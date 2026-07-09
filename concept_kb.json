@@ -273,10 +273,23 @@
       "layer": "L0",
       "title": "C/C++ → Rust 工程层对比路线图",
       "positioning": "",
-      "line_count": 140,
+      "line_count": 206,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "let result = may_fail(); match result {     Ok(v) => process(v),     Err(e) => l..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "use std::ops::Add;  fn add<T: Add<Output = T>>(a: T, b: T) -> T { a + b } ..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../../archive/reports/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md",
@@ -303,7 +316,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 2,
       "matrix_rows": 38,
       "pre_post": {
         "pre": [
@@ -640,7 +653,7 @@
       "layer": "L0",
       "title": "模式语义空间索引：设计模式在概念体系中的坐标",
       "positioning": "",
-      "line_count": 134,
+      "line_count": 162,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -664,8 +677,8 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 32,
+      "mermaid_blocks": 2,
+      "matrix_rows": 40,
       "pre_post": {
         "pre": [
           "[Patterns](../../06_ecosystem/03_design_patterns/02_patterns.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)"
@@ -5613,22 +5626,22 @@
       "layer": "L1",
       "title": "Rust 起步指南",
       "positioning": "Rust 学习路径的起点。本文档假设你没有任何 Rust 背景，只需基本的命令行操作经验。",
-      "line_count": 139,
+      "line_count": 251,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将安装、构建、测试、文档生成串联为可重复的开发工作流。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"Rust 起步指南 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"Rust 起步只需要安装一个编译器即可\" ⟹ 不成立。`rustup` 管理工具链版本，`cargo` 管理项目生命周期，二者缺一不可。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 Rust 起步指南 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 Rust 起步指南 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"任何 Rust 项目都必须从 `cargo new` 开始\" ⟹ 不成立。单文件脚本、workspace、已有代码库都可以作为起点，选择取决于交付形态。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 Rust 起步指南 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rust 起步指南 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"初学者应该直接 nightly 以获取最新特性\" ⟹ 不成立。Stable 通道提供最佳兼容性与学习资料，nightly 仅在学习高级/实验特性时使用。",
           "type": "paragraph"
         }
       ],
@@ -5637,21 +5650,35 @@
           "title": "## 反命题"
         }
       ],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// src/main.rs fn main() {     println!(\"Hello, Rust!\"); } ..."
+        }
+      ],
       "sources": [],
       "cross_references": [
-        "../../00_meta/04_navigation/learning_guide.md"
+        "../../00_meta/04_navigation/learning_guide.md",
+        "../../06_ecosystem/01_cargo/80_cargo_getting_started.md",
+        "../01_ownership_borrow_lifetime/01_ownership.md",
+        "../01_ownership_borrow_lifetime/02_borrowing.md",
+        "../02_type_system/04_type_system.md",
+        "../07_modules_and_items/11_modules_and_paths.md",
+        "../08_error_handling/32_error_handling_basics.md",
+        "../10_testing_basics/16_testing_basics.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
-      "matrix_rows": 7,
+      "mermaid_blocks": 1,
+      "matrix_rows": 32,
       "pre_post": {
         "pre": [
           "N/A"
         ],
         "post": [
-          "N/A"
+          "[所有权](../01_ownership_borrow_lifetime/01_ownership.md) · [借用](../01_ownership_borrow_lifetime/02_borrowing.md) · [类型系统](../02_type_system/04_type_system.md) · [模块与路径](../07_modules_and_items/11_modules_and_paths.md) · [错误处理基础](../08_error_handling/32_error_handling_basics.md) · [测试基础](../10_testing_basics/16_testing_basics.md)"
         ]
       },
       "backward_chains": 0,
@@ -12091,22 +12118,22 @@
       "layer": "L1",
       "title": "Crate 与源文件（Crates and Source Files）",
       "positioning": "",
-      "line_count": 149,
+      "line_count": 253,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块路径解析串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"Crate 与源文件（Crates and Source F 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"一个 Cargo package 就是一个 crate\" ⟹ 不成立。一个 package 可以包含多个 crate（一个库 + 多个二进制）。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 Crate 与源文件（Crates and Source F 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 Crate 与源文件（Crates and Source F 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"crate 名称可以随意命名\" ⟹ 不成立。`crate_name` 只能包含 Unicode 字母数字或下划线，且不能为空。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 Crate 与源文件（Crates and Source F 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Crate 与源文件（Crates and Source F 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"源文件越多，编译后的 crate 越多\" ⟹ 不成立。一个 crate 由单个 crate root 与若干模块源文件组成，最终输出仍是一个编译单元。",
           "type": "paragraph"
         }
       ],
@@ -12118,21 +12145,27 @@
       "code_blocks": [
         {
           "flags": [],
-          "lines": 4,
+          "lines": 5,
           "should_fail": false,
-          "code_preview": "#![crate_name = \"projx\"] #![crate_type = \"lib\"] #![warn(non_camel_case_types)] ..."
+          "code_preview": "#![crate_name = \"projx\"] #![crate_type = \"lib\"] #![warn(non_camel_case_types)] #..."
         },
         {
           "flags": [],
-          "lines": 6,
+          "lines": 13,
           "should_fail": false,
-          "code_preview": "fn main() {}  fn main() -> ! {     std::process::exit(0); } ..."
+          "code_preview": "fn main() {     println!(\"Hello, world!\"); }  fn main() -> Result<(), std::io::E..."
         },
         {
           "flags": [],
           "lines": 7,
           "should_fail": false,
           "code_preview": "mod foo {     pub fn bar() {         println!(\"Hello, world!\");     } } use foo:..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "#![crate_name = \"parser_core\"] #![crate_type = \"lib\"]  pub fn parse(input: &str)..."
         }
       ],
       "sources": [],
@@ -12140,21 +12173,23 @@
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../03_advanced/02_unsafe/30_rust_runtime.md",
         "../../03_advanced/04_ffi/27_linkage.md",
+        "../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md",
         "../../06_ecosystem/01_cargo/78_cargo_workspaces.md",
         "../09_macros_basics/12_attributes_and_macros.md",
         "11_modules_and_paths.md",
+        "12_functions.md",
         "39_items.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
-      "matrix_rows": 11,
+      "mermaid_blocks": 1,
+      "matrix_rows": 28,
       "pre_post": {
         "pre": [
-          "[Modules and Paths](11_modules_and_paths.md) · [Attributes and Macros](../09_macros_basics/12_attributes_and_macros.md)"
+          "[Modules and Paths](11_modules_and_paths.md) · [Attributes and Macros](../09_macros_basics/12_attributes_and_macros.md) · [Functions](12_functions.md)"
         ],
         "post": [
-          "[Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md) · [The Rust Runtime](../../03_advanced/02_unsafe/30_rust_runtime.md)"
+          "[Items](39_items.md) · [Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md) · [Cargo Manifest Reference](../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md) · [The Rust Runtime](../../03_advanced/02_unsafe/30_rust_runtime.md)"
         ]
       },
       "backward_chains": 0,
@@ -12165,22 +12200,22 @@
       "layer": "L1",
       "title": "项（Items）",
       "positioning": "",
-      "line_count": 124,
+      "line_count": 283,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块、item、名称解析与可见性串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"项（Items） 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"所有 item 都在运行时可以动态创建\" ⟹ 不成立。Item 完全在编译期确定，执行期间通常保持不变。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 项（Items） 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 项（Items） 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"item 必须按使用顺序定义\" ⟹ 不成立。Rust 的名称解析允许 item 在引用位置之前或之后声明。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 项（Items） 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 项（Items） 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"模块中的 item 默认对外可见\" ⟹ 不成立。Item 默认私有，必须通过 `pub` 显式公开。",
           "type": "paragraph"
         }
       ],
@@ -12189,7 +12224,80 @@
           "title": "## 反命题"
         }
       ],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// 这些都是 item mod math;          // 模块声明 use std::fmt;      // use 声明 const PI: f..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "pub fn greet(name: &str) -> String {     format!(\"Hello, {name}!\") } ..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "pub type UserId = u64; ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "pub struct Rectangle {     pub width: u32,     pub height: u32, }  pub enum Mess..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "pub const MAX_CONNECTIONS: usize = 100; pub static APP_NAME: &str = \"MyApp\"; ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashMap; pub use std::time::Duration; // 重导出 ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#[repr(C)] union FloatInt {     f: f32,     i: u32, } ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn outer() {     const INNER_CONST: i32 = 1;     fn inner() { println!(\"inner\");..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "mod outer {     pub mod inner {         pub(crate) fn crate_only() {}         pu..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "trait Area {     type Output;     const PI: f64;     fn area(&self) -> Self::Out..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#[link(name = \"c\")] extern \"C\" {     fn malloc(size: usize) -> *mut u8;     fn f..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn main() {     say_hello(); // 先引用，后定义 }  fn say_hello() {     println!(\"hello\"..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
@@ -12199,21 +12307,27 @@
         "../../02_intermediate/01_generics/02_generics.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/04_ffi/05_rust_ffi.md",
-        "../../03_advanced/04_ffi/09_ffi_advanced.md",
         "../../03_advanced/04_ffi/27_linkage.md",
         "11_modules_and_paths.md",
-        "38_crates_and_source_files.md"
+        "12_functions.md",
+        "13_use_declarations.md",
+        "14_structs.md",
+        "15_enumerations.md",
+        "16_implementations.md",
+        "38_crates_and_source_files.md",
+        "44_static_items.md",
+        "45_const_items_and_const_fn.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
-      "matrix_rows": 20,
+      "mermaid_blocks": 1,
+      "matrix_rows": 32,
       "pre_post": {
         "pre": [
-          "[Modules and Paths](11_modules_and_paths.md) · [Crates and Source Files](38_crates_and_source_files.md)"
+          "[Modules and Paths](11_modules_and_paths.md) · [Crates and Source Files](38_crates_and_source_files.md) · [Functions](12_functions.md)"
         ],
         "post": [
-          "[Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md)"
+          "[Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [FFI](../../03_advanced/04_ffi/05_rust_ffi.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md)"
         ]
       },
       "backward_chains": 0,
@@ -12898,7 +13012,7 @@
       "layer": "L1",
       "title": "错误处理控制流（Error Handling Control Flow）",
       "positioning": "",
-      "line_count": 108,
+      "line_count": 212,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -12914,6 +13028,12 @@
         },
         {
           "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn read_number_manual(s: &str) -> Result<i32, String> {     match s.trim().parse..."
+        },
+        {
+          "flags": [],
           "lines": 5,
           "should_fail": false,
           "code_preview": "fn opt_chain(x: Option<i32>) -> Option<i32> {     let y = Some(1)?; // None 则直接返..."
@@ -12922,7 +13042,25 @@
           "flags": [],
           "lines": 5,
           "should_fail": false,
+          "code_preview": "fn option_to_result(o: Option<i32>) -> Result<i32, &'static str> {     let n = o..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
           "code_preview": "fn sum3(a: Result<i32, &'static str>, b: Result<i32, &'static str>) -> Result<i3..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn demo() -> Result<i32, &'static str> {     let x: i32 = try {         let a = ..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "use thiserror::Error;  #[derive(Debug, Error)] enum ConfigError {     #[error(\"i..."
         }
       ],
       "sources": [],
@@ -12936,8 +13074,8 @@
       ],
       "transitions": 1,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "mermaid_blocks": 1,
+      "matrix_rows": 7,
       "pre_post": {
         "pre": [
           "[Error Handling 基础](32_error_handling_basics.md) · [Control Flow](../04_control_flow/07_control_flow.md) · [Functions](../07_modules_and_items/12_functions.md)"
@@ -13234,22 +13372,22 @@
       "layer": "L1",
       "title": "常用开发工具（Useful Development Tools）",
       "positioning": "",
-      "line_count": 89,
+      "line_count": 208,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将代码编写、格式化、lint、测试、文档、发布串联为可重复工作流。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"常用开发工具（Useful Development Tool 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"有了 rust-analyzer 就不需要运行 `cargo build`\" ⟹ 不成立。IDE 提供快速反馈，但最终正确性仍需编译器确认。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 常用开发工具（Useful Development Tool 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 常用开发工具（Useful Development Tool 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"Clippy 的所有建议都必须遵循\" ⟹ 不成立。部分 lint 在特定场景下需要 `#[allow(...)]` 抑制。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 常用开发工具（Useful Development Tool 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 常用开发工具（Useful Development Tool 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"开发工具版本可以任意落后于编译器\" ⟹ 不成立。rust-analyzer、clippy 通常需要与当前工具链版本匹配。",
           "type": "paragraph"
         }
       ],
@@ -13263,20 +13401,21 @@
       "cross_references": [
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md",
+        "../../06_ecosystem/01_cargo/66_cargo_subcommands_and_plugins.md",
         "../../06_ecosystem/01_cargo/80_cargo_getting_started.md",
         "../../06_ecosystem/09_testing_and_quality/14_documentation.md",
         "16_testing_basics.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
-      "matrix_rows": 6,
+      "mermaid_blocks": 2,
+      "matrix_rows": 20,
       "pre_post": {
         "pre": [
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Cargo Getting Started](../../06_ecosystem/01_cargo/80_cargo_getting_started.md)"
         ],
         "post": [
-          "[Testing Basics](16_testing_basics.md) · [Documentation](../../06_ecosystem/09_testing_and_quality/14_documentation.md) · [DevOps and CI/CD](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md)"
+          "[Testing Basics](16_testing_basics.md) · [Documentation](../../06_ecosystem/09_testing_and_quality/14_documentation.md) · [DevOps and CI/CD](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) · [Cargo Subcommands](../../06_ecosystem/01_cargo/66_cargo_subcommands_and_plugins.md)"
         ]
       },
       "backward_chains": 0,
@@ -15739,22 +15878,22 @@
       "layer": "L2",
       "title": "Rust Editions（语言版本）",
       "positioning": "",
-      "line_count": 89,
+      "line_count": 195,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将编译器版本、Edition、语法行为、迁移路径串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"Rust Editions（语言版本） 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"Edition 会强制所有依赖同步升级\" ⟹ 不成立。每个 crate 可独立选择 edition，同一编译单元内可混用不同 edition 的依赖。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 Rust Editions（语言版本） 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 Rust Editions（语言版本） 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"设置 `edition = \"2024\"` 后旧代码一定能编译\" ⟹ 不成立。Edition 引入非兼容语法变更，需通过 `cargo fix --edition` 或手动调整。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 Rust Editions（语言版本） 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rust Editions（语言版本） 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"`rust-version` 与 `edition` 是同一回事\" ⟹ 不成立。`edition` 控制语法/语义版本，`rust-version` 声明最低编译器版本，是不同维度的约束。",
           "type": "paragraph"
         }
       ],
@@ -15763,26 +15902,47 @@
           "title": "## 反命题"
         }
       ],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "extern crate serde; mod foo;  fn main() {     let trait_obj: &Serialize = &1; //..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use serde::Serialize;  fn main() {     let trait_obj: &dyn Serialize = &1; } ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn main() {     let arr = [1, 2, 3];     for x in arr {         // 2021: 按值迭代数组；..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../03_advanced/01_async/25_async_advanced.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/01_cargo/76_cargo_196_features.md",
         "../../06_ecosystem/01_cargo/80_cargo_getting_started.md",
+        "../../07_future/00_version_tracking/05_rust_version_tracking.md",
+        "../../07_future/01_edition_roadmap/44_edition_guide.md",
         "../05_modules_and_visibility/10_module_system.md",
         "33_rust_release_process.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
-      "matrix_rows": 5,
+      "mermaid_blocks": 1,
+      "matrix_rows": 22,
       "pre_post": {
         "pre": [
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Cargo Getting Started](../../06_ecosystem/01_cargo/80_cargo_getting_started.md) · [Module System](../05_modules_and_visibility/10_module_system.md)"
         ],
         "post": [
-          "[Async Advanced](../../03_advanced/01_async/25_async_advanced.md) · [Cargo 1.96 Features](../../06_ecosystem/01_cargo/76_cargo_196_features.md) · [Rust Release Process](33_rust_release_process.md)"
+          "[Async Advanced](../../03_advanced/01_async/25_async_advanced.md) · [Cargo 1.96 Features](../../06_ecosystem/01_cargo/76_cargo_196_features.md) · [Rust Release Process](33_rust_release_process.md) · [Edition Guide](../../07_future/01_edition_roadmap/44_edition_guide.md)"
         ]
       },
       "backward_chains": 0,
@@ -26257,22 +26417,22 @@
       "layer": "L3",
       "title": "Rust 内存模型（Memory Model）",
       "positioning": "",
-      "line_count": 110,
+      "line_count": 149,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将字节模型、provenance 和 UB 边界串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"Rust 内存模型（Memory Model） 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"Rust 内存模型在所有场景下都完全确定\" ⟹ 不成立。Rust 的内存模型目前尚不完整，部分细节仍在 Unsafe Code Guidelines 工作组讨论中。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 Rust 内存模型（Memory Model） 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 Rust 内存模型（Memory Model） 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"忽略 Rust 内存模型的细节也能写出正确 unsafe 代码\" ⟹ 不成立。未初始化内存读取、provenance 丢失和别名违规都是常见的 UB 来源。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 Rust 内存模型（Memory Model） 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rust 内存模型（Memory Model） 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"其他语言对内存模型的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权、借用和 provenance 模型具有语言特有形态。",
           "type": "paragraph"
         }
       ],
@@ -26281,7 +26441,20 @@
           "title": "## 反命题"
         }
       ],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// 危险：可能丢失 provenance let ptr: *mut u8 = alloc(layout); let addr = ptr as usize;..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use std::mem::MaybeUninit;  let mut x: MaybeUninit<i32> = MaybeUninit::uninit();..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -26290,12 +26463,13 @@
         "../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md",
         "../00_concurrency/11_atomics_and_memory_ordering.md",
         "../05_inline_assembly/13_inline_assembly.md",
-        "03_unsafe.md"
+        "03_unsafe.md",
+        "31_panic.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 5,
+      "matrix_rows": 15,
       "pre_post": {
         "pre": [
           "[Unsafe Rust](03_unsafe.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Behavior Considered Undefined](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md)"
@@ -26312,22 +26486,22 @@
       "layer": "L3",
       "title": "Rust 运行时（The Rust Runtime）",
       "positioning": "",
-      "line_count": 139,
+      "line_count": 177,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将运行时属性、分配行为和二进制输出串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"Rust 运行时（The Rust Runtime） 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"Rust 运行时在所有场景下都相同\" ⟹ 不成立。`#[global_allocator]`、`panic = \"abort\"` 和目标平台都会显著改变运行时行为。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 Rust 运行时（The Rust Runtime） 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 Rust 运行时（The Rust Runtime） 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"忽略 Rust 运行时的细节也能写出正确代码\" ⟹ 不成立。全局分配器选择错误、panic 策略不匹配和子系统设置错误会导致运行时失败。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 Rust 运行时（The Rust Runtime） 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rust 运行时（The Rust Runtime） 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"其他语言对运行时的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的运行时非常轻量，大部分核心行为可通过属性和 feature 定制。",
           "type": "paragraph"
         }
       ],
@@ -26348,6 +26522,12 @@
           "lines": 2,
           "should_fail": false,
           "code_preview": "#![windows_subsystem = \"windows\"] ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "#![no_std] #![no_main]  #[panic_handler] fn panic(_info: &core::panic::PanicInfo..."
         }
       ],
       "sources": [],
@@ -26358,18 +26538,20 @@
         "../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md",
         "../04_ffi/27_linkage.md",
         "../06_low_level_patterns/14_custom_allocators.md",
-        "03_unsafe.md"
+        "03_unsafe.md",
+        "29_memory_model.md",
+        "31_panic.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 9,
+      "matrix_rows": 20,
       "pre_post": {
         "pre": [
           "[Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Custom Allocators](../06_low_level_patterns/14_custom_allocators.md) · [Linkage](../04_ffi/27_linkage.md)"
         ],
         "post": [
-          "[Embedded Systems](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) · [Unsafe Rust](03_unsafe.md)"
+          "[Embedded Systems](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) · [Unsafe Rust](03_unsafe.md) · [Panic](31_panic.md)"
         ]
       },
       "backward_chains": 0,
@@ -26447,22 +26629,22 @@
       "layer": "L3",
       "title": "Unsafe 参考（Unsafe Reference）",
       "positioning": "",
-      "line_count": 100,
+      "line_count": 162,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将 `unsafe` 关键字、块、操作和 UB 契约串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"Unsafe 参考（Unsafe Reference） 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"Unsafe 参考覆盖所有危险行为\" ⟹ 不成立。死锁、内存泄漏和无限循环等虽然危险，但不属于 `unsafe` 操作。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 Unsafe 参考（Unsafe Reference） 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 Unsafe 参考（Unsafe Reference） 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"忽略 Unsafe 参考的细节也能写出正确 unsafe 代码\" ⟹ 不成立。违反 UB 契约会导致未定义行为，且往往难以调试。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 Unsafe 参考（Unsafe Reference） 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Unsafe 参考（Unsafe Reference） 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"其他语言对 unsafe 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的 `unsafe` 块不禁用借用检查器，只是放宽特定操作限制。",
           "type": "paragraph"
         }
       ],
@@ -26471,7 +26653,20 @@
           "title": "## 反命题"
         }
       ],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "let mut x = 5; let r = &mut x as *mut i32; unsafe {     *r += 1; } assert_eq!(x,..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use std::ptr::NonNull;  pub struct SafeBox<T> {     ptr: NonNull<T>, }  impl<T> ..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../02_intermediate/02_memory_management/08_interior_mutability.md",
@@ -26481,12 +26676,15 @@
         "../05_inline_assembly/13_inline_assembly.md",
         "../06_low_level_patterns/14_custom_allocators.md",
         "../06_low_level_patterns/33_variables.md",
-        "03_unsafe.md"
+        "03_unsafe.md",
+        "29_memory_model.md",
+        "30_rust_runtime.md",
+        "31_panic.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 11,
+      "matrix_rows": 19,
       "pre_post": {
         "pre": [
           "[Unsafe Rust](03_unsafe.md) · [Behavior Considered Undefined](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md) · [Variables](../06_low_level_patterns/33_variables.md)"
@@ -35577,22 +35775,22 @@
       "layer": "L4",
       "title": "名称、作用域与解析（Names, Scopes and Resolution）",
       "positioning": "",
-      "line_count": 141,
+      "line_count": 207,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时语义串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"名称、作用域与解析（Names, Scopes and Re 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"名称、作用域与解析在所有场景下都适用\" ⟹ 不成立。`unsafe` 块、FFI 符号、过程宏生成的名称可能绕过常规解析规则。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 名称、作用域与解析（Names, Scopes and Re 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 名称、作用域与解析（Names, Scopes and Re 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"忽略名称、作用域与解析的细节也能写出正确代码\" ⟹ 不成立。编译错误 E0425、E0433、E0603 等通常是名称解析或可见性规则被违反的直接信号。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 名称、作用域与解析（Names, Scopes and Re 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 名称、作用域与解析（Names, Scopes and Re 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"其他语言对名称、作用域与解析的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的模块系统、命名空间分离和 `use` 重导出机制具有语言特有的形态。",
           "type": "paragraph"
         }
       ],
@@ -35601,26 +35799,40 @@
           "title": "## 反命题"
         }
       ],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "mod Foo { pub const X: i32 = 1; } fn Foo() {}  fn main() {     let _ = Foo::X; /..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "mod inner {     pub fn helper() {} }  pub use inner::helper as public_helper; //..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../01_foundation/07_modules_and_items/11_modules_and_paths.md",
         "../../01_foundation/07_modules_and_items/35_preludes.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/04_ffi/27_linkage.md",
-        "../../05_comparative/03_domain_comparisons/04_safety_boundaries.md",
-        "35_name_resolution_and_hir.md"
+        "35_name_resolution_and_hir.md",
+        "51_names_reference.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 6,
+      "matrix_rows": 39,
       "pre_post": {
         "pre": [
           "[Modules and Paths](../../01_foundation/07_modules_and_items/11_modules_and_paths.md) · [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md)"
         ],
         "post": [
-          "[Name Resolution and HIR](35_name_resolution_and_hir.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md) · [Visibility and Privacy](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md)"
+          "[Name Resolution and HIR](35_name_resolution_and_hir.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md) · [Names Reference](51_names_reference.md)"
         ]
       },
       "backward_chains": 0,
@@ -35840,22 +36052,22 @@
       "layer": "L4",
       "title": "词法结构（Lexical Structure）",
       "positioning": "",
-      "line_count": 117,
+      "line_count": 183,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将字节流、Unicode 解码、token 流和 AST 构建串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"词法结构（Lexical Structure） 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"词法结构在所有场景下都适用\" ⟹ 不成立。过程宏可以自定义 token 树的解析规则，`unsafe` 块和内联汇编允许非 Rust 语法。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 词法结构（Lexical Structure） 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 词法结构（Lexical Structure） 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"忽略词法结构的细节也能写出正确代码\" ⟹ 不成立。`macro_rules!` follow-set 歧义、关键字误用和无效标识符都是词法层面的错误。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 词法结构（Lexical Structure） 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 词法结构（Lexical Structure） 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"其他语言对词法结构的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的生命周期 token、原始标识符和嵌套块注释具有语言特有形态。",
           "type": "paragraph"
         }
       ],
@@ -35873,14 +36085,21 @@
         },
         {
           "flags": [],
-          "lines": 3,
+          "lines": 5,
           "should_fail": false,
-          "code_preview": "let valid_name = 1; let _ = 2; // 通配符，非标识符 ..."
+          "code_preview": "let valid_name = 1; let _ = 2;            // 通配符，非标识符 let r#match = 3;      // 原..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "/// A point in 2D space. struct Point;  // 等价于 #[doc = \" A point in 2D space.\"] ..."
         }
       ],
       "sources": [],
       "cross_references": [
         "../../01_foundation/00_start/36_keywords.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/03_proc_macros/04_macros.md",
         "../../03_advanced/03_proc_macros/07_proc_macro.md",
         "../04_model_checking/23_programming_language_foundations.md",
@@ -35891,7 +36110,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 17,
+      "matrix_rows": 32,
       "pre_post": {
         "pre": [
           "[Notation](../06_notation/44_notation.md) · [Programming Language Foundations](../04_model_checking/23_programming_language_foundations.md)"
@@ -35908,22 +36127,22 @@
       "layer": "L4",
       "title": "条目参考（Items Reference）",
       "positioning": "",
-      "line_count": 115,
+      "line_count": 168,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块、item 和声明串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"条目参考（Items Reference） 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"条目参考在所有场景下都适用\" ⟹ 不成立。`unsafe` 外部块、FFI 声明和过程宏生成的 item 具有额外的语义约束。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 条目参考（Items Reference） 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 条目参考（Items Reference） 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"忽略条目参考的细节也能写出正确代码\" ⟹ 不成立。item 可见性、泛型参数和 trait 实现规则错误会直接导致编译失败。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 条目参考（Items Reference） 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 条目参考（Items Reference） 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"其他语言对条目参考的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的 trait、impl、泛型参数和生命周期参数构成独特的 item 体系。",
           "type": "paragraph"
         }
       ],
@@ -35941,9 +36160,21 @@
         },
         {
           "flags": [],
-          "lines": 4,
+          "lines": 8,
           "should_fail": false,
-          "code_preview": "extern \"C\" {     fn c_function(x: i32) -> i32; } ..."
+          "code_preview": "struct Matrix<T, const N: usize> {     data: [[T; N]; N], }  fn max<T: Ord>(a: T..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "trait Add<Rhs = Self> {     type Output;     fn add(self, rhs: Rhs) -> Self::Out..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "extern \"C\" {     fn c_function(x: i32) -> i32;     static errno: i32; } ..."
         }
       ],
       "sources": [],
@@ -35952,13 +36183,17 @@
         "../../01_foundation/07_modules_and_items/38_crates_and_source_files.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/06_low_level_patterns/34_visibility_and_privacy.md",
-        "47_attributes.md"
+        "26_trait_solver_in_rustc.md",
+        "40_names_and_resolution.md",
+        "47_attributes.md",
+        "53_generics_compiler_behavior.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 20,
+      "matrix_rows": 35,
       "pre_post": {
         "pre": [
           "[Crates and Source Files](../../01_foundation/07_modules_and_items/38_crates_and_source_files.md) · [Modules and Paths](../../01_foundation/07_modules_and_items/11_modules_and_paths.md) · [Visibility and Privacy](../../03_advanced/06_low_level_patterns/34_visibility_and_privacy.md)"
@@ -35975,22 +36210,22 @@
       "layer": "L4",
       "title": "属性（Attributes）",
       "positioning": "",
-      "line_count": 105,
+      "line_count": 151,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将属性元数据与编译器行为串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"属性（Attributes） 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"属性在所有场景下都适用\" ⟹ 不成立。某些属性只在特定 item 类型或 nightly 编译器上有效，错误使用会触发编译错误。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 属性（Attributes） 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 属性（Attributes） 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"忽略属性的细节也能写出正确代码\" ⟹ 不成立。`#[repr(C)]`、`#[must_use]`、`#[non_exhaustive]` 等属性直接影响类型布局和接口语义。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 属性（Attributes） 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 属性（Attributes） 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"其他语言对属性的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 属性在词法阶段即被解析并影响宏展开和类型检查，与 C# 注解或 Java 注解的运行时反射模型不同。",
           "type": "paragraph"
         }
       ],
@@ -36023,19 +36258,27 @@
           "lines": 3,
           "should_fail": false,
           "code_preview": "#[doc = \" A point in 2D space.\"] struct Point; ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "#[my_attribute_macro] fn decorated() {} ..."
         }
       ],
       "sources": [],
       "cross_references": [
         "../../02_intermediate/00_traits/31_derive_traits.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/03_proc_macros/04_macros.md",
         "../../03_advanced/03_proc_macros/28_conditional_compilation.md",
-        "46_items_reference.md"
+        "46_items_reference.md",
+        "53_generics_compiler_behavior.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 8,
+      "matrix_rows": 25,
       "pre_post": {
         "pre": [
           "[Items Reference](46_items_reference.md) · [Macros](../../03_advanced/03_proc_macros/04_macros.md)"
@@ -36052,22 +36295,22 @@
       "layer": "L4",
       "title": "语句与表达式参考（Statements and Expressions Reference）",
       "positioning": "",
-      "line_count": 105,
+      "line_count": 162,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将语句、表达式、值和副作用串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"语句与表达式参考（Statements and Expres 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"语句与表达式参考在所有场景下都适用\" ⟹ 不成立。`unsafe` 块、常量上下文和异步上下文对某些表达式有特殊限制。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 语句与表达式参考（Statements and Expres 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 语句与表达式参考（Statements and Expres 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"忽略语句与表达式参考的细节也能写出正确代码\" ⟹ 不成立。临时值生命周期、move 语义和常量求值限制都源于表达式语义。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 语句与表达式参考（Statements and Expres 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 语句与表达式参考（Statements and Expres 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"其他语言对语句与表达式的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的块表达式、match 表达式和所有权移动语义具有语言特有形态。",
           "type": "paragraph"
         }
       ],
@@ -36082,12 +36325,38 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "fn example() {     let x = 1;          // let 语句     fn inner() {}       // item..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "let add = |a: i32, b: i32| -> i32 { a + b }; let add2 = |a, b| a + b; // 类型可推断 ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "match option {     Some(x) if x > 0 => println!(\"positive\"),     Some(_) => prin..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "let s = String::from(\"hello\").as_str(); // 错误：临时值在语句结束时释放 ..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "let x = unsafe { *raw_ptr }; ..."
         }
       ],
       "sources": [],
       "cross_references": [
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../01_foundation/04_control_flow/41_statements_and_expressions.md",
+        "../../03_advanced/01_async_await/01_async_await.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/06_low_level_patterns/33_variables.md",
         "../03_operational_semantics/39_constant_evaluation.md",
         "43_destructors.md",
@@ -36096,7 +36365,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 28,
+      "matrix_rows": 34,
       "pre_post": {
         "pre": [
           "[Statements and Expressions](../../01_foundation/04_control_flow/41_statements_and_expressions.md) · [Variables](../../03_advanced/06_low_level_patterns/33_variables.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)"
@@ -36113,22 +36382,22 @@
       "layer": "L4",
       "title": "模式参考（Patterns Reference）",
       "positioning": "",
-      "line_count": 101,
+      "line_count": 161,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将值、模式匹配、绑定和解构串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"模式参考（Patterns Reference） 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"模式参考在所有场景下都适用\" ⟹ 不成立。`unsafe` 代码中的裸指针解引用、FFI 类型和过程宏生成的模式可能超出常规模式检查范围。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 模式参考（Patterns Reference） 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 模式参考（Patterns Reference） 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"忽略模式参考的细节也能写出正确代码\" ⟹ 不成立。不可反驳模式误用、绑定模式错误和穷尽性检查失败都会导致编译错误。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 模式参考（Patterns Reference） 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 模式参考（Patterns Reference） 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"其他语言对模式参考的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权移动、引用模式和 `@` 绑定具有语言特有语义。",
           "type": "paragraph"
         }
       ],
@@ -36140,22 +36409,42 @@
       "code_blocks": [
         {
           "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "let x = 5;              // 不可反驳 let Some(y) = opt;      // 错误：let 要求不可反驳模式 if le..."
+        },
+        {
+          "flags": [],
           "lines": 5,
           "should_fail": false,
           "code_preview": "let x = &mut 5; match x {     ref mut n => **n += 1, } ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 推荐写法 let mut x = 5; match &mut x {     n => *n += 1, } ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "enum Color { Red, Green, Blue }  fn get_rgb(c: Color) -> u32 {     match c {    ..."
         }
       ],
       "sources": [],
       "cross_references": [
         "../../01_foundation/04_control_flow/40_patterns.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/06_low_level_patterns/33_variables.md",
+        "40_names_and_resolution.md",
         "43_destructors.md",
         "48_statements_and_expressions_reference.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 23,
+      "matrix_rows": 33,
       "pre_post": {
         "pre": [
           "[Patterns](../../01_foundation/04_control_flow/40_patterns.md) · [Statements and Expressions Reference](48_statements_and_expressions_reference.md) · [Variables](../../03_advanced/06_low_level_patterns/33_variables.md)"
@@ -36172,22 +36461,22 @@
       "layer": "L4",
       "title": "名字参考（Names Reference）",
       "positioning": "",
-      "line_count": 104,
+      "line_count": 161,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将源文件、模块树、命名空间、作用域和名字解析串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"名字参考（Names Reference） 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"名字参考在所有场景下都适用\" ⟹ 不成立。过程宏生成的名字、FFI 符号和 `unsafe` 外部块中的名字具有特殊的解析和链接行为。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 名字参考（Names Reference） 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 名字参考（Names Reference） 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"忽略名字参考的细节也能写出正确代码\" ⟹ 不成立。命名空间隔离错误、`use` 冲突和可见性违规是常见的编译错误来源。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 名字参考（Names Reference） 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 名字参考（Names Reference） 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"其他语言对名字参考的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的四层命名空间、`Self`/`self`/`super` 路径和 crate 相对路径具有独特性。",
           "type": "paragraph"
         }
       ],
@@ -36196,11 +36485,25 @@
           "title": "## 反命题"
         }
       ],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn outer() {     let x = 1;          // 外层作用域     {         let x = 2;      // 内..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "mod inner {     pub fn public() {}     fn private() {}     // 默认私有 }  fn main() ..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../01_foundation/07_modules_and_items/11_modules_and_paths.md",
         "../../01_foundation/07_modules_and_items/35_preludes.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/06_low_level_patterns/34_visibility_and_privacy.md",
         "40_names_and_resolution.md",
         "46_items_reference.md",
@@ -36209,7 +36512,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 17,
+      "matrix_rows": 33,
       "pre_post": {
         "pre": [
           "[Modules and Paths](../../01_foundation/07_modules_and_items/11_modules_and_paths.md) · [Names and Resolution](40_names_and_resolution.md) · [Visibility and Privacy](../../03_advanced/06_low_level_patterns/34_visibility_and_privacy.md)"
@@ -36226,22 +36529,22 @@
       "layer": "L4",
       "title": "Rust Reference 附录（Reference Appendices）",
       "positioning": "",
-      "line_count": 107,
+      "line_count": 163,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将文法、词法、语法索引和测试摘要串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"Rust Reference 附录（Reference Ap 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"Rust Reference 附录在所有场景下都适用\" ⟹ 不成立。附录是规范摘要，实际编译器实现可能包含尚未写入 Reference 的扩展或 nightly 特性。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 Rust Reference 附录（Reference Ap 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 Rust Reference 附录（Reference Ap 规则被违反的直接信号。",
+          "text": "> **反命题 2**: \"忽略 Rust Reference 附录的细节也能写出正确代码\" ⟹ 不成立。宏 follow-set 歧义规则和完整文法是编写复杂宏和形式化分析的基础。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 Rust Reference 附录（Reference Ap 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rust Reference 附录（Reference Ap 具有语言特有的形态。",
+          "text": "> **反命题 3**: \"其他语言对参考附录的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust Reference 附录的组织方式、测试映射和术语定义具有语言特异性。",
           "type": "paragraph"
         }
       ],
@@ -36250,9 +36553,17 @@
           "title": "## 反命题"
         }
       ],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "macro_rules! ambiguous {     ($($e:expr),* $(,)?) => {}; // OK：尾随逗号处理 } ..."
+        }
+      ],
       "sources": [],
       "cross_references": [
+        "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/03_proc_macros/04_macros.md",
         "../../03_advanced/03_proc_macros/07_proc_macro.md",
         "../06_notation/44_notation.md",
@@ -36264,7 +36575,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 13,
+      "matrix_rows": 47,
       "pre_post": {
         "pre": [
           "[Notation](../06_notation/44_notation.md) · [Lexical Structure](45_lexical_structure.md) · [Items Reference](46_items_reference.md)"
@@ -36280,16 +36591,43 @@
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\05_rustc_internals\\53_generics_compiler_behavior.md",
       "layer": "L4",
       "title": "泛型编译器行为：单态化、分发与类型擦除",
-      "positioning": "深入分析 Rust 泛型代码在编译期与运行时的行为差异，解释单态化如何实现零成本抽象，以及何时应退回到动态分发以优化代码体积。",
-      "line_count": 97,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "positioning": "",
+      "line_count": 149,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将泛型函数、类型参数、实例化和分发方式串联起来。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 1**: \"泛型在所有场景下都零成本\" ⟹ 不成立。单态化会导致代码体积膨胀和编译时间增加。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"动态分发总是比静态分发慢\" ⟹ 不成立。在特定场景下，`dyn Trait` 可以减少缓存失效和代码体积，反而提升整体性能。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"单态化代码可以直接等价替换为 trait object\" ⟹ 不成立。trait object 有对象安全限制，且丢失类型信息。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
           "lines": 7,
           "should_fail": false,
           "code_preview": "fn identity<T>(x: T) -> T { x }  fn main() {     identity(5i32);     // 生成 ident..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "fn static_dispatch<T: Debug>(x: T) { println!(\"{:?}\", x); } fn dynamic_dispatch(..."
         },
         {
           "flags": [],
@@ -36310,13 +36648,15 @@
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
         "26_trait_solver_in_rustc.md",
+        "38_application_binary_interface.md",
         "42_type_layout.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 9,
+      "matrix_rows": 26,
       "pre_post": {
         "pre": [
           "[Generics](../../02_intermediate/01_generics/02_generics.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)"
@@ -41128,12 +41468,18 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\01_cargo\\87_build_std.md",
       "layer": "L6",
-      "title": "Cargo build-std",
+      "title": "Unknown",
       "positioning": "",
-      "line_count": 150,
+      "line_count": 267,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "#![no_std] #![no_main]  extern crate alloc;  use alloc::vec::Vec; use core::pani..."
+        },
         {
           "flags": [],
           "lines": 18,
@@ -41149,6 +41495,10 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../05_systems_and_embedded/17_cross_compilation.md",
         "../05_systems_and_embedded/22_embedded_systems.md",
@@ -41156,14 +41506,14 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 6,
+      "mermaid_blocks": 2,
+      "matrix_rows": 16,
       "pre_post": {
         "pre": [
-          "[Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md) · [Cargo 配置与环境变量](83_cargo_configuration.md)"
+          "[Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md) · [Cargo 配置与环境变量](83_cargo_configuration.md) · [所有权系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)"
         ],
         "post": [
-          "[交叉编译](../05_systems_and_embedded/17_cross_compilation.md)"
+          "[交叉编译](../05_systems_and_embedded/17_cross_compilation.md) · [unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)"
         ]
       },
       "backward_chains": 0,
@@ -48294,25 +48644,70 @@
       "layer": "L6",
       "title": "Rust 高级网络协议概览",
       "positioning": "",
-      "line_count": 137,
+      "line_count": 264,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "use tonic::{transport::Server, Request, Response, Status};  pub mod hello_world ..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use rumqttc::{MqttOptions, Client, QoS}; use std::time::Duration;  let mut mqtto..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use quinn::{Endpoint, ServerConfig}; use std::net::SocketAddr; use std::sync::Ar..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use lapin::{Connection, ConnectionProperties, options::*, types::FieldTable};  l..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use async_graphql::{Schema, EmptyMutation, EmptySubscription, Object};  struct Q..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use axum::{response::sse::{Event, Sse}, routing::get, Router}; use futures::stre..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/00_concurrency/10_concurrency_patterns.md",
         "../../03_advanced/01_async/02_async.md",
         "../../05_comparative/00_paradigms/05_execution_model_isomorphism.md",
         "../../05_comparative/01_systems_languages/02_rust_vs_go.md",
-        "../03_design_patterns/02_patterns.md"
+        "../03_design_patterns/02_patterns.md",
+        "../04_web_and_networking/38_network_protocols.md",
+        "../04_web_and_networking/39_high_performance_network_service_architecture.md",
+        "02_network_security.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 2,
       "matrix_rows": 14,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[异步编程](../../03_advanced/01_async/02_async.md) · [并发模式](../../03_advanced/00_concurrency/10_concurrency_patterns.md) · [网络协议](../04_web_and_networking/38_network_protocols.md)"
+        ],
+        "post": [
+          "[高性能网络服务架构](../04_web_and_networking/39_high_performance_network_service_architecture.md) · [网络安全](02_network_security.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -48453,10 +48848,34 @@
       "layer": "L6",
       "title": "Rust 网络编程快速入门",
       "positioning": "为 Rust 网络编程提供分阶段学习路径与场景化导航，链接到权威概念页获取深度解释。",
-      "line_count": 123,
+      "line_count": 245,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "use std::net::{TcpListener, TcpStream}; use std::io::{Read, Write};  fn handle_c..."
+        },
+        {
+          "flags": [],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "use tokio::net::{TcpListener, TcpStream}; use tokio::io::{AsyncReadExt, AsyncWri..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use std::net::UdpSocket;  fn main() -> std::io::Result<()> {     let socket = Ud..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use reqwest::Error;  #[tokio::main] async fn main() -> Result<(), Error> {     l..."
+        },
         {
           "flags": [],
           "lines": 7,
@@ -48479,7 +48898,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 2,
       "matrix_rows": 24,
       "pre_post": {
         "pre": [
@@ -51566,9 +51985,9 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\77_data_structures_in_rust.md",
       "layer": "L6",
-      "title": "Rust 数据结构实践",
+      "title": "Unknown",
       "positioning": "",
-      "line_count": 146,
+      "line_count": 256,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -51592,6 +52011,12 @@
         },
         {
           "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use std::collections::BTreeMap;  fn btree_demo() {     let mut map = BTreeMap::n..."
+        },
+        {
+          "flags": [],
           "lines": 10,
           "should_fail": false,
           "code_preview": "use std::collections::{HashMap, HashSet};  fn hash_demo() {     let mut map = Ha..."
@@ -51601,6 +52026,18 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "use std::collections::HashMap;  type Graph = HashMap<usize, Vec<usize>>;  fn add..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use std::rc::{Rc, Weak}; use std::cell::RefCell;  #[derive(Default)] struct Node..."
+        },
+        {
+          "flags": [],
+          "lines": 34,
+          "should_fail": false,
+          "code_preview": "pub struct UnionFind {     parent: Vec<usize>,     rank: Vec<usize>, }  impl Uni..."
         }
       ],
       "sources": [],
@@ -51616,8 +52053,8 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 16,
+      "mermaid_blocks": 1,
+      "matrix_rows": 24,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Collections](../../01_foundation/05_collections/08_collections.md)"
@@ -55150,7 +55587,7 @@
       "layer": "L7",
       "title": "Lifetime Capture in `impl Trait` Preview",
       "positioning": "",
-      "line_count": 150,
+      "line_count": 240,
       "theorem_chains": [
         {
           "text": "| Lifetime Capture in `impl Trait` Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -55173,6 +55610,32 @@
       "code_blocks": [
         {
           "flags": [
+            "compile_fail",
+            "edition2021"
+          ],
+          "lines": 13,
+          "should_fail": true,
+          "code_preview": "fn make_iter<'a, 'b>(s: &'a str, _t: &'b str) -> impl Iterator<Item = char> + 'a..."
+        },
+        {
+          "flags": [
+            "editable",
+            "edition2024"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "#![allow(unused)]  fn make_iter<'a, 'b>(s: &'a str, _t: &'b str) -> impl Iterato..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// 精确捕获 lifetime 和类型参数 fn foo<'a, T>(x: &'a T, y: i32) -> impl SomeTrait + use<'..."
+        },
+        {
+          "flags": [
             "ignore"
           ],
           "lines": 14,
@@ -55183,18 +55646,20 @@
       "sources": [],
       "cross_references": [
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "12_return_type_notation_preview.md",
         "37_rpitit_preview.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "matrix_rows": 10,
       "pre_post": {
         "pre": [
-          "[Lifetime](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Trait](../../02_intermediate/00_traits/01_traits.md)",
+          "[Lifetime](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [Advanced Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md)",
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)",
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)",
           "N/A"
@@ -55327,7 +55792,7 @@
       "layer": "L7",
       "title": "TAIT Preview",
       "positioning": "",
-      "line_count": 146,
+      "line_count": 236,
       "theorem_chains": [
         {
           "text": "| TAIT Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -55349,6 +55814,28 @@
       ],
       "code_blocks": [
         {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "type MyIter = impl Iterator<Item = i32>; ..."
+        },
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "#![allow(unused)]  type HiddenIter = impl Iterator<Item = u32>;  fn produce() ->..."
+        },
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "#![allow(unused)]  struct Counter {     state: u32, }  impl Iterator for Counter..."
+        },
+        {
           "flags": [
             "compile_fail"
           ],
@@ -55360,18 +55847,20 @@
       "sources": [],
       "cross_references": [
         "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/00_traits/19_advanced_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "17_const_trait_preview.md",
         "37_rpitit_preview.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "matrix_rows": 9,
       "pre_post": {
         "pre": [
-          "[Generics](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md)",
+          "[Generics](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [Advanced Traits](../../02_intermediate/00_traits/19_advanced_traits.md)",
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)",
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)",
           "N/A"
@@ -55388,7 +55877,7 @@
       "layer": "L7",
       "title": "Const Trait 实现预览",
       "positioning": "",
-      "line_count": 143,
+      "line_count": 234,
       "theorem_chains": [
         {
           "text": "| Const Trait Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -55413,6 +55902,30 @@
           "flags": [
             "ignore"
           ],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "const fn double<T: std::ops::Add<Output = T> + Copy>(x: T) -> T {     x + x   //..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "#![feature(const_trait_impl)]  const trait Compute {     fn compute(&self) -> i3..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// T 可以是 const 或非 const 的 Add 实现 const fn add_if_possible<T: ~const std::ops::Ad..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "// 概念代码: const trait（开发中） // const trait Compute { //     const fn compute() -> ..."
@@ -55420,19 +55933,21 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../01_foundation/07_modules_and_items/45_const_items_and_const_fn.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
-        "11_const_trait_impl_preview.md"
+        "11_const_trait_impl_preview.md",
+        "32_inline_const_pattern_preview.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "matrix_rows": 9,
       "pre_post": {
         "pre": [
-          "[Trait](../../02_intermediate/00_traits/01_traits.md) · [Const Generics](../../02_intermediate/01_generics/02_generics.md)",
+          "[Trait](../../02_intermediate/00_traits/01_traits.md) · [Const Generics](../../02_intermediate/01_generics/02_generics.md) · [Const Items and Const Fn](../../01_foundation/07_modules_and_items/45_const_items_and_const_fn.md)",
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)",
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)",
           "N/A"
@@ -56206,7 +56721,7 @@
       "layer": "L7",
       "title": "Stable ABI Preview",
       "positioning": "",
-      "line_count": 148,
+      "line_count": 240,
       "theorem_chains": [
         {
           "text": "| Stable ABI Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -56229,6 +56744,22 @@
       "code_blocks": [
         {
           "flags": [
+            "editable"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "#[repr(C)] pub struct Point {     pub x: f64,     pub y: f64, }  #[no_mangle] pu..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// ❌ 不要这样做：extern \"Rust\" ABI 不稳定 #[no_mangle] pub fn unstable_abi_function(x: St..."
+        },
+        {
+          "flags": [
             "compile_fail"
           ],
           "lines": 13,
@@ -56240,6 +56771,7 @@
       "cross_references": [
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/04_ffi/05_rust_ffi.md",
+        "../../03_advanced/04_ffi/27_linkage.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../04_research_and_experimental/43_rust_for_linux.md"
@@ -56247,10 +56779,10 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "matrix_rows": 10,
       "pre_post": {
         "pre": [
-          "[FFI](../../03_advanced/04_ffi/05_rust_ffi.md) · [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md)",
+          "[FFI](../../03_advanced/04_ffi/05_rust_ffi.md) · [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md)",
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)",
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)",
           "N/A"
@@ -56328,7 +56860,7 @@
       "layer": "L7",
       "title": "Inline Const Pattern 预览（Rust 1.98+ Nightly）",
       "positioning": "",
-      "line_count": 148,
+      "line_count": 251,
       "theorem_chains": [
         {
           "text": "| Inline Const Pattern Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -56351,6 +56883,46 @@
       "code_blocks": [
         {
           "flags": [
+            "editable"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn main() {     let arr: [u8; const { 2 + 2 }] = [0; 4];     assert_eq!(arr.len(..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "match x {     const { 1 + 1 } => ...,   // 稳定 Rust 不支持 } ..."
+        },
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "const fn compute_threshold(base: i32) -> i32 {     base * 2 + 10 }  fn main() { ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "#![feature(inline_const_pat)]  fn classify(x: u32) -> &'static str {     match x..."
+        },
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "const BIT_0: u32 = 1 << 0; const BIT_1: u32 = 1 << 1; const BIT_2: u32 = 1 << 2;..."
+        },
+        {
+          "flags": [
             "ignore"
           ],
           "lines": 16,
@@ -56361,6 +56933,8 @@
       "sources": [],
       "cross_references": [
         "../../01_foundation/04_control_flow/07_control_flow.md",
+        "../../01_foundation/04_control_flow/40_patterns.md",
+        "../../01_foundation/07_modules_and_items/45_const_items_and_const_fn.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
@@ -56369,10 +56943,10 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "matrix_rows": 9,
       "pre_post": {
         "pre": [
-          "[Const Generics](../../02_intermediate/01_generics/02_generics.md) · [Pattern Matching](../../01_foundation/04_control_flow/07_control_flow.md)",
+          "[Const Generics](../../02_intermediate/01_generics/02_generics.md) · [Pattern Matching](../../01_foundation/04_control_flow/07_control_flow.md) · [Patterns](../../01_foundation/04_control_flow/40_patterns.md) · [Const Items and Const Fn](../../01_foundation/07_modules_and_items/45_const_items_and_const_fn.md)",
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)",
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)",
           "N/A"
@@ -56440,7 +57014,7 @@
       "layer": "L7",
       "title": "`must_not_suspend` Lint Preview",
       "positioning": "",
-      "line_count": 144,
+      "line_count": 231,
       "theorem_chains": [
         {
           "text": "| `must_not_suspend` Lint Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -56463,6 +57037,30 @@
       "code_blocks": [
         {
           "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "#![warn(must_not_suspend)]  use std::cell::RefCell;  async fn problematic(data: ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "#[must_not_suspend] struct SensitiveHandle; ..."
+        },
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "use std::cell::RefCell;  async fn safe_version(data: &RefCell<i32>) {     {     ..."
+        },
+        {
+          "flags": [
             "compile_fail"
           ],
           "lines": 13,
@@ -56473,6 +57071,7 @@
       "sources": [],
       "cross_references": [
         "../../02_intermediate/02_memory_management/08_interior_mutability.md",
+        "../../03_advanced/00_concurrency/10_concurrency_patterns.md",
         "../../03_advanced/01_async/02_async.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
@@ -56481,10 +57080,10 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "matrix_rows": 8,
       "pre_post": {
         "pre": [
-          "[Async/Await](../../03_advanced/01_async/02_async.md) · [Interior Mutability](../../02_intermediate/02_memory_management/08_interior_mutability.md)",
+          "[Async/Await](../../03_advanced/01_async/02_async.md) · [Interior Mutability](../../02_intermediate/02_memory_management/08_interior_mutability.md) · [Concurrency Patterns](../../03_advanced/00_concurrency/10_concurrency_patterns.md)",
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)",
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)",
           "N/A"
@@ -56607,7 +57206,7 @@
       "layer": "L7",
       "title": "特质中返回位置 impl Trait（RPITIT）预览",
       "positioning": "",
-      "line_count": 149,
+      "line_count": 258,
       "theorem_chains": [
         {
           "text": "| RPITIT Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -56630,6 +57229,44 @@
       "code_blocks": [
         {
           "flags": [
+            "editable"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// Rust 1.74 及之前的写法 trait Factory {     type Product: Iterator<Item = i32>;     ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "trait Factory {     fn create(&self) -> impl Iterator<Item = i32>; } ..."
+        },
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "#![allow(unused)]  trait Parser {     fn parse(&self, input: &str) -> impl Itera..."
+        },
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "#![allow(unused)]  use std::future::Future;  trait Fetcher {     async fn fetch(..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// Rust 2024 / 1.82+ 支持精确捕获输入 lifetime trait BorrowingParser<'a> {     fn parse(..."
+        },
+        {
+          "flags": [
             "ignore"
           ],
           "lines": 19,
@@ -56640,18 +57277,20 @@
       "sources": [],
       "cross_references": [
         "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/00_traits/19_advanced_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "14_lifetime_capture_preview.md",
         "16_type_alias_impl_trait_preview.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "matrix_rows": 10,
       "pre_post": {
         "pre": [
-          "[Trait](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)",
+          "[Trait](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Advanced Traits](../../02_intermediate/00_traits/19_advanced_traits.md)",
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)",
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)",
           "N/A"
@@ -57401,7 +58040,7 @@
       "layer": "L7",
       "title": "WASM Target Evolution Preview",
       "positioning": "",
-      "line_count": 143,
+      "line_count": 242,
       "theorem_chains": [
         {
           "text": "| WASM Target Evolution Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -57434,6 +58073,7 @@
       "sources": [],
       "cross_references": [
         "../../06_ecosystem/05_systems_and_embedded/08_wasi.md",
+        "../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md",
         "../../06_ecosystem/11_domain_applications/11_webassembly.md",
         "../04_research_and_experimental/28_rust_for_webassembly.md",
         "https://github.com/WebAssembly/WASI/blob/main/specifications/wasi-0.2.4/Overview.md"
@@ -57441,11 +58081,11 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "matrix_rows": 20,
       "pre_post": {
         "pre": [
           "N/A",
-          "[WASI](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) · [WebAssembly](../../06_ecosystem/11_domain_applications/11_webassembly.md)"
+          "[WASI](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) · [WebAssembly](../../06_ecosystem/11_domain_applications/11_webassembly.md) · [Cross Compilation](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md)"
         ],
         "post": [
           "[Rust Specification](https://www.rust-lang.org/) ·"
@@ -57526,7 +58166,7 @@
       "layer": "L7",
       "title": "Rust in Space Preview",
       "positioning": "",
-      "line_count": 100,
+      "line_count": 231,
       "theorem_chains": [
         {
           "text": "| Rust in Space Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -57546,20 +58186,39 @@
           "title": "### 反命题"
         }
       ],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "#![no_std] #![no_main]  use core::panic::PanicInfo;  #[panic_handler] fn panic(_..."
+        },
+        {
+          "flags": [
+            "editable"
+          ],
+          "lines": 28,
+          "should_fail": false,
+          "code_preview": "#![no_std]  pub struct TelemetryFrame {     pub timestamp: u32,     pub sensor_i..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../03_advanced/02_unsafe/03_unsafe.md",
+        "../../04_formal/04_model_checking/16_aerospace_certification_formal_methods.md",
         "../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md",
-        "../04_research_and_experimental/43_rust_for_linux.md"
+        "../04_research_and_experimental/43_rust_for_linux.md",
+        "35_ferrocene_preview.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "matrix_rows": 11,
       "pre_post": {
         "pre": [
-          "[Embedded](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) · [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md)",
+          "[Embedded Systems](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Formal Methods](../../04_formal/04_model_checking/16_aerospace_certification_formal_methods.md)",
           "N/A"
         ],
         "post": [

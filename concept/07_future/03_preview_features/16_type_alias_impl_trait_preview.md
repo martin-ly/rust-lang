@@ -1,27 +1,117 @@
 # TAIT Preview
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [综述级 — 含可编译示例]
 >
-> **EN**: Type Alias Impl Trait Preview
-> **Summary**: Type Alias Impl Trait Preview: emerging Rust language feature or ecosystem trend.
->
-> **状态**: 🧪 Nightly 实验性
-> **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
-> **跟踪版本**: nightly 1.98.0 (2026-05-31)
-> **预计稳定**: 待定（需等待 RFC / MCP 完成）
+> **EN**: Type Alias Impl Trait (TAIT) Preview
+> **Summary**: Preview of Type Alias Impl Trait (TAIT), which allows `impl Trait` inside type aliases to hide concrete types while preserving zero-cost abstraction; stabilized in Rust 1.75.0.
+> **状态**: ✅ Rust 1.75.0 已稳定；关联类型位置与模块级抽象可用
+> **Rust 属性标记**: `#[stable_since_1_75]`
+> **跟踪版本**: stable 1.75.0
+> **预计稳定**: 已稳定
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 TAIT 的类型系统（Type System）影响
-> **前置依赖**: [Generics](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md)
-> **后置延伸**: [RPITIT](37_rpitit_preview.md)
-> **来源**: [Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html) · [RFC 2515](https://rust-lang.github.io/rfcs//2515-type_alias_impl_trait.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **前置依赖**: [Generics](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [Advanced Traits](../../02_intermediate/00_traits/19_advanced_traits.md)
+> **后置延伸**: [RPITIT](37_rpitit_preview.md) · [Const Trait](17_const_trait_preview.md)
+> **来源**: [Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html) · [RFC 2515 — Type Alias Impl Trait](https://rust-lang.github.io/rfcs/2515-type_alias_impl_trait.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
-## 10.4 边界测试：TAIT（Type Alias Impl Trait）的递归类型限制（编译错误）
+## 一、功能动机：为什么需要 TAIT？
+
+在稳定 Rust 中，`impl Trait` 只能出现在函数参数和返回类型的位置。当需要在多个函数之间共享一个“隐藏具体类型、但暴露 trait bound”的类型时，开发者通常面临两种选择：
+
+1. **使用 `Box<dyn Trait>`**：引入运行时动态分发和堆分配，破坏零成本抽象；
+2. **暴露具体类型**：泄露实现细节，导致 API 脆弱（如返回 `std::iter::Map<...>` 这类难以命名的类型）。
+
+**Type Alias Impl Trait（TAIT）** 允许在类型别名中使用 `impl Trait`：
+
+```rust
+type MyIter = impl Iterator<Item = i32>;
+```
+
+这样，`MyIter` 对外只暴露 `Iterator<Item = i32>` 的能力，内部具体类型由编译器在模块边界内唯一确定。自 **Rust 1.75.0** 起，TAIT 在 stable 上可用，主要覆盖关联类型和模块级类型别名。
+
+---
+
+## 二、语法说明与核心规则
+
+### 2.1 模块级 TAIT
+
+```rust,editable
+#![allow(unused)]
+
+type HiddenIter = impl Iterator<Item = u32>;
+
+fn produce() -> HiddenIter {
+    vec![1, 2, 3].into_iter()
+}
+
+fn consume(it: HiddenIter) -> u32 {
+    it.sum()
+}
+
+fn main() {
+    let total = consume(produce());
+    assert_eq!(total, 6);
+}
+```
+
+### 2.2 关联类型 TAIT（最常见用法）
+
+```rust,editable
+#![allow(unused)]
+
+struct Counter {
+    state: u32,
+}
+
+impl Iterator for Counter {
+    type Item = u32;   // TAIT 允许这里写 impl SomeTrait
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.state < 5 {
+            let v = self.state;
+            self.state += 1;
+            Some(v)
+        } else {
+            None
+        }
+    }
+}
+```
+
+### 2.3 核心限制
+
+1. **模块级或关联类型位置**：TAIT 不能用于局部变量；
+2. **具体类型必须唯一确定**：所有返回/使用 TAIT 的位置必须能推导出同一个底层类型；
+3. **不支持递归类型**：`type Recursive = impl Display;` 若其实现为自引用类型会导致编译错误；
+4. **可见性约束**：TAIT 定义的具体类型对外部模块隐藏，只能在定义它的模块内被确定。
+
+---
+
+## 三、与稳定 Rust 的对比及迁移建议
+
+| 场景 | 稳定 Rust 1.74 及之前 | Rust 1.75+ with TAIT |
+|:---|:---|:---|
+| 隐藏迭代器类型 | `Box<dyn Iterator<Item = T>>` | `type MyIter = impl Iterator<Item = T>` |
+| 跨函数共享隐藏类型 | 暴露具体类型或使用 trait object | 类型别名 + `impl Trait` |
+| 性能 | 动态分发 / 堆分配 | 静态分发 / 零成本 |
+| API 稳定性 | 具体类型变更会破坏 API | 只暴露 trait bound，更稳定 |
+
+### 3.1 迁移建议
+
+1. **优先在库 API 中使用 TAIT**：隐藏内部迭代器、解析器、状态机等复杂类型；
+2. **不要用 TAIT 隐藏生命周期**：TAIT 不能替代正确的 lifetime 标注；
+3. **注意版本门槛**：TAIT 要求 Rust 1.75.0+，若需支持旧版本仍应使用 `Box<dyn>`；
+4. **避免递归定义**：TAIT 不支持自引用或无限递归类型，需要时改用 `Box` 或显式 GAT。
+
+---
+
+## 四、边界测试：TAIT（Type Alias Impl Trait）的递归类型限制（编译错误）
 
 ```rust,compile_fail
 // 概念代码: TAIT 允许类型别名使用 impl trait

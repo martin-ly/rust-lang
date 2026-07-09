@@ -1,27 +1,118 @@
 # Const Trait 实现预览
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [综述级 — 含可编译示例]
 >
 > **EN**: Const Trait Implementation Preview
-> **Summary**: Preview of const traits for generic compile-time computation.
->
+> **Summary**: Preview of const traits (`~const Trait`, `const impl`) that allow generic trait bounds inside `const fn` and other const contexts; still nightly/experimental.
 > **状态**: 🧪 Nightly 实验性
-> **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
+> **Rust 属性标记**: `#[experimental]` `#[nightly_only]` `feature(const_trait_impl)`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
-> **预计稳定**: 待定（需等待 RFC / MCP 完成）
+> **预计稳定**: 待定（需等待 design 迭代完成）
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价 const trait 的设计权衡
-> **前置依赖**: [Trait](../../02_intermediate/00_traits/01_traits.md) · [Const Generics](../../02_intermediate/01_generics/02_generics.md)
-> **后置延伸**: [Const Trait Impl](11_const_trait_impl_preview.md)
-> **来源**: [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 2632](https://github.com/rust-lang/rust/issues/67792) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **前置依赖**: [Trait](../../02_intermediate/00_traits/01_traits.md) · [Const Generics](../../02_intermediate/01_generics/02_generics.md) · [Const Items and Const Fn](../../01_foundation/07_modules_and_items/45_const_items_and_const_fn.md)
+> **后置延伸**: [Const Trait Impl](11_const_trait_impl_preview.md) · [Inline Const Pattern](32_inline_const_pattern_preview.md)
+> **来源**: [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) · [Const Trait Tracking Issue #67792](https://github.com/rust-lang/rust/issues/67792) · [RFC 2632](https://github.com/rust-lang/rfcs/pull/2632) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
-## 10.4 边界测试：const trait 与泛型 const 求值（编译错误/未来特性）
+## 一、功能动机：为什么需要 Const Trait？
+
+稳定 Rust 中的 `const fn` 已经允许在编译期执行大量计算，但它有一个关键限制：**不能在 `const fn` 中使用泛型 trait bound**。例如，以下代码在稳定 Rust 中无法编译：
+
+```rust,ignore
+const fn double<T: std::ops::Add<Output = T> + Copy>(x: T) -> T {
+    x + x   // 错误：稳定 Rust 不允许在 const fn 中调用 trait 方法
+}
+```
+
+这限制了常量求值的表达能力。开发者不得不：
+
+1. 为每种具体类型写单独的 `const fn`；
+2. 使用宏生成多份代码；
+3. 将计算推迟到运行时。
+
+**Const Trait** 的目标是允许 trait 方法在 const 上下文中使用，从而使泛型常量计算成为可能。核心语法包括：
+
+- `~const Trait`：表示“可在 const 上下文中使用的 trait bound”；
+- `const impl Trait for Type`：表示某个实现支持常量求值。
+
+---
+
+## 二、语法说明
+
+### 2.1 声明 const trait
+
+```rust,ignore
+#![feature(const_trait_impl)]
+
+const trait Compute {
+    fn compute(&self) -> i32;
+}
+
+struct Value(i32);
+
+const impl Compute for Value {
+    fn compute(&self) -> i32 {
+        self.0 * 2
+    }
+}
+
+const fn evaluate<T: ~const Compute>(x: &T) -> i32 {
+    x.compute()
+}
+
+const RESULT: i32 = evaluate(&Value(21));
+```
+
+### 2.2 `~const Trait` 的含义
+
+```rust,ignore
+// T 可以是 const 或非 const 的 Add 实现
+const fn add_if_possible<T: ~const std::ops::Add<Output = T>>(a: T, b: T) -> T {
+    a + b
+}
+```
+
+`~const` 表示“这个 bound 在 const 上下文中可用，但在运行时上下文也同样可用”。它允许同一份泛型代码同时服务于 const 和 runtime 场景。
+
+### 2.3 与稳定 Rust 的对比
+
+| 能力 | 稳定 Rust | Nightly + const_trait_impl |
+|:---|:---|:---|
+| `const fn` 中调用 trait 方法 | ❌ 不允许 | ✅ 允许（使用 `~const`） |
+| 泛型 `const fn` 使用 trait bound | ❌ 不允许 | ✅ 允许 |
+| 标记实现为 const 可用 | ❌ 无语法 | ✅ `const impl` |
+| 编译期复杂数据结构构造 | 受限 | 大幅增强 |
+
+---
+
+## 三、与稳定 Rust 的对比及迁移建议
+
+### 3.1 当前替代方案
+
+在 const trait 稳定之前，常见 workaround 有：
+
+1. **宏展开**：用 `macro_rules!` 为每种类型生成 `const fn`；
+2. **min_specialization**：为 const / non-const 分别写实现；
+3. **运行时计算**：放弃编译期优化，将逻辑移到 `fn` 中。
+
+### 3.2 迁移建议
+
+1. **跟踪 nightly 进展**：const trait 的语法和语义仍在迭代，不要过早锁定设计；
+2. **先使用 `macro_rules!`**：在稳定 channel 上，宏仍是处理“泛型常量计算”最可靠的方式；
+3. **隔离 const 路径**：将需要在 const 上下文中使用的逻辑封装为小函数，未来可无缝替换为 const trait；
+4. **关注 `const_mut_refs` 和 `const_heap`**：这些特性会进一步扩展 const 上下文的能力边界。
+
+> **版本说明**：const trait 目前仍是 nightly 实验特性（`feature(const_trait_impl)`）。预计在 2026-2027 年才会进入稳定化流程，具体时间取决于 design 收敛和生态反馈。
+
+---
+
+## 四、边界测试：const trait 与泛型 const 求值（编译错误/未来特性）
 
 ```rust,ignore
 // 概念代码: const trait（开发中）
@@ -55,7 +146,7 @@ fn main() {
 > 3) 放弃 const，使用运行时（Runtime）计算。
 > 这与 C++ 的 `constexpr`（函数可自动在编译期/运行期使用，无需特殊标记）或 D 的 `CTFE`（Compile Time Function Execution，类似但更灵活）不同——Rust 追求显式控制：const 函数有严格的副作用限制，trait 的 const 支持需显式声明。
 > [来源: [Const Trait RFC](https://github.com/rust-lang/rust/issues/67792)] ·
-> [来源: [Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
+> [来源: [Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)]
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)

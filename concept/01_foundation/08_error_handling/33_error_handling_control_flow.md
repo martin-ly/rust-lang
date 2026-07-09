@@ -3,7 +3,7 @@
 # 错误处理控制流（Error Handling Control Flow）
 >
 > **EN**: Error Handling Control Flow
-> **Summary**: Error handling patterns in Rust control flow, covering the `?` operator, `FromResidual`, `try` blocks, and boundary design recommendations.
+> **Summary**: Error-handling patterns in Rust control flow: the `?` operator, `Try`/`FromResidual`, `try` blocks, custom error types with `thiserror`, and decision guidance for choosing between `?`, `match`, `unwrap`, `expect`, and `panic`.
 >
 > **受众**: [初学者] / [进阶]
 > **层级**: L1 基础概念
@@ -25,31 +25,52 @@
 - [错误处理控制流（Error Handling Control Flow）](#错误处理控制流error-handling-control-flow)
   - [📊 目录](#-目录)
   - [`?` 运算符与早退](#-运算符与早退)
-  - [`FromResidual` 与跨类型传播](#fromresidual-与跨类型传播)
-  - [`try` 块（稳定）](#try-块稳定)
+  - [`Try`/`FromResidual` 与跨类型传播](#tryfromresidual-与跨类型传播)
+  - [`try` 块](#try-块)
+  - [自定义错误类型](#自定义错误类型)
   - [边界设计建议](#边界设计建议)
+  - [对比与决策](#对比与决策)
+    - [决策树](#决策树)
   - [认知路径与推理骨架](#认知路径与推理骨架)
     - [认知路径](#认知路径)
     - [定理链](#定理链)
     - [反向推理](#反向推理)
     - [反命题](#反命题)
 
-本篇聚焦 `Result`/`Option` 与 `?` 运算符、`FromResidual` 残差机制、`try` 块、错误转换与边界设计。
+本篇聚焦 `Result`/`Option` 与 `?` 运算符、`Try`/`FromResidual` 残差机制、`try` 块、错误转换与边界设计。
 
 ## `?` 运算符与早退
 
+`?` 用于从返回 `Result`、`Option` 或 `ControlFlow` 的函数中提前返回错误/空值/控制信号。
+
 ```rust
 fn read_number(s: &str) -> Result<i32, String> {
-    let num: i32 = s.trim().parse().map_err(|_| "parse".to_string())?;
+    let num: i32 = s.trim().parse().map_err(|_| "parse failed".to_string())?;
     Ok(num)
 }
 ```
 
-要点：`?` 等价于 `match` 早退；自动从错误类型转换到函数返回错误类型。
+要点：
 
-## `FromResidual` 与跨类型传播
+- `?` 等价于一段展开后的 `match`，在 `Err`/`None` 时立即从当前函数返回。
+- 自动通过 `From` 将内部错误类型转换到函数返回错误类型。
 
-`?` 依赖 `Try`/`FromResidual` 将如 `Option::None`、`Result::Err` 转化为调用者返回类型的残差。
+等价展开：
+
+```rust
+fn read_number_manual(s: &str) -> Result<i32, String> {
+    match s.trim().parse::<i32>() {
+        Ok(n) => Ok(n),
+        Err(_) => Err("parse failed".to_string()),
+    }
+}
+```
+
+---
+
+## `Try`/`FromResidual` 与跨类型传播
+
+`?` 依赖 `Try` 与 `FromResidual` trait 将 `Option::None`、`Result::Err` 等转换为调用者返回类型的**残差**（residual）。
 
 ```rust
 fn opt_chain(x: Option<i32>) -> Option<i32> {
@@ -58,7 +79,18 @@ fn opt_chain(x: Option<i32>) -> Option<i32> {
 }
 ```
 
-## `try` 块（稳定）
+在 `Result` 与 `Option` 之间转换时需要显式处理，因为错误信息会丢失：
+
+```rust
+fn option_to_result(o: Option<i32>) -> Result<i32, &'static str> {
+    let n = o.ok_or("missing value")?;
+    Ok(n)
+}
+```
+
+---
+
+## `try` 块
 
 将一段内部使用 `?` 的表达式整体化，便于在表达式位置编写错误传播逻辑。
 
@@ -69,13 +101,84 @@ fn sum3(a: Result<i32, &'static str>, b: Result<i32, &'static str>) -> Result<i3
 }
 ```
 
-## 边界设计建议
+`try` 块允许把错误传播限制在一个表达式内，而不是整个函数：
 
-- 对外 API 使用语义明确的错误类型（可结合 `thiserror`）；
-- 小范围 `try` 块提升表达式可读性；
-- 仅在需要时引入 `anyhow`/`eyre` 等动态错误类型。
+```rust
+fn demo() -> Result<i32, &'static str> {
+    let x: i32 = try {
+        let a = "10".parse::<i32>()?;
+        let b = "20".parse::<i32>()?;
+        a + b
+    }.map_err(|_| "inner parse failed")?;
+    Ok(x * 2)
+}
+```
 
 ---
+
+## 自定义错误类型
+
+对外 API 推荐定义精确的错误类型，可使用 `thiserror` 减少样板：
+
+```toml
+[dependencies]
+thiserror = "2"
+```
+
+```rust
+use thiserror::Error;
+
+#[derive(Debug, Error)]
+enum ConfigError {
+    #[error("io error: {0}")]
+    Io(#[from] std::io::Error),
+    #[error("parse error: {0}")]
+    Parse(#[from] toml::de::Error),
+    #[error("missing field: {0}")]
+    MissingField(String),
+}
+
+fn load_config(path: &str) -> Result<Config, ConfigError> {
+    let text = std::fs::read_to_string(path)?; // io::Error -> ConfigError
+    let cfg: Config = toml::from_str(&text)?;  // toml::de::Error -> ConfigError
+    Ok(cfg)
+}
+```
+
+---
+
+## 边界设计建议
+
+- 对外 API 使用语义明确的错误类型（可结合 `thiserror`）。
+- 小范围 `try` 块提升表达式可读性。
+- 仅在需要时引入 `anyhow`/`eyre` 等动态错误类型。
+- 不可恢复或编程错误使用 `panic!` 或 `assert!`，不要滥用 `Result`。
+
+---
+
+## 对比与决策
+
+| 方式 | 适用场景 | 优点 | 缺点 |
+|:---|:---|:---|:---|
+| `match` | 需要立即处理每个分支 | 最显式、最灵活 | 嵌套多时代码冗长 |
+| `?` | 错误需要向上传播 | 代码扁平、可读性高 | 要求返回类型兼容 |
+| `try` 块 | 局部表达式内需要 `?` | 限制错误作用域 | Rust 1.85+ / 2024 Edition |
+| `unwrap` | 原型或确定不会失败 | 简洁 | panic 风险，生产代码慎用 |
+| `expect` | 失败说明确为 bug |  panic 信息可自定义 | 同 `unwrap` |
+| `panic!` | 不可恢复状态 | 立即终止错误传播 | 不应作为常规错误处理 |
+
+### 决策树
+
+```mermaid
+flowchart TD
+    A[遇到可能失败的操作] --> B{调用者需要处理失败?}
+    B -->|是| C{需要转换错误类型?}
+    C -->|是| D[使用 `?` + `From`/`map_err`]
+    C -->|否| E[直接使用 `?`]
+    B -->|否| F{失败是否为编程 bug?}
+    F -->|是| G[使用 `expect` / `panic!`]
+    F -->|否| H[使用 `unwrap` 或 `if let Some/Ok`]
+```
 
 ---
 
@@ -86,7 +189,8 @@ fn sum3(a: Result<i32, &'static str>, b: Result<i32, &'static str>) -> Result<i3
 1. **从显式 `match` 开始**：先理解如何用 `match` 处理 `Result`/`Option`。
 2. **引入 `?` 简化传播**：掌握 `?` 的早退语义与自动类型转换。
 3. **理解残差机制**：通过 `Try`/`FromResidual` 知道 `?` 为何能在 `Option` 与 `Result` 间统一工作。
-4. **边界设计**：在库/API 边界处选择错误类型、错误转换策略与可恢复性设计。
+4. **自定义错误类型**：在 API 边界定义精确错误类型，实现 `std::error::Error`。
+5. **边界设计**：在库/API 边界处选择错误类型、错误转换策略与可恢复性设计。
 
 ### 定理链
 

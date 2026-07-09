@@ -1,10 +1,9 @@
 # `must_not_suspend` Lint Preview
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [综述级 — 含可编译示例]
 >
-> **EN**: Must Not Suspend Preview
-> **Summary**: Must Not Suspend Preview: emerging Rust language feature or ecosystem trend.
->
+> **EN**: `must_not_suspend` Lint Preview
+> **Summary**: Preview of the `must_not_suspend` lint that warns when types like `MutexGuard` or `RefCell` borrows are held across `.await` points in async code; nightly experimental.
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
@@ -15,13 +14,101 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: F×Eva — 评价跨 await 点的借用（Borrowing）安全性
-> **前置依赖**: [Async/Await](../../03_advanced/01_async/02_async.md) · [Interior Mutability](../../02_intermediate/02_memory_management/08_interior_mutability.md)
+> **前置依赖**: [Async/Await](../../03_advanced/01_async/02_async.md) · [Interior Mutability](../../02_intermediate/02_memory_management/08_interior_mutability.md) · [Concurrency Patterns](../../03_advanced/00_concurrency/10_concurrency_patterns.md)
 > **后置延伸**: [Async Drop](18_async_drop_preview.md)
-> **来源**: [RFC 3014](https://rust-lang.github.io/rfcs//3014-must-not-suspend-lint.html) · [Tracking Issue](https://github.com/rust-lang/rust/issues/83310) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [RFC 3014 — Must Not Suspend Lint](https://rust-lang.github.io/rfcs/3014-must-not-suspend-lint.html) · [Tracking Issue #83310](https://github.com/rust-lang/rust/issues/83310) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
-## 10.4 边界测试：`must_not_suspend` 与跨 await 点的借用（运行时错误）
+## 一、功能动机：跨 await 点持有的危险
+
+异步 Rust 的核心机制是 `.await` 点：当 future 遇到 `.await` 时，它可能将控制权交还给 executor，当前任务被挂起。如果某个 async 函数在挂起前持有了以下类型的值，就可能引入运行时故障：
+
+- `std::cell::RefCell` 的 `Ref` / `RefMut`：跨 await 时仍持有借用，其他任务可能 panic；
+- `std::sync::MutexGuard` / `RwLockReadGuard`：跨 await 时仍持有锁，可能导致死锁；
+- 某些 `unsafe` 或 raw handle：挂起期间可能因资源状态变化而 UB。
+
+`must_not_suspend` lint 的目标就是在编译期警告这类危险持有。它不影响类型系统，而是作为**静态分析工具**帮助开发者发现 async 代码中的常见反模式。
+
+---
+
+## 二、语法说明：如何启用与使用
+
+### 2.1 启用 lint
+
+```rust,ignore
+#![warn(must_not_suspend)]
+
+use std::cell::RefCell;
+
+async fn problematic(data: &RefCell<i32>) {
+    let mut borrow = data.borrow_mut();
+    tokio::task::yield_now().await;   // lint 警告：borrow_mut 跨越 await
+    *borrow += 1;
+}
+```
+
+### 2.2 自定义类型标记
+
+未来可能允许类型作者通过属性主动声明“我的类型不应跨越 await”：
+
+```rust,ignore
+#[must_not_suspend]
+struct SensitiveHandle;
+```
+
+### 2.3 解决方式
+
+```rust,editable
+use std::cell::RefCell;
+
+async fn safe_version(data: &RefCell<i32>) {
+    {
+        let mut borrow = data.borrow_mut();
+        *borrow += 1;
+    } // guard 在此作用域结束，释放借用
+
+    // 现在可以安全 await
+    // tokio::task::yield_now().await;
+}
+
+fn main() {
+    let data = RefCell::new(0);
+    // 注意：此处没有实际运行时，仅展示编译期结构
+    let _ = safe_version(&data);
+}
+```
+
+---
+
+## 三、与稳定 Rust 的对比及迁移建议
+
+| 问题 | 稳定 Rust 当前行为 | 启用 `must_not_suspend` 后 |
+|:---|:---|:---|
+| `RefCell` 借用跨 await | 编译通过，运行时可能 panic | 编译期警告 |
+| `MutexGuard` 跨 await | 编译通过，可能死锁 | 编译期警告 |
+| 异步锁选择 | 开发者自行判断 | lint 引导使用 `tokio::sync::Mutex` 等 async-aware 锁 |
+
+### 3.1 稳定 Rust 中的最佳实践
+
+即使 lint 尚未稳定，开发者也应遵循以下原则：
+
+1. **在 `.await` 前 drop guard**：使用嵌套作用域或显式 `drop(guard)`；
+2. **使用异步锁**：在 async 上下文中优先使用 `tokio::sync::Mutex` / `async-lock`；
+3. **避免在 async 函数中使用 `std::sync::Mutex`**：除非能证明锁持有时间极短且不跨越 await；
+4. **代码审查**：对跨越 await 的借用保持警觉，尤其是 `RefCell`、`RwLock`、`parking_lot` 等类型。
+
+### 3.2 迁移建议
+
+1. **在 CI 中启用 `-W must_not_suspend`**：nightly 项目可以将其设为 error，提前捕获问题；
+2. **不要 suppress 所有警告**：逐个评估警告是否真的是 bug；
+3. **结合 `Send` 分析**：`must_not_suspend` 与 `Send` 是正交约束，两者共同保证 async 代码健康。
+
+> **版本说明**：`must_not_suspend` 目前仍是 nightly 实验性 lint，没有进入 stable 的明确时间表。它未来可能成为默认允许（allow-by-default）或默认警告（warn-by-default）的 lint。
+
+---
+
+## 四、边界测试：`must_not_suspend` 与跨 await 点的借用（运行时错误）
 
 ```rust,compile_fail
 use std::cell::RefCell;

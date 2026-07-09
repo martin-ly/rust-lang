@@ -1,7 +1,7 @@
 # C/C++ → Rust 工程层对比路线图
 >
 > **EN**: C/C++ to Rust Engineering Comparison Roadmap
-> **Summary**: A unified roadmap and index for all C/C++ engineering-level comparison files, helping C++ programmers migrate to Rust through structured topic clusters.
+> **Summary**: A unified roadmap and index for all C/C++ engineering-level comparison files, with topic clusters, migration paths, idiomatic code comparisons, and decision trees for C++ programmers moving to Rust.
 >
 > **受众**: [进阶]
 > **层级**: L2-L5 跨层导航
@@ -20,7 +20,19 @@
 > 本路线图将 C/C++ → Rust 的对比内容组织为五个主题簇：内存模型、类型系统、错误处理、构造与元编程、ABI 与运行时，
 > 帮助学习者按自己的知识缺口定位文件，而不是按文件编号顺序阅读。**
 
----
+```mermaid
+graph TD
+    Cpp([C++ 背景]) --> M[内存模型簇]
+    Cpp --> T[类型系统簇]
+    Cpp --> E[错误处理簇]
+    Cpp --> Ct[构造与元编程簇]
+    Cpp --> A[ABI 与运行时簇]
+    M --> R[Rust 工程实践]
+    T --> R
+    E --> R
+    Ct --> R
+    A --> R
+```
 
 ## 二、主题簇地图
 
@@ -42,7 +54,7 @@
 | SFINAE / `enable_if` | Trait Bounds / `where` | [Traits §5.8](../../02_intermediate/00_traits/01_traits.md) |
 | C++20 Concepts | Trait + Bound | [Traits §5.8.5](../../02_intermediate/00_traits/01_traits.md) |
 | 模板特化 / 偏特化 | Orphan Rule / Specialization | [Traits §5.8.3](../../02_intermediate/00_traits/01_traits.md) · [Advanced Traits](../../02_intermediate/00_traits/19_advanced_traits.md) |
-| 运算符重载 | `std::ops` trait | [Type System §12](../../01_foundation/02_type_system/04_type_system.md) · [Surface Features §3](../../05_comparative/00_paradigms/16_cpp_rust_surface_features.md) |
+| 运算符重载 | `std::ops` trait | [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Surface Features](../../05_comparative/00_paradigms/16_cpp_rust_surface_features.md) |
 
 ### 2.3 错误处理簇
 
@@ -73,9 +85,51 @@
 | `friend` | 模块可见性 | [Friend vs Module Privacy](../../02_intermediate/05_modules_and_visibility/29_friend_vs_module_privacy.md) |
 | FFI / `extern "C"` | `extern "C"` / `unsafe` | [Rust FFI](../../03_advanced/04_ffi/05_rust_ffi.md) |
 
----
+## 三、代码对比示例
 
-## 三、推荐学习路径
+### 错误处理
+
+**C++**
+
+```cpp
+auto result = may_throw();
+try {
+    process(result.value());
+} catch (const std::exception& e) {
+    log(e.what());
+}
+```
+
+**Rust**
+
+```rust
+let result = may_fail();
+match result {
+    Ok(v) => process(v),
+    Err(e) => log(&e.to_string()),
+}
+// 或更简洁
+process(may_fail()?);
+```
+
+### 泛型约束
+
+**C++**
+
+```cpp
+template <typename T>
+auto add(T a, T b) -> decltype(a + b) { return a + b; }
+```
+
+**Rust**
+
+```rust
+use std::ops::Add;
+
+fn add<T: Add<Output = T>>(a: T, b: T) -> T { a + b }
+```
+
+## 四、推荐学习路径
 
 ### 路径 A：C++ 系统程序员快速迁移
 
@@ -102,9 +156,24 @@ RTTI / Friend / Preprocessor（逐个主题扫尾）
 | 企业后端 | [Exception Safety](../../02_intermediate/03_error_handling/27_exception_safety_rust_cpp.md) | [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) |
 | 编译器 / 元编程 | [Preprocessor vs Macros](../../02_intermediate/06_macros_and_metaprogramming/26_c_preprocessor_vs_rust_macros.md) | [Macros](../../03_advanced/03_proc_macros/04_macros.md) |
 
----
+## 五、主题簇选择决策树
 
-## 四、与 Phase B 计划的衔接
+```mermaid
+flowchart TD
+    Start([C++ 迁移者]) --> Q1{最常纠结的问题?}
+    Q1 -->|内存/生命周期| A[内存模型簇]
+    Q1 -->|模板/Concepts| B[类型系统簇]
+    Q1 -->|try/catch| C[错误处理簇]
+    Q1 -->|构造函数/宏| D[构造与元编程簇]
+    Q1 -->|FFI/虚函数| E[ABI 与运行时簇]
+    A --> F[阅读 Variable Model + Borrowing]
+    B --> G[阅读 Generics + Traits]
+    C --> H[阅读 Error Handling + Exception Safety]
+    D --> I[阅读 Construction + Preprocessor vs Macros]
+    E --> J[阅读 C++ ABI Object Model + Rust FFI]
+```
+
+## 六、与 Phase B 计划的衔接
 
 本路线图属于 **Phase B（C/C++ 工程层对比）** 的导航层。审计报告 [SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md](../../../archive/reports/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md) 指出的 Phase B 缺口包括：
 
@@ -115,9 +184,7 @@ RTTI / Friend / Preprocessor（逐个主题扫尾）
 - 构造/初始化/运算符/RTTI/友元 ✅ [Surface Features](../../05_comparative/00_paradigms/16_cpp_rust_surface_features.md) + 专门文件
 - 预处理器 vs 宏 ✅ [Preprocessor vs Macros](../../02_intermediate/06_macros_and_metaprogramming/26_c_preprocessor_vs_rust_macros.md)
 
----
-
-## 五、L1 / L2 / L3 总结
+## 七、L1 / L2 / L3 总结
 
 | 层级 | 要点 |
 |:---|:---|
@@ -125,14 +192,13 @@ RTTI / Friend / Preprocessor（逐个主题扫尾）
 | **L2** | Rust 通过类型系统、trait、模块可见性替代了 C++ 的构造函数、异常、friend、SFINAE 等语言内建机制。 |
 | **L3** | 迁移的核心不是"找等价语法"，而是理解 Rust 如何通过去语法化和显式约束，把 C++ 中的隐式规则和特权语法转化为可静态检查的结构。 |
 
----
-
-## 六、延伸阅读
+## 八、延伸阅读
 
 - [Rust Foundation Interop Initiative](https://github.com/rustfoundation/interop-initiative)
 - [Brown University C++↔Rust Phrasebook](https://cel.cs.brown.edu/crp/)
 - [simplifycpp.org — C++ vs Rust](https://simplifycpp.org/books/cpp/CPP_Rust.pdf)
 - [Tangram Vision — C++ Rust Generics](https://www.tangramvision.com/blog/c-rust-generics-and-specialization)
+- [Pattern Semantic Space Index](pattern_semantic_space_index.md)
 
 ---
 

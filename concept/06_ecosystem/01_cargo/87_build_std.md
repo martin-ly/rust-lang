@@ -1,14 +1,14 @@
 > **内容分级**: [综述级]
 >
-# Cargo build-std
-
-> **EN**: Cargo `build-std`
-> **Summary**: A guide to Cargo's unstable `build-std` feature, which compiles the Rust standard library (`std`, `core`, `alloc`) from source for custom targets, `no_std` + `alloc`, custom panic handlers, and LTO size optimization.
-> **受众**: [进阶 / 工程]
-> **Bloom 层级**: 理解 → 应用
-> **A/S/P 标记**: **A** — Application
-> **前置概念**: [Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md) · [Cargo 配置与环境变量](83_cargo_configuration.md)
-> **后置概念**: [交叉编译](../05_systems_and_embedded/17_cross_compilation.md)
+> # Cargo build-std
+>
+> > **EN**: Cargo `build-std`
+> > **Summary**: A comprehensive guide to Cargo's unstable `build-std` feature: compiling the Rust standard library (`std`, `core`, `alloc`) from source for custom targets, `no_std` + `alloc`, custom panic handlers, LTO size optimization, and embedded systems.
+> > **受众**: [进阶 / 工程]
+> > **Bloom 层级**: 理解 → 应用
+> > **A/S/P 标记**: **A** — Application
+> > **前置概念**: [Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md) · [Cargo 配置与环境变量](83_cargo_configuration.md) · [所有权系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> > **后置概念**: [交叉编译](../05_systems_and_embedded/17_cross_compilation.md) · [unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 
 ---
 
@@ -32,6 +32,22 @@
 - 去除未使用的 `std` 代码
 - 内联标准库函数
 - 自定义内存分配器
+
+## build-std 工作流程
+
+`build-std` 本质上是把 `rust-src` 组件中的标准库源码作为当前 workspace 的依赖重新编译。
+
+```mermaid
+graph LR
+    A[安装 rust-src 组件] --> B[.cargo/config.toml 启用 build-std]
+    B --> C[编译 core]
+    B --> D[编译 alloc]
+    B --> E[编译 std]
+    C --> F[链接为目标二进制]
+    D --> F
+    E --> F
+    F --> G[自定义 panic / LTO / 体积优化]
+```
 
 ## 使用方法
 
@@ -68,21 +84,88 @@ opt-level = "z"
 codegen-units = 1
 ```
 
-## 稳定化进度跟踪
+## 何时选择 build-std（决策树）
 
-| 里程碑 | 状态 | 说明 |
-|--------|------|------|
-| 功能引入 | ✅ | 已作为 unstable 功能可用多年 |
-| rust-src 组件 | ✅ | `rustup component add rust-src` 稳定可用 |
-| Cargo.toml 原生支持 | ⏳ | 需在 `.cargo/config.toml` 中配置 |
-| 无需 nightly | ⏳ | 仍需要 nightly toolchain 启用 `-Z build-std` |
-| 完全稳定化 | 🔮 | 无明确时间表，依赖 Cargo 团队规划 |
+```mermaid
+flowchart TD
+    Start([开始]) --> Q1{目标平台是否有预编译 std?}
+    Q1 -->|有| A[使用默认 cargo build]
+    Q1 -->|无| Q2{是否需要 alloc?}
+    Q2 -->|是| B[build-std = core,alloc,compiler_builtins]
+    Q2 -->|否| C[build-std = core]
+    B --> D{是否追求极致体积?}
+    C --> D
+    D -->|是| E[panic=abort + lto=true + opt-level=z]
+    D -->|否| F[标准 release 配置]
+```
 
-### 当前替代方案
+## 典型配置示例
 
-- **`#![no_std]` + `#![no_main]`**: 最稳定的方式，完全绕过标准库
-- **`embedded-hal` 生态**: 提供跨平台 HAL 抽象
-- **`cortex-m-rt`**: 提供启动代码和向量表
+### 自定义 target JSON
+
+自定义内核或固件常需要自定义 target 描述文件：
+
+```json
+{
+  "llvm-target": "x86_64-unknown-none",
+  "data-layout": "e-m:e-i64:64-f80:128-n8:16:32:64-S128",
+  "arch": "x86_64",
+  "target-endian": "little",
+  "target-pointer-width": "64",
+  "target-c-int-width": "32",
+  "os": "none",
+  "executables": true,
+  "linker-flavor": "ld.lld",
+  "panic-strategy": "abort"
+}
+```
+
+配合 `.cargo/config.toml`：
+
+```toml
+[build]
+target = "x86_64-unknown-none.json"
+
+[unstable]
+build-std = ["core", "compiler_builtins"]
+build-std-features = ["compiler-builtins-mem"]
+```
+
+### no_std + 全局分配器
+
+在 `build-std` 开启 `alloc` 后，即使 `#![no_std]` 也能使用 `Vec`、`Box` 等数据结构：
+
+```rust
+#![no_std]
+#![no_main]
+
+extern crate alloc;
+
+use alloc::vec::Vec;
+use core::panic::PanicInfo;
+
+#[global_allocator]
+static ALLOCATOR: MyAllocator = MyAllocator;
+
+struct MyAllocator;
+
+unsafe impl alloc::alloc::GlobalAlloc for MyAllocator {
+    unsafe fn alloc(&self, _layout: core::alloc::Layout) -> *mut u8 { core::ptr::null_mut() }
+    unsafe fn dealloc(&self, _ptr: *mut u8, _layout: core::alloc::Layout) {}
+}
+
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! { loop {} }
+```
+
+## build-std-features 速查表
+
+| feature | 作用 | 典型场景 |
+|:---|:---|:---|
+| `compiler-builtins-mem` | 使用 `compiler_builtins` 提供 `memcpy` 等 | 大多数裸机目标 |
+| `compiler-builtins-c` | 使用 C 实现的部分 builtins | 需要与 C 库混编 |
+| `panic-immediate-abort` | panic 直接 abort，不输出信息 | 体积极度敏感 |
+| `optimize_for_size` | 针对代码体积极致优化 | `opt-level = z` 时配合 |
 
 ## HAL 设计模式深化
 
@@ -139,6 +222,40 @@ impl<T> Register<T> {
     }
 }
 ```
+
+## 常见陷阱与排查
+
+| 现象 | 可能原因 | 解决方案 |
+|:---|:---|:---|
+| `error: failed to read cargo metadata` | 未安装 `rust-src` | `rustup component add rust-src --toolchain nightly` |
+| `could not find std` | target 不支持完整 std | 改用 `core`/`alloc` 或自定义 target |
+| 二进制体积未减小 | 未开启 `panic=abort` 或 LTO | 检查 `Cargo.toml` profile |
+| panic 信息输出占用空间 | 默认 panic handler 含格式化 | 使用 `panic-immediate-abort` |
+
+## 稳定化进度跟踪
+
+| 里程碑 | 状态 | 说明 |
+|--------|------|------|
+| 功能引入 | ✅ | 已作为 unstable 功能可用多年 |
+| rust-src 组件 | ✅ | `rustup component add rust-src` 稳定可用 |
+| Cargo.toml 原生支持 | ⏳ | 需在 `.cargo/config.toml` 中配置 |
+| 无需 nightly | ⏳ | 仍需要 nightly toolchain 启用 `-Z build-std` |
+| 完全稳定化 | 🔮 | 无明确时间表，依赖 Cargo 团队规划 |
+
+### 当前替代方案
+
+- **`#![no_std]` + `#![no_main]`**: 最稳定的方式，完全绕过标准库
+- **`embedded-hal` 生态**: 提供跨平台 HAL 抽象
+- **`cortex-m-rt`**: 提供启动代码和向量表
+
+## 相关权威页
+
+- [Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md)
+- [交叉编译](../05_systems_and_embedded/17_cross_compilation.md)
+- [Cargo 配置与环境变量](83_cargo_configuration.md)
+- [所有权系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+- [泛型与 Trait Bounds](../../02_intermediate/01_generics/02_generics.md)
+- [unsafe 与裸机内存](../../03_advanced/02_unsafe/01_unsafe.md)
 
 ## 参考
 

@@ -1,7 +1,7 @@
 # 模式语义空间索引：设计模式在概念体系中的坐标
 >
 > **EN**: Pattern Semantic Space Index
-> **Summary**: A unified index and learning path for all design-pattern-related concepts across the concept hierarchy.
+> **Summary**: A unified index and learning path for all design-pattern-related concepts across the concept hierarchy, with semantic axes, GoF-to-Rust mapping, and scenario-based decision trees.
 >
 > **受众**: [进阶]
 > **层级**: L2-L6 跨层导航
@@ -19,7 +19,17 @@
 > **设计模式不是 23 个孤立代码模板的集合，而是分布在概念空间中不同坐标点上的结构化知识。
 > 本索引提供一张"模式地图"，帮助学习者在以下维度上定位每个模式文件：抽象层级（L1-L6）、问题域（并发/分布式/架构/算法）、认知目标（理解/分析/评价/创造）、以及与其他概念的语义关联。**
 
----
+```mermaid
+graph TD
+    P[Pattern Semantic Space] --> D[Definition 定义轴]
+    P --> A[Attribute 属性轴]
+    P --> S[Scenario 场景轴]
+    P --> R[Reasoning 推理轴]
+    D --> L1[L1-L2 单个模式]
+    A --> L3[L3 模式与类型系统]
+    S --> L4[L4-L5 架构组合]
+    R --> L6[L6 组合代数]
+```
 
 ## 二、模式文件语义坐标系
 
@@ -58,9 +68,19 @@
 | **评价（Evaluate）** | [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md) | 判断 Observer + Factory + Typestate 是否适合当前问题 |
 | **创造（Create）** | [System Composability](../../06_ecosystem/03_design_patterns/30_system_composability.md) | 设计一个新的模式组合以解决领域问题 |
 
----
+## 三、GoF 模式到 Rust 的映射
 
-## 三、推荐学习路径
+| GoF 模式 | Rust 惯用法 | 关键机制 |
+|:---|:---|:---|
+| Singleton | `lazy_static!` / `once_cell` / `std::sync::OnceLock` | 全局初始化而非全局可变状态 |
+| Factory | 关联函数 `fn new(...)` + `Default` trait | 结构体字面量 + trait |
+| Builder | 消费式 Builder / Typestate Builder | 所有权转移 + 泛型状态 |
+| Strategy | Trait object / 泛型 + trait bound | 多态分发 |
+| Observer | `tokio::sync::broadcast` / 自定义回调 | 通道与生命周期 |
+| Decorator | Wrapper struct + `Deref` / trait 组合 | 零成本抽象 |
+| Iterator | `Iterator` trait | 惰性计算 + 组合子 |
+
+## 四、推荐学习路径
 
 ### 路径 A：从单个模式到组合代数
 
@@ -85,9 +105,22 @@ Pattern Composition Algebra (L6)
 | 如何构建事件驱动系统 | [Event Driven Architecture](../../06_ecosystem/03_design_patterns/32_event_driven_architecture.md) | [Reactive Programming](../../06_ecosystem/04_web_and_networking/40_reactive_programming.md) |
 | 如何处理分布式失败 | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md) | [CQRS and Event Sourcing](../../06_ecosystem/03_design_patterns/33_cqrs_event_sourcing.md) |
 
----
+## 五、模式选择决策树
 
-## 四、组合代数主文件说明
+```mermaid
+flowchart TD
+    Start([遇到设计问题]) --> Q1{需要创建对象?}
+    Q1 -->|是| A[创建型模式: Builder / Factory]
+    Q1 -->|否| Q2{需要组合对象?}
+    Q2 -->|是| B[结构型模式: Decorator / Adapter]
+    Q2 -->|否| Q3{需要改变行为?}
+    Q3 -->|是| C[行为型模式: Strategy / Observer]
+    Q3 -->|否| Q4{跨任务/服务?}
+    Q4 -->|是| D[并发/分布式模式]
+    Q4 -->|否| E[回到需求分析]
+```
+
+## 六、组合代数主文件说明
 
 [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md) 是模式语义空间的核心枢纽文件，它定义了：
 
@@ -98,9 +131,7 @@ Pattern Composition Algebra (L6)
 
 > 学习完单个模式后，应回到此文件建立模式之间的结构化关联。
 
----
-
-## 五、与 Phase C 表征空间坐标系的衔接
+## 七、与 Phase C 表征空间坐标系的衔接
 
 本索引属于 **Phase C（表征空间坐标系）** 的导航层，目标是将分散的模式知识锚定到统一坐标系中：
 
@@ -108,9 +139,7 @@ Pattern Composition Algebra (L6)
 - **C×Eva**：评价不同模式组合的正确性、一致性与工程代价。
 - **P×Ana**：从问题特征出发，推导合适的模式选择。
 
----
-
-## 六、L1 / L2 / L3 总结
+## 八、L1 / L2 / L3 总结
 
 | 层级 | 要点 |
 |:---|:---|
@@ -118,15 +147,14 @@ Pattern Composition Algebra (L6)
 | **L2** | 模式可以按问题域、抽象层级、认知目标三个维度分类。 |
 | **L3** | 模式不是孤立存在的；通过组合代数可以理解模式之间的结构化关联、冲突与选择策略。 |
 
----
-
-## 七、延伸阅读
+## 九、延伸阅读
 
 - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 - [GoF — Design Patterns: Elements of Reusable Object-Oriented Software]
 - [POSA — Pattern-Oriented Software Architecture]
 - [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md)
 - [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)
+- [Type System](../../01_foundation/02_type_system/04_type_system.md)
 
 ---
 

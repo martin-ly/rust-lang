@@ -12,7 +12,7 @@
 > **后置概念**: [Items Reference](46_items_reference.md) · [Patterns Reference](49_patterns_reference.md)
 > **定理链**: Source File → Module Tree → Namespace → Scope → Name Resolution
 >
-> **来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [rustc-dev-guide — Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 
 ---
 
@@ -22,32 +22,32 @@
 
 > **认知路径**: 本节从 "名字参考（Names Reference）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
 
-1. **问题识别**: 为什么 名字参考（Names Reference） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
-2. **概念建立**: 掌握 名字参考（Names Reference） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
-3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
-4. **边界辨析**: 借助反命题/反例理解常见错误与名字参考（Names Reference）的适用边界。
-5. **迁移应用**: 将 名字参考（Names Reference） 与前置/后置概念链接，形成跨层知识网络。
+1. **问题识别**: 为什么名字参考在 Rust 中值得关注？同名冲突、路径解析、prelude 行为和可见性边界都依赖名字系统的精确规则。
+2. **概念建立**: 掌握命名空间、作用域、prelude、路径和名字解析的核心定义。
+3. **机制推理**: 通过 ⟹ 定理链将源文件、模块树、命名空间、作用域和名字解析串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与名字参考的适用边界。
+5. **迁移应用**: 将名字参考与前置/后置概念链接，形成跨层知识网络。
 
 ---
 
 ## 反命题决策树
 
-> **反命题 1**: "名字参考（Names Reference） 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+> **反命题 1**: "名字参考在所有场景下都适用" ⟹ 不成立。过程宏生成的名字、FFI 符号和 `unsafe` 外部块中的名字具有特殊的解析和链接行为。
 
-> **反命题 2**: "忽略 名字参考（Names Reference） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 名字参考（Names Reference） 规则被违反的直接信号。
+> **反命题 2**: "忽略名字参考的细节也能写出正确代码" ⟹ 不成立。命名空间隔离错误、`use` 冲突和可见性违规是常见的编译错误来源。
 
-> **反命题 3**: "其他语言对 名字参考（Names Reference） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 名字参考（Names Reference） 具有语言特有的形态。
+> **反命题 3**: "其他语言对名字参考的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的四层命名空间、`Self`/`self`/`super` 路径和 crate 相对路径具有独特性。
 
 ## 一、命名空间
 
 Rust 将名字分为多个命名空间：
 
-| 命名空间 | 包含 |
-|:---|:---|
-| 类型命名空间 | `struct`, `enum`, `union`, `trait`, `type`, `mod` |
-| 值命名空间 | `fn`, `const`, `static`, 绑定，关联函数 |
-| 宏命名空间 | `macro_rules!`, 过程宏（Procedural Macro） |
-| 生命周期（Lifetimes）命名空间 | 生命周期参数 `'a` |
+| 命名空间 | 包含 | 示例 |
+|:---|:---|:---|
+| 类型命名空间 | `struct`, `enum`, `union`, `trait`, `type`, `mod` | `struct Foo; fn Foo() {}` 可共存 |
+| 值命名空间 | `fn`, `const`, `static`, 绑定，关联函数 | 同一作用域不可重复 |
+| 宏命名空间 | `macro_rules!`, 过程宏 | 通过 `name!()` 调用 |
+| 生命周期命名空间 | 生命周期参数 `'a` | 独立解析 |
 
 同一作用域内，不同类型空间的名字可以同名；同一空间内不可重复。
 
@@ -57,11 +57,24 @@ Rust 将名字分为多个命名空间：
 
 | 作用域类型 | 说明 |
 |:---|:---|
-| 模块（Module）作用域 | 整个模块可见 |
+| 模块作用域 | 整个模块可见 |
 | 块作用域 | 仅在 `{}` 内可见 |
 | 函数参数作用域 | 函数体可见 |
 | 模式作用域 | `match` 分支或 `let` 绑定后可见 |
 | 实现作用域 | `impl` 块内可见 |
+
+### 作用域嵌套规则
+
+```rust
+fn outer() {
+    let x = 1;          // 外层作用域
+    {
+        let x = 2;      // 内层遮蔽外层
+        println!("{}", x); // 2
+    }
+    println!("{}", x);  // 1
+}
+```
 
 ## 三、Prelude
 
@@ -69,6 +82,13 @@ Prelude 是自动导入的名字集合：
 
 - `std::prelude::rust_2024`
 - 包含 `Option`, `Result`, `Vec`, `String`, `Drop`, `Copy` 等核心 trait 和类型。
+
+| Edition | Prelude 模块 |
+|:---|:---|
+| 2015 | `std::prelude::v1` |
+| 2018 | `std::prelude::v1` |
+| 2021 | `std::prelude::rust_2021` |
+| 2024 | `std::prelude::rust_2024` |
 
 详见 [Preludes](../../01_foundation/07_modules_and_items/35_preludes.md)。
 
@@ -78,11 +98,19 @@ Prelude 是自动导入的名字集合：
 
 | 路径形式 | 示例 | 说明 |
 |:---|:---|:---|
-| 相对路径 | `foo::bar` | 从当前模块（Module）开始 |
+| 相对路径 | `foo::bar` | 从当前模块开始 |
 | 绝对路径 | `::crate::foo::bar` | 从 crate 根开始 |
-| 自我路径 | `self::foo`, `super::bar` | 当前模块（Module） / 父模块 |
+| 自我路径 | `self::foo`, `super::bar` | 当前模块 / 父模块 |
 | `Self` 路径 | `Self::Assoc` | 当前实现类型 |
 | `crate` 路径 | `crate::foo` | 2018+ edition 的 crate 根 |
+
+### 路径语法
+
+```bnf
+Path          ::= PathExprSegment ("::" PathExprSegment)*
+PathExprSegment ::= PathIdentSegment ("::" GenericArgs)?
+PathIdentSegment ::= Identifier | "super" | "self" | "Self" | "crate" | "$crate"
+```
 
 ## 五、名字解析过程
 
@@ -91,13 +119,42 @@ Prelude 是自动导入的名字集合：
 3. 应用可见性规则过滤私有项。
 4. 处理 `use` 重导出和 `pub use` 的别名。
 
+### 版本差异
+
+| Edition | `use foo::bar` 起点 | `extern crate` 行为 |
+|:---|:---|:---|
+| 2015 | 当前模块 | 通常需要显式声明 |
+| 2018 | 当前模块或外部 crate | 隐式，但可用显式别名 |
+| 2021 | 同 2018 | 同 2018 |
+| 2024 | 同 2018，部分路径解析更严格 | 同 2018 |
+
 ## 六、与可见性的交互
 
-可见性规则决定名字是否能被特定路径访问。公共项（`pub`）可被外部访问；私有项默认仅对当前模块（Module）及子模块可见。
+可见性规则决定名字是否能被特定路径访问。公共项（`pub`）可被外部访问；私有项默认仅对当前模块及子模块可见。
 
-详见 [Visibility and Privacy](../../03_advanced/06_low_level_patterns/34_visibility_and_privacy.md)。
+```rust
+mod inner {
+    pub fn public() {}
+    fn private() {}     // 默认私有
+}
+
+fn main() {
+    inner::public();    // OK
+    // inner::private(); // 错误：私有
+}
+```
+
+## 七、关联概念
+
+| 概念 | 关系 |
+|:---|:---|
+| [Names and Resolution](40_names_and_resolution.md) | 本页是 Names 的规范参考视图 |
+| [Items Reference](46_items_reference.md) | item 是名字声明的主要载体 |
+| [Patterns Reference](49_patterns_reference.md) | 模式引入新的名字绑定 |
+| [Preludes](../../01_foundation/07_modules_and_items/35_preludes.md) | prelude 是隐式名字注入机制 |
+| [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | `unsafe` 符号和 FFI 名字有特殊规则 |
 
 ---
 
-> **权威来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Rust Reference — Namespaces and Scopes](https://doc.rust-lang.org/reference/names/namespaces.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **权威来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Rust Reference — Namespaces and Scopes](https://doc.rust-lang.org/reference/names/namespaces.html) · [Rust Reference — Paths](https://doc.rust-lang.org/reference/paths.html) · [rustc-dev-guide — Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 > **内容分级**: [研究级]

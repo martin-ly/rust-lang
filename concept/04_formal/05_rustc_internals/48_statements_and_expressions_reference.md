@@ -1,7 +1,7 @@
 # 语句与表达式参考（Statements and Expressions Reference）
 
 > **EN**: Statements and Expressions Reference
-> **Summary**: Rust Reference 对语句（let、item、expression statement）与全部表达式形式（字面量、路径、块、运算符、数组、元组、结构体（Struct）、调用、方法调用、字段访问、闭包（Closures）、循环、范围、if、match、return、await 等）的规范定义。
+> **Summary**: Rust Reference 对语句（let、item、expression statement）与全部表达式形式（字面量、路径、块、运算符、数组、元组、结构体、调用、方法调用、字段访问、闭包、循环、范围、if、match、return、await 等）的规范定义。 Normative definitions of Rust statements and expressions: literals, paths, blocks, operators, arrays, tuples, structs, calls, method calls, field access, closures, loops, ranges, if, match, return, await, and more.
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -12,7 +12,7 @@
 > **后置概念**: [Patterns Reference](49_patterns_reference.md) · [Constant Evaluation](../03_operational_semantics/39_constant_evaluation.md) · [Destructors](43_destructors.md)
 > **定理链**: Statement → Expression → Value / Effect
 >
-> **来源**: [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 
 ---
 
@@ -20,23 +20,23 @@
 
 ## 认知路径
 
-> **认知路径**: 本节从 "语句与表达式参考（Statements and Expres" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+> **认知路径**: 本节从 "语句与表达式参考（Statements and Expressions Reference）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
 
-1. **问题识别**: 为什么 语句与表达式参考（Statements and Expres 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
-2. **概念建立**: 掌握 语句与表达式参考（Statements and Expres 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
-3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
-4. **边界辨析**: 借助反命题/反例理解常见错误与语句与表达式参考（Statements and Expres的适用边界。
-5. **迁移应用**: 将 语句与表达式参考（Statements and Expres 与前置/后置概念链接，形成跨层知识网络。
+1. **问题识别**: 为什么语句与表达式参考在 Rust 中值得关注？Rust 中几乎所有构造都是表达式，理解求值规则、临时值作用域和常量求值边界是写好 Rust 的基础。
+2. **概念建立**: 掌握语句分类、表达式分类和主要表达式形式的语法与语义。
+3. **机制推理**: 通过 ⟹ 定理链将语句、表达式、值和副作用串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与语句与表达式参考的适用边界。
+5. **迁移应用**: 将语句与表达式参考与前置/后置概念链接，形成跨层知识网络。
 
 ---
 
 ## 反命题决策树
 
-> **反命题 1**: "语句与表达式参考（Statements and Expres 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+> **反命题 1**: "语句与表达式参考在所有场景下都适用" ⟹ 不成立。`unsafe` 块、常量上下文和异步上下文对某些表达式有特殊限制。
 
-> **反命题 2**: "忽略 语句与表达式参考（Statements and Expres 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 语句与表达式参考（Statements and Expres 规则被违反的直接信号。
+> **反命题 2**: "忽略语句与表达式参考的细节也能写出正确代码" ⟹ 不成立。临时值生命周期、move 语义和常量求值限制都源于表达式语义。
 
-> **反命题 3**: "其他语言对 语句与表达式参考（Statements and Expres 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 语句与表达式参考（Statements and Expres 具有语言特有的形态。
+> **反命题 3**: "其他语言对语句与表达式的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的块表达式、match 表达式和所有权移动语义具有语言特有形态。
 
 ## 一、语句
 
@@ -54,6 +54,15 @@ fn example() {
     fn inner() {}       // item 语句
     println!("ok");     // 表达式语句
 }
+```
+
+### 语法概要
+
+```bnf
+Statement      ::= LetStatement | ItemStatement | ExpressionStatement
+LetStatement   ::= "let" Pattern (":" Type)? ("=" Expression)? ";"
+ItemStatement  ::= Item
+ExpressionStmt ::= Expression ";"
 ```
 
 ## 二、表达式分类
@@ -77,28 +86,76 @@ Rust 表达式按语义可分为：
 | 运算符 | 算术、位、比较、逻辑、赋值、复合赋值 |
 | 数组/索引 | `[1, 2, 3]`, `[0; 5]`, `a[i]` |
 | 元组/索引 | `(1, 2)`, `t.0` |
-| 结构体（Struct） | `Point { x: 1, y: 2 }` |
+| 结构体 | `Point { x: 1, y: 2 }` |
 | 调用 | `f(a, b)` |
 | 方法调用 | `obj.method(a)` |
 | 字段访问 | `s.field` |
-| 闭包（Closures） | `|x| x + 1` |
+| 闭包 | `\|x\| x + 1` |
 | 循环 | `loop`, `while`, `while let`, `for` |
 | 范围 | `1..5`, `1..=5` |
 | `if` / `if let` | 条件分支 |
-| `match` | 模式匹配（Pattern Matching） |
+| `match` | 模式匹配 |
 | `return` | 从函数返回 |
 | `await` | 挂起 async 求值 |
 | `_` | 下划线表达式，显式丢弃值 |
+
+### 闭包表达式
+
+```rust
+let add = |a: i32, b: i32| -> i32 { a + b };
+let add2 = |a, b| a + b; // 类型可推断
+```
+
+### Match 表达式
+
+```rust
+match option {
+    Some(x) if x > 0 => println!("positive"),
+    Some(_) => println!("non-positive"),
+    None => println!("none"),
+}
+```
 
 ## 四、临时值作用域
 
 表达式的临时值通常在**最小包围语句**结束时丢弃；2024 Edition 进一步收窄了部分临时值的作用域。详见 [Destructors](43_destructors.md)。
 
+```rust
+let s = String::from("hello").as_str(); // 错误：临时值在语句结束时释放
+```
+
 ## 五、与模式的关系
 
-`let`、`match`、`for`、`while let`、`if let`、`函数参数` 等上下文都使用模式解构值。详见 [Patterns Reference](49_patterns_reference.md)。
+`let`、`match`、`for`、`while let`、`if let`、函数参数等上下文都使用模式解构值。详见 [Patterns Reference](49_patterns_reference.md)。
+
+## 六、Unsafe 表达式
+
+`unsafe` 块本身是一个表达式，其值是最后一个表达式的值：
+
+```rust
+let x = unsafe { *raw_ptr };
+```
+
+在 `unsafe` 块内允许：
+
+- 解引用裸指针
+- 调用 `unsafe` 函数
+- 访问 `union` 字段
+- 访问可变 `static`
+
+详见 [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)。
+
+## 七、关联概念
+
+| 概念 | 关系 |
+|:---|:---|
+| [Patterns Reference](49_patterns_reference.md) | 多种表达式上下文依赖模式 |
+| [Destructors](43_destructors.md) | 临时值作用域决定析构时机 |
+| [Constant Evaluation](../03_operational_semantics/39_constant_evaluation.md) | 常量上下文限制可用表达式 |
+| [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | `unsafe` 块是特殊表达式 |
+| [Async/Await](../../03_advanced/01_async_await/01_async_await.md) | `await` 表达式只能在 async 上下文中使用 |
 
 ---
 
-> **权威来源**: [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **权威来源**: [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html) · [Rust Reference — Expressions](https://doc.rust-lang.org/reference/expressions.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 > **内容分级**: [研究级]

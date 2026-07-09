@@ -11,23 +11,122 @@
 
 # WASM Target Evolution Preview
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [综述级 — 含可编译示例]
 >
-> **EN**: WebAssembly Target Evolution
-> **Summary**: WebAssembly Target Evolution: emerging Rust language feature or ecosystem trend.
+> **EN**: WebAssembly Target Evolution Preview
+> **Summary**: Preview of Rust WebAssembly target evolution, including WASI p1/p2, component model, SIMD, threads, GC, and exception handling proposals.
+> **状态**: 🧪 部分 target 已稳定；部分提案仍在实验阶段
+> **Rust 属性标记**: `#[stable_target]`（`wasm32-unknown-unknown`、`wasm32-wasip1`）`#[experimental]`（`wasm32-wasip2`、新提案）
+> **跟踪版本**: stable 1.82.0+（`wasm32-wasip2` Tier 2）；stable 1.84.0（移除旧 `wasm32-wasi`）
+> **预计稳定**: 随 WebAssembly 提案逐步推进
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: P×Ana — 分析 WASM 目标的演进方向
-> **前置依赖**: [WASI](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) · [WebAssembly](../../06_ecosystem/11_domain_applications/11_webassembly.md)
+> **前置依赖**: [WASI](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) · [WebAssembly](../../06_ecosystem/11_domain_applications/11_webassembly.md) · [Cross Compilation](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md)
 > **后置延伸**: [Rust for WebAssembly](../04_research_and_experimental/28_rust_for_webassembly.md)
 > **来源**: [Rust Compiler Repository](https://github.com/rust-lang/rust) · [WebAssembly Spec](https://webassembly.github.io/spec/) · [WASI Preview 2](https://github.com/WebAssembly/WASI/blob/main/specifications/wasi-0.2.4/Overview.md) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
-## 10.4 边界测试：WASI 的 capability-based security 与文件系统访问（运行时拒绝）
+## 一、功能动机：WASM 目标为什么需要演进？
+
+WebAssembly（WASM）本身在不断扩展：从 MVP 到 SIMD、线程、GC、异常处理、组件模型等。Rust 作为 WASM 生态的核心语言，需要跟踪这些提案并调整 target 命名与能力模型。
+
+当前 Rust 的 WASM 目标已经从单一的 `wasm32-unknown-unknown` 演进为一个矩阵：
+
+| Target | 用途 | 状态 |
+|:---|:---|:---|
+| `wasm32-unknown-unknown` | 浏览器、最小依赖 | 稳定 Tier 2 |
+| `wasm32-wasip1` | WASI Preview 1，类 POSIX | 稳定 Tier 2 |
+| `wasm32-wasip2` | WASI Preview 2，组件模型 | 稳定 Tier 2（1.82+） |
+| `wasm64-unknown-unknown` | 64-bit 线性内存 | 实验性 |
+
+WASM Target Evolution 关注这些 target 的迁移路径、能力差异以及未来提案对 Rust 编译器的影响。
+
+---
+
+## 二、核心概念：target 命名与能力模型
+
+### 2.1 `wasm32-unknown-unknown`
+
+```bash
+# 浏览器端 WASM，无系统接口
+cargo build --target wasm32-unknown-unknown
+```
+
+这是 Rust 最早的 WASM target，适合浏览器环境，配合 `wasm-bindgen` 与 JavaScript 交互。它没有文件系统、网络、环境变量等能力。
+
+### 2.2 `wasm32-wasip1`（旧 `wasm32-wasi`）
+
+```bash
+# WASI Preview 1：类 POSIX 能力
+cargo build --target wasm32-wasip1
+```
+
+WASI Preview 1 提供文件系统、时钟、随机数等系统接口，但使用 capability-based security 模型：
+
+```bash
+wasmtime --dir=/tmp myapp.wasm
+```
+
+### 2.3 `wasm32-wasip2`
+
+```bash
+# WASI Preview 2：组件模型（Component Model）
+cargo build --target wasm32-wasip2
+```
+
+WASI Preview 2 引入组件模型，支持：
+
+- 更强的模块化与接口定义（WIT）；
+- 跨语言组件组合；
+- 更细粒度的 capability 管理。
+
+---
+
+## 三、未来提案对 Rust 的影响
+
+| 提案 | 状态 | 对 Rust 的影响 |
+|:---|:---|:---|
+| Threads | 标准化中 | `std::thread` 可在 WASM 中运行 |
+| SIMD128 | 已标准化 | `std::simd` 可映射到 WASM SIMD |
+| GC | 提案阶段 | 可能减少 Rust/WASM 二进制体积 |
+| Exception Handling | 标准化中 | panic 传播更高效 |
+| Component Model | Preview 2 | `wasm32-wasip2` 目标 |
+
+### 3.1 启用 target feature 示例
+
+```bash
+# 启用 SIMD128
+cargo rustc --target wasm32-unknown-unknown -- -C target-feature=+simd128
+```
+
+---
+
+## 四、与稳定 Rust 的对比及迁移建议
+
+| 旧用法 | 推荐迁移 |
+|:---|:---|
+| `wasm32-wasi` | `wasm32-wasip1`（Rust 1.84+ 旧目标已移除） |
+| 仅浏览器 WASM | 继续 `wasm32-unknown-unknown` |
+| 需要系统接口 | 评估 `wasm32-wasip1` 或 `wasm32-wasip2` |
+| 跨语言组件 | `wasm32-wasip2` + `wasm-tools` |
+
+### 4.1 迁移建议
+
+1. **立即替换 `wasm32-wasi`**：Rust 1.84 已移除该目标，CI 和文档应更新为 `wasm32-wasip1`；
+2. **新 WASI 项目考虑 `wasm32-wasip2`**：特别是需要组件模型和更严格 capability 管理的场景；
+3. **浏览器项目保持 `wasm32-unknown-unknown`**：这是最小、最成熟的路径；
+4. **跟踪 `wasm-bindgen` 和 `wasm-tools` 版本**：新 target 需要配套工具链支持。
+
+> **版本说明**：`wasm32-wasip1` 和 `wasm32-wasip2` 在 stable Rust 1.82+ 中可用；旧 `wasm32-wasi` 目标于 Rust 1.84 移除。Threads、SIMD128 等提案通过 `-C target-feature` 控制，成熟度各不相同。
+
+---
+
+## 五、边界测试：WASI 的 capability-based security 与文件系统访问（运行时拒绝）
 
 ```rust,ignore
 // WASI 程序需要显式 capability

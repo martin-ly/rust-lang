@@ -1,20 +1,151 @@
 # Rust in Space Preview
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [综述级 — 含可编译示例]
 >
-> **EN**: Rust In Space
-> **Summary**: Rust In Space: emerging Rust language feature or ecosystem trend.
+> **EN**: Rust in Space Preview
+> **Summary**: Preview of Rust's adoption in aerospace and safety-critical systems, covering Ferrocene certification, no_std embedded deployment, and comparison with Ada/SPARK.
+> **状态**: 📡 生态趋势/预研阶段
+> **Rust 属性标记**: N/A（语言特性层面稳定，领域应用仍在扩展）
+> **跟踪版本**: stable Rust（核心语言）；Ferrocene（认证工具链）
+> **预计稳定**: 随 Ferrocene 等认证路径推进
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评价 Rust 在太空环境中的适用性
-> **前置依赖**: [Embedded](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) · [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md)
-> **后置延伸**: [Rust for Linux](../04_research_and_experimental/43_rust_for_linux.md)
+> **前置依赖**: [Embedded Systems](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Formal Methods](../../04_formal/04_model_checking/16_aerospace_certification_formal_methods.md)
+> **后置延伸**: [Rust for Linux](../04_research_and_experimental/43_rust_for_linux.md) · [Ferrocene](35_ferrocene_preview.md)
 > **来源**: [Ferrocene](https://ferrocene.dev/) · [Rust Embedded WG](https://github.com/rust-embedded/wg) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)
+
+## 一、功能动机：为什么航天领域关注 Rust？
+
+航天软件对可靠性、确定性和可验证性的要求极高。传统上，这类系统使用 Ada/SPARK、C 或汇编编写，但这些语言各有短板：
+
+- **C/C++**：内存安全漏洞是航天任务中常见的故障来源；
+- **Ada/SPARK**：形式化验证能力强，但工具链较老、生态较小、与现代开发流程整合困难；
+- **Java/Python**：运行时开销和 GC 不确定性不适合硬实时场景。
+
+Rust 提供了：
+
+1. **编译期内存安全**：消除 dangling pointer、use-after-free、data race；
+2. **零成本抽象**：高性能同时保持高级抽象；
+3. **现代工具链**：cargo、crates.io、测试、文档一体化；
+4. **C 互操作**：便于与现有航天软件遗产集成。
+
+欧洲航天局（ESA）等组织已经开始评估 Rust 作为未来任务的开发语言，Ferrocene 项目则提供 Rust 的安全认证路径。
+
+---
+
+## 二、核心应用场景
+
+### 2.1 卫星星载软件
+
+卫星计算机资源受限：CPU 慢、内存小、无操作系统或 RTOS。Rust 的 `no_std` 模式允许在裸机或 RTOS 上运行：
+
+```rust,editable
+#![no_std]
+#![no_main]
+
+use core::panic::PanicInfo;
+
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! {
+    loop {}
+}
+
+#[no_mangle]
+pub extern "C" fn satellite_init() {
+    // 初始化传感器、通信模块
+}
+```
+
+### 2.2 任务关键型数据结构
+
+```rust,editable
+#![no_std]
+
+pub struct TelemetryFrame {
+    pub timestamp: u32,
+    pub sensor_id: u8,
+    pub value: i32,
+    pub checksum: u16,
+}
+
+impl TelemetryFrame {
+    pub const fn new(timestamp: u32, sensor_id: u8, value: i32) -> Self {
+        let mut frame = Self {
+            timestamp,
+            sensor_id,
+            value,
+            checksum: 0,
+        };
+        frame.checksum = frame.compute_checksum();
+        frame
+    }
+
+    pub const fn compute_checksum(&self) -> u16 {
+        (self.timestamp as u16)
+            .wrapping_add(self.sensor_id as u16)
+            .wrapping_add(self.value as u16)
+    }
+}
+```
+
+### 2.3 地面支持与模拟系统
+
+Rust 也用于任务控制软件、遥测分析、轨道模拟等地面系统，利用其并发安全和性能优势。
+
+---
+
+## 三、与 Ada/SPARK 及 C 的对比
+
+| 维度 | C | Ada/SPARK | Rust |
+|:---|:---|:---|:---|
+| 内存安全 | 无保证 | 强（尤其 SPARK） | 编译期保证（所有权系统） |
+| 形式化验证 | 有限 | 非常强 | 逐步增强（Kani、Prusti） |
+| 生态与现代工具 | 一般 | 较弱 | 强（cargo、crates.io） |
+| 实时确定性 | 可做到 | 可做到 | `no_std` + `alloc` 可做到 |
+| 认证路径 | 成熟 | 成熟 | Ferrocene 推进中 |
+| 学习曲线 | 低 | 中高 | 中高 |
+
+### 3.1 Rust 在航天领域的优势
+
+1. **减少软件缺陷**：所有权系统显著降低内存相关 bug；
+2. **现代开发生态**：与 DevOps、CI/CD、容器化流程无缝集成；
+3. **活跃的社区**：大量开源库和硬件抽象层（HAL）；
+4. **逐步替换能力**：可通过 FFI 与现有 C/Ada 代码共存。
+
+### 3.2 Rust 在航天领域的挑战
+
+1. **认证工具链不成熟**：Ferrocene 仍在推进 DO-178C 等认证；
+2. **形式化验证生态不如 SPARK**：Kani、Prusti 仍在发展；
+3. **辐射硬化硬件支持**：需要针对特定 MCU 的 target 和 HAL；
+4. **团队培训成本高**：Rust 的所有权和生命周期概念需要时间掌握。
+
+---
+
+## 四、迁移与采用建议
+
+1. **从地面工具和非关键子系统开始**：积累经验后再进入星载软件；
+2. **使用 `no_std` + `alloc`**：避免标准库的不可控行为；
+3. **最小化 `unsafe` 使用**：将 unsafe 隔离在硬件抽象层；
+4. **引入形式化验证工具**：如 Kani 用于关键模块的属性验证；
+5. **跟踪 Ferrocene 认证进展**：对于需要认证的任务，使用 Ferrocene 工具链。
+
+> **版本说明**：Rust 核心语言本身已稳定多年。航天应用依赖的是 `no_std`、`const fn`、FFI 等稳定特性，以及 Ferrocene 等认证工具链。具体任务采用路径取决于认证要求和硬件平台。
+
+---
+
+## 五、辐射硬化与硬件容错
+
+太空环境的高能粒子可能导致位翻转（bit flip）。Rust 的类型安全不能保证硬件级错误，但可以：
+
+1. **减少软件漏洞面**：更少的未定义行为意味着更确定的故障模式；
+2. **配合硬件 ECC 和 TMR**：使用三模冗余和错误检测代码；
+3. **使用 `no_std` 避免运行时异常**：可预测的执行路径便于故障分析。
 
 ## 认知路径
 

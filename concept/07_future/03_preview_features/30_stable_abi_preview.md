@@ -1,11 +1,10 @@
 # Stable ABI Preview
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [综述级 — 含可编译示例]
 >
-> **EN**: Stable Abi Preview
-> **Summary**: Stable Abi Preview: emerging Rust language feature or ecosystem trend.
->
-> **状态**: 🧪 Nightly 实验性
+> **EN**: Stable Application Binary Interface (ABI) Preview
+> **Summary**: Preview of Rust's long-term effort to define a stable ABI (`crabi`) for cross-version dynamic linking and FFI, currently experimental and under discussion.
+> **状态**: 🧪 设计/MCP 阶段；`crabi` 提案仍在讨论
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
 > **预计稳定**: 待定（需等待 RFC / MCP 完成）
@@ -15,13 +14,106 @@
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Rust ABI 稳定性问题
-> **前置依赖**: [FFI](../../03_advanced/04_ffi/05_rust_ffi.md) · [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md)
+> **前置依赖**: [FFI](../../03_advanced/04_ffi/05_rust_ffi.md) · [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md)
 > **后置延伸**: [Rust for Linux](../04_research_and_experimental/43_rust_for_linux.md)
-> **来源**: [Rust Reference — ABI](https://doc.rust-lang.org/reference/items/external-blocks.html) · [RFC 2945](https://rust-lang.github.io/rfcs//2945-c-unwind-abi.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference — ABI](https://doc.rust-lang.org/reference/items/external-blocks.html) · [RFC 2945 — C-unwind ABI](https://rust-lang.github.io/rfcs/2945-c-unwind-abi.html) · [Rust RFCs](https://github.com/rust-lang/rfcs) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
-## 10.4 边界测试：稳定 ABI 与 extern "C" 的符号兼容性（链接错误）
+## 一、功能动机：为什么 Rust 需要稳定 ABI？
+
+Rust 的默认 ABI（`extern "Rust"`）是**不稳定**的。这意味着：
+
+- 不同编译器版本编译的动态库通常无法相互链接；
+- 结构体字段重排、枚举布局优化、单态化策略都可能随版本变化；
+- 插件系统、闭源 SDK、操作系统驱动等场景难以使用纯 Rust ABI。
+
+目前稳定 Rust 的唯一选择是 `extern "C"` + `#[repr(C)]`，这带来以下问题：
+
+1. **表达能力受限**：不支持 Rust 高级类型（如 `String`、`Vec`、trait object、enum with payload）；
+2. **panic 跨边界未定义**：FFI 边界 panic 是 UB；
+3. **手动转换开销**：需要在 `repr(C)` 类型和 Rust 类型之间反复转换。
+
+**Stable ABI（crabi / C Rust ABI）** 提案旨在定义一套 Rust 类型在 FFI 中的稳定布局，既兼容 C ABI，又支持 Rust 特性（如 panic 协议、trait object、闭包），从而实现 Rust 动态库跨版本安全链接。
+
+---
+
+## 二、当前稳定 Rust 的 ABI 选择
+
+### 2.1 `extern "C"` 与 `#[repr(C)]`
+
+```rust,editable
+#[repr(C)]
+pub struct Point {
+    pub x: f64,
+    pub y: f64,
+}
+
+#[no_mangle]
+pub extern "C" fn distance(p: Point) -> f64 {
+    (p.x * p.x + p.y * p.y).sqrt()
+}
+
+fn main() {
+    let p = Point { x: 3.0, y: 4.0 };
+    assert_eq!(distance(p), 5.0);
+}
+```
+
+### 2.2 为什么不直接用 `extern "Rust"`？
+
+```rust,ignore
+// ❌ 不要这样做：extern "Rust" ABI 不稳定
+#[no_mangle]
+pub fn unstable_abi_function(x: String) -> String {
+    x
+}
+```
+
+`String` / `Vec` / `Drop` 类型跨越 FFI 边界时行为未定义，且默认 ABI 可能因编译器版本不同而改变。
+
+---
+
+## 三、Stable ABI 提案要点与对比
+
+| 维度 | 当前 `extern "C"` | 未来 Stable ABI (`crabi`) |
+|:---|:---|:---|
+| 跨版本链接 | 仅对 C 布局类型稳定 | 对 Rust 类型稳定 |
+| 支持 Rust 类型 | 仅基础 POD + 手动转换 | `String`、`Vec`、enum、trait object 等 |
+| panic 协议 | 未定义 | 定义跨边界 panic 行为 |
+| 性能 | 受限于 C 布局 | 可能保留部分 Rust 布局优化 |
+| 成熟度 | 稳定可用 | 设计阶段 |
+
+### 3.1 `crabi` 关键设计方向
+
+1. **与 C ABI 兼容**：基础类型布局与平台 C ABI 一致；
+2. **扩展 panic 协议**：定义 Rust panic 如何跨动态库边界传播；
+3. **Drop / 所有权（Ownership）协议**：明确跨 FFI 边界的资源释放责任；
+4. **版本协商**：允许动态库在加载时协商 ABI 版本，逐步演进。
+
+---
+
+## 四、与稳定 Rust 的对比及迁移建议
+
+### 4.1 当前最佳实践
+
+1. **所有 FFI 边界使用 `extern "C"` + `#[repr(C)]`**；
+2. **不传递 `String` / `Vec` / 裸指针所有权**，使用 `CString`、长度+指针、或 `Box` 显式约定；
+3. **panic 边界隔离**：在 FFI 边界捕获 panic（`catch_unwind`），避免 UB；
+4. **动态库插件系统**：目前建议通过 C ABI 接口暴露，或要求所有 Rust 插件用同一编译器版本构建。
+
+### 4.2 何时关注 Stable ABI？
+
+- 设计长期稳定的 Rust SDK；
+- 操作系统驱动或内核模块；
+- 需要跨编译器版本加载的插件系统；
+- 与 Ferrocene 等安全认证工具链配套使用。
+
+> **版本说明**：Stable ABI 目前处于 RFC/MCP 讨论阶段，没有明确的 nightly 实现时间表。`crabi` 名称和目标仍在迭代中。
+
+---
+
+## 五、边界测试：稳定 ABI 与 extern "C" 的符号兼容性（链接错误）
 
 ```rust,compile_fail
 // Rust 的默认 ABI 不稳定（随编译器版本变化）
@@ -58,7 +150,7 @@ fn main() {}
 > 2) `panic` 跨 FFI 边界是 UB；
 > 3) `Drop` 在 FFI 中的行为未定义。这与 C++ 的 ABI（由 Itanium/MSVC 定义，稳定但不跨编译器）或 Swift 的 ABI（稳定但版本锁定）不同——Rust 追求语言级别的稳定 ABI，而非依赖平台约定。
 >
-> [来源: [crabi Proposal](https://rust-lang.github.io/rfcs//3325-unsafe-attributes.html)] ·
+> [来源: [crabi Proposal](https://rust-lang.github.io/rfcs/3325-unsafe-attributes.html)] ·
 > [来源: [Rust FFI](https://doc.rust-lang.org/nomicon/ffi.html)]
 >
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)

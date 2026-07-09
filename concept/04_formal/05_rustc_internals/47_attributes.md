@@ -1,7 +1,7 @@
 # 属性（Attributes）
 
 > **EN**: Attributes
-> **Summary**: Rust 属性系统：内置属性分类（测试、derive、诊断、代码生成、限制、类型系统（Type System）、调试器）及其在 item、表达式、语句上的应用规则。 Rust attribute system: built-in attribute categories and application rules on items, expressions, and statements.
+> **Summary**: Rust 属性系统：内置属性分类（测试、derive、诊断、代码生成、限制、类型系统、调试器）及其在 item、表达式、语句上的应用规则。 Rust attribute system: built-in attribute categories and application rules on items, expressions, and statements.
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -12,7 +12,7 @@
 > **后置概念**: [Conditional Compilation](../../03_advanced/03_proc_macros/28_conditional_compilation.md) · [Derive Traits](../../02_intermediate/00_traits/31_derive_traits.md)
 > **定理链**: Attribute → Metadata → Compiler Behavior
 >
-> **来源**: [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 
 ---
 
@@ -22,21 +22,21 @@
 
 > **认知路径**: 本节从 "属性（Attributes）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
 
-1. **问题识别**: 为什么 属性（Attributes） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
-2. **概念建立**: 掌握 属性（Attributes） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
-3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
-4. **边界辨析**: 借助反命题/反例理解常见错误与属性（Attributes）的适用边界。
-5. **迁移应用**: 将 属性（Attributes） 与前置/后置概念链接，形成跨层知识网络。
+1. **问题识别**: 为什么属性在 Rust 中值得关注？属性是编译期元编程的核心机制，控制代码生成、条件编译、lint 级别和测试标记。
+2. **概念建立**: 掌握属性的语法、分类和应用规则。
+3. **机制推理**: 通过 ⟹ 定理链将属性元数据与编译器行为串联起来。
+4. **边界辨析**: 借助反命题/反例理解常见错误与属性的适用边界。
+5. **迁移应用**: 将属性与前置/后置概念链接，形成跨层知识网络。
 
 ---
 
 ## 反命题决策树
 
-> **反命题 1**: "属性（Attributes） 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+> **反命题 1**: "属性在所有场景下都适用" ⟹ 不成立。某些属性只在特定 item 类型或 nightly 编译器上有效，错误使用会触发编译错误。
 
-> **反命题 2**: "忽略 属性（Attributes） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 属性（Attributes） 规则被违反的直接信号。
+> **反命题 2**: "忽略属性的细节也能写出正确代码" ⟹ 不成立。`#[repr(C)]`、`#[must_use]`、`#[non_exhaustive]` 等属性直接影响类型布局和接口语义。
 
-> **反命题 3**: "其他语言对 属性（Attributes） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 属性（Attributes） 具有语言特有的形态。
+> **反命题 3**: "其他语言对属性的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 属性在词法阶段即被解析并影响宏展开和类型检查，与 C# 注解或 Java 注解的运行时反射模型不同。
 
 ## 一、属性语法
 
@@ -44,6 +44,12 @@
 
 - 外层属性作用于其后的 item。
 - 内层属性作用于包含它的 item 或 crate。
+
+```bnf
+Attribute      ::= "#" "[" Attr "]"
+InnerAttribute ::= "#!" "[" Attr "]"
+Attr           ::= Path ("=" Literal | "(" TokenTree* ")")?
+```
 
 ```rust
 #![allow(dead_code)] // 内层：作用于当前模块/crate
@@ -61,8 +67,9 @@ struct Point { x: i32, y: i32 }
 | 诊断 | `#[allow]`, `#[warn]`, `#[deny]`, `#[forbid]`, `#[deprecated]` | 控制 lint 与弃用 |
 | 代码生成 | `#[inline]`, `#[cold]`, `#[no_mangle]`, `#[repr(...)]` | 影响代码生成 |
 | 限制 | `#[allow(...)]`, `#[feature(...)]`（nightly） | 能力开关 |
-| 类型系统（Type System） | `#[non_exhaustive]`, `#[must_use]` | 影响类型/接口语义 |
+| 类型系统 | `#[non_exhaustive]`, `#[must_use]` | 影响类型/接口语义 |
 | 调试器 | `#[debugger_visualizer]` | 调试器可视化 |
+| 运行时 | `#[global_allocator]`, `#[windows_subsystem]` | 运行时行为 |
 
 ## 三、条件编译属性
 
@@ -75,6 +82,14 @@ fn linux_only() {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 struct Data;
 ```
+
+| 谓词 | 说明 |
+|:---|:---|
+| `cfg(target_os = "...")` | 目标操作系统 |
+| `cfg(target_arch = "...")` | 目标架构 |
+| `cfg(feature = "...")` | Cargo feature |
+| `cfg(test)` | 测试模式 |
+| `cfg(debug_assertions)` | debug 构建 |
 
 详见 [Conditional Compilation](../../03_advanced/03_proc_macros/28_conditional_compilation.md)。
 
@@ -96,9 +111,40 @@ struct Point;
 
 ## 五、与宏的关系
 
-过程宏（procedural macro）和声明宏（Declarative Macro）（`macro_rules!`）都可生成属性。属性宏在宏展开阶段执行，可读取或替换被装饰的 item。
+过程宏（procedural macro）和声明宏（`macro_rules!`）都可生成属性。属性宏在宏展开阶段执行，可读取或替换被装饰的 item。
+
+```rust
+#[my_attribute_macro]
+fn decorated() {}
+```
+
+属性宏接收整个 item 的 token tree，可以：
+
+- 保留原 item 不变。
+- 生成额外的 item。
+- 完全替换原 item。
+
+## 六、Unsafe 相关属性
+
+| 属性 | 作用 | 示例 |
+|:---|:---|:---|
+| `#[no_mangle]` | 禁止符号名修饰，用于 FFI | `#[no_mangle] pub extern "C" fn foo() {}` |
+| `#[export_name = "..."]` | 显式指定导出符号名 | `#[export_name = "bar"] fn foo() {}` |
+| `#[link(name = "...")]` | 链接外部库 | `#[link(name = "openssl")]` |
+
+这些属性经常与 [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) 和 FFI 代码配合使用。
+
+## 七、关联概念
+
+| 概念 | 关系 |
+|:---|:---|
+| [Items Reference](46_items_reference.md) | 属性修饰 item |
+| [Macros](../../03_advanced/03_proc_macros/04_macros.md) | 属性宏在宏展开阶段执行 |
+| [Conditional Compilation](../../03_advanced/03_proc_macros/28_conditional_compilation.md) | `#[cfg]` 控制条件编译 |
+| [Generics Compiler Behavior](53_generics_compiler_behavior.md) | `#[inline]` 影响单态化代码生成 |
+| [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | `#[no_mangle]`、`#[link]` 用于 unsafe/FFI 场景 |
 
 ---
 
-> **权威来源**: [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html) · [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **权威来源**: [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html) · [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 > **内容分级**: [研究级]

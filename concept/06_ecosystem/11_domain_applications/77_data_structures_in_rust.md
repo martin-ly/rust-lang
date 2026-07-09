@@ -1,18 +1,18 @@
 > **内容分级**: [进阶]
 > **代码状态**: ✅ 含可编译示例
 >
-# Rust 数据结构实践
+> # Rust 数据结构实践
 >
-> **EN**: Data Structures in Rust
-> **Summary**: Core data structures in Rust's standard library and common custom implementations: vectors, queues, trees, hash tables, graphs, and advanced structures.
->
-> **受众**: [进阶]
-> **层级**: L6 应用主题
-> **A/S/P 标记**: **A+S** — Application + Structure
-> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Collections](../../01_foundation/05_collections/08_collections.md)
-> **后置概念**: [算法工程实践](76_algorithm_engineering_practice.md) · [算法与竞赛编程](29_algorithms_competitive_programming.md)
->
-> **来源**: [std::collections](https://doc.rust-lang.org/std/collections/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
+> > **EN**: Data Structures in Rust
+> > **Summary**: Core data structures in Rust's standard library and common custom implementations: vectors, queues, trees, hash tables, graphs, and advanced structures, with selection guidance and ownership-aware design patterns.
+> >
+> > **受众**: [进阶]
+> > **层级**: L6 应用主题
+> > **A/S/P 标记**: **A+S** — Application + Structure
+> > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Collections](../../01_foundation/05_collections/08_collections.md)
+> > **后置概念**: [算法工程实践](76_algorithm_engineering_practice.md) · [算法与竞赛编程](29_algorithms_competitive_programming.md)
+> >
+> > **来源**: [std::collections](https://doc.rust-lang.org/std/collections/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
 
 ---
 
@@ -79,6 +79,20 @@ fn list_demo() {
 - **二叉搜索树（BST）**：可用 `Box<Node>` 自引用实现，但 Rust 中更常用标准库的平衡树 `BTreeMap`/`BTreeSet`。
 - **B 树**：`std::collections::BTreeMap` 和 `BTreeSet` 基于 B 树实现，支持有序遍历和范围查询。
 
+```rust
+use std::collections::BTreeMap;
+
+fn btree_demo() {
+    let mut map = BTreeMap::new();
+    map.insert(3, "c");
+    map.insert(1, "a");
+    map.insert(2, "b");
+    for (k, v) in map.range(1..=2) {
+        println!("{} -> {}", k, v);
+    }
+}
+```
+
 ## 4. 哈希表
 
 ```rust
@@ -111,6 +125,25 @@ fn add_edge(graph: &mut Graph, u: usize, v: usize) {
 
 对于稠密图或需要快速边查询的场景，可使用邻接矩阵 `Vec<Vec<bool>>` 或 `bitvec`。
 
+### 带所有权图：使用 `Rc`/`RefCell` 或 Arena
+
+```rust
+use std::rc::{Rc, Weak};
+use std::cell::RefCell;
+
+#[derive(Default)]
+struct Node {
+    value: i32,
+    neighbors: RefCell<Vec<Weak<Node>>>,
+}
+
+fn build_graph() {
+    let a = Rc::new(Node { value: 1, ..Default::default() });
+    let b = Rc::new(Node { value: 2, ..Default::default() });
+    a.neighbors.borrow_mut().push(Rc::downgrade(&b));
+}
+```
+
 ## 6. 高级数据结构
 
 | 数据结构 | Rust 实现方式 | 典型应用 |
@@ -121,7 +154,73 @@ fn add_edge(graph: &mut Graph, u: usize, v: usize) {
 | 布隆过滤器 | `bloom` / `bloomfilter` crate | 大数据去重 |
 | 并查集（Union-Find） | 自定义数组 + 路径压缩 | 连通性判断 |
 
-## 7. 性能对比
+### 并查集示例
+
+```rust
+pub struct UnionFind {
+    parent: Vec<usize>,
+    rank: Vec<usize>,
+}
+
+impl UnionFind {
+    pub fn new(n: usize) -> Self {
+        Self {
+            parent: (0..n).collect(),
+            rank: vec![0; n],
+        }
+    }
+
+    pub fn find(&mut self, x: usize) -> usize {
+        if self.parent[x] != x {
+            self.parent[x] = self.find(self.parent[x]);
+        }
+        self.parent[x]
+    }
+
+    pub fn union(&mut self, x: usize, y: usize) {
+        let (rx, ry) = (self.find(x), self.find(y));
+        if rx == ry { return; }
+        match self.rank[rx].cmp(&self.rank[ry]) {
+            std::cmp::Ordering::Less => self.parent[rx] = ry,
+            std::cmp::Ordering::Greater => self.parent[ry] = rx,
+            std::cmp::Ordering::Equal => {
+                self.parent[ry] = rx;
+                self.rank[rx] += 1;
+            }
+        }
+    }
+}
+```
+
+## 7. 集合选择决策树
+
+```mermaid
+flowchart TD
+    Start([需要存储数据？]) --> Q1{是否需要键值映射?}
+    Q1 -->|是| Q2{是否需要有序遍历?}
+    Q2 -->|是| A[BTreeMap]
+    Q2 -->|否| B[HashMap]
+    Q1 -->|否| Q3{是否只在尾部操作?}
+    Q3 -->|是| C[Vec]
+    Q3 -->|否| Q4{是否两端操作?}
+    Q4 -->|是| D[VecDeque]
+    Q4 -->|否| Q5{是否优先取最大/最小?}
+    Q5 -->|是| E[BinaryHeap]
+    Q5 -->|否| F[根据场景选 LinkedList / 自定义结构]
+```
+
+## 8. 常用第三方 crate
+
+| 用途 | crate | 说明 |
+| :--- | :--- | :--- |
+| 有序映射/集合 | `indexmap` / `indexset` | 保留插入顺序 |
+| 稳定 ID 分配 | `slotmap` | 键类型安全、可删除 |
+| 图算法 | `petgraph` | 有向/无向图、遍历、最短路径 |
+| 并发哈希表 | `dashmap` | 无锁/细粒度锁并发访问 |
+| 位集合 | `bitvec` | 紧凑位运算 |
+| 高效哈希 | `ahash` / `fxhash` | 非加密快速哈希 |
+
+## 9. 性能对比
 
 | 数据结构 | 随机访问 | 插入 | 删除 | 查找 | 备注 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -130,13 +229,24 @@ fn add_edge(graph: &mut Graph, u: usize, v: usize) {
 | `LinkedList` | O(n) | O(1) | O(1) | O(n) | 缓存不友好 |
 | `HashMap` | — | O(1) 平均 | O(1) 平均 | O(1) 平均 | 键值存储 |
 | `BTreeMap` | — | O(log n) | O(log n) | O(log n) | 有序 |
+| `BinaryHeap` | — | O(log n) | O(log n) 堆顶 | — | 优先队列 |
 
-## 8. 最佳实践
+## 10. 所有权与数据结构设计
+
+Rust 的所有权模型直接影响数据结构实现：
+
+- **唯一所有权**：树形结构用 `Box<Node>` 即可表达父子关系。
+- **共享可变图**：需要 `Rc<RefCell<T>>` 或 Arena + index。
+- **并发共享**：使用 `Arc<Mutex<T>>` 或并发集合如 `DashMap`。
+- **零拷贝切片**：利用 `&[T]` 和 `Vec` 的 `drain`/`split_off` 避免克隆。
+
+## 11. 最佳实践
 
 - 默认使用 `Vec` 和 `HashMap`，它们经过高度优化。
 - 需要有序遍历时选择 `BTreeMap`/`BTreeSet`。
 - 避免在性能关键路径上使用 `LinkedList`。
 - 利用 Rust 的所有权模型在编译期保证数据结构不变量。
+- 对图、链表等自引用结构，优先用 index/Arena 替代 `Rc<RefCell<T>>` 以提升性能与可维护性。
 
 > **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Go](../../05_comparative/01_systems_languages/02_rust_vs_go.md)
 

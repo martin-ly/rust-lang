@@ -1,20 +1,17 @@
 # Crate 与源文件（Crates and Source Files）
 
 > **EN**: Crates and Source Files
-> **Summary**: Rust 编译模型核心：crate 作为编译、链接、版本控制与运行加载单元；源文件、模块（Module）树、crate 属性与 `main` 函数的规则。
+> **Summary**: The Rust compilation model: crate as the unit of compilation, linking, versioning, and runtime loading; source file conventions, crate-level attributes, `main` function rules, and how the module tree maps to the filesystem.
 >
 > **受众**: [初学者]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
-> **前置依赖**: [Modules and Paths](11_modules_and_paths.md) · [Attributes and Macros](../09_macros_basics/12_attributes_and_macros.md)
-> **后置概念**: [Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md) · [The Rust Runtime](../../03_advanced/02_unsafe/30_rust_runtime.md)
-> **定理链**: Crate → Module Tree → Compilation Unit
-> **主要来源**: [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-
->
-> **来源**: [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html)
+> **前置依赖**: [Modules and Paths](11_modules_and_paths.md) · [Attributes and Macros](../09_macros_basics/12_attributes_and_macros.md) · [Functions](12_functions.md)
+> **后置概念**: [Items](39_items.md) · [Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md) · [Cargo Manifest Reference](../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md) · [The Rust Runtime](../../03_advanced/02_unsafe/30_rust_runtime.md)
+> **定理链**: Crate → Module Tree → Source File → Item
+> **主要来源**: [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
 
 ---
 
@@ -22,23 +19,25 @@
 
 ## 认知路径
 
-> **认知路径**: 本节从 "Crate 与源文件（Crates and Source F" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
+> **认知路径**: 本节从 "Crate 与源文件" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
 
-1. **问题识别**: 为什么 Crate 与源文件（Crates and Source F 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
-2. **概念建立**: 掌握 Crate 与源文件（Crates and Source F 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
-3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
-4. **边界辨析**: 借助反命题/反例理解常见错误与Crate 与源文件（Crates and Source F的适用边界。
-5. **迁移应用**: 将 Crate 与源文件（Crates and Source F 与前置/后置概念链接，形成跨层知识网络。
+1. **问题识别**: 为什么 Rust 选择 crate 作为编译与分发的基本单元？它与 C/C++ 的翻译单元、Java 的包有何异同？
+2. **概念建立**: 掌握 crate、crate root、源文件、模块树、crate-level 属性等关键术语。
+3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块路径解析串联起来。
+4. **边界辨析**: 借助反命题/反例理解 `crate_type`、`no_main`、混合 crate 等边界情况。
+5. **迁移应用**: 将 crate 模型与 [Cargo workspace](../../06_ecosystem/01_cargo/78_cargo_workspaces.md)、[链接](../../03_advanced/04_ffi/27_linkage.md)、[运行时](../../03_advanced/02_unsafe/30_rust_runtime.md) 等后置概念链接。
 
 ---
 
 ## 反命题决策树
 
-> **反命题 1**: "Crate 与源文件（Crates and Source F 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
+> **反命题 1**: "一个 Cargo package 就是一个 crate" ⟹ 不成立。一个 package 可以包含多个 crate（一个库 + 多个二进制）。
 
-> **反命题 2**: "忽略 Crate 与源文件（Crates and Source F 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Crate 与源文件（Crates and Source F 规则被违反的直接信号。
+> **反命题 2**: "crate 名称可以随意命名" ⟹ 不成立。`crate_name` 只能包含 Unicode 字母数字或下划线，且不能为空。
 
-> **反命题 3**: "其他语言对 Crate 与源文件（Crates and Source F 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Crate 与源文件（Crates and Source F 具有语言特有的形态。
+> **反命题 3**: "源文件越多，编译后的 crate 越多" ⟹ 不成立。一个 crate 由单个 crate root 与若干模块源文件组成，最终输出仍是一个编译单元。
+
+---
 
 ## 一、Crate 是 Rust 的编译单元
 
@@ -65,16 +64,72 @@ Rust 的语义存在清晰的**编译期与运行期阶段区分（phase distinc
 - 每个源文件都是模块（Module），但并非每个模块都需要独立源文件；模块定义可以嵌套在一个文件内。
 - 源文件以零个或多个 **Item** 定义序列组成，文件开头可以有应用于所在模块的属性。
 - 匿名 crate 模块还可以拥有应用于整个 crate 的属性。
-- 文件内容可以以 shebang 开头。
+- 文件内容可以以 shebang（`#!`）开头。
 
 ---
 
-## 三、Crate 级属性示例
+## 三、Crate 输出类型
+
+`Cargo.toml` 通过 `crate-type` 控制输出：
+
+```toml
+[package]
+name = "mylib"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "mylib"
+crate-type = ["lib", "staticlib", "cdylib"]
+```
+
+| `crate_type` | 输出 | 典型用途 |
+|:---|:---|:---|
+| `bin` | 可执行文件 | 命令行程序、服务入口 |
+| `lib` | Rust 库（rlib）| 被其他 Rust crate 依赖 |
+| `rlib` | Rust 静态库格式 | 中间链接格式 |
+| `dylib` | 动态 Rust 库 | 插件、热重载 |
+| `cdylib` | C 兼容动态库 | FFI、WebAssembly、嵌入其他语言 |
+| `staticlib` | C 兼容静态库 | 与 C/C++ 项目静态链接 |
+
+---
+
+## 四、典型源文件布局
+
+```text
+my_project/
+├── Cargo.toml
+└── src/
+    ├── main.rs          # 默认二进制入口（bin crate）
+    ├── lib.rs           # 默认库入口（lib crate）
+    ├── bin/
+    │   ├── server.rs    # 额外二进制：cargo run --bin server
+    │   └── cli.rs       # 额外二进制：cargo run --bin cli
+    └── utils/
+        ├── mod.rs       # utils 模块
+        └── parser.rs    # utils::parser 子模块
+```
+
+模块树与文件系统的映射：
+
+```text
+crate root (main.rs / lib.rs)
+├── mod front_of_house;
+│   └── src/front_of_house.rs
+│       └── mod hosting;
+│           └── src/front_of_house/hosting.rs
+└── mod back_of_house { ... }   // 同文件内嵌套模块
+```
+
+---
+
+## 五、Crate 级属性示例
 
 ```rust
 #![crate_name = "projx"]
 #![crate_type = "lib"]
 #![warn(non_camel_case_types)]
+#![deny(unsafe_code)]
 ```
 
 常用 crate 级属性：
@@ -84,10 +139,12 @@ Rust 的语义存在清晰的**编译期与运行期阶段区分（phase distinc
 | `crate_name` | 指定 crate 名称 |
 | `crate_type` | 指定输出类型：`bin` / `lib` / `dylib` / `cdylib` / `staticlib` / `rlib` |
 | `warn` / `deny` / `allow` | 控制 lint 级别 |
+| `no_main` | 禁止为可执行文件生成 `main` 符号 |
+| `no_std` | 禁用标准库，用于嵌入式或内核开发 |
 
 ---
 
-## 四、`main` 函数
+## 六、`main` 函数
 
 一个包含 `main` 函数的 crate 可以被编译为可执行文件。
 
@@ -99,7 +156,14 @@ Rust 的语义存在清晰的**编译期与运行期阶段区分（phase distinc
 - 返回类型必须实现 `Termination` trait。
 
 ```rust
-fn main() {}
+fn main() {
+    println!("Hello, world!");
+}
+
+fn main() -> Result<(), std::io::Error> {
+    std::fs::read_to_string("config.toml")?;
+    Ok(())
+}
 
 fn main() -> ! {
     std::process::exit(0);
@@ -123,26 +187,66 @@ use foo::bar as main;
 
 ### `no_main` 属性
 
-`#![no_main]` 禁止为可执行二进制文件生成 `main` 符号，适用于由其他链接对象定义 `main` 的场景（如嵌入式）。
+`#![no_main]` 禁止为可执行二进制文件生成 `main` 符号，适用于由其他链接对象定义 `main` 的场景（如嵌入式或操作系统内核）。
 
 ---
 
-## 五、`crate_name` 属性
+## 七、`crate_name` 属性
 
 `#![crate_name = "mycrate"]` 用于在 crate 级别指定 crate 名称。
 
 - 名称不能为空。
 - 只能包含 Unicode 字母数字或下划线 `_`。
 
+```rust
+#![crate_name = "parser_core"]
+#![crate_type = "lib"]
+
+pub fn parse(input: &str) -> Result<(), &str> {
+    if input.is_empty() { Err("empty") } else { Ok(()) }
+}
+```
+
 ---
 
-## 六、关联概念
+## 八、如何选择 Crate 类型
+
+```mermaid
+flowchart TD
+    A[开始新项目] --> B{是否需要被其他 Rust 项目依赖?}
+    B -->|是| C[优先使用 lib crate]
+    B -->|否| D{是否需要被 C/其他语言调用?}
+    D -->|是| E[使用 cdylib / staticlib]
+    D -->|否| F[使用 bin crate]
+    C --> G{是否需要跨语言 FFI?}
+    G -->|是| H[同时构建 lib + cdylib]
+    G -->|否| I[仅构建 rlib/lib]
+```
+
+| 目标 | 推荐 crate 类型 | 说明 |
+|:---|:---|:---|
+| 命令行工具 | `bin` | `cargo run` 直接执行 |
+| 可复用 Rust 库 | `lib` | 发布到 crates.io 供 Rust 项目使用 |
+| Python/Node 扩展 | `cdylib` | 生成平台动态库 |
+| 静态链接到 C++ | `staticlib` | 不依赖 Rust 运行时分发 |
+| 插件系统 | `dylib` | Rust 动态加载 |
+
+---
+
+## 九、关联概念
 
 | 概念 | 关系 |
 |:---|:---|
 | [Modules and Paths](11_modules_and_paths.md) | crate 由模块树组织 |
 | [Items](39_items.md) | crate 由各种 item 组成 |
+| [Functions](12_functions.md) | `main` 与普通函数的定义规则 |
 | [Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md) | Cargo 在 crate 之上组织 workspace |
+| [Cargo Manifest Reference](../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md) | `Cargo.toml` 完整字段说明 |
 | [Linkage](../../03_advanced/04_ffi/27_linkage.md) | crate 输出参与链接 |
 | [The Rust Runtime](../../03_advanced/02_unsafe/30_rust_runtime.md) | crate 运行时行为由运行时定义 |
 | [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md) | 术语表（元层参考） |
+
+---
+
+> **权威来源**: [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
+> **内容分级**: [综述级]
