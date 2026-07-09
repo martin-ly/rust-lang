@@ -14,6 +14,9 @@
 
 ---
 
+> **权威来源**: [concept/03_advanced/05_inline_assembly/13_inline_assembly.md](../../concept/03_advanced/05_inline_assembly/13_inline_assembly.md)
+> 本指南保留平台实践与示例，完整概念解释请参阅 `concept/` 权威页。
+
 ## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**

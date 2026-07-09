@@ -15,6 +15,9 @@
 > **内容分级**: [专家级]
 > **权威来源**: [concept/06_ecosystem/03_design_patterns/02_patterns.md](../../concept/06_ecosystem/03_design_patterns/02_patterns.md)
 
+> **权威来源**: [concept/06_ecosystem/03_design_patterns/02_patterns.md](../../concept/06_ecosystem/03_design_patterns/02_patterns.md)
+> 本指南保留设计模式应用示例，完整概念解释请参阅 `concept/` 权威页。
+
 ## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

@@ -21,6 +21,9 @@
 
 ---
 
+> **权威来源**: [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> 本指南保留学习路径与易错点分析，完整概念解释请参阅 `concept/` 权威页。
+
 ## 目录 {#目录}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**

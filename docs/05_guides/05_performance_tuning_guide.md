@@ -16,6 +16,9 @@
 
 ---
 
+> **权威来源**: [concept/06_ecosystem/10_performance/15_performance_optimization.md](../../concept/06_ecosystem/10_performance/15_performance_optimization.md)
+> 本指南保留性能调优实践与工具链示例，完整概念解释请参阅 `concept/` 权威页。
+
 ## 📑 目录 {#目录}
 
 - [性能调优完整指南 {#性能调优完整指南}](#性能调优完整指南-性能调优完整指南)

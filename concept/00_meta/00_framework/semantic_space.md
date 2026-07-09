@@ -515,8 +515,7 @@ fn main() {
 // const generics 的当前边界：泛型常量表达式不稳定
 fn concat<const M: usize, const N: usize>(a: [i32; M], b: [i32; N]) -> [i32; M + N] {
     // error: generic parameters may not be used in const operations
-    // 需要 `#![feature(generic_const_exprs)]`
-    todo!()
+    // 需要 `#![feature(generic_const_exprs)]` 才能使用 M + N
 }
 ```
 

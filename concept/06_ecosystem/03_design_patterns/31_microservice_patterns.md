@@ -46,10 +46,10 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：微服务模式的编译错误](#十边界测试微服务模式的编译错误)
-    - [10.1 边界测试：配置注入的生命周期（Lifetimes）（编译错误）](#101-边界测试配置注入的生命周期编译错误)
+    - [10.1 边界测试：配置注入的生命周期（编译错误）](#101-边界测试配置注入的生命周期编译错误)
     - [10.2 边界测试：gRPC trait 对象与序列化（编译错误）](#102-边界测试grpc-trait-对象与序列化编译错误)
-    - [10.5 边界测试：断路器模式的半开状态竞态条件（运行时（Runtime）雪崩）](#105-边界测试断路器模式的半开状态竞态条件运行时雪崩)
-    - [10.3 边界测试：断路器模式的半开状态竞态条件（运行时（Runtime）雪崩）](#103-边界测试断路器模式的半开状态竞态条件运行时雪崩)
+    - [10.5 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）](#105-边界测试断路器模式的半开状态竞态条件运行时雪崩)
+    - [10.3 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）](#103-边界测试断路器模式的半开状态竞态条件运行时雪崩)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 微服务中常用的服务发现机制有哪些？（理解层）](#测验-1rust-微服务中常用的服务发现机制有哪些理解层)
@@ -301,12 +301,48 @@ struct CircuitBreaker {
     threshold: f64, min_calls: u64, cooldown: Duration,
 }
 
+#[derive(Debug)]
+enum CircuitError {
+    Open,
+    Downstream,
+}
+
 impl CircuitBreaker {
     async fn call<F, Fut, T, E>(&self, f: F) -> Result<T, CircuitError>
     where F: FnOnce() -> Fut, Fut: std::future::Future<Output = Result<T, E>> {
-        // 状态检查: Closed 正常执行; Open 快速失败; HalfOpen 允许探测
+        // 状态检查：Closed 正常执行；Open 快速失败；HalfOpen 允许探测
+        {
+            let state = self.state.read().await;
+            if let CircuitState::Open { opened_at } = &*state {
+                if opened_at.elapsed() < self.cooldown {
+                    return Err(CircuitError::Open);
+                }
+            }
+        }
+
         // 执行调用，记录结果，触发状态转换
-        todo!()
+        match f().await {
+            Ok(v) => {
+                *self.state.write().await = CircuitState::Closed {
+                    failures: AtomicU64::new(0),
+                    successes: AtomicU64::new(0),
+                };
+                Ok(v)
+            }
+            Err(_) => {
+                let mut state = self.state.write().await;
+                let failures = match &*state {
+                    CircuitState::Closed { failures } => {
+                        failures.fetch_add(1, Ordering::Relaxed) + 1
+                    }
+                    _ => 1,
+                };
+                if failures >= self.min_calls {
+                    *state = CircuitState::Open { opened_at: Instant::now() };
+                }
+                Err(CircuitError::Downstream)
+            }
+        }
     }
 }
 ```

@@ -17,6 +17,9 @@
 
 ---
 
+> **权威来源**: [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md)
+> 本指南保留并发使用示例与模式决策，完整概念解释请参阅 `concept/` 权威页。
+
 ## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

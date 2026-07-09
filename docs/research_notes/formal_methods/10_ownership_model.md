@@ -30,6 +30,9 @@
 
 ---
 
+> **权威来源**: [concept/04_formal/01_ownership_logic/03_ownership_formal.md](../../../concept/04_formal/01_ownership_logic/03_ownership_formal.md)
+> 本文档保留所有权形式化研究笔记，完整概念解释请参阅 `concept/` 权威页。
+
 ## 📑 目录 {#目录}
 
 > **来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)**
@@ -45,7 +48,7 @@
     - [Rust 所有权三原则 {#rust-所有权三原则}](#rust-所有权三原则-rust-所有权三原则)
     - [相关概念 {#相关概念}](#相关概念-相关概念)
     - [理论背景 {#理论背景}](#理论背景-理论背景)
-    - [线性类型系统（Type System）的详细说明 {#线性类型系统的详细说明}](#线性类型系统的详细说明-线性类型系统的详细说明)
+    - [线性类型系统的详细说明 {#线性类型系统的详细说明}](#线性类型系统的详细说明-线性类型系统的详细说明)
     - [分离逻辑的相关内容 {#分离逻辑的相关内容}](#分离逻辑的相关内容-分离逻辑的相关内容)
     - [所有权语义的形式化描述 {#所有权语义的形式化描述}](#所有权语义的形式化描述-所有权语义的形式化描述)
     - [相关学术论文的详细分析 {#相关学术论文的详细分析}](#相关学术论文的详细分析-相关学术论文的详细分析)
@@ -128,10 +131,10 @@
       - [**反例 1: 使用已移动值 (Use After Move)** {#反例-1-使用已移动值-use-after-move}](#反例-1-使用已移动值-use-after-move-反例-1-使用已移动值-use-after-move)
       - [**反例 2: 双重可变借用 (Double Mutable Borrow)** {#反例-2-双重可变借用-double-mutable-borrow}](#反例-2-双重可变借用-double-mutable-borrow-反例-2-双重可变借用-double-mutable-borrow)
       - [**反例 3: 悬垂引用 (Dangling Reference)** {#反例-3-悬垂引用-dangling-reference}](#反例-3-悬垂引用-dangling-reference-反例-3-悬垂引用-dangling-reference)
-      - [**反例 4: 可变与不可变借用（Mutable Borrow）共存 (Mixed Borrow Violation)** {#反例-4-可变与不可变借用共存-mixed-borrow-violation}](#反例-4-可变与不可变借用共存-mixed-borrow-violation-反例-4-可变与不可变借用共存-mixed-borrow-violation)
+      - [**反例 4: 可变与不可变借用共存 (Mixed Borrow Violation)** {#反例-4-可变与不可变借用共存-mixed-borrow-violation}](#反例-4-可变与不可变借用共存-mixed-borrow-violation-反例-4-可变与不可变借用共存-mixed-borrow-violation)
       - [**反例 5: 部分移动后使用整体 (Partial Move)** {#反例-5-部分移动后使用整体-partial-move}](#反例-5-部分移动后使用整体-partial-move-反例-5-部分移动后使用整体-partial-move)
       - [**反例 6: 迭代器失效 (Iterator Invalidation)** {#反例-6-迭代器失效-iterator-invalidation}](#反例-6-迭代器失效-iterator-invalidation-反例-6-迭代器失效-iterator-invalidation)
-      - [**反例 7: 自引用（Reference）结构移动 (Self-Referential Struct Move)** {#反例-7-自引用结构移动-self-referential-struct-move}](#反例-7-自引用结构移动-self-referential-struct-move-反例-7-自引用结构移动-self-referential-struct-move)
+      - [**反例 7: 自引用结构移动 (Self-Referential Struct Move)** {#反例-7-自引用结构移动-self-referential-struct-move}](#反例-7-自引用结构移动-self-referential-struct-move-反例-7-自引用结构移动-self-referential-struct-move)
       - [**反例 8: 跨线程共享可变状态 (Data Race)** {#反例-8-跨线程共享可变状态-data-race}](#反例-8-跨线程共享可变状态-data-race-反例-8-跨线程共享可变状态-data-race)
     - [CVE 关联总结 {#cve-关联总结}](#cve-关联总结-cve-关联总结)
   - [🌳 公理-定理证明树 {#公理-定理证明树}](#-公理-定理证明树-公理-定理证明树)
@@ -166,15 +169,15 @@
     - [计划中 📋（已完成） {#计划中-已完成}](#计划中-已完成-计划中-已完成)
     - [新增代码示例 {#新增代码示例}](#新增代码示例-新增代码示例)
       - [示例 7: 所有权转移与函数参数 {#示例-7-所有权转移与函数参数}](#示例-7-所有权转移与函数参数-示例-7-所有权转移与函数参数)
-      - [示例 8: 复杂所有权场景 - 结构体（Struct）字段移动 {#示例-8-复杂所有权场景---结构体字段移动}](#示例-8-复杂所有权场景---结构体字段移动-示例-8-复杂所有权场景---结构体字段移动)
+      - [示例 8: 复杂所有权场景 - 结构体字段移动 {#示例-8-复杂所有权场景---结构体字段移动}](#示例-8-复杂所有权场景---结构体字段移动-示例-8-复杂所有权场景---结构体字段移动)
       - [示例 9: 错误示例 - 使用已移动的值 {#示例-9-错误示例---使用已移动的值}](#示例-9-错误示例---使用已移动的值-示例-9-错误示例---使用已移动的值)
       - [示例 10: 所有权与借用结合 {#示例-10-所有权与借用结合}](#示例-10-所有权与借用结合-示例-10-所有权与借用结合)
   - [🔗 系统集成与实际应用 {#系统集成与实际应用}](#-系统集成与实际应用-系统集成与实际应用)
     - [与借用检查器的集成 {#与借用检查器的集成}](#与借用检查器的集成-与借用检查器的集成)
-    - [与生命周期（Lifetimes）的集成 {#与生命周期的集成}](#与生命周期的集成-与生命周期的集成)
+    - [与生命周期的集成 {#与生命周期的集成}](#与生命周期的集成-与生命周期的集成)
     - [实际应用案例 {#实际应用案例}](#实际应用案例-实际应用案例)
   - [Rust 1.93 与智能指针扩展（形式化占位） {#rust-193-与智能指针扩展形式化占位}](#rust-193-与智能指针扩展形式化占位-rust-193-与智能指针扩展形式化占位)
-  - [MaybeUninit、原子操作（Atomic Operations）、union、transmute（Phase 4） {#maybeuninit原子操作uniontransmutephase-4}](#maybeuninit原子操作uniontransmutephase-4-maybeuninit原子操作uniontransmutephase-4)
+  - [MaybeUninit、原子操作、union、transmute（Phase 4） {#maybeuninit原子操作uniontransmutephase-4}](#maybeuninit原子操作uniontransmutephase-4-maybeuninit原子操作uniontransmutephase-4)
   - [Deref/Drop、repr、const \&mut static（Phase 6） {#derefdropreprconst-mut-staticphase-6}](#derefdropreprconst-mut-staticphase-6-derefdropreprconst-mut-staticphase-6)
     - [相关思维表征 {#相关思维表征}](#相关思维表征-相关思维表征)
   - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
@@ -283,7 +286,7 @@
       - [**反例 1: 使用已移动值 (Use After Move)** {#反例-1-使用已移动值-use-after-move}](#反例-1-使用已移动值-use-after-move-反例-1-使用已移动值-use-after-move)
       - [**反例 2: 双重可变借用 (Double Mutable Borrow)** {#反例-2-双重可变借用-double-mutable-borrow}](#反例-2-双重可变借用-double-mutable-borrow-反例-2-双重可变借用-double-mutable-borrow)
       - [**反例 3: 悬垂引用 (Dangling Reference)** {#反例-3-悬垂引用-dangling-reference}](#反例-3-悬垂引用-dangling-reference-反例-3-悬垂引用-dangling-reference)
-      - [**反例 4: 可变与不可变借用（Immutable Borrow）共存 (Mixed Borrow Violation)** {#反例-4-可变与不可变借用共存-mixed-borrow-violation}](#反例-4-可变与不可变借用共存-mixed-borrow-violation-反例-4-可变与不可变借用共存-mixed-borrow-violation)
+      - [**反例 4: 可变与不可变借用共存 (Mixed Borrow Violation)** {#反例-4-可变与不可变借用共存-mixed-borrow-violation}](#反例-4-可变与不可变借用共存-mixed-borrow-violation-反例-4-可变与不可变借用共存-mixed-borrow-violation)
       - [**反例 5: 部分移动后使用整体 (Partial Move)** {#反例-5-部分移动后使用整体-partial-move}](#反例-5-部分移动后使用整体-partial-move-反例-5-部分移动后使用整体-partial-move)
       - [**反例 6: 迭代器失效 (Iterator Invalidation)** {#反例-6-迭代器失效-iterator-invalidation}](#反例-6-迭代器失效-iterator-invalidation-反例-6-迭代器失效-iterator-invalidation)
       - [**反例 7: 自引用结构移动 (Self-Referential Struct Move)** {#反例-7-自引用结构移动-self-referential-struct-move}](#反例-7-自引用结构移动-self-referential-struct-move-反例-7-自引用结构移动-self-referential-struct-move)

@@ -14,6 +14,9 @@
 
 ---
 
+> **权威来源**: [concept/02_intermediate/03_error_handling/04_error_handling.md](../../../concept/02_intermediate/03_error_handling/04_error_handling.md)
+> 本文档保留错误处理决策树与研究笔记，完整概念解释请参阅 `concept/` 权威页。
+
 ## 目录 {#目录}
 
 >

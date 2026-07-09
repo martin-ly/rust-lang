@@ -6,6 +6,9 @@
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
 
+> **权威来源**: [concept/06_ecosystem/01_cargo/87_build_std.md](../concept/06_ecosystem/01_cargo/87_build_std.md)
+> 本指南保留编译优化实践与脚本示例，完整概念解释请参阅 `concept/` 权威页。
+
 本文档提供针对大型 Rust 项目（2000+ 依赖）的编译速度优化方案。
 
 ## 📑 目录 {#目录}
