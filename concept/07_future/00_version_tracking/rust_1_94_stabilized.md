@@ -246,7 +246,7 @@ pub fn advanced_example<T>(value: T) -> T {
 
 ---
 
-> 💡 **提示**: 本文档为占位符增强版本，详细内容请参考模块主文档。
+> 💡 **提示**: 本文档为占位符增强版本，详细内容请参考模块（Module）主文档。
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

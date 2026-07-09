@@ -7557,7 +7557,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：引用不能比数据活得更久 ⟹ 悬垂指针在编译期被消除](#41-引理引用不能比数据活得更久--悬垂指针在编译期被消除)",
+          "text": "- [4.1 引理：引用（Reference）不能比数据活得更久 ⟹ 悬垂指针在编译期被消除](#41-引理引用不能比数据活得更久--悬垂指针在编译期被消除)",
           "type": "paragraph"
         },
         {
@@ -8531,7 +8531,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：ADT（枚举 + 结构体）⟹ 代数数据类型完备性](#41-引理adt枚举--结构体-代数数据类型完备性)",
+          "text": "- [4.1 引理：ADT（枚举（Enum） + 结构体（Struct））⟹ 代数数据类型完备性](#41-引理adt枚举--结构体-代数数据类型完备性)",
           "type": "paragraph"
         },
         {
@@ -8543,11 +8543,11 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.4 定理：类型推断完备性 ⟹ Principal type property](#44-定理类型推断完备性--principal-type-property)",
+          "text": "- [4.4 定理：类型推断（Type Inference）完备性 ⟹ Principal type property](#44-定理类型推断完备性--principal-type-property)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.5 定理：类型一致性（Progress + Preservation）⟹ 运行时无类型错误](#45-定理类型一致性progress--preservation-运行时无类型错误)",
+          "text": "- [4.5 定理：类型一致性（Progress + Preservation）⟹ 运行时（Runtime）无类型错误](#45-定理类型一致性progress--preservation-运行时无类型错误)",
           "type": "paragraph"
         },
         {
@@ -9778,7 +9778,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 引用语义：自动解引用、Deref 强制与类型转换 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |",
+          "text": "| 引用语义：自动解引用、Deref 强制与类型转换 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |",
           "type": "table_row"
         },
         {
@@ -10087,7 +10087,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"值语义 vs 引用语义 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
+          "text": "> **反命题 1**: \"值语义 vs 引用（Reference）语义 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
           "type": "paragraph"
         },
         {
@@ -11655,7 +11655,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **定理 2** [Tier 1]: 函数参数默认按值传递 ⟹ 调用者需显式使用 `&T` / `&mut T` 表达借用，否则发生所有权移动。",
+          "text": "> **定理 2** [Tier 1]: 函数参数默认按值传递 ⟹ 调用者需显式使用 `&T` / `&mut T` 表达借用（Borrowing），否则发生所有权移动。",
           "type": "paragraph"
         },
         {
@@ -11761,7 +11761,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\07_modules_and_items\\13_use_declarations.md",
       "layer": "L1",
       "title": "Use Declarations（使用声明）",
-      "positioning": "系统讲解 `use` 声明的语法、作用域规则、重导出与 glob 导入，帮助学习者建立清晰的模块命名空间心智模型。",
+      "positioning": "系统讲解 `use` 声明的语法、作用域规则、重导出与 glob 导入，帮助学习者建立清晰的模块（Module）命名空间心智模型。",
       "line_count": 220,
       "theorem_chains": [
         {
@@ -11870,7 +11870,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\07_modules_and_items\\14_structs.md",
       "layer": "L1",
       "title": "Structs（结构体）",
-      "positioning": "系统讲解 Rust 结构体的三种形式、字段可见性、结构体更新语法与方法基础，为后续 Trait、Enum、泛型（Generics）奠定类型基础。",
+      "positioning": "系统讲解 Rust 结构体（Struct）的三种形式、字段可见性、结构体更新语法与方法基础，为后续 Trait、Enum、泛型（Generics）奠定类型基础。",
       "line_count": 228,
       "theorem_chains": [
         {
@@ -11972,11 +11972,11 @@
       "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\07_modules_and_items\\15_enumerations.md",
       "layer": "L1",
       "title": "Enumerations（枚举）",
-      "positioning": "系统讲解 Rust 枚举的定义、变体负载、Option/Result 两个核心枚举、模式匹配（Pattern Matching）穷尽性检查，以及与错误处理（Error Handling）的关系。",
+      "positioning": "系统讲解 Rust 枚举（Enum）的定义、变体负载、Option/Result 两个核心枚举、模式匹配（Pattern Matching）穷尽性检查，以及与错误处理（Error Handling）的关系。",
       "line_count": 230,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将枚举、模式匹配与错误处理规则串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将枚举、模式匹配与错误处理（Error Handling）规则串联起来。",
           "type": "paragraph"
         },
         {
@@ -12096,7 +12096,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **定理 1** [Tier 1]: `impl Type { ... }` 将方法绑定到类型 ⟹ 方法第一个参数 `self` / `&self` / `&mut self` 决定调用时的所有权转移或借用。",
+          "text": "> **定理 1** [Tier 1]: `impl Type { ... }` 将方法绑定到类型 ⟹ 方法第一个参数 `self` / `&self` / `&mut self` 决定调用时的所有权（Ownership）转移或借用（Borrowing）。",
           "type": "paragraph"
         },
         {
@@ -12275,7 +12275,7 @@
       "line_count": 269,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块路径解析串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块（Module）路径解析串联起来。",
           "type": "paragraph"
         },
         {
@@ -12357,7 +12357,7 @@
       "line_count": 299,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块、item、名称解析与可见性串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块（Module）、item、名称解析与可见性串联起来。",
           "type": "paragraph"
         },
         {
@@ -12631,7 +12631,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"静态项可以包含任意运行时计算的值\" ⟹ 不成立。静态项初始化器必须是 const-evaluable；需要运行时初始化时使用 `LazyLock`。",
+          "text": "> **反命题 3**: \"静态项可以包含任意运行时（Runtime）计算的值\" ⟹ 不成立。静态项初始化器必须是 const-evaluable；需要运行时初始化时使用 `LazyLock`。",
           "type": "paragraph"
         },
         {
@@ -14748,7 +14748,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.4 Trait + 泛型 ⟹ 零成本抽象](#44-trait--泛型--零成本抽象)",
+          "text": "- [4.4 Trait + 泛型（Generics） ⟹ 零成本抽象（Zero-Cost Abstraction）](#44-trait--泛型--零成本抽象)",
           "type": "paragraph"
         },
         {
@@ -16541,7 +16541,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：单态化 ⟹ 零成本抽象 ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)",
+          "text": "- [4.2 定理：单态化（Monomorphization） ⟹ 零成本抽象（Zero-Cost Abstraction） ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)",
           "type": "paragraph"
         },
         {
@@ -17517,15 +17517,15 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：Box ⟹ 堆分配 + 唯一所有权](#41-引理box--堆分配--唯一所有权)",
+          "text": "- [4.1 引理：Box ⟹ 堆分配 + 唯一所有权（Ownership）](#41-引理box--堆分配--唯一所有权)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用计数）](#42-定理rcarc--共享所有权安全引用计数)",
+          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用（Reference）计数）](#42-定理rcarc--共享所有权安全引用计数)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.3 推论：RefCell ⟹ 内部可变性运行时检查](#43-推论refcell--内部可变性运行时检查)",
+          "text": "- [4.3 推论：RefCell ⟹ 内部可变性运行时（Runtime）检查](#43-推论refcell--内部可变性运行时检查)",
           "type": "paragraph"
         },
         {
@@ -19632,7 +19632,7 @@
           "flags": [],
           "lines": 22,
           "should_fail": false,
-          "code_preview": "let s = String::from(\"hello\");  // 默认: 编译器选择 &s（不可变借用（Immutable Borrow）（Immutabl..."
+          "code_preview": "let s = String::from(\"hello\");  // 默认: 编译器选择 &s（不可变借用（Immutable Borrow）） let f1 ..."
         },
         {
           "flags": [
@@ -20193,7 +20193,7 @@
       "line_count": 423,
       "theorem_chains": [
         {
-          "text": "> **反命题 1**: \"联合体与枚举相同\" ⟹ 不成立。枚举有标签，联合体没有；枚举模式匹配安全，联合体读取需 unsafe。",
+          "text": "> **反命题 1**: \"联合体与枚举相同\" ⟹ 不成立。枚举有标签，联合体没有；枚举模式匹配（Pattern Matching）安全，联合体读取需 unsafe。",
           "type": "paragraph"
         },
         {
@@ -21520,7 +21520,7 @@
       "line_count": 460,
       "theorem_chains": [
         {
-          "text": "> **反命题 1**: \"属性只影响运行时行为\" ⟹ 不成立。属性主要影响编译期、代码生成、诊断和链接。",
+          "text": "> **反命题 1**: \"属性只影响运行时（Runtime）行为\" ⟹ 不成立。属性主要影响编译期、代码生成、诊断和链接。",
           "type": "paragraph"
         },
         {
@@ -21962,7 +21962,7 @@
           "type": "table_row"
         },
         {
-          "text": "| T1 | 类型系统排他性 | `T: Send + Sync` + 借用（Borrowing）检查通过 | ⟹ 编译期排除数据竞争 | Alias-XOR-Mutation + CSL | 所有并发代码 | `unsafe` 绕过检查、错误 `Ordering` | E0277/E0382 |",
+          "text": "| T1 | 类型系统（Type System）排他性 | `T: Send + Sync` + 借用（Borrowing）检查通过 | ⟹ 编译期排除数据竞争 | Alias-XOR-Mutation + CSL | 所有并发代码 | `unsafe` 绕过检查、错误 `Ordering` | E0277/E0382 |",
           "type": "table_row"
         },
         {
@@ -26382,7 +26382,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [7.3 定理一致性矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)",
+          "text": "- [7.3 定理一致性（Coherence）矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)",
           "type": "paragraph"
         },
         {
@@ -28911,7 +28911,7 @@
           "type": "table_row"
         },
         {
-          "text": "> **反命题 1**: \"可以用常规 debugger 调试过程宏\" ⟹ 不成立。宏在编译期执行，运行时调试器无法介入。",
+          "text": "> **反命题 1**: \"可以用常规 debugger 调试过程宏（Procedural Macro）\" ⟹ 不成立。宏在编译期执行，运行时调试器无法介入。",
           "type": "paragraph"
         },
         {
@@ -28991,7 +28991,7 @@
           "[过程宏（Procedural Macro）](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)"
         ],
         "post": [
-          "[生产级宏开发](31_production_grade_macro_development.md) · [rustc 编译器诊断](../../06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md)"
+          "[生产级宏（Macro）开发](31_production_grade_macro_development.md) · [rustc 编译器诊断](../../06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md)"
         ]
       },
       "backward_chains": 2,
@@ -29341,7 +29341,7 @@
           "[过程宏（Procedural Macro）](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)"
         ],
         "post": [
-          "[宏卫生性](35_macro_hygiene.md) · [syn/quote 参考](34_syn_quote_reference.md)"
+          "[宏（Macro）卫生性](35_macro_hygiene.md) · [syn/quote 参考](34_syn_quote_reference.md)"
         ]
       },
       "backward_chains": 2,
@@ -29375,11 +29375,11 @@
           "type": "table_row"
         },
         {
-          "text": "> **反命题 1**: \"宏只是简单的代码替换\" ⟹ 不成立。Rust 宏受卫生性、span 与类型系统约束，行为远比文本替换复杂。",
+          "text": "> **反命题 1**: \"宏只是简单的代码替换\" ⟹ 不成立。Rust 宏受卫生性、span 与类型系统（Type System）约束，行为远比文本替换复杂。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"过程宏一定比声明宏好\" ⟹ 不成立。简单模式匹配场景下声明宏更轻量。",
+          "text": "> **反命题 2**: \"过程宏一定比声明宏好\" ⟹ 不成立。简单模式匹配（Pattern Matching）场景下声明宏更轻量。",
           "type": "paragraph"
         },
         {
@@ -29623,7 +29623,7 @@
           "[过程宏（Procedural Macro）](07_proc_macro.md) · [宏术语表](32_macro_glossary.md)"
         ],
         "post": [
-          "[宏卫生性](35_macro_hygiene.md) · [生产级宏开发](31_production_grade_macro_development.md)"
+          "[宏（Macro）卫生性](35_macro_hygiene.md) · [生产级宏开发](31_production_grade_macro_development.md)"
         ]
       },
       "backward_chains": 2,
@@ -30165,7 +30165,7 @@
           "[过程宏（Procedural Macro）](07_proc_macro.md) · [syn/quote 参考](34_syn_quote_reference.md)"
         ],
         "post": [
-          "[生产级宏开发](31_production_grade_macro_development.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md)"
+          "[生产级宏（Macro）开发](31_production_grade_macro_development.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md)"
         ]
       },
       "backward_chains": 2,
@@ -32027,7 +32027,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"Mutex 可以不使用 unsafe\" ⟹ 不成立。`Mutex` 内部必须使用 `UnsafeCell` 打破借用规则。",
+          "text": "> **反命题 3**: \"Mutex 可以不使用 unsafe\" ⟹ 不成立。`Mutex` 内部必须使用 `UnsafeCell` 打破借用（Borrowing）规则。",
           "type": "paragraph"
         },
         {
@@ -33547,7 +33547,7 @@
           "type": "table_row"
         },
         {
-          "text": "| **L1** | 线性命题 ⟹ 资源不可复制 | L1 ⟹ C1 | 线性逻辑 sequent calculus（无 weakening/contraction） | 资源消耗后不可再用 | 线性性公理 | C1, T2, T3, T4, T5 | `!A` 允许复制（指数模态突破线性性） | L1/01_ownership.md §2 \"所有权规则\" |",
+          "text": "| **L1** | 线性命题 ⟹ 资源不可复制 | L1 ⟹ C1 | 线性逻辑 sequent calculus（无 weakening/contraction） | 资源消耗后不可再用 | 线性性公理 | C1, T2, T3, T4, T5 | `!A` 允许复制（指数模态突破线性性） | L1/01_ownership.md §2 \"所有权（Ownership）规则\" |",
           "type": "table_row"
         },
         {
@@ -33755,7 +33755,7 @@
           "type": "table_row"
         },
         {
-          "text": "| **T3**: 区域（Region） | Region ⟹ 生命周期形式化 | 生命周期约束为偏序 `κ ⊑ κ'` | 约束图可求解，引用使用点位于被引用值存活区域内 | T5（别名模型）、L2（借用权限） | HRTB（高阶 trait bound）不可判定片段；NLL 近似导致保守拒绝 | [lifetimes] `'a` 的数学本质 |",
+          "text": "| **T3**: 区域（Region） | Region ⟹ 生命周期形式化 | 生命周期约束为偏序 `κ ⊑ κ'` | 约束图可求解，引用（Reference）使用点位于被引用值存活区域内 | T5（别名模型）、L2（借用权限） | HRTB（高阶 trait bound）不可判定片段；NLL 近似导致保守拒绝 | [lifetimes] `'a` 的数学本质 |",
           "type": "table_row"
         },
         {
@@ -36746,11 +36746,11 @@
           "type": "paragraph"
         },
         {
-          "text": "> **定理 1** [Tier 2]: MIR 显式表达控制流图与所有权（Ownership）转移 ⟹ 借用检查、drop 展开与常量求值可以在统一的图上进行。",
+          "text": "> **定理 1** [Tier 2]: MIR 显式表达控制流图与所有权（Ownership）转移 ⟹ 借用（Borrowing）检查、drop 展开与常量求值可以在统一的图上进行。",
           "type": "paragraph"
         },
         {
-          "text": "> **定理 2** [Tier 2]: MIR 经过借用检查与优化后再 lower 到 codegen ⟹ 后端无需重新理解 Rust 的高层语法与所有权规则。",
+          "text": "> **定理 2** [Tier 2]: MIR 经过借用检查与优化后再 lower 到 codegen ⟹ 后端无需重新理解 Rust 的高层语法与所有权（Ownership）规则。",
           "type": "paragraph"
         },
         {
@@ -37504,7 +37504,7 @@
       "line_count": 250,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块、item 和声明串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块（Module）、item 和声明串联起来。",
           "type": "paragraph"
         },
         {
@@ -37789,11 +37789,11 @@
       "line_count": 161,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将值、模式匹配、绑定和解构串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将值、模式匹配（Pattern Matching）、绑定和解构串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"模式参考在所有场景下都适用\" ⟹ 不成立。`unsafe` 代码中的裸指针解引用、FFI 类型和过程宏（Procedural Macro）生成的模式可能超出常规模式检查范围。",
+          "text": "> **反命题 1**: \"模式参考在所有场景下都适用\" ⟹ 不成立。`unsafe` 代码中的裸指针解引用（Reference）、FFI 类型和过程宏（Procedural Macro）生成的模式可能超出常规模式检查范围。",
           "type": "paragraph"
         },
         {
@@ -37944,7 +37944,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略 Rust Reference 附录的细节也能写出正确代码\" ⟹ 不成立。宏 follow-set 歧义规则和完整文法是编写复杂宏和形式化分析的基础。",
+          "text": "> **反命题 2**: \"忽略 Rust Reference 附录的细节也能写出正确代码\" ⟹ 不成立。宏（Macro） follow-set 歧义规则和完整文法是编写复杂宏和形式化分析的基础。",
           "type": "paragraph"
         },
         {
@@ -45144,7 +45144,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 并发约束 ⟹ Send/Sync 要求 | Rust 所有权模型 | 排除不满足线程安全的设计 |",
+          "text": "| 并发约束 ⟹ Send/Sync 要求 | Rust 所有权（Ownership）模型 | 排除不满足线程安全的设计 |",
           "type": "table_row"
         },
         {
@@ -50293,7 +50293,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 零拷贝解析 ⟹ 高吞吐 | 直接引用原始缓冲区 | 减少数据拷贝开销 |",
+          "text": "| 零拷贝解析 ⟹ 高吞吐 | 直接引用（Reference）原始缓冲区 | 减少数据拷贝开销 |",
           "type": "table_row"
         },
         {
@@ -50375,7 +50375,7 @@
       "line_count": 321,
       "theorem_chains": [
         {
-          "text": "| 内存安全 ⟹ 更少攻击面 | Rust 所有权（Ownership）与借用（Borrowing）检查 | 消除大量传统 C/C++ 漏洞类 |",
+          "text": "| 内存安全（Memory Safety） ⟹ 更少攻击面 | Rust 所有权（Ownership）与借用（Borrowing）检查 | 消除大量传统 C/C++ 漏洞类 |",
           "type": "table_row"
         },
         {
@@ -50519,7 +50519,7 @@
       "line_count": 262,
       "theorem_chains": [
         {
-          "text": "| std 网络 ⟹ 简单性 | 无需额外运行时依赖 | 适合低并发或学习场景 |",
+          "text": "| std 网络 ⟹ 简单性 | 无需额外运行时（Runtime）依赖 | 适合低并发或学习场景 |",
           "type": "table_row"
         },
         {
@@ -51494,7 +51494,7 @@
           "type": "table_row"
         },
         {
-          "text": "| **重入 (Reentrancy)** | 默认 call 传递控制流 + 可重入锁需手动实现 | `&mut self` 独占 ⟹ 编译期保证无并发写；运行时借用（Borrowing）检查覆盖跨程序调用 | 线性逻辑：资源不可复制、不可丢弃 |",
+          "text": "| **重入 (Reentrancy)** | 默认 call 传递控制流 + 可重入锁需手动实现 | `&mut self` 独占 ⟹ 编译期保证无并发写；运行时（Runtime）借用（Borrowing）检查覆盖跨程序调用 | 线性逻辑：资源不可复制、不可丢弃 |",
           "type": "table_row"
         },
         {
@@ -53463,7 +53463,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 显式内存所有权 ⟹ 安全性 | Rust 管理 wasm 线性内存 | 避免 use-after-free |",
+          "text": "| 显式内存所有权（Ownership） ⟹ 安全性 | Rust 管理 wasm 线性内存 | 避免 use-after-free |",
           "type": "table_row"
         },
         {
@@ -53952,7 +53952,7 @@
       "line_count": 235,
       "theorem_chains": [
         {
-          "text": "| Rust 内存安全 ⟹ 更少并发 bug | 所有权与借用检查 | 降低新算法实现风险 |",
+          "text": "| Rust 内存安全（Memory Safety） ⟹ 更少并发 bug | 所有权与借用检查 | 降低新算法实现风险 |",
           "type": "table_row"
         },
         {
@@ -61192,7 +61192,7 @@
           "type": "paragraph"
         },
         {
-          "text": "| Rust for Linux ：操作系统内核中的内存安全 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
+          "text": "| Rust for Linux ：操作系统内核中的内存安全（Memory Safety） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
           "type": "table_row"
         },
         {

@@ -139,7 +139,7 @@ pub fn generic_example() {
 - ✅ 可内联
 - ✅ 编译时多态
 - ⚠️ 代码膨胀 (单态化)
-- ⚠️ 不能运行时切换
+- ⚠️ 不能运行时（Runtime）切换
 
 ### 2.2 性能对比
 
@@ -727,11 +727,11 @@ pub fn clone_example() {
 
 | 模式          | 实现方式     | 调用开销 | 内存开销 | 灵活性 | 类型安全 | 推荐指数   |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- || **Singleton** | OnceLock     | ~2-5ns   | 静态     | 低     | ✅       | ⭐⭐⭐⭐⭐ |
-| **Factory**   | 泛型         | 0ns      | 栈       | 中     | ✅       | ⭐⭐⭐⭐⭐ |
+| **Factory**   | 泛型（Generics）         | 0ns      | 栈       | 中     | ✅       | ⭐⭐⭐⭐⭐ |
 | **Factory**   | Trait Object | ~2ns     | 堆       | 高     | ✅       | ⭐⭐⭐⭐   |
 | **Builder**   | 链式调用     | 0ns      | 栈       | 高     | ✅       | ⭐⭐⭐⭐⭐ |
 | **Observer**  | 同步         | ~1ns     | 低       | 中     | ✅       | ⭐⭐⭐     |
-| **Observer**  | 异步         | ~1000ns  | 中       | 高     | ✅       | ⭐⭐⭐⭐⭐ |
+| **Observer**  | 异步（Async）         | ~1000ns  | 中       | 高     | ✅       | ⭐⭐⭐⭐⭐ |
 | **Strategy**  | 泛型         | 0ns      | 栈       | 低     | ✅       | ⭐⭐⭐⭐⭐ |
 | **Strategy**  | Trait Object | ~2ns     | 堆       | 高     | ✅       | ⭐⭐⭐⭐   |
 | **Iterator**  | 零成本       | 0ns      | 栈       | 高     | ✅       | ⭐⭐⭐⭐⭐ |

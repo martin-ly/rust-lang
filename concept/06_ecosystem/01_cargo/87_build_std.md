@@ -253,8 +253,8 @@ impl<T> Register<T> {
 - [Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md)
 - [交叉编译](../05_systems_and_embedded/17_cross_compilation.md)
 - [Cargo 配置与环境变量](83_cargo_configuration.md)
-- [所有权系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
-- [泛型与 Trait Bounds](../../02_intermediate/01_generics/02_generics.md)
+- [所有权（Ownership）系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+- [泛型（Generics）与 Trait Bounds](../../02_intermediate/01_generics/02_generics.md)
 - [unsafe 与裸机内存](../../03_advanced/02_unsafe/03_unsafe.md)
 
 ## 参考

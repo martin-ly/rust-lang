@@ -162,7 +162,7 @@ flowchart TD
 ## 11. 相关概念
 
 - [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
-- [异步进程管理](03_async_process_management.md)
+- [异步（Async）进程管理](03_async_process_management.md)
 - [IPC 机制](05_ipc_mechanisms.md)
 - [进程监控与诊断](06_process_monitoring_and_diagnostics.md)
 - [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/15_performance_optimization.md)

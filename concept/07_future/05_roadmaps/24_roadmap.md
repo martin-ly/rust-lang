@@ -73,8 +73,8 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 路线图的编译错误](#十边界测试rust-路线图的编译错误)
     - [10.1 边界测试：`never_type` (`!`) 的降级与类型推断（Type Inference）（编译错误）](#101-边界测试never_type--的降级与类型推断编译错误)
-    - [10.2 边界测试：GAT（泛型关联类型）的递归约束（编译错误）](#102-边界测试gat泛型关联类型的递归约束编译错误)
-    - [10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断限制（编译错误）](#106-边界测试impl-trait-在-let-绑定中的类型推断限制编译错误)
+    - [10.2 边界测试：GAT（泛型（Generics）关联类型）的递归约束（编译错误）](#102-边界测试gat泛型关联类型的递归约束编译错误)
+    - [10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断（Type Inference）限制（编译错误）](#106-边界测试impl-trait-在-let-绑定中的类型推断限制编译错误)
     - [10.5 边界测试：语言特性稳定化的时间预估偏差（工程规划风险）](#105-边界测试语言特性稳定化的时间预估偏差工程规划风险)
     - [10.3 边界测试：nightly 特性在 production 中的不可预测性（编译中断）](#103-边界测试nightly-特性在-production-中的不可预测性编译中断)
     - [补充定理链](#补充定理链)
@@ -828,7 +828,7 @@ fn main() {
 > 2) 闭包（Closures）返回类型推断（Type Inference）；
 > 3) `Result<T, !>` 的 `?` 运算符行为。
 >
-> `!` 的稳定化是 Rust 类型系统成熟度的重要里程碑——它使"不可恢复错误"在类型层面得到精确表达，而非使用占位类型（`std::convert::Infallible`）。
+> `!` 的稳定化是 Rust 类型系统（Type System）成熟度的重要里程碑——它使"不可恢复错误"在类型层面得到精确表达，而非使用占位类型（`std::convert::Infallible`）。
 > 这与 Haskell 的 `Void`（需显式 `absurd` 转换）或 TypeScript 的 `never`（类似语义，但无运行时（Runtime）对应）类似。
 > [来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 

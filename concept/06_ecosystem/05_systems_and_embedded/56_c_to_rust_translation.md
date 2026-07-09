@@ -43,7 +43,7 @@
     - [3.2 \&inator（PLDI 2026）](#32-inatorpldi-2026)
     - [3.3 His2Trans（2026）](#33-his2trans2026)
     - [3.4 Cpp2Rust：C++ → Safe Rust 的自动翻译（PLDI 2026）](#34-cpp2rustc--safe-rust-的自动翻译pldi-2026)
-    - [3.5 Hayroll：C 宏与条件编译的模块化翻译（PLDI 2026）](#35-hayrollc-宏与条件编译的模块化翻译pldi-2026)
+    - [3.5 Hayroll：C 宏（Macro）与条件编译的模块（Module）化翻译（PLDI 2026）](#35-hayrollc-宏与条件编译的模块化翻译pldi-2026)
   - [四、现有工具链](#四现有工具链)
     - [4.1 C2Rust 与后处理生态](#41-c2rust-与后处理生态)
   - [四-A、评估基准与近期学术成果](#四-a评估基准与近期学术成果)
@@ -418,7 +418,7 @@ pub fn call_c_function() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-自动翻译产生大量 `unsafe`。应通过封装将 unsafe 限制在最底层，向上提供安全的 Rust API。这允许借用检查器保护大部分代码，同时与 C 遗留代码互操作。
+自动翻译产生大量 `unsafe`。应通过封装将 unsafe 限制在最底层，向上提供安全的 Rust API。这允许借用（Borrowing）检查器保护大部分代码，同时与 C 遗留代码互操作。
 </details>
 
 ---

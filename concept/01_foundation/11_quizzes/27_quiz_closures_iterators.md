@@ -175,7 +175,7 @@ fn main() {
 | Trait | 调用方式 | 实现条件 |
 |:---|:---|:---|
 | `Fn` | `&self` | 只捕获不可变引用（Immutable Reference） |
-| `FnMut` | `&mut self` | 捕获可变引用（Reference） |
+| `FnMut` | `&mut self` | 捕获可变引用（Mutable Reference） |
 | `FnOnce` | `self` | 消耗捕获的值 |
 
 **层次关系**：`Fn` <: `FnMut` <: `FnOnce`（所有实现 `Fn` 的闭包（Closures）也自动实现 `FnMut` 和 `FnOnce`）
@@ -214,7 +214,7 @@ fn make_adder(x: i32) -> impl Fn(i32) -> i32 {
 }
 ```
 
-不加 `move` 时，闭包捕获 `x` 的引用（Reference）。但 `x` 是函数参数，在 `make_adder` 返回后失效，闭包将持有悬垂引用。
+不加 `move` 时，闭包（Closures）捕获 `x` 的引用（Reference）。但 `x` 是函数参数，在 `make_adder` 返回后失效，闭包将持有悬垂引用。
 
 **加了 `move`**：
 
@@ -438,7 +438,7 @@ fn main() {
 | `take(n)` | 只取前 n 个元素 | `.take(3)` |
 | `skip(n)` | 跳过前 n 个元素 | `.skip(2)` |
 | `enumerate()` | 添加索引 | `.enumerate()` → `(0, x₁), (1, x₂), ...` |
-| `zip(other)` | 与另一个迭代器配对 | `.zip(v2)` → `(x₁, y₁), (x₂, y₂), ...` |
+| `zip(other)` | 与另一个迭代器（Iterator）配对 | `.zip(v2)` → `(x₁, y₁), (x₂, y₂), ...` |
 | `flatten()` | 展平嵌套迭代器 | `[[1,2],[3]].flatten()` → `[1,2,3]` |
 | `chain(other)` | 连接两个迭代器 | `.chain(v2)` |
 

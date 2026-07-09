@@ -727,7 +727,7 @@ fn init() -> i32 {
 > 1) 堆分配可能失败（内存紧张），`alloc` 的 `oom=panic` 策略在 kernel 中不可接受；
 > 2) 分配是 GFP（Get Free Pages）标志敏感的（`GFP_KERNEL`、`GFP_ATOMIC`），`alloc` 默认使用 `GFP_KERNEL`（可睡眠），在中断上下文中非法；
 > 3) 内存碎片问题（内核无用户空间的 `malloc` 自由）。`rust-for-linux` 提供内核特定的分配 API：`kmalloc`（GFP 敏感）、`kzalloc`（零初始化）、`kfree`（释放）。
-> Rust 代码需使用这些 API 替代标准 `alloc`。这与 C 的内核模块（直接使用 `kmalloc`/`kfree`）或 eBPF 的受限内存（无堆分配，仅栈和 map）类似——内核编程的内存管理是核心技能。
+> Rust 代码需使用这些 API 替代标准 `alloc`。这与 C 的内核模块（Module）（直接使用 `kmalloc`/`kfree`）或 eBPF 的受限内存（无堆分配，仅栈和 map）类似——内核编程的内存管理是核心技能。
 > [来源: [Rust for Linux](https://rust-for-linux.com/)] ·
 > [来源: [Linux Kernel Memory Management](https://docs.kernel.org/core-api/memory-allocation.html)]
 >
@@ -874,7 +874,7 @@ fn main() {}
 
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
-| Rust for Linux ：操作系统内核中的内存安全 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| Rust for Linux ：操作系统内核中的内存安全（Memory Safety） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Rust for Linux ：操作系统内核中的内存安全 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust for Linux ：操作系统内核中的内存安全 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 

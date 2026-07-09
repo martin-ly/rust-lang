@@ -344,7 +344,7 @@ cargo check -W rust-2024-compatibility
 | **Cargo** | Rust-version aware resolver | 依赖解析考虑 `rust-version` 字段 | 自动 |
 
 **关键洞察**：
-Rust 2024 的核心主题是**显式化 Unsafe 边界**与**生命周期精确控制**。
+Rust 2024 的核心主题是**显式化 Unsafe 边界**与**生命周期（Lifetimes）精确控制**。
 `unsafe extern` 块、`unsafe` 属性、`unsafe_op_in_unsafe_fn` 三重变化共同强化了 Rust 的安全契约——"unsafe 的边界必须肉眼可见"。
 而 RPIT `use<>` 则填补了 `impl Trait` 在生命周期表达上的长期模糊地带，与 `../02_intermediate/01_generics/02_generics.md` 中的泛型（Generics）约束理论直接相关。
 
@@ -589,7 +589,7 @@ struct Array<T, const N: usize> {
 
 **演进中**：
 
-- **Const 泛型表达式**：允许 `Array<T, {N * 2}>` 这样的复杂表达式
+- **Const 泛型（Generics）表达式**：允许 `Array<T, {N * 2}>` 这样的复杂表达式
 - **Const 泛型 where 约束**：`where N > 0` 这样的常量约束
 - **泛型 const 项**：`const fn foo<const N: usize>() -> [u8; N]`
 
@@ -1182,7 +1182,7 @@ impl LendingIterator for Vec<String> {
 ```
 
 > **修正**:
-> 泛型关联类型（GAT，Generic Associated Types）是 Rust 类型系统的重大扩展，允许关联类型带有自己的泛型参数（如 `type Item<'a>`）。
+> 泛型关联类型（GAT，Generic Associated Types）是 Rust 类型系统（Type System）的重大扩展，允许关联类型带有自己的泛型参数（如 `type Item<'a>`）。
 > 这在 Rust 1.65（2022-11）稳定。GAT 之前， Lending Iterator（返回对集合内部元素的引用（Reference））无法安全表达——`Iterator::Item` 不能有生命周期参数。
 > GAT 的引入是 Rust 从"足够好"向"表达能力接近 Haskell"演进的关键一步，使流式解析器、借用（Borrowing）迭代器（Iterator）等模式成为可能。
 > [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)]
@@ -1261,7 +1261,7 @@ fn fixed() {
 
 ### 6.2 旗舰二：Flexible, fast(er) compilation（灵活快速编译）
 
-**核心命题**：打破 rustc 的单体编译模型，实现模块化、并行化、可替换后端。
+**核心命题**：打破 rustc 的单体编译模型，实现模块（Module）化、并行化、可替换后端。
 
 | 子目标 | 状态 | 形式模型意义 |
 | :--- | :--- | :--- |
@@ -1291,7 +1291,7 @@ fn fixed() {
 
 ### 6.4 旗舰四：Unblocking Dormant Traits（释放沉睡 Trait）
 
-**核心命题**：解决长期阻塞的类型系统特性——specialization、trait solver 性能、Polonius 借用检查。
+**核心命题**：解决长期阻塞的类型系统特性——specialization、trait solver 性能、Polonius 借用（Borrowing）检查。
 
 | 子目标 | 状态 | 形式模型意义 |
 | :--- | :--- | :--- |
@@ -1342,7 +1342,7 @@ fn fixed() {
 | **`build-std` 系列 (3874/3875)** | 3874 FCP 完成待合并，3875 反馈处理中 | 自定义编译 `core`/`std`，为安全关键和形式化验证提供可剪裁标准库 |
 | **In-place Initialization** | 设计语言实验中 | 允许未初始化内存的安全使用，扩展 Rust 的**初始化语义** |
 | **`Sized Hierarchy` / `Pointee` 命名** | lang team 设计会议 | 统一 `?Sized` 相关 trait 的命名和层级，影响 Rust 类型系统的可扩展性 |
-| **`null-ptr-deref` guarantees** | MCP 计划中 | 定义空指针解引用的保证语义，为 Miri 和编译器优化提供明确的 UB 边界 |
+| **`null-ptr-deref` guarantees** | MCP 计划中 | 定义空指针解引用（Reference）的保证语义，为 Miri 和编译器优化提供明确的 UB 边界 |
 | **zerocopy traits** (`NoCell` / `Freeze`) | 积极讨论 | 定义"可安全按位复制"的类型类，为内核和网络协议栈提供零拷贝抽象 |
 
 > **来源**:
@@ -1659,7 +1659,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 | **时间** | **环节** | **内容** |
 | :--- | :--- | :--- |
-| 2026-03-02 | XPro 主题演讲 | Rebecca Rumbul: “Building the Future in Rust”——内存安全、性能、可持续性与治理正成为核心设计要求 |
+| 2026-03-02 | XPro 主题演讲 | Rebecca Rumbul: “Building the Future in Rust”——内存安全（Memory Safety）、性能、可持续性与治理正成为核心设计要求 |
 | 2026-03-04 | 工作坊 | Fledgio 创始人 Lawrence Freeman 主讲两场 Rust 技能工作坊（Intro to Rust / Advanced Rust），Ernest Kissiedu 协助 |
 | 同期 | 社区聚会 | Ernest Kissiedu 与 Rust BCN 共同主办 Rust 社区 meetup |
 

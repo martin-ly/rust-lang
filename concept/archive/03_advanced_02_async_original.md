@@ -67,7 +67,7 @@
       - [.await 的 CPS 变换规则](#await-的-cps-变换规则)
       - [Pin 约束在操作语义中的体现](#pin-约束在操作语义中的体现)
     - [3.2 Pin 的形式化语义](#32-pin-的形式化语义)
-    - [3.2b Pin 的 LTL 形式化（异步状态机语境）](#32b-pin-的-ltl-形式化异步状态机语境)
+    - [3.2b Pin 的 LTL 形式化（异步（Async）状态机语境）](#32b-pin-的-ltl-形式化异步状态机语境)
       - [不动性公理（Immobility Axiom）](#不动性公理immobility-axiom)
       - [Unpin 豁免（Exemption）](#unpin-豁免exemption)
       - [在 poll 递归调用链中的验证](#在-poll-递归调用链中的验证)
@@ -112,7 +112,7 @@
       - [生命周期（Lifetimes）陷阱](#生命周期陷阱)
   - [十一、国际课程与论文对齐](#十一国际课程与论文对齐)
   - [十二、`AsyncFn` Trait 家族：异步闭包（Closures）的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
-    - [12.1 问题：异步闭包的类型真空](#121-问题异步闭包的类型真空)
+    - [12.1 问题：异步闭包（Closures）的类型真空](#121-问题异步闭包的类型真空)
     - [12.2 `AsyncFn` 家族层级](#122-asyncfn-家族层级)
     - [12.3 关键形式化特性：可重入性限制](#123-关键形式化特性可重入性限制)
     - [12.4 效果系统原型](#124-效果系统原型)
@@ -363,7 +363,7 @@ Pin<&mut Self> 的内存布局约束:
 
 > **来源**: [RFC 2349 §3: Pin invariants] · [TRPL: Ch17] · [Rustonomicon: Pinning]
 
-> **[RFC 2349]** Pin 被引入以支持自引用结构：Pin<&mut T> 保证 T 的内存地址不会被改变，除非 T: Unpin。✅ 已验证
+> **[RFC 2349]** Pin 被引入以支持自引用（Reference）结构：Pin<&mut T> 保证 T 的内存地址不会被改变，除非 T: Unpin。✅ 已验证
 >
 > **[TRPL: Ch17]** Pin 是 async/await 安全的关键——编译器生成的状态机可能包含自引用（局部变量的引用），Pin 防止状态机被 move 后引用失效。✅ 已验证
 >
@@ -653,7 +653,7 @@ async 状态机的 Pin 验证场景:
 | **FFI** | 完美（C ABI 兼容） | 需 `spawn_blocking` 桥接 | 栈切换成本，CGO 有开销 |
 | **Rust 排除原因** | —（基准模型） | ✅ **零成本抽象（Zero-Cost Abstraction），无运行时（Runtime）依赖** | ❌ 运行时依赖（RFC 230 明确拒绝） |
 
-> **[without.boats blog]** Rust 明确拒绝绿色线程（green threads / M:N 线程），因为"每个零成本抽象（Zero-Cost Abstraction）都必须有不用不付钱的路径；绿色线程的运行时负担与 Rust 的系统编程定位冲突"。✅ 已验证
+> **[without.boats blog]** Rust 明确拒绝绿色线程（green threads / M:N 线程），因为"每个零成本抽象（Zero-Cost Abstraction）都必须有不用不付钱的路径；绿色线程的运行时（Runtime）负担与 Rust 的系统编程定位冲突"。✅ 已验证
 >
 > **[RFC 230]** Rust 曾实验性支持绿色线程（Rust 1.0 前），后因运行时复杂性与 FFI 互操作困难被移除。✅ 已验证
 >
@@ -753,7 +753,7 @@ graph TD
 >
 > [来源: [Rust Async Book]]
 > **章节过渡**：思维导图提供概念拓扑，而定理矩阵提供严格的推理链条。以下 10 条定理按"语言层（L）→ 变换层（T）→ 约束层（C）→ 运行时层（P）→ 抽象层（A）→ 系统层（S）"递进排列，每行均含"⟹"推理链，展示从前提到结论的必然性。
-> **[Rust Reference: Pin]** 一致性检查: Pin 不动性 ⟹ Future 轮询安全 ⟹ async 状态机安全，形成**从内存到状态到控制流**的递进链。注意：async 的完整形式化仍是活跃研究领域。✅ 已验证
+> **[Rust Reference: Pin]** 一致性（Coherence）检查: Pin 不动性 ⟹ Future 轮询安全 ⟹ async 状态机安全，形成**从内存到状态到控制流**的递进链。注意：async 的完整形式化仍是活跃研究领域。✅ 已验证
 >
 > **[🔍 待验证]** async 的完整形式化（包括 Waker 契约、执行器正确性）仍是活跃研究领域，目前仅有部分片段被形式化验证。
 >
@@ -1239,7 +1239,7 @@ async fn graceful_shutdown(token: CancellationToken) {
 ### 8.8 Waker 契约与活性
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]**
-> **章节过渡**：取消安全回答了"Future 被丢弃时会发生什么"，而 Waker 契约则回答"Future 被挂起后如何复活"。二者共同构成异步执行的生命周期闭环：从 poll 到 Pending，从 wake 到再 poll，任何一环断裂都会导致活锁或资源泄漏。
+> **章节过渡**：取消安全回答了"Future 被丢弃时会发生什么"，而 Waker 契约则回答"Future 被挂起后如何复活"。二者共同构成异步执行的生命周期（Lifetimes）闭环：从 poll 到 Pending，从 wake 到再 poll，任何一环断裂都会导致活锁或资源泄漏。
 
 **Waker 契约（Waker Contract）**：
 
@@ -1838,7 +1838,7 @@ async fn pipeline() {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]**
 
-> **章节过渡**：定理 T1 声称 async/await 是零成本抽象，但实践中我们常常看到 `Box::pin` 和 `dyn Future`。理解静态分发与动态分发的边界、栈 pinning 与堆 pinning 的差异，是判断"何时零成本成立"的关键。
+> **章节过渡**：定理 T1 声称 async/await 是零成本抽象（Zero-Cost Abstraction），但实践中我们常常看到 `Box::pin` 和 `dyn Future`。理解静态分发与动态分发的边界、栈 pinning 与堆 pinning 的差异，是判断"何时零成本成立"的关键。
 
 **动态分发 vs 静态分发的 async 开销**
 
@@ -2064,7 +2064,7 @@ fn test_mutex_concurrent_access() {
 | 测试对象 | 同步原语、并发数据结构 | 任意 Rust 代码（含 unsafe） |
 | 执行方式 | 模型检测（穷举交错） | 解释执行（动态分析） |
 | 覆盖范围 | 小状态空间（需控制并发度） | 单执行路径 |
-| 适用场景 | 验证并发算法正确性 | 验证 unsafe 代码内存安全 |
+| 适用场景 | 验证并发算法正确性 | 验证 unsafe 代码内存安全（Memory Safety） |
 | 使用方式 | 替换 `std::sync` 为 `loom::sync` | `cargo +nightly miri test` |
 
 **反例：loom 状态空间爆炸**

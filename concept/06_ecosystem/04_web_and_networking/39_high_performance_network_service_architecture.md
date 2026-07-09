@@ -620,7 +620,7 @@ fn io_uring_basics() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 2.2 Tokio-uring集成
 
-**使用 tokio-uring 的异步网络服务器**:
+**使用 tokio-uring 的异步（Async）网络服务器**:
 
 ```rust
 use tokio_uring::net::{TcpListener, TcpStream};

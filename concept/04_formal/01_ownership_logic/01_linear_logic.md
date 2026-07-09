@@ -338,7 +338,7 @@ T1(切消定理) ⟹ L1(线性命题) ⟹ C1(Rust所有权) ⟹ C2(仿射move语
 
 | 定理ID | 定理陈述 | ⟹ 推理链 | 前提 | 结论 | 依赖的公理 | 被哪些定理依赖 | 失效条件 | 对应 L1/L2 概念 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| **L1** | 线性命题 ⟹ 资源不可复制 | L1 ⟹ C1 | 线性逻辑 sequent calculus（无 weakening/contraction） | 资源消耗后不可再用 | 线性性公理 | C1, T2, T3, T4, T5 | `!A` 允许复制（指数模态突破线性性） | L1/01_ownership.md §2 "所有权规则" |
+| **L1** | 线性命题 ⟹ 资源不可复制 | L1 ⟹ C1 | 线性逻辑 sequent calculus（无 weakening/contraction） | 资源消耗后不可再用 | 线性性公理 | C1, T2, T3, T4, T5 | `!A` 允许复制（指数模态突破线性性） | L1/01_ownership.md §2 "所有权（Ownership）规则" |
 | **L2** | !A (of course) ⟹ 经典逻辑嵌入 | L2 ⟹ L1(反向出口) | 指数模态提升规则（Promotion） | 可复制/可丢弃资源可嵌入经典推理 | 提升/推导/收缩/弱化公理 | 经典逻辑对应、Copy trait 语义 | 无指数模态时无法嵌入经典子系统 | L1/01_ownership.md §4 "Copy trait" |
 | **T1** | 线性逻辑切消定理 ⟹ 一致性（Coherence） | T1 ⟹ L1 | Gentzen 切消（Cut Elimination）在 multiplicative-additive fragment 中成立 | 无矛盾证明、规范形式（cut-free proof）存在 | 线性 sequent calculus 结构规则 | 所有派生定理（L1-L2, C1-C2, T3-T6） | 添加非一致性公理（如 `A ⊗ A⊥ ⊢ ⊥` 被破坏）时失效 | — |
 | **T2** | 会话类型 ⟹ 通信协议正确性 | T2 ⟹ L1 ⊸ C1 | 通道（channel）作为线性资源 | 无死锁、无协议违规（progress + preservation） | ⊸ 线性蕴含、⊗ 张量、!A 复制许可 | 并发验证、类型安全、Actix/Tokio 通道 | 递归会话类型无 guard 条件时可能死锁；循环依赖通道不释放 | L3/c05_threads.md §3 "通道通信" |
@@ -777,7 +777,7 @@ h x = ...  -- m 是重数变量
 | **Contraction（复制）** | ❌ 不允许（非 Copy 类型 move） | ❌ 不允许 | ✅ 允许（默认拷贝） | ✅ 允许（值拷贝） |
 | **资源管理** | 所有权 + `Drop` 编译期检查 | GC + 线性类型约束 | RAII + 手动 `delete` / 智能指针（Smart Pointer） | GC（垃圾回收） |
 | **Copy 语义** | `Copy` trait 标记可复制类型 | `Dupable` 类型类（通过 `ω` 重数隐式支持） | 默认拷贝构造 / 移动构造 | 默认值拷贝 |
-| **生命周期** | 内置区域类型系统（`'a`） | 无内置生命周期；依赖 GC 或外部框架 | 无（指针可能悬垂） | 无（GC 决定） |
+| **生命周期** | 内置区域类型系统（Type System）（`'a`） | 无内置生命周期；依赖 GC 或外部框架 | 无（指针可能悬垂） | 无（GC 决定） |
 | **借用（Borrowing）模型** | `&T` / `&mut T` 编译期检查 | 无原生借用；线性值只能 move | `const T&` / `T&`（无编译期检查） | 指针 `*T`（无别名检查） |
 | **unsafe 支持** | 原生支持，可封装安全抽象 | 无 direct 对应（FFI 通过 C 调用） | 原生 `unsafe` 区域广泛存在 | 有限（`unsafe` 包） |
 | **生态状态** | 工业级，稳定 | 实验性，GHC 9.x+ 可用 | 工业级，标准化 | 工业级，稳定 |
@@ -1008,7 +1008,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 线性逻辑的 **multiplicative conjunction**（`⊗`）对应 Rust 的元组/结构体（Struct）所有权分割，**additive conjunction**（`&`）对应共享借用。Rust 的借用规则是线性逻辑 **ILL**（Intuitionistic Linear Logic）的实用化变体：独占资源（`own`）可分割为共享权限（`shr`）和独占权限（`own ∗ shr`），但共享权限不能升级为独占权限。这保证了"读取者-写入者"互斥——多个读者或单个写者，永不会同时存在。来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **修正**: 线性逻辑的 **multiplicative conjunction**（`⊗`）对应 Rust 的元组/结构体（Struct）所有权分割，**additive conjunction**（`&`）对应共享借用（Borrowing）。Rust 的借用规则是线性逻辑 **ILL**（Intuitionistic Linear Logic）的实用化变体：独占资源（`own`）可分割为共享权限（`shr`）和独占权限（`own ∗ shr`），但共享权限不能升级为独占权限。这保证了"读取者-写入者"互斥——多个读者或单个写者，永不会同时存在。来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ### 10.3 边界测试：所有权转移与线性逻辑的析取（编译错误）
 

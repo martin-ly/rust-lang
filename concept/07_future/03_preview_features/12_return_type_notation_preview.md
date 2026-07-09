@@ -234,7 +234,7 @@ where
 
 ### 2.3 与 async closures 的关联
 
-Async closures（Rust 1.85.0 stable）稳定后，社区希望 RTN 也能用于 async closure 类型，以便在泛型约束中表达「async closure 返回的 Future 是 Send」。相关设计仍在 RFC 阶段，是 2026 年「Prepare TAIT + RTN for stabilization」项目目标的一部分。
+Async closures（Rust 1.85.0 stable）稳定后，社区希望 RTN 也能用于 async closure 类型，以便在泛型（Generics）约束中表达「async closure 返回的 Future 是 Send」。相关设计仍在 RFC 阶段，是 2026 年「Prepare TAIT + RTN for stabilization」项目目标的一部分。
 
 [来源: [Rust Project Goals 2026 — RTN](https://rust-lang.github.io/rust-project-goals/2026/rtn.html)]
 

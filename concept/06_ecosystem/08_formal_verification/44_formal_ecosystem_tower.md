@@ -450,7 +450,7 @@ fn sqrt_fixed(x: i32) -> Result<i32, String> {
 }
 ```
 
-> **修正**: 形式化验证工具（Prusti、Creusot、Kani）将程序正确性证明引入编译流程。Prusti 使用 Viper 验证基础设施，要求开发者标注前置条件（`requires`）、后置条件（`ensures`）和循环不变量。若调用者违反前置条件，编译失败。这与传统单元测试不同——形式化验证覆盖**所有**输入，不是抽样检查。Rust 的类型系统已捕获大量错误（空指针、数据竞争），形式化工具进一步验证功能正确性（排序结果有序、除法不溢出等）。[来源: [Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html)]
+> **修正**: 形式化验证工具（Prusti、Creusot、Kani）将程序正确性证明引入编译流程。Prusti 使用 Viper 验证基础设施，要求开发者标注前置条件（`requires`）、后置条件（`ensures`）和循环不变量。若调用者违反前置条件，编译失败。这与传统单元测试不同——形式化验证覆盖**所有**输入，不是抽样检查。Rust 的类型系统（Type System）已捕获大量错误（空指针、数据竞争），形式化工具进一步验证功能正确性（排序结果有序、除法不溢出等）。[来源: [Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html)]
 
 ### 10.2 边界测试：Kani 的循环展开限制（编译错误）
 

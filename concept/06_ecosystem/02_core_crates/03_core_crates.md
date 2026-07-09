@@ -443,7 +443,7 @@ graph TD
 |:---|:---|:---|:---|
 | `crossbeam::channel` | MPMC 通道 | 基于 epoch 的无锁队列 | 需要 `select!` 或动态关闭的场景 |
 | `crossbeam::epoch` | 无锁内存回收 | 三代 epoch 垃圾回收 | 实现自定义无锁数据结构 |
-| `crossbeam::deque` | 工作窃取双端队列 | Chase-Lev 算法 | 自定义调度器、并行运行时 |
+| `crossbeam::deque` | 工作窃取双端队列 | Chase-Lev 算法 | 自定义调度器、并行运行时（Runtime） |
 
 > **关键洞察**: crossbeam 的 epoch GC 解决了无锁数据结构的**安全内存回收问题**——当读者可能正在访问节点时，延迟释放直到所有读者进入新 epoch。这是 Rust 无法直接用所有权（Ownership）解决的问题（因为无锁读取不持有所有权）。
 
@@ -575,7 +575,7 @@ graph TD
 | **serde** | 类型系统 (ADT) | Trait (derive) | 过程宏（Procedural Macro） | — | C++ 无等价 |
 | **tokio** | 所有权（Ownership） + Drop | — | async/await + Pin + Send/Sync | — | Go goroutine |
 | **axum** | — | Trait (Handler/FromRequest) | async + unsafe(极少) | — | Go net/http |
-| **sqlx** | 生命周期（Lifetimes） | 泛型 | 过程宏（Procedural Macro） + async | — | ORM 对比 |
+| **sqlx** | 生命周期（Lifetimes） | 泛型（Generics） | 过程宏（Procedural Macro） + async | — | ORM 对比 |
 | **clap** | — | Trait (Parser/Args) | 过程宏（Procedural Macro） | — | Python argparse |
 | **tracing** | — | Trait (Subscriber/Layer) | async Span 传播 | — | OpenTelemetry 多语言 |
 | **ring** | 类型安全 | — | unsafe (常量时间) | — | OpenSSL (C) |
@@ -651,7 +651,7 @@ graph TD
 |:---|:---|:---|:---|
 | *The Rust Programming Language* (TRPL) | Klabnik & Nichols | Rust 官方教材 | 所有 crate 的设计前提 |
 | *Serde: Serialization Framework* | github.com/serde-rs | 零成本抽象（Zero-Cost Abstraction）序列化 | serde 是 Trait + 宏（Macro）的典范 |
-| *Rayon: Data Parallelism in Rust* | Josh Stone / Niko, POPL 2015 workshop | 无数据竞争的数据并行 | Send/Sync + 所有权 ⇒ 安全并行 |
+| *Rayon: Data Parallelism in Rust* | Josh Stone / Niko, POPL 2015 workshop | 无数据竞争的数据并行 | Send/Sync + 所有权（Ownership） ⇒ 安全并行 |
 | *Security Analysis of Rust Cryptography* | 2023-2025 工业审计 | Rust 密码学库安全评估 | ring/rustls 审计基础 |
 | *Tokio: An Asynchronous Rust Runtime* | tokio.rs Team | 协作式调度 + work-stealing | tokio 的调度理论 |
 | *Rustls: Modern TLS in Rust* | rustls 团队 | 内存安全（Memory Safety） TLS | 替代 OpenSSL 的工程实践 |
@@ -688,7 +688,7 @@ graph TD
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | 所有权 / Drop | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | RAII 资源管理根基 |
-| Trait 系统 | [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) | derive 宏 + 接口抽象 |
+| Trait 系统 | [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) | derive 宏（Macro） + 接口抽象 |
 | 泛型 | [`../02_intermediate/01_generics/02_generics.md`](../../02_intermediate/01_generics/02_generics.md) | 零成本抽象（Zero-Cost Abstraction） |
 | 异步（Async）编程 | [`../03_advanced/01_async/02_async.md`](../../03_advanced/01_async/02_async.md) | tokio/axum 根基 |
 | Unsafe | [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md) | FFI/密码学边界 |
@@ -1268,7 +1268,7 @@ async fn tokio_task() {
 }
 ```
 
-> **修正**: `tokio::sync::mpsc` 的 `send`/`recv` 是异步方法，底层依赖 tokio 的 reactor（epoll/kqueue/IOCP）进行任务唤醒。在 Tokio 或 smol 的 runtime 上调用 tokio channel，可能导致任务永不唤醒（deadlock）或 panic。跨 runtime 的互操作性是 Rust 异步生态的分裂点：1) 计算型 future（无 I/O）可跨 runtime 使用；2) I/O 和定时器必须匹配 runtime；3) `async-compat` crate 提供适配层，但有开销。这与 Go 的单一 runtime（所有 goroutine 由 Go scheduler 管理）或 JavaScript 的单一事件循环不同——Rust 的异步生态允许多个 runtime 竞争，但要求开发者明确选择和隔离。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Tokio Documentation](https://docs.rs/Tokio/)]
+> **修正**: `tokio::sync::mpsc` 的 `send`/`recv` 是异步（Async）方法，底层依赖 tokio 的 reactor（epoll/kqueue/IOCP）进行任务唤醒。在 Tokio 或 smol 的 runtime 上调用 tokio channel，可能导致任务永不唤醒（deadlock）或 panic。跨 runtime 的互操作性是 Rust 异步生态的分裂点：1) 计算型 future（无 I/O）可跨 runtime 使用；2) I/O 和定时器必须匹配 runtime；3) `async-compat` crate 提供适配层，但有开销。这与 Go 的单一 runtime（所有 goroutine 由 Go scheduler 管理）或 JavaScript 的单一事件循环不同——Rust 的异步生态允许多个 runtime 竞争，但要求开发者明确选择和隔离。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Tokio Documentation](https://docs.rs/Tokio/)]
 
 ### 10.5 边界测试：`rayon` 的线程池饥饿与任务粒度（运行时性能下降）
 

@@ -111,7 +111,7 @@ Rust 宏 hygiene:
 | **C** | `#define` | ❌ 文本替换 | ❌ 无 | 文本 |
 | **C++** | 模板 + 宏（Macro） | ⚠️ 部分 | ⚠️ 复杂错误 | AST（模板） |
 | **Lisp** | 宏（Macro）（代码即数据） | ✅ 符号隔离 | ⚠️ 展开后检查 | S-expression |
-| **Nim** | 宏 + 模板 | ✅ 卫生 | ✅ 编译期执行 | AST |
+| **Nim** | 宏（Macro） + 模板 | ✅ 卫生 | ✅ 编译期执行 | AST |
 
 ### 2.3 宏展开在编译管道中的位置
 >
@@ -403,7 +403,7 @@ graph TD
 
 **不可跨越的边界**（Rust Reference: Macros · [RFC 1584](https://rust-lang.github.io/rfcs//1584-macros.html)）：
 
-1. **宏无法做类型推断（Type Inference）** — 过程宏接收未类型化的 `TokenStream`；`macro_rules!` 的 `:expr` / `:ty` 只匹配语法形态，不携带语义类型。
+1. **宏无法做类型推断（Type Inference）** — 过程宏（Procedural Macro）接收未类型化的 `TokenStream`；`macro_rules!` 的 `:expr` / `:ty` 只匹配语法形态，不携带语义类型。
 2. **宏无法做重载** — 宏匹配基于语法模式（token 结构），无法像 C++ 模板那样根据类型特化。
 3. **宏的"类型安全"是语法级的** — 宏保证输出合法 Token 序列，但不保证语义合法；类型安全由编译器后续阶段保证。 [来源: [Rust Reference: Macros] · [RFC 1584](https://rust-lang.github.io/rfcs/1584-macros.html)]
 
@@ -724,7 +724,7 @@ graph TD
 
 > **直觉困惑**: "复制粘贴最快，为什么要学宏这么复杂的东西？"
 
-**概念解答**: DRY（Don't Repeat Yourself）不仅是代码行数问题，更是**语义一致性**问题。当同一模式在 10 处重复时，任何修改都面临"漏改一处"的风险。泛型（Generics）解决类型层面的重复，宏解决语法模式层面的重复。
+**概念解答**: DRY（Don't Repeat Yourself）不仅是代码行数问题，更是**语义一致性（Coherence）**问题。当同一模式在 10 处重复时，任何修改都面临"漏改一处"的风险。泛型（Generics）解决类型层面的重复，宏解决语法模式层面的重复。
 
 ```rust
 // 反面: 重复代码
@@ -1901,7 +1901,7 @@ fn foo() {}
 | 遍历/修改函数体内部 AST 节点 | ✅ | ❌ | `syn::Fold` 或手动替换 `stmts`；声明宏（Declarative Macro）只能做 token 模式匹配 |
 | 生成带 hygiene 的唯一标识符 | ✅ | ✅ | 二者均基于编译器 hygiene 机制，内部变量不污染外部 |
 | 在函数前后注入代码并保留签名 | ✅ | ⚠️ 极困难 | 声明宏（Declarative Macro）可包裹表达式，但无法可靠包裹 item 并保留完整签名 |
-| 操作任意 item（fn / struct / impl / mod） | ✅ | ❌ | 属性宏接收完整 item TokenStream；声明宏仅匹配 token 树片段 |
+| 操作任意 item（fn / struct / impl / mod） | ✅ | ❌ | 属性宏接收完整 item TokenStream；声明宏（Declarative Macro）仅匹配 token 树片段 |
 | 编译错误定位到宏参数具体位置 | ✅（`Span`） | ⚠️ 有限 | `proc_macro_error2` 提供精确 Span；声明宏错误指向宏调用处 |
 | 代码可读性 / 可维护性 | ⚠️ 需学习 syn/quote | ✅ 简单直观 | 声明宏语法更简洁，但能力天花板显著低于过程宏 |
 
@@ -1938,7 +1938,7 @@ macro_rules! trace_fn {
 > **[The Little Book of Rust Macros](https://veykril.github.io/tlborm/)** `macro_rules!` 的片段分类器（`expr`、`ty`、`ident`、`path` 等）匹配语法范畴而非语义实体。对于函数定义这类结构复杂、分支众多的语法结构，声明宏的模式匹配能力迅速耗尽，这正是过程宏的设计动机。✅ 已验证
 > **[Rust Reference: Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html)** 声明宏不支持递归下降解析复杂语法结构（如完整函数签名含泛型（Generics）与 where 子句），也无法在匹配后对内部节点做结构化遍历。✅ 已验证
 > **[RFC 1566: Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)** 过程宏被引入的核心动机之一，正是弥补 `macro_rules!` 在复杂 AST 变换场景下的能力缺口。✅ 已验证
-> **跨层映射**: 本文件属性宏示例 ↔ [`01_foundation/02_type_system/04_type_system.md`](../../01_foundation/02_type_system/04_type_system.md) § 泛型与 trait bound（签名保留中的泛型参数）
+> **跨层映射**: 本文件属性宏示例 ↔ [`01_foundation/02_type_system/04_type_system.md`](../../01_foundation/02_type_system/04_type_system.md) § 泛型（Generics）与 trait bound（签名保留中的泛型参数）
 > **跨层映射**: 本文件 `Fold` trait ↔ [`04_formal/02_type_theory.md`](../../04_formal/00_type_theory/02_type_theory.md) § 语法树归纳定义（AST 递归结构的归纳遍历）
 
 ---

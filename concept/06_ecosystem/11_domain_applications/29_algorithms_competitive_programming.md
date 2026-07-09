@@ -1114,7 +1114,7 @@ let even_squares: Vec<_> = nums.iter()
 | **集合类型** | `Vec`、`HashMap`、`BTreeMap`、`HashSet`；选型看访问模式 |
 | **迭代器（Iterator）** | `iter()`/`into_iter()`/`iter_mut()`；适配器 `map`/`filter`/`fold` |
 | **算法复杂度** | O(1)、O(log n)、O(n)；排序、搜索、图算法 |
-| **Rust 特色** | 零成本抽象（Zero-Cost Abstraction）；迭代器惰性求值；`sort_unstable` 等 |
+| **Rust 特色** | 零成本抽象（Zero-Cost Abstraction）；迭代器（Iterator）惰性求值；`sort_unstable` 等 |
 
 ### 常见坑与解决
 

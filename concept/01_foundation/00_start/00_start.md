@@ -22,10 +22,10 @@
 > **认知路径**: 本节从 "Rust 起步指南" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
 
 1. **问题识别**: 为什么 Rust 需要一套专门的起步流程？它与编译型、垃圾回收型语言在项目结构和工具链上有何不同？
-2. **概念建立**: 掌握 `rustup`、`cargo`、`rustc` 的角色，理解 crate、模块、依赖与版本控制的基本关系。
+2. **概念建立**: 掌握 `rustup`、`cargo`、`rustc` 的角色，理解 crate、模块（Module）、依赖与版本控制的基本关系。
 3. **机制推理**: 通过 ⟹ 定理链将安装、构建、测试、文档生成串联为可重复的开发工作流。
 4. **边界辨析**: 借助反命题/反例理解 `stable`/`nightly` 通道、单 crate 与 workspace 等常见选择误区。
-5. **迁移应用**: 将起步知识与 [所有权](../01_ownership_borrow_lifetime/01_ownership.md)、[类型系统](../02_type_system/04_type_system.md)、[错误处理](../08_error_handling/32_error_handling_basics.md) 等后置概念链接。
+5. **迁移应用**: 将起步知识与 [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md)、[类型系统（Type System）](../02_type_system/04_type_system.md)、[错误处理（Error Handling）](../08_error_handling/32_error_handling_basics.md) 等后置概念链接。
 
 ---
 
@@ -193,7 +193,7 @@ flowchart TD
 完成安装后，进入 Rust 最核心的概念：
 
 1. [所有权与移动语义](../01_ownership_borrow_lifetime/01_ownership.md)
-2. [借用与引用](../01_ownership_borrow_lifetime/02_borrowing.md)
+2. [借用（Borrowing）与引用（Reference）](../01_ownership_borrow_lifetime/02_borrowing.md)
 3. [类型系统](../02_type_system/04_type_system.md)
 
 随后再学习 [模块系统](../07_modules_and_items/11_modules_and_paths.md)、[错误处理](../08_error_handling/32_error_handling_basics.md) 与 [测试](../10_testing_basics/16_testing_basics.md)。

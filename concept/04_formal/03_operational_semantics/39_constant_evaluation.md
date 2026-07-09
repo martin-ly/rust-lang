@@ -145,7 +145,7 @@ struct Buffer<const N: usize> {
 let b = Buffer::<1024> { data: [0; 1024] };
 ```
 
-const 泛型参数本身必须是常量表达式。
+const 泛型（Generics）参数本身必须是常量表达式。
 
 ## 七、常量求值中的 unsafe
 

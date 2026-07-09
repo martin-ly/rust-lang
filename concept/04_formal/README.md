@@ -257,7 +257,7 @@ L4 → L1 映射中的信息损失:
 
 | 定理 | 前提 | 结论 | 依赖的公理 | 失效条件 | 验证工具 |
 |:---|:---|:---|:---|:---|:---|
-| 线性资源 ⟹ 所有权安全 | 线性逻辑证明系统 | 无 use-after-move | 线性逻辑 ⊗ 规则 | 允许 weakening（Copy） | 逻辑推导 |
+| 线性资源 ⟹ 所有权（Ownership）安全 | 线性逻辑证明系统 | 无 use-after-move | 线性逻辑 ⊗ 规则 | 允许 weakening（Copy） | 逻辑推导 |
 | 区域约束可满足 ⟹ 无悬垂指针 | 区域偏序约束 | 所有引用（Reference）合法 | Tofte-Talpin 区域类型 | HRTB 不可判定片段 | 约束求解器 |
 | 分数权限 ⟹ AXM | 分离逻辑框架 | &T 与 &mut T 不共存 | 分数权限分配规则 | UnsafeCell 绕过 | Iris 证明助手 |
 | RustBelt ⟹ Safe Rust 无数据竞争 | λRust 操作语义 | 所有 safe 程序安全 | Iris 高阶分离逻辑 | unsafe 块、FFI | Coq 证明 |

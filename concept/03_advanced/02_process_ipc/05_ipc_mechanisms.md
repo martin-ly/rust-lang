@@ -129,7 +129,7 @@ fn shared_memory() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 8. 信号处理
 
-Unix 信号用于通知进程异步事件。Rust 中常用 `signal-hook` 或 `tokio::signal`：
+Unix 信号用于通知进程异步（Async）事件。Rust 中常用 `signal-hook` 或 `tokio::signal`：
 
 ```rust
 use signal_hook::iterator::Signals;
@@ -185,7 +185,7 @@ fn handle_signals() -> Result<(), Box<dyn std::error::Error>> {
 
 - [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [并发模型](../00_concurrency/01_concurrency.md)
-- [原子操作与内存序](../00_concurrency/11_atomics_and_memory_ordering.md)
+- [原子操作（Atomic Operations）与内存序](../00_concurrency/11_atomics_and_memory_ordering.md)
 - [Rust 网络编程](../06_low_level_patterns/18_network_programming.md)
 
 ---

@@ -1224,7 +1224,7 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 |:---|:---|:---|
 | 设计目标 | 极致代码优化（release） | 快速编译（debug） |
 | 编译时间 | 基准 | **2-5× 更快**（debug 构建） |
-| 运行时性能 | 高（Aggressive 优化管线） | 中等（基础优化） |
+| 运行时（Runtime）性能 | 高（Aggressive 优化管线） | 中等（基础优化） |
 | 支持的架构 | x86_64、ARM、AArch64、RISC-V、WASM 等 | x86_64、AArch64（逐步扩展） |
 | 增量编译支持 | 成熟 | 实验性 |
 | LTO / PGO | 完整支持 | 不支持（debug 场景不需要） |
@@ -1397,7 +1397,7 @@ graph TD
     T3 --> E3["后果：开发者减少重构意愿<br/>技术债固化"]
 ```
 
-> **认知功能**: 此图论证工具链选择通过 lint 规则、格式一致性、IDE 体验三条路径影响代码质量，建议在项目启动阶段统一 Clippy 规则和 rustfmt 配置；宽松 lint 和缓慢 IDE 响应会隐性降低重构意愿，导致技术债长期固化。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> **认知功能**: 此图论证工具链选择通过 lint 规则、格式一致性（Coherence）、IDE 体验三条路径影响代码质量，建议在项目启动阶段统一 Clippy 规则和 rustfmt 配置；宽松 lint 和缓慢 IDE 响应会隐性降低重构意愿，导致技术债长期固化。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **层次一致性**：反命题决策树是 L6 生态工程的"批判性思维"层；其根节点均为常见误区，叶节点指向 L1-L3 的具体技术后果。
 
 ---

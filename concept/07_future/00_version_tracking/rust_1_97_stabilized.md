@@ -150,7 +150,7 @@ cargo build
 |:---|:---|:---|
 | `#[must_use]` 扩展 | 可能产生新的 lint | 检查 CI 中的新 warning |
 | 空 `export_name` 被拒绝 | 非法属性现在报错 | 移除或修正空 `export_name` |
-| `pin!` 宏阻止隐式 deref | 部分代码可能需要显式解引用 | 参考 Rust 1.97 Release Notes |
+| `pin!` 宏（Macro）阻止隐式 deref | 部分代码可能需要显式解引用（Reference） | 参考 Rust 1.97 Release Notes |
 
 ---
 

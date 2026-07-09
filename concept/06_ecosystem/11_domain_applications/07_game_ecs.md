@@ -337,7 +337,7 @@ graph TD
 ```
 
 > **认知功能**: 此调度图展示了 Bevy 的帧阶段流水线与 System 依赖关系——Update 阶段内的 System Set 按 Query 签名自动分析冲突并并行执行。建议将高频 System 注册到同一阶段，利用无冲突 Query 的自动并行提升吞吐。关键洞察：`&mut T` 与 `&T` 的互斥/共享关系直接映射到 System 的串行/并行调度，借用（Borrowing）检查器成为调度器的形式化验证后端。[💡 原创分析](../../00_meta/00_framework/methodology.md)
-> **Bevy 调度安全**: 默认并行调度器在**编译期**收集所有 System 的 `Query` 签名，在**运行期**构建依赖图。`&mut T` vs `&T` 的冲突分析由 Rust 借用检查器保证，跨线程调度由 `Send` / `Sync` 保证。
+> **Bevy 调度安全**: 默认并行调度器在**编译期**收集所有 System 的 `Query` 签名，在**运行期**构建依赖图。`&mut T` vs `&T` 的冲突分析由 Rust 借用（Borrowing）检查器保证，跨线程调度由 `Send` / `Sync` 保证。
 
 ### 2.3 wgpu：跨平台 GPU 抽象与所有权
 
@@ -380,7 +380,7 @@ queue.submit(std::iter::once(encoder.finish()));
 | **`no_std`（无 `alloc`）** | 无全局分配器；仅栈与静态存储 | 所有实体/组件数量必须在编译期确定；使用 `MaybeUninit` 数组或 `heapless` 容器 | Cortex-M0/M0+、GBA、Playdate |
 | **`no_std` + `alloc`** | 有全局分配器，但无 `std` 的 OS 抽象 | 可使用 `Box`、`Vec`、自定义分配器；但需避免碎片与 OOM | ESP32、RG35XX（Linux）、PocketCHIP |
 
-> **核心约束**: 在无 `alloc` 的极致场景下，ECS 的 `World` 不再能动态增长。实体数量上限、组件类型组合、系统执行顺序都需在编译期或启动期固化。这与 [L1 所有权模型](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 中的"资源必须显式拥有"形成强烈共鸣——动态分配的自由被剥夺后，所有权的静态化成为唯一选择。
+> **核心约束**: 在无 `alloc` 的极致场景下，ECS 的 `World` 不再能动态增长。实体数量上限、组件类型组合、系统执行顺序都需在编译期或启动期固化。这与 [L1 所有权（Ownership）模型](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 中的"资源必须显式拥有"形成强烈共鸣——动态分配的自由被剥夺后，所有权的静态化成为唯一选择。
 
 #### 2.4.2 掌机平台 Rust 游戏开发现状
 
@@ -1146,9 +1146,9 @@ struct ChildOf {
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Component 生命周期与资源管理 |
+| 所有权 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Component 生命周期（Lifetimes）与资源管理 |
 | 借用检查 | [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | System 调度冲突检测同构 |
-| 生命周期 | [`../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | Entity 引用跨 System 有效性 |
+| 生命周期 | [`../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | Entity 引用（Reference）跨 System 有效性 |
 | Trait 系统 | [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) | `Component` / `SystemParam` derive |
 | 泛型（Generics） | `../02_intermediate/01_generics/02_generics.md` | `Query<Q>` 的零成本抽象（Zero-Cost Abstraction） |
 | 并发 | [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md) | `Send`/`Sync` 在多线程循环中的保证 |
@@ -1235,7 +1235,7 @@ fn fixed_system(mut query: Query<&mut Health>) {
 }
 ```
 
-> **修正**: Bevy 的系统函数在编译期检查 Query 的兼容性——两个返回相同组件可变引用（Mutable Reference）的 Query 不能同时存在。`ParamSet` 允许顺序访问冲突的 Query，确保运行时不会同时持有同一组件的多个可变引用。这是 Rust 借用检查器在 ECS 架构中的延伸——编译期保证无数据竞争，即使在高并发游戏循环中。来源: [Bevy Documentation]
+> **修正**: Bevy 的系统函数在编译期检查 Query 的兼容性——两个返回相同组件可变引用（Mutable Reference）的 Query 不能同时存在。`ParamSet` 允许顺序访问冲突的 Query，确保运行时（Runtime）不会同时持有同一组件的多个可变引用。这是 Rust 借用检查器在 ECS 架构中的延伸——编译期保证无数据竞争，即使在高并发游戏循环中。来源: [Bevy Documentation]
 
 ### 10.3 边界测试：ECS 的 archetype 变更与引用失效（运行时 panic）
 

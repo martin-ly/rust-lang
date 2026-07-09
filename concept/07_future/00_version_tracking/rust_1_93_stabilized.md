@@ -122,7 +122,7 @@ println!("{}", f);
 | `MaybeUninit` 批量写入 | 无 | `write_copy_of_slice` / `write_clone_of_slice` | 持续扩展 |
 | `String`/`Vec` 原始部分 | 无 | `into_raw_parts` 稳定 | — |
 | `VecDeque` 条件弹出 | 无 | `pop_front_if` / `pop_back_if` | — |
-| 切片转数组 | 手动 `try_into` | `as_array` / `as_mut_array` | — |
+| 切片（Slice）转数组 | 手动 `try_into` | `as_array` / `as_mut_array` | — |
 | 高精度 Duration | 64 位纳秒 | `from_nanos_u128` | — |
 
 ## 五、WebAssembly 与嵌入式影响
@@ -146,7 +146,7 @@ pub extern "C" fn allocate_string() -> *mut u8 {
 ## 六、迁移提示
 
 - 使用 `MaybeUninit::write_copy_of_slice` 替代手动循环写入，可减少 unsafe 代码量。
-- `String`/`Vec::into_raw_parts` 与 `from_raw_parts` 配对使用，注意所有权与容量一致性（Coherence）。
+- `String`/`Vec::into_raw_parts` 与 `from_raw_parts` 配对使用，注意所有权（Ownership）与容量一致性（Coherence）。
 - `as_array` 返回 `Option`，避免手动长度检查与 `try_into` 转换。
 - 在 `no_std` 环境中，`write_copy_of_slice` 等 API 可直接在 `core` 中使用。
 

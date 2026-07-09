@@ -39,7 +39,7 @@
 
 ---
 
-> **定理 1** [Tier 1]: `impl Type { ... }` 将方法绑定到类型 ⟹ 方法第一个参数 `self` / `&self` / `&mut self` 决定调用时的所有权转移或借用。
+> **定理 1** [Tier 1]: `impl Type { ... }` 将方法绑定到类型 ⟹ 方法第一个参数 `self` / `&self` / `&mut self` 决定调用时的所有权（Ownership）转移或借用（Borrowing）。
 >
 > **定理 2** [Tier 1]: 关联函数无 `self` 参数 ⟹ 通常用作构造函数，通过 `Type::func()` 调用，不依赖实例。
 >
@@ -117,7 +117,7 @@ fn main() {
 |:---|:---|:---|
 | `self` | `obj.method()` | 获取所有权 |
 | `&self` | `obj.method()` | 不可变借用（Immutable Borrow） |
-| `&mut self` | `obj.method()` | 可变借用 |
+| `&mut self` | `obj.method()` | 可变借用（Mutable Borrow） |
 
 ```rust
 impl String {

@@ -158,7 +158,7 @@ counter.update(Ordering::Relaxed, Ordering::Relaxed, |current| current + 1);
 
 稳定版本：**1.95.0**
 
-`Vec::push_mut` / `insert_mut`、`VecDeque::push_front_mut` / `push_back_mut` / `insert_mut`、`LinkedList::push_front_mut` / `push_back_mut` 返回新插入元素的可变引用（Reference）。
+`Vec::push_mut` / `insert_mut`、`VecDeque::push_front_mut` / `push_back_mut` / `insert_mut`、`LinkedList::push_front_mut` / `push_back_mut` 返回新插入元素的可变引用（Mutable Reference）。
 
 ```rust
 use std::collections::{VecDeque, LinkedList};

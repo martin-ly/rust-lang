@@ -53,7 +53,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 与 JavaScript 的编译错误对比](#十边界测试rust-与-javascript-的编译错误对比)
     - [10.1 边界测试：JavaScript 的隐式转换 vs Rust 的显式转换（编译错误）](#101-边界测试javascript-的隐式转换-vs-rust-的显式转换编译错误)
-    - [10.2 边界测试：JavaScript 的闭包（Closures）变量捕获与 Rust 的所有权（编译错误）](#102-边界测试javascript-的闭包变量捕获与-rust-的所有权编译错误)
+    - [10.2 边界测试：JavaScript 的闭包（Closures）变量捕获与 Rust 的所有权（Ownership）（编译错误）](#102-边界测试javascript-的闭包变量捕获与-rust-的所有权编译错误)
     - [10.3 边界测试：JavaScript 的 `this` 动态绑定与 Rust 的方法调用（编译错误）](#103-边界测试javascript-的-this-动态绑定与-rust-的方法调用编译错误)
     - [10.4 边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译错误）](#104-边界测试javascript-的弱类型与-rust-的强制类型编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -185,7 +185,7 @@ graph LR
 
 > **认知功能**: 此图展示 Rust 和 JavaScript 的**内存模型差异**及 WASM 的**桥梁作用**。Rust 的确定性内存管理与 JS 的 GC 在 WASM 中通过线性内存交互。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
-> **关键洞察**: WASM 是 Rust 和 JavaScript **共存的运行时**——Rust 编译为 WASM 模块（Module），JS 通过 JS API 调用，两者共享线性内存。
+> **关键洞察**: WASM 是 Rust 和 JavaScript **共存的运行时（Runtime）**——Rust 编译为 WASM 模块（Module），JS 通过 JS API 调用，两者共享线性内存。
 > [来源: [WASM Memory Model](https://webassembly.github.io/spec/core/syntax/modules.html#memories)]
 
 ---

@@ -337,7 +337,7 @@ fn main() {
 - `Iterator` 用关联类型：每个集合类型只有一种迭代元素类型
 - `Add` 用泛型（Generics）参数：一个类型可以与多种类型相加（`i32 + i32`、`i32 + f64`）
 
-**知识点**：关联类型减少泛型参数的冗余，使 trait 方法签名更简洁。[→ 高级 Trait 详解](../00_traits/19_advanced_traits.md)
+**知识点**：关联类型减少泛型（Generics）参数的冗余，使 trait 方法签名更简洁。[→ 高级 Trait 详解](../00_traits/19_advanced_traits.md)
 
 </details>
 

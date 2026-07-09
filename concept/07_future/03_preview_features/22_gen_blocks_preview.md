@@ -383,7 +383,7 @@ graph LR
 | 返回类型 | `impl Iterator` | `impl Stream` | `impl Future` |
 | 挂起点 | `yield` | `yield` / `.await` | `.await` |
 | 恢复触发 | `next()` 调用 | `next().await` | Future 完成 |
-| 用例 | 惰性序列 | 异步流 | 异步任务 |
+| 用例 | 惰性序列 | 异步（Async）流 | 异步任务 |
 | 稳定状态 | 🟡 nightly | 🟡 nightly | ✅ stable |
 
 > **对比要点**: `async gen` 是 `gen` 和 `async` 的**正交组合**——它既可以在 `yield` 点挂起返回值，也可以在 `.await` 点挂起等待异步事件。
@@ -625,7 +625,7 @@ fn self_referential_gen() -> impl Iterator<Item = &str> {
 > 3) 若必须自引用（Reference），返回 `Pin<Box<dyn Iterator>>`（复杂且 API 不友好）。
 >
 > 这与 `async` 块的自引用（Reference）问题相同——`async fn` 自动处理 `Pin`，但 `gen` 块的返回类型设计仍在演进。
-> `gen` 块的简化目标（消除手写 Iterator 的样板）与自引用的复杂性形成张力。
+> `gen` 块的简化目标（消除手写 Iterator 的样板）与自引用（Reference）的复杂性形成张力。
 > [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
@@ -681,7 +681,7 @@ fn early_return() -> impl Iterator<Item = i32> {
 <details>
 <summary>✅ 答案与解析</summary>
 
-1) 手写迭代器状态机繁琐；2) `async fn` 不能 `yield`；3) 生成器（Generator）语法不稳定。`gen` 提供类似 Python generator 的简洁语法。
+1) 手写迭代器（Iterator）状态机繁琐；2) `async fn` 不能 `yield`；3) 生成器（Generator）语法不稳定。`gen` 提供类似 Python generator 的简洁语法。
 
 </details>
 

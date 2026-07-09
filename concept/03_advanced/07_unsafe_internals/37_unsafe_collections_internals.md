@@ -54,7 +54,7 @@
   - [四、示例与反例](#四示例与反例)
     - [4.1 正确示例：手动实现 Vec 的 pop](#41-正确示例手动实现-vec-的-pop)
     - [4.2 反例：读取未初始化内存](#42-反例读取未初始化内存)
-    - [4.3 反例：Arc 引用计数管理错误](#43-反例arc-引用计数管理错误)
+    - [4.3 反例：Arc 引用（Reference）计数管理错误](#43-反例arc-引用计数管理错误)
   - [五、反命题与边界分析](#五反命题与边界分析)
     - [5.1 反命题树](#51-反命题树)
     - [5.2 边界极限](#52-边界极限)
@@ -208,7 +208,7 @@ impl<T> Drop for MyArc<T> {
 }
 ```
 
-> **关键洞察**: `Arc` 使用原子引用计数管理共享所有权。`Release`/`Acquire` 内存序保证 drop 时能看到之前所有对数据的写入。
+> **关键洞察**: `Arc` 使用原子引用计数管理共享所有权（Ownership）。`Release`/`Acquire` 内存序保证 drop 时能看到之前所有对数据的写入。
 > [来源: [The Rustonomicon — Arc and Mutex](https://doc.rust-lang.org/nomicon/arc-mutex.html)]
 
 ### 3.3 Mutex 的核心结构
@@ -280,7 +280,7 @@ fn main() {
 }
 ```
 
-> **错误诊断**: 代码可编译，但运行时行为未定义。
+> **错误诊断**: 代码可编译，但运行时（Runtime）行为未定义。
 > **修正**: 使用 `ptr::write` 初始化后再读取。
 > [来源: [Unsafe Code Guidelines — Validity of References](https://rust-lang.github.io/unsafe-code-guidelines/reference/types/reference.html)]
 
@@ -314,7 +314,7 @@ impl<T> Clone for BadArc<T> {
 
 > **反命题 1**: "实现 Vec 只需要普通引用" ⟹ 不成立。未初始化内存无法通过 safe 引用表达，必须使用原始指针（Raw Pointer）。
 > **反命题 2**: "Arc 的引用计数可以用普通 `usize`" ⟹ 不成立。多线程共享需要 `AtomicUsize` 和正确的内存序。
-> **反命题 3**: "Mutex 可以不使用 unsafe" ⟹ 不成立。`Mutex` 内部必须使用 `UnsafeCell` 打破借用规则。
+> **反命题 3**: "Mutex 可以不使用 unsafe" ⟹ 不成立。`Mutex` 内部必须使用 `UnsafeCell` 打破借用（Borrowing）规则。
 > **反命题 4**: "unsafe 集合的实现不需要考虑 Drop" ⟹ 不成立。必须精确追踪哪些元素已初始化，避免 double drop 或 leak。
 
 ### 5.2 边界极限
@@ -477,7 +477,7 @@ D. `Ordering::SeqCst`
 >
 > 1. **问题识别**: 标准集合如何在 unsafe 之上保证安全？
 > 2. **概念建立**: Vec 管理未初始化内存；Arc 管理共享所有权；Mutex 管理运行时互斥。
-> 3. **机制推理**: 原始指针、Layout、Drop 语义、原子操作、内存序。
+> 3. **机制推理**: 原始指针（Raw Pointer）、Layout、Drop 语义、原子操作（Atomic Operations）、内存序。
 > 4. **边界辨析**: safe 抽象与 unsafe 实现的边界；何时需要手写 unsafe 集合。
 > 5. **迁移应用**: 使用 Miri 验证 unsafe 代码；在必要时实现自定义集合。
 

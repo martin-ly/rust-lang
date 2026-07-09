@@ -8,7 +8,7 @@
 > **Bloom 层级**: 记忆 → 理解 → 应用
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: F×App — 掌握模块（Module）路径的引入与重导出机制
-> **定位**: 系统讲解 `use` 声明的语法、作用域规则、重导出与 glob 导入，帮助学习者建立清晰的模块命名空间心智模型。
+> **定位**: 系统讲解 `use` 声明的语法、作用域规则、重导出与 glob 导入，帮助学习者建立清晰的模块（Module）命名空间心智模型。
 > **前置概念**: [Modules and Paths](11_modules_and_paths.md) · [Items](39_items.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
 > **后置概念**: [Preludes](35_preludes.md) · [API Naming Conventions](../../02_intermediate/05_modules_and_visibility/22_api_naming_conventions.md)
 >

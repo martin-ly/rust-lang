@@ -33,7 +33,7 @@
 type MyIter = impl Iterator<Item = i32>;
 ```
 
-这样，`MyIter` 对外只暴露 `Iterator<Item = i32>` 的能力，内部具体类型由编译器在模块边界内唯一确定。自 **Rust 1.75.0** 起，TAIT 在 stable 上可用，主要覆盖关联类型和模块级类型别名。
+这样，`MyIter` 对外只暴露 `Iterator<Item = i32>` 的能力，内部具体类型由编译器在模块（Module）边界内唯一确定。自 **Rust 1.75.0** 起，TAIT 在 stable 上可用，主要覆盖关联类型和模块级类型别名。
 
 ---
 
@@ -104,10 +104,10 @@ impl Iterator for Counter {
 
 ### 3.1 迁移建议
 
-1. **优先在库 API 中使用 TAIT**：隐藏内部迭代器、解析器、状态机等复杂类型；
+1. **优先在库 API 中使用 TAIT**：隐藏内部迭代器（Iterator）、解析器、状态机等复杂类型；
 2. **不要用 TAIT 隐藏生命周期（Lifetimes）**：TAIT 不能替代正确的 lifetime 标注；
 3. **注意版本门槛**：TAIT 要求 Rust 1.75.0+，若需支持旧版本仍应使用 `Box<dyn>`；
-4. **避免递归定义**：TAIT 不支持自引用或无限递归类型，需要时改用 `Box` 或显式 GAT。
+4. **避免递归定义**：TAIT 不支持自引用（Reference）或无限递归类型，需要时改用 `Box` 或显式 GAT。
 
 ---
 

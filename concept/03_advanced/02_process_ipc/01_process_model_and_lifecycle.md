@@ -47,7 +47,7 @@ Rust 采用 1:1 进程模型映射到操作系统进程，核心类型包括：
 
 ### 2.1 进程状态机
 
-典型进程生命周期：
+典型进程生命周期（Lifetimes）：
 
 ```text
 Created → Running → (Waiting →)* → Terminated
@@ -62,14 +62,14 @@ Created → Running → (Waiting →)* → Terminated
 
 现代 Rust 异步（Async）运行时（Runtime）（如 Tokio）提供 `tokio::process::Command`，支持：
 
-- 异步等待子进程完成。
+- 异步（Async）等待子进程完成。
 - 超时控制与自动清理。
 - 并发管理多个子进程。
 
 ### 2.3 资源自动释放
 
 - `Child` 实现 `Drop` trait，析构时自动释放系统资源（文件描述符、内存等）。
-- 即使子进程崩溃，父进程不会受内存安全威胁，所有错误通过 `Result` 类型显式处理。
+- 即使子进程崩溃，父进程不会受内存安全（Memory Safety）威胁，所有错误通过 `Result` 类型显式处理。
 
 ---
 
@@ -100,11 +100,11 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 
 ## 4. Rust 的进程安全抽象
 
-> **L2 向下引用（Reference）**: 进程安全抽象建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md) 与 [L2 错误处理](../../02_intermediate/03_error_handling/04_error_handling.md) 之上。
+> **L2 向下引用（Reference）**: 进程安全抽象建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md) 与 [L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 之上。
 
 ### 4.1 类型安全保证
 
-- 进程 I/O 管道通过 `Option<ChildStdin>`、`Option<ChildStdout>`、`Option<ChildStderr>` 暴露，所有权确保每个管道只被消费一次。
+- 进程 I/O 管道通过 `Option<ChildStdin>`、`Option<ChildStdout>`、`Option<ChildStderr>` 暴露，所有权（Ownership）确保每个管道只被消费一次。
 - 所有系统调用错误通过 `Result` 传播。
 
 ### 4.2 错误处理机制
@@ -129,7 +129,7 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 
 ### 5.1 Tokio 异步进程
 
-`tokio::process::Command` 提供与 Tokio 运行时集成的异步进程管理能力，支持异步读写和超时。
+`tokio::process::Command` 提供与 Tokio 运行时（Runtime）集成的异步进程管理能力，支持异步读写和超时。
 
 ### 5.2 Duct 进程组合
 

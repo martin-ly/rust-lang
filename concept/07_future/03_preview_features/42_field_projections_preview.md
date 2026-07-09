@@ -50,7 +50,7 @@
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Pinned field projections 解决的是什么问题？（理解层）](#测验-1pinned-field-projections-解决的是什么问题理解层)
-    - [测验 2：为什么自引用结构体（Struct）的字段投影是 unsafe 的？（理解层）](#测验-2为什么自引用结构体的字段投影是-unsafe-的理解层)
+    - [测验 2：为什么自引用（Reference）结构体（Struct）的字段投影是 unsafe 的？（理解层）](#测验-2为什么自引用结构体的字段投影是-unsafe-的理解层)
     - [测验 3：`pin-project` crate 目前如何解决这个问题？（理解层）](#测验-3pin-project-crate-目前如何解决这个问题理解层)
     - [测验 4：语言级 field projection 支持对 `async fn` 有什么帮助？（理解层）](#测验-4语言级-field-projection-支持对-async-fn-有什么帮助理解层)
     - [测验 5：这个特性目前的实现状态如何？（理解层）](#测验-5这个特性目前的实现状态如何理解层)
@@ -326,7 +326,7 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 
 ### 测验 2：为什么自引用结构体的字段投影是 unsafe 的？（理解层）
 
-**题目**: 为什么自引用结构体的字段投影是 unsafe 的？
+**题目**: 为什么自引用结构体（Struct）的字段投影是 unsafe 的？
 
 <details>
 <summary>✅ 答案与解析</summary>

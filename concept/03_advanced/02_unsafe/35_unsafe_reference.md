@@ -59,9 +59,9 @@
 4. 访问可变 `static`
 5. 实现 `unsafe` trait
 6. 调用 extern 函数
-7. 使用 `asm!` 内联汇编
+7. 使用 `asm!` 内联汇编（Inline Assembly）
 
-> `unsafe` 块**不**禁用借用检查器；它只放宽上述操作限制。
+> `unsafe` 块**不**禁用借用（Borrowing）检查器；它只放宽上述操作限制。
 
 ```rust
 let mut x = 5;
@@ -89,7 +89,7 @@ unsafe impl Zeroable for u32 {}
 | Trait | 契约 | 实现者责任 |
 |:---|:---|:---|
 | `Send` | 可跨线程转移所有权（Ownership） | 类型在线程间转移是安全的 |
-| `Sync` | 可跨线程共享引用 | 类型在多线程共享引用是安全的 |
+| `Sync` | 可跨线程共享引用（Reference） | 类型在多线程共享引用是安全的 |
 | `GlobalAlloc` | 全局内存分配器 | `alloc`/`dealloc` 行为符合约定 |
 
 ## 四、不被视为 unsafe 的行为
@@ -189,7 +189,7 @@ unsafe 代码必须遵守 Rust 内存模型：
 
 ## 七、Unsafe 与运行时
 
-部分运行时功能依赖 unsafe 实现：
+部分运行时（Runtime）功能依赖 unsafe 实现：
 
 - `#[global_allocator]` 需要 `unsafe impl GlobalAlloc`。
 - `panic_handler` 在 `no_std` 环境中常用 unsafe。

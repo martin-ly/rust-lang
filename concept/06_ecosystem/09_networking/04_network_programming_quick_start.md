@@ -45,7 +45,7 @@ graph LR
 
 ### 路径 2：系统学习（1 周）
 
-- Day 1–2：异步 trait/closure、TCP/UDP 编程。
+- Day 1–2：异步（Async） trait/closure、TCP/UDP 编程。
 - Day 3–4：HTTP 客户端、WebSocket 客户端与 DNS 解析。
 - Day 5：协议对比与技术选型。
 - Day 6–7：综合项目（聊天室、代理或简单网关）。
@@ -256,6 +256,6 @@ flowchart TD
 
 | 定理 | 前提 | 结论 |
 |:---|:---|:---|
-| std 网络 ⟹ 简单性 | 无需额外运行时依赖 | 适合低并发或学习场景 |
+| std 网络 ⟹ 简单性 | 无需额外运行时（Runtime）依赖 | 适合低并发或学习场景 |
 | tokio ⟹ 可扩展性 | 与 async/await 集成 | 适合高并发 I/O 服务 |
 | 示例驱动 ⟹ 降低上手成本 | 从最小可运行代码开始 | 加速学习曲线 |

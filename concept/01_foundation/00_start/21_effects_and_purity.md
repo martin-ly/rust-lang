@@ -190,7 +190,7 @@ increment(&mut x); // 调用者明确知道 x 会被修改
 | 语言 | 副作用表达 | 调用者知情度 |
 |:---|:---|:---|
 | C | `void process(int* x)` | 低 — `x` 可能被修改，也可能只是读取 |
-| C++ | `void process(int& x)` | 中 — 引用语义暗示修改，但不强制 |
+| C++ | `void process(int& x)` | 中 — 引用（Reference）语义暗示修改，但不强制 |
 | Java | `void process(int[] x)` | 低 — 数组内容可能被修改 |
 | Rust | `fn process(x: &mut i32)` | **高** — 编译器强制 `&mut`，且调用者必须写 `&mut x` |
 
@@ -674,7 +674,7 @@ fn main() {
 | 来源 | 与本节对应的核心论点 |
 |:---|:---|
 | [Haskell Wiki — Referential Transparency](https://wiki.haskell.org/Referential_transparency) | 引用透明性的定义与函数式编程实践 |
-| [Pierce — TAPL, §13](https://www.cis.upenn.edu/~bcpierce/tapl/) | 引用类型与副作用的类型系统形式化 |
+| [Pierce — TAPL, §13](https://www.cis.upenn.edu/~bcpierce/tapl/) | 引用类型与副作用的类型系统（Type System）形式化 |
 | [Moggi 1989 — Computational Lambda-Calculus and Monads](https://doi.org/10.1109/LICS.1989.39155) | 通过 monad 结构化计算效果的奠基工作 |
 | [Wadler 1992 — The Essence of Functional Programming](https://doi.org/10.1145/143165.143169) | 将 monad 引入函数式编程以处理 IO 与状态 |
 | [Wadler 1995 — Monads for Functional Programming](https://doi.org/10.1007/3-540-59451-5_2) | monad 作为“可组合效果”的教学推导 |

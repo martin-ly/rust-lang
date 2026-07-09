@@ -451,7 +451,7 @@ shared shared
 **解析**：
 
 - `Rc<T>`（Reference Counted）提供**单线程共享所有权（Ownership）**
-- `Rc::clone(&data)` 不克隆底层数据，仅增加引用计数
+- `Rc::clone(&data)` 不克隆底层数据，仅增加引用（Reference）计数
 - 当最后一个 `Rc` 离开作用域时，引用计数归零，数据被 drop
 
 **限制**：`Rc` 不提供内部可变性。如需修改共享数据，需配合 `RefCell<T>` 或 `Mutex<T>`。

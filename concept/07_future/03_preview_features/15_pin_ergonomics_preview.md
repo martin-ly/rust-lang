@@ -307,5 +307,5 @@ graph TD
 <details>
 <summary>✅ 答案与解析</summary>
 
-`pin` 关键字可能允许直接声明自引用字段（`pin field: T`），编译器自动生成必要的 pinning 保证，无需手动 `Pin` 包装和 unsafe 投影。
+`pin` 关键字可能允许直接声明自引用（Reference）字段（`pin field: T`），编译器自动生成必要的 pinning 保证，无需手动 `Pin` 包装和 unsafe 投影。
 </details>

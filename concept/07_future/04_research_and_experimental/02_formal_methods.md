@@ -394,7 +394,7 @@ Rust 的引用（Reference）类型直接对应分离逻辑中的权限（permis
 2. **无数据竞争**: `&mut T` 的独占性保证了同一时刻至多一个写者；`&T` 的持久性允许多个读者共存
 3. **无 double-free**: 所有权（Ownership）唯一性保证每个资源只被释放一次
 
-这些性质在 C/C++ 中需要专门的静态分析器（如 Infer、Facebook 的 RacerD）或运行时检测（如 ThreadSanitizer）才能部分捕获；而在 Rust 中，它们是**类型系统的定理**。
+这些性质在 C/C++ 中需要专门的静态分析器（如 Infer、Facebook 的 RacerD）或运行时（Runtime）检测（如 ThreadSanitizer）才能部分捕获；而在 Rust 中，它们是**类型系统（Type System）的定理**。
 
 ### 4.4 编译器证明了什么，没有证明什么
 
@@ -752,7 +752,7 @@ jobs:
 
 ### 6.7 `cargo fuzz` 与持续模糊测试
 
-模糊测试（Fuzzing）通过自动生成畸形输入发现 panic、内存安全漏洞和逻辑错误。`cargo-fuzz` 基于 `libFuzzer`，与 Rust 无缝集成：
+模糊测试（Fuzzing）通过自动生成畸形输入发现 panic、内存安全（Memory Safety）漏洞和逻辑错误。`cargo-fuzz` 基于 `libFuzzer`，与 Rust 无缝集成：
 
 **`cargo fuzz` 初始化与运行**：
 
@@ -1377,7 +1377,7 @@ fn main() {
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | RustBelt | [`../04_formal/04_rustbelt.md`](../../04_formal/02_separation_logic/04_rustbelt.md) | 理论基础（L4） |
-| 所有权形式化 | [`../04_formal/03_ownership_formal.md`](../../04_formal/01_ownership_logic/03_ownership_formal.md) | 验证对象（L4） |
+| 所有权（Ownership）形式化 | [`../04_formal/03_ownership_formal.md`](../../04_formal/01_ownership_logic/03_ownership_formal.md) | 验证对象（L4） |
 | Unsafe | [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md) | 验证边界（L3） |
 | 工具链 | [`../06_ecosystem/01_toolchain.md`](../../06_ecosystem/00_toolchain/01_toolchain.md) | CI 集成 |
 | AI × Rust | [`./01_ai_integration.md`](01_ai_integration.md) | 协同趋势 |

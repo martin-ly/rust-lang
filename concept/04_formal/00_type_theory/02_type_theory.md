@@ -298,7 +298,7 @@ graph TD
 
 ### 5.2 反命题 2: "所有类型系统都是 sound 的"
 
-> 历史/理论层 — 类型系统的 soundness 是元定理，需证明，非天然成立。
+> 历史/理论层 — 类型系统（Type System）的 soundness 是元定理，需证明，非天然成立。
 > Curry 悖论等历史案例展示了无类型或弱类型系统的内在不一致性（Coherence）。
 
 ```mermaid
@@ -628,7 +628,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 ```
 
 > **关键洞察**: HRTB 的**可判定性**来自生命周期（Lifetimes）量化域的结构性——生命周期是偏序关系上的点，而非任意类型。这使得 Rust 可以在编译期高效求解高阶生命周期约束，而无需面对 System F 的不可判定性噩梦。
-> **深入阅读**: 生命周期（Lifetimes）约束求解详见 [`03_lifetimes.md`](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) §4；泛型约束系统详见 [`02_generics.md`](../../02_intermediate/01_generics/02_generics.md) §4.1。
+> **深入阅读**: 生命周期（Lifetimes）约束求解详见 [`03_lifetimes.md`](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) §4；泛型（Generics）约束系统详见 [`02_generics.md`](../../02_intermediate/01_generics/02_generics.md) §4.1。
 
 ---
 
@@ -660,7 +660,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 | 泛型 | [`../02_intermediate/01_generics/02_generics.md`](../../02_intermediate/01_generics/02_generics.md) | 参数多态的应用（L2 映射） |
 | Trait | [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) | Type Class 的应用（L2 映射） |
 | 线性逻辑 | [`./01_linear_logic.md`](../01_ownership_logic/01_linear_logic.md) | 形式化同层（所有权（Ownership）理论来源） |
-| 所有权形式化 | [`./03_ownership_formal.md`](../01_ownership_logic/03_ownership_formal.md) | 类型规则的扩展 |
+| 所有权（Ownership）形式化 | [`./03_ownership_formal.md`](../01_ownership_logic/03_ownership_formal.md) | 类型规则的扩展 |
 | RustBelt | [`./04_rustbelt.md`](../02_separation_logic/04_rustbelt.md) | 验证框架 |
 | 范式矩阵 | [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/03_paradigm_matrix.md) | 类型系统谱系 |
 
@@ -1360,7 +1360,7 @@ fn borrow<'a>(x: &'a i32) -> &'a i32 { x }
 | 声明位置 | `<T>` | `<'a>` |
 | 约束方式 | `T: Trait` | `'a: 'b`（outlives）|
 | 擦除时机 | 编译期（单态化）| 编译期（借用（Borrowing）检查后）|
-| 运行时开销 | 零 | 零 |
+| 运行时（Runtime）开销 | 零 | 零 |
 | 推断 | 通常显式标注或部分推断 | 通常自动推断（lifetime elision）|
 
 **Lifetime Elision（省略规则）**：
@@ -1398,7 +1398,7 @@ v = 42 : v  -- 无限列表
 
 - A. 没有区别，两者使用完全相同的类型推断（Type Inference）算法
 - B. Rust 无法推断 `Vec::new()` 的类型（需要显式标注），Haskell 可以推断 `[]` 为 `[a]`
-- C. Rust 的类型推断是局部的（基于表达式上下文），Haskell 的 HM 是全局的（基于整个程序）
+- C. Rust 的类型推断（Type Inference）是局部的（基于表达式上下文），Haskell 的 HM 是全局的（基于整个程序）
 - D. Rust 和 Haskell 都无法推断这段代码的类型
 
 <details>
@@ -1582,7 +1582,7 @@ process(Vec::new());  // ✅ 从参数类型推断 T = i32
 - **Rust 的类型系统特性**: 仿射类型系统、HM 类型推断、类型安全保证
 - **高阶类型**: Higher-Kinded Types、GATs、HRTB、高阶类型的实战应用
 - **类型级编程**: 类型级计算、Phantom Types、状态机类型编码
-- **子类型和型变**: 子类型关系、型变规则、生命周期的格理论
+- **子类型和型变**: 子类型关系、型变规则、生命周期（Lifetimes）的格理论
 
 **Rust 1.92.0 新特性**:
 
@@ -1633,7 +1633,7 @@ process(Vec::new());  // ✅ 从参数类型推断 T = i32
 | 类型系统特性 | 理论基础   | Rust 实现          | 性能   | Rust 1.92.0 |
 | :--- | :--- | :--- | :--- | :--- |
 | **线性性**   | 线性逻辑   | 所有权 (默认 move) | 零开销 | ✅          |
-| **仿射性**   | 仿射逻辑   | 借用 (允许不使用)  | 零开销 | ✅          |
+| **仿射性**   | 仿射逻辑   | 借用（Borrowing） (允许不使用)  | 零开销 | ✅          |
 | **多态性**   | 参数多态   | 泛型 + Trait       | 零开销 | ✅ 改进     |
 | **子类型**   | 子类型关系 | 生命周期 + 型变    | 零开销 | ✅          |
 | **高阶类型** | HKT        | GATs (Rust 1.65+)  | 零开销 | ✅ 稳定     |

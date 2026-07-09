@@ -43,7 +43,7 @@
     - [Vue 基本用法](#vue-基本用法)
   - [🟢 Node.js 集成](#-nodejs-集成)
     - [Node.js 基本用法](#nodejs-基本用法)
-    - [ES 模块](#es-模块)
+    - [ES 模块（Module）](#es-模块)
   - [📦 TypeScript 类型](#-typescript-类型)
     - [使用类型](#使用类型)
   - [🌐 Web API 集成](#-web-api-集成)
@@ -386,7 +386,7 @@ const result = sum_array(new Int32Array([1, 2, 3, 4, 5])) // 15
 
 ### 使用联合体原始引用进行安全的 FFI 互操作
 
-Rust 1.92.0 允许在安全代码中使用原始引用访问联合体字段，特别适用于 FFI 互操作：
+Rust 1.92.0 允许在安全代码中使用原始引用（Reference）访问联合体字段，特别适用于 FFI 互操作：
 
 ```rust
 use c12_wasm::rust_192_features::WasmFFIUnion;
@@ -456,7 +456,7 @@ let mut_raw_ref = union.get_integer_mut_raw();
 >
 > **过渡**: 从类型映射过渡到内存所有权（Ownership），可以建立安全共享数据的责任边界。
 >
-> **过渡**: 从运行时交互过渡到错误处理（Error Handling），可以形成健壮的跨语言调用模式。
+> **过渡**: 从运行时（Runtime）交互过渡到错误处理（Error Handling），可以形成健壮的跨语言调用模式。
 >
 
 ## 定理链
@@ -464,5 +464,5 @@ let mut_raw_ref = union.get_integer_mut_raw();
 | 定理 | 前提 | 结论 |
 |:---|:---|:---|
 | wasm-bindgen ⟹ 人体工学绑定 | 自动生成 JS/TS 胶水代码 | 大幅减少手写样板 |
-| 显式内存所有权 ⟹ 安全性 | Rust 管理 wasm 线性内存 | 避免 use-after-free |
+| 显式内存所有权（Ownership） ⟹ 安全性 | Rust 管理 wasm 线性内存 | 避免 use-after-free |
 | 类型化接口 ⟹ 更少 bug | 强类型绑定替代动态调用 | 编译期捕获接口错误 |

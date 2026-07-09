@@ -25,7 +25,7 @@
   - [2. 为什么需要 Polonius {#2-为什么需要-polonius}](#2-为什么需要-polonius-2-为什么需要-polonius)
     - [2.1 NLL 的局限性 {#21-nll-的局限性}](#21-nll-的局限性-21-nll-的局限性)
     - [2.2 Polonius 的核心改进 {#22-polonius-的核心改进}](#22-polonius-的核心改进-22-polonius-的核心改进)
-  - [3. 核心原理：基于 Datalog 的生命周期（Lifetimes）推断 {#3-核心原理基于-datalog-的生命周期推断}](#3-核心原理基于-datalog-的生命周期推断-3-核心原理基于-datalog-的生命周期推断)
+  - [3. 核心原理：基于 Datalog 的生命周期推断 {#3-核心原理基于-datalog-的生命周期推断}](#3-核心原理基于-datalog-的生命周期推断-3-核心原理基于-datalog-的生命周期推断)
     - [3.1 Datalog 简介 {#31-datalog-简介}](#31-datalog-简介-31-datalog-简介)
     - [3.2 Polonius 的 Datalog 建模 {#32-polonius-的-datalog-建模}](#32-polonius-的-datalog-建模-32-polonius-的-datalog-建模)
     - [3.3 关键推导规则 {#33-关键推导规则}](#33-关键推导规则-33-关键推导规则)

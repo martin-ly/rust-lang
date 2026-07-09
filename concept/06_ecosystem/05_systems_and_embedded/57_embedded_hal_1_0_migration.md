@@ -135,7 +135,7 @@ Embassy 是 Rust 嵌入式生态的 **async/await 运行时（Runtime）**，允
 | **USB 协议栈** | 全栈 async USB device/host | ✅ |
 | **TCP/UDP 网络** | async smoltcp 集成 | ✅ |
 | **WiFi/BLE** | CYW43、nrf-softdevice 绑定 | ✅ |
-| **LORA** | 异步 LoRa 驱动 | ✅ |
+| **LORA** | 异步（Async） LoRa 驱动 | ✅ |
 | **多核支持** | RP2040 双核、ESP32 等 | 🧪 实验 |
 
 ### 3.3 Embassy vs RTIC 选型

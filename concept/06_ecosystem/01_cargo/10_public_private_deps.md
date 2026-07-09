@@ -115,7 +115,7 @@ indexmap = { version = "2", public = false }
 当使用 nightly 并传入 `-Zpublic-dependency` 时，编译器会启用 `exported_private_dependencies` lint：
 
 - `public = true` 的依赖类型可出现在 `pub` / `pub(crate)` API 中。
-- `public = false` 的依赖类型**仅限私有模块**使用；若出现在公共接口中，则产生警告。
+- `public = false` 的依赖类型**仅限私有模块（Module）**使用；若出现在公共接口中，则产生警告。
 
 截至 Rust 1.96.1，stable Cargo 已接受 `public` 字段的语法，但会发出“ignoring `public` … pass `-Zpublic-dependency`”警告并忽略其语义；完整强制执行仍依赖 nightly。
 

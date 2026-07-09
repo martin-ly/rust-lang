@@ -693,7 +693,7 @@ pub enum PatternError {
 ### 7.1 性能检查清单
 
 - [ ] 避免不必要的堆分配
-- [ ] 使用泛型而非 Trait Object（性能关键路径）
+- [ ] 使用泛型（Generics）而非 Trait Object（性能关键路径）
 - [ ] 缩小锁粒度
 - [ ] 考虑使用 `#[inline]`
 - [ ] 基准测试验证性能假设
@@ -717,7 +717,7 @@ pub enum PatternError {
 ### 7.4 模式选择优先级
 
 1. **优先**：零成本抽象（Zero-Cost Abstraction）（泛型、枚举（Enum））
-2. **其次**：运行时灵活性（Trait Object）
+2. **其次**：运行时（Runtime）灵活性（Trait Object）
 3. **谨慎**：复杂模式组合
 4. **避免**：过度工程
 
@@ -746,5 +746,5 @@ pub enum PatternError {
 | 定理 | 前提 | 结论 |
 |:---|:---|:---|
 | 需求明确 ⟹ 模式选型准确 | 清晰的功能与非功能需求 | 避免过度设计或选型失误 |
-| 并发约束 ⟹ Send/Sync 要求 | Rust 所有权模型 | 排除不满足线程安全的设计 |
+| 并发约束 ⟹ Send/Sync 要求 | Rust 所有权（Ownership）模型 | 排除不满足线程安全的设计 |
 | 团队能力 ⟹ 可维护性 | 熟悉度与工具链支持 | 影响模式的长期落地效果 |

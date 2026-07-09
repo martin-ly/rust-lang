@@ -121,7 +121,7 @@ rustc -Zsanitizer=borrow main.rs
 cargo bsan test
 ```
 
-目前需要通过 `cargo-bsan` 插件和定制编译器使用。2026 年项目目标包括：完成 shadow-stack 运行时、提出 `__rust_retag` intrinsics MCP、向 LLVM 上游提交组件 PR，最终使 `-Zsanitizer=borrow` 可直接在 nightly 使用。
+目前需要通过 `cargo-bsan` 插件和定制编译器使用。2026 年项目目标包括：完成 shadow-stack 运行时（Runtime）、提出 `__rust_retag` intrinsics MCP、向 LLVM 上游提交组件 PR，最终使 `-Zsanitizer=borrow` 可直接在 nightly 使用。
 
 ---
 

@@ -42,7 +42,7 @@
     - [1.2 TRPL 官方定义](#12-trpl-官方定义)
     - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
-    - [2.1 错误处理机制矩阵](#21-错误处理机制矩阵)
+    - [2.1 错误处理（Error Handling）机制矩阵](#21-错误处理机制矩阵)
     - [2.2 Rust vs 其他语言错误处理对比](#22-rust-vs-其他语言错误处理对比)
     - [2.3 `Result` 组合子矩阵](#23-result-组合子矩阵)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
@@ -51,15 +51,15 @@
     - [4.2 定理：? 运算符 ⟹ 错误传播自动化](#42-定理-运算符--错误传播自动化)
     - [4.3 推论：panic ⟹ 不可恢复错误的显式边界](#43-推论panic--不可恢复错误的显式边界)
     - [4.4 类型安全错误处理](#44-类型安全错误处理)
-    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
+    - [4.5 定理一致性（Coherence）矩阵](#45-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：`?` 运算符链式传播](#51-正确示例-运算符链式传播)
     - [5.2 正确示例：自定义错误类型](#52-正确示例自定义错误类型)
     - [5.3 反例：`?` 在错误返回类型中不匹配](#53-反例-在错误返回类型中不匹配)
     - [5.4 反例：忽略 Result 导致 bug](#54-反例忽略-result-导致-bug)
     - [5.5 边界示例：`Option` 与 `Result` 互转](#55-边界示例option-与-result-互转)
-    - [5.5 补充：异步错误处理与 `poll_fn` / `TryFuture` 模式](#55-补充异步错误处理与-poll_fn--tryfuture-模式)
-      - [`poll_fn`：将闭包提升为 Future](#poll_fn将闭包提升为-future)
+    - [5.5 补充：异步（Async）错误处理与 `poll_fn` / `TryFuture` 模式](#55-补充异步错误处理与-poll_fn--tryfuture-模式)
+      - [`poll_fn`：将闭包（Closures）提升为 Future](#poll_fn将闭包提升为-future)
       - [`TryFuture` 与 `?` 运算符的异步扩展](#tryfuture-与--运算符的异步扩展)
       - [取消安全（Cancellation Safety）与错误处理](#取消安全cancellation-safety与错误处理)
   - [六、反命题与边界分析（Counter-proposition \& Boundary Analysis）](#六反命题与边界分析counter-proposition--boundary-analysis)
@@ -127,7 +127,7 @@
     - [11.1 边界测试：? 运算符在错误类型不匹配时使用（编译错误）](#111-边界测试-运算符在错误类型不匹配时使用编译错误)
     - [11.2 边界测试：panic 在 const fn 中（编译错误）](#112-边界测试panic-在-const-fn-中编译错误)
     - [11.3 边界测试：`Result` 未处理（编译错误）](#113-边界测试result-未处理编译错误)
-    - [11.4 边界测试：`?` 在闭包中的类型推断失败（编译错误）](#114-边界测试-在闭包中的类型推断失败编译错误)
+    - [11.4 边界测试：`?` 在闭包中的类型推断（Type Inference）失败（编译错误）](#114-边界测试-在闭包中的类型推断失败编译错误)
     - [11.5 边界测试：自定义 Error 未实现 `std::error::Error`（编译错误）](#115-边界测试自定义-error-未实现-stderrorerror编译错误)
     - [11.6 边界测试：`Result` 与 `Option` 混用（编译错误）](#116-边界测试result-与-option-混用编译错误)
     - [11.7 边界测试：`panic!` 在 `const fn` 中的限制（编译错误）](#117-边界测试panic-在-const-fn-中的限制编译错误)
@@ -1178,7 +1178,7 @@ fn main() {
 | 环境变量值 | 行为 | 适用场景 |
 |:---|:---|:---|
 | `unset` / `0` | `Backtrace::capture()` 返回 `disabled`；panic 不打印 backtrace | 生产环境默认 |
-| `1` | 捕获并打印 backtrace，省略某些运行时/编译器内部帧 | 常规调试 |
+| `1` | 捕获并打印 backtrace，省略某些运行时（Runtime）/编译器内部帧 | 常规调试 |
 | `full` | 捕获并打印完整 backtrace，包含所有帧 | 深度诊断 |
 
 ```bash

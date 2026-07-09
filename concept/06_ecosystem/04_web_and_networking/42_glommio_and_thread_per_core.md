@@ -17,7 +17,7 @@
 
 ## 一、核心定位
 
-**Glommio** 是由 DataDog 开发的、基于 Linux `io_uring` 的高性能异步运行时，采用 **Thread-per-Core** 架构。它通过避免线程切换和跨核同步开销，追求极致的延迟与吞吐量。
+**Glommio** 是由 DataDog 开发的、基于 Linux `io_uring` 的高性能异步（Async）运行时（Runtime），采用 **Thread-per-Core** 架构。它通过避免线程切换和跨核同步开销，追求极致的延迟与吞吐量。
 
 | 特性 | 说明 |
 |:---|:---|

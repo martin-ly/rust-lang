@@ -65,7 +65,7 @@
 | **结构型** | Adapter | `From` / `Deref` / wrapper | [Design Patterns](02_patterns.md) |
 | | Bridge | trait + 组合替代继承 | [Architecture Patterns](35_architecture_patterns.md) |
 | | Composite | enum + 递归结构 | [Design Patterns](02_patterns.md) |
-| | Decorator | 泛型包装 / `Deref` | [Formal Design Pattern Theory](38_formal_design_pattern_theory.md) |
+| | Decorator | 泛型（Generics）包装 / `Deref` | [Formal Design Pattern Theory](38_formal_design_pattern_theory.md) |
 | | Facade | 模块（Module）级 API 封装 | [System Design Principles](05_system_design_principles.md) |
 | | Flyweight | `Arc` + 共享不可变数据 | [Pattern Implementation Comparison](36_pattern_implementation_comparison.md) |
 | | Proxy | trait object / 生命周期（Lifetimes）守卫 | [Design Patterns](02_patterns.md) |
@@ -103,7 +103,7 @@ pub fn greet_all(greeters: &[&dyn Greeter]) {
 
 ### Typestate 模式
 
-使用类型系统（Type System）在编译时保证状态转换合法，零运行时开销。
+使用类型系统（Type System）在编译时保证状态转换合法，零运行时（Runtime）开销。
 
 ```rust
 use std::marker::PhantomData;
@@ -139,7 +139,7 @@ impl Email<Verified> {
 
 ### 零成本抽象 (Zero-Cost Abstraction)
 
-抽象不引入运行时开销；泛型单态化、迭代器（Iterator）链、`const` 计算均遵循此原则。详见 [零成本抽象](../../01_foundation/00_start/06_zero_cost_abstractions.md)。
+抽象不引入运行时开销；泛型单态化（Monomorphization）、迭代器（Iterator）链、`const` 计算均遵循此原则。详见 [零成本抽象（Zero-Cost Abstraction）](../../01_foundation/00_start/06_zero_cost_abstractions.md)。
 
 ### OnceLock / LazyLock
 
@@ -177,7 +177,7 @@ pub fn config() -> &'static Config {
 
 ### Future / async/await
 
-`Future` 表示尚未完成的异步计算；`async/await` 是编译器状态机语法糖。
+`Future` 表示尚未完成的异步（Async）计算；`async/await` 是编译器状态机语法糖。
 
 ```rust
 use std::future::Future;

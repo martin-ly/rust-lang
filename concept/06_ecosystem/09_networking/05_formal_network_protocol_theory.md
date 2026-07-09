@@ -470,7 +470,7 @@ impl TypedConnection<state::Connected> {
 > conn.send(b"data"); // 错误：Closed 状态未实现 send
 > ```
 >
-> 这是 Rust 类型系统对协议状态机的最强保证形式。
+> 这是 Rust 类型系统（Type System）对协议状态机的最强保证形式。
 
 ---
 

@@ -85,7 +85,7 @@ fn main() {
 
 | 问题 | 稳定 Rust 当前行为 | 启用 `must_not_suspend` 后 |
 |:---|:---|:---|
-| `RefCell` 借用跨 await | 编译通过，运行时可能 panic | 编译期警告 |
+| `RefCell` 借用（Borrowing）跨 await | 编译通过，运行时（Runtime）可能 panic | 编译期警告 |
 | `MutexGuard` 跨 await | 编译通过，可能死锁 | 编译期警告 |
 | 异步锁选择 | 开发者自行判断 | lint 引导使用 `tokio::sync::Mutex` 等 async-aware 锁 |
 

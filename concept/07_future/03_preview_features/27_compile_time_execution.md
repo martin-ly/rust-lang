@@ -526,7 +526,7 @@ fn main() {
 ```
 
 > **修正**:
-> `const fn` 在编译期执行，因此不能使用运行时才可用的功能：堆分配（`Box::new`、`Vec::new`）、I/O、随机数、线程、panic（Rust 1.57+ 允许 `const panic`）。
+> `const fn` 在编译期执行，因此不能使用运行时（Runtime）才可用的功能：堆分配（`Box::new`、`Vec::new`）、I/O、随机数、线程、panic（Rust 1.57+ 允许 `const panic`）。
 > `vec![]` 宏（Macro）在底层调用 `Vec::new()` 和堆分配，因此不能在 `const fn` 中使用。
 > 编译期计算应使用栈分配类型（数组 `[T; N]`、`const` 值）或 `const` 泛型（Generics）。
 > Rust 的 `const fn` 能力在持续扩展：1.46 允许 `if`/`match`，1.57 允许 `panic`，1.64 允许 `dyn Trait`，未来可能允许有限堆分配（`const Heap` RFC）。
@@ -565,7 +565,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 > `syn` crate 将 TokenStream 解析为 AST（`DeriveInput`、`ItemFn` 等），解析失败时产生编译错误。
 > 过程宏（Procedural Macro）的调试困难：错误信息指向宏生成的代码，而非宏定义本身。
 > Rust 1.64+ 的 `Span::error` 和 `proc_macro::Diagnostic` 改善了错误报告。
-> 过程宏（Macro）的编译期执行能力强大但风险高：无限循环的宏导致编译器挂起，`quote!` 生成的代码可能有类型错误（在宏调用点报告）。
+> 过程宏（Procedural Macro）的编译期执行能力强大但风险高：无限循环的宏导致编译器挂起，`quote!` 生成的代码可能有类型错误（在宏调用点报告）。
 > 这与 C 的宏（Macro）预处理器（纯文本替换，无类型检查）或 Lisp 的宏（同像性，编译期执行）不同——Rust 的过程宏（Procedural Macro）在编译期运行完整 Rust 代码，但输出仍需通过类型检查。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] ·
 > [来源: [syn Documentation](https://docs.rs/syn/)]

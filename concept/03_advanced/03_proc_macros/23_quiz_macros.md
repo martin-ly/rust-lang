@@ -101,7 +101,7 @@
 
 **解析**：`vec!` 是 Rust 标准库中的**声明宏**（declarative macro），使用 `macro_rules!` 定义。
 
-**声明宏（Macro）的核心特征**：
+**声明宏（Declarative Macro）的核心特征**：
 
 | 特性 | 说明 |
 |:---|:---|
@@ -214,7 +214,7 @@ fn main() {
 
 **答案**：✅ 能编译，输出 `outer`。
 
-**解析**：Rust 的声明宏（Macro）是**半卫生（semi-hygienic）**的。
+**解析**：Rust 的声明宏（Declarative Macro）是**半卫生（semi-hygienic）**的。
 
 **卫生性含义**：宏（Macro）内部定义的变量不会与外部变量冲突，但**从外部传入的标识符**仍引用（Reference）外部作用域。
 
@@ -326,7 +326,7 @@ fn main() {
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
-**答案**：假设 `trace` 宏已正确定义，✅ 能编译。
+**答案**：假设 `trace` 宏（Macro）已正确定义，✅ 能编译。
 
 **解析**：属性宏（Attribute Macro）可以**修改**（甚至替换）被标注的项。
 

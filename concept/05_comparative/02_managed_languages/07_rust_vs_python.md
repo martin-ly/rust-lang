@@ -45,11 +45,11 @@
     - [10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）](#101-边界测试python-的动态类型-vs-rust-的静态类型编译错误)
   - [十、边界测试：Rust 与 Python 的编译错误对比](#十边界测试rust-与-python-的编译错误对比-1)
     - [10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）](#101-边界测试python-的动态类型-vs-rust-的静态类型编译错误-1)
-    - [10.2 边界测试：Python 的 GIL 与 Rust 的所有权并发（编译错误）](#102-边界测试python-的-gil-与-rust-的所有权并发编译错误)
+    - [10.2 边界测试：Python 的 GIL 与 Rust 的所有权（Ownership）并发（编译错误）](#102-边界测试python-的-gil-与-rust-的所有权并发编译错误)
     - [10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时（Runtime）开销）](#105-边界测试python-的-gil-与-rust-的-arcmutext-的性能对比运行时开销)
     - [10.3 边界测试：Python 式动态类型在 Rust 中的不可表达（编译错误）](#103-边界测试python-式动态类型在-rust-中的不可表达编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 和 Python 在类型系统上的核心区别是什么？（理解层）](#测验-1rust-和-python-在类型系统上的核心区别是什么理解层)
+    - [测验 1：Rust 和 Python 在类型系统（Type System）上的核心区别是什么？（理解层）](#测验-1rust-和-python-在类型系统上的核心区别是什么理解层)
     - [测验 2：Python 的 GIL（全局解释器锁）对并发有什么限制？Rust 有类似限制吗？（理解层）](#测验-2python-的-gil全局解释器锁对并发有什么限制rust-有类似限制吗理解层)
     - [测验 3：为什么 Rust 常被用来重写 Python 的性能瓶颈模块（Module）（如 `numpy`、`cryptography`）？（理解层）](#测验-3为什么-rust-常被用来重写-python-的性能瓶颈模块如-numpycryptography理解层)
     - [测验 4：Python 的"鸭子类型"（Duck Typing）与 Rust 的 Trait 系统有什么异同？（理解层）](#测验-4python-的鸭子类型duck-typing与-rust-的-trait-系统有什么异同理解层)
@@ -559,7 +559,7 @@ fn fixed() {
 }
 ```
 
-> **Python 对比**: Python 通过 **GIL**（Global Interpreter Lock）保证单线程执行字节码，实现"线程安全"——但代价是真正的并行计算受限（CPU 密集型任务无法利用多核）。Rust 没有 GIL，通过**所有权（Ownership）和类型系统**保证线程安全：`Rc<T>`（非原子）不能跨线程，`Arc<T>`（原子）可以。编译器在编译期拒绝数据竞争，无需运行时锁。这使得 Rust 的并发程序既有 C/C++ 的性能，又有 Python 的安全性——但无需全局锁。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **Python 对比**: Python 通过 **GIL**（Global Interpreter Lock）保证单线程执行字节码，实现"线程安全"——但代价是真正的并行计算受限（CPU 密集型任务无法利用多核）。Rust 没有 GIL，通过**所有权（Ownership）和类型系统**保证线程安全：`Rc<T>`（非原子）不能跨线程，`Arc<T>`（原子）可以。编译器在编译期拒绝数据竞争，无需运行时（Runtime）锁。这使得 Rust 的并发程序既有 C/C++ 的性能，又有 Python 的安全性——但无需全局锁。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时开销）
 

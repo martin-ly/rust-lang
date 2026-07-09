@@ -60,7 +60,7 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：云原生开发的编译错误](#十边界测试云原生开发的编译错误)
-    - [10.1 边界测试：异步（Async）运行时混用（编译错误）](#101-边界测试异步运行时混用编译错误)
+    - [10.1 边界测试：异步（Async）运行时（Runtime）混用（编译错误）](#101-边界测试异步运行时混用编译错误)
     - [10.2 边界测试：配置结构的反序列化生命周期（Lifetimes）（编译错误）](#102-边界测试配置结构的反序列化生命周期编译错误)
     - [10.6 边界测试：Kubernetes 的优雅关闭与 `SIGTERM` 处理（运行时数据丢失）](#106-边界测试kubernetes-的优雅关闭与-sigterm-处理运行时数据丢失)
     - [10.5 边界测试：Kubernetes 探针配置不当导致的级联重启（运行时可用性下降）](#105-边界测试kubernetes-探针配置不当导致的级联重启运行时可用性下降)
@@ -590,7 +590,7 @@ fn main() {
 > 但 `serde_json::from_str` 返回的 `Config` 必须拥有独立生命周期（Lifetimes）——它无法持有对输入字符串的引用（Reference）（因为输入字符串可能在函数返回后被释放）。
 > 正确做法是使用 `String` 而非 `&str`，让 `Config` 拥有数据。
 > 这与 Go 的 `json.Unmarshal`（总是复制到目标结构）或 Python 的 `json.loads`（无生命周期（Lifetimes）概念）不同
-> ——Rust 的生命周期系统强制区分"拥有"和"借用（Borrowing）"，在反序列化场景中通常要求"拥有"。
+> ——Rust 的生命周期（Lifetimes）系统强制区分"拥有"和"借用（Borrowing）"，在反序列化场景中通常要求"拥有"。
 > [来源: [Serde Documentation](https://serde.rs/)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 

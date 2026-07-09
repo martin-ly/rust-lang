@@ -76,7 +76,7 @@
 | [17.2](https://doc.rust-lang.org/book/ch17-02-async-fn-and-messages.html) | Async Functions and Messages | §3.5 调度模型对比、§8.7 取消安全 | 协作式调度与消息传递模式 |
 | [17.3](https://doc.rust-lang.org/book/ch17-03-more-futures.html) | More Futures | §2.2 Future 组合子矩阵、§8.10 Stream/Sink | `join!`、`select!`、Stream 等扩展 |
 | [17.4](https://doc.rust-lang.org/book/ch17-04-pin.html) | Pinning | §3.2 Pin 的形式化语义、§7.2 Pin 使用边界 | 自引用（Reference）与内存位置稳定性 |
-| [17.5](https://doc.rust-lang.org/book/ch17-05-concurrency.html) | Concurrency with Async | §2.3 运行时对比矩阵、§6.1 反命题 | async 与线程/并发的选择 |
+| [17.5](https://doc.rust-lang.org/book/ch17-05-concurrency.html) | Concurrency with Async | §2.3 运行时（Runtime）对比矩阵、§6.1 反命题 | async 与线程/并发的选择 |
 
 > **阅读建议**：若初次接触 async Rust，可先阅读 TRPL Ch17 原文，再回本文查看形式化推导、跨语言对比与工程反例。
 
@@ -91,7 +91,7 @@
     - [1.2 官方文档定义](#12-官方文档定义)
     - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
-    - [2.1 异步 vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
+    - [2.1 异步（Async） vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
     - [2.2 Future 组合子矩阵](#22-future-组合子矩阵)
     - [2.3 运行时对比矩阵](#23-运行时对比矩阵)
   - [三、形式化理论根基（Formal Foundation）](#三形式化理论根基formal-foundation)
@@ -110,7 +110,7 @@
     - [3.5 调度模型对比：抢占式 vs 协作式 vs 绿色线程](#35-调度模型对比抢占式-vs-协作式-vs-绿色线程)
     - [3.5·补充：跨语言异步机制对比](#35补充跨语言异步机制对比)
   - [四、思维导图（Mind Map）](#四思维导图mind-map)
-  - [五、定理一致性矩阵（Theorem Consistency Matrix）](#五定理一致性矩阵theorem-consistency-matrix)
+  - [五、定理一致性（Coherence）矩阵（Theorem Consistency Matrix）](#五定理一致性矩阵theorem-consistency-matrix)
     - [5.1 定理矩阵（10 行，含 ⟹ 推理链）](#51-定理矩阵10-行含--推理链)
     - [5.2 推理链层级图](#52-推理链层级图)
   - [六、反命题决策树（Counter-proposition Decision Trees）](#六反命题决策树counter-proposition-decision-trees)
@@ -125,7 +125,7 @@
     - [8.2 正确示例：并发执行](#82-正确示例并发执行)
     - [8.3 正确示例：Stream 异步迭代](#83-正确示例stream-异步迭代)
     - [8.4 反例：在 async 中阻塞线程](#84-反例在-async-中阻塞线程)
-    - [8.5 反例：未 Pin 的自引用 Future](#85-反例未-pin-的自引用-future)
+    - [8.5 反例：未 Pin 的自引用（Reference） Future](#85-反例未-pin-的自引用-future)
     - [8.6 边界极限测试：跨越 await 的 Send 约束](#86-边界极限测试跨越-await-的-send-约束)
     - [8.7 边界极限测试：取消安全系统分析](#87-边界极限测试取消安全系统分析)
     - [8.8 Waker 契约与活性](#88-waker-契约与活性)
@@ -133,7 +133,7 @@
     - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
     - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
     - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
-    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
+    - [8.13 Miri 动态验证：async 状态机的内存安全（Memory Safety）检测](#813-miri-动态验证async-状态机的内存安全检测)
       - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
       - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
       - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
@@ -144,9 +144,9 @@
       - [问题与解决方案演进](#问题与解决方案演进)
       - [当前最佳实践](#当前最佳实践)
       - [限制与注意事项](#限制与注意事项)
-      - [生命周期陷阱](#生命周期陷阱)
+      - [生命周期（Lifetimes）陷阱](#生命周期陷阱)
   - [十一、国际课程与论文对齐](#十一国际课程与论文对齐)
-  - [十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
+  - [十二、`AsyncFn` Trait 家族：异步闭包（Closures）的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
     - [12.1 问题：异步闭包的类型真空](#121-问题异步闭包的类型真空)
     - [12.2 `AsyncFn` 家族层级](#122-asyncfn-家族层级)
     - [12.3 关键形式化特性：可重入性限制](#123-关键形式化特性可重入性限制)
@@ -166,7 +166,7 @@
     - [16.1 边界测试：非 Send 类型跨 await 点（编译错误）](#161-边界测试非-send-类型跨-await-点编译错误)
     - [16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）](#162-边界测试在-async-块中调用阻塞函数逻辑错误)
     - [16.3 边界测试：递归 async fn（编译错误）](#163-边界测试递归-async-fn编译错误)
-    - [16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
+    - [16.4 边界测试：在 async 块中借用（Borrowing）局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
     - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
     - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -2995,7 +2995,7 @@ fn foo() -> impl Future<Output = i32> {
 
 **关键点**: `async fn` **不会**自动在新线程中运行。它只是返回一个惰性（lazy）的 `Future`，需要 executor（如 Tokio）来驱动执行。
 
-这与 Kotlin 的协程、Go 的 goroutine 不同——Rust 的 async 是**零成本抽象**，状态机在编译期生成，无运行时开销。
+这与 Kotlin 的协程、Go 的 goroutine 不同——Rust 的 async 是**零成本抽象（Zero-Cost Abstraction）**，状态机在编译期生成，无运行时开销。
 </details>
 
 ---

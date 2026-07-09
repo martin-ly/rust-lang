@@ -129,7 +129,7 @@ pub fn example_polymorphism() {
 
 ### 2.3 Effect 约束与推断
 
-**使用类型系统约束副作用**:
+**使用类型系统（Type System）约束副作用**:
 
 ```rust
 use std::marker::PhantomData;
@@ -930,7 +930,7 @@ pub fn quantum_pattern_example() {
 
 **近期可用** (1-2 年):
 
-- 🔜 异步析构
+- 🔜 异步（Async）析构
 - 🔜 生成器
 - 🔜 Try blocks
 

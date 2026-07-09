@@ -92,7 +92,7 @@ fn test_sigterm_handling() {
 
 ## 4. 异步进程测试
 
-使用 `tokio::test` 与 `tokio::time::timeout` 验证异步进程生命周期（Lifetimes）：
+使用 `tokio::test` 与 `tokio::time::timeout` 验证异步（Async）进程生命周期（Lifetimes）：
 
 ```rust,ignore
 #[tokio::test]
@@ -189,7 +189,7 @@ flowchart LR
 
 ## 9. 相关概念
 
-- [进程模型与生命周期](01_process_model_and_lifecycle.md)
+- [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [高级进程管理](02_advanced_process_management.md)
 - [异步进程管理](03_async_process_management.md)
 - [进程性能工程](08_process_performance_engineering.md)

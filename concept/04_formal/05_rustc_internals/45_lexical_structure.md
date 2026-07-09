@@ -142,7 +142,7 @@ Token     ::= Keyword | Identifier | Literal | Punctuation | Delimiter
 token_tree::= Token | "(" token_tree* ")" | "[" token_tree* "]" | "{" token_tree* "}"
 ```
 
-Token tree 是宏系统（`macro_rules!` 和过程宏）处理的基本单元。过程宏接收 `TokenStream`，可以遍历、转换并输出新的 token tree。
+Token tree 是宏系统（`macro_rules!` 和过程宏（Procedural Macro））处理的基本单元。过程宏接收 `TokenStream`，可以遍历、转换并输出新的 token tree。
 
 ```bnf
 Identifier      ::= XID_Start XID_Continue* | "_" XID_Continue+
@@ -195,7 +195,7 @@ Rust token 主要包括：
 | 标识符 | `foo`, `Foo`, `_bar`, `r#match` |
 | 关键字 | `fn`, `let`, `struct`, `async` |
 | 标点符号 | `(`, `)`, `{`, `}`, `;`, `,`, `::`, `->` |
-| 生命周期 | `'a`, `'static` |
+| 生命周期（Lifetimes） | `'a`, `'static` |
 | 文档注释 | `///`, `//!` |
 
 ### 字面量子类
@@ -230,7 +230,7 @@ DelimitedTree ::= "(" TokenTree* ")"
                 | "{" TokenTree* "}"
 ```
 
-宏展开阶段，编译器在 token tree 层面匹配和替换，随后再次进行名称解析和类型检查。
+宏（Macro）展开阶段，编译器在 token tree 层面匹配和替换，随后再次进行名称解析和类型检查。
 
 ## 十、关联概念
 

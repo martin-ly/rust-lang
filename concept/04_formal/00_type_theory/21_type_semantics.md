@@ -27,17 +27,17 @@
   - [目录](#目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 类型作为规约：进步与保持](#11-类型作为规约进步与保持)
-    - [1.2 类型安全到内存安全](#12-类型安全到内存安全)
+    - [1.2 类型安全到内存安全（Memory Safety）](#12-类型安全到内存安全)
   - [二、概念属性矩阵](#二概念属性矩阵)
     - [2.1 类型语义方法对比矩阵](#21-类型语义方法对比矩阵)
   - [三、Rust 特有类型的语义](#三rust-特有类型的语义)
-    - [3.1 借用语义：`&T` 与 `&mut T`](#31-借用语义t-与-mut-t)
+    - [3.1 借用（Borrowing）语义：`&T` 与 `&mut T`](#31-借用语义t-与-mut-t)
     - [3.2 资源管理语义：`Box<T>` / `Rc<T>` / `Arc<T>`](#32-资源管理语义boxt--rct--arct)
     - [3.3 代数效应语义：`Option<T>` / `Result<T, E>`](#33-代数效应语义optiont--resultt-e)
       - [Row Polymorphism：Effect System 的类型论基础](#row-polymorphismeffect-system-的类型论基础)
     - [3.4 存在与全称类型：`dyn Trait` 与 `impl Trait`](#34-存在与全称类型dyn-trait-与-impl-trait)
   - [四、子类型与变型的语义解释](#四子类型与变型的语义解释)
-    - [4.1 生命周期子类型](#41-生命周期子类型)
+    - [4.1 生命周期（Lifetimes）子类型](#41-生命周期子类型)
     - [4.2 协变、逆变与不变](#42-协变逆变与不变)
   - [五、反命题与边界分析](#五反命题与边界分析)
     - [5.1 反命题树](#51-反命题树)
@@ -45,7 +45,7 @@
   - [十、边界测试](#十边界测试)
     - [10.1 边界测试：协变数组的 soundness 漏洞（编译错误）](#101-边界测试协变数组的-soundness-漏洞编译错误)
     - [10.2 边界测试：`dyn Trait` 与 `impl Trait` 的语义混淆（编译错误）](#102-边界测试dyn-trait-与-impl-trait-的语义混淆编译错误)
-    - [10.3 边界测试：生命周期子类型的悬垂引用（编译错误）](#103-边界测试生命周期子类型的悬垂引用编译错误)
+    - [10.3 边界测试：生命周期子类型的悬垂引用（Reference）（编译错误）](#103-边界测试生命周期子类型的悬垂引用编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：什么是"类型安全性"（Type Safety）？它通常包含哪两个核心性质？（理解层）](#测验-1什么是类型安全性type-safety它通常包含哪两个核心性质理解层)
     - [测验 2：`&mut T` 在类型语义上如何区别于 `&T`？这种区别如何映射到分离逻辑？（理解层）](#测验-2mut-t-在类型语义上如何区别于-t这种区别如何映射到分离逻辑理解层)
@@ -60,7 +60,7 @@
     - [Step 4: `dyn` 和 `impl` 的区别](#step-4-dyn-和-impl-的区别)
     - [Step 5: 子类型和变型为什么重要？](#step-5-子类型和变型为什么重要)
   - [七、定理推理链](#七定理推理链)
-    - [7.1 定理一致性矩阵](#71-定理一致性矩阵)
+    - [7.1 定理一致性（Coherence）矩阵](#71-定理一致性矩阵)
     - [7.2 反命题决策树](#72-反命题决策树)
   - [八、更多边界测试](#八更多边界测试)
     - [10.4 边界测试：`PhantomData` 的语义必要性（编译错误）](#104-边界测试phantomdata-的语义必要性编译错误)
@@ -318,7 +318,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 
 > **与异常的对比**:
 >
-> Java/C++ 的异常是**隐式的控制流**，类型系统不跟踪哪些函数可能抛出异常。
+> Java/C++ 的异常是**隐式的控制流**，类型系统（Type System）不跟踪哪些函数可能抛出异常。
 > Rust 的 `Result<T, E>` 是**显式的控制流**，函数签名直接声明可能的错误类型 `E`。
 > 这使类型语义可以精确追踪错误传播路径——编译器强制调用者处理 `Result`，而非在运行时（Runtime）意外捕获异常。
 > 来源: [Pierce 2002, Ch.11] · 来源: [Rust Reference — Option/Result](https://doc.rust-lang.org/reference/introduction.html) · 来源: [Hoare's Billion Dollar Mistake]
@@ -837,7 +837,7 @@ struct SoundVec<T> {
 // SoundVec<T> 对 T 的变型由 PhantomData<T> 决定。
 ```
 
-> **修正**: `PhantomData<T>` 是 Rust 类型系统的**语义桥接器**。它在运行时不占内存（ZST，Zero-Sized Type），但在编译期向类型系统传递关键语义信息："这个结构在逻辑上与 `T` 相关联"。这是 Rust 实现**零成本抽象（Zero-Cost Abstraction）**的典型模式——语义信息在编译期使用，运行时不带来任何开销。没有 `PhantomData`，像 `Vec<T>`、`Box<T>` 这样的容器无法在内部使用裸指针的同时保持正确的变型推断。来源: [Rust Reference — PhantomData](https://doc.rust-lang.org/reference/introduction.html) · Rust Nomicon — PhantomData
+> **修正**: `PhantomData<T>` 是 Rust 类型系统的**语义桥接器**。它在运行时（Runtime）不占内存（ZST，Zero-Sized Type），但在编译期向类型系统传递关键语义信息："这个结构在逻辑上与 `T` 相关联"。这是 Rust 实现**零成本抽象（Zero-Cost Abstraction）**的典型模式——语义信息在编译期使用，运行时不带来任何开销。没有 `PhantomData`，像 `Vec<T>`、`Box<T>` 这样的容器无法在内部使用裸指针的同时保持正确的变型推断。来源: [Rust Reference — PhantomData](https://doc.rust-lang.org/reference/introduction.html) · Rust Nomicon — PhantomData
 
 ### 10.5 边界测试：`Pin<T>` 的类型语义（编译错误）
 

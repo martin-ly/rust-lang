@@ -56,7 +56,7 @@
     - [2.2 UB（未定义行为）分类矩阵](#22-ub未定义行为分类矩阵)
     - [2.2b Unsafe Code Guidelines 完整 UB 分类](#22b-unsafe-code-guidelines-完整-ub-分类)
       - [内存访问类 UB](#内存访问类-ub)
-      - [类型系统类 UB](#类型系统类-ub)
+      - [类型系统（Type System）类 UB](#类型系统类-ub)
       - [并发与同步类 UB](#并发与同步类-ub)
       - [其他 UB](#其他-ub)
       - [UB 检测的不可判定性边界](#ub-检测的不可判定性边界)
@@ -81,7 +81,7 @@
     - [6.3 反命题决策树](#63-反命题决策树)
       - [反命题 1: "unsafe 块内没有安全检查"](#反命题-1-unsafe-块内没有安全检查)
       - [反命题 2: "只要用了 unsafe 就会触发 UB"](#反命题-2-只要用了-unsafe-就会触发-ub)
-      - [反命题 3: "raw pointer 和引用等价"](#反命题-3-raw-pointer-和引用等价)
+      - [反命题 3: "raw pointer 和引用（Reference）等价"](#反命题-3-raw-pointer-和引用等价)
       - [反命题 4: "FFI 调用总是安全的"](#反命题-4-ffi-调用总是安全的)
   - [七、定理推理链（Theorem Chain）](#七定理推理链theorem-chain)
     - [7.1 安全抽象定理](#71-安全抽象定理)
@@ -90,13 +90,13 @@
       - [Miri 检测的核心算法](#miri-检测的核心算法)
       - [Miri 与编译器优化的关系](#miri-与编译器优化的关系)
       - [MIRIFLAGS 完整选项速查](#miriflags-完整选项速查)
-    - [7.3 定理一致性矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)
+    - [7.3 定理一致性（Coherence）矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)
   - [八、示例与反例（Examples \& Counter-examples）](#八示例与反例examples--counter-examples)
     - [8.1 正确示例：安全封装裸指针（Vec 简化版）](#81-正确示例安全封装裸指针vec-简化版)
     - [8.2 正确示例：手动实现 Send/Sync](#82-正确示例手动实现-sendsync)
     - [8.3 反例：悬垂裸指针（UB）](#83-反例悬垂裸指针ub)
     - [8.4 反例：transmute 滥用（UB）](#84-反例transmute-滥用ub)
-    - [8.5 反例：无效枚举值（UB）](#85-反例无效枚举值ub)
+    - [8.5 反例：无效枚举（Enum）值（UB）](#85-反例无效枚举值ub)
     - [8.6 边界极限测试](#86-边界极限测试)
       - [命题: "unsafe 代码可以安全地封装"](#命题-unsafe-代码可以安全地封装)
       - [命题: "Miri 可以检测所有 UB"](#命题-miri-可以检测所有-ub)
@@ -152,7 +152,7 @@
   - [九、Unsafe/FFI 2024：权限分离与显式契约](#九unsafeffi-2024权限分离与显式契约)
     - [9.1 问题：权限的混淆](#91-问题权限的混淆)
     - [9.2 2024 Edition 的权限分离](#92-2024-edition-的权限分离)
-    - [9.3 形式化模型：权限的模块化](#93-形式化模型权限的模块化)
+    - [9.3 形式化模型：权限的模块（Module）化](#93-形式化模型权限的模块化)
     - [9.4 与 `unsafe extern` + `safe` 的关系](#94-与-unsafe-extern--safe-的关系)
     - [9.5 `unsafe extern` blocks：FFI 边界的显式 unsafe（Rust 2024）](#95-unsafe-extern-blocksffi-边界的显式-unsaferust-2024)
       - [9.5.1 问题：谁为 FFI 签名负责？](#951-问题谁为-ffi-签名负责)
@@ -176,7 +176,7 @@
       - [Tree Borrows（PLDI 2023）](#tree-borrowspldi-2023)
       - [Provenance（PLDI 2022）](#provenancepldi-2022)
     - [15.5 跨语言内存模型对比矩阵](#155-跨语言内存模型对比矩阵)
-  - [十六、边界测试：Unsafe 代码的编译错误与运行时灾难](#十六边界测试unsafe-代码的编译错误与运行时灾难)
+  - [十六、边界测试：Unsafe 代码的编译错误与运行时（Runtime）灾难](#十六边界测试unsafe-代码的编译错误与运行时灾难)
     - [16.1 边界测试：裸指针解引用前的空检查（编译错误）](#161-边界测试裸指针解引用前的空检查编译错误)
     - [16.2 边界测试：将 \&T 转换为 \&mut T（编译错误）](#162-边界测试将-t-转换为-mut-t编译错误)
     - [16.3 边界测试：无效 UTF-8 的 str::from\_utf8\_unchecked（运行时 UB）](#163-边界测试无效-utf-8-的-strfrom_utf8_unchecked运行时-ub)
@@ -1985,7 +1985,7 @@ struct BadBox<T> {
 | **类型** | **内部指针字段** | **使用 NonNull 的目的** |
 |:---|:---|:---|
 | `Vec<T>` | `RawVec<T>` → `NonNull<T>` | 保证 buffer 非空（即使空 Vec 也指向对齐的 dangling 地址） |
-| `Box<T>` | `Unique<T>` → 后来改为 `NonNull<T>` + `PhantomData<T>` | 非空 + 协变；所有权由 `Box` 结构本身和 `Drop` 实现承担 |
+| `Box<T>` | `Unique<T>` → 后来改为 `NonNull<T>` + `PhantomData<T>` | 非空 + 协变；所有权（Ownership）由 `Box` 结构本身和 `Drop` 实现承担 |
 | `Rc<T>` | `NonNull<RcBox<T>>` | 非空 + 协变；共享所有权由引用计数管理 |
 | `Arc<T>` | `NonNull<ArcInner<T>>` | 同上，但额外要求 `T: Send` 时 `Arc<T>: Send` |
 | `String` | `Vec<u8>` 间接使用 | 通过 `Vec<u8>` 继承 NonNull 保证 |
@@ -2088,7 +2088,7 @@ fn demo_invariance<'a>(ptr: *mut &'a str) -> *mut &'static str {
 > `NonNull<T>` 通过内部存储 `*const T` 来实现协变，同时通过 API 设计（`as_mut()` 需要 unsafe）保持写入的安全性。
 > ✅ 已验证
 > **来源: [Rustonomicon: Variance](https://doc.rust-lang.org/nomicon/index.html)**
-> 协变性对容器类型至关重要：`Vec<&'a str>` 可协变为 `Vec<&'static str>`，这使函数返回包含长生命周期引用的容器成为可能。
+> 协变性对容器类型至关重要：`Vec<&'a str>` 可协变为 `Vec<&'static str>`，这使函数返回包含长生命周期（Lifetimes）引用的容器成为可能。
 > 若 `Vec` 内部使用 `*mut T` 而非 `NonNull<T>`，它将是不变的，极大限制其可用性。 ✅ 已验证
 > **定理**：`NonNull<T>` 的协变设计是**类型系统层面的精巧权衡**
 > ——通过 `*const T` 的字段存储获得协变性，通过 `unsafe` API 控制写入风险，从而在"编译器优化假设"（非空性）和"程序员便利"（协变性）之间取得平衡。
@@ -2594,7 +2594,7 @@ fn main() {
 
 > **过渡: L3 → L1**
 > `unsafe` 不是 Rust 的例外——它是所有权系统的延伸。`unsafe` 块中的原始指针（Raw Pointer）解引用之所以危险，正是因为它绕过了借用（Borrowing）检查器对 `&T`/`&mut T` 的约束。理解 unsafe 的安全契约，需要首先理解 safe Rust 中这些约束的精确含义。
-> 安全基础见 [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)（借用规则）与 [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)（所有权转移）。
+> 安全基础见 [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)（借用（Borrowing）规则）与 [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)（所有权转移）。
 > **过渡: L3 → L6**
 > `cbindgen`、`cxx`、`diplomat` 等工具将 FFI 的 unsafe 边界自动化，而 `Miri` 和 `Kani` 则在 CI 中持续验证 unsafe 代码的正确性。unsafe 不是 "放弃安全"，而是 "将安全的责任从编译器转移到工具和流程"。
 > 工具化实践见 [`../06_ecosystem/01_toolchain.md`](../../06_ecosystem/00_toolchain/01_toolchain.md)（工具链安全审计）与 [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化验证工具）。

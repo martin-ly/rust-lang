@@ -71,7 +71,7 @@
     - [10.3 边界测试：特化（specialization）的 soundness 问题与编译错误（编译错误）](#103-边界测试特化specialization的-soundness-问题与编译错误编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：什么是"特化"（Specialization）？它与当前 Rust 的泛型实现有什么区别？（理解层）](#测验-1什么是特化specialization它与当前-rust-的泛型实现有什么区别理解层)
+    - [测验 1：什么是"特化"（Specialization）？它与当前 Rust 的泛型（Generics）实现有什么区别？（理解层）](#测验-1什么是特化specialization它与当前-rust-的泛型实现有什么区别理解层)
     - [测验 2：为什么 Rust 的特化比 C++ 的模板特化更难设计？（理解层）](#测验-2为什么-rust-的特化比-c-的模板特化更难设计理解层)
     - [测验 3：`default impl` 语法在特化中有什么作用？（理解层）](#测验-3default-impl-语法在特化中有什么作用理解层)
     - [测验 4：特化对性能优化有什么帮助？（理解层）](#测验-4特化对性能优化有什么帮助理解层)

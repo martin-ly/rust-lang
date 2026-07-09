@@ -141,7 +141,7 @@ graph LR
     end
 ```
 
-> **认知功能**: 此图展示 Rust 内存安全（Memory Safety）检测的**三层架构**——编译器负责静态保证，Miri 负责深度验证，BorrowSanitizer 负责工业级运行时检测。
+> **认知功能**: 此图展示 Rust 内存安全（Memory Safety）检测的**三层架构**——编译器负责静态保证，Miri 负责深度验证，BorrowSanitizer 负责工业级运行时（Runtime）检测。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 开发阶段使用编译器；测试阶段使用 BorrowSanitizer；深度审计使用 Miri。
 > **关键洞察**: BorrowSanitizer 的定位是"**可部署的 Miri 子集**"——牺牲部分检测能力以换取可接受的运行时开销。
@@ -399,7 +399,7 @@ fn main() {
 }
 ```
 
-> **修正**: BorrowSanitizer（实验性）是 LLVM 的 sanitizers 家族新成员，专门检测 Rust 风格的借用违规。
+> **修正**: BorrowSanitizer（实验性）是 LLVM 的 sanitizers 家族新成员，专门检测 Rust 风格的借用（Borrowing）违规。
 > 它与 Miri 类似，但在编译后的二进制中插入检查（类似 AddressSanitizer），因此可检测 FFI 边界和并发场景。
 > 关键挑战：**别名分析的精度**。上述代码中，`p1` 和 `p2` 指向不重叠的数组元素，理论上安全，但 Stacked Borrows 模型可能要求每次通过派生指针写入后"重新借用"原始指针（Raw Pointer）。
 > Tree Borrows 模型对此更宽松——允许不重叠区域的独立可变访问。

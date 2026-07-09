@@ -318,7 +318,7 @@ Bevy 的 ECS 将游戏世界表示为**扁平化的类型化数组**（SoA），
 Rust 在区块链领域占据**主导地位**的原因：
 
 - **无 GC 确定执行**: 智能合约需要确定性的 gas 计费，GC 停顿不可接受
-- **内存安全**: 消除智能合约中的溢出/重入漏洞
+- **内存安全（Memory Safety）**: 消除智能合约中的溢出/重入漏洞
 - **高性能**: 共识节点需要处理数千 TPS
 - **WASM 兼容**: 合约编译为 WASM 在链上执行
 
@@ -810,7 +810,7 @@ graph TD
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 所有领域的安全根基 |
+| 所有权（Ownership） | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 所有领域的安全根基 |
 | 并发 | [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md) | Web/游戏/数据工程核心 |
 | 异步（Async） | [`../03_advanced/01_async/02_async.md`](../../03_advanced/01_async/02_async.md) | Web 后端/嵌入式事件循环 |
 | Unsafe | [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md) | 系统编程/游戏/密码学边界 |
@@ -1235,7 +1235,7 @@ graph TD
 
 **安全边界**: Aya 的 `aya::maps` 模块（Module）将 eBPF map 操作封装为类型安全的 API。`PerCpuArray<T>` 的类型参数 `T` 必须在编译期满足 `Pod`（Plain Old Data）约束，确保 eBPF 验证器可以推断其内存布局。
 
-> **[Aya Book](https://aya-rs.dev/book/)** eBPF 验证器在加载期证明程序安全性，Rust 类型系统在编译期证明内存安全。
+> **[Aya Book](https://aya-rs.dev/book/)** eBPF 验证器在加载期证明程序安全性，Rust 类型系统（Type System）在编译期证明内存安全。
 
 ---
 
@@ -1295,7 +1295,7 @@ graph TD
 
 - **L1 类型系统**: `candle` 的 `Tensor` 类型携带**形状信息**（`Shape`）和**数据类型**（`DType`）。矩阵乘法的形状约束（`(m, k) × (k, n) → (m, n)`）在编译期通过 trait 约束验证——这是**依赖类型**（dependent types）的 Rust 近似。
 - **L2 泛型（Generics）**: `burn` 的 `Backend` trait 抽象了计算后端（CPU/CUDA/WGPU）。`Tensor<B, D>` 的泛型参数 `B` 是后端，`D` 是维度——这是**类型级编程**（type-level programming）的工程应用。
-- **L3 Unsafe**: 张量操作底层依赖 `unsafe` 的 SIMD/BLAS 调用。`candle` 通过 `Storage` trait 封装内存布局，将 `unsafe` 限制在 `src/storage/` 模块内。`burn` 的 `NdArray` 后端完全用 safe Rust 实现，无 `unsafe`。
+- **L3 Unsafe**: 张量操作底层依赖 `unsafe` 的 SIMD/BLAS 调用。`candle` 通过 `Storage` trait 封装内存布局，将 `unsafe` 限制在 `src/storage/` 模块（Module）内。`burn` 的 `NdArray` 后端完全用 safe Rust 实现，无 `unsafe`。
 - **L4 形式化**: 张量的**形状安全**（shape safety）是 Rust 类型系统向**数组语言**（APL/J）形式化能力的逼近。但 Rust 目前无法在编译期证明**动态形状**（如基于运行时输入的 reshape）的合法性——这需要 const generics 的进一步扩展或 dependent types 的引入。
 
 **安全边界**: AI 推理的**确定性**是关键需求——相同的输入必须产生相同的输出。Rust 的无 GC 确定性内存管理使其成为**确定性容器**的理想载体。`candle` 的 `no_std` 支持使其可在嵌入式设备上运行 LLaMA 模型，无 Python 解释器的非确定性干扰。
@@ -1460,7 +1460,7 @@ async fn handler() -> String {
 > **修正**: Async runtime（tokio）基于**协作式多任务** [历史: async-std [已归档]]：任务在 `.await` 点 yield 控制权，让 runtime 调度其他任务。
 > 若在 async 函数中执行**阻塞操作**（`std::thread::sleep`、`std::fs::read`、CPU 密集型计算、数据库同步查询），当前线程被阻塞，该线程上的所有任务都无法执行。
 > 在多线程 runtime 中，一个线程阻塞降低整体吞吐；在单线程 runtime 中，整个应用死锁。
-> 解决方案：1) 使用异步版本的 API（`tokio::fs`、`tokio::time`）；2) 将阻塞操作放到 `spawn_blocking` 线程池；3) 使用 `tokio::task::yield_now().await` 手动 yield。
+> 解决方案：1) 使用异步（Async）版本的 API（`tokio::fs`、`tokio::time`）；2) 将阻塞操作放到 `spawn_blocking` 线程池；3) 使用 `tokio::task::yield_now().await` 手动 yield。
 > 这与 Node.js 的 event loop（单线程，阻塞操作冻结整个应用）或 Go 的 goroutine（阻塞操作挂起 goroutine，调度器切换到其他 goroutine）不同——Rust 的 async 任务不自动处理阻塞，需要开发者显式选择。
 > [来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/index.html)]
 

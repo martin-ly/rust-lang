@@ -8,7 +8,7 @@
 > **Bloom 层级**: 记忆 → 理解 → 应用
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: F×App — 掌握枚举（Enum）作为带标签联合类型的表达力
-> **定位**: 系统讲解 Rust 枚举的定义、变体负载、Option/Result 两个核心枚举、模式匹配（Pattern Matching）穷尽性检查，以及与错误处理（Error Handling）的关系。
+> **定位**: 系统讲解 Rust 枚举（Enum）的定义、变体负载、Option/Result 两个核心枚举、模式匹配（Pattern Matching）穷尽性检查，以及与错误处理（Error Handling）的关系。
 > **前置概念**: [Type System](../02_type_system/04_type_system.md) · [Structs](14_structs.md) · [Pattern Matching](../04_control_flow/40_patterns.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
 > **后置概念**: [Error Handling Basics](../08_error_handling/32_error_handling_basics.md) · [Result and Option Deep Dive](../../02_intermediate/03_error_handling/04_error_handling.md) · [Algebraic Data Types](../../04_formal/00_type_theory/02_type_theory.md)
 >
@@ -21,11 +21,11 @@
 
 ## 认知路径
 
-> **认知路径**: 本节从“如何表达一组互斥的状态”出发，依次建立枚举变体、`Option<T>`、`Result<T, E>` 与模式匹配穷尽性的完整图景。
+> **认知路径**: 本节从“如何表达一组互斥的状态”出发，依次建立枚举变体、`Option<T>`、`Result<T, E>` 与模式匹配（Pattern Matching）穷尽性的完整图景。
 
 1. **问题识别**: 当变量只能处于若干互斥状态之一时，如何用类型安全地表达？
 2. **概念建立**: 掌握枚举定义、变体负载、`Option`、`Result`、穷尽性检查。
-3. **机制推理**: 通过 ⟹ 定理链将枚举、模式匹配与错误处理规则串联起来。
+3. **机制推理**: 通过 ⟹ 定理链将枚举、模式匹配与错误处理（Error Handling）规则串联起来。
 4. **边界辨析**: 借助反命题/反例理解未处理 `None`、`if let` 误用、变体所有权（Ownership）移动等问题。
 5. **迁移应用**: 将枚举与错误处理、代数数据类型、形式化语义等后置概念链接。
 
@@ -49,7 +49,7 @@
 
 > **反向推理 1** [Tier 1]: 若编译器报错 `non-exhaustive patterns` ⟸ 应检查 `match` 是否覆盖了所有枚举变体（包括 `None` / `Err`）。
 >
-> **反向推理 2** [Tier 1]: 若需要从枚举变体中提取值 ⟸ 优先使用 `match` 或 `if let`，并注意所有权移动。
+> **反向推理 2** [Tier 1]: 若需要从枚举变体中提取值 ⟸ 优先使用 `match` 或 `if let`，并注意所有权（Ownership）移动。
 
 ---
 
@@ -216,7 +216,7 @@ fn main() {
 }
 ```
 
-**修正**: 对变体使用引用匹配 `Packet::Data(ref s)`，或让 `Packet` 实现 `Clone`。
+**修正**: 对变体使用引用（Reference）匹配 `Packet::Data(ref s)`，或让 `Packet` 实现 `Clone`。
 
 ---
 

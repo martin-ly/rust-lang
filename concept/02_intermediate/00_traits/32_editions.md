@@ -57,7 +57,7 @@
 
 | Edition | 稳定版本 | 主要变化 |
 |:---|:---:|:---|
-| 2015 | 1.0 | 初始版本；模块路径需要 `extern crate`；trait 对象可省略 `dyn` |
+| 2015 | 1.0 | 初始版本；模块（Module）路径需要 `extern crate`；trait 对象可省略 `dyn` |
 | 2018 | 1.31 | 模块系统简化（`mod` 自动解析）、路径统一为 `crate::`、NLL、`async`/await 语法准备、`dyn Trait` 必须显式 |
 | 2021 | 1.56 | prelude 新增 `TryFrom`/`TryInto`/`FromIterator`、数组实现 `IntoIterator`、panic 宏（Macro）一致性（Coherence）、保留语法 |
 | 2024 | 1.85+ | `if let` 临时作用域收窄、`gen` 关键字保留、异步（Async）闭包（Closures）、`match` 人体工学改进、never type fallback |

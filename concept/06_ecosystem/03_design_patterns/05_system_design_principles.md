@@ -49,7 +49,7 @@
     - [6.1 设计原则依赖图](#61-设计原则依赖图)
     - [6.2 系统架构决策树](#62-系统架构决策树)
   - [七、定理推理链](#七定理推理链)
-    - [定理一致性矩阵（系统设计专集）](#定理一致性矩阵系统设计专集)
+    - [定理一致性（Coherence）矩阵（系统设计专集）](#定理一致性矩阵系统设计专集)
   - [八、相关概念链接（L0-L7 映射）](#八相关概念链接l0-l7-映射)
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
@@ -63,7 +63,7 @@
     - [10.3 边界测试：过度泛型（Generics）化导致的单态化（Monomorphization）膨胀（编译后体积爆炸）](#103-边界测试过度泛型化导致的单态化膨胀编译后体积爆炸)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 中"零成本抽象"（Zero-Cost Abstractions）对系统架构设计意味着什么？（理解层）](#测验-1rust-中零成本抽象zero-cost-abstractions对系统架构设计意味着什么理解层)
+    - [测验 1：Rust 中"零成本抽象（Zero-Cost Abstraction）"（Zero-Cost Abstractions）对系统架构设计意味着什么？（理解层）](#测验-1rust-中零成本抽象zero-cost-abstractions对系统架构设计意味着什么理解层)
     - [测验 2：在 Rust 微服务架构中，为什么选择 `tokio` 而非多线程模型？（理解层）](#测验-2在-rust-微服务架构中为什么选择-tokio-而非多线程模型理解层)
     - [测验 3：Rust 的 `trait` 系统在解耦模块（Module）时有什么优势？（理解层）](#测验-3rust-的-trait-系统在解耦模块时有什么优势理解层)
     - [测验 4：什么是"错误即类型"（Errors as Values）？Rust 如何通过类型系统（Type System）实现它？（理解层）](#测验-4什么是错误即类型errors-as-valuesrust-如何通过类型系统实现它理解层)
@@ -118,7 +118,7 @@ Rust 的所有权（Ownership）系统正是 Capability-Based Security 的现代
 | Capability 理论 | Rust 实现 |
 |:---|:---|
 | 不可伪造的 capability | 值的所有权（Ownership）（编译器保证不可复制，除非 `Copy`） |
-| Capability 转移 | `move` 语义（所有权转移后原持有者失效） |
+| Capability 转移 | `move` 语义（所有权（Ownership）转移后原持有者失效） |
 | Capability 降级（只读） | `&T` 共享借用（Borrowing）（只读 capability） |
 | Capability 委托（可写） | `&mut T` 独占借用（Borrowing）（可写 capability） |
 | Capability 撤销 | 借用（Borrowing）生命周期（Lifetimes）结束（编译器自动回收） |
@@ -310,7 +310,7 @@ graph LR
 | 区块链节点 | Actor + 无锁共识 | `ractor`, `crossbeam` | Error Kernel + 状态机 |
 | 游戏引擎 | ECS + 数据导向 | `bevy`, `hecs` | Archetype + 缓存友好 |
 | 微服务网格 | WASM + WASI | `wasmtime`, `wit-bindgen` | Capability 安全 + 沙箱 |
-| 安全关键系统 | 形式化验证 + Safe Rust | `kani`, `creusot` | 编译期证明 + 运行时监控 |
+| 安全关键系统 | 形式化验证 + Safe Rust | `kani`, `creusot` | 编译期证明 + 运行时（Runtime）监控 |
 
 ---
 
@@ -449,7 +449,7 @@ graph TD
 
 | 本文件主题 | L1 基础 | L2 进阶 | L3 高级 | L4 形式化 | L5 对比 | L6 生态 | L7 前沿 |
 |:---|:---|:---|:---|:---|:---|:---|:---|
-| Capability 安全 | 所有权 / 借用 | 智能指针（Smart Pointer） | Pin / Unsafe | 分离逻辑 | vs C++ 指针 | Scopeguard | 自定义分配器 |
+| Capability 安全 | 所有权 / 借用（Borrowing） | 智能指针（Smart Pointer） | Pin / Unsafe | 分离逻辑 | vs C++ 指针 | Scopeguard | 自定义分配器 |
 | Session Types | 生命周期（Lifetimes） | Trait | 并发原语 | 线性逻辑 | vs Go channel | crossbeam | 流处理 |
 | 零成本抽象 | 类型系统（Type System） | 泛型（Generics） / GATs | async/await | 参数性 | vs C++ 模板 | 优化工具链 | Effects |
 | 组件组合 | struct / enum | Trait | 宏（Macro）系统 | 范畴论 | vs Haskell | Tower / Axum | 架构框架 |
@@ -602,7 +602,7 @@ impl Service {
 }
 ```
 
-> **修正**: 依赖注入（DI）在 Rust 中通常通过**泛型**（静态分发）或 **trait object**（动态分发）实现。泛型无运行时开销，但代码膨胀；trait object 有 vtable 间接开销（约 1-2 个指针解引用（Reference）），但二进制更小。上述代码使用 `Box<dyn Repository>` 实现 DI，每次 `find` 调用有虚函数开销。在性能关键路径上，应使用泛型：`struct Service<R: Repository> { repo: R }`。Rust 的类型系统允许在编译期选择：开发时使用 trait object（快速迭代），发布时重构为泛型（性能优化）。这与 Java 的接口（总是动态分发，JIT 可能内联）或 C++ 的模板（总是静态分发）不同——Rust 提供了两种机制，让开发者根据场景选择。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [Rust Performance Book]
+> **修正**: 依赖注入（DI）在 Rust 中通常通过**泛型（Generics）**（静态分发）或 **trait object**（动态分发）实现。泛型无运行时开销，但代码膨胀；trait object 有 vtable 间接开销（约 1-2 个指针解引用（Reference）），但二进制更小。上述代码使用 `Box<dyn Repository>` 实现 DI，每次 `find` 调用有虚函数开销。在性能关键路径上，应使用泛型：`struct Service<R: Repository> { repo: R }`。Rust 的类型系统（Type System）允许在编译期选择：开发时使用 trait object（快速迭代），发布时重构为泛型（性能优化）。这与 Java 的接口（总是动态分发，JIT 可能内联）或 C++ 的模板（总是静态分发）不同——Rust 提供了两种机制，让开发者根据场景选择。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [Rust Performance Book]
 
 ### 10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）
 

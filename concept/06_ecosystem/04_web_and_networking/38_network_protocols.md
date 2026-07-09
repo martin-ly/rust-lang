@@ -441,7 +441,7 @@ Rust 生态：`tokio-uring`、`monoio`、`glommio`。
 | 方法 | 机制 | 适用场景 |
 | :--- | :--- | :--- |
 | `sendfile` | 内核态直接传输 | 静态文件服务 |
-| io_uring | 批量异步 I/O | 高并发网络/文件 |
+| io_uring | 批量异步（Async） I/O | 高并发网络/文件 |
 | `mmap` | 用户态映射文件 | 大文件随机访问 |
 
 ### HTTP/3 与 QUIC
@@ -497,7 +497,7 @@ Rust 生态：纯 Rust QUIC 实现 `quinn`、HTTP/3 实现 `h3`、AWS `s2n-quic`
 
 | 坑 | 解决 |
 | :--- | :--- |
-| 同步阻塞运行时 | 用 `tokio::net` 或 `spawn_blocking` |
+| 同步阻塞运行时（Runtime） | 用 `tokio::net` 或 `spawn_blocking` |
 | 连接泄漏 | 设置超时、连接池、`Drop` 确保关闭 |
 | 半关闭处理 | 正确 `shutdown`；区分读/写关闭 |
 | 跨平台差异 | 用 `tokio` 抽象；注意 Windows 差异 |

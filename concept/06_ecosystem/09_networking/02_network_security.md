@@ -315,6 +315,6 @@ async fn read_with_timeout(mut stream: TcpStream) -> std::io::Result<Vec<u8>> {
 
 | 定理 | 前提 | 结论 |
 |:---|:---|:---|
-| 内存安全 ⟹ 更少攻击面 | Rust 所有权（Ownership）与借用（Borrowing）检查 | 消除大量传统 C/C++ 漏洞类 |
+| 内存安全（Memory Safety） ⟹ 更少攻击面 | Rust 所有权（Ownership）与借用（Borrowing）检查 | 消除大量传统 C/C++ 漏洞类 |
 | TLS ⟹ 机密性与完整性 | 加密握手与记录层 | 防止窃听与篡改 |
 | 形式审计 ⟹ 高保证 | 对关键安全代码进行审查与验证 | 降低高风险漏洞概率 |

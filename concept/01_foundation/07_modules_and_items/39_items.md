@@ -25,7 +25,7 @@
 
 1. **问题识别**: 为什么 Rust 将程序拆分为模块（Module）与项？这与 C/C++ 的头文件/源文件模型有何不同？
 2. **概念建立**: 掌握 item 的定义、种类、声明位置、可见性与作用域规则。
-3. **机制推理**: 通过 ⟹ 定理链将 crate、模块、item、名称解析与可见性串联起来。
+3. **机制推理**: 通过 ⟹ 定理链将 crate、模块（Module）、item、名称解析与可见性串联起来。
 4. **边界辨析**: 借助反命题/反例理解 item 顺序、`macro_rules` 作用域、关联项与外部项的边界。
 5. **迁移应用**: 将 item 知识与 [trait](../../02_intermediate/00_traits/01_traits.md)、[泛型（Generics）](../../02_intermediate/01_generics/02_generics.md)、[unsafe](../../03_advanced/02_unsafe/03_unsafe.md) 等后置概念链接。
 
@@ -287,12 +287,12 @@ flowchart TD
 >
 > **过渡**: 从可见性规则过渡到 use 声明，可以建立“定义—导出—使用”的模块协作模式。
 >
-> **过渡**: 从 item 顺序与宏（Macro）作用域过渡到 trait 与泛型，可以为进阶类型系统（Type System）学习奠定基础。
+> **过渡**: 从 item 顺序与宏（Macro）作用域过渡到 trait 与泛型（Generics），可以为进阶类型系统（Type System）学习奠定基础。
 >
 
 ## 反向推理
 
 > **反向推理**: 编译器提示某 item 不存在但实际已定义 ⟸ 说明可见性 `pub` 或模块路径未正确设置。
 >
-> **反向推理**: 宏在定义前被调用导致错误 ⟸ 说明 item 顺序与 `macro_rules` 作用域规则未遵守。
+> **反向推理**: 宏（Macro）在定义前被调用导致错误 ⟸ 说明 item 顺序与 `macro_rules` 作用域规则未遵守。
 >

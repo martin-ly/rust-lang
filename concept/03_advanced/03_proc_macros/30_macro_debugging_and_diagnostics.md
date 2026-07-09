@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: P×App — 宏（Macro）调试与错误诊断流程
 > **前置概念**: [过程宏（Procedural Macro）](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)
-> **后置概念**: [生产级宏开发](31_production_grade_macro_development.md) · [rustc 编译器诊断](../../06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md)
+> **后置概念**: [生产级宏（Macro）开发](31_production_grade_macro_development.md) · [rustc 编译器诊断](../../06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md)
 >
 > **主要来源**: [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html) · [cargo-expand](https://github.com/dtolnay/cargo-expand) · [rustc-dev-guide — Macro Expansion](https://rustc-dev-guide.rust-lang.org/macro-expansion.html) · [proc-macro2 crate](https://docs.rs/proc-macro2/)
 >
@@ -255,7 +255,7 @@ impl rustc_driver::Callbacks for MyCallbacks {
 
 ## 认知路径
 
-1. **问题识别**: 识别宏在编译期展开导致传统运行时调试器失效的问题。
+1. **问题识别**: 识别宏在编译期展开导致传统运行时（Runtime）调试器失效的问题。
 2. **概念建立**: 掌握 cargo-expand、编译器回调、span 跟踪与编译期性能分析技术。
 3. **机制推理**: 通过展开追踪 ⟹ span 保留 ⟹ 精确诊断的定理链提升排错效率。
 4. **边界辨析**: 辨析“宏错误信息必然模糊”等反命题，理解 span 与诊断 API 的价值。
@@ -271,7 +271,7 @@ impl rustc_driver::Callbacks for MyCallbacks {
 
 ## 反命题
 
-> **反命题 1**: "可以用常规 debugger 调试过程宏" ⟹ 不成立。宏在编译期执行，运行时调试器无法介入。
+> **反命题 1**: "可以用常规 debugger 调试过程宏（Procedural Macro）" ⟹ 不成立。宏在编译期执行，运行时调试器无法介入。
 >
 > **反命题 2**: "宏错误信息必然模糊" ⟹ 不成立。通过 `proc_macro::Diagnostic` 与 span 可以输出精确错误。
 >

@@ -26,11 +26,11 @@
 
 ## 📑 目录
 
-- 过程宏（Macro）：编译期代码生成的元编程工具
+- 过程宏（Procedural Macro）：编译期代码生成的元编程工具
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 过程宏（Procedural Macro） vs macro\_rules](#11-过程宏-vs-macro_rules)
-    - [1.2 三种过程宏（Macro）类型](#12-三种过程宏类型)
+    - [1.2 三种过程宏（Procedural Macro）类型](#12-三种过程宏类型)
     - [1.3 编译期执行模型](#13-编译期执行模型)
   - [二、技术细节](#二技术细节)
     - [2.1 TokenStream 操作](#21-tokenstream-操作)
@@ -47,13 +47,13 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
     - [10.5 边界测试：过程宏（Procedural Macro）的 `Span` 与错误定位精度（编译错误/调试困难）](#105-边界测试过程宏的-span-与错误定位精度编译错误调试困难)
-    - [10.3 边界测试：过程宏（Macro）的 hygiene 与路径解析（编译错误）](#103-边界测试过程宏的-hygiene-与路径解析编译错误)
+    - [10.3 边界测试：过程宏（Procedural Macro）的 hygiene 与路径解析（编译错误）](#103-边界测试过程宏的-hygiene-与路径解析编译错误)
     - [10.4 边界测试：proc\_macro 的 TokenStream 与 hygiene 标识符生成（编译错误）](#104-边界测试proc_macro-的-tokenstream-与-hygiene-标识符生成编译错误)
     - 10.6 边界测试：不可变借用（Immutable Borrow）与可变借用的冲突
   - [参考来源](#参考来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：过程宏（Procedural Macro）的类型（理解层）](#测验-1过程宏的类型理解层)
-    - [测验 2：过程宏（Macro）的执行时机（应用层）](#测验-2过程宏的执行时机应用层)
+    - [测验 2：过程宏（Procedural Macro）的执行时机（应用层）](#测验-2过程宏的执行时机应用层)
     - [测验 3：syn + quote 工作流（应用层）](#测验-3syn--quote-工作流应用层)
     - [测验 4：卫生性（Hygiene）（分析层）](#测验-4卫生性hygiene分析层)
     - [测验 5：Derive 宏（Macro）的限制（分析层）](#测验-5derive-宏的限制分析层)
@@ -109,7 +109,7 @@
 
 > **认知功能**: 此对比揭示两种宏系统的**设计权衡**——macro_rules! 简单但受限，过程宏（Procedural Macro）强大但复杂。选择取决于元编程任务的复杂度。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch20-05-macros.html)]
-> **关键洞察**: 过程宏（Macro）不是 macro_rules! 的替代品，而是**互补工具**——简单代码生成用 macro_rules!，复杂逻辑（如 derive）用过程宏。
+> **关键洞察**: 过程宏（Procedural Macro）不是 macro_rules! 的替代品，而是**互补工具**——简单代码生成用 macro_rules!，复杂逻辑（如 derive）用过程宏。
 > [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 
 ---
@@ -229,7 +229,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 // - 不解析语义，只操作语法树
 ```
 
-> **TokenStream**: 过程宏（Macro）的输入/输出都是 `TokenStream`——它是**语法树**而非字符串。这保证了宏生成的代码总是语法合法的（但不一定语义合法）。
+> **TokenStream**: 过程宏（Procedural Macro）的输入/输出都是 `TokenStream`——它是**语法树**而非字符串。这保证了宏生成的代码总是语法合法的（但不一定语义合法）。
 > [来源: [std::proc_macro::TokenStream](https://doc.rust-lang.org/proc_macro/struct.TokenStream.html)]
 
 ---
@@ -363,7 +363,7 @@ pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
   // 生成自定义格式的序列化/反序列化代码
 ```
 
-> **模式总结**: 过程宏的**核心价值**是消除 boilerplate——将重复的、模式化的代码生成委托给编译器，同时保持类型安全。
+> **模式总结**: 过程宏（Procedural Macro）的**核心价值**是消除 boilerplate——将重复的、模式化的代码生成委托给编译器，同时保持类型安全。
 > [来源: [serde_derive Source](https://github.com/serde-rs/serde/tree/master/serde_derive)]
 
 ---
@@ -387,7 +387,7 @@ graph TD
     style MANUAL fill:#fff3e0
 ```
 
-> **认知功能**: 此决策树判断是否应使用过程宏。核心原则是：**优先使用语言原生特性（泛型（Generics）、Trait），过程宏是最后手段**。
+> **认知功能**: 此决策树判断是否应使用过程宏（Procedural Macro）。核心原则是：**优先使用语言原生特性（泛型（Generics）、Trait），过程宏是最后手段**。
 > **使用建议**: 80% 的"重复代码"可以用泛型（Generics）解决；只有当模式跨越类型边界且无法抽象为 Trait 时，才考虑过程宏。
 > **关键洞察**: 过程宏增加了**编译时间**和**调试复杂度**——只在 boilerplate 显著影响可维护性时使用。
 > [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html)]
@@ -1067,7 +1067,7 @@ fn test_compile_fail() {
 
 | 场景 | 选型 |
 | :--- | :--- |
-| 简单重复代码 | 声明宏 `macro_rules!` |
+| 简单重复代码 | 声明宏（Declarative Macro） `macro_rules!` |
 | 自动实现 trait | `#[derive(Trait)]` 过程宏 |
 | 属性注解 | 属性过程宏 `#[attr]` |
 | 函数式语法扩展 | 函数过程宏 `macro!()` |

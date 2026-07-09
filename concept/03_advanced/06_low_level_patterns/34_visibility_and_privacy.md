@@ -87,7 +87,7 @@ pub enum State {               // 公开枚举，变体默认公开
 | `pub` | 全局公开 |
 | `pub(crate)` | 当前 crate 内可见 |
 | `pub(super)` | 父模块（Module）可见，等价于 `pub(in super)` |
-| `pub(in path)` | 在指定祖先模块路径内可见 |
+| `pub(in path)` | 在指定祖先模块（Module）路径内可见 |
 | `pub(self)` | 仅当前模块可见，等价于 private |
 
 ### 示例

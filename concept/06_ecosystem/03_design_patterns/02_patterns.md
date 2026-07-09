@@ -475,7 +475,7 @@ unsafe {
 - **C/C++**: `dlopen` / `LoadLibrary`；Rust 的 `libloading` 是对这些 API 的安全封装。
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [libloading docs] · 可信度: ✅
-> **过渡**：从静态分发的Strategy到动态加载的Plugin，Rust的模式谱系覆盖了编译期到运行时的全生命周期（Lifetimes）。理解这些实现机制后，必须警惕其对立面——反模式。
+> **过渡**：从静态分发的Strategy到动态加载的Plugin，Rust的模式谱系覆盖了编译期到运行时（Runtime）的全生命周期（Lifetimes）。理解这些实现机制后，必须警惕其对立面——反模式。
 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 4.6 Observer 模式
@@ -497,7 +497,7 @@ unsafe {
 
 #### Rust 实现方式一：回调列表（同步）
 
-使用 `Vec<Box<dyn Fn(&T)>>` 存储闭包（Closures）回调，适用于单线程同步场景。所有权核心挑战在于：Subject 持有 Observer 回调，而 Observer 可能持有 Subject 的引用（Reference）。
+使用 `Vec<Box<dyn Fn(&T)>>` 存储闭包（Closures）回调，适用于单线程同步场景。所有权（Ownership）核心挑战在于：Subject 持有 Observer 回调，而 Observer 可能持有 Subject 的引用（Reference）。
 
 ```rust
 use std::cell::RefCell;
@@ -660,7 +660,7 @@ async fn lightweight_observer_example() {
 
 #### 所有权挑战：循环引用与 `Weak<T>` 的作用
 
-Rust 的所有权模型使 Observer 模式面临独特挑战。当 Observer 需要访问 Subject 的当前状态，而 Subject 又持有 Observer 回调时，双向引用形成所有权循环：
+Rust 的所有权模型使 Observer 模式面临独特挑战。当 Observer 需要访问 Subject 的当前状态，而 Subject 又持有 Observer 回调时，双向引用（Reference）形成所有权循环：
 
 | **挑战** | **经典 OOP 方案** | **Rust 方案** | **原理** |
 |:---|:---|:---|:---|
@@ -753,7 +753,7 @@ fn display_system(mut reader: EventReader<TemperatureChanged>) {
 
 | **模式** | **GATs 解决的核心问题** | **典型应用** |
 |:---|:---|:---|
-| Lending Iterator | 返回引用生命周期与迭代器本身绑定 | `windows()`, `array_chunks()` |
+| Lending Iterator | 返回引用生命周期（Lifetimes）与迭代器本身绑定 | `windows()`, `array_chunks()` |
 | Type Families | 关联类型参数化 | 异步（Async） trait、流式 API |
 | Higher-Kinded Types 模拟 | 类型构造器的抽象 | 泛型（Generics）集合接口 |
 
@@ -816,7 +816,7 @@ struct WriterVTable {
 | **Graceful Shutdown** | 运行时有序退出，完成 inflight 请求 | `tokio::select!` + `mpsc::channel` 关闭信号 |
 | **Backpressure** | 防止生产者过载消费者 | `tokio::sync::Semaphore` + bounded channel |
 | **Resource Pool** | 异步（Async）环境下的连接/对象复用 | `deadpool` / `bb8` |
-| **Stream 适配** | 异步迭代与转换 | `futures::Stream` + `StreamExt` |
+| **Stream 适配** | 异步（Async）迭代与转换 | `futures::Stream` + `StreamExt` |
 
 ```rust,ignore
 // Graceful Shutdown 模式
@@ -958,7 +958,7 @@ fn load(path: &str) -> Result<Config, Error> {
 
 > **Bloom 层级**: 应用 → 分析
 
-反模式是"看似正确、实则有害"的惯用做法。Rust 的类型系统与所有权模型在消除某些经典反模式（如悬空指针、数据竞争）的同时，也催生了特有的抽象陷阱——过度使用泛型、过早拆分模块（Module）、`Rc<RefCell<...>>` 迷宫等。以下从工程直觉到成本分析，建立反模式的识别框架。
+反模式是"看似正确、实则有害"的惯用做法。Rust 的类型系统（Type System）与所有权模型在消除某些经典反模式（如悬空指针、数据竞争）的同时，也催生了特有的抽象陷阱——过度使用泛型（Generics）、过早拆分模块（Module）、`Rc<RefCell<...>>` 迷宫等。以下从工程直觉到成本分析，建立反模式的识别框架。
 
 ---
 
@@ -1072,7 +1072,7 @@ impl Transport {
 | 出现次数 | 推荐做法 | Rust 机制 |
 |:---|:---|:---|
 | 1 | 直接复制/内联 | 具体类型 |
-| 2 | 注释标记"若再次出现则提取" | 模块级 `// TODO: extract if reused` |
+| 2 | 注释标记"若再次出现则提取" | 模块（Module）级 `// TODO: extract if reused` |
 | 3 | 提取为泛型函数或 Trait | `fn foo<T: Bound>(x: T)` / `trait Foo` |
 | ≥5 | 考虑 crate 级拆分 | Workspace 独立 crate |
 
@@ -2217,7 +2217,7 @@ fn global_config() -> &'static Config {
 | God Object | 职责过重、测试困难 | 拆分为多个小结构体（Struct） + trait |
 | `Deref` 滥用 | 隐藏类型边界、违反新类型初衷 | 显式方法或 `AsRef` |
 | `clone()` 滥用 | 不必要的内存拷贝 | 借用（Borrowing）、引用计数或共享所有权 |
-| `unwrap()` 滥用 | 生产环境 panic | `?`、显式错误处理或 `expect` 说明 |
+| `unwrap()` 滥用 | 生产环境 panic | `?`、显式错误处理（Error Handling）或 `expect` 说明 |
 | 频繁字符串拼接 | 多次分配 | `String::with_capacity` + `push_str` 或 `format!` |
 | 过度使用 `Box` | 堆分配与间接调用 | 泛型参数或 `impl Trait` |
 

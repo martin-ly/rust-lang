@@ -48,7 +48,7 @@
   - [二、概念属性矩阵](#二概念属性矩阵)
   - [三、技术细节与示例](#三技术细节与示例)
     - [3.1 基本用法](#31-基本用法)
-    - [3.2 泛型类型别名](#32-泛型类型别名)
+    - [3.2 泛型（Generics）类型别名](#32-泛型类型别名)
     - [3.3 与 Trait Bound 结合](#33-与-trait-bound-结合)
     - [3.4 在 impl 块中使用别名](#34-在-impl-块中使用别名)
   - [四、示例与反例](#四示例与反例)
@@ -130,7 +130,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: `Meters` 和 `Kilograms` 在类型系统中没有区别，因此上述代码无法阻止将重量赋值给距离。若需区分语义，应使用 newtype 模式（`struct Meters(u32);`）。
+> **关键洞察**: `Meters` 和 `Kilograms` 在类型系统（Type System）中没有区别，因此上述代码无法阻止将重量赋值给距离。若需区分语义，应使用 newtype 模式（`struct Meters(u32);`）。
 > [来源: [TRPL — Newtype Pattern](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)]
 
 ### 3.2 泛型类型别名

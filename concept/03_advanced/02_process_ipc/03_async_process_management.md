@@ -12,7 +12,7 @@
 
 # Rust 异步进程管理
 
-> **权威页地位**：本页为 Rust 异步进程管理概念的 canonical 解释来源。
+> **权威页地位**：本页为 Rust 异步（Async）进程管理概念的 canonical 解释来源。
 > **对应 crate 示例**：`crates/c07_process/docs/05_async_process_management.md` 现为摘要页，指向此处。
 
 ---
@@ -169,7 +169,7 @@ async fn cancellable_child() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 7. 大规模并发与流控
 
-在异步运行时中管理大量子进程时，需要控制并发度、避免资源耗尽，并保证可预测的行为。
+在异步运行时（Runtime）中管理大量子进程时，需要控制并发度、避免资源耗尽，并保证可预测的行为。
 
 ### 7.1 并发度限制
 
@@ -318,7 +318,7 @@ flowchart TD
 相关权威页：
 
 - [Async/Await](../01_async/02_async.md)
-- [进程模型与生命周期](01_process_model_and_lifecycle.md)
+- [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 
 ---
 

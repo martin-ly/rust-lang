@@ -23,7 +23,7 @@
 
 1. **问题识别**: 为什么 Rust 选择 crate 作为编译与分发的基本单元？它与 C/C++ 的翻译单元、Java 的包有何异同？
 2. **概念建立**: 掌握 crate、crate root、源文件、模块（Module）树、crate-level 属性等关键术语。
-3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块路径解析串联起来。
+3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块（Module）路径解析串联起来。
 4. **边界辨析**: 借助反命题/反例理解 `crate_type`、`no_main`、混合 crate 等边界情况。
 5. **迁移应用**: 将 crate 模型与 [Cargo workspace](../../06_ecosystem/01_cargo/78_cargo_workspaces.md)、[链接](../../03_advanced/04_ffi/27_linkage.md)、[运行时（Runtime）](../../03_advanced/02_unsafe/30_rust_runtime.md) 等后置概念链接。
 
@@ -228,7 +228,7 @@ flowchart TD
 | 命令行工具 | `bin` | `cargo run` 直接执行 |
 | 可复用 Rust 库 | `lib` | 发布到 crates.io 供 Rust 项目使用 |
 | Python/Node 扩展 | `cdylib` | 生成平台动态库 |
-| 静态链接到 C++ | `staticlib` | 不依赖 Rust 运行时分发 |
+| 静态链接到 C++ | `staticlib` | 不依赖 Rust 运行时（Runtime）分发 |
 | 插件系统 | `dylib` | Rust 动态加载 |
 
 ---

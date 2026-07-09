@@ -619,7 +619,7 @@ fn compose_fixed<T: ReadWrite>(rw: &T) {
 }
 ```
 
-> **修正**: Rust 的 trait object（`dyn Trait`）有对象安全性限制：只能包含一个"主 trait" 和若干 auto trait（`Send`、`Sync` 等）。不能直接写 `dyn TraitA + TraitB`（除非 TraitB 是 auto trait）。这是因为 vtable 只能存储一个主 trait 的方法指针。系统设计中的"接口组合"需通过泛型（Generics）（`T: TraitA + TraitB`）或创建新的组合 trait（`trait Combo: TraitA + TraitB {}`）实现。这与 Java 的多接口继承或 Go 的隐式接口不同——Rust 在类型安全和运行时效率之间做了明确权衡。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
+> **修正**: Rust 的 trait object（`dyn Trait`）有对象安全性限制：只能包含一个"主 trait" 和若干 auto trait（`Send`、`Sync` 等）。不能直接写 `dyn TraitA + TraitB`（除非 TraitB 是 auto trait）。这是因为 vtable 只能存储一个主 trait 的方法指针。系统设计中的"接口组合"需通过泛型（Generics）（`T: TraitA + TraitB`）或创建新的组合 trait（`trait Combo: TraitA + TraitB {}`）实现。这与 Java 的多接口继承或 Go 的隐式接口不同——Rust 在类型安全和运行时（Runtime）效率之间做了明确权衡。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：插件系统的 ABI 稳定性（运行时 UB）
 
@@ -640,7 +640,7 @@ pub struct PluginVTable {
 }
 ```
 
-> **修正**: Rust 的 trait 和泛型**不保证 ABI 稳定性**——不同编译器版本、不同优化级别可能生成不同的 vtable 布局。设计插件系统时，必须使用 `#[repr(C)]` 结构体（Struct）和 `extern "C"` 函数作为 FFI 边界。这与 COM（Windows）或 GObject（GNOME）的虚表稳定 ABI 不同——Rust 优先类型安全和零成本抽象（Zero-Cost Abstraction），牺牲了跨版本二进制兼容性。`abi_stable` crate 提供了一种在 Rust 插件间维持 ABI 稳定的方案，但增加了运行时开销。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+> **修正**: Rust 的 trait 和泛型（Generics）**不保证 ABI 稳定性**——不同编译器版本、不同优化级别可能生成不同的 vtable 布局。设计插件系统时，必须使用 `#[repr(C)]` 结构体（Struct）和 `extern "C"` 函数作为 FFI 边界。这与 COM（Windows）或 GObject（GNOME）的虚表稳定 ABI 不同——Rust 优先类型安全和零成本抽象（Zero-Cost Abstraction），牺牲了跨版本二进制兼容性。`abi_stable` crate 提供了一种在 Rust 插件间维持 ABI 稳定的方案，但增加了运行时开销。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：trait 组合子的菱形继承问题（编译错误）
 

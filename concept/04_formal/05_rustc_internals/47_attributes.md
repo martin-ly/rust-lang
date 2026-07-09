@@ -67,9 +67,9 @@ struct Point { x: i32, y: i32 }
 | 诊断 | `#[allow]`, `#[warn]`, `#[deny]`, `#[forbid]`, `#[deprecated]` | 控制 lint 与弃用 |
 | 代码生成 | `#[inline]`, `#[cold]`, `#[no_mangle]`, `#[repr(...)]` | 影响代码生成 |
 | 限制 | `#[allow(...)]`, `#[feature(...)]`（nightly） | 能力开关 |
-| 类型系统 | `#[non_exhaustive]`, `#[must_use]` | 影响类型/接口语义 |
+| 类型系统（Type System） | `#[non_exhaustive]`, `#[must_use]` | 影响类型/接口语义 |
 | 调试器 | `#[debugger_visualizer]` | 调试器可视化 |
-| 运行时 | `#[global_allocator]`, `#[windows_subsystem]` | 运行时行为 |
+| 运行时（Runtime） | `#[global_allocator]`, `#[windows_subsystem]` | 运行时行为 |
 
 ## 三、属性应用位置
 
@@ -79,7 +79,7 @@ struct Point { x: i32, y: i32 }
 | Module | `#![allow(...)]` | 作用于当前模块 |
 | 函数 | `#[test]` | 作用于单个函数 |
 | 结构体（Struct）/枚举（Enum） | `#[derive(Debug)]` | 作用于类型定义 |
-| 字段 | `#[serde(rename = "...")]` | 作用于结构体字段 |
+| 字段 | `#[serde(rename = "...")]` | 作用于结构体（Struct）字段 |
 | 表达式/语句 | 部分属性允许 | 如 `#[allow(unreachable_code)]` |
 
 ## 四、常用内置属性速查
@@ -144,7 +144,7 @@ struct Point;
 fn decorated() {}
 ```
 
-属性宏接收整个 item 的 token tree，可以：
+属性宏（Macro）接收整个 item 的 token tree，可以：
 
 - 保留原 item 不变。
 - 生成额外的 item。

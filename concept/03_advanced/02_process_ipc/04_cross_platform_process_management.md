@@ -164,7 +164,7 @@ fn config_path() -> PathBuf {
 ## 7. 最佳实践
 
 - 默认使用 `std::process` 保持可移植性。
-- 将平台特定逻辑隔离在 `#[cfg(...)]` 模块中。
+- 将平台特定逻辑隔离在 `#[cfg(...)]` 模块（Module）中。
 - 路径操作始终使用 `std::path::Path` 和 `PathBuf`。
 - 在 CI 中针对目标平台进行交叉编译与测试。
 
@@ -194,7 +194,7 @@ fn config_path() -> PathBuf {
 
 ## 相关概念
 
-- [进程模型与生命周期](01_process_model_and_lifecycle.md)
+- [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [高级进程管理](02_advanced_process_management.md)
 - [异步（Async）进程管理](03_async_process_management.md)
 - [条件编译](../03_proc_macros/28_conditional_compilation.md)

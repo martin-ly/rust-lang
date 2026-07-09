@@ -237,7 +237,7 @@ mod erc20 {
 
 | 漏洞 | Solidity 根源 | Rust 消除机制 | 形式化根基 |
 |:---|:---|:---|:---|
-| **重入 (Reentrancy)** | 默认 call 传递控制流 + 可重入锁需手动实现 | `&mut self` 独占 ⟹ 编译期保证无并发写；运行时借用（Borrowing）检查覆盖跨程序调用 | 线性逻辑：资源不可复制、不可丢弃 |
+| **重入 (Reentrancy)** | 默认 call 传递控制流 + 可重入锁需手动实现 | `&mut self` 独占 ⟹ 编译期保证无并发写；运行时（Runtime）借用（Borrowing）检查覆盖跨程序调用 | 线性逻辑：资源不可复制、不可丢弃 |
 | **整数溢出** | 默认 wrapping（0.8 前）或 checked（0.8+，gas 开销） | 默认 panic；`checked_add` / `saturating_add` 强制显式分支 | 类型系统（Type System）：数值操作返回 `Option<T>` |
 | **访问控制遗漏** | `onlyOwner` 修饰器需手动添加 | 无直接帮助，但 `Auth` 类型可通过类型状态模式强制检查 | Typestate：权限作为类型参数 |
 | **未检查的外部调用返回值** | `call` 返回 `bool` 可被忽略 | `Result<T, E>` 的 `#[must_use]` 强制处理错误 | 代数数据类型：错误不可静默丢弃 |
@@ -407,7 +407,7 @@ let coin: Coin = get_coin();
 // 函数结尾未消费 coin → 编译器拒绝
 ```
 
-> **核心洞察**: Move 的 abilities 是**能力安全（Capability Security）**在类型系统中的表达。与 Rust 的所有权（Ownership）转移不同，Move 通过**编译期 ability 检查**和**字节码验证器（bytecode verifier）**双重保障资源安全。 [来源: [lib.rs](https://lib.rs/)]
+> **核心洞察**: Move 的 abilities 是**能力安全（Capability Security）**在类型系统（Type System）中的表达。与 Rust 的所有权（Ownership）转移不同，Move 通过**编译期 ability 检查**和**字节码验证器（bytecode verifier）**双重保障资源安全。 [来源: [lib.rs](https://lib.rs/)]
 
 ### 4.2 Sui 的 Object-Centric 模型 vs Aptos 的账户存储模型
 
@@ -437,10 +437,10 @@ public fun get_balance(addr: address): u64 acquires Coin {
 
 | 安全维度 | Move (Sui/Aptos) | Rust (ink!/Solana) | 形式化根基 |
 |:---|:---|:---|:---|
-| **资源唯一性** | Ability 系统 + 字节码验证器 | 所有权 + `Drop`/`Clone` trait | 线性逻辑：资源不可复制、不可丢弃 |
+| **资源唯一性** | Ability 系统 + 字节码验证器 | 所有权（Ownership） + `Drop`/`Clone` trait | 线性逻辑：资源不可复制、不可丢弃 |
 | **内存安全（Memory Safety）** | 字节码验证器检查引用（Reference）安全 | 编译期借用（Borrowing）检查器 | 分离逻辑 / 别名类型系统 |
 | **全局状态访问** | `borrow_global` / `move_to`（显式 acquires） | 运行时存储 API（`Mapping` / `AccountInfo`）| 效果系统：全局状态作为显式 effect |
-| **并发安全（Concurrency Safety）** | Sui 对象级并行；Aptos 顺序执行 | Solana Sealevel 运行时借用检查 | 会话类型 / 区域类型 |
+| **并发安全（Concurrency Safety）** | Sui 对象级并行；Aptos 顺序执行 | Solana Sealevel 运行时借用（Borrowing）检查 | 会话类型 / 区域类型 |
 | **形式化验证** | Move Prover（Boogie/Z3 后端）| Kani（Rust 模型检测）| SMT 求解 / 符号执行 |
 
 > **关键差异**: Move 的**字节码验证器**在部署时执行额外的安全检查（引用（Reference）不悬空、资源不丢失、类型不混淆），这是 Rust 编译器不提供的**链上验证层**。Rust 合约依赖 Wasm 沙箱和运行时检查，而 Move 合约在**字节码级别**即被验证为安全。

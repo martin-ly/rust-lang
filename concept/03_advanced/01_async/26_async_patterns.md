@@ -515,7 +515,7 @@ CPU 密集型 offload:
   → spawn_blocking(|| heavy_compute()).await?
 ```
 
-> **模式矩阵**: Rust 异步的**核心模式可以归纳为 7 类**——覆盖从简单并发到复杂流处理的大部分场景。
+> **模式矩阵**: Rust 异步（Async）的**核心模式可以归纳为 7 类**——覆盖从简单并发到复杂流处理的大部分场景。
 
 ### 2.4 spawn_blocking 与混合架构
 

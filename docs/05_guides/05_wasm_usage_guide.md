@@ -30,7 +30,7 @@
     - [1. 基本 WASM 函数 {#1-基本-wasm-函数}](#1-基本-wasm-函数-1-基本-wasm-函数)
     - [2. 与 JavaScript 互操作 {#2-与-javascript-互操作}](#2-与-javascript-互操作-2-与-javascript-互操作)
     - [3. 处理 JavaScript 对象 {#3-处理-javascript-对象}](#3-处理-javascript-对象-3-处理-javascript-对象)
-    - [4. 异步（Async）函数 {#4-异步函数}](#4-异步函数-4-异步函数)
+    - [4. 异步函数 {#4-异步函数}](#4-异步函数-4-异步函数)
   - [🔧 编译配置 {#编译配置}](#-编译配置-编译配置)
     - [1. Cargo.toml {#1-cargotoml}](#1-cargotoml-1-cargotoml)
     - [2. 编译命令 {#2-编译命令}](#2-编译命令-2-编译命令)

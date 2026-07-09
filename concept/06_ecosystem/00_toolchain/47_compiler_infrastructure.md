@@ -271,7 +271,7 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 <details>
 <summary>✅ 答案与解析</summary>
 
-`syn` 将 `proc_macro::TokenStream` 解析为 AST（如 `DeriveInput`、`Expr`），使过程宏（Macro）可以操作结构化语法而非原始 token。是几乎所有 derive 宏的基础依赖。
+`syn` 将 `proc_macro::TokenStream` 解析为 AST（如 `DeriveInput`、`Expr`），使过程宏（Procedural Macro）可以操作结构化语法而非原始 token。是几乎所有 derive 宏的基础依赖。
 </details>
 
 ---
@@ -283,7 +283,7 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 <details>
 <summary>✅ 答案与解析</summary>
 
-`quote!` 从模板生成 `TokenStream`，支持变量插值（`#var`）。它是过程宏（Macro）输出代码的主要方式，比手动拼接 token 更安全、更易读。
+`quote!` 从模板生成 `TokenStream`，支持变量插值（`#var`）。它是过程宏（Procedural Macro）输出代码的主要方式，比手动拼接 token 更安全、更易读。
 </details>
 
 ---

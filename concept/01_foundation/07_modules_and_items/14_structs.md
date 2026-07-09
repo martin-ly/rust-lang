@@ -8,7 +8,7 @@
 > **Bloom 层级**: 记忆 → 理解 → 应用
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: F×Und — 理解结构体（Struct）作为自定义复合类型的基础构造
-> **定位**: 系统讲解 Rust 结构体的三种形式、字段可见性、结构体更新语法与方法基础，为后续 Trait、Enum、泛型（Generics）奠定类型基础。
+> **定位**: 系统讲解 Rust 结构体（Struct）的三种形式、字段可见性、结构体更新语法与方法基础，为后续 Trait、Enum、泛型（Generics）奠定类型基础。
 > **前置概念**: [Type System](../02_type_system/04_type_system.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Functions](12_functions.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
 > **后置概念**: [Enumerations](15_enumerations.md) · [Implementations](16_implementations.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
 >
@@ -26,8 +26,8 @@
 1. **问题识别**: 当多个值在逻辑上属于同一实体时，如何用类型表达？
 2. **概念建立**: 掌握三种结构体形式、字段可见性、结构体更新语法。
 3. **机制推理**: 通过 ⟹ 定理链将结构体定义、字段所有权（Ownership）与借用（Borrowing）规则串联起来。
-4. **边界辨析**: 借助反命题/反例理解更新语法的所有权陷阱、字段可变性问题。
-5. **迁移应用**: 将结构体与枚举（Enum）、实现块、泛型、Trait 等后置概念链接。
+4. **边界辨析**: 借助反命题/反例理解更新语法的所有权（Ownership）陷阱、字段可变性问题。
+5. **迁移应用**: 将结构体与枚举（Enum）、实现块、泛型（Generics）、Trait 等后置概念链接。
 
 ---
 
@@ -77,7 +77,7 @@
 >
 > **命题 2**: Rust 有三种结构体：**命名字段型**、**元组型**、**单元型**。
 >
-> **命题 3**: 结构体字段默认私有；通过 `pub` 暴露给模块外部。
+> **命题 3**: 结构体字段默认私有；通过 `pub` 暴露给模块（Module）外部。
 >
 > **命题 4**: 结构体更新语法 `..old` 使用旧实例的未显式指定字段，但会移动所有权。
 

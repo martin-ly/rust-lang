@@ -6,7 +6,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: S×Mem — 宏（Macro）术语结构化索引
 > **前置依赖**: [过程宏（Procedural Macro）](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)
-> **后置概念**: [宏卫生性](35_macro_hygiene.md) · [syn/quote 参考](34_syn_quote_reference.md)
+> **后置概念**: [宏（Macro）卫生性](35_macro_hygiene.md) · [syn/quote 参考](34_syn_quote_reference.md)
 > **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency
 >
 > **权威来源**: 本页为 `Macro Glossary` 的权威概念页；crate 文档仅保留导航 stub。
@@ -27,12 +27,12 @@
     - [Macro (宏)](#macro-宏)
     - [Declarative Macro (声明宏)](#declarative-macro-声明宏)
     - [Procedural Macro (过程宏)](#procedural-macro-过程宏)
-  - [🔧 声明宏术语](#-声明宏术语)
+  - [🔧 声明宏（Declarative Macro）术语](#-声明宏术语)
     - [macro\_rules](#macro_rules)
     - [Pattern Matching (模式匹配)](#pattern-matching-模式匹配)
     - [Repetition (重复)](#repetition-重复)
     - [Metavariable (元变量)](#metavariable-元变量)
-  - [⚙️ 过程宏术语](#️-过程宏术语)
+  - [⚙️ 过程宏（Procedural Macro）术语](#️-过程宏术语)
     - [TokenStream](#tokenstream)
     - [Derive Macro (派生宏)](#derive-macro-派生宏)
     - [Attribute Macro (属性宏)](#attribute-macro-属性宏)
@@ -98,7 +98,7 @@ macro_rules! vec_of_strings {
 **特点**:
 
 - 语法简洁
-- 模式匹配
+- 模式匹配（Pattern Matching）
 - 卫生性保证
 
 ---
@@ -595,7 +595,7 @@ for x in vec {
 
 ### Compile-time Computation (编译时计算)
 
-在编译期完成计算，运行时零开销。
+在编译期完成计算，运行时（Runtime）零开销。
 
 ```rust
 const SIZE: usize = compute_size!(some_input);
@@ -619,7 +619,7 @@ const SIZE: usize = compute_size!(some_input);
 
 ---
 
-> **向下引用**: 参见 [17_macro_patterns](../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md)
+> **向下引用（Reference）**: 参见 [17_macro_patterns](../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md)
 
 ## 认知路径
 

@@ -44,9 +44,9 @@
 
 ---
 
-> **定理 1** [Tier 2]: MIR 显式表达控制流图与所有权（Ownership）转移 ⟹ 借用检查、drop 展开与常量求值可以在统一的图上进行。
+> **定理 1** [Tier 2]: MIR 显式表达控制流图与所有权（Ownership）转移 ⟹ 借用（Borrowing）检查、drop 展开与常量求值可以在统一的图上进行。
 >
-> **定理 2** [Tier 2]: MIR 经过借用检查与优化后再 lower 到 codegen ⟹ 后端无需重新理解 Rust 的高层语法与所有权规则。
+> **定理 2** [Tier 2]: MIR 经过借用检查与优化后再 lower 到 codegen ⟹ 后端无需重新理解 Rust 的高层语法与所有权（Ownership）规则。
 >
 > **定理 3** [Tier 2]: `rustc --emit=mir` 与 `rustc --emit=llvm-ir` 输出的是同一编译过程的不同切片（Slice） ⟹ 开发者可以通过对比二者定位优化与代码生成问题。
 >
@@ -81,7 +81,7 @@
   - [嵌入式测验](#嵌入式测验)
     - [测验 1：MIR 与 LLVM IR 的主要区别是什么？](#测验-1mir-与-llvm-ir-的主要区别是什么)
     - [测验 2：`--emit=mir` 输出的是优化前还是优化后的 MIR？](#测验-2--emitmir-输出的是优化前还是优化后的-mir)
-    - [测验 3：单态化发生在流水线的哪一步？](#测验-3单态化发生在流水线的哪一步)
+    - [测验 3：单态化（Monomorphization）发生在流水线的哪一步？](#测验-3单态化发生在流水线的哪一步)
     - [测验 4：为什么 LLVM IR 不适合作为长期稳定的后端接口？](#测验-4为什么-llvm-ir-不适合作为长期稳定的后端接口)
   - [权威来源索引](#权威来源索引)
 
@@ -154,7 +154,7 @@ graph LR
 | `optimized_mir(def_id)` | 返回优化后的 MIR | 后端 lowering 的输入 |
 | `collect_and_partition_mono_items(crate)` | 收集需要单态化的项 | 决定生成哪些 LLVM 函数 |
 
-> **定理**: 每个泛型函数在 `optimized_mir` 阶段仍是泛型的；真正的单态化发生在 codegen 阶段，由 `Instance::mono` 等机制驱动。
+> **定理**: 每个泛型（Generics）函数在 `optimized_mir` 阶段仍是泛型的；真正的单态化发生在 codegen 阶段，由 `Instance::mono` 等机制驱动。
 >
 > [Rustc Dev Guide — Monomorphization](https://rustc-dev-guide.rust-lang.org/backend/monomorph.html)(<https://rustc-dev-guide.rust-lang.org/backend/monomorph.html>)
 

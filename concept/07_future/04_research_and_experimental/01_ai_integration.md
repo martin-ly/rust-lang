@@ -437,7 +437,7 @@ Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，
 | `suggested_replacement` | 动作空间剪枝 | 将候选修复从全 token 空间缩小到建议替换 |
 | `children[].message` (help) | 附加状态特征 | 编译器主动提供修复方向提示 |
 
-> **定理**：Rust 编译器诊断的**结构化密度**（每字节源码对应的诊断信息量）远高于 C++（文本诊断）或 Python（运行时堆栈），这使得 Rust 的 RL 状态表示更紧凑、奖励信号更密集。`rustc` 的确定性（相同输入总是产生相同诊断）进一步保证了 MDP 转移函数的稳定性。来源: [Rust Reference: JSON Diagnostic Format](https://doc.rust-lang.org/reference/introduction.html) · [rustc-dev-guide]
+> **定理**：Rust 编译器诊断的**结构化密度**（每字节源码对应的诊断信息量）远高于 C++（文本诊断）或 Python（运行时（Runtime）堆栈），这使得 Rust 的 RL 状态表示更紧凑、奖励信号更密集。`rustc` 的确定性（相同输入总是产生相同诊断）进一步保证了 MDP 转移函数的稳定性。来源: [Rust Reference: JSON Diagnostic Format](https://doc.rust-lang.org/reference/introduction.html) · [rustc-dev-guide]
 
 ### 6.5 与 LLM-based 修复的对比
 >
@@ -850,7 +850,7 @@ fn ai_generated_parse(data: &[u8]) -> &[u8] {
 >
 > 1) 边界检查遗漏（`slice::from_raw_parts` 的指针算术）；
 > 2) 别名规则违反（`&mut` 和 `*mut` 混用）；
-> 3) 生命周期误标注（`'static` 滥用）。
+> 3) 生命周期（Lifetimes）误标注（`'static` 滥用）。
 >
 > 缓解策略：
 >
@@ -934,7 +934,7 @@ fn main() {
 > 1) **始终编译 AI 生成的代码**；
 > 2) 使用 `cargo check` + `cargo clippy`；
 > 3) 对关键代码运行 Miri；
-> 4) 不依赖 AI 生成 unsafe 代码。这与人类初学者的错误模式类似——Rust 的所有权系统是独特的，需要专门学习，AI 也无法从其他语言的训练中自动掌握。
+> 4) 不依赖 AI 生成 unsafe 代码。这与人类初学者的错误模式类似——Rust 的所有权（Ownership）系统是独特的，需要专门学习，AI 也无法从其他语言的训练中自动掌握。
 >
 > [来源: [GitHub Copilot](https://github.com/features/copilot)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]

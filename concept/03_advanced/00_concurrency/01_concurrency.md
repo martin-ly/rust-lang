@@ -61,9 +61,9 @@
     - [第 2 步：多线程哪里变了？](#第-2-步多线程哪里变了)
     - [第 3 步：为什么数据会竞争？](#第-3-步为什么数据会竞争)
     - [第 4 步：编译器怎么预防？](#第-4-步编译器怎么预防)
-    - [第 5 步：运行时还有什么风险？](#第-5-步运行时还有什么风险)
+    - [第 5 步：运行时（Runtime）还有什么风险？](#第-5-步运行时还有什么风险)
     - [第 6 步：怎么验证正确性？](#第-6-步怎么验证正确性)
-  - [一、权威定义（Definition） Rust 并发基于所有权系统——每个值有唯一所有者（单一所有权，资源唯一性），所有权通过 move/转移在线程间传递（赋值、传参），owner 离开作用域时自动 drop/释放](#一权威定义definition-rust-并发基于所有权系统每个值有唯一所有者单一所有权资源唯一性所有权通过-move转移在线程间传递赋值传参owner-离开作用域时自动-drop释放)
+  - [一、权威定义（Definition） Rust 并发基于所有权（Ownership）系统——每个值有唯一所有者（单一所有权，资源唯一性），所有权通过 move/转移在线程间传递（赋值、传参），owner 离开作用域时自动 drop/释放](#一权威定义definition-rust-并发基于所有权系统每个值有唯一所有者单一所有权资源唯一性所有权通过-move转移在线程间传递赋值传参owner-离开作用域时自动-drop释放)
     - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
     - [1.2 TRPL 官方定义](#12-trpl-官方定义)
     - [1.3 形式化定义](#13-形式化定义)
@@ -92,9 +92,9 @@
   - [六、定理推理链（Theorem Chain）](#六定理推理链theorem-chain)
     - [6.1 所有权 + Send/Sync ⇒ 无数据竞争](#61-所有权--sendsync--无数据竞争)
     - [6.2 `Mutex<T>` 的内部可变性定理](#62-mutext-的内部可变性定理)
-    - [6.3 定理一致性矩阵](#63-定理一致性矩阵)
+    - [6.3 定理一致性（Coherence）矩阵](#63-定理一致性矩阵)
   - [七、示例与反例（Examples \& Counter-examples）](#七示例与反例examples--counter-examples)
-    - [7.1 正确示例：spawn + move 闭包](#71-正确示例spawn--move-闭包)
+    - [7.1 正确示例：spawn + move 闭包（Closures）](#71-正确示例spawn--move-闭包)
     - [7.2 正确示例：Mutex 共享状态](#72-正确示例mutex-共享状态)
     - [7.3 正确示例：Channel 消息传递](#73-正确示例channel-消息传递)
     - [7.4 反例：跨线程共享 Rc（E0277）](#74-反例跨线程共享-rce0277)
@@ -824,7 +824,7 @@ graph TD
 |:---|:---|:---|:---|:---|:---|:---|:---|
 | L1 | Send/Sync marker trait 安全性 | 类型满足 auto trait 推导规则 | ⟹ 线程间数据传递安全 | RustBelt CSL + Auto trait 公理 | T1, T2, L2 | `unsafe impl` 违背内部不变式 | E0225 |
 | L2 | `Mutex<T: Send>` 互斥安全 | 锁获取/释放协议正确 | ⟹ 跨线程共享安全 | 分离逻辑 (资源令牌) | T1, 并发集合 | 死锁、poison、lock 后 panic | — |
-| T1 | 类型系统排他性 | `T: Send + Sync` + 借用（Borrowing）检查通过 | ⟹ 编译期排除数据竞争 | Alias-XOR-Mutation + CSL | 所有并发代码 | `unsafe` 绕过检查、错误 `Ordering` | E0277/E0382 |
+| T1 | 类型系统（Type System）排他性 | `T: Send + Sync` + 借用（Borrowing）检查通过 | ⟹ 编译期排除数据竞争 | Alias-XOR-Mutation + CSL | 所有并发代码 | `unsafe` 绕过检查、错误 `Ordering` | E0277/E0382 |
 | T2 | `Arc<T>` 共享所有权 | `T: Send + Sync` | ⟹ 引用（Reference）计数共享的所有权语义 | 线性逻辑 ⊗ + RAII | L1, Channel | 循环引用导致内存泄漏 | — |
 | T3 | Atomic 无锁安全 | 正确使用 `Ordering` | ⟹ 原子操作（Atomic Operations）无撕裂 | C11 内存模型 | 无锁数据结构 | 错误 `Ordering`（如 `Relaxed` 做同步） | — |
 | T4 | Channel 消息安全 | 所有权转移入 Channel | ⟹ 接收方获得唯一所有权 | 线性逻辑 ⊗ | Actor 模式、T2 | 发送后继续使用已 move 值 | E0382 |
@@ -927,7 +927,7 @@ fn main() {
 
 **错误分析**：
 
-- `Rc` 使用非原子引用计数
+- `Rc` 使用非原子引用（Reference）计数
 - 若跨线程使用，计数增减存在数据竞争
 - `Rc` 未实现 `Send`
 
@@ -1440,7 +1440,7 @@ fn main() {
 
 **正确答案是 B**。
 
-Rust 并发安全的两个核心 marker trait：
+Rust 并发安全（Concurrency Safety）的两个核心 marker trait：
 
 - **`Send`**: 类型 `T` 实现 `Send` 意味着 **T 的所有权可以安全地 transfer 到另一个线程**。
   - 例如：`i32`、`String`、`Vec<T>`（若 T: Send）都是 `Send`

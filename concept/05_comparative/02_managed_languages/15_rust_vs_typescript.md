@@ -572,7 +572,7 @@ graph TD
   > [来源: [WASM Performance](https://webassembly.github.io/spec/core/appendix/index.html)] · [来源: [wasm-bindgen — Performance](https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/js-objects-in-rust.html)]
 ```
 
-> **层次一致性（Coherence）**: 反命题分析区分了**类型系统的力量**（Rust 的穷尽保证 vs TS 的渐进检查）和**运行时（Runtime）的真实行为**（TS 类型擦除后即为无类型 JS）。
+> **层次一致性（Coherence）**: 反命题分析区分了**类型系统（Type System）的力量**（Rust 的穷尽保证 vs TS 的渐进检查）和**运行时（Runtime）的真实行为**（TS 类型擦除后即为无类型 JS）。
 > [来源: [TypeScript — Design Non-Goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals)]
 
 ---
@@ -844,7 +844,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 类型检查在编译期进行，类型错误阻止编译。TypeScript 的类型检查只在编译期，运行的是无类型的 JavaScript，类型错误可能在运行时被忽略。
+Rust 类型检查在编译期进行，类型错误阻止编译。TypeScript 的类型检查只在编译期，运行的是无类型的 JavaScript，类型错误可能在运行时（Runtime）被忽略。
 </details>
 
 ---

@@ -235,7 +235,7 @@ flowchart TD
 
 Rust 的所有权（Ownership）模型直接影响数据结构实现：
 
-- **唯一所有权**：树形结构用 `Box<Node>` 即可表达父子关系。
+- **唯一所有权（Ownership）**：树形结构用 `Box<Node>` 即可表达父子关系。
 - **共享可变图**：需要 `Rc<RefCell<T>>` 或 Arena + index。
 - **并发共享**：使用 `Arc<Mutex<T>>` 或并发集合如 `DashMap`。
 - **零拷贝切片（Slice）**：利用 `&[T]` 和 `Vec` 的 `drain`/`split_off` 避免克隆。
@@ -246,7 +246,7 @@ Rust 的所有权（Ownership）模型直接影响数据结构实现：
 - 需要有序遍历时选择 `BTreeMap`/`BTreeSet`。
 - 避免在性能关键路径上使用 `LinkedList`。
 - 利用 Rust 的所有权模型在编译期保证数据结构不变量。
-- 对图、链表等自引用结构，优先用 index/Arena 替代 `Rc<RefCell<T>>` 以提升性能与可维护性。
+- 对图、链表等自引用（Reference）结构，优先用 index/Arena 替代 `Rc<RefCell<T>>` 以提升性能与可维护性。
 
 > **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Go](../../05_comparative/01_systems_languages/02_rust_vs_go.md)
 

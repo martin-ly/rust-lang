@@ -100,7 +100,7 @@
 
 ### 实例 (Instance)
 
-**定义**: 模块的运行时表示，包含已分配的内存和导出的函数。
+**定义**: 模块（Module）的运行时（Runtime）表示，包含已分配的内存和导出的函数。
 
 **关系**: 模块 → 实例化 → 实例
 
@@ -347,7 +347,7 @@
 
 ---
 
-> **向下引用**: 参见 [08_rust_vs_javascript](../../05_comparative/02_managed_languages/08_rust_vs_javascript.md)
+> **向下引用（Reference）**: 参见 [08_rust_vs_javascript](../../05_comparative/02_managed_languages/08_rust_vs_javascript.md)
 
 ## 过渡段
 

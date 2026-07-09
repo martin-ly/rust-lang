@@ -82,7 +82,7 @@
 
 - ✅ **浏览器**: Chrome、Firefox、Safari、Edge
 - ✅ **Node.js**: 通过 `WebAssembly` API
-- ✅ **独立运行时**: wasmtime、wasmer
+- ✅ **独立运行时（Runtime）**: wasmtime、wasmer
 - ✅ **边缘计算**: Cloudflare Workers、Fastly Compute
 - ✅ **移动设备**: iOS、Android（通过浏览器）
 
@@ -227,7 +227,7 @@ impl Person {
 **A**: 优化方法：
 
 1. **压缩**: 使用 gzip/brotli 压缩
-2. **分块加载**: 按需加载模块
+2. **分块加载**: 按需加载模块（Module）
 3. **缓存**: 使用浏览器缓存
 4. **预加载**: 提前加载关键模块
 
@@ -331,7 +331,7 @@ wasm-pack test --headless --firefox
 - ✅ **类型安全**: 强类型系统（Type System）
 - ✅ **CORS 限制**: 遵循浏览器安全策略
 
-**建议**: 使用 Rust 可以避免常见的内存安全问题。
+**建议**: 使用 Rust 可以避免常见的内存安全（Memory Safety）问题。
 
 ---
 
@@ -381,7 +381,7 @@ wasm-pack test --headless --firefox
 | :--- | :--- | :--- |
 | MaybeUninit 优化  | +5%         | 内存管理     |
 | NonZero::div_ceil | +10%        | 缓冲区分配   |
-| 迭代器特化        | +15-25%     | 数组比较     |
+| 迭代器（Iterator）特化        | +15-25%     | 数组比较     |
 | rotate_right      | +30-35%     | 数据旋转     |
 | **综合优化**      | **+20-30%** | **整体性能** |
 
@@ -449,7 +449,7 @@ wasm-pack test --headless --firefox
 
 ---
 
-> **向下引用**: 参见 [08_rust_vs_javascript](../../05_comparative/02_managed_languages/08_rust_vs_javascript.md)
+> **向下引用（Reference）**: 参见 [08_rust_vs_javascript](../../05_comparative/02_managed_languages/08_rust_vs_javascript.md)
 
 ## 过渡段
 

@@ -351,7 +351,7 @@ impl GuestFile for File {
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权模型 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 能力安全的形式化根基 |
+| 所有权（Ownership）模型 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 能力安全的形式化根基 |
 | Unsafe / FFI | [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md) | Wasm 与宿主边界 |
 | 泛型（Generics）与 Trait | [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) | WIT 接口的 Rust 映射 |
 | 形式化生态塔 | [`./05_formal_ecosystem_tower.md`](../08_formal_verification/44_formal_ecosystem_tower.md) | Wasm 在 L0-L4 中的位置 |
@@ -430,7 +430,7 @@ fn escape_sandbox() {
 
 > **运行时（Runtime）错误**: WASI 能力检查器返回 `ENOTCAPABLE`（无能力）。
 > **与 Rust 所有权的同构**: 这类似于 Rust 编译器阻止无所有权变量的访问——WASI 在运行时（Runtime）强制执行相同的逻辑，但边界是"能力句柄"而非"所有权变量"。
-> **关键洞察**: Rust 的所有权检查在编译期，WASI 的能力检查在运行时，二者形成**互补的安全层**。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> **关键洞察**: Rust 的所有权检查在编译期，WASI 的能力检查在运行时（Runtime），二者形成**互补的安全层**。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 8.4 反例：WIT 类型不匹配导致组件组合失败
 

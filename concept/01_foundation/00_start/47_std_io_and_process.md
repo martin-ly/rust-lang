@@ -71,7 +71,7 @@
   - [九、来源与延伸阅读](#九来源与延伸阅读)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：路径拼接](#测验-1路径拼接)
-    - [测验 2：I/O 错误处理](#测验-2io-错误处理)
+    - [测验 2：I/O 错误处理（Error Handling）](#测验-2io-错误处理)
   - [认知路径](#认知路径)
 
 ---
@@ -104,7 +104,7 @@
 
 ### 1.2 直觉解释
 
-标准 I/O 和进程模块是 Rust 与“外部世界”交互的门户。无论是读取键盘输入、写入文件、启动子进程，还是获取环境变量，都通过这些模块完成。它们遵循 Rust 的核心原则：所有权（Ownership）、借用（Borrowing）、`Result` 错误处理。
+标准 I/O 和进程模块（Module）是 Rust 与“外部世界”交互的门户。无论是读取键盘输入、写入文件、启动子进程，还是获取环境变量，都通过这些模块完成。它们遵循 Rust 的核心原则：所有权（Ownership）、借用（Borrowing）、`Result` 错误处理。
 
 > [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
@@ -184,7 +184,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: `PathBuf` 是可拥有的、可变的路径；`Path` 是借用的切片（Slice）式路径。两者都正确处理 Windows 和 Unix 路径分隔符。
+> **关键洞察**: `PathBuf` 是可拥有的、可变的路径；`Path` 是借用（Borrowing）的切片（Slice）式路径。两者都正确处理 Windows 和 Unix 路径分隔符。
 > [来源: [std::path](https://doc.rust-lang.org/std/path/index.html)]
 
 ### 3.4 子进程
@@ -368,7 +368,7 @@ graph TD
 > ```text
 > error[E0277] Result 未处理 ⟸ I/O 操作返回 Result 但未 unwrap/? ⟸ 使用 ? 或显式 match
 > error[E0308] 路径类型不匹配 ⟸ 使用 String 而非 Path/PathBuf ⟸ 改用 PathBuf
-> 运行时 panic ⟸ I/O 错误用 unwrap 处理 ⟸ 改为 ? 传播或错误恢复
+> 运行时（Runtime） panic ⟸ I/O 错误用 unwrap 处理 ⟸ 改为 ? 传播或错误恢复
 > 子进程无输出 ⟸ 未正确等待或读取 stdout ⟸ 使用 output() 或读取 Child stdout
 > ```
 >
@@ -439,7 +439,7 @@ D. `let _ = file.read_to_string(&mut s);`
 > 1. **问题识别**: 需要读取输入、写入文件、启动进程或获取环境信息。
 > 2. **概念建立**: `std::io`、`std::fs`、`std::path`、`std::process`、`std::env` 各司其职。
 > 3. **机制推理**: I/O 操作返回 `Result`，需用 `?` 或匹配处理；路径用 `PathBuf` 抽象。
-> 4. **边界辨析**: 同步 vs 异步 I/O；小文件 vs 大文件处理；跨平台路径。
+> 4. **边界辨析**: 同步 vs 异步（Async） I/O；小文件 vs 大文件处理；跨平台路径。
 > 5. **迁移应用**: 在 CLI 工具、配置文件读取、子进程调用中使用标准 I/O API。
 
 ---

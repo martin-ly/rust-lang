@@ -414,7 +414,7 @@ let received = rx.recv().unwrap(); // 所有权转移到 received
 
 ### 7.1 Rust Actor 的实现原理
 
-> **Actor 模型**: 由 Carl Hewitt 1973 提出，Actor 是**有身份（named）**的独立计算实体，通过**异步、非阻塞**的消息投递（mailbox）通信。
+> **Actor 模型**: 由 Carl Hewitt 1973 提出，Actor 是**有身份（named）**的独立计算实体，通过**异步（Async）、非阻塞**的消息投递（mailbox）通信。
 > 每个 Actor 顺序处理其 mailbox 中的消息，天然支持分布式和容错。
 > [Hewitt, Bishop & Steiger, *A Universal Modular ACTOR Formalism*, IJCAI 1973](https://www.ijcai.org/Proceedings/73/Papers/027B.pdf)
 
@@ -518,7 +518,7 @@ fn consumer() {
 
 | 模型 | 机制 | Rust 实现 | Go 实现 |
 | :--- | :--- | :--- | :--- |
-| **Reactor** | 就绪通知（可读/可写）+ 应用主动 I/O | `mio` / `tokio::net`（epoll/kqueue/IOCP） | `netpoller`（集成在运行时） |
+| **Reactor** | 就绪通知（可读/可写）+ 应用主动 I/O | `mio` / `tokio::net`（epoll/kqueue/IOCP） | `netpoller`（集成在运行时（Runtime）） |
 | **Proactor** | 完成通知（I/O 已完成）+ 系统传递数据 | `io_uring`（Linux）via `tokio-uring` | 无原生支持 |
 
 Rust 的事件驱动模型是**显式的**：

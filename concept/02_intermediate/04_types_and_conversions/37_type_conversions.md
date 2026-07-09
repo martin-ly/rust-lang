@@ -52,7 +52,7 @@
     - [3.2 显式转换（Cast）](#32-显式转换cast)
     - [3.3 `From` / `Into`](#33-from--into)
     - [3.4 `TryFrom` / `TryInto`](#34-tryfrom--tryinto)
-    - [3.5 孤儿规则](#35-孤儿规则)
+    - [3.5 孤儿规则（Orphan Rule）](#35-孤儿规则)
   - [四、示例与反例](#四示例与反例)
     - [4.1 正确示例：自定义错误类型](#41-正确示例自定义错误类型)
     - [4.2 反例：滥用 `as` 导致截断](#42-反例滥用-as-导致截断)
@@ -371,7 +371,7 @@ graph TD
 > ```text
 > error[E0277] 类型不匹配 ⟸ 缺少 From/Into 实现或强制条件不满足 ⟸ 检查是否需要显式转换或实现 trait
 > error[E0117] 孤儿规则 ⟸ 为外部类型实现了外部 trait ⟸ 使用 newtype 包装
-> 运行时截断/溢出 ⟸ 使用了 as 而非 TryInto ⟸ 改为 try_into 并处理 Err
+> 运行时（Runtime）截断/溢出 ⟸ 使用了 as 而非 TryInto ⟸ 改为 try_into 并处理 Err
 > error[E0308] 期望引用（Reference）得到其他类型 ⟸ 缺少 Deref 强制 ⟸ 显式借用（Borrowing）或转换
 > ```
 >
@@ -441,7 +441,7 @@ D. 本地 newtype `struct Bytes(Vec<u8>)`
 > 2. **概念建立**: Coercion（隐式）、Cast（`as`）、Trait 转换（From/Into/TryFrom）三种机制。
 > 3. **机制推理**: 每种机制的适用条件、安全保证和限制。
 > 4. **边界辨析**: 截断风险、孤儿规则、跨 crate 扩展。
-> 5. **迁移应用**: 在错误处理、API 设计、FFI 中选择合适的转换方式。
+> 5. **迁移应用**: 在错误处理（Error Handling）、API 设计、FFI 中选择合适的转换方式。
 
 ---
 

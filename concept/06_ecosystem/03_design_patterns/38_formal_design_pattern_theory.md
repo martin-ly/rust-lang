@@ -519,7 +519,7 @@ pub fn linear_type_example() {
 
 ### 5.2 仿射类型 (Affine Types)
 
-Rust的所有权系统实际上是仿射类型（值可以被使用 ≤ 1 次）：
+Rust的所有权（Ownership）系统实际上是仿射类型（值可以被使用 ≤ 1 次）：
 
 ```rust
 /// Builder 模式的仿射类型表示
@@ -959,7 +959,7 @@ impl<S: Strategy, O: Observer> StrategyObserver<S, O> {
 
 **为什么 Rust 适合形式化**:
 
-1. **强类型系统**: 编译时捕获大部分错误
+1. **强类型系统（Type System）**: 编译时捕获大部分错误
 2. **所有权系统**: 内存安全（Memory Safety）的数学保证
 3. **代数数据类型**: 与形式化理论直接对应
 4. **trait 系统**: 支持高阶多态

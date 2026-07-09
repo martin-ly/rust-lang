@@ -24,7 +24,7 @@
 
 1. **问题识别**: 为什么模式参考在 Rust 中值得关注？模式匹配（Pattern Matching）是 Rust 控制流和数据解构的核心，穷尽性检查保障了安全性。
 2. **概念建立**: 掌握模式位置、可反驳性、各种模式形式和绑定规则。
-3. **机制推理**: 通过 ⟹ 定理链将值、模式匹配、绑定和解构串联起来。
+3. **机制推理**: 通过 ⟹ 定理链将值、模式匹配（Pattern Matching）、绑定和解构串联起来。
 4. **边界辨析**: 借助反命题/反例理解常见错误与模式参考的适用边界。
 5. **迁移应用**: 将模式参考与前置/后置概念链接，形成跨层知识网络。
 
@@ -32,7 +32,7 @@
 
 ## 反命题决策树
 
-> **反命题 1**: "模式参考在所有场景下都适用" ⟹ 不成立。`unsafe` 代码中的裸指针解引用、FFI 类型和过程宏（Procedural Macro）生成的模式可能超出常规模式检查范围。
+> **反命题 1**: "模式参考在所有场景下都适用" ⟹ 不成立。`unsafe` 代码中的裸指针解引用（Reference）、FFI 类型和过程宏（Procedural Macro）生成的模式可能超出常规模式检查范围。
 
 > **反命题 2**: "忽略模式参考的细节也能写出正确代码" ⟹ 不成立。不可反驳模式误用、绑定模式错误和穷尽性检查失败都会导致编译错误。
 
@@ -76,7 +76,7 @@ if let Some(y) = opt {  // OK：if let 允许可反驳模式
 | 字面量 | 匹配具体常量 | `42`, `"x"` |
 | 范围 | 匹配区间内的值 | `1..=10` |
 | 引用 | 匹配引用 | `&x`, `&mut y` |
-| 结构体 | 按字段解构 | `Point { x, y }` |
+| 结构体（Struct） | 按字段解构 | `Point { x, y }` |
 | 元组 | 按位置解构 | `(a, b, c)` |
 | 数组/切片（Slice） | 匹配数组或可变长度切片 | `[a, b, ..]` |
 | 枚举（Enum）变体 | 匹配枚举 | `Some(x)`, `None` |
@@ -150,7 +150,7 @@ fn get_rgb(c: Color) -> u32 {
 | 概念 | 关系 |
 |:---|:---|
 | [Statements and Expressions Reference](48_statements_and_expressions_reference.md) | `match`、`if let` 等表达式使用模式 |
-| [Destructors](43_destructors.md) | 模式解构涉及所有权转移和析构 |
+| [Destructors](43_destructors.md) | 模式解构涉及所有权（Ownership）转移和析构 |
 | [Names and Resolution](40_names_and_resolution.md) | 模式中的标识符是新的绑定 |
 | [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | union 和裸指针解引用需要 unsafe |
 

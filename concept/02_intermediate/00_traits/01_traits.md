@@ -80,8 +80,8 @@
       - [定义与语法](#定义与语法)
       - [自动推导规则](#自动推导规则)
       - [`unsafe impl` 的例外情况](#unsafe-impl-的例外情况)
-    - [4.4 Trait + 泛型 ⟹ 零成本抽象](#44-trait--泛型--零成本抽象)
-    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
+    - [4.4 Trait + 泛型（Generics） ⟹ 零成本抽象（Zero-Cost Abstraction）](#44-trait--泛型--零成本抽象)
+    - [4.5 定理一致性（Coherence）矩阵](#45-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：Trait 定义与实现](#51-正确示例trait-定义与实现)
     - [5.2 正确示例：关联类型](#52-正确示例关联类型)
@@ -137,7 +137,7 @@
       - [编译器如何处理 `impl Trait` 返回](#编译器如何处理-impl-trait-返回)
       - [限制：不能用于 trait object](#限制不能用于-trait-object)
       - [形式化语义：存在类型 vs 全称类型](#形式化语义存在类型-vs-全称类型)
-      - [高阶边界：RPITIT 与 HRTB / 生命周期参数](#高阶边界rpitit-与-hrtb--生命周期参数)
+      - [高阶边界：RPITIT 与 HRTB / 生命周期（Lifetimes）参数](#高阶边界rpitit-与-hrtb--生命周期参数)
     - [补充章节：Const Trait 与 `~const` 实验特性](#补充章节const-trait-与-const-实验特性)
       - [问题背景：const fn 中的 Trait Bound 限制](#问题背景const-fn-中的-trait-bound-限制)
       - [`~const` 语法与 `#[const_trait]`](#const-语法与-const_trait)
@@ -146,7 +146,7 @@
       - [`impl const Trait` 与 `~const` 的区别](#impl-const-trait-与-const-的区别)
       - [替代方案：当前稳定 Rust 的 workaround](#替代方案当前稳定-rust-的-workaround)
     - [补充章节：`#[fundamental]` Attribute 与 Orphan Rule 例外](#补充章节fundamental-attribute-与-orphan-rule-例外)
-      - [目的：为智能指针和引用打开 impl 空间](#目的为智能指针和引用打开-impl-空间)
+      - [目的：为智能指针（Smart Pointer）和引用（Reference）打开 impl 空间](#目的为智能指针和引用打开-impl-空间)
       - [哪些类型是 fundamental](#哪些类型是-fundamental)
       - [为什么这些类型是 fundamental：对下游 crate 的"透明性"](#为什么这些类型是-fundamental对下游-crate-的透明性)
       - [与 `#[non_exhaustive]` 的对比](#与-non_exhaustive-的对比)
@@ -170,7 +170,7 @@
     - [11.5 Negative Impls（`impl !Trait for T`）的形式化语义](#115-negative-implsimpl-trait-for-t的形式化语义)
     - [11.6 Next-generation Trait Solver](#116-next-generation-trait-solver)
   - [权威来源索引](#权威来源索引)
-    - [10.5 边界测试：trait 的孤儿规则与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
+    - [10.5 边界测试：trait 的孤儿规则（Orphan Rule）与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
     - [10.6 边界测试：关联常量与泛型参数的交互（编译错误）](#106-边界测试关联常量与泛型参数的交互编译错误)
   - [实践](#实践)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -182,7 +182,7 @@
     - [测验 4：Orphan Rule（分析层）](#测验-4orphan-rule分析层)
     - [测验 5：Trait 对象（分析层）](#测验-5trait-对象分析层)
   - [从 `crates\c02_type_system\docs\tier_02_guides\04_trait_system_guide.md` 迁移的补充视角](#从-cratesc02_type_systemdocstier_02_guides04_trait_system_guidemd-迁移的补充视角)
-- [2.4 Rust 类型系统 - Trait 系统指南](#24-rust-类型系统---trait-系统指南)
+- [2.4 Rust 类型系统（Type System） - Trait 系统指南](#24-rust-类型系统---trait-系统指南)
   - [📋 目录](#-目录-1)
   - [🎯 学习目标](#-学习目标)
   - [📐 知识结构](#-知识结构)
@@ -1309,7 +1309,7 @@ graph TD
 
 > **认知功能**: 类型论对偶辨析——区分存在类型的两种擦除层次（编译期擦除 vs 运行时（Runtime）擦除）及其工程后果。
 > **使用建议**: 返回单一实现用 `impl Trait`，异构集合用 `dyn Trait`；遇到 E0746 时沿树回溯检查分发方式选择。
-> **关键洞察**: `impl Trait` 和 `dyn Trait` 在类型论中不等价——前者是 ∃T.编译期已知(Trait(T))，后者是 ∃T.运行时已知(Trait(T))，信息隐藏的时机决定了能力边界。
+> **关键洞察**: `impl Trait` 和 `dyn Trait` 在类型论中不等价——前者是 ∃T.编译期已知(Trait(T))，后者是 ∃T.运行时（Runtime）已知(Trait(T))，信息隐藏的时机决定了能力边界。
 
 **四层分析**:
 
@@ -1736,7 +1736,7 @@ AFIT 的编译器内部转换:
   }
 ```
 
-编译器为每个 `impl` 自动生成一个**匿名关联类型**，其约束为 `impl` 后跟随的 Trait bounds。这保持了零成本抽象——调用点仍然单态化。
+编译器为每个 `impl` 自动生成一个**匿名关联类型**，其约束为 `impl` 后跟随的 Trait bounds。这保持了零成本抽象——调用点仍然单态化（Monomorphization）。
 
 #### 限制：不能用于 trait object
 

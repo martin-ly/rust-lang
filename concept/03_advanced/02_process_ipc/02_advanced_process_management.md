@@ -156,7 +156,7 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 
 ---
 
-> **L2 向下引用（Reference）**: 进程池模式建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[并发模型](../00_concurrency/01_concurrency.md) 与 [异步编程](../01_async/02_async.md) 之上。
+> **L2 向下引用（Reference）**: 进程池模式建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[并发模型](../00_concurrency/01_concurrency.md) 与 [异步（Async）编程](../01_async/02_async.md) 之上。
 
 ## 相关概念
 

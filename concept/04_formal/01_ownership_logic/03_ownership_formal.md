@@ -139,7 +139,7 @@ stateDiagram-v2
     end note
 ```
 
-> **认知功能**: 此状态图将所有权形式化的**分数权限模型**转化为可视化的状态机。关键洞察：**所有权不是静态属性，而是随程序执行动态变化的状态**。`Owned` 态（π=1）可以分化为 `SharedBorrow`（π 拆分）或 `MutBorrow`（临时转移），但最终必须回归 `Owned` 或进入 `Dropped`。这对应分离逻辑中的资源不变量：资源要么被持有，要么被释放，不存在"悬空持有"状态。
+> **认知功能**: 此状态图将所有权（Ownership）形式化的**分数权限模型**转化为可视化的状态机。关键洞察：**所有权不是静态属性，而是随程序执行动态变化的状态**。`Owned` 态（π=1）可以分化为 `SharedBorrow`（π 拆分）或 `MutBorrow`（临时转移），但最终必须回归 `Owned` 或进入 `Dropped`。这对应分离逻辑中的资源不变量：资源要么被持有，要么被释放，不存在"悬空持有"状态。
 > [来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)]
 > **前置概念**: [Type System](../00_type_theory/06_subtype_variance.md)
 > **后置概念**: [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
@@ -208,7 +208,7 @@ COR 的核心类型判断：
 | **状态** | **符号** | **可读** | **可写** | **可转移** | **形式化** | **L1 映射** |
 |:---|:---|:---|:---|:---|:---|:---|
 | 独有所有权 | `Own(p)` | ✅ | ✅ | ✅ | `p ↦_1 v`（独占指针） | `let x = v;` |
-| 共享借用 | `Shr(p)` | ✅ | ❌ | ❌ | `p ↦_π v`（分数权限 π < 1） | `let r = &x;` |
+| 共享借用（Borrowing） | `Shr(p)` | ✅ | ❌ | ❌ | `p ↦_π v`（分数权限 π < 1） | `let r = &x;` |
 | 可变借用（Mutable Borrow） | `Mut(p)` | ❌ | ✅ | ❌ | `p ↦_1 v`（临时独占） | `let r = &mut x;` |
 | 已释放 | `Dealloc(p)` | ❌ | ❌ | ❌ | `p ↦ ⊥` | `drop(x);` / 作用域结束 |
 
@@ -330,7 +330,7 @@ graph TD
 | **L2**: 借用作为 fractional permission | fractional permission ⟹ 共享读/独占写 | 分数权限公理 `π + ρ ≤ 1` | `&T` 可共享读，`&mut T` 独占写，二者互斥 | T3（区域约束）、T5（别名模型）、C2（内部可变性） | 权限超额（`π + ρ > 1`），即同时存在 `&x` 与 `&mut x` | [borrowing] `&x` 与 `&mut x` 互斥 |
 | **T1**: 所有权转移 | 权限 100% 移交 | `Own(x)` 且 `y` 未初始化 | `Own(y) * x ↦ ⊥`，原变量失效 | C1（仿射弱化）、T4（分离逻辑） | 部分移动（partial move）后未正确处理 `x` 的剩余字段 | [ownership] `let y = x;` 后 `x` 失效 |
 | **T2**: 线性类型 | 线性类型 ⟹ 无 use-after-free | 类型系统（Type System）为线性或仿射 | 每个堆分配恰好释放一次，无 UAF/DF | T1（所有权转移）、T4（分离逻辑） | 通过 `unsafe` 或 `mem::forget` 绕过类型系统 | [ownership] 自动 `drop`，禁止 UAF |
-| **T3**: 区域（Region） | Region ⟹ 生命周期形式化 | 生命周期约束为偏序 `κ ⊑ κ'` | 约束图可求解，引用使用点位于被引用值存活区域内 | T5（别名模型）、L2（借用权限） | HRTB（高阶 trait bound）不可判定片段；NLL 近似导致保守拒绝 | [lifetimes] `'a` 的数学本质 |
+| **T3**: 区域（Region） | Region ⟹ 生命周期形式化 | 生命周期约束为偏序 `κ ⊑ κ'` | 约束图可求解，引用（Reference）使用点位于被引用值存活区域内 | T5（别名模型）、L2（借用权限） | HRTB（高阶 trait bound）不可判定片段；NLL 近似导致保守拒绝 | [lifetimes] `'a` 的数学本质 |
 | **C1**: 仿射弱化 | weakening ⟹ move 后原变量失效 | 仿射类型允许丢弃（weakening） | `move` 后原变量从 `Γ` 中移除或标记为 `⊥` | T1（所有权转移）、T2（线性类型） | 在 `Copy` 类型上误用 move 语义（实际为复制） | [ownership] `move` 与 `Copy` 的区别 |
 | **C2**: 内部可变性 | 运行时（Runtime）权限检查 | `UnsafeCell` 打破静态 `&T` 只读承诺 | 通过运行时借用计数（`RefCell`）或原子操作（Atomic Operations）（`AtomicT`）确保安全 | T5（别名模型）、T6（内存模型） | 运行时权限检查失败：`borrow_mut` 时已有活跃借用，触发 `panic` | [borrowing + unsafe] `RefCell<T>`、`Mutex<T>` |
 | **T4**: 分离逻辑断言 | 堆内存不相交 | `own(x, T) * own(y, U)` | `x` 与 `y` 的堆区域不相交，支持局部推理 | T2（线性类型）、T1（所有权转移） | `unsafe` 代码制造别名导致断言重叠，破坏 `*` 的分离性 | [ownership] 两个 `Box<T>` 永不相交 |
@@ -609,7 +609,7 @@ Polonius 可视为 Oxide 的**实现层优化**：
 
 - Oxide 的 $\Phi$（effect）记录了所有权变化
 - Polonius 的 `loan_originates_from` + `loan_killed_at` 精确实现了 $\Phi$ 的语义
-- **差异**：Oxide 是类型系统的形式化描述，Polonius 是编译器中的高效算法实现
+- **差异**：Oxide 是类型系统（Type System）的形式化描述，Polonius 是编译器中的高效算法实现
 
 ### 9.6 开放问题
 
@@ -1190,7 +1190,7 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 | 概念 | Wikipedia 词条 | 对应 Rust 概念 |
 |:---|:---|:---|
 | **Ownership (type theory)** | [Substructural type system](https://en.wikipedia.org/wiki/Substructural_type_system) | Ownership、Move semantics |
-| **Region-based memory management** | [Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management) | 生命周期、Borrow checker |
+| **Region-based memory management** | [Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management) | 生命周期（Lifetimes）、Borrow checker |
 | **Fractional permission** | [Fractional permissions](https://en.wikipedia.org/wiki/Fractional_permissions) | `&T` / `&mut T` |
 | **Affine type system** | [Affine logic](https://en.wikipedia.org/wiki/Affine_logic) | Copy / Drop traits |
 | **Alias analysis** | [Alias analysis](https://en.wikipedia.org/wiki/Alias_analysis) | Borrow checker、NLL |

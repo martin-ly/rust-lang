@@ -217,13 +217,13 @@ flowchart TD
 - 监控文件描述符数量，防止泄漏。
 - 对监控数据设置采样间隔，避免高频轮询带来的开销。
 - 将监控事件持久化到日志或时序数据库，便于回溯。
-- 在异步（Async）运行时中优先使用 `tokio::process` + `tokio::time::interval` 做轮询。
+- 在异步（Async）运行时（Runtime）中优先使用 `tokio::process` + `tokio::time::interval` 做轮询。
 
 ## 8. 相关概念
 
 - [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [高级进程管理](02_advanced_process_management.md)
-- [异步进程管理](03_async_process_management.md)
+- [异步（Async）进程管理](03_async_process_management.md)
 - [IPC 机制](05_ipc_mechanisms.md)
 - [Rust 性能工程](08_process_performance_engineering.md)
 

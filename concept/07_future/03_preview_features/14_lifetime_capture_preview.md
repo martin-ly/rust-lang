@@ -107,7 +107,7 @@ async fn bar<'a>(x: &'a str, _y: &str) -> impl std::future::Future<Output = ()> 
 | 默认行为 | 隐式 over-capture | 精确捕获为默认 |
 | 兼容性 | 旧代码无需修改 | 通过 edition 切换，旧 edition 行为不变 |
 | 适用位置 | `fn` / `async fn` 返回类型 | 同样支持 RPIT、TAIT、async block |
-| 对 API 影响 | 可能被迫使用 `Box<dyn>` | 减少不必要的分配，保持零成本抽象 |
+| 对 API 影响 | 可能被迫使用 `Box<dyn>` | 减少不必要的分配，保持零成本抽象（Zero-Cost Abstraction） |
 
 ### 3.1 迁移建议
 
@@ -223,7 +223,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-两者都解决 `impl Trait` 的生命周期精确控制问题。RTN 是更通用的语法，`use<'a>` 是其具体应用之一。
+两者都解决 `impl Trait` 的生命周期（Lifetimes）精确控制问题。RTN 是更通用的语法，`use<'a>` 是其具体应用之一。
 </details>
 
 ---

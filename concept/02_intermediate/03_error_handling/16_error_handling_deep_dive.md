@@ -422,7 +422,7 @@ graph TD
 └── 缓解: thiserror 支持 no_std（需 alloc）
 ```
 
-> **边界要点**: 错误处理的边界主要与**panic 与 Result 混用**、**错误类型膨胀**、**异步（Async）**、**FFI** 和 **no_std** 相关。
+> **边界要点**: 错误处理（Error Handling）的边界主要与**panic 与 Result 混用**、**错误类型膨胀**、**异步（Async）**、**FFI** 和 **no_std** 相关。
 > [来源: [Rust Error Handling Working Group](https://github.com/rust-lang/project-error-handling)]
 
 ---

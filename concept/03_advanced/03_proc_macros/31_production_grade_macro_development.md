@@ -27,7 +27,7 @@
 
 ## 一、核心定位
 
-生产级宏开发不仅是“让宏能工作”，还需要考虑：
+生产级宏（Macro）开发不仅是“让宏能工作”，还需要考虑：
 
 - **版本兼容性**: MSRV、Edition、依赖版本策略。
 - **错误诊断**: 用户遇到宏错误时能否快速修复。
@@ -60,7 +60,7 @@ v2.0.0 (MSRV 1.70) ✅ Major 可更新
 
 ### 2.2 Edition 兼容
 
-过程宏 crate 本身的 `edition` 不影响使用方的 edition，但生成代码中使用的语法特性需要兼容目标 edition：
+过程宏（Procedural Macro） crate 本身的 `edition` 不影响使用方的 edition，但生成代码中使用的语法特性需要兼容目标 edition：
 
 ```rust
 // 生成代码时使用全限定路径，避免 edition 相关解析差异

@@ -630,7 +630,7 @@ impl SelfReferential {
 > 来源: [Rustonomicon §7, Rust std docs](https://doc.rust-lang.org/nomicon/index.html) 内部可变性分层
 > **惯用**: 根据场景选择适当的内部可变性原语，形成安全梯度。
 
-| 原语 | 线程安全 | 运行时检查 | 适用场景 |
+| 原语 | 线程安全 | 运行时（Runtime）检查 | 适用场景 |
 |:---|:---:|:---:|:---|
 | `UnsafeCell<T>` | 否 | 无 | `unsafe` 内部实现 |
 | `Cell<T>` | 否 | 无（`T: Copy`） | 单线程内部修改 |
@@ -1241,7 +1241,7 @@ fn main() {
 }
 ```
 
-> **修正**: `String` 实现了 `Deref<Target = str>`，因此 `&String` 可自动解引用为 `&str`。但 `greet(name)` 传递的是 `String` 本身，而非 `&String`，自动解引用不适用。正确写法是 `greet(&name)`——显式获取引用，触发 `Deref` 强制转换。这是 Rust 类型系统的**自动解引用**（deref coercion）规则：仅当从引用到引用的转换时自动进行。`String` → `&str` 需要两步：`String` → `&String`（显式 `&`），然后 `&String` → `&str`（自动 `Deref`）。此规则避免了隐式转换带来的不可预测性，同时保持了表达力。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] · [来源: [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html)]
+> **修正**: `String` 实现了 `Deref<Target = str>`，因此 `&String` 可自动解引用为 `&str`。但 `greet(name)` 传递的是 `String` 本身，而非 `&String`，自动解引用不适用。正确写法是 `greet(&name)`——显式获取引用，触发 `Deref` 强制转换。这是 Rust 类型系统（Type System）的**自动解引用**（deref coercion）规则：仅当从引用到引用的转换时自动进行。`String` → `&str` 需要两步：`String` → `&String`（显式 `&`），然后 `&String` → `&str`（自动 `Deref`）。此规则避免了隐式转换带来的不可预测性，同时保持了表达力。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] · [来源: [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html)]
 
 ### 10.5 边界测试：`Default::default()` 与类型推断的歧义（编译错误）
 

@@ -44,20 +44,20 @@
 
 **实体（entity）** 是源代码中可以被引用（Reference）的语言构造，例如类型、项（item）、泛型（Generics）参数、变量绑定、循环标签、生命周期（Lifetimes）、字段、属性和 lint。
 
-**声明（declaration）** 是引入名称以引用实体的语法构造。实体名称在**作用域（scope）**内有效，即源代码中可以引用该名称的区域。
+**声明（declaration）** 是引入名称以引用（Reference）实体的语法构造。实体名称在**作用域（scope）**内有效，即源代码中可以引用该名称的区域。
 
 ### 显式声明的实体
 
-- 项：模块（`mod`）、外部 crate（`extern crate`）、`use` 声明、函数与参数、类型别名、结构体（Struct）/联合体/枚举（Enum）及其字段、`const`/`static`、trait 及关联项、外部块项、`macro_rules`、实现关联项等。
+- 项：模块（Module）（`mod`）、外部 crate（`extern crate`）、`use` 声明、函数与参数、类型别名、结构体（Struct）/联合体/枚举（Enum）及其字段、`const`/`static`、trait 及关联项、外部块项、`macro_rules`、实现关联项等。
 - 表达式：闭包（Closures）参数、`while let`/`for`/`if let`/`match` 模式绑定、循环标签。
-- 泛型参数、高阶 trait bound、`let` 语句模式绑定。
-- `macro_use` / `macro_export` 属性引入的宏名称。
+- 泛型（Generics）参数、高阶 trait bound、`let` 语句模式绑定。
+- `macro_use` / `macro_export` 属性引入的宏（Macro）名称。
 
 ### 隐式声明的实体
 
 - 语言 prelude：`bool`、`char`、`str`、整数类型、浮点类型、`usize`/`isize`。
 - 内置属性、标准库 prelude 项/属性/宏、标准库 crate、外部链接 crate、工具属性、lint、derive 辅助属性。
-- `'static` 生命周期。
+- `'static` 生命周期（Lifetimes）。
 
 ### 形式化表示
 
@@ -76,8 +76,8 @@ ItemDecl    ::= ModDecl | ExternCrate | UseDecl | FnDecl
 | 命名空间 | 包含实体 | 示例冲突规则 |
 |:---|:---|:---|
 | 值命名空间（value namespace） | 函数、变量、`const`、`static`、关联函数 | 同一作用域不可重复 |
-| 类型命名空间（type namespace） | 结构体、枚举、trait、类型别名、模块 | 可与值命名空间同名 |
-| 宏命名空间（macro namespace） | `macro_rules!`、过程宏 | 通过 `name!()` 调用 |
+| 类型命名空间（type namespace） | 结构体（Struct）、枚举（Enum）、trait、类型别名、模块 | 可与值命名空间同名 |
+| 宏命名空间（macro namespace） | `macro_rules!`、过程宏（Procedural Macro） | 通过 `name!()` 调用 |
 | 生命周期命名空间（lifetime namespace） | 生命周期参数 `'a` | 独立解析 |
 
 例如，可以同时定义一个名为 `Foo` 的模块和一个名为 `Foo` 的函数，因为它们处于不同命名空间：
@@ -101,7 +101,7 @@ fn main() {
 | Crate 作用域 | 整个 crate | prelude 注入 |
 | 模块作用域 | 模块体 | `mod foo { ... }` |
 | 块作用域 | 块表达式 | `{ let x = 1; ... }` |
-| 函数/闭包体作用域 | 函数或闭包体 | `fn f() { ... }` |
+| 函数/闭包（Closures）体作用域 | 函数或闭包体 | `fn f() { ... }` |
 | `match` 臂作用域 | 单个分支 | `1 => { ... }` |
 | 循环体作用域 | 循环内部 | `loop { ... }` |
 | `if let` / `while let` 条件作用域 | 条件与对应块 | `if let Some(x) = opt { ... }` |

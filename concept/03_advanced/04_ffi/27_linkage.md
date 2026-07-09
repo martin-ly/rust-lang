@@ -273,7 +273,7 @@ extern "C" {}
 | 需要动态链接的 Rust 插件 | `dylib` |
 | 嵌入非 Rust 应用的静态库 | `staticlib` |
 | 供其他语言调用的动态库 | `cdylib` |
-| 过程宏（Macro） | `proc-macro` |
+| 过程宏（Procedural Macro） | `proc-macro` |
 
 ---
 

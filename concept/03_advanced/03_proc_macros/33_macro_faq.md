@@ -6,7 +6,7 @@
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: A×Eva — 评估宏（Macro）使用场景与限制
 > **前置依赖**: [过程宏（Procedural Macro）](07_proc_macro.md) · [宏术语表](32_macro_glossary.md)
-> **后置概念**: [宏卫生性](35_macro_hygiene.md) · [生产级宏开发](31_production_grade_macro_development.md)
+> **后置概念**: [宏（Macro）卫生性](35_macro_hygiene.md) · [生产级宏开发](31_production_grade_macro_development.md)
 > **定理链**: Common Question ⟹ Mechanism Explanation ⟹ Best Practice
 >
 > **权威来源**: 本页为 `Macro FAQ` 的权威概念页；crate 文档仅保留导航 stub。
@@ -24,7 +24,7 @@
 - [常见问题 (FAQ) - C11 Macro System](#常见问题-faq---c11-macro-system)
   - [📋 目录](#-目录)
   - [🎨 宏基础问题](#-宏基础问题)
-    - [Q1: 声明宏 vs. 过程宏，何时使用哪个？](#q1-声明宏-vs-过程宏何时使用哪个)
+    - [Q1: 声明宏（Declarative Macro） vs. 过程宏（Procedural Macro），何时使用哪个？](#q1-声明宏-vs-过程宏何时使用哪个)
     - [Q2: 宏与函数的区别是什么？](#q2-宏与函数的区别是什么)
     - [Q3: 宏会影响性能吗？](#q3-宏会影响性能吗)
   - [🔧 声明宏问题](#-声明宏问题)
@@ -47,7 +47,7 @@
   - [💡 高级话题](#-高级话题)
     - [Q17: 如何构建 DSL？](#q17-如何构建-dsl)
     - [Q18: 宏可以生成宏吗？](#q18-宏可以生成宏吗)
-    - [Q19: 如何实现零成本抽象？](#q19-如何实现零成本抽象)
+    - [Q19: 如何实现零成本抽象（Zero-Cost Abstraction）？](#q19-如何实现零成本抽象)
   - [认知路径](#认知路径)
   - [定理链](#定理链)
   - [反命题](#反命题)
@@ -123,7 +123,7 @@ let x = five(); // 运行时调用函数
 - 宏展开需要时间
 - 复杂宏影响更大
 
-**运行时**: 零性能开销
+**运行时（Runtime）**: 零性能开销
 
 - 宏完全展开为代码
 - 与手写代码相同
@@ -739,7 +739,7 @@ let v = temp;
 
 ---
 
-> **向下引用**: 参见 [17_macro_patterns](../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md)
+> **向下引用（Reference）**: 参见 [17_macro_patterns](../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md)
 
 ## 认知路径
 
@@ -759,9 +759,9 @@ let v = temp;
 
 ## 反命题
 
-> **反命题 1**: "宏只是简单的代码替换" ⟹ 不成立。Rust 宏受卫生性、span 与类型系统约束，行为远比文本替换复杂。
+> **反命题 1**: "宏只是简单的代码替换" ⟹ 不成立。Rust 宏受卫生性、span 与类型系统（Type System）约束，行为远比文本替换复杂。
 >
-> **反命题 2**: "过程宏一定比声明宏好" ⟹ 不成立。简单模式匹配场景下声明宏更轻量。
+> **反命题 2**: "过程宏一定比声明宏好" ⟹ 不成立。简单模式匹配（Pattern Matching）场景下声明宏更轻量。
 >
 > **反命题 3**: "FAQ 不需要示例" ⟹ 不成立。可运行的最小示例是验证答案正确性的关键。
 >

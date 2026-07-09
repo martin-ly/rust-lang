@@ -36,7 +36,7 @@ const fn double<T: std::ops::Add<Output = T> + Copy>(x: T) -> T {
 2. 使用宏（Macro）生成多份代码；
 3. 将计算推迟到运行时（Runtime）。
 
-**Const Trait** 的目标是允许 trait 方法在 const 上下文中使用，从而使泛型常量计算成为可能。核心语法包括：
+**Const Trait** 的目标是允许 trait 方法在 const 上下文中使用，从而使泛型（Generics）常量计算成为可能。核心语法包括：
 
 - `~const Trait`：表示“可在 const 上下文中使用的 trait bound”；
 - `const impl Trait for Type`：表示某个实现支持常量求值。
@@ -97,9 +97,9 @@ const fn add_if_possible<T: ~const std::ops::Add<Output = T>>(a: T, b: T) -> T {
 
 在 const trait 稳定之前，常见 workaround 有：
 
-1. **宏展开**：用 `macro_rules!` 为每种类型生成 `const fn`；
+1. **宏（Macro）展开**：用 `macro_rules!` 为每种类型生成 `const fn`；
 2. **min_specialization**：为 const / non-const 分别写实现；
-3. **运行时计算**：放弃编译期优化，将逻辑移到 `fn` 中。
+3. **运行时（Runtime）计算**：放弃编译期优化，将逻辑移到 `fn` 中。
 
 ### 3.2 迁移建议
 

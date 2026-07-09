@@ -6,7 +6,7 @@
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: S×Eva — 评估宏（Macro）卫生性设计
 > **前置依赖**: [过程宏（Procedural Macro）](07_proc_macro.md) · [syn/quote 参考](34_syn_quote_reference.md)
-> **后置概念**: [生产级宏开发](31_production_grade_macro_development.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md)
+> **后置概念**: [生产级宏（Macro）开发](31_production_grade_macro_development.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md)
 > **定理链**: Hygiene ⟹ Span Selection ⟹ Name Collision Prevention
 >
 > **权威来源**: 本页为 `Macro Hygiene` 的权威概念页；crate 文档仅保留导航 stub。
@@ -28,11 +28,11 @@
     - [1.1 什么是卫生性](#11-什么是卫生性)
     - [1.2 为什么需要卫生性](#12-为什么需要卫生性)
     - [1.3 Rust 的卫生性模型](#13-rust-的卫生性模型)
-  - [2. 声明宏卫生性](#2-声明宏卫生性)
+  - [2. 声明宏（Declarative Macro）卫生性](#2-声明宏卫生性)
     - [2.1 局部变量](#21-局部变量)
     - [2.2 函数和类型](#22-函数和类型)
-    - [2.3 模块和导入](#23-模块和导入)
-  - [3. 过程宏 Span](#3-过程宏-span)
+    - [2.3 模块（Module）和导入](#23-模块和导入)
+  - [3. 过程宏（Procedural Macro） Span](#3-过程宏-span)
     - [3.1 call\_site()](#31-call_site)
     - [3.2 def\_site()](#32-def_site)
     - [3.3 mixed\_site()](#33-mixed_site)
@@ -208,7 +208,7 @@ mod inner {
 
 **规则**:
 
-- 宏内引用的函数/类型，在 **调用点** 解析
+- 宏内引用（Reference）的函数/类型，在 **调用点** 解析
 - 使用完整路径避免歧义：`::std::vec::Vec`
 
 ---

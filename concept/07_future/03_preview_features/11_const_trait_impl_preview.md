@@ -450,7 +450,7 @@ const fn sum<T: ~const Add>(a: T, b: T) -> T {
 ```
 
 > **修正**:
-> `~const Trait`（"maybe const"）bound 是 `const trait impl` 的关键语法：它表示"此泛型参数可以是 const 或非 const 实现，但在 const 上下文中要求 const"。
+> `~const Trait`（"maybe const"）bound 是 `const trait impl` 的关键语法：它表示"此泛型（Generics）参数可以是 const 或非 const 实现，但在 const 上下文中要求 const"。
 > 这增加了类型系统（Type System）的维度：trait bound 现在需考虑"const 性"（constness）。
 > 设计挑战：
 >

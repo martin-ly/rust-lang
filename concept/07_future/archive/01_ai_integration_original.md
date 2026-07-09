@@ -450,7 +450,7 @@ jobs:
 
 | 工具 | 核心模式 | 适用场景 | 定价 | 隐私 | Rust 支持质量 | IDE 集成 |
 |:---|:---|:---|:---|:---|:---|:---|
-| **GitHub Copilot** | 生成式补全 | 日常编码、函数实现、注释生成 | $10/月（个人） | 代码上传至 OpenAI 云端 | **高**（生命周期准确率 ~91%，支持 async/await） | VS Code、JetBrains、Neovim、Vim |
+| **GitHub Copilot** | 生成式补全 | 日常编码、函数实现、注释生成 | $10/月（个人） | 代码上传至 OpenAI 云端 | **高**（生命周期（Lifetimes）准确率 ~91%，支持 async/await） | VS Code、JetBrains、Neovim、Vim |
 | **Codeium** | 生成 + 语义搜索 | 大型 Cargo workspace、离线环境、语义检索 | 免费（个人）/ 企业订阅 | **支持完全自托管** | **高**（本地索引响应快，Rust 惯用法重构） | VS Code、JetBrains、Vim、Emacs |
 | **Kiro** | 审查式分析 | 企业安全审计、合规检查、PR 审查、unsafe 审计 | 企业许可（按量/订阅） | **AWS 私有部署**，代码不出域 | **很高**（所有权（Ownership）语义推断、`Send`/`Sync` 验证、SARIF 导出） | AWS CodeConnections、GitHub Enterprise、GitLab |
 | **Cursor** | AI 原生 IDE | 全栈开发、多文件重构、AI 对话式编程、快速原型 | 免费版可用 / Pro $20/月 | 可选本地模型（Ollama） | **高**（基于 `rust-analyzer` LSP，实时编译错误感知） | Cursor（VS Code 分支） |
@@ -915,7 +915,7 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 | AI 生成代码安全 | L3 Unsafe 契约需机器可读 | `03_advanced/02_unsafe/03_unsafe.md` | 反向约束 |
 | AI 类型推断（Type Inference）辅助 | L1 类型系统（Type System）需更易推断 | `01_foundation/02_type_system/04_type_system.md` | 反向约束 |
 | AI 错误修复 | L2 错误处理（Error Handling）模式需标准化 | `02_intermediate/03_error_handling/04_error_handling.md` | 反向约束 |
-| 确定性容器 | L1 所有权需扩展确定性语义 | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | 潜在扩展 |
+| 确定性容器 | L1 所有权（Ownership）需扩展确定性语义 | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | 潜在扩展 |
 
 ---
 
@@ -1163,13 +1163,13 @@ graph TD
 
 > **过渡: L7 → L2**
 >
-> AI 辅助编程的核心挑战不是"生成代码"，而是"生成正确的代码"。Rust 的类型系统为 AI 提供了额外的验证层：即使 LLM 生成了有 bug 的代码，编译器也会拒绝它。这种"类型系统作为安全网"的特性，使 Rust 成为 AI 辅助编程的理想语言。
+> AI 辅助编程的核心挑战不是"生成代码"，而是"生成正确的代码"。Rust 的类型系统（Type System）为 AI 提供了额外的验证层：即使 LLM 生成了有 bug 的代码，编译器也会拒绝它。这种"类型系统作为安全网"的特性，使 Rust 成为 AI 辅助编程的理想语言。
 >
 > 类型系统见 [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) 与 [`../02_intermediate/01_generics/02_generics.md`](../../02_intermediate/01_generics/02_generics.md)。
 
 > **过渡: L7 → L5**
 >
-> AI 代码生成在不同语言中的表现差异显著：Python 的弱类型让 bug 潜伏到运行时，JavaScript 的动态特性使 AI 难以推断正确 API，而 Rust 的强类型使 AI 能在编译期捕获大部分错误。这种差异不是语言优劣的判断，而是类型系统精度对 AI 辅助效果的直接影响。
+> AI 代码生成在不同语言中的表现差异显著：Python 的弱类型让 bug 潜伏到运行时（Runtime），JavaScript 的动态特性使 AI 难以推断正确 API，而 Rust 的强类型使 AI 能在编译期捕获大部分错误。这种差异不是语言优劣的判断，而是类型系统精度对 AI 辅助效果的直接影响。
 >
 > 对比分析见 [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/03_paradigm_matrix.md)。
 

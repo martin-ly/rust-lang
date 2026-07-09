@@ -113,7 +113,7 @@
 | 隐式转换 | 类型安全、意外行为 | 显式 `From`/`Into` | 设计哲学 |
 | 异常控制流 | 隐藏控制流、非局部跳转 | `Result` + `?` | 设计哲学 |
 | GC 自动回收 | 运行时（Runtime）开销、非确定性 | 所有权（Ownership） + `Rc`/`Arc` | 设计哲学 |
-| 运行时反射 | 编译期信息擦除 | 宏（Macro） + `Any` | 设计哲学 |
+| 运行时（Runtime）反射 | 编译期信息擦除 | 宏（Macro） + `Any` | 设计哲学 |
 | 可变长度数组 (VLA) | 栈安全、类型系统（Type System）简化 | `Vec<T>` | 设计哲学 |
 | 联合体自动析构 | 不知道哪个变体活跃 | `enum` + `match` | 设计哲学 |
 
@@ -162,7 +162,7 @@ Rust 的核心机制可以看作一个代数组合系统：
 
 **基础算子**：
 
-- `Own(T)`：所有权（线性资源）
+- `Own(T)`：所有权（Ownership）（线性资源）
 - `Borrow(T, mode)`：借用（Borrowing）（共享/独占）
 - `Lifetime('a)`：生命周期（Lifetimes）约束
 - `Trait(T)`：行为抽象
@@ -209,7 +209,7 @@ Lifetime('a) × Lifetime('b) where 'a > 'b → ❌ 生命周期不足 E0597
 2. **Rust 的表征空间为什么是这样？**（历史决策：RFC 230、 borrow checker 发明）
 3. **能表达和不能表达的边界在哪？**（编译器作为"守门人"）
 4. **等价表达怎么选择？**（enum vs dyn Trait 的决策树）
-5. **机制组合有什么约束？**（类型系统的"代数规则"）
+5. **机制组合有什么约束？**（类型系统（Type System）的"代数规则"）
 6. **表征空间会扩展吗？**（const generics、GATs、specialization 的未来）
 
 ### 3.2 增强现有文件（标注映射）

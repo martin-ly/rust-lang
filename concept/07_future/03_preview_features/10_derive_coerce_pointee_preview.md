@@ -39,7 +39,7 @@
 - [派生 CoercePointee 预研：智能指针（Smart Pointer）的自动类型强制](#派生-coercepointee-预研智能指针的自动类型强制)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 问题：自定义智能指针的样板代码](#11-问题自定义智能指针的样板代码)
+    - [1.1 问题：自定义智能指针（Smart Pointer）的样板代码](#11-问题自定义智能指针的样板代码)
     - [1.2 CoerceUnsized 与 DispatchFromDyn](#12-coerceunsized-与-dispatchfromdyn)
     - [1.3 `#[derive(CoercePointee)]` 方案](#13-derivecoercepointee-方案)
   - [二、技术细节](#二技术细节)
@@ -282,7 +282,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助判断是否可以使用 `#[derive(CoercePointee)]`。核心判断标准是结构体（Struct）是否满足约束条件以及是否需要特殊的强制行为。
-> **使用建议**: 对于绝大多数自定义智能指针（如引用（Reference）计数、自定义 Box），派生宏完全足够；仅在非常规布局（如分片存储、内联小对象优化）时需要手动实现。
+> **使用建议**: 对于绝大多数自定义智能指针（如引用（Reference）计数、自定义 Box），派生宏（Macro）完全足够；仅在非常规布局（如分片存储、内联小对象优化）时需要手动实现。
 > **关键洞察**: `CoercePointee` 覆盖约 **80-90%** 的自定义智能指针场景，剩余场景需要手动 unsafe 实现。
 
 ---

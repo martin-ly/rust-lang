@@ -75,7 +75,7 @@
 
 ## 一、权威定义（Definition）
 
-> Rust 的格式化系统基于 `std::fmt` 模块（Module），核心是 `Display` 和 `Debug` trait。`Display` 用于面向用户的格式化输出，`Debug` 用于面向程序员的调试输出。`format!`、`print!`、`println!`、`eprintln!`、`write!` 等宏都使用同一套格式化机制。
+> Rust 的格式化系统基于 `std::fmt` 模块（Module），核心是 `Display` 和 `Debug` trait。`Display` 用于面向用户的格式化输出，`Debug` 用于面向程序员的调试输出。`format!`、`print!`、`println!`、`eprintln!`、`write!` 等宏（Macro）都使用同一套格式化机制。
 >
 > [来源: [std::fmt](https://doc.rust-lang.org/std/fmt/index.html)]
 
@@ -277,7 +277,7 @@ fn main() {
 
 | 边界 | 现状 | 理论极限 | 工程意义 |
 |:---|:---|:---|:---|
-| 类型安全 | 编译期检查 | 完全类型安全 | 避免运行时格式化错误 |
+| 类型安全 | 编译期检查 | 完全类型安全 | 避免运行时（Runtime）格式化错误 |
 | 国际化 | 无内置 i18n | 需第三方 crate | `format!` 不支持复数/性别等 |
 | 自定义格式 | 通过 trait | 任意 | 可为类型实现专用 trait |
 | 性能 | 通常优秀 | 零分配 | `write!` 可直接写入缓冲区 |

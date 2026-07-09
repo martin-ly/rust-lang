@@ -169,7 +169,7 @@
 | `fn ident<...> ...` | 定义泛型（Generics）函数 |
 | `struct ident<...> ...` | 定义泛型（Generics）结构体（Struct） |
 | `enum ident<...> ...` | 定义泛型（Generics）枚举（Enum） |
-| `impl<...> ...` | 定义泛型实现 |
+| `impl<...> ...` | 定义泛型（Generics）实现 |
 | `for<...> type` | 高阶生命周期（Lifetimes）约束 |
 | `type<ident=type>` | 为关联类型赋值，如 `Iterator<Item=T>` |
 
@@ -197,7 +197,7 @@
 | `$ident` | 宏（Macro）替换 |
 | `$ident:kind` | 宏（Macro）元变量 |
 | `$(...)...` | 宏（Macro）重复 |
-| `ident!(...)` / `ident!{...}` / `ident![...]` | 宏调用 |
+| `ident!(...)` / `ident!{...}` / `ident![...]` | 宏（Macro）调用 |
 
 ---
 

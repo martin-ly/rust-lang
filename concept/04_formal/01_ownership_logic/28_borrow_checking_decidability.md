@@ -100,7 +100,7 @@ flowchart LR
 
 ### 2.1 词法作用域（Lexical Scopes）
 
-借用生命周期（Lifetimes）绑定到词法块边界，线性扫描 $O(n)$，但过度保守。
+借用（Borrowing）生命周期（Lifetimes）绑定到词法块边界，线性扫描 $O(n)$，但过度保守。
 
 ```rust
 fn lexical_problem() {

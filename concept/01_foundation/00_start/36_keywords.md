@@ -83,7 +83,7 @@
 | `self` | 方法接收者或当前模块（Module） |
 | `static` | 全局变量或贯穿整个程序执行的生命周期（Lifetimes） |
 | `struct` | 定义结构体（Struct） |
-| `super` | 当前模块的父模块 |
+| `super` | 当前模块（Module）的父模块 |
 | `trait` | 定义 trait |
 | `true` | 布尔真字面量 |
 | `type` | 定义类型别名或关联类型 |
