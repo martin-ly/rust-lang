@@ -246,3 +246,12 @@ DelimitedTree ::= "(" TokenTree* ")"
 
 > **权威来源**: [Rust Reference — Lexical Structure](https://doc.rust-lang.org/reference/lexical-structure.html) · [Rust Reference — Keywords](https://doc.rust-lang.org/reference/keywords.html) · [Rust Reference — Tokens](https://doc.rust-lang.org/reference/tokens.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 > **内容分级**: [研究级]
+
+## 过渡段
+
+> **过渡**: 从源文件字节序列过渡到 Unicode 规范化，可以理解 Rust 词法分析的第一步如何处理输入编码。
+>
+> **过渡**: 从标识符规则与关键字过渡到 token 分类，可以建立“字符流 → token 流 → 语法树”的编译前端模型。
+>
+> **过渡**: 从 token 分类过渡到语法产生式，可以链接 [Notation](../06_notation/44_notation.md) 与条目参考，形成完整参考链。
+>

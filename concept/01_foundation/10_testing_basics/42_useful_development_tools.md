@@ -206,3 +206,19 @@ flowchart TD
 
 > **权威来源**: [TRPL — Appendix D](https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html) · [Rust Analyzer Manual](https://rust-analyzer.github.io/manual.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
 > **内容分级**: [参考级]
+
+## 过渡段
+
+> **过渡**: 从 rustfmt 格式化过渡到 clippy lint，可以理解“先统一风格、再捕获潜在问题”的代码质量流程。
+>
+> **过渡**: 从静态检查过渡到测试与文档工具，可以建立“写—查—测—文档”的完整工作流。
+>
+> **过渡**: 从本地工具过渡到 CI/CD 集成，可以将个人开发习惯转化为团队交付标准。
+>
+
+## 反向推理
+
+> **反向推理**: CI 报告风格不一致 ⟸ 说明未在 CI 中统一运行 `rustfmt --check`。
+>
+> **反向推理**: 出现本可避免的常见错误 ⟸ 说明 clippy 未启用或未处理 warn 级别提示。
+>

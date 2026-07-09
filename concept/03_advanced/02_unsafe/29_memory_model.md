@@ -236,3 +236,19 @@ cargo +nightly miri test
 
 > **权威来源**: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
 > **内容分级**: [专家级]
+
+## 过渡段
+
+> **过渡**: 从抽象字节模型过渡到初始化与 provenance，可以理解 Rust 内存模型如何在底层区分“值”与“来源”。
+>
+> **过渡**: 从 provenance 过渡到 UB 边界，可以建立“合法操作必须保持指针来源”的直觉。
+>
+> **过渡**: 从 UB 边界过渡到 Miri 等检测工具，可以形成“规范—违反—验证”的闭环。
+>
+
+## 反向推理
+
+> **反向推理**: Miri 报告未定义行为 ⟸ 说明代码中存在未初始化读取、provenance 丢失或别名违规。
+>
+> **反向推理**: unsafe 代码在升级 Rust 版本后行为变化 ⟸ 说明之前依赖了未规范化的内存模型细节。
+>

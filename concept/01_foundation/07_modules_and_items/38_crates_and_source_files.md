@@ -250,3 +250,19 @@ flowchart TD
 
 > **权威来源**: [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
 > **内容分级**: [综述级]
+
+## 过渡段
+
+> **过渡**: 从 crate 作为编译单元过渡到源文件布局，可以理解 Rust 如何将文件系统映射为模块树。
+>
+> **过渡**: 从模块树过渡到 crate-level 属性，可以建立“配置在根、结构在文件”的组织原则。
+>
+> **过渡**: 从单个 crate 过渡到 workspace 与链接，可以理解 crate 模型在大型项目中的扩展方式。
+>
+
+## 反向推理
+
+> **反向推理**: 发现同一目录下的模块未被编译 ⟸ 说明未在 crate root 或父模块中正确声明 `mod`。
+>
+> **反向推理**: 二进制 crate 与库 crate 行为不一致 ⟸ 说明未正确理解 crate type 与 `main` 函数规则。
+>

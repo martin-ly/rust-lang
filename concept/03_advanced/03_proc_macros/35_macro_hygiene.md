@@ -1,5 +1,13 @@
 > **EN**: Macro Hygiene
 > **Summary**: Authoritative concept page for `宏卫生性完整参考`. Content migrated from `crates/c11_macro_system_proc/docs/tier_03_references/04_macro_hygiene_reference.md`.
+> **受众**: [专家]
+> **内容分级**: [专家级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S+A** — Structure + Application
+> **双维定位**: S×Eva — 评估宏卫生性设计
+> **前置依赖**: [过程宏](07_proc_macro.md) · [syn/quote 参考](34_syn_quote_reference.md)
+> **后置概念**: [生产级宏开发](31_production_grade_macro_development.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md)
+> **定理链**: Hygiene ⟹ Span Selection ⟹ Name Collision Prevention
 >
 > **权威来源**: 本页为 `Macro Hygiene` 的权威概念页；crate 文档仅保留导航 stub。
 
@@ -969,3 +977,42 @@ macro_rules! hygienic_macro {
 ---
 
 > **向下引用**: 参见 [17_macro_patterns](../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md)
+
+## 认知路径
+
+1. **问题识别**: 识别宏展开时标识符作用域可能泄漏或冲突的问题。
+2. **概念建立**: 掌握声明宏与过程宏的卫生性模型、span 类型（call_site/def_site/mixed_site）及其影响。
+3. **机制推理**: 通过卫生性 ⟹ span 选择 ⟹ 名称冲突预防的定理链设计安全宏。
+4. **边界辨析**: 辨析“hygiene 使宏无法调试”等反命题，理解卫生性是可靠性的基础。
+5. **迁移应用**: 将卫生性与生产级开发、宏调试主题链接。
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 卫生性 ⟹ 防止名称冲突 | 宏生成的标识符不会意外捕获外部变量 | 展开后的代码更可预测 |
+| call_site span ⟹ 用户上下文可见 | 生成的标识符表现得像用户写的 | 适用于需要用户覆盖的场景 |
+| def_site span ⟹ 内部封装 | 标识符仅在宏定义处解析 | 防止外部意外干扰宏内部实现 |
+
+## 反命题
+
+> **反命题 1**: "宏卫生性使调试变得不可能" ⟹ 不成立。卫生性是作用域规则，不影响 cargo-expand 等展开查看工具。
+>
+> **反命题 2**: "所有生成标识符都应该用 call_site" ⟹ 不成立。call_site 会增加名称冲突与捕获风险。
+>
+> **反命题 3**: "声明宏与过程宏卫生性完全相同" ⟹ 不成立。二者实现细节与 span 控制能力存在差异。
+>
+## 反向推理
+
+> **反向推理 1**: 宏展开后出现未定义的局部变量名冲突 ⟸ 说明 hygiene 未正确应用或错误使用了 call_site。
+>
+> **反向推理 2**: 用户无法在宏外覆盖某个生成标识符 ⟸ 说明 def_site 过度封装，应根据需求调整 span。
+>
+## 过渡段
+
+> **过渡**: 从名称冲突风险过渡到卫生性机制，可以理解 hygiene 是宏可靠性的第一道防线。
+>
+> **过渡**: 从卫生性过渡到 span 选择，可以建立“何时开放用户上下文、何时封装内部实现”的决策框架。
+>
+> **过渡**: 从 span 决策过渡到生产级实践，可以将 hygiene 规则融入宏开发与测试流程。
+>

@@ -259,3 +259,19 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 
 > **权威来源**: [Rust Reference — The Rust Runtime](https://doc.rust-lang.org/reference/runtime.html) · [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html) · [Rust Embedded Book](https://docs.rust-embedded.org/book/)
 > **内容分级**: [专家级]
+
+## 过渡段
+
+> **过渡**: 从 libcore/liballoc/libstd 分层过渡到运行时组件，可以理解 Rust 如何在无运行时与全功能运行时之间取舍。
+>
+> **过渡**: 从 panic/unwind 机制过渡到堆分配器，可以建立“运行时行为由属性与全局实现共同决定”的视角。
+>
+> **过渡**: 从运行时属性过渡到 no_std 场景，可以理解嵌入式与通用程序对运行时的不同需求。
+>
+
+## 反向推理
+
+> **反向推理**: 嵌入式目标出现链接错误 ⟸ 说明依赖了 std 运行时组件，需评估 no_std 或自定义分配器。
+>
+> **反向推理**: 全局分配器行为与预期不符 ⟸ 说明 `#[global_allocator]` 未正确注册或实现未满足 `GlobalAlloc` 契约。
+>

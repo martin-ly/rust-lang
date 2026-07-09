@@ -213,3 +213,19 @@ unsafe 代码必须遵守 Rust 内存模型：
 
 > **权威来源**: [Rust Reference — Unsafe Keyword](https://doc.rust-lang.org/reference/unsafe-keyword.html) · [Rust Reference — Behavior Not Considered Unsafe](https://doc.rust-lang.org/reference/behavior-not-considered-unsafe.html) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#unsafe-blocks) · [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)
 > **内容分级**: [专家级]
+
+## 过渡段
+
+> **过渡**: 从 unsafe 关键字语义过渡到 unsafe 块，可以理解“关键字只是契约声明，块才是边界”。
+>
+> **过渡**: 从 unsafe 块过渡到 unsafe trait 与实现，可以建立“unsafe 不仅是表达式，也是类型系统契约”的视角。
+>
+> **过渡**: 从 unsafe 操作清单过渡到 soundness 责任，可以理解调用者与被调用者之间的信任边界。
+>
+
+## 反向推理
+
+> **反向推理**: 代码在 safe 函数中触发 UB ⟸ 说明 unsafe 边界划分错误，存在未封装的不安全操作。
+>
+> **反向推理**: unsafe trait 实现被标记为 unsound ⟸ 说明实现未维持 trait 文档声明的不变量。
+>

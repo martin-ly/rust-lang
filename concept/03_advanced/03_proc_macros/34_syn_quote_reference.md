@@ -1,5 +1,13 @@
 > **EN**: syn and quote Reference
 > **Summary**: Authoritative concept page for `syn & quote 完整参考`. Content migrated from `crates/c11_macro_system_proc/docs/tier_03_references/03_syn_quote_reference.md`.
+> **受众**: [专家]
+> **内容分级**: [参考级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: S×App — 应用 syn/quote API
+> **前置依赖**: [过程宏](07_proc_macro.md) · [宏术语表](32_macro_glossary.md)
+> **后置概念**: [生产级宏开发](31_production_grade_macro_development.md) · [宏卫生性](35_macro_hygiene.md)
+> **定理链**: Parse Input ⟹ Transform AST ⟹ Emit Tokens
 >
 > **权威来源**: 本页为 `syn and quote Reference` 的权威概念页；crate 文档仅保留导航 stub。
 
@@ -921,3 +929,42 @@ mod tests {
 ---
 
 > **向下引用**: 参见 [17_macro_patterns](../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md)
+
+## 认知路径
+
+1. **问题识别**: 识别 syn/quote 是 Rust 过程宏开发的核心工具链。
+2. **概念建立**: 掌握 `parse_macro_input!`、`DeriveInput`、`quote!` 等关键 API 的使用与限制。
+3. **机制推理**: 通过解析输入 ⟹ 转换 AST ⟹ 生成 token 的定理链组织宏实现。
+4. **边界辨析**: 辨析“syn/quote 是必须的”等反命题，理解直接操作 TokenStream 的场景。
+5. **迁移应用**: 将 syn/quote 参考与生产级开发、卫生性主题链接。
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 精确解析 ⟹ 健壮宏 | 使用 syn 的类型化 AST 解析输入 | 宏在错误输入下给出清晰诊断 |
+| AST 转换 ⟹ 代码生成灵活 | 在解析后的数据结构上进行变换 | 可以实现复杂的 derive/attribute 逻辑 |
+| quote 生成 ⟹ 保留可读性 | 使用 `quote!` 以类 Rust 语法生成 token | 生成的代码更易审查与调试 |
+
+## 反命题
+
+> **反命题 1**: "syn 和 quote 是过程宏必须的" ⟹ 不成立。简单宏可以直接操作 `proc_macro::TokenStream`。
+>
+> **反命题 2**: "解析越宽松越好" ⟹ 不成立。过度宽松的解析会隐藏用户错误，导致难以诊断的生成代码。
+>
+> **反命题 3**: "quote! 中的变量会自动 hygiene" ⟹ 不成立。仍需关注 span 来源与标识符捕获。
+>
+## 反向推理
+
+> **反向推理 1**: 宏在有效输入下 panic 或生成错误代码 ⟸ 说明 syn 解析或 AST 转换分支未覆盖该输入形状。
+>
+> **反向推理 2**: 生成代码报错位置混乱 ⟸ 说明 quote! 中未正确传递 span。
+>
+## 过渡段
+
+> **过渡**: 从解析 API 过渡到 AST 数据结构，可以理解 syn 将无结构 token 转为可操作模型的价值。
+>
+> **过渡**: 从 AST 转换过渡到 quote 生成，可以建立“先解析、再变换、最后输出”的宏实现模式。
+>
+> **过渡**: 从 quote 生成过渡到卫生性，可以理解生成代码与调用方上下文之间的边界控制。
+>

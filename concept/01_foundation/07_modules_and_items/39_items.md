@@ -280,3 +280,19 @@ flowchart TD
 
 > **权威来源**: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) · [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html)
 > **内容分级**: [综述级]
+
+## 过渡段
+
+> **过渡**: 从 item 分类过渡到作用域与可见性，可以理解 Rust 名称解析的基础规则。
+>
+> **过渡**: 从可见性规则过渡到 use 声明，可以建立“定义—导出—使用”的模块协作模式。
+>
+> **过渡**: 从 item 顺序与宏作用域过渡到 trait 与泛型，可以为进阶类型系统学习奠定基础。
+>
+
+## 反向推理
+
+> **反向推理**: 编译器提示某 item 不存在但实际已定义 ⟸ 说明可见性 `pub` 或模块路径未正确设置。
+>
+> **反向推理**: 宏在定义前被调用导致错误 ⟸ 说明 item 顺序与 `macro_rules` 作用域规则未遵守。
+>

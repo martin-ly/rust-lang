@@ -238,3 +238,12 @@ extern "C" {
 
 > **权威来源**: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) · [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 > **内容分级**: [研究级]
+
+## 过渡段
+
+> **过渡**: 从 item 的种类枚举过渡到模块与可见性，可以理解 crate 静态结构的组织方式。
+>
+> **过渡**: 从泛型参数与关联项过渡到 trait 与实现，可以建立“抽象定义 + 具体实现”的 item 组合模型。
+>
+> **过渡**: 从 item 参考过渡到属性与宏系统，可以理解编译期元编程如何扩展和修饰 item 语义。
+>

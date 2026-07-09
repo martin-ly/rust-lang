@@ -5640,7 +5640,7 @@
       "layer": "L1",
       "title": "Rust 起步指南",
       "positioning": "Rust 学习路径的起点。本文档假设你没有任何 Rust 背景，只需基本的命令行操作经验。",
-      "line_count": 251,
+      "line_count": 267,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将安装、构建、测试、文档生成串联为可重复的开发工作流。",
@@ -5683,7 +5683,7 @@
         "../08_error_handling/32_error_handling_basics.md",
         "../10_testing_basics/16_testing_basics.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 32,
@@ -5695,7 +5695,7 @@
           "[所有权](../01_ownership_borrow_lifetime/01_ownership.md) · [借用](../01_ownership_borrow_lifetime/02_borrowing.md) · [类型系统](../02_type_system/04_type_system.md) · [模块与路径](../07_modules_and_items/11_modules_and_paths.md) · [错误处理基础](../08_error_handling/32_error_handling_basics.md) · [测试基础](../10_testing_basics/16_testing_basics.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -6617,7 +6617,7 @@
       "layer": "L1",
       "title": "Rust 所有权-借用-生命周期知识图谱",
       "positioning": "",
-      "line_count": 377,
+      "line_count": 384,
       "theorem_chains": [
         {
           "text": "- **T-OBL-1 所有权唯一性**：每个值在任一时刻有且仅有一个所有者 ⟹ 内存释放责任清晰。",
@@ -6650,7 +6650,7 @@
         "./23_move_semantics.md",
         "./30_lifetimes_advanced.md"
       ],
-      "transitions": 1,
+      "transitions": 5,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
       "matrix_rows": 44,
@@ -12132,7 +12132,7 @@
       "layer": "L1",
       "title": "Crate 与源文件（Crates and Source Files）",
       "positioning": "",
-      "line_count": 253,
+      "line_count": 269,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块路径解析串联起来。",
@@ -12194,7 +12194,7 @@
         "12_functions.md",
         "39_items.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 28,
@@ -12206,7 +12206,7 @@
           "[Items](39_items.md) · [Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md) · [Cargo Manifest Reference](../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md) · [The Rust Runtime](../../03_advanced/02_unsafe/30_rust_runtime.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -12214,7 +12214,7 @@
       "layer": "L1",
       "title": "项（Items）",
       "positioning": "",
-      "line_count": 283,
+      "line_count": 299,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块、item、名称解析与可见性串联起来。",
@@ -12332,7 +12332,7 @@
         "44_static_items.md",
         "45_const_items_and_const_fn.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 32,
@@ -12344,7 +12344,7 @@
           "[Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [FFI](../../03_advanced/04_ffi/05_rust_ffi.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -13026,8 +13026,21 @@
       "layer": "L1",
       "title": "错误处理控制流（Error Handling Control Flow）",
       "positioning": "",
-      "line_count": 253,
-      "theorem_chains": [],
+      "line_count": 260,
+      "theorem_chains": [
+        {
+          "text": "- **T-EH-1 错误传播单调性**：若函数返回 `Result<T, E>`，内部 `?` ⟹ 只会将 `Err` 向 `E` 转换，不会引入额外成功路径。",
+          "type": "paragraph"
+        },
+        {
+          "text": "- **T-EH-2 `?` 早退等价性**：`expr?` ⟹ 在语义上等价于一段展开后的 `match`，编译器保证控制流一致。",
+          "type": "paragraph"
+        },
+        {
+          "text": "- **T-EH-3 边界封闭性**：良好的错误边界设计 ⟹ 将领域错误封装在 crate/模块内部，对外暴露稳定、可操作的错误类型。",
+          "type": "paragraph"
+        }
+      ],
       "anti_propositions": [
         {
           "title": "### 反命题"
@@ -13098,7 +13111,7 @@
         "../07_modules_and_items/12_functions.md",
         "32_error_handling_basics.md"
       ],
-      "transitions": 1,
+      "transitions": 7,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 7,
@@ -13110,7 +13123,7 @@
           "[Error Handling 深入](../../02_intermediate/03_error_handling/04_error_handling.md) · [Iterator Patterns](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)"
         ]
       },
-      "backward_chains": 2,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -13398,7 +13411,7 @@
       "layer": "L1",
       "title": "常用开发工具（Useful Development Tools）",
       "positioning": "",
-      "line_count": 209,
+      "line_count": 225,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将代码编写、格式化、lint、测试、文档、发布串联为可重复工作流。",
@@ -13433,7 +13446,7 @@
         "../00_start/00_start.md",
         "16_testing_basics.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 20,
@@ -13445,7 +13458,7 @@
           "[Testing Basics](16_testing_basics.md) · [Documentation](../../06_ecosystem/09_testing_and_quality/14_documentation.md) · [DevOps and CI/CD](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) · [Cargo Subcommands](../../06_ecosystem/01_cargo/66_cargo_subcommands_and_plugins.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -16026,9 +16039,42 @@
       "layer": "L2",
       "title": "分发机制 (Dispatch Mechanisms)",
       "positioning": "",
-      "line_count": 1987,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 2025,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过静态分发 ⟹ 零成本/体积膨胀 与 动态分发 ⟹ 运行时开销/体积缩减 的定理链进行选型。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 静态分发 ⟹ 零成本运行时 | 编译期单态化生成专用代码 | 调用无额外开销 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 单态化 ⟹ 二进制体积膨胀 | 每个具体类型生成一份代码 | 泛型使用过多时代码段增大 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 对象安全约束 ⟹ trait object 可用范围 | 方法不能按 Self 大小返回等 | 只有对象安全 trait 才能动态分发 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"静态分发总是比动态分发好\" ⟹ 不成立。静态分发会带来二进制体积膨胀，有时动态分发更优。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"动态分发一定很慢\" ⟹ 不成立。虚表查找在现代 CPU 上通常很小，且能减少代码膨胀。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"任何 trait 都可以做成 trait object\" ⟹ 不成立。对象安全规则禁止某些方法签名。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -16280,10 +16326,10 @@
         "../../06_ecosystem/10_performance/15_performance_optimization.md",
         "39_dispatch_mechanisms.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 32,
+      "matrix_rows": 36,
       "pre_post": {
         "pre": [
           "[Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)"
@@ -16292,7 +16338,7 @@
           "[Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -17125,9 +17171,42 @@
       "layer": "L2",
       "title": "类型级编程 (Type-Level Programming)",
       "positioning": "",
-      "line_count": 615,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 653,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过类型级数据 ⟹ trait 约束 ⟹ 编译期计算的定理链利用类型系统能力。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 类型级 Peano 数 ⟹ 编译期算术 | 通过递归类型与 trait 实现 | 可在编译期表达长度等约束 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 类型级布尔 ⟹ 条件类型选择 | 利用关联类型实现 if/else | 编译期根据类型状态选择实现 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| Typestate ⟹ 状态机编码于类型 | 状态转换由类型系统保证 | 运行时状态转换错误可被编译器拦截 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"类型级编程总是比普通代码好\" ⟹ 不成立。过度复杂化会降低可读性并拖慢编译时间。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"Rust 拥有完整的高阶类型（HKT）\" ⟹ 不成立。Rust 只能通过关联类型与 trait 模拟部分 HKT 能力。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"复杂类型不会影响编译时间\" ⟹ 不成立。类型级递归和大量约束可能显著增加编译耗时。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -17187,10 +17266,10 @@
         "../../06_ecosystem/10_performance/15_performance_optimization.md",
         "39_type_level_programming.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "matrix_rows": 4,
       "pre_post": {
         "pre": [
           "[Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)"
@@ -17199,7 +17278,7 @@
           "[Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -24639,9 +24718,42 @@
       "layer": "L3",
       "title": "Future 与 Executor 机制 (Future and Executor Mechanisms)",
       "positioning": "",
-      "line_count": 1002,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 1040,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过 Future ⟹ Poll ⟹ Waker ⟹ Executor 的定理链理解异步任务生命周期。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| async/await 脱糖 ⟹ Future 状态机 | 编译器将异步代码转换为 poll 状态机 | 无额外运行时分配或虚表开销 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| Waker ⟹ 事件驱动再 poll | 资源就绪时通过 waker 通知执行器 | 避免忙等，提升 CPU 利用率 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 执行器调度 ⟹ 协作式多任务 | 任务主动让出控制权 | 单线程或多线程执行器可灵活选择 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"async 一定比同步快\" ⟹ 不成立。async 更适合高并发 I/O，低并发或 CPU 密集任务可能更慢。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"Future 创建后立即执行\" ⟹ 不成立。Future 是惰性的，必须由执行器驱动 poll 才会推进。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"任何执行器都适用于所有工作负载\" ⟹ 不成立。线程池、work-stealing、thread-per-core 各有适用场景。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -24755,10 +24867,10 @@
         "../../06_ecosystem/10_performance/15_performance_optimization.md",
         "39_future_and_executor_mechanisms.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "matrix_rows": 8,
       "pre_post": {
         "pre": [
           "[Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)"
@@ -24767,7 +24879,7 @@
           "[Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -26655,16 +26767,33 @@
       "layer": "L3",
       "title": "Unsafe Rust 模式：安全抽象的核心技术",
       "positioning": "",
-      "line_count": 18,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 33,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过需求 ⟹ 安全抽象 ⟹ 安全 API 的定理链组织 unsafe 代码。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 1**: \"unsafe 代码总是错误的\" ⟹ 不成立。unsafe 是 Rust 提供的合法能力，关键在于维持 soundness 契约。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"把 safe 代码放进 unsafe 块可以提升性能\" ⟹ 不成立。不必要的 unsafe 不会带来优化，反而增加风险。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
         "03_unsafe.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 0,
       "pre_post": {
@@ -26889,7 +27018,7 @@
       "layer": "L3",
       "title": "Rust 内存模型（Memory Model）",
       "positioning": "",
-      "line_count": 239,
+      "line_count": 255,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将字节模型、provenance 和 UB 边界串联起来。",
@@ -26974,7 +27103,7 @@
         "03_unsafe.md",
         "31_panic.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 24,
@@ -26986,7 +27115,7 @@
           "[Atomics and Memory Ordering](../00_concurrency/11_atomics_and_memory_ordering.md) · [Inline Assembly](../05_inline_assembly/13_inline_assembly.md) · [Tree Borrows](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -26994,7 +27123,7 @@
       "layer": "L3",
       "title": "Rust 运行时（The Rust Runtime）",
       "positioning": "",
-      "line_count": 262,
+      "line_count": 278,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将运行时属性、分配行为和二进制输出串联起来。",
@@ -27068,7 +27197,7 @@
         "29_memory_model.md",
         "31_panic.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 26,
@@ -27080,7 +27209,7 @@
           "[Embedded Systems](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) · [Unsafe Rust](03_unsafe.md) · [Panic](31_panic.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -27155,7 +27284,7 @@
       "layer": "L3",
       "title": "Unsafe 参考（Unsafe Reference）",
       "positioning": "",
-      "line_count": 216,
+      "line_count": 232,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `unsafe` 关键字、块、操作和 UB 契约串联起来。",
@@ -27219,7 +27348,7 @@
         "30_rust_runtime.md",
         "31_panic.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 29,
@@ -27231,7 +27360,7 @@
           "[Inline Assembly](../05_inline_assembly/13_inline_assembly.md) · [FFI Advanced](../04_ffi/09_ffi_advanced.md) · [Custom Allocators](../06_low_level_patterns/14_custom_allocators.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -28313,9 +28442,42 @@
       "layer": "L3",
       "title": "过程宏代码生成优化",
       "positioning": "",
-      "line_count": 300,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 339,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过 token 质量 ⟹ 编译期开销 ⟹ 二进制体积的定理链进行优化决策。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 精简生成 token ⟹ 缩短编译时间 | 避免冗余展开与重复实现 | 宏使用场景的编译耗时下降 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 保留原始 span ⟹ 提升诊断精度 | `quote_spanned!` 与 `Span::call_site` 合理选用 | 用户收到的错误信息定位更准确 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 编译期常量折叠 ⟹ 减少运行时开销 | 在宏展开阶段完成可静态求值的计算 | 生成的运行时代码更高效 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"过程宏生成的代码越多越好\" ⟹ 不成立。冗余生成会增加编译负担与二进制体积。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"所有生成代码都会 monomorphize\" ⟹ 不成立。通过泛型约束与宏生成策略可以减少单态化膨胀。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"优化宏输出不需要测量\" ⟹ 不成立。应使用 cargo-llvm-lines、cargo-bloat 等工具量化后再优化。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -28393,10 +28555,10 @@
         "30_macro_debugging_and_diagnostics.md",
         "31_production_grade_macro_development.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 5,
+      "matrix_rows": 9,
       "pre_post": {
         "pre": [
           "[过程宏](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) · [泛型](../../02_intermediate/01_generics/02_generics.md)"
@@ -28405,7 +28567,7 @@
           "[生产级宏开发](31_production_grade_macro_development.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -28413,9 +28575,42 @@
       "layer": "L3",
       "title": "宏调试与诊断",
       "positioning": "",
-      "line_count": 255,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 294,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过展开追踪 ⟹ span 保留 ⟹ 精确诊断的定理链提升排错效率。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| cargo-expand ⟹ 可视化展开结果 | 查看宏实际生成的代码 | 快速定位逻辑错误与生成的意外代码 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| Span 保留 ⟹ 错误定位到调用点 | 使用 `Span::call_site` / `Span::mixed_site` | 用户看到的报错位置更准确 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 编译期性能分析 ⟹ 定位慢宏 | 测量各宏的展开耗时 | 优化工作聚焦在真正的热点上 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"可以用常规 debugger 调试过程宏\" ⟹ 不成立。宏在编译期执行，运行时调试器无法介入。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"宏错误信息必然模糊\" ⟹ 不成立。通过 `proc_macro::Diagnostic` 与 span 可以输出精确错误。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"cargo-expand 只在本地开发有用\" ⟹ 不成立。CI 中对比展开结果可及早发现回归。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -28470,10 +28665,10 @@
         "30_macro_debugging_and_diagnostics.md",
         "31_production_grade_macro_development.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "matrix_rows": 4,
       "pre_post": {
         "pre": [
           "[过程宏](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)"
@@ -28482,7 +28677,7 @@
           "[生产级宏开发](31_production_grade_macro_development.md) · [rustc 编译器诊断](../../06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -28490,9 +28685,42 @@
       "layer": "L3",
       "title": "生产级宏开发",
       "positioning": "",
-      "line_count": 297,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 336,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过兼容性 ⟹ 诊断质量 ⟹ 可持续维护的定理链评估工程成熟度。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 明确 MSRV 策略 ⟹ 降低兼容性风险 | 在文档与 CI 中声明最低 Rust 版本 | 下游用户可以预测升级成本 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| span 感知诊断 ⟹ 减少 issue 噪音 | 错误信息指向用户代码而非宏内部 | 维护者处理支持请求的时间下降 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 多工具链 CI ⟹ 及早发现回归 | 覆盖 stable、beta、nightly 及多 edition | 破坏性变更在发布前暴露 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"宏 crate 不需要 semver\" ⟹ 不成立。derive/attribute 的签名变化会直接破坏下游代码。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"文档对宏 crate 不重要\" ⟹ 不成立。宏的隐式行为尤其需要清晰文档与示例。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"测试只需测 happy path\" ⟹ 不成立。应包含 `compile_fail` 测试验证错误场景。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -28553,10 +28781,10 @@
         "30_macro_debugging_and_diagnostics.md",
         "31_production_grade_macro_development.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 8,
+      "matrix_rows": 12,
       "pre_post": {
         "pre": [
           "[过程宏](07_proc_macro.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) · [Cargo 注册表与包发布](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md)"
@@ -28565,7 +28793,7 @@
           "[Cargo semver-checks](../../07_future/03_preview_features/46_cargo_semver_checks_preview.md) · [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/82_engineering_and_production_patterns.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -28573,9 +28801,46 @@
       "layer": "L3",
       "title": "术语表 - C11 Macro System",
       "positioning": "",
-      "line_count": 610,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 657,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过术语标准化 ⟹ 概念对齐 ⟹ 沟通效率的定理链构建共同语言。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 统一术语 ⟹ 减少沟通歧义 | 在团队与文档中使用一致定义 | 技术讨论与代码审查更高效 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 术语与概念链接 ⟹ 加速学习 | 每个术语指向权威概念页或示例 | 读者可以从 glossary 进入深度内容 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 分类维度清晰 ⟹ 快速检索 | 按宏类型、机制、工具分层组织 | 查找特定术语的时间缩短 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"术语表只是字典\" ⟹ 不成立。良好的术语表还揭示概念之间的关系与学习路径。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"初学者不需要术语表\" ⟹ 不成立。精确的术语是避免“宏很黑魔法”误解的基础。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"术语翻译可以随意\" ⟹ 不成立。中英双语应遵循项目统一约定，避免一词多译。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -28743,18 +29008,26 @@
       "sources": [],
       "cross_references": [
         "../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md",
         "/crates/c11_macro_system_proc/docs/tier_01_foundations/02_navigation.md",
-        "/crates/c11_macro_system_proc/docs/tier_01_foundations/04_faq.md"
+        "/crates/c11_macro_system_proc/docs/tier_01_foundations/04_faq.md",
+        "07_proc_macro.md",
+        "34_syn_quote_reference.md",
+        "35_macro_hygiene.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "matrix_rows": 4,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[过程宏](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)"
+        ],
+        "post": [
+          "[宏卫生性](35_macro_hygiene.md) · [syn/quote 参考](34_syn_quote_reference.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -28762,9 +29035,46 @@
       "layer": "L3",
       "title": "常见问题 (FAQ) - C11 Macro System",
       "positioning": "",
-      "line_count": 730,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 777,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Common Question ⟹ Mechanism Explanation ⟹ Best Practice",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过问题 ⟹ 机制解释 ⟹ 最佳实践的定理链深化理解。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 问题驱动 ⟹ 针对性学习 | 按真实困惑组织内容 | 读者能快速找到当前痛点 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 机制解释 ⟹ 避免死记硬背 | 说明宏展开、卫生性、span 等底层原理 | 用户能举一反三解决新问题 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 最佳实践 ⟹ 减少反模式 | 给出可执行的代码示例与工具推荐 | FAQ 直接转化为工程规范 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"宏只是简单的代码替换\" ⟹ 不成立。Rust 宏受卫生性、span 与类型系统约束，行为远比文本替换复杂。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"过程宏一定比声明宏好\" ⟹ 不成立。简单模式匹配场景下声明宏更轻量。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"FAQ 不需要示例\" ⟹ 不成立。可运行的最小示例是验证答案正确性的关键。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -28981,17 +29291,25 @@
       "cross_references": [
         "../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md",
         "/crates/c11_macro_system_proc/docs/tier_01_foundations/03_glossary.md",
-        "/crates/c11_macro_system_proc/docs/tier_02_guides/README.md"
+        "/crates/c11_macro_system_proc/docs/tier_02_guides/README.md",
+        "07_proc_macro.md",
+        "31_production_grade_macro_development.md",
+        "32_macro_glossary.md",
+        "35_macro_hygiene.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 7,
+      "matrix_rows": 11,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[过程宏](07_proc_macro.md) · [宏术语表](32_macro_glossary.md)"
+        ],
+        "post": [
+          "[宏卫生性](35_macro_hygiene.md) · [生产级宏开发](31_production_grade_macro_development.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -28999,9 +29317,46 @@
       "layer": "L3",
       "title": "syn & quote 完整参考",
       "positioning": "",
-      "line_count": 924,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 971,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Parse Input ⟹ Transform AST ⟹ Emit Tokens",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过解析输入 ⟹ 转换 AST ⟹ 生成 token 的定理链组织宏实现。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 精确解析 ⟹ 健壮宏 | 使用 syn 的类型化 AST 解析输入 | 宏在错误输入下给出清晰诊断 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| AST 转换 ⟹ 代码生成灵活 | 在解析后的数据结构上进行变换 | 可以实现复杂的 derive/attribute 逻辑 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| quote 生成 ⟹ 保留可读性 | 使用 `quote!` 以类 Rust 语法生成 token | 生成的代码更易审查与调试 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"syn 和 quote 是过程宏必须的\" ⟹ 不成立。简单宏可以直接操作 `proc_macro::TokenStream`。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"解析越宽松越好\" ⟹ 不成立。过度宽松的解析会隐藏用户错误，导致难以诊断的生成代码。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"quote! 中的变量会自动 hygiene\" ⟹ 不成立。仍需关注 span 来源与标识符捕获。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -29195,17 +29550,25 @@
         "../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md",
         "/crates/c11_macro_system_proc/docs/tier_03_references/01_declarative_macros_complete_reference.md",
         "/crates/c11_macro_system_proc/docs/tier_03_references/02_procedural_macro_api_reference.md",
-        "/crates/c11_macro_system_proc/docs/tier_03_references/04_macro_hygiene_reference.md"
+        "/crates/c11_macro_system_proc/docs/tier_03_references/04_macro_hygiene_reference.md",
+        "07_proc_macro.md",
+        "31_production_grade_macro_development.md",
+        "32_macro_glossary.md",
+        "35_macro_hygiene.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "matrix_rows": 4,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[过程宏](07_proc_macro.md) · [宏术语表](32_macro_glossary.md)"
+        ],
+        "post": [
+          "[生产级宏开发](31_production_grade_macro_development.md) · [宏卫生性](35_macro_hygiene.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -29213,9 +29576,46 @@
       "layer": "L3",
       "title": "宏卫生性完整参考",
       "positioning": "",
-      "line_count": 972,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 1019,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Hygiene ⟹ Span Selection ⟹ Name Collision Prevention",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过卫生性 ⟹ span 选择 ⟹ 名称冲突预防的定理链设计安全宏。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 卫生性 ⟹ 防止名称冲突 | 宏生成的标识符不会意外捕获外部变量 | 展开后的代码更可预测 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| call_site span ⟹ 用户上下文可见 | 生成的标识符表现得像用户写的 | 适用于需要用户覆盖的场景 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| def_site span ⟹ 内部封装 | 标识符仅在宏定义处解析 | 防止外部意外干扰宏内部实现 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"宏卫生性使调试变得不可能\" ⟹ 不成立。卫生性是作用域规则，不影响 cargo-expand 等展开查看工具。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"所有生成标识符都应该用 call_site\" ⟹ 不成立。call_site 会增加名称冲突与捕获风险。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"声明宏与过程宏卫生性完全相同\" ⟹ 不成立。二者实现细节与 span 控制能力存在差异。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -29433,17 +29833,25 @@
         "../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md",
         "/crates/c11_macro_system_proc/docs/tier_03_references/01_declarative_macros_complete_reference.md",
         "/crates/c11_macro_system_proc/docs/tier_03_references/02_procedural_macro_api_reference.md",
-        "/crates/c11_macro_system_proc/docs/tier_03_references/03_syn_quote_reference.md"
+        "/crates/c11_macro_system_proc/docs/tier_03_references/03_syn_quote_reference.md",
+        "07_proc_macro.md",
+        "30_macro_debugging_and_diagnostics.md",
+        "31_production_grade_macro_development.md",
+        "34_syn_quote_reference.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 5,
+      "matrix_rows": 9,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[过程宏](07_proc_macro.md) · [syn/quote 参考](34_syn_quote_reference.md)"
+        ],
+        "post": [
+          "[生产级宏开发](31_production_grade_macro_development.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -31188,9 +31596,30 @@
       "layer": "L3",
       "title": "所有权性能优化",
       "positioning": "从所有权视角出发，系统梳理避免不必要拷贝、使用写时复制、优化内存布局、零拷贝解析与移动语义的最佳实践。",
-      "line_count": 157,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 174,
+      "theorem_chains": [
+        {
+          "text": "3. **机制推理**: 通过避免拷贝 ⟹ Cow/零拷贝 ⟹ 布局优化的定理链进行性能决策。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 1**: \"Clone 总是性能问题\" ⟹ 不成立。小数据或不可变共享场景下 clone 可能更简单且可接受。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"零拷贝总是最优\" ⟹ 不成立。零拷贝常引入复杂生命周期约束，可能增加维护成本。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"栈分配总是比堆分配快\" ⟹ 不成立。大数据结构在栈上拷贝或传递可能反而更慢。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -31251,7 +31680,7 @@
         "15_zero_copy_parsing.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 10,
       "pre_post": {

@@ -204,3 +204,12 @@ pub use inner::helper as public_helper; // 重导出并改名
 
 > **权威来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Rust Reference — Namespaces](https://doc.rust-lang.org/reference/names/namespaces.html) · [Rust Reference — Scopes](https://doc.rust-lang.org/reference/names/scopes.html) · [Rust Reference — Paths](https://doc.rust-lang.org/reference/paths.html) · [Rust Reference — Name Resolution](https://doc.rust-lang.org/reference/names/name-resolution.html) · [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) · [rustc-dev-guide — Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html)
 > **内容分级**: [研究级]
+
+## 过渡段
+
+> **过渡**: 从实体与声明过渡到作用域与命名空间，可以理解 Rust 如何在同一 crate 内区分不同种类的名称。
+>
+> **过渡**: 从作用域规则过渡到路径与解析算法，可以建立“名字如何被找到”的系统性理解。
+>
+> **过渡**: 从名称解析过渡到 HIR 与链接，可以理解前端语义分析如何为后续编译阶段提供基础。
+>

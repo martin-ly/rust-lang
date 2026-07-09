@@ -1,5 +1,13 @@
 > **EN**: Macro Glossary
 > **Summary**: Authoritative concept page for `术语表 - C11 Macro System`. Content migrated from `crates/c11_macro_system_proc/docs/tier_01_foundations/03_glossary.md`.
+> **受众**: [研究者]
+> **内容分级**: [参考级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: S×Mem — 宏术语结构化索引
+> **前置依赖**: [过程宏](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)
+> **后置概念**: [宏卫生性](35_macro_hygiene.md) · [syn/quote 参考](34_syn_quote_reference.md)
+> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency
 >
 > **权威来源**: 本页为 `Macro Glossary` 的权威概念页；crate 文档仅保留导航 stub。
 
@@ -607,3 +615,42 @@ const SIZE: usize = compute_size!(some_input);
 ---
 
 > **向下引用**: 参见 [17_macro_patterns](../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md)
+
+## 认知路径
+
+1. **问题识别**: 识别 Rust 宏系统中大量术语（declarative/procedural macro、token、span、hygiene 等）容易混淆的问题。
+2. **概念建立**: 掌握每个术语的精确定义、适用场景及其与其他概念的关系。
+3. **机制推理**: 通过术语标准化 ⟹ 概念对齐 ⟹ 沟通效率的定理链构建共同语言。
+4. **边界辨析**: 辨析“术语表只是字典”等反命题，理解术语是概念网络的入口。
+5. **迁移应用**: 将术语表与卫生性、syn/quote 参考等主题链接。
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 统一术语 ⟹ 减少沟通歧义 | 在团队与文档中使用一致定义 | 技术讨论与代码审查更高效 |
+| 术语与概念链接 ⟹ 加速学习 | 每个术语指向权威概念页或示例 | 读者可以从 glossary 进入深度内容 |
+| 分类维度清晰 ⟹ 快速检索 | 按宏类型、机制、工具分层组织 | 查找特定术语的时间缩短 |
+
+## 反命题
+
+> **反命题 1**: "术语表只是字典" ⟹ 不成立。良好的术语表还揭示概念之间的关系与学习路径。
+>
+> **反命题 2**: "初学者不需要术语表" ⟹ 不成立。精确的术语是避免“宏很黑魔法”误解的基础。
+>
+> **反命题 3**: "术语翻译可以随意" ⟹ 不成立。中英双语应遵循项目统一约定，避免一词多译。
+>
+## 反向推理
+
+> **反向推理 1**: 发现文档中对同一宏机制使用了多个不同名称 ⟸ 说明缺少统一术语表或约定未被执行。
+>
+> **反向推理 2**: 学习者在 hygiene 与 span 之间混淆 ⟸ 说明术语表未清晰区分二者层级关系。
+>
+## 过渡段
+
+> **过渡**: 从术语收集过渡到分类维度，可以理解 glossary 不仅是列表，更是概念地图。
+>
+> **过渡**: 从分类维度过渡到概念链接，可以建立“查到术语即可进入权威解释”的导航体验。
+>
+> **过渡**: 从导航体验过渡到与卫生性、参考页的结合，可以形成宏系统学习的完整入口。
+>
