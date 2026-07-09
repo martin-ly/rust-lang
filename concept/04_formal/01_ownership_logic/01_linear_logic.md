@@ -47,9 +47,9 @@
 
 > **[Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic)** Linear logic is a substructural logic proposed by Jean-Yves Girard as a refinement of classical and intuitionistic logic, joining the dualities of the former with many of the constructive properties of the latter. The key operational intuition behind linear logic is that logical assumptions are consumed in proving a conclusion, rather than merely used as in classical logic. [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
 > **[Wikipedia: Affine logic](https://en.wikipedia.org/wiki/Affine_logic)** Affine logic is a substructural logic whose proof theory rejects the structural rule of contraction. It can also be characterized as linear logic with weakening. In affine logic, each hypothesis may be used at most once—unlike in linear logic, where each hypothesis must be used exactly once.
-> **[学术来源: Girard 1987, *Linear Logic* (Theoretical Computer Science 50:1-102)]** Linear logic introduces a new connective, the exponential `!A` ("of course A"), which allows a formula to be copied or discarded. Without `!`, every assumption must be used exactly once. This makes linear logic a **resource-sensitive logic**: propositions represent resources, and proofs represent resource-transforming processes. [来源] ✅
-> **[学术来源: Pierce 2002, *Types and Programming Languages* (TAPL) §15.3]** Pierce 将子结构类型系统（substructural type systems）定位为"通过控制变量的使用次数来管理资源 [来源: [Linear Logic](https://plato.stanford.edu/entries/logic-linear/)]"的类型理论。线性类型（linear types）对应"恰好使用一次"，仿射类型（affine types）对应"最多使用一次"，这构成了 Rust 所有权（Ownership）系统的理论先声。此处为 L1/01_ownership.md §1 "什么是所有权" 的精确对应——Pierce 的形式化定义是 Rust 所有权规则的先验类型论基础。 [来源] ✅
-> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** Rust's ownership system can be understood as an **affine type system** embedded in a larger language with managed copying (`Clone`) and shared borrowing (`&T`). The core insight is that ownership tracking enforces the resource discipline of affine logic at compile time. [来源] ✅
+> **[学术来源: Girard 1987, *Linear Logic* (Theoretical Computer Science 50:1-102)]** Linear logic introduces a new connective, the exponential `!A` ("of course A"), which allows a formula to be copied or discarded. Without `!`, every assumption must be used exactly once. This makes linear logic a **resource-sensitive logic**: propositions represent resources, and proofs represent resource-transforming processes. (Source: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4))
+> **[学术来源: Pierce 2002, *Types and Programming Languages* (TAPL) §15.3]** Pierce 将子结构类型系统（substructural type systems）定位为"通过控制变量的使用次数来管理资源 [来源: [Linear Logic](https://plato.stanford.edu/entries/logic-linear/)]"的类型理论。线性类型（linear types）对应"恰好使用一次"，仿射类型（affine types）对应"最多使用一次"，这构成了 Rust 所有权（Ownership）系统的理论先声。此处为 L1/01_ownership.md §1 "什么是所有权" 的精确对应——Pierce 的形式化定义是 Rust 所有权规则的先验类型论基础。 (Source: [Pierce 2002 — TAPL §15.3](https://www.cis.upenn.edu/~bcpierce/tapl/))
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** Rust's ownership system can be understood as an **affine type system** embedded in a larger language with managed copying (`Clone`) and shared borrowing (`&T`). The core insight is that ownership tracking enforces the resource discipline of affine logic at compile time. (Source: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/))
 
 ---
 
@@ -157,10 +157,10 @@ Rust 对应:
 Rust 对应:
   fn consume(a: A) -> B { /* 使用 a 构造 B */ }
   // 前提: 拥有 A 可构造 B
-  // 结论: 此函数是 A ⊸ B 的证明 [来源] ✅
+  // 结论: 此函数是 A ⊸ B 的证明
 ```
 
-> 此处为 L1/01_ownership.md §3.2 "函数参数 move" 的精确对应——函数参数按值传递时，调用者失去所有权（Ownership）（`A` 被消耗），被调用者获得构造 `B` 的资源，这正是 `A ⊸ B` 的编程语言实现。
+> 此处为 L1/01_ownership.md §3.2 "函数参数 move" 的精确对应——函数参数按值传递时，调用者失去所有权（Ownership）（`A` 被消耗），被调用者获得构造 `B` 的资源，这正是 `A ⊸ B` 的编程语言实现。 (Source: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4))
 
 ```text
 弱化（Weakening）在仿射逻辑中允许:
@@ -186,10 +186,10 @@ Rust 对应:
 Rust 对应:
   Copy trait = !T  （T 可被复制，不受线性约束）
   例: i32: Copy     →  !i32
-  例: String: !Copy →  String 受线性约束 [来源] ✅
+  例: String: !Copy →  String 受线性约束
 ```
 
-> 此处为 L1/01_ownership.md §4 "Copy trait" 的精确对应——Girard 的 Dereliction 规则 `!A ⊢ A` 解释了 Copy 类型的隐式复制行为：编译器自动将 `!T` 推导为 `T` 的多个副本，无需显式 move。
+> 此处为 L1/01_ownership.md §4 "Copy trait" 的精确对应——Girard 的 Dereliction 规则 `!A ⊢ A` 解释了 Copy 类型的隐式复制行为：编译器自动将 `!T` 推导为 `T` 的多个副本，无需显式 move。 (Source: [Girard 1987 — Linear Logic §1.2](https://doi.org/10.1016/0304-3975(87)90045-4))
 
 ---
 
@@ -506,15 +506,15 @@ fn session_demo() {
 
 | 线性逻辑 | Rust 对应 | 映射精度 | 偏差说明 |
 |:---|:---|:---|:---|
-| 线性资源 (A) | 非 Copy 类型的所有权 | **精确** | 一对一 [来源] ✅ |
-| 仿射资源 (A, 可丢弃) | 所有类型的 Drop | **近似** | Rust 允许显式丢弃（`mem::forget`） [来源] ⚠️ |
-| !A (可复制) | Copy trait | **近似** | !A 是理论构造，Copy 是显式标记 [来源] 💡 |
-| ⊗ (A ⊗ B) | 结构体（Struct） `(A, B)` | **精确** | 积类型对应 [来源] ✅ |
-| ⊕ (A ⊕ B) | `enum { A, B }` | **精确** | 和类型对应 [来源] ✅ |
-| ⊸ (A ⊸ B) | 函数 `fn(A) -> B` | **近似** | Rust 函数允许多次调用（若参数 Copy） [来源] 💡 |
-| ⅋ (par) | 无直接对应 | **无映射** | Rust 无双线程并发分离的显式构造 [来源] 💡 |
-| & With | `trait` 约束（外部选择） | **近似** | `impl Trait for Type` 是外部提供能力 [来源] 💡 |
-| ?A Why not | `Drop` + 允许泄漏 | **近似** | `?A` 理想化可忽略，工程上有 `mem::forget` [来源] ⚠️ |
+| 线性资源 (A) | 非 Copy 类型的所有权 | **精确** | 一对一 (Source: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4)) |
+| 仿射资源 (A, 可丢弃) | 所有类型的 Drop | **近似** | Rust 允许显式丢弃（`mem::forget`） (Source: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4)) |
+| !A (可复制) | Copy trait | **近似** | !A 是理论构造，Copy 是显式标记 (Source: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4)) |
+| ⊗ (A ⊗ B) | 结构体（Struct） `(A, B)` | **精确** | 积类型对应 (Source: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4)) |
+| ⊕ (A ⊕ B) | `enum { A, B }` | **精确** | 和类型对应 (Source: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4)) |
+| ⊸ (A ⊸ B) | 函数 `fn(A) -> B` | **近似** | Rust 函数允许多次调用（若参数 Copy） (Source: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4)) |
+| ⅋ (par) | 无直接对应 | **无映射** | Rust 无双线程并发分离的显式构造 (Source: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4)) |
+| & With | `trait` 约束（外部选择） | **近似** | `impl Trait for Type` 是外部提供能力 (Source: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4)) |
+| ?A Why not | `Drop` + 允许泄漏 | **近似** | `?A` 理想化可忽略，工程上有 `mem::forget` (Source: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4)) |
 
 ---
 
@@ -908,6 +908,7 @@ Rust 所有权系统（仿射变体）:
 > 对比视角见 [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/03_paradigm_matrix.md)（类型系统谱系）。
 
 ---
+(Source: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4))
 
 ## 十四、Wikipedia 概念对齐
 
@@ -926,7 +927,7 @@ Rust 所有权系统（仿射变体）:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic) · [Wikipedia — Affine Logic](https://en.wikipedia.org/wiki/Affine_logic)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1

@@ -69,7 +69,7 @@
 ### 1.1 Serde 的设计哲学
 >
 
-Serde 是 Rust 生态中**数据序列化**的事实标准框架，其核心设计是**类型驱动的数据转换**：
+Serde 是 Rust 生态中**数据序列化**的事实标准框架，其核心设计是**类型驱动的数据转换**。(Source: [Serde Documentation](https://serde.rs/))
 
 ```text
 Serde 的核心抽象:
@@ -229,7 +229,7 @@ impl Deserialize for User {
 }
 ```
 
-> **展开要点**: Derive 宏（Macro）生成的是**手写的 Trait 实现的机械版本**。编译器内联后，序列化代码与手写实现等效——零运行时（Runtime）开销。
+> **展开要点**: Derive 宏（Macro）生成的是**手写的 Trait 实现的机械版本**。编译器内联后，序列化代码与手写实现等效——零运行时（Runtime）开销。(Source: [Serde Book — Derive](https://serde.rs/derive.html))
 > [来源: [Serde Book — Derive](https://serde.rs/derive.html)]
 
 ---

@@ -116,6 +116,7 @@ graph TD
 > **使用建议**: 根据"是否需要共享"和"是否需要线程安全"两个维度快速定位合适的智能指针。
 > **关键洞察**: Rust 的智能指针不是 C++ 的"自动释放指针"——它们是**所有权（Ownership）的显式表达**，每种类型都对应一种特定的所有权语义。
 > [来源: [TRPL Ch15 — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
+> (Source: [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html))
 
 ---
 
@@ -151,6 +152,7 @@ Box<T> 的设计:
 
 > **Box 洞察**: Box 是 Rust 中最简单的智能指针——它只做一件事：在堆上分配并管理内存。它的设计哲学是**最小化**——没有可选的空值，没有自定义删除器（stable），只有一个指针的开销。
 > [来源: [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html)]
+> (Source: [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html))
 
 ---
 
@@ -185,6 +187,7 @@ let weak = Rc::downgrade(&data);
 
 > **Rc/Arc 洞察**: `Rc::clone` 不是深拷贝——它只是增加引用（Reference）计数。这与 Rust 的**显式性**哲学一致：看起来像 clone 的操作实际上是廉价的，但语法上明确表达了"共享"。
 > [来源: [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html)] · [来源: [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)]
+> (Source: [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) · [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html))
 
 ---
 

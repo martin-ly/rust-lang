@@ -27,7 +27,7 @@
 > **后置概念**: [Generics](../01_generics/02_generics.md) ·
 > [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
 > [Async](../../03_advanced/01_async/02_async.md)
-> **主要来源**: [TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**: [TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html) ·
 > [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class) ·
 > [RFC 255](https://rust-lang.github.io/rfcs//0255-object-safety.html)
@@ -215,7 +215,7 @@
 > a trait is a concept used in object-oriented programming that represents a set of methods that can be used to extend the functionality of a class.
 > Rust uses traits to define shared behavior in an abstract way, enabling ad hoc polymorphism without inheritance.
 > **[Wikipedia: Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)** Ad hoc polymorphism is a kind of polymorphism in which polymorphic functions can be applied to arguments of different types, because a polymorphic function can denote a number of distinct and potentially heterogeneous implementations depending on the type of the argument(s). Rust traits provide this through explicit implementation.
-> **来源: [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class) · [Wikipedia: Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming)) · [Wikipedia: Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)** Rust traits 直接受 Haskell type classes 启发，通过显式 `impl` 实现 ad hoc 多态，区别于 C++ 模板重载和 Java 接口继承。
+> **来源: [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class) · [Wikipedia: Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming)) · [Wikipedia: Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)** Rust traits 直接受 Haskell type classes 启发，通过显式 `impl` 实现 ad hoc 多态，区别于 C++ 模板重载和 Java 接口继承。(Source: [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class))
 
 ### 1.2 TRPL 与 RFC 官方定义
 
@@ -432,7 +432,7 @@ impl<P₁...Pn> Trait<T₁...Tm> for Type
 
 #### 定义与语法
 
-Auto trait 由 `auto trait` 关键字声明，是编译器自动为类型实现的标记 trait。
+Auto trait 由 `auto trait` 关键字声明，是编译器自动为类型实现的标记 trait。(Source: [Rust Reference: Auto Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits))
 标准库中最重要的 Auto trait 是 `Send` 和 `Sync`
 ——`Send` 表示类型可安全跨线程转移所有权（Ownership）（值 move 到另一线程无数据竞争），`Sync` 表示类型可安全跨线程共享引用（Reference）（`&T` 可在多线程间安全读取）：
 
@@ -528,7 +528,7 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 
 > **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** ·
 > **[Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/glossary.html#monomorphization)**
-> Trait 泛型的零成本抽象（Zero-Cost Abstraction）由单态化（Monomorphization）和编译器内联优化保证。 ✅ 已验证
+> Trait 泛型的零成本抽象（Zero-Cost Abstraction）由单态化（Monomorphization）和编译器内联优化保证。(Source: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/glossary.html#monomorphization)) ✅ 已验证
 
 ```text
 前提 1: Trait 定义接口契约

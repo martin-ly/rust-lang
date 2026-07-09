@@ -37,6 +37,7 @@
 > **反命题 2**: "忽略 类型系统参考（Type System Reference） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 类型系统参考（Type System Reference） 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 类型系统参考（Type System Reference） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 类型系统参考（Type System Reference） 具有语言特有的形态。
+(Source: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html))
 
 ## 一、类型分类
 
@@ -77,6 +78,7 @@ DST 在编译期大小未知，必须置于指针之后 (Source: [Rust Reference
 | `Mutex<T>` | 多线程，互斥 |
 | `RwLock<T>` | 多线程，读写锁 |
 | `Atomic*` | 多线程，原子操作（Atomic Operations） |
+(Source: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html))
 
 ## 四、子类型与变型
 
@@ -84,6 +86,7 @@ DST 在编译期大小未知，必须置于指针之后 (Source: [Rust Reference
 - 变型描述类型构造器对子类型的保留方式：协变、逆变、不变。
 
 详见 [Subtyping and Variance](06_subtype_variance.md)。
+(Source: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html))
 
 ## 五、Trait 与 Lifetime Bounds
 
@@ -96,6 +99,7 @@ fn foo<T: Clone + Send + 'a>(x: T) {}
 - Trait bound：`T: Trait`
 - Lifetime bound：`T: 'a`
 - Higher-ranked trait bound (HRTB)：`for<'a> T: Trait<'a>`
+(Source: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html))
 
 ## 六、类型强制转换
 
@@ -108,6 +112,7 @@ Rust 在特定位置自动执行类型强制（coercion）：
 | 子类型 | `&'static str` → `&'a str` |
 | Trait 对象 | `&T` → `&dyn Trait` |
 | 函数项转指针 | `fn item` → `fn pointer` |
+(Source: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html))
 
 ## 七、生命周期省略
 
@@ -310,6 +315,7 @@ Rust 在特定位置自动执行类型强制（coercion）：
 ```
 
 ---
+(Source: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html))
 
 ## 🎯 概述
 
@@ -321,6 +327,7 @@ Rust 类型系统的形式化基于：
 - Hindley-Milner 类型推断
 
 ---
+(Source: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html))
 
 ## 1. 语法定义
 
@@ -395,6 +402,8 @@ Rust 类型系统的形式化基于：
 生命周期 'a, 'b, ...          生命周期变量
 ```
 
+(Source: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html))
+
 ## 过渡段
 
 > **过渡**: 从基础类型分类过渡到动态大小类型与内部可变性，可以理解 Rust 如何在静态类型系统中表达运行时（Runtime）变化。
@@ -405,7 +414,7 @@ Rust 类型系统的形式化基于：
 >
 ---
 
-> **权威来源**: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) · [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli 1996 — Type Systems](https://dl.acm.org/doi/10.1145/6041.6042) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源**: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) · [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli 1996 — Type Systems](https://dl.acm.org/doi/10.1145/6041.6042) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0

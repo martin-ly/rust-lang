@@ -14,11 +14,12 @@
 
 ---
 
-> **来源**: [Rust Reference — Errors](https://doc.rust-lang.org/std/result/enum.Result.html) · · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: [Rust Reference — Errors](https://doc.rust-lang.org/std/result/enum.Result.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
 > [thiserror crate](https://docs.rs/thiserror/latest/thiserror/) ·
 > [anyhow crate](https://docs.rs/anyhow/latest/anyhow/) ·
 > [RFC 0243 — Trait-based Exception Handling](https://rust-lang.github.io/rfcs//0243-trait-based-exception-handling.html)
+> (Source: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html))
 
 ## 📑 目录
 
@@ -100,6 +101,7 @@ Option<T> 和 Result<T, E> 是 Rust 错误处理的代数数据类型:
 
 > **认知功能**: `Result` 和 `Option` 将**错误处理（Error Handling）**从控制流（异常）转化为**数据流**（类型）——错误成为值的一部分，而非控制流的跳转。
 > [来源: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)]
+> (Source: [TRPL — Recoverable Errors with Result](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html))
 
 ---
 
@@ -173,6 +175,7 @@ pub trait Error: Debug + Display {
 
 > **Error Trait 洞察**: Rust 的 `Error` trait 是**错误类型系统（Type System）的根基**——它要求所有错误都可 `Display`（用户可读）和 `Debug`（开发者调试）。
 > [来源: [std::error::Error](https://doc.rust-lang.org/std/error/trait.Error.html)]
+> (Source: [std::error::Error](https://doc.rust-lang.org/std/error/trait.Error.html))
 
 ---
 
@@ -274,6 +277,7 @@ impl std::error::Error for ManualError {
 
 > **自定义错误洞察**: `thiserror` 是**库开发**的标准选择——它通过派生宏（Macro）消除了 `Error` trait 的样板代码。
 > [来源: [thiserror crate](https://docs.rs/thiserror/latest/thiserror/)]
+> (Source: [thiserror crate](https://docs.rs/thiserror/latest/thiserror/))
 
 ---
 

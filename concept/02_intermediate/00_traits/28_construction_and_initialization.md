@@ -164,7 +164,7 @@ struct Config {
 let cfg = Config::default();
 ```
 
-`Default::default()` 提供零参数构造的等价物，与 C++ 默认构造函数对应。
+`Default::default()` 提供零参数构造的等价物，与 C++ 默认构造函数对应。(Source: [std::default::Default](https://doc.rust-lang.org/std/default/trait.Default.html))
 
 ### 3.4 `const fn` 编译期构造
 
@@ -182,7 +182,7 @@ fn main() {
 }
 ```
 
-`const fn` 允许在编译期构造值，这是 C++ `constexpr` 构造函数的对应物。
+`const fn` 允许在编译期构造值，这是 C++ `constexpr` 构造函数的对应物。(Source: [Rust Reference — const fn](https://doc.rust-lang.org/reference/const_eval.html#const-functions))
 
 ---
 
@@ -265,3 +265,7 @@ Point::new(x, y) = Point { x, y }
 - [cppreference: Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
 - [Brown CRP: Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/constructors/copy_and_move_constructors.html)
 - [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html)
+
+---
+
+> **权威来源**: [TRPL: Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) · [Rust Reference: Struct Expressions](https://doc.rust-lang.org/reference/expressions/struct-expr.html) · [Rust Reference: const fn](https://doc.rust-lang.org/reference/const_eval.html#const-functions) · [std::default::Default](https://doc.rust-lang.org/std/default/trait.Default.html)

@@ -99,7 +99,7 @@ HRTB (Higher-Ranked Trait Bounds):
   └── 否则泛型函数无法接受闭包
 ```
 
-> **认知功能**: HRTB 是 Rust **泛型（Generics）与借用（Borrowing）结合**的关键机制——它使闭包（Closures）和回调可以接受任意生命周期的引用（Reference）。
+> **认知功能**: HRTB 是 Rust **泛型（Generics）与借用（Borrowing）结合**的关键机制——它使闭包（Closures）和回调可以接受任意生命周期的引用（Reference）。(Source: [RFC 0387 — HRTB](https://rust-lang.github.io/rfcs/0387-higher-ranked-trait-bounds.html))
 > [来源: [RFC 0387 — HRTB](https://rust-lang.github.io/rfcs//0387-higher-ranked-trait-bounds.html)]
 
 ---
@@ -140,7 +140,7 @@ HRTB (Higher-Ranked Trait Bounds):
   // 返回的生命周期必须 <= 两个输入的最小值
 ```
 
-> **省略洞察**: 生命周期省略（Lifetime Elision）**不是可选特性**——它是使 Rust 代码可读的关键设计，覆盖了 90% 的常见模式。
+> **省略洞察**: 生命周期省略（Lifetime Elision）**不是可选特性**——它是使 Rust 代码可读的关键设计，覆盖了 90% 的常见模式。(Source: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html))
 > [来源: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)]
 
 ---

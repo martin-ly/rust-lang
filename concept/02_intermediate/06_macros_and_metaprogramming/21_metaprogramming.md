@@ -120,6 +120,7 @@ Rust 元编程的抽象层次（从低到高）:
 ```
 
 > **认知功能**: Rust 元编程的**层次递进设计**——从 C 的文本替换到 macro_rules! 的语法树匹配再到过程宏（Procedural Macro）的完整 AST 操作，每一步都增加了表达能力同时保持类型安全和卫生性。
+> (Source: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html))
 > [来源: [Wikipedia — Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming)]
 
 ---
@@ -173,6 +174,7 @@ macro_rules! my_vec {
 ```
 
 > **认知功能**: macro_rules! 的**核心设计哲学**——用模式匹配（Pattern Matching）而非命令式代码描述"输入长什么样、输出应该长什么样"，这与函数式编程中的模式匹配一脉相承。
+> (Source: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/))
 > [来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)]
 
 ---
@@ -209,6 +211,7 @@ macro_rules! my_vec {
 ```
 
 > **认知功能**: 过程宏（Procedural Macro）的**三类划分**对应三种"代码变换意图"——Derive 是"基于数据结构生成实现"，Attribute 是"基于元数据修改语义"，Function-like 是"自定义语法扩展"。
+> (Source: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html))
 > [来源: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)]
 
 ---
@@ -277,6 +280,7 @@ pub fn derive_my_debug(input: TokenStream) -> TokenStream {
 ```
 
 > **认知功能**: syn/quote 的**互补设计**——syn 负责"理解代码"（解析），quote 负责"写出代码"（生成），两者结合使过程宏开发从"操作原始 token"提升到"操作语义结构"。
+> (Source: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html))
 > [来源: [quote crate docs](https://docs.rs/quote/latest/quote/)]
 
 ---
@@ -321,6 +325,7 @@ sequenceDiagram
 ```
 
 > **认知功能**: Derive 宏的**编译时序限制**——过程宏在类型检查之前运行，因此只能基于语法结构（AST）生成代码，无法基于类型信息做决策。这是 Rust 宏系统与模板元编程（C++）的关键差异。
+> (Source: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html))
 > [来源: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)]
 
 ---
@@ -356,6 +361,7 @@ sequenceDiagram
 ```
 
 > **认知功能**: 卫生性的**核心洞察**——Rust 不是"防止名称冲突"，而是通过为每个标识符附加"出生证明"（Span），使不同来源的同名标识符在语义上成为完全不同的实体。
+> (Source: [Wikipedia — Hygienic Macro](https://en.wikipedia.org/wiki/Hygienic_macro))
 > [来源: [Wikipedia — Hygienic Macro](https://en.wikipedia.org/wiki/Hygienic_macro)]
 
 ---
@@ -403,6 +409,7 @@ Rust 元编程的演进方向:
 ```
 
 > **认知功能**: 元编程技术选型的**核心原则**——"能用 const fn 就不用宏，能用泛型（Generics）就不用宏"——因为宏放弃了类型系统（Type System）的保护，而 const eval 在编译期计算的同时保持类型安全。
+> (Source: [RFC 911 — const fn](https://github.com/rust-lang/rfcs/blob/master/text/0911-const-fn.md))
 > [来源: [Rust RFC — const fn 演进](https://github.com/rust-lang/rfcs/blob/master/text/0911-const-fn.md)]
 
 ---
@@ -438,6 +445,7 @@ Rust 元编程的演进方向:
 ```
 
 > **认知功能**: 反命题分析揭示了宏系统的**关键边界**——宏操作的是"语法"而非"语义"，这是宏强大与危险的根源：强大在于可以创造新语法，危险在于无法利用类型系统（Type System）的安全保障。
+> (Source: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html))
 > [来源: [The Little Book of Rust Macros — Hygiene](https://veykril.github.io/tlborm/)]
 
 ---
@@ -467,6 +475,7 @@ Rust 元编程的演进方向:
 ```
 
 > **认知功能**: 边界极限定义了元编程的**能力疆域**——理解"宏不能做什么"（访问类型信息、全局代码变换、无限递归）与理解"宏能做什么"同等重要。
+> (Source: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html))
 > [来源: [Rust Analyzer — Macro Expansion](https://rust-analyzer.github.io/manual.html#macro-expansion)]
 
 ---
@@ -520,6 +529,7 @@ Rust 元编程的演进方向:
 ```
 
 > **陷阱总结**: 元编程的陷阱集中在**错误定位**、**卫生性理解**、**模式匹配（Pattern Matching）细节**、**依赖限制**和**泛型（Generics）替代**五个方面——每个陷阱都反映了"宏的语法层面操作"与"开发者的语义层面直觉"之间的鸿沟。
+> (Source: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html))
 > [来源: [proc-macro Workshop](https://github.com/dtolnay/proc-macro-workshop)]
 
 ---
@@ -577,7 +587,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
+> **权威来源**: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html), [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html), [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html), [The Little Book of Rust Macros](https://veykril.github.io/tlborm/), [Cargo Book — proc-macro](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#proc-macro)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 

@@ -597,7 +597,7 @@ fn divide_fixed(a: i32, b: NonZeroI32) -> i32 {
 > Rust 的类型系统可部分编码这些条件：`NonZeroI32` 类型编码 `b ≠ 0` 的前置条件，`Result<T, E>` 编码可能失败的后置条件。
 > 这是**类型驱动设计**（type-driven design）的体现——将运行时（Runtime）断言提升为编译期类型约束。
 > 与依赖类型（Idris、Agda）相比，Rust 的编码能力有限（无法表达任意数学断言），但足以处理常见的不变量（非零、非空、正数等）。
-> [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
+> (Source: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic))
 
 ### 10.2 边界测试：循环不变量的违反（逻辑错误）
 
@@ -629,7 +629,7 @@ fn find_max(arr: &[i32]) -> Option<i32> {
 > 2) 每次迭代保持不变量；
 > 3) 终止时不变量蕴含后置条件。
 > 这确保了算法正确性，而非仅依赖测试覆盖。
-> [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
+> (Source: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic))
 
 ### 10.3 边界测试：霍尔逻辑的不变量与 Rust 的 `while let`（编译错误）
 
@@ -655,8 +655,8 @@ fn drain_map(map: &mut std::collections::HashMap<i32, String>) {
 > 2) `std::mem::take(map)` 后 drain；
 > 3) `retain`（若支持）。
 > 这与 Java 的 `ConcurrentHashMap`（迭代中修改可能抛 `ConcurrentModificationException`）或 C++ 的 `unordered_map`（迭代器（Iterator）可能失效）不同——Rust 在编译期阻止所有迭代中修改。
-> [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)] ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-03-hash-maps.html)]
+> (Source: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)) ·
+> (Source: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-03-hash-maps.html))
 
 ### 10.4 边界测试： weakest precondition 与 `unsafe` 代码的规范缺口（编译错误/验证失败）
 
@@ -682,8 +682,8 @@ fn abs(x: i32) -> i32 {
 > 这是形式化方法的现实挑战：规范（specification）本身可能有漏洞。
 > Rust 的类型系统部分缓解（`checked_neg` 返回 `Option`），但`unsafe`代码和数值算法仍需人工审查规范完整性。
 > 这与 SPARK/Ada（整数范围在类型中声明，溢出在编译期检查）或 Frama-C（需手动写 ACSL 规范）类似——形式化验证的质量取决于规范的质量。
-> [Weakest Precondition Calculus](https://en.wikipedia.org/wiki/Predicate_transformer_semantics)] ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> (Source: [Weakest Precondition Calculus](https://en.wikipedia.org/wiki/Predicate_transformer_semantics)) ·
+> (Source: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html))
 
 ### 10.5 边界测试：循环不变量的发现与人工介入（验证失败）
 
@@ -713,8 +713,8 @@ fn gcd(a: u32, b: u32) -> u32 {
 > 2) Creusot 支持类似 WhyML 的逻辑函数；
 > 3) Kani 依赖有界展开，不直接处理不变量。
 > 这与 Isabelle/HOL（手动证明，完全控制）或 Dafny（自动生成部分不变量）类似——不变量的发现是形式化方法的"艺术"部分，需要领域知识和创造力。
-> [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)] ·
-> [Prusti Loop Invariants](https://www.pm.inf.ethz.ch/research/prusti.html)]
+> (Source: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)) ·
+> (Source: [Prusti Loop Invariants](https://www.pm.inf.ethz.ch/research/prusti.html))
 
 ### 10.9 边界测试：生命周期参数的不匹配返回
 

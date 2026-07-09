@@ -160,7 +160,7 @@
 
 ## 🎯 概述
 
-**分派** (Dispatch) 决定在运行时（Runtime）调用哪个具体的方法实现。
+**分派** (Dispatch) 决定在运行时（Runtime）调用哪个具体的方法实现。(Source: [Rust Reference: Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html))
 
 | 特性  | 静态分发        | 动态分发          |
 | :--- | :--- | :--- |
@@ -556,7 +556,7 @@ fn main() {
 
 ### 4.1 规则
 
-**对象安全的 trait 必须满足**:
+**对象安全的 trait 必须满足**:(Source: [RFC 255 — Object Safety](https://rust-lang.github.io/rfcs/0255-object-safety.html))
 
 1. ❌ 方法不返回 `Self`
 2. ❌ 方法没有泛型（Generics）类型参数

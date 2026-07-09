@@ -72,6 +72,7 @@
 > **C 预处理器和 Rust 宏（Macro）都叫"宏"，但本质上是两个时代的产物。
 > C 预处理器在文本层面做替换，不感知语法、类型和作用域；
 > Rust 宏在 token 流 / AST 层面操作，受卫生性（hygiene）约束，展开后仍受类型系统（Type System）检查。**
+> (Source: [Rust Reference — Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html))
 
 ---
 
@@ -182,6 +183,8 @@ impl Serialize for MyType {}
 | 头文件包含 | `#include` | 模块（Module）系统 + `use` |
 | 元编程能力 | 有限 | 声明宏（Declarative Macro） + 过程宏（Procedural Macro）完整覆盖 |
 
+(Source: [Rust Reference — Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html))
+
 ---
 
 ## 五、迁移思维
@@ -249,3 +252,9 @@ M!(t)  ⟶  E[x := α(t)]
 - [Rust Reference: Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)
 - [cppreference: C preprocessor](https://en.cppreference.com/w/c/preprocessor)
 - [rustify.rs: Glossary — Macro hygiene](https://rustify.rs/glossary)
+
+---
+
+> **权威来源**: [Rust Reference — Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html), [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html), [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html), [The Little Book of Rust Macros](https://veykril.github.io/tlborm/), [cppreference — C preprocessor](https://en.cppreference.com/w/c/preprocessor)
+>
+> **权威来源对齐变更日志**: 2026-07-10 添加权威来源对齐

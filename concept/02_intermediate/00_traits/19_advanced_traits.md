@@ -134,7 +134,7 @@ pub trait Graph {
 }
 ```
 
-> **关联类型洞察**: 关联类型使 Trait **像一个"类型族"**——每个实现者定义自己的成员类型，而非让调用者指定。
+> **关联类型洞察**: 关联类型使 Trait **像一个"类型族"**——每个实现者定义自己的成员类型，而非让调用者指定。(Source: [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs/0195-associated-items.html))
 > [来源: [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs//0195-associated-items.html)]
 
 ---
@@ -181,7 +181,7 @@ impl<'a, T> LendingIterator for MutWindows<'a, T> {
 // 例如: 流式反序列化、按行解析、窗口迭代
 ```
 
-> **GATs 洞察**: GATs 是 Rust **类型系统（Type System）的重大扩展**——它使**生命周期（Lifetimes）泛型**可以出现在关联类型上，解决了自引用（Reference）和流式处理的核心问题。
+> **GATs 洞察**: GATs 是 Rust **类型系统（Type System）的重大扩展**——它使**生命周期（Lifetimes）泛型**可以出现在关联类型上，解决了自引用（Reference）和流式处理的核心问题。(Source: [RFC 1598 — GATs](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html))
 > [来源: [RFC 1598 — GATs](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)]
 
 ---
@@ -225,7 +225,7 @@ impl<'a, T> LendingIterator for MutWindows<'a, T> {
   └── 渐进式优化（先通用，后特化）
 ```
 
-> **特化洞察**: 特化是 Rust **"零成本抽象（Zero-Cost Abstraction）"承诺的技术支撑**——通用代码工作，特定类型可以优化到与手写代码等价。
+> **特化洞察**: 特化是 Rust **"零成本抽象（Zero-Cost Abstraction）"承诺的技术支撑**——通用代码工作，特定类型可以优化到与手写代码等价。(Source: [Rust Tracking Issue — Specialization](https://github.com/rust-lang/rust/issues/31844))
 > [来源: [Rust Tracking Issue — Specialization](https://github.com/rust-lang/rust/issues/31844)]
 
 ---

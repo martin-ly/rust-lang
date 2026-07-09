@@ -402,7 +402,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源**: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html), [RFC 1558 — Closures](https://github.com/rust-lang/rfcs/pull/1558)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 

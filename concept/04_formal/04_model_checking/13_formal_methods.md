@@ -555,7 +555,7 @@ fn fixed() {
 > 对于 safe Rust，编译器已保证无 UB；对于 unsafe Rust，形式化工具验证 unsafe 块的前置条件是否满足。
 > Kani 使用模型检查（CBMC）验证所有执行路径，Miri 解释执行并检测 UB（Stacked Borrows / Tree Borrows 违规）。
 > unsafe 块是形式化方法的边界——工具假设 unsafe 块内的操作是正确的，验证其外部接口的安全性。
-> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
+> (Source: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/))
 
 ### 10.2 边界测试：循环不变量与编译期验证（逻辑错误）
 
@@ -583,7 +583,7 @@ fn main() {
 > 循环需要 **循环不变量**（loop invariant）——在每次迭代前后保持为真的断言。
 > 对于 `sum` 函数，循环不变量是 `total = sum(0..i)`。Prusti（基于 Viper）和 Creusot（基于 Why3）等工具要求开发者标注循环不变量，然后自动验证其保持性和终止性。
 > 这是将数学证明引入软件工程的典范。
-> [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
+> (Source: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic))
 
 ### 10.3 边界测试：`contracts` crate 的运行时断言开销（逻辑错误）
 
@@ -614,8 +614,8 @@ fn main() {
 >
 > 这与 Eiffel 的 Design by Contract（原生语言特性，可配置断言级别）、D 的 `in`/`out` 契约、或 Python 的 `deal`/`icontract` 类似。
 > Rust 的设计趋势：契约作为宏（Macro）/属性，最终可能集成到编译器（如 `rustc_contracts` 实验），支持编译期证明和运行时（Runtime）检查的双模式。
-> [contracts Crate](https://docs.rs/contracts/)] ·
-> [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
+> (Source: [contracts Crate](https://docs.rs/contracts/)) ·
+> (Source: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic))
 
 ### 10.4 边界测试：Kani 的循环展开限制（验证失败）
 
@@ -642,8 +642,8 @@ fn verify_loop() {
 >
 > 这与 Coq/Isabelle 的交互式证明（手动提供不变量）或 CBMC（C 的模型检查器，同样受限于循环展开）相同——自动化验证的瓶颈在于处理循环和递归。
 > Rust 的所有权（Ownership）系统简化了部分不变量（无别名 = 无意外修改），但循环逻辑仍需人工或半自动处理。
-> [Kani Documentation](https://model-checking.github.io/kani/)] ·
-> [Bounded Model Checking](https://en.wikipedia.org/wiki/Model_checking#Bounded_model_checking)]
+> (Source: [Kani Documentation](https://model-checking.github.io/kani/)) ·
+> (Source: [Bounded Model Checking](https://en.wikipedia.org/wiki/Model_checking#Bounded_model_checking))
 
 ### 10.5 边界测试：形式化验证的时间复杂度与路径爆炸（验证失败/超时）
 
@@ -659,7 +659,7 @@ fn verify_loop_unbounded() {
 }
 ```
 
-> **修正**: 模型检查器（Kani、CBMC）通过展开循环验证程序。`#[kani::unwind(10)]` 限制循环展开次数，若实际迭代超过 10 次，验证失败（"unwinding assertion"）。无界循环（`while` 依赖外部输入）在模型检查中本质不可判定——需提取循环不变量（`sum == i * (i - 1) / 2`）或用归纳法证明。形式化验证的**可扩展性**是核心挑战：1) 状态空间随变量和路径指数增长；2) 复杂数据结构（链表、图）的验证需抽象（用长度代替具体元素）；3) 并发程序的验证需考虑所有交错（interleaving）。这与数学证明（可处理无限，但需人类智慧）或测试（有限覆盖，但可扩展）形成能力光谱——形式化验证在关键代码（密码学、安全模块（Module））中提供最高保证，但成本高昂。[Kani Documentation](https://model-checking.github.io/kani/)] · [Bounded Model Checking](https://en.wikipedia.org/wiki/Model_checking#Bounded_model_checking)]
+> **修正**: 模型检查器（Kani、CBMC）通过展开循环验证程序。`#[kani::unwind(10)]` 限制循环展开次数，若实际迭代超过 10 次，验证失败（"unwinding assertion"）。无界循环（`while` 依赖外部输入）在模型检查中本质不可判定——需提取循环不变量（`sum == i * (i - 1) / 2`）或用归纳法证明。形式化验证的**可扩展性**是核心挑战：1) 状态空间随变量和路径指数增长；2) 复杂数据结构（链表、图）的验证需抽象（用长度代替具体元素）；3) 并发程序的验证需考虑所有交错（interleaving）。这与数学证明（可处理无限，但需人类智慧）或测试（有限覆盖，但可扩展）形成能力光谱——形式化验证在关键代码（密码学、安全模块（Module））中提供最高保证，但成本高昂。(Source: [Kani Documentation](https://model-checking.github.io/kani/) · [Bounded Model Checking](https://en.wikipedia.org/wiki/Model_checking#Bounded_model_checking))
 
 ### 10.8 边界测试：不可变借用与可变借用的冲突
 

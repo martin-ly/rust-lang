@@ -437,7 +437,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html), [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
+> **权威来源**: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html), [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html), [Cargo Book](https://doc.rust-lang.org/cargo/index.html), [Rust Edition Guide — Path Changes](https://doc.rust-lang.org/edition-guide/rust-2018/path-changes.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 

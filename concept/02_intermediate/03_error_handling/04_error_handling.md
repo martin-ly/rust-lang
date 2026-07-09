@@ -17,10 +17,11 @@
 > [Traits](../00_traits/01_traits.md)
 > **后置概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
 > [Async](../../03_advanced/01_async/02_async.md)
-> **主要来源**: [TRPL: Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**: [TRPL: Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference: Errors](https://doc.rust-lang.org/reference/introduction.html) ·
 > [Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling) ·
 > [RFC 243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)
+> (Source: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html))
 
 ---
 **变更日志**:
@@ -157,6 +158,7 @@
 >
 > **[TRPL Ch9.0](https://doc.rust-lang.org/book/ch09-00-error-handling.html)** Rust groups errors into two major categories: recoverable and unrecoverable errors. For a recoverable error, we most likely want to report the problem to the user and retry the operation. Unrecoverable errors are always symptoms of bugs, and we want to immediately stop the program.
 > **[TRPL Ch9.2](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)** The `?` placed after a `Result` value is defined to work in almost the same way as the `match` expressions we defined to handle the `Result` values. If the value of the `Result` is an `Ok`, the value inside the `Ok` will get returned from this expression, and the program will continue. If the value is an `Err`, the `Err` will be returned from the whole function as if we had used the `return` keyword.
+> (Source: [TRPL — Recoverable Errors with Result](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html))
 
 ### 1.3 形式化定义
 >
@@ -283,6 +285,7 @@ graph TD
 > **[TRPL Ch9.2](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html) ·
 > [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)** ? 运算符通过隐式调用 From::from 实现错误的自动转换与传播。 ✅ 已验证
 > **[RFC 243: The ? Operator](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)** The `?` operator was introduced in RFC 243 to provide ergonomic error propagation, later extended by [RFC 3058](https://rust-lang.github.io/rfcs//3058-try-trait-v2.html) for the general `Try` trait. ✅ 已验证
+> (Source: [Rust Reference — The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator))
 
 ```text
 前提 1: ? 运算符展开为 match，Err 分支提前返回
@@ -743,6 +746,8 @@ graph TD
 | 运行时（Runtime） | panic 立即终止线程，不可恢复 | ❌ 可能过度使用 |
 | 语义 | Rust API Guidelines 明确区分 panic vs Result 场景 | ✅ 语义明确 |
 | 工程 | 库代码应返回 Result，应用代码可酌情 panic | ✅ 有指导原则 |
+
+> (Source: [TRPL — To panic! or Not to panic!](https://doc.rust-lang.org/book/ch09-03-to-panic-or-not-to-panic.html))
 
 ### 6.4 反命题 4: "Option<T> 完全替代 null"
 

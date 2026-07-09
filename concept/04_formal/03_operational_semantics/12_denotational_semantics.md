@@ -497,8 +497,8 @@ fn main() {
 > `!` 可 coerce 为任意类型（ex falso quodlibet），因此 `let y: i32 = diverges()` 合法——但 `diverges()` 永不执行到赋值点，所以 `y` 永远不会被使用。
 > 这与 Haskell 的 `undefined :: a`（值层面的 ⊥，有类型但运行时（Runtime）错误）或 Scala 的 `Nothing`（类型层面的 ⊥，无值）类似——Rust 的 `!` 更接近 Scala 的 `Nothing`，是空类型（uninhabited type）。
 > `!` 的稳定化使 Rust 的类型系统（Type System）在理论上更完整，支持更精确的控制流分析。
-> [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] ·
-> [Rust RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)]
+> (Source: [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)) ·
+> (Source: [Rust RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html))
 
 ### 10.4 边界测试：`unsafe` 代码的语义鸿沟（运行时 UB）
 
@@ -520,8 +520,8 @@ fn main() {
 > 上述代码中，`r.add(1)` 指向 `x` 之后的内存（未分配），写入是未定义行为——指称语义无法描述 `unsafe` 代码的行为，因为 `unsafe` 进入了实现定义的领域。
 > 形式化验证工具（Miri、Kani、RustBelt）试图为 `unsafe` 代码建立安全边界：Miri 解释执行检测 UB，Kani 符号验证断言，RustBelt 在分离逻辑中证明 unsafe 抽象的安全性。
 > 但完全的形式化覆盖仍是开放问题——`unsafe` 是 Rust 语义中的"已知未知"。
-> [RustBelt Paper](https://doi.org/10.1145/3158154)] ·
-> [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+> (Source: [RustBelt Paper](https://doi.org/10.1145/3158154)) ·
+> (Source: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html))
 
 ### 10.3 边界测试：不动点语义与递归类型的无限展开（编译错误）
 
@@ -551,8 +551,8 @@ fn main() {
 > 3) **手动状态机**：`Stream` 实现。递归类型（`List<T>`）在 Rust 中必须间接（`Box` 或 `Rc`），因为编译器需要确定类型大小。
 >
 > 这与 Haskell 的惰性递归类型（`data List a = Nil | Cons a (List a)`，可无限）或 ML 的惰性 `datatype` 不同——Rust 的严格语义和静态大小要求排除了直接的不动点类型。
-> [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] ·
-> [Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)]
+> (Source: [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)) ·
+> (Source: [Domain Theory](https://en.wikipedia.org/wiki/Domain_theory))
 
 ## 嵌入式测验（Embedded Quiz）
 

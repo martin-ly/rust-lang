@@ -107,6 +107,7 @@
 ```
 
 > **认知功能**: 宏的**核心价值**是"编译期编程"——它扩展了语言的表达能力，同时保持零运行时（Runtime）成本。
+> (Source: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html))
 > [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html)]
 
 ---
@@ -403,6 +404,7 @@ Builder 生成:
 ```
 
 > **模式矩阵**: 宏的**选择逻辑**是：简单模式匹配（Pattern Matching）用 `macro_rules!`，复杂 AST 操作用 `proc_macro`，能用类型系统（Type System）解决的不用宏。
+> (Source: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html))
 
 ---
 
@@ -426,6 +428,7 @@ graph TD
 ```
 
 > **认知功能**: **泛型（Generics） > 宏（Macro）**——当类型系统（Type System）可以表达时，优先使用泛型（更好的错误信息、IDE 支持、编译速度）。
+> (Source: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html))
 > [来源: [Rust Style Guide](https://doc.rust-lang.org/nightly/style-guide/)]
 
 ---
@@ -466,6 +469,7 @@ graph TD
 ```
 
 > **边界要点**: 宏的边界主要与**编译时间**、**错误信息**、**调试**、**文档**和**复杂度**相关。
+> (Source: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/))
 > [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 
 ---
@@ -526,6 +530,7 @@ graph TD
 ```
 
 > **陷阱总结**: 宏的陷阱主要与**多次求值**、**优先级**、**逗号处理**、**标识符拼接**和**递归**相关。
+> (Source: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/))
 > [来源: [The Little Book of Rust Macros — Pitfalls](https://veykril.github.io/tlborm/)]
 
 ---
@@ -552,7 +557,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html)
+> **权威来源**: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html), [Rust Reference — Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html), [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html), [The Little Book of Rust Macros](https://veykril.github.io/tlborm/), [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 

@@ -98,7 +98,7 @@ public:
 };
 ```
 
-`friend` 可以授予：
+`friend` 可以授予 (Source: [cppreference — Friend](https://en.cppreference.com/w/cpp/language/friend))：
 
 - 另一个类（`friend class X;`）
 - 一个函数（`friend void f();`）
@@ -118,7 +118,7 @@ public:
 
 ### 3.1 可见性修饰符
 
-Rust 没有 `friend`，用模块系统控制可见性：
+Rust 没有 `friend`，用模块系统控制可见性 (Source: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html))：
 
 ```rust
 mod wallet {
@@ -154,6 +154,8 @@ mod audit {
 | `pub(super)` | 父模块可见 |
 | `pub(in path)` | 指定路径模块可见 |
 | `pub(self)` | 等价于默认私有 |
+
+(Source: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html))
 
 ### 3.3 模块系统的优势
 

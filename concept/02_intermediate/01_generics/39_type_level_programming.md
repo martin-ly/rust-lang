@@ -80,7 +80,7 @@
 
 ## 🎯 什么是类型级编程？
 
-类型级编程是在类型系统层面进行计算和推理，所有计算在编译时完成，运行时（Runtime）零开销。
+类型级编程是在类型系统层面进行计算和推理，所有计算在编译时完成，运行时（Runtime）零开销。(Source: [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html))
 
 **核心概念**:
 
@@ -341,7 +341,7 @@ fn hlist_operations() {
 
 ### 什么是 HKT？
 
-HKT 允许对类型构造器进行抽象。Rust 原生不支持，但可以模拟。
+HKT 允许对类型构造器进行抽象。Rust 原生不支持，但可以模拟。(Source: [RFC 1598 — GATs](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html))
 
 ### 使用关联类型模拟 HKT
 

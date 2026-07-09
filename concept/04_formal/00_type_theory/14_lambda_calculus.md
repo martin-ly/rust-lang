@@ -432,6 +432,8 @@ fn main() {
 }
 ```
 
+(Source: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/))
+
 ## 相关概念文件
 
 - [Type Theory](02_type_theory.md) — 类型论
@@ -441,7 +443,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **权威来源**: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Wikipedia — Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus) · [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus) · [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html) · [Rust Reference — Closures](https://doc.rust-lang.org/reference/types/closure.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)

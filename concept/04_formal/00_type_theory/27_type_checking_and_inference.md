@@ -57,6 +57,7 @@
 > **反命题 2**: "忽略 rustc 类型检查与类型推断 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 rustc 类型检查与类型推断 规则被违反的直接信号。
 
 > **反命题 3**: "其他语言对 rustc 类型检查与类型推断 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 rustc 类型检查与类型推断 具有语言特有的形态。
+(Source: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html))
 
 ## 📑 目录
 
@@ -101,6 +102,7 @@
 > [Rustc Dev Guide — HIR Type checking](https://rustc-dev-guide.rust-lang.org/type-checking.html)(<https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html>)
 
 ---
+(Source: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html))
 
 ## 二、`Ty<'tcx>`：rustc 内部类型表示
 
@@ -121,6 +123,7 @@ let x = 1;
 > [Rustc Dev Guide — The ty module](https://rustc-dev-guide.rust-lang.org/ty.html)(<https://rustc-dev-guide.rust-lang.org/ty.html>)
 
 ---
+(Source: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html))
 
 ## 三、`typeck` Query 与 `InferCtxt`
 
@@ -149,6 +152,7 @@ let infcx = tcx.infer_ctxt().build();
 它维护着所有 inference variables 和待求解的约束。
 
 ---
+(Source: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html))
 
 ## 四、推断变量与统一
 
@@ -173,6 +177,7 @@ x.push("hello");    // ?T = &str
 > [Rustc Dev Guide — Inference variables](https://rustc-dev-guide.rust-lang.org/type-inference.html)(<https://rustc-dev-guide.rust-lang.org/type-inference.html#inference-variables>)
 
 ---
+(Source: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html))
 
 ## 五、相等约束与子类型约束
 
@@ -195,6 +200,7 @@ Rust 的子类型关系主要体现在生命周期（Lifetimes）上，例如 `&
 对于普通类型，子类型通常可转化为相等约束；涉及未绑定变量时，会生成 `Subtype(?T, ?U)` obligation 延后处理。
 
 ---
+(Source: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html))
 
 ## 六、区域约束与求解
 
@@ -218,6 +224,7 @@ Rust 的子类型关系主要体现在生命周期（Lifetimes）上，例如 `&
 > [Rustc Dev Guide — Region constraints](https://rustc-dev-guide.rust-lang.org/borrow_check/region_inference.html)(<https://rustc-dev-guide.rust-lang.org/type-inference.html#region-constraints>)
 
 ---
+(Source: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html))
 
 ## 七、Snapshots 与回滚
 
@@ -240,6 +247,7 @@ if success {
 > [Rustc Dev Guide — Snapshots](https://rustc-dev-guide.rust-lang.org/type-inference.html)(<https://rustc-dev-guide.rust-lang.org/type-inference.html#snapshots>)
 
 ---
+(Source: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html))
 
 ## 嵌入式测验
 
@@ -298,7 +306,7 @@ if success {
 
 ---
 
-> **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **权威来源**: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html) · [Rustc Dev Guide — HIR Type checking](https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html) · [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 类型检查与推断文档
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 

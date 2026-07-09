@@ -94,6 +94,7 @@ API 设计中的常见困境:
 
 > **核心问题**: API 设计常面临**借用（Borrowing） vs 拥有**的选择——借用高效但受限，拥有灵活但有克隆成本。Cow 提供了**第三种选择**。
 > [来源: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines//flexibility.html)]
+> (Source: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines//flexibility.html))
 
 ---
 
@@ -133,6 +134,7 @@ graph TD
 > **使用建议**: 当 API 可能接受借用或拥有，且可能或不可能需要修改时，使用 Cow。
 > **关键洞察**: Cow 是 Rust **零成本抽象（Zero-Cost Abstraction）**的典范——如果不修改，它的开销与直接借用完全相同；如果需要修改，自动退化为拥有。
 > [来源: [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html)]
+> (Source: [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html))
 
 ---
 
@@ -206,6 +208,7 @@ takes_str(&cow);  // 自动解引用 &Cow<str> → &str
 
 > **核心操作**: `to_mut()` 是 Cow 的**关键方法**——它在需要可变访问时自动克隆（如果当前是 Borrowed），然后返回 `&mut B::Owned`。
 > [来源: [Cow Methods](https://doc.rust-lang.org/std/borrow/enum.Cow.html)]
+> (Source: [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html))
 
 ---
 

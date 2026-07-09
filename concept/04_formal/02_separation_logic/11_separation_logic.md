@@ -540,7 +540,7 @@ fn fixed() {
 > 分离逻辑的核心是 **frame rule**：若 `P` 描述某部分内存的状态，则可在保持 `P` 不变的情况下，对内存的其他部分进行推理。
 > `split_at_mut` 将数组分割为两个不重叠的可变切片（Slice），编译器验证分割点不会导致重叠借用（Borrowing）。
 > 这是 Rust 借用（Borrowing）检查器对分离逻辑 *-conjunction（`P ∗ Q`）的直接实现——两个不重叠的可变引用（Mutable Reference）可以同时存在，因为它们操作分离的内存区域。
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+> (Source: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html))
 
 ### 10.2 边界测试：`Box::leak` 与资源永久转移（运行时行为）
 
@@ -564,7 +564,7 @@ fn fixed() {
 > `Box::leak` 将堆内存转换为 `&'static` 引用（Reference），放弃释放义务。
 > 在分离逻辑中，`Box<T>` 对应于 `own(τ, ℓ)`（对 ℓ 的独占所有权），`Box::leak` 将 `own(τ, ℓ)` 转换为 `shr(static, ℓ)`（静态共享权限）。
 > 一旦转换，资源永远不会被释放——这是显式的资源泄漏，在 Rust 中被视为安全操作（因为不破坏内存安全（Memory Safety）），但可能违反系统资源约束。
-> [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
+> (Source: [Rust Standard Library](https://doc.rust-lang.org/std/index.html))
 
 ### 10.3 边界测试：分离逻辑中的帧规则违反（编译错误）
 
@@ -591,8 +591,8 @@ fn main() {
 > 编译器通过借用（Borrowing）检查验证不相交性：两个 `&mut T` 不能指向同一内存。
 > `swap` 要求 `a` 和 `b` 不重叠——若重叠，交换会破坏数据。
 > 这与 C 的 `swap`（无检查，重叠时 UB）或 Java 的引用（Reference）交换（总是安全，因为是交换引用而非值）不同——Rust 在编译期保证内存区域的不相交性，使分离逻辑的推理在实战中可行。
-> [Separation Logic Tutorial](https://www.cs.cmu.edu/~jcr/seplogic.pdf)] ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
+> (Source: [Separation Logic Tutorial](https://www.cs.cmu.edu/~jcr/seplogic.pdf)) ·
+> (Source: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html))
 
 ### 10.4 边界测试：GhostCell 的分离逻辑建模（编译错误）
 
@@ -619,8 +619,8 @@ fn main() {
 > 代价：`GhostToken` 的生命周期（Lifetimes）约束要求所有相关操作在闭包（Closures）内完成，API  ergonomics 较差。
 > 分离逻辑视角：`GhostToken` 是权限（capability），`GhostCell` 是资源，借用（Borrowing）规则对应于权限的独占转移。
 > 这是 Rust 类型系统（Type System）表达力的高级展示：将运行时（Runtime）检查迁移到编译期，同时保持零成本。
-> [GhostCell Paper](https://plv.mpi-sws.org/rustbelt/ghostcell/)] ·
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+> (Source: [GhostCell Paper](https://plv.mpi-sws.org/rustbelt/ghostcell/)) ·
+> (Source: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html))
 
 ### 10.5 边界测试：RustBelt 的 `own` 与 `shr` 断言的编码（编译错误）
 
@@ -651,7 +651,7 @@ fn main() {
 > 3) `shr(x, T)` 不能写入。这些规则在 RustBelt 中以**高阶协议**（higher-order protocol）编码，通过 Iris 框架证明。
 > RustBelt 证明了：若 unsafe 代码满足其协议，则 safe Rust 代码不可能触发 UB。
 > 这是 Rust 安全保证的形式化基础。这与 Hoare 逻辑的前置/后置条件（类似但非资源导向）或 C 的分离逻辑工具（VeriFast、VST）类似——RustBelt 是第一个为工业语言（Rust）提供完整内存安全（Memory Safety）形式化证明的项目。
-> [RustBelt Paper](https://doi.org/10.1145/3158154)] · [Iris Framework](https://iris-project.org/)]
+> (Source: [RustBelt Paper](https://doi.org/10.1145/3158154) · [Iris Framework](https://iris-project.org/))
 
 ### 10.3 边界测试：分离逻辑与 Rust 引用的一致性（编译错误）
 
@@ -676,8 +676,8 @@ fn main() {
 > `&T` 对应 `shr(κ, ℓ)`（共享权限），允许多个读者但无写者。上述代码中，两个 `&mut x` 试图同时存在，违反 `own(ℓ, i32)` 的独占性。
 > RustBelt 使用 Iris 分离逻辑框架证明：若程序通过 Rust 编译器的借用（Borrowing）检查，则其执行在分离逻辑模型中是安全的。
 > 这与 C 的指针（无独占性保证，需人工验证）或 Java 的引用（共享只读，无 `&mut` 等价物）不同——Rust 的编译器是分离逻辑的"自动证明器"。
-> [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)] ·
-> [Iris Project](https://iris-project.org/)]
+> (Source: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)) ·
+> (Source: [Iris Project](https://iris-project.org/))
 
 ## 嵌入式测验（Embedded Quiz）
 

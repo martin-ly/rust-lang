@@ -138,6 +138,7 @@ fn main() {
 ```
 
 > **关键洞察**: `#[inline]` 建议内联；`#[repr(C)]` 保证 C 兼容布局；`#[no_mangle]` 保留符号名供 FFI 使用。
+> (Source: [The Rust Reference — Code Generation Attributes](https://doc.rust-lang.org/reference/attributes/codegen.html))
 > [来源: [The Rust Reference — Code Generation Attributes](https://doc.rust-lang.org/reference/attributes/codegen.html)]
 
 ### 3.2 条件编译属性
@@ -166,6 +167,7 @@ fn main() {
 ```
 
 > **关键洞察**: `cfg` 是 Rust 条件编译的核心机制，支持平台、特性、编译器版本等多种条件。
+> (Source: [The Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html))
 > [来源: [The Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)]
 
 ### 3.3 诊断属性
@@ -187,6 +189,7 @@ fn main() {
 ```
 
 > **关键洞察**: `allow`/`warn`/`deny`/`expect` 控制 lint 级别；`deprecated` 标记过时 API；`must_use` 强制调用者处理返回值。
+> (Source: [The Rust Reference — Diagnostic Attributes](https://doc.rust-lang.org/reference/attributes/diagnostics.html))
 > [来源: [The Rust Reference — Diagnostic Attributes](https://doc.rust-lang.org/reference/attributes/diagnostics.html)]
 
 ### 3.4 类型系统属性
@@ -211,6 +214,7 @@ fn main() {
 ```
 
 > **关键洞察**: `derive` 自动生成 trait 实现；`non_exhaustive` 防止外部 crate 穷举枚举（Enum）变体。
+> (Source: [The Rust Reference — Type System Attributes](https://doc.rust-lang.org/reference/attributes/type_system.html))
 > [来源: [The Rust Reference — Type System Attributes](https://doc.rust-lang.org/reference/attributes/type_system.html)]
 
 ### 3.5 测试与文档属性
@@ -239,6 +243,7 @@ mod tests {
 ```
 
 > **关键洞察**: `#[test]` 标记测试函数；`#[cfg(test)]` 只在测试编译时包含模块（Module）；文档注释中的代码块会被 `cargo test --doc` 执行。
+> (Source: [The Rust Reference — Testing](https://doc.rust-lang.org/reference/attributes/testing.html))
 > [来源: [The Rust Reference — Testing](https://doc.rust-lang.org/reference/attributes/testing.html)]
 
 ---
@@ -340,6 +345,7 @@ fn main() {
 ```
 
 > **关键洞察**: `cfg_attr` 在条件满足时应用另一个属性，常用于特性门控 derive。
+> (Source: [The Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html))
 > [来源: [The Rust Reference — cfg_attr](https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg_attr-attribute)]
 
 ---
@@ -454,6 +460,6 @@ D. `#[serde]`
 
 ---
 
-> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [The Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html), [The Rust Reference — Built-in Attributes Index](https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index), [The Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html), [The Rust Programming Language — Derivable Traits](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.96.1 Reference 属性章节对齐](https://doc.rust-lang.org/reference/attributes.html)
 > **状态**: ✅ 权威来源对齐完成

@@ -480,6 +480,7 @@ graph TD
 | [Rust Patterns — Typestate](https://rust-unofficial.github.io/patterns/) | ✅ 二级 | 模式库 |
 
 ---
+(Source: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/))
 
 ## 相关概念文件
 
@@ -490,7 +491,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Girard — Linear Logic](https://girard.perso.math.cnrs.fr/linear.pdf) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsub/linearsub.ps) · [Session Types in Rust](https://munksgaard.me/papers/laumann-munksgaard-larsen.pdf) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)

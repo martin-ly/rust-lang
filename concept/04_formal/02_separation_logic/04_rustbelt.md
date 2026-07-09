@@ -250,7 +250,7 @@ graph BT
 
 ### 3.1 CSL = 分离逻辑 + 资源不变量
 
-并发分离逻辑（Concurrent Separation Logic, CSL）由 O'Hearn 于 2007 年提出，将 Hoare 逻辑的并行规则与分离逻辑的局部推理相结合。其核心扩展在于**资源不变量（resource invariant）**`I`：线程访问共享资源时必须证明该资源满足 `I`，并在释放时恢复 `I`。 [来源: [Iris Project](https://iris-project.org/)(https://iris-project.org/)]
+并发分离逻辑（Concurrent Separation Logic, CSL）由 O'Hearn 于 2007 年提出，将 Hoare 逻辑的并行规则与分离逻辑的局部推理相结合。其核心扩展在于**资源不变量（resource invariant）**`I`：线程访问共享资源时必须证明该资源满足 `I`，并在释放时恢复 `I`。 (Source: [Iris Project](https://iris-project.org/))
 
 在 RustBelt/Iris 框架中，CSL 被实例化为高阶并发分离逻辑，支持高阶幽灵状态和原子性推理，使得 Rust 的 `std::sync` 原语可被精确形式化规约。
 

@@ -544,6 +544,7 @@ graph TD
 | [Functor, Applicative, Monad](http://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html) | ✅ 二级 | 图解教程 |
 
 ---
+(Source: [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/))
 
 ## 相关概念文件
 
@@ -554,7 +555,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) · [Haskell Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) · [Wikipedia — Monad (functional programming)](https://en.wikipedia.org/wiki/Monad_(functional_programming)) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)

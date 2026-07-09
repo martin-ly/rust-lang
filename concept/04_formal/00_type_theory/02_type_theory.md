@@ -108,6 +108,7 @@ Rust 扩展:
 | `*mut T` | — | `T`: 不变 |
 
 ---
+(Source: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/))
 
 ## 三、形式化理论根基
 
@@ -496,6 +497,7 @@ Rust 类型系统 = λ→ + System F + HM + λ<: + 线性类型 + 约束类型
 | `impl Trait` | C3: 存在类型 | L2 Trait §4.4 → L4 C3 |
 
 ---
+(Source: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/))
 
 ## 八、思维导图
 
@@ -651,6 +653,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 > **过渡: L4 → L2**
 > System F 的 `Λα.λx:α. x` 在 Rust 中写作 `fn identity<T>(x: T) -> T { x }`，但 System F 无法表达生命周期（Lifetimes）——后者需要 **System F_ω + 区域类型** 的扩展。HRTB 的 `for<'a>` 是全称量词 `∀` 在类型约束中的具体实现，而 GATs 则用类型族（type family）模拟了 Haskell 中缺失的 HKT。
 > Rust 的具体实现见 [`../02_intermediate/01_generics/02_generics.md`](../../02_intermediate/01_generics/02_generics.md)（泛型与单态化（Monomorphization））与 [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md)（Trait 作为 Type Class 的变体）。
+(Source: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/))
 
 ## 十一、相关概念链接
 
@@ -665,6 +668,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 | 范式矩阵 | [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/03_paradigm_matrix.md) | 类型系统谱系 |
 
 ---
+(Source: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/))
 
 ## 十之一、补充：Dependent Type、Const Generics 与 HKT workaround
 
@@ -947,7 +951,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 > 演进方向见 [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)（语言演进路线图）与 [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化方法的未来）。
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli 1996 — Type Systems](https://dl.acm.org/doi/10.1145/6041.6042) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
@@ -957,6 +961,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 
 ---
+(Source: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/))
 
 ## 权威来源索引
 
@@ -1673,6 +1678,7 @@ process(Vec::new());  // ✅ 从参数类型推断 T = i32
 ```
 
 ---
+(Source: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/))
 
 ## 🎯 概述
 
@@ -1686,6 +1692,7 @@ Rust 的类型系统基于**仿射类型系统** (Affine Type System) 和 **Hind
 | **子类型** | 子类型关系 | 生命周期 + 型变    |
 
 ---
+(Source: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/))
 
 ## 1. 类型理论基础
 

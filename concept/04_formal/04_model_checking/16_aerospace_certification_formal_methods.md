@@ -925,7 +925,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 航空航天软件标准（DO-178C、MISRA C）严格限制指针别名、动态内存分配和未定义行为。Rust 的所有权系统**在编译期自动强制执行** MISRA C 的核心规则：无数据竞争、无悬垂指针、无 use-after-free。这消除了大量需要手动审查和工具检查的代码模式。Rust 的 `unsafe` 块对应于 DO-178C 中的"需要额外验证的代码"，但 Rust 要求 unsafe 代码被 safe API 封装，形成清晰的安全边界。[DO-178C](https://en.wikipedia.org/wiki/DO-178C)] · [MISRA C](https://www.misra.org.uk/)]
+> **修正**: 航空航天软件标准（DO-178C、MISRA C）严格限制指针别名、动态内存分配和未定义行为。Rust 的所有权系统**在编译期自动强制执行** MISRA C 的核心规则：无数据竞争、无悬垂指针、无 use-after-free。这消除了大量需要手动审查和工具检查的代码模式。Rust 的 `unsafe` 块对应于 DO-178C 中的"需要额外验证的代码"，但 Rust 要求 unsafe 代码被 safe API 封装，形成清晰的安全边界。(Source: [DO-178C](https://en.wikipedia.org/wiki/DO-178C) · [MISRA C](https://www.misra.org.uk/))
 
 ### 10.2 边界测试：确定性执行与 `const fn`（编译错误）
 
@@ -965,7 +965,7 @@ fn main() {
 }
 ```
 
-> **修正**: SPARK（Ada 的子集，用于形式化验证）通过语言子集和工具（GNATprove）保证无运行时（Runtime）错误。Rust 中，`no_panic` crate 通过链接时检查验证函数不 panic，但前提是代码本身不使用可能 panic 的操作。`a / b` 在 `b = 0` 时 panic，因此 `no_panic` 构建会失败。安全替代：1) `a.checked_div(b).unwrap_or(0)`（返回 `Option`）；2) 前置条件检查 `assert!(b != 0)`（但 assert 在 `no_panic` 下也失败）；3) 使用 `wrapping_div`（不 panic，但结果可能无意义）。航空软件的 Rust 应用（如 Ferrocene 项目）正在探索将 Rust 子集用于 DO-178C 认证，但完整的形式化验证工具链（如 SPARK 的 GNATprove）尚未成熟。[no_panic Crate](https://docs.rs/no-panic/)] · [DO-178C Standard](https://www.rtca.org/product/do-178c/)]
+> **修正**: SPARK（Ada 的子集，用于形式化验证）通过语言子集和工具（GNATprove）保证无运行时（Runtime）错误。Rust 中，`no_panic` crate 通过链接时检查验证函数不 panic，但前提是代码本身不使用可能 panic 的操作。`a / b` 在 `b = 0` 时 panic，因此 `no_panic` 构建会失败。安全替代：1) `a.checked_div(b).unwrap_or(0)`（返回 `Option`）；2) 前置条件检查 `assert!(b != 0)`（但 assert 在 `no_panic` 下也失败）；3) 使用 `wrapping_div`（不 panic，但结果可能无意义）。航空软件的 Rust 应用（如 Ferrocene 项目）正在探索将 Rust 子集用于 DO-178C 认证，但完整的形式化验证工具链（如 SPARK 的 GNATprove）尚未成熟。(Source: [no_panic Crate](https://docs.rs/no-panic/) · [DO-178C Standard](https://www.rtca.org/product/do-178c/))
 
 ### 10.4 边界测试：MC/DC 覆盖率与短路逻辑（逻辑错误）
 
@@ -986,7 +986,7 @@ fn test_mcdc() {
 }
 ```
 
-> **修正**: MC/DC（Modified Condition/Decision Coverage）要求证明每个条件的独立影响。短路逻辑（`&&`、`||`）使某些条件在特定路径上不求值，增加了 MC/DC 的测试用例数量。`a && b || c` 需要 4 个测试用例满足 MC/DC（比无短路的 3 个多），因为 `b` 的独立影响需要 `a = true` 才能暴露。Rust 的 `&&` 和 `||` 是短路的（与 C/Java 相同），这与 VHDL 的 `and`/`or`（无短路，所有操作数都求值）不同。形式化验证中，短路逻辑增加了路径复杂度，但也提供了优化机会（提前终止）。DO-178C 的 MC/DC 要求对安全关键软件是强制性的，Rust 的短路语义必须被测试充分覆盖。[DO-178C Standard](https://www.rtca.org/product/do-178c/)] · [MC/DC Analysis](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)]
+> **修正**: MC/DC（Modified Condition/Decision Coverage）要求证明每个条件的独立影响。短路逻辑（`&&`、`||`）使某些条件在特定路径上不求值，增加了 MC/DC 的测试用例数量。`a && b || c` 需要 4 个测试用例满足 MC/DC（比无短路的 3 个多），因为 `b` 的独立影响需要 `a = true` 才能暴露。Rust 的 `&&` 和 `||` 是短路的（与 C/Java 相同），这与 VHDL 的 `and`/`or`（无短路，所有操作数都求值）不同。形式化验证中，短路逻辑增加了路径复杂度，但也提供了优化机会（提前终止）。DO-178C 的 MC/DC 要求对安全关键软件是强制性的，Rust 的短路语义必须被测试充分覆盖。(Source: [DO-178C Standard](https://www.rtca.org/product/do-178c/) · [MC/DC Analysis](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage))
 
 ### 10.3 边界测试：形式化验证与 DO-178C 的代码覆盖冲突（验证盲区）
 
@@ -1005,7 +1005,7 @@ fn verify_decision_table(a: bool, b: bool, c: bool) -> bool {
 fn main() {}
 ```
 
-> **修正**: DO-178C（航空软件认证）要求 **MC/DC**（Modified Condition/Decision Coverage）：每个条件必须独立影响决策结果。`a && (b || c)` 需要 5 个测试用例满足 MC/DC。Kani 等模型检查器验证**所有可能输入**（有界），自然满足 MC/DC，但工具链认证是障碍：1) 形式化工具本身需通过 DO-330（工具鉴定）；2) 生成的证据需被认证机构接受；3) Rust 缺乏 DO-178C 的 A 级认证历史。Ferrocene 项目：提供经过认证的 Rust 工具链，支持 DO-178C、ISO 26262（汽车）、IEC 61508（工业）。这与 Ada/SPARK（长期用于航空，有完整认证历史）或 C（广泛认证但需大量测试）不同——Rust 的形式化验证生态正在成熟，但工业认证仍需时间积累。[DO-178C](https://en.wikipedia.org/wiki/DO-178C)] · [Ferrocene](https://ferrous-systems.com/ferrocene/)] · [MC/DC](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)]
+> **修正**: DO-178C（航空软件认证）要求 **MC/DC**（Modified Condition/Decision Coverage）：每个条件必须独立影响决策结果。`a && (b || c)` 需要 5 个测试用例满足 MC/DC。Kani 等模型检查器验证**所有可能输入**（有界），自然满足 MC/DC，但工具链认证是障碍：1) 形式化工具本身需通过 DO-330（工具鉴定）；2) 生成的证据需被认证机构接受；3) Rust 缺乏 DO-178C 的 A 级认证历史。Ferrocene 项目：提供经过认证的 Rust 工具链，支持 DO-178C、ISO 26262（汽车）、IEC 61508（工业）。这与 Ada/SPARK（长期用于航空，有完整认证历史）或 C（广泛认证但需大量测试）不同——Rust 的形式化验证生态正在成熟，但工业认证仍需时间积累。(Source: [DO-178C](https://en.wikipedia.org/wiki/DO-178C) · [Ferrocene](https://ferrous-systems.com/ferrocene/) · [MC/DC](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage))
 
 ## 嵌入式测验（Embedded Quiz）
 

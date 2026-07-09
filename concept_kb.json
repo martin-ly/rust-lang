@@ -15880,7 +15880,7 @@
       "layer": "L2",
       "title": "构造与初始化：C++ 的构造函数 vs Rust 的结构体字面量",
       "positioning": "",
-      "line_count": 268,
+      "line_count": 272,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -15976,7 +15976,7 @@
       "layer": "L2",
       "title": "可派生 Trait（Derive Traits）",
       "positioning": "",
-      "line_count": 268,
+      "line_count": 272,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -17510,7 +17510,7 @@
       "layer": "L2",
       "title": "Memory Management（内存管理）",
       "positioning": "",
-      "line_count": 2173,
+      "line_count": 2176,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -18153,7 +18153,7 @@
       "layer": "L2",
       "title": "Cow：写时克隆与零拷贝抽象",
       "positioning": "深入分析 Rust 中 **Cow（Clone [来源: [std::clone::Clone](https://doc.rust-lang.org/std/clone/trait.Clone.html)] on Write）**类型的设计——如何在**借用（Borrowing）**（零拷贝）和**拥有**（必要时克隆）之间自动切换，以及它在 API 设计中的广泛应用。",
-      "line_count": 761,
+      "line_count": 764,
       "theorem_chains": [
         {
           "text": "| Cow：写时克隆与零拷贝抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -18274,7 +18274,7 @@
       "layer": "L2",
       "title": "智能指针：堆内存管理与共享语义",
       "positioning": "系统分析 Rust **智能指针（Smart Pointer）**的设计——Box（独占堆分配）、Rc/Arc（引用（Reference）计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权（Ownership）语义和适用场景。",
-      "line_count": 897,
+      "line_count": 900,
       "theorem_chains": [
         {
           "text": "| 智能指针：堆内存管理与共享语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -18423,7 +18423,7 @@
       "layer": "L2",
       "title": "测验：内存管理（L2 试点扩展）",
       "positioning": "L2 嵌入式互动测验——验证智能指针（Smart Pointer）核心概念（Box、Rc/Arc、RefCell/Mutex、内部可变性模式）的掌握程度。",
-      "line_count": 743,
+      "line_count": 744,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -18465,7 +18465,7 @@
             "fn main() { let b = Box::new(5); println!(\"{}\"",
             "b); }```"
           ],
-          "lines": 83,
+          "lines": 84,
           "should_fail": false,
           "code_preview": "> <details> <summary>💡 点击展开答案与解析</summary> > **答案**：✅ 能编译，输出 `5`。 **解析**： | 特性 |..."
         },
@@ -18675,7 +18675,7 @@
       "layer": "L2",
       "title": "Error Handling（错误处理）",
       "positioning": "",
-      "line_count": 2709,
+      "line_count": 2714,
       "theorem_chains": [
         {
           "text": "- [4.1 引理：Result\\<T,E\\> ⟹ 和类型强制错误处理](#41-引理resultte--和类型强制错误处理)",
@@ -19217,7 +19217,7 @@
       "layer": "L2",
       "title": "错误处理深入：从 Result 到自定义错误生态",
       "positioning": "深入分析 Rust **错误处理（Error Handling）机制**——从 `Result`/`Option` 的组合子到 `?` 运算符、错误转换、自定义错误类型和错误处理框架，揭示 Rust 如何将错误处理融入类型系统（Type System）实现编译期安全。",
-      "line_count": 770,
+      "line_count": 774,
       "theorem_chains": [
         {
           "text": "| 错误处理深入：从 Result 到自定义错误生态 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -19348,7 +19348,7 @@
       "layer": "L2",
       "title": "异常安全：C++ 与 Rust 的错误处理哲学",
       "positioning": "",
-      "line_count": 257,
+      "line_count": 266,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -19933,7 +19933,7 @@
           ],
           "lines": 34,
           "should_fail": false,
-          "code_preview": "// impl Trait: 隐藏具体类型，暴露行为  // 1. 函数返回位置 (Rust 1.26+) fn make_iter() -> impl Ite..."
+          "code_preview": "// impl Trait: 隐藏具体类型，暴露行为  // 1. 函数返回位置 (Rust 1.26+) (Source: [Rust Reference —..."
         },
         {
           "flags": [
@@ -19949,7 +19949,7 @@
           ],
           "lines": 54,
           "should_fail": false,
-          "code_preview": "// Const Generics: 泛型参数可以是常量值  // 固定大小的数组包装器 struct Array<T, const N: usize> {  ..."
+          "code_preview": "// Const Generics: 泛型参数可以是常量值 (Source: [RFC 2000 — Const Generics](https://rust-..."
         },
         {
           "flags": [],
@@ -20768,7 +20768,7 @@
       "layer": "L2",
       "title": "友元 vs 模块可见性：C++ 的 `friend` 与 Rust 的隐私边界",
       "positioning": "",
-      "line_count": 257,
+      "line_count": 259,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -20852,7 +20852,7 @@
       "layer": "L2",
       "title": "`assert_matches!`：模式匹配断言的形式化语义",
       "positioning": "将 Rust 的**模式匹配（Pattern Matching）**能力从\"表达式求值\"扩展到\"测试断言\"的工程机制，实现编译期模式检查与运行时（Runtime）断言的统一。",
-      "line_count": 682,
+      "line_count": 694,
       "theorem_chains": [
         {
           "text": "| `assert_matches!`：模式匹配断言的形式化语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -21036,7 +21036,7 @@
       "layer": "L2",
       "title": "DSL 与嵌入 式设计：Rust 中的领域特定语言",
       "positioning": "分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏（Macro）驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rustc-dev-guide.rust-lang.org/)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。",
-      "line_count": 828,
+      "line_count": 833,
       "theorem_chains": [
         {
           "text": "| DSL 与嵌入 式设计：Rust 中的领域特定语言 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -21184,7 +21184,7 @@
       "layer": "L2",
       "title": "宏模式：编译期代码生成的工程实践",
       "positioning": "深入分析 Rust **宏（Macro）的工程模式**——从 DRY 代码生成、API 设计到编译期计算，揭示如何在不牺牲可读性的前提下利用宏提升代码复用和类型安全。",
-      "line_count": 813,
+      "line_count": 818,
       "theorem_chains": [
         {
           "text": "| 宏模式：编译期代码生成的工程实践 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -21308,7 +21308,7 @@
       "layer": "L2",
       "title": "元编程：Rust 的编译期代码生成与变换",
       "positioning": "深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配（Pattern Matching）、过程宏（Procedural Macro）的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。",
-      "line_count": 861,
+      "line_count": 871,
       "theorem_chains": [
         {
           "text": "| 元编程：Rust 的编译期代码生成与变换 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -21427,7 +21427,7 @@
       "layer": "L2",
       "title": "C 预处理器 vs Rust 宏：从文本替换到语法树",
       "positioning": "",
-      "line_count": 252,
+      "line_count": 261,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -21517,7 +21517,7 @@
       "layer": "L2",
       "title": "属性分类详解（Attributes by Category）",
       "positioning": "",
-      "line_count": 460,
+      "line_count": 466,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"属性只影响运行时（Runtime）行为\" ⟹ 不成立。属性主要影响编译期、代码生成、诊断和链接。",
@@ -21643,7 +21643,7 @@
       "layer": "L2",
       "title": "Rust 迭代器模式",
       "positioning": "深入探讨 Rust 迭代器（Iterator）模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。",
-      "line_count": 1335,
+      "line_count": 1345,
       "theorem_chains": [
         {
           "text": "> 迭代器安全 ⟹ 惰性求值 + 消费语义",
@@ -32143,7 +32143,7 @@
       "layer": "L4",
       "title": "Type Theory（类型论基础）",
       "positioning": "",
-      "line_count": 1740,
+      "line_count": 1747,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构——定理一致性（Coherence）矩阵扩展至11行（带⟹推理链），新增3个反命题决策树，认知路径重构为5步递进，全章补充Wikipedia/Pierce TAPL/Cardelli引用与L1-L3层次一致性标注",
@@ -32509,7 +32509,7 @@
       "layer": "L4",
       "title": "子类型与变型：Rust 类型系统中的协变、逆变与不变",
       "positioning": "深入分析 Rust 类型系统（Type System）中的**子类型关系**与**变型规则**（Variance），解释为什么 `&'static str` 可以赋给 `&'a str`，但 `&mut &'static str` 不能赋给 `&mut &'a str`。",
-      "line_count": 636,
+      "line_count": 637,
       "theorem_chains": [
         {
           "text": "| 子类型与变型：Rust 类型系统中的协变、逆变与不变 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -32646,7 +32646,7 @@
       "layer": "L4",
       "title": "类型推断：Hindley-Milner 算法与 Rust 的工业实现",
       "positioning": "深入分析 **Hindley-Milner (HM) 类型推断（Type Inference）算法**——从 λ 演算到 Rust 的工业实现，探讨 HM 的完备性、Rust 对 HM 的扩展（trait 约束、泛型（Generics）、生命周期（Lifetimes）），以及类型推断与代码可读性的平衡。",
-      "line_count": 759,
+      "line_count": 761,
       "theorem_chains": [
         {
           "text": "| 类型推断：Hindley-Milner 算法与 Rust 的工业实现 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -32777,7 +32777,7 @@
       "layer": "L4",
       "title": "范畴论与 Rust：从函子到单子",
       "positioning": "从**范畴论**视角分析 Rust 的类型系统（Type System）——从函子（Functor）、应用函子（Applicative）到单子（Monad），揭示 Rust 的类型构造器如何隐式实现这些抽象代数结构。",
-      "line_count": 810,
+      "line_count": 811,
       "theorem_chains": [
         {
           "text": "| 范畴论与 Rust：从函子到单子 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -32920,7 +32920,7 @@
       "layer": "L4",
       "title": "Lambda 演算与 Rust 计算模型",
       "positioning": "探讨 Lambda 演算作为 Rust 函数式编程的数学基础——从 β-归约到类型化 Lambda 演算，分析 Rust 的闭包（Closures）与函数类型如何映射到计算理论。",
-      "line_count": 753,
+      "line_count": 755,
       "theorem_chains": [
         {
           "text": "| Lambda 演算与 Rust 计算模型 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -33055,7 +33055,7 @@
       "layer": "L4",
       "title": "Type Semantics（类型语义）",
       "positioning": "",
-      "line_count": 900,
+      "line_count": 901,
       "theorem_chains": [
         {
           "text": "- **定理**: Type Semantics（类型语义） 定义 ⟹ 类型安全保证",
@@ -33246,7 +33246,7 @@
       "layer": "L4",
       "title": "rustc 类型检查与类型推断",
       "positioning": "把“编译器如何知道 `Vec<&str>` 并对未标注类型做推断”还原为约束生成、统一与区域求解的完整算法。",
-      "line_count": 309,
+      "line_count": 317,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -33370,7 +33370,7 @@
       "layer": "L4",
       "title": "Type Inference Complexity（类型推断复杂度）",
       "positioning": "解释 Rust 类型推断（Type Inference）为什么从 HM 的 $O(n^3)$ 跃迁到 PSPACE-完全，以及这一理论结论如何在 rustc 的约束求解器中得到工程化实现。",
-      "line_count": 408,
+      "line_count": 414,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Type Inference Complexity（类型推断 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -33483,7 +33483,7 @@
       "layer": "L4",
       "title": "类型系统参考（Type System Reference）",
       "positioning": "",
-      "line_count": 415,
+      "line_count": 424,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -33547,7 +33547,7 @@
       "layer": "L4",
       "title": "Linear Logic & Affine Logic（线性逻辑与仿射逻辑）",
       "positioning": "",
-      "line_count": 1240,
+      "line_count": 1241,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构——定理矩阵扩展至10行并引入⟹推理链、新增3组反命题决策树、5步认知路径、层次一致性（Coherence）标注（L1-L3精确对应）、补充Pierce TAPL引用",
@@ -33972,7 +33972,7 @@
       "layer": "L4",
       "title": "线性逻辑在 Rust 中的工程应用",
       "positioning": "深入分析**线性逻辑**如何从理论概念转化为 Rust 的**工程实践**——从资源管理、协议状态机到 session types，揭示形式化类型论在现代系统编程中的实际价值。",
-      "line_count": 746,
+      "line_count": 747,
       "theorem_chains": [
         {
           "text": "| 线性逻辑在 Rust 中的工程应用 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",

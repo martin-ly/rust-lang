@@ -43,7 +43,7 @@
 
 ## 一、什么是 Edition
 
-**Edition** 是 Rust 语言在保持向后兼容的前提下引入非兼容性语法/语义变更的机制。每个 crate 可独立选择 edition，同一编译单元内可混用不同 edition 的依赖。
+**Edition** 是 Rust 语言在保持向后兼容的前提下引入非兼容性语法/语义变更的机制。每个 crate 可独立选择 edition，同一编译单元内可混用不同 edition 的依赖。(Source: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html))
 
 关键原则：
 
@@ -113,7 +113,7 @@ rust-version = "1.85"
 
 - 新推荐使用最新稳定 edition。
 - 依赖 crate 的 edition 不影响当前 crate 的编译。
-- `rust-version` 让 Cargo 在低于该版本的编译器上给出清晰错误。
+- `rust-version` 让 Cargo 在低于该版本的编译器上给出清晰错误。(Source: [TRPL — Appendix E: Editions](https://doc.rust-lang.org/book/appendix-05-editions.html))
 
 ---
 

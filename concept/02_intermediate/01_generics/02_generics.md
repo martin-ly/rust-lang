@@ -196,7 +196,7 @@
 ### 1.1 Wikipedia 对齐定义
 
 > **[Wikipedia: Generic programming](https://en.wikipedia.org/wiki/Generic_programming)** Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters. Rust uses monomorphization to implement generics, generating specialized code at compile time for each concrete type used.
-> 关键区分：Rust 的泛型属于**参数多态**（parametric polymorphism），与 C++ 模板（textual substitution）和 Java 泛型（type erasure）在实现语义上存在本质差异。来源: [Wikipedia: Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)
+> 关键区分：Rust 的泛型属于**参数多态**（parametric polymorphism），与 C++ 模板（textual substitution）和 Java 泛型（type erasure）在实现语义上存在本质差异。(Source: [Wikipedia: Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism))
 
 ### 1.2 TRPL 官方定义
 
@@ -241,7 +241,7 @@
 | **生命周期（Lifetimes）参数** | `<'a>` | 引用（Reference）有效期 | 推断 | 函数/结构体（Struct）含引用 |
 
 > **形式化对应**: 生命周期（Lifetimes）参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用（Reference）有效性的形式化约束。详见 L1 生命周期 §4 和 [L4 所有权（Ownership）形式化](../../04_formal/01_ownership_logic/03_ownership_formal.md) §2.2。[Tofte & Talpin 1994 — Region Types](https://doi.org/10.1145/176454.176456)
-| **常量泛型** | `<const N: usize>` | 编译期常量值 | 无 | 固定大小数组、类型状态 |
+| **常量泛型** | `<const N: usize>` | 编译期常量值 | 无 | 固定大小数组、类型状态 |(Source: [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html))
 | **关联类型** | `type Item;` | Trait 内部类型 | 实现时确定 | Iterator、Future 等 |
 
 ### 2.2 泛型实现机制对比
@@ -256,7 +256,7 @@
 | **Go** | 接口实现（GCShape stenciling） | 为每个 GC shape 生成一份代码 | 极低 | 中 |
 | **Haskell** | 类型类字典传递 | 运行时（Runtime）传递字典指针 | 有（间接调用） | 低 |
 
-> **来源: [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/introduction.html)** Rust 泛型通过单态化实现零成本抽象（Zero-Cost Abstraction），为每个具体类型生成专用代码。 ✅
+> **来源: [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/introduction.html)** Rust 泛型通过单态化实现零成本抽象（Zero-Cost Abstraction），为每个具体类型生成专用代码。(Source: [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html)) ✅
 > **[C++ Reference: Templates](https://en.cppreference.com/w/cpp/templates)** C++ 模板通过文本替换实现编译期实例化，与 Rust 单态化类似但无统一类型检查。 ✅
 > **[Java Language Spec: Type Erasure](https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.6)** Java 泛型通过类型擦除实现，编译为 `Object` 并插入类型转换，有运行时装箱开销。 ✅
 > **[Go Spec: Type parameters](https://go.dev/ref/spec#Type_parameters)** Go 1.18+ 泛型通过 GC shape stenciling 实现，为每个 GC shape 生成一份代码，运行时开销极低。 ✅

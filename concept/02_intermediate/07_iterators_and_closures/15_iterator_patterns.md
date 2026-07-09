@@ -147,6 +147,7 @@ pub trait Iterator {
 ```
 
 > **认知功能**: **Iterator trait 是 Rust 零成本抽象（Zero-Cost Abstraction）的核心体现**——丰富的适配器方法在编译期内联展开，不产生运行时（Runtime）开销。
+> (Source: [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html))
 > [来源: [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)]
 
 ---
@@ -188,6 +189,7 @@ pub trait Iterator {
 ```
 
 > **认知功能**: **适配器链让数据转换声明式且可组合**——每个适配器只做一件事，组合起来完成复杂转换。
+> (Source: [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html))
 > [来源: [Rust Iterator Cheat Sheet](https://doc.rust-lang.org/std/iter/index.html)]
 
 ---
@@ -258,6 +260,7 @@ let result: Vec<i32> = vec![1, 2, 3, 4, 5]
 ```
 
 > **认知功能**: **惰性求值让迭代器链既高效又可读**——没有中间分配，编译器优化为单一循环。
+> (Source: [TRPL — Iterator Performance](https://doc.rust-lang.org/book/ch13-04-performance.html))
 > [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)] · [来源: [TRPL — Iterator Performance](https://doc.rust-lang.org/book/ch13-04-performance.html)]
 
 ---
@@ -328,6 +331,7 @@ map-filter-collect:
 ```
 
 > **认知功能**: **map-filter-collect 是 Rust 迭代器的经典模式**——声明式数据处理。
+> (Source: [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html))
 
 ---
 
@@ -359,6 +363,7 @@ fold 与归约:
 ```
 
 > **认知功能**: **fold 是迭代器的通用归约操作**——任何累积计算都可以用 fold 表达。
+> (Source: [std::iter::Iterator::fold](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.fold))
 > [来源: [std::iter::Iterator::fold](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.fold)]
 
 ---
@@ -389,6 +394,7 @@ zip: 并行迭代多个序列
 ```
 
 > **认知功能**: **zip 让并行迭代多个序列变得简单**——无需手动管理索引。
+> (Source: [std::iter::Iterator::zip](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.zip))
 > [来源: [std::iter::Iterator::zip](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.zip)]
 
 ---
@@ -487,6 +493,7 @@ for x in &mut v { /* x 是 &mut i32 */ }
 ```
 
 > **模式矩阵**: Rust 迭代器的**丰富方法集**覆盖了 90% 的数据处理需求——函数式风格的代码更简洁且通常更快。
+> (Source: [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html))
 > [来源: [itertools crate](https://docs.rs/itertools/latest/itertools/)]
 
 ---
@@ -589,6 +596,7 @@ where I::Item: Clone
 ```
 
 > **认知功能**: **自定义迭代器让任何序列类型都能享受标准库适配器链**。
+> (Source: [TRPL — Implementing Iterator](https://doc.rust-lang.org/book/ch13-02-iterators.html))
 > [来源: [TRPL — Implementing Iterator](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Rust By Example — Iterators](https://doc.rust-lang.org/rust-by-example/trait/iter.html)]
 
 ---
@@ -718,6 +726,7 @@ graph TD
 ```
 
 > **认知功能**: **适配器链和 for 循环各有适用场景**——简单转换用链，复杂控制用循环。迭代器的边界主要与编译时间、错误信息、递归限制、特殊算法和异步（Async）相关。
+> (Source: [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html))
 > [来源: [Rust Style Guide](https://doc.rust-lang.org/nightly/style-guide/)] · [来源: [async-iter RFC](https://rust-lang.github.io/rfcs//2996-async-iterator.html)]
 
 ---
@@ -795,6 +804,7 @@ graph TD
 ```
 
 > **陷阱总结**: 迭代器的陷阱主要与**多次消费**、**外部状态**、**不必要 collect**、**Option 处理**、**collect 遗忘**、**修改集合**、**所有权（Ownership）选择**、**链长度**和**内存优化**相关。
+> (Source: [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html))
 > [来源: [Common Rust Iterator Mistakes](https://users.rust-lang.org/t/iterator-mistakes/)]
 
 ---
@@ -844,7 +854,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+> **权威来源**: [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html), [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html), [TRPL — Iterator Performance](https://doc.rust-lang.org/book/ch13-04-performance.html), [RFC 0235 — IntoIterator](https://rust-lang.github.io/rfcs/0235-collections-conventions.html), [Rust Performance Book](https://nnethercote.github.io/perf-book/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 13](../../00_meta/02_sources/international_authority_index.md)
 

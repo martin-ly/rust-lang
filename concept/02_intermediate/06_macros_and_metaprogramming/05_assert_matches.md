@@ -183,6 +183,7 @@ debug_assert_matches!(config, Some(true));
 | `debug_assert_matches!` | ✅ 执行 | ❌ 消除 | 性能敏感路径的调试断言 |
 
 > **定理**: `debug_assert_matches!` 在 release 模式下不产生任何机器码。
+> (Source: [Rust Reference — debug_assertions](https://doc.rust-lang.org/reference/conditional-compilation.html#debug_assertions))
 > **证明**: 宏（Macro）展开为 `if cfg!(debug_assertions) { assert_matches!(...) }`，编译器在 `cfg!(false)` 时消除整个分支。
 > [来源: [Rust Reference — debug_assertions](https://doc.rust-lang.org/reference/conditional-compilation.html#debug_assertions)]
 
@@ -210,9 +211,12 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust 断言宏（Macro）的**家族关系**和**语义演进**。`assert_matches!` 填补了"模式匹配断言"的空白，使断言系统从"值相等"扩展到"结构匹配"。
+> (Source: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html))
 > [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
 > **使用建议**: 在测试枚举（Enum）类型时，优先选择 `assert_matches!` 而非 `assert_eq!`——前者验证结构形状，后者仅验证相等性。
+> (Source: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html))
 > **关键洞察**: 断言系统的演进轨迹是**从具体值到抽象模式**：`assert!`（任意布尔）→ `assert_eq!`（部分相等）→ `assert_matches!`（结构模式）。
+> (Source: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html))
 
 **形式化对比表**:
 
@@ -284,6 +288,7 @@ fn parse_config() {
 ```
 
 > **最佳实践**: 在测试中，使用 `assert_matches!` 验证**结构形状**（是否为 `Ok`），然后使用 `assert_eq!` 验证**具体值**。分层断言使测试失败信息更精确。
+> (Source: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html))
 
 ---
 
@@ -329,8 +334,11 @@ flowchart TD
 ```
 
 > **认知功能**: 此决策树帮助开发者在 `if let` 和 `assert_matches!` 之间选择。核心判断标准是"失败是否应导致 panic"。
+> (Source: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html))
 > **使用建议**: 生产代码中的可选处理用 `if let`；测试和不变量检查用 `assert_matches!`。
+> (Source: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html))
 > **关键洞察**: `assert_matches!` 本质上是 **"panic-if-no-match + if-let"** 的语法糖，将两个操作压缩为单一表达式。
+> (Source: [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html))
 
 ---
 
@@ -360,8 +368,11 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助测试编写者在 `assert_matches!`、`assert_eq!` 和 `if let` 之间选择最合适的工具。
+> (Source: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html))
 > **使用建议**: 对简单标量相等检查，使用 `assert_eq!` 更简洁；对结构匹配和绑定提取，使用 `assert_matches!`。
+> (Source: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html))
 > **关键洞察**: 工具选择的本质是**信息粒度**的权衡——`assert_eq!` 验证值，`assert_matches!` 验证形状 + 提取成分。
+> (Source: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html))
 
 ---
 
@@ -390,6 +401,7 @@ let x = 42;
 ```
 
 > **边界要点**: `assert_matches!` 支持所有标准模式语法（嵌套、或模式、`..`、守卫条件），但**不可反驳模式**（irrefutable patterns）会触发编译器警告——因为断言在此情况下永不为假。
+> (Source: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html))
 
 ---
 
@@ -445,7 +457,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-00-patterns.html)
+> **权威来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html), [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html), [std::matches](https://doc.rust-lang.org/std/macro.matches.html), [RFC 2005 — matches!](https://github.com/rust-lang/rfcs/pull/2005), [The Rust Programming Language — Patterns](https://doc.rust-lang.org/book/ch19-00-patterns.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1 (Edition 2024)
 
 **文档版本**: 1.1

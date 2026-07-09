@@ -108,7 +108,7 @@ wp(if B then C1 else C2, Q) = (B → wp(C1, Q)) ∧ (¬B → wp(C2, Q))
 wp(while B do C, Q)   = ∃k. H_k(Q)      （极限构造，H_0 = false, H_{k+1} = (¬B → Q) ∧ (B → wp(C, H_k))）
 ```
 
-> **认知桥梁**: wp 计算是**程序合成的数学基础**——给定后置条件 \(Q\)，通过反向应用 wp 规则，可以机械地推导出实现 \(Q\) 的程序。Creusot 工具正是基于这一原理，从 Why3 逻辑规约自动生成 Rust 代码的验证条件。(Source: [Dijkstra 1975](https://doi.org/10.1145/360933.360975)) · [来源: [Creusot Documentation](https://creusot.rs/))]
+> **认知桥梁**: wp 计算是**程序合成的数学基础**——给定后置条件 \(Q\)，通过反向应用 wp 规则，可以机械地推导出实现 \(Q\) 的程序。Creusot 工具正是基于这一原理，从 Why3 逻辑规约自动生成 Rust 代码的验证条件。(Source: [Dijkstra 1975](https://doi.org/10.1145/360933.360975) · [Creusot Documentation](https://creusot.rs/))
 
 ### 1.3 最强后置条件（Strongest Postcondition）
 >
@@ -319,7 +319,7 @@ fn check_invariants() {
 }
 ```
 
-> **形式化表达**: 借用检查器通过**区域约束系统**（Region Constraint System）在编译期验证这三个不变式。NLL（Non-Lexical Lifetimes）将生命周期从词法作用域精确到**使用点**（use-site），使得不变式的验证更加精确。Polonius 进一步将区域约束转化为 Datalog 规则，实现 borrow check 的声明式表达。[来源: [Rust [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — NLL](https://rust-lang.github.io/rfcs//2094-nll.html)] · (Source: [Polonius — rust-lang/polonius](https://github.com/rust-lang/polonius)) · (Source: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html))
+> **形式化表达**: 借用检查器通过**区域约束系统**（Region Constraint System）在编译期验证这三个不变式。NLL（Non-Lexical Lifetimes）将生命周期从词法作用域精确到**使用点**（use-site），使得不变式的验证更加精确。Polonius 进一步将区域约束转化为 Datalog 规则，实现 borrow check 的声明式表达。(Source: [Rust RFC 2094 — NLL](https://rust-lang.github.io/rfcs//2094-nll.html)) · (Source: [Polonius — rust-lang/polonius](https://github.com/rust-lang/polonius)) · (Source: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html))
 
 ### 3.4 unsafe 块的公理边界
 >

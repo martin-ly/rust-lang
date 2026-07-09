@@ -19,7 +19,7 @@
 
 ## 一、发布频道
 
-Rust 使用三个发布频道，构成"发布火车"（release train）模型：
+Rust 使用三个发布频道，构成"发布火车"（release train）模型：(Source: [TRPL — Appendix G](https://doc.rust-lang.org/book/appendix-07-nightly-rust.html))
 
 | 频道 | 更新频率 | 用途 | 风险 |
 |:---|:---|:---|:---|
@@ -47,7 +47,7 @@ flowchart LR
 
 ## 三、版本号规则
 
-Rust 版本号遵循 [Semantic Versioning](https://semver.org/)：
+Rust 版本号遵循 [Semantic Versioning](https://semver.org/)：(Source: [Rust Forge — Release Process](https://forge.rust-lang.org/release/process.html))
 
 ```text
 MAJOR.MINOR.PATCH

@@ -784,7 +784,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的操作语义基于**小步归约**（small-step reduction）和**内存模型**（Tree Borrows / Stacked Borrows）。关键规则：同一时间只能有一个活跃的可变引用（Mutable Reference），或任意数量的共享引用。违反此规则是未定义行为（UB）。Miri 通过追踪每个引用的"借用（Borrowing）标签"（borrow tag）在运行时检测违规。这与 C 的未定义行为（依赖编译器实现）不同——Rust 的 UB 有明确的形式化定义，可通过工具验证。[Rust Operational Semantics](https://doc.rust-lang.org/nomicon/index.html)]
+> **修正**: Rust 的操作语义基于**小步归约**（small-step reduction）和**内存模型**（Tree Borrows / Stacked Borrows）。关键规则：同一时间只能有一个活跃的可变引用（Mutable Reference），或任意数量的共享引用。违反此规则是未定义行为（UB）。Miri 通过追踪每个引用的"借用（Borrowing）标签"（borrow tag）在运行时检测违规。这与 C 的未定义行为（依赖编译器实现）不同——Rust 的 UB 有明确的形式化定义，可通过工具验证。(Source: [Rust Operational Semantics](https://doc.rust-lang.org/nomicon/index.html))
 
 ### 10.2 边界测试：panic 的栈展开语义（运行时行为）
 
@@ -809,7 +809,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的 panic 机制使用**栈展开**（stack unwinding）调用每个栈帧中值的 `Drop::drop`。这与 C++ 的异常处理类似，但 Rust 的 panic 设计为"不可恢复错误"——不应在常规控制流中使用。`Drop` 的实现必须是 panic-safe（不 panic），否则会导致**双重 panic**（double panic）→ `abort`。形式化语义中，panic 对应于计算的 abrupt termination，栈展开对应于资源释放的补偿动作（compensating action）。[Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+> **修正**: Rust 的 panic 机制使用**栈展开**（stack unwinding）调用每个栈帧中值的 `Drop::drop`。这与 C++ 的异常处理类似，但 Rust 的 panic 设计为"不可恢复错误"——不应在常规控制流中使用。`Drop` 的实现必须是 panic-safe（不 panic），否则会导致**双重 panic**（double panic）→ `abort`。形式化语义中，panic 对应于计算的 abrupt termination，栈展开对应于资源释放的补偿动作（compensating action）。(Source: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html))
 
 ### 10.3 边界测试：形式化规则违反导致的编译错误（编译错误）
 
@@ -822,7 +822,7 @@ fn main() {
 }
 ```
 
-> **修正**: 这是 Rust 借用（Borrowing）检查器的核心规则在操作语义层面的体现：同一时间，对同一内存位置，要么存在任意数量的不可变引用（Immutable Reference） `&T`（读访问），要么存在一个可变引用 `&mut T`（写访问），二者互斥。形式化上，这一规则对应于线性逻辑中的**资源分裂**（resource splitting）：所有权（Ownership） `own(x)` 可分裂为两个只读能力 `read(x)` ∧ `read(x)`，或一个读写能力 `write(x)`，但不能同时分裂为 `read(x)` ∧ `write(x)`。编译器在生成 MIR（Mid-level IR）时，通过**借用检查**（borrow check）验证引用生命周期的不相交性。此规则是 Rust"零成本抽象（Zero-Cost Abstraction）"的基石：无需运行时锁即可保证内存安全（Memory Safety）。[Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/associated-items.html)] · [Stacked Borrows Paper](https://doi.org/10.1145/3371106)]
+> **修正**: 这是 Rust 借用（Borrowing）检查器的核心规则在操作语义层面的体现：同一时间，对同一内存位置，要么存在任意数量的不可变引用（Immutable Reference） `&T`（读访问），要么存在一个可变引用 `&mut T`（写访问），二者互斥。形式化上，这一规则对应于线性逻辑中的**资源分裂**（resource splitting）：所有权（Ownership） `own(x)` 可分裂为两个只读能力 `read(x)` ∧ `read(x)`，或一个读写能力 `write(x)`，但不能同时分裂为 `read(x)` ∧ `write(x)`。编译器在生成 MIR（Mid-level IR）时，通过**借用检查**（borrow check）验证引用生命周期的不相交性。此规则是 Rust"零成本抽象（Zero-Cost Abstraction）"的基石：无需运行时锁即可保证内存安全（Memory Safety）。(Source: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/associated-items.html) · [Stacked Borrows Paper](https://doi.org/10.1145/3371106))
 
 ### 10.4 边界测试：悬垂引用的形式化禁止（编译错误）
 
@@ -838,7 +838,7 @@ fn main() {
 }
 ```
 
-> **修正**: 在形式化语义中，局部变量 `x` 的生命周期（Lifetimes） `ℓ_x` 受限于函数作用域。当函数返回时，`x` 的存储被释放，生命周期结束。返回 `&x` 意味着返回的引用生命周期 `ℓ_r` 必须满足 `ℓ_r ⊆ ℓ_x`，但函数返回后 `ℓ_x` 已结束，因此 `ℓ_r` 无法有效。编译器通过**生命周期推断**发现这一矛盾：返回类型的隐式生命周期参数 `'a` 无法与任何输入参数匹配（因为 `x` 是局部变量），因此无法构造有效的生命周期约束。这与 C/C++ 的悬垂指针（编译器通常不报错）形成鲜明对比——Rust 将"使用已释放内存"这一运行时错误转化为编译期类型错误。[The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [RustBelt Paper](https://doi.org/10.1145/3158154)]
+> **修正**: 在形式化语义中，局部变量 `x` 的生命周期（Lifetimes） `ℓ_x` 受限于函数作用域。当函数返回时，`x` 的存储被释放，生命周期结束。返回 `&x` 意味着返回的引用生命周期 `ℓ_r` 必须满足 `ℓ_r ⊆ ℓ_x`，但函数返回后 `ℓ_x` 已结束，因此 `ℓ_r` 无法有效。编译器通过**生命周期推断**发现这一矛盾：返回类型的隐式生命周期参数 `'a` 无法与任何输入参数匹配（因为 `x` 是局部变量），因此无法构造有效的生命周期约束。这与 C/C++ 的悬垂指针（编译器通常不报错）形成鲜明对比——Rust 将"使用已释放内存"这一运行时错误转化为编译期类型错误。(Source: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [RustBelt Paper](https://doi.org/10.1145/3158154))
 
 ### 10.5 边界测试：形式化语义中的非确定性选择（运行时行为差异）
 
@@ -855,7 +855,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的形式化语义（如 RustBelt、Stacked Borrows、Tree Borrows）定义了程序的"合法"与"非法"行为。但编译器实现是演进的：旧版编译器可能接受某些形式化上非法的程序（保守性不足），新版编译器可能拒绝（更精确的分析）。这导致**语义与实现的不一致**：形式化语义说"这是 UB"，但旧编译器"它能编译"。Rust 的策略：逐步收紧编译器，使实现趋近形式化语义。NLL、Polonius、MIR  borrow checker 都是这一进程的体现。这与 C/C++ 的 "实现定义行为"（compiler-specific）不同——Rust 的目标是"形式化语义定义行为，编译器实现语义"。但完全对齐是长期过程，期间存在过渡状态。[RustBelt Paper](https://doi.org/10.1145/3158154)] · [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)]
+> **修正**: Rust 的形式化语义（如 RustBelt、Stacked Borrows、Tree Borrows）定义了程序的"合法"与"非法"行为。但编译器实现是演进的：旧版编译器可能接受某些形式化上非法的程序（保守性不足），新版编译器可能拒绝（更精确的分析）。这导致**语义与实现的不一致**：形式化语义说"这是 UB"，但旧编译器"它能编译"。Rust 的策略：逐步收紧编译器，使实现趋近形式化语义。NLL、Polonius、MIR  borrow checker 都是这一进程的体现。这与 C/C++ 的 "实现定义行为"（compiler-specific）不同——Rust 的目标是"形式化语义定义行为，编译器实现语义"。但完全对齐是长期过程，期间存在过渡状态。(Source: [RustBelt Paper](https://doi.org/10.1145/3158154) · [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html))
 
 ### 10.6 边界测试：堆叠借用（Stacked Borrows）与原始指针的别名（运行时 UB）
 
@@ -903,7 +903,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的操作语义明确定义了**求值顺序**和**别名规则**。safe Rust 中，`&mut T` 和 `&T` 不能同时指向同一数据（编译期保证）。但在 `unsafe` 块中，可以通过裸指针创建别名：`*const T` 和 `*mut T` 同时指向同一地址是**合法**的，但解引用时若存在 `&mut` 活跃则 UB。Stacked Borrows / Tree Borrows 模型定义了**精确规则**：1) 创建 `&mut` 会"弹出"（pop）所有重叠的共享引用；2) 通过 `&mut` 创建 `*mut` 保留 `&mut` 的权限；3) 从 `*mut` 重新创建 `&` 或 `&mut` 需满足无活跃冲突借用。这与 C 的"无别名假设"（strict aliasing rule，编译器假设 `int*` 和 `float*` 不别名）或 LLVM 的 `noalias` 元数据类似——Rust 的别名规则更严格，但允许通过 unsafe 显式控制。[Rust Reference — Evaluation Order](https://doc.rust-lang.org/reference/expressions.html#evaluation-order)] · [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]
+> **修正**: Rust 的操作语义明确定义了**求值顺序**和**别名规则**。safe Rust 中，`&mut T` 和 `&T` 不能同时指向同一数据（编译期保证）。但在 `unsafe` 块中，可以通过裸指针创建别名：`*const T` 和 `*mut T` 同时指向同一地址是**合法**的，但解引用时若存在 `&mut` 活跃则 UB。Stacked Borrows / Tree Borrows 模型定义了**精确规则**：1) 创建 `&mut` 会"弹出"（pop）所有重叠的共享引用；2) 通过 `&mut` 创建 `*mut` 保留 `&mut` 的权限；3) 从 `*mut` 重新创建 `&` 或 `&mut` 需满足无活跃冲突借用。这与 C 的"无别名假设"（strict aliasing rule，编译器假设 `int*` 和 `float*` 不别名）或 LLVM 的 `noalias` 元数据类似——Rust 的别名规则更严格，但允许通过 unsafe 显式控制。(Source: [Rust Reference — Evaluation Order](https://doc.rust-lang.org/reference/expressions.html#evaluation-order) · [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/))
 
 ### 10.2 边界测试：match 分支返回类型不一致
 

@@ -785,7 +785,7 @@ impl Container for BadWrapper {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-03-advanced-types.html)
+> **权威来源**: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html), [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-03-advanced-types.html), [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 

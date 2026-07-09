@@ -109,8 +109,8 @@ impl std::ops::Add for Meters {
 
 > **认知功能**: Newtype 是 Rust **类型系统（Type System）的轻量级扩展**——它不增加运行时（Runtime）开销（单字段结构体（Struct）与内部类型完全相同的大小），但提供了编译期的语义区分。
 > [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
-> **关键洞察**: Newtype 是**零成本抽象（Zero-Cost Abstraction）**的典范——编译后 `Meters(f64)` 与 `f64` 的机器表示完全相同。
-> [来源: [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines//type-safety.html#c-newtype)]
+> **关键洞察**: Newtype 是**零成本抽象（Zero-Cost Abstraction）**的典范——编译后 `Meters(f64)` 与 `f64` 的机器表示完全相同 (Source: [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines/type-safety.html#c-newtype))。
+> [来源: [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines/type-safety.html#c-newtype)]
 
 ---
 

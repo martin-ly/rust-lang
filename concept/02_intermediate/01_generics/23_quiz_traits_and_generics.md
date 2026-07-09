@@ -118,7 +118,7 @@ impl Summary for Article {
 
 **Rust trait 设计的核心原则**：
 
-- Trait 定义行为契约，impl 提供具体实现
+- Trait 定义行为契约，impl 提供具体实现。(Source: [TRPL: Ch10.2 — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html))
 - **孤儿规则（Orphan Rule）**：trait 或类型至少有一个必须在当前 crate 中，才能写 `impl`
 - 与 Go interface 的区别：Rust trait 实现是显式的，Go interface 是隐式的
 
@@ -178,7 +178,7 @@ Tweet content
 
 **限制**：默认实现中**不能**调用同一 trait 中未提供默认实现的方法（否则递归不确定）。
 
-**知识点**：默认实现是 trait 演进的关键——可以在不破坏现有代码的情况下扩展 trait。[→ Trait 详解](../00_traits/01_traits.md)
+**知识点**：默认实现是 trait 演进的关键——可以在不破坏现有代码的情况下扩展 trait。(Source: [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html))[→ Trait 详解](../00_traits/01_traits.md)
 
 </details>
 
@@ -231,7 +231,7 @@ where
 
 **where 子句的优势**：约束与函数签名分离，可读性更好，支持更复杂的约束组合。
 
-**知识点**：trait bound 是 Rust 泛型（Generics）的"类型类约束"，编译器通过它进行单态化（Monomorphization）生成具体代码。[→ 泛型详解](02_generics.md)
+**知识点**：trait bound 是 Rust 泛型（Generics）的"类型类约束"，编译器通过它进行单态化（Monomorphization）生成具体代码。(Source: [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html))[→ 泛型详解](02_generics.md)
 
 </details>
 

@@ -15,10 +15,11 @@
 > **后置概念**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) ·
 > [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
 > [Async](../../03_advanced/01_async/02_async.md)
-> **主要来源**: [TRPL: Ch4.1-4.3](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**: [TRPL: Ch4.1-4.3](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL: Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·
 > [Rust Reference: Memory Model](https://doc.rust-lang.org/reference/introduction.html) ·
 > [Wikipedia: Memory management](https://en.wikipedia.org/wiki/Memory_management)
+> (Source: [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html))
 
 ---
 
@@ -165,10 +166,12 @@
 > **[TRPL Ch4.1](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)** The stack stores values in the order it gets them and removes the values in the opposite order. This is referred to as last in, first out. The heap is less organized: when you put data on the heap, you request a certain amount of space. The memory allocator finds an empty spot in the heap that is big enough, marks it as being in use, and returns a pointer.
 > **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)** A smart pointer is a data structure that acts like a pointer but also has additional metadata and capabilities. The concept of smart pointers isn't unique to Rust: smart pointers originated in C++ and exist in other languages as well. In Rust, smart pointers own the data they point to.
 > **[Wikipedia: Smart pointer](https://en.wikipedia.org/wiki/Smart_pointer)** `Box<T>` provides the simplest form of heap-allocated smart pointer with unique ownership, analogous to `std::unique_ptr` in C++. ✅ 已验证
+> (Source: [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html))
 
 ### 1.3 形式化定义
 >
 > **[Rustonomicon: Ownership](https://doc.rust-lang.org/nomicon/ownership.html) · [线性逻辑]** Rust 内存模型形式化为栈帧自动管理 + 堆分配显式所有权（Ownership）的组合。 ✅ 已验证
+> (Source: [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html))
 
 Rust 的内存模型可以形式化为**栈帧自动管理 + 堆分配显式所有权**的组合：
 

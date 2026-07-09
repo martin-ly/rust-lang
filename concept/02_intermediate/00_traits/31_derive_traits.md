@@ -65,7 +65,7 @@
 
 ## 一、`#[derive]` 的作用
 
-`#[derive(TraitName)]` 可以自动为 struct 或 enum 生成 trait 实现。编译器使用默认实现，其行为通常基于字段的逐字段/逐变体推导。
+`#[derive(TraitName)]` 可以自动为 struct 或 enum 生成 trait 实现。编译器使用默认实现，其行为通常基于字段的逐字段/逐变体推导。(Source: [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html))
 
 ```rust
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
@@ -176,7 +176,7 @@ struct Document {
 struct Point { x: i32, y: i32 }
 ```
 
-> **关键区别**：`Copy` 是隐式、廉价的；`Clone` 是显式、可能昂贵的。所有 `Copy` 类型都可以 `Clone`，但反之不成立。
+> **关键区别**：`Copy` 是隐式、廉价的；`Clone` 是显式、可能昂贵的。所有 `Copy` 类型都可以 `Clone`，但反之不成立。(Source: [TRPL — Appendix C](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html))
 
 ---
 
@@ -265,3 +265,7 @@ struct User {
 | [Traits](../../01_foundation/02_type_system/04_type_system.md) | derive 是 trait 实现的语法糖 |
 | [Advanced Traits](19_advanced_traits.md) | 手动实现 trait 替代默认 derive 行为 |
 | [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) | 第三方 derive 通过过程宏（Procedural Macro）实现 |
+
+---
+
+> **权威来源**: [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html) · [TRPL — Appendix C: Derivable Traits](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)

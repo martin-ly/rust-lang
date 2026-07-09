@@ -103,6 +103,7 @@ DSL 的两种形态:
 ```
 
 > **认知功能**: DSL 的**核心权衡**是**表达能力 vs 工具链支持**——内嵌 DSL 免费获得 Rust 的类型检查和 IDE 支持，外部 DSL 需要自建工具链。
+> (Source: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html))
 > [来源: [Fowler — Domain-Specific Languages](https://martinfowler.com/books/dsl.html)]
 
 ---
@@ -370,6 +371,7 @@ SQL 查询:
 ```
 
 > **模式矩阵**: Rust 的 DSL 生态充分利用了**宏系统 [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)]**和**类型系统（Type System）**——两者结合使 DSL 既表达力强又类型安全。
+> (Source: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html))
 > [source: [Awesome Rust — DSL](https://github.com/rust-unofficial/awesome-rust)]
 
 ---
@@ -394,6 +396,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示 DSL 的**适用边界**。核心原则是：**需要编译期验证时用 Rust DSL，需要通用可编辑性时用标准格式**。
+> (Source: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html))
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > [source: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
@@ -435,6 +438,7 @@ graph TD
 ```
 
 > **边界要点**: DSL 的边界主要与**编译时间**、**错误信息**、**IDE 支持**、**语法限制**和**学习曲线**相关。
+> (Source: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html))
 > [source: [Rust Proc Macro Workshop](https://github.com/dtolnay/proc-macro-workshop)]
 
 ---
@@ -478,6 +482,7 @@ graph TD
 ```
 
 > **陷阱总结**: DSL 的陷阱主要与**过度工程**、**错误信息**、**语法冲突**、**性能假设**和**版本兼容**相关。
+> (Source: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html))
 > [source: [Rust Macro Best Practices](https://doc.rust-lang.org/reference/macros.html)]
 
 ---
@@ -509,7 +514,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html), [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html), [The Little Book of Rust Macros](https://veykril.github.io/tlborm/), [Rust API Guidelines — Predictability](https://rust-lang.github.io/api-guidelines/predictability.html), [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 

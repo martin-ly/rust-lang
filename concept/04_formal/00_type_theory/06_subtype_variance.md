@@ -387,6 +387,7 @@ graph TD
 | [RustBelt](https://plv.mpi-sws.org/rustbelt/) | ✅ 一级 | Rust 安全性的形式化证明 |
 
 ---
+(Source: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html))
 
 ## 相关概念文件
 
@@ -398,7 +399,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-03-advanced-types.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源**: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Wikipedia — Covariance and Contravariance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science))
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 

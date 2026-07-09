@@ -184,6 +184,7 @@ graph TD
 
 ### 2.1 统一（Unification）
 >
+(Source: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html))
 
 ## 十、边界测试：类型推断的编译错误
 
@@ -487,6 +488,7 @@ graph TD
 | [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system) | ✅ 三级 | 入门概述 |
 
 ---
+(Source: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html))
 
 ## 相关概念文件
 
@@ -497,7 +499,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **权威来源**: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html) · [rustc-dev-guide — Type Inference](https://rustc-dev-guide.rust-lang.org/type-inference.html) · [Milner 1978 — A Theory of Type Polymorphism](https://doi.org/10.1016/0022-0000(78)90014-4) · [Hindley 1969 — Principal Type-Schemes](https://doi.org/10.1093/comjnl/12.2.166) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
