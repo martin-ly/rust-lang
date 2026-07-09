@@ -134,7 +134,14 @@ flowchart TD
 
 ---
 
-## 五、与相关元页的关系
+## 五、使用判定树的技巧
+
+1. 从报错信息或现象定位症状类别。
+2. 按顺序回答每个判定问题，避免同时修改多处代码。
+3. 到达叶子节点后，先阅读推荐的权威概念页，再实施修复。
+4. 若问题仍未解决，使用 [Miri](../../04_formal/04_model_checking/31_miri.md) 或 [Kani](../../04_formal/04_model_checking/32_kani.md) 进一步验证。
+
+## 六、与相关元页的关系
 
 - 需要按场景决策 → [场景决策树图谱](03_scenario_decision_tree_atlas.md)
 - 需要查看示例/反例 → [示例与反例图谱](04_example_counterexample_atlas.md)

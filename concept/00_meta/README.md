@@ -134,4 +134,12 @@ graph LR
 
 ---
 
+## 最新状态与变更
+
+| 日期 | 变更 |
+|:---|:---|
+| 2026-07 | 完成 Q3 薄页补全，元层文件全部通过 `kb_auditor.py --link-check` |
+| 2026-06 | 引入 A/S/P 三维标记与内容分级体系 |
+| 2026-05 | 建立 `knowledge_topology/` 10 个 atlas 文件 |
+
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)

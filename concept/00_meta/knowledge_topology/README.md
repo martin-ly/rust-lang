@@ -39,6 +39,27 @@
 - 人工策展内容以 `<!-- MANUAL -->` 标记。
 - 当 `concept/` 文件更新后，应重新运行生成脚本并审阅变更。
 
+## 典型使用流程
+
+```bash
+# 1. 生成或更新图谱集
+python scripts/generate_knowledge_topology_atlas.py
+
+# 2. 检查链接与跨层引用
+python scripts/kb_auditor.py --link-check
+
+# 3. 检查内容重复
+python scripts/detect_content_overlap.py
+```
+
+## 与质量门禁的关系
+
+| 门禁 | 作用 | 本目录支持 |
+|:---|:---|:---|
+| `kb_auditor.py` | 链接、跨层引用、元数据 | 提供引用统计与缺口追踪 |
+| `detect_content_overlap.py` | 内容去重 | 通过图谱定位重复主题 |
+| `mdbook build` | 构建可读书 | 保证图谱页可被渲染 |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)

@@ -128,7 +128,59 @@ mod implementation {
 
 ---
 
-## 六、实践建议
+## 六、`use` 声明与可见性
+
+`use` 本身不改变可见性，只是把名称引入当前作用域。只有 `pub use` 会把引入的名称再次公开：
+
+```rust
+mod inner {
+    pub fn public_fn() {}
+    fn private_fn() {}
+}
+
+pub use inner::public_fn; // 外部可见
+// pub use inner::private_fn; // ❌ 错误：不能重导出私有 item
+```
+
+## 七、可见性与 crate 边界
+
+跨 crate 时，只有 `pub` 的 item 能被外部访问。`pub(crate)`、`pub(super)`、`pub(in path)` 仅在当前 crate 内部生效，对外部 crate 等同于 private。
+
+```rust
+// crate-a
+pub struct Foo {
+    pub(crate) internal: i32, // 对 crate-b 不可见
+}
+```
+
+## 八、可见性与测试
+
+单元测试通常放在 `#[cfg(test)]` 模块中，作为 crate 的一部分可以访问 `pub(crate)` 及以下可见性：
+
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_internal() {
+        assert_eq!(crate::module::crate_visible_fn(), 42);
+    }
+}
+```
+
+## 九、可见性决策树
+
+```mermaid
+flowchart TD
+    A[定义新 item] --> B{是否需要被 crate 外部使用?}
+    B -->|是| C[pub]
+    B -->|否| D{是否需要跨模块但仍在 crate 内?}
+    D -->|是| E[pub(crate) / pub(in path)]
+    D -->|否| F[默认 private]
+```
+
+## 十、实践建议
 
 1. **最小公开表面**: 只把必要的 item 设为 `pub`，隐藏实现细节。
 2. **使用 `pub(crate)` 管理内部 API**: 比 `pub` 更严格，同时允许 crate 内测试访问。
@@ -137,7 +189,7 @@ mod implementation {
 
 ---
 
-## 七、关联概念
+## 十一、关联概念
 
 | 概念 | 关系 |
 |:---|:---|

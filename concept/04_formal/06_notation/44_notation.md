@@ -97,9 +97,33 @@ Rust Reference 为许多规则附加稳定标识符，形如：
 - 结合 [Lexical Structure](../05_rustc_internals/45_lexical_structure.md) 理解 token 级别规则。
 - 结合 Rust Reference 的 Grammar Summary 附录获取完整语法概览。
 
+## 六、Unicode 属性示例
+
+Rust 标识符规则直接引用 Unicode 属性：
+
+| 属性 | 含义 | 应用 |
+|:---|:---|:---|
+| `XID_Start` | 可作为标识符首字符 | 变量、函数名 |
+| `XID_Continue` | 可作为标识符后续字符 | 变量、函数名 |
+
+例如 `foo`、`foo1`、`_foo` 均合法；`1foo` 不合法，因为数字不是 `XID_Start`。
+
+## 七、记法速查表
+
+| 符号 | 含义 | 示例 |
+|:---|:---|:---|
+| `:=` | 定义为 | `rule := ...` |
+| `\|` | 或 | `a \| b` |
+| `*` | 零次或多次 | `item*` |
+| `+` | 一次或多次 | `item+` |
+| `?` | 可选 | `item?` |
+| `[label]` | 规则标识符 | `[notation.productions]` |
+| *italic* | 非终结符 | *expression* |
+| `monospace` | 终结符 | `fn` |
+
 ---
 
-## 六、与其他概念的关系
+## 八、与其他概念的关系
 
 ```mermaid
 graph TD

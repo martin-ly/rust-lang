@@ -125,13 +125,57 @@ const VALUE: i32 = square(12);
 
 ---
 
-## 五、溢出与越界
+## 五、Const 块
+
+Rust 1.79+ 支持 `const { ... }` 块，可在非 const 上下文中强制编译期求值：
+
+```rust
+let arr = [0; const { 1 + 2 }]; // 长度为 3
+```
+
+## 六、Const 泛型
+
+const 泛型参数允许在类型系统中使用编译期常量：
+
+```rust
+struct Buffer<const N: usize> {
+    data: [u8; N],
+}
+
+let b = Buffer::<1024> { data: [0; 1024] };
+```
+
+const 泛型参数本身必须是常量表达式。
+
+## 七、常量求值中的 unsafe
+
+`const fn` 和 const 块中允许使用 `unsafe` 块，但操作仍需满足常量表达式规则：
+
+```rust
+const fn read_raw(ptr: *const i32) -> i32 {
+    unsafe { *ptr }
+}
+```
+
+注意：const 求值中的指针操作受 Miri 严格检查。
+
+## 八、溢出与越界
 
 在 const context 中，数组越界索引、整数溢出等行为是**编译错误**。在非 const context 中，这些行为可能只是警告，并可能在运行时（Runtime） panic。
 
+## 九、调试 const 错误
+
+常见错误：
+
+| 错误信息 | 原因 | 解决 |
+|:---|:---|:---|
+| `cannot call non-const fn` | 调用了非 const 函数 | 使用 const fn 或替换实现 |
+| `mutable references are not allowed` | const 上下文不允许可变引用 | 重构算法，避免可变状态 |
+| `evaluation of constant value failed` | 运行期行为在编译期失败 | 检查越界、溢出、panic |
+
 ---
 
-## 六、关联概念
+## 十、关联概念
 
 | 概念 | 关系 |
 |:---|:---|

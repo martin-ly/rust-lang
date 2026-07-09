@@ -98,7 +98,11 @@ flowchart LR
 | L7 前沿 | [rustc Query System](../../04_formal/05_rustc_internals/19_rustc_query_system.md) | L4 | [Parallel Frontend Preview](../../07_future/03_preview_features/09_parallel_frontend_preview.md) |
 | L7 前沿 | [Formal Verification Tools](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md) | L6 | [Ferrocene Preview](../../07_future/03_preview_features/35_ferrocene_preview.md) |
 
-## 七、与现有元文件的关系
+## 七、层间引用统计说明
+
+矩阵中的数字表示从源层文件指向目标层文件的前置/后置引用数量。数字高说明该方向依赖密集，数字低说明存在潜在缺口或该层较少引用他层。
+
+## 八、与现有元文件的关系
 
 - 更详细的层间依赖图见 [../inter_layer_map.md](../04_navigation/inter_layer_map.md)
 - 层内模型映射见 [../intra_layer_model_map.md](../04_navigation/intra_layer_model_map.md)

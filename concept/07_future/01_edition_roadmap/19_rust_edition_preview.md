@@ -22,7 +22,16 @@
 
 ---
 
-## 二、主要特性预览
+## 二、Edition 机制核心原则
+
+| 原则 | 说明 |
+|:---|:---|
+| crate 级选择 | `Cargo.toml` 中的 `edition` 字段决定当前 crate 使用的 Edition |
+| 依赖隔离 | 依赖的 Edition 与当前 crate 互不影响 |
+| 向后兼容 | 旧 Edition 继续被同一编译器支持 |
+| 迁移自动化 | `cargo fix --edition` 可自动处理大部分语法变更 |
+
+## 三、主要特性预览
 
 | 特性 | 说明 | 状态 |
 |:---|:---|:---:|
@@ -31,12 +40,46 @@
 | Never type fallback | `!` 类型的默认回退调整为 `!` 本身 | stable |
 | Lifetime capture in RPIT | `impl Trait` 生命周期（Lifetimes）捕获规则更精确 | stable |
 | `if let` 临时作用域收窄 | 临时值在 `if let` 条件中的生命周期（Lifetimes）缩短 | stable |
+| 尾表达式临时作用域 | 块尾表达式的临时值作用域收窄到语句结束 | stable |
+| `Macro` 与 `unsafe` 块优先级 | 宏调用不再无条件优先于 `unsafe` 块 | stable |
 
 > **注意**: `gen {}` 块和 `gen fn` 目前仍是 nightly-only 特性（`feature(gen_blocks)`），不在 2024 Edition stable 范围内。
 
+## 四、迁移前后代码对比
+
+### Async closures
+
+```rust
+// 2021 Edition：需要显式 async 块
+let f = |x| async move { x + 1 };
+
+// 2024 Edition：async 闭包语法
+let f = async |x| x + 1;
+```
+
+### `if let` 临时作用域
+
+```rust
+// 2021 Edition：临时值生命周期可能延续到 if 块外
+if let Some(x) = get_temp().as_ref() { /* ... */ }
+
+// 2024 Edition：临时值在条件求值后立即释放
+if let Some(x) = get_temp().as_ref() { /* ... */ }
+```
+
+### Never type fallback
+
+```rust
+let x = match condition {
+    true => return,
+    false => 42,
+};
+// 2024 Edition: x 的类型推断为 i32（更直观）
+```
+
 ---
 
-## 三、迁移策略
+## 五、迁移策略
 
 从 2021 Edition 迁移到 2024 Edition 的推荐流程：
 
@@ -54,7 +97,7 @@ cargo fix --edition
 
 ---
 
-## 四、权威来源
+## 六、权威来源
 
 - [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 - [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs/3501-edition-2024.html)

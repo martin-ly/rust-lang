@@ -118,9 +118,13 @@ VTable for dyn Trait:
 
 ## 五、性能权衡与最佳实践
 
-- **默认使用泛型/静态分发**：利用零成本抽象与内联。
-- **代码体积敏感时考虑 `dyn Trait`**：如大量不同类型调用同一泛型函数。
-- **泛型函数拆分为非泛型入口**：减少单态化膨胀。
+| 目标 | 推荐方案 | 原因 |
+|:---|:---|:---|
+| 最大化运行时性能 | 泛型 / `impl Trait` | 可内联、零开销 |
+| 最小化二进制体积 | `dyn Trait` | 一份代码处理所有类型 |
+| 同质集合 | 泛型 `Vec<T>` | 连续存储 |
+| 异质集合 | `Vec<Box<dyn Trait>>` | 统一接口 |
+| 减少编译时间 | 非泛型入口 + 内部泛型包装 | 降低单态化点 |
 
 ```rust
 // 减少膨胀：公共非泛型入口 + 小型泛型包装
@@ -129,7 +133,27 @@ pub fn process_value(value: &dyn MyTrait) {
 }
 ```
 
-## 六、与 Unsafe 的交互
+## 六、`impl Trait` 返回类型
+
+`impl Trait` 在返回位置提供抽象同时保留静态分发：
+
+```rust
+fn make_iter() -> impl Iterator<Item = i32> {
+    (0..10).map(|x| x * 2)
+}
+```
+
+与 `dyn Trait` 的区别：调用者不知道具体类型，但编译器可以内联和优化。
+
+## 七、单态化与编译时间
+
+单态化在 crate 边界会导致重复编译：泛型函数在定义 crate 中不生成机器码，在每个使用 crate 中单独实例化。对于大型泛型库，可以考虑：
+
+- 提供非泛型 API 入口。
+- 将泛型包装为内部 trait object。
+- 使用 `-C prefer-dynamic`（较少用）。
+
+## 八、与 Unsafe 的交互
 
 `dyn Trait` 的 VTable 布局、`Any::downcast_ref` 的类型擦除与恢复，以及 `core::raw_vtable` 等底层操作都涉及 unsafe 语义。详见 [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)。
 

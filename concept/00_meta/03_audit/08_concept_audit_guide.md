@@ -23,6 +23,30 @@
 - [学习指南](../04_navigation/learning_guide.md) — 分层学习路径
 - [语义空间坐标系](../00_framework/semantic_space.md) — 概念三维定位
 
+## 审计流程
+
+```mermaid
+flowchart LR
+    A[选择目标文件] --> B[检查元数据]
+    B --> C[检查链接]
+    C --> D[检查跨层引用]
+    D --> E[检查内容重复]
+    E --> F{是否通过?}
+    F -->|是| G[归档状态]
+    F -->|否| H[修复并重新审计]
+```
+
+## 审计维度
+
+| 维度 | 检查项 | 工具/方法 |
+|:---|:---|:---|
+| 元数据 | EN、Summary、受众、内容分级、Bloom、A/S/P | 人工 + `kb_auditor.py` |
+| 链接 | 内部相对链接有效、外部链接可访问 | `kb_auditor.py --link-check` |
+| 跨层引用 | Ln 文件引用 L(n-1) | `kb_auditor.py` |
+| 内容重复 | 与 knowledge/docs 重复 | `detect_content_overlap.py` |
+| 权威性 | 非 concept 文件是否过度展开 | 人工对照 `AGENTS.md` |
+| 表征完整性 | 是否含示例/表格/决策树 | `kb_auditor.py` 统计代码块/Mermaid |
+
 ## 认知路径
 
 > **认知路径**: 本文件作为 Rust 分层知识体系的 **Concept Audit Guide（概念审计指南）** 元层导航节点，连接概念定义、学习路径与质量评估框架。
