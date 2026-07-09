@@ -1,6 +1,14 @@
 > **EN**: Cross-Platform Process Management in Rust
 > **Summary**: Writing portable process-management code across Windows, Linux, and macOS using std::process, platform extensions, and conditional compilation.
 > **Rust Version**: 1.96.1+
+> **受众**: [专家]
+> **内容分级**: [专家级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: S×Eva — 评价跨平台进程管理可移植性
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Conditional Compilation](../03_proc_macros/28_conditional_compilation.md) · [Module System](../../02_intermediate/05_modules_and_visibility/10_module_system.md)
+> **后置概念**: [IPC Mechanisms](05_ipc_mechanisms.md) · [Process Security](07_process_security_and_sandboxing.md) · [Modern Process Libraries](10_modern_process_libraries.md)
+> **定理链**: Platform Differences ⟹ cfg Abstraction ⟹ Portable API
 
 # Rust 跨平台进程管理
 
@@ -258,3 +266,42 @@ fn main() {
     println!("config path: {}", config_path().display());
 }
 ```
+
+## 认知路径
+
+1. **问题识别**: 识别 Windows、Linux、macOS 在进程创建、信号、路径与权限上的差异。
+2. **概念建立**: 掌握 `#[cfg(target_os = "...")]` 与 `std::os::*` 平台扩展的使用。
+3. **机制推理**: 通过平台差异 ⟹ 条件编译 ⟹ 统一接口的定理链设计可移植代码。
+4. **边界辨析**: 辨析“std::process 已完全跨平台”等反命题，明确信号、守护进程等边界。
+5. **迁移应用**: 将跨平台进程管理与 CI 矩阵、安全沙箱主题链接。
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 条件编译隔离 ⟹ 可移植性 | 平台代码限制在最小模块 | 上层 API 保持统一 |
+| 平台扩展 trait ⟹ 类型安全 | `std::os::unix::process::CommandExt` | 编译期阻止在错误平台调用 |
+| CI 矩阵覆盖 ⟹ 缺陷早发 | 多 OS/架构持续集成 | 平台相关问题在合并前暴露 |
+
+## 反命题
+
+> **反命题 1**: "`std::process` 完全隐藏了所有平台差异" ⟹ 不成立。信号、权限、路径分隔符仍需显式处理。
+>
+> **反命题 2**: "只需在开发机上测试即可保证跨平台正确" ⟹ 不成立。Windows 与 Unix 的进程模型差异可能导致仅在特定平台暴露的 bug。
+>
+> **反命题 3**: "条件编译会降低代码可读性" ⟹ 不成立。合理封装的 cfg 模块比分支平台代码更易维护。
+>
+## 反向推理
+
+> **反向推理 1**: 发现 Windows CI 上命令行参数解析失败 ⟸ 说明未处理 shell 转义与参数拼接差异。
+>
+> **反向推理 2**: 发现 Unix 上信号未按预期传递 ⟸ 说明混淆了 Unix 信号与 Windows 事件机制。
+>
+## 过渡段
+
+> **过渡**: 从平台差异概述过渡到条件编译，可以理解 `#[cfg]` 是跨平台进程管理的第一道防线。
+>
+> **过渡**: 从条件编译过渡到统一抽象层，可以建立“平台相关代码内聚、通用逻辑平台无关”的设计原则。
+>
+> **过渡**: 从可移植抽象过渡到安全与沙箱，可以理解跨平台代码同样需要最小权限约束。
+>

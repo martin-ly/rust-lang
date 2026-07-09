@@ -1,6 +1,14 @@
 > **EN**: Advanced Process Management in Rust
 > **Summary**: Enterprise-grade process patterns in Rust: process pools, load balancing, health checks, resource quotas, and fault recovery, built on `std::process` and `tokio::process`.
 > **Rust Version**: 1.96.1+
+> **受众**: [专家]
+> **内容分级**: [专家级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **A+P** — Application + Procedure
+> **双维定位**: A×Eva — 评价高级进程管理策略
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Concurrency](../00_concurrency/01_concurrency.md)
+> **后置概念**: [Async Process Management](03_async_process_management.md) · [Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Process Performance Engineering](08_process_performance_engineering.md)
+> **定理链**: Process Pool ⟹ Health Check ⟹ Fault Recovery
 
 # Rust 高级进程管理
 
@@ -257,3 +265,42 @@ async fn health_check_loop(program: &str) {
     }
 }
 ```
+
+## 认知路径
+
+1. **问题识别**: 识别频繁创建/销毁进程带来的延迟与资源开销。
+2. **概念建立**: 掌握进程池、负载均衡、健康检查与故障恢复的设计模式。
+3. **机制推理**: 通过池化 ⟹ 限流 ⟹ 自愈的定理链分析生产级进程管理。
+4. **边界辨析**: 辨析“进程越多越好”等反命题，理解上下文切换与内存占用边界。
+5. **迁移应用**: 将高级进程管理与监控、性能工程主题链接，构建可观测系统。
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 进程池化 ⟹ 降低启动延迟 | 维护一组可复用子进程 | 单位任务响应时间显著缩短 |
+| 健康检查 ⟹ 故障隔离 | 定期检测子进程存活与响应 | 异常进程可被及时替换，避免级联失败 |
+| 资源配额 ⟹ 可预测性 | 限制并发数、内存与 CPU 使用 | 系统在高负载下仍保持稳定 |
+
+## 反命题
+
+> **反命题 1**: "进程池越大性能越好" ⟹ 不成立。过大的池会加剧上下文切换与内存占用，反而降低吞吐。
+>
+> **反命题 2**: "只要子进程能启动就说明健康" ⟹ 不成立。启动成功不能覆盖死锁、响应超时等运行时故障。
+>
+> **反命题 3**: "故障恢复只需重启进程" ⟹ 不成立。无状态重启可能丢失上下文，需结合重试策略与幂等设计。
+>
+## 反向推理
+
+> **反向推理 1**: 观察到任务排队时间持续增长 ⟸ 说明进程池容量不足或任务分布不均。
+>
+> **反向推理 2**: 发现子进程频繁重启但问题依旧 ⟸ 说明健康检查指标未覆盖真正的失效模式。
+>
+## 过渡段
+
+> **过渡**: 从进程创建开销过渡到进程池，可以理解池化是生产环境降低延迟的关键手段。
+>
+> **过渡**: 从进程池过渡到健康检查，可以建立“先预防、后自愈”的运维思维。
+>
+> **过渡**: 从故障恢复过渡到监控与性能工程，可以形成完整的进程管理闭环。
+>

@@ -1,6 +1,14 @@
 > **EN**: Async Process Management in Rust
 > **Summary**: Managing child processes inside Rust's async runtime: tokio::process, async I/O, timeouts, cancellation, and structured concurrency.
 > **Rust Version**: 1.96.1+
+> **受众**: [专家]
+> **内容分级**: [专家级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **A+P** — Application + Procedure
+> **双维定位**: A×App — 应用异步进程管理
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Async](../01_async/02_async.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
+> **后置概念**: [IPC Mechanisms](05_ipc_mechanisms.md) · [Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Modern Process Libraries](10_modern_process_libraries.md)
+> **定理链**: Async Runtime ⟹ tokio::process ⟹ Cancellation Safety
 
 # Rust 异步进程管理
 
@@ -330,3 +338,42 @@ async fn run_with_cancellation() -> std::io::Result<()> {
     Ok(())
 }
 ```
+
+## 认知路径
+
+1. **问题识别**: 识别在异步运行时中调用同步 `std::process` 会阻塞工作线程的问题。
+2. **概念建立**: 掌握 `tokio::process::Command`、`Child`、`ChildStdout` 等异步 API。
+3. **机制推理**: 通过异步运行时 ⟹ 非阻塞 I/O ⟹ 取消安全的定理链分析设计约束。
+4. **边界辨析**: 辨析“异步一定更快”等反命题，理解运行时调度和缓冲策略的影响。
+5. **迁移应用**: 将异步进程管理与超时、取消、结构化并发主题链接。
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 异步进程 I/O ⟹ 不阻塞运行时线程 | I/O 与等待由运行时事件驱动 | 线程池可服务更多并发任务 |
+| 超时 + 取消 ⟹ 避免挂起 | `tokio::time::timeout` 与 AbortHandle | 资源不会被无限期占用 |
+| 结构化并发 ⟹ 简化生命周期 | 子任务与父任务共命运 | 子进程在父任务取消时被正确清理 |
+
+## 反命题
+
+> **反命题 1**: "异步进程管理总是比同步快" ⟹ 不成立。低并发或 CPU 密集型任务可能因运行时开销而劣势。
+>
+> **反命题 2**: "取消任务后子进程会自动结束" ⟹ 不成立。需在 Drop 或取消逻辑中显式 `kill`/`wait` 子进程。
+>
+> **反命题 3**: "可以直接混用 `std::process` 与 `tokio::process` 句柄" ⟹ 不成立。混用易导致阻塞与竞争条件。
+>
+## 反向推理
+
+> **反向推理 1**: 观察到运行时线程池被占满 ⟸ 说明存在同步进程调用阻塞了异步执行器。
+>
+> **反向推理 2**: 发现取消任务后子进程仍在运行 ⟸ 说明未在 Drop 中实现子进程清理逻辑。
+>
+## 过渡段
+
+> **过渡**: 从同步进程阻塞问题过渡到 `tokio::process`，可以理解异步封装的核心动机。
+>
+> **过渡**: 从异步 I/O 过渡到取消安全，可以建立“启动—监控—清理”的责任边界。
+>
+> **过渡**: 从取消安全过渡到结构化并发，可以形成高可靠性异步进程管理的设计原则。
+>

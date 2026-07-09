@@ -23001,9 +23001,38 @@
       "layer": "L3",
       "title": "Cross-Platform Concurrency（跨平台并发）",
       "positioning": "",
-      "line_count": 130,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 168,
+      "theorem_chains": [
+        {
+          "text": "| 平台线程模型差异 ⟹ 同步原语选择必须显式 | 不同 OS 使用不同内核对象 | 代码中应避免隐式依赖默认排序或固定线程数 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 条件编译隔离平台代码 ⟹ 可维护性提升 | `#[cfg]` 将平台差异限制在最小模块 | 上层逻辑可保持平台无关 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| Async Runtime 依赖底层原语 ⟹ 选型前需确认目标平台 | io_uring / GCD / IOCP 支持不同 | 生产环境需验证 CI 矩阵覆盖 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"Rust 的 `std::sync` 在所有平台上语义完全一致\" ⟹ 不成立。实现底层使用不同内核原语，性能特征与极限行为存在差异。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"跨平台并发代码不需要条件编译\" ⟹ 不成立。路径分隔符、信号处理、后台策略等差异必须通过 `#[cfg]` 或统一抽象处理。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"移动平台可以像桌面平台一样长时间持有后台线程\" ⟹ 不成立。Android / iOS 对后台执行有电量与 QoS 限制。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -23031,10 +23060,10 @@
         "../03_proc_macros/28_conditional_compilation.md",
         "01_concurrency.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 11,
+      "matrix_rows": 15,
       "pre_post": {
         "pre": [
           "[Concurrency](01_concurrency.md) · [Conditional Compilation](../03_proc_macros/28_conditional_compilation.md)"
@@ -23043,7 +23072,7 @@
           "[Rust for Linux](../../07_future/04_research_and_experimental/43_rust_for_linux.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -24746,9 +24775,46 @@
       "layer": "L3",
       "title": "Rust 进程模型与生命周期",
       "positioning": "",
-      "line_count": 366,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 413,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: OS Process ⟹ std::process::Command ⟹ Resource Control",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过进程模型 ⟹ 生命周期 ⟹ 资源控制的定理链理解 `wait` 与管道关闭顺序。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 独立地址空间 ⟹ 内存安全隔离 | OS 为每个进程分配独立虚拟地址空间 | Rust 子进程不会因父进程悬垂指针而暴露未定义行为 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 显式等待 ⟹ 避免僵尸进程 | 父进程调用 `wait`/`try_wait` 回收子进程 | 内核进程表项被释放，资源不泄漏 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 所有权模型 ⟹ 句柄安全 | `Child` 与 `ChildStdin/Stdout` 实现 Drop | 管道与进程句柄随作用域正确关闭 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"进程可以像线程一样共享内存\" ⟹ 不成立。进程拥有独立地址空间，共享数据必须通过显式 IPC 机制。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"子进程退出后父进程无需等待\" ⟹ 不成立。未等待的子进程会变成僵尸进程，长期占用内核资源。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"Rust 的 `std::process` 完全隐藏了平台差异\" ⟹ 不成立。信号、权限、路径等仍需平台特定处理。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -24778,17 +24844,24 @@
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../00_concurrency/01_concurrency.md",
-        "../01_async/02_async.md"
+        "../01_async/02_async.md",
+        "02_advanced_process_management.md",
+        "03_async_process_management.md",
+        "05_ipc_mechanisms.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 15,
+      "matrix_rows": 19,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Traits](../../02_intermediate/00_traits/01_traits.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Concurrency](../00_concurrency/01_concurrency.md)"
+        ],
+        "post": [
+          "[Advanced Process Management](02_advanced_process_management.md) · [Async Process Management](03_async_process_management.md) · [IPC Mechanisms](05_ipc_mechanisms.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -24796,9 +24869,46 @@
       "layer": "L3",
       "title": "Rust 高级进程管理",
       "positioning": "",
-      "line_count": 260,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 307,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Process Pool ⟹ Health Check ⟹ Fault Recovery",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过池化 ⟹ 限流 ⟹ 自愈的定理链分析生产级进程管理。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 进程池化 ⟹ 降低启动延迟 | 维护一组可复用子进程 | 单位任务响应时间显著缩短 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 健康检查 ⟹ 故障隔离 | 定期检测子进程存活与响应 | 异常进程可被及时替换，避免级联失败 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 资源配额 ⟹ 可预测性 | 限制并发数、内存与 CPU 使用 | 系统在高负载下仍保持稳定 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"进程池越大性能越好\" ⟹ 不成立。过大的池会加剧上下文切换与内存占用，反而降低吞吐。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"只要子进程能启动就说明健康\" ⟹ 不成立。启动成功不能覆盖死锁、响应超时等运行时故障。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"故障恢复只需重启进程\" ⟹ 不成立。无状态重启可能丢失上下文，需结合重试策略与幂等设计。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -24824,22 +24934,29 @@
       "sources": [],
       "cross_references": [
         "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../00_concurrency/01_concurrency.md",
         "../01_async/02_async.md",
         "01_process_model_and_lifecycle.md",
         "03_async_process_management.md",
         "04_cross_platform_process_management.md",
-        "05_ipc_mechanisms.md"
+        "05_ipc_mechanisms.md",
+        "06_process_monitoring_and_diagnostics.md",
+        "08_process_performance_engineering.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 11,
+      "matrix_rows": 15,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Concurrency](../00_concurrency/01_concurrency.md)"
+        ],
+        "post": [
+          "[Async Process Management](03_async_process_management.md) · [Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Process Performance Engineering](08_process_performance_engineering.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -24847,9 +24964,46 @@
       "layer": "L3",
       "title": "Rust 异步进程管理",
       "positioning": "",
-      "line_count": 333,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 380,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Async Runtime ⟹ tokio::process ⟹ Cancellation Safety",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过异步运行时 ⟹ 非阻塞 I/O ⟹ 取消安全的定理链分析设计约束。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 异步进程 I/O ⟹ 不阻塞运行时线程 | I/O 与等待由运行时事件驱动 | 线程池可服务更多并发任务 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 超时 + 取消 ⟹ 避免挂起 | `tokio::time::timeout` 与 AbortHandle | 资源不会被无限期占用 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 结构化并发 ⟹ 简化生命周期 | 子任务与父任务共命运 | 子进程在父任务取消时被正确清理 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"异步进程管理总是比同步快\" ⟹ 不成立。低并发或 CPU 密集型任务可能因运行时开销而劣势。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"取消任务后子进程会自动结束\" ⟹ 不成立。需在 Drop 或取消逻辑中显式 `kill`/`wait` 子进程。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"可以直接混用 `std::process` 与 `tokio::process` 句柄\" ⟹ 不成立。混用易导致阻塞与竞争条件。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -24910,20 +25064,28 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../01_async/02_async.md",
         "../01_async/39_future_and_executor_mechanisms.md",
         "01_process_model_and_lifecycle.md",
-        "02_advanced_process_management.md"
+        "02_advanced_process_management.md",
+        "05_ipc_mechanisms.md",
+        "06_process_monitoring_and_diagnostics.md",
+        "10_modern_process_libraries.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 6,
+      "matrix_rows": 10,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Async](../01_async/02_async.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)"
+        ],
+        "post": [
+          "[IPC Mechanisms](05_ipc_mechanisms.md) · [Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Modern Process Libraries](10_modern_process_libraries.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -24931,9 +25093,46 @@
       "layer": "L3",
       "title": "Rust 跨平台进程管理",
       "positioning": "",
-      "line_count": 261,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 308,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Platform Differences ⟹ cfg Abstraction ⟹ Portable API",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过平台差异 ⟹ 条件编译 ⟹ 统一接口的定理链设计可移植代码。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 条件编译隔离 ⟹ 可移植性 | 平台代码限制在最小模块 | 上层 API 保持统一 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 平台扩展 trait ⟹ 类型安全 | `std::os::unix::process::CommandExt` | 编译期阻止在错误平台调用 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| CI 矩阵覆盖 ⟹ 缺陷早发 | 多 OS/架构持续集成 | 平台相关问题在合并前暴露 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"`std::process` 完全隐藏了所有平台差异\" ⟹ 不成立。信号、权限、路径分隔符仍需显式处理。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"只需在开发机上测试即可保证跨平台正确\" ⟹ 不成立。Windows 与 Unix 的进程模型差异可能导致仅在特定平台暴露的 bug。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"条件编译会降低代码可读性\" ⟹ 不成立。合理封装的 cfg 模块比分支平台代码更易维护。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -24970,20 +25169,28 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../02_intermediate/05_modules_and_visibility/10_module_system.md",
         "../03_proc_macros/28_conditional_compilation.md",
         "01_process_model_and_lifecycle.md",
         "02_advanced_process_management.md",
-        "03_async_process_management.md"
+        "03_async_process_management.md",
+        "05_ipc_mechanisms.md",
+        "07_process_security_and_sandboxing.md",
+        "10_modern_process_libraries.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 8,
+      "matrix_rows": 12,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Conditional Compilation](../03_proc_macros/28_conditional_compilation.md) · [Module System](../../02_intermediate/05_modules_and_visibility/10_module_system.md)"
+        ],
+        "post": [
+          "[IPC Mechanisms](05_ipc_mechanisms.md) · [Process Security](07_process_security_and_sandboxing.md) · [Modern Process Libraries](10_modern_process_libraries.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -24991,9 +25198,46 @@
       "layer": "L3",
       "title": "Rust 进程间通信机制（IPC）",
       "positioning": "",
-      "line_count": 227,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 274,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: IPC Mechanism ⟹ Latency/Throughput Trade-off ⟹ Safety",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过机制特性 ⟹ 选型 ⟹ 安全边界的定理链进行工程决策。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 管道简单 ⟹ 低开销但仅限亲缘进程 | 匿名管道基于文件描述符 | 适合父子进程单向流 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| Unix 域套接字 ⟹ 高吞吐本地通信 | 绕过网络协议栈 | 适合同机复杂双向通信 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 共享内存 ⟹ 零拷贝但需同步 | 多个进程映射同一段物理内存 | 必须配合 Mutex/Semaphore 避免数据竞争 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"共享内存总是最快的 IPC\" ⟹ 不成立。若同步开销过高或数据量小，其优势可能被抵消。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"管道可以双向通信\" ⟹ 不成立。匿名管道通常是单向的，双向通信需创建两个管道或改用套接字。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"IPC 数据不需要序列化\" ⟹ 不成立。进程地址空间独立，必须通过协议或序列化传递结构化数据。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -25037,21 +25281,29 @@
       "sources": [],
       "cross_references": [
         "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/02_memory_management/12_smart_pointers.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../00_concurrency/01_concurrency.md",
         "../00_concurrency/11_atomics_and_memory_ordering.md",
         "../06_low_level_patterns/18_network_programming.md",
-        "01_process_model_and_lifecycle.md"
+        "01_process_model_and_lifecycle.md",
+        "06_process_monitoring_and_diagnostics.md",
+        "07_process_security_and_sandboxing.md",
+        "08_process_performance_engineering.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 15,
+      "matrix_rows": 19,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)"
+        ],
+        "post": [
+          "[Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Process Security](07_process_security_and_sandboxing.md) · [Process Performance Engineering](08_process_performance_engineering.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -25059,9 +25311,46 @@
       "layer": "L3",
       "title": "Rust 进程监控与诊断",
       "positioning": "",
-      "line_count": 225,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 272,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Observable Metrics ⟹ Diagnostic Loop ⟹ Recovery",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过指标 ⟹ 诊断 ⟹ 恢复的定理链构建监控闭环。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 可观测指标 ⟹ 快速定位 | 收集退出码、CPU、内存、I/O 与日志 | 异常模式可被量化识别 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 结构化日志 ⟹ 可查询 | JSON/OTLP 格式替代自由文本 | 诊断效率与告警准确率提升 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 诊断闭环 ⟹ 系统韧性 | 监控—告警—恢复形成反馈 | 故障影响面被最小化 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"监控只在生产环境重要\" ⟹ 不成立。开发阶段的监控可提前暴露资源泄漏与性能退化。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"只要进程还在运行就是健康的\" ⟹ 不成立。进程可能处于死锁或无限循环状态。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"日志越多越好\" ⟹ 不成立。无结构化的高频日志会淹没关键信号并增加存储成本。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [
@@ -25113,17 +25402,23 @@
         "02_advanced_process_management.md",
         "03_async_process_management.md",
         "05_ipc_mechanisms.md",
-        "08_process_performance_engineering.md"
+        "07_process_security_and_sandboxing.md",
+        "08_process_performance_engineering.md",
+        "09_process_testing_and_benchmarking.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 10,
+      "matrix_rows": 14,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [IPC Mechanisms](05_ipc_mechanisms.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)"
+        ],
+        "post": [
+          "[Process Security](07_process_security_and_sandboxing.md) · [Process Performance Engineering](08_process_performance_engineering.md) · [Process Testing](09_process_testing_and_benchmarking.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -25131,9 +25426,46 @@
       "layer": "L3",
       "title": "Rust 进程安全与沙箱",
       "positioning": "",
-      "line_count": 189,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 236,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Least Privilege ⟹ Isolation Boundary ⟹ Attack Surface Reduction",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过最小权限 ⟹ 隔离边界 ⟹ 攻击面缩减的定理链分析安全方案。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 权限降级 ⟹ 减少受损影响 | 以非特权用户启动子进程 | 即使子进程被攻破，主机暴露面有限 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 命名空间隔离 ⟹ 资源边界 | PID/network/mount namespace | 子进程无法看到或访问全局资源 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| seccomp 过滤 ⟹ 系统调用收敛 | 限制可使用的 syscall | 攻击者可利用的内核接口大幅减少 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"Rust 的内存安全保证已经让沙箱多余\" ⟹ 不成立。Rust 无法限制运行时特权、网络访问或文件系统操作。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"沙箱越严格越好\" ⟹ 不成立。过度严格的沙箱会增加运维复杂度并破坏功能可用性。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"只需在容器里运行就足够安全\" ⟹ 不成立。容器共享内核，仍需 seccomp、capability 等额外层。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [
@@ -25198,20 +25530,27 @@
         "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../06_ecosystem/07_security_and_cryptography/19_security_practices.md",
         "../00_concurrency/01_concurrency.md",
+        "../02_unsafe/03_unsafe.md",
         "01_process_model_and_lifecycle.md",
         "04_cross_platform_process_management.md",
         "05_ipc_mechanisms.md",
-        "08_process_performance_engineering.md"
+        "08_process_performance_engineering.md",
+        "09_process_testing_and_benchmarking.md",
+        "10_modern_process_libraries.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 10,
+      "matrix_rows": 14,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [IPC Mechanisms](05_ipc_mechanisms.md) · [Unsafe Rust](../02_unsafe/03_unsafe.md)"
+        ],
+        "post": [
+          "[Process Performance Engineering](08_process_performance_engineering.md) · [Process Testing](09_process_testing_and_benchmarking.md) · [Modern Process Libraries](10_modern_process_libraries.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -25219,9 +25558,46 @@
       "layer": "L3",
       "title": "Rust 进程性能工程",
       "positioning": "",
-      "line_count": 165,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 212,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Spawn Latency ⟹ Throughput ⟹ Resource Reclaim",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过创建延迟 ⟹ 吞吐 ⟹ 回收延迟的定理链优化系统。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 进程池化 ⟹ 降低创建延迟 | 复用已初始化子进程 | 单位任务响应时间与系统负载更稳定 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 零拷贝 IPC ⟹ 提升吞吐 | 共享内存 / memfd 避免数据拷贝 | 大数据量场景下 CPU 占用显著下降 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 及时回收 ⟹ 避免资源耗尽 | `wait` 与超时机制快速释放句柄 | 长时运行服务可保持资源可控 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"进程数越少性能越好\" ⟹ 不成立。过少会限制并行度，无法利用多核。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"零拷贝总是优于拷贝\" ⟹ 不成立。小数据量下同步开销可能超过拷贝收益。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"只优化热点代码就够了\" ⟹ 不成立。进程创建、IPC 与回收的全链路都可能成为瓶颈。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [
@@ -25257,17 +25633,23 @@
         "01_process_model_and_lifecycle.md",
         "03_async_process_management.md",
         "05_ipc_mechanisms.md",
-        "06_process_monitoring_and_diagnostics.md"
+        "06_process_monitoring_and_diagnostics.md",
+        "09_process_testing_and_benchmarking.md",
+        "10_modern_process_libraries.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 6,
+      "matrix_rows": 10,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [IPC Mechanisms](05_ipc_mechanisms.md) · [Concurrency](../00_concurrency/01_concurrency.md)"
+        ],
+        "post": [
+          "[Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Process Testing](09_process_testing_and_benchmarking.md) · [Modern Process Libraries](10_modern_process_libraries.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -25275,9 +25657,46 @@
       "layer": "L3",
       "title": "Rust 进程测试与基准",
       "positioning": "",
-      "line_count": 194,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 241,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Unit Test ⟹ Integration Pipeline ⟹ CI Gate",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过单元测试 ⟹ 集成管道 ⟹ CI 门禁的定理链保证质量。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 确定性输入 ⟹ 可重复测试 | 固定环境变量、参数与工作目录 |  flaky 测试比例下降 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 超时约束 ⟹ 防止挂起 | 为每个外部命令设置时间上限 | CI 不会因为死锁而无限等待 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 压力测试 ⟹ 暴露资源竞争 | 高并发创建/通信子进程 | 句柄泄漏与竞态条件可被复现 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"进程测试只能在集成阶段做\" ⟹ 不成立。通过抽象接口与 mock，单元测试同样可以验证进程逻辑。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"测试通过一次就代表稳定\" ⟹ 不成立。进程状态受环境与调度影响，需要重复与压力测试。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"基准测试只需测最优路径\" ⟹ 不成立。冷启动、失败路径与并发场景同样影响生产表现。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [
@@ -25322,6 +25741,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../01_foundation/10_testing_basics/16_testing_basics.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md",
@@ -25330,17 +25750,23 @@
         "01_process_model_and_lifecycle.md",
         "02_advanced_process_management.md",
         "03_async_process_management.md",
-        "08_process_performance_engineering.md"
+        "06_process_monitoring_and_diagnostics.md",
+        "08_process_performance_engineering.md",
+        "10_modern_process_libraries.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 4,
+      "matrix_rows": 8,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Testing Basics](../../01_foundation/10_testing_basics/16_testing_basics.md)"
+        ],
+        "post": [
+          "[Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Process Performance Engineering](08_process_performance_engineering.md) · [Modern Process Libraries](10_modern_process_libraries.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -25348,9 +25774,46 @@
       "layer": "L3",
       "title": "Rust 现代进程管理库",
       "positioning": "",
-      "line_count": 182,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 229,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Requirement ⟹ Library Selection ⟹ Ecosystem Integration",
+          "type": "paragraph"
+        },
+        {
+          "text": "3. **机制推理**: 通过需求 ⟹ 库选型 ⟹ 生态集成的定理链做出技术决策。",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 需求匹配 ⟹ 降低复杂度 | 选择抽象级别与场景相符的库 | 代码更简洁、可维护性更高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| tokio::process ⟹ 异步生态集成 | 与 Tokio 运行时无缝协作 | 高并发异步服务中减少阻塞 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| nix/procfs ⟹ 底层可控性 | 直接操作系统接口与 /proc | 需要精细控制的系统工具首选 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **反命题 1**: \"标准库总是最好的选择\" ⟹ 不成立。复杂管道、异步管理或平台底层控制需要生态库支持。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 2**: \"库越新越好\" ⟹ 不成立。维护状态、社区成熟度与兼容性同样关键。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **反命题 3**: \"引入多个进程库不会增加复杂度\" ⟹ 不成立。库之间可能带来版本冲突与抽象层不一致。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [
@@ -25410,17 +25873,23 @@
         "01_process_model_and_lifecycle.md",
         "03_async_process_management.md",
         "04_cross_platform_process_management.md",
-        "07_process_security_and_sandboxing.md"
+        "07_process_security_and_sandboxing.md",
+        "08_process_performance_engineering.md",
+        "09_process_testing_and_benchmarking.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 17,
+      "matrix_rows": 21,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Async Process Management](03_async_process_management.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)"
+        ],
+        "post": [
+          "[Process Performance Engineering](08_process_performance_engineering.md) · [Process Security](07_process_security_and_sandboxing.md) · [Process Testing](09_process_testing_and_benchmarking.md)"
+        ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {

@@ -1,6 +1,14 @@
 > **EN**: Process Testing and Benchmarking in Rust
 > **Summary**: Testing strategies, process-specific test techniques, benchmarking, stress testing, and CI integration for Rust process management.
 > **Rust Version**: 1.96.1+
+> **受众**: [专家]
+> **内容分级**: [专家级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **A+P** — Application + Procedure
+> **双维定位**: A×Eva — 评价进程测试与基准策略
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Testing Basics](../../01_foundation/10_testing_basics/16_testing_basics.md)
+> **后置概念**: [Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Process Performance Engineering](08_process_performance_engineering.md) · [Modern Process Libraries](10_modern_process_libraries.md)
+> **定理链**: Unit Test ⟹ Integration Pipeline ⟹ CI Gate
 
 # Rust 进程测试与基准
 
@@ -191,3 +199,42 @@ flowchart LR
 ---
 
 > **权威来源**: [The Rust Programming Language — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) · [Criterion.rs](https://bheisler.github.io/criterion.rs/book/) · [Rust By Example — Process](https://doc.rust-lang.org/rust-by-example/std_misc/process.html)
+
+## 认知路径
+
+1. **问题识别**: 识别进程相关代码在单元测试、集成测试与 CI 中的特殊挑战。
+2. **概念建立**: 掌握命令执行验证、管道测试、超时/取消测试与压力测试技术。
+3. **机制推理**: 通过单元测试 ⟹ 集成管道 ⟹ CI 门禁的定理链保证质量。
+4. **边界辨析**: 辨析“进程测试只能在集成阶段做”等反命题，理解可测试性设计的重要性。
+5. **迁移应用**: 将进程测试与监控、性能、生态库主题链接。
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 确定性输入 ⟹ 可重复测试 | 固定环境变量、参数与工作目录 |  flaky 测试比例下降 |
+| 超时约束 ⟹ 防止挂起 | 为每个外部命令设置时间上限 | CI 不会因为死锁而无限等待 |
+| 压力测试 ⟹ 暴露资源竞争 | 高并发创建/通信子进程 | 句柄泄漏与竞态条件可被复现 |
+
+## 反命题
+
+> **反命题 1**: "进程测试只能在集成阶段做" ⟹ 不成立。通过抽象接口与 mock，单元测试同样可以验证进程逻辑。
+>
+> **反命题 2**: "测试通过一次就代表稳定" ⟹ 不成立。进程状态受环境与调度影响，需要重复与压力测试。
+>
+> **反命题 3**: "基准测试只需测最优路径" ⟹ 不成立。冷启动、失败路径与并发场景同样影响生产表现。
+>
+## 反向推理
+
+> **反向推理 1**: 发现 CI 偶发超时 ⟸ 说明缺少确定性超时设置或测试依赖外部环境。
+>
+> **反向推理 2**: 发现压力测试下句柄泄漏 ⟸ 说明 `wait` 或 Drop 逻辑未覆盖所有分支。
+>
+## 过渡段
+
+> **过渡**: 从测试分层过渡到具体技巧，可以理解进程代码在不同测试层级需要不同的抽象策略。
+>
+> **过渡**: 从具体技巧过渡到超时与取消，可以建立防止测试挂起的防御性实践。
+>
+> **过渡**: 从防御性测试过渡到压力与 CI 集成，可以形成高可信度的进程代码交付流程。
+>

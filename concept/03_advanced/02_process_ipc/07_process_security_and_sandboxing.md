@@ -1,6 +1,14 @@
 > **EN**: Process Security and Sandboxing in Rust
 > **Summary**: Process isolation, privilege dropping, resource limits, namespaces, seccomp, and sandbox design for Rust child processes.
 > **Rust Version**: 1.96.1+
+> **受众**: [专家]
+> **内容分级**: [专家级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: A×Eva — 评价进程安全与沙箱设计
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [IPC Mechanisms](05_ipc_mechanisms.md) · [Unsafe Rust](../02_unsafe/03_unsafe.md)
+> **后置概念**: [Process Performance Engineering](08_process_performance_engineering.md) · [Process Testing](09_process_testing_and_benchmarking.md) · [Modern Process Libraries](10_modern_process_libraries.md)
+> **定理链**: Least Privilege ⟹ Isolation Boundary ⟹ Attack Surface Reduction
 
 # Rust 进程安全与沙箱
 
@@ -186,3 +194,42 @@ flowchart TD
 ---
 
 > **权威来源**: [Rust Standard Library — std::process](https://doc.rust-lang.org/std/process/) · [nix crate](https://docs.rs/nix/) · [seccompiler crate](https://docs.rs/seccompiler/) · [Linux kernel — namespaces/cgroups/seccomp](https://www.kernel.org/doc/html/latest/)
+
+## 认知路径
+
+1. **问题识别**: 识别不可信或高敏感子进程对主机安全的威胁。
+2. **概念建立**: 掌握权限降级、资源限制、命名空间、seccomp 与沙箱设计原则。
+3. **机制推理**: 通过最小权限 ⟹ 隔离边界 ⟹ 攻击面缩减的定理链分析安全方案。
+4. **边界辨析**: 辨析“Rust 内存安全等于进程安全”等反命题，理解运行时特权边界的重要性。
+5. **迁移应用**: 将沙箱与性能、测试、生态库主题链接。
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 权限降级 ⟹ 减少受损影响 | 以非特权用户启动子进程 | 即使子进程被攻破，主机暴露面有限 |
+| 命名空间隔离 ⟹ 资源边界 | PID/network/mount namespace | 子进程无法看到或访问全局资源 |
+| seccomp 过滤 ⟹ 系统调用收敛 | 限制可使用的 syscall | 攻击者可利用的内核接口大幅减少 |
+
+## 反命题
+
+> **反命题 1**: "Rust 的内存安全保证已经让沙箱多余" ⟹ 不成立。Rust 无法限制运行时特权、网络访问或文件系统操作。
+>
+> **反命题 2**: "沙箱越严格越好" ⟹ 不成立。过度严格的沙箱会增加运维复杂度并破坏功能可用性。
+>
+> **反命题 3**: "只需在容器里运行就足够安全" ⟹ 不成立。容器共享内核，仍需 seccomp、capability 等额外层。
+>
+## 反向推理
+
+> **反向推理 1**: 发现子进程可访问不应有的文件 ⟸ 说明未正确设置 chroot/mount namespace 或权限。
+>
+> **反向推理 2**: 发现 syscall 审计中出现异常系统调用 ⟸ 说明 seccomp 策略未覆盖或子进程被注入代码。
+>
+## 过渡段
+
+> **过渡**: 从权限最小化过渡到资源限制，可以理解安全沙箱的第一层是“能做什么”而非“怎么做”。
+>
+> **过渡**: 从资源限制过渡到命名空间隔离，可以建立纵深防御的多层边界。
+>
+> **过渡**: 从隔离边界过渡到攻击面评估，可以理解沙箱设计需要在安全性与可用性之间权衡。
+>

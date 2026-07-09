@@ -1,6 +1,14 @@
 > **EN**: Modern Process Management Libraries in Rust
 > **Summary**: Ecosystem survey of Rust process management libraries: std::process, tokio::process, duct, nix, sysinfo, procfs, daemonize, caps, users.
 > **Rust Version**: 1.96.1+
+> **受众**: [专家]
+> **内容分级**: [专家级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: A×Eva — 评价现代进程管理库选型
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Async Process Management](03_async_process_management.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
+> **后置概念**: [Process Performance Engineering](08_process_performance_engineering.md) · [Process Security](07_process_security_and_sandboxing.md) · [Process Testing](09_process_testing_and_benchmarking.md)
+> **定理链**: Requirement ⟹ Library Selection ⟹ Ecosystem Integration
 
 # Rust 现代进程管理库
 
@@ -179,3 +187,42 @@ flowchart TD
 ---
 
 > **权威来源**: [crates.io](https://crates.io/) · [Tokio Process](https://docs.rs/tokio/latest/tokio/process/) · [duct crate](https://docs.rs/duct/) · [nix crate](https://docs.rs/nix/) · [sysinfo crate](https://docs.rs/sysinfo/) · [procfs crate](https://docs.rs/procfs/) · [daemonize crate](https://docs.rs/daemonize/)
+
+## 认知路径
+
+1. **问题识别**: 识别不同场景对同步/异步、易用性、底层控制与跨平台支持的需求差异。
+2. **概念建立**: 掌握 std::process、tokio::process、duct、nix、sysinfo、daemonize 等库的适用场景。
+3. **机制推理**: 通过需求 ⟹ 库选型 ⟹ 生态集成的定理链做出技术决策。
+4. **边界辨析**: 辨析“标准库总是足够”等反命题，理解生态库在复杂场景中的价值。
+5. **迁移应用**: 将库选型与性能、安全、测试主题链接。
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 需求匹配 ⟹ 降低复杂度 | 选择抽象级别与场景相符的库 | 代码更简洁、可维护性更高 |
+| tokio::process ⟹ 异步生态集成 | 与 Tokio 运行时无缝协作 | 高并发异步服务中减少阻塞 |
+| nix/procfs ⟹ 底层可控性 | 直接操作系统接口与 /proc | 需要精细控制的系统工具首选 |
+
+## 反命题
+
+> **反命题 1**: "标准库总是最好的选择" ⟹ 不成立。复杂管道、异步管理或平台底层控制需要生态库支持。
+>
+> **反命题 2**: "库越新越好" ⟹ 不成立。维护状态、社区成熟度与兼容性同样关键。
+>
+> **反命题 3**: "引入多个进程库不会增加复杂度" ⟹ 不成立。库之间可能带来版本冲突与抽象层不一致。
+>
+## 反向推理
+
+> **反向推理 1**: 发现跨平台代码大量重复 ⟸ 说明应评估更高层抽象库如 `duct`。
+>
+> **反向推理 2**: 发现需要直接操作 namespace/capability ⟸ 说明需要引入 `nix`/`caps` 等底层库。
+>
+## 过渡段
+
+> **过渡**: 从核心库对比过渡到选型原则，可以理解没有万能库，只有与需求匹配的库。
+>
+> **过渡**: 从选型原则过渡到异步与底层库，可以建立“通用场景用 std/tokio，特殊需求用 nix/caps”的决策树。
+>
+> **过渡**: 从库选型过渡到性能、安全与测试，可以理解生态选择需要与整个工程质量体系协同。
+>

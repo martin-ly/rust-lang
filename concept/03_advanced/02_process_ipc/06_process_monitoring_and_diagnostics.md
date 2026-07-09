@@ -1,6 +1,14 @@
 > **EN**: Process Monitoring and Diagnostics in Rust
 > **Summary**: Monitoring process status, resource usage, logging, and diagnostic techniques for Rust child processes.
 > **Rust Version**: 1.96.1+
+> **受众**: [专家]
+> **内容分级**: [专家级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **A+P** — Application + Procedure
+> **双维定位**: A×Eva — 评价进程监控与诊断方法
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [IPC Mechanisms](05_ipc_mechanisms.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
+> **后置概念**: [Process Security](07_process_security_and_sandboxing.md) · [Process Performance Engineering](08_process_performance_engineering.md) · [Process Testing](09_process_testing_and_benchmarking.md)
+> **定理链**: Observable Metrics ⟹ Diagnostic Loop ⟹ Recovery
 
 # Rust 进程监控与诊断
 
@@ -222,3 +230,42 @@ flowchart TD
 ---
 
 > **权威来源**: [Rust Standard Library — std::process](https://doc.rust-lang.org/std/process/) · [sysinfo crate](https://docs.rs/sysinfo/) · [procfs crate](https://docs.rs/procfs/) · [tracing crate](https://docs.rs/tracing/)
+
+## 认知路径
+
+1. **问题识别**: 识别子进程运行时状态、资源使用与输出日志的可观测性需求。
+2. **概念建立**: 掌握存活检查、资源监控、结构化日志与跟踪技术。
+3. **机制推理**: 通过指标 ⟹ 诊断 ⟹ 恢复的定理链构建监控闭环。
+4. **边界辨析**: 辨析“监控只在生产环境重要”等反命题，理解开发阶段同样需要可观测性。
+5. **迁移应用**: 将监控与诊断与安全、性能、测试主题链接。
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 可观测指标 ⟹ 快速定位 | 收集退出码、CPU、内存、I/O 与日志 | 异常模式可被量化识别 |
+| 结构化日志 ⟹ 可查询 | JSON/OTLP 格式替代自由文本 | 诊断效率与告警准确率提升 |
+| 诊断闭环 ⟹ 系统韧性 | 监控—告警—恢复形成反馈 | 故障影响面被最小化 |
+
+## 反命题
+
+> **反命题 1**: "监控只在生产环境重要" ⟹ 不成立。开发阶段的监控可提前暴露资源泄漏与性能退化。
+>
+> **反命题 2**: "只要进程还在运行就是健康的" ⟹ 不成立。进程可能处于死锁或无限循环状态。
+>
+> **反命题 3**: "日志越多越好" ⟹ 不成立。无结构化的高频日志会淹没关键信号并增加存储成本。
+>
+## 反向推理
+
+> **反向推理 1**: 发现内存占用持续上升但代码无显式泄漏 ⟸ 说明子进程句柄或管道未正确关闭。
+>
+> **反向推理 2**: 告警触发但日志无法定位根因 ⟸ 说明缺少结构化上下文或关键指标未采集。
+>
+## 过渡段
+
+> **过渡**: 从状态监控过渡到资源监控，可以建立“存活只是最低要求，资源健康才是可持续运行”的视角。
+>
+> **过渡**: 从资源监控过渡到结构化日志，可以理解指标与日志互补才能支撑根因分析。
+>
+> **过渡**: 从诊断技术过渡到恢复策略，可以形成监控闭环并链接安全与性能主题。
+>

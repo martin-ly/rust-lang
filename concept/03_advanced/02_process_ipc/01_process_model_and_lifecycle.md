@@ -1,6 +1,14 @@
 > **EN**: Process Model and Lifecycle in Rust
 > **Summary**: A canonical guide to Rust's process abstraction, lifecycle management, resource control, and IPC safety guarantees, grounded in `std::process` and modern async runtimes.
 > **Rust Version**: 1.96.1+
+> **受众**: [专家]
+> **内容分级**: [专家级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: S×Eva — 评价进程抽象与生命周期
+> **前置依赖**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Concurrency](../00_concurrency/01_concurrency.md)
+> **后置概念**: [Advanced Process Management](02_advanced_process_management.md) · [Async Process Management](03_async_process_management.md) · [IPC Mechanisms](05_ipc_mechanisms.md)
+> **定理链**: OS Process ⟹ std::process::Command ⟹ Resource Control
 
 # Rust 进程模型与生命周期
 
@@ -363,3 +371,42 @@ fn main() -> std::io::Result<()> {
     Ok(())
 }
 ```
+
+## 认知路径
+
+1. **问题识别**: 识别子进程生命周期中的资源泄漏与僵尸进程风险。
+2. **概念建立**: 掌握 `Command`、`Child`、`ExitStatus` 等核心抽象及其所有权语义。
+3. **机制推理**: 通过进程模型 ⟹ 生命周期 ⟹ 资源控制的定理链理解 `wait` 与管道关闭顺序。
+4. **边界辨析**: 辨析反命题中“进程即线程”的误区，明确地址空间隔离边界。
+5. **迁移应用**: 将进程模型与后续 IPC、监控、安全主题链接，形成系统级编程视图。
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 独立地址空间 ⟹ 内存安全隔离 | OS 为每个进程分配独立虚拟地址空间 | Rust 子进程不会因父进程悬垂指针而暴露未定义行为 |
+| 显式等待 ⟹ 避免僵尸进程 | 父进程调用 `wait`/`try_wait` 回收子进程 | 内核进程表项被释放，资源不泄漏 |
+| 所有权模型 ⟹ 句柄安全 | `Child` 与 `ChildStdin/Stdout` 实现 Drop | 管道与进程句柄随作用域正确关闭 |
+
+## 反命题
+
+> **反命题 1**: "进程可以像线程一样共享内存" ⟹ 不成立。进程拥有独立地址空间，共享数据必须通过显式 IPC 机制。
+>
+> **反命题 2**: "子进程退出后父进程无需等待" ⟹ 不成立。未等待的子进程会变成僵尸进程，长期占用内核资源。
+>
+> **反命题 3**: "Rust 的 `std::process` 完全隐藏了平台差异" ⟹ 不成立。信号、权限、路径等仍需平台特定处理。
+>
+## 反向推理
+
+> **反向推理 1**: 发现大量 `<defunct>` 进程 ⟸ 说明父进程未正确调用 `wait` 或处理 `Child` 句柄。
+>
+> **反向推理 2**: 管道写入阻塞但子进程已退出 ⟸ 说明未关闭不再使用的 `ChildStdin`，导致对端读端未收到 EOF。
+>
+## 过渡段
+
+> **过渡**: 从 OS 进程模型过渡到 Rust 的 `std::process` 抽象，可以理解标准库如何在保持所有权安全的同时封装平台差异。
+>
+> **过渡**: 从生命周期管理过渡到资源控制，可以建立“创建—使用—等待—回收”的完整责任链。
+>
+> **过渡**: 从资源控制过渡到后续 IPC 与安全主题，可以理解进程模型是更高阶机制的底座。
+>

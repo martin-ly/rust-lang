@@ -1,6 +1,14 @@
 > **EN**: Process Performance Engineering in Rust
 > **Summary**: Performance analysis, profiling tools, zero-copy IPC, process pool optimization, and production monitoring for Rust process management.
 > **Rust Version**: 1.96.1+
+> **受众**: [专家]
+> **内容分级**: [专家级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **A+P** — Application + Procedure
+> **双维定位**: A×App — 应用进程级性能优化
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [IPC Mechanisms](05_ipc_mechanisms.md) · [Concurrency](../00_concurrency/01_concurrency.md)
+> **后置概念**: [Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Process Testing](09_process_testing_and_benchmarking.md) · [Modern Process Libraries](10_modern_process_libraries.md)
+> **定理链**: Spawn Latency ⟹ Throughput ⟹ Resource Reclaim
 
 # Rust 进程性能工程
 
@@ -162,3 +170,42 @@ flowchart TD
 ---
 
 > **权威来源**: [Rust Performance Book](https://nnethercote.github.io/perf-book/) · [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) · [nix crate](https://docs.rs/nix/) · [memmap2 crate](https://docs.rs/memmap2/)
+
+## 认知路径
+
+1. **问题识别**: 识别进程创建、执行、通信与回收全链路的性能瓶颈。
+2. **概念建立**: 掌握零拷贝 IPC、进程池、批量启动与资源回收技术。
+3. **机制推理**: 通过创建延迟 ⟹ 吞吐 ⟹ 回收延迟的定理链优化系统。
+4. **边界辨析**: 辨析“减少进程数总能提升性能”等反命题，理解并行度与资源竞争的关系。
+5. **迁移应用**: 将性能工程与监控、测试、生态库主题链接。
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 进程池化 ⟹ 降低创建延迟 | 复用已初始化子进程 | 单位任务响应时间与系统负载更稳定 |
+| 零拷贝 IPC ⟹ 提升吞吐 | 共享内存 / memfd 避免数据拷贝 | 大数据量场景下 CPU 占用显著下降 |
+| 及时回收 ⟹ 避免资源耗尽 | `wait` 与超时机制快速释放句柄 | 长时运行服务可保持资源可控 |
+
+## 反命题
+
+> **反命题 1**: "进程数越少性能越好" ⟹ 不成立。过少会限制并行度，无法利用多核。
+>
+> **反命题 2**: "零拷贝总是优于拷贝" ⟹ 不成立。小数据量下同步开销可能超过拷贝收益。
+>
+> **反命题 3**: "只优化热点代码就够了" ⟹ 不成立。进程创建、IPC 与回收的全链路都可能成为瓶颈。
+>
+## 反向推理
+
+> **反向推理 1**: 观察到 CPU 使用率不高但吞吐上不去 ⟸ 说明可能存在 IPC 或进程创建开销瓶颈。
+>
+> **反向推理 2**: 发现句柄数持续增长 ⟸ 说明子进程或管道未回收，导致资源耗尽。
+>
+## 过渡段
+
+> **过渡**: 从关键性能指标过渡到进程池，可以理解减少创建延迟是提升响应性的直接手段。
+>
+> **过渡**: 从进程池过渡到零拷贝 IPC，可以建立“计算并行 + 通信高效”的组合优化思路。
+>
+> **过渡**: 从通信优化过渡到资源回收，可以形成全链路性能工程的闭环。
+>

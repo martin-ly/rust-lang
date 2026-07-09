@@ -1,6 +1,14 @@
 > **EN**: Inter-Process Communication Mechanisms in Rust
 > **Summary**: IPC patterns in Rust: anonymous pipes, named pipes, Unix sockets, TCP/UDP sockets, shared memory, message queues, and signal handling.
 > **Rust Version**: 1.96.1+
+> **受众**: [专家]
+> **内容分级**: [专家级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S+A** — Structure + Application
+> **双维定位**: S×App — 应用 IPC 机制选型
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
+> **后置概念**: [Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Process Security](07_process_security_and_sandboxing.md) · [Process Performance Engineering](08_process_performance_engineering.md)
+> **定理链**: IPC Mechanism ⟹ Latency/Throughput Trade-off ⟹ Safety
 
 # Rust 进程间通信机制（IPC）
 
@@ -224,3 +232,42 @@ fn main() -> std::io::Result<()> {
     Ok(())
 }
 ```
+
+## 认知路径
+
+1. **问题识别**: 识别不同 IPC 机制在延迟、吞吐、复杂度与跨网络能力上的权衡。
+2. **概念建立**: 掌握匿名管道、命名管道、Unix 域套接字、TCP/UDP、共享内存与信号的使用场景。
+3. **机制推理**: 通过机制特性 ⟹ 选型 ⟹ 安全边界的定理链进行工程决策。
+4. **边界辨析**: 辨析“共享内存总是最快”等反命题，理解同步开销与数据一致性问题。
+5. **迁移应用**: 将 IPC 与监控、安全、性能工程主题链接。
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 管道简单 ⟹ 低开销但仅限亲缘进程 | 匿名管道基于文件描述符 | 适合父子进程单向流 |
+| Unix 域套接字 ⟹ 高吞吐本地通信 | 绕过网络协议栈 | 适合同机复杂双向通信 |
+| 共享内存 ⟹ 零拷贝但需同步 | 多个进程映射同一段物理内存 | 必须配合 Mutex/Semaphore 避免数据竞争 |
+
+## 反命题
+
+> **反命题 1**: "共享内存总是最快的 IPC" ⟹ 不成立。若同步开销过高或数据量小，其优势可能被抵消。
+>
+> **反命题 2**: "管道可以双向通信" ⟹ 不成立。匿名管道通常是单向的，双向通信需创建两个管道或改用套接字。
+>
+> **反命题 3**: "IPC 数据不需要序列化" ⟹ 不成立。进程地址空间独立，必须通过协议或序列化传递结构化数据。
+>
+## 反向推理
+
+> **反向推理 1**: 观察到 IPC 延迟随消息大小剧增 ⟸ 说明应评估共享内存或零拷贝方案。
+>
+> **反向推理 2**: 发现消息乱序或丢失 ⟸ 说明未在不可靠通道上实现序列号或确认机制。
+>
+## 过渡段
+
+> **过渡**: 从 IPC 机制概览过渡到具体实现，可以理解每种机制都是延迟、复杂度与可移植性的权衡。
+>
+> **过渡**: 从管道与套接字过渡到共享内存，可以建立“数据量小的时候用拷贝，数据量大的时候用映射”的选型直觉。
+>
+> **过渡**: 从共享内存过渡到安全与同步，可以理解 IPC 性能优势必须与同步原语配套使用。
+>
