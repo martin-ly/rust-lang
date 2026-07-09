@@ -44,7 +44,7 @@ Count: **122** files
 | `concept/00_meta/README.md` | L0 Meta / Navigation | 145 | wledge_topology/README.md) \| \| `placeholders/` \| SUMMARY.md 占位符 \| 待创建主题的导航占位 \| ## 核心索引文件 - [全局概念索引](04_navigation/concep |
 | `concept/00_meta/trpl_3rd_ed_mapping.md` | L0 Meta / Navigation | 8 | **EN**: TRPL 3rd Ed Chapter Mapping > **Summary**: Redirect stub pointing to the full TRPL 3rd Ed chapter-to-concept mapping |
 | `concept/01_foundation/01_ownership_borrow_lifetime/00_ownership_borrow_lifetime_knowledge_map.md` | L1 Foundation | 383 | 页为 `Ownership-Borrowing-Lifetimes` 知识拓扑的权威概念页；crate 文档仅保留导航 stub。 # Rust 所有权-借用-生命周期知识图谱 本页从**结构（Structure）**视角梳理 Rust 所有权 |
-| `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | L1 Foundation | 1895 | t` 的所有权例外](#83-补充manuallydrop-和-maybeuninit-的所有权例外) - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos) - [补充：`Drop` 与 `std::mem |
+| `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | L1 Foundation | 1895 | t`的所有权例外](#83-补充manuallydrop-和-maybeuninit-的所有权例外) - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos) - [补充：`Drop` 与 `std::mem |
 | `concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | L1 Foundation | 2040 | [核心差异](#核心差异) - [`AsRef` 多实现示例](#asref-多实现示例) - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos) - [12.1 `&str` 作为 `&[u8] |
 | `concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` | L1 Foundation | 1474 | 周期（Lifetimes）规则矩阵、形式化视角、NLL 分析、示例反例 - v2.2 (2026-05-14): 完成 TODO 双项——§13 Lifetime Elision 完整形式化（三条规则 ∀/⇒ 形式化、正例+反例、Rust Refe |
 | `concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md` | L1 Foundation | 1568 | - [16.6 代码示例：正确使用 + 典型错误](#166-代码示例正确使用--典型错误) - [十七、待补充与演进方向（TODOs）](#十七待补充与演进方向todos) - [17.1 Lifetime Elision |
@@ -62,7 +62,7 @@ Count: **122** files
 | `concept/02_intermediate/02_memory_management/08_interior_mutability.md` | L2 Intermediate | 871 | Mutex<T>` \| 简单可靠 \| \| 多线程 + 原子操作（Atomic Operations） \| `AtomicXxx` \| 最高性能 \| \| 不需要内部可变性 \| `&mut T` \| 编译时保证 \| ### 典型组合模式 - `R |
 | `concept/02_intermediate/02_memory_management/12_smart_pointers.md` | L2 Intermediate | 896 | Mutex<T>` \| 简单可靠 \| \| 多线程 + 原子操作（Atomic Operations） \| `AtomicXxx` \| 最高性能 \| \| 不需要内部可变性 \| `&mut T` \| 编译时保证 \| ### 典型组合模式 - `R |
 | `concept/02_intermediate/03_error_handling/04_error_handling.md` | L2 Intermediate | 2708 | 96-try-trait-与自定义--行为稳定化中) - [十、相关概念链接](#十相关概念链接) - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos) - [11.1 `std::backtrace: |
-| `concept/02_intermediate/05_modules_and_visibility/22_api_naming_conventions.md` | L2 Intermediate | 445 | capacity`） - `with_config` / `with_options` — 带配置对象 - `with_xxx` — 带某个特定属性 ```rust,ignore impl Task { pub fn with_prio |
+| `concept/02_intermediate/05_modules_and_visibility/22_api_naming_conventions.md` | L2 Intermediate | 445 | capacity`） -`with_config` / `with_options` — 带配置对象 - `with_xxx` — 带某个特定属性 ```rust,ignore impl Task { pub fn with_prio |
 | `concept/02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md` | L2 Intermediate | 827 | sers WHERE id = ?") .bind_int(42); // 编译器保证: // - 参数数量与占位符匹配（运行时检查） // - 参数类型与列类型兼容（数据库检查） // - 无字符串拼接导致的注入风险 ``` > |
 | `concept/03_advanced/01_async/02_async.md` | L3 Advanced | 3440 | 豁免、poll 递归调用链验证、与§3.1b 操作语义衔接） - v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Str |
 | `concept/03_advanced/01_async/39_future_and_executor_mechanisms.md` | L3 Advanced | 1045 | -- > **来源**: 本文档由 `crates/*/docs/` 合规整改迁移而来。原始 crate 文档现为摘要占位符，指向本权威页： > **权威来源**: [concept/03_advanced/01_async/39_futur |
@@ -76,18 +76,18 @@ Count: **122** files
 | `concept/03_advanced/03_proc_macros/33_macro_faq.md` | L3 Advanced | 781 | Practice > > **权威来源**: 本页为 `Macro FAQ` 的权威概念页；crate 文档仅保留导航 stub。 # 常见问题 (FAQ) - C11 Macro System **最后更新**: 2025-12-11 本文 |
 | `concept/03_advanced/03_proc_macros/34_syn_quote_reference.md` | L3 Advanced | 975 | *权威来源**: 本页为 `syn and quote Reference` 的权威概念页；crate 文档仅保留导航 stub。 # syn & quote 完整参考 **最后更新**: 2025-12-11 **适用版本**: syn 2. |
 | `concept/03_advanced/03_proc_macros/35_macro_hygiene.md` | L3 Advanced | 1028 | tion > > **权威来源**: 本页为 `Macro Hygiene` 的权威概念页；crate 文档仅保留导航 stub。 # 宏卫生性完整参考 **最后更新**: 2025-12-11 **适用版本**: Rust 1.96.1+ |
-| `concept/04_formal/00_type_theory/02_type_theory.md` | L4 Formal | 1738 | yping](https://en.wikipedia.org/wiki/Subtyping) --- ## 十二、待补充与演进方向（TODOs） - [x] **TODO**: 补充 Dependent type 与 Const Gene |
+| `concept/04_formal/00_type_theory/02_type_theory.md` | L4 Formal | 1738 | yping](<https://en.wikipedia.org/wiki/Subtyping>) --- ## 十二、待补充与演进方向（TODOs） - [x] **TODO**: 补充 Dependent type 与 Const Gene |
 | `concept/04_formal/00_type_theory/14_lambda_calculus.md` | L4 Formal | 752 | n(&dyn Fn(u64) -> u64, u64) -> u64, { // 近似实现 todo!() } 限制: ├── Rust 类型系统阻止直接的 Y 组合子 ├── 需要递归类型或 trai |
 | `concept/04_formal/00_type_theory/50_type_system_reference.md` | L4 Formal | 410 | 类型 \| `!` \| 发散类型 \| \| Inferred 类型 \| `_` \| 类型推断（Type Inference）占位 \| ## 二、动态大小类型（DST） DST 在编译期大小未知，必须置于指针之后： - `dyn Trait` |
-| `concept/04_formal/01_ownership_logic/01_linear_logic.md` | L4 Formal | 1239 | stBelt: POPL 2018](https://doi.org/10.1145/3158154) > ## 十三、待补充与演进方向（TODOs） - [x] **TODO**: 补充线性逻辑的 sequent calculus 完整规则集 |
-| `concept/04_formal/01_ownership_logic/03_ownership_formal.md` | L4 Formal | 1639 | or unsafe Rust](https://doi.org/10.1145/3656425) --- ## 十、待补充与演进方向（TODOs） - [x] **TODO**: 引入 Polonius 新 borrow checker 对 |
+| `concept/04_formal/01_ownership_logic/01_linear_logic.md` | L4 Formal | 1239 | stBelt: POPL 2018](<https://doi.org/10.1145/3158154>) > ## 十三、待补充与演进方向（TODOs） - [x] **TODO**: 补充线性逻辑的 sequent calculus 完整规则集 |
+| `concept/04_formal/01_ownership_logic/03_ownership_formal.md` | L4 Formal | 1639 | or unsafe Rust](<https://doi.org/10.1145/3656425>) --- ## 十、待补充与演进方向（TODOs） - [x] **TODO**: 引入 Polonius 新 borrow checker 对 |
 | `concept/04_formal/01_ownership_logic/09_linear_logic_applications.md` | L4 Formal | 743 | str) -> Result<Vec<Row>, Error> { // 在事务中查询 todo!() } } // 使用: let conn = Db::<Connection>::new(); let |
 | `concept/04_formal/02_separation_logic/04_rustbelt.md` | L4 Formal | 1422 | ：借用（Borrowing）与重分配的形式化处理](#79-vec-重新分配借用与重分配的形式化处理) - [十三、待补充与演进方向（TODOs）](#十三待补充与演进方向todos) - [十四、Wikipedia 概念对齐](#十四w |
-| `concept/04_formal/04_model_checking/32_kani.md` | L4 Formal | 383 | 围** \| 部分 `std` API（如浮点运算、I/O、网络）建模不完整，可能报 "unsupported" 或需要 stub。 \| \| **验证复杂度** \| 随着状态空间增长，求解时间可能指数级上升，需要合理设置边界或添加假设。 \| \| ** |
+| `concept/04_formal/04_model_checking/32_kani.md` | L4 Formal | 383 | 围**\| 部分 `std` API（如浮点运算、I/O、网络）建模不完整，可能报 "unsupported" 或需要 stub。 \| \| **验证复杂度** \| 随着状态空间增长，求解时间可能指数级上升，需要合理设置边界或添加假设。 \| \|** |
 | `concept/05_comparative/00_paradigms/03_paradigm_matrix.md` | L5 Comparative | 1213 | n_comparisons/04_safety_boundaries.md) \| 能力边界 \| --- ## 十三、待补充与演进方向（TODOs） - [x] **TODO**: 补充具体 benchmark 数据链接 - [x] **TO |
 | `concept/05_comparative/01_systems_languages/02_rust_vs_go.md` | L5 Comparative | 974 | GC 简化内存管理 ⟹ 降低开发者心智负担 ⟹ 适合快速开发与云原生微服务 ⟹ 但无法保证最坏情况延迟。 ## 十三、待补充与演进方向（TODOs） - [x] **TODO**: 补充具体微服务场景的性能对比数据 —— 已完成 §8.1 - |
 | `concept/05_comparative/02_managed_languages/07_rust_vs_python.md` | L5 Comparative | 685 | 示覆盖率 ├── mypy 等工具需要完整类型标注才能有效检查 ├── 大量遗留代码无类型提示 ├── 第三方库的类型 stub 不完整 └── 即使类型正确，运行时仍可能因鸭子类型而出错 边界 2: Rust 的学习曲线 ├── 所有权、生命周 |
-| `concept/05_comparative/03_domain_comparisons/04_safety_boundaries.md` | L5 Comparative | 1003 | (https://en.wikipedia.org/wiki/Memory_ordering) --- ## 十二、待补充与演进方向（TODOs） - [x] **高**: 补充每个边界条件的具体编译错误码和运行时错误信息 —— 已完成 § |
+| `concept/05_comparative/03_domain_comparisons/04_safety_boundaries.md` | L5 Comparative | 1003 | (<https://en.wikipedia.org/wiki/Memory_ordering>) --- ## 十二、待补充与演进方向（TODOs） - [x] **高**: 补充每个边界条件的具体编译错误码和运行时错误信息 —— 已完成 § |
 | `concept/06_ecosystem/00_toolchain/01_toolchain.md` | L6 Ecosystem | 1887 | - [十五、定理一致性（Coherence）矩阵（工具链保证层）](#十五定理一致性矩阵工具链保证层) - [十六、待补充与演进方向（TODOs）](#十六待补充与演进方向todos) - [权威来源索引](#权威来源索引) - [十 |
 | `concept/06_ecosystem/00_toolchain/57_quiz_toolchain.md` | L6 Ecosystem | 559 | 景**： \| 问题类型 \| 工具 \| \|:---\|:---\| \| 编译错误 \| `rustc --explain E0XXX`、`cargo check` \| \| 性能瓶颈 \| `cargo flamegraph`、`perf` \| \| 内存泄 |
 | `concept/06_ecosystem/00_toolchain/58_platform_rust_integration.md` | L6 Ecosystem | 312 | um-cxx-abi.github.io/cxx-abi/abi.html) > > **代码状态**: [综述级 — 待补充可编译示例] > > **EN**: Integrating Rust into Existing Platforms |
@@ -113,7 +113,7 @@ Count: **122** files
 | `concept/06_ecosystem/09_networking/05_formal_network_protocol_theory.md` | L6 Ecosystem | 558 | -- > **来源**: 本文档由 `crates/*/docs/` 合规整改迁移而来。原始 crate 文档现为摘要占位符，指向本权威页： > **权威来源**: [concept/06_ecosystem/09_networking/05 |
 | `concept/06_ecosystem/09_networking/06_networking_basics.md` | L6 Ecosystem | 858 | > > **权威来源**: 本页为 `Networking Basics` 的权威概念页；crate 文档仅保留导航 stub。 # C10 Networks - Tier 2: 网络基础实践 > **文档版本**: v1.0.0 > **最 |
 | `concept/06_ecosystem/11_domain_applications/06_blockchain.md` | L6 Ecosystem | 918 | 4 线性逻辑** \| 代币作为线性资源（不可复制、不可凭空产生） \| 总量守恒由类型系统保证 \| --- ## 八、待补充与演进方向（TODOs） - [x] **高**: 补充 Move 语言（Sui/Aptos）与 Rust 合约的所有 |
-| `concept/06_ecosystem/11_domain_applications/07_game_ecs.md` | L6 Ecosystem | 1361 | dBuffer` 的一次性消费、`Entity` 的不可复制 \| 资源消耗性状态的形式化近似 \| --- ## 九、待补充与演进方向（TODOs） - [x] **高**: 补充 Bevy 的 `RenderGraph` 与 wgpu 的所 |
+| `concept/06_ecosystem/11_domain_applications/07_game_ecs.md` | L6 Ecosystem | 1361 | dBuffer`的一次性消费、`Entity` 的不可复制 \| 资源消耗性状态的形式化近似 \| --- ## 九、待补充与演进方向（TODOs） - [x] **高**: 补充 Bevy 的 `RenderGraph` 与 wgpu 的所 |
 | `concept/06_ecosystem/11_domain_applications/49_game_engine_internals.md` | L6 Ecosystem | 1132 | 若 texture panic，mesh 永远不会加载，系统状态不一致 } // ✅ 修正: 使用 Result + 占位资源 fn good_asset_loading(asset_server: &AssetServer) -> Resu |
 | `concept/06_ecosystem/11_domain_applications/51_quantum_computing_rust.md` | L6 Ecosystem | 905 | engineering practices. > **内容分级**: [实验级] > **代码状态**: [综述级 — 待补充代码] > **后置概念**: [Future Roadmap](../../07_future/05_roadmaps |
 | `concept/06_ecosystem/11_domain_applications/59_wasm_glossary.md` | L6 Ecosystem | 367 | > **权威来源**: 本页为 `WebAssembly Glossary` 的权威概念页；crate 文档仅保留导航 stub。 # C12 WASM - 术语表 > **文档类型**: Tier 1 - 基础层 > **文档定位**: WA |
@@ -137,7 +137,7 @@ Count: **122** files
 | `concept/07_future/03_preview_features/26_specialization_preview.md` | L7 Future | 742 | # Specialization：Trait 实现的精确化与重叠解析 > **代码状态**: [综述级 — 待补充代码] > > **EN**: Specialization Preview > **Summary**: Previe |
 | `concept/07_future/03_preview_features/39_arbitrary_self_types_preview.md` | L7 Future | 349 | # Arbitrary Self Types 预览：自定义方法接收器 > **代码状态**: [综述级 — 待补充代码] > > **EN**: Arbitrary Self Types Preview > **Summary**: |
 | `concept/07_future/03_preview_features/45_std_autodiff_preview.md` | L7 Future | 325 | # `std::autodiff`：Rust 官方自动微分前沿追踪 > **代码状态**: [综述级 — 待补充代码] > > **EN**: Std Autodiff Preview > **Summary**: Std Auto |
-| `concept/07_future/04_research_and_experimental/01_ai_integration.md` | L7 Future | 1006 | .h1();` → `if (h0 == null) return; h0.h1();`），其中 `h0`、`h1` 为占位符。 3. **层次聚类**：构建 dendrogram（树状图），在更高层级合并相似模板，生成更通用但精度更低的模式。 |
+| `concept/07_future/04_research_and_experimental/01_ai_integration.md` | L7 Future | 1006 | .h1();` → `if (h0 == null) return; h0.h1();`），其中`h0`、`h1` 为占位符。 3. **层次聚类**：构建 dendrogram（树状图），在更高层级合并相似模板，生成更通用但精度更低的模式。 |
 | `concept/07_future/04_research_and_experimental/03_evolution.md` | L7 Future | 2178 | 除 8 个根目录级旧版索引（`00.md`/`03-07.md` 归档，`01.md` 已归档、`02.md` 0 字节占位符已删除）；③ 归档 3 个历史规划文件（`PLAN.md`、`PLAN_Semantic_Space_Wave.md` |
 | `concept/07_future/04_research_and_experimental/29_ebpf_rust.md` | L7 Future | 991 | Rust 编译器替代 eBPF 验证器** [Rex: Safe Rust for eBPF, arXiv:2501.xxxxx](https://arxiv.org/abs/2501.xxxxx)。 ### 4.1 问题域：eBPF 验证器 |
 | `concept/07_future/04_research_and_experimental/43_rust_for_linux.md` | L7 Future | 1017 | 。`docs/` 版本已改为重定向页；`concept/` 版本为项目权威主轨。 > **代码状态**: [综述级 — 待补充代码] > > **EN**: Operating Systems > **Summary**: Operating S |
@@ -193,7 +193,7 @@ Count: **12** files
 | `concept/06_ecosystem/03_design_patterns/41_workflow_theory.md` | L6 Ecosystem | 1390 | > { // ... 先 poll first，完成后用输出作为 second 的输入 todo!() } } // 编译期保证：顺序组合要求 W1 的输出类型 = W2 的输入类型 // Sequential |
 | `concept/06_ecosystem/07_security_and_cryptography/43_security_cryptography.md` | L6 Ecosystem | 927 | bytes); // ... ring 的 API 较为底层，通常直接使用 aes-gcm crate todo!() } // ring 的 Ed25519 签名 fn ring_sign(key_pair: &Ed25519Key |
 | `concept/06_ecosystem/11_domain_applications/06_blockchain.md` | L6 Ecosystem | 918 | (); // 可能 panic（长度不是32） // secp256k1 要求消息是 32 字节哈希值 todo!() } ``` > **修正**: > 椭圆曲线签名（ECDSA、Schnorr）要求消息先经过密码学哈希（SHA-2 |
-| `concept/07_future/03_preview_features/10_derive_coerce_pointee_preview.md` | L7 Future | 591 | ker::PhantomData<T>, } fn main() { let s: MyBox<str> = todo!(); } ``` > **修正**: `CoercePointee`（[RFC 3621](https://rust- |
+| `concept/07_future/03_preview_features/10_derive_coerce_pointee_preview.md` | L7 Future | 591 | ker::PhantomData<T>, } fn main() { let s: MyBox<str> = todo!(); } ``` > **修正**: `CoercePointee`（[RFC 3621](<https://rust-> |
 
 ## 6. Per-Layer Counts
 
@@ -213,6 +213,7 @@ Layer | Cat 1 | Cat 2 | Cat 3 | Cat 4 | Total flags |
 ### P0 — L1–L3 core concepts still missing TODO/code
 
 Core learning-path pages should not carry TODOs or unimplemented examples. For each file, either:
+
 - **Enrich in place** if the topic is essential and the file is the canonical page.
 - **Convert to redirect stub** if a better canonical page exists elsewhere in `concept/`.
 - **Archive** if the topic has been superseded or merged into another page.
@@ -267,6 +268,7 @@ Formal pages should either present complete definitions/proofs or explicitly red
 ### P2 — L6/L7 pages with `待补充代码`
 
 Ecosystem and future pages explicitly marked as missing code examples (the `待补充代码` status). Recommendation is usually **enrich in place** unless the crate/version is obsolete, in which case **archive**.
+
 - `concept/06_ecosystem/01_cargo/09_cargo_script.md` (696 lines)
 - `concept/06_ecosystem/05_systems_and_embedded/39_os_kernel.md` (414 lines)
 - `concept/06_ecosystem/05_systems_and_embedded/53_embedded_graphics.md` (1044 lines)
@@ -321,4 +323,4 @@ Meta/navigation placeholders are lowest priority; most should be **converted to 
 
 ---
 
-_Report generated by `tmp/content_completeness_audit_wave2.py`._
+*Report generated by `tmp/content_completeness_audit_wave2.py`.*
