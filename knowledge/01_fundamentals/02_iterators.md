@@ -76,7 +76,7 @@
 
 ### 1. array_windows - 滑动窗口迭代
 
-`array_windows` 是 Rust 1.94 引入的方法 [Rust 1.94 Release Notes / 2025; RFC 关于数组窗口迭代的设计决策; 核心语义: 在数组/切片上以固定大小的窗口进行迭代，返回 `[[T; N]]` 类型的窗口，编译期确定窗口大小 `N`](https://releases.rs/docs/1.94/)，在 Rust 1.96+ 中稳定可用。
+`array_windows` 是 Rust 1.94 引入的方法 [Rust 1.94 Release Notes / 2025; RFC 关于数组窗口迭代的设计决策; 核心语义: 在数组/切片上以固定大小的窗口进行迭代，返回 `[[T; N]]` 类型的窗口，编译期确定窗口大小 `N`](https://web.archive.org/web/*/https://releases.rs/docs/1.94/)，在 Rust 1.96+ 中稳定可用。
 
 #### 1.1 基础用法
 >

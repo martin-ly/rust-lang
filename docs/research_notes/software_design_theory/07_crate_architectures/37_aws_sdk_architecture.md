@@ -27,7 +27,7 @@
 >
 > **Bloom 层级**: L3-L5 (应用/分析/评价)
 >
-> **知识领域**: 云厂商 SDK、AWS、异步 HTTP 客户端、Smithy 代码生成、凭证链
+> **知识领域**: 云厂商 SDK、AWS、异步（Async） HTTP 客户端、Smithy 代码生成、凭证链
 >
 > **对应 Rust 版本**: 1.96.1+ (aws-sdk-rust 1.x)
 
@@ -49,7 +49,7 @@
 | **crate 组织** | 每服务一个 crate | 按需引入，避免无关服务的依赖膨胀 |
 | **配置模型** | `SdkConfig` + `RegionProviderChain` + 凭证链 | 环境、配置文件、IAM Role 自动回退 |
 | **运行时绑定** | 基于 Tokio 的异步 HTTP | 与 Rust 异步生态原生集成 |
-| **错误处理** | 每个操作返回 `Result<Output, SdkError<E>>` | 强类型服务错误与通用传输错误分离 |
+| **错误处理（Error Handling）** | 每个操作返回 `Result<Output, SdkError<E>>` | 强类型服务错误与通用传输错误分离 |
 
 > [来源: [awslabs/aws-sdk-rust 仓库](https://github.com/awslabs/aws-sdk-rust)]
 
@@ -142,7 +142,7 @@ while let Some(obj) = paginator.next().await {
 
 | 反例 | 错误表现 | 正确做法 |
 |:--|:--|:--|
-| 未配置区域或凭证 | 运行时 `NoRegion` / `NoCredentials` 错误 | 显式设置 `RegionProviderChain` 与凭证，或在环境中配置 |
+| 未配置区域或凭证 | 运行时（Runtime） `NoRegion` / `NoCredentials` 错误 | 显式设置 `RegionProviderChain` 与凭证，或在环境中配置 |
 | 每个请求新建 Client | 连接池无法复用，延迟与资源开销大 | 复用 `Client`，将其注入服务层 |
 | 忽略 `SdkError` 的分类 | 对所有错误统一重试导致幂等性问题 | 区分 `ServiceError`、`TimeoutError`、`DispatchFailure` 等 |
 | 硬编码 access key | 凭证泄露、轮换困难 | 使用 IAM Role、SSO、Secrets Manager 或凭证链 |

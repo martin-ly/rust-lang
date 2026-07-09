@@ -58,9 +58,9 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **安全**：在 Safe Rust 下，违反机制会导致编译错误或类型系统拒绝，从而避免内存安全/数据竞争等 UB。
-- **可判定**：是否满足该机制可由**编译期**算法判定（类型系统 + 固定规则），无需运行时或人工证明。
+- **可判定**：是否满足该机制可由**编译期**算法判定（类型系统（Type System） + 固定规则），无需运行时或人工证明。
 
-**例外**：RefCell 的借用为**运行时**可判定（违反则 panic）；死锁、进度为**不可判定**（需额外方法）。
+**例外**：RefCell 的借用为**运行时（Runtime）**可判定（违反则 panic）；死锁、进度为**不可判定**（需额外方法）。
 
 ---
 
@@ -71,10 +71,10 @@
 
 | 机制 | 可判定性 | 形式化文档 | Def/定理 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
-| 所有权 | 静态 | [ownership_model](formal_methods/10_ownership_model.md) | 规则 1–3, T2, T3 | 使用已移动值、双重释放 |
-| 借用 | 静态 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | 规则 5–8, T1 | 双重可变借用、悬垂引用 |
+| 所有权（Ownership） | 静态 | [ownership_model](formal_methods/10_ownership_model.md) | 规则 1–3, T2, T3 | 使用已移动值、双重释放 |
+| 借用（Borrowing） | 静态 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | 规则 5–8, T1 | 双重可变借用、悬垂引用 |
 | 生命周期 | 静态 | lifetime_formalization | LF1–LF2, LF-T1–T3 | 返回局部引用、存短命引用 |
-| Send | 静态 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | SEND1, SEND-T1 | Rc 跨线程、!Send 闭包 spawn |
+| Send | 静态 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | SEND1, SEND-T1 | Rc 跨线程、!Send 闭包（Closures） spawn |
 | Sync | 静态 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | SYNC1, SYNC-L1, SYNC-T1 | Cell 跨线程共享、Rc &T 跨线程 |
 | Pin/Unpin | 静态 | [pin_self_referential](formal_methods/10_pin_self_referential.md) | Def 1.1–2.2, T1–T3 | 未 Pin 自引用、栈上 !Unpin |
 | Future/async | 静态（边界） | [async_state_machine](formal_methods/10_async_state_machine.md) | Def 4.1–5.2, T6.1–T6.3 | 非 Send 跨 await、未 Pin 移动 |
@@ -100,7 +100,7 @@
 
 - **概念定义**：唯一所有者、移动语义、Copy/Clone 区分；形式化见 [ownership_model](formal_methods/10_ownership_model.md) 规则 1–3、Def 1.1–1.5。
 - **属性关系**：为借用的前提；borrow 规则 5–8 在单所有者下定义。
-- **解释论证**：无 GC 内存安全；设计理由见 [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md)。
+- **解释论证**：无 GC 内存安全（Memory Safety）；设计理由见 [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md)。
 - **形式证明**：定理 T2 唯一性、T3 内存安全；[PROOF_INDEX](10_proof_index.md)。
 - **反例**：使用已移动值、双重释放；[FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) 反例索引。
 
@@ -171,7 +171,7 @@
 - **概念定义**：Poll、Ready/Pending、async 状态机；[async_state_machine](formal_methods/10_async_state_machine.md) Def 4.1–5.2。
 - **属性关系**：依赖 Pin；跨 await 需 Send；并发 poll 需 Send+Sync。
 - **解释论证**：I/O 并发、无数据竞争；FLS Ch. 17.3。
-- **形式证明**：T6.1–T6.3 状态一致、并发安全、进度。
+- **形式证明**：T6.1–T6.3 状态一致、并发安全（Concurrency Safety）、进度。
 - **反例**：非 Send 跨 await、未 Pin 移动 Future。
 
 ### 3.8 类型系统 {#38-类型系统}
@@ -246,13 +246,13 @@
 | 特性 | 可判定性 | 安全边界 | 形式化 Def/定理 | 思维表征入口 |
 | :--- | :--- | :--- | :--- | :--- |
 | 线程 | 静态 | Safe 并发 | SPAWN1, SPAWN-T1 | [async_state_machine](formal_methods/10_async_state_machine.md)、[send_sync_formalization](formal_methods/10_send_sync_formalization.md)、06_boundary_analysis |
-| Future | 静态（边界） | Safe 异步 | Def 4.1–5.2, T6.1–T6.3 | async_state_machine、六篇并表、PROOF_INDEX |
+| Future | 静态（边界） | Safe 异步（Async） | Def 4.1–5.2, T6.1–T6.3 | async_state_machine、六篇并表、PROOF_INDEX |
 | async/await | 静态（边界） | Safe 异步 | 同上 + Send 跨 await | 同上、DESIGN_MECHANISM |
 | Pin | 静态 | Safe 自引用 | Def 1.1–2.2, T1–T3 | [pin_self_referential](formal_methods/10_pin_self_referential.md)、六篇并表 |
 | Send/Sync | 静态 | Safe 并发 | SEND1/SYNC1, SEND-T1/SYNC-T1 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md)、六篇并表、DESIGN_MECHANISM |
 | 通道 | 静态（接口） | Safe 并发 | CHAN1, CHAN-T1 | borrow_checker_proof、06_boundary |
 | Mutex/RwLock | 静态（接口） | Safe 并发 | MUTEX1, MUTEX-T1 | borrow_checker_proof、06_boundary |
-| 原子操作 | 静态（接口） | Safe 并发 | ATOMIC1, ATOMIC-T1 | ownership_model |
+| 原子操作（Atomic Operations） | 静态（接口） | Safe 并发 | ATOMIC1, ATOMIC-T1 | ownership_model |
 
 ### 6.2 Trait 与多态族 {#62-trait-与多态族}
 
@@ -262,7 +262,7 @@
 | 特性 | 可判定性 | 安全边界 | 形式化 Def/定理 | 思维表征入口 |
 | :--- | :--- | :--- | :--- | :--- |
 | Trait | 静态 | Safe 核心 | trait_system_formalization COH1/COH2 | type_theory、PROOF_INDEX |
-| 泛型 | 静态 | Safe 核心 | 单态化、类型规则 | type_system_foundations |
+| 泛型（Generics） | 静态 | Safe 核心 | 单态化（Monomorphization）、类型规则 | type_system_foundations |
 | 关联类型 / GATs | 静态 | Safe 核心 | advanced_types AT-L1 | type_theory |
 | Trait 对象 | 静态 | Safe 核心 | 对象安全 T1–T3 | trait_system_formalization |
 | **Send/Sync** | **静态** | **Safe 并发** | **SEND1/SYNC1, SEND-T1/SYNC-T1** | **send_sync_formalization、六篇并表** |
@@ -311,7 +311,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

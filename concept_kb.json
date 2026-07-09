@@ -6670,7 +6670,7 @@
       "layer": "L1",
       "title": "Ownership（所有权）",
       "positioning": "",
-      "line_count": 1831,
+      "line_count": 1833,
       "theorem_chains": [
         {
           "text": "> 引理 L1（所有权唯一性）⟹",
@@ -16039,7 +16039,7 @@
       "layer": "L2",
       "title": "分发机制 (Dispatch Mechanisms)",
       "positioning": "",
-      "line_count": 2025,
+      "line_count": 2031,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过静态分发 ⟹ 零成本/体积膨胀 与 动态分发 ⟹ 运行时开销/体积缩减 的定理链进行选型。",
@@ -17171,7 +17171,7 @@
       "layer": "L2",
       "title": "类型级编程 (Type-Level Programming)",
       "positioning": "",
-      "line_count": 653,
+      "line_count": 659,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过类型级数据 ⟹ trait 约束 ⟹ 编译期计算的定理链利用类型系统能力。",
@@ -21934,7 +21934,7 @@
       "layer": "L3",
       "title": "并发 模式：从消息 传递到锁自由的数据结构",
       "positioning": "深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权（Ownership）系统如何为并发安全（Concurrency Safety）提供编译期保证。",
-      "line_count": 2250,
+      "line_count": 2298,
       "theorem_chains": [
         {
           "text": "| 并发 模式：从消息 传递到锁自由的数据结构 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -22138,7 +22138,7 @@
           "flags": [
             "ignore"
           ],
-          "lines": 63,
+          "lines": 77,
           "should_fail": false,
           "code_preview": "use std::sync::atomic::{AtomicU32, Ordering};  #[derive(Debug, Clone)] pub enum ..."
         },
@@ -22146,7 +22146,7 @@
           "flags": [
             "ignore"
           ],
-          "lines": 58,
+          "lines": 92,
           "should_fail": false,
           "code_preview": "pub struct RouterActor<M> {     routes: HashMap<String, ActorRef<M>>,     routin..."
         },
@@ -24718,7 +24718,7 @@
       "layer": "L3",
       "title": "Future 与 Executor 机制 (Future and Executor Mechanisms)",
       "positioning": "",
-      "line_count": 1040,
+      "line_count": 1046,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 Future ⟹ Poll ⟹ Waker ⟹ Executor 的定理链理解异步任务生命周期。",
@@ -28801,7 +28801,7 @@
       "layer": "L3",
       "title": "术语表 - C11 Macro System",
       "positioning": "",
-      "line_count": 657,
+      "line_count": 662,
       "theorem_chains": [
         {
           "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
@@ -29035,7 +29035,7 @@
       "layer": "L3",
       "title": "常见问题 (FAQ) - C11 Macro System",
       "positioning": "",
-      "line_count": 777,
+      "line_count": 782,
       "theorem_chains": [
         {
           "text": "> **定理链**: Common Question ⟹ Mechanism Explanation ⟹ Best Practice",
@@ -29317,7 +29317,7 @@
       "layer": "L3",
       "title": "syn & quote 完整参考",
       "positioning": "",
-      "line_count": 971,
+      "line_count": 976,
       "theorem_chains": [
         {
           "text": "> **定理链**: Parse Input ⟹ Transform AST ⟹ Emit Tokens",
@@ -29576,7 +29576,7 @@
       "layer": "L3",
       "title": "宏卫生性完整参考",
       "positioning": "",
-      "line_count": 1019,
+      "line_count": 1029,
       "theorem_chains": [
         {
           "text": "> **定理链**: Hygiene ⟹ Span Selection ⟹ Name Collision Prevention",
@@ -31596,7 +31596,7 @@
       "layer": "L3",
       "title": "所有权性能优化",
       "positioning": "从所有权视角出发，系统梳理避免不必要拷贝、使用写时复制、优化内存布局、零拷贝解析与移动语义的最佳实践。",
-      "line_count": 174,
+      "line_count": 176,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过避免拷贝 ⟹ Cow/零拷贝 ⟹ 布局优化的定理链进行性能决策。",
@@ -46006,7 +46006,7 @@
       "layer": "L6",
       "title": "C09 设计模式 - 常见问题",
       "positioning": "",
-      "line_count": 482,
+      "line_count": 486,
       "theorem_chains": [
         {
           "text": "> **定理链**: Common Question ⟹ Pattern Mechanism ⟹ Best Practice",
@@ -46636,7 +46636,7 @@
       "layer": "L6",
       "title": "高性能网络服务架构 (High-Performance Network Service Architecture)",
       "positioning": "",
-      "line_count": 2055,
+      "line_count": 2057,
       "theorem_chains": [
         {
           "text": "| 零拷贝 ⟹ 降低延迟 | 避免用户态与内核态间数据拷贝 | 提升网络 I/O 吞吐 |",
@@ -47120,7 +47120,7 @@
       "layer": "L6",
       "title": "C10 Networks - Tier 2: WebSocket 实时通信",
       "positioning": "",
-      "line_count": 721,
+      "line_count": 723,
       "theorem_chains": [
         {
           "text": "> **定理链**: Real-Time Requirement ⟹ Connection State ⟹ Message Delivery",
@@ -50415,7 +50415,7 @@
       "layer": "L6",
       "title": "C10 Networks - Tier 2: 网络基础实践",
       "positioning": "",
-      "line_count": 857,
+      "line_count": 859,
       "theorem_chains": [
         {
           "text": "> **定理链**: Socket ⟹ Protocol ⟹ Application",
@@ -52991,7 +52991,7 @@
       "layer": "L6",
       "title": "C12 WASM - 术语表",
       "positioning": "",
-      "line_count": 366,
+      "line_count": 368,
       "theorem_chains": [
         {
           "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
@@ -53043,7 +53043,7 @@
       "layer": "L6",
       "title": "C12 WASM - 常见问题",
       "positioning": "",
-      "line_count": 468,
+      "line_count": 470,
       "theorem_chains": [
         {
           "text": "> **定理链**: Common Question ⟹ Mechanism Explanation ⟹ Best Practice",
@@ -53135,7 +53135,7 @@
       "layer": "L6",
       "title": "C12 WASM - JavaScript 互操作",
       "positioning": "",
-      "line_count": 467,
+      "line_count": 469,
       "theorem_chains": [
         {
           "text": "> **定理链**: wasm-bindgen ⟹ Type Mapping ⟹ Runtime Interaction",
@@ -53297,7 +53297,7 @@
       "layer": "L6",
       "title": "算法工程实践 (Algorithm Engineering Practice)",
       "positioning": "",
-      "line_count": 1938,
+      "line_count": 1940,
       "theorem_chains": [
         {
           "text": "| 复杂度分析 ⟹ 可扩展性预测 | 大 O 与内存占用评估 | 指导算法选型 |",
@@ -53707,7 +53707,7 @@
       "layer": "L6",
       "title": "形式化算法理论",
       "positioning": "",
-      "line_count": 263,
+      "line_count": 265,
       "theorem_chains": [
         {
           "text": "| 形式规约 ⟹ 无歧义需求 | 使用谓词与状态转换 | 精确定义期望行为 |",
@@ -53993,7 +53993,7 @@
       "layer": "L7",
       "title": "Rust 1.90 网络特性参考",
       "positioning": "",
-      "line_count": 751,
+      "line_count": 753,
       "theorem_chains": [
         {
           "text": "> **定理链**: Version Context ⟹ Feature Set ⟹ Migration Impact",
@@ -54128,7 +54128,7 @@
       "layer": "L7",
       "title": "Rust 1.91 稳定特性",
       "positioning": "",
-      "line_count": 2406,
+      "line_count": 2408,
       "theorem_chains": [
         {
           "text": "| 版本上下文 ⟹ 演进脉络 | 对比前后版本特性 | 理解语言发展方向 |",

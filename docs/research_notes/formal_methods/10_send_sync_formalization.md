@@ -2,7 +2,7 @@
 
 > **EN**: Send Sync Formalization
 > **Summary**: Send/Sync 形式化 Send Sync Formalization. (stub/archive redirect)
-> **概念族**: 并发安全 / Send/Sync
+> **概念族**: 并发安全（Concurrency Safety） / Send/Sync
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 > **内容分级**: [归档级]
 >
@@ -73,7 +73,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - Send/Sync 的 Def 与定理（SEND1、SYNC1、SEND-T1、SYNC-T1、SYNC-L1）
-- 反例索引（Rc !Send、Cell !Sync、非 Send 闭包 spawn）
+- 反例索引（Rc !Send、Cell !Sync、非 Send 闭包（Closures） spawn）
 - 与 [async_state_machine](10_async_state_machine.md)、
 - [borrow_checker_proof](10_borrow_checker_proof.md)、
 - [ownership_model](10_ownership_model.md) 的双向链接
@@ -145,7 +145,7 @@ $$\text{AutoSync}(\tau) \leftrightarrow \forall f \in \text{Fields}(\tau).\ \tex
 - 包含内部可变性（如 `Cell<T>`、`RefCell<T>`）的类型默认不实现 `Sync`
 - 手动实现 `!Sync` 可阻止自动派生
 
-**Def 2.4（组合类型的 Send/Sync 推导）**：对于组合类型（结构体、枚举、联合体），其 `Send` 和 `Sync` 实现遵循以下推导规则：
+**Def 2.4（组合类型的 Send/Sync 推导）**：对于组合类型（结构体（Struct）、枚举（Enum）、联合体），其 `Send` 和 `Sync` 实现遵循以下推导规则：
 
 | 组合类型 | Send 条件 | Sync 条件 |
 |:---------|:----------|:----------|
@@ -322,7 +322,7 @@ Def SEND1, SYNC1
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

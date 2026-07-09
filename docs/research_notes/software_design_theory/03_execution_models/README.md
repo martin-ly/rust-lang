@@ -60,7 +60,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-对同步、异步、并发、并行、分布式五类执行模型进行形式化分析，并与 Rust 形式化基础（async_state_machine、pin、Send/Sync、ownership、borrow）衔接。
+对同步、异步（Async）、并发、并行、分布式五类执行模型进行形式化分析，并与 Rust 形式化基础（async_state_machine、pin、Send/Sync、ownership、borrow）衔接。
 
 ---
 
@@ -109,8 +109,8 @@
 | :--- | :--- |
 | 异步状态机 | [async_state_machine](../../formal_methods/10_async_state_machine.md) |
 | Pin | [pin_self_referential](../../formal_methods/10_pin_self_referential.md) |
-| 借用 | [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) |
-| 所有权 | [ownership_model](../../formal_methods/10_ownership_model.md) |
+| 借用（Borrowing） | [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) |
+| 所有权（Ownership） | [ownership_model](../../formal_methods/10_ownership_model.md) |
 | Rust Book Ch16 | 线程、消息传递、Send/Sync |
 | Async Book | Future、async/await、Pin |
 
@@ -434,7 +434,7 @@ fn main() {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

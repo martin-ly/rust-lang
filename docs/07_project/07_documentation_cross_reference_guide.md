@@ -275,7 +275,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
 | **主索引** | `crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md` | ←→ [algorithms_cheatsheet](../02_reference/quick_reference/02_algorithms_cheatsheet.md) |
-| **速查卡** | [02_algorithms_cheatsheet.md](../02_reference/quick_reference/02_algorithms_cheatsheet.md) | → [ownership_model](../research_notes/formal_methods/10_ownership_model.md) §智能指针 → [05_guides/PERFORMANCE_TUNING_GUIDE](../05_guides/05_performance_tuning_guide.md) |
+| **速查卡** | [02_algorithms_cheatsheet.md](../02_reference/quick_reference/02_algorithms_cheatsheet.md) | → [ownership_model](../research_notes/formal_methods/10_ownership_model.md) §智能指针（Smart Pointer） → [05_guides/PERFORMANCE_TUNING_GUIDE](../05_guides/05_performance_tuning_guide.md) |
 | **指南** | [05_performance_tuning_guide.md](../05_guides/05_performance_tuning_guide.md) | ← [algorithms_cheatsheet](../02_reference/quick_reference/02_algorithms_cheatsheet.md) |
 
 ### C09 - 设计模式 {#c09---设计模式}
@@ -429,17 +429,17 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | [type_system](../02_reference/quick_reference/02_type_system.md) | [ADVANCED_TOPICS_DEEP_DIVE](../05_guides/05_advanced_topics_deep_dive.md) | 基础 ↔ 高级 |
 | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/05_async_programming_usage_guide.md) | 语法 ↔ 应用 |
 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | [THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/05_threads_concurrency_usage_guide.md) | 语法 ↔ 应用 |
-| [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) | [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/05_macro_system_usage_guide.md) | 泛型 ↔ 宏系统 |
+| [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) | [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/05_macro_system_usage_guide.md) | 泛型（Generics） ↔ 宏系统 |
 | design_patterns_cheatsheet | [DESIGN_PATTERNS_USAGE_GUIDE](../05_guides/05_design_patterns_usage_guide.md) | 模式速查 ↔ 模式应用 |
 | macros_cheatsheet | [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/05_macro_system_usage_guide.md) | 语法 ↔ 应用 |
 | [wasm_cheatsheet](../02_reference/quick_reference/02_wasm_cheatsheet.md) | [WASM_USAGE_GUIDE](../05_guides/05_wasm_usage_guide.md) | 语法 ↔ 应用 |
 | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) | [TESTING_COVERAGE_GUIDE](../05_guides/05_testing_coverage_guide.md) | 测试语法 ↔ 测试策略 |
 | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 工具 ↔ 应用 |
-| [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) | [TROUBLESHOOTING_GUIDE](../05_guides/05_troubleshooting_guide.md) | 错误处理 ↔ 故障排查 |
+| [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) | [TROUBLESHOOTING_GUIDE](../05_guides/05_troubleshooting_guide.md) | 错误处理（Error Handling） ↔ 故障排查 |
 | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](../05_guides/05_performance_tuning_guide.md) | 智能指针 ↔ 性能优化 |
 | [collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](../05_guides/05_performance_tuning_guide.md) | 集合 ↔ 性能优化 |
 | [strings_formatting_cheatsheet](../02_reference/quick_reference/02_strings_formatting_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 字符串 ↔ CLI应用 |
-| [modules_cheatsheet](../02_reference/quick_reference/02_modules_cheatsheet.md) | [CROSS_MODULE_INTEGRATION_EXAMPLES](../05_guides/05_cross_module_integration_examples.md) | 模块 ↔ 集成示例 |
+| [modules_cheatsheet](../02_reference/quick_reference/02_modules_cheatsheet.md) | [CROSS_MODULE_INTEGRATION_EXAMPLES](../05_guides/05_cross_module_integration_examples.md) | 模块（Module） ↔ 集成示例 |
 | [algorithms_cheatsheet](../02_reference/quick_reference/02_algorithms_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](../05_guides/05_performance_tuning_guide.md) | 算法 ↔ 性能优化 |
 | [process_management_cheatsheet](../02_reference/quick_reference/02_process_management_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 进程 ↔ CLI应用 |
 | [network_programming_cheatsheet](../02_reference/quick_reference/02_network_programming_cheatsheet.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/05_async_programming_usage_guide.md) | 网络 ↔ 异步应用 |
@@ -455,11 +455,11 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | 语法 ↔ 形式化定义 |
 | [type_system](../02_reference/quick_reference/02_type_system.md) | [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 语法 ↔ 类型理论 |
 | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 语法 ↔ 状态机形式化 |
-| [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 语法 ↔ 并发安全 |
+| [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 语法 ↔ 并发安全（Concurrency Safety） |
 | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) | [trait_system_formalization](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) | 泛型 ↔ Trait系统 |
 | design_patterns_cheatsheet | [01_design_patterns_formal](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md) | 模式 ↔ 形式化模式 |
 | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) §智能指针 | 指针 ↔ 所有权模型 |
-| [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) | [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) §Result类型 | 错误处理 ↔ 类型系统 |
+| [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) | [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) §Result类型 | 错误处理 ↔ 类型系统（Type System） |
 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | [formal_methods/README](../../archive/research_notes_2026_06_25/formal_methods/README.md) §控制流形式化 | 控制流 ↔ A-CF1公理 |
 
 ---

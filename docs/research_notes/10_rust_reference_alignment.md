@@ -50,7 +50,7 @@
 | Reference 章节 | 项目文档 | 状态 | 备注 |
 |----------------|----------|------|------|
 | [Lexical Elements](https://doc.rust-lang.org/reference/tokens.html) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | 🔄 | 基础词法在类型基础中提及 |
-| [Macros](https://doc.rust-lang.org/reference/macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | 🔄 | 声明宏/过程宏有 crate 示例 |
+| [Macros](https://doc.rust-lang.org/reference/macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | 🔄 | 声明宏（Declarative Macro）/过程宏有 crate 示例 |
 | [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | crate、module、source file 规则 |
 
 ---
@@ -132,7 +132,7 @@
 
 1. `const` 求值与 `const fn` 的 Reference 章节可进一步细化。
 2. 宏展开 hygiene 与解析规则的 Reference 映射待扩展。
-3. 异步 trait / RPITIT 的 Reference 章节需随 Rust 1.97+ 更新。
+3. 异步（Async） trait / RPITIT 的 Reference 章节需随 Rust 1.97+ 更新。
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 

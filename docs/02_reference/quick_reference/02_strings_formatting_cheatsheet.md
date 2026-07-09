@@ -108,9 +108,9 @@ let s4: &str = &s1; // String 自动解引用为 &str
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-| 类型     | 所有权 | 可变性 | 存储位置 | 大小            |
+| 类型     | 所有权（Ownership） | 可变性 | 存储位置 | 大小            |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `&str`   | 借用   | 不可变 | 栈/堆    | 16 字节         |
+| `&str`   | 借用（Borrowing）   | 不可变 | 栈/堆    | 16 字节         |
 
 ---
 
@@ -1091,7 +1091,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 
 - [类型系统模块（String/&str 相关）](../../../crates/c02_type_system/README.md)
 - [算法模块（字符串算法与数据处理）](../../../crates/c08_algorithms/README.md)
-- [WASM 模块（字符串互操作示例）](../../../crates/c12_wasm/README.md)
+- [WASM 模块（Module）（字符串互操作示例）](../../../crates/c12_wasm/README.md)
 
 ## 🧩 相关示例代码 {#相关示例代码}
 >

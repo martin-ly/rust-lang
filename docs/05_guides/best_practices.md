@@ -322,7 +322,7 @@ for (idx, value) in data.iter().enumerate() {
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**✅ 最佳实践**: 泛型、#[inline] 关键路径
+**✅ 最佳实践**: 泛型（Generics）、#[inline] 关键路径
 
 ```rust
 // 泛型实现零成本抽象
@@ -1246,7 +1246,7 @@ println!("运行时长: {:?}", stopped.duration());
 使用本指南进行代码审查：
 
 - 检查所有权和借用模式（[1.1 节](#11-所有权和借用)）
-- 验证错误处理策略（[3. 错误处理](#3-错误处理最佳实践)）
+- 验证错误处理策略（[3. 错误处理（Error Handling）](#3-错误处理最佳实践)）
 - 评估性能优化机会（[2. 性能优化](#2-性能优化最佳实践)）
 
 ### 场景3: 性能优化 {#场景3-性能优化}
@@ -1278,7 +1278,7 @@ println!("运行时长: {:?}", stopped.duration());
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
-| **核心模块** | C01 所有权 |
+| **核心模块** | C01 所有权（Ownership） |
 | :--- | :--- |
 | :--- | :--- |
 | :--- | :--- |
@@ -1319,9 +1319,9 @@ println!("运行时长: {:?}", stopped.duration());
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - C01 所有权
-- C02 类型系统
+- C02 类型系统（Type System）
 - C05 线程与并发
-- C06 异步
+- C06 异步（Async）
 
 ## Rust 1.95+ 最佳实践（深度指南） {#rust-195-最佳实践深度指南}
 >

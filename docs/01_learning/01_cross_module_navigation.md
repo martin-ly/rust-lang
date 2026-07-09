@@ -113,9 +113,9 @@
 
 | 核心概念 | crates/ 源码 | docs/ 文档 | content/ 拓展 |
 |----------|--------------|------------|---------------|
-| 所有权 | c01_ownership/src/ | docs/01_learning/ | - |
-| 类型系统 | c02_type_system/src/ | docs/04_thinking/matrices/ | - |
-| 泛型 | c04_generic/src/ | docs/05_guides/ | content/emerging/ |
+| 所有权（Ownership） | c01_ownership/src/ | docs/01_learning/ | - |
+| 类型系统（Type System） | c02_type_system/src/ | docs/04_thinking/matrices/ | - |
+| 泛型（Generics） | c04_generic/src/ | docs/05_guides/ | content/emerging/ |
 | 并发 | c05_concurrency/src/ | docs/05_guides/ | content/ecosystem/ |
 | 异步 | c06_async_await/src/ | docs/05_guides/ASYNC* | content/ecosystem/async* |
 | 设计模式 | c09_design_patterns/src/ | docs/04_thinking/decision_trees/ | content/scenarios/ |

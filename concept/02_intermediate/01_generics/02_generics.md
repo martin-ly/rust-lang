@@ -2250,12 +2250,144 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 
 ## 十一、待补充与演进方向（TODOs）
 
-- [x] **TODO**: 补充 `min_specialization` 的当前状态与使用 —— 优先级: 中 —— 已完成 §9.2 —— 2026-05-14
-- [x] **TODO**: 补充泛型代码的编译时间优化策略（Turbofish、显式标注、cargo bloat、thin LTO） —— 优先级: 低 —— 已完成 §9.3 —— 2026-05-14
-- [x] **TODO**: 补充 Type-level programming（Peano arithmetic、typenum、与 Const Generics 对比） —— 优先级: 低 —— 已完成 §9.4 —— 2026-05-14
-- [x] **TODO**: 补充 `impl Trait` 在返回位置 vs 参数位置的区别 —— 优先级: 中 —— 已完成 §9.1
-- [x] **TODO**: 补充 Generic Associated Types (GATs) 的完整形式化视角 —— 优先级: 中 —— 已完成 §9.5 —— 2026-05-13
-- [x] **TODO**: 补充 Const Generics 进阶用法（表达式、where 约束、generic_const_exprs、GATs 交互、C++ 对比） —— 优先级: 高 —— 已完成 §5.7 —— 2026-05-14
+### 11.1 `min_specialization` 的当前状态与使用
+
+**定义**：`min_specialization` 是 Rust specialization 特性的受限子集，允许为更具体类型提供覆盖 blanket impl 的特化实现，同时避免旧 full specialization 中的已知 soundness 问题。
+
+**动机**：标准库需要为 `&str`/`String` 等常见类型提供零拷贝或更高效的实现，但不能让普通用户代码面临 coherence 风险。
+
+```rust,ignore
+#![feature(min_specialization)]
+
+trait ToOwnedFast {
+    fn fast_clone(&self) -> String;
+}
+
+impl<T: std::fmt::Display> ToOwnedFast for T {
+    default fn fast_clone(&self) -> String { format!("{}", self) }
+}
+
+impl ToOwnedFast for &str {
+    fn fast_clone(&self) -> String { String::from(*self) }
+}
+```
+
+> 详见 [§9.2 补充：`min_specialization` 的当前状态与使用](#92-补充min_specialization-的当前状态与使用) 与 [Traits 中的 Specialization](../00_traits/19_advanced_traits.md)。
+
+### 11.2 泛型代码的编译时间优化策略
+
+**定义**：通过显式类型标注、Turbofish、动态分发替代、编译单元拆分和 `cargo bloat` 等工具，减少泛型单态化带来的编译时间与二进制膨胀。
+
+**动机**：泛型在运行时是零成本的，但编译期为每个具体类型生成一份代码，复杂项目可能因此编译缓慢、二进制膨胀。
+
+```rust
+// Turbofish 减少类型推断开销
+let nums: Vec<i32> = "1,2,3".split(',')
+    .map(|s| s.parse::<i32>().unwrap())
+    .collect();
+
+// 在泛型调用频繁但性能不敏感的路径使用 dyn Trait 共享代码
+fn report(values: &[Box<dyn std::fmt::Display>]) {
+    for v in values { println!("{}", v); }
+}
+```
+
+> 详见 [§9.3 补充：泛型代码的编译时间优化策略](#93-补充泛型代码的编译时间优化策略)。
+
+### 11.3 Type-level Programming
+
+**定义**：利用泛型、关联类型和 trait 系统在类型层面进行计算（如 Peano 数、类型级布尔、HList），将运行时检查前移到编译期。
+
+**动机**：在 Const Generics 之前，类型级编程是实现编译期大小、状态机等约束的唯一方式；如今它与 Const Generics 互补，用于更复杂的类型构造。
+
+```rust
+use std::marker::PhantomData;
+
+struct Zero;
+struct Succ<N>(PhantomData<N>);
+
+trait Add<Rhs> { type Output; }
+impl<Rhs> Add<Rhs> for Zero { type Output = Rhs; }
+impl<M, N> Add<N> for Succ<M>
+where M: Add<N> { type Output = Succ<<M as Add<N>>::Output>; }
+
+type Two = Succ<Succ<Zero>>;
+type Three = Succ<Succ<Succ<Zero>>>;
+type Five = <Two as Add<Three>>::Output;
+```
+
+> 详见 [§9.4 补充：Type-level Programming](#94-补充type-level-programmingpeano-算术与-typenum) 与 [类型级编程](39_type_level_programming.md)。
+
+### 11.4 `impl Trait` 在返回位置 vs 参数位置
+
+**定义**：参数位置的 `impl Trait` 是匿名泛型（全称量化，调用者决定具体类型）；返回位置的 `impl Trait` 是存在类型（实现者决定具体类型，调用者只能看到 trait bound）。
+
+**动机**：统一语法在不同位置表达不同的量化语义，既隐藏实现细节，又保持静态分发。
+
+```rust
+// 参数位置：等价于 fn take<T: Iterator<Item = i32>>(iter: T)
+fn take_sum(iter: impl Iterator<Item = i32>) -> i32 {
+    iter.sum()
+}
+
+// 返回位置：调用者不知道具体类型，只知道它实现了 Iterator<Item = i32>
+fn make_range() -> impl Iterator<Item = i32> {
+    0..10
+}
+```
+
+> 详见 [§9.1 补充：`impl Trait` 在返回位置 vs 参数位置的区别](#91-补充impl-trait-在返回位置-vs-参数位置的区别)。
+
+### 11.5 Generic Associated Types（GATs）的形式化视角
+
+**定义**：GATs 允许关联类型自身携带泛型参数，使 trait 能表达“类型族”（type family），是 Rust 对高阶类型（HKT）的部分模拟。
+
+**动机**：普通关联类型只能表达一对一映射；GATs 能表达生命周期依赖于 `&mut self` 的 lending iterator 等模式。
+
+```rust
+trait LendingIterator {
+    type Item<'a> where Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+
+struct Windows<'t, T> { slice: &'t [T], size: usize }
+
+impl<'t, T> LendingIterator for Windows<'t, T> {
+    type Item<'a> = &'a [T] where Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<&'a [T]> {
+        let w = self.slice.get(..self.size)?;
+        self.slice = &self.slice[1..];
+        Some(w)
+    }
+}
+```
+
+> 详见 [§9.5 补充：GATs 的完整形式化视角](#95-补充generic-associated-types-gats-的完整形式化视角) 与 [高级 Traits](../00_traits/19_advanced_traits.md)。
+
+### 11.6 Const Generics 进阶用法
+
+**定义**：Const generics 将编译期常量值引入类型参数，支持 `<const N: usize>` 以及常量表达式 `[T; N + 1]`、where 约束和类型状态机。
+
+**动机**：让数组长度、矩阵维度、状态步数等值在编译期参与类型检查，消除运行时维度错误。
+
+```rust
+struct Matrix<T, const R: usize, const C: usize> { data: [[T; C]; R] }
+
+impl<T: Copy + Default + std::ops::Add<Output = T> + std::ops::Mul<Output = T>,
+     const R: usize, const C: usize, const K: usize>
+    Matrix<T, R, C>
+{
+    fn mul(&self, other: &Matrix<T, C, K>) -> Matrix<T, R, K> {
+        let mut res = [[T::default(); K]; R];
+        for i in 0..R { for j in 0..K { for k in 0..C {
+            res[i][j] = res[i][j] + self.data[i][k] * other.data[k][j];
+        }}}
+        Matrix { data: res }
+    }
+}
+```
+
+> 详见 [§5.7 Const Generics 进阶用法](#57-const-generics-进阶用法)。
 
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html); [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-00-generics.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅

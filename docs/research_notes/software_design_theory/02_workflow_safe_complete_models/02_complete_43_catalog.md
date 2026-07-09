@@ -1014,7 +1014,7 @@ pub fn update_optimistic(
 
 | 模式 | 形式化对应 | 与 23 安全组合 |
 | :--- | :--- | :--- |
-| Domain Model | 结构体 + 方法；无贫血；见 [ownership_model](../../formal_methods/10_ownership_model.md) 规则 1–3 | 与 State、Strategy 组合 |
+| Domain Model | 结构体（Struct） + 方法；无贫血；见 [ownership_model](../../formal_methods/10_ownership_model.md) 规则 1–3 | 与 State、Strategy 组合 |
 | Service Layer | 模块依赖、trait 组合；见 [03_integration_theory](../04_compositional_engineering/03_integration_theory.md) IT-T1 | 编排 Repository、Factory |
 | Repository | 见 [02_effectiveness_proofs](../04_compositional_engineering/02_effectiveness_proofs.md) CE-T1；trait 泛型约束 | 可与 Factory Method、Builder 组合 |
 | Unit of Work | 批量提交；所有权收集；见 ownership 规则 3 drop 顺序 | 与 Repository、Data Mapper 组合 |
@@ -1086,7 +1086,7 @@ pub fn update_optimistic(
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

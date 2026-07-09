@@ -124,7 +124,7 @@
 | 静态分发 | Static Dispatch | 编译期确定具体实现的函数调用，通过单态化实现 | Reference Ch 8.9 |
 | 动态分发 | Dynamic Dispatch | 运行时确定具体实现的函数调用，通过虚表实现 | Reference Ch 8.9 |
 | 单态化 | Monomorphization | 将泛型代码转换为具体类型代码的编译过程 | Reference Ch 8.9 |
-| 零成本抽象 | Zero-Cost Abstractions | 运行时无开销的高级抽象，开销在编译期消除 | The Book Ch 13.1 |
+| 零成本抽象（Zero-Cost Abstraction） | Zero-Cost Abstractions | 运行时无开销的高级抽象，开销在编译期消除 | The Book Ch 13.1 |
 | 型变 | Variance | 类型构造器对其参数的子类型关系保持方式（协变/逆变/不变） | Reference Ch 4.6 |
 | 协变 | Covariance | 子类型关系保持方向一致（若 `A <: B` 则 `F<A> <: F<B>`） | Reference Ch 4.6 |
 | 逆变 | Contravariance | 子类型关系方向反转（若 `A <: B` 则 `F<B> <: F<A>`） | Reference Ch 4.6 |
@@ -152,7 +152,7 @@
 | 同步 | Synchronization | 协调多线程访问共享资源的机制 | The Book Ch 16.2 |
 | 互斥锁 | Mutex | 互斥（Mutual Exclusion）同步原语，保证同时只有一个线程访问数据 | The Book Ch 16.2 |
 | 读写锁 | RwLock | 允许多读单写的同步原语，读共享写独占 | The Book Ch 16.2 |
-| 原子操作 | Atomic Operation | 不可中断的基本操作，通过 `std::sync::atomic` 提供 | The Book Ch 16.3 |
+| 原子操作（Atomic Operations） | Atomic Operation | 不可中断的基本操作，通过 `std::sync::atomic` 提供 | The Book Ch 16.3 |
 | 内存序 | Memory Ordering | 控制原子操作间可见性的规则（Relaxed/Acquire/Release/AcqRel/SeqCst） | Reference Ch 22.9 |
 | 顺序一致性 | Sequential Consistency | 最强的内存序，保证所有线程看到一致的操作顺序 | Reference Ch 22.9 |
 | 获取-释放 | Acquire-Release | 成对的内存序，建立 happens-before 关系 | Reference Ch 22.9 |
@@ -364,7 +364,7 @@
 本术语表与 Ferrocene Language Specification (FLS) 对齐的关键点：
 
 1. **所有权与借用**: 采用 FLS Chapter 8 的借用检查器术语定义
-2. **类型系统**: 遵循 FLS Chapter 4 的类型分类和型变规则
+2. **类型系统（Type System）**: 遵循 FLS Chapter 4 的类型分类和型变规则
 3. **生命周期**: 基于 FLS Chapter 6 的泛型生命周期规范
 4. **Unsafe Rust**: 参考 FLS Chapter 11 的不安全操作定义
 5. **并发模型**: 与 FLS Chapter 16 的线程安全 trait 定义一致

@@ -2,7 +2,7 @@
 
 > **EN**: Trait System Formalization
 > **Summary**: Trait 系统形式化 Trait System Formalization. (stub/archive redirect)
-> **概念族**: 类型系统 / Trait
+> **概念族**: 类型系统（Type System） / Trait
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 > **内容分级**: [归档级]
 >
@@ -121,7 +121,7 @@
 
 1. **Trait 的形式化定义**: 如何用类型理论精确描述 Trait？
 2. **Trait 对象语义**: Trait 对象的类型理论解释是什么？
-3. **泛型 Trait**: 泛型 Trait 的类型推导如何工作？
+3. **泛型（Generics） Trait**: 泛型 Trait 的类型推导如何工作？
 
 ### 预期成果 {#预期成果}
 
@@ -1575,7 +1575,7 @@ Trait 系统与 Rust 类型系统的集成通过以下形式化关系表达：
 - ✅ 代码示例：9个完成（基本 Trait、Trait 对象、泛型 Trait、关联类型、动态分发、Trait 约束、生命周期、默认实现、Trait 对象集合）
 - ✅ 证明工作：100%完成（定理 1–3 及与类型系统、生命周期的集成论证）
 - ✅ Rust 1.93 更新：已完成（全局分配器 thread_local、MaybeUninit 新方法对 Trait 对象的影响分析）
-- ✅ 系统集成与实际应用：已完成（与类型系统、生命周期集成及 Serde/异步/插件案例）
+- ✅ 系统集成与实际应用：已完成（与类型系统、生命周期集成及 Serde/异步（Async）/插件案例）
 
 ## 🆕 Rust 1.93.0 相关更新 {#rust-1930-相关更新}
 
@@ -1891,7 +1891,7 @@ fn deref_mut_example() {
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
-| 智能指针 | Deref实现 | Target | 用途 |
+| 智能指针（Smart Pointer） | Deref实现 | Target | 用途 |
 | :--- | :--- | :--- | :--- |
 | `Box<T>` | ✅ | `T` | 堆分配 |
 | `Rc<T>` | ✅ | `T` | 共享所有权 |
@@ -1953,7 +1953,7 @@ $$
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

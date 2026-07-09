@@ -8,7 +8,7 @@
 > **受众**: [进阶] / [专家]
 > **内容分级**: [专家级]
 
-**模块**: C11 Macro System
+**模块（Module）**: C11 Macro System
 **创建日期**: 2025-12-11
 **最后更新**: 2026-05-08
 **Rust 版本**: 1.96.1+ (Edition 2024)
@@ -77,7 +77,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-本指南介绍 Rust 宏系统的使用，包括声明宏、过程宏、属性宏、派生宏等。
+本指南介绍 Rust 宏系统的使用，包括声明宏、过程宏（Procedural Macro）、属性宏、派生宏等。
 
 **形式化引用**：COH-T1 (Trait 一致性)、[trait_system_formalization](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)。
 宏展开与类型检查衔接见 [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)。

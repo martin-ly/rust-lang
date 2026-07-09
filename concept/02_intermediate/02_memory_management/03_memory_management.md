@@ -1597,13 +1597,140 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 
 ## 十二、待补充与演进方向（TODOs）
 
-- [x] **TODO**: 补充自定义 Allocator（`#[global_allocator]`） —— 优先级: 中 —— 已完成 §5.7
-- [x] **TODO**: 补充 `ManuallyDrop<T>` 与 `mem::forget` 的形式化分析 —— 优先级: 中 —— 已完成 §5.8
-- [x] **TODO**: 补充 `Vec<T>` / `String` / `HashMap` 的内存布局与扩容策略 —— 优先级: 中 —— 已完成 §5.9
-- [x] **TODO**: 补充 `std::alloc::System` vs `jemalloc` vs `mimalloc` 对比 —— 优先级: 低 —— 已完成 §5.10
-- [x] **TODO**: 补充 `MaybeUninit<T>` 与 `MaybeDangling` 的完整边界分析 —— 优先级: 中 —— 已完成 §补充章节
-- [x] **TODO**: 补充 `Pin<Box<T>>` 与自引用结构的形式化语义 —— 优先级: 低 —— 已完成 §5.5
-- [x] **TODO**: 补充 Field Projections（Beyond the & 旗舰主题、Pin 投影、in-place initialization） —— 优先级: **高** —— 已完成 §十一 —— 2026-05-21
+### 12.1 自定义 Allocator（`#[global_allocator]`）
+
+**定义**：Rust 允许通过 `#[global_allocator]` 替换默认全局分配器，也支持 nightly 的 `Allocator` trait 为特定容器指定局部分配器。
+
+**动机**：不同场景对分配延迟、碎片、并发扩展性要求不同；替换为 `jemalloc`/`mimalloc` 可显著提升大型服务或游戏引擎的性能。
+
+```rust
+use std::alloc::{GlobalAlloc, System, Layout};
+
+struct LoggingAlloc;
+
+unsafe impl GlobalAlloc for LoggingAlloc {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        println!("alloc {} bytes", layout.size());
+        System.alloc(layout)
+    }
+    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
+        System.dealloc(ptr, layout)
+    }
+}
+
+#[global_allocator]
+static ALLOC: LoggingAlloc = LoggingAlloc;
+```
+
+> 详见 [§5.7 补充：自定义 Allocator](#57-补充自定义-allocatorglobal_allocator)。
+
+### 12.2 `ManuallyDrop<T>` 与 `mem::forget` 的形式化分析
+
+**定义**：`ManuallyDrop<T>` 阻止编译器自动调用 `Drop`，`mem::forget` 以函数形式永不调用 `Drop`；两者都用于将释放责任显式移交给用户。
+
+**动机**：在 FFI 边界、自引用结构或需要精确控制资源释放顺序时，必须绕过 RAII 的默认行为，但必须保证不因此产生 use-after-free。
+
+```rust
+use std::mem::ManuallyDrop;
+
+let mut boxed = ManuallyDrop::new(Box::new(42));
+// 安全地取出内部值，但不触发 Drop
+let inner: Box<i32> = unsafe { ManuallyDrop::take(&mut boxed) };
+drop(inner); // 现在由我们负责释放
+```
+
+> 详见 [§5.8 补充：`ManuallyDrop<T>` 与 `mem::forget` 的形式化分析](#58-补充manuallydropt-与-memforget-的形式化分析)。
+
+### 12.3 `Vec<T>` / `String` / `HashMap` 的内存布局与扩容策略
+
+**定义**：标准库容器通过连续内存（`Vec`/`String`）或 Robin Hood/SwissTable 哈希表（`HashMap`）实现缓存友好与摊还 O(1) 操作。
+
+**动机**：理解容器布局是性能调优的基础——知道 `Vec` 的指数扩容、`String` 的 UTF-8 不变性、`HashMap` 的负载因子，才能写出内存高效的代码。
+
+```rust
+let mut v = Vec::with_capacity(4);
+println!("capacity = {}", v.capacity()); // 4
+v.push(1); // 无重新分配
+```
+
+> 详见 [§5.9 `Vec<T>` / `String` / `HashMap` 的内存布局与扩容策略](#59-vect--string--hashmap-的内存布局与扩容策略)。
+
+### 12.4 `std::alloc::System` vs `jemalloc` vs `mimalloc`
+
+**定义**：`System` 使用操作系统默认分配器；`jemalloc` 擅长多线程小对象；`mimalloc` 以低延迟和良好局部性著称。
+
+**动机**：全局分配器是程序内存性能的“隐式基础设施”，根据工作负载选择合适的分配器可显著降低延迟和内存占用。
+
+```rust,ignore
+// Cargo.toml
+// [dependencies]
+// tikv-jemallocator = "0.5"
+
+use tikv_jemallocator::Jemalloc;
+
+#[global_allocator]
+static GLOBAL: Jemalloc = Jemalloc;
+```
+
+> 详见 [§5.10 `std::alloc::System` vs `jemalloc` vs `mimalloc` 对比](#510-stdallocsystem-vs-jemalloc-vs-mimalloc-对比)。
+
+### 12.5 `MaybeUninit<T>` 与 `MaybeDangling` 的边界分析
+
+**定义**：`MaybeUninit<T>` 是一块可能未初始化的 `T` 内存，允许安全地逐字段构造；`MaybeDangling`（nightly 实验）允许持有已释放或悬垂的引用而不触发 UB。
+
+**动机**：在实现 `Vec`、channels、FFI 绑定时，经常需要先分配内存再初始化；`MaybeUninit` 提供了未初始化内存的安全抽象。
+
+```rust
+use std::mem::MaybeUninit;
+
+let mut slot = MaybeUninit::<String>::uninit();
+slot.write(String::from("hello"));
+let s = unsafe { slot.assume_init() };
+```
+
+> 详见 [补充章节：`MaybeUninit<T>` 的内存安全边界](#补充章节maybeuninitt-的内存安全边界)。
+
+### 12.6 `Pin<Box<T>>` 与自引用结构的形式化语义
+
+**定义**：`Pin<P>` 保证 `!Unpin` 类型的内存地址不会被 safe 代码移动；`Pin<Box<T>>` 通过堆分配提供长期地址稳定性，是自引用结构的安全载体。
+
+**动机**：自引用结构（如 async 状态机、链表节点）在栈上移动会导致内部指针悬垂；Pin 将“不可移动”编码进类型系统。
+
+```rust
+use std::pin::Pin;
+use std::marker::PhantomPinned;
+
+struct SelfRef {
+    data: String,
+    ptr: *const String,
+    _pin: PhantomPinned,
+}
+
+impl SelfRef {
+    fn new(s: String) -> Pin<Box<Self>> {
+        let mut b = Box::new(Self { data: s, ptr: std::ptr::null(), _pin: PhantomPinned });
+        let ptr: *const String = &b.data;
+        unsafe { b.as_mut().get_unchecked_mut().ptr = ptr; }
+        Pin::from(b)
+    }
+}
+```
+
+> 详见 [§5.5 补充：`Pin<&mut T>` 的堆内存语义与自引用安全](#55-补充pinmut-t-的堆内存语义与自引用安全) 与 [Pin 概念](../../03_advanced/01_async/06_pin_unpin.md)。
+
+### 12.7 Field Projections（Pin 投影与 In-place Initialization）
+
+**定义**：Field projections 关注如何安全地投影智能指针/容器到其字段，例如 `Pin<Box<T>>` 投影到 `Pin<Box<T.field>>`，或在原地初始化未初始化内存。
+
+**动机**：当前 Safe Rust 对 Pin 投影和未初始化字段的“最后一公里”支持不足，需要借助 unsafe 或 nightly 提案（如 `Pin::map_unchecked`、`field_init`）。
+
+```rust,ignore
+// Pin 投影的常见模式：安全地获取结构体子字段的 Pin
+let mut pinned: Pin<Box<SelfRef>> = SelfRef::new(String::from("x"));
+// 仍需 unsafe 或 Pin::map_unchecked 访问字段
+```
+
+> 详见 [§十一 补充章节：Field Projections](#十一补充章节field-projectionsbeyond-the--旗舰主题)。
 
 ---
 

@@ -81,9 +81,9 @@
 
 | 维度 | C 内核代码 | Rust 内核代码 |
 |------|-----------|--------------|
-| 内存安全 | 手动管理，依赖 review | 编译期保证 + unsafe 边界明确 |
-| 并发安全 | 依赖锁规则约定 | 类型系统强制（Send/Sync） |
-| 错误处理 | 返回码检查（易遗漏） | `Result` 强制处理 |
+| 内存安全（Memory Safety） | 手动管理，依赖 review | 编译期保证 + unsafe 边界明确 |
+| 并发安全（Concurrency Safety） | 依赖锁规则约定 | 类型系统强制（Send/Sync） |
+| 错误处理（Error Handling） | 返回码检查（易遗漏） | `Result` 强制处理 |
 | 调试成本 | 高（Use-after-free, 竞态） | 低（多数问题在编译期捕获） |
 | 与 C 互操作 | 原生 | 通过 `unsafe` FFI + bindgen |
 

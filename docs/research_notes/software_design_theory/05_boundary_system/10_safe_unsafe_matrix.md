@@ -74,7 +74,7 @@
 
 **Def 1.2（安全抽象）**:
 
-设 $A$ 为封装 unsafe 的 Rust 模块。
+设 $A$ 为封装 unsafe 的 Rust 模块（Module）。
 
 若 $A$ 对外 API 满足 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) 与 [ownership_model](../../formal_methods/10_ownership_model.md) 的 Safe 规则，则称 $A$ 为**安全抽象**。
 
@@ -133,9 +133,9 @@
 
 | 类别 | 典型行为 | Rust 实例 |
 | :--- | :--- | :--- |
-| 内存安全 UB | 悬垂指针解引用、use-after-free、双重释放 | `*ptr` 指向已释放内存 |
+| 内存安全（Memory Safety） UB | 悬垂指针解引用、use-after-free、双重释放 | `*ptr` 指向已释放内存 |
 | 数据竞争 | 无同步的共享可变访问 | `static mut` 多线程写 |
-| 类型系统 UB | 非法 transmute、破坏 niche | `mem::transmute` 到不合法枚举 |
+| 类型系统（Type System） UB | 非法 transmute、破坏 niche | `mem::transmute` 到不合法枚举 |
 | 调用约定 UB | FFI 调用约定/ABI 不匹配 | `extern "C"` 函数签名错误 |
 | 生命周期 UB | 构造不满足 outlives 的引用 | 返回悬垂 `&T` |
 | 未初始化内存 UB | 读取未初始化值 | `MaybeUninit::assume_init` 过早 |
@@ -251,7 +251,7 @@
 | :--- | :--- | :--- |
 | Chain of Responsibility | 纯 Safe | `Option<Box<Handler>>` 链 |
 | Command | 纯 Safe | `Box<dyn Fn()>` 或 `Fn` trait |
-| Interpreter | 纯 Safe | 枚举 AST + match 求值 |
+| Interpreter | 纯 Safe | 枚举（Enum） AST + match 求值 |
 | Iterator | 纯 Safe | `Iterator` trait |
 | Mediator | 纯 Safe | 结构体持有多方引用 |
 | Memento | 纯 Safe | Clone 或 serde 序列化 |
@@ -285,7 +285,7 @@
 
 | 模式 | 安全边界 | 说明 |
 | :--- | :--- | :--- |
-| Domain Model | 纯 Safe | 结构体 + 方法 |
+| Domain Model | 纯 Safe | 结构体（Struct） + 方法 |
 | Service Layer | 纯 Safe | 模块/结构体 |
 | Repository | 纯 Safe | trait + impl |
 | Unit of Work | 纯 Safe | 收集变更，批量提交 |
@@ -337,7 +337,7 @@
 | 错误 | 原因 | 解决 |
 | :--- | :--- | :--- |
 | 编译错误：`Rc` 不满足 `Send` | 跨线程传递 Rc | 改用 `Arc` |
-| 运行时 panic：RefCell borrow 冲突 | 同时 borrow 与 borrow_mut | 缩小借用范围；或改用 Mutex |
+| 运行时（Runtime） panic：RefCell borrow 冲突 | 同时 borrow 与 borrow_mut | 缩小借用范围；或改用 Mutex |
 | 数据竞争 | 共享可变无同步 | 加 Mutex/RwLock；或改用 channel |
 | 悬垂引用 | 生命周期短于借用 | 延长生命周期；或改用所有权 |
 
@@ -449,7 +449,7 @@ impl PaymentGateway for FFIPaymentGateway {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

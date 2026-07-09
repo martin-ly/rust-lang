@@ -22,7 +22,7 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 本目录对 Rust 生态中 **42 个核心工业级 crate / 生态专题** 进行系统性架构解构，揭示类型系统、零成本抽象、组合性设计在真实工程中的运用方式。
+> **定位**: 本目录对 Rust 生态中 **42 个核心工业级 crate / 生态专题** 进行系统性架构解构，揭示类型系统、零成本抽象（Zero-Cost Abstraction）、组合性设计在真实工程中的运用方式。
 > **方法论对齐**: 软件架构分析 (Software Architecture Analysis) · 设计恢复 (Design Recovery) · 架构权衡分析方法 (ATAM)
 
 ---
@@ -66,7 +66,7 @@
 
 | 层级 | 标准 | 代表 Crate |
 |:---|:---|:---|
-| **基础设施层** | 被 1000+ downstream crates 依赖，构成 Rust 异步/网络/并行基础 | Tokio, Hyper, Tower, Rayon |
+| **基础设施层** | 被 1000+ downstream crates 依赖，构成 Rust 异步（Async）/网络/并行基础 | Tokio, Hyper, Tower, Rayon |
 | **应用框架层** | 年下载量 1000万+，定义领域编程模型 | Axum, Actix-web, Serde, Clap, Reqwest, SQLx, Diesel |
 | **领域专业层** | 在特定领域（游戏、图形、科学计算）成为事实标准 | Bevy, Wgpu, nalgebra/ndarray |
 
@@ -91,7 +91,7 @@
 | 05 | **Bevy** | 游戏引擎 | ECS (Entity-Component-System) | HRTB 安全借用、Archetype 存储 | ✅ 连续内存布局 | [05_bevy_architecture.md](05_bevy_architecture.md) |
 | 06 | **Tokio** | 异步运行时 | Runtime = Scheduler + IO Driver + Timer | Future + Pin、Send/Sync 跨 await 传播 | ✅ 工作窃取无锁队列 | [06_tokio_architecture.md](06_tokio_architecture.md)（已重定向 → [Tokio 深度解析](../../../../knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md)） |
 | 07 | **Axum** | Web 框架 | Router → Handler → Tower Service | FromRequest、State 注入、matchit 路由 | ✅ 编译期路由匹配 | [07_axum_architecture.md](07_axum_architecture.md)（已重定向 → [Axum 深度解析](../../../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md)） |
-| 08 | **Hyper** | HTTP 实现 | Body trait + Request/Response | 泛型 Body、零拷贝解析 | ✅ httparse 零分配 | [08_hyper_architecture.md](08_hyper_architecture.md) |
+| 08 | **Hyper** | HTTP 实现 | Body trait + Request/Response | 泛型（Generics） Body、零拷贝解析 | ✅ httparse 零分配 | [08_hyper_architecture.md](08_hyper_architecture.md) |
 | 09 | **SQLx** | SQL 工具 | query! / query_as! 宏 + Pool | 编译期查询验证、FromRow、Database trait | ✅ 编译期 SQL 检查 | [09_sqlx_architecture.md](09_sqlx_architecture.md)（已重定向 → [SQLx 深度解析](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md)） |
 | 10 | **Reqwest** | HTTP 客户端 | ClientBuilder → RequestBuilder → Response | 泛型 JSON/Form 体、中间件扩展 | ✅ 复用 Hyper 连接池 | [10_reqwest_architecture.md](10_reqwest_architecture.md) |
 | 11 | **Wgpu** | GPU 图形 | Adapter → Device → Queue → Pipeline | BindGroup 类型安全、Naga 着色器验证 | ✅ 显式 GPU 内存管理 | [11_wgpu_architecture.md](11_wgpu_architecture.md) |
@@ -107,7 +107,7 @@
 | 21 | **mio** | IO 多路复用 | `Poll` + `Registry` + `Token` + `Waker` | 跨平台 epoll/kqueue/IOCP 统一抽象 | ✅ 与直接 epoll 零额外开销 | [21_mio_architecture.md](21_mio_architecture.md) |
 | 22 | **redis-rs** | 缓存 / 消息 / 分布式协调 | `Client` → `MultiplexedConnection` / `ConnectionManager` / `PubSub` / `ClusterClient` | `FromRedisValue` / `ToRedisArgs` trait、命令返回类型静态化 | ✅ 单连接多路复用零额外连接开销 | [22_redis_architecture.md](22_redis_architecture.md) |
 | 23 | **mongodb-rust-driver** | 文档数据库 / NoSQL | `Client` → `Database` → `Collection<T>` | `Serialize`/`Deserialize` 类型参数、`bson::doc!` 编译期构造 | ✅ 内置连接池、BSON 原生模型 | [23_mongodb_architecture.md](23_mongodb_architecture.md) |
-| 24 | **regex** | 文本处理 / 模式匹配 | `Regex` / `RegexBuilder` / `RegexSet` | 不可变 `Regex` 共享、`Captures<'t>` 生命周期借用 | ✅ 线性时间保证、DFA/NFA/Hybrid 引擎 | [24_regex_architecture.md](24_regex_architecture.md) |
+| 24 | **regex** | 文本处理 / 模式匹配（Pattern Matching） | `Regex` / `RegexBuilder` / `RegexSet` | 不可变 `Regex` 共享、`Captures<'t>` 生命周期借用 | ✅ 线性时间保证、DFA/NFA/Hybrid 引擎 | [24_regex_architecture.md](24_regex_architecture.md) |
 | 25 | **chrono** | 日期时间 / 时区 | `DateTime<Tz>` / `NaiveDateTime` / `Duration` | `TimeZone` trait 类型化时区、`TimeDelta` 正负 Duration | ✅ Naive 与带时区类型在编译期分离 | [25_chrono_architecture.md](25_chrono_architecture.md) |
 | 26 | **rdkafka** | 消息队列 / 流处理 | `ClientConfig` → `FutureProducer` / `StreamConsumer` | 异步 Future / Stream、Consumer Group 语义静态化 | ✅ 复用 librdkafka 高性能协议栈 | [26_kafka_architecture.md](26_kafka_architecture.md) |
 | 27 | **kube-rs** | 云原生 / Kubernetes | `Client` → `Api<K>` / `Controller` / `watcher` | `Resource` trait、`#[derive(CustomResource)]`、类型化 API 路径 | ✅ 编译期资源类型与 API Group/Version 匹配 | [27_kube_rs_architecture.md](27_kube_rs_architecture.md) |
@@ -116,7 +116,7 @@
 | 30 | **meilisearch-sdk** | 全文搜索 | `Client` → `Index` → `SearchQuery` / `TaskInfo` | serde 类型化文档、HTTP Client trait、搜索 Builder | ✅ 无运行时反射的 REST 客户端 | [30_meilisearch_architecture.md](30_meilisearch_architecture.md) |
 | 31 | **surrealdb** | 文档-图数据库 | `Surreal<C: Connection>` → CRUD / `query` | 引擎类型参数、serde 边界、参数化 SurrealQL | ✅ 同一 API 覆盖远程与嵌入式引擎 | [31_surrealdb_architecture.md](31_surrealdb_architecture.md) |
 | 32 | **vector** | 向量搜索 / ANN | `Index<V>` → `search` | `Vector` trait 固定维度、索引类型参数 | ✅ 纯内存零依赖 | [32_vector_architecture.md](32_vector_architecture.md) |
-| 33 | **sentry** | 错误追踪 / 可观测性 | `Client` / `Hub` / `Scope` / `Transaction` | RAII Guard、线程本地 Hub、Scope 闭包 | ✅ 无 Recorder 时事件丢弃成本低 | [33_sentry_architecture.md](33_sentry_architecture.md) |
+| 33 | **sentry** | 错误追踪 / 可观测性 | `Client` / `Hub` / `Scope` / `Transaction` | RAII Guard、线程本地 Hub、Scope 闭包（Closures） | ✅ 无 Recorder 时事件丢弃成本低 | [33_sentry_architecture.md](33_sentry_architecture.md) |
 | 34 | **metrics** | 指标门面 / Prometheus | `Recorder` trait + `counter!` / `gauge!` / `histogram!` | `Key` 与标签、`Counter`/`Gauge`/`Histogram` 句柄 | ✅ 未安装 Recorder 时近似零开销 | [34_metrics_architecture.md](34_metrics_architecture.md) |
 | 35 | **ort** | AI 推理 / ONNX Runtime | `Session` / `Tensor` / `ExecutionProvider` | 元素类型参数 `Tensor<T>`、`DynValue` 提取校验 | ✅ 复用 ONNX Runtime C++ 后端，Rust 层零额外拷贝 | [35_ort_architecture.md](35_ort_architecture.md) |
 | 36 | **tract** | AI 推理 / 纯 Rust 引擎 | `Onnx` / `TypedModel` / `SimplePlan` | 类型化计算图、执行计划不可变 | ✅ 零外部动态库、编译期图优化 | [36_tract_architecture.md](36_tract_architecture.md) |
@@ -125,7 +125,7 @@
 | 39 | **Salvo** | Web 框架 | `Router` → `#[handler]` → `Request` / `Response` | 宏驱动 Handler、`FlowCtrl` 中间件链 | ✅ 基于 Hyper 的高性能路由 | [39_salvo_architecture.md](39_salvo_architecture.md) |
 | 40 | **ntex** | Web 框架 / 可组合网络服务 | `HttpServer` → `App` → `#[web::get]` | 自研 HTTP 协议栈、运行时无关 Service trait | ✅ async/await 原生、Actix-web 兼容 API | [40_ntex_architecture.md](40_ntex_architecture.md) |
 | 41 | **Askama** | 模板引擎 | `#[derive(Template)]` → `render()` | 编译期 Jinja-like 模板、字段类型检查 | ✅ 运行时零模板解析开销 | [41_askama_architecture.md](41_askama_architecture.md) |
-| 42 | **Maud** | 模板引擎 | `html!` 过程宏 → `Markup` | 编译期 HTML DSL、`Render` trait 组件化 | ✅ 模板即 Rust 代码 | [42_maud_architecture.md](42_maud_architecture.md) |
+| 42 | **Maud** | 模板引擎 | `html!` 过程宏（Procedural Macro） → `Markup` | 编译期 HTML DSL、`Render` trait 组件化 | ✅ 模板即 Rust 代码 | [42_maud_architecture.md](42_maud_architecture.md) |
 
 > [crates.io download statistics · docs.rs API documentation](https://crates.io/)
 
@@ -367,7 +367,7 @@ graph TD
 | **泛型** | `FutureRecord<..>` / `MessageStream<'_, T>` |
 | **关联类型** | `ProducerContext::DeliveryOpaque`、`ConsumerContext::RebalanceType` |
 | **Trait Bound** | `K: ToBytes` / `V: ToBytes`、`M: Message` |
-| **生命周期** | `MessageStream` 借用 `Consumer`；`BorrowedMessage` 受限于 poll 周期 |
+| **生命周期** | `MessageStream` 借用（Borrowing） `Consumer`；`BorrowedMessage` 受限于 poll 周期 |
 | **宏** | 无（纯 trait 与配置驱动） |
 | **零成本证明** | 复用 librdkafka C 实现，Rust 层仅做类型化包装 |
 | 技术维度 | kube-rs |

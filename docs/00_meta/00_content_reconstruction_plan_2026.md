@@ -74,7 +74,7 @@
 2. **操作定义**（Operational）：通过代码行为刻画概念边界
 3. **形式化直觉**（Formal Intuition）：对齐类型理论/内存模型的精确表述（不要求完整证明，但要求公理化方向）
 
-**示例（所有权）**:
+**示例（所有权（Ownership））**:
 
 - 直观："所有权决定谁负责释放一块内存"
 - 操作："赋值转移、函数传参转移、作用域结束自动调用 Drop"
@@ -329,15 +329,15 @@ graph TD
 - 缺少运行时对比（Tokio vs async-std [已归档] vs smol vs embassy）
 - 缺少取消语义与 Task 生命周期
 
-**目标结构**（650+ 行，10 模块）：
+**目标结构**（650+ 行，10 模块（Module））：
 
 1. **概念定义**：Future as state machine、poll-based cooperative multitasking、.await as yield point
 2. **属性清单**：Send Future vs !Send Future、'static bound、 cancellation safety
 3. **依赖图**：async/await → Future → Pin → Unpin → 自引用结构
 4. **机制解释**：
-   - 类型系统：async fn 脱糖为 impl Future
+   - 类型系统（Type System）：async fn 脱糖为 impl Future
    - 内存模型：Pin<&mut Self> 保证地址稳定
-   - 运行时：executor 的 run-queue 与 waker 唤醒机制
+   - 运行时（Runtime）：executor 的 run-queue 与 waker 唤醒机制
 5. **正例**：Minimal HTTP client → Realistic stream processing → Production graceful shutdown
 6. **反例**：在 !Send future 中持有 MutexGuard、忘记 Pin、在 select! 中丢失数据
 7. **表征**：Future 状态转换图（Mermaid）、运行时选择决策树、Pin 机制内存图

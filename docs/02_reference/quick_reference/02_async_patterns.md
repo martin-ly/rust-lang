@@ -1213,7 +1213,7 @@ async fn process_stream() {
 **Rust 版本**: 1.96.1+ (Edition 2024)
 **运行时版本**: Tokio 1.48.0+
 
-⚡ **Rust 异步，高性能与优雅并存！**
+⚡ **Rust 异步（Async），高性能与优雅并存！**
 
 ---
 

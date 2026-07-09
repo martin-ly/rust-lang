@@ -91,7 +91,7 @@
 | Rust Reference | [Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) | 动态分发与生命周期 |
 | Rustonomicon | [Safe Abstractions](https://doc.rust-lang.org/nomicon/) | `unsafe` 边界与 Safe 封装 |
 
-> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权、借用检查与 trait 系统对实现方式的约束。
+> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权（Ownership）、借用检查与 trait 系统对实现方式的约束。
 
 ---
 
@@ -226,7 +226,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
    - 必须按顺序调用 `host()` → `port()` → `build()`
    - 非法状态转换在编译期被拒绝
 
-由 Rust 类型系统，得证。$\square$
+由 Rust 类型系统（Type System），得证。$\square$
 
 ---
 
@@ -543,7 +543,7 @@ ownership_model T2
 | `self` 消费 | `build(self)` | 单次构建 |
 | `Option<T>` | 可选字段 | 显式处理缺失 |
 | `PhantomData<State>` | 类型状态 | 编译期状态机 |
-| `Result<T, E>` | 必填校验 | 错误处理 |
+| `Result<T, E>` | 必填校验 | 错误处理（Error Handling） |
 
 ### 内存安全保证 {#内存安全保证}
 

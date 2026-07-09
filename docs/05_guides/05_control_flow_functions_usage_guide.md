@@ -8,7 +8,7 @@
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 
-**模块**: C03 Control Flow & Functions
+**模块（Module）**: C03 Control Flow & Functions
 **创建日期**: 2026-05-12
 **最后更新**: 2026-05-12
 **Rust 版本**: 1.96.1+ (Edition 2024)
@@ -42,7 +42,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-本指南对应 `crates/c03_control_fn`，涵盖 Rust 控制流、函数系统、闭包、模式匹配以及 Rust 1.95.0 的 `if let guards` 和协程/生成器前瞻。
+本指南对应 `crates/c03_control_fn`，涵盖 Rust 控制流、函数系统、闭包（Closures）、模式匹配以及 Rust 1.95.0 的 `if let guards` 和协程/生成器前瞻。
 
 **前置知识**: [knowledge/01_fundamentals/](../../knowledge/01_fundamentals)
 **速查卡**: [02_control_flow_functions_cheatsheet.md](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md)

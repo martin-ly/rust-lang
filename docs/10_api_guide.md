@@ -73,11 +73,11 @@ fn main() {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-| 模块 | 核心类型 | 描述 |
+| 模块（Module） | 核心类型 | 描述 |
 |------|----------|------|
 | ownership | OwnershipDemo | 所有权演示 |
 | borrow | BorrowChecker | 借用检查示例 |
-| smart_pointers | BoxDemo, RcDemo | 智能指针 |
+| smart_pointers | BoxDemo, RcDemo | 智能指针（Smart Pointer） |
 | lifetime | LifetimeDemo | 生命周期 |
 
 ### c02_type_system {#c02_type_system}

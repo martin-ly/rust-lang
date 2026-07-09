@@ -8,7 +8,7 @@
 > **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **概念说明**: 质量保障（Quality Assurance）是通过系统化的测试、分析和验证活动确保软件满足需求的过程。Rust 的质量保障结合编译时检查（类型系统、借用检查）、运行时测试（单元测试、集成测试、基准测试）和形式化验证（模型检查、定理证明）来提供多层次的质量保证。
+> **概念说明**: 质量保障（Quality Assurance）是通过系统化的测试、分析和验证活动确保软件满足需求的过程。Rust 的质量保障结合编译时检查（类型系统（Type System）、借用检查）、运行时测试（单元测试、集成测试、基准测试）和形式化验证（模型检查、定理证明）来提供多层次的质量保证。
 
 ---
 
@@ -58,7 +58,7 @@
 | :--- | :--- | :--- |
 | **测试覆盖** | 单元/集成/基准、覆盖率报告 | [TESTING_COVERAGE_GUIDE](../../05_guides/05_testing_coverage_guide.md) |
 | **性能测试** | 基准测试、性能回归、分析工具 | [PERFORMANCE_TESTING_REPORT](../../05_guides/05_performance_testing_report.md) |
-| **内存安全** | MIRI、Valgrind、无 UB 验证 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
+| **内存安全（Memory Safety）** | MIRI、Valgrind、无 UB 验证 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
 | **形式化验证** | Prusti、Kani、Creusot | [TOOLS_GUIDE](../../../archive/research_notes_2026_06_25/10_tools_guide.md)、[FORMAL_VERIFICATION_GUIDE](../../../archive/research_notes_2026_06_25/10_formal_verification_guide.md) |
 | **代码质量** | Clippy、rustfmt、文档 | [QUALITY_CHECKLIST](../../../archive/research_notes_2026_06_25/10_quality_checklist.md) |
 

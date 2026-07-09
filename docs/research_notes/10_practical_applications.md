@@ -162,8 +162,8 @@
 **Rust 特性应用**：
 
 - **所有权系统**：确保内存安全，避免系统崩溃
-- **零成本抽象**：系统调用接口的高效实现
-- **并发安全**：多核处理器的安全并发
+- **零成本抽象（Zero-Cost Abstraction）**：系统调用接口的高效实现
+- **并发安全（Concurrency Safety）**：多核处理器的安全并发
 
 **关键代码示例**：
 
@@ -196,7 +196,7 @@ impl Syscall {
 
 **性能表现**：
 
-- 内存安全：零内存安全漏洞
+- 内存安全（Memory Safety）：零内存安全漏洞
 - 性能：接近 C 语言性能
 - 可维护性：代码更易维护
 
@@ -217,7 +217,7 @@ impl Syscall {
 **Rust 特性应用**：
 
 - **异步编程**：Future 和 async/await
-- **零成本抽象**：异步 I/O 的高效实现
+- **零成本抽象**：异步（Async） I/O 的高效实现
 - **类型安全**：编译时保证异步安全
 
 **关键代码示例**：
@@ -940,7 +940,7 @@ impl<T> Drop for SafeVec<T> {
    - 优先使用栈分配
    - 合理使用 `Box`、`Vec` 等智能指针
    - 避免不必要的堆分配
-2. **错误处理**：
+2. **错误处理（Error Handling）**：
    - 使用 `Result` 类型处理错误
    - 提供清晰的错误信息
    - 实现适当的错误恢复机制
@@ -1013,7 +1013,7 @@ impl<T> Drop for SafeVec<T> {
 撰写单个案例报告时，建议包含以下部分：
 
 1. **项目概述**：名称、领域、规模、主要功能
-2. **Rust 特性应用**：所有权、借用、并发、异步、零成本抽象、类型安全等在该项目中的体现
+2. **Rust 特性应用**：所有权（Ownership）、借用（Borrowing）、并发、异步、零成本抽象、类型安全等在该项目中的体现
 3. **关键代码示例**：1–2 段具代表性的代码，附简要说明
 4. **性能/安全/可维护性**：量化指标或定性结论（若有）
 5. **研究价值**：对形式化、类型理论、实验或方法论的启发
@@ -1045,7 +1045,7 @@ impl<T> Drop for SafeVec<T> {
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-- **类型系统 / Trait** [10_type_system_foundations.md](type_theory/10_type_system_foundations.md)、[10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md)：各案例中的泛型、`impl Trait`、派生与 Trait 对象，可作类型论与 Trait 形式化的实例。
+- **类型系统（Type System） / Trait** [10_type_system_foundations.md](type_theory/10_type_system_foundations.md)、[10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md)：各案例中的泛型、`impl Trait`、派生与 Trait 对象，可作类型论与 Trait 形式化的实例。
 - **性能基准** [10_performance_benchmarks.md](experiments/10_performance_benchmarks.md)、**并发性能** [10_concurrency_performance.md](experiments/10_concurrency_performance.md)：案例 1–2 的吞吐、延迟、并发模式可与实验的「结果分析模板」对照，用于选型与调优。
 - **内存分析** [10_memory_analysis.md](experiments/10_memory_analysis.md)、**编译器优化** [10_compiler_optimizations.md](experiments/10_compiler_optimizations.md)：案例中的分配策略、`-O2`/LTO 等可与实验指南结合，做上线前检查。
 
@@ -1119,7 +1119,7 @@ impl<T> Drop for SafeVec<T> {
 | 异步 / Future | [ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | [async-await.html](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) |
 | 并发 / Send/Sync | [ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | [send-and-sync.html](https://doc.rust-lang.org/nomicon/send-and-sync.html) | 核心语言设计 |
 | Unsafe / 原始指针 | [ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | [what-unsafe-does.html](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [RFC 1966](https://rust-lang.github.io/rfcs/1966-unsafe-pointer-reform.html) |
-| impl Trait / 泛型 | [ch10](https://doc.rust-lang.org/book/ch10-02-traits.html) | — | [RFC 1522](https://rust-lang.github.io/rfcs/1522-conservative-impl-trait.html)、[RFC 1951](https://rust-lang.github.io/rfcs/1951-expand-impl-trait.html) |
+| impl Trait / 泛型（Generics） | [ch10](https://doc.rust-lang.org/book/ch10-02-traits.html) | — | [RFC 1522](https://rust-lang.github.io/rfcs/1522-conservative-impl-trait.html)、[RFC 1951](https://rust-lang.github.io/rfcs/1951-expand-impl-trait.html) |
 | 型变 | [ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | [subtyping-and-variance.html](https://doc.rust-lang.org/nomicon/subtyping.html) | [RFC 738](https://rust-lang.github.io/rfcs/0738-variance.html) |
 | Error 处理 | [ch09](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | — | [RFC 1859](https://rust-lang.github.io/rfcs/1859-try-trait.html)（`Try` trait） |
 

@@ -28,7 +28,7 @@
 >
 > **Bloom 层级**: L3-L5 (应用/分析/评价)
 >
-> **知识领域**: 消息队列、AMQP、RabbitMQ、异步 IO、分布式系统
+> **知识领域**: 消息队列、AMQP、RabbitMQ、异步（Async） IO、分布式系统
 >
 > **对应 Rust 版本**: 1.96.1+ (lapin 2.5+)
 
@@ -280,7 +280,7 @@ let conn = Connection::connect(&addr, props).await?;
 | 连接/通道分层 | `Connection` / `Channel` | 明确资源所有权，避免跨线程共享通道 |
 | 确认语义 | `PublisherConfirm` / `Confirmation` | 必须显式等待确认，减少未处理发布 |
 | 异步 trait | `Consumer` 实现 `Stream` | 与 futures/tokio 生态组合，`Send` 保证跨任务安全 |
-| 路由类型 | `ExchangeKind` 枚举 | 交换机类型在编译期选择，避免字符串拼写错误 |
+| 路由类型 | `ExchangeKind` 枚举（Enum） | 交换机类型在编译期选择，避免字符串拼写错误 |
 
 > [来源: [lapin API docs](https://docs.rs/lapin/latest/lapin/)]
 

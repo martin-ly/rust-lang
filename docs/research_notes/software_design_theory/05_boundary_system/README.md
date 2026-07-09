@@ -118,7 +118,7 @@
 | **零依赖** | 仅 std、无第三方 crate | supported_unsupported_matrix；选 Native |
 | **语义等价** | 与 GoF/OOP 一致 | expressive_inexpressive_matrix；选 Same |
 | **组合约束** | 子模式 Safe 则组合 Safe | 定理 B-T1、SBM-C2；见 [04_compositional_engineering](../04_compositional_engineering/02_effectiveness_proofs.md) CE-T1–T3 |
-| **执行模型** | 同步/异步/并发/并行/分布式 | [03_execution_models/06_boundary_analysis](../03_execution_models/06_boundary_analysis.md) 决策树 |
+| **执行模型** | 同步/异步（Async）/并发/并行/分布式 | [03_execution_models/06_boundary_analysis](../03_execution_models/06_boundary_analysis.md) 决策树 |
 
 **选型流程**：需求 → 03_semantic_boundary_map 模式选取示例 → 查 Safe/支持/表达 → 确定实现路径。
 
@@ -135,7 +135,7 @@
 
 **步骤 2**：判安全 → [safe_unsafe_matrix](10_safe_unsafe_matrix.md) 创建型表 → **纯 Safe**。
 
-**步骤 3**：判支持 → [supported_unsupported_matrix](10_supported_unsupported_matrix.md) → **原生**（trait + 枚举）。
+**步骤 3**：判支持 → [supported_unsupported_matrix](10_supported_unsupported_matrix.md) → **原生**（trait + 枚举（Enum））。
 
 **步骤 4**：判表达 → [expressive_inexpressive_matrix](10_expressive_inexpressive_matrix.md) → **等价**。
 
@@ -206,7 +206,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

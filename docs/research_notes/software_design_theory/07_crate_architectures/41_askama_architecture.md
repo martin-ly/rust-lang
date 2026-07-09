@@ -153,7 +153,7 @@ async fn page() -> impl IntoResponse {
 | 维度 | Askama | Maud | Tera | Axum/Actix-web 原生 |
 |:--|:--|:--|:--|:--|
 | **语法风格** | Jinja-like | Rust DSL (`html!` 宏) | Jinja-like | 无（直接返回字符串/JSON） |
-| **渲染时机** | 编译期 | 编译期 | 运行时解析 | 运行时 |
+| **渲染时机** | 编译期 | 编译期 | 运行时解析 | 运行时（Runtime） |
 | **类型安全** | 强（字段编译期检查） | 极强（Rust 表达式） | 弱（动态上下文） | 强（返回类型） |
 | **模板文件** | 支持 `.html` 文件 | 通常内联 | 支持 `.html` 文件 | 不适用 |
 | **与 axum 集成** | `with-axum` feature | `axum` feature | 手动渲染后返回 | 原生支持 |

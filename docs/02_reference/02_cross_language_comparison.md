@@ -60,7 +60,7 @@
 
 | 维度 | Rust | C++ | Go | Python |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 安全 | 编译期保证 | 依赖程序员 | 运行时 GC | 运行时 GC |
+| 安全 | 编译期保证 | 依赖程序员 | 运行时（Runtime） GC | 运行时 GC |
 | 零成本 | 是 | 可选 | 否 | 否 |
 | 学习曲线 | 高 | 高 | 低 | 低 |
 
@@ -139,7 +139,7 @@ print(s)           # 仍然可用
 | **Python** | 引用计数 + GC | 运行时 | 无官方形式化证明 |
 
 > **来源: [Rust Reference: Ownership](https://doc.rust-lang.org/reference/)** Rust 所有权规则由编译器在类型检查和借用检查阶段强制执行，对应线性逻辑中的资源唯一性公理。 ✅
-> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)** Safe Rust 内存安全（无 UAF / 无 DF / 无数据竞争）已在 Iris 分离逻辑框架中得到机器检验证明。 ✅
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)** Safe Rust 内存安全（Memory Safety）（无 UAF / 无 DF / 无数据竞争）已在 Iris 分离逻辑框架中得到机器检验证明。 ✅
 > **来源: [C++ Reference: std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr)** C++ `unique_ptr` 提供运行时 RAII 管理，但编译器不检查 use-after-move，无统一形式化安全保证。 ✅
 > **来源: [Go Spec: Memory Model](https://go.dev/ref/mem)** Go 依赖并发标记-清除 GC，内存安全由运行时保证，无编译期形式化验证。 ✅
 
@@ -158,7 +158,7 @@ print(s)           # 仍然可用
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 异步 | async/await | 库（如 asio） | go/chan | asyncio |
 | 数据竞争 | 编译期禁止 | 需手动同步 | 通道优先 | GIL 限制 |
-| 推荐 | 所有权 + Send/Sync | 各显其能 | CSP/goroutine | 多进程/asyncio |
+| 推荐 | 所有权（Ownership） + Send/Sync | 各显其能 | CSP/goroutine | 多进程/asyncio |
 
 ### 并发代码对比示例 {#并发代码对比示例}
 
@@ -427,7 +427,7 @@ except Exception as e:
 
 | 维度 | Rust | C++ | Go | Python |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 泛型 | 单态化 | 模板 | 1.18+ 泛型 | 不适用 |
+| 泛型（Generics） | 单态化（Monomorphization） | 模板 | 1.18+ 泛型 | 不适用 |
 | 推断 | 强 | 有 | 有 | 无 |
 
 ### 泛型代码对比示例 {#泛型代码对比示例}
@@ -493,7 +493,7 @@ result = max_val(10, 20)
 
 > **来源: [ACM](https://dl.acm.org/)**
 
-| 语言 | 类型系统 | 泛型实现 | 类型安全 | 形式化证明 |
+| 语言 | 类型系统（Type System） | 泛型实现 | 类型安全 | 形式化证明 |
 | :--- | :--- | :--- | :--- | :--- |
 | **Rust** | 线性类型 + Trait | 单态化 | 编译期 | [类型安全定理](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
 | **C++** | 模板元编程 | 编译期实例化 | 编译期 | 无官方形式化 |
@@ -574,7 +574,7 @@ $ python -m pytest
 | :--- | :--- | :--- | :--- | :--- |
 | **内存安全** | ✅ 编译期保证 | ⚠️ 程序员负责 | ✅ GC | ✅ GC |
 | **数据竞争自由** | ✅ 编译期保证 | ❌ 手动同步 | ⚠️ 运行时检测 | ⚠️ GIL |
-| **零成本抽象** | ✅ 是 | ✅ 是 | ❌ 否 | ❌ 否 |
+| **零成本抽象（Zero-Cost Abstraction）** | ✅ 是 | ✅ 是 | ❌ 否 | ❌ 否 |
 | **编译期错误** | ✅ 丰富 | ✅ 丰富 | ✅ 中等 | ❌ 无 |
 | **运行时性能** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
 | **学习曲线** | 陡峭 | 陡峭 | 平缓 | 平缓 |
@@ -593,10 +593,10 @@ $ python -m pytest
 | 概念 | 形式化文档 | 核心定理 |
 | :--- | :--- | :--- |
 | 所有权 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | T2 唯一性, T3 内存安全 |
-| 借用 | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) | T1 数据竞争自由 |
+| 借用（Borrowing） | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) | T1 数据竞争自由 |
 | 生命周期 | lifetime_formalization | LF-T2 引用有效性 |
 | 并发 | [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | SEND-T1, SYNC-T1 |
-| 异步 | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | T6.1-T6.3 |
+| 异步（Async） | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | T6.1-T6.3 |
 | 类型系统 | [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | T1-T3 类型安全 |
 
 ### 权威来源索引 {#权威来源索引-1}

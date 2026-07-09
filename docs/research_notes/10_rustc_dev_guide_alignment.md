@@ -106,7 +106,7 @@
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [Rust Reference 对齐](10_rust_reference_alignment.md)
 - [模块系统规范](formal_modules/10_module_system_specification.md)
-- [模块 HIR/MIR 映射](formal_modules/30_module_hir_mir_mapping.md)
+- [模块（Module） HIR/MIR 映射](formal_modules/30_module_hir_mir_mapping.md)
 - [知识图谱索引](10_knowledge_graph_index.md)
 
 ---

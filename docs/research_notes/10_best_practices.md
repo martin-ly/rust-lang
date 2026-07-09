@@ -133,7 +133,7 @@
 | :--- | :--- | :--- |
 | **形式化** | Def OW1、定理 T2 | [ownership_model](formal_methods/10_ownership_model.md) |
 | **代码** | `let s = String::from("x"); take_ownership(s);` | 对应 T2 移动语义 |
-| **场景** | 所有权转移、借用、生命周期 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) |
+| **场景** | 所有权转移、借用（Borrowing）、生命周期 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) |
 | **反例** | 双重可变借用、悬垂引用 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md) |
 | **衔接** | 定理引用 PROOF_INDEX | [PROOF_INDEX](10_proof_index.md) |
 
@@ -789,7 +789,7 @@ git commit -m "添加所有权模型形式化研究笔记
 | :--- | :--- | :--- |
 | Unsafe 能力边界 | [what-unsafe-does.html](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | `unsafe` 允许的五种额外操作 |
 | 行为 considered UB | [what-unsafe-does.html#behavior-considered-undefined](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | 语言层面的未定义行为清单 |
-| 生命周期省略 | [lifetime-elision.html](https://doc.rust-lang.org/nomicon/lifetime-elision.html) | 函数签名中的生命周期推断 |
+| 生命周期省略（Lifetime Elision） | [lifetime-elision.html](https://doc.rust-lang.org/nomicon/lifetime-elision.html) | 函数签名中的生命周期推断 |
 | 子类型与型变 | [subtyping-and-variance.html](https://doc.rust-lang.org/nomicon/subtyping.html) | 协变/逆变/不变与内存安全 |
 | 发送与同步 | [send-and-sync.html](https://doc.rust-lang.org/nomicon/send-and-sync.html) | `Send`/`Sync` 的语义与手动实现 |
 | 未初始化内存 | [uninitialized.html](https://doc.rust-lang.org/nomicon/uninitialized.html) | `MaybeUninit` 与 unsafe 初始化 |
@@ -800,7 +800,7 @@ git commit -m "添加所有权模型形式化研究笔记
 | :--- | :--- | :--- |
 | 所有权与借用 | [ch04-00-understanding-ownership.html](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | 所有权、借用、slice |
 | 泛型与 trait | [ch10-00-generics.html](https://doc.rust-lang.org/book/ch10-00-generics.html) | 泛型、trait、生命周期 |
-| 迭代器与闭包 | [ch13-00-functional-features.html](https://doc.rust-lang.org/book/ch13-00-functional-features.html) | 闭包、迭代器 |
+| 迭代器与闭包 | [ch13-00-functional-features.html](https://doc.rust-lang.org/book/ch13-00-functional-features.html) | 闭包（Closures）、迭代器 |
 | 并发编程 | [ch16-00-concurrency.html](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | 线程、`Mutex`、`Arc`、Send/Sync |
 | 高级 trait / unsafe | [ch19-00-advanced-features.html](https://doc.rust-lang.org/book/ch19-00-advanced-features.html) | 不安全 Rust、高级 trait、宏 |
 

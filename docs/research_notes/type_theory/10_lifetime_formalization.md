@@ -12,7 +12,7 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-> **视角**: 类型理论视角 — 关注生命周期作为类型系统的组成部分，与类型推导、子类型、泛型、型变的交互。
+> **视角**: 类型理论视角 — 关注生命周期作为类型系统的组成部分，与类型推导、子类型、泛型（Generics）、型变的交互。
 > **对应视角**: [形式化方法视角](../formal_methods/10_lifetime_formalization.md) 聚焦定理、公理、证明目标与国际形式化成果映射。
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
@@ -546,7 +546,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 | 主线 | 代表工作 | 生命周期含义 | 证明方法 |
 | :--- | :--- | :--- | :--- |
-| **类型系统/区域类型** | Oxide | 位置集合（provenance） | Progress & Preservation |
+| **类型系统（Type System）/区域类型** | Oxide | 位置集合（provenance） | Progress & Preservation |
 | **分离逻辑/借用命题** | RustBelt | Time Credits / Lifetime Logic | Iris 高阶并发分离逻辑 |
 | **操作语义/运行时检查** | RustSEM | 时间戳跨度（timestamp span） | K-Framework 可执行语义 |
 | **别名模型** | Tree Borrows | 借用树中节点的存活区间 | Rocq 机械证明 |
@@ -589,7 +589,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

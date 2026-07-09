@@ -171,13 +171,13 @@
      - 性质1（无悬垂指针）：由所有权唯一性和作用域规则保证
      - 性质2（无双重释放）：由所有权唯一性直接保证
      - 性质3（无内存泄漏）：由规则3（作用域结束）保证
-3. **Def RC1/ARC1/CELL1/REFCELL1/BOX1 / 定理 RC-T1/REFCELL-T1/BOX-T1（Rust 1.93 智能指针）** ✅ `L1`
+3. **Def RC1/ARC1/CELL1/REFCELL1/BOX1 / 定理 RC-T1/REFCELL-T1/BOX-T1（Rust 1.93 智能指针（Smart Pointer））** ✅ `L1`
    - **形式化表示**: Rc/Arc 引用计数、Cell/RefCell 内部可变、Box RAII
    - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
 4. **Def MAYBEUNINIT1 / 定理 MAYBEUNINIT-T1（MaybeUninit 1.93）** ✅
    - **形式化表示**: assume_init 合法仅当 initialized
    - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
-5. **Def ATOMIC1 / 定理 ATOMIC-T1（原子操作）** ✅
+5. **Def ATOMIC1 / 定理 ATOMIC-T1（原子操作（Atomic Operations））** ✅
    - **形式化表示**: 原子操作与数据竞争自由相容
    - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
 6. **Def UNION1（union 非活动字段）** ✅
@@ -357,7 +357,7 @@
    - **形式化表示**: $\forall F, s, s': \text{State}(F)=s \land \text{Transition}(F)=s' \rightarrow \text{ValidTransition}(s, s')$
    - **证明方法**: 归纳法 + 案例分析 + 不变式验证
    - **证明位置**: [10_async_state_machine.md#定理-61-状态一致性](formal_methods/10_async_state_machine.md#定理-61-状态一致性)
-2. **定理 6.2 (并发安全)** ✅
+2. **定理 6.2 (并发安全（Concurrency Safety）)** ✅
    - **形式化表示**: $\forall \{F_1,\ldots,F_n\}: (\forall i: \text{Send}(F_i)\land\text{Sync}(F_i)) \rightarrow \text{DataRaceFree}(\text{ConcurrentExec}[\{F_1,\ldots,F_n\}])$
    - **证明方法**: 类型系统保证 + 运行时保证 + 组合性
    - **证明位置**: [10_async_state_machine.md#定理-62-并发安全](formal_methods/10_async_state_machine.md#定理-62-并发安全)
@@ -379,7 +379,7 @@
 
 1. **定理 1 (Pin 保证)** ✅
    - **形式化表示**: 对于非 `Unpin` 类型 $T$ 和 $\text{Pin}[\Box[T]]$，被 Pin 的值在内存中的位置不会改变
-   - **证明方法**: 类型系统 + 编译器保证
+   - **证明方法**: 类型系统（Type System） + 编译器保证
    - **证明位置**: [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md)
 2. **定理 2 (自引用类型安全)** ✅
    - **形式化表示**: 若自引用类型 $T$ 被 Pin，则其自引用字段安全，无悬垂指针
@@ -411,7 +411,7 @@
 7. **推论 RPIT-C1** ✅ — RPITIT 与 dyn Trait 对象安全交互；[证明位置](type_theory/10_trait_system_formalization.md)
 8. **Def ORPH1/NEG1、定理 NEG-T1（孤儿规则、negative impls）** ✅ — 孤儿形式化、negative impl 与 coherence 交互；[证明位置](type_theory/10_trait_system_formalization.md)
 9. **Def DYN-IMPL1、定理 DYN-T1、推论 DYN-C1（impl/dyn 可替换边界）** ✅ — 对象安全条件下 impl T 与 dyn T 可替换条件；[证明位置](type_theory/10_trait_system_formalization.md)
-10. **Def TRAIT-GAT1、Def SPEC1、定理 SPEC-T1（Trait+GAT、specialization）** ✅ — 泛型+GAT 解析优先级、specialization 与 coherence；[证明位置](type_theory/10_trait_system_formalization.md)
+10. **Def TRAIT-GAT1、Def SPEC1、定理 SPEC-T1（Trait+GAT、specialization）** ✅ — 泛型（Generics）+GAT 解析优先级、specialization 与 coherence；[证明位置](type_theory/10_trait_system_formalization.md)
 
 #### 型变理论 {#型变理论}
 
@@ -506,7 +506,7 @@
 **Rust Idioms 与反模式**：
 
 1. **Def RAII1、Axiom RAII1、定理 RAII-T1** ✅ — RAII 与 ownership 规则 3 一致；[证明位置](software_design_theory/06_rust_idioms.md)
-2. **Def NW1、定理 NW-T1** ✅ — Newtype 零成本抽象；[证明位置](software_design_theory/06_rust_idioms.md)
+2. **Def NW1、定理 NW-T1** ✅ — Newtype 零成本抽象（Zero-Cost Abstraction）；[证明位置](software_design_theory/06_rust_idioms.md)
 3. **Def TS1、定理 TS-T1** ✅ — 类型状态与 Builder B-T2 一致；[证明位置](software_design_theory/06_rust_idioms.md)
 4. **Def AP1、Axiom AP1** ✅ — 反模式形式化；13 反例索引；[证明位置](software_design_theory/07_anti_patterns.md)
 
@@ -659,7 +659,7 @@
 
 | 深度 | 证明列表（示例） |
 | :--- | :--- |
-| **L1** | 所有权 T3、借用 T2、生命周期 LF-T1–T3、类型 T1/T2/T4/T5、异步 T6.1–T6.3、Pin T1–T3、Trait T1–T3、设计模式推论、实验定理 |
+| **L1** | 所有权（Ownership） T3、借用（Borrowing） T2、生命周期 LF-T1–T3、类型 T1/T2/T4/T5、异步（Async） T6.1–T6.3、Pin T1–T3、Trait T1–T3、设计模式推论、实验定理 |
 | **L2** | 所有权 T2、借用 T1、类型 T3（见 [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md)）；型变 T1–T4、组合工程 CE-T1–T3、边界 BMP-T1/T2 |
 | **L3** | Coq 骨架已创建 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)（证明 Admitted）；补全见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[L3_MACHINE_PROOF_GUIDE](10_l3_machine_proof_guide.md) |
 
@@ -686,7 +686,7 @@
 | 本项目定理 | 证明深度 | RustBelt (Iris/Coq) | Aeneas (Lean/Coq/F*) | Kani | Verus | Creusot | 差距 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **T-OW2 所有权唯一性** | L2 | Theorem 4.1 (λRust `own(b)`) | 翻译后由线性类型隐式保持 | 可符号验证简单案例 | ghost 状态可编码 | 函数合约可表达 | 无 L3 机器证明 |
-| **T-OW3 内存安全框架** | L1 | RustBelt 类型安全 ⇒ 内存安全 | Safe Rust 子集自动保持 | 可检测 UAF/双重释放 | 可验证分配/释放契约 | Why3 可编码部分性质 | 无 MIR 级语义 |
+| **T-OW3 内存安全框架** | L1 | RustBelt 类型安全 ⇒ 内存安全（Memory Safety） | Safe Rust 子集自动保持 | 可检测 UAF/双重释放 | 可验证分配/释放契约 | Why3 可编码部分性质 | 无 MIR 级语义 |
 | **T-BR1 数据竞争自由** | L2 | Theorem 5.2 (借用规则 ⇒ 无竞争) | 借用区域消除竞争 | 并发路径符号检查 | 线性 ghost 类型验证 | 不支持并发 | 无 Tree Borrows 形式化 |
 | **T-TY3 类型安全** | L2 | 类型系统章节 | 类型保持翻译 | 类型相关 panic 检查 | 类型不变式 | 类型不变式 | 无完整进展/保持 L3 |
 | **LF-T2 引用有效性** | L1/L2 | Lifetime Logic | region 约束保持 | 边界检查 | 可表达生命周期不变式 | 部分支持 | 无 region inference L3 |

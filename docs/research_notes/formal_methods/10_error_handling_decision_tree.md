@@ -4,7 +4,7 @@
 > **Summary**: Rust 错误处理决策树 Error Handling Decision Tree. (stub/archive redirect)
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级（已迁回并持续推进）
-> **概念族**: 错误处理 / 决策树
+> **概念族**: 错误处理（Error Handling） / 决策树
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链节点持续推进。
 > **内容分级**: [归档级]
 >

@@ -42,7 +42,7 @@
 - [ ] 键值存储
 - [ ] TTL过期
 - [ ] LRU淘汰
-- [ ] 并发安全
+- [ ] 并发安全（Concurrency Safety）
 
 ---
 

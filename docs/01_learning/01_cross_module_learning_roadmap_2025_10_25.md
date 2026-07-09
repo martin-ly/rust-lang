@@ -143,7 +143,7 @@ trait OldProcessor {
 }
 ```
 
-**模块关联**: C06 (异步) + C04 (泛型) + ≥1.85 async Fn
+**模块关联**: C06 (异步) + C04 (泛型（Generics）) + ≥1.85 async Fn
 
 **学习建议**: 在学习 C04 泛型时，尝试用 1.85 的 `async Fn` 语法重构异步代码。
 
@@ -294,10 +294,10 @@ C07 高级系统编程 ────────────┘
 | 特性 | 所属模块 | 前置知识 | 学习优先级 |
 |------|----------|----------|------------|
 | `isqrt` | C08 算法 | 基础数学 | ⭐ 高 |
-| `get_disjoint_mut` | C01/C05 | 所有权、HashMap | ⭐⭐ 中高 |
+| `get_disjoint_mut` | C01/C05 | 所有权（Ownership）、HashMap | ⭐⭐ 中高 |
 | `async Fn` trait | C04/C06 | 泛型、async/await | ⭐⭐ 中 |
-| `if let guards` | C03/C05 | 模式匹配、控制流 | ⭐⭐ 中 |
-| never_type (!) | C03/C13 | 错误处理 | ⭐⭐ 中 |
+| `if let guards` | C03/C05 | 模式匹配（Pattern Matching）、控制流 | ⭐⭐ 中 |
+| never_type (!) | C03/C13 | 错误处理（Error Handling） | ⭐⭐ 中 |
 
 ---
 

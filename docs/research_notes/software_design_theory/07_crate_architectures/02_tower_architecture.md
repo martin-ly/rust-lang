@@ -729,7 +729,7 @@ Tower 处于"抽象 sweet spot"——足够底层以支持任意请求-响应协
 | Tower GitHub | <https://github.com/tower-rs/tower> | 设计文档与示例 |
 | hyper 文档 | <https://docs.rs/hyper/> | HTTP 层面的 Service 实现 |
 | axum 文档 | <https://docs.rs/axum/> | Tower 在 Web 框架中的应用 |
-| Rust Reference | <https://doc.rust-lang.org/reference/> | 关联类型、泛型、Pin |
+| Rust Reference | <https://doc.rust-lang.org/reference/> | 关联类型、泛型（Generics）、Pin |
 | Kleisli Category (Wikipedia) | <https://en.wikipedia.org/wiki/Kleisli_category> | 函数式对应概念 |
 
 > **文档元信息**

@@ -27,7 +27,7 @@
 >
 > **Bloom 层级**: L3-L5 (应用/分析/评价)
 >
-> **知识领域**: 云厂商 SDK、Azure、异步 HTTP 客户端、TokenCredential、Pager/Poller
+> **知识领域**: 云厂商 SDK、Azure、异步（Async） HTTP 客户端、TokenCredential、Pager/Poller
 >
 > **对应 Rust 版本**: 1.96.1+ (azure-sdk-rust 稳定版)
 
@@ -136,7 +136,7 @@ let response = poller.await?;
 | 分页 | 各服务 `.into_paginator().items()` | 统一 `Pager<T>` / `try_next()` |
 | 长运行 | `Poller`（部分服务） | 统一 `Poller<T>` / `.await` |
 | 请求构造 | Smithy 生成的 builder | 服务客户端方法 + `ClientOptions` builder |
-| 运行时 | 默认 Tokio | 默认 Tokio，可 `set_async_runtime` 替换 |
+| 运行时（Runtime） | 默认 Tokio | 默认 Tokio，可 `set_async_runtime` 替换 |
 
 ---
 

@@ -290,8 +290,8 @@ where
 
 | 反模式类 | 规避策略 | 工具/模式 |
 | :--- | :--- | :--- |
-| 所有权 | 显式作用域、避免自引用环 | Weak 打破 Rc 环 |
-| 借用 | 先 collect 再修改、缩短借用范围 | `std::mem::take` 转移 |
+| 所有权（Ownership） | 显式作用域、避免自引用环 | Weak 打破 Rc 环 |
+| 借用（Borrowing） | 先 collect 再修改、缩短借用范围 | `std::mem::take` 转移 |
 | 并发 | 选 Send/Sync 类型、消息传递优先 | channel、Arc\<Mutex> |
 | 设计模式误选 | 按需求查 `03_semantic_boundary_map` | 模式选取示例 |
 | 过度抽象 | 从具体开始，按需泛型 | impl Trait、trait 按需 |
@@ -443,7 +443,7 @@ let x = match result {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

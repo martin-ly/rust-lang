@@ -82,7 +82,7 @@
 | 概念 | 定义 | 公理 | 定理 | 证明 | Rust示例 |
 |------|------|------|------|------|----------|
 | Type Safety | Def TY1: 类型安全 | A-TY1: 良类型性 | T-TY1: 进展性定理 | L2: 进展归纳 | `type_system_basics.rs` |
-| Generic | Def GE1: 参数化类型 | A-GE1: 单态化 | T-GE1: 零成本抽象定理 | L2: 等价证明 | `generics_basics.rs` |
+| Generic | Def GE1: 参数化类型 | A-GE1: 单态化（Monomorphization） | T-GE1: 零成本抽象定理 | L2: 等价证明 | `generics_basics.rs` |
 | Trait | Def TR1: 接口抽象 | A-TR1: 一致性 | T-TR1: Trait一致性定理 | L2: 归纳法 | `traits_basics.rs` |
 | Lifetime Subtyping | Def LT2: 子类型关系 | A-LT2: 协变/逆变 | T-LT2: 子类型替换定理 | L2: 上下文归纳 | `variance.rs` |
 | PhantomData | Def TY2: 标记类型 | A-TY2: 零大小 | T-TY2: Phantom安全性定理 | L2: 构造证明 | `phantom_types.rs` |
@@ -97,9 +97,9 @@
 | 概念 | 定义 | 公理 | 定理 | 证明 | Rust示例 |
 |------|------|------|------|------|----------|
 | Mutex | Def MT1: 互斥锁 | A-MT1: 数据竞争自由 | T-MT1: Mutex安全性定理 | L2: 不变式证明 | `shared_state.rs` |
-| Channel | Def CH1: 消息传递 | A-CH1: 所有权传递 | T-CH1: 通道安全性定理 | L2: 类型系统 | `message_passing.rs` |
+| Channel | Def CH1: 消息传递 | A-CH1: 所有权传递 | T-CH1: 通道安全性定理 | L2: 类型系统（Type System） | `message_passing.rs` |
 | Arc | Def AR1: 原子引用计数 | A-AR1: 线程安全 | T-AR1: Arc安全性定理 | L2: 原子性证明 | `shared_state.rs` |
-| Atomic | Def AT1: 原子操作 | A-AT1: 内存序 | T-AT1: 原子一致性定理 | L2: 内存模型 | `lock_free.rs` |
+| Atomic | Def AT1: 原子操作（Atomic Operations） | A-AT1: 内存序 | T-AT1: 原子一致性定理 | L2: 内存模型 | `lock_free.rs` |
 
 ---
 
@@ -157,7 +157,7 @@
 |------|------|------|------|------|--------|
 | 所有权系统 | 7 | 7 | 7 | 7 | 100% ✅ |
 | 类型系统 | 5 | 5 | 5 | 5 | 100% ✅ |
-| 并发安全 | 4 | 4 | 4 | 4 | 100% ✅ |
+| 并发安全（Concurrency Safety） | 4 | 4 | 4 | 4 | 100% ✅ |
 | 异步编程 | 4 | 4 | 4 | 4 | 100% ✅ |
 | 分布式系统 | 8 | 8 | 8 | 8 | 100% ✅ |
 | 工作流引擎 | 3 | 3 | 3 | 3 | 100% ✅ |
@@ -218,7 +218,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

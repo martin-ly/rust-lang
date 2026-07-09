@@ -5,7 +5,7 @@
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
 > **Bloom 层级**: L5-L6 (分析/评价)
-> **概念族**: 所有权 / 借用 / 反例边界
+> **概念族**: 所有权（Ownership） / 借用（Borrowing） / 反例边界
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **创建日期**: 2026-06-29
@@ -252,7 +252,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 | 可变+不可变借用重叠 | 借用排斥性 | E0502 | 重排操作 / 临时作用域 |
 | 返回悬垂引用 | 引用有效性 | E0106 / E0515 | 返回所有权 / 生命周期参数 |
 | 自引用结构体被移动 | 移动语义 | E0106 | 索引 / Pin / 重新设计 |
-| 错误实现 Send/Sync | 并发不变量 | — (运行时 UB) | 不手动实现 / 使用同步原语 |
+| 错误实现 Send/Sync | 并发不变量 | — (运行时（Runtime） UB) | 不手动实现 / 使用同步原语 |
 | 生命周期参数不足 | 生命周期推断 | E0106 | 显式标注 / 返回 owned 类型 |
 
 > **权威来源**: [Rust Reference – Ownership](https://doc.rust-lang.org/reference/) | [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) | [The Rust Programming Language – Ch 4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | [The Rust Programming Language – Ch 10](https://doc.rust-lang.org/book/ch10-00-generics.html) | [Rustonomicon – Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | [Pin and Suffering](https://blog.yoshuawuyts.com/)

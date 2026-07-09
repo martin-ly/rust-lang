@@ -73,7 +73,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-| 模块 | D1 | D2 | R1 | R2 | P1 | P2 | 综合 |
+| 模块（Module） | D1 | D2 | R1 | R2 | P1 | P2 | 综合 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | ownership_model | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 | borrow_checker_proof | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
@@ -131,7 +131,7 @@
 - **03_semantic_boundary_map**：✅ 引理 SB-L1（边界冲突可化解）
 - **DESIGN_MECHANISM_RATIONALE**：✅ OM1/OM-T1、BC1/BC-T1 已形式化
 - **formal_methods/README**：✅ Def FM1、Axiom FM1、定理 FM-T1
-- **type_theory/00_completeness_gaps**：✅ 新增完备性缺口文档；Def CGI、Axiom CGI1、定理 CGI-T1；Rust 1.93 类型系统、组合法则、Trait 特性缺口列表；**阶段 1–7 已补全 Def 占位**
+- **type_theory/00_completeness_gaps**：✅ 新增完备性缺口文档；Def CGI、Axiom CGI1、定理 CGI-T1；Rust 1.93 类型系统（Type System）、组合法则、Trait 特性缺口列表；**阶段 1–7 已补全 Def 占位**
 - **type_theory 阶段 2–7**：✅ LUB/COP、VAR-COM、RPITIT/async fn、NEG-T1、DYN-T1、CONST-EVAL-T1；Def OFFSET1/ASC1/BOT1、NEWTYPE1/DEREF-NULL1、CONST-MUT1/EXIST1、TRAIT-GAT1/SPEC1；定理 NEWTYPE-T1/SPEC-T1；全部缺口 Def 占位完成
 - **type_theory/trait_system_formalization**：✅ 阶段 1 补全；Axiom COH1/COH2、定理 COH-T1（Trait coherence）、推论 COH-C1
 - **type_theory/README**：✅ Def TT1、Axiom TT1、定理 TT-T1
@@ -165,11 +165,11 @@
 | 机制 | 动机论证 | 设计决策论证 | 使用场景/决策树 | 反例 | 综合 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Pin 堆/栈区分** | ✅ | ✅ | ✅ | ✅ | 好 |
-| 所有权 | ✅ | ✅ | ✅ | ✅ | 好 |
-| 借用 | ✅ | ✅ | ✅ | ✅ | 好 |
+| 所有权（Ownership） | ✅ | ✅ | ✅ | ✅ | 好 |
+| 借用（Borrowing） | ✅ | ✅ | ✅ | ✅ | 好 |
 | 生命周期 | ✅ | ✅ | ✅ | ✅ | 好 |
 | 型变 | ✅ | ✅ | ✅ | ✅ | 好 |
-| 异步 Future | ✅ | ✅ | ✅ | ✅ | 好 |
+| 异步（Async） Future | ✅ | ✅ | ✅ | ✅ | 好 |
 | 类型安全 | ✅ | ✅ | ✅ | ✅ | 好 |
 | Trait 对象 | ✅ | ✅ | ✅ | ✅ | 好 |
 | Send/Sync | ✅ | ✅ | ✅ | ✅ | 好 |
@@ -258,7 +258,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

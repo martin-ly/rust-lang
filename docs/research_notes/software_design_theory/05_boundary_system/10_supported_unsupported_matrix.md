@@ -106,7 +106,7 @@
 
 *证明*：`core`、`alloc` 随编译器分发；由 Axiom SUM1。∎
 
-**推论 SUM-C1**：GoF 23 种设计模式中，除需网络/异步/并行的 Observer、分布式扩展外，其余均为 Native。
+**推论 SUM-C1**：GoF 23 种设计模式中，除需网络/异步（Async）/并行的 Observer、分布式扩展外，其余均为 Native。
 
 **引理 SUM-L2（no_std 边界）**：若 $F$ 需 `Vec`、`String`、`Box`，则 $\mathit{SuppB}(F) \in \{\mathrm{Native},\, \mathrm{Lib}\}$；
 
@@ -162,7 +162,7 @@
 | 模式 | 支持边界 | 说明 |
 | :--- | :--- | :--- |
 | Factory Method | 原生支持 | trait + impl |
-| Abstract Factory | 原生支持 | 枚举/结构体 |
+| Abstract Factory | 原生支持 | 枚举（Enum）/结构体（Struct） |
 | Builder | 原生支持 | 方法链 |
 | Prototype | 原生支持 | Clone trait |
 | Singleton | 原生支持 | OnceLock、LazyLock（std） |
@@ -192,7 +192,7 @@
 | 模式 | 支持边界 | 说明 |
 | :--- | :--- | :--- |
 | Chain of Responsibility | 原生支持 | Option、链表 |
-| Command | 原生支持 | Fn、闭包 |
+| Command | 原生支持 | Fn、闭包（Closures） |
 | Interpreter | 原生支持 | match、枚举 |
 | Iterator | 原生支持 | Iterator trait |
 | Mediator | 原生支持 | 结构体 |
@@ -387,7 +387,7 @@ async fn serve() {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

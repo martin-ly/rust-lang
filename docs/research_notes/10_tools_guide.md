@@ -179,7 +179,7 @@ cargo kani
 cargo kani --function test_abs
 ```
 
-**与形式化衔接**：Kani 可验证 [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 无数据竞争、[ownership_model](formal_methods/10_ownership_model.md) 内存安全；`kani::any()` 对应全称量化。
+**与形式化衔接**：Kani 可验证 [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 无数据竞争、[ownership_model](formal_methods/10_ownership_model.md) 内存安全（Memory Safety）；`kani::any()` 对应全称量化。
 
 **版本与官方资源**:
 
@@ -841,7 +841,7 @@ cargo expand > expanded.rs
 | HIR | [hir.html](https://rustc-dev-guide.rust-lang.org/hir.html) | 高级中间表示 |
 | MIR | [mir/index.html](https://rustc-dev-guide.rust-lang.org/mir/index.html) | 中阶中间表示，借用检查与优化的基础 |
 | 借用检查 | [borrow_check.html](https://rustc-dev-guide.rust-lang.org/borrow_check.html) | NLL/Polonius 与生命周期检查 |
-| 类型推断 | [type-inference.html](https://rustc-dev-guide.rust-lang.org/type-inference.html) | 类型系统实现 |
+| 类型推断（Type Inference） | [type-inference.html](https://rustc-dev-guide.rust-lang.org/type-inference.html) | 类型系统实现 |
 | trait 系统 | [traits/resolution.html](https://rustc-dev-guide.rust-lang.org/traits/resolution.html) | trait 解析与 coherence |
 | 代码生成 | [backend/index.html](https://rustc-dev-guide.rust-lang.org/overview.html) | LLVM 后端与目标平台 |
 | Miri | [miri.html](https://rustc-dev-guide.rust-lang.org/miri.html) | Miri 解释器架构 |

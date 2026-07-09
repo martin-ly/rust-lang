@@ -116,7 +116,7 @@ mindmap
 ## 〇之一、Rust Effects Initiative 官方定位
 
 > **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://rust-lang.github.io/keyword-generics-initiative/updates/2024-02-09-extending-rusts-effect-system.html)(<https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md>)** ✅ ·
-> **[Inside Rust Blog — Keyword Generics Progress Report (2023-02-23)](https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report.html)(<https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html>)** ✅
+> **[Inside Rust Blog — Keyword Generics Progress Report (2023-02-23)](https://web.archive.org/web/*/https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report.html)(<https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html>)** ✅
 
 Rust 语言团队自 2022 年起通过 **Keyword Generics Initiative** 系统性地推进 effect system 的设计。
 该 initiative 的核心理论洞察由 Yoshua Wuyts 在 2024 年 2 月的官方更新中明确提出：
@@ -501,7 +501,7 @@ Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实
 ### 2.1 Carried vs Uncarried Effects（Rust 官方分类）
 
 > **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://rust-lang.github.io/keyword-generics-initiative/updates/2024-02-09-extending-rusts-effect-system.html)(<https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md>)** ✅ ·
-> **[Inside Rust Blog — Keyword Generics Progress Report (2023-02-23)](https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report.html)(<https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html>)** ✅
+> **[Inside Rust Blog — Keyword Generics Progress Report (2023-02-23)](https://web.archive.org/web/*/https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report.html)(<https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html>)** ✅
 
 Rust 语言团队（由 Yoshua Wuyts 在 2024 年官方更新中明确提出）将效果分为两类，这一分类直接决定了不同效果的泛化难度和技术路径：
 

@@ -86,7 +86,7 @@
 | Rust Reference | [Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) | 动态分发与生命周期 |
 | Rustonomicon | [Safe Abstractions](https://doc.rust-lang.org/nomicon/) | `unsafe` 边界与 Safe 封装 |
 
-> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权、借用检查与 trait 系统对实现方式的约束。
+> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权（Ownership）、借用检查与 trait 系统对实现方式的约束。
 
 ---
 
@@ -364,7 +364,7 @@ trait 默认方法实现模板，无默认实现的方法作为必须 hook；子
 
 | Rust 机制 | 本模式使用方式 | 保证 |
 | :--- | :--- | :--- |
-| 所有权转移 | 模板方法按序消费/借用 hook 结果 | 无双重释放 / 无悬垂 |
+| 所有权转移 | 模板方法按序消费/借用（Borrowing） hook 结果 | 无双重释放 / 无悬垂 |
 | 借用检查 | `&self` 模板方法可调用所有 hook | 无数据竞争 |
 | 生命周期 | 中间结果生命周期不超过模板作用域 | 引用有效性 |
 | trait / 关联类型 | trait 默认方法定义模板 | 编译期多态安全 |
@@ -768,7 +768,7 @@ graph LR
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

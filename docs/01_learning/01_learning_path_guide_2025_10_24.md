@@ -274,7 +274,7 @@ async fn use_async_fn_trait() {
 
 - `HashMap::get_disjoint_mut`
 - `LazyLock::get` 热路径优化 (1.95+)
-- `ControlFlow` 错误处理 (1.95+)
+- `ControlFlow` 错误处理（Error Handling） (1.95+)
 
 **预计时间**: 4-5 天
 

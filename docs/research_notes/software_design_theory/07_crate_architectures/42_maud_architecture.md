@@ -27,7 +27,7 @@
 >
 > **Bloom 层级**: L3-L5 (应用/分析/评价)
 >
-> **知识领域**: 模板引擎、HTML DSL、过程宏、编译期代码生成、Web 框架集成
+> **知识领域**: 模板引擎、HTML DSL、过程宏（Procedural Macro）、编译期代码生成、Web 框架集成
 >
 > **对应 Rust 版本**: 1.96.1+ (maud 0.27.0+)
 
@@ -166,7 +166,7 @@ async fn hello() -> impl axum::response::IntoResponse {
 | 维度 | Maud | Askama | Tera | Axum/Actix-web 原生 |
 |:--|:--|:--|:--|:--|
 | **语法风格** | Rust DSL (`html!` 宏) | Jinja-like | Jinja-like | 无 |
-| **渲染时机** | 编译期 | 编译期 | 运行时 | 运行时 |
+| **渲染时机** | 编译期 | 编译期 | 运行时（Runtime） | 运行时 |
 | **模板位置** | 内联 Rust | 外部 `.html` 文件 | 外部 `.html` 文件 | 不适用 |
 | **类型安全** | 极强（Rust 表达式） | 强（字段绑定） | 弱 | 强 |
 | **与 axum 集成** | `axum` feature | `with-axum` feature | 手动 | 原生 |

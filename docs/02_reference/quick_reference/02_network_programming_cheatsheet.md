@@ -567,7 +567,7 @@ async fn proxy_server() -> io::Result<()> {
 | **异步状态机** | [async_state_machine](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 异步网络操作的语义 |
 | **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 跨线程数据传递安全 |
 | **生命周期** | lifetime_formalization | 连接引用有效性 |
-| **并发安全** | [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md) | 并发访问数据竞争自由 |
+| **并发安全（Concurrency Safety）** | [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md) | 并发访问数据竞争自由 |
 
 ### 形式化定理 {#形式化定理}
 >

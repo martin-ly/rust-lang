@@ -86,7 +86,7 @@
 | Rust Reference | [Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) | 动态分发与生命周期 |
 | Rustonomicon | [Safe Abstractions](https://doc.rust-lang.org/nomicon/) | `unsafe` 边界与 Safe 封装 |
 
-> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权、借用检查与 trait 系统对实现方式的约束。
+> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权（Ownership）、借用检查与 trait 系统对实现方式的约束。
 
 ---
 
@@ -528,7 +528,7 @@ impl<S: CompressStrategy> Exporter<S> {
 
 | 变体 | 说明 | 适用 |
 | :--- | :--- | :--- |
-| 泛型 `Context<S: Strategy>` | 编译期单态化，零成本 | 策略类型已知 |
+| 泛型（Generics） `Context<S: Strategy>` | 编译期单态化，零成本 | 策略类型已知 |
 | `Box<dyn Strategy>` | 运行时多态 | 策略动态选择 |
 | `impl Strategy` 返回值 | 类型擦除 | 作为函数返回值 |
 
@@ -748,7 +748,7 @@ graph LR
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

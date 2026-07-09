@@ -62,9 +62,9 @@
 | TRPL 章节 | 学习主题 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |-----------|----------|-----------------|----------|--------------|
 | Ch 1-3: 开始 / 基础概念 | 安装、变量、类型、函数、控制流 | L1-L2 | [10_rust_book_alignment.md](10_rust_book_alignment.md) §Ch 1-3 | [TRPL Ch 1-3](https://doc.rust-lang.org/book/ch00-00-introduction.html) |
-| Ch 4: 所有权 | 所有权三规则、Move/Copy、借用、切片 | L2-L4 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | [TRPL Ch 4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) |
-| Ch 10: 泛型、Trait、生命周期 | 泛型、Trait bound、生命周期标注 | L3-L5 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | [TRPL Ch 10](https://doc.rust-lang.org/book/ch10-00-generics.html) |
-| Ch 15: 智能指针 | Box/Rc/Arc/RefCell/Weak、内部可变性 | L3-L4 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) §Def 4.1-4.5 | [TRPL Ch 15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) |
+| Ch 4: 所有权（Ownership） | 所有权三规则、Move/Copy、借用（Borrowing）、切片（Slice） | L2-L4 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | [TRPL Ch 4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) |
+| Ch 10: 泛型（Generics）、Trait、生命周期 | 泛型、Trait bound、生命周期标注 | L3-L5 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | [TRPL Ch 10](https://doc.rust-lang.org/book/ch10-00-generics.html) |
+| Ch 15: 智能指针（Smart Pointer） | Box/Rc/Arc/RefCell/Weak、内部可变性 | L3-L4 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) §Def 4.1-4.5 | [TRPL Ch 15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) |
 | Ch 16: 无畏并发 | 线程、mpsc、Mutex、Send/Sync | L3-L5 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | [TRPL Ch 16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) |
 | Ch 17: 异步编程基础 | async/await、Future、Pin | L3-L5 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | [TRPL Ch 17](https://doc.rust-lang.org/book/ch17-00-async-await.html) |
 | Ch 20: 高级特性 | Unsafe Rust、宏、高级 Trait/类型 | L4-L6 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) | [TRPL Ch 20](https://doc.rust-lang.org/book/ch20-00-advanced-features.html) |
@@ -81,12 +81,12 @@
 
 ### Rustlings {#rustlings}
 
-| Rustlings 模块 | 学习主题 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
+| Rustlings 模块（Module） | 学习主题 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |----------------|----------|-----------------|----------|--------------|
 | intro / variables / functions | 基础语法 | L1-L2 | [exercises/README.md](../../exercises/README.md) | [rustlings](https://github.com/rust-lang/rustlings) |
 | ownership / borrow / lifetimes | 所有权与借用 | L2-L4 | [crates/c01_ownership_borrow_scope/README.md](../../crates/c01_ownership_borrow_scope/README.md) | [rustlings exercises](https://github.com/rust-lang/rustlings) |
 | structs / enums / modules | 类型与模块 | L2-L3 | [crates/c02_type_system/README.md](../../crates/c02_type_system/README.md)、[formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | [rustlings exercises](https://github.com/rust-lang/rustlings) |
-| errors / generics / traits | 错误处理、泛型、Trait | L3-L4 | [10_error_handling_cheatsheet.md](10_error_handling_cheatsheet.md)、[type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | [rustlings exercises](https://github.com/rust-lang/rustlings) |
+| errors / generics / traits | 错误处理（Error Handling）、泛型、Trait | L3-L4 | [10_error_handling_cheatsheet.md](10_error_handling_cheatsheet.md)、[type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | [rustlings exercises](https://github.com/rust-lang/rustlings) |
 | tests / iterators / threads | 测试、迭代器、线程 | L3-L4 | [crates/c05_threads/README.md](../../crates/c05_threads/README.md)、[crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | [rustlings exercises](https://github.com/rust-lang/rustlings) |
 | smart_pointers / conversions / clippy | 智能指针、类型转换、Clippy | L3-L5 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) §Def 4.1-4.5 | [rustlings exercises](https://github.com/rust-lang/rustlings) |
 
@@ -111,7 +111,7 @@
 | 基础入门 | 变量、类型、控制流 | L1-L2 | [10_learning_path_comprehensive.md](10_learning_path_comprehensive.md) §路径一 | [course.rs 基础](https://course.rs/basic/) |
 | 所有权与借用 | 所有权、借用、生命周期 | L2-L4 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md)、[formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | [course.rs 所有权](https://course.rs/basic/ownership.html) |
 | 泛型与特征 | 泛型、Trait、生命周期 | L3-L5 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | [course.rs 泛型](https://course.rs/basic/trait.html) |
-| 深入类型 | 智能指针、并发、异步 | L4-L6 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md)、[formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | [course.rs 深入类型](https://course.rs/advance/) |
+| 深入类型 | 智能指针、并发、异步（Async） | L4-L6 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md)、[formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | [course.rs 深入类型](https://course.rs/advance/) |
 
 ### Rust 中文社区 {#rust-中文社区}
 
@@ -207,7 +207,7 @@
 | 所有权 | 三规则 | Move/Copy 语义 | 修复所有权错误 | 分析 Rc/Arc 边界 | 评价所有权安全保证 | 设计自定义智能指针 |
 | 借用 | 借用规则 | 引用有效性 | 重构借用代码 | NLL 行为分析 | 评价别名可变性设计 | 设计安全封装 |
 | 生命周期 | 标注语法 | 省略规则 | 添加生命周期标注 | 型变与生命周期 | 评价复杂 lifetime 设计 | 设计自引用类型 API |
-| 类型系统 | Trait/泛型语法 | 关联类型/GAT | 实现泛型 API | 型变分析 | 评价类型安全设计 | 设计类型状态机 |
+| 类型系统（Type System） | Trait/泛型语法 | 关联类型/GAT | 实现泛型 API | 型变分析 | 评价类型安全设计 | 设计类型状态机 |
 | 并发 | Send/Sync 定义 | 线程/锁模型 | 使用 Mutex/Arc | 死锁/饥饿分析 | 评价并发架构 | 设计无锁/异步运行时 |
 | Unsafe | unsafe 语法 | UB 分类 | 封装 unsafe 抽象 | 内存布局分析 | 评价 unsafe 边界 | 设计安全 FFI 封装 |
 | 设计模式 | 模式名称 | Rust 惯用法 | 实现 Builder/状态机 | 模式与所有权交互 | 评价模式适用性 | 设计领域特定抽象 |

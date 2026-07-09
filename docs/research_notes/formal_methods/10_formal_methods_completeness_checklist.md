@@ -57,7 +57,7 @@
 | [ownership_model](10_ownership_model.md) | ✅ 规则 1–3, Def 1.1–1.5 | ✅ 与 borrow/变量 | ✅ 理论基础、设计理由 | ✅ T2, T3 | ✅ 使用已移动、双重释放 | ✅ 导图/矩阵/证明树/决策树 |
 | [borrow_checker_proof](10_borrow_checker_proof.md) | ✅ 规则 5–8 | ✅ 与 ownership/lifetime/Send | ✅ 数据竞争定义、理论 | ✅ T1, T2 | ✅ 双重可变借用、悬垂 | ✅ 同上 |
 | lifetime_formalization | ✅ LF1–LF2, Def 1.4, $\ell \subseteq \text{lft}$ | ✅ 与 borrow、型变 | ✅ 区域类型、NLL | ✅ LF-T1–T3 | ✅ 返回局部引用、存短命 | ✅ 矩阵/证明树 |
-| [async_state_machine](10_async_state_machine.md) | ✅ Def 4.1–5.2（Future、Poll） | ✅ 与 Pin、Send/Sync | ✅ 状态机、并发安全 | ✅ T6.1–T6.3, SPAWN-T1 | ✅ 非 Send 跨线程、未 Pin | ✅ 导图/矩阵/证明树/决策树 |
+| [async_state_machine](10_async_state_machine.md) | ✅ Def 4.1–5.2（Future、Poll） | ✅ 与 Pin、Send/Sync | ✅ 状态机、并发安全（Concurrency Safety） | ✅ T6.1–T6.3, SPAWN-T1 | ✅ 非 Send 跨线程、未 Pin | ✅ 导图/矩阵/证明树/决策树 |
 | [pin_self_referential](10_pin_self_referential.md) | ✅ Def 1.1–2.2（位置稳定、自引用） | ✅ 与 async、Unpin | ✅ 堆/栈固定、设计理由 | ✅ T1–T3 | ✅ 未 Pin 自引用、栈 !Unpin | ✅ 矩阵/证明树/决策树 |
 | [send_sync_formalization](10_send_sync_formalization.md) | ✅ Def SEND1, SYNC1, SYNC-L1 | ✅ $T:\text{Sync} \Leftrightarrow \&T:\text{Send}$；与 spawn/Future/Arc | ✅ 跨线程安全、FLS Ch.17.1 | ✅ SEND-T1, SYNC-T1, SEND-SYNC-T1 | ✅ Rc !Send、Cell !Sync、非 Send spawn | ✅ 导图/矩阵/决策树/证明树 |
 
@@ -125,7 +125,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

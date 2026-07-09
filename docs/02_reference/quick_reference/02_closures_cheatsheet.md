@@ -607,7 +607,7 @@ pub fn setup_processor() -> EventProcessor {
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
-| 特性 | 闭包/函数式场景应用 | 性能提升 |
+| 特性 | 闭包（Closures）/函数式场景应用 | 性能提升 |
 |------|-------------------|----------|
 | `ControlFlow` | 迭代器链提前终止、事件处理 | 代码清晰，延迟-60% |
 | `LazyLock` | 闭包工厂、处理器缓存 | 启动-80%，热路径优化 |

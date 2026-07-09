@@ -31,7 +31,7 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L3-L5 (应用/分析/评价)
-> **知识领域**: 文档数据库、NoSQL、异步 IO、分布式存储
+> **知识领域**: 文档数据库、NoSQL、异步（Async） IO、分布式存储
 > **对应 Rust 版本**: 1.96.1+ (mongodb 3.0+)
 
 ---
@@ -51,8 +51,8 @@
 |:--|:--|:--|
 | **数据模型** | `bson::Document` 与 serde 派生类型双轨 | 快速原型可用动态文档，生产代码可用强类型模型 |
 | **核心抽象** | `Client` → `Database` → `Collection<T>` 三级层次 | 与 MongoDB 命名空间一一对应，语义清晰 |
-| **运行时** | 纯 Tokio 异步 API，可选 `sync` feature | 与 Rust 异步生态对齐，同步场景可启用 feature |
-| **类型安全** | `Serialize`/`Deserialize` 边界 + 泛型 `Collection<T>` | 编译期保证文档结构与 Rust 类型匹配 |
+| **运行时（Runtime）** | 纯 Tokio 异步 API，可选 `sync` feature | 与 Rust 异步生态对齐，同步场景可启用 feature |
+| **类型安全** | `Serialize`/`Deserialize` 边界 + 泛型（Generics） `Collection<T>` | 编译期保证文档结构与 Rust 类型匹配 |
 | **连接管理** | 内置连接池 + Server 选择器 + 拓扑监控 | 无需外部池即可支撑高并发 |
 
 > [mongodb-rust-driver GitHub Repository](https://github.com/mongodb/mongo-rust-driver)(<https://github.com/mongodb/mongo-rust-driver>)

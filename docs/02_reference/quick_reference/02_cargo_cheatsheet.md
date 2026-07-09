@@ -1055,7 +1055,7 @@ $ cargo bloat --release
 
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
-| **类型系统** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 依赖版本解析的类型理论 |
+| **类型系统（Type System）** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 依赖版本解析的类型理论 |
 | **类型构造** | [construction_capability](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) | 包组合的类型构造能力 |
 | **Trait 系统** | [trait_system_formalization](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) | 特征组合的兼容性 |
 

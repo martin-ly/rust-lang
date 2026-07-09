@@ -229,8 +229,8 @@
 
 | 概念 | 公理/定义 | 定理 | 证明方法 | 反例（违反后果） |
 | :--- | :--- | :--- | :--- | :--- |
-| 所有权 | 规则 1–3, Def 1.1–1.3 | T2 唯一性, T3 内存安全 | 结构归纳、反证 | 使用已移动值 |
-| 借用 | 规则 5–8 | 数据竞争自由 | 规则归纳 | 双重可变借用 |
+| 所有权（Ownership） | 规则 1–3, Def 1.1–1.3 | T2 唯一性, T3 内存安全（Memory Safety） | 结构归纳、反证 | 使用已移动值 |
+| 借用（Borrowing） | 规则 5–8 | 数据竞争自由 | 规则归纳 | 双重可变借用 |
 | 生命周期 | $\ell \subseteq \text{lft}$ | 引用有效性 | 三步骤 | 返回局部引用 |
 | 子类型 | $S <: T$ | - | - | - |
 | 协变 | Def 1.1 | T1 | 直接推导 | - |
@@ -238,7 +238,7 @@
 | 不变 | Def 3.1 | T3 | 直接推导 | 协变→悬垂引用 |
 | 类型安全 | 进展性、保持性 | T3 | 组合 | 类型不匹配 |
 | Future | Def 4.1–5.2 | T6.1–T6.3 | 归纳+案例 | 非 Send 跨线程 |
-| Pin | Def 1.1–2.2 | T1–T3 | 类型系统 | 移动未 Pin 自引用 |
+| Pin | Def 1.1–2.2 | T1–T3 | 类型系统（Type System） | 移动未 Pin 自引用 |
 | Trait 对象 | vtable, 存在类型 | T1–T3 | 类型系统 | 对象安全违规 |
 
 ### 2. 语义范式 vs 概念族 矩阵 {#2-语义范式-vs-概念族-矩阵}
@@ -260,7 +260,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-| 模块 | D1 | D2 | R1 | R2 | P1 | P2 | 证明完成度 |
+| 模块（Module） | D1 | D2 | R1 | R2 | P1 | P2 | 证明完成度 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | ownership_model | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
 | borrow_checker_proof | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 5.0 |
@@ -488,7 +488,7 @@
 | 借用 | 双重可变借用 | 互斥 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) |
 | 生命周期 | 返回局部引用 | outlives | lifetime_formalization |
 | 生命周期 | 存储短生命周期引用 | 约束冲突 | lifetime_formalization |
-| 异步 | 非 Send 跨线程 | Send 边界 | [async_state_machine](formal_methods/10_async_state_machine.md) |
+| 异步（Async） | 非 Send 跨线程 | Send 边界 | [async_state_machine](formal_methods/10_async_state_machine.md) |
 | 异步 | 未 Pin 自引用 | Pin 边界 | [async_state_machine](formal_methods/10_async_state_machine.md) |
 | Pin | 移动未 Pin 自引用 | 位置稳定 | [pin_self_referential](formal_methods/10_pin_self_referential.md) |
 | Trait | 对象安全违规 | vtable 约束 | [trait_system_formalization](type_theory/10_trait_system_formalization.md) |
@@ -596,7 +596,7 @@ Pin ──→ 自引用安全
 | **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](10_rust_193_feature_matrix.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) |
 | **内存与所有权** | 五维矩阵 § 所有权/借用 | 表达能力边界决策树 § 内存管理 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) 所有权/借用 |
 | **类型系统** | 五维矩阵 § 类型安全/协变 | 表达能力边界决策树 § 类型多态 | [construction_capability](type_theory/10_construction_capability.md) |
-| **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) Trait/泛型 |
+| **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) Trait/泛型（Generics） |
 | **控制流** | - | - | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) match/for/? |
 | **并发与异步** | 五维矩阵 § Future/Pin | 表达能力边界决策树 § 并发/异步 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) Send/Sync/Future |
 
@@ -689,7 +689,7 @@ Pin ──→ 自引用安全
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

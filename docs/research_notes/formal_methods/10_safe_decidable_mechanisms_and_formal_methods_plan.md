@@ -63,7 +63,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- **已有**：所有权、借用、生命周期、Pin、异步（Future/Poll 状态机）、**Send/Sync** 六篇独立形式化文档；
+- **已有**：所有权（Ownership）、借用（Borrowing）、生命周期、Pin、异步（Future/Poll 状态机）、**Send/Sync** 六篇独立形式化文档；
 - 控制流、通道、Mutex、thread::spawn、裸指针、unsafe 等
 - 以 Def/定理形式分散在 ownership_model、borrow_checker_proof、async_state_machine 中；
 - [六篇并表](README.md#formal_methods-六篇并表) 与
@@ -88,7 +88,7 @@
 | :--- | :--- | :--- |
 | **新增 Send/Sync 形式化专篇** | P0 | 独立文档：概念定义（SafeTransfer/SafeShare）、属性关系（T: Sync ⇔ &T: Send）、与 thread::spawn/Future/Arc 的衔接、形式化 Def/Axiom/定理、反例（Rc !Send、Cell !Sync）；与 async_state_machine、borrow_checker_proof、ownership_model 双向链接。 |
 | **安全可判定机制总览文档** | P0 | 单文档列出所有“安全且编译期可判定”的机制，每项含：概念定义、属性关系、解释论证、形式证明引用、反例；并注明对应思维表征（思维导图、矩阵、决策树、证明树）位置。 |
-| **完备 Rust 特性全部特征对比表** | P1 | 在现有 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 基础上，增加维度：可判定性（静态/运行时/不可判定）、安全边界（Safe/Unsafe 边界）、形式化文档、思维表征入口；必要时拆出「核心机制子表」含 Send/Sync/async。 |
+| **完备 Rust 特性全部特征对比表** | P1 | 在现有 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 基础上，增加维度：可判定性（静态/运行时（Runtime）/不可判定）、安全边界（Safe/Unsafe 边界）、形式化文档、思维表征入口；必要时拆出「核心机制子表」含 Send/Sync/async。 |
 | **思维表征四类与 formal_methods 绑定** | P1 | 在 HIERARCHICAL_MAPPING 或本目录 README 中明确：思维导图、概念多维矩阵、决策树图、推理证明树图各自对应哪些 formal_methods 文档/小节；各篇形式化文档末尾「相关思维表征」表统一包含四类入口。 |
 | **async 机制单篇可选** | P2 | 若需“async 语法与运行时模型”与“Future 状态机”分离，可增「async 机制形式化」篇，侧重 async fn、.await、Send 边界、与 Pin 的接口；与 async_state_machine 分工（状态机 vs 语言机制）。 |
 
@@ -123,11 +123,11 @@
 | 所有权 | 静态 | 唯一所有者、移动、Copy/Clone | 规则 1–3 → T2/T3 | [ownership_model](10_ownership_model.md) | 使用已移动值、双重释放 |
 | 借用 | 静态 | &T/&mut T、互斥可变、不可变可多 | 规则 5–8 → T1 | [borrow_checker_proof](10_borrow_checker_proof.md) | 双重可变借用、悬垂引用 |
 | 生命周期 | 静态 | outlives、区域、NLL | $\ell \subseteq \text{lft}$ → LF-T1–T3 | lifetime_formalization | 返回局部引用、存短命引用 |
-| **Send** | **静态** | **跨线程转移所有权安全** | **T: Sync ⇔ &T: Send** | **[send_sync_formalization](10_send_sync_formalization.md)** | **Rc 跨线程、!Send 闭包 spawn** |
+| **Send** | **静态** | **跨线程转移所有权安全** | **T: Sync ⇔ &T: Send** | **[send_sync_formalization](10_send_sync_formalization.md)** | **Rc 跨线程、!Send 闭包（Closures） spawn** |
 | **Sync** | **静态** | **跨线程共享引用安全** | **见上** | **同上** | **Cell 跨线程共享、Rc &T 跨线程** |
 | Pin/Unpin | 静态 | 位置稳定、自引用、!Unpin 堆固定 | Def 1.1–2.2 → T1–T3 | [pin_self_referential](10_pin_self_referential.md) | 未 Pin 自引用、栈上 !Unpin |
 | Future/async | 静态（边界） | Poll、Ready/Pending、Send 跨 await | Def 4.1–5.2 → T6.1–T6.3 | [async_state_machine](10_async_state_machine.md) | 非 Send 跨 await、未 Pin 移动 |
-| 类型系统 | 静态 | 进展性、保持性、类型安全 | typing rules → T1–T3 | [type_system_foundations](../type_theory/10_type_system_foundations.md) | 类型错误、不可达代码 |
+| 类型系统（Type System） | 静态 | 进展性、保持性、类型安全 | typing rules → T1–T3 | [type_system_foundations](../type_theory/10_type_system_foundations.md) | 类型错误、不可达代码 |
 | match 穷尽 | 静态 | 模式覆盖所有变体 | Def MATCH1 → MATCH-T1 | [borrow_checker_proof](10_borrow_checker_proof.md) | 非穷尽 match |
 | for/? | 静态 | IntoIterator、Result 类型 | FOR1/QUERY1 → FOR-T1/QUERY-T1 | [borrow_checker_proof](10_borrow_checker_proof.md) | 迭代中修改、非 Result ? |
 | 通道/Mutex | 静态（接口） | 消息传递、锁保护；Send 约束 | CHAN1/MUTEX1 → CHAN-T1/MUTEX-T1 | [borrow_checker_proof](10_borrow_checker_proof.md) | 发送非 Send、锁外访问 |
@@ -179,7 +179,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **可判定性**：静态 / 运行时 / 不可判定（或 N/A）。
-- **安全边界**：Safe 核心 / Safe 并发 / Safe 异步 / Unsafe 边界 / 仅规范（无形式化）。
+- **安全边界**：Safe 核心 / Safe 并发 / Safe 异步（Async） / Unsafe 边界 / 仅规范（无形式化）。
 - **形式化文档**：formal_methods 或 type_theory 中的文档名 + Def/定理编号；无则「-」。
 - **思维表征**：思维导图（04_thinking/MIND_MAP_COLLECTION 等）、概念多维矩阵（六篇并表、执行模型矩阵等）、决策树（06_boundary_analysis、DESIGN_MECHANISM）、推理证明树（PROOF_INDEX、PROOF_GRAPH_NETWORK）。
 
@@ -294,7 +294,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

@@ -80,7 +80,7 @@
 | **提示词模板** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) | 概念解释、代码审查、错误修复 |
 | **RAG 与项目结合** | 同上 | 速查卡、00_MASTER_INDEX、决策树纳入检索 |
 | **错误码上下文** | [ERROR_CODE_MAPPING](../02_reference/02_error_code_mapping.md) | 编译错误 → 文档映射 |
-| **练习推荐** | [RUSTLINGS_MAPPING](../../exercises/rustlings_mapping.md) | 模块 ↔ 习题对应 |
+| **练习推荐** | [RUSTLINGS_MAPPING](../../exercises/rustlings_mapping.md) | 模块（Module） ↔ 习题对应 |
 
 ---
 
@@ -120,10 +120,10 @@
 
 | 本项目模块 | AI/ML 应用中的关联 |
 | :--- | :--- |
-| **C01 所有权** | 张量生命周期、零拷贝、内存管理 |
-| **C02 类型系统** | 泛型张量、Trait 抽象 |
+| **C01 所有权（Ownership）** | 张量生命周期、零拷贝、内存管理 |
+| **C02 类型系统（Type System）** | 泛型张量、Trait 抽象 |
 | **C05** | 多线程训练、数据并行 |
-| **C06 异步** | 流式推理、异步 I/O |
+| **C06 异步（Async）** | 流式推理、异步 I/O |
 | **C11 宏** | 模型定义 DSL |
 
 ---
@@ -148,7 +148,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. 掌握 C01–C03、C04 泛型
+1. 掌握 C01–C03、C04 泛型（Generics）
 2. 学习 Candle 或 Burn 入门教程
 3. 实践：用 Candle 加载简单模型做推理
 

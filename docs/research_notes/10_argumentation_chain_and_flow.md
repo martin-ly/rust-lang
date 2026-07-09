@@ -257,7 +257,7 @@ type T3 ────────────────────────
 
 | 推导链 | 论证思路 | 依赖 | 结论 |
 | :--- | :--- | :--- | :--- |
-| **所有权→借用** | 所有权唯一性 ⇒ 借用互斥 | ownership T2 | borrow T1 数据竞争自由 |
+| **所有权→借用（Borrowing）** | 所有权唯一性 ⇒ 借用互斥 | ownership T2 | borrow T1 数据竞争自由 |
 | **所有权→组合** | 内存安全框架 ⇒ 组合保持 | ownership T3 | CE-T1 组合保持内存安全 |
 | **借用+类型→组合** | 数据竞争自由 + 类型安全 | borrow T1、type T3 | CE-T2 组合保持数据竞争自由 |
 | **类型→组合** | 类型安全 ⇒ 组合保持 | type T3 | CE-T3 组合保持类型安全 |
@@ -265,7 +265,7 @@ type T3 ────────────────────────
 | **型变→引用安全** | 协变/逆变/不变 ⇒ 无悬垂 | variance Def | variance T1–T4 |
 | **Pin→自引用** | 位置稳定 ⇒ 自引用安全 | Pin Def | pin T1–T3 |
 | **Send/Sync→跨线程安全** | 跨线程转移/共享 ⇒ 数据竞争自由 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) SEND1/SYNC1 | SEND-T1、SYNC-T1、SEND-SYNC-T1；与 borrow T1、SPAWN-T1 一致 |
-| **Future+Pin→并发** | 状态一致 + Send/Sync | async Def、Pin、send_sync | async T6.2 并发安全 |
+| **Future+Pin→并发** | 状态一致 + Send/Sync | async Def、Pin、send_sync | async T6.2 并发安全（Concurrency Safety） |
 
 ---
 
@@ -361,7 +361,7 @@ software_design_theory
 
 | 我想论证… | 入口 | 论证链 |
 | :--- | :--- | :--- |
-| 内存安全 | ownership_model | 规则 1–3 → T2 → T3 |
+| 内存安全（Memory Safety） | ownership_model | 规则 1–3 → T2 → T3 |
 | 数据竞争自由 | borrow_checker_proof | 规则 5–8 → T1 |
 | 类型安全 | type_system_foundations | typing rules → T1/T2 → T3 |
 | 引用有效性 | lifetime_formalization | Axiom LF1/2 → LF-T1–T3 |
@@ -470,7 +470,7 @@ software_design_theory
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

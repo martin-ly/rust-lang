@@ -52,7 +52,7 @@
 |---------|----------|----------|----------|
 | **Diesel** | [diesel.rs](https://diesel.rs/) / [docs.rs/diesel](https://docs.rs/diesel/) | [software_design_theory/07_crate_architectures/03_diesel_architecture.md](software_design_theory/07_crate_architectures/03_diesel_architecture.md) | 类型安全 ORM、Typestate 查询构建、后端抽象 |
 | **SQLx** | [launchbadge/sqlx](https://github.com/launchbadge/sqlx) / [docs.rs/sqlx](https://docs.rs/sqlx/) | [software_design_theory/07_crate_architectures/09_sqlx_architecture.md](software_design_theory/07_crate_architectures/09_sqlx_architecture.md) / [15_sqlx_advanced_architecture.md](software_design_theory/07_crate_architectures/15_sqlx_advanced_architecture.md) | 编译期 SQL 验证、`query!` / `query_as!`、连接池 |
-| **SeaORM** | [sea-ql.org/SeaORM](https://www.sea-ql.org/SeaORM/) / [docs.rs/sea-orm](https://docs.rs/sea-orm/) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) | 异步 ORM、Entity/Relation、迁移 |
+| **SeaORM** | [sea-ql.org/SeaORM](https://www.sea-ql.org/SeaORM/) / [docs.rs/sea-orm](https://docs.rs/sea-orm/) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) | 异步（Async） ORM、Entity/Relation、迁移 |
 | **rusqlite** | [rusqlite/rusqlite](https://github.com/rusqlite/rusqlite) / [docs.rs/rusqlite](https://docs.rs/rusqlite/) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) | SQLite 同步驱动、参数化查询、事务 |
 
 ---

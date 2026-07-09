@@ -56,7 +56,7 @@
 
 1. **设计模式形式化**：创建-结构-行为模式的公理/定理级形式分析
 2. **工作流安全 vs 完全模型**：23 种安全设计模型、43 种完全模型的形式边界与语义论证
-3. **执行模型形式化**：同步/异步/并发/并行/分布式设计模型的形式化与边界分析
+3. **执行模型形式化**：同步/异步（Async）/并发/并行/分布式设计模型的形式化与边界分析
 4. **组合软件工程**：Rust 组合软件工程有效性的形式论证与证明
 5. **表达能力边界**：安全/非安全、支持/不支持、充分/非充分表达的系统论证
 
@@ -84,7 +84,7 @@
 
 本体系归属于 [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../10_theoretical_and_argumentation_system_architecture.md) 的**第 4 层（应用与边界层）**，依赖：
 
-- **公理层**：所有权、借用、类型、型变、Pin、Send/Sync
+- **公理层**：所有权（Ownership）、借用（Borrowing）、类型、型变、Pin、Send/Sync
 - **语义层**：操作语义、指称语义、公理语义、内存模型
 - **定理层**：ownership T2/T3、borrow T1、lifetime T2、async T6.2、pin T1-T3
 
@@ -137,7 +137,7 @@
 
 ## 完成度总览 {#完成度总览}
 
-| 模块 | 状态 | 2026-02 增强 |
+| 模块（Module） | 状态 | 2026-02 增强 |
 | :--- | :--- | :--- |
 | 01_design_patterns_formal（23 模式） | 100% | 16+ 模式有完整场景示例（Builder/Adapter/Decorator/Composite/Flyweight/Facade/Chain/Mediator/Observer/Strategy/Command/State/Visitor/Interpreter/Template 等） |
 | 02_workflow_safe_complete_models（23/43） | 100% | 场景→模式→代码完整链条（Web API、可撤销编辑器） |
@@ -192,7 +192,7 @@
 | Factory Method 与 Abstract Factory 区别？ | 单产品 vs 产品族；见 [创建型模式对比](01_design_patterns_formal/README.md#创建型模式对比) |
 | Observer 用 channel 还是回调？ | 跨线程用 channel；单线程简单场景可用 RefCell+回调 |
 | 如何选执行模型？ | 见 [06_boundary_analysis](03_execution_models/06_boundary_analysis.md) 决策树；[03_execution_models README](03_execution_models/README.md) 含典型场景与设计模式组合 |
-| 泛型 vs dyn Trait？ | 编译期确定用泛型（零成本）；运行时选择用 `Box<dyn Trait>` |
+| 泛型（Generics） vs dyn Trait？ | 编译期确定用泛型（零成本）；运行时选择用 `Box<dyn Trait>` |
 | 何时用 Box / Rc / Arc？ | 独占用 Box；单线程共享用 Rc；跨线程共享用 Arc |
 | 组合多模块如何验证？ | 见 [02_effectiveness_proofs](04_compositional_engineering/02_effectiveness_proofs.md) 验证工作流；CE-T1/T2/T3 检查清单 |
 | 模式组合如何选？ | Builder+Factory、Decorator+Strategy、Composite+Visitor 见 [03_integration_theory](04_compositional_engineering/03_integration_theory.md) 多层次组合链条 |
@@ -205,7 +205,7 @@
 | :--- | :--- |
 | [Refactoring.Guru 设计模式](https://refactoring.guru/design-patterns) | 各模式结构、示例、关系 |
 | rust-unofficial/patterns | Rust Idioms、Patterns、Anti-patterns |
-| Rust API Guidelines | 命名、错误处理、文档 |
+| Rust API Guidelines | 命名、错误处理（Error Handling）、文档 |
 | Fowler EAA | 企业架构模式 |
 
 ---

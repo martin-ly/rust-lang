@@ -363,7 +363,7 @@ None
 
 ### 官方来源
 
-- [RFC 2497 — if-let-chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html) [Rust Core Team / 2022](https://blog.rust-lang.org/2022/)
+- [RFC 2497 — if-let-chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html) [Rust Core Team / 2022](https://web.archive.org/web/*/https://blog.rust-lang.org/2022/)
 - [Rust Reference — Let expressions](https://doc.rust-lang.org/reference/statements.html#let-statements) [Rust Reference / 2025](https://doc.rust-lang.org/reference/introduction.html)
 - [Rust 2024 Edition Guide — let chains](https://doc.rust-lang.org/rust-by-example/flow_control/let_else.html) [Rust Edition Team / 2025](https://doc.rust-lang.org/edition-guide/index.html)
 

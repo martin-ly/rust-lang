@@ -83,7 +83,7 @@ $P_{\mathrm{Rust}} \equiv P_{\mathrm{OOP}}$
 
 **Axiom EIM1**：Rust 无隐式全局可变；无类继承；无运行时反射。这些限制导致部分 OOP 模式不可直接表达。
 
-**Axiom EIM2**：Rust 的 trait、枚举、所有权、借用可直接对应 OOP 的接口、多态、封装；等价表达模式在语义上无损失。
+**Axiom EIM2**：Rust 的 trait、枚举（Enum）、所有权（Ownership）、借用可直接对应 OOP 的接口、多态、封装；等价表达模式在语义上无损失。
 
 **定理 EIM-T1**：若模式 $P$ 仅依赖接口、多态、组合、委托，则 $\mathit{ExprB}(P) = \mathrm{Same}$。
 
@@ -198,7 +198,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 | Bridge | 等价表达 | trait 解耦抽象与实现 |
 | Composite | 等价表达 | 枚举递归结构 |
 | Decorator | 等价表达 | 结构体包装 |
-| Facade | 等价表达 | 模块/结构体 |
+| Facade | 等价表达 | 模块（Module）/结构体（Struct） |
 | Flyweight | 等价表达 | Arc 共享 |
 | Proxy | 等价表达 | 委托、延迟 |
 
@@ -232,7 +232,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 | 模型 | 表达边界 | 说明 |
 | :--- | :--- | :--- |
 | 同步 | 等价表达 | 顺序执行，语义一致 |
-| 异步 | 等价表达 | Future 模型，await 语义清晰 |
+| 异步（Async） | 等价表达 | Future 模型，await 语义清晰 |
 | 并发 | 等价表达 | Send/Sync 提供更强保证 |
 | 并行 | 等价表达 | 数据并行、任务并行 |
 | 分布式 | 近似表达 | 无内置 RPC，需库支持 |
@@ -271,7 +271,7 @@ struct QuickSort; impl SortStrategy for QuickSort { ... }
 struct MergeSort; impl SortStrategy for MergeSort { ... }
 ```
 
-**Iterator**：`Iterator` trait 为语言原生；语义等价且更强（零成本抽象）。
+**Iterator**：`Iterator` trait 为语言原生；语义等价且更强（零成本抽象（Zero-Cost Abstraction））。
 
 ---
 
@@ -385,7 +385,7 @@ impl Node {
 | 多继承 | 菱形继承、混入 | 仅 trait 多实现；无类继承 |
 | 运行时反射 | 动态调用、属性注入 | 无内置反射；用宏或 trait 显式 |
 | 任意子类型 | 协变/逆变复杂 | 型变严格；见 [variance_theory](../../type_theory/10_variance_theory.md) |
-| 重载（同名不同签名的函数） | 传统 OOP 多态 | trait 方法 + 泛型；无 ad-hoc 重载 |
+| 重载（同名不同签名的函数） | 传统 OOP 多态 | trait 方法 + 泛型（Generics）；无 ad-hoc 重载 |
 | 负约束 | `T: !Trait` | 仅部分支持；RFC 讨论中 |
 
 ---
@@ -460,7 +460,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

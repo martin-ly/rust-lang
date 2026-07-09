@@ -45,7 +45,7 @@
 
 > [regex docs.rs](https://docs.rs/regex/latest/regex/)(<https://docs.rs/regex/latest/regex/>)
 
-与许多动态语言的正则实现不同，`regex` crate 在设计上强调**可预期的线性时间匹配**与**内存安全**：
+与许多动态语言的正则实现不同，`regex` crate 在设计上强调**可预期的线性时间匹配**与**内存安全（Memory Safety）**：
 
 | 维度 | 设计选择 | 工程价值 |
 |:--|:--|:--|
@@ -244,7 +244,7 @@ graph LR
 |:--|:--|:--|
 | **不可变性保证** | `Regex` | 编译后不可变，天然 `Send + Sync`，可跨线程共享 |
 | **生命周期借用** | `Match<'t>` / `Captures<'t>` | 匹配结果生命周期绑定输入字符串，防止悬垂引用 |
-| **错误处理** | `Result<Regex, regex::Error>` | 非法模式必须在调用点显式处理 |
+| **错误处理（Error Handling）** | `Result<Regex, regex::Error>` | 非法模式必须在调用点显式处理 |
 | **零拷贝** | `Cow<str>` | 无替换时借用原字符串，减少堆分配 |
 | **类型安全迭代器** | `Matches` / `CaptureMatches` | 迭代元素类型在编译期确定，无运行时类型分支 |
 

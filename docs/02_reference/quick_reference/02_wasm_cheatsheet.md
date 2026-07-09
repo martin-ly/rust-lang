@@ -277,7 +277,7 @@ for i in 0..10000 {
 - [基础加法与导出](../../../crates/c12_wasm/examples/01_basic_add.rs)
 - [字符串与数组](../../../crates/c12_wasm/examples/02_string_operations.rs)、[03_array_processing.rs](../../../crates/c12_wasm/examples/03_array_processing.rs)
 - [计数器与 WASI](../../../crates/c12_wasm/examples/04_counter_class.rs)、[05_wasi_file_processor.rs](../../../crates/c12_wasm/examples/05_wasi_file_processor.rs)
-- [异步 fetch、设计模式、微服务](../../../crates/c12_wasm/examples/06_async_fetch.rs)、[07_design_patterns.rs](../../../crates/c12_wasm/examples/07_design_patterns.rs)、[08_container_microservice.rs](../../../crates/c12_wasm/examples/08_container_microservice.rs)
+- [异步（Async） fetch、设计模式、微服务](../../../crates/c12_wasm/examples/06_async_fetch.rs)、[07_design_patterns.rs](../../../crates/c12_wasm/examples/07_design_patterns.rs)、[08_container_microservice.rs](../../../crates/c12_wasm/examples/08_container_microservice.rs)
 - [Rust 1.92 特性演示](../../../crates/c12_wasm/examples/c12_rust_192_features_demo.rs)
 
 ---
@@ -467,7 +467,7 @@ pub fn process_task(task_json: &str) -> String {
 | **所有权模型** | [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) | WASM 内存安全保证 |
 | **生命周期** | lifetime_formalization | JS 互操作引用有效性 |
 | **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | Web Worker 安全 |
-| **类型系统** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | JS 绑定类型安全 |
+| **类型系统（Type System）** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | JS 绑定类型安全 |
 
 ### 形式化定理 {#形式化定理}
 
@@ -485,7 +485,7 @@ pub fn process_task(task_json: &str) -> String {
 
 - [异步编程速查卡](02_async_patterns.md) - WASM 异步
 - [类型系统速查卡](02_type_system.md) - WASM 类型
-- [错误处理速查卡](02_error_handling_cheatsheet.md) - WASM 错误处理
+- [错误处理速查卡](02_error_handling_cheatsheet.md) - WASM 错误处理（Error Handling）
 - [测试速查卡](02_testing_cheatsheet.md) - WASM 测试
 - 反模式速查卡 - WASM 反模式
 

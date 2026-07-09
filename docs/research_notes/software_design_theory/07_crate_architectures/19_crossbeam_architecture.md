@@ -34,7 +34,7 @@ Crossbeam 是 Rust 生态中**无锁并发原语**的事实标准库，年下载
 
 Crossbeam 的五大核心模块：
 
-| 模块 | 抽象 | 算法类别 | 核心价值 |
+| 模块（Module） | 抽象 | 算法类别 | 核心价值 |
 |:---|:---|:---|:---|
 | **`crossbeam-epoch`** | 基于 Epoch 的内存回收 (EBR) | Lock-free | 安全地回收被其他线程仍在访问的内存 |
 | **`crossbeam-channel`** | 多生产者多消费者通道 | Lock-free | 替代 `std::sync::mpsc`，支持 `select!` 和关闭语义 |

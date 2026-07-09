@@ -27,7 +27,7 @@
 >
 > **Bloom 层级**: L3-L5 (应用/分析/评价)
 >
-> **知识领域**: Web 框架、HTTP 服务、路由组合、中间件、异步 IO
+> **知识领域**: Web 框架、HTTP 服务、路由组合、中间件、异步（Async） IO
 >
 > **对应 Rust 版本**: 1.96.1+ (salvo 0.93.0+)
 
@@ -166,7 +166,7 @@ let router = Router::new().hoop(logger).get(hello);
 | **中间件模型** | Handler 即中间件 (`hoop`) | Tower `Service` + `Layer` | `Transform` trait |
 | **路由注册** | `Router::with_path` / `push` | `Router::route` / `nest` / `merge` | `App::service` / `route` |
 | **内置特性** | 丰富（CORS/JWT/OpenAPI/静态文件） | 精简，依赖 tower-http | 丰富（WebSocket/Static/CORS） |
-| **运行时** | Tokio | Tokio | Tokio + Actix actor |
+| **运行时（Runtime）** | Tokio | Tokio | Tokio + Actix actor |
 | **学习曲线** | 中（宏 + 约定） | 中高（需理解 Tower） | 中（Actor 模型背景） |
 
 > [来源: [axum 文档](https://docs.rs/axum/latest/axum/)] · [actix-web 文档](https://actix.rs/docs/)

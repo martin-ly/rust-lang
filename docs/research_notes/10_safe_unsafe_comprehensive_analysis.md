@@ -127,12 +127,12 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 
 | 需求 | 安全子集 | unsafe 用途 |
 | :--- | :--- | :--- |
-| 性能 | 零成本抽象 | 绕过不必要的检查 |
+| 性能 | 零成本抽象（Zero-Cost Abstraction） | 绕过不必要的检查 |
 | FFI | 无 | 与 C/系统交互 |
 | 未初始化内存 | MaybeUninit（需 assume_init） | 延迟初始化、零成本 |
 | 自引用 | Pin（堆固定） | 底层实现、自定义集合 |
 | 类型转换 | as 等有限转换 | transmute、union |
-| 内联汇编 | 无 | asm! |
+| 内联汇编（Inline Assembly） | 无 | asm! |
 | 实现不安全 trait | 无 | unsafe trait impl |
 
 ---
@@ -149,11 +149,11 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 
 | 保证 | 机制 | 定理 | 文档 |
 | :--- | :--- | :--- | :--- |
-| 无悬垂引用 | 生命周期、借用 | lifetime T2、ownership T3 | lifetime_formalization、ownership_model |
+| 无悬垂引用 | 生命周期、借用（Borrowing） | lifetime T2、ownership T3 | lifetime_formalization、ownership_model |
 | 无双重释放 | 所有权 | ownership T2,T3 | ownership_model |
 | 无内存泄漏 | RAII、所有权 | ownership T3 | ownership_model |
 | 数据竞争自由 | 借用、Send/Sync | borrow T1、async T6.2 | borrow_checker_proof、async_state_machine |
-| 类型安全 | 类型系统 | type_system T1–T3 | type_system_foundations |
+| 类型安全 | 类型系统（Type System） | type_system T1–T3 | type_system_foundations |
 | 引用有效性 | 生命周期 | lifetime T2 | lifetime_formalization |
 | 型变安全 | 协变/逆变/不变 | variance T1–T4 | variance_theory |
 | 自引用安全 | Pin | pin T1–T3 | pin_self_referential |
@@ -329,8 +329,8 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 | 维度 | 安全子集 | unsafe 拓展 | 边界 |
 | :--- | :--- | :--- | :--- |
-| **内存** | 所有权、借用、RAII | 裸指针、MaybeUninit、手动分配 | 编译器可验证 vs 程序员契约 |
-| **类型** | 类型系统、泛型 | transmute、union | 类型安全 vs 重解释 |
+| **内存** | 所有权（Ownership）、借用、RAII | 裸指针、MaybeUninit、手动分配 | 编译器可验证 vs 程序员契约 |
+| **类型** | 类型系统、泛型（Generics） | transmute、union | 类型安全 vs 重解释 |
 | **并发** | Send/Sync、借用 | 裸原子、无锁 | 数据竞争自由 vs 手动同步 |
 | **引用** | 生命周期、NLL | 裸指针无生命周期 | 引用有效性 vs 手动保证 |
 | **FFI** | 无 | extern、extern "C" | 无 vs 完全手动 |
@@ -390,7 +390,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

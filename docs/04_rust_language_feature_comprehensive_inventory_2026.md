@@ -199,13 +199,13 @@ B = 本项目现有知识集合
 
 | 特性 | 认知维度 | 归属 Crate | 状态 |
 |------|---------|-----------|------|
-| `if let` guards on match arms | 控制流/模式匹配 | c03_control_fn | ✅ 已覆盖（437行模块+知识库文档） |
+| `if let` guards on match arms | 控制流/模式匹配（Pattern Matching） | c03_control_fn | ✅ 已覆盖（437行模块+知识库文档） |
 | `cfg_select!` 宏 | 元编程/条件编译 | c11_macro_system_proc | ✅ 已覆盖（303行模块+知识库文档） |
-| `core::range` / `RangeInclusive` | 类型系统/迭代器 | c02_type_system | ✅ 已覆盖（619行模块+知识库文档） |
-| `Atomic*::update` / `try_update` | 并发/原子操作 | c05_threads | ✅ 已覆盖（469行模块） |
+| `core::range` / `RangeInclusive` | 类型系统（Type System）/迭代器 | c02_type_system | ✅ 已覆盖（619行模块+知识库文档） |
+| `Atomic*::update` / `try_update` | 并发/原子操作（Atomic Operations） | c05_threads | ✅ 已覆盖（469行模块） |
 | `core::hint::cold_path` | 性能/分支预测 | c05_threads | ✅ 已覆盖（已集成） |
 | `as_ref_unchecked` / `as_mut_unchecked` | Unsafe/裸指针 | c13_embedded | ✅ 已覆盖（393行模块） |
-| `MaybeUninit<[T; N]>` ↔ 数组互转 | 内存安全/初始化 | c01_ownership | ✅ 已覆盖（635行模块） |
+| `MaybeUninit<[T; N]>` ↔ 数组互转 | 内存安全（Memory Safety）/初始化 | c01_ownership | ✅ 已覆盖（635行模块） |
 | `bool: TryFrom<{integer}>` | 类型转换 | c03_control_fn | ✅ 已覆盖（已集成） |
 | `Cell<[T; N]>` AsRef | 内存安全 | c01_ownership | ✅ 已覆盖（已集成） |
 
@@ -218,7 +218,7 @@ B = 本项目现有知识集合
 | 特性 | 认知维度 | 归属 Crate | 紧迫度 |
 |------|---------|-----------|--------|
 | Async Closures (`async \|\| {}`) | 异步/闭包 | c06_async | 🔴 极高 |
-| `AsyncFn` / `AsyncFnMut` / `AsyncFnOnce` | 异步/Trait | c06_async, c04_generic | 🔴 极高 |
+| `AsyncFn` / `AsyncFnMut` / `AsyncFnOnce` | 异步（Async）/Trait | c06_async, c04_generic | 🔴 极高 |
 | AFIT dyn 兼容 (`async_fn_in_dyn_trait`) | 异步/动态分发 | c06_async | 🔴 极高 |
 | Return Type Notation (RTN) | 异步/类型表达 | c06_async | 🟡 高 |
 
@@ -247,7 +247,7 @@ B = 本项目现有知识集合
 
 | 特性 | 认知维度 | 归属 Crate | 紧迫度 |
 |------|---------|-----------|--------|
-| `use<..>` precise capturing | 生命周期/泛型 | c04_generic | 🟡 高 |
+| `use<..>` precise capturing | 生命周期/泛型（Generics） | c04_generic | 🟡 高 |
 | Cargo Script / Frontmatter | 工具链/脚本 | 全局 | 🟡 高 |
 | Safety Tags | Unsafe/安全标注 | c01_ownership | 🟡 高 |
 | 并行前端编译 (`-Z threads=N`) | 构建优化 | docs/06_toolchain | 🟢 中 |
@@ -521,7 +521,7 @@ graph TD
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
-**What**: Rust 1.95.0 稳定了 `core::range` 模块，引入新的 `RangeInclusive` 类型和 `RangeInclusiveIter` 迭代器。
+**What**: Rust 1.95.0 稳定了 `core::range` 模块（Module），引入新的 `RangeInclusive` 类型和 `RangeInclusiveIter` 迭代器。
 这是对 `core::ops::RangeInclusive` 的模块级重构。
 
 **How**:
@@ -1868,7 +1868,7 @@ Not:    不是跨平台的！仅限 Linux 5.1+
 **Rust 生态**:
 
 - `io-uring` crate (tokio-rs): 底层安全封装
-- `tokio-uring`: Tokio 的 io_uring 运行时
+- `tokio-uring`: Tokio 的 io_uring 运行时（Runtime）
 - `monoio`: 基于 io_uring 的线程 per core 运行时
 
 ### 10.4 前沿缺口：QUIC/HTTP3 完整实现 {#104-前沿缺口quichttp3-完整实现}
@@ -2494,7 +2494,7 @@ docs/01_core/
 
 | 论文/来源 | 会议/年份 | 相关概念 |
 |----------|----------|---------|
-| Tree Borrows | PLDI 2025 | 所有权、借用检查器 |
+| Tree Borrows | PLDI 2025 | 所有权（Ownership）、借用检查器 |
 | Aliasing Mutation | POPL 2026 | 内存模型 |
 | RustBelt | ICFP 2018 | 形式化验证 |
 | Stacked Borrows (过时) | POPL 2019 | 历史参考 |

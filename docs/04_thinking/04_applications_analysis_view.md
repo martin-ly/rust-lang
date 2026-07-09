@@ -72,7 +72,7 @@
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | I/O 模式 | 同步 (std::io) | CLI 通常非高并发、简单直接 |
-| 错误处理 | anyhow (应用) / thiserror (库) | 快速原型用 anyhow、库用 thiserror |
+| 错误处理（Error Handling） | anyhow (应用) / thiserror (库) | 快速原型用 anyhow、库用 thiserror |
 | 相关模块 | C03 控制流、C07 进程、C08 算法 | 控制流、子进程、数据处理 |
 
 **公理 / 定理 → 论证**：CLI 选型遵循「单线程主导」公理——CLI 通常顺序执行、无高并发需求。定理：同步 I/O 在单线程下零额外开销；派生：`std::io` 足以满足，`std::process` 管理子进程。错误类型需满足 `Error + Send + Sync` 以支持 `anyhow`/`thiserror`。
@@ -88,7 +88,7 @@
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Web 框架 | axum / actix-web | axum 与 Tokio 同源、actix 高性能 |
-| 相关模块 | C06 异步、C10 网络 | 异步 I/O、TCP/HTTP |
+| 相关模块 | C06 异步（Async）、C10 网络 | 异步 I/O、TCP/HTTP |
 
 **公理 / 定理 → 论证**：Web 选型遵循「I/O 密集型」公理——大量请求等待网络/磁盘。定理：异步 runtime 在 I/O 等待时复用线程，可支撑更高并发。Tokio 选型依据：M:N 调度、与 smol 生态对比、生产验证。axum 与 Tokio 同源，减少调度开销。
 
@@ -120,7 +120,7 @@
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 并发 | 裸金属/RTOS | 无 OS 时受限 |
-| 相关模块 | C01 所有权、C02 类型、C05 线程 | 内存、类型、并发基础 |
+| 相关模块 | C01 所有权（Ownership）、C02 类型、C05 线程 | 内存、类型、并发基础 |
 
 **公理 / 定理 → 论证**：嵌入式选型遵循「资源受限」公理——无 OS 或极小运行时。定理：`no_std` 剔除堆分配与标准库；所有权与借用保证无 GC 下内存安全。并发选型：裸金属用临界区/中断；RTOS 用其提供的同步原语。
 
@@ -151,7 +151,7 @@
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 并行运算 | rayon | 数据并行、CPU 密集型 |
 | 数据管道 | polars / rust-dataframe | 列式存储、内存布局优化 |
-| 相关模块 | C02 类型、C05 线程、C08 算法 | 泛型、并行、排序/搜索 |
+| 相关模块 | C02 类型、C05 线程、C08 算法 | 泛型（Generics）、并行、排序/搜索 |
 
 **公理 / 定理 → 论证**：数据科学选型遵循「数据密集」公理——大量结构化数据在内存中处理。定理：所有权系统保证无 GC 暂停、无数据竞争；rayon 提供数据并行；ndarray 与 SIMD 结合可达到 C/Fortran 级性能。
 
@@ -183,7 +183,7 @@
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 密码学 | ring / rust-crypto | 安全、可审计 |
 | 序列化 | borsh / scale | 确定性编码、无歧义 |
-| 相关模块 | C01 所有权、C02 类型、C11 宏 | 内存安全、类型安全、代码生成 |
+| 相关模块 | C01 所有权、C02 类型、C11 宏 | 内存安全（Memory Safety）、类型安全、代码生成 |
 
 **公理 / 定理 → 论证**：区块链选型遵循「确定性」公理——全节点共识须一致。定理：Rust 无 GC、无未定义行为，执行可复现；形式化验证可应用到合约逻辑；宏用于序列化/反序列化代码生成。
 
@@ -198,7 +198,7 @@
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 目标 | wasm32-unknown-unknown | 无 std、可选 alloc |
-| 运行时 | wasm-bindgen-futures | 异步与 JS Promise 互操作 |
+| 运行时（Runtime） | wasm-bindgen-futures | 异步与 JS Promise 互操作 |
 | 相关模块 | C01 所有权、C02 类型、C11 宏 | 内存、类型、serde |
 
 **公理 / 定理 → 论证**：WASM 选型遵循「无 host 假设」公理——目标环境无 OS、无 std。定理：`no_std` 剔除标准库；所有权保证无 GC；与 JS 互操作需 `wasm-bindgen`。无浮点、无 alloc 可减小体积；确定性重要时避免随机/时间依赖。
@@ -296,7 +296,7 @@ flowchart LR
 
 | 应用场景 | 形式化定理 | 文档 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 并发安全 | async T6.2、Send/Sync | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) |
+| 并发安全（Concurrency Safety） | async T6.2、Send/Sync | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) |
 | 类型安全 | type_system T1–T3 | [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
 | 设计模式 | CE-T1–T3 | [04_compositional_engineering](../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md) |
 | 安全边界 | unsafe 契约 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../research_notes/10_safe_unsafe_comprehensive_analysis.md) |

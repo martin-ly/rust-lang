@@ -78,15 +78,15 @@
 | 排名 | 概念族 | 文件数 | P0 | P1 | P2 | P0+P1+P2 | 补全结果 |
 |-----:|--------|-------:|-----:|-----:|-----:|----------:|----------|
 | 1 | [软件设计 / Crate 架构](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) | 22 | 100% | 100% | 100% | 100% | 已批量补充 Rust API Guidelines、Rust Design Patterns、SemVer 官方规范 |
-| 2 | [软件设计 / 边界系统](software_design_theory/05_boundary_system/README.md) | 4 | 100% | 100% | 100% | 100% | 已补充 Rust Reference 模块/FFI 边界、Refactoring Guru 边界模式 |
+| 2 | [软件设计 / 边界系统](software_design_theory/05_boundary_system/README.md) | 4 | 100% | 100% | 100% | 100% | 已补充 Rust Reference 模块（Module）/FFI 边界、Refactoring Guru 边界模式 |
 | 3 | [速查卡](10_lifetime_cheatsheet.md) | 4 | 100% | 100% | 100% | 100% | 已补充 Rust Reference 对应章节及 Rust Design Patterns 实战链接 |
 | 4 | [形式化模块 / 反例边界](formal_modules/60_module_counterexamples.md) | 1 | 100% | 100% | 100% | 100% | 已补充 RFC 2126、Rust Reference Modules、Rust Design Patterns |
 | 5 | [Crate 架构 / 反例边界](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) | 1 | 100% | 100% | 100% | 100% | 已补充 Rust API Guidelines、Cargo Book workspace 章节 |
 | 6 | [实验研究 / 性能 / 反例边界](experiments/60_experiments_counterexamples.md) | 1 | 100% | 100% | 100% | 100% | 已补充 Rust Performance Book、Criterion 论文/文档 |
 | 7 | [工作流 / 组合工程 / 分布式 / 反例边界](software_design_theory/60_workflow_compositional_distributed_counterexamples.md) | 1 | 100% | 100% | 100% | 100% | 已补充 Saga/补偿事务社区资源与学术来源 |
-| 8 | [并发安全 / Send/Sync](formal_methods/10_send_sync_formalization.md) | 1 | 100% | 100% | 100% | 100% | 已补充 Tokio Docs、async-std 生态文档 |
-| 9 | [所有权 / 借用 / 反例边界](formal_methods/60_ownership_counterexamples.md) | 1 | 100% | 100% | 100% | 100% | 已补充 Rust Design Patterns、常见借用错误排查社区文章 |
-| 10 | [类型系统 / Trait / 反例边界](type_theory/60_type_system_counterexamples.md) | 1 | 100% | 100% | 100% | 100% | 已补充 Rust API Guidelines、Rust Design Patterns 中 Trait 相关模式 |
+| 8 | [并发安全（Concurrency Safety） / Send/Sync](formal_methods/10_send_sync_formalization.md) | 1 | 100% | 100% | 100% | 100% | 已补充 Tokio Docs、async-std 生态文档 |
+| 9 | [所有权（Ownership） / 借用（Borrowing） / 反例边界](formal_methods/60_ownership_counterexamples.md) | 1 | 100% | 100% | 100% | 100% | 已补充 Rust Design Patterns、常见借用错误排查社区文章 |
+| 10 | [类型系统（Type System） / Trait / 反例边界](type_theory/60_type_system_counterexamples.md) | 1 | 100% | 100% | 100% | 100% | 已补充 Rust API Guidelines、Rust Design Patterns 中 Trait 相关模式 |
 
 > **说明**：本表由 [`scripts/maintenance/check_authoritative_source_gaps.py`](../../scripts/maintenance/check_authoritative_source_gaps.py) 与 [`authority_coverage_dashboard.py`](../../scripts/maintenance/authority_coverage_dashboard.py) 扫描验证，所有概念族 P0/P1/P2 覆盖率均为 100%。
 

@@ -48,7 +48,7 @@
 
 **本 research_notes 体系**：围绕 Rust 的**公理判定系统**、**语言表达力**、**组件组合法则**三大支柱，
 建立形式化定义→公理→定理→推论的**可追溯论证链**，
-覆盖所有权/借用/类型/异步/Pin/**Send/Sync**（formal_methods 六篇并表）、**安全可判定机制总览**、设计模式 23/43、并发选型、组合工程 CE-T1–T3，
+覆盖所有权/借用（Borrowing）/类型/异步（Async）/Pin/**Send/Sync**（formal_methods 六篇并表）、**安全可判定机制总览**、设计模式 23/43、并发选型、组合工程 CE-T1–T3，
 并与 RustBelt 等国际权威对标。
 聚焦**数学风格形式化论证 + Rust 示例**（L3/Coq/Lean 已归档）。
 
@@ -102,10 +102,10 @@
 
 | 领域 | 一句话总结 | 入口 |
 | :--- | :--- | :--- |
-| **所有权** | 唯一所有者、移动转移、作用域释放；T2 唯一性、T3 内存安全 | ownership_model |
+| **所有权（Ownership）** | 唯一所有者、移动转移、作用域释放；T2 唯一性、T3 内存安全（Memory Safety） | ownership_model |
 | **借用** | 共享/可变互斥、作用域；T1 数据竞争自由 | borrow_checker_proof |
 | **生命周期** | ℓ⊆lft、outlives；LF-T1–T3 引用有效性 | lifetime_formalization |
-| **类型系统** | 进展性、保持性；T1–T3 类型安全 | type_system_foundations |
+| **类型系统（Type System）** | 进展性、保持性；T1–T3 类型安全 | type_system_foundations |
 | **型变** | 协变/逆变/不变；T1–T4 型变安全 | variance_theory |
 | **Trait** | impl、对象安全、一致性；COH-T1 | trait_system_formalization |
 | **异步** | Future、Poll、状态机；T6.1–T6.3 | async_state_machine |
@@ -238,7 +238,7 @@
 
 > **来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
-本文档已完成权威国际化来源对齐升级：将泛化的 "Rust Official Docs" 替换为官方具体章节/模块/API 链接，并补充 P1 形式化来源对照。
+本文档已完成权威国际化来源对齐升级：将泛化的 "Rust Official Docs" 替换为官方具体章节/模块（Module）/API 链接，并补充 P1 形式化来源对照。
 
 #### 权威来源对齐 {#权威来源对齐}
 

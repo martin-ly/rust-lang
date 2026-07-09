@@ -34,7 +34,7 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L3-L5 (应用/分析/评价)
-> **知识领域**: 缓存、异步 IO、消息队列、分布式协调
+> **知识领域**: 缓存、异步（Async） IO、消息队列、分布式协调
 > **对应 Rust 版本**: 1.96.1+ (redis-rs 0.25+/1.x)
 
 ---
@@ -54,7 +54,7 @@
 |:--|:--|:--|
 | **命令层** | `redis::cmd(...)` 与 `AsyncCommands` trait 双轨 | 简单场景人体工学，复杂场景可精确控制 |
 | **连接层** | `Connection` / `MultiplexedConnection` / `ConnectionManager` 分离 | 按并发模型选择最小开销抽象 |
-| **运行时** | `tokio-comp` / `async-std-comp` feature 可选 | 不强制绑定运行时，避免依赖污染 |
+| **运行时（Runtime）** | `tokio-comp` / `async-std-comp` feature 可选 | 不强制绑定运行时，避免依赖污染 |
 | **类型安全** | `FromRedisValue` / `ToRedisArgs` trait | 编译期保证命令参数与返回值类型匹配 |
 
 > [redis-rs GitHub Repository](https://github.com/redis-rs/redis-rs)(<https://github.com/redis-rs/redis-rs>)

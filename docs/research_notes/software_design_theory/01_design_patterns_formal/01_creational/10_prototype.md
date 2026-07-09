@@ -88,7 +88,7 @@
 | Rust Reference | [Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) | 动态分发与生命周期 |
 | Rustonomicon | [Safe Abstractions](https://doc.rust-lang.org/nomicon/) | `unsafe` 边界与 Safe 封装 |
 
-> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权、借用检查与 trait 系统对实现方式的约束。
+> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权（Ownership）、借用检查与 trait 系统对实现方式的约束。
 
 ---
 
@@ -149,7 +149,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 **证明**：
 
 1. **类型签名**：`Clone::clone(&self) -> Self`
-   - 输入：`&self`（不可变借用）
+   - 输入：`&self`（不可变借用（Immutable Borrow））
    - 输出：`Self`（拥有值）
 2. **类型保持**：根据 [type_system_foundations](../../../type_theory/10_type_system_foundations.md)，
    - $\Gamma \vdash t : T$
@@ -169,7 +169,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-`&self` 借用，返回值拥有所有权；原对象仍有效。
+`&self` 借用（Borrowing），返回值拥有所有权；原对象仍有效。
 
 **证明**：
 
@@ -746,7 +746,7 @@ graph LR
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

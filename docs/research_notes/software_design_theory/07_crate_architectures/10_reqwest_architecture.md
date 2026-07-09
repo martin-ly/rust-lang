@@ -414,7 +414,7 @@ async fn main() -> Result<(), reqwest::Error> {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-`reqwest::blocking` 模块为同步上下文提供完全相同的 API 表面，其实现并非独立的同步 HTTP 栈，而是在内部启动一个 `tokio` 运行时，将异步操作阻塞化：
+`reqwest::blocking` 模块为同步上下文提供完全相同的 API 表面，其实现并非独立的同步 HTTP 栈，而是在内部启动一个 `tokio` 运行时（Runtime），将异步操作阻塞化：
 
 ```rust,ignore
 use reqwest::blocking::{Client, Response};
@@ -702,7 +702,7 @@ match client.get("https://invalid.url").send().await {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Hyper HTTP 实现架构](08_hyper_architecture.md)
-- [SQLx 异步 SQL 工具架构](09_sqlx_architecture.md)
+- [SQLx 异步（Async） SQL 工具架构](09_sqlx_architecture.md)
 
 ---
 

@@ -147,7 +147,7 @@ MISRA Rust 是汽车/航空领域的事实标准编码规范。
 |:---|:---:|:---:|:---|
 | **语法约束** ( forbid 某些模式) | 15 | 8 | 7 条未覆盖 |
 | **类型安全** (强制显式转换) | 12 | 10 | 2 条未覆盖 |
-| **并发安全** (Send/Sync 规则) | 8 | 5 | 3 条未覆盖 |
+| **并发安全（Concurrency Safety）** (Send/Sync 规则) | 8 | 5 | 3 条未覆盖 |
 | **unsafe 规范** (使用限制) | 10 | 4 | 6 条未覆盖 |
 | **文档要求** (Safety Comment) | 5 | 2 | 3 条未覆盖 |
 
@@ -353,6 +353,6 @@ graph TD
 > **[IEC 61508 - Safety Standards](https://webstore.iec.ch/publication/66912)**
 > **[MISRA Rust Guidelines](https://www.misra.org.uk/)**
 > **[Ferrocene Language Specification](https://spec.ferrocene.dev/)**
-> **[Ferrocene 26.02.0 Release Notes](https://ferrocene.dev/)(https://ferrocene.dev/)** — ISO 26262 ASIL B + IEC 61508 SIL 2 core 子集认证 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
+> **[Ferrocene 26.02.0 Release Notes](https://ferrocene.dev/)(<https://ferrocene.dev/>)** — ISO 26262 ASIL B + IEC 61508 SIL 2 core 子集认证 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 
 ---

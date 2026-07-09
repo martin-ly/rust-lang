@@ -284,7 +284,7 @@ unsafe fn very_dangerous() {
 | 内核开发 | `#[no_std]`, 自定义 alloc | 操作系统内核 |
 | 实时系统 | `const fn`, 编译期计算 | 确定性行为 |
 | FFI 边界 | `extern "C"`, `repr(C)` | 与其他语言互操作 |
-| 元编程 | 过程宏, 声明宏 | 代码生成 |
+| 元编程 | 过程宏（Procedural Macro）, 声明宏（Declarative Macro） | 代码生成 |
 | 条件编译 | `cfg` 属性 | 多平台支持 |
 
 ---

@@ -377,8 +377,8 @@ graph TD
 
 **形式化对应**:
 
-- 所有权: [ownership_model](../research_notes/formal_methods/10_ownership_model.md) 定理 T2（唯一性）、T3（内存安全）
-- 借用: [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) 定理 T1
+- 所有权（Ownership）: [ownership_model](../research_notes/formal_methods/10_ownership_model.md) 定理 T2（唯一性）、T3（内存安全（Memory Safety））
+- 借用（Borrowing）: [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) 定理 T1
 - 类型: [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) 定理 T1–T3
 
 ### 内存安全定理 {#内存安全定理}
@@ -1396,7 +1396,7 @@ fn proof_validation_workflow() {
 **最后更新**: 2026-05-08
 **状态**: ✅ 已完成
 **证明树总数**: 15个
-**覆盖领域**: 内存安全、类型安全、并发安全、定理证明链
+**覆盖领域**: 内存安全、类型安全、并发安全（Concurrency Safety）、定理证明链
 
 ---
 
@@ -1424,7 +1424,7 @@ Rust 新特性可扩展思维表征方式：
 `
 ust
 // array_windows 的思维导图节点
-// [数据切片] -> [array_windows<N>] -> [模式匹配]
+// [数据切片] -> [array_windows<N>] -> [模式匹配（Pattern Matching）]
 
 // ControlFlow 的决策树
 // [迭代开始] -> [条件检查] -> [Break/Continue]
@@ -1453,7 +1453,7 @@ ust
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

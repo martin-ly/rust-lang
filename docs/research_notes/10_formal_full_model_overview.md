@@ -59,13 +59,13 @@
 
 | 机制 | 公理/定义 | 子文档 |
 | :--- | :--- | :--- |
-| **所有权** | 规则 1–3：唯一所有者、移动转移、作用域结束释放 | [ownership_model](formal_methods/10_ownership_model.md) |
-| **借用** | 规则 5–8：共享借用、可变借用、互斥、作用域 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) |
+| **所有权（Ownership）** | 规则 1–3：唯一所有者、移动转移、作用域结束释放 | [ownership_model](formal_methods/10_ownership_model.md) |
+| **借用（Borrowing）** | 规则 5–8：共享借用、可变借用（Mutable Borrow）、互斥、作用域 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) |
 | **生命周期** | Axiom LF1–LF2、Def 1.4、$\ell \subseteq \text{lft}$ | lifetime_formalization |
-| **类型系统** | 进展性、保持性、typing rules | [type_system_foundations](type_theory/10_type_system_foundations.md) |
+| **类型系统（Type System）** | 进展性、保持性、typing rules | [type_system_foundations](type_theory/10_type_system_foundations.md) |
 | **型变** | Def 1.1–3.1（协变、逆变、不变） | [variance_theory](type_theory/10_variance_theory.md) |
 | **Trait** | Axiom COH1/COH2、对象安全、impl 解析 | [trait_system_formalization](type_theory/10_trait_system_formalization.md) |
-| **异步** | Def 4.1–5.2（Future、Poll、Ready/Pending） | [async_state_machine](formal_methods/10_async_state_machine.md) |
+| **异步（Async）** | Def 4.1–5.2（Future、Poll、Ready/Pending） | [async_state_machine](formal_methods/10_async_state_machine.md) |
 | **Pin** | Def 1.1–2.2（位置稳定、自引用） | [pin_self_referential](formal_methods/10_pin_self_referential.md) |
 | **Send/Sync** | Def SEND1/SYNC1、SYNC-L1（$T:\text{Sync} \Leftrightarrow \&T:\text{Send}$）；SEND-T1/SYNC-T1 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) |
 | **控制流** | A-CF1：控制流归约保持类型与所有权 | [formal_methods/README](formal_methods/README.md#控制流形式化) |
@@ -135,7 +135,7 @@
 | ownership T3 → CE-T1 | 内存安全框架 ⇒ 组合保持 | 组合保持内存安全 |
 | borrow T1 + type T3 → CE-T2 | 数据竞争自由 + 类型安全 | 组合保持数据竞争自由 |
 | lifetime LF-T2 → borrow T2 | 引用有效性 ⇒ 借用规则 | 借用规则正确性 |
-| send_sync SEND-T1/SYNC-T1 → async T6.2、SPAWN-T1 | 跨线程转移/共享安全 ⇒ 并发安全 | 与 borrow T1 一致、spawn/Future 数据竞争自由 |
+| send_sync SEND-T1/SYNC-T1 → async T6.2、SPAWN-T1 | 跨线程转移/共享安全 ⇒ 并发安全（Concurrency Safety） | 与 borrow T1 一致、spawn/Future 数据竞争自由 |
 
 ### 1.4 公理→组合定理 DAG（支柱 1+3 衔接） {#14-公理组合定理-dag支柱-13-衔接}
 
@@ -328,7 +328,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

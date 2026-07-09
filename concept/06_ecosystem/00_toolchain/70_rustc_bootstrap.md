@@ -68,7 +68,7 @@
 
 > **关键洞察**: 自举让 Rust 编译器“吃自己的狗粮”，同时也确保编译器能稳定地构建自身。
 >
-> [Rustc Dev Guide — Bootstrapping](https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html)(<https://rustc-dev-guide.rust-lang.org/overview.html#bootstrapping>)
+> [Rustc Dev Guide — Bootstrapping](https://web.archive.org/web/*/https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html)(<https://rustc-dev-guide.rust-lang.org/overview.html#bootstrapping>)
 
 ---
 
@@ -99,7 +99,7 @@ Stage 3: 可选，验证 stage2 输出与 stage1 一致
 
 > **定理**: 日常开发通常只需 `./x build library`（得到 stage1），完整发布才需要 stage2。
 >
-> [Rustc Dev Guide — What Bootstrapping does](https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html)(<https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html>)
+> [Rustc Dev Guide — What Bootstrapping does](https://web.archive.org/web/*/https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html)(<https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html>)
 
 ---
 
@@ -164,7 +164,7 @@ fn new_impl() { ... }
 
 > **警告**: `RUSTC_BOOTSTRAP=1` 只在自举 rustc 时使用，**永远不要**在普通项目中使用，因为它会破坏稳定性保证。
 >
-> [Rustc Dev Guide — What Bootstrapping does](https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html)(<https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html#complications-of-bootstrapping>)
+> [Rustc Dev Guide — What Bootstrapping does](https://web.archive.org/web/*/https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html)(<https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html#complications-of-bootstrapping>)
 
 ---
 
@@ -178,7 +178,7 @@ Bootstrap 支持三种工具构建模式：
 | `ToolStd` | 依赖本地构建的 std，如 `compiletest` |
 | `ToolRustcPrivate` | 使用 `rustc_private`，依赖本地 rustc 产物，如 Clippy |
 
-> [Rustc Dev Guide — Writing tools in Bootstrap](https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html)(<https://rustc-dev-guide.rust-lang.org/building/bootstrapping/writing-tools-in-bootstrap.html>)
+> [Rustc Dev Guide — Writing tools in Bootstrap](https://web.archive.org/web/*/https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html)(<https://rustc-dev-guide.rust-lang.org/building/bootstrapping/writing-tools-in-bootstrap.html>)
 
 ---
 

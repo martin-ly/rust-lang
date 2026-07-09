@@ -39,10 +39,10 @@
 
 ## 二、核心类型 {#二核心类型}
 
-| std 模块/类型 | 项目文档 | 状态 | 备注 |
+| std 模块（Module）/类型 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | ✅ | Option/Result 处理 |
-| [std::result::Result](https://doc.rust-lang.org/std/result/enum.Result.html) | [10_error_handling_cheatsheet.md](10_error_handling_cheatsheet.md) | ✅ | 错误处理 |
+| [std::result::Result](https://doc.rust-lang.org/std/result/enum.Result.html) | [10_error_handling_cheatsheet.md](10_error_handling_cheatsheet.md) | ✅ | 错误处理（Error Handling） |
 | [std::string::String](https://doc.rust-lang.org/std/string/struct.String.html) | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) §1 | ✅ | 所有权转移示例 |
 | [std::vec::Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html) | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) §2-§3 | ✅ | 借用示例 |
 | [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html) | [type_theory/60_type_system_counterexamples.md](type_theory/60_type_system_counterexamples.md) §3 | ✅ | `Box<dyn Trait>` |
@@ -68,7 +68,7 @@
 | [std::sync::Mutex](https://doc.rust-lang.org/std/sync/struct.Mutex.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §3-§4 | ✅ | 互斥锁 |
 | [std::sync::RwLock](https://doc.rust-lang.org/std/sync/struct.RwLock.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §7 | ✅ | 读写锁 |
 | [std::thread](https://doc.rust-lang.org/std/thread/index.html) | [crates/c05_threads/](../../crates/c05_threads/README.md) | ✅ | 线程 API |
-| [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §3 | ✅ | 原子操作 |
+| [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §3 | ✅ | 原子操作（Atomic Operations） |
 
 ---
 

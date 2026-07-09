@@ -508,7 +508,7 @@ unsafe extern "C" {
 
 ### 2.4 未来 Edition 方向（2027+）
 
-> **[Rust Lang Team Roadmap](https://www.rust-lang.org/policies/roadmap); Inside Rust Blog; 社区讨论** 📋 推测性内容
+> **[Rust Lang Team Roadmap](https://web.archive.org/web/*/https://www.rust-lang.org/policies/roadmap); Inside Rust Blog; 社区讨论** 📋 推测性内容
 
 Rust 语言团队已公开表示 Edition 将继续以约 3 年为周期发布。基于当前 nightly 特性、RFC 草案和 Lang Team 博客，2027 Edition 可能聚焦以下方向：
 
@@ -1063,10 +1063,10 @@ graph TD
 > Rust 的演进速度比 C++ 快（无历史包袱），比 Go 慢（需要社区共识）。Edition 系统每 2-3 年发布一次，每个 Edition 都是语言设计的阶段性总结。比较 Rust 与其他语言的演进机制，能揭示 "如何在不破坏生态的前提下推进语言进化"。
 > 演进对比见 [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) 与 [`../05_comparative/02_rust_vs_go.md`](../../05_comparative/01_systems_languages/02_rust_vs_go.md)。
 > **[来源: Rust Edition Guide; [RFC 2052](https://rust-lang.github.io/rfcs//2052-epochs.html); [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html); [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html); RFC 1210]** 语言演进分析基于官方 RFC 和 Edition 指南。✅
-> **[Rust Lang Team Blog; Rust Internals Forum; Lang Team Roadmap](https://www.rust-lang.org/policies/roadmap)** 未来方向基于语言团队的公开讨论和路线图文档。✅
+> **[Rust Lang Team Blog; Rust Internals Forum; Lang Team Roadmap](https://web.archive.org/web/*/https://www.rust-lang.org/policies/roadmap)** 未来方向基于语言团队的公开讨论和路线图文档。✅
 > **[Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/)(<https://rust-lang.github.io/rust-project-goals/2026/>)** Rust 项目目标定义了语言团队每年的旗舰级工作方向，包括下一代 trait solver、const traits、Effects 系统等。✅
 > **[Niko Matsakis, "Rust in 2025+" blog](https://smallcultfollowing.com/babysteps/)** 语言设计决策的社区权威解读，涵盖 trait solver 演进、const generics 稳定化等主题。 ✅
-> **[Without Boats, "The Rust I Wanted Had No Future"](https://without.boats/blog/the-rust-i-wanted-had-no-future/)** 对 Rust 语言设计哲学和演进方向的深度反思，涉及 effects、async fn in traits 等特性的设计权衡。 ✅
+> **[Without Boats, "The Rust I Wanted Had No Future"](https://web.archive.org/web/*/https://without.boats/blog/the-rust-i-wanted-had-no-future/)** 对 Rust 语言设计哲学和演进方向的深度反思，涉及 effects、async fn in traits 等特性的设计权衡。 ✅
 > **[Koka Language; Plotkin & Pretnar 2009; Type Theory Research](https://koka-lang.github.io/koka/doc/)** Effects 系统和类型论扩展参考了学术文献。✅
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html); [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅

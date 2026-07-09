@@ -78,17 +78,17 @@
 |----------|--------------|----------|
 | [The Rust Programming Language](https://doc.rust-lang.org/book/) | 21 章全章节 | [10_rust_book_alignment.md](10_rust_book_alignment.md) |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | 词法、类型、表达式、items、modules、unsafe、attributes | [10_rust_reference_alignment.md](10_rust_reference_alignment.md)、[10_rust_reference_chapters_alignment.md](10_rust_reference_chapters_alignment.md) |
-| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 所有权、类型布局、并发、未初始化内存、FFI | [10_rustonomicon_alignment.md](10_rustonomicon_alignment.md) |
+| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 所有权（Ownership）、类型布局、并发、未初始化内存、FFI | [10_rustonomicon_alignment.md](10_rustonomicon_alignment.md) |
 | [Cargo Book](https://doc.rust-lang.org/cargo/) | package、依赖、workspace、features、build、发布 | [10_cargo_book_alignment.md](10_cargo_book_alignment.md) |
 | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) | 2015/2018/2021/2024 Edition 差异 | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) |
 | [Async Book](https://rust-lang.github.io/async-book/) | Future、Pin、执行器、Waker、IO | [10_async_book_alignment.md](10_async_book_alignment.md) |
-| [Rust RFCs](https://rust-lang.github.io/rfcs/) | 所有权、借用、生命周期、async、Edition、语法糖 | [10_rfc_alignment_index.md](10_rfc_alignment_index.md)、[10_rfc_argumentation_chain.md](10_rfc_argumentation_chain.md) |
+| [Rust RFCs](https://rust-lang.github.io/rfcs/) | 所有权、借用（Borrowing）、生命周期、async、Edition、语法糖 | [10_rfc_alignment_index.md](10_rfc_alignment_index.md)、[10_rfc_argumentation_chain.md](10_rfc_argumentation_chain.md) |
 | [Standard Library](https://doc.rust-lang.org/std/) | 核心类型、trait、collections、sync、io | [10_std_library_alignment.md](10_std_library_alignment.md) |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | 基础概念、所有权、类型、并发、unsafe | [10_rust_by_example_alignment.md](10_rust_by_example_alignment.md) |
 | [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) | 内存模型、UB、类型布局、FFI、并发 | [10_unsafe_code_guidelines_alignment.md](10_unsafe_code_guidelines_alignment.md) |
-| [Rust Error Codes](https://doc.rust-lang.org/error_codes/error-index.html) | 所有权、类型、模块、并发、unsafe 错误码 | [10_rustc_errors_alignment.md](10_rustc_errors_alignment.md) |
+| [Rust Error Codes](https://doc.rust-lang.org/error_codes/error-index.html) | 所有权、类型、模块（Module）、并发、unsafe 错误码 | [10_rustc_errors_alignment.md](10_rustc_errors_alignment.md) |
 | [Ferrocene Language Specification](https://spec.ferrocene.dev/) | 语义规范、安全关键认证 | [10_ferrocene_fls_alignment.md](10_ferrocene_fls_alignment.md) |
-| [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | HIR/MIR、名称解析、类型推断、借用检查 | [10_rustc_dev_guide_alignment.md](10_rustc_dev_guide_alignment.md) |
+| [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | HIR/MIR、名称解析、类型推断（Type Inference）、借用检查 | [10_rustc_dev_guide_alignment.md](10_rustc_dev_guide_alignment.md) |
 
 ### 2.2 P1 学术/形式化来源 {#22-p1-学术形式化来源}
 
@@ -139,7 +139,7 @@
 |-----------|----------|----------|--------|
 | RustBelt 具体定理 | [10_rustbelt_alignment.md](10_rustbelt_alignment.md) | 论文定理与项目证明树（`10_proof_tree_ownership.md`、`10_proof_tree_borrow.md`）的逐项映射不完整 | P1 |
 | Tree Borrows 精确反例 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | `MaybeUninit`、raw pointer、two-phase borrow 等边界未精确到反例行号 | P1 |
-| Aeneas async / trait 支持 | [10_aeneas_integration_plan.md](10_aeneas_integration_plan.md) | async、泛型 trait 证明边界尚未对齐 | P2 |
+| Aeneas async / trait 支持 | [10_aeneas_integration_plan.md](10_aeneas_integration_plan.md) | async、泛型（Generics） trait 证明边界尚未对齐 | P2 |
 | coq-of-rust 证明脚本 | [10_coq_of_rust_integration_plan.md](10_coq_of_rust_integration_plan.md) | 缺少具体 Coq 证明脚本与项目定理映射 | P2 |
 | Oxide 独立章节 | 引用多处 | 无独立文档，需创建 `type_theory/10_oxide_formalization.md` | P1 |
 

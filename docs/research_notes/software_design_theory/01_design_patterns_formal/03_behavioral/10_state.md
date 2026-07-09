@@ -85,7 +85,7 @@
 | Rust Reference | [Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) | 动态分发与生命周期 |
 | Rustonomicon | [Safe Abstractions](https://doc.rust-lang.org/nomicon/) | `unsafe` 边界与 Safe 封装 |
 
-> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权、借用检查与 trait 系统对实现方式的约束。
+> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权（Ownership）、借用检查与 trait 系统对实现方式的约束。
 
 ---
 
@@ -131,7 +131,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-枚举 + match 或类型状态（零开销）实现；由 [type_system_foundations](../../../type_theory/10_type_system_foundations.md) 穷尽匹配保证完备性。
+枚举（Enum） + match 或类型状态（零开销）实现；由 [type_system_foundations](../../../type_theory/10_type_system_foundations.md) 穷尽匹配保证完备性。
 
 **证明**：
 
@@ -192,7 +192,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
    - `Config<Locked>::get()` 不存在 → 编译错误
    - 非法状态不可构造
 
-由 Rust 类型系统，得证。$\square$
+由 Rust 类型系统（Type System），得证。$\square$
 
 ---
 
@@ -775,7 +775,7 @@ graph LR
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

@@ -64,7 +64,7 @@ mindmap
 | **所有权模型** | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) | 所有权系统的形式化定义 |
 | **借用检查器证明** | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用规则的形式化证明 |
 | **生命周期形式化** | ../../../research_notes/formal_methods/10_lifetime_formalization.md | 生命周期与区域理论 |
-| **证明索引** | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) | 所有权/借用相关证明 |
+| **证明索引** | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) | 所有权（Ownership）/借用相关证明 |
 | **工具指南** | [../../../research_notes/10_tools_guide.md](../../../../archive/research_notes_2026_06_25/10_tools_guide.md) | 借用检查验证工具 |
 
 ---

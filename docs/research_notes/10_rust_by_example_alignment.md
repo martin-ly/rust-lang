@@ -95,8 +95,8 @@
 
 | Rust By Example 章节 | 项目文档/示例 | 状态 | 备注 |
 |----------------------|---------------|------|------|
-| [Macros](https://doc.rust-lang.org/rust-by-example/macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | ✅ | 声明宏 |
-| [Procedural Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | ✅ | 过程宏 |
+| [Macros](https://doc.rust-lang.org/rust-by-example/macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | ✅ | 声明宏（Declarative Macro） |
+| [Procedural Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | ✅ | 过程宏（Procedural Macro） |
 
 ---
 

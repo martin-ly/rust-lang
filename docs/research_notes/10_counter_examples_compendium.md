@@ -807,7 +807,7 @@ fn get_instance() -> &'static Singleton {
 | CE-2.1 | 借用冲突 | ⭐⭐ | 高 |
 | CE-2.2 | 多重可变借用 | ⭐⭐ | 高 |
 | CE-2.3 | 悬垂引用 | ⭐⭐⭐ | 中 |
-| CE-3.1 | 生命周期省略 | ⭐⭐⭐ | 中 |
+| CE-3.1 | 生命周期省略（Lifetime Elision） | ⭐⭐⭐ | 中 |
 | CE-4.1 | Rc跨线程 | ⭐⭐⭐ | 中 |
 | CE-4.2 | RefCell跨线程 | ⭐⭐⭐ | 中 |
 | CE-5.1 | 跨await持锁 | ⭐⭐⭐⭐ | 低 |
@@ -866,7 +866,7 @@ fn get_instance() -> &'static Singleton {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

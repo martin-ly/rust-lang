@@ -69,7 +69,7 @@
 
 > **关键洞察**: `rustc_driver` 提供“开箱即用”的高级 API；`rustc_interface` 提供可精细控制的低级 API；Stable MIR 则试图提供**不依赖内部 API** 的长期稳定接口。
 >
-> [Rustc Dev Guide — rustc_driver and rustc_interface](https://rustc-dev-guide.rust-lang.org/rustc-driver.html)(<https://rustc-dev-guide.rust-lang.org/rustc-driver/intro.html>)
+> [Rustc Dev Guide — rustc_driver and rustc_interface](https://web.archive.org/web/*/https://rustc-dev-guide.rust-lang.org/rustc-driver.html)(<https://rustc-dev-guide.rust-lang.org/rustc-driver/intro.html>)
 
 ---
 
@@ -140,7 +140,7 @@ interface::run_compiler(config, |compiler| {
 
 > **警告**: 这些内部 API 永远不稳定，升级 Rust 版本时可能需要同步修改。
 >
-> [Rustc Dev Guide — rustc_interface](https://rustc-dev-guide.rust-lang.org/rustc-driver.html)(<https://rustc-dev-guide.rust-lang.org/rustc-driver/intro.html#rustc_interface>)
+> [Rustc Dev Guide — rustc_interface](https://web.archive.org/web/*/https://rustc-dev-guide.rust-lang.org/rustc-driver.html)(<https://rustc-dev-guide.rust-lang.org/rustc-driver/intro.html#rustc_interface>)
 
 ---
 
@@ -159,7 +159,7 @@ rustup component add rustc-dev llvm-tools
 
 > **常见错误**: 缺少 `llvm-tools` 时链接会报 `-lLLVM-{version}` 找不到。
 >
-> [Rustc Dev Guide — External rustc_drivers](https://rustc-dev-guide.rust-lang.org/rustc-driver.html)(<https://rustc-dev-guide.rust-lang.org/rustc-driver/external-rustc-drivers.html>)
+> [Rustc Dev Guide — External rustc_drivers](https://web.archive.org/web/*/https://rustc-dev-guide.rust-lang.org/rustc-driver.html)(<https://rustc-dev-guide.rust-lang.org/rustc-driver/external-rustc-drivers.html>)
 
 ---
 

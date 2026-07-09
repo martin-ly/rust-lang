@@ -145,6 +145,14 @@
       - [11.7.9 认知路径：何时名义、何时结构](#1179-认知路径何时名义何时结构)
     - [11.7.10 与多级引用语义的交叉：引用的名义与结构行为](#11710-与多级引用语义的交叉引用的名义与结构行为)
   - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
+    - [12.1 `impl Trait` 与 `dyn Trait` 的类型论差异](#121-impl-trait-与-dyn-trait-的类型论差异)
+    - [12.2 `!` (Never type) 的形式化分析与控制流图](#122--never-type-的形式化分析与控制流图)
+    - [12.3 Const Generics：常量泛型的类型系统扩展](#123-const-generics常量泛型的类型系统扩展)
+    - [12.4 Type Inference：HM 算法与 Rust 扩展](#124-type-inferencehm-算法与-rust-扩展)
+    - [12.5 ZST 与 `PhantomData` 的类型论意义](#125-zst-与-phantomdata-的类型论意义)
+    - [12.6 Discriminant 与内存布局](#126-discriminant-与内存布局)
+    - [12.7 `union` 的类型安全边界](#127-union-的类型安全边界)
+    - [12.8 Nominal vs Structural Typing](#128-nominal-vs-structural-typing)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：类型系统的编译错误](#十二边界测试类型系统的编译错误)
@@ -2165,7 +2173,7 @@ Rust 名义类型的刚性:
 
 > **[TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)** TypeScript 的接口是纯粹结构的——只要对象满足接口的 shape，就自动兼容，无需显式声明 `implements`。✅ 三级来源
 > **[Go Language Specification](https://go.dev/ref/spec)** Go 的 interface 是结构类型的典型代表：类型自动满足 interface，只要它实现了所有方法。✅ 三级来源
-> **[Haskell 2010 Report](https://www.haskell.org/definition/haskell2010/)** Haskell 的 Type Class 需要显式 `instance` 声明，与 Rust trait 同为名义系统。✅ 一级来源
+> **[Haskell 2010 Report](https://web.archive.org/web/*/https://www.haskell.org/definition/haskell2010/)** Haskell 的 Type Class 需要显式 `instance` 声明，与 Rust trait 同为名义系统。✅ 一级来源
 > **[C++20 Concepts](https://en.cppreference.com/w/cpp/concepts)** C++20 Concepts 是结构类型的回归：模板约束由「类型是否满足 expression 要求」自动判定，无需显式「实现」某个 concept。✅ 一级来源
 
 **关键观察**：
@@ -2364,14 +2372,147 @@ let p: &Point = &Point(1, 2);
 
 ## 十二、待补充与演进方向（TODOs）
 
-- [x] **TODO**: 补充 `impl Trait` 与 `dyn Trait` 的类型论差异 —— 优先级: 高 —— 已完成 v1.2
-- [x] **TODO**: 补充 `!` (Never type) 的完整形式化分析与控制流图交互 —— 优先级: 中 —— 已完成 §11.1
-- [x] **TODO**: 补充 Const Generics（常量泛型）的类型系统扩展 —— 优先级: 中 —— 已完成 §11.3
-- [x] **TODO**: 补充 Type Inference 的 HM 算法完整规则与 Rust 扩展 —— 优先级: 低 —— 已完成 §11.4 —— 2026-05-14
-- [x] **TODO**: 补充 Zero-sized types (ZST) 和 PhantomData 的类型论意义 —— 优先级: 中 —— 已完成 §11.2
-- [x] **TODO**: 补充 Discriminant 和内存布局的底层分析 —— 优先级: 低 —— 已完成 §11.5 —— 2026-05-14
-- [x] **TODO**: 补充 `union` 的类型安全边界与使用模式 —— 优先级: 低 —— 已完成 §11.6
-- [x] **TODO**: 补充名义类型与结构类型（Nominal vs Structural Typing）的完整分析 —— 优先级: 高 —— 已完成 §11.7 —— 2026-05-22
+### 12.1 `impl Trait` 与 `dyn Trait` 的类型论差异
+
+> **定义**：`impl Trait` 是**存在量化类型**的语法糖，表示“某个实现了该 trait 的具体类型”，编译器在单态化时知道具体类型；`dyn Trait` 是**trait 对象**，通过 vtable 实现动态分发，运行时只知道 trait 接口而不知道具体类型。
+
+> **原理与合理性**：`impl Trait` 在返回位置隐藏实现细节同时保留零成本抽象；在参数位置等价于匿名泛型，要求调用方提供具体类型。`dyn Trait` 通过 fat pointer（数据指针 + vtable 指针）抹除具体类型，允许异构集合和运行时多态，但引入间接调用开销。两者关键差异：是否发生**类型擦除**与**动态分发**。
+
+```rust,ignore
+// impl Trait：编译期单态化，零运行时开销
+fn f() -> impl Iterator<Item = i32> { vec![1, 2, 3].into_iter() }
+
+// dyn Trait：运行时动态分发，允许异构集合
+fn g(items: &mut [Box<dyn Iterator<Item = i32>>]) {
+    for it in items { let _ = it.next(); }
+}
+```
+
+> **相关链接**：完整分析见 §11.1；生命周期与 `impl Trait` 的交互见 [30_lifetimes_advanced.md](../../01_ownership_borrow_lifetime/30_lifetimes_advanced.md) §14。
+
+### 12.2 `!` (Never type) 的形式化分析与控制流图
+
+> **定义**：`!` 是**底类型（bottom type）**，表示永远不会返回的表达式。它是所有类型的子类型，因此可以出现在任何期望具体类型的位置。
+
+> **原理与合理性**：`!` 与空类型不同——空类型没有值，`!` 表示“无返回”。在控制流图中，`panic!()`、`loop {}`、`return` 等发散表达式产生 `!`，并可通过子类型关系自然融入后续类型检查（如 `let x: i32 = return;`）。它与 `Result<T, !>`、`Option<!>` 等组合，精确刻画“不可能失败/不可能有值”的语义。
+
+```rust
+fn diverge() -> ! { panic!("never returns") }
+
+fn maybe_ok() -> Result<i32, !> {
+    Ok(42) // Err 分支不可能出现
+}
+```
+
+> **相关链接**：Never type 权威页见 [31_never_type.md](31_never_type.md)；与 coercion 的交互见 [14_coercion_and_casting.md](14_coercion_and_casting.md)。
+
+### 12.3 Const Generics：常量泛型的类型系统扩展
+
+> **定义**：Const Generics 允许泛型参数不仅是类型或生命周期，还可以是编译期已知的常量值（目前支持整数、`char`、`bool`、`usize` 等），从而把数值参数化引入类型系统。
+
+> **原理与合理性**：它让类型可以编码大小、维度、长度等编译期常量，例如 `[T; N]` 中的 `N` 现在可以参与泛型约束。类型系统必须保证 const 参数在实例化时可求值、无副作用，并且不参与运行时状态。`where` 子句中的 const 约束进一步支持依赖类型的轻量形式。
+
+```rust,ignore
+struct Matrix<T, const N: usize> {
+    data: [[T; N]; N],
+}
+
+impl<T: Copy + Default, const N: usize> Matrix<T, N> {
+    fn identity() -> Self { /* ... */ }
+}
+```
+
+> **相关链接**：Const Generics 的完整规则见 §11.3；泛型基础见 [02_generics.md](../../02_intermediate/01_generics/02_generics.md)。
+
+### 12.4 Type Inference：HM 算法与 Rust 扩展
+
+> **定义**：类型推断是编译器根据表达式上下文自动推导出类型的过程。Rust 基于 Hindley–Milner（HM）算法的核心思想，并扩展以支持重载、trait bound、方法调用和生命周期。
+
+> **原理与合理性**：HM 通过统一（unification）算法求解类型变量；Rust 在此基础上引入**约束生成 + 约束求解**两阶段模型，处理 `+` 等重载运算符、`.method()` 方法解析以及 `impl Trait` 的匿名泛型。如果约束无解，则产生 E0282/E0283 等错误。
+
+```rust
+fn identity(x: T) -> T { x } // 需要显式泛型参数；Rust 不支持完全 HM 多态
+
+let v = Vec::new();
+v.push(42i32); // 推断 v: Vec<i32>
+```
+
+> **相关链接**：完整 HM 规则与 Rust 扩展见 §11.4；类型一致性错误见 §12 边界测试。
+
+### 12.5 ZST 与 `PhantomData` 的类型论意义
+
+> **定义**：Zero-sized type（ZST）是不占用运行内存的类型（如 `()`、`PhantomData<T>`、空 enum）。`PhantomData<T>` 是零大小标记类型，用于向类型系统声明“本类型逻辑上拥有/依赖 `T`”，但不存储 `T` 的值。
+
+> **原理与合理性**：ZST 在类型论中对应单元类型/空积；它们不影响运行时布局，但能参与类型检查。`PhantomData<T>` 对 unsafe 代码至关重要：它让编译器正确推导 variance、Drop check 和 auto-trait（`Send`/`Sync`）推导，而不引入实际存储。
+
+```rust,ignore
+use std::marker::PhantomData;
+
+struct Handle<T> {
+    ptr: *mut (),
+    _marker: PhantomData<T>, // 声明逻辑所有权，影响 variance 与 Drop check
+}
+```
+
+> **相关链接**：完整分析见 §11.2；与所有权和 FFI 的交互见 [01_ownership.md](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) §8.3。
+
+### 12.6 Discriminant 与内存布局
+
+> **定义**：Discriminant 是 Rust 用于区分 enum 不同变体的**标签（tag）**。编译器可能进行 niche optimization（如 `Option<&T>` 用空指针作为 discriminant）以消除显式标签的内存开销。
+
+> **原理与合理性**：`enum` 的内存布局 = discriminant + 最大变体 payload 的对齐填充。理解 discriminant 对 FFI、`unsafe` 读取、`#[repr(C)]` 布局以及性能优化都至关重要。`std::mem::discriminant` 提供安全的变体身份比较，而 `std::mem::variant_count` 给出变体数量。
+
+```rust
+use std::mem;
+
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+}
+
+let m = Message::Quit;
+assert_eq!(mem::discriminant(&m), mem::discriminant(&Message::Quit));
+```
+
+> **相关链接**：完整分析见 §11.5；coercion 与类型转换见 [14_coercion_and_casting.md](14_coercion_and_casting.md)。
+
+### 12.7 `union` 的类型安全边界
+
+> **定义**：`union` 是一种与 C 兼容的内存共享类型，所有变体共享同一块内存，编译器不维护当前活跃变体。读取 `union` 字段必须放在 `unsafe` 块中。
+
+> **原理与合理性**：`union` 在 FFI 和低层布局控制中提供零成本抽象，但将“当前哪个字段有效”的举证责任交给程序员。为了安全，包含非 `Copy`/需要 `Drop` 的字段时必须使用 `ManuallyDrop<T>`，且 `union` 不能自动实现 `Drop`。
+
+```rust,ignore
+use std::mem::ManuallyDrop;
+
+#[repr(C)]
+union U {
+    n: u32,
+    s: ManuallyDrop<String>,
+}
+
+let u = U { n: 42 };
+assert_eq!(unsafe { u.n }, 42);
+```
+
+> **相关链接**：完整分析见 §11.6；高级 `union` 安全边界见 [30_lifetimes_advanced.md](../../01_ownership_borrow_lifetime/30_lifetimes_advanced.md) §16。
+
+### 12.8 Nominal vs Structural Typing
+
+> **定义**：**名义类型（Nominal Typing）** 按类型名称判断等价；**结构类型（Structural Typing）** 按类型结构（字段/方法签名）判断等价。Rust 的类型系统以名义类型为主，结构行为仅出现在引用构造、生命周期子类型等有限场景。
+
+> **原理与合理性**：名义类型增强了类型安全与可读性：即使两个 struct 字段完全相同，只要名称不同就不兼容，避免意外替换。结构类型则提供了灵活性（如 `&T` 的构造、tuple 等价）。Rust 的 trait 系统也接近名义类型——实现必须显式声明。
+
+```rust,ignore
+struct Meters(f64);
+struct Feet(f64);
+
+let m = Meters(3.0);
+// let f: Feet = m; // ❌ 名义不等价，编译错误
+```
+
+> **相关链接**：完整分析见 §11.7；数据抽象谱系见 [22_data_abstraction_spectrum.md](22_data_abstraction_spectrum.md)。
 
 ---
 

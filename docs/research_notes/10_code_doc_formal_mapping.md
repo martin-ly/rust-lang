@@ -102,8 +102,8 @@
 
 | 代码模式 | 对应概念 | 概念解释 |
 | :--- | :--- | :--- |
-| `let r = &s;` | 不可变借用 | 只读引用，可同时存在多个 |
-| `let r = &mut s;` | 可变借用 | 独占写引用，同一时刻只能有一个 |
+| `let r = &s;` | 不可变借用（Immutable Borrow） | 只读引用，可同时存在多个 |
+| `let r = &mut s;` | 可变借用（Mutable Borrow） | 独占写引用，同一时刻只能有一个 |
 | `let r: &str = &s[0..5];` | 切片借用 | 借用集合的一部分 |
 | `fn foo(s: &str)` | 借用参数 | 函数接受引用而非所有权 |
 | `fn foo(s: &mut String)` | 可变借用参数 | 函数可以修改传入的值 |
@@ -183,10 +183,10 @@
 
 | 代码示例 | 相关文档位置 | 快速查找关键词 |
 | :--- | :--- | :--- |
-| `let s = String::from("hello");` | [C01 所有权](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 所有权获取 |
+| `let s = String::from("hello");` | [C01 所有权（Ownership）](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 所有权获取 |
 | `let s2 = s1;` | [C01 所有权](../02_reference/quick_reference/02_ownership_cheatsheet.md) | move, 转移 |
 | `fn take_ownership(s: String)` | [C01 函数参数](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 参数所有权 |
-| `fn borrow(s: &String)` | [C01 借用](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 引用, 借用 |
+| `fn borrow(s: &String)` | [C01 借用（Borrowing）](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 引用, 借用 |
 
 ### 2.2 生命周期文档映射 {#22-生命周期文档映射}
 
@@ -198,7 +198,7 @@
 | :--- | :--- | :--- |
 | `fn longest<'a>(x: &'a str, y: &'a str)` | [C01 生命周期](../02_reference/quick_reference/02_ownership_cheatsheet.md) | lifetime, 生命周期 |
 | `struct Excerpt<'a> { part: &'a str }` | [C01 结构体生命周期](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 结构体生命周期 |
-| `impl<'a> Excerpt<'a> { ... }` | [C01 生命周期省略](../02_reference/quick_reference/02_ownership_cheatsheet.md#生命周期省略规则) | impl 生命周期 |
+| `impl<'a> Excerpt<'a> { ... }` | [C01 生命周期省略（Lifetime Elision）](../02_reference/quick_reference/02_ownership_cheatsheet.md#生命周期省略规则) | impl 生命周期 |
 
 ### 2.3 泛型与 Trait 文档映射 {#23-泛型与-trait-文档映射}
 
@@ -206,7 +206,7 @@
 
 | 代码示例 | 相关文档位置 | 快速查找关键词 |
 | :--- | :--- | :--- |
-| `fn foo<T>(x: T)` | [C04 泛型](../02_reference/quick_reference/02_generics_cheatsheet.md) | 泛型函数 |
+| `fn foo<T>(x: T)` | [C04 泛型（Generics）](../02_reference/quick_reference/02_generics_cheatsheet.md) | 泛型函数 |
 | `struct Point<T> { x: T, y: T }` | [C04 泛型结构体](../02_reference/quick_reference/02_generics_cheatsheet.md#泛型结构体) | 泛型结构体 |
 | `fn foo<T: Display + Clone>(x: T)` | [C04 Trait Bound](../02_reference/quick_reference/02_generics_cheatsheet.md) | trait bound, 约束 |
 | `trait Drawable { fn draw(&self); }` | [C04 Trait 定义](../02_reference/quick_reference/02_generics_cheatsheet.md) | trait 定义 |
@@ -348,7 +348,7 @@
 | :--- | :--- | :--- | :--- | :--- |
 | **E0597** | `{ let s = "x"; r = &s; } use(r);` | 生命周期不足 | [TROUBLESHOOTING](../05_guides/05_troubleshooting_guide.md#2-生命周期错误) | 规则 3 - 借用有效性: Valid(b) <=> Lifetime(b) subset Scope(b) |
 | **E0310** | `fn foo<T>(x: &T)` | 参数生命周期不足 | [C01 生命周期](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 定理 LF-T2 - 引用有效性 |
-| **E0373** | `move \|_\| x` in closure | 闭包生命周期 | [C06 异步](../02_reference/quick_reference/02_async_patterns.md) | 捕获变量生命周期约束 |
+| **E0373** | `move \|_\| x` in closure | 闭包生命周期 | [C06 异步（Async）](../02_reference/quick_reference/02_async_patterns.md) | 捕获变量生命周期约束 |
 
 ### 4.4 类型系统错误 (E02xx, E03xx) {#44-类型系统错误-e02xx-e03xx}
 
@@ -359,7 +359,7 @@
 | :--- | :--- | :--- | :--- | :--- |
 | **E0308** | `let x: i32 = "hello";` | 类型不匹配 | [TROUBLESHOOTING](../05_guides/05_troubleshooting_guide.md#3-类型不匹配) | 类型系统一致性: Gamma |- e : tau |
 | **E0277** | `fn foo<T>(x: T) { println!("{}", x); }` | Trait Bound 不满足 | [C04 Trait](../02_reference/quick_reference/02_generics_cheatsheet.md) | Trait 约束: Gamma |- T: Trait |
-| **E0282** | `let x = Vec::new();` | 需要类型标注 | [C02 类型推断](../02_reference/quick_reference/02_type_system.md) | 类型推断规则 |
+| **E0282** | `let x = Vec::new();` | 需要类型标注 | [C02 类型推断（Type Inference）](../02_reference/quick_reference/02_type_system.md) | 类型推断规则 |
 | **E0283** | `x.into()` (ambiguous) | 需要更多类型信息 | [C04 泛型](../02_reference/quick_reference/02_generics_cheatsheet.md) | 类型推断冲突 |
 | **E0325** | 递归 trait bound | 溢出求值要求 | [C04 泛型](../02_reference/quick_reference/02_generics_cheatsheet.md) | 类型系统一致性 |
 
@@ -588,7 +588,7 @@ Trait Bound      -> 1.4, E0277
 - [02_standard_library_comprehensive_analysis_2025_12_25.md](../02_reference/02_standard_library_comprehensive_analysis_2025_12_25.md) - 标准库全面分析
 - [05_troubleshooting_guide.md](../05_guides/05_troubleshooting_guide.md) - 故障排查指南
 - [C01 所有权与借用](../02_reference/quick_reference/02_ownership_cheatsheet.md) - 所有权核心概念
-- [C02 类型系统](../02_reference/quick_reference/02_type_system.md) - 类型系统详解
+- [C02 类型系统（Type System）](../02_reference/quick_reference/02_type_system.md) - 类型系统详解
 - [C04 泛型与 Trait](../02_reference/quick_reference/02_generics_cheatsheet.md) - 泛型编程
 
 ### 形式化文档 {#形式化文档}
@@ -631,7 +631,7 @@ Trait Bound      -> 1.4, E0277
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

@@ -11,7 +11,7 @@
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ **已完成**
 > **层级**: L4-L6
-> **概念族**: 并发安全 / 无锁数据结构
+> **概念族**: 并发安全（Concurrency Safety） / 无锁数据结构
 > **权威来源**: [Rust Atomics and Locks](https://marabos.nl/atomics/) (P0) | [The Rust Programming Language - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) (P1) | [crossbeam-epoch documentation](https://docs.rs/crossbeam-epoch) (P2)
 
 ---

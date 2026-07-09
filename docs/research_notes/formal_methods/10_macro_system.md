@@ -122,7 +122,7 @@ pub fn cfg_select(input: TokenStream) -> TokenStream {
 
 ## 五、与其他概念的关系 {#五与其他概念的关系}
 
-- **类型系统**：过程宏生成的代码必须仍通过类型检查。
+- **类型系统（Type System）**：过程宏生成的代码必须仍通过类型检查。
 - **借用检查器**：宏展开后的代码受相同借用规则约束。
 - **宏速查卡**: [10_macros_cheatsheet.md](../10_macros_cheatsheet.md) 提供语法和模式速查。
 

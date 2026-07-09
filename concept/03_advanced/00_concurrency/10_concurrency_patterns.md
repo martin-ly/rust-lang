@@ -1666,8 +1666,22 @@ impl Supervisor {
     where
         A: Actor + Clone + 'static,
     {
-        // 实际的Actor启动逻辑
-        todo!()
+        // 为 Actor 创建无界通道，发送端交给调用方作为 ActorRef
+        let (sender, mut receiver) = mpsc::unbounded_channel();
+        let actor_ref = ActorRef::new(sender);
+
+        let mut actor = actor;
+        tokio::spawn(async move {
+            actor.on_start().await;
+
+            while let Some(message) = receiver.recv().await {
+                actor.handle_message(message).await;
+            }
+
+            actor.on_stop().await;
+        });
+
+        Ok(actor_ref)
     }
 }
 ```
@@ -1710,18 +1724,52 @@ impl<M: Send + Clone + 'static> RouterActor<M> {
     }
 
     async fn round_robin_route(&self, message: M) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-        // 实现轮询路由
-        todo!()
+        // 实现轮询路由：按顺序循环选择下一个目标 Actor
+        use std::sync::atomic::{AtomicUsize, Ordering};
+
+        static COUNTER: AtomicUsize = AtomicUsize::new(0);
+
+        let actors: Vec<_> = self.routes.values().collect();
+        if actors.is_empty() {
+            return Err("no routes available".into());
+        }
+
+        let idx = COUNTER.fetch_add(1, Ordering::Relaxed) % actors.len();
+        actors[idx].send(message).await
     }
 
     async fn random_route(&self, message: M) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-        // 实现随机路由
-        todo!()
+        // 实现随机路由：基于当前时间纳秒选择目标 Actor（教学用简单随机）
+        use std::time::{SystemTime, UNIX_EPOCH};
+
+        let actors: Vec<_> = self.routes.values().collect();
+        if actors.is_empty() {
+            return Err("no routes available".into());
+        }
+
+        let now = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap_or_default()
+            .subsec_nanos() as usize;
+        let idx = now % actors.len();
+        actors[idx].send(message).await
     }
 
     async fn hash_route(&self, message: M, routing_key: Option<String>) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-        // 实现哈希路由
-        todo!()
+        // 实现哈希路由：对 routing_key 做确定性哈希，保证同一 key 路由到同一 Actor
+        use std::collections::hash_map::DefaultHasher;
+        use std::hash::{Hash, Hasher};
+
+        let actors: Vec<_> = self.routes.values().collect();
+        if actors.is_empty() {
+            return Err("no routes available".into());
+        }
+
+        let key = routing_key.unwrap_or_default();
+        let mut hasher = DefaultHasher::new();
+        key.hash(&mut hasher);
+        let idx = (hasher.finish() as usize) % actors.len();
+        actors[idx].send(message).await
     }
 
     async fn broadcast_route(&self, message: M) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {

@@ -83,7 +83,7 @@
 |----------|------|----------|----------|------|
 | [embedded-hal](https://docs.rs/embedded-hal/) | 硬件抽象 trait | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | 外设抽象、传感器/驱动接口 | ✅ 已完成 |
 | [Embassy](https://embassy.dev/) | 异步运行时框架 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | `no_std` async、executor、中断驱动 | ✅ 已完成 |
-| [RTIC](https://rtic.rs/) | 实时中断驱动并发框架 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | 任务调度、资源锁、单态化 | ✅ 已完成 |
+| [RTIC](https://rtic.rs/) | 实时中断驱动并发框架 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | 任务调度、资源锁、单态化（Monomorphization） | ✅ 已完成 |
 | [The Embedded Rust Book](https://docs.rust-embedded.org/book/) | 官方教材 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | `no_std`、HAL、启动流程、panic 处理 | ✅ 已完成 |
 | [Ferrous Systems Training](https://embedded-trainings.ferrous-systems.com/) | 社区培训教材 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | 裸机调试、硬件实操、defmt | ✅ 已完成 |
 | [probe-rs](https://probe.rs/) | 调试/烧录工具 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | 片上调试、RTT、Flash 下载 | ✅ 已完成 |
@@ -95,7 +95,7 @@
 
 | 项目文档 | 生态覆盖 | 权威来源 |
 |----------|----------|----------|
-| [crates/c11_macro_system_proc/README.md](../../crates/c11_macro_system_proc/README.md) | 声明宏、过程宏、DSL、调试与性能 | Rust Reference、The Little Book of Rust Macros、proc-macro-workshop |
+| [crates/c11_macro_system_proc/README.md](../../crates/c11_macro_system_proc/README.md) | 声明宏（Declarative Macro）、过程宏（Procedural Macro）、DSL、调试与性能 | Rust Reference、The Little Book of Rust Macros、proc-macro-workshop |
 | [crates/c12_wasm/README.md](../../crates/c12_wasm/README.md) | wasm-bindgen、wasm-pack、WASI、浏览器/Node 集成 | wasm-bindgen、wasm-pack、The Rust and WebAssembly Book |
 | [crates/c13_embedded/README.md](../../crates/c13_embedded/README.md) | `no_std`、HAL、RTIC、Embassy、FFI、probe-rs、defmt | Embedded Rust Book、embedded-hal、RTIC、Embassy、Ferrous Systems Training |
 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §6 | FFI 内存协议、裸指针、跨语言所有权 | Rustonomicon FFI、Unsafe Code Guidelines FFI |

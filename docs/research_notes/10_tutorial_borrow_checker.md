@@ -661,7 +661,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 | 概念 | 形式化定义 | 文档 |
 | :--- | :--- | :--- |
-| 借用 | `&'a T`, `&'a mut T` | 10_borrow_checker_proof.md |
+| 借用（Borrowing） | `&'a T`, `&'a mut T` | 10_borrow_checker_proof.md |
 | 生命周期 | `'a: 'b` | 10_lifetime_formalization.md |
 | 数据竞争自由 | `Send` + `Sync` | 10_send_sync_formalization.md |
 
@@ -740,7 +740,7 @@ free(ptr);
 
 - **GC**: 运行时开销
 - **手动管理**: 容易出错
-- **智能指针**: 仍可能出错
+- **智能指针（Smart Pointer）**: 仍可能出错
 
 **Rust的解决方案**: 编译时检查，零运行时开销。
 
@@ -1020,7 +1020,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

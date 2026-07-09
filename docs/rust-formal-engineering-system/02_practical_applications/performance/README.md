@@ -299,7 +299,7 @@ criterion_main!(benches);
 | 数值计算 | SIMD 向量化 | `std::simd`, `packed_simd` |
 | 大规模数据处理 | 缓存优化、并行化 | 分块访问、`rayon` |
 | 实时系统 | 无锁数据结构、内存预分配 | `crossbeam`, 对象池 |
-| 网络服务 | 异步 I/O、零拷贝 | `tokio`, `io_uring` |
+| 网络服务 | 异步（Async） I/O、零拷贝 | `tokio`, `io_uring` |
 | 游戏渲染 | 缓存友好布局、SIMD | `glam`, `ultraviolet` |
 | 高频交易 | 分支预测、缓存行对齐 | `#[repr(align)]`, `likely/unlikely` |
 

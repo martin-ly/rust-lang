@@ -267,7 +267,7 @@ let parsed: Request = serde_json::from_slice(&bytes)?;
 | 模型 | 通信 | 语义 | 典型库 |
 | :--- | :--- | :--- | :--- |
 | RPC | 请求-响应 | 同步风格 | tonic、tarpc |
-| Actor | 消息传递 | 异步、无共享 | actix |
+| Actor | 消息传递 | 异步（Async）、无共享 | actix |
 | 消息队列 | 发布-订阅 | 解耦 | rdkafka、lapin |
 
 ---
@@ -504,7 +504,7 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

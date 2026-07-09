@@ -43,7 +43,7 @@
 | Cargo Book | package、依赖、workspace、features | vendor、metadata、timings、registry 协议 | P2 |
 | rustc-dev-guide | HIR/MIR、借用检查、名称解析 | 查询系统、增量编译、诊断生成 | P2 |
 | Standard Library | 核心类型、并发、FFI | `std::fmt`、`std::error`、`std::process` | P2 |
-| Rust By Example | 基础、所有权、类型、并发 | Testing、Std Library Types、Crates | P2 |
+| Rust By Example | 基础、所有权（Ownership）、类型、并发 | Testing、Std Library Types、Crates | P2 |
 | Edition Guide | 2018/2021/2024 | 2024 `if let` / `while let` 临时作用域 | P1 |
 
 ---
@@ -52,7 +52,7 @@
 
 | 来源 | 已覆盖 | 缺口 | 优先级 |
 |------|--------|------|--------|
-| RustBelt | 所有权、借用、unsafe | 具体定理与项目证明树的逐项映射 | P1 |
+| RustBelt | 所有权、借用（Borrowing）、unsafe | 具体定理与项目证明树的逐项映射 | P1 |
 | Tree Borrows | 别名模型 | 与项目反例的精确对应（如 `MaybeUninit`） | P1 |
 | Aeneas | 借用、纯函数 | async、trait 支持边界 | P2 |
 | coq-of-rust | Rust→Coq 翻译 | 具体 Coq 证明脚本与项目定理映射 | P3 |
@@ -75,10 +75,10 @@
 | 主题域 | 已有对齐 | 缺口 | 优先级 |
 |--------|----------|------|--------|
 | 所有权/借用 | TRPL、Reference、RustBelt、Tree Borrows | 学术论文到反例的精确行号映射 | P1 |
-| 类型系统/生命周期 | Reference、RFC、FLS | const 泛型、GAT、RPITIT 的 RFC 论证链 | P1 |
+| 类型系统（Type System）/生命周期 | Reference、RFC、FLS | const 泛型（Generics）、GAT、RPITIT 的 RFC 论证链 | P1 |
 | 并发/异步 | Async Book、Send/Sync | tokio/async-std/smol 生态对齐 | P2 |
 | 安全/unsafe | Rustonomicon、UCG | Unsafe Code Guidelines 每个结论到反例 | P1 |
-| 模块/Crate | Reference、Cargo Book | crate.io / registry 协议、semver 自动化检查 | P2 |
+| 模块（Module）/Crate | Reference、Cargo Book | crate.io / registry 协议、semver 自动化检查 | P2 |
 | 设计模式 | API Guidelines、Design Patterns | GoF、Refactoring Guru、Enterprise Patterns | P3 |
 | 实验/性能 | Performance Book | Criterion.rs Book 深度对齐 | P2 |
 | 版本演进 | Edition Guide、RFC | Rust 1.97+ 预览特性持续跟踪 | P1 |

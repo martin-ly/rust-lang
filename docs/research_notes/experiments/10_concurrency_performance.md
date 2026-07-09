@@ -159,7 +159,7 @@
 | 实验类型 | 形式化定理 | 验证目标 |
 | :--- | :--- | :--- |
 | 多线程性能 | borrow T1 | 无数据竞争；Send/Sync 约束 |
-| 异步性能 | async T6.2 | 并发安全；Future 状态一致 |
+| 异步性能 | async T6.2 | 并发安全（Concurrency Safety）；Future 状态一致 |
 
 **引用**：[experiments/README](README.md) 定理 EX-T1、EX-T2；[FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)。
 
@@ -200,7 +200,7 @@ Rust 并发性能优化应关注：
 - **减少锁竞争**：缩小临界区、使用读写锁（`RwLock`）或原子操作（`Atomic*`）。
 - **消息传递 vs 共享状态**：通道（channel）可解耦生产者与消费者，降低显式锁需求；`crossbeam::channel` 在高吞吐场景下通常优于 std mpsc。
 - **数据并行**：对 CPU 密集型任务，使用 `rayon` 的 `par_iter` 自动实现工作窃取（work-stealing）。
-- **异步 I/O**：对高并发 I/O，使用 Tokio 的协作式调度，避免每个连接一个 OS 线程。
+- **异步（Async） I/O**：对高并发 I/O，使用 Tokio 的协作式调度，避免每个连接一个 OS 线程。
 - **内存顺序（Ordering）**：`Relaxed` 最快但最弱；`Acquire`/`Release`/`AcqRel` 用于同步点；`SeqCst` 最强但开销最大。
 
 ---
@@ -826,7 +826,7 @@ async fn async_task_benchmark() {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
@@ -875,7 +875,7 @@ async fn async_task_benchmark() {
 | Tokio 异步运行时 | [Tokio Docs](https://docs.rs/tokio/latest/tokio/) | `tokio::spawn`、`#[tokio::main]`、通道 |
 | Rayon 数据并行 | [Rayon Docs](https://docs.rs/rayon/latest/rayon/) | `par_iter`、工作窃取 |
 | Crossbeam 通道 | [Crossbeam Docs](https://docs.rs/crossbeam/latest/crossbeam/) | `crossbeam::channel`、无锁数据结构 |
-| 原子操作 Ordering | [Rust Standard Library – std::sync::atomic](https://doc.rust-lang.org/std/) | `Ordering::Relaxed` / `Acquire` / `Release` / `SeqCst` |
+| 原子操作（Atomic Operations） Ordering | [Rust Standard Library – std::sync::atomic](https://doc.rust-lang.org/std/) | `Ordering::Relaxed` / `Acquire` / `Release` / `SeqCst` |
 
 ## 权威来源索引 {#权威来源索引}
 

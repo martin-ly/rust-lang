@@ -86,7 +86,7 @@
 | Rust Reference | [Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) | 动态分发与生命周期 |
 | Rustonomicon | [Safe Abstractions](https://doc.rust-lang.org/nomicon/) | `unsafe` 边界与 Safe 封装 |
 
-> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权、借用检查与 trait 系统对实现方式的约束。
+> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权（Ownership）、借用检查与 trait 系统对实现方式的约束。
 
 ---
 
@@ -528,7 +528,7 @@ fn run_room(rx: mpsc::Receiver<ChatMessage>) {
 | :--- | :--- | :--- |
 | `Vec<Box<dyn Fn>>` | 广播回调；无同事引用 | 简单事件总线 |
 | `Weak<Colleague>` | 同事注册；避免循环 | 需同事身份 |
-| channel | 消息传递；完全解耦 | 异步、跨线程 |
+| channel | 消息传递；完全解耦 | 异步（Async）、跨线程 |
 
 ---
 
@@ -599,7 +599,7 @@ mediator.notify("btn", Event::Clicked); // send 返回 Err
 
 | GoF | Rust 对应 | 差异 |
 | :--- | :--- | :--- |
-| 中介者接口 | trait 或 结构体 | 等价 |
+| 中介者接口 | trait 或 结构体（Struct） | 等价 |
 | 同事注册 | Vec、Weak | 等价 |
 | 无直接引用 | 仅持 Mediator | 等价 |
 
@@ -738,7 +738,7 @@ graph LR
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

@@ -32,7 +32,7 @@
 >
 > **Bloom 层级**: L3-L5 (应用/分析/评价)
 >
-> **知识领域**: 消息队列、流处理、分布式系统、异步 IO
+> **知识领域**: 消息队列、流处理、分布式系统、异步（Async） IO
 >
 > **对应 Rust 版本**: 1.96.1+ (rdkafka 0.37+)
 
@@ -53,7 +53,7 @@
 | **协议实现** | 复用 librdkafka（C） | 获得经过多年生产验证的协议兼容性与性能 |
 | **API 风格** | 同步与异步 Future 双轨 | 简单脚本可用同步，高并发服务可用 Tokio 异步 |
 | **运行时绑定** | `tokio-runtime` / `async-std-runtime` / `smol-runtime` feature 可选 | 不强制锁定运行时 |
-| **类型安全** | `ClientConfig` 键值对 + `FutureProducer` / `StreamConsumer` 泛型 | 在编译期区分生产者与消费者语义 |
+| **类型安全** | `ClientConfig` 键值对 + `FutureProducer` / `StreamConsumer` 泛型（Generics） | 在编译期区分生产者与消费者语义 |
 
 > [来源: [rdkafka GitHub Repository](https://github.com/fede10247/rust-rdkafka)]
 

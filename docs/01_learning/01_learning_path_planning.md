@@ -109,7 +109,7 @@
    - C01: 所有权与借用（重点）
    - C03: 控制流与函数
    - 实践: 编写简单的 CLI 工具
-2. **第 3-4 周: 类型系统**
+2. **第 3-4 周: 类型系统（Type System）**
    - C02: 类型系统
    - C04: 泛型编程（基础部分）
    - 实践: 实现简单的数据结构
@@ -244,7 +244,7 @@
    - 系统编程
 4. **前沿特性跟踪（本轮新增）**
    - content/emerging/: 前沿特性跟踪（Async Closures、Generic Const Expressions、TAIT 等）
-   - content/ecosystem/: 生态深度（Tokio 运行时、Axum 服务抽象、SQLx 编译时检查）
+   - content/ecosystem/: 生态深度（Tokio 运行时（Runtime）、Axum 服务抽象、SQLx 编译时检查）
    - 跟踪最新稳定版本特性，保持技术敏锐度
 5. **形式化与验证（研究者路径）**
    - [形式化证明系统指南](../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md)
@@ -498,7 +498,7 @@ fn main() {
   - 路径 2: 有编程经验（其他语言）
 - **与本文档对齐**:
 
-  | Coursera 模块 | 本文档对应章节 |
+  | Coursera 模块（Module） | 本文档对应章节 |
 | :--- | :--- |
   | Rust Basics | C01-C03 基础阶段 |
   | Data Structures | C04 集合与错误 |
@@ -715,10 +715,10 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 | 主题 | 文档 | 核心定理 |
 | :--- | :--- | :--- |
-| 所有权 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | T2 唯一性, T3 内存安全 |
-| 借用 | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) | T1 数据竞争自由 |
+| 所有权（Ownership） | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | T2 唯一性, T3 内存安全（Memory Safety） |
+| 借用（Borrowing） | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) | T1 数据竞争自由 |
 | 生命周期 | lifetime_formalization | LF-T2 引用有效性 |
-| 异步 | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | T6.1-T6.3 状态/安全/进度 |
+| 异步（Async） | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | T6.1-T6.3 状态/安全/进度 |
 | Pin | [pin_self_referential](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) | T1-T3 Pin 保证 |
 | Send/Sync | [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | SEND-T1, SYNC-T1 |
 
@@ -887,7 +887,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

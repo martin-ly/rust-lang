@@ -97,7 +97,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- **DOCS_STRUCTURE_OVERVIEW**：新建 docs/DOCS_STRUCTURE_OVERVIEW.md，按 00_COMPREHENSIVE_SUMMARY 格式（模块|核心问题|判定目标|核心文档）100% 覆盖 docs
+- **DOCS_STRUCTURE_OVERVIEW**：新建 docs/DOCS_STRUCTURE_OVERVIEW.md，按 00_COMPREHENSIVE_SUMMARY 格式（模块（Module）|核心问题|判定目标|核心文档）100% 覆盖 docs
 - **顶层 11 模块**：三大支柱、01_learning、02_reference、04_thinking、05_guides、06_toolchain、07_project、archive、rust-formal-engineering-system 全部纳入表格
 - **子目录 README 元信息**：01_learning、02_reference、04_thinking、05_guides、06_toolchain、07_project、archive、quick_reference、process_reports、version_reports 补齐用途、判定目标、DOCS_STRUCTURE 链接
 - **research_notes 子模块**：formal_methods、type_theory、software_design_theory、experiments 均增加 DOCS_STRUCTURE 链接
@@ -186,7 +186,7 @@
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - **23 模式双向链接**：23 个设计模式文档元信息均增加「23 模式矩阵」行号链接；[01_design_patterns_formal/README §23 模式多维对比矩阵](software_design_theory/01_design_patterns_formal/README.md#23-模式多维对比矩阵) 已建
-- **执行模型多维对比矩阵**：[03_execution_models/README §执行模型多维对比矩阵](software_design_theory/03_execution_models/README.md#执行模型多维对比矩阵)（同步/异步/并发/并行/分布式×确定性/数据竞争/选型）
+- **执行模型多维对比矩阵**：[03_execution_models/README §执行模型多维对比矩阵](software_design_theory/03_execution_models/README.md#执行模型多维对比矩阵)（同步/异步（Async）/并发/并行/分布式×确定性/数据竞争/选型）
 - **formal_methods 六篇并表**：[formal_methods/README §formal_methods 六篇并表](formal_methods/README.md#formal_methods-六篇并表)（概念×公理×定理×证明方法×反例；含 Send/Sync）
 - **矩阵与文档双向链接规范**：CONTENT_ENHANCEMENT 新增 § 矩阵与文档双向链接规范；MAINTENANCE_GUIDE 更新流程与季度维护增加层次化/矩阵核对项
 - **RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN**：阶段 2 标记为 ✅ 已完成
@@ -214,7 +214,7 @@
 - **Phase 2 类型构造能力**：新建 [type_theory/10_construction_capability.md](type_theory/10_construction_capability.md)；Def TCON1、TCON 矩阵、类型构造决策树、确定性判定；type_theory README 收录
 - **Phase 3 并发确定性**：扩展 [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md)；Def EB-DET1、 theorem EB-DET-T1、确定性判定决策树、并发 vs 并行判定表；与 FORMAL_PROOF_SYSTEM_GUIDE 衔接
 - **Phase 4 组件成熟度**：扩展 [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md)；Def CE-MAT1（L1–L4 成熟度）、 theorem CE-MAT-T1、构建能力确定性判定树；与 02_workflow、05_boundary_system 衔接
-- **Phase 5 核心特性完整链**：新建 [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md)；13 项核心特性（所有权、借用、生命周期、Pin、Send/Sync、Future、Trait、泛型、match、for、Option/Result、闭包、?）统一 Def→示例→论证→证明链
+- **Phase 5 核心特性完整链**：新建 [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md)；13 项核心特性（所有权（Ownership）、借用（Borrowing）、生命周期、Pin、Send/Sync、Future、Trait、泛型（Generics）、match、for、Option/Result、闭包（Closures）、?）统一 Def→示例→论证→证明链
 - **Phase 6 全局索引增强**：UNIFIED_SYSTEMATIC_FRAMEWORK 新增「按特性族/类型族/执行模型子索引」；设计模式表征与组件构建索引
 - **Phase 7 92 特性精简模板**：新建 [FEATURE_TEMPLATE](10_feature_template.md)；概念→形式化引用→反例模板；与 RUST_193 对应
 - **Phase 8 增量流程**：新建 [INCREMENTAL_UPDATE_FLOW](10_incremental_update_flow.md)；1.94+ 发布后更新步骤与检查清单；MAINTENANCE_GUIDE 新增版本增量更新节
@@ -300,7 +300,7 @@
 - **QUALITY_CHECKLIST**：新增 Def QC1、Axiom QC1、定理 QC-T1、推论 QC-C1
 - **practical_applications**：新增引理 PA-L1（unsafe 案例边界）
 - **03_execution_models**：02_async AS-L1/AS-C1；03_concurrent CC-L1/CC-C1（CC 前缀）；04_parallel PL-L1/PL-C1；05_distributed DI-L1/DI-C1
-- **type_theory/00_completeness_gaps**：新增完备性缺口文档；明确 Rust 1.93 类型系统、组合法则、Trait 特性**不充分**；README 状态改为「持续完善」
+- **type_theory/00_completeness_gaps**：新增完备性缺口文档；明确 Rust 1.93 类型系统（Type System）、组合法则、Trait 特性**不充分**；README 状态改为「持续完善」
 - **type_theory/trait_system_formalization**：新增 Axiom COH1/COH2、定理 COH-T1（Trait coherence：至多一个 impl）、推论 COH-C1；阶段 1 补全完成
 - **00_master_index**：PROOF_INDEX 统计更新至 69+
 - **10_quality_assurance**：新增 type_theory/00_completeness_gaps 衔接；表格格式统一
@@ -401,7 +401,7 @@
 
 - ✅ 02_async：Waker/Executor、join!/select!、运行时选型、错误传播与取消
 - ✅ 03_concurrent：原子操作与内存顺序、死锁避免、通道选型
-- ✅ 04_parallel：Rayon 工作窃取、原子操作、分治递归、与异步组合
+- ✅ 04_parallel：Rayon 工作窃取、原子操作（Atomic Operations）、分治递归、与异步组合
 - ✅ 05_distributed：CAP、失败模式、序列化契约、重试与熔断
 - ✅ 01_synchronous：栈展开与 panic、选型决策树
 
@@ -484,7 +484,7 @@
 
 - ✅ [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) - 92 项语言特性全覆盖
 - ✅ 10 大类别：内存、类型、Trait、控制流、并发、宏、模块、常量、FFI、1.93 新增
-- ✅ DESIGN_MECHANISM_RATIONALE 补全：宏、闭包、模式匹配、Option/Result
+- ✅ DESIGN_MECHANISM_RATIONALE 补全：宏、闭包、模式匹配（Pattern Matching）、Option/Result
 
 ---
 
@@ -757,7 +757,7 @@
 
 **内存分析研究笔记**:
 
-- ✅ 完善理论基础部分，添加相关概念说明（内存分配器、内存对齐、内存池、垃圾回收、引用计数、内存安全、内存分析工具、内存追踪）
+- ✅ 完善理论基础部分，添加相关概念说明（内存分配器、内存对齐、内存池、垃圾回收、引用计数、内存安全（Memory Safety）、内存分析工具、内存追踪）
 - ✅ 添加理论背景（内存管理理论、内存模型理论、内存安全理论、性能分析理论）
 - ✅ 完善内存模型和内存分析指标的说明
 - ✅ 更新研究进展，反映已完成的工作
@@ -899,7 +899,7 @@
 
 **异步状态机形式化研究笔记**:
 
-- ✅ 完善理论基础部分，添加相关概念说明（Future、Poll、Executor、状态机、协作式多任务、并发安全、async/await）
+- ✅ 完善理论基础部分，添加相关概念说明（Future、Poll、Executor、状态机、协作式多任务、并发安全（Concurrency Safety）、async/await）
 - ✅ 添加理论背景（状态机理论、并发理论、CPS、协程理论）
 - ✅ 添加状态机正确性定理（定理 2）
 - ✅ 添加 Poll 一致性定理（定理 3）
@@ -960,7 +960,7 @@
 
 **生命周期形式化研究笔记**:
 
-- ✅ 完善理论基础部分，添加相关概念说明（生命周期、生命周期标注、生命周期省略、生命周期子类型）
+- ✅ 完善理论基础部分，添加相关概念说明（生命周期、生命周期标注、生命周期省略（Lifetime Elision）、生命周期子类型）
 - ✅ 完善生命周期推断规则说明
 - ✅ 添加相关概念说明（作用域、悬垂引用、生命周期约束）
 - ✅ 添加理论背景（区域类型、子类型理论、约束求解）
@@ -1349,7 +1349,7 @@ _版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/) 规范。_
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

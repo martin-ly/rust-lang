@@ -79,7 +79,7 @@
 
 | 测试文件 | 测试函数数 | 覆盖内容 |
 |---------|-----------|---------|
-| type_inference_tests.rs | 8 | 类型推断、类型注解、Option/Result |
+| type_inference_tests.rs | 8 | 类型推断（Type Inference）、类型注解、Option/Result |
 | trait_system_tests.rs | 9 | trait定义、关联类型、trait对象 |
 | generic_bounds_tests.rs | 12 | 泛型函数、泛型结构体、where子句 |
 | associated_types_tests.rs | 9 | 关联类型、GATs、关联常量 |
@@ -181,7 +181,7 @@ docs/Rust所有权与可判定性/            (82 files)
 **成果**:
 
 - ✅ 源码文件从 2 个 → **7 个**
-- ✅ 覆盖声明宏、过程宏、属性宏
+- ✅ 覆盖声明宏、过程宏（Procedural Macro）、属性宏
 - ✅ 包含设计模式和最佳实践
 
 ---

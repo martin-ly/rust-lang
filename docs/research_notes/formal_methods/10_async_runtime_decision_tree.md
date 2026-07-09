@@ -5,7 +5,7 @@
 > - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
 > **Rust 版本**: 1.96.1+ (Edition 2024)
-> **概念族**: 异步 / 运行时决策
+> **概念族**: 异步（Async） / 运行时决策
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链节点持续推进。
 
 ---
@@ -124,7 +124,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-| 运行时 | 适用场景 | 特点 | 生态 |
+| 运行时（Runtime） | 适用场景 | 特点 | 生态 |
 | :--- | :--- | :--- | :--- |
 | **Tokio** | 通用服务端 | 成熟、功能全、生态好 | ⭐⭐⭐⭐⭐ |
 | **async-std [已归档]** | 标准库兼容 | 类似std API | ⭐⭐⭐ |
@@ -299,7 +299,7 @@ async fn main() {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

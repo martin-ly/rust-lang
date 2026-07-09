@@ -171,8 +171,8 @@
 
 | 概念 | 本项目定义 | 官方定义 | 状态 |
 | :--- | :--- | :--- | :--- |
-| 所有权 | 资源唯一控制者 | 资源唯一控制者 | ✅ 一致 |
-| 借用 | &T / &mut T | &T / &mut T | ✅ 一致 |
+| 所有权（Ownership） | 资源唯一控制者 | 资源唯一控制者 | ✅ 一致 |
+| 借用（Borrowing） | &T / &mut T | &T / &mut T | ✅ 一致 |
 | 生命周期 | 引用有效性范围 | 引用有效性范围 | ✅ 一致 |
 
 ### 维度 2: 代码示例对齐 {#维度-2-代码示例对齐}
@@ -217,7 +217,7 @@ let r = &s;
 | 指南 | 本项目 | 官方 | 状态 |
 | :--- | :--- | :--- | :--- |
 | 命名规范 | snake_case | snake_case | ✅ |
-| 错误处理 | Result | Result | ✅ |
+| 错误处理（Error Handling） | Result | Result | ✅ |
 | 文档注释 | /// | /// | ✅ |
 
 ### 维度 4: 版本特性对齐 {#维度-4-版本特性对齐}
@@ -331,7 +331,7 @@ let r = &s;
 | 所有权 | Rust Book 4.1 | [所有权模型](formal_methods/10_ownership_model.md) | ✅ | 一致 |
 | 借用 | Rust Book 4.2 | [借用检查](formal_methods/10_borrow_checker_proof.md) | ✅ | 一致 |
 | 生命周期 | Rust Book 10.3 | 生命周期形式化 | ✅ | 一致 |
-| 泛型 | Rust Book 10 | [类型系统](type_theory/10_type_system_foundations.md) | ✅ | 一致 |
+| 泛型（Generics） | Rust Book 10 | [类型系统（Type System）](type_theory/10_type_system_foundations.md) | ✅ | 一致 |
 | Trait | Rust Book 10.2 | [Trait系统](type_theory/10_trait_system_formalization.md) | ✅ | 一致 |
 | async/await | Rust Book 17 | [异步状态机](formal_methods/10_async_state_machine.md) | ✅ | 一致 |
 
@@ -344,20 +344,20 @@ let r = &s;
 | Hello World | Rust Book 1.2 | quick_reference/02_ownership_cheatsheet.md | ✅ | 一致 |
 | 所有权转移 | Rust Book 4.1 | formal_methods/10_ownership_model.md | ✅ | 一致 |
 | 共享借用 | Rust Book 4.2 | formal_methods/10_borrow_checker_proof.md | ✅ | 一致 |
-| 可变借用 | Rust Book 4.2 | formal_methods/10_borrow_checker_proof.md | ✅ | 一致 |
-| 结构体 | Rust Book 5 | quick_reference/02_type_system.md | ✅ | 一致 |
-| 枚举 | Rust Book 6 | quick_reference/02_type_system.md | ✅ | 一致 |
-| 模式匹配 | Rust Book 6.2 | quick_reference/02_control_flow_functions_cheatsheet.md | ✅ | 一致 |
+| 可变借用（Mutable Borrow） | Rust Book 4.2 | formal_methods/10_borrow_checker_proof.md | ✅ | 一致 |
+| 结构体（Struct） | Rust Book 5 | quick_reference/02_type_system.md | ✅ | 一致 |
+| 枚举（Enum） | Rust Book 6 | quick_reference/02_type_system.md | ✅ | 一致 |
+| 模式匹配（Pattern Matching） | Rust Book 6.2 | quick_reference/02_control_flow_functions_cheatsheet.md | ✅ | 一致 |
 | 错误处理 | Rust Book 9 | quick_reference/02_error_handling_cheatsheet.md | ✅ | 一致 |
 | 泛型 | Rust Book 10 | quick_reference/02_generics_cheatsheet.md | ✅ | 一致 |
 | Trait | Rust Book 10.2 | quick_reference/02_type_system.md | ✅ | 一致 |
 | 生命周期 | Rust Book 10.3 | quick_reference/02_type_system.md | ✅ | 一致 |
 | 测试 | Rust Book 11 | quick_reference/02_testing_cheatsheet.md | ✅ | 一致 |
-| 闭包 | Rust Book 13 | quick_reference/02_control_flow_functions_cheatsheet.md | ✅ | 一致 |
+| 闭包（Closures） | Rust Book 13 | quick_reference/02_control_flow_functions_cheatsheet.md | ✅ | 一致 |
 | 迭代器 | Rust Book 13.2 | quick_reference/02_collections_iterators_cheatsheet.md | ✅ | 一致 |
-| 智能指针 | Rust Book 15 | quick_reference/02_smart_pointers_cheatsheet.md | ✅ | 一致 |
+| 智能指针（Smart Pointer） | Rust Book 15 | quick_reference/02_smart_pointers_cheatsheet.md | ✅ | 一致 |
 | 并发 | Rust Book 16 | quick_reference/02_threads_concurrency_cheatsheet.md | ✅ | 一致 |
-| 异步 | Rust Book 17 | quick_reference/02_async_patterns.md | ✅ | 一致 |
+| 异步（Async） | Rust Book 17 | quick_reference/02_async_patterns.md | ✅ | 一致 |
 
 ### 版本信息检查 {#版本信息检查}
 

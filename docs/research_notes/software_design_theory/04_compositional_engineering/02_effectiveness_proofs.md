@@ -83,7 +83,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**陈述**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/10_ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
+**陈述**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/10_ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全（Memory Safety）），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
 
 **证明思路**：
 
@@ -227,7 +227,7 @@ fn main() {
 }
 ```
 
-**形式化对应**：`A`、`B` 为模块；`main` 组合两者。所有权：`a` 移入 `B::new`，符合 T2；无悬垂、无泄漏。
+**形式化对应**：`A`、`B` 为模块；`main` 组合两者。所有权（Ownership）：`a` 移入 `B::new`，符合 T2；无悬垂、无泄漏。
 
 ---
 
@@ -402,7 +402,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

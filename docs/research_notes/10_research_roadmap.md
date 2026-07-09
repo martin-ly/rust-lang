@@ -103,7 +103,7 @@
 - [x] [Trait 系统形式化](type_theory/10_trait_system_formalization.md) ✅ 100%
   - Trait 的形式化定义
   - Trait 对象语义
-  - 泛型 Trait
+  - 泛型（Generics） Trait
 
 **预期成果**: Trait 系统的类型理论模型
 
@@ -339,7 +339,7 @@
 
 **同步说明**：
 
-- 阶段一（类型系统基础）参考 Rust Reference 与 RFC 738（型变）、RFC 141（生命周期省略）等。
+- 阶段一（类型系统基础）参考 Rust Reference 与 RFC 738（型变）、RFC 141（生命周期省略（Lifetime Elision））等。
 - 阶段二（形式化验证）对照 RustBelt/Aeneas 论文与 RFC 1966（unsafe 指针改革）等。
 - 阶段三（实验研究）结合 Rust Blog 的性能发布说明与 rustc dev guide 的编译器章节。
 - 阶段四（综合应用）依据 Rust API Guidelines、Nomicon 与 RFC 流程落地最佳实践。

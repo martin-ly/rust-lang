@@ -2302,12 +2302,119 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 
 ## 十一、待补充与演进方向（TODOs）
 
-- [x] **TODO**: 补充 `impl Trait` 在 `trait` 定义中的使用（存在类型 + 高阶） —— 优先级: 中 —— 已完成 §补充章节 RPITIT —— 2026-05-13
-- [x] **TODO**: 补充 `Const Trait` / `~const` 实验特性（impl const Trait 区别、替代方案） —— 优先级: 低 —— 已完成 §补充章节 Const Trait —— 2026-05-14
-- [x] **TODO**: 补充 `#[fundamental]` attribute 与 Orphan Rule 例外（Pin<P>、透明性、non_exhaustive 对比） —— 优先级: 低 —— 已完成 §补充章节 #[fundamental] —— 2026-05-14
-- [x] **TODO**: 补充 Specialization（min_specialization）的最新稳定状态追踪 —— 优先级: 中 —— 已完成 §5.7
-- [x] **TODO**: 补充 Negative impls（`impl !Trait for T`）的形式化语义 —— 优先级: 低 —— 已完成 §补充章节 Negative Impls —— 2026-05-13
-- [x] **TODO**: 补充 Next-generation trait solver（2026 旗舰稳定化目标、coherence 改进、解锁效应） —— 优先级: 高 —— 已完成 §十二 —— 2026-05-18
+### 11.1 `impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）
+
+**定义**：RPITIT（Return Position Impl Trait In Traits）与 AFIT（Abstracted Function In Trait）允许在 trait 方法签名中使用 `-> impl Trait`，编译器自动为每个实现者推导匿名关联类型。
+
+**动机**：隐藏实现类型的同时避免手写关联类型，使 trait 定义更贴近自然接口描述，并保持零成本抽象。
+
+```rust
+trait Drawable {
+    fn shape(&self) -> impl std::fmt::Display;
+}
+
+struct Circle;
+
+impl Drawable for Circle {
+    fn shape(&self) -> impl std::fmt::Display { "circle" }
+}
+```
+
+> 详见 [补充章节：`impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）](#补充章节impl-trait-在-trait-定义中的使用rpitit--afit)。
+
+### 11.2 `Const Trait` 与 `~const` 实验特性
+
+**定义**：`~const`（及演进中的 `[const]` 语法）让 `const fn` 能够接受受 trait bound 约束的泛型参数，使编译期泛型计算不再依赖特殊内建规则。
+
+**动机**：当前稳定 Rust 中 `const fn` 无法使用泛型 trait bound，`~const` 旨在填补这一缺口，让自定义类型在 const 上下文享受与运行时相同的抽象能力。
+
+```rust,ignore
+#![feature(const_trait_impl)]
+
+#[const_trait]
+trait Add {
+    fn add(self, other: Self) -> Self;
+}
+
+impl const Add for i32 {
+    fn add(self, other: Self) -> Self { self + other }
+}
+
+const fn double<T: ~const Add + Copy>(x: T) -> T { x.add(x) }
+```
+
+> 详见 [补充章节：Const Trait 与 `~const` 实验特性](#补充章节const-trait-与-const-实验特性)。
+
+### 11.3 `#[fundamental]` Attribute 与 Orphan Rule 例外
+
+**定义**：`#[fundamental]` 标记的类型（如 `Box<T>`、`&T`、`&mut T`、`Pin<P>`）在 Orphan Rule 判定中对内部类型“透明”，允许基于本地内容类型为外部包装类型写 impl。
+
+**动机**：在保持 coherence 的前提下，为标准库中的通用包装器打开扩展空间，使 `impl Add for &str` 等核心实现成为可能。
+
+```rust,ignore
+// 标准库内部示例：&str 的 &T fundamental 属性使其 impl 成为可能
+impl std::ops::Add for &str {
+    type Output = String;
+    fn add(self, other: Self) -> String { format!("{}{}", self, other) }
+}
+```
+
+> 详见 [补充章节：`#[fundamental]` Attribute 与 Orphan Rule 例外](#补充章节fundamental-attribute-与-orphan-rule-例外)。
+
+### 11.4 Specialization（`min_specialization`）的最新稳定状态
+
+**定义**：Specialization 允许为更具体的类型子集提供特化 trait 实现，同时保留对更广泛类型的默认实现；`min_specialization` 是其经过 soundness 裁剪后的受限子集。
+
+**动机**：让标准库和性能敏感代码能为常见类型提供零成本特化路径，而无需牺牲 coherence 与类型安全。
+
+```rust,ignore
+#![feature(min_specialization)]
+
+trait Convert<T> { fn convert(&self) -> T; }
+
+impl<T, U> Convert<U> for T
+where U: From<T>, T: Clone {
+    default fn convert(&self) -> U { U::from(self.clone()) }
+}
+
+impl Convert<String> for &str {
+    fn convert(&self) -> String { String::from(*self) }
+}
+```
+
+> 详见 [§5.7 正确示例：Specialization（特化）的语义与边界](#57-正确示例specialization特化的语义与边界)。
+
+### 11.5 Negative Impls（`impl !Trait for T`）的形式化语义
+
+**定义**：Negative impl 显式声明某类型**不**实现某 trait，作为 coherence 系统的负向公理，常用于 auto trait 的显式取消。
+
+**动机**：在类型系统中表达“此类型不具有某能力”，使 `!Send`、`!Sync` 等否定约束拥有正式的推理基础。
+
+```rust,ignore
+#![feature(negative_impls)]
+
+struct NotSend(*const u8);
+
+unsafe impl !Send for NotSend {}
+```
+
+> 详见 [补充章节：Negative Impls（`impl !Trait for T`）的形式化语义](#补充章节negative-implsimpl-trait-for-t的形式化语义)。
+
+### 11.6 Next-generation Trait Solver
+
+**定义**：Next-generation trait solver 是 Rust 2026 旗舰稳定化目标之一，用新的目标导向搜索算法替换现有 solver，提升 coherence 检查、where-clause 推导和复杂生命周期约束的可靠性。
+
+**动机**：GATs、TAIT、specialization、implied bounds 等特性的正确性与稳定性受限于旧 solver 的架构债务；新 solver 是这些特性从“可用”走向“可靠”的基础设施。
+
+```rust
+// 稳定 Rust 中已经能观察到的改进：复杂 where-clause 与 GAT 推断更可靠
+trait LendingIterator {
+    type Item<'a> where Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+```
+
+> 详见 [§十二 补充章节：Next-generation Trait Solver](#十二补充章节next-generation-trait-solver2026-旗舰稳定化目标)。
 
 ---
 

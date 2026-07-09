@@ -50,7 +50,7 @@
 | :--- | :--- | :--- | :--- |
 | **λRust 语法** | 形式化语言子集语法 | ownership_model、borrow_checker_proof 的 Def/规则 | 部分 |
 | **操作语义** | 小步归约 $e \to e'$ | type_system 进展性/保持性；无显式 MIR 级 | 部分 |
-| **类型系统** | typing rules | type_system_foundations T1–T5 | 部分 |
+| **类型系统（Type System）** | typing rules | type_system_foundations T1–T5 | 部分 |
 | **生命周期逻辑** | lifetime 证明规则 | lifetime_formalization LF1–LF3 | 部分 |
 | **借用证明规则** | 分离逻辑、borrowing | borrow_checker_proof T1–T2 | 部分 |
 | **owned pointers** | Box 语义 | ownership_model Def BOX1、BOX-T1 | 已覆盖 |
@@ -102,7 +102,7 @@
 | :--- | :--- | :--- | :--- |
 | 松弛内存 | synchronized ghost state | 无 | 未覆盖 |
 | Arc 数据竞争 | 形式化发现 Arc bug | Def ATOMIC1、ARC1；无松弛内存 | 部分 |
-| 原子操作 | 内存序形式化 | Def ATOMIC1 | 部分 |
+| 原子操作（Atomic Operations） | 内存序形式化 | Def ATOMIC1 | 部分 |
 
 ---
 
@@ -159,7 +159,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

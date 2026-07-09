@@ -73,7 +73,7 @@
 
 本文档提供常见问题的排查和解决方案，帮助开发者快速定位和解决问题。
 
-**形式化引用**：T-OW2/T-OW3 (所有权)、T-BR1 (借用)、T-LF2 (生命周期)。
+**形式化引用**：T-OW2/T-OW3 (所有权（Ownership）)、T-BR1 (借用（Borrowing）)、T-LF2 (生命周期)。
 编译错误对应 [ownership_model](../research_notes/formal_methods/10_ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md)、lifetime_formalization。
 
 ---

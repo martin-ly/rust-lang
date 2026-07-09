@@ -117,7 +117,7 @@ trait IPC {
 > 传统操作系统依赖 MMU（内存管理单元）进行进程隔离；
 > Theseus 依赖 Rust 的所有权（Ownership）系统——如果一个 cell 没有另一个 cell 的引用（Reference），它就无法访问其内存。
 > 这在理论上是安全的，但在实践中需要完全排除 unsafe 代码（任何 unsafe 块都可能绕过类型系统（Type System）隔离）。
-> [Raman et al., OSDI 2020](https://www.usenix.org/conference/osdi20/presentation/raman) ✅
+> [Raman et al., OSDI 2020](https://web.archive.org/web/*/https://www.usenix.org/conference/osdi20/presentation/raman) ✅
 
 ---
 

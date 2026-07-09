@@ -92,7 +92,7 @@ diff <(ls en/src) <(ls zh-CN/src)
 python scripts/maintenance/check_i18n_translation_gap.py
 ```
 
-术语一致性检查以 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml) 作为权威数据源，脚本可读取该文件并对照各语言翻译中的关键术语使用情况。该文件涵盖所有权、类型系统、并发安全、异步、包管理等核心概念，是检测术语偏差与未覆盖缺口的标准来源。
+术语一致性检查以 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml) 作为权威数据源，脚本可读取该文件并对照各语言翻译中的关键术语使用情况。该文件涵盖所有权、类型系统（Type System）、并发安全（Concurrency Safety）、异步（Async）、包管理等核心概念，是检测术语偏差与未覆盖缺口的标准来源。
 
 > 当前版本仅做版本号/最新 commit 差距检测，缺失章节与术语差异待后续扩展。
 

@@ -424,7 +424,7 @@ struct CacheLinePadded {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-| 模块 | 示例 |
+| 模块（Module） | 示例 |
 | :--- | :--- | :--- | :--- | :--- |
 | c02 | `memory_safety_advanced`、`rust_192_features_demo` 对齐计算 |
 | c04 | `rust_192_features_demo` 泛型对齐大小 |

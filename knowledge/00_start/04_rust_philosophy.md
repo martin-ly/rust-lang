@@ -256,7 +256,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 - [Rust Language FAQ](https://www.rust-lang.org/learn) [Rust Team / 2025](https://www.rust-lang.org/)
 - [The Rust Programming Language](https://doc.rust-lang.org/book/) Rust Team; [TRPL 2024](https://doc.rust-lang.org/book/title-page.html)
 - [Rustonomicon](https://doc.rust-lang.org/nomicon/) [Rust Team / Rustonomicon 2025](https://doc.rust-lang.org/nomicon/index.html)
-- [RFC 2005: Match ergonomics](https://rust-lang.github.io/rfcs/2005-match-ergonomics.html) [Rust Core Team / 2017](https://blog.rust-lang.org/2017/)
+- [RFC 2005: Match ergonomics](https://rust-lang.github.io/rfcs/2005-match-ergonomics.html) [Rust Core Team / 2017](https://web.archive.org/web/*/https://blog.rust-lang.org/2017/)
 
 ### 学术来源
 

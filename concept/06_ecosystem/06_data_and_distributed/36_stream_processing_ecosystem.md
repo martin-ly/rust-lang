@@ -188,7 +188,7 @@ Fluvio 是一个用 Rust 从头构建的分布式流处理平台，定位为 Kaf
 | **生态成熟度** | 新兴 | 工业标准 |
 | **云原生** | 专为 K8s 设计 | 需额外工具（Strimzi 等） |
 
-> **关键洞察**: Fluvio 的核心卖点不是功能超越 Kafka，而是"Rust 原生"带来的运维简化——无 JVM 调优、无 GC 暂停、低内存占用、快速启动。对于边缘计算和 IoT 场景，这些特性比 Kafka 的丰富生态更有价值。[Fluvio Blog](https://www.fluvio.io/blog/) ✅
+> **关键洞察**: Fluvio 的核心卖点不是功能超越 Kafka，而是"Rust 原生"带来的运维简化——无 JVM 调优、无 GC 暂停、低内存占用、快速启动。对于边缘计算和 IoT 场景，这些特性比 Kafka 的丰富生态更有价值。[Fluvio Blog](https://web.archive.org/web/*/https://www.fluvio.io/blog/) ✅
 
 ---
 

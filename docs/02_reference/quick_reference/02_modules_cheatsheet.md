@@ -792,7 +792,7 @@ mod inner {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-这些文件展示了“模块/子模块/导出”的真实组织方式（可直接打开阅读）：
+这些文件展示了“模块（Module）/子模块/导出”的真实组织方式（可直接打开阅读）：
 
 - [C01 crate 根与模块组织](../../../crates/c01_ownership_borrow_scope/src/lib.rs)
 - [C02 crate 根与模块组织](../../../crates/c02_type_system/src/lib.rs)

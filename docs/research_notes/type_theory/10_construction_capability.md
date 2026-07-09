@@ -2,7 +2,7 @@
 
 > **EN**: Construction Capability
 > **Summary**: 类型系统构造能力 Construction Capability. (stub/archive redirect)
-> **概念族**: 类型系统 / 表达能力
+> **概念族**: 类型系统（Type System） / 表达能力
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 > **内容分级**: [归档级]
 >
@@ -51,7 +51,7 @@
 
 1. **构造能力**：哪些类型可构造、用何种语法、构造路径是否唯一
 2. **类型构造确定性判定**：何时可推断、何时需注解、何时必然失败
-3. **类型构造能力形式化树图**：按基本类型/复合类型/泛型/关联类型/GAT 等分层的决策树
+3. **类型构造能力形式化树图**：按基本类型/复合类型/泛型（Generics）/关联类型/GAT 等分层的决策树
 
 ---
 
@@ -93,17 +93,17 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 | :--- | :--- | :--- | :--- |
 | **基本类型** | 字面量 `42`、`true`、`'a'` | Unique | 编译器直接推断 |
 | **元组** | `(a, b)`、`()` | Unique（若各分量可推断） | 局部推断；歧义时需 `: (i32, bool)` |
-| **结构体** | `S { x: 1, y: 2 }` | Unique（若字段不歧义） | 缺字段或歧义需注解 |
-| **枚举** | `E::Variant(a)` | Unique（若变体与参数可推断） | Option/Result 常用 |
+| **结构体（Struct）** | `S { x: 1, y: 2 }` | Unique（若字段不歧义） | 缺字段或歧义需注解 |
+| **枚举（Enum）** | `E::Variant(a)` | Unique（若变体与参数可推断） | Option/Result 常用 |
 | **数组** | `[1, 2, 3]`、`[0; N]` | Unique（元素类型可推断） | `[T; N]` 中 N 需 const |
-| **切片** | `&[a, b]`、`v.as_slice()` | Unique | 借用或方法产生 |
+| **切片（Slice）** | `&[a, b]`、`v.as_slice()` | Unique | 借用或方法产生 |
 | **引用** | `&x`、`&mut x` | Unique | 生命周期由 NLL 推断 |
-| **Box** | `Box::new(x)` | Unique | 单态化 |
+| **Box** | `Box::new(x)` | Unique | 单态化（Monomorphization） |
 | **泛型** | `Vec::new()`、`F::<i32>::new()` | Multi（多 impl）或 Unique（约束唯一） | 歧义 impl 需 turbofish |
 | **impl Trait** | 返回值、参数 | Unique（调用处推断） | 存在类型，静态分发 |
 | **dyn Trait** | `&x as &dyn T`、`Box::new(x)` | Unique（目标 Trait 唯一） | 对象安全约束 |
 | **函数项** | `f`、`g::<i32>` | Unique 或 Multi | 重载时需 turbofish |
-| **闭包** | `\|x\| x + 1` | Unique（使用处推断） | 唯一匿名类型 |
+| **闭包（Closures）** | `\|x\| x + 1` | Unique（使用处推断） | 唯一匿名类型 |
 | **Never (!)** | 不可达、`panic!`、`loop {}` | Unique | 无构造子 |
 | **关联类型** | `T::Item` | Unique（impl 唯一） | coherence 保证 |
 | **GAT** | `T::Item<'a>` | Unique（约束唯一） | 见 [advanced_types](10_advanced_types.md) |
@@ -293,7 +293,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

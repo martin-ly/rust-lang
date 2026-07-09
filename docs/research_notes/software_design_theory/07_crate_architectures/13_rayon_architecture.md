@@ -327,7 +327,7 @@ pub trait ParallelIterator: Sized + Send {
 
 - **迭代器本身**必须可跨线程发送（`Send`）
 - **每个元素**必须可跨线程发送（`Item: Send`）
-- **闭包**必须是 `Sync`（可被多线程同时引用）且 `Send`（可跨线程调用）
+- **闭包（Closures）**必须是 `Sync`（可被多线程同时引用）且 `Send`（可跨线程调用）
 
 这些约束保证了：**在 Rayon 的并行迭代中，不可能出现数据竞争**。
 
@@ -530,7 +530,7 @@ pool.install(|| {
 | **类型约束** | 要求 `Send` / `Sync` | 无额外约束 |
 | **开销** | 小数据量自动回退到顺序 | 无调度开销 |
 | **适用场景** | CPU 密集型、数据量大 | I/O 密集型、数据量小、需确定性 |
-| **错误处理** | `try_par_iter` 支持短路错误传播 | `try_fold` 等 |
+| **错误处理（Error Handling）** | `try_par_iter` 支持短路错误传播 | `try_fold` 等 |
 
 ---
 

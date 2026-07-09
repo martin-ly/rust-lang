@@ -94,12 +94,12 @@
 
 | 依赖 | 文档 |
 | :--- | :--- |
-| 所有权 | [ownership_model](../formal_methods/10_ownership_model.md) |
-| 借用 | [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) |
+| 所有权（Ownership） | [ownership_model](../formal_methods/10_ownership_model.md) |
+| 借用（Borrowing） | [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) |
 | 生命周期 | lifetime_formalization |
-| 类型系统 | [type_system_foundations](../type_theory/10_type_system_foundations.md) |
+| 类型系统（Type System） | [type_system_foundations](../type_theory/10_type_system_foundations.md) |
 | 型变 | [variance_theory](../type_theory/10_variance_theory.md) |
-| 异步 | [async_state_machine](../formal_methods/10_async_state_machine.md) |
+| 异步（Async） | [async_state_machine](../formal_methods/10_async_state_machine.md) |
 | Pin | [pin_self_referential](../formal_methods/10_pin_self_referential.md) |
 | Trait | [trait_system_formalization](../type_theory/10_trait_system_formalization.md) |
 
@@ -287,7 +287,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

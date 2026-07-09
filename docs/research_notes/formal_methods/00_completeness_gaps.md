@@ -53,7 +53,7 @@
 本文档系统列出 formal_methods 目录下各文档的形式化论证覆盖情况：
 
 1. **Rust 1.93 语言特性**：Phase 1–6 已全面覆盖
-2. **内存与并发机制**：智能指针、通道、锁、原子操作、thread::spawn 等已形式化
+2. **内存与并发机制**：智能指针（Smart Pointer）、通道、锁、原子操作（Atomic Operations）、thread::spawn 等已形式化
 3. **FFI 与 unsafe**：裸指针、union、transmute、extern、C variadic 已与 formal_methods 衔接
 
 ---
@@ -289,7 +289,7 @@ $
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

@@ -221,13 +221,13 @@ Rust 语义族谱（顶层归纳）
 
 | 上游概念族 | 下游概念族 | 依赖关系 | 形式化表达 |
 | :--- | :--- | :--- | :--- |
-| 所有权 | 借用 | 借用以所有权为前提 | $\Omega(x)=\text{Owned} \rightarrow \text{Borrow}(x)$ |
+| 所有权（Ownership） | 借用（Borrowing） | 借用以所有权为前提 | $\Omega(x)=\text{Owned} \rightarrow \text{Borrow}(x)$ |
 | 所有权+借用 | 生命周期 | 引用需生命周期约束 | $\&'a T \rightarrow 'a \subseteq \text{lft}(T)$ |
-| 类型系统 | 型变 | 型变基于子类型 | $S <: T \Rightarrow F[S] \mathrel{?} F[T]$ |
-| 所有权+借用 | 内存安全 | 规则保证无悬垂等 | 定理 2、3 (ownership_model) |
+| 类型系统（Type System） | 型变 | 型变基于子类型 | $S <: T \Rightarrow F[S] \mathrel{?} F[T]$ |
+| 所有权+借用 | 内存安全（Memory Safety） | 规则保证无悬垂等 | 定理 2、3 (ownership_model) |
 | 生命周期 | 引用有效性 | 生命周期满足则引用有效 | 定理 2 (lifetime_formalization) |
 | 类型系统 | 异步状态机 | Future 类型需类型检查 | $\Gamma \vdash e : \text{Future}[\tau]$ |
-| Send/Sync | 并发安全 | 满足则数据竞争自由 | 定理 6.2 (async_state_machine) |
+| Send/Sync | 并发安全（Concurrency Safety） | 满足则数据竞争自由 | 定理 6.2 (async_state_machine) |
 | Pin | 自引用安全 | Pin 保证位置稳定 | 定理 1–3 (pin_self_referential) |
 
 **定理 CSO-T1（概念族完备性）**：若程序 $P$ 满足内存安全族、类型安全族、并发安全族、算法正确性族的全部定理，则 $P$ 为 Safe 且良型。
@@ -236,7 +236,7 @@ Rust 语义族谱（顶层归纳）
 
 **引理 CSO-L1（族依赖传递）**：内存安全族 → 引用有效性；类型安全族 → 算法正确性族（类型推导、解析）；各族定理无循环依赖。
 
-*证明*：由概念族依赖表；所有权、借用、生命周期为上游；型变、异步、Pin 依赖类型与所有权；依赖图无环。∎
+*证明*：由概念族依赖表；所有权、借用、生命周期为上游；型变、异步（Async）、Pin 依赖类型与所有权；依赖图无环。∎
 
 **推论 CSO-C1**：若 $P$ 违反任一族定理，则 $P$ 非 Safe 或非良型；反例见 [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) 反例索引。
 
@@ -376,7 +376,7 @@ Axiom/规则层
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-| 模块 | D1 | D2 | R1 | R2 | P1 | P2 | 综合 | 备注 |
+| 模块（Module） | D1 | D2 | R1 | R2 | P1 | P2 | 综合 | 备注 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | ownership_model | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 | 定理 3 已补全作用域归纳、公理链 |
 | borrow_checker_proof | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 | 定理 1 已补全执行步骤归纳 |
@@ -697,7 +697,7 @@ Axiom/规则层
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

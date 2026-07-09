@@ -119,7 +119,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 本目录旨在记录和推进 Rust 语言相关的深入研究，包括：
 
-1. **形式化方法**：所有权、借用检查器、异步系统的形式化建模与证明
+1. **形式化方法**：所有权（Ownership）、借用检查器、异步系统的形式化建模与证明
 2. **类型理论**：Rust 类型系统的理论基础、范畴论解释、形式化验证
 3. **实验研究**：性能基准测试、内存分析、编译器优化实验
 4. **实际应用**：实际项目案例研究、最佳实践总结
@@ -143,7 +143,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 - ✅ 所有权模型的形式化定义
 - ✅ 借用检查器的正确性证明
-- ✅ 异步 Future/Poll 状态机的形式化描述
+- ✅ 异步（Async） Future/Poll 状态机的形式化描述
 - ✅ 生命周期系统的形式化语义
 - ✅ 并发安全的形式化保证
 - ✅ Rust 1.93.1 新特性的形式化分析（已完成）🆕
@@ -178,7 +178,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 **构造性语义与表达能力边界**: [10_language_semantics_expressiveness.md](10_language_semantics_expressiveness.md) - 操作/指称/公理语义形式化、表达能力边界论证
 
-**设计机制论证**: [10_design_mechanism_rationale.md](10_design_mechanism_rationale.md) - Pin 堆/栈区分、所有权、借用、型变等设计理由与完整论证
+**设计机制论证**: [10_design_mechanism_rationale.md](10_design_mechanism_rationale.md) - Pin 堆/栈区分、所有权、借用（Borrowing）、型变等设计理由与完整论证
 
 **论证缺口与设计理由综合索引**: [10_argumentation_gap_index.md](10_argumentation_gap_index.md) - 缺口追踪、设计理由矩阵、思维表征覆盖
 
@@ -228,7 +228,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 - [类型系统基础](../../crates/c02_type_system/docs/tier_04_advanced/README.md)
 - [类型型变参考](../../crates/c02_type_system/docs/README.md) - 类型系统参考文档
-- [形式化工程系统 - 类型系统](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
+- [形式化工程系统 - 类型系统（Type System）](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
 
 ---
 
@@ -597,7 +597,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

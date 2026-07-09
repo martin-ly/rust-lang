@@ -50,7 +50,7 @@
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.96.1+ (Edition 2024)
-> **状态**: ✅ **100% 完成**（Pin、所有权、借用、生命周期、型变、异步等设计理由已补全）
+> **状态**: ✅ **100% 完成**（Pin、所有权（Ownership）、借用（Borrowing）、生命周期、型变、异步等设计理由已补全）
 > **目标**: 填补「编程语言设计机制缺乏充分说明理由和完整论证」的缺口
 
 ---
@@ -394,11 +394,11 @@ Pin 使用场景决策树
 
 **动机**：函数式编程、回调、迭代器适配。需捕获环境变量。
 
-**设计决策**：`Fn`（不可变借用）、`FnMut`（可变借用）、`FnOnce`（消费）。编译器根据使用推断。
+**设计决策**：`Fn`（不可变借用（Immutable Borrow））、`FnMut`（可变借用（Mutable Borrow））、`FnOnce`（消费）。编译器根据使用推断。
 
 **论证**：对应三种借用语义；`FnOnce` 可调用一次（消费 self）；`FnMut` 可多次可变；`Fn` 可多次不可变。满足借用规则则自动实现。
 
-**反例**：闭包捕获可变引用后再次借用；跨线程传递非 Send 闭包。
+**反例**：闭包捕获可变引用后再次借用；跨线程传递非 Send 闭包（Closures）。
 
 ---
 
@@ -452,18 +452,18 @@ Pin 使用场景决策树
 | 机制 | 动机 | 设计决策 | 形式化文档 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
 | Pin | 自引用移动→悬垂 | 堆/栈区分：Unpin 栈固定，非 Unpin 堆固定 | pin_self_referential | 非 Unpin 用 Pin::new、移动未 Pin |
-| 所有权 | 无 GC 内存安全 | 默认移动，显式 Copy | ownership_model | 使用已移动值 |
+| 所有权 | 无 GC 内存安全（Memory Safety） | 默认移动，显式 Copy | ownership_model | 使用已移动值 |
 | 借用 | 数据竞争自由 | 可变独占，不可变可多 | borrow_checker_proof | 双重可变借用 |
 | 生命周期 | 引用有效性 | NLL + 显式标注 | lifetime_formalization | 返回局部引用 |
 | 型变 | 子类型在泛型中的传递 | 协变/逆变/不变 | variance_theory | &mut 协变等 |
-| 异步 Future | 自引用 Future | poll 用 Pin，堆固定 | async_state_machine, pin | 未 Pin 自引用 |
+| 异步（Async） Future | 自引用 Future | poll 用 Pin，堆固定 | async_state_machine, pin | 未 Pin 自引用 |
 | 类型安全 | 良型→无类型错误 | 进展+保持 | type_system_foundations | 类型不匹配 |
 | Trait 对象 | 运行时多态 | vtable、对象安全 | trait_system_formalization | 对象安全违规 |
 | Send/Sync | 跨线程安全 | Send=可转移、Sync=可共享 | async_state_machine | Rc 非 Send、Cell 非 Sync |
-| 宏 | 代码生成、DSL | 声明宏/过程宏分离、卫生 | - | 意外捕获 |
+| 宏 | 代码生成、DSL | 声明宏（Declarative Macro）/过程宏分离、卫生 | - | 意外捕获 |
 | Option/Result | 避免 null、显式错误处理 | 无 null；穷尽匹配；构造性逻辑 | LANGUAGE_SEMANTICS_EXPRESSIVENESS、OR-T1 | unwrap 空值 panic |
 | 闭包 | 捕获环境 | Fn/FnMut/FnOnce 三种 | - | 非 Send 跨线程 |
-| 模式匹配 | 代数类型、解构 | 穷尽、_ 通配 | - | 非穷尽 match |
+| 模式匹配（Pattern Matching） | 代数类型、解构 | 穷尽、_ 通配 | - | 非穷尽 match |
 | Option/Result | 无 null、显式错误 | 构造性、? 传播 | LANGUAGE_SEMANTICS | unwrap 空值 |
 
 ---
@@ -526,7 +526,7 @@ Pin 使用场景决策树
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

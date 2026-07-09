@@ -547,7 +547,7 @@ rust-lang/
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - **C01**: 所有权与借用
-- **C02**: 类型系统
+- **C02**: 类型系统（Type System）
 - **C03**: 控制流与函数
 
 **特点**: 核心概念，所有学习者必须掌握
@@ -813,7 +813,7 @@ codegen-units = 1
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

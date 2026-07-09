@@ -34,7 +34,7 @@
 
 ## 一、对齐说明 {#一对齐说明}
 
-本文档将 `docs/research_notes/` 中关于 crate、模块、workspace、依赖、发布的内容与 [Cargo Book](https://doc.rust-lang.org/cargo/) 建立映射。
+本文档将 `docs/research_notes/` 中关于 crate、模块（Module）、workspace、依赖、发布的内容与 [Cargo Book](https://doc.rust-lang.org/cargo/) 建立映射。
 
 ---
 

@@ -1649,15 +1649,15 @@ fn broken_test() {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-项目内可直接参考/运行的测试样例（覆盖单元测试、集成测试、并发安全、错误路径）：
+项目内可直接参考/运行的测试样例（覆盖单元测试、集成测试、并发安全（Concurrency Safety）、错误路径）：
 
 - **顶层集成测试**：`tests/cross_module_integration_tests.rs`（待创建）
 - **典型 crate 测试目录**：
-  - C02 类型系统：error_paths_tests.rs、edge_cases_tests.rs（代码示例待补充）
-  - C06 异步：[`crates/c06_async/tests/integration_tests.rs`](../../../crates/c06_async/tests/integration_tests.rs)
+  - C02 类型系统（Type System）：error_paths_tests.rs、edge_cases_tests.rs（代码示例待补充）
+  - C06 异步（Async）：[`crates/c06_async/tests/integration_tests.rs`](../../../crates/c06_async/tests/integration_tests.rs)
   - C05 并发：[`crates/c05_threads/tests/concurrent_safety_tests.rs`](../../../crates/c05_threads/tests/concurrent_safety_tests.rs)
   - C08 算法：[`crates/c08_algorithms/tests/edge_cases_tests.rs`](../../../crates/c08_algorithms/tests/edge_cases_tests.rs)
-  - C01 所有权：[`crates/c01_ownership_borrow_scope/tests/integration_tests.rs`](../../../crates/c01_ownership_borrow_scope/tests/integration_tests.rs)
+  - C01 所有权（Ownership）：[`crates/c01_ownership_borrow_scope/tests/integration_tests.rs`](../../../crates/c01_ownership_borrow_scope/tests/integration_tests.rs)
   - C10 网络：[`crates/c10_networks/tests/error_paths_tests.rs`](../../../crates/c10_networks/tests/error_paths_tests.rs)
 
 ## 📚 相关资源 {#相关资源}

@@ -726,7 +726,7 @@ graph LR
 > **[C++ Reference: Coroutines](https://en.cppreference.com/w/cpp/language/coroutines)** C++20 Coroutines 通过 `co_await`/`co_yield`/`co_return` 和 promise 类型实现，编译器生成状态机，与 Rust 类似但自定义能力更强。 ✅
 > **[Haskell GHC User Guide: Concurrent Haskell](https://downloads.haskell.org/ghc/latest/docs/users_guide/parallel.html)** Haskell 异步通过 `IO` monad 和 `forkIO` 实现，纯函数隔离保证并发安全（Concurrency Safety），但运行时依赖 GC 和 thunk 求值。 ✅
 > **[Go Spec: Goroutines](https://go.dev/ref/spec#Go_statements)** Go goroutine 是轻量级线程，由运行时 M:N 调度，内存占用约 2KB 起，阻塞不影响其他 goroutine。 ✅
-> **[Without Boats, "Pin and Suffering"](https://without.boats/blog/pin-and-suffering/)** Rust `Pin<T>` 的设计是为了安全表达自引用结构，这是 Rust 异步与 C++20 Coroutines 的关键差异之一。 ✅
+> **[Without Boats, "Pin and Suffering"](https://web.archive.org/web/*/https://without.boats/blog/pin-and-suffering/)** Rust `Pin<T>` 的设计是为了安全表达自引用结构，这是 Rust 异步与 C++20 Coroutines 的关键差异之一。 ✅
 
 ---
 
@@ -1925,7 +1925,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 ```
 
 > **来源**: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [without.boats blog: The cost of dynamic dispatch in Rust]
-> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats blog: "The cost of dynamic dispatch in Rust"](https://without.boats/blog/the-cost-of-dynamic-dispatch/); [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/dynamic-dispatch.html)
+> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats blog: "The cost of dynamic dispatch in Rust"](https://web.archive.org/web/*/https://without.boats/blog/the-cost-of-dynamic-dispatch/); [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/dynamic-dispatch.html)
 
 **何时选择哪种：API 边界 vs 内部实现**
 

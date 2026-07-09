@@ -159,11 +159,11 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-| 传递方式 | 所有权 | 形式化 |
+| 传递方式 | 所有权（Ownership） | 形式化 |
 | :--- | :--- | :--- |
 | `fn f(x: T)` | 移动 | $\Omega(x) \mapsto \text{callee}$ |
-| `fn f(x: &T)` | 不可变借用 | 借用规则 5–6 |
-| `fn f(x: &mut T)` | 可变借用 | 借用规则 7–8 |
+| `fn f(x: &T)` | 不可变借用（Immutable Borrow） | 借用规则 5–6 |
+| `fn f(x: &mut T)` | 可变借用（Mutable Borrow） | 借用规则 7–8 |
 | `fn f() -> T` | 返回转移 | $\Omega(\text{ret}) \mapsto \text{caller}$ |
 
 组合时上述规则在模块边界不变；`pub fn` 为边界。
@@ -654,7 +654,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 | 实践 | 说明 |
 | :--- | :--- |
 | **最小 pub** | 仅暴露必要接口；内部实现 `pub(crate)` |
-| **trait 边界** | 泛型 `T: Trait` 在模块边界明确；避免 `dyn Trait` 泛滥 |
+| **trait 边界** | 泛型（Generics） `T: Trait` 在模块边界明确；避免 `dyn Trait` 泛滥 |
 | **所有权传递** | 跨模块用值传递或 `&`/`&mut`；避免跨模块持有裸指针 |
 | **错误类型** | 模块间用 `Result<T, E>` 或自定义 `Error`；`From` 实现转换 |
 | **文档契约** | `pub fn` 文档化前置/后置条件；unsafe 契约显式标注 |
@@ -691,7 +691,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

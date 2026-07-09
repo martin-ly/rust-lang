@@ -227,7 +227,7 @@ struct Parser<'a> { input: &'a str }
 | :--- | :--- | :--- |
 | Adapter | 接口适配 | Trait实现 |
 | Decorator | 动态增强 | Trait对象 |
-| Proxy | 访问控制 | 智能指针 |
+| Proxy | 访问控制 | 智能指针（Smart Pointer） |
 
 ### 行为型 {#行为型}
 
@@ -614,7 +614,7 @@ Coq → Iris → RustBelt → 工具开发
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

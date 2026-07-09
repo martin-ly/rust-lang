@@ -345,7 +345,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
@@ -393,7 +393,7 @@
 | The Rust Performance Book | [nnethercote.github.io/perf-book](https://nnethercote.github.io/perf-book/) | Profiling、内存、并行性、编译时间 |
 | rustc Book | [doc.rust-lang.org/rustc](https://doc.rust-lang.org/rustc/) | 优化级别、LTO、PGO、内联 |
 | Rust Reference | [doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/) | 语言语义、类型布局、宏、并发 |
-| The Rust Programming Language | [doc.rust-lang.org/book](https://doc.rust-lang.org/book/) | 官方教程（所有权、并发、宏） |
+| The Rust Programming Language | [doc.rust-lang.org/book](https://doc.rust-lang.org/book/) | 官方教程（所有权（Ownership）、并发、宏） |
 | Rust Standard Library | [doc.rust-lang.org/std](https://doc.rust-lang.org/std/) | `std::sync`、`std::alloc`、`Atomic`、`Vec` 等 API |
 | Tokio Docs | [docs.rs/tokio](https://docs.rs/tokio/latest/tokio/) | 异步运行时与通道 |
 | Rayon Docs | [docs.rs/rayon](https://docs.rs/rayon/latest/rayon/) | 数据并行 |

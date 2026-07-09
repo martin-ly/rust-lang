@@ -208,7 +208,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 **Decorator + Strategy 组合有效性推导**：
 
-1. **CE-T1（内存安全）**：`Decorator` 持 `Box<dyn Strategy>`，所有权唯一；`execute()` 消费 `&self`，无双重释放。由 ownership T2、T3 传递。
+1. **CE-T1（内存安全（Memory Safety））**：`Decorator` 持 `Box<dyn Strategy>`，所有权唯一；`execute()` 消费 `&self`，无双重释放。由 ownership T2、T3 传递。
 2. **CE-T2（数据竞争自由）**：`Strategy` 为 `dyn Trait`，无共享可变；装饰器内部 `RefCell` 若存在，限于单线程或 `Mutex` 封装。由 borrow T1、Send/Sync 约束。
 3. **CE-T3（类型安全）**：`impl Strategy for X` 满足 trait 约束；`Decorator<X>` 泛型良型。由 type T1–T3 传递。
 
@@ -235,7 +235,7 @@ impl<R: OrderRepository> OrderService<R> {
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. **组合的形式化**：模块、crate、trait、泛型如何组合？组合满足何种性质？
+1. **组合的形式化**：模块（Module）、crate、trait、泛型如何组合？组合满足何种性质？
 2. **有效性**：组合后的系统保持内存安全、类型安全、无数据竞争？
 3. **与已有证明衔接**：如何引用 ownership、borrow、trait 的定理？
 
@@ -599,7 +599,7 @@ L4 跨进程/跨网络（分布式、微服务）
 
 - **无循环依赖**：`cargo check` 可检测；`mod` 图需为 DAG
 - **pub 边界**：跨模块仅通过 `pub` 接口；内部实现可私有
-- **trait 约束**：泛型 `T: Trait` 在组合边界保持
+- **trait 约束**：泛型（Generics） `T: Trait` 在组合边界保持
 - **验证**：组合后运行测试；CE-T1/T2/T3 用 cargo、clippy、MIRI 验证
 
 ---
@@ -668,7 +668,7 @@ L4 跨进程/跨网络（分布式、微服务）
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

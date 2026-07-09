@@ -177,7 +177,7 @@ Lint 运行的时机：
 | Late | HIR 后、类型检查等分析后 | 完整类型信息 |
 | MIR | MIR 上 | 控制流 |
 
-> [Rustc Dev Guide — Lints](https://rustc-dev-guide.rust-lang.org/diagnostics/lint-guidelines.html)(<https://rustc-dev-guide.rust-lang.org/diagnostics.html#lints>)
+> [Rustc Dev Guide — Lints](https://web.archive.org/web/*/https://rustc-dev-guide.rust-lang.org/diagnostics/lint-guidelines.html)(<https://rustc-dev-guide.rust-lang.org/diagnostics.html#lints>)
 
 ---
 

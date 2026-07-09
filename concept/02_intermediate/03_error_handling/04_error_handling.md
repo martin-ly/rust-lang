@@ -1667,7 +1667,7 @@ graph TD
 当函数标记为 `#[track_caller]` 时，编译器执行两项变换：
 
 1. **ABI 修改**：在函数的调用约定中追加一个隐式的 `&'static Location<'static>` 参数。调用方在每次调用时自动填充该参数为自己的源码位置（文件、行号、列号）。
-2. **MIR 重定向**：在 MIR（Mid-level IR）阶段，编译器将所有对 `#[track_caller]` 函数的调用重定向到一个内部闭包 `foo::{{closure}}`，该闭包负责把调用点的 `Location` 常数绑定到函数的隐式参数上。[rustc-dev-guide — Implicit caller location](https://rustc-dev-guide.rust-lang.org/codegen/implicit-caller-location.html)
+2. **MIR 重定向**：在 MIR（Mid-level IR）阶段，编译器将所有对 `#[track_caller]` 函数的调用重定向到一个内部闭包 `foo::{{closure}}`，该闭包负责把调用点的 `Location` 常数绑定到函数的隐式参数上。[rustc-dev-guide — Implicit caller location](https://web.archive.org/web/*/https://rustc-dev-guide.rust-lang.org/codegen/implicit-caller-location.html)
 
 ```rust
 // ✅ #[track_caller] 使 panic 报告调用者位置
@@ -1897,7 +1897,7 @@ impl AppError {
 | 普通函数 | ✅ 稳定 | Rust 1.46+ |
 | 泛型（Generics）函数 | ✅ 稳定 | 单态化（Monomorphization）后隐式参数正确传递 |
 | `const fn` | ✅ 稳定 | 编译期错误定位 |
-| trait 方法 | ✅ 稳定 | [RFC 2091](https://rust-lang.github.io/rfcs//2091-inline-semantic.html) 最初因 MIR 传递时机限制而禁止；后实现改为 monomorphization 之后注入，解除限制 [rustc-dev-guide — track_caller in traits](https://rustc-dev-guide.rust-lang.org/codegen/implicit-caller-location.html) |
+| trait 方法 | ✅ 稳定 | [RFC 2091](https://rust-lang.github.io/rfcs//2091-inline-semantic.html) 最初因 MIR 传递时机限制而禁止；后实现改为 monomorphization 之后注入，解除限制 [rustc-dev-guide — track_caller in traits](https://web.archive.org/web/*/https://rustc-dev-guide.rust-lang.org/codegen/implicit-caller-location.html) |
 | `async fn` | ⚠️ 部分支持 | Stable 上为 **no-op**（编译通过但 `Location::caller()` 返回 async fn 自身位置）；完整支持需 nightly `#![feature(async_fn_track_caller)]`（Tracking: [rust-lang/rust#110011]） |
 | 闭包（Closures） | ❌ 不稳定 | 需 nightly `#![feature(closure_track_caller)]`（Tracking: [rust-lang/rust#87417]） |
 | `dyn Fn()` / 函数指针 | ❌ 不支持 | 动态分发无法传递隐式 `Location` 参数；通过 trait object 调用时丢失 caller 信息 |

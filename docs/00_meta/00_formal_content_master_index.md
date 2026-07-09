@@ -67,7 +67,7 @@
 |------|------|------|
 | ⭐⭐ 通用基础 | [`research_notes/type_theory/`](../research_notes/type_theory) | 类型系统基础、方差、常量求值 |
 | ⭐⭐⭐ Rust 特定 | [`rust-ownership-decidability/01-core-concepts/`](../../archive/rust-ownership-decidability/01-core-concepts) | Rust 类型系统的形式化语义 |
-| ⭐⭐⭐ 前沿特性 | [`rust-ownership-decidability/08-advanced-topics/`](../../archive/rust-ownership-decidability/08-advanced-topics) | 常量泛型、异步 Rust、过程宏 |
+| ⭐⭐⭐ 前沿特性 | [`rust-ownership-decidability/08-advanced-topics/`](../../archive/rust-ownership-decidability/08-advanced-topics) | 常量泛型、异步（Async） Rust、过程宏（Procedural Macro） |
 
 **建议**: 类型理论通用基础读 `research_notes/`，Rust 特定深入读 `rust-ownership-decidability/`。
 

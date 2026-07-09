@@ -73,13 +73,13 @@
 | :--- | :--- | :--- | :--- |
 | 1 | 语法 / 类型 / 控制流 | ✅ 完整 | 100% |
 | 2 | Ownership / Borrowing / Lifetimes | ✅ 完整 | 100% |
-| 3 | Structs / Enums / 模式匹配 | ✅ 完整 | 100% |
-| 4 | 模块 / Crates | ✅ 完整 | 100% |
+| 3 | Structs / Enums / 模式匹配（Pattern Matching） | ✅ 完整 | 100% |
+| 4 | 模块（Module） / Crates | ✅ 完整 | 100% |
 | 5 | 集合 / 字符串 | ✅ 完整 | 100% |
-| 6 | 错误处理 | ✅ 完整 | 100% |
-| 7 | Traits / 泛型 | ✅ 完整 | 100% |
+| 6 | 错误处理（Error Handling） | ✅ 完整 | 100% |
+| 7 | Traits / 泛型（Generics） | ✅ 完整 | 100% |
 | 8 | 测试 | ✅ 完整 | 100% |
-| 9 | 闭包 / 迭代器 / Smart Pointers | ⚠️ 部分 | 85% |
+| 9 | 闭包（Closures） / 迭代器 / Smart Pointers | ⚠️ 部分 | 85% |
 | 10 | 并发（线程 / 通道 / async） | ⚠️ 部分 | 90% |
 
 ---
@@ -383,7 +383,7 @@
 | Send / Sync | `crates/c04_generic/src/trait_bound/send.rs` | 线程安全标记 trait | ✅ |
 | async/await | `crates/c06_async/src/await/` | 基础语法 | ✅ |
 | Future | `crates/c06_async/src/futures/` | Future trait 与执行器 | ✅ |
-| Tokio | `crates/c06_async/src/tokio/` | 运行时、任务、通道 | ✅ |
+| Tokio | `crates/c06_async/src/tokio/` | 运行时（Runtime）、任务、通道 | ✅ |
 | Stream | `crates/c06_async/src/streams/` | 异步流处理 | ✅ |
 | 并行算法 | `crates/c05_threads/src/paralelism/` | Rayon、SIMD | ✅ |
 | 无锁数据结构 | `crates/c05_threads/src/lockfree/` | 高级并发 | ✅ |

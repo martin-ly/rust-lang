@@ -6,7 +6,7 @@
 > **Bloom 层级**: L2 (理解)
 >
 > **层次定位**: L1-L3 基础-高级 / 编译器诊断参考
-> **前置依赖**: [docs 核心概念](../01_core/README.md) · [concept L1 所有权](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> **前置依赖**: [docs 核心概念](../01_core/README.md) · [concept L1 所有权（Ownership）](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **后置延伸**: [docs 性能调优](../05_guides/05_performance_tuning_guide.md) · [concept L3 Unsafe](../../concept/03_advanced/02_unsafe/03_unsafe.md)
 > **跨层映射**: docs→concept 诊断映射 | L1-L3 错误→概念
 > **定理链编号**: E0502 ↔ T-010 | E0597 ↔ T-011
@@ -149,7 +149,7 @@
 | 错误码范围 | 类别 | 常见错误码 |
 |:---|:---|:---|
 | E01xx | 语法错误 | E0106, E0107 |
-| E02xx | 类型系统 | E0201, E0277, E0282, E0283, E0308 |
+| E02xx | 类型系统（Type System） | E0201, E0277, E0282, E0283, E0308 |
 | E03xx | 所有权与借用 | E0310, E0381, E0382, E0383, E0384 |
 | E04xx | 借用检查 | E0499, E0502, E0503, E0505, E0506, E0507 |
 | E05xx | 生命周期与类型 | E0596, E0597, E0599, E0609 |
@@ -1260,7 +1260,7 @@ fn main() {
 
 **相关概念**:
 
-- [模式匹配](../../crates/c03_control_fn/docs/tier_02_guides/04_pattern_matching_guide.md)
+- [模式匹配（Pattern Matching）](../../crates/c03_control_fn/docs/tier_02_guides/04_pattern_matching_guide.md)
 - [穷尽性检查](../../crates/c03_control_fn/docs/tier_04_advanced/01_advanced_pattern_matching.md)
 
 ---
@@ -1947,7 +1947,7 @@ fn make_closure_static() -> impl Fn() -> i32 {
 
 **相关概念**:
 
-- [闭包](../../crates/c03_control_fn/docs/tier_03_references/04_closures_reference.md)
+- [闭包（Closures）](../../crates/c03_control_fn/docs/tier_03_references/04_closures_reference.md)
 - [move 闭包](../../crates/c05_threads/docs/tier_02_guides/01_thread_basics_and_lifetimes.md)
 
 ---
@@ -2490,7 +2490,7 @@ fn main() {
 |:---|:---|:---|:---|
 | **E0106** | 缺少生命周期标注 | 添加 `'a` 生命周期参数 | 生命周期标注 |
 | **E0277** | Trait 未实现 | 添加 `impl Trait` 或修改 bound | Trait 系统 |
-| **E0282** | 类型无法推断 | 添加类型标注 `let x: T` | 类型推断 |
+| **E0282** | 类型无法推断 | 添加类型标注 `let x: T` | 类型推断（Type Inference） |
 | **E0308** | 类型不匹配 | 类型转换或修正声明 | 类型系统 |
 | **E0381** | 使用未初始化变量 | 初始化变量 `let x = value` | 变量初始化 |
 | **E0382** | 使用已移动的值 | 使用引用 `.clone()` 或重构 | 移动语义 |
@@ -2539,7 +2539,7 @@ fn main() {
 |:---|:---|:---|
 | 所有权 | `quick_reference/02_ownership_cheatsheet.md` | 所有权规则速查 |
 | 类型系统 | `quick_reference/02_type_system.md` | 类型相关速查 |
-| 错误处理 | `quick_reference/02_error_handling_cheatsheet.md` | 错误处理模式 |
+| 错误处理（Error Handling） | `quick_reference/02_error_handling_cheatsheet.md` | 错误处理模式 |
 | 生命周期 | `quick_reference/lifetimes_cheatsheet.md` | 生命周期速查 |
 
 ### 官方资源 {#官方资源}

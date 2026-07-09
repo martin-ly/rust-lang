@@ -47,7 +47,7 @@
 
 本文档定位 `exercises/src/algorithms/` 算法专项练习的入口说明，配套代码位于 [`exercises/src/algorithms/`](../../exercises/src/algorithms) 目录。
 练习采用"函数骨架 + 参考实现 + 单元测试"的形式，覆盖排序、搜索、图论、动态规划与经典数据结构五大主题，
-帮助学习者在 Rust 1.96.1+ 环境中掌握算法实现与所有权、借用、泛型等 Rust 特性的结合。
+帮助学习者在 Rust 1.96.1+ 环境中掌握算法实现与所有权、借用（Borrowing）、泛型等 Rust 特性的结合。
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
@@ -126,7 +126,7 @@
 ## 四、学习路径 {#四学习路径}
 
 1. **阶段 1：排序与搜索**（L2-L3）
-   - 先完成 `sorting.rs` 与 `searching.rs`，熟悉递归、切片、索引边界处理。
+   - 先完成 `sorting.rs` 与 `searching.rs`，熟悉递归、切片（Slice）、索引边界处理。
 2. **阶段 2：数据结构**（L2-L4）
    - 实现 `LruCache`、`Trie`、`UnionFind` 等，练习泛型、生命周期与自定义结构体。
 3. **阶段 3：图论**（L3-L4）
@@ -142,7 +142,7 @@
 
 ### P0 — Rust 官方文档 {#p0-rust-官方文档}
 
-- [The Rust Programming Language](https://doc.rust-lang.org/book/) — 所有权、借用、泛型、Trait
+- [The Rust Programming Language](https://doc.rust-lang.org/book/) — 所有权（Ownership）、借用、泛型（Generics）、Trait
 - [Rust Reference](https://doc.rust-lang.org/reference/) — 语言语义与标准库约定
 - [Rust By Example](https://doc.rust-lang.org/rust-by-example/) — 可运行示例与惯用法
 - [The Rustonomicon](https://doc.rust-lang.org/nomicon/) — Unsafe 与高级内存模型

@@ -213,7 +213,7 @@ let s: &'static str = "我是字符串字面量，存储在二进制中";
 |------|------|------|
 | 标量 | `i32`, `u64`, `f32`, `bool`, `char` | 单一值 |
 | 复合 | `[T; N]`, `(T, U)`, `struct`, `enum` | 组合多个值 |
-| 引用 | `&T`, `&mut T` | 借用 |
+| 引用 | `&T`, `&mut T` | 借用（Borrowing） |
 | 指针 | `*const T`, `*mut T` | 裸指针（unsafe） |
 | 函数 | `fn(T) -> U` | 函数指针 |
 | trait 对象 | `dyn Trait` | 动态分发 |
@@ -254,7 +254,7 @@ fn notify<T: Summary>(item: &T) {
 
 | 错误类型 | C/C++ 状态 | Rust 防护 |
 |---------|-----------|----------|
-| 使用已释放内存 (UAF) | 常见漏洞 | ✅ 所有权+Drop 防止 |
+| 使用已释放内存 (UAF) | 常见漏洞 | ✅ 所有权（Ownership）+Drop 防止 |
 | 双重释放 | 常见漏洞 | ✅ 所有权唯一性防止 |
 | 缓冲区溢出 | 常见漏洞 | ✅ 边界检查+借用检查防止 |
 | 数据竞争 | 常见漏洞 | ✅ 借用规则防止 |
@@ -288,7 +288,7 @@ unsafe {
 | Type Safety | [Type safety](https://en.wikipedia.org/wiki/Type_safety) | 编译期排除未定义行为 | Borrow checker |
 | RAII | [Resource acquisition is initialization](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) | 构造获取、析构释放 | `Drop` + ownership |
 | Pattern Matching | [Pattern matching](https://en.wikipedia.org/wiki/Pattern_matching) | 解构与绑定 | `match`, `if let` |
-| Zero-cost Abstraction | [Zero-overhead principle](https://en.wikipedia.org/wiki/Zero-overhead_principle) | 高级特性不引入运行时开销 | 迭代器、泛型 Monomorphization |
+| Zero-cost Abstraction | [Zero-overhead principle](https://en.wikipedia.org/wiki/Zero-overhead_principle) | 高级特性不引入运行时开销 | 迭代器、泛型（Generics） Monomorphization |
 
 ---
 
@@ -322,7 +322,7 @@ unsafe {
 ## 相关链接 {#相关链接}
 
 - [c01_ownership_borrow_scope](../../crates/c01_ownership_borrow_scope) - 所有权 crate 深度示例
-- [c02_type_system](../../crates/c02_type_system) - 类型系统 crate
+- [c02_type_system](../../crates/c02_type_system) - 类型系统（Type System） crate
 - [c03_control_fn](../../crates/c03_control_fn) - 控制流与函数
 - [The Rust Book - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 - [The Rustonomicon](https://doc.rust-lang.org/nomicon/)

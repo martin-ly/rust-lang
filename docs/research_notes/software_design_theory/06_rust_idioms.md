@@ -91,7 +91,7 @@
 
 | 层次 | 内容 | 先修 |
 | :--- | :--- | :--- |
-| **L1 基础** | RAII、Newtype | 所有权、类型系统 |
+| **L1 基础** | RAII、Newtype | 所有权（Ownership）、类型系统（Type System） |
 | **L2 进阶** | 类型状态、Error handling | L1 |
 | **L3 扩展** | Cow、Option/Result 模式、Builder 变体 | L2 |
 
@@ -204,7 +204,7 @@ let m = Mutex::new(0);
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**Def NW1（Newtype）**：单字段包装类型，零成本抽象；`struct Newtype(T)`；`repr(transparent)` 保证布局与 `T` 一致。
+**Def NW1（Newtype）**：单字段包装类型，零成本抽象（Zero-Cost Abstraction）；`struct Newtype(T)`；`repr(transparent)` 保证布局与 `T` 一致。
 
 **Axiom NW1**：Newtype 与底层类型布局相同；无运行时开销；类型层面区分语义。
 
@@ -679,7 +679,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

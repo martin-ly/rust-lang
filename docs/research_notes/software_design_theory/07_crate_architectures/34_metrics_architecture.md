@@ -45,7 +45,7 @@
 
 | 维度 | 设计选择 | 工程价值 |
 |:--|:--|:--|
-| **API 形态** | 过程宏 + 句柄类型（`Counter`/`Gauge`/`Histogram`） | 代码侵入性低，无需全局可变状态 |
+| **API 形态** | 过程宏（Procedural Macro） + 句柄类型（`Counter`/`Gauge`/`Histogram`） | 代码侵入性低，无需全局可变状态 |
 | **后端解耦** | `Recorder` trait | 同一业务代码可在测试、本地 Prometheus、云监控之间切换 |
 | **零成本默认** | 未安装 Recorder 时使用 noop recorder | 库可无负担埋点，不引入运行时开销 |
 | **Key / Labels** | `Key` 组合名称与标签，`Label` 为字符串键值 | 支持高基数标签，但建议由 Recorder 过滤 |
@@ -141,8 +141,8 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 | 指标类型分离 | `Counter` / `Gauge` / `Histogram` 句柄 | 编译期防止对 histogram 调用 `increment` 等非法操作 |
 | 键名静态化 | 宏接受 `&'static str` 名称 | 鼓励使用常量/静态键名，避免运行时构造 |
 | 标签有序 | `Key` 保持标签插入顺序 | 相同标签集合以相同顺序构造时才等价 |
-| Recorder 单例 | `set_global_recorder` / `install` | 类型系统 + 运行时共同保证全局唯一 |
-| 零成本抽象 | 无 Recorder 时为原子 load + compare | 不对未启用指标的场景引入额外开销 |
+| Recorder 单例 | `set_global_recorder` / `install` | 类型系统（Type System） + 运行时共同保证全局唯一 |
+| 零成本抽象（Zero-Cost Abstraction） | 无 Recorder 时为原子 load + compare | 不对未启用指标的场景引入额外开销 |
 
 > [来源: [metrics API docs](https://docs.rs/metrics/latest/metrics/)]
 
@@ -157,7 +157,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 | 高基数标签使用动态值 | 内存与导出成本爆炸、查询变慢 | 将用户 ID、IP 等放入 tracing 日志或低采样指标 |
 | 对 gauge 使用 `increment` 理解错误 | Gauge 不是 counter，语义混乱 | 外部测量值用 `set`，自增计数用 counter |
 | 未安装 Recorder 就期望指标被收集 | 指标静默丢失 | 在 `main` 最早阶段安装 exporter |
-| 重复安装全局 Recorder | 运行时 panic 或后续安装被忽略 | 保证只调用一次 `install` |
+| 重复安装全局 Recorder | 运行时（Runtime） panic 或后续安装被忽略 | 保证只调用一次 `install` |
 | 标签顺序不一致 | 同一指标被 Recorder 视为不同时间序列 | 固定标签构造顺序 |
 | histogram 使用非秒单位未说明 | Prometheus 等后端单位混乱 | 使用 `Unit::Seconds` 等语义单位，或在名称中体现 |
 | 指标名称含非法字符 | 某些 exporter 会替换为下划线 | 遵循 snake_case，避免特殊字符 |

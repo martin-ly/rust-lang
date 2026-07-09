@@ -56,11 +56,11 @@
 
 | 节点 | 说明 | 主文档 |
 |------|------|--------|
-| 资源管理 | 所有权、借用、生命周期共同解决的核心问题 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) |
+| 资源管理 | 所有权（Ownership）、借用（Borrowing）、生命周期共同解决的核心问题 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) |
 | 类型安全 | 编译期保证程序行为的类型系统目标 | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) |
-| 并发安全 | 多线程/异步执行中的数据竞争自由 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) |
-| 内存安全 | 无 UB、无悬垂指针、无数据竞争 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) |
-| 抽象能力 | 泛型、Trait、模块、宏等组合抽象机制 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) |
+| 并发安全（Concurrency Safety） | 多线程/异步执行中的数据竞争自由 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) |
+| 内存安全（Memory Safety） | 无 UB、无悬垂指针、无数据竞争 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) |
+| 抽象能力 | 泛型（Generics）、Trait、模块（Module）、宏等组合抽象机制 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) |
 | 权威来源对齐 | 项目概念与国际化权威来源的映射与追溯 | [10_authoritative_source_alignment_network.md](10_authoritative_source_alignment_network.md) |
 
 ### L2 核心概念族 {#l2-核心概念族}
@@ -71,7 +71,7 @@
 | 借用 | L2 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) / [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
 | 生命周期 | L2 | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) / [formal_methods/10_lifetime_formalization.md](formal_methods/10_lifetime_formalization.md) | [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
 | 型变 | L2 | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) |
-| 类型系统 | L2 | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | [type_theory/60_type_system_counterexamples.md](type_theory/60_type_system_counterexamples.md) / [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
+| 类型系统（Type System） | L2 | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | [type_theory/60_type_system_counterexamples.md](type_theory/60_type_system_counterexamples.md) / [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
 | Trait | L2 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | [type_theory/60_type_system_counterexamples.md](type_theory/60_type_system_counterexamples.md) / [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
 | Send/Sync | L2 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) / [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
 | Future / async/await | L2 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) / [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
@@ -115,7 +115,7 @@
 | Copy / Drop 互斥 | 类型系统 / 资源语义 | L3 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | [type_theory/60_type_system_counterexamples.md](type_theory/60_type_system_counterexamples.md) §7 |
 | `Send` / `Sync` | 并发安全 | L3 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §1-§2 |
 | `Mutex` / `RwLock` | 并发安全 | L3 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §3 |
-| `Future` / `poll` | 异步 | L3-L4 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §7 |
+| `Future` / `poll` | 异步（Async） | L3-L4 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §7 |
 | `Pin` 契约 | 异步 / 自引用 | L3-L4 | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §5 |
 | 裸指针 | unsafe / 内存 | L3 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §1-§2 |
 | `unsafe impl` | unsafe / 并发 | L3 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §5 |
@@ -144,7 +144,7 @@
 | Sliding Window | 限流算法 | L4 | [software_design_theory/05_distributed/09_rate_limiting_idempotency_pattern.md](software_design_theory/05_distributed/09_rate_limiting_idempotency_pattern.md) | [software_design_theory/05_distributed/09_rate_limiting_idempotency_pattern.md](software_design_theory/05_distributed/09_rate_limiting_idempotency_pattern.md) §4 Rust 实现示例 |
 | Redis / redis-rs | Crate 架构 / 缓存 / 消息 / 分布式协调 | L3-L5 | [software_design_theory/07_crate_architectures/22_redis_architecture.md](software_design_theory/07_crate_architectures/22_redis_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
 | MongoDB / mongodb-rust-driver | Crate 架构 / 文档数据库 / NoSQL / 异步数据访问 | L3-L5 | [software_design_theory/07_crate_architectures/23_mongodb_architecture.md](software_design_theory/07_crate_architectures/23_mongodb_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
-| regex / regex crate | Crate 架构 / 文本处理 / 模式匹配 / 验证 | L3-L5 | [software_design_theory/07_crate_architectures/24_regex_architecture.md](software_design_theory/07_crate_architectures/24_regex_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
+| regex / regex crate | Crate 架构 / 文本处理 / 模式匹配（Pattern Matching） / 验证 | L3-L5 | [software_design_theory/07_crate_architectures/24_regex_architecture.md](software_design_theory/07_crate_architectures/24_regex_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
 | chrono | Crate 架构 / 日期时间 / 时区 / Duration | L3-L5 | [software_design_theory/07_crate_architectures/25_chrono_architecture.md](software_design_theory/07_crate_architectures/25_chrono_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
 | Kafka / rdkafka | Crate 架构 / 消息队列 / 流处理 / 分布式 / 异步 | L3-L5 | [software_design_theory/07_crate_architectures/26_kafka_architecture.md](software_design_theory/07_crate_architectures/26_kafka_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
 | kube-rs / Kubernetes | Crate 架构 / 云原生 / Kubernetes / 分布式 / 异步 / 控制器模式 | L3-L5 | [software_design_theory/07_crate_architectures/27_kube_rs_architecture.md](software_design_theory/07_crate_architectures/27_kube_rs_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
@@ -161,7 +161,7 @@
 | Salvo | Crate 架构 / Web 框架 / 异步 / HTTP | L3-L5 | [software_design_theory/07_crate_architectures/39_salvo_architecture.md](software_design_theory/07_crate_architectures/39_salvo_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
 | ntex | Crate 架构 / Web 框架 / 可组合网络服务 / 异步 | L3-L5 | [software_design_theory/07_crate_architectures/40_ntex_architecture.md](software_design_theory/07_crate_architectures/40_ntex_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
 | Askama | Crate 架构 / 模板引擎 / HTML 渲染 / 编译期生成 | L3-L5 | [software_design_theory/07_crate_architectures/41_askama_architecture.md](software_design_theory/07_crate_architectures/41_askama_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
-| Maud | Crate 架构 / 模板引擎 / HTML DSL / 过程宏 | L3-L5 | [software_design_theory/07_crate_architectures/42_maud_architecture.md](software_design_theory/07_crate_architectures/42_maud_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
+| Maud | Crate 架构 / 模板引擎 / HTML DSL / 过程宏（Procedural Macro） | L3-L5 | [software_design_theory/07_crate_architectures/42_maud_architecture.md](software_design_theory/07_crate_architectures/42_maud_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
 | GUI / 跨平台 UI | Crate 架构 / GUI / 跨平台 UI / 桌面 / Web / 原生 | L3-L5 | [software_design_theory/07_crate_architectures/29_gui_cross_platform_ui_architecture.md](software_design_theory/07_crate_architectures/29_gui_cross_platform_ui_architecture.md) | [software_design_theory/07_crate_architectures/29_gui_cross_platform_ui_architecture.md](software_design_theory/07_crate_architectures/29_gui_cross_platform_ui_architecture.md) §4 |
 | LRU/LFU/ARC/CLOCK/W-TinyLFU | 算法 / 缓存策略 | L3-L5 | [10_cache_eviction_policies_guide.md](10_cache_eviction_policies_guide.md) | [10_cache_eviction_policies_guide.md](10_cache_eviction_policies_guide.md) §反例边界 |
 | Treiber Stack | 并发安全 / 无锁数据结构 | L4-L5 | [10_lock_free_data_structures_guide.md](10_lock_free_data_structures_guide.md) | [10_lock_free_data_structures_guide.md](10_lock_free_data_structures_guide.md) §七反例边界 |
@@ -208,7 +208,7 @@
 | 性能与测试权威来源对齐 | 权威来源对齐 / 性能 / 测试 | L0-L5 | [10_performance_and_testing_alignment.md](10_performance_and_testing_alignment.md) | [experiments/60_experiments_counterexamples.md](experiments/60_experiments_counterexamples.md) |
 | 宏/FFI/嵌入式生态权威来源对齐 | 权威来源对齐 / 宏 / FFI / 嵌入式 | L0-L5 | [10_macros_ffi_embedded_alignment.md](10_macros_ffi_embedded_alignment.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) / [crates/c13_embedded/README.md](../../crates/c13_embedded/README.md) |
 | 学术资源对齐索引 | 权威来源对齐 / 学术资源 | L0-L6 | [10_academic_papers_alignment.md](10_academic_papers_alignment.md) | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) |
-| 错误处理与网络/Web 生态权威来源对齐 | 权威来源对齐 / 错误处理 / 网络 / Web | L0-L5 | [10_error_handling_network_web_alignment.md](10_error_handling_network_web_alignment.md) | [10_error_handling_cheatsheet.md](10_error_handling_cheatsheet.md) / [crates/c10_networks/README.md](../../crates/c10_networks/README.md) |
+| 错误处理与网络/Web 生态权威来源对齐 | 权威来源对齐 / 错误处理（Error Handling） / 网络 / Web | L0-L5 | [10_error_handling_network_web_alignment.md](10_error_handling_network_web_alignment.md) | [10_error_handling_cheatsheet.md](10_error_handling_cheatsheet.md) / [crates/c10_networks/README.md](../../crates/c10_networks/README.md) |
 | 数据库、存储与云原生生态权威来源对齐 | 权威来源对齐 / 数据库 / 存储 / 云原生 | L0-L5 | [10_database_storage_cloud_alignment.md](10_database_storage_cloud_alignment.md) | [crates/c10_networks/README.md](../../crates/c10_networks/README.md) |
 | CI/CD 与供应链安全权威来源对齐 | 权威来源对齐 / CI/CD / 供应链安全 | L0-L4 | [10_cicd_supply_chain_alignment.md](10_cicd_supply_chain_alignment.md) | [.github/workflows/ci.yml](../../.github/workflows/ci.yml) |
 | 权威来源缺口与反向追溯索引 | 权威来源对齐 / 缺口分析 / 反向追溯 | L0-L7 | [10_authoritative_source_gap_and_backref_index.md](10_authoritative_source_gap_and_backref_index.md) | [10_authoritative_alignment_gap_matrix.md](10_authoritative_alignment_gap_matrix.md) / [10_authoritative_alignment_gap_analysis.md](10_authoritative_alignment_gap_analysis.md) |
@@ -238,7 +238,7 @@
 |------|----------|-------------|----------|----------|
 | ≡ | 等价 | `equivalent_to` / `aligns_to` | 两概念语义可互换，或项目概念与权威来源对齐 | `Future` ≡ `async/await` |
 | ⇒ | 蕴含 | `implies` | A 成立必然导致 B 成立 | 所有权 ⇒ 移动语义 |
-| ⊥ | 互斥 | `contradicts` | 同一上下文中不能同时成立 | 共享借用 ⊥ 可变借用 |
+| ⊥ | 互斥 | `contradicts` | 同一上下文中不能同时成立 | 共享借用 ⊥ 可变借用（Mutable Borrow） |
 | ∘ | 组合 | `composes_with` / `depends_on` | A 与 B 组合形成新概念，或 A 的实现依赖 B | `Mutex ∘ Arc` ⇒ 线程安全共享可变 |
 | ⊂ | 层次/精化 | `refines` / `hierarchical` | A 是 B 的子集、特例或更精化的模型 | 移动语义 ⊂ 所有权 |
 
@@ -420,7 +420,7 @@
 | refines | Degrade | 分布式模式 | 降级是分布式韧性模式的精化形式 | [software_design_theory/05_distributed/08_fallback_pattern.md](software_design_theory/05_distributed/08_fallback_pattern.md) |
 | depends_on | Fallback | 独立回退源 | 回退结果不能依赖主路径的失败域 | [software_design_theory/05_distributed/08_fallback_pattern.md](software_design_theory/05_distributed/08_fallback_pattern.md) |
 | contradicts | Fallback 共享失败域 | 失败隔离 | fallback 仍访问主依赖会导致级联失败 | [software_design_theory/05_distributed/08_fallback_pattern.md](software_design_theory/05_distributed/08_fallback_pattern.md) §反例 1 |
-| depends_on | 排序算法 | 切片 / 索引 / 递归 | 排序实现依赖 Rust 切片、索引与递归控制 | [exercises/src/algorithms/sorting.rs](../../exercises/src/algorithms/sorting.rs) / P0: [TRPL – Slices](https://doc.rust-lang.org/book/ch04-03-slices.html) |
+| depends_on | 排序算法 | 切片（Slice） / 索引 / 递归 | 排序实现依赖 Rust 切片、索引与递归控制 | [exercises/src/algorithms/sorting.rs](../../exercises/src/algorithms/sorting.rs) / P0: [TRPL – Slices](https://doc.rust-lang.org/book/ch04-03-slices.html) |
 | depends_on | 搜索算法 | 切片 / 队列 / DFS/BFS | 搜索实现依赖切片、标准库队列与图遍历模板 | [exercises/src/algorithms/searching.rs](../../exercises/src/algorithms/searching.rs) / P0: [std::collections::VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) |
 | depends_on | 图论算法 | 优先队列 / 并查集 | Dijkstra 依赖 BinaryHeap；Kruskal/环检测依赖并查集 | [exercises/src/algorithms/graph.rs](../../exercises/src/algorithms/graph.rs) / P0: [std::collections::BinaryHeap](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html) |
 | depends_on | 动态规划 | 迭代 / 滚动数组 | DP 实现依赖 Rust 迭代器与滚动数组空间优化 | [exercises/src/algorithms/dynamic_programming.rs](../../exercises/src/algorithms/dynamic_programming.rs) / P0: [TRPL – Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) |

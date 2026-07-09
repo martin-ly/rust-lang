@@ -2,7 +2,7 @@
 
 > **EN**: Advanced Types
 > **Summary**: 高级类型特性 Advanced Types. (stub/archive redirect)
-> **概念族**: 类型系统 / 高级类型
+> **概念族**: 类型系统（Type System） / 高级类型
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 > **内容分级**: [归档级]
 >
@@ -136,7 +136,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**const 泛型**: 允许使用常量值作为泛型参数，提供值级别的泛型能力。const 泛型允许类型依赖于编译时常量值。
+**const 泛型（Generics）**: 允许使用常量值作为泛型参数，提供值级别的泛型能力。const 泛型允许类型依赖于编译时常量值。
 
 **值级别泛型**: const 泛型扩展了类型系统的表达能力，允许类型依赖于常量值，而不仅仅是类型。
 
@@ -243,7 +243,7 @@ $$T : \text{Const} \to \text{Type}$$
 **const 泛型的优势**：
 
 1. **类型安全**：编译时检查常量值
-2. **零成本抽象**：编译时计算，无运行时开销
+2. **零成本抽象（Zero-Cost Abstraction）**：编译时计算，无运行时开销
 3. **表达能力**：支持更丰富的类型约束
 
 ### 依赖类型的理论基础 {#依赖类型的理论基础}
@@ -1170,7 +1170,7 @@ let reference = unsafe { item.assume_init_ref() };
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

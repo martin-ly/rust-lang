@@ -421,7 +421,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 | 高可用服务 | 监督树 | 自动故障恢复 |
 | 状态机实现 | 状态 Actor | 状态隔离，消息驱动 |
 | 事件溯源 | 持久化 Actor | 状态可重放 |
-| 工作流引擎 | Actor 编排 | 并发安全，可组合 |
+| 工作流引擎 | Actor 编排 | 并发安全（Concurrency Safety），可组合 |
 | 游戏服务器 | 实体 Actor | 每个玩家/实体独立 |
 | 实时聊天 | 路由器模式 | 负载均衡，广播 |
 | 任务队列 | 工作池 Actor | 背压控制，容错 |

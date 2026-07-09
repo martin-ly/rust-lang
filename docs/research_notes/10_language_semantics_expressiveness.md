@@ -74,7 +74,7 @@
 | **缺乏构造性语义** | 语言表达式的求值、存储、类型如何形式化定义 | 操作语义、指称语义、公理语义小节 |
 | **缺乏表达能力边界** | 何者可表达、何者不可表达、边界在哪里 | 表达能力边界论证、矩阵、反例 |
 | **语义归纳缺失** | 概念语义未归纳、总结未结构化 | 语义归纳表、概念族谱与语义对应 |
-| **无全局一致性** | 语义与类型系统、所有权、借用等模块的衔接 | 与 PROOF_INDEX、COMPREHENSIVE_OVERVIEW 交叉引用 |
+| **无全局一致性** | 语义与类型系统、所有权（Ownership）、借用等模块的衔接 | 与 PROOF_INDEX、COMPREHENSIVE_OVERVIEW 交叉引用 |
 
 ### 设计原则 {#设计原则}
 
@@ -177,7 +177,7 @@ $\Gamma \vdash e : \tau \land e \Downarrow v \Rightarrow \Gamma \vdash v : \tau$
 
 | 可表达 | 不可表达（或需 unsafe） | 边界论证 |
 | :--- | :--- | :--- |
-| 移动、复制、借用 | 绕过借用检查的裸指针混用 | 借用规则 5–8 强制；违反则编译错误 |
+| 移动、复制、借用（Borrowing） | 绕过借用检查的裸指针混用 | 借用规则 5–8 强制；违反则编译错误 |
 | 生命周期标注 | 无界生命周期（非 `'static`） | NLL 推断 + 显式标注；超域则拒绝 |
 | 泛型单态化 | 运行时类型擦除（如 Java） | 编译时单态化，无运行时类型信息 |
 | 类型状态机 | 运行时类型切换 | 类型在编译时固定，PhantomData 仅影响类型检查 |
@@ -232,7 +232,7 @@ Rust 的 `Result<T, E>` 对应构造性逻辑中的 $T \lor E$：可构造的要
 | 存在类型（`impl Trait`、dyn） | 完整依赖类型 | 受限 GAT；依赖类型需额外约束 |
 | 高阶类型（`Vec<T>`） | 无界高阶 | 类型构造子有限；无 type-level 计算 |
 | 线性/仿射类型（所有权） | 全息类型（可复制任意次） | 默认移动；Copy 需显式 |
-| 类型级常量（const 泛型） | 任意运行时值作类型参数 | 仅 const 表达式；见 [advanced_types](type_theory/10_advanced_types.md) |
+| 类型级常量（const 泛型（Generics）） | 任意运行时值作类型参数 | 仅 const 表达式；见 [advanced_types](type_theory/10_advanced_types.md) |
 
 ---
 
@@ -292,7 +292,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 | 维度 | 可表达 | 边界 | 不可表达 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- |
 | **内存** | 所有权、借用、RAII | 无 GC、无手动 malloc/free | 跨线程共享无同步 | [ownership_model](formal_methods/10_ownership_model.md) T2, T3 |
-| **类型** | 泛型、Trait、类型推断 | 无运行时类型反射 | 完整依赖类型 | [type_system_foundations](type_theory/10_type_system_foundations.md)、[advanced_types](type_theory/10_advanced_types.md) |
+| **类型** | 泛型、Trait、类型推断（Type Inference） | 无运行时类型反射 | 完整依赖类型 | [type_system_foundations](type_theory/10_type_system_foundations.md)、[advanced_types](type_theory/10_advanced_types.md) |
 | **并发** | Send/Sync、async、线程 | 数据竞争自由 | 无 GC 的共享可变 | [async_state_machine](formal_methods/10_async_state_machine.md) T6.2、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) T1 |
 | **异步** | Future、Pin、async/await | 有限 Future 终将 Ready | 无限延迟未标记 | [async_state_machine](formal_methods/10_async_state_machine.md) T6.3 |
 | **引用** | 生命周期、NLL | 引用不超被引用对象 | 无界引用 | lifetime_formalization T2 |
@@ -344,7 +344,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-**公理 EB0**：表达能力边界由类型系统、所有权、借用、生命周期、型变、异步、Pin 等机制共同定义；违反则编译错误或 UB。
+**公理 EB0**：表达能力边界由类型系统、所有权、借用、生命周期、型变、异步（Async）、Pin 等机制共同定义；违反则编译错误或 UB。
 
 | 定理 | 陈述 | 证明文档 |
 | :--- | :--- | :--- |
@@ -489,7 +489,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

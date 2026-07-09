@@ -25,7 +25,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-| 模块 | 入口路径 | 说明 |
+| 模块（Module） | 入口路径 | 说明 |
 | :--- | :--- | :--- |
 | **形式化方法** | [research_notes/formal_methods/](../../archive/research_notes_2026_06_25/formal_methods/README.md) | 所有权模型、借用检查器、生命周期、Pin、异步状态机 |
 | **类型理论** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型系统基础、Trait 形式化、型变理论、生命周期 |
@@ -130,7 +130,7 @@ fn render<T: Drawable>(item: T) {
 | **所有权模型** | [../research_notes/formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | 所有权系统的形式化定义与证明 |
 | **借用检查器** | [../research_notes/formal_methods/10_borrow_checker_proof.md](../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用检查的形式化正确性证明 |
 | **生命周期** | ../research_notes/formal_methods/10_lifetime_formalization.md | 生命周期的形式化模型 |
-| **类型系统** | [../research_notes/type_theory/10_type_system_foundations.md](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 类型理论基础 |
+| **类型系统（Type System）** | [../research_notes/type_theory/10_type_system_foundations.md](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 类型理论基础 |
 | **Trait 系统** | [../research_notes/type_theory/10_trait_system_formalization.md](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) | Trait 系统的形式化 |
 | **型变理论** | [../research_notes/type_theory/10_variance_theory.md](../research_notes/type_theory/10_variance_theory.md) | 型变规则与证明 |
 | **证明索引** | [../research_notes/10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) | 87+ 个形式化证明的完整索引 |

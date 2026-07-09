@@ -113,11 +113,11 @@
 
 | 关键词     | 相关研究笔记                                               | 状态    |
 | :--- | :--- | :--- |
-| 所有权     | [所有权模型形式化](formal_methods/10_ownership_model.md)    | ✅ 100% |
-| 借用       | [借用检查器证明](formal_methods/10_borrow_checker_proof.md) | ✅ 100% |
+| 所有权（Ownership）     | [所有权模型形式化](formal_methods/10_ownership_model.md)    | ✅ 100% |
+| 借用（Borrowing）       | [借用检查器证明](formal_methods/10_borrow_checker_proof.md) | ✅ 100% |
 | 借用检查器 | [借用检查器证明](formal_methods/10_borrow_checker_proof.md) | ✅ 100% |
 | 数据竞争   | [借用检查器证明](formal_methods/10_borrow_checker_proof.md) | ✅ 100% |
-| 内存安全   | [所有权模型形式化](formal_methods/10_ownership_model.md)    | ✅ 100% |
+| 内存安全（Memory Safety）   | [所有权模型形式化](formal_methods/10_ownership_model.md)    | ✅ 100% |
 
 ### 类型系统 {#类型系统-1}
 
@@ -127,13 +127,13 @@
 
 | 关键词     | 相关研究笔记                                                    | 状态    |
 | :--- | :--- | :--- |
-| 类型系统   | [类型系统基础](type_theory/10_type_system_foundations.md)        | ✅ 100% |
+| 类型系统（Type System）   | [类型系统基础](type_theory/10_type_system_foundations.md)        | ✅ 100% |
 | 类型构造能力 | [construction_capability](type_theory/10_construction_capability.md) | ✅ Def TCON1、矩阵、决策树 |
 | 核心特性完整链 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) | ✅ 13 项 Def→示例→论证→证明 |
 | 类型理论缺口 | [完备性缺口](formal_methods/00_completeness_gaps.md)           | ✅ 阶段 1–7 Def 占位 |
 | 形式化方法缺口 | [formal_methods 完备性缺口](formal_methods/00_completeness_gaps.md) | ✅ Phase 1–6 100% |
 | Trait      | [Trait 系统形式化](type_theory/10_trait_system_formalization.md) | ✅ 100% |
-| 泛型       | [高级类型特性](type_theory/10_advanced_types.md)                 | ✅ 100% |
+| 泛型（Generics）       | [高级类型特性](type_theory/10_advanced_types.md)                 | ✅ 100% |
 | GATs       | [高级类型特性](type_theory/10_advanced_types.md)                 | ✅ 100% |
 | const 泛型 | [高级类型特性](type_theory/10_advanced_types.md)                 | ✅ 100% |
 | 型变       | [型变理论](type_theory/10_variance_theory.md)                    | ✅ 100% |
@@ -161,13 +161,13 @@
 
 | 关键词      | 相关研究笔记                                                | 状态    |
 | :--- | :--- | :--- |
-| 异步        | [异步状态机形式化](formal_methods/10_async_state_machine.md) | ✅ 100% |
+| 异步（Async）        | [异步状态机形式化](formal_methods/10_async_state_machine.md) | ✅ 100% |
 | Future      | [异步状态机形式化](formal_methods/10_async_state_machine.md) | ✅ 100% |
 | async/await | [异步状态机形式化](formal_methods/10_async_state_machine.md) | ✅ 100% |
 | 并发        | [并发性能研究](experiments/10_concurrency_performance.md)    | ✅ 100% |
 | 执行确定性 | [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md) | ✅ Def EB-DET1、确定性判定树 |
 | 组件成熟度 | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) | ✅ Def CE-MAT1、L1–L4 |
-| 并发安全    | [异步状态机形式化](formal_methods/10_async_state_machine.md) | ✅ 100% |
+| 并发安全（Concurrency Safety）    | [异步状态机形式化](formal_methods/10_async_state_machine.md) | ✅ 100% |
 | Send/Sync   | [Send/Sync 形式化](formal_methods/10_send_sync_formalization.md)、[异步状态机形式化](formal_methods/10_async_state_machine.md)、[设计机制论证](10_design_mechanism_rationale.md) §Send/Sync | ✅ Def SEND1/SYNC1、SEND-T1/SYNC-T1；六篇并表 |
 | 安全可判定机制 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](10_safe_decidable_mechanisms_overview.md)、[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md) | ✅ 总览每机制一节；并发+Trait 族四维表；阶段 A–D 已完成 |
 | formal_methods 完备性 | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/10_formal_methods_completeness_checklist.md) | ✅ 六篇×六维自检（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类） |
@@ -196,7 +196,7 @@
 | :--- | :--- | :--- |
 | 宏       | [宏展开性能分析](experiments/10_macro_expansion_performance.md) | ✅ 100% |
 | 宏展开   | [宏展开性能分析](experiments/10_macro_expansion_performance.md) | ✅ 100% |
-| 过程宏   | [宏展开性能分析](experiments/10_macro_expansion_performance.md) | ✅ 100% |
+| 过程宏（Procedural Macro）   | [宏展开性能分析](experiments/10_macro_expansion_performance.md) | ✅ 100% |
 | 编译时间 | [宏展开性能分析](experiments/10_macro_expansion_performance.md) | ✅ 100% |
 
 ---

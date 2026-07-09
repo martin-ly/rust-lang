@@ -58,9 +58,9 @@
 
 | 成果 | 机构/作者 | 年份 | 形式化范围 | 证明助手/工具 | 与本项目对应 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **RustBelt** | MPI-SWS (Jung et al.) | 2018 | 所有权、借用、MIR 级 | Iris (Coq) | ownership_model, borrow_checker_proof, [coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)（T-OW2/BR1/TY3 骨架） |
+| **RustBelt** | MPI-SWS (Jung et al.) | 2018 | 所有权（Ownership）、借用（Borrowing）、MIR 级 | Iris (Coq) | ownership_model, borrow_checker_proof, [coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)（T-OW2/BR1/TY3 骨架） |
 | **Tree Borrows** | ETH (PLDI 2025) | 2025 | 借用模型、树结构、54% 更少拒绝 | Iris (Coq)、Rocq | borrow_checker_proof 演进；Distinguished Paper |
-| **RustBelt Meets Relaxed Memory** | MPI-SWS | 2020 | 松弛内存、Arc、原子操作 | Iris (Coq) | formal_methods Phase 4（部分） |
+| **RustBelt Meets Relaxed Memory** | MPI-SWS | 2020 | 松弛内存、Arc、原子操作（Atomic Operations） | Iris (Coq) | formal_methods Phase 4（部分） |
 | **Rust Distilled** | DBLP | - | 高层所有权、无生命周期 | - | ownership_model（高层部分） |
 | **Aeneas** | INRIA 等 | 2023+ | Safe Rust → Coq/F*/HOL4/Lean | 多后端 | [AENEAS_INTEGRATION_PLAN](10_aeneas_integration_plan.md) |
 | **coq-of-rust** | - | 2023+ | THIR → Rocq，借用与 effect | Rocq (Coq) | 无直接对应 |
@@ -68,7 +68,7 @@
 | **RustSEM** | 2024 (FMSD) | 2024 | 内存级 OBS、可执行语义、700+ 测试 | K-Framework | 无直接对应 |
 | **AutoVerus** | - | 2024–2025 | LLM 自动证明生成 | Verus | 无直接对应 |
 | **Verus** | MSR/CMU/ETH 等 | 2023 | Safe + 部分 unsafe 系统代码 | SMT（Z3） | `10_international_formal_verification_index.md` |
-| **Kani** | AWS/Model Checking | 2022+ | unsafe 代码属性、内存安全 | CBMC 模型检查 | `formal_methods/10_borrow_checker_proof.md`（CAV 工具） |
+| **Kani** | AWS/Model Checking | 2022+ | unsafe 代码属性、内存安全（Memory Safety） | CBMC 模型检查 | `formal_methods/10_borrow_checker_proof.md`（CAV 工具） |
 | **Prusti** | ETH Zurich | 2019–2022 | Safe Rust 功能正确性 | Viper / 分离逻辑 | `formal_methods/10_borrow_checker_proof.md` |
 | **Creusot** | Inria/Paris-Saclay | 2022 | Safe Rust + 部分 unsafe | Why3 / SMT | 无直接对应 |
 | **Miri** | Rust 官方 | 2017+ | MIR 解释、UB 动态检测 | 解释器 | `formal_methods/10_borrow_checker_proof.md` |
@@ -160,7 +160,7 @@
 - **覆盖范围**: 低层系统代码、并发原语、部分 unsafe 代码；使用 Z3 自动求解。
 - **与本项目 PROOF_INDEX 映射**:
   - 所有权/借用：对应 `ownership_model` 定理 5/6 的功能正确性扩展。
-  - 并发安全：对应 `send_sync_formalization` 中的 `Send`/`Sync` 规范。
+  - 并发安全（Concurrency Safety）：对应 `send_sync_formalization` 中的 `Send`/`Sync` 规范。
   - 线性 ghost 类型：对应 Axiom OW1 / Axiom BR1 的 ghost-state 扩展。
 - **差距**: 无 Verus 规范库的直接映射；无线性 ghost 类型在本项目形式化中的占位。
 
@@ -244,7 +244,7 @@
 | :--- | :--- | :--- |
 | 所有权与借用 | RustBelt, RustSEM | 部分（语言级有，内存级/机器证明无） |
 | 生命周期 | RustBelt（间接） | 部分 |
-| 类型系统 | RustBelt, Aeneas | 部分 |
+| 类型系统（Type System） | RustBelt, Aeneas | 部分 |
 | 异步与 Pin | - | 无国际直接对标 |
 | 松弛内存/原子 | RustBelt Meets Relaxed Memory | 未覆盖 |
 
@@ -284,7 +284,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

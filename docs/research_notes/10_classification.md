@@ -93,8 +93,8 @@
 
 | 主题域 | 子域 | 文档 |
 | :--- | :--- | :--- |
-| **内存与所有权** | 所有权、借用、智能指针、RAII | ownership_model、borrow_checker_proof、06_rust_idioms |
-| **类型系统** | 类型基础、Trait、型变、高级类型 | type_theory/ |
+| **内存与所有权** | 所有权（Ownership）、借用（Borrowing）、智能指针（Smart Pointer）、RAII | ownership_model、borrow_checker_proof、06_rust_idioms |
+| **类型系统（Type System）** | 类型基础、Trait、型变、高级类型 | type_theory/ |
 | **生命周期** | 区域、outlives、NLL | formal_methods/lifetime、type_theory/lifetime |
 | **并发与异步** | Future、Pin、Send/Sync、执行模型 | async_state_machine、pin_self_referential、03_execution_models |
 | **安全与 unsafe** | 边界、契约、UB、安全抽象 | SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS、05_boundary_system、07_anti_patterns |
@@ -113,7 +113,7 @@
 | :--- | :--- | :--- |
 | **形式化方法** | 6 | 00_completeness_gaps、ownership、borrow、async、lifetime、pin |
 | **类型理论** | 6 | 00_completeness_gaps、type_system、trait、lifetime、advanced、variance |
-| **软件设计理论** | 7 模块 | 01_design_patterns、02_workflow、03_execution、04_compositional、05_boundary、06_idioms、07_anti_patterns |
+| **软件设计理论** | 7 模块（Module） | 01_design_patterns、02_workflow、03_execution、04_compositional、05_boundary、06_idioms、07_anti_patterns |
 | **实验研究** | 5 | performance、memory、compiler、concurrency、macro |
 | **综合** | 2 | practical_applications、research_methodology |
 
@@ -131,7 +131,7 @@
 | 方向 | 当前 | 可扩展 |
 | :--- | :--- | :--- |
 | **设计模式** | GoF 23 + 扩展 20（43 完全） | Actor、CSP、事件溯源 |
-| **执行模型** | 同步/异步/并发/并行/分布式 | 更多运行时（rayon、actix） |
+| **执行模型** | 同步/异步（Async）/并发/并行/分布式 | 更多运行时（rayon、actix） |
 | **Rust 版本** | 1.93 为主 | 1.94+ 增量更新 |
 | **国际权威** | RustBelt、Stacked Borrows、Tree Borrows、FLS | 新论文、规范 |
 
@@ -207,7 +207,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

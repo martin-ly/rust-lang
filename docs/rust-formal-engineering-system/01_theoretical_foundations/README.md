@@ -12,7 +12,7 @@
 
 | 主题 | 链接 |
 | :--- | :--- |
-| 类型系统 | [type_theory/](../../research_notes/type_theory/README.md) |
+| 类型系统（Type System） | [type_theory/](../../research_notes/type_theory/README.md) |
 | 所有权与借用 | [formal_methods/](../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
 | 所有权模型 | [10_ownership_model.md](../../research_notes/formal_methods/10_ownership_model.md) |
 | 借用检查器 | [10_borrow_checker_proof.md](../../research_notes/formal_methods/10_borrow_checker_proof.md) |

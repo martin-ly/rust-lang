@@ -127,7 +127,7 @@
 ## 七、未覆盖缺口 {#七未覆盖缺口}
 
 1. 宏系统 RFC（macro hygiene、proc-macro）的论证链可进一步展开。
-2. const 泛型、const eval 相关 RFC 的动机与设计可补充。
+2. const 泛型（Generics）、const eval 相关 RFC 的动机与设计可补充。
 3. 每个 RFC 的「Alternatives」部分与项目中的设计模式反例可建立更多关联。
 
 > **权威来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/)

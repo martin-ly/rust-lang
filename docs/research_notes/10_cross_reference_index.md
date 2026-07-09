@@ -167,7 +167,7 @@
 | software_design_theory 子目录 | 正向链接 → | ← 反向链接来源 |
 | :--- | :--- | :--- |
 | [01_design_patterns_formal](software_design_theory/01_design_patterns_formal/README.md) | → [ownership_model](formal_methods/10_ownership_model.md) 所有权实现→ [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 借用模式→ [software_design_theory/05_boundary_system](software_design_theory/05_boundary_system/README.md) 安全边界 | ← [05_guides/DESIGN_PATTERNS_USAGE_GUIDE](../05_guides/05_design_patterns_usage_guide.md) 实践指南← [04_thinking/MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) 模式导图← 02_reference/quick_reference/design_patterns_cheatsheet.md 速查 |
-| [03_execution_models](software_design_theory/03_execution_models/README.md) | → [async_state_machine](formal_methods/10_async_state_machine.md) 异步形式化→ [send_sync_formalization](formal_methods/10_send_sync_formalization.md) 并发安全→ [software_design_theory/06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md) 边界分析 | ← [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/05_async_programming_usage_guide.md) 异步实践← [05_guides/THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/05_threads_concurrency_usage_guide.md) 并发实践← [02_reference/quick_reference/02_async_patterns.md](../02_reference/quick_reference/02_async_patterns.md) 速查 |
+| [03_execution_models](software_design_theory/03_execution_models/README.md) | → [async_state_machine](formal_methods/10_async_state_machine.md) 异步形式化→ [send_sync_formalization](formal_methods/10_send_sync_formalization.md) 并发安全（Concurrency Safety）→ [software_design_theory/06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md) 边界分析 | ← [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/05_async_programming_usage_guide.md) 异步实践← [05_guides/THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/05_threads_concurrency_usage_guide.md) 并发实践← [02_reference/quick_reference/02_async_patterns.md](../02_reference/quick_reference/02_async_patterns.md) 速查 |
 | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) | → [ownership_model](formal_methods/10_ownership_model.md) CE-T1依赖→ [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) CE-T2依赖→ [type_system_foundations](type_theory/10_type_system_foundations.md) CE-T3依赖 | ← [01_design_patterns_formal](software_design_theory/01_design_patterns_formal/README.md) 模式组合← [03_execution_models](software_design_theory/03_execution_models/README.md) 执行组合← [05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES](../05_guides/05_cross_module_integration_examples.md) 集成示例 |
 
 ### 速查卡 ↔ 指南/研究笔记 {#速查卡-指南研究笔记}
@@ -300,7 +300,7 @@
 
 | 定理 (源文档) | 被引用位置 | 引用用途 |
 | :--- | :--- | :--- |
-| **ownership_model:T3** (内存安全) | [04_compositional_engineering:CE-T1](software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md) | 组合有效性证明 |
+| **ownership_model:T3** (内存安全（Memory Safety）) | [04_compositional_engineering:CE-T1](software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md) | 组合有效性证明 |
 | :--- | :--- | :--- |
 | :--- | :--- | :--- |
 | **borrow_checker:T1** (数据竞争自由) | [04_compositional_engineering:CE-T2](software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md) | 组合有效性证明 |
@@ -499,13 +499,13 @@ graph TD
 
 > **来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
-本文档已完成权威国际化来源对齐升级：将泛化的 "Rust Official Docs" 替换为官方具体章节/模块/API 链接，并补充 P1 形式化来源对照。
+本文档已完成权威国际化来源对齐升级：将泛化的 "Rust Official Docs" 替换为官方具体章节/模块（Module）/API 链接，并补充 P1 形式化来源对照。
 
 #### 权威来源对齐 {#权威来源对齐}
 
 | 来源类型 | 具体链接 | 用途 |
 | :--- | :--- | :--- |
-| **The Rust Programming Language** | [所有权](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)、[借用](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)、[生命周期](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)、[Trait](https://doc.rust-lang.org/book/ch10-02-traits.html)、[并发](https://doc.rust-lang.org/book/ch16-00-concurrency.html)、[异步](https://doc.rust-lang.org/book/ch17-00-async-await.html)、[Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | 概念教学与场景解释 |
+| **The Rust Programming Language** | [所有权（Ownership）](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)、[借用（Borrowing）](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)、[生命周期](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)、[Trait](https://doc.rust-lang.org/book/ch10-02-traits.html)、[并发](https://doc.rust-lang.org/book/ch16-00-concurrency.html)、[异步（Async）](https://doc.rust-lang.org/book/ch17-00-async-await.html)、[Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | 概念教学与场景解释 |
 | **Rust Reference** | [引言](https://doc.rust-lang.org/reference/introduction.html)、[变量与所有权](https://doc.rust-lang.org/reference/variables.html)、[类型](https://doc.rust-lang.org/reference/types.html)、[Trait 项](https://doc.rust-lang.org/reference/items/traits.html)、[async 函数](https://doc.rust-lang.org/reference/items/functions.html#async-functions)、[Unsafe 块](https://doc.rust-lang.org/reference/unsafe-blocks.html) | 语言规范与精确语义 |
 | **Cargo Book** | [Cargo Book](https://doc.rust-lang.org/cargo/)、[Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html)、[依赖](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)、[Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html) | 构建、包与项目管理 |
 | **Rust Standard Library** | [std](https://doc.rust-lang.org/std/)、[Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)、[HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)、[Result](https://doc.rust-lang.org/std/result/enum.Result.html)、[Future](https://doc.rust-lang.org/std/future/trait.Future.html)、[Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)、[thread](https://doc.rust-lang.org/std/thread/)、[sync](https://doc.rust-lang.org/std/sync/) | API/模块级别参考 |
@@ -519,7 +519,7 @@ graph TD
 | :--- | :--- | :--- | :--- |
 | 所有权唯一性/内存安全 | ✓ 核心模型 | ✓ 可验证提取 | ✓ 规范 § 所有权 |
 | 借用/数据竞争自由 | ✓ 生命周期逻辑 | ✓ 借用检查验证 | ✓ 规范 § 借用 |
-| 类型系统/Trait | ✓ Iris 语义 | ✓ 类型系统提取 | ✓ 规范 § 类型 |
+| 类型系统（Type System）/Trait | ✓ Iris 语义 | ✓ 类型系统提取 | ✓ 规范 § 类型 |
 | 异步/Pin | ✓ 扩展模型 | 部分支持 | ✓ 规范 § 表达式 |
 
 #### 版本与生态更新 {#版本与生态更新}

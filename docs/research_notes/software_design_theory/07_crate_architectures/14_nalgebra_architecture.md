@@ -485,12 +485,12 @@ flowchart LR
 | 维度 | nalgebra / ndarray | NumPy |
 |:---|:---|:---|
 | **类型安全** | 编译期维度检查；元素类型严格 | 运行时维度检查；动态类型 (`dtype`) |
-| **所有权** | 显式所有权与生命周期；视图不拥有数据 | 引用计数 + GC；切片共享底层数据 |
+| **所有权（Ownership）** | 显式所有权与生命周期；视图不拥有数据 | 引用计数 + GC；切片共享底层数据 |
 | **广播规则** | ndarray 支持 NumPy 风格广播；nalgebra 更严格 | 灵活的广播规则 |
-| **性能** | 零成本抽象；可选 BLAS；无 GIL | 底层 C 优化；受 GIL 限制（多线程扩展有限） |
-| **错误处理** | 维度不匹配 = 编译错误（静态）或 `Result`（动态） | 运行时异常 (`ValueError`, `IndexError`) |
+| **性能** | 零成本抽象（Zero-Cost Abstraction）；可选 BLAS；无 GIL | 底层 C 优化；受 GIL 限制（多线程扩展有限） |
+| **错误处理（Error Handling）** | 维度不匹配 = 编译错误（静态）或 `Result`（动态） | 运行时异常 (`ValueError`, `IndexError`) |
 | **生态系统** | 较小但快速增长；ndarray 是 Rust ML 基础 | 极其成熟；SciPy, Pandas, scikit-learn 等 |
-| **可移植性** | 静态链接；无 Python 依赖；适合嵌入式 | 需要 Python 运行时；体积较大 |
+| **可移植性** | 静态链接；无 Python 依赖；适合嵌入式 | 需要 Python 运行时（Runtime）；体积较大 |
 | **学习曲线** | 需要掌握 Rust 泛型与生命周期 | 更平缓；动态类型降低入门门槛 |
 
 ### 6.1 代码对比示例 {#61-代码对比示例}

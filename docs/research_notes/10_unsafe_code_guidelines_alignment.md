@@ -70,7 +70,7 @@
 
 | UCG 主题 | 项目文档 | 状态 | 备注 |
 |-----------|----------|------|------|
-| [Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | ✅ | 并发安全 |
+| [Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | ✅ | 并发安全（Concurrency Safety） |
 | [Data Races](https://doc.rust-lang.org/nomicon/races.html) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §3 | ✅ | 数据竞争 |
 
 ---

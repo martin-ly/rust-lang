@@ -8,7 +8,7 @@
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 
-**模块**: C02 Type System
+**模块（Module）**: C02 Type System
 **创建日期**: 2026-05-12
 **最后更新**: 2026-05-12
 **Rust 版本**: 1.96.1+ (Edition 2024)
@@ -42,7 +42,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-本指南对应 `crates/c02_type_system`，涵盖 Rust 类型系统的核心概念与高级特性，包括基本类型、泛型、Trait、型变、模式匹配以及 Rust 1.95.0 的 `if let guards` 和 `use<..>` 精确捕获。
+本指南对应 `crates/c02_type_system`，涵盖 Rust 类型系统的核心概念与高级特性，包括基本类型、泛型（Generics）、Trait、型变、模式匹配以及 Rust 1.95.0 的 `if let guards` 和 `use<..>` 精确捕获。
 
 **前置知识**: [knowledge/01_fundamentals/](../../knowledge/01_fundamentals) 基础语法
 **速查卡**: [02_type_system.md](../02_reference/quick_reference/02_type_system.md)
@@ -229,9 +229,9 @@ fn main() {
 
 | 技术 | 说明 | 模块 |
 |------|------|------|
-| 单态化 | 泛型在编译时实例化，零运行时开销 | `type_class/` |
+| 单态化（Monomorphization） | 泛型在编译时实例化，零运行时开销 | `type_class/` |
 | 静态分派 | 使用泛型约束而非 `dyn Trait` | `performance_optimization.rs` |
-| 零成本抽象 | `PhantomData` 等零大小类型 | `type_transformation/` |
+| 零成本抽象（Zero-Cost Abstraction） | `PhantomData` 等零大小类型 | `type_transformation/` |
 | 内存对齐 | 自定义类型布局优化 | `primitive_types/sized_type.rs` |
 
 ---

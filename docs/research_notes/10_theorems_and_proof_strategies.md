@@ -266,7 +266,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 **步骤 3: 证明借用规则阻止数据竞争**
 
-**情况 A: 可变借用**
+**情况 A: 可变借用（Mutable Borrow）**
 
 ```
 如果线程T持有 &mut l:
@@ -278,7 +278,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 - 不存在并发访问，无数据竞争
 ```
 
-**情况 B: 不可变借用**
+**情况 B: 不可变借用（Immutable Borrow）**
 
 ```
 如果多个线程持有 &l:
@@ -433,7 +433,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 **Rust的扩展**:
 
 - 所有权系统扩展了类型安全
-- 不仅保证"不会stuck"，还保证"内存安全"
+- 不仅保证"不会stuck"，还保证"内存安全（Memory Safety）"
 
 ---
 
@@ -533,7 +533,7 @@ T: 'a  表示 T中所有引用都存活至少'a
 | :--- | :--- | :--- | :--- |
 | T-OW2 所有权唯一性 | 状态机归纳 | RustBelt Theorem 4.1 | 本项目用集合论状态机，RustBelt 用 Iris `own(b)` |
 | T-BR1 数据竞争自由 | 借用规则互斥 | RustBelt Theorem 5.2；Tree Borrows 权限树 | 概念一致，RustBelt 用分离逻辑，Tree Borrows 用状态机 |
-| T-TY3 类型安全 | 进展 + 保持 | Wright & Felleisen 1994；RustBelt 类型系统；Oxide | 经典框架的 Rust 实例化 |
+| T-TY3 类型安全 | 进展 + 保持 | Wright & Felleisen 1994；RustBelt 类型系统（Type System）；Oxide | 经典框架的 Rust 实例化 |
 | T-LF2 引用有效性 | 区域包含 | Oxide region calculus；RustBelt Lifetime Logic | 生命周期约束的形式化表达 |
 | SEND-T1 Send 安全 | 构造证明 | RustBelt Meets Relaxed Memory | 松弛内存下 Send 的同步 ghost state |
 | SYNC-T1 Sync 安全 | 等价推导 | 同上 | `&T: Send` 当且仅当 `T: Sync` |

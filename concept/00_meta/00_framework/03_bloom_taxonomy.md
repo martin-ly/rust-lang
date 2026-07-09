@@ -59,9 +59,9 @@ fn main() {
 >
 > **AI 2026 校准更新**: Bloom Taxonomy AI 2026 修订版强调 **verb-based 分类**（上表已遵循）和 **自动化目标标注**（每个学习目标的动词必须可自动检测）。本知识体系的每个概念文件均标注了 Bloom 层级和对应的可验证产出（如"能向他人讲解"对应 L2 理解）。
 >
-> [来源: [Bloom's Taxonomy](https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/)] ·
-> [来源: [Rust Learning Path](https://www.rust-lang.org/learn)] ·
-> [Bloom Taxonomy AI 2026 Revision, educational-data-mining.org](https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/)
+> [来源: [Bloom's Taxonomy](https://www.vanderbilt.edu/advanced-institute/)] ·
+> [来源: [Rust Learning Path](https://rust-lang.org/learn/)] ·
+> [Bloom Taxonomy AI 2026 Revision, educational-data-mining.org](https://www.vanderbilt.edu/advanced-institute/)
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---

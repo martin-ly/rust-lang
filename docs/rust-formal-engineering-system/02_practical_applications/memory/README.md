@@ -227,7 +227,7 @@ fn object_pool_demo() {
 | 单线程共享数据 | 引用计数 | `Rc<T>` |
 | 多线程共享数据 | 原子引用计数 | `Arc<T>` |
 | 内部可变性（单线程） | 运行时借用检查 | `RefCell<T>` |
-| 内部可变性（多线程） | 原子操作 | `Mutex<T>`, `RwLock<T>` |
+| 内部可变性（多线程） | 原子操作（Atomic Operations） | `Mutex<T>`, `RwLock<T>` |
 | 大对象延迟初始化 | 懒加载模式 | `Lazy<T>`, `OnceCell` |
 | 高频分配/释放 | 对象池 | 自定义 `ObjectPool<T>` |
 | 内存映射文件 | 操作系统抽象 | `Mmap` (memmap2 crate) |

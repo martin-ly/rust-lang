@@ -80,7 +80,7 @@ Embassy 是 Rust 嵌入式生态中**异步优先 (async-first)** 的 dominant f
 
 > [来源: [Embassy Book - Executor](https://embassy.dev/book/)]
 
-Embassy 的核心创新是在**无操作系统**、**无堆分配器**（可选）的环境中实现了完整的 `async/await` 运行时。
+Embassy 的核心创新是在**无操作系统**、**无堆分配器**（可选）的环境中实现了完整的 `async/await` 运行时（Runtime）。
 
 ```mermaid
 graph TB
@@ -265,7 +265,7 @@ pub trait UartRx<'a, T: Instance> {
 | UART | `Serial::read` | `Serial::read` (async) | `read_until_idle` |
 | GPIO | `OutputPin::set_high` | `Wait::wait_for_high` (async) | 中断驱动边缘检测 |
 
-这意味着：为 `embedded-hal` 编写的驱动（传感器、显示屏、LoRa 模块）可以在 Embassy 生态中直接使用。
+这意味着：为 `embedded-hal` 编写的驱动（传感器、显示屏、LoRa 模块（Module））可以在 Embassy 生态中直接使用。
 
 > [来源: [embedded-hal 1.0 发布说明](https://github.com/rust-embedded/embedded-hal)]
 

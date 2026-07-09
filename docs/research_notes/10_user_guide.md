@@ -54,7 +54,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-Rust Formal Methods Research Notes 是一套全面的Rust形式化方法文档，涵盖所有权、借用、类型系统、并发等核心概念的深入解释和证明。
+Rust Formal Methods Research Notes 是一套全面的Rust形式化方法文档，涵盖所有权、借用（Borrowing）、类型系统（Type System）、并发等核心概念的深入解释和证明。
 
 ---
 
@@ -354,7 +354,7 @@ A: 请参考 [10_project_maintenance_guide.md](10_project_maintenance_guide.md) 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

@@ -33,7 +33,7 @@
 >
 > **Bloom 层级**: L3-L5 (应用/分析/评价)
 >
-> **知识领域**: 云原生、Kubernetes、分布式系统、控制器模式、异步 IO
+> **知识领域**: 云原生、Kubernetes、分布式系统、控制器模式、异步（Async） IO
 >
 > **对应 Rust 版本**: 1.96.1+ (kube-rs 0.98+)
 
@@ -52,7 +52,7 @@
 | 维度 | 设计选择 | 工程价值 |
 |:--|:--|:--|
 | **API 模型** | `Api<K>` 泛型封装 REST 路径 | 编译期保证资源类型与 API Group/Version 匹配 |
-| **运行时** | 基于 Tokio 的异步 watcher / controller | 与 Rust 异步生态天然集成，支持背压与超时 |
+| **运行时（Runtime）** | 基于 Tokio 的异步 watcher / controller | 与 Rust 异步生态天然集成，支持背压与超时 |
 | **CRD 支持** | `#[derive(CustomResource)]` 派生宏 | 将 Kubernetes CRD 静态化为 Rust struct |
 | **类型生成** | 依赖 `k8s-openapi` 生成核心资源类型 | 随 Kubernetes 版本更新，避免手工维护 |
 

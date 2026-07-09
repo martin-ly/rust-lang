@@ -46,7 +46,7 @@
 
 ## 一、对齐说明 {#一对齐说明}
 
-本文档将 `docs/research_notes/` 中关于 **Crate 架构** 的内容与 P0 官方、P2 社区权威来源建立映射，覆盖 workspace 组织、公开/私有 API 边界、feature 设计、错误处理、日志、配置、CLI、库/二进制拆分、MSRV 策略等关键工程主题。目标是为项目中的 crate 架构决策提供可追溯的权威依据。
+本文档将 `docs/research_notes/` 中关于 **Crate 架构** 的内容与 P0 官方、P2 社区权威来源建立映射，覆盖 workspace 组织、公开/私有 API 边界、feature 设计、错误处理（Error Handling）、日志、配置、CLI、库/二进制拆分、MSRV 策略等关键工程主题。目标是为项目中的 crate 架构决策提供可追溯的权威依据。
 
 > **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [crates.io policies](https://crates.io/policies)
 
@@ -70,7 +70,7 @@
 
 | Rust Reference 章节 | 项目文档 | 状态 | 备注 |
 |---------------------|----------|------|------|
-| [Items](https://doc.rust-lang.org/reference/items.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) §2 | ✅ | 模块、函数、类型、trait 等条目 |
+| [Items](https://doc.rust-lang.org/reference/items.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) §2 | ✅ | 模块（Module）、函数、类型、trait 等条目 |
 | [Crates and source files](https://doc.rust-lang.org/reference/crates-and-source-files.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) §1 | ✅ | crate root、edition、module tree |
 | [Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) §4 | ✅ | `pub`、`pub(crate)`、`pub(in path)` |
 | [Use declarations](https://doc.rust-lang.org/reference/items/use-declarations.html) | [formal_modules/70_module_patterns_and_refactoring.md](formal_modules/70_module_patterns_and_refactoring.md) §4 | ✅ | 重导出与 API 塑形 |

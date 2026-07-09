@@ -96,7 +96,7 @@
 ## 八、未覆盖缺口 {#八未覆盖缺口}
 
 1. `Stream` trait（已不稳定 `async_iter`）的专门对齐待 Rust 1.97+ 稳定后补充。
-2. 异步 trait（`trait Foo { async fn bar(); }`）的 Rust 1.75+ 特性需更新。
+2. 异步（Async） trait（`trait Foo { async fn bar(); }`）的 Rust 1.75+ 特性需更新。
 3. 具体运行时（tokio/async-std）差异可单独成文。
 
 > **权威来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)

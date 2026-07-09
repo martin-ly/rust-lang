@@ -170,9 +170,9 @@
 
 **形式化方法研究**:
 
-- 内存安全 → [所有权模型形式化](formal_methods/10_ownership_model.md)
+- 内存安全（Memory Safety） → [所有权模型形式化](formal_methods/10_ownership_model.md)
 - 数据竞争自由 → [借用检查器证明](formal_methods/10_borrow_checker_proof.md)
-- 并发安全 → [异步状态机形式化](formal_methods/10_async_state_machine.md)
+- 并发安全（Concurrency Safety） → [异步状态机形式化](formal_methods/10_async_state_machine.md)
 - 引用有效性 → 生命周期形式化
 
 ### 我想理解类型系统 {#我想理解类型系统}
@@ -235,7 +235,7 @@
 - 类型推导 → [10_type_system_foundations.md](type_theory/10_type_system_foundations.md)
 - Trait → [10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md)
 - GATs → [10_advanced_types.md](type_theory/10_advanced_types.md)
-- const 泛型 → [10_advanced_types.md](type_theory/10_advanced_types.md)
+- const 泛型（Generics） → [10_advanced_types.md](type_theory/10_advanced_types.md)
 - 型变 → [10_variance_theory.md](type_theory/10_variance_theory.md)
 - 类型理论缺口 → [00_completeness_gaps.md](formal_methods/00_completeness_gaps.md)
 
@@ -349,7 +349,7 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [主索引](README.md) - 完整的研究笔记索引
-- [速查卡快速参考](../02_reference/quick_reference/README.md) - 20 个速查卡（含 AI/ML、类型、所有权、并发、设计模式等）；与本研究笔记互为补充
+- [速查卡快速参考](../02_reference/quick_reference/README.md) - 20 个速查卡（含 AI/ML、类型、所有权（Ownership）、并发、设计模式等）；与本研究笔记互为补充
 - [完整索引](../../concept/sources/INDEX.md) - 所有研究笔记的详细索引
 - [软件设计理论](software_design_theory/README.md) - 设计模式、23/43、执行模型、组合工程
 - [快速入门指南](10_getting_started.md) - 新用户入门指南

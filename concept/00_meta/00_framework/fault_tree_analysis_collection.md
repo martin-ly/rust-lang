@@ -13,18 +13,18 @@
 > [IEC 61025 — 故障树分析标准] ·
 > [NASA FTA 手册] ·
 > [RustBelt](https://plv.mpi-sws.org/rustbelt/) ·
-> [The Rustonomicon — What Unsafe Rust Can Do](https://doc.rust-lang.org/nomicon/index.html) ·
+> [The Rustonomicon — What Unsafe Rust Can Do](https://doc.rust-lang.org/stable/nomicon/index.html) ·
 > [MIRI 未定义行为检测]
 > **符号约定**: ⬡ 顶事件 / ◇ 中间事件 / ○ 基本事件 / ∧ 与门 / ∨ 或门
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+> **来源**: [TRPL](https://doc.rust-lang.org/stable/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/stable/reference/introduction.html)
 ---
 
 > **来源**: [IEC 61025 — *Fault Tree Analysis*]
 > **来源**: [NASA — *Fault Tree Handbook with Aerospace Applications*]
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
-> **来源**: [The Rustonomicon — *What Unsafe Rust Can Do*](https://doc.rust-lang.org/nomicon/index.html)
+> **来源**: [The Rustonomicon — *What Unsafe Rust Can Do*](https://doc.rust-lang.org/stable/nomicon/index.html)
 > **来源**: [Miri — Undefined Behavior Detection]
 
 ## 📑 目录
@@ -140,7 +140,7 @@ mindmap
 **⬡ 顶事件：Rust 程序发生内存安全违规（UAF / 双重释放 / 缓冲区溢出）**
 
 > **定义**: 程序在运行时访问已释放内存、重复释放同一块内存、或访问越界内存。
-> 来源: [Rust Reference §13 — Memory Model; RustBelt Soundness Theorem 的反面](https://doc.rust-lang.org/reference/introduction.html)
+> 来源: [Rust Reference §13 — Memory Model; RustBelt Soundness Theorem 的反面](https://doc.rust-lang.org/stable/reference/introduction.html)
 
 ### 2.2 故障树 Mermaid
 
@@ -336,7 +336,7 @@ graph TD
 **⬡ 顶事件：Rust 类型系统保证失效（Coherence 破坏 / unsound impl / 类型推断歧义导致运行时错误）**
 
 > **定义**: 编译器允许了本应拒绝的程序，导致类型安全保证在运行时不成立。
-> 来源: [Rust Reference §10 — Type System; RustBelt Type Safety 的反面](https://doc.rust-lang.org/reference/introduction.html)
+> 来源: [Rust Reference §10 — Type System; RustBelt Type Safety 的反面](https://doc.rust-lang.org/stable/reference/introduction.html)
 
 ### 4.2 故障树 Mermaid
 
@@ -523,7 +523,7 @@ graph TD
 **⬡ 顶事件：Rust 程序触发未定义行为（UB）或破坏安全抽象契约**
 
 > **定义**: 程序执行了 Rust 语言规范未定义行为，或 unsafe 代码违反了其公开 safe API 承诺的不变式。
-> 来源: [Rust Reference §16 — Unsafety; The Rustonomicon — List of UB](https://doc.rust-lang.org/reference/introduction.html)
+> 来源: [Rust Reference §16 — Unsafety; The Rustonomicon — List of UB](https://doc.rust-lang.org/stable/reference/introduction.html)
 
 ### 6.2 故障树 Mermaid
 
@@ -696,7 +696,7 @@ graph TD
 |:---|:---|:---|
 | **一级** | IEC 61025 — *Fault Tree Analysis* | FTA 方法论和符号标准 |
 | **一级** | NASA — *Fault Tree Handbook with Aerospace Applications* | 航空航天级 FTA 实践规范 |
-| **一级** | [Rust Reference — Memory Model / Concurrency / Unsafe](https://doc.rust-lang.org/reference/introduction.html) | Rust 语义定义和 UB 分类 |
+| **一级** | [Rust Reference — Memory Model / Concurrency / Unsafe](https://doc.rust-lang.org/stable/reference/introduction.html) | Rust 语义定义和 UB 分类 |
 | **一级** | RustBelt (Jung et al., POPL 2018) | 安全性定理的反面分析 — 失效条件 |
 | **二级** | The Rustonomicon — *What Unsafe Rust Can Do* | unsafe 操作的具体 UB 列表 |
 | **二级** | Miri 文档 — UB 检测分类 | 运行时 UB 检测覆盖范围 |
@@ -706,7 +706,7 @@ graph TD
 
 **变更日志**:
 
-- v1.0 (2026-05-23): 初始版本 — 五棵标准 FTA（内存/并发/类型/异步/Unsafe）+ IEC 61025 符号系统 + 最小割集分析 + 跨树关联 [权威来源对齐 Wave 3](https://doc.rust-lang.org/)
+- v1.0 (2026-05-23): 初始版本 — 五棵标准 FTA（内存/并发/类型/异步/Unsafe）+ IEC 61025 符号系统 + 最小割集分析 + 跨树关联 [权威来源对齐 Wave 3](https://doc.rust-lang.org/stable/)
 
 ---
 

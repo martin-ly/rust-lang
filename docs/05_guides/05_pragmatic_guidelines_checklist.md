@@ -151,7 +151,7 @@
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
-| R01 | 类型使用 PascalCase | MUST | 所有 `struct`/`enum` 定义 | 结构体/枚举名是否大写开头？ |
+| R01 | 类型使用 PascalCase | MUST | 所有 `struct`/`enum` 定义 | 结构体（Struct）/枚举名是否大写开头？ |
 | R02 | 函数与变量使用 snake_case | MUST | 所有 `fn` 定义 | 函数名是否小写+下划线？ |
 | R03 | 常量使用 SCREAMING_SNAKE_CASE | MUST | `crates/*/src/lib.rs` | `const`/`static` 是否全大写？ |
 | R04 | 避免单字母命名（迭代器除外） | SHOULD | `exercises/src/` | 变量名是否有描述性？ |
@@ -231,7 +231,7 @@
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
-| N01 | Crate 命名使用 `cNN_` 前缀 | MUST | `Cargo.toml` members | 模块 crate 是否使用 `c01_` 格式？ |
+| N01 | Crate 命名使用 `cNN_` 前缀 | MUST | `Cargo.toml` members | 模块（Module） crate 是否使用 `c01_` 格式？ |
 | N02 | 示例文件使用 `_exp.rs` 后缀 | SHOULD | `crates/*/src/bin/` | bin 示例是否有统一后缀？ |
 | N03 | 文档使用中文，代码注释视受众而定 | MUST | `docs/` 所有文件 | 文档是否为中文？ |
 | N04 | 测试函数使用 `test_` 前缀 | SHOULD | `exercises/src/*/ex*.rs` | `#[test]` 函数是否以 `test_` 开头？ |

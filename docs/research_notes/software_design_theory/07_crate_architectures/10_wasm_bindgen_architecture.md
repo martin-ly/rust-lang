@@ -219,7 +219,7 @@ pub struct JsValue {
 | `i32`, `f64` | number | 直接 WASM 数值类型 |
 | `bool` | boolean | 0/1 编码 |
 | `String` | string | UTF-8 编码写入 WASM 内存 |
-| `&str` | string | 借用：零拷贝视窗 |
+| `&str` | string | 借用（Borrowing）：零拷贝视窗 |
 | `Vec<u8>` | Uint8Array | 拷贝到 JS ArrayBuffer |
 | `JsValue` | 任意 JS 值 | 句柄引用 |
 | `Closure<dyn FnMut(...)>` | Function | JS 可调用的闭包 |
@@ -266,7 +266,7 @@ impl<T: ?Sized> Closure<T> {
 `Closure` 解决了 JS 事件回调调用 Rust 代码的核心问题：
 
 1. Rust 闭包被 Box 到堆上，获得稳定的内存地址
-2. 生成一个 JS `Function` 包装器，通过导入的 WASM 函数间接调用 Rust 闭包
+2. 生成一个 JS `Function` 包装器，通过导入的 WASM 函数间接调用 Rust 闭包（Closures）
 3. JS 侧持有 `Closure` 的 `JsValue` 句柄；Rust 侧通过 `Closure::drop` 在不再使用时释放堆内存
 
 ```rust,ignore
@@ -552,7 +552,7 @@ export async function fetch_data(url) {
 
 `web-sys` 是 wasm-bindgen 项目的姊妹 crate，包含约 30000 个 `#[wasm_bindgen]` 标记的绑定，覆盖完整的 WebIDL 规范：
 
-| 模块 | 绑定数量 | 典型类型 |
+| 模块（Module） | 绑定数量 | 典型类型 |
 |:---|:---:|:---|
 | `web_sys::Document` | ~200 方法 | DOM 操作 |
 | `web_sys::CanvasRenderingContext2d` | ~150 方法 | 2D 绘图 |

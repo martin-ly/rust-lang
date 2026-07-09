@@ -81,8 +81,8 @@
 | 标准输入输出 | std::io | [C07 进程管理](../../crates/c07_process/README.md) |
 | 子进程与管道 | std::process | C07 [进程管理](../../crates/c07_process/docs/README.md) |
 | 文件系统 | std::fs | C03、C08 算法 |
-| 错误处理 | anyhow、thiserror | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
-| 异步 CLI | tokio | [C06 异步](../../crates/c06_async/README.md)、[async_patterns](../02_reference/quick_reference/02_async_patterns.md) |
+| 错误处理（Error Handling） | anyhow、thiserror | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
+| 异步（Async） CLI | tokio | [C06 异步](../../crates/c06_async/README.md)、[async_patterns](../02_reference/quick_reference/02_async_patterns.md) |
 
 ---
 

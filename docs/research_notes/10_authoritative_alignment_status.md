@@ -100,23 +100,23 @@
 
 | 本书章节 | 对应项目文档 | 对齐状态 | 差异说明 |
 | :--- | :--- | :--- | :--- |
-| 4.1 所有权 | 02_ownership_cheatsheet.md, 10_ownership_model.md | ✅ 一致 | 项目添加了形式化 |
-| 4.2 借用 | 10_borrow_checker_proof.md | ✅ 一致 | 项目添加了证明 |
+| 4.1 所有权（Ownership） | 02_ownership_cheatsheet.md, 10_ownership_model.md | ✅ 一致 | 项目添加了形式化 |
+| 4.2 借用（Borrowing） | 10_borrow_checker_proof.md | ✅ 一致 | 项目添加了证明 |
 | 4.3 Slice | 02_collections_iterators_cheatsheet.md | ✅ 一致 | - |
-| 5.0 结构体 | 02_type_system.md | ✅ 一致 | - |
-| 6.0 枚举 | 02_type_system.md | ✅ 一致 | - |
-| 6.2 模式匹配 | 02_control_flow_functions_cheatsheet.md | ✅ 一致 | - |
+| 5.0 结构体（Struct） | 02_type_system.md | ✅ 一致 | - |
+| 6.0 枚举（Enum） | 02_type_system.md | ✅ 一致 | - |
+| 6.2 模式匹配（Pattern Matching） | 02_control_flow_functions_cheatsheet.md | ✅ 一致 | - |
 | 8.0 集合 | 02_collections_iterators_cheatsheet.md | ✅ 一致 | - |
-| 9.0 错误处理 | 02_error_handling_cheatsheet.md | ✅ 一致 | 项目添加了形式化 |
-| 10.0 泛型 | 02_generics_cheatsheet.md, 10_type_system_foundations.md | ✅ 一致 | 项目添加了类型论 |
+| 9.0 错误处理（Error Handling） | 02_error_handling_cheatsheet.md | ✅ 一致 | 项目添加了形式化 |
+| 10.0 泛型（Generics） | 02_generics_cheatsheet.md, 10_type_system_foundations.md | ✅ 一致 | 项目添加了类型论 |
 | 10.2 Trait | 10_trait_system_formalization.md | ✅ 一致 | 项目添加了形式化 |
 | 10.3 生命周期 | 10_lifetime_formalization.md | ✅ 一致 | 项目添加了形式化 |
 | 11.0 测试 | 02_testing_cheatsheet.md | ✅ 一致 | - |
-| 13.0 闭包 | 02_control_flow_functions_cheatsheet.md | ✅ 一致 | - |
+| 13.0 闭包（Closures） | 02_control_flow_functions_cheatsheet.md | ✅ 一致 | - |
 | 13.2 迭代器 | 02_collections_iterators_cheatsheet.md | ✅ 一致 | - |
-| 15.0 智能指针 | 02_smart_pointers_cheatsheet.md | ✅ 一致 | - |
+| 15.0 智能指针（Smart Pointer） | 02_smart_pointers_cheatsheet.md | ✅ 一致 | - |
 | 16.0 并发 | 02_threads_concurrency_cheatsheet.md | ✅ 一致 | 项目添加了形式化 |
-| 17.0 异步 | 02_async_patterns.md, 10_async_state_machine.md | ✅ 一致 | 项目添加了形式化 |
+| 17.0 异步（Async） | 02_async_patterns.md, 10_async_state_machine.md | ✅ 一致 | 项目添加了形式化 |
 | 19.0 高级特性 | 05_advanced_topics_deep_dive.md | ✅ 一致 | - |
 | 20.0 项目 | 02_cargo_cheatsheet.md | ✅ 一致 | - |
 
@@ -169,7 +169,7 @@
 | 所有权逻辑 | 10_ownership_model.md | ✅ 一致 | 分离逻辑 |
 | 借用规则 | 10_borrow_checker_proof.md | ✅ 一致 | 定理对应 |
 | 类型安全 | 10_type_system_foundations.md | ✅ 一致 | 进展保持 |
-| 并发安全 | 10_send_sync_formalization.md | ✅ 一致 | Send/Sync |
+| 并发安全（Concurrency Safety） | 10_send_sync_formalization.md | ✅ 一致 | Send/Sync |
 
 ### 形式化方法对齐 {#形式化方法对齐}
 

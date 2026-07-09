@@ -60,7 +60,7 @@
 | **关系** | 移动→借用下游；Copy 为移动的特例 |
 | **解释** | 无 GC 下保证内存安全；移动即所有权转移 |
 | **示例** | `let x = vec![1,2]; let y = x;` // x 已移动 |
-| **论证** | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) § 所有权 |
+| **论证** | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) § 所有权（Ownership） |
 | **形式化** | [ownership_model](formal_methods/10_ownership_model.md) 定理 T2/T3、规则 1–8 |
 | **反例** | 使用已移动值；见 [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) |
 
@@ -73,13 +73,13 @@
 
 | 维度 | 内容 |
 | :--- | :--- |
-| **定义** | &T 不可变借用、&mut T 可变借用；可变独占、不可变可多 |
+| **定义** | &T 不可变借用（Immutable Borrow）、&mut T 可变借用（Mutable Borrow）；可变独占、不可变可多 |
 | **概念** | 借用规则 5–8（[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)） |
 | **属性** | 零成本、编译期检查、数据竞争自由 |
 | **关系** | 依赖所有权；与生命周期协同 |
 | **解释** | 借用不转移所有权；&mut 互斥；& 与 &mut 互斥 |
 | **示例** | `let r = &v; let r2 = &v;` // 允许多 &；`let m = &mut v;` 独占 |
-| **论证** | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) § 借用 |
+| **论证** | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) § 借用（Borrowing） |
 | **形式化** | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 定理 T1 |
 | **反例** | 双重可变借用；悬垂引用 |
 
@@ -155,7 +155,7 @@
 | **关系** | 依赖 Pin；跨 await 需 Send |
 | **解释** | Future 不立即执行；poll 驱动步进 |
 | **示例** | `async fn f() -> i32 { 1 }` |
-| **论证** | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) § 异步 |
+| **论证** | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) § 异步（Async） |
 | **形式化** | [async_state_machine](formal_methods/10_async_state_machine.md) 定理 T6.1–T6.3 |
 | **反例** | 未 Pin 自引用；非 Send 跨 await |
 
@@ -187,7 +187,7 @@
 
 | 维度 | 内容 |
 | :--- | :--- |
-| **定义** | 编译时多态；单态化 |
+| **定义** | 编译时多态；单态化（Monomorphization） |
 | **概念** | `fn f<T: Trait>(x: T)`；[type_system_foundations](type_theory/10_type_system_foundations.md) |
 | **属性** | 零成本、无运行时类型信息 |
 | **关系** | Trait 约束；关联类型；GAT |
@@ -244,7 +244,7 @@
 
 | 维度 | 内容 |
 | :--- | :--- |
-| **定义** | Option 可选值；Result 错误处理；无 null |
+| **定义** | Option 可选值；Result 错误处理（Error Handling）；无 null |
 | **概念** | 构造性、Some/None、Ok/Err（[DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) Def OR1） |
 | **属性** | 显式处理、无空指针 |
 | **关系** | ? 操作符早期返回；与 match 协同 |
@@ -271,7 +271,7 @@
 | **示例** | `let f = \|x\| x + 1;` |
 | **论证** | [type_system_foundations](type_theory/10_type_system_foundations.md) |
 | **形式化** | 闭包类型规则 |
-| **反例** | 跨线程传非 Send 闭包 |
+| **反例** | 跨线程传非 Send 闭包（Closures） |
 
 ---
 

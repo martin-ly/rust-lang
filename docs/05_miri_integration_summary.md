@@ -81,7 +81,7 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 | c02_type_system | `src/miri_tests.rs` | MaybeUninit, NonNull, ManuallyDrop |
 | c03_control_fn | `src/miri_tests.rs` | 控制流内存安全，指针操作 |
 | c04_generic | `src/miri_tests.rs` | 泛型内存操作，PhantomData |
-| c05_threads | `src/miri_tests.rs` | 原子操作，自旋锁，内存序 |
+| c05_threads | `src/miri_tests.rs` | 原子操作（Atomic Operations），自旋锁，内存序 |
 | c06_async | `src/miri_tests.rs` | Future, Pin, 异步内存安全 |
 | c07_process | `src/miri_tests.rs` | FFI 类型，进程结构 |
 | c08_algorithms | `src/miri_tests.rs` | 排序，链表，树结构 |

@@ -241,7 +241,7 @@ End BoundedCounter.
 
 ## 权威来源对照表 {#权威来源对照表}
 
-| 工具 | 论文/文档 | 处理方式 | 模块/私有性映射 |
+| 工具 | 论文/文档 | 处理方式 | 模块（Module）/私有性映射 |
 | :--- | :--- | :--- | :--- |
 | Aeneas | [LLBC Paper](https://arxiv.org/abs/2207.09467) | borrow-checker 语义 → Lean | 保留 DefId/模块层级；public API 需规范 |
 | coq-of-rust | [GitHub / Examples](https://github.com/formal-land/coq-of-rust) | Rust → Coq 翻译 | Rust `mod` → Coq `Module`；`use` → `Import` |

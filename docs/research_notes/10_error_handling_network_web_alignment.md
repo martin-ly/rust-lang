@@ -2,7 +2,7 @@
 
 > **EN**: Error Handling Network Web Alignment
 > **Summary**: 错误处理与网络/Web 生态权威来源对齐矩阵 Error Handling Network Web Alignment.
-> **概念族**: 权威来源对齐 / 错误处理 / 网络 / Web
+> **概念族**: 权威来源对齐 / 错误处理（Error Handling） / 网络 / Web
 > **内容分级**: [核心级]
 > **层级**: L0-L5
 > **Bloom 层级**: L5-L6 (分析/评价)
@@ -34,7 +34,7 @@
 本文档将 `docs/research_notes/` 中的错误处理、网络基础与 Web 生态内容与国际化权威来源建立映射，覆盖：
 
 - **错误处理**：从 `Result`/`Option`、`?` 操作符到库级错误抽象（`thiserror`、`anyhow`、`eyre`）。
-- **网络基础**：tokio 异步 IO、`hyper` HTTP 实现、`tonic` gRPC 框架。
+- **网络基础**：tokio 异步（Async） IO、`hyper` HTTP 实现、`tonic` gRPC 框架。
 - **Web 框架与中间件**：`axum`、`actix-web`、`rocket`、`tower`、`tower-http`。
 - **Web 标准/协议**：HTTP/1.1、HTTP/2、HTTP/3、WebSocket、OpenAPI。
 

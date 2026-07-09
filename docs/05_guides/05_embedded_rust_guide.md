@@ -57,7 +57,7 @@
 
 本指南为官方 **Embedded Rust Book** 的入口与项目内导航，帮助在开发嵌入式 Rust 应用时快速定位到本项目的相关模块和官方资源。
 
-**形式化引用**：T-OW3 (内存安全)、
+**形式化引用**：T-OW3 (内存安全（Memory Safety）)、
 T-BR1、[UNSAFE_RUST_GUIDE](../../concept/03_advanced/02_unsafe/03_unsafe.md)（no_std、裸机 unsafe 契约）。
 
 ---
@@ -82,9 +82,9 @@ T-BR1、[UNSAFE_RUST_GUIDE](../../concept/03_advanced/02_unsafe/03_unsafe.md)（
 
 | 嵌入式主题 | 官方 Embedded Book | 本项目对应 |
 | :--- | :--- | :--- |
-| 所有权与内存安全 | 内存管理、无堆 | [C01 所有权](../../crates/c01_ownership_borrow_scope/README.md) |
-| 类型系统与 no_std | 最小运行时 | [C02 类型系统](../../crates/c02_type_system/README.md) |
-| 并发与中断 | 临界区、原子操作 | [C05 线程与并发](../../crates/c05_threads/README.md) |
+| 所有权与内存安全 | 内存管理、无堆 | [C01 所有权（Ownership）](../../crates/c01_ownership_borrow_scope/README.md) |
+| 类型系统与 no_std | 最小运行时 | [C02 类型系统（Type System）](../../crates/c02_type_system/README.md) |
+| 并发与中断 | 临界区、原子操作（Atomic Operations） | [C05 线程与并发](../../crates/c05_threads/README.md) |
 | 进程与系统调用 | - | [C07 进程管理](../../crates/c07_process/README.md) |
 | WASM 与边缘计算 | - | [C12 WASM](../../crates/c12_wasm/README.md) |
 
@@ -428,7 +428,7 @@ fn update_data(value: u32) {
 使用 RTIC 构建实时应用：
 
 - 确定性的任务调度
-- 零成本抽象
+- 零成本抽象（Zero-Cost Abstraction）
 - 参考 [RTIC 示例](#6-rtic-real-time-interrupt-driven-concurrency)
 
 ### 场景3: 物联网 (IoT) 边缘设备 {#场景3-物联网-iot-边缘设备}

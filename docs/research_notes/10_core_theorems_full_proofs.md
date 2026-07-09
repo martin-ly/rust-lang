@@ -214,7 +214,7 @@
 
 **引理 L-BR2（读写不并存）**：若满足规则 2（可变与不可变互斥），则 $\forall m, t_1, t_2: \text{Write}(t_1,m) \land \text{Read}(t_2,m) \land \text{Concurrent}(t_1,t_2) \rightarrow \text{false}$。
 
-*证明*：规则 2 保证可变与不可变借用互斥；写⇒可变借用，读⇒不可变借用；并存⇒违反规则 2。∎
+*证明*：规则 2 保证可变与不可变借用互斥；写⇒可变借用（Mutable Borrow），读⇒不可变借用（Immutable Borrow）；并存⇒违反规则 2。∎
 
 ### 3.2 主证明 {#32-主证明}
 
@@ -389,7 +389,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

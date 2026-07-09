@@ -219,7 +219,7 @@ impl OrderService {
 
 | 能力 | 表达 | Rust 实现 | 说明 |
 | :--- | :--- | :--- | :--- |
-| **状态机** | 等价 | 枚举 + match；`#[derive(StateMachine)]` 宏；类型状态 | 与 23 安全 State 模式一致；穷尽匹配保证覆盖 |
+| **状态机** | 等价 | 枚举（Enum） + match；`#[derive(StateMachine)]` 宏；类型状态 | 与 23 安全 State 模式一致；穷尽匹配保证覆盖 |
 | **补偿（Compensation）** | 近似 | `Result` + 补偿闭包；`async` 编排；显式 `rollback()` | 无内置 Saga 编排器；需显式实现补偿链 |
 | **Temporal 式工作流** | 近似 | `temporal-sdk`、`cadence` 等 Rust 客户端 | 编排在服务端；Rust 实现 Activity/Workflow 定义；需外部运行时 |
 
@@ -248,7 +248,7 @@ impl OrderService {
 | **构建块** | 23 安全、43 完全（Domain Model、Repository、DTO、Event Sourcing 等） | 先选 |
 | **编排** | 状态机、补偿链、Temporal 式工作流 | 后选 |
 
-**工作流定义**：工作流 = 多步骤业务过程 + 状态转换 + 可选补偿 + 可选人工任务 + 超时/重试。与执行模型（同步/异步/并发/分布式）为不同维度：工作流关注**业务编排语义**，执行模型关注**运行时模型**。
+**工作流定义**：工作流 = 多步骤业务过程 + 状态转换 + 可选补偿 + 可选人工任务 + 超时/重试。与执行模型（同步/异步（Async）/并发/分布式）为不同维度：工作流关注**业务编排语义**，执行模型关注**运行时模型**。
 
 **选型流程**：需求 → 选 23/43 模式（如 Repository、Service Layer、Event Sourcing）→ 选执行模型（如分布式）→ 选编排（状态机 / Saga 补偿 / Temporal）。
 
@@ -274,7 +274,7 @@ impl OrderService {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

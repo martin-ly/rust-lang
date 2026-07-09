@@ -82,7 +82,7 @@
 | Miri 主题 | 项目文档 | 状态 | 备注 |
 |-----------|----------|------|------|
 | [Undefined Behavior detection](https://github.com/rust-lang/miri) | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) | ✅ | 栈借用、数据竞争检测 |
-| [Concurrency with Miri](https://github.com/rust-lang/miri#miri-) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) | ✅ | 异步/并发 UB 检测 |
+| [Concurrency with Miri](https://github.com/rust-lang/miri#miri-) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) | ✅ | 异步（Async）/并发 UB 检测 |
 | [Foreign Function Interface](https://github.com/rust-lang/miri#miri-) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) | 🔄 | FFI 行为检测 |
 
 ### 2.5 Clippy {#25-clippy}

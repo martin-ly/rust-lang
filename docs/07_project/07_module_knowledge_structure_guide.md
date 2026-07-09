@@ -350,7 +350,7 @@ impl ThinkingRepresentationTemplates {
                 └── 结论: [最终结果]
                     ├── 功能正确性: [保证]
                     ├── 类型安全: [保证]
-                    └── 内存安全: [保证]
+                    └── 内存安全（Memory Safety）: [保证]
                 ```
                 "#, goal)
         }
@@ -684,7 +684,7 @@ fn main() {
 **借用 (Borrowing)**:
 
 - **定义**: 通过引用访问值而不获取所有权
-- **属性**: 不可变借用、可变借用、借用规则
+- **属性**: 不可变借用（Immutable Borrow）、可变借用（Mutable Borrow）、借用规则
 - **关系**: 依赖所有权、与生命周期相关
 
 ### 2. C02: 类型系统 {#2-c02-类型系统}
@@ -829,14 +829,14 @@ fn main() {
 
 #### 核心概念知识结构 {#核心概念知识结构-9}
 
-**声明宏 (Declarative Macros)**:
+**声明宏（Declarative Macro） (Declarative Macros)**:
 
 - **定义**: 使用 `macro_rules!` 定义的宏，通过模式匹配在编译时展开
 - **类型**: 基础概念
-- **属性**: 模式匹配、片段指定符（expr/ident/ty/pat 等）、重复展开（`$(...)*`）
+- **属性**: 模式匹配（Pattern Matching）、片段指定符（expr/ident/ty/pat 等）、重复展开（`$(...)*`）
 - **关系**: 与过程宏、TokenStream、AST、元编程相关
 
-**过程宏 (Procedural Macros)**:
+**过程宏（Procedural Macro） (Procedural Macros)**:
 
 - **定义**: 以 Rust 函数形式编写、操作 TokenStream/AST 的宏
 - **类型**: 复合概念
@@ -904,7 +904,7 @@ fn main() {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

@@ -222,12 +222,12 @@
 
 | 理论族 | 公理/定义 | 语义模型 | 核心定理 | 边界/反例 |
 | :--- | :--- | :--- | :--- | :--- |
-| 内存安全 | 规则 1–3, Def 1.1–1.3 | 所有权状态 Ω | T2 唯一性, T3 内存安全 | 使用已移动值 |
-| 借用 | 规则 5–8 | 借用状态 | 数据竞争自由 T1 | 双重可变借用 |
+| 内存安全（Memory Safety） | 规则 1–3, Def 1.1–1.3 | 所有权状态 Ω | T2 唯一性, T3 内存安全 | 使用已移动值 |
+| 借用（Borrowing） | 规则 5–8 | 借用状态 | 数据竞争自由 T1 | 双重可变借用 |
 | 生命周期 | ℓ ⊆ lft | 区域类型 | 引用有效性 T2 | 返回局部引用 |
-| 类型系统 | typing rules | 操作语义 | 进展 T1、保持 T2、类型安全 T3 | 类型不匹配 |
+| 类型系统（Type System） | typing rules | 操作语义 | 进展 T1、保持 T2、类型安全 T3 | 类型不匹配 |
 | 型变 | Def 1.1–3.1 | 子类型 | T1–T4 协变/逆变/不变 | &mut 协变等 |
-| 异步 | Def 4.1–5.2 | 状态机 | T6.1–T6.3 | 非 Send 跨线程 |
+| 异步（Async） | Def 4.1–5.2 | 状态机 | T6.1–T6.3 | 非 Send 跨线程 |
 | Pin | Def 1.1–2.2 | 位置稳定 | T1–T3 | 移动未 Pin |
 | Trait | impl, Resolve | vtable | T1–T3 | 对象安全违规 |
 
@@ -354,7 +354,7 @@
 
 | 论证要素 | 索引文档 | 覆盖范围 |
 | :--- | :--- | :--- |
-| 概念定义 | KNOWLEDGE_STRUCTURE_FRAMEWORK、各 research_notes | 所有权、借用、类型、型变、Pin、异步 |
+| 概念定义 | KNOWLEDGE_STRUCTURE_FRAMEWORK、各 research_notes | 所有权（Ownership）、借用、类型、型变、Pin、异步 |
 | 公理-定理映射 | FORMAL_PROOF_SYSTEM_GUIDE、PROOF_INDEX | 概念→公理→定理→推论 |
 | 论证缺口 | ARGUMENTATION_GAP_INDEX、FORMAL_PROOF_SYSTEM_GUIDE | D1/D2/R1/R2/P1/P2/M1/M2 |
 | 证明索引 | PROOF_INDEX | 26 个证明、按领域/类型/方法 |
@@ -452,7 +452,7 @@
 | **引用有效性** | 生命周期 | lifetime T2 | 悬垂引用、UB |
 | **型变安全** | 协变/逆变/不变 | variance T1–T4 | 悬垂引用 |
 | **自引用安全** | Pin | pin T1–T3 | 悬垂指针 |
-| **并发安全** | Send/Sync、Future 状态 | async T6.2 | 数据竞争、UB |
+| **并发安全（Concurrency Safety）** | Send/Sync、Future 状态 | async T6.2 | 数据竞争、UB |
 
 ### 3.3 unsafe 契约矩阵 {#33-unsafe-契约矩阵}
 
@@ -928,7 +928,7 @@ Admitted.
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

@@ -89,7 +89,7 @@
 |-------|----------|----------|----------|
 | `config` | 多来源分层合并（文件、环境变量、字符串、默认值），支持热加载 | 通用服务端/工具配置 | `0.15` |
 | `clap` | 声明式命令行参数解析，可派生 `Parser` | CLI 入口参数 | `4.x` |
-| `envy` | 将环境变量直接反序列化到 `serde` 结构体 | 纯环境变量驱动的服务 | `0.4` |
+| `envy` | 将环境变量直接反序列化到 `serde` 结构体（Struct） | 纯环境变量驱动的服务 | `0.4` |
 | `figment` | 基于配置 Profile 的组合，支持 Provider 扩展 | 需要复杂配置组合（如 Rocket） | `0.10` |
 
 - **`config`** 是“分层配置”的首选：默认 → 文件 → 环境变量 → 手动覆盖，代码简洁且优先级明确。
@@ -262,7 +262,7 @@ let cfg: AppConfig = load_config().unwrap();
 |--------|------|------|
 | P0 | [Rust Reference](https://doc.rust-lang.org/reference/) | `static`、`const`、模块与可见性规则 |
 | P0 | [Cargo Book – Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html) | Cargo 运行期环境变量约定 |
-| P0 | [The Rust Programming Language](https://doc.rust-lang.org/book/) | 错误处理、 trait、生命周期基础 |
+| P0 | [The Rust Programming Language](https://doc.rust-lang.org/book/) | 错误处理（Error Handling）、 trait、生命周期基础 |
 | P1 | [config crate docs](https://docs.rs/config/latest/config/) | 分层配置 API、环境变量解析 |
 | P1 | [clap docs](https://docs.rs/clap/latest/clap/) | 命令行参数解析与派生宏 |
 | P1 | [envy docs](https://docs.rs/envy/latest/envy/) | 环境变量到结构体反序列化 |

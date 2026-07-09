@@ -108,7 +108,7 @@ main loop {           #[embassy_executor::main]
 
 | 特性 | 说明 | 优势 |
 |:---|:---|:---|
-| **Async 运行时** | 单线程 executor，无堆分配 | 零开销抽象 |
+| **Async 运行时（Runtime）** | 单线程 executor，无堆分配 | 零开销抽象 |
 | **Time 驱动** | `Timer::after(Duration).await` | 精确延时，无忙等 |
 | **HAL 生态** | 1400+ STM32/Nordic/RP HALs | 即拿即用 |
 | **stable Rust** | MSRV 1.75 | 无需 nightly |

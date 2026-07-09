@@ -684,7 +684,7 @@ struct UserChangeset {
 ```
 
 > 来源: [Diesel Schema 文档](https://diesel.rs/guides/schema-in-depth.html)
-> 来源: [Rust Reference, 过程宏, https://doc.rust-lang.org/reference/procedural-macros.html](https://doc.rust-lang.org/reference/)
+> 来源: [Rust Reference, 过程宏（Procedural Macro）, https://doc.rust-lang.org/reference/procedural-macros.html](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -693,7 +693,7 @@ struct UserChangeset {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-Diesel 通过 `Backend` trait 实现多数据库支持，但不同于传统的运行时多态（虚表分发），Diesel 利用**泛型 + 单态化**在编译期确定所有 SQL 生成逻辑，彻底消除运行时分发开销。
+Diesel 通过 `Backend` trait 实现多数据库支持，但不同于传统的运行时多态（虚表分发），Diesel 利用**泛型（Generics） + 单态化（Monomorphization）**在编译期确定所有 SQL 生成逻辑，彻底消除运行时分发开销。
 
 ### 6.1 Backend Trait 设计 {#61-backend-trait-设计}
 
@@ -993,10 +993,10 @@ let row: (i64, String) = sqlx::query_as("SELECT id, name FROM users WHERE id = $
 | 场景 | Diesel | sqlx | 原始驱动 |
 |:---|:---:|:---:|:---:|
 | 复杂关系查询 | ✅ 极佳 | ⚠️ 一般 | ❌ 繁琐 |
-| 类型安全 | ✅ 编译期完整 | ✅ 编译期校验 | ❌ 运行时 |
+| 类型安全 | ✅ 编译期完整 | ✅ 编译期校验 | ❌ 运行时（Runtime） |
 | 动态/元编程查询 | ❌ 困难 | ⚠️ 一般 | ✅ 灵活 |
 | 启动/原型速度 | ❌ 需配置 | ✅ 快 | ✅ 最快 |
-| 零成本抽象 | ✅ 是 | ✅ 是 | ✅ 是 |
+| 零成本抽象（Zero-Cost Abstraction） | ✅ 是 | ✅ 是 | ✅ 是 |
 
 > 来源: [Diesel vs sqlx 对比分析](https://diesel.rs/guides/)
 > 来源: sqlx 文档, https: /  / github.com / launchbadge / [sqlx](https://github.com/launchbadge/sqlx)
@@ -1014,7 +1014,7 @@ let row: (i64, String) = sqlx::query_as("SELECT id, name FROM users WHERE id = $
 | Diesel API 文档 | <https://docs.rs/diesel/latest/diesel/> | Trait 定义与类型级 API |
 | Diesel GitHub | <https://github.com/diesel-rs/diesel> | 源码、Issue、RFC |
 | The Rust Programming Language | <https://doc.rust-lang.org/book/> | Trait、泛型、生命周期基础 |
-| Rust Reference | <https://doc.rust-lang.org/reference/> | 过程宏、单态化、类型系统 |
+| Rust Reference | <https://doc.rust-lang.org/reference/> | 过程宏、单态化、类型系统（Type System） |
 | sqlx | <https://github.com/launchbadge/sqlx> | 编译期校验的轻量替代方案 |
 | Typestate Pattern | <https://rust-lang.github.io/api-guidelines/type-safety.html> | Rust API 类型安全设计指南 |
 
@@ -1032,7 +1032,7 @@ let row: (i64, String) = sqlx::query_as("SELECT id, name FROM users WHERE id = $
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [SQLx 异步 SQL 工具架构](09_sqlx_architecture.md)
+- [SQLx 异步（Async） SQL 工具架构](09_sqlx_architecture.md)
 - 类型系统与所有权
 
 ---

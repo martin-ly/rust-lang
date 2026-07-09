@@ -37,7 +37,7 @@
 
 > **[来源: [ntex crates.io](https://crates.io/crates/ntex)]**
 
-`ntex` 是由原 Actix 核心开发者创建的**可组合网络服务框架**，可视为 Actix-web 设计理念在 `async/await` 时代的重新实现。它保留了 Actix-web 的 `App` / `HttpServer` / `#[web::get]` 等熟悉 API，同时剥离了 Actor 运行时，采用更现代的 Service trait 组合模型。
+`ntex` 是由原 Actix 核心开发者创建的**可组合网络服务框架**，可视为 Actix-web 设计理念在 `async/await` 时代的重新实现。它保留了 Actix-web 的 `App` / `HttpServer` / `#[web::get]` 等熟悉 API，同时剥离了 Actor 运行时（Runtime），采用更现代的 Service trait 组合模型。
 
 > [来源: [ntex docs.rs](https://docs.rs/ntex/latest/ntex/)]
 
@@ -193,7 +193,7 @@ HttpServer::new(|| async {
 | 在 handler 中阻塞线程 | 运行时性能下降 | 使用 `web::block` 或将 CPU 密集型任务放入线程池 |
 | 忽略 `Payload` 的背压 | 内存占用激增 | 使用 `Stream` 逐块处理大请求体 |
 
-> [来源: [ntex::web 错误处理](https://docs.rs/ntex/latest/ntex/web/struct.Error.html)]
+> [来源: [ntex::web 错误处理（Error Handling）](https://docs.rs/ntex/latest/ntex/web/struct.Error.html)]
 
 ---
 

@@ -56,6 +56,11 @@
     - [Code Generation (代码生成)](#code-generation-代码生成)
     - [Zero-Cost Abstraction (零成本抽象)](#zero-cost-abstraction-零成本抽象)
     - [Compile-time Computation (编译时计算)](#compile-time-computation-编译时计算)
+  - [认知路径](#认知路径)
+  - [定理链](#定理链)
+  - [反命题](#反命题)
+  - [反向推理](#反向推理)
+  - [过渡段](#过渡段)
 
 ---
 

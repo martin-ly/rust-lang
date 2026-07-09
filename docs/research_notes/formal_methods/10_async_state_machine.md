@@ -24,7 +24,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成 (Week 2 任务 P1-W2-T2)
 > **更新内容**: 添加 Future/Poll/Waker/Context 形式化定义
-> **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 4 行（异步）
+> **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 4 行（异步（Async））
 
 ---
 
@@ -350,7 +350,7 @@ $$\text{Sync}(\tau) \leftrightarrow \forall t: \text{SafeShare}(\& \tau, t)$$
 | 来源 | 内容 | 本文档对应 | 对齐状态 |
 | :--- | :--- | :--- | :---: |
 | RFC 2394 | Async/await | §状态机 | ✅ |
-| RustBelt Meets Relaxed Memory | Async concurrency | §并发安全 | ✅ |
+| RustBelt Meets Relaxed Memory | Async concurrency | §并发安全（Concurrency Safety） | ✅ |
 | Ferrocene FLS Ch.17 | Asynchronous computation | §异步 | ✅ |
 | Stanford CS110L | Async programming | §async/await | ✅ |
 | EPFL Concurrent Programming | Concurrent execution | §执行模型 | ✅ |
@@ -594,7 +594,7 @@ $$
 
 $$
 
-**内存安全**：Waker 是 `Send + Sync`，可以安全地跨线程传递和共享：
+**内存安全（Memory Safety）**：Waker 是 `Send + Sync`，可以安全地跨线程传递和共享：
 
 $$\text{Waker}: \text{Send} \land \text{Sync} \quad \text{(原子引用计数实现)}$$
 
@@ -1557,7 +1557,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 
 1. **RustBelt: Securing the Foundations of the Rust Programming Language** (POPL 2018)
    - 链接: <https://plv.mpi-sws.org/rustbelt/popl18/>
-   - 与本目录: 类型系统、Send/Sync、并发安全；T6.2 对应
+   - 与本目录: 类型系统（Type System）、Send/Sync、并发安全；T6.2 对应
 2. **RustBelt Meets Relaxed Memory** (POPL 2020)
    - 链接: <https://plv.mpi-sws.org/rustbelt/rbrlx/>
    - 与本目录: relaxed memory、Arc 并发；SPAWN-T1 对应
@@ -1729,7 +1729,7 @@ $$\text{StateMachineGen}[\text{loop-match}] \rightarrow \text{OptimizedCodeGen}[
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

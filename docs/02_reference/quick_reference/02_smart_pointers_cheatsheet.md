@@ -1366,7 +1366,7 @@ impl Unmovable {
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [所有权与智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
-- [智能指针 API 参考](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_smart_pointer_api_reference.md)
+- [智能指针（Smart Pointer） API 参考](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_smart_pointer_api_reference.md)
 
 ## 🧩 相关示例代码 {#相关示例代码}
 >

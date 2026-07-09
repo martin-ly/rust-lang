@@ -169,13 +169,13 @@ research_notes/
 
 | 概念族 | 主文档 | Def/Axiom | 定理/推论 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
-| 所有权 | [ownership_model](formal_methods/10_ownership_model.md) | 规则 1–3, Def 1.1–1.5 | T2 唯一性, T3 内存安全 | 变量绑定/遮蔽 Def 1.4/1.5 |
-| 借用 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | 规则 5–8 | T1 数据竞争自由, T2 | |
+| 所有权（Ownership） | [ownership_model](formal_methods/10_ownership_model.md) | 规则 1–3, Def 1.1–1.5 | T2 唯一性, T3 内存安全（Memory Safety） | 变量绑定/遮蔽 Def 1.4/1.5 |
+| 借用（Borrowing） | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | 规则 5–8 | T1 数据竞争自由, T2 | |
 | 生命周期 | lifetime_formalization | Axiom LF1–LF2, Def 1.4 | LF-T1–T3 引用有效性 | |
-| 类型系统 | [type_system_foundations](type_theory/10_type_system_foundations.md) | typing rules, 进展/保持 | T1 进展, T2 保持, T3 类型安全 | |
+| 类型系统（Type System） | [type_system_foundations](type_theory/10_type_system_foundations.md) | typing rules, 进展/保持 | T1 进展, T2 保持, T3 类型安全 | |
 | 型变 | [variance_theory](type_theory/10_variance_theory.md) | Def 1.1–3.1 | T1–T4 协变/逆变/不变/函数 | |
 | Trait | [trait_system_formalization](type_theory/10_trait_system_formalization.md) | Axiom COH1/COH2 | COH-T1, 对象安全 T1–T3 | |
-| 异步 | [async_state_machine](formal_methods/10_async_state_machine.md) | Def 4.1–5.2 | T6.1 状态一致, T6.2 并发安全, T6.3 进度 | |
+| 异步（Async） | [async_state_machine](formal_methods/10_async_state_machine.md) | Def 4.1–5.2 | T6.1 状态一致, T6.2 并发安全（Concurrency Safety）, T6.3 进度 | |
 | Pin | [pin_self_referential](formal_methods/10_pin_self_referential.md) | Def 1.1–2.2 | T1–T3 Pin 保证/自引用/投影 | |
 | Send/Sync | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | Def SEND1/SYNC1、SYNC-L1 | SEND-T1、SYNC-T1、SEND-SYNC-T1 | 与 spawn/Future/Arc 衔接 |
 | 控制流 | [formal_methods/README](formal_methods/README.md) | A-CF1 | 与 T-TY3 衔接 | |
@@ -315,7 +315,7 @@ research_notes/
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

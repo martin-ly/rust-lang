@@ -365,12 +365,12 @@ fn llm_inference() -> anyhow::Result<()> {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-| 模块 | AI/ML 中的关联 |
+| 模块（Module） | AI/ML 中的关联 |
 | :--- | :--- |
-| C01 所有权 | 张量生命周期、零拷贝 |
-| C02 类型系统 | 泛型张量、Trait 抽象 |
+| C01 所有权（Ownership） | 张量生命周期、零拷贝 |
+| C02 类型系统（Type System） | 泛型张量、Trait 抽象 |
 | C05 线程 | 多线程训练、数据并行 |
-| C06 异步 | 流式推理 |
+| C06 异步（Async） | 流式推理 |
 | C11 宏 | 模型定义 DSL |
 
 ---

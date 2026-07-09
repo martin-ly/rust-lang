@@ -412,7 +412,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 | :--- | :--- | :--- |
 | 无宏  | 45.2  | 基准 |
 | 声明式宏   | 48.7         | +7.7%    |
-| 过程宏     | 52.3         | +15.7%   |
+| 过程宏（Procedural Macro）     | 52.3         | +15.7%   |
 | 复杂过程宏 | 68.9         | +52.4%   |
 
 **分析**：
@@ -610,7 +610,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

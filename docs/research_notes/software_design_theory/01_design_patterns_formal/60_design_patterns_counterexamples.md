@@ -246,7 +246,7 @@ struct Service {
 |------|----------|------|----------|
 | 全局可变状态 | 单例 | 隐藏依赖、瓶颈 | 依赖注入 / 只读全局 |
 | 生命周期耦合 Observer | Observer | 动态管理困难 | Weak / channel |
-| 滥用 RefCell | 内部可变性 | 运行时 panic | 优先 `&mut self` |
+| 滥用 RefCell | 内部可变性 | 运行时（Runtime） panic | 优先 `&mut self` |
 | Builder 缺失验证 | Builder | 运行时错误 | 类型状态 / Result |
 | Deref 模拟继承 | 组合 | API 不可控 | 显式转发 / trait |
 | 过度泛型化 | 泛型设计 | 可读性差 | 关联类型 / 上下文对象 |

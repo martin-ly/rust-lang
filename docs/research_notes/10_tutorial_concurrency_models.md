@@ -395,7 +395,7 @@ async fn fetch_multiple() -> Result<(), Error> {
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-| 运行时 | 特点 | 适用场景 |
+| 运行时（Runtime） | 特点 | 适用场景 |
 | :--- | :--- | :--- |
 | **Tokio** | 功能最全，生态丰富 | 生产环境首选 |
 | **async-std [已归档]** | 标准库风格 | 简洁项目 |
@@ -743,7 +743,7 @@ impl Handler<Message> for MyActor {
 | 模型 | 适用场景 | 性能 | 复杂度 |
 | :--- | :--- | :--- | :--- |
 | OS线程 | CPU密集 | 高 | 低 |
-| 异步 | IO密集 | 高 | 中 |
+| 异步（Async） | IO密集 | 高 | 中 |
 | 数据并行 | 数据处理 | 极高 | 低 |
 | Actor | 分布式 | 中 | 高 |
 
@@ -775,7 +775,7 @@ impl Handler<Message> for MyActor {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

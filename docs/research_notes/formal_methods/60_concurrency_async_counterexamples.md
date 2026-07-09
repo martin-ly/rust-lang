@@ -5,7 +5,7 @@
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
 > **Bloom 层级**: L5-L6 (分析/评价)
-> **概念族**: 并发安全 / 异步 / Send/Sync / Future / Pin / 反例边界
+> **概念族**: 并发安全（Concurrency Safety） / 异步（Async） / Send/Sync / Future / Pin / 反例边界
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **创建日期**: 2026-06-29

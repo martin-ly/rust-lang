@@ -615,24 +615,22 @@ fn main() {
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] ·
 > [来源: [Rust Reference — Type Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)]
 
-### 10.5 边界测试：`dyn Trait` 到 `dyn Trait` 的跨 trait coercion（编译错误）
+### 10.5 边界测试：`dyn Trait` 到 `dyn Trait` 的跨 trait upcasting（1.86+ 已支持）
 
 ```rust,ignore
 trait A {}
 trait B: A {}
 
 fn upcast(b: &dyn B) -> &dyn A {
-    // ❌ 编译错误: Rust 不支持直接的 trait object upcasting
-    // b as &dyn A // 错误!
-
-    // 旧版 Rust 需手动实现，1.86+ 支持 trait upcasting（不稳定）
-    todo!()
+    // Rust 1.86+ 已支持 trait object upcasting：
+    // `dyn B` 可以向上转型为 `dyn A`，因为 `B: A`
+    b as &dyn A
 }
 ```
 
-> **修正**: Trait object 的**向上转型**（upcasting）：`dyn B` → `dyn A`（`B: A`）在 Rust 中长期不支持，因为 vtable 布局问题：`dyn B` 的 vtable 包含 `B` 的方法，`dyn A` 的 vtable 只包含 `A` 的方法，需要额外的 vtable 指针或调整。
-> Rust 1.86+ 引入了 trait upcasting（不稳定特性），允许 `b as &dyn A`。
-> 旧版 workaround：1) 在 trait 中定义 `as_a(&self) -> &dyn A` 方法；2) 使用泛型（Generics）而非 trait object；3) 使用 `downcast_ref`（若具体类型已知）。
+> **说明**: Trait object 的**向上转型**（upcasting）：`dyn B` → `dyn A`（`B: A`）在 Rust 1.86+ 已稳定支持。实现上，`dyn B` 的 vtable 包含 `B` 的方法，向上转型到 `dyn A` 时需要额外的 vtable 指针或调整，因此早期 Rust 不允许直接 `as` 转换。
+> 当前写法：`b as &dyn A`。
+> 旧版 workaround（1.86 之前）：1) 在 trait 中定义 `as_a(&self) -> &dyn A` 方法；2) 使用泛型（Generics）而非 trait object；3) 使用 `downcast_ref`（若具体类型已知）。
 > 这与 Java 的接口向上转型（自动，无开销）或 C++ 的多继承（复杂 vtable 调整）不同——Rust 的单一继承 trait + 自动 upcasting 是设计演进的方向。
 > [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] ·
 > [来源: [Trait Upcasting RFC](https://rust-lang.github.io/rfcs//3324-dyn-upcasting.html)]

@@ -80,7 +80,7 @@
 
 **判定流程**：1→不可则「不可表达」；2→需 unsafe 且可封装则「近似」；3→一致则「等价」；4→依赖则「不可表达」；5→有替代则「近似」。
 
-**反例类型**：等价违反→类型错误/所有权错误；近似违反→运行时 panic/逻辑错误；不可表达→编译拒绝或 UB。
+**反例类型**：等价违反→类型错误/所有权错误；近似违反→运行时（Runtime） panic/逻辑错误；不可表达→编译拒绝或 UB。
 
 **引用**：[LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../10_language_semantics_expressiveness.md) EB1–EB6。
 
@@ -98,7 +98,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **Factory Method**：trait 工厂方法，语义一致
-- **Abstract Factory**：枚举/关联类型产品族，等价
+- **Abstract Factory**：枚举（Enum）/关联类型产品族，等价
 - **Builder**：链式构建，类型状态可增强
 - **Prototype**：`Clone` trait 直接对应
 
@@ -112,7 +112,7 @@
 - **Bridge**：trait 解耦抽象与实现，等价
 - **Composite**：枚举递归结构，等价
 - **Decorator**：结构体包装，等价
-- **Facade**：模块/结构体，等价
+- **Facade**：模块（Module）/结构体（Struct），等价
 - **Flyweight**：`Arc` 共享，等价
 - **Proxy**：委托、延迟，等价
 
@@ -129,7 +129,7 @@
 - **State**：枚举/类型状态更严格，等价
 - **Strategy**：trait 即策略，等价
 
-**论证**：Rust 的 trait、枚举、所有权、借用可直接对应 OOP 的接口、多态、封装，语义一致。
+**论证**：Rust 的 trait、枚举、所有权（Ownership）、借用可直接对应 OOP 的接口、多态、封装，语义一致。
 
 ---
 
@@ -225,7 +225,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-**Def WF1（工作流）**：工作流 = 多步骤业务过程 + 状态转换 + 可选补偿 + 可选人工任务 + 超时/重试。与 23/43 构建块正交；与执行模型（同步/异步/并发/分布式）为不同维度。
+**Def WF1（工作流）**：工作流 = 多步骤业务过程 + 状态转换 + 可选补偿 + 可选人工任务 + 超时/重试。与 23/43 构建块正交；与执行模型（同步/异步（Async）/并发/分布式）为不同维度。
 
 **Def WF2（状态机）**：有限状态集 $S$，转换 $\delta: S \times E \to S$；Rust 等价：`enum State` + `match`。
 
@@ -504,7 +504,7 @@ impl Originator {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

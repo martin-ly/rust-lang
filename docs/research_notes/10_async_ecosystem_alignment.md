@@ -38,7 +38,7 @@
 
 ## 二、核心运行时 {#二核心运行时}
 
-| 运行时/库 | 官方文档 | 项目文档 | 覆盖内容 |
+| 运行时（Runtime）/库 | 官方文档 | 项目文档 | 覆盖内容 |
 |-----------|----------|----------|----------|
 | Tokio | <https://tokio.rs/> | [crates/c06_async/](../../crates/c06_async/README.md) | 任务调度、IO、time、sync |
 | async-std | <https://docs.rs/async-std/> | [crates/c06_async/](../../crates/c06_async/README.md) | 与 std 类似的异步 API |
@@ -62,7 +62,7 @@
 
 | 库/框架 | 来源 | 项目文档 | 备注 |
 |---------|------|----------|------|
-| tokio::net | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [crates/c10_networks/](../../crates/c10_networks/README.md) | TCP/UDP 异步 IO |
+| tokio::net | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [crates/c10_networks/](../../crates/c10_networks/README.md) | TCP/UDP 异步（Async） IO |
 | hyper | [hyper.rs](https://hyper.rs/) | [crates/c10_networks/](../../crates/c10_networks/README.md) | HTTP 客户端/服务端 |
 | axum | [axum docs](https://docs.rs/axum/) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) | Web 框架架构 |
 | tonic | [tonic docs](https://docs.rs/tonic/) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) | gRPC |

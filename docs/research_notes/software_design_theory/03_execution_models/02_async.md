@@ -82,7 +82,7 @@ $\mathit{async}\, \{ e \}$ 产生 $\mathrm{Future}\langle \tau \rangle$，其中
 
 **Axiom AS2**：单线程协作式多任务；无抢占，yield 点仅在 await。
 
-**定理 AS-T1**：由 [async_state_machine](../../formal_methods/10_async_state_machine.md) 定理 6.1（状态一致性）、6.2（并发安全）、6.3（进度保证）。
+**定理 AS-T1**：由 [async_state_machine](../../formal_methods/10_async_state_machine.md) 定理 6.1（状态一致性）、6.2（并发安全（Concurrency Safety））、6.3（进度保证）。
 
 **定理 AS-T2**：由 [pin_self_referential](../../formal_methods/10_pin_self_referential.md)，Pin 保证自引用 Future 移动安全。
 
@@ -210,7 +210,7 @@ impl SelfReferential {
 | 模型 | 线程 | 调度 | 适用场景 |
 | :--- | :--- | :--- | :--- |
 | 同步 | 1 | 无 | CPU 密集 |
-| 异步 | 1 | 协作式 | I/O 密集、高并发连接 |
+| 异步（Async） | 1 | 协作式 | I/O 密集、高并发连接 |
 | 并发 | N | 抢占式 | 多核并行 |
 
 ---
@@ -367,7 +367,7 @@ handle.abort();  // 显式取消
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-| 运行时 | 特点 | 适用 |
+| 运行时（Runtime） | 特点 | 适用 |
 | :--- | :--- | :--- |
 | **tokio** | 多线程、work-stealing、生态丰富 | 生产、网络服务 |
 | **tokio** | 接近 std API、兼容性好 | 快速原型 |
@@ -450,7 +450,7 @@ handle.abort();  // 显式取消
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

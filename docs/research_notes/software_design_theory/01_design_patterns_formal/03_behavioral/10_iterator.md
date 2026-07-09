@@ -87,7 +87,7 @@
 | Rust Reference | [Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) | 动态分发与生命周期 |
 | Rustonomicon | [Safe Abstractions](https://doc.rust-lang.org/nomicon/) | `unsafe` 边界与 Safe 封装 |
 
-> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权、借用检查与 trait 系统对实现方式的约束。
+> **国际化对齐说明**：本模式在 Rust 生态中的表达与 GoF 原典保持语义等价；差异主要体现在 Rust 所有权（Ownership）、借用检查与 trait 系统对实现方式的约束。
 
 ---
 
@@ -222,7 +222,7 @@ Iterator 为纯 Safe；`Iterator` trait 标准库定义，`for` 糖语法，无 
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
-| **概念定义层** | Def 1.1（Iterator 结构）、Axiom IT1/IT2（无重复、可变借用） | 上 |
+| **概念定义层** | Def 1.1（Iterator 结构）、Axiom IT1/IT2（无重复、可变借用（Mutable Borrow）） | 上 |
 | **属性关系层** | Axiom IT1/IT2 $\rightarrow$ 定理 IT-T1/IT-T2 $\rightarrow$ 推论 IT-C1；依赖 type、borrow | 上 |
 | **解释论证层** | IT-T1/IT-T2 完整证明；反例：迭代中修改集合 | §完整证明、§反例 |
 
@@ -546,7 +546,7 @@ impl Iterator for Bad {
 
 | 变体 | 说明 | 适用 |
 | :--- | :--- | :--- |
-| 结构体 + next | 自定义迭代器；实现 trait | 新集合类型 |
+| 结构体（Struct） + next | 自定义迭代器；实现 trait | 新集合类型 |
 | 适配器链 | `iter().map().filter()` | 惰性转换 |
 | 消费器 | `collect`、`sum`、`fold` | 聚合结果 |
 
@@ -713,7 +713,7 @@ graph LR
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

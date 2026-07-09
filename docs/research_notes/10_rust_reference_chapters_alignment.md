@@ -83,7 +83,7 @@
 | [Block Expressions](https://doc.rust-lang.org/reference/expressions/block-expr.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | async 块、tail expr drop order |
 | [If / Match](https://doc.rust-lang.org/reference/expressions/if-expr.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 控制流 |
 | [Call Expressions](https://doc.rust-lang.org/reference/expressions/call-expr.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | async fn 调用 |
-| [Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 闭包 |
+| [Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 闭包（Closures） |
 
 ---
 
@@ -141,7 +141,7 @@
 
 ## 十一、未覆盖缺口 {#十一未覆盖缺口}
 
-1. Reference 中 `const` 求值、模式匹配、宏的详细章节可进一步拆分。
+1. Reference 中 `const` 求值、模式匹配（Pattern Matching）、宏的详细章节可进一步拆分。
 2. 每个对齐点可细化到具体文件行号。
 3. 可随 Rust 1.97+ 发布持续更新本章节目录。
 

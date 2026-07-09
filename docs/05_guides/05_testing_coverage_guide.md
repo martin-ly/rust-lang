@@ -508,7 +508,7 @@ exclude-files = [
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
-| **核心模块** | C01 所有权 |
+| **核心模块** | C01 所有权（Ownership） |
 | :--- | :--- |
 | :--- | :--- |
 | **相关指南** | [05_performance_testing_report.md](05_performance_testing_report.md) |

@@ -57,8 +57,8 @@
 | 层级 | 目标读者 | 内容特征 |
 |------|----------|----------|
 | `00_start/` | 零基础 | 安装、Hello World、设计哲学 |
-| `01_fundamentals/` | 初学者 | 所有权、借用、生命周期、迭代器 |
-| `02_intermediate/` | 进阶者 | 泛型、Trait、错误处理、智能指针 |
+| `01_fundamentals/` | 初学者 | 所有权（Ownership）、借用（Borrowing）、生命周期、迭代器 |
+| `02_intermediate/` | 进阶者 | 泛型（Generics）、Trait、错误处理（Error Handling）、智能指针（Smart Pointer） |
 | `03_advanced/` | 高级开发者 | async/await、Unsafe、FFI、宏系统 |
 | `04_expert/` | 专家/研究者 | 编译器内部、形式化验证、安全关键系统 |
 | `05_reference/` | 全阶段 | 关键字参考、标准库速查 |

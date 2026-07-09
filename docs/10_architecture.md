@@ -176,8 +176,8 @@ flowchart LR
 
 | Crate | 核心概念 | 外部依赖 | 特性标志 | 示例数量 |
 |-------|----------|----------|----------|----------|
-| c01_ownership | 所有权、借用、生命周期 | tokio, serde | - | 15+ |
-| c02_type_system | 类型系统、泛型 | serde, tokio, futures | - | 20+ |
+| c01_ownership | 所有权（Ownership）、借用（Borrowing）、生命周期 | tokio, serde | - | 15+ |
+| c02_type_system | 类型系统（Type System）、泛型（Generics） | serde, tokio, futures | - | 20+ |
 | c03_control_fn | 控制流、函数、异步 | tokio, tracing | async, std | 12+ |
 | c04_generic | 泛型、Trait、GAT | rayon, itertools | - | 18+ |
 | c05_threads | 并发、同步、锁 | crossbeam, rayon | std, tokio | 25+ |
@@ -186,7 +186,7 @@ flowchart LR
 | c08_algorithms | 算法、数据结构 | rayon, petgraph | bench | 40+ |
 | c09_design_pattern | 设计模式 | tokio, rayon | obs-tracing | 20+ |
 | c10_networks | 网络协议、WebSocket | tokio, tonic, rustls | tls, sniff | 25+ |
-| c11_macro_system_proc | 宏规则、过程宏 | syn, quote | serde_support | 10+ |
+| c11_macro_system_proc | 宏规则、过程宏（Procedural Macro） | syn, quote | serde_support | 10+ |
 | c12_wasm | WebAssembly、WASI | wasm-bindgen, js-sys | ecosystem | 8+ |
 
 ---
@@ -444,7 +444,7 @@ sequenceDiagram
 
 - [Cargo Workspace 文档](https://doc.rust-lang.org/cargo/reference/workspaces.html)
 - [Rust 模块系统](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
-- [Tokio 运行时](https://tokio.rs/)
+- [Tokio 运行时（Runtime）](https://tokio.rs/)
 
 ---
 

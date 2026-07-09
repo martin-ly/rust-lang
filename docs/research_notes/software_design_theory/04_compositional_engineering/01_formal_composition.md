@@ -54,7 +54,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**Def 1.1（模块）**:
+**Def 1.1（模块（Module））**:
 
 模块 $M$ 为一个命名空间，包含：
 
@@ -108,7 +108,7 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**定理 CE-T1（组合保持内存安全）**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/10_ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
+**定理 CE-T1（组合保持内存安全）**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/10_ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全（Memory Safety）），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
 
 *证明*：见 [02_effectiveness_proofs](02_effectiveness_proofs.md) CE-T1；归纳基：单模块；归纳步：添加 $M_n$ 时，值传递/所有权转移符合 Def 1.3 接口一致；无新分配模式违反规则。∎
 
@@ -324,7 +324,7 @@ impl Client<Configured> {
 | 抽象 | 运行时开销 | 编译期保证 |
 | :--- | :--- | :--- |
 | trait 对象 `&dyn Trait` | 一次 vtable 间接 | 对象安全、方法签名 |
-| 泛型 `T: Trait` | 单态化后零开销 | 边界检查在编译期 |
+| 泛型（Generics） `T: Trait` | 单态化后零开销 | 边界检查在编译期 |
 | 类型状态 Builder | 无额外字段/标签 | 状态转换编译期验证 |
 | `enum` 替代 string | 无堆分配 | 穷尽匹配 |
 
@@ -426,7 +426,7 @@ fn main() {
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

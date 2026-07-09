@@ -165,7 +165,7 @@
 | RustHorn 内容 | 本项目对应 | 差距 | 优先级 |
 | :--- | :--- | :--- | :--- |
 | CHC 编码验证 | `borrow_checker_proof` T1 | 无 CHC/约束 Horn 子句形式化 | P2 |
-| 所有权 → 借用约束翻译 | `lifetime_formalization` | 无 SMT 编码 | P2 |
+| 所有权（Ownership） → 借用约束翻译 | `lifetime_formalization` | 无 SMT 编码 | P2 |
 | 反例引导的属性检查 | 反例表 | 未与 RustHorn 工具链对接 | P2 |
 | 高阶函数/递归数据类型 | 类型系统基础 | 无 CHC 近似处理 | P2 |
 

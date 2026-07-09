@@ -95,7 +95,7 @@
 
 | 包含 | 排除 | 交叉领域 |
 | :--- | :--- | :--- |
-| 所有权系统 | 垃圾回收 | 类型系统（所有权类型） |
+| 所有权系统 | 垃圾回收 | 类型系统（Type System）（所有权类型） |
 | 借用检查器 | 手动内存管理 | 并发（Send/Sync） |
 | 生命周期 | 智能指针实现细节 | 编译器（MIR borrowck） |
 | 内存布局 | 分配器实现 | FFI（unsafe边界） |
@@ -146,7 +146,7 @@
 | 定理 | 陈述 | 证明 | 重要性 |
 | :--- | :--- | :--- | :--- |
 | **T-唯一性** | 任何时刻只有一个所有者 | [ownership_model](formal_methods/10_ownership_model.md) | ⭐⭐⭐⭐⭐ |
-| **T-内存安全** | 无悬垂指针、无双重释放 | [ownership_model](formal_methods/10_ownership_model.md) | ⭐⭐⭐⭐⭐ |
+| **T-内存安全（Memory Safety）** | 无悬垂指针、无双重释放 | [ownership_model](formal_methods/10_ownership_model.md) | ⭐⭐⭐⭐⭐ |
 | **T-无泄漏** | 资源最终被释放 | [ownership_model](formal_methods/10_ownership_model.md) | ⭐⭐⭐⭐ |
 | **T-数据竞争自由** | 借用规则保证线程安全 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | ⭐⭐⭐⭐⭐ |
 
@@ -203,7 +203,7 @@ graph TB
 | 包含 | 排除 | 交叉领域 |
 | :--- | :--- | :--- |
 | 静态类型检查 | 运行时类型信息 | 内存安全（所有权类型） |
-| 泛型 | 模板元编程 | 编译器（单态化） |
+| 泛型（Generics） | 模板元编程 | 编译器（单态化（Monomorphization）） |
 | Trait | 虚函数表 | 软件设计（接口抽象） |
 | 类型推导 | 反射 | 形式化（类型论） |
 | 型变 | 协变/逆变实现 | 生命周期（子类型） |
@@ -298,7 +298,7 @@ A + B     : A 或 B
 | 包含 | 排除 | 交叉领域 |
 | :--- | :--- | :--- |
 | 线程并发 | 进程间通信 | 内存安全（Send/Sync） |
-| 异步/await | 协程实现 | 类型系统（Future trait） |
+| 异步（Async）/await | 协程实现 | 类型系统（Future trait） |
 | 同步原语 | 无锁算法细节 | 编译器（状态机转换） |
 | Send/Sync trait | 线程池实现 | 软件设计（Actor模式） |
 
@@ -545,7 +545,7 @@ graph TB
 | :--- | :--- | :--- | :--- | :--- |
 | **内存安全** | 资源管理 | 所有权系统 | 借用规则 | RAII模式 |
 | **类型系统** | 类型安全 | 类型判断 | 泛型/Trait | 类型标注 |
-| **并发** | 并发安全 | Send/Sync | 同步原语 | async/await |
+| **并发** | 并发安全（Concurrency Safety） | Send/Sync | 同步原语 | async/await |
 | **软件设计** | 抽象能力 | 设计模式 | 模块系统 | 代码组织 |
 | **工具链** | 代码转换 | 编译流程 | MIR优化 | cargo命令 |
 
@@ -585,7 +585,7 @@ graph TB
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

@@ -42,7 +42,7 @@
 |----------|--------------|----------|------|
 | 基于区域（region-based）的借用模型 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ 高 | Aeneas 将借用编码为区域 |
 | 纯函数子集 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | ✅ 高 | 支持无指针别名的函数 |
-| Trait / 泛型 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 🔄 中 | 部分 trait 支持 |
+| Trait / 泛型（Generics） | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 🔄 中 | 部分 trait 支持 |
 | Unsafe / 裸指针 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) | ⚠️ 低 | Aeneas 主要支持 safe Rust |
 | 异步状态机 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 🔄 中 | 实验性支持 |
 
@@ -55,7 +55,7 @@
 | 工具特性 | 项目对应内容 | 可验证性 | 备注 |
 |----------|--------------|----------|------|
 | 将 Rust 翻译为 Coq | [10_formal_language_and_proofs.md](10_formal_language_and_proofs.md) | ✅ 高 | 适合构造机器证明 |
-| 所有权 / 生命周期 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | ✅ 高 | 通过 Coq 编码 |
+| 所有权（Ownership） / 生命周期 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | ✅ 高 | 通过 Coq 编码 |
 | Trait 实现 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 🔄 中 | 需要手工编写 Coq 证明 |
 | Unsafe 翻译 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) | 🔄 中 | 翻译后需显式处理 UB |
 
@@ -82,7 +82,7 @@
 | 工具特性 | 项目对应内容 | 可验证性 | 备注 |
 |----------|--------------|----------|------|
 | 基于 Viper 的合约验证 | [10_verification_tools_matrix.md](10_verification_tools_matrix.md) | ✅ 高 | 需要写前置/后置条件 |
-| 所有权 / 借用 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ 高 | 自动处理借用 |
+| 所有权 / 借用（Borrowing） | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ 高 | 自动处理借用 |
 | Loop 不变量 | [crates/c08_algorithms/](../../crates/c08_algorithms/README.md) | ✅ 高 | 适合算法验证 |
 | Trait 合约 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 🔄 中 | 需要写抽象谓词 |
 

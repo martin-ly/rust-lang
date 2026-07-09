@@ -93,13 +93,13 @@
 | :--- | :--- |
 | 加载时机 | 编译期 / 启动期 |
 | 类型安全 | 完全由 Rust 类型系统保证 |
-| 性能 | 零额外开销（单态化、内联） |
+| 性能 | 零额外开销（单态化（Monomorphization）、内联） |
 | 部署 | 与主程序一起打包 |
 | 代表 crate | `inventory`、`linkme`、`ctor` |
 
 ### 2.2 动态加载（Dynamic Loading） {#22-动态加载dynamic-loading}
 
-插件编译为动态库（`.so` / `.dll` / `.dylib`），主程序在**运行时**通过 `dlopen`/`dlsym` 加载。
+插件编译为动态库（`.so` / `.dll` / `.dylib`），主程序在**运行时（Runtime）**通过 `dlopen`/`dlsym` 加载。
 
 | 维度 | 动态加载 |
 | :--- | :--- |

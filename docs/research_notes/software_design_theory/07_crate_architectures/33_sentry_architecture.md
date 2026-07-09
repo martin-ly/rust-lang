@@ -166,7 +166,7 @@ tx.finish();
 | 初始化 Guard | `ClientInitGuard` | RAII 保证 Client 生命周期与 flush 行为 |
 | Hub 绑定 | `SentryFuture` / `SentryFutureExt` | 在异步 Future 执行期间静态绑定 Hub |
 | Scope 修改 | `configure_scope<F: FnOnce(&mut Scope)>` | 编译期保证 Scope 借用的独占性 |
-| 事件构造 | `Event<'static>` / `protocol` 模块 | 将动态 JSON 事件约束为类型化结构 |
+| 事件构造 | `Event<'static>` / `protocol` 模块（Module） | 将动态 JSON 事件约束为类型化结构 |
 | 集成 trait | `Integration` | 通过 trait 对象扩展 panic/tracing/anyhow 等集成 |
 
 > [来源: [sentry API docs](https://docs.rs/sentry/latest/sentry/)]

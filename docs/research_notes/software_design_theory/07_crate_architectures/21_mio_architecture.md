@@ -458,9 +458,9 @@ poll.poll(&mut events, None)?;
 - **系统调用次数**：完全相同（`epoll_create1` → `epoll_ctl` → `epoll_wait`）
 - **内存分配**：mio 在 `Events::with_capacity` 中预分配数组，与直接 `libc::epoll_event[]` 等价
 - **类型转换**：`Token(0)` 直接映射为 `epoll_data.u64 = 0`，无运行时转换
-- **错误处理**：mio 将 `errno` 转换为 `io::Error`，增加一次分支判断（可忽略）
+- **错误处理（Error Handling）**：mio 将 `errno` 转换为 `io::Error`，增加一次分支判断（可忽略）
 
-> **结论**: mio 是**零成本抽象**的典范——它提供跨平台一致性和内存安全，同时不增加任何额外的系统调用或内存开销。
+> **结论**: mio 是**零成本抽象（Zero-Cost Abstraction）**的典范——它提供跨平台一致性和内存安全，同时不增加任何额外的系统调用或内存开销。
 > [Rustnomicon — Zero-Cost Abstractions](https://doc.rust-lang.org/nomicon/)(<https://doc.rust-lang.org/nomicon/>)
 
 ---

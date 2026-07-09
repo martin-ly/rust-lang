@@ -87,10 +87,10 @@
 | 元概念 | 定义 | Rust 体现 | 相关文档 |
 | :--- | :--- | :--- | :--- |
 | **资源管理** | 计算机资源的获取和释放 | 所有权系统 | 10_ownership_model.md |
-| **类型安全** | 编译时类型正确性保证 | 类型系统 | 10_type_system_foundations.md |
-| **并发安全** | 多线程/异步执行安全 | Send/Sync | 10_send_sync_formalization.md |
-| **内存安全** | 无悬垂指针、无数据竞争 | 借用检查器 | 10_borrow_checker_proof.md |
-| **抽象能力** | 代码复用和接口定义 | Trait/泛型 | 10_trait_system_formalization.md |
+| **类型安全** | 编译时类型正确性保证 | 类型系统（Type System） | 10_type_system_foundations.md |
+| **并发安全（Concurrency Safety）** | 多线程/异步执行安全 | Send/Sync | 10_send_sync_formalization.md |
+| **内存安全（Memory Safety）** | 无悬垂指针、无数据竞争 | 借用检查器 | 10_borrow_checker_proof.md |
+| **抽象能力** | 代码复用和接口定义 | Trait/泛型（Generics） | 10_trait_system_formalization.md |
 
 **形式化**:
 
@@ -116,7 +116,7 @@
 
 | 概念 | 定义 | 层间关系 | 主文档 |
 | :--- | :--- | :--- | :--- |
-| **所有权** | 资源唯一控制者 | L1资源管理 → L2所有权 | 10_ownership_model.md |
+| **所有权（Ownership）** | 资源唯一控制者 | L1资源管理 → L2所有权 | 10_ownership_model.md |
 | **移动语义** | 所有权转移机制 | L2所有权 → L3移动 | 10_ownership_model.md |
 | **Copy/Clone** | 值复制语义 | L2所有权 → L3复制 | 10_ownership_model.md |
 | **Drop** | 资源释放机制 | L2所有权 → L3析构 | 10_ownership_model.md |
@@ -197,7 +197,7 @@
 | 概念 | 定义 | 层间关系 | 示例 |
 | :--- | :--- | :--- | :--- |
 | **共享借用** | `&T` 只读引用 | L2借用 → L3共享 | `let r = &s;` |
-| **可变借用** | `&mut T` 独占引用 | L2借用 → L3可变 | `let r = &mut s;` |
+| **可变借用（Mutable Borrow）** | `&mut T` 独占引用 | L2借用 → L3可变 | `let r = &mut s;` |
 | **解引用** | `*` 操作符解引用 | L2借用 → L3解引用 | `*r = String::from("y");` |
 | **重新借用** | 从借用创建新借用 | L2借用 → L3重新借用 | `let r2 = &*r;` |
 
@@ -208,7 +208,7 @@
 | 概念 | 定义 | 层间关系 | 示例 |
 | :--- | :--- | :--- | :--- |
 | **生命周期标注** | 显式标注引用有效性 | L2生命周期 → L3标注 | `fn foo<'a>(x: &'a str)` |
-| **生命周期省略** | 编译器推断生命周期 | L2生命周期 → L3省略 | `fn foo(x: &str)` |
+| **生命周期省略（Lifetime Elision）** | 编译器推断生命周期 | L2生命周期 → L3省略 | `fn foo(x: &str)` |
 | **生命周期边界** | `'a: 'b` 约束 | L2生命周期 → L3边界 | `fn foo<'a, 'b>(x: &'a str, y: &'b str) where 'a: 'b` |
 
 ---
@@ -222,7 +222,7 @@
 | 机制 | 定义 | 层间关系 | 实现细节 |
 | :--- | :--- | :--- | :--- |
 | **借用检查器** | 编译时借用规则检查 | L2借用 → L4检查器 | MIR borrowck |
-| **单态化** | 泛型编译时特化 | L2泛型 → L4单态化 | 为每个类型生成代码 |
+| **单态化（Monomorphization）** | 泛型编译时特化 | L2泛型 → L4单态化 | 为每个类型生成代码 |
 | **vtable** | Trait对象动态分发 | L2Trait → L4vtable | 指向方法表的指针 |
 | **ARC/Mutex** | 运行时引用计数/锁 | L2并发 → L4运行时 | Atomic Rc / Mutex 实现 |
 | **Future状态机** | 异步代码状态转换 | L2异步 → L4状态机 | Poll/await 状态转换 |
@@ -398,11 +398,11 @@ L5 代码实践
 | 概念 | L2 文档 | L3 文档 | L4 文档 | L5 文档 | 完整 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 所有权 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 借用 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 借用（Borrowing） | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 生命周期 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 泛型 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Trait | ✅ | ✅ | ⚠️ | ✅ | ⚠️ |
-| 异步 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 异步（Async） | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 并发 | ✅ | ✅ | ⚠️ | ✅ | ⚠️ |
 
 ---
@@ -521,7 +521,7 @@ graph BT
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

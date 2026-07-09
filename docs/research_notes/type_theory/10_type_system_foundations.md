@@ -2,7 +2,7 @@
 
 > **EN**: Type System Foundations
 > **Summary**: 类型系统基础 Type System Foundations. (stub/archive redirect)
-> **概念族**: 类型系统 / 基础
+> **概念族**: 类型系统（Type System） / 基础
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 > **内容分级**: [归档级]
 >
@@ -10,7 +10,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 >
 > **层次定位**: L4 形式化 / 类型论基础研究
-> **前置依赖**: [concept L4 类型论](../../../concept/04_formal/00_type_theory/02_type_theory.md) · [concept L2 泛型](../../../concept/02_intermediate/01_generics/02_generics.md)
+> **前置依赖**: [concept L4 类型论](../../../concept/04_formal/00_type_theory/02_type_theory.md) · [concept L2 泛型（Generics）](../../../concept/02_intermediate/01_generics/02_generics.md)
 > **后置延伸**: [ROD 形式语义](../../../archive/rust-ownership-decidability/formal-foundations/README.md) · [concept L7 效果系统](../../../concept/07_future/03_preview_features/04_effects_system.md)
 > **跨层映射**: L4 System F ↔ Rust 泛型 | 研究笔记扩展
 > **定理链编号**: T-130 类型一致性 → T-131 子类型 soundness
@@ -2797,7 +2797,7 @@ impl<T> Same<T> for T {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-| 反例类别 | 编译时/运行时 | 错误类型 | 理论根源 |
+| 反例类别 | 编译时/运行时（Runtime） | 错误类型 | 理论根源 |
 |---------|-------------|---------|---------|
 | 类型不匹配 | 编译时 | 约束冲突 | 统一失败 |
 | 未绑定变量 | 编译时 | 环境查找失败 | 自由变量 |
@@ -3308,7 +3308,7 @@ fn main() {
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 1. **泛型与 impl Trait**：`fn f<T: Trait>()`、`fn g() -> impl Trait` 的类型推导与存在/全称量化对应。
-2. **错误处理**：`Result`/`Option` 的类型与类型安全保证无隐式异常；`?` 的类型规则与子类型化。
+2. **错误处理（Error Handling）**：`Result`/`Option` 的类型与类型安全保证无隐式异常；`?` 的类型规则与子类型化。
 3. **Rust 1.93**：const 泛型、`MaybeUninit` 等对类型规则与推导的扩展已反映于 Rust 参考与 Chalk；形式化属后续工作。
 
 ---
@@ -3419,7 +3419,7 @@ fn main() {
 
 对 `Clone + Copy` 类型的 `clone()` 调用语义不变，但 impl 解析路径变更。见 [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)。
 
-**Def LUB1（LUB 类型推断）**：设 $e_1 : \tau_1$、$e_2 : \tau_2$，则 `if c { e1 } else { e2 }` 的类型为 $\mathrm{LUB}(\tau_1, \tau_2)$；
+**Def LUB1（LUB 类型推断（Type Inference））**：设 $e_1 : \tau_1$、$e_2 : \tau_2$，则 `if c { e1 } else { e2 }` 的类型为 $\mathrm{LUB}(\tau_1, \tau_2)$；
 
 1.93 修正函数项、安全性，使 LUB 推断更严格。
 
@@ -3463,7 +3463,7 @@ fn main() {
 
 **定理 BOT-T1**：若 $e : \bot$ 则 $e$ 不终止或无正常返回值；$\bot$ 可 coerce 到任意类型；控制流分析中 `!` 分支视为不可达。
 
-**Def NEWTYPE1（newtype 与 repr(transparent)）**：`#[repr(transparent)]` 结构体 $\tau_w$ 包装单字段类型 $\tau$ 时，$\tau_w$ 与 $\tau$ 有相同布局与 ABI；零成本抽象。
+**Def NEWTYPE1（newtype 与 repr(transparent)）**：`#[repr(transparent)]` 结构体（Struct） $\tau_w$ 包装单字段类型 $\tau$ 时，$\tau_w$ 与 $\tau$ 有相同布局与 ABI；零成本抽象（Zero-Cost Abstraction）。
 
 形式化：
 

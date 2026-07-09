@@ -69,6 +69,9 @@
     - [16.5 与 C 语言 union 的 FFI 互操作](#165-与-c-语言-union-的-ffi-互操作)
     - [16.6 代码示例：正确使用 + 典型错误](#166-代码示例正确使用--典型错误)
   - [十七、待补充与演进方向（TODOs）](#十七待补充与演进方向todos)
+    - [17.1 Lifetime Elision：省略即约定](#171-lifetime-elision省略即约定)
+    - [17.2 `impl Trait` 与生命周期推断](#172-impl-trait-与生命周期推断)
+    - [17.3 `union` 的类型安全边界](#173-union-的类型安全边界)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：高级生命周期的编译错误](#十边界测试高级生命周期的编译错误)
@@ -1125,9 +1128,74 @@ enum SafeValue {
 
 ## 十七、待补充与演进方向（TODOs）
 
-- [x] **TODO**: 补充 Lifetime Elision 的三条规则的完整形式化描述（∀, ⇒ 符号、每个规则的正例+反例、Rust Reference 来源）—— 已完成 §13 —— 2026-05-14
-- [x] **TODO**: 补充 `impl Trait` 与生命周期推断的交互（RPIT 捕获、APIT 差异、`+'a` 显式约束、where 对比）—— 已完成 §14 —— 2026-05-14
-- [x] **TODO**: 补充 `union` 的类型安全边界（内存布局、enum 对比、unsafe 必要性、ManuallyDrop、impl 限制、FFI、代码示例）—— 已完成 §16 —— 2026-05-14
+### 17.1 Lifetime Elision：省略即约定
+
+> **定义**：Lifetime Elision 是 Rust 编译器在函数签名中省略显式生命周期标注时，按固定规则自动补全生命周期的**语法糖**。它不是放宽生命周期检查，而是把常见引用模式（单个输入引用、多个输入引用、`&self` 方法）的默认约定编码进语言。
+
+> **原理与合理性**：省略规则共有三条。规则一保证方法返回的引用不会长于 `&self`/`&mut self`；规则二/三通过输入参数的通用量化与蕴含关系，将输出引用的生命周期绑定到输入引用。Elision 是 **sound** 的，因为任何按规则推导出的签名都可以显式写出等价形式；若模式超出规则覆盖范围，编译器会要求显式标注。
+
+```rust
+// 省略形式
+fn first_word(s: &str) -> &str { /* ... */ }
+
+// 等价显式形式（规则二/三）
+fn first_word<'a>(s: &'a str) -> &'a str { /* ... */ }
+
+// 反例：多个输入引用时省略失效，必须显式标注
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y }
+}
+```
+
+> **相关链接**：完整形式化见 §13；基础生命周期概念见 [03_lifetimes.md](03_lifetimes.md)；`impl Trait` 与生命周期的交互见 §17.2。
+
+### 17.2 `impl Trait` 与生命周期推断
+
+> **定义**：`impl Trait` 在返回位置（RPIT）表示“某个实现该 trait 的具体类型”，在参数位置（APIT）等价于独立的匿名泛型参数。两种位置对生命周期捕获的默认行为不同：RPIT 会捕获所有输入生命周期，APIT 的每个参数独立推断。
+
+> **原理与合理性**：返回位置的 `impl Trait` 隐藏具体类型但**不隐藏生命周期约束**，因此必须携带足够生命周期信息以保证返回值可用。通过 `+ 'a` 可以显式限制其存活不长于 `'a`；APIT 则因为每个参数是独立泛型，不能假设两个 `impl Trait` 参数具有相同类型。`where` 子句可以在两种位置提供额外约束。
+
+```rust,ignore
+// RPIT：返回的 impl Iterator 捕获输入引用的生命周期
+fn words(s: &str) -> impl Iterator<Item = &str> {
+    s.split_whitespace()
+}
+
+// 显式限制生命周期
+fn prefix<'a>(s: &'a str) -> impl Iterator<Item = &'a str> + 'a {
+    s.split_whitespace().take(2)
+}
+
+// APIT：两个 impl Iterator 参数是不同类型
+fn merge(a: impl Iterator<Item = i32>, b: impl Iterator<Item = i32>) {
+    // a 与 b 类型不一定相同
+}
+```
+
+> **相关链接**：完整分析见 §14；类型系统背景见 [04_type_system.md](../../02_type_system/04_type_system.md) §11.1；HRTB 与生命周期判定树见 [00_meta/00_framework/concept_definition_decision_forest.md](../../00_meta/00_framework/concept_definition_decision_forest.md#四生命周期判定树)。
+
+### 17.3 `union` 的类型安全边界
+
+> **定义**：`union` 是一种与 C 兼容的内存布局类型，它的所有变体共享同一段内存，编译器**不维护当前活跃变体**（无 discriminant）。读取 union field 必须放在 `unsafe` 块中，因为 Rust 无法静态验证读取的字段是否确实处于有效状态。
+
+> **原理与合理性**：`union` 存在的意义是零成本的 C 互操作和内存双关；作为交换，类型安全责任完全由程序员承担。安全 Rust 中应优先使用 `enum`，它通过 discriminant 在编译期保证访问的变体有效。当 `union` 包含需要析构的类型时，必须使用 `ManuallyDrop<T>` 防止未定义行为。Rust 还对 `union` 施加 impl 限制：不能实现 `Drop`，字段不能是 `Drop` 类型（除非包裹在 `ManuallyDrop` 中）。
+
+```rust,ignore
+use std::mem::ManuallyDrop;
+
+#[repr(C)]
+union Value {
+    int: i32,
+    text: ManuallyDrop<String>, // 需要手动管理 Drop
+}
+
+fn read_int(u: &Value) -> i32 {
+    // unsafe：程序员保证当前活跃字段是 int
+    unsafe { u.int }
+}
+```
+
+> **相关链接**：完整分析见 §16；Rust 类型系统中的 `union` 见 [04_type_system.md](../../02_type_system/04_type_system.md) §11.6；`ManuallyDrop` 与所有权例外见 [01_ownership.md](../01_ownership.md) §8.3。
 
 ---
 

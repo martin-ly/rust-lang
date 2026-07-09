@@ -140,7 +140,7 @@
 
 - Trait 的类型理论基础是什么？
 - Trait 对象和动态分发的语义如何形式化？
-- 泛型 Trait 的类型推导如何工作？
+- 泛型（Generics） Trait 的类型推导如何工作？
 
 **相关笔记**: [10_trait_system_formalization.md](10_trait_system_formalization.md)
 
@@ -243,7 +243,7 @@
 | Trait 系统 | `10_trait_system_formalization.md` | RustBelt（trait 对象）、RefinedRust | Prusti、Creusot |
 | 生命周期 | `10_lifetime_formalization.md` | Oxide、RustBelt Lifetime Logic、RustSEM | Polonius、Miri |
 | 型变 | `10_variance_theory.md` | Oxide、RustBelt | Rust Analyzer |
-| 所有权/借用 | `formal_methods/10_ownership_model.md` | RustBelt、Tree Borrows、RustSEM | Aeneas、coq-of-rust |
+| 所有权（Ownership）/借用（Borrowing） | `formal_methods/10_ownership_model.md` | RustBelt、Tree Borrows、RustSEM | Aeneas、coq-of-rust |
 | 借用检查器 | `formal_methods/10_borrow_checker_proof.md` | Tree Borrows、Oxide | Miri、Kani |
 
 ### 推荐阅读路径 {#推荐阅读路径}
@@ -291,7 +291,7 @@
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-- [形式化工程系统 - 类型系统](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
+- [形式化工程系统 - 类型系统（Type System）](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
 - [类型系统文档](../../../crates/c02_type_system/docs/README.md)
 - [类型系统速查卡](../../02_reference/quick_reference/02_type_system.md)
 
@@ -381,7 +381,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

@@ -90,7 +90,7 @@
 ## 七、未覆盖缺口 {#七未覆盖缺口}
 
 1. 宏系统相关 RFC（如 `macro_rules!` hygiene、proc-macro）可进一步索引。
-2. const 泛型、const eval 相关 RFC 待随内容扩展补充。
+2. const 泛型（Generics）、const eval 相关 RFC 待随内容扩展补充。
 3. Rust 1.97+ 新特性的 RFC 需持续跟踪。
 
 > **权威来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/)
