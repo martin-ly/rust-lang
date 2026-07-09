@@ -170,3 +170,12 @@ fn make_iter() -> impl Iterator<Item = i32> {
 
 > **权威来源**: [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Rustonomicon — Trait Objects](https://doc.rust-lang.org/nomicon/index.html)
 > **内容分级**: [专家级]
+---
+
+> **权威来源**: [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Rustonomicon — Trait Objects](https://doc.rust-lang.org/nomicon/index.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

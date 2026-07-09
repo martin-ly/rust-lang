@@ -39,6 +39,8 @@
 
 ## 一、Crate 是 Rust 的编译单元
 
+> (Source: [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html))
+
 Rust 的语义存在清晰的**编译期与运行期阶段区分（phase distinction）**：
 
 - **静态解释**的规则决定编译是否成功。
@@ -55,6 +57,8 @@ Rust 的语义存在清晰的**编译期与运行期阶段区分（phase distinc
 ---
 
 ## 二、源文件
+
+> (Source: [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html))
 
 - Rust 编译器总是以**单个源文件**作为输入，输出**单个 crate**。
 - 源文件扩展名为 `.rs`。

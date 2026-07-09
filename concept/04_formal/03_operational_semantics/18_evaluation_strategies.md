@@ -83,7 +83,7 @@
   - [四、Lambda 演算中的归约策略](#四lambda-演算中的归约策略)
     - [4.1 三种归约策略](#41-三种归约策略)
     - [4.2 Rust 的求值顺序](#42-rust-的求值顺序)
-  - [五、求值策略与类型系统（Type System）的交互](#五求值策略与类型系统的交互)
+  - [五、求值策略与类型系统的交互](#五求值策略与类型系统的交互)
     - [5.1 严格性 vs 类型系统表达能力](#51-严格性-vs-类型系统表达能力)
   - [六、反例与边界测试](#六反例与边界测试)
     - [6.1 反例：严格求值的性能陷阱](#61-反例严格求值的性能陷阱)
@@ -92,8 +92,8 @@
   - [七、跨语言求值策略对比矩阵](#七跨语言求值策略对比矩阵)
   - [八、知识来源关系](#八知识来源关系)
     - [10.3 边界测试：按值传递与 `Copy` 的交互（编译错误）](#103-边界测试按值传递与-copy-的交互编译错误)
-    - [10.4 边界测试：惰性迭代器（Iterator）与严格求值的混合（编译错误/逻辑错误）](#104-边界测试惰性迭代器与严格求值的混合编译错误逻辑错误)
-    - [10.5 边界测试：惰性求值与 panic 的延迟触发（运行时（Runtime）行为差异）](#105-边界测试惰性求值与-panic-的延迟触发运行时行为差异)
+    - [10.4 边界测试：惰性迭代器与严格求值的混合（编译错误/逻辑错误）](#104-边界测试惰性迭代器与严格求值的混合编译错误逻辑错误)
+    - [10.5 边界测试：惰性求值与 panic 的延迟触发（运行时行为差异）](#105-边界测试惰性求值与-panic-的延迟触发运行时行为差异)
     - [10.3 边界测试：按值传递与大类型的性能陷阱（编译错误/逻辑问题）](#103-边界测试按值传递与大类型的性能陷阱编译错误逻辑问题)
     - [10.3 边界测试：const fn 中的非编译期操作](#103-边界测试const-fn-中的非编译期操作)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -482,8 +482,8 @@ fn main() {
 > 但移动后原变量失效，若需保留，应传引用（`&Config`）或 `Clone`。
 > Rust 的求值策略可描述为"严格按值 + 移动语义"：参数在调用前求值（严格），传递时移动所有权（非共享）。
 > 这与 C++11 的右值引用（`std::move`，显式移动）类似，但 Rust 的移动是默认且自动的。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] ·
-> [来源: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)]
+> (Source: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)) ·
+> (Source: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy))
 
 ### 10.4 边界测试：惰性迭代器与严格求值的混合（编译错误/逻辑错误）
 
@@ -516,8 +516,8 @@ fn main() {
 > 3) 多次 `collect` 同一迭代器导致副作用重复执行。
 > 这与 C# 的 LINQ（惰性，`ToList()` 触发）或 Java 的 `Stream`（惰性，`collect` 触发）相同。
 >
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] ·
-> [来源: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)]
+> (Source: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)) ·
+> (Source: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy))
 
 ### 10.5 边界测试：惰性求值与 panic 的延迟触发（运行时行为差异）
 
@@ -542,8 +542,8 @@ fn main() {
 > 惰性求值的风险：副作用（panic、I/O、修改状态）的触发时机不确定。
 > `unwrap_or_else(|| panic!(...))` 在 `None` 时立即 panic，因为 `unwrap_or_else` 是严格的（立即调用闭包（Closures））。
 > 这与 Haskell 的惰性求值（`error` 可能在不可预期时刻触发）或 Swift 的 `@autoclosure`（延迟求值参数）不同——Rust 的惰性仅限于迭代器和高阶函数，核心表达式是严格的。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] ·
-> [来源: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)]
+> (Source: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)) ·
+> (Source: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy))
 
 ### 10.3 边界测试：按值传递与大类型的性能陷阱（编译错误/逻辑问题）
 
@@ -581,8 +581,8 @@ fn main() {
 >
 > Rust 的 move 语义在抽象层面是"零成本"（不调用拷贝构造函数），但底层仍是 `memcpy`——这是所有值语义语言的共性。
 > 这与 C++ 的 RVO/NRVO（类似优化）或 Go 的接口值（隐式指针+堆分配）不同——Rust 的 move 语义是显式的、可预测的。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] ·
-> [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
+> (Source: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)) ·
+> (Source: [Rust Performance Book](https://nnethercote.github.io/perf-book/))
 
 ### 10.3 边界测试：const fn 中的非编译期操作
 
@@ -679,3 +679,13 @@ Rust 的惰性是局部的（仅在迭代器适配器链中），最终必须通
 - **L1**：求值策略决定表达式何时、如何被计算；Rust 默认严格 Call-by-Value，`Copy` 类型按位拷贝、`!Copy` 类型转移所有权。
 - **L2**：Rust 通过显式借用（Borrowing） `&T`/`&mut T` 提供受限的 Call-by-Reference；`&&`/`||` 短路、`Future` 惰性构造、`lazy_static` 等是非严格求值的局部工程表达。
 - **L3**：Rust 的求值策略选择是性能可预测性与表达力之间的权衡；理解 CBV/CBN/CPS 对形式化验证（如 RustBelt、Kani）和编译优化都有直接影响。
+
+---
+
+> **权威来源**: [Verus](https://github.com/verus-lang/verus) · [Kani](https://model-checking.github.io/kani/) · [Pierce — TAPL, §5-§11](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Harper — PFPL, Part III](https://www.cs.cmu.edu/~rwh/pfpl/) · [Wadler 1984 — Why Calculating is Better than Scheming](https://doi.org/10.1093/comjnl/27.2.115) · [Plotkin 1975 — Call-by-Name, Call-by-Value and the λ-Calculus](<https://doi.org/10.1016/0304-3975(75)> · [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

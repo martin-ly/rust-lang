@@ -124,6 +124,8 @@
 
 ## 一、权威定义（Definition）
 
+> (Source: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-rules.html))
+
 ### 1.1 TRPL 官方定义
 
 > **[TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)** Lifetimes are another kind of generic that we've already been using. Rather than ensuring that a type has the behavior we want, lifetimes ensure that references are valid as long as we need them to be. Every reference in Rust has a lifetime, which is the scope for which that reference is valid.
@@ -493,6 +495,8 @@ graph BT
 ---
 
 ## 五、示例与反例（Examples & Counter-examples）
+
+> (Source: [TRPL — Validating References with Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html))
 
 定理链条的正确性需要通过代码实例来验证。以下示例覆盖正确用法、编译期反例与运行时（Runtime）边界。
 
@@ -1089,6 +1093,9 @@ fn print_it<T: Display + 'static>(t: T) { ... }
 
 **答案**：`T` 必须实现 `Display`，且 `T` 中**不包含任何非 `'static` 的引用**。注意：`T: 'static` 不表示 `T` 本身必须存活整个程序运行期，而是表示 `T` 内部没有引用局部数据（即 `T` 可以安全地在线程间传递或长期存储）。例如 `String: 'static`，`&'static str: 'static`，但 `&'a i32`（其中 `'a` 不是 `'static`）不满足 `T: 'static`。
 </details>
+> **权威来源**: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-rules.html) · [TRPL — Validating References with Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Rustonomicon — Lifetimes](https://doc.rust-lang.org/nomicon/lifetimes.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL、Rustonomicon）
 
 ## 实践
 

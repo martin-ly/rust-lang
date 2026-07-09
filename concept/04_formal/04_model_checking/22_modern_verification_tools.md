@@ -47,7 +47,7 @@
   - [快速开始：工具安装与运行](#快速开始工具安装与运行)
     - [Miri（Rust 官方动态分析器）](#mirirust-官方动态分析器)
     - [Kani（AWS 有界模型检查器）](#kaniaws-有界模型检查器)
-    - [BorrowSanitizer（运行时（Runtime）借用（Borrowing）检查 Sanitizer）](#borrowsanitizer运行时借用检查-sanitizer)
+    - [BorrowSanitizer（运行时借用检查 Sanitizer）](#borrowsanitizer运行时借用检查-sanitizer)
     - [Verus（Microsoft 演绎验证器）](#verusmicrosoft-演绎验证器)
   - [嵌入式测验](#嵌入式测验)
   - [相关工具交叉索引](#相关工具交叉索引)
@@ -454,8 +454,12 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 > **文档版本**: 1.1
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-07-09
-> **权威来源对齐变更日志**: 2026-07-09 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用（Reference） [P2-Q3 形式化工具交叉引用]
-> **状态**: ✅ 现代验证工具生态补全
+> **权威来源对齐变更日志**: 2026-07-09 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用（Reference） [P2-Q3 形式化工具交叉引用]; 2026-07-10 L4 形式化层权威来源对齐复审 [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)
 
 ## 相关工具交叉索引
 

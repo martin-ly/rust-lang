@@ -42,7 +42,7 @@
 
 ## 一、Item 的生命周期
 
-程序中的 **item**（函数、模块（Module）、类型）在编译期计算其值，并在 Rust 进程的内存映像中唯一存储。
+程序中的 **item**（函数、模块（Module）、类型）在编译期计算其值，并在 Rust 进程的内存映像中唯一存储。(Source: [Rust Reference — Memory Allocation and Lifetime](https://doc.rust-lang.org/reference/memory-allocation-and-lifetime.html#items))
 
 - item 不是动态分配或释放的。
 - item 的生命周期（Lifetimes）与整个程序相同。
@@ -55,7 +55,7 @@
 
 ### 堆分配的生命周期
 
-- 堆分配的生命周期（Lifetimes）取决于指向它的 box 值的生命周期。
+- 堆分配的生命周期（Lifetimes）取决于指向它的 box 值的生命周期。(Source: [Rust Reference — Heap Allocations](https://doc.rust-lang.org/reference/memory-allocation-and-lifetime.html#heap-allocations))
 - box 值可以在栈帧之间传递，也可以存储在堆上，因此堆分配可能超出创建它的栈帧。
 - 堆分配保证在其整个生命周期（Lifetimes）中位于堆上的固定位置——移动 box 值本身不会导致堆内存重定位。
 
@@ -78,7 +78,7 @@ let b = Box::new(42);
 let c = b; // b 被 move，所有权转移到 c
 ```
 
-- 移动 box 值只是复制指针，不会复制堆上的数据。
+- 移动 box 值只是复制指针，不会复制堆上的数据。(Source: [TRPL Ch4 — Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html))
 - 堆数据的所有权（Ownership）随 box 值一起转移。
 - 当 box 离开作用域时，堆上的数据被释放。
 
@@ -169,3 +169,7 @@ let v = vec![ZeroSized; 1000]; // 无内存开销
 | [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) | `Box`、`Rc`、`Arc` 管理堆内存 |
 | [Custom Allocators](14_custom_allocators.md) | 自定义分配器改变堆分配行为 |
 | [The Rust Runtime](../02_unsafe/30_rust_runtime.md) | `#[global_allocator]` 影响堆分配 |
+
+> **权威来源**: [Rust Reference — Memory Allocation and Lifetime](https://doc.rust-lang.org/reference/memory-allocation-and-lifetime.html), [TRPL Ch4 — Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html), [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)

@@ -85,7 +85,7 @@
 
 ### 1.2 `std::ops::Range`：运行时迭代器语义
 
-Rust 1.0 至今，`std::ops::Range` 直接实现 `Iterator`：
+Rust 1.0 至今，`std::ops::Range` 直接实现 `Iterator` (Source: [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html))：
 
 ```rust
 // 当前稳定版（< 1.96）的行为
@@ -111,7 +111,7 @@ for i in r {
 ### 1.3 `core::range`：编译期值语义
 >
 
-Rust 1.96.0 引入 `core::range::Range`，将范围从**迭代器（Iterator）**重构为**纯值**：
+Rust 1.96.0 引入 `core::range::Range`，将范围从**迭代器（Iterator）**重构为**纯值** (Source: [RFC 3550 — New Range Types](https://github.com/rust-lang/rfcs/pull/3550), [core::range](https://doc.rust-lang.org/core/range/index.html))：
 
 ```rust
 // Rust 1.96+ 的新语义
@@ -160,7 +160,7 @@ graph LR
 > **认知功能**: 此图展示 `Range` 语义从**直接迭代器（Iterator）**到**可迭代值**的关键架构变化。旧模型中范围与迭代器状态耦合；新模型通过 `IntoIterator` 解耦，范围作为**工厂**生成迭代器。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 在需要多次遍历同一范围的场景中，优先使用 `core::range::Range`；在需要保存迭代进度（如 `break` 后恢复）的场景中，使用显式迭代器（Iterator）。
-> **关键洞察**: `IntoIterator` 分离了"可迭代性"和"迭代状态"，使范围回归数学区间的**纯值本质**。
+> **关键洞察**: `IntoIterator` 分离了"可迭代性"和"迭代状态"，使范围回归数学区间的**纯值本质** (Source: [IntoIterator Trait](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html))。
 > [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---

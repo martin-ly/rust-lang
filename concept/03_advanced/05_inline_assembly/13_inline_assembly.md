@@ -76,7 +76,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 为什么需要内联汇编](#11-为什么需要内联汇编)
-    - [1.2 `asm!` 宏（Macro）基础语法](#12-asm-宏基础语法)
+    - [1.2 `asm!` 宏基础语法](#12-asm-宏基础语法)
     - [1.3 约束系统 (Constraints)](#13-约束系统-constraints)
     - [1.4 Clobber 与 Options](#14-clobber-与-options)
   - [二、平台差异矩阵](#二平台差异矩阵)
@@ -97,7 +97,7 @@
   - [嵌入式测验](#嵌入式测验)
     - [测验 1：asm! 宏基本语法（记忆层）](#测验-1asm-宏基本语法记忆层)
     - [测验 2：操作数约束（理解层）](#测验-2操作数约束理解层)
-    - [测验 3：用内联汇编实现原子操作（Atomic Operations）（应用层）](#测验-3用内联汇编实现原子操作应用层)
+    - [测验 3：用内联汇编实现原子操作（应用层）](#测验-3用内联汇编实现原子操作应用层)
     - [测验 4：clobber 与内存屏障（分析层）](#测验-4clobber-与内存屏障分析层)
 
 ---
@@ -106,7 +106,7 @@
 
 ### 1.1 为什么需要内联汇编
 
-Rust 的内联汇编允许在高级代码中直接嵌入底层机器指令，绕过编译器的优化和控制流分析。典型使用场景：
+Rust 的内联汇编允许在高级代码中直接嵌入底层机器指令，绕过编译器的优化和控制流分析。(Source: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html), [RFC 2873 — Inline Assembly](https://rust-lang.github.io/rfcs/2873-inline-asm.html))典型使用场景：
 
 | 场景 | 示例 | 替代方案 |
 |:---|:---|:---|
@@ -115,7 +115,7 @@ Rust 的内联汇编允许在高级代码中直接嵌入底层机器指令，绕
 | **极致性能优化** | 手写 SIMD、循环展开、分支预测提示 | `std::simd`、编译器内建属性 |
 | **裸机/内核开发** | MMIO 寄存器访问、启动代码 | `volatile` crate、`mmio` 抽象 |
 
-> **原则**: 内联汇编是**最后手段**。优先使用 `core::arch` 中的类型安全内联函数，它们由编译器验证并在多平台上提供统一抽象。
+> **原则**: 内联汇编是**最后手段**。优先使用 `core::arch` 中的类型安全内联函数，它们由编译器验证并在多平台上提供统一抽象。(Source: [Rust By Example — Inline Assembly](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html))
 
 ### 1.2 `asm!` 宏基础语法
 
@@ -398,7 +398,7 @@ unsafe fn sse2_xor(a: &[u32; 4], b: &[u32; 4]) -> [u32; 4] {
 
 ### 4.1 编译器无法验证的契约
 
-内联汇编是 Rust 中最"不安全"的特性之一——编译器几乎不做任何验证：
+内联汇编是 Rust 中最"不安全"的特性之一——编译器几乎不做任何验证：(Source: [Rust Reference — Inline Assembly Safety](https://doc.rust-lang.org/reference/inline-assembly.html#safety))
 
 | 契约 | 程序员责任 | 编译器行为 |
 |:---|:---|:---|
@@ -810,3 +810,7 @@ unsafe {
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) · [Rust By Example - Assembly](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html)
+
+> **权威来源**: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html), [RFC 2873 — Inline Assembly](https://rust-lang.github.io/rfcs/2873-inline-asm.html), [Rust By Example — Inline Assembly](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)

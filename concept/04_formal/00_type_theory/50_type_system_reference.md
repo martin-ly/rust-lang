@@ -40,7 +40,7 @@
 
 ## 一、类型分类
 
-Rust 类型可分为：
+Rust 类型可分为 (Source: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html))：
 
 | 类别 | 示例 | 说明 |
 |:---|:---|:---|
@@ -56,7 +56,7 @@ Rust 类型可分为：
 
 ## 二、动态大小类型（DST）
 
-DST 在编译期大小未知，必须置于指针之后：
+DST 在编译期大小未知，必须置于指针之后 (Source: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html))：
 
 - `dyn Trait`
 - `[T]`
@@ -111,16 +111,11 @@ Rust 在特定位置自动执行类型强制（coercion）：
 
 ## 七、生命周期省略
 
-函数签名中生命周期（Lifetimes）可省略，编译器按三条规则推导：
+函数签名中生命周期（Lifetimes）可省略，编译器按三条规则推导 (Source: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/items/generics.html#lifetime-elision))：
 
 1. 每个 elided 输入参数获得独立生命周期（Lifetimes）。
 2. 若只有一个输入生命周期（Lifetimes），所有输出生命周期与之相同。
 3. 若 `&self` 或 `&mut self` 存在，其生命周期（Lifetimes）赋给所有输出生命周期。
-
----
-
-> **权威来源**: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) · [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
-> **内容分级**: [研究级]
 
 ---
 
@@ -408,3 +403,12 @@ Rust 类型系统的形式化基于：
 >
 > **过渡**: 从类型规范过渡到 ABI 与未定义行为，可以理解类型系统不仅是语法规则，也是内存安全与跨语言互操作的边界。
 >
+---
+
+> **权威来源**: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) · [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli 1996 — Type Systems](https://dl.acm.org/doi/10.1145/6041.6042) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

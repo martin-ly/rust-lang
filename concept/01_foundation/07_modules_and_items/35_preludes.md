@@ -40,6 +40,9 @@
 > **反向推理 1**: 如果程序在 Preludes（预导入模块（Module）） 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
 >
 > **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 Preludes（预导入模块（Module）） 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
+> **权威来源**: [Rust Reference — Preludes](https://doc.rust-lang.org/reference/names/preludes.html) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ## 认知路径
 
@@ -73,7 +76,10 @@
 
 ---
 
-## 二、标准库 Prelude（Standard library prelude）
+## 二、标准库 Prelude
+
+> (Source: [Rust Reference — Preludes](https://doc.rust-lang.org/reference/names/preludes.html))
+（Standard library prelude）
 
 每个 crate 都有一个标准库 prelude，内容由单个标准库模块决定：
 
@@ -121,7 +127,10 @@ use core::cell::RefCell;
 
 ---
 
-## 四、语言 Prelude（Language prelude）
+## 四、语言 Prelude
+
+> (Source: [Rust Reference — Preludes](https://doc.rust-lang.org/reference/names/preludes.html))
+（Language prelude）
 
 语言 prelude 中的名字由语言内置，**始终**在作用域中，且不受 `#![no_implicit_prelude]` 影响。
 

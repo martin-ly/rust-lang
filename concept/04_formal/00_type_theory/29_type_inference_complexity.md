@@ -57,7 +57,7 @@
 - [Type Inference Complexity（类型推断复杂度）](#type-inference-complexity类型推断复杂度)
   - [反命题决策树](#反命题决策树)
   - [📑 目录](#-目录)
-  - [一、HM：类型推断（Type Inference）的黄金标准](#一hm类型推断的黄金标准)
+  - [一、HM：类型推断的黄金标准](#一hm类型推断的黄金标准)
   - [二、Rust 的四项复杂度放大器](#二rust-的四项复杂度放大器)
   - [三、约束生成与 Robinson 合一](#三约束生成与-robinson-合一)
     - [3.1 约束生成（Constraint Generation）](#31-约束生成constraint-generation)
@@ -399,8 +399,9 @@ PSPACE-完全。Rehman et al. (2023) 给出 Rust 类型推断复杂度的 PSPACE
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-06-25 创建，迁移归档内容并提炼为 L4 形式化概念页
+> [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-25
-**状态**: ✅ 概念文件创建完成
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

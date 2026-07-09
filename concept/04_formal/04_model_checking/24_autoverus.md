@@ -33,9 +33,9 @@
 ## 一、权威定义
 
 > Verus is a tool for verifying the correctness of Rust code using proofs and specifications also written in Rust.
-> —— AutoVerus 论文
+> —— AutoVerus 论文 (Source: [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174))
 
-**Verus** 允许开发者用 Rust 语法编写程序、规格（specifications）和证明（proofs），然后调用 SMT 求解器（Z3）自动验证。它充分利用 Rust 类型系统（Type System）已经保证的内存安全（Memory Safety）与线程安全，因此验证器只需推理功能正确性。
+**Verus** 允许开发者用 Rust 语法编写程序、规格（specifications）和证明（proofs），然后调用 SMT 求解器（Z3）自动验证。它充分利用 Rust 类型系统（Type System）已经保证的内存安全（Memory Safety）与线程安全，因此验证器只需推理功能正确性。 (Source: [Verus GitHub](https://github.com/verus-lang/verus))
 
 **AutoVerus** 则进一步利用大语言模型（LLM）自动为 Verus 程序生成证明，降低形式化验证的专家门槛。
 
@@ -111,6 +111,8 @@ AutoVerus 论文提出五个核心原则：
 - 在 **Verus-Bench**（150 个非平凡证明任务）上，AutoVerus 成功率 **>90%**。
 - 超过一半任务在 **30 秒或 3 次 LLM 调用内**完成。
 
+(Source: [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082))
+
 ---
 
 ## 四、Verus / AutoVerus 在 Rust 生态中的位置
@@ -180,3 +182,13 @@ B
 - [Safety Tags](../02_separation_logic/33_safety_tags_in_formal.md)
 - [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md)
 - [Rust 1.98+ 预览](../../07_future/00_version_tracking/rust_1_98_preview.md)
+
+---
+
+> **权威来源**: [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://github.com/verus-lang/verus/guide/) · [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

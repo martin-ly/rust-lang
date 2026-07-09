@@ -18,6 +18,9 @@
 
 > **对应 Crate**: [`c02_type_system`](../../crates/c02_type_system)
 > **对应练习**: [`exercises/src/type_system/`](../../exercises/src/type_system)
+> **权威来源**: [Rust Reference — Enumerations](https://doc.rust-lang.org/reference/items/enumerations.html) · [TRPL — Enums](https://doc.rust-lang.org/book/ch06-00-enums.html) · [RFC 2008 — non_exhaustive](https://github.com/rust-lang/rfcs/pull/2008)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL、RFC 2008）
 
 ## 认知路径
 
@@ -83,6 +86,8 @@
 
 ## 二、枚举变体
 
+> (Source: [Rust Reference — Enumerations](https://doc.rust-lang.org/reference/items/enumerations.html))
+
 ```rust
 enum Message {
     Quit,                           // 单元变体
@@ -128,6 +133,8 @@ fn divide(a: f64, b: f64) -> Result<f64, &'static str> {
 ---
 
 ## 四、模式匹配与穷尽性
+
+> (Source: [TRPL — Enums](https://doc.rust-lang.org/book/ch06-00-enums.html))
 
 ```rust
 fn handle(msg: Message) {

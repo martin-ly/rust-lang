@@ -93,11 +93,11 @@
 
 ## 一、Kani 是什么
 
-**Kani** 是 AWS 开发并开源的 **Rust 有界模型检查器（Bounded Model Checker）**。它基于 [CBMC](https://github.com/diffblue/cbmc)，将 Rust 代码转换为逻辑公式，然后调用 SAT/SMT 求解器验证**在给定边界内**程序是否满足指定属性。
+**Kani** 是 AWS 开发并开源的 **Rust 有界模型检查器（Bounded Model Checker）**。它基于 [CBMC](https://github.com/diffblue/cbmc)，将 Rust 代码转换为逻辑公式，然后调用 SAT/SMT 求解器验证**在给定边界内**程序是否满足指定属性。 (Source: [Kani 官方文档](https://model-checking.github.io/kani/))
 
 > **关键洞察**: Kani 不是测试框架，而是**符号执行 + 模型检查器**。它回答的问题是："对于所有满足前置条件的输入，该函数是否永远不会 panic、越界、触发断言失败或其他指定错误？"
 >
-> [Kani 官方文档](https://model-checking.github.io/kani/)(<https://model-checking.github.io/kani/>)
+> [Kani 官方文档](https://model-checking.github.io/kani/)
 
 ### 与测试、Miri、Verus 的定位差异
 
@@ -114,6 +114,8 @@
 > - 需要证明 **unsafe 代码无 UB** → Miri（动态） + Kani（有界形式化）。
 > - 需要证明 **算法/协议在所有输入下正确** → Kani（快速上手）或 Verus（完整无界）。
 > - 需要 **发现复杂状态机 bug** → 模糊测试 + Kani 互补。
+>
+> (Source: [Kani 官方文档](https://model-checking.github.io/kani/))
 
 ---
 
@@ -377,7 +379,9 @@ fn verify_vec_push_safety() {
 
 > **权威来源**: [Kani 官方文档](https://model-checking.github.io/kani/) · [Kani GitHub](https://github.com/model-checking/kani) · [CBMC](https://github.com/diffblue/cbmc)
 > **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Kani 0.66+ / Rust 1.96.1 · 2026-07-09 扩展 `c03_control_fn`、`c04_generic` Kani 示例并新增交叉引用（Reference） [P2-Q3 形式化工具示例]
+> [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-09
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

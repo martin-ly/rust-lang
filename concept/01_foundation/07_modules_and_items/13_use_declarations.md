@@ -18,6 +18,9 @@
 
 > **对应 Crate**: [`c03_control_fn`](../../crates/c03_control_fn)
 > **对应练习**: [`exercises/src/modules/`](../../exercises/src/modules)
+> **权威来源**: [Rust Reference — Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html) · [TRPL — Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ## 认知路径
 
@@ -83,6 +86,8 @@
 
 ## 二、`use` 基本语法
 
+> (Source: [Rust Reference — Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html))
+
 ```rust
 mod kitchen {
     pub fn cook() {}
@@ -127,6 +132,8 @@ mod outer {
 ---
 
 ## 四、`pub use` 重导出
+
+> (Source: [TRPL — Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html))
 
 ```rust
 mod backend {

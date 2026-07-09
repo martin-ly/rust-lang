@@ -25,6 +25,9 @@
 > **Bloom 层级**: 理解 → 分析
 
 ---
+> **权威来源**: [Rust Reference — Place Expressions and Value Expressions](https://doc.rust-lang.org/reference/expressions.html#place-expressions-and-value-expressions) · [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [TRPL — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ## 认知路径
 
@@ -55,7 +58,9 @@
 
 ---
 
-## 二、值语义（Value Semantics）
+## 二、值语义
+> (Source: [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html))
+（Value Semantics）
 
 ### 2.1 定义
 
@@ -118,6 +123,8 @@ System.out.println(a); // [99, 2, 3]
 ---
 
 ## 四、Rust：值语义的极致
+
+> (Source: [Rust Reference — Place Expressions and Value Expressions](https://doc.rust-lang.org/reference/expressions.html#place-expressions-and-value-expressions))
 
 ### 4.1 默认行为
 

@@ -481,7 +481,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**: [Rust Reference — Tuple Structs](https://doc.rust-lang.org/reference/items/structs.html), [TRPL — Newtype Pattern](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types), [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines/type-safety.html#c-newtype)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
@@ -737,9 +737,9 @@ Newtype 是全新类型，不自动继承底层类型的 trait 实现。`type` �
 
 ## 参考来源
 
-> [来源: [Rust Reference — Newtype Idiom](https://doc.rust-lang.org/reference/types/struct.html)]
-> [来源: [RFC 0738 — Variadic](https://rust-lang.github.io/rfcs//0738-variance.html)]
-> [来源: [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines/)]
+> [来源: [Rust Reference — Tuple Structs](https://doc.rust-lang.org/reference/items/structs.html)]
+> [来源: [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines/type-safety.html#c-newtype)]
+> [来源: [TRPL — Newtype Pattern](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types)]
 
 ## 认知路径
 

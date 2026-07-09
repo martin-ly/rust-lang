@@ -99,7 +99,7 @@ fn generate_getter(field: &syn::Field) -> proc_macro2::TokenStream {
 }
 ```
 
-> **关键洞察**: `quote_spanned!` 让生成的代码错误指向用户输入的字段，而不是宏定义位置，是提升宏用户体验的核心手段。
+> **关键洞察**: `quote_spanned!` 让生成的代码错误指向用户输入的字段，而不是宏定义位置，是提升宏用户体验的核心手段 (Source: [quote docs](https://docs.rs/quote/latest/quote/macro.quote_spanned.html))。
 
 ---
 
@@ -216,12 +216,16 @@ cargo install cargo-llvm-lines
 cargo llvm-lines | head -20
 ```
 
+(Source: [cargo-llvm-lines](https://github.com/dtolnay/cargo-llvm-lines))
+
 ### 5.3 cargo-bloat
 
 ```bash
 cargo install cargo-bloat
 cargo bloat --release
 ```
+
+(Source: [cargo-bloat](https://github.com/RazrFalcon/cargo-bloat))
 
 ### 5.4 Criterion 基准测试
 

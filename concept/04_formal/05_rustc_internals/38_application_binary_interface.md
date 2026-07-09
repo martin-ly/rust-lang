@@ -163,3 +163,13 @@ pub fn name_in_rust() {}
 | [FFI Advanced](../../03_advanced/04_ffi/09_ffi_advanced.md) | FFI 场景是 ABI 控制的主要用例 |
 | [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | 多数 ABI 属性需要 `unsafe` |
 | [Inline Assembly](../../03_advanced/05_inline_assembly/13_inline_assembly.md) | 与底层段/符号控制经常协同使用 |
+
+---
+
+> **权威来源**: [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/items/external-blocks.html#abi) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/abi.html) · [Rust Reference — extern functions](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

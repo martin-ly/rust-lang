@@ -7,7 +7,7 @@
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
-> **层次定位**: L4 形式化理论 / 公理语义子域 [来源: [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034)]
+> **层次定位**: L4 形式化理论 / 公理语义子域 (Source: [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034))
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价形式化规约的完备性
 > **前置依赖**: [Type Theory](../00_type_theory/02_type_theory.md) · [Ownership Formalization](../01_ownership_logic/03_ownership_formal.md) · [Operational Semantics](17_operational_semantics.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
@@ -30,8 +30,8 @@
     - [2.1 公理语义方法对比矩阵](#21-公理语义方法对比矩阵)
   - [三、技术细节](#三技术细节)
     - [3.1 Rust 赋值规则的公理化](#31-rust-赋值规则的公理化)
-    - [3.2 所有权（Ownership）转移的 wp 计算](#32-所有权转移的-wp-计算)
-    - [3.3 借用（Borrowing）规则的不变式](#33-借用规则的不变式)
+    - [3.2 所有权转移的 wp 计算](#32-所有权转移的-wp-计算)
+    - [3.3 借用规则的不变式](#33-借用规则的不变式)
     - [3.4 unsafe 块的公理边界](#34-unsafe-块的公理边界)
   - [四、工具链映射](#四工具链映射)
     - [4.1 Prusti：Viper 后端的契约推导](#41-prustiviper-后端的契约推导)
@@ -44,7 +44,7 @@
   - [十、边界测试](#十边界测试)
     - [10.1 边界测试：wp 计算的无限 descending chain（逻辑错误）](#101-边界测试wp-计算的无限-descending-chain逻辑错误)
     - [10.2 边界测试：借用不变式违反的验证失败（验证错误）](#102-边界测试借用不变式违反的验证失败验证错误)
-    - [10.3 边界测试：unsafe 块的公理逃逸（运行时（Runtime） UB）](#103-边界测试unsafe-块的公理逃逸运行时-ub)
+    - [10.3 边界测试：unsafe 块的公理逃逸（运行时 UB）](#103-边界测试unsafe-块的公理逃逸运行时-ub)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Hoare 三元组 `{P} C {Q}` 中，P、C、Q 分别代表什么？（理解层）](#测验-1hoare-三元组-p-c-q-中pcq-分别代表什么理解层)
     - [测验 2：什么是"最弱前置条件"（Weakest Precondition, wp）？它在程序验证中的作用是什么？（理解层）](#测验-2什么是最弱前置条件weakest-precondition-wp它在程序验证中的作用是什么理解层)
@@ -59,14 +59,14 @@
     - [Step 4: 工具怎么自动验证？](#step-4-工具怎么自动验证)
     - [Step 5: 公理语义的边界在哪里？](#step-5-公理语义的边界在哪里)
   - [六、定理推理链](#六定理推理链)
-    - [6.1 定理一致性（Coherence）矩阵](#61-定理一致性矩阵)
+    - [6.1 定理一致性矩阵](#61-定理一致性矩阵)
     - [6.2 反命题决策树](#62-反命题决策树)
   - [七、工具链深度对比矩阵](#七工具链深度对比矩阵)
     - [7.1 Prusti vs Creusot vs Kani](#71-prusti-vs-creusot-vs-kani)
   - [八、更多边界测试](#八更多边界测试)
-    - [10.4 边界测试：Prusti 对泛型（Generics） Trait 的验证失败](#104-边界测试prusti-对泛型-trait-的验证失败)
+    - [10.4 边界测试：Prusti 对泛型 Trait 的验证失败](#104-边界测试prusti-对泛型-trait-的验证失败)
     - [10.5 边界测试：Kani 的路径爆炸与有界验证](#105-边界测试kani-的路径爆炸与有界验证)
-    - [10.6 边界测试：Creusot 的 Ghost 代码与零成本抽象（Zero-Cost Abstraction）](#106-边界测试creusot-的-ghost-代码与零成本抽象)
+    - [10.6 边界测试：Creusot 的 Ghost 代码与零成本抽象](#106-边界测试creusot-的-ghost-代码与零成本抽象)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
 
@@ -108,7 +108,7 @@ wp(if B then C1 else C2, Q) = (B → wp(C1, Q)) ∧ (¬B → wp(C2, Q))
 wp(while B do C, Q)   = ∃k. H_k(Q)      （极限构造，H_0 = false, H_{k+1} = (¬B → Q) ∧ (B → wp(C, H_k))）
 ```
 
-> **认知桥梁**: wp 计算是**程序合成的数学基础**——给定后置条件 \(Q\)，通过反向应用 wp 规则，可以机械地推导出实现 \(Q\) 的程序。Creusot 工具正是基于这一原理，从 Why3 逻辑规约自动生成 Rust 代码的验证条件。[来源: [Dijkstra 1975](https://doi.org/10.1145/360933.360975)] · [来源: [Creusot Documentation](https://creusot.rs/))]
+> **认知桥梁**: wp 计算是**程序合成的数学基础**——给定后置条件 \(Q\)，通过反向应用 wp 规则，可以机械地推导出实现 \(Q\) 的程序。Creusot 工具正是基于这一原理，从 Why3 逻辑规约自动生成 Rust 代码的验证条件。(Source: [Dijkstra 1975](https://doi.org/10.1145/360933.360975)) · [来源: [Creusot Documentation](https://creusot.rs/))]
 
 ### 1.3 最强后置条件（Strongest Postcondition）
 >
@@ -124,7 +124,7 @@ wp 与 sp 的对偶关系：
 P → wp(C, Q)    ⟺    sp(P, C) → Q
 ```
 
-> **直觉**: wp 是"向后看"（从目标推导起点），sp 是"向前看"（从起点推导目标）。在 Rust 验证中，**Kani 使用符号执行（sp 方向）** 从初始状态探索所有可达状态；**Creusot 使用 wp 计算** 从断言反向推导验证条件。两种方向各有优劣：wp 适合验证给定规约，sp 适合发现未预期的程序行为。[来源: [Winskel 1993, §7](https://mitpress.mit.edu/9780262731034)]
+> **直觉**: wp 是"向后看"（从目标推导起点），sp 是"向前看"（从起点推导目标）。在 Rust 验证中，**Kani 使用符号执行（sp 方向）** 从初始状态探索所有可达状态；**Creusot 使用 wp 计算** 从断言反向推导验证条件。两种方向各有优劣：wp 适合验证给定规约，sp 适合发现未预期的程序行为。(Source: [Winskel 1993, §7](https://mitpress.mit.edu/9780262731034))
 
 ### 1.4 三种语义谱系：操作 · 指称 · 公理
 >
@@ -187,8 +187,8 @@ P → wp(C, Q)    ⟺    sp(P, C) → Q
 >
 > Rust 编译器的**借用（Borrowing）检查器**本质上是一个轻量级的、全自动的公理验证器——它通过类型推导自动计算所有权和生命周期（Lifetimes）的不变式，无需程序员手动书写 `{P} C {Q}`。
 > 这是 Hoare 逻辑从学术研究走向工业实践的最成功范例：将公理规约"编译进"类型系统（Type System），使验证成为零成本抽象（Zero-Cost Abstraction）。
-> [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] ·
-> [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
+> (Source: [RustBelt Paper](https://doi.org/10.1145/3158154)) ·
+> (Source: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html))
 
 ---
 
@@ -230,7 +230,7 @@ let s2 = s1;                      // { moved(Σ, s1) ∧ no_borrows_active(s2) }
 // println!("{}", s1);           // ❌ 编译错误: s1 已失效
 ```
 
-> **形式化洞察**: Rust 的赋值公理比标准 Hoare 逻辑更复杂，因为它不仅是**状态更新**（`Q[x/e]`），还是**资源转移**——`s1` 的所有权被"消耗"并转移到 `s2`。这与分离逻辑中的**框架规则**（Frame Rule）天然契合：赋值操作只影响局部资源，不变的部分自动保持。[来源: [Separation Logic — Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf)] · [来源: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/)]
+> **形式化洞察**: Rust 的赋值公理比标准 Hoare 逻辑更复杂，因为它不仅是**状态更新**（`Q[x/e]`），还是**资源转移**——`s1` 的所有权被"消耗"并转移到 `s2`。这与分离逻辑中的**框架规则**（Frame Rule）天然契合：赋值操作只影响局部资源，不变的部分自动保持。(Source: [Separation Logic — Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf)) · (Source: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/))
 
 ### 3.2 所有权转移的 wp 计算
 >
@@ -271,7 +271,7 @@ wp(let x = e, Q) =
             borrow(e, κ) → Q[x/e]     // 引入借用令牌 κ
 ```
 
-> **关键区别**: `Copy` 类型的 wp 就是标准 Hoare 赋值公理；`Move` 类型的 wp 引入了**资源消耗**，这是 Rust 所有权系统对公理语义的独特贡献。RustBelt 通过**Iris 幽灵状态**（ghost state）形式化地追踪这些资源令牌，使得 wp 计算可以精确建模所有权转移。[来源: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/)] · [来源: [Iris Project](https://iris-project.org/)]
+> **关键区别**: `Copy` 类型的 wp 就是标准 Hoare 赋值公理；`Move` 类型的 wp 引入了**资源消耗**，这是 Rust 所有权系统对公理语义的独特贡献。RustBelt 通过**Iris 幽灵状态**（ghost state）形式化地追踪这些资源令牌，使得 wp 计算可以精确建模所有权转移。(Source: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/)) · (Source: [Iris Project](https://iris-project.org/))
 
 ### 3.3 借用规则的不变式
 >
@@ -319,7 +319,7 @@ fn check_invariants() {
 }
 ```
 
-> **形式化表达**: 借用检查器通过**区域约束系统**（Region Constraint System）在编译期验证这三个不变式。NLL（Non-Lexical Lifetimes）将生命周期从词法作用域精确到**使用点**（use-site），使得不变式的验证更加精确。Polonius 进一步将区域约束转化为 Datalog 规则，实现 borrow check 的声明式表达。[来源: [Rust [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — NLL](https://rust-lang.github.io/rfcs//2094-nll.html)] · [来源: [Polonius — rust-lang/polonius](https://github.com/rust-lang/polonius)] · [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html)]
+> **形式化表达**: 借用检查器通过**区域约束系统**（Region Constraint System）在编译期验证这三个不变式。NLL（Non-Lexical Lifetimes）将生命周期从词法作用域精确到**使用点**（use-site），使得不变式的验证更加精确。Polonius 进一步将区域约束转化为 Datalog 规则，实现 borrow check 的声明式表达。[来源: [Rust [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — NLL](https://rust-lang.github.io/rfcs//2094-nll.html)] · (Source: [Polonius — rust-lang/polonius](https://github.com/rust-lang/polonius)) · (Source: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html))
 
 ### 3.4 unsafe 块的公理边界
 >
@@ -358,7 +358,7 @@ unsafe fn dereference_raw<T>(ptr: *const T) -> T {
 // 其中 unsafe_assumptions(ptr) 是程序员手动保证的前置条件
 ```
 
-> **关键洞察**: `unsafe` 块不是"无规则"的区域，而是**公理由程序员手动提供**的区域。Rust 的 `// SAFETY:` 注释文化正是公理语义在工程实践中的体现——程序员在 unsafe 块前显式声明所需的前置条件，这些条件构成了人工的霍尔三元组。然而，当前工具链（Prusti/Creusot/Kani）对 `unsafe` 的支持仍然有限，这是 Rust 形式化验证的最大缺口之一。[来源: [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/index.html)] · [来源: [RustBelt — Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)]
+> **关键洞察**: `unsafe` 块不是"无规则"的区域，而是**公理由程序员手动提供**的区域。Rust 的 `// SAFETY:` 注释文化正是公理语义在工程实践中的体现——程序员在 unsafe 块前显式声明所需的前置条件，这些条件构成了人工的霍尔三元组。然而，当前工具链（Prusti/Creusot/Kani）对 `unsafe` 的支持仍然有限，这是 Rust 形式化验证的最大缺口之一。(Source: [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/index.html)) · (Source: [RustBelt — Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/))
 
 ---
 
@@ -392,7 +392,7 @@ fn increment_positive(x: i32) -> i32 {
 // wp(increment_positive, result > x) = (x + 1 > x) = true (given x > 0)
 ```
 
-> **局限**: Prusti 目前不支持 `unsafe` 块、并发、`dyn Trait` 和复杂的生命周期（Lifetimes）泛型（Generics）。其验证范围本质上是"安全的 Rust 子集"——这正是公理语义在工业工具中的典型边界。[来源: [Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html)] · [来源: [Viper Project](https://www.pm.inf.ethz.ch/research/viper.html)]
+> **局限**: Prusti 目前不支持 `unsafe` 块、并发、`dyn Trait` 和复杂的生命周期（Lifetimes）泛型（Generics）。其验证范围本质上是"安全的 Rust 子集"——这正是公理语义在工业工具中的典型边界。(Source: [Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html)) · (Source: [Viper Project](https://www.pm.inf.ethz.ch/research/viper.html))
 
 ### 4.2 Creusot：Why3 逻辑下的 WP 计算
 >
@@ -421,7 +421,7 @@ pub fn increment(x: i32) -> i32 {
 // 结合前置条件 x > 0，验证通过。
 ```
 
-> **与 RustBelt 的关系**: Creusot 验证的是**功能性正确性**（函数输出满足规约），而 RustBelt 验证的是**内存安全（Memory Safety）性**（无悬垂指针、无数据竞争）。两者互补：Creusot 的 wp 计算假设底层内存安全已由 Rust 编译器保证，RustBelt 的形式化证明为这一假设提供了数学基础。[来源: [Creusot Documentation](https://creusot.rs/)] · [来源: [Why3 Platform](https://why3.lri.fr/)]
+> **与 RustBelt 的关系**: Creusot 验证的是**功能性正确性**（函数输出满足规约），而 RustBelt 验证的是**内存安全（Memory Safety）性**（无悬垂指针、无数据竞争）。两者互补：Creusot 的 wp 计算假设底层内存安全已由 Rust 编译器保证，RustBelt 的形式化证明为这一假设提供了数学基础。(Source: [Creusot Documentation](https://creusot.rs/)) · (Source: [Why3 Platform](https://why3.lri.fr/))
 
 ### 4.3 Kani：符号执行与断言验证
 >
@@ -452,7 +452,7 @@ fn check_increment() {
 //   → (result > x) ✓
 ```
 
-> **局限与优势**: Kani 的优势是**全自动**（无需手动写循环不变式），局限是**路径爆炸**（复杂程序的状态空间过大）。它更适合验证小规模的核心抽象（如标准库原语），而非大型应用程序。这与公理语义的理论边界一致：全自动验证（无不变式辅助）仅在有限状态空间下可判定。[来源: [Kani Documentation](https://model-checking.github.io/kani/)] · [来源: [CBMC — C Bounded Model Checker](https://github.com/diffblue/cbmc)]
+> **局限与优势**: Kani 的优势是**全自动**（无需手动写循环不变式），局限是**路径爆炸**（复杂程序的状态空间过大）。它更适合验证小规模的核心抽象（如标准库原语），而非大型应用程序。这与公理语义的理论边界一致：全自动验证（无不变式辅助）仅在有限状态空间下可判定。(Source: [Kani Documentation](https://model-checking.github.io/kani/)) · (Source: [CBMC — C Bounded Model Checker](https://github.com/diffblue/cbmc))
 
 ---
 
@@ -557,7 +557,7 @@ fn bad_loop(n: u32) -> u32 {
 // #[invariant(i <= n)]
 ```
 
-> **修正**: wp 计算的终止性依赖于循环不变式的存在。Dijkstra 的 wp 理论证明：若循环不变式存在，则 H_k 序列在有限步内收敛到不动点；若不存在，wp 计算可能不终止。这与 Rust 的借用检查形成对比——借用检查器总是终止的，因为它验证的是**语法可判定的**约束（生命周期（Lifetimes）包含），而非**语义不可判定的**不变式。[来源: [Dijkstra 1975](https://doi.org/10.1145/360933.360975)] · [来源: [Winskel 1993, §7.4](https://mitpress.mit.edu/9780262731034)]
+> **修正**: wp 计算的终止性依赖于循环不变式的存在。Dijkstra 的 wp 理论证明：若循环不变式存在，则 H_k 序列在有限步内收敛到不动点；若不存在，wp 计算可能不终止。这与 Rust 的借用检查形成对比——借用检查器总是终止的，因为它验证的是**语法可判定的**约束（生命周期（Lifetimes）包含），而非**语义不可判定的**不变式。(Source: [Dijkstra 1975](https://doi.org/10.1145/360933.360975)) · (Source: [Winskel 1993, §7.4](https://mitpress.mit.edu/9780262731034))
 
 ### 10.2 边界测试：借用不变式违反的验证失败（验证错误）
 
@@ -578,7 +578,7 @@ fn borrow_violation(x: &mut i32) -> i32 {
 // Prusti 只需验证编译通过后的代码的功能性正确性。
 ```
 
-> **修正**: Rust 编译器的借用检查器可以被视为一个**全自动的、零成本的公理验证器**。它自动推断并验证了借用规则的不变式（3.3 节），无需程序员手动书写 `{P} C {Q}`。这是 Hoare 逻辑从学术走向工业的最成功实践——将公理规约"编译"进类型系统（Type System）。[来源: [Rust Reference — Borrowing](https://doc.rust-lang.org/reference/expressions.html?highlight=borrow#evaluation-order)] · [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)]
+> **修正**: Rust 编译器的借用检查器可以被视为一个**全自动的、零成本的公理验证器**。它自动推断并验证了借用规则的不变式（3.3 节），无需程序员手动书写 `{P} C {Q}`。这是 Hoare 逻辑从学术走向工业的最成功实践——将公理规约"编译"进类型系统（Type System）。(Source: [Rust Reference — Borrowing](https://doc.rust-lang.org/reference/expressions.html?highlight=borrow#evaluation-order)) · (Source: [RustBelt Paper](https://doi.org/10.1145/3158154))
 
 ### 10.3 边界测试：unsafe 块的公理逃逸（运行时 UB）
 
@@ -949,3 +949,13 @@ fn factorial(n: Int) -> Int {
 - **定理**: Axiomatic Semantics（公理语义） 定义 ⟹ 类型安全保证
 - **定理**: Axiomatic Semantics（公理语义） 定义 ⟹ 类型安全保证
 - **定理**: Axiomatic Semantics（公理语义） 定义 ⟹ 类型安全保证
+
+---
+
+> **权威来源**: [Verus](https://github.com/verus-lang/verus) · [Kani](https://model-checking.github.io/kani/) · [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1145/363235.363259) · [Dijkstra 1975 — Guarded Commands, Nondeterminacy and Formal Derivation of Programs](https://doi.org/10.1145/360933.360975)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

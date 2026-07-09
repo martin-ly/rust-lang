@@ -47,6 +47,8 @@ version = "1.0.0"
 rust-version = "1.70.0"  # 最低支持的 Rust 版本
 ```
 
+(Source: [Cargo Book — The rust-version field](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field))
+
 **保守策略**（推荐）：
 
 - Minor 版本不提升 MSRV。
@@ -60,7 +62,7 @@ v2.0.0 (MSRV 1.70) ✅ Major 可更新
 
 ### 2.2 Edition 兼容
 
-过程宏（Procedural Macro） crate 本身的 `edition` 不影响使用方的 edition，但生成代码中使用的语法特性需要兼容目标 edition：
+过程宏（Procedural Macro） crate 本身的 `edition` 不影响使用方的 edition，但生成代码中使用的语法特性需要兼容目标 edition (Source: [Rust Reference — Editions](https://doc.rust-lang.org/reference/editions.html))：
 
 ```rust
 // 生成代码时使用全限定路径，避免 edition 相关解析差异
@@ -191,6 +193,8 @@ pub fn derive_builder(input: TokenStream) -> TokenStream { /* ... */ }
 
 ### 5.1 语义化版本
 
+(Source: [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html))
+
 | 变更类型 | 版本段 | 示例 |
 |:---|:---|:---|
 | 破坏性变更 | MAJOR | 1.5.0 → 2.0.0 |
@@ -216,6 +220,8 @@ pub fn old_api() { new_api(); }
 
 ### 5.4 CI/CD 发布流程
 
+(Source: [Cargo Book — Publishing on crates.io](https://doc.rust-lang.org/cargo/reference/publishing.html))
+
 ```yaml
 # .github/workflows/release.yml
 name: Release
@@ -238,6 +244,8 @@ jobs:
 ## 六、维护策略
 
 ### 6.1 安全审计
+
+(Source: [RustSec cargo-audit](https://github.com/RustSec/rustsec/tree/main/cargo-audit))
 
 ```yaml
 # .github/workflows/audit.yml

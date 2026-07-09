@@ -25,7 +25,8 @@ chrono = "0.4"
 use clap::Parser;
 use chrono::Local;
 
-#[derive(Parser)]
+# [derive(Parser)]
+
 struct Args {
     #[arg(help = "输入 CSV 文件路径")]
     input: String,

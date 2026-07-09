@@ -18,6 +18,9 @@
 
 > **对应 Crate**: [`c02_type_system`](../../crates/c02_type_system)
 > **对应练习**: [`exercises/src/type_system/`](../../exercises/src/type_system)
+> **权威来源**: [Rust Reference — Implementations](https://doc.rust-lang.org/reference/items/implementations.html) · [TRPL — Method Syntax](https://doc.rust-lang.org/book/ch05-03-method-syntax.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ## 认知路径
 
@@ -81,7 +84,10 @@
 
 ---
 
-## 二、固有实现（Inherent Impl）
+## 二、固有实现
+
+> (Source: [Rust Reference — Implementations](https://doc.rust-lang.org/reference/items/implementations.html))
+（Inherent Impl）
 
 ```rust
 struct Rectangle {

@@ -41,6 +41,8 @@
 
 ## 安装 Rust
 
+> (Source: [TRPL — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html))
+
 Rust 通过 [rustup](https://rustup.rs/) 管理工具链和版本。
 
 ```bash
@@ -62,6 +64,8 @@ rustup show
 ---
 
 ## 配置工具链
+
+> (Source: [rustup.rs](https://rustup.rs/))
 
 对于团队项目，建议在仓库根目录放置 `rust-toolchain.toml`：
 
@@ -120,6 +124,8 @@ rust-version = "1.85"
 ---
 
 ## Cargo 基本操作
+
+> (Source: [Cargo Book](https://doc.rust-lang.org/cargo/index.html))
 
 | 命令 | 作用 |
 |:---|:---|
@@ -199,6 +205,9 @@ flowchart TD
 随后再学习 [模块系统](../07_modules_and_items/11_modules_and_paths.md)、[错误处理](../08_error_handling/32_error_handling_basics.md) 与 [测试](../10_testing_basics/16_testing_basics.md)。
 
 ---
+> **权威来源**: [TRPL — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html) · [Rust Installation](https://www.rust-lang.org/tools/install) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [rustup.rs](https://rustup.rs/)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（TRPL、Cargo Book、rustup.rs）
 
 ## 关联概念
 

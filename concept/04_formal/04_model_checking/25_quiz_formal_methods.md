@@ -573,11 +573,7 @@ let _ref = &mut x;     // Stacked Borrows: ptr 失效
 ---
 
 > **对应练习**: 建议安装 Kani (`cargo install kani-verifier`) 并用 `cargo kani` 验证简单函数
-
----
-
-> **权威来源**: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Iris Tutorial](https://people.mpi-sws.org/~dreyer/papers/iris-ground-up/paper.pdf) · [The Rustonomicon — Rust's Memory Model](https://doc.rust-lang.org/nomicon/index.html)
-
+>
 ## 嵌入式测验（Embedded Quiz）
 
 ### 测验 1：本文件是 测验：形式化方法概念（L4 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
@@ -613,3 +609,12 @@ let _ref = &mut x;     // Stacked Borrows: ptr 失效
 
 专项测验题量更大、覆盖更全面，通常按难度分层；嵌入式测验更精简，直接关联刚阅读的概念内容，用于即时检验理解。
 </details>
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/popl18/) · [Iris Project](https://iris-project.org/) · [Kani Documentation](https://model-checking.github.io/kani/)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

@@ -20,6 +20,9 @@
 ---
 
 ---
+> **权威来源**: [Rust Reference — Keywords](https://doc.rust-lang.org/reference/keywords.html) · [TRPL — Appendix A: Keywords](https://doc.rust-lang.org/book/appendix-01-keywords.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ## 认知路径
 
@@ -118,7 +121,10 @@
 
 ---
 
-## 四、Raw Identifiers（原始标识符）
+## 四、Raw Identifiers
+
+> (Source: [TRPL — Appendix A: Keywords](https://doc.rust-lang.org/book/appendix-01-keywords.html))
+（原始标识符）
 
 使用 `r#` 前缀可以将关键字当作普通标识符使用。
 

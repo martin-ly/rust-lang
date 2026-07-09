@@ -18,6 +18,9 @@
 
 > **对应 Crate**: [`c03_control_fn`](../../crates/c03_control_fn)
 > **对应练习**: [`exercises/src/control_flow/`](../../exercises/src/control_flow)
+> **权威来源**: [Rust Reference — Functions](https://doc.rust-lang.org/reference/items/functions.html) · [TRPL — Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) · [Rust By Example — Functions](https://doc.rust-lang.org/rust-by-example/fn.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL、Rust By Example）
 
 ## 认知路径
 
@@ -88,6 +91,8 @@
 
 ## 二、函数声明与调用
 
+> (Source: [Rust Reference — Functions](https://doc.rust-lang.org/reference/items/functions.html))
+
 ```rust
 fn greet(name: &str) {
     println!("Hello, {name}!");
@@ -113,6 +118,8 @@ fn main() {
 ---
 
 ## 三、参数与所有权
+
+> (Source: [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html))
 
 ```rust
 fn take_ownership(s: String) {
@@ -168,6 +175,8 @@ fn wrong() -> i32 {
 ---
 
 ## 五、发散函数
+
+> (Source: [Rust Reference — Diverging Functions](https://doc.rust-lang.org/reference/items/functions.html#diverging-functions))
 
 发散函数返回 `!`（never type），常用于 `panic!`、`loop {}`、`std::process::exit`。
 

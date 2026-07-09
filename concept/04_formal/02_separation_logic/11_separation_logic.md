@@ -24,7 +24,7 @@
 
 ## 📑 目录
 
-- [分离逻辑：Rust 所有权（Ownership）的形式化根基](#分离逻辑rust-所有权的形式化根基)
+- [分离逻辑：Rust 所有权的形式化根基](#分离逻辑rust-所有权的形式化根基)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 从霍尔逻辑到分离逻辑](#11-从霍尔逻辑到分离逻辑)
@@ -44,11 +44,11 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：分离逻辑的编译错误](#十边界测试分离逻辑的编译错误)
     - [10.1 边界测试：独占资源的分割与重组（编译错误）](#101-边界测试独占资源的分割与重组编译错误)
-    - [10.2 边界测试：`Box::leak` 与资源永久转移（运行时（Runtime）行为）](#102-边界测试boxleak-与资源永久转移运行时行为)
+    - [10.2 边界测试：`Box::leak` 与资源永久转移（运行时行为）](#102-边界测试boxleak-与资源永久转移运行时行为)
     - [10.3 边界测试：分离逻辑中的帧规则违反（编译错误）](#103-边界测试分离逻辑中的帧规则违反编译错误)
     - [10.4 边界测试：GhostCell 的分离逻辑建模（编译错误）](#104-边界测试ghostcell-的分离逻辑建模编译错误)
     - [10.5 边界测试：RustBelt 的 `own` 与 `shr` 断言的编码（编译错误）](#105-边界测试rustbelt-的-own-与-shr-断言的编码编译错误)
-    - [10.3 边界测试：分离逻辑与 Rust 引用（Reference）的一致性（Coherence）（编译错误）](#103-边界测试分离逻辑与-rust-引用的一致性编译错误)
+    - [10.3 边界测试：分离逻辑与 Rust 引用的一致性（编译错误）](#103-边界测试分离逻辑与-rust-引用的一致性编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：分离合取 \*（理解层）](#测验-1分离合取-理解层)
     - [测验 2：帧规则（Frame Rule）（应用层）](#测验-2帧规则frame-rule应用层)
@@ -97,7 +97,7 @@
 ```
 
 > **认知功能**: **分离逻辑将"资源独占"从编程直觉提升为数学公理**——它是 Rust 所有权系统的形式化先驱。
-> [来源: [Reynolds — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf)]
+> (Source: [Reynolds — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf))
 
 ---
 
@@ -138,7 +138,7 @@
 ```
 
 > **分离洞察**: **分离合取 (*) 是分离逻辑的核心创新**——它精确编码了"资源不重叠"的概念，与 Rust 的独占所有权直接对应。
-> [来源: [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
+> (Source: [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic))
 
 ---
 
@@ -179,7 +179,7 @@
 ```
 
 > **框架洞察**: **框架规则是"局部推理"的数学基础**——它使验证可以模块（Module）化，与 Rust 的所有权隔离完美对应。
-> [来源: [O'Hearn — Resources, Concurrency and Local Reasoning](https://www.cs.ucl.ac.uk/staff/p.ohearn/papers/localreasoning.pdf)]
+> (Source: [O'Hearn — Resources, Concurrency and Local Reasoning](https://www.cs.ucl.ac.uk/staff/p.ohearn/papers/localreasoning.pdf))
 
 ---
 
@@ -222,7 +222,7 @@
 ```
 
 > **断言洞察**: **分离蕴含（-*）是 Rust mutable borrow 的形式化对应**——"如果你有独占访问，你可以修改"。
-> [来源: [Iris Lecture Notes](https://iris-project.org/tutorial-pdfs/iris-lecture-notes.pdf)]
+> (Source: [Iris Lecture Notes](https://iris-project.org/tutorial-pdfs/iris-lecture-notes.pdf))
 
 ---
 
@@ -266,7 +266,7 @@ Rust 所有权 → 分离逻辑:
 ```
 
 > **映射洞察**: **Rust 的 borrow checker 是分离逻辑的"自动版本"**——编译器自动证明程序满足分离逻辑约束。
-> [来源: [RustBelt — Logical Relations](https://plv.mpi-sws.org/rustbelt/popl18/)]
+> (Source: [RustBelt — Logical Relations](https://plv.mpi-sws.org/rustbelt/popl18/))
 
 ---
 
@@ -306,7 +306,7 @@ Iris: 更高阶并发分离逻辑框架
 ```
 
 > **Iris 洞察**: **Iris 将分离逻辑扩展到并发和更高阶场景**——它是验证 Rust unsafe 代码的数学基础。
-> [来源: [Iris Project](https://iris-project.org/)]
+> (Source: [Iris Project](https://iris-project.org/))
 
 ---
 
@@ -342,7 +342,7 @@ Unsafe 代码审计:
 ```
 
 > **模式矩阵**: **分离逻辑是连接 Rust 工程实践和形式化验证的桥梁**——它为所有权系统提供了严格的数学语义。
-> [来源: [RustBelt — Methodology](https://plv.mpi-sws.org/rustbelt/popl18/)]
+> (Source: [RustBelt — Methodology](https://plv.mpi-sws.org/rustbelt/popl18/))
 
 ---
 
@@ -366,7 +366,7 @@ graph TD
 ```
 
 > **认知功能**: **Safe Rust 已由编译器验证**，形式化验证主要针对 **unsafe 代码和安全关键组件**。
-> [来源: [Rust Verification Tools](https://alastairreid.github.io/rust-verification-tools/)]
+> (Source: [Rust Verification Tools](https://alastairreid.github.io/rust-verification-tools/))
 
 ---
 
@@ -406,7 +406,7 @@ graph TD
 ```
 
 > **边界要点**: 形式化验证的边界主要与**复杂度**、**工具可用性**、**语义鸿沟**、**并发**和**硬件差距**相关。
-> [来源: [The Limitations of Formal Verification](https://www.hillelwayne.com/post/why-dont-people-use-formal-methods/)]
+> (Source: [The Limitations of Formal Verification](https://www.hillelwayne.com/post/why-dont-people-use-formal-methods/))
 
 ---
 
@@ -450,7 +450,7 @@ graph TD
 ```
 
 > **陷阱总结**: 形式化验证的陷阱主要与**逻辑混淆**、**框架规则假设**、**过度形式化**、**工具限制**和**抽象精度**相关。
-> [来源: [Formal Verification Pitfalls](https://www.hillelwayne.com/post/why-dont-people-use-formal-methods/)]
+> (Source: [Formal Verification Pitfalls](https://www.hillelwayne.com/post/why-dont-people-use-formal-methods/))
 
 ---
 
@@ -487,11 +487,12 @@ fn main() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
+> [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
-**状态**: ✅ 概念文件创建完成
+**状态**: ✅ 权威来源对齐完成 (Batch L4)
 
 ---
 
@@ -539,7 +540,7 @@ fn fixed() {
 > 分离逻辑的核心是 **frame rule**：若 `P` 描述某部分内存的状态，则可在保持 `P` 不变的情况下，对内存的其他部分进行推理。
 > `split_at_mut` 将数组分割为两个不重叠的可变切片（Slice），编译器验证分割点不会导致重叠借用（Borrowing）。
 > 这是 Rust 借用（Borrowing）检查器对分离逻辑 *-conjunction（`P ∗ Q`）的直接实现——两个不重叠的可变引用（Mutable Reference）可以同时存在，因为它们操作分离的内存区域。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.2 边界测试：`Box::leak` 与资源永久转移（运行时行为）
 
@@ -563,7 +564,7 @@ fn fixed() {
 > `Box::leak` 将堆内存转换为 `&'static` 引用（Reference），放弃释放义务。
 > 在分离逻辑中，`Box<T>` 对应于 `own(τ, ℓ)`（对 ℓ 的独占所有权），`Box::leak` 将 `own(τ, ℓ)` 转换为 `shr(static, ℓ)`（静态共享权限）。
 > 一旦转换，资源永远不会被释放——这是显式的资源泄漏，在 Rust 中被视为安全操作（因为不破坏内存安全（Memory Safety）），但可能违反系统资源约束。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：分离逻辑中的帧规则违反（编译错误）
 
@@ -590,8 +591,8 @@ fn main() {
 > 编译器通过借用（Borrowing）检查验证不相交性：两个 `&mut T` 不能指向同一内存。
 > `swap` 要求 `a` 和 `b` 不重叠——若重叠，交换会破坏数据。
 > 这与 C 的 `swap`（无检查，重叠时 UB）或 Java 的引用（Reference）交换（总是安全，因为是交换引用而非值）不同——Rust 在编译期保证内存区域的不相交性，使分离逻辑的推理在实战中可行。
-> [来源: [Separation Logic Tutorial](https://www.cs.cmu.edu/~jcr/seplogic.pdf)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
+> [Separation Logic Tutorial](https://www.cs.cmu.edu/~jcr/seplogic.pdf)] ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 
 ### 10.4 边界测试：GhostCell 的分离逻辑建模（编译错误）
 
@@ -618,8 +619,8 @@ fn main() {
 > 代价：`GhostToken` 的生命周期（Lifetimes）约束要求所有相关操作在闭包（Closures）内完成，API  ergonomics 较差。
 > 分离逻辑视角：`GhostToken` 是权限（capability），`GhostCell` 是资源，借用（Borrowing）规则对应于权限的独占转移。
 > 这是 Rust 类型系统（Type System）表达力的高级展示：将运行时（Runtime）检查迁移到编译期，同时保持零成本。
-> [来源: [GhostCell Paper](https://plv.mpi-sws.org/rustbelt/ghostcell/)] ·
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+> [GhostCell Paper](https://plv.mpi-sws.org/rustbelt/ghostcell/)] ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.5 边界测试：RustBelt 的 `own` 与 `shr` 断言的编码（编译错误）
 
@@ -650,7 +651,7 @@ fn main() {
 > 3) `shr(x, T)` 不能写入。这些规则在 RustBelt 中以**高阶协议**（higher-order protocol）编码，通过 Iris 框架证明。
 > RustBelt 证明了：若 unsafe 代码满足其协议，则 safe Rust 代码不可能触发 UB。
 > 这是 Rust 安全保证的形式化基础。这与 Hoare 逻辑的前置/后置条件（类似但非资源导向）或 C 的分离逻辑工具（VeriFast、VST）类似——RustBelt 是第一个为工业语言（Rust）提供完整内存安全（Memory Safety）形式化证明的项目。
-> [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [Iris Framework](https://iris-project.org/)]
+> [RustBelt Paper](https://doi.org/10.1145/3158154)] · [Iris Framework](https://iris-project.org/)]
 
 ### 10.3 边界测试：分离逻辑与 Rust 引用的一致性（编译错误）
 
@@ -675,8 +676,8 @@ fn main() {
 > `&T` 对应 `shr(κ, ℓ)`（共享权限），允许多个读者但无写者。上述代码中，两个 `&mut x` 试图同时存在，违反 `own(ℓ, i32)` 的独占性。
 > RustBelt 使用 Iris 分离逻辑框架证明：若程序通过 Rust 编译器的借用（Borrowing）检查，则其执行在分离逻辑模型中是安全的。
 > 这与 C 的指针（无独占性保证，需人工验证）或 Java 的引用（共享只读，无 `&mut` 等价物）不同——Rust 的编译器是分离逻辑的"自动证明器"。
-> [来源: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)] ·
-> [来源: [Iris Project](https://iris-project.org/)]
+> [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)] ·
+> [Iris Project](https://iris-project.org/)]
 
 ## 嵌入式测验（Embedded Quiz）
 

@@ -97,12 +97,12 @@
 ```rust,ignore
 // impl Trait: 隐藏具体类型，暴露行为
 
-// 1. 函数返回位置 (Rust 1.26+)
+// 1. 函数返回位置 (Rust 1.26+) (Source: [Rust Reference — impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html))
 fn make_iter() -> impl Iterator<Item = i32> {
     vec![1, 2, 3].into_iter()
 }
 
-// 2. 函数参数位置 (Rust 1.75+)
+// 2. 函数参数位置 (Rust 1.75+) (Source: [Rust Reference — impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html))
 fn process(iter: impl Iterator<Item = i32>) -> i32 {
     iter.sum()
 }
@@ -162,7 +162,7 @@ trait Foo {
 >
 
 ```rust,ignore
-// Const Generics: 泛型参数可以是常量值
+// Const Generics: 泛型参数可以是常量值 (Source: [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html), [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics))
 
 // 固定大小的数组包装器
 struct Array<T, const N: usize> {

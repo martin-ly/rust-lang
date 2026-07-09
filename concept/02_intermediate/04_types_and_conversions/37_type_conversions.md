@@ -97,9 +97,9 @@ Trait 转换:
 
 ### 1.2 直觉解释
 
-- **Coercion**：编译器“悄悄”帮你做的安全转换，比如把 `&String` 变成 `&str`。
-- **Cast**：你明确告诉编译器“我要把这个值当作另一种类型”，可能伴随数据丢失。
-- **Trait 转换**：通过标准 trait 实现可组合、可发现的类型转换，是错误处理（Error Handling）和 API 设计的首选。
+- **Coercion**：编译器“悄悄”帮你做的安全转换，比如把 `&String` 变成 `&str` (Source: [The Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html))。
+- **Cast**：你明确告诉编译器“我要把这个值当作另一种类型”，可能伴随数据丢失 (Source: [The Rust Reference — Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions))。
+- **Trait 转换**：通过标准 trait 实现可组合、可发现的类型转换，是错误处理（Error Handling）和 API 设计的首选 (Source: [std::convert](https://doc.rust-lang.org/std/convert/index.html))。
 
 > [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
@@ -208,8 +208,8 @@ impl Display for i32 {
 fn main() {}
 ```
 
-> **错误诊断**: `error[E0117]: only traits defined in the current crate can be implemented for arbitrary types`
-> **修正**: 使用 newtype 包装外部类型：`struct MyInt(i32); impl Display for MyInt { ... }`
+> **错误诊断**: `error[E0117]: only traits defined in the current crate can be implemented for arbitrary types` (Source: [The Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules))
+> **修正**: 使用 newtype 包装外部类型：`struct MyInt(i32); impl Display for MyInt { ... }` (Source: [TRPL — Newtype Pattern](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types))
 > [来源: [The Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)]
 
 ---

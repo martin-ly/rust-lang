@@ -69,7 +69,7 @@ NLL 的数据流分析与 Polonius 的 Datalog 视角如何统一？
 
 ## 一、借用检查器判定什么（What Borrow Checking Decides）
 
-Rust 借用（Borrowing）检查器在编译期回答一个**安全判定问题**：
+Rust 借用（Borrowing）检查器在编译期回答一个**安全判定问题** (Source: [Rustc Dev Guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html))：
 
 > 给定 Safe Rust 程序，是否存在执行路径使得引用（Reference）在使用时指向已释放或非法改写的内存？
 
@@ -113,7 +113,7 @@ fn lexical_problem() {
 
 ### 2.2 NLL（Non-Lexical Lifetimes）
 
-生命周期（Lifetimes）由“创建点 → 最后一次使用点”定义，基于 MIR 与 CFG 数据流分析。
+生命周期（Lifetimes）由“创建点 → 最后一次使用点”定义，基于 MIR 与 CFG 数据流分析。 (Source: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs/2094-nll.html))
 
 ```rust
 fn nll_allows() {
@@ -126,7 +126,7 @@ fn nll_allows() {
 
 ### 2.3 Polonius
 
-以 Datalog 风格将借用检查表达为约束传播，可处理 NLL 拒绝的部分安全模式（条件借用、循环内精确分析）。`-Zpolonius` 在 nightly 可用，被视为未来默认路线。
+以 Datalog 风格将借用检查表达为约束传播，可处理 NLL 拒绝的部分安全模式（条件借用、循环内精确分析）。`-Zpolonius` 在 nightly 可用，被视为未来默认路线。 (Source: [Polonius Repository](https://github.com/rust-lang/polonius))
 
 ```rust
 fn polonius_friendly(flag: bool, data: &mut [i32]) -> &mut i32 {
@@ -399,12 +399,10 @@ fn two_phase_borrow() {
 
 ---
 
-## 权威来源索引
+> **权威来源**: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs/2094-nll.html) · [Polonius](https://github.com/rust-lang/polonius) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) · [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
-> **来源**: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs/2094-nll.html)
-> **来源**: [Polonius Repository](https://github.com/rust-lang/polonius)
-> **来源**: [Rustc Dev Guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html)
-> **来源**: [Rustc Dev Guide — Region Inference](https://rustc-dev-guide.rust-lang.org/borrow_check/region_inference.html)
-> **来源**: [The Rust Programming Language — Ch. 4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
-> **来源**: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html)
-> **来源**: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

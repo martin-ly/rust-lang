@@ -20,6 +20,9 @@
 ---
 
 ---
+> **权威来源**: [Rust Reference — Tokens](https://doc.rust-lang.org/reference/tokens.html) · [TRPL — Appendix B: Operators and Symbols](https://doc.rust-lang.org/book/appendix-02-operators.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ## 认知路径
 
@@ -64,6 +67,8 @@
 > **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 Rust 运算符与符号（Operators and Symb 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
 
 ## 一、运算符
+
+> (Source: [Rust Reference — Tokens](https://doc.rust-lang.org/reference/tokens.html))
 
 | 运算符 | 示例 | 说明 | 可重载？ |
 |:---|:---|:---|:---:|
@@ -162,6 +167,8 @@
 
 ## 四、泛型相关符号
 
+> (Source: [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html))
+
 | 符号 | 说明 |
 |:---|:---|
 | `path<...>` | 为泛型（Generics）类型指定参数，如 `Vec<u8>` |
@@ -176,6 +183,8 @@
 ---
 
 ## 五、Trait Bound 约束
+
+> (Source: [Rust Reference — Trait Bounds](https://doc.rust-lang.org/reference/trait-bounds.html))
 
 | 符号 | 说明 |
 |:---|:---|

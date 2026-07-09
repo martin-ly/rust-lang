@@ -76,7 +76,7 @@
 ### 1.1 闭包的本质：匿名结构体
 >
 
-Rust 的闭包不是函数，而是**编译器自动生成的匿名结构体（Struct）**：
+Rust 的闭包不是函数，而是**编译器自动生成的匿名结构体（Struct）** (Source: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html))：
 
 ```rust,ignore
 // 概念示例：编译器如何展开闭包
@@ -186,7 +186,7 @@ let f3 = || drop(s);  // s 被移动到闭包内
 // f3(); // ❌ 编译错误：值已被移动
 ```
 
-> **技术要点**: 闭包的 Trait 实现是**自动推导**的，不是显式声明的。编译器分析闭包体对捕获变量的使用方式，决定实现哪个 Trait。
+> **技术要点**: 闭包的 Trait 实现是**自动推导**的，不是显式声明的。编译器分析闭包体对捕获变量的使用方式，决定实现哪个 Trait (Source: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html))。
 
 ---
 

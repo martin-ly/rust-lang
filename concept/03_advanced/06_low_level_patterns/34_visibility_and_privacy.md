@@ -50,7 +50,7 @@ Rust 的名称解析基于全局的命名空间层次结构。每个层级都可
 
 ## 二、默认规则
 
-默认情况下，所有 item 都是**私有（private）**的，但有两个例外：
+默认情况下，所有 item 都是**私有（private）**的，但有两个例外：(Source: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html))
 
 1. `pub` trait 的关联项默认是 public。
 2. `pub` enum 的变体默认是 public。
@@ -109,7 +109,7 @@ pub mod outer_mod {
 
 ## 五、重导出与可见性
 
-`pub use` 可以公开地重导出 item，使外部 crate 通过新的路径访问原本私有的模块链中的 item。
+`pub use` 可以公开地重导出 item，使外部 crate 通过新的路径访问原本私有的模块链中的 item。(Source: [Rust Reference — Re-exporting and Visibility](https://doc.rust-lang.org/reference/visibility-and-privacy.html#re-exporting-and-visibility))
 
 ```rust
 pub use self::implementation::api;
@@ -144,7 +144,7 @@ pub use inner::public_fn; // 外部可见
 
 ## 七、可见性与 crate 边界
 
-跨 crate 时，只有 `pub` 的 item 能被外部访问。`pub(crate)`、`pub(super)`、`pub(in path)` 仅在当前 crate 内部生效，对外部 crate 等同于 private。
+跨 crate 时，只有 `pub` 的 item 能被外部访问。(Source: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html))`pub(crate)`、`pub(super)`、`pub(in path)` 仅在当前 crate 内部生效，对外部 crate 等同于 private。
 
 ```rust
 // crate-a
@@ -197,3 +197,7 @@ flowchart TD
 | [Names, Scopes and Resolution](../../04_formal/05_rustc_internals/40_names_and_resolution.md) | 名称解析遵守可见性规则 |
 | [API Naming Conventions](../../02_intermediate/05_modules_and_visibility/22_api_naming_conventions.md) | 可见性决定公共 API 边界 |
 | [Cargo SemVer Checks](../../07_future/03_preview_features/46_cargo_semver_checks_preview.md) | 可见性变化影响语义化版本 |
+
+> **权威来源**: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html), [TRPL Ch7 — Modules](https://doc.rust-lang.org/book/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)

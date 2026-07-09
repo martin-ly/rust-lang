@@ -41,6 +41,8 @@
 
 ## 一、什么是 Item
 
+> (Source: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html))
+
 **项（item）** 是 crate 的组成部分。项通过嵌套的模块（Module）集合在 crate 中组织。每个 crate 都有一个最外层的匿名模块；crate 中的所有其他项都位于该 crate 模块树的路径中。
 
 项的特性：
@@ -64,6 +66,8 @@ impl Drawable for Point { fn draw(&self) { println!("point"); } } // 实现
 ---
 
 ## 二、Item 的种类
+
+> (Source: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html))
 
 Rust 中的 item 包括：
 

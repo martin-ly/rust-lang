@@ -61,7 +61,7 @@
 6. 调用 extern 函数
 7. 使用 `asm!` 内联汇编（Inline Assembly）
 
-> `unsafe` 块**不**禁用借用（Borrowing）检查器；它只放宽上述操作限制。
+> `unsafe` 块**不**禁用借用（Borrowing）检查器；它只放宽上述操作限制。(Source: [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#unsafe-blocks))
 
 ```rust
 let mut x = 5;
@@ -74,7 +74,7 @@ assert_eq!(x, 6);
 
 ## 三、外部契约与 unsafe trait
 
-`unsafe trait` 用于标记实现者必须手动保证的契约：
+`unsafe trait` 用于标记实现者必须手动保证的契约：(Source: [Rust Reference — Unsafe Traits](https://doc.rust-lang.org/reference/items/traits.html#unsafe-traits))
 
 ```rust
 unsafe trait Zeroable {
@@ -104,7 +104,7 @@ Rust 将以下行为归类为**危险但不属于 `unsafe` 操作**：
 | 算术溢出（debug） | 调试模式下 panic | 程序终止 |
 | 竞争条件（逻辑层） | 非原子操作（Atomic Operations）导致错误结果 | 逻辑错误，不一定是 UB |
 
-> 关键区别：`unsafe` 操作指的是可能直接导致**未定义行为**的操作；死锁和泄漏虽然严重，但属于定义良好的行为。
+> 关键区别：`unsafe` 操作指的是可能直接导致**未定义行为**的操作；死锁和泄漏虽然严重，但属于定义良好的行为。(Source: [Rust Reference — Behavior Not Considered Unsafe](https://doc.rust-lang.org/reference/behavior-not-considered-unsafe.html))
 
 ## 五、安全抽象层
 
@@ -179,7 +179,7 @@ impl<T> SafeBox<T> {
 
 ## 六、Unsafe 与内存模型
 
-unsafe 代码必须遵守 Rust 内存模型：
+unsafe 代码必须遵守 Rust 内存模型：(Source: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html))
 
 - 正确区分已初始化/未初始化字节。
 - 不丢失指针 provenance。

@@ -42,7 +42,7 @@
 
 ## 一、什么是 Panic
 
-**Panic** 是 Rust 提供的机制，用于阻止函数正常返回，以响应通常不可恢复的错误条件。
+**Panic** 是 Rust 提供的机制，用于阻止函数正常返回，以响应通常不可恢复的错误条件。(Source: [Rust Reference — Panic](https://doc.rust-lang.org/reference/panic.html), [TRPL Ch9 — Unrecoverable Errors](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html))
 
 - 某些语言结构（如数组越界索引）会自动 panic。
 - 标准库通过 `panic!` 宏（Macro）提供显式 panic 能力。
@@ -81,7 +81,7 @@ fn panic(_info: &PanicInfo) -> ! {
 
 ## 三、标准行为
 
-标准库提供两种 panic handler：
+标准库提供两种 panic handler：(Source: [Rust Reference — Panic Strategy](https://doc.rust-lang.org/reference/panic.html#panic-strategy))
 
 | 策略 | 行为 | 可恢复性 |
 |:---|:---|:---:|
@@ -90,7 +90,7 @@ fn panic(_info: &PanicInfo) -> ! {
 
 - 并非所有目标都支持 `unwind`。
 - 使用 `std` 链接时，可通过 `-C panic` 选择策略；大多数目标默认 `unwind`。
-- 可通过 `std::panic::set_hook` 在运行时（Runtime）修改标准库 panic 行为。
+- 可通过 `std::panic::set_hook` 在运行时（Runtime）修改标准库 panic 行为。(Source: [std::panic::set_hook](https://doc.rust-lang.org/std/panic/fn.set_hook.html))
 - 链接 `no_std` binary、dylib、cdylib 或 staticlib 时必须自行指定 panic handler。
 
 ---
@@ -123,14 +123,14 @@ Panic 可以是可恢复的，也可以是不可恢复的，具体取决于 pani
 
 ### 恢复机制
 
-- `std::panic::catch_unwind`：在当前线程内恢复 panic。
+- `std::panic::catch_unwind`：在当前线程内恢复 panic。(Source: [std::panic::catch_unwind](https://doc.rust-lang.org/std/panic/fn.catch_unwind.html))
 - `std::thread::spawn`：自动为子线程设置 panic 恢复，使其他线程继续运行。
 
 ---
 
 ## 六、跨 FFI Boundary 的 Unwinding
 
-跨 FFI boundary 的 unwind 需要特别小心，错误的 ABI 声明会导致未定义行为。
+跨 FFI boundary 的 unwind 需要特别小心，错误的 ABI 声明会导致未定义行为。(Source: [Rust Reference — Unwinding](https://doc.rust-lang.org/reference/panic.html#unwinding), [Rust Reference — ABIs](https://doc.rust-lang.org/reference/items/external-blocks.html#abi))
 
 ### UB 情况
 
@@ -160,3 +160,7 @@ Panic 可以是可恢复的，也可以是不可恢复的，具体取决于 pani
 | [FFI Advanced](../04_ffi/09_ffi_advanced.md) | 跨 FFI unwind 需要正确的 ABI |
 | [Behavior Considered Undefined](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md) | 错误的 FFI unwind 是 UB |
 | [The Rust Runtime](30_rust_runtime.md) | panic handler 是运行时的一部分 |
+
+> **权威来源**: [Rust Reference — Panic](https://doc.rust-lang.org/reference/panic.html), [TRPL Ch9 — Unrecoverable Errors](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html), [Rustonomicon — Panics](https://doc.rust-lang.org/nomicon/unwinding.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)

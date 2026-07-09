@@ -53,7 +53,7 @@ fn make_callback() -> impl FnOnce() -> Pin<Box<dyn Future<Output = i32> + Send>>
 2. **捕获不精确**：`async move` 会强制把捕获变量 move 进 Future，无法像同步闭包（Closures）那样按使用自动推断借用（Borrowing）。
 3. **类型表达困难**：返回 `impl Fn() -> impl Future` 在 trait bound、高阶回调中非常冗长。
 
-Rust 1.85 引入 `async || {}` 语法后，上述代码可简化为：
+Rust 1.85 引入 `async || {}` 语法后，上述代码可简化为：(Source: [Rust Reference — Async Closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures), [Rust 1.85.0 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html))
 
 ```rust
 fn make_callback() -> impl AsyncFnOnce() -> i32 {
@@ -156,7 +156,7 @@ async fn capture_examples() {
 
 ## 3. AsyncFn trait 家族
 
-Rust 为标准库增加了三个新 trait：
+Rust 为标准库增加了三个新 trait：(Source: [std::ops::AsyncFn](https://doc.rust-lang.org/std/ops/trait.AsyncFn.html), [RFC 3668](https://rust-lang.github.io/rfcs/3668-async-closures.html))
 
 - `AsyncFn(Args) -> Output`
 - `AsyncFnMut(Args) -> Output`
@@ -369,7 +369,7 @@ fn make_dyn() -> Box<dyn AsyncFn(i32) -> bool> {
 }
 ```
 
-原因：`AsyncFn` 包含关联类型 `CallRefFuture<'a>`，使其不符合 object-safe（dyn-compatible）条件。
+原因：`AsyncFn` 包含关联类型 `CallRefFuture<'a>`，使其不符合 object-safe（dyn-compatible）条件。(Source: [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety))
 
 **替代方案**：
 

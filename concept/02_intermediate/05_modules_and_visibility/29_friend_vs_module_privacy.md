@@ -248,3 +248,9 @@ access(item, module) = visible  iff  item 在 module 的可见范围内
 - [Rust Reference: Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
 - [cppreference: Friend](https://en.cppreference.com/w/cpp/language/friend)
 - [C++ Core Guidelines: Prefer minimal encapsulation](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-class)
+
+---
+
+> **权威来源**: [TRPL — Packages, Crates, and Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html), [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html), [Rust by Example — Visibility](https://doc.rust-lang.org/rust-by-example/mod/visibility.html), [cppreference — Friend](https://en.cppreference.com/w/cpp/language/friend)
+> **权威来源对齐变更日志**: 2026-07-04 创建，对齐 Rust 1.96.1 (Edition 2024)
+> **状态**: ✅ 权威来源对齐完成

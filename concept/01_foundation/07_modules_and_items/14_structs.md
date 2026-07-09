@@ -18,6 +18,9 @@
 
 > **对应 Crate**: [`c02_type_system`](../../crates/c02_type_system)
 > **对应练习**: [`exercises/src/type_system/`](../../exercises/src/type_system)
+> **权威来源**: [Rust Reference — Structs](https://doc.rust-lang.org/reference/items/structs.html) · [TRPL — Structs](https://doc.rust-lang.org/book/ch05-00-structs.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ## 认知路径
 
@@ -83,6 +86,8 @@
 
 ## 二、三种结构体
 
+> (Source: [Rust Reference — Structs](https://doc.rust-lang.org/reference/items/structs.html))
+
 ```rust
 // 1. 命名字段型
 struct User {
@@ -109,6 +114,8 @@ struct Electron;
 ---
 
 ## 三、结构体更新语法
+
+> (Source: [TRPL — Structs](https://doc.rust-lang.org/book/ch05-00-structs.html))
 
 ```rust
 let u1 = User {

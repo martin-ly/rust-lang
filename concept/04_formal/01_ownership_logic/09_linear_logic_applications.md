@@ -493,11 +493,12 @@ graph TD
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
+> [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
-**状态**: ✅ 概念文件创建完成
+**状态**: ✅ 权威来源对齐完成 (Batch L4)
 
 ---
 
@@ -554,7 +555,7 @@ fn consume_clone(l: LinearClone) {
 }
 ```
 
-> **修正**: 线性逻辑要求资源**恰好使用一次**。Rust 的所有权系统是一种**仿射类型系统（Type System）**（affine）——资源最多使用一次，但允许通过 `Drop` 隐式丢弃。这与纯线性逻辑（不允许丢弃）不同，更符合系统编程需求。`#[derive(Clone)]` 显式 opt-in 复制语义，避免隐式复制导致的性能问题。这与 C++ 的拷贝构造函数（默认复制）形成鲜明对比——Rust 的默认是 move，复制需显式。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
+> **修正**: 线性逻辑要求资源**恰好使用一次**。Rust 的所有权系统是一种**仿射类型系统（Type System）**（affine）——资源最多使用一次，但允许通过 `Drop` 隐式丢弃。这与纯线性逻辑（不允许丢弃）不同，更符合系统编程需求。`#[derive(Clone)]` 显式 opt-in 复制语义，避免隐式复制导致的性能问题。这与 C++ 的拷贝构造函数（默认复制）形成鲜明对比——Rust 的默认是 move，复制需显式。[Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：`Vec` 的线性所有权与索引（运行时 panic）
 
@@ -572,7 +573,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Vec` 的索引操作 `v[i]` 在越界时 panic，体现了 Rust"快速失败"的哲学。从线性逻辑视角，`Vec` 是一个资源容器，其元素是子资源。越界访问试图获取不存在的子资源，是资源使用错误。`get()` 返回 `Option<&T>`，将可能的失败显式编码到类型中，调用者必须处理 `None` 情况。这是 Rust 将运行时错误转为编译期类型安全边界的典型模式。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
+> **修正**: `Vec` 的索引操作 `v[i]` 在越界时 panic，体现了 Rust"快速失败"的哲学。从线性逻辑视角，`Vec` 是一个资源容器，其元素是子资源。越界访问试图获取不存在的子资源，是资源使用错误。`get()` 返回 `Option<&T>`，将可能的失败显式编码到类型中，调用者必须处理 `None` 情况。这是 Rust 将运行时错误转为编译期类型安全边界的典型模式。[Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：线性资源的隐式复制（编译错误）
 
@@ -593,7 +594,7 @@ fn main() {
 }
 ```
 
-> **修正**: 线性逻辑在 Rust 中的体现：未实现 `Copy` 的类型在传递时**移动**（move）所有权（Ownership）。`FileHandle` 没有 `Copy` derive，因此 `use_file(file)` 将 `file` 的所有权转移给函数参数，之后 `file` 不可用。这是 Rust 资源管理的核心：文件句柄、网络连接、锁守卫等必须唯一拥有，防止双重关闭或数据竞争。若需多次使用，应实现 `Clone`（显式复制）或使用引用（Reference）（`&FileHandle`）。这与 C 的文件描述符（可复制 `int`，易双重 `close`）或 Java 的 `Closeable`（引用共享，依赖 GC 和 try-with-resources）不同——Rust 在编译期强制资源的一次性使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Linear Logic in Computer Science](https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-inference.pdf)]
+> **修正**: 线性逻辑在 Rust 中的体现：未实现 `Copy` 的类型在传递时**移动**（move）所有权（Ownership）。`FileHandle` 没有 `Copy` derive，因此 `use_file(file)` 将 `file` 的所有权转移给函数参数，之后 `file` 不可用。这是 Rust 资源管理的核心：文件句柄、网络连接、锁守卫等必须唯一拥有，防止双重关闭或数据竞争。若需多次使用，应实现 `Clone`（显式复制）或使用引用（Reference）（`&FileHandle`）。这与 C 的文件描述符（可复制 `int`，易双重 `close`）或 Java 的 `Closeable`（引用共享，依赖 GC 和 try-with-resources）不同——Rust 在编译期强制资源的一次性使用。[The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [Linear Logic in Computer Science](https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-inference.pdf)]
 
 ### 10.4 边界测试：`Copy` 与 `Drop` 的互斥性（编译错误）
 
@@ -613,7 +614,7 @@ impl Clone for Resource {
 }
 ```
 
-> **修正**: Rust 禁止同时为类型实现 `Copy` 和 `Drop`。原因：`Copy` 语义允许按位复制（`let b = a;` 后 `a` 仍可用），若 `Resource` 有 `Drop`，复制后两个副本都需要析构——但按位复制意味着共享同一底层资源（如文件描述符），双重析构会导致重复释放。这是线性逻辑**资源唯一性**的编译期强制：有析构逻辑的类型必须是线性的（move-only），不能是复制的。这与 C++ 的拷贝构造函数（可复制，需手动实现深拷贝或引用计数）或 Swift 的 `struct`（总是可复制，但 `class` 是引用）不同——Rust 的类型系统将"可复制的值"和"需析构的资源"在 trait 层面分离。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Rust Reference — Special Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html)]
+> **修正**: Rust 禁止同时为类型实现 `Copy` 和 `Drop`。原因：`Copy` 语义允许按位复制（`let b = a;` 后 `a` 仍可用），若 `Resource` 有 `Drop`，复制后两个副本都需要析构——但按位复制意味着共享同一底层资源（如文件描述符），双重析构会导致重复释放。这是线性逻辑**资源唯一性**的编译期强制：有析构逻辑的类型必须是线性的（move-only），不能是复制的。这与 C++ 的拷贝构造函数（可复制，需手动实现深拷贝或引用计数）或 Swift 的 `struct`（总是可复制，但 `class` 是引用）不同——Rust 的类型系统将"可复制的值"和"需析构的资源"在 trait 层面分离。[The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [Rust Reference — Special Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html)]
 
 ### 10.5 边界测试：`Vec::drain` 与线性资源的消耗（编译错误）
 
@@ -639,7 +640,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Vec::drain(range)` 移除指定范围内的元素并返回迭代器（Iterator）——这是**批量消耗**线性资源的操作。每个被 drain 的元素在迭代器被消费时逐个 drop（若未 `collect` 到新的 `Vec`），或在 `collect` 时转移所有权。`drain` 的边界检查：范围必须在 `0..=len` 内，否则 panic。这与线性逻辑中的**批量资源释放**对应：一次性转移多个资源的所有权，而非逐个 `pop`。Rust 的 `drain` 是高效的（O(end - start)，只移动尾部元素），但要求范围有效。这与 C++ 的 `vector::erase(first, last)`（同样批量移除，迭代器失效）或 Haskell 的列表操作（无突变，无 drain 概念）不同——Rust 的 `drain` 是所有权系统下的批量资源管理工具。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
+> **修正**: `Vec::drain(range)` 移除指定范围内的元素并返回迭代器（Iterator）——这是**批量消耗**线性资源的操作。每个被 drain 的元素在迭代器被消费时逐个 drop（若未 `collect` 到新的 `Vec`），或在 `collect` 时转移所有权。`drain` 的边界检查：范围必须在 `0..=len` 内，否则 panic。这与线性逻辑中的**批量资源释放**对应：一次性转移多个资源的所有权，而非逐个 `pop`。Rust 的 `drain` 是高效的（O(end - start)，只移动尾部元素），但要求范围有效。这与 C++ 的 `vector::erase(first, last)`（同样批量移除，迭代器失效）或 Haskell 的列表操作（无突变，无 drain 概念）不同——Rust 的 `drain` 是所有权系统下的批量资源管理工具。[Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
 
 ### 10.3 边界测试：线性类型与 `Drop` 的资源泄漏边界（编译错误/逻辑问题）
 

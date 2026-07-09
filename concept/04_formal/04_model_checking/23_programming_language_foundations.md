@@ -40,12 +40,12 @@
     - [5.2 Rust 的类型驱动控制流](#52-rust-的类型驱动控制流)
   - [六、变量模型：环境 vs 存储](#六变量模型环境-vs-存储)
     - [6.1 两个概念](#61-两个概念)
-    - [6.2 Rust 的所有权（Ownership）作为存储约束](#62-rust-的所有权作为存储约束)
+    - [6.2 Rust 的所有权作为存储约束](#62-rust-的所有权作为存储约束)
   - [七、来源与参考](#七来源与参考)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Lambda 演算（Lambda Calculus）为什么被称为"编程语言的汇编语言"？（理解层）](#测验-1lambda-演算lambda-calculus为什么被称为编程语言的汇编语言理解层)
-    - [测验 2：什么是"柯里化"（Currying）？Rust 的闭包（Closures）支持柯里化吗？（理解层）](#测验-2什么是柯里化curryingrust-的闭包支持柯里化吗理解层)
-    - [测验 3：系统 F（System F）是什么？Rust 的泛型（Generics）与它有什么关系？（理解层）](#测验-3系统-fsystem-f是什么rust-的泛型与它有什么关系理解层)
+    - [测验 2：什么是"柯里化"（Currying）？Rust 的闭包支持柯里化吗？（理解层）](#测验-2什么是柯里化curryingrust-的闭包支持柯里化吗理解层)
+    - [测验 3：系统 F（System F）是什么？Rust 的泛型与它有什么关系？（理解层）](#测验-3系统-fsystem-f是什么rust-的泛型与它有什么关系理解层)
     - [测验 4：什么是"停机问题"（Halting Problem）？它对程序验证有什么实际影响？（理解层）](#测验-4什么是停机问题halting-problem它对程序验证有什么实际影响理解层)
     - [测验 5：类型论中的"依赖类型"（Dependent Types）是什么？Rust 目前支持依赖类型吗？（理解层）](#测验-5类型论中的依赖类型dependent-types是什么rust-目前支持依赖类型吗理解层)
   - [认知路径](#认知路径)
@@ -340,8 +340,6 @@ fn example() {
 **最后更新**: 2026-06-01
 **状态**: ✅ 概念文档创建完成
 
-> **权威来源**: [TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/), [RustBelt](https://plv.mpi-sws.org/rustbelt/)
-
 ## 嵌入式测验（Embedded Quiz）
 
 ### 测验 1：Lambda 演算（Lambda Calculus）为什么被称为"编程语言的汇编语言"？（理解层）
@@ -421,3 +419,12 @@ fn example() {
 ### 反命题与边界
 
 > **反命题**: "通用程序语言理论基础：Rust 的 PL 基座 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+---
+
+> **权威来源**: [Verus](https://github.com/verus-lang/verus) · [Kani](https://model-checking.github.io/kani/) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Oxide](https://arxiv.org/abs/1903.00982)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

@@ -96,7 +96,7 @@ graph TB
 > Package 是 Cargo 的构建单元（对应一个 Cargo.toml），Crate 是编译单元（一个 lib.rs 或 main.rs），Module 是命名空间单元（文件或内联模块）。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)]
 > **使用建议**: 理解这三者的区别是掌握 Rust 模块系统的基础——Package 管理依赖，Crate 管理编译，Module 管理命名空间。
-> **关键洞察**: 一个 Package 可包含**多个 Crate**（1 个 lib + 多个 bin + tests + examples + benches），但每个 Crate 是独立编译的单元。
+> **关键洞察**: 一个 Package 可包含**多个 Crate**（1 个 lib + 多个 bin + tests + examples + benches），但每个 Crate 是独立编译的单元 (Source: [TRPL Ch7 — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html), [Cargo Book](https://doc.rust-lang.org/cargo/index.html))。
 > [来源: [TRPL Ch7 — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html)]
 
 ---
@@ -168,7 +168,7 @@ graph LR
 
 > **认知功能**: 此图展示 Rust 的**可见性层次结构**。默认私有是 Rust 的安全哲学体现——与 C++（默认私有类成员但公开全局函数）和 Java（默认包可见）都不同。
 > **使用建议**: 优先使用默认私有，需要跨模块时提升到 pub(crate)，真正公开的 API 才使用 pub。
-> **关键洞察**: `pub(crate)` 是 Rust 模块系统的**最佳实践**——它允许 crate 内部任意模块访问，但对外部 crate 隐藏。这比 C++ 的 `friend` 或 Java 的包可见性更精确。
+> **关键洞察**: `pub(crate)` 是 Rust 模块系统的**最佳实践**——它允许 crate 内部任意模块访问，但对外部 crate 隐藏。这比 C++ 的 `friend` 或 Java 的包可见性更精确 (Source: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html))。
 > [来源: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)]
 
 ---

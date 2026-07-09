@@ -88,9 +88,9 @@ union UnionName {
 }
 ```
 
-- 联合体的内存大小等于其最大字段的大小（含对齐填充）。
-- 读取任何字段都需要 `unsafe` 块，因为 Rust 无法保证该字段当前是活跃字段。
-- 联合体可以实现 `Copy`、 `Drop`、 trait 等，但字段类型必须满足相应约束。
+- 联合体的内存大小等于其最大字段的大小（含对齐填充）(Source: [The Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html))。
+- 读取任何字段都需要 `unsafe` 块，因为 Rust 无法保证该字段当前是活跃字段 (Source: [The Rust Reference — Unions](https://doc.rust-lang.org/reference/items/unions.html))。
+- 联合体可以实现 `Copy`、 `Drop`、 trait 等，但字段类型必须满足相应约束 (Source: [The Rustonomicon — Unions](https://doc.rust-lang.org/nomicon/other-reprs.html))。
 
 ### 1.2 直觉解释
 

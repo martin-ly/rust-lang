@@ -33,11 +33,11 @@
 ## 一、权威定义
 
 > Safety tags are a lightweight, machine-readable convention for annotating the safety requirements of `unsafe` functions and discharging them at call sites.
-> —— RFC #3842 核心思想
+> —— RFC #3842 核心思想 (Source: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842))
 
-当前 Unsafe Rust 的安全前提主要依赖人工撰写的 `# Safety` 文档注释。Safety Tags 尝试将这些契约提升为**结构化属性（structured attributes）**，让 Clippy、rust-analyzer、Miri 以及未来的形式化工具能够：
+当前 Unsafe Rust 的安全前提主要依赖人工撰写的 `# Safety` 文档注释。Safety Tags 尝试将这些契约提升为**结构化属性（structured attributes）**，让 Clippy、rust-analyzer、Miri 以及未来的形式化工具能够检查。 (Source: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842))
 
-1. **统一词汇表**：用 `valid_ptr`、`aligned`、`initialized` 等标准标签表达常见前提。Safety Tags 研究原型已梳理出 21 个基础标签，可覆盖 std 中约 96% 的公开 `unsafe` API。
+1. **统一词汇表**：用 `valid_ptr`、`aligned`、`initialized` 等标准标签表达常见前提。Safety Tags 研究原型已梳理出 21 个基础标签，可覆盖 std 中约 96% 的公开 `unsafe` API。 (Source: [safety-tool slides](https://os-checker.github.io/slides/safety-tags))
 2. **调用点检查**：在 `unsafe` 调用处通过 `#[safety::checked(...)]` 显式声明已满足哪些标签。
 3. **文档与 IDE 支持**：自动生成安全检查清单，提供补全与诊断。
 4. **通向形式化**：将标签转换为验证工具的前置条件（preconditions）。
@@ -164,3 +164,13 @@ B
 - [BorrowSanitizer](34_borrow_sanitizer_in_formal.md)
 - [AutoVerus](../04_model_checking/24_autoverus.md)
 - [Rust 1.98+ 预览](../../07_future/00_version_tracking/rust_1_98_preview.md)
+
+---
+
+> **权威来源**: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Iris Project](https://iris-project.org/) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

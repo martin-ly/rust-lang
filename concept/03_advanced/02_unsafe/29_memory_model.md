@@ -46,11 +46,11 @@
 
 > **警告**: Rust 的内存模型目前尚不完整，部分细节尚未最终确定。
 
-Rust 内存模型定义了程序执行期间内存的状态以及哪些操作是合法的。理解内存模型对于编写正确的 `unsafe` 代码至关重要。
+Rust 内存模型定义了程序执行期间内存的状态以及哪些操作是合法的。理解内存模型对于编写正确的 `unsafe` 代码至关重要。(Source: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html))
 
 ## 二、字节（Bytes）
 
-Rust 内存的最基本单位是**字节（byte）**。与硬件字节不同，Rust 使用一种**抽象字节**，可以区分硬件字节无法区分的状态：
+Rust 内存的最基本单位是**字节（byte）**。与硬件字节不同，Rust 使用一种**抽象字节**，可以区分硬件字节无法区分的状态：(Source: [Unsafe Code Guidelines — Memory Model](https://rust-lang.github.io/unsafe-code-guidelines/))
 
 - **已初始化字节（initialized byte）**: 包含一个 `u8` 值，以及可选的 provenance。
 - **未初始化字节（uninitialized byte）**: 不包含确定值。
@@ -66,7 +66,7 @@ Rust 内存的最基本单位是**字节（byte）**。与硬件字节不同，R
 
 ## 三、Provenance
 
-**Provenance** 是指针值携带的"来源"信息，说明它指向哪个分配（allocation）。Rust 编译器利用 provenance 进行优化并判断指针使用的合法性。
+**Provenance** 是指针值携带的"来源"信息，说明它指向哪个分配（allocation）。Rust 编译器利用 provenance 进行优化并判断指针使用的合法性。(Source: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html#provenance))
 
 关键规则：
 
@@ -82,7 +82,7 @@ let restored = addr as *mut u8; // provenance 可能无效
 
 ## 四、初始化与 MaybeUninit
 
-`MaybeUninit<T>` 是处理未初始化内存的核心类型：
+`MaybeUninit<T>` 是处理未初始化内存的核心类型：(Source: [Rust Reference — MaybeUninit](https://doc.rust-lang.org/reference/standard-library-mem.html#maybeuninit), [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html))
 
 ```rust
 use std::mem::MaybeUninit;

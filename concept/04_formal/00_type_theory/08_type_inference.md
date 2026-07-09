@@ -26,19 +26,19 @@
 
 ## 📑 目录
 
-- [类型推断（Type Inference）：Hindley-Milner 算法与 Rust 的工业实现](#类型推断hindley-milner-算法与-rust-的工业实现)
+- [类型推断：Hindley-Milner 算法与 Rust 的工业实现](#类型推断hindley-milner-算法与-rust-的工业实现)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 从显式类型到隐式推断](#11-从显式类型到隐式推断)
     - [1.2 Hindley-Milner 算法](#12-hindley-milner-算法)
-    - [1.3 Rust 的类型推断（Type Inference）扩展](#13-rust-的类型推断扩展)
+    - [1.3 Rust 的类型推断扩展](#13-rust-的类型推断扩展)
   - [二、技术细节](#二技术细节)
     - [2.1 统一（Unification）](#21-统一unification)
   - [十、边界测试：类型推断的编译错误](#十边界测试类型推断的编译错误)
-    - [10.1 边界测试：泛型（Generics）方法链中的类型推断失败（编译错误）](#101-边界测试泛型方法链中的类型推断失败编译错误)
-    - [10.2 边界测试：闭包（Closures）参数类型推断的歧义（编译错误）](#102-边界测试闭包参数类型推断的歧义编译错误)
-    - [2.2 泛型（Generics）函数的类型推断](#22-泛型函数的类型推断)
-    - [2.3 生命周期（Lifetimes）推断](#23-生命周期推断)
+    - [10.1 边界测试：泛型方法链中的类型推断失败（编译错误）](#101-边界测试泛型方法链中的类型推断失败编译错误)
+    - [10.2 边界测试：闭包参数类型推断的歧义（编译错误）](#102-边界测试闭包参数类型推断的歧义编译错误)
+    - [2.2 泛型函数的类型推断](#22-泛型函数的类型推断)
+    - [2.3 生命周期推断](#23-生命周期推断)
   - [三、Rust 与 HM 的差异](#三rust-与-hm-的差异)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -47,7 +47,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：闭包（Closures）参数的类型推断歧义（编译错误）](#103-边界测试闭包参数的类型推断歧义编译错误)
+    - [10.3 边界测试：闭包参数的类型推断歧义（编译错误）](#103-边界测试闭包参数的类型推断歧义编译错误)
     - [10.4 边界测试：关联类型的投影歧义（编译错误）](#104-边界测试关联类型的投影歧义编译错误)
     - [10.3 边界测试：闭包捕获与类型推断的交互（编译错误）](#103-边界测试闭包捕获与类型推断的交互编译错误)
     - [10.4 边界测试：类型推断的模糊性与显式标注需求（编译错误）](#104-边界测试类型推断的模糊性与显式标注需求编译错误)
@@ -500,11 +500,12 @@ graph TD
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
+> [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
-**状态**: ✅ 概念文件创建完成
+**状态**: ✅ 权威来源对齐完成 (Batch L4)
 
 ---
 
@@ -538,7 +539,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的闭包参数类型推断依赖**使用点上下文**：闭包在何处被调用，参数类型从调用处推断。若闭包定义后未被调用（或调用点无足够类型信息），编译器无法推断参数类型。这与 C++ 的 lambda（参数类型必须显式或使用 `auto`）或 JavaScript 的箭头函数（动态类型，无推断问题）不同——Rust 的闭包类型推断是双向的：函数签名可从闭包推断，闭包参数可从调用推断，但若两端都未知，推断失败。`map`、`filter` 等迭代器（Iterator）适配器提供足够的上下文（`Iterator::Item` 类型），因此迭代器闭包通常无需显式标注。独立闭包（未立即使用）需要类型注解。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html)]
+> **修正**: Rust 的闭包参数类型推断依赖**使用点上下文**：闭包在何处被调用，参数类型从调用处推断。若闭包定义后未被调用（或调用点无足够类型信息），编译器无法推断参数类型。这与 C++ 的 lambda（参数类型必须显式或使用 `auto`）或 JavaScript 的箭头函数（动态类型，无推断问题）不同——Rust 的闭包类型推断是双向的：函数签名可从闭包推断，闭包参数可从调用推断，但若两端都未知，推断失败。`map`、`filter` 等迭代器（Iterator）适配器提供足够的上下文（`Iterator::Item` 类型），因此迭代器闭包通常无需显式标注。独立闭包（未立即使用）需要类型注解。[The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html)]
 
 ### 10.4 边界测试：关联类型的投影歧义（编译错误）
 
@@ -558,7 +559,7 @@ fn main() {
 }
 ```
 
-> **修正**: 关联类型（associated types）是 trait 的一部分：`Container::Item` 由具体实现决定。但调用泛型函数 `process` 时，编译器必须知道 `C` 的具体类型才能解析 `C::Item`。若 `C` 无法从参数推断（如上述代码中 `process` 无参数或参数类型不明确），编译错误。解决方案：1) 显式指定类型参数 `process::<Vec<i32>>(vec)`；2) 使用 `impl Trait` 返回类型替代关联类型；3) 确保参数类型提供足够上下文。这与 Haskell 的 type families（`Container a -> Item a`，类型推断类似）或 C++ 的 `typename`（`typename C::Item`，需要显式 `typename` 关键字）类似——Rust 的关联类型推断在复杂场景下需要显式标注。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust Reference — Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html)]
+> **修正**: 关联类型（associated types）是 trait 的一部分：`Container::Item` 由具体实现决定。但调用泛型函数 `process` 时，编译器必须知道 `C` 的具体类型才能解析 `C::Item`。若 `C` 无法从参数推断（如上述代码中 `process` 无参数或参数类型不明确），编译错误。解决方案：1) 显式指定类型参数 `process::<Vec<i32>>(vec)`；2) 使用 `impl Trait` 返回类型替代关联类型；3) 确保参数类型提供足够上下文。这与 Haskell 的 type families（`Container a -> Item a`，类型推断类似）或 C++ 的 `typename`（`typename C::Item`，需要显式 `typename` 关键字）类似——Rust 的关联类型推断在复杂场景下需要显式标注。[The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [Rust Reference — Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html)]
 
 ### 10.3 边界测试：闭包捕获与类型推断的交互（编译错误）
 
@@ -584,7 +585,7 @@ fn main() {
 > 4) 先以 `Fn` 使用闭包，后添加 `mut` 捕获 → 编译错误；
 > 5) `move ||` 强制 move 所有捕获，可能从 `FnMut` 降级为 `FnOnce`；
 > 6) 递归闭包需显式类型标注（`let f: &dyn Fn(i32) -> i32 = &|x| { ... }`）。这与 C++ 的 lambda（按值/按引用（Reference）捕获显式指定）或 Java 的匿名类（隐式 final 变量捕获）不同——Rust 的闭包推断是自动的，但开发者需理解捕获模式对调用次数的限制。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
 
 ### 10.4 边界测试：类型推断的模糊性与显式标注需求（编译错误）
 
@@ -610,7 +611,7 @@ fn main() {
 > 8) 编译错误更精确（推断失败时错误信息模糊）；
 > 9) API 边界（公共接口必须显式）。
 > 这与 Haskell 的完全类型推断（几乎无需标注，但复杂程序可能需要）或 C++ 的 `auto`（有限推断，模板参数从调用推断）不同——Rust 的平衡点是"局部推断 + 接口显式"。
-> [来源: [Type Inference](https://doc.rust-lang.org/reference/types.html)] ·
+> [Type Inference](https://doc.rust-lang.org/reference/types.html)] ·
 
 ### 10.5 边界测试：类型不匹配的基础错误
 

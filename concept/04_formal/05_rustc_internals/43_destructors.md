@@ -176,3 +176,13 @@ println!("{}", x);
 | [Panic](../../03_advanced/02_unsafe/31_panic.md) | panic 与 unwind 影响析构执行 |
 | [Memory Model](../../03_advanced/02_unsafe/29_memory_model.md) | drop 是内存模型的一部分 |
 | [Behavior Considered Undefined](../01_ownership_logic/37_behavior_considered_undefined.md) | 错误依赖析构可能导致 UB |
+
+---
+
+> **权威来源**: [Rust Reference — Destructors](https://doc.rust-lang.org/reference/destructors.html) · [Tofte & Talpin — Region-Based Memory Management](<https://doi.org/10.1016/0890-5401(94)> · [Wadler — Linear Types Can Change the World!](https://doi.org/10.1007/978-1-4471-3227-7_5) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

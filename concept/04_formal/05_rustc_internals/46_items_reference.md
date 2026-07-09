@@ -234,11 +234,6 @@ extern "C" {
 | [Trait Solver](26_trait_solver_in_rustc.md) | trait/impl item 的解析 |
 | [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | 特定 item 需要 unsafe 上下文 |
 
----
-
-> **权威来源**: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) · [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
-> **内容分级**: [研究级]
-
 ## 过渡段
 
 > **过渡**: 从 item 的种类枚举过渡到模块与可见性，可以理解 crate 静态结构的组织方式。
@@ -247,3 +242,12 @@ extern "C" {
 >
 > **过渡**: 从 item 参考过渡到属性与宏（Macro）系统，可以理解编译期元编程如何扩展和修饰 item 语义。
 >
+---
+
+> **权威来源**: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

@@ -65,14 +65,14 @@
 
 ## 一、什么是条件编译
 
-**条件编译** 指仅在特定条件下才编译某段源代码。Rust 通过以下方式实现：
+**条件编译** 指仅在特定条件下才编译某段源代码。Rust 通过以下方式实现：(Source: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html))
 
 - `cfg` 属性：`#[cfg(...)]`
 - `cfg_attr` 属性：`#[cfg_attr(..., attr)]`
 - `cfg!` 宏（Macro）：`cfg!(predicate)`
 - `cfg_select!` 宏（Macro）：`cfg_select! { ... }`
 
-条件编译的判定依据是**配置谓词（configuration predicate）**，谓词求值为 `true` 或 `false`。
+条件编译的判定依据是**配置谓词（configuration predicate）**，谓词求值为 `true` 或 `false`。(Source: [Rust Reference — Configuration Predicates](https://doc.rust-lang.org/reference/conditional-compilation.html#configuration-predicates))
 
 ---
 
@@ -199,7 +199,7 @@ fn bewitched() {}
 
 ## 六、`cfg!` 宏
 
-`cfg!(predicate)` 在编译期求值为 `true` 或 `false` 字面量。
+`cfg!(predicate)` 在编译期求值为 `true` 或 `false` 字面量。(Source: [std::cfg!](https://doc.rust-lang.org/std/macro.cfg.html))
 
 ```rust
 let machine_kind = if cfg!(unix) {
@@ -217,7 +217,7 @@ let machine_kind = if cfg!(unix) {
 
 ## 七、`cfg_select!` 宏
 
-`cfg_select!` 在编译期根据多个配置谓词选择代码，第一个为真的臂被展开。
+`cfg_select!` 在编译期根据多个配置谓词选择代码，第一个为真的臂被展开。(Source: [Rust Reference — cfg_select!](https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg_select-macro))
 
 ```rust
 cfg_select! {
@@ -272,3 +272,7 @@ Cargo 中通过 `RUSTFLAGS` 或在 `.cargo/config.toml` 中设置。
 | [Linkage](../04_ffi/27_linkage.md) | `target_feature = "crt-static"` 影响 C 运行时（Runtime）链接 |
 | [FFI Advanced](../04_ffi/09_ffi_advanced.md) | 平台相关 FFI 代码常用 `cfg` 条件编译 |
 | [Cargo Features](../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md) | `feature = "..."` 是 Cargo 传递给 rustc 的自定义 cfg |
+
+> **权威来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html), [TRPL](https://doc.rust-lang.org/book/title-page.html), [Cargo Reference — Features](https://doc.rust-lang.org/cargo/reference/features.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)

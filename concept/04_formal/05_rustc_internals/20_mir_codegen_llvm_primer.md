@@ -81,7 +81,7 @@
   - [嵌入式测验](#嵌入式测验)
     - [测验 1：MIR 与 LLVM IR 的主要区别是什么？](#测验-1mir-与-llvm-ir-的主要区别是什么)
     - [测验 2：`--emit=mir` 输出的是优化前还是优化后的 MIR？](#测验-2--emitmir-输出的是优化前还是优化后的-mir)
-    - [测验 3：单态化（Monomorphization）发生在流水线的哪一步？](#测验-3单态化发生在流水线的哪一步)
+    - [测验 3：单态化发生在流水线的哪一步？](#测验-3单态化发生在流水线的哪一步)
     - [测验 4：为什么 LLVM IR 不适合作为长期稳定的后端接口？](#测验-4为什么-llvm-ir-不适合作为长期稳定的后端接口)
   - [权威来源索引](#权威来源索引)
 
@@ -113,7 +113,7 @@
 
 > **关键洞察**: HIR 还保留 Rust 源代码的语法结构；MIR 已经把语法结构扁平化为控制流图，但**仍然保留 Rust 语义**（如 `Copy` vs `move`、`Drop`、`Unwind`）。LLVM IR 则进一步把这些语义翻译成低层 SSA 与平台相关指令。
 >
-> [Rustc Dev Guide — The MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html)(<https://rustc-dev-guide.rust-lang.org/mir/index.html>)
+> [Rustc Dev Guide — The MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html)
 
 ---
 
@@ -156,7 +156,7 @@ graph LR
 
 > **定理**: 每个泛型（Generics）函数在 `optimized_mir` 阶段仍是泛型的；真正的单态化发生在 codegen 阶段，由 `Instance::mono` 等机制驱动。
 >
-> [Rustc Dev Guide — Monomorphization](https://rustc-dev-guide.rust-lang.org/backend/monomorph.html)(<https://rustc-dev-guide.rust-lang.org/backend/monomorph.html>)
+> [Rustc Dev Guide — Monomorphization](https://rustc-dev-guide.rust-lang.org/backend/monomorph.html)
 
 ---
 
@@ -192,7 +192,7 @@ fn example::add(_1: i32, _2: i32) -> i32 {
 
 > **注意**: `--emit=mir` 默认输出的是**优化前** MIR；若要查看优化后 MIR，需要结合 `-O` 或 `-Zmir-opt-level=N`。
 >
-> [Rustc Dev Guide — Debugging MIR](https://rustc-dev-guide.rust-lang.org/mir/debugging.html)(<https://rustc-dev-guide.rust-lang.org/mir/debugging.html>)
+> [Rustc Dev Guide — Debugging MIR](https://rustc-dev-guide.rust-lang.org/mir/debugging.html)
 
 ---
 
@@ -219,7 +219,7 @@ LLVM IR 是 SSA 形式，更接近机器指令。例如 `i32` 加法在 LLVM IR 
 
 > **关键洞察**: MIR 中的 `Add` 算子在 LLVM IR 中可能对应 `add`、`fadd`、向量加法或调用内建函数，具体取决于类型与目标平台。Codegen 层负责把 Rust 类型映射到 LLVM 类型。
 >
-> [Rustc Dev Guide — Code Generation](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)(<https://rustc-dev-guide.rust-lang.org/backend/codegen.html>)
+> [Rustc Dev Guide — Code Generation](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)
 
 ---
 
@@ -359,8 +359,9 @@ MIR 仍保留 Rust 高层语义（如 `move`、`Drop`、借用检查标记、基
 
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [LLVM Documentation](https://llvm.org/docs/)
 > **权威来源对齐变更日志**: 2026-07-09 创建，对齐 Rust 1.96.1+ MIR/codegen 文档
+> [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-09
-**状态**: ✅ 已对齐 Rust 1.96.1+ MIR/codegen 文档
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

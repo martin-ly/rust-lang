@@ -80,11 +80,11 @@
 
 ## 一、Miri 是什么
 
-**Miri** 是 Rust 官方维护的 **MIR（Mid-level IR）解释器**。与 `rustc` 直接生成机器码不同，Miri 在 MIR 层面逐条解释执行程序，同时追踪每块内存的**有效性、初始化状态、借用（Borrowing）权限**和**别名关系**。当程序即将触发未定义行为（UB）时，Miri 会报错并指出具体位置。
+**Miri** 是 Rust 官方维护的 **MIR（Mid-level IR）解释器**。与 `rustc` 直接生成机器码不同，Miri 在 MIR 层面逐条解释执行程序，同时追踪每块内存的**有效性、初始化状态、借用（Borrowing）权限**和**别名关系**。当程序即将触发未定义行为（UB）时，Miri 会报错并指出具体位置。 (Source: [Miri 官方 README](https://github.com/rust-lang/miri))
 
 > **关键洞察**: Miri 不是测试框架，而是**运行时（Runtime）语义检查器**。它回答的问题是：“这段代码在 Rust 抽象机上的执行是否违反了内存模型？”
 >
-> [Miri 官方 README](https://github.com/rust-lang/miri)(<https://github.com/rust-lang/miri>)
+> [Miri 官方 README](https://github.com/rust-lang/miri)
 
 ### 与测试/Clippy 的区别
 
@@ -110,9 +110,9 @@ Miri 目前能检测的主要 UB 类别包括：
 | **违反 `UnsafeCell` 规则** | 通过 `&T` 修改非内部可变性数据 | `trying to reborrow` |
 | **未对齐访问** | 读取未对齐地址 | `alignment` |
 
-> **注意**: Miri 使用**动态分析**，只能验证实际执行到的路径。未被测试覆盖的分支仍然可能隐藏 UB。
+> **注意**: Miri 使用**动态分析**，只能验证实际执行到的路径。未被测试覆盖的分支仍然可能隐藏 UB。 (Source: [rustc-dev-guide — Miri](https://rustc-dev-guide.rust-lang.org/miri.html))
 >
-> [Rust Reference — Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)(<https://doc.rust-lang.org/reference/behavior-considered-undefined.html>)
+> [Rust Reference — Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
 
 ---
 
@@ -304,9 +304,11 @@ graph TD
 
 ---
 
-> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html), [Miri](https://github.com/rust-lang/miri)
+> **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Miri](https://github.com/rust-lang/miri)
 > **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Rust 1.96.1 / Miri nightly · 2026-07-09 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用（Reference） [P2-Q3 形式化工具交叉引用]
+> [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-09
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

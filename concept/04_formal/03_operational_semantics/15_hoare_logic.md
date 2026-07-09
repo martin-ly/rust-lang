@@ -52,12 +52,12 @@
     - [10.3 边界测试：霍尔逻辑的不变量与 Rust 的 `while let`（编译错误）](#103-边界测试霍尔逻辑的不变量与-rust-的-while-let编译错误)
     - [10.4 边界测试： weakest precondition 与 `unsafe` 代码的规范缺口（编译错误/验证失败）](#104-边界测试-weakest-precondition-与-unsafe-代码的规范缺口编译错误验证失败)
     - [10.5 边界测试：循环不变量的发现与人工介入（验证失败）](#105-边界测试循环不变量的发现与人工介入验证失败)
-    - [10.9 边界测试：生命周期（Lifetimes）参数的不匹配返回](#109-边界测试生命周期参数的不匹配返回)
+    - [10.9 边界测试：生命周期参数的不匹配返回](#109-边界测试生命周期参数的不匹配返回)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Hoare 三元组（理解层）](#测验-1hoare-三元组理解层)
     - [测验 2：最弱前置条件（Weakest Precondition）（应用层）](#测验-2最弱前置条件weakest-precondition应用层)
     - [测验 3：循环不变量（应用层）](#测验-3循环不变量应用层)
-    - [测验 4：Rust 类型系统（Type System）对 Hoare 逻辑的编码（分析层）](#测验-4rust-类型系统对-hoare-逻辑的编码分析层)
+    - [测验 4：Rust 类型系统对 Hoare 逻辑的编码（分析层）](#测验-4rust-类型系统对-hoare-逻辑的编码分析层)
     - [测验 5：Hoare 逻辑的局限性与 Rust 扩展（评价层）](#测验-5hoare-逻辑的局限性与-rust-扩展评价层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -109,7 +109,7 @@ Hoare 三元组的形式化定义:
 ```
 
 > **认知功能**: Hoare 三元组是**程序验证的原子单位**——它将"程序正确性"这一模糊概念转化为可验证的数学陈述：给定前提，执行代码，得到保证。这与 Rust 类型系统（Type System）的"给定输入类型，执行函数，得到输出类型"在结构上同构。
-> [来源: [Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1093/comjnl/12.4.576)]
+> (Source: [Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1093/comjnl/12.4.576))
 
 ---
 
@@ -145,7 +145,7 @@ Hoare 三元组的形式化定义:
 ```
 
 > **认知功能**: WP 演算的**核心洞察**——它不是"验证程序是否满足规格"，而是"从规格反向推导出程序必须满足的前提"，这种"反向推理"是自动化验证的基础。
-> [来源: [Dijkstra 1976 — A Discipline of Programming](https://dl.acm.org/doi/book/10.5555/1243380)]
+> (Source: [Dijkstra 1976 — A Discipline of Programming](https://dl.acm.org/doi/book/10.5555/1243380))
 
 ---
 
@@ -182,7 +182,7 @@ Hoare 三元组的形式化定义:
 ```
 
 > **认知功能**: 循环不变量的**本质**——它不是"循环做什么"的操作描述，而是"循环维护了什么性质"的逻辑刻画。找到好的不变量需要理解循环的"目的"而非"步骤"。
-> [来源: [Floyd 1967 — Assigning Meanings to Programs](https://doi.org/10.1007/978-94-011-1793-7_4)]
+> (Source: [Floyd 1967 — Assigning Meanings to Programs](https://doi.org/10.1007/978-94-011-1793-7_4))
 
 ---
 
@@ -229,7 +229,7 @@ Hoare 三元组的形式化定义:
 ```
 
 > **认知功能**: Hoare 规则系统的**组合性**——复杂程序的正确性可以从简单命令的正确性推导而来，这与 Rust 类型系统（Type System）的"从小类型构建大类型"（组合子逻辑）在方法论上同构。
-> [来源: [Hoare 1969](https://doi.org/10.1093/comjnl/12.4.576)]
+> (Source: [Hoare 1969](https://doi.org/10.1093/comjnl/12.4.576))
 
 ---
 
@@ -275,7 +275,7 @@ graph LR
 ```
 
 > **认知功能**: 从 Hoare 到分离逻辑的演进揭示了**形式化方法如何响应实践需求**——经典 Hoare 逻辑无法优雅处理别名，分离逻辑通过"资源分离"的原语解决了这一问题，而 Rust 的 ownership 系统可以看作是分离逻辑的工程化实现。
-> [来源: [Reynolds 2002 — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf)]
+> (Source: [Reynolds 2002 — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf))
 
 ---
 
@@ -321,7 +321,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
 ```
 
 > **认知功能**: 用 Hoare 逻辑审视 unsafe Rust，可以发现**借用（Borrowing）检查器本质上是一个自动化的 Hoare 验证器**——它为 safe Rust 自动生成并验证前置/后置条件，而 unsafe Rust 将这些责任显式交还给开发者。
-> [来源: [The Rustonomicon — What Unsafe Can Do](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)]
+> (Source: [The Rustonomicon — What Unsafe Can Do](https://doc.rust-lang.org/nomicon/what-unsafe-does.html))
 
 ---
 
@@ -369,7 +369,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
 ```
 
 > **认知功能**: 形式化验证的**成本-精度权衡**——完全自动化但能力受限（类型系统），到表达能力无限但需人工证明（Coq），中间存在连续光谱，工具选择取决于安全关键程度和时间预算。
-> [来源: [Verification Toolchain Selection Guide](../04_model_checking/05_verification_toolchain.md)]
+> (Source: [Verification Toolchain Selection Guide](../04_model_checking/05_verification_toolchain.md))
 
 ---
 
@@ -386,7 +386,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
       ├── 停机问题不可判定，因此完全正确性不可自动证明
       ├── 部分正确性（不保证终止）是半可判定的
       └── ✅ 正确表述: "Hoare 逻辑为可表达属性提供验证框架，但需人工提供不变量"
-> [来源: [Hoare 1969](https://doi.org/10.1093/comjnl/12.4.576)]
+> (Source: [Hoare 1969](https://doi.org/10.1093/comjnl/12.4.576))
 
 反命题 2: "Rust 借用检查器等价于 Hoare 逻辑验证"
   └── ⚠️ 部分正确
@@ -394,7 +394,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
       ├── 但借用检查器不验证数值范围、功能正确性、终止性
       ├── Hoare 逻辑可验证任意属性（给定足够表达能力）
       └── ✅ 正确表述: "借用检查器是 Hoare 逻辑在内存安全领域的自动化子集"
-> [来源: [RustBelt — POPL 2018](https://doi.org/10.1145/3158154)]
+> (Source: [RustBelt — POPL 2018](https://doi.org/10.1145/3158154))
 
 反命题 3: "循环不变量总是可以自动推断"
   └── ❌ 否
@@ -402,12 +402,12 @@ Rust unsafe 代码的 Hoare 三元组视角:
       ├── 复杂算法的不变量需要算法洞察
       ├── 自动推断是活跃研究领域（AI/ML 辅助）
       └── ✅ 正确表述: "循环不变量推断在一般情况下是不可判定问题，工具只能辅助"
-> [来源: [Floyd 1967](https://doi.org/10.1007/978-94-011-1793-7_4)]
-> [来源: [Wikipedia — Loop Invariant](https://en.wikipedia.org/wiki/Loop_invariant)]
+> (Source: [Floyd 1967](https://doi.org/10.1007/978-94-011-1793-7_4))
+> (Source: [Wikipedia — Loop Invariant](https://en.wikipedia.org/wiki/Loop_invariant))
 ```
 
 > **认知功能**: 反命题分析揭示了形式化方法的**能力边界**——Hoare 逻辑是框架而非万能药，需要人类提供创造性洞察（不变量），工具只负责验证推导。
-> [来源: [TAPL — Undecidability](https://www.cis.upenn.edu/~bcpierce/tapl/)]
+> (Source: [TAPL — Undecidability](https://www.cis.upenn.edu/~bcpierce/tapl/))
 
 ---
 
@@ -434,7 +434,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
 ```
 
 > **认知功能**: 边界极限指明了从 Hoare 逻辑到工业验证的**现实差距**——理论上的"可验证"不等于实践中的"已验证"，工具链、规格工程和人类洞察都是关键瓶颈。
-> [来源: [RustBelt — Limitations](https://plv.mpi-sws.org/rustbelt/)]
+> (Source: [RustBelt — Limitations](https://plv.mpi-sws.org/rustbelt/))
 
 ---
 
@@ -449,7 +449,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
   ✅ 明确区分: 是否证明了终止性？
      // 循环变体（variant）: 每次迭代严格递减的非负整数
      // 变体存在 → 循环终止
-> [来源: [Dijkstra 1976](https://dl.acm.org/doi/book/10.5555/1243380)]
+> (Source: [Dijkstra 1976](https://dl.acm.org/doi/book/10.5555/1243380))
 
 陷阱 2: 过强的循环不变量
   ❌ I = "数组已完全排序"
@@ -457,7 +457,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
 
   ✅ 不变量应描述"部分进度"
      // I = "arr[0..i] 已排序 ∧ arr[i..] 未处理"
-> [来源: [Wikipedia — Loop Invariant](https://en.wikipedia.org/wiki/Loop_invariant)]
+> (Source: [Wikipedia — Loop Invariant](https://en.wikipedia.org/wiki/Loop_invariant))
 
 陷阱 3: 忽略 unsafe 契约的隐式前提
   ❌ 仅看函数签名 unsafe fn foo(ptr: *mut T)
@@ -466,7 +466,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
   ✅ 将 unsafe 契约形式化记录
      // SAFETY: ptr must be non-null, properly aligned,
      //          and point to a valid T.
-> [来源: [The Rustonomicon — Safety](https://doc.rust-lang.org/nomicon/index.html)]
+> (Source: [The Rustonomicon — Safety](https://doc.rust-lang.org/nomicon/index.html))
 
 陷阱 4: 将运行时断言当作形式化验证
   ❌ assert!(x > 0); // 运行时检查
@@ -475,7 +475,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
   ✅ 使用 Kani/Prusti 进行符号验证
      // #[kani::proof]
      // fn check_increment() { ... }
-> [来源: [AWS Kani Docs](https://model-checking.github.io/kani/)]
+> (Source: [AWS Kani Docs](https://model-checking.github.io/kani/))
 
 陷阱 5: 规格与实现不同步
   ❌ 修改代码后忘记更新 #[requires]/#[ensures] 注解
@@ -484,11 +484,11 @@ Rust unsafe 代码的 Hoare 三元组视角:
   ✅ 将验证集成到 CI
      // cargo verify 作为门禁
      // 规格即文档，文档即代码
-> [来源: [Continuous Verification](https://www.verifythis.org/)]
+> (Source: [Continuous Verification](https://www.verifythis.org/))
 ```
 
 > **陷阱总结**: Hoare 逻辑应用的陷阱集中在**正确性层次混淆**、**不变量设计**、**unsafe 契约**、**运行时（Runtime） vs 编译期验证**和**规格同步**五个方面——每个都反映了形式化方法从理论到实践的鸿沟。
-> [来源: [Prusti User Guide](https://www.pm.inf.ethz.ch/research/prusti.html)]
+> (Source: [Prusti User Guide](https://www.pm.inf.ethz.ch/research/prusti.html))
 
 ---
 
@@ -549,11 +549,12 @@ graph TD
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
+> [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
-**状态**: ✅ 概念文件创建完成
+**状态**: ✅ 权威来源对齐完成 (Batch L4)
 
 ---
 
@@ -596,7 +597,7 @@ fn divide_fixed(a: i32, b: NonZeroI32) -> i32 {
 > Rust 的类型系统可部分编码这些条件：`NonZeroI32` 类型编码 `b ≠ 0` 的前置条件，`Result<T, E>` 编码可能失败的后置条件。
 > 这是**类型驱动设计**（type-driven design）的体现——将运行时（Runtime）断言提升为编译期类型约束。
 > 与依赖类型（Idris、Agda）相比，Rust 的编码能力有限（无法表达任意数学断言），但足以处理常见的不变量（非零、非空、正数等）。
-> [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
+> [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
 
 ### 10.2 边界测试：循环不变量的违反（逻辑错误）
 
@@ -628,7 +629,7 @@ fn find_max(arr: &[i32]) -> Option<i32> {
 > 2) 每次迭代保持不变量；
 > 3) 终止时不变量蕴含后置条件。
 > 这确保了算法正确性，而非仅依赖测试覆盖。
-> [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
+> [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
 
 ### 10.3 边界测试：霍尔逻辑的不变量与 Rust 的 `while let`（编译错误）
 
@@ -654,8 +655,8 @@ fn drain_map(map: &mut std::collections::HashMap<i32, String>) {
 > 2) `std::mem::take(map)` 后 drain；
 > 3) `retain`（若支持）。
 > 这与 Java 的 `ConcurrentHashMap`（迭代中修改可能抛 `ConcurrentModificationException`）或 C++ 的 `unordered_map`（迭代器（Iterator）可能失效）不同——Rust 在编译期阻止所有迭代中修改。
-> [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-03-hash-maps.html)]
+> [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)] ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-03-hash-maps.html)]
 
 ### 10.4 边界测试： weakest precondition 与 `unsafe` 代码的规范缺口（编译错误/验证失败）
 
@@ -681,8 +682,8 @@ fn abs(x: i32) -> i32 {
 > 这是形式化方法的现实挑战：规范（specification）本身可能有漏洞。
 > Rust 的类型系统部分缓解（`checked_neg` 返回 `Option`），但`unsafe`代码和数值算法仍需人工审查规范完整性。
 > 这与 SPARK/Ada（整数范围在类型中声明，溢出在编译期检查）或 Frama-C（需手动写 ACSL 规范）类似——形式化验证的质量取决于规范的质量。
-> [来源: [Weakest Precondition Calculus](https://en.wikipedia.org/wiki/Predicate_transformer_semantics)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> [Weakest Precondition Calculus](https://en.wikipedia.org/wiki/Predicate_transformer_semantics)] ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.5 边界测试：循环不变量的发现与人工介入（验证失败）
 
@@ -712,8 +713,8 @@ fn gcd(a: u32, b: u32) -> u32 {
 > 2) Creusot 支持类似 WhyML 的逻辑函数；
 > 3) Kani 依赖有界展开，不直接处理不变量。
 > 这与 Isabelle/HOL（手动证明，完全控制）或 Dafny（自动生成部分不变量）类似——不变量的发现是形式化方法的"艺术"部分，需要领域知识和创造力。
-> [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)] ·
-> [来源: [Prusti Loop Invariants](https://www.pm.inf.ethz.ch/research/prusti.html)]
+> [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)] ·
+> [Prusti Loop Invariants](https://www.pm.inf.ethz.ch/research/prusti.html)]
 
 ### 10.9 边界测试：生命周期参数的不匹配返回
 

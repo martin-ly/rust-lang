@@ -38,10 +38,10 @@
     - [1.3 单子（Monad）](#13-单子monad)
   - [二、技术细节](#二技术细节)
     - [2.1 Option 作为单子](#21-option-作为单子)
-    - [2.2 Result 与错误处理（Error Handling）](#22-result-与错误处理)
+    - [2.2 Result 与错误处理](#22-result-与错误处理)
   - [十、边界测试：范畴论视角的编译错误](#十边界测试范畴论视角的编译错误)
     - [10.1 边界测试：`Option` 与 `Result` 的 monad 定律违反（编译错误）](#101-边界测试option-与-result-的-monad-定律违反编译错误)
-    - [10.2 边界测试：`Iterator` 的 functor 映射与所有权（Ownership）（编译错误）](#102-边界测试iterator-的-functor-映射与所有权编译错误)
+    - [10.2 边界测试：`Iterator` 的 functor 映射与所有权（编译错误）](#102-边界测试iterator-的-functor-映射与所有权编译错误)
     - [2.3 Iterator 作为函子](#23-iterator-作为函子)
   - [三、范畴模式矩阵](#三范畴模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -51,7 +51,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：`Functor` 与 Rust 迭代器（Iterator）的映射（编译错误）](#103-边界测试functor-与-rust-迭代器的映射编译错误)
+    - [10.3 边界测试：`Functor` 与 Rust 迭代器的映射（编译错误）](#103-边界测试functor-与-rust-迭代器的映射编译错误)
     - [10.4 边界测试：`Monad` 与 Rust 的 `?` 运算符（编译错误）](#104-边界测试monad-与-rust-的--运算符编译错误)
     - [10.7 边界测试：所有权移动后的再次使用](#107-边界测试所有权移动后的再次使用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -557,11 +557,12 @@ graph TD
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
+> [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
-**状态**: ✅ 概念文件创建完成
+**状态**: ✅ 权威来源对齐完成 (Batch L4)
 
 ---
 
@@ -599,7 +600,7 @@ where
 }
 ```
 
-> **修正**: 范畴论中的 **Functor** 是保持结构的映射：`F: C → D`，对任意 `f: A → B`，有 `F(f): F(A) → F(B)`。Haskell 的 `Functor` typeclass 将这一概念编码为 `fmap :: (a -> b) -> f a -> f b`。Rust 中没有高阶类型（HKT），因此没有直接的 `Functor` trait——`Option` 的 `map`、`Result` 的 `map`、`Iterator` 的 `map` 是每个类型独立实现的方法，而非统一的 `fmap`。这是 Rust 与 Haskell 的核心差异：Haskell 通过 HKT 实现统一的抽象，Rust 通过宏（Macro）和 trait 实现类似的 ergonomics，但无理论统一性。`fmap` 的缺失不影响表达能力（每个类型有自己的 `map`），但影响了代码复用（不能写跨类型的 `map` 泛型（Generics）函数）。这与 Scala 的 `Functor`（通过 higher-kinded types 实现）或 C++ 的模板（无 HKT，但 `std::transform` 可跨容器）类似。[来源: [Category Theory](https://en.wikipedia.org/wiki/Category_theory)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **修正**: 范畴论中的 **Functor** 是保持结构的映射：`F: C → D`，对任意 `f: A → B`，有 `F(f): F(A) → F(B)`。Haskell 的 `Functor` typeclass 将这一概念编码为 `fmap :: (a -> b) -> f a -> f b`。Rust 中没有高阶类型（HKT），因此没有直接的 `Functor` trait——`Option` 的 `map`、`Result` 的 `map`、`Iterator` 的 `map` 是每个类型独立实现的方法，而非统一的 `fmap`。这是 Rust 与 Haskell 的核心差异：Haskell 通过 HKT 实现统一的抽象，Rust 通过宏（Macro）和 trait 实现类似的 ergonomics，但无理论统一性。`fmap` 的缺失不影响表达能力（每个类型有自己的 `map`），但影响了代码复用（不能写跨类型的 `map` 泛型（Generics）函数）。这与 Scala 的 `Functor`（通过 higher-kinded types 实现）或 C++ 的模板（无 HKT，但 `std::transform` 可跨容器）类似。[Category Theory](https://en.wikipedia.org/wiki/Category_theory)] · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.4 边界测试：`Monad` 与 Rust 的 `?` 运算符（编译错误）
 
@@ -621,7 +622,7 @@ fn monadic_bind() -> Result<i32, String> {
 }
 ```
 
-> **修正**: **Monad** 是范畴论中描述"可序列化计算"的结构，Haskell 的 `Monad` typeclass 统一了 `Maybe`、`Either`、`IO`、`List` 的绑定语义。Rust 中没有 `Monad` trait，但 `?` 运算符提供了**特定于 `Result` 和 `Option`** 的 monadic 绑定：`?` 在 `Err`/`None` 时提前返回，在 `Ok`/`Some` 时解包值。这限制了 `?` 只能在返回 `Result`/`Option` 的函数中使用，不能用于自定义 monad（如 `List`、`State`、`Reader`）。`?` 的设计是务实的：覆盖 95% 的使用场景（错误处理），牺牲理论统一性换取编译器优化的简洁性。这与 Haskell 的 `do` 语法（通用 monad）、Scala 的 `for` 推导（通用 monad）或 JavaScript 的 `async/await`（特定于 Promise）类似——Rust 的 `?` 是"特化 monad"。[来源: [Monad (functional programming)](https://en.wikipedia.org/wiki/Monad_(functional_programming))] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-03-improving-our-io-project.html)]
+> **修正**: **Monad** 是范畴论中描述"可序列化计算"的结构，Haskell 的 `Monad` typeclass 统一了 `Maybe`、`Either`、`IO`、`List` 的绑定语义。Rust 中没有 `Monad` trait，但 `?` 运算符提供了**特定于 `Result` 和 `Option`** 的 monadic 绑定：`?` 在 `Err`/`None` 时提前返回，在 `Ok`/`Some` 时解包值。这限制了 `?` 只能在返回 `Result`/`Option` 的函数中使用，不能用于自定义 monad（如 `List`、`State`、`Reader`）。`?` 的设计是务实的：覆盖 95% 的使用场景（错误处理），牺牲理论统一性换取编译器优化的简洁性。这与 Haskell 的 `do` 语法（通用 monad）、Scala 的 `for` 推导（通用 monad）或 JavaScript 的 `async/await`（特定于 Promise）类似——Rust 的 `?` 是"特化 monad"。[Monad (functional programming)](https://en.wikipedia.org/wiki/Monad_(functional_programming))] · [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-03-improving-our-io-project.html)]
 
 ### 10.7 边界测试：所有权移动后的再次使用
 

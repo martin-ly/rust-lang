@@ -65,7 +65,7 @@
 
 ## 一、概述
 
-本节主要从**编译器**而非语言语义的角度，介绍 Rust 支持的 crate 链接方式。Rust 编译器可以通过命令行标志或 `#![crate_type = "..."]` 属性生成多种输出产物。
+本节主要从**编译器**而非语言语义的角度，介绍 Rust 支持的 crate 链接方式。Rust 编译器可以通过命令行标志或 `#![crate_type = "..."]` 属性生成多种输出产物。(Source: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html))
 
 > **核心原则**：编译器会尽量避免同一个库在最终产物中出现多次。
 
@@ -152,7 +152,7 @@ fn main() {
 
 ## 三、命令行 vs 属性
 
-- 通过 `--crate-type=...` 命令行标志指定时，`#![crate_type]` 属性会被忽略。
+- 通过 `--crate-type=...` 命令行标志指定时，`#![crate_type]` 属性会被忽略。(Source: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html))
 - 同一方法（全命令行或全属性）指定的多个输出类型可以**叠加**，一次编译生成多个产物。
 - 混合使用命令行和属性时，仅生成命令行指定的产物。
 
@@ -176,7 +176,7 @@ rustc --crate-type=rlib,dylib src/lib.rs
 
 ## 五、C 运行时的静态与动态链接
 
-标准库支持为不同目标选择静态或动态 C 运行时（Runtime）。默认行为由目标决定：
+标准库支持为不同目标选择静态或动态 C 运行时（Runtime）。默认行为由目标决定：(Source: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html#static-and-dynamic-c-runtimes))
 
 - 大多数目标默认**动态**链接 C 运行时（Runtime）。
 - 以下目标默认**静态**链接：
@@ -252,7 +252,7 @@ extern "C" {}
 
 ## 七、Panic 展开与链接一致性
 
-如果 Rust 产物是 **potentially unwinding** 的，则所有 crate 必须使用 `unwind` panic 策略，否则可能导致未定义行为。
+如果 Rust 产物是 **potentially unwinding** 的，则所有 crate 必须使用 `unwind` panic 策略，否则可能导致未定义行为。(Source: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html#linking-and-unwinding))
 
 潜在展开的条件：
 
@@ -284,3 +284,7 @@ extern "C" {}
 | [FFI Advanced](09_ffi_advanced.md) | `cdylib`/`staticlib` 常用于 FFI 场景 |
 | [Preludes](../../01_foundation/07_modules_and_items/35_preludes.md) | `extern crate` 影响 extern prelude 和链接 |
 | [Unsafe Rust](../02_unsafe/03_unsafe.md) | FFI 和混合代码库通常涉及 unsafe |
+
+> **权威来源**: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html), [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html), [TRPL](https://doc.rust-lang.org/book/title-page.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)

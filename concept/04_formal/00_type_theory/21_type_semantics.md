@@ -27,17 +27,17 @@
   - [目录](#目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 类型作为规约：进步与保持](#11-类型作为规约进步与保持)
-    - [1.2 类型安全到内存安全（Memory Safety）](#12-类型安全到内存安全)
+    - [1.2 类型安全到内存安全](#12-类型安全到内存安全)
   - [二、概念属性矩阵](#二概念属性矩阵)
     - [2.1 类型语义方法对比矩阵](#21-类型语义方法对比矩阵)
   - [三、Rust 特有类型的语义](#三rust-特有类型的语义)
-    - [3.1 借用（Borrowing）语义：`&T` 与 `&mut T`](#31-借用语义t-与-mut-t)
+    - [3.1 借用语义：`&T` 与 `&mut T`](#31-借用语义t-与-mut-t)
     - [3.2 资源管理语义：`Box<T>` / `Rc<T>` / `Arc<T>`](#32-资源管理语义boxt--rct--arct)
     - [3.3 代数效应语义：`Option<T>` / `Result<T, E>`](#33-代数效应语义optiont--resultt-e)
       - [Row Polymorphism：Effect System 的类型论基础](#row-polymorphismeffect-system-的类型论基础)
     - [3.4 存在与全称类型：`dyn Trait` 与 `impl Trait`](#34-存在与全称类型dyn-trait-与-impl-trait)
   - [四、子类型与变型的语义解释](#四子类型与变型的语义解释)
-    - [4.1 生命周期（Lifetimes）子类型](#41-生命周期子类型)
+    - [4.1 生命周期子类型](#41-生命周期子类型)
     - [4.2 协变、逆变与不变](#42-协变逆变与不变)
   - [五、反命题与边界分析](#五反命题与边界分析)
     - [5.1 反命题树](#51-反命题树)
@@ -45,7 +45,7 @@
   - [十、边界测试](#十边界测试)
     - [10.1 边界测试：协变数组的 soundness 漏洞（编译错误）](#101-边界测试协变数组的-soundness-漏洞编译错误)
     - [10.2 边界测试：`dyn Trait` 与 `impl Trait` 的语义混淆（编译错误）](#102-边界测试dyn-trait-与-impl-trait-的语义混淆编译错误)
-    - [10.3 边界测试：生命周期子类型的悬垂引用（Reference）（编译错误）](#103-边界测试生命周期子类型的悬垂引用编译错误)
+    - [10.3 边界测试：生命周期子类型的悬垂引用（编译错误）](#103-边界测试生命周期子类型的悬垂引用编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：什么是"类型安全性"（Type Safety）？它通常包含哪两个核心性质？（理解层）](#测验-1什么是类型安全性type-safety它通常包含哪两个核心性质理解层)
     - [测验 2：`&mut T` 在类型语义上如何区别于 `&T`？这种区别如何映射到分离逻辑？（理解层）](#测验-2mut-t-在类型语义上如何区别于-t这种区别如何映射到分离逻辑理解层)
@@ -60,7 +60,7 @@
     - [Step 4: `dyn` 和 `impl` 的区别](#step-4-dyn-和-impl-的区别)
     - [Step 5: 子类型和变型为什么重要？](#step-5-子类型和变型为什么重要)
   - [七、定理推理链](#七定理推理链)
-    - [7.1 定理一致性（Coherence）矩阵](#71-定理一致性矩阵)
+    - [7.1 定理一致性矩阵](#71-定理一致性矩阵)
     - [7.2 反命题决策树](#72-反命题决策树)
   - [八、更多边界测试](#八更多边界测试)
     - [10.4 边界测试：`PhantomData` 的语义必要性（编译错误）](#104-边界测试phantomdata-的语义必要性编译错误)
@@ -79,7 +79,7 @@
 >
 > **保持定理（Preservation）**: 若 `⊢ e : T` 且 `e → e'`，则 `⊢ e' : T`。
 
-这两个定理合称**类型安全**（Type Safety）：良类型程序不会"卡住"（stuck）——它不会在执行过程中遇到类型不匹配的操作（如将整数当函数调用）。
+这两个定理合称**类型安全**（Type Safety）：良类型程序不会"卡住"（stuck）——它不会在执行过程中遇到类型不匹配的操作（如将整数当函数调用）。 (Source: [Pierce 2002 — TAPL Ch.8](https://www.cis.upenn.edu/~bcpierce/tapl/))
 
 在 Rust 中，进步与保持定理被扩展为**资源感知的类型安全**：
 
@@ -108,7 +108,7 @@ RustBelt 的形式化证明表明：Rust 的扩展进步/保持定理**蕴含内
 >
 > 在大多数语言中，类型安全 ≠ 内存安全（C/C++ 是典型反例）。Rust 的独特贡献在于：**类型系统（Type System）被设计为内存安全的充分条件**。
 
-Rust 的类型安全 → 内存安全（Memory Safety） 的推理链：
+Rust 的类型安全 → 内存安全（Memory Safety） 的推理链 (Source: [Cardelli 1996 — Type Systems](https://dl.acm.org/doi/10.1145/6041.6042) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/))：
 
 ```text
 Progress + Preservation（类型安全）
@@ -882,14 +882,18 @@ fn pinned_self_ref() {
 - 泛型（Generics）系统 — 参数多态与约束
 - [RustBelt 与验证工具链](../02_separation_logic/04_rustbelt.md) — 高阶幽灵状态、验证工具生态
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
-> **过渡**: Type Semantics（类型语义） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Type Semantics（类型语义） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Type Semantics（类型语义） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
 ### 补充定理链
 
 - **定理**: Type Semantics（类型语义） 定义 ⟹ 类型安全保证
 - **定理**: Type Semantics（类型语义） 定义 ⟹ 类型安全保证
 - **定理**: Type Semantics（类型语义） 定义 ⟹ 类型安全保证
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli 1996 — Type Systems (ACM Computing Surveys 28(1))](https://dl.acm.org/doi/10.1145/6041.6042) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

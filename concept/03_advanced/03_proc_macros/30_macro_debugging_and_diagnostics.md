@@ -57,6 +57,8 @@ cargo expand --tests
 cargo expand --features my_feature
 ```
 
+(Source: [cargo-expand](https://github.com/dtolnay/cargo-expand))
+
 ### 2.2 比较宏展开差异
 
 ```bash
@@ -66,7 +68,7 @@ cargo expand > after.rs
 diff -u before.rs after.rs
 ```
 
-> **关键洞察**: `cargo expand` 是宏调试的“printf 调试器”——当编译错误指向宏调用处但你看不出原因时，查看展开后的代码通常能立刻定位问题。
+> **关键洞察**: `cargo expand` 是宏调试的“printf 调试器”——当编译错误指向宏调用处但你看不出原因时，查看展开后的代码通常能立刻定位问题 (Source: [cargo-expand README](https://github.com/dtolnay/cargo-expand))。
 
 ---
 
@@ -185,6 +187,8 @@ cargo build --release --timings
 RUSTC_LOG=rustc_expand::trace_macros cargo build 2>&1 | tee expand.log
 ```
 
+(Source: [rustc-dev-guide — Logging](https://rustc-dev-guide.rust-lang.org/compiler-debugging.html?highlight=RUSTC_LOG#logging))
+
 ### 5.3 测量宏展开耗时
 
 ```rust
@@ -228,7 +232,7 @@ impl rustc_driver::Callbacks for MyCallbacks {
 }
 ```
 
-> **关键洞察**: 自定义 `rustc` 回调是强大的诊断手段，但它将代码绑定到 nightly 编译器内部 API，通常只用于研究和教学工具，不推荐用于生产宏库。
+> **关键洞察**: 自定义 `rustc` 回调是强大的诊断手段，但它将代码绑定到 nightly 编译器内部 API，通常只用于研究和教学工具，不推荐用于生产宏库 (Source: [rustc-dev-guide — Rustc Driver](https://rustc-dev-guide.rust-lang.org/rustc-driver.html))。
 
 ---
 

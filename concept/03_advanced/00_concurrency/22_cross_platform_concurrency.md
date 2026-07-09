@@ -25,7 +25,7 @@
 | macOS | POSIX 线程 + Grand Central Dispatch | `pthread`, GCD, `NSOperationQueue` |
 | Android / iOS | 继承 Linux / Darwin 模型，附加后台执行限制 | JNI, QoS |
 
-Rust 的 `std::thread` 与 `std::sync` 已封装大部分差异，但跨平台优化仍需理解底层实现。
+Rust 的 `std::thread` 与 `std::sync` 已封装大部分差异，但跨平台优化仍需理解底层实现。(Source: [std::thread](https://doc.rust-lang.org/std/thread/), [std::sync](https://doc.rust-lang.org/std/sync/))
 
 ---
 
@@ -42,7 +42,7 @@ fn mutex_example() {
 }
 ```
 
-平台特定代码应使用 `#[cfg(target_os = "...")]` 隔离，并对外暴露统一接口。
+平台特定代码应使用 `#[cfg(target_os = "...")]` 隔离，并对外暴露统一接口。(Source: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html))
 
 ---
 
@@ -84,11 +84,11 @@ fn optimal_thread_count() -> usize {
 | monoio | thread-per-core (io_uring) | Linux | 极致性能 |
 | embassy | async/await | 嵌入式/RTOS | no_std |
 
-选择 Runtime 时，应优先确认目标平台是否支持其底层原语（如 io_uring 仅限较新 Linux 内核）。
+选择 Runtime 时，应优先确认目标平台是否支持其底层原语（如 io_uring 仅限较新 Linux 内核）。(Source: [Tokio docs](https://tokio.rs/), [monoio docs](https://docs.rs/monoio))
 
 ## 五、原子操作与内存排序
 
-跨平台代码应显式选择内存排序，避免依赖平台默认：
+跨平台代码应显式选择内存排序，避免依赖平台默认：(Source: [Rust Reference — Atomic Types](https://doc.rust-lang.org/reference/types.html#atomic-types), [std::sync::atomic::Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html))
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -165,3 +165,7 @@ strategy:
 - [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)
 - [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)
 - [std::thread](https://doc.rust-lang.org/std/thread/)
+
+> **权威来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html), [std::thread](https://doc.rust-lang.org/std/thread/), [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html), [TRPL Ch16 — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)

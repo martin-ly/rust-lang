@@ -23,6 +23,9 @@
 > **Bloom 层级**: 理解 → 应用
 
 ---
+> **权威来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（TRPL、Rust Reference、Rustonomicon）
 
 ## 认知路径
 

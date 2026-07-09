@@ -947,13 +947,14 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 > 演进方向见 [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)（语言演进路线图）与 [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化方法的未来）。
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
+> [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**状态**: ✅ 权威来源对齐完成 (Batch L4)
 
 ---
 
@@ -1001,7 +1002,7 @@ fn unit_vs_never() {
 > `!` 是任何类型的子类型（`! <: T`），因为"假蕴含一切"（ex falso quodlibet）。
 > Rust 的 `!` 类型用于 `panic!()`、`loop {}`、`return` 等不返回的控制流。
 > 区分 `()` 和 `!` 是理解 Rust 错误处理（Error Handling）（`Result<T, !>` 表示不会失败）和并发（`JoinHandle<!>` 表示线程永不结束）的关键。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ### 10.2 边界测试：代数数据类型的穷尽匹配（编译错误）
 
@@ -1035,7 +1036,7 @@ fn fixed() {
 > 和类型的值是"若干选择之一"，模式匹配（Pattern Matching）是"对每个选择给出响应"。
 > 不覆盖所有变体在逻辑上是不完整的——相当于没有定义函数在某些输入上的行为。
 > Rust 编译器通过构造决策树（decision tree）验证穷尽性，这是类型安全的核心保证。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：GAT 与高阶类型（编译错误）
 
@@ -1064,7 +1065,7 @@ impl Iterable for Vec<i32> {
 > 未来可能的扩展：`type_family` 或 `higher-ranked type constructors`，但设计复杂。
 > 当前 workaround：使用宏（Macro）生成单态代码，或使用 trait 的关联类型链模拟 HKT。
 > 这与 C++ 的模板模板参数（`template<template<typename> class F>`，类似 HKT）或 Scala 的 higher-kinded types（通过类型构造器实现）不同——Rust 的 GAT 是向 HKT 迈出的半步，但尚未完全到达。
-> [来源: [Rust RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)] ·
+> [Rust RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)] ·
 
 ### 10.4 边界测试：依赖类型与数组长度（编译错误）
 
@@ -1089,7 +1090,7 @@ fn main() {
 > 运行时（Runtime）值（如 `args().len()`）不能用于类型构造。
 > 这与 Idris、Agda、Coq 的完全依赖类型（任意值可用于类型）或 C++ 的 `std::array<T, N>`（同样编译期常量）不同——Rust 在类型安全性和编译期复杂性间取平衡。
 > 未来可能的扩展：`const` 泛型表达式（`[T; N + 1]`）、依赖 trait bound，但完全依赖类型可能永远不会进入 Rust（与零成本抽象（Zero-Cost Abstraction）和编译速度冲突）。
-> [来源: [Dependent Types](https://en.wikipedia.org/wiki/Dependent_type)] ·
+> [Dependent Types](https://en.wikipedia.org/wiki/Dependent_type)] ·
 
 ### 10.3 边界测试：GADT 与 Rust 枚举的表达能力差距（编译错误）
 
@@ -1138,7 +1139,7 @@ fn main() {
 > 3) 与当前类型系统的交互（lifetime、trait bound）尚未完全设计。
 >
 > 这与 Haskell 的 GADT（`data Expr a where ...`）或 OCaml 的 GADT（`type _ expr = ...`）不同——Rust 的 phantom 类型是轻量替代，但语法噪音更大。
-> [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)] · [来源: [GADT](https://en.wikipedia.org/wiki/Generalized_algebraic_data_type)]
+> [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)] · [GADT](https://en.wikipedia.org/wiki/Generalized_algebraic_data_type)]
 
 ### 10.4 边界测试：Rust 的类型系统与 HKT（高阶类型）的缺失（编译错误）
 
@@ -1175,8 +1176,8 @@ fn main() {}
 > 2) Functor/Applicative 抽象；
 > 3) 类型级列表。
 > 这与 Haskell（原生 HKT，`Functor f => f a`）或 Scala（类型构造器作为更高阶类型参数）不同——Rust 通过 GAT 和宏（Macro）近似 HKT，但表达能力有限。
-> [来源: [GAT RFC](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)] ·
-> [来源: [Higher-Kinded Types](https://en.wikipedia.org/wiki/Kind_(type_theory))]
+> [GAT RFC](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)] ·
+> [Higher-Kinded Types](https://en.wikipedia.org/wiki/Kind_(type_theory))]
 
 ---
 

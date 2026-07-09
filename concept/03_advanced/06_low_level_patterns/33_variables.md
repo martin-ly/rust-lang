@@ -42,7 +42,7 @@
 
 ## 一、什么是变量
 
-**变量（variable）** 是栈帧的组成部分，包括：
+**变量（variable）** 是栈帧的组成部分，包括：(Source: [Rust Reference — Variables](https://doc.rust-lang.org/reference/variables.html))
 
 - 命名的函数参数（named function parameter）
 - 匿名临时值（anonymous temporary）
@@ -82,7 +82,7 @@ let closure = |mut a, b| { /* a 可变，b 不可变 */ };
 
 ## 三、初始化规则
 
-局部变量在分配时**未初始化**。进入函数时，整个栈帧的局部变量都以未初始化状态分配。后续语句可能初始化这些变量。
+局部变量在分配时**未初始化**。进入函数时，整个栈帧的局部变量都以未初始化状态分配。(Source: [Rust Reference — Local Variables](https://doc.rust-lang.org/reference/variables.html#local-variables))后续语句可能初始化这些变量。
 
 变量只能在所有可达控制流路径都已初始化之后才能使用。
 
@@ -109,7 +109,7 @@ fn initialization_example() {
 
 ## 四、变量遮蔽（Shadowing）
 
-Rust 允许在同一作用域内使用相同名称重新绑定变量，这称为**遮蔽**：
+Rust 允许在同一作用域内使用相同名称重新绑定变量，这称为**遮蔽**：(Source: [TRPL Ch3 — Variables and Mutability](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html#shadowing))
 
 ```rust
 let x = 5;
@@ -175,3 +175,7 @@ unsafe {
 | [Destructors](../../04_formal/05_rustc_internals/43_destructors.md) | 变量离开作用域时触发析构 |
 | [Unsafe Rust](../02_unsafe/03_unsafe.md) | 未初始化内存操作需要 unsafe |
 | [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) | 智能指针（Smart Pointer）管理堆上变量所有权（Ownership） |
+
+> **权威来源**: [Rust Reference — Variables](https://doc.rust-lang.org/reference/variables.html), [TRPL Ch3 — Variables and Mutability](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch Batch 10](../../00_meta/02_sources/international_authority_index.md)

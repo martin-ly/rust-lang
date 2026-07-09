@@ -200,11 +200,6 @@ pub use inner::helper as public_helper; // 重导出并改名
 | [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) | 宏展开可以引入新名称 |
 | [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | `unsafe` 块中的外部符号解析有特殊规则 |
 
----
-
-> **权威来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Rust Reference — Namespaces](https://doc.rust-lang.org/reference/names/namespaces.html) · [Rust Reference — Scopes](https://doc.rust-lang.org/reference/names/scopes.html) · [Rust Reference — Paths](https://doc.rust-lang.org/reference/paths.html) · [Rust Reference — Name Resolution](https://doc.rust-lang.org/reference/names/name-resolution.html) · [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) · [rustc-dev-guide — Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html)
-> **内容分级**: [研究级]
-
 ## 过渡段
 
 > **过渡**: 从实体与声明过渡到作用域与命名空间，可以理解 Rust 如何在同一 crate 内区分不同种类的名称。
@@ -213,3 +208,12 @@ pub use inner::helper as public_helper; // 重导出并改名
 >
 > **过渡**: 从名称解析过渡到 HIR 与链接，可以理解前端语义分析如何为后续编译阶段提供基础。
 >
+---
+
+> **权威来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) · [Rust Reference — Namespaces](https://doc.rust-lang.org/reference/names/namespaces.html) · [Rust Reference — Scopes](https://doc.rust-lang.org/reference/names/scopes.html) · [Rust Reference — Paths](https://doc.rust-lang.org/reference/paths.html) · [Rust Reference — Name Resolution](https://doc.rust-lang.org/reference/names/name-resolution.html) · [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

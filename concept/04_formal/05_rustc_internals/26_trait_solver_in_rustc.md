@@ -74,7 +74,7 @@
   - [五、Evaluation：不约束推断变量的判断](#五evaluation不约束推断变量的判断)
   - [六、旧 Solver 与新 Solver（Next-Gen）的对比](#六旧-solver-与新-solvernext-gen的对比)
     - [6.1 架构差异](#61-架构差异)
-    - [6.2 行为差异示例：关联类型与高阶生命周期（Lifetimes）](#62-行为差异示例关联类型与高阶生命周期)
+    - [6.2 行为差异示例：关联类型与高阶生命周期](#62-行为差异示例关联类型与高阶生命周期)
     - [6.3 嵌套目标与 Fixpoint：推断变量的传播](#63-嵌套目标与-fixpoint推断变量的传播)
     - [6.4 可复现的对比实验：高阶生命周期与关联类型归一化](#64-可复现的对比实验高阶生命周期与关联类型归一化)
   - [七、Coinduction 与递归 Trait](#七coinduction-与递归-trait)
@@ -103,7 +103,7 @@ let v = clone_slice(&[1, 2, 3]);
 
 > **关键洞察**: Trait 求解 = 为每个 obligation 找到一个“证据”：一个 impl、一个 where-clause、或一个内建规则。
 >
-> [Rustc Dev Guide — Trait resolution (old-style)](https://rustc-dev-guide.rust-lang.org/traits/resolution.html)(<https://rustc-dev-guide.rust-lang.org/traits/resolution.html>)
+> [Rustc Dev Guide — Trait resolution (old-style)](https://rustc-dev-guide.rust-lang.org/traits/resolution.html)
 
 ---
 
@@ -187,7 +187,7 @@ fn foo<T: Clone + Debug>(x: T) {
 
 > **定理**: Fulfillment 结束时，所有类型检查阶段的 trait obligation 都必须被证明可解。
 >
-> [Rustc Dev Guide — Trait resolution — Overview](https://rustc-dev-guide.rust-lang.org/traits/resolution.html)(<https://rustc-dev-guide.rust-lang.org/traits/resolution.html#overview>)
+> [Rustc Dev Guide — Trait resolution — Overview](https://rustc-dev-guide.rust-lang.org/traits/resolution.html)
 
 ---
 
@@ -232,7 +232,7 @@ Evaluation 只回答“这个 obligation 是否可能成立”，不会修改推
 
 > **关键洞察**: 新 solver 不是简单优化，而是把 "候选选择" 与 "约束应用" 从两个独立系统合并为一个基于 canonical query 的系统，从而消除旧实现中 evaluation 与 fulfillment 行为不一致导致的 corner case。
 >
-> [Rustc Dev Guide — Significant changes and quirks](https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html)(<https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html>)
+> [Rustc Dev Guide — Significant changes and quirks](https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html)
 
 ### 6.2 行为差异示例：关联类型与高阶生命周期
 
@@ -256,7 +256,7 @@ where
 
 > **注意**: 该模式仅在 nightly 新 solver 下行为有显著差异；稳定版默认仍为旧 solver。historically 可通过 `-Ztrait-solver=next` 尝试；当前 nightly 已改为 `-Znext-solver=globally`（coherence 模式为 `-Znext-solver=coherence`）。
 >
-> [Rustc Dev Guide — Deferred alias equality](https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#deferred-alias-equality)(<https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#deferred-alias-equality>)
+> [Rustc Dev Guide — Deferred alias equality](https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#deferred-alias-equality)
 
 ### 6.3 嵌套目标与 Fixpoint：推断变量的传播
 
@@ -284,11 +284,11 @@ fn main() {
 
 > **关键洞察**: Fixpoint 迭代削弱了嵌套目标的求值顺序对结果的影响，使得多个相互依赖的约束可以被同时满足，而不是被处理顺序偶然决定。
 >
-> [Rustc Dev Guide — Nested goals are evaluated until reaching a fixpoint](https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#nested-goals-are-evaluated-until-reaching-a-fixpoint)(<https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#nested-goals-are-evaluated-until-reaching-a-fixpoint>)
+> [Rustc Dev Guide — Nested goals are evaluated until reaching a fixpoint](https://rustc-dev-guide.rust-lang.org/solve/significant-changes.html#nested-goals-are-evaluated-until-reaching-a-fixpoint)
 
 > **状态（截至 Rust 1.99 nightly）**: 新 solver 仍在迭代，尚未成为默认。historical flag 为 `-Ztrait-solver=next`；当前 nightly 使用 `-Znext-solver=globally`。
 >
-> [Rustc Dev Guide — Next-gen trait solving](https://rustc-dev-guide.rust-lang.org/solve/trait-solving.html)(<https://rustc-dev-guide.rust-lang.org/solve/the-solver.html>)
+> [Rustc Dev Guide — Next-gen trait solving](https://rustc-dev-guide.rust-lang.org/solve/trait-solving.html)
 
 ---
 
@@ -367,7 +367,7 @@ where
 
 新 solver 使用 coinduction 来处理这类递归约束，避免无限展开。
 
-> [Rustc Dev Guide — Coinduction](https://rustc-dev-guide.rust-lang.org/solve/coinduction.html)(<https://rustc-dev-guide.rust-lang.org/solve/coinduction.html>)
+> [Rustc Dev Guide — Coinduction](https://rustc-dev-guide.rust-lang.org/solve/coinduction.html)
 
 ---
 
@@ -439,10 +439,11 @@ Obligation 是需要被证明的 trait reference，例如 `i32: Clone` 或 `T: D
 
 ---
 
-> **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 trait solver 文档；2026-07-09 新增 6.4 节旧/新 solver 可复现对比实验并更新 nightly flag 名称 [P2-Q3 2026]
+> [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.1+ / nightly 1.99 (Edition 2024)
 **最后更新**: 2026-07-09
-**状态**: ✅ 已对齐 Rust 1.96.1 trait solver 文档
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

@@ -24,15 +24,15 @@
 
 ## 📑 目录
 
-- [子类型与变型：Rust 类型系统（Type System）中的协变、逆变与不变](#子类型与变型rust-类型系统中的协变逆变与不变)
+- [子类型与变型：Rust 类型系统中的协变、逆变与不变](#子类型与变型rust-类型系统中的协变逆变与不变)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 子类型关系：'static 是 'a 的子类型](#11-子类型关系static-是-a-的子类型)
     - [1.2 变型三态：协变、逆变、不变](#12-变型三态协变逆变不变)
     - [1.3 Rust 中的变型规则](#13-rust-中的变型规则)
   - [二、技术细节](#二技术细节)
-    - [2.1 生命周期（Lifetimes）位置的变型推导](#21-生命周期位置的变型推导)
-    - [2.2 结构体（Struct）与枚举（Enum）的变型](#22-结构体与枚举的变型)
+    - [2.1 生命周期位置的变型推导](#21-生命周期位置的变型推导)
+    - [2.2 结构体与枚举的变型](#22-结构体与枚举的变型)
     - [2.3 函数指针的变型](#23-函数指针的变型)
   - [三、形式化分析](#三形式化分析)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -46,7 +46,7 @@
     - [10.1 边界测试：协变与逆变的生命周期误用（编译错误）](#101-边界测试协变与逆变的生命周期误用编译错误)
     - [10.2 边界测试：`UnsafeCell` 的不变性（编译错误）](#102-边界测试unsafecell-的不变性编译错误)
     - [10.3 边界测试：逆变与 `fn` 参数的不变性（编译错误）](#103-边界测试逆变与-fn-参数的不变性编译错误)
-    - [10.4 边界测试：`UnsafeCell` 的不变性（编译错误/运行时（Runtime） UB）](#104-边界测试unsafecell-的不变性编译错误运行时-ub)
+    - [10.4 边界测试：`UnsafeCell` 的不变性（编译错误/运行时 UB）](#104-边界测试unsafecell-的不变性编译错误运行时-ub)
     - [10.3 边界测试：逆变（contravariant）与函数参数的生命周期（编译错误）](#103-边界测试逆变contravariant与函数参数的生命周期编译错误)
     - [10.4 边界测试：协变/逆变与生命周期子类型的错误转换（编译错误）](#104-边界测试协变逆变与生命周期子类型的错误转换编译错误)
     - [10.4 边界测试：函数重复定义](#104-边界测试函数重复定义)
@@ -398,13 +398,14 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-03-advanced-types.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-03-advanced-types.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
+> [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
-**状态**: ✅ 概念文件创建完成
+**状态**: ✅ 权威来源对齐完成 (Batch L4)
 
 ---
 
@@ -449,7 +450,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 生命周期在 Rust 中是**协变**（covariant）的——较长生命周期是较短生命周期的子类型。`'static: 'a` 对任何 `'a` 成立，因此 `&'static T` 可隐式转为 `&'a T`。但反过来不行：`&'a T` 不能转为 `&'static T`。这与面向对象中的子类型多态（`Dog` 是 `Animal` 的子类型）方向一致——"更具体/更长久"是"更通用/更短暂"的子类型。错误的生命周期假设会导致悬垂引用（Reference），编译器通过变异性检查阻止此类转换。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+> **修正**: 生命周期在 Rust 中是**协变**（covariant）的——较长生命周期是较短生命周期的子类型。`'static: 'a` 对任何 `'a` 成立，因此 `&'static T` 可隐式转为 `&'a T`。但反过来不行：`&'a T` 不能转为 `&'static T`。这与面向对象中的子类型多态（`Dog` 是 `Animal` 的子类型）方向一致——"更具体/更长久"是"更通用/更短暂"的子类型。错误的生命周期假设会导致悬垂引用（Reference），编译器通过变异性检查阻止此类转换。[Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.2 边界测试：`UnsafeCell` 的不变性（编译错误）
 
@@ -508,7 +509,7 @@ fn main() {
 }
 ```
 
-> **修正**: `UnsafeCell` 是 Rust 内部可变性的底层原语，它**关闭**了编译器的可变性和别名假设——通过 `UnsafeCell` 获取的指针可同时存在多个读写别名。但 `UnsafeCell` 本身不改变语义：从 `UnsafeCell` 获取的 `&mut T` 和 `&T` 仍不能同时活跃，除非使用 `UnsafeCell` 的特定 API（如 `Cell::get` 的按位复制）。上述代码是 UB，因为 `r1` 和 `r2` 同时存在。正确用法：`UnsafeCell` 应配合显式同步原语（`Mutex`、`RwLock`）或单线程运行时检查（`RefCell`）使用。`UnsafeCell` 的变异性是**不变**（invariant）的：不能将 `UnsafeCell<&'long T>` 赋值给 `UnsafeCell<&'short T>`，因为内部可变可能通过 `&mut` 改变引用（Reference）的生命周期。这与 Java 的 `Object[]`（数组是协变的，运行时（Runtime） `ArrayStoreException`）或 C++ 的 `std::vector<T>`（无变异性概念）不同——Rust 的 `UnsafeCell` 不变性防止了通过内部可变性破坏子类型关系。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/concurrency.html)]
+> **修正**: `UnsafeCell` 是 Rust 内部可变性的底层原语，它**关闭**了编译器的可变性和别名假设——通过 `UnsafeCell` 获取的指针可同时存在多个读写别名。但 `UnsafeCell` 本身不改变语义：从 `UnsafeCell` 获取的 `&mut T` 和 `&T` 仍不能同时活跃，除非使用 `UnsafeCell` 的特定 API（如 `Cell::get` 的按位复制）。上述代码是 UB，因为 `r1` 和 `r2` 同时存在。正确用法：`UnsafeCell` 应配合显式同步原语（`Mutex`、`RwLock`）或单线程运行时检查（`RefCell`）使用。`UnsafeCell` 的变异性是**不变**（invariant）的：不能将 `UnsafeCell<&'long T>` 赋值给 `UnsafeCell<&'short T>`，因为内部可变可能通过 `&mut` 改变引用（Reference）的生命周期。这与 Java 的 `Object[]`（数组是协变的，运行时（Runtime） `ArrayStoreException`）或 C++ 的 `std::vector<T>`（无变异性概念）不同——Rust 的 `UnsafeCell` 不变性防止了通过内部可变性破坏子类型关系。[Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html)] · [The Rustonomicon](https://doc.rust-lang.org/nomicon/concurrency.html)]
 
 ### 10.3 边界测试：逆变（contravariant）与函数参数的生命周期（编译错误）
 
@@ -526,7 +527,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的生命周期**变型**（variance）：1) `&'a T` — 对 `'a` **协变**（covariant）：`'long <: 'short` 则 `&'long T <: &'short T`；2) `&mut 'a T` — 对 `'a` 协变，对 `T` **不变**（invariant）；3) `fn(T) -> U` — 对 `T` **逆变**（contravariant），对 `U` 协变。逆变意味着：若 `'a <: 'b`，则 `fn(&'b T) <: fn(&'a T)`（函数能接受更短生命周期的输入是更"通用"的）。`fn(&'static str)` 要求输入活得更长，因此**不能**替代 `fn(&'short str)`。变型是 Rust 类型系统的深层理论，影响 trait 对象、泛型（Generics）约束和生命周期子类型。这与 Java 的泛型（通配符 `? super T` 显式逆变）或 C++ 的模板（无显式变型概念，依赖具体实例化）不同——Rust 的变型是隐式推导的，编译器自动计算。[来源: [Rust Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)] · [来源: [Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html)]
+> **修正**: Rust 的生命周期**变型**（variance）：1) `&'a T` — 对 `'a` **协变**（covariant）：`'long <: 'short` 则 `&'long T <: &'short T`；2) `&mut 'a T` — 对 `'a` 协变，对 `T` **不变**（invariant）；3) `fn(T) -> U` — 对 `T` **逆变**（contravariant），对 `U` 协变。逆变意味着：若 `'a <: 'b`，则 `fn(&'b T) <: fn(&'a T)`（函数能接受更短生命周期的输入是更"通用"的）。`fn(&'static str)` 要求输入活得更长，因此**不能**替代 `fn(&'short str)`。变型是 Rust 类型系统的深层理论，影响 trait 对象、泛型（Generics）约束和生命周期子类型。这与 Java 的泛型（通配符 `? super T` 显式逆变）或 C++ 的模板（无显式变型概念，依赖具体实例化）不同——Rust 的变型是隐式推导的，编译器自动计算。[Rust Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)] · [Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html)]
 
 ### 10.4 边界测试：协变/逆变与生命周期子类型的错误转换（编译错误）
 
@@ -540,7 +541,7 @@ fn extend_lifetime<'a>(r: &'a i32) -> &'static i32 {
 fn main() {}
 ```
 
-> **修正**: **生命周期子类型**：1) `'static: 'a`（`'static` 是所有生命周期的子类型，因为 `'static` 比任何 `'a` 都长）；2) `&'static T` 可安全转为 `&'a T`（协变）；3) `&'a T` 不能转为 `&'static T`（逆变/不変）。协变位置：1) `&'a T` — `'a` 和 `T` 都协变；2) `Box<T>`、`Vec<T>` — `T` 协变；3) `fn(T) -> U` — `T` 逆变，`U` 协变。逆变：1) `fn(&'a T)` 的参数位置 — `'a` 越长，函数越具体（子类型关系反转）；2) `&mut T` — `T` 不变（同时读写要求类型完全相同）。这与 Java 的泛型（Generics）协变（`List<? extends T>`，通配符）或 C# 的 `in`/`out` 关键字（显式声明协变/逆变）不同——Rust 的协变/逆变是隐式的，由类型构造器的位置决定。[来源: [Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+> **修正**: **生命周期子类型**：1) `'static: 'a`（`'static` 是所有生命周期的子类型，因为 `'static` 比任何 `'a` 都长）；2) `&'static T` 可安全转为 `&'a T`（协变）；3) `&'a T` 不能转为 `&'static T`（逆变/不変）。协变位置：1) `&'a T` — `'a` 和 `T` 都协变；2) `Box<T>`、`Vec<T>` — `T` 协变；3) `fn(T) -> U` — `T` 逆变，`U` 协变。逆变：1) `fn(&'a T)` 的参数位置 — `'a` 越长，函数越具体（子类型关系反转）；2) `&mut T` — `T` 不变（同时读写要求类型完全相同）。这与 Java 的泛型（Generics）协变（`List<? extends T>`，通配符）或 C# 的 `in`/`out` 关键字（显式声明协变/逆变）不同——Rust 的协变/逆变是隐式的，由类型构造器的位置决定。[Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html)] · [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.4 边界测试：函数重复定义
 

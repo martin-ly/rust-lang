@@ -56,7 +56,7 @@
   - [📑 目录](#-目录)
   - [一、问题与动机（Problem \& Motivation）](#一问题与动机problem--motivation)
   - [二、核心结构总览（Overview）](#二核心结构总览overview)
-  - [三、LLBC：显式借用（Borrowing）演算](#三llbc显式借用演算)
+  - [三、LLBC：显式借用演算](#三llbc显式借用演算)
     - [3.1 设计思想](#31-设计思想)
     - [3.2 核心构造](#32-核心构造)
     - [3.3 与 MIR 的关系](#33-与-mir-的关系)
@@ -440,3 +440,13 @@ Aeneas 符号化语义五步认知路径
 - [L3 Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 - [L6 形式化验证工具](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md)
 - [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md)
+
+---
+
+> **权威来源**: [Rust Reference — Functions and Borrowing](https://doc.rust-lang.org/reference/items/functions.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [POPL 2024 — Sound Borrow-Checking for Rust via Symbolic Semantics](https://doi.org/10.1145/3571192) · [Aeneas: Rust Verification by Functional Translation (ICFP 2022)](https://doi.org/10.1145/3547627) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Miri](https://github.com/rust-lang/miri)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

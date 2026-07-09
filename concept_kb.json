@@ -5640,7 +5640,7 @@
       "layer": "L1",
       "title": "Rust 起步指南",
       "positioning": "Rust 学习路径的起点。本文档假设你没有任何 Rust 背景，只需基本的命令行操作经验。",
-      "line_count": 267,
+      "line_count": 276,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将安装、构建、测试、文档生成串联为可重复的开发工作流。",
@@ -6237,7 +6237,7 @@
       "layer": "L1",
       "title": "编程语言理论基础（PL Prerequisites）",
       "positioning": "L1 基础层的**前置知识补充**。理解这些通用 PL 概念后，你将能更深刻地回答\"为什么 Rust 要这样设计\"，而非仅仅记忆规则。",
-      "line_count": 499,
+      "line_count": 503,
       "theorem_chains": [
         {
           "text": "| 编程语言理论基础（PL Prerequisites） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -6364,7 +6364,7 @@
       "layer": "L1",
       "title": "Rust 关键字（Keywords）",
       "positioning": "",
-      "line_count": 159,
+      "line_count": 165,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -6424,7 +6424,7 @@
       "layer": "L1",
       "title": "Rust 运算符与符号（Operators and Symbols）",
       "positioning": "",
-      "line_count": 258,
+      "line_count": 267,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -7550,7 +7550,7 @@
       "layer": "L1",
       "title": "Lifetimes（生命周期）",
       "positioning": "",
-      "line_count": 1475,
+      "line_count": 1482,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡",
@@ -7967,7 +7967,7 @@
       "layer": "L1",
       "title": "Move 语义：C++ 与 Rust 的资源转移模型",
       "positioning": "",
-      "line_count": 279,
+      "line_count": 282,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -8058,7 +8058,7 @@
       "layer": "L1",
       "title": "所有权清单自测：Brown University Ownership Inventory",
       "positioning": "> 本文档为 **Brown University Interactive Book** 中「Ownership Inventory」概念清单的本地映射。",
-      "line_count": 217,
+      "line_count": 224,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -10080,7 +10080,7 @@
       "layer": "L1",
       "title": "值语义 vs 引用语义：从 C++、Java、Python 到 Rust",
       "positioning": "",
-      "line_count": 194,
+      "line_count": 201,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -10546,7 +10546,7 @@
       "layer": "L1",
       "title": "模式匹配（Patterns）",
       "positioning": "",
-      "line_count": 259,
+      "line_count": 265,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -10673,7 +10673,7 @@
       "layer": "L1",
       "title": "语句与表达式（Statements and Expressions）",
       "positioning": "",
-      "line_count": 166,
+      "line_count": 173,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -11644,7 +11644,7 @@
       "layer": "L1",
       "title": "Functions（函数）",
       "positioning": "系统讲解 Rust 函数声明、参数传递、返回值、发散函数与所有权（Ownership）的交互，为后续 Trait、闭包（Closures）、Async 打下语法基础。",
-      "line_count": 293,
+      "line_count": 302,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将函数签名、所有权移动与借用（Borrowing）规则串联起来。",
@@ -11762,7 +11762,7 @@
       "layer": "L1",
       "title": "Use Declarations（使用声明）",
       "positioning": "系统讲解 `use` 声明的语法、作用域规则、重导出与 glob 导入，帮助学习者建立清晰的模块（Module）命名空间心智模型。",
-      "line_count": 218,
+      "line_count": 225,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `use` 声明、作用域与可见性规则串联起来。",
@@ -11871,7 +11871,7 @@
       "layer": "L1",
       "title": "Structs（结构体）",
       "positioning": "系统讲解 Rust 结构体（Struct）的三种形式、字段可见性、结构体更新语法与方法基础，为后续 Trait、Enum、泛型（Generics）奠定类型基础。",
-      "line_count": 226,
+      "line_count": 233,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将结构体定义、字段所有权（Ownership）与借用（Borrowing）规则串联起来。",
@@ -11973,7 +11973,7 @@
       "layer": "L1",
       "title": "Enumerations（枚举）",
       "positioning": "系统讲解 Rust 枚举（Enum）的定义、变体负载、Option/Result 两个核心枚举、模式匹配（Pattern Matching）穷尽性检查，以及与错误处理（Error Handling）的关系。",
-      "line_count": 228,
+      "line_count": 235,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将枚举、模式匹配与错误处理（Error Handling）规则串联起来。",
@@ -12089,7 +12089,7 @@
       "layer": "L1",
       "title": "Implementations（实现块）",
       "positioning": "系统讲解 Rust `impl` 块的两种形式（固有实现、Trait 实现）、方法 receiver、关联函数，以及与结构体（Struct）/枚举（Enum）/Trait 的关系。",
-      "line_count": 223,
+      "line_count": 229,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将方法调用、receiver 选择与所有权（Ownership）/借用（Borrowing）规则串联起来。",
@@ -12194,7 +12194,7 @@
       "layer": "L1",
       "title": "Preludes（预导入模块）",
       "positioning": "",
-      "line_count": 221,
+      "line_count": 230,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -12272,7 +12272,7 @@
       "layer": "L1",
       "title": "Crate 与源文件（Crates and Source Files）",
       "positioning": "",
-      "line_count": 267,
+      "line_count": 271,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块（Module）路径解析串联起来。",
@@ -12354,7 +12354,7 @@
       "layer": "L1",
       "title": "项（Items）",
       "positioning": "",
-      "line_count": 297,
+      "line_count": 301,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块（Module）、item、名称解析与可见性串联起来。",
@@ -13166,7 +13166,7 @@
       "layer": "L1",
       "title": "错误处理控制流（Error Handling Control Flow）",
       "positioning": "",
-      "line_count": 260,
+      "line_count": 269,
       "theorem_chains": [
         {
           "text": "- **T-EH-1 错误传播单调性**：若函数返回 `Result<T, E>`，内部 `?` ⟹ 只会将 `Err` 向 `E` 转换，不会引入额外成功路径。",
@@ -13551,7 +13551,7 @@
       "layer": "L1",
       "title": "常用开发工具（Useful Development Tools）",
       "positioning": "",
-      "line_count": 225,
+      "line_count": 229,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将代码编写、格式化、lint、测试、文档、发布串联为可重复工作流。",
@@ -14485,7 +14485,7 @@
       "layer": "L1",
       "title": "测验：通用 PL 基座",
       "positioning": "",
-      "line_count": 168,
+      "line_count": 171,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -14748,7 +14748,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.4 Trait + 泛型（Generics） ⟹ 零成本抽象（Zero-Cost Abstraction）](#44-trait--泛型--零成本抽象)",
+          "text": "- [4.4 Trait + 泛型 ⟹ 零成本抽象](#44-trait--泛型--零成本抽象)",
           "type": "paragraph"
         },
         {
@@ -17517,15 +17517,15 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：Box ⟹ 堆分配 + 唯一所有权（Ownership）](#41-引理box--堆分配--唯一所有权)",
+          "text": "- [4.1 引理：Box ⟹ 堆分配 + 唯一所有权](#41-引理box--堆分配--唯一所有权)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用（Reference）计数）](#42-定理rcarc--共享所有权安全引用计数)",
+          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用计数）](#42-定理rcarc--共享所有权安全引用计数)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.3 推论：RefCell ⟹ 内部可变性运行时（Runtime）检查](#43-推论refcell--内部可变性运行时检查)",
+          "text": "- [4.3 推论：RefCell ⟹ 内部可变性运行时检查](#43-推论refcell--内部可变性运行时检查)",
           "type": "paragraph"
         },
         {
@@ -20094,7 +20094,7 @@
       "layer": "L2",
       "title": "RTTI 与动态类型识别：从 C++ 到 Rust",
       "positioning": "",
-      "line_count": 259,
+      "line_count": 265,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -20593,7 +20593,7 @@
       "layer": "L2",
       "title": "Rust API 命名约定",
       "positioning": "系统整理 Rust 标准库与生态中反复出现的命名模式，帮助学习者写出“看起来就像 Rust”的 API。",
-      "line_count": 446,
+      "line_count": 452,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -20768,7 +20768,7 @@
       "layer": "L2",
       "title": "友元 vs 模块可见性：C++ 的 `friend` 与 Rust 的隐私边界",
       "positioning": "",
-      "line_count": 251,
+      "line_count": 257,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -21915,7 +21915,7 @@
       "layer": "L3",
       "title": "Concurrency（并发模型）",
       "positioning": "",
-      "line_count": 2105,
+      "line_count": 2104,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 增强定理一致性（Coherence）矩阵（11行 ⟹ 推理链）、反命题决策树、6步认知路径、章节过渡、层次一致性标注",
@@ -23397,7 +23397,7 @@
       "layer": "L3",
       "title": "Cross-Platform Concurrency（跨平台并发）",
       "positioning": "",
-      "line_count": 168,
+      "line_count": 172,
       "theorem_chains": [
         {
           "text": "| 平台线程模型差异 ⟹ 同步原语选择必须显式 | 不同 OS 使用不同内核对象 | 代码中应避免隐式依赖默认排序或固定线程数 |",
@@ -23451,6 +23451,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/02_memory_management/12_smart_pointers.md",
         "../../07_future/04_research_and_experimental/43_rust_for_linux.md",
         "../03_proc_macros/28_conditional_compilation.md",
@@ -26326,7 +26327,7 @@
       "layer": "L3",
       "title": "是否需要进入 L4 形式化层？",
       "positioning": "L3（高级）与 L4（形式化）之间的**决策缓冲带**，帮助你判断是否需要阅读形式化内容。",
-      "line_count": 171,
+      "line_count": 175,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -26353,6 +26354,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md"
       ],
       "transitions": 0,
@@ -26382,7 +26384,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [7.3 定理一致性（Coherence）矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)",
+          "text": "- [7.3 定理一致性矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)",
           "type": "paragraph"
         },
         {
@@ -27534,7 +27536,7 @@
       "layer": "L3",
       "title": "Panic 机制",
       "positioning": "",
-      "line_count": 163,
+      "line_count": 167,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -27574,6 +27576,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/08_error_handling/13_panic_and_abort.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md",
@@ -28642,7 +28645,7 @@
       "layer": "L3",
       "title": "条件编译（Conditional Compilation）",
       "positioning": "",
-      "line_count": 275,
+      "line_count": 279,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -28730,6 +28733,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/07_modules_and_items/11_modules_and_paths.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
@@ -28759,7 +28763,7 @@
       "layer": "L3",
       "title": "过程宏代码生成优化",
       "positioning": "",
-      "line_count": 339,
+      "line_count": 343,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 token 质量 ⟹ 编译期开销 ⟹ 二进制体积的定理链进行优化决策。",
@@ -28892,7 +28896,7 @@
       "layer": "L3",
       "title": "宏调试与诊断",
       "positioning": "",
-      "line_count": 294,
+      "line_count": 298,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过展开追踪 ⟹ span 保留 ⟹ 精确诊断的定理链提升排错效率。",
@@ -29002,7 +29006,7 @@
       "layer": "L3",
       "title": "生产级宏开发",
       "positioning": "",
-      "line_count": 336,
+      "line_count": 344,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过兼容性 ⟹ 诊断质量 ⟹ 可持续维护的定理链评估工程成熟度。",
@@ -30527,7 +30531,7 @@
       "layer": "L3",
       "title": "Linkage（链接）",
       "positioning": "",
-      "line_count": 287,
+      "line_count": 291,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -30628,6 +30632,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/07_modules_and_items/35_preludes.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
         "../../02_intermediate/02_memory_management/12_smart_pointers.md",
@@ -30655,7 +30660,7 @@
       "layer": "L3",
       "title": "内联汇编 (Inline Assembly)",
       "positioning": "深入分析 Rust `asm!` 宏（Macro）的语法、约束系统、寄存器管理，以及 x86_64、aarch64、RISC-V、s390x 四大平台的差异，重点覆盖 Rust 1.96 为 s390x 引入的向量寄存器支持。",
-      "line_count": 813,
+      "line_count": 817,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -30879,6 +30884,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md",
         "../../07_future/04_research_and_experimental/43_rust_for_linux.md",
@@ -31639,7 +31645,7 @@
       "layer": "L3",
       "title": "内存分配与生命周期（Memory Allocation and Lifetime）",
       "positioning": "",
-      "line_count": 172,
+      "line_count": 176,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -31704,6 +31710,7 @@
       "sources": [],
       "cross_references": [
         "../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/04_memory_layout_optimization.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../02_intermediate/02_memory_management/12_smart_pointers.md",
         "../02_unsafe/29_memory_model.md",
@@ -31731,7 +31738,7 @@
       "layer": "L3",
       "title": "变量（Variables）",
       "positioning": "",
-      "line_count": 178,
+      "line_count": 182,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -31795,6 +31802,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md",
         "../../02_intermediate/02_memory_management/12_smart_pointers.md",
@@ -31823,7 +31831,7 @@
       "layer": "L3",
       "title": "可见性与隐私（Visibility and Privacy）",
       "positioning": "",
-      "line_count": 200,
+      "line_count": 204,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -31887,6 +31895,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/07_modules_and_items/11_modules_and_paths.md",
         "../../02_intermediate/05_modules_and_visibility/22_api_naming_conventions.md",
         "../../04_formal/05_rustc_internals/40_names_and_resolution.md",
@@ -31913,7 +31922,7 @@
       "layer": "L3",
       "title": "所有权性能优化",
       "positioning": "从所有权（Ownership）视角出发，系统梳理避免不必要拷贝、使用写时复制、优化内存布局、零拷贝解析与移动语义的最佳实践。",
-      "line_count": 176,
+      "line_count": 180,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过避免拷贝 ⟹ Cow/零拷贝 ⟹ 布局优化的定理链进行性能决策。",
@@ -31990,6 +31999,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../02_intermediate/02_memory_management/12_smart_pointers.md",
@@ -32133,7 +32143,7 @@
       "layer": "L4",
       "title": "Type Theory（类型论基础）",
       "positioning": "",
-      "line_count": 1739,
+      "line_count": 1740,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构——定理一致性（Coherence）矩阵扩展至11行（带⟹推理链），新增3个反命题决策树，认知路径重构为5步递进，全章补充Wikipedia/Pierce TAPL/Cardelli引用与L1-L3层次一致性标注",
@@ -32499,7 +32509,7 @@
       "layer": "L4",
       "title": "子类型与变型：Rust 类型系统中的协变、逆变与不变",
       "positioning": "深入分析 Rust 类型系统（Type System）中的**子类型关系**与**变型规则**（Variance），解释为什么 `&'static str` 可以赋给 `&'a str`，但 `&mut &'static str` 不能赋给 `&mut &'a str`。",
-      "line_count": 635,
+      "line_count": 636,
       "theorem_chains": [
         {
           "text": "| 子类型与变型：Rust 类型系统中的协变、逆变与不变 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -32607,6 +32617,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -32635,7 +32646,7 @@
       "layer": "L4",
       "title": "类型推断：Hindley-Milner 算法与 Rust 的工业实现",
       "positioning": "深入分析 **Hindley-Milner (HM) 类型推断（Type Inference）算法**——从 λ 演算到 Rust 的工业实现，探讨 HM 的完备性、Rust 对 HM 的扩展（trait 约束、泛型（Generics）、生命周期（Lifetimes）），以及类型推断与代码可读性的平衡。",
-      "line_count": 758,
+      "line_count": 759,
       "theorem_chains": [
         {
           "text": "| 类型推断：Hindley-Milner 算法与 Rust 的工业实现 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -32766,7 +32777,7 @@
       "layer": "L4",
       "title": "范畴论与 Rust：从函子到单子",
       "positioning": "从**范畴论**视角分析 Rust 的类型系统（Type System）——从函子（Functor）、应用函子（Applicative）到单子（Monad），揭示 Rust 的类型构造器如何隐式实现这些抽象代数结构。",
-      "line_count": 809,
+      "line_count": 810,
       "theorem_chains": [
         {
           "text": "| 范畴论与 Rust：从函子到单子 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -32909,7 +32920,7 @@
       "layer": "L4",
       "title": "Lambda 演算与 Rust 计算模型",
       "positioning": "探讨 Lambda 演算作为 Rust 函数式编程的数学基础——从 β-归约到类型化 Lambda 演算，分析 Rust 的闭包（Closures）与函数类型如何映射到计算理论。",
-      "line_count": 752,
+      "line_count": 753,
       "theorem_chains": [
         {
           "text": "| Lambda 演算与 Rust 计算模型 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -33044,7 +33055,7 @@
       "layer": "L4",
       "title": "Type Semantics（类型语义）",
       "positioning": "",
-      "line_count": 896,
+      "line_count": 900,
       "theorem_chains": [
         {
           "text": "- **定理**: Type Semantics（类型语义） 定义 ⟹ 类型安全保证",
@@ -33202,6 +33213,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/03_preview_features/04_effects_system.md",
@@ -33213,7 +33225,7 @@
         "02_type_theory.md",
         "https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md"
       ],
-      "transitions": 6,
+      "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 37,
@@ -33234,7 +33246,7 @@
       "layer": "L4",
       "title": "rustc 类型检查与类型推断",
       "positioning": "把“编译器如何知道 `Vec<&str>` 并对未标注类型做推断”还原为约束生成、统一与区域求解的完整算法。",
-      "line_count": 308,
+      "line_count": 309,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -33331,6 +33343,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/08_nll_and_polonius.md",
         "../../06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md",
         "../05_rustc_internals/26_trait_solver_in_rustc.md",
@@ -33357,7 +33370,7 @@
       "layer": "L4",
       "title": "Type Inference Complexity（类型推断复杂度）",
       "positioning": "解释 Rust 类型推断（Type Inference）为什么从 HM 的 $O(n^3)$ 跃迁到 PSPACE-完全，以及这一理论结论如何在 rustc 的约束求解器中得到工程化实现。",
-      "line_count": 407,
+      "line_count": 408,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Type Inference Complexity（类型推断 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -33441,6 +33454,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../05_rustc_internals/26_trait_solver_in_rustc.md",
         "02_type_theory.md",
@@ -33469,7 +33483,7 @@
       "layer": "L4",
       "title": "类型系统参考（Type System Reference）",
       "positioning": "",
-      "line_count": 411,
+      "line_count": 415,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -33504,6 +33518,7 @@
       "sources": [],
       "cross_references": [
         "../../../crates/c02_type_system/docs/tier_04_advanced/01_type_theory_in_depth.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/04_types_and_conversions/20_type_system_advanced.md",
         "../../03_advanced/06_low_level_patterns/33_variables.md",
@@ -33957,7 +33972,7 @@
       "layer": "L4",
       "title": "线性逻辑在 Rust 中的工程应用",
       "positioning": "深入分析**线性逻辑**如何从理论概念转化为 Rust 的**工程实践**——从资源管理、协议状态机到 session types，揭示形式化类型论在现代系统编程中的实际价值。",
-      "line_count": 745,
+      "line_count": 746,
       "theorem_chains": [
         {
           "text": "| 线性逻辑在 Rust 中的工程应用 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -34094,7 +34109,7 @@
       "layer": "L4",
       "title": "Borrow Checking Decidability（借用检查可判定性）",
       "positioning": "",
-      "line_count": 411,
+      "line_count": 409,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Borrow Checking Decidability（借 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -34184,6 +34199,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../00_type_theory/27_type_checking_and_inference.md",
         "../02_separation_logic/04_rustbelt.md",
@@ -34211,7 +34227,7 @@
       "layer": "L4",
       "title": "Tree Borrows 深度解析",
       "positioning": "",
-      "line_count": 162,
+      "line_count": 172,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -34237,6 +34253,7 @@
       "cross_references": [
         "../../../archive/docs/content/academic/10_tree_borrows_guide.md",
         "../../../knowledge/04_expert/miri/01_tree_borrows.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
         "../../07_future/00_version_tracking/rust_1_98_preview.md",
@@ -34270,7 +34287,7 @@
       "layer": "L4",
       "title": "未定义行为清单（Behavior Considered Undefined）",
       "positioning": "",
-      "line_count": 164,
+      "line_count": 176,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -34297,6 +34314,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/00_concurrency/11_atomics_and_memory_ordering.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/05_inline_assembly/13_inline_assembly.md",
@@ -34513,7 +34531,7 @@
       "layer": "L4",
       "title": "分离逻辑：Rust 所有权的形式化根基",
       "positioning": "深入讲解**分离逻辑（Separation Logic）**——从霍尔逻辑到分离合取、框架规则，揭示 Rust 所有权（Ownership）系统如何建立在严格的数学基础之上，并连接形式化验证工具如 Iris 和 Viper。",
-      "line_count": 838,
+      "line_count": 839,
       "theorem_chains": [
         {
           "text": "| 分离逻辑：Rust 所有权的形式化根基 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -34641,7 +34659,7 @@
       "layer": "L4",
       "title": "Safety Tags（安全标签）",
       "positioning": "",
-      "line_count": 167,
+      "line_count": 177,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -34673,6 +34691,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
         "../../07_future/00_version_tracking/rust_1_98_preview.md",
@@ -34702,7 +34721,7 @@
       "layer": "L4",
       "title": "BorrowSanitizer 运行时别名模型检测",
       "positioning": "",
-      "line_count": 167,
+      "line_count": 177,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -34717,6 +34736,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
         "../../07_future/00_version_tracking/rust_1_98_preview.md",
@@ -34747,7 +34767,7 @@
       "layer": "L4",
       "title": "指称语义与领域理论",
       "positioning": "探讨 Rust 的**指称语义**（Denotational Semantics）基础——从 Scott-Strachey 方法到完备偏序（CPO）、不动点理论，分析 Rust 类型如何通过数学对象赋予意义。",
-      "line_count": 637,
+      "line_count": 638,
       "theorem_chains": [
         {
           "text": "| 指称语义与领域理论 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -34861,7 +34881,7 @@
       "layer": "L4",
       "title": "Hoare 逻辑：程序验证的形式化基础与 Rust 契约",
       "positioning": "系统讲解 **Hoare 逻辑（霍尔逻辑）**——从前置条件、后置条件、循环不变量的经典形式化，到最弱前置条件演算，揭示 Hoare 逻辑如何为 Rust 的 unsafe 代码契约、内部不变量和形式化验证工具提供理论基础。",
-      "line_count": 908,
+      "line_count": 909,
       "theorem_chains": [
         {
           "text": "| Hoare 逻辑：程序验证的形式化基础与 Rust 契约 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -34983,7 +35003,7 @@
       "layer": "L4",
       "title": "操作语义：程序行为的形式化定义",
       "positioning": "介绍 **操作语义（Operational Semantics）**——通过形式化规则定义程序的执行步骤，分析小步语义（Small-Step）与大步语义（Big-Step）的对比，以及 Rust 的所有权（Ownership）、借用（Borrowing）和并发操作的形式化建模方法。",
-      "line_count": 1076,
+      "line_count": 1077,
       "theorem_chains": [
         {
           "text": "| 操作语义：程序行为的形式化定义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -35131,7 +35151,7 @@
       "layer": "L4",
       "title": "求值策略：Call-by-Value, Call-by-Name, Call-by-Need",
       "positioning": "",
-      "line_count": 682,
+      "line_count": 692,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -35269,6 +35289,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../01_foundation/03_values_and_references/20_variable_model.md",
         "../../01_foundation/04_control_flow/07_control_flow.md",
@@ -35296,7 +35317,7 @@
       "layer": "L4",
       "title": "Axiomatic Semantics（公理语义）",
       "positioning": "",
-      "line_count": 952,
+      "line_count": 962,
       "theorem_chains": [
         {
           "text": "- **定理**: Axiomatic Semantics（公理语义） 定义 ⟹ 类型安全保证",
@@ -35418,6 +35439,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../00_type_theory/02_type_theory.md",
@@ -35450,7 +35472,7 @@
       "layer": "L4",
       "title": "Aeneas Symbolic Semantics（Aeneas 符号化语义）",
       "positioning": "",
-      "line_count": 443,
+      "line_count": 453,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Aeneas Symbolic Semantics（Aene 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -35518,6 +35540,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
@@ -35547,7 +35570,7 @@
       "layer": "L4",
       "title": "常量求值（Constant Evaluation）",
       "positioning": "",
-      "line_count": 186,
+      "line_count": 196,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -35599,6 +35622,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../01_foundation/04_control_flow/07_control_flow.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -35798,7 +35822,7 @@
       "layer": "L4",
       "title": "形式化方法在 Rust 中的应用",
       "positioning": "探讨形式化验证工具在 Rust 生态中的应用——从 Kani 的模型检查到 Creusot 的演绎验证，分析如何用数学方法证明 Rust 代码正确性。",
-      "line_count": 757,
+      "line_count": 758,
       "theorem_chains": [
         {
           "text": "| 形式化方法在 Rust 中的应用 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -36005,7 +36029,7 @@
       "layer": "L4",
       "title": "现代 Rust 验证工具生态（2025-2026）",
       "positioning": "利用大语言模型（LLM）自动生成 Verus 证明注解，降低形式化验证的门槛。",
-      "line_count": 527,
+      "line_count": 531,
       "theorem_chains": [
         {
           "text": "| 现代 Rust 验证工具生态（2025-2026） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -36091,6 +36115,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
@@ -36128,7 +36153,7 @@
       "layer": "L4",
       "title": "通用程序语言理论基础：Rust 的 PL 基座",
       "positioning": "从通用程序语言（PL）理论视角审视 Rust 的设计根基，建立从 λ 演算到 Rust 类型系统（Type System）的概念桥梁。",
-      "line_count": 424,
+      "line_count": 431,
       "theorem_chains": [
         {
           "text": "| 通用程序语言理论基础：Rust 的 PL 基座 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -36216,6 +36241,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/03_preview_features/04_effects_system.md",
@@ -36244,7 +36270,7 @@
       "layer": "L4",
       "title": "AutoVerus / Verus 自动证明生态",
       "positioning": "",
-      "line_count": 183,
+      "line_count": 195,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -36268,6 +36294,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
         "../../07_future/00_version_tracking/rust_1_98_preview.md",
@@ -36296,7 +36323,7 @@
       "layer": "L4",
       "title": "测验：形式化方法概念（L4 试点扩展）",
       "positioning": "L4 嵌入式互动测验——验证形式化方法核心概念（分离逻辑、RustBelt、类型安全、验证工具链）的概念掌握程度。",
-      "line_count": 616,
+      "line_count": 621,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -36404,6 +36431,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../00_type_theory/21_type_semantics.md",
         "../01_ownership_logic/01_linear_logic.md",
@@ -36432,7 +36460,7 @@
       "layer": "L4",
       "title": "Miri：Rust 未定义行为动态检测器",
       "positioning": "将 Miri 从“nightly 玩具”还原为日常 unsafe 代码审查与教学的标准工具。",
-      "line_count": 313,
+      "line_count": 315,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -36476,6 +36504,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -36506,7 +36535,7 @@
       "layer": "L4",
       "title": "Kani：Rust 有界模型检查器",
       "positioning": "将 Kani 从\"AWS 内部工具\"还原为日常安全关键代码审查与教学的标准模型检查器。",
-      "line_count": 384,
+      "line_count": 388,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -36619,6 +36648,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -36649,7 +36679,7 @@
       "layer": "L4",
       "title": "Rustc 查询系统与增量编译",
       "positioning": "将 `rustc` 从“顺序 pass 流水线”还原为“按需查询 + 缓存”的真实架构，理解增量编译的底层机制。",
-      "line_count": 590,
+      "line_count": 591,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -36739,7 +36769,7 @@
       "layer": "L4",
       "title": "MIR、Codegen 与 LLVM IR 入门",
       "positioning": "把 rustc 后端入口讲清楚：MIR 是什么、它如何被逐步 lower 为 LLVM IR、以及开发者如何利用 `rustc` 命令直接观察这些中间产物。",
-      "line_count": 367,
+      "line_count": 368,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 MIR 构建、借用（Borrowing）检查、优化、单态化（Monomorphization）与 LLVM IR 生成串联起来。",
@@ -36790,6 +36820,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../06_ecosystem/00_toolchain/47_compiler_infrastructure.md",
@@ -36816,7 +36847,7 @@
       "layer": "L4",
       "title": "rustc 中的 Trait Solver",
       "positioning": "把“这个类型是否实现了某 trait”这一核心问题，还原为候选装配、筛选、确认与约束求解的完整算法。",
-      "line_count": 449,
+      "line_count": 450,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -36933,6 +36964,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -36961,7 +36993,7 @@
       "layer": "L4",
       "title": "Rustc 名称解析与 HIR",
       "positioning": "把“名字怎么找到定义”和“源码如何变成编译器友好的 HIR”这两个前端核心步骤讲清楚，为理解类型检查、借用（Borrowing）检查打下基础。",
-      "line_count": 331,
+      "line_count": 332,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -37027,6 +37059,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/03_proc_macros/04_macros.md",
         "../00_type_theory/08_type_inference.md",
@@ -37053,7 +37086,7 @@
       "layer": "L4",
       "title": "Application Binary Interface（ABI）",
       "positioning": "",
-      "line_count": 166,
+      "line_count": 176,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -37105,6 +37138,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/04_ffi/09_ffi_advanced.md",
@@ -37131,7 +37165,7 @@
       "layer": "L4",
       "title": "名称、作用域与解析（Names, Scopes and Resolution）",
       "positioning": "",
-      "line_count": 216,
+      "line_count": 220,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -37171,6 +37205,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/07_modules_and_items/11_modules_and_paths.md",
         "../../01_foundation/07_modules_and_items/35_preludes.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
@@ -37199,7 +37234,7 @@
       "layer": "L4",
       "title": "特殊类型与 Trait（Special Types and Traits）",
       "positioning": "",
-      "line_count": 185,
+      "line_count": 195,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -37226,6 +37261,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -37256,7 +37292,7 @@
       "layer": "L4",
       "title": "类型布局（Type Layout）",
       "positioning": "",
-      "line_count": 161,
+      "line_count": 171,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -37308,6 +37344,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/02_unsafe/29_memory_model.md",
@@ -37335,7 +37372,7 @@
       "layer": "L4",
       "title": "析构函数与 Drop Scope（Destructors）",
       "positioning": "",
-      "line_count": 179,
+      "line_count": 189,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -37381,6 +37418,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../03_advanced/02_unsafe/29_memory_model.md",
         "../../03_advanced/02_unsafe/31_panic.md",
@@ -37408,7 +37446,7 @@
       "layer": "L4",
       "title": "词法结构（Lexical Structure）",
       "positioning": "",
-      "line_count": 258,
+      "line_count": 262,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将字节流、Unicode 解码、token 流和 AST 构建串联起来。",
@@ -37472,6 +37510,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/00_start/36_keywords.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/03_proc_macros/04_macros.md",
@@ -37501,7 +37540,7 @@
       "layer": "L4",
       "title": "条目参考（Items Reference）",
       "positioning": "",
-      "line_count": 250,
+      "line_count": 254,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块（Module）、item 和声明串联起来。",
@@ -37583,6 +37622,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/07_modules_and_items/11_modules_and_paths.md",
         "../../01_foundation/07_modules_and_items/38_crates_and_source_files.md",
         "../../02_intermediate/00_traits/01_traits.md",
@@ -37614,7 +37654,7 @@
       "layer": "L4",
       "title": "属性（Attributes）",
       "positioning": "",
-      "line_count": 177,
+      "line_count": 186,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将属性元数据与编译器行为串联起来。",
@@ -37672,6 +37712,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/31_derive_traits.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/03_proc_macros/04_macros.md",
@@ -37699,7 +37740,7 @@
       "layer": "L4",
       "title": "语句与表达式参考（Statements and Expressions Reference）",
       "positioning": "",
-      "line_count": 160,
+      "line_count": 169,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语句、表达式、值和副作用串联起来。",
@@ -37757,6 +37798,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../01_foundation/04_control_flow/41_statements_and_expressions.md",
         "../../03_advanced/01_async/02_async.md",
@@ -37786,7 +37828,7 @@
       "layer": "L4",
       "title": "模式参考（Patterns Reference）",
       "positioning": "",
-      "line_count": 161,
+      "line_count": 170,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将值、模式匹配（Pattern Matching）、绑定和解构串联起来。",
@@ -37838,6 +37880,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/04_control_flow/40_patterns.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/06_low_level_patterns/33_variables.md",
@@ -37865,7 +37908,7 @@
       "layer": "L4",
       "title": "名字参考（Names Reference）",
       "positioning": "",
-      "line_count": 161,
+      "line_count": 170,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将源文件、模块（Module）树、命名空间、作用域和名字解析串联起来。",
@@ -37905,6 +37948,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/07_modules_and_items/11_modules_and_paths.md",
         "../../01_foundation/07_modules_and_items/35_preludes.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
@@ -37933,7 +37977,7 @@
       "layer": "L4",
       "title": "Rust Reference 附录（Reference Appendices）",
       "positioning": "",
-      "line_count": 163,
+      "line_count": 172,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将文法、词法、语法索引和测试摘要串联起来。",
@@ -37967,6 +38011,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/03_proc_macros/04_macros.md",
         "../../03_advanced/03_proc_macros/07_proc_macro.md",
@@ -37996,7 +38041,7 @@
       "layer": "L4",
       "title": "泛型编译器行为：单态化、分发与类型擦除",
       "positioning": "",
-      "line_count": 173,
+      "line_count": 182,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将泛型函数、类型参数、实例化和分发方式串联起来。",
@@ -38055,6 +38100,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
@@ -38083,7 +38129,7 @@
       "layer": "L4",
       "title": "符号约定（Notation）",
       "positioning": "",
-      "line_count": 141,
+      "line_count": 150,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -38110,6 +38156,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/03_proc_macros/04_macros.md",
         "../../03_advanced/03_proc_macros/07_proc_macro.md",
         "../04_model_checking/23_programming_language_foundations.md",
@@ -41764,7 +41811,7 @@
       "layer": "L6",
       "title": "Cargo Script 脚本化 Rust",
       "positioning": "将 Rust 从\"项目级语言\"扩展为\"脚本级语言\"的工程机制，使单文件可执行成为一等公民。",
-      "line_count": 736,
+      "line_count": 737,
       "theorem_chains": [
         {
           "text": "- **定理**: Cargo Script：单文件 Rust 程序 定义 ⟹ 类型安全保证",
@@ -54549,7 +54596,7 @@
       "layer": "L7",
       "title": "Rust 1.91 稳定特性",
       "positioning": "",
-      "line_count": 2408,
+      "line_count": 2543,
       "theorem_chains": [
         {
           "text": "| 版本上下文 ⟹ 演进脉络 | 对比前后版本特性 | 理解语言发展方向 |",
@@ -55124,7 +55171,7 @@
       "layer": "L7",
       "title": "Rust 1.92 稳定特性",
       "positioning": "",
-      "line_count": 2354,
+      "line_count": 2536,
       "theorem_chains": [
         {
           "text": "| 版本上下文 ⟹ 演进脉络 | 对比前后版本特性 | 理解语言发展方向 |",
@@ -56080,7 +56127,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
-      "line_count": 339,
+      "line_count": 342,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -56158,9 +56205,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 4,
+          "lines": 7,
           "should_fail": false,
-          "code_preview": "const BELL: char = '\\u{0007}'; const IS_CTRL: bool = BELL.is_control(); static_a..."
+          "code_preview": "const BELL: char = '\\u{0007}'; const IS_CTRL: bool = BELL.is_control();  fn main..."
         },
         {
           "flags": [

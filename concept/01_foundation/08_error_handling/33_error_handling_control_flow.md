@@ -44,6 +44,8 @@
 
 ## `?` 运算符与早退
 
+> (Source: [Rust Reference — The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator))
+
 `?` 用于从返回 `Result`、`Option` 或 `ControlFlow` 的函数中提前返回错误/空值/控制信号。
 
 ```rust
@@ -72,6 +74,8 @@ fn read_number_manual(s: &str) -> Result<i32, String> {
 ---
 
 ## `Try`/`FromResidual` 与跨类型传播
+
+> (Source: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html))
 
 `?` 依赖 `Try` 与 `FromResidual` trait 将 `Option::None`、`Result::Err` 等转换为调用者返回类型的**残差**（residual）。
 
@@ -120,6 +124,8 @@ fn demo() -> Result<i32, &'static str> {
 ---
 
 ## 错误转换：From 与 map_err
+
+> (Source: [std::result::Result](https://doc.rust-lang.org/std/result/enum.Result.html))
 
 `?` 要求内部错误类型能够转换到函数返回的错误类型。标准库已为常见类型实现 `From`，例如 `io::Error` → `Box<dyn Error>`、`Infallible` → `E`。
 
@@ -222,6 +228,9 @@ flowchart TD
 ```
 
 ---
+> **权威来源**: [Rust Reference — The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator) · [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust By Example — Error handling](https://doc.rust-lang.org/rust-by-example/error.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL、Rust By Example）
 
 ## 认知路径与推理骨架
 

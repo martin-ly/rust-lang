@@ -19,6 +19,9 @@
 ---
 
 ---
+> **权威来源**: [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html) · [TRPL — Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ## 认知路径
 
@@ -41,6 +44,8 @@
 > **反命题 3**: "其他语言对 语句与表达式（Statements and Expressi 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 语句与表达式（Statements and Expressi 具有语言特有的形态。
 
 ## 一、Rust 是表达式语言
+
+> (Source: [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html))
 
 Rust **主要**是一门表达式语言。这意味着大多数产生值或产生副作用的求值都由统一的**表达式（expression）**语法类别驱动。
 
@@ -120,6 +125,8 @@ println!("hello");
 ---
 
 ## 四、表达式的求值顺序
+
+> (Source: [Rust Reference — Evaluation Order](https://doc.rust-lang.org/reference/expressions.html#evaluation-order))
 
 Rust 规定了大多数子表达式的求值顺序：
 

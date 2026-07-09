@@ -47,8 +47,8 @@
   - [十、边界测试：指称语义的编译错误](#十边界测试指称语义的编译错误)
     - [10.1 边界测试：非终止计算与 `loop {}` 的类型（编译错误）](#101-边界测试非终止计算与-loop--的类型编译错误)
     - [10.2 边界测试：`panic!` 的指称与 `Result` 的指称分离（编译错误）](#102-边界测试panic-的指称与-result-的指称分离编译错误)
-    - [2.2 所有权（Ownership）即线性性](#22-所有权即线性性)
-    - [2.3 生命周期（Lifetimes）即区域](#23-生命周期即区域)
+    - [2.2 所有权即线性性](#22-所有权即线性性)
+    - [2.3 生命周期即区域](#23-生命周期即区域)
   - [三、反命题与边界分析](#三反命题与边界分析)
     - [3.1 反命题树](#31-反命题树)
     - [3.2 边界极限](#32-边界极限)
@@ -57,7 +57,7 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
     - [10.3 边界测试：发散函数（`!`）的指称语义（编译错误）](#103-边界测试发散函数的指称语义编译错误)
-    - [10.4 边界测试：`unsafe` 代码的语义鸿沟（运行时（Runtime） UB）](#104-边界测试unsafe-代码的语义鸿沟运行时-ub)
+    - [10.4 边界测试：`unsafe` 代码的语义鸿沟（运行时 UB）](#104-边界测试unsafe-代码的语义鸿沟运行时-ub)
     - [10.3 边界测试：不动点语义与递归类型的无限展开（编译错误）](#103-边界测试不动点语义与递归类型的无限展开编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：指称语义（Denotational Semantics）的核心思想是什么？与操作语义有什么区别？（理解层）](#测验-1指称语义denotational-semantics的核心思想是什么与操作语义有什么区别理解层)
@@ -96,7 +96,7 @@
   │ 类型安全        │ 逐步验证        │ 良定义性        │
   │ 并发            │ 交织序列        │ 幂域 / 余代数   │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
+> (Source: [TRPL](https://doc.rust-lang.org/book/title-page.html))
 
   基本框架:
   [[_]]: 语法 → 语义域
@@ -105,7 +105,7 @@
 ```
 
 > **认知功能**: **指称语义回答"程序计算什么"而非"如何计算"**——通过数学抽象揭示程序的本质含义。
-> [来源: [Winskel — Semantics of PL](https://www.cl.cam.ac.uk/~gw104/dens.pdf)]
+> (Source: [Winskel — Semantics of PL](https://www.cl.cam.ac.uk/~gw104/dens.pdf))
 
 ---
 
@@ -134,7 +134,7 @@
 ```
 
 > **CPO 洞察**: **CPO 为递归和并发提供了数学基础**——递归函数的语义通过最小不动点定义。
-> [来源: [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)]
+> (Source: [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory))
 
 ---
 
@@ -164,7 +164,7 @@ Kleene 不动点定理:
 ```
 
 > **不动点洞察**: **Kleene 不动点定理是递归的数学基础**——所有递归定义都可以通过最小不动点赋予语义。
-> [来源: [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/files/298/handbook.pdf)]
+> (Source: [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/files/298/handbook.pdf))
 
 ---
 
@@ -201,7 +201,7 @@ fn call_diverges() -> i32 {
 > `⊥` 是任何域的子集（因为 `⊥ ⊑ v` 对所有 `v` 成立），因此 `!` 可被强制转换为任何类型。
 > 这与 Haskell 的 `undefined :: a` 或 Scala 的 `Nothing` 类似——底部类型是所有类型的子类型。
 > Rust 的 `!` 类型目前仍在部分特性中不稳定，但核心语义已稳定。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
+> (Source: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html))
 
 ### 10.2 边界测试：`panic!` 的指称与 `Result` 的指称分离（编译错误）
 
@@ -229,7 +229,7 @@ fn main() {
 > `Result::Err` 的指称是 `Ok(v) ⊑ Err(e)` 域中的一个正常元素——错误是值空间的一部分，可被匹配、传播、转换。
 > Rust 强制区分这两种错误模式：`panic` 用于不可恢复错误（bug），`Result` 用于可恢复错误（文件不存在、网络超时）。
 > 这与 Java 的异常（Exception vs Error）或 Haskell 的 `Either`（无 panic 机制）形成对比。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> (Source: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html))
 
 ```text
 Rust 类型的指称:
@@ -253,7 +253,7 @@ Rust 类型的指称:
 ```
 
 > **类型洞察**: **Rust 的代数数据类型直接对应域论构造**——乘积、和、函数空间都是标准域论操作。
-> [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]
+> (Source: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html))
 
 ---
 
@@ -281,7 +281,7 @@ Rust 类型的指称:
 ```
 
 > **所有权（Ownership）洞察**: **Rust 的所有权在指称语义中表现为资源分离**——线性逻辑和分离逻辑提供了精确的数学框架。
-> [来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]
+> (Source: [RustBelt](https://plv.mpi-sws.org/rustbelt/))
 
 ---
 
@@ -313,7 +313,7 @@ Rust 类型的指称:
 ```
 
 > **生命周期（Lifetimes）洞察**: **生命周期是编译期的区域推断系统**——指称语义中表现为时间区间的集合包含关系。
-> [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)]
+> (Source: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html))
 
 ---
 
@@ -339,7 +339,7 @@ graph TD
 ```
 
 > **认知功能**: **指称语义和操作语义各有优势**——等价证明用指称，实现分析用操作。
-> [来源: [Winskel — Semantics](https://www.cl.cam.ac.uk/~gw104/dens.pdf)]
+> (Source: [Winskel — Semantics](https://www.cl.cam.ac.uk/~gw104/dens.pdf))
 
 ---
 
@@ -374,7 +374,7 @@ graph TD
 ```
 
 > **边界要点**: 指称语义的边界与**非终止性**、**并发**、**状态**、**unsafe** 和**高阶类型**相关。
-> [来源: [PL Foundations](https://softwarefoundations.cis.upenn.edu/)]
+> (Source: [PL Foundations](https://softwarefoundations.cis.upenn.edu/))
 
 ---
 
@@ -411,7 +411,7 @@ graph TD
 ```
 
 > **陷阱总结**: 指称语义的陷阱主要与**语法/语义混淆**、**⊥ 处理**、**语义层级**和**抽象过度**相关。
-> [来源: [Semantics Course Notes](https://www.cl.cam.ac.uk/teaching/2021/Semantics/)]
+> (Source: [Semantics Course Notes](https://www.cl.cam.ac.uk/teaching/2021/Semantics/))
 
 ---
 
@@ -462,11 +462,12 @@ fn main() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
+> [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
-**状态**: ✅ 概念文件创建完成
+**状态**: ✅ 权威来源对齐完成 (Batch L4)
 
 ---
 
@@ -496,8 +497,8 @@ fn main() {
 > `!` 可 coerce 为任意类型（ex falso quodlibet），因此 `let y: i32 = diverges()` 合法——但 `diverges()` 永不执行到赋值点，所以 `y` 永远不会被使用。
 > 这与 Haskell 的 `undefined :: a`（值层面的 ⊥，有类型但运行时（Runtime）错误）或 Scala 的 `Nothing`（类型层面的 ⊥，无值）类似——Rust 的 `!` 更接近 Scala 的 `Nothing`，是空类型（uninhabited type）。
 > `!` 的稳定化使 Rust 的类型系统（Type System）在理论上更完整，支持更精确的控制流分析。
-> [来源: [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] ·
-> [来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)]
+> [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] ·
+> [Rust RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)]
 
 ### 10.4 边界测试：`unsafe` 代码的语义鸿沟（运行时 UB）
 
@@ -519,8 +520,8 @@ fn main() {
 > 上述代码中，`r.add(1)` 指向 `x` 之后的内存（未分配），写入是未定义行为——指称语义无法描述 `unsafe` 代码的行为，因为 `unsafe` 进入了实现定义的领域。
 > 形式化验证工具（Miri、Kani、RustBelt）试图为 `unsafe` 代码建立安全边界：Miri 解释执行检测 UB，Kani 符号验证断言，RustBelt 在分离逻辑中证明 unsafe 抽象的安全性。
 > 但完全的形式化覆盖仍是开放问题——`unsafe` 是 Rust 语义中的"已知未知"。
-> [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] ·
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+> [RustBelt Paper](https://doi.org/10.1145/3158154)] ·
+> [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.3 边界测试：不动点语义与递归类型的无限展开（编译错误）
 
@@ -550,8 +551,8 @@ fn main() {
 > 3) **手动状态机**：`Stream` 实现。递归类型（`List<T>`）在 Rust 中必须间接（`Box` 或 `Rc`），因为编译器需要确定类型大小。
 >
 > 这与 Haskell 的惰性递归类型（`data List a = Nil | Cons a (List a)`，可无限）或 ML 的惰性 `datatype` 不同——Rust 的严格语义和静态大小要求排除了直接的不动点类型。
-> [来源: [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] ·
-> [来源: [Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)]
+> [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] ·
+> [Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)]
 
 ## 嵌入式测验（Embedded Quiz）
 

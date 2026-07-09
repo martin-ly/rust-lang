@@ -43,6 +43,8 @@
 
 ## 一、官方工具链
 
+> (Source: [TRPL — Appendix D](https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html))
+
 | 工具 | 作用 | 常用命令 |
 |:---|:---|:---|
 | `rustfmt` | 自动格式化代码 | `cargo fmt` |
@@ -54,6 +56,8 @@
 ---
 
 ## 二、IDE 与编辑器支持
+
+> (Source: [Rust Analyzer Manual](https://rust-analyzer.github.io/manual.html))
 
 **rust-analyzer** 是官方推荐的 Rust 语言服务器，提供：
 

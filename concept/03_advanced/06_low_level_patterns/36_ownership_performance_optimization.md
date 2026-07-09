@@ -18,7 +18,7 @@
 
 ## 📑 目录
 
-- [所有权（Ownership）性能优化](#所有权性能优化)
+- [所有权性能优化](#所有权性能优化)
   - [📑 目录](#-目录)
   - [一、避免不必要的 Clone](#一避免不必要的-clone)
   - [二、Copy on Write (Cow)](#二copy-on-write-cow)
@@ -26,7 +26,7 @@
   - [四、零拷贝解析](#四零拷贝解析)
   - [五、移动语义优化](#五移动语义优化)
   - [六、栈与堆选择](#六栈与堆选择)
-  - [七、枚举（Enum）与 Option 布局优化](#七枚举与-option-布局优化)
+  - [七、枚举与 Option 布局优化](#七枚举与-option-布局优化)
   - [八、缓存局部性](#八缓存局部性)
   - [九、常见反模式](#九常见反模式)
   - [认知路径](#认知路径)
@@ -36,7 +36,7 @@
 
 ## 一、避免不必要的 Clone
 
-优先使用引用（Reference）（`&str`、`&[T]`）代替拥有所有权的类型（`String`、`Vec<T>`），避免堆分配。
+优先使用引用（Reference）（`&str`、`&[T]`）代替拥有所有权的类型（`String`、`Vec<T>`），避免堆分配。(Source: [TRPL — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html))
 
 ```rust
 // ❌ 不必要的 clone
@@ -52,7 +52,7 @@ fn process(data: &str) {}
 
 ## 二、Copy on Write (Cow)
 
-`std::borrow::Cow` 在不需要修改时零成本借用（Borrowing），需要修改时才克隆。
+`std::borrow::Cow` 在不需要修改时零成本借用（Borrowing），需要修改时才克隆。(Source: [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html))
 
 ```rust
 use std::borrow::Cow;
@@ -116,7 +116,7 @@ fn consume(data: Vec<u8>) -> usize {
 
 ## 七、枚举与 Option 布局优化
 
-`Option<Box<T>>` 可利用 null pointer optimization，使 `None` 不占用额外空间：
+`Option<Box<T>>` 可利用 null pointer optimization，使 `None` 不占用额外空间：(Source: [Rustonomicon — Option and Nullable Pointers](https://doc.rust-lang.org/nomicon/option-zipper.html))
 
 ```rust
 use std::mem::size_of;
@@ -173,3 +173,7 @@ let matrix: Vec<f64> = vec![0.0; n * 1024];
 >
 > **反命题 3**: "栈分配总是比堆分配快" ⟹ 不成立。大数据结构在栈上拷贝或传递可能反而更慢。
 >
+
+> **权威来源**: [TRPL — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html), [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html), [Rust Performance Book](https://nnethercote.github.io/perf-book/)
+>
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)

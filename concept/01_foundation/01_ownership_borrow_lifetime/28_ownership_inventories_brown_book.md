@@ -55,6 +55,9 @@
 > **反向推理 1**: 如果程序在 所有权清单自测 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
 >
 > **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 所有权（Ownership）清单自测 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
+> **权威来源**: [Brown University Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Brown Book、TRPL、Rust Reference）
 
 ## 认知路径
 
@@ -78,6 +81,8 @@
 
 ## 一、四个 Inventory 节点
 
+> (Source: [Brown University Interactive Rust Book](https://rust-book.cs.brown.edu/))
+
 | Inventory | 完成时机 | Brown Book 链接 | 本项目对应 |
 |:---|:---|:---|:---|
 | **Inventory #1** | 学完所有权（Ownership）、借用（Borrowing）、枚举（Enum）后 | Ch 6.4 | `01_ownership.md` · `02_borrowing.md` |
@@ -89,7 +94,9 @@
 
 ---
 
-## 二、样题示例（基于 Inventory 方法论）
+## 二、样题示例
+> (Source: [TRPL — Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html))
+（基于 Inventory 方法论）
 
 ### 样题 1：字符串替换链
 

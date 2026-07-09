@@ -19,6 +19,9 @@
 ---
 
 ---
+> **权威来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html)
+>
+> **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ## 认知路径
 
@@ -105,7 +108,10 @@ match message {
 
 ---
 
-## 三、可反驳性（Refutability）
+## 三、可反驳性
+
+> (Source: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html))
+（Refutability）
 
 - **可反驳模式（refutable）**: 可能无法匹配被匹配的值。
 - **不可反驳模式（irrefutable）**: 总是匹配被匹配的值。

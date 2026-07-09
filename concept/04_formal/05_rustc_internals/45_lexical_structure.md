@@ -42,7 +42,7 @@
 
 ## 一、输入格式
 
-Rust 源文件必须是有效的 **UTF-8** 编码字节序列。编译器不接受其他编码。
+Rust 源文件必须是有效的 **UTF-8** 编码字节序列。编译器不接受其他编码。 (Source: [Rust Reference — Lexical Structure](https://doc.rust-lang.org/reference/lexical-structure.html))
 
 - 允许的字符包括所有 Unicode 标量值（Unicode scalar value）。
 - 不允许的字符包括：surrogate code point（U+D800–U+DFFF）以及大于 U+10FFFF 的值。
@@ -64,7 +64,7 @@ fn main() {}
 
 ## 三、关键字
 
-Rust 将标识符分为三类：
+Rust 将标识符分为三类 (Source: [Rust Reference — Keywords](https://doc.rust-lang.org/reference/keywords.html))：
 
 | 类别 | 说明 | 示例 |
 |:---|:---|:---|
@@ -242,11 +242,6 @@ DelimitedTree ::= "(" TokenTree* ")"
 | [Keywords](../../01_foundation/00_start/36_keywords.md) | 关键字是特殊 token |
 | [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | `unsafe` 是词法关键字，触发特殊解析上下文 |
 
----
-
-> **权威来源**: [Rust Reference — Lexical Structure](https://doc.rust-lang.org/reference/lexical-structure.html) · [Rust Reference — Keywords](https://doc.rust-lang.org/reference/keywords.html) · [Rust Reference — Tokens](https://doc.rust-lang.org/reference/tokens.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
-> **内容分级**: [研究级]
-
 ## 过渡段
 
 > **过渡**: 从源文件字节序列过渡到 Unicode 规范化，可以理解 Rust 词法分析的第一步如何处理输入编码。
@@ -255,3 +250,12 @@ DelimitedTree ::= "(" TokenTree* ")"
 >
 > **过渡**: 从 token 分类过渡到语法产生式，可以链接 [Notation](../06_notation/44_notation.md) 与条目参考，形成完整参考链。
 >
+---
+
+> **权威来源**: [Rust Reference — Lexical Structure](https://doc.rust-lang.org/reference/lexical-structure.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Rust Reference — Keywords](https://doc.rust-lang.org/reference/keywords.html) · [Rust Reference — Tokens](https://doc.rust-lang.org/reference/tokens.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

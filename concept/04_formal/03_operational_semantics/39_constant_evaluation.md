@@ -183,3 +183,13 @@ const fn read_raw(ptr: *const i32) -> i32 {
 | [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | const 块中允许使用 `unsafe` 块，但需满足常量表达式规则 |
 | [Memory Model](../../03_advanced/02_unsafe/29_memory_model.md) | 常量求值涉及初始化字节、指针 provenance 等内存模型概念 |
 | [Application Binary Interface](../05_rustc_internals/38_application_binary_interface.md) | `static` 初始化与 ABI 属性交互 |
+
+---
+
+> **权威来源**: [Rust Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference — Expressions](https://doc.rust-lang.org/reference/expressions.html) · [Winskel 1993 — Formal Semantics](https://mitpress.mit.edu/9780262731034) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 权威来源对齐完成 (Batch L4)

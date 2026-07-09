@@ -49,7 +49,7 @@
 - [Cargo Build Scripts（`build.rs`）](#cargo-build-scriptsbuildrs)
   - [📑 目录](#-目录)
   - [一、什么是 Build Script](#一什么是-build-script)
-  - [二、生命周期（Lifetimes）与执行时机](#二生命周期与执行时机)
+  - [二、生命周期与执行时机](#二生命周期与执行时机)
     - [2.1 默认执行条件](#21-默认执行条件)
     - [2.2 `rerun-if-changed`](#22-rerun-if-changed)
   - [三、向主 crate 传递信息](#三向主-crate-传递信息)

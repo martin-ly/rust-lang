@@ -25,12 +25,11 @@
 > **所有权（Ownership）语义对齐**: 并发编程中的所有权遵循 Rust 核心原则——每个值有**唯一所有者**（单一所有权，资源唯一性），
 > owner 离开**作用域**时自动**drop/释放**（RAII），
 > 值通过**move/转移**传递所有权（Ownership）（赋值、传参后原变量变为 uninitialized）
-> 来源: Rust Reference — Ownership / 2025; RustBelt — 所有权类型系统（Type System）的 Iris 形式化 / POPL 2018
+> (Source: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/introduction.html), [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/))
 > **后置概念**: [Async/Await](../01_async/02_async.md) ·
 > [Unsafe Rust](../02_unsafe/03_unsafe.md)
-> **unsafe 语义对齐**: 当本文件提及 `unsafe impl Send/Sync` 时，遵循核心语义——`unsafe` 不是关闭检查器，而是将全局线程
-> [来源: [std::thread](https://doc.rust-lang.org/std/thread/index.html)]安全假设的证明责任转移给程序员
-> 来源: [Rustonomicon — Send and Sync / 2025](https://doc.rust-lang.org/nomicon/index.html)
+> **unsafe 语义对齐**: 当本文件提及 `unsafe impl Send/Sync` 时，遵循核心语义——`unsafe` 不是关闭检查器，而是将全局线程安全假设的证明责任转移给程序员。
+> (Source: [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html), [std::thread](https://doc.rust-lang.org/std/thread/index.html))
 > **主要来源**: [TRPL: Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch16-00-concurrency.html) · · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference: Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html) ·
 > [Wikipedia: Data race](https://en.wikipedia.org/wiki/Data_race) ·
@@ -1171,8 +1170,8 @@ fn arc_refcell_race() {
 >
 >
 >
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-00-concurrency.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-00-concurrency.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html), [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html), [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 更新权威来源块 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 ---
 
