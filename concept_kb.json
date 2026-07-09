@@ -873,7 +873,7 @@
       "layer": "L0",
       "title": "Rust 表征空间（Semantic / Representational Space）",
       "positioning": "本文件是 `concept/` 知识体系的**元层总论**，从表征空间（Representational Space）与语义空间（Semantic Space）的视角，系统分析 Rust 语言\"能表达什么\"、\"不能表达什么\"、\"等价表达的组合关系\"，以及其内部机制的完备性与封闭性。",
-      "line_count": 1325,
+      "line_count": 1324,
       "theorem_chains": [
         {
           "text": "| 断言 | 前提条件 ⟹ 结论 | 反例/边界条件 | 典型场景 | 失效条件 |",
@@ -949,7 +949,7 @@
           "flags": [
             "ignore"
           ],
-          "lines": 7,
+          "lines": 6,
           "should_fail": false,
           "code_preview": "// const generics 的当前边界：泛型常量表达式不稳定 fn concat<const M: usize, const N: usize>(a: ..."
         },
@@ -1070,7 +1070,7 @@
       "layer": "L0",
       "title": "全局待办清单（Global TODO Tracker）",
       "positioning": "汇总 `concept/` 下所有文件的待补充项，按优先级和层级组织，支持持续审计与迭代。",
-      "line_count": 324,
+      "line_count": 343,
       "theorem_chains": [
         {
           "text": "| Todos 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -7557,7 +7557,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：引用（Reference）不能比数据活得更久 ⟹ 悬垂指针在编译期被消除](#41-引理引用不能比数据活得更久--悬垂指针在编译期被消除)",
+          "text": "- [4.1 引理：引用不能比数据活得更久 ⟹ 悬垂指针在编译期被消除](#41-引理引用不能比数据活得更久--悬垂指针在编译期被消除)",
           "type": "paragraph"
         },
         {
@@ -8531,7 +8531,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：ADT（枚举（Enum） + 结构体（Struct））⟹ 代数数据类型完备性](#41-引理adt枚举--结构体-代数数据类型完备性)",
+          "text": "- [4.1 引理：ADT（枚举 + 结构体）⟹ 代数数据类型完备性](#41-引理adt枚举--结构体-代数数据类型完备性)",
           "type": "paragraph"
         },
         {
@@ -8543,11 +8543,11 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.4 定理：类型推断（Type Inference）完备性 ⟹ Principal type property](#44-定理类型推断完备性--principal-type-property)",
+          "text": "- [4.4 定理：类型推断完备性 ⟹ Principal type property](#44-定理类型推断完备性--principal-type-property)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.5 定理：类型一致性（Progress + Preservation）⟹ 运行时（Runtime）无类型错误](#45-定理类型一致性progress--preservation-运行时无类型错误)",
+          "text": "- [4.5 定理：类型一致性（Progress + Preservation）⟹ 运行时无类型错误](#45-定理类型一致性progress--preservation-运行时无类型错误)",
           "type": "paragraph"
         },
         {
@@ -11644,7 +11644,7 @@
       "layer": "L1",
       "title": "Functions（函数）",
       "positioning": "系统讲解 Rust 函数声明、参数传递、返回值、发散函数与所有权（Ownership）的交互，为后续 Trait、闭包（Closures）、Async 打下语法基础。",
-      "line_count": 295,
+      "line_count": 293,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将函数签名、所有权移动与借用（Borrowing）规则串联起来。",
@@ -11762,7 +11762,7 @@
       "layer": "L1",
       "title": "Use Declarations（使用声明）",
       "positioning": "系统讲解 `use` 声明的语法、作用域规则、重导出与 glob 导入，帮助学习者建立清晰的模块（Module）命名空间心智模型。",
-      "line_count": 220,
+      "line_count": 218,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `use` 声明、作用域与可见性规则串联起来。",
@@ -11871,7 +11871,7 @@
       "layer": "L1",
       "title": "Structs（结构体）",
       "positioning": "系统讲解 Rust 结构体（Struct）的三种形式、字段可见性、结构体更新语法与方法基础，为后续 Trait、Enum、泛型（Generics）奠定类型基础。",
-      "line_count": 228,
+      "line_count": 226,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将结构体定义、字段所有权（Ownership）与借用（Borrowing）规则串联起来。",
@@ -11973,7 +11973,7 @@
       "layer": "L1",
       "title": "Enumerations（枚举）",
       "positioning": "系统讲解 Rust 枚举（Enum）的定义、变体负载、Option/Result 两个核心枚举、模式匹配（Pattern Matching）穷尽性检查，以及与错误处理（Error Handling）的关系。",
-      "line_count": 230,
+      "line_count": 228,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将枚举、模式匹配与错误处理（Error Handling）规则串联起来。",
@@ -12089,7 +12089,7 @@
       "layer": "L1",
       "title": "Implementations（实现块）",
       "positioning": "系统讲解 Rust `impl` 块的两种形式（固有实现、Trait 实现）、方法 receiver、关联函数，以及与结构体（Struct）/枚举（Enum）/Trait 的关系。",
-      "line_count": 225,
+      "line_count": 223,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将方法调用、receiver 选择与所有权（Ownership）/借用（Borrowing）规则串联起来。",
@@ -12194,7 +12194,7 @@
       "layer": "L1",
       "title": "Preludes（预导入模块）",
       "positioning": "",
-      "line_count": 215,
+      "line_count": 221,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -12272,7 +12272,7 @@
       "layer": "L1",
       "title": "Crate 与源文件（Crates and Source Files）",
       "positioning": "",
-      "line_count": 269,
+      "line_count": 267,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块（Module）路径解析串联起来。",
@@ -12354,7 +12354,7 @@
       "layer": "L1",
       "title": "项（Items）",
       "positioning": "",
-      "line_count": 299,
+      "line_count": 297,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块（Module）、item、名称解析与可见性串联起来。",
@@ -12492,7 +12492,7 @@
       "layer": "L1",
       "title": "类型别名（Type Alias）",
       "positioning": "",
-      "line_count": 409,
+      "line_count": 407,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"类型别名会创建新类型\" ⟹ 不成立。别名与原类型完全等价，编译器不会区分。",
@@ -12620,7 +12620,7 @@
       "layer": "L1",
       "title": "静态项（Static Items）",
       "positioning": "",
-      "line_count": 398,
+      "line_count": 396,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`static` 和 `const` 完全相同\" ⟹ 不成立。`static` 有固定地址且可运行期存在；`const` 是编译期内联值。",
@@ -12738,7 +12738,7 @@
       "layer": "L1",
       "title": "常量项与常量函数（Const Items and Const Functions）",
       "positioning": "",
-      "line_count": 419,
+      "line_count": 417,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`const` 和 `let` 一样\" ⟹ 不成立。`const` 是编译期常量，无运行时地址；`let` 是运行时局部绑定。",
@@ -16541,7 +16541,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：单态化（Monomorphization） ⟹ 零成本抽象（Zero-Cost Abstraction） ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)",
+          "text": "- [4.2 定理：单态化 ⟹ 零成本抽象 ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)",
           "type": "paragraph"
         },
         {
@@ -32909,7 +32909,7 @@
       "layer": "L4",
       "title": "Lambda 演算与 Rust 计算模型",
       "positioning": "探讨 Lambda 演算作为 Rust 函数式编程的数学基础——从 β-归约到类型化 Lambda 演算，分析 Rust 的闭包（Closures）与函数类型如何映射到计算理论。",
-      "line_count": 753,
+      "line_count": 752,
       "theorem_chains": [
         {
           "text": "| Lambda 演算与 Rust 计算模型 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -33957,7 +33957,7 @@
       "layer": "L4",
       "title": "线性逻辑在 Rust 中的工程应用",
       "positioning": "深入分析**线性逻辑**如何从理论概念转化为 Rust 的**工程实践**——从资源管理、协议状态机到 session types，揭示形式化类型论在现代系统编程中的实际价值。",
-      "line_count": 744,
+      "line_count": 745,
       "theorem_chains": [
         {
           "text": "| 线性逻辑在 Rust 中的工程应用 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -34010,7 +34010,7 @@
           "flags": [
             "ignore"
           ],
-          "lines": 51,
+          "lines": 52,
           "should_fail": false,
           "code_preview": "// 类型状态: 将状态编码到类型中  // 协议状态机示例: 数据库事务  struct Connection; struct Transaction; st..."
         },
@@ -41764,7 +41764,7 @@
       "layer": "L6",
       "title": "Cargo Script 脚本化 Rust",
       "positioning": "将 Rust 从\"项目级语言\"扩展为\"脚本级语言\"的工程机制，使单文件可执行成为一等公民。",
-      "line_count": 697,
+      "line_count": 733,
       "theorem_chains": [
         {
           "text": "- **定理**: Cargo Script：单文件 Rust 程序 定义 ⟹ 类型安全保证",
@@ -41789,6 +41789,22 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "#!/usr/bin/env cargo ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "#!/usr/bin/env cargo  fn main() {     let args: Vec<String> = std::env::args().c..."
+        },
         {
           "flags": [
             "ignore"
@@ -43902,7 +43918,7 @@
       "layer": "L6",
       "title": "微服务架构模式 (Microservice Architecture Patterns)",
       "positioning": "从系统架构视角梳理 Rust 在微服务场景中的核心模式——服务发现、熔断、Saga、CQRS、事件溯源——揭示 Rust 的类型安全与零成本抽象（Zero-Cost Abstraction）如何支撑高可靠分布式系统。",
-      "line_count": 972,
+      "line_count": 1008,
       "theorem_chains": [
         {
           "text": "- **定理**: 微服务架构模式 (Microservice Architecture Patterns) 定义 ⟹ 类型安全保证",
@@ -43974,7 +43990,7 @@
           "flags": [
             "ignore"
           ],
-          "lines": 24,
+          "lines": 60,
           "should_fail": false,
           "code_preview": "use std::sync::atomic::{AtomicU64, Ordering}; use tokio::sync::RwLock; use std::..."
         },
@@ -44487,7 +44503,7 @@
       "layer": "L6",
       "title": "Rust 惯用法谱系全景（Idioms Spectrum）",
       "positioning": "本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `02_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。",
-      "line_count": 1393,
+      "line_count": 1411,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust 惯用法谱系全景（Idioms Spectrum） 定义 ⟹ 类型安全保证",
@@ -44692,7 +44708,7 @@
         },
         {
           "flags": [],
-          "lines": 17,
+          "lines": 35,
           "should_fail": false,
           "code_preview": "// 惯用：epoch-based 内存回收（概念性） use crossbeam_epoch::{self as epoch, Atomic, Owned, ..."
         },
@@ -44816,7 +44832,7 @@
       "layer": "L6",
       "title": "Architecture Patterns（架构设计模式）",
       "positioning": "",
-      "line_count": 1270,
+      "line_count": 1276,
       "theorem_chains": [
         {
           "text": "- **定理**: Architecture Patterns（架构设计模式） 定义 ⟹ 类型安全保证",
@@ -44887,7 +44903,7 @@
           "flags": [
             "ignore"
           ],
-          "lines": 64,
+          "lines": 70,
           "should_fail": false,
           "code_preview": "// Layer 1: Domain Model — 零外部依赖 // src/domain/model.rs #[derive(Debug, Clone)] ..."
         },
@@ -45550,7 +45566,7 @@
       "layer": "L6",
       "title": "Workflow Theory & Formalization（工作流理论与形式化）",
       "positioning": "",
-      "line_count": 1391,
+      "line_count": 1409,
       "theorem_chains": [
         {
           "text": "- **定理**: Workflow Theory & Formalization（工作流理论与形式化） 定义 ⟹ 类型安全保证",
@@ -45621,7 +45637,7 @@
           "flags": [
             "ignore"
           ],
-          "lines": 29,
+          "lines": 39,
           "should_fail": false,
           "code_preview": "// 工作流作为类型 pub trait Workflow: Future {     type Input;     type Output;     typ..."
         },
@@ -45667,7 +45683,7 @@
         },
         {
           "flags": [],
-          "lines": 38,
+          "lines": 46,
           "should_fail": false,
           "code_preview": "// 去中心化工作流：基于事件总线的状态同步 use tokio::sync::broadcast;  pub struct DistributedWorkfl..."
         },
@@ -48113,7 +48129,7 @@
       "layer": "L6",
       "title": "Rust 操作系统内核开发",
       "positioning": "",
-      "line_count": 415,
+      "line_count": 490,
       "theorem_chains": [
         {
           "text": "- **定理**: 操作系统与内核：Rust 的系统级编程 定义 ⟹ 类型安全保证",
@@ -48161,6 +48177,30 @@
           "lines": 13,
           "should_fail": false,
           "code_preview": "// Theseus 中的 Cell 隔离（简化概念） struct Cell<T> {     data: T,     // 只有拥有 Cell 的引用才能..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "#![no_std] #![no_main]  use core::panic::PanicInfo;  #[no_mangle] pub extern \"C\"..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "#![no_std]  use core::ptr::{read_volatile, write_volatile};  const GPIO_BASE: us..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "#![no_std] #![feature(allocator_api)] // 仅作概念展示  use core::alloc::{GlobalAlloc, ..."
         },
         {
           "flags": [
@@ -48428,7 +48468,7 @@
       "layer": "L6",
       "title": "Rust 嵌入式图形开发",
       "positioning": "",
-      "line_count": 1045,
+      "line_count": 1162,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust 嵌入式图形系统开发 定义 ⟹ 类型安全保证",
@@ -48467,6 +48507,30 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 32,
+          "should_fail": false,
+          "code_preview": "use embedded_graphics::{     mono_font::{iso_8859_1::FONT_6X10, MonoTextStyle}, ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 46,
+          "should_fail": false,
+          "code_preview": "#![no_std]  use embedded_graphics::{     draw_target::DrawTarget,     geometry::..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "#![no_std]  const WIDTH: usize = 320; const HEIGHT: usize = 240; static mut FRAM..."
+        },
         {
           "flags": [
             "ignore"
@@ -49826,7 +49890,7 @@
       "layer": "L6",
       "title": "Security & Cryptography（安全与密码学）",
       "positioning": "",
-      "line_count": 928,
+      "line_count": 931,
       "theorem_chains": [
         {
           "text": "- **定理**: Security & Cryptography（安全与密码学） 定义 ⟹ 类型安全保证",
@@ -49931,9 +49995,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 18,
+          "lines": 21,
           "should_fail": false,
-          "code_preview": "use ring::aead::{Aes256Gcm, Nonce, UnboundKey, AES_256_GCM}; use ring::rand::Sec..."
+          "code_preview": "use ring::aead::{Aad, LessSafeKey, Nonce, UnboundKey, AES_256_GCM}; use ring::ra..."
         },
         {
           "flags": [
@@ -52984,7 +53048,7 @@
       "layer": "L6",
       "title": "Rust 量子计算生态",
       "positioning": "",
-      "line_count": 906,
+      "line_count": 992,
       "theorem_chains": [
         {
           "text": "- **定理**: Quantum Computing in Rust（量子计算与 Rust） 定义 ⟹ 类型安全保证",
@@ -53038,6 +53102,26 @@
           "lines": 21,
           "should_fail": false,
           "code_preview": "// Rust + rayon 并行化量子门应用示例 use rayon::prelude::*; use num_complex::Complex64;  f..."
+        },
+        {
+          "flags": [],
+          "lines": 31,
+          "should_fail": false,
+          "code_preview": "#[derive(Debug, Clone, Copy, PartialEq)] struct Complex { re: f64, im: f64 }  im..."
+        },
+        {
+          "flags": [],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "/// 参数移位规则：∂⟨O⟩/∂θ = (⟨O⟩(θ+s) - ⟨O⟩(θ-s)) / (2 sin(s)) /// 此处用简单可微函数模拟期望值的评估。 f..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "// 需要 crate: roqoqo, roqoqo-quest use roqoqo::{Circuit, operations::*}; use roqo..."
         },
         {
           "flags": [
@@ -53536,7 +53620,7 @@
       "layer": "L6",
       "title": "Rust 工业应用案例研究",
       "positioning": "",
-      "line_count": 357,
+      "line_count": 459,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust 工业级案例研究 定义 ⟹ 类型安全保证",
@@ -53584,6 +53668,26 @@
           "lines": 12,
           "should_fail": false,
           "code_preview": "// Android Rust 通过 AIDL 与 Java 通信 // Rust 实现 AIDL 接口 use binder;  pub struct MyS..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "// 需要 Linux 内核源码、kernel crate 及对应的 target/toolchain use kernel::prelude::*; use ..."
+        },
+        {
+          "flags": [],
+          "lines": 34,
+          "should_fail": false,
+          "code_preview": "/// 一个固定大小、运行时边界检查的缓冲区，避免传统 C 风格缓冲区溢出。 pub struct BoundedBuffer<const N: usize> ..."
+        },
+        {
+          "flags": [],
+          "lines": 25,
+          "should_fail": false,
+          "code_preview": "use std::sync::{Arc, Mutex}; use std::thread;  fn main() {     let counter = Arc..."
         }
       ],
       "sources": [],

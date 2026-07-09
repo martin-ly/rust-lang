@@ -7,6 +7,7 @@
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
+> **权威来源**: 本目录为参考索引；速查表入口见 [concept/00_meta/04_navigation/quick_reference.md](../../concept/00_meta/04_navigation/quick_reference.md)。核心主题（所有权、类型系统、泛型、并发、异步等）请见 [concept/01_foundation/README.md](../../concept/01_foundation/README.md)、[concept/02_intermediate/README.md](../../concept/02_intermediate/README.md)、[concept/03_advanced/README.md](../../concept/03_advanced/README.md)。
 
 本目录收录 Rust 参考文档、API 速查表和标准库分析。
 

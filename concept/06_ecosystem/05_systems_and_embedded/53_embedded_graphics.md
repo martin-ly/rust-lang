@@ -6,7 +6,7 @@
 > **EN**: Embedded Graphics Development with Rust
 > **Summary**: Embedded Graphics: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [综述级]
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [示例级 — 已补充代码]
 >
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -26,6 +26,10 @@
     - [3.2 lvgl-rs](#32-lvgl-rs)
     - [3.3 Slint UI](#33-slint-ui)
     - [3.4 egui](#34-egui)
+  - [代码示例：嵌入式图形核心模式](#代码示例嵌入式图形核心模式)
+    - [示例 1：使用 `MockDisplay` 测试像素级绘制](#示例-1使用-mockdisplay-测试像素级绘制)
+    - [示例 2：为 SPI 显示屏实现 `DrawTarget`](#示例-2为-spi-显示屏实现-drawtarget)
+    - [示例 3：手动操作 RGB565 帧缓冲](#示例-3手动操作-rgb565-帧缓冲)
   - [四、显示驱动与 HAL 集成](#四显示驱动与-hal-集成)
     - [4.1 接口协议](#41-接口协议)
     - [4.2 DMA 与帧缓冲传输](#42-dma-与帧缓冲传输)
@@ -37,8 +41,8 @@
   - [八、常见陷阱](#八常见陷阱)
   - [九、来源与延伸阅读](#九来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
-  - [十、边界测试：嵌入式图形的编译错误与运行时（Runtime）风险](#十边界测试嵌入式图形的编译错误与运行时风险)
-    - [10.1 边界测试：DMA 缓冲区未对齐到缓存行（运行时（Runtime）数据竞争）](#101-边界测试dma-缓冲区未对齐到缓存行运行时数据竞争)
+  - [十、边界测试：嵌入式图形的编译错误与运行时风险](#十边界测试嵌入式图形的编译错误与运行时风险)
+    - [10.1 边界测试：DMA 缓冲区未对齐到缓存行（运行时数据竞争）](#101-边界测试dma-缓冲区未对齐到缓存行运行时数据竞争)
     - [10.2 边界测试：绘制超出帧缓冲边界（内存损坏）](#102-边界测试绘制超出帧缓冲边界内存损坏)
     - [10.3 边界测试：中断上下文中阻塞 SPI 传输（实时性违例）](#103-边界测试中断上下文中阻塞-spi-传输实时性违例)
     - [补充定理链](#补充定理链)
@@ -432,6 +436,123 @@ egui: 即时模式 GUI (Immediate Mode GUI)
 > [来源: [egui on Embedded](https://github.com/emilk/egui/discussions/categories/embedded)]
 > **安全洞察**: egui 的 `no_std` 路径不依赖 `alloc`（可选），通过栈分配和固定大小缓冲区工作，这对无堆环境的嵌入式系统至关重要。
 > [来源: [egui no_std Support](https://docs.rs/egui/latest/egui/)]
+
+---
+
+## 代码示例：嵌入式图形核心模式
+
+> 以下示例使用 `rust,ignore`，因为它们依赖 `embedded-graphics`、`embedded-hal` 等外部 crate 或需要特定嵌入式 target（如 `thumbv7em-none-eabihf`），无法在本工作区直接编译。
+
+### 示例 1：使用 `MockDisplay` 测试像素级绘制
+
+```rust,ignore
+use embedded_graphics::{
+    mono_font::{iso_8859_1::FONT_6X10, MonoTextStyle},
+    pixelcolor::Rgb565,
+    prelude::*,
+    primitives::{Circle, PrimitiveStyle, Rectangle},
+    text::Text,
+};
+use embedded_graphics::mock_display::MockDisplay;
+
+fn draw_demo() -> MockDisplay<Rgb565> {
+    let mut display = MockDisplay::new();
+
+    let style = PrimitiveStyle::with_stroke(Rgb565::RED, 1);
+    Rectangle::new(Point::new(0, 0), Size::new(20, 10))
+        .into_styled(style)
+        .draw(&mut display)
+        .unwrap();
+
+    let fill = PrimitiveStyle::with_fill(Rgb565::GREEN);
+    Circle::new(Point::new(30, 30), 10)
+        .into_styled(fill)
+        .draw(&mut display)
+        .unwrap();
+
+    let text_style = MonoTextStyle::new(&FONT_6X10, Rgb565::WHITE);
+    Text::new("Rust", Point::new(10, 25), text_style)
+        .draw(&mut display)
+        .unwrap();
+
+    display
+}
+```
+
+### 示例 2：为 SPI 显示屏实现 `DrawTarget`
+
+```rust,ignore
+#![no_std]
+
+use embedded_graphics::{
+    draw_target::DrawTarget,
+    geometry::{Dimensions, Point, Size},
+    pixelcolor::Rgb565,
+    prelude::*,
+};
+use embedded_hal::blocking::spi::Write;
+use embedded_hal::digital::OutputPin;
+
+struct SpiDisplay<SPI, DC> {
+    spi: SPI,
+    dc: DC,
+    size: Size,
+}
+
+impl<SPI, DC, E> DrawTarget for SpiDisplay<SPI, DC>
+where
+    SPI: Write<u8, Error = E>,
+    DC: OutputPin,
+{
+    type Color = Rgb565;
+    type Error = E;
+
+    fn draw_iter<I>(&mut self, pixels: I) -> Result<(), Self::Error>
+    where
+        I: IntoIterator<Item = Pixel<Self::Color>>,
+    {
+        for Pixel(coord, color) in pixels {
+            if coord.x < 0 || coord.y < 0 {
+                continue;
+            }
+            // 实际实现：设置地址窗口，然后通过 SPI 发送像素数据
+            let _ = (coord, color.into_storage());
+        }
+        Ok(())
+    }
+}
+
+impl<SPI, DC> Dimensions for SpiDisplay<SPI, DC> {
+    fn bounding_box(&self) -> Rectangle {
+        Rectangle::new(Point::zero(), self.size)
+    }
+}
+```
+
+### 示例 3：手动操作 RGB565 帧缓冲
+
+```rust,ignore
+#![no_std]
+
+const WIDTH: usize = 320;
+const HEIGHT: usize = 240;
+static mut FRAMEBUFFER: [u16; WIDTH * HEIGHT] = [0; WIDTH * HEIGHT];
+
+/// 设置帧缓冲像素，带边界检查。
+/// 在真实硬件中通常位于 `no_std` + 特定嵌入式 target。
+fn set_pixel(x: usize, y: usize, rgb565: u16) {
+    if x < WIDTH && y < HEIGHT {
+        unsafe {
+            FRAMEBUFFER[y * WIDTH + x] = rgb565;
+        }
+    }
+}
+
+/// 将 RGB888 转换为 RGB565
+fn rgb888_to_rgb565(r: u8, g: u8, b: u8) -> u16 {
+    ((r as u16 & 0xF8) << 8) | ((g as u16 & 0xFC) << 3) | (b as u16 >> 3)
+}
+```
 
 ---
 

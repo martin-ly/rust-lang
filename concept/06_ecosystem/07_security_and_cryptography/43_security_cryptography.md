@@ -61,14 +61,14 @@
     - [9.1 反命题树](#91-反命题树)
     - [9.2 边界极限](#92-边界极限)
   - [十、边界测试](#十边界测试)
-    - [10.1 边界测试：非常量时间比较导致定时攻击（运行时（Runtime）信息泄露）](#101-边界测试非常量时间比较导致定时攻击运行时信息泄露)
+    - [10.1 边界测试：非常量时间比较导致定时攻击（运行时信息泄露）](#101-边界测试非常量时间比较导致定时攻击运行时信息泄露)
     - [10.2 边界测试：Nonce 复用破坏 AES-GCM 机密性（逻辑错误）](#102-边界测试nonce-复用破坏-aes-gcm-机密性逻辑错误)
     - [10.3 边界测试：低迭代次数 KDF 导致暴力破解（安全漏洞）](#103-边界测试低迭代次数-kdf-导致暴力破解安全漏洞)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 的 `ring` crate 在密码学中提供什么功能？（理解层）](#测验-1rust-的-ring-crate-在密码学中提供什么功能理解层)
-    - [测验 2：为什么密码学代码中绝对不应该使用 `unsafe` 或原始指针（Raw Pointer）？（理解层）](#测验-2为什么密码学代码中绝对不应该使用-unsafe-或原始指针理解层)
+    - [测验 2：为什么密码学代码中绝对不应该使用 `unsafe` 或原始指针？（理解层）](#测验-2为什么密码学代码中绝对不应该使用-unsafe-或原始指针理解层)
     - [测验 3：Rust 的常量时间比较（Constant-Time Comparison）为什么对密码学重要？（理解层）](#测验-3rust-的常量时间比较constant-time-comparison为什么对密码学重要理解层)
     - [测验 4：`rustls` 与 OpenSSL 相比在安全性上有什么优势？（理解层）](#测验-4rustls-与-openssl-相比在安全性上有什么优势理解层)
     - [测验 5：在 Rust 中存储密码时，为什么必须使用 Argon2 / bcrypt / scrypt 而非 SHA-256？（理解层）](#测验-5在-rust-中存储密码时为什么必须使用-argon2--bcrypt--scrypt-而非-sha-256理解层)
@@ -503,7 +503,7 @@ fn derive_keys(master_key: &[u8], salt: &[u8]) -> ([u8; 32], [u8; 32]) {
 > **[ring](https://briansmith.org/rustdoc/ring/)** 是 Brian Smith 开发的 Rust 密码学库，聚合了 BoringSSL（Google 的 OpenSSL 分支）的高性能、审计过的密码学原语。设计哲学：**最小 API 表面积、高安全性默认值、无 unsafe 暴露**。
 
 ```rust,ignore
-use ring::aead::{Aes256Gcm, Nonce, UnboundKey, AES_256_GCM};
+use ring::aead::{Aad, LessSafeKey, Nonce, UnboundKey, AES_256_GCM};
 use ring::rand::SecureRandom;
 use ring::signature::{Ed25519KeyPair, UnparsedPublicKey, ED25519};
 
@@ -512,8 +512,11 @@ fn ring_encrypt(key: &[u8; 32], plaintext: &[u8]) -> Result<Vec<u8>, ring::error
     let unbound_key = UnboundKey::new(&AES_256_GCM, key)?;
     let nonce_bytes = [0u8; 12];  // 实际应使用 CSPRNG
     let nonce = Nonce::assume_unique_for_key(nonce_bytes);
-    // ... ring 的 API 较为底层，通常直接使用 aes-gcm crate
-    todo!()
+    // ring 的 API 较为底层，通常直接使用 aes-gcm crate
+    let key = LessSafeKey::new(unbound_key);
+    let mut in_out = plaintext.to_vec();
+    key.seal_in_place_append_tag(nonce, Aad::empty(), &mut in_out)?;
+    Ok(in_out)
 }
 
 // ring 的 Ed25519 签名

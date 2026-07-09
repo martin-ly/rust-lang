@@ -5,7 +5,7 @@
 > **EN**: Industrial Rust Adoption Case Studies
 > **Summary**: Industrial Case Studies: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [示例级 — 已补充代码]
 > **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -216,6 +216,108 @@ Firecracker 是 AWS 开发的**微虚拟机监视器 (MicroVMM)**，用于 AWS L
 | 内存安全（Memory Safety） | 消除 VM 逃逸漏洞（关键安全需求） |
 | 小型二进制 | 静态链接，精简依赖 |
 | 并发处理 | 安全的多线程 I/O 虚拟化 |
+
+---
+
+## 代码示例：工业案例中的典型 Rust 模式
+
+### 示例 1：Linux 内核模块骨架（Rust for Linux）
+
+```rust,ignore
+// 需要 Linux 内核源码、kernel crate 及对应的 target/toolchain
+use kernel::prelude::*;
+use kernel::module;
+
+module! {
+    type: RustMinimal,
+    name: b"rust_minimal",
+    author: b"Rust for Linux",
+    description: b"Minimal Rust kernel module",
+    license: b"GPL",
+}
+
+struct RustMinimal;
+
+impl kernel::Module for RustMinimal {
+    fn init(_module: &'static ThisModule) -> Result<Self> {
+        pr_info!("Hello from Rust kernel module!\n");
+        Ok(RustMinimal)
+    }
+}
+
+impl Drop for RustMinimal {
+    fn drop(&mut self) {
+        pr_info!("Goodbye from Rust kernel module!\n");
+    }
+}
+```
+
+### 示例 2：类型安全的缓冲区抽象（Firecracker / Rustls 风格）
+
+```rust
+/// 一个固定大小、运行时边界检查的缓冲区，避免传统 C 风格缓冲区溢出。
+pub struct BoundedBuffer<const N: usize> {
+    data: [u8; N],
+    len: usize,
+}
+
+impl<const N: usize> BoundedBuffer<N> {
+    pub fn new() -> Self {
+        Self { data: [0; N], len: 0 }
+    }
+
+    pub fn push(&mut self, byte: u8) -> Result<(), &'static str> {
+        if self.len >= N {
+            return Err("buffer full");
+        }
+        self.data[self.len] = byte;
+        self.len += 1;
+        Ok(())
+    }
+
+    pub fn as_slice(&self) -> &[u8] {
+        &self.data[..self.len]
+    }
+}
+
+fn main() {
+    let mut buf = BoundedBuffer::<16>::new();
+    for b in b"hello" {
+        buf.push(*b).unwrap();
+    }
+    assert_eq!(buf.as_slice(), b"hello");
+    println!("安全缓冲区内容: {:?}", buf.as_slice());
+}
+```
+
+### 示例 3： fearless 并发的请求计数器（TiKV / 网络服务风格）
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0u64));
+    let mut handles = vec![];
+
+    for _ in 0..4 {
+        let c = Arc::clone(&counter);
+        handles.push(thread::spawn(move || {
+            for _ in 0..1000 {
+                *c.lock().unwrap() += 1;
+            }
+        }));
+    }
+
+    for h in handles {
+        h.join().unwrap();
+    }
+
+    let total = *counter.lock().unwrap();
+    assert_eq!(total, 4000);
+    println!("总请求数: {}", total);
+}
+```
 
 ---
 

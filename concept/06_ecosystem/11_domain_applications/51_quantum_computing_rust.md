@@ -5,7 +5,7 @@
 > **EN**: Rust in Quantum Computing Ecosystems
 > **Summary**: Quantum Computing Rust: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [实验级]
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [示例级 — 已补充代码]
 > **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) · [std API Docs](https://doc.rust-lang.org/std/index.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
@@ -30,6 +30,10 @@
     - [4.1 态向量模拟](#41-态向量模拟)
     - [4.2 张量网络收缩](#42-张量网络收缩)
     - [4.3 Rust 性能优势：SIMD 与并行化](#43-rust-性能优势simd-与并行化)
+  - [代码示例：量子计算核心模式](#代码示例量子计算核心模式)
+    - [示例 1：纯 Rust 实现单量子比特 Hadamard 变换](#示例-1纯-rust-实现单量子比特-hadamard-变换)
+    - [示例 2：参数移位梯度计算（VQE/QAOA 经典部分）](#示例-2参数移位梯度计算vqeqaoa-经典部分)
+    - [示例 3：使用 `roqoqo` 构建并运行贝尔态电路](#示例-3使用-roqoqo-构建并运行贝尔态电路)
   - [五、量子安全密码学](#五量子安全密码学)
     - [5.1 NIST PQC 标准与迁移时间线](#51-nist-pqc-标准与迁移时间线)
     - [5.2 CRYSTALS-Kyber / Dilithium 原理](#52-crystals-kyber--dilithium-原理)
@@ -409,6 +413,92 @@ Rust 在量子模拟中的性能优势:
 ```
 
 > **来源**: [Rayon Documentation](https://docs.rs/rayon/) · [Rust std::simd RFC](https://github.com/rust-lang/rfcs/pull/2948) · [LogosQ Performance Analysis](https://arxiv.org/abs/2512.23183)
+
+---
+
+## 代码示例：量子计算核心模式
+
+> 以下示例中，依赖外部 crate 的使用 `rust,ignore` 并注明所需 crate；纯 Rust 示例可直接在标准 Rust 环境中编译理解。
+
+### 示例 1：纯 Rust 实现单量子比特 Hadamard 变换
+
+```rust
+#[derive(Debug, Clone, Copy, PartialEq)]
+struct Complex { re: f64, im: f64 }
+
+impl Complex {
+    fn new(re: f64, im: f64) -> Self { Self { re, im } }
+    fn add(self, other: Self) -> Self {
+        Self::new(self.re + other.re, self.im + other.im)
+    }
+    fn sub(self, other: Self) -> Self {
+        Self::new(self.re - other.re, self.im - other.im)
+    }
+    fn scale(self, s: f64) -> Self {
+        Self::new(self.re * s, self.im * s)
+    }
+}
+
+fn apply_hadamard(state: &mut [Complex; 2]) {
+    let inv_sqrt2 = 1.0 / 2.0_f64.sqrt();
+    let a = state[0];
+    let b = state[1];
+    state[0] = a.add(b).scale(inv_sqrt2);
+    state[1] = a.sub(b).scale(inv_sqrt2);
+}
+
+fn main() {
+    let mut qubit = [Complex::new(1.0, 0.0), Complex::new(0.0, 0.0)];
+    apply_hadamard(&mut qubit);
+    println!("H|0> = [{:?}, {:?}]", qubit[0], qubit[1]);
+    assert!((qubit[0].re - 1.0 / 2.0_f64.sqrt()).abs() < 1e-12);
+}
+```
+
+### 示例 2：参数移位梯度计算（VQE/QAOA 经典部分）
+
+```rust
+/// 参数移位规则：∂⟨O⟩/∂θ = (⟨O⟩(θ+s) - ⟨O⟩(θ-s)) / (2 sin(s))
+/// 此处用简单可微函数模拟期望值的评估。
+fn expectation(theta: f64) -> f64 {
+    theta.cos()
+}
+
+fn parameter_shift_gradient(theta: f64, shift: f64) -> f64 {
+    let forward = expectation(theta + shift);
+    let backward = expectation(theta - shift);
+    (forward - backward) / (2.0 * shift.sin())
+}
+
+fn main() {
+    let theta = 0.5;
+    let grad = parameter_shift_gradient(theta, std::f64::consts::FRAC_PI_4);
+    let analytical = -theta.sin();
+    println!("数值梯度: {}, 解析梯度: {}", grad, analytical);
+    assert!((grad - analytical).abs() < 1e-10);
+}
+```
+
+### 示例 3：使用 `roqoqo` 构建并运行贝尔态电路
+
+```rust,ignore
+// 需要 crate: roqoqo, roqoqo-quest
+use roqoqo::{Circuit, operations::*};
+use roqoqo_quest::Backend;
+
+fn main() {
+    let mut circuit = Circuit::new();
+    circuit += Hadamard::new(0);
+    circuit += CNOT::new(0, 1);
+    circuit += DefinitionBit::new("ro".to_string(), 2, true);
+    circuit += MeasureQubit::new(0, "ro".to_string(), 0);
+    circuit += MeasureQubit::new(1, "ro".to_string(), 1);
+
+    let backend = Backend::new(2);
+    let result = backend.run_circuit(&circuit).unwrap();
+    println!("Bell state measurement: {:?}", result);
+}
+```
 
 ---
 

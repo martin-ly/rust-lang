@@ -6,7 +6,7 @@
 > **EN**: Rust for Operating System Kernel Development
 > **Summary**: Os Kernel: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [示例级 — 已补充代码]
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **来源**: [Rust for Linux](https://rust-for-linux.com/) · [Redox OS](https://www.redox-os.org/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
@@ -173,6 +173,81 @@ Rust + aya 的优势:
 | **bpf-linker** | eBPF 目标链接器 | Rust |
 | **cargo-bpf** | eBPF 构建工具链 | Rust |
 | **bpftool** | eBPF 加载/检查工具 | C |
+
+---
+
+## 代码示例：内核开发核心模式
+
+> 以下示例使用 `rust,ignore`，因为它们需要 `no_std` 目标、外部 crate（如 `kernel`、`volatile`）或特定内核编译环境，无法在本工作区直接编译。
+
+### 示例 1：最小 `no_std` 内核入口与 Panic Handler
+
+```rust,ignore
+#![no_std]
+#![no_main]
+
+use core::panic::PanicInfo;
+
+#[no_mangle]
+pub extern "C" fn _start() -> ! {
+    // 假设已将一个 UART/串口寄存器映射到 0x3F20_1000
+    let uart = 0x3F20_1000 as *mut u8;
+    for byte in b"Hello from Rust kernel!\n" {
+        unsafe { uart.write_volatile(*byte); }
+    }
+    loop {}
+}
+
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! {
+    loop {}
+}
+```
+
+### 示例 2：volatile 读取 MMIO 寄存器
+
+```rust,ignore
+#![no_std]
+
+use core::ptr::{read_volatile, write_volatile};
+
+const GPIO_BASE: usize = 0x3F20_0000;
+const GPIO_SET0: usize = GPIO_BASE + 0x1C;
+const GPIO_CLR0: usize = GPIO_BASE + 0x28;
+
+/// 设置 GPIO 引脚电平（高/低）。
+/// 需要目标 `x86_64-unknown-none` 或 ARM 裸机 target，且 MMIO 地址真实存在。
+unsafe fn gpio_set(pin: u8, high: bool) {
+    let reg = if high { GPIO_SET0 } else { GPIO_CLR0 };
+    write_volatile((reg + (pin as usize / 32) * 4) as *mut u32, 1 << (pin % 32));
+}
+```
+
+### 示例 3：自定义内核全局分配器骨架
+
+```rust,ignore
+#![no_std]
+#![feature(allocator_api)] // 仅作概念展示
+
+use core::alloc::{GlobalAlloc, Layout};
+
+struct KernelAllocator;
+
+unsafe impl GlobalAlloc for KernelAllocator {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        // 实际实现应调用 kmalloc 或伙伴系统分配器
+        // 此处为占位，仅展示 trait 边界
+        core::ptr::null_mut()
+    }
+
+    unsafe fn dealloc(&self, _ptr: *mut u8, _layout: Layout) {
+        // 实际实现应调用 kfree
+    }
+}
+
+#[global_allocator]
+static KERNEL_ALLOC: KernelAllocator = KernelAllocator;
+```
 
 ---
 

@@ -6,7 +6,7 @@
 
 ## 代码示例：Cargo Script 单文件程序
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [示例级 — 已补充代码]
 
 以下是一个完整的 Cargo Script 示例，演示 frontmatter 依赖声明与单文件执行：
 
@@ -25,8 +25,7 @@ chrono = "0.4"
 use clap::Parser;
 use chrono::Local;
 
-# [derive(Parser)]
-
+#[derive(Parser)]
 struct Args {
     #[arg(help = "输入 CSV 文件路径")]
     input: String,
@@ -41,7 +40,9 @@ fn main() {
 }
 
 ```
+
 运行方式：
+
 ```bash
 # 直接执行（Rust 1.79+）
 cargo run --manifest-path csv_filter.rs
@@ -49,6 +50,46 @@ cargo run --manifest-path csv_filter.rs
 # 或赋予执行权限后运行
 chmod +x csv_filter.rs && ./csv_filter.rs
 ```
+
+### 示例 1：零依赖脚本
+
+```rust,ignore
+#!/usr/bin/env cargo
+
+fn main() {
+    let args: Vec<String> = std::env::args().collect();
+    match args.get(1).map(String::as_str) {
+        Some("--help") | Some("-h") => println!("用法: {} [名字]", args[0]),
+        Some(name) => println!("你好, {}!", name),
+        None => println!("你好, Cargo Script!"),
+    }
+}
+```
+
+### 示例 2：使用 nightly `-Zscript` 运行（稳定化前/旧版本）
+
+```bash
+# 若稳定版尚未启用 cargo script，可用 nightly 的 -Zscript 标志
+cargo +nightly -Zscript run --manifest-path script.rs
+```
+
+### 示例 3：处理 JSON 的脚本
+
+```rust,ignore
+#!/usr/bin/env cargo
+```cargo
+[dependencies]
+serde_json = "1"
+```
+
+fn main() {
+    let input = r#"{"name":"Rust","year":2010}"#;
+    let parsed: serde_json::Value = serde_json::from_str(input).unwrap();
+    println!("{} 诞生于 {}", parsed["name"], parsed["year"]);
+}
+
+```
+
 >
 # Cargo Script：单文件 Rust 程序
 
@@ -317,8 +358,7 @@ graph TD
     ```
 use clap::Parser;
 
-# [derive(Parser)]
-
+#[derive(Parser)]
 struct Args {
     #[arg(short, long)]
     name: String,
@@ -358,8 +398,7 @@ Cargo Script 的**自包含性**使其成为 CI 脚本的理想选择：
     ```
 use serde::Deserialize;
 
-# [derive(Deserialize)]
-
+#[derive(Deserialize)]
 struct Record { age: u32, city: String }
 
 fn main() {

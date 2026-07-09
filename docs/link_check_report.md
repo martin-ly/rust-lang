@@ -2,6 +2,7 @@
 
 > **EN**: Link Check Report
 > **Summary**: 链接有效性检查报告 Link Check Report.
+> **说明**: 本文件是项目内部链接检查报告，记录链接审计结果，不属于 Rust 概念知识，因此不设 concept/ 权威页。
 
 ## 统计
 

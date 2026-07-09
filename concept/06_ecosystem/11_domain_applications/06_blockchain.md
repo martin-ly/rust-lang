@@ -757,14 +757,17 @@ impl Contract {
 
 ### 10.3 边界测试：加密签名的类型安全（编译错误）
 
-```rust,compile_fail
-use secp256k1::{SecretKey, PublicKey, Message};
+```rust,ignore
+// 需要 secp256k1 与 sha2 crate
+use secp256k1::{Message, Secp256k1, SecretKey};
+use sha2::{Digest, Sha256};
 
 fn sign(sk: &SecretKey, msg: &[u8]) -> Vec<u8> {
-    // ❌ 编译错误/逻辑错误: msg 未哈希为 32 字节直接使用
-    // let msg = Message::from_slice(msg).unwrap(); // 可能 panic（长度不是32）
-    // secp256k1 要求消息是 32 字节哈希值
-    todo!()
+    // ✅ 正确做法：先哈希为 32 字节，再构造 Message
+    let msg_hash: [u8; 32] = Sha256::digest(msg).into();
+    let message = Message::from_slice(&msg_hash).expect("SHA-256 produces 32 bytes");
+    let secp = Secp256k1::new();
+    secp.sign_ecdsa(&message, sk).serialize_der().to_vec()
 }
 ```
 
@@ -781,14 +784,13 @@ fn sign(sk: &SecretKey, msg: &[u8]) -> Vec<u8> {
 ```rust,ignore
 #![no_std]
 
+use sha2::{Digest, Sha256};
+
 fn hash_data(data: &[u8]) -> [u8; 32] {
-    // ❌ 编译错误: sha2 的 Sha256::new() 在 no_std 中可用，
-    // 但某些哈希库依赖 Vec/Box
-    // use sha2::{Sha256, Digest};
-    // let mut hasher = Sha256::new();
-    // hasher.update(data);
-    // hasher.finalize().into()
-    todo!()
+    // ✅ no_std 下可用：sha2 开启 default-features = false
+    let mut hasher = Sha256::new();
+    hasher.update(data);
+    hasher.finalize().into()
 }
 ```
 

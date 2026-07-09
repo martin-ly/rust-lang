@@ -7,6 +7,8 @@
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
+> **权威来源**: 性能测试与基准测试概念见 [concept/06_ecosystem/09_testing_and_quality/17_benchmarking.md](../../concept/06_ecosystem/09_testing_and_quality/17_benchmarking.md) 与 [concept/06_ecosystem/10_performance/15_performance_optimization.md](../../concept/06_ecosystem/10_performance/15_performance_optimization.md)。
+> **说明**: 本文件为项目性能测试报告，记录工具、方法与数据，不属于 Rust 概念知识本身，不建立 concept/ 权威页。
 
 本文件记录 Rust 代码性能测试的方法、工具和基准数据。
 

@@ -1,5 +1,7 @@
 # Rust 1.94 引入特性速查卡（1.96+ 稳定可用）/ Rust 1.94 Features Cheatsheet (Stable in 1.96+) {#rust-194-引入特性速查卡196-稳定可用-rust-194-features-cheatsheet-stable-in-196}
 
+> **权威来源**: Rust 1.94 引入特性深度解释见 [concept/07_future/00_version_tracking/rust_1_94_stabilized.md](../../../concept/07_future/00_version_tracking/rust_1_94_stabilized.md)。
+
 > **EN**: Rust 1.94 Features Cheatsheet Stable in 1.96+
 > **Summary**: Rust 1.94 引入特性速查卡 1.96+ 稳定可用 / Rust 1.94 Features Cheatsheet Stable in 1.96+.
 > **分级**: [A]

@@ -1508,7 +1508,7 @@ fn tail_recursive_factorial(n: u32, acc: u32) -> u32 {
 
 ### Rust 1.91 改进概述
 
-Rust 1.91 优化了条件语句和模式匹配：
+Rust 1.91 优化了条件语句和模式匹配（Pattern Matching）：
 
 - **编译时条件计算**: const 函数中可以进行条件计算
 - **模式匹配优化**: 编译时间减少，性能提升

@@ -50,8 +50,8 @@
     - [3.2 状态机语义](#32-状态机语义)
     - [3.3 执行语义](#33-执行语义)
   - [四、Rust 中的工作流实现](#四rust-中的工作流实现)
-    - [4.1 异步（Async）机制与工作流同构性](#41-异步机制与工作流同构性)
-    - [4.2 类型系统（Type System）映射](#42-类型系统映射)
+    - [4.1 异步机制与工作流同构性](#41-异步机制与工作流同构性)
+    - [4.2 类型系统映射](#42-类型系统映射)
     - [4.3 状态机转换](#43-状态机转换)
   - [五、形式化验证](#五形式化验证)
     - [5.1 Petri 网模型](#51-petri-网模型)
@@ -66,8 +66,8 @@
     - [7.2 边界极限](#72-边界极限)
   - [八、边界测试](#八边界测试)
     - [8.1 边界测试：状态机转换遗漏导致死代码（编译/逻辑错误）](#81-边界测试状态机转换遗漏导致死代码编译逻辑错误)
-    - [8.2 边界测试：Petri 网可达性分析的 state explosion（运行时（Runtime）性能）](#82-边界测试petri-网可达性分析的-state-explosion运行时性能)
-    - [8.3 边界测试：工作流循环缺乏终止条件导致无限执行（运行时（Runtime）错误）](#83-边界测试工作流循环缺乏终止条件导致无限执行运行时错误)
+    - [8.2 边界测试：Petri 网可达性分析的 state explosion（运行时性能）](#82-边界测试petri-网可达性分析的-state-explosion运行时性能)
+    - [8.3 边界测试：工作流循环缺乏终止条件导致无限执行（运行时错误）](#83-边界测试工作流循环缺乏终止条件导致无限执行运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -528,8 +528,18 @@ where
     type Output = Result<T2, E>;
 
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
-        // ... 先 poll first，完成后用输出作为 second 的输入
-        todo!()
+        // 先 poll first，完成后用输出作为 second 的输入
+        let this = unsafe { self.get_unchecked_mut() };
+        let first = unsafe { Pin::new_unchecked(&mut this.first) };
+        match first.poll(cx) {
+            Poll::Pending => Poll::Pending,
+            Poll::Ready(Ok(v)) => {
+                // 实际应用中：将 v 作为 second 的输入构造新的 workflow
+                let second = unsafe { Pin::new_unchecked(&mut this.second) };
+                second.poll(cx)
+            }
+            Poll::Ready(Err(e)) => Poll::Ready(Err(e)),
+        }
     }
 }
 
@@ -1018,8 +1028,16 @@ impl DistributedWorkflowWorker {
     }
 
     async fn recover_from_store(&self) {
-        // 从事件存储重放所有事件重建状态
-        todo!()
+        // 从事件存储重放所有事件重建状态（示意）
+        let events = self.load_all_events().await;
+        let mut states = self.local_state.write().await;
+        states.clear();
+        for event in events {
+            states
+                .entry(event.instance_id)
+                .or_insert_with(WorkflowState::default)
+                .apply(event);
+        }
     }
 }
 ```

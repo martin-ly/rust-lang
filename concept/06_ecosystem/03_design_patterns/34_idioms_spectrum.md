@@ -79,18 +79,18 @@
     - [12.2 惯用法效率-认知负荷象限图](#122-惯用法效率-认知负荷象限图)
     - [12.3 惯用法效率矩阵](#123-惯用法效率矩阵)
   - [十三、定理推理链](#十三定理推理链)
-    - [定理一致性（Coherence）矩阵（惯用法谱系专集）](#定理一致性矩阵惯用法谱系专集)
+    - [定理一致性矩阵（惯用法谱系专集）](#定理一致性矩阵惯用法谱系专集)
   - [十四、相关概念链接（L0-L7 映射）](#十四相关概念链接l0-l7-映射)
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
   - [十五、惯用法选择的认知路径](#十五惯用法选择的认知路径)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：惯用法谱系的编译错误](#十边界测试惯用法谱系的编译错误)
-    - [10.1 边界测试：`unwrap` 的滥用（运行时（Runtime） panic）](#101-边界测试unwrap-的滥用运行时-panic)
+    - [10.1 边界测试：`unwrap` 的滥用（运行时 panic）](#101-边界测试unwrap-的滥用运行时-panic)
     - [10.2 边界测试：`clone` 的隐式成本（逻辑错误）](#102-边界测试clone-的隐式成本逻辑错误)
     - [10.3 边界测试：Clippy 警告的编译错误等价（编译错误）](#103-边界测试clippy-警告的编译错误等价编译错误)
     - [10.4 边界测试：`String` 与 `&str` 的类型不匹配（编译错误）](#104-边界测试string-与-str-的类型不匹配编译错误)
-    - [10.5 边界测试：`Default::default()` 与类型推断（Type Inference）的歧义（编译错误）](#105-边界测试defaultdefault-与类型推断的歧义编译错误)
+    - [10.5 边界测试：`Default::default()` 与类型推断的歧义（编译错误）](#105-边界测试defaultdefault-与类型推断的歧义编译错误)
     - [10.7 边界测试：`std::mem::replace` 与 `take` 的惯用选择（逻辑错误）](#107-边界测试stdmemreplace-与-take-的惯用选择逻辑错误)
     - [10.3 边界测试：`Default` 派生与手动实现的语义差异（逻辑错误）](#103-边界测试default-派生与手动实现的语义差异逻辑错误)
     - [补充定理链](#补充定理链)
@@ -98,7 +98,7 @@
     - [测验 1：`Default` trait 的用途是什么？如何为自定义类型实现它？（理解层）](#测验-1default-trait-的用途是什么如何为自定义类型实现它理解层)
     - [测验 2：`AsRef` 与 `Borrow` trait 在语义上有什么区别？（理解层）](#测验-2asref-与-borrow-trait-在语义上有什么区别理解层)
     - [测验 3：什么是"早返回"（Early Return）模式？Rust 中通常如何实现？（理解层）](#测验-3什么是早返回early-return模式rust-中通常如何实现理解层)
-    - [测验 4：`todo!()` 和 `unimplemented!()` 宏（Macro）在开发中有什么用途？（理解层）](#测验-4todo-和-unimplemented-宏在开发中有什么用途理解层)
+    - [测验 4：`todo!()` 和 `unimplemented!()` 宏在开发中有什么用途？（理解层）](#测验-4todo-和-unimplemented-宏在开发中有什么用途理解层)
     - [测验 5：Rust 的 `must_use` 属性有什么作用？什么类型的返回值通常应该标记它？（理解层）](#测验-5rust-的-must_use-属性有什么作用什么类型的返回值通常应该标记它理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -808,6 +808,7 @@ let received = rx.recv().unwrap(); // 所有权从 channel 转移到 received
 ```rust
 // 惯用：epoch-based 内存回收（概念性）
 use crossbeam_epoch::{self as epoch, Atomic, Owned, Shared};
+use std::sync::atomic::Ordering;
 
 struct Node<T> {
     data: T,
@@ -818,9 +819,26 @@ struct Node<T> {
 fn pop<T>(head: &Atomic<Node<T>>) -> Option<T> {
     let guard = &epoch::pin(); // 进入 epoch
     let shared = head.load(Ordering::Acquire, guard);
-    // ... 安全地操作 shared
-    // guard 退出时，延迟释放的节点在此之后安全回收
-    todo!()
+
+    if shared.is_null() {
+        return None;
+    }
+
+    unsafe {
+        let node = &*shared.as_raw();
+        let next = node.next.load(Ordering::Acquire, guard);
+        // 尝试将 head 更新为 next
+        if head
+            .compare_exchange(shared, next, Ordering::Release, Ordering::Relaxed, guard)
+            .is_ok()
+        {
+            let data = std::ptr::read(&node.data);
+            guard.defer_destroy(shared); // 延迟释放旧节点
+            Some(data)
+        } else {
+            None
+        }
+    }
 }
 ```
 

@@ -68,13 +68,13 @@
   - [十、边界测试](#十边界测试)
     - [10.1 边界测试：适配器绕过端口直接依赖核心（编译错误）](#101-边界测试适配器绕过端口直接依赖核心编译错误)
     - [10.2 边界测试：跨层依赖导致循环依赖（编译错误）](#102-边界测试跨层依赖导致循环依赖编译错误)
-    - [10.3 边界测试：Serverless 超时导致状态不一致（运行时（Runtime）错误）](#103-边界测试serverless-超时导致状态不一致运行时错误)
+    - [10.3 边界测试：Serverless 超时导致状态不一致（运行时错误）](#103-边界测试serverless-超时导致状态不一致运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 中常用的分层架构（Layered Architecture）如何划分？（理解层）](#测验-1rust-中常用的分层架构layered-architecture如何划分理解层)
     - [测验 2：六边形架构（Hexagonal Architecture / Ports and Adapters）在 Rust 中如何体现？（理解层）](#测验-2六边形架构hexagonal-architecture--ports-and-adapters在-rust-中如何体现理解层)
-    - [测验 3：Rust 的强类型系统（Type System）对洋葱架构（Onion Architecture）有什么天然支持？（理解层）](#测验-3rust-的强类型系统对洋葱架构onion-architecture有什么天然支持理解层)
+    - [测验 3：Rust 的强类型系统对洋葱架构（Onion Architecture）有什么天然支持？（理解层）](#测验-3rust-的强类型系统对洋葱架构onion-architecture有什么天然支持理解层)
     - [测验 4：什么是"依赖倒置原则"（DIP）？Rust 的 trait 如何帮助实现它？（理解层）](#测验-4什么是依赖倒置原则diprust-的-trait-如何帮助实现它理解层)
     - [测验 5：在 Rust 中，为什么 Repository 模式比直接在 Service 中调用 SQL 更受推荐？（理解层）](#测验-5在-rust-中为什么-repository-模式比直接在-service-中调用-sql-更受推荐理解层)
   - [认知路径](#认知路径)
@@ -596,8 +596,14 @@ pub struct PostgresOrderRepository { pool: PgPool }
 // 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 impl OrderRepository for PostgresOrderRepository {
     async fn save(&self, order: &Order) -> Result<(), RepositoryError> {
-        // PostgreSQL 具体实现...
-        todo!()
+        // PostgreSQL 具体实现（示意）
+        sqlx::query("INSERT INTO orders (id, total) VALUES ($1, $2)")
+            .bind(&order.id)
+            .bind(order.total)
+            .execute(&self.pool)
+            .await
+            .map_err(RepositoryError::from)?;
+        Ok(())
     }
 }
 ```
