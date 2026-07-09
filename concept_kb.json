@@ -13372,7 +13372,7 @@
       "layer": "L1",
       "title": "常用开发工具（Useful Development Tools）",
       "positioning": "",
-      "line_count": 208,
+      "line_count": 209,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将代码编写、格式化、lint、测试、文档、发布串联为可重复工作流。",
@@ -13404,6 +13404,7 @@
         "../../06_ecosystem/01_cargo/66_cargo_subcommands_and_plugins.md",
         "../../06_ecosystem/01_cargo/80_cargo_getting_started.md",
         "../../06_ecosystem/09_testing_and_quality/14_documentation.md",
+        "../00_start/00_start.md",
         "16_testing_basics.md"
       ],
       "transitions": 0,
@@ -15878,7 +15879,7 @@
       "layer": "L2",
       "title": "Rust Editions（语言版本）",
       "positioning": "",
-      "line_count": 195,
+      "line_count": 196,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将编译器版本、Edition、语法行为、迁移路径串联起来。",
@@ -15924,6 +15925,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../03_advanced/01_async/25_async_advanced.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/01_cargo/76_cargo_196_features.md",
@@ -36355,7 +36358,7 @@
       "cross_references": [
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../01_foundation/04_control_flow/41_statements_and_expressions.md",
-        "../../03_advanced/01_async_await/01_async_await.md",
+        "../../03_advanced/01_async/02_async.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/06_low_level_patterns/33_variables.md",
         "../03_operational_semantics/39_constant_evaluation.md",
@@ -41497,7 +41500,6 @@
       "cross_references": [
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../02_intermediate/01_generics/02_generics.md",
-        "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../05_systems_and_embedded/17_cross_compilation.md",

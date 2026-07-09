@@ -10,6 +10,7 @@
 > **双维定位**: S×App — 规范应用
 > **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Cargo Getting Started](../../06_ecosystem/01_cargo/80_cargo_getting_started.md) · [Module System](../05_modules_and_visibility/10_module_system.md)
 > **后置概念**: [Async Advanced](../../03_advanced/01_async/25_async_advanced.md) · [Cargo 1.96 Features](../../06_ecosystem/01_cargo/76_cargo_196_features.md) · [Rust Release Process](33_rust_release_process.md) · [Edition Guide](../../07_future/01_edition_roadmap/44_edition_guide.md)
+> **L1 基础依赖**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Module System](../05_modules_and_visibility/10_module_system.md)
 > **定理链**: Compiler Version → Edition → Syntax/Behavior → Migration
 >
 > **来源**: [The Rust Programming Language — Appendix E: Editions](https://doc.rust-lang.org/book/appendix-05-editions.html) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html) · [Rust Reference — Editions](https://doc.rust-lang.org/reference/items.html?search=edition)

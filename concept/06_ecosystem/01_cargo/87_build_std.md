@@ -255,7 +255,7 @@ impl<T> Register<T> {
 - [Cargo 配置与环境变量](83_cargo_configuration.md)
 - [所有权系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 - [泛型与 Trait Bounds](../../02_intermediate/01_generics/02_generics.md)
-- [unsafe 与裸机内存](../../03_advanced/02_unsafe/01_unsafe.md)
+- [unsafe 与裸机内存](../../03_advanced/02_unsafe/03_unsafe.md)
 
 ## 参考
 

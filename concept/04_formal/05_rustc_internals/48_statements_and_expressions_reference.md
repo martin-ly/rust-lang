@@ -153,7 +153,7 @@ let x = unsafe { *raw_ptr };
 | [Destructors](43_destructors.md) | 临时值作用域决定析构时机 |
 | [Constant Evaluation](../03_operational_semantics/39_constant_evaluation.md) | 常量上下文限制可用表达式 |
 | [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) | `unsafe` 块是特殊表达式 |
-| [Async/Await](../../03_advanced/01_async_await/01_async_await.md) | `await` 表达式只能在 async 上下文中使用 |
+| [Async/Await](../../03_advanced/01_async/02_async.md) | `await` 表达式只能在 async 上下文中使用 |
 
 ---
 

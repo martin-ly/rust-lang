@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-09T02:17:06.620539+00:00
+> 生成时间: 2026-07-09T02:19:33.505729+00:00
 > 扫描文件数: 459
 
 ## 全局指标
@@ -13,7 +13,7 @@
 | 总 Mermaid 图 | 606 | ≥50 | ✅ |
 | 编译验证代码块 | 4456 | ≥150 | ✅ |
 | 定理矩阵总行 | 19293 | — | — |
-| 死链数量 | 2 | 0 | ❌ |
+| 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 277 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
 | 前置概念覆盖率 | 369/396 | 100% | ⚠️ |
@@ -97,13 +97,6 @@
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_92_stabilized.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_93_stabilized.md | L7 | 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_94_stabilized.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
-
-## 死链检测
-
-| 来源文件 | 引用路径 | 解析后的绝对路径 |
-|:---|:---|:---|
-| E:\_src\rust-lang\concept\04_formal\05_rustc_internals\48_statements_and_expressions_reference.md | ../../03_advanced/01_async_await/01_async_await.md | E:\_src\rust-lang\concept\03_advanced\01_async_await\01_async_await.md |
-| E:\_src\rust-lang\concept\06_ecosystem\01_cargo\87_build_std.md | ../../03_advanced/02_unsafe/01_unsafe.md | E:\_src\rust-lang\concept\03_advanced\02_unsafe\01_unsafe.md |
 
 ## 文件详细统计
 
@@ -220,7 +213,7 @@
 | E:\_src\rust-lang\concept\01_foundation\08_error_handling\33_error_handling_control_flow.md | L1 | 212 | 0 | 2 | 0 | 1 | 1 | 7 | 1 | ✅ | ✅ | ✅ | 初学者 | 入门实践级 |
 | E:\_src\rust-lang\concept\01_foundation\09_macros_basics\12_attributes_and_macros.md | L1 | 914 | 3 | 2 | 0 | 3 | 1 | 14 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\10_testing_basics\16_testing_basics.md | L1 | 741 | 3 | 2 | 0 | 3 | 1 | 8 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| E:\_src\rust-lang\concept\01_foundation\10_testing_basics\42_useful_development_tools.md | L1 | 208 | 4 | 0 | 0 | 1 | 2 | 0 | 0 | ✅ | ✅ | ✅ | 初学者 | 参考级 |
+| E:\_src\rust-lang\concept\01_foundation\10_testing_basics\42_useful_development_tools.md | L1 | 209 | 4 | 0 | 0 | 1 | 2 | 0 | 0 | ✅ | ✅ | ✅ | 初学者 | 参考级 |
 | E:\_src\rust-lang\concept\01_foundation\11_quizzes\24_quiz_type_system.md | L1 | 539 | 7 | 2 | 0 | 1 | 0 | 14 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\11_quizzes\25_quiz_error_handling.md | L1 | 652 | 7 | 2 | 0 | 1 | 0 | 18 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\11_quizzes\26_quiz_modules_testing.md | L1 | 741 | 7 | 2 | 0 | 1 | 0 | 22 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
@@ -233,7 +226,7 @@
 | E:\_src\rust-lang\concept\02_intermediate\00_traits\19_advanced_traits.md | L2 | 957 | 3 | 3 | 0 | 3 | 1 | 21 | 6 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\02_intermediate\00_traits\28_construction_and_initialization.md | L2 | 268 | 7 | 2 | 0 | 1 | 0 | 5 | 6 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
 | E:\_src\rust-lang\concept\02_intermediate\00_traits\31_derive_traits.md | L2 | 268 | 7 | 2 | 0 | 1 | 0 | 10 | 6 | ✅ | ✅ | ✅ | 初学者 | 参考级 |
-| E:\_src\rust-lang\concept\02_intermediate\00_traits\32_editions.md | L2 | 195 | 4 | 0 | 0 | 1 | 1 | 3 | 0 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
+| E:\_src\rust-lang\concept\02_intermediate\00_traits\32_editions.md | L2 | 196 | 4 | 0 | 0 | 1 | 1 | 3 | 0 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
 | E:\_src\rust-lang\concept\02_intermediate\00_traits\33_rust_release_process.md | L2 | 93 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 进阶 | 参考级 |
 | E:\_src\rust-lang\concept\02_intermediate\00_traits\39_dispatch_mechanisms.md | L2 | 1987 | 0 | 0 | 0 | 0 | 0 | 40 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\02_intermediate\01_generics\02_generics.md | L2 | 3108 | 16 | 2 | 0 | 7 | 6 | 68 | 8 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
