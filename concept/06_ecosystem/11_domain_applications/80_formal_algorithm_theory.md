@@ -13,6 +13,7 @@
 > **前置概念**: [算法复杂度分析](78_algorithm_complexity_analysis.md) · [形式化方法](../../04_formal/04_model_checking/13_formal_methods.md) · [Hoare 逻辑](../../04_formal/03_operational_semantics/15_hoare_logic.md)
 > **后置概念**: [算法工程实践](76_algorithm_engineering_practice.md)
 > **相关概念**: [数据结构与 Rust](77_data_structures_in_rust.md) · [算法与竞赛编程](29_algorithms_competitive_programming.md) · [形式化设计模式理论](../03_design_patterns/38_formal_design_pattern_theory.md) · [前沿算法技术](79_cutting_edge_algorithms.md)
+> **L5 对比视角**: [范式矩阵](../../05_comparative/00_paradigms/03_paradigm_matrix.md) · [Rust vs C++ 形式系统与性能](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [安全边界对比](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md)
 >
 > **来源**: [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/) · [Sipser — Introduction to the Theory of Computation](https://math.mit.edu/~sipser/book.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 

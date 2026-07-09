@@ -13,6 +13,7 @@
 > **前置概念**: [算法复杂度分析](78_algorithm_complexity_analysis.md) · [算法工程实践](76_algorithm_engineering_practice.md)
 > **后置概念**: [量子计算生态](51_quantum_computing_rust.md) · [机器学习生态](46_machine_learning_ecosystem.md)
 > **相关概念**: [数据结构与 Rust](77_data_structures_in_rust.md) · [算法与竞赛编程](29_algorithms_competitive_programming.md) · [形式化算法理论](80_formal_algorithm_theory.md) · [工程实践与生产级模式](../03_design_patterns/82_engineering_and_production_patterns.md) · [前沿研究与创新模式](../03_design_patterns/39_frontier_research_and_innovative_patterns.md)
+> **L5 对比视角**: [范式矩阵](../../05_comparative/00_paradigms/03_paradigm_matrix.md) · [Rust vs C++ 性能与抽象边界](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [安全边界对比](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md)
 >
 > **来源**: [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Mining of Massive Datasets](http://www.mmds.org/)
 

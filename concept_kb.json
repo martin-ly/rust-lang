@@ -44361,7 +44361,7 @@
       "layer": "L6",
       "title": "C09 设计模式 - 术语表",
       "positioning": "",
-      "line_count": 231,
+      "line_count": 232,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -51692,7 +51692,7 @@
       "layer": "L6",
       "title": "前沿算法技术",
       "positioning": "",
-      "line_count": 217,
+      "line_count": 218,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -51721,6 +51721,9 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../05_comparative/00_paradigms/03_paradigm_matrix.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/03_domain_comparisons/04_safety_boundaries.md",
         "../03_design_patterns/39_frontier_research_and_innovative_patterns.md",
         "../03_design_patterns/82_engineering_and_production_patterns.md",
         "29_algorithms_competitive_programming.md",
@@ -51751,7 +51754,7 @@
       "layer": "L6",
       "title": "形式化算法理论",
       "positioning": "",
-      "line_count": 239,
+      "line_count": 246,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -51784,6 +51787,9 @@
       "cross_references": [
         "../../04_formal/03_operational_semantics/15_hoare_logic.md",
         "../../04_formal/04_model_checking/13_formal_methods.md",
+        "../../05_comparative/00_paradigms/03_paradigm_matrix.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/03_domain_comparisons/04_safety_boundaries.md",
         "../03_design_patterns/38_formal_design_pattern_theory.md",
         "29_algorithms_competitive_programming.md",
         "76_algorithm_engineering_practice.md",
