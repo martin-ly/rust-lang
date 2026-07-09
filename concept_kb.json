@@ -42711,7 +42711,7 @@
       "layer": "L6",
       "title": "模式选择最佳实践 (Pattern Selection Best Practices)",
       "positioning": "",
-      "line_count": 725,
+      "line_count": 726,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -42789,7 +42789,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 10,
+      "matrix_rows": 11,
       "pre_post": {
         "pre": [],
         "post": [
@@ -42804,7 +42804,7 @@
       "layer": "L6",
       "title": "形式化设计模式理论 (Formal Design Pattern Theory)",
       "positioning": "",
-      "line_count": 971,
+      "line_count": 972,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -42912,7 +42912,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 14,
+      "matrix_rows": 15,
       "pre_post": {
         "pre": [],
         "post": [
@@ -45151,7 +45151,7 @@
       "layer": "L6",
       "title": "Rust 嵌入式系统开发",
       "positioning": "探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全（Memory Safety）如何保证关键系统的可靠性。",
-      "line_count": 970,
+      "line_count": 973,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust 嵌入式系统开发 定义 ⟹ 类型安全保证",
@@ -49565,7 +49565,7 @@
       "layer": "L6",
       "title": "算法与竞赛编程 (Algorithms & Competitive Programming)",
       "positioning": "",
-      "line_count": 1258,
+      "line_count": 1257,
       "theorem_chains": [
         {
           "text": "- **定理**: 算法与竞赛编程 (Algorithms & Competitive Programming) 定义 ⟹ 类型安全保证",
@@ -51032,7 +51032,7 @@
       "layer": "L6",
       "title": "形式化算法理论",
       "positioning": "",
-      "line_count": 59,
+      "line_count": 69,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
