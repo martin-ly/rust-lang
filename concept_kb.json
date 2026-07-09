@@ -26420,7 +26420,7 @@
       "layer": "L3",
       "title": "Rust 内存模型（Memory Model）",
       "positioning": "",
-      "line_count": 149,
+      "line_count": 239,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将字节模型、provenance 和 UB 边界串联起来。",
@@ -26456,6 +26456,42 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "use std::mem::MaybeUninit;  let mut x: MaybeUninit<i32> = MaybeUninit::uninit();..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use std::alloc::{alloc, dealloc, Layout};  unsafe {     let layout = Layout::new..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "let x = 42u64; let ptr = &x as *const u64; let addr = ptr as usize;  // 危险：round..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 15,
+          "should_fail": true,
+          "code_preview": "#[repr(C)] struct WithPadding {     a: u8,     b: u32, }  unsafe {     let s: Wi..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "let v = vec![1, 2, 3]; let ptr = v.as_ptr(); let addr = ptr as usize; drop(v); /..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "let mut x = 0; let r1 = &mut x as *mut i32; let r2 = &mut x as *mut i32; unsafe ..."
         }
       ],
       "sources": [],
@@ -26472,7 +26508,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 15,
+      "matrix_rows": 24,
       "pre_post": {
         "pre": [
           "[Unsafe Rust](03_unsafe.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Behavior Considered Undefined](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md)"
@@ -52415,7 +52451,7 @@
       "layer": "L7",
       "title": "Rust 的发布流程与 Nightly Rust",
       "positioning": "",
-      "line_count": 128,
+      "line_count": 216,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -52436,7 +52472,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 11,
+      "matrix_rows": 17,
       "pre_post": {
         "pre": [
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Editions](../01_edition_roadmap/44_edition_guide.md)"
@@ -54096,10 +54132,47 @@
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
-      "line_count": 75,
+      "line_count": 175,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::num::NonZeroU32;  let n = NonZeroU32::new(0b0001_0100).unwrap(); assert..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "const BELL: char = '\\u{0007}'; const IS_CTRL: bool = BELL.is_control(); assert!(..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use std::ptr;  fn foo() {} fn bar() {}  assert!(ptr::fn_addr_eq(foo, foo)); asse..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use std::mem::{size_of_val, align_of_val};  const ARR: [u8; 8] = [0; 8]; const S..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "let b = Box::new(42); let p: *const i32 = Box::as_ptr(&b); assert!(!p.is_null())..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "let x: Option<i32> = Some(42); assert_eq!(x.as_slice(), &[42]);  let y: Option<i..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../../docs/06_toolchain/06_21_rust_1_97_features.md",
@@ -54111,7 +54184,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "matrix_rows": 4,
       "pre_post": {
         "pre": [
           "[Rust 版本跟踪](05_rust_version_tracking.md) · [Rust 1.96 稳定特性](rust_1_96_stabilized.md)"

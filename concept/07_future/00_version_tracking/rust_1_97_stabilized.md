@@ -54,7 +54,107 @@ Rust 1.97.0 主要带来以下类别的改进：
 
 ---
 
-## 2. 权威来源与示例
+## 2. 主要稳定特性详解
+
+### 2.1 `NonZero*` 位查询方法
+
+`NonZeroUsize`、`NonZeroU32` 等类型新增 `highest_one`、`lowest_one`、`bit_width` 方法：
+
+```rust
+use std::num::NonZeroU32;
+
+let n = NonZeroU32::new(0b0001_0100).unwrap();
+assert_eq!(n.lowest_one(), NonZeroU32::new(0b0000_0100).unwrap());
+assert_eq!(n.highest_one(), NonZeroU32::new(0b0001_0000).unwrap());
+assert_eq!(n.bit_width(), 32);
+```
+
+### 2.2 `char::is_control` 成为 `const fn`
+
+可以在 const 上下文中判断字符是否为控制字符：
+
+```rust
+const BELL: char = '\u{0007}';
+const IS_CTRL: bool = BELL.is_control();
+assert!(IS_CTRL);
+```
+
+### 2.3 `Option<NonZero*>` 的 niche 编码优化
+
+Rust 1.97 将 `Option<NonZero*>` 的 niche 值统一为 `-1`，提高与 C 接口和外部 ABI 的互操作性，并可能生成更紧凑的代码。
+
+### 2.4 `ptr::fn_addr_eq`
+
+比较两个函数指针是否指向同一地址，避免闭包/function item 比较时的意外行为：
+
+```rust
+use std::ptr;
+
+fn foo() {}
+fn bar() {}
+
+assert!(ptr::fn_addr_eq(foo, foo));
+assert!(!ptr::fn_addr_eq(foo, bar));
+```
+
+### 2.5 `const size_of_val` / `const align_of_val`
+
+在 const 上下文中获取值的大小和对齐：
+
+```rust
+use std::mem::{size_of_val, align_of_val};
+
+const ARR: [u8; 8] = [0; 8];
+const SIZE: usize = size_of_val(&ARR);
+const ALIGN: usize = align_of_val(&ARR);
+```
+
+### 2.6 `Box::as_ptr`
+
+无需解引用即可获取 `Box<T>` 的原始指针：
+
+```rust
+let b = Box::new(42);
+let p: *const i32 = Box::as_ptr(&b);
+assert!(!p.is_null());
+```
+
+### 2.7 `Option::as_slice` / `as_mut_slice`
+
+将 `Option<T>` 视为长度为 0 或 1 的切片：
+
+```rust
+let x: Option<i32> = Some(42);
+assert_eq!(x.as_slice(), &[42]);
+
+let y: Option<i32> = None;
+assert_eq!(y.as_slice(), &[]);
+```
+
+---
+
+## 3. 迁移指南
+
+### 3.1 从 Rust 1.96.x 迁移
+
+Rust 1.97.0 是向后兼容版本。大多数项目只需：
+
+```bash
+rustup update stable
+cargo build
+```
+
+### 3.2 需要注意的变更
+
+| 变更 | 影响 | 建议 |
+|:---|:---|:---|
+| `#[must_use]` 扩展 | 可能产生新的 lint | 检查 CI 中的新 warning |
+| 空 `export_name` 被拒绝 | 非法属性现在报错 | 移除或修正空 `export_name` |
+| `pin!` 宏阻止隐式 deref | 部分代码可能需要显式解引用 | 参考 Rust 1.97 Release Notes |
+
+---
+
+## 4. 权威来源与示例
 
 > **完整特性说明、代码示例与迁移建议**请参见项目权威页：
 >
@@ -67,7 +167,7 @@ Rust 1.97.0 主要带来以下类别的改进：
 
 ---
 
-## 3. 项目构建说明
+## 5. 项目构建说明
 
 本项目 `rust-toolchain.toml` 保持 `channel = "stable"`，由 rustup 自动解析当前 latest stable。Rust 1.97.0 发布后，`stable` 将逐步解析到 1.97.0；在 CI 与本地环境中无需手动切换工具链版本号。
 

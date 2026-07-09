@@ -108,16 +108,104 @@ Rust 的重大变更通过 **RFC（Request for Comments）** 流程决策：
 
 ---
 
-## 六、实践建议
+## 六、常见 Nightly 使用场景
+
+| 场景 | 说明 | 推荐命令 |
+|:---|:---|:---|
+| 尝试预览特性 | 使用 `#![feature(...)]` 启用不稳定特性 | `cargo +nightly build` |
+| 运行 Miri | Miri 目前只能在 Nightly 上运行 | `cargo +nightly miri test` |
+| 编译器开发 | 为 rustc 贡献代码需要 nightly 工具链 | `./x.py build` |
+| 自定义目标 | 使用 `build-std` 编译标准库 | `cargo +nightly build -Zbuild-std` |
+| 基准测试 | 某些性能分析工具依赖 nightly | `cargo +nightly bench` |
+
+### 使用 `cargo +nightly`
+
+`cargo +nightly` 是 rustup 提供的工具链覆盖语法，不需要切换默认工具链：
+
+```bash
+# 单次使用 nightly 编译
+cargo +nightly build
+
+# 单次使用 nightly 运行测试
+cargo +nightly test
+
+# 单次使用 nightly 并启用不稳定 cargo 特性
+cargo +nightly build -Zunstable-options
+```
+
+---
+
+## 七、Nightly 与 Miri
+
+Miri 是 Rust 的未定义行为检测器，目前只能在 Nightly 工具链上运行：
+
+```bash
+# 安装 Miri
+rustup component add --toolchain nightly miri
+
+# 运行 Miri 检查
+cargo +nightly miri test
+```
+
+Miri 特别适合验证以下代码：
+
+- 包含 `unsafe` 块的自定义数据结构
+- 使用原始指针和手动内存管理
+- 依赖内存顺序的并发原语
+- 与 FFI 交互的边界代码
+
+---
+
+## 八、RFC 流程与稳定化提案
+
+Rust 的重大变更通过 **RFC（Request for Comments）** 流程决策：
+
+1. **提交 RFC**：社区任何人都可以撰写 RFC 提案，提交到 `rust-lang/rfcs` 仓库。
+2. **团队评审**：相关子团队（语言设计、编译器、文档、基础设施等）讨论并给出反馈。
+3. **达成共识**：团队决定接受或拒绝 RFC。
+4. **实现**：被接受的 RFC 会创建 tracking issue，由贡献者实现。
+5. **进入 Nightly**：实现合入 `main`，默认由 feature flag 保护。
+6. **稳定化提案（Stabilization Report）**：实现成熟后，提交稳定化报告。
+7. **稳定化决策**：经过 nightly 用户试用和团队评估后，决定是否移除 feature flag 并进入 stable。
+
+### Tracking Issue
+
+每个不稳定特性都有一个 tracking issue，记录：
+
+- 当前实现状态
+- 已知问题
+- 阻止稳定化的因素
+- 使用示例和测试覆盖
+
+可以通过 `rustc --version` 和 `rustc +nightly --version` 查看当前工具链版本：
+
+```bash
+$ rustc --version
+rustc 1.96.1 (2026-06-30)
+
+$ rustc +nightly --version
+rustc 1.99.0-nightly (2026-07-08)
+```
+
+---
+
+## 九、实践建议
 
 1. **生产环境使用 Stable**：获得最佳稳定性和长期支持预期。
 2. **CI 中测试 Beta**：提前发现可能的回归问题。
 3. **只在必要时使用 Nightly**：例如需要尝试前沿特性或为 Rust 贡献代码。
 4. **关注 RFC 和 Release Notes**：了解即将到来的语言/工具链变化。
+5. **使用 `rust-toolchain.toml` 固定通道**：对于需要 nightly 的项目，可以在项目根目录创建：
+
+```toml
+[toolchain]
+channel = "nightly"
+components = ["rust-src", "miri", "rustfmt", "clippy"]
+```
 
 ---
 
-## 七、关联概念
+## 十、关联概念
 
 | 概念 | 关系 |
 |:---|:---|
