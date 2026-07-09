@@ -422,6 +422,8 @@ fn main() {
 
 ### 10.1 边界测试：规范未定义行为的边界（编译错误/运行时 UB）
 
+以下示例区分编译期错误与运行时（Runtime）未定义行为。
+
 ```rust,ignore
 fn main() {
     let mut x = 0;

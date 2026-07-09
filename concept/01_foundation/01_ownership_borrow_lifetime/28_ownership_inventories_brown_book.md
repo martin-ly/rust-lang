@@ -95,6 +95,7 @@
 ---
 
 ## 二、样题示例
+>
 > (Source: [TRPL — Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html))
 （基于 Inventory 方法论）
 
