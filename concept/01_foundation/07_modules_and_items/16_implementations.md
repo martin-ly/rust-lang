@@ -116,7 +116,7 @@ fn main() {
 | Receiver | 调用方式 | 所有权 |
 |:---|:---|:---|
 | `self` | `obj.method()` | 获取所有权 |
-| `&self` | `obj.method()` | 不可变借用（Mutable Borrow） |
+| `&self` | `obj.method()` | 不可变借用（Immutable Borrow） |
 | `&mut self` | `obj.method()` | 可变借用 |
 
 ```rust

@@ -5647,7 +5647,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"Rust 起步只需要安装一个编译器即可\" ⟹ 不成立。`rustup` 管理工具链版本，`cargo` 管理项目生命周期，二者缺一不可。",
+          "text": "> **反命题 1**: \"Rust 起步只需要安装一个编译器即可\" ⟹ 不成立。`rustup` 管理工具链版本，`cargo` 管理项目生命周期（Lifetimes），二者缺一不可。",
           "type": "paragraph"
         },
         {
@@ -5692,7 +5692,7 @@
           "N/A"
         ],
         "post": [
-          "[所有权](../01_ownership_borrow_lifetime/01_ownership.md) · [借用](../01_ownership_borrow_lifetime/02_borrowing.md) · [类型系统](../02_type_system/04_type_system.md) · [模块与路径](../07_modules_and_items/11_modules_and_paths.md) · [错误处理基础](../08_error_handling/32_error_handling_basics.md) · [测试基础](../10_testing_basics/16_testing_basics.md)"
+          "[所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) · [借用（Borrowing）](../01_ownership_borrow_lifetime/02_borrowing.md) · [类型系统（Type System）](../02_type_system/04_type_system.md) · [模块（Module）与路径](../07_modules_and_items/11_modules_and_paths.md) · [错误处理（Error Handling）基础](../08_error_handling/32_error_handling_basics.md) · [测试基础](../10_testing_basics/16_testing_basics.md)"
         ]
       },
       "backward_chains": 2,
@@ -6492,7 +6492,7 @@
       "line_count": 450,
       "theorem_chains": [
         {
-          "text": "> **反命题 1**: \"`std::io` 是异步的\" ⟹ 不成立。`std::io` 是同步阻塞 I/O；异步 I/O 使用 `tokio::io` 等。",
+          "text": "> **反命题 1**: \"`std::io` 是异步（Async）的\" ⟹ 不成立。`std::io` 是同步阻塞 I/O；异步 I/O 使用 `tokio::io` 等。",
           "type": "paragraph"
         },
         {
@@ -6624,7 +6624,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- **T-OBL-2 借用不变性**：不可变借用可共享，可变借用唯一 ⟹ 数据竞争在编译期被排除。",
+          "text": "- **T-OBL-2 借用不变性**：不可变借用（Immutable Borrow）可共享，可变借用唯一 ⟹ 数据竞争在编译期被排除。",
           "type": "paragraph"
         },
         {
@@ -6697,7 +6697,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> 定理 T5（mutable borrow 唯一性 ⟹ 无数据竞争）⟹ 推论 C1（无所有权 ⟹ 无 Drop 责任）⟹ 推论 C2（无所有权 ⟹ 裸指针危险）⟹ 推论 C3（Safe Rust 内存安全完备性）",
+          "text": "> 定理 T5（mutable borrow 唯一性 ⟹ 无数据竞争）⟹ 推论 C1（无所有权 ⟹ 无 Drop 责任）⟹ 推论 C2（无所有权 ⟹ 裸指针危险）⟹ 推论 C3（Safe Rust 内存安全（Memory Safety）完备性）",
           "type": "paragraph"
         },
         {
@@ -11383,7 +11383,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"`format!` 在运行时才检查参数\" ⟹ 不成立。`format!` 在编译期检查参数数量和类型。",
+          "text": "> **反命题 2**: \"`format!` 在运行时（Runtime）才检查参数\" ⟹ 不成立。`format!` 在编译期检查参数数量和类型。",
           "type": "paragraph"
         },
         {
@@ -11643,15 +11643,15 @@
       "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\07_modules_and_items\\12_functions.md",
       "layer": "L1",
       "title": "Functions（函数）",
-      "positioning": "系统讲解 Rust 函数声明、参数传递、返回值、发散函数与所有权的交互，为后续 Trait、闭包、Async 打下语法基础。",
+      "positioning": "系统讲解 Rust 函数声明、参数传递、返回值、发散函数与所有权（Ownership）的交互，为后续 Trait、闭包（Closures）、Async 打下语法基础。",
       "line_count": 295,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将函数签名、所有权移动与借用规则串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将函数签名、所有权移动与借用（Borrowing）规则串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **定理 1** [Tier 1]: 函数签名精确声明参数类型与返回类型 ⟹ 编译器可在调用点静态检查类型一致性。",
+          "text": "> **定理 1** [Tier 1]: 函数签名精确声明参数类型与返回类型 ⟹ 编译器可在调用点静态检查类型一致性（Coherence）。",
           "type": "paragraph"
         },
         {
@@ -11870,11 +11870,11 @@
       "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\07_modules_and_items\\14_structs.md",
       "layer": "L1",
       "title": "Structs（结构体）",
-      "positioning": "系统讲解 Rust 结构体的三种形式、字段可见性、结构体更新语法与方法基础，为后续 Trait、Enum、泛型奠定类型基础。",
+      "positioning": "系统讲解 Rust 结构体的三种形式、字段可见性、结构体更新语法与方法基础，为后续 Trait、Enum、泛型（Generics）奠定类型基础。",
       "line_count": 228,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将结构体定义、字段所有权与借用规则串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将结构体定义、字段所有权（Ownership）与借用（Borrowing）规则串联起来。",
           "type": "paragraph"
         },
         {
@@ -11882,7 +11882,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **定理 2** [Tier 1]: 结构体字段默认私有 ⟹ 跨模块访问需显式标注 `pub`，否则编译器拒绝访问。",
+          "text": "> **定理 2** [Tier 1]: 结构体字段默认私有 ⟹ 跨模块（Module）访问需显式标注 `pub`，否则编译器拒绝访问。",
           "type": "paragraph"
         },
         {
@@ -11972,7 +11972,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\07_modules_and_items\\15_enumerations.md",
       "layer": "L1",
       "title": "Enumerations（枚举）",
-      "positioning": "系统讲解 Rust 枚举的定义、变体负载、Option/Result 两个核心枚举、模式匹配穷尽性检查，以及与错误处理的关系。",
+      "positioning": "系统讲解 Rust 枚举的定义、变体负载、Option/Result 两个核心枚举、模式匹配（Pattern Matching）穷尽性检查，以及与错误处理（Error Handling）的关系。",
       "line_count": 230,
       "theorem_chains": [
         {
@@ -11984,11 +11984,11 @@
           "type": "paragraph"
         },
         {
-          "text": "> **定理 2** [Tier 1]: `Option<T>` 显式区分“有值”与“无值” ⟹ 替代空指针，消除解引用空指针的运行时错误。",
+          "text": "> **定理 2** [Tier 1]: `Option<T>` 显式区分“有值”与“无值” ⟹ 替代空指针，消除解引用（Reference）空指针的运行时（Runtime）错误。",
           "type": "paragraph"
         },
         {
-          "text": "> **定理 3** [Tier 1]: `Result<T, E>` 显式区分“成功”与“失败” ⟹ 错误处理成为类型系统的一部分，不可静默忽略。",
+          "text": "> **定理 3** [Tier 1]: `Result<T, E>` 显式区分“成功”与“失败” ⟹ 错误处理成为类型系统（Type System）的一部分，不可静默忽略。",
           "type": "paragraph"
         }
       ],
@@ -12088,11 +12088,11 @@
       "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\07_modules_and_items\\16_implementations.md",
       "layer": "L1",
       "title": "Implementations（实现块）",
-      "positioning": "系统讲解 Rust `impl` 块的两种形式（固有实现、Trait 实现）、方法 receiver、关联函数，以及与结构体/枚举/Trait 的关系。",
+      "positioning": "系统讲解 Rust `impl` 块的两种形式（固有实现、Trait 实现）、方法 receiver、关联函数，以及与结构体（Struct）/枚举（Enum）/Trait 的关系。",
       "line_count": 225,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将方法调用、receiver 选择与所有权/借用规则串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将方法调用、receiver 选择与所有权（Ownership）/借用（Borrowing）规则串联起来。",
           "type": "paragraph"
         },
         {
@@ -12361,11 +12361,11 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"所有 item 都在运行时可以动态创建\" ⟹ 不成立。Item 完全在编译期确定，执行期间通常保持不变。",
+          "text": "> **反命题 1**: \"所有 item 都在运行时（Runtime）可以动态创建\" ⟹ 不成立。Item 完全在编译期确定，执行期间通常保持不变。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"item 必须按使用顺序定义\" ⟹ 不成立。Rust 的名称解析允许 item 在引用位置之前或之后声明。",
+          "text": "> **反命题 2**: \"item 必须按使用顺序定义\" ⟹ 不成立。Rust 的名称解析允许 item 在引用（Reference）位置之前或之后声明。",
           "type": "paragraph"
         },
         {
@@ -13177,7 +13177,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- **T-EH-3 边界封闭性**：良好的错误边界设计 ⟹ 将领域错误封装在 crate/模块内部，对外暴露稳定、可操作的错误类型。",
+          "text": "- **T-EH-3 边界封闭性**：良好的错误边界设计 ⟹ 将领域错误封装在 crate/模块（Module）内部，对外暴露稳定、可操作的错误类型。",
           "type": "paragraph"
         }
       ],
@@ -14729,7 +14729,7 @@
       "layer": "L2",
       "title": "Traits（Trait 系统）",
       "positioning": "",
-      "line_count": 3074,
+      "line_count": 3080,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -16530,7 +16530,7 @@
       "layer": "L2",
       "title": "Generics（泛型系统）",
       "positioning": "",
-      "line_count": 3240,
+      "line_count": 3246,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -17510,7 +17510,7 @@
       "layer": "L2",
       "title": "Memory Management（内存管理）",
       "positioning": "",
-      "line_count": 2166,
+      "line_count": 2173,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -19632,7 +19632,7 @@
           "flags": [],
           "lines": 22,
           "should_fail": false,
-          "code_preview": "let s = String::from(\"hello\");  // 默认: 编译器选择 &s（不可变借用（Mutable Borrow）（Immutable ..."
+          "code_preview": "let s = String::from(\"hello\");  // 默认: 编译器选择 &s（不可变借用（Immutable Borrow）（Immutabl..."
         },
         {
           "flags": [
@@ -21994,7 +21994,7 @@
           "type": "table_row"
         },
         {
-          "text": "| C4 | Arc 循环引用 | `Arc::clone` 成环且未使用 `Weak` | ⟹ 内存泄漏 | 引用计数语义 | — | 设计缺陷 | — |",
+          "text": "| C4 | Arc 循环引用（Reference） | `Arc::clone` 成环且未使用 `Weak` | ⟹ 内存泄漏 | 引用计数语义 | — | 设计缺陷 | — |",
           "type": "table_row"
         },
         {
@@ -23404,7 +23404,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 条件编译隔离平台代码 ⟹ 可维护性提升 | `#[cfg]` 将平台差异限制在最小模块 | 上层逻辑可保持平台无关 |",
+          "text": "| 条件编译隔离平台代码 ⟹ 可维护性提升 | `#[cfg]` 将平台差异限制在最小模块（Module） | 上层逻辑可保持平台无关 |",
           "type": "table_row"
         },
         {
@@ -25038,7 +25038,7 @@
       "line_count": 1046,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 Future ⟹ Poll ⟹ Waker ⟹ Executor 的定理链理解异步任务生命周期。",
+          "text": "3. **机制推理**: 通过 Future ⟹ Poll ⟹ Waker ⟹ Executor 的定理链理解异步任务生命周期（Lifetimes）。",
           "type": "paragraph"
         },
         {
@@ -25325,7 +25325,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"只要子进程能启动就说明健康\" ⟹ 不成立。启动成功不能覆盖死锁、响应超时等运行时故障。",
+          "text": "> **反命题 2**: \"只要子进程能启动就说明健康\" ⟹ 不成立。启动成功不能覆盖死锁、响应超时等运行时（Runtime）故障。",
           "type": "paragraph"
         },
         {
@@ -27350,7 +27350,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对内存模型的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权、借用和 provenance 模型具有语言特有形态。",
+          "text": "> **反命题 3**: \"其他语言对内存模型的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）、借用（Borrowing）和 provenance 模型具有语言特有形态。",
           "type": "paragraph"
         }
       ],
@@ -27616,7 +27616,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对 unsafe 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的 `unsafe` 块不禁用借用检查器，只是放宽特定操作限制。",
+          "text": "> **反命题 3**: \"其他语言对 unsafe 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的 `unsafe` 块不禁用借用（Borrowing）检查器，只是放宽特定操作限制。",
           "type": "paragraph"
         }
       ],
@@ -28878,10 +28878,10 @@
       "matrix_rows": 9,
       "pre_post": {
         "pre": [
-          "[过程宏](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) · [泛型](../../02_intermediate/01_generics/02_generics.md)"
+          "[过程宏（Procedural Macro）](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) · [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md)"
         ],
         "post": [
-          "[生产级宏开发](31_production_grade_macro_development.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md)"
+          "[生产级宏（Macro）开发](31_production_grade_macro_development.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md)"
         ]
       },
       "backward_chains": 2,
@@ -28988,7 +28988,7 @@
       "matrix_rows": 4,
       "pre_post": {
         "pre": [
-          "[过程宏](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)"
+          "[过程宏（Procedural Macro）](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)"
         ],
         "post": [
           "[生产级宏开发](31_production_grade_macro_development.md) · [rustc 编译器诊断](../../06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md)"
@@ -29104,7 +29104,7 @@
       "matrix_rows": 12,
       "pre_post": {
         "pre": [
-          "[过程宏](07_proc_macro.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) · [Cargo 注册表与包发布](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md)"
+          "[过程宏（Procedural Macro）](07_proc_macro.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) · [Cargo 注册表与包发布](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md)"
         ],
         "post": [
           "[Cargo semver-checks](../../07_future/03_preview_features/46_cargo_semver_checks_preview.md) · [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/82_engineering_and_production_patterns.md)"
@@ -29338,7 +29338,7 @@
       "matrix_rows": 4,
       "pre_post": {
         "pre": [
-          "[过程宏](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)"
+          "[过程宏（Procedural Macro）](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)"
         ],
         "post": [
           "[宏卫生性](35_macro_hygiene.md) · [syn/quote 参考](34_syn_quote_reference.md)"
@@ -29620,7 +29620,7 @@
       "matrix_rows": 11,
       "pre_post": {
         "pre": [
-          "[过程宏](07_proc_macro.md) · [宏术语表](32_macro_glossary.md)"
+          "[过程宏（Procedural Macro）](07_proc_macro.md) · [宏术语表](32_macro_glossary.md)"
         ],
         "post": [
           "[宏卫生性](35_macro_hygiene.md) · [生产级宏开发](31_production_grade_macro_development.md)"
@@ -29879,10 +29879,10 @@
       "matrix_rows": 4,
       "pre_post": {
         "pre": [
-          "[过程宏](07_proc_macro.md) · [宏术语表](32_macro_glossary.md)"
+          "[过程宏（Procedural Macro）](07_proc_macro.md) · [宏术语表](32_macro_glossary.md)"
         ],
         "post": [
-          "[生产级宏开发](31_production_grade_macro_development.md) · [宏卫生性](35_macro_hygiene.md)"
+          "[生产级宏（Macro）开发](31_production_grade_macro_development.md) · [宏卫生性](35_macro_hygiene.md)"
         ]
       },
       "backward_chains": 2,
@@ -30162,7 +30162,7 @@
       "matrix_rows": 9,
       "pre_post": {
         "pre": [
-          "[过程宏](07_proc_macro.md) · [syn/quote 参考](34_syn_quote_reference.md)"
+          "[过程宏（Procedural Macro）](07_proc_macro.md) · [syn/quote 参考](34_syn_quote_reference.md)"
         ],
         "post": [
           "[生产级宏开发](31_production_grade_macro_development.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md)"
@@ -31218,7 +31218,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 类型擦除与动态分发 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |",
+          "text": "| 类型擦除与动态分发 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |",
           "type": "table_row"
         },
         {
@@ -31363,7 +31363,7 @@
           "type": "table_row"
         },
         {
-          "text": "| Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |",
+          "text": "| Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |",
           "type": "table_row"
         }
       ],
@@ -31912,7 +31912,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\06_low_level_patterns\\36_ownership_performance_optimization.md",
       "layer": "L3",
       "title": "所有权性能优化",
-      "positioning": "从所有权视角出发，系统梳理避免不必要拷贝、使用写时复制、优化内存布局、零拷贝解析与移动语义的最佳实践。",
+      "positioning": "从所有权（Ownership）视角出发，系统梳理避免不必要拷贝、使用写时复制、优化内存布局、零拷贝解析与移动语义的最佳实践。",
       "line_count": 176,
       "theorem_chains": [
         {
@@ -31924,7 +31924,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"零拷贝总是最优\" ⟹ 不成立。零拷贝常引入复杂生命周期约束，可能增加维护成本。",
+          "text": "> **反命题 2**: \"零拷贝总是最优\" ⟹ 不成立。零拷贝常引入复杂生命周期（Lifetimes）约束，可能增加维护成本。",
           "type": "paragraph"
         },
         {
@@ -32019,7 +32019,7 @@
       "line_count": 489,
       "theorem_chains": [
         {
-          "text": "> **反命题 1**: \"实现 Vec 只需要普通引用\" ⟹ 不成立。未初始化内存无法通过 safe 引用表达，必须使用原始指针。",
+          "text": "> **反命题 1**: \"实现 Vec 只需要普通引用\" ⟹ 不成立。未初始化内存无法通过 safe 引用表达，必须使用原始指针（Raw Pointer）。",
           "type": "paragraph"
         },
         {
@@ -36742,11 +36742,11 @@
       "line_count": 367,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将 MIR 构建、借用检查、优化、单态化与 LLVM IR 生成串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将 MIR 构建、借用（Borrowing）检查、优化、单态化（Monomorphization）与 LLVM IR 生成串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **定理 1** [Tier 2]: MIR 显式表达控制流图与所有权转移 ⟹ 借用检查、drop 展开与常量求值可以在统一的图上进行。",
+          "text": "> **定理 1** [Tier 2]: MIR 显式表达控制流图与所有权（Ownership）转移 ⟹ 借用检查、drop 展开与常量求值可以在统一的图上进行。",
           "type": "paragraph"
         },
         {
@@ -36754,11 +36754,11 @@
           "type": "paragraph"
         },
         {
-          "text": "> **定理 3** [Tier 2]: `rustc --emit=mir` 与 `rustc --emit=llvm-ir` 输出的是同一编译过程的不同切片 ⟹ 开发者可以通过对比二者定位优化与代码生成问题。",
+          "text": "> **定理 3** [Tier 2]: `rustc --emit=mir` 与 `rustc --emit=llvm-ir` 输出的是同一编译过程的不同切片（Slice） ⟹ 开发者可以通过对比二者定位优化与代码生成问题。",
           "type": "paragraph"
         },
         {
-          "text": "> **定理 4** [Tier 3]: 单态化（Monomorphization）在 MIR 层完成泛型实例化 ⟹ 每个泛型函数会生成独立的 MIR body，再独立 lower 到 LLVM IR。",
+          "text": "> **定理 4** [Tier 3]: 单态化（Monomorphization）在 MIR 层完成泛型（Generics）实例化 ⟹ 每个泛型函数会生成独立的 MIR body，再独立 lower 到 LLVM IR。",
           "type": "paragraph"
         },
         {
@@ -36766,7 +36766,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"所有 Rust 代码都能被 `rustc --emit=mir` 完整观察\" ⟹ 不成立。宏展开、名字解析与部分类型检查错误发生在 MIR 生成之前；`--emit=mir` 要求源码至少通过 HIR/THIR lowering。",
+          "text": "> **反命题 2**: \"所有 Rust 代码都能被 `rustc --emit=mir` 完整观察\" ⟹ 不成立。宏（Macro）展开、名字解析与部分类型检查错误发生在 MIR 生成之前；`--emit=mir` 要求源码至少通过 HIR/THIR lowering。",
           "type": "paragraph"
         },
         {
@@ -36855,7 +36855,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **定理 6** [Tier 3]: 新 solver 与 rust-analyzer 共享核心逻辑 ⟹ 编辑器中的类型推断与编译器趋于一致，降低 IDE 与 rustc 行为漂移的风险。",
+          "text": "> **定理 6** [Tier 3]: 新 solver 与 rust-analyzer 共享核心逻辑 ⟹ 编辑器中的类型推断（Type Inference）与编译器趋于一致，降低 IDE 与 rustc 行为漂移的风险。",
           "type": "paragraph"
         }
       ],
@@ -37134,11 +37134,11 @@
       "line_count": 216,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时语义串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"名称、作用域与解析在所有场景下都适用\" ⟹ 不成立。`unsafe` 块、FFI 符号、过程宏生成的名称可能绕过常规解析规则。",
+          "text": "> **反命题 1**: \"名称、作用域与解析在所有场景下都适用\" ⟹ 不成立。`unsafe` 块、FFI 符号、过程宏（Procedural Macro）生成的名称可能绕过常规解析规则。",
           "type": "paragraph"
         },
         {
@@ -37146,7 +37146,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对名称、作用域与解析的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的模块系统、命名空间分离和 `use` 重导出机制具有语言特有的形态。",
+          "text": "> **反命题 3**: \"其他语言对名称、作用域与解析的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的模块（Module）系统、命名空间分离和 `use` 重导出机制具有语言特有的形态。",
           "type": "paragraph"
         }
       ],
@@ -37415,7 +37415,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"词法结构在所有场景下都适用\" ⟹ 不成立。过程宏可以自定义 token 树的解析规则，`unsafe` 块和内联汇编允许非 Rust 语法。",
+          "text": "> **反命题 1**: \"词法结构在所有场景下都适用\" ⟹ 不成立。过程宏（Procedural Macro）可以自定义 token 树的解析规则，`unsafe` 块和内联汇编（Inline Assembly）允许非 Rust 语法。",
           "type": "paragraph"
         },
         {
@@ -37423,7 +37423,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对词法结构的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的生命周期 token、原始标识符和嵌套块注释具有语言特有形态。",
+          "text": "> **反命题 3**: \"其他语言对词法结构的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的生命周期（Lifetimes） token、原始标识符和嵌套块注释具有语言特有形态。",
           "type": "paragraph"
         }
       ],
@@ -37508,7 +37508,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"条目参考在所有场景下都适用\" ⟹ 不成立。`unsafe` 外部块、FFI 声明和过程宏生成的 item 具有额外的语义约束。",
+          "text": "> **反命题 1**: \"条目参考在所有场景下都适用\" ⟹ 不成立。`unsafe` 外部块、FFI 声明和过程宏（Procedural Macro）生成的 item 具有额外的语义约束。",
           "type": "paragraph"
         },
         {
@@ -37516,7 +37516,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对条目参考的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的 trait、impl、泛型参数和生命周期参数构成独特的 item 体系。",
+          "text": "> **反命题 3**: \"其他语言对条目参考的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的 trait、impl、泛型参数和生命周期（Lifetimes）参数构成独特的 item 体系。",
           "type": "paragraph"
         }
       ],
@@ -37629,7 +37629,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对属性的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 属性在词法阶段即被解析并影响宏展开和类型检查，与 C# 注解或 Java 注解的运行时反射模型不同。",
+          "text": "> **反命题 3**: \"其他语言对属性的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 属性在词法阶段即被解析并影响宏（Macro）展开和类型检查，与 C# 注解或 Java 注解的运行时（Runtime）反射模型不同。",
           "type": "paragraph"
         }
       ],
@@ -37706,15 +37706,15 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"语句与表达式参考在所有场景下都适用\" ⟹ 不成立。`unsafe` 块、常量上下文和异步上下文对某些表达式有特殊限制。",
+          "text": "> **反命题 1**: \"语句与表达式参考在所有场景下都适用\" ⟹ 不成立。`unsafe` 块、常量上下文和异步（Async）上下文对某些表达式有特殊限制。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略语句与表达式参考的细节也能写出正确代码\" ⟹ 不成立。临时值生命周期、move 语义和常量求值限制都源于表达式语义。",
+          "text": "> **反命题 2**: \"忽略语句与表达式参考的细节也能写出正确代码\" ⟹ 不成立。临时值生命周期（Lifetimes）、move 语义和常量求值限制都源于表达式语义。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对语句与表达式的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的块表达式、match 表达式和所有权移动语义具有语言特有形态。",
+          "text": "> **反命题 3**: \"其他语言对语句与表达式的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的块表达式、match 表达式和所有权（Ownership）移动语义具有语言特有形态。",
           "type": "paragraph"
         }
       ],
@@ -37793,7 +37793,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"模式参考在所有场景下都适用\" ⟹ 不成立。`unsafe` 代码中的裸指针解引用、FFI 类型和过程宏生成的模式可能超出常规模式检查范围。",
+          "text": "> **反命题 1**: \"模式参考在所有场景下都适用\" ⟹ 不成立。`unsafe` 代码中的裸指针解引用、FFI 类型和过程宏（Procedural Macro）生成的模式可能超出常规模式检查范围。",
           "type": "paragraph"
         },
         {
@@ -37801,7 +37801,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对模式参考的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权移动、引用模式和 `@` 绑定具有语言特有语义。",
+          "text": "> **反命题 3**: \"其他语言对模式参考的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）移动、引用模式和 `@` 绑定具有语言特有语义。",
           "type": "paragraph"
         }
       ],
@@ -37868,11 +37868,11 @@
       "line_count": 161,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将源文件、模块树、命名空间、作用域和名字解析串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将源文件、模块（Module）树、命名空间、作用域和名字解析串联起来。",
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 1**: \"名字参考在所有场景下都适用\" ⟹ 不成立。过程宏生成的名字、FFI 符号和 `unsafe` 外部块中的名字具有特殊的解析和链接行为。",
+          "text": "> **反命题 1**: \"名字参考在所有场景下都适用\" ⟹ 不成立。过程宏（Procedural Macro）生成的名字、FFI 符号和 `unsafe` 外部块中的名字具有特殊的解析和链接行为。",
           "type": "paragraph"
         },
         {
@@ -39788,7 +39788,7 @@
           "type": "table_row"
         },
         {
-          "text": "| Rust vs Scala：类型系统的两种哲学 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |",
+          "text": "| Rust vs Scala：类型系统（Type System）的两种哲学 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |",
           "type": "table_row"
         }
       ],
@@ -40212,7 +40212,7 @@
           "type": "table_row"
         },
         {
-          "text": "| **safe Rust 保证内存安全（Memory Safety）** | 所有权+借用+生命周期 ⟹ | 无UAF/无数据竞争 | 逻辑错误未覆盖 | 默认编程模式 |",
+          "text": "| **safe Rust 保证内存安全（Memory Safety）** | 所有权+借用+生命周期（Lifetimes） ⟹ | 无UAF/无数据竞争 | 逻辑错误未覆盖 | 默认编程模式 |",
           "type": "table_row"
         },
         {
@@ -42891,7 +42891,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 自定义 panic ⟹ 减少运行时开销 | 使用 `panic = \"abort\"` | 避免栈展开代码 |",
+          "text": "| 自定义 panic ⟹ 减少运行时（Runtime）开销 | 使用 `panic = \"abort\"` | 避免栈展开代码 |",
           "type": "table_row"
         }
       ],
@@ -42932,7 +42932,7 @@
       "matrix_rows": 20,
       "pre_post": {
         "pre": [
-          "[Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md) · [Cargo 配置与环境变量](83_cargo_configuration.md) · [所有权系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)"
+          "[Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md) · [Cargo 配置与环境变量](83_cargo_configuration.md) · [所有权（Ownership）系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)"
         ],
         "post": [
           "[交叉编译](../05_systems_and_embedded/17_cross_compilation.md) · [unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)"
@@ -45265,7 +45265,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 语言映射 ⟹ 可应用边界 | Rust 所有权与生命周期约束 | 决定哪些形式模式可直接实现 |",
+          "text": "| 语言映射 ⟹ 可应用边界 | Rust 所有权与生命周期（Lifetimes）约束 | 决定哪些形式模式可直接实现 |",
           "type": "table_row"
         }
       ],
@@ -46338,7 +46338,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 决策规则 ⟹ 一致性 | 将 FAQ 提炼为选型原则 | 提升工程一致性 |",
+          "text": "| 决策规则 ⟹ 一致性（Coherence） | 将 FAQ 提炼为选型原则 | 提升工程一致性 |",
           "type": "table_row"
         }
       ],
@@ -50289,7 +50289,7 @@
       "line_count": 281,
       "theorem_chains": [
         {
-          "text": "| 类型状态 ⟹ 更少运行时错误 | 将协议阶段编码为类型 | 非法状态转移被编译器拦截 |",
+          "text": "| 类型状态 ⟹ 更少运行时（Runtime）错误 | 将协议阶段编码为类型 | 非法状态转移被编译器拦截 |",
           "type": "table_row"
         },
         {
@@ -50358,7 +50358,7 @@
       "matrix_rows": 18,
       "pre_post": {
         "pre": [
-          "[异步编程](../../03_advanced/01_async/02_async.md) · [并发模式](../../03_advanced/00_concurrency/10_concurrency_patterns.md) · [网络协议](../04_web_and_networking/38_network_protocols.md)"
+          "[异步（Async）编程](../../03_advanced/01_async/02_async.md) · [并发模式](../../03_advanced/00_concurrency/10_concurrency_patterns.md) · [网络协议](../04_web_and_networking/38_network_protocols.md)"
         ],
         "post": [
           "[高性能网络服务架构](../04_web_and_networking/39_high_performance_network_service_architecture.md) · [网络安全](02_network_security.md)"
@@ -50375,7 +50375,7 @@
       "line_count": 321,
       "theorem_chains": [
         {
-          "text": "| 内存安全 ⟹ 更少攻击面 | Rust 所有权与借用检查 | 消除大量传统 C/C++ 漏洞类 |",
+          "text": "| 内存安全 ⟹ 更少攻击面 | Rust 所有权（Ownership）与借用（Borrowing）检查 | 消除大量传统 C/C++ 漏洞类 |",
           "type": "table_row"
         },
         {
@@ -53801,11 +53801,11 @@
           "type": "table_row"
         },
         {
-          "text": "| 所有权清晰 ⟹ 更少 bug | Rust 借用规则约束 | 避免悬垂与数据竞争 |",
+          "text": "| 所有权清晰 ⟹ 更少 bug | Rust 借用（Borrowing）规则约束 | 避免悬垂与数据竞争 |",
           "type": "table_row"
         },
         {
-          "text": "| 缓存友好布局 ⟹ 吞吐提升 | 控制结构体字段顺序 | 减少缓存未命中 |",
+          "text": "| 缓存友好布局 ⟹ 吞吐提升 | 控制结构体（Struct）字段顺序 | 减少缓存未命中 |",
           "type": "table_row"
         }
       ],
@@ -60552,7 +60552,7 @@
           "type": "table_row"
         },
         {
-          "text": "> **⟹ 推理链**: V1-V5 构成 Rust 语言演进的**治理基础设施**。核心原则是**从不破坏现有代码**——即使引入 breaking change，也通过 Edition 机制显式隔离。这是 Rust 能从 2015 年稳定发展到今天复杂类型系统的根本前提。",
+          "text": "> **⟹ 推理链**: V1-V5 构成 Rust 语言演进的**治理基础设施**。核心原则是**从不破坏现有代码**——即使引入 breaking change，也通过 Edition 机制显式隔离。这是 Rust 能从 2015 年稳定发展到今天复杂类型系统（Type System）的根本前提。",
           "type": "paragraph"
         }
       ],

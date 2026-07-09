@@ -27,7 +27,7 @@
     - [Macro (宏)](#macro-宏)
     - [Declarative Macro (声明宏)](#declarative-macro-声明宏)
     - [Procedural Macro (过程宏)](#procedural-macro-过程宏)
-  - [🔧 声明宏（Declarative Macro）术语](#-声明宏术语)
+  - [🔧 声明宏术语](#-声明宏术语)
     - [macro\_rules](#macro_rules)
     - [Pattern Matching (模式匹配)](#pattern-matching-模式匹配)
     - [Repetition (重复)](#repetition-重复)

@@ -158,7 +158,7 @@ graph TD
   - 闭包体移动变量（如 drop）→ T 捕获 → FnOnce
 ```
 
-> **推导原则**: 编译器选择**最宽松**的捕获方式——优先不可变借用（Mutable Borrow），其次可变借用，最后移动。
+> **推导原则**: 编译器选择**最宽松**的捕获方式——优先不可变借用（Immutable Borrow），其次可变借用，最后移动。
 > [来源: [Rust Reference — Closure Capture Modes](https://doc.rust-lang.org/reference/types/closure.html#capture-modes)]
 
 ---
@@ -222,7 +222,7 @@ graph LR
 ```rust
 let s = String::from("hello");
 
-// 默认: 编译器选择 &s（不可变借用（Mutable Borrow）（Immutable Borrow）（Mutable Borrow））
+// 默认: 编译器选择 &s（不可变借用（Immutable Borrow）（Immutable Borrow）（Mutable Borrow））
 let f1 = || println!("{}", s);
 println!("{}", s);  // ✅ s 仍可用
 
@@ -768,7 +768,7 @@ let print = || println!("hi"); // 无参数
 
 | 闭包体使用环境变量方式 | 编译器实现 trait | 调用限制 |
 | :--- | :--- | :--- |
-| 仅不可变借用（Mutable Borrow） | `Fn` | 可多次调用 |
+| 仅不可变借用（Immutable Borrow） | `Fn` | 可多次调用 |
 | 可变借用（Borrowing） | `FnMut` | 调用需 `&mut` |
 | 移动/消费 | `FnOnce` | 只能调用一次 |
 

@@ -775,7 +775,7 @@ fn main() {
 
 **编译错误**。
 
-`r` 是对 `s` 的不可变借用（Mutable Borrow），`s.push_str` 需要可变借用。两者不能同时存在。
+`r` 是对 `s` 的不可变借用（Immutable Borrow），`s.push_str` 需要可变借用。两者不能同时存在。
 
 修复方案：确保不可变借用（Immutable Borrow）在使用后才释放：
 

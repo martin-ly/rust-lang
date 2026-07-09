@@ -57,7 +57,7 @@
 - [Type Inference Complexity（类型推断复杂度）](#type-inference-complexity类型推断复杂度)
   - [反命题决策树](#反命题决策树)
   - [📑 目录](#-目录)
-  - [一、HM：类型推断（Type Inference）的黄金标准](#一hm类型推断的黄金标准)
+  - [一、HM：类型推断的黄金标准](#一hm类型推断的黄金标准)
   - [二、Rust 的四项复杂度放大器](#二rust-的四项复杂度放大器)
   - [三、约束生成与 Robinson 合一](#三约束生成与-robinson-合一)
     - [3.1 约束生成（Constraint Generation）](#31-约束生成constraint-generation)

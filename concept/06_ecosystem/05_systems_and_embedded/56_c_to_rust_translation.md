@@ -43,7 +43,7 @@
     - [3.2 \&inator（PLDI 2026）](#32-inatorpldi-2026)
     - [3.3 His2Trans（2026）](#33-his2trans2026)
     - [3.4 Cpp2Rust：C++ → Safe Rust 的自动翻译（PLDI 2026）](#34-cpp2rustc--safe-rust-的自动翻译pldi-2026)
-    - [3.5 Hayroll：C 宏（Macro）与条件编译的模块（Module）化翻译（PLDI 2026）](#35-hayrollc-宏与条件编译的模块化翻译pldi-2026)
+    - [3.5 Hayroll：C 宏与条件编译的模块化翻译（PLDI 2026）](#35-hayrollc-宏与条件编译的模块化翻译pldi-2026)
   - [四、现有工具链](#四现有工具链)
     - [4.1 C2Rust 与后处理生态](#41-c2rust-与后处理生态)
   - [四-A、评估基准与近期学术成果](#四-a评估基准与近期学术成果)
@@ -180,7 +180,7 @@ Cpp2Rust 不尝试在编译期证明 C++ 的别名模式符合 Rust 的借用（
 | C++ 特性 | Cpp2Rust 翻译策略 | 运行时（Runtime）开销 |
 |:---|:---|:---|
 | 原始指针（Raw Pointer） `T*` | 自定义 `Ptr<T>` 类型（引用（Reference）计数 + 借用（Borrowing）检查） | 引用计数增减 |
-| 引用（Reference） `T&` | `Ptr<T>` 的不可变借用（Mutable Borrow）视图 | 动态可变性检查 |
+| 引用（Reference） `T&` | `Ptr<T>` 的不可变借用（Immutable Borrow）视图 | 动态可变性检查 |
 | 指针算术 | `Ptr<T>` 的偏移操作（边界检查） | 边界检查 |
 | 类/继承/虚调用 | Rust trait + vtable 模拟 | 动态分发 |
 | 部分 STL（`std::vector`, `std::string`） | 对应 Rust 标准库类型 | 无额外开销 |

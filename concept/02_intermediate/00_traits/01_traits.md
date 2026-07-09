@@ -2697,7 +2697,7 @@ trait Drawable {
 
 ## 从 `crates\c02_type_system\docs\tier_02_guides\04_trait_system_guide.md` 迁移的补充视角
 
-> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏（Macro）观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
 
 # 2.4 Rust 类型系统 - Trait 系统指南
 

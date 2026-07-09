@@ -147,7 +147,7 @@ fn main() {
 
 **解析**:
 
-- `s` 是对 `v` 的不可变借用（Mutable Borrow）（`&[i32]`）。
+- `s` 是对 `v` 的不可变借用（Immutable Borrow）（`&[i32]`）。
 - `v.push(4)` 需要可变借用（Borrowing） `&mut v`。
 - Rust 禁止同时存在对同一数据的可变借用和不可变借用（Immutable Borrow），因此编译失败。
 - 修复方案：在 `push` 之前停止使用 `s`，或先 `clone` 出独立数据。

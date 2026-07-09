@@ -174,7 +174,7 @@ graph TB
 
 | 借用（Borrowing）模式 | 检查时机 | 运行时（Runtime）开销 | 灵活性 | 安全性 |
 | :--- | :--- | :--- | :--- | :--- |
-| 不可变借用（Mutable Borrow） | 编译时 | 零成本 | 高 | 完全安全 |
+| 不可变借用（Immutable Borrow） | 编译时 | 零成本 | 高 | 完全安全 |
 | 可变借用 | 编译时 | 零成本 | 中 | 完全安全 |
 | `Cell<T>` | 编译时 | 零成本 | 中 | 限制在 `Copy` 类型 |
 | `RefCell<T>` | 运行时 | 引用（Reference）计数 | 高 | 运行时 panic |
