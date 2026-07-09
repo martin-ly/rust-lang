@@ -46861,7 +46861,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md",
+        "../../../content/ecosystem/deep_dives/01_axum_deep_dive.md",
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/international_authority_index.md",
         "../../02_intermediate/00_traits/01_traits.md",
