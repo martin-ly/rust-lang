@@ -15,7 +15,7 @@
 > **EN**: Ownership Borrowing Lifetimes
 > **Summary**: 所有权、借用与生命周期 Ownership Borrowing Lifetimes.
 > **Bloom 层级**: L1-L2 (记忆/理解)
-> **Rust 版本**: 1.96.1+
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **难度**: 初级 → 中级
 > **预计学习时间**: 4-6 小时
 

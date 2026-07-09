@@ -358,7 +358,7 @@ MIR 仍保留 Rust 高层语义（如 `move`、`Drop`、借用检查标记、基
 ---
 
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [LLVM Documentation](https://llvm.org/docs/)
-> **权威来源对齐变更日志**: 2026-07-09 创建，对齐 Rust 1.96.1+ MIR/codegen 文档
+> **权威来源对齐变更日志**: 2026-07-09 创建，对齐 Rust 1.97.0+ MIR/codegen 文档
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
