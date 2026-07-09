@@ -78,6 +78,79 @@ Visibility ::= "pub" | "pub(crate)" | "pub(super)" | "pub(in SimplePath)"
 模块（Module）通过 `mod name { ... }` 声明，可嵌套。`pub use` 可重导出外部名称，改变名称在模块树中的可见路径。
 
 ```rust
+mod outer {
+    pub mod inner {
+        pub fn helper() {}
+    }
+    pub use inner::helper as public_helper;
+}
+```
+
+## 三、函数与常量项
+
+函数 item 可包含泛型参数、where 子句和 const 泛型：
+
+```rust
+fn max<T: Ord>(a: T, b: T) -> T {
+    if a > b { a } else { b }
+}
+
+const THRESHOLD: u32 = 100;
+static COUNTER: std::sync::Mutex<u32> = std::sync::Mutex::new(0);
+```
+
+## 四、类型定义项
+
+| Item | 示例 | 说明 |
+|:---|:---|:---|
+| 结构体 | `struct Point { x: i32, y: i32 }` | 命名字段类型 |
+| 元组结构体 | `struct Meters(u32);` | 单字段 newtype |
+| 单元结构体 | `struct Flag;` | 无字段 |
+| 枚举 | `enum Option<T> { Some(T), None }` | 带变体 |
+| 联合体 | `union Value { i: i32, f: f32 }` | 内存共享，unsafe 访问 |
+| 类型别名 | `type MyResult<T> = Result<T, Error>;` | 同义名 |
+
+## 五、Trait 与实现
+
+```rust
+trait Drawable {
+    fn draw(&self);
+    fn bounds(&self) -> Bounds;
+}
+
+impl Drawable for Circle {
+    fn draw(&self) { /* ... */ }
+    fn bounds(&self) -> Bounds { /* ... */ }
+}
+```
+
+实现分为两类：
+
+- **Inherent impl**: `impl Type { ... }`，定义类型的固有方法。
+- **Trait impl**: `impl Trait for Type { ... }`，实现外部 trait。
+
+## 六、泛型参数与关联项
+
+```rust
+trait Container<T> {
+    type Item;           // 关联类型
+    const MAX: usize;    // 关联常量
+    fn get(&self) -> Option<&Self::Item>; // 关联函数
+}
+```
+
+## 七、外部块（Extern Blocks）
+
+```rust
+extern "C" {
+    fn c_function(x: i32) -> i32;
+    static C_GLOBAL: c_int;
+}
+```
+
+外部块声明 FFI 边界，其内部函数和静态项默认为 `unsafe`。
+
+```rust
 mod inner {
     pub fn helper() {}
 }

@@ -20,11 +20,27 @@
 
 Rust 1.93.0 在标准库中稳定了一批与内存管理、容器操作和格式化相关的新 API。这些特性对 WebAssembly、嵌入式和系统编程场景尤为实用。
 
+## 二、版本上下文
+
+| 项目 | 说明 |
+|:---|:---|
+| 版本 | 1.93.0 |
+| 频道 | Stable |
+| 上一版本 | [Rust 1.92 稳定特性](rust_1_92_stabilized.md) |
+| 下一版本 | [Rust 1.94 稳定特性](rust_1_94_stabilized.md) |
+| 适用 Edition | 2015 / 2018 / 2021 / 2024 |
+| 获取方式 | `rustup update stable` 或 `rustup toolchain install 1.93.0` |
+
+```bash
+rustup toolchain install 1.93.0
+rustup run 1.93.0 cargo build
+```
+
 ---
 
-## 二、主要稳定特性
+## 三、主要稳定特性
 
-### 2.1 `MaybeUninit` 增强 API
+### 3.1 `MaybeUninit` 增强 API
 
 新增 `assume_init_ref`、`assume_init_mut`、`assume_init_drop`、`write_copy_of_slice`、`write_clone_of_slice` 等方法，使未初始化内存的批量写入与安全读取更加便利。
 
@@ -36,7 +52,7 @@ MaybeUninit::write_copy_of_slice(&mut buf, b"hello");
 let init = MaybeUninit::assume_init_ref(&buf[..5]);
 ```
 
-### 2.2 `String` / `Vec` 原始部分拆分
+### 3.2 `String` / `Vec` 原始部分拆分
 
 `into_raw_parts` 将 `String` 或 `Vec` 拆分为原始指针、长度与容量三元组，便于与 FFI 或 Wasm 线性内存进行零拷贝交互。
 
@@ -46,7 +62,7 @@ let (ptr, len, cap) = v.into_raw_parts();
 // 使用 ptr/len/cap 与外部运行时交互
 ```
 
-### 2.3 `VecDeque` 条件弹出
+### 3.3 `VecDeque` 条件弹出
 
 `pop_front_if` 与 `pop_back_if` 允许在满足谓词时从双端队列两端条件弹出元素，简化数据流处理。
 
@@ -57,7 +73,7 @@ let mut deque: VecDeque<i32> = [1, 2, 3, 4].into_iter().collect();
 let maybe_two = deque.pop_front_if(|x| *x == 1);
 ```
 
-### 2.4 切片安全转固定长度数组
+### 3.4 切片安全转固定长度数组
 
 `<[T]>::as_array` 与 `as_mut_array` 将切片安全转换为固定长度数组引用，失败时返回 `None`。
 
@@ -66,7 +82,7 @@ let bytes = b"abcd";
 let arr: Option<&[u8; 4]> = bytes.as_array();
 ```
 
-### 2.5 `Duration::from_nanos_u128`
+### 3.5 `Duration::from_nanos_u128`
 
 高精度纳秒转换为 `Duration`，适用于测量粒度低于 64 位纳秒上限的场景。
 
@@ -76,7 +92,7 @@ use std::time::Duration;
 let d = Duration::from_nanos_u128(3_000_000_000_u128);
 ```
 
-### 2.6 `char::MAX_LEN_UTF8` / `MAX_LEN_UTF16`
+### 3.6 `char::MAX_LEN_UTF8` / `MAX_LEN_UTF16`
 
 提供字符编码最大长度常量，用于缓冲区预分配。
 
@@ -85,7 +101,7 @@ let mut buf = [0u8; char::MAX_LEN_UTF8];
 let len = '世'.encode_utf8(&mut buf).len();
 ```
 
-### 2.7 `fmt::from_fn`
+### 3.7 `fmt::from_fn`
 
 通过闭包快速构造自定义 `Display`/`Debug` 格式化器，减少样板代码。
 
@@ -98,12 +114,51 @@ println!("{}", f);
 
 ---
 
-## 三、迁移提示
+## 四、版本间对比
+
+| 特性领域 | Rust 1.92 | Rust 1.93 | Rust 1.94+ |
+|:---|:---|:---|:---|
+| `MaybeUninit` 批量写入 | 无 | `write_copy_of_slice` / `write_clone_of_slice` | 持续扩展 |
+| `String`/`Vec` 原始部分 | 无 | `into_raw_parts` 稳定 | — |
+| `VecDeque` 条件弹出 | 无 | `pop_front_if` / `pop_back_if` | — |
+| 切片转数组 | 手动 `try_into` | `as_array` / `as_mut_array` | — |
+| 高精度 Duration | 64 位纳秒 | `from_nanos_u128` | — |
+
+## 五、WebAssembly 与嵌入式影响
+
+Rust 1.93 的新 API 对 `no_std` 和 WebAssembly 目标尤其重要：
+
+- `into_raw_parts` 允许将 `Vec`/`String` 的所有权直接交给 Wasm 宿主，避免额外拷贝。
+- `MaybeUninit::write_copy_of_slice` 在裸机缓冲区写入中减少 unsafe 代码。
+- `char::MAX_LEN_UTF8` 帮助嵌入式系统预分配固定大小的编码缓冲区。
+
+```rust
+// WebAssembly 边界示例：将 String 移交给宿主
+#[no_mangle]
+pub extern "C" fn allocate_string() -> *mut u8 {
+    let s = String::from("hello wasm");
+    let (ptr, _len, _cap) = s.into_raw_parts();
+    ptr
+}
+```
+
+## 六、迁移提示
 
 - 使用 `MaybeUninit::write_copy_of_slice` 替代手动循环写入，可减少 unsafe 代码量。
 - `String`/`Vec::into_raw_parts` 与 `from_raw_parts` 配对使用，注意所有权与容量一致性。
 - `as_array` 返回 `Option`，避免手动长度检查与 `try_into` 转换。
+- 在 `no_std` 环境中，`write_copy_of_slice` 等 API 可直接在 `core` 中使用。
+
+## 七、兼容性与 MSRV
+
+| 场景 | 建议 |
+|:---|:---|
+| 当前工具链 ≥ 1.93 | 可直接使用本页 API |
+| 当前工具链 < 1.93 | 提升 `rust-version` 到 `1.93.0`，或使用 polyfill |
+| 跨平台库 | 优先使用 `core` 可用 API，减少对 `std` 的依赖 |
+| WebAssembly | `into_raw_parts` 与 Wasm 宿主互操作时注意容量与析构约定 |
 
 ---
 
 > **来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **相关版本页**: [Rust 1.92 稳定特性](rust_1_92_stabilized.md) · [Rust 1.94 稳定特性](rust_1_94_stabilized.md) · [Rust 版本跟踪](05_rust_version_tracking.md)

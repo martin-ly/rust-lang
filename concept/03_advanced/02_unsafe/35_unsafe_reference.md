@@ -72,12 +72,66 @@ unsafe {
 assert_eq!(x, 6);
 ```
 
-## 三、安全抽象层
+## 三、外部契约与 unsafe trait
+
+`unsafe trait` 用于标记实现者必须手动保证的契约：
+
+```rust
+unsafe trait Zeroable {
+    /// 实现者必须保证该类型的所有位模式都是合法的
+}
+
+unsafe impl Zeroable for u32 {}
+```
+
+常见 unsafe trait：
+
+| Trait | 契约 | 实现者责任 |
+|:---|:---|:---|
+| `Send` | 可跨线程转移所有权 | 类型在线程间转移是安全的 |
+| `Sync` | 可跨线程共享引用 | 类型在多线程共享引用是安全的 |
+| `GlobalAlloc` | 全局内存分配器 | `alloc`/`dealloc` 行为符合约定 |
+
+## 四、不被视为 unsafe 的行为
+
+Rust 将以下行为归类为**危险但不属于 `unsafe` 操作**：
+
+| 行为 | 说明 | 后果 |
+|:---|:---|:---|
+| 死锁 | 锁的循环等待 | 程序挂起，但不触发 UB |
+| 内存泄漏 | 分配后未释放 | 资源浪费，但不触发 UB |
+| 无限循环 | 无法终止的循环 | 程序无响应 |
+| 算术溢出（debug） | 调试模式下 panic | 程序终止 |
+| 竞争条件（逻辑层） | 非原子操作导致错误结果 | 逻辑错误，不一定是 UB |
+
+> 关键区别：`unsafe` 操作指的是可能直接导致**未定义行为**的操作；死锁和泄漏虽然严重，但属于定义良好的行为。
+
+## 五、安全抽象层
 
 将 unsafe 操作封装为 safe API 时，必须确保：
 
 - 所有公开 safe 函数的输入都满足 unsafe 前置条件。
 - 不变式在类型层面尽可能编码（如 `NonNull<T>` 保证非空）。
+- 文档中明确说明调用者无需满足的不变式与内部已保证的不变式。
+
+```rust
+use std::ptr::NonNull;
+
+/// Safe wrapper：调用者无需检查空指针
+pub struct SafeBox<T> {
+    ptr: NonNull<T>,
+}
+
+impl<T> SafeBox<T> {
+    pub fn new(value: T) -> Self {
+        let b = Box::new(value);
+        Self {
+            ptr: unsafe { NonNull::new_unchecked(Box::into_raw(b)) },
+        }
+    }
+}
+```
+
 - 文档清楚说明调用者/实现者的责任。
 
 ```rust

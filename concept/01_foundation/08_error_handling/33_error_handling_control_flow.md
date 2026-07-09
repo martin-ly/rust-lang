@@ -27,7 +27,10 @@
   - [`?` 运算符与早退](#-运算符与早退)
   - [`Try`/`FromResidual` 与跨类型传播](#tryfromresidual-与跨类型传播)
   - [`try` 块](#try-块)
+  - [错误转换：From 与 map\_err](#错误转换from-与-map_err)
+    - [FromResidual 与 try\_trait\_v2](#fromresidual-与-try_trait_v2)
   - [自定义错误类型](#自定义错误类型)
+  - [常见反模式](#常见反模式)
   - [边界设计建议](#边界设计建议)
   - [对比与决策](#对比与决策)
     - [决策树](#决策树)
@@ -116,6 +119,36 @@ fn demo() -> Result<i32, &'static str> {
 
 ---
 
+## 错误转换：From 与 map_err
+
+`?` 要求内部错误类型能够转换到函数返回的错误类型。标准库已为常见类型实现 `From`，例如 `io::Error` → `Box<dyn Error>`、`Infallible` → `E`。
+
+当默认转换不存在时，使用 `map_err`：
+
+```rust
+fn parse_positive(s: &str) -> Result<u32, String> {
+    let n: u32 = s.parse::<u32>()
+        .map_err(|e| format!("invalid number '{}': {}", s, e))?;
+    n.checked_add(1).ok_or_else(|| "overflow".to_string())?;
+    Ok(n)
+}
+```
+
+### FromResidual 与 try_trait_v2
+
+`?` 在 Rust 1.56+ 通过 `Try` trait 与 `FromResidual` trait 实现。残差（residual）指 `Err`、`None`、`Break` 等"跳出"值，`?` 将其转换为外层可返回的形式。
+
+```rust
+// 等价展开（概念上）
+let x = expr?;
+// ≈ match Try::branch(expr) {
+//     ControlFlow::Continue(v) => v,
+//     ControlFlow::Break(r) => return FromResidual::from_residual(r),
+// }
+```
+
+自定义类型要实现 `?` 支持，需实现 `Try` 与 `FromResidual`，但绝大多数场景使用 `Result`/`Option`/`ControlFlow` 即可。
+
 ## 自定义错误类型
 
 对外 API 推荐定义精确的错误类型，可使用 `thiserror` 减少样板：
@@ -144,6 +177,14 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
     Ok(cfg)
 }
 ```
+
+---
+
+## 常见反模式
+
+- **在 `main` 中大量使用 `unwrap`**：CLI 程序应使用 `Result` 与 `main` 返回 `Result<(), E>` 以优雅退出。
+- **滥用 `map_err(|_| ...)` 丢失原始错误**：保留原始错误有助于调试，可使用 `#[source]` 或 `#[from]`。
+- **为不可恢复错误返回 `Result`**：如数组索引越界应为 `panic!` 或前置检查，不要返回 `Result` 让调用者不知所措。
 
 ---
 

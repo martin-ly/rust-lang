@@ -13012,7 +13012,7 @@
       "layer": "L1",
       "title": "错误处理控制流（Error Handling Control Flow）",
       "positioning": "",
-      "line_count": 212,
+      "line_count": 250,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -13055,6 +13055,18 @@
           "lines": 9,
           "should_fail": false,
           "code_preview": "fn demo() -> Result<i32, &'static str> {     let x: i32 = try {         let a = ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn parse_positive(s: &str) -> Result<u32, String> {     let n: u32 = s.parse::<u..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// 等价展开（概念上） let x = expr?; // ≈ match Try::branch(expr) { //     ControlFlow::C..."
         },
         {
           "flags": [],
@@ -15956,28 +15968,11 @@
       "layer": "L2",
       "title": "Rust 发布流程（Rust Release Process）",
       "positioning": "",
-      "line_count": 93,
-      "theorem_chains": [
-        {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
-          "type": "paragraph"
-        },
-        {
-          "text": "> **反命题 1**: \"Rust 发布流程（Rust Release Process 在所有场景下都适用\" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。",
-          "type": "paragraph"
-        },
-        {
-          "text": "> **反命题 2**: \"忽略 Rust 发布流程（Rust Release Process 的细节也能写出正确代码\" ⟹ 不成立。编译错误通常是 Rust 发布流程（Rust Release Process 规则被违反的直接信号。",
-          "type": "paragraph"
-        },
-        {
-          "text": "> **反命题 3**: \"其他语言对 Rust 发布流程（Rust Release Process 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Rust 发布流程（Rust Release Process 具有语言特有的形态。",
-          "type": "paragraph"
-        }
-      ],
+      "line_count": 152,
+      "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 反命题"
+          "title": "### 反命题"
         }
       ],
       "code_blocks": [
@@ -15990,6 +15985,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../01_foundation/00_start/37_operators_and_symbols.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../07_future/00_version_tracking/50_nightly_rust.md",
         "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
@@ -15998,8 +15994,8 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "mermaid_blocks": 1,
+      "matrix_rows": 9,
       "pre_post": {
         "pre": [
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Editions](32_editions.md)"
@@ -26525,7 +26521,7 @@
       "layer": "L3",
       "title": "Rust 运行时（The Rust Runtime）",
       "positioning": "",
-      "line_count": 177,
+      "line_count": 262,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将运行时属性、分配行为和二进制输出串联起来。",
@@ -26550,6 +26546,24 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "#![no_std] #![no_main]  #[panic_handler] fn panic(_info: &core::panic::PanicInfo..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::cell::RefCell;  thread_local! {     static COUNTER: RefCell<u32> = RefC..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 控制台程序（默认） #![windows_subsystem = \"console\"]  // GUI 程序，不显示控制台窗口 #![windows_su..."
+        },
         {
           "flags": [],
           "lines": 17,
@@ -26584,7 +26598,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 20,
+      "matrix_rows": 26,
       "pre_post": {
         "pre": [
           "[Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Custom Allocators](../06_low_level_patterns/14_custom_allocators.md) · [Linkage](../04_ffi/27_linkage.md)"
@@ -26668,7 +26682,7 @@
       "layer": "L3",
       "title": "Unsafe 参考（Unsafe Reference）",
       "positioning": "",
-      "line_count": 162,
+      "line_count": 216,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `unsafe` 关键字、块、操作和 UB 契约串联起来。",
@@ -26701,6 +26715,18 @@
         },
         {
           "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "unsafe trait Zeroable {     /// 实现者必须保证该类型的所有位模式都是合法的 }  unsafe impl Zeroable fo..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use std::ptr::NonNull;  /// Safe wrapper：调用者无需检查空指针 pub struct SafeBox<T> {     ..."
+        },
+        {
+          "flags": [],
           "lines": 19,
           "should_fail": false,
           "code_preview": "use std::ptr::NonNull;  pub struct SafeBox<T> {     ptr: NonNull<T>, }  impl<T> ..."
@@ -26723,7 +26749,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 19,
+      "matrix_rows": 29,
       "pre_post": {
         "pre": [
           "[Unsafe Rust](03_unsafe.md) · [Behavior Considered Undefined](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md) · [Variables](../06_low_level_patterns/33_variables.md)"
@@ -36091,7 +36117,7 @@
       "layer": "L4",
       "title": "词法结构（Lexical Structure）",
       "positioning": "",
-      "line_count": 183,
+      "line_count": 249,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将字节流、Unicode 解码、token 流和 AST 构建串联起来。",
@@ -36124,6 +36150,24 @@
         },
         {
           "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "let r#match = 1; let r#type = \"keyword as identifier\"; ..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "let _ = some_side_effect(); ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "/// 计算两数之和 /// /// # Examples /// ..."
+        },
+        {
+          "flags": [],
           "lines": 5,
           "should_fail": false,
           "code_preview": "let valid_name = 1; let _ = 2;            // 通配符，非标识符 let r#match = 3;      // 原..."
@@ -36149,7 +36193,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 32,
+      "matrix_rows": 46,
       "pre_post": {
         "pre": [
           "[Notation](../06_notation/44_notation.md) · [Programming Language Foundations](../04_model_checking/23_programming_language_foundations.md)"
@@ -36166,7 +36210,7 @@
       "layer": "L4",
       "title": "条目参考（Items Reference）",
       "positioning": "",
-      "line_count": 168,
+      "line_count": 241,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块、item 和声明串联起来。",
@@ -36191,6 +36235,36 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "mod outer {     pub mod inner {         pub fn helper() {}     }     pub use inn..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn max<T: Ord>(a: T, b: T) -> T {     if a > b { a } else { b } }  const THRESHO..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "trait Drawable {     fn draw(&self);     fn bounds(&self) -> Bounds; }  impl Dra..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "trait Container<T> {     type Item;           // 关联类型     const MAX: usize;    /..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "extern \"C\" {     fn c_function(x: i32) -> i32;     static C_GLOBAL: c_int; } ..."
+        },
         {
           "flags": [],
           "lines": 6,
@@ -36232,7 +36306,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 35,
+      "matrix_rows": 42,
       "pre_post": {
         "pre": [
           "[Crates and Source Files](../../01_foundation/07_modules_and_items/38_crates_and_source_files.md) · [Modules and Paths](../../01_foundation/07_modules_and_items/11_modules_and_paths.md) · [Visibility and Privacy](../../03_advanced/06_low_level_patterns/34_visibility_and_privacy.md)"
@@ -36249,7 +36323,7 @@
       "layer": "L4",
       "title": "属性（Attributes）",
       "positioning": "",
-      "line_count": 151,
+      "line_count": 177,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将属性元数据与编译器行为串联起来。",
@@ -36317,7 +36391,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 25,
+      "matrix_rows": 43,
       "pre_post": {
         "pre": [
           "[Items Reference](46_items_reference.md) · [Macros](../../03_advanced/03_proc_macros/04_macros.md)"
@@ -36334,7 +36408,7 @@
       "layer": "L4",
       "title": "语句与表达式参考（Statements and Expressions Reference）",
       "positioning": "",
-      "line_count": 162,
+      "line_count": 160,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语句、表达式、值和副作用串联起来。",
@@ -53649,7 +53723,7 @@
       "layer": "L7",
       "title": "Rust 1.93 稳定特性",
       "positioning": "",
-      "line_count": 110,
+      "line_count": 165,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -53694,6 +53768,12 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "use std::fmt;  let f = fmt::from_fn(|f, _| write!(f, \"custom\")); println!(\"{}\", ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// WebAssembly 边界示例：将 String 移交给宿主 #[no_mangle] pub extern \"C\" fn allocate_strin..."
         }
       ],
       "sources": [],
@@ -53703,12 +53783,13 @@
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../06_ecosystem/11_domain_applications/11_webassembly.md",
         "05_rust_version_tracking.md",
-        "rust_1_92_stabilized.md"
+        "rust_1_92_stabilized.md",
+        "rust_1_94_stabilized.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "matrix_rows": 18,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)"

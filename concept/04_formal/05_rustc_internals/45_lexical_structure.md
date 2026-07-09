@@ -78,6 +78,72 @@ Rust 将标识符分为三类：
 
 标识符由 `XID_Start` 或下划线 `_` 开头，后续字符为 `XID_Continue`。下划线单独出现时不是标识符，而是模式中的通配符。
 
+### 原始标识符
+
+使用 `r#` 前缀可以将关键字用作标识符：
+
+```rust
+let r#match = 1;
+let r#type = "keyword as identifier";
+```
+
+### 下划线与未使用绑定
+
+下划线 `_` 作为模式时，表示"忽略该值"，不会触发未使用变量警告：
+
+```rust
+let _ = some_side_effect();
+```
+
+## 五、注释
+
+| 注释类型 | 语法 | 说明 |
+|:---|:---|:---|
+| 行注释 | `// ...` | 单行注释 |
+| 块注释 | `/* ... */` | 可跨多行，支持嵌套 |
+| 文档行注释 | `/// ...` | 生成 rustdoc 文档 |
+| 文档块注释 | `/** ... */` | 生成 rustdoc 文档 |
+| 模块文档注释 | `//! ...` | 为包含它的模块生成文档 |
+
+```rust
+/// 计算两数之和
+///
+/// # Examples
+/// ```
+/// let s = add(1, 2);
+/// ```
+fn add(a: i32, b: i32) -> i32 {
+    a + b // 行注释
+}
+
+/* 外层块注释
+   /* 嵌套块注释 */
+*/
+```
+
+## 六、字面量
+
+| 字面量类型 | 示例 | 说明 |
+|:---|:---|:---|
+| 整数 | `42`, `0x2A`, `0b101010`, `0o52` | 支持十进制/十六进制/二进制/八进制 |
+| 浮点数 | `3.14`, `1e10` | `f64` 默认 |
+| 字符 | `'a'`, `'\n'`, `'\u{1F600}'` | Unicode 标量值 |
+| 字符串 | `"hello"` | UTF-8 字符串 |
+| 原始字符串 | `r#"..."#` | 不处理转义 |
+| 字节字符串 | `b"hello"` | `&[u8]` 类型 |
+| C 字符串 | `c"hello"` | 以 NUL 结尾，用于 FFI |
+
+## 七、Token 与 Token Tree
+
+词法分析将源代码转换为 token 流：
+
+```bnf
+Token     ::= Keyword | Identifier | Literal | Punctuation | Delimiter
+token_tree::= Token | "(" token_tree* ")" | "[" token_tree* "]" | "{" token_tree* "}"
+```
+
+Token tree 是宏系统（`macro_rules!` 和过程宏）处理的基本单元。过程宏接收 `TokenStream`，可以遍历、转换并输出新的 token tree。
+
 ```bnf
 Identifier      ::= XID_Start XID_Continue* | "_" XID_Continue+
 RawIdentifier   ::= "r#" Identifier
