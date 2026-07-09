@@ -1,5 +1,5 @@
 > **内容分级**: [基础级]
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 静态项（Static Item） · 可变静态（Mutable Static） · 内部可变性（Interior Mutability） · 生命周期（Lifetime） · 延迟初始化（Lazy Initialization）
 
 # 静态项（Static Items）
@@ -19,7 +19,7 @@
 > [The Rust Programming Language — Constants and Statics](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) ·
 > [Rust By Example — Statics](https://doc.rust-lang.org/rust-by-example/custom_types/constants.html)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 

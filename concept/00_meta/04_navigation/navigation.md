@@ -4,7 +4,7 @@
 > **Summary**: Navigation hub and learning-path index for the concept map.
 > **受众**: [初学者]
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **定位**: 本文件是 `concept/` 知识体系的**统一入口**，提供按层级、按主题、按背景的多维导航路径。
 > **适用对象**: 任何希望系统掌握 Rust 语义空间的读者。
 > **Bloom 层级**: 应用
@@ -230,7 +230,7 @@ L5: paradigm_matrix（Rust 在设计空间中的位置）
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 与知识体系 v2.0 同步
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 认知路径
 

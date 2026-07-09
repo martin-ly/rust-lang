@@ -2,7 +2,7 @@
 
 > **EN**: Multi Dimensional Concept Matrix
 > **Summary**: 多维概念矩阵 Multi Dimensional Concept Matrix.
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
 
 本文件提供项目知识的多维度概念映射，连接不同抽象层（L1-L7）和领域（类型系统（Type System）、并发、异步（Async）、形式化等）。

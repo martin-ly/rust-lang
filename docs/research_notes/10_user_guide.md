@@ -4,7 +4,7 @@
 > **Summary**: 用户使用指南 User Guide.
 > **概念族**: 方法论 / 工具 / 指南
 > **内容分级**: [归档级]
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -339,7 +339,7 @@ A: 请参考 [10_project_maintenance_guide.md](10_project_maintenance_guide.md) 
 
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-> **适用版本**: Rust 1.96.1+ (Edition 2024)
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -386,7 +386,7 @@ A: 请参考 [10_project_maintenance_guide.md](10_project_maintenance_guide.md) 
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

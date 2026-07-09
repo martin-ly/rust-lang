@@ -2403,7 +2403,7 @@ impl<T: Copy + Default + std::ops::Add<Output = T> + std::ops::Mul<Output = T>,
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -2902,7 +2902,7 @@ fn main() {
 - **定义**: Rust 1.92.0 高级泛型编程模式，包括类型状态模式、类型见证模式、Newtype 模式、Visitor 模式、Extension Traits、Sealed Traits、类型擦除、高级组合模式等
 - **类型**: 高级层文档
 - **范畴**: 类型系统、泛型编程
-- **版本**: Rust 1.96.1+ (Edition 2024)
+- **版本**: Rust 1.97.0+ (Edition 2024)
 - **相关概念**: 泛型模式、类型状态、Newtype、Visitor、Extension Traits、类型擦除、HKT 模拟
 
 ### 属性特征

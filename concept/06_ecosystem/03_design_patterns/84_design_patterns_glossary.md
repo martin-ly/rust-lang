@@ -19,7 +19,7 @@
 > **相关文档**: [Design Patterns](02_patterns.md) · [Pattern Implementation Comparison](36_pattern_implementation_comparison.md) · [Pattern Selection Best Practices](37_pattern_selection_best_practices.md) · [Architecture Patterns](35_architecture_patterns.md) · [Engineering and Production Patterns](82_engineering_and_production_patterns.md) · [Frontier Research and Innovative Patterns](39_frontier_research_and_innovative_patterns.md) · [Algorithm Engineering Practice](../11_domain_applications/76_algorithm_engineering_practice.md)
 
 **最后更新**: 2026-07-09
-**适用版本**: Rust 1.96.1+ (Edition 2024)
+**适用版本**: Rust 1.97.0+ (Edition 2024)
 **文档类型**: 📚 基础参考
 
 ---
@@ -235,7 +235,7 @@ pub trait SimpleFuture {
 > **权威来源对齐变更日志**: 2026-07-09 将内部链接迁移至 `concept/` 权威页，补全 Rust 代码示例、术语表与决策树
 
 **文档版本**: 2.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **状态**: ✅ 权威页（canonical）
 
 ## 过渡段

@@ -15,7 +15,7 @@
 > **创建日期**: 2026-02-24
 > **最后更新**: 2026-06-29
 > **更新内容**: 补充型变与 Tree Borrows / RustBelt / Oxide 形式化联系
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 > **级别**: L1 (给人看的)
 > **用途**: 型变概念全景、三种型变详解、型变表、组合规则、与类型安全的关系
@@ -513,7 +513,7 @@ let local = String::from("local");
 
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **适用版本**: Rust 1.96.1+ (Edition 2024)
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -565,7 +565,7 @@ let local = String::from("local");
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

@@ -568,6 +568,8 @@ pub async fn improved_lifetime_elision(data: &str) -> &str {
 
 ### 零成本抽象
 
+Rust 1.90 继续强化零成本抽象（Zero-Cost Abstraction），使高层 API 在编译后接近手写底层代码的性能。
+
 ```rust
 /// 内联优化（Rust 1.90改进）
 #[inline(always)]

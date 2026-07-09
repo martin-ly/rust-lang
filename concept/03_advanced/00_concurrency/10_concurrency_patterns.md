@@ -29,8 +29,8 @@
 - [并发 模式：从消息 传递到锁自由的数据结构](#并发-模式从消息-传递到锁自由的数据结构)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 所有权（Ownership）与并发的统一](#11-所有权与并发的统一)
-    - [1.2 Send 与 Sync：编译期并发安全（Concurrency Safety）](#12-send-与-sync编译期并发安全)
+    - [1.1 所有权与并发的统一](#11-所有权与并发的统一)
+    - [1.2 Send 与 Sync：编译期并发安全](#12-send-与-sync编译期并发安全)
     - [1.3 共享状态 vs 消息传递](#13-共享状态-vs-消息传递)
   - [二、技术细节](#二技术细节)
     - [2.1 通道模式](#21-通道模式)
@@ -42,7 +42,7 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
-    - [4.4 边界测试：`ScopedThread` 中引用（Reference）逃逸（编译错误）](#44-边界测试scopedthread-中引用逃逸编译错误)
+    - [4.4 边界测试：`ScopedThread` 中引用逃逸（编译错误）](#44-边界测试scopedthread-中引用逃逸编译错误)
     - [4.5 边界测试：`Condvar` 虚假唤醒未处理（逻辑错误）](#45-边界测试condvar-虚假唤醒未处理逻辑错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
@@ -98,7 +98,7 @@
     - [2. 背压控制通道](#2-背压控制通道)
   - [发布订阅模式](#发布订阅模式)
     - [1. 类型安全的事件总线](#1-类型安全的事件总线)
-    - [2. 异步（Async）事件流](#2-异步事件流)
+    - [2. 异步事件流](#2-异步事件流)
   - [总结](#总结)
   - [这些模式充分利用了Rust 1.89的新特性，提供了高效、安全的消息传递解决方案](#这些模式充分利用了rust-189的新特性提供了高效安全的消息传递解决方案)
   - [补充视角：C05 Crate 并发模式实践](#补充视角c05-crate-并发模式实践)
@@ -698,7 +698,7 @@ fn fixed() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -801,7 +801,7 @@ fn main() {
 > [来源: [Herlihy & Shavit — Art of Multiprocessor Programming](https://dl.acm.org/doi/book/10.5555/2385452)]
 > [来源: [RFC 0458 — Send and Sync](https://rust-lang.github.io/rfcs//0458-send-improvements.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 补充视角：并发算法模式
 
@@ -2292,6 +2292,6 @@ async fn hybrid_processing() -> Result<Vec<u8>, String> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

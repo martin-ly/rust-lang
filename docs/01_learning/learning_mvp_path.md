@@ -2,7 +2,7 @@
 
 > **EN**: TRPL 3rd Edition Chapter Mapping Table
 > **Summary**: Maps each chapter of *The Rust Programming Language* 3rd Edition to the corresponding `concept/` authority page(s) in this knowledge base, with notes on coverage gaps.
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-07-09
 >
 > **受众**: [初学者] / [进阶]

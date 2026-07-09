@@ -619,7 +619,7 @@ async fn main() {
 > [Materialize Documentation](https://materialize.com/docs/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 流处理语义空间
 
@@ -731,7 +731,7 @@ fn main() {
 > [来源: [Stream Processing — Akka Streams](https://doc.akka.io/docs/akka/current/stream/)]
 > [来源: [Apache Flink — Stream Semantics](https://nightlies.apache.org/flink/flink-docs-stable/)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch17-00-async-await.html)
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）
 

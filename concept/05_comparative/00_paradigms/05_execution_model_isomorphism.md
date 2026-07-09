@@ -20,7 +20,7 @@
 > **原则**: 不做"并发编程教程"，聚焦"Rust 的执行模型在数学上与什么同构、与什么不同构、同构的精确条件是什么"。
 > **对齐来源**: [The Rust Async Book](https://rust-lang.github.io/async-book/index.html) · [Tokio Tutorial] · [Go Memory Model] · [Hoare CSP 1978] · [Milner π-Calculus 1992] · [Hewitt Actor 1973] · [Boehm & Adve PLDI 2008]
 > **对比语言**: Rust · Go · Erlang · C++ · Java
-> **基准版本**: Rust 1.96.1 stable (Edition 2024)
+> **基准版本**: Rust 1.97.0 stable (Edition 2024)
 
 ---
 

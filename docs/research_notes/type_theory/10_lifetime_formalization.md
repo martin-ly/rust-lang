@@ -14,7 +14,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **视角**: 类型理论视角 — 关注生命周期作为类型系统（Type System）的组成部分，与类型推导、子类型、泛型（Generics）、型变的交互。
 > **对应视角**: [形式化方法视角](../formal_methods/10_lifetime_formalization.md) 聚焦定理、公理、证明目标与国际形式化成果映射。
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [NLL RFC](https://rust-lang.github.io/rfcs/2094-nll.html)
 
@@ -75,7 +75,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-06-29
 > **更新内容**: 补充国际形式化成果对标（Oxide / RustBelt / RustSEM / Tree Borrows）
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 
 ---
@@ -574,7 +574,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-> **适用版本**: Rust 1.96.1+ (Edition 2024)
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -621,7 +621,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

@@ -3,7 +3,7 @@
 > **EN**: Fuzzing Guide
 > **Summary**: cargo-fuzz 模糊测试入门指南 Fuzzing Guide.
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/应用)
 > 本文档对应 Rust 生产级工程实践体系阶段三 —— 模糊测试。
@@ -307,7 +307,7 @@ fuzzing:
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Fuzzing Book、cargo-fuzz、libFuzzer 官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

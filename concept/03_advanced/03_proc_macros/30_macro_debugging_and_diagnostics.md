@@ -16,7 +16,7 @@
 >
 > **主要来源**: [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html) · [cargo-expand](https://github.com/dtolnay/cargo-expand) · [rustc-dev-guide — Macro Expansion](https://rustc-dev-guide.rust-lang.org/macro-expansion.html) · [proc-macro2 crate](https://docs.rs/proc-macro2/)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 
@@ -249,7 +249,7 @@ impl rustc_driver::Callbacks for MyCallbacks {
 > **权威来源对齐变更日志**: 2026-07-09 由 `crates/c11_macro_system_proc/docs/tier_04_advanced/04_macro_debugging_in_depth.md` 按 AGENTS.md §6.4 迁移至此
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-09
 **状态**: ✅ 权威来源对齐完成
 

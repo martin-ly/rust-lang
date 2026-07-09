@@ -41764,7 +41764,7 @@
       "layer": "L6",
       "title": "Cargo Script 脚本化 Rust",
       "positioning": "将 Rust 从\"项目级语言\"扩展为\"脚本级语言\"的工程机制，使单文件可执行成为一等公民。",
-      "line_count": 733,
+      "line_count": 736,
       "theorem_chains": [
         {
           "text": "- **定理**: Cargo Script：单文件 Rust 程序 定义 ⟹ 类型安全保证",
@@ -45001,7 +45001,7 @@
       "layer": "L6",
       "title": "模式实现对比 (Pattern Implementation Comparison)",
       "positioning": "",
-      "line_count": 788,
+      "line_count": 789,
       "theorem_chains": [
         {
           "text": "> **定理链**: Scenario ⟹ Implementation Strategy ⟹ Trade-off Evaluation",
@@ -45131,7 +45131,7 @@
       "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 32,
+      "matrix_rows": 33,
       "pre_post": {
         "pre": [
           "[Design Patterns](02_patterns.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)"
@@ -48468,7 +48468,7 @@
       "layer": "L6",
       "title": "Rust 嵌入式图形开发",
       "positioning": "",
-      "line_count": 1162,
+      "line_count": 1166,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust 嵌入式图形系统开发 定义 ⟹ 类型安全保证",
@@ -51543,7 +51543,7 @@
       "layer": "L6",
       "title": "Blockchain & Smart Contract Security（区块链与智能合约安全）",
       "positioning": "",
-      "line_count": 919,
+      "line_count": 921,
       "theorem_chains": [
         {
           "text": "### 1.1 内存安全 ⟹ 合约无重入/溢出漏洞",
@@ -51638,19 +51638,19 @@
         },
         {
           "flags": [
-            "compile_fail"
+            "ignore"
           ],
-          "lines": 9,
-          "should_fail": true,
-          "code_preview": "use secp256k1::{SecretKey, PublicKey, Message};  fn sign(sk: &SecretKey, msg: &[..."
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// 需要 secp256k1 与 sha2 crate use secp256k1::{Message, Secp256k1, SecretKey}; use..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 12,
+          "lines": 11,
           "should_fail": false,
-          "code_preview": "#![no_std]  fn hash_data(data: &[u8]) -> [u8; 32] {     // ❌ 编译错误: sha2 的 Sha256..."
+          "code_preview": "#![no_std]  use sha2::{Digest, Sha256};  fn hash_data(data: &[u8]) -> [u8; 32] {..."
         },
         {
           "flags": [
@@ -53048,7 +53048,7 @@
       "layer": "L6",
       "title": "Rust 量子计算生态",
       "positioning": "",
-      "line_count": 992,
+      "line_count": 996,
       "theorem_chains": [
         {
           "text": "- **定理**: Quantum Computing in Rust（量子计算与 Rust） 定义 ⟹ 类型安全保证",
@@ -54204,7 +54204,7 @@
       "layer": "L7",
       "title": "Rust 形式模型演进跟踪（1.79–1.97+）",
       "positioning": "本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权（Ownership）模型、类型系统（Type System）、异步（Async）语义、Unsafe 边界**有结构性影响的特性。",
-      "line_count": 2583,
+      "line_count": 2584,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust 形式模型演进跟踪（1.79–1.97+） 定义 ⟹ 类型安全保证",
@@ -54341,12 +54341,12 @@
         "../04_research_and_experimental/03_evolution.md",
         "https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md",
         "rust_1_95_stabilized.md",
-        "rust_1_97_preview.md"
+        "rust_1_97_stabilized.md"
       ],
       "transitions": 8,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
-      "matrix_rows": 473,
+      "matrix_rows": 474,
       "pre_post": {
         "pre": [
           ">"
@@ -54414,7 +54414,7 @@
       "layer": "L7",
       "title": "Rust 1.90 网络特性参考",
       "positioning": "",
-      "line_count": 753,
+      "line_count": 755,
       "theorem_chains": [
         {
           "text": "> **定理链**: Version Context ⟹ Feature Set ⟹ Migration Impact",
@@ -56037,112 +56037,39 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\rust_1_97_preview.md",
       "layer": "L7",
-      "title": "Rust 1.97.0 稳定特性详解",
+      "title": "Rust 1.97.0 前沿特性预览（已归档）",
       "positioning": "",
-      "line_count": 293,
-      "theorem_chains": [
-        {
-          "text": "> **定理 1** [Tier 2]: Rust 1.97.0 前沿特性预览（Beta） 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
-          "type": "paragraph"
-        },
-        {
-          "text": "> **定理 2** [Tier 2]: 正确理解 Rust 1.97.0 前沿特性预览（Beta） 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。",
-          "type": "paragraph"
-        },
-        {
-          "text": "> **定理 3** [Tier 3]: 将 Rust 1.97.0 前沿特性预览（Beta） 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。",
-          "type": "paragraph"
-        }
-      ],
+      "line_count": 98,
+      "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
-        {
-          "flags": [],
-          "lines": 12,
-          "should_fail": false,
-          "code_preview": "#[must_use] struct ImportantToken;  fn give_token() -> Result<ImportantToken, st..."
-        },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 4,
+          "lines": 15,
           "should_fail": false,
-          "code_preview": "// ❌ 编译错误 #[export_name = \"\"] pub fn foo() {} ..."
-        },
-        {
-          "flags": [],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "use std::num::NonZeroU32;  let n = NonZeroU32::new(0b00010100).unwrap(); assert_..."
-        },
-        {
-          "flags": [],
-          "lines": 3,
-          "should_fail": false,
-          "code_preview": "const SPACE: char = ' '; const IS_CONTROL: bool = SPACE.is_control(); // false ..."
-        },
-        {
-          "flags": [],
-          "lines": 9,
-          "should_fail": false,
-          "code_preview": "use std::num::NonZeroU32;  let a = NonZeroU32::new(10).unwrap(); let b = NonZero..."
-        },
-        {
-          "flags": [],
-          "lines": 6,
-          "should_fail": false,
-          "code_preview": "fn a() {} fn b() {}  assert!(std::ptr::fn_addr_eq(a, a)); assert!(!std::ptr::fn_..."
-        },
-        {
-          "flags": [],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "const BUF: [u8; 10] = [0; 10]; const SIZE: usize = std::mem::size_of_val(&BUF); ..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "use std::hash::BuildHasherDefault; use std::collections::hash_map::DefaultHasher..."
-        },
-        {
-          "flags": [],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "let b = Box::new(42); let p = Box::as_ptr(&b); assert_eq!(unsafe { *p }, 42); ..."
-        },
-        {
-          "flags": [],
-          "lines": 6,
-          "should_fail": false,
-          "code_preview": "let opt = Some(42); assert_eq!(opt.as_slice(), &[42]);  let none: Option<i32> = ..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "#[cfg(target_has_atomic_equal_alignment = \"ptr\")] fn optimized_ptr_atomic() {   ..."
+          "code_preview": "// 以下代码在 1.97.0 stable 上尚不可用，预计 1.98+ 稳定 #![feature(vec_deque_truncate_front, ve..."
         }
       ],
       "sources": [],
       "cross_references": [
-        "../../../docs/02_reference/quick_reference/02_rust_197_features_cheatsheet.md",
-        "../../02_intermediate/02_memory_management/03_memory_management.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "05_rust_version_tracking.md",
         "rust_1_96_stabilized.md",
+        "rust_1_97_stabilized.md",
         "rust_1_98_preview.md"
       ],
-      "transitions": 6,
+      "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 11,
+      "matrix_rows": 17,
       "pre_post": {
         "pre": [
-          "[Rust 1.96 稳定特性](rust_1_96_stabilized.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [NonZero](../../02_intermediate/02_memory_management/03_memory_management.md)"
+          "[Rust 1.96 稳定特性](rust_1_96_stabilized.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)"
         ],
         "post": [
-          "[Rust 1.98 前沿特性预览](rust_1_98_preview.md)"
+          "[Rust 1.97.0 稳定特性](rust_1_97_stabilized.md) · [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)"
         ]
       },
       "backward_chains": 0,
@@ -56153,45 +56080,103 @@
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
-      "line_count": 175,
+      "line_count": 339,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
         {
-          "flags": [],
-          "lines": 7,
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
           "should_fail": false,
-          "code_preview": "use std::num::NonZeroU32;  let n = NonZeroU32::new(0b0001_0100).unwrap(); assert..."
+          "code_preview": "#[must_use] struct ImportantToken;  fn give_token() -> Result<ImportantToken, st..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#![warn(dead_code_pub_in_binary)]  pub fn unused_in_binary() {}  fn main() {} ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
           "lines": 4,
           "should_fail": false,
-          "code_preview": "const BELL: char = '\\u{0007}'; const IS_CTRL: bool = BELL.is_control(); assert!(..."
+          "code_preview": "#[cfg(any(target_arch = \"aarch64\", target_arch = \"x86_64\"))] #[target_feature(en..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_has_atomic_primitive_alignment = \"64\")] fn assumes_atomic_align() {..."
         },
         {
           "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "use std::io::{self}; use std::io::{self, Write}; ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "use std::iter::RepeatN;  let empty: RepeatN<i32> = RepeatN::default(); assert_eq..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
           "lines": 8,
           "should_fail": false,
-          "code_preview": "use std::ptr;  fn foo() {} fn bar() {}  assert!(ptr::fn_addr_eq(foo, foo)); asse..."
+          "code_preview": "use std::ffi::CStr;  let bytes = b\"hello\\0\"; let e: std::ffi::FromBytesUntilNulE..."
         },
         {
-          "flags": [],
-          "lines": 6,
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
           "should_fail": false,
-          "code_preview": "use std::mem::{size_of_val, align_of_val};  const ARR: [u8; 8] = [0; 8]; const S..."
+          "code_preview": "let n: u32 = 0b_0110_0100;  assert_eq!(n.isolate_highest_one(), 0b_0100_0000); a..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::num::NonZeroU32;  let n = NonZeroU32::new(0b_0110_0100).unwrap();  asse..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
           "lines": 4,
           "should_fail": false,
-          "code_preview": "let b = Box::new(42); let p: *const i32 = Box::as_ptr(&b); assert!(!p.is_null())..."
+          "code_preview": "const BELL: char = '\\u{0007}'; const IS_CTRL: bool = BELL.is_control(); static_a..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
-          "code_preview": "let x: Option<i32> = Some(42); assert_eq!(x.as_slice(), &[42]);  let y: Option<i..."
+          "code_preview": "use std::pin::{pin, Pin};  let mut x = 42; let p: Pin<&mut &mut i32> = pin!(&mut..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// ❌ 编译错误 #[export_name = \"\"] pub fn foo() {} ..."
         }
       ],
       "sources": [],
@@ -56205,7 +56190,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 4,
+      "matrix_rows": 32,
       "pre_post": {
         "pre": [
           "[Rust 版本跟踪](05_rust_version_tracking.md) · [Rust 1.96 稳定特性](rust_1_96_stabilized.md)"
@@ -56222,7 +56207,7 @@
       "layer": "L7",
       "title": "Rust 1.98+ 前沿特性预览",
       "positioning": "",
-      "line_count": 575,
+      "line_count": 595,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Rust 1.98+ 前沿特性预览 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -56280,10 +56265,18 @@
           "code_preview": "#![feature(async_drop)]  struct AsyncFile {     // 持有需要异步刷新的资源 }  impl AsyncDrop..."
         },
         {
-          "flags": [],
-          "lines": 15,
+          "flags": [
+            "ignore"
+          ],
+          "lines": 17,
           "should_fail": false,
-          "code_preview": "// 1.98+ 使用示例（概念性，当前需 nightly 或等待稳定） use std::num::NonZeroU32;  fn demo_198_apis..."
+          "code_preview": "// 1.98+ API 预览（当前需 nightly，稳定化后可直接使用） #![feature(float_algebraic, int_format_in..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "fn demo_stable_apis() {     // 整数平方根（1.84 稳定）     assert_eq!(10i32.isqrt(), 3); ..."
         }
       ],
       "sources": [],
@@ -56546,7 +56539,7 @@
       "layer": "L7",
       "title": "BorrowSanitizer：动态别名规则验证工具",
       "positioning": "",
-      "line_count": 329,
+      "line_count": 353,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: BorrowSanitizer 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -56567,6 +56560,20 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn reborrow_ok() {     let mut x = 0i32;     let r1 = &mut x;     let r2 = &mut ..."
+        },
+        {
+          "flags": [
+            "no_run"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "unsafe fn aliasing_violation() {     let mut x = 0i32;     let r = &mut x as *mu..."
+        },
         {
           "flags": [
             "ignore"
@@ -57209,7 +57216,7 @@
       "layer": "L7",
       "title": "派生 CoercePointee 预研：智能指针的自动类型强制",
       "positioning": "探讨 Rust 1.95+ 中通过派生宏（Macro）自动化 `CoerceUnsized` 和 `DispatchFromDyn` 实现，降低自定义智能指针（Smart Pointer）的**样板代码**和**unsafe 实现风险**。",
-      "line_count": 592,
+      "line_count": 636,
       "theorem_chains": [
         {
           "text": "- **定理**: 派生 CoercePointee 预研：智能指针的自动类型强制 定义 ⟹ 类型安全保证",
@@ -57258,9 +57265,17 @@
         },
         {
           "flags": [
+            "ignore"
+          ],
+          "lines": 34,
+          "should_fail": false,
+          "code_preview": "#![feature(derive_coerce_pointee)]  use std::marker::CoercePointee; use std::ops..."
+        },
+        {
+          "flags": [
             "compile_fail"
           ],
-          "lines": 13,
+          "lines": 16,
           "should_fail": true,
           "code_preview": "use std::marker::CoercePointee;  // ❌ 编译错误: CoercePointee 要求 #[repr(transparent)..."
         },
@@ -57276,7 +57291,7 @@
           "flags": [
             "compile_fail"
           ],
-          "lines": 16,
+          "lines": 19,
           "should_fail": true,
           "code_preview": "use std::marker::CoercePointee;  #[repr(transparent)] #[derive(CoercePointee)] s..."
         },
@@ -57330,7 +57345,7 @@
       "layer": "L7",
       "title": "Const Trait Impl 预研：常量上下文中的 Trait 泛化",
       "positioning": "探讨 Rust 在**常量上下文**（`const fn`）中支持 Trait 调用的演进，分析其对泛型（Generics）编程、`const fn` 表达能力以及编译期计算的影响。",
-      "line_count": 626,
+      "line_count": 654,
       "theorem_chains": [
         {
           "text": "- **定理**: Const Trait Impl 预研：常量上下文中的 Trait 泛化 定义 ⟹ 类型安全保证",
@@ -57376,6 +57391,14 @@
           "lines": 15,
           "should_fail": false,
           "code_preview": "// 当前 Rust: const fn 中不能调用 Trait 方法 trait Add {     fn add(&self, other: &Self) ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "#![feature(const_trait_impl)]  #[const_trait] trait Add {     fn add(&self, othe..."
         },
         {
           "flags": [
@@ -57580,7 +57603,7 @@
       "layer": "L7",
       "title": "Unsafe Fields 预研：字段级安全边界的精确标注",
       "positioning": ">",
-      "line_count": 619,
+      "line_count": 668,
       "theorem_chains": [
         {
           "text": "- **定理**: Unsafe Fields 预研：字段级安全边界的精确标注 定义 ⟹ 类型安全保证",
@@ -57634,6 +57657,20 @@
           "lines": 21,
           "should_fail": false,
           "code_preview": "// 声明 unsafe 字段 struct RawBuffer {     unsafe ptr: *mut u8,      // 访问此字段需要 unsa..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use std::mem::MaybeUninit;  struct MiniVec<T> {     data: Box<[MaybeUninit<T>]>,..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "#![feature(unsafe_fields)]  use std::mem::MaybeUninit;  struct MiniVec<T> {     ..."
         },
         {
           "flags": [
@@ -58079,7 +58116,7 @@
       "layer": "L7",
       "title": "Async Drop：异步资源的优雅销毁",
       "positioning": "分析 Rust 中 **异步（Async）资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（[Async Drop Initiative](https://github.com/rust-lang/rust/issues/126482)）、设计约束与当前 nightly 实现状态。",
-      "line_count": 758,
+      "line_count": 789,
       "theorem_chains": [
         {
           "text": "- **定理**: Async Drop：异步资源的优雅销毁 定义 ⟹ 类型安全保证",
@@ -58118,6 +58155,14 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "#![feature(async_drop)]  use std::future::AsyncDrop; use std::pin::Pin;  struct ..."
+        },
         {
           "flags": [
             "ignore"
@@ -58317,22 +58362,10 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\03_preview_features\\22_gen_blocks_preview.md",
       "layer": "L7",
-      "title": "Generator Blocks（gen）预览",
+      "title": "Gen Blocks 预研：超越异步的泛化生成器",
       "positioning": "探讨 Rust 中 **gen blocks**（生成器块）的提案——将 `async`/`.await` 的模式从**异步（Async）计算**泛化到**惰性迭代**和**协程**，分析其对迭代器（Iterator）生态、流处理（Stream）和异步生成器的影响。",
-      "line_count": 743,
+      "line_count": 650,
       "theorem_chains": [
-        {
-          "text": "| Gen Blocks Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| Gen Blocks Preview 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| Gen Blocks Preview 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |",
-          "type": "table_row"
-        },
         {
           "text": "- **定理**: Gen Blocks 预研：超越异步的泛化生成器 定义 ⟹ 类型安全保证",
           "type": "paragraph"
@@ -58352,9 +58385,6 @@
       ],
       "anti_propositions": [
         {
-          "title": "### 反命题"
-        },
-        {
           "title": "## 四、反命题"
         },
         {
@@ -58369,17 +58399,31 @@
           "flags": [
             "ignore"
           ],
-          "lines": 11,
+          "lines": 28,
           "should_fail": false,
-          "code_preview": "// 概念代码: gen block（提案中，与 generator 相关） // let iter = gen { //     yield 1; //   ..."
+          "code_preview": "// gen block 示例 let fib = gen {     let mut a = 0;     let mut b = 1;     loop {..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "fn fibonacci() -> impl Iterator<Item = u64> {     let (mut a, mut b) = (0u64, 1u..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 28,
+          "lines": 17,
           "should_fail": false,
-          "code_preview": "// gen block 示例 let fib = gen {     let mut a = 0;     let mut b = 1;     loop {..."
+          "code_preview": "#![feature(gen_blocks)]  fn fibonacci() -> impl Iterator<Item = u64> {     gen {..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "#![feature(gen_blocks)]  // async gen 产生一个 Stream（需 futures/nightly std Stream 支..."
         },
         {
           "flags": [
@@ -58418,29 +58462,22 @@
       "cross_references": [
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
-        "../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md",
         "../../03_advanced/01_async/02_async.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
-        "../00_version_tracking/05_rust_version_tracking.md",
-        "22_gen_blocks_preview.md"
+        "../00_version_tracking/05_rust_version_tracking.md"
       ],
-      "transitions": 14,
+      "transitions": 8,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
-      "matrix_rows": 28,
+      "matrix_rows": 24,
       "pre_post": {
         "pre": [
-          "[Iterator](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) · [Async](../../03_advanced/01_async/02_async.md)",
-          "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)",
-          "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)",
-          "N/A",
           "[Async](../../03_advanced/01_async/02_async.md) · [Traits/Iterators](../../02_intermediate/00_traits/01_traits.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)",
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)",
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)"
         ],
         "post": [
-          "[Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)",
           "[Version Tracking](../00_version_tracking/05_rust_version_tracking.md)"
         ]
       },
@@ -58606,7 +58643,7 @@
       "layer": "L7",
       "title": "Specialization：Trait 实现的精确化与重叠解析",
       "positioning": "分析 Rust **特化（Specialization）**机制的设计动机——允许为特定类型提供比泛型（Generics）实现更精确的 Trait 实现，解决当前 Orphan Rule 和 Coherence 规则下的表达能力限制。",
-      "line_count": 743,
+      "line_count": 772,
       "theorem_chains": [
         {
           "text": "- **定理**: Specialization：Trait 实现的精确化与重叠解析 定义 ⟹ 类型安全保证",
@@ -58644,6 +58681,14 @@
           "lines": 28,
           "should_fail": false,
           "code_preview": "#![feature(specialization)]  // nightly only  // 默认实现（最通用） impl<T: Debug> ToDebu..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 25,
+          "should_fail": false,
+          "code_preview": "#![feature(min_specialization)]  trait Describe {     fn describe(&self) -> &'st..."
         },
         {
           "flags": [
@@ -59556,7 +59601,7 @@
       "layer": "L7",
       "title": "Arbitrary Self Types 预览：自定义方法接收器",
       "positioning": "探讨 Rust 中 arbitrary self types 的提案——允许 `self` 参数使用任意类型（不仅是 `Self`、`&Self`、`&mut Self`、`Box<Self>`、`Rc<Self>`、`Arc<Self>`、`Pin<P<Self>>`），分析其对嵌入式驱动、内核编程和自定义指针类型的影响。",
-      "line_count": 350,
+      "line_count": 401,
       "theorem_chains": [
         {
           "text": "- **定理**: Arbitrary Self Types 预览：自定义方法接收器 定义 ⟹ 类型安全保证",
@@ -59601,12 +59646,26 @@
           "code_preview": "impl MyType {     fn by_value(self) {}           // ✅ Self     fn by_ref(&self) ..."
         },
         {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use std::rc::Rc;  struct Counter(i32);  impl Counter {     fn value(self: Rc<Sel..."
+        },
+        {
           "flags": [
             "ignore"
           ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "#![feature(arbitrary_self_types)]  impl MyType {     // 使用自定义智能指针     fn by_my_p..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 28,
+          "should_fail": false,
+          "code_preview": "#![feature(arbitrary_self_types)]  use std::ops::Receiver;  struct TaggedPtr<T> ..."
         },
         {
           "flags": [
@@ -59999,7 +60058,7 @@
       "layer": "L7",
       "title": "`std::autodiff`：Rust 官方自动微分前沿追踪",
       "positioning": "追踪 Rust 语言层面的自动微分（Automatic Differentiation, AD）实验进展，分析其对 AI/ML 生态的潜在影响。",
-      "line_count": 326,
+      "line_count": 325,
       "theorem_chains": [
         {
           "text": "- **定理**: `std::autodiff`：Rust 官方自动微分前沿追踪 定义 ⟹ 类型安全保证",
@@ -60039,17 +60098,17 @@
           "flags": [
             "ignore"
           ],
-          "lines": 22,
+          "lines": 15,
           "should_fail": false,
-          "code_preview": "#![feature(autodiff)]  use std::autodiff::{forward, reverse};  // 反向模式自动微分（深度学习常..."
+          "code_preview": "#![feature(autodiff)]  // 前向模式自动微分：标量函数求导 #[autodiff_forward(d_square, Dual, Dua..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 10,
+          "lines": 14,
           "should_fail": false,
-          "code_preview": "// 前向模式: 同时计算值和导数 #[forward] fn f(x: f64) -> f64 { x.sin() } // 生成: f(x) -> (f64..."
+          "code_preview": "#![feature(autodiff)]  // 反向模式自动微分（多输入、单输出常用） #[autodiff_reverse(d_rosenbrock, D..."
         },
         {
           "flags": [
@@ -61289,7 +61348,7 @@
       "layer": "L7",
       "title": "Rust for Linux ：操作系统内核中的内存安全",
       "positioning": "深入分析 **Rust for Linux** 项目——如何将 Rust 引入 Linux 内核开发，从驱动程序编写、C 互操作到内核特定的安全保证，揭示系统编程范式的历史性转变。",
-      "line_count": 1018,
+      "line_count": 1066,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust for Linux ：操作系统内核中的内存安全（Memory Safety） 定义 ⟹ 类型安全保证",
@@ -61320,6 +61379,20 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "#![no_std]  pub fn add(left: u64, right: u64) -> u64 {     left + right }  #[cfg..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "#![no_std] #![no_main]  extern crate alloc;  use kernel::prelude::*;  module! { ..."
+        },
         {
           "flags": [
             "ignore"

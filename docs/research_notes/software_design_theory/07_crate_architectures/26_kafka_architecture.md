@@ -10,7 +10,7 @@
 > 本文档涉及的消息中间件生态以 Apache Kafka 与 `rdkafka` crate 为主。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
 >

@@ -1,7 +1,7 @@
 > **内容分级**: [综述级]
 > [综述级]
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 错误处理 (Error Handling) · Result · Option · 传播运算符 (? ) · 模式匹配（Pattern Matching）错误 (Match on Result) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 # Rust 错误处理基础
@@ -40,7 +40,7 @@
 
 ## 📑 目录
 
-- [Rust 错误处理（Error Handling）基础](#rust-错误处理基础)
+- [Rust 错误处理基础](#rust-错误处理基础)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Result 类型](#11-result-类型)
@@ -51,7 +51,7 @@
     - [2.2 map 与 and\_then](#22-map-与-and_then)
     - [2.3 组合模式](#23-组合模式)
   - [三、Panic 与不可恢复错误](#三panic-与不可恢复错误)
-    - [3.1 panic! 宏（Macro）](#31-panic-宏)
+    - [3.1 panic! 宏](#31-panic-宏)
     - [3.2 unwrap 与 expect](#32-unwrap-与-expect)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -61,12 +61,12 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：错误处理的编译错误](#十二边界测试错误处理的编译错误)
-    - [12.1 边界测试：`unwrap()` 在 `Result::Err` 上 panic（运行时（Runtime）错误）](#121-边界测试unwrap-在-resulterr-上-panic运行时错误)
+    - [12.1 边界测试：`unwrap()` 在 `Result::Err` 上 panic（运行时错误）](#121-边界测试unwrap-在-resulterr-上-panic运行时错误)
     - [12.2 边界测试：`?` 在返回 `()` 的函数中使用（编译错误）](#122-边界测试-在返回--的函数中使用编译错误)
     - [10.3 边界测试：`Result` 与 `Option` 的混用（编译错误）](#103-边界测试result-与-option-的混用编译错误)
     - [10.4 边界测试：`catch_unwind` 与 `UnwindSafe`（编译错误）](#104-边界测试catch_unwind-与-unwindsafe编译错误)
     - [10.5 边界测试：`Result` 的 `unwrap_unchecked` 与 release 模式（运行时 UB）](#105-边界测试result-的-unwrap_unchecked-与-release-模式运行时-ub)
-    - [10.5 边界测试：生命周期（Lifetimes）参数的不匹配返回](#105-边界测试生命周期参数的不匹配返回)
+    - [10.5 边界测试：生命周期参数的不匹配返回](#105-边界测试生命周期参数的不匹配返回)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -620,7 +620,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -791,12 +791,12 @@ fn main() {}
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
 > [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**:
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 实践
 

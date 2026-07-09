@@ -5,7 +5,7 @@
 > - [机器学习生态](../../../../concept/06_ecosystem/11_domain_applications/46_machine_learning_ecosystem.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
 >

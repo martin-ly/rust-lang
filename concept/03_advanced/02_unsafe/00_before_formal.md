@@ -4,7 +4,7 @@
 > **Summary**: Formal Methods: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **内容分级**: [综述级]
 > **受众**: [进阶]
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **定位**: L3（高级）与 L4（形式化）之间的**决策缓冲带**，帮助你判断是否需要阅读形式化内容。
 >

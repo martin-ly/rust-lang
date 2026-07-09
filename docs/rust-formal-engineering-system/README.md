@@ -6,7 +6,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **说明**: 本目录为**单一索引层**，形式化理论内容已整合至 [研究笔记](../research_notes/README.md) 及各 crates。子目录 README 仅为占位重定向，请以 [00_master_index.md](00_master_index.md) 为完整导航入口。
 > **docs 全结构**: DOCS_STRUCTURE_OVERVIEW § 2.9
@@ -164,7 +164,7 @@ fn render<T: Drawable>(item: T) {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

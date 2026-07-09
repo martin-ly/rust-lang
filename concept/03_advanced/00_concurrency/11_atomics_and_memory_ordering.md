@@ -30,7 +30,7 @@
 
 ## 📑 目录
 
-- [原子操作（Atomic Operations）与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)
+- [原子操作与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 原子类型全景](#11-原子类型全景)
@@ -46,7 +46,7 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
-    - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时（Runtime） UB）](#44-边界测试原子操作与非原子操作混用数据竞争--运行时-ub)
+    - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时 UB）](#44-边界测试原子操作与非原子操作混用数据竞争--运行时-ub)
     - [4.5 边界测试：`Ordering::Relaxed` 导致逻辑错误（编译通过但语义错误）](#45-边界测试orderingrelaxed-导致逻辑错误编译通过但语义错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
@@ -76,7 +76,7 @@
     - [2.1. 理念与优势](#21-理念与优势)
     - [2.2. 挑战与危险](#22-挑战与危险)
   - [3. 本分册核心思想总结](#3-本分册核心思想总结)
-    - [3.1. 所有权（Ownership）作为并发的中心法则](#31-所有权作为并发的中心法则)
+    - [3.1. 所有权作为并发的中心法则](#31-所有权作为并发的中心法则)
     - [3.2. 两种范式，一个目标](#32-两种范式一个目标)
     - [3.3. 抽象的力量](#33-抽象的力量)
   - [4. 哲学批判性分析](#4-哲学批判性分析)
@@ -712,7 +712,7 @@ fn fixed() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -831,7 +831,7 @@ fn main() {
 > [来源: [RFC 1505 — Atomic Ordering](https://github.com/rust-lang/rfcs/pull/1505)]
 > [来源: [Herlihy & Shavit — Art of Multiprocessor Programming](https://dl.acm.org/doi/book/10.5555/2385452)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 认知路径
 

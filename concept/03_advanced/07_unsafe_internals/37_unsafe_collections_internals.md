@@ -1,5 +1,5 @@
 > **内容分级**: [专家级]
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 未初始化内存（Uninitialized Memory） · 原始指针（Raw Pointer） · 容量（Capacity） · 长度（Length） · 布局（Layout） · Drop 检查 · 内存安全（Memory Safety）
 
 # Unsafe 集合内部实现：Vec、Arc、Mutex（Unsafe Collections Internals）
@@ -20,7 +20,7 @@
 > [The Rust Reference — Raw Pointers](https://doc.rust-lang.org/reference/types/pointer.html) ·
 > [std::alloc](https://doc.rust-lang.org/std/alloc/index.html)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 

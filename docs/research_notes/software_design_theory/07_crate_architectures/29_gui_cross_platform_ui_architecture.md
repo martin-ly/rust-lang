@@ -6,7 +6,7 @@
 > - [响应式编程](../../../../concept/06_ecosystem/04_web_and_networking/40_reactive_programming.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **状态**: ✅ 已完成
 >
@@ -365,7 +365,7 @@ let window = web_sys::window().unwrap();
 > [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-06-29
 > **状态**: ✅ 已完成
 

@@ -319,6 +319,6 @@ serde = { path = "../serde-fix" }
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 / Cargo manifest format
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Cargo Book manifest 参考文档

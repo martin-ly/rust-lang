@@ -3,7 +3,7 @@
 > **EN**: Embassy vs RTIC
 > **Summary**: 嵌入式 Rust 指南 Embassy vs RTIC. (stub/archive redirect)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [A]
 >
 > **层次定位**: L3-L6 高级-生态 / 嵌入式应用域
@@ -314,7 +314,7 @@ mod app {
 > **权威来源**: [Embassy Book](https://embassy.dev/book/), [RTIC Book](https://rtic-rs.github.io/book/), [Rust Embedded WG](https://github.com/rust-embedded/wg)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 初版完成
 

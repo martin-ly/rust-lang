@@ -40,7 +40,7 @@
     - [思维导图](#思维导图)
   - [1. Future Trait 详解](#1-future-trait-详解)
     - [1.1 Future 的定义](#11-future-的定义)
-    - [1.2 Poll 枚举（Enum）](#12-poll-枚举)
+    - [1.2 Poll 枚举](#12-poll-枚举)
     - [1.3 Context 和 Waker](#13-context-和-waker)
   - [2. Poll 与 Waker 机制](#2-poll-与-waker-机制)
     - [2.1 完整执行流程](#21-完整执行流程)
@@ -56,7 +56,7 @@
   - [5. async/await 状态机](#5-asyncawait-状态机)
     - [5.1 从 async 到状态机](#51-从-async-到状态机)
     - [5.2 状态机可视化](#52-状态机可视化)
-    - [5.3 零成本抽象（Zero-Cost Abstraction）验证](#53-零成本抽象验证)
+    - [5.3 零成本抽象验证](#53-零成本抽象验证)
   - [6. 实战案例](#6-实战案例)
     - [6.1 自定义定时器 Future](#61-自定义定时器-future)
     - [6.2 可取消的 Future](#62-可取消的-future)
@@ -1001,7 +1001,7 @@ impl Future for MyFuture {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

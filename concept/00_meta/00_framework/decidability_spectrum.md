@@ -13,7 +13,7 @@
 > [POPL Papers](https://dblp.org/db/conf/popl/index.html) ·
 > [Theory of Computation](https://en.wikipedia.org/wiki/Theory_of_computation)
 >
-> **基准版本**: Rust 1.96.1 stable (Edition 2024)
+> **基准版本**: Rust 1.97.0 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)

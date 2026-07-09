@@ -2,7 +2,7 @@
 
 > **位置**: `exercises/src/unsafe_rust/mod.rs`  
 > **测试**: `exercises/tests/l3_unsafe_rust.rs`  
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 

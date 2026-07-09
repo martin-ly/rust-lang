@@ -28,11 +28,11 @@
     - [1.1 什么是卫生性](#11-什么是卫生性)
     - [1.2 为什么需要卫生性](#12-为什么需要卫生性)
     - [1.3 Rust 的卫生性模型](#13-rust-的卫生性模型)
-  - [2. 声明宏（Declarative Macro）卫生性](#2-声明宏卫生性)
+  - [2. 声明宏卫生性](#2-声明宏卫生性)
     - [2.1 局部变量](#21-局部变量)
     - [2.2 函数和类型](#22-函数和类型)
-    - [2.3 模块（Module）和导入](#23-模块和导入)
-  - [3. 过程宏（Procedural Macro） Span](#3-过程宏-span)
+    - [2.3 模块和导入](#23-模块和导入)
+  - [3. 过程宏 Span](#3-过程宏-span)
     - [3.1 call\_site()](#31-call_site)
     - [3.2 def\_site()](#32-def_site)
     - [3.3 mixed\_site()](#33-mixed_site)
@@ -671,7 +671,7 @@ pub macro my_macro($e:expr) {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -980,7 +980,7 @@ macro_rules! hygienic_macro {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

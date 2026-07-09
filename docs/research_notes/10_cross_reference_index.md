@@ -10,7 +10,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-03-10
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Standard Library](https://doc.rust-lang.org/std/) | [Cargo Book](https://doc.rust-lang.org/cargo/) | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
@@ -55,7 +55,7 @@
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 > **用途**: 全文档双向链接表、概念跨文档定义映射、定理跨文档引用中心
 > **上位文档**: [00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](10_hierarchical_mapping_and_summary.md)
@@ -492,7 +492,7 @@ graph TD
 > **来源**: [Rust Edition Guide - Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
-> **适用版本**: Rust 1.96.1+ (Edition 2024)
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
 ### 升级要点 {#升级要点}
@@ -524,7 +524,7 @@ graph TD
 
 #### 版本与生态更新 {#版本与生态更新}
 
-- 所有概念、示例与最佳实践统一对齐 **Rust 1.96.1+ (Edition 2024)**。
+- 所有概念、示例与最佳实践统一对齐 **Rust 1.97.0+ (Edition 2024)**。
 - 生态引用已更新：async-std → Tokio / smol；wasm32-wasi → wasm32-wasip1 / wasm32-wasip2（详见 [10_application_trees.md](10_application_trees.md)）。
 - 后续版本跟踪请参见 [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) 与 [Rust Reference](https://doc.rust-lang.org/reference/)。
 
@@ -575,7 +575,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-06-29 完成 Batch 9：将泛化 Rust Official Docs 替换为具体章节/API/模块链接，并补充 P1 形式化来源对照 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-29
 **状态**: ✅ 已完成权威国际化来源对齐升级
 

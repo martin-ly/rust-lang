@@ -9,7 +9,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **Source**: [10_formal_full_model_overview.md](10_formal_full_model_overview.md) (Chinese)
 
@@ -168,7 +168,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 >
 > **[来源: [crates.io](https://crates.io/)]**
-> **适用版本**: Rust 1.96.1+ (Edition 2024)
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -220,7 +220,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

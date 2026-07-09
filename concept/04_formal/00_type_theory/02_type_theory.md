@@ -951,7 +951,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -1571,7 +1571,7 @@ process(Vec::new());  // ✅ 从参数类型推断 T = i32
 - **定义**: Rust 1.92.0 类型理论的深入探讨，包括类型系统分类、Curry-Howard 同构、类型推导、高阶类型、类型级编程、子类型和型变、线性类型和仿射类型、依赖类型模拟等
 - **类型**: 高级层文档
 - **范畴**: 类型系统、形式化方法
-- **版本**: Rust 1.96.1+ (Edition 2024)
+- **版本**: Rust 1.97.0+ (Edition 2024)
 - **相关概念**: 类型理论、仿射类型系统、HM 类型推断、高阶类型、GATs、HRTB、类型级编程、依赖类型
 
 ### 属性特征

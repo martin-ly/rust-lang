@@ -574,7 +574,7 @@ async fn good() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Tokio 文档](https://docs.rs/tokio/), [Tower 文档](https://docs.rs/tower/), [rayon 文档](https://docs.rs/rayon/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-22
 > **状态**: ✅ 初版完成
 

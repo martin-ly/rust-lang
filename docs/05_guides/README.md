@@ -2,7 +2,7 @@
 
 > **EN**: Guides Index
 > **Summary**: 扩展指南 Guides Index.
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
 >
 > **受众**: [专家] / [研究者]

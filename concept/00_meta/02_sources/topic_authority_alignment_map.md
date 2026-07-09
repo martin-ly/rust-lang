@@ -239,9 +239,9 @@
 - `concept/07_future/00_version_tracking/05_rust_version_tracking.md` — Rust 形式模型演进跟踪（1.79–1.97+）
 - `concept/07_future/00_version_tracking/50_nightly_rust.md` — Rust 的发布流程与 Nightly Rust
 - `concept/07_future/00_version_tracking/rust_1_95_stabilized.md` — Rust 1.95.0 稳定特性
-- `concept/07_future/00_version_tracking/rust_1_96_stabilized.md` — Rust 1.96 稳定特性（当前 patch 1.96.1）
-- `concept/07_future/00_version_tracking/rust_1_97_preview.md` — Rust 1.97.0 前沿特性预览（Beta）
-- `concept/07_future/00_version_tracking/rust_1_97_stabilized.md` — Rust 1.97.0 稳定特性
+- `concept/07_future/00_version_tracking/rust_1_96_stabilized.md` — Rust 1.96 稳定特性（历史版本 patch 1.96.1）
+- `concept/07_future/00_version_tracking/rust_1_97_stabilized.md` — Rust 1.97.0 稳定特性（当前 stable 参考）
+- `concept/07_future/00_version_tracking/rust_1_97_preview.md` — Rust 1.97.0 前沿特性预览（已归档，仅保留未稳定候选）
 - `concept/07_future/00_version_tracking/rust_1_98_preview.md` — Rust 1.98+ 前沿特性预览
 - `concept/07_future/01_edition_roadmap/19_rust_edition_preview.md` — Rust 2024 Edition (1.85.0+ stable)
 - `concept/07_future/01_edition_roadmap/23_rust_edition_guide.md` — Rust Edition 机制与迁移指南

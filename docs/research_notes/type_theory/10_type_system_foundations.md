@@ -25,7 +25,7 @@
 > - 添加类型约束生成和求解详细算法
 > - 增强 Curry-Howard 对应（依赖类型、const 泛型关联）
 > - 添加 8 个详细反例分析
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已增强论证深度 | 理论完整性提升
 
 ---
@@ -3850,7 +3850,7 @@ fn truncate_front(&mut self, len: usize)
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
-> **适用版本**: Rust 1.96.1+ (Edition 2024)
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -3902,7 +3902,7 @@ fn truncate_front(&mut self, len: usize)
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

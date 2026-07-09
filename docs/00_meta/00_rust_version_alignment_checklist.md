@@ -3,7 +3,7 @@
 > **EN**: Rust Version Alignment Checklist
 > **Summary**: 🦀 Rust 版本对齐检查表 Rust Version Alignment Checklist. (stub/archive redirect)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2 (理解)
 > **使用说明:** 每半年（建议 6月、12月）执行一次 Rust 版本对齐检查，确保项目与 Rust 最新版本保持同步。
@@ -254,7 +254,7 @@ cargo clippy --workspace --all-features -- -D warnings
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

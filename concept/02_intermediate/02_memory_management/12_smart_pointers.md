@@ -28,12 +28,12 @@
 
 ## 📑 目录
 
-- [智能指针（Smart Pointer）：堆内存管理与共享语义](#智能指针堆内存管理与共享语义)
+- [智能指针：堆内存管理与共享语义](#智能指针堆内存管理与共享语义)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 智能指针谱系](#11-智能指针谱系)
     - [1.2 Box：独占堆分配](#12-box独占堆分配)
-    - [1.3 Rc 与 Arc：引用（Reference）计数共享](#13-rc-与-arc引用计数共享)
+    - [1.3 Rc 与 Arc：引用计数共享](#13-rc-与-arc引用计数共享)
   - [二、技术细节](#二技术细节)
     - [2.1 RefCell 与 Cell：内部可变性](#21-refcell-与-cell内部可变性)
     - [2.2 智能指针的组合模式](#22-智能指针的组合模式)
@@ -604,7 +604,7 @@ fn fixed() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -695,7 +695,7 @@ fn main() {
 > [来源: [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)]
 > [来源: [Rustonomicon — Rc and Arc](https://doc.rust-lang.org/std/rc/struct.Rc.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）
 

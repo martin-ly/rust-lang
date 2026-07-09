@@ -8,7 +8,7 @@
 > **formal methods定义（教学类比）**： ``` h ⊨ P * Q   ⟺   ∃h₁, h₂.  h = h₁ ⊎ h₂  ∧  h₁ ⊨ P  ∧  h₂ ⊨ Q ``` - `h` 是整个memory堆（heap） - `h₁ ⊎ h₂` 表示 `h₁` 和 `h₂` 的**不相交并集**（disjoint union） - `h₁` 和 `h₂` 没有重叠的memory地址 **
 > **受众**: [研究者]
 > **内容分级**: [专家级]
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [验证工具链](05_verification_toolchain.md) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)

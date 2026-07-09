@@ -1,5 +1,5 @@
 > **内容分级**: [基础级]
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 标准输入输出（Standard I/O） · `std::io` · `std::fs` · `std::path` · `std::process` · `std::env` · 错误处理（Error Handling）
 
 # 标准 I/O 与进程（std I/O and Process）
@@ -21,7 +21,7 @@
 > [Rust By Example — Std I/O](https://doc.rust-lang.org/rust-by-example/std.html) ·
 > [Rust By Example — Filesystem](https://doc.rust-lang.org/rust-by-example/std_misc/file.html)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 
@@ -71,7 +71,7 @@
   - [九、来源与延伸阅读](#九来源与延伸阅读)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：路径拼接](#测验-1路径拼接)
-    - [测验 2：I/O 错误处理（Error Handling）](#测验-2io-错误处理)
+    - [测验 2：I/O 错误处理](#测验-2io-错误处理)
   - [认知路径](#认知路径)
 
 ---

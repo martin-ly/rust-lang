@@ -2,7 +2,7 @@
 
 > **EN**: Project Index
 > **Summary**: 项目管理与状态追踪 Project Index.
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
 
 本目录收录项目进度跟踪、完成状态报告和文档交叉引用（Reference）指南。

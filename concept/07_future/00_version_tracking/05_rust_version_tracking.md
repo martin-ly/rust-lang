@@ -19,8 +19,8 @@
 > **定位**: 本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权（Ownership）模型、类型系统（Type System）、异步（Async）语义、Unsafe 边界**有结构性影响的特性。
 > **原则**: 琐碎语法糖点到为止，聚焦"形式化语义发生了什么变化"。
 > **更新频率**: 每 6 周对齐 stable release，每季度审计。
-> **状态**: v1.72（2026-07-04 更新，对齐 Rust 1.96.1 stable；Rust 1.97.0 beta / nightly 候选跟踪中（预计 2026-07-09 进入 stable）；本地 nightly 1.98.0（2026-06-17），1.98 nightly 前瞻跟踪中）。
-> Rust 1.97.0 尚未 stable；`rust_1_97_preview.md` 为当前维护入口，`rust_1_97_stabilized.md` 待 1.97.0 发布后再填充。
+> **状态**: v1.73（2026-07-10 更新，对齐 Rust 1.97.0 stable；本地 nightly 1.99.0（2026-06-26），1.98/1.99 nightly 前瞻跟踪中）。
+> Rust 1.97.0 已于 2026-07-09 进入 stable；`rust_1_97_stabilized.md` 为当前 stable 参考入口，`rust_1_97_preview.md` 仅保留未稳定候选。
 > 新增 Rust 1.98 nightly 前瞻代码示例（4 crates: c02/c06/c08/c13）。
 > 核心概念来源标注率 100% 达标。全项目 Bloom 层级标注 1567/1567（100%）。
 > **本次对齐**: 已同步 releases.rs 2026-06-19 数据、Rust Project Goals 2026 目录、CVE-2026-5222/5223/33055/33056 安全公告、crates.io 政策澄清、GSoC/Outreachy、Rust 调试调查、安全关键 Vision Doc 洞察、crates.io 平台安全能力演进、Project Goals 2025H2 收官、Cargo 1.93/1.94 开发周期、Rust 1.93/1.94/1.95 稳定版发布笔记、NVIDIA GPU 目标（nvptx64-nvidia-cuda）基线提升、2025 State of Rust Survey 结果细化、Rust Foundation 年度报告、Rust-C++ 互操作倡议阶段性更新、Rust Innovation Lab 下一阶段、Sustaining Package Registries Working Group（开源注册表可持续性）、2026 Project Goals 目录与旗舰主题、OpenAI 以铂金会员加入 Rust Foundation、RustConf 2026 演讲者与注册开放、Rust Commercial Network 成立、Rust-Edu Refresh & CFP、Joint Statement on Sustainable Stewardship、AI 安全工程师驻场计划、2026 年 Rust Foundation 会员动态、Rust 1.97 beta / 1.96.x 点版本状态、2026 Project Goals 流程、维护者基金哲学、基础设施 Q4 2025 / Q1/Q2 2026、项目管理 Jan/Feb/March/April/May 更新、January/March 2026 Project Director Update、Maintainer spotlight: Tiffany Pek Yuan、Josh 跨仓库同步工具、Leadership Council 3 月更新、1–2 月 Project Director Update、Leadership Council 代表选举、Walter Pearce 当选 OpenSSF Ambassador、Rust Foundation 加入 Datadog Open Source Program、MWC + Talent Arena 2026、FOSDEM 2026 Rust Devroom 回顾、Symposium 入驻 Rust Innovation Lab、Mainmatter 巴塞罗那 Rust 实训、Safety-Critical Rust Consortium 2025–2026 进展、WhatsApp Rust at Scale 客户端媒体安全、Rust Trademark Policy 更新、Astral & adorsys Silver Member、Rust Foundation 2025 Technology Report、Microsoft $1M Donation、Arm Platinum Member、Rust Global 2025、Rust Foundation 2024 Fellows、Rust Foundation 2025 年度报告与 2026-2028 战略、RustConf 2026 早期信息/CFP/Program Committee、Rust for Linux 实验结束、Compiler Team 七名新成员、Clippy 功能冻结复盘、基础设施团队 2025 Q3 复盘与 Q4 计划、Rust All Hands 2026、`hint-mostly-unused` 测试征集、Project Directors 2025 选举、rustup 1.29.0 beta/正式发布、Cargo 1.94 开发周期（Target Dir 锁/Structured Logging/TOML 1.1/cargo-cargofmt/lockfile-path）、Cargo 1.96 稳定版工具链亮点。
@@ -71,10 +71,10 @@ mindmap
       inline_const[inline const blocks 1.79<br/>表达式级编译期计算]
       const_asm[const in asm 1.82/1.87<br/>汇编与 Rust 控制流交互]
       cold_path[cold_path hint 1.95<br/>性能语义显式表达]
-    Rust 1.97 候选
+    1.97 未稳定候选 / 1.98+ 前瞻
       async_drop[Async Drop 推进<br/>异步资源销毁语义]
-      strict_provenance[Strict Provenance 1.97<br/>指针模型契约化]
-      pin_const[Pin const ops 1.97<br/>固定指针编译期安全]
+      strict_provenance[Strict Provenance 推进<br/>指针模型契约化]
+      pin_const[Pin const ops 推进<br/>固定指针编译期安全]
     Rust 1.98 nightly 前瞻
       gen_blocks_stable[gen blocks 推进<br/>同步协程语法糖]
       async_for_loop[for await 1.98 nightly<br/>异步迭代语法糖]
@@ -475,7 +475,7 @@ timeline
 
     2025 Q3<br/>1.96.0 beta : assert_matches! : core::range : NonZero iter : cargo config include
 
-    2026 Q3<br/>1.97.0 beta / 候选 : NonZero 位操作 : char::is_control const : Box::as_ptr : Option::as_slice
+    2026 Q3<br/>1.97.0 stable : NonZero 位操作 : char::is_control const : must_use lint 扩展 : cfg(target_has_atomic_primitive_alignment)
 
     2026+<br/>1.98+ nightly : Tree Borrows 演进 : Effects 系统讨论 : Safety Tags RFC : async gen / Stream
 ```
@@ -666,30 +666,31 @@ timeline
 
 ---
 
-## 十、Rust 1.97.0 发布跟踪（尚未 stable）
+## 十、Rust 1.97.0 发布跟踪（已 stable）
 >
 
-**计划稳定发布日期**: 2026-07-09（当前仍处于 beta / nightly 候选）
+**稳定发布日期**: 2026-07-09
 
 **1.97 状态速览**：
 
-- Rust 1.97.0 尚未 stable，预计 **2026-07-09** 发布。权威预览内容见 [concept/07_future/rust_1_97_preview.md](rust_1_97_preview.md) 与 [`docs/06_toolchain/06_21_rust_1_97_features.md`](../../../docs/06_toolchain/06_21_rust_1_97_features.md) 全景文档。
-- 截至本更新，**Rust 1.96.1 已发布**，是当前最新稳定版；1.96.0 为 1.96 列车初始发布版本。
-- 已确认进入 1.97 beta 的部分变更（来自 Rust Changelogs）：
+- Rust 1.97.0 已于 **2026-07-09** 发布 stable。权威稳定内容见 [concept/07_future/rust_1_97_stabilized.md](rust_1_97_stabilized.md) 与 [`docs/06_toolchain/06_21_rust_1_97_features.md`](../../../docs/06_toolchain/06_21_rust_1_97_features.md) 速查入口。
+- 截至本更新，**Rust 1.97.0 为当前最新 stable 版本**；1.96.1 为 1.96 系列最新 patch。
+- 已确认进入 1.97.0 stable 的主要变更：
 
 | **变更** | **说明** |
 | :--- | :--- |
-| `cfg_target_has_atomic_equal_alignment` | 稳定化目标原子对齐相等性 cfg |
-| `must_use` lint 扩展 | `Result` / `ControlFlow` 被视为与内部类型 `T` 等效用于 `must_use` 诊断 |
-| 空 `export_name` 报错 | 拒绝空字符串 `export_name`，避免链接器歧义 |
-| `WSAESHUTDOWN` 映射 | Windows 套接字关闭映射为 `io::ErrorKind::BrokenPipe` |
-| `linker-messages` 默认 warn | 链接器消息从 allow 恢复为 warn-by-default |
-| NVPTX 旧架构移除 | 与 §NVIDIA GPU 基线提升一致： dropping old architectures / ISAs |
-| `pin!` 阻止 deref coercions | 修复 `pin!` 宏（Macro）中的隐式解引用强制，避免意外行为 |
-| `Option<NonZero*>` 偏好 `-1` | `None` 的 niche 编码偏好 `-1`，优化 FFI / 序列化互操作 |
-| tuple index shorthand 拒绝 | 在 struct 模式中语法上拒绝元组索引简写，修复正确性回归 |
-| `NonZero` 位操作 API 稳定化 | `NonZeroU*::highest_one` / `lowest_one` / `bit_width` 稳定，便于非零整数的位模式查询 |
-| `char::is_control()` const 稳定化 | `char::is_control` 可在 `const` 上下文调用，编译期字符分类能力扩展 |
+| `must_use` lint 扩展 | `Result<T, Uninhabited>` / `ControlFlow<Uninhabited, T>` 等价于 `T` 触发 `must_use` |
+| `dead_code_pub_in_binary` | 新增 allow-by-default lint，标记二进制 crate 中未使用的 `pub` 条目 |
+| `cfg(target_has_atomic_primitive_alignment)` | 检测原子类型与对应原始整数类型对齐是否相等 |
+| target features | `div32`、`lam-bh`、`lamcas`、`ld-seq-sa`、`scq` 稳定 |
+| import 中 `self` 放宽 | 更多场景允许 trailing `self` |
+| `NonZero` / 整数位查询方法 | `isolate_highest_one` / `isolate_lowest_one` / `highest_one` / `lowest_one` / `bit_width` |
+| `char::is_control` const | 控制字符判断可在 const 上下文使用 |
+| `Default for RepeatN` / `Copy for FromBytesUntilNulError` / `Send for File` on UEFI | 标准库 trait impl |
+| `nvptx64-nvidia-cuda` 基线提升 | 最低 SM 提升至 sm_70，PTX ISA 7.0 |
+| Cargo | `build.warnings`、`resolver.lockfile-path`、`-m` 简写、`cargo-clean` 目标目录校验 |
+| Rustdoc | `--emit`、`--remap-path-prefix` 稳定 |
+| 兼容性 | v0 mangling 默认、`pin!` 阻止 deref coercion、空 `export_name` 报错、`WSAESHUTDOWN` 映射等 |
 
 > **来源**: [Rust 1.97.0 Release Notes](https://releases.rs/docs/1.97.0/) · [releases.rs — 1.97.0](https://releases.rs/docs/1.97.0/) · 可信度: ✅ · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
@@ -798,7 +799,7 @@ PTX 是 NVIDIA GPU 的中间表示（类似 LLVM IR），Rust 通过 `nvptx64-nv
 
 ---
 
-## 十二、Rust 1.96.x Stable 特性全景（当前 1.96.1）
+## 十二、Rust 1.96.x Stable 特性全景（历史版本 1.96.1）
 >
 
 **已确定稳定的新特性**:
@@ -856,9 +857,9 @@ PTX 是 NVIDIA GPU 的中间表示（类似 LLVM IR），Rust 通过 `nvptx64-nv
 - **Safety-Critical Rust**: Consortium (2024-03 成立) 推动 MC/DC 支持、FLS 维护、Clippy 安全关键 lints
 - **Ferrocene**: core 子集获 IEC 61508 SIL 2 (2025-12) 和 ISO 26262 ASIL B (2026-03) 认证
 
-**1.96.0 已发布（2026-05-28），1.96.1 为当前最新 patch**：
+**1.96.0 已发布（2026-05-28），1.96.1 为 1.96 系列最新 patch；当前最新 stable 为 1.97.0**：
 
-Rust 1.96.0 已按计划进入 stable 通道；1.96.1 为当前推荐的稳定 patch。详见 [`docs/06_toolchain/06_19_rust_1_96_features.md`](../../../docs/06_toolchain/06_19_rust_1_96_features.md) 全景文档及 `reports/RUST_1_96_COMPREHENSIVE_REPORT.md` 综合报告。
+Rust 1.96.0 已按计划进入 stable 通道；1.96.1 为 1.96 系列推荐 patch。详见 [`docs/06_toolchain/06_19_rust_1_96_features.md`](../../../docs/06_toolchain/06_19_rust_1_96_features.md) 全景文档及 `reports/RUST_1_96_COMPREHENSIVE_REPORT.md` 综合报告。
 
 > **来源**: [Rust 1.96.0 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.96.0) · 可信度: ✅
 

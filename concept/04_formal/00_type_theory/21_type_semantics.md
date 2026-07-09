@@ -883,7 +883,7 @@ fn pinned_self_ref() {
 - [RustBelt 与验证工具链](../02_separation_logic/04_rustbelt.md) — 高阶幽灵状态、验证工具生态
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: Type Semantics（类型语义） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Type Semantics（类型语义） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Type Semantics（类型语义） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

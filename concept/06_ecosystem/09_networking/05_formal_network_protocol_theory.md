@@ -16,7 +16,7 @@
 >
 > **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Kani 文档](https://model-checking.github.io/kani/) · [TCP RFC 793](https://tools.ietf.org/html/rfc793) · [RFC 8446 — TLS 1.3](https://tools.ietf.org/html/rfc8446)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 
@@ -536,7 +536,7 @@ impl SimpleHttpSemantics {
 > **权威来源对齐变更日志**: 2026-07-09 由 `crates/c10_networks/docs/tier_04_advanced/01_formal_network_protocol_theory.md` 按 AGENTS.md §6.4 迁移至此
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-09
 **状态**: ✅ 权威来源对齐完成
 

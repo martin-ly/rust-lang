@@ -9,7 +9,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
 > **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/` 迁回，正在按 [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、[Tower Layer/Service Docs](https://docs.rs/tower/latest/tower/trait.Layer.html)、[Rust Design Patterns](https://rust-unofficial.github.io/patterns/) 等权威来源升级。
 >
@@ -50,7 +50,7 @@
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
 
 ---
@@ -388,7 +388,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.96.1+ (Edition 2024)
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -433,7 +433,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

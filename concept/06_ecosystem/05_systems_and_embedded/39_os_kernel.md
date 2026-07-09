@@ -281,7 +281,7 @@ static KERNEL_ALLOC: KernelAllocator = KernelAllocator;
 > **权威来源**: [Rust for Linux](https://rust-for-linux.com/) · [Theseus OS](https://www.theseus-os.com/) · [Redox OS](https://www.redox-os.org/) · [Aya-rs](https://aya-rs.dev/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 工业系统深度对齐
 

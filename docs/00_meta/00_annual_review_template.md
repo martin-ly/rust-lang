@@ -2,7 +2,7 @@
 
 > **EN**: Annual Review Template
 > **Summary**: 📊 年度全面评估模板 Annual Review Template. (stub/archive redirect)
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2 (理解)
 > **使用说明:** 每年年底（12月）由维护团队执行全面评估，回顾全年项目健康度并制定下一年度路线图。
@@ -304,7 +304,7 @@
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

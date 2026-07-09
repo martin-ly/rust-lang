@@ -257,7 +257,7 @@ FROM person:tobie;
 > **权威来源**: [TiKV Documentation](https://tikv.org/docs/) · [Materialize Documentation](https://materialize.com/docs/) · [Meilisearch Documentation](https://www.meilisearch.com/docs) · [SurrealDB Documentation](https://surrealdb.com/docs)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 工业系统深度对齐
 

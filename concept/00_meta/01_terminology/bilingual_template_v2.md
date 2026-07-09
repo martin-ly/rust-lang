@@ -36,7 +36,7 @@
 > [RFC XXXX](.) ·
 > [Unsafe Code Guidelines — 章节](.)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 ---
 ```
 

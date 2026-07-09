@@ -34,21 +34,21 @@
   - [二、技术细节](#二技术细节)
     - [2.1 extern 块的完整语法](#21-extern-块的完整语法)
     - [2.2 不透明类型与封装](#22-不透明类型与封装)
-    - [2.3 回调与闭包（Closures）传递](#23-回调与闭包传递)
+    - [2.3 回调与闭包传递](#23-回调与闭包传递)
   - [三、工具链生态](#三工具链生态)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱与最佳实践](#五常见陷阱与最佳实践)
     - [编译错误示例](#编译错误示例)
-    - [3.4 边界测试：C 结构体（Struct）布局不匹配（编译错误 / 运行时（Runtime） UB）](#34-边界测试c-结构体布局不匹配编译错误--运行时-ub)
-    - [3.5 边界测试：裸指针生命周期（Lifetimes）与 FFI 边界（编译错误）](#35-边界测试裸指针生命周期与-ffi-边界编译错误)
+    - [3.4 边界测试：C 结构体布局不匹配（编译错误 / 运行时 UB）](#34-边界测试c-结构体布局不匹配编译错误--运行时-ub)
+    - [3.5 边界测试：裸指针生命周期与 FFI 边界（编译错误）](#35-边界测试裸指针生命周期与-ffi-边界编译错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：FFI 中的空指针解引用（Reference）（运行时 UB）](#103-边界测试ffi-中的空指针解引用运行时-ub)
-    - [10.5 边界测试：所有权（Ownership）移动后的再次使用](#105-边界测试所有权移动后的再次使用)
+    - [10.3 边界测试：FFI 中的空指针解引用（运行时 UB）](#103-边界测试ffi-中的空指针解引用运行时-ub)
+    - [10.5 边界测试：所有权移动后的再次使用](#105-边界测试所有权移动后的再次使用)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -544,10 +544,10 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.1+ (Edition 2024)
+> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 
@@ -609,9 +609,9 @@ fn main() {
 
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 认知路径
 

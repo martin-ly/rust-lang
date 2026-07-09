@@ -3,7 +3,7 @@
 > **EN**: Learning Mvp Path
 > **Summary**: Learning Mvp Path. Core Rust concept.
 > ```text Week 1: 基础能力构建（20h） ├─ Day 1-2: Hello World + 基础语法      [4h] ├─ Day 3-4: ownership与borrowing                [6h] ├─ Day 5-6: types系统与错误处理          [6h] └─ Day 7:   第一个 CLI 工具（无concurrency）    [4h] Week 2: concurrency与工程化（20h） ├─ Day 8-9:  集合与迭代器               [4h] ├─ Day 10-11: 多线程与concurrency              [6h] ├─ Day 12-13: async基础```
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 应用
 > **定位**: 本项目的**最小可行学习路径**（Minimum Viable Path）。无论背景如何，完成本路径即可独立编写带并发/异步的 Rust CLI 工具。

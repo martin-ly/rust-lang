@@ -1,5 +1,5 @@
 > **内容分级**: [进阶]
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 联合体（Union） · 字段（Field） · 布局（Layout） · Drop 语义 · 内联汇编（Inline Assembly） · C 互操作（FFI） · 未初始化内存（Uninitialized Memory）
 
 # 联合体（Unions）
@@ -19,7 +19,7 @@
 > [The Rustonomicon — Unions](https://doc.rust-lang.org/nomicon/unions.html) ·
 > [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/reference/types/union.html)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 
@@ -49,9 +49,9 @@
   - [三、技术细节与示例](#三技术细节与示例)
     - [3.1 基本用法](#31-基本用法)
     - [3.2 C 兼容联合体](#32-c-兼容联合体)
-    - [3.3 联合体与枚举（Enum）的区别](#33-联合体与枚举的区别)
+    - [3.3 联合体与枚举的区别](#33-联合体与枚举的区别)
   - [四、示例与反例](#四示例与反例)
-    - [4.1 正确示例：与 C 结构体（Struct）互操作](#41-正确示例与-c-结构体互操作)
+    - [4.1 正确示例：与 C 结构体互操作](#41-正确示例与-c-结构体互操作)
     - [4.2 反例：读取非活跃字段](#42-反例读取非活跃字段)
     - [4.3 反例：为非 Copy 字段实现 Copy](#43-反例为非-copy-字段实现-copy)
   - [五、反命题与边界分析](#五反命题与边界分析)

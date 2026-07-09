@@ -1,5 +1,5 @@
 > **内容分级**: [进阶]
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 属性（Attribute） · 内部属性（Inner Attribute） · 外部属性（Outer Attribute） · 过程宏（Procedural Macro） · 条件编译（Conditional Compilation） · 代码生成（Code Generation）
 
 # 属性分类详解（Attributes by Category）
@@ -19,7 +19,7 @@
 > [The Rust Reference — Attribute Catalog](https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index) ·
 > [The Rust Programming Language — Annotations](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 
@@ -50,7 +50,7 @@
     - [3.1 代码生成属性](#31-代码生成属性)
     - [3.2 条件编译属性](#32-条件编译属性)
     - [3.3 诊断属性](#33-诊断属性)
-    - [3.4 类型系统（Type System）属性](#34-类型系统属性)
+    - [3.4 类型系统属性](#34-类型系统属性)
     - [3.5 测试与文档属性](#35-测试与文档属性)
   - [四、示例与反例](#四示例与反例)
     - [4.1 正确示例：组合使用属性](#41-正确示例组合使用属性)

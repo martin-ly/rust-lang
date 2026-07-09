@@ -5,7 +5,7 @@
 > **分级**: [B]
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **概念说明**: Rust 编译器（rustc）将源代码转换为机器码，经过词法分析、语法分析、语义分析、类型检查、借用（Borrowing）检查、MIR 优化和 LLVM 代码生成等阶段。理解编译器理论有助于优化代码性能和诊断编译错误。
 > 内容已整合至： [01_compiler_features.md](../../../06_toolchain/01_compiler_features.md)
@@ -222,7 +222,7 @@ impl<T, const N: usize> Array<T, N> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

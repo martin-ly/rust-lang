@@ -3,7 +3,7 @@
 > **EN**: Concept Index
 > **Summary**: Concept Index. Core Rust concept.
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: 应用
 > **定位**：本文件是 `concept/` 知识体系的**倒排索引**，从概念名称快速定位到定义文件、交叉引用位置、Bloom 认知层级和语义链接关系。
@@ -724,7 +724,7 @@
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/international_authority_index.md)
 
 **文档版本**: 1.4
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-23
 **状态**: ✅ 权威来源对齐 Wave 1-6 完成（A/S/P + 双维矩阵 + 判定森林 + FTA + 问题/能力图谱 + 知识图谱本体 + RustBelt 谓词 + 范式转换矩阵）
 

@@ -649,7 +649,7 @@ Rust panic in Wasm:
 > **权威来源对齐变更日志**: 2026-05-22 初始创建，覆盖工具链、框架、性能、内存模型与互操作 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 权威来源对齐完成
 

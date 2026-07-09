@@ -82,7 +82,7 @@
 **模块（Module）**: C06 Async
 **创建日期**: 2025-12-11
 **最后更新**: 2026-05-08
-**Rust 版本**: 1.96.1+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **状态**: ✅ 已完成
 
 > **AFIDT 状态提示（2026-06-26）**：`async fn in dyn trait`（AFIDT）仍为 nightly 实验特性，暂无稳定时间表。生产代码中 `dyn Trait` 的异步方法请继续使用 `async-trait`；AFIT（`async fn in trait`）已在 Rust 1.75+ stable，可用于泛型（Generics）/`impl Trait` 场景。
@@ -1845,7 +1845,7 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

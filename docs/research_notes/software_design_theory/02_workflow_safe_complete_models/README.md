@@ -9,7 +9,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
 > **对齐说明**: 本目录已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/02_workflow_safe_complete_models/` 迁回，正在按 [Rustonomicon – Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)、[Crossbeam Docs](https://docs.rs/crossbeam/latest/crossbeam/)、[Rayon Docs](https://docs.rs/rayon/latest/rayon/) 等权威来源升级。
 >
@@ -258,7 +258,7 @@ impl OrderService {
 
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
-> **适用版本**: Rust 1.96.1+ (Edition 2024)
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -306,7 +306,7 @@ impl OrderService {
 
 **文档版本**: 1.1
 
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 **最后更新**: 2026-05-19
 

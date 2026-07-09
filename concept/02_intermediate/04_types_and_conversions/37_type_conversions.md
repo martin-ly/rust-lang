@@ -1,5 +1,5 @@
 > **内容分级**: [进阶]
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 类型转换（Type Conversion） · 类型强制（Type Coercion） · 类型转换 trait（Conversion Trait） · 孤儿规则（Orphan Rule） · 盲眼实现（Blanket Impl）
 
 # 类型转换（Type Conversions）
@@ -20,7 +20,7 @@
 > [Rust By Example — Conversion](https://doc.rust-lang.org/rust-by-example/conversion.html) ·
 > [The Rust Programming Language — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 
@@ -52,7 +52,7 @@
     - [3.2 显式转换（Cast）](#32-显式转换cast)
     - [3.3 `From` / `Into`](#33-from--into)
     - [3.4 `TryFrom` / `TryInto`](#34-tryfrom--tryinto)
-    - [3.5 孤儿规则（Orphan Rule）](#35-孤儿规则)
+    - [3.5 孤儿规则](#35-孤儿规则)
   - [四、示例与反例](#四示例与反例)
     - [4.1 正确示例：自定义错误类型](#41-正确示例自定义错误类型)
     - [4.2 反例：滥用 `as` 导致截断](#42-反例滥用-as-导致截断)

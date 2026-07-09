@@ -3,7 +3,7 @@
 > **EN**: QUIC
 > **Summary**: HTTP/3 指南 QUIC.
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [A]
 > **层级**: L6 生态工具 / L3 高级网络
 > **前置概念**: [Async](../../concept/03_advanced/01_async/02_async.md) · [Network Programming](../../crates/c10_networks)
@@ -280,7 +280,7 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 > **权威来源**: [RFC 9000](https://datatracker.ietf.org/doc/html/rfc9000), [RFC 9114](https://datatracker.ietf.org/doc/html/rfc9114), [quinn](https://github.com/quinn-rs/quinn)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 初版完成
 

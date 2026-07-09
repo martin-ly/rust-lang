@@ -1280,7 +1280,7 @@ fn fixed() {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md); 2026-05-21 补充 Wikipedia 概念对齐、a-mir-formality 工具链、2026 工具状态更新 [Formal Methods Deep Dive](https://rust-lang.github.io/rust-project-goals/2024h2/formal-methods.html); 2026-05-22 网络权威内容对齐：Miri POPL 2026、KVerus arXiv 2026、AutoVerus OOPSLA 2025、Vest USENIX Security 2025、Rustlantis OOPSLA 2024、Kani+VeriFast 联合 std 验证 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新: 2026-05-22
 **状态**: ✅ 深化完成
 

@@ -262,6 +262,6 @@ After completing this path, you should be able to:
 
 ---
 
-> **Version**: Rust 1.96.1+ (Edition 2024)
+> **Version**: Rust 1.97.0+ (Edition 2024)
 > **Last Updated**: 2026-06-09
 > **Maintainer**: Rust Learning Community

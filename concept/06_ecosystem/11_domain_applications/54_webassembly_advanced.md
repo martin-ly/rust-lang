@@ -806,10 +806,10 @@ fn main() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html), [WebAssembly Specification](https://webassembly.github.io/spec/), [WASI Preview 2 Docs](https://wasi.dev), [Component Model Spec](https:/component-model.bytecodealliance.org)
-> **权威来源对齐变更日志**: 2026-05-26 初始创建，对齐 Rust 1.96.1+ (Edition 2024) 与 WASI Preview 2 / Component Model 最新规范
+> **权威来源对齐变更日志**: 2026-05-26 初始创建，对齐 Rust 1.97.0+ (Edition 2024) 与 WASI Preview 2 / Component Model 最新规范
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-26
 **状态**: ✅ 概念文件创建完成
 > **过渡**: Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

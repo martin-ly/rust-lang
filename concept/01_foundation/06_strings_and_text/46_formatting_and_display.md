@@ -1,5 +1,5 @@
 > **内容分级**: [基础级]
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 格式化（Formatting） · `Display` trait · `Debug` trait · `format!` 宏（Macro） · 格式化字符串（Format String） · 占位符（Placeholder）
 
 # 格式化与显示（Display and Debug Formatting）
@@ -19,7 +19,7 @@
 > [The Rust Programming Language — Printing Values](https://doc.rust-lang.org/book/ch01-02-hello-world.html) ·
 > [Rust By Example — Formatted Print](https://doc.rust-lang.org/rust-by-example/hello/print.html)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 

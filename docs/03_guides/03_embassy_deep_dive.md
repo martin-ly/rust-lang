@@ -3,7 +3,7 @@
 > **EN**: Embassy Deep Dive
 > **Summary**: Embassy 异步（Async）嵌入式框架深度指南 Embassy Deep Dive.
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶] / [专家]
 > **内容分级**: [专家级]
@@ -818,7 +818,7 @@ async fn main(spawner: Spawner) {
 > **权威来源**: [Embassy Book](https://embassy.dev/book/), [RTIC Book](https://rtic-rs.github.io/book/), [embedded-hal 文档](https://docs.rs/embedded-hal/), [svd2rust 文档](https://docs.rs/svd2rust/), [defmt 文档](https://defmt.ferrous-systems.com/), [Rust Embedded Book](https://docs.rust-embedded.org/book/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-22
 > **状态**: ✅ 初版完成
 

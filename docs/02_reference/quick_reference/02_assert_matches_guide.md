@@ -3,7 +3,7 @@
 > **EN**: assert_matches!
 > **Summary**: debug_assert_matches! 速查指南 assert_matches!.
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [A]
 > **Rust 版本**: 1.96.1+ Stable
 > **跟踪 Issue**: rust#108099
@@ -232,7 +232,7 @@ assert_matches!(result, Ok(Config { key: "test", .. }));
 > **权威来源**: [Rust Standard Library: assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html), [Tracking Issue #108099](https://github.com/rust-lang/rust/issues/108099)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 初版完成
 

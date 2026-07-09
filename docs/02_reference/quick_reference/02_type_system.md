@@ -86,7 +86,7 @@
 > **快速参考** | [完整文档](../../../crates/c02_type_system/docs/README.md) | [代码示例](../../../crates/c02_type_system/examples/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -1230,7 +1230,7 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 ---
 
 **最后更新**: 2026-05-08
-**Rust 版本**: 1.96.1+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 
 🔷 **Rust 类型系统，安全与表达力的极致！**
 
@@ -1261,7 +1261,7 @@ Rust 1.95+ 重要更新：
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

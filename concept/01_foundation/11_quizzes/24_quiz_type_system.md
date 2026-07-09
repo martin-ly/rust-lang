@@ -6,7 +6,7 @@
 > **Summary**: Quiz Type System. Core Rust concept.
 > **受众**: [初学者]
 > **内容分级**: [综述级]
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 > **后置概念**: [Ownership](33_quiz_ownership_borrowing.md)
 ---

@@ -10,7 +10,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 完成
 
 ---
@@ -857,7 +857,7 @@ cargo expand > expanded.rs
 ## 🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960}
 >
 > **来源**: [Rust Research Community]
-> **适用版本**: Rust 1.96.1+ (Edition 2024)
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
 ### 本次升级要点 {#本次升级要点}
@@ -879,7 +879,7 @@ cargo expand > expanded.rs
 > **权威来源对齐变更日志**: 2026-06-29 新增 Cargo Book、rustc dev guide、Kani/Prusti/Miri/Creusot/Aeneas/Verus 官方文档与版本信息 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-29
 **状态**: ✅ 完成
 

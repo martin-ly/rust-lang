@@ -1,5 +1,5 @@
 > **内容分级**: [基础级]
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 类型别名（Type Alias） · 泛型（Generics）类型别名（Generic Type Alias） · 关联类型（Associated Type） · 新类型模式（Newtype Pattern）
 
 # 类型别名（Type Alias）
@@ -19,7 +19,7 @@
 > [The Rust Programming Language — Custom Types](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html) ·
 > [Rust By Example — Alias](https://doc.rust-lang.org/rust-by-example/custom_types/alias.html)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 

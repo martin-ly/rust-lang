@@ -42,7 +42,7 @@
 
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 针对「设计模式、分布式设计模式、工作流设计模式」全面论证不足，输出批判性意见与建议、可持续推进计划
 > **上位文档**: [00_MASTER_INDEX](../../00_master_index.md)、RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
@@ -269,7 +269,7 @@ D1.*、D2.*、D3.* 有阶段性成果 ─→ D4.*
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-> **适用版本**: Rust 1.96.1+ (Edition 2024)
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -313,7 +313,7 @@ D1.*、D2.*、D3.* 有阶段性成果 ─→ D4.*
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

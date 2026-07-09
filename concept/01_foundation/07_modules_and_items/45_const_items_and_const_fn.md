@@ -1,5 +1,5 @@
 > **内容分级**: [基础级]
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 常量项（Const Item） · 常量函数（Const Function / const fn） · 常量上下文（Const Context） · 常量泛型（Const Generic） · 编译期执行（Compile-Time Execution）
 
 # 常量项与常量函数（Const Items and Const Functions）
@@ -20,7 +20,7 @@
 > [The Rust Programming Language — Constants](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) ·
 > [Rust By Example — Constants](https://doc.rust-lang.org/rust-by-example/custom_types/constants.html)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 

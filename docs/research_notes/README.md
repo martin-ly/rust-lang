@@ -10,7 +10,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **对齐日期**: 2026-06-29
 > **状态**: ✅ 结构迁回完成，权威国际化来源对齐升级完成
 
@@ -558,7 +558,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 **维护团队**: Rust Research Community
 **最后更新**: 2026-06-29
-**Rust 版本**: 1.96.1+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **状态**: ✅ **结构迁回完成，权威国际化来源对齐升级完成**（子目录已从 archive 迁回，内容按 P0/P1/P2 来源逐项升级完成）
 
 **全面梳理**：[RESEARCH_NOTES_ORGANIZATION](10_research_notes_organization.md) — 实际结构、归档约定、入口与索引关系
@@ -581,7 +581,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
-> **适用版本**: Rust 1.96.1+ (Edition 2024)
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
@@ -631,7 +631,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 > **权威来源对齐变更日志**: 2026-06-29 完成 research_notes 空目录迁回与权威国际化来源对齐升级
 
 **文档版本**: 1.3
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-29
 **状态**: ✅ 权威国际化来源对齐升级完成
 

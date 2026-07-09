@@ -285,7 +285,7 @@ fn demo_198_apis() {
 }
 ```
 
-以下 API 在当前稳定版（1.96.1）中已可用：
+以下 API 在当前稳定版（1.97.0）中已可用：
 
 ```rust
 fn demo_stable_apis() {

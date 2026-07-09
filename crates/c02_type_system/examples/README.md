@@ -104,6 +104,6 @@ cargo run --example variance_examples -p c02_type_system
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 
 **文档版本**: 1.2
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-24
 **状态**: 🔄 随源码重构持续更新

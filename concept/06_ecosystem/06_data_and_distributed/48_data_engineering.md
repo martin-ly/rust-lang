@@ -847,7 +847,7 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 - [安全与密码学](../07_security_and_cryptography/43_security_cryptography.md) — 数据加密、合规性
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.96.1+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: Data Engineering（数据工程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Data Engineering（数据工程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Data Engineering（数据工程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
