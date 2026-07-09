@@ -6380,7 +6380,7 @@
       "layer": "L1",
       "title": "Ownership（所有权）",
       "positioning": "",
-      "line_count": 1819,
+      "line_count": 1831,
       "theorem_chains": [
         {
           "text": "> 引理 L1（所有权唯一性）⟹",
@@ -22622,7 +22622,7 @@
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
-      "line_count": 3433,
+      "line_count": 3441,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注",

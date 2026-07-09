@@ -7,6 +7,14 @@
 
 ---
 
+> **教材对应提示**：
+>
+> 本页内容对应 [*The Rust Programming Language* 第 3 版第 17 章 “Async and Await”](https://doc.rust-lang.org/book/ch17-00-async-await.html)。
+> TRPL Ch17 提供面向初学者的 `async`/`await` 语法、Futures 与 `Pin` 入门；本文档在此基础上补充形式化语义（状态机操作语义、Pin 的 LTL 形式化）、运行时对比、取消安全、跨语言机制对比与工程反例，适合作为教材的深化与延伸阅读。
+> 详细节次映射见下文 [📚 权威教材对照：TRPL 3rd Ed Ch17](#-权威教材对照trpl-3rd-ed-ch17)。
+
+---
+
 > **内容分级**: [专家级]
 
 # Async/Await（异步编程）
