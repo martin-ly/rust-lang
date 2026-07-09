@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-09T20:16:57.789847+00:00
+> 生成时间: 2026-07-09T20:40:04.173596+00:00
 > 扫描文件数: 459
 
 ## 全局指标
@@ -13,7 +13,7 @@
 | 总 Mermaid 图 | 609 | ≥50 | ✅ |
 | 编译验证代码块 | 4569 | ≥150 | ✅ |
 | 定理矩阵总行 | 19711 | — | — |
-| 死链数量 | 0 | 0 | ✅ |
+| 死链数量 | 1 | 0 | ❌ |
 | 反向推理 (⟸) | 335 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
 | 前置概念覆盖率 | 396/396 | 100% | ✅ |
@@ -42,6 +42,12 @@
 | E:\_src\rust-lang\concept\03_advanced\06_low_level_patterns\34_visibility_and_privacy.md | L3 | 过渡段落不足 (0 < 3); 反向推理不足 (⟸ 0 < 2) |
 | E:\_src\rust-lang\concept\04_formal\00_type_theory\21_type_semantics.md | L4 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_97_stabilized.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+
+## 死链检测
+
+| 来源文件 | 引用路径 | 解析后的绝对路径 |
+|:---|:---|:---|
+| E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\27_web_frameworks.md | ../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md | E:\_src\content\ecosystem\deep_dives\01_axum_deep_dive.md |
 
 ## 文件详细统计
 

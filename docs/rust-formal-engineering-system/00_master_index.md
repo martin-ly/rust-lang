@@ -3,7 +3,7 @@
 > **EN**: Master Index
 > **Summary**: Rust 形式化工程系统 - 主索引 Master Index.
 > **归档说明**: 本文档为历史研究材料，内容已迁移到 `content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md`。
-> 请以 [content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md](../../../content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md) 为权威来源。
+> 请以 [content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md](../../content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md) 为权威来源。
 
 ---
 

@@ -31,7 +31,7 @@
   - [2. 声明宏卫生性](#2-声明宏卫生性)
     - [2.1 局部变量](#21-局部变量)
     - [2.2 函数和类型](#22-函数和类型)
-    - [2.3 模块和导入](#23-模块和导入)
+    - [2.3 模块和导入 (Modules and Imports)](#23-模块和导入-modules-and-imports)
   - [3. 过程宏 Span](#3-过程宏-span)
     - [3.1 call\_site()](#31-call_site)
     - [3.2 def\_site()](#32-def_site)
@@ -213,7 +213,7 @@ mod inner {
 
 ---
 
-### 2.3 模块和导入
+### 2.3 模块和导入 (Modules and Imports)
 
 ```rust
 macro_rules! use_hashmap {
@@ -362,7 +362,7 @@ let x = gen_code!();
 
 **规则**:
 
-- 宏生成的项（函数、结构体（Struct）、模块）在展开位置可见
+- 宏生成的项（函数、结构体（Struct）、模块（Module））在展开位置可见
 - 除非明确标记 `pub`，否则不会泄露到外部
 
 ---
@@ -698,7 +698,7 @@ pub macro my_macro($e:expr) {
   - [2. 声明宏卫生性](#2-声明宏卫生性)
     - [2.1 局部变量](#21-局部变量)
     - [2.2 函数和类型](#22-函数和类型)
-    - [2.3 模块和导入](#23-模块和导入)
+    - [2.3 模块和导入 (Modules and Imports)](#23-模块和导入-modules-and-imports)
   - [3. 过程宏 Span](#3-过程宏-span)
     - [3.1 call\_site()](#31-call_site)
     - [3.2 def\_site()](#32-def_site)

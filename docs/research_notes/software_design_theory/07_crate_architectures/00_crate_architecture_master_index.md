@@ -89,8 +89,8 @@
 | 03 | **Diesel** | ORM/查询 | Typestate SQL 构建器 | 连贯接口类型链、FromRow 推导 | ✅ 编译期 SQL 验证 | [03_diesel_architecture.md](03_diesel_architecture.md) |
 | 04 | **Clap** | CLI 解析 | Derive macro + Builder 双 API | FromStr、ValueEnum、 exhaustive match | ✅ 无运行时反射 | [04_clap_architecture.md](04_clap_architecture.md) |
 | 05 | **Bevy** | 游戏引擎 | ECS (Entity-Component-System) | HRTB 安全借用（Borrowing）、Archetype 存储 | ✅ 连续内存布局 | [05_bevy_architecture.md](05_bevy_architecture.md) |
-| 06 | **Tokio** | 异步运行时 | Runtime = Scheduler + IO Driver + Timer | Future + Pin、Send/Sync 跨 await 传播 | ✅ 工作窃取无锁队列 | [06_tokio_architecture.md](06_tokio_architecture.md)（已重定向 → [Tokio 深度解析](../../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md)） |
-| 07 | **Axum** | Web 框架 | Router → Handler → Tower Service | FromRequest、State 注入、matchit 路由 | ✅ 编译期路由匹配 | [07_axum_architecture.md](07_axum_architecture.md)（已重定向 → [Axum 深度解析](../../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md)） |
+| 06 | **Tokio** | 异步运行时 | Runtime = Scheduler + IO Driver + Timer | Future + Pin、Send/Sync 跨 await 传播 | ✅ 工作窃取无锁队列 | [06_tokio_architecture.md](06_tokio_architecture.md)（已重定向 → [Tokio 深度解析](../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md)） |
+| 07 | **Axum** | Web 框架 | Router → Handler → Tower Service | FromRequest、State 注入、matchit 路由 | ✅ 编译期路由匹配 | [07_axum_architecture.md](07_axum_architecture.md)（已重定向 → [Axum 深度解析](../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md)） |
 | 08 | **Hyper** | HTTP 实现 | Body trait + Request/Response | 泛型（Generics） Body、零拷贝解析 | ✅ httparse 零分配 | [08_hyper_architecture.md](08_hyper_architecture.md) |
 | 09 | **SQLx** | SQL 工具 | query! / query_as! 宏（Macro） + Pool | 编译期查询验证、FromRow、Database trait | ✅ 编译期 SQL 检查 | [09_sqlx_architecture.md](09_sqlx_architecture.md)（已重定向 → [SQLx 深度解析](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md)） |
 | 10 | **Reqwest** | HTTP 客户端 | ClientBuilder → RequestBuilder → Response | 泛型（Generics） JSON/Form 体、中间件扩展 | ✅ 复用 Hyper 连接池 | [10_reqwest_architecture.md](10_reqwest_architecture.md) |
@@ -584,8 +584,8 @@ graph TD
 
 | Crate | 当前状态 | 权威来源 | 使用指南/概念参考 |
 |:---|:---|:---|:---|
-| **Tokio** | 已重定向 | [content/ecosystem/deep_dives/02_tokio_deep_dive.md](../../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md) | [concept/03_advanced/01_async/02_async.md](../../../../concept/03_advanced/01_async/02_async.md) |
-| **Axum** | 已重定向 | [content/ecosystem/deep_dives/01_axum_deep_dive.md](../../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md) | [concept/06_ecosystem/27_web_frameworks.md](../../../../concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md) |
+| **Tokio** | 已重定向 | [content/ecosystem/deep_dives/02_tokio_deep_dive.md](../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md) | [concept/03_advanced/01_async/02_async.md](../../../../concept/03_advanced/01_async/02_async.md) |
+| **Axum** | 已重定向 | [content/ecosystem/deep_dives/01_axum_deep_dive.md](../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md) | [concept/06_ecosystem/27_web_frameworks.md](../../../../concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md) |
 | **SQLx** | 已重定向 | [knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md) | [concept/06_ecosystem/23_database_access.md](../../../../concept/06_ecosystem/06_data_and_distributed/23_database_access.md) |
 | **SQLx (进阶)** | 已重定向 | [knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md) | [concept/06_ecosystem/37_database_systems.md](../../../../concept/06_ecosystem/06_data_and_distributed/37_database_systems.md) |
 | 其他 crate | 保留并添加 canonical 说明 | 见各文件头部 | 见各文件头部 |

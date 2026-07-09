@@ -53,6 +53,10 @@ def is_redirect_stub(filepath):
         "内容已迁移",
         "已重定向",
         "superseded",
+        "stub/archive redirect",
+        "已移除",
+        "正文已移除",
+        "重定向 stub",
     ]
     lower_content = content.lower()
     marker_count = sum(1 for m in stub_markers if m.lower() in lower_content)
@@ -186,7 +190,7 @@ def main():
 
     print(f"\n=== 发现 {len(overlaps)} 对潜在重复文件 ===\n")
 
-    report_lines = ["# 四轨内容相似度检测报告\n\n"], f"- **扫描文件数**: {len(files)}\n", f"- **相似度阈值**: {THRESHOLD}\n", f"- **潜在重复对**: {len(overlaps)}\n\n"]
+    report_lines = ["# 四轨内容相似度检测报告\n\n", f"- **扫描文件数**: {len(files)}\n", f"- **相似度阈值**: {THRESHOLD}\n", f"- **潜在重复对**: {len(overlaps)}\n\n"]
     report_lines.append("| 相似度 | 文件1 | 文件2 | 标题1 | 标题2 |\n")
     report_lines.append("|:---|:---|:---|:---|:---|\n")
 

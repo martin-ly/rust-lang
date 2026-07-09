@@ -21,7 +21,7 @@
 >
 > **[Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. 先掌握 [03_advanced/async/](../../../../knowledge/03_advanced/async) 的异步基础
+1. 先掌握 [03_advanced/async/](../../../knowledge/03_advanced/async) 的异步基础
 2. 再深入 Tokio 运行时机制
 3. 最后学习 Axum 的 Web 开发模式
 
@@ -29,8 +29,8 @@
 
 > **[Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [03_advanced/concurrency/](../../../../knowledge/03_advanced/concurrency) - 线程与并发
-- [06_ecosystem/databases/](../../../../knowledge/06_ecosystem/databases) - 数据库集成
+- [03_advanced/concurrency/](../../../knowledge/03_advanced/concurrency) - 线程与并发
+- [06_ecosystem/databases/](../../../knowledge/06_ecosystem/databases) - 数据库集成
 
 ---
 
@@ -41,7 +41,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
@@ -52,7 +52,7 @@
 
 ## 相关概念
 
-- [Rust 标准库速查](../../../../knowledge/05_reference/03_std_library_cheatsheet.md)
+- [Rust 标准库速查](../../../knowledge/05_reference/03_std_library_cheatsheet.md)
 
 ## 📚 模块 8: 国际化对齐
 

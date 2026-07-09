@@ -51,7 +51,7 @@
     - [2.2 map 与 and\_then](#22-map-与-and_then)
     - [2.3 组合模式](#23-组合模式)
   - [三、Panic 与不可恢复错误](#三panic-与不可恢复错误)
-    - [3.1 panic! 宏](#31-panic-宏)
+    - [3.1 panic! 宏 (panic! Macro)](#31-panic-宏-panic-macro)
     - [3.2 unwrap 与 expect](#32-unwrap-与-expect)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -401,7 +401,7 @@ Result/Option 组合:
 
 ## 三、Panic 与不可恢复错误
 
-### 3.1 panic! 宏
+### 3.1 panic! 宏 (panic! Macro)
 >
 
 ```text

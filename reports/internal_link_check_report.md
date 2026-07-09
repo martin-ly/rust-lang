@@ -4,8 +4,8 @@
 | 类别 | 数量 |
 |:---|:---:|
 | 总链接数 | 45003 |
-| 有效链接 | 14174 |
-| 损坏链接 | 7557 |
+| 有效链接 | 14184 |
+| 损坏链接 | 7547 |
 | 外部链接 | 23271 |
 | 仅锚点链接 | 13359 |
 
@@ -7331,7 +7331,7 @@
 | docs\templates\10_versioned_doc_template.md | 🧪 测试用例 {#测试用例} | `#-测试用例-测试用例` | 同文件锚点不存在: #-测试用例-测试用例 |
 | docs\templates\10_versioned_doc_template.md | 📚 深入阅读 {#深入阅读} | `#-深入阅读-深入阅读` | 同文件锚点不存在: #-深入阅读-深入阅读 |
 
-### 文件不存在 (242个)
+### 文件不存在 (232个)
 
 | 源文件 | 链接文本 | 链接路径 | 问题 |
 |:---|:---|:---|:---|
@@ -7352,7 +7352,6 @@
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | AI_ASSISTED_RUST_PROGRAMMING_GUIDE | `../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md` | 文件不存在: guides\AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md |
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | AI_ASSISTED_RUST_PROGRAMMING_GUIDE | `../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md` | 文件不存在: guides\AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md |
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | AI 辅助编程指南 | `../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md` | 文件不存在: guides\AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md |
-| docs\05_guides\05_async_programming_usage_guide.md | Tokio 异步运行时深度解析 | `../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\02_tokio_deep_dive.md |
 | docs\05_guides\05_cxx_rust_interop_evaluation.md | Rust for Linux 工具链指南 | `../../concept/07_future/19_rust_for_linux.md` | 文件不存在: concept\07_future\19_rust_for_linux.md |
 | docs\05_guides\best_practices.md | concept L1-L2 基础-进阶 | `../../01_foundation` | 文件不存在: 01_foundation |
 | docs\06_toolchain\06_parallel_frontend.md | Build Systems | `../../07_future` | 文件不存在: 07_future |
@@ -7554,18 +7553,10 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | RUST_193_COUNTEREXAMPLES_INDEX | `../../../10_rust_193_counterexamples_index.md` | 文件不存在: docs\research_notes\10_rust_193_counterexamples_index.md |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | RUST_193_COUNTEREXAMPLES_INDEX | `../../../10_rust_193_counterexamples_index.md` | 文件不存在: docs\research_notes\10_rust_193_counterexamples_index.md |
 | docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `../../10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\00_crate_architecture_master_index.md | Tokio 深度解析 | `../../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\02_tokio_deep_dive.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\00_crate_architecture_master_index.md | Axum 深度解析 | `../../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\01_axum_deep_dive.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\00_crate_architecture_master_index.md | content/ecosystem/deep_dives/02_tokio_deep_dive.md | `../../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\02_tokio_deep_dive.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\00_crate_architecture_master_index.md | content/ecosystem/deep_dives/01_axum_deep_dive.md | `../../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\01_axum_deep_dive.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md | Serde 最佳实践 | `../../../../content/ecosystem/serialization/serde_best_practices.md` | 文件不存在: content\ecosystem\serialization\serde_best_practices.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md | Tower 形式化生态 | `../../../../concept/06_ecosystem/05_formal_ecosystem_tower.md` | 文件不存在: concept\06_ecosystem\05_formal_ecosystem_tower.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md | Tokio 深度解析 | `../../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\02_tokio_deep_dive.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md | Tokio 运行时（Runtime）生态指南 | `../../../../content/ecosystem/async_runtimes/tokio_deep_dive.md` | 文件不存在: content\ecosystem\async_runtimes\tokio_deep_dive.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md | Tokio 深度解析 | `../../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\02_tokio_deep_dive.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md | Axum 深度解析 | `../../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\01_axum_deep_dive.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md | Axum Web 框架指南 | `../../../../content/ecosystem/web_frameworks/axum_deep_dive.md` | 文件不存在: content\ecosystem\web_frameworks\axum_deep_dive.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md | Axum 深度解析 | `../../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\01_axum_deep_dive.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md | SQLx 数据库指南 | `../../../../content/ecosystem/database/sqlx_deep_dive.md` | 文件不存在: content\ecosystem\database\sqlx_deep_dive.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md | gRPC 微服务指南 | `../../../../content/ecosystem/web_frameworks/grpc_microservices_guide.md` | 文件不存在: content\ecosystem\web_frameworks\grpc_microservices_guide.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md | Actix-web vs Axum | `../../../../content/ecosystem/web_frameworks/actix_web_vs_axum.md` | 文件不存在: content\ecosystem\web_frameworks\actix_web_vs_axum.md |
@@ -7576,7 +7567,6 @@
 | docs\research_notes\software_design_theory\07_crate_architectures\41_askama_architecture.md | concept L6: Web 框架与中间件 | `../../../../06_ecosystem` | 文件不存在: 06_ecosystem |
 | docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md | concept L6: Web 框架与中间件 | `../../../../06_ecosystem` | 文件不存在: 06_ecosystem |
 | docs\research_notes\type_theory\10_construction_capability.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `../10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\rust-formal-engineering-system\00_master_index.md | content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md | `../../../content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md` | 文件不存在: E:\_src\content\safety_critical\02_rust_safety_critical_ecosystem_master_index.md |
 
 ## 修复建议
 
@@ -7622,9 +7612,9 @@
 | docs\02_reference\quick_reference\02_type_system.md | 46 |
 | docs\research_notes\experiments\10_memory_analysis.md | 46 |
 | docs\02_reference\quick_reference\02_testing_cheatsheet.md | 45 |
-| docs\05_guides\05_async_programming_usage_guide.md | 45 |
 | docs\research_notes\formal_methods\10_error_handling_decision_tree.md | 45 |
 | docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 44 |
+| docs\05_guides\05_async_programming_usage_guide.md | 44 |
 | docs\research_notes\10_faq.md | 44 |
 | docs\research_notes\10_code_doc_formal_mapping.md | 43 |
 | docs\05_guides\05_macro_system_usage_guide.md | 42 |
@@ -7648,6 +7638,6 @@
 | docs\05_guides\05_testing_coverage_guide.md | 32 |
 | docs\research_notes\type_theory\10_variance_theory.md | 32 |
 | docs\02_reference\quick_reference\02_algorithms_cheatsheet.md | 31 |
-| ... 还有 369 个文件 | |
+| ... 还有 368 个文件 | |
 
-**总计 419 个文件包含损坏链接**
+**总计 418 个文件包含损坏链接**

@@ -197,7 +197,7 @@
 | E11 | 国际化 (i18n) 与本地化基础设施 | 🔴 | 无覆盖 — `fluent` 或 `i18n-embed` 等 crate 的使用 |
 | E12 | WebAssembly 生态集成 | 🟡 | `crates/c10_networks/` 有 WASM 相关内容，但缺少 `wasm-bindgen` 和 `trunk` 的完整工作流 |
 | E13 | 学习路径标准化与分级 | 🟡 | [`knowledge/INDEX.md`](../../../knowledge/INDEX.md) 有分级学习索引，但缺少与官方 Book 的对比映射 |
-| E14 | 行业采用案例收集与分析 | 🟡 | [`content/production/`](../../content/production) 有部分案例，但缺少结构化模板和量化指标 |
+| E14 | 行业采用案例收集与分析 | 🟡 | [`content/production/`](../../../content/production) 有部分案例，但缺少结构化模板和量化指标 |
 
 **小计**：✅ 3 | 🟡 8 | 🔴 3
 
