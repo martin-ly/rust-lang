@@ -6327,9 +6327,26 @@
       "layer": "L1",
       "title": "Rust 所有权-借用-生命周期知识图谱",
       "positioning": "",
-      "line_count": 345,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 377,
+      "theorem_chains": [
+        {
+          "text": "- **T-OBL-1 所有权唯一性**：每个值在任一时刻有且仅有一个所有者 ⟹ 内存释放责任清晰。",
+          "type": "paragraph"
+        },
+        {
+          "text": "- **T-OBL-2 借用不变性**：不可变借用可共享，可变借用唯一 ⟹ 数据竞争在编译期被排除。",
+          "type": "paragraph"
+        },
+        {
+          "text": "- **T-OBL-3 生命周期子类型**：`'long: 'short` ⟹ 引用不会比其引用对象活得更长。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "### 反命题"
+        }
+      ],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
@@ -6343,8 +6360,8 @@
         "./23_move_semantics.md",
         "./30_lifetimes_advanced.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 1,
+      "has_cognitive_path": true,
       "mermaid_blocks": 5,
       "matrix_rows": 44,
       "pre_post": {
@@ -6355,7 +6372,7 @@
           "[Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -12632,9 +12649,13 @@
       "layer": "L1",
       "title": "错误处理控制流（Error Handling Control Flow）",
       "positioning": "",
-      "line_count": 70,
+      "line_count": 108,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -12657,14 +12678,15 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/knowledge_mindmap.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md",
         "../04_control_flow/07_control_flow.md",
         "../07_modules_and_items/12_functions.md",
         "32_error_handling_basics.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 1,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 0,
       "pre_post": {
@@ -12675,7 +12697,7 @@
           "[Error Handling 深入](../../02_intermediate/03_error_handling/04_error_handling.md) · [Iterator Patterns](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {

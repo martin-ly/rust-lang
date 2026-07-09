@@ -255,6 +255,7 @@
   - [操作语义：程序行为的形式化定义](04_formal/03_operational_semantics/17_operational_semantics.md)
   - [求值策略：Call-by-Value, Call-by-Name, Call-by-Need](04_formal/03_operational_semantics/18_evaluation_strategies.md)
   - [Rustc 查询系统与增量编译](04_formal/05_rustc_internals/19_rustc_query_system.md)
+  - [MIR、Codegen 与 LLVM IR 入门](04_formal/05_rustc_internals/20_mir_codegen_llvm_primer.md)
   - [Axiomatic Semantics（公理语义）](04_formal/03_operational_semantics/20_axiomatic_semantics.md)
   - [Type Semantics（类型语义）](04_formal/00_type_theory/21_type_semantics.md)
   - [现代 Rust 验证工具生态（2025-2026）](04_formal/04_model_checking/22_modern_verification_tools.md)

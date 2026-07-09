@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-09T00:22:56.956865+00:00
+> 生成时间: 2026-07-09T00:42:20.232176+00:00
 > 扫描文件数: 458
 
 ## 全局指标
@@ -8,17 +8,17 @@
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
 | 总文件数 | 458 | 27 | ✅ |
-| 总定理链 (⟹) | 1917 | ≥270 | ✅ |
-| 总反命题 | 708 | ≥40 | ✅ |
+| 总定理链 (⟹) | 1920 | ≥270 | ✅ |
+| 总反命题 | 710 | ≥40 | ✅ |
 | 总 Mermaid 图 | 561 | ≥50 | ✅ |
 | 编译验证代码块 | 4323 | ≥150 | ✅ |
 | 定理矩阵总行 | 18572 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
-| 反向推理 (⟸) | 273 | ≥50 | ✅ |
+| 反向推理 (⟸) | 277 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
 | 前置概念覆盖率 | 367/395 | 100% | ⚠️ |
 | 后置概念覆盖率 | 371/395 | 100% | ⚠️ |
-| 双标签覆盖率 | 362/395 | >=95% | ⚠️ |
+| 双标签覆盖率 | 364/395 | >=95% | ⚠️ |
 | 非法标签组合 | 0 | 0 | ✅ |
 
 ## 按层级分布
@@ -26,7 +26,7 @@
 | 层级 | 文件数 | 平均 ⟹/文件 | 平均过渡段/文件 | 认知路径 | ⟸/文件 | 模板化 | 前置覆盖 | 后置覆盖 | 双标签 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | L0 | 63 | 5.2 | 3.1 | 35/63 (55%) | 0.1 | 0 | 14/63 | 13/63 | 45/63 |
-| L1 | 55 | 4.6 | 5.6 | 53/55 (96%) | 1.7 | 0 | 55/55 | 55/55 | 53/55 |
+| L1 | 55 | 4.7 | 5.6 | 55/55 (100%) | 1.8 | 0 | 55/55 | 55/55 | 55/55 |
 | L2 | 38 | 5.1 | 5.6 | 36/38 (94%) | 2.4 | 0 | 38/38 | 38/38 | 38/38 |
 | L3 | 57 | 3.6 | 2.9 | 37/57 (64%) | 1.3 | 0 | 43/57 | 43/57 | 43/57 |
 | L4 | 53 | 4.7 | 3.5 | 52/53 (98%) | 0.1 | 0 | 53/53 | 53/53 | 53/53 |
@@ -38,8 +38,7 @@
 
 | 文件 | 层级 | 未通过项 |
 |:---|:---|:---|
-| E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\00_ownership_borrow_lifetime_knowledge_map.md | L1 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 反向推理不足 (⟸ 0 < 2); 缺失受众标签; 缺失内容分级标签 |
-| E:\_src\rust-lang\concept\01_foundation\08_error_handling\33_error_handling_control_flow.md | L1 | 缺失认知路径; 缺失反命题; 缺失内容分级标签 |
+| E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\00_ownership_borrow_lifetime_knowledge_map.md | L1 | 过渡段落不足 (1 < 3) |
 | E:\_src\rust-lang\concept\02_intermediate\00_traits\39_dispatch_mechanisms.md | L2 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 反向推理不足 (⟸ 0 < 2) |
 | E:\_src\rust-lang\concept\02_intermediate\01_generics\39_type_level_programming.md | L2 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 反向推理不足 (⟸ 0 < 2) |
 | E:\_src\rust-lang\concept\03_advanced\00_concurrency\22_cross_platform_concurrency.md | L3 | 缺失认知路径; 缺失反命题 |
@@ -163,7 +162,7 @@
 | E:\_src\rust-lang\concept\01_foundation\00_start\36_keywords.md | L1 | 159 | 4 | 0 | 0 | 1 | 0 | 1 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\00_start\37_operators_and_symbols.md | L1 | 258 | 7 | 2 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\00_start\47_std_io_and_process.md | L1 | 450 | 4 | 4 | 0 | 4 | 1 | 10 | 6 | ✅ | ✅ | ✅ | 初学者 | 基础级 |
-| E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\00_ownership_borrow_lifetime_knowledge_map.md | L1 | 345 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | ❌ | ✅ | ✅ | None | None |
+| E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\00_ownership_borrow_lifetime_knowledge_map.md | L1 | 377 | 3 | 2 | 0 | 1 | 5 | 0 | 1 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\01_ownership.md | L1 | 1819 | 12 | 2 | 0 | 3 | 7 | 43 | 16 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\02_borrowing.md | L1 | 1953 | 4 | 2 | 0 | 3 | 6 | 49 | 20 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\03_lifetimes.md | L1 | 1475 | 19 | 2 | 0 | 3 | 5 | 40 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
@@ -200,7 +199,7 @@
 | E:\_src\rust-lang\concept\01_foundation\07_modules_and_items\45_const_items_and_const_fn.md | L1 | 419 | 4 | 3 | 0 | 4 | 1 | 8 | 6 | ✅ | ✅ | ✅ | 初学者 | 基础级 |
 | E:\_src\rust-lang\concept\01_foundation\08_error_handling\13_panic_and_abort.md | L1 | 938 | 3 | 2 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\08_error_handling\32_error_handling_basics.md | L1 | 986 | 3 | 2 | 0 | 3 | 1 | 15 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| E:\_src\rust-lang\concept\01_foundation\08_error_handling\33_error_handling_control_flow.md | L1 | 70 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | ❌ | ✅ | ✅ | 初学者 | None |
+| E:\_src\rust-lang\concept\01_foundation\08_error_handling\33_error_handling_control_flow.md | L1 | 108 | 0 | 2 | 0 | 1 | 0 | 3 | 1 | ✅ | ✅ | ✅ | 初学者 | 入门实践级 |
 | E:\_src\rust-lang\concept\01_foundation\09_macros_basics\12_attributes_and_macros.md | L1 | 914 | 3 | 2 | 0 | 3 | 1 | 14 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\10_testing_basics\16_testing_basics.md | L1 | 741 | 3 | 2 | 0 | 3 | 1 | 8 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\10_testing_basics\42_useful_development_tools.md | L1 | 89 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | ✅ | ✅ | ✅ | 初学者 | 参考级 |

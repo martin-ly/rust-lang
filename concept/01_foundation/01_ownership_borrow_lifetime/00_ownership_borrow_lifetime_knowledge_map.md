@@ -1,6 +1,9 @@
+> **内容分级**: [综述级]
+>
 > **EN**: Ownership, Borrowing & Lifetimes Knowledge Map
 > **Summary**: A panoramic knowledge map of the Rust ownership-borrowing-lifetime-scope cluster, showing concept dependencies, smart-pointer ecosystems, and learning paths. Authoritative explanations of each topic remain in the dedicated concept pages.
 >
+> **受众**: [初学者] → [进阶者] → [研究者]
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **S** — Structure
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Lifetimes](./03_lifetimes.md)
@@ -342,3 +345,32 @@ graph TB
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+
+---
+
+## 七、认知路径与推理骨架
+
+### 认知路径
+
+1. **建立直觉**：从“堆内存需要被唯一拥有”出发，理解为什么 Rust 选择所有权模型。
+2. **掌握规则**：学习移动、借用、生命周期的语法规则与编译器检查机制。
+3. **扩展应用**：将所有权思维迁移到智能指针、并发安全、异步 `Pin`/生命周期等高级场景。
+4. **形式化理解**：在线性逻辑、区域类型和借用检查可判定性层面，建立对模型的深层信任。
+
+### 定理链
+
+- **T-OBL-1 所有权唯一性**：每个值在任一时刻有且仅有一个所有者 ⟹ 内存释放责任清晰。
+- **T-OBL-2 借用不变性**：不可变借用可共享，可变借用唯一 ⟹ 数据竞争在编译期被排除。
+- **T-OBL-3 生命周期子类型**：`'long: 'short` ⟹ 引用不会比其引用对象活得更长。
+
+### 反向推理
+
+- 要能安全地在多线程间共享数据 ⟸ 需要 `Sync`/`Send` 保证 ⟸ 其根基是所有权和生命周期规则。
+- 要实现无垃圾回收的确定性内存管理 ⟸ 需要编译期可验证的所有权转移与析构调度。
+
+### 反命题
+
+- ❌ “生命周期标注越多越安全” → 生命周期标注只是显式约束；错误标注仍会导致编译失败或逻辑错误。
+- ❌ “拥有 `Rc<RefCell<T>>` 就等同于 GC” → 循环引用仍会造成内存泄漏，需要 `Weak` 或显式解除。
+
+> **过渡提示**：掌握上述结构后，可进入 [Ownership 权威页](./01_ownership.md) 开始逐项深入学习，或在 [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) 中查看所有权系统的工程扩展。
