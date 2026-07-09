@@ -119,12 +119,13 @@ def main():
 
     include_stubs = "--include-stubs" in sys.argv
 
-    print("=== 三轨内容相似度检测 ===\n")
+    print("=== 四轨内容相似度检测 ===\n")
 
     dirs = [
         PROJECT_ROOT / "concept",
         PROJECT_ROOT / "knowledge",
         PROJECT_ROOT / "docs",
+        PROJECT_ROOT / "content",
     ]
 
     files = find_md_files(dirs, include_stubs=include_stubs)
@@ -185,7 +186,7 @@ def main():
 
     print(f"\n=== 发现 {len(overlaps)} 对潜在重复文件 ===\n")
 
-    report_lines = ["# 三轨内容相似度检测报告\n\n", f"- **扫描文件数**: {len(files)}\n", f"- **相似度阈值**: {THRESHOLD}\n", f"- **潜在重复对**: {len(overlaps)}\n\n"]
+    report_lines = ["# 四轨内容相似度检测报告\n\n"], f"- **扫描文件数**: {len(files)}\n", f"- **相似度阈值**: {THRESHOLD}\n", f"- **潜在重复对**: {len(overlaps)}\n\n"]
     report_lines.append("| 相似度 | 文件1 | 文件2 | 标题1 | 标题2 |\n")
     report_lines.append("|:---|:---|:---|:---|:---|\n")
 

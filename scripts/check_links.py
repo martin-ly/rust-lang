@@ -369,7 +369,8 @@ def main():
     report_lines.append(f"**总计 {len(source_file_counts)} 个文件包含损坏链接**")
     
     # 写入报告文件
-    report_path = Path('e:/_src/rust-lang/docs/link_check_report.md')
+    report_path = Path('reports/internal_link_check_report.md')
+    report_path.parent.mkdir(parents=True, exist_ok=True)
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(report_lines))
     
@@ -381,6 +382,10 @@ def main():
     print(f"  - 外部链接: {stats['external']}")
     print(f"  - 仅锚点链接: {stats['anchor_only']}")
     print(f"  - 问题文件数: {len(source_file_counts)}")
+    
+    if stats['broken'] > 0:
+        print(f"\n❌ 发现 {stats['broken']} 个损坏链接，检查失败。")
+        sys.exit(1)
     
     return stats, broken_links
 

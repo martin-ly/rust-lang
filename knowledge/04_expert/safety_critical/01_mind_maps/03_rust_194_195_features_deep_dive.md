@@ -1,10 +1,8 @@
 # Rust 1.94/1.95 特性深度解析
 
 > **EN**: Rust 194 195 Features Deep Dive
-> **Summary**: Rust 1.94/1.95 特性深度解析 Rust 194 195 Features Deep Dive. (stub/archive redirect)
-> **归档说明**: 本文为安全关键视角的历史研究笔记。Rust 1.95 稳定特性的权威来源已迁移至 `concept/07_future/rust_1_95_stabilized.md`，后续安全关键系统分析将逐步合并到 `concept/06_ecosystem/safety_critical/` 系列文件。
-> 请以 [concept/07_future/rust_1_95_stabilized.md](../../../../concept/07_future/00_version_tracking/rust_1_95_stabilized.md) 为权威来源。
+> **Summary**: Rust 1.94/1.95 特性深度解析 Rust 194 195 Features Deep Dive.
 
----
-
-**历史内容已迁移**：本文件不再维护，请点击上方链接查看最新内容。
+> **权威来源**: [01_mind_maps/03_rust_194_195_features_deep_dive.md](../../../../../content/safety_critical/01_mind_maps/03_rust_194_195_features_deep_dive.md)
+>
+> 根据 [AGENTS.md](../../../../../AGENTS.md) §2 Canonical 规则，通用 Rust 概念解释统一维护在 concept/ 中；本专题深度内容已迁移到 content/。

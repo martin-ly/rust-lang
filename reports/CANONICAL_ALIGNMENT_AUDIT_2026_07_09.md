@@ -63,15 +63,15 @@ These files are the most serious canonical violations: they teach core Rust conc
 
 ### 2.3 Domain-specific reports currently in `knowledge/`
 
-The `knowledge/04_expert/safety_critical/` tree (~50 files, many 400–900 lines) is a safety-critical systems report suite. It does not belong in `knowledge/` under the current rules; it should live in `docs/` or `content/`.
+The `content/safety_critical/` tree (~50 files, many 400–900 lines) is a safety-critical systems report suite. It does not belong in `knowledge/` under the current rules; it should live in `docs/` or `content/`.
 
 | File | Closest `concept/` page | Lines | Recommendation |
 |---|---|---:|---|
-| `knowledge/04_expert/safety_critical/09_reference/10_performance_optimization_guide.md` | `concept/06_ecosystem/10_performance/15_performance_optimization.md` | 534 | `convert_to_summary` + relocate to `docs/` |
-| `knowledge/04_expert/safety_critical/04_axiomatic_reasoning/01_formal_verification_practical_guide.md` | `concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md` | 822 | `convert_to_summary` + relocate to `docs/` |
-| `knowledge/04_expert/safety_critical/09_reference/07_ffi_integration_guide.md` | `concept/03_advanced/04_ffi/09_ffi_advanced.md` | 667 | `convert_to_summary` + relocate to `docs/` |
-| `knowledge/04_expert/safety_critical/09_reference/01_api_design_guidelines.md` | `concept/06_ecosystem/03_design_patterns/42_api_design_patterns.md` | 702 | `convert_to_summary` + relocate to `docs/` |
-| `knowledge/04_expert/safety_critical/10_standards/01_do_178c_rust_compliance_pathway.md` | `concept/06_ecosystem/11_domain_applications/20_licensing_and_compliance.md` | 727 | `keep` (domain report) but move to `docs/` |
+| `content/safety_critical/09_reference/10_performance_optimization_guide.md` | `concept/06_ecosystem/10_performance/15_performance_optimization.md` | 534 | `convert_to_summary` + relocate to `docs/` |
+| `content/safety_critical/04_axiomatic_reasoning/01_formal_verification_practical_guide.md` | `concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md` | 822 | `convert_to_summary` + relocate to `docs/` |
+| `content/safety_critical/09_reference/07_ffi_integration_guide.md` | `concept/03_advanced/04_ffi/09_ffi_advanced.md` | 667 | `convert_to_summary` + relocate to `docs/` |
+| `content/safety_critical/09_reference/01_api_design_guidelines.md` | `concept/06_ecosystem/03_design_patterns/42_api_design_patterns.md` | 702 | `convert_to_summary` + relocate to `docs/` |
+| `content/safety_critical/10_standards/01_do_178c_rust_compliance_pathway.md` | `concept/06_ecosystem/11_domain_applications/20_licensing_and_compliance.md` | 727 | `keep` (domain report) but move to `docs/` |
 
 Likewise, the `knowledge/06_ecosystem/` deep dives (Axum, Sea-ORM, SQLx, Tokio, Kubernetes) are ecosystem guides and should be moved to `docs/06_ecosystem/` or `content/` rather than remaining in `knowledge/`.
 
@@ -148,7 +148,7 @@ The following topics have substantial write-ups outside `concept/` and **do not 
 | **Rust Design Philosophy** | `knowledge/00_start/04_rust_philosophy.md` | `concept/01_foundation/00_start/rust_philosophy.md` |
 | **Hello, World / First Program** | `knowledge/00_start/01_hello_world.md` | `concept/01_foundation/00_start/hello_world.md` or merge into getting-started index |
 | **Installation & Toolchain Setup** | `knowledge/00_start/02_installation.md` | `concept/01_foundation/00_start/installation.md` |
-| **Axum** | `knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md` | `concept/06_ecosystem/04_web_and_networking/axum.md` |
+| **Axum** | `content/ecosystem/deep_dives/01_axum_deep_dive.md` | `concept/06_ecosystem/04_web_and_networking/axum.md` |
 | **Sea-ORM** | `knowledge/06_ecosystem/databases/01_sea_orm_deep_dive.md` | `concept/06_ecosystem/06_data_and_distributed/sea_orm.md` |
 | **SQLx** | `knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md` | `concept/06_ecosystem/06_data_and_distributed/sqlx.md` |
 | **Cargo Script** | `docs/06_toolchain/06_cargo_script_guide.md` | already exists: `concept/06_ecosystem/01_cargo/09_cargo_script.md` (link it explicitly) |
@@ -201,7 +201,7 @@ These files are legitimate guides, reports, or learning paths and do not need to
 1. Convert the 14 `knowledge/` redirect stubs that still contain full explanations into true stubs.
 2. Migrate or redirect the 90 substantial `knowledge/` files, especially the core tutorials (`iterators`, `lazy_initialization`, `type_driven_correctness`, `unsafe_audit`).
 3. Add a top-of-file `concept/` authority link to every `docs/` guide and cheatsheet that covers a `concept/` topic.
-4. Relocate the `knowledge/04_expert/safety_critical/` suite to `docs/` or `content/`.
+4. Relocate the `content/safety_critical/` suite to `docs/` or `content/`.
 5. Create missing canonical pages for **Lazy Initialization**, **Type-Driven Correctness / Type-State**, **Unsafe Code Auditing**, **MaybeUninit**, and **Rust Design Philosophy**.
 
 ---

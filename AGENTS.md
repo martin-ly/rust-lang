@@ -28,7 +28,7 @@
 | `concept/` | **权威概念层（L0-L7）**。每个 Rust 概念的唯一深度解释。 | ✅ 是 |
 | `knowledge/` | 精简知识卡片、速查、学习入口。 | ❌ 否；只能摘要或重定向到 `concept/` |
 | `docs/` | 指南、参考、实践项目、研究报告。 | ❌ 否；指南可保留操作步骤，概念解释必须链接到 `concept/` |
-| `content/` | 专题深度内容（生态库、生产实践、学术研究）。 | ⚠️ 仅当 `concept/` 未覆盖时可作为该专题的权威页；否则必须链接 |
+| `content/` | 专题深度内容套件（安全关键、生态深度、生产实践、学术研究）。 | ⚠️ 仅当 `concept/` 未覆盖时可作为该专题的权威页；否则必须链接 |
 | `crates/` | 可编译代码示例与 workspace。`crates/*/docs/` 只保留与 crate 直接相关的独特内容。 | ❌ 概念解释不能放在这里 |
 | `exercises/` | 练习题与答案。 | ❌ 不能替代概念解释 |
 | `archive/` | 只读历史归档。内部文件不得与活跃目录重复。 | ❌ 不是权威来源 |
@@ -67,6 +67,12 @@
 2. 较新、较完整、英文摘要/元数据齐全的版本优先
 3. 保留有交叉引用、版本跟踪、Bloom 标签等元数据的版本
 4. 被合并的文件保留路径，内容改为重定向 stub
+
+### 3.4 `docs/` 去重政策
+
+- `docs/` 中的指南、cheatsheet 可以保留操作步骤、决策树、示例和速查表。
+- `docs/` 中**不得**重复已在 `concept/` 中存在的通用 Rust 概念解释；应通过链接指向 `concept/` 权威页。
+- 编辑 `docs/` 文件时，如发现某节与 `concept/` 文件重复，应将该节迁移到 `concept/` 权威页，并在 `docs/` 中替换为 canonical 链接。
 
 ---
 
@@ -126,6 +132,19 @@ homepage.workspace = true
 > `knowledge/` 仅保留摘要、速查与链接。
 ```
 
+### 4.4 `content/` 重定向 / 专题入口 stub 模板
+
+```markdown
+# 中文标题
+
+**EN**: English Title
+**Summary**: One-sentence English abstract.
+
+> **权威来源**: 本文件为专题深度内容入口；通用 Rust 概念解释请见
+> [`concept/xxx/xxx.md`](../../concept/xxx/xxx.md)。
+> 若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
+```
+
 ---
 
 ## 5. 常用命令
@@ -148,6 +167,20 @@ cargo test --workspace
 # mdbook 构建（输出到 book/，不应提交）
 mdbook build
 ```
+
+### 5.1 CI 九大质量门
+
+所有合并到 `main`/`master` 的变更必须通过以下 9 个质量门：
+
+1. `cargo check --workspace`
+2. `cargo test --workspace --quiet`
+3. `cargo clippy --workspace -- -D warnings`
+4. `cargo audit --no-fetch`
+5. `cargo vet --locked`
+6. `mdbook build`
+7. `python scripts/kb_auditor.py --link-check`
+8. `python scripts/detect_content_overlap.py`
+9. `python scripts/add_bilingual_annotations.py --mode check-only`
 
 ---
 

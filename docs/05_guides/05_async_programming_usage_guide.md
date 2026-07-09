@@ -411,7 +411,7 @@ assert_eq!(evens, vec![2, 4]);
 ```
 
 > **与 Tokio 生态集成**：async closures 与 Tokio 的任务系统、通道系统天然配合。
-> 详见 [Tokio 异步运行时深度解析](../../knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md)。
+> 详见 [Tokio 异步运行时深度解析](../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md)。
 
 ---
 

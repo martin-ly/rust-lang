@@ -110,7 +110,7 @@
 ## 7. 后续建议
 
 1. **继续修剪 `docs/` 中重复的理论正文**：当前已补齐权威链接，但部分 guide 仍保留大段与 `concept/` 重复的概念推导。建议后续按文件逐步删除重复段落，保留操作步骤、决策树、示例代码。
-2. **迁移 `knowledge/04_expert/safety_critical/` 与 `knowledge/06_ecosystem/deep_dives/`**：虽已 stub 化，但这些报告套房更适合放到 `docs/` 或 `content/`。
+2. **迁移 `content/safety_critical/` 与 `content/ecosystem/deep_dives/`**：虽已 stub 化，但这些报告套房更适合放到 `docs/` 或 `content/`。
 3. **统一 `concept/` 元数据模板**：可在 `AGENTS.md` 中明确 EN/Summary 位置、Rust 版本字段格式，作为新增文件的模板。
 4. **CI 固化**：建议将上述 9 个门禁加入 CI，防止一致性回退。
 

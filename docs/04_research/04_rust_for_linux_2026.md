@@ -383,7 +383,7 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 
 | 本项目知识模块 | Rust for Linux 关联 |
 |--------------|-------------------|
-| `knowledge/04_expert/safety_critical/` | DO-178C / IEC 61508 对内核驱动的安全要求 |
+| `content/safety_critical/` | DO-178C / IEC 61508 对内核驱动的安全要求 |
 | `crates/c13_embedded/` | 裸机/RTOS 到 Linux 内核驱动的迁移路径 |
 | `crates/c11_macro_system_proc/` | 内核宏与 `module!` 声明宏（Declarative Macro）的对比 |
 | `docs/04_research/formal_verification/` | RustBelt 语义对内核 unsafe 代码的形式化验证 |

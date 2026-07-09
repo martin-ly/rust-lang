@@ -39,7 +39,7 @@ CROSS_REFS = [
     ("concept/06_ecosystem/15_performance_optimization.md", "knowledge/03_advanced/05_performance_optimization.md", "性能优化"),
     # 生态
     ("concept/06_ecosystem/23_database_systems.md", "knowledge/06_ecosystem/databases/", "数据库"),
-    ("concept/06_ecosystem/27_web_frameworks.md", "knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md", "Web 框架"),
+    ("concept/06_ecosystem/27_web_frameworks.md", "content/ecosystem/deep_dives/01_axum_deep_dive.md", "Web 框架"),
 ]
 
 def rel_path(from_file, to_file):
