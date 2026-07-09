@@ -4,6 +4,14 @@
 >
 > **EN**: Frontier Research and Innovative Patterns
 > **Summary**: Frontier topics in Rust design patterns: effect systems, algebraic effects, advanced session types, linear types, capability-based security, dependent types, quantum computing patterns, and future directions.
+> **受众**: [研究者]
+> **内容分级**: [研究级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: A×Res — 前沿研究与创新模式
+> **前置依赖**: [Design Patterns](02_patterns.md) · [Formal Design Pattern Theory](38_formal_design_pattern_theory.md)
+> **后置概念**: [Engineering and Production Patterns](82_engineering_and_production_patterns.md) · [Industrial Case Studies](../11_domain_applications/75_industrial_case_studies.md)
+> **定理链**: Emerging Problem ⟹ Experimental Pattern ⟹ Production Hardening
 > **层级**: L6 生态工程
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **后置概念**: [Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -950,3 +958,20 @@ pub fn quantum_pattern_example() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
+
+## 过渡段
+
+> **过渡**: 从行业新挑战过渡到研究型模式，可以理解问题驱动的创新来源。
+>
+> **过渡**: 从实验模式过渡到原型验证，可以建立“快速失败、快速学习”的迭代思维。
+>
+> **过渡**: 从原型验证过渡到生产加固，可以将前沿想法转化为可靠的工程方案。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 新问题 ⟹ 新模式 | 现有模式无法覆盖的领域 | 催生针对性抽象 |
+| 类型系统进展 ⟹ 新抽象能力 | GAT、 effects 等语言特性 | 使 previously 不可能的模式成为可能 |
+| 原型验证 ⟹  adoption | 通过真实场景检验 | 决定创新模式是否值得推广 |

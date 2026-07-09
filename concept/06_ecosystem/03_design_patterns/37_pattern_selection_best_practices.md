@@ -4,6 +4,14 @@
 >
 > **EN**: Pattern Selection Best Practices
 > **Summary**: Provides a systematic guide for selecting design patterns in Rust, including decision trees, scenario-driven recommendations, anti-patterns, pattern composition, Rust-specific concerns, and production checklists.
+> **受众**: [进阶]
+> **内容分级**: [参考级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **A+P** — Application + Procedure
+> **双维定位**: A×Eva — 评估模式选型
+> **前置依赖**: [Design Patterns](02_patterns.md) · [Pattern Implementation Comparison](36_pattern_implementation_comparison.md)
+> **后置概念**: [Engineering and Production Patterns](82_engineering_and_production_patterns.md) · [Architecture Patterns](35_architecture_patterns.md)
+> **定理链**: Requirement ⟹ Pattern Selection ⟹ Validation
 > **层级**: L6 生态工程
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **后置概念**: [Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -723,3 +731,20 @@ pub enum PatternError {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
+
+## 过渡段
+
+> **过渡**: 从具体场景过渡到决策树，可以系统化地缩小可选模式范围。
+>
+> **过渡**: 从决策树过渡到 Rust 特有约束，可以排除在所有权与并发模型下不适用的方案。
+>
+> **过渡**: 从选型结果过渡到生产检查清单，可以将设计决策转化为可验证的工程实践。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 需求明确 ⟹ 模式选型准确 | 清晰的功能与非功能需求 | 避免过度设计或选型失误 |
+| 并发约束 ⟹ Send/Sync 要求 | Rust 所有权模型 | 排除不满足线程安全的设计 |
+| 团队能力 ⟹ 可维护性 | 熟悉度与工具链支持 | 影响模式的长期落地效果 |

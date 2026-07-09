@@ -4,6 +4,14 @@
 >
 > **EN**: Formal Design Pattern Theory
 > **Summary**: Formal foundations of design patterns: type theory, category theory, Curry-Howard correspondence, linear/affine types, session types, algebraic data types, and verification practice with Kani.
+> **受众**: [研究者]
+> **内容分级**: [研究级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: S×Theo — 设计模式形式化理论
+> **前置依赖**: [Design Patterns](02_patterns.md) · [Pattern Implementation Comparison](36_pattern_implementation_comparison.md)
+> **后置概念**: [Frontier Research and Innovative Patterns](39_frontier_research_and_innovative_patterns.md) · [Pattern Composition Algebra](73_pattern_composition_algebra.md)
+> **定理链**: Abstract Pattern ⟹ Formal Model ⟹ Language Mapping
 > **层级**: L6 生态工程
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **后置概念**: [Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -969,3 +977,20 @@ impl<S: Strategy, O: Observer> StrategyObserver<S, O> {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
+
+## 过渡段
+
+> **过渡**: 从经典 GoF 模式过渡到形式语义，可以理解模式背后的不变量与角色关系。
+>
+> **过渡**: 从形式模型过渡到 Rust 类型系统，可以建立“模式即类型约束”的视角。
+>
+> **过渡**: 从类型映射过渡到模式代数，可以理解模式组合与变形的数学基础。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 形式模型 ⟹ 精确推理 | 消除自然语言描述的歧义 | 支持严格验证模式适用性 |
+| 范畴论 ⟹ 模式组合 | 对象、态射与函子 | 提供模式组合与变换的框架 |
+| 语言映射 ⟹ 可应用边界 | Rust 所有权与生命周期约束 | 决定哪些形式模式可直接实现 |

@@ -1,5 +1,13 @@
 > **EN**: Networking Basics
 > **Summary**: Authoritative concept page for `01 Networking Basics Practice`. Content migrated from `crates/c10_networks/docs/tier_02_guides/01_networking_basics_practice.md`.
+> **受众**: [初学者]
+> **内容分级**: [综述级]
+> **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **A+P** — Application + Procedure
+> **双维定位**: A×Mem — 网络编程基础
+> **前置依赖**: [Std IO and Process](../../01_foundation/00_start/47_std_io_and_process.md) · [Async](../../03_advanced/01_async/02_async.md)
+> **后置概念**: [Network Protocols](../04_web_and_networking/38_network_protocols.md) · [Web Frameworks](../04_web_and_networking/27_web_frameworks.md)
+> **定理链**: Socket ⟹ Protocol ⟹ Application
 >
 > **权威来源**: 本页为 `Networking Basics` 的权威概念页；crate 文档仅保留导航 stub。
 
@@ -50,6 +58,8 @@
     - [最佳实践](#最佳实践)
   - [📚 参考资源](#-参考资源)
   - [**下一步**: 学习 HTTP 客户端开发，深入 HTTP 协议实践](#下一步-学习-http-客户端开发深入-http-协议实践)
+  - [过渡段](#过渡段)
+  - [定理链](#定理链)
 
 ## 📐 知识结构
 
@@ -829,3 +839,20 @@ fn main() {
 ---
 
 > **向下引用**: 参见 [04_safety_boundaries](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md)
+
+## 过渡段
+
+> **过渡**: 从 socket API 过渡到协议分层，可以理解网络编程中传输层与应用层的职责划分。
+>
+> **过渡**: 从协议概念过渡到异步运行时，可以建立高并发连接的处理模型。
+>
+> **过渡**: 从运行时过渡到应用架构，可以将网络基础与 Web 框架、微服务等主题链接。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| Socket 抽象 ⟹ 可移植性 | 统一接口屏蔽操作系统差异 | 代码可跨平台编译 |
+| 协议分层 ⟹ 关注点分离 | 传输层与应用层解耦 | 每层独立演进与测试 |
+| 异步运行时 ⟹ 并发连接 | 单线程或多线程事件驱动 | 支持大量同时连接 |

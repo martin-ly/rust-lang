@@ -301,3 +301,20 @@ async fn read_with_timeout(mut stream: TcpStream) -> std::io::Result<Vec<u8>> {
 ---
 
 > **来源**: [rustls](https://docs.rs/rustls/) · [RFC 8446](https://tools.ietf.org/html/rfc8446) · [OWASP Rust Security](https://owasp.org/www-project-web-security-testing-guide/)
+
+## 过渡段
+
+> **过渡**: 从威胁模型过渡到 TLS/QUIC 等传输安全机制，可以理解机密性与完整性的保障来源。
+>
+> **过渡**: 从密码学原语过渡到 Rust 内存安全，可以建立“更少内存漏洞类”的安全信心。
+>
+> **过渡**: 从实现过渡到审计与验证，可以形成高 assurance 网络组件的交付流程。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 内存安全 ⟹ 更少攻击面 | Rust 所有权与借用检查 | 消除大量传统 C/C++ 漏洞类 |
+| TLS ⟹ 机密性与完整性 | 加密握手与记录层 | 防止窃听与篡改 |
+| 形式审计 ⟹ 高保证 | 对关键安全代码进行审查与验证 | 降低高风险漏洞概率 |

@@ -264,3 +264,20 @@ impl<T> Register<T> {
 - [Rust Embedded Working Group](https://github.com/rust-embedded/wg)
 
 > **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
+
+## 过渡段
+
+> **过渡**: 从 `no_std` 场景过渡到 `build-std` 动机，可以理解为什么需要从源码编译标准库。
+>
+> **过渡**: 从 `build-std` 配置过渡到 panic 策略与 LTO，可以建立完整的体积优化方案。
+>
+> **过渡**: 从本地优化过渡到嵌入式部署，可以将构建配置与目标硬件需求对齐。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 源码构建 std ⟹ 自定义目标支持 | 编译目标平台未预编译的标准库 | 支持新硬件与操作系统 |
+| 跨 crate LTO ⟹ 更小二进制 | 链接时优化覆盖 std | 显著减少体积 |
+| 自定义 panic ⟹ 减少运行时开销 | 使用 `panic = "abort"` | 避免栈展开代码 |

@@ -204,3 +204,20 @@ fn main() {
 - [Glommio GitHub](https://github.com/DataDog/glommio)
 - [Linux io_uring 论文](https://kernel.dk/io_uring.pdf)
 - [Async Rust Book](https://rust-lang.github.io/async-book/)
+
+## 过渡段
+
+> **过渡**: 从传统线程池过渡到 thread-per-core，可以理解专用核心与缓存亲和性对尾延迟的影响。
+>
+> **过渡**: 从 io_uring 集成过渡到协作式调度，可以建立“避免抢占、减少抖动”的设计原则。
+>
+> **过渡**: 从低延迟设计过渡到运维复杂度，可以评估这种架构对部署与监控的要求。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 专用核心 ⟹ 缓存亲和性 | 任务固定到特定 CPU | 减少缓存失效与上下文切换 |
+| io_uring ⟹ 更少系统调用 | 批量处理 I/O 请求 | 降低内核态开销 |
+| 协作式任务 ⟹ 可预测尾延迟 | 避免抢占式调度抖动 | 适合延迟敏感型服务 |

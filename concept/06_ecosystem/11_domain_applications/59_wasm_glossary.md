@@ -1,5 +1,13 @@
 > **EN**: WebAssembly Glossary
 > **Summary**: Authoritative concept page for `C12 WASM - 术语表`. Content migrated from `crates/c12_wasm/docs/tier_01_foundations/03_glossary.md`.
+> **受众**: [进阶]
+> **内容分级**: [参考级]
+> **Bloom 层级**: 记忆 → 理解
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: S×Mem — WebAssembly 术语索引
+> **前置依赖**: [WebAssembly](11_webassembly.md) · [Rust WebAssembly Advanced](54_webassembly_advanced.md)
+> **后置概念**: [Wasm FAQ](60_wasm_faq.md) · [Wasm JavaScript Interop](61_wasm_javascript_interop.md)
+> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency
 >
 > **权威来源**: 本页为 `WebAssembly Glossary` 的权威概念页；crate 文档仅保留导航 stub。
 
@@ -50,6 +58,8 @@
     - [wasmer](#wasmer)
   - [📚 相关资源](#-相关资源)
   - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1961--edition-2024-wasm-20--wasi-02)
+  - [过渡段](#过渡段)
+  - [定理链](#定理链)
 
 ---
 
@@ -338,3 +348,20 @@
 ---
 
 > **向下引用**: 参见 [08_rust_vs_javascript](../../05_comparative/02_managed_languages/08_rust_vs_javascript.md)
+
+## 过渡段
+
+> **过渡**: 从 wasm 术语过渡到浏览器/宿主环境，可以理解 WebAssembly 在不同运行时的角色。
+>
+> **过渡**: 从宿主环境过渡到 JS 互操作，可以建立 wasm 与 JavaScript 协同工作的视角。
+>
+> **过渡**: 从互操作过渡到性能优化，可以将术语理解与工程实践链接。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 统一 wasm 术语 ⟹ 文档清晰 | 模块、实例、内存等概念一致 | 降低学习门槛 |
+| 宿主 API 链接 ⟹ 快速定位 | 指向 WASI、JS API 等权威来源 | 缩短查阅时间 |
+| 性能术语 ⟹ 优化焦点 | 加载、实例化、调用开销 | 指导性能调优方向 |

@@ -1,5 +1,13 @@
 > **EN**: WebAssembly FAQ
 > **Summary**: Authoritative concept page for `C12 WASM - 常见问题`. Content migrated from `crates/c12_wasm/docs/tier_01_foundations/04_faq.md`.
+> **受众**: [进阶]
+> **内容分级**: [参考级]
+> **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **A+P** — Application + Procedure
+> **双维定位**: A×Eva — WebAssembly FAQ 评估
+> **前置依赖**: [WebAssembly](11_webassembly.md) · [Wasm Glossary](59_wasm_glossary.md)
+> **后置概念**: [Wasm JavaScript Interop](61_wasm_javascript_interop.md) · [Rust WebAssembly Advanced](54_webassembly_advanced.md)
+> **定理链**: Common Question ⟹ Mechanism Explanation ⟹ Best Practice
 >
 > **权威来源**: 本页为 `WebAssembly FAQ` 的权威概念页；crate 文档仅保留导航 stub。
 
@@ -47,6 +55,8 @@
     - [Q: 如何迁移到 Rust 1.92.0？](#q-如何迁移到-rust-1920)
   - [📚 相关资源](#-相关资源)
   - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1961--edition-2024-wasm-20--wasi-02)
+  - [过渡段](#过渡段)
+  - [定理链](#定理链)
 
 ---
 
@@ -440,3 +450,20 @@ wasm-pack test --headless --firefox
 ---
 
 > **向下引用**: 参见 [08_rust_vs_javascript](../../05_comparative/02_managed_languages/08_rust_vs_javascript.md)
+
+## 过渡段
+
+> **过渡**: 从构建工具问题过渡到 wasm 模块加载，可以理解工具链与运行时之间的边界。
+>
+> **过渡**: 从 JS 互操作问题过渡到内存模型，可以建立正确共享数据的设计原则。
+>
+> **过渡**: 从调试问题过渡到部署实践，可以形成完整的 wasm 开发闭环。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| FAQ 覆盖 ⟹ 减少上手摩擦 | 集中回答高频问题 | 加速新用户入门 |
+| 示例验证 ⟹ 答案可靠 | 提供可运行代码 | 避免误导性回答 |
+| 工具链指导 ⟹ 快速迭代 | 推荐 wasm-pack、wasm-bindgen 等 | 提升开发效率 |

@@ -261,3 +261,20 @@ flowchart TD
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+
+## 过渡段
+
+> **过渡**: 从协议规范过渡到 Rust 类型，可以理解如何用类型状态机表达协议阶段。
+>
+> **过渡**: 从状态机实现过渡到 unsafe 边界，可以识别协议解析中需要手动管理的内存区域。
+>
+> **过渡**: 从实现过渡到模糊测试与验证，可以建立协议符合性的保障手段。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 类型状态 ⟹ 更少运行时错误 | 将协议阶段编码为类型 | 非法状态转移被编译器拦截 |
+| 零拷贝解析 ⟹ 高吞吐 | 直接引用原始缓冲区 | 减少数据拷贝开销 |
+| 属性测试 ⟹ 协议符合性 | 自动生成输入验证解析器 | 发现边界情况缺陷 |

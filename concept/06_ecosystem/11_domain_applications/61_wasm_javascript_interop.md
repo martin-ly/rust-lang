@@ -1,5 +1,13 @@
 > **EN**: WebAssembly JavaScript Interop
 > **Summary**: Authoritative concept page for `C12 WASM - JavaScript 互操作`. Content migrated from `crates/c12_wasm/docs/tier_02_guides/03_javascript_interop.md`.
+> **受众**: [进阶]
+> **内容分级**: [参考级]
+> **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: A×App — wasm/JS 互操作应用
+> **前置依赖**: [WebAssembly](11_webassembly.md) · [Wasm FAQ](60_wasm_faq.md)
+> **后置概念**: [Rust WebAssembly Advanced](54_webassembly_advanced.md) · [Web Frameworks](../04_web_and_networking/27_web_frameworks.md)
+> **定理链**: wasm-bindgen ⟹ Type Mapping ⟹ Runtime Interaction
 >
 > **权威来源**: 本页为 `WebAssembly JavaScript Interop` 的权威概念页；crate 文档仅保留导航 stub。
 
@@ -48,6 +56,8 @@
     - [使用联合体原始引用进行安全的 FFI 互操作](#使用联合体原始引用进行安全的-ffi-互操作)
   - [📚 相关资源](#-相关资源)
   - [**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1961--edition-2024-wasm-20--wasi-02)
+  - [过渡段](#过渡段)
+  - [定理链](#定理链)
 
 ---
 
@@ -439,3 +449,20 @@ let mut_raw_ref = union.get_integer_mut_raw();
 ---
 
 > **向下引用**: 参见 [08_rust_vs_javascript](../../05_comparative/02_managed_languages/08_rust_vs_javascript.md)
+
+## 过渡段
+
+> **过渡**: 从原始 wasm 模块过渡到 wasm-bindgen，可以理解绑定生成器如何简化 JS 互操作。
+>
+> **过渡**: 从类型映射过渡到内存所有权，可以建立安全共享数据的责任边界。
+>
+> **过渡**: 从运行时交互过渡到错误处理，可以形成健壮的跨语言调用模式。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| wasm-bindgen ⟹ 人体工学绑定 | 自动生成 JS/TS 胶水代码 | 大幅减少手写样板 |
+| 显式内存所有权 ⟹ 安全性 | Rust 管理 wasm 线性内存 | 避免 use-after-free |
+| 类型化接口 ⟹ 更少 bug | 强类型绑定替代动态调用 | 编译期捕获接口错误 |

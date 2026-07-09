@@ -213,3 +213,20 @@ components = ["rust-src", "miri", "rustfmt", "clippy"]
 | [Editions](../01_edition_roadmap/44_edition_guide.md) | Edition 是 Rust 每 2-3 年发布的重大语法/库更新 |
 | [Rust Version Tracking](05_rust_version_tracking.md) | 跟踪各版本稳定特性 |
 | [Rust 1.97 Preview (Beta)](rust_1_97_preview.md) | Stable 通道具体特性示例 |
+
+## 过渡段
+
+> **过渡**: 从火车发布模型过渡到 Nightly 通道，可以理解“稳定而不停滞”的发布哲学。
+>
+> **过渡**: 从 feature flag 机制过渡到 RFC 流程，可以建立新特性从实验到稳定的演进路径。
+>
+> **过渡**: 从 Nightly 使用过渡到 Beta/Stable，可以评估尝鲜特性对项目维护的影响。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| Nightly 通道 ⟹ 实验空间 | 每日构建包含最新特性 | 支持早期验证 |
+| Feature Flag ⟹ 可控启用 | 用户显式选择不稳定特性 | 防止意外依赖 |
+| 稳定化流程 ⟹ 生态兼容 | 经过 Beta 测试后进入 Stable | 保证升级安全 |

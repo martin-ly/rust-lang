@@ -1,5 +1,13 @@
 > **EN**: Rust 1.90 Stabilized Features
 > **Summary**: Authoritative concept page for `Rust 1.90 网络特性参考`. Content migrated from `crates/c10_networks/docs/tier_03_references/03_rust_190_networking_features_reference.md`.
+> **受众**: [进阶]
+> **内容分级**: [参考级]
+> **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: A×Ref — 版本特性参考
+> **前置依赖**: [Rust Version Tracking](05_rust_version_tracking.md) · [Async](../../03_advanced/01_async/02_async.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
+> **后置概念**: [Rust 1.91 Stabilized](rust_1_91_stabilized.md) · [Networking Basics](../../06_ecosystem/09_networking/06_networking_basics.md)
+> **定理链**: Version Context ⟹ Feature Set ⟹ Migration Impact
 >
 > **权威来源**: 本页为 `Rust 1.90 Stabilized Features` 的权威概念页；crate 文档仅保留导航 stub。
 
@@ -723,3 +731,20 @@ pub async fn modern_websocket_server() -> std::io::Result<()> {
 ---
 
 > **向下引用**: 参见 [01_toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
+
+## 过渡段
+
+> **过渡**: 从版本上下文过渡到特性概览，可以理解 1.90 在异步与类型系统方面的重点改进。
+>
+> **过渡**: 从 RPITIT 与异步闭包过渡到网络应用场景，可以评估这些特性对实际代码的影响。
+>
+> **过渡**: 从特性列表过渡到迁移建议，可以将版本更新转化为可执行的升级步骤。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 版本上下文 ⟹ 特性定位 | 了解 1.90 在 release train 中的位置 | 判断是否需要升级 |
+| RPITIT 稳定 ⟹ 异步 trait 人体工学 | `impl Trait` 在 trait 中的返回类型 | 简化异步接口设计 |
+| 特性迁移 ⟹ 渐进升级 | 评估影响面后逐步采用 | 降低版本切换风险 |

@@ -4,6 +4,14 @@
 >
 > **EN**: Pattern Implementation Comparison
 > **Summary**: Compares different implementation strategies for design patterns in Rust: trait objects vs generics, sync vs async, static vs dynamic dispatch, single vs multi-threaded, zero-cost vs runtime abstraction, and ownership models.
+> **受众**: [进阶]
+> **内容分级**: [参考级]
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: A×Eva — 评估模式实现策略
+> **前置依赖**: [Design Patterns](02_patterns.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)
+> **后置概念**: [Pattern Selection Best Practices](37_pattern_selection_best_practices.md) · [Engineering and Production Patterns](82_engineering_and_production_patterns.md)
+> **定理链**: Scenario ⟹ Implementation Strategy ⟹ Trade-off Evaluation
 > **层级**: L6 生态工程
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **后置概念**: [Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -760,3 +768,20 @@ pub fn clone_example() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
+
+## 过渡段
+
+> **过渡**: 从模式意图过渡到 trait 与泛型实现，可以理解 Rust 中“接口与实现”的两种主要组织方式。
+>
+> **过渡**: 从同步/异步选择过渡到并发模型，可以建立性能与复杂度之间的权衡视角。
+>
+> **过渡**: 从静态/动态分发过渡到可维护性，可以评估长期演进成本与运行时性能。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 泛型实现 ⟹ 零成本运行时 | 编译期单态化 | 性能最优但二进制体积增大 |
+| Trait Object 实现 ⟹ 运行时多态 | 通过 vtable 动态分发 | 提升灵活性并减少代码膨胀 |
+| async 变体 ⟹ 可扩展并发 | 与异步运行时集成 | 适合高并发 I/O 场景 |

@@ -33152,7 +33152,7 @@
       "layer": "L4",
       "title": "类型系统参考（Type System Reference）",
       "positioning": "",
-      "line_count": 402,
+      "line_count": 411,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -33195,7 +33195,7 @@
         "../05_rustc_internals/42_type_layout.md",
         "06_subtype_variance.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 83,
@@ -36814,7 +36814,7 @@
       "layer": "L4",
       "title": "名称、作用域与解析（Names, Scopes and Resolution）",
       "positioning": "",
-      "line_count": 207,
+      "line_count": 216,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时语义串联起来。",
@@ -36862,7 +36862,7 @@
         "35_name_resolution_and_hir.md",
         "51_names_reference.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 39,
@@ -37091,7 +37091,7 @@
       "layer": "L4",
       "title": "词法结构（Lexical Structure）",
       "positioning": "",
-      "line_count": 249,
+      "line_count": 258,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将字节流、Unicode 解码、token 流和 AST 构建串联起来。",
@@ -37164,7 +37164,7 @@
         "40_names_and_resolution.md",
         "46_items_reference.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 46,
@@ -37184,7 +37184,7 @@
       "layer": "L4",
       "title": "条目参考（Items Reference）",
       "positioning": "",
-      "line_count": 241,
+      "line_count": 250,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块、item 和声明串联起来。",
@@ -37277,7 +37277,7 @@
         "47_attributes.md",
         "53_generics_compiler_behavior.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 42,
@@ -42563,8 +42563,21 @@
       "layer": "L6",
       "title": "Unknown",
       "positioning": "",
-      "line_count": 267,
-      "theorem_chains": [],
+      "line_count": 284,
+      "theorem_chains": [
+        {
+          "text": "| 源码构建 std ⟹ 自定义目标支持 | 编译目标平台未预编译的标准库 | 支持新硬件与操作系统 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 跨 crate LTO ⟹ 更小二进制 | 链接时优化覆盖 std | 显著减少体积 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 自定义 panic ⟹ 减少运行时开销 | 使用 `panic = \"abort\"` | 避免栈展开代码 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -42596,10 +42609,10 @@
         "../05_systems_and_embedded/22_embedded_systems.md",
         "83_cargo_configuration.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 16,
+      "matrix_rows": 20,
       "pre_post": {
         "pre": [
           "[Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md) · [Cargo 配置与环境变量](83_cargo_configuration.md) · [所有权系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)"
@@ -44655,8 +44668,25 @@
       "layer": "L6",
       "title": "模式实现对比 (Pattern Implementation Comparison)",
       "positioning": "",
-      "line_count": 763,
-      "theorem_chains": [],
+      "line_count": 788,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Scenario ⟹ Implementation Strategy ⟹ Trade-off Evaluation",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 泛型实现 ⟹ 零成本运行时 | 编译期单态化 | 性能最优但二进制体积增大 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| Trait Object 实现 ⟹ 运行时多态 | 通过 vtable 动态分发 | 提升灵活性并减少代码膨胀 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| async 变体 ⟹ 可扩展并发 | 与异步运行时集成 | 适合高并发 I/O 场景 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -44758,15 +44788,23 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/02_generics.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "02_patterns.md",
+        "37_pattern_selection_best_practices.md",
+        "82_engineering_and_production_patterns.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 28,
+      "matrix_rows": 32,
       "pre_post": {
-        "pre": [],
+        "pre": [
+          "[Design Patterns](02_patterns.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)"
+        ],
         "post": [
+          "[Pattern Selection Best Practices](37_pattern_selection_best_practices.md) · [Engineering and Production Patterns](82_engineering_and_production_patterns.md)",
           "[Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
         ]
       },
@@ -44778,8 +44816,25 @@
       "layer": "L6",
       "title": "模式选择最佳实践 (Pattern Selection Best Practices)",
       "positioning": "",
-      "line_count": 726,
-      "theorem_chains": [],
+      "line_count": 751,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Requirement ⟹ Pattern Selection ⟹ Validation",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 需求明确 ⟹ 模式选型准确 | 清晰的功能与非功能需求 | 避免过度设计或选型失误 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 并发约束 ⟹ Send/Sync 要求 | Rust 所有权模型 | 排除不满足线程安全的设计 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 团队能力 ⟹ 可维护性 | 熟悉度与工具链支持 | 影响模式的长期落地效果 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -44851,15 +44906,22 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "02_patterns.md",
+        "35_architecture_patterns.md",
+        "36_pattern_implementation_comparison.md",
+        "82_engineering_and_production_patterns.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 11,
+      "matrix_rows": 15,
       "pre_post": {
-        "pre": [],
+        "pre": [
+          "[Design Patterns](02_patterns.md) · [Pattern Implementation Comparison](36_pattern_implementation_comparison.md)"
+        ],
         "post": [
+          "[Engineering and Production Patterns](82_engineering_and_production_patterns.md) · [Architecture Patterns](35_architecture_patterns.md)",
           "[Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
         ]
       },
@@ -44871,8 +44933,25 @@
       "layer": "L6",
       "title": "形式化设计模式理论 (Formal Design Pattern Theory)",
       "positioning": "",
-      "line_count": 972,
-      "theorem_chains": [],
+      "line_count": 997,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Abstract Pattern ⟹ Formal Model ⟹ Language Mapping",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 形式模型 ⟹ 精确推理 | 消除自然语言描述的歧义 | 支持严格验证模式适用性 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 范畴论 ⟹ 模式组合 | 对象、态射与函子 | 提供模式组合与变换的框架 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 语言映射 ⟹ 可应用边界 | Rust 所有权与生命周期约束 | 决定哪些形式模式可直接实现 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -44974,15 +45053,22 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "02_patterns.md",
+        "36_pattern_implementation_comparison.md",
+        "39_frontier_research_and_innovative_patterns.md",
+        "73_pattern_composition_algebra.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 15,
+      "matrix_rows": 19,
       "pre_post": {
-        "pre": [],
+        "pre": [
+          "[Design Patterns](02_patterns.md) · [Pattern Implementation Comparison](36_pattern_implementation_comparison.md)"
+        ],
         "post": [
+          "[Frontier Research and Innovative Patterns](39_frontier_research_and_innovative_patterns.md) · [Pattern Composition Algebra](73_pattern_composition_algebra.md)",
           "[Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
         ]
       },
@@ -44994,8 +45080,25 @@
       "layer": "L6",
       "title": "前沿研究与创新模式 (Frontier Research and Innovative Patterns)",
       "positioning": "",
-      "line_count": 953,
-      "theorem_chains": [],
+      "line_count": 978,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Emerging Problem ⟹ Experimental Pattern ⟹ Production Hardening",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 新问题 ⟹ 新模式 | 现有模式无法覆盖的领域 | 催生针对性抽象 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 类型系统进展 ⟹ 新抽象能力 | GAT、 effects 等语言特性 | 使 previously 不可能的模式成为可能 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 原型验证 ⟹  adoption | 通过真实场景检验 | 决定创新模式是否值得推广 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -45103,15 +45206,22 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../11_domain_applications/75_industrial_case_studies.md",
+        "02_patterns.md",
+        "38_formal_design_pattern_theory.md",
+        "82_engineering_and_production_patterns.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 6,
+      "matrix_rows": 10,
       "pre_post": {
-        "pre": [],
+        "pre": [
+          "[Design Patterns](02_patterns.md) · [Formal Design Pattern Theory](38_formal_design_pattern_theory.md)"
+        ],
         "post": [
+          "[Engineering and Production Patterns](82_engineering_and_production_patterns.md) · [Industrial Case Studies](../11_domain_applications/75_industrial_case_studies.md)",
           "[Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
         ]
       },
@@ -45718,8 +45828,21 @@
       "layer": "L6",
       "title": "工程实践与生产级模式",
       "positioning": "",
-      "line_count": 298,
-      "theorem_chains": [],
+      "line_count": 315,
+      "theorem_chains": [
+        {
+          "text": "| 熔断器 ⟹ 故障隔离 | 快速失败并限制级联影响 | 提升系统整体可用性 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 结构化日志 ⟹ 快速恢复 | 统一日志格式与上下文 | 缩短平均故障定位时间 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 负载 shedding ⟹ 稳定性 | 在过载时保护核心路径 | 避免雪崩效应 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -45783,10 +45906,10 @@
         "36_pattern_implementation_comparison.md",
         "37_pattern_selection_best_practices.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 10,
+      "matrix_rows": 14,
       "pre_post": {
         "pre": [
           "[Architecture Patterns](35_architecture_patterns.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)"
@@ -45803,8 +45926,25 @@
       "layer": "L6",
       "title": "C09 设计模式 - 术语表",
       "positioning": "",
-      "line_count": 232,
-      "theorem_chains": [],
+      "line_count": 257,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 统一术语 ⟹ 减少歧义 | 团队与文档使用一致定义 | 提升沟通效率 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 术语链接 ⟹ 加速学习 | 每个术语指向权威概念页 | 读者可快速深入 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 分类清晰 ⟹ 快速检索 | 按模式类型与适用场景组织 | 缩短查找时间 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -45846,13 +45986,17 @@
         "39_frontier_research_and_innovative_patterns.md",
         "82_engineering_and_production_patterns.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 31,
+      "matrix_rows": 35,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Design Patterns](02_patterns.md) · [Pattern Implementation Comparison](36_pattern_implementation_comparison.md)"
+        ],
+        "post": [
+          "[Pattern Selection Best Practices](37_pattern_selection_best_practices.md) · [Formal Design Pattern Theory](38_formal_design_pattern_theory.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -45862,8 +46006,25 @@
       "layer": "L6",
       "title": "C09 设计模式 - 常见问题",
       "positioning": "",
-      "line_count": 457,
-      "theorem_chains": [],
+      "line_count": 482,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Common Question ⟹ Pattern Mechanism ⟹ Best Practice",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 问题覆盖 ⟹ 减少重复询问 | 集中回答高频困惑 | 降低支持成本 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 示例验证 ⟹ 答案可信 | 可运行的最小代码 | 确保 FAQ 解决方案正确 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 决策规则 ⟹ 一致性 | 将 FAQ 提炼为选型原则 | 提升工程一致性 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -45902,15 +46063,23 @@
         "/crates/c09_design_pattern/docs/tier_01_foundations/02_navigation.md",
         "/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md",
         "/crates/c09_design_pattern/docs/tier_01_foundations/04_faq.md",
-        "/crates/c09_design_pattern/docs/tier_04_advanced/README.md"
+        "/crates/c09_design_pattern/docs/tier_04_advanced/README.md",
+        "02_patterns.md",
+        "37_pattern_selection_best_practices.md",
+        "82_engineering_and_production_patterns.md",
+        "84_design_patterns_glossary.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 19,
+      "matrix_rows": 23,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Design Patterns](02_patterns.md) · [Design Patterns Glossary](84_design_patterns_glossary.md)"
+        ],
+        "post": [
+          "[Pattern Selection Best Practices](37_pattern_selection_best_practices.md) · [Engineering and Production Patterns](82_engineering_and_production_patterns.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -46467,8 +46636,21 @@
       "layer": "L6",
       "title": "高性能网络服务架构 (High-Performance Network Service Architecture)",
       "positioning": "",
-      "line_count": 2038,
-      "theorem_chains": [],
+      "line_count": 2055,
+      "theorem_chains": [
+        {
+          "text": "| 零拷贝 ⟹ 降低延迟 | 避免用户态与内核态间数据拷贝 | 提升网络 I/O 吞吐 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| io_uring ⟹ 高 IOPS | 批量提交与完成事件 | 减少系统调用开销 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 无锁结构 ⟹ 可扩展并发 | 避免互斥锁竞争 | 提升多核场景下的吞吐量 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -46596,10 +46778,10 @@
         "../../06_ecosystem/10_performance/15_performance_optimization.md",
         "39_high_performance_network_service_architecture.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 10,
+      "matrix_rows": 14,
       "pre_post": {
         "pre": [
           "[Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)"
@@ -46863,8 +47045,21 @@
       "layer": "L6",
       "title": "Glommio 与 Thread-per-Core 异步运行时",
       "positioning": "",
-      "line_count": 207,
-      "theorem_chains": [],
+      "line_count": 224,
+      "theorem_chains": [
+        {
+          "text": "| 专用核心 ⟹ 缓存亲和性 | 任务固定到特定 CPU | 减少缓存失效与上下文切换 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| io_uring ⟹ 更少系统调用 | 批量处理 I/O 请求 | 降低内核态开销 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 协作式任务 ⟹ 可预测尾延迟 | 避免抢占式调度抖动 | 适合延迟敏感型服务 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -46905,10 +47100,10 @@
         "../../05_comparative/00_paradigms/05_execution_model_isomorphism.md",
         "39_high_performance_network_service_architecture.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 19,
+      "matrix_rows": 23,
       "pre_post": {
         "pre": [
           "[Async/Await](../../03_advanced/01_async/02_async.md) · [Async Patterns](../../03_advanced/01_async/26_async_patterns.md) · [执行模型同构](../../05_comparative/00_paradigms/05_execution_model_isomorphism.md)"
@@ -46925,8 +47120,25 @@
       "layer": "L6",
       "title": "C10 Networks - Tier 2: WebSocket 实时通信",
       "positioning": "",
-      "line_count": 696,
-      "theorem_chains": [],
+      "line_count": 721,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Real-Time Requirement ⟹ Connection State ⟹ Message Delivery",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 持久连接 ⟹ 更低延迟 | 避免重复建立 HTTP 连接 | 适合实时推送场景 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 帧协议 ⟹ 高效解析 | 二进制帧头与掩码机制 | 降低解析开销 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 背压 ⟹ 稳定广播 | 控制发送速率 | 防止慢消费者拖垮系统 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -46992,16 +47204,24 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../03_advanced/01_async/02_async.md",
         "../../05_comparative/02_managed_languages/08_rust_vs_javascript.md",
-        "/crates/c10_networks/docs/tier_02_guides/04_tcp_udp_programming.md"
+        "/crates/c10_networks/docs/tier_02_guides/04_tcp_udp_programming.md",
+        "27_web_frameworks.md",
+        "38_network_protocols.md",
+        "39_high_performance_network_service_architecture.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 14,
+      "matrix_rows": 18,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Network Protocols](38_network_protocols.md) · [Async](../../03_advanced/01_async/02_async.md)"
+        ],
+        "post": [
+          "[High Performance Network Service Architecture](39_high_performance_network_service_architecture.md) · [Web Frameworks](27_web_frameworks.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -48063,8 +48283,21 @@
       "layer": "L6",
       "title": "Embedded-HAL 1.0 迁移与 Embassy 生产状态",
       "positioning": "",
-      "line_count": 220,
-      "theorem_chains": [],
+      "line_count": 237,
+      "theorem_chains": [
+        {
+          "text": "| 稳定 HAL API ⟹ 生态可移植性 | 统一硬件抽象接口 | 驱动与板级支持代码复用性提升 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 类型级错误 ⟹ 编译期检查 | 1.0 引入的错误关联类型 | 更多问题在编译期暴露 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 验证矩阵 ⟹ 硬件覆盖 | 在目标硬件上运行测试 | 降低迁移回归风险 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -48106,10 +48339,10 @@
         "22_embedded_systems.md",
         "https://github.com/rust-embedded/embedded-hal/blob/master/docs/migrating-0.2-to-1.0.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 28,
+      "matrix_rows": 32,
       "pre_post": {
         "pre": [
           "[Rust 嵌入式系统开发](22_embedded_systems.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)"
@@ -49736,8 +49969,21 @@
       "layer": "L6",
       "title": "Rust 高级网络协议概览",
       "positioning": "",
-      "line_count": 264,
-      "theorem_chains": [],
+      "line_count": 281,
+      "theorem_chains": [
+        {
+          "text": "| 类型状态 ⟹ 更少运行时错误 | 将协议阶段编码为类型 | 非法状态转移被编译器拦截 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 零拷贝解析 ⟹ 高吞吐 | 直接引用原始缓冲区 | 减少数据拷贝开销 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 属性测试 ⟹ 协议符合性 | 自动生成输入验证解析器 | 发现边界情况缺陷 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -49789,10 +50035,10 @@
         "../04_web_and_networking/39_high_performance_network_service_architecture.md",
         "02_network_security.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 14,
+      "matrix_rows": 18,
       "pre_post": {
         "pre": [
           "[异步编程](../../03_advanced/01_async/02_async.md) · [并发模式](../../03_advanced/00_concurrency/10_concurrency_patterns.md) · [网络协议](../04_web_and_networking/38_network_protocols.md)"
@@ -49809,8 +50055,21 @@
       "layer": "L6",
       "title": "网络安全",
       "positioning": "",
-      "line_count": 304,
-      "theorem_chains": [],
+      "line_count": 321,
+      "theorem_chains": [
+        {
+          "text": "| 内存安全 ⟹ 更少攻击面 | Rust 所有权与借用检查 | 消除大量传统 C/C++ 漏洞类 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| TLS ⟹ 机密性与完整性 | 加密握手与记录层 | 防止窃听与篡改 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 形式审计 ⟹ 高保证 | 对关键安全代码进行审查与验证 | 降低高风险漏洞概率 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -49866,10 +50125,10 @@
         "../07_security_and_cryptography/43_security_cryptography.md",
         "01_advanced_network_protocols.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 5,
+      "matrix_rows": 9,
       "pre_post": {
         "pre": [
           "[Async/Await](../../03_advanced/01_async/02_async.md) · [Rust 网络编程](../../03_advanced/06_low_level_patterns/18_network_programming.md) · [Security & Cryptography](../07_security_and_cryptography/43_security_cryptography.md)"
@@ -49940,8 +50199,21 @@
       "layer": "L6",
       "title": "Rust 网络编程快速入门",
       "positioning": "为 Rust 网络编程提供分阶段学习路径与场景化导航，链接到权威概念页获取深度解释。",
-      "line_count": 245,
-      "theorem_chains": [],
+      "line_count": 262,
+      "theorem_chains": [
+        {
+          "text": "| std 网络 ⟹ 简单性 | 无需额外运行时依赖 | 适合低并发或学习场景 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| tokio ⟹ 可扩展性 | 与 async/await 集成 | 适合高并发 I/O 服务 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 示例驱动 ⟹ 降低上手成本 | 从最小可运行代码开始 | 加速学习曲线 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -49988,10 +50260,10 @@
         "02_network_security.md",
         "03_custom_protocol_implementation.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 24,
+      "matrix_rows": 28,
       "pre_post": {
         "pre": [
           "[Async](../../03_advanced/01_async/02_async.md) · [Network Protocols](../04_web_and_networking/38_network_protocols.md)"
@@ -50008,8 +50280,21 @@
       "layer": "L6",
       "title": "形式化网络协议理论",
       "positioning": "",
-      "line_count": 542,
-      "theorem_chains": [],
+      "line_count": 559,
+      "theorem_chains": [
+        {
+          "text": "| 形式模型 ⟹ 无歧义规范 | 使用状态机或进程代数 | 精确描述协议行为 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 精化关系 ⟹ 实现正确性 | 证明代码满足模型 | 降低实现偏离规范的风险 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 模型检查 ⟹ 缺陷发现 | 自动遍历状态空间 | 暴露罕见交互路径中的 bug |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -50110,10 +50395,10 @@
         "03_custom_protocol_implementation.md",
         "05_formal_network_protocol_theory.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 6,
+      "matrix_rows": 10,
       "pre_post": {
         "pre": [
           "[网络协议](../04_web_and_networking/38_network_protocols.md) · [类型级编程](../../02_intermediate/01_generics/39_type_level_programming.md) · [Kani](../../04_formal/04_model_checking/32_kani.md)"
@@ -50130,8 +50415,25 @@
       "layer": "L6",
       "title": "C10 Networks - Tier 2: 网络基础实践",
       "positioning": "",
-      "line_count": 832,
-      "theorem_chains": [],
+      "line_count": 857,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Socket ⟹ Protocol ⟹ Application",
+          "type": "paragraph"
+        },
+        {
+          "text": "| Socket 抽象 ⟹ 可移植性 | 统一接口屏蔽操作系统差异 | 代码可跨平台编译 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 协议分层 ⟹ 关注点分离 | 传输层与应用层解耦 | 每层独立演进与测试 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 异步运行时 ⟹ 并发连接 | 单线程或多线程事件驱动 | 支持大量同时连接 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -50227,16 +50529,24 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../01_foundation/00_start/47_std_io_and_process.md",
+        "../../03_advanced/01_async/02_async.md",
         "../../05_comparative/03_domain_comparisons/04_safety_boundaries.md",
+        "../04_web_and_networking/27_web_frameworks.md",
+        "../04_web_and_networking/38_network_protocols.md",
         "/crates/c10_networks/docs/tier_02_guides/02_http_client_development.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 11,
+      "matrix_rows": 15,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Std IO and Process](../../01_foundation/00_start/47_std_io_and_process.md) · [Async](../../03_advanced/01_async/02_async.md)"
+        ],
+        "post": [
+          "[Network Protocols](../04_web_and_networking/38_network_protocols.md) · [Web Frameworks](../04_web_and_networking/27_web_frameworks.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -52681,8 +52991,25 @@
       "layer": "L6",
       "title": "C12 WASM - 术语表",
       "positioning": "",
-      "line_count": 341,
-      "theorem_chains": [],
+      "line_count": 366,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 统一 wasm 术语 ⟹ 文档清晰 | 模块、实例、内存等概念一致 | 降低学习门槛 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 宿主 API 链接 ⟹ 快速定位 | 指向 WASI、JS API 等权威来源 | 缩短查阅时间 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 性能术语 ⟹ 优化焦点 | 加载、实例化、调用开销 | 指导性能调优方向 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
@@ -52690,15 +53017,23 @@
         "../../05_comparative/02_managed_languages/08_rust_vs_javascript.md",
         "/crates/c12_wasm/docs/tier_01_foundations/01_project_overview.md",
         "/crates/c12_wasm/docs/tier_01_foundations/02_navigation.md",
-        "/crates/c12_wasm/docs/tier_01_foundations/04_faq.md"
+        "/crates/c12_wasm/docs/tier_01_foundations/04_faq.md",
+        "11_webassembly.md",
+        "54_webassembly_advanced.md",
+        "60_wasm_faq.md",
+        "61_wasm_javascript_interop.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "matrix_rows": 4,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[WebAssembly](11_webassembly.md) · [Rust WebAssembly Advanced](54_webassembly_advanced.md)"
+        ],
+        "post": [
+          "[Wasm FAQ](60_wasm_faq.md) · [Wasm JavaScript Interop](61_wasm_javascript_interop.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -52708,8 +53043,25 @@
       "layer": "L6",
       "title": "C12 WASM - 常见问题",
       "positioning": "",
-      "line_count": 443,
-      "theorem_chains": [],
+      "line_count": 468,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Common Question ⟹ Mechanism Explanation ⟹ Best Practice",
+          "type": "paragraph"
+        },
+        {
+          "text": "| FAQ 覆盖 ⟹ 减少上手摩擦 | 集中回答高频问题 | 加速新用户入门 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 示例验证 ⟹ 答案可靠 | 提供可运行代码 | 避免误导性回答 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 工具链指导 ⟹ 快速迭代 | 推荐 wasm-pack、wasm-bindgen 等 | 提升开发效率 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -52757,15 +53109,23 @@
         "/crates/c12_wasm/docs/rust_192_wasm_improvements.md",
         "/crates/c12_wasm/docs/tier_01_foundations/01_project_overview.md",
         "/crates/c12_wasm/docs/tier_01_foundations/02_navigation.md",
-        "/crates/c12_wasm/docs/tier_01_foundations/03_glossary.md"
+        "/crates/c12_wasm/docs/tier_01_foundations/03_glossary.md",
+        "11_webassembly.md",
+        "54_webassembly_advanced.md",
+        "59_wasm_glossary.md",
+        "61_wasm_javascript_interop.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 17,
+      "matrix_rows": 21,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[WebAssembly](11_webassembly.md) · [Wasm Glossary](59_wasm_glossary.md)"
+        ],
+        "post": [
+          "[Wasm JavaScript Interop](61_wasm_javascript_interop.md) · [Rust WebAssembly Advanced](54_webassembly_advanced.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -52775,8 +53135,25 @@
       "layer": "L6",
       "title": "C12 WASM - JavaScript 互操作",
       "positioning": "",
-      "line_count": 442,
-      "theorem_chains": [],
+      "line_count": 467,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: wasm-bindgen ⟹ Type Mapping ⟹ Runtime Interaction",
+          "type": "paragraph"
+        },
+        {
+          "text": "| wasm-bindgen ⟹ 人体工学绑定 | 自动生成 JS/TS 胶水代码 | 大幅减少手写样板 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 显式内存所有权 ⟹ 安全性 | Rust 管理 wasm 线性内存 | 避免 use-after-free |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 类型化接口 ⟹ 更少 bug | 强类型绑定替代动态调用 | 编译期捕获接口错误 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -52813,18 +53190,26 @@
       "sources": [],
       "cross_references": [
         "../../05_comparative/02_managed_languages/08_rust_vs_javascript.md",
+        "../04_web_and_networking/27_web_frameworks.md",
         "/crates/c12_wasm/docs/rust_192_wasm_improvements.md",
         "/crates/c12_wasm/docs/tier_02_guides/02_compiling_rust_to_wasm.md",
         "/crates/c12_wasm/docs/tier_02_guides/04_performance_optimization_guide.md",
-        "/crates/c12_wasm/docs/tier_03_references/03_best_practices.md"
+        "/crates/c12_wasm/docs/tier_03_references/03_best_practices.md",
+        "11_webassembly.md",
+        "54_webassembly_advanced.md",
+        "60_wasm_faq.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "matrix_rows": 4,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[WebAssembly](11_webassembly.md) · [Wasm FAQ](60_wasm_faq.md)"
+        ],
+        "post": [
+          "[Rust WebAssembly Advanced](54_webassembly_advanced.md) · [Web Frameworks](../04_web_and_networking/27_web_frameworks.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -52912,8 +53297,21 @@
       "layer": "L6",
       "title": "算法工程实践 (Algorithm Engineering Practice)",
       "positioning": "",
-      "line_count": 1921,
-      "theorem_chains": [],
+      "line_count": 1938,
+      "theorem_chains": [
+        {
+          "text": "| 复杂度分析 ⟹ 可扩展性预测 | 大 O 与内存占用评估 | 指导算法选型 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 属性测试 ⟹ 正确性保障 | 随机输入验证不变量 | 发现边界缺陷 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 性能分析 ⟹ 针对性优化 | 定位真正热点 | 避免无效微优化 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -53059,10 +53457,10 @@
         "../../06_ecosystem/10_performance/15_performance_optimization.md",
         "76_algorithm_engineering_practice.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 8,
+      "matrix_rows": 12,
       "pre_post": {
         "pre": [
           "[Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)"
@@ -53079,8 +53477,21 @@
       "layer": "L6",
       "title": "Unknown",
       "positioning": "",
-      "line_count": 256,
-      "theorem_chains": [],
+      "line_count": 273,
+      "theorem_chains": [
+        {
+          "text": "| 合适结构 ⟹ 算法效率 | 根据访问模式选择 | 时间/空间复杂度最优 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 所有权清晰 ⟹ 更少 bug | Rust 借用规则约束 | 避免悬垂与数据竞争 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 缓存友好布局 ⟹ 吞吐提升 | 控制结构体字段顺序 | 减少缓存未命中 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -53143,10 +53554,10 @@
         "29_algorithms_competitive_programming.md",
         "76_algorithm_engineering_practice.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 24,
+      "matrix_rows": 28,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Collections](../../01_foundation/05_collections/08_collections.md)"
@@ -53221,8 +53632,21 @@
       "layer": "L6",
       "title": "前沿算法技术",
       "positioning": "",
-      "line_count": 218,
-      "theorem_chains": [],
+      "line_count": 235,
+      "theorem_chains": [
+        {
+          "text": "| Rust 内存安全 ⟹ 更少并发 bug | 所有权与借用检查 | 降低新算法实现风险 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 类型系统 ⟹ 不变量强制 | 将算法前提编码为类型 | 编译期排除非法状态 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 基准测试 ⟹ 真实有效性 | 与现有实现对比 | 确认性能假设 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -53263,10 +53687,10 @@
         "78_algorithm_complexity_analysis.md",
         "80_formal_algorithm_theory.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 12,
+      "matrix_rows": 16,
       "pre_post": {
         "pre": [
           "[算法复杂度分析](78_algorithm_complexity_analysis.md) · [算法工程实践](76_algorithm_engineering_practice.md)"
@@ -53283,8 +53707,21 @@
       "layer": "L6",
       "title": "形式化算法理论",
       "positioning": "",
-      "line_count": 246,
-      "theorem_chains": [],
+      "line_count": 263,
+      "theorem_chains": [
+        {
+          "text": "| 形式规约 ⟹ 无歧义需求 | 使用谓词与状态转换 | 精确定义期望行为 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 正确性证明 ⟹ 可靠性 | 循环不变量与终止性 | 保证算法输出符合规约 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 复杂度界 ⟹ 资源预测 | 最坏/平均/均摊分析 | 评估算法可行性 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -53326,10 +53763,10 @@
         "78_algorithm_complexity_analysis.md",
         "79_cutting_edge_algorithms.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 12,
+      "matrix_rows": 16,
       "pre_post": {
         "pre": [
           "[算法复杂度分析](78_algorithm_complexity_analysis.md) · [形式化方法](../../04_formal/04_model_checking/13_formal_methods.md) · [Hoare 逻辑](../../04_formal/03_operational_semantics/15_hoare_logic.md)"
@@ -53505,8 +53942,21 @@
       "layer": "L7",
       "title": "Rust 的发布流程与 Nightly Rust",
       "positioning": "",
-      "line_count": 216,
-      "theorem_chains": [],
+      "line_count": 233,
+      "theorem_chains": [
+        {
+          "text": "| Nightly 通道 ⟹ 实验空间 | 每日构建包含最新特性 | 支持早期验证 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| Feature Flag ⟹ 可控启用 | 用户显式选择不稳定特性 | 防止意外依赖 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 稳定化流程 ⟹ 生态兼容 | 经过 Beta 测试后进入 Stable | 保证升级安全 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -53523,10 +53973,10 @@
         "05_rust_version_tracking.md",
         "rust_1_97_preview.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 17,
+      "matrix_rows": 21,
       "pre_post": {
         "pre": [
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Editions](../01_edition_roadmap/44_edition_guide.md)"
@@ -53543,8 +53993,25 @@
       "layer": "L7",
       "title": "Rust 1.90 网络特性参考",
       "positioning": "",
-      "line_count": 726,
-      "theorem_chains": [],
+      "line_count": 751,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Version Context ⟹ Feature Set ⟹ Migration Impact",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 版本上下文 ⟹ 特性定位 | 了解 1.90 在 release train 中的位置 | 判断是否需要升级 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| RPITIT 稳定 ⟹ 异步 trait 人体工学 | `impl Trait` 在 trait 中的返回类型 | 简化异步接口设计 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 特性迁移 ⟹ 渐进升级 | 评估影响面后逐步采用 | 降低版本切换风险 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -53634,16 +54101,24 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../03_advanced/01_async/02_async.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
-        "/crates/c10_networks/docs/tier_03_references/04_network_performance_benchmarks_reference.md"
+        "../../06_ecosystem/09_networking/06_networking_basics.md",
+        "/crates/c10_networks/docs/tier_03_references/04_network_performance_benchmarks_reference.md",
+        "05_rust_version_tracking.md",
+        "rust_1_91_stabilized.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "matrix_rows": 4,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Rust Version Tracking](05_rust_version_tracking.md) · [Async](../../03_advanced/01_async/02_async.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)"
+        ],
+        "post": [
+          "[Rust 1.91 Stabilized](rust_1_91_stabilized.md) · [Networking Basics](../../06_ecosystem/09_networking/06_networking_basics.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -53653,8 +54128,21 @@
       "layer": "L7",
       "title": "Rust 1.91 稳定特性",
       "positioning": "",
-      "line_count": 2388,
-      "theorem_chains": [],
+      "line_count": 2406,
+      "theorem_chains": [
+        {
+          "text": "| 版本上下文 ⟹ 演进脉络 | 对比前后版本特性 | 理解语言发展方向 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 所有权/生命周期改进 ⟹ 更精确借用 | 编译器推断能力增强 | 部分代码可更简洁 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 控制流增强 ⟹ 表达力提升 | 新语法简化常见模式 | 提高代码可读性 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -54195,10 +54683,10 @@
         "05_rust_version_tracking.md",
         "rust_1_92_stabilized.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 23,
+      "matrix_rows": 27,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Control Flow](../../01_foundation/04_control_flow/07_control_flow.md)"
@@ -54215,8 +54703,21 @@
       "layer": "L7",
       "title": "Rust 1.92 稳定特性",
       "positioning": "",
-      "line_count": 2336,
-      "theorem_chains": [],
+      "line_count": 2354,
+      "theorem_chains": [
+        {
+          "text": "| 版本上下文 ⟹ 演进脉络 | 对比前后版本特性 | 理解语言发展方向 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 类型系统增强 ⟹ 更灵活抽象 | 泛型与 trait 能力扩展 | 支持更简洁的 API 设计 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 标准库 API 改进 ⟹ 代码简化 | 新增或稳定的方法 | 减少自定义实现 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -54683,10 +55184,10 @@
         "05_rust_version_tracking.md",
         "rust_1_91_stabilized.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 1,
+      "matrix_rows": 5,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Control Flow](../../01_foundation/04_control_flow/07_control_flow.md)"
@@ -54703,8 +55204,21 @@
       "layer": "L7",
       "title": "Rust 1.93 稳定特性",
       "positioning": "",
-      "line_count": 165,
-      "theorem_chains": [],
+      "line_count": 183,
+      "theorem_chains": [
+        {
+          "text": "| 版本上下文 ⟹ 特性定位 | 了解 1.93 在 release train 中的位置 | 判断是否需要升级 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| MaybeUninit API 增强 ⟹ 更安全的底层初始化 | 新增 slice 与 array 辅助方法 | 减少 unsafe 样板 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 标准库 API 增量 ⟹ 代码简化 | VecDeque 条件弹出、Duration nanoseconds | 提升常见任务效率 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -54766,10 +55280,10 @@
         "rust_1_92_stabilized.md",
         "rust_1_94_stabilized.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 18,
+      "matrix_rows": 22,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)"
@@ -54786,8 +55300,25 @@
       "layer": "L7",
       "title": "c10_networks - Rust 1.94 更新概览",
       "positioning": "",
-      "line_count": 387,
-      "theorem_chains": [],
+      "line_count": 412,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Version Context ⟹ Feature Set ⟹ Migration Impact",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 版本上下文 ⟹ 特性定位 | 了解 1.94 在 release train 中的位置 | 判断是否需要升级 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 网络特性增强 ⟹ 更高效的 I/O | 新 API 与优化 | 提升网络服务性能 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 特性迁移 ⟹ 渐进升级 | 评估影响面后逐步采用 | 降低版本切换风险 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [],
       "code_blocks": [
         {
@@ -54848,17 +55379,25 @@
       "sources": [],
       "cross_references": [
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "../../06_ecosystem/04_web_and_networking/38_network_protocols.md",
+        "../../06_ecosystem/09_networking/06_networking_basics.md",
         "/crates/c10_networks/docs/00_master_index.md",
         "/crates/c11_macro_system_proc/docs/00_master_index.md",
-        "/crates/c12_wasm/docs/00_master_index.md"
+        "/crates/c12_wasm/docs/00_master_index.md",
+        "05_rust_version_tracking.md",
+        "rust_1_95_stabilized.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 21,
+      "matrix_rows": 25,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Rust Version Tracking](05_rust_version_tracking.md) · [Networking Basics](../../06_ecosystem/09_networking/06_networking_basics.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)"
+        ],
+        "post": [
+          "[Rust 1.95 Stabilized](rust_1_95_stabilized.md) · [Network Protocols](../../06_ecosystem/04_web_and_networking/38_network_protocols.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0

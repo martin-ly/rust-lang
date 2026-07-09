@@ -1,5 +1,13 @@
 > **EN**: Design Patterns Glossary
 > **Summary**: Canonical glossary for Rust design patterns: GoF classifications, Rust idioms, concurrency/async terms, and cross-links to authoritative concept pages.
+> **受众**: [进阶]
+> **内容分级**: [参考级]
+> **Bloom 层级**: 记忆 → 理解
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: S×Mem — 设计模式术语索引
+> **前置依赖**: [Design Patterns](02_patterns.md) · [Pattern Implementation Comparison](36_pattern_implementation_comparison.md)
+> **后置概念**: [Pattern Selection Best Practices](37_pattern_selection_best_practices.md) · [Formal Design Pattern Theory](38_formal_design_pattern_theory.md)
+> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency
 >
 > **权威来源**: 本页为 `Design Patterns Glossary` 的权威概念页；crate 文档仅保留导航 stub。
 
@@ -229,3 +237,20 @@ pub trait SimpleFuture {
 **文档版本**: 2.0
 **对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **状态**: ✅ 权威页（canonical）
+
+## 过渡段
+
+> **过渡**: 从术语收集过渡到分类维度，可以理解 glossary 不仅是列表，更是概念地图。
+>
+> **过渡**: 从分类维度过渡到交叉链接，可以建立“查到术语即可进入权威解释”的导航体验。
+>
+> **过渡**: 从导航体验过渡到学习路径，可以将术语表转化为模式学习的入口。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 统一术语 ⟹ 减少歧义 | 团队与文档使用一致定义 | 提升沟通效率 |
+| 术语链接 ⟹ 加速学习 | 每个术语指向权威概念页 | 读者可快速深入 |
+| 分类清晰 ⟹ 快速检索 | 按模式类型与适用场景组织 | 缩短查找时间 |

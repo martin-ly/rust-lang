@@ -1,5 +1,13 @@
 > **EN**: WebSocket Real-Time Communication
 > **Summary**: Authoritative concept page for `03 Websocket Realtime Communication`. Content migrated from `crates/c10_networks/docs/tier_02_guides/03_websocket_realtime_communication.md`.
+> **受众**: [进阶]
+> **内容分级**: [参考级]
+> **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: A×App — WebSocket 实时通信应用
+> **前置依赖**: [Network Protocols](38_network_protocols.md) · [Async](../../03_advanced/01_async/02_async.md)
+> **后置概念**: [High Performance Network Service Architecture](39_high_performance_network_service_architecture.md) · [Web Frameworks](27_web_frameworks.md)
+> **定理链**: Real-Time Requirement ⟹ Connection State ⟹ Message Delivery
 >
 > **权威来源**: 本页为 `WebSocket Real-Time Communication` 的权威概念页；crate 文档仅保留导航 stub。
 
@@ -45,6 +53,8 @@
     - [最佳实践](#最佳实践)
   - [📚 参考资源](#-参考资源)
   - [**下一步**: 学习 TCP/UDP 编程，掌握底层网络协议](#下一步-学习-tcpudp-编程掌握底层网络协议)
+  - [过渡段](#过渡段)
+  - [定理链](#定理链)
 
 ## 📐 知识结构
 
@@ -693,3 +703,20 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 > **向下引用**: 参见 [08_rust_vs_javascript](../../05_comparative/02_managed_languages/08_rust_vs_javascript.md)
+
+## 过渡段
+
+> **过渡**: 从 HTTP 轮询过渡到持久 WebSocket 连接，可以理解实时通信对延迟的改进。
+>
+> **过渡**: 从连接管理过渡到消息排序与背压，可以建立可靠广播的设计约束。
+>
+> **过渡**: 从单机实现过渡到水平扩展，可以评估状态共享与负载均衡策略。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 持久连接 ⟹ 更低延迟 | 避免重复建立 HTTP 连接 | 适合实时推送场景 |
+| 帧协议 ⟹ 高效解析 | 二进制帧头与掩码机制 | 降低解析开销 |
+| 背压 ⟹ 稳定广播 | 控制发送速率 | 防止慢消费者拖垮系统 |

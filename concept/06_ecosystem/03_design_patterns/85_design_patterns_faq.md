@@ -1,5 +1,13 @@
 > **EN**: Design Patterns FAQ
 > **Summary**: Authoritative concept page for `C09 设计模式 - 常见问题`. Content migrated from `crates/c09_design_pattern/docs/tier_01_foundations/04_faq.md`.
+> **受众**: [进阶]
+> **内容分级**: [参考级]
+> **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **A+P** — Application + Procedure
+> **双维定位**: A×Eva — 设计模式 FAQ 评估
+> **前置依赖**: [Design Patterns](02_patterns.md) · [Design Patterns Glossary](84_design_patterns_glossary.md)
+> **后置概念**: [Pattern Selection Best Practices](37_pattern_selection_best_practices.md) · [Engineering and Production Patterns](82_engineering_and_production_patterns.md)
+> **定理链**: Common Question ⟹ Pattern Mechanism ⟹ Best Practice
 >
 > **权威来源**: 本页为 `Design Patterns FAQ` 的权威概念页；crate 文档仅保留导航 stub。
 
@@ -38,6 +46,8 @@
   - [🔗 相关资源](#-相关资源)
     - [内部文档](#内部文档)
   - [**文档状态**: ✅ 活跃维护](#文档状态--活跃维护)
+  - [过渡段](#过渡段)
+  - [定理链](#定理链)
 
 ---
 
@@ -65,6 +75,8 @@
   - [🔗 相关资源](#-相关资源)
     - [内部文档](#内部文档)
   - [**文档状态**: ✅ 活跃维护](#文档状态--活跃维护)
+  - [过渡段](#过渡段)
+  - [定理链](#定理链)
 
 ---
 
@@ -454,3 +466,20 @@ trait Observer {
 ---
 
 > **向下引用**: 参见 [03_paradigm_matrix](../../05_comparative/00_paradigms/03_paradigm_matrix.md)
+
+## 过渡段
+
+> **过渡**: 从常见问题过渡到机制解释，可以理解“为什么”比“怎么做”更能避免重复踩坑。
+>
+> **过渡**: 从机制解释过渡到权衡分析，可以建立基于场景而非偏好的选型依据。
+>
+> **过渡**: 从权衡分析过渡到最佳实践，可以将 FAQ 答案转化为团队工程规范。
+>
+
+## 定理链
+
+| 定理 | 前提 | 结论 |
+|:---|:---|:---|
+| 问题覆盖 ⟹ 减少重复询问 | 集中回答高频困惑 | 降低支持成本 |
+| 示例验证 ⟹ 答案可信 | 可运行的最小代码 | 确保 FAQ 解决方案正确 |
+| 决策规则 ⟹ 一致性 | 将 FAQ 提炼为选型原则 | 提升工程一致性 |
