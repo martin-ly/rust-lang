@@ -76,6 +76,56 @@
 - 禁止中文文件名、空格、混合大小写（过渡期例外：`archive/` 历史文件、`.kimi/` 日期风格文件、`reports/` 日期风格文件、`.github/ISSUE_TEMPLATE/`）。
 - 每个 `concept/` 文件应包含 `**EN**` 英文标题和 `**Summary**` 英文摘要。
 
+### 4.1 `Cargo.toml` 规范
+
+所有 workspace member 必须继承 workspace 元数据，禁止硬编码重复值：
+
+```toml
+[package]
+name = "crate_name"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+```
+
+- `rust-version` 保持 `1.96.1`（本地 MSRV），文档版本号可单独维护为 `1.97.0+`。
+- feature 名使用 `kebab-case`；避免使用 Rust 关键字（如 `async`）作为 feature 名。
+- 已在 workspace dependencies 中声明的依赖，优先使用 `{ workspace = true }`。
+
+### 4.2 `concept/` 文件元数据模板
+
+```markdown
+# 中文标题
+
+**EN**: English Title
+**Summary**: One-sentence English abstract.
+
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Bloom 层级**: Lx
+> **权威来源**: 本文件为 `concept/` 权威页。
+
+正文...
+```
+
+### 4.3 `knowledge/` 重定向 stub 模板
+
+```markdown
+# 中文标题
+
+**EN**: English Title
+**Summary**: One-sentence English abstract.
+
+> **权威来源**: 本文件为学习入口 stub，完整概念解释请见：
+> [`concept/xxx/xxx.md`](../../concept/xxx/xxx.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则，通用 Rust 概念解释统一维护在 `concept/` 中；
+> `knowledge/` 仅保留摘要、速查与链接。
+```
+
 ---
 
 ## 5. 常用命令
@@ -122,4 +172,4 @@ mdbook build
 
 ---
 
-**最后更新**：2026-07-01
+**最后更新**：2026-07-10

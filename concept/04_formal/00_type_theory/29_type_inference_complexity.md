@@ -29,9 +29,7 @@
 ---
 
 > **过渡**: 从 Type Inference Complexity（类型推断 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
-
 > **过渡**: 在建立 Type Inference Complexity（类型推断 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
-
 > **过渡**: 最后，将 Type Inference Complexity（类型推断 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
 
 ---
@@ -47,9 +45,7 @@
 ## 反命题决策树
 
 > **反命题 1**: "Type Inference Complexity（类型推断 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
-
 > **反命题 2**: "忽略 Type Inference Complexity（类型推断 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Type Inference Complexity（类型推断 规则被违反的直接信号。
-
 > **反命题 3**: "其他语言对 Type Inference Complexity（类型推断 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Type Inference Complexity（类型推断 具有语言特有的形态。
 (Source: [Rustc Dev Guide — Type Inference](https://rustc-dev-guide.rust-lang.org/type-inference.html))
 
