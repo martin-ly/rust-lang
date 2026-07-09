@@ -1,4 +1,4 @@
-> **Canonical 说明**: 本文件专注 **Askama 编译期 Jinja-like 模板引擎的派生宏架构**。
+> **Canonical 说明**: 本文件专注 **Askama 编译期 Jinja-like 模板引擎的派生宏（Macro）架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
@@ -37,7 +37,7 @@
 
 > **[来源: [askama crates.io](https://crates.io/crates/askama)]**
 
-`Askama` 是 Rust 生态中**类型安全、编译期渲染**的模板引擎，采用 Jinja-like 语法。它的核心设计是将模板文件或内联模板在编译期转换为 Rust 代码，从而把运行时语法错误和字段名错误转变为编译错误。
+`Askama` 是 Rust 生态中**类型安全、编译期渲染**的模板引擎，采用 Jinja-like 语法。它的核心设计是将模板文件或内联模板在编译期转换为 Rust 代码，从而把运行时（Runtime）语法错误和字段名错误转变为编译错误。
 
 > [来源: [askama docs.rs](https://docs.rs/askama/latest/askama/)]
 
@@ -89,7 +89,7 @@ struct HelloTemplate<'a> {
 
 > [来源: [askama::Template trait](https://docs.rs/askama/latest/askama/trait.Template.html)]
 
-宏展开后，结构体字段成为模板上下文。模板中引用的变量必须在 struct 中定义，否则编译报错。
+宏展开后，结构体字段成为模板上下文。模板中引用（Reference）的变量必须在 struct 中定义，否则编译报错。
 
 ### 2.2 模板语法与控制结构 {#22-模板语法与控制结构}
 
@@ -164,7 +164,7 @@ async fn page() -> impl IntoResponse {
 
 **关键差异**：
 
-- **Askama vs Maud**：Askama 使用 Jinja 模板文件，适合设计师与开发者协作；Maud 使用 Rust 宏内联 HTML，适合纯 Rust 团队，模板与逻辑共用类型系统。
+- **Askama vs Maud**：Askama 使用 Jinja 模板文件，适合设计师与开发者协作；Maud 使用 Rust 宏内联 HTML，适合纯 Rust 团队，模板与逻辑共用类型系统（Type System）。
 - **Askama vs Tera**：Tera 是运行时解析的动态模板引擎，上下文是 `HashMap<String, Value>`，更灵活但失去编译期检查；Askama 牺牲部分灵活性换取类型安全与性能。
 - **Askama vs 原生返回**：在 Axum/Actix-web 中直接返回 `String`/`Json` 最简单，但无法利用模板继承和 HTML 专用语法；Askama 在保持类型安全的同时提供完整模板能力。
 

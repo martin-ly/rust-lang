@@ -30,7 +30,7 @@
   - [1. 概念定义 (Def) {#1-概念定义-def}](#1-概念定义-def-1-概念定义-def)
     - [Def CQ1: CQRS (Command Query Responsibility Segregation) {#def-cq1-cqrs-command-query-responsibility-segregation}](#def-cq1-cqrs-command-query-responsibility-segregation-def-cq1-cqrs-command-query-responsibility-segregation)
     - [Def CQ2: 命令与查询的分离 {#def-cq2-命令与查询的分离}](#def-cq2-命令与查询的分离-def-cq2-命令与查询的分离)
-    - [Def CQ3: 最终一致性边界 {#def-cq3-最终一致性边界}](#def-cq3-最终一致性边界-def-cq3-最终一致性边界)
+    - [Def CQ3: 最终一致性（Coherence）边界 {#def-cq3-最终一致性边界}](#def-cq3-最终一致性边界-def-cq3-最终一致性边界)
   - [2. 基本假设 (Axiom) {#2-基本假设-axiom}](#2-基本假设-axiom-2-基本假设-axiom)
     - [Axiom CQ1: 命令不可重复 {#axiom-cq1-命令不可重复}](#axiom-cq1-命令不可重复-axiom-cq1-命令不可重复)
     - [Axiom CQ2: 投影单调性 {#axiom-cq2-投影单调性}](#axiom-cq2-投影单调性-axiom-cq2-投影单调性)

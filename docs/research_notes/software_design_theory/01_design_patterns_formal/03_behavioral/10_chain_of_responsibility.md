@@ -35,15 +35,15 @@
   - [Rust 实现与代码示例 {#rust-实现与代码示例}](#rust-实现与代码示例-rust-实现与代码示例)
   - [Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}](#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点 {#edition-2024-关键兼容点}](#edition-2024-关键兼容点-edition-2024-关键兼容点)
-  - [Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
+  - [Rust 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束 {#所有权约束}](#所有权约束-所有权约束)
     - [借用与生命周期约束 {#借用与生命周期约束}](#借用与生命周期约束-借用与生命周期约束)
     - [trait 系统约束 {#trait-系统约束}](#trait-系统约束-trait-系统约束)
-    - [与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
+    - [与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
   - [完整证明 {#完整证明}](#完整证明-完整证明)
     - [形式化论证链 {#形式化论证链}](#形式化论证链-形式化论证链)
     - [与 Rust 类型系统的联系 {#与-rust-类型系统的联系}](#与-rust-类型系统的联系-与-rust-类型系统的联系)
-    - [内存安全保证 {#内存安全保证}](#内存安全保证-内存安全保证)
+    - [内存安全（Memory Safety）保证 {#内存安全保证}](#内存安全保证-内存安全保证)
   - [形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}](#形式化属性不变式前置后置条件与安全边界-形式化属性不变式前置后置条件与安全边界)
     - [不变式（Invariants） {#不变式invariants}](#不变式invariants-不变式invariants)
     - [前置条件（Preconditions） {#前置条件preconditions}](#前置条件preconditions-前置条件preconditions)
@@ -167,7 +167,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
    - 头节点释放时，递归释放整个链
 3. **无悬垂**：
    - 无裸指针
-   - 借用检查保证引用有效
+   - 借用检查保证引用（Reference）有效
 
 由 ownership_model T1，得证。$\square$
 
@@ -603,9 +603,9 @@ let chain = LogHandler {
 
 | 变体 | 说明 | 适用 |
 | :--- | :--- | :--- |
-| 结构体链 | `Option<Box<Handler>>`，如上示例 | 链固定、类型同质 |
+| 结构体（Struct）链 | `Option<Box<Handler>>`，如上示例 | 链固定、类型同质 |
 | trait 链 | `trait Handler { fn handle(&self, req: &R) -> Option<()>; fn next(&self) -> Option<&dyn Handler>; }` | 需多态处理器 |
-| 迭代器链 | `handlers.iter().find_map(\|h\| h.handle(req))` | 链为 `Vec`，顺序尝试 |
+| 迭代器（Iterator）链 | `handlers.iter().find_map(\|h\| h.handle(req))` | 链为 `Vec`，顺序尝试 |
 
 ---
 

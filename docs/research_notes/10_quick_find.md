@@ -26,12 +26,12 @@
   - [🎯 使用说明 {#使用说明}](#-使用说明-使用说明)
   - [🔍 按关键词查找 {#按关键词查找}](#-按关键词查找-按关键词查找)
     - [形式语言与形式证明 {#形式语言与形式证明}](#形式语言与形式证明-形式语言与形式证明)
-    - [所有权和借用 {#所有权和借用}](#所有权和借用-所有权和借用)
-    - [类型系统 {#类型系统-1}](#类型系统-类型系统-1)
-    - [生命周期 {#生命周期-1}](#生命周期-生命周期-1)
-    - [异步和并发 {#异步和并发}](#异步和并发-异步和并发)
+    - [所有权（Ownership）和借用（Borrowing） {#所有权和借用}](#所有权和借用-所有权和借用)
+    - [类型系统（Type System） {#类型系统-1}](#类型系统-类型系统-1)
+    - [生命周期（Lifetimes） {#生命周期-1}](#生命周期-生命周期-1)
+    - [异步（Async）和并发 {#异步和并发}](#异步和并发-异步和并发)
     - [性能优化 {#性能优化}](#性能优化-性能优化)
-    - [宏系统 {#宏系统}](#宏系统-宏系统)
+    - [宏（Macro）系统 {#宏系统}](#宏系统-宏系统)
   - [📚 按研究领域查找 {#按研究领域查找}](#-按研究领域查找-按研究领域查找)
     - [形式化方法 {#形式化方法}](#形式化方法-形式化方法)
     - [类型理论 {#类型理论}](#类型理论-类型理论)
@@ -56,14 +56,14 @@
   - [🌍 权威国际化资源链接 {#权威国际化资源链接}](#-权威国际化资源链接-权威国际化资源链接)
     - [Rust Reference 核心章节 {#rust-reference-核心章节}](#rust-reference-核心章节-rust-reference-核心章节)
     - [The Rust Programming Language 核心章节 {#the-rust-programming-language-核心章节}](#the-rust-programming-language-核心章节-the-rust-programming-language-核心章节)
-    - [Rust Standard Library 核心 API / 模块 {#rust-standard-library-核心-api-模块}](#rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块)
+    - [Rust Standard Library 核心 API / 模块（Module） {#rust-standard-library-核心-api-模块}](#rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块)
     - [Rust By Example / Rust Cookbook / cheats.rs {#rust-by-example-rust-cookbook-cheatsrs}](#rust-by-example--rust-cookbook--cheatsrs-rust-by-example-rust-cookbook-cheatsrs)
     - [快速查找专属语言 / API 链接 {#快速查找专属语言-api-链接}](#快速查找专属语言--api-链接-快速查找专属语言-api-链接)
       - [所有权与借用 {#所有权与借用}](#所有权与借用-所有权与借用)
       - [类型系统 {#类型系统-1}](#类型系统-类型系统-1-1)
       - [异步与并发 {#异步与并发}](#异步与并发-异步与并发)
       - [生命周期 {#生命周期-1}](#生命周期-生命周期-1-1)
-      - [宏与错误处理 {#宏与错误处理}](#宏与错误处理-宏与错误处理)
+      - [宏与错误处理（Error Handling） {#宏与错误处理}](#宏与错误处理-宏与错误处理)
   - [相关概念 {#相关概念}](#相关概念-相关概念)
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
@@ -135,7 +135,7 @@
 | Trait      | [Trait 系统形式化](type_theory/10_trait_system_formalization.md) | ✅ 100% |
 | 泛型（Generics）       | [高级类型特性](type_theory/10_advanced_types.md)                 | ✅ 100% |
 | GATs       | [高级类型特性](type_theory/10_advanced_types.md)                 | ✅ 100% |
-| const 泛型 | [高级类型特性](type_theory/10_advanced_types.md)                 | ✅ 100% |
+| const 泛型（Generics） | [高级类型特性](type_theory/10_advanced_types.md)                 | ✅ 100% |
 | 型变       | [型变理论](type_theory/10_variance_theory.md)                    | ✅ 100% |
 | 协变       | [型变理论](type_theory/10_variance_theory.md)                    | ✅ 100% |
 | 逆变       | [型变理论](type_theory/10_variance_theory.md)                    | ✅ 100% |
@@ -150,7 +150,7 @@
 | :--- | :--- | :--- |
 | 生命周期     | 生命周期形式化 | ✅ 100% |
 | 生命周期推断 | [生命周期形式化](type_theory/10_lifetime_formalization.md)    | ✅ 100% |
-| 引用有效性   | 生命周期形式化 | ✅ 100% |
+| 引用（Reference）有效性   | 生命周期形式化 | ✅ 100% |
 | 区域类型     | [生命周期形式化](type_theory/10_lifetime_formalization.md)    | ✅ 100% |
 
 ### 异步和并发 {#异步和并发}
@@ -215,9 +215,9 @@
 | 研究笔记                                                           | 研究目标                                    | 状态      | 完成度 |
 | :--- | :--- | :--- | :--- |
 | [形式语言与形式证明](10_formal_language_and_proofs.md)             | 推理规则、操作语义、判定形式、形式证明推导树 | ✅ 已完成 | 100%   |
-| [所有权模型形式化](formal_methods/10_ownership_model.md)            | 形式化定义所有权系统，证明内存安全          | ✅ 已完成 | 100%   |
+| [所有权模型形式化](formal_methods/10_ownership_model.md)            | 形式化定义所有权系统，证明内存安全（Memory Safety）          | ✅ 已完成 | 100%   |
 | [借用检查器证明](formal_methods/10_borrow_checker_proof.md)         | 形式化定义借用检查器，证明数据竞争自由      | ✅ 已完成 | 100%   |
-| [异步状态机形式化](formal_methods/10_async_state_machine.md)        | 形式化定义 Future/Poll 状态机，证明并发安全 | ✅ 已完成 | 100%   |
+| [异步状态机形式化](formal_methods/10_async_state_machine.md)        | 形式化定义 Future/Poll 状态机，证明并发安全（Concurrency Safety） | ✅ 已完成 | 100%   |
 | 生命周期形式化       | 形式化定义生命周期系统，证明引用有效性      | ✅ 已完成 | 100%   |
 | [Pin 和自引用类型形式化](formal_methods/10_pin_self_referential.md) | 形式化定义 Pin 类型和自引用类型，证明安全性 | ✅ 已完成 | 100%   |
 

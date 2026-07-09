@@ -23,12 +23,12 @@
 
 - [概念对比表汇编 {#概念对比表汇编}](#概念对比表汇编-概念对比表汇编)
   - [📑 目录 {#目录}](#-目录-目录)
-  - [一、所有权相关对比 {#一所有权相关对比}](#一所有权相关对比-一所有权相关对比)
+  - [一、所有权（Ownership）相关对比 {#一所有权相关对比}](#一所有权相关对比-一所有权相关对比)
     - [Move vs Copy {#move-vs-copy}](#move-vs-copy-move-vs-copy)
     - [\&T vs \&mut T {#t-vs-mut-t}](#t-vs-mut-t-t-vs-mut-t)
     - [Box vs Rc vs Arc {#box-vs-rc-vs-arc}](#box-vs-rc-vs-arc-box-vs-rc-vs-arc)
     - [Cell vs RefCell vs Mutex vs RwLock {#cell-vs-refcell-vs-mutex-vs-rwlock}](#cell-vs-refcell-vs-mutex-vs-rwlock-cell-vs-refcell-vs-mutex-vs-rwlock)
-  - [二、类型系统对比 {#二类型系统对比}](#二类型系统对比-二类型系统对比)
+  - [二、类型系统（Type System）对比 {#二类型系统对比}](#二类型系统对比-二类型系统对比)
     - [impl Trait vs dyn Trait {#impl-trait-vs-dyn-trait}](#impl-trait-vs-dyn-trait-impl-trait-vs-dyn-trait)
     - [Sized vs ?Sized {#sized-vs-sized}](#sized-vs-sized-sized-vs-sized)
     - [型变对比 {#型变对比}](#型变对比-型变对比)
@@ -36,7 +36,7 @@
     - [Send vs Sync {#send-vs-sync}](#send-vs-sync-send-vs-sync)
     - [thread::spawn vs tokio::spawn {#threadspawn-vs-tokiospawn}](#threadspawn-vs-tokiospawn-threadspawn-vs-tokiospawn)
     - [Mutex vs RwLock {#mutex-vs-rwlock}](#mutex-vs-rwlock-mutex-vs-rwlock)
-  - [四、异步对比 {#四异步对比}](#四异步对比-四异步对比)
+  - [四、异步（Async）对比 {#四异步对比}](#四异步对比-四异步对比)
     - [async fn vs 普通fn {#async-fn-vs-普通fn}](#async-fn-vs-普通fn-async-fn-vs-普通fn)
     - [Future vs Task {#future-vs-task}](#future-vs-task-future-vs-task)
     - [Pin\<\&mut T\> vs \&mut T {#pinmut-t-vs-mut-t}](#pinmut-t-vs-mut-t-pinmut-t-vs-mut-t)
@@ -50,7 +50,7 @@
   - [七、证明层级对比 {#七证明层级对比}](#七证明层级对比-七证明层级对比)
     - [L1 vs L2 vs L3 {#l1-vs-l2-vs-l3}](#l1-vs-l2-vs-l3-l1-vs-l2-vs-l3)
   - [八、快速决策表 {#八快速决策表}](#八快速决策表-八快速决策表)
-    - [选择何种智能指针？ {#选择何种智能指针}](#选择何种智能指针-选择何种智能指针)
+    - [选择何种智能指针（Smart Pointer）？ {#选择何种智能指针}](#选择何种智能指针-选择何种智能指针)
     - [选择何种锁？ {#选择何种锁}](#选择何种锁-选择何种锁)
     - [选择何种并发模型？ {#选择何种并发模型}](#选择何种并发模型-选择何种并发模型)
     - [选择何种事务模式？ {#选择何种事务模式}](#选择何种事务模式-选择何种事务模式)
@@ -95,7 +95,7 @@
 | **读** | ✅ | ✅ |
 | **写** | ❌ | ✅ |
 | **数量** | 多个 | 只能一个 |
-| **与其他借用共存** | 可以 | 不能 |
+| **与其他借用（Borrowing）共存** | 可以 | 不能 |
 | **排他性** | 共享 | 独占 |
 | **类比** | 多人阅读 | 一个人修改 |
 
@@ -109,7 +109,7 @@
 | :--- | :--- | :--- | :--- |
 | **所有权** | 唯一 | 共享 | 共享 |
 | **线程安全** | ✅ | ❌ | ✅ |
-| **引用计数** | 无 | 非原子 | 原子 |
+| **引用（Reference）计数** | 无 | 非原子 | 原子 |
 | **开销** | 最低 | 低 | 中等 |
 | **克隆行为** | 转移所有权 | 引用+1 | 引用+1 |
 | **使用场景** | 堆分配唯一值 | 单线程共享 | 多线程共享 |
@@ -146,12 +146,12 @@
 | 特性 | impl Trait | dyn Trait |
 | :--- | :--- | :--- |
 | **分发方式** | 静态 | 动态 |
-| **运行时开销** | 无 | 虚表查找 |
+| **运行时（Runtime）开销** | 无 | 虚表查找 |
 | **代码生成** | 单态化（Monomorphization） | 统一接口 |
 | **编译时大小** | 大（代码膨胀） | 小 |
 | **运行时大小** | 小 | 大（胖指针） |
 | **使用场景** | 性能敏感 | 需要运行时多态 |
-| **返回类型** | ✅ 支持 | ⚠️ 需要Box |
+| **返回类型** | ✅ 支持 | ⚠️ 需要Box（Box） |
 
 ### Sized vs ?Sized {#sized-vs-sized}
 
@@ -164,7 +164,7 @@
 | **编译时大小** | 已知 | 未知 |
 | **使用位置** | 栈/寄存器 | 必须间接（&/Box） |
 | **示例** | i32, String | str, [i32], dyn Trait |
-| **泛型默认** | ✅ | 需显式标注 |
+| **泛型（Generics）默认** | ✅ | 需显式标注 |
 | **使用场景** | 通用 | 特化场景 |
 
 ### 型变对比 {#型变对比}
@@ -246,7 +246,7 @@
 
 | 特性 | fn | async fn |
 | :--- | :--- | :--- |
-| **返回值** | 立即返回 | 返回Future |
+| **返回值** | 立即返回 | 返回Future（Future） |
 | **执行** | 立即执行 | 惰性求值 |
 | **状态** | 无 | 状态机 |
 | **挂起** | 不能 | .await处可以 |
@@ -293,7 +293,7 @@
 
 | 特性 | Saga | 2PC |
 | :--- | :--- | :--- |
-| **一致性** | 最终一致 | 强一致 |
+| **一致性（Coherence）** | 最终一致 | 强一致 |
 | **复杂度** | 中 | 高 |
 | **性能** | 高 | 低（阻塞） |
 | **故障恢复** | 补偿操作 | 协调者恢复 |

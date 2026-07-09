@@ -32,7 +32,7 @@ Crossbeam 是 Rust 生态中**无锁并发原语**的事实标准库，年下载
 
 与 `std::sync` 中的阻塞同步原语（`Mutex`、`RwLock`）不同，Crossbeam 专注于**非阻塞算法 (lock-free / wait-free)** 和**基于 epoch 的内存回收**，为 Rust 程序员提供了在标准库之上构建高性能并发系统的底层工具箱。
 
-Crossbeam 的五大核心模块：
+Crossbeam 的五大核心模块（Module）：
 
 | 模块（Module） | 抽象 | 算法类别 | 核心价值 |
 |:---|:---|:---|:---|
@@ -87,7 +87,7 @@ q.push(1).unwrap();
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-Crossbeam 的架构以 **Epoch-Based Reclamation (EBR)** 为中心，上层数据结构通过 epoch 机制安全地管理共享内存生命周期：
+Crossbeam 的架构以 **Epoch-Based Reclamation (EBR)** 为中心，上层数据结构通过 epoch 机制安全地管理共享内存生命周期（Lifetimes）：
 
 ```mermaid
 graph TB
@@ -203,7 +203,7 @@ stateDiagram-v2
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-Crossbeam 的 `pin()` 函数返回一个特殊的 guard，将 epoch 的生命周期与 Rust 的借用系统绑定：
+Crossbeam 的 `pin()` 函数返回一个特殊的 guard，将 epoch 的生命周期与 Rust 的借用（Borrowing）系统绑定：
 
 ```rust,ignore
 pub fn pin() -> Guard {
@@ -242,7 +242,7 @@ impl Guard {
 **类型安全保证**：
 
 - `Guard` 的 RAII 语义确保 `unpin()` 总是被调用，即使发生 panic
-- `defer` 要求闭包为 `Send + 'static`，防止在线程局部存储中捕获非 `Send` 数据
+- `defer` 要求闭包（Closures）为 `Send + 'static`，防止在线程局部存储中捕获非 `Send` 数据
 - `Guard` 不实现 `Clone`，防止同一个线程多次 `pin` 造成 epoch 计数错误
 
 > [Crossbeam Epoch — Guard](https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/struct.Guard.html)(<https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/struct.Guard.html>)
@@ -290,7 +290,7 @@ struct Slot<T> {
 
 - `head` 和 `tail` 使用 `Acquire`/`Release` 配对，保证 buffer 访问的 happens-before 关系
 - `Slot::stamp` 使用 `SeqCst` 仅在必要的边界处，避免过度同步
-- 通过类型系统禁止 `T: !Send` 的数据进入队列（`ArrayQueue<T>: Send` 仅当 `T: Send`）
+- 通过类型系统（Type System）禁止 `T: !Send` 的数据进入队列（`ArrayQueue<T>: Send` 仅当 `T: Send`）
 
 > [Crossbeam Queue Docs](https://docs.rs/crossbeam-queue/latest/crossbeam_queue/)(<https://docs.rs/crossbeam-queue/latest/crossbeam_queue/>)
 > [Rustnomicon — Memory Ordering](https://doc.rust-lang.org/nomicon/atomics.html)(<https://doc.rust-lang.org/nomicon/atomics.html>)
@@ -322,7 +322,7 @@ crossbeam::scope(|s| {
 
 - `Scope::spawn` 的签名要求闭包参数 `'scope` 生命周期覆盖整个 scope 块
 - `JoinHandle` 的 `join()` 方法在 scope 结束时隐式调用，编译器通过 `Drop` 顺序保证
-- 不会发生 use-after-free，因为 Rust 的借用检查器在编译期验证了所有引用的有效性
+- 不会发生 use-after-free，因为 Rust 的借用检查器在编译期验证了所有引用（Reference）的有效性
 
 > [来源: Crossbeam Utils — Scope](https://docs.rs/crossbeam-utils/latest/crossbeam_utils/thread/struct.Scope.html)
 > [来源: Rust RFC 3151 — Scoped Threads](https://rust-lang.github.io/rfcs/3151-scoped-threads.html)
@@ -482,7 +482,7 @@ graph BT
     PI --> Q
 ```
 
-> **关键事实**: Tokio 的 `runtime::task` 模块和 Rayon 的 `ThreadPool` 都直接依赖 `crossbeam-deque` 实现工作窃取。没有 Crossbeam，Rust 的异步和数据并行生态将失去最重要的调度基础设施。
+> **关键事实**: Tokio 的 `runtime::task` 模块和 Rayon 的 `ThreadPool` 都直接依赖 `crossbeam-deque` 实现工作窃取。没有 Crossbeam，Rust 的异步（Async）和数据并行生态将失去最重要的调度基础设施。
 > [Tokio Cargo.toml](https://github.com/tokio-rs/tokio/blob/master/tokio/Cargo.toml)(<https://github.com/tokio-rs/tokio/blob/master/tokio/Cargo.toml>)
 > [Rayon Cargo.toml](https://github.com/rayon-rs/rayon/blob/master/Cargo.toml)(<https://github.com/rayon-rs/rayon/blob/master/Cargo.toml>)
 
@@ -493,10 +493,10 @@ graph BT
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [Tokio 异步运行时架构](06_tokio_architecture.md)
+- [Tokio 异步运行时（Runtime）架构](06_tokio_architecture.md)
 - [Rayon 数据并行架构](13_rayon_architecture.md)
 - [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
-- [原子操作与内存排序](../../../../concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md)
+- [原子操作（Atomic Operations）与内存排序](../../../../concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md)
 - [无锁数据结构](../../../../concept/03_advanced/00_concurrency/16_lock_free.md)
 - [形式化操作语义](../../../../concept/04_formal/03_operational_semantics/17_operational_semantics.md)
 

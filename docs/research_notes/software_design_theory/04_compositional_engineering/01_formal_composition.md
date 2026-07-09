@@ -30,10 +30,10 @@
   - [中间件栈组合 {#中间件栈组合}](#中间件栈组合-中间件栈组合)
   - [设计模式组合示例 {#设计模式组合示例}](#设计模式组合示例-设计模式组合示例)
   - [类型驱动组合（Type-Driven Composition） {#类型驱动组合type-driven-composition}](#类型驱动组合type-driven-composition-类型驱动组合type-driven-composition)
-  - [零成本抽象示例 {#零成本抽象示例}](#零成本抽象示例-零成本抽象示例)
+  - [零成本抽象（Zero-Cost Abstraction）示例 {#零成本抽象示例}](#零成本抽象示例-零成本抽象示例)
   - [Crate 组合 {#crate-组合}](#crate-组合-crate-组合)
   - [组合反例 {#组合反例}](#组合反例-组合反例)
-  - [引用 {#引用}](#引用-引用)
+  - [引用（Reference） {#引用}](#引用-引用)
   - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
       - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
@@ -56,7 +56,7 @@
 
 **Def 1.1（模块（Module））**:
 
-模块 $M$ 为一个命名空间，包含：
+模块（Module） $M$ 为一个命名空间，包含：
 
 - 类型定义：$\mathit{types}(M) = \{T_1, \ldots, T_k\}$
 - 函数/方法：$\mathit{fns}(M) = \{f_1, \ldots, f_m\}$
@@ -81,12 +81,12 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 - $A$ 满足 $T_1, \ldots, T_k$ 的约束
 - 实现 $T$ 的所有 required 方法
 
-**Def 1.5（泛型组合）**:
+**Def 1.5（泛型（Generics）组合）**:
 
 设 $F\langle T \rangle$ 为泛型结构。组合满足：
 
 - $T$ 满足 $F$ 的 trait 约束
-- 单态化后类型正确；无冲突的 impl
+- 单态化（Monomorphization）后类型正确；无冲突的 impl
 
 ---
 
@@ -99,7 +99,7 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 
 **Axiom CE2**：组合保持类型安全；若各组件良型，则组合良型。
 
-**Axiom CE3**：组合保持所有权与借用规则；跨模块调用不违反规则。
+**Axiom CE3**：组合保持所有权（Ownership）与借用（Borrowing）规则；跨模块调用不违反规则。
 
 ---
 
@@ -122,11 +122,11 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 
 **引理 CE-L1（模块无环）**：若 $C = M_1 \oplus \cdots \oplus M_n$ 满足 Def 1.3 无环，则依赖图 $G$ 为 DAG；$M_i \prec^* M_j \land M_j \prec^* M_i \Rightarrow \bot$。
 
-*证明*：由 Def 1.3 无环；$\prec^*$ 为传递闭包，环存在则 $M_i \prec^* M_i$，矛盾。∎
+*证明*：由 Def 1.3 无环；$\prec^*$ 为传递闭包（Closures），环存在则 $M_i \prec^* M_i$，矛盾。∎
 
 **推论 CE-C1**：组合 CE-T1、CE-T2、CE-T3 可组合；若 $C$ 满足 CE-T1、CE-T2、CE-T3，则 $C$ 为 Safe 且良型。
 
-*证明*：由各定理陈述；内存安全 + 数据竞争自由 + 类型安全 ⇒ Safe。∎
+*证明*：由各定理陈述；内存安全（Memory Safety） + 数据竞争自由 + 类型安全 ⇒ Safe。∎
 
 **推论 CE-C2（组合反例）**：若 $M_n$ 的 `pub` API 泄漏 `unsafe` 或违反借用规则，则 CE-T1 或 CE-T2 不成立；组合后可能 UB。
 
@@ -280,7 +280,7 @@ impl<S: Service> Service for Logging<S> {
 
 **Def 1.6（类型状态）**：
 
-使用类型系统编码运行时不变式，使非法状态不可表示（make illegal states unrepresentable）。
+使用类型系统（Type System）编码运行时（Runtime）不变式，使非法状态不可表示（make illegal states unrepresentable）。
 
 ```rust
 // Builder 的类型状态：未配置 vs 已配置

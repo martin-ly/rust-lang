@@ -34,7 +34,7 @@ Tracing 的四大设计支柱：
 
 | 支柱 | 抽象 | 核心价值 |
 |:---|:---|:---|
-| **Span** | 具有生命周期的结构化上下文 | 替代传统日志的"当前执行上下文"概念 |
+| **Span** | 具有生命周期（Lifetimes）的结构化上下文 | 替代传统日志的"当前执行上下文"概念 |
 | **Event** | 瞬时点状诊断信息 | 零成本条件编译（`tracing::info!` 在 release 中可被完全消除） |
 | **Subscriber** | 可插拔的消费后端 | `fmt`、`jaeger`、`opentelemetry` 等后端通过 trait 解耦 |
 | **Layer** | 中间件式组合 | 复用 Tower 的 `Layer` 模式实现遥测管道的可组合性 |
@@ -132,7 +132,7 @@ graph TB
     SUB --> L1 & L2 & L3 & L4
 ```
 
-> **认知功能**: 此图展示 Tracing 的核心分层——应用代码通过宏生成事件，分发器根据 `Level` 和 `Filter` 进行快速路由决策，最终由 `Subscriber` + `Layer` 组合消费。与 `log` crate 的"全局 Logger"不同，Tracing 支持**线程局部和作用域级的 Subscriber 切换**。
+> **认知功能**: 此图展示 Tracing 的核心分层——应用代码通过宏（Macro）生成事件，分发器根据 `Level` 和 `Filter` 进行快速路由决策，最终由 `Subscriber` + `Layer` 组合消费。与 `log` crate 的"全局 Logger"不同，Tracing 支持**线程局部和作用域级的 Subscriber 切换**。
 > [Tracing Docs — Subscriber](https://docs.rs/tracing/latest/tracing/subscriber/index.html)(<https://docs.rs/tracing-subscriber/latest/tracing_subscriber/>)
 
 ### 2.2 Span 生命周期状态机 {#22-span-生命周期状态机}
@@ -196,7 +196,7 @@ stateDiagram-v2
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-Tracing 的字段系统通过 `Value` trait 实现**编译期类型检查 + 运行时结构化输出**：
+Tracing 的字段系统通过 `Value` trait 实现**编译期类型检查 + 运行时（Runtime）结构化输出**：
 
 ```rust,ignore
 pub trait Value: 'static {
@@ -232,7 +232,7 @@ info!(data = vec![1,2,3]);      // ❌ 编译错误：Vec<i32> 未实现 Value
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-`#[instrument]` 过程宏通过编译期代码生成，在函数入口/出口自动创建 Span：
+`#[instrument]` 过程宏（Procedural Macro）通过编译期代码生成，在函数入口/出口自动创建 Span：
 
 ```rust,ignore
 #[tracing::instrument(level = "info", skip(_ctx), fields(req_id = %req.id))]
@@ -258,7 +258,7 @@ async fn handle_request(req: Request, _ctx: Context) -> Result<Response, Error> 
 
 - `level = "info"` 在编译期生成 `Metadata` 静态常量
 - 如果当前 Subscriber 的 `max_level_hint()` 低于 `INFO`，`span!` 宏展开为**无操作 (no-op)**，运行时开销为 0
-- `skip` 属性避免为大体积参数生成 `Value` 实现，减少单态化膨胀
+- `skip` 属性避免为大体积参数生成 `Value` 实现，减少单态化（Monomorphization）膨胀
 
 > [Tracing Docs — `#[instrument]`](https://docs.rs/tracing/latest/tracing/attr.instrument.html)(<https://docs.rs/tracing/latest/tracing/attr.instrument.html>)
 
@@ -417,7 +417,7 @@ std::thread::spawn(move || {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-Tracing 的 `Span` 使用**引用计数 + 弱引用**管理生命周期：
+Tracing 的 `Span` 使用**引用（Reference）计数 + 弱引用**管理生命周期：
 
 ```rust,ignore
 pub struct Span {
@@ -519,7 +519,7 @@ sequenceDiagram
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [Tokio 异步运行时架构](06_tokio_architecture.md)
+- [Tokio 异步（Async）运行时架构](06_tokio_architecture.md)
 - [Tower 中间件组合架构](02_tower_architecture.md)
 - [Axum Web 框架架构](07_axum_architecture.md)
 - [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)

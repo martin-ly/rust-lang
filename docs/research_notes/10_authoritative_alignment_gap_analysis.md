@@ -39,9 +39,9 @@
 
 | 来源 | 已覆盖 | 缺口 | 优先级 |
 |------|--------|------|--------|
-| Rust Reference | 类型、表达式、items、unsafe、modules | `const` 求值、宏 hygiene、模式匹配细节 | P1 |
+| Rust Reference | 类型、表达式、items、unsafe、modules | `const` 求值、宏（Macro） hygiene、模式匹配（Pattern Matching）细节 | P1 |
 | Cargo Book | package、依赖、workspace、features | vendor、metadata、timings、registry 协议 | P2 |
-| rustc-dev-guide | HIR/MIR、借用检查、名称解析 | 查询系统、增量编译、诊断生成 | P2 |
+| rustc-dev-guide | HIR/MIR、借用（Borrowing）检查、名称解析 | 查询系统、增量编译、诊断生成 | P2 |
 | Standard Library | 核心类型、并发、FFI | `std::fmt`、`std::error`、`std::process` | P2 |
 | Rust By Example | 基础、所有权（Ownership）、类型、并发 | Testing、Std Library Types、Crates | P2 |
 | Edition Guide | 2018/2021/2024 | 2024 `if let` / `while let` 临时作用域 | P1 |
@@ -52,7 +52,7 @@
 
 | 来源 | 已覆盖 | 缺口 | 优先级 |
 |------|--------|------|--------|
-| RustBelt | 所有权、借用（Borrowing）、unsafe | 具体定理与项目证明树的逐项映射 | P1 |
+| RustBelt | 所有权（Ownership）、借用（Borrowing）、unsafe | 具体定理与项目证明树的逐项映射 | P1 |
 | Tree Borrows | 别名模型 | 与项目反例的精确对应（如 `MaybeUninit`） | P1 |
 | Aeneas | 借用、纯函数 | async、trait 支持边界 | P2 |
 | coq-of-rust | Rust→Coq 翻译 | 具体 Coq 证明脚本与项目定理映射 | P3 |
@@ -75,7 +75,7 @@
 | 主题域 | 已有对齐 | 缺口 | 优先级 |
 |--------|----------|------|--------|
 | 所有权/借用 | TRPL、Reference、RustBelt、Tree Borrows | 学术论文到反例的精确行号映射 | P1 |
-| 类型系统（Type System）/生命周期 | Reference、RFC、FLS | const 泛型（Generics）、GAT、RPITIT 的 RFC 论证链 | P1 |
+| 类型系统（Type System）/生命周期（Lifetimes） | Reference、RFC、FLS | const 泛型（Generics）、GAT、RPITIT 的 RFC 论证链 | P1 |
 | 并发/异步 | Async Book、Send/Sync | tokio/async-std/smol 生态对齐 | P2 |
 | 安全/unsafe | Rustonomicon、UCG | Unsafe Code Guidelines 每个结论到反例 | P1 |
 | 模块（Module）/Crate | Reference、Cargo Book | crate.io / registry 协议、semver 自动化检查 | P2 |
@@ -102,7 +102,7 @@
 | P0 | 持续运行 `check_research_notes.py` | 保持 100% 元数据/链接/反例覆盖 |
 | P1 | 补齐 unsafe/借用/类型的学术论文精确映射 | 3-5 个细化对齐文档 |
 | P1 | 建立 Rust 1.97+ 预览特性跟踪 | 更新 RFC 追踪表 |
-| P2 | 异步生态、性能、设计模式社区来源 | 3 个新对齐文档 |
+| P2 | 异步（Async）生态、性能、设计模式社区来源 | 3 个新对齐文档 |
 | P2 | 自动化 URL/版本检查脚本 | 扩展 check_research_notes.py |
 | P3 | 行号级锚点 | 长期工程 |
 

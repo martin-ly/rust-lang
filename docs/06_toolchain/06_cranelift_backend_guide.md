@@ -50,7 +50,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Cranelift** 是 Rust 编译器的替代代码生成后端（`codegen backend`），最初由 Mozilla 的 Wasmtime 团队开发。
-与 Rust 默认使用的 LLVM 后端不同，Cranelift 专注于**快速编译**而非极致的运行时性能优化。
+与 Rust 默认使用的 LLVM 后端不同，Cranelift 专注于**快速编译**而非极致的运行时（Runtime）性能优化。
 
 ```text
 Rust 编译器后端对比:
@@ -195,7 +195,7 @@ cargo +nightly build -v
 | 维度 | LLVM | Cranelift |
 |------|------|-----------|
 | **主要目标** | 极致运行时性能 | 快速编译时间 |
-| **优化深度** | 多轮跨模块优化 (`LTO`) | 基础块级别轻量优化 |
+| **优化深度** | 多轮跨模块（Module）优化 (`LTO`) | 基础块级别轻量优化 |
 | **编译速度** | 慢 (debug 仍需生成 LLVM IR) | 快 (跳过 LLVM 管线) |
 | **内存占用** | 编译时高 | 编译时低 |
 | **代码体积** | 优化后紧凑 | debug 构建略大 |
@@ -302,7 +302,7 @@ Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关
 |------|------|
 | **日常开发迭代** | 编译快，反馈循环短 |
 | **CI 快速检查** | `cargo check` / `cargo test` 之前的快速编译 |
-| **大型 Workspace** | 泛型代码多，LLVM monomorphization 耗时高 |
+| **大型 Workspace** | 泛型（Generics）代码多，LLVM monomorphization 耗时高 |
 | **WebAssembly 目标** | Cranelift 的原始强项 |
 | **教学/学习** | 编译快，适合频繁实验 |
 

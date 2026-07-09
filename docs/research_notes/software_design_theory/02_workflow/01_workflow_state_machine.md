@@ -28,7 +28,7 @@
     - [Axiom WF1: 状态互斥 {#axiom-wf1-状态互斥}](#axiom-wf1-状态互斥-axiom-wf1-状态互斥)
     - [Theorem WF1: 状态可达性 {#theorem-wf1-状态可达性}](#theorem-wf1-状态可达性-theorem-wf1-状态可达性)
   - [4. Rust 实现方案 {#4-rust-实现方案}](#4-rust-实现方案-4-rust-实现方案)
-    - [4.1 枚举状态机 {#41-枚举状态机}](#41-枚举状态机-41-枚举状态机)
+    - [4.1 枚举（Enum）状态机 {#41-枚举状态机}](#41-枚举状态机-41-枚举状态机)
     - [4.2 Typestate 模式 {#42-typestate-模式}](#42-typestate-模式-42-typestate-模式)
     - [4.3 持久化工作流 {#43-持久化工作流}](#43-持久化工作流-43-持久化工作流)
   - [5. 反例与边界 {#5-反例与边界}](#5-反例与边界-5-反例与边界)
@@ -63,7 +63,7 @@
 - **事件（Event）**：触发状态迁移的外部或内部信号，如 `Pay`、`Ship`、`Deliver`、`Cancel`。
 - **迁移（Transition）**：满足前置条件时，从源状态到目标状态的变化，通常表示为 `S × E → S`。
 - **动作（Action）**：迁移前后执行的副作用，如持久化、发送通知、记录审计日志。
-- **Typestate**：利用 Rust 类型系统在编译期排除非法迁移。
+- **Typestate**：利用 Rust 类型系统（Type System）在编译期排除非法迁移。
 
 在 Rust 中，该模式常借助枚举、`async/await`、Typestate 和持久化存储实现。
 
@@ -173,7 +173,7 @@ fn main() {
 
 ### 4.2 Typestate 模式 {#42-typestate-模式}
 
-利用泛型参数把状态编码进类型，**非法迁移在编译期即被拒绝**。
+利用泛型（Generics）参数把状态编码进类型，**非法迁移在编译期即被拒绝**。
 
 ```rust
 use std::marker::PhantomData;

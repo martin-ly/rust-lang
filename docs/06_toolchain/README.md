@@ -107,7 +107,7 @@ lto = true
 **涵盖内容**:
 
 - ✅ **Edition 2024 概览**：RPIT、`if let` 临时作用域、`unsafe_op_in_unsafe_fn` 等
-- ✅ **对 C01–C11 学习路径的影响**：所有权（Ownership）、类型系统（Type System）、控制流、宏
+- ✅ **对 C01–C11 学习路径的影响**：所有权（Ownership）、类型系统（Type System）、控制流、宏（Macro）
 - ✅ **迁移与学习建议**
 
 **适用场景**: 理解 2024 Edition 对学习的影响；从 2021 迁移
@@ -223,7 +223,7 @@ lto = true
 
 - ✅ **musl 1.2.5 更新** (DNS 解析器改进)
 - ✅ **全局分配器增强** (线程本地存储支持)
-- ✅ **内联汇编改进** (`cfg` 属性支持)
+- ✅ **内联汇编（Inline Assembly）改进** (`cfg` 属性支持)
 - ✅ **标准库 API 稳定化** (MaybeUninit、集合类型、整数操作等)
 - ✅ **工具链更新** (Cargo、Clippy、Rustfmt)
 - ✅ **实际应用示例** (代码示例、迁移指南)
@@ -340,9 +340,9 @@ lto = true
 
 - **ControlFlow::ok()**: 简化控制流与 Option 的互操作
 - **int::fmt_into()**: 高性能整数格式化，提升 30-50%
-- **RangeToInclusive**: 新的范围类型，完善类型系统
+- **RangeToInclusive**: 新的范围类型，完善类型系统（Type System）
 - **RefCell::try_map()**: 安全的内部可变性映射
-- **proc_macro_value**: 过程宏增强
+- **proc_macro_value**: 过程宏（Procedural Macro）增强
 - **Edition 2024 默认**: 现代 Rust 开发体验
 - **性能优化**: 增量编译 +15-20%，HashMap +10-15%
 
@@ -523,7 +523,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 ### 相关模块 {#相关模块}
 
 - [C08 Algorithms - 算法优化](../../crates/c08_algorithms/docs/README.md)
-- **注意**: 当前项目包含 c01-c12 共 12 个学习模块
+- **注意**: 当前项目包含 c01-c12 共 12 个学习模块（Module）
 
 ---
 

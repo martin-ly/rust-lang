@@ -2,7 +2,7 @@
 
 > **EN**: Linkage And Symbols
 > **Summary**: Linkage 与符号机制 Linkage And Symbols.
-> **概念族**: 形式化模块
+> **概念族**: 形式化模块（Module）
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -46,7 +46,7 @@
 | 术语 | 定义 |
 | :--- | :--- |
 | **Linkage** | 决定符号在链接阶段的作用范围。Rust 中 `static`（内部链接）、`external`（外部链接）以及通过 `#[linkage = "..."]` 指定的 LLVM linkage 类型。 |
-| **`extern crate`** | 在 Rust 2015/2018 中显式声明外部 crate 依赖；在 Rust 2021+ 中，除特殊场景（如宏/重命名）外基本由 Cargo 隐式处理。 |
+| **`extern crate`** | 在 Rust 2015/2018 中显式声明外部 crate 依赖；在 Rust 2021+ 中，除特殊场景（如宏（Macro）/重命名）外基本由 Cargo 隐式处理。 |
 | **`crate-type`** | 编译目标类型：`bin`、`lib`、`rlib`、`dylib`、`staticlib`、`cdylib`、`proc-macro` 等，决定输出产物与链接约定。 |
 | **`#[no_mangle]`** | 禁用 Rust 的符号混淆（mangling），使函数在目标文件中使用原始名称，便于 FFI 与动态符号查找。 |
 | **符号可见性（Symbol Visibility）** | 目标文件/动态库中符号是否对外导出。Rust 默认仅导出 `pub` 且被标记为 `#[no_mangle]` 或 `extern "C"` 的函数；语言级 `pub` 不保证链接器级导出。 |
@@ -105,7 +105,7 @@ Source Crate
 
 ### 为什么 Rust 默认要 name mangling {#为什么-rust-默认要-name-mangling}
 
-Name mangling 把模块路径、泛型参数、crate 哈希等信息编码到符号名中，以支持重载（函数名相同但签名不同）、泛型单态化和 crate 内唯一性。`#[no_mangle]` 关闭这一机制，代价是失去重载与泛型信息，因此通常只用于无泛型的 `extern "C"` 函数。
+Name mangling 把模块路径、泛型（Generics）参数、crate 哈希等信息编码到符号名中，以支持重载（函数名相同但签名不同）、泛型单态化（Monomorphization）和 crate 内唯一性。`#[no_mangle]` 关闭这一机制，代价是失去重载与泛型信息，因此通常只用于无泛型的 `extern "C"` 函数。
 
 ### `extern crate` 的演进 {#extern-crate-的演进}
 

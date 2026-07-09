@@ -460,7 +460,7 @@ fn main() {
 
 | 类别 | 文档 | 可视化内容 |
 | :--- | :--- | :--- |
-| 形式化方法 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | 所有权状态图 |
+| 形式化方法 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | 所有权（Ownership）状态图 |
 | 类型理论 | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | 类型推导树 |
 | 实验研究 | [experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) | 性能图表 |
 
@@ -472,7 +472,7 @@ fn main() {
 | 定理 | 可视化表示 | 代码示例位置 |
 | :--- | :--- | :--- |
 | T-OW2 | 所有权状态转换图 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
-| T-BR1 | 借用生命周期图 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
+| T-BR1 | 借用（Borrowing）生命周期（Lifetimes）图 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
 | T-TY3 | 类型推导树 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
 
 ---

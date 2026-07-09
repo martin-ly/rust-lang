@@ -42,7 +42,7 @@
     - [示例 1：OOP 继承迁移 {#示例-1oop-继承迁移}](#示例-1oop-继承迁移-示例-1oop-继承迁移)
     - [示例 2：观察者模式 {#示例-2观察者模式}](#示例-2观察者模式-示例-2观察者模式)
     - [示例 3：多继承不可表达 {#示例-3多继承不可表达}](#示例-3多继承不可表达-示例-3多继承不可表达)
-  - [引用 {#引用}](#引用-引用)
+  - [引用（Reference） {#引用}](#引用-引用)
   - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
       - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
@@ -81,9 +81,9 @@ $P_{\mathrm{Rust}} \equiv P_{\mathrm{OOP}}$
 
 且类型/约束对应关系一致。
 
-**Axiom EIM1**：Rust 无隐式全局可变；无类继承；无运行时反射。这些限制导致部分 OOP 模式不可直接表达。
+**Axiom EIM1**：Rust 无隐式全局可变；无类继承；无运行时（Runtime）反射。这些限制导致部分 OOP 模式不可直接表达。
 
-**Axiom EIM2**：Rust 的 trait、枚举（Enum）、所有权（Ownership）、借用可直接对应 OOP 的接口、多态、封装；等价表达模式在语义上无损失。
+**Axiom EIM2**：Rust 的 trait、枚举（Enum）、所有权（Ownership）、借用（Borrowing）可直接对应 OOP 的接口、多态、封装；等价表达模式在语义上无损失。
 
 **定理 EIM-T1**：若模式 $P$ 仅依赖接口、多态、组合、委托，则 $\mathit{ExprB}(P) = \mathrm{Same}$。
 
@@ -91,7 +91,7 @@ $P_{\mathrm{Rust}} \equiv P_{\mathrm{OOP}}$
 
 trait 即接口；`impl Trait for T` 即多态；
 
-结构体包装即组合；
+结构体（Struct）包装即组合；
 
 委托即方法转发。
 
@@ -107,7 +107,7 @@ trait 即接口；`impl Trait for T` 即多态；
 
 由 Axiom EIM1；Rust 无隐式全局可变、无类继承、无运行时反射。
 
-若 $P$ 核心依赖三者之一，则 $P_{\mathrm{Rust}}$ 必用替代（OnceLock、trait、宏）或无法实现；
+若 $P$ 核心依赖三者之一，则 $P_{\mathrm{Rust}}$ 必用替代（OnceLock、trait、宏（Macro））或无法实现；
 
 故 $\mathit{ExprB}(P) \in \{\mathrm{Approx},\, \mathrm{NoExpr}\}$。∎
 
@@ -119,7 +119,7 @@ trait 即接口；`impl Trait for T` 即多态；
 
 依 Def 1.1 为 Approx。∎
 
-**推论 EIM-C1**：等价表达模式（Factory Method、Strategy、Adapter 等）满足零成本抽象；
+**推论 EIM-C1**：等价表达模式（Factory Method、Strategy、Adapter 等）满足零成本抽象（Zero-Cost Abstraction）；
 
 近似表达模式可能有额外间接（如 channel）。
 
@@ -181,7 +181,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 | 模式 | 表达边界 | 说明 |
 | :--- | :--- | :--- |
 | Factory Method | 等价表达 | trait 工厂方法，语义一致 |
-| Abstract Factory | 等价表达 | 枚举/结构体族 |
+| Abstract Factory | 等价表达 | 枚举（Enum）/结构体族 |
 | Builder | 等价表达 | 链式构建，类型状态可增强 |
 | Prototype | 等价表达 | Clone trait 直接对应 |
 | Singleton | 近似表达 | 无全局可变，用 OnceLock 等替代 |
@@ -211,7 +211,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 | 模式 | 表达边界 | 说明 |
 | :--- | :--- | :--- |
 | Chain of Responsibility | 等价表达 | Option/链表传递 |
-| Command | 等价表达 | 闭包即命令对象 |
+| Command | 等价表达 | 闭包（Closures）即命令对象 |
 | Interpreter | 近似表达 | 无继承，用枚举+match |
 | Iterator | 等价表达 | Iterator trait 原生 |
 | Mediator | 等价表达 | 结构体协调 |
@@ -335,7 +335,7 @@ impl Target for Adapter {
 }
 ```
 
-**形式化对应**：Adapter 持有 `Adaptee`；`impl Target for Adapter` 委托；所有权清晰：`Adapter` 拥有 `Adaptee`。
+**形式化对应**：Adapter 持有 `Adaptee`；`impl Target for Adapter` 委托；所有权（Ownership）清晰：`Adapter` 拥有 `Adaptee`。
 
 ---
 

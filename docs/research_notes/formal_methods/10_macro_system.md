@@ -10,7 +10,7 @@
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: 🔄 持续推进中（骨架已建立，形式化定义与反例待补全）
 > **层级**: L3-L5
-> **概念族**: 形式化方法 / 宏系统
+> **概念族**: 形式化方法 / 宏（Macro）系统
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) | [Rust RFCs](https://rust-lang.github.io/rfcs/)
 
 ---
@@ -21,8 +21,8 @@
   - [📑 目录 {#目录}](#-目录-目录)
   - [一、核心概念 {#一核心概念}](#一核心概念-一核心概念)
   - [二、形式化定义 {#二形式化定义}](#二形式化定义-二形式化定义)
-    - [Def 1.1 声明宏 {#def-11-声明宏}](#def-11-声明宏-def-11-声明宏)
-    - [Def 1.2 过程宏 {#def-12-过程宏}](#def-12-过程宏-def-12-过程宏)
+    - [Def 1.1 声明宏（Declarative Macro） {#def-11-声明宏}](#def-11-声明宏-def-11-声明宏)
+    - [Def 1.2 过程宏（Procedural Macro） {#def-12-过程宏}](#def-12-过程宏-def-12-过程宏)
     - [Axiom 1.1 卫生性 {#axiom-11-卫生性}](#axiom-11-卫生性-axiom-11-卫生性)
   - [三、Rust 实现 {#三rust-实现}](#三rust-实现-三rust-实现)
   - [四、反例与边界 {#四反例与边界}](#四反例与边界-四反例与边界)
@@ -39,7 +39,7 @@
 
 Rust 宏系统分为两大类：
 
-- **声明宏（Declarative Macros）**：`macro_rules!`，基于模式匹配和模板替换。
+- **声明宏（Declarative Macros）**：`macro_rules!`，基于模式匹配（Pattern Matching）和模板替换。
 - **过程宏（Procedural Macros）**：在编译期接收 TokenStream 并输出 TokenStream，包括 derive、attribute-like 和 function-like 三种。
 
 形式化上，声明宏可视为从语法树模式到语法树模板的偏函数；过程宏则可视为编译期函数 `TokenStream -> TokenStream`。
@@ -123,7 +123,7 @@ pub fn cfg_select(input: TokenStream) -> TokenStream {
 ## 五、与其他概念的关系 {#五与其他概念的关系}
 
 - **类型系统（Type System）**：过程宏生成的代码必须仍通过类型检查。
-- **借用检查器**：宏展开后的代码受相同借用规则约束。
+- **借用（Borrowing）检查器**：宏展开后的代码受相同借用规则约束。
 - **宏速查卡**: [10_macros_cheatsheet.md](../10_macros_cheatsheet.md) 提供语法和模式速查。
 
 ---

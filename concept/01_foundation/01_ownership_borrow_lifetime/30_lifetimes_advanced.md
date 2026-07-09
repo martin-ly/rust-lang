@@ -1172,7 +1172,7 @@ fn merge(a: impl Iterator<Item = i32>, b: impl Iterator<Item = i32>) {
 }
 ```
 
-> **相关链接**：完整分析见 §14；类型系统背景见 [04_type_system.md](../../02_type_system/04_type_system.md) §11.1；HRTB 与生命周期判定树见 [00_meta/00_framework/concept_definition_decision_forest.md](../../00_meta/00_framework/concept_definition_decision_forest.md#四生命周期判定树)。
+> **相关链接**：完整分析见 §14；类型系统背景见 [04_type_system.md](../../01_foundation/02_type_system/04_type_system.md) §11.1；HRTB 与生命周期判定树见 [00_meta/00_framework/concept_definition_decision_forest.md](../../00_meta/00_framework/concept_definition_decision_forest.md#四生命周期判定树)。
 
 ### 17.3 `union` 的类型安全边界
 
@@ -1195,7 +1195,7 @@ fn read_int(u: &Value) -> i32 {
 }
 ```
 
-> **相关链接**：完整分析见 §16；Rust 类型系统中的 `union` 见 [04_type_system.md](../../02_type_system/04_type_system.md) §11.6；`ManuallyDrop` 与所有权例外见 [01_ownership.md](../01_ownership.md) §8.3。
+> **相关链接**：完整分析见 §16；Rust 类型系统中的 `union` 见 [04_type_system.md](../../01_foundation/02_type_system/04_type_system.md) §11.6；`ManuallyDrop` 与所有权例外见 [01_ownership.md](01_ownership.md) §8.3。
 
 ---
 

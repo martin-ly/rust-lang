@@ -108,6 +108,13 @@
     - [9.6 `Try` trait 与自定义 `?` 行为（稳定化中）](#96-try-trait-与自定义--行为稳定化中)
   - [十、相关概念链接](#十相关概念链接)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
+    - [11.1 `std::backtrace::Backtrace` 与错误追踪](#111-stdbacktracebacktrace-与错误追踪)
+    - [11.2 `Termination` trait 与 main 返回 Result](#112-termination-trait-与-main-返回-result)
+    - [11.3 `eyre` / `color-eyre` / `miette` / `snafu` 生态库对比](#113-eyre--color-eyre--miette--snafu-生态库对比)
+    - [11.4 `#[track_caller]` 与错误定位优化](#114-track_caller-与错误定位优化)
+    - [11.5 `Result<T, !>` 与 `!` (never type) 在错误处理中的使用](#115-resultt--与--never-type-在错误处理中的使用)
+    - [11.6 异步错误处理（`poll_fn` / `TryFuture`）](#116-异步错误处理poll_fn--tryfuture)
+    - [11.7 `Try` trait 与自定义 `?` 行为](#117-try-trait-与自定义--行为)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
@@ -2027,13 +2034,140 @@ fn compute() -> Maybe<i32> {
 
 ## 十一、待补充与演进方向（TODOs）
 
-- [x] **TODO**: 补充 `std::backtrace::Backtrace` 与错误追踪 —— 优先级: 中 —— 已完成 §9.3 (2026-05-14)
-- [x] **TODO**: 补充 `Termination` trait 与 main 返回 Result —— 优先级: 中 —— 已完成 §9.1
-- [x] **TODO**: 补充 `eyre` / `color-eyre` / `miette` / `snafu` 等生态库的对比 —— 优先级: 低 —— 已完成 §9.4 (2026-05-14)
-- [x] **TODO**: 补充 `#[track_caller]` 与错误定位优化 —— 优先级: 低 —— 已完成 §9.5 (2026-05-14)
-- [x] **TODO**: 补充 `Result<T, !>` 与 `!` (never type) 在错误处理中的使用 —— 优先级: 中 —— 已完成 §9.2
-- [x] **TODO**: 补充 `poll_fn` / `TryFuture` 等异步错误处理 —— 优先级: 高 —— 已完成 §5.5
-- [x] **TODO**: 补充 `Try` trait（稳定化中）与自定义 ? 行为 —— 优先级: 中 —— 已完成 §9.6
+### 11.1 `std::backtrace::Backtrace` 与错误追踪
+
+**定义**：`std::backtrace::Backtrace` 在运行时捕获当前调用栈，为 `Error` 类型提供位置上下文，无需依赖外部 crate。
+
+**动机**：分布式系统与 CLI 工具需要快速定位错误触发路径；Backtrace 是 `std` 内置、跨平台且无额外依赖的追踪基础。
+
+```rust
+use std::backtrace::Backtrace;
+
+#[derive(Debug)]
+struct AppError {
+    msg: String,
+    backtrace: Backtrace,
+}
+
+impl AppError {
+    fn new(msg: impl Into<String>) -> Self {
+        Self { msg: msg.into(), backtrace: Backtrace::capture() }
+    }
+}
+```
+
+> 详见 [§9.3 `std::backtrace::Backtrace` 与错误追踪](#93-stdbacktracebacktrace-与错误追踪)。
+
+### 11.2 `Termination` trait 与 main 返回 Result
+
+**定义**：`Termination` trait 描述 `main` 或测试函数可返回的类型；`Result<T, E>: Termination` 会在 `Err` 时以非零退出码退出并打印 Debug 表示。
+
+**动机**：让 `main` 函数直接返回 `Result`，消除样板 `match` 与 `unwrap`，同时保证程序退出语义一致。
+
+```rust
+use std::fs;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let contents = fs::read_to_string("config.toml")?;
+    println!("{}", contents);
+    Ok(())
+}
+```
+
+> 详见 [§9.1 补充：`Termination` trait 与 `main` 返回 `Result`](#91-补充termination-trait-与-main-返回-result)。
+
+### 11.3 `eyre` / `color-eyre` / `miette` / `snafu` 生态库对比
+
+**定义**：这些 crate 在 `std::error::Error` 之上提供报告格式、错误链、自定义类型与诊断信息；`eyre` 强调零样板，`miette` 强调格式化诊断，`snafu` 强调显式错误枚举。
+
+**动机**：大型项目需要在错误类型严谨性、编译器报错可读性和运行时报告美观度之间做权衡。
+
+```rust,ignore
+// eyre 示例
+use eyre::Result;
+fn parse() -> Result<i32> { "not a number".parse()?; Ok(0) }
+```
+
+> 详见 [§9.4 `eyre` / `color-eyre` / `miette` / `snafu` 等生态库对比](#94-eyre--color-eyre--miette--snafu-等生态库对比)。
+
+### 11.4 `#[track_caller]` 与错误定位优化
+
+**定义**：`#[track_caller]` 让 panic/错误宏（如 `unwrap`、`?`）报告调用者位置，而非宏定义或库内部位置。
+
+**动机**：在不暴露内部实现细节的前提下，把错误信息定位到用户的代码行，提高调试效率。
+
+```rust
+#[track_caller]
+fn expect_some<T>(opt: Option<T>) -> T {
+    match opt {
+        Some(v) => v,
+        None => panic!("expected Some"),
+    }
+}
+```
+
+> 详见 [§9.5 `#[track_caller]` 与错误定位优化](#95-track_caller-与错误定位优化)。
+
+### 11.5 `Result<T, !>` 与 `!` (never type) 在错误处理中的使用
+
+**定义**：`!`（never type）表示不可能返回；`Result<T, !>` 中的 `Err` 分支在类型层面不可达，因此在 `?` 或 `match` 中可被编译器优化。
+
+**动机**：在类型系统里显式表达“此操作不可能失败”，避免冗余的 `unwrap` 或虚构错误变体。
+
+```rust
+fn infallible() -> Result<i32, !> {
+    Ok(42)
+}
+
+fn main() {
+    let x = infallible().unwrap(); // Err 分支不可达
+    println!("{}", x);
+}
+```
+
+> 详见 [§9.2 补充：`Result<T, !>` 与 `!` 在错误处理中的使用](#92-补充resultt---与--never-type-在错误处理中的使用)。
+
+### 11.6 异步错误处理（`poll_fn` / `TryFuture`）
+
+**定义**：异步错误处理关注 `Future` 执行过程中的 `Poll<Result<T, E>>` 转换，`TryFuture` 扩展允许在 Future 上直接使用 `?` 与 `try_join` 等组合子。
+
+**动机**：async/await 会隐藏 `Poll` 状态，专门的 `TryFutureExt` 和 `poll_fn` 帮助在手动实现 Future 时统一错误传播。
+
+```rust
+use std::future::Future;
+
+async fn fallible() -> Result<i32, &'static str> { Ok(7) }
+
+async fn wrapper() -> Result<i32, &'static str> {
+    let v = fallible().await?;
+    Ok(v * 2)
+}
+```
+
+> 详见 [§5.5 补充：`poll_fn` / `TryFuture` 等异步错误处理](#55-补充poll_fn--tryfuture-等异步错误处理)。
+
+### 11.7 `Try` trait 与自定义 `?` 行为
+
+**定义**：`Try` trait（稳定化中）抽象了 `?` 运算符背后的转换逻辑：`from_output` 构造成功值，`from_residual` 构造/传播错误值，`branch` 将值拆分为继续或返回。
+
+**动机**：统一 `Result`、`Option`、`ControlFlow` 乃至用户自定义类型的 `?` 行为，使 `try {}` 块与自定义错误类型拥有相同的一等公民支持。
+
+```rust,ignore
+#![feature(try_trait_v2)]
+use std::ops::{ControlFlow, FromResidual, Try};
+
+// 自定义类型实现 Try 后可直接使用 ?
+enum MyResult<T, E> { Ok(T), Err(E) }
+
+impl<T, E> Try for MyResult<T, E> {
+    type Output = T;
+    type Residual = MyResult<!, E>;
+    fn from_output(output: T) -> Self { MyResult::Ok(output) }
+    fn branch(self) -> ControlFlow<Self::Residual, T> { ... }
+}
+```
+
+> 详见 [§9.6 `Try` trait 与自定义 `?` 行为（稳定化中）](#96-try-trait-与自定义--行为稳定化中)。
 
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html); [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅

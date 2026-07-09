@@ -134,7 +134,7 @@ pub struct Entity {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-组件必须是 `Send + Sync + 'static` 的类型，且通常通过 derive 宏实现 `Component` trait：
+组件必须是 `Send + Sync + 'static` 的类型，且通常通过 derive 宏（Macro）实现 `Component` trait：
 
 ```rust,ignore
 #[derive(Component, Debug, Clone, Copy)]
@@ -427,7 +427,7 @@ graph LR
     style E fill:#fce4ec
 ```
 
-调度器通过分析 `Query` 的泛型参数自动判断冲突：
+调度器通过分析 `Query` 的泛型（Generics）参数自动判断冲突：
 
 - `Query<&Position>` + `Query<&Position>` → **并行安全**（只读）
 - `Query<&mut Position>` + `Query<&Position>` → **冲突**（读写）
@@ -536,7 +536,7 @@ where
 }
 ```
 
-`for<'w, 's>` 确保系统函数可以对 World 进行任意生命周期的借用，而调度器在调用 `run` 时独占整个 `&mut World`，从而**静态保证**没有两个系统可以同时写入同一组件。
+`for<'w, 's>` 确保系统函数可以对 World 进行任意生命周期（Lifetimes）的借用（Borrowing），而调度器在调用 `run` 时独占整个 `&mut World`，从而**静态保证**没有两个系统可以同时写入同一组件。
 
 > [Rust Reference — Higher-Ranked Trait Bounds](https://doc.rust-lang.org/reference/introduction.html)(<https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds>)
 
@@ -672,7 +672,7 @@ fn update_score(mut score: ResMut<Score>, query: Query<&Health, With<Player>>) {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-Bevy 的事件系统是零成本抽象的类型安全 pub/sub：
+Bevy 的事件系统是零成本抽象（Zero-Cost Abstraction）的类型安全 pub/sub：
 
 ```rust,ignore
 #[derive(Event)]
@@ -774,7 +774,7 @@ fn handle_damage(
 | 数据布局 | 对象分散在堆上 | 组件密集排列 |
 | 行为定义 | 虚函数/方法 | 纯函数系统 |
 | 缓存友好性 | 差（指针追踪） | 优（SIMD 友好） |
-| 运行时灵活性 | 静态类层次 | 动态增删组件 |
+| 运行时（Runtime）灵活性 | 静态类层次 | 动态增删组件 |
 
 ### 7.2 何时 NOT 使用 ECS {#72-何时-not-使用-ecs}
 
@@ -845,7 +845,7 @@ fn better_system_b(b_query: Query<&Position, With<B>>) { }
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-Bevy 的 crate 架构展示了 Rust 类型系统在游戏引擎领域的极致发挥：
+Bevy 的 crate 架构展示了 Rust 类型系统（Type System）在游戏引擎领域的极致发挥：
 
 | 设计决策 | Rust 特性 | 收益 |
 |----------|-----------|------|

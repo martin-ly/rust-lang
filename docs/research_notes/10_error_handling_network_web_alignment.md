@@ -15,7 +15,7 @@
 
 ## 目录 {#目录}
 
-- [错误处理与网络/Web 生态权威来源对齐矩阵 {#错误处理与网络web-生态权威来源对齐矩阵}](#错误处理与网络web-生态权威来源对齐矩阵-错误处理与网络web-生态权威来源对齐矩阵)
+- [错误处理（Error Handling）与网络/Web 生态权威来源对齐矩阵 {#错误处理与网络web-生态权威来源对齐矩阵}](#错误处理与网络web-生态权威来源对齐矩阵-错误处理与网络web-生态权威来源对齐矩阵)
   - [目录 {#目录}](#目录-目录)
   - [一、对齐说明 {#一对齐说明}](#一对齐说明-一对齐说明)
   - [二、错误处理 {#二错误处理}](#二错误处理-二错误处理)
@@ -60,7 +60,7 @@
 
 | 库/框架 | 权威来源 | 项目文档 | 备注 |
 |---------|----------|----------|------|
-| `tokio::net` | [Tokio Docs - tokio::net](https://docs.rs/tokio/latest/tokio/net/index.html) | [crates/c10_networks/](../../crates/c10_networks/README.md) | TCP/UDP 异步 IO |
+| `tokio::net` | [Tokio Docs - tokio::net](https://docs.rs/tokio/latest/tokio/net/index.html) | [crates/c10_networks/](../../crates/c10_networks/README.md) | TCP/UDP 异步（Async） IO |
 | `hyper` | [hyper.rs](https://hyper.rs/) | [crates/c10_networks/](../../crates/c10_networks/README.md) / [software_design_theory/07_crate_architectures/08_hyper_architecture.md](software_design_theory/07_crate_architectures/08_hyper_architecture.md) | HTTP/1、HTTP/2 客户端/服务端 |
 | `tonic` | [docs.rs - tonic](https://docs.rs/tonic/) | [crates/c10_networks/](../../crates/c10_networks/README.md) / [software_design_theory/07_crate_architectures/09_tonic_architecture.md](software_design_theory/07_crate_architectures/09_tonic_architecture.md) | gRPC over HTTP/2 |
 | `mio` | [docs.rs - mio](https://docs.rs/mio/) | [software_design_theory/07_crate_architectures/21_mio_architecture.md](software_design_theory/07_crate_architectures/21_mio_architecture.md) | 跨平台 epoll/kqueue/IOCP |
@@ -97,7 +97,7 @@
 | 项目文档 | 生态覆盖 | 权威来源 |
 |----------|----------|----------|
 | [10_error_handling_cheatsheet.md](10_error_handling_cheatsheet.md) | Result、Option、`?`、panic、错误转换、thiserror/anyhow/eyre | Rust Book Ch 9、Rust Reference、std |
-| [crates/c06_async/README.md](../../crates/c06_async/README.md) | 异步运行时、tokio 错误处理与任务管理 | Tokio Docs |
+| [crates/c06_async/README.md](../../crates/c06_async/README.md) | 异步运行时（Runtime）、tokio 错误处理与任务管理 | Tokio Docs |
 | [crates/c10_networks/README.md](../../crates/c10_networks/README.md) | TCP/UDP、HTTP/1/2/3、WebSocket、gRPC、DNS、P2P | tokio::net、hyper、tonic、RFC 9112/9113/9114/6455 |
 | [10_async_ecosystem_alignment.md](10_async_ecosystem_alignment.md) | tokio、hyper、axum、tonic 异步生态映射 | Tokio、hyper、axum、tonic 官方文档 |
 | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) | axum、actix-web、hyper、tonic、tower 架构分析 | 官方文档与 crates.io 依赖分析 |

@@ -1,7 +1,7 @@
 # Embassy 异步嵌入式框架深度指南 {#embassy-异步嵌入式框架深度指南}
 
 > **EN**: Embassy Deep Dive
-> **Summary**: Embassy 异步嵌入式框架深度指南 Embassy Deep Dive.
+> **Summary**: Embassy 异步（Async）嵌入式框架深度指南 Embassy Deep Dive.
 >
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 >
@@ -127,7 +127,7 @@ pub fn run(&'static mut self) -> ! {
 
 - 无锁数据结构（单生产者单消费者队列）
 - 无上下文切换开销（任务即 Future 状态机）
-- 栈分配任务上下文（`#[embassy_executor::task]` 宏处理）
+- 栈分配任务上下文（`#[embassy_executor::task]` 宏（Macro）处理）
 
 > [来源: [Embassy 源码 - embassy-executor](https://github.com/embassy-rs/embassy)]
 

@@ -102,7 +102,7 @@
 
 | 来源 | 项目文档 | 状态 | 备注 |
 |------|----------|------|------|
-| [Rust Modules Guide](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) | [formal_modules/70_module_patterns_and_refactoring.md](formal_modules/70_module_patterns_and_refactoring.md) | ✅ | 模块分层、职责划分 |
+| [Rust Modules Guide](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) | [formal_modules/70_module_patterns_and_refactoring.md](formal_modules/70_module_patterns_and_refactoring.md) | ✅ | 模块（Module）分层、职责划分 |
 | [Cargo Guide – Project Layout](https://doc.rust-lang.org/cargo/guide/project-layout.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) §2 | ✅ | package 目录结构 |
 
 ### 3.3 SemVer 与 cargo book 实战 {#33-semver-与-cargo-book-实战}
@@ -210,7 +210,7 @@
 | [社区最佳实践对齐矩阵](10_community_best_practices_alignment.md) | API Guidelines、Rust Design Patterns、Performance Book 总映射 |
 | [Rust Reference 对齐矩阵](10_rust_reference_alignment.md) | 语言规范 items/modules/visibility 映射 |
 | [版本演进对齐矩阵](10_version_evolution_alignment.md) | rust-version、Edition、MSRV 策略映射 |
-| [错误处理与网络/Web 生态对齐矩阵](10_error_handling_network_web_alignment.md) | 错误类型与生态 crate 映射 |
+| [错误处理（Error Handling）与网络/Web 生态对齐矩阵](10_error_handling_network_web_alignment.md) | 错误类型与生态 crate 映射 |
 
 ---
 

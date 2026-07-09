@@ -77,7 +77,7 @@
 
 **定理 SY-T1**：由 type_system 进展性 T1、保持性 T2，良型程序 $e$ 可求值至值 $v$（$e \to^* v$）或无限归约。
 
-**定理 SY-T2**：由 [ownership_model](../../formal_methods/10_ownership_model.md)、[borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md)，同步执行下所有权与借用规则保证内存安全与无数据竞争。
+**定理 SY-T2**：由 [ownership_model](../../formal_methods/10_ownership_model.md)、[borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md)，同步执行下所有权（Ownership）与借用（Borrowing）规则保证内存安全（Memory Safety）与无数据竞争。
 
 ---
 
@@ -199,7 +199,7 @@ main()
 
 | 组合 | 说明 |
 | :--- | :--- |
-| 同步 + Factory Method | 运行时决定产品类型；`let product = factory.create();` |
+| 同步 + Factory Method | 运行时（Runtime）决定产品类型；`let product = factory.create();` |
 | 同步 + Strategy | 可替换算法；`ctx.execute(&data)` |
 | 同步 + Template Method | 算法骨架；`algorithm.run()` |
 | 同步 + State | 状态机；`state.handle(&mut ctx)` |

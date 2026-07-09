@@ -417,7 +417,7 @@ stream.read(&mut buf);  // ❌ 可能永久阻塞
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [网络模块完整文档](../../../crates/c10_networks/docs/README.md)
+- [网络模块（Module）完整文档](../../../crates/c10_networks/docs/README.md)
 - [网络模块 README](../../../crates/c10_networks/README.md)
 
 ## 🧩 相关示例代码 {#相关示例代码}
@@ -566,7 +566,7 @@ async fn proxy_server() -> io::Result<()> {
 | :--- | :--- | :--- |
 | **异步状态机** | [async_state_machine](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 异步网络操作的语义 |
 | **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 跨线程数据传递安全 |
-| **生命周期** | lifetime_formalization | 连接引用有效性 |
+| **生命周期（Lifetimes）** | lifetime_formalization | 连接引用（Reference）有效性 |
 | **并发安全（Concurrency Safety）** | [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md) | 并发访问数据竞争自由 |
 
 ### 形式化定理 {#形式化定理}

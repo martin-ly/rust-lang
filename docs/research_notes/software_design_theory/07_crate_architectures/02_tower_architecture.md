@@ -25,7 +25,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-Tower 是 Rust 异步生态中**服务组合 (Service Composition)** 的基础设施层。hyper（HTTP 客户端/服务器）、tonic（gRPC）、axum（Web 框架）等重量级项目均构建于 Tower 之上。它提供了一套极简的 trait 体系——核心仅 `Service` 和 `Layer` 两个 trait——却支撑起了整个 Rust 异步服务中间件的组合代数。
+Tower 是 Rust 异步（Async）生态中**服务组合 (Service Composition)** 的基础设施层。hyper（HTTP 客户端/服务器）、tonic（gRPC）、axum（Web 框架）等重量级项目均构建于 Tower 之上。它提供了一套极简的 trait 体系——核心仅 `Service` 和 `Layer` 两个 trait——却支撑起了整个 Rust 异步服务中间件的组合代数。
 
 > [来源: [Tower 官方文档](https://docs.rs/tower/latest/tower/)]
 > [来源: [hyper 文档](https://docs.rs/hyper/latest/hyper/)]
@@ -352,7 +352,7 @@ Client -> Timeout.poll_ready()
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-Tower 的零成本承诺建立在 Rust 类型系统的三个支柱之上：
+Tower 的零成本承诺建立在 Rust 类型系统（Type System）的三个支柱之上：
 
 ### 5.1 关联类型消除输出类型歧义 {#51-关联类型消除输出类型歧义}
 
@@ -373,7 +373,7 @@ impl Service<HttpRequest> for MyHandler {
 }
 ```
 
-与 Java 的 `Service<T, R>`（需显式传递两个类型参数）不同，Rust 的关联类型使得**输出类型由实现推导**，调用方无需重复声明。这减少了泛型参数爆炸，同时保持编译期类型安全。
+与 Java 的 `Service<T, R>`（需显式传递两个类型参数）不同，Rust 的关联类型使得**输出类型由实现推导**，调用方无需重复声明。这减少了泛型（Generics）参数爆炸，同时保持编译期类型安全。
 
 > [来源: [Rust Reference - Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html)]
 
@@ -408,7 +408,7 @@ let stack = ServiceBuilder::new()
 |:---|:---|:---|
 | 调用开销 | 直接调用 + 内联 | 虚表查找 + 间接调用 |
 | 内存布局 | 内联展开，缓存友好 | 堆分配，指针跳转 |
-| 编译时间 | 较慢（单态化膨胀） | 较快 |
+| 编译时间 | 较慢（单态化（Monomorphization）膨胀） | 较快 |
 | 类型擦除 | 边界处显式 `.boxed()` | 全程动态 |
 
 > [来源: [Rust Reference - Monomorphization](https://doc.rust-lang.org/reference/items/generics.html#monomorphization)]
@@ -418,7 +418,7 @@ let stack = ServiceBuilder::new()
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-Tower 的中间件经常需要生成自引用的 `Future`（如超时 Future 需要引用计时器状态）。`pin-project` 和 Rust 的 `Pin` 类型保证了这些 Future 在异步执行期间的安全移动语义。
+Tower 的中间件经常需要生成自引用（Reference）的 `Future`（如超时 Future 需要引用计时器状态）。`pin-project` 和 Rust 的 `Pin` 类型保证了这些 Future 在异步执行期间的安全移动语义。
 
 ```rust,ignore
 use pin_project::pin_project;
@@ -745,7 +745,7 @@ Tower 处于"抽象 sweet spot"——足够底层以支持任意请求-响应协
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [Tokio 异步运行时架构](06_tokio_architecture.md)
+- [Tokio 异步运行时（Runtime）架构](06_tokio_architecture.md)
 - [Axum Web 框架架构](07_axum_architecture.md)
 - [系统可组合性设计模式](../../../../concept/06_ecosystem/03_design_patterns/30_system_composability.md)
 

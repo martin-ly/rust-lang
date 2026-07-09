@@ -37,7 +37,7 @@
 
 > **[来源: [meilisearch-sdk crates.io](https://crates.io/crates/meilisearch-sdk)]**
 
-`meilisearch-sdk` 是 [Meilisearch](https://www.meilisearch.com/) 官方维护的 Rust 异步客户端，封装了 Meilisearch 的 REST API。Meilisearch 是一个开源、轻量、 typo-tolerant 的即时搜索引擎，适用于应用内搜索、站点搜索、商品/内容检索等场景。
+`meilisearch-sdk` 是 [Meilisearch](https://www.meilisearch.com/) 官方维护的 Rust 异步（Async）客户端，封装了 Meilisearch 的 REST API。Meilisearch 是一个开源、轻量、 typo-tolerant 的即时搜索引擎，适用于应用内搜索、站点搜索、商品/内容检索等场景。
 
 > [来源: [meilisearch-sdk docs.rs](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/)]
 
@@ -49,7 +49,7 @@
 | **通信层** | 默认 `reqwest` + 可插拔 `HttpClient` trait | 与 Rust 异步 HTTP 生态对齐，支持自定义 TLS/连接池 |
 | **索引更新** | 所有写操作返回 `TaskInfo`，通过 `wait_for_task` 异步等待 | 明确暴露搜索引擎的异步索引成本 |
 | **搜索 API** | `Index::search()` 返回 builder，链式配置查询/过滤/高亮/排序 | 编译期防止无效查询状态 |
-| **可配置性** | 通过 `Settings` 管理 filterable/sortable/searchable attributes、ranking rules、synonyms 等 | 将搜索行为从运行时字符串提升为类型化配置 |
+| **可配置性** | 通过 `Settings` 管理 filterable/sortable/searchable attributes、ranking rules、synonyms 等 | 将搜索行为从运行时（Runtime）字符串提升为类型化配置 |
 
 > [来源: [meilisearch-sdk GitHub Repository](https://github.com/meilisearch/meilisearch-sdk)]
 
@@ -110,8 +110,8 @@ graph TD
 
 `add_documents` 接受 `&[T: Serialize]`，`execute::<T>()` 要求 `T: DeserializeOwned`。这意味着：
 
-- 写入侧：任何可序列化的 Rust 结构体都可以直接推入索引。
-- 读取侧：通过泛型参数将 JSON 命中映射为强类型对象。
+- 写入侧：任何可序列化的 Rust 结构体（Struct）都可以直接推入索引。
+- 读取侧：通过泛型（Generics）参数将 JSON 命中映射为强类型对象。
 - 动态场景：也可使用 `serde_json::Value` 或 `std::collections::HashMap<String, serde_json::Value>`。
 
 ```rust,ignore
@@ -178,7 +178,7 @@ let task = index.set_settings(&settings).await?;
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-| 维度 | API | 类型系统价值 |
+| 维度 | API | 类型系统（Type System）价值 |
 |:--|:--|:--|
 | 文档类型参数 | `add_documents<T: Serialize>` / `execute<T: DeserializeOwned>` | 将 JSON 文档映射与 Rust 类型在编译期绑定 |
 | HTTP 客户端抽象 | `Client<Http: HttpClient>` | 通过泛型隔离具体 HTTP 实现，支持 wasm/自定义客户端 |

@@ -62,7 +62,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. **Send/Sync 的形式化定义**：如何用数学语言精确描述「可安全跨线程转移」与「可安全跨线程共享引用」？
+1. **Send/Sync 的形式化定义**：如何用数学语言精确描述「可安全跨线程转移」与「可安全跨线程共享引用（Reference）」？
 2. **属性关系**：$T : \text{Sync} \Leftrightarrow \&T : \text{Send}$ 如何形式化并用于证明？
 3. **与并发原语衔接**：thread::spawn、Future、Arc、通道、Mutex 如何依赖 Send/Sync？
 
@@ -85,7 +85,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- **Send**：类型可以**安全地跨线程转移所有权**。若值从线程 $t_1$ 转移到 $t_2$，则 $t_1$ 不再访问该值，且 $t_2$ 的访问满足单线程内存与借用规则。
+- **Send**：类型可以**安全地跨线程转移所有权（Ownership）**。若值从线程 $t_1$ 转移到 $t_2$，则 $t_1$ 不再访问该值，且 $t_2$ 的访问满足单线程内存与借用（Borrowing）规则。
 - **Sync**：类型可以**安全地跨线程共享引用**。即多线程同时持有 `&T` 时，不产生数据竞争（无共享可变或由同步原语保护）。
 - **关系**：$T : \text{Sync} \Leftrightarrow \&T : \text{Send}$（Rust 标准库定义）；即「可共享引用」等价于「引用类型可跨线程传递」。
 - **可判定性**：Send/Sync 由**编译期**类型检查判定；违反则编译错误。
@@ -112,13 +112,13 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**Def SEND1（Send）**：类型 $\tau$ 满足 **Send** 当且仅当：将 $\tau$ 的值从线程 $t_1$ 转移到线程 $t_2$ 后，$t_1$ 不再持有或访问该值，且 $t_2$ 上的使用满足单线程内存安全与 [borrow_checker_proof](10_borrow_checker_proof.md) 借用规则。形式化谓词：
+**Def SEND1（Send）**：类型 $\tau$ 满足 **Send** 当且仅当：将 $\tau$ 的值从线程 $t_1$ 转移到线程 $t_2$ 后，$t_1$ 不再持有或访问该值，且 $t_2$ 上的使用满足单线程内存安全（Memory Safety）与 [borrow_checker_proof](10_borrow_checker_proof.md) 借用规则。形式化谓词：
 
 $$\text{Send}(\tau) \leftrightarrow \forall v:\tau,\, t_1,\, t_2.\ \text{SafeTransfer}(v, t_1, t_2)$$
 
 其中 $\text{SafeTransfer}(v, t_1, t_2)$ 表示：$v$ 在 $t_1$ 上创建或持有，转移至 $t_2$ 后，$t_1$ 不再访问 $v$，且 $t_2$ 上对 $v$ 的访问满足内存安全与借用规则。
 
-**Def SYNC1（Sync）**：类型 $\tau$ 满足 **Sync** 当且仅当：多线程共享不可变引用 $\& \tau$ 时，无数据竞争。形式化谓词：
+**Def SYNC1（Sync）**：类型 $\tau$ 满足 **Sync** 当且仅当：多线程共享不可变引用（Mutable Reference） $\& \tau$ 时，无数据竞争。形式化谓词：
 
 $$\text{Sync}(\tau) \leftrightarrow \forall t.\ \text{SafeShare}(\& \tau, t)$$
 
@@ -183,9 +183,9 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 **定理 SYNC-T1（跨线程共享引用安全）**：若 $T : \text{Sync}$，则多线程同时持有 $\&T$ 不引入数据竞争。
 
-*证明*：由 Def SYNC1 与 SYNC-L1；$\&T : \text{Send}$ 保证引用可跨线程传递，且不可变引用允许多读者、无写，故无数据竞争。与 [async_state_machine](10_async_state_machine.md) 定理 6.2 中 Sync 约束一致。∎
+*证明*：由 Def SYNC1 与 SYNC-L1；$\&T : \text{Send}$ 保证引用可跨线程传递，且不可变引用（Immutable Reference）允许多读者、无写，故无数据竞争。与 [async_state_machine](10_async_state_machine.md) 定理 6.2 中 Sync 约束一致。∎
 
-**定理 SEND-SYNC-T1（spawn 数据竞争自由）**：若闭包类型 $F$ 满足 $F : \text{Send} + \text{'static}$，则 `thread::spawn(|| body)` 与 [async_state_machine](10_async_state_machine.md) Def SPAWN1、定理 SPAWN-T1 一致，跨线程无数据竞争。
+**定理 SEND-SYNC-T1（spawn 数据竞争自由）**：若闭包（Closures）类型 $F$ 满足 $F : \text{Send} + \text{'static}$，则 `thread::spawn(|| body)` 与 [async_state_machine](10_async_state_machine.md) Def SPAWN1、定理 SPAWN-T1 一致，跨线程无数据竞争。
 
 *证明*：SPAWN1 要求闭包 `Send + 'static`；由 SEND-T1，捕获的 $T$ 转移至新线程后原线程不再访问，故满足数据竞争自由。∎
 
@@ -227,7 +227,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 | `Rc<T>` 跨线程传递 | Send | 编译错误；若用 unsafe 则多线程持 Rc 导致计数竞态 | Def SEND1；[ownership_model](10_ownership_model.md) Def RC1 |
 | `Cell<T>` 多线程共享 `&Cell<T>` | Sync | 编译错误；内部可变无同步，共享即数据竞争 | Def SYNC1；[ownership_model](10_ownership_model.md) Def CELL1 |
 | 非 Send 闭包传入 `thread::spawn` | Send | 编译错误 | SPAWN1；[async_state_machine](10_async_state_machine.md) |
-| 非 Send Future 在多线程运行时 poll | Send | 编译错误或 UB | [async_state_machine](10_async_state_machine.md) 定理 6.2 |
+| 非 Send Future 在多线程运行时（Runtime） poll | Send | 编译错误或 UB | [async_state_machine](10_async_state_machine.md) 定理 6.2 |
 | `&T` 跨线程但 `T: !Sync` | Sync | 编译错误 | SYNC-L1 |
 
 ---

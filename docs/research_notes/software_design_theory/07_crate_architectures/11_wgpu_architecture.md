@@ -121,7 +121,7 @@ graph TB
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-`Instance` 是 Wgpu 的全局入口，负责加载底层图形驱动并管理 GPU 适配器的枚举：
+`Instance` 是 Wgpu 的全局入口，负责加载底层图形驱动并管理 GPU 适配器的枚举（Enum）：
 
 ```rust,ignore
 let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
@@ -311,7 +311,7 @@ let bind_group = device.create_bind_group(&wgpu::BindGroupDescriptor {
 });
 ```
 
-如果 `BindGroup` 中的资源类型与 `BindGroupLayoutEntry` 不匹配（例如将 `TextureView` 绑定到期望 `Buffer` 的槽位），`create_bind_group` 调用会在创建期即报错，而非在着色器运行时产生未定义行为。
+如果 `BindGroup` 中的资源类型与 `BindGroupLayoutEntry` 不匹配（例如将 `TextureView` 绑定到期望 `Buffer` 的槽位），`create_bind_group` 调用会在创建期即报错，而非在着色器运行时（Runtime）产生未定义行为。
 
 ### 3.2 着色器验证：Naga 编译器 {#32-着色器验证naga-编译器}
 
@@ -407,7 +407,7 @@ Naga 在 `create_shader_module` 时执行完整的静态分析：类型检查、
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-Wgpu 拒绝隐式内存拷贝，所有 GPU 资源（Buffer、Texture）的创建、使用和生命周期管理完全显式：
+Wgpu 拒绝隐式内存拷贝，所有 GPU 资源（Buffer、Texture）的创建、使用和生命周期（Lifetimes）管理完全显式：
 
 ```rust,ignore
 // Buffer 创建 —— 必须显式声明用途
@@ -603,9 +603,9 @@ fn render(&mut self) -> Result<(), wgpu::SurfaceError> {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-Wgpu 的初始化 API（`request_adapter`、`request_device`）均为 `async`，因为某些平台（尤其是 Web/WASM）的 GPU 枚举是异步操作。
+Wgpu 的初始化 API（`request_adapter`、`request_device`）均为 `async`，因为某些平台（尤其是 Web/WASM）的 GPU 枚举是异步（Async）操作。
 
-在原生平台，这些函数实际会立即返回 `Poll::Ready`，但统一使用 async 接口保持了跨平台一致性。
+在原生平台，这些函数实际会立即返回 `Poll::Ready`，但统一使用 async 接口保持了跨平台一致性（Coherence）。
 
 ```rust,ignore
 // 原生平台：使用 pollster 阻塞等待

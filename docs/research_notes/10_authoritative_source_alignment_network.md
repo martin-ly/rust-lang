@@ -23,7 +23,7 @@
 | 性能与测试 | [10_performance_and_testing_alignment.md](10_performance_and_testing_alignment.md) | Rust Performance Book、Cargo 测试、Miri、Clippy、Criterion、Sanitizer |
 | 行号级锚点 | [10_authoritative_source_line_anchors.md](10_authoritative_source_line_anchors.md) | 核心概念到权威来源 GitHub 行号级链接 |
 | RFC 到反例映射 | [10_rfc_to_counterexample_mapping.md](10_rfc_to_counterexample_mapping.md) | 关键 RFC 与项目反例文档的双向映射 |
-| 宏 / FFI / 嵌入式生态 | [10_macros_ffi_embedded_alignment.md](10_macros_ffi_embedded_alignment.md) | 宏系统、FFI、WebAssembly、嵌入式生态权威来源对齐 |
+| 宏（Macro） / FFI / 嵌入式生态 | [10_macros_ffi_embedded_alignment.md](10_macros_ffi_embedded_alignment.md) | 宏系统、FFI、WebAssembly、嵌入式生态权威来源对齐 |
 | 错误处理（Error Handling） / 网络 / Web | [10_error_handling_network_web_alignment.md](10_error_handling_network_web_alignment.md) | Rust Book Ch 9、std::result、thiserror/anyhow/eyre、tokio::net、hyper、tonic、axum、actix-web、rocket、tower、HTTP/1/2/3、WebSocket、OpenAPI 权威来源对齐 |
 | 数据库、存储与云原生 | [10_database_storage_cloud_alignment.md](10_database_storage_cloud_alignment.md) | diesel、sqlx、sea-orm、rusqlite、redis、mongo、kafka、rabbitmq、nats、kube-rs、otel、prometheus、容器/K8s |
 | CI/CD 与供应链安全 | [10_cicd_supply_chain_alignment.md](10_cicd_supply_chain_alignment.md) | GitHub Actions、GitLab CI、测试质量、供应链安全、发布签名 |
@@ -66,9 +66,9 @@
 
 | 权威来源 | 类型 | 对齐文档 | 覆盖主题 | 状态 |
 |----------|------|----------|----------|------|
-| [The Rust Programming Language](https://doc.rust-lang.org/book/) | 教程 | [10_rust_book_alignment.md](10_rust_book_alignment.md) | 所有权（Ownership）、类型系统（Type System）、并发、错误处理、宏、OOP 等 21 章 | ✅ 已完成 |
+| [The Rust Programming Language](https://doc.rust-lang.org/book/) | 教程 | [10_rust_book_alignment.md](10_rust_book_alignment.md) | 所有权（Ownership）、类型系统（Type System）、并发、错误处理（Error Handling）、宏、OOP 等 21 章 | ✅ 已完成 |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | 语言规范 | [10_rust_reference_alignment.md](10_rust_reference_alignment.md) / [10_rust_reference_chapters_alignment.md](10_rust_reference_chapters_alignment.md) | 词法、类型、表达式、items、modules、unsafe、attributes | ✅ 已完成 |
-| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 高级/unsafe 指南 | [10_rustonomicon_alignment.md](10_rustonomicon_alignment.md) | 所有权、生命周期、子类型、Send/Sync、FFI、未初始化内存 | ✅ 已完成 |
+| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 高级/unsafe 指南 | [10_rustonomicon_alignment.md](10_rustonomicon_alignment.md) | 所有权（Ownership）、生命周期（Lifetimes）、子类型、Send/Sync、FFI、未初始化内存 | ✅ 已完成 |
 | [Cargo Book](https://doc.rust-lang.org/cargo/) | 构建工具 | [10_cargo_book_alignment.md](10_cargo_book_alignment.md) | 依赖、workspace、features、crate-type、发布、配置 | ✅ 已完成 |
 | [Toolchain Ecosystem](https://www.rust-lang.org/tools) | 工具链 | [10_toolchain_ecosystem_alignment.md](10_toolchain_ecosystem_alignment.md) | rustc、rustup、clippy、rustfmt、rust-analyzer、rustdoc | ✅ 已完成 |
 | [Async Ecosystem](https://tokio.rs/) | 异步生态 | [10_async_ecosystem_alignment.md](10_async_ecosystem_alignment.md) | tokio、async-std、smol、futures、axum、tonic | ✅ 已完成 |
@@ -96,7 +96,7 @@
 
 | 权威来源 | 机构 | 类型 | 对齐文档 | 覆盖主题 |
 |----------|------|------|----------|----------|
-| [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) | MPI-SWS | 形式化证明 | [10_rustbelt_alignment.md](10_rustbelt_alignment.md) | 所有权、借用、Unsafe 语义 |
+| [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) | MPI-SWS | 形式化证明 | [10_rustbelt_alignment.md](10_rustbelt_alignment.md) | 所有权、借用（Borrowing）、Unsafe 语义 |
 | [Aeneas](https://aeneas-verification.github.io/) | EPFL | 验证工具 | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) | 可验证的 Rust 子集 |
 | [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3) | 多机构 | 操作语义 | [10_rustsem_semantics.md](10_rustsem_semantics.md) | Rust 操作语义 |
 | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | ETH Zürich | 借用模型 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | 别名模型改进 |

@@ -21,14 +21,14 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 
-- [异步执行模型形式化 {#异步执行模型形式化}](#异步执行模型形式化-异步执行模型形式化)
+- [异步（Async）执行模型形式化 {#异步执行模型形式化}](#异步执行模型形式化-异步执行模型形式化)
   - [📑 目录 {#目录}](#-目录-目录)
   - [形式化定义 {#形式化定义}](#形式化定义-形式化定义)
   - [操作语义（简化） {#操作语义简化}](#操作语义简化-操作语义简化)
   - [Rust 实现与代码示例 {#rust-实现与代码示例}](#rust-实现与代码示例-rust-实现与代码示例)
   - [典型场景 {#典型场景}](#典型场景-典型场景)
   - [与同步/并发对比 {#与同步并发对比}](#与同步并发对比-与同步并发对比)
-  - [运行时与任务调度 {#运行时与任务调度}](#运行时与任务调度-运行时与任务调度)
+  - [运行时（Runtime）与任务调度 {#运行时与任务调度}](#运行时与任务调度-运行时与任务调度)
     - [Waker 与 Executor {#waker-与-executor}](#waker-与-executor-waker-与-executor)
     - [多任务组合 {#多任务组合}](#多任务组合-多任务组合)
     - [Stream、异步迭代与背压 {#stream异步迭代与背压}](#stream异步迭代与背压-stream异步迭代与背压)
@@ -78,11 +78,11 @@ $$\mathrm{Poll}\langle T \rangle = \mathrm{Pending} \mid \mathrm{Ready}(T)$$
 
 $\mathit{async}\, \{ e \}$ 产生 $\mathrm{Future}\langle \tau \rangle$，其中 $\tau$ 为 $e$ 的类型。$\mathit{await}\, f$ 在 $f$ 为 $\mathrm{Ready}(v)$ 时求值为 $v$，否则挂起。
 
-**Axiom AS1**：Future 状态转换合法；自引用 Future 需 Pin 保证位置稳定。
+**Axiom AS1**：Future 状态转换合法；自引用（Reference） Future 需 Pin 保证位置稳定。
 
 **Axiom AS2**：单线程协作式多任务；无抢占，yield 点仅在 await。
 
-**定理 AS-T1**：由 [async_state_machine](../../formal_methods/10_async_state_machine.md) 定理 6.1（状态一致性）、6.2（并发安全（Concurrency Safety））、6.3（进度保证）。
+**定理 AS-T1**：由 [async_state_machine](../../formal_methods/10_async_state_machine.md) 定理 6.1（状态一致性（Coherence））、6.2（并发安全（Concurrency Safety））、6.3（进度保证）。
 
 **定理 AS-T2**：由 [pin_self_referential](../../formal_methods/10_pin_self_referential.md)，Pin 保证自引用 Future 移动安全。
 
@@ -306,7 +306,7 @@ use futures::stream::Stream;
 > **来源: [Tokio Docs – Spawning](https://tokio.rs/tokio/tutorial/spawning)**
 > **来源: [rust-lang/async-book](https://rust-lang.github.io/async-book/06_multiple_futures/02_join.html)**
 
-**Def 1.8（结构化并发）**：子任务生命周期受父任务作用域约束；父任务退出时子任务必须完成或被取消。
+**Def 1.8（结构化并发）**：子任务生命周期（Lifetimes）受父任务作用域约束；父任务退出时子任务必须完成或被取消。
 
 ```rust,ignore
 use tokio::task;

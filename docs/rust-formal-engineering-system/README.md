@@ -27,9 +27,9 @@
 
 | 模块（Module） | 入口路径 | 说明 |
 | :--- | :--- | :--- |
-| **形式化方法** | [research_notes/formal_methods/](../../archive/research_notes_2026_06_25/formal_methods/README.md) | 所有权模型、借用检查器、生命周期、Pin、异步状态机 |
-| **类型理论** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型系统基础、Trait 形式化、型变理论、生命周期 |
-| **主索引** | [00_master_index.md](00_master_index.md) | 完整模块映射与导航 |
+| **形式化方法** | [research_notes/formal_methods/](../../archive/research_notes_2026_06_25/formal_methods/README.md) | 所有权（Ownership）模型、借用（Borrowing）检查器、生命周期（Lifetimes）、Pin、异步（Async）状态机 |
+| **类型理论** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型系统（Type System）基础、Trait 形式化、型变理论、生命周期 |
+| **主索引** | [00_master_index.md](00_master_index.md) | 完整模块（Module）映射与导航 |
 
 ### 快速跳转 {#快速跳转}
 
@@ -53,7 +53,7 @@
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-Rust 的所有权系统是其内存安全保证的核心：
+Rust 的所有权系统是其内存安全（Memory Safety）保证的核心：
 
 ```rust
 // 所有权三规则的形式化理解
@@ -73,7 +73,7 @@ fn ownership_demo() {
 
 ### 2. 借用检查 {#2-借用检查}
 
-借用检查器在编译时验证引用有效性：
+借用检查器在编译时验证引用（Reference）有效性：
 
 ```rust
 // 借用规则的形式化表达

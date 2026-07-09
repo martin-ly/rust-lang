@@ -23,12 +23,12 @@
 - [Rust形式化方法速查卡 {#rust形式化方法速查卡}](#rust形式化方法速查卡-rust形式化方法速查卡)
   - [📑 目录 {#目录}](#-目录-目录)
   - [核心概念速查 {#核心概念速查}](#核心概念速查-核心概念速查)
-    - [所有权规则 {#所有权规则}](#所有权规则-所有权规则)
-    - [借用规则 {#借用规则}](#借用规则-借用规则)
-  - [生命周期速查 {#生命周期速查}](#生命周期速查-生命周期速查)
+    - [所有权（Ownership）规则 {#所有权规则}](#所有权规则-所有权规则)
+    - [借用（Borrowing）规则 {#借用规则}](#借用规则-借用规则)
+  - [生命周期（Lifetimes）速查 {#生命周期速查}](#生命周期速查-生命周期速查)
     - [语法 {#语法}](#语法-语法)
     - [省略规则 {#省略规则}](#省略规则-省略规则)
-  - [Send/Sync速查 {#sendsync速查}](#sendsync速查-sendsync速查)
+  - [Send/Sync（Sync）速查 {#sendsync速查}](#sendsync速查-sendsync速查)
   - [核心定理速查 {#核心定理速查}](#核心定理速查-核心定理速查)
   - [证明技术速查 {#证明技术速查-1}](#证明技术速查-证明技术速查-1)
   - [验证工具速查 {#验证工具速查}](#验证工具速查-验证工具速查)
@@ -36,11 +36,11 @@
     - [创建型 {#创建型}](#创建型-创建型)
     - [结构型 {#结构型}](#结构型-结构型)
     - [行为型 {#行为型}](#行为型-行为型)
-  - [unsafe速查 {#unsafe速查}](#unsafe速查-unsafe速查)
+  - [unsafe（Unsafe）速查 {#unsafe速查}](#unsafe速查-unsafe速查)
     - [安全承诺 {#安全承诺}](#安全承诺-安全承诺)
     - [常见unsafe操作 {#常见unsafe操作}](#常见unsafe操作-常见unsafe操作)
-  - [异步速查 {#异步速查}](#异步速查-异步速查)
-    - [Future基础 {#future基础}](#future基础-future基础)
+  - [异步（Async）速查 {#异步速查}](#异步速查-异步速查)
+    - [Future（Future）基础 {#future基础}](#future基础-future基础)
     - [组合操作 {#组合操作}](#组合操作-组合操作)
     - [取消安全 {#取消安全}](#取消安全-取消安全)
   - [并发模式速查 {#并发模式速查}](#并发模式速查-并发模式速查)
@@ -53,7 +53,7 @@
     - [借用两规则 {#借用两规则}](#借用两规则-借用两规则)
     - [生命周期关系 {#生命周期关系}](#生命周期关系-生命周期关系)
   - [核心定理 (Core Theorems) {#核心定理-core-theorems}](#核心定理-core-theorems-核心定理-core-theorems)
-  - [Send与Sync矩阵 {#send与sync矩阵}](#send与sync矩阵-send与sync矩阵)
+  - [Send（Send）与Sync矩阵 {#send与sync矩阵}](#send与sync矩阵-send与sync矩阵)
   - [型变规则 (Variance) {#型变规则-variance}](#型变规则-variance-型变规则-variance)
   - [分布式模式速查 {#分布式模式速查}](#分布式模式速查-分布式模式速查)
   - [常见错误与修复 {#常见错误与修复}](#常见错误与修复-常见错误与修复)
@@ -106,7 +106,7 @@ let len = calculate_length(&s1);  // 借用s1
 
 | 规则 | 说明 | 代码 |
 | :--- | :--- | :--- |
-| R1 | 可多不可变借用 | `let r1 = &s; let r2 = &s;` |
+| R1 | 可多不可变借用（Mutable Borrow） | `let r1 = &s; let r2 = &s;` |
 | R2 | 仅一可变借用 | `let r = &mut s;` |
 | R3 | 不可共存 | `&s` 和 `&mut s` 不能同时 |
 
@@ -140,7 +140,7 @@ struct Parser<'a> { input: &'a str }
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. 每个引用参数有自己的生命周期
+1. 每个引用（Reference）参数有自己的生命周期
 2. 单一输入 → 应用到输出
 3. `&self` → 应用到输出
 
@@ -215,7 +215,7 @@ struct Parser<'a> { input: &'a str }
 
 | 模式 | 用途 | Rust特色 |
 | :--- | :--- | :--- |
-| Factory | 对象创建 | 结合泛型 |
+| Factory | 对象创建 | 结合泛型（Generics） |
 | Builder | 复杂构造 | 消费式builder |
 | Singleton | 唯一实例 | `LazyLock` |
 
@@ -267,7 +267,7 @@ unsafe {
 | 裸指针解引用 | 指针有效 | `*ptr` |
 | `transmute` | 布局兼容 | `mem::transmute` |
 | `static mut` | 同步访问 | `unsafe { STATIC }` |
-| FFI调用 | C契约满足 | `extern "C"` |
+| FFI（FFI）调用 | C契约满足 | `extern "C"` |
 
 ---
 
@@ -418,7 +418,7 @@ T: 'a   →  T中所有引用存活至少 'a
 | 定理 | 陈述 | 直觉 |
 | :--- | :--- | :--- |
 | **T-OW2** | 每个值只有一个所有者 | 防止重复释放 |
-| **T-BR1** | 借用检查通过 ⇒ 无数据竞争 | 编译时并发安全 |
+| **T-BR1** | 借用检查通过 ⇒ 无数据竞争 | 编译时并发安全（Concurrency Safety） |
 | **T-TY3** | 良类型程序不会崩溃 | 类型即证明 |
 | **T-LF2** | 引用不活得比数据长 | 防止悬垂指针 |
 
@@ -432,12 +432,12 @@ T: 'a   →  T中所有引用存活至少 'a
 | :--- | :--- | :--- | :--- |
 | `T` | ✅(若T:Send) | ✅(若T:Sync) | 普通类型 |
 | `&T` | ✅(若T:Sync) | ✅(若T:Sync) | 共享引用 |
-| `&mut T` | ✅(若T:Send) | ✅(若T:Sync) | 可变引用 |
+| `&mut T` | ✅(若T:Send) | ✅(若T:Sync) | 可变引用（Mutable Reference） |
 | `Box<T>` | ✅ | ✅(若T:Sync) | 堆分配 |
 | `Rc<T>` | ❌ | ❌ | 单线程引用计数 |
 | `Arc<T>` | ✅ | ✅(若T:Sync) | 多线程引用计数 |
 | `Cell<T>` | ✅ | ❌ | 内部可变性 |
-| `RefCell<T>` | ✅ | ❌ | 运行时借用检查 |
+| `RefCell<T>` | ✅ | ❌ | 运行时（Runtime）借用检查 |
 | `Mutex<T>` | ✅ | ✅ | 互斥锁 |
 | `RwLock<T>` | ✅ | ✅ | 读写锁 |
 
@@ -468,7 +468,7 @@ T: 'a   →  T中所有引用存活至少 'a
 
 | 模式 | 问题 | 解决方案 | Rust实现 |
 | :--- | :--- | :--- | :--- |
-| **Saga** | 长事务 | 分解+补偿 | Result链+回滚函数 |
+| **Saga** | 长事务 | 分解+补偿 | Result（Result）链+回滚函数 |
 | **CQRS** | 读写冲突 | 分离读写模型 | Event Store + 投影 |
 | **Circuit Breaker** | 级联故障 | 快速失败 | 状态机+错误计数 |
 | **Bulkhead** | 资源耗尽 | 资源隔离 | Semaphore/semaphore |

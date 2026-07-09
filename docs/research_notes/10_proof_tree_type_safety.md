@@ -27,9 +27,9 @@
   - [🌿 证明树结构 {#证明树结构}](#-证明树结构-证明树结构)
   - [📋 关键引理 {#关键引理}](#-关键引理-关键引理)
     - [Lemma 1: 替换保持类型 (Substitution) {#lemma-1-替换保持类型-substitution}](#lemma-1-替换保持类型-substitution-lemma-1-替换保持类型-substitution)
-    - [Lemma 2: 模式匹配保持类型 {#lemma-2-模式匹配保持类型}](#lemma-2-模式匹配保持类型-lemma-2-模式匹配保持类型)
+    - [Lemma 2: 模式匹配（Pattern Matching）保持类型 {#lemma-2-模式匹配保持类型}](#lemma-2-模式匹配保持类型-lemma-2-模式匹配保持类型)
   - [🎯 Rust 代码验证 {#rust-代码验证}](#-rust-代码验证-rust-代码验证)
-  - [📊 类型系统规则 {#类型系统规则}](#-类型系统规则-类型系统规则)
+  - [📊 类型系统（Type System）规则 {#类型系统规则}](#-类型系统规则-类型系统规则)
   - [📊 证明复杂度 {#证明复杂度}](#-证明复杂度-证明复杂度)
   - [🔗 相关证明 {#相关证明}](#-相关证明-相关证明)
   - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
@@ -323,8 +323,8 @@ fn type_safety_theorem() {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [所有权证明树](10_proof_tree_ownership.md)
-- [借用证明树](10_proof_tree_borrow.md)
+- [所有权（Ownership）证明树](10_proof_tree_ownership.md)
+- [借用（Borrowing）证明树](10_proof_tree_borrow.md)
 - [类型系统基础](type_theory/10_type_system_foundations.md)
 
 ---

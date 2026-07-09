@@ -326,7 +326,7 @@ criterion_main!(benches);
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| Send/Sync 形式化 | 并发安全形式化 | 10_send_sync_formalization.md (研究笔记) |
+| Send/Sync 形式化 | 并发安全（Concurrency Safety）形式化 | 10_send_sync_formalization.md (研究笔记) |
 
 ---
 

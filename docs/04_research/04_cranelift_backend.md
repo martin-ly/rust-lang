@@ -46,7 +46,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**Cranelift** 是一个模块化的代码生成器（code generator），最初由 Mozilla 的 Wasmtime 团队开发，用于将 WebAssembly 编译为机器码。与 LLVM 不同，Cranelift 专注于：
+**Cranelift** 是一个模块（Module）化的代码生成器（code generator），最初由 Mozilla 的 Wasmtime 团队开发，用于将 WebAssembly 编译为机器码。与 LLVM 不同，Cranelift 专注于：
 
 - **快速编译**: 牺牲部分极致优化，换取显著更快的编译速度
 - **增量编译友好**: 更适合开发迭代场景
@@ -120,7 +120,7 @@ Standard (LLVM backend):           Cranelift backend:
 
 | 维度 | LLVM | Cranelift |
 |------|------|-----------|
-| **主要目标** | 极致的运行时性能 | 快速的编译时间 |
+| **主要目标** | 极致的运行时（Runtime）性能 | 快速的编译时间 |
 | **优化深度** | 多轮、跨模块、LTO | 基础块级别、轻量 |
 | **内存占用** | 高 (编译时) | 低 (编译时) |
 | **启动时间** | 较慢 | 快 |
@@ -158,7 +158,7 @@ Standard (LLVM backend):           Cranelift backend:
 | 大型 workspace | 45s | 28s | **38%** |
 | 典型 Web 服务 | 15s | 9.5s | **37%** |
 
-> ⚠️ **注意**: 实际提升幅度取决于代码特征。大量泛型代码的提升更明显（因为 Cranelift 减少了 monomorphization 后的优化时间）。
+> ⚠️ **注意**: 实际提升幅度取决于代码特征。大量泛型（Generics）代码的提升更明显（因为 Cranelift 减少了 monomorphization 后的优化时间）。
 
 ---
 

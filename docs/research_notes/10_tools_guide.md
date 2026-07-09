@@ -124,7 +124,7 @@ cargo prusti
 cargo prusti --file src/lib.rs
 ```
 
-**与形式化衔接**：Prusti 可验证 [ownership_model](formal_methods/10_ownership_model.md) 定理 T2（移动语义）、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 定理 T1（借用规则）；`#[requires]`/`#[ensures]` 对应前置/后置条件。
+**与形式化衔接**：Prusti 可验证 [ownership_model](formal_methods/10_ownership_model.md) 定理 T2（移动语义）、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 定理 T1（借用（Borrowing）规则）；`#[requires]`/`#[ensures]` 对应前置/后置条件。
 
 **版本与官方资源**:
 
@@ -739,7 +739,7 @@ rust-analyzer 通常在 IDE 中自动使用，提供：
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-**用途**: 宏展开工具
+**用途**: 宏（Macro）展开工具
 
 **安装**:
 
@@ -813,7 +813,7 @@ cargo expand > expanded.rs
 - [研究方法论](10_research_methodology.md) - 研究方法概述
 - [实验研究索引](experiments/README.md) - 实验研究工具
 - [形式化方法索引](formal_methods/README.md) - 形式化工具
-- [Rust 异步编程](https://rust-lang.github.io/async-book/)
+- [Rust 异步（Async）编程](https://rust-lang.github.io/async-book/)
 - [Rust 性能指南](https://nnethercote.github.io/perf-book/)
 
 ## 📚 Cargo Book 与 rustc dev guide 权威章节 {#cargo-book-与-rustc-dev-guide-权威章节}
@@ -840,8 +840,8 @@ cargo expand > expanded.rs
 | 编译器概览 | [overview.html](https://rustc-dev-guide.rust-lang.org/overview.html) | 编译管线与查询系统 |
 | HIR | [hir.html](https://rustc-dev-guide.rust-lang.org/hir.html) | 高级中间表示 |
 | MIR | [mir/index.html](https://rustc-dev-guide.rust-lang.org/mir/index.html) | 中阶中间表示，借用检查与优化的基础 |
-| 借用检查 | [borrow_check.html](https://rustc-dev-guide.rust-lang.org/borrow_check.html) | NLL/Polonius 与生命周期检查 |
-| 类型推断（Type Inference） | [type-inference.html](https://rustc-dev-guide.rust-lang.org/type-inference.html) | 类型系统实现 |
+| 借用检查 | [borrow_check.html](https://rustc-dev-guide.rust-lang.org/borrow_check.html) | NLL/Polonius 与生命周期（Lifetimes）检查 |
+| 类型推断（Type Inference） | [type-inference.html](https://rustc-dev-guide.rust-lang.org/type-inference.html) | 类型系统（Type System）实现 |
 | trait 系统 | [traits/resolution.html](https://rustc-dev-guide.rust-lang.org/traits/resolution.html) | trait 解析与 coherence |
 | 代码生成 | [backend/index.html](https://rustc-dev-guide.rust-lang.org/overview.html) | LLVM 后端与目标平台 |
 | Miri | [miri.html](https://rustc-dev-guide.rust-lang.org/miri.html) | Miri 解释器架构 |

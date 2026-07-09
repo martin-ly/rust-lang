@@ -2,7 +2,7 @@
 
 > **EN**: Module Safety Abstraction
 > **Summary**: 模块系统与安全抽象边界 Module Safety Abstraction.
-> **概念族**: 形式化模块
+> **概念族**: 形式化模块（Module）
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -45,11 +45,11 @@
 
 | 术语 | 定义 |
 | :--- | :--- |
-| **安全抽象边界** | 模块（Module）/类型的可见性边界使得外部代码无法直接破坏内部不变式，unsafe 代码可以在边界内依赖这些不变式，而 safe 接口承诺在任意 safe 使用下保持内存安全。 |
-| **Encapsulation（封装）** | 通过私有字段/模块隐藏实现细节，仅暴露必要接口。Rust 中封装由 visibility 系统强制执行，是类型系统之外的安全基础。 |
-| **内部可变性（Interior Mutability）** | 在不可变引用持有期间仍能修改数据的能力，通过 `UnsafeCell`、`Cell`、`RefCell`、`Mutex`、`RwLock`、`Atomic*` 等类型实现。 |
+| **安全抽象边界** | 模块（Module）/类型的可见性边界使得外部代码无法直接破坏内部不变式，unsafe 代码可以在边界内依赖这些不变式，而 safe 接口承诺在任意 safe 使用下保持内存安全（Memory Safety）。 |
+| **Encapsulation（封装）** | 通过私有字段/模块隐藏实现细节，仅暴露必要接口。Rust 中封装由 visibility 系统强制执行，是类型系统（Type System）之外的安全基础。 |
+| **内部可变性（Interior Mutability）** | 在不可变引用（Mutable Reference）持有期间仍能修改数据的能力，通过 `UnsafeCell`、`Cell`、`RefCell`、`Mutex`、`RwLock`、`Atomic*` 等类型实现。 |
 | **Unsafe Boundary** | safe API 与 unsafe 实现之间的分界线。调用 safe API 的代码无需 `unsafe` 块，但实现者必须在私有代码中保证 unsafe 约束。 |
-| **Invariant** | 数据类型在运行时必须保持的性质。私有字段和私有函数是维护 invariant 的关键机制，因为外部代码无法绕过公共方法修改状态。 |
+| **Invariant** | 数据类型在运行时（Runtime）必须保持的性质。私有字段和私有函数是维护 invariant 的关键机制，因为外部代码无法绕过公共方法修改状态。 |
 
 > **来源:** [Rustonomicon – Safe Abstraction](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html)
 >
@@ -91,9 +91,9 @@ Crate 安全边界
 
 **关键关系：**
 
-1. **可见性是安全的“软边界”**：Rust 借用检查器不直接检查可见性，但可见性限制了哪些代码能构造或破坏类型的内部状态，从而间接保证 unsafe 代码所依赖的 invariant。
+1. **可见性是安全的“软边界”**：Rust 借用（Borrowing）检查器不直接检查可见性，但可见性限制了哪些代码能构造或破坏类型的内部状态，从而间接保证 unsafe 代码所依赖的 invariant。
 2. **Safe API = 公开接口 + unsafe 实现隐藏**：只要公开方法内部正确使用 unsafe，且私有字段不可被外部直接修改，safe 调用者就无法触发未定义行为。
-3. **内部可变性类型依赖封装**：`RefCell` 的 borrow flag、`Rc` 的引用计数等关键状态都是私有字段；如果外部可直接写入，将破坏运行时 borrow 规则或导致 use-after-free。
+3. **内部可变性类型依赖封装**：`RefCell` 的 borrow flag、`Rc` 的引用（Reference）计数等关键状态都是私有字段；如果外部可直接写入，将破坏运行时 borrow 规则或导致 use-after-free。
 
 > **来源:** [Rustonomicon – Working With Unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html)
 

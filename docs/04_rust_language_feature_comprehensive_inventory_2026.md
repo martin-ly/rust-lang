@@ -24,8 +24,8 @@
 > 经代码验证，本梳理文档初稿（v1.0）存在系统性低估：
 >
 > - `crates/*/src/rust_195_features.rs` **已全部存在且测试通过**（672 tests），初稿误判为"完全缺失"
-> - 真实缺口不在 1.95 stable 特性，而在 **nightly 预研模块**、**嵌入式前沿框架**（Embassy/RTIC）和**版本索引的及时更新**
-> - 本次修订已更新对称差分析、修正任务状态、补充新创建模块引用
+> - 真实缺口不在 1.95 stable 特性，而在 **nightly 预研模块（Module）**、**嵌入式前沿框架**（Embassy/RTIC）和**版本索引的及时更新**
+> - 本次修订已更新对称差分析、修正任务状态、补充新创建模块引用（Reference）
 >
 > **执行成果**: 阶段一~四核心任务已完成，新增代码/文档 8 个文件，编译验证通过。
 
@@ -201,13 +201,13 @@ B = 本项目现有知识集合
 |------|---------|-----------|------|
 | `if let` guards on match arms | 控制流/模式匹配（Pattern Matching） | c03_control_fn | ✅ 已覆盖（437行模块+知识库文档） |
 | `cfg_select!` 宏 | 元编程/条件编译 | c11_macro_system_proc | ✅ 已覆盖（303行模块+知识库文档） |
-| `core::range` / `RangeInclusive` | 类型系统（Type System）/迭代器 | c02_type_system | ✅ 已覆盖（619行模块+知识库文档） |
+| `core::range` / `RangeInclusive` | 类型系统（Type System）/迭代器（Iterator） | c02_type_system | ✅ 已覆盖（619行模块+知识库文档） |
 | `Atomic*::update` / `try_update` | 并发/原子操作（Atomic Operations） | c05_threads | ✅ 已覆盖（469行模块） |
 | `core::hint::cold_path` | 性能/分支预测 | c05_threads | ✅ 已覆盖（已集成） |
 | `as_ref_unchecked` / `as_mut_unchecked` | Unsafe/裸指针 | c13_embedded | ✅ 已覆盖（393行模块） |
 | `MaybeUninit<[T; N]>` ↔ 数组互转 | 内存安全（Memory Safety）/初始化 | c01_ownership | ✅ 已覆盖（635行模块） |
 | `bool: TryFrom<{integer}>` | 类型转换 | c03_control_fn | ✅ 已覆盖（已集成） |
-| `Cell<[T; N]>` AsRef | 内存安全 | c01_ownership | ✅ 已覆盖（已集成） |
+| `Cell<[T; N]>` AsRef | 内存安全（Memory Safety） | c01_ownership | ✅ 已覆盖（已集成） |
 
 #### 🔴 P0 — 异步范式层（改变编程心智模型） {#p0-异步范式层改变编程心智模型}
 
@@ -247,7 +247,7 @@ B = 本项目现有知识集合
 
 | 特性 | 认知维度 | 归属 Crate | 紧迫度 |
 |------|---------|-----------|--------|
-| `use<..>` precise capturing | 生命周期/泛型（Generics） | c04_generic | 🟡 高 |
+| `use<..>` precise capturing | 生命周期（Lifetimes）/泛型（Generics） | c04_generic | 🟡 高 |
 | Cargo Script / Frontmatter | 工具链/脚本 | 全局 | 🟡 高 |
 | Safety Tags | Unsafe/安全标注 | c01_ownership | 🟡 高 |
 | 并行前端编译 (`-Z threads=N`) | 构建优化 | docs/06_toolchain | 🟢 中 |
@@ -260,7 +260,7 @@ B = 本项目现有知识集合
 
 | 内容 | 位置 | 问题 | 处理建议 |
 |------|------|------|---------|
-| async-std [已归档] 运行时示例 | c06_async/src/async_std/ | 2025年3月已归档 | ✅ 已有归档说明+迁移对照表 |
+| async-std [已归档] 运行时（Runtime）示例 | c06_async/src/async_std/ | 2025年3月已归档 | ✅ 已有归档说明+迁移对照表 |
 | 旧 WASI 目标 | c12_wasm | `wasm32-wasip1` → `wasm32-wasip1` 已全量替换 | ✅ 代码/脚本/文档已更新 |
 | `static mut` 引用示例 | c05_threads, c13_embedded | 2024 Edition deny-by-default | ✅ 已迁移至 AtomicUsize/UnsafeCell |
 | 旧版 `async_trait` 依赖 | c10_networks | Axum 0.8+ 在泛型/`impl Trait` 场景已不需要；`dyn Trait` 仍需 `async_trait` | ⏳ 待评估（c10已有AFIT示例） |
@@ -697,7 +697,7 @@ graph TD
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-**What**: Rust 1.95.0 稳定了 match arm 上的 `if let` guards，允许在模式匹配的分支 guard 中进行嵌套模式匹配，
+**What**: Rust 1.95.0 稳定了 match arm 上的 `if let` guards，允许在模式匹配（Pattern Matching）的分支 guard 中进行嵌套模式匹配，
 解决了过去需要嵌套 `match` 或 `if let` + `if let` 的冗长问题。
 
 **How**:
@@ -1215,7 +1215,7 @@ fn optimistic_update<T>(ptr: &AtomicPtr<T>, new: Box<T>) -> Option<Box<T>> {
 }
 ```
 
-**When/Where**: 错误处理分支、panic 路径、罕见边界条件、并发竞争失败路径。
+**When/Where**: 错误处理（Error Handling）分支、panic 路径、罕见边界条件、并发竞争失败路径。
 
 **What not (反例)**:
 
@@ -1591,7 +1591,7 @@ Not:    不是用户态程序！没有 std，没有 libc，只有 core/alloc
 **认知必要性**:
 
 - 可观测性、网络安全、性能分析的核心技术
-- Rust 的零成本抽象完美契合 eBPF 的资源约束
+- Rust 的零成本抽象（Zero-Cost Abstraction）完美契合 eBPF 的资源约束
 
 **预研知识单元**:
 
@@ -1775,7 +1775,7 @@ unsafe fn new_style(ptr: *mut u8) {
 }
 ```
 
-**影响**: 所有涉及 `unsafe fn` 的设计模式（FFI wrapper、原始指针封装）都需要更新示例。
+**影响**: 所有涉及 `unsafe fn` 的设计模式（FFI wrapper、原始指针（Raw Pointer）封装）都需要更新示例。
 
 ### 09.4 权威来源对齐 {#094-权威来源对齐}
 
@@ -2494,7 +2494,7 @@ docs/01_core/
 
 | 论文/来源 | 会议/年份 | 相关概念 |
 |----------|----------|---------|
-| Tree Borrows | PLDI 2025 | 所有权（Ownership）、借用检查器 |
+| Tree Borrows | PLDI 2025 | 所有权（Ownership）、借用（Borrowing）检查器 |
 | Aliasing Mutation | POPL 2026 | 内存模型 |
 | RustBelt | ICFP 2018 | 形式化验证 |
 | Stacked Borrows (过时) | POPL 2019 | 历史参考 |

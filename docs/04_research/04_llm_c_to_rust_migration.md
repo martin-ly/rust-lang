@@ -55,7 +55,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 将 C/C++ 代码迁移到 Rust 是工业界和学术界共同关注的重要课题。
-Rust 的内存安全保证可以消除 C/C++ 中常见的内存漏洞（如缓冲区溢出、Use-After-Free、Double-Free），但手动迁移成本极高。
+Rust 的内存安全（Memory Safety）保证可以消除 C/C++ 中常见的内存漏洞（如缓冲区溢出、Use-After-Free、Double-Free），但手动迁移成本极高。
 
 本报告系统评估当前主流迁移工具，特别关注 **LLM 辅助翻译** 的最新进展。
 
@@ -160,7 +160,7 @@ pub unsafe extern "C" fn create_array(n: libc::c_int) -> *mut libc::c_int {
 | 局限 | 说明 |
 |------|------|
 | **unsafe 泛滥** | 翻译后的代码几乎完全在 `unsafe` 块中，失去 Rust 的安全优势 |
-| **无自动重构** | 不会将原始指针转换为 `Box`/`Vec`/`&mut` |
+| **无自动重构** | 不会将原始指针（Raw Pointer）转换为 `Box`/`Vec`/`&mut` |
 | **C 限定** | 不支持 C++ (类、模板、异常等) |
 | **依赖保留** | 翻译后的代码仍依赖 libc |
 | **人工后处理** | 需要大量手动重构才能达到地道 Rust |
@@ -326,7 +326,7 @@ SafeNet 架构:
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - **核心方法**: 生成 → 编译检查 → 错误反馈 → 重生成 的迭代循环
-- **创新点**: 利用 Rust 类型系统信息指导 LLM 修复
+- **创新点**: 利用 Rust 类型系统（Type System）信息指导 LLM 修复
 - **结果**: 编译通过率从 45% 提升至 82%
 
 #### C. "SafeTrans: Safety-Aware C-to-Rust Translation using LLMs" (ICSE 2025) {#c-safetrans-safety-aware-c-to-rust-translation-using-llms-icse-2025}
@@ -412,7 +412,7 @@ Phase 4: 工程化
 | **In Rust We Trust** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ | ❌ | 需要验证的高可靠场景 |
 | **SafeNet** | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ❌ | 研究/实验性项目 |
 | **纯 LLM (GPT-4)** | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⚠️ | 辅助理解/小函数翻译 |
-| **LLM + 反馈循环** | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⚠️ | 中等规模模块迁移 |
+| **LLM + 反馈循环** | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⚠️ | 中等规模模块（Module）迁移 |
 | **人工迁移** | ⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ✅ | 核心安全组件 |
 
 ### 6.2 场景化推荐 {#62-场景化推荐}
@@ -458,7 +458,7 @@ c2rust transpile compile_commands.json
 
 - 使用 LLM 生成对比版本
 - 手动分析 Rust 版本的优势
-- 理解所有权转换的逻辑
+- 理解所有权（Ownership）转换的逻辑
 
 ### 6.3 成本估算 {#63-成本估算}
 >

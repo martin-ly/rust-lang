@@ -76,7 +76,7 @@
 | 反模式 | 来源 | 项目文档 | 备注 |
 |--------|------|----------|------|
 | 全局可变状态 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §1 | 单例反模式 |
-| 过度泛型化 | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §6 | 类型参数过多 |
+| 过度泛型（Generics）化 | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §6 | 类型参数过多 |
 | 滥用内部可变性 | [Rustonomicon](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §3 | RefCell 过度使用 |
 
 ---
@@ -87,7 +87,7 @@
 |----------|----------|----------|
 | [01_design_patterns_formal/README.md](software_design_theory/01_design_patterns_formal/README.md) | GoF 23 + Rust 特化 | GoF、Refactoring Guru |
 | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) | 单例、Observer、Builder、内部可变性、Deref、过度泛型 | API Guidelines、Rustonomicon、Design Patterns |
-| [06_rust_idioms.md](software_design_theory/06_rust_idioms.md) | RAII、Newtype、迭代器惯用法 | Rust Book、API Guidelines |
+| [06_rust_idioms.md](software_design_theory/06_rust_idioms.md) | RAII、Newtype、迭代器（Iterator）惯用法 | Rust Book、API Guidelines |
 | [07_anti_patterns.md](software_design_theory/07_anti_patterns.md) | 反模式合集 | Rust Design Patterns |
 
 ---

@@ -207,7 +207,7 @@ pub struct Cell {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-Ratatui 的 `Widget` trait 是**消费型 trait** (consuming trait)，即 `render` 方法获取 `self` 的所有权：
+Ratatui 的 `Widget` trait 是**消费型 trait** (consuming trait)，即 `render` 方法获取 `self` 的所有权（Ownership）：
 
 ```rust,ignore
 pub trait Widget {
@@ -270,7 +270,7 @@ frame.render_stateful_widget(list, area, &mut list_state);
 
 - `State` 被定义为关联类型，编译期确定每个 widget 对应的状态类型
 - `&mut Self::State` 确保状态可变，同时与 widget 的**消费语义**分离
-- 用户必须在应用层管理 `State` 的生命周期，Ratatui 不隐式保存任何状态
+- 用户必须在应用层管理 `State` 的生命周期（Lifetimes），Ratatui 不隐式保存任何状态
 
 > [来源: Ratatui StatefulWidget Docs](https://docs.rs/ratatui/latest/ratatui/widgets/trait.StatefulWidget.html)
 
@@ -303,7 +303,7 @@ let layout = Layout::default()
 // layout[0], layout[1], layout[2], layout[3] 是互不重叠的 Rect
 ```
 
-**运行时保证**：
+**运行时（Runtime）保证**：
 
 - `split()` 在运行时求解约束系统，返回的 `Rect` 数组满足：
   - 总面积等于父 `Rect` 面积（无溢出、无遗漏）
@@ -481,7 +481,7 @@ fn test_ui_renders_correctly() {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-Ratatui 本身不提供事件循环，但与 Tokio / `crossterm` 的异步事件流无缝集成：
+Ratatui 本身不提供事件循环，但与 Tokio / `crossterm` 的异步（Async）事件流无缝集成：
 
 ```rust,ignore
 use tokio::time::{interval, Duration};

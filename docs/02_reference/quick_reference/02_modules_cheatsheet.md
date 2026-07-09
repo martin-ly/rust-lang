@@ -1,7 +1,7 @@
 # 📦 Rust 模块系统速查卡 {#rust-模块系统速查卡}
 
 > **EN**: Modules Cheatsheet
-> **Summary**: 📦 Rust 模块系统速查卡 Modules Cheatsheet. (stub/archive redirect)
+> **Summary**: 📦 Rust 模块（Module）系统速查卡 Modules Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **快速参考**
 > | [Cargo/包索引（已归档）](../../../archive/cargo_package_management_from_c02/00_INDEX.md)
@@ -786,7 +786,7 @@ mod inner {
 - [Cargo 包管理与模块索引（已归档）](../../../archive/cargo_package_management_from_c02/00_INDEX.md)
 - [Workspace 模块示例：控制流与函数模块 README](../../../crates/c03_control_fn/README.md)
 - [Workspace 模块示例：线程与并发模块 README](../../../crates/c05_threads/README.md)
-- [Workspace 模块示例：类型系统模块 README](../../../crates/c02_type_system/README.md)
+- [Workspace 模块示例：类型系统（Type System）模块 README](../../../crates/c02_type_system/README.md)
 
 ## 🧩 相关示例代码 {#相关示例代码}
 >
@@ -824,8 +824,8 @@ mod inner {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [所有权系统速查卡](02_ownership_cheatsheet.md) - 模块中的所有权规则
-- [错误处理速查卡](02_error_handling_cheatsheet.md) - 模块中的错误处理
+- [所有权（Ownership）系统速查卡](02_ownership_cheatsheet.md) - 模块中的所有权规则
+- [错误处理（Error Handling）速查卡](02_error_handling_cheatsheet.md) - 模块中的错误处理
 - [测试速查卡](02_testing_cheatsheet.md) - 模块测试
 
 ---

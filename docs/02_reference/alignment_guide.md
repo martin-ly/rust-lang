@@ -374,7 +374,7 @@ struct CacheLinePadded {
 ## 六、权威来源（非技术对齐） {#六权威来源非技术对齐}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **说明**：此处「对齐」指项目文档与官方发布的一致性，与内存对齐无技术关联。技术读者可跳过。
+> **说明**：此处「对齐」指项目文档与官方发布的一致性（Coherence），与内存对齐无技术关联。技术读者可跳过。
 
 版本追踪与权威来源： [版本对齐检查清单](../00_meta/00_rust_version_alignment_checklist.md)、[INCREMENTAL_UPDATE_FLOW](../../archive/research_notes_2026_06_25/10_incremental_update_flow.md)。
 
@@ -415,7 +415,7 @@ struct CacheLinePadded {
 | 主题 | 路径 |
 | :--- | :--- | :--- | :--- | :--- |
 | 性能优化参考 | [c01/tier_03/09_性能优化参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/09_performance_optimization_reference.md) |
-| 内存安全参考 | [c01/tier_03/08_内存安全参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/08_memory_safety_reference.md) |
+| 内存安全（Memory Safety）参考 | [c01/tier_03/08_内存安全参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/08_memory_safety_reference.md) |
 | 缓存行对齐 | [c05/02_系统编程优化](../../crates/c05_threads/docs/tier_04_advanced/02_systems_programming_optimization.md#51-缓存行对齐) |
 | 无锁编程 | [c05/04_lock_free_programming](../../crates/c05_threads/docs/04_lock_free_programming.md) |
 | 格式化对齐 | [strings_formatting_cheatsheet](quick_reference/02_strings_formatting_cheatsheet.md) |
@@ -427,7 +427,7 @@ struct CacheLinePadded {
 | 模块（Module） | 示例 |
 | :--- | :--- | :--- | :--- | :--- |
 | c02 | `memory_safety_advanced`、`rust_192_features_demo` 对齐计算 |
-| c04 | `rust_192_features_demo` 泛型对齐大小 |
+| c04 | `rust_192_features_demo` 泛型（Generics）对齐大小 |
 | c05 | 并行算法中的缓存行对齐；`benches/false_sharing_bench` 伪共享基准 |
 | c08 | `rust_192_features` align_size |
 

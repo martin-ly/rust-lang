@@ -5,7 +5,7 @@
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
 > **Bloom 层级**: L5-L6 (分析/评价)
-> **概念族**: 形式化模块 / 反例边界
+> **概念族**: 形式化模块（Module） / 反例边界
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **创建日期**: 2026-06-29
@@ -94,7 +94,7 @@ error[E0585]: found a documentation comment that doesn't document anything
 error[E0433]: failed to resolve: use of undeclared crate or module `b`
 ```
 
-或当通过 `use` 引用自身时产生循环引用错误。
+或当通过 `use` 引用（Reference）自身时产生循环引用错误。
 
 ### 根因 {#根因-6}
 
@@ -256,7 +256,7 @@ extern crate serde; // ⚠️ 冗余，Edition 2018+ 通常不需要
 
 仍需 `extern crate` 的场景：
 
-- 宏 crate：`#[macro_use] extern crate lazy_static;`（除非使用 2018+ 的 `use lazy_static::lazy_static;`）。
+- 宏（Macro） crate：`#[macro_use] extern crate lazy_static;`（除非使用 2018+ 的 `use lazy_static::lazy_static;`）。
 - 内建 crate：`extern crate core;` 在某些 `#![no_std]` 边缘场景需要。
 - 重命名：`extern crate foo as bar;`。
 

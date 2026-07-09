@@ -15,12 +15,12 @@
 
 ## 目录 {#目录}
 
-- [类型系统反例边界 {#类型系统反例边界}](#类型系统反例边界-类型系统反例边界)
+- [类型系统（Type System）反例边界 {#类型系统反例边界}](#类型系统反例边界-类型系统反例边界)
   - [目录 {#目录}](#目录-目录)
   - [1. 型变误用：数组与 Vec 的协变差异 {#1-型变误用数组与-vec-的协变差异}](#1-型变误用数组与-vec-的协变差异-1-型变误用数组与-vec-的协变差异)
     - [现象 {#现象-6}](#现象-现象-6)
     - [修复方案 {#修复方案-6}](#修复方案-修复方案-6)
-  - [2. 生命周期子类型误判 {#2-生命周期子类型误判}](#2-生命周期子类型误判-2-生命周期子类型误判)
+  - [2. 生命周期（Lifetimes）子类型误判 {#2-生命周期子类型误判}](#2-生命周期子类型误判-2-生命周期子类型误判)
     - [现象 {#现象-6}](#现象-现象-6-1)
     - [编译器错误 {#编译器错误-3}](#编译器错误-编译器错误-3)
     - [修复方案 {#修复方案-6}](#修复方案-修复方案-6-1)
@@ -126,8 +126,8 @@ error[E0277]: the size for values of type `dyn Trait` cannot be known at compila
 
 ### 修复方案 {#修复方案-6}
 
-- 使用引用/智能指针（Smart Pointer）：`&dyn Trait`、`Box<dyn Trait>`、`Rc<dyn Trait>`、`Arc<dyn Trait>`。
-- 或改用泛型 `fn take<T: Trait>(obj: T)`。
+- 使用引用（Reference）/智能指针（Smart Pointer）：`&dyn Trait`、`Box<dyn Trait>`、`Rc<dyn Trait>`、`Arc<dyn Trait>`。
+- 或改用泛型（Generics） `fn take<T: Trait>(obj: T)`。
 
 ---
 
@@ -238,7 +238,7 @@ error[E0184]: the trait `Copy` may not be implemented for this type; the type im
 ### 修复方案 {#修复方案-6}
 
 - 移除 `Copy`，仅保留 `Clone`（若需深拷贝）。
-- 使用 `Rc`/`Arc` 共享所有权。
+- 使用 `Rc`/`Arc` 共享所有权（Ownership）。
 
 ---
 
@@ -246,7 +246,7 @@ error[E0184]: the trait `Copy` may not be implemented for this type; the type im
 
 | 反例 | 涉及概念 | 典型错误码 | 修复方向 |
 |------|----------|------------|----------|
-| 型变误用 | 型变、子类型 | E0308 / E0623 | 切片转换、显式收集 |
+| 型变误用 | 型变、子类型 | E0308 / E0623 | 切片（Slice）转换、显式收集 |
 | 生命周期子类型误判 | 生命周期、子类型 | lifetime mismatch | 生命周期约束 `'b: 'a` |
 | `dyn Trait` 大小不固定 | trait 对象 | E0277 | `Box<dyn Trait>` / 泛型（Generics） |
 | `impl Trait` 类型隐藏 | 抽象返回类型 | — | `Box<dyn Trait>` / 具体类型 |

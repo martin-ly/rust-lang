@@ -111,7 +111,7 @@ mindmap
 
 | 层次 | 概念定义 | 属性关系 | 解释论证 |
 | :--- | :--- | :--- | :--- |
-| **L1 基础** | Send：可跨线程转移所有权 | 公理：T: Send ⟹ 线程间转移安全 | 定理 S1：Send 保证无数据竞争 |
+| **L1 基础** | Send：可跨线程转移所有权（Ownership） | 公理：T: Send ⟹ 线程间转移安全 | 定理 S1：Send 保证无数据竞争 |
 | **L2 共享** | Sync：可跨线程共享引用 | 公理：T: Sync ⟺ &T: Send | 定理 S2：Sync 保证并发读安全 |
 | **L3 同步** | Mutex/RwLock：互斥访问 | 规则：锁保护临界区 | 定理 S3：锁顺序一致则无死锁 |
 | **L4 通信** | Channel：消息传递 | 规则：所有权随消息转移 | 定理 S4：无共享则无数据竞争 |
@@ -678,7 +678,7 @@ thread::spawn(|| {
 });
 ```
 
-**原因**: `thread::spawn` 要求闭包捕获的类型实现 `Send`。
+**原因**: `thread::spawn` 要求闭包（Closures）捕获的类型实现 `Send`。
 
 **修正**:
 
@@ -883,17 +883,17 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 - [执行模型选型决策树](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md#决策树选择执行模型)
 - [并发形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) — Send/Sync trait 形式化定义
 - [状态机形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) — 并发状态机模型
-- 生命周期形式化 — 借用与生命周期
+- 生命周期（Lifetimes）形式化 — 借用（Borrowing）与生命周期
 - [所有权模型](../../research_notes/formal_methods/10_ownership_model.md) — 所有权系统形式化基础
 
 ### 相关速查卡 {#相关速查卡}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-- [异步编程速查卡](02_async_patterns.md) - 异步并发对比
-- [智能指针速查卡](02_smart_pointers_cheatsheet.md) - Arc 和 Mutex
+- [异步（Async）编程速查卡](02_async_patterns.md) - 异步并发对比
+- [智能指针（Smart Pointer）速查卡](02_smart_pointers_cheatsheet.md) - Arc 和 Mutex
 - [所有权系统速查卡](02_ownership_cheatsheet.md) - 所有权与并发
-- [错误处理速查卡](02_error_handling_cheatsheet.md) - 并发错误处理
+- [错误处理（Error Handling）速查卡](02_error_handling_cheatsheet.md) - 并发错误处理
 
 ---
 

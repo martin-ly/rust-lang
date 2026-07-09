@@ -1090,7 +1090,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [类型系统模块（String/&str 相关）](../../../crates/c02_type_system/README.md)
-- [算法模块（字符串算法与数据处理）](../../../crates/c08_algorithms/README.md)
+- [算法模块（Module）（字符串算法与数据处理）](../../../crates/c08_algorithms/README.md)
 - [WASM 模块（Module）（字符串互操作示例）](../../../crates/c12_wasm/README.md)
 
 ## 🧩 相关示例代码 {#相关示例代码}
@@ -1126,8 +1126,8 @@ fn process_logs(logs: &[LogEntry]) -> String {
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [类型系统基础](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) — 字符串类型与类型理论
-- [所有权模型](../../research_notes/formal_methods/10_ownership_model.md) — 字符串所有权转移形式化
-- 生命周期形式化 — 字符串生命周期
+- [所有权（Ownership）模型](../../research_notes/formal_methods/10_ownership_model.md) — 字符串所有权转移形式化
+- 生命周期（Lifetimes）形式化 — 字符串生命周期
 - [构造能力理论](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) — 字符串操作表达能力
 
 ### 相关速查卡 {#相关速查卡}
@@ -1135,7 +1135,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [类型系统速查卡](02_type_system.md) - String 和 &str 类型
-- [集合与迭代器速查卡](02_collections_iterators_cheatsheet.md) - 字符串集合操作
+- [集合与迭代器（Iterator）速查卡](02_collections_iterators_cheatsheet.md) - 字符串集合操作
 - [错误处理速查卡](02_error_handling_cheatsheet.md) - 字符串错误处理
 - [模块系统速查卡](02_modules_cheatsheet.md) - 模块中的字符串处理
 

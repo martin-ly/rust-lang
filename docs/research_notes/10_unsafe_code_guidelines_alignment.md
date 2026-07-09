@@ -19,7 +19,7 @@
   - [目录 {#目录}](#目录-目录)
   - [一、对齐说明 {#一对齐说明}](#一对齐说明-一对齐说明)
   - [二、内存模型 {#二内存模型}](#二内存模型-二内存模型)
-  - [三、所有权与借用 {#三所有权与借用}](#三所有权与借用-三所有权与借用)
+  - [三、所有权（Ownership）与借用（Borrowing） {#三所有权与借用}](#三所有权与借用-三所有权与借用)
   - [四、类型与布局 {#四类型与布局}](#四类型与布局-四类型与布局)
   - [五、并发 {#五并发}](#五并发-五并发)
   - [六、FFI {#六ffi}](#六ffi-六ffi)
@@ -51,7 +51,7 @@
 
 | UCG 主题 | 项目文档 | 状态 | 备注 |
 |-----------|----------|------|------|
-| [References](https://doc.rust-lang.org/nomicon/references.html) | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) §4 | ✅ | 悬垂引用 |
+| [References](https://doc.rust-lang.org/nomicon/references.html) | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) §4 | ✅ | 悬垂引用（Reference） |
 | [Self-referential structs [已失效]]<!-- 原链接: https://doc.rust-lang.org/nomicon/self-referential-structs.html --> | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) §5 | ✅ | 自引用类型 |
 
 ---

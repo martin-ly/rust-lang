@@ -464,8 +464,8 @@ pub fn process_task(task_json: &str) -> String {
 
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
-| **所有权模型** | [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) | WASM 内存安全保证 |
-| **生命周期** | lifetime_formalization | JS 互操作引用有效性 |
+| **所有权（Ownership）模型** | [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) | WASM 内存安全（Memory Safety）保证 |
+| **生命周期（Lifetimes）** | lifetime_formalization | JS 互操作引用（Reference）有效性 |
 | **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | Web Worker 安全 |
 | **类型系统（Type System）** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | JS 绑定类型安全 |
 
@@ -473,7 +473,7 @@ pub fn process_task(task_json: &str) -> String {
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-**定理 WASM-T1（JS 边界安全）**: 若 WASM 模块满足所有权规则，则 JS 互操作无内存不安全。
+**定理 WASM-T1（JS 边界安全）**: 若 WASM 模块（Module）满足所有权规则，则 JS 互操作无内存不安全。
 
 *证明*: 由 [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) 定理 T2/T3，wasm-bindgen 生成的绑定保持所有权语义，JS 侧无法直接访问 Rust 内存。∎
 
@@ -484,7 +484,7 @@ pub fn process_task(task_json: &str) -> String {
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [异步编程速查卡](02_async_patterns.md) - WASM 异步
-- [类型系统速查卡](02_type_system.md) - WASM 类型
+- [类型系统（Type System）速查卡](02_type_system.md) - WASM 类型
 - [错误处理速查卡](02_error_handling_cheatsheet.md) - WASM 错误处理（Error Handling）
 - [测试速查卡](02_testing_cheatsheet.md) - WASM 测试
 - 反模式速查卡 - WASM 反模式

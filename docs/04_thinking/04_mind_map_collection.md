@@ -1105,7 +1105,7 @@ Rust 新特性可扩展思维表征方式：
 `
 ust
 // array_windows 的思维导图节点
-// [数据切片] -> [array_windows<N>] -> [模式匹配（Pattern Matching）]
+// [数据切片（Slice）] -> [array_windows<N>] -> [模式匹配（Pattern Matching）]
 
 // ControlFlow 的决策树
 // [迭代开始] -> [条件检查] -> [Break/Continue]

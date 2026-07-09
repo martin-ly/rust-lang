@@ -17,12 +17,12 @@
 - [代码-文档-形式化完整映射 {#代码-文档-形式化完整映射}](#代码-文档-形式化完整映射-代码-文档-形式化完整映射)
   - [📑 目录 {#目录}](#-目录-目录)
   - [1. 代码到概念的映射 {#1-代码到概念的映射}](#1-代码到概念的映射-1-代码到概念的映射)
-    - [1.1 所有权与移动语义 {#11-所有权与移动语义}](#11-所有权与移动语义-11-所有权与移动语义)
-    - [1.2 借用与引用 {#12-借用与引用}](#12-借用与引用-12-借用与引用)
-    - [1.3 生命周期 {#13-生命周期}](#13-生命周期-13-生命周期)
-    - [1.4 Trait 与泛型 {#14-trait-与泛型}](#14-trait-与泛型-14-trait-与泛型)
+    - [1.1 所有权（Ownership）与移动语义 {#11-所有权与移动语义}](#11-所有权与移动语义-11-所有权与移动语义)
+    - [1.2 借用（Borrowing）与引用（Reference） {#12-借用与引用}](#12-借用与引用-12-借用与引用)
+    - [1.3 生命周期（Lifetimes） {#13-生命周期}](#13-生命周期-13-生命周期)
+    - [1.4 Trait 与泛型（Generics） {#14-trait-与泛型}](#14-trait-与泛型-14-trait-与泛型)
     - [1.5 并发与同步 {#15-并发与同步}](#15-并发与同步-15-并发与同步)
-    - [1.6 错误处理 {#16-错误处理}](#16-错误处理-16-错误处理)
+    - [1.6 错误处理（Error Handling） {#16-错误处理}](#16-错误处理-16-错误处理)
   - [2. 代码到文档的映射 {#2-代码到文档的映射}](#2-代码到文档的映射-2-代码到文档的映射)
     - [2.1 所有权系统文档映射 {#21-所有权系统文档映射}](#21-所有权系统文档映射-21-所有权系统文档映射)
     - [2.2 生命周期文档映射 {#22-生命周期文档映射}](#22-生命周期文档映射-22-生命周期文档映射)
@@ -33,9 +33,9 @@
     - [3.1 所有权转移的形式化 {#31-所有权转移的形式化}](#31-所有权转移的形式化-31-所有权转移的形式化)
     - [3.2 借用的形式化 {#32-借用的形式化}](#32-借用的形式化-32-借用的形式化)
     - [3.3 生命周期的形式化 {#33-生命周期的形式化}](#33-生命周期的形式化-33-生命周期的形式化)
-    - [3.4 类型系统的形式化 {#34-类型系统的形式化}](#34-类型系统的形式化-34-类型系统的形式化)
+    - [3.4 类型系统（Type System）的形式化 {#34-类型系统的形式化}](#34-类型系统的形式化-34-类型系统的形式化)
     - [3.5 并发的形式化 {#35-并发的形式化}](#35-并发的形式化-35-并发的形式化)
-    - [3.6 异步的形式化 {#36-异步的形式化}](#36-异步的形式化-36-异步的形式化)
+    - [3.6 异步（Async）的形式化 {#36-异步的形式化}](#36-异步的形式化-36-异步的形式化)
   - [4. 错误代码映射 {#4-错误代码映射}](#4-错误代码映射-4-错误代码映射)
     - [4.1 所有权错误 (E03xx) {#41-所有权错误-e03xx}](#41-所有权错误-e03xx-41-所有权错误-e03xx)
     - [4.2 借用错误 (E04xx, E05xx) {#42-借用错误-e04xx-e05xx}](#42-借用错误-e04xx-e05xx-42-借用错误-e04xx-e05xx)
@@ -104,9 +104,9 @@
 | :--- | :--- | :--- |
 | `let r = &s;` | 不可变借用（Immutable Borrow） | 只读引用，可同时存在多个 |
 | `let r = &mut s;` | 可变借用（Mutable Borrow） | 独占写引用，同一时刻只能有一个 |
-| `let r: &str = &s[0..5];` | 切片借用 | 借用集合的一部分 |
+| `let r: &str = &s[0..5];` | 切片（Slice）借用 | 借用集合的一部分 |
 | `fn foo(s: &str)` | 借用参数 | 函数接受引用而非所有权 |
-| `fn foo(s: &mut String)` | 可变借用参数 | 函数可以修改传入的值 |
+| `fn foo(s: &mut String)` | 可变借用（Mutable Borrow）参数 | 函数可以修改传入的值 |
 
 ### 1.3 生命周期 {#13-生命周期}
 
@@ -118,7 +118,7 @@
 | :--- | :--- | :--- |
 | `&'a str` | 显式生命周期 | 标注引用的有效范围 |
 | `fn foo<'a>(x: &'a str)` | 生命周期参数 | 泛型生命周期约束 |
-| `struct Foo<'a> { x: &'a str }` | 结构体生命周期 | 结构体包含引用时的生命周期标注 |
+| `struct Foo<'a> { x: &'a str }` | 结构体（Struct）生命周期 | 结构体包含引用时的生命周期标注 |
 | `fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str` | 生命周期选择 | 返回与特定参数相同生命周期的引用 |
 | `&'static str` | 静态生命周期 | 程序整个运行期间有效 |
 
@@ -134,7 +134,7 @@
 | `fn foo<T: Display>(x: T)` | Trait Bound | 约束 `T` 必须实现 `Display` |
 | `fn foo<T>(x: T) where T: Clone` | Where 从句 | 更清晰的多约束写法 |
 | `impl Trait for Type` | Trait 实现 | 为类型实现特定行为 |
-| `dyn Trait` | 动态分发 | 运行时确定具体类型的 Trait 对象 |
+| `dyn Trait` | 动态分发 | 运行时（Runtime）确定具体类型的 Trait 对象 |
 | `impl Trait` | 静态分发 | 编译时确定具体类型的抽象返回 |
 
 ### 1.5 并发与同步 {#15-并发与同步}
@@ -348,7 +348,7 @@
 | :--- | :--- | :--- | :--- | :--- |
 | **E0597** | `{ let s = "x"; r = &s; } use(r);` | 生命周期不足 | [TROUBLESHOOTING](../05_guides/05_troubleshooting_guide.md#2-生命周期错误) | 规则 3 - 借用有效性: Valid(b) <=> Lifetime(b) subset Scope(b) |
 | **E0310** | `fn foo<T>(x: &T)` | 参数生命周期不足 | [C01 生命周期](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 定理 LF-T2 - 引用有效性 |
-| **E0373** | `move \|_\| x` in closure | 闭包生命周期 | [C06 异步（Async）](../02_reference/quick_reference/02_async_patterns.md) | 捕获变量生命周期约束 |
+| **E0373** | `move \|_\| x` in closure | 闭包（Closures）生命周期 | [C06 异步（Async）](../02_reference/quick_reference/02_async_patterns.md) | 捕获变量生命周期约束 |
 
 ### 4.4 类型系统错误 (E02xx, E03xx) {#44-类型系统错误-e02xx-e03xx}
 
@@ -357,10 +357,10 @@
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
 | :--- | :--- | :--- | :--- | :--- |
-| **E0308** | `let x: i32 = "hello";` | 类型不匹配 | [TROUBLESHOOTING](../05_guides/05_troubleshooting_guide.md#3-类型不匹配) | 类型系统一致性: Gamma |- e : tau |
+| **E0308** | `let x: i32 = "hello";` | 类型不匹配 | [TROUBLESHOOTING](../05_guides/05_troubleshooting_guide.md#3-类型不匹配) | 类型系统一致性（Coherence）: Gamma |- e : tau |
 | **E0277** | `fn foo<T>(x: T) { println!("{}", x); }` | Trait Bound 不满足 | [C04 Trait](../02_reference/quick_reference/02_generics_cheatsheet.md) | Trait 约束: Gamma |- T: Trait |
 | **E0282** | `let x = Vec::new();` | 需要类型标注 | [C02 类型推断（Type Inference）](../02_reference/quick_reference/02_type_system.md) | 类型推断规则 |
-| **E0283** | `x.into()` (ambiguous) | 需要更多类型信息 | [C04 泛型](../02_reference/quick_reference/02_generics_cheatsheet.md) | 类型推断冲突 |
+| **E0283** | `x.into()` (ambiguous) | 需要更多类型信息 | [C04 泛型](../02_reference/quick_reference/02_generics_cheatsheet.md) | 类型推断（Type Inference）冲突 |
 | **E0325** | 递归 trait bound | 溢出求值要求 | [C04 泛型](../02_reference/quick_reference/02_generics_cheatsheet.md) | 类型系统一致性 |
 
 ### 4.5 并发错误 (E0xxx) {#45-并发错误-e0xxx}
@@ -402,10 +402,10 @@
 
 | API | 概念 | 使用场景 | 形式化规格 |
 | :--- | :--- | :--- | :--- |
-| `String::from(s)` | 所有权获取 | 从字符串切片创建拥有所有权的 String | String::from: &str -> String && Omega(result) = Owned |
+| `String::from(s)` | 所有权获取 | 从字符串切片（String Slice）创建拥有所有权的 String | String::from: &str -> String && Omega(result) = Owned |
 | `s.clone()` | 深度复制 | 需要独立副本时 | clone: T -> T && T: Clone && Omega(r) = Owned && deep_copy(r, s) |
 | `mem::drop(s)` | 显式释放 | 提前释放资源 | drop: T -> () && Omega(T) = Freed |
-| `mem::replace(&mut T, T)` | 替换值 | 从可变引用取出值并替换 | replace: (&mut T, T) -> T && old_value = return && new_value = *ref |
+| `mem::replace(&mut T, T)` | 替换值 | 从可变引用（Mutable Reference）取出值并替换 | replace: (&mut T, T) -> T && old_value = return && new_value = *ref |
 | `mem::take(&mut T)` | 取出默认值 | 取出值并用 Default 替换 | take: &mut T -> T && T: Default && old = return && *ref = default() |
 
 ### 5.2 借用相关 API {#52-借用相关-api}
@@ -415,7 +415,7 @@
 
 | API | 概念 | 使用场景 | 形式化规格 |
 | :--- | :--- | :--- | :--- |
-| `&T` | 不可变借用 | 只读访问 | borrow: T -> &T && readonly && multiple_allowed |
+| `&T` | 不可变借用（Immutable Borrow） | 只读访问 | borrow: T -> &T && readonly && multiple_allowed |
 | `&mut T` | 可变借用 | 独占写访问 | borrow_mut: T -> &mut T && exclusive && single_allowed |
 | `as_ref()` | 转为引用 | 将容器转为引用 | as_ref: T -> &U && view |
 | `as_mut()` | 转为可变引用 | 将容器转为可变引用 | as_mut: T -> &mut U && mutable_view |

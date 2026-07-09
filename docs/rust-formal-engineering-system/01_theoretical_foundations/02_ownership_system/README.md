@@ -82,8 +82,8 @@ fn demo() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 所有权模型 | 所有权系统的完整形式化模型 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
-| 借用检查器 | 借用检查的形式化证明 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
+| 所有权（Ownership）模型 | 所有权系统的完整形式化模型 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
+| 借用（Borrowing）检查器 | 借用检查的形式化证明 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
 
 ## 更多代码示例 {#更多代码示例}
 

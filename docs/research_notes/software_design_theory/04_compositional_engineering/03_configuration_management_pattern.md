@@ -151,7 +151,7 @@ fn load_config() -> Result<AppConfig, config::ConfigError> {
 - **`required(false)`**：配置文件可选，避免本地开发必须携带配置文件。
 - **`try_parsing(true)`**：自动将环境变量字符串解析为数字、布尔值等类型。
 - **分隔符 `__`**：将扁平环境变量映射到嵌套字段，如 `APP__SERVER__PORT` → `server.port`。
-- **敏感字段**：使用独立结构体 `Secrets` 并通过环境变量单独注入，避免序列化到日志。
+- **敏感字段**：使用独立结构体（Struct） `Secrets` 并通过环境变量单独注入，避免序列化到日志。
 
 ---
 
@@ -260,11 +260,11 @@ let cfg: AppConfig = load_config().unwrap();
 
 | 优先级 | 来源 | 说明 |
 |--------|------|------|
-| P0 | [Rust Reference](https://doc.rust-lang.org/reference/) | `static`、`const`、模块与可见性规则 |
+| P0 | [Rust Reference](https://doc.rust-lang.org/reference/) | `static`、`const`、模块（Module）与可见性规则 |
 | P0 | [Cargo Book – Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html) | Cargo 运行期环境变量约定 |
-| P0 | [The Rust Programming Language](https://doc.rust-lang.org/book/) | 错误处理（Error Handling）、 trait、生命周期基础 |
+| P0 | [The Rust Programming Language](https://doc.rust-lang.org/book/) | 错误处理（Error Handling）、 trait、生命周期（Lifetimes）基础 |
 | P1 | [config crate docs](https://docs.rs/config/latest/config/) | 分层配置 API、环境变量解析 |
-| P1 | [clap docs](https://docs.rs/clap/latest/clap/) | 命令行参数解析与派生宏 |
+| P1 | [clap docs](https://docs.rs/clap/latest/clap/) | 命令行参数解析与派生宏（Macro） |
 | P1 | [envy docs](https://docs.rs/envy/latest/envy/) | 环境变量到结构体反序列化 |
 | P1 | [figment docs](https://docs.rs/figment/latest/figment/) | Profile 化配置组合 |
 | P2 | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | Builder、Strategy、依赖注入等设计模式 |
@@ -280,5 +280,5 @@ let cfg: AppConfig = load_config().unwrap();
 - [01_formal_composition](01_formal_composition.md)：组合工程的形式化定义。
 - [02_effectiveness_proofs](02_effectiveness_proofs.md)：组合有效性定理。
 - [Builder / 类型状态](../01_design_patterns_formal/README.md)：复杂配置对象常使用 Builder 构造。
-- [错误处理](../../10_error_handling_cheatsheet.md)：配置解析失败必须显式处理。
+- [错误处理（Error Handling）](../../10_error_handling_cheatsheet.md)：配置解析失败必须显式处理。
 - [Crate 架构](../07_crate_architectures/00_crate_architecture_master_index.md)：Feature flag 与配置分层共同决定 crate 运行期行为。

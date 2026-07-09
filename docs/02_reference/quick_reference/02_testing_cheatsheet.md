@@ -763,7 +763,7 @@ cargo fuzz run parser_fuzz -- -max_total_time=300
 
 **比例分配**:
 
-| 测试类型 | 比例 | 特点               | 运行时间 |
+| 测试类型 | 比例 | 特点               | 运行时（Runtime）间 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 集成测试 | 20%  | 测试模块交互       | 分钟级   |
 | E2E 测试 | 10%  | 完整用户流程       | 小时级   |
@@ -1713,8 +1713,8 @@ fn broken_test() {
 
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
-| **类型系统** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 测试的类型正确性 |
-| **所有权与借用** | [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md) | 测试中的内存安全 |
+| **类型系统（Type System）** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 测试的类型正确性 |
+| **所有权（Ownership）与借用（Borrowing）** | [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md) | 测试中的内存安全（Memory Safety） |
 | **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 并发测试安全性 |
 | **反模式** | [anti_patterns](../../../archive/research_notes_2026_06_25/software_design_theory/07_anti_patterns.md) | 测试中的常见错误模式 |
 

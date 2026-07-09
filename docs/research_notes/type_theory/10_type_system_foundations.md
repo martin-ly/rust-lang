@@ -12,8 +12,8 @@
 > **层次定位**: L4 形式化 / 类型论基础研究
 > **前置依赖**: [concept L4 类型论](../../../concept/04_formal/00_type_theory/02_type_theory.md) · [concept L2 泛型（Generics）](../../../concept/02_intermediate/01_generics/02_generics.md)
 > **后置延伸**: [ROD 形式语义](../../../archive/rust-ownership-decidability/formal-foundations/README.md) · [concept L7 效果系统](../../../concept/07_future/03_preview_features/04_effects_system.md)
-> **跨层映射**: L4 System F ↔ Rust 泛型 | 研究笔记扩展
-> **定理链编号**: T-130 类型一致性 → T-131 子类型 soundness
+> **跨层映射**: L4 System F ↔ Rust 泛型（Generics） | 研究笔记扩展
+> **定理链编号**: T-130 类型一致性（Coherence） → T-131 子类型 soundness
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-03-11
 > **更新内容**:
@@ -35,7 +35,7 @@
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 >
 
-- [类型系统基础 {#类型系统基础}](#类型系统基础-类型系统基础)
+- [类型系统（Type System）基础 {#类型系统基础}](#类型系统基础-类型系统基础)
   - [📑 目录 {#目录}](#-目录-目录)
   - [🎯 研究目标 {#研究目标}](#-研究目标-研究目标)
     - [核心问题 {#核心问题}](#核心问题-核心问题)
@@ -91,9 +91,9 @@
     - [反例 2: 未绑定变量 {#反例-2-未绑定变量}](#反例-2-未绑定变量-反例-2-未绑定变量)
     - [反例 3: 类型推导冲突（无限类型） {#反例-3-类型推导冲突无限类型}](#反例-3-类型推导冲突无限类型-反例-3-类型推导冲突无限类型)
     - [反例 4: 多态限制违反 {#反例-4-多态限制违反}](#反例-4-多态限制违反-反例-4-多态限制违反)
-    - [反例 5: 类型不安全操作（运行时错误） {#反例-5-类型不安全操作运行时错误}](#反例-5-类型不安全操作运行时错误-反例-5-类型不安全操作运行时错误)
+    - [反例 5: 类型不安全操作（运行时（Runtime）错误） {#反例-5-类型不安全操作运行时错误}](#反例-5-类型不安全操作运行时错误-反例-5-类型不安全操作运行时错误)
     - [反例 6: 约束求解失败 {#反例-6-约束求解失败}](#反例-6-约束求解失败-反例-6-约束求解失败)
-    - [反例 7: 生命周期错误（类型系统扩展） {#反例-7-生命周期错误类型系统扩展}](#反例-7-生命周期错误类型系统扩展-反例-7-生命周期错误类型系统扩展)
+    - [反例 7: 生命周期（Lifetimes）错误（类型系统扩展） {#反例-7-生命周期错误类型系统扩展}](#反例-7-生命周期错误类型系统扩展-反例-7-生命周期错误类型系统扩展)
     - [反例 8: Trait 解析失败 {#反例-8-trait-解析失败}](#反例-8-trait-解析失败-反例-8-trait-解析失败)
     - [反例总结表 {#反例总结表}](#反例总结表-反例总结表)
   - [🌳 公理-定理证明树 {#公理-定理证明树}](#-公理-定理证明树-公理-定理证明树)
@@ -126,13 +126,13 @@
     - [实际应用案例 {#实际应用案例}](#实际应用案例-实际应用案例)
   - [🆕 Rust 1.93.0 更新内容 {#rust-1930-更新内容}](#-rust-1930-更新内容-rust-1930-更新内容)
     - [MaybeUninit API 增强 {#maybeuninit-api-增强}](#maybeuninit-api-增强-maybeuninit-api-增强)
-    - [切片到数组转换 {#切片到数组转换}](#切片到数组转换-切片到数组转换)
+    - [切片（Slice）到数组转换 {#切片到数组转换}](#切片到数组转换-切片到数组转换)
     - [const 上下文增强（Rust 1.91.1+） {#const-上下文增强rust-1911}](#const-上下文增强rust-1911-const-上下文增强rust-1911)
     - [类型系统改进 {#类型系统改进}](#类型系统改进-类型系统改进)
     - [Rust 1.93.0 补充 {#rust-1930-补充}](#rust-1930-补充-rust-1930-补充)
     - [低优先级扩展（形式化占位） {#低优先级扩展形式化占位}](#低优先级扩展形式化占位-低优先级扩展形式化占位)
   - [🆕 Rust 1.96.1 更新内容 {#rust-1960-更新内容}](#-rust-1961-更新内容-rust-1960-更新内容)
-    - [1. ControlFlow::ok() - 控制流与Option转换 {#1-controlflowok---控制流与option转换}](#1-controlflowok---控制流与option转换-1-controlflowok---控制流与option转换)
+    - [1. ControlFlow::ok() - 控制流与Option（Option）转换 {#1-controlflowok---控制流与option转换}](#1-controlflowok---控制流与option转换-1-controlflowok---控制流与option转换)
     - [2. RangeToInclusive 类型 {#2-rangetoinclusive-类型}](#2-rangetoinclusive-类型-2-rangetoinclusive-类型)
     - [3. int\_format\_into - 高性能整数格式化 {#3-int\_format\_into---高性能整数格式化}](#3-int_format_into---高性能整数格式化-3-int_format_into---高性能整数格式化)
     - [4. 其他类型系统相关改进 {#4-其他类型系统相关改进}](#4-其他类型系统相关改进-4-其他类型系统相关改进)
@@ -934,7 +934,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 **核心贡献**:
 
 - Rust 类型系统的形式化
-- 类型与所有权系统的集成
+- 类型与所有权（Ownership）系统的集成
 - 类型安全的形式化证明
 
 **关键结果**:
@@ -1019,11 +1019,11 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 | EPFL内容 | Rust概念 | 本文档对应 |
 | :--- | :--- | :--- |
 | Type-Based Concurrency | 基于类型的并发 | §系统集成与实际应用 |
-| Send/Sync Traits | 线程安全trait | §与Trait系统的集成 |
+| Send/Sync Traits | 线程安全trait（Trait） | §与Trait系统的集成 |
 | Type Safety & Parallelism | 类型安全与并行 | §定理3 (类型安全) |
 | Generic Programming | 泛型编程 | §示例3 (泛型类型) |
 
-**EPFL课程特点**: 并发编程理论深厚，强调类型系统在并发安全中的作用，与本文档的类型安全定理高度契合。
+**EPFL课程特点**: 并发编程理论深厚，强调类型系统在并发安全（Concurrency Safety）中的作用，与本文档的类型安全定理高度契合。
 
 ---
 
@@ -2588,7 +2588,7 @@ unsafe fn bad_deref() {
 
 在 Safe Rust 中，进展性保证以下情况不会发生：
 
-- 解引用空指针
+- 解引用（Reference）空指针
 - 使用悬垂引用
 - 数组越界访问
 - 数据竞争
@@ -2787,7 +2787,7 @@ impl<T> Same<T> for T {
 
 **理论解释**:
 
-- **孤儿规则**: 防止 impl 冲突，保证 trait 解析的一致性
+- **孤儿规则（Orphan Rule）**: 防止 impl 冲突，保证 trait 解析的一致性
 - **一致性**: 对于任何类型，最多只有一个 impl 适用
 - 这是保证类型安全（特别是泛型代码的 monomorphization 安全）的关键
 
@@ -3322,7 +3322,7 @@ fn main() {
 **完成情况**:
 
 - ✅ 理论基础、形式化定义、代码示例、证明工作（进展性、保持性、类型安全、类型推导正确性）
-- ✅ 系统集成与实际应用（与 Trait、生命周期及泛型/错误处理/Rust 1.93 案例）
+- ✅ 系统集成与实际应用（与 Trait、生命周期及泛型/错误处理（Error Handling）/Rust 1.93 案例）
 
 ---
 
@@ -3345,7 +3345,7 @@ fn main() {
 
 **新增 API**:
 
-- `assume_init_ref()`: 获取不可变引用
+- `assume_init_ref()`: 获取不可变引用（Mutable Reference）
 - `assume_init_mut()`: 获取可变引用
 - `assume_init_drop()`: 安全地调用 drop
 - `write_copy_of_slice()`: 从切片写入
@@ -3355,7 +3355,7 @@ fn main() {
 
 - MaybeUninit 的类型理论分析
 - 未初始化内存的安全性形式化
-- 类型系统的内存安全保证
+- 类型系统的内存安全（Memory Safety）保证
 
 ### 切片到数组转换 {#切片到数组转换}
 
@@ -3439,10 +3439,10 @@ fn main() {
 
 - **全局分配器与 `thread_local`**：1.93 允许 `#[global_allocator]` 实现中使用 `thread_local!` 和 `std::thread::current()`，类型上涉及 `Allocator` trait 与线程局部；
 
-对类型推导、单态化无新增规则，但对 `alloc` 相关泛型与 `impl` 的选用有影响。
+对类型推导、单态化（Monomorphization）无新增规则，但对 `alloc` 相关泛型与 `impl` 的选用有影响。
 
 - **`MaybeUninit` 新方法**：`assume_init_drop`、`write_copy_of_slice`、`write_clone_of_slice` 等已稳定，类型为 `MaybeUninit<T>` 及其切片，形式化上可纳入 `MaybeUninit` 的定型与操作语义扩展。
-- **`asm!` 中 `cfg`**：在 `asm!` 语句上使用 `cfg` 不改变类型系统，仅影响条件编译与代码生成；类型检查在宏展开与 `cfg` 之后进行。
+- **`asm!` 中 `cfg`**：在 `asm!` 语句上使用 `cfg` 不改变类型系统，仅影响条件编译与代码生成；类型检查在宏（Macro）展开与 `cfg` 之后进行。
 - **状态机 codegen（ roadmap ）**：若今后对 `loop`–`match` 等状态机形态有专门 codegen，可能涉及控制流与类型化；当前仍属 MIR/LLVM 优化范畴，类型规则未变。
 
 ---
@@ -3451,7 +3451,7 @@ fn main() {
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-**Def OFFSET1（offset_of! well-formed）**：`offset_of!(Type, field)` 的 well-formed 条件：（1）`Type` 为有效结构体/联合体类型；（2）`field` 为该类型的有效字段名；（3）类型布局可确定。违反则编译错误。1.93 强化 well-formed 检查。
+**Def OFFSET1（offset_of! well-formed）**：`offset_of!(Type, field)` 的 well-formed 条件：（1）`Type` 为有效结构体（Struct）/联合体类型；（2）`field` 为该类型的有效字段名；（3）类型布局可确定。违反则编译错误。1.93 强化 well-formed 检查。
 
 **定理 OFFSET-T1**：若 `offset_of!(τ, f)` 通过 well-formed 检查，则其值为 `τ` 中字段 `f` 的字节偏移；类型为 `usize`。由编译器布局计算保证。
 
@@ -3670,7 +3670,7 @@ for i in range {
 
 - 完善范围类型族：`Range`, `RangeFrom`, `RangeFull`, `RangeInclusive`, `RangeTo`, `RangeToInclusive`
 - 支持更精确的类型匹配和模式解构
-- 与迭代器系统的无缝集成
+- 与迭代器（Iterator）系统的无缝集成
 
 ---
 

@@ -23,7 +23,7 @@
     - [1.3 理论覆盖范围矩阵 {#13-理论覆盖范围矩阵}](#13-理论覆盖范围矩阵-13-理论覆盖范围矩阵)
   - [📐 二、论证体系结构（总览） {#二论证体系结构总览}](#-二论证体系结构总览-二论证体系结构总览)
     - [2.1 论证要素五层结构 {#21-论证要素五层结构}](#21-论证要素五层结构-21-论证要素五层结构)
-    - [2.2 论证流向与一致性 {#22-论证流向与一致性}](#22-论证流向与一致性-22-论证流向与一致性)
+    - [2.2 论证流向与一致性（Coherence） {#22-论证流向与一致性}](#22-论证流向与一致性-22-论证流向与一致性)
     - [2.3 论证体系索引 {#23-论证体系索引}](#23-论证体系索引-23-论证体系索引)
   - [🔬 三、安全与非安全全面论证 {#三安全与非安全全面论证}](#-三安全与非安全全面论证-三安全与非安全全面论证)
     - [3.1 安全与非安全边界总览 {#31-安全与非安全边界总览}](#31-安全与非安全边界总览-31-安全与非安全边界总览)
@@ -222,9 +222,9 @@
 
 | 理论族 | 公理/定义 | 语义模型 | 核心定理 | 边界/反例 |
 | :--- | :--- | :--- | :--- | :--- |
-| 内存安全（Memory Safety） | 规则 1–3, Def 1.1–1.3 | 所有权状态 Ω | T2 唯一性, T3 内存安全 | 使用已移动值 |
-| 借用（Borrowing） | 规则 5–8 | 借用状态 | 数据竞争自由 T1 | 双重可变借用 |
-| 生命周期 | ℓ ⊆ lft | 区域类型 | 引用有效性 T2 | 返回局部引用 |
+| 内存安全（Memory Safety） | 规则 1–3, Def 1.1–1.3 | 所有权（Ownership）状态 Ω | T2 唯一性, T3 内存安全 | 使用已移动值 |
+| 借用（Borrowing） | 规则 5–8 | 借用状态 | 数据竞争自由 T1 | 双重可变借用（Mutable Borrow） |
+| 生命周期（Lifetimes） | ℓ ⊆ lft | 区域类型 | 引用（Reference）有效性 T2 | 返回局部引用 |
 | 类型系统（Type System） | typing rules | 操作语义 | 进展 T1、保持 T2、类型安全 T3 | 类型不匹配 |
 | 型变 | Def 1.1–3.1 | 子类型 | T1–T4 协变/逆变/不变 | &mut 协变等 |
 | 异步（Async） | Def 4.1–5.2 | 状态机 | T6.1–T6.3 | 非 Send 跨线程 |
@@ -354,13 +354,13 @@
 
 | 论证要素 | 索引文档 | 覆盖范围 |
 | :--- | :--- | :--- |
-| 概念定义 | KNOWLEDGE_STRUCTURE_FRAMEWORK、各 research_notes | 所有权（Ownership）、借用、类型、型变、Pin、异步 |
+| 概念定义 | KNOWLEDGE_STRUCTURE_FRAMEWORK、各 research_notes | 所有权（Ownership）、借用（Borrowing）、类型、型变、Pin、异步（Async） |
 | 公理-定理映射 | FORMAL_PROOF_SYSTEM_GUIDE、PROOF_INDEX | 概念→公理→定理→推论 |
 | 论证缺口 | ARGUMENTATION_GAP_INDEX、FORMAL_PROOF_SYSTEM_GUIDE | D1/D2/R1/R2/P1/P2/M1/M2 |
 | 证明索引 | PROOF_INDEX | 26 个证明、按领域/类型/方法 |
 | 反例索引 | FORMAL_PROOF_SYSTEM_GUIDE § 反例、UNIFIED_SYSTEMATIC_FRAMEWORK | 型变、所有权、生命周期、Pin、异步、Trait |
 | 思维表征 | MIND_MAP_COLLECTION、MULTI_DIMENSIONAL_CONCEPT_MATRIX、DECISION_GRAPH_NETWORK | 导图、矩阵、证明树、决策树 |
-| 设计机制论证 | DESIGN_MECHANISM_RATIONALE | Pin、所有权、借用、型变、Send/Sync、宏、闭包等 |
+| 设计机制论证 | DESIGN_MECHANISM_RATIONALE | Pin、所有权、借用、型变、Send/Sync、宏（Macro）、闭包（Closures）等 |
 | 语言特性 | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | 92 项特性 |
 
 ---
@@ -446,9 +446,9 @@
 
 | 保证类型 | 安全机制 | 形式化定理 | 违反后果 |
 | :--- | :--- | :--- | :--- |
-| **内存安全** | 所有权、借用、生命周期 | ownership T2,T3、borrow T1、lifetime T2 | 悬垂、双重释放、泄漏 |
+| **内存安全（Memory Safety）** | 所有权、借用、生命周期 | ownership T2,T3、borrow T1、lifetime T2 | 悬垂、双重释放、泄漏 |
 | **数据竞争自由** | 借用、Send/Sync | borrow T1、async T6.2 | 数据竞争、UB |
-| **类型安全** | 类型系统 | type_system T1–T3 | 类型错误、UB |
+| **类型安全** | 类型系统（Type System） | type_system T1–T3 | 类型错误、UB |
 | **引用有效性** | 生命周期 | lifetime T2 | 悬垂引用、UB |
 | **型变安全** | 协变/逆变/不变 | variance T1–T4 | 悬垂引用 |
 | **自引用安全** | Pin | pin T1–T3 | 悬垂指针 |

@@ -30,7 +30,7 @@
     - [3. 表达能力边界：指称语义视角 {#3-表达能力边界指称语义视角}](#3-表达能力边界指称语义视角-3-表达能力边界指称语义视角)
   - [📜 公理语义与前/后条件 {#公理语义与前后条件}](#-公理语义与前后条件-公理语义与前后条件)
     - [1. Hoare 逻辑与 Rust {#1-hoare-逻辑与-rust}](#1-hoare-逻辑与-rust-1-hoare-逻辑与-rust)
-    - [2. 分离逻辑与所有权 {#2-分离逻辑与所有权}](#2-分离逻辑与所有权-2-分离逻辑与所有权)
+    - [2. 分离逻辑与所有权（Ownership） {#2-分离逻辑与所有权}](#2-分离逻辑与所有权-2-分离逻辑与所有权)
     - [3. 表达能力边界：公理语义视角 {#3-表达能力边界公理语义视角}](#3-表达能力边界公理语义视角-3-表达能力边界公理语义视角)
   - [📍 表达能力边界论证 {#表达能力边界论证}](#-表达能力边界论证-表达能力边界论证)
     - [1. 多维表达能力边界矩阵 {#1-多维表达能力边界矩阵}](#1-多维表达能力边界矩阵-1-多维表达能力边界矩阵)
@@ -74,7 +74,7 @@
 | **缺乏构造性语义** | 语言表达式的求值、存储、类型如何形式化定义 | 操作语义、指称语义、公理语义小节 |
 | **缺乏表达能力边界** | 何者可表达、何者不可表达、边界在哪里 | 表达能力边界论证、矩阵、反例 |
 | **语义归纳缺失** | 概念语义未归纳、总结未结构化 | 语义归纳表、概念族谱与语义对应 |
-| **无全局一致性** | 语义与类型系统、所有权（Ownership）、借用等模块的衔接 | 与 PROOF_INDEX、COMPREHENSIVE_OVERVIEW 交叉引用 |
+| **无全局一致性（Coherence）** | 语义与类型系统（Type System）、所有权（Ownership）、借用（Borrowing）等模块（Module）的衔接 | 与 PROOF_INDEX、COMPREHENSIVE_OVERVIEW 交叉引用（Reference） |
 
 ### 设计原则 {#设计原则}
 
@@ -85,7 +85,7 @@
 1. **语义先行**：语法→语义→性质，每层有形式化定义
 2. **边界可证**：表达能力边界有形式化陈述或至少论证思路
 3. **与已有证明衔接**：引用 ownership_model、borrow_checker、type_system 等定理
-4. **反例边界**：违反表达能力边界时给出反例或编译/运行时错误
+4. **反例边界**：违反表达能力边界时给出反例或编译/运行时（Runtime）错误
 
 ---
 
@@ -143,7 +143,7 @@ $\to \subseteq \text{Expr} \times \text{Expr}$：若 $(e, e') \in \to$，则称 
 
 **定义 1.2（多步归约）**
 
-$\to^*$ 为 $\to$ 的自反传递闭包。
+$\to^*$ 为 $\to$ 的自反传递闭包（Closures）。
 
 **引理 1.1**（与类型系统衔接）
 
@@ -178,8 +178,8 @@ $\Gamma \vdash e : \tau \land e \Downarrow v \Rightarrow \Gamma \vdash v : \tau$
 | 可表达 | 不可表达（或需 unsafe） | 边界论证 |
 | :--- | :--- | :--- |
 | 移动、复制、借用（Borrowing） | 绕过借用检查的裸指针混用 | 借用规则 5–8 强制；违反则编译错误 |
-| 生命周期标注 | 无界生命周期（非 `'static`） | NLL 推断 + 显式标注；超域则拒绝 |
-| 泛型单态化 | 运行时类型擦除（如 Java） | 编译时单态化，无运行时类型信息 |
+| 生命周期（Lifetimes）标注 | 无界生命周期（非 `'static`） | NLL 推断 + 显式标注；超域则拒绝 |
+| 泛型（Generics）单态化（Monomorphization） | 运行时类型擦除（如 Java） | 编译时单态化，无运行时类型信息 |
 | 类型状态机 | 运行时类型切换 | 类型在编译时固定，PhantomData 仅影响类型检查 |
 
 ---
@@ -296,7 +296,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 | **并发** | Send/Sync、async、线程 | 数据竞争自由 | 无 GC 的共享可变 | [async_state_machine](formal_methods/10_async_state_machine.md) T6.2、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) T1 |
 | **异步** | Future、Pin、async/await | 有限 Future 终将 Ready | 无限延迟未标记 | [async_state_machine](formal_methods/10_async_state_machine.md) T6.3 |
 | **引用** | 生命周期、NLL | 引用不超被引用对象 | 无界引用 | lifetime_formalization T2 |
-| **别名** | 独占可变、多只读 | 可变借用独占 | 共享可变（安全子集） | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 规则 5–8 |
+| **别名** | 独占可变、多只读 | 可变借用（Mutable Borrow）独占 | 共享可变（安全子集） | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 规则 5–8 |
 | **多态** | 静态分发、dyn | 编译时单态化 | 运行时类型擦除 | [trait_system_formalization](type_theory/10_trait_system_formalization.md) |
 | **型变** | 协变、逆变、不变 | 违反则悬垂 | 任意型变 | [variance_theory](type_theory/10_variance_theory.md) T1–T4 |
 
@@ -355,7 +355,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 | **EB5** | 有限 Future 终将 Ready | [async_state_machine](formal_methods/10_async_state_machine.md) T6.3 |
 | **EB6** | Pin 保证自引用安全 | [pin_self_referential](formal_methods/10_pin_self_referential.md) T2 |
 
-**定理 EB-Meta（边界完备性）**：EB1–EB6 覆盖内存、类型、并发、异步、引用、自引用等主要表达能力边界；任意 Safe 代码违反其一则无法通过编译或触发 UB。
+**定理 EB-Meta（边界完备性）**：EB1–EB6 覆盖内存、类型、并发、异步（Async）、引用、自引用等主要表达能力边界；任意 Safe 代码违反其一则无法通过编译或触发 UB。
 
 *证明*：由 EB0，表达能力边界由类型系统、所有权、借用、生命周期、型变、异步、Pin 等机制定义。EB1–EB6 分别对应 borrow、lifetime+ownership、type_system、variance、async、pin 的定理。Safe 子集定义为上述机制均满足的代码，故违反任一边界即出 Safe 子集。依赖链：Axiom EB0 → 各机制定理 → EB1–EB6 → EB-Meta。∎
 
@@ -392,9 +392,9 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 
 | 概念族 | 可表达 | 边界 | 论证 |
 | :--- | :--- | :--- | :--- |
-| 内存安全族 | 无悬垂、无双重释放、无泄漏 | 所有权+借用+生命周期 | T2,T3 ownership; T1 borrow; T2 lifetime |
+| 内存安全（Memory Safety）族 | 无悬垂、无双重释放、无泄漏 | 所有权+借用+生命周期 | T2,T3 ownership; T1 borrow; T2 lifetime |
 | 类型安全族 | 良型→无类型错误 | 进展+保持 | type_system T1–T3 |
-| 并发安全族 | 数据竞争自由 | Send/Sync+借用 | async T6.2 |
+| 并发安全（Concurrency Safety）族 | 数据竞争自由 | Send/Sync+借用 | async T6.2 |
 | 算法正确性族 | 推导、推断、解析正确 | 算法完备性 | type_system T4,T5; trait Resolve |
 
 ---

@@ -1,7 +1,7 @@
 # 类型系统构造能力 {#类型系统构造能力}
 
 > **EN**: Construction Capability
-> **Summary**: 类型系统构造能力 Construction Capability. (stub/archive redirect)
+> **Summary**: 类型系统（Type System）构造能力 Construction Capability. (stub/archive redirect)
 > **概念族**: 类型系统（Type System） / 表达能力
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 > **内容分级**: [归档级]
@@ -68,8 +68,8 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 其中：
 
-- $\mathit{Syntax}(\tau)$：构造 $\tau$ 的语法形式（字面量、构造子、泛型实例化等）
-- $\mathit{Constraints}(\tau)$：构造 $\tau$ 时需满足的约束（Trait、生命周期、const 等）
+- $\mathit{Syntax}(\tau)$：构造 $\tau$ 的语法形式（字面量、构造子、泛型（Generics）实例化等）
+- $\mathit{Constraints}(\tau)$：构造 $\tau$ 时需满足的约束（Trait、生命周期（Lifetimes）、const 等）
 - $\mathit{Determinism}(\tau) \in \{\mathrm{Unique}, \mathrm{Multi}, \mathrm{Impossible}\}$：唯一可构造、多解、不可构造
 
 **Axiom TCON1**：基本类型（`i32`、`bool`、`char` 等）的构造能力为 Unique；字面量唯一确定类型。
@@ -96,8 +96,8 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 | **结构体（Struct）** | `S { x: 1, y: 2 }` | Unique（若字段不歧义） | 缺字段或歧义需注解 |
 | **枚举（Enum）** | `E::Variant(a)` | Unique（若变体与参数可推断） | Option/Result 常用 |
 | **数组** | `[1, 2, 3]`、`[0; N]` | Unique（元素类型可推断） | `[T; N]` 中 N 需 const |
-| **切片（Slice）** | `&[a, b]`、`v.as_slice()` | Unique | 借用或方法产生 |
-| **引用** | `&x`、`&mut x` | Unique | 生命周期由 NLL 推断 |
+| **切片（Slice）** | `&[a, b]`、`v.as_slice()` | Unique | 借用（Borrowing）或方法产生 |
+| **引用（Reference）** | `&x`、`&mut x` | Unique | 生命周期由 NLL 推断 |
 | **Box** | `Box::new(x)` | Unique | 单态化（Monomorphization） |
 | **泛型** | `Vec::new()`、`F::<i32>::new()` | Multi（多 impl）或 Unique（约束唯一） | 歧义 impl 需 turbofish |
 | **impl Trait** | 返回值、参数 | Unique（调用处推断） | 存在类型，静态分发 |
@@ -120,7 +120,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 | 特性 | 构造方式 | 确定性 | 说明 |
 | :--- | :--- | :--- | :--- |
-| **LUB coercion** | 函数项、多分支匹配 | Unique（修正后） | 1.93 修正 LUB 推断；函数项类型推断更正确 |
+| **LUB coercion** | 函数项、多分支匹配 | Unique（修正后） | 1.93 修正 LUB 推断；函数项类型推断（Type Inference）更正确 |
 | **Copy specialization 移除** | Copy 类型 | Unique | 1.93 不再内部 specialization；Copy 与 Clone 构造路径显式 |
 | **const 中 &mut static** | const 上下文 | Unique（受限） | 1.93 允许 const 含 `&mut static`；`const_item_interior_mutations` lint |
 | **offset_of!** | 类型检查 | - | 1.93 well-formed 检查；非法类型构造失败 |
@@ -226,7 +226,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 | **生命周期不足** | 不可推断 | 需显式生命周期标注 |
 | **类型变量未约束** | Multi 或 Impossible | 添加约束或注解 |
 | **overflow / 默认推断** | 可能 Multi | 如 `42` 默认 i32；后缀 `42u64` 指定 |
-| **闭包类型** | Unique | 由使用处唯一确定 |
+| **闭包（Closures）类型** | Unique | 由使用处唯一确定 |
 | **dyn Trait** | Unique | 目标 Trait 唯一；需对象安全 |
 
 **引理 TCON-L1（推断失败可判定）**：若类型检查器报错「类型无法推断」或「歧义」，则 $\mathit{Determinism}(\tau) \in \{\mathrm{Multi}, \mathrm{Impossible}\}$；添加适当注解可提升为 Unique。

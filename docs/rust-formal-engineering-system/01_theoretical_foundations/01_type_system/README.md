@@ -10,10 +10,10 @@
 > **状态**: ✅ 已完成
 > 内容已整合至： [type_theory/](../../../research_notes/type_theory/README.md)
 
-- [类型系统基础](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
+- [类型系统（Type System）基础](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
 - [Trait 系统形式化](../../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)
 - [型变理论](../../../research_notes/type_theory/10_variance_theory.md)
-- 生命周期形式化
+- 生命周期（Lifetimes）形式化
 
 ## 知识结构思维导图 {#知识结构思维导图}
 >

@@ -19,10 +19,10 @@
   - [目录 {#目录}](#目录-目录)
   - [一、对齐说明 {#一对齐说明}](#一对齐说明-一对齐说明)
   - [二、核心类型 {#二核心类型}](#二核心类型-二核心类型)
-  - [三、所有权与借用相关 {#三所有权与借用相关}](#三所有权与借用相关-三所有权与借用相关)
+  - [三、所有权（Ownership）与借用（Borrowing）相关 {#三所有权与借用相关}](#三所有权与借用相关-三所有权与借用相关)
   - [四、并发与同步 {#四并发与同步}](#四并发与同步-四并发与同步)
-  - [五、集合与迭代器 {#五集合与迭代器}](#五集合与迭代器-五集合与迭代器)
-  - [六、IO 与异步 {#六io-与异步}](#六io-与异步-六io-与异步)
+  - [五、集合与迭代器（Iterator） {#五集合与迭代器}](#五集合与迭代器-五集合与迭代器)
+  - [六、IO 与异步（Async） {#六io-与异步}](#六io-与异步-六io-与异步)
   - [七、FFI 与 unsafe 辅助 {#七ffi-与-unsafe-辅助}](#七ffi-与-unsafe-辅助-七ffi-与-unsafe-辅助)
   - [八、未覆盖缺口 {#八未覆盖缺口}](#八未覆盖缺口-八未覆盖缺口)
   - [相关概念 {#相关概念}](#相关概念-相关概念)
@@ -33,7 +33,7 @@
 
 ## 一、对齐说明 {#一对齐说明}
 
-本文档将 `docs/research_notes/` 中的概念、示例与 [Rust Standard Library](https://doc.rust-lang.org/std/) 的核心类型、trait、模块建立映射，确保代码实践与官方 API 对齐。
+本文档将 `docs/research_notes/` 中的概念、示例与 [Rust Standard Library](https://doc.rust-lang.org/std/) 的核心类型、trait、模块（Module）建立映射，确保代码实践与官方 API 对齐。
 
 ---
 
@@ -53,7 +53,7 @@
 
 | std 模块/类型 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
-| [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §1 | ✅ | 非线程安全引用计数 |
+| [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §1 | ✅ | 非线程安全引用（Reference）计数 |
 | [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §1 | ✅ | 线程安全引用计数 |
 | [std::cell::RefCell](https://doc.rust-lang.org/std/cell/struct.RefCell.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §2 | ✅ | 内部可变性 |
 | [std::cell::Cell](https://doc.rust-lang.org/std/cell/struct.Cell.html) | [software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §3 | ✅ | 内部可变性 |

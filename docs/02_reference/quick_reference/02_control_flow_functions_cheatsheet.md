@@ -757,7 +757,7 @@ let f = || v.push(4);  // ❌ 闭包可变借用 v
 // let r = &v;  // 再借用会冲突
 ```
 
-**原因**: 闭包捕获可变引用后，外部不能再借用。
+**原因**: 闭包捕获可变引用后，外部不能再借用（Borrowing）。
 
 **修正**:
 
@@ -812,10 +812,10 @@ let _ = &v;
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [错误处理速查卡](02_error_handling_cheatsheet.md) - 错误处理模式
-- [类型系统速查卡](02_type_system.md) - 类型与函数
+- [错误处理（Error Handling）速查卡](02_error_handling_cheatsheet.md) - 错误处理模式
+- [类型系统（Type System）速查卡](02_type_system.md) - 类型与函数
 - [集合与迭代器速查卡](02_collections_iterators_cheatsheet.md) - 迭代器与循环
-- [所有权系统速查卡](02_ownership_cheatsheet.md) - 所有权与闭包
+- [所有权（Ownership）系统速查卡](02_ownership_cheatsheet.md) - 所有权与闭包
 
 ---
 

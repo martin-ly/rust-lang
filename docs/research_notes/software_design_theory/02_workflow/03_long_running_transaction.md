@@ -27,7 +27,7 @@
     - [Def LT1: 长事务 {#def-lt1-长事务}](#def-lt1-长事务-def-lt1-长事务)
     - [Axiom LT1: 局部提交可见性 {#axiom-lt1-局部提交可见性}](#axiom-lt1-局部提交可见性-axiom-lt1-局部提交可见性)
     - [Axiom LT2: 持久化可靠性 {#axiom-lt2-持久化可靠性}](#axiom-lt2-持久化可靠性-axiom-lt2-持久化可靠性)
-    - [Theorem LT1: 业务一致性 {#theorem-lt1-业务一致性}](#theorem-lt1-业务一致性-theorem-lt1-业务一致性)
+    - [Theorem LT1: 业务一致性（Coherence） {#theorem-lt1-业务一致性}](#theorem-lt1-业务一致性-theorem-lt1-业务一致性)
     - [Theorem LT2: 故障可恢复性 {#theorem-lt2-故障可恢复性}](#theorem-lt2-故障可恢复性-theorem-lt2-故障可恢复性)
   - [4. Rust 实现方案 {#4-rust-实现方案}](#4-rust-实现方案-4-rust-实现方案)
   - [5. 反例与边界 {#5-反例与边界}](#5-反例与边界-5-反例与边界)

@@ -37,7 +37,7 @@
 
 > **[来源: [Salvo 官方文档](https://salvo.rs/)]**
 
-`Salvo` 是 Rust 生态中快速发展的**现代 Web 框架**，设计目标是提供接近 Axum 的模块化能力，同时内置更多生产级特性（CORS、JWT、OpenAPI、静态文件、反向代理等）。它基于 Tokio 异步运行时与 Hyper HTTP 协议实现构建，采用宏驱动的 Handler 抽象，使业务代码保持简洁。
+`Salvo` 是 Rust 生态中快速发展的**现代 Web 框架**，设计目标是提供接近 Axum 的模块（Module）化能力，同时内置更多生产级特性（CORS、JWT、OpenAPI、静态文件、反向代理等）。它基于 Tokio 异步（Async）运行时（Runtime）与 Hyper HTTP 协议实现构建，采用宏（Macro）驱动的 Handler 抽象，使业务代码保持简洁。
 
 > [来源: [salvo crates.io](https://crates.io/crates/salvo)]
 
@@ -88,7 +88,7 @@ graph LR
     HANDLER --> |Response| HTTP
 ```
 
-Salvo 的请求生命周期分为四层：
+Salvo 的请求生命周期（Lifetimes）分为四层：
 
 1. **网络层**：`TcpListener` 接受连接，Hyper 负责 HTTP/1.1 与 HTTP/2 解析。
 2. **路由层**：`Router` 使用内部 trie 树进行路径匹配，支持 `<param>` 路径参数与 `**` 通配。
@@ -99,7 +99,7 @@ Salvo 的请求生命周期分为四层：
 
 ### 2.2 `#[handler]` 宏与零成本抽象 {#22-handler-宏与零成本抽象}
 
-`#[handler]` 是 Salvo 类型系统的核心杠杆。它在编译期为函数生成 `Handler` trait 实现，避免手写 `Service` boilerplate：
+`#[handler]` 是 Salvo 类型系统（Type System）的核心杠杆。它在编译期为函数生成 `Handler` trait 实现，避免手写 `Service` boilerplate：
 
 ```rust,ignore
 #[handler]
@@ -161,7 +161,7 @@ let router = Router::new().hoop(logger).get(hello);
 | 维度 | Salvo | Axum | Actix-web |
 |:--|:--|:--|:--|
 | **底层协议** | Hyper | Hyper | 自研 HTTP / Tokio |
-| **Handler 抽象** | `#[handler]` 宏 | `Handler<T, S>` trait + 变参泛型 | `Handler<Args>` trait |
+| **Handler 抽象** | `#[handler]` 宏 | `Handler<T, S>` trait + 变参泛型（Generics） | `Handler<Args>` trait |
 | **提取器** | `Request::param` / `parse_json` | `FromRequest` / `FromRequestParts` | `FromRequest` |
 | **中间件模型** | Handler 即中间件 (`hoop`) | Tower `Service` + `Layer` | `Transform` trait |
 | **路由注册** | `Router::with_path` / `push` | `Router::route` / `nest` / `merge` | `App::service` / `route` |

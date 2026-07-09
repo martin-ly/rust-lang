@@ -16,18 +16,18 @@
 
 - [Rust 核心特性完整链：定义→示例→论证→证明 {#rust-核心特性完整链定义示例论证证明}](#rust-核心特性完整链定义示例论证证明-rust-核心特性完整链定义示例论证证明)
   - [📑 目录 {#目录}](#-目录-目录)
-  - [1. 所有权 {#1-所有权}](#1-所有权-1-所有权)
-  - [2. 借用 {#2-借用}](#2-借用-2-借用)
-  - [3. 生命周期 {#3-生命周期}](#3-生命周期-3-生命周期)
+  - [1. 所有权（Ownership） {#1-所有权}](#1-所有权-1-所有权)
+  - [2. 借用（Borrowing） {#2-借用}](#2-借用-2-借用)
+  - [3. 生命周期（Lifetimes） {#3-生命周期}](#3-生命周期-3-生命周期)
   - [4. Pin {#4-pin}](#4-pin-4-pin)
   - [5. Send/Sync {#5-sendsync}](#5-sendsync-5-sendsync)
   - [6. Future {#6-future}](#6-future-6-future)
   - [7. Trait {#7-trait}](#7-trait-7-trait)
-  - [8. 泛型 {#8-泛型}](#8-泛型-8-泛型)
+  - [8. 泛型（Generics） {#8-泛型}](#8-泛型-8-泛型)
   - [9. match {#9-match}](#9-match-9-match)
   - [10. for {#10-for}](#10-for-10-for)
   - [11. Option/Result {#11-optionresult}](#11-optionresult-11-optionresult)
-  - [12. 闭包 {#12-闭包}](#12-闭包-12-闭包)
+  - [12. 闭包（Closures） {#12-闭包}](#12-闭包-12-闭包)
   - [13. ? 操作符 {#13-操作符}](#13--操作符-13-操作符)
     - [相关思维表征 {#相关思维表征}](#相关思维表征-相关思维表征)
   - [相关文档 {#相关文档-1}](#相关文档-相关文档-1)
@@ -58,7 +58,7 @@
 | **概念** | 规则 1–3（[ownership_model](formal_methods/10_ownership_model.md)）；Def 1.1–1.3 |
 | **属性** | 唯一性、RAII、无 GC |
 | **关系** | 移动→借用下游；Copy 为移动的特例 |
-| **解释** | 无 GC 下保证内存安全；移动即所有权转移 |
+| **解释** | 无 GC 下保证内存安全（Memory Safety）；移动即所有权转移 |
 | **示例** | `let x = vec![1,2]; let y = x;` // x 已移动 |
 | **论证** | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) § 所有权（Ownership） |
 | **形式化** | [ownership_model](formal_methods/10_ownership_model.md) 定理 T2/T3、规则 1–8 |
@@ -81,7 +81,7 @@
 | **示例** | `let r = &v; let r2 = &v;` // 允许多 &；`let m = &mut v;` 独占 |
 | **论证** | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) § 借用（Borrowing） |
 | **形式化** | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 定理 T1 |
-| **反例** | 双重可变借用；悬垂引用 |
+| **反例** | 双重可变借用（Mutable Borrow）；悬垂引用（Reference） |
 
 ---
 
@@ -149,7 +149,7 @@
 
 | 维度 | 内容 |
 | :--- | :--- |
-| **定义** | 异步计算；Poll 状态机；Pin 保证自引用 |
+| **定义** | 异步（Async）计算；Poll 状态机；Pin 保证自引用 |
 | **概念** | async/await 语法糖；状态机生成（[async_state_machine](formal_methods/10_async_state_machine.md)） |
 | **属性** | 惰性、可恢复、自引用 |
 | **关系** | 依赖 Pin；跨 await 需 Send |
@@ -170,7 +170,7 @@
 | :--- | :--- |
 | **定义** | 行为抽象；trait 定义 + impl for |
 | **概念** | 静态分发、对象安全（[trait_system_formalization](type_theory/10_trait_system_formalization.md)） |
-| **属性** | 零成本、编译时单态化 |
+| **属性** | 零成本、编译时单态化（Monomorphization） |
 | **关系** | 泛型约束；impl Trait / dyn Trait |
 | **解释** | 接口即 trait；多态通过 impl |
 | **示例** | `trait Display { fn fmt(...); } impl Display for i32 { ... }` |
@@ -189,7 +189,7 @@
 | :--- | :--- |
 | **定义** | 编译时多态；单态化（Monomorphization） |
 | **概念** | `fn f<T: Trait>(x: T)`；[type_system_foundations](type_theory/10_type_system_foundations.md) |
-| **属性** | 零成本、无运行时类型信息 |
+| **属性** | 零成本、无运行时（Runtime）类型信息 |
 | **关系** | Trait 约束；关联类型；GAT |
 | **解释** | 类型参数在编译时展开 |
 | **示例** | `fn id<T>(x: T) -> T { x }` |
@@ -206,7 +206,7 @@
 
 | 维度 | 内容 |
 | :--- | :--- |
-| **定义** | 穷尽模式匹配；必须覆盖所有变体 |
+| **定义** | 穷尽模式匹配（Pattern Matching）；必须覆盖所有变体 |
 | **概念** | Def MATCH1（[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)） |
 | **属性** | 穷尽性、模式解构 |
 | **关系** | 与借用协同；迭代中 match 影响借用 |
@@ -227,7 +227,7 @@
 | :--- | :--- |
 | **定义** | 基于 IntoIterator 的迭代 |
 | **概念** | Def FOR1（[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)） |
-| **属性** | 消费或借用迭代器 |
+| **属性** | 消费或借用迭代器（Iterator） |
 | **关系** | 与借用协同；迭代中修改集合违规 |
 | **解释** | `for x in iter` 消费；`for x in &vec` 借用 |
 | **示例** | `for x in &v { ... }` 不可修改 v |
@@ -284,7 +284,7 @@
 | :--- | :--- |
 | **定义** | Result/Option 早期返回；错误传播 |
 | **概念** | Def QUERY1（[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)） |
-| **属性** | 简化错误处理 |
+| **属性** | 简化错误处理（Error Handling） |
 | **关系** | 与 Result、From 协同 |
 | **解释** | `Ok(x)` 解开；`Err(e)` 提前返回 |
 | **示例** | `let x = f()?;` |

@@ -18,7 +18,7 @@
   - [📑 目录 {#目录}](#-目录-目录)
   - [🎯 框架宗旨 {#框架宗旨}](#-框架宗旨-框架宗旨)
     - [核心问题响应 {#核心问题响应}](#核心问题响应-核心问题响应)
-  - [形式化论证（框架一致性） {#形式化论证框架一致性}](#形式化论证框架一致性-形式化论证框架一致性)
+  - [形式化论证（框架一致性（Coherence）） {#形式化论证框架一致性}](#形式化论证框架一致性-形式化论证框架一致性)
   - [🕸️ 全局思维导图：Rust 形式化知识全景 {#全局思维导图rust-形式化知识全景}](#️-全局思维导图rust-形式化知识全景-全局思维导图rust-形式化知识全景)
     - [按论证结构展开的思维导图 {#按论证结构展开的思维导图}](#按论证结构展开的思维导图-按论证结构展开的思维导图)
   - [📐 多维概念对比矩阵总览 {#多维概念对比矩阵总览}](#-多维概念对比矩阵总览-多维概念对比矩阵总览)
@@ -43,7 +43,7 @@
     - [按类型族 {#按类型族}](#按类型族-按类型族)
     - [按执行模型 {#按执行模型}](#按执行模型-按执行模型)
     - [设计模式表征与组件构建 {#设计模式表征与组件构建}](#设计模式表征与组件构建-设计模式表征与组件构建)
-  - [📚 文档交叉引用总索引 {#文档交叉引用总索引}](#-文档交叉引用总索引-文档交叉引用总索引)
+  - [📚 文档交叉引用（Reference）总索引 {#文档交叉引用总索引}](#-文档交叉引用总索引-文档交叉引用总索引)
   - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
       - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
@@ -99,7 +99,7 @@
 
 *证明*：由 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md) 全局一致性矩阵；术语、公理编号、定义链已校验。∎
 
-**推论 USF-C1**：反例索引与各模块反例一一对应；违反任一模块定理的代码在反例索引中可查。
+**推论 USF-C1**：反例索引与各模块（Module）反例一一对应；违反任一模块定理的代码在反例索引中可查。
 
 ---
 
@@ -230,8 +230,8 @@
 | 概念 | 公理/定义 | 定理 | 证明方法 | 反例（违反后果） |
 | :--- | :--- | :--- | :--- | :--- |
 | 所有权（Ownership） | 规则 1–3, Def 1.1–1.3 | T2 唯一性, T3 内存安全（Memory Safety） | 结构归纳、反证 | 使用已移动值 |
-| 借用（Borrowing） | 规则 5–8 | 数据竞争自由 | 规则归纳 | 双重可变借用 |
-| 生命周期 | $\ell \subseteq \text{lft}$ | 引用有效性 | 三步骤 | 返回局部引用 |
+| 借用（Borrowing） | 规则 5–8 | 数据竞争自由 | 规则归纳 | 双重可变借用（Mutable Borrow） |
+| 生命周期（Lifetimes） | $\ell \subseteq \text{lft}$ | 引用有效性 | 三步骤 | 返回局部引用 |
 | 子类型 | $S <: T$ | - | - | - |
 | 协变 | Def 1.1 | T1 | 直接推导 | - |
 | 逆变 | Def 2.1 | T2 | 直接推导 | 参数协变→悬垂 |
@@ -239,7 +239,7 @@
 | 类型安全 | 进展性、保持性 | T3 | 组合 | 类型不匹配 |
 | Future | Def 4.1–5.2 | T6.1–T6.3 | 归纳+案例 | 非 Send 跨线程 |
 | Pin | Def 1.1–2.2 | T1–T3 | 类型系统（Type System） | 移动未 Pin 自引用 |
-| Trait 对象 | vtable, 存在类型 | T1–T3 | 类型系统 | 对象安全违规 |
+| Trait 对象 | vtable, 存在类型 | T1–T3 | 类型系统（Type System） | 对象安全违规 |
 
 ### 2. 语义范式 vs 概念族 矩阵 {#2-语义范式-vs-概念族-矩阵}
 
@@ -247,9 +247,9 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-| 语义范式 | 内存安全族 | 类型安全族 | 并发安全族 | 表达能力边界 |
+| 语义范式 | 内存安全（Memory Safety）族 | 类型安全族 | 并发安全（Concurrency Safety）族 | 表达能力边界 |
 | :--- | :--- | :--- | :--- | :--- |
-| 操作语义 | 归约保持所有权 | 保持性 T2 | 数据竞争自由 | 规则即边界 |
+| 操作语义 | 归约保持所有权（Ownership） | 保持性 T2 | 数据竞争自由 | 规则即边界 |
 | 指称语义 | - | 类型=命题 | - | 构造性限制 |
 | 公理语义 | 分离逻辑 | Hoare | unsafe 契约 | 前置/后置 |
 | 设计机制 | Pin 堆/栈、Send/Sync、Trait 对象 | 动机→决策→论证→反例 | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) |
@@ -481,7 +481,7 @@
 
 | 领域 | 反例 | 违反的边界 | 文档 |
 | :--- | :--- | :--- | :--- |
-| 型变 | `&mut T` 协变 | 唯一可变借用 | [variance_theory](type_theory/10_variance_theory.md) |
+| 型变 | `&mut T` 协变 | 唯一可变借用（Borrowing） | [variance_theory](type_theory/10_variance_theory.md) |
 | 型变 | `fn(T)` 参数协变 | 生命周期 | [variance_theory](type_theory/10_variance_theory.md) |
 | 型变 | `Cell<T>` 协变 | 内部可变 | [variance_theory](type_theory/10_variance_theory.md) |
 | 所有权 | 使用已移动值 | 唯一性 | [ownership_model](formal_methods/10_ownership_model.md) |
@@ -489,7 +489,7 @@
 | 生命周期 | 返回局部引用 | outlives | lifetime_formalization |
 | 生命周期 | 存储短生命周期引用 | 约束冲突 | lifetime_formalization |
 | 异步（Async） | 非 Send 跨线程 | Send 边界 | [async_state_machine](formal_methods/10_async_state_machine.md) |
-| 异步 | 未 Pin 自引用 | Pin 边界 | [async_state_machine](formal_methods/10_async_state_machine.md) |
+| 异步（Async） | 未 Pin 自引用 | Pin 边界 | [async_state_machine](formal_methods/10_async_state_machine.md) |
 | Pin | 移动未 Pin 自引用 | 位置稳定 | [pin_self_referential](formal_methods/10_pin_self_referential.md) |
 | Trait | 对象安全违规 | vtable 约束 | [trait_system_formalization](type_theory/10_trait_system_formalization.md) |
 | 类型系统 | 类型不匹配 | 类型安全 | [type_system_foundations](type_theory/10_type_system_foundations.md) |
@@ -513,7 +513,7 @@
 | 概念 | 语义归纳 | 证明文档 |
 | :--- | :--- | :--- |
 | 所有权 | 每个值恰有一个所有者，移动后原变量无效 | ownership_model |
-| 借用 | 不可变借用可多个，可变借用独占；互斥保证 | borrow_checker_proof |
+| 借用 | 不可变借用（Immutable Borrow）可多个，可变借用独占；互斥保证 | borrow_checker_proof |
 | 生命周期 | 引用生命周期必须 outlives 被引用对象 | lifetime_formalization |
 | 类型安全 | 良型程序不会出现类型错误（进展+保持） | type_system_foundations |
 | 型变 | 协变同向、逆变反向、不变无子类型；违反则悬垂 | variance_theory |
@@ -609,7 +609,7 @@ Pin ──→ 自引用安全
 | :--- | :--- | :--- | :--- |
 | **基本类型** | TCON 矩阵 Unique | 类型构造决策树 | [construction_capability](type_theory/10_construction_capability.md) |
 | **复合类型** | struct/enum/tuple | 同上 | [construction_capability](type_theory/10_construction_capability.md) |
-| **泛型/GAT** | Multi 或 Unique | 同上 | [construction_capability](type_theory/10_construction_capability.md)、[advanced_types](type_theory/10_advanced_types.md) |
+| **泛型（Generics）/GAT** | Multi 或 Unique | 同上 | [construction_capability](type_theory/10_construction_capability.md)、[advanced_types](type_theory/10_advanced_types.md) |
 | **impl Trait / dyn Trait** | Unique | 同上 | [trait_system_formalization](type_theory/10_trait_system_formalization.md) |
 
 ### 按执行模型 {#按执行模型}

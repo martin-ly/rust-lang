@@ -7,7 +7,7 @@
 # 生命周期形式化（形式化方法视角） {#生命周期形式化形式化方法视角}
 
 > **EN**: Lifetime Formalization
-> **Summary**: 生命周期形式化 形式化方法视角 Lifetime Formalization.
+> **Summary**: 生命周期（Lifetimes）形式化 形式化方法视角 Lifetime Formalization.
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -47,7 +47,7 @@
 ## 🎯 研究目标 {#研究目标}
 
 1. 从形式化方法视角精确描述 Rust 生命周期系统。
-2. 建立生命周期约束与借用检查器、内存安全定理之间的形式化桥梁。
+2. 建立生命周期约束与借用（Borrowing）检查器、内存安全（Memory Safety）定理之间的形式化桥梁。
 3. 对标 Tree Borrows、RustSEM、RustBelt、Oxide 等最新国际成果，明确差距。
 
 ---
@@ -57,7 +57,7 @@
 - **区域类型（Region Types）**: 生命周期作为作用域抽象。
 - **子类型理论**: 生命周期 outlives 关系构成偏序。
 - **约束求解**: 生命周期推断生成并求解 outlives 约束。
-- **Non-Lexical Lifetimes（NLL）**: 引用有效期由最后使用点决定，而非词法作用域。
+- **Non-Lexical Lifetimes（NLL）**: 引用（Reference）有效期由最后使用点决定，而非词法作用域。
 
 ---
 
@@ -99,7 +99,7 @@ RustSEM 通过**动态生命周期延伸**显式建模 NLL：引用 `shr(lt, p)`
 
 ### RustBelt（POPL 2018） {#rustbeltpopl-2018}
 
-RustBelt 的 **Lifetime Logic** 将生命周期编码为 Iris 中的「借用命题（borrow proposition）」：所有权资源可在生命周期内临时拆分，生命周期结束后归还。这给出了 `LF-FM-T1` 的分离逻辑证明。
+RustBelt 的 **Lifetime Logic** 将生命周期编码为 Iris 中的「借用命题（borrow proposition）」：所有权（Ownership）资源可在生命周期内临时拆分，生命周期结束后归还。这给出了 `LF-FM-T1` 的分离逻辑证明。
 
 ### Oxide（ICFP 2023 / arXiv:1903.00982） {#oxideicfp-2023-arxiv190300982}
 

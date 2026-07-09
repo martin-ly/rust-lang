@@ -1,7 +1,7 @@
 # 🎯 Rust 智能指针速查卡 {#rust-智能指针速查卡}
 
 > **EN**: Smart Pointers Cheatsheet
-> **Summary**: 🎯 Rust 智能指针速查卡 Smart Pointers Cheatsheet. (stub/archive redirect)
+> **Summary**: 🎯 Rust 智能指针（Smart Pointer）速查卡 Smart Pointers Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >
@@ -1011,7 +1011,7 @@ impl AppConfig {
 
 | 操作 | `LazyLock` (标准访问) | `LazyLock::get()` (Rust 1.96) | 提升 |
 |------|----------------------|------------------------------|------|
-| 已初始化读取 | 原子操作检查 | 直接读取 | **15-20%** |
+| 已初始化读取 | 原子操作（Atomic Operations）检查 | 直接读取 | **15-20%** |
 | 未初始化读取 | 触发初始化 | 返回 None | 避免不必要初始化 |
 | 并发读取 | 锁竞争 | 无锁 | **显著降低延迟** |
 
@@ -1229,7 +1229,7 @@ let g1 = r.borrow_mut();
 let g2 = r.borrow();  // ❌ panic: 已借出可变借用
 ```
 
-**原因**: 运行时借用检查，同一时刻只能有一个可变借用或多个不可变借用。
+**原因**: 运行时借用检查，同一时刻只能有一个可变借用（Mutable Borrow）或多个不可变借用（Immutable Borrow）。
 
 **修正**:
 
@@ -1365,7 +1365,7 @@ impl Unmovable {
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [所有权与智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
+- [所有权（Ownership）与智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [智能指针（Smart Pointer） API 参考](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_smart_pointer_api_reference.md)
 
 ## 🧩 相关示例代码 {#相关示例代码}
@@ -1404,7 +1404,7 @@ impl Unmovable {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [所有权模型形式化](../../research_notes/formal_methods/10_ownership_model.md) — 所有权系统形式化基础
-- 生命周期形式化 — 智能指针生命周期
+- 生命周期（Lifetimes）形式化 — 智能指针生命周期
 - [Pin 形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) — 自引用结构形式化
 - [Send/Sync 形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) — 线程安全 trait 形式化
 - [类型系统基础](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) — 智能指针类型理论
@@ -1416,7 +1416,7 @@ impl Unmovable {
 - [所有权系统速查卡](02_ownership_cheatsheet.md) - 所有权与智能指针
 - [类型系统速查卡](02_type_system.md) - 指针类型
 - [线程与并发速查卡](02_threads_concurrency_cheatsheet.md) - Arc 在多线程中的应用
-- [异步编程速查卡](02_async_patterns.md) - Arc 在异步中的应用
+- [异步（Async）编程速查卡](02_async_patterns.md) - Arc 在异步中的应用
 
 ---
 

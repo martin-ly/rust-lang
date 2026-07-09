@@ -18,8 +18,8 @@
   - [📑 目录 {#目录}](#-目录-目录)
   - [一、RustBelt 论文结构（附录形式化） {#一rustbelt-论文结构附录形式化}](#一rustbelt-论文结构附录形式化-一rustbelt-论文结构附录形式化)
   - [二、逐章对标详情 {#二逐章对标详情}](#二逐章对标详情-二逐章对标详情)
-    - [2.1 所有权与借用（RustBelt 核心） {#21-所有权与借用rustbelt-核心}](#21-所有权与借用rustbelt-核心-21-所有权与借用rustbelt-核心)
-    - [2.2 类型系统 {#22-类型系统}](#22-类型系统-22-类型系统)
+    - [2.1 所有权（Ownership）与借用（RustBelt 核心） {#21-所有权与借用rustbelt-核心}](#21-所有权与借用rustbelt-核心-21-所有权与借用rustbelt-核心)
+    - [2.2 类型系统（Type System） {#22-类型系统}](#22-类型系统-22-类型系统)
     - [2.3 扩展（RustBelt Meets Relaxed Memory, POPL 2020） {#23-扩展rustbelt-meets-relaxed-memory-popl-2020}](#23-扩展rustbelt-meets-relaxed-memory-popl-2020-23-扩展rustbelt-meets-relaxed-memory-popl-2020)
   - [三、覆盖度汇总 {#三覆盖度汇总}](#三覆盖度汇总-三覆盖度汇总)
   - [四、补全路线图 {#四补全路线图}](#四补全路线图-四补全路线图)
@@ -51,11 +51,11 @@
 | **λRust 语法** | 形式化语言子集语法 | ownership_model、borrow_checker_proof 的 Def/规则 | 部分 |
 | **操作语义** | 小步归约 $e \to e'$ | type_system 进展性/保持性；无显式 MIR 级 | 部分 |
 | **类型系统（Type System）** | typing rules | type_system_foundations T1–T5 | 部分 |
-| **生命周期逻辑** | lifetime 证明规则 | lifetime_formalization LF1–LF3 | 部分 |
+| **生命周期（Lifetimes）逻辑** | lifetime 证明规则 | lifetime_formalization LF1–LF3 | 部分 |
 | **借用证明规则** | 分离逻辑、borrowing | borrow_checker_proof T1–T2 | 部分 |
 | **owned pointers** | Box 语义 | ownership_model Def BOX1、BOX-T1 | 已覆盖 |
-| **&mut T** | 可变引用 | borrow 规则 6、A-BR2 | 已覆盖 |
-| **&T** | 共享引用 | borrow 规则 5、A-BR1 | 已覆盖 |
+| **&mut T** | 可变引用（Mutable Reference） | borrow 规则 6、A-BR2 | 已覆盖 |
+| **&T** | 共享引用（Reference） | borrow 规则 5、A-BR1 | 已覆盖 |
 | **Copy** | 复制语义 | ownership 规则、Copy trait | 已覆盖 |
 | **Send/Sync** | 并发 trait | async_state_machine T6.2、SPAWN-T1 | 已覆盖 |
 | **Iris 分离逻辑** | 机器可检查证明框架 | [coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)（T-OW2 骨架，证明 Admitted） | 部分 |
@@ -79,7 +79,7 @@
 | :--- | :--- | :--- |
 | 唯一所有者 | ownership T2、A-OW1、[coq_skeleton](../../archive/deprecated/coq_skeleton/README.md) | Coq 骨架已创建，证明待补全 |
 | 移动语义 | ownership 规则 2、A-OW2 | 语言级有，MIR 级无 |
-| 借用互斥 | borrow T1、A-BR2/3 | Coq 骨架待扩展（见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)） |
+| 借用（Borrowing）互斥 | borrow T1、A-BR2/3 | Coq 骨架待扩展（见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)） |
 | 生命周期 outlives | lifetime LF-T1–T3 | 无 Iris lifetime 逻辑 |
 
 ### 2.2 类型系统 {#22-类型系统}
@@ -130,7 +130,7 @@
 
 1. **短期**：保持语言级形式化与 RustBelt 概念对齐；在 PROOF_INDEX 中标注 RustBelt 对应章节
 2. **中期**：补全 [coq_skeleton](../../archive/deprecated/coq_skeleton/README.md) Admitted 证明；扩展 T-BR1/T-TY3 骨架（见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[AENEAS_INTEGRATION_PLAN](10_aeneas_integration_plan.md)、[COQ_OF_RUST_INTEGRATION_PLAN](10_coq_of_rust_integration_plan.md)）
-3. **长期**：若资源允许，对标 RustBelt Meets Relaxed Memory，补全原子操作与 Arc 松弛内存形式化
+3. **长期**：若资源允许，对标 RustBelt Meets Relaxed Memory，补全原子操作（Atomic Operations）与 Arc 松弛内存形式化
 
 ---
 

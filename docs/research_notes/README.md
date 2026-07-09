@@ -23,7 +23,7 @@
 本目录正在进行 **权威国际化来源对齐升级**（Rust 1.96.1+ / Edition 2024）。
 
 - `experiments/`、`software_design_theory/` 各子目录（设计模式、工作流、执行模型、组合工程、边界系统、分布式）内容已从 `archive/research_notes_2026_06_25/` 迁回，并完成权威国际化来源对齐升级。
-- `formal_modules/` 已新建 5 篇模块系统规范文档并迁回形式化生态思维导图。
+- `formal_modules/` 已新建 5 篇模块（Module）系统规范文档并迁回形式化生态思维导图。
 - 根目录 130+ 篇历史核心文档已从 `archive/research_notes_2026_06_25/` 迁回。
 - 所有文件已完成标准化元信息、权威来源标注、Rust 1.96.1+ / Edition 2024 版本对齐。
 
@@ -38,7 +38,7 @@
 | 目标 | 入口 |
 | :--- | :--- |
 | 理解形式化证明 | [FORMAL_FULL_MODEL_OVERVIEW](10_formal_full_model_overview.md) → [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) |
-| Rust 所有权系统深度形式化 | [`rust-ownership-decidability/`](../../archive/rust-ownership-decidability) — 600K+ 字完整知识库 |
+| Rust 所有权（Ownership）系统深度形式化 | [`rust-ownership-decidability/`](../../archive/rust-ownership-decidability) — 600K+ 字完整知识库 |
 | 查概念/证明 | [QUICK_FIND](10_quick_find.md) |
 | 选设计模式/并发模型 | [software_design_theory/00_MASTER_INDEX](software_design_theory/10_00_master_index.md) |
 | 理解三大支柱 | [AUTHORITATIVE_ALIGNMENT_GUIDE](10_authoritative_alignment_guide.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） |
@@ -119,8 +119,8 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 本目录旨在记录和推进 Rust 语言相关的深入研究，包括：
 
-1. **形式化方法**：所有权（Ownership）、借用检查器、异步系统的形式化建模与证明
-2. **类型理论**：Rust 类型系统的理论基础、范畴论解释、形式化验证
+1. **形式化方法**：所有权（Ownership）、借用（Borrowing）检查器、异步（Async）系统的形式化建模与证明
+2. **类型理论**：Rust 类型系统（Type System）的理论基础、范畴论解释、形式化验证
 3. **实验研究**：性能基准测试、内存分析、编译器优化实验
 4. **实际应用**：实际项目案例研究、最佳实践总结
 5. **研究方法**：研究方法和工具的使用指南
@@ -144,8 +144,8 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 - ✅ 所有权模型的形式化定义
 - ✅ 借用检查器的正确性证明
 - ✅ 异步（Async） Future/Poll 状态机的形式化描述
-- ✅ 生命周期系统的形式化语义
-- ✅ 并发安全的形式化保证
+- ✅ 生命周期（Lifetimes）系统的形式化语义
+- ✅ 并发安全（Concurrency Safety）的形式化保证
 - ✅ Rust 1.93.1 新特性的形式化分析（已完成）🆕
 - ✅ Rust 1.93.0 新特性的形式化分析（已完成）
 - ✅ Rust 1.91.1 新特性的形式化分析（已完成）
@@ -153,10 +153,10 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 **已完成的证明**:
 
 - ✅ 所有权唯一性证明
-- ✅ 内存安全框架证明
+- ✅ 内存安全（Memory Safety）框架证明
 - ✅ 数据竞争自由证明
 - ✅ 借用规则正确性证明
-- ✅ 引用有效性证明
+- ✅ 引用（Reference）有效性证明
 - ✅ 生命周期推断算法正确性证明
 - ✅ 类型安全证明（进展性、保持性）
 - ✅ 类型推导正确性证明
@@ -172,7 +172,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 **论证系统指南**: [10_formal_proof_system_guide.md](10_formal_proof_system_guide.md) - 论证缺口分析、概念-公理-定理映射、反例与证明树索引
 
-**全面系统化梳理总览**: [10_comprehensive_systematic_overview.md](10_comprehensive_systematic_overview.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪、思维表征全索引
+**全面系统化梳理总览**: [10_comprehensive_systematic_overview.md](10_comprehensive_systematic_overview.md) - 全局一致性（Coherence）、语义归纳、概念族谱、论证缺口追踪、思维表征全索引
 
 **全局统一系统化框架**: [10_unified_systematic_framework.md](10_unified_systematic_framework.md) - 全景思维导图、多维矩阵、公理-定理证明全链路、决策树、反例总索引
 
@@ -218,7 +218,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 - ✅ Trait 系统的形式化定义
 - ✅ 型变（Variance）的数学基础
 - ✅ GATs (Generic Associated Types) 的类型理论
-- ✅ const 泛型的类型系统影响
+- ✅ const 泛型（Generics）的类型系统影响
 - ✅ Dependent Type 与 Rust 的关系（已在高级类型特性中涵盖）
 - ✅ Rust 1.93.0 类型系统改进的形式化分析（已完成）🆕
 - ✅ Rust 1.92.0 类型系统改进的形式化分析（已完成）
@@ -246,7 +246,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 - ✅ 内存使用模式分析
 - ✅ 并发性能测试框架
 - ✅ 编译器优化效果评估
-- ✅ 宏展开性能分析
+- ✅ 宏（Macro）展开性能分析
 - ✅ 不同分配器策略对比（已在内存分析和并发性能中涵盖）
 - ✅ Rust 1.93.0 性能改进的实验验证（已完成）🆕
 - ✅ Rust 1.92.0 性能改进的实验验证（已完成）
@@ -432,7 +432,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
    - 未初始化内存的安全性形式化
    - 相关笔记: [类型系统基础](type_theory/10_type_system_foundations.md)、[高级类型特性](type_theory/10_advanced_types.md)
 4. **`cfg` 属性在 `asm!` 行上研究**
-   - 内联汇编条件编译的改进
+   - 内联汇编（Inline Assembly）条件编译的改进
    - 平台特定代码简化策略
    - 相关笔记: [工具链文档](../06_toolchain/06_05_rust_1_93_vs_1_92_comparison.md)
 
@@ -450,7 +450,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 **主要研究方向**:
 
-1. **异步迭代器性能研究**
+1. **异步迭代器（Iterator）性能研究**
    - 性能提升 15-20% 的机制分析
    - 异步迭代器链式操作优化研究
    - 相关笔记: [并发性能研究](experiments/10_concurrency_performance.md)

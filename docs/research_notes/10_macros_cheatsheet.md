@@ -1,7 +1,7 @@
 # 宏速查卡 {#宏速查卡}
 
 > **EN**: Macros Cheatsheet
-> **Summary**: 宏速查卡 Macros Cheatsheet. (stub/archive redirect)
+> **Summary**: 宏（Macro）速查卡 Macros Cheatsheet. (stub/archive redirect)
 >
 > **概念族**: 速查卡
 > **内容分级**: [归档级]
@@ -27,7 +27,7 @@
     - [参数模式 {#参数模式}](#参数模式-参数模式)
     - [重复模式 {#重复模式}](#重复模式-重复模式)
     - [常见片段类型 {#常见片段类型}](#常见片段类型-常见片段类型)
-  - [过程宏 {#过程宏}](#过程宏-过程宏)
+  - [过程宏（Procedural Macro） {#过程宏}](#过程宏-过程宏)
     - [派生宏 {#派生宏-1}](#派生宏-派生宏-1)
     - [属性宏 {#属性宏-1}](#属性宏-属性宏-1)
     - [函数式宏 {#函数式宏}](#函数式宏-函数式宏)
@@ -50,7 +50,7 @@
   - [🌍 权威国际化资源链接 {#权威国际化资源链接}](#-权威国际化资源链接-权威国际化资源链接)
     - [Rust Reference 核心章节 {#rust-reference-核心章节}](#rust-reference-核心章节-rust-reference-核心章节)
     - [The Rust Programming Language 核心章节 {#the-rust-programming-language-核心章节}](#the-rust-programming-language-核心章节-the-rust-programming-language-核心章节)
-    - [Rust Standard Library 核心 API / 模块 {#rust-standard-library-核心-api-模块}](#rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块)
+    - [Rust Standard Library 核心 API / 模块（Module） {#rust-standard-library-核心-api-模块}](#rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块)
     - [Rust By Example / Rust Cookbook / cheats.rs {#rust-by-example-rust-cookbook-cheatsrs}](#rust-by-example--rust-cookbook--cheatsrs-rust-by-example-rust-cookbook-cheatsrs)
     - [宏系统专属权威链接 {#宏系统专属权威链接}](#宏系统专属权威链接-宏系统专属权威链接)
       - [Reference Macros {#reference-macros}](#reference-macros-reference-macros)
@@ -143,7 +143,7 @@ vec![1, 2, 3,];  // 带结尾逗号
 | `item` | 项 | `fn`, `struct`等 |
 | `block` | 块 | `{ ... }` |
 | `meta` | 属性内容 | `derive(Debug)` |
-| `lifetime` | 生命周期 | `'a`, `'static` |
+| `lifetime` | 生命周期（Lifetimes） | `'a`, `'static` |
 
 ---
 
@@ -384,7 +384,7 @@ struct MyStruct;
 | :--- | :--- | :--- |
 | `println!` | 打印 | `println!("{}", x)` |
 | `format!` | 格式化字符串 | `format!("{}", x)` |
-| `vec!` | 创建Vec | `vec![1, 2, 3]` |
+| `vec!` | 创建Vec（Vec） | `vec![1, 2, 3]` |
 | `assert!` | 断言 | `assert!(x > 0)` |
 | `panic!` | panic | `panic!("error")` |
 | `todo!` | 待实现 | `todo!("implement")` |
@@ -401,7 +401,7 @@ struct MyStruct;
 struct Point { x: i32, y: i32 }
 ```
 
-常用trait: `Debug`, `Clone`, `Copy`, `PartialEq`, `Eq`, `PartialOrd`, `Ord`, `Hash`, `Default`
+常用trait（Trait）: `Debug`, `Clone`, `Copy`, `PartialEq`, `Eq`, `PartialOrd`, `Ord`, `Hash`, `Default`
 
 ---
 

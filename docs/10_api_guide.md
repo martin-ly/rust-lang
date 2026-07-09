@@ -76,15 +76,15 @@ fn main() {
 | 模块（Module） | 核心类型 | 描述 |
 |------|----------|------|
 | ownership | OwnershipDemo | 所有权演示 |
-| borrow | BorrowChecker | 借用检查示例 |
+| borrow | BorrowChecker | 借用（Borrowing）检查示例 |
 | smart_pointers | BoxDemo, RcDemo | 智能指针（Smart Pointer） |
-| lifetime | LifetimeDemo | 生命周期 |
+| lifetime | LifetimeDemo | 生命周期（Lifetimes） |
 
 ### c02_type_system {#c02_type_system}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-| 模块 | 核心类型 | 描述 |
+| 模块（Module） | 核心类型 | 描述 |
 |------|----------|------|
 | basic_types | TypeDemo | 基础类型 |
 | collections | VecDemo, MapDemo | 集合类型 |
@@ -117,7 +117,7 @@ fn main() {
 
 | 模块 | 核心类型 | 描述 |
 |------|----------|------|
-| async_basics | AsyncRuntime | 异步运行时 |
+| async_basics | AsyncRuntime | 异步运行时（Runtime） |
 | streams | StreamProcessor | 流处理 |
 | web_frameworks | AxumServer | Web 服务器 |
 

@@ -24,7 +24,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-Rust 的异步编程基于 Future trait：
+Rust 的异步（Async）编程基于 Future trait：
 
 ```rust
 use std::future::Future;
@@ -388,7 +388,7 @@ where
 
 | 场景 | 异步模式 | 关键技术 |
 | :--- | :--- | :--- |
-| 高并发网络服务 | 多线程运行时 | `tokio::main(multi_thread)` |
+| 高并发网络服务 | 多线程运行时（Runtime） | `tokio::main(multi_thread)` |
 | 大量并发连接 | 限制并发数 | `Semaphore` |
 | 长连接处理 | 取消与清理 | `CancellationToken` |
 | 实时数据流 | 流处理 | `Stream`, `StreamExt` |
@@ -421,7 +421,7 @@ where
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 异步状态机 | 异步状态机形式化 | [../../../research_notes/formal_methods/10_async_state_machine.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) |
-| Pin 与自引用 | 自引用类型形式化 | [../../../research_notes/formal_methods/10_pin_self_referential.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) |
+| Pin 与自引用（Reference） | 自引用类型形式化 | [../../../research_notes/formal_methods/10_pin_self_referential.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) |
 | Send/Sync 形式化 | 线程安全 trait 形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 
 ### 实验分析 {#实验分析}

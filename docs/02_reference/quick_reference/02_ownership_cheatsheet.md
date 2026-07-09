@@ -113,10 +113,10 @@ mindmap
 
 | 层次 | 概念定义 | 属性关系 | 解释论证 |
 | :--- | :--- | :--- | :--- |
-| **L1 基础** | 所有权（Ownership）：值的唯一管理者 | 公理：每个值有且仅有一个所有者 | 定理 T2.1：所有权唯一性保证内存安全 |
+| **L1 基础** | 所有权（Ownership）：值的唯一管理者 | 公理：每个值有且仅有一个所有者 | 定理 T2.1：所有权唯一性保证内存安全（Memory Safety） |
 | **L2 借用（Borrowing）** | 引用：临时访问权限 | 规则：&T 允许多重，&mut T 独占 | 定理 T2.2：借用规则防止数据竞争 |
 | **L3 生命周期** | 作用域标注：'a | 公理：引用不能 outlive 所有者 | 定理 T2.3：生命周期保证引用有效性 |
-| **L4 智能指针（Smart Pointer）** | RAII 封装：Box/Rc/Arc | 规则：运行时引用计数 | 定理 T2.4：智能指针保持所有权语义 |
+| **L4 智能指针（Smart Pointer）** | RAII 封装：Box/Rc/Arc | 规则：运行时（Runtime）引用计数 | 定理 T2.4：智能指针保持所有权语义 |
 | **L5 形式化** | 分离逻辑模型 | 霍尔三元组 {P}C{Q} | 定理 T2.5：所有权系统可靠性 |
 
 > 形式化理论详见：[所有权模型形式化](../../research_notes/formal_methods/10_ownership_model.md)
@@ -484,7 +484,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
    fn process(s: &String) { ... }  // ✅ 高效
    ```
 
-2. **使用切片**
+2. **使用切片（Slice）**
 
    ```rust,ignore
    fn first_word(s: &str) -> &str { ... }  // ✅ 灵活
@@ -619,7 +619,7 @@ fn no_dangle() -> String {
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-- [类型系统理论](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/06_type_system_theory.md)
+- [类型系统（Type System）理论](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/06_type_system_theory.md)
 - [形式化验证](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/07_formal_verification.md)
 - [所有权模型形式化](../../research_notes/formal_methods/10_ownership_model.md) — Def 2.1–2.3、定理 T2.1–T2.5
 - [借用检查器证明](../../research_notes/formal_methods/10_borrow_checker_proof.md) — 定理 3.1–3.3、引理 L3.1–L3.4
@@ -853,7 +853,7 @@ for i in 0..1000 {
 
 **影响**:
 
-- 异步场景下的内存分配性能提升
+- 异步（Async）场景下的内存分配性能提升
 - HashMap 操作更快
 - 内存碎片减少
 
@@ -905,7 +905,7 @@ for i in 0..1000 {
 - [生命周期速查卡](02_type_system.md) - 生命周期标注
 - [智能指针速查卡](02_smart_pointers_cheatsheet.md) - 所有权与智能指针
 - [借用检查器速查卡](02_ownership_cheatsheet.md) - 借用规则详解
-- [错误处理速查卡](02_error_handling_cheatsheet.md) - 所有权与错误处理
+- [错误处理（Error Handling）速查卡](02_error_handling_cheatsheet.md) - 所有权与错误处理
 
 ---
 

@@ -51,7 +51,7 @@ mindmap
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-Rust 通过所有权和借用系统在编译时保证内存安全：
+Rust 通过所有权（Ownership）和借用（Borrowing）系统在编译时保证内存安全（Memory Safety）：
 
 ```rust
 // 保证 1：无空指针解引用

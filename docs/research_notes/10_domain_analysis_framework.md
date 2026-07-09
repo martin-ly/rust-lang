@@ -24,12 +24,12 @@
   - [📑 目录 {#目录}](#-目录-目录)
   - [🎯 概述 {#概述}](#-概述-概述)
   - [五大核心领域 {#五大核心领域}](#五大核心领域-五大核心领域)
-    - [领域 1: 内存安全 {#领域-1-内存安全}](#领域-1-内存安全-领域-1-内存安全)
+    - [领域 1: 内存安全（Memory Safety） {#领域-1-内存安全}](#领域-1-内存安全-领域-1-内存安全)
       - [边界定义 {#边界定义}](#边界定义-边界定义)
       - [核心抽象 {#核心抽象}](#核心抽象-核心抽象)
       - [关键定理 {#关键定理}](#关键定理-关键定理)
       - [领域模型图 {#领域模型图}](#领域模型图-领域模型图)
-    - [领域 2: 类型系统 {#领域-2-类型系统}](#领域-2-类型系统-领域-2-类型系统)
+    - [领域 2: 类型系统（Type System） {#领域-2-类型系统}](#领域-2-类型系统-领域-2-类型系统)
       - [边界定义 {#边界定义-1}](#边界定义-边界定义-1)
       - [核心抽象 {#核心抽象-1}](#核心抽象-核心抽象-1)
       - [关键定理 {#关键定理-1}](#关键定理-关键定理-1)
@@ -95,10 +95,10 @@
 
 | 包含 | 排除 | 交叉领域 |
 | :--- | :--- | :--- |
-| 所有权系统 | 垃圾回收 | 类型系统（Type System）（所有权类型） |
-| 借用检查器 | 手动内存管理 | 并发（Send/Sync） |
-| 生命周期 | 智能指针实现细节 | 编译器（MIR borrowck） |
-| 内存布局 | 分配器实现 | FFI（unsafe边界） |
+| 所有权（Ownership）系统 | 垃圾回收 | 类型系统（Type System）（所有权类型） |
+| 借用（Borrowing）检查器 | 手动内存管理 | 并发（Send/Sync） |
+| 生命周期（Lifetimes） | 智能指针（Smart Pointer）实现细节 | 编译器（MIR borrowck） |
+| 内存布局 | 分配器实现 | FFI（unsafe（Unsafe）边界） |
 
 #### 核心抽象 {#核心抽象}
 
@@ -202,7 +202,7 @@ graph TB
 
 | 包含 | 排除 | 交叉领域 |
 | :--- | :--- | :--- |
-| 静态类型检查 | 运行时类型信息 | 内存安全（所有权类型） |
+| 静态类型检查 | 运行时（Runtime）类型信息 | 内存安全（所有权类型） |
 | 泛型（Generics） | 模板元编程 | 编译器（单态化（Monomorphization）） |
 | Trait | 虚函数表 | 软件设计（接口抽象） |
 | 类型推导 | 反射 | 形式化（类型论） |
@@ -289,7 +289,7 @@ A + B     : A 或 B
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
-**核心关注点**: 多线程执行、异步编程、同步机制
+**核心关注点**: 多线程执行、异步（Async）编程、同步机制
 
 #### 边界定义 {#边界定义-2}
 
@@ -334,10 +334,10 @@ Rust 映射:
 
 | 定理 | 陈述 | 证明 | 重要性 |
 | :--- | :--- | :--- | :--- |
-| **T-Send安全** | Send类型可安全跨线程转移 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | ⭐⭐⭐⭐⭐ |
-| **T-Sync安全** | Sync类型可安全跨线程共享 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | ⭐⭐⭐⭐⭐ |
+| **T-Send（Send）安全** | Send类型可安全跨线程转移 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | ⭐⭐⭐⭐⭐ |
+| **T-Sync（Sync）安全** | Sync类型可安全跨线程共享 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | ⭐⭐⭐⭐⭐ |
 | **T-异步安全** | async/await不引入数据竞争 | [async_state_machine](formal_methods/10_async_state_machine.md) | ⭐⭐⭐⭐ |
-| **T-Pin安全** | Pin保证自引用安全 | [pin_self_referential](formal_methods/10_pin_self_referential.md) | ⭐⭐⭐⭐ |
+| **T-Pin（Pin）安全** | Pin保证自引用（Reference）安全 | [pin_self_referential](formal_methods/10_pin_self_referential.md) | ⭐⭐⭐⭐ |
 
 #### 并发模型对比 {#并发模型对比}
 
@@ -346,7 +346,7 @@ Rust 映射:
 | **线程** | 共享内存 | Mutex/RwLock | std::thread | CPU密集型 |
 | **CSP** | 通道 | 阻塞/缓冲 | std::sync::mpsc | 消息传递 |
 | **Actor** | 消息 | 异步邮箱 | actix/tokio::sync | 分布式 |
-| **异步** | Future组合 | Poll/await | async/await | I/O密集型 |
+| **异步** | Future（Future）组合 | Poll/await | async/await | I/O密集型 |
 | **数据并行** | 分块数据 | 归约/扫描 | rayon | 并行计算 |
 
 ---
@@ -362,9 +362,9 @@ Rust 映射:
 | 包含 | 排除 | 交叉领域 |
 | :--- | :--- | :--- |
 | 设计模式 | 架构风格 | 类型系统（Trait抽象） |
-| 模块系统 | 包管理 | 编译器（可见性检查） |
+| 模块（Module）系统 | 包管理 | 编译器（可见性检查） |
 | API设计 | 用户界面 | 形式化（接口规范） |
-| 错误处理策略 | 日志实现 | 类型系统（Result类型） |
+| 错误处理（Error Handling）策略 | 日志实现 | 类型系统（Result（Result）类型） |
 
 #### 核心抽象 {#核心抽象-3}
 
@@ -405,7 +405,7 @@ Rust特有:
 | **Builder** | 复杂对象构建 | 消耗型/非消耗型 | 渐进式类型 |
 | **RAII** | 资源管理 | Drop trait | 线性类型 |
 | **Newtype** | 类型安全 | struct Wrapper(T); | 同构类型 |
-| **类型状态** | 编译时状态 | 泛型参数 | 依赖类型 |
+| **类型状态** | 编译时状态 | 泛型（Generics）参数 | 依赖类型 |
 | **策略** | 算法族 | Trait对象/泛型 | 高阶类型 |
 | **观察者** | 事件通知 | 通道/回调 | 协程 |
 
@@ -543,7 +543,7 @@ graph TB
 
 | 领域 | L1 元概念 | L2 核心抽象 | L3 具体实现 | L4 代码实践 |
 | :--- | :--- | :--- | :--- | :--- |
-| **内存安全** | 资源管理 | 所有权系统 | 借用规则 | RAII模式 |
+| **内存安全** | 资源管理 | 所有权系统 | 借用规则 | RAII（RAII）模式 |
 | **类型系统** | 类型安全 | 类型判断 | 泛型/Trait | 类型标注 |
 | **并发** | 并发安全（Concurrency Safety） | Send/Sync | 同步原语 | async/await |
 | **软件设计** | 抽象能力 | 设计模式 | 模块系统 | 代码组织 |

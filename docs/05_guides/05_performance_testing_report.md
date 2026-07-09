@@ -15,7 +15,7 @@
 | 方法 | 工具 | 适用场景 |
 |:---|:---|:---|
 | 微基准测试 | `criterion` | 函数级性能对比 |
-| 集成性能测试 | `cargo bench` | 模块级性能评估 |
+| 集成性能测试 | `cargo bench` | 模块（Module）级性能评估 |
 | 内存分析 | `heaptrack`, `valgrind` | 堆分配分析 |
 | CPU 分析 | `perf`, `flamegraph` | 热点识别 |
 

@@ -27,7 +27,7 @@
 >
 > **Bloom 层级**: L3-L5 (应用/分析/评价)
 >
-> **知识领域**: Web 框架、可组合网络服务、异步运行时、Actor 模型演进
+> **知识领域**: Web 框架、可组合网络服务、异步（Async）运行时（Runtime）、Actor 模型演进
 >
 > **对应 Rust 版本**: 1.96.1+ (ntex 3.10.0+)
 
@@ -89,12 +89,12 @@ graph LR
     HANDLER --> RESP[HttpResponse]
 ```
 
-ntex 的请求生命周期：
+ntex 的请求生命周期（Lifetimes）：
 
 1. **`HttpServer`**：监听端口，管理工作线程，负责连接生命周期。
 2. **`App`**：存储状态、路由表和中间件；本身实现 `Service<Request>`。
 3. **路由分发**：根据路径与方法匹配到对应的 service/handler。
-4. **Handler**：用户异步函数通过 `#[web::get]` 等宏注册为 service。
+4. **Handler**：用户异步函数通过 `#[web::get]` 等宏（Macro）注册为 service。
 5. **响应**：`HttpResponse` 通过 `Responder` trait 构造。
 
 > [来源: [ntex::web 文档](https://docs.rs/ntex/latest/ntex/web/index.html)]
@@ -116,7 +116,7 @@ async fn get_user(id: web::types::Path<u64>) -> impl web::Responder {
 
 ### 2.3 提取器与类型映射 {#23-提取器与类型映射}
 
-ntex 提供 `web::types` 模块中的提取器：
+ntex 提供 `web::types` 模块（Module）中的提取器：
 
 ```rust,ignore
 use ntex::web::types::{Path, Query, Json, State};

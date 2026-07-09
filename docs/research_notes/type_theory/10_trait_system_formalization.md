@@ -27,7 +27,7 @@
     - [理论背景 {#理论背景}](#理论背景-理论背景)
     - [类型类的理论基础 {#类型类的理论基础}](#类型类的理论基础-类型类的理论基础)
     - [Trait 对象的理论基础 {#trait-对象的理论基础}](#trait-对象的理论基础-trait-对象的理论基础)
-    - [泛型 Trait 的理论基础 {#泛型-trait-的理论基础}](#泛型-trait-的理论基础-泛型-trait-的理论基础)
+    - [泛型（Generics） Trait 的理论基础 {#泛型-trait-的理论基础}](#泛型-trait-的理论基础-泛型-trait-的理论基础)
     - [相关学术论文的详细分析 {#相关学术论文的详细分析}](#相关学术论文的详细分析-相关学术论文的详细分析)
       - [1. Type Classes: An Exploration of the Design Space {#1-type-classes-an-exploration-of-the-design-space}](#1-type-classes-an-exploration-of-the-design-space-1-type-classes-an-exploration-of-the-design-space)
       - [2. Existential Types for Object-Oriented Programming {#2-existential-types-for-object-oriented-programming}](#2-existential-types-for-object-oriented-programming-2-existential-types-for-object-oriented-programming)
@@ -39,7 +39,7 @@
     - [4. Trait 解析算法 {#4-trait-解析算法}](#4-trait-解析算法-4-trait-解析算法)
     - [5. Trait 对象语义 {#5-trait-对象语义}](#5-trait-对象语义-5-trait-对象语义)
     - [Trait Coherence（一致性）形式化 {#trait-coherence一致性形式化}](#trait-coherence一致性形式化-trait-coherence一致性形式化)
-    - [孤儿规则与 Negative Impls {#孤儿规则与-negative-impls}](#孤儿规则与-negative-impls-孤儿规则与-negative-impls)
+    - [孤儿规则（Orphan Rule）与 Negative Impls {#孤儿规则与-negative-impls}](#孤儿规则与-negative-impls-孤儿规则与-negative-impls)
     - [RPITIT 与 async fn in trait（Rust 1.75.0 稳定化） {#rpitit-与-async-fn-in-traitrust-1750-稳定化}](#rpitit-与-async-fn-in-traitrust-1750-稳定化-rpitit-与-async-fn-in-traitrust-1750-稳定化)
     - [impl Trait 与 dyn Trait 可替换边界 {#impl-trait-与-dyn-trait-可替换边界}](#impl-trait-与-dyn-trait-可替换边界-impl-trait-与-dyn-trait-可替换边界)
     - [Trait + 泛型 + GAT 组合与 Specialization {#trait-泛型-gat-组合与-specialization}](#trait--泛型--gat-组合与-specialization-trait-泛型-gat-组合与-specialization)
@@ -47,7 +47,7 @@
   - [🌳 公理-定理证明树 {#公理-定理证明树}](#-公理-定理证明树-公理-定理证明树)
     - [证明工作完成总结 {#证明工作完成总结}](#证明工作完成总结-证明工作完成总结)
       - [定理 1: Trait 对象类型安全 ✅ {#定理-1-trait-对象类型安全}](#定理-1-trait-对象类型安全--定理-1-trait-对象类型安全)
-      - [定理 2: Trait 实现一致性 ✅ {#定理-2-trait-实现一致性}](#定理-2-trait-实现一致性--定理-2-trait-实现一致性)
+      - [定理 2: Trait 实现一致性（Coherence） ✅ {#定理-2-trait-实现一致性}](#定理-2-trait-实现一致性--定理-2-trait-实现一致性)
       - [定理 3: Trait 解析正确性 ✅ {#定理-3-trait-解析正确性}](#定理-3-trait-解析正确性--定理-3-trait-解析正确性)
   - [✅ 证明目标 {#证明目标}](#-证明目标-证明目标)
     - [待证明的性质 {#待证明的性质}](#待证明的性质-待证明的性质)
@@ -59,7 +59,7 @@
     - [示例 4: 关联类型 {#示例-4-关联类型}](#示例-4-关联类型-示例-4-关联类型)
     - [示例 5: Trait 对象与动态分发 {#示例-5-trait-对象与动态分发}](#示例-5-trait-对象与动态分发-示例-5-trait-对象与动态分发)
     - [示例 6: Trait 约束 {#示例-6-trait-约束}](#示例-6-trait-约束-示例-6-trait-约束)
-    - [示例 7: Trait 对象与生命周期 {#示例-7-trait-对象与生命周期}](#示例-7-trait-对象与生命周期-示例-7-trait-对象与生命周期)
+    - [示例 7: Trait 对象与生命周期（Lifetimes） {#示例-7-trait-对象与生命周期}](#示例-7-trait-对象与生命周期-示例-7-trait-对象与生命周期)
     - [示例 8: 高级 Trait 特性 - 默认实现和关联函数 {#示例-8-高级-trait-特性---默认实现和关联函数}](#示例-8-高级-trait-特性---默认实现和关联函数-示例-8-高级-trait-特性---默认实现和关联函数)
     - [示例 9: Trait 对象集合 {#示例-9-trait-对象集合}](#示例-9-trait-对象集合-示例-9-trait-对象集合)
   - [📖 参考文献 {#参考文献}](#-参考文献-参考文献)
@@ -72,22 +72,22 @@
     - [进行中 🔄（已完成） {#进行中-已完成}](#进行中-已完成-进行中-已完成)
     - [已完成（原计划中）✅ {#已完成原计划中}](#已完成原计划中-已完成原计划中)
   - [🔗 系统集成与实际应用 {#系统集成与实际应用}](#-系统集成与实际应用-系统集成与实际应用)
-    - [与类型系统的集成 {#与类型系统的集成}](#与类型系统的集成-与类型系统的集成)
+    - [与类型系统（Type System）的集成 {#与类型系统的集成}](#与类型系统的集成-与类型系统的集成)
     - [与生命周期的集成 {#与生命周期的集成}](#与生命周期的集成-与生命周期的集成)
     - [实际应用案例 {#实际应用案例}](#实际应用案例-实际应用案例)
   - [🆕 Rust 1.93.0 相关更新 {#rust-1930-相关更新}](#-rust-1930-相关更新-rust-1930-相关更新)
     - [全局分配器与 Trait 对象 {#全局分配器与-trait-对象}](#全局分配器与-trait-对象-全局分配器与-trait-对象)
     - [MaybeUninit 新方法与 Trait 对象 {#maybeuninit-新方法与-trait-对象}](#maybeuninit-新方法与-trait-对象-maybeuninit-新方法与-trait-对象)
-  - [🆕 Rust Book Ch 15.2 对齐: Deref Trait形式化 {#rust-book-ch-152-对齐-deref-trait形式化}](#-rust-book-ch-152-对齐-deref-trait形式化-rust-book-ch-152-对齐-deref-trait形式化)
+  - [🆕 Rust Book Ch 15.2 对齐: Deref Trait形式化 {#rust-book-ch-152-对齐-deref-trait（Trait）形式化}](#-rust-book-ch-152-对齐-deref-trait形式化-rust-book-ch-152-对齐-deref-trait形式化)
     - [定义 DEREF-1 (Deref Trait) {#定义-deref-1-deref-trait}](#定义-deref-1-deref-trait-定义-deref-1-deref-trait)
     - [定义 DEREF-2 (DerefMut Trait) {#定义-deref-2-derefmut-trait}](#定义-deref-2-derefmut-trait-定义-deref-2-derefmut-trait)
-    - [定义 DEREF-3 (解引用强制转换 Deref Coercion) {#定义-deref-3-解引用强制转换-deref-coercion}](#定义-deref-3-解引用强制转换-deref-coercion-定义-deref-3-解引用强制转换-deref-coercion)
+    - [定义 DEREF-3 (解引用（Reference）强制转换 Deref Coercion) {#定义-deref-3-解引用强制转换-deref-coercion}](#定义-deref-3-解引用强制转换-deref-coercion-定义-deref-3-解引用强制转换-deref-coercion)
     - [定理 DEREF-T1 (Deref一致性) {#定理-deref-t1-deref一致性}](#定理-deref-t1-deref一致性-定理-deref-t1-deref一致性)
     - [定理 DEREF-T2 (Deref传递性) {#定理-deref-t2-deref传递性}](#定理-deref-t2-deref传递性-定理-deref-t2-deref传递性)
     - [定理 DEREF-T3 (DerefMut排他性) {#定理-deref-t3-derefmut排他性}](#定理-deref-t3-derefmut排他性-定理-deref-t3-derefmut排他性)
     - [代码示例 {#代码示例}](#代码示例-代码示例)
-      - [示例1: Box解引用 {#示例1-box解引用}](#示例1-box解引用-示例1-box解引用)
-      - [示例2: 自定义智能指针 {#示例2-自定义智能指针}](#示例2-自定义智能指针-示例2-自定义智能指针)
+      - [示例1: Box（Box）解引用 {#示例1-box解引用}](#示例1-box解引用-示例1-box解引用)
+      - [示例2: 自定义智能指针（Smart Pointer） {#示例2-自定义智能指针}](#示例2-自定义智能指针-示例2-自定义智能指针)
       - [示例3: 函数参数中的Deref强制转换 {#示例3-函数参数中的deref强制转换}](#示例3-函数参数中的deref强制转换-示例3-函数参数中的deref强制转换)
       - [示例4: DerefMut {#示例4-derefmut}](#示例4-derefmut-示例4-derefmut)
     - [与智能指针的集成 {#与智能指针的集成}](#与智能指针的集成-与智能指针的集成)
@@ -161,7 +161,7 @@
 
 **Trait 实现 (Trait Implementation)**: 为类型实现 Trait，提供 Trait 中所有方法的具体实现。
 
-**Trait 对象 (Trait Object)**: 动态分发的 Trait 类型，使用 `dyn Trait` 表示。Trait 对象允许在运行时选择具体实现。
+**Trait 对象 (Trait Object)**: 动态分发的 Trait 类型，使用 `dyn Trait` 表示。Trait 对象允许在运行时（Runtime）选择具体实现。
 
 **泛型 Trait (Generic Trait)**: 带类型参数的 Trait，可以约束类型参数的行为。
 
@@ -590,13 +590,13 @@ RFC 1023。形式化：$\text{Fundamental}(\tau) \rightarrow \text{OrphanRule}(\
 
 **定理 RPIT-T1（RPITIT 与 impl 解析）**：若 Trait $T$ 含 RPITIT 方法 $m$，则对 $\tau : T$，$\text{Resolve}(\tau, T)$ 返回的 impl 决定 $m$ 的返回类型；
 
-该类型在编译时单态化，与 [COH-T1](#trait-coherence一致性形式化) 一致，至多一个 impl 故返回类型唯一。
+该类型在编译时单态化（Monomorphization），与 [COH-T1](#trait-coherence一致性形式化) 一致，至多一个 impl 故返回类型唯一。
 
 *证明思路*：RPITIT 的返回类型由 impl 绑定；由 COH-T1，$(\tau, T)$ 至多一个 impl，故返回类型唯一。∎
 
 **定理 ASYNC-T1（async fn Send 边界）**：若 `async fn m(...) -> R` 用于跨线程（如 `Send` 边界），则其生成的 Future 类型须满足 `Future: Send`；
 
-等价于 $\tau_R$ 及相关借用的生命周期、自引用约束满足 Send。见 [async_state_machine](../formal_methods/10_async_state_machine.md) 定理 6.2。
+等价于 $\tau_R$ 及相关借用（Borrowing）的生命周期、自引用约束满足 Send。见 [async_state_machine](../formal_methods/10_async_state_machine.md) 定理 6.2。
 
 *证明思路*：async fn 脱糖为 `impl Future`；Send 由 Future 的 poll 状态与捕获的 `&self`/`&mut self` 决定；类型系统在 Trait 约束传播时检查。∎
 
@@ -1557,7 +1557,7 @@ Trait 系统与 Rust 类型系统的集成通过以下形式化关系表达：
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 1. **序列化/反序列化**：`Serde` 的 `Serialize`/`Deserialize` 作为 Trait，多态与 Trait 对象（`Box<dyn Error>`）的典型应用；形式化对应 $\tau : \text{Serialize} \rightarrow \text{to\_bytes}(\tau) : \text{Result}[Vec[u8]]$。
-2. **异步运行时**：`Future`、`AsyncRead`/`AsyncWrite` 等 Trait 与 `dyn Future`、`Pin<Box<dyn Future>>` 的交互；对应本研究中的 Trait 对象语义与 Pin 不变式。
+2. **异步（Async）运行时**：`Future`、`AsyncRead`/`AsyncWrite` 等 Trait 与 `dyn Future`、`Pin<Box<dyn Future>>` 的交互；对应本研究中的 Trait 对象语义与 Pin 不变式。
 3. **插件与策略模式**：`dyn Handler`、`dyn Strategy` 等 Trait 对象的依赖注入与动态分发；对应 $\text{TraitObject}[T]$ 与 $\text{Resolve}$ 的运行时多态。
 
 ---
@@ -1603,11 +1603,11 @@ Rust 1.93.0 允许全局分配器使用 `thread_local!` 和 `std::thread::curren
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-Rust 1.93.0 稳定化了 `MaybeUninit<T>` 切片的新方法：
+Rust 1.93.0 稳定化了 `MaybeUninit<T>` 切片（Slice）的新方法：
 
 - `assume_init_drop`: 安全地 drop 未初始化的切片
 - `assume_init_ref`: 获取未初始化切片的引用
-- `assume_init_mut`: 获取未初始化切片的可变引用
+- `assume_init_mut`: 获取未初始化切片的可变引用（Mutable Reference）
 - `write_copy_of_slice`: 写入切片的副本
 
 **对 Trait 对象形式化的影响**：
@@ -1894,7 +1894,7 @@ fn deref_mut_example() {
 | 智能指针（Smart Pointer） | Deref实现 | Target | 用途 |
 | :--- | :--- | :--- | :--- |
 | `Box<T>` | ✅ | `T` | 堆分配 |
-| `Rc<T>` | ✅ | `T` | 共享所有权 |
+| `Rc<T>` | ✅ | `T` | 共享所有权（Ownership） |
 | `RefCell<T>` | ✅ | `T` | 内部可变性 |
 | `Arc<T>` | ✅ | `T` | 线程安全共享 |
 | `MutexGuard<T>` | ✅ | `T` | 互斥锁保护 |

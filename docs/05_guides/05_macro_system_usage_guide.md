@@ -79,7 +79,7 @@
 
 本指南介绍 Rust 宏系统的使用，包括声明宏、过程宏（Procedural Macro）、属性宏、派生宏等。
 
-**形式化引用**：COH-T1 (Trait 一致性)、[trait_system_formalization](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)。
+**形式化引用（Reference）**：COH-T1 (Trait 一致性（Coherence）)、[trait_system_formalization](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)。
 宏展开与类型检查衔接见 [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)。
 
 ---
@@ -927,7 +927,7 @@ macro_rules! public_macro {
 
 Rust 1.95+ 带来了以下重要更新：
 
-- **rray_windows** - 固定大小的数组窗口迭代器
+- **rray_windows** - 固定大小的数组窗口迭代器（Iterator）
 - **ControlFlow** - 控制流抽象类型
 - **LazyCell/LazyLock 新方法** - get(), get_mut(),
 orce_mut()

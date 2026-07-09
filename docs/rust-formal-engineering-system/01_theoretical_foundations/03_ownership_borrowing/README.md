@@ -10,9 +10,9 @@
 > **状态**: ✅ 已完成
 > 内容已整合至： [formal_methods/](../../../../archive/research_notes_2026_06_25/formal_methods/README.md)
 
-- [所有权模型](../../../research_notes/formal_methods/10_ownership_model.md)
-- [借用检查器证明](../../../research_notes/formal_methods/10_borrow_checker_proof.md)
-- 生命周期形式化
+- [所有权（Ownership）模型](../../../research_notes/formal_methods/10_ownership_model.md)
+- [借用（Borrowing）检查器证明](../../../research_notes/formal_methods/10_borrow_checker_proof.md)
+- 生命周期（Lifetimes）形式化
 
 ## 知识结构思维导图 {#知识结构思维导图}
 >

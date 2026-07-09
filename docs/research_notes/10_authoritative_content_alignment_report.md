@@ -27,14 +27,14 @@
   - [一、权威来源清单 {#一权威来源清单}](#一权威来源清单-一权威来源清单)
   - [二、Rust Book 2024 Edition 逐章对齐详情 {#二rust-book-2024-edition-逐章对齐详情}](#二rust-book-2024-edition-逐章对齐详情-二rust-book-2024-edition-逐章对齐详情)
     - [Ch 1-3: 基础概念 {#ch-1-3-基础概念}](#ch-1-3-基础概念-ch-1-3-基础概念)
-    - [Ch 4: 所有权 (核心章节) {#ch-4-所有权-核心章节}](#ch-4-所有权-核心章节-ch-4-所有权-核心章节)
-    - [Ch 10-11: 泛型与Trait {#ch-10-11-泛型与trait}](#ch-10-11-泛型与trait-ch-10-11-泛型与trait)
-    - [Ch 15: 智能指针 {#ch-15-智能指针}](#ch-15-智能指针-ch-15-智能指针)
+    - [Ch 4: 所有权（Ownership） (核心章节) {#ch-4-所有权-核心章节}](#ch-4-所有权-核心章节-ch-4-所有权-核心章节)
+    - [Ch 10-11: 泛型（Generics）与Trait {#ch-10-11-泛型与trait（Trait）}](#ch-10-11-泛型与trait-ch-10-11-泛型与trait)
+    - [Ch 15: 智能指针（Smart Pointer） {#ch-15-智能指针}](#ch-15-智能指针-ch-15-智能指针)
     - [Ch 16: 无畏并发 {#ch-16-无畏并发}](#ch-16-无畏并发-ch-16-无畏并发)
-    - [Ch 17: 异步编程 (2024 Edition新增) {#ch-17-异步编程-2024-edition新增}](#ch-17-异步编程-2024-edition新增-ch-17-异步编程-2024-edition新增)
+    - [Ch 17: 异步（Async）编程 (2024 Edition新增) {#ch-17-异步编程-2024-edition新增}](#ch-17-异步编程-2024-edition新增-ch-17-异步编程-2024-edition新增)
   - [三、Rust Reference 1.94 对齐检查 {#三rust-reference-194-对齐检查}](#三rust-reference-194-对齐检查-三rust-reference-194-对齐检查)
-    - [类型系统 {#类型系统}](#类型系统-类型系统)
-    - [所有权与借用 {#所有权与借用}](#所有权与借用-所有权与借用)
+    - [类型系统（Type System） {#类型系统}](#类型系统-类型系统)
+    - [所有权与借用（Borrowing） {#所有权与借用}](#所有权与借用-所有权与借用)
     - [2024 Edition 特性 {#2024-edition-特性}](#2024-edition-特性-2024-edition-特性)
   - [四、差距汇总与修复计划 {#四差距汇总与修复计划}](#四差距汇总与修复计划-四差距汇总与修复计划)
     - [P0 高优先级 (本周修复) {#p0-高优先级-本周修复}](#p0-高优先级-本周修复-p0-高优先级-本周修复)
@@ -42,7 +42,7 @@
     - [P2 低优先级 (后续版本) {#p2-低优先级-后续版本}](#p2-低优先级-后续版本-p2-低优先级-后续版本)
   - [五、版本更新检查 {#五版本更新检查}](#五版本更新检查-五版本更新检查)
     - [当前项目版本声明 {#当前项目版本声明}](#当前项目版本声明-当前项目版本声明)
-  - [六、权威来源引用完整性 {#六权威来源引用完整性}](#六权威来源引用完整性-六权威来源引用完整性)
+  - [六、权威来源引用（Reference）完整性 {#六权威来源引用完整性}](#六权威来源引用完整性-六权威来源引用完整性)
     - [已引用来源 {#已引用来源}](#已引用来源-已引用来源)
   - [七、修复执行清单 {#七修复执行清单}](#七修复执行清单-七修复执行清单)
   - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
@@ -115,7 +115,7 @@
 
 - **GAP-SLICE-01**: Slice类型形式化定义缺失
 - **GAP-SLICE-02**: String切片与str类型语义
-- **GAP-SLICE-03**: 切片生命周期规则
+- **GAP-SLICE-03**: 切片生命周期（Lifetimes）规则
 
 ---
 
@@ -140,7 +140,7 @@
 
 | Book章节 | 本项目文档 | 对齐状态 | 备注 |
 | :--- | :--- | :--- | :--- |
-| 15.1 `Box<T>` | 10_ownership_model.md Def 4.1 | ✅ | Box形式化 |
+| 15.1 `Box<T>` | 10_ownership_model.md Def 4.1 | ✅ | Box（Box）形式化 |
 | 15.2 Deref Trait | - | ⚠️ | **需补充Deref形式化** |
 | 15.3 Drop Trait | guides/drop-check-analysis.md | ✅ | Drop检查 |
 | 15.4 `Rc<T>` | 10_ownership_model.md Def 4.2 | ✅ | Rc形式化 |
@@ -177,7 +177,7 @@
 | :--- | :--- | :--- | :--- |
 | 17.1 Futures and Async | 10_async_state_machine.md | ✅ | 状态机形式化 |
 | 17.2 Applying Concurrency | C06_async_programming/ | ✅ | async/await |
-| 17.3 Working with Futures | C06_async_programming/ | ✅ | Future组合 |
+| 17.3 Working with Futures | C06_async_programming/ | ✅ | Future（Future）组合 |
 | 17.4 Streams | C06_async_programming/ | ✅ | Stream语义 |
 | 17.5 Async Traits | - | ⚠️ | **需补充Async Trait形式化** |
 | 17.6 Futures vs Threads | - | ⚠️ | **需补充对比分析** |

@@ -7,9 +7,9 @@
 >
 > **层次定位**: L2-L6 进阶-生态 / 设计模式应用
 > **前置依赖**: [concept L2 Trait](../../concept/02_intermediate/00_traits/01_traits.md) · docs 最佳实践
-> **后置延伸**: [docs 异步编程](05_async_programming_usage_guide.md) · [concept L6 设计模式](../../concept/06_ecosystem/03_design_patterns/02_patterns.md)
+> **后置延伸**: [docs 异步（Async）编程](05_async_programming_usage_guide.md) · [concept L6 设计模式](../../concept/06_ecosystem/03_design_patterns/02_patterns.md)
 > **跨层映射**: L2→L6 抽象映射 | Trait→模式
-> **定理链编号**: T-020 特质一致性 → 模式可组合性
+> **定理链编号**: T-020 特质一致性（Coherence） → 模式可组合性
 >
 > **受众**: [进阶]
 > **内容分级**: [专家级]
@@ -92,7 +92,7 @@
 
 本指南介绍如何在 Rust 中使用常见的设计模式，包括 GoF 模式和 Rust 特有的模式。
 
-**形式化引用**：CE-T1、CE-T2、CE-T3（组合工程定理）。
+**形式化引用（Reference）**：CE-T1、CE-T2、CE-T3（组合工程定理）。
 详见 [04_compositional_engineering](../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md)、
 [01_design_patterns_formal](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md)。
 
@@ -2280,7 +2280,7 @@ Rust 1.95+ 引入的新特性为设计模式实现提供了更优雅、更高效
 
 `
 ust
-// ❌ 传统实现：动态窗口，运行时边界检查
+// ❌ 传统实现：动态窗口，运行时（Runtime）边界检查
 fn moving_average_traditional(data: &[f64], window: usize) -> Vec<f64> {
     data.windows(window)
         .map(|w| w.iter().sum::<f64>() / window as f64)

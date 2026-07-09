@@ -72,7 +72,7 @@
 
 Miri 的核心价值在于：
 
-- **在运行时检测 UB**：即使代码通过了编译器检查，Miri 仍能发现内存安全问题
+- **在运行时（Runtime）检测 UB**：即使代码通过了编译器检查，Miri 仍能发现内存安全（Memory Safety）问题
 - **无需修改源码**：直接对现有测试运行 `cargo miri test`
 - **覆盖编译器盲区**：`rustc` 对 UB 采取"信任程序员"策略，Miri 则严格验证
 
@@ -223,7 +223,7 @@ error: Undefined Behavior: Data race detected between Read on thread `<unnamed>`
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-Miri 严格执行 Rust 的别名规则：对于任何内存位置，`&mut T` 必须是唯一的活跃引用。
+Miri 严格执行 Rust 的别名规则：对于任何内存位置，`&mut T` 必须是唯一的活跃引用（Reference）。
 
 ```rust
 // ❌ 错误示例：别名违规 (违反独占引用规则)
@@ -252,7 +252,7 @@ fn aliasing_violation() {
 | UB 类型 | 说明 | Miri 检测能力 |
 |---------|------|--------------|
 | **空指针解引用** | `*std::ptr::null()` | ✅ 精确检测 |
-| **越界访问** | 数组/切片索引越界 | ✅ 精确检测 |
+| **越界访问** | 数组/切片（Slice）索引越界 | ✅ 精确检测 |
 | **类型混淆** | `mem::transmute` 到不兼容类型 | ✅ 检测无效值 |
 | **未初始化内存读取** | 读取 `MaybeUninit` 的未初始化部分 | ✅ 精确检测 |
 | **错误对齐访问** | 读取未对齐的指针 | ✅ 检测对齐违规 |
@@ -373,7 +373,7 @@ mod miri_tests {
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-某些测试 Miri 无法运行 (如内联汇编、特定系统调用)，可以使用 `cfg(miri)` 跳过：
+某些测试 Miri 无法运行 (如内联汇编（Inline Assembly）、特定系统调用)，可以使用 `cfg(miri)` 跳过：
 
 ```rust
 #[test]
@@ -437,7 +437,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 | **仅检测可达代码** | 未执行的代码路径不会检测 | 需要高覆盖率测试 |
 | **非确定性** | 线程调度顺序不同可能导致漏报 | 多次运行或固定调度 |
 | **FFI 限制** | 外部 C 代码在隔离模式下受限 | 需要 `-Zmiri-disable-isolation` |
-| **不支持 inline asm** | `asm!` 宏无法执行 | 跳过相关测试 |
+| **不支持 inline asm** | `asm!` 宏（Macro）无法执行 | 跳过相关测试 |
 | **仅 nightly** | 无 stable 版本 | CI 需要 nightly 工具链 |
 | **内存限制** | 大型程序的 Miri 内存开销大 | 超大项目可能 OOM |
 

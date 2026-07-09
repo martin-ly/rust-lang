@@ -29,7 +29,7 @@
     - [互补关系 {#互补关系}](#互补关系-互补关系)
     - [协同工作 {#协同工作}](#协同工作-协同工作)
   - [📚 内容对应关系 {#内容对应关系}](#-内容对应关系-内容对应关系)
-    - [类型系统 {#类型系统}](#类型系统-类型系统)
+    - [类型系统（Type System） {#类型系统}](#类型系统-类型系统)
     - [形式化方法 {#形式化方法}](#形式化方法-形式化方法)
     - [实验研究 {#实验研究}](#实验研究-实验研究)
   - [🔄 工作流程 {#工作流程}](#-工作流程-工作流程)
@@ -43,7 +43,7 @@
     - [贡献建议 {#贡献建议}](#贡献建议-贡献建议)
   - [📖 示例场景 {#示例场景}](#-示例场景-示例场景)
     - [场景 1: 研究类型系统 {#场景-1-研究类型系统}](#场景-1-研究类型系统-场景-1-研究类型系统)
-    - [场景 2: 形式化所有权模型 {#场景-2-形式化所有权模型}](#场景-2-形式化所有权模型-场景-2-形式化所有权模型)
+    - [场景 2: 形式化所有权（Ownership）模型 {#场景-2-形式化所有权模型}](#场景-2-形式化所有权模型-场景-2-形式化所有权模型)
     - [场景 3: 性能优化研究 {#场景-3-性能优化研究}](#场景-3-性能优化研究-场景-3-性能优化研究)
   - [🔗 相关资源 {#相关资源}](#-相关资源-相关资源)
     - [研究笔记系统 {#研究笔记系统-1}](#研究笔记系统-研究笔记系统-1)
@@ -155,8 +155,8 @@
 | 研究笔记系统 | 形式化工程系统 | 关系 |
 | :--- | :--- | :--- |
 | [所有权模型形式化](formal_methods/10_ownership_model.md)      | [所有权系统理论](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)  | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
-| [借用检查器证明](formal_methods/10_borrow_checker_proof.md)   | [借用系统理论](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)    | 研究笔记提供证明研究，形式化系统提供证明框架     |
-| 生命周期形式化 | [生命周期系统理论](../rust-formal-engineering-system/01_theoretical_foundations/06_lifetime_management/README.md) | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
+| [借用（Borrowing）检查器证明](formal_methods/10_borrow_checker_proof.md)   | [借用系统理论](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)    | 研究笔记提供证明研究，形式化系统提供证明框架     |
+| 生命周期（Lifetimes）形式化 | [生命周期系统理论](../rust-formal-engineering-system/01_theoretical_foundations/06_lifetime_management/README.md) | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
 
 ### 实验研究 {#实验研究}
 

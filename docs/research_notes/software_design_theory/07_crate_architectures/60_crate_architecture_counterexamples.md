@@ -134,7 +134,7 @@ pub fn parse(input: &str) -> internal_crate::Token { ... }
 
 ### 现象 {#现象-6}
 
-一个 workspace 包含 50+ 个微型 crate，每个 crate 只有 1-2 个模块。
+一个 workspace 包含 50+ 个微型 crate，每个 crate 只有 1-2 个模块（Module）。
 
 ### 问题 {#问题-3}
 

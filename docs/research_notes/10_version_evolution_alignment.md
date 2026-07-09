@@ -53,7 +53,7 @@
 | Edition | 官方指南 | 项目文档 | 核心变化 |
 |---------|----------|----------|----------|
 | Rust 2024 | [Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) | gen keyword、tail expr temp scope、unsafe extern |
-| Rust 2021 | [Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2021/index.html) | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) | 预留字、闭包捕获、panic macro |
+| Rust 2021 | [Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2021/index.html) | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) | 预留字、闭包（Closures）捕获、panic macro |
 | Rust 2018 | [Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2018/index.html) | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) | module system、NLL、async/await |
 
 ---

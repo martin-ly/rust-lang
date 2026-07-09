@@ -106,7 +106,7 @@ flowchart TD
 | 模式 | 语言语义风险 | 编译器保护机制 | 结果 |
 |------|-----------|-------------|------|
 | 未初始化的局部变量读取 | `UB`（未定义行为） | `SSA` 形式 + `Dead Store Elimination` | 实际不可达或已初始化 |
-| 悬空指针解引用 | 内存安全违规 | `Alias Analysis` + `Load Elimination` | 实际加载的是有效内存 |
+| 悬空指针解引用 | 内存安全（Memory Safety）违规 | `Alias Analysis` + `Load Elimination` | 实际加载的是有效内存 |
 | 数据竞争 | 并发 `UB` | `LICM` + 栅栏插入 | 实际执行顺序被序列化 |
 
 ---
@@ -144,8 +144,8 @@ Rust 编译器 (`rustc`) 的以下组件扮演了论文中"saved by compiler"的
 
 | 组件 | 消除的错误类别 | 机制 |
 |------|-------------|------|
-| `Borrow Checker` | .use-after-free、double-free | 生命周期静态分析 |
-| `Trait Solver` | 类型状态不一致 | 约束求解与一致性检查 |
+| `Borrow Checker` | .use-after-free、double-free | 生命周期（Lifetimes）静态分析 |
+| `Trait Solver` | 类型状态不一致 | 约束求解与一致性（Coherence）检查 |
 | `MIRI` (解释器) | 未定义行为检测 | 运行时语义模拟 |
 | `Drop Check` | 悬垂引用、use-after-move | 析构顺序分析 |
 
@@ -206,9 +206,9 @@ flowchart LR
 
 `unique_ptr` 提供了所有权抽象，但：
 
-- `.get()` 返回的原始指针仍可导致 `UB`
+- `.get()` 返回的原始指针（Raw Pointer）仍可导致 `UB`
 - 循环引用（`std::shared_ptr`）需要运行时引用计数
-- 没有借用检查器，无法防止悬垂引用
+- 没有借用（Borrowing）检查器，无法防止悬垂引用
 
 相比之下，Rust 的 `Box<T>` 和 `&T` / `&mut T` 在编译期就排除了这些风险。
 
@@ -228,7 +228,7 @@ flowchart LR
 |------|---------|----------------|
 | 航空 (DO-178C) | 依赖代码审查 + 测试覆盖 | 编译期保证降低测试负担 |
 | 汽车 (ISO 26262) | MISRA C 编码规范 | 语言规则替代规范约束 |
-| 医疗设备 | 静态分析工具补漏 | 类型系统内置安全属性 |
+| 医疗设备 | 静态分析工具补漏 | 类型系统（Type System）内置安全属性 |
 | 操作系统内核 | 内核模式隔离 | `Rust for Linux` 减少 `unsafe` |
 
 ### 5.2 从"偶然安全"到"必然安全" {#52-从偶然安全到必然安全}

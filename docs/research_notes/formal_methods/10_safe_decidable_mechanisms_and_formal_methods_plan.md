@@ -63,7 +63,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- **已有**：所有权（Ownership）、借用（Borrowing）、生命周期、Pin、异步（Future/Poll 状态机）、**Send/Sync** 六篇独立形式化文档；
+- **已有**：所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）、Pin、异步（Future/Poll 状态机）、**Send/Sync** 六篇独立形式化文档；
 - 控制流、通道、Mutex、thread::spawn、裸指针、unsafe 等
 - 以 Def/定理形式分散在 ownership_model、borrow_checker_proof、async_state_machine 中；
 - [六篇并表](README.md#formal_methods-六篇并表) 与
@@ -87,10 +87,10 @@
 | 建议 | 优先级 | 说明 |
 | :--- | :--- | :--- |
 | **新增 Send/Sync 形式化专篇** | P0 | 独立文档：概念定义（SafeTransfer/SafeShare）、属性关系（T: Sync ⇔ &T: Send）、与 thread::spawn/Future/Arc 的衔接、形式化 Def/Axiom/定理、反例（Rc !Send、Cell !Sync）；与 async_state_machine、borrow_checker_proof、ownership_model 双向链接。 |
-| **安全可判定机制总览文档** | P0 | 单文档列出所有“安全且编译期可判定”的机制，每项含：概念定义、属性关系、解释论证、形式证明引用、反例；并注明对应思维表征（思维导图、矩阵、决策树、证明树）位置。 |
+| **安全可判定机制总览文档** | P0 | 单文档列出所有“安全且编译期可判定”的机制，每项含：概念定义、属性关系、解释论证、形式证明引用（Reference）、反例；并注明对应思维表征（思维导图、矩阵、决策树、证明树）位置。 |
 | **完备 Rust 特性全部特征对比表** | P1 | 在现有 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 基础上，增加维度：可判定性（静态/运行时（Runtime）/不可判定）、安全边界（Safe/Unsafe 边界）、形式化文档、思维表征入口；必要时拆出「核心机制子表」含 Send/Sync/async。 |
 | **思维表征四类与 formal_methods 绑定** | P1 | 在 HIERARCHICAL_MAPPING 或本目录 README 中明确：思维导图、概念多维矩阵、决策树图、推理证明树图各自对应哪些 formal_methods 文档/小节；各篇形式化文档末尾「相关思维表征」表统一包含四类入口。 |
-| **async 机制单篇可选** | P2 | 若需“async 语法与运行时模型”与“Future 状态机”分离，可增「async 机制形式化」篇，侧重 async fn、.await、Send 边界、与 Pin 的接口；与 async_state_machine 分工（状态机 vs 语言机制）。 |
+| **async 机制单篇可选** | P2 | 若需“async 语法与运行时（Runtime）模型”与“Future 状态机”分离，可增「async 机制形式化」篇，侧重 async fn、.await、Send 边界、与 Pin 的接口；与 async_state_machine 分工（状态机 vs 语言机制）。 |
 
 ---
 
@@ -105,10 +105,10 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- **安全**：在 Safe Rust 下，违反机制会导致编译错误或类型系统拒绝，从而避免内存安全/数据竞争等 UB。
+- **安全**：在 Safe Rust 下，违反机制会导致编译错误或类型系统（Type System）拒绝，从而避免内存安全（Memory Safety）/数据竞争等 UB。
 - **可判定**：是否满足该机制可由**编译期**算法判定（或由类型系统 + 固定规则在编译期检查），无需运行时或人工证明。
 
-示例：所有权、借用、生命周期、Send、Sync、Unpin（及 async 的 Send 边界）、match 穷尽、for/IntoIterator、? 的 Result 类型等，均为**静态可判定**；RefCell 的借用为**运行时**可判定（panic）；死锁、进度则为**不可判定**（需额外方法或规范）。
+示例：所有权（Ownership）、借用（Borrowing）、生命周期、Send、Sync、Unpin（及 async 的 Send 边界）、match 穷尽、for/IntoIterator、? 的 Result 类型等，均为**静态可判定**；RefCell 的借用为**运行时**可判定（panic）；死锁、进度则为**不可判定**（需额外方法或规范）。
 
 ### 2.2 建议的“安全可判定机制”清单与形式化对应 {#22-建议的安全可判定机制清单与形式化对应}
 
@@ -121,7 +121,7 @@
 | 机制 | 可判定性 | 概念定义要点 | 属性关系 | 形式化文档 | 反例 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 所有权 | 静态 | 唯一所有者、移动、Copy/Clone | 规则 1–3 → T2/T3 | [ownership_model](10_ownership_model.md) | 使用已移动值、双重释放 |
-| 借用 | 静态 | &T/&mut T、互斥可变、不可变可多 | 规则 5–8 → T1 | [borrow_checker_proof](10_borrow_checker_proof.md) | 双重可变借用、悬垂引用 |
+| 借用 | 静态 | &T/&mut T、互斥可变、不可变可多 | 规则 5–8 → T1 | [borrow_checker_proof](10_borrow_checker_proof.md) | 双重可变借用（Mutable Borrow）、悬垂引用 |
 | 生命周期 | 静态 | outlives、区域、NLL | $\ell \subseteq \text{lft}$ → LF-T1–T3 | lifetime_formalization | 返回局部引用、存短命引用 |
 | **Send** | **静态** | **跨线程转移所有权安全** | **T: Sync ⇔ &T: Send** | **[send_sync_formalization](10_send_sync_formalization.md)** | **Rc 跨线程、!Send 闭包（Closures） spawn** |
 | **Sync** | **静态** | **跨线程共享引用安全** | **见上** | **同上** | **Cell 跨线程共享、Rc &T 跨线程** |
@@ -131,7 +131,7 @@
 | match 穷尽 | 静态 | 模式覆盖所有变体 | Def MATCH1 → MATCH-T1 | [borrow_checker_proof](10_borrow_checker_proof.md) | 非穷尽 match |
 | for/? | 静态 | IntoIterator、Result 类型 | FOR1/QUERY1 → FOR-T1/QUERY-T1 | [borrow_checker_proof](10_borrow_checker_proof.md) | 迭代中修改、非 Result ? |
 | 通道/Mutex | 静态（接口） | 消息传递、锁保护；Send 约束 | CHAN1/MUTEX1 → CHAN-T1/MUTEX-T1 | [borrow_checker_proof](10_borrow_checker_proof.md) | 发送非 Send、锁外访问 |
-| thread::spawn | 静态 | F: Send + 'static | SPAWN1 → SPAWN-T1 | [async_state_machine](10_async_state_machine.md) | 非 Send 闭包 spawn |
+| thread::spawn | 静态 | F: Send + 'static | SPAWN1 → SPAWN-T1 | [async_state_machine](10_async_state_machine.md) | 非 Send 闭包（Closures） spawn |
 | RefCell 借用 | 运行时 | 运行时借用栈、panic | REFCELL1 → REFCELL-T1 | [ownership_model](10_ownership_model.md) | 双重可变借用 panic |
 
 **说明**：Send/Sync 已通过阶段 A 独立成篇 [send_sync_formalization](10_send_sync_formalization.md)，与上表一致。
@@ -229,7 +229,7 @@
 | :--- | :--- | :--- | :--- | :--- |
 | **阶段 A** | Send/Sync 形式化专篇 | 新文档 `10_send_sync_formalization.md`：Def SEND1/SYNC1、定理 SEND-T1/SYNC-T1、与 spawn/Future/Arc 衔接、反例；README 六篇并表 | P0 | ✅ 已完成 |
 | **阶段 B** | 安全可判定机制总览 | 单文档 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../10_safe_decidable_mechanisms_overview.md)：每机制一节（概念定义、属性关系、解释论证、形式证明、反例）；与 formal_methods/type_theory 双向链接 | P0 | ✅ 已完成 |
-| **阶段 C** | 完备特性对比表扩展 | 并发与异步族、Trait 族四维表已入 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../10_safe_decidable_mechanisms_overview.md) §6；92 项全量可选后续迭代 | P1 | ✅ 已完成（并发+Trait 族） |
+| **阶段 C** | 完备特性对比表扩展 | 并发与异步（Async）族、Trait 族四维表已入 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../10_safe_decidable_mechanisms_overview.md) §6；92 项全量可选后续迭代 | P1 | ✅ 已完成（并发+Trait 族） |
 | **阶段 D** | 思维表征四类绑定 | MIND_MAP 增安全可判定机制节点；README 或 HIERARCHICAL_MAPPING 增「机制↔思维表征」表；各篇「相关思维表征」统一四类 | P1 | ✅ 见 §4 与总览/各篇块 |
 | **阶段 E** | async 机制单篇（可选） | 若需拆分，新增 async 机制形式化（async fn、.await、Send 边界）；与 async_state_machine 分工明确 | P2 | ⏸ 可选，不实施不影响 100% |
 

@@ -7,7 +7,7 @@
 > **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **概念说明**: Rust 编译器（rustc）将源代码转换为机器码，经过词法分析、语法分析、语义分析、类型检查、借用检查、MIR 优化和 LLVM 代码生成等阶段。理解编译器理论有助于优化代码性能和诊断编译错误。
+> **概念说明**: Rust 编译器（rustc）将源代码转换为机器码，经过词法分析、语法分析、语义分析、类型检查、借用（Borrowing）检查、MIR 优化和 LLVM 代码生成等阶段。理解编译器理论有助于优化代码性能和诊断编译错误。
 > 内容已整合至： [01_compiler_features.md](../../../06_toolchain/01_compiler_features.md)
 
 [返回主索引](../../00_master_index.md) | [返回工具链索引](../README.md)
@@ -196,9 +196,9 @@ impl<T, const N: usize> Array<T, N> {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 形式化方法概述 | 形式化验证基础理论 | [../../../research_notes/formal_methods/README.md](../../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
-| 所有权模型形式化 | 所有权系统数学定义 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
-| 生命周期形式化 | 生命周期理论证明 | ../../../research_notes/formal_methods/10_lifetime_formalization.md |
+| 类型系统（Type System）形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
+| 所有权（Ownership）模型形式化 | 所有权系统数学定义 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
+| 生命周期（Lifetimes）形式化 | 生命周期理论证明 | ../../../research_notes/formal_methods/10_lifetime_formalization.md |
 | 借用检查器证明 | 借用检查器形式化 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | 证明索引 | 形式化证明集合 | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 

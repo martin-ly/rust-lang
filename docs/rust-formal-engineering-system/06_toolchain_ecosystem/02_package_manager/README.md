@@ -255,7 +255,7 @@ utils = { path = "crates/utils" }
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 形式化方法概述 | 形式化验证基础理论 | [../../../research_notes/formal_methods/README.md](../../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
+| 类型系统（Type System）形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
 | Send/Sync 形式化 | 线程安全形式化定义 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 | 证明索引 | 形式化证明集合 | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 

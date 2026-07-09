@@ -121,7 +121,7 @@
 | 任务 | 交付物 |
 | :--- | :--- |
 | 选择工具 | Redex 或自研 |
-| 实现 λ + Box 子集 | 小步归约、所有权移动规则 |
+| 实现 λ + Box 子集 | 小步归约、所有权（Ownership）移动规则 |
 | 测试用例 | 5–10 个正例、3–5 个反例（应拒绝） |
 
 ### 阶段 3：扩展（按需） {#阶段-3扩展按需}
@@ -131,7 +131,7 @@
 | 任务 | 说明 |
 | :--- | :--- |
 | 借用规则 | 增加共享/可变借用（Mutable Borrow） |
-| 生命周期 | 简化版 outlives |
+| 生命周期（Lifetimes） | 简化版 outlives |
 | K 迁移 | 若阶段 2 成功，评估 K 迁移 |
 
 ---
@@ -144,7 +144,7 @@
 | 本项目文档 | 可执行语义对应 |
 | :--- | :--- |
 | ownership_model 规则 1–3 | 归约规则：move、copy、drop |
-| borrow_checker_proof 规则 5–8 | 借用状态转换 |
+| borrow_checker_proof 规则 5–8 | 借用（Borrowing）状态转换 |
 | type_system_foundations T1–T2 | 进展性、保持性可测试 |
 | [FORMAL_FULL_MODEL_OVERVIEW](10_formal_full_model_overview.md) | 公理列表 → 语义规则 |
 

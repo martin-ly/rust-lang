@@ -47,7 +47,7 @@
 
 本指南对应 `crates/c08_algorithms`，提供 Rust 中各类算法的完整实现，包括排序、搜索、图算法、动态规划、数据结构、机器学习算法以及 LeetCode 分类题解。所有实现支持同步、并行和异步三种执行模式。
 
-**前置知识**: [knowledge/02_intermediate/](../../knowledge/02_intermediate) 集合与迭代器
+**前置知识**: [knowledge/02_intermediate/](../../knowledge/02_intermediate) 集合与迭代器（Iterator）
 **速查卡**: [02_algorithms_cheatsheet.md](../02_reference/quick_reference/02_algorithms_cheatsheet.md)
 
 ---
@@ -85,7 +85,7 @@ fn main() {
 
 `algorithms/sorting/` 提供多种排序实现，支持同步、并行和分布式执行：
 
-| 算法 | 平均复杂度 | 空间复杂度 | 稳定性 | 模块 |
+| 算法 | 平均复杂度 | 空间复杂度 | 稳定性 | 模块（Module） |
 |------|-----------|-----------|--------|------|
 | 快速排序 | O(n log n) | O(log n) | 否 | `sorting/sync.rs` |
 | 归并排序 | O(n log n) | O(n) | 是 | `sorting/sync.rs` |

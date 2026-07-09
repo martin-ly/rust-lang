@@ -32,7 +32,7 @@
 - [责任链](10_chain_of_responsibility.md)
 - [命令](10_command.md)
 - [解释器](10_interpreter.md)
-- [迭代器](10_iterator.md)
+- [迭代器（Iterator）](10_iterator.md)
 - [中介者](10_mediator.md)
 - [备忘录](10_memento.md)
 - [观察者](10_observer.md)
@@ -114,7 +114,7 @@
 >
 > **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)** | **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** | **来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
-| 模式文件 | Rust Design Patterns | Rust API Guidelines | GoF 原典 | Rust 1.96+ 示例 | 所有权（Ownership）/生命周期分析 | 形式化属性 | 反例升级 |
+| 模式文件 | Rust Design Patterns | Rust API Guidelines | GoF 原典 | Rust 1.96+ 示例 | 所有权（Ownership）/生命周期（Lifetimes）分析 | 形式化属性 | 反例升级 |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | [责任链](10_chain_of_responsibility.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [命令](10_command.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |

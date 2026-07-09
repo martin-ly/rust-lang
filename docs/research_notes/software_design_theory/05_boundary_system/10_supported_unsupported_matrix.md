@@ -42,7 +42,7 @@
     - [示例 1：是否需要第三方 crate {#示例-1是否需要第三方-crate}](#示例-1是否需要第三方-crate-示例-1是否需要第三方-crate)
     - [示例 2：no\_std 嵌入式 {#示例-2no\_std-嵌入式}](#示例-2no_std-嵌入式-示例-2no_std-嵌入式)
     - [示例 3：FFI 绑定 C 库 {#示例-3ffi-绑定-c-库}](#示例-3ffi-绑定-c-库-示例-3ffi-绑定-c-库)
-  - [引用 {#引用}](#引用-引用)
+  - [引用（Reference） {#引用}](#引用-引用)
   - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
       - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
@@ -74,7 +74,7 @@
 - **库支持**：$\mathit{SuppB}(F) = \mathrm{Lib}$ 当且仅当 $F$ 需第三方 crate（如 tokio、rayon）
 - **需 FFI**：$\mathit{SuppB}(F) = \mathrm{FFI}$ 当且仅当 $F$ 需 `extern` 调用 C/外部库
 
-**Def 1.2（依赖闭包）**:
+**Def 1.2（依赖闭包（Closures））**:
 
 设 $\mathit{deps}(C)$ 为 crate $C$ 的传递依赖集。
 
@@ -94,7 +94,7 @@
 
 依 Def 1.1，$\mathit{SuppB}(X) = \mathrm{Native}$。∎
 
-**定理 SUM-T2**：若 $F$ 涉及异步运行时、线程池或通信，则 $\mathit{SuppB}(F) \in \{\mathrm{Native},\, \mathrm{Lib}\}$；
+**定理 SUM-T2**：若 $F$ 涉及异步（Async）运行时（Runtime）、线程池或通信，则 $\mathit{SuppB}(F) \in \{\mathrm{Native},\, \mathrm{Lib}\}$；
 
 `std` 提供 `thread`、`mpsc`，但 `tokio`/`rayon` 为 Lib。
 
@@ -175,11 +175,11 @@
 
 | 模式 | 支持边界 | 说明 |
 | :--- | :--- | :--- |
-| Adapter | 原生支持 | 结构体包装 |
+| Adapter | 原生支持 | 结构体（Struct）包装 |
 | Bridge | 原生支持 | trait |
-| Composite | 原生支持 | Box、Vec、枚举 |
+| Composite | 原生支持 | Box、Vec、枚举（Enum） |
 | Decorator | 原生支持 | 结构体委托 |
-| Facade | 原生支持 | 模块系统 |
+| Facade | 原生支持 | 模块（Module）系统 |
 | Flyweight | 原生支持 | Arc、Rc |
 | Proxy | 原生支持 | 委托 |
 

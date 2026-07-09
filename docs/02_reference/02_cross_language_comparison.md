@@ -133,12 +133,12 @@ print(s)           # 仍然可用
 
 | 语言 | 形式化模型 | 安全保证 | 形式化证明 |
 | :--- | :--- | :--- | :--- |
-| **Rust** | 线性类型 + 分离逻辑 | 编译期 | [所有权唯一性定理](../research_notes/formal_methods/10_ownership_model.md)、[内存安全定理](../research_notes/formal_methods/10_ownership_model.md) |
-| **C++** | 无统一形式化 | 运行时/程序员 | 无官方形式化证明 |
+| **Rust** | 线性类型 + 分离逻辑 | 编译期 | [所有权（Ownership）唯一性定理](../research_notes/formal_methods/10_ownership_model.md)、[内存安全（Memory Safety）定理](../research_notes/formal_methods/10_ownership_model.md) |
+| **C++** | 无统一形式化 | 运行时（Runtime）/程序员 | 无官方形式化证明 |
 | **Go** | 标记-清除 GC | 运行时 | GC 正确性证明 |
-| **Python** | 引用计数 + GC | 运行时 | 无官方形式化证明 |
+| **Python** | 引用（Reference）计数 + GC | 运行时 | 无官方形式化证明 |
 
-> **来源: [Rust Reference: Ownership](https://doc.rust-lang.org/reference/)** Rust 所有权规则由编译器在类型检查和借用检查阶段强制执行，对应线性逻辑中的资源唯一性公理。 ✅
+> **来源: [Rust Reference: Ownership](https://doc.rust-lang.org/reference/)** Rust 所有权规则由编译器在类型检查和借用（Borrowing）检查阶段强制执行，对应线性逻辑中的资源唯一性公理。 ✅
 > **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)** Safe Rust 内存安全（Memory Safety）（无 UAF / 无 DF / 无数据竞争）已在 Iris 分离逻辑框架中得到机器检验证明。 ✅
 > **来源: [C++ Reference: std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr)** C++ `unique_ptr` 提供运行时 RAII 管理，但编译器不检查 use-after-move，无统一形式化安全保证。 ✅
 > **来源: [Go Spec: Memory Model](https://go.dev/ref/mem)** Go 依赖并发标记-清除 GC，内存安全由运行时保证，无编译期形式化验证。 ✅
@@ -261,7 +261,7 @@ print(f"结果: {counter}")
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-| 语言 | 并发安全机制 | 数据竞争检测 | 形式化保证 |
+| 语言 | 并发安全（Concurrency Safety）机制 | 数据竞争检测 | 形式化保证 |
 | :--- | :--- | :--- | :--- |
 | **Rust** | Send/Sync Trait | 编译期 | [数据竞争自由定理](../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | **C++** | 手动同步 | 运行时工具 (TSan) | 无编译期保证 |
@@ -495,12 +495,12 @@ result = max_val(10, 20)
 
 | 语言 | 类型系统（Type System） | 泛型实现 | 类型安全 | 形式化证明 |
 | :--- | :--- | :--- | :--- | :--- |
-| **Rust** | 线性类型 + Trait | 单态化 | 编译期 | [类型安全定理](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
+| **Rust** | 线性类型 + Trait | 单态化（Monomorphization） | 编译期 | [类型安全定理](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
 | **C++** | 模板元编程 | 编译期实例化 | 编译期 | 无官方形式化 |
 | **Go** | 结构类型 | 单态化（1.18+） | 编译期 | 无官方形式化 |
 | **Python** | 动态类型 | 不适用 | 运行时 | 无形式化 |
 
-> **来源: [Rust Reference: Types](https://doc.rust-lang.org/reference/)** Rust 类型系统基于 HM 推断 + Trait solving，泛型通过单态化实现零成本抽象。 ✅
+> **来源: [Rust Reference: Types](https://doc.rust-lang.org/reference/)** Rust 类型系统基于 HM 推断 + Trait solving，泛型通过单态化实现零成本抽象（Zero-Cost Abstraction）。 ✅
 > **[C++ Reference: Templates](https://en.cppreference.com/w/cpp/templates)** C++ 模板是图灵完备的编译期元编程系统，但无官方形式化语义，错误信息 notoriously 复杂。 ✅
 > **[Go Spec: Types](https://go.dev/ref/spec#Types)** Go 1.18+ 泛型基于类型参数和类型集（type sets），实现为编译期单态化，与 Rust 类似但表达能力较弱（无特化）。 ✅
 > **[Pierce, "Types and Programming Languages" (TAPL)](https://www.cis.upenn.edu/~bcpierce/tapl/)** Rust 的类型系统理论基础：HM 推断、子类型、参数多态，与 ML 家族同源。 ⚠️（教科书级参考）
@@ -508,7 +508,7 @@ result = max_val(10, 20)
 **Rust 类型系统形式化**:
 
 - Trait 约束: $\Gamma \vdash T: \text{Trait}$ ([Trait 形式化](../research_notes/formal_methods/10_ownership_model.md))
-- 生命周期子类型: $\ell_2 <: \ell_1$ 当 $\ell_1 \supseteq \ell_2$ (Def 1.4)
+- 生命周期（Lifetimes）子类型: $\ell_2 <: \ell_1$ 当 $\ell_1 \supseteq \ell_2$ (Def 1.4)
 
 ---
 

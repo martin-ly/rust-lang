@@ -40,8 +40,8 @@
 
 | RFC | 主题 | 项目文档 | 状态 |
 |-----|------|----------|------|
-| [RFC 1859](https://rust-lang.github.io/rfcs/2094-nll.html) — Non-Lexical Lifetimes | 借用检查器改进 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ |
-| [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) — NLL | 非词法生命周期 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ |
+| [RFC 1859](https://rust-lang.github.io/rfcs/2094-nll.html) — Non-Lexical Lifetimes | 借用（Borrowing）检查器改进 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ |
+| [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) — NLL | 非词法生命周期（Lifetimes） | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ |
 | [RFC 0380](https://rust-lang.github.io/rfcs/1184-stabilize-no_std.html) — `no_std` | 无 std 环境 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | ✅ |
 | [RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html) — Specialization | Trait 特化 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 🔄 |
 
@@ -54,7 +54,7 @@
 | [RFC 0195](https://rust-lang.github.io/rfcs/0195-associated-items.html) — Associated Items | 关联类型/常量 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | ✅ |
 | [RFC 0401](https://rust-lang.github.io/rfcs/0401-coercions.html) — Coercions | 类型强制 | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | 🔄 |
 | [RFC 0738](https://rust-lang.github.io/rfcs/0738-variance.html) — Variance | 型变 | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | ✅ |
-| [RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) — GATs | 泛型关联类型 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | ✅ |
+| [RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) — GATs | 泛型（Generics）关联类型 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | ✅ |
 | [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) — Associated Type Bounds | 关联类型约束 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | ✅ |
 
 ---

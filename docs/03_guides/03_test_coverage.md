@@ -205,7 +205,7 @@ coverage:
 
 | 等级 | 行覆盖率 | 说明 |
 |-----|---------|------|
-| 🚧 最低 | 50% | 新功能模块的初始目标 |
+| 🚧 最低 | 50% | 新功能模块（Module）的初始目标 |
 | ✅ 良好 | 70% | 核心业务逻辑要求 |
 | 🏆 优秀 | 85% | 关键安全模块（如 c10_networks 的安全子模块） |
 | 💎 卓越 | 95% | 金融/密码学相关代码 |
@@ -229,7 +229,7 @@ cargo tarpaulin --workspace --all-features --engine llvm --out html
 
 1. **先覆盖核心路径**: 优先测试最常用的公共 API
 2. **使用 property-based testing**: proptest 可自动生成边界 case
-3. **测试错误路径**: 确保错误处理分支也被覆盖
+3. **测试错误路径**: 确保错误处理（Error Handling）分支也被覆盖
 4. **避免测试私有函数**: 通过公共 API 间接测试
 5. **关注 unsafe 代码**: 每个 unsafe 块都应被测试覆盖
 
@@ -266,7 +266,7 @@ cargo tarpaulin --exclude-files "*/tests/*" --exclude-files "*/benches/*"
 A: 这是已知问题。尝试：
 
 - 使用 `cargo-llvm-cov` 替代
-- 增加测试运行时间
+- 增加测试运行时（Runtime）间
 
 ---
 

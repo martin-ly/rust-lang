@@ -55,11 +55,11 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-Rust 的所有权系统防止了大部分内存安全问题，但以下场景仍可能出现问题：
+Rust 的所有权（Ownership）系统防止了大部分内存安全（Memory Safety）问题，但以下场景仍可能出现问题：
 
 | 场景 | 风险 |
 |-----|------|
-| `unsafe` 代码块 | 原始指针操作可能导致越界、use-after-free |
+| `unsafe` 代码块 | 原始指针（Raw Pointer）操作可能导致越界、use-after-free |
 | 解析外部输入（文件、网络数据） | 逻辑错误、 panic、无限循环 |
 | 复杂算法实现 | 边界条件处理不当 |
 | 与 C 代码的 FFI 交互 | 调用约定不匹配、内存管理错误 |

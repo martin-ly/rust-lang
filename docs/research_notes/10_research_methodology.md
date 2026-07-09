@@ -132,9 +132,9 @@
 
 **适用场景**:
 
-- 类型系统研究
-- 内存安全证明
-- 并发安全验证
+- 类型系统（Type System）研究
+- 内存安全（Memory Safety）证明
+- 并发安全（Concurrency Safety）验证
 
 **方法步骤**:
 
@@ -255,7 +255,7 @@ Qed.
 
 - **RustBelt** (Jung et al., POPL 2018): 使用 Iris 高阶并发分离逻辑，对 Rust 的核心类型系统和 `unsafe` 库给出了第一个机器检查的安全证明。官方论文 PDF: <https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf>。
 - **Aeneas** (Ho & Protzenko, ICFP 2022): 通过 LLBC（Low-Level Borrow Calculus）将安全 Rust 函数式翻译到 F\*/Coq/Lean，消除了显式内存推理。项目主页: <https://aeneas-verif.github.io/aeneas/>，源码: <https://github.com/AeneasVerif/aeneas>。
-- **RustHorn** (Matsushita et al., ESOP 2020 / TOPLAS 2021): 基于约束 Horn 子句（CHC）的 Rust 程序验证，利用所有权信息消除指针与堆。论文 PDF: <https://www.kb.is.s.u-tokyo.ac.jp/old-users/yskm24t/web/papers/esop2020-rust-horn.pdf>。
+- **RustHorn** (Matsushita et al., ESOP 2020 / TOPLAS 2021): 基于约束 Horn 子句（CHC）的 Rust 程序验证，利用所有权（Ownership）信息消除指针与堆。论文 PDF: <https://www.kb.is.s.u-tokyo.ac.jp/old-users/yskm24t/web/papers/esop2020-rust-horn.pdf>。
 - **RustHornBelt** (Matsushita, Denis, Jourdan, Dreyer, PLDI 2022): 扩展 RustBelt，为带 `unsafe` 代码的 Rust 程序功能正确性提供语义基础。论文 PDF: <https://people.mpi-sws.org/~dreyer/papers/rusthornbelt/paper.pdf>。
 - **Iris** (Jung et al., POPL 2015 / JFP 2018): 高阶并发分离逻辑框架，RustBelt 的证明基础。主页: <https://iris-project.org/>，Coq 实现: <https://gitlab.mpi-sws.org/iris/iris>。
 - **λRust** (RustBelt 的 Coq 形式化): RustBelt 在 Iris 中的操作语义与类型解释。源码: <https://gitlab.mpi-sws.org/iris/lambda-rust>。
@@ -286,7 +286,7 @@ Qed.
 >
 > **来源**: [Aeneas](https://aeneas-verif.github.io/aeneas/)
 
-Aeneas 将 Rust 的安全子集提取为 Lean 4（或 F\*/Coq/HOL4）中的纯函数，利用 Rust 借用检查保证消除内存推理：
+Aeneas 将 Rust 的安全子集提取为 Lean 4（或 F\*/Coq/HOL4）中的纯函数，利用 Rust 借用（Borrowing）检查保证消除内存推理：
 
 ```lean4
 -- Aeneas 生成的 Lean 4 函数签名示例（Result monad 区分 ok/fail/div）
@@ -376,7 +376,7 @@ def take_max (a b : U32) : Result U32 :=
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
-- **问题**：类型安全、型变、生命周期、Trait 解析等；需可形式化。
+- **问题**：类型安全、型变、生命周期（Lifetimes）、Trait 解析等；需可形式化。
 - **模型**：语法、类型规则、操作语义、性质（进展性、保持性、安全）。
 - **推导**：归纳、反证、辅助定理；可借助 Coq/Lean/Isabelle。
 - **详见**： [10_type_system_foundations.md](type_theory/10_type_system_foundations.md)、[10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md)、[10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)。
@@ -478,7 +478,7 @@ def take_max (a b : U32) : Result U32 :=
 - **可重复性**：环境、命令、版本可复现；实验类需「数据收集执行指南」+「结果分析模板」。
 - **逻辑一致**：形式化研究中的定义、定理、证明与代码示例一致；类型/借用规则与实现对应。
 - **可验证**：形式化可用 Coq/Lean/Prusti 等验证；实验可用 `cargo bench`/`cargo test`/Valgrind 等复现。
-- **交叉引用**：与 [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md)、[experiments](experiments/README.md)、[practical_applications](10_practical_applications.md) 的关联明确。
+- **交叉引用（Reference）**：与 [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md)、[experiments](experiments/README.md)、[practical_applications](10_practical_applications.md) 的关联明确。
 - **时效性**：注明 Rust 版本（如 1.93.1+）；若依赖未稳定特性，需标出。
 
 ### 研究模板 {#研究模板}
@@ -518,7 +518,7 @@ def take_max (a b : U32) : Result U32 :=
 - **Criterion**：`cargo bench`、`--save-baseline`、`BenchmarkId` 区分维度；结果见 `target/criterion/`。
 - **Valgrind**：`--leak-check=full --show-leak-kinds=all`；配合 `--error-limit=no` 做回归。
 - **Miri**：`cargo miri test`；`-Zmiri-tag-raw-pointers` 等见 Miri 文档。
-- **cargo expand / bloat**：宏展开与二进制体积分析；见 [macro_expansion_performance](experiments/10_macro_expansion_performance.md)。
+- **cargo expand / bloat**：宏（Macro）展开与二进制体积分析；见 [macro_expansion_performance](experiments/10_macro_expansion_performance.md)。
 
 ### 案例研究索引 {#案例研究索引}
 >

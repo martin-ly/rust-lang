@@ -67,7 +67,7 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **文件**: `crates/c12_wasm/src/ffi_advanced.rs`
-- **覆盖**: 不透明结构体、回调封装（trampoline）、RAII 封装、动态库加载概念、可变参数
+- **覆盖**: 不透明结构体（Struct）、回调封装（trampoline）、RAII 封装、动态库加载概念、可变参数
 
 ### c13: 裸指针、volatile、内联汇编 {#c13-裸指针volatile内联汇编}
 >
@@ -86,8 +86,8 @@
 | 5.2 Transmute | `mem::transmute` 安全使用 | 部分覆盖 |
 | 6.2 Drop Flags | 废弃内容，暂不跟踪 | - |
 | 7.3 Lock-Free 数据结构 | `crossbeam` 集成 | `c05_threads/src/lockfree/` 已有 |
-| 9.2 PhantomData | 生命周期/所有权标记 | 部分覆盖 |
-| 10.2 Arc/Weak 实现 | 引用计数实现 | 未覆盖 |
+| 9.2 PhantomData | 生命周期（Lifetimes）/所有权（Ownership）标记 | 部分覆盖 |
+| 10.2 Arc/Weak 实现 | 引用（Reference）计数实现 | 未覆盖 |
 
 ## 参考资源 {#参考资源}
 >

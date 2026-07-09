@@ -219,15 +219,15 @@ impl OrderService {
 
 | 能力 | 表达 | Rust 实现 | 说明 |
 | :--- | :--- | :--- | :--- |
-| **状态机** | 等价 | 枚举（Enum） + match；`#[derive(StateMachine)]` 宏；类型状态 | 与 23 安全 State 模式一致；穷尽匹配保证覆盖 |
-| **补偿（Compensation）** | 近似 | `Result` + 补偿闭包；`async` 编排；显式 `rollback()` | 无内置 Saga 编排器；需显式实现补偿链 |
-| **Temporal 式工作流** | 近似 | `temporal-sdk`、`cadence` 等 Rust 客户端 | 编排在服务端；Rust 实现 Activity/Workflow 定义；需外部运行时 |
+| **状态机** | 等价 | 枚举（Enum） + match；`#[derive(StateMachine)]` 宏（Macro）；类型状态 | 与 23 安全 State 模式一致；穷尽匹配保证覆盖 |
+| **补偿（Compensation）** | 近似 | `Result` + 补偿闭包（Closures）；`async` 编排；显式 `rollback()` | 无内置 Saga 编排器；需显式实现补偿链 |
+| **Temporal 式工作流** | 近似 | `temporal-sdk`、`cadence` 等 Rust 客户端 | 编排在服务端；Rust 实现 Activity/Workflow 定义；需外部运行时（Runtime） |
 
-**等价论证（状态机）**：Rust 枚举 + match 与有限状态机语义等价；类型状态可编译时约束非法转换。
+**等价论证（状态机）**：Rust 枚举（Enum） + match 与有限状态机语义等价；类型状态可编译时约束非法转换。
 
 **近似论证（补偿、Temporal）**：补偿需显式实现；Temporal 式需依赖外部编排服务；Rust 可表达 Activity 逻辑，但编排语义由引擎提供。
 
-**引用**：[04_expressiveness_boundary 分布式模式](04_expressiveness_boundary.md#分布式模式形式化边界event-sourcingsagacqrs)、[06_boundary_analysis 并发选型](../03_execution_models/06_boundary_analysis.md)
+**引用（Reference）**：[04_expressiveness_boundary 分布式模式](04_expressiveness_boundary.md#分布式模式形式化边界event-sourcingsagacqrs)、[06_boundary_analysis 并发选型](../03_execution_models/06_boundary_analysis.md)
 
 ---
 

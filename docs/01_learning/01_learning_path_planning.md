@@ -106,12 +106,12 @@
 **学习顺序**:
 
 1. **第 1-2 周: 基础语法**
-   - C01: 所有权与借用（重点）
+   - C01: 所有权（Ownership）与借用（Borrowing）（重点）
    - C03: 控制流与函数
    - 实践: 编写简单的 CLI 工具
 2. **第 3-4 周: 类型系统（Type System）**
-   - C02: 类型系统
-   - C04: 泛型编程（基础部分）
+   - C02: 类型系统（Type System）
+   - C04: 泛型（Generics）编程（基础部分）
    - 实践: 实现简单的数据结构
 3. **第 5-6 周: 综合实践**
    - 完成第一个项目: 文件处理工具
@@ -156,7 +156,7 @@
    - C09: 设计模式
    - 实践: 综合项目
 5. **第 9-10 周: 进阶专题（本轮新增）**
-   - c01: [Pin 与自引用结构](../../crates/c01_ownership_borrow_scope/src/pin_and_self_referential.rs)（高级所有权深入）
+   - c01: [Pin 与自引用（Reference）结构](../../crates/c01_ownership_borrow_scope/src/pin_and_self_referential.rs)（高级所有权深入）
    - exercises: [Rust 1.95 特性练习](../../exercises/src/rust_195_feature_exercises.rs)
    - 实践: 理解异步状态机底层与自引用安全
 
@@ -194,7 +194,7 @@
    - C09: 设计模式（完整）
    - 实践: 算法优化项目
 4. **第 7-8 周: 高级主题**
-   - C11: 宏系统
+   - C11: 宏（Macro）系统
    - C12: WASM
    - c01: [Pin 与自引用结构](../../crates/c01_ownership_borrow_scope/src/pin_and_self_referential.rs)（深入 `Pin<P>`、`Unpin`、自引用安全）
    - c02: [类型系统前沿](../../crates/c02_type_system/src/type_system_frontier.rs)（Never type `!`、TAIT、RPITIT/AFIT）
@@ -276,9 +276,9 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 理解所有权和借用规则
-- [ ] 掌握生命周期基础
+- [ ] 掌握生命周期（Lifetimes）基础
 - [ ] 能够编写基本的控制流代码
-- [ ] 理解函数和闭包
+- [ ] 理解函数和闭包（Closures）
 - [ ] 完成基础项目
 
 #### 进阶阶段（C04-C06） {#进阶阶段c04-c06}

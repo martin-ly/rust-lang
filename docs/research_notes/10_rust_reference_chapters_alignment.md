@@ -20,7 +20,7 @@
   - [一、对齐说明 {#一对齐说明}](#一对齐说明-一对齐说明)
   - [二、前言与介绍 {#二前言与介绍}](#二前言与介绍-二前言与介绍)
   - [三、词法结构 {#三词法结构}](#三词法结构-三词法结构)
-  - [四、类型系统 {#四类型系统}](#四类型系统-四类型系统)
+  - [四、类型系统（Type System） {#四类型系统}](#四类型系统-四类型系统)
   - [五、表达式 {#五表达式}](#五表达式-五表达式)
   - [六、Items {#六items}](#六items-六items)
   - [七、Attributes {#七attributes}](#七attributes-七attributes)
@@ -115,7 +115,7 @@
 
 | Reference 章节 | 项目文档 | 对齐点 |
 |----------------|----------|--------|
-| [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | crate 根、模块文件 |
+| [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | crate 根、模块（Module）文件 |
 | [Linkage](https://doc.rust-lang.org/reference/linkage.html) | [formal_modules/20_linkage_and_symbols.md](formal_modules/20_linkage_and_symbols.md) | crate-type、符号 |
 
 ---
@@ -141,7 +141,7 @@
 
 ## 十一、未覆盖缺口 {#十一未覆盖缺口}
 
-1. Reference 中 `const` 求值、模式匹配（Pattern Matching）、宏的详细章节可进一步拆分。
+1. Reference 中 `const` 求值、模式匹配（Pattern Matching）、宏（Macro）的详细章节可进一步拆分。
 2. 每个对齐点可细化到具体文件行号。
 3. 可随 Rust 1.97+ 发布持续更新本章节目录。
 

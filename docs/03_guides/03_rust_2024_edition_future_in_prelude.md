@@ -93,7 +93,7 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-1. **代码更简洁**：异步代码中减少冗余的 `use std::future::Future;`
+1. **代码更简洁**：异步（Async）代码中减少冗余的 `use std::future::Future;`
 2. **学习曲线降低**：新手无需了解 prelude 与 `Future` 的关系
 3. **与 async/await 对称**：`async` 和 `await` 已经是关键字，`Future` 自然应可见
 

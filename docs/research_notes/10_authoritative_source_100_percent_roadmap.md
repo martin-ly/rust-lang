@@ -46,7 +46,7 @@
 **关键判断**：
 
 - **P0 官方来源**已经达成 100%，所有研究笔记均具备官方规范或 RFC 级背书。
-- **P1 学术/形式化来源**已经达成 100%，通过 `p1_coverage_sprint.py` 与手工补齐，所有文件均引用学术/形式化来源。
+- **P1 学术/形式化来源**已经达成 100%，通过 `p1_coverage_sprint.py` 与手工补齐，所有文件均引用（Reference）学术/形式化来源。
 - **P2 社区/生态来源**已经达成 100%，通过 `p2_coverage_sprint.py` 与手工补齐，所有文件均引用社区/生态来源。
 - **P0+P1+P2 同时覆盖**已经达成 100%，docs/research_notes 全面国际化权威来源对齐网络建设目标完成。
 
@@ -80,7 +80,7 @@
 | 1 | [软件设计 / Crate 架构](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) | 22 | 100% | 100% | 100% | 100% | 已批量补充 Rust API Guidelines、Rust Design Patterns、SemVer 官方规范 |
 | 2 | [软件设计 / 边界系统](software_design_theory/05_boundary_system/README.md) | 4 | 100% | 100% | 100% | 100% | 已补充 Rust Reference 模块（Module）/FFI 边界、Refactoring Guru 边界模式 |
 | 3 | [速查卡](10_lifetime_cheatsheet.md) | 4 | 100% | 100% | 100% | 100% | 已补充 Rust Reference 对应章节及 Rust Design Patterns 实战链接 |
-| 4 | [形式化模块 / 反例边界](formal_modules/60_module_counterexamples.md) | 1 | 100% | 100% | 100% | 100% | 已补充 RFC 2126、Rust Reference Modules、Rust Design Patterns |
+| 4 | [形式化模块（Module） / 反例边界](formal_modules/60_module_counterexamples.md) | 1 | 100% | 100% | 100% | 100% | 已补充 RFC 2126、Rust Reference Modules、Rust Design Patterns |
 | 5 | [Crate 架构 / 反例边界](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) | 1 | 100% | 100% | 100% | 100% | 已补充 Rust API Guidelines、Cargo Book workspace 章节 |
 | 6 | [实验研究 / 性能 / 反例边界](experiments/60_experiments_counterexamples.md) | 1 | 100% | 100% | 100% | 100% | 已补充 Rust Performance Book、Criterion 论文/文档 |
 | 7 | [工作流 / 组合工程 / 分布式 / 反例边界](software_design_theory/60_workflow_compositional_distributed_counterexamples.md) | 1 | 100% | 100% | 100% | 100% | 已补充 Saga/补偿事务社区资源与学术来源 |

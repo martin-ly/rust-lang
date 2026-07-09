@@ -37,7 +37,7 @@
 
 > **[来源: [tract-onnx crates.io](https://crates.io/crates/tract-onnx)]**
 
-`tract` 是 Sonos 开源的 **纯 Rust 神经网络推理引擎**，主打“Tiny, no-nonsense, self contained”。它无需外部 C/C++ 运行时即可加载并执行 ONNX、TensorFlow、TensorFlow Lite 与 NNEF 模型，特别适合对二进制体积、跨平台构建和依赖审计敏感的场景，如嵌入式、可信执行环境（TEE）与端侧 AI。
+`tract` 是 Sonos 开源的 **纯 Rust 神经网络推理引擎**，主打“Tiny, no-nonsense, self contained”。它无需外部 C/C++ 运行时（Runtime）即可加载并执行 ONNX、TensorFlow、TensorFlow Lite 与 NNEF 模型，特别适合对二进制体积、跨平台构建和依赖审计敏感的场景，如嵌入式、可信执行环境（TEE）与端侧 AI。
 
 > [来源: [tract docs.rs](https://docs.rs/tract-onnx/latest/tract_onnx/)]
 
@@ -90,7 +90,7 @@ println!("output shape = {:?}", view.shape());
 
 ### 2.1 模型加载与优化流水线 {#21-模型加载与优化流水线}
 
-`tract` 将模型生命周期显式分为解析、优化、可运行三个阶段。开发者可在中间阶段检查或修改图，例如插入量化、裁剪子图、查看中间形状。
+`tract` 将模型生命周期（Lifetimes）显式分为解析、优化、可运行三个阶段。开发者可在中间阶段检查或修改图，例如插入量化、裁剪子图、查看中间形状。
 
 ```rust,ignore
 let model = tract_onnx::onnx()
@@ -155,7 +155,7 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-`tract` 通过类型系统将神经网络图的静态结构表达在编译期：
+`tract` 通过类型系统（Type System）将神经网络图的静态结构表达在编译期：
 
 | 维度 | API | 类型系统价值 |
 |:--|:--|:--|

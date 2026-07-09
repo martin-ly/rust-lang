@@ -694,7 +694,7 @@ fn validate_all_items(items: Vec<i32>) -> ControlFlow<Vec<String>, Vec<i32>> {
 
 | 操作 | `Result` 提前返回 | `ControlFlow` 提前终止 | 性能差异 |
 |------|------------------|----------------------|----------|
-| 迭代器短路 | 需要类型转换 | 原生支持 | ControlFlow 快 10-15% |
+| 迭代器（Iterator）短路 | 需要类型转换 | 原生支持 | ControlFlow 快 10-15% |
 | 批量处理 | 复杂错误类型 | 清晰语义 | 代码可维护性提升 |
 | 树搜索 |  awkward 的 Ok/Err | Break/Continue | 语义清晰度提升 |
 
@@ -721,7 +721,7 @@ fn validate(value: i32) -> ControlFlow<String, i32> {
 }
 ```
 
-**影响**: 更好的异步验证和转换
+**影响**: 更好的异步（Async）验证和转换
 
 ---
 
@@ -748,9 +748,9 @@ fn validate(value: i32) -> ControlFlow<String, i32> {
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-- [类型系统速查卡](02_type_system.md) - Result 和 Option 类型
+- [类型系统（Type System）速查卡](02_type_system.md) - Result 和 Option 类型
 - [控制流与函数速查卡](02_control_flow_functions_cheatsheet.md) - 错误处理模式
-- [所有权系统速查卡](02_ownership_cheatsheet.md) - 所有权与错误处理
+- [所有权（Ownership）系统速查卡](02_ownership_cheatsheet.md) - 所有权与错误处理
 - [异步编程速查卡](02_async_patterns.md) - 异步错误处理
 
 ---

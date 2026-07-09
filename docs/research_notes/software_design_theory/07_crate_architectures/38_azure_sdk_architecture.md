@@ -37,7 +37,7 @@
 
 > **[来源: [Azure SDK for Rust](https://github.com/Azure/azure-sdk-for-rust)]**
 
-`azure-sdk-rust` 是微软官方提供的 Rust 语言 Azure SDK，采用与 .NET / Java / Python / Go / JavaScript SDK 统一的设计准则（Azure SDK Guidelines）。它以 `azure_core` 为统一内核，各服务（Blob、Key Vault、Queue 等）分别发布独立 crate，提供类型化的异步客户端、`TokenCredential` 认证抽象、以及 `Pager<T>` / `Poller<T>` 等分页与长运行操作原语。
+`azure-sdk-rust` 是微软官方提供的 Rust 语言 Azure SDK，采用与 .NET / Java / Python / Go / JavaScript SDK 统一的设计准则（Azure SDK Guidelines）。它以 `azure_core` 为统一内核，各服务（Blob、Key Vault、Queue 等）分别发布独立 crate，提供类型化的异步（Async）客户端、`TokenCredential` 认证抽象、以及 `Pager<T>` / `Poller<T>` 等分页与长运行操作原语。
 
 > [来源: [Azure SDK releases (Rust)](https://azure.github.io/azure-sdk/releases/latest/rust.html)]
 
@@ -48,7 +48,7 @@
 | **核心抽象** | `azure_core` 统一 HTTP、凭证、分页、重试 | 跨服务 API 风格一致，学习成本低 |
 | **crate 组织** | 每服务一个 crate | 按需依赖，避免引入未使用的服务 |
 | **认证模型** | `TokenCredential` trait 抽象 | 本地开发、托管身份、服务主体可无缝切换 |
-| **异步运行时** | 原生 async/await，默认 Tokio | 与 Rust 生态一致，可插拔运行时 |
+| **异步运行时（Runtime）** | 原生 async/await，默认 Tokio | 与 Rust 生态一致，可插拔运行时 |
 
 > [来源: [docs.rs azure_core](https://docs.rs/azure_core)] · [docs.rs azure_identity](https://docs.rs/azure_identity)] · [docs.rs azure_storage_blob](https://docs.rs/azure_storage_blob)]
 
@@ -120,9 +120,9 @@ let response = poller.await?;
 
 | Rust 类型机制 | 在 azure-sdk-rust 中的体现 |
 |:--|:--|
-| **Trait 抽象** | `TokenCredential` 用 trait object 统一多种凭证，避免客户端泛型爆炸 |
+| **Trait 抽象** | `TokenCredential` 用 trait object 统一多种凭证，避免客户端泛型（Generics）爆炸 |
 | **泛型分页** | `Pager<T, F>` 对 item 类型 `T` 与 page 格式 `F` 参数化，编译期保证类型安全 |
-| **Builder 模式** | 每个操作通过 `ClientOptions` / request builder 逐步构造，必填参数由类型系统保证 |
+| **Builder 模式** | 每个操作通过 `ClientOptions` / request builder 逐步构造，必填参数由类型系统（Type System）保证 |
 | `Response<T, F>` | 原始 HTTP 响应被包装为强类型响应，`.into_model()` 将 body 反序列化为业务模型 |
 | **错误分离** | `azure_core::Error` 统一网络、认证、服务错误；服务级错误通过生成的具体类型暴露 |
 

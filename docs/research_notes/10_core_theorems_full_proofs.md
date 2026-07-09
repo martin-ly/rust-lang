@@ -28,11 +28,11 @@
   - [📑 目录 {#目录}](#-目录-目录)
   - [〇、证明结构规范（A→L→T→C 链） {#〇证明结构规范altc-链}](#〇证明结构规范altc-链-〇证明结构规范altc-链)
   - [一、证明依赖 DAG {#一证明依赖-dag}](#一证明依赖-dag-一证明依赖-dag)
-  - [二、所有权定理 T-OW2（所有权唯一性） {#二所有权定理-t-ow2所有权唯一性}](#二所有权定理-t-ow2所有权唯一性-二所有权定理-t-ow2所有权唯一性)
+  - [二、所有权（Ownership）定理 T-OW2（所有权唯一性） {#二所有权定理-t-ow2所有权唯一性}](#二所有权定理-t-ow2所有权唯一性-二所有权定理-t-ow2所有权唯一性)
     - [2.1 辅助引理 {#21-辅助引理}](#21-辅助引理-21-辅助引理)
     - [2.2 归纳证明 {#22-归纳证明}](#22-归纳证明-22-归纳证明)
     - [2.3 反例的形式化否定 {#23-反例的形式化否定}](#23-反例的形式化否定-23-反例的形式化否定)
-  - [三、借用定理 T-BR1（数据竞争自由） {#三借用定理-t-br1数据竞争自由}](#三借用定理-t-br1数据竞争自由-三借用定理-t-br1数据竞争自由)
+  - [三、借用（Borrowing）定理 T-BR1（数据竞争自由） {#三借用定理-t-br1数据竞争自由}](#三借用定理-t-br1数据竞争自由-三借用定理-t-br1数据竞争自由)
     - [3.1 辅助引理 {#31-辅助引理}](#31-辅助引理-31-辅助引理)
     - [3.2 主证明 {#32-主证明}](#32-主证明-32-主证明)
     - [3.3 归纳细化（对执行步骤） {#33-归纳细化对执行步骤}](#33-归纳细化对执行步骤-33-归纳细化对执行步骤)
@@ -67,7 +67,7 @@
 | **Theorem** | T-OW2, T-BR1 | 主要结论 | T-OW2 所有权唯一性 |
 | **Corollary** | C-OW1 | 由 Theorem 直接推论 | 推论 |
 
-**引用规范**：每个 Theorem 应显式列出依赖的 Axiom/Lemma；Lemma 引用 Axiom；Corollary 引用 Theorem。详见 [formal_methods/README](formal_methods/README.md)、[PROOF_INDEX](10_proof_index.md)。
+**引用（Reference）规范**：每个 Theorem 应显式列出依赖的 Axiom/Lemma；Lemma 引用 Axiom；Corollary 引用 Theorem。详见 [formal_methods/README](formal_methods/README.md)、[PROOF_INDEX](10_proof_index.md)。
 
 ---
 
@@ -191,7 +191,7 @@
 
 **反例**：使用已移动值。形式化 $\neg P$：$\exists x, v, t: \Omega_t(x)=\text{Moved} \land \Gamma_t(x)=v \land \text{use}_t(x)$。
 
-*否定*：规则 2 规定移动后 $\text{valid}(x)=\text{false}$；类型系统拒绝使用已移动变量；故 $\neg\exists$ 此类执行。∎
+*否定*：规则 2 规定移动后 $\text{valid}(x)=\text{false}$；类型系统（Type System）拒绝使用已移动变量；故 $\neg\exists$ 此类执行。∎
 
 ---
 
@@ -208,7 +208,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**引理 L-BR1（写操作互斥）**：若满足规则 1（可变借用唯一性），则 $\forall m, t_1, t_2: \text{Write}(t_1,m) \land \text{Write}(t_2,m) \land \text{Concurrent}(t_1,t_2) \rightarrow \text{false}$。
+**引理 L-BR1（写操作互斥）**：若满足规则 1（可变借用（Mutable Borrow）唯一性），则 $\forall m, t_1, t_2: \text{Write}(t_1,m) \land \text{Write}(t_2,m) \land \text{Concurrent}(t_1,t_2) \rightarrow \text{false}$。
 
 *证明*：规则 1 保证同一时刻至多一个可变借用；两写并发⇒两可变借用并存⇒违反规则 1。∎
 
@@ -294,7 +294,7 @@
 | L-OW2 | 无悬垂（反证） | ownership_model T3 性质1 |
 | L-OW3 | 无双重释放（反证） | ownership_model T3 性质2 |
 | T-OW2 | 所有权唯一性 | §2 |
-| T-OW3 | 内存安全框架 | ownership_model |
+| T-OW3 | 内存安全（Memory Safety）框架 | ownership_model |
 | L-BR1 | 写操作互斥 | §3.1 |
 | L-BR2 | 读写不并存 | §3.1 |
 | T-BR1 | 数据竞争自由 | §3 |
@@ -350,7 +350,7 @@
 
 **定理 SYNC-T1**：若 $T : \text{Sync}$，则多线程同时持有 $\&T$ 不引入数据竞争。
 
-**定理 SEND-SYNC-T1**：若闭包 $F : \text{Send} + \text{'static}$，则 `thread::spawn(|| body)` 与 SPAWN-T1 一致，跨线程无数据竞争。
+**定理 SEND-SYNC-T1**：若闭包（Closures） $F : \text{Send} + \text{'static}$，则 `thread::spawn(|| body)` 与 SPAWN-T1 一致，跨线程无数据竞争。
 
 **引理 SYNC-L1**：$T : \text{Sync} \Leftrightarrow \&T : \text{Send}$。
 

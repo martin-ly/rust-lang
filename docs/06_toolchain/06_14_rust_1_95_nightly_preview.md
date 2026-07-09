@@ -109,11 +109,11 @@ where
 
 **状态**: 实验实现中
 
-**描述**: 允许异步析构函数
+**描述**: 允许异步（Async）析构函数
 
 **形式化挑战**:
 
-- 异步析构与借用检查器的交互
+- 异步析构与借用（Borrowing）检查器的交互
 - Pin 语义在异步 Drop 中的扩展
 
 ```rust,ignore
@@ -139,7 +139,7 @@ impl AsyncDrop for AsyncResource {
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**状态**: 迭代器生成器实验
+**状态**: 迭代器（Iterator）生成器实验
 
 **描述**: 原生的生成器/协程支持
 
@@ -332,7 +332,7 @@ cargo build --timings -Zsection-timings
 | :--- | :--- | :--- |
 | 下一代 Trait 求解器 | 新求解器的正确性证明 | [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
 | Async Drop | 异步析构的安全保证 | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) |
-| 生成器状态机 | 生成器的内存安全证明 | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) |
+| 生成器状态机 | 生成器的内存安全（Memory Safety）证明 | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) |
 | Pin 重新借用 | 人体工学改进的安全边界 | [pin_self_referential](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) |
 | 严格指针来源 | 指针操作的严格语义 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) |
 
@@ -344,7 +344,7 @@ cargo build --timings -Zsection-timings
 
 **Def 1.95-2 (生成器状态)**: 生成器状态机定义扩展，包含 `Yielded` 和 `Complete` 状态
 
-**Def 1.95-3 (Pin 重新借用)**: 隐式重新借用的生命周期约束形式化
+**Def 1.95-3 (Pin 重新借用)**: 隐式重新借用的生命周期（Lifetimes）约束形式化
 
 ---
 

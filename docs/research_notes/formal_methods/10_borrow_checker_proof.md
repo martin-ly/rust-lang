@@ -4,7 +4,7 @@
 # 借用检查器证明 {#借用检查器证明}
 
 > **EN**: Borrow Checker Proof
-> **Summary**: 借用检查器证明 Borrow Checker Proof.
+> **Summary**: 借用（Borrowing）检查器证明 Borrow Checker Proof.
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -40,7 +40,7 @@
     - [相关学术论文的详细分析 {#相关学术论文的详细分析}](#相关学术论文的详细分析-相关学术论文的详细分析)
       - [1. RustBelt: Logical Foundations for the Future of Safe Systems Programming {#1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming}](#1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming-1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming)
       - [2. The RustBelt Project: Formalizing Rust's Type System {#2-the-rustbelt-project-formalizing-rusts-type-system}](#2-the-rustbelt-project-formalizing-rusts-type-system-2-the-rustbelt-project-formalizing-rusts-type-system)
-    - [MIT 课程对齐：内存安全与数据竞争自由 {#mit-课程对齐内存安全与数据竞争自由}](#mit-课程对齐内存安全与数据竞争自由-mit-课程对齐内存安全与数据竞争自由)
+    - [MIT 课程对齐：内存安全（Memory Safety）与数据竞争自由 {#mit-课程对齐内存安全与数据竞争自由}](#mit-课程对齐内存安全与数据竞争自由-mit-课程对齐内存安全与数据竞争自由)
       - [MIT 6.826: Computer Systems Security 形式化对比 {#mit-6826-computer-systems-security-形式化对比}](#mit-6826-computer-systems-security-形式化对比-mit-6826-computer-systems-security-形式化对比)
       - [MIT 6.858: Computer Systems 与 Symbolic Execution {#mit-6858-computer-systems-与-symbolic-execution}](#mit-6858-computer-systems-与-symbolic-execution-mit-6858-computer-systems-与-symbolic-execution)
       - [数据竞争自由与 MIT 课程的联系 {#数据竞争自由与-mit-课程的联系}](#数据竞争自由与-mit-课程的联系-数据竞争自由与-mit-课程的联系)
@@ -52,7 +52,7 @@
       - [Resource Invariants 与 Mutex {#resource-invariants-与-mutex}](#resource-invariants-与-mutex-resource-invariants-与-mutex)
       - [Ghost State 与 Unsafe 契约 {#ghost-state-与-unsafe-契约}](#ghost-state-与-unsafe-契约-ghost-state-与-unsafe-契约)
       - [CMU 15-799 并发验证对齐表 {#cmu-15-799-并发验证对齐表}](#cmu-15-799-并发验证对齐表-cmu-15-799-并发验证对齐表)
-      - [差异分析：Rust 如何解决 MIT 课程中的并发安全问题 {#差异分析rust-如何解决-mit-课程中的并发安全问题}](#差异分析rust-如何解决-mit-课程中的并发安全问题-差异分析rust-如何解决-mit-课程中的并发安全问题)
+      - [差异分析：Rust 如何解决 MIT 课程中的并发安全（Concurrency Safety）问题 {#差异分析rust-如何解决-mit-课程中的并发安全问题}](#差异分析rust-如何解决-mit-课程中的并发安全问题-差异分析rust-如何解决-mit-课程中的并发安全问题)
   - [🆕 最新别名模型与操作语义（Tree Borrows / RustSEM / RustBelt / Oxide） {#最新别名模型与操作语义tree-borrows-rustsem-rustbelt-oxide}](#-最新别名模型与操作语义tree-borrows--rustsem--rustbelt--oxide-最新别名模型与操作语义tree-borrows-rustsem-rustbelt-oxide)
     - [1. Tree Borrows：借用检查器的别名语义精化 {#1-tree-borrows借用检查器的别名语义精化}](#1-tree-borrows借用检查器的别名语义精化-1-tree-borrows借用检查器的别名语义精化)
     - [2. RustSEM：内存级借用规则的可执行语义 {#2-rustsem内存级借用规则的可执行语义}](#2-rustsem内存级借用规则的可执行语义-2-rustsem内存级借用规则的可执行语义)
@@ -71,14 +71,14 @@
     - [Rust 对应 {#rust-对应}](#rust-对应-rust-对应)
   - [⚠️ 反例：违反借用规则导致数据竞争 {#反例违反借用规则导致数据竞争}](#️-反例违反借用规则导致数据竞争-反例违反借用规则导致数据竞争)
   - [💻 代码示例与实践 {#代码示例与实践}](#-代码示例与实践-代码示例与实践)
-    - [示例 1：不可变借用 {#示例-1不可变借用}](#示例-1不可变借用-示例-1不可变借用)
+    - [示例 1：不可变借用（Mutable Borrow） {#示例-1不可变借用}](#示例-1不可变借用-示例-1不可变借用)
     - [示例 2：可变借用 {#示例-2可变借用}](#示例-2可变借用-示例-2可变借用)
     - [示例 3：借用检查器拒绝数据竞争 {#示例-3借用检查器拒绝数据竞争}](#示例-3借用检查器拒绝数据竞争-示例-3借用检查器拒绝数据竞争)
-    - [示例 4：借用作用域与生命周期 {#示例-4借用作用域与生命周期}](#示例-4借用作用域与生命周期-示例-4借用作用域与生命周期)
-    - [示例 5：借用检查器检测悬垂引用 {#示例-5借用检查器检测悬垂引用}](#示例-5借用检查器检测悬垂引用-示例-5借用检查器检测悬垂引用)
+    - [示例 4：借用作用域与生命周期（Lifetimes） {#示例-4借用作用域与生命周期}](#示例-4借用作用域与生命周期-示例-4借用作用域与生命周期)
+    - [示例 5：借用检查器检测悬垂引用（Reference） {#示例-5借用检查器检测悬垂引用}](#示例-5借用检查器检测悬垂引用-示例-5借用检查器检测悬垂引用)
     - [示例 6：复杂借用场景 {#示例-6复杂借用场景}](#示例-6复杂借用场景-示例-6复杂借用场景)
   - [🔗 系统集成与实际应用 {#系统集成与实际应用}](#-系统集成与实际应用-系统集成与实际应用)
-    - [与所有权系统的集成 {#与所有权系统的集成}](#与所有权系统的集成-与所有权系统的集成)
+    - [与所有权（Ownership）系统的集成 {#与所有权系统的集成}](#与所有权系统的集成-与所有权系统的集成)
     - [与生命周期的集成 {#与生命周期的集成}](#与生命周期的集成-与生命周期的集成)
     - [实际应用案例 {#实际应用案例}](#实际应用案例-实际应用案例)
   - [✅ 证明目标 {#证明目标}](#-证明目标-证明目标)
@@ -159,7 +159,7 @@
 
 **借用规则**：
 
-1. 同一时间只能有一个可变借用或多个不可变借用
+1. 同一时间只能有一个可变借用或多个不可变借用（Immutable Borrow）
 2. 借用必须始终有效
 
 **数据竞争（Data Race）**：多个线程同时访问同一内存位置，至少有一个是写操作，且没有同步。
@@ -172,7 +172,7 @@
 
 **分离逻辑（Separation Logic）**：用于表达借用规则的逻辑系统。
 
-**区域类型（Region Types）**：用于形式化生命周期的类型系统。
+**区域类型（Region Types）**：用于形式化生命周期的类型系统（Type System）。
 
 ### 数据竞争的形式化定义 {#数据竞争的形式化定义}
 
@@ -381,7 +381,7 @@ MIT 6.858 Lab 3 使用符号执行发现程序漏洞：
 
 **形式化关系**:
 
-符号执行检查运行时属性：
+符号执行检查运行时（Runtime）属性：
 
 $$\forall \pi \in \text{Paths}(P): \text{Safe}(\pi)$$
 
@@ -493,7 +493,7 @@ CMU 15-799 的并发验证主题与 Rust 借用检查器的并发保证直接对
 | Concurrent Separation Logic | Send/Sync trait | §并发安全（Corollary 2） |
 | Resource Invariants | Mutex/RwLock | Def MUTEX1 |
 | Ghost State | Unsafe 代码契约 | §unsafe 契约 |
-| Linearizability | 原子操作语义 | Def ATOMIC1 |
+| Linearizability | 原子操作（Atomic Operations）语义 | Def ATOMIC1 |
 
 #### 并发分离逻辑形式化 {#并发分离逻辑形式化}
 
@@ -646,7 +646,7 @@ RustSEM 把借用检查器维护的不变量下沉到**内存操作语义**：
 
 - `own(b)` 表示对块 `b` 的所有权；`mut(lt, p)` / `shr(lt, p)` 表示带生命周期的引用值。
 - 通过**动态生命周期延伸**实现 NLL：引用每次被使用时自动更新其时间戳跨度，无需预先知道 lexical scope。
-- 在 K-Framework 中实现，可用约 700 个测试用例与 `rustc` 进行语义一致性对比。
+- 在 K-Framework 中实现，可用约 700 个测试用例与 `rustc` 进行语义一致性（Coherence）对比。
 
 **与本文档的对应**: RustSEM 可视为本文 **Def 1.2（借用状态）** 与 **Def 1.3（借用有效性）** 的**可执行精化**。RustSEM 的运行时检查器能够检测：未初始化读取、悬垂指针、双重释放、数据竞争、所有权（Ownership）/借用错误、缓冲区溢出。
 
@@ -996,7 +996,7 @@ $$\forall b \in \Delta_t: \text{Owner}(b) \in \text{LocalVars}(t) \lor (\text{Ow
 
 1. **程序序**：同一线程内，若 $s_i$ 在 $s_j$ 之前执行，则 $(t, s_i) \xrightarrow{hb} (t, s_j)$
 2. **同步序**：若 $s_i$ 释放同步原语 $s$ 且 $s_j$ 获取 $s$，则 $(t_1, s_i) \xrightarrow{hb} (t_2, s_j)$
-3. **传递闭包**：若 $e_1 \xrightarrow{hb} e_2$ 且 $e_2 \xrightarrow{hb} e_3$，则 $e_1 \xrightarrow{hb} e_3$
+3. **传递闭包（Closures）**：若 $e_1 \xrightarrow{hb} e_2$ 且 $e_2 \xrightarrow{hb} e_3$，则 $e_1 \xrightarrow{hb} e_3$
 
 **Lemma 1.6（HB 防止数据竞争）**：
 
@@ -1543,7 +1543,7 @@ graph TD
 | :--- | :--- | :--- | :--- |
 | 双可变借用 | Axiom 1 | 编译错误 | 两处 `&mut` 叠加，编译器拒绝 |
 | 可变与不可变共存 | Axiom 2 | 编译错误 | `&` 与 `&mut` 同时存在 |
-| 跨线程共享可变引用 | Axiom 1、2 | 编译错误 | 示例 3：thread::spawn 捕获可变借用 |
+| 跨线程共享可变引用（Mutable Reference） | Axiom 1、2 | 编译错误 | 示例 3：thread::spawn 捕获可变借用 |
 | 借用超出所有者 | Axiom 3 | 悬垂引用 | 返回局部引用，生命周期不足 |
 
 ---
@@ -1784,7 +1784,7 @@ Polonius 与 lifetime_formalization 中的推断、约束求解一致。
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 1. **并发**：`Mutex`、`RwLock`、channel 的接口与借用、`Send`/`Sync` 配合，保证数据竞争自由。
-2. **迭代器**：`Iter`/`IterMut` 的 `&T`/`&mut T` 与借用规则、生命周期对应。
+2. **迭代器（Iterator）**：`Iter`/`IterMut` 的 `&T`/`&mut T` 与借用规则、生命周期对应。
 3. **闭包（Closures）**：`Fn`/`FnMut`/`FnOnce` 的捕获与借用、move 语义对应排他/共享与所有权转移。
 
 ---

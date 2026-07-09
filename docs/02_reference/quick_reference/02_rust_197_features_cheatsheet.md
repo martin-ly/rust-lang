@@ -165,7 +165,7 @@ match err.kind() {
 | `FromIterator<(A, B, ...)>` for tuples | 一次 collect，多个容器 |
 | `VecDeque::truncate_front` | 截断前部，保留后部 `n` 个元素 |
 | `BufRead` for `VecDeque<u8>` | 无锁缓冲读取 |
-| `Option::as_slice` / `as_mut_slice` | Option → 切片视图 |
+| `Option::as_slice` / `as_mut_slice` | Option → 切片（Slice）视图 |
 | `From<&mut [T]>` for `Box/Rc/Arc<[T]>` | 可变切片转换 |
 
 ```rust

@@ -193,7 +193,7 @@ vec.get(0..=5);                // 获取 0-5
 
 | Lint | 默认级别 | 说明 | 修复建议 |
 |------|----------|------|----------|
-| `unused_tuple_struct_fields` | Warn | 元组结构体字段未使用 | 删除或添加 `_` 前缀 |
+| `unused_tuple_struct_fields` | Warn | 元组结构体（Struct）字段未使用 | 删除或添加 `_` 前缀 |
 | `redundant_guards` | Warn | 冗余的 match 守卫 | 简化守卫条件 |
 | `opaque_hidden_inferred_bound` | Warn | 不透明类型隐藏推断边界 | 显式指定类型边界 |
 

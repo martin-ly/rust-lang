@@ -1,4 +1,4 @@
-> **Canonical 说明**: 本文件专注 **Tonic gRPC 框架的服务宏、prost 编解码与 Tower 中间件架构**。
+> **Canonical 说明**: 本文件专注 **Tonic gRPC 框架的服务宏（Macro）、prost 编解码与 Tower 中间件架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
@@ -24,11 +24,11 @@
 
 Tonic 是 Rust 生态中的原生 gRPC 实现，年下载量超过 2000 万次 来源: [crates.io 统计, 2025](https://crates.io/)。
 
-它并非独立的网络框架，而是精密组装了 Tokio（异步运行时）、Hyper（HTTP/2 实现）、Tower（Service/Layer 抽象）和 prost（Protobuf 编解码）等多个生态基石。
+它并非独立的网络框架，而是精密组装了 Tokio（异步（Async）运行时（Runtime））、Hyper（HTTP/2 实现）、Tower（Service/Layer 抽象）和 prost（Protobuf 编解码）等多个生态基石。
 
 Tonic 的核心理念可以概括为：**gRPC 即 HTTP/2 + Protobuf + 流语义**，一切抽象都围绕这三者的类型安全组合展开。
 
-与 Go 的 gRPC 实现不同，Tonic 充分利用 Rust 的类型系统，在编译期即保证：服务方法的签名与 `.proto` 定义一致、流类型的方向（服务器流/客户端流/双向流）与 handler 签名匹配、拦截器链的类型正确。
+与 Go 的 gRPC 实现不同，Tonic 充分利用 Rust 的类型系统（Type System），在编译期即保证：服务方法的签名与 `.proto` 定义一致、流类型的方向（服务器流/客户端流/双向流）与 handler 签名匹配、拦截器链的类型正确。
 
 > 来源: Tonic 官方文档, https: /  / [docs.rs](https://docs.rs/) / tonic / latest / tonic /
 > 来源: [Tonic GitHub README](https://github.com/hyperium/tonic)
@@ -540,7 +540,7 @@ Tonic 基于 Hyper 的 HTTP/2 实现，单一 TCP 连接上可同时承载多个
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-`prost`（Tonic 使用的 Protobuf 库）采用零拷贝解析策略：对于 `bytes` 和 `string` 字段，直接从输入缓冲区借用，而非拷贝到新的堆分配。
+`prost`（Tonic 使用的 Protobuf 库）采用零拷贝解析策略：对于 `bytes` 和 `string` 字段，直接从输入缓冲区借用（Borrowing），而非拷贝到新的堆分配。
 
 这在大消息体传输中显著降低内存压力。
 

@@ -465,7 +465,7 @@ async fn weighted_semaphore() {
 | :--- | :--- | :--- |
 | 并发执行模型 | 并发模型理论 | [../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/03_concurrent.md) |
 | 并行执行模型 | 并行模型理论 | [../../../research_notes/software_design_theory/03_execution_models/04_parallel.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/04_parallel.md) |
-| 边界矩阵 | 并发安全边界 | [../../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md](../../../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md) |
+| 边界矩阵 | 并发安全（Concurrency Safety）边界 | [../../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md](../../../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md) |
 
 ### 形式化方法 {#形式化方法}
 
@@ -476,7 +476,7 @@ async fn weighted_semaphore() {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | Send/Sync 形式化 | 线程安全形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
-| 所有权模型 | 所有权与并发 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
+| 所有权（Ownership）模型 | 所有权与并发 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 
 ### 实验分析 {#实验分析}
 
@@ -494,7 +494,7 @@ async fn weighted_semaphore() {
 | :--- | :--- | :--- |
 | c09_design_pattern | 并发设计模式实现 | [../../../../crates/c09_design_pattern/docs/](../../../../crates/c09_design_pattern/docs/README.md) |
 | c05_threads | 线程并发 | [../../../../crates/c05_threads/](../../../../crates/c05_threads/README.md) |
-| c06_async | 异步并发 | [../../../../crates/c06_async/](../../../../crates/c06_async/README.md) |
+| c06_async | 异步（Async）并发 | [../../../../crates/c06_async/](../../../../crates/c06_async/README.md) |
 
 ---
 

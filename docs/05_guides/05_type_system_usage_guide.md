@@ -20,19 +20,19 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [类型系统使用指南 {#类型系统使用指南}](#类型系统使用指南-类型系统使用指南)
+- [类型系统（Type System）使用指南 {#类型系统使用指南}](#类型系统使用指南-类型系统使用指南)
   - [📑 目录 {#目录}](#-目录-目录)
   - [📋 概述 {#概述}](#-概述-概述)
   - [🚀 快速开始 {#快速开始}](#-快速开始-快速开始)
   - [📊 核心功能 {#核心功能}](#-核心功能-核心功能)
     - [1. 基本类型系统 {#1-基本类型系统}](#1-基本类型系统-1-基本类型系统)
-    - [2. 泛型与 Trait {#2-泛型与-trait}](#2-泛型与-trait-2-泛型与-trait)
+    - [2. 泛型（Generics）与 Trait {#2-泛型与-trait}](#2-泛型与-trait-2-泛型与-trait)
     - [3. 型变 (Variance) {#3-型变-variance}](#3-型变-variance-3-型变-variance)
-    - [4. 高级模式匹配 {#4-高级模式匹配}](#4-高级模式匹配-4-高级模式匹配)
+    - [4. 高级模式匹配（Pattern Matching） {#4-高级模式匹配}](#4-高级模式匹配-4-高级模式匹配)
     - [5. 精确捕获 (Precise Capturing) {#5-精确捕获-precise-capturing}](#5-精确捕获-precise-capturing-5-精确捕获-precise-capturing)
     - [6. Rust 1.95 类型系统增强 {#6-rust-195-类型系统增强}](#6-rust-195-类型系统增强-6-rust-195-类型系统增强)
   - [⚡ 性能优化 {#性能优化}](#-性能优化-性能优化)
-  - [🔧 错误处理 {#错误处理}](#-错误处理-错误处理)
+  - [🔧 错误处理（Error Handling） {#错误处理}](#-错误处理-错误处理)
   - [🐛 常见问题与解决方案 {#常见问题与解决方案}](#-常见问题与解决方案-常见问题与解决方案)
   - [🔗 相关文档 {#相关文档}](#-相关文档-相关文档)
   - [相关概念 {#相关概念}](#相关概念-相关概念)
@@ -81,14 +81,14 @@ fn main() {
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-`primitive_types/` 模块提供对标量类型和复合类型的深度封装：
+`primitive_types/` 模块（Module）提供对标量类型和复合类型的深度封装：
 
 | 模块 | 内容 |
 |------|------|
 | `scalar_types/number/` | 增强整数、浮点数运算，溢出安全 |
 | `scalar_types/boolean/` | 布尔代数与逻辑运算优化 |
 | `scalar_types/char/` | Unicode 字符处理 |
-| `compound_types/array/` | 固定数组与切片操作 |
+| `compound_types/array/` | 固定数组与切片（Slice）操作 |
 | `compound_types/tuple/` | 元组解构与模式匹配 |
 
 **示例：安全整数运算**
@@ -197,7 +197,7 @@ fn precise_capturing_example() {
 }
 ```
 
-`use<..>` 精确捕获允许你在 `impl Trait` 返回类型中明确指定哪些生命周期被捕获，解决了隐式捕获导致的过度约束问题。
+`use<..>` 精确捕获允许你在 `impl Trait` 返回类型中明确指定哪些生命周期（Lifetimes）被捕获，解决了隐式捕获导致的过度约束问题。
 
 ### 6. Rust 1.95 类型系统增强 {#6-rust-195-类型系统增强}
 >
@@ -229,7 +229,7 @@ fn main() {
 
 | 技术 | 说明 | 模块 |
 |------|------|------|
-| 单态化（Monomorphization） | 泛型在编译时实例化，零运行时开销 | `type_class/` |
+| 单态化（Monomorphization） | 泛型在编译时实例化，零运行时（Runtime）开销 | `type_class/` |
 | 静态分派 | 使用泛型约束而非 `dyn Trait` | `performance_optimization.rs` |
 | 零成本抽象（Zero-Cost Abstraction） | `PhantomData` 等零大小类型 | `type_transformation/` |
 | 内存对齐 | 自定义类型布局优化 | `primitive_types/sized_type.rs` |
@@ -269,7 +269,7 @@ fn robust_operation() -> Result<(), ContextualError> {
 | 生命周期冲突 | 型变理解错误 | 参考 `type_variance/` 模块示例 |
 | 泛型推断失败 | 约束不足 | 显式标注类型或增加 trait bound |
 | 动态分派性能差 | 过度使用 `Box<dyn>` | 改用泛型静态分派 |
-| 模式匹配不穷尽 | 遗漏枚举变体 | 使用 `_ =>` 通配或 `#[non_exhaustive]` |
+| 模式匹配不穷尽 | 遗漏枚举（Enum）变体 | 使用 `_ =>` 通配或 `#[non_exhaustive]` |
 
 ---
 

@@ -25,13 +25,13 @@
   - [📑 目录 {#目录}](#-目录-目录)
   - [公理与定义 {#公理与定义}](#公理与定义-公理与定义)
   - [定理陈述与证明 {#定理陈述与证明}](#定理陈述与证明-定理陈述与证明)
-    - [定理 CE-T1（组合保持内存安全） {#定理-ce-t1组合保持内存安全}](#定理-ce-t1组合保持内存安全-定理-ce-t1组合保持内存安全)
+    - [定理 CE-T1（组合保持内存安全（Memory Safety）） {#定理-ce-t1组合保持内存安全}](#定理-ce-t1组合保持内存安全-定理-ce-t1组合保持内存安全)
     - [定理 CE-T2（组合保持数据竞争自由） {#定理-ce-t2组合保持数据竞争自由}](#定理-ce-t2组合保持数据竞争自由-定理-ce-t2组合保持数据竞争自由)
     - [定理 CE-T3（组合保持类型安全） {#定理-ce-t3组合保持类型安全}](#定理-ce-t3组合保持类型安全-定理-ce-t3组合保持类型安全)
   - [引理与推论 {#引理与推论}](#引理与推论-引理与推论)
     - [概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}](#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总)
   - [定理 CE-PAT1（模式组合 CE 保持） {#定理-ce-pat1模式组合-ce-保持}](#定理-ce-pat1模式组合-ce-保持-定理-ce-pat1模式组合-ce-保持)
-  - [代码示例：模块组合 {#代码示例模块组合}](#代码示例模块组合-代码示例模块组合)
+  - [代码示例：模块（Module）组合 {#代码示例模块组合}](#代码示例模块组合-代码示例模块组合)
   - [定理应用示例 {#定理应用示例}](#定理应用示例-定理应用示例)
   - [中间件栈有效性定理 {#中间件栈有效性定理}](#中间件栈有效性定理-中间件栈有效性定理)
   - [验证方法 {#验证方法}](#验证方法-验证方法)
@@ -65,7 +65,7 @@
 设 $M_1, \ldots, M_n$ 为模块。组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足：
 
 - 各模块通过 `pub` 接口暴露，依赖通过 `use` 或 `mod` 建立
-- 无循环依赖：$\mathrm{dep}(M_i)$ 的传递闭包不包含 $M_i$
+- 无循环依赖：$\mathrm{dep}(M_i)$ 的传递闭包（Closures）不包含 $M_i$
 - 类型环境：$\Gamma_C = \bigcup_i \Gamma_{M_i}$ 且无冲突
 
 **Axiom CE0**：组合不引入新的全局可变状态；或新状态通过 `const`/`static` 正确初始化。
@@ -83,14 +83,14 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**陈述**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/10_ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全（Memory Safety）），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
+**陈述**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/10_ownership_model.md) 定理 T2、T3（所有权（Ownership）唯一性、内存安全（Memory Safety）），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
 
 **证明思路**：
 
 1. **归纳基**：单模块 $M_1$ 由前提满足 T2、T3。
 2. **归纳步**：设 $C' = M_1 \oplus \cdots \oplus M_{n-1}$ 满足内存安全。添加 $M_n$ 时：
-   - 模块边界：值通过函数参数/返回值传递，或通过 `pub` 结构体字段；所有权转移符合 T2。
-   - 调用链：$M_n$ 调用 $C'$ 或反向；参数为值或引用，不违反借用规则。
+   - 模块边界：值通过函数参数/返回值传递，或通过 `pub` 结构体（Struct）字段；所有权转移符合 T2。
+   - 调用链：$M_n$ 调用 $C'$ 或反向；参数为值或引用（Reference），不违反借用（Borrowing）规则。
    - 无新分配模式：$M_n$ 的 `Box`/`Vec` 等由所有权管理；释放由 RAII 保证。
 3. **结论**：组合不引入悬垂、双重释放、泄漏；由 T2、T3 的归纳结构。
 
@@ -164,7 +164,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**陈述**：设模式 $A$、$B$ 各自满足 CE-T1、CE-T2、CE-T3（作为独立模块）。若组合 $A \circ B$ 的接口满足 [03_integration_theory](03_integration_theory.md) IT-T1（跨模块所有权保持）、IT-T2（Send/Sync 传递）、IT-L1（生命周期约束），则 $A \circ B$ 保持 CE-T1、CE-T2、CE-T3。
+**陈述**：设模式 $A$、$B$ 各自满足 CE-T1、CE-T2、CE-T3（作为独立模块）。若组合 $A \circ B$ 的接口满足 [03_integration_theory](03_integration_theory.md) IT-T1（跨模块所有权保持）、IT-T2（Send/Sync 传递）、IT-L1（生命周期（Lifetimes）约束），则 $A \circ B$ 保持 CE-T1、CE-T2、CE-T3。
 
 **证明**：
 
@@ -240,7 +240,7 @@ fn main() {
 | :--- | :--- |
 | CE-T1 | 多 crate 项目：各 crate 内 Safe，组合后仍内存安全 |
 | CE-T2 | 跨线程：只有 `Send` 类型跨线程传递，`Sync` 类型共享 |
-| CE-T3 | 泛型模块：`fn f<T: Trait>(x: T)` 组合时类型检查在边界完成 |
+| CE-T3 | 泛型（Generics）模块：`fn f<T: Trait>(x: T)` 组合时类型检查在边界完成 |
 
 ---
 
@@ -260,7 +260,7 @@ fn main() {
 
 1. **CE-T1**：每个 `Layer` 不改变请求/响应的所有权传递；内部状态由 `self` 持有，符合 ownership T2/T3。
 2. **CE-T2**：`Service::call` 通常以 `&mut self` 调用；若跨任务共享则通过 `Clone` 或 `Arc<Mutex>`，受 Send/Sync 约束。
-3. **CE-T3**：`Layer` 组合在编译期单态化；类型环境合并无冲突。∎
+3. **CE-T3**：`Layer` 组合在编译期单态化（Monomorphization）；类型环境合并无冲突。∎
 
 **应用**：Timeout、RateLimit、Retry、Buffer、ConcurrencyLimit 等 Tower 中间件可任意堆叠而不破坏组合安全性。
 
@@ -307,7 +307,7 @@ fn main() {
 | :--- | :--- | :--- |
 | `pub fn leak_raw(p: *mut T)` | CE-T1 | 泄漏裸指针违反 ownership 唯一性 |
 | `pub fn spawn_rc(rc: Rc<T>)` | CE-T2 | Rc 非 Send，跨线程传递导致编译错误 |
-| `pub fn bad_return<T>() -> T` | CE-T3 | 返回类型未约束，调用处类型推断失败 |
+| `pub fn bad_return<T>() -> T` | CE-T3 | 返回类型未约束，调用处类型推断（Type Inference）失败 |
 | `mod a { use super::b; } mod b { use super::a; }` | 引理 CE-L1 | 循环依赖，编译失败 |
 | 泛型约束不一致 | CE-T3 | `impl<T: Trait> Service for T` 与 `Service<U>` 边界冲突 |
 

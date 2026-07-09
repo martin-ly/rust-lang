@@ -558,9 +558,14 @@ let fib: Vec<u64> = Fibonacci::new()
 // [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 
 // 自定义适配器: 窗口迭代器
-struct Windows<I> {
+struct Windows<I>
+where
+    I: Iterator,
+    I::Item: Clone,
+{
     iter: I,
     window_size: usize,
+    buffer: Vec<I::Item>,
 }
 
 impl<I: Iterator> Iterator for Windows<I>
@@ -569,8 +574,16 @@ where I::Item: Clone
     type Item = Vec<I::Item>;
 
     fn next(&mut self) -> Option<Self::Item> {
-        // 实现滑动窗口逻辑
-        todo!()
+        if self.window_size == 0 {
+            return None;
+        }
+        // 首次以及每次滑动后填充窗口至 window_size
+        while self.buffer.len() < self.window_size {
+            self.buffer.push(self.iter.next()?);
+        }
+        let window = self.buffer.clone();
+        self.buffer.remove(0);
+        Some(window)
     }
 }
 ```

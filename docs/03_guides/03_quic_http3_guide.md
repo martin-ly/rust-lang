@@ -77,7 +77,7 @@ HTTP              HTTP              HTTP
 
 | Crate | 层级 | 说明 | 成熟度 |
 |:---|:---|:---|:---:|
-| `quinn` | 高级 QUIC 实现 | 基于 `rustls` 的异步 QUIC | 🟢 生产可用 |
+| `quinn` | 高级 QUIC 实现 | 基于 `rustls` 的异步（Async） QUIC | 🟢 生产可用 |
 | `quinn-proto` | 协议逻辑 | 无 I/O 的纯协议实现 | 🟢 稳定 |
 | `s2n-quic` | AWS 出品 | AWS 内部使用 | 🟢 生产可用 |
 | `h3` | HTTP/3 实现 | 与 `hyper` 兼容 | 🟡 活跃开发 |

@@ -95,7 +95,7 @@
 | 借用检查器证明   | [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)                | ✅ 100%           |
 | 异步状态机形式化 | [10_async_state_machine.md](formal_methods/10_async_state_machine.md)                  | ✅ 100%           |
 | 生命周期形式化   | 10_lifetime_formalization.md            | ✅ 100%           |
-| Pin 和自引用类型 | [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md)                | ✅ 100%           |
+| Pin 和自引用（Reference）类型 | [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md)                | ✅ 100%           |
 
 #### 🔷 类型理论研究 {#类型理论研究}
 

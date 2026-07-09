@@ -1,4 +1,4 @@
-> **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用（Reference）。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 > **Rust 版本**: 1.96.1+ (Edition 2024)
@@ -44,11 +44,11 @@
     - [共享状态 {#共享状态}](#共享状态-共享状态)
   - [第三部分：同步原语 {#第三部分同步原语}](#第三部分同步原语-第三部分同步原语)
     - [Mutex vs RwLock {#mutex-vs-rwlock}](#mutex-vs-rwlock-mutex-vs-rwlock)
-    - [原子操作 {#原子操作}](#原子操作-原子操作)
-  - [第四部分：异步模型 {#第四部分异步模型}](#第四部分异步模型-第四部分异步模型)
-    - [Future基础 {#future基础}](#future基础-future基础)
+    - [原子操作（Atomic Operations） {#原子操作}](#原子操作-原子操作)
+  - [第四部分：异步（Async）模型 {#第四部分异步模型}](#第四部分异步模型-第四部分异步模型)
+    - [Future（Future）基础 {#future基础}](#future基础-future基础)
     - [async/await {#asyncawait}](#asyncawait-asyncawait)
-    - [运行时选择 {#运行时选择}](#运行时选择-运行时选择)
+    - [运行时（Runtime）选择 {#运行时选择}](#运行时选择-运行时选择)
   - [第五部分：并发模式 {#第五部分并发模式}](#第五部分并发模式-第五部分并发模式)
     - [Fork-Join {#fork-join}](#fork-join-fork-join)
     - [生产者-消费者 {#生产者-消费者}](#生产者-消费者-生产者-消费者)
@@ -145,7 +145,7 @@ pub unsafe auto trait Sync {}
 **自动实现规则:**
 
 - 原始类型(i32, bool等): Send + Sync
-- 只包含Send/Sync类型的结构体: Send + Sync
+- 只包含Send/Sync类型的结构体（Struct）: Send + Sync
 - `Rc`: !Send && !Sync(非原子)
 - `Arc<T>`: Send(if T: Send) + Sync(if T: Sync)
 

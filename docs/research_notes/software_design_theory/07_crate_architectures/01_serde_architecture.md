@@ -1,4 +1,4 @@
-> **Canonical 说明**: 本文件专注 **Serde 库内部架构分析（Visitor、Serializer/Deserializer trait 设计、单态化优化等）**。
+> **Canonical 说明**: 本文件专注 **Serde 库内部架构分析（Visitor、Serializer/Deserializer trait 设计、单态化（Monomorphization）优化等）**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
@@ -27,10 +27,10 @@ Serde（**Ser**ialization / **De**serialization）是 Rust 生态中序列化与
 
 Serde 的核心理念可以概括为：**数据拥有结构，格式拥有规则**。Rust 的数据结构（struct、enum、元组等）只描述"是什么"，而具体的 `Serializer` / `Deserializer` 实现决定"怎么写"和"怎么读"。
 
-这种设计不仅带来了极高的可扩展性，更通过 Rust 的类型系统和单态化（monomorphization）实现了零成本抽象——序列化调用链在编译期完全展开，运行时无任何虚拟分发开销。
+这种设计不仅带来了极高的可扩展性，更通过 Rust 的类型系统（Type System）和单态化（monomorphization）实现了零成本抽象（Zero-Cost Abstraction）——序列化调用链在编译期完全展开，运行时（Runtime）无任何虚拟分发开销。
 
 > 来源: Serde 官方文档, https: /  / [serde.rs](https://serde.rs/) /
-> 来源: [The Rust Programming Language, Trait 与泛型章节](https://doc.rust-lang.org/book/ch10-00-generics.html)
+> 来源: [The Rust Programming Language, Trait 与泛型（Generics）章节](https://doc.rust-lang.org/book/ch10-00-generics.html)
 
 ---
 
@@ -166,7 +166,7 @@ pub trait Deserialize<'de>: Sized {
 }
 ```
 
-`'de` 生命周期参数是 Serde 反序列化设计的精髓。它允许反序列化器从输入缓冲区**借出**数据（如 `&str`、`&[u8]`），而非必须拷贝到堆上。当 `'de = 'static` 时，表示反序列化后的数据独立于输入缓冲区；当 `'de` 为输入缓冲区的生命周期时，支持零拷贝反序列化。
+`'de` 生命周期（Lifetimes）参数是 Serde 反序列化设计的精髓。它允许反序列化器从输入缓冲区**借出**数据（如 `&str`、`&[u8]`），而非必须拷贝到堆上。当 `'de = 'static` 时，表示反序列化后的数据独立于输入缓冲区；当 `'de` 为输入缓冲区的生命周期时，支持零拷贝反序列化。
 
 > 来源: Serde 生命周期文档, https: /  / [serde.rs](https://serde.rs/) / lifetimes.html
 > 来源: [Rust Reference, Lifetime Parameters, https://doc.rust-lang.org/reference/items/generics.html#lifetime-parameters](https://doc.rust-lang.org/reference/)
@@ -257,7 +257,7 @@ pub trait Deserializer<'de>: Sized {
 
 1. **单一职责**：Deserializer 只负责"从格式中读取什么"，Visitor 负责"用读取的值做什么"
 2. **自描述格式 vs 模式驱动格式**：对于 JSON 这类自描述格式，`deserialize_any` 让 Visitor 根据实际遇到的类型决定处理逻辑；对于 Bincode 这类模式驱动格式，`deserialize_i32` 等方法直接要求特定类型，减少分支判断
-3. **异构枚举处理**：Rust 的枚举在 Serde 中通过 `deserialize_enum` 统一处理，无论格式使用字符串标签（JSON）、整数标签（Bincode）还是外部标签（TOML）
+3. **异构枚举（Enum）处理**：Rust 的枚举在 Serde 中通过 `deserialize_enum` 统一处理，无论格式使用字符串标签（JSON）、整数标签（Bincode）还是外部标签（TOML）
 
 > 来源: Serde Deserializer trait 文档, https: /  / [docs.rs](https://docs.rs/) / [serde](https://serde.rs/) / latest / [serde](https://serde.rs/) / de / trait.Deserializer.html
 
@@ -374,7 +374,7 @@ Serde 利用 Rust 的类型系统保证序列化与反序列化的**结构同构
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-Serde 的 `'de` 生命周期设计使得反序列化可以从输入缓冲区直接借用数据，避免不必要的堆分配和内存拷贝。
+Serde 的 `'de` 生命周期设计使得反序列化可以从输入缓冲区直接借用（Borrowing）数据，避免不必要的堆分配和内存拷贝。
 
 ### 5.1 `&str` 与 `&[u8]` 的直接借用 {#51-str-与-u8-的直接借用}
 
@@ -422,7 +422,7 @@ struct FlexibleData<'a> {
 }
 ```
 
-`Cow`（Clone-on-Write）在 Serde 反序列化中扮演关键角色：当输入格式允许直接引用时（如 JSON 中的未转义字符串），`Cow::Borrowed` 零拷贝使用；当需要转义或转换时，自动升级为 `Cow::Owned`，无需调用方预先判断。
+`Cow`（Clone-on-Write）在 Serde 反序列化中扮演关键角色：当输入格式允许直接引用（Reference）时（如 JSON 中的未转义字符串），`Cow::Borrowed` 零拷贝使用；当需要转义或转换时，自动升级为 `Cow::Owned`，无需调用方预先判断。
 
 ### 5.3 `Bytes` crate 与 `serde_bytes` {#53-bytes-crate-与-serde_bytes}
 
@@ -548,7 +548,7 @@ impl Serialize for Point {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-Serde derive 宏支持 30+ 种属性配置，覆盖序列化行为的方方面面：
+Serde derive 宏（Macro）支持 30+ 种属性配置，覆盖序列化行为的方方面面：
 
 | 属性 | 作用域 | 说明 |
 |:---|:---|:---|
@@ -673,7 +673,7 @@ struct PacketHeader {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-Serde 的序列化是**逻辑序列化**（将 Rust 的语义结构映射为格式元素），而非**内存序列化**（将内存字节按原样传输）。对于 FFI 场景，需要将 Rust 结构体传递给 C 代码时，应使用 `#[repr(C)]` 配合指针转换，而非 Serde。
+Serde 的序列化是**逻辑序列化**（将 Rust 的语义结构映射为格式元素），而非**内存序列化**（将内存字节按原样传输）。对于 FFI 场景，需要将 Rust 结构体（Struct）传递给 C 代码时，应使用 `#[repr(C)]` 配合指针转换，而非 Serde。
 
 ```rust,ignore
 // ❌ 错误：Serde 序列化后的 JSON 无法被 C 解析

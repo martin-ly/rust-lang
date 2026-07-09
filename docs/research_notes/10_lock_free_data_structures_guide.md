@@ -73,7 +73,7 @@
 
 - **Hazard Pointers**：每个线程声明自己正在访问的指针。
 - **Epoch-Based Reclamation (EBR)**：将删除延迟到所有线程离开当前 epoch。
-- **引用计数**：原子引用计数，但可能引入额外竞争。
+- **引用（Reference）计数**：原子引用计数，但可能引入额外竞争。
 
 ---
 
@@ -200,7 +200,7 @@ ABA 问题：
 本实现采用 **EBR（crossbeam-epoch）**，因为：
 
 - 无需手动管理 tagged pointer 的位运算。
-- 与 Rust 所有权系统兼容，避免裸指针误用。
+- 与 Rust 所有权（Ownership）系统兼容，避免裸指针误用。
 
 ---
 
@@ -303,7 +303,7 @@ let head = self.head.load(Relaxed, guard);
 | 级别 | 来源 | 链接 | 对齐内容 |
 |------|------|------|----------|
 | P0 | *Rust Atomics and Locks* | <https://marabos.nl/atomics/> | Treiber Stack、MS Queue、内存序、ABA |
-| P1 | The Rust Programming Language | <https://doc.rust-lang.org/book/ch16-00-concurrency.html> | Send/Sync、并发安全基础 |
+| P1 | The Rust Programming Language | <https://doc.rust-lang.org/book/ch16-00-concurrency.html> | Send/Sync、并发安全（Concurrency Safety）基础 |
 | P1 | Rust Reference | <https://doc.rust-lang.org/reference/memory-model.html> | 内存模型与内存序 |
 | P2 | crossbeam-epoch docs | <https://docs.rs/crossbeam-epoch> | EBR API、Guard、defer_unchecked |
 | P2 | Rustonomicon | <https://doc.rust-lang.org/nomicon/> | unsafe Rust、裸指针、内存回收 |

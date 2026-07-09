@@ -69,7 +69,7 @@ let x = {
 
 ### 修复方案 {#修复方案-6}
 
-- 明确使用 `let` 绑定控制生命周期。
+- 明确使用 `let` 绑定控制生命周期（Lifetimes）。
 - 不依赖临时值的隐式 drop 顺序编写程序逻辑。
 
 > **权威来源**: [Rust Edition Guide – Tail Expr Drop Order](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
@@ -125,7 +125,7 @@ let gen = 1; // ⚠️ 未来版本可能冲突
 
 ### 现象 {#现象-6}
 
-Edition 2024 对 `match` 临时值作用域有调整，某些借用模式可能不再通过。
+Edition 2024 对 `match` 临时值作用域有调整，某些借用（Borrowing）模式可能不再通过。
 
 ```rust
 let x: Option<&String> = match Some(String::from("hello")) {
@@ -175,7 +175,7 @@ edition = "2024"
 ### 问题 {#问题}
 
 - 同一 workspace 中不同 edition 的 crate 行为不一致。
-- 跨 crate 的宏展开可能受 edition 差异影响。
+- 跨 crate 的宏（Macro）展开可能受 edition 差异影响。
 
 ### 修复方案 {#修复方案-6}
 

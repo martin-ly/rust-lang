@@ -120,7 +120,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 | 10_coq_isabelle_proof_scaffolding.md | [archive/deprecated/](../../archive/docs/deprecated/README.md) | Coq/Isabelle 骨架说明 |
 | coq_skeleton/（.v 等） | [archive/deprecated/coq_skeleton/](../../archive/docs/deprecated/coq_skeleton/README.md) | Coq 证明骨架；本目录仅保留 [coq_skeleton/README.md](../../archive/deprecated/coq_skeleton/README.md) 重定向 |
 
-**引用建议**：新文档中提及 Aeneas、coq-of-rust、Coq 骨架时，链接至上述 `archive/deprecated/` 路径；INDEX/README 中已统一标注「已归档」。
+**引用（Reference）建议**：新文档中提及 Aeneas、coq-of-rust、Coq 骨架时，链接至上述 `archive/deprecated/` 路径；INDEX/README 中已统一标注「已归档」。
 
 ---
 
@@ -136,7 +136,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 | [QUICK_FIND](10_quick_find.md) | 关键词/领域/目标 | 快速定位 |
 | [QUICK_REFERENCE](10_quick_reference.md) | 按主题快速参考 | 按主题查 |
 | [HIERARCHICAL_MAPPING_AND_SUMMARY](10_hierarchical_mapping_and_summary.md) | 文档树、概念↔定理、文档↔思维表征 | 层次化检索、双向追溯 |
-| 本文件 | 结构梳理、归档约定、版本 | 维护与一致性检查 |
+| 本文件 | 结构梳理、归档约定、版本 | 维护与一致性（Coherence）检查 |
 
 ---
 

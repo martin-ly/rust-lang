@@ -8,7 +8,7 @@
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **⚠️ 历史文档提示**：
 >
-> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用（Reference）。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 > **Rust 版本**: 1.96.1+ (Edition 2024)
@@ -154,7 +154,7 @@ let client = ClientBuilder::new()
     .build()?;
 ```
 
-`Client` 被设计为可克隆（`Clone`）且线程安全（`Send + Sync + 'static`），内部通过 `Arc` 共享连接池状态，因此应在应用生命周期内复用同一 `Client` 实例，而非为每个请求创建新实例。
+`Client` 被设计为可克隆（`Clone`）且线程安全（`Send + Sync + 'static`），内部通过 `Arc` 共享连接池状态，因此应在应用生命周期（Lifetimes）内复用同一 `Client` 实例，而非为每个请求创建新实例。
 
 > [来源: Reqwest 官方文档 — ClientBuilder](https://docs.rs/reqwest/latest/reqwest/struct.ClientBuilder.html)
 
@@ -194,7 +194,7 @@ let request = client
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-`Response` 提供多种方式来消费响应体，所有方法都是异步的（基于 `hyper::Body` 的流式数据）：
+`Response` 提供多种方式来消费响应体，所有方法都是异步（Async）的（基于 `hyper::Body` 的流式数据）：
 
 ```rust,ignore
 let resp = client.get("https://api.example.com/data").send().await?;
@@ -414,7 +414,7 @@ async fn main() -> Result<(), reqwest::Error> {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-`reqwest::blocking` 模块为同步上下文提供完全相同的 API 表面，其实现并非独立的同步 HTTP 栈，而是在内部启动一个 `tokio` 运行时（Runtime），将异步操作阻塞化：
+`reqwest::blocking` 模块（Module）为同步上下文提供完全相同的 API 表面，其实现并非独立的同步 HTTP 栈，而是在内部启动一个 `tokio` 运行时（Runtime），将异步操作阻塞化：
 
 ```rust,ignore
 use reqwest::blocking::{Client, Response};
@@ -466,7 +466,7 @@ sequenceDiagram
 
 这种设计的优势在于**代码复用**：`blocking` 模块与异步模块共享相同的 `hyper` 连接池、TLS 实现和协议处理逻辑，仅在最外层通过 `block_on` 桥接。
 
-但代价是 `blocking::Client` 会占用一个 OS 线程运行内部事件循环，不适合在已有异步运行时中混用。
+但代价是 `blocking::Client` 会占用一个 OS 线程运行内部事件循环，不适合在已有异步运行时（Runtime）中混用。
 
 > [来源: Reqwest 官方文档 — Blocking Client](https://docs.rs/reqwest/latest/reqwest/blocking/index.html)
 

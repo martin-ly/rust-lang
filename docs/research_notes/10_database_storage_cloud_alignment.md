@@ -62,7 +62,7 @@
 | 库/框架 | 官方来源 | 项目文档 | 覆盖内容 |
 |---------|----------|----------|----------|
 | **redis-rs** | [redis-rs/redis-rs](https://github.com/redis-rs/redis-rs) / [docs.rs/redis](https://docs.rs/redis/) | [crates/c10_networks/README.md](../../crates/c10_networks/README.md) | Redis 客户端、连接池、Pub/Sub |
-| **mini-redis** | [tokio-rs/mini-redis](https://github.com/tokio-rs/mini-redis) / [docs.rs/mini-redis](https://docs.rs/mini-redis/) | [crates/c06_async/README.md](../../crates/c06_async/README.md) | Tokio 官方教学实现、RESP 协议、异步网络 |
+| **mini-redis** | [tokio-rs/mini-redis](https://github.com/tokio-rs/mini-redis) / [docs.rs/mini-redis](https://docs.rs/mini-redis/) | [crates/c06_async/README.md](../../crates/c06_async/README.md) | Tokio 官方教学实现、RESP 协议、异步（Async）网络 |
 | **sled** | [spacejam/sled](https://github.com/spacejam/sled) / [docs.rs/sled](https://docs.rs/sled/) | — | 嵌入式 KV 存储、B-tree、MVCC 事务 |
 | **mongodb-rust-driver** | [mongodb/mongo-rust-driver](https://github.com/mongodb/mongo-rust-driver) / [docs.rs/mongodb](https://docs.rs/mongodb/) | — | MongoDB 异步驱动、BSON、聚合管道 |
 
@@ -96,7 +96,7 @@
 | **Docker** | [Docker Docs](https://docs.docker.com/) | — | 多阶段构建、镜像分层、非 root 容器 |
 | **Kubernetes** | [Kubernetes Docs](https://kubernetes.io/docs/) | [k8s/configmap.yaml](../../k8s/configmap.yaml) / [deployment.yaml](../../k8s/deployment.yaml) / [service.yaml](../../k8s/service.yaml) | Deployment、Service、ConfigMap 模板 |
 | **Helm** | [Helm Docs](https://helm.sh/docs/) | — | Chart 包管理、Values 注入、Release 升级 |
-| **OCI / containerd** | [OCI Spec](https://opencontainers.org/) / [containerd](https://containerd.io/) | — | 镜像规范、运行时接口 |
+| **OCI / containerd** | [OCI Spec](https://opencontainers.org/) / [containerd](https://containerd.io/) | — | 镜像规范、运行时（Runtime）接口 |
 
 > **说明**: `10_microservice_template.md` 目前尚未创建，相关微服务示例代码可参考 `examples/microservice_template.rs`。
 

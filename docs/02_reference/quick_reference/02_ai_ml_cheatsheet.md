@@ -367,11 +367,11 @@ fn llm_inference() -> anyhow::Result<()> {
 
 | 模块（Module） | AI/ML 中的关联 |
 | :--- | :--- |
-| C01 所有权（Ownership） | 张量生命周期、零拷贝 |
-| C02 类型系统（Type System） | 泛型张量、Trait 抽象 |
+| C01 所有权（Ownership） | 张量生命周期（Lifetimes）、零拷贝 |
+| C02 类型系统（Type System） | 泛型（Generics）张量、Trait 抽象 |
 | C05 线程 | 多线程训练、数据并行 |
 | C06 异步（Async） | 流式推理 |
-| C11 宏 | 模型定义 DSL |
+| C11 宏（Macro） | 模型定义 DSL |
 
 ---
 
@@ -439,8 +439,8 @@ async fn stream_generate<B: Backend>(
 
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
-| **所有权与内存安全** | [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) | 张量内存管理的形式化保证 |
-| **类型系统** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 泛型张量的类型安全 |
+| **所有权（Ownership）与内存安全（Memory Safety）** | [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) | 张量内存管理的形式化保证 |
+| **类型系统（Type System）** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 泛型张量的类型安全 |
 | **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 多线程训练的安全性 |
 | **生命周期** | lifetime_formalization | 模型引用有效性 |
 
@@ -448,7 +448,7 @@ async fn stream_generate<B: Backend>(
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-**定理 ML-T1（张量内存安全）**: 若张量操作满足所有权规则 1-8 和借用规则 5-8，则张量内存访问安全。
+**定理 ML-T1（张量内存安全）**: 若张量操作满足所有权规则 1-8 和借用（Borrowing）规则 5-8，则张量内存访问安全。
 
 *证明*: 由 [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) 定理 T2/T3 和 [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md) 定理 T1，张量作为复合类型，其内存安全由内部元素的所有权保证。∎
 

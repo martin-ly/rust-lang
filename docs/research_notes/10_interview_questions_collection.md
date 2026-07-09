@@ -24,17 +24,17 @@
 - [Rust形式化方法面试题集锦 {#rust形式化方法面试题集锦}](#rust形式化方法面试题集锦-rust形式化方法面试题集锦)
   - [📑 目录 {#目录}](#-目录-目录)
   - [使用指南 {#使用指南}](#使用指南-使用指南)
-  - [一、所有权与借用 (20题) {#一所有权与借用-20题}](#一所有权与借用-20题-一所有权与借用-20题)
+  - [一、所有权（Ownership）与借用（Borrowing） (20题) {#一所有权与借用-20题}](#一所有权与借用-20题-一所有权与借用-20题)
     - [⭐ 基础题 {#基础题-2}](#-基础题-基础题-2)
     - [⭐⭐ 进阶题 {#进阶题-4}](#-进阶题-进阶题-4)
     - [⭐⭐⭐ 高级题 {#高级题-4}](#-高级题-高级题-4)
     - [⭐⭐⭐⭐ 专家题 {#专家题-3}](#-专家题-专家题-3)
-  - [二、类型系统 (15题) {#二类型系统-15题}](#二类型系统-15题-二类型系统-15题)
+  - [二、类型系统（Type System） (15题) {#二类型系统-15题}](#二类型系统-15题-二类型系统-15题)
     - [⭐ 基础题 {#基础题-2}](#-基础题-基础题-2-1)
     - [⭐⭐ 进阶题 {#进阶题-4}](#-进阶题-进阶题-4-1)
     - [⭐⭐⭐ 高级题 {#高级题-4}](#-高级题-高级题-4-1)
     - [⭐⭐⭐⭐ 专家题 {#专家题-3}](#-专家题-专家题-3-1)
-  - [三、并发与异步 (15题) {#三并发与异步-15题}](#三并发与异步-15题-三并发与异步-15题)
+  - [三、并发与异步（Async） (15题) {#三并发与异步-15题}](#三并发与异步-15题-三并发与异步-15题)
     - [⭐ 基础题 {#基础题-2}](#-基础题-基础题-2-2)
     - [⭐⭐ 进阶题 {#进阶题-4}](#-进阶题-进阶题-4-2)
     - [⭐⭐⭐ 高级题 {#高级题-4}](#-高级题-高级题-4-2)
@@ -123,8 +123,8 @@
 
 <summary>答案</summary>
 
-1. 要么一个可变引用(&mut)，要么多个不可变引用(&)
-2. 引用必须始终有效（不能悬垂）
+1. 要么一个可变引用（Mutable Reference）(&mut)，要么多个不可变引用（Immutable Reference）(&)
+2. 引用（Reference）必须始终有效（不能悬垂）
 
 </details>
 
@@ -168,7 +168,7 @@ let y = &x;
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**Q5: 解释`Rc`和`Arc`的区别，为什么`Rc`不是Send？**
+**Q5: 解释`Rc`和`Arc`的区别，为什么`Rc`不是Send（Send）？**
 
 <details>
 
@@ -191,7 +191,7 @@ let y = &x;
 
 <summary>答案</summary>
 
-- `RefCell`: 单线程运行时借用检查
+- `RefCell`: 单线程运行时（Runtime）借用检查
 - `Mutex`: 多线程互斥锁，线程安全
 
 相同点：都提供内部可变性。
@@ -240,7 +240,7 @@ println!("{}", r1);
 
 <summary>答案</summary>
 
-**错误**: 不能同时存在不可变借用和可变借用。
+**错误**: 不能同时存在不可变借用（Mutable Borrow）和可变借用。
 
 `r1`仍然存在（被println使用），所以不能创建`r2`。
 
@@ -262,7 +262,7 @@ println!("{}", r1);
 
 <summary>答案</summary>
 
-NLL基于值的使用位置而非词法作用域判断生命周期。
+NLL基于值的使用位置而非词法作用域判断生命周期（Lifetimes）。
 
 **解决的问题**:
 
@@ -304,7 +304,7 @@ struct Slice<'a, T: 'a> {
 
 ---
 
-**Q11: 什么是Pin？为什么需要它？**
+**Q11: 什么是Pin（Pin）？为什么需要它？**
 
 <details>
 
@@ -312,7 +312,7 @@ struct Slice<'a, T: 'a> {
 
 `Pin`保证值不会被移动，用于自引用结构。
 
-async/await需要Pin因为Future是状态机，可能自引用。
+async/await需要Pin因为Future（Future）是状态机，可能自引用。
 
 </details>
 
@@ -354,7 +354,7 @@ let old = mem::replace(&mut a, new);  // a=new，返回旧值
 - 所有权系统主要防止**内存不安全**（use-after-free, double-free）
 - 内存泄漏仍可能发生（`Rc`循环引用、`mem::forget`）
 
-但所有权+RAII确实有助于减少泄漏。
+但所有权+RAII（RAII）确实有助于减少泄漏。
 
 </details>
 
@@ -375,14 +375,14 @@ let x: &'static str = Box::leak(Box::new(String::from("hello")));
 用途：
 
 - 全局状态
-- 与C FFI交互
+- 与C FFI（FFI）交互
 - 运行时单例
 
 </details>
 
 ---
 
-**Q15: 如何实现一个线程安全的引用计数智能指针？**
+**Q15: 如何实现一个线程安全的引用计数智能指针（Smart Pointer）？**
 
 <details>
 
@@ -431,7 +431,7 @@ drop: `if count.fetch_sub(1, Release) == 1 { 释放 }`
 
 <summary>答案</summary>
 
-标记编译时已知大小的类型。泛型参数默认`T: Sized`，DST（动态大小类型）如`str`、`[T]`、`dyn Trait`不是Sized。
+标记编译时已知大小的类型。泛型（Generics）参数默认`T: Sized`，DST（动态大小类型）如`str`、`[T]`、`dyn Trait`不是Sized。
 
 </details>
 
@@ -447,7 +447,7 @@ drop: `if count.fetch_sub(1, Release) == 1 { 释放 }`
 | :--- | :--- | :--- |
 | 分发 | 静态 | 动态 |
 | 开销 | 无 | 虚表查找 |
-| 返回类型 | 支持 | 需要Box |
+| 返回类型 | 支持 | 需要Box（Box） |
 
 </details>
 
@@ -499,7 +499,7 @@ trait Iterator {
 
 ---
 
-**Q20: 生命周期省略的三条规则是什么？**
+**Q20: 生命周期省略（Lifetime Elision）的三条规则是什么？**
 
 <details>
 
@@ -519,7 +519,7 @@ trait Iterator {
 
 <summary>答案</summary>
 
-高阶trait bound (HRTB)，表示"对于所有生命周期"。
+高阶trait（Trait） bound (HRTB)，表示"对于所有生命周期"。
 
 ```rust,ignore
 F: for<'a> Fn(&'a str) -> &'a str
@@ -634,7 +634,7 @@ let ptr: *const MySlice;  // 包含长度信息
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-**Q26: Send和Sync有什么区别？**
+**Q26: Send和Sync（Sync）有什么区别？**
 
 <details>
 
@@ -801,7 +801,7 @@ let guard = tokio_mutex.lock().await;
 
 ---
 
-**Q34: `select!`宏是什么？**
+**Q34: `select!`宏（Macro）是什么？**
 
 <details>
 
@@ -915,7 +915,7 @@ impl Runtime {
 
 **数据竞争自由定理**: 借用检查通过 ⇒ 无数据竞争。
 
-直觉：编译时保证并发安全。
+直觉：编译时保证并发安全（Concurrency Safety）。
 
 </details>
 

@@ -11,7 +11,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-03-08
 > **版本**: v1.0
-> **定理**: T-BR1 (借用安全性定理)
+> **定理**: T-BR1 (借用（Borrowing）安全性定理)
 
 ---
 
@@ -28,7 +28,7 @@
   - [📋 详细证明 {#详细证明}](#-详细证明-详细证明)
     - [Lemma 1: 读取不修改 {#lemma-1-读取不修改}](#lemma-1-读取不修改-lemma-1-读取不修改)
     - [Lemma 2: 独占访问 {#lemma-2-独占访问}](#lemma-2-独占访问-lemma-2-独占访问)
-    - [Lemma 3: 悬垂引用预防 {#lemma-3-悬垂引用预防}](#lemma-3-悬垂引用预防-lemma-3-悬垂引用预防)
+    - [Lemma 3: 悬垂引用（Reference）预防 {#lemma-3-悬垂引用预防}](#lemma-3-悬垂引用预防-lemma-3-悬垂引用预防)
   - [🎯 Rust 代码验证 {#rust-代码验证}](#-rust-代码验证-rust-代码验证)
   - [📊 借用检查器算法 {#借用检查器算法}](#-借用检查器算法-借用检查器算法)
   - [📊 证明复杂度 {#证明复杂度}](#-证明复杂度-证明复杂度)
@@ -281,9 +281,9 @@ BorrowCheck(程序 P):
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [所有权证明树](10_proof_tree_ownership.md)
+- [所有权（Ownership）证明树](10_proof_tree_ownership.md)
 - [类型安全证明树](10_proof_tree_type_safety.md)
-- 生命周期形式化
+- 生命周期（Lifetimes）形式化
 
 ---
 

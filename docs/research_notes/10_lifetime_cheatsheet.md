@@ -1,7 +1,7 @@
 # 生命周期速查卡 {#生命周期速查卡}
 
 > **EN**: Lifetime Cheatsheet
-> **Summary**: 生命周期速查卡 Lifetime Cheatsheet.
+> **Summary**: 生命周期（Lifetimes）速查卡 Lifetime Cheatsheet.
 >
 > **概念族**: 速查卡
 > **内容分级**: [归档级]
@@ -24,19 +24,19 @@
 - [生命周期速查卡 {#生命周期速查卡}](#生命周期速查卡-生命周期速查卡)
   - [📑 目录 {#目录}](#-目录-目录)
   - [生命周期语法 {#生命周期语法}](#生命周期语法-生命周期语法)
-  - [生命周期省略规则 {#生命周期省略规则-1}](#生命周期省略规则-生命周期省略规则-1)
-  - [结构体生命周期 {#结构体生命周期-1}](#结构体生命周期-结构体生命周期-1)
+  - [生命周期省略（Lifetime Elision）规则 {#生命周期省略规则-1}](#生命周期省略规则-生命周期省略规则-1)
+  - [结构体（Struct）生命周期 {#结构体生命周期-1}](#结构体生命周期-结构体生命周期-1)
   - ['static 生命周期 {#static-生命周期}](#static-生命周期-static-生命周期)
-  - [高阶Trait Bound (HRTB) {#高阶trait-bound-hrtb}](#高阶trait-bound-hrtb-高阶trait-bound-hrtb)
+  - [高阶Trait Bound (HRTB) {#高阶trait（Trait）-bound-hrtb}](#高阶trait-bound-hrtb-高阶trait-bound-hrtb)
   - [常见模式 {#常见模式}](#常见模式-常见模式)
     - [输入输出相同生命周期 {#输入输出相同生命周期}](#输入输出相同生命周期-输入输出相同生命周期)
     - [返回与特定输入关联 {#返回与特定输入关联}](#返回与特定输入关联-返回与特定输入关联)
     - [多个输入，返回其中一个 {#多个输入返回其中一个}](#多个输入返回其中一个-多个输入返回其中一个)
   - [生命周期错误与修复 {#生命周期错误与修复}](#生命周期错误与修复-生命周期错误与修复)
-  - [Trait对象生命周期 {#trait对象生命周期}](#trait对象生命周期-trait对象生命周期)
+  - [Trait对象生命周期 {#trait对象（Trait Object）生命周期}](#trait对象生命周期-trait对象生命周期)
   - [型变与生命周期 {#型变与生命周期}](#型变与生命周期-型变与生命周期)
-  - [与泛型结合 {#与泛型结合}](#与泛型结合-与泛型结合)
-  - [自我引用结构 {#自我引用结构}](#自我引用结构-自我引用结构)
+  - [与泛型（Generics）结合 {#与泛型结合}](#与泛型结合-与泛型结合)
+  - [自我引用（Reference）结构 {#自我引用结构}](#自我引用结构-自我引用结构)
   - [快速诊断 {#快速诊断}](#快速诊断-快速诊断)
   - [生命周期基础 {#生命周期基础}](#生命周期基础-生命周期基础)
     - [生命周期关系 {#生命周期关系}](#生命周期关系-生命周期关系)
@@ -64,7 +64,7 @@
   - [🌍 权威国际化资源链接 {#权威国际化资源链接}](#-权威国际化资源链接-权威国际化资源链接)
     - [Rust Reference 核心章节 {#rust-reference-核心章节}](#rust-reference-核心章节-rust-reference-核心章节)
     - [The Rust Programming Language 核心章节 {#the-rust-programming-language-核心章节}](#the-rust-programming-language-核心章节-the-rust-programming-language-核心章节)
-    - [Rust Standard Library 核心 API / 模块 {#rust-standard-library-核心-api-模块}](#rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块)
+    - [Rust Standard Library 核心 API / 模块（Module） {#rust-standard-library-核心-api-模块}](#rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块)
     - [Rust By Example / Rust Cookbook / cheats.rs {#rust-by-example-rust-cookbook-cheatsrs}](#rust-by-example--rust-cookbook--cheatsrs-rust-by-example-rust-cookbook-cheatsrs)
     - [生命周期专属权威链接 {#生命周期专属权威链接}](#生命周期专属权威链接-生命周期专属权威链接)
       - [Reference Lifetime 章节 {#reference-lifetime-章节}](#reference-lifetime-章节-reference-lifetime-章节)
@@ -234,7 +234,7 @@ fn choose<'a>(first: &'a str, second: &'a str, use_first: bool) -> &'a str {
 | :--- | :--- | :--- |
 | 悬垂引用 | `fn bad() -> &str { let s = ""; &s }` | 返回 `String` 或 `'static` |
 | 生命周期不匹配 | `let r; { let x = 5; r = &x; }` | 扩大值的作用域 |
-| 借用冲突 | `&mut` 同时有 `&` | 分离使用范围 |
+| 借用（Borrowing）冲突 | `&mut` 同时有 `&` | 分离使用范围 |
 
 ---
 

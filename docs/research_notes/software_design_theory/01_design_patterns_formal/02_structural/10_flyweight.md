@@ -35,15 +35,15 @@
   - [Rust 实现与代码示例 {#rust-实现与代码示例}](#rust-实现与代码示例-rust-实现与代码示例)
   - [Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}](#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点 {#edition-2024-关键兼容点}](#edition-2024-关键兼容点-edition-2024-关键兼容点)
-  - [Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
+  - [Rust 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束 {#所有权约束}](#所有权约束-所有权约束)
     - [借用与生命周期约束 {#借用与生命周期约束}](#借用与生命周期约束-借用与生命周期约束)
     - [trait 系统约束 {#trait-系统约束}](#trait-系统约束-trait-系统约束)
-    - [与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
+    - [与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
   - [完整证明 {#完整证明}](#完整证明-完整证明)
     - [形式化论证链 {#形式化论证链}](#形式化论证链-形式化论证链)
     - [与 Rust 类型系统的联系 {#与-rust-类型系统的联系}](#与-rust-类型系统的联系-与-rust-类型系统的联系)
-    - [内存安全保证 {#内存安全保证}](#内存安全保证-内存安全保证)
+    - [内存安全（Memory Safety）保证 {#内存安全保证}](#内存安全保证-内存安全保证)
   - [形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}](#形式化属性不变式前置后置条件与安全边界-形式化属性不变式前置后置条件与安全边界)
     - [不变式（Invariants） {#不变式invariants}](#不变式invariants-不变式invariants)
     - [前置条件（Preconditions） {#前置条件preconditions}](#前置条件preconditions-前置条件preconditions)
@@ -117,7 +117,7 @@
 
 - $\exists \mathit{get} : K \to \mathrm{Arc}\langle F \rangle$ 或 $\&F$
 - 相同 $k$ 返回共享实例；缓存避免重复创建
-- 不可变共享：$\mathit{get}(k)$ 为只读引用或 `Arc`；可变状态外置
+- 不可变共享：$\mathit{get}(k)$ 为只读引用（Reference）或 `Arc`；可变状态外置
 - **缓存单射**：$k_1 \neq k_2 \implies \mathit{cache}[k_1] \neq \mathit{cache}[k_2]$ 或共享等价实例
 
 **形式化表示**：

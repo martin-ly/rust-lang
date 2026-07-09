@@ -138,7 +138,7 @@
 | Domain Model | 业务逻辑封装为领域对象 | `struct` + 方法、无贫血模型 |
 | Service Layer | 用例编排、事务边界 | `struct` + `async fn`、事务封装 |
 | Repository | 集合式抽象、持久化隔离 | `trait Repository<T>` + `impl` |
-| Unit of Work | 批量提交、一致性 | `struct` 持有待提交实体、`commit()` |
+| Unit of Work | 批量提交、一致性（Coherence） | `struct` 持有待提交实体、`commit()` |
 | Data Mapper | ORM 映射层 | `From`/`Into`、serde、diesel/sqlx |
 | Table Data Gateway | 表级数据访问 | `struct` 封装 SQL、`async fn` |
 | Active Record | 对象即行 | `struct` 持 `Connection`、`save()` |
@@ -1015,16 +1015,16 @@ pub fn update_optimistic(
 | 模式 | 形式化对应 | 与 23 安全组合 |
 | :--- | :--- | :--- |
 | Domain Model | 结构体（Struct） + 方法；无贫血；见 [ownership_model](../../formal_methods/10_ownership_model.md) 规则 1–3 | 与 State、Strategy 组合 |
-| Service Layer | 模块依赖、trait 组合；见 [03_integration_theory](../04_compositional_engineering/03_integration_theory.md) IT-T1 | 编排 Repository、Factory |
-| Repository | 见 [02_effectiveness_proofs](../04_compositional_engineering/02_effectiveness_proofs.md) CE-T1；trait 泛型约束 | 可与 Factory Method、Builder 组合 |
+| Service Layer | 模块（Module）依赖、trait 组合；见 [03_integration_theory](../04_compositional_engineering/03_integration_theory.md) IT-T1 | 编排 Repository、Factory |
+| Repository | 见 [02_effectiveness_proofs](../04_compositional_engineering/02_effectiveness_proofs.md) CE-T1；trait 泛型（Generics）约束 | 可与 Factory Method、Builder 组合 |
 | Unit of Work | 批量提交；所有权收集；见 ownership 规则 3 drop 顺序 | 与 Repository、Data Mapper 组合 |
-| Data Mapper | `From`/`Into` 转换；所有权转移；见 [ownership_model](../../formal_methods/10_ownership_model.md) | 与 Repository 组合 |
+| Data Mapper | `From`/`Into` 转换；所有权（Ownership）转移；见 [ownership_model](../../formal_methods/10_ownership_model.md) | 与 Repository 组合 |
 | Table Data Gateway | 表级 API；`async fn`；见 [async_state_machine](../../formal_methods/10_async_state_machine.md) | 与 Repository 二选一 |
 | Active Record | 对象持 Connection；`save`/`load`；见 ownership 规则 2 | 简单 CRUD；与 DTO 区别：有行为 |
 | Gateway | trait + FFI/HTTP；见 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) Def EXTERN1 | 外部集成；FFI 时可能 unsafe |
 | MVC | 模块分层；见 [05_boundary_system](../05_boundary_system/README.md) | 与 Front Controller 组合 |
 | Front Controller | `Router`、`match` 路径；见 `03_semantic_boundary_map` | 与 MVC 组合 |
-| DTO | 结构体 + serde；无行为；所有权转移 | 与 Remote Facade、Gateway 组合 |
+| DTO | 结构体（Struct） + serde；无行为；所有权转移 | 与 Remote Facade、Gateway 组合 |
 | Remote Facade | 粗粒度接口；batch 减少 RPC；见 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) CHAN1 | 与 DTO 组合 |
 | Value Object | `Clone`、`PartialEq`；不可变；见 [06_rust_idioms](../06_rust_idioms.md) Def NW1 | 与 Newtype、DTO 衔接 |
 | Registry | `OnceLock<HashMap>`；见 [singleton](../01_design_patterns_formal/01_creational/10_singleton.md) | 服务定位；与 Plugin 二选一 |

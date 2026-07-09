@@ -11,7 +11,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-03-08
 > **版本**: v1.0
-> **描述**: Rust 所有权系统的完整概念族谱
+> **描述**: Rust 所有权（Ownership）系统的完整概念族谱
 
 ---
 
@@ -140,8 +140,8 @@ mindmap
 | 概念A | 关系 | 概念B | 说明 |
 |-------|------|-------|------|
 | Ownership | enables | Move | 所有权使移动语义成为可能 |
-| Borrowing | requires | Lifetime | 借用需要生命周期保证 |
-| Send | combined with | Sync | 线程安全双trait |
+| Borrowing | requires | Lifetime | 借用需要生命周期（Lifetimes）保证 |
+| Send | combined with | Sync | 线程安全双trait（Trait） |
 | Pin | constrains | Move | Pin限制移动 |
 | Rc | provides | shared ownership | 共享所有权 |
 | Arc | extends | Rc | 线程安全版Rc |
@@ -197,8 +197,8 @@ mindmap
 > **来源: [ACM](https://dl.acm.org/)**
 
 - Pin/Unpin
-- 自引用结构
-- 零成本抽象保证
+- 自引用（Reference）结构
+- 零成本抽象（Zero-Cost Abstraction）保证
 
 ---
 
@@ -210,9 +210,9 @@ mindmap
 | 概念 | 示例代码位置 |
 |------|-------------|
 | 所有权基础 | `crates/c01_ownership_borrow_scope/examples/ownership_basics.rs` |
-| 借用检查器 | `crates/c01_ownership_borrow_scope/examples/borrow_checker_demo.rs` |
+| 借用（Borrowing）检查器 | `crates/c01_ownership_borrow_scope/examples/borrow_checker_demo.rs` |
 | 生命周期 | `crates/c01_ownership_borrow_scope/examples/scope_lifetime.rs` |
-| 智能指针 | `crates/c01_ownership_borrow_scope/examples/rc_refcell_demo.rs` |
+| 智能指针（Smart Pointer） | `crates/c01_ownership_borrow_scope/examples/rc_refcell_demo.rs` |
 | Send/Sync | `crates/c05_threads/examples/thread_safety.rs` |
 | Pin | `crates/c06_async/examples/pin_unpin.rs` |
 
@@ -226,7 +226,7 @@ mindmap
 - [所有权形式化定义](formal_methods/10_ownership_model.md)
 - [借用检查器证明](formal_methods/10_borrow_checker_proof.md)
 - 生命周期形式化
-- [Send/Sync形式化](formal_methods/10_send_sync_formalization.md)
+- [Send/Sync（Sync）形式化](formal_methods/10_send_sync_formalization.md)
 
 ---
 

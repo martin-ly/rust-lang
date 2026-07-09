@@ -65,7 +65,7 @@
 
 本指南涵盖「AI 辅助 Rust 开发」与「用 Rust 构建 AI/ML 应用」两类场景，帮助开发者选择合适工具并规划学习路径。
 
-**形式化引用**：T-OW2、T-TY3、[type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)（张量泛型、Trait 抽象）。
+**形式化引用（Reference）**：T-OW2、T-TY3、[type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)（张量泛型（Generics）、Trait 抽象）。
 
 ---
 
@@ -109,7 +109,7 @@
 | 项目 | 用途 | 特点 |
 | :--- | :--- | :--- |
 | **llm** | 本地 LLM 推理 | 多架构（Llama、GPT-J 等）、CPU 友好 |
-| **mistral.rs** | 高性能推理 | 模块化、量化、Vision 支持 |
+| **mistral.rs** | 高性能推理 | 模块（Module）化、量化、Vision 支持 |
 | **lm.rs** | 轻量推理 | CPU 优化、SIMD、rayon |
 
 ### 2.3 与 C01–C12 的关联 {#23-与-c01c12-的关联}
@@ -120,11 +120,11 @@
 
 | 本项目模块 | AI/ML 应用中的关联 |
 | :--- | :--- |
-| **C01 所有权（Ownership）** | 张量生命周期、零拷贝、内存管理 |
+| **C01 所有权（Ownership）** | 张量生命周期（Lifetimes）、零拷贝、内存管理 |
 | **C02 类型系统（Type System）** | 泛型张量、Trait 抽象 |
 | **C05** | 多线程训练、数据并行 |
 | **C06 异步（Async）** | 流式推理、异步 I/O |
-| **C11 宏** | 模型定义 DSL |
+| **C11 宏（Macro）** | 模型定义 DSL |
 
 ---
 
@@ -515,7 +515,7 @@ type Result<T> = std::result::Result<T, AIError>;
 
 使用 AI 工具快速理解 Rust 复杂概念：
 
-- 将所有权错误信息粘贴给 AI，获取详细解释
+- 将所有权（Ownership）错误信息粘贴给 AI，获取详细解释
 - 让 AI 根据 [RUSTLINGS_MAPPING](../../exercises/rustlings_mapping.md) 推荐练习
 - 使用 AI 审查代码并提供改进建议
 
@@ -545,7 +545,7 @@ type Result<T> = std::result::Result<T, AIError>;
 
 构建端到端机器学习工作流：
 
-- 数据预处理（并行 + 异步）
+- 数据预处理（并行 + 异步（Async））
 - 模型训练（Burn 多后端支持）
 - 推理服务（WASM 部署或原生服务）
 

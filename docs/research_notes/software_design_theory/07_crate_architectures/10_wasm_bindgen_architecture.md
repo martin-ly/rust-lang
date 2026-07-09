@@ -1,4 +1,4 @@
-> **Canonical 说明**: 本文件专注 **wasm-bindgen 的跨语言绑定宏与 JS 胶水生成架构**。
+> **Canonical 说明**: 本文件专注 **wasm-bindgen 的跨语言绑定宏（Macro）与 JS 胶水生成架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
@@ -22,13 +22,13 @@
 
 ## 1. 引言 {#1-引言}
 
-wasm-bindgen 是 Rust WebAssembly 生态与 JavaScript 运行时之间的核心桥梁，年下载量超过 5000 万次 来源: [crates.io 统计, 2025](https://crates.io/)。
+wasm-bindgen 是 Rust WebAssembly 生态与 JavaScript 运行时（Runtime）之间的核心桥梁，年下载量超过 5000 万次 来源: [crates.io 统计, 2025](https://crates.io/)。
 
-它并非简单的 FFI 封装，而是一套完整的**跨语言绑定系统**：通过过程宏在编译期分析 Rust 代码的公共接口，生成配套的 JavaScript 胶水代码和 WASM 导入/导出表，实现 Rust 与 JS 之间的无缝互调用。
+它并非简单的 FFI 封装，而是一套完整的**跨语言绑定系统**：通过过程宏（Procedural Macro）在编译期分析 Rust 代码的公共接口，生成配套的 JavaScript 胶水代码和 WASM 导入/导出表，实现 Rust 与 JS 之间的无缝互调用。
 
 wasm-bindgen 的核心理念可以概括为：**JS 拥有对象，Rust 借出能力**。
 
-JavaScript 运行时作为垃圾回收环境，持有通过 wasm-bindgen 创建的 Rust 对象的引用；Rust 则通过生成的封装函数，安全地暴露其计算能力，同时避免内存管理冲突。
+JavaScript 运行时作为垃圾回收环境，持有通过 wasm-bindgen 创建的 Rust 对象的引用（Reference）；Rust 则通过生成的封装函数，安全地暴露其计算能力，同时避免内存管理冲突。
 
 > 来源: [wasm-bindgen 官方文档](https://rustwasm.github.io/docs/wasm-bindgen/)
 > 来源: [WebAssembly 规范](https://webassembly.github.io/spec/)
@@ -222,7 +222,7 @@ pub struct JsValue {
 | `&str` | string | 借用（Borrowing）：零拷贝视窗 |
 | `Vec<u8>` | Uint8Array | 拷贝到 JS ArrayBuffer |
 | `JsValue` | 任意 JS 值 | 句柄引用 |
-| `Closure<dyn FnMut(...)>` | Function | JS 可调用的闭包 |
+| `Closure<dyn FnMut(...)>` | Function | JS 可调用的闭包（Closures） |
 
 > 来源: wasm-bindgen JsValue 文档, https: /  / [docs.rs](https://docs.rs/) / wasm-bindgen / latest / wasm_bindgen / struct.JsValue.html
 
@@ -357,7 +357,7 @@ graph TB
     style RustHeap fill:#fce4ec
 ```
 
-WASM 模块拥有一个连续的线性内存（`WebAssembly.Memory`），JS 和 Rust 均可读写。但 Rust 对象（如 `Vec<String>`）不能直接暴露给 JS——JS 的 GC 不理解 Rust 的内存布局。wasm-bindgen 的解决方案：**JS 通过句柄引用 Rust 堆对象**，Rust 对象的生命周期由 Rust 的 ownership 规则管理，JS 侧通过生成的 `free()` 方法显式释放。
+WASM 模块（Module）拥有一个连续的线性内存（`WebAssembly.Memory`），JS 和 Rust 均可读写。但 Rust 对象（如 `Vec<String>`）不能直接暴露给 JS——JS 的 GC 不理解 Rust 的内存布局。wasm-bindgen 的解决方案：**JS 通过句柄引用 Rust 堆对象**，Rust 对象的生命周期（Lifetimes）由 Rust 的 ownership 规则管理，JS 侧通过生成的 `free()` 方法显式释放。
 
 ### 4.2 字符串传递：拷贝 vs 借用 {#42-字符串传递拷贝-vs-借用}
 
@@ -534,7 +534,7 @@ export async function fetch_data(url) {
 }
 ```
 
-`wasm_bindgen_futures` crate 提供了 `JsFuture` 类型，将 JS `Promise` 转换为 Rust 的 `Future`（通过事件循环集成），使得 Rust 代码可以使用 `async/await` 语法直接等待 JS 异步操作。
+`wasm_bindgen_futures` crate 提供了 `JsFuture` 类型，将 JS `Promise` 转换为 Rust 的 `Future`（通过事件循环集成），使得 Rust 代码可以使用 `async/await` 语法直接等待 JS 异步（Async）操作。
 
 > 来源: wasm-bindgen-futures 文档, https: /  / [docs.rs](https://docs.rs/) / wasm-bindgen-futures / latest / wasm_bindgen_futures /
 

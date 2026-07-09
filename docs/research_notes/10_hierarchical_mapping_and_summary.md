@@ -171,7 +171,7 @@ research_notes/
 | :--- | :--- | :--- | :--- | :--- |
 | 所有权（Ownership） | [ownership_model](formal_methods/10_ownership_model.md) | 规则 1–3, Def 1.1–1.5 | T2 唯一性, T3 内存安全（Memory Safety） | 变量绑定/遮蔽 Def 1.4/1.5 |
 | 借用（Borrowing） | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | 规则 5–8 | T1 数据竞争自由, T2 | |
-| 生命周期 | lifetime_formalization | Axiom LF1–LF2, Def 1.4 | LF-T1–T3 引用有效性 | |
+| 生命周期（Lifetimes） | lifetime_formalization | Axiom LF1–LF2, Def 1.4 | LF-T1–T3 引用（Reference）有效性 | |
 | 类型系统（Type System） | [type_system_foundations](type_theory/10_type_system_foundations.md) | typing rules, 进展/保持 | T1 进展, T2 保持, T3 类型安全 | |
 | 型变 | [variance_theory](type_theory/10_variance_theory.md) | Def 1.1–3.1 | T1–T4 协变/逆变/不变/函数 | |
 | Trait | [trait_system_formalization](type_theory/10_trait_system_formalization.md) | Axiom COH1/COH2 | COH-T1, 对象安全 T1–T3 | |
@@ -235,11 +235,11 @@ research_notes/
 
 | 思维表征文档 | 覆盖领域 | 对应 research_notes 入口 |
 | :--- | :--- | :--- |
-| [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 所有权、类型、并发、异步、C01–C08 | formal_methods、type_theory、COMPREHENSIVE_SYSTEMATIC_OVERVIEW § 按研究领域索引 |
+| [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 所有权（Ownership）、类型、并发、异步（Async）、C01–C08 | formal_methods、type_theory、COMPREHENSIVE_SYSTEMATIC_OVERVIEW § 按研究领域索引 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 所有权、类型、并发、形式化理论 | FORMAL_PROOF_SYSTEM_GUIDE 概念-公理-定理映射、COMPREHENSIVE_SYSTEMATIC_OVERVIEW § 形式化理论概念对比矩阵 |
-| [PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) | MaybeUninit、借用、生命周期、联合体、迭代器 | PROOF_INDEX、各 formal_methods/type_theory 文档 |
+| [PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) | MaybeUninit、借用（Borrowing）、生命周期、联合体、迭代器（Iterator） | PROOF_INDEX、各 formal_methods/type_theory 文档 |
 | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 所有权、类型、异步、性能、安全 | 06_boundary_analysis、DESIGN_MECHANISM_RATIONALE、03_semantic_boundary_map |
-| [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) | 1.93 特性、证明树、决策树 | RUST_193、各模块证明树/决策树小节 |
+| [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) | 1.93 特性、证明树、决策树 | RUST_193、各模块（Module）证明树/决策树小节 |
 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](10_safe_decidable_mechanisms_overview.md) | 安全可判定机制、四类思维表征入口 | §四 思维表征入口、§六 并发+Trait 族四维表；formal_methods 六篇、06_boundary、DESIGN_MECHANISM |
 
 *更细的「按研究领域索引」见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md) § 思维表征方式全索引。*

@@ -59,7 +59,7 @@
 
 ### 2.4 CLOCK（Second Chance） {#24-clocksecond-chance}
 
-- **核心思想**: 用环形缓冲区的**引用位（referenced bit）**近似 LRU，避免维护精确的时间戳。
+- **核心思想**: 用环形缓冲区的**引用（Reference）位（referenced bit）**近似 LRU，避免维护精确的时间戳。
 - **行为**:
   - 命中时置引用位为 1。
   - 需要淘汰时，时钟指针顺时针扫描，若引用位为 1 则清零并放行，为 0 则驱逐。

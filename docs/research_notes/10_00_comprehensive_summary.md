@@ -48,7 +48,7 @@
 
 **本 research_notes 体系**：围绕 Rust 的**公理判定系统**、**语言表达力**、**组件组合法则**三大支柱，
 建立形式化定义→公理→定理→推论的**可追溯论证链**，
-覆盖所有权/借用（Borrowing）/类型/异步（Async）/Pin/**Send/Sync**（formal_methods 六篇并表）、**安全可判定机制总览**、设计模式 23/43、并发选型、组合工程 CE-T1–T3，
+覆盖所有权（Ownership）/借用（Borrowing）/类型/异步（Async）/Pin/**Send/Sync**（formal_methods 六篇并表）、**安全可判定机制总览**、设计模式 23/43、并发选型、组合工程 CE-T1–T3，
 并与 RustBelt 等国际权威对标。
 聚焦**数学风格形式化论证 + Rust 示例**（L3/Coq/Lean 已归档）。
 
@@ -103,12 +103,12 @@
 | 领域 | 一句话总结 | 入口 |
 | :--- | :--- | :--- |
 | **所有权（Ownership）** | 唯一所有者、移动转移、作用域释放；T2 唯一性、T3 内存安全（Memory Safety） | ownership_model |
-| **借用** | 共享/可变互斥、作用域；T1 数据竞争自由 | borrow_checker_proof |
-| **生命周期** | ℓ⊆lft、outlives；LF-T1–T3 引用有效性 | lifetime_formalization |
+| **借用（Borrowing）** | 共享/可变互斥、作用域；T1 数据竞争自由 | borrow_checker_proof |
+| **生命周期（Lifetimes）** | ℓ⊆lft、outlives；LF-T1–T3 引用（Reference）有效性 | lifetime_formalization |
 | **类型系统（Type System）** | 进展性、保持性；T1–T3 类型安全 | type_system_foundations |
 | **型变** | 协变/逆变/不变；T1–T4 型变安全 | variance_theory |
-| **Trait** | impl、对象安全、一致性；COH-T1 | trait_system_formalization |
-| **异步** | Future、Poll、状态机；T6.1–T6.3 | async_state_machine |
+| **Trait** | impl、对象安全、一致性（Coherence）；COH-T1 | trait_system_formalization |
+| **异步（Async）** | Future、Poll、状态机；T6.1–T6.3 | async_state_machine |
 | **Pin** | 位置稳定、自引用；T1–T3 | pin_self_referential |
 | **Send/Sync** | 跨线程转移/共享安全；SEND-T1、SYNC-T1、SYNC-L1 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) |
 | **安全可判定机制** | 每机制概念定义·属性关系·形式证明·反例；并发/Trait 族四维表 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](10_safe_decidable_mechanisms_overview.md) |
@@ -138,7 +138,7 @@
 
 **核心论证链**：
 
-1. **所有权→内存安全**：规则 1–3 → T2 唯一性 → T3 无悬垂/无双重释放/无泄漏
+1. **所有权→内存安全（Memory Safety）**：规则 1–3 → T2 唯一性 → T3 无悬垂/无双重释放/无泄漏
 2. **借用→数据竞争自由**：规则 5–8 → T1 数据竞争自由
 3. **类型→类型安全**：typing rules → 进展 T1、保持 T2 → T3 类型安全
 4. **公理→组合定理**：ownership T3 → CE-T1；borrow T1 + type T3 → CE-T2；type T3 → CE-T3
@@ -247,7 +247,7 @@
 | **The Rust Programming Language** | [所有权](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)、[借用](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)、[生命周期](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)、[Trait](https://doc.rust-lang.org/book/ch10-02-traits.html)、[并发](https://doc.rust-lang.org/book/ch16-00-concurrency.html)、[异步](https://doc.rust-lang.org/book/ch17-00-async-await.html)、[Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | 概念教学与场景解释 |
 | **Rust Reference** | [引言](https://doc.rust-lang.org/reference/introduction.html)、[变量与所有权](https://doc.rust-lang.org/reference/variables.html)、[类型](https://doc.rust-lang.org/reference/types.html)、[Trait 项](https://doc.rust-lang.org/reference/items/traits.html)、[async 函数](https://doc.rust-lang.org/reference/items/functions.html#async-functions)、[Unsafe 块](https://doc.rust-lang.org/reference/unsafe-blocks.html) | 语言规范与精确语义 |
 | **Cargo Book** | [Cargo Book](https://doc.rust-lang.org/cargo/)、[Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html)、[依赖](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)、[Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html) | 构建、包与项目管理 |
-| **Rust Standard Library** | [std](https://doc.rust-lang.org/std/)、[Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)、[HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)、[Result](https://doc.rust-lang.org/std/result/enum.Result.html)、[Future](https://doc.rust-lang.org/std/future/trait.Future.html)、[Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)、[thread](https://doc.rust-lang.org/std/thread/)、[sync](https://doc.rust-lang.org/std/sync/) | API/模块级别参考 |
+| **Rust Standard Library** | [std](https://doc.rust-lang.org/std/)、[Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)、[HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)、[Result](https://doc.rust-lang.org/std/result/enum.Result.html)、[Future](https://doc.rust-lang.org/std/future/trait.Future.html)、[Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)、[thread](https://doc.rust-lang.org/std/thread/)、[sync](https://doc.rust-lang.org/std/sync/) | API/模块（Module）级别参考 |
 | **Rust Edition Guide** | [Edition Guide](https://doc.rust-lang.org/edition-guide/)、[Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) | 版本差异与迁移 |
 
 #### 形式化来源对照 {#形式化来源对照}
@@ -258,7 +258,7 @@
 | :--- | :--- | :--- | :--- |
 | 所有权唯一性/内存安全 | ✓ 核心模型 | ✓ 可验证提取 | ✓ 规范 § 所有权 |
 | 借用/数据竞争自由 | ✓ 生命周期逻辑 | ✓ 借用检查验证 | ✓ 规范 § 借用 |
-| 类型系统/Trait | ✓ Iris 语义 | ✓ 类型系统提取 | ✓ 规范 § 类型 |
+| 类型系统（Type System）/Trait | ✓ Iris 语义 | ✓ 类型系统提取 | ✓ 规范 § 类型 |
 | 异步/Pin | ✓ 扩展模型 | 部分支持 | ✓ 规范 § 表达式 |
 
 #### 版本与生态更新 {#版本与生态更新}

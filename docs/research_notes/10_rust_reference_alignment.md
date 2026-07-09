@@ -19,10 +19,10 @@
   - [目录 {#目录}](#目录-目录)
   - [一、对齐说明 {#一对齐说明}](#一对齐说明-一对齐说明)
   - [二、词法与语法 {#二词法与语法}](#二词法与语法-二词法与语法)
-  - [三、类型系统 {#三类型系统}](#三类型系统-三类型系统)
+  - [三、类型系统（Type System） {#三类型系统}](#三类型系统-三类型系统)
   - [四、表达式与语句 {#四表达式与语句}](#四表达式与语句-四表达式与语句)
   - [五、Items 与 Modules {#五items-与-modules}](#五items-与-modules-五items-与-modules)
-  - [六、Traits 与泛型 {#六traits-与泛型}](#六traits-与泛型-六traits-与泛型)
+  - [六、Traits 与泛型（Generics） {#六traits-与泛型}](#六traits-与泛型-六traits-与泛型)
   - [七、Unsafe 与 FFI {#七unsafe-与-ffi}](#七unsafe-与-ffi-七unsafe-与-ffi)
   - [八、Attributes {#八attributes}](#八attributes-八attributes)
   - [九、版本差异 {#九版本差异}](#九版本差异-九版本差异)
@@ -50,7 +50,7 @@
 | Reference 章节 | 项目文档 | 状态 | 备注 |
 |----------------|----------|------|------|
 | [Lexical Elements](https://doc.rust-lang.org/reference/tokens.html) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | 🔄 | 基础词法在类型基础中提及 |
-| [Macros](https://doc.rust-lang.org/reference/macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | 🔄 | 声明宏（Declarative Macro）/过程宏有 crate 示例 |
+| [Macros](https://doc.rust-lang.org/reference/macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | 🔄 | 声明宏（Declarative Macro）/过程宏（Procedural Macro）有 crate 示例 |
 | [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | crate、module、source file 规则 |
 
 ---
@@ -74,7 +74,7 @@
 |----------------|----------|------|------|
 | [Expressions](https://doc.rust-lang.org/reference/expressions.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ | async 块表达式 |
 | [Control Flow](https://doc.rust-lang.org/reference/expressions.html#control-flow-expressions) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 🔄 | 基础控制流在 crate 中 |
-| [Match Expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 🔄 | 模式匹配示例 |
+| [Match Expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 🔄 | 模式匹配（Pattern Matching）示例 |
 
 ---
 
@@ -82,7 +82,7 @@
 
 | Reference 章节 | 项目文档 | 状态 | 备注 |
 |----------------|----------|------|------|
-| [Items and Modules](https://doc.rust-lang.org/reference/items.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | 模块系统规范 |
+| [Items and Modules](https://doc.rust-lang.org/reference/items.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | 模块（Module）系统规范 |
 | [Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | `pub`、`pub(crate)`、`pub(in path)` |
 | [Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html) | [formal_modules/60_module_counterexamples.md](formal_modules/60_module_counterexamples.md) §4 | ✅ | `use` 路径相对/绝对 |
 | [Linkage](https://doc.rust-lang.org/reference/linkage.html) | [formal_modules/20_linkage_and_symbols.md](formal_modules/20_linkage_and_symbols.md) | ✅ | `crate-type`、`#[no_mangle]` |
@@ -131,7 +131,7 @@
 ## 十、未覆盖缺口 {#十未覆盖缺口}
 
 1. `const` 求值与 `const fn` 的 Reference 章节可进一步细化。
-2. 宏展开 hygiene 与解析规则的 Reference 映射待扩展。
+2. 宏（Macro）展开 hygiene 与解析规则的 Reference 映射待扩展。
 3. 异步（Async） trait / RPITIT 的 Reference 章节需随 Rust 1.97+ 更新。
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)

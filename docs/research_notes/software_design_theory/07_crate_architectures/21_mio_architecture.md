@@ -2,13 +2,13 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [异步编程](../../../../concept/03_advanced/01_async/02_async.md)
+> - [异步（Async）编程](../../../../concept/03_advanced/01_async/02_async.md)
 > - [网络编程](../../../../concept/03_advanced/06_low_level_patterns/18_network_programming.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **⚠️ 历史文档提示**：
 >
-> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用（Reference）。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 > **Rust 版本**: 1.96.1+ (Edition 2024)
@@ -39,7 +39,7 @@
 
 mio（Metal IO）是 Rust 生态中最底层的**跨平台 IO 多路复用库**，年下载量超过 1.2 亿次 来源: [crates.io 统计, 2025](https://crates.io/)。
 
-与 Tokio 这样的高级异步运行时不同，mio 不提供 `async/await`、任务调度或 `Future` 抽象——它只解决一个核心问题：**如何以最少的系统调用和内存开销，在单个线程上监视大量文件描述符的就绪状态**。
+与 Tokio 这样的高级异步运行时（Runtime）不同，mio 不提供 `async/await`、任务调度或 `Future` 抽象——它只解决一个核心问题：**如何以最少的系统调用和内存开销，在单个线程上监视大量文件描述符的就绪状态**。
 
 mio 是 Tokio、async-std [已归档]（已弃用但历史意义重大）、Poll 等几乎所有 Rust 异步运行时的底层依赖。
 
@@ -460,7 +460,7 @@ poll.poll(&mut events, None)?;
 - **类型转换**：`Token(0)` 直接映射为 `epoll_data.u64 = 0`，无运行时转换
 - **错误处理（Error Handling）**：mio 将 `errno` 转换为 `io::Error`，增加一次分支判断（可忽略）
 
-> **结论**: mio 是**零成本抽象（Zero-Cost Abstraction）**的典范——它提供跨平台一致性和内存安全，同时不增加任何额外的系统调用或内存开销。
+> **结论**: mio 是**零成本抽象（Zero-Cost Abstraction）**的典范——它提供跨平台一致性（Coherence）和内存安全（Memory Safety），同时不增加任何额外的系统调用或内存开销。
 > [Rustnomicon — Zero-Cost Abstractions](https://doc.rust-lang.org/nomicon/)(<https://doc.rust-lang.org/nomicon/>)
 
 ---

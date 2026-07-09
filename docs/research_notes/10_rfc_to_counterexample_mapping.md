@@ -32,7 +32,7 @@
 本文档建立 **Rust RFC** 与项目内 **反例/形式化文档** 之间的双向映射，帮助维护者：
 
 1. 快速定位某个 RFC 在哪些反例文件中有对应覆盖；
-2. 快速判断某个反例文件引用了哪些 RFC 权威来源；
+2. 快速判断某个反例文件引用（Reference）了哪些 RFC 权威来源；
 3. 为后续自动化脚本扫描 RFC 链接、生成映射报告提供人工基线。
 
 > **编号核对说明**：下表中的 RFC 编号已与 `rust-lang.github.io/rfcs/` 和 `github.com/rust-lang/rfcs` 实际内容核对。原稿中部分编号存在笔误，已更正为实际对应 RFC：
@@ -48,12 +48,12 @@
 | RFC 编号 | RFC 标题 | 稳定版本 | 关键约束 | 对应反例文档 | 状态 |
 |----------|----------|----------|----------|--------------|------|
 | [RFC 1858](https://github.com/rust-lang/rfcs/pull/1858) | Immovable types | 未合并（已关闭） | 不可移动类型、自引用与 `Pin` 的前身讨论 | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) | 📝 |
-| [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) | Non-lexical lifetimes | 1.63 | 借用检查器基于 MIR 的非词法生命周期分析，打破词法作用域限制 | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) / [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | ✅ |
+| [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) | Non-lexical lifetimes | 1.63 | 借用（Borrowing）检查器基于 MIR 的非词法生命周期分析，打破词法作用域限制 | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) / [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | ✅ |
 | [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) | async/await | 1.39 | `async fn`/`async {}` 语法、Future 状态机、`.await` 语义 | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) / [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ |
 | [RFC 2580](https://rust-lang.github.io/rfcs/2580-ptr-meta.html) | Pointer metadata | 未稳定（nightly `ptr_metadata`） | `Pointee::Metadata`、`metadata()`、`DynMetadata`、胖指针拆装 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) | 🔄 |
 | [RFC 2585](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html) | Unsafe blocks in unsafe fn | 1.52.0（lint 稳定）；2024 Edition 默认 warn | `unsafe fn` 体不再隐式视为 `unsafe {}`，需显式 `unsafe_op_in_unsafe_fn` | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) / [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) | ✅ |
 | [RFC 3185](https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html) | Static async fn in traits | 1.75 | trait 中 `async fn` 语法糖、匿名关联类型、静态分发限制 | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) | ✅ |
-| [RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html) | gen blocks | 未稳定（Rust 2024 保留 `gen` 关键字） | `gen {}` 生成器块、`yield` 语义、迭代器与借用跨越 yield 点限制 | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) | 🔄 |
+| [RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html) | gen blocks | 未稳定（Rust 2024 保留 `gen` 关键字） | `gen {}` 生成器块、`yield` 语义、迭代器（Iterator）与借用跨越 yield 点限制 | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) | 🔄 |
 
 状态图例：
 

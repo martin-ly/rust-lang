@@ -27,8 +27,8 @@
   - [权威来源对照 {#权威来源对照}](#权威来源对照-权威来源对照)
   - [形式化定义 {#形式化定义}](#形式化定义-形式化定义)
     - [Def 1.1（Factory Method 结构） {#def-11factory-method-结构}](#def-11factory-method-结构-def-11factory-method-结构)
-    - [Axiom FM1（返回类型一致性公理） {#axiom-fm1返回类型一致性公理}](#axiom-fm1返回类型一致性公理-axiom-fm1返回类型一致性公理)
-    - [Axiom FM2（所有权独立公理） {#axiom-fm2所有权独立公理}](#axiom-fm2所有权独立公理-axiom-fm2所有权独立公理)
+    - [Axiom FM1（返回类型一致性（Coherence）公理） {#axiom-fm1返回类型一致性公理}](#axiom-fm1返回类型一致性公理-axiom-fm1返回类型一致性公理)
+    - [Axiom FM2（所有权（Ownership）独立公理） {#axiom-fm2所有权独立公理}](#axiom-fm2所有权独立公理-axiom-fm2所有权独立公理)
     - [定理 FM-T1（类型保持定理） {#定理-fm-t1类型保持定理}](#定理-fm-t1类型保持定理-定理-fm-t1类型保持定理)
     - [定理 FM-T2（所有权安全定理） {#定理-fm-t2所有权安全定理}](#定理-fm-t2所有权安全定理-定理-fm-t2所有权安全定理)
     - [推论 FM-C1（纯 Safe Factory） {#推论-fm-c1纯-safe-factory}](#推论-fm-c1纯-safe-factory-推论-fm-c1纯-safe-factory)
@@ -36,15 +36,15 @@
   - [Rust 实现与代码示例 {#rust-实现与代码示例}](#rust-实现与代码示例-rust-实现与代码示例)
   - [Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}](#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点 {#edition-2024-关键兼容点}](#edition-2024-关键兼容点-edition-2024-关键兼容点)
-  - [Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
+  - [Rust 所有权、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束 {#所有权约束}](#所有权约束-所有权约束)
     - [借用与生命周期约束 {#借用与生命周期约束}](#借用与生命周期约束-借用与生命周期约束)
     - [trait 系统约束 {#trait-系统约束}](#trait-系统约束-trait-系统约束)
-    - [与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
+    - [与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
   - [完整证明 {#完整证明}](#完整证明-完整证明)
     - [形式化论证链 {#形式化论证链}](#形式化论证链-形式化论证链)
     - [与 Rust 类型系统的联系 {#与-rust-类型系统的联系}](#与-rust-类型系统的联系-与-rust-类型系统的联系)
-    - [内存安全保证 {#内存安全保证}](#内存安全保证-内存安全保证)
+    - [内存安全（Memory Safety）保证 {#内存安全保证}](#内存安全保证-内存安全保证)
   - [形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}](#形式化属性不变式前置后置条件与安全边界-形式化属性不变式前置后置条件与安全边界)
     - [不变式（Invariants） {#不变式invariants}](#不变式invariants-不变式invariants)
     - [前置条件（Preconditions） {#前置条件preconditions}](#前置条件preconditions-前置条件preconditions)
@@ -183,7 +183,7 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
    - 返回后：调用者拥有 $p$
    - 无双重释放：所有权唯一性保证
 3. **借用安全**：若 `factory(&c)` 借用创建者，根据借用规则：
-   - $c$ 不可变借用期间，$c$ 不可被修改
+   - $c$ 不可变借用（Mutable Borrow）期间，$c$ 不可被修改
    - 借用生命周期不超过 $c$ 的生命周期
 
 由 Axiom FM2 及 ownership 唯一性，得证。$\square$
@@ -379,7 +379,7 @@ fn main() {
 | :--- | :--- | :--- |
 | 所有权转移 | 工厂方法返回拥有值 | 无双重释放 / 无悬垂 |
 | 借用检查 | `&self` 支持无状态共享调用 | 无数据竞争 |
-| 生命周期 | 产品与 Creator 生命周期解耦 | 引用有效性 |
+| 生命周期 | 产品与 Creator 生命周期解耦 | 引用（Reference）有效性 |
 | trait / 关联类型 | 关联类型约束产品类型 | 编译期多态安全 |
 | Send / Sync | Creator 与 Product 实现 `Send + Sync` 时支持跨线程 | 跨线程安全 |
 
@@ -429,7 +429,7 @@ ownership_model T2
 | Rust 特性 | Factory Method 实现 | 类型安全保证 |
 | :--- | :--- | :--- |
 | `trait Product` | 产品接口 | 编译期检查实现完整性 |
-| `Box<dyn Product>` | 运行时多态 | 虚表派发类型安全 |
+| `Box<dyn Product>` | 运行时（Runtime）多态 | 虚表派发类型安全 |
 | `match` 穷尽 | 工厂分支 | 编译期检查所有分支 |
 | 所有权转移 | 返回 `Box` | 无悬垂指针 |
 

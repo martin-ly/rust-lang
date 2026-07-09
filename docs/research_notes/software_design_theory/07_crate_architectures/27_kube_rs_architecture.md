@@ -43,7 +43,7 @@
 
 > **[来源: [kube-rs crates.io](https://crates.io/crates/kube)]**
 
-`kube-rs` 是 Rust 生态中对接 **Kubernetes** 的工业级客户端，提供类型安全的 API 访问、资源监听与控制器运行时。它适用于构建 Kubernetes Operator、集群自动化工具、GitOps 控制器、CI/CD 触发器与可观测性 Agent 等场景。
+`kube-rs` 是 Rust 生态中对接 **Kubernetes** 的工业级客户端，提供类型安全的 API 访问、资源监听与控制器运行时（Runtime）。它适用于构建 Kubernetes Operator、集群自动化工具、GitOps 控制器、CI/CD 触发器与可观测性 Agent 等场景。
 
 > [来源: [kube-rs docs.rs](https://docs.rs/kube/latest/kube/)]
 
@@ -51,9 +51,9 @@
 
 | 维度 | 设计选择 | 工程价值 |
 |:--|:--|:--|
-| **API 模型** | `Api<K>` 泛型封装 REST 路径 | 编译期保证资源类型与 API Group/Version 匹配 |
-| **运行时（Runtime）** | 基于 Tokio 的异步 watcher / controller | 与 Rust 异步生态天然集成，支持背压与超时 |
-| **CRD 支持** | `#[derive(CustomResource)]` 派生宏 | 将 Kubernetes CRD 静态化为 Rust struct |
+| **API 模型** | `Api<K>` 泛型（Generics）封装 REST 路径 | 编译期保证资源类型与 API Group/Version 匹配 |
+| **运行时（Runtime）** | 基于 Tokio 的异步（Async） watcher / controller | 与 Rust 异步生态天然集成，支持背压与超时 |
+| **CRD 支持** | `#[derive(CustomResource)]` 派生宏（Macro） | 将 Kubernetes CRD 静态化为 Rust struct |
 | **类型生成** | 依赖 `k8s-openapi` 生成核心资源类型 | 随 Kubernetes 版本更新，避免手工维护 |
 
 > [来源: [kube-rs GitHub Repository](https://github.com/kube-rs/kube)]
@@ -178,7 +178,7 @@ struct MyAppSpec {
 | 未使用 `owner_reference` | 删除 CR 时，由该 CR 创建的子资源泄漏 | reconcile 时通过 `controller_owner_reference` 设置 ownerRef |
 | CRD 版本管理混乱 | `v1alpha1` 与 `v1` 字段冲突，导致反序列化失败 | 显式声明 `version`，使用 `serde` `default` 与 `apiextensions.k8s.io` 版本转换策略 |
 | 集群外运行依赖 `KUBECONFIG` | 在容器内无 kubeconfig 时启动失败 | 集群内使用 `Client::incluster()`，集群外使用 `Client::try_default()` 并校验 |
-| watcher 无超时/取消 | 控制循环无法优雅关闭 | 使用 `tokio::select!` 或 `CancellationToken` 管理生命周期 |
+| watcher 无超时/取消 | 控制循环无法优雅关闭 | 使用 `tokio::select!` 或 `CancellationToken` 管理生命周期（Lifetimes） |
 | 对同一资源高频 list | 给 apiserver 造成过大压力 | 使用 watcher 增量监听，必要时结合 local cache（`reflector`） |
 
 > [来源: [Kubernetes API Concepts](https://kubernetes.io/docs/reference/using-api/api-concepts/)]
@@ -189,7 +189,7 @@ struct MyAppSpec {
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-`kube-rs` 通过类型系统将 Kubernetes 的资源语义静态化：
+`kube-rs` 通过类型系统（Type System）将 Kubernetes 的资源语义静态化：
 
 | 维度 | API | 类型系统价值 |
 |:--|:--|:--|

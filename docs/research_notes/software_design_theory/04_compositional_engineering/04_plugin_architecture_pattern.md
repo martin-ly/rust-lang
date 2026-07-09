@@ -54,7 +54,7 @@
     - [示例 2：使用 libloading 的动态插件 {#示例-2使用-libloading-的动态插件}](#示例-2使用-libloading-的动态插件-示例-2使用-libloading-的动态插件)
   - [六、反例边界 {#六反例边界}](#六反例边界-六反例边界)
     - [6.1 ABI 不稳定 {#61-abi-不稳定}](#61-abi-不稳定-61-abi-不稳定)
-    - [6.2 生命周期管理 {#62-生命周期管理}](#62-生命周期管理-62-生命周期管理)
+    - [6.2 生命周期（Lifetimes）管理 {#62-生命周期管理}](#62-生命周期管理-62-生命周期管理)
     - [6.3 版本兼容性 {#63-版本兼容性}](#63-版本兼容性-63-版本兼容性)
   - [七、验证清单 {#七验证清单}](#七验证清单-七验证清单)
   - [八、权威来源索引 {#八权威来源索引}](#八权威来源索引-八权威来源索引)
@@ -66,7 +66,7 @@
 
 > **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
 
-插件架构（Plugin Architecture）通过**运行时或编译期扩展点**，允许核心系统在不修改自身代码的情况下加载、替换或卸载功能模块。
+插件架构（Plugin Architecture）通过**运行时（Runtime）或编译期扩展点**，允许核心系统在不修改自身代码的情况下加载、替换或卸载功能模块（Module）。
 
 典型动机：
 
@@ -92,7 +92,7 @@
 | 维度 | 静态注册 |
 | :--- | :--- |
 | 加载时机 | 编译期 / 启动期 |
-| 类型安全 | 完全由 Rust 类型系统保证 |
+| 类型安全 | 完全由 Rust 类型系统（Type System）保证 |
 | 性能 | 零额外开销（单态化（Monomorphization）、内联） |
 | 部署 | 与主程序一起打包 |
 | 代表 crate | `inventory`、`linkme`、`ctor` |
@@ -140,7 +140,7 @@ impl PluginRegistry {
 }
 ```
 
-该模式满足 [04_compositional_engineering README](README.md) 中的 **Def CE-ARCH1**：跨边界时，所有权与 `Send/Sync` 沿 `Box<dyn Plugin>` 传递。
+该模式满足 [04_compositional_engineering README](README.md) 中的 **Def CE-ARCH1**：跨边界时，所有权（Ownership）与 `Send/Sync` 沿 `Box<dyn Plugin>` 传递。
 
 ---
 
@@ -326,7 +326,7 @@ Rust 没有稳定的**类型布局 ABI**（struct 字段顺序、`dyn Trait` vta
 | 错误做法 | 正确做法 |
 | :--- | :--- |
 | `pub struct Point { x: f64, y: f64 }` 跨动态库传递 | `#[repr(C)] pub struct Point { x: f64, y: f64 }` |
-| 直接传递 `Box<dyn Plugin>` | 仅传递 `extern "C"` 函数指针与原始指针 |
+| 直接传递 `Box<dyn Plugin>` | 仅传递 `extern "C"` 函数指针与原始指针（Raw Pointer） |
 
 ### 6.2 生命周期管理 {#62-生命周期管理}
 
@@ -363,10 +363,10 @@ println!("{}", CStr::from_ptr(ptr).to_str()?); // UB
 
 - [ ] 静态注册：`cargo check -p c09_design_pattern --examples` 通过。
 - [ ] 动态加载：插件 crate 设置 `crate-type = ["cdylib"]`。
-- [ ] 跨动态库结构体使用 `#[repr(C)]`。
+- [ ] 跨动态库结构体（Struct）使用 `#[repr(C)]`。
 - [ ] 动态入口函数使用 `extern "C"` 与 `#[no_mangle]`。
 - [ ] 接口 crate 遵循 SemVer。
-- [ ] `Library` 句柄生命周期覆盖所有从库中借用的资源。
+- [ ] `Library` 句柄生命周期覆盖所有从库中借用（Borrowing）的资源。
 
 ---
 

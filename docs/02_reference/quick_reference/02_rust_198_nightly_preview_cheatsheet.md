@@ -43,7 +43,7 @@
 
 ### `gen` 块 — 原生生成器 {#gen-块-原生生成器}
 
-`gen { yield ... }` 提供了一种直观的方式构造惰性迭代器，无需显式实现 `Iterator` trait 或使用 `std::iter::from_fn`。
+`gen { yield ... }` 提供了一种直观的方式构造惰性迭代器（Iterator），无需显式实现 `Iterator` trait 或使用 `std::iter::from_fn`。
 
 ```rust
 #![feature(gen_blocks, yield_expr)]
@@ -66,8 +66,8 @@ for x in fibonacci().take(10) {
 
 **关键约束**：
 
-- `gen` 块默认按引用捕获变量；需要 `gen move` 获取所有权
-- yield 时不能持有对捕获变量的借用（编译器会检查）
+- `gen` 块默认按引用（Reference）捕获变量；需要 `gen move` 获取所有权（Ownership）
+- yield 时不能持有对捕获变量的借用（Borrowing）（编译器会检查）
 - 目前不支持在 `gen` 块内直接递归 yield
 
 ---
@@ -134,7 +134,7 @@ impl<'a, T: ?Sized> Deref for MyBox<'a, T> {
 // 自动支持 CoerceUnsized，无需手动实现
 ```
 
-**注意**：`#[pointee]` 属性必须标注在泛型参数上（不能用在字段上）。
+**注意**：`#[pointee]` 属性必须标注在泛型（Generics）参数上（不能用在字段上）。
 
 ---
 

@@ -42,7 +42,7 @@
 | Rust Reference — Unsafe | [Unsafe Operations](https://doc.rust-lang.org/reference/unsafe-functions.html) | [10_rust_reference_alignment.md](10_rust_reference_alignment.md) | unsafe 操作语义 |
 | Rustonomicon | <https://doc.rust-lang.org/nomicon/> | [10_rustonomicon_alignment.md](10_rustonomicon_alignment.md) | 所有权（Ownership）、类型布局、Send/Sync、FFI |
 | Unsafe Code Guidelines | <https://rust-lang.github.io/unsafe-code-guidelines/> | [10_unsafe_code_guidelines_alignment.md](10_unsafe_code_guidelines_alignment.md) | UB、内存模型、类型合法值 |
-| Rust Error Codes | [Error Index](https://doc.rust-lang.org/error_codes/error-index.html) | [10_rustc_errors_alignment.md](10_rustc_errors_alignment.md) | E0xxx unsafe/借用错误 |
+| Rust Error Codes | [Error Index](https://doc.rust-lang.org/error_codes/error-index.html) | [10_rustc_errors_alignment.md](10_rustc_errors_alignment.md) | E0xxx unsafe/借用（Borrowing）错误 |
 
 ---
 
@@ -50,7 +50,7 @@
 
 | 权威来源 | 机构 | 项目文档 | 覆盖主题 |
 |----------|------|----------|----------|
-| [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) | MPI-SWS | [10_rustbelt_alignment.md](10_rustbelt_alignment.md) | 所有权、借用（Borrowing）、unsafe 抽象安全 |
+| [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) | MPI-SWS | [10_rustbelt_alignment.md](10_rustbelt_alignment.md) | 所有权（Ownership）、借用（Borrowing）、unsafe 抽象安全 |
 | [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/) | MPI-SWS | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | 别名模型、UB |
 | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | ETH Zürich | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | 改进别名模型 |
 | [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3) | 多机构 | [10_rustsem_semantics.md](10_rustsem_semantics.md) | 操作语义、unsafe 行为 |

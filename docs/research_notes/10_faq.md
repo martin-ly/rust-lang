@@ -147,8 +147,8 @@
 **详细说明**：
 
 - **形式化**：含 Def、Axiom、定理及证明或证明思路
-- **代码**：可运行 Rust 示例，对应某定理（如所有权移动对应 [ownership_model](formal_methods/10_ownership_model.md) T2）
-- **衔接**：与 [PROOF_INDEX](10_proof_index.md)、[formal_methods](formal_methods/README.md) 有交叉引用
+- **代码**：可运行 Rust 示例，对应某定理（如所有权（Ownership）移动对应 [ownership_model](formal_methods/10_ownership_model.md) T2）
+- **衔接**：与 [PROOF_INDEX](10_proof_index.md)、[formal_methods](formal_methods/README.md) 有交叉引用（Reference）
 
 **相关资源**：[BEST_PRACTICES](10_best_practices.md) Def BP2、实践对照表、[PROOF_INDEX](10_proof_index.md)
 
@@ -191,7 +191,7 @@
 **详细说明**:
 
 - **形式化方法**: 适合有数学/逻辑背景的研究者
-- **类型理论**: 适合对类型系统感兴趣的研究者
+- **类型理论**: 适合对类型系统（Type System）感兴趣的研究者
 - **实验研究**: 适合对性能优化感兴趣的研究者
 - **实际应用**: 适合对实际项目感兴趣的研究者
 

@@ -42,7 +42,7 @@
 
 > **[来源: [rdkafka crates.io](https://crates.io/crates/rdkafka)]**
 
-`rdkafka` 是 Rust 生态中对接 **Apache Kafka** 的工业级客户端，底层封装了高性能 C 库 **librdkafka**，上层提供符合 Rust 异步习惯的 Producer / Consumer API。它适用于构建高吞吐日志管道、事件溯源、流式 ETL 与实时指标系统等场景。
+`rdkafka` 是 Rust 生态中对接 **Apache Kafka** 的工业级客户端，底层封装了高性能 C 库 **librdkafka**，上层提供符合 Rust 异步（Async）习惯的 Producer / Consumer API。它适用于构建高吞吐日志管道、事件溯源、流式 ETL 与实时指标系统等场景。
 
 > [来源: [rdkafka docs.rs](https://docs.rs/rdkafka/latest/rdkafka/)]
 
@@ -52,7 +52,7 @@
 |:--|:--|:--|
 | **协议实现** | 复用 librdkafka（C） | 获得经过多年生产验证的协议兼容性与性能 |
 | **API 风格** | 同步与异步 Future 双轨 | 简单脚本可用同步，高并发服务可用 Tokio 异步 |
-| **运行时绑定** | `tokio-runtime` / `async-std-runtime` / `smol-runtime` feature 可选 | 不强制锁定运行时 |
+| **运行时（Runtime）绑定** | `tokio-runtime` / `async-std-runtime` / `smol-runtime` feature 可选 | 不强制锁定运行时 |
 | **类型安全** | `ClientConfig` 键值对 + `FutureProducer` / `StreamConsumer` 泛型（Generics） | 在编译期区分生产者与消费者语义 |
 
 > [来源: [rdkafka GitHub Repository](https://github.com/fede10247/rust-rdkafka)]
@@ -297,12 +297,12 @@ match producer.send(record, timeout).await {
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-`rdkafka` 通过类型系统将 Kafka 的客户端语义静态化：
+`rdkafka` 通过类型系统（Type System）将 Kafka 的客户端语义静态化：
 
 | 维度 | API | 类型系统价值 |
 |:--|:--|:--|
 | 生产者/消费者区分 | `FutureProducer` vs `StreamConsumer` | 编译期防止在 producer 上 subscribe |
-| 消息所有权 | `OwnedMessage` / `BorrowedMessage` | 明确消息生命周期，避免悬垂引用 |
+| 消息所有权（Ownership） | `OwnedMessage` / `BorrowedMessage` | 明确消息生命周期（Lifetimes），避免悬垂引用（Reference） |
 | 上下文回调 | `ConsumerContext` / `ProducerContext` trait | 自定义行为通过 trait 实现注入，保持类型安全 |
 | 异步 trait | `Producer::send` 返回 Future | 与 Tokio 生态组合，Send + 'static 保证跨任务安全 |
 

@@ -31,9 +31,9 @@
     - [2. 提供理论基础 {#2-提供理论基础}](#2-提供理论基础-2-提供理论基础)
     - [3. 使用清晰的结构 {#3-使用清晰的结构}](#3-使用清晰的结构-3-使用清晰的结构)
   - [📚 内容组织最佳实践 {#内容组织最佳实践}](#-内容组织最佳实践-内容组织最佳实践)
-    - [1. 模块化组织 {#1-模块化组织}](#1-模块化组织-1-模块化组织)
+    - [1. 模块（Module）化组织 {#1-模块化组织}](#1-模块化组织-1-模块化组织)
     - [2. 渐进式展开 {#2-渐进式展开}](#2-渐进式展开-2-渐进式展开)
-    - [3. 交叉引用 {#3-交叉引用}](#3-交叉引用-3-交叉引用)
+    - [3. 交叉引用（Reference） {#3-交叉引用}](#3-交叉引用-3-交叉引用)
   - [🔗 链接管理最佳实践 {#链接管理最佳实践}](#-链接管理最佳实践-链接管理最佳实践)
     - [1. 使用相对路径 {#1-使用相对路径}](#1-使用相对路径-1-使用相对路径)
     - [2. 提供描述性链接文本 {#2-提供描述性链接文本}](#2-提供描述性链接文本-2-提供描述性链接文本)
@@ -84,7 +84,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 提供清晰的编写指南
-- 确保内容质量和一致性
+- 确保内容质量和一致性（Coherence）
 - 优化用户体验
 - 促进协作和贡献
 
@@ -133,8 +133,8 @@
 | :--- | :--- | :--- |
 | **形式化** | Def OW1、定理 T2 | [ownership_model](formal_methods/10_ownership_model.md) |
 | **代码** | `let s = String::from("x"); take_ownership(s);` | 对应 T2 移动语义 |
-| **场景** | 所有权转移、借用（Borrowing）、生命周期 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) |
-| **反例** | 双重可变借用、悬垂引用 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md) |
+| **场景** | 所有权（Ownership）转移、借用（Borrowing）、生命周期（Lifetimes） | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) |
+| **反例** | 双重可变借用（Mutable Borrow）、悬垂引用 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md) |
 | **衔接** | 定理引用 PROOF_INDEX | [PROOF_INDEX](10_proof_index.md) |
 
 **Rust 实质示例与定理对应**：
@@ -184,7 +184,7 @@ fn example_anti_pattern() {
 | 形式化 | 仅「定义见 X」无具体 Def | Def OW1、定理 T2 及证明思路 |
 | 代码 | 伪代码或不可运行片段 | `cargo run` 可执行、对应某定理 |
 | 场景 | 「可用于多种场景」无具体例 | 「Web API 请求→Builder 模式→Axum」 |
-| 反例 | 无 | 双重可变借用、悬垂引用、unwrap 空值 |
+| 反例 | 无 | 双重可变借用（Borrowing）、悬垂引用、unwrap 空值 |
 | 衔接 | 无引用 | 链接至 ownership_model T2、PROOF_INDEX |
 
 **四步修复法**：
@@ -790,7 +790,7 @@ git commit -m "添加所有权模型形式化研究笔记
 | Unsafe 能力边界 | [what-unsafe-does.html](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | `unsafe` 允许的五种额外操作 |
 | 行为 considered UB | [what-unsafe-does.html#behavior-considered-undefined](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | 语言层面的未定义行为清单 |
 | 生命周期省略（Lifetime Elision） | [lifetime-elision.html](https://doc.rust-lang.org/nomicon/lifetime-elision.html) | 函数签名中的生命周期推断 |
-| 子类型与型变 | [subtyping-and-variance.html](https://doc.rust-lang.org/nomicon/subtyping.html) | 协变/逆变/不变与内存安全 |
+| 子类型与型变 | [subtyping-and-variance.html](https://doc.rust-lang.org/nomicon/subtyping.html) | 协变/逆变/不变与内存安全（Memory Safety） |
 | 发送与同步 | [send-and-sync.html](https://doc.rust-lang.org/nomicon/send-and-sync.html) | `Send`/`Sync` 的语义与手动实现 |
 | 未初始化内存 | [uninitialized.html](https://doc.rust-lang.org/nomicon/uninitialized.html) | `MaybeUninit` 与 unsafe 初始化 |
 
@@ -800,9 +800,9 @@ git commit -m "添加所有权模型形式化研究笔记
 | :--- | :--- | :--- |
 | 所有权与借用 | [ch04-00-understanding-ownership.html](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | 所有权、借用、slice |
 | 泛型与 trait | [ch10-00-generics.html](https://doc.rust-lang.org/book/ch10-00-generics.html) | 泛型、trait、生命周期 |
-| 迭代器与闭包 | [ch13-00-functional-features.html](https://doc.rust-lang.org/book/ch13-00-functional-features.html) | 闭包（Closures）、迭代器 |
+| 迭代器（Iterator）与闭包 | [ch13-00-functional-features.html](https://doc.rust-lang.org/book/ch13-00-functional-features.html) | 闭包（Closures）、迭代器 |
 | 并发编程 | [ch16-00-concurrency.html](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | 线程、`Mutex`、`Arc`、Send/Sync |
-| 高级 trait / unsafe | [ch19-00-advanced-features.html](https://doc.rust-lang.org/book/ch19-00-advanced-features.html) | 不安全 Rust、高级 trait、宏 |
+| 高级 trait / unsafe | [ch19-00-advanced-features.html](https://doc.rust-lang.org/book/ch19-00-advanced-features.html) | 不安全 Rust、高级 trait、宏（Macro） |
 
 > 实践建议：在编写研究笔记的代码示例时，先运行 `cargo clippy -- -W clippy::all`，并对 unsafe 段落给出对应 Nomicon 章节的引用。
 

@@ -15,7 +15,7 @@
 
 ## 目录 {#目录}
 
-- [并发与异步反例边界 {#并发与异步反例边界}](#并发与异步反例边界-并发与异步反例边界)
+- [并发与异步（Async）反例边界 {#并发与异步反例边界}](#并发与异步反例边界-并发与异步反例边界)
   - [目录 {#目录}](#目录-目录)
   - [1. `Rc` 跨线程 {#1-rc-跨线程}](#1-rc-跨线程-1-rc-跨线程)
     - [现象 {#现象-6}](#现象-现象-6)
@@ -135,7 +135,7 @@ thread::spawn(move || {
 
 ### 后果 {#后果-2}
 
-运行时线程互相等待，程序挂起。
+运行时（Runtime）线程互相等待，程序挂起。
 
 ### 修复方案 {#修复方案-6}
 
@@ -189,7 +189,7 @@ fn broken(pin: Pin<&mut SelfRef>) {
 
 ### 根因 {#根因}
 
-自引用类型要求 `Pin` 之后不再移动其指向的内存，且不能进行可能重新分配的操作。
+自引用（Reference）类型要求 `Pin` 之后不再移动其指向的内存，且不能进行可能重新分配的操作。
 
 ### 修复方案 {#修复方案-6}
 
@@ -274,7 +274,7 @@ impl Future for BadFuture {
 - [Send/Sync 形式化](10_send_sync_formalization.md)
 - [异步状态机](10_async_state_machine.md)
 - [Pin 与自引用](10_pin_self_referential.md)
-- [所有权与借用反例](60_ownership_counterexamples.md)
+- [所有权（Ownership）与借用（Borrowing）反例](60_ownership_counterexamples.md)
 - [通用反例汇编](../10_counter_examples_compendium.md)
 - [知识图谱索引](../10_knowledge_graph_index.md)
 

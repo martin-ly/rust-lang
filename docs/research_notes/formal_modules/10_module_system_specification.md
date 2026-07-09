@@ -2,7 +2,7 @@
 
 > **EN**: Module System Specification
 > **Summary**: Rust 模块系统规范 Module System Specification.
-> **概念族**: 形式化模块
+> **概念族**: 形式化模块（Module）
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -47,7 +47,7 @@
 | :--- | :--- |
 | **Crate** | Rust 编译器一次独立编译的产物单元，分为二进制 crate（`bin`）与库 crate（`lib`）。每个 crate 拥有自己的 crate root 与全局唯一的 crate 名称空间。 |
 | **Module** | crate 内部的命名空间容器，用于组织 items（`fn`、`struct`、`trait` 等）。可通过文件系统目录（`mod.rs` 或 `module_name.rs`）或内联 `mod name { ... }` 声明创建。 |
-| **Path** | 访问 item 的限定名称，形式包括相对路径 `self::`、`super::`、`crate::`，以及绝对路径通过 `::crate_name` 引用外部 crate。 |
+| **Path** | 访问 item 的限定名称，形式包括相对路径 `self::`、`super::`、`crate::`，以及绝对路径通过 `::crate_name` 引用（Reference）外部 crate。 |
 | **Use** | 通过 `use` 将路径绑定到当前作用域的别名，实现名称引入与重导出（`pub use`）。 |
 | **Visibility** | item 的可见范围，`pub` / `pub(crate)` / `pub(super)` / `pub(in path)` 分别表示公开、crate 内、父模块内、指定路径内可见。 |
 

@@ -31,10 +31,10 @@
   - [完备性声明 {#完备性声明}](#完备性声明-完备性声明)
   - [🎯 研究目标 {#研究目标}](#-研究目标-研究目标)
   - [📚 研究主题 {#研究主题}](#-研究主题-研究主题)
-    - [1. 类型系统基础 {#1-类型系统基础}](#1-类型系统基础-1-类型系统基础)
+    - [1. 类型系统（Type System）基础 {#1-类型系统基础}](#1-类型系统基础-1-类型系统基础)
     - [1b. 类型构造能力 {#1b-类型构造能力}](#1b-类型构造能力-1b-类型构造能力)
     - [2. Trait 系统形式化 {#2-trait-系统形式化}](#2-trait-系统形式化-2-trait-系统形式化)
-    - [3. 生命周期形式化 {#3-生命周期形式化}](#3-生命周期形式化-3-生命周期形式化)
+    - [3. 生命周期（Lifetimes）形式化 {#3-生命周期形式化}](#3-生命周期形式化-3-生命周期形式化)
     - [4. 高级类型特性 {#4-高级类型特性}](#4-高级类型特性-4-高级类型特性)
     - [5. 型变理论 {#5-型变理论}](#5-型变理论-5-型变理论)
   - [形式化论证汇总 {#形式化论证汇总}](#形式化论证汇总-形式化论证汇总)
@@ -74,7 +74,7 @@
 **本目录核心缺口已补全，全部缺口均有 Def 占位**。详见 [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)：
 
 - **Rust 1.93 类型系统特性**：LUB coercion、Copy specialization、offset_of!、never_type、type ascription、newtype、deref_nullptr ✅ Def 已补全；const &mut static、existential 等见 [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
-- **组合法则**：Trait coherence、类型+生命周期+型变、negative impls、impl/dyn 边界、const 求值失败 ✅ 已补全；孤儿规则放宽为倡议未稳定
+- **组合法则**：Trait coherence、类型+生命周期+型变、negative impls、impl/dyn 边界、const 求值失败 ✅ 已补全；孤儿规则（Orphan Rule）放宽为倡议未稳定
 - **Trait 特性**：RPITIT、async fn in trait ✅ 已补全（Def RPIT1/ASYNC1、定理 RPIT-T1/ASYNC-T1）；negative impls、fundamental 等为扩展缺口
 
 ---
@@ -89,7 +89,7 @@
 1. **类型系统基础**: Rust 类型系统的形式化定义和理论基础
 2. **Trait 系统**: Trait 系统的形式化建模和类型推导
 3. **生命周期**: 生命周期系统的类型理论解释
-4. **高级类型**: GATs、const 泛型等高级类型特性
+4. **高级类型**: GATs、const 泛型（Generics）等高级类型特性
 
 ---
 
@@ -244,7 +244,7 @@
 | 生命周期 | `10_lifetime_formalization.md` | Oxide、RustBelt Lifetime Logic、RustSEM | Polonius、Miri |
 | 型变 | `10_variance_theory.md` | Oxide、RustBelt | Rust Analyzer |
 | 所有权（Ownership）/借用（Borrowing） | `formal_methods/10_ownership_model.md` | RustBelt、Tree Borrows、RustSEM | Aeneas、coq-of-rust |
-| 借用检查器 | `formal_methods/10_borrow_checker_proof.md` | Tree Borrows、Oxide | Miri、Kani |
+| 借用（Borrowing）检查器 | `formal_methods/10_borrow_checker_proof.md` | Tree Borrows、Oxide | Miri、Kani |
 
 ### 推荐阅读路径 {#推荐阅读路径}
 
@@ -257,10 +257,10 @@
 | 文档 | 核心公理/定理 | 证明要点 | 缺口 |
 | :--- | :--- | :--- | :--- |
 | [00_completeness_gaps](../formal_methods/00_completeness_gaps.md) | Def CGI、Axiom CGI1、CGI-T1 | 不完备性形式化 | 缺口索引 |
-| [type_system_foundations](10_type_system_foundations.md) | T1–T5、LUB-T1、COP-T1、OFFSET-T1、ASC-T1、BOT-T1、NEWTYPE-T1、DEREF-NULL1 | 良型不卡住、求值保型 | 类型推断歧义 |
+| [type_system_foundations](10_type_system_foundations.md) | T1–T5、LUB-T1、COP-T1、OFFSET-T1、ASC-T1、BOT-T1、NEWTYPE-T1、DEREF-NULL1 | 良型不卡住、求值保型 | 类型推断（Type Inference）歧义 |
 | [construction_capability](10_construction_capability.md) | Def TCON1、TCON-T1、TCON-L1、TCON-C1 | 类型构造能力、确定性判定树 | - |
 | [trait_system_formalization](10_trait_system_formalization.md) | 对象安全、impl 解析、COH-T1、RPIT-T1、ASYNC-T1、NEG-T1、DYN-T1、TRAIT-GAT1、SPEC-T1 | dyn | 孤儿放宽（倡议） |
-| [lifetime_formalization](10_lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、见 formal_methods | 与型变组合 |
+| [lifetime_formalization](10_lifetime_formalization.md) | outlives、T2 引用（Reference）有效性 | 区域类型、见 formal_methods | 与型变组合 |
 | [advanced_types](10_advanced_types.md) | GAT、const 泛型、PhantomData、CONST-EVAL-T1、CONST-MUT1、EXIST1 | 关联类型、类型级常量 | existential 完整规则 |
 | [variance_theory](10_variance_theory.md) | T1–T4、VAR-COM-T1/C1 | 协变/逆变/不变、组合传递 | 三元组合已补全 |
 

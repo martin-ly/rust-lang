@@ -597,7 +597,7 @@ mindmap
 
 | 模块（Module） | 思维导图/知识图谱 | 路径 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C02 | 类型系统多维矩阵 | crates/c02_type_system/docs/ |
+| C02 | 类型系统（Type System）多维矩阵 | crates/c02_type_system/docs/ |
 | C03 | 控制流 MIND_MAP | crates/c03_control_fn/docs/mind_map.md |
 | C04 | 泛型概念关系 | crates/c04_generic/docs/ |
 | C05 | 并发模型对比 | crates/c05_threads/docs/ |
@@ -606,7 +606,7 @@ mindmap
 | C08 | 算法复杂度矩阵 | docs/04_multi_dimensional_concept_matrix.md |
 | C09 | 设计模式矩阵 | crates/c09_design_pattern/docs/ |
 | C10 | 网络协议矩阵 | docs/04_multi_dimensional_concept_matrix.md |
-| C11 | 宏系统层级 | crates/c11_macro_system_proc/docs/ |
+| C11 | 宏（Macro）系统层级 | crates/c11_macro_system_proc/docs/ |
 | C12 | WASM 思维导图 | crates/c12_wasm/docs/wasm_mind_maps.md |
 
 ### 1.12 学习路径思维导图 {#112-学习路径思维导图}
@@ -664,7 +664,7 @@ mindmap
 
 | 特性类别 | 特性名称 | 重要性 | 影响范围 | 迁移难度 | 性能影响 | 安全影响 | 应用场景 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **语言特性** | 联合体原始引用          | ⭐⭐⭐⭐   | 中等     | 中       | 正       | ✅ 安全访问    | 底层编程       |
+| **语言特性** | 联合体原始引用（Reference）          | ⭐⭐⭐⭐   | 中等     | 中       | 正       | ✅ 安全访问    | 底层编程       |
 | **语言特性** | 自动特征改进            | ⭐⭐⭐     | 全局     | 低       | 正       | ✅ 类型安全    | 泛型编程       |
 | **语言特性** | 零大小数组优化          | ⭐⭐       | 局部     | 低       | 正       | ✅ 类型安全    | 类型系统（Type System）       |
 | **语言特性** | track_caller 组合       | ⭐⭐⭐     | 局部     | 低       | 无       | ✅ 调试友好    | 调试、错误处理（Error Handling） |
@@ -677,10 +677,10 @@ mindmap
 | **标准库**   | rotate_right            | ⭐⭐⭐     | 局部     | 低       | 无       | ✅ 安全        | 算法、数据处理 |
 | **标准库**   | Box::new_zeroed         | ⭐⭐⭐⭐   | 中等     | 中       | 正       | ⚠️ 需要 unsafe | 内存分配、FFI  |
 | **标准库**   | Box::new_zeroed_slice   | ⭐⭐⭐⭐   | 中等     | 中       | 正       | ⚠️ 需要 unsafe | 内存分配、FFI  |
-| **性能**     | 迭代器特化              | ⭐⭐⭐⭐   | 全局     | 低       | 正       | ✅ 安全        | 性能关键代码   |
+| **性能**     | 迭代器（Iterator）特化              | ⭐⭐⭐⭐   | 全局     | 低       | 正       | ✅ 安全        | 性能关键代码   |
 | **性能**     | 元组扩展简化            | ⭐⭐       | 局部     | 低       | 无       | ✅ 安全        | 代码简化       |
 | **性能**     | EncodeWide Debug        | ⭐         | 局部     | 低       | 无       | ✅ 安全        | Windows 开发   |
-| **性能**     | iter::Repeat panic      | ⭐⭐       | 局部     | 低       | 无       | ✅ 安全        | 错误处理       |
+| **性能**     | iter::Repeat panic      | ⭐⭐       | 局部     | 低       | 无       | ✅ 安全        | 错误处理（Error Handling）       |
 
 **图例**:
 
@@ -718,7 +718,7 @@ mindmap
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-| 特性               | 编译时性能 | 运行时性能 | 内存使用 | 代码大小 | 优化潜力 |
+| 特性               | 编译时性能 | 运行时（Runtime）性能 | 内存使用 | 代码大小 | 优化潜力 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 联合体原始引用     | 无影响     | 零成本     | 无影响   | 无影响   | 低       |
 | 迭代器特化         | 轻微提升   | 显著提升   | 无影响   | 可能增加 | 高       |

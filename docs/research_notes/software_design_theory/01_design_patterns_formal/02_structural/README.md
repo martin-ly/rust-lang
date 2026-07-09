@@ -110,7 +110,7 @@
 >
 > **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)** | **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** | **来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
-| 模式文件 | Rust Design Patterns | Rust API Guidelines | GoF 原典 | Rust 1.96+ 示例 | 所有权（Ownership）/生命周期分析 | 形式化属性 | 反例升级 |
+| 模式文件 | Rust Design Patterns | Rust API Guidelines | GoF 原典 | Rust 1.96+ 示例 | 所有权（Ownership）/生命周期（Lifetimes）分析 | 形式化属性 | 反例升级 |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | [适配器](10_adapter.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [桥接](10_bridge.md) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |

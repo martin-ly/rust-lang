@@ -38,7 +38,7 @@
 
 > **[来源: [lapin crates.io](https://crates.io/crates/lapin)]**
 
-`lapin` 是 Rust 生态中主流的 **AMQP 0-9-1** 异步客户端，主要面向 **RabbitMQ** 消息代理。它基于纯 Rust 实现 AMQP 协议，提供运行时无关的异步 API（默认集成 Tokio），适用于任务队列、事件驱动微服务、发布-订阅、RPC 等场景。
+`lapin` 是 Rust 生态中主流的 **AMQP 0-9-1** 异步（Async）客户端，主要面向 **RabbitMQ** 消息代理。它基于纯 Rust 实现 AMQP 协议，提供运行时（Runtime）无关的异步 API（默认集成 Tokio），适用于任务队列、事件驱动微服务、发布-订阅、RPC 等场景。
 
 > [来源: [lapin docs.rs](https://docs.rs/lapin/latest/lapin/)]
 
@@ -50,7 +50,7 @@
 | **运行时绑定** | `tokio`（默认）/ `smol` / `async-global-executor` feature 可选 | 不强制锁定运行时 |
 | **消息模型** | 队列 + 交换机 + 绑定 + 路由键 | 灵活的消息路由语义 |
 | **可靠性** | Publisher Confirm、事务、QoS prefetch、ACK/NACK | 细粒度控制投递保证 |
-| **类型安全** | `Connection` / `Channel` / `Consumer` 等结构体静态化 | 编译期区分发布/消费语义 |
+| **类型安全** | `Connection` / `Channel` / `Consumer` 等结构体（Struct）静态化 | 编译期区分发布/消费语义 |
 
 > [来源: [lapin GitHub Repository](https://github.com/amqp-rs/lapin)]
 
@@ -258,7 +258,7 @@ let conn = Connection::connect(&addr, props).await?;
 | 未确认发布即退出 | 进程崩溃后消息可能仍在客户端缓冲区，未到达 Broker | 使用 Publisher Confirm 并在退出前 `wait_for_confirms` |
 | 未处理 ACK/NACK | 消息被重复投递或堆积，导致队列不断增长 | 成功处理立即 `ack`，失败按策略 `nack`/`reject` |
 | 同一 Channel 跨任务共享并发发布 | AMQP 通道非线程安全，可能产生帧交错或协议错误 | 每个任务/线程持有独立 Channel，或使用连接池 |
-| 连接泄漏 | 连接未关闭导致文件描述符与 Broker 资源耗尽 | 使用 `drop(conn)` 或 RAII 作用域管理连接生命周期 |
+| 连接泄漏 | 连接未关闭导致文件描述符与 Broker 资源耗尽 | 使用 `drop(conn)` 或 RAII 作用域管理连接生命周期（Lifetimes） |
 | 无限 prefetch | 消费者一次性接收过多消息，内存爆炸或处理超时 | 设置合理的 `basic_qos(prefetch_count)` |
 | 自动 ack + 处理失败 | 消息未真正处理但已被确认，造成消息丢失 | `BasicConsumeOptions { no_ack: false, .. }` 并手动 ack |
 | 忽略通道关闭错误 | 后续操作全部失败且难以定位 | 监听 `channel.on_error` 回调并重建 Channel |
@@ -272,12 +272,12 @@ let conn = Connection::connect(&addr, props).await?;
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-`lapin` 通过类型系统将 AMQP 客户端语义静态化：
+`lapin` 通过类型系统（Type System）将 AMQP 客户端语义静态化：
 
 | 维度 | API | 类型系统价值 |
 |:--|:--|:--|
 | 发布/消费区分 | `basic_publish` vs `basic_consume` | 编译期防止在 Consumer 上调用发布操作 |
-| 连接/通道分层 | `Connection` / `Channel` | 明确资源所有权，避免跨线程共享通道 |
+| 连接/通道分层 | `Connection` / `Channel` | 明确资源所有权（Ownership），避免跨线程共享通道 |
 | 确认语义 | `PublisherConfirm` / `Confirmation` | 必须显式等待确认，减少未处理发布 |
 | 异步 trait | `Consumer` 实现 `Stream` | 与 futures/tokio 生态组合，`Send` 保证跨任务安全 |
 | 路由类型 | `ExchangeKind` 枚举（Enum） | 交换机类型在编译期选择，避免字符串拼写错误 |

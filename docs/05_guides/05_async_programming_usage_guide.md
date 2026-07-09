@@ -5,11 +5,11 @@
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 >
-> **层次定位**: L3-L6 高级-生态 / 异步工程实践
+> **层次定位**: L3-L6 高级-生态 / 异步（Async）工程实践
 > **前置依赖**: [concept L3 Async](../../concept/03_advanced/01_async/02_async.md) · [docs 设计模式](05_design_patterns_usage_guide.md)
 > **后置延伸**: [docs 嵌入式](05_embedded_rust_guide.md) · [knowledge Async](../../knowledge/03_advanced/async/README.md)
-> **跨层映射**: L3→L6 运行时映射 | 语义→实现
-> **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性 → Tokio 调度正确性
+> **跨层映射**: L3→L6 运行时（Runtime）映射 | 语义→实现
+> **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性（Coherence） → Tokio 调度正确性
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]
@@ -84,7 +84,7 @@
 **Rust 版本**: 1.96.1+ (Edition 2024)
 **状态**: ✅ 已完成
 
-> **AFIDT 状态提示（2026-06-26）**：`async fn in dyn trait`（AFIDT）仍为 nightly 实验特性，暂无稳定时间表。生产代码中 `dyn Trait` 的异步方法请继续使用 `async-trait`；AFIT（`async fn in trait`）已在 Rust 1.75+ stable，可用于泛型/`impl Trait` 场景。
+> **AFIDT 状态提示（2026-06-26）**：`async fn in dyn trait`（AFIDT）仍为 nightly 实验特性，暂无稳定时间表。生产代码中 `dyn Trait` 的异步方法请继续使用 `async-trait`；AFIT（`async fn in trait`）已在 Rust 1.75+ stable，可用于泛型（Generics）/`impl Trait` 场景。
 
 ---
 
@@ -347,7 +347,7 @@ async fn main() {
 > **相关文档**: [Async Closures 深度指南](../../crates/c06_async/docs/async_closures_guide.md)
 
 Rust 1.85 稳定了 async closures，引入了 `AsyncFn`、`AsyncFnMut`、`AsyncFnOnce` trait family，
-解决了旧范式 `|| async move { ... }` 的三大痛点：强制 move、Send bound 表达困难、类型系统不统一。
+解决了旧范式 `|| async move { ... }` 的三大痛点：强制 move、Send bound 表达困难、类型系统（Type System）不统一。
 
 #### 基础语法 {#基础语法}
 
@@ -378,8 +378,8 @@ let moved = async move |x: i32| {
 
 | 维度 | 旧范式 `\|x\| async move { ... }` | Async Closure `async \|x\| { ... }` (1.85.0+) |
 |------|----------------------------------|-----------------------------------------------|
-| **语法** | 闭包返回 async block | `async` 关键字修饰闭包 |
-| **捕获方式** | 强制 `move`（所有权转移） | 支持借用（与常规闭包一致） |
+| **语法** | 闭包（Closures）返回 async block | `async` 关键字修饰闭包 |
+| **捕获方式** | 强制 `move`（所有权（Ownership）转移） | 支持借用（Borrowing）（与常规闭包一致） |
 | **返回类型** | `impl Future<Output = T>` | `impl AsyncFn(...) -> T` |
 | **Trait 实现** | `FnOnce` / `Fn` / `FnMut` | `AsyncFnOnce` / `AsyncFn` / `AsyncFnMut` |
 | **Send bound** | 复杂（需显式标注） | 自动推断（通过关联类型） |

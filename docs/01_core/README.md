@@ -138,7 +138,7 @@ println!("'{}' 的长度是 {}", s1, len); // ✅ s1 仍然有效
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. **任意数量**的不可变引用 (`&T`)
+1. **任意数量**的不可变引用（Mutable Reference） (`&T`)
 2. **仅一个**可变引用 (`&mut T`)
 3. 两者**不能同时存在**
 
@@ -288,7 +288,7 @@ unsafe {
 | Type Safety | [Type safety](https://en.wikipedia.org/wiki/Type_safety) | 编译期排除未定义行为 | Borrow checker |
 | RAII | [Resource acquisition is initialization](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) | 构造获取、析构释放 | `Drop` + ownership |
 | Pattern Matching | [Pattern matching](https://en.wikipedia.org/wiki/Pattern_matching) | 解构与绑定 | `match`, `if let` |
-| Zero-cost Abstraction | [Zero-overhead principle](https://en.wikipedia.org/wiki/Zero-overhead_principle) | 高级特性不引入运行时开销 | 迭代器、泛型（Generics） Monomorphization |
+| Zero-cost Abstraction | [Zero-overhead principle](https://en.wikipedia.org/wiki/Zero-overhead_principle) | 高级特性不引入运行时（Runtime）开销 | 迭代器（Iterator）、泛型（Generics） Monomorphization |
 
 ---
 

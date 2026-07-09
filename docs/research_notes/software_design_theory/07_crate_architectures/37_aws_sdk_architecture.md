@@ -37,7 +37,7 @@
 
 > **[来源: [aws-sdk-rust GitHub](https://github.com/awslabs/aws-sdk-rust)]**
 
-`aws-sdk-rust` 是 AWS 官方提供的 Rust 语言 SDK，基于 **Smithy** 模型代码生成，为每个 AWS 服务提供独立 crate（如 `aws-sdk-s3`、`aws-sdk-dynamodb`）。它深度集成 Tokio 异步运行时，提供强类型、可组合的操作构造器与统一的凭证、区域、重试配置机制。
+`aws-sdk-rust` 是 AWS 官方提供的 Rust 语言 SDK，基于 **Smithy** 模型代码生成，为每个 AWS 服务提供独立 crate（如 `aws-sdk-s3`、`aws-sdk-dynamodb`）。它深度集成 Tokio 异步（Async）运行时（Runtime），提供强类型、可组合的操作构造器与统一的凭证、区域、重试配置机制。
 
 > [来源: [AWS SDK for Rust Developer Guide](https://docs.aws.amazon.com/sdk-for-rust/latest/dg/welcome.html)]
 
@@ -106,7 +106,7 @@ let dynamodb = aws_sdk_dynamodb::Client::new(&sdk_config);
 
 ### 2.2 强类型操作构造器 {#22-强类型操作构造器}
 
-每个 AWS API 操作都是一个 Builder，链式调用设置请求参数后通过 `.send().await` 发起调用。这种模式将参数验证与请求构造分离，并利用 Rust 类型系统防止缺失必填字段。
+每个 AWS API 操作都是一个 Builder，链式调用设置请求参数后通过 `.send().await` 发起调用。这种模式将参数验证与请求构造分离，并利用 Rust 类型系统（Type System）防止缺失必填字段。
 
 ```rust,ignore
 let resp = client
@@ -148,7 +148,7 @@ while let Some(obj) = paginator.next().await {
 | 硬编码 access key | 凭证泄露、轮换困难 | 使用 IAM Role、SSO、Secrets Manager 或凭证链 |
 | 未处理分页 | 只拿到第一页数据 | 使用 `into_paginator()` 或手动处理 `next_continuation_token` |
 | 在 Lambda/容器内依赖 IMDSv1 | 元数据访问失败或安全审计不通过 | 使用 IMDSv2 或环境角色凭证 |
-| 混淆 `send()` 之前的所有权 | Builder 消费后不可复用 | 每次操作重新构造 Builder 或 clone 必要参数 |
+| 混淆 `send()` 之前的所有权（Ownership） | Builder 消费后不可复用 | 每次操作重新构造 Builder 或 clone 必要参数 |
 
 > [来源: [AWS SDK for Rust Error Handling](https://docs.aws.amazon.com/sdk-for-rust/latest/dg/error-handling.html)]
 

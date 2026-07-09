@@ -176,10 +176,10 @@ flowchart LR
 
 | Crate | 核心概念 | 外部依赖 | 特性标志 | 示例数量 |
 |-------|----------|----------|----------|----------|
-| c01_ownership | 所有权（Ownership）、借用（Borrowing）、生命周期 | tokio, serde | - | 15+ |
+| c01_ownership | 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes） | tokio, serde | - | 15+ |
 | c02_type_system | 类型系统（Type System）、泛型（Generics） | serde, tokio, futures | - | 20+ |
 | c03_control_fn | 控制流、函数、异步 | tokio, tracing | async, std | 12+ |
-| c04_generic | 泛型、Trait、GAT | rayon, itertools | - | 18+ |
+| c04_generic | 泛型（Generics）、Trait、GAT | rayon, itertools | - | 18+ |
 | c05_threads | 并发、同步、锁 | crossbeam, rayon | std, tokio | 25+ |
 | c06_async | 异步运行时、Future | tokio, actix-web, axum | full | 30+ |
 | c07_process | 进程、IPC、信号 | nix, memmap2 | async, unix | 15+ |
@@ -381,7 +381,7 @@ sequenceDiagram
 **原因**:
 
 - 避免代码重复
-- 统一错误处理
+- 统一错误处理（Error Handling）
 - 共享测试工具
 - 可配置特性标志
 

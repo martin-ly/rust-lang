@@ -115,7 +115,7 @@ mindmap
 | **L1 基础** | 类型参数 T：占位符类型 | 公理：∀T, T 是具体类型的抽象 | 定理 G1：泛型保证类型安全 |
 | **L2 约束** | Trait Bound：能力要求 | 规则：T: Trait ⟹ T 实现 Trait | 定理 G2：约束满足则调用安全 |
 | **L3 关联** | Associated Type：输出类型 | 规则：impl 中确定具体类型 | 定理 G3：关联类型唯一性 |
-| **L4 单态化** | Monomorphization：代码生成 | 规则：每个 T 生成独立实例 | 定理 G4：零运行时开销 |
+| **L4 单态化** | Monomorphization：代码生成 | 规则：每个 T 生成独立实例 | 定理 G4：零运行时（Runtime）开销 |
 | **L5 高阶** | HRTB：高阶 Trait Bound | 规则：∀'a, T: Trait<'a> | 定理 G5：生命周期泛化 |
 
 > 形式化理论详见：[类型构造能力](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) | [Trait 系统形式化](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)
@@ -440,14 +440,14 @@ fn print_all(items: Vec<Box<dyn Display>>) {
 
 - [泛型集合与 GAT](../../../crates/c04_generic/examples/generic_collections_demo.rs)、[generic_gat_demo.rs](../../../crates/c04_generic/examples/generic_gat_demo.rs)
 - [HRTB、特化与 Trait 对象](../../../crates/c04_generic/examples/generic_hrtb_demo.rs)、[generic_specialization_demo.rs](../../../crates/c04_generic/examples/generic_specialization_demo.rs)、[generic_trait_object_demo.rs](../../../crates/c04_generic/examples/generic_trait_object_demo.rs)
-- [类型状态与零成本抽象](../../../crates/c04_generic/examples/generic_type_state_demo.rs)、[generic_zero_cost_demo.rs](../../../crates/c04_generic/examples/generic_zero_cost_demo.rs)
+- [类型状态与零成本抽象（Zero-Cost Abstraction）](../../../crates/c04_generic/examples/generic_type_state_demo.rs)、[generic_zero_cost_demo.rs](../../../crates/c04_generic/examples/generic_zero_cost_demo.rs)
 - [Rust 1.95/1.96 新特性](../../06_toolchain/06_19_rust_1_96_features.md)（详见 Rust 1.96 稳定特性全景）
 
 ## 🔗 相关资源 {#相关资源}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [类型系统速查卡](02_type_system.md)
+- [类型系统（Type System）速查卡](02_type_system.md)
 - [Rust 官方文档 - 泛型](https://doc.rust-lang.org/book/ch10-00-generics.html)
 
 ---
@@ -487,7 +487,7 @@ fn init_array<T, const N: usize>(init: impl Fn(usize) -> T) -> [T; N] {
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-**改进**: 支持对非静态常量的引用，应用于泛型配置
+**改进**: 支持对非静态常量的引用（Reference），应用于泛型配置
 
 ```rust,ignore
 // Rust 1.92.0 新特性
@@ -531,7 +531,7 @@ const REF: &i32 = &CONFIG;  // ✅ 现在支持
 - [类型系统速查卡](02_type_system.md) - 类型系统基础
 - [Trait 系统速查卡](02_type_system.md#trait-系统) - Trait 与泛型
 - [生命周期速查卡](02_type_system.md) - 生命周期参数
-- [所有权系统速查卡](02_ownership_cheatsheet.md) - 所有权与泛型
+- [所有权（Ownership）系统速查卡](02_ownership_cheatsheet.md) - 所有权与泛型
 
 ---
 

@@ -46,7 +46,7 @@
 | 维度 | 设计选择 | 工程价值 |
 |:--|:--|:--|
 | **数据模型** | Event / Breadcrumb / Transaction / Span | 将错误、上下文与性能追踪统一为事件流 |
-| **并发模型** | 线程本地 `Hub` + 全局默认 `Hub` | 在异步/多线程场景下隔离上下文 |
+| **并发模型** | 线程本地 `Hub` + 全局默认 `Hub` | 在异步（Async）/多线程场景下隔离上下文 |
 | **集成能力** | panic、tracing、anyhow、tower、actix 等可选集成 | 不改变业务代码即可捕获关键信号 |
 | **传输层** | 默认 `reqwest` + `native-tls` / `rustls` 可选 | 与现有 HTTP/TLS 栈对齐 |
 | **初始化模型** | `sentry::init` 返回 `ClientInitGuard`，drop 时 flush | RAII 保证退出时事件不丢失 |
@@ -90,7 +90,7 @@ graph TD
 | `Hub` | 管理当前线程/异步任务关联的 Client 与 Scope 栈 | `Hub::current`, `Hub::with` |
 | `Scope` | 为事件附加上下文：tags、user、breadcrumbs、extra、contexts | `configure_scope`, `with_scope` |
 | `Event` | 上报单元：异常、消息、线程、堆栈等 | `capture_event`, `capture_error` |
-| `Transaction` / `Span` | 性能监控：追踪请求生命周期 | `start_transaction`, `start_child`, `finish` |
+| `Transaction` / `Span` | 性能监控：追踪请求生命周期（Lifetimes） | `start_transaction`, `start_child`, `finish` |
 
 > [来源: [sentry Client Docs](https://docs.rs/sentry/latest/sentry/struct.Client.html)]
 
@@ -161,11 +161,11 @@ tx.finish();
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-| 维度 | API | 类型系统价值 |
+| 维度 | API | 类型系统（Type System）价值 |
 |:--|:--|:--|
 | 初始化 Guard | `ClientInitGuard` | RAII 保证 Client 生命周期与 flush 行为 |
 | Hub 绑定 | `SentryFuture` / `SentryFutureExt` | 在异步 Future 执行期间静态绑定 Hub |
-| Scope 修改 | `configure_scope<F: FnOnce(&mut Scope)>` | 编译期保证 Scope 借用的独占性 |
+| Scope 修改 | `configure_scope<F: FnOnce(&mut Scope)>` | 编译期保证 Scope 借用（Borrowing）的独占性 |
 | 事件构造 | `Event<'static>` / `protocol` 模块（Module） | 将动态 JSON 事件约束为类型化结构 |
 | 集成 trait | `Integration` | 通过 trait 对象扩展 panic/tracing/anyhow 等集成 |
 
@@ -207,10 +207,10 @@ tx.finish();
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [Tokio 异步运行时架构](06_tokio_architecture.md)
+- [Tokio 异步运行时（Runtime）架构](06_tokio_architecture.md)
 - [Tracing 可观测性架构](18_tracing_architecture.md) — 与 sentry-tracing 集成
 - [Tower 中间件抽象架构](02_tower_architecture.md) — sentry-tower 集成
-- [错误处理深入](../../../../concept/02_intermediate/15_error_handling_deep_dive.md)
+- [错误处理（Error Handling）深入](../../../../concept/02_intermediate/15_error_handling_deep_dive.md)
 - [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
 
 ---

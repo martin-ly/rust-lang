@@ -96,7 +96,7 @@
 | :--- | :--- |
 | 所有权（Ownership） | [ownership_model](../formal_methods/10_ownership_model.md) |
 | 借用（Borrowing） | [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) |
-| 生命周期 | lifetime_formalization |
+| 生命周期（Lifetimes） | lifetime_formalization |
 | 类型系统（Type System） | [type_system_foundations](../type_theory/10_type_system_foundations.md) |
 | 型变 | [variance_theory](../type_theory/10_variance_theory.md) |
 | 异步（Async） | [async_state_machine](../formal_methods/10_async_state_machine.md) |
@@ -148,7 +148,7 @@
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-- 五模型（同步、异步、并发、并行、分布式）✅
+- 五模型（同步、异步（Async）、并发、并行、分布式）✅
 - 可选扩展：Actor（actix）、CSP（channel）、事件溯源（02_complete_43 Event Sourcing）
 - **层次推进**：三阶段已完成；见 [CONTENT_ENHANCEMENT](../10_content_enhancement.md) 层次推进计划
 
@@ -199,12 +199,12 @@
 
 - **设计模式**：每模式含 Def/Axiom/定理、Rust 代码示例、证明思路、**典型场景**、**相关模式**、**实现变体**、**反例**、与理论衔接（23 模式均有典型场景、相关模式、实现变体；13 反例）
 - **43 完全**：20 种扩展模式**全部**含 Rust 代码示例（Domain Model、Repository、DTO、Event Sourcing、Table Data Gateway、Active Record、Gateway、MVC、Front Controller、Remote Facade、Lazy Load、Plugin、Optimistic Offline Lock 等）
-- **Rust Idioms**：RAII、Newtype、类型状态、**Error handling**、**Option/Result 组合**、**Cow**、**智能指针选型**；层次推进 L1→L2→L3
+- **Rust Idioms**：RAII、Newtype、类型状态、**Error handling**、**Option/Result 组合**、**Cow**、**智能指针（Smart Pointer）选型**；层次推进 L1→L2→L3
 - **执行模型**：形式化定义、操作语义、Rust 示例、**典型场景**、与 async/borrow 衔接（五模型）
 - **组合工程**：CE-T1–T3 完整证明思路、**Builder+Factory、Repository+Service+DTO 完整代码示例**、与 ownership/borrow/trait 衔接
 - **边界体系**：安全/支持/表达三维矩阵、**场景化 Safe 决策 3 例**、**模式选取与边界判定完整流程**、反例
 - **Rust Idioms**：RAII、Newtype、类型状态（Def/Axiom/定理、典型场景、常见陷阱、与 GoF 衔接）
-- **反模式**：13 反例索引、反模式分类、**代码示例**（所有权、借用、过度泛型、Clone 满足借用）、**规避策略实质指南**、与 FORMAL_PROOF_SYSTEM_GUIDE 衔接
+- **反模式**：13 反例索引、反模式分类、**代码示例**（所有权（Ownership）、借用（Borrowing）、过度泛型（Generics）、Clone 满足借用）、**规避策略实质指南**、与 FORMAL_PROOF_SYSTEM_GUIDE 衔接
 
 ---
 

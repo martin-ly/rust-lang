@@ -59,9 +59,9 @@
 | 成果 | 机构/作者 | 年份 | 形式化范围 | 证明助手/工具 | 与本项目对应 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **RustBelt** | MPI-SWS (Jung et al.) | 2018 | 所有权（Ownership）、借用（Borrowing）、MIR 级 | Iris (Coq) | ownership_model, borrow_checker_proof, [coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)（T-OW2/BR1/TY3 骨架） |
-| **Tree Borrows** | ETH (PLDI 2025) | 2025 | 借用模型、树结构、54% 更少拒绝 | Iris (Coq)、Rocq | borrow_checker_proof 演进；Distinguished Paper |
+| **Tree Borrows** | ETH (PLDI 2025) | 2025 | 借用（Borrowing）模型、树结构、54% 更少拒绝 | Iris (Coq)、Rocq | borrow_checker_proof 演进；Distinguished Paper |
 | **RustBelt Meets Relaxed Memory** | MPI-SWS | 2020 | 松弛内存、Arc、原子操作（Atomic Operations） | Iris (Coq) | formal_methods Phase 4（部分） |
-| **Rust Distilled** | DBLP | - | 高层所有权、无生命周期 | - | ownership_model（高层部分） |
+| **Rust Distilled** | DBLP | - | 高层所有权（Ownership）、无生命周期（Lifetimes） | - | ownership_model（高层部分） |
 | **Aeneas** | INRIA 等 | 2023+ | Safe Rust → Coq/F*/HOL4/Lean | 多后端 | [AENEAS_INTEGRATION_PLAN](10_aeneas_integration_plan.md) |
 | **coq-of-rust** | - | 2023+ | THIR → Rocq，借用与 effect | Rocq (Coq) | 无直接对应 |
 | **Crux-MIR** | Galois | 2024 | 比特级精确、密码学验证 | Crux | 无直接对应 |
@@ -96,7 +96,7 @@
 
 - **论文**: RustBelt Meets Relaxed Memory
 - **形式化**: 松弛内存、Arc 数据竞争、synchronized ghost state
-- **本项目对应**: `formal_methods` Phase 4（MaybeUninit、原子操作）— 仅 Def 级
+- **本项目对应**: `formal_methods` Phase 4（MaybeUninit、原子操作（Atomic Operations））— 仅 Def 级
 - **差距**: 无松弛内存模型；无 Arc 形式化；无 ghost state 构造
 
 ### 2.3 RustSEM (K-Framework, 2024) {#23-rustsem-k-framework-2024}
@@ -129,7 +129,7 @@
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
-- **形式化**: 比特级精确、密码学模块验证
+- **形式化**: 比特级精确、密码学模块（Module）验证
 - **本项目对应**: 无
 - **差距**: 无比特级模型
 
@@ -169,9 +169,9 @@
 > **来源**: [Kani Rust Verifier](https://github.com/model-checking/kani)
 
 - **方法**: **位精确模型检查（bit-precise model checking）**，基于 CBMC；通过 `#[kani::proof]` harness 与 `kani::any()` 符号输入验证属性。
-- **覆盖范围**: unsafe 块、内存安全（空指针、UAF、越界）、panic、算术溢出、用户断言。
+- **覆盖范围**: unsafe 块、内存安全（Memory Safety）（空指针、UAF、越界）、panic、算术溢出、用户断言。
 - **与本项目 PROOF_INDEX 映射**:
-  - 内存安全定理：验证 `Theorem 5` 在 unsafe 子集上的运行时实例。
+  - 内存安全定理：验证 `Theorem 5` 在 unsafe 子集上的运行时（Runtime）实例。
   - 数据竞争自由：通过符号执行检查 `Theorem 1` 的并发路径。
 - **差距**: 无并发支持；无法给出数学证明，只能给出有界验证/反例。
 
@@ -194,7 +194,7 @@
 - **覆盖范围**: Safe Rust 功能正确性；最近扩展线性 ghost 类型以支持部分 unsafe 代码。
 - **与本项目 PROOF_INDEX 映射**:
   - 函数合约/循环不变式：对应 `ownership_model` / `borrow_checker_proof` 中的定理与引理。
-  - 预言变量（prophecy）编码可变借用：与 Aeneas 的 CPV 互补。
+  - 预言变量（prophecy）编码可变借用（Mutable Borrow）：与 Aeneas 的 CPV 互补。
 - **差距**: 无 Why3/Coma 翻译；无 Pearlite 规范库。
 
 ### 2.13 Miri {#213-miri}
@@ -245,7 +245,7 @@
 | 所有权与借用 | RustBelt, RustSEM | 部分（语言级有，内存级/机器证明无） |
 | 生命周期 | RustBelt（间接） | 部分 |
 | 类型系统（Type System） | RustBelt, Aeneas | 部分 |
-| 异步与 Pin | - | 无国际直接对标 |
+| 异步（Async）与 Pin | - | 无国际直接对标 |
 | 松弛内存/原子 | RustBelt Meets Relaxed Memory | 未覆盖 |
 
 ---

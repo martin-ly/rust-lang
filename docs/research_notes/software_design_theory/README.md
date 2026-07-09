@@ -1,6 +1,6 @@
 > **⚠️ 历史文档提示**：
 >
-> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用（Reference）。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 >
@@ -72,7 +72,7 @@
 | [00_MASTER_INDEX](../../00_master_index.md) | 主索引、层次、边界、扩展路线 |
 | [01_design_patterns_formal](01_design_patterns_formal/README.md) | 设计模式形式分析（GoF 23） |
 | [02_workflow_safe_complete_models](02_workflow_safe_complete_models/README.md) | 23 安全 vs 43 完全模型 |
-| [03_execution_models](03_execution_models/README.md) | 同步/异步/并发/并行/分布式 |
+| [03_execution_models](03_execution_models/README.md) | 同步/异步（Async）/并发/并行/分布式 |
 | [04_compositional_engineering](04_compositional_engineering/README.md) | 组合软件工程有效性形式论证 |
 | [05_boundary_system](05_boundary_system/README.md) | 边界体系统一分析 |
 | [06_rust_idioms](06_rust_idioms.md) | Rust 惯用模式（RAII、Newtype、类型状态） |
@@ -180,7 +180,7 @@
 | 43 完全 | 23 + 扩展 20（Fowler EAA/DDD） |
 | 等价表达 | 与 GoF 语义完全一致 |
 | 近似表达 | 可实现，但实现方式不同 |
-| CE-T1/T2/T3 | 组合保持内存安全/数据竞争自由/类型安全 |
+| CE-T1/T2/T3 | 组合保持内存安全（Memory Safety）/数据竞争自由/类型安全 |
 
 ---
 
@@ -192,9 +192,9 @@
 | Factory Method 与 Abstract Factory 区别？ | 单产品 vs 产品族；见 [创建型模式对比](01_design_patterns_formal/README.md#创建型模式对比) |
 | Observer 用 channel 还是回调？ | 跨线程用 channel；单线程简单场景可用 RefCell+回调 |
 | 如何选执行模型？ | 见 [06_boundary_analysis](03_execution_models/06_boundary_analysis.md) 决策树；[03_execution_models README](03_execution_models/README.md) 含典型场景与设计模式组合 |
-| 泛型（Generics） vs dyn Trait？ | 编译期确定用泛型（零成本）；运行时选择用 `Box<dyn Trait>` |
+| 泛型（Generics） vs dyn Trait？ | 编译期确定用泛型（零成本）；运行时（Runtime）选择用 `Box<dyn Trait>` |
 | 何时用 Box / Rc / Arc？ | 独占用 Box；单线程共享用 Rc；跨线程共享用 Arc |
-| 组合多模块如何验证？ | 见 [02_effectiveness_proofs](04_compositional_engineering/02_effectiveness_proofs.md) 验证工作流；CE-T1/T2/T3 检查清单 |
+| 组合多模块（Module）如何验证？ | 见 [02_effectiveness_proofs](04_compositional_engineering/02_effectiveness_proofs.md) 验证工作流；CE-T1/T2/T3 检查清单 |
 | 模式组合如何选？ | Builder+Factory、Decorator+Strategy、Composite+Visitor 见 [03_integration_theory](04_compositional_engineering/03_integration_theory.md) 多层次组合链条 |
 
 ---
@@ -241,7 +241,7 @@
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

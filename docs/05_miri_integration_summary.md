@@ -77,12 +77,12 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 
 | Crate | 测试文件 | 主要内容 |
 |-------|----------|----------|
-| c01_ownership_borrow_scope | `src/miri_tests.rs` | Tree Borrows 验证，重新借用模式 |
+| c01_ownership_borrow_scope | `src/miri_tests.rs` | Tree Borrows 验证，重新借用（Borrowing）模式 |
 | c02_type_system | `src/miri_tests.rs` | MaybeUninit, NonNull, ManuallyDrop |
-| c03_control_fn | `src/miri_tests.rs` | 控制流内存安全，指针操作 |
-| c04_generic | `src/miri_tests.rs` | 泛型内存操作，PhantomData |
+| c03_control_fn | `src/miri_tests.rs` | 控制流内存安全（Memory Safety），指针操作 |
+| c04_generic | `src/miri_tests.rs` | 泛型（Generics）内存操作，PhantomData |
 | c05_threads | `src/miri_tests.rs` | 原子操作（Atomic Operations），自旋锁，内存序 |
-| c06_async | `src/miri_tests.rs` | Future, Pin, 异步内存安全 |
+| c06_async | `src/miri_tests.rs` | Future, Pin, 异步（Async）内存安全 |
 | c07_process | `src/miri_tests.rs` | FFI 类型，进程结构 |
 | c08_algorithms | `src/miri_tests.rs` | 排序，链表，树结构 |
 | c09_design_pattern | `src/miri_tests.rs` | 单例，观察者，工厂模式 |
@@ -209,7 +209,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 
 1. **基础内存安全测试**: 验证基本操作
 2. **Unsafe 代码测试**: 验证裸指针、MaybeUninit 等
-3. **并发测试**: 原子操作、内存序
+3. **并发测试**: 原子操作（Atomic Operations）、内存序
 4. **UB 检测测试**: 标记为 `#[ignore]` 的应该失败的测试
 
 ## 注意事项 {#注意事项}

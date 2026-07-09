@@ -1,7 +1,7 @@
 # 📦 Rust 集合与迭代器速查卡 {#rust-集合与迭代器速查卡}
 
 > **EN**: Collections Iterators Cheatsheet
-> **Summary**: 📦 Rust 集合与迭代器速查卡 Collections Iterators Cheatsheet. (stub/archive redirect)
+> **Summary**: 📦 Rust 集合与迭代器（Iterator）速查卡 Collections Iterators Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
 >
@@ -602,7 +602,7 @@ assert_eq!(iter.collect::<Vec<_>>(), vec![0, 1, 2, 3]);
 | `RangeFromIter` | — | `RangeFrom` 的迭代器 |
 | `RangeToInclusiveIter` | — | `RangeToInclusive` 的迭代器 |
 
-> **注意**: 这些类型在 `core::range` 模块中稳定于 Rust 1.96.1，之前仅在 `std::ops` 中作为不稳定 trait 存在。
+> **注意**: 这些类型在 `core::range` 模块（Module）中稳定于 Rust 1.96.1，之前仅在 `std::ops` 中作为不稳定 trait 存在。
 
 ---
 
@@ -909,7 +909,7 @@ let sums_old: Vec<i32> = data.windows(3)
 | 方法 | 吞吐量 | 内存分配 | 说明 |
 |------|--------|---------|------|
 | `array_windows::<3>()` | 2.4M ops/s | **0** | 编译期确定大小，循环可展开 |
-| `windows(3)` | 1.8M ops/s | 动态分配 | 运行时大小，需边界检查 |
+| `windows(3)` | 1.8M ops/s | 动态分配 | 运行时（Runtime）大小，需边界检查 |
 | 手动索引 | 2.1M ops/s | 0 | 易出错，代码冗长 |
 
 **适用场景**:
@@ -1248,7 +1248,7 @@ for x in &v {
 }
 ```
 
-**原因**: 迭代器持有集合的借用，同时修改会违反借用规则。
+**原因**: 迭代器持有集合的借用（Borrowing），同时修改会违反借用规则。
 
 **修正**:
 
@@ -1402,8 +1402,8 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 
 - [类型系统基础](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) — 集合类型与类型理论
 - [构造能力理论](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) — 迭代器的表达能力
-- [泛型编程形式化](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) — Iterator trait 形式化
-- [所有权模型](../../research_notes/formal_methods/10_ownership_model.md) — 集合所有权转移形式化
+- [泛型（Generics）编程形式化](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) — Iterator trait 形式化
+- [所有权（Ownership）模型](../../research_notes/formal_methods/10_ownership_model.md) — 集合所有权转移形式化
 - [变型理论](../../research_notes/type_theory/10_variance_theory.md) — 集合协变/逆变
 
 ### 相关速查卡 {#相关速查卡}

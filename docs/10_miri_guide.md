@@ -6,7 +6,7 @@
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
 
-本文档介绍如何在项目中使用 Miri 进行内存安全测试。
+本文档介绍如何在项目中使用 Miri 进行内存安全（Memory Safety）测试。
 
 ## 目录 {#目录}
 >
@@ -51,10 +51,10 @@ Miri 可以检测的问题：
 
 - **内存安全（Memory Safety）**: Use-after-free, double-free, 内存泄漏
 - **数据竞争**: 线程间不安全的数据访问
-- **无效内存访问**: 空指针解引用, 越界访问
+- **无效内存访问**: 空指针解引用（Reference）, 越界访问
 - **对齐违规**: 未对齐的内存访问
 - **未初始化内存**: 读取未初始化的值
-- **类型违规**: 违反 Rust 类型系统的操作
+- **类型违规**: 违反 Rust 类型系统（Type System）的操作
 
 ## 安装 Miri {#安装-miri}
 >
@@ -119,7 +119,7 @@ Miri 支持两种别名模型来检查内存访问的有效性：
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 更严格的模型
-- 基于栈的借用跟踪
+- 基于栈的借用（Borrowing）跟踪
 - 与某些合法的 unsafe 模式不兼容
 
 ### Tree Borrows (推荐) {#tree-borrows-推荐}
@@ -371,7 +371,7 @@ mod non_miri_tests {
 
 1. **为所有 unsafe 代码编写 Miri 测试**
    - 确保 unsafe 块的安全性
-   - 验证原始指针操作
+   - 验证原始指针（Raw Pointer）操作
 2. **使用 Tree Borrows 模型**
    - 更友好的 unsafe 代码支持
    - 减少误报

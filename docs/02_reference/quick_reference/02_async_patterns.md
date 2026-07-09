@@ -144,7 +144,7 @@ mindmap
 | :--- | :--- | :--- | :--- |
 | **L1 基础** | Future：异步计算抽象 | 公理：Future 可轮询至完成 | 定理 A1：poll 契约保证进度 |
 | **L2 状态** | 状态机：async fn 编译结果 | 规则：每个 await 点为一个状态 | 定理 A2：状态机正确模拟控制流 |
-| **L3 固定** | Pin：内存位置固定 | 公理：Pin<&mut T> ⟹ T 不移动 | 定理 A3：Pin 保证自引用安全 |
+| **L3 固定** | Pin：内存位置固定 | 公理：Pin<&mut T> ⟹ T 不移动 | 定理 A3：Pin 保证自引用（Reference）安全 |
 | **L4 执行** | Executor：Future 驱动者 | 规则：轮询 Ready/Pending | 定理 A4：执行器公平性保证 |
 | **L5 唤醒** | Waker：异步通知机制 | 规则：事件→Waker→poll | 定理 A5：无虚假唤醒 |
 
@@ -1204,8 +1204,8 @@ async fn process_stream() {
 
 - [线程与并发速查卡](02_threads_concurrency_cheatsheet.md) - 并发编程对比
 - [错误处理速查卡](02_error_handling_cheatsheet.md) - 异步错误处理
-- [所有权系统速查卡](02_ownership_cheatsheet.md) - 异步中的所有权
-- [智能指针速查卡](02_smart_pointers_cheatsheet.md) - Arc 在异步中的应用
+- [所有权（Ownership）系统速查卡](02_ownership_cheatsheet.md) - 异步中的所有权
+- [智能指针（Smart Pointer）速查卡](02_smart_pointers_cheatsheet.md) - Arc 在异步中的应用
 
 ---
 

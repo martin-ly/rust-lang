@@ -29,7 +29,7 @@
 - [定理与证明策略汇编 {#定理与证明策略汇编}](#定理与证明策略汇编-定理与证明策略汇编)
   - [📑 目录 {#目录}](#-目录-目录)
   - [核心定理索引 {#核心定理索引}](#核心定理索引-核心定理索引)
-  - [一、所有权唯一性定理 (T-OW2) {#一所有权唯一性定理-t-ow2}](#一所有权唯一性定理-t-ow2-一所有权唯一性定理-t-ow2)
+  - [一、所有权（Ownership）唯一性定理 (T-OW2) {#一所有权唯一性定理-t-ow2}](#一所有权唯一性定理-t-ow2-一所有权唯一性定理-t-ow2)
     - [1.1 定理陈述 {#11-定理陈述}](#11-定理陈述-11-定理陈述)
     - [1.2 证明策略 {#12-证明策略}](#12-证明策略-12-证明策略)
     - [1.3 详细证明思路 {#13-详细证明思路}](#13-详细证明思路-13-详细证明思路)
@@ -45,7 +45,7 @@
     - [3.3 进展性 (T-TY1) {#33-进展性-t-ty1}](#33-进展性-t-ty1-33-进展性-t-ty1)
     - [3.4 保持性 (T-TY2) {#34-保持性-t-ty2}](#34-保持性-t-ty2-34-保持性-t-ty2)
     - [3.5 直观理解 {#35-直观理解}](#35-直观理解-35-直观理解)
-  - [四、生命周期有效性定理 (T-LF2) {#四生命周期有效性定理-t-lf2}](#四生命周期有效性定理-t-lf2-四生命周期有效性定理-t-lf2)
+  - [四、生命周期（Lifetimes）有效性定理 (T-LF2) {#四生命周期有效性定理-t-lf2}](#四生命周期有效性定理-t-lf2-四生命周期有效性定理-t-lf2)
     - [4.1 定理陈述 {#41-定理陈述}](#41-定理陈述-41-定理陈述)
     - [4.2 证明策略 {#42-证明策略}](#42-证明策略-42-证明策略)
   - [五、证明技术总结 {#五证明技术总结}](#五证明技术总结-五证明技术总结)
@@ -68,7 +68,7 @@
 | T-OW2 | 所有权唯一性 | ⭐⭐⭐ | 状态机归纳 | ✅ |
 | T-BR1 | 数据竞争自由 | ⭐⭐⭐⭐ | 分离逻辑 | 🔄 |
 | T-TY3 | 类型安全 | ⭐⭐⭐ | 进展+保持 | ✅ |
-| T-LF2 | 引用有效性 | ⭐⭐ | 区域包含 | ✅ |
+| T-LF2 | 引用（Reference）有效性 | ⭐⭐ | 区域包含 | ✅ |
 | SEND-T1 | Send安全 | ⭐⭐ | 构造证明 | ✅ |
 | SYNC-T1 | Sync安全 | ⭐⭐ | 等价推导 | ✅ |
 
@@ -222,7 +222,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 >
-> **学术来源对照**: [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) Theorem 5.2：借用规则在 Iris 分离逻辑下保证无数据竞争；[Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) 进一步用权限树状态机形式化该性质。
+> **学术来源对照**: [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) Theorem 5.2：借用（Borrowing）规则在 Iris 分离逻辑下保证无数据竞争；[Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) 进一步用权限树状态机形式化该性质。
 
 **核心思想**: 借用规则确保对同一内存位置的冲突访问不能并发发生。
 
@@ -260,8 +260,8 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 **规则**: 在任意时刻，对于内存位置l：
 
-- 要么：有一个可变借用`&mut l`
-- 要么：有多个不可变借用`&l`
+- 要么：有一个可变借用（Mutable Borrow）`&mut l`
+- 要么：有多个不可变借用（Immutable Borrow）`&l`
 - 不会同时有可变和不可变借用
 
 **步骤 3: 证明借用规则阻止数据竞争**
@@ -333,7 +333,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
-> **学术来源对照**: Wright & Felleisen (1994) 的经典类型安全证明框架；[RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) 在 λRust 操作语义中复现该框架；[Oxide](https://arxiv.org/abs/1903.00982) 在带 region 的类型系统中给出进展/保持证明。
+> **学术来源对照**: Wright & Felleisen (1994) 的经典类型安全证明框架；[RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) 在 λRust 操作语义中复现该框架；[Oxide](https://arxiv.org/abs/1903.00982) 在带 region 的类型系统（Type System）中给出进展/保持证明。
 
 **经典类型安全证明框架** (Wright & Felleisen, 1994)
 

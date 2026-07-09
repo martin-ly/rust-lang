@@ -34,7 +34,7 @@
   - [2. 基本假设 (Axiom) {#2-基本假设-axiom}](#2-基本假设-axiom-2-基本假设-axiom)
     - [Axiom S1: 补偿幂等性 {#axiom-s1-补偿幂等性}](#axiom-s1-补偿幂等性-axiom-s1-补偿幂等性)
     - [Axiom S2: 偏序无环性 {#axiom-s2-偏序无环性}](#axiom-s2-偏序无环性-axiom-s2-偏序无环性)
-    - [Axiom S3: 最终一致性 {#axiom-s3-最终一致性}](#axiom-s3-最终一致性-axiom-s3-最终一致性)
+    - [Axiom S3: 最终一致性（Coherence） {#axiom-s3-最终一致性}](#axiom-s3-最终一致性-axiom-s3-最终一致性)
   - [3. 定理 (Theorem) {#3-定理-theorem}](#3-定理-theorem-3-定理-theorem)
     - [Theorem S1: Saga 原子性 {#theorem-s1-saga-原子性}](#theorem-s1-saga-原子性-theorem-s1-saga-原子性)
     - [Theorem S2: 补偿终止性 {#theorem-s2-补偿终止性}](#theorem-s2-补偿终止性-theorem-s2-补偿终止性)

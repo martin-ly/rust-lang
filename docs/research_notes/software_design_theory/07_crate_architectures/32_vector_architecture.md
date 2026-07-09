@@ -47,8 +47,8 @@
 | 维度 | 设计选择 | 工程价值 |
 |:--|:--|:--|
 | **索引结构** | HNSW 近似图索引 | 在内存中以较小建索引代价获得亚线性查询性能 |
-| **API 形态** | `Index::build` + `Index::search` 两个核心方法 | 学习曲线低，易于集成到现有异步服务中 |
-| **数据类型** | 泛型向量类型（实现 `Vector` trait 的固定长度数组） | 编译期保证维度一致，避免运行时维度错误 |
+| **API 形态** | `Index::build` + `Index::search` 两个核心方法 | 学习曲线低，易于集成到现有异步（Async）服务中 |
+| **数据类型** | 泛型（Generics）向量类型（实现 `Vector` trait 的固定长度数组） | 编译期保证维度一致，避免运行时（Runtime）维度错误 |
 | **依赖** | 无外部运行时依赖 | 构建速度快，适合嵌入式与边缘设备 |
 | **部署** | 纯内存，不提供持久化 | 索引重建成本低，适合数据可重新生成的场景 |
 
@@ -95,7 +95,7 @@ graph LR
 
 `Index::build` 接收四个参数：
 
-- `vectors`：原始向量集合的引用。
+- `vectors`：原始向量集合的引用（Reference）。
 - `m`：每个节点的最大邻居数，影响索引密度与查询精度。
 - `ef`：扩展因子（expansion factor），影响搜索范围与速度。
 - `seed`：随机种子，保证可复现性。
@@ -138,12 +138,12 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-| 维度 | API | 类型系统价值 |
+| 维度 | API | 类型系统（Type System）价值 |
 |:--|:--|:--|
 | 向量维度 | `Vector` trait / 固定长度数组 | 编译期保证所有向量维度一致 |
 | 索引类型参数 | `Index<V>` | 索引与向量类型绑定，防止搜索时传入错误维度/类型 |
 | 距离类型 | `f64` | 明确标量距离，避免隐式精度转换 |
-| 零拷贝构建 | `Index::build(&vectors, ...)` | 借用原始集合，生命周期由调用者管理 |
+| 零拷贝构建 | `Index::build(&vectors, ...)` | 借用（Borrowing）原始集合，生命周期（Lifetimes）由调用者管理 |
 
 > [来源: [vector API docs](https://docs.rs/vector/latest/vector/)]
 

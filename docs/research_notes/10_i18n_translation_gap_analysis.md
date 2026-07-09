@@ -22,7 +22,7 @@
   - [三、版本差异检测维度 {#三版本差异检测维度}](#三版本差异检测维度-三版本差异检测维度)
   - [四、自动化检测方法 {#四自动化检测方法}](#四自动化检测方法-四自动化检测方法)
     - [4.1 基于 GitHub API 的版本对比 {#41-基于-github-api-的版本对比}](#41-基于-github-api-的版本对比-41-基于-github-api-的版本对比)
-    - [4.2 基于文件哈希的章节一致性检查 {#42-基于文件哈希的章节一致性检查}](#42-基于文件哈希的章节一致性检查-42-基于文件哈希的章节一致性检查)
+    - [4.2 基于文件哈希的章节一致性（Coherence）检查 {#42-基于文件哈希的章节一致性检查}](#42-基于文件哈希的章节一致性检查-42-基于文件哈希的章节一致性检查)
     - [4.3 维护脚本 {#43-维护脚本}](#43-维护脚本-43-维护脚本)
   - [五、关键术语翻译一致性 {#五关键术语翻译一致性}](#五关键术语翻译一致性-五关键术语翻译一致性)
   - [六、差异处理流程 {#六差异处理流程}](#六差异处理流程-六差异处理流程)
@@ -83,7 +83,7 @@ diff <(ls en/src) <(ls zh-CN/src)
 
 已提供 `scripts/maintenance/check_i18n_translation_gap.py`：
 
-- 输入：各语言翻译仓库的 GitHub owner/repo、原版引用。
+- 输入：各语言翻译仓库的 GitHub owner/repo、原版引用（Reference）。
 - 输出：版本差距报告（release tag、latest commit）。
 
 运行方式：
@@ -92,7 +92,7 @@ diff <(ls en/src) <(ls zh-CN/src)
 python scripts/maintenance/check_i18n_translation_gap.py
 ```
 
-术语一致性检查以 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml) 作为权威数据源，脚本可读取该文件并对照各语言翻译中的关键术语使用情况。该文件涵盖所有权、类型系统（Type System）、并发安全（Concurrency Safety）、异步（Async）、包管理等核心概念，是检测术语偏差与未覆盖缺口的标准来源。
+术语一致性检查以 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml) 作为权威数据源，脚本可读取该文件并对照各语言翻译中的关键术语使用情况。该文件涵盖所有权（Ownership）、类型系统（Type System）、并发安全（Concurrency Safety）、异步（Async）、包管理等核心概念，是检测术语偏差与未覆盖缺口的标准来源。
 
 > 当前版本仅做版本号/最新 commit 差距检测，缺失章节与术语差异待后续扩展。
 
@@ -104,7 +104,7 @@ python scripts/maintenance/check_i18n_translation_gap.py
 |----------|----------|----------|------|
 | Ownership | 所有权 | 所有権 | 已统一 |
 | Borrowing | 借用 | 借用 | 已统一 |
-| Lifetime | 生命周期 | ライフタイム | 避免直译为“寿命” |
+| Lifetime | 生命周期（Lifetimes） | ライフタイム | 避免直译为“寿命” |
 | Trait | 特征 / Trait | トレイト | 中文保留英文更常见 |
 | unsafe | unsafe / 不安全 | unsafe | 代码中保留英文 |
 | Edition | 版本 / Edition | Edition | 注意与“版本号”区分 |

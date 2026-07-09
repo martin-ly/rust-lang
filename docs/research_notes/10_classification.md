@@ -26,7 +26,7 @@
     - [5.2 分类扩展 {#52-分类扩展}](#52-分类扩展-52-分类扩展)
     - [5.3 索引扩展 {#53-索引扩展}](#53-索引扩展-53-索引扩展)
   - [六、快速查找指引 {#六快速查找指引}](#六快速查找指引-六快速查找指引)
-  - [引用 {#引用}](#引用-引用)
+  - [引用（Reference） {#引用}](#引用-引用)
   - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
       - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
@@ -61,7 +61,7 @@
 | **导航** | [README](README.md)、[00_ORGANIZATION_AND_NAVIGATION](10_00_organization_and_navigation.md)、[INDEX](../../concept/sources/INDEX.md)、[QUICK_REFERENCE](10_quick_reference.md)、[QUICK_FIND](10_quick_find.md) | 入口、按目标导航、索引、快速查找 |
 | **总结与论证脉络** | [00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md)、[ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) | 完整总结综合、知识地图、论证思路与脉络关系 |
 | **证明索引** | [PROOF_INDEX](10_proof_index.md)、[ARGUMENTATION_GAP_INDEX](10_argumentation_gap_index.md) | 公理-定理映射、缺口追踪 |
-| **框架** | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md)、[UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md)、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) | 全局一致性、概念族谱、理论/论证架构 |
+| **框架** | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md)、[UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md)、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) | 全局一致性（Coherence）、概念族谱、理论/论证架构 |
 | **分析** | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md)、[DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md)、[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) | 语义、设计理由、安全边界、92 特性 |
 | **指南** | [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md)、[FORMAL_VERIFICATION_GUIDE](10_formal_verification_guide.md)、[BEST_PRACTICES](10_best_practices.md)、[CONTENT_ENHANCEMENT](10_content_enhancement.md)、[WRITING_GUIDE](10_writing_guide.md) | 论证规范、验证流程、实质内容自检 |
 | **运维** | [CONTRIBUTING](10_contributing.md)、[MAINTENANCE_GUIDE](10_maintenance_guide.md)、[CHANGELOG](10_changelog.md)、[STATISTICS](10_statistics.md)、[QUALITY_CHECKLIST](10_quality_checklist.md) | 贡献、维护、统计、质量 |
@@ -95,11 +95,11 @@
 | :--- | :--- | :--- |
 | **内存与所有权** | 所有权（Ownership）、借用（Borrowing）、智能指针（Smart Pointer）、RAII | ownership_model、borrow_checker_proof、06_rust_idioms |
 | **类型系统（Type System）** | 类型基础、Trait、型变、高级类型 | type_theory/ |
-| **生命周期** | 区域、outlives、NLL | formal_methods/lifetime、type_theory/lifetime |
-| **并发与异步** | Future、Pin、Send/Sync、执行模型 | async_state_machine、pin_self_referential、03_execution_models |
+| **生命周期（Lifetimes）** | 区域、outlives、NLL | formal_methods/lifetime、type_theory/lifetime |
+| **并发与异步（Async）** | Future、Pin、Send/Sync、执行模型 | async_state_machine、pin_self_referential、03_execution_models |
 | **安全与 unsafe** | 边界、契约、UB、安全抽象 | SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS、05_boundary_system、07_anti_patterns |
 | **设计模式与工程** | GoF 23、43 完全、组合、边界 | 01_design_patterns_formal、02_workflow、04_compositional_engineering |
-| **实验与性能** | 基准、内存、编译、并发、宏 | experiments/ |
+| **实验与性能** | 基准、内存、编译、并发、宏（Macro） | experiments/ |
 | **版本与特性** | Rust 1.93、92、91 更新 | RUST_193_*、RUST_192_*、RUST_191_* |
 
 ---

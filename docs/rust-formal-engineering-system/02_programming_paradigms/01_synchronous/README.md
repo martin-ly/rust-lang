@@ -299,7 +299,7 @@ fn thread_local_demo() {
 | 任务分发与收集 | `mpsc` 通道 | 生产者-消费者模式 |
 | 多阶段并行计算 | `Barrier` | 同步多个线程的阶段 |
 | 等待特定条件 | `Condvar` | 条件变量等待/通知 |
-| 借用栈数据的多线程 | `thread::scope` | 避免 'static 约束 |
+| 借用（Borrowing）栈数据的多线程 | `thread::scope` | 避免 'static 约束 |
 | 线程私有缓存 | `thread_local!` | 每个线程独立数据 |
 
 ---
@@ -329,7 +329,7 @@ fn thread_local_demo() {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | Send/Sync 形式化 | 线程安全 trait 形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
-| 所有权模型 | 所有权与并发 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
+| 所有权（Ownership）模型 | 所有权与并发 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 
 ### 实验分析 {#实验分析}
 

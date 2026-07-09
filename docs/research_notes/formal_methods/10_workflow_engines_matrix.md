@@ -99,7 +99,7 @@
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
-| 引擎 | Rust SDK | 异步支持 | 类型安全 | 维护状态 |
+| 引擎 | Rust SDK | 异步（Async）支持 | 类型安全 | 维护状态 |
 | :--- | :--- | :--- | :--- | :--- |
 | **Temporal** | ✅ | ✅ | ✅ | 活跃 |
 | **Cadence** | ❌ | N/A | N/A | 维护中 |
@@ -123,7 +123,7 @@
 | :--- | :--- | :--- | :--- |
 | 企业级工作流 | Temporal/Camunda | 功能完善，生态成熟 | 基础设施成本高 |
 | 微服务编排 | Temporal/Conductor | 云原生，可扩展 | 学习曲线陡峭 |
-| 纯Rust项目 | Temporal SDK/自研 | 类型安全，无FFI | 功能需自行扩展 |
+| 纯Rust项目 | Temporal SDK/自研 | 类型安全，无FFI（FFI） | 功能需自行扩展 |
 | 简单状态机 | tokio::fsm/自研 | 轻量，无依赖 | 功能有限 |
 | 人工审批流程 | Camunda | BPMN支持完善 | 需要Java生态 |
 | 事务补偿(Saga) | Temporal | 原生Saga模式 | 需理解事件溯源 |
@@ -351,7 +351,7 @@ impl<S: State> Workflow<S> {
 | :--- | :--- | :--- |
 | 状态机 | ✅ 完全支持 | 自研实现可形式化验证 |
 | 工作流正确性 | ⚠️ 部分支持 | Temporal提供确定性保证 |
-| 补偿一致性 | ⚠️ 需自定义 | Saga模式需手动验证 |
+| 补偿一致性（Coherence） | ⚠️ 需自定义 | Saga模式需手动验证 |
 | 类型安全 | ✅ Rust原生 | SDK提供类型安全 |
 
 ---

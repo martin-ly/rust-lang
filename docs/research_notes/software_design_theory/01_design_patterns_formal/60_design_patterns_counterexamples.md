@@ -21,7 +21,7 @@
     - [现象 {#现象-6}](#现象-现象-6)
     - [问题 {#问题-6}](#问题-问题-6)
     - [修复方案 {#修复方案-6}](#修复方案-修复方案-6)
-  - [2. Observer 模式生命周期管理不当 {#2-observer-模式生命周期管理不当}](#2-observer-模式生命周期管理不当-2-observer-模式生命周期管理不当)
+  - [2. Observer 模式生命周期（Lifetimes）管理不当 {#2-observer-模式生命周期管理不当}](#2-observer-模式生命周期管理不当-2-observer-模式生命周期管理不当)
     - [现象 {#现象-6}](#现象-现象-6-1)
     - [问题 {#问题-6}](#问题-问题-6-1)
     - [修复方案 {#修复方案-6}](#修复方案-修复方案-6-1)
@@ -37,7 +37,7 @@
     - [现象 {#现象-6}](#现象-现象-6-4)
     - [问题 {#问题-6}](#问题-问题-6-4)
     - [修复方案 {#修复方案-6}](#修复方案-修复方案-6-4)
-  - [6. 过度泛型化 {#6-过度泛型化}](#6-过度泛型化-6-过度泛型化)
+  - [6. 过度泛型（Generics）化 {#6-过度泛型化}](#6-过度泛型化-6-过度泛型化)
     - [现象 {#现象-6}](#现象-现象-6-5)
     - [问题 {#问题-6}](#问题-问题-6-5)
     - [修复方案 {#修复方案-6}](#修复方案-修复方案-6-5)
@@ -76,7 +76,7 @@ fn update_config(c: AppConfig) {
 ### 修复方案 {#修复方案-6}
 
 - 显式传递 `Arc<AppConfig>` 或上下文对象。
-- 使用 `OnceLock` / `LazyLock` 做只读全局初始化，避免运行时可变。
+- 使用 `OnceLock` / `LazyLock` 做只读全局初始化，避免运行时（Runtime）可变。
 - 将可变状态局部化。
 
 ---
@@ -94,7 +94,7 @@ struct Subject<'a> {
 ### 问题 {#问题-6}
 
 - 难以动态增删观察者。
-- 容易因生命周期不匹配导致编译失败或悬垂引用。
+- 容易因生命周期不匹配导致编译失败或悬垂引用（Reference）。
 
 ### 修复方案 {#修复方案-6}
 
@@ -132,7 +132,7 @@ let b = c.value.borrow_mut(); // ❌ 运行时 panic
 ### 修复方案 {#修复方案-6}
 
 - 优先使用 `&mut self` 暴露可变接口。
-- 仅在共享所有权且无法使用 `&mut` 时使用 `RefCell` / `Mutex`。
+- 仅在共享所有权（Ownership）且无法使用 `&mut` 时使用 `RefCell` / `Mutex`。
 
 ---
 
@@ -179,7 +179,7 @@ impl Admin {
 
 ### 问题 {#问题-6}
 
-- `Deref` 应仅用于智能指针语义，不能表达 is-a 关系。
+- `Deref` 应仅用于智能指针（Smart Pointer）语义，不能表达 is-a 关系。
 - 滥用会导致 API 表面不可控，违反 API Guidelines。
 
 ### 修复方案 {#修复方案-6}
@@ -258,8 +258,8 @@ struct Service {
 
 - [设计模式形式化 README](README.md)
 - [边界矩阵](04_boundary_matrix.md)
-- [模块系统代码实践](../../formal_modules/70_module_patterns_and_refactoring.md)
-- [并发与异步反例](../../formal_methods/60_concurrency_async_counterexamples.md)
+- [模块（Module）系统代码实践](../../formal_modules/70_module_patterns_and_refactoring.md)
+- [并发与异步（Async）反例](../../formal_methods/60_concurrency_async_counterexamples.md)
 - [知识图谱索引](../../10_knowledge_graph_index.md)
 
 ---

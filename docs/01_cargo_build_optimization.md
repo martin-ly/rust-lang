@@ -203,7 +203,7 @@ codegen-units = 1024
 | cargo-bloat | 分析二进制大小 | `cargo install cargo-bloat` |
 | cargo-tree | 依赖树分析 | `cargo install cargo-tree` |
 | cargo-cache | 缓存管理 | `cargo install cargo-cache` |
-| cargo-expand | 宏展开 | `cargo install cargo-expand` |
+| cargo-expand | 宏（Macro）展开 | `cargo install cargo-expand` |
 
 ## 📈 性能监控 {#性能监控}
 >

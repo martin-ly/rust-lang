@@ -15,7 +15,7 @@
 ### 核心专题 {#核心专题}
 
 - [CLI 应用开发指南](05_cli_applications_guide.md)
-- [异步编程使用指南](05_async_programming_usage_guide.md)
+- [异步（Async）编程使用指南](05_async_programming_usage_guide.md)
 - [性能调优完整指南](05_performance_tuning_guide.md)
 - [测试与覆盖率指南](05_testing_coverage_guide.md)
 - [线程与并发使用指南](05_threads_concurrency_usage_guide.md)
@@ -35,13 +35,13 @@
 - [设计模式使用指南](05_design_patterns_usage_guide.md)
 - [嵌入式 Rust 专题指南](05_embedded_rust_guide.md)
 - [C++ ↔ Rust 互操作评估](05_cxx_rust_interop_evaluation.md)
-- [宏系统使用指南](05_macro_system_usage_guide.md)
-- [内联汇编完整指南](05_inline_assembly_guide.md)
+- [宏（Macro）系统使用指南](05_macro_system_usage_guide.md)
+- [内联汇编（Inline Assembly）完整指南](05_inline_assembly_guide.md)
 
 ### 其他 {#其他}
 
 - [高级主题深度指南](05_advanced_topics_deep_dive.md)
-- [跨模块集成示例指南](05_cross_module_integration_examples.md)
+- [跨模块（Module）集成示例指南](05_cross_module_integration_examples.md)
 - [Pragmatic Guidelines 代码审查清单](05_pragmatic_guidelines_checklist.md)
 - [`cfg_select!` 宏完全指南](05_cfg_select_macro_guide.md)
 - [控制流与函数使用指南](05_control_flow_functions_usage_guide.md)

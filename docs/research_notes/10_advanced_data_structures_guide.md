@@ -104,14 +104,14 @@ Treap = **Tree（BST 按 key）+ Heap（按随机 priority）**。
 
 ### 4.1 Treap {#41-treap}
 
-- 使用 `Box<Node>` 表达父子关系，避免裸指针并享受 Rust 所有权安全。
+- 使用 `Box<Node>` 表达父子关系，避免裸指针并享受 Rust 所有权（Ownership）安全。
 - 旋转后必须重新计算子树大小 `size`。
 - 删除时先判断存在性，避免无意义的旋转路径。
 - 重复键按集合语义忽略，或改为 multiset 需要额外计数器。
 
 ### 4.2 Skip List {#42-skip-list}
 
-- 使用 **arena 索引**（`Vec<Node>` + `usize`）而非 `Box`/`Rc`，避免复杂的借用链。
+- 使用 **arena 索引**（`Vec<Node>` + `usize`）而非 `Box`/`Rc`，避免复杂的借用（Borrowing）链。
 - 用 `usize::MAX` 作为 NIL 哨兵。
 - `rand::Rng::random` 生成 `[0,1)` 浮点数决定层数。
 - 范围查询利用底层有序链表，避免额外数据结构。

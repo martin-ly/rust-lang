@@ -57,7 +57,7 @@
 
 反向追溯（back-reference）是权威来源对齐网络的双向链路：
 
-- **正向链路**：从项目概念/文档出发，引用权威来源的章节、行号或论文，证明项目表述有据可依。
+- **正向链路**：从项目概念/文档出发，引用（Reference）权威来源的章节、行号或论文，证明项目表述有据可依。
 - **反向链路**：从权威来源的某个章节/论文/示例出发，能够反向检索到项目内对应的文档、反例、代码示例或证明。
 
 本索引负责记录和维护反向链路，确保：
@@ -82,13 +82,13 @@
 | [Cargo Book](https://doc.rust-lang.org/cargo/) | package、依赖、workspace、features、build、发布 | [10_cargo_book_alignment.md](10_cargo_book_alignment.md) |
 | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) | 2015/2018/2021/2024 Edition 差异 | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) |
 | [Async Book](https://rust-lang.github.io/async-book/) | Future、Pin、执行器、Waker、IO | [10_async_book_alignment.md](10_async_book_alignment.md) |
-| [Rust RFCs](https://rust-lang.github.io/rfcs/) | 所有权、借用（Borrowing）、生命周期、async、Edition、语法糖 | [10_rfc_alignment_index.md](10_rfc_alignment_index.md)、[10_rfc_argumentation_chain.md](10_rfc_argumentation_chain.md) |
+| [Rust RFCs](https://rust-lang.github.io/rfcs/) | 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）、async、Edition、语法糖 | [10_rfc_alignment_index.md](10_rfc_alignment_index.md)、[10_rfc_argumentation_chain.md](10_rfc_argumentation_chain.md) |
 | [Standard Library](https://doc.rust-lang.org/std/) | 核心类型、trait、collections、sync、io | [10_std_library_alignment.md](10_std_library_alignment.md) |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | 基础概念、所有权、类型、并发、unsafe | [10_rust_by_example_alignment.md](10_rust_by_example_alignment.md) |
 | [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) | 内存模型、UB、类型布局、FFI、并发 | [10_unsafe_code_guidelines_alignment.md](10_unsafe_code_guidelines_alignment.md) |
 | [Rust Error Codes](https://doc.rust-lang.org/error_codes/error-index.html) | 所有权、类型、模块（Module）、并发、unsafe 错误码 | [10_rustc_errors_alignment.md](10_rustc_errors_alignment.md) |
 | [Ferrocene Language Specification](https://spec.ferrocene.dev/) | 语义规范、安全关键认证 | [10_ferrocene_fls_alignment.md](10_ferrocene_fls_alignment.md) |
-| [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | HIR/MIR、名称解析、类型推断（Type Inference）、借用检查 | [10_rustc_dev_guide_alignment.md](10_rustc_dev_guide_alignment.md) |
+| [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | HIR/MIR、名称解析、类型推断（Type Inference）、借用（Borrowing）检查 | [10_rustc_dev_guide_alignment.md](10_rustc_dev_guide_alignment.md) |
 
 ### 2.2 P1 学术/形式化来源 {#22-p1-学术形式化来源}
 
@@ -121,8 +121,8 @@
 | Reference 章节 | 当前覆盖 | 缺口说明 | 建议项目文档 |
 |----------------|----------|----------|--------------|
 | [const 求值](https://doc.rust-lang.org/reference/const_eval.html) | 少量提及 | 缺少 const 求值规则、 promotability、`const fn` 边界到项目反例的反向索引 | [10_const_eval_formalization.md](10_const_eval_formalization.md) |
-| [宏 hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene) | `10_macro_system.md` | 缺少 hygiene 示例与 `$crate` 到项目宏示例的反向索引 | [crates/c11_macro_system_proc/README.md](../../crates/c11_macro_system_proc/README.md) |
-| [模式匹配细节](https://doc.rust-lang.org/reference/patterns.html) | 分散 | 缺少 refutability、match ergonomics、bindings 到项目文档的反向索引 | [10_core_features_full_chain.md](10_core_features_full_chain.md) |
+| [宏（Macro） hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene) | `10_macro_system.md` | 缺少 hygiene 示例与 `$crate` 到项目宏示例的反向索引 | [crates/c11_macro_system_proc/README.md](../../crates/c11_macro_system_proc/README.md) |
+| [模式匹配（Pattern Matching）细节](https://doc.rust-lang.org/reference/patterns.html) | 分散 | 缺少 refutability、match ergonomics、bindings 到项目文档的反向索引 | [10_core_features_full_chain.md](10_core_features_full_chain.md) |
 | [链接与 crate-type](https://doc.rust-lang.org/reference/linkage.html) | [formal_modules/20_linkage_and_symbols.md](formal_modules/20_linkage_and_symbols.md) | 缺少 `dylib`/`staticlib`/`cdylib` 安全契约的精确反向索引 | [formal_modules/20_linkage_and_symbols.md](formal_modules/20_linkage_and_symbols.md) |
 
 ### 3.2 Rust By Example 缺口 {#32-rust-by-example-缺口}
@@ -131,7 +131,7 @@
 |----------|----------|----------|--------------|
 | [Testing](https://doc.rust-lang.org/rust-by-example/testing.html) | 未系统对齐 | 单元测试、集成测试、文档测试与项目测试策略未建立反向索引 | [formal_methods/10_testing_strategy_decision_tree.md](formal_methods/10_testing_strategy_decision_tree.md) |
 | [Std Library Types](https://doc.rust-lang.org/rust-by-example/std.html) | 未系统对齐 | `HashMap`、`VecDeque`、`Rc`/`Arc` 示例未映射到项目 std 对齐文档 | [10_std_library_alignment.md](10_std_library_alignment.md) |
-| [Crates](https://doc.rust-lang.org/rust-by-example/crates.html) | 未系统对齐 | crate 类型、模块树与项目 crate 架构文档未建立反向索引 | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) |
+| [Crates](https://doc.rust-lang.org/rust-by-example/crates.html) | 未系统对齐 | crate 类型、模块（Module）树与项目 crate 架构文档未建立反向索引 | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) |
 
 ### 3.3 学术论文与形式化证明缺口 {#33-学术论文与形式化证明缺口}
 

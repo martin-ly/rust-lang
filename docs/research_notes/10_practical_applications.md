@@ -27,7 +27,7 @@
   - [📚 案例分类 {#案例分类}](#-案例分类-案例分类)
     - [1. 系统编程案例 {#1-系统编程案例}](#1-系统编程案例-1-系统编程案例)
       - [案例 1.1：Redox OS {#案例-11redox-os}](#案例-11redox-os-案例-11redox-os)
-      - [案例 1.2：Tokio 异步运行时 {#案例-12tokio-异步运行时}](#案例-12tokio-异步运行时-案例-12tokio-异步运行时)
+      - [案例 1.2：Tokio 异步（Async）运行时（Runtime） {#案例-12tokio-异步运行时}](#案例-12tokio-异步运行时-案例-12tokio-异步运行时)
     - [2. 网络应用案例 {#2-网络应用案例}](#2-网络应用案例-2-网络应用案例)
       - [案例 2.1：Actix-web 高性能 Web 框架 {#案例-21actix-web-高性能-web-框架}](#案例-21actix-web-高性能-web-框架-案例-21actix-web-高性能-web-框架)
       - [案例 2.2：Linkerd 服务网格 {#案例-22linkerd-服务网格}](#案例-22linkerd-服务网格-案例-22linkerd-服务网格)
@@ -40,7 +40,7 @@
   - [💻 案例示例 {#案例示例}](#-案例示例-案例示例)
     - [案例 1：高性能 Web 服务器 {#案例-1高性能-web-服务器}](#案例-1高性能-web-服务器-案例-1高性能-web-服务器)
     - [案例 2：并发数据处理系统 {#案例-2并发数据处理系统}](#案例-2并发数据处理系统-案例-2并发数据处理系统)
-    - [案例 3：内存安全的数据结构 {#案例-3内存安全的数据结构}](#案例-3内存安全的数据结构-案例-3内存安全的数据结构)
+    - [案例 3：内存安全（Memory Safety）的数据结构 {#案例-3内存安全的数据结构}](#案例-3内存安全的数据结构-案例-3内存安全的数据结构)
       - [案例 1.3：Firecracker 微虚拟机 {#案例-13firecracker-微虚拟机}](#案例-13firecracker-微虚拟机-案例-13firecracker-微虚拟机)
   - [📊 案例分析 {#案例分析}](#-案例分析-案例分析)
     - [性能分析 {#性能分析}](#性能分析-性能分析)
@@ -129,7 +129,7 @@
 
 *证明*：由 Def PA1；unsafe 块引入契约；安全抽象将 unsafe 封装，对外满足 Safe 规则；契约满足则与定理一致。∎
 
-**推论 PA-C1**：案例分析可引用 [PROOF_INDEX](10_proof_index.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) 的论证链，建立与实际项目的追溯关系。
+**推论 PA-C1**：案例分析可引用（Reference） [PROOF_INDEX](10_proof_index.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) 的论证链，建立与实际项目的追溯关系。
 
 ---
 
@@ -161,7 +161,7 @@
 
 **Rust 特性应用**：
 
-- **所有权系统**：确保内存安全，避免系统崩溃
+- **所有权（Ownership）系统**：确保内存安全，避免系统崩溃
 - **零成本抽象（Zero-Cost Abstraction）**：系统调用接口的高效实现
 - **并发安全（Concurrency Safety）**：多核处理器的安全并发
 
@@ -217,7 +217,7 @@ impl Syscall {
 **Rust 特性应用**：
 
 - **异步编程**：Future 和 async/await
-- **零成本抽象**：异步（Async） I/O 的高效实现
+- **零成本抽象（Zero-Cost Abstraction）**：异步（Async） I/O 的高效实现
 - **类型安全**：编译时保证异步安全
 
 **关键代码示例**：
@@ -351,7 +351,7 @@ async fn main() -> std::io::Result<()> {
 
 - **内存安全**：避免网络代理中的安全漏洞
 - **高性能**：低延迟代理
-- **并发安全**：安全处理大量并发连接
+- **并发安全（Concurrency Safety）**：安全处理大量并发连接
 
 **关键特性**：
 
@@ -429,7 +429,7 @@ impl TiKVEngine {
 
 - 吞吐量：> 100,000 ops/s
 - 延迟：< 10ms (P99)
-- 一致性：强一致性保证
+- 一致性（Coherence）：强一致性保证
 
 **研究价值**：
 
@@ -708,7 +708,7 @@ async fn process_task(task: DataTask, worker_id: usize) {
 **技术栈**：
 
 - 所有权系统
-- 借用检查器
+- 借用（Borrowing）检查器
 - 零成本抽象
 
 **关键实现**：
@@ -938,7 +938,7 @@ impl<T> Drop for SafeVec<T> {
 
 1. **内存管理**：
    - 优先使用栈分配
-   - 合理使用 `Box`、`Vec` 等智能指针
+   - 合理使用 `Box`、`Vec` 等智能指针（Smart Pointer）
    - 避免不必要的堆分配
 2. **错误处理（Error Handling）**：
    - 使用 `Result` 类型处理错误
@@ -961,7 +961,7 @@ impl<T> Drop for SafeVec<T> {
    - 使用连接池管理资源
    - 实现适当的背压机制
    - 监控并发指标
-3. **错误处理**：
+3. **错误处理（Error Handling）**：
    - 实现重试机制
    - 使用超时控制
    - 记录详细的错误日志
@@ -1045,7 +1045,7 @@ impl<T> Drop for SafeVec<T> {
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-- **类型系统（Type System） / Trait** [10_type_system_foundations.md](type_theory/10_type_system_foundations.md)、[10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md)：各案例中的泛型、`impl Trait`、派生与 Trait 对象，可作类型论与 Trait 形式化的实例。
+- **类型系统（Type System） / Trait** [10_type_system_foundations.md](type_theory/10_type_system_foundations.md)、[10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md)：各案例中的泛型（Generics）、`impl Trait`、派生与 Trait 对象，可作类型论与 Trait 形式化的实例。
 - **性能基准** [10_performance_benchmarks.md](experiments/10_performance_benchmarks.md)、**并发性能** [10_concurrency_performance.md](experiments/10_concurrency_performance.md)：案例 1–2 的吞吐、延迟、并发模式可与实验的「结果分析模板」对照，用于选型与调优。
 - **内存分析** [10_memory_analysis.md](experiments/10_memory_analysis.md)、**编译器优化** [10_compiler_optimizations.md](experiments/10_compiler_optimizations.md)：案例中的分配策略、`-O2`/LTO 等可与实验指南结合，做上线前检查。
 
@@ -1074,7 +1074,7 @@ impl<T> Drop for SafeVec<T> {
 | **案例 2** 并发数据处理（mpsc） | CHAN-T1、SPAWN-T1、borrow T1 | 通道、tokio::spawn、无共享可变 |
 | **案例 3** SafeVec/内存安全 | ownership T2/T3、REFCELL-T1 |  interior mutability、RAII |
 | 所有案例 | [type_system_foundations](type_theory/10_type_system_foundations.md) T1–T3 | 良型、进展性、保持性 |
-| 组合案例 | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) CE-T1–T3 | 模块组合、CE-T1/T2/T3 |
+| 组合案例 | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) CE-T1–T3 | 模块（Module）组合、CE-T1/T2/T3 |
 | unsafe 案例 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md)、PA-L1 | 安全抽象、契约 |
 
 **引用**：案例分析可引用 [PROOF_INDEX](10_proof_index.md) 建立与形式化定理的追溯关系；见 PA-T1、PA-L1、PA-C1。
@@ -1118,7 +1118,7 @@ impl<T> Drop for SafeVec<T> {
 | 借用与生命周期 | [ch10](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) | [lifetimes.html](https://doc.rust-lang.org/nomicon/lifetimes.html)、[lifetime-elision.html](https://doc.rust-lang.org/nomicon/lifetime-elision.html) | [RFC 141](https://rust-lang.github.io/rfcs/0141-lifetime-elision.html) |
 | 异步 / Future | [ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | [async-await.html](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) |
 | 并发 / Send/Sync | [ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | [send-and-sync.html](https://doc.rust-lang.org/nomicon/send-and-sync.html) | 核心语言设计 |
-| Unsafe / 原始指针 | [ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | [what-unsafe-does.html](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [RFC 1966](https://rust-lang.github.io/rfcs/1966-unsafe-pointer-reform.html) |
+| Unsafe / 原始指针（Raw Pointer） | [ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | [what-unsafe-does.html](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [RFC 1966](https://rust-lang.github.io/rfcs/1966-unsafe-pointer-reform.html) |
 | impl Trait / 泛型（Generics） | [ch10](https://doc.rust-lang.org/book/ch10-02-traits.html) | — | [RFC 1522](https://rust-lang.github.io/rfcs/1522-conservative-impl-trait.html)、[RFC 1951](https://rust-lang.github.io/rfcs/1951-expand-impl-trait.html) |
 | 型变 | [ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | [subtyping-and-variance.html](https://doc.rust-lang.org/nomicon/subtyping.html) | [RFC 738](https://rust-lang.github.io/rfcs/0738-variance.html) |
 | Error 处理 | [ch09](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | — | [RFC 1859](https://rust-lang.github.io/rfcs/1859-try-trait.html)（`Try` trait） |

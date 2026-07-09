@@ -26,7 +26,7 @@
   - [🎯 研究目标 {#研究目标}](#-研究目标-研究目标)
     - [核心问题 {#核心问题}](#核心问题-核心问题)
     - [预期成果 {#预期成果}](#预期成果-预期成果)
-  - [形式化论证（与类型系统衔接） {#形式化论证与类型系统衔接}](#形式化论证与类型系统衔接-形式化论证与类型系统衔接)
+  - [形式化论证（与类型系统（Type System）衔接） {#形式化论证与类型系统衔接}](#形式化论证与类型系统衔接-形式化论证与类型系统衔接)
   - [📚 理论基础 {#理论基础}](#-理论基础-理论基础)
     - [相关概念 {#相关概念}](#相关概念-相关概念)
       - [rustc 优化选项（Rust 1.96+） {#rustc-优化选项rust-196}](#rustc-优化选项rust-196-rustc-优化选项rust-196)
@@ -126,7 +126,7 @@
 
 *证明*：由 [type_system_foundations](../type_theory/10_type_system_foundations.md) 保持性；MIR 优化在类型检查之后；故优化保持类型。∎
 
-**引理 CO-L1（优化阶段顺序）**：Rust 编译流程为：解析 → 宏展开 → 类型检查 → MIR 生成 → 优化 → 代码生成；优化在类型检查之后，故优化输入必良型。
+**引理 CO-L1（优化阶段顺序）**：Rust 编译流程为：解析 → 宏（Macro）展开 → 类型检查 → MIR 生成 → 优化 → 代码生成；优化在类型检查之后，故优化输入必良型。
 
 *证明*：由 Axiom CO1；编译器实现保证该顺序；类型检查通过后 MIR 为良型表示。∎
 
@@ -166,7 +166,7 @@ Rust 编译器提供以下核心优化手段：
 
 - **优化级别（`opt-level`）**：`0`（调试）、`1`、`2`（默认 release）、`3`（激进优化）、`s`/`z`（体积优化）。
 - **链接时优化（LTO）**：`lto = true`（全 LTO）或 `lto = "thin"`（更快但优化粒度较粗），可跨 crate 内联与消除死代码。
-- **配置文件引导优化（PGO）**：通过 `-C profile-generate` 收集运行时剖面，再用 `-C profile-use` 重新编译，提升分支预测与缓存命中率。
+- **配置文件引导优化（PGO）**：通过 `-C profile-generate` 收集运行时（Runtime）剖面，再用 `-C profile-use` 重新编译，提升分支预测与缓存命中率。
 - **内联（`#[inline]`）**：提示编译器内联小函数；`#[inline(always)]` 强制内联但可能增加代码体积；`#[inline(never)]` 用于调试或防止代码膨胀。
 
 > **注意**：优化不改变程序语义（由类型系统与 MIR 优化保证）；优化效果（速度、体积）需通过 Criterion 等基准测试量化。
@@ -680,7 +680,7 @@ fn dead_code_example() {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- **类型系统基础**：见 [10_type_system_foundations.md](../type_theory/10_type_system_foundations.md)。类型与单态化直接影响内联与死代码消除；泛型与 `impl Trait` 的 codegen 可在此验证。
+- **类型系统基础**：见 [10_type_system_foundations.md](../type_theory/10_type_system_foundations.md)。类型与单态化（Monomorphization）直接影响内联与死代码消除；泛型（Generics）与 `impl Trait` 的 codegen 可在此验证。
 - **Trait 系统**：见 [10_trait_system_formalization.md](../type_theory/10_trait_system_formalization.md)。动态分发 (`dyn`) vs 静态分发对 `#[inline]` 与优化级别敏感，可纳入对照实验。
 
 ### 与实验研究的集成 {#与实验研究的集成}

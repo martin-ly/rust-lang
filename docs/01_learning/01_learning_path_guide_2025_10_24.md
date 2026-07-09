@@ -289,7 +289,7 @@ async fn use_async_fn_trait() {
 - [ ] REST API 服务端
 - [ ] 使用 `async Fn` trait 抽象处理器
 - [ ] 连接池管理 (使用 1.96 新 API)
-- [ ] 错误处理管道 (使用 `ControlFlow`)
+- [ ] 错误处理（Error Handling）管道 (使用 `ControlFlow`)
 
 **涉及特性**:
 

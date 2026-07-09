@@ -241,7 +241,7 @@ fn main() {
 
 **错误信息**: `partial move` / `borrow of partially moved value`
 
-**触发场景**: 结构体或元组的部分字段被移动后，整体不能再使用，但未移动的字段仍可用。
+**触发场景**: 结构体（Struct）或元组的部分字段被移动后，整体不能再使用，但未移动的字段仍可用。
 
 **错误代码**:
 
@@ -653,7 +653,7 @@ fn main() {
 
 **错误信息**: `cannot move out of type which is behind a shared reference`
 
-**触发场景**: 尝试从数组或切片的借用中移出元素。
+**触发场景**: 尝试从数组或切片（Slice）的借用中移出元素。
 
 **错误代码**:
 
@@ -950,7 +950,7 @@ fn main() {
 **相关概念**:
 
 - [生命周期标注](../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/03_lifetimes_practice.md)
-- [生命周期省略规则](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/03_lifetimes_reference.md)
+- [生命周期省略（Lifetime Elision）规则](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/03_lifetimes_reference.md)
 
 ---
 
@@ -2582,7 +2582,7 @@ Rust 1.94 对错误诊断进行了多项改进：
 
 - **更清晰的借用错误提示**: 错误信息包含可视化借用图
 - **异步错误改进**: 更好的 async/await 错误定位
-- **类型推断增强**: 更好的类型推断失败提示
+- **类型推断（Type Inference）增强**: 更好的类型推断失败提示
 
 ---
 

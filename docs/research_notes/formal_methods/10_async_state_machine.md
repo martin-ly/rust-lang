@@ -1,6 +1,6 @@
 > **⚠️ 历史文档提示**：
 >
-> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用（Reference）。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 >
@@ -30,7 +30,7 @@
 
 ## 📑 目录 {#目录}
 
-- [异步状态机形式化 {#异步状态机形式化}](#异步状态机形式化-异步状态机形式化)
+- [异步（Async）状态机形式化 {#异步状态机形式化}](#异步状态机形式化-异步状态机形式化)
   - [📑 目录 {#目录}](#-目录-目录)
   - [🎯 研究目标 {#研究目标}](#-研究目标-研究目标)
     - [核心问题 {#核心问题}](#核心问题-核心问题)
@@ -40,7 +40,7 @@
     - [理论背景 {#理论背景}](#理论背景-理论背景)
     - [状态机的理论基础 {#状态机的理论基础}](#状态机的理论基础-状态机的理论基础)
     - [Future/Poll 的理论基础 {#futurepoll-的理论基础}](#futurepoll-的理论基础-futurepoll-的理论基础)
-    - [并发安全的理论基础 {#并发安全的理论基础}](#并发安全的理论基础-并发安全的理论基础)
+    - [并发安全（Concurrency Safety）的理论基础 {#并发安全的理论基础}](#并发安全的理论基础-并发安全的理论基础)
     - [相关学术论文的详细分析 {#相关学术论文的详细分析}](#相关学术论文的详细分析-相关学术论文的详细分析)
       - [1. Async/await for Rust: A Language Perspective {#1-asyncawait-for-rust-a-language-perspective}](#1-asyncawait-for-rust-a-language-perspective-1-asyncawait-for-rust-a-language-perspective)
       - [2. Formal Verification of Async Rust Programs {#2-formal-verification-of-async-rust-programs}](#2-formal-verification-of-async-rust-programs-2-formal-verification-of-async-rust-programs)
@@ -68,12 +68,12 @@
     - [待证明的性质 {#待证明的性质}](#待证明的性质-待证明的性质)
     - [证明方法 {#证明方法}](#证明方法-证明方法)
     - [证明工作 {#证明工作}](#证明工作-证明工作)
-      - [定理 6.1 (状态一致性) {#定理-61-状态一致性}](#定理-61-状态一致性-定理-61-状态一致性)
+      - [定理 6.1 (状态一致性（Coherence）) {#定理-61-状态一致性}](#定理-61-状态一致性-定理-61-状态一致性)
       - [定理 6.2 (并发安全) {#定理-62-并发安全}](#定理-62-并发安全-定理-62-并发安全)
       - [定理 6.3 (进度保证) {#定理-63-进度保证}](#定理-63-进度保证-定理-63-进度保证)
   - [🔗 系统集成与实际应用 {#系统集成与实际应用}](#-系统集成与实际应用-系统集成与实际应用)
-    - [与类型系统的集成 {#与类型系统的集成}](#与类型系统的集成-与类型系统的集成)
-    - [与生命周期的集成 {#与生命周期的集成}](#与生命周期的集成-与生命周期的集成)
+    - [与类型系统（Type System）的集成 {#与类型系统的集成}](#与类型系统的集成-与类型系统的集成)
+    - [与生命周期（Lifetimes）的集成 {#与生命周期的集成}](#与生命周期的集成-与生命周期的集成)
     - [实际应用案例 {#实际应用案例}](#实际应用案例-实际应用案例)
     - [Rust 对应 {#rust-对应}](#rust-对应-rust-对应)
   - [⚠️ 反例：违反异步安全规则 {#反例违反异步安全规则}](#️-反例违反异步安全规则-反例违反异步安全规则)
@@ -328,7 +328,7 @@ $$\text{Sync}(\tau) \leftrightarrow \forall t: \text{SafeShare}(\& \tau, t)$$
 
 - Rust 类型系统的完整形式化
 - 包括异步系统的形式化
-- 内存安全和并发安全的统一证明
+- 内存安全（Memory Safety）和并发安全的统一证明
 
 **关键结果**：
 
@@ -394,7 +394,7 @@ $$\text{Poll}: \text{Pin}[\&mut F] \times \text{Context} \rightarrow \text{Poll}
 其中：
 
 - $F$ 是 Future 类型
-- $\text{Pin}[\&mut F]$ 是 Pin 包装的可变引用
+- $\text{Pin}[\&mut F]$ 是 Pin 包装的可变引用（Mutable Reference）
 - $\text{Context}$ 是执行上下文，包含 Waker
 - $\text{Poll}[\tau]$ 是 `Poll<Output>` 类型
 
@@ -1394,7 +1394,7 @@ $$\forall \{F_1, \ldots, F_n\}: (\forall i: \text{Send}(F_i) \land \text{Sync}(F
 
 1. **类型系统保证**： Send/Sync 约束由类型检查保证，违反则编译失败
    - $\neg(\text{Send}(F) \land \text{Sync}(F)) \rightarrow \text{Reject}(F)$
-2. **运行时保证**： 满足 Send/Sync 的 Future 满足：
+2. **运行时（Runtime）保证**： 满足 Send/Sync 的 Future 满足：
    - Send：$\text{Send}(F) \rightarrow \forall t_1, t_2: \text{SafeTransfer}(\text{State}(F), t_1, t_2)$
    - Sync：$\text{Sync}(F) \rightarrow \forall t: \text{SafeShare}(\& \text{State}(F), t)$
 3. **组合性**： 设 $F_1, \ldots, F_n$ 均满足 Send/Sync，则 $\text{ConcurrentExec}[\{F_1,\ldots,F_n\}]$ 中：
@@ -1462,7 +1462,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 
 **Future 与 `'a`**：`Future + 'a` 表示该 Future 在 `'a` 内存活；自引用 Future 通过 `Pin` 与 `PhantomPinned` 保证不变式，避免 `'a` 悬垂。形式化：$\text{State}(F) \ni \&'a \_ \rightarrow 'a \subseteq \text{lft}(F)$。
 
-**async 块中的引用**：`async { let x = ..; f(&x).await }` 中 `&x` 的生命周期被编译进状态机，与借用检查器一致；与生命周期形式化中的 NLL、outlives 关系兼容。
+**async 块中的引用**：`async { let x = ..; f(&x).await }` 中 `&x` 的生命周期被编译进状态机，与借用（Borrowing）检查器一致；与生命周期形式化中的 NLL、outlives 关系兼容。
 
 ### 实际应用案例 {#实际应用案例}
 
@@ -1605,7 +1605,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 **完成情况**:
 
 - ✅ 理论基础完善：100%完成（状态机理论、Future/Poll理论、并发安全理论、学术论文分析）
-- ✅ 形式化定义：100%完成（Future状态、Poll操作、状态转换、async/await语义、并发安全框架）
+- ✅ 形式化定义：100%完成（Future（Future）状态、Poll操作、状态转换、async/await语义、并发安全框架）
 - ✅ 代码示例：6个完成（基本Future、异步函数、组合Future、状态机实现、并发场景、Waker使用）
 - ✅ 证明工作：100%完成（定理 6.1–6.3 及与类型系统、生命周期的集成论证）
 - ✅ Rust 1.93 更新：已完成（全局分配器 thread_local、asm! cfg、状态机代码生成目标对异步状态机的影响分析）
@@ -1678,7 +1678,7 @@ $$\text{StateMachineGen}[\text{loop-match}] \rightarrow \text{OptimizedCodeGen}[
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**Def SPAWN1（thread::spawn）**：`thread::spawn(|| body)` 创建新线程；闭包需 `F: Send + 'static`；所有权转移至新线程；`JoinHandle<T>` 持有所得权，`join()` 阻塞直到线程完成并返回 `Result<T>`。
+**Def SPAWN1（thread::spawn）**：`thread::spawn(|| body)` 创建新线程；闭包（Closures）需 `F: Send + 'static`；所有权（Ownership）转移至新线程；`JoinHandle<T>` 持有所得权，`join()` 阻塞直到线程完成并返回 `Result<T>`。
 
 **定理 SPAWN-T1**：spawn 与 Send 约束保证数据竞争自由：闭包捕获的 `T` 必须 `Send`，故跨线程无共享可变；与 [borrow_checker_proof](10_borrow_checker_proof.md) 定理 1、[async_state_machine](10_async_state_machine.md) 定理 6.2 一致。
 

@@ -33,7 +33,7 @@
     - [1.6 属性测试 (Property Testing) {#16-属性测试-property-testing}](#16-属性测试-property-testing-16-属性测试-property-testing)
   - [二、测试工具选择矩阵 {#二测试工具选择矩阵}](#二测试工具选择矩阵-二测试工具选择矩阵)
     - [2.1 工具对比表 {#21-工具对比表}](#21-工具对比表-21-工具对比表)
-    - [2.2 异步测试：tokio-test {#22-异步测试tokio-test}](#22-异步测试tokio-test-22-异步测试tokio-test)
+    - [2.2 异步（Async）测试：tokio-test {#22-异步测试tokio-test}](#22-异步测试tokio-test-22-异步测试tokio-test)
     - [2.3 模拟对象：mockall {#23-模拟对象mockall}](#23-模拟对象mockall-23-模拟对象mockall)
     - [2.4 快照测试：insta {#24-快照测试insta}](#24-快照测试insta-24-快照测试insta)
     - [2.5 基准测试：Criterion {#25-基准测试criterion}](#25-基准测试criterion-25-基准测试criterion)
@@ -1061,7 +1061,7 @@ impl ReferenceStateMachine for MyStateMachine {
 | 工具/库 | 用途 | 适用场景 | 学习曲线 | 维护状态 |
 | :--- | :--- | :--- | :--- | :--- |
 | **内置 test** | 基础单元/集成测试 | 所有项目 | ⭐ 低 | Rust 内置 |
-| **tokio-test** | 异步运行时测试 | async/await 代码 | ⭐⭐ 中 | 活跃 |
+| **tokio-test** | 异步运行时（Runtime）测试 | async/await 代码 | ⭐⭐ 中 | 活跃 |
 | **mockall** | 模拟对象生成 | 依赖隔离 | ⭐⭐ 中 | 活跃 |
 | **insta** | 快照测试 | 复杂输出验证 | ⭐⭐ 中 | 活跃 |
 | **criterion** | 性能基准测试 | 算法优化 | ⭐⭐⭐ 高 | 活跃 |

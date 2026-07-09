@@ -95,12 +95,12 @@
       - [`ManuallyDrop<T>`：显式控制析构时机](#manuallydropt显式控制析构时机)
     - [8.3 补充：`ManuallyDrop` 和 `MaybeUninit` 的所有权例外](#83-补充manuallydrop-和-maybeuninit-的所有权例外)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
-    - [11.1 `Drop` 与 `std::mem::forget` 边界](#111-drop-与-stdmemforget-边界)
-    - [11.2 `ManuallyDrop` 与 `MaybeUninit` 所有权例外](#112-manuallydrop-与-maybeuninit-所有权例外)
-    - [11.3 Rust 所有权 vs C++ `unique_ptr`](#113-rust-所有权-vs-c-unique_ptr)
-    - [11.4 `Pin<T>` 与所有权的交互](#114-pint-与所有权的交互)
-    - [11.5 跨线程所有权转移（Send）的形式化视角](#115-跨线程所有权转移send的形式化视角)
-    - [11.6 所有权与 FFI / unsafe 边界的交互](#116-所有权与-ffi--unsafe-边界的交互)
+    - [补充：`Drop` 与 `std::mem::forget` 边界](#补充drop-与-stdmemforget-边界)
+    - [补充：`ManuallyDrop` 与 `MaybeUninit` 所有权例外](#补充manuallydrop-与-maybeuninit-所有权例外)
+    - [补充：Rust 所有权 vs C++ `unique_ptr`](#补充rust-所有权-vs-c-unique_ptr)
+    - [补充：`Pin<T>` 与所有权的交互](#补充pint-与所有权的交互)
+    - [补充：跨线程所有权转移（Send）的形式化视角](#补充跨线程所有权转移send的形式化视角)
+    - [补充：所有权与 FFI / unsafe 边界的交互](#补充所有权与-ffi--unsafe-边界的交互)
   - [权威来源索引](#权威来源索引)
   - [十一、边界测试：所有权规则的编译错误](#十一边界测试所有权规则的编译错误)
     - [11.1 边界测试：use-after-move（编译错误）](#111-边界测试use-after-move编译错误)
@@ -998,7 +998,7 @@ unsafe {
 
 ## 十一、待补充与演进方向（TODOs）
 
-### 11.1 `Drop` 与 `std::mem::forget` 边界
+### 补充：`Drop` 与 `std::mem::forget` 边界
 
 - [x] **TODO**: 补充 `Drop` 的 `std::mem::forget` 边界分析 —— 优先级: 中 —— 已完成 §8.2
 
@@ -1015,7 +1015,7 @@ mem::forget(s); // s 的内存被泄漏，Drop 不会执行
 
 > **相关链接**：详细边界分析见 §8.2；`ManuallyDrop` 对比见 §11.2；RAII 与 Drop 基础见 §6。
 
-### 11.2 `ManuallyDrop` 与 `MaybeUninit` 所有权例外
+### 补充：`ManuallyDrop` 与 `MaybeUninit` 所有权例外
 
 - [x] **TODO**: 补充 `ManuallyDrop` 和 `MaybeUninit` 的所有权例外 —— 优先级: 中 —— 已完成 §8.3
 
@@ -1036,7 +1036,7 @@ unsafe { let _ = u.assume_init(); } // 取得所有权后才负责 drop
 
 > **相关链接**：详细分析见 §8.3；Pin 与自引用结构借用见 [02_borrowing.md](02_borrowing.md) §补充章节：Pin<&mut T>；FFI 所有权模式见 §11.6。
 
-### 11.3 Rust 所有权 vs C++ `unique_ptr`
+### 补充：Rust 所有权 vs C++ `unique_ptr`
 
 - [x] **TODO**: 添加与 C++ `unique_ptr` 的深度对比示例 —— 优先级: 低 —— 已完成 §8.1
 
@@ -1059,7 +1059,7 @@ let b = a;
 
 > **相关链接**：深度对比见 §8.1；Move/Copy 语义见 §3；RAII 见 §6。
 
-### 11.4 `Pin<T>` 与所有权的交互
+### 补充：`Pin<T>` 与所有权的交互
 
 - [x] **TODO**: 补充 `Pin<T>` 与所有权的交互 —— 优先级: 高 —— 已完成 v1.1
 
@@ -1098,7 +1098,7 @@ fn main() {
 
 ---
 
-### 11.5 跨线程所有权转移（Send）的形式化视角
+### 补充：跨线程所有权转移（Send）的形式化视角
 
 - [x] **TODO**: 补充跨线程所有权转移（`Send` trait）的形式化视角 —— 优先级: 高 —— 已完成 v1.1
 
@@ -1134,7 +1134,7 @@ Send trait 的形式化语义:
 > > **来源: [Rustonomicon: Send and Sync](https://doc.rust-lang.org/nomicon/index.html)** ✅
 > **相关链接**：内部可变性对 `Send`/`Sync` 的影响见 [02_borrowing.md](02_borrowing.md) §补充章节：`Cell<T>` / `RefCell<T>` 的内部可变性；异步任务的所有权转移见 [c06_async README](../../../crates/c06_async/README.md)。
 
-### 11.6 所有权与 FFI / unsafe 边界的交互
+### 补充：所有权与 FFI / unsafe 边界的交互
 
 - [x] **TODO**: 补充所有权与 FFI / unsafe 边界的交互 —— 优先级: 高 —— 已完成 v1.1
 

@@ -19,19 +19,19 @@
   - [一、何为“安全的可判定的机制” {#一何为安全的可判定的机制}](#一何为安全的可判定的机制-一何为安全的可判定的机制)
   - [二、机制清单与形式化对应总表 {#二机制清单与形式化对应总表}](#二机制清单与形式化对应总表-二机制清单与形式化对应总表)
   - [三、各机制分节（概念定义·属性关系·解释论证·形式证明·反例） {#三各机制分节概念定义属性关系解释论证形式证明反例}](#三各机制分节概念定义属性关系解释论证形式证明反例-三各机制分节概念定义属性关系解释论证形式证明反例)
-    - [3.1 所有权 {#31-所有权}](#31-所有权-31-所有权)
-    - [3.2 借用 {#32-借用}](#32-借用-32-借用)
-    - [3.3 生命周期 {#33-生命周期}](#33-生命周期-33-生命周期)
+    - [3.1 所有权（Ownership） {#31-所有权}](#31-所有权-31-所有权)
+    - [3.2 借用（Borrowing） {#32-借用}](#32-借用-32-借用)
+    - [3.3 生命周期（Lifetimes） {#33-生命周期}](#33-生命周期-33-生命周期)
     - [3.4 Send {#34-send}](#34-send-34-send)
     - [3.5 Sync {#35-sync}](#35-sync-35-sync)
     - [3.6 Pin/Unpin {#36-pinunpin}](#36-pinunpin-36-pinunpin)
     - [3.7 Future/async {#37-futureasync}](#37-futureasync-37-futureasync)
-    - [3.8 类型系统 {#38-类型系统}](#38-类型系统-38-类型系统)
+    - [3.8 类型系统（Type System） {#38-类型系统}](#38-类型系统-38-类型系统)
     - [3.9 match / for / ? {#39-match-for}](#39-match--for---39-match-for)
     - [3.10 通道 / Mutex / thread::spawn {#310-通道-mutex-threadspawn}](#310-通道--mutex--threadspawn-310-通道-mutex-threadspawn)
-    - [3.11 RefCell 借用（运行时可判定） {#311-refcell-借用运行时可判定}](#311-refcell-借用运行时可判定-311-refcell-借用运行时可判定)
+    - [3.11 RefCell 借用（运行时（Runtime）可判定） {#311-refcell-借用运行时可判定}](#311-refcell-借用运行时可判定-311-refcell-借用运行时可判定)
   - [四、思维表征入口 {#四思维表征入口}](#四思维表征入口-四思维表征入口)
-  - [六、并发与异步族、Trait 族 四维对比表（完备特性对比子集） {#六并发与异步族trait-族-四维对比表完备特性对比子集}](#六并发与异步族trait-族-四维对比表完备特性对比子集-六并发与异步族trait-族-四维对比表完备特性对比子集)
+  - [六、并发与异步（Async）族、Trait 族 四维对比表（完备特性对比子集） {#六并发与异步族trait-族-四维对比表完备特性对比子集}](#六并发与异步族trait-族-四维对比表完备特性对比子集-六并发与异步族trait-族-四维对比表完备特性对比子集)
     - [6.1 并发与异步族 {#61-并发与异步族}](#61-并发与异步族-61-并发与异步族)
     - [6.2 Trait 与多态族 {#62-trait-与多态族}](#62-trait-与多态族-62-trait-与多态族)
   - [七、相关文档 {#七相关文档}](#七相关文档-七相关文档)
@@ -47,7 +47,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **用途**: 全面梳理 Rust 中「安全且编译期可判定」的机制，每项含概念定义、属性关系、解释论证、形式证明引用、反例；与 [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md) 双向链接
+> **用途**: 全面梳理 Rust 中「安全且编译期可判定」的机制，每项含概念定义、属性关系、解释论证、形式证明引用（Reference）、反例；与 [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md) 双向链接
 > **上位**: [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](10_hierarchical_mapping_and_summary.md)
 
 ---
@@ -57,7 +57,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- **安全**：在 Safe Rust 下，违反机制会导致编译错误或类型系统拒绝，从而避免内存安全/数据竞争等 UB。
+- **安全**：在 Safe Rust 下，违反机制会导致编译错误或类型系统拒绝，从而避免内存安全（Memory Safety）/数据竞争等 UB。
 - **可判定**：是否满足该机制可由**编译期**算法判定（类型系统（Type System） + 固定规则），无需运行时或人工证明。
 
 **例外**：RefCell 的借用为**运行时（Runtime）**可判定（违反则 panic）；死锁、进度为**不可判定**（需额外方法）。
@@ -72,7 +72,7 @@
 | 机制 | 可判定性 | 形式化文档 | Def/定理 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
 | 所有权（Ownership） | 静态 | [ownership_model](formal_methods/10_ownership_model.md) | 规则 1–3, T2, T3 | 使用已移动值、双重释放 |
-| 借用（Borrowing） | 静态 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | 规则 5–8, T1 | 双重可变借用、悬垂引用 |
+| 借用（Borrowing） | 静态 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | 规则 5–8, T1 | 双重可变借用（Mutable Borrow）、悬垂引用 |
 | 生命周期 | 静态 | lifetime_formalization | LF1–LF2, LF-T1–T3 | 返回局部引用、存短命引用 |
 | Send | 静态 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | SEND1, SEND-T1 | Rc 跨线程、!Send 闭包（Closures） spawn |
 | Sync | 静态 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | SYNC1, SYNC-L1, SYNC-T1 | Cell 跨线程共享、Rc &T 跨线程 |
@@ -82,7 +82,7 @@
 | match 穷尽 | 静态 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | MATCH1, MATCH-T1 | 非穷尽 match |
 | for / ? | 静态 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | FOR1/QUERY1, FOR-T1/QUERY-T1 | 迭代中修改、非 Result ? |
 | 通道/Mutex | 静态（接口） | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | CHAN1/MUTEX1, CHAN-T1/MUTEX-T1 | 发送非 Send |
-| thread::spawn | 静态 | [async_state_machine](formal_methods/10_async_state_machine.md) | SPAWN1, SPAWN-T1 | 非 Send 闭包 spawn |
+| thread::spawn | 静态 | [async_state_machine](formal_methods/10_async_state_machine.md) | SPAWN1, SPAWN-T1 | 非 Send 闭包（Closures） spawn |
 | RefCell 借用 | 运行时 | [ownership_model](formal_methods/10_ownership_model.md) | REFCELL1, REFCELL-T1 | 双重可变借用 panic |
 
 ---
@@ -148,7 +148,7 @@
 
 - **概念定义**：可安全跨线程**共享引用** &T；[send_sync_formalization](formal_methods/10_send_sync_formalization.md) Def SYNC1。
 - **属性关系**：Sync ⇔ &T: Send；多线程共享 &T 时需 T: Sync。
-- **解释论证**：共享不可变引用无数据竞争；FLS Ch. 17.1。
+- **解释论证**：共享不可变引用（Mutable Reference）无数据竞争；FLS Ch. 17.1。
 - **形式证明**：SYNC-T1；与 async 定理 6.2 一致。
 - **反例**：Cell 跨线程共享、Rc &T 跨线程。
 

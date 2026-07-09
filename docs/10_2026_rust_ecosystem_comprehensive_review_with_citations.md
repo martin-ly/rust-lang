@@ -1,7 +1,7 @@
 # 2026年Rust生态系统全面梳理（含26处国际权威引用） {#2026年rust生态系统全面梳理含26处国际权威引用}
 
 > **EN**: 2026 Rust Ecosystem Comprehensive Review With Citations
-> **Summary**: 2026年Rust生态系统全面梳理 含26处国际权威引用 2026 Rust Ecosystem Comprehensive Review With Citations.
+> **Summary**: 2026年Rust生态系统全面梳理 含26处国际权威引用（Reference） 2026 Rust Ecosystem Comprehensive Review With Citations.
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
 > **文档版本**: 4.0（100%国际权威对齐完成版）
@@ -202,13 +202,13 @@ DOI: 10.1145/3704904
 
 **实验规模**:
 
-- 测试了crates.io上**30,000个**最广泛使用的crate
+- 测试了crates.io上**30,000个**最广泛使用的crate（Crate）
 - 运行了**674,748个**测试用例
 - **54%更少的误报**（相比Stacked Borrows）
 
 **技术创新**:
 
-- **树结构替代栈结构**: 使用树形借用追踪替代栈式借用追踪
+- **树结构替代栈结构**: 使用树形借用（Borrowing）追踪替代栈式借用追踪
 - **动态引用范围**: 不预先确定内存区域，基于使用动态确定
 - **状态机权限**: 每个节点跟踪权限状态机，支持权限变化
 - **读-读重排序**: 支持相邻读取操作的重新排序优化

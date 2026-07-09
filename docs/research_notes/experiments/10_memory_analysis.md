@@ -141,7 +141,7 @@
 1. **内存分配模式**：分析不同类型的内存分配行为
 2. **内存泄漏检测**：识别和预防内存泄漏
 3. **内存碎片化**：分析内存碎片化问题
-4. **内存安全验证**：验证 Rust 内存安全保证
+4. **内存安全（Memory Safety）验证**：验证 Rust 内存安全保证
 
 ### 核心问题 {#核心问题}
 
@@ -193,9 +193,9 @@
 
 **内存管理理论**：
 
-- **引用计数**：通过计数管理内存生命周期
+- **引用（Reference）计数**：通过计数管理内存生命周期（Lifetimes）
 - **垃圾回收**：自动管理内存（Rust 不使用）
-- **所有权系统**：编译时内存管理（Rust 核心特性）
+- **所有权（Ownership）系统**：编译时内存管理（Rust 核心特性）
 
 #### Rust Performance Book 内存视角 {#rust-performance-book-内存视角}
 
@@ -640,7 +640,7 @@ fn analyze_memory_layout() {
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - **所有权模型**：见 [10_ownership_model.md](../formal_methods/10_ownership_model.md)。内存分析中的「移动/复制/Drop」可对照所有权规则验证无泄漏。
-- **借用检查器**：见 [10_borrow_checker_proof.md](../formal_methods/10_borrow_checker_proof.md)。引用与生命周期不影响堆分配量，但可通过 Miri 与借用规则共同保证无 UB。
+- **借用（Borrowing）检查器**：见 [10_borrow_checker_proof.md](../formal_methods/10_borrow_checker_proof.md)。引用与生命周期不影响堆分配量，但可通过 Miri 与借用规则共同保证无 UB。
 
 ### 与实验研究的集成 {#与实验研究的集成}
 

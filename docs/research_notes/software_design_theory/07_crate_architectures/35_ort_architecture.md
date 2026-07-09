@@ -48,8 +48,8 @@ ONNX Runtime 是跨平台、高性能的机器学习推理引擎，支持 CPU、
 | 维度 | 设计选择 | 工程价值 |
 |:--|:--|:--|
 | **后端能力** | 绑定 C/C++ ONNX Runtime，复用成熟内核 | 支持最全的 ONNX 算子与硬件加速后端 |
-| **封装策略** | 安全 Rust API + `ort_sys` FFI | 隐藏 `unsafe` 细节，保留零成本抽象 |
-| **执行模式** | 同步 `Session::run` 为主，支持异步回调 | 与 Rust 同步/异步生态均可集成 |
+| **封装策略** | 安全 Rust API + `ort_sys` FFI | 隐藏 `unsafe` 细节，保留零成本抽象（Zero-Cost Abstraction） |
+| **执行模式** | 同步 `Session::run` 为主，支持异步（Async）回调 | 与 Rust 同步/异步生态均可集成 |
 | **部署形态** | 可静态链接或动态加载 `onnxruntime` 动态库 | 灵活控制二进制体积与授权合规 |
 | **类型安全** | `Tensor<T>` / `DynValue` / `SessionInputs` | 编译期区分张量类型与输入名称 |
 
@@ -84,7 +84,7 @@ let (_shape, data) = outputs[0].try_extract_tensor::<f32>()?;
 | **Environment** | 进程级全局配置与日志上下文 | `ort::init()` / 隐式默认环境 |
 | **Session** | 加载并优化后的 ONNX 模型实例 | `Session::builder()` → `commit_from_file` |
 | **Tensor** | 类型化张量输入/输出 | `Tensor::<f32>::from_array(...)` |
-| **DynValue** | 类型擦除的运行时值 | `SessionOutputs` 元素、`DynTensor` |
+| **DynValue** | 类型擦除的运行时（Runtime）值 | `SessionOutputs` 元素、`DynTensor` |
 | **ExecutionProvider** | 硬件加速后端（CUDA、TensorRT 等） | `CUDAExecutionProvider::default()` |
 | **IoBinding** | 预绑定输入/输出设备内存 | `Session::create_binding(...)` |
 
@@ -144,7 +144,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 | 未启用对应 EP feature | 调用 CUDA EP 时编译期或运行时回退到 CPU | 在 `Cargo.toml` 中启用 `ort/cuda` 等 feature 并验证环境 |
 | 输入张量形状/类型与模型不匹配 | `Session::run` 返回输入形状错误 | 通过模型工具查看输入 metadata，使用 `Tensor::from_array` 精确构造 |
 | 跨线程共享可变 `Session` | 编译错误：`Session::run` 需要 `&mut self` | 使用 `Mutex<Session>` 或每个线程持有独立 Session |
-| 输出 `DynValue` 生命周期误用 | 提取出的张量视图在 `SessionOutputs` drop 后失效 | 在 `outputs` 存活期间使用视图，必要时拷贝数据 |
+| 输出 `DynValue` 生命周期（Lifetimes）误用 | 提取出的张量视图在 `SessionOutputs` drop 后失效 | 在 `outputs` 存活期间使用视图，必要时拷贝数据 |
 | 忽略 `commit_from_file` 的模型路径验证 | 生产环境加载错误模型文件 | 校验模型哈希/签名，使用版本化模型仓库 |
 | 动态库版本不匹配 | 运行时符号错误、崩溃 | 使用 `ort` 对应版本的预编译二进制或静态链接 |
 | 在 `no_std` 环境误用默认 feature | 编译失败或体积过大 | 按需关闭 `std`、`download-binaries` 等 feature |
@@ -157,7 +157,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-`ort` 通过类型系统将 ONNX Runtime 的运行时语义静态化：
+`ort` 通过类型系统（Type System）将 ONNX Runtime 的运行时语义静态化：
 
 | 维度 | API | 类型系统价值 |
 |:--|:--|:--|

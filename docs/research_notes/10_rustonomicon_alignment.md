@@ -18,9 +18,9 @@
 - [Rustonomicon 对齐矩阵 {#rustonomicon-对齐矩阵}](#rustonomicon-对齐矩阵-rustonomicon-对齐矩阵)
   - [目录 {#目录}](#目录-目录)
   - [一、对齐说明 {#一对齐说明}](#一对齐说明-一对齐说明)
-  - [二、所有权与借用 {#二所有权与借用}](#二所有权与借用-二所有权与借用)
-  - [三、类型系统与布局 {#三类型系统与布局}](#三类型系统与布局-三类型系统与布局)
-  - [四、并发安全 {#四并发安全}](#四并发安全-四并发安全)
+  - [二、所有权（Ownership）与借用（Borrowing） {#二所有权与借用}](#二所有权与借用-二所有权与借用)
+  - [三、类型系统（Type System）与布局 {#三类型系统与布局}](#三类型系统与布局-三类型系统与布局)
+  - [四、并发安全（Concurrency Safety） {#四并发安全}](#四并发安全-四并发安全)
   - [五、未初始化内存 {#五未初始化内存}](#五未初始化内存-五未初始化内存)
   - [六、FFI {#六ffi}](#六ffi-六ffi)
   - [七、实现相关机制 {#七实现相关机制}](#七实现相关机制-七实现相关机制)
@@ -33,7 +33,7 @@
 
 ## 一、对齐说明 {#一对齐说明}
 
-本文档将 `docs/research_notes/` 中关于 unsafe、内存布局、生命周期、并发安全的内容与 [Rustonomicon](https://doc.rust-lang.org/nomicon/) 建立映射。
+本文档将 `docs/research_notes/` 中关于 unsafe、内存布局、生命周期（Lifetimes）、并发安全的内容与 [Rustonomicon](https://doc.rust-lang.org/nomicon/) 建立映射。
 
 ---
 
@@ -42,7 +42,7 @@
 | Rustonomicon 章节 | 项目文档 | 状态 | 备注 |
 |-------------------|----------|------|------|
 | [Ownership](https://doc.rust-lang.org/nomicon/ownership.html) | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | ✅ | 所有权三规则 |
-| [References](https://doc.rust-lang.org/nomicon/references.html) | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ | 引用约束 |
+| [References](https://doc.rust-lang.org/nomicon/references.html) | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ | 引用（Reference）约束 |
 | [Lifetimes](https://doc.rust-lang.org/nomicon/lifetimes.html) | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | ✅ | 生命周期子类型 |
 | [Lifetime Elision](https://doc.rust-lang.org/nomicon/lifetime-elision.html) | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | ✅ | 省略规则 |
 

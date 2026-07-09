@@ -1,11 +1,13 @@
 # 三轨内容相似度检测报告
 
-- **扫描文件数**: 1019
+- **扫描文件数**: 1020
 - **相似度阈值**: 0.6
-- **潜在重复对**: 0
+- **潜在重复对**: 2
 
 | 相似度 | 文件1 | 文件2 | 标题1 | 标题2 |
 |:---|:---|:---|:---|:---|
+| 0.75 | `concept\03_advanced\02_unsafe\03_unsafe.md` | `knowledge\03_advanced\unsafe\04_unsafe_rust.md` | Unsafe Rust 安全编程 | Unsafe Rust 学习入口 |
+| 0.75 | `concept\03_advanced\02_unsafe\12_unsafe_rust_patterns.md` | `knowledge\03_advanced\unsafe\04_unsafe_rust.md` | Unsafe Rust 模式：安全抽象的核心技术 | Unsafe Rust 学习入口 |
 
 ## 建议
 

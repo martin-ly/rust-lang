@@ -1003,7 +1003,7 @@ graph TD
 | 调用位置追踪 | #[track_caller] | 手动传递 | 运行时开销 | ✅ 调试友好 |
 | Never 类型 | ! 类型 | Infallible | 零成本 | ✅ 类型安全 |
 | 迭代器比较 | Iterator::eq | 手动循环 | 性能提升 | ✅ 安全 |
-| 切片旋转 | rotate_right | 手动实现 | 性能提升 | ✅ 安全 |
+| 切片（Slice）旋转 | rotate_right | 手动实现 | 性能提升 | ✅ 安全 |
 
 ---
 

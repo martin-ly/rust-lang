@@ -57,7 +57,7 @@
 
 本指南为官方 **Embedded Rust Book** 的入口与项目内导航，帮助在开发嵌入式 Rust 应用时快速定位到本项目的相关模块和官方资源。
 
-**形式化引用**：T-OW3 (内存安全（Memory Safety）)、
+**形式化引用（Reference）**：T-OW3 (内存安全（Memory Safety）)、
 T-BR1、[UNSAFE_RUST_GUIDE](../../concept/03_advanced/02_unsafe/03_unsafe.md)（no_std、裸机 unsafe 契约）。
 
 ---
@@ -82,8 +82,8 @@ T-BR1、[UNSAFE_RUST_GUIDE](../../concept/03_advanced/02_unsafe/03_unsafe.md)（
 
 | 嵌入式主题 | 官方 Embedded Book | 本项目对应 |
 | :--- | :--- | :--- |
-| 所有权与内存安全 | 内存管理、无堆 | [C01 所有权（Ownership）](../../crates/c01_ownership_borrow_scope/README.md) |
-| 类型系统与 no_std | 最小运行时 | [C02 类型系统（Type System）](../../crates/c02_type_system/README.md) |
+| 所有权与内存安全（Memory Safety） | 内存管理、无堆 | [C01 所有权（Ownership）](../../crates/c01_ownership_borrow_scope/README.md) |
+| 类型系统与 no_std | 最小运行时（Runtime） | [C02 类型系统（Type System）](../../crates/c02_type_system/README.md) |
 | 并发与中断 | 临界区、原子操作（Atomic Operations） | [C05 线程与并发](../../crates/c05_threads/README.md) |
 | 进程与系统调用 | - | [C07 进程管理](../../crates/c07_process/README.md) |
 | WASM 与边缘计算 | - | [C12 WASM](../../crates/c12_wasm/README.md) |
@@ -332,7 +332,7 @@ mod app {
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. **前置**: 熟练掌握 C01 所有权、C02 类型系统（本项目核心模块）
+1. **前置**: 熟练掌握 C01 所有权（Ownership）、C02 类型系统（Type System）（本项目核心模块）
 2. **入门**: [Discovery Book](https://docs.rust-embedded.org/discovery/)（零嵌入式经验）
 3. **进阶**: [Embedded Rust Book](https://doc.rust-lang.org/embedded-book/)（ARM Cortex-M）
 4. **深入**: [Embedonomicon](https://docs.rust-embedded.org/embedonomicon/)

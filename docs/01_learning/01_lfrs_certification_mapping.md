@@ -126,10 +126,10 @@
 
 | 子主题 | 项目文件路径 | 说明 |
 | :--- | :--- | :--- |
-| 所有权规则 | `crates/c01_ownership_borrow_scope/src/ownership/` | 三大所有权规则详解 |
-| 借用检查器 | `crates/c01_ownership_borrow_scope/src/borrow_checker/` | 编译时内存安全验证 |
-| 引用与借用 | `crates/c01_ownership_borrow_scope/src/scope/` | &T、&mut T 规则 |
-| 生命周期 | `crates/c01_ownership_borrow_scope/src/lifetime/` | 显式标注、省略规则 |
+| 所有权（Ownership）规则 | `crates/c01_ownership_borrow_scope/src/ownership/` | 三大所有权规则详解 |
+| 借用（Borrowing）检查器 | `crates/c01_ownership_borrow_scope/src/borrow_checker/` | 编译时内存安全（Memory Safety）验证 |
+| 引用（Reference）与借用 | `crates/c01_ownership_borrow_scope/src/scope/` | &T、&mut T 规则 |
+| 生命周期（Lifetimes） | `crates/c01_ownership_borrow_scope/src/lifetime/` | 显式标注、省略规则 |
 | Copy vs Move | `crates/c01_ownership_borrow_scope/src/copy_move/` | 语义差异与实现 |
 | 内部可变性 | `crates/c01_ownership_borrow_scope/src/internal_mut/` | Cell、RefCell、UnsafeCell |
 
@@ -160,8 +160,8 @@
 
 | 子主题 | 项目文件路径 | 说明 |
 | :--- | :--- | :--- |
-| 结构体定义 | `crates/c02_type_system/src/type_composition/composite/struct/` | 命名字段、元组结构体、单元结构体 |
-| 枚举定义 | `crates/c02_type_system/src/type_composition/composite/enum/` | 变体、带数据变体 |
+| 结构体（Struct）定义 | `crates/c02_type_system/src/type_composition/composite/struct/` | 命名字段、元组结构体、单元结构体 |
+| 枚举（Enum）定义 | `crates/c02_type_system/src/type_composition/composite/enum/` | 变体、带数据变体 |
 | 模式匹配 | `crates/c02_type_system/src/type_decomposition/match/` | match、if let、while let |
 | `Option<T>` | `crates/c03_control_fn/src/error_handling/` | 空值安全替代 |
 | 方法语法 | `crates/c02_type_system/src/type_class/` | impl 块、关联函数 |
@@ -340,10 +340,10 @@
 | 迭代器 | `docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md` | 适配器、消费者 | ✅ |
 | `Box<T>` | `crates/c01_ownership_borrow_scope/src/ownership/` | 堆分配 | ✅ |
 | `Rc<T>` | `crates/c01_ownership_borrow_scope/src/internal_mut/refcell/` | 引用计数 | ✅ |
-| `RefCell<T>` | `crates/c01_ownership_borrow_scope/src/internal_mut/refcell/` | 运行时借用检查 | ✅ |
+| `RefCell<T>` | `crates/c01_ownership_borrow_scope/src/internal_mut/refcell/` | 运行时（Runtime）借用检查 | ✅ |
 | `Arc<T>` | `crates/c05_threads/src/synchronization/arc/` | 线程安全 Rc | ✅ |
 | `Cow<T>` | — | 写时克隆 | ❌ 缺失 |
-| 自定义智能指针 | — | Deref/Drop 实现 | ❌ 缺失 |
+| 自定义智能指针（Smart Pointer） | — | Deref/Drop 实现 | ❌ 缺失 |
 
 ### 补充计划 {#补充计划}
 
@@ -384,7 +384,7 @@
 | async/await | `crates/c06_async/src/await/` | 基础语法 | ✅ |
 | Future | `crates/c06_async/src/futures/` | Future trait 与执行器 | ✅ |
 | Tokio | `crates/c06_async/src/tokio/` | 运行时（Runtime）、任务、通道 | ✅ |
-| Stream | `crates/c06_async/src/streams/` | 异步流处理 | ✅ |
+| Stream | `crates/c06_async/src/streams/` | 异步（Async）流处理 | ✅ |
 | 并行算法 | `crates/c05_threads/src/paralelism/` | Rayon、SIMD | ✅ |
 | 无锁数据结构 | `crates/c05_threads/src/lockfree/` | 高级并发 | ✅ |
 | async trait | — | async-trait crate | ⚠️ 部分 |

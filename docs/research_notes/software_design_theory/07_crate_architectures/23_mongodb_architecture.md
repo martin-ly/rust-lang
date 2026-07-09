@@ -1,4 +1,4 @@
-> **Canonical 说明**: 本文件专注 **mongodb-rust-driver 的 BSON 模型与异步连接池架构**。
+> **Canonical 说明**: 本文件专注 **mongodb-rust-driver 的 BSON 模型与异步（Async）连接池架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
@@ -41,7 +41,7 @@
 >
 > **[来源: [mongodb-rust-driver crates.io](https://crates.io/crates/mongodb)]**
 
-`mongodb` crate 是 MongoDB 官方维护的 Rust 驱动，基于 Tokio 异步运行时，使用 `bson` crate 处理 MongoDB 的原生 BSON 数据模型。它为 Rust 应用提供了从单机到副本集、分片集群的统一访问抽象，是 Rust 生态中构建文档型数据持久化层的首选客户端。
+`mongodb` crate 是 MongoDB 官方维护的 Rust 驱动，基于 Tokio 异步运行时（Runtime），使用 `bson` crate 处理 MongoDB 的原生 BSON 数据模型。它为 Rust 应用提供了从单机到副本集、分片集群的统一访问抽象，是 Rust 生态中构建文档型数据持久化层的首选客户端。
 
 > [mongodb-rust-driver docs.rs](https://docs.rs/mongodb/latest/mongodb/)(<https://docs.rs/mongodb/latest/mongodb/>)
 
@@ -224,10 +224,10 @@ let client = Client::with_options(opts)?;
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-| 维度 | API | 类型系统价值 |
+| 维度 | API | 类型系统（Type System）价值 |
 |:--|:--|:--|
 | **集合类型参数** | `Collection<T>` | `T: Serialize + DeserializeOwned + Send + Sync`，编译期保证文档-类型映射 |
-| **BSON 宏** | `bson::doc!` | 在编译期构造 `Document`，避免运行时字符串拼接 |
+| **BSON 宏（Macro）** | `bson::doc!` | 在编译期构造 `Document`，避免运行时字符串拼接 |
 | **Options Builder** | `ClientOptions::builder()` / `IndexModel::builder()` | Typestate 模式避免非法配置状态 |
 | **Session 传递** | `.session(&mut session)` | 通过显式参数将操作绑定到事务边界，避免隐式上下文 |
 | **错误类型** | `mongodb::error::Error` / `Result<T>` | 所有 IO 与协议错误必须在调用点处理 |
@@ -249,7 +249,7 @@ let client = Client::with_options(opts)?;
 | 在异步上下文阻塞等待驱动 Future | 线程阻塞、吞吐量崩溃 | 始终 `await` 驱动返回的 Future；超时通过 `tokio::time::timeout` 作用于 `JoinHandle` 而非直接包裹驱动 Future |
 | 忽略事务拓扑要求 | 单节点 `mongod` 调用事务返回错误 | 仅在副本集/分片集群启用事务 |
 | 变更流未处理 resume token | 故障后丢失事件 | 定期读取 `change_stream.resume_token()` 并在重建流时使用 |
-| 未配置读写关注 | 数据一致性问题 | 根据业务需求显式设置 `ReadConcern`/`WriteConcern` |
+| 未配置读写关注 | 数据一致性（Coherence）问题 | 根据业务需求显式设置 `ReadConcern`/`WriteConcern` |
 
 > [MongoDB 官方文档](https://www.mongodb.com/docs/)(<https://www.mongodb.com/docs/>)
 

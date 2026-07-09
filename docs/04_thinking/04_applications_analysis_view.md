@@ -73,7 +73,7 @@
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | I/O 模式 | 同步 (std::io) | CLI 通常非高并发、简单直接 |
 | 错误处理（Error Handling） | anyhow (应用) / thiserror (库) | 快速原型用 anyhow、库用 thiserror |
-| 相关模块 | C03 控制流、C07 进程、C08 算法 | 控制流、子进程、数据处理 |
+| 相关模块（Module） | C03 控制流、C07 进程、C08 算法 | 控制流、子进程、数据处理 |
 
 **公理 / 定理 → 论证**：CLI 选型遵循「单线程主导」公理——CLI 通常顺序执行、无高并发需求。定理：同步 I/O 在单线程下零额外开销；派生：`std::io` 足以满足，`std::process` 管理子进程。错误类型需满足 `Error + Send + Sync` 以支持 `anyhow`/`thiserror`。
 
@@ -90,11 +90,11 @@
 | Web 框架 | axum / actix-web | axum 与 Tokio 同源、actix 高性能 |
 | 相关模块 | C06 异步（Async）、C10 网络 | 异步 I/O、TCP/HTTP |
 
-**公理 / 定理 → 论证**：Web 选型遵循「I/O 密集型」公理——大量请求等待网络/磁盘。定理：异步 runtime 在 I/O 等待时复用线程，可支撑更高并发。Tokio 选型依据：M:N 调度、与 smol 生态对比、生产验证。axum 与 Tokio 同源，减少调度开销。
+**公理 / 定理 → 论证**：Web 选型遵循「I/O 密集型」公理——大量请求等待网络/磁盘。定理：异步（Async） runtime 在 I/O 等待时复用线程，可支撑更高并发。Tokio 选型依据：M:N 调度、与 smol 生态对比、生产验证。axum 与 Tokio 同源，减少调度开销。
 
 **决策树**：REST/GraphQL？→ axum；极高 QPS？→ actix-web；gRPC？→ tonic；WebSocket？→ axum/tokio-tungstenite。
 
-**形式化引用**：[async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md)、[03_execution_models/02_async](../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/02_async.md)。
+**形式化引用（Reference）**：[async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md)、[03_execution_models/02_async](../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/02_async.md)。
 
 ---
 
@@ -122,7 +122,7 @@
 | 并发 | 裸金属/RTOS | 无 OS 时受限 |
 | 相关模块 | C01 所有权（Ownership）、C02 类型、C05 线程 | 内存、类型、并发基础 |
 
-**公理 / 定理 → 论证**：嵌入式选型遵循「资源受限」公理——无 OS 或极小运行时。定理：`no_std` 剔除堆分配与标准库；所有权与借用保证无 GC 下内存安全。并发选型：裸金属用临界区/中断；RTOS 用其提供的同步原语。
+**公理 / 定理 → 论证**：嵌入式选型遵循「资源受限」公理——无 OS 或极小运行时（Runtime）。定理：`no_std` 剔除堆分配与标准库；所有权（Ownership）与借用（Borrowing）保证无 GC 下内存安全（Memory Safety）。并发选型：裸金属用临界区/中断；RTOS 用其提供的同步原语。
 
 **决策树**：需堆？→ `extern crate alloc`；需异步？→ embassy；裸金属？→ cortex-m/avr；有 RTOS？→ 用其 API。参考 supported_unsupported_matrix。
 
@@ -135,7 +135,7 @@
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 异步+网络 | Tokio + 网络 crate | 高并发 I/O |
-| 相关模块 | C06 异步、C10 网络、C11 宏 | 异步、网络、元编程 |
+| 相关模块 | C06 异步、C10 网络、C11 宏（Macro） | 异步、网络、元编程 |
 
 **公理 / 定理 → 论证**：分布式选型遵循「跨节点通信」公理——网络延迟与故障不可忽视。定理：异步 I/O 适合网络等待；消息传递优于共享状态（避免分布式锁复杂性）。Tokio 与消息队列（如 Kafka、RabbitMQ）配合；宏用于序列化/代码生成。
 
@@ -368,7 +368,7 @@ Rust 新特性可扩展思维表征方式：
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 

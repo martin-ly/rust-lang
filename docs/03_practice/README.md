@@ -17,7 +17,7 @@
 
 | 项目 | 描述 | 包含项目数 |
 |------|------|-----------|
-| [跨模块实战项目指南](03_cross_module_practical_projects_2025_10_25.md) | 10 个渐进式跨模块实战项目总览 | 10 |
+| [跨模块（Module）实战项目指南](03_cross_module_practical_projects_2025_10_25.md) | 10 个渐进式跨模块实战项目总览 | 10 |
 
 ### 🟢 入门级（5个） {#入门级5个}
 >
@@ -37,7 +37,7 @@
 
 | 项目 | 描述 | 所需知识 | 预计时间 |
 |------|------|---------|---------|
-| [项目 06: 并发下载器](03_project_06_concurrent_downloader.md) | 多线程/异步下载 | c05-c06 | 4-6h |
+| [项目 06: 并发下载器](03_project_06_concurrent_downloader.md) | 多线程/异步（Async）下载 | c05-c06 | 4-6h |
 | [项目 07: 聊天服务器](03_project_07_chat_server.md) | TCP聊天服务器 | c05-c06, c10 | 5-7h |
 | [项目 08: 内存缓存](03_project_08_cache_system.md) | 线程安全缓存 | c05 | 4-5h |
 | [项目 09: 日志分析器](03_project_09_log_parser.md) | 高性能日志处理 | c01-c06 | 4-5h |
@@ -50,7 +50,7 @@
 | [项目 11: Web服务器](03_project_11_web_server.md) | HTTP服务器 | c06, c10 | 8-10h |
 | [项目 12: WASM应用](03_project_12_wasm_app.md) | 浏览器WASM应用 | c12 | 6-8h |
 | [项目 13: 数据库引擎](03_project_13_database_engine.md) | 嵌入式数据库 | c01-c08 | 10-12h |
-| [项目 14: 异步运行时](03_project_14_async_runtime.md) | 简化版async运行时 | c06 | 12-15h |
+| [项目 14: 异步运行时（Runtime）](03_project_14_async_runtime.md) | 简化版async运行时 | c06 | 12-15h |
 | [项目 15: 分布式KV](03_project_15_distributed_system.md) | 分布式键值存储 | c05-c10 | 15-20h |
 
 ---

@@ -109,7 +109,7 @@ verus = { git = "https://github.com/verus-lang/verus" }
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-Verus 的核心是 `verus!{}` 宏，在其中可以编写带有 `requires`（前置条件）、`ensures`（后置条件）和 `invariant`（循环不变量）的代码。
+Verus 的核心是 `verus!{}` 宏（Macro），在其中可以编写带有 `requires`（前置条件）、`ensures`（后置条件）和 `invariant`（循环不变量）的代码。
 
 ### 3.1 `requires` — 前置条件 {#31-requires-前置条件}
 >
@@ -226,7 +226,7 @@ fn sum_rec(arr: &[i32], idx: usize) -> (result: i64)
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-Verus 的关键创新是 **ghost 变量** —— 只存在于规格中，不生成运行时代码。
+Verus 的关键创新是 **ghost 变量** —— 只存在于规格中，不生成运行时（Runtime）代码。
 
 ### 4.1 `tracked` Ghost 变量 {#41-tracked-ghost-变量}
 >
@@ -263,7 +263,7 @@ fn push_with_ghost<T>(vec: &mut Vec<T>, value: T, ghost_old_len: Ghost<usize>)
 |:---|:---:|:---:|:---|
 | `T` (普通) | ✅ | ✅ | 数据和规格 |
 | `Ghost<T>` | ❌ | ✅ | 仅规格 |
-| `Tracked<T>` | ✅ | ✅ | 线性 ghost（所有权跟踪） |
+| `Tracked<T>` | ✅ | ✅ | 线性 ghost（所有权（Ownership）跟踪） |
 
 > [来源: [Verus Guide — Ghost Entities](https://github.com/verus-lang/verusverus/guide/ghost.html)]
 > [来源: [PLDI 2023 — Linear Ghost Types](https://dl.acm.org/doi/10.1145/3591285)]
@@ -319,7 +319,7 @@ fn verify_all_nonnegative(arr: &[i32]) -> (result: bool)
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-当函数返回可变引用 `&mut T` 时，Verus 需要 `after<>` 块来描述返回后引用的状态。
+当函数返回可变引用（Mutable Reference） `&mut T` 时，Verus 需要 `after<>` 块来描述返回后引用的状态。
 
 ### 5.1 `after<>` 基础 {#51-after-基础}
 >
@@ -780,10 +780,10 @@ verus! {
 
 | 限制 | 说明 | 缓解策略 |
 |:---|:---|:---|
-| **Rust 特性覆盖** | 部分语法/标准库未建模 | 避免闭包、复杂 trait bounds；使用基础类型 |
+| **Rust 特性覆盖** | 部分语法/标准库未建模 | 避免闭包（Closures）、复杂 trait bounds；使用基础类型 |
 | **SMT 超时** | 复杂不变量导致 Z3 无法求解 | 分解证明步骤，简化不变量 |
 | **递归深度** | 深层递归需显式 `decreases` | 提供良基递减度量 |
-| **Vec/String 规格** | 部分集合操作规格不完整 | 关注索引访问，避免复杂迭代器链 |
+| **Vec/String 规格** | 部分集合操作规格不完整 | 关注索引访问，避免复杂迭代器（Iterator）链 |
 | **性能** | 大型项目验证耗时 | 增量验证，仅修改文件重验 |
 | **nightly 锁定** | 依赖特定 Rust 版本 | 使用 `rust-toolchain.toml` 管理 |
 
@@ -846,7 +846,7 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 - [Kani 实战指南 —— 互补的有界模型检查器](05_kani_practical_guide.md)
 - [形式化操作语义与 Rust 的形式化模型](../../concept/04_formal/03_operational_semantics/17_operational_semantics.md)
 - [所有权的形式化定义](../../concept/04_formal/01_ownership_logic/03_ownership_formal.md)
-- [引用语义与多级借用](../../concept/01_foundation/03_values_and_references/05_reference_semantics.md)
+- [引用（Reference）语义与多级借用（Borrowing）](../../concept/01_foundation/03_values_and_references/05_reference_semantics.md)
 
 ## 11. 来源与延伸阅读 {#11-来源与延伸阅读}
 >

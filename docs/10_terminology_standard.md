@@ -52,7 +52,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-本文档旨在为 Rust 学习项目提供标准化的术语对照体系，确保中英文术语使用的一致性和准确性。所有术语定义均对齐 **Ferrocene Language Specification (FLS)** 标准，并引用官方文档（The Book、Reference、RFC）作为权威来源。
+本文档旨在为 Rust 学习项目提供标准化的术语对照体系，确保中英文术语使用的一致性（Coherence）和准确性。所有术语定义均对齐 **Ferrocene Language Specification (FLS)** 标准，并引用官方文档（The Book、Reference、RFC）作为权威来源。
 
 ### 术语表使用说明 {#术语表使用说明}
 
@@ -74,15 +74,15 @@
 | 中文术语 | 英文术语 | 定义 | 官方来源 |
 |---------|---------|------|---------|
 | 所有权 | Ownership | 每个值在任一时刻有且只有一个所有者，所有者离开作用域时值被释放 | The Book Ch 4.1 |
-| 借用 | Borrowing | 通过引用临时访问值而不获取所有权，分为不可变借用和可变借用 | The Book Ch 4.2 |
-| 不可变借用 | Immutable Borrow / Shared Reference | 允许只读访问的引用类型 `&T`，可同时存在多个 | The Book Ch 4.2 |
+| 借用 | Borrowing | 通过引用临时访问值而不获取所有权，分为不可变借用（Mutable Borrow）和可变借用 | The Book Ch 4.2 |
+| 不可变借用（Borrowing） | Immutable Borrow / Shared Reference | 允许只读访问的引用类型 `&T`，可同时存在多个 | The Book Ch 4.2 |
 | 可变借用 | Mutable Borrow / Exclusive Reference | 允许读写访问的引用类型 `&mut T`，同一作用域内只能存在一个 | The Book Ch 4.2 |
 | 移动 | Move | 将值的所有权从一个变量转移到另一个变量，原变量失效 | The Book Ch 4.1 |
 | 复制 | Copy | 按位复制的隐式克隆，原变量保持有效；仅适用于实现 `Copy` trait 的类型 | The Book Ch 4.1 |
 | 克隆 | Clone | 显式深度复制，通过 `Clone` trait 实现，可自定义复制逻辑 | The Book Ch 4.1 |
 | 借用检查器 | Borrow Checker | 编译器组件，静态分析代码确保借用规则被遵守，防止数据竞争和悬垂引用 | Reference Ch 8.2 |
 | 所有权规则 | Ownership Rules | (1) 每个值有唯一所有者；(2) 值随所有者离开作用域而释放；(3) 所有权可转移 | The Book Ch 4.1 |
-| 借用规则 | Borrowing Rules | (1) 任一时刻只能有一个可变引用或任意数量的不可变引用；(2) 引用必须始终有效 | The Book Ch 4.2 |
+| 借用规则 | Borrowing Rules | (1) 任一时刻只能有一个可变引用（Mutable Reference）或任意数量的不可变引用（Immutable Reference）；(2) 引用必须始终有效 | The Book Ch 4.2 |
 | 作用域 | Scope | 变量有效的程序文本区域，通常由大括号 `{}` 界定 | The Book Ch 4.1 |
 | 释放 | Drop | 值离开作用域时自动调用 `Drop::drop` 方法回收资源 | The Book Ch 15.3 |
 | RAII | Resource Acquisition Is Initialization | 资源获取即初始化，资源生命周期与对象绑定，通过析构器自动释放 | Reference Ch 11.3 |
@@ -110,18 +110,18 @@
 | 切片 | Slice | 动态长度的连续序列视图类型 `&[T]` 或 `&mut [T]` | The Book Ch 4.3 |
 | 结构体 | Struct | 命名字段的复合数据类型，类似其他语言的记录或对象 | The Book Ch 5.1 |
 | 枚举 | Enum | 可拥有多个变体（variants）的代数数据类型 | The Book Ch 6 |
-| 变体 | Variant | 枚举类型的可能取值之一，可包含关联数据 | The Book Ch 6 |
+| 变体 | Variant | 枚举（Enum）类型的可能取值之一，可包含关联数据 | The Book Ch 6 |
 | 模式匹配 | Pattern Matching | 使用 `match` 等结构解构值并执行对应分支的机制 | The Book Ch 6.2 |
 | 泛型 | Generics | 参数化类型，允许编写适用于多种类型的代码 | The Book Ch 10 |
 | 特征 | Trait | 定义共享行为的抽象接口，可被类型实现 | The Book Ch 10.2 |
 | 实现 | Implementation / Impl | 为类型定义方法或实现特征的具体代码块 | The Book Ch 5.3 |
 | 关联类型 | Associated Type | 在 trait 定义中声明、在实现时指定的占位符类型 | The Book Ch 19.2 |
-| 泛型参数 | Generic Parameter | 类型、生命周期或常量的形式参数，用于泛型定义 | Reference Ch 6.1 |
+| 泛型（Generics）参数 | Generic Parameter | 类型、生命周期或常量的形式参数，用于泛型定义 | Reference Ch 6.1 |
 | 类型参数 | Type Parameter | 泛型定义中的形式类型参数，如 `T` in `Vec<T>` | The Book Ch 10.1 |
 | 常量泛型 | Const Generics | 使用常量值作为泛型参数，如 `[T; N]` 中的 `N` | RFC 2000 |
 | 约束 | Bound / Constraint | 对泛型参数的限制条件，如 `T: Display` | The Book Ch 10.2 |
-| 特征对象 | Trait Object | 运行时多态，使用 `dyn Trait` 实现的动态分发 | The Book Ch 17.2 |
-| 静态分发 | Static Dispatch | 编译期确定具体实现的函数调用，通过单态化实现 | Reference Ch 8.9 |
+| 特征对象 | Trait Object | 运行时（Runtime）多态，使用 `dyn Trait` 实现的动态分发 | The Book Ch 17.2 |
+| 静态分发 | Static Dispatch | 编译期确定具体实现的函数调用，通过单态化（Monomorphization）实现 | Reference Ch 8.9 |
 | 动态分发 | Dynamic Dispatch | 运行时确定具体实现的函数调用，通过虚表实现 | Reference Ch 8.9 |
 | 单态化 | Monomorphization | 将泛型代码转换为具体类型代码的编译过程 | Reference Ch 8.9 |
 | 零成本抽象（Zero-Cost Abstraction） | Zero-Cost Abstractions | 运行时无开销的高级抽象，开销在编译期消除 | The Book Ch 13.1 |
@@ -131,7 +131,7 @@
 | 不变 | Invariance | 无子类型关系（`F<A>` 与 `F<B>` 无关） | Reference Ch 4.6 |
 | never 类型 | Never Type (`!`) | 表示永不返回的函数的返回类型，可强制转换为任何类型 | Reference Ch 4.8 |
 | 单元类型 | Unit Type (`()`) | 空元组类型，表示无有意义返回值 | The Book Ch 3.2 |
-| 新类型模式 | Newtype Pattern | 使用元组结构体包装现有类型以提供类型安全和抽象 | The Book Ch 19.3 |
+| 新类型模式 | Newtype Pattern | 使用元组结构体（Struct）包装现有类型以提供类型安全和抽象 | The Book Ch 19.3 |
 | 类型别名 | Type Alias | 为现有类型创建同义词，使用 `type` 关键字 | The Book Ch 19.4 |
 
 ---
@@ -153,7 +153,7 @@
 | 互斥锁 | Mutex | 互斥（Mutual Exclusion）同步原语，保证同时只有一个线程访问数据 | The Book Ch 16.2 |
 | 读写锁 | RwLock | 允许多读单写的同步原语，读共享写独占 | The Book Ch 16.2 |
 | 原子操作（Atomic Operations） | Atomic Operation | 不可中断的基本操作，通过 `std::sync::atomic` 提供 | The Book Ch 16.3 |
-| 内存序 | Memory Ordering | 控制原子操作间可见性的规则（Relaxed/Acquire/Release/AcqRel/SeqCst） | Reference Ch 22.9 |
+| 内存序 | Memory Ordering | 控制原子操作（Atomic Operations）间可见性的规则（Relaxed/Acquire/Release/AcqRel/SeqCst） | Reference Ch 22.9 |
 | 顺序一致性 | Sequential Consistency | 最强的内存序，保证所有线程看到一致的操作顺序 | Reference Ch 22.9 |
 | 获取-释放 | Acquire-Release | 成对的内存序，建立 happens-before 关系 | Reference Ch 22.9 |
 | 条件变量 | Condition Variable | 允许线程等待特定条件满足的同步原语 | The Book Ch 16.2 |
@@ -195,7 +195,7 @@
 | Pin | Pin | 固定值在内存中位置的类型，用于自引用结构和异步 Future | The Book Ch 17.4 |
 | Unpin | Unpin | 标记类型可安全移动的 trait，大多数类型自动实现 | The Book Ch 17.4 |
 | 固定 | Pinning | 保证值在内存中不被移动的机制 | The Book Ch 17.4 |
-| 流 | Stream | 异步版本的迭代器，产生一系列异步值 | Reference Ch 37.1 |
+| 流 | Stream | 异步版本的迭代器（Iterator），产生一系列异步值 | Reference Ch 37.1 |
 | Sink | Sink | 可异步接收值的抽象，Stream 的反向操作 | Reference Ch 37.1 |
 | 异步迭代器 | Async Iterator | 异步生成值序列的类型（`async fn next(&mut self) -> Option<T>`） | RFC 79 |
 | 并发执行 | Concurrent Execution | 同时执行多个 Future 并等待其完成（`join!`/`select!`） | The Book Ch 17.3 |
@@ -215,9 +215,9 @@
 | 中文术语 | 英文术语 | 定义 | 官方来源 |
 |---------|---------|------|---------|
 | 宏 | Macro | 在编译期进行代码生成和转换的元编程机制 | The Book Ch 19.5 |
-| 声明宏 | Declarative Macro / `macro_rules!` | 基于模式匹配的宏定义方式，类似规则匹配替换 | The Book Ch 19.5 |
+| 声明宏 | Declarative Macro / `macro_rules!` | 基于模式匹配（Pattern Matching）的宏定义方式，类似规则匹配替换 | The Book Ch 19.5 |
 | 过程宏 | Procedural Macro | 在编译期执行 Rust 代码进行代码生成的宏类型 | The Book Ch 19.5 |
-| 派生宏 | Derive Macro | 过程宏的一种，通过 `#[derive(Trait)]` 自动实现 trait | The Book Ch 19.5 |
+| 派生宏 | Derive Macro | 过程宏（Procedural Macro）的一种，通过 `#[derive(Trait)]` 自动实现 trait | The Book Ch 19.5 |
 | 属性宏 | Attribute Macro | 过程宏的一种，定义自定义属性 `#[attribute]` 修饰项 | The Book Ch 19.5 |
 | 函数式宏 | Function-like Macro | 过程宏的一种，类似函数调用的宏 `macro!()` | The Book Ch 19.5 |
 | Token | Token | 源代码的最小语法单元，宏操作的基本单位 | Reference Ch 3 |

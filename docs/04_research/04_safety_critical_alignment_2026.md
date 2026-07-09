@@ -155,7 +155,7 @@ MISRA Rust 是汽车/航空领域的事实标准编码规范。
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-**MISRA-Rust-Dir-4.1**: `unsafe` 代码必须被隔离到最小模块
+**MISRA-Rust-Dir-4.1**: `unsafe` 代码必须被隔离到最小模块（Module）
 
 ```rust,ignore
 // ❌ 违反: unsafe 分散在业务逻辑中

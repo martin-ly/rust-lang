@@ -19,9 +19,9 @@
   - [目录 {#目录}](#目录-目录)
   - [一、对齐说明 {#一对齐说明}](#一对齐说明-一对齐说明)
   - [二、形式化语义与内存模型 {#二形式化语义与内存模型}](#二形式化语义与内存模型-二形式化语义与内存模型)
-  - [三、所有权与借用形式化 {#三所有权与借用形式化}](#三所有权与借用形式化-三所有权与借用形式化)
-  - [四、类型系统形式化 {#四类型系统形式化}](#四类型系统形式化-四类型系统形式化)
-  - [五、并发与异步形式化 {#五并发与异步形式化}](#五并发与异步形式化-五并发与异步形式化)
+  - [三、所有权（Ownership）与借用（Borrowing）形式化 {#三所有权与借用形式化}](#三所有权与借用形式化-三所有权与借用形式化)
+  - [四、类型系统（Type System）形式化 {#四类型系统形式化}](#四类型系统形式化-四类型系统形式化)
+  - [五、并发与异步（Async）形式化 {#五并发与异步形式化}](#五并发与异步形式化-五并发与异步形式化)
   - [六、验证工具 {#六验证工具}](#六验证工具-六验证工具)
   - [七、顶级会议/期刊资源 {#七顶级会议期刊资源}](#七顶级会议期刊资源-七顶级会议期刊资源)
     - [7.1 顶级会议 {#71-顶级会议}](#71-顶级会议-71-顶级会议)
@@ -79,7 +79,7 @@
 
 | 论文/工具 | 机构/作者 | 主题 | 项目文档 | 状态 |
 |-----------|-----------|------|----------|------|
-| [RustBelt – Send/Sync](https://dl.acm.org/doi/10.1145/3158154) | MPI-SWS (Jung et al.) | 并发安全形式化 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | ✅ |
+| [RustBelt – Send/Sync](https://dl.acm.org/doi/10.1145/3158154) | MPI-SWS (Jung et al.) | 并发安全（Concurrency Safety）形式化 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | ✅ |
 | [Aeneas – async support](https://dl.acm.org/doi/10.1145/3547647) | EPFL / INRIA (Ho & Protzenko) | 异步状态机验证 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ |
 | [Async Rust: 从 Semantics to Safety](https://arxiv.org/abs/2201.12334) | 多机构 | 异步语义 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 🔄 |
 

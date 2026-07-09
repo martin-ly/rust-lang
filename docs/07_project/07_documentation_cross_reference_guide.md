@@ -9,23 +9,23 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [🔗 文档交叉引用指南 {#文档交叉引用指南}](#-文档交叉引用指南-文档交叉引用指南)
+- [🔗 文档交叉引用（Reference）指南 {#文档交叉引用指南}](#-文档交叉引用指南-文档交叉引用指南)
   - [📑 目录 {#目录}](#-目录-目录)
   - [🗺️ 文档网络总览 {#文档网络总览}](#️-文档网络总览-文档网络总览)
     - [全文档依赖图 {#全文档依赖图}](#全文档依赖图-全文档依赖图)
     - [文档层次结构 {#文档层次结构}](#文档层次结构-文档层次结构)
-  - [🔄 核心模块交叉引用 {#核心模块交叉引用}](#-核心模块交叉引用-核心模块交叉引用)
-    - [C01 - 所有权与借用 {#c01---所有权与借用}](#c01---所有权与借用-c01---所有权与借用)
-    - [C02 - 类型系统 {#c02---类型系统}](#c02---类型系统-c02---类型系统)
+  - [🔄 核心模块（Module）交叉引用 {#核心模块交叉引用}](#-核心模块交叉引用-核心模块交叉引用)
+    - [C01 - 所有权（Ownership）与借用（Borrowing） {#c01---所有权与借用}](#c01---所有权与借用-c01---所有权与借用)
+    - [C02 - 类型系统（Type System） {#c02---类型系统}](#c02---类型系统-c02---类型系统)
     - [C03 - 控制流与函数 {#c03---控制流与函数}](#c03---控制流与函数-c03---控制流与函数)
-    - [C04 - 泛型编程 {#c04---泛型编程}](#c04---泛型编程-c04---泛型编程)
+    - [C04 - 泛型（Generics）编程 {#c04---泛型编程}](#c04---泛型编程-c04---泛型编程)
     - [C05 - 线程与并发 {#c05---线程与并发}](#c05---线程与并发-c05---线程与并发)
-    - [C06 - 异步编程 {#c06---异步编程}](#c06---异步编程-c06---异步编程)
+    - [C06 - 异步（Async）编程 {#c06---异步编程}](#c06---异步编程-c06---异步编程)
     - [C07 - 进程管理 {#c07---进程管理}](#c07---进程管理-c07---进程管理)
     - [C08 - 算法与数据结构 {#c08---算法与数据结构}](#c08---算法与数据结构-c08---算法与数据结构)
     - [C09 - 设计模式 {#c09---设计模式}](#c09---设计模式-c09---设计模式)
     - [C10 - 网络编程 {#c10---网络编程}](#c10---网络编程-c10---网络编程)
-    - [C11 - 宏系统 {#c11---宏系统}](#c11---宏系统-c11---宏系统)
+    - [C11 - 宏（Macro）系统 {#c11---宏系统}](#c11---宏系统-c11---宏系统)
     - [C12 - WASM {#c12---wasm}](#c12---wasm-c12---wasm)
   - [📚 研究笔记交叉引用 {#研究笔记交叉引用}](#-研究笔记交叉引用-研究笔记交叉引用)
     - [形式化方法研究 {#形式化方法研究}](#形式化方法研究-形式化方法研究)
@@ -42,7 +42,7 @@
       - [研究者路径 {#研究者路径}](#研究者路径-研究者路径)
       - [维护者路径 {#维护者路径}](#维护者路径-维护者路径)
     - [按主题导航 {#按主题导航}](#按主题导航-按主题导航)
-      - [内存安全主题 {#内存安全主题}](#内存安全主题-内存安全主题)
+      - [内存安全（Memory Safety）主题 {#内存安全主题}](#内存安全主题-内存安全主题)
       - [并发编程主题 {#并发编程主题}](#并发编程主题-并发编程主题)
       - [类型系统主题 {#类型系统主题}](#类型系统主题-类型系统主题)
       - [设计模式主题 {#设计模式主题}](#设计模式主题-设计模式主题)
@@ -436,7 +436,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) | [TESTING_COVERAGE_GUIDE](../05_guides/05_testing_coverage_guide.md) | 测试语法 ↔ 测试策略 |
 | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 工具 ↔ 应用 |
 | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) | [TROUBLESHOOTING_GUIDE](../05_guides/05_troubleshooting_guide.md) | 错误处理（Error Handling） ↔ 故障排查 |
-| [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](../05_guides/05_performance_tuning_guide.md) | 智能指针 ↔ 性能优化 |
+| [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](../05_guides/05_performance_tuning_guide.md) | 智能指针（Smart Pointer） ↔ 性能优化 |
 | [collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](../05_guides/05_performance_tuning_guide.md) | 集合 ↔ 性能优化 |
 | [strings_formatting_cheatsheet](../02_reference/quick_reference/02_strings_formatting_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 字符串 ↔ CLI应用 |
 | [modules_cheatsheet](../02_reference/quick_reference/02_modules_cheatsheet.md) | [CROSS_MODULE_INTEGRATION_EXAMPLES](../05_guides/05_cross_module_integration_examples.md) | 模块（Module） ↔ 集成示例 |
@@ -459,7 +459,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) | [trait_system_formalization](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) | 泛型 ↔ Trait系统 |
 | design_patterns_cheatsheet | [01_design_patterns_formal](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md) | 模式 ↔ 形式化模式 |
 | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) §智能指针 | 指针 ↔ 所有权模型 |
-| [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) | [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) §Result类型 | 错误处理 ↔ 类型系统（Type System） |
+| [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) | [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) §Result（Result）类型 | 错误处理（Error Handling） ↔ 类型系统（Type System） |
 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | [formal_methods/README](../../archive/research_notes_2026_06_25/formal_methods/README.md) §控制流形式化 | 控制流 ↔ A-CF1公理 |
 
 ---
@@ -726,8 +726,8 @@ graph TB
 | :--- | :--- | :--- | :--- |
 | ownership_model ↔ borrow_checker_proof | 检查相互引用 | 双向链接存在 | ✅ |
 | formal_methods/lifetime ↔ type_theory/lifetime | 检查等价定义引用 | 双向链接存在 | ✅ |
-| async_state_machine ↔ pin_self_referential | 检查Pin依赖引用 | 双向链接存在 | ✅ |
-| send_sync_formalization ↔ async_state_machine | 检查Send/Sync要求 | 双向链接存在 | ✅ |
+| async_state_machine ↔ pin_self_referential | 检查Pin（Pin）依赖引用 | 双向链接存在 | ✅ |
+| send_sync_formalization ↔ async_state_machine | 检查Send（Send）/Sync（Sync）要求 | 双向链接存在 | ✅ |
 | 所有速查卡 ↔ 对应指南 | 检查相关资源部分 | 双向链接存在 | ✅ |
 | 所有速查卡 ↔ 对应研究笔记 | 检查相关资源部分 | 双向链接存在 | ✅ |
 | 01_design_patterns ↔ 04_compositional_engineering | 检查组合引用 | 双向链接存在 | ✅ |

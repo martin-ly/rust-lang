@@ -2,7 +2,7 @@
 
 > **EN**: Formal Tools Module Mapping
 > **Summary**: 形式化工具中的模块与私有性映射 Formal Tools Module Mapping.
-> **概念族**: 形式化模块
+> **概念族**: 形式化模块（Module）
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -46,7 +46,7 @@
 
 | 术语 | 定义 |
 | :--- | :--- |
-| **Aeneas** | 基于 Rust 的 borrow-checker 语义（LLBC）生成为 Lean 证明助手的函数式翻译，专注于 safe Rust 子集，保留生命周期与所有权信息。 |
+| **Aeneas** | 基于 Rust 的 borrow-checker 语义（LLBC）生成为 Lean 证明助手的函数式翻译，专注于 safe Rust 子集，保留生命周期（Lifetimes）与所有权（Ownership）信息。 |
 | **coq-of-rust** | 将 Rust 代码翻译为 Coq 形式的工具，覆盖较大的 Rust 语法子集，通过生成的 Coq 定义进行证明。 |
 | **RustBelt** | MPI-SWS 提出的 Rust 逻辑关系模型，使用 Iris（高阶分离逻辑）在 Coq 中证明 unsafe 代码的安全性，核心概念是协议（protocol）与资源（resource）。 |
 | **Modularity in Proofs** | 形式化工具中如何复用已证明的模块/函数，通常通过接口规范（interface specification）隐藏实现细节。 |
@@ -230,10 +230,10 @@ End BoundedCounter.
 | 场景 | 工具 | 限制 |
 | :--- | :--- | :--- |
 | 公开 unsafe fn | Aeneas | 通常作为 opaque/external，需要手动规范 |
-| 泛型单态化 | coq-of-rust | 需要为每个单态实例生成 Coq 定义，规模可能爆炸 |
+| 泛型（Generics）单态化（Monomorphization） | coq-of-rust | 需要为每个单态实例生成 Coq 定义，规模可能爆炸 |
 | 跨 crate  trait 实现 | RustBelt | 需要为每个实现点建立协议兼容性 |
 | `pub(crate)` 作为公开边界 | 所有工具 | 工具通常以 crate 为单位验证，此时 `pub(crate)` 视为公开 |
-| 宏生成代码 | coq-of-rust / Aeneas | 通常先由 rustc 展开，工具处理展开后的代码 |
+| 宏（Macro）生成代码 | coq-of-rust / Aeneas | 通常先由 rustc 展开，工具处理展开后的代码 |
 
 > **来源:** [Aeneas – Limitations](https://github.com/AeneasVerif/aeneas/blob/main/PROGRESS.md)
 

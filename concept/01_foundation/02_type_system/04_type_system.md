@@ -145,14 +145,14 @@
       - [11.7.9 认知路径：何时名义、何时结构](#1179-认知路径何时名义何时结构)
     - [11.7.10 与多级引用语义的交叉：引用的名义与结构行为](#11710-与多级引用语义的交叉引用的名义与结构行为)
   - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
-    - [12.1 `impl Trait` 与 `dyn Trait` 的类型论差异](#121-impl-trait-与-dyn-trait-的类型论差异)
-    - [12.2 `!` (Never type) 的形式化分析与控制流图](#122--never-type-的形式化分析与控制流图)
-    - [12.3 Const Generics：常量泛型的类型系统扩展](#123-const-generics常量泛型的类型系统扩展)
-    - [12.4 Type Inference：HM 算法与 Rust 扩展](#124-type-inferencehm-算法与-rust-扩展)
-    - [12.5 ZST 与 `PhantomData` 的类型论意义](#125-zst-与-phantomdata-的类型论意义)
-    - [12.6 Discriminant 与内存布局](#126-discriminant-与内存布局)
-    - [12.7 `union` 的类型安全边界](#127-union-的类型安全边界)
-    - [12.8 Nominal vs Structural Typing](#128-nominal-vs-structural-typing)
+    - [补充：`impl Trait` 与 `dyn Trait` 的类型论差异](#补充impl-trait-与-dyn-trait-的类型论差异)
+    - [补充：`!` (Never type) 的形式化分析与控制流图](#补充-never-type-的形式化分析与控制流图)
+    - [补充：Const Generics 的类型系统扩展](#补充const-generics-的类型系统扩展)
+    - [补充：Type Inference 的 HM 算法与 Rust 扩展](#补充type-inference-的-hm-算法与-rust-扩展)
+    - [补充：ZST 与 `PhantomData` 的类型论意义](#补充zst-与-phantomdata-的类型论意义)
+    - [补充：Discriminant 与内存布局](#补充discriminant-与内存布局)
+    - [补充：`union` 的类型安全边界](#补充union-的类型安全边界)
+    - [补充：Nominal vs Structural Typing](#补充nominal-vs-structural-typing)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：类型系统的编译错误](#十二边界测试类型系统的编译错误)
@@ -2372,7 +2372,7 @@ let p: &Point = &Point(1, 2);
 
 ## 十二、待补充与演进方向（TODOs）
 
-### 12.1 `impl Trait` 与 `dyn Trait` 的类型论差异
+### 补充：`impl Trait` 与 `dyn Trait` 的类型论差异
 
 > **定义**：`impl Trait` 是**存在量化类型**的语法糖，表示“某个实现了该 trait 的具体类型”，编译器在单态化时知道具体类型；`dyn Trait` 是**trait 对象**，通过 vtable 实现动态分发，运行时只知道 trait 接口而不知道具体类型。
 
@@ -2388,9 +2388,9 @@ fn g(items: &mut [Box<dyn Iterator<Item = i32>>]) {
 }
 ```
 
-> **相关链接**：完整分析见 §11.1；生命周期与 `impl Trait` 的交互见 [30_lifetimes_advanced.md](../../01_ownership_borrow_lifetime/30_lifetimes_advanced.md) §14。
+> **相关链接**：完整分析见 §11.1；生命周期与 `impl Trait` 的交互见 [30_lifetimes_advanced.md](../01_ownership_borrow_lifetime/30_lifetimes_advanced.md) §14。
 
-### 12.2 `!` (Never type) 的形式化分析与控制流图
+### 补充：`!` (Never type) 的形式化分析与控制流图
 
 > **定义**：`!` 是**底类型（bottom type）**，表示永远不会返回的表达式。它是所有类型的子类型，因此可以出现在任何期望具体类型的位置。
 
@@ -2406,7 +2406,7 @@ fn maybe_ok() -> Result<i32, !> {
 
 > **相关链接**：Never type 权威页见 [31_never_type.md](31_never_type.md)；与 coercion 的交互见 [14_coercion_and_casting.md](14_coercion_and_casting.md)。
 
-### 12.3 Const Generics：常量泛型的类型系统扩展
+### 补充：Const Generics 的类型系统扩展
 
 > **定义**：Const Generics 允许泛型参数不仅是类型或生命周期，还可以是编译期已知的常量值（目前支持整数、`char`、`bool`、`usize` 等），从而把数值参数化引入类型系统。
 
@@ -2424,7 +2424,7 @@ impl<T: Copy + Default, const N: usize> Matrix<T, N> {
 
 > **相关链接**：Const Generics 的完整规则见 §11.3；泛型基础见 [02_generics.md](../../02_intermediate/01_generics/02_generics.md)。
 
-### 12.4 Type Inference：HM 算法与 Rust 扩展
+### 补充：Type Inference 的 HM 算法与 Rust 扩展
 
 > **定义**：类型推断是编译器根据表达式上下文自动推导出类型的过程。Rust 基于 Hindley–Milner（HM）算法的核心思想，并扩展以支持重载、trait bound、方法调用和生命周期。
 
@@ -2439,7 +2439,7 @@ v.push(42i32); // 推断 v: Vec<i32>
 
 > **相关链接**：完整 HM 规则与 Rust 扩展见 §11.4；类型一致性错误见 §12 边界测试。
 
-### 12.5 ZST 与 `PhantomData` 的类型论意义
+### 补充：ZST 与 `PhantomData` 的类型论意义
 
 > **定义**：Zero-sized type（ZST）是不占用运行内存的类型（如 `()`、`PhantomData<T>`、空 enum）。`PhantomData<T>` 是零大小标记类型，用于向类型系统声明“本类型逻辑上拥有/依赖 `T`”，但不存储 `T` 的值。
 
@@ -2456,7 +2456,7 @@ struct Handle<T> {
 
 > **相关链接**：完整分析见 §11.2；与所有权和 FFI 的交互见 [01_ownership.md](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) §8.3。
 
-### 12.6 Discriminant 与内存布局
+### 补充：Discriminant 与内存布局
 
 > **定义**：Discriminant 是 Rust 用于区分 enum 不同变体的**标签（tag）**。编译器可能进行 niche optimization（如 `Option<&T>` 用空指针作为 discriminant）以消除显式标签的内存开销。
 
@@ -2477,7 +2477,7 @@ assert_eq!(mem::discriminant(&m), mem::discriminant(&Message::Quit));
 
 > **相关链接**：完整分析见 §11.5；coercion 与类型转换见 [14_coercion_and_casting.md](14_coercion_and_casting.md)。
 
-### 12.7 `union` 的类型安全边界
+### 补充：`union` 的类型安全边界
 
 > **定义**：`union` 是一种与 C 兼容的内存共享类型，所有变体共享同一块内存，编译器不维护当前活跃变体。读取 `union` 字段必须放在 `unsafe` 块中。
 
@@ -2496,9 +2496,9 @@ let u = U { n: 42 };
 assert_eq!(unsafe { u.n }, 42);
 ```
 
-> **相关链接**：完整分析见 §11.6；高级 `union` 安全边界见 [30_lifetimes_advanced.md](../../01_ownership_borrow_lifetime/30_lifetimes_advanced.md) §16。
+> **相关链接**：完整分析见 §11.6；高级 `union` 安全边界见 [30_lifetimes_advanced.md](../01_ownership_borrow_lifetime/30_lifetimes_advanced.md) §16。
 
-### 12.8 Nominal vs Structural Typing
+### 补充：Nominal vs Structural Typing
 
 > **定义**：**名义类型（Nominal Typing）** 按类型名称判断等价；**结构类型（Structural Typing）** 按类型结构（字段/方法签名）判断等价。Rust 的类型系统以名义类型为主，结构行为仅出现在引用构造、生命周期子类型等有限场景。
 

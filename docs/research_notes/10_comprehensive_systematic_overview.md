@@ -31,8 +31,8 @@
     - [1. 语义归纳表：Rust 核心概念族 {#1-语义归纳表rust-核心概念族}](#1-语义归纳表rust-核心概念族-1-语义归纳表rust-核心概念族)
     - [2. 概念族之间的依赖关系 {#2-概念族之间的依赖关系}](#2-概念族之间的依赖关系-2-概念族之间的依赖关系)
     - [3. 语义归纳：核心命题一句话总结 {#3-语义归纳核心命题一句话总结}](#3-语义归纳核心命题一句话总结-3-语义归纳核心命题一句话总结)
-  - [🔗 全局一致性矩阵 {#全局一致性矩阵}](#-全局一致性矩阵-全局一致性矩阵)
-    - [1. 跨模块术语一致性 {#1-跨模块术语一致性}](#1-跨模块术语一致性-1-跨模块术语一致性)
+  - [🔗 全局一致性（Coherence）矩阵 {#全局一致性矩阵}](#-全局一致性矩阵-全局一致性矩阵)
+    - [1. 跨模块（Module）术语一致性 {#1-跨模块术语一致性}](#1-跨模块术语一致性-1-跨模块术语一致性)
     - [2. 公理编号全局一致性 {#2-公理编号全局一致性}](#2-公理编号全局一致性-2-公理编号全局一致性)
     - [3. 证明依赖链一致性 {#3-证明依赖链一致性}](#3-证明依赖链一致性-3-证明依赖链一致性)
   - [📊 论证缺口详细追踪 {#论证缺口详细追踪}](#-论证缺口详细追踪-论证缺口详细追踪)
@@ -75,7 +75,7 @@
 | :--- | :--- | :--- |
 | **论证缺乏证明** | 概念定义、属性关系、解释论证、形式化证明等缺乏完整推导 | 论证缺口追踪表 + 证明完成度矩阵 |
 | **无系统梳理** | 概念-公理-定理-反例分散，无统一索引 | 语义归纳、概念族谱、全链路图 |
-| **无全局一致性** | 跨模块术语、依赖、公理链不一致 | 全局一致性矩阵、交叉引用校验 |
+| **无全局一致性** | 跨模块术语、依赖、公理链不一致 | 全局一致性矩阵、交叉引用（Reference）校验 |
 | **语义归纳缺失** | 概念语义未归纳、总结未结构化 | 概念族谱、语义归纳表 |
 | **思维表征分散** | 思维导图、矩阵、证明树、决策树、反例分散 | 思维表征方式全索引 |
 | **缺少构造性语义** | 编程语言表达式的语义形式化、求值/存储/类型 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) |
@@ -222,15 +222,15 @@ Rust 语义族谱（顶层归纳）
 | 上游概念族 | 下游概念族 | 依赖关系 | 形式化表达 |
 | :--- | :--- | :--- | :--- |
 | 所有权（Ownership） | 借用（Borrowing） | 借用以所有权为前提 | $\Omega(x)=\text{Owned} \rightarrow \text{Borrow}(x)$ |
-| 所有权+借用 | 生命周期 | 引用需生命周期约束 | $\&'a T \rightarrow 'a \subseteq \text{lft}(T)$ |
+| 所有权（Ownership）+借用（Borrowing） | 生命周期（Lifetimes） | 引用需生命周期约束 | $\&'a T \rightarrow 'a \subseteq \text{lft}(T)$ |
 | 类型系统（Type System） | 型变 | 型变基于子类型 | $S <: T \Rightarrow F[S] \mathrel{?} F[T]$ |
 | 所有权+借用 | 内存安全（Memory Safety） | 规则保证无悬垂等 | 定理 2、3 (ownership_model) |
 | 生命周期 | 引用有效性 | 生命周期满足则引用有效 | 定理 2 (lifetime_formalization) |
-| 类型系统 | 异步状态机 | Future 类型需类型检查 | $\Gamma \vdash e : \text{Future}[\tau]$ |
+| 类型系统（Type System） | 异步（Async）状态机 | Future 类型需类型检查 | $\Gamma \vdash e : \text{Future}[\tau]$ |
 | Send/Sync | 并发安全（Concurrency Safety） | 满足则数据竞争自由 | 定理 6.2 (async_state_machine) |
 | Pin | 自引用安全 | Pin 保证位置稳定 | 定理 1–3 (pin_self_referential) |
 
-**定理 CSO-T1（概念族完备性）**：若程序 $P$ 满足内存安全族、类型安全族、并发安全族、算法正确性族的全部定理，则 $P$ 为 Safe 且良型。
+**定理 CSO-T1（概念族完备性）**：若程序 $P$ 满足内存安全（Memory Safety）族、类型安全族、并发安全（Concurrency Safety）族、算法正确性族的全部定理，则 $P$ 为 Safe 且良型。
 
 *证明*：由 formal_methods（ownership T2/T3、borrow T1、lifetime T2、async T6.2、pin T1–T3）与 type_theory（type_system T1–T3、variance T1–T4）；各族定理覆盖 Safe 子集。∎
 
@@ -251,7 +251,7 @@ Rust 语义族谱（顶层归纳）
 | 概念 | 语义归纳（一句话） | 证明文档 |
 | :--- | :--- | :--- |
 | 所有权 | 每个值恰有一个所有者，移动后原变量无效 | ownership_model |
-| 借用 | 不可变借用可多个，可变借用独占；互斥保证 | borrow_checker_proof |
+| 借用 | 不可变借用（Mutable Borrow）可多个，可变借用独占；互斥保证 | borrow_checker_proof |
 | 生命周期 | 引用生命周期必须 outlive 被引用对象 | lifetime_formalization |
 | 类型安全 | 良型程序不会出现类型错误（进展+保持） | type_system_foundations |
 | 型变 | 协变同向、逆变反向、不变无子类型；违反则悬垂 | variance_theory |
@@ -426,7 +426,7 @@ Axiom/规则层
 | **思维导图** | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) §1 | Rust 1.93 特性、学习路径 | 1.93 特性、跨模块依赖 |
 | **多维矩阵** | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 所有权、类型、并发、同步原语、形式化理论 | 型变、证明方法、公理-定理依赖 |
 | **公理-定理证明树** | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) §4 | MaybeUninit、Never、借用、生命周期、Send/Sync | 证明树 |
-| **公理-定理证明树** | [PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) | 证明结构模板、核心证明路径 | MaybeUninit、联合体、迭代器 |
+| **公理-定理证明树** | [PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) | 证明结构模板、核心证明路径 | MaybeUninit、联合体、迭代器（Iterator） |
 | **公理-定理证明树** | 各 research_notes「公理-定理证明树」小节 | 所有权、借用、生命周期、异步、Pin、型变 | 模块级证明树 |
 | **决策树** | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 所有权、类型、异步、性能、安全决策 | 技术选型 |
 | **决策树** | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) §3 | 特性使用、迁移、性能、应用场景 | 1.93 特性决策 |

@@ -115,7 +115,7 @@
 ## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
-- [模块系统代码实践](formal_modules/70_module_patterns_and_refactoring.md)
+- [模块（Module）系统代码实践](formal_modules/70_module_patterns_and_refactoring.md)
 - [Crate 架构反例](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md)
 - [知识图谱索引](10_knowledge_graph_index.md)
 

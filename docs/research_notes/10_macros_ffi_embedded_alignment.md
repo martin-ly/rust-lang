@@ -1,7 +1,7 @@
 # 宏系统、FFI 与嵌入式生态权威来源对齐矩阵 {#宏系统ffi-与嵌入式生态权威来源对齐矩阵}
 
 > **EN**: Macros FFI Embedded Alignment
-> **Summary**: 宏系统、FFI 与嵌入式生态权威来源对齐矩阵 Macros FFI Embedded Alignment.
+> **Summary**: 宏（Macro）系统、FFI 与嵌入式生态权威来源对齐矩阵 Macros FFI Embedded Alignment.
 > **概念族**: 权威来源对齐 / 宏 / FFI / 嵌入式
 > **内容分级**: [核心级]
 > **层级**: L0-L5
@@ -48,8 +48,8 @@
 | 权威来源 | 类型 | 项目文档 | 覆盖内容 | 状态 |
 |----------|------|----------|----------|------|
 | [The Rust Reference – Macros](https://doc.rust-lang.org/reference/macros.html) | 语言规范 | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | `macro_rules!`、卫生性、fragment specifiers、proc-macro | ✅ 已完成 |
-| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 高级/unsafe 指南 | [10_rustonomicon_alignment.md](10_rustonomicon_alignment.md) | 宏展开与 unsafe 边界、生命周期与类型布局 | ✅ 已完成 |
-| [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/) | 社区教材 | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | 声明宏模式、递归、卫生性、调试技巧 | ✅ 已完成 |
+| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 高级/unsafe 指南 | [10_rustonomicon_alignment.md](10_rustonomicon_alignment.md) | 宏展开与 unsafe 边界、生命周期（Lifetimes）与类型布局 | ✅ 已完成 |
+| [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/) | 社区教材 | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | 声明宏（Declarative Macro）模式、递归、卫生性、调试技巧 | ✅ 已完成 |
 | [proc-macro-workshop](https://github.com/dtolnay/proc-macro-workshop) | 实战练习 | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | 派生宏、属性宏、函数宏、TokenStream 解析 | ✅ 已完成 |
 
 ---
@@ -58,7 +58,7 @@
 
 | 权威来源 | 类型 | 项目文档 | 覆盖内容 | 状态 |
 |----------|------|----------|----------|------|
-| [Rustonomicon – FFI](https://doc.rust-lang.org/nomicon/ffi.html) | 高级/unsafe 指南 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §6 | `extern`、ABI、裸指针、所有权跨边界 | ✅ 已完成 |
+| [Rustonomicon – FFI](https://doc.rust-lang.org/nomicon/ffi.html) | 高级/unsafe 指南 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §6 | `extern`、ABI、裸指针、所有权（Ownership）跨边界 | ✅ 已完成 |
 | [Unsafe Code Guidelines – FFI](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html) | unsafe 指南 | [10_unsafe_code_guidelines_alignment.md](10_unsafe_code_guidelines_alignment.md) | FFI 内存协议、Validity Invariants | ✅ 已完成 |
 | [bindgen](https://rust-lang.github.io/rust-bindgen/) | 工具/crate | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | C/C++ 头文件自动生成 Rust 绑定 | ✅ 已完成 |
 | [cbindgen](https://github.com/mozilla/cbindgen) | 工具/crate | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | 由 Rust 生成 C/C++ 头文件 | ✅ 已完成 |
@@ -82,7 +82,7 @@
 | 权威来源 | 类型 | 项目文档 | 覆盖内容 | 状态 |
 |----------|------|----------|----------|------|
 | [embedded-hal](https://docs.rs/embedded-hal/) | 硬件抽象 trait | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | 外设抽象、传感器/驱动接口 | ✅ 已完成 |
-| [Embassy](https://embassy.dev/) | 异步运行时框架 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | `no_std` async、executor、中断驱动 | ✅ 已完成 |
+| [Embassy](https://embassy.dev/) | 异步运行时（Runtime）框架 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | `no_std` async、executor、中断驱动 | ✅ 已完成 |
 | [RTIC](https://rtic.rs/) | 实时中断驱动并发框架 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | 任务调度、资源锁、单态化（Monomorphization） | ✅ 已完成 |
 | [The Embedded Rust Book](https://docs.rust-embedded.org/book/) | 官方教材 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | `no_std`、HAL、启动流程、panic 处理 | ✅ 已完成 |
 | [Ferrous Systems Training](https://embedded-trainings.ferrous-systems.com/) | 社区培训教材 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | 裸机调试、硬件实操、defmt | ✅ 已完成 |
@@ -110,7 +110,7 @@
 2. **FFI**：跨语言异常安全（C++ exception / Rust panic 边界）与 `UnwindSafe` 的 FFI 映射。
 3. **FFI**：`windows-rs` 生成代码与 `raw-dylib`、COM/WinRT 互操作的专门示例 crate。
 4. **WebAssembly**：WASI 0.2 / component model 与 Rust 新 target（`wasm32-wasip2`）的对齐。
-5. **WebAssembly**：`wasm-bindgen` 高级模式（内部可变性、闭包长期存活、JS 异常处理）的边界反例。
+5. **WebAssembly**：`wasm-bindgen` 高级模式（内部可变性、闭包（Closures）长期存活、JS 异常处理）的边界反例。
 6. **嵌入式**：`no_std` 全局分配器（`embedded-alloc`、`alloc-cortex-m`）与 heap 安全边界。
 7. **嵌入式**：RTIC v2 迁移、Embassy 与 `embassy-time` 时钟抽象的持续跟踪。
 8. **嵌入式**：`probe-rs` 调试脚本自动化与 `defmt` 自定义解码器的实战映射。
@@ -123,7 +123,7 @@
 - [知识图谱索引](10_knowledge_graph_index.md)
 - [Unsafe Code Guidelines 对齐](10_unsafe_code_guidelines_alignment.md)
 - [Rustonomicon 对齐](10_rustonomicon_alignment.md)
-- [异步生态权威来源对齐](10_async_ecosystem_alignment.md)
+- [异步（Async）生态权威来源对齐](10_async_ecosystem_alignment.md)
 - [C11 宏系统 crate](../../crates/c11_macro_system_proc/README.md)
 - [C12 WASM crate](../../crates/c12_wasm/README.md)
 - [C13 嵌入式 crate](../../crates/c13_embedded/README.md)

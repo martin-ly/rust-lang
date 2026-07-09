@@ -25,7 +25,7 @@
   - [2. 为什么需要 Polonius {#2-为什么需要-polonius}](#2-为什么需要-polonius-2-为什么需要-polonius)
     - [2.1 NLL 的局限性 {#21-nll-的局限性}](#21-nll-的局限性-21-nll-的局限性)
     - [2.2 Polonius 的核心改进 {#22-polonius-的核心改进}](#22-polonius-的核心改进-22-polonius-的核心改进)
-  - [3. 核心原理：基于 Datalog 的生命周期推断 {#3-核心原理基于-datalog-的生命周期推断}](#3-核心原理基于-datalog-的生命周期推断-3-核心原理基于-datalog-的生命周期推断)
+  - [3. 核心原理：基于 Datalog 的生命周期（Lifetimes）推断 {#3-核心原理基于-datalog-的生命周期推断}](#3-核心原理基于-datalog-的生命周期推断-3-核心原理基于-datalog-的生命周期推断)
     - [3.1 Datalog 简介 {#31-datalog-简介}](#31-datalog-简介-31-datalog-简介)
     - [3.2 Polonius 的 Datalog 建模 {#32-polonius-的-datalog-建模}](#32-polonius-的-datalog-建模-32-polonius-的-datalog-建模)
     - [3.3 关键推导规则 {#33-关键推导规则}](#33-关键推导规则-33-关键推导规则)
@@ -59,7 +59,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**Polonius** 是 Rust 编译器 `rustc` 的下一代 borrow checker（借用检查器）核心算法。它得名于莎士比亚《哈姆雷特》中的角色波洛涅斯（Polonius），象征其对程序中"借用关系"的精细洞察。
+**Polonius** 是 Rust 编译器 `rustc` 的下一代 borrow checker（借用（Borrowing）检查器）核心算法。它得名于莎士比亚《哈姆雷特》中的角色波洛涅斯（Polonius），象征其对程序中"借用关系"的精细洞察。
 
 ### 历史背景 {#历史背景}
 
@@ -251,7 +251,7 @@ pub fn polonius_wins(vec: &mut Vec<i32>) -> i32 {
 |------|-----|----------|------|
 | 条件返回后修改 | ❌ 报错 | ✅ 通过 | 路径敏感分析 |
 | 循环内条件借用 | ⚠️ 有限 | ✅ 更精确 | 控制流合并策略 |
-| 嵌套结构体字段 | ❌ 保守 | ✅ 精确 | 字段级粒度 |
+| 嵌套结构体（Struct）字段 | ❌ 保守 | ✅ 精确 | 字段级粒度 |
 | 编译时间 | 快 | 较慢（优化中） | 增量求解缓解 |
 
 ---
@@ -379,7 +379,7 @@ Polonius 的精确分析对内核代码尤为重要：
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- **理解编译器演进**：Polonius 代表了类型系统 + 逻辑编程的交叉创新
+- **理解编译器演进**：Polonius 代表了类型系统（Type System） + 逻辑编程的交叉创新
 - **解决实际问题**：遇到 NLL 误报时，知道未来有解决方案
 - **学术研究**：Datalog 在编译器中的应用是 PL 领域的前沿方向
 

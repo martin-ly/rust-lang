@@ -82,7 +82,7 @@
 - **D1 设计模式**：CE-PAT1 模式组合定理（02_effectiveness_proofs）；EB-DET1 等价判定规则（04_expressiveness_boundary）；反例→错误码映射（01_design_patterns_formal）；模式组合约束 DAG（04_boundary_matrix）；Factory/Strategy/Observer/State 证明深度 L2
 - **D2 分布式**：05_distributed 扩展 Event Sourcing、Saga、CQRS、Circuit Breaker、Bulkhead Def/Axiom/定理；CAP/BASE 与 Rust 衔接
 - **D3 工作流**：Def WF1–WF4 工作流形式化；04_expressiveness_boundary 工作流引擎表达力；02_workflow README 23/43 与工作流关系
-- **交叉引用**：00_MASTER_INDEX、03_execution_models README 更新
+- **交叉引用（Reference）**：00_MASTER_INDEX、03_execution_models README 更新
 
 ---
 
@@ -98,7 +98,7 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **DOCS_STRUCTURE_OVERVIEW**：新建 docs/DOCS_STRUCTURE_OVERVIEW.md，按 00_COMPREHENSIVE_SUMMARY 格式（模块（Module）|核心问题|判定目标|核心文档）100% 覆盖 docs
-- **顶层 11 模块**：三大支柱、01_learning、02_reference、04_thinking、05_guides、06_toolchain、07_project、archive、rust-formal-engineering-system 全部纳入表格
+- **顶层 11 模块（Module）**：三大支柱、01_learning、02_reference、04_thinking、05_guides、06_toolchain、07_project、archive、rust-formal-engineering-system 全部纳入表格
 - **子目录 README 元信息**：01_learning、02_reference、04_thinking、05_guides、06_toolchain、07_project、archive、quick_reference、process_reports、version_reports 补齐用途、判定目标、DOCS_STRUCTURE 链接
 - **research_notes 子模块**：formal_methods、type_theory、software_design_theory、experiments 均增加 DOCS_STRUCTURE 链接
 - **双向链接**：00_MASTER_INDEX、research_notes/README、docs/README、rust-formal-engineering-system/README 与 DOCS_STRUCTURE 双向链接
@@ -149,7 +149,7 @@
 
 - **阶段 A**：新建 [send_sync_formalization](formal_methods/10_send_sync_formalization.md)；Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1、与 spawn/Future/Arc 衔接、反例；README 扩展为**六篇并表**
 - **阶段 B**：新建 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](10_safe_decidable_mechanisms_overview.md)；每机制一节（概念定义、属性关系、解释论证、形式证明、反例）；与 formal_methods/type_theory 双向链接
-- **阶段 C**：并发与异步族、Trait 族四维表（可判定性、安全边界、形式化、思维表征）已入 SAFE_DECIDABLE_MECHANISMS_OVERVIEW §6
+- **阶段 C**：并发与异步（Async）族、Trait 族四维表（可判定性、安全边界、形式化、思维表征）已入 SAFE_DECIDABLE_MECHANISMS_OVERVIEW §6
 - **阶段 D**：HIERARCHICAL_MAPPING 增加 send_sync_formalization、安全可判定机制总览行；文档↔思维表征表更新；各篇「五篇并表」→「六篇并表」统一
 - **SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN**：阶段 A–D 状态更新为 ✅ 已完成；00_completeness_gaps、INDEX、QUICK_FIND 已更新
 
@@ -214,7 +214,7 @@
 - **Phase 2 类型构造能力**：新建 [type_theory/10_construction_capability.md](type_theory/10_construction_capability.md)；Def TCON1、TCON 矩阵、类型构造决策树、确定性判定；type_theory README 收录
 - **Phase 3 并发确定性**：扩展 [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md)；Def EB-DET1、 theorem EB-DET-T1、确定性判定决策树、并发 vs 并行判定表；与 FORMAL_PROOF_SYSTEM_GUIDE 衔接
 - **Phase 4 组件成熟度**：扩展 [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md)；Def CE-MAT1（L1–L4 成熟度）、 theorem CE-MAT-T1、构建能力确定性判定树；与 02_workflow、05_boundary_system 衔接
-- **Phase 5 核心特性完整链**：新建 [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md)；13 项核心特性（所有权（Ownership）、借用（Borrowing）、生命周期、Pin、Send/Sync、Future、Trait、泛型（Generics）、match、for、Option/Result、闭包（Closures）、?）统一 Def→示例→论证→证明链
+- **Phase 5 核心特性完整链**：新建 [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md)；13 项核心特性（所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）、Pin、Send/Sync、Future、Trait、泛型（Generics）、match、for、Option/Result、闭包（Closures）、?）统一 Def→示例→论证→证明链
 - **Phase 6 全局索引增强**：UNIFIED_SYSTEMATIC_FRAMEWORK 新增「按特性族/类型族/执行模型子索引」；设计模式表征与组件构建索引
 - **Phase 7 92 特性精简模板**：新建 [FEATURE_TEMPLATE](10_feature_template.md)；概念→形式化引用→反例模板；与 RUST_193 对应
 - **Phase 8 增量流程**：新建 [INCREMENTAL_UPDATE_FLOW](10_incremental_update_flow.md)；1.94+ 发布后更新步骤与检查清单；MAINTENANCE_GUIDE 新增版本增量更新节
@@ -237,9 +237,9 @@
 - **QUICK_REFERENCE**：新增完备性缺口、软件设计理论块；类型理论缺口链接
 - **QUICK_FIND**：新增类型理论缺口、软件设计理论研究领域；「我想理解」增加软件设计理论
 - **RESEARCH_ROADMAP**：新增 1.4 类型理论完备性缺口（持续完善）
-- **INDEX**：type_theory 增加 00_completeness_gaps 条目；类型系统主题增加缺口链接
+- **INDEX**：type_theory 增加 00_completeness_gaps 条目；类型系统（Type System）主题增加缺口链接
 - **类型理论阶段 1**：trait_system_formalization 补全 COH-T1（Trait coherence：至多一个 impl）
-- **全局一致性**：00_master_index、10_quality_assurance、COMPREHENSIVE_SYSTEMATIC_OVERVIEW、INDEX、README 衔接更新
+- **全局一致性（Coherence）**：00_master_index、10_quality_assurance、COMPREHENSIVE_SYSTEMATIC_OVERVIEW、INDEX、README 衔接更新
 - **PROOF_INDEX**：收录 NEG-T1、DYN-T1、DYN-C1、CONST-EVAL-T1；总计 80+ 证明；00_completeness_gaps 状态改为「高/中优先级已补全」
 - **类型理论阶段 6（低优先级）**：type_system_foundations 新增 Def OFFSET1/ASC1/BOT1、定理 OFFSET-T1/ASC-T1/BOT-T1（offset_of!、type ascription、never type）；00_completeness_gaps 阶段 6、宗旨更新；PROOF_INDEX 总计 83+
 - **类型理论阶段 7（全部缺口 Def 占位）**：Def NEWTYPE1/DEREF-NULL1（type_system_foundations）、CONST-MUT1/EXIST1（advanced_types）、TRAIT-GAT1/SPEC1、定理 NEWTYPE-T1/SPEC-T1（trait_system_formalization）；00_completeness_gaps 全部缺口均有 Def；PROOF_INDEX 总计 87+
@@ -272,7 +272,7 @@
 - **索引与实验 100% 完善**：INDEX type_theory 00_completeness_gaps 状态改为「✅ 阶段 1–7 Def 占位完成」；QUICK_FIND 完备性缺口状态更新；STATISTICS 证明数 105+、formal_methods Phase 1–6；experiments README 实验与形式化衔接表新增定理与文档链接列；PROOF_INDEX、experiments 最后更新 2026-02-12
 - **software_design_theory 层次推进丰富**：safe_unsafe_matrix 新增场景化决策 3 例（全局配置、Observer、FFI Gateway）；04_compositional_engineering 新增 Builder+Factory、Repository+Service+DTO 完整代码；02_workflow README 新增场景→模式→代码完整链条（Web API、可撤销编辑器）；05_boundary_system README 新增模式选取与边界判定完整流程；interpreter 新增过滤表达式完整示例；README 新增实质内容索引
 - **software_design_theory 层次推进**：02_complete_43_catalog 补全 10 扩展模式 Rust 代码（Table Data Gateway、Active Record、Gateway、MVC、Front Controller、Remote Facade、Lazy Load、Plugin、Optimistic Offline Lock）；04_expressiveness_boundary 增加等价/近似表达完整代码示例；01_safe_23_catalog 增加典型场景与快速示例表；02_workflow README 增加层次推进阅读路径；04_compositional_engineering 增加设计模式组合示例
-- **software_design_theory 层次推进**：06_rust_idioms 扩展 Error handling、Option/Result、Cow、智能指针选型；07_anti_patterns 增加代码示例（所有权、借用、过度泛型、Clone 满足借用）、规避策略实质指南；02_complete_43 增加 Domain Model、Unit of Work、Data Mapper、Value Object、Registry、Identity Map 代码示例；00_MASTER_INDEX 增加层次推进学习路径；05_boundary_system 增加模式选取决策依据；README 增加 层次推进 L1–L3
+- **software_design_theory 层次推进**：06_rust_idioms 扩展 Error handling、Option/Result、Cow、智能指针（Smart Pointer）选型；07_anti_patterns 增加代码示例（所有权（Ownership）、借用（Borrowing）、过度泛型（Generics）、Clone 满足借用）、规避策略实质指南；02_complete_43 增加 Domain Model、Unit of Work、Data Mapper、Value Object、Registry、Identity Map 代码示例；00_MASTER_INDEX 增加层次推进学习路径；05_boundary_system 增加模式选取决策依据；README 增加 层次推进 L1–L3
 
 ---
 
@@ -399,8 +399,8 @@
 
 **执行模型增强**:
 
-- ✅ 02_async：Waker/Executor、join!/select!、运行时选型、错误传播与取消
-- ✅ 03_concurrent：原子操作与内存顺序、死锁避免、通道选型
+- ✅ 02_async：Waker/Executor、join!/select!、运行时（Runtime）选型、错误传播与取消
+- ✅ 03_concurrent：原子操作（Atomic Operations）与内存顺序、死锁避免、通道选型
 - ✅ 04_parallel：Rayon 工作窃取、原子操作（Atomic Operations）、分治递归、与异步组合
 - ✅ 05_distributed：CAP、失败模式、序列化契约、重试与熔断
 - ✅ 01_synchronous：栈展开与 panic、选型决策树
@@ -483,8 +483,8 @@
 **Rust 1.93 语言特性全面分析**（2026-02-12 追加）:
 
 - ✅ [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) - 92 项语言特性全覆盖
-- ✅ 10 大类别：内存、类型、Trait、控制流、并发、宏、模块、常量、FFI、1.93 新增
-- ✅ DESIGN_MECHANISM_RATIONALE 补全：宏、闭包、模式匹配（Pattern Matching）、Option/Result
+- ✅ 10 大类别：内存、类型、Trait、控制流、并发、宏（Macro）、模块、常量、FFI、1.93 新增
+- ✅ DESIGN_MECHANISM_RATIONALE 补全：宏、闭包（Closures）、模式匹配（Pattern Matching）、Option/Result
 
 ---
 
@@ -544,7 +544,7 @@
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
-- ✅ 异步迭代器性能提升研究（15-20%）
+- ✅ 异步迭代器（Iterator）性能提升研究（15-20%）
 - ✅ const 上下文增强研究
 - ✅ JIT 编译器优化研究
 - ✅ 内存分配优化研究（25-30%）
@@ -758,7 +758,7 @@
 **内存分析研究笔记**:
 
 - ✅ 完善理论基础部分，添加相关概念说明（内存分配器、内存对齐、内存池、垃圾回收、引用计数、内存安全（Memory Safety）、内存分析工具、内存追踪）
-- ✅ 添加理论背景（内存管理理论、内存模型理论、内存安全理论、性能分析理论）
+- ✅ 添加理论背景（内存管理理论、内存模型理论、内存安全（Memory Safety）理论、性能分析理论）
 - ✅ 完善内存模型和内存分析指标的说明
 - ✅ 更新研究进展，反映已完成的工作
 
@@ -903,7 +903,7 @@
 - ✅ 添加理论背景（状态机理论、并发理论、CPS、协程理论）
 - ✅ 添加状态机正确性定理（定理 2）
 - ✅ 添加 Poll 一致性定理（定理 3）
-- ✅ 完善并发安全定理的证明思路
+- ✅ 完善并发安全（Concurrency Safety）定理的证明思路
 - ✅ 更新研究进展，反映已完成的工作
 
 **系统改进**:

@@ -141,7 +141,7 @@ tauri::Builder::default()
 
 > **[来源: [Dioxus Reference](https://dioxuslabs.com/learn/0.7/)]**
 
-Dioxus 使用函数式组件与 `rsx!` 宏，状态通过 `use_signal` / `use_hook` 管理。
+Dioxus 使用函数式组件与 `rsx!` 宏（Macro），状态通过 `use_signal` / `use_hook` 管理。
 
 ```rust
 #[component]
@@ -241,7 +241,7 @@ impl Counter {
 | 特性 | 说明 |
 |:---|:---|
 | `Model` | 应用状态 |
-| `Message` | 用户事件枚举 |
+| `Message` | 用户事件枚举（Enum） |
 | `update` | 纯函数状态迁移 |
 | `view` | 由状态生成 UI |
 
@@ -253,7 +253,7 @@ impl Counter {
 
 ### 4.1 线程模型：UI 主线程与后台计算 {#41-线程模型ui-主线程与后台计算}
 
-Rust GUI 框架通常要求**所有 UI 操作发生在主线程**。在 Tauri / Dioxus / Leptos 中，后台任务需通过通道或信号回传结果；直接在后台线程修改 UI 状态会导致运行时错误或数据竞争。
+Rust GUI 框架通常要求**所有 UI 操作发生在主线程**。在 Tauri / Dioxus / Leptos 中，后台任务需通过通道或信号回传结果；直接在后台线程修改 UI 状态会导致运行时（Runtime）错误或数据竞争。
 
 ```rust,ignore
 // ❌ 错误：在 Tokio 任务中直接修改 egui 状态
@@ -289,7 +289,7 @@ impl eframe::App for MyApp {
 
 ### 4.4 生命周期：Tauri Command 中的非 Send 类型 {#44-生命周期tauri-command-中的非-send-类型}
 
-Tauri 命令可能在异步运行时中执行，返回的 Future 及其捕获的状态必须满足 `Send`。
+Tauri 命令可能在异步（Async）运行时中执行，返回的 Future 及其捕获的状态必须满足 `Send`。
 
 ```rust,ignore
 use std::rc::Rc;
@@ -317,12 +317,12 @@ let window = web_sys::window().unwrap();
 
 > **[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]**
 
-| 框架 | 核心模式 | 类型系统价值 |
+| 框架 | 核心模式 | 类型系统（Type System）价值 |
 |:---|:---|:---|
 | **Tauri** | Command + State 注入 | `State<T>` 在编译期保证单例存在 |
-| **Dioxus** | 函数式组件 + 响应式钩子 | `Element` 生命周期与组件树一致 |
+| **Dioxus** | 函数式组件 + 响应式钩子 | `Element` 生命周期（Lifetimes）与组件树一致 |
 | **Leptos** | 细粒度信号 + 同构视图 | `signal` / `Memo` 在类型级别区分读写 |
-| **egui** | 即时模式 + 闭包回调 | 每帧 `&mut Ui` 借用避免持久组件树 |
+| **egui** | 即时模式 + 闭包（Closures）回调 | 每帧 `&mut Ui` 借用（Borrowing）避免持久组件树 |
 | **iced** | Elm Model-Update-View | `Message` 枚举穷举所有交互，强制处理分支 |
 
 ---

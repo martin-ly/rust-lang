@@ -94,8 +94,8 @@ let closure = move || println!("{}", s);
 
 | Trait | 描述 | 使用场景 |
 |-------|------|----------|
-| `Fn` | 不可变借用捕获 | 可多次调用 |
-| `FnMut` | 可变借用捕获 | 可多次调用，需要可变引用 |
+| `Fn` | 不可变借用（Mutable Borrow）捕获 | 可多次调用 |
+| `FnMut` | 可变借用（Borrowing）捕获 | 可多次调用，需要可变引用（Mutable Reference） |
 | `FnOnce` | 移动捕获 | 只能调用一次 |
 
 ### Trait 使用示例 {#trait-使用示例}
@@ -177,7 +177,7 @@ where
 
 - [控制流与函数速查卡](02_control_flow_functions_cheatsheet.md)
 - [迭代器速查卡](02_collections_iterators_cheatsheet.md)
-- [类型系统速查卡](02_type_system.md)
+- [类型系统（Type System）速查卡](02_type_system.md)
 
 ---
 

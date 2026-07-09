@@ -49,7 +49,7 @@
 
 | 论证环节 | RFC 内容 | 项目文档 | 备注 |
 |----------|----------|----------|------|
-| Motivation | 词法生命周期过于严格，拒绝安全代码 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | NLL 前借用检查器限制 |
+| Motivation | 词法生命周期（Lifetimes）过于严格，拒绝安全代码 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | NLL 前借用检查器限制 |
 | Design | 基于 CFG 的数据流分析 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | NLL 算法 |
 | Rationale | 提高表达能力而不损失安全 | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) | 反例仍被正确拒绝 |
 
@@ -68,7 +68,7 @@
 
 | 论证环节 | RFC 内容 | 项目文档 | 备注 |
 |----------|----------|----------|------|
-| Motivation | 需要安全地处理泛型生命周期子类型 | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | 型变规则动机 |
+| Motivation | 需要安全地处理泛型（Generics）生命周期子类型 | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | 型变规则动机 |
 | Design | 定义协变/逆变/不变规则 | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | 型变表 |
 | Rationale | 防止通过子类型破坏不变量 | [type_theory/60_type_system_counterexamples.md](type_theory/60_type_system_counterexamples.md) §1 | 型变误用反例 |
 
@@ -87,9 +87,9 @@
 
 | 论证环节 | RFC 内容 | 项目文档 | 备注 |
 |----------|----------|----------|------|
-| Motivation | 零成本抽象的异步 I/O | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 异步动机 |
+| Motivation | 零成本抽象（Zero-Cost Abstraction）的异步 I/O | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 异步动机 |
 | Design | async 块编译为 Future 状态机 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 状态机展开 |
-| Drawbacks | Pin、自引用复杂性 | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) | Pin 引入原因 |
+| Drawbacks | Pin、自引用（Reference）复杂性 | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) | Pin 引入原因 |
 | Rationale | 与同步代码接近的语法 | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §4 | 同步锁跨 await 风险 |
 
 ---

@@ -37,7 +37,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-Rust 的内存安全保证通过所有权系统实现，无需垃圾回收器：
+Rust 的内存安全（Memory Safety）保证通过所有权（Ownership）系统实现，无需垃圾回收器：
 
 ```rust
 // 栈分配 vs 堆分配

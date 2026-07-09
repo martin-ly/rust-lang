@@ -13,7 +13,7 @@
 ## 文档索引 {#文档索引}
 
 - [TRPL 3rd Ed 章节映射表](learning_mvp_path.md) — 官方教材逐章到 `concept/` 权威页的完整映射
-- [跨模块学习路线图](01_cross_module_learning_roadmap_2025_10_25.md) — 2025-10 版学习路线图
+- [跨模块（Module）学习路线图](01_cross_module_learning_roadmap_2025_10_25.md) — 2025-10 版学习路线图
 - [跨模块学习导航图](01_cross_module_navigation.md) — 概念/knowledge/book 三轨导航
 - [学习路径指南](01_learning_path_guide_2025_10_24.md) — 初学者学习路径建议
 - [学习路径规划文档](01_learning_path_planning.md) — 系统化学习规划

@@ -173,7 +173,7 @@
 | :--- | :--- | :--- | :--- |
 | 所有权（Ownership） | 资源唯一控制者 | 资源唯一控制者 | ✅ 一致 |
 | 借用（Borrowing） | &T / &mut T | &T / &mut T | ✅ 一致 |
-| 生命周期 | 引用有效性范围 | 引用有效性范围 | ✅ 一致 |
+| 生命周期（Lifetimes） | 引用（Reference）有效性范围 | 引用有效性范围 | ✅ 一致 |
 
 ### 维度 2: 代码示例对齐 {#维度-2-代码示例对齐}
 
@@ -253,9 +253,9 @@ let r = &s;
 
 | 定理 | 本项目 | RustBelt | 状态 |
 | :--- | :--- | :--- | :--- |
-| 所有权唯一性 | Def OW1, T2 | Theorem 4.1 | ✅ 一致 |
-| 借用安全性 | Def BR1-4, T1 | Theorem 5.2 | ✅ 一致 |
-| 类型安全性 | Def TY1-3, T3 | 类型系统章节 | ✅ 一致 |
+| 所有权（Ownership）唯一性 | Def OW1, T2 | Theorem 4.1 | ✅ 一致 |
+| 借用（Borrowing）安全性 | Def BR1-4, T1 | Theorem 5.2 | ✅ 一致 |
+| 类型安全性 | Def TY1-3, T3 | 类型系统（Type System）章节 | ✅ 一致 |
 
 ---
 
@@ -348,13 +348,13 @@ let r = &s;
 | 结构体（Struct） | Rust Book 5 | quick_reference/02_type_system.md | ✅ | 一致 |
 | 枚举（Enum） | Rust Book 6 | quick_reference/02_type_system.md | ✅ | 一致 |
 | 模式匹配（Pattern Matching） | Rust Book 6.2 | quick_reference/02_control_flow_functions_cheatsheet.md | ✅ | 一致 |
-| 错误处理 | Rust Book 9 | quick_reference/02_error_handling_cheatsheet.md | ✅ | 一致 |
-| 泛型 | Rust Book 10 | quick_reference/02_generics_cheatsheet.md | ✅ | 一致 |
+| 错误处理（Error Handling） | Rust Book 9 | quick_reference/02_error_handling_cheatsheet.md | ✅ | 一致 |
+| 泛型（Generics） | Rust Book 10 | quick_reference/02_generics_cheatsheet.md | ✅ | 一致 |
 | Trait | Rust Book 10.2 | quick_reference/02_type_system.md | ✅ | 一致 |
 | 生命周期 | Rust Book 10.3 | quick_reference/02_type_system.md | ✅ | 一致 |
 | 测试 | Rust Book 11 | quick_reference/02_testing_cheatsheet.md | ✅ | 一致 |
 | 闭包（Closures） | Rust Book 13 | quick_reference/02_control_flow_functions_cheatsheet.md | ✅ | 一致 |
-| 迭代器 | Rust Book 13.2 | quick_reference/02_collections_iterators_cheatsheet.md | ✅ | 一致 |
+| 迭代器（Iterator） | Rust Book 13.2 | quick_reference/02_collections_iterators_cheatsheet.md | ✅ | 一致 |
 | 智能指针（Smart Pointer） | Rust Book 15 | quick_reference/02_smart_pointers_cheatsheet.md | ✅ | 一致 |
 | 并发 | Rust Book 16 | quick_reference/02_threads_concurrency_cheatsheet.md | ✅ | 一致 |
 | 异步（Async） | Rust Book 17 | quick_reference/02_async_patterns.md | ✅ | 一致 |
@@ -435,7 +435,7 @@ let r = &s;
 | 所有权唯一性 | ✅ 已证明 | ✅ 类型规则 | ✅ 树节点独占 | ✅ `own(b)` | ✅ 概念对齐，❌ 机械证明 |
 | 借用安全性 | ✅ 已证明 | ✅ 推理规则 | ✅ 权限树 | ✅ `mut/shr` | ✅ 概念对齐，❌ 机械证明 |
 | 生命周期 | ✅ Lifetime Logic | ✅ Region | ✅ 节点存活期 | ✅ 时间戳跨度 | ✅ 类型论/形式化定义 |
-| 数据竞争自由 | ✅ 已证明 | — | — | ✅ 运行时检测 | ✅ 定理 1 |
+| 数据竞争自由 | ✅ 已证明 | — | — | ✅ 运行时（Runtime）检测 | ✅ 定理 1 |
 | unsafe 封装 | ✅ 库规范 | — | ✅ 运行期检测 | ✅ 部分支持 | ⚠️ Def 占位 |
 | 可执行语义 | — | — | ✅ Miri | ✅ K-Framework | ❌ 无实现 |
 | 工具链验证 | Aeneas/Verus | — | Miri/Kani | — | ⚠️ 计划/占位 |

@@ -25,14 +25,14 @@
   - [📑 目录 {#目录}](#-目录-目录)
   - [形式化定义与定理 {#形式化定义与定理}](#形式化定义与定理-形式化定义与定理)
   - [衔接关系图 {#衔接关系图}](#衔接关系图-衔接关系图)
-  - [组合与所有权 {#组合与所有权}](#组合与所有权-组合与所有权)
+  - [组合与所有权（Ownership） {#组合与所有权}](#组合与所有权-组合与所有权)
   - [组合与 trait {#组合与-trait}](#组合与-trait-组合与-trait)
   - [Tower Service 与类型驱动中间件组合 {#tower-service-与类型驱动中间件组合}](#tower-service-与类型驱动中间件组合-tower-service-与类型驱动中间件组合)
   - [设计模式组合示例 {#设计模式组合示例}](#设计模式组合示例-设计模式组合示例)
   - [组合代码示例 {#组合代码示例}](#组合代码示例-组合代码示例)
   - [完整多模式组合链条：Builder + Factory + Repository {#完整多模式组合链条builder-factory-repository}](#完整多模式组合链条builder--factory--repository-完整多模式组合链条builder-factory-repository)
   - [组合验证清单 {#组合验证清单}](#组合验证清单-组合验证清单)
-  - [跨模块 Send/Sync 传递 {#跨模块-sendsync-传递}](#跨模块-sendsync-传递-跨模块-sendsync-传递)
+  - [跨模块（Module） Send/Sync 传递 {#跨模块-sendsync-传递}](#跨模块-sendsync-传递-跨模块-sendsync-传递)
   - [组合反例 {#组合反例}](#组合反例-组合反例)
   - [多层次组合链条（实质内容） {#多层次组合链条实质内容}](#多层次组合链条实质内容-多层次组合链条实质内容)
     - [链条 1：Builder + Factory + Repository {#链条-1builder-factory-repository}](#链条-1builder--factory--repository-链条-1builder-factory-repository)
@@ -40,7 +40,7 @@
     - [链条 3：Composite + Visitor + Iterator（完整实现） {#链条-3composite-visitor-iterator完整实现}](#链条-3composite--visitor--iterator完整实现-链条-3composite-visitor-iterator完整实现)
     - [链条 4：Chain of Responsibility + Command + Observer {#链条-4chain-of-responsibility-command-observer}](#链条-4chain-of-responsibility--command--observer-链条-4chain-of-responsibility-command-observer)
   - [跨模块边界最佳实践 {#跨模块边界最佳实践}](#跨模块边界最佳实践-跨模块边界最佳实践)
-  - [引用 {#引用}](#引用-引用)
+  - [引用（Reference） {#引用}](#引用-引用)
   - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
       - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
@@ -69,11 +69,11 @@
 
 **Def 1.2（性质保持）**:
 
-设 $\Phi$ 为性质（如内存安全、无数据竞争、类型安全）。
+设 $\Phi$ 为性质（如内存安全（Memory Safety）、无数据竞争、类型安全）。
 
 若 $M_1$、$M_2$ 各自满足 $\Phi$，且跨模块调用不破坏 $\Phi$，则称**组合保持 $\Phi$**。
 
-**Axiom IT1**：所有权在跨模块值传递时转移；引用传递遵守借用规则。
+**Axiom IT1**：所有权在跨模块值传递时转移；引用传递遵守借用（Borrowing）规则。
 
 由 [ownership_model](../../formal_methods/10_ownership_model.md) 规则 1–3、[borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) 规则 5–8。
 
@@ -87,7 +87,7 @@
 
 *证明*：由 [async_state_machine](../../formal_methods/10_async_state_machine.md) T6.1–T6.3；Future 跨 await 点持有时，需 Send 才能跨线程。
 
-**引理 IT-L1（跨模块引用生命周期）**：若 $M_1$ 的 `pub fn` 返回 `&'a T`，则 `'a` 必须 outlive 调用者可见的生命周期；否则编译错误。
+**引理 IT-L1（跨模块引用生命周期（Lifetimes））**：若 $M_1$ 的 `pub fn` 返回 `&'a T`，则 `'a` 必须 outlive 调用者可见的生命周期；否则编译错误。
 
 *证明*：由 lifetime_formalization T2；跨模块不改变 outlives 规则。∎
 
@@ -177,9 +177,9 @@
 
 | 场景 | 衔接 |
 | :--- | :--- |
-| `fn f<T: Trait>(x: T)` | 泛型约束跨模块；单态化后类型确定 |
+| `fn f<T: Trait>(x: T)` | 泛型（Generics）约束跨模块；单态化（Monomorphization）后类型确定 |
 | `fn f(x: &dyn Trait)` | 对象安全；vtable 正确 |
-| `impl Trait for ForeignType` | 孤儿规则； coherence 保证 |
+| `impl Trait for ForeignType` | 孤儿规则（Orphan Rule）； coherence 保证 |
 
 ---
 

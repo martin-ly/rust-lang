@@ -28,7 +28,7 @@
     - [2. 内存分析 {#2-内存分析}](#2-内存分析-2-内存分析)
     - [3. 编译器优化 {#3-编译器优化}](#3-编译器优化-3-编译器优化)
     - [4. 并发性能 {#4-并发性能}](#4-并发性能-4-并发性能)
-    - [5. 宏展开性能 {#5-宏展开性能}](#5-宏展开性能-5-宏展开性能)
+    - [5. 宏（Macro）展开性能 {#5-宏展开性能}](#5-宏展开性能-5-宏展开性能)
   - [📝 研究笔记 {#研究笔记}](#-研究笔记-研究笔记)
     - [已完成 ✅ {#已完成}](#已完成--已完成)
   - [🔗 相关资源 {#相关资源}](#-相关资源-相关资源)
@@ -205,7 +205,7 @@
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - [算法实现](../../../crates/c08_algorithms/src/README.md)
-- [异步实现](../../../crates/c06_async/docs/README.md)
+- [异步（Async）实现](../../../crates/c06_async/docs/README.md)
 - [并发实现](../../../crates/c05_threads/docs/README.md)
 
 ### 工具资源 {#工具资源}
@@ -237,7 +237,7 @@
 
 - **统计方法**: 使用统计方法分析结果
 - **多次运行**: 多次运行取平均值
-- **环境控制**: 控制实验环境的一致性
+- **环境控制**: 控制实验环境的一致性（Coherence）
 - **结果报告**: 清晰报告实验结果
 
 ### 性能分析工具 {#性能分析工具}
@@ -395,7 +395,7 @@
 | Rust Reference | [doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/) | 语言语义、类型布局、宏、并发 |
 | The Rust Programming Language | [doc.rust-lang.org/book](https://doc.rust-lang.org/book/) | 官方教程（所有权（Ownership）、并发、宏） |
 | Rust Standard Library | [doc.rust-lang.org/std](https://doc.rust-lang.org/std/) | `std::sync`、`std::alloc`、`Atomic`、`Vec` 等 API |
-| Tokio Docs | [docs.rs/tokio](https://docs.rs/tokio/latest/tokio/) | 异步运行时与通道 |
+| Tokio Docs | [docs.rs/tokio](https://docs.rs/tokio/latest/tokio/) | 异步运行时（Runtime）与通道 |
 | Rayon Docs | [docs.rs/rayon](https://docs.rs/rayon/latest/rayon/) | 数据并行 |
 | Crossbeam Docs | [docs.rs/crossbeam](https://docs.rs/crossbeam/latest/crossbeam/) | 高性能并发原语 |
 | The Little Book of Rust Macros | [veykril.github.io/tlborm](https://veykril.github.io/tlborm/) | 宏高级主题 |

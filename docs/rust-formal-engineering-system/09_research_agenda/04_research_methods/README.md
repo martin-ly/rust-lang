@@ -305,10 +305,10 @@ mod property_tests {
 | 形式化方法概述 | 形式化验证基础理论 | [../../../research_notes/formal_methods/README.md](../../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
 | 形式化验证指南 | 完整验证流程 | [../../../research_notes/10_formal_verification_guide.md](../../../../archive/research_notes_2026_06_25/10_formal_verification_guide.md) |
 | 证明系统指南 | 形式化证明方法 | [../../../research_notes/10_formal_proof_system_guide.md](../../../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md) |
-| 所有权模型形式化 | 所有权系统数学定义 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
-| 生命周期形式化 | 生命周期理论证明 | ../../../research_notes/formal_methods/10_lifetime_formalization.md |
-| 借用检查器证明 | 借用检查器形式化 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
+| 所有权（Ownership）模型形式化 | 所有权系统数学定义 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
+| 类型系统（Type System）形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
+| 生命周期（Lifetimes）形式化 | 生命周期理论证明 | ../../../research_notes/formal_methods/10_lifetime_formalization.md |
+| 借用（Borrowing）检查器证明 | 借用检查器形式化 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | 证明索引 | 形式化证明集合 | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 
 ## 相关研究笔记 {#相关研究笔记}

@@ -29,20 +29,20 @@
 | TRPL 章节 | concept/ 对应文件 | 对齐状态 | 差异摘要 |
 |:---|:---|:---:|:---|
 | **Ch 1: Getting Started** | [00_pl_prerequisites.md](../concept/01_foundation/00_pl_prerequisites.md) | ⚠️ | TRPL 侧重安装与 Hello World；concept/ 前置 PL 理论基础 |
-| **Ch 2: Guessing Game** | [07_control_flow.md](../concept/01_foundation/04_control_flow/07_control_flow.md) · [10_error_handling_basics.md](../concept/01_foundation/10_error_handling_basics.md) | ⚠️ | TRPL 以完整项目驱动；concept/ 拆分为控制流和错误处理 |
+| **Ch 2: Guessing Game** | [07_control_flow.md](../concept/01_foundation/04_control_flow/07_control_flow.md) · [10_error_handling_basics.md](../concept/01_foundation/10_error_handling_basics.md) | ⚠️ | TRPL 以完整项目驱动；concept/ 拆分为控制流和错误处理（Error Handling） |
 | **Ch 3: Common Programming Concepts** | [04_type_system.md](../concept/01_foundation/02_type_system/04_type_system.md) · [10_numerics.md](../concept/01_foundation/02_type_system/10_numerics.md) · [20_variable_model.md](../concept/01_foundation/03_values_and_references/20_variable_model.md) | ✅ | 变量、类型、函数、控制流、注释等基础概念完全覆盖 |
 | **Ch 4: Understanding Ownership** | [01_ownership.md](../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | ✅ | 核心叙事一致；concept/ 额外提供形式化命题和定理链 |
 | **Ch 5: Using Structs** | [04_type_system.md](../concept/01_foundation/02_type_system/04_type_system.md) · [08_collections.md](../concept/01_foundation/05_collections/08_collections.md) | ✅ | struct、enum、method 完全覆盖；concept/ 额外包含 ADT 代数语义 |
 | **Ch 6: Enums and Pattern Matching** | [04_type_system.md](../concept/01_foundation/02_type_system/04_type_system.md) · [07_control_flow.md](../concept/01_foundation/04_control_flow/07_control_flow.md) | ✅ | enum、match、if let 完全覆盖；concept/ 额外包含穷尽性证明 |
-| **Ch 7: Packages, Crates, Modules** | [11_modules_and_paths.md](../concept/01_foundation/07_modules_and_items/11_modules_and_paths.md) · [10_module_system.md](../concept/02_intermediate/05_modules_and_visibility/10_module_system.md) | ✅ | 模块系统完全覆盖；concept/ L2 额外包含 workspace 深入分析 |
+| **Ch 7: Packages, Crates, Modules** | [11_modules_and_paths.md](../concept/01_foundation/07_modules_and_items/11_modules_and_paths.md) · [10_module_system.md](../concept/02_intermediate/05_modules_and_visibility/10_module_system.md) | ✅ | 模块（Module）系统完全覆盖；concept/ L2 额外包含 workspace 深入分析 |
 | **Ch 8: Common Collections** | [08_collections.md](../concept/01_foundation/05_collections/08_collections.md) · [17_collections_advanced.md](../concept/01_foundation/05_collections/17_collections_advanced.md) | ✅ | Vec、String、HashMap 完全覆盖；concept/ 额外包含 BTreeMap/Set |
 | **Ch 9: Error Handling** | [10_error_handling_basics.md](../concept/01_foundation/10_error_handling_basics.md) · [04_error_handling.md](../concept/02_intermediate/03_error_handling/04_error_handling.md) · [15_error_handling_deep_dive.md](../concept/02_intermediate/15_error_handling_deep_dive.md) | ✅ | panic、Result、? 完全覆盖；concept/ L2 额外包含 anyhow/thiserror |
 | **Ch 10: Generics, Traits, Lifetimes** | [01_traits.md](../concept/02_intermediate/00_traits/01_traits.md) · [02_generics.md](../concept/02_intermediate/01_generics/02_generics.md) · [03_lifetimes.md](../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [18_lifetimes_advanced.md](../concept/02_intermediate/00_traits/18_lifetimes_advanced.md) | ✅ | 三大核心主题完全覆盖；concept/ 拆分更细 |
 | **Ch 11: Writing Automated Tests** | [16_testing_basics.md](../concept/01_foundation/10_testing_basics/16_testing_basics.md) · [12_testing_strategies.md](../concept/06_ecosystem/09_testing_and_quality/12_testing_strategies.md) | ✅ | 单元测试、集成测试完全覆盖；concept/ 额外包含属性测试 |
-| **Ch 12: I/O Project: CLI** | [MVP 学习路径](../concept/00_meta/04_navigation/learning_mvp_path.md) | ⚠️ | TRPL 以完整 CLI 项目贯穿；concept/ MVP 路径更宏观 |
-| **Ch 13: Iterators and Closures** | [15_closure_basics.md](../concept/01_foundation/00_start/15_closure_basics.md) · [07_closure_types.md](../concept/02_intermediate/04_types_and_conversions/07_closure_types.md) · [15_iterator_patterns.md](../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) | ✅ | 闭包、迭代器完全覆盖；concept/ 额外包含自定义迭代器 |
+| **Ch 12: I/O Project: CLI** | [MVP 学习路径](../concept/00_meta/04_navigation/learning_mvp_path.md) | ⚠️ | TRPL 以完整 CLI 项目贯穿；concept/ MVP 路径更宏（Macro）观 |
+| **Ch 13: Iterators and Closures** | [15_closure_basics.md](../concept/01_foundation/00_start/15_closure_basics.md) · [07_closure_types.md](../concept/02_intermediate/04_types_and_conversions/07_closure_types.md) · [15_iterator_patterns.md](../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) | ✅ | 闭包、迭代器（Iterator）完全覆盖；concept/ 额外包含自定义迭代器 |
 | **Ch 14: More About Cargo** | [09_cargo_script.md](../concept/06_ecosystem/01_cargo/09_cargo_script.md) · [01_toolchain.md](../concept/06_ecosystem/00_toolchain/01_toolchain.md) | ⚠️ | TRPL 侧重 Cargo 工作流；concept/ 分散在生态层 |
-| **Ch 15: Smart Pointers** | [12_smart_pointers.md](../concept/02_intermediate/02_memory_management/12_smart_pointers.md) | ✅ | Box、Rc、RefCell、Arc 完全覆盖；concept/ 额外包含自定义智能指针 |
+| **Ch 15: Smart Pointers** | [12_smart_pointers.md](../concept/02_intermediate/02_memory_management/12_smart_pointers.md) | ✅ | Box、Rc、RefCell、Arc 完全覆盖；concept/ 额外包含自定义智能指针（Smart Pointer） |
 | **Ch 16: Fearless Concurrency** | [01_concurrency.md](../concept/03_advanced/00_concurrency/01_concurrency.md) | ✅ | 线程、Mutex、Arc、Channel 完全覆盖；concept/ 额外包含内存顺序 |
 | **Ch 17: OOP Features** | [01_traits.md](../concept/02_intermediate/00_traits/01_traits.md) · [01_rust_vs_cpp.md](../concept/05_comparative/01_systems_languages/01_rust_vs_cpp.md) | ⚠️ | TRPL 以 trait 对象讲解动态分发；concept/ 强调无继承设计哲学 |
 | **Ch 18: Patterns and Matching** | [07_control_flow.md](../concept/01_foundation/04_control_flow/07_control_flow.md) · [12_attributes_and_macros.md](../concept/01_foundation/09_macros_basics/12_attributes_and_macros.md) · [15_iterator_patterns.md](../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) | ✅ | `match`/`if let` 模式语法完全覆盖；concept/ 额外包含守卫条件、@ 绑定与迭代器模式 |
@@ -68,7 +68,7 @@
 |:---|:---|:---|:---|
 | Ownership | 直觉 + 规则 | 直觉 + 形式化命题 + 定理链 + 认知路径 | concept/ 有 L4 形式化层支撑 |
 | Lifetimes | 语法 + 省略规则 | 语法 + 省略规则 + HRTB + 方差 + Polonius | concept/ 有 03_lifetimes_advanced.md |
-| Traits | 语法 + 基本用法 | 语法 + 孤儿规则 + 一致性 + 对象安全 + GAT + 负实现 | concept/ 拆分为 L2/L3/L4 三层 |
+| Traits | 语法 + 基本用法 | 语法 + 孤儿规则（Orphan Rule） + 一致性（Coherence） + 对象安全 + GAT + 负实现 | concept/ 拆分为 L2/L3/L4 三层 |
 | Unsafe | 基本语法 + 裸指针 | 完整 unsafe 模式 + Miri 验证 + Safety Contract + FFI | concept/ 有 03_unsafe.md + 05_rust_ffi.md |
 | Concurrency | 线程 + Mutex + Channel | 内存顺序 + 锁-free + 并发模式 + 形式化验证 | concept/ 有 L3 并发 + L4 分离逻辑 |
 
@@ -85,7 +85,7 @@
 | concept/ 内容 | 价值 | 对应层级 |
 |:---|:---|:---:|
 | 形式化验证工具链（Kani、Verus、Miri、RustBelt） | 研究者/安全关键领域 | L4 |
-| 效果系统（Effects System）预研 | 前沿类型系统研究 | L7 |
+| 效果系统（Effects System）预研 | 前沿类型系统（Type System）研究 | L7 |
 | 跨语言对比（Rust vs C++/Go/Java 等 16 种语言） | 迁移背景学习者 | L5 |
 | 生态工程层（Tokio、Axum、Sea-ORM 等生产工具链） | 工业实践 | L6 |
 | AI 集成与代码生成前沿 | 未来趋势 | L7 |

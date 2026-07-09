@@ -203,7 +203,7 @@ research_notes/
 | 10_memory_analysis.md | [experiments/10_memory_analysis.md](experiments/10_memory_analysis.md) | 内存分析 |
 | 10_compiler_optimizations.md | [experiments/10_compiler_optimizations.md](experiments/10_compiler_optimizations.md) | 编译器优化 |
 | 10_concurrency_performance.md | [experiments/10_concurrency_performance.md](experiments/10_concurrency_performance.md) | 并发性能 |
-| 10_macro_expansion_performance.md | [experiments/10_macro_expansion_performance.md](experiments/10_macro_expansion_performance.md) | 宏展开性能 |
+| 10_macro_expansion_performance.md | [experiments/10_macro_expansion_performance.md](experiments/10_macro_expansion_performance.md) | 宏（Macro）展开性能 |
 
 #### 综合研究 (2个) {#综合研究-2个}
 
@@ -224,17 +224,17 @@ research_notes/
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-- ✅ 所有权系统
-- ✅ 借用检查器
-- ✅ 异步系统
-- ✅ 生命周期系统
-- ✅ Pin 和自引用类型
+- ✅ 所有权（Ownership）系统
+- ✅ 借用（Borrowing）检查器
+- ✅ 异步（Async）系统
+- ✅ 生命周期（Lifetimes）系统
+- ✅ Pin 和自引用（Reference）类型
 
 ### 类型理论领域 {#类型理论领域}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-- ✅ 类型系统基础
+- ✅ 类型系统（Type System）基础
 - ✅ Trait 系统
 - ✅ 生命周期理论
 - ✅ 高级类型特性（GATs、const 泛型（Generics））
@@ -283,7 +283,7 @@ research_notes/
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- **模块化设计**: 易于添加新研究主题
+- **模块（Module）化设计**: 易于添加新研究主题
 - **贡献指南**: 清晰的贡献流程
 - **持续更新**: 支持持续改进
 

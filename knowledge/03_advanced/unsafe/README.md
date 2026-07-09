@@ -1,13 +1,10 @@
-# Unsafe Rust
+# Unsafe Rust 参考入口
 
-> **EN**: Unsafe Rust
-> **Summary**: Unsafe Rust knowledge index: raw pointers, FFI, MaybeUninit, inline assembly, and safety abstraction design.
+> **EN**: Unsafe Rust reference redirect
+> **Summary**: 本页是 `knowledge/` 目录下的导航占位符，用于维护学习路径入口与稳定链接。此处不保留完整技术解释，也不重复 `concept/` 权威页中的定义、示例与定理推导。读者如需深入理解，请直接访问下方权威来源。
 
-Unsafe 子域速查入口。
+> **权威来源**: [Unsafe Rust 参考入口](../../../concept/03_advanced/02_unsafe/35_unsafe_reference.md)
 
-- **核心概念**: `unsafe` 块、原始指针、FFI、MaybeUninit、内联汇编
-- **安全实践**: 每段 `unsafe` 块必须附带 `// SAFETY:` 注释，建议用 Miri 验证
-- **后续延伸**: Unsafe 代码审计、Tree Borrows / Stacked Borrows 别名模型
+---
 
-> **权威来源**: [Unsafe Rust 安全编程 — concept/03_advanced/02_unsafe/03_unsafe.md](../../../concept/03_advanced/02_unsafe/03_unsafe.md)
-> **参考规范**: [Unsafe 参考 — concept/03_advanced/02_unsafe/35_unsafe_reference.md](../../../concept/03_advanced/02_unsafe/35_unsafe_reference.md)
+说明：该主题的正文、代码示例、反命题与形式化分析均已统一维护在 `concept/` 下的权威页中。本 stub 仅作为索引与重定向存在，避免在多个目录中维护重复内容。

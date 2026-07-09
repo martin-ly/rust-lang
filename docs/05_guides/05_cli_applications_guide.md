@@ -55,7 +55,7 @@
 
 本指南为官方 **Command Line Book** 的补充与项目内导航，帮助在开发 Rust 命令行应用时快速定位到本项目的相关模块和示例。
 
-**形式化引用**：T-OW2、T-BR1（进程间资源）、
+**形式化引用（Reference）**：T-OW2、T-BR1（进程间资源）、
 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../research_notes/10_safe_unsafe_comprehensive_analysis.md)（子进程安全边界）。
 
 ---

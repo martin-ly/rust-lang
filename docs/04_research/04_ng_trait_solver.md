@@ -9,7 +9,7 @@
 > **最后更新日期**: 2026-05-08
 > **预计下次复查日期**: 2026-07-24
 > **跟踪状态**: 🔬 深度开发中 (nightly 默认已切换)
-> **相关 Rust 官方目标**: 2025H2 Goals —— 类型系统扩展
+> **相关 Rust 官方目标**: 2025H2 Goals —— 类型系统（Type System）扩展
 
 ---
 
@@ -265,7 +265,7 @@ Chalk 架构:
 
 1. **性能瓶颈**: 纯逻辑求解在处理 rustc 的大规模类型约束时速度不足
 2. **与 rustc 耦合困难**: Chalk 假设了过于理想化的类型系统模型
-3. **生命周期交互**: Chalk 最初未考虑 Rust 独特的生命周期系统
+3. **生命周期（Lifetimes）交互**: Chalk 最初未考虑 Rust 独特的生命周期系统
 
 ### 3.3 Next-gen Solver 与 Chalk 的对比 {#33-next-gen-solver-与-chalk-的对比}
 
@@ -311,7 +311,7 @@ Rust 1.0  Solver ──→ NLL Era ──→ Chalk 实验 ──→ Next-gen Sol
 
 **当前状态**: 已稳定 (Rust 1.65+)
 
-GATs 允许 trait 拥有带泛型参数的关联类型：
+GATs 允许 trait 拥有带泛型（Generics）参数的关联类型：
 
 ```rust,ignore
 trait LendingIterator {
@@ -349,7 +349,7 @@ trait Factory {
 
 **Next-gen solver 的改进**:
 
-- 更稳定的隐式关联类型推断
+- 更稳定的隐式关联类型推断（Type Inference）
 - 支持更复杂的返回类型组合
 - 减少 `impl Trait` 在 trait 中的边界情况错误
 

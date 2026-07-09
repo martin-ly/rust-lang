@@ -71,12 +71,12 @@
 1. **RustBelt: Securing the Foundations of the Rust Programming Language**
    - 作者: Ralf Jung, et al.
    - 年份: 2018
-   - 摘要: 使用分离逻辑形式化验证 Rust 的类型系统
+   - 摘要: 使用分离逻辑形式化验证 Rust 的类型系统（Type System）
    - 链接: 论文链接
 2. **Stacked Borrows: An Aliasing Model for Rust**
    - 作者: Ralf Jung, et al.
    - 年份: 2019
-   - 摘要: Rust 借用检查器的形式化模型
+   - 摘要: Rust 借用（Borrowing）检查器的形式化模型
    - 链接: 论文链接
 3. **The RustBelt Project**
    - 作者: Ralf Jung, et al.
@@ -251,7 +251,7 @@
   - 相关: [工具使用指南 - rust-analyzer](10_tools_guide.md#rust-analyzer)
 - **cargo-expand**
   - 链接: <https://github.com/dtolnay/cargo-expand>
-  - 描述: 宏展开工具
+  - 描述: 宏（Macro）展开工具
   - 相关: [工具使用指南 - cargo-expand](10_tools_guide.md#cargo-expand)
 
 ---
@@ -360,7 +360,7 @@
 | RustBelt、Stacked Borrows | [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)、[coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)、[RUSTBELT_ALIGNMENT](10_rustbelt_alignment.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
 | Rust 类型系统研究 | [type_system_foundations](type_theory/10_type_system_foundations.md)、[trait_system_formalization](type_theory/10_trait_system_formalization.md) | 类型保持、coherence、RPITIT |
 | Prusti、Kani | [formal_methods](formal_methods/README.md) | 所有权（Ownership）、借用（Borrowing）、unsafe 契约 |
-| Criterion、Miri | [experiments/README](experiments/README.md) | EX-T1、EX-T2；内存安全验证 |
+| Criterion、Miri | [experiments/README](experiments/README.md) | EX-T1、EX-T2；内存安全（Memory Safety）验证 |
 
 详见 [PROOF_INDEX](10_proof_index.md) 全证明索引、
 
@@ -403,7 +403,7 @@
 - [国际对标索引](10_international_formal_verification_index.md) - RustBelt、Aeneas、RustSEM 等
 - [形式化全模型入口](10_formal_full_model_overview.md) - 统一形式系统
 - [核心定理完整证明](10_core_theorems_full_proofs.md) - L2 级 ownership T2、borrow T1、type T3
-- [Coq 证明骨架](../../archive/deprecated/coq_skeleton/README.md) - T-OW2 所有权唯一性
+- [Coq 证明骨架](../../archive/deprecated/coq_skeleton/README.md) - T-OW2 所有权（Ownership）唯一性
 - L3 实施指南 - Coq/Isabelle 补全路线（已归档）
 
 ---

@@ -18,7 +18,7 @@
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **用途**: 集合、算法、并发等模块的边界/特例示例
+> **用途**: 集合、算法、并发等模块（Module）的边界/特例示例
 
 ---
 
@@ -775,7 +775,7 @@ fn iterator_invalidation() {
 
 | 边界情况 | 形式化规则 | 相关文档 |
 | :--- | :--- | :--- |
-| 部分移动 | $\Omega(\text{field}) = \text{Moved}$，结构体不能整体使用 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md#示例-8-复杂所有权场景---结构体字段移动) |
+| 部分移动 | $\Omega(\text{field}) = \text{Moved}$，结构体（Struct）不能整体使用 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md#示例-8-复杂所有权场景---结构体字段移动) |
 | 复制语义 | $\Gamma(y) = \text{copy}(\Gamma(x))$，原变量仍有效 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) |
 | NLL | $\text{Scope}(r) = t_1, t_{\text{last\_use}}]$ | [lifetime_formalization |
 

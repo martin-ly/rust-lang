@@ -39,7 +39,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [ ] Future trait实现
+- [ ] Future trait（Trait）实现
 - [ ] 任务调度器
 - [ ] Reactor模式
 - [ ] Waker机制

@@ -80,7 +80,7 @@
 |----------|------|------|----------|
 | Ownership | 所有权 | 所有権 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) |
 | Borrowing | 借用 | 借用 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) |
-| Lifetime | 生命周期 | ライフタイム | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) |
+| Lifetime | 生命周期（Lifetimes） | ライフタイム | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) |
 | Trait | 特征 / Trait | トレイト | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) |
 | unsafe | 不安全 / unsafe | unsafe | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) |
 | async/await | 异步/等待 | 非同期/待機 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) |
@@ -91,7 +91,7 @@
 
 完整术语库存放于 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml)，采用 YAML 结构化格式，包含每个术语的英文原文、中文翻译、日文翻译、分类及使用说明。
 
-引用方式：
+引用（Reference）方式：
 
 - 在 Markdown 文档中提及本术语库时，使用相对路径 `data/i18n_terminology.yaml` 或链接 `[术语库](data/i18n_terminology.yaml)`。
 - 维护脚本可通过 `PROJECT_ROOT / "data" / "i18n_terminology.yaml"` 读取并解析该文件。

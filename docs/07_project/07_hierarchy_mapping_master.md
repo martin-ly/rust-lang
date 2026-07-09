@@ -118,11 +118,11 @@ graph TB
 | # | 文件路径 | 层次定位 | 前置依赖 | 后置延伸 | 跨层映射 | 定理链 |
 |:---:|:---|:---|:---|:---|:---|:---|
 | 1 | `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | L1 基础 / 所有权（Ownership） | 无 | L2 泛型（Generics） · L4 形式化 · L3 Unsafe | L1→L4 形式化嵌入 | T-001 → T-002 → T-003 |
-| 2 | `concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | L1 基础 / 借用（Borrowing） | L1 所有权 | L2 Trait · L4 分离逻辑 · L3 并发 | L1→L4 !A ↔ 可变借用（Mutable Borrow） | T-010 → T-011 → T-012 |
+| 2 | `concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | L1 基础 / 借用（Borrowing） | L1 所有权（Ownership） | L2 Trait · L4 分离逻辑 · L3 并发 | L1→L4 !A ↔ 可变借用（Mutable Borrow） | T-010 → T-011 → T-012 |
 | 3 | `concept/02_intermediate/00_traits/01_traits.md` | L2 进阶 / Trait | L1 类型系统（Type System） · L1 所有权 | L3 并发 · L4 类型论 · L6 模式 | L2→L4 Trait ↔ Type Class | T-020 → T-021 → T-022 |
-| 4 | `concept/02_intermediate/01_generics/02_generics.md` | L2 进阶 / 泛型 | L1 类型系统 · L2 Trait | L3 Async · L4 类型论 · L7 效果 | L2→L4 参数多态 ↔ System F | T-030 → T-031 → T-032 |
-| 5 | `concept/03_advanced/00_concurrency/01_concurrency.md` | L3 高级 / 并发 | L1 所有权 · L1 借用 · L2 Trait | L4 RustBelt · L6 Tokio · L7 AI | L3→L4 Send/Sync ↔ 分离逻辑 | T-040 → T-041 → T-042 |
-| 6 | `concept/03_advanced/01_async/02_async.md` | L3 高级 / 异步（Async） | L2 泛型 · L2 Trait · L1 生命周期 | L4 异步语义 · L6 Tokio · L7 效果 | L3→L4 Future ↔ continuation monad | T-050 → T-051 → T-052 |
+| 4 | `concept/02_intermediate/01_generics/02_generics.md` | L2 进阶 / 泛型（Generics） | L1 类型系统（Type System） · L2 Trait | L3 Async · L4 类型论 · L7 效果 | L2→L4 参数多态 ↔ System F | T-030 → T-031 → T-032 |
+| 5 | `concept/03_advanced/00_concurrency/01_concurrency.md` | L3 高级 / 并发 | L1 所有权 · L1 借用（Borrowing） · L2 Trait | L4 RustBelt · L6 Tokio · L7 AI | L3→L4 Send/Sync ↔ 分离逻辑 | T-040 → T-041 → T-042 |
+| 6 | `concept/03_advanced/01_async/02_async.md` | L3 高级 / 异步（Async） | L2 泛型 · L2 Trait · L1 生命周期（Lifetimes） | L4 异步语义 · L6 Tokio · L7 效果 | L3→L4 Future ↔ continuation monad | T-050 → T-051 → T-052 |
 | 7 | `concept/04_formal/03_ownership_formal.md` | L4 形式化 / 所有权 | L1 所有权 · L1 借用 · L4 线性逻辑 | L4 RustBelt · L7 形式化 · L3 Unsafe | L4↔L1 形式化 ↔ 直觉 双射 | T-100 → T-101 → T-102 |
 | 8 | `concept/04_formal/04_rustbelt.md` | L4 形式化 / RustBelt | L4 所有权形式化 · L4 类型论 · L4 线性逻辑 | L7 形式化 · L6 工具链 | L4→L7 机械证明 → 自动化 | T-110 → T-111 → T-112 |
 | 9 | `knowledge/01_fundamentals/ownership.md` | L1 基础 / 所有权 | 无 | knowledge 借用 · concept L1 | knowledge→concept 直觉映射 | T-001 |
@@ -130,9 +130,9 @@ graph TB
 | 11 | `knowledge/02_intermediate/traits.md` | L2 进阶 / Trait | knowledge 所有权 · 借用 | knowledge 泛型 · concept L2 | knowledge→concept 直觉映射 | T-020 |
 | 12 | `knowledge/02_intermediate/generics.md` | L2 进阶 / 泛型 | knowledge Trait | knowledge 并发 · concept L2 | knowledge→concept 直觉映射 | T-030 |
 | 13 | `knowledge/03_advanced/concurrency/README.md` | L3 高级 / 并发索引 | knowledge 泛型 · Trait | knowledge Async · concept L3 | knowledge→concept 直觉映射 | T-040 → T-041 |
-| 14 | `knowledge/03_advanced/async/README.md` | L3 高级 / 异步索引 | knowledge 泛型 · Trait | knowledge Unsafe · concept L3 | knowledge→concept 直觉映射 | T-050 → T-051 |
+| 14 | `knowledge/03_advanced/async/README.md` | L3 高级 / 异步（Async）索引 | knowledge 泛型 · Trait | knowledge Unsafe · concept L3 | knowledge→concept 直觉映射 | T-050 → T-051 |
 | 15 | `knowledge/03_advanced/unsafe/README.md` | L3 高级 / Unsafe 索引 | knowledge 所有权 · 借用 | knowledge 专家层 · concept L3 | knowledge→concept 直觉映射 | T-060 |
-| 16 | `knowledge/03_advanced/macros/README.md` | L3 高级 / 宏索引 | knowledge Trait · 泛型 | knowledge 编译器内部 · concept L3 | knowledge→concept 直觉映射 | T-070 → T-071 |
+| 16 | `knowledge/03_advanced/macros/README.md` | L3 高级 / 宏（Macro）索引 | knowledge Trait · 泛型 | knowledge 编译器内部 · concept L3 | knowledge→concept 直觉映射 | T-070 → T-071 |
 | 17 | `docs/01_core/README.md` | L1-L2 基础-进阶 / 总览 | 无 | docs 指南 · 参考 · concept | docs→concept 工程映射 | T-001 → T-010 → T-020 → T-030 |
 | 18 | `docs/02_reference/02_error_code_mapping.md` | L1-L3 诊断参考 | docs 核心概念 · concept L1 | docs 性能 · concept L3 | docs→concept 诊断映射 | E0502↔T-010 · E0597↔T-011 |
 | 19 | `docs/03_guides/05_embedded_rust_guide.md` | L3-L6 嵌入式 | concept L3 Async · Unsafe · docs 核心 | docs RfL · knowledge Unsafe | L3→L6 工程映射 | T-050 → T-060 |
@@ -140,11 +140,11 @@ graph TB
 | 21 | `docs/04_research/04_safety_critical_alignment_2026.md` | L5-L7 安全关键 | concept L5 安全边界 · docs RfL | docs 设计模式 · concept L7 | L5→L7 标准驱动 | T-110 → ISO 26262 |
 | 22 | `docs/05_guides/10_best_practices.md` | L2-L6 最佳实践 | concept L1-L2 · docs 核心 | docs 设计模式 · 性能 | L2→L6 经验映射 | T-020 → T-030 → 模式库 |
 | 23 | `docs/05_guides/05_design_patterns_usage_guide.md` | L2-L6 设计模式 | concept L2 Trait · docs 最佳实践 | docs 异步 · concept L6 | L2→L6 抽象映射 | T-020 → 模式可组合性 |
-| 24 | `docs/05_guides/05_async_programming_usage_guide.md` | L3-L6 异步工程 | concept L3 Async · docs 设计模式 | docs 嵌入式 · knowledge Async | L3→L6 运行时映射 | T-050 → T-051 → Tokio |
+| 24 | `docs/05_guides/05_async_programming_usage_guide.md` | L3-L6 异步工程 | concept L3 Async · docs 设计模式 | docs 嵌入式 · knowledge Async | L3→L6 运行时（Runtime）映射 | T-050 → T-051 → Tokio |
 | 25 | `docs/06_toolchain/01_compiler_features.md` | L6-L7 编译器 | concept L2 泛型 · docs 核心 | docs 并行前端 · concept L7 | L6→L7 工具驱动 | T-030 单态化（Monomorphization） → 优化保持 |
 | 26 | `docs/06_toolchain/06_parallel_frontend.md` | L6-L7 编译器优化 | docs 编译器 · concept L2 泛型 | concept L7 · Rust Compiler Team | L6→L7 性能驱动 | T-030 → 并行语义保持 |
 | 27 | `docs/ROD/01-core-concepts/01-01-ownership-rules-deep.md` | L4 深度 / 所有权 | concept L1 · L4 | ROD 借用 · ROD 可判定性 | L4↔L1 ROD 深度展开 | T-100 → T-101 |
-| 28 | `docs/ROD/01-core-concepts/01-02-borrowing-system-deep.md` | L4 深度 / 借用 | ROD 所有权 · concept L4 线性逻辑 | ROD 异步 · 并发 | L4 !A ↔ 可变借用 | T-110 → T-111 |
+| 28 | `docs/ROD/01-core-concepts/01-02-borrowing-system-deep.md` | L4 深度 / 借用 | ROD 所有权 · concept L4 线性逻辑 | ROD 异步 · 并发 | L4 !A ↔ 可变借用（Mutable Borrow） | T-110 → T-111 |
 | 29 | `docs/ROD/16-program-semantics/03-async-semantics.md` | L4 深度 / 异步 | ROD 借用 · concept L3 | ROD 形式语义 · 验证工具 | L4 continuation ↔ async/await | T-120 → T-121 → T-122 |
 | 30 | `docs/research_notes/type_theory/10_type_system_foundations.md` | L4 研究 / 类型论 | concept L4 类型论 · L2 泛型 | ROD 形式语义 · concept L7 | L4 System F ↔ Rust 泛型 | T-130 → T-131 |
 
@@ -161,15 +161,15 @@ graph TB
 | T-003 | Drop 安全性 | L1 Drop Trait | L4 资源释放证明 | L1→L4 | ✅ |
 | T-010 | 借用唯一性 | L1 &mut | L4 分离逻辑 * | L1→L4 | ✅ |
 | T-011 | 生命周期包含 | L1 'a | L4 区域包含 ⊑ | L1→L4 | ✅ |
-| T-012 | 悬垂引用不可达 | L1 编译器检查 | L4 类型安全 soundness | L1→L4 | ✅ |
-| T-020 | Trait 一致性 | L2 impl | L4 类型类字典 | L2→L4 | ✅ |
+| T-012 | 悬垂引用（Reference）不可达 | L1 编译器检查 | L4 类型安全 soundness | L1→L4 | ✅ |
+| T-020 | Trait 一致性（Coherence） | L2 impl | L4 类型类字典 | L2→L4 | ✅ |
 | T-030 | 参数多态保持 | L2 <T> | L4 System F ∀ | L2→L4 | ✅ |
 | T-040 | Send 类型安全 | L3 Send | L4 资源分片可分性 | L3→L4 | ✅ |
 | T-050 | Pin 安全性 | L3 Pin | L4 自引用不变性 | L3→L4 | ✅ |
 | T-060 | unsafe 块可靠性 | L3 unsafe | L4 公理扩展 | L3→L4 | ✅ |
 | T-100 | 借用检查可判定性 | L4 语法 | L4 算法复杂度 P | L4 | ✅ |
 | T-101 | 所有权类型 soundness | L4 类型规则 | L4 进度 + 保持 | L4 | ✅ |
-| T-102 | 内存安全完备性 | L4 操作语义 | L4 无 UB 保证 | L4 | ✅ |
+| T-102 | 内存安全（Memory Safety）完备性 | L4 操作语义 | L4 无 UB 保证 | L4 | ✅ |
 | T-110 | Iris 逻辑可靠性 | L4 高阶逻辑 | L4 模型存在性 | L4 | ✅ |
 | T-120 | Future 安全性 | L4 async 语义 | L4 轮询不变性 | L4 | ✅ |
 | T-130 | 类型一致性 | L4 类型论 | L4 子类型 soundness | L4 | ✅ |

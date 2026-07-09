@@ -254,7 +254,7 @@ Kani 与普通 `assert!()` 的区别：
 
 | 特性 | `assert!()` | `kani::assert()` |
 |:---|:---|:---|
-| 运行时行为 | panic（若条件为假） | 无运行时开销（仅在验证时生效） |
+| 运行时（Runtime）行为 | panic（若条件为假） | 无运行时开销（仅在验证时生效） |
 | 验证作用 | 无 | Kani 会穷尽检查所有路径 |
 | 编译条件 | 始终编译 | 仅在 `#[cfg(kani)]` 下编译 |
 
@@ -372,7 +372,7 @@ fn check_factorial() {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-Kani 是验证 unsafe Rust 的利器——它能检查指针别名、内存安全假设和布局约束。
+Kani 是验证 unsafe Rust 的利器——它能检查指针别名、内存安全（Memory Safety）假设和布局约束。
 
 ### 5.1 验证原始指针操作 {#51-验证原始指针操作}
 >
@@ -788,7 +788,7 @@ flowchart LR
 1. **从小开始**：先验证核心不变量，逐步增加复杂度
 2. **合理设置 `unwind`**：`unwind` 深度应与 `assume` 的范围匹配
 3. **使用 `kani::any_where`**：比 `any()` + `assume()` 更高效
-4. **分离验证代码**：用 `#[cfg(kani)]` 模块隔离，不影响生产编译
+4. **分离验证代码**：用 `#[cfg(kani)]` 模块（Module）隔离，不影响生产编译
 5. **结合 MIRI**：Kani 验证功能正确性，MIRI 检查未定义行为
 
 ### 8.3 CI 集成 {#83-ci-集成}
@@ -818,7 +818,7 @@ jobs:
 
 - [Verus 实战指南 —— 互补的演绎验证器](05_verus_practical_guide.md)
 - [形式化操作语义与 Rust 的形式化模型](../../concept/04_formal/03_operational_semantics/17_operational_semantics.md)
-- [所有权的形式化定义](../../concept/04_formal/01_ownership_logic/03_ownership_formal.md)
+- [所有权（Ownership）的形式化定义](../../concept/04_formal/01_ownership_logic/03_ownership_formal.md)
 
 ## 10. 来源与延伸阅读 {#10-来源与延伸阅读}
 >

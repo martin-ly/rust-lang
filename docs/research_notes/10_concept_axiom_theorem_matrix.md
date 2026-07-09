@@ -24,10 +24,10 @@
 - [概念-公理-定理五维矩阵 {#概念-公理-定理五维矩阵}](#概念-公理-定理五维矩阵-概念-公理-定理五维矩阵)
   - [📑 目录 {#目录}](#-目录-目录)
   - [📊 五维矩阵概览 {#五维矩阵概览}](#-五维矩阵概览-五维矩阵概览)
-  - [🧬 所有权系统矩阵 {#所有权系统矩阵}](#-所有权系统矩阵-所有权系统矩阵)
-  - [🧬 类型系统矩阵 {#类型系统矩阵}](#-类型系统矩阵-类型系统矩阵)
-  - [🧬 并发安全矩阵 {#并发安全矩阵}](#-并发安全矩阵-并发安全矩阵)
-  - [🧬 异步编程矩阵 {#异步编程矩阵}](#-异步编程矩阵-异步编程矩阵)
+  - [🧬 所有权（Ownership）系统矩阵 {#所有权系统矩阵}](#-所有权系统矩阵-所有权系统矩阵)
+  - [🧬 类型系统（Type System）矩阵 {#类型系统矩阵}](#-类型系统矩阵-类型系统矩阵)
+  - [🧬 并发安全（Concurrency Safety）矩阵 {#并发安全矩阵}](#-并发安全矩阵-并发安全矩阵)
+  - [🧬 异步（Async）编程矩阵 {#异步编程矩阵}](#-异步编程矩阵-异步编程矩阵)
   - [🧬 分布式系统矩阵 {#分布式系统矩阵}](#-分布式系统矩阵-分布式系统矩阵)
   - [🧬 工作流引擎矩阵 {#工作流引擎矩阵}](#-工作流引擎矩阵-工作流引擎矩阵)
   - [📈 完成度统计 {#完成度统计}](#-完成度统计-完成度统计)
@@ -66,8 +66,8 @@
 |------|------|------|------|------|----------|
 | Ownership | Def OW1: 资源唯一拥有者 | A-OW1: 唯一性 | T-OW1: 所有权唯一性定理 | L2: 反证法 | `ownership_basics.rs` |
 | Move | Def OW2: 所有权转移 | A-OW2: 移动后不可用 | T-OW2: 移动保持性定理 | L2: 归纳法 | `move_semantics.rs` |
-| Borrow | Def BR1: 引用借用 | A-BR1: 借用规则 | T-BR1: 借用安全性定理 | L2: 归纳法 | `borrow_checker_demo.rs` |
-| Lifetime | Def LT1: 引用有效期 | A-LT1: 生命周期包含 | T-LT1: 生命周期包含定理 | L2: 结构归纳 | `lifetime_annotations.rs` |
+| Borrow | Def BR1: 引用（Reference）借用（Borrowing） | A-BR1: 借用规则 | T-BR1: 借用安全性定理 | L2: 归纳法 | `borrow_checker_demo.rs` |
+| Lifetime | Def LT1: 引用有效期 | A-LT1: 生命周期（Lifetimes）包含 | T-LT1: 生命周期包含定理 | L2: 结构归纳 | `lifetime_annotations.rs` |
 | Drop | Def OW3: 资源释放 | A-OW3: RAII | T-OW3: 资源释放定理 | L2: 构造证明 | `drop_order.rs` |
 | Send | Def SS1: 线程传递 | A-SS1: 安全传递 | T-SS1: Send安全性定理 | L2: 分类证明 | `thread_safety.rs` |
 | Sync | Def SS2: 线程共享 | A-SS2: 安全共享 | T-SS2: Sync安全性定理 | L2: 分类证明 | `thread_safety.rs` |
@@ -82,8 +82,8 @@
 | 概念 | 定义 | 公理 | 定理 | 证明 | Rust示例 |
 |------|------|------|------|------|----------|
 | Type Safety | Def TY1: 类型安全 | A-TY1: 良类型性 | T-TY1: 进展性定理 | L2: 进展归纳 | `type_system_basics.rs` |
-| Generic | Def GE1: 参数化类型 | A-GE1: 单态化（Monomorphization） | T-GE1: 零成本抽象定理 | L2: 等价证明 | `generics_basics.rs` |
-| Trait | Def TR1: 接口抽象 | A-TR1: 一致性 | T-TR1: Trait一致性定理 | L2: 归纳法 | `traits_basics.rs` |
+| Generic | Def GE1: 参数化类型 | A-GE1: 单态化（Monomorphization） | T-GE1: 零成本抽象（Zero-Cost Abstraction）定理 | L2: 等价证明 | `generics_basics.rs` |
+| Trait | Def TR1: 接口抽象 | A-TR1: 一致性（Coherence） | T-TR1: Trait一致性定理 | L2: 归纳法 | `traits_basics.rs` |
 | Lifetime Subtyping | Def LT2: 子类型关系 | A-LT2: 协变/逆变 | T-LT2: 子类型替换定理 | L2: 上下文归纳 | `variance.rs` |
 | PhantomData | Def TY2: 标记类型 | A-TY2: 零大小 | T-TY2: Phantom安全性定理 | L2: 构造证明 | `phantom_types.rs` |
 

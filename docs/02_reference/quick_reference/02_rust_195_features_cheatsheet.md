@@ -134,7 +134,7 @@ unsafe {
 | API | 示例 | 说明 |
 |-----|------|------|
 | `core::range::RangeInclusive` | `use core::range::RangeInclusive; let r = RangeInclusive::new(1, 10);` | 新的包含性范围类型（与 `std::ops::RangeInclusive` 等价但位于 `core::range`） |
-| `core::range::RangeInclusiveIter` | `let iter = r.into_iter();` | 专属迭代器类型 |
+| `core::range::RangeInclusiveIter` | `let iter = r.into_iter();` | 专属迭代器（Iterator）类型 |
 
 ```rust,ignore
 use core::range::RangeInclusive;
@@ -334,7 +334,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **JSON target specs destabilized**: stable 通道不再支持自定义 target JSON，需 nightly `-Z unstable-options`
-- **`#[non_exhaustive]` enum matching**: 现在读取 discriminant，可能影响闭包捕获分析
+- **`#[non_exhaustive]` enum matching**: 现在读取 discriminant，可能影响闭包（Closures）捕获分析
 - **`Eq::assert_receiver_is_total_eq`**: 已废弃，手动实现会触发未来兼容性警告
 
 ---

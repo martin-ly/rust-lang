@@ -9,7 +9,7 @@
 > **最后更新日期**: 2026-05-08
 > **预计下次复查日期**: 2026-10-24
 > **文档类型**: 学术导读 + 学习路径
-> **前置知识**: Rust 所有权系统基础、一阶逻辑基础
+> **前置知识**: Rust 所有权（Ownership）系统基础、一阶逻辑基础
 
 ---
 
@@ -53,9 +53,9 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-Rust 的核心卖点是**编译时内存安全保证**，但这个保证本身依赖于：
+Rust 的核心卖点是**编译时内存安全（Memory Safety）保证**，但这个保证本身依赖于：
 
-1. **类型系统的正确性**: 编译器的类型检查是否正确实现了 Rust 的类型规则？
+1. **类型系统（Type System）的正确性**: 编译器的类型检查是否正确实现了 Rust 的类型规则？
 2. **unsafe Rust 的边界**: `unsafe` 块是否确实遵循了编译器假设的不变式？
 3. **编译器实现的正确性**: MIR → LLVM IR 的转换是否保持了语义？
 
@@ -399,8 +399,8 @@ impl<T> Vec<T> {
 本项目在 `archive/docs/research_notes` 中已有的形式化相关内容：
 
 - 线性类型理论基础
-- 所有权与借用的逻辑建模
-- 生命周期分析框架
+- 所有权与借用（Borrowing）的逻辑建模
+- 生命周期（Lifetimes）分析框架
 
 ### 5.2 衔接建议 {#52-衔接建议}
 >
@@ -411,7 +411,7 @@ impl<T> Vec<T> {
 | 线性类型理论 | RustBelt 的 owning(x) 谓词 | 引入 Iris 具体编码 |
 | 所有权转移分析 | ⟦ move semantics ⟧ | 分离逻辑规则化 |
 | 借用生命周期 | lifetime logic | 区域与分离逻辑的结合 |
-| 并发安全模型 | RustBelt + Iris 并发 | Sync/Send 的形式化语义 |
+| 并发安全（Concurrency Safety）模型 | RustBelt + Iris 并发 | Sync/Send 的形式化语义 |
 
 ### 5.3 新增研究方向建议 {#53-新增研究方向建议}
 >
@@ -478,7 +478,7 @@ impl<T> Vec<T> {
 > 📌 **复查记录**
 >
 > - 2026-04-24: 初始创建，综合 POPL 2017 和 PLDI 2024 核心成果
-> - 2026-05-22: 网络权威内容对齐 Batch 9：补充 Miri POPL 2026、KVerus、AutoVerus、Vest、Creusot POPL 2026 Tutorial 等 2025–2026 工具链进展；添加与 concept/04_formal/05_verification_toolchain.md 的交叉引用
+> - 2026-05-22: 网络权威内容对齐 Batch 9：补充 Miri POPL 2026、KVerus、AutoVerus、Vest、Creusot POPL 2026 Tutorial 等 2025–2026 工具链进展；添加与 concept/04_formal/05_verification_toolchain.md 的交叉引用（Reference）
 > - 下次复查: 2026-10-24 (跟踪 RefinedRust 工具链成熟度和新论文)
 >
 ---

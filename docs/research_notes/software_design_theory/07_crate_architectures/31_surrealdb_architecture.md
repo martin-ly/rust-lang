@@ -49,7 +49,7 @@
 | **部署形态** | 支持远程 WebSocket/HTTP、嵌入式内存、RocksDB、SurrealKV、TiKV 等多种引擎 | 同一套 API 覆盖开发、测试、生产与边缘场景 |
 | **数据模型** | 文档 + 图 + 关系混合，使用 `RecordId` 作为记录标识 | 减少多数据库之间的数据同步与转换 |
 | **查询语言** | SurrealQL（类 SQL 但支持图遍历与嵌套文档） | 复杂查询可下推到数据库，避免应用层多次往返 |
-| **类型安全** | `Surreal<C: Connection>` 泛型引擎 + serde 类型参数 | 编译期区分连接类型，读取时反序列化为强类型 |
+| **类型安全** | `Surreal<C: Connection>` 泛型（Generics）引擎 + serde 类型参数 | 编译期区分连接类型，读取时反序列化为强类型 |
 | **连接恢复** | WebSocket 远程连接默认自动重连 | 提升长连接服务的 resilience |
 
 > [来源: [surrealdb GitHub Repository](https://github.com/surrealdb/surrealdb)]
@@ -174,10 +174,10 @@ db.use_ns("test").use_db("test").await?;
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-| 维度 | API | 类型系统价值 |
+| 维度 | API | 类型系统（Type System）价值 |
 |:--|:--|:--|
 | 引擎类型参数 | `Surreal<C: Connection>` | 编译期区分远程/嵌入式引擎，防止将网络认证代码用于内存引擎 |
-| 文档类型参数 | `create<T>`, `select<T>`, `update<T>` | 读写边界由 serde 约束，避免运行时类型不匹配 |
+| 文档类型参数 | `create<T>`, `select<T>`, `update<T>` | 读写边界由 serde 约束，避免运行时（Runtime）类型不匹配 |
 | 查询结果索引 | `Response::take::<Vec<T>>(idx)` | 通过泛型在编译期决定反序列化目标类型 |
 | 记录 ID | `RecordId` / `Thing` / tuple `("table", "id")` | 将字符串主键提升为类型化资源标识 |
 | 认证类型 | `Root`, `Namespace`, `Database` | 不同权限级别在类型上分离 |
@@ -197,7 +197,7 @@ db.use_ns("test").use_db("test").await?;
 | 忽略 `Response::take` 的剩余结果 | 查询结果丢失、内存泄漏 | 按索引依次 `take` 所有结果集 |
 | 在查询中直接拼接用户输入 | 注入风险 | 使用 `.bind(...)` 参数化查询 |
 | 远程连接未处理断线 | 长时间运行后请求失败 | 利用 WebSocket 自动重连，或在应用层实现重试 |
-| 将事务性多操作拆分为多次异步调用 | 竞态条件 | 在 SurrealQL 中使用事务或单次复杂查询 |
+| 将事务性多操作拆分为多次异步（Async）调用 | 竞态条件 | 在 SurrealQL 中使用事务或单次复杂查询 |
 | 嵌入式引擎在多线程间共享未考虑 Send | 编译错误 | 确认所选引擎与 `Surreal` 句柄满足 `Send` |
 
 > [来源: [SurrealDB Best Practices](https://docs.surrealdb.com/docs/deployment/best-practices)]

@@ -79,7 +79,7 @@ fn main() {
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-`control_flow_patterns/` 模块封装了 Rust 中所有控制流结构的高级用法：
+`control_flow_patterns/` 模块（Module）封装了 Rust 中所有控制流结构的高级用法：
 
 | 模式 | 说明 |
 |------|------|
@@ -130,7 +130,7 @@ fn conditional_execution() {
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-`closure/` 模块深入解析闭包的捕获机制与类型系统：
+`closure/` 模块深入解析闭包的捕获机制与类型系统（Type System）：
 
 ```rust,ignore
 use c03_control_fn::closure::design::{ClosureDesigner, CaptureStrategy};
@@ -223,7 +223,7 @@ fn process_message(msg: Message, current_user: Option<User>) {
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-`coroutine/` 和 `generator/` 模块提供异步控制流和生成器模式（部分为 nightly 特性）：
+`coroutine/` 和 `generator/` 模块提供异步（Async）控制流和生成器模式（部分为 nightly 特性）：
 
 ```rust,ignore
 use c03_control_fn::coroutine::CoroutineExample;
@@ -285,8 +285,8 @@ fn robust_control_flow() -> ControlFlowResult<()> {
 
 | 问题 | 原因 | 解决方案 |
 |------|------|----------|
-| match 未穷尽 | 遗漏枚举变体 | 编译器警告，补全分支或使用 `_` |
-| 闭包生命周期错误 | 捕获引用超出作用域 | 使用 `move` 关键字按值捕获 |
+| match 未穷尽 | 遗漏枚举（Enum）变体 | 编译器警告，补全分支或使用 `_` |
+| 闭包生命周期（Lifetimes）错误 | 捕获引用（Reference）超出作用域 | 使用 `move` 关键字按值捕获 |
 | if let guards 编译失败 | 语法位置错误 | 确保 `if let` 在 match arm 的守卫位置 |
 | 递归栈溢出 | 深度过大 | 改用迭代或尾递归优化 |
 

@@ -52,7 +52,7 @@
 当前 **P0 官方来源覆盖率已接近 100%**，主要缺口集中在 **P1 学术/形式化来源** 与 **P2 社区/生态来源**。具体而言：
 
 - **P0**：仅 1 个文件缺少官方来源，可快速补齐。
-- **P1**：76 个概念族文件缺少学术/形式化来源，重点分布在 Crate 架构、形式化模块、边界系统、速查卡等概念族。
+- **P1**：76 个概念族文件缺少学术/形式化来源，重点分布在 Crate 架构、形式化模块（Module）、边界系统、速查卡等概念族。
 - **P2**：59 个概念族文件缺少社区/生态来源，重点分布在形式化模块、软件设计、学习资源等领域。
 
 ---
@@ -72,7 +72,7 @@
 | 7 | 权威来源对齐 / 行号锚点 | 1 | 0 | 1 | 1 | Rust Reference、RustBelt、Rust Design Patterns |
 | 8 | 形式化模块 / 反例边界 | 1 | 0 | 1 | 1 | RFC 2126、Rust Reference Modules、RustBelt |
 | 9 | 形式化模块 / 代码实践 | 1 | 0 | 1 | 1 | RFC 2126、Rust Reference Modules、RustBelt |
-| 10 | 形式化方法 / 宏系统 | 1 | 0 | 1 | 1 | Rust Reference、RustBelt、Rust Design Patterns |
+| 10 | 形式化方法 / 宏（Macro）系统 | 1 | 0 | 1 | 1 | Rust Reference、RustBelt、Rust Design Patterns |
 
 > 注：以上数据由 `suggest_authoritative_sources.py` 扫描生成，随文档更新而变化。P0 缺口权重最高，但当前 P0 已基本补全，因此 TOP 10 主要由 P1 缺口驱动。
 
@@ -87,7 +87,7 @@
 - 递归读取 `docs/research_notes/` 下所有 Markdown 文件。
 - 按 `概念族` 元信息分组。
 - 对每个文件检测已覆盖的 P0/P1/P2 层级，列出缺少的层级。
-- 根据概念族关键词匹配推荐权威来源链接（如所有权/借用（Borrowing）、类型系统（Type System）、并发/异步（Async）、unsafe/FFI/内存、模块（Module）、设计模式、Crate 架构、数据库/云原生、CI/CD/供应链、性能/测试、学习/面试等）。
+- 根据概念族关键词匹配推荐权威来源链接（如所有权（Ownership）/借用（Borrowing）、类型系统（Type System）、并发/异步（Async）、unsafe/FFI/内存、模块（Module）、设计模式、Crate 架构、数据库/云原生、CI/CD/供应链、性能/测试、学习/面试等）。
 - 输出 Markdown 报告，包含每个概念族下缺少各层级的文件及推荐链接。
 - 信息性工具，退出码始终为 0。
 
@@ -128,7 +128,7 @@ python scripts/maintenance/suggest_authoritative_sources.py --output=suggestions
 | 优先级 | 行动项 | 目标概念族 | 预计产出 |
 |--------|--------|------------|----------|
 | P0 | 补齐唯一缺少 P0 的文件 | 权威来源对齐 / 版本跟踪 | P0 覆盖率达到 100% |
-| P1 | 为 Crate 架构族补充学术/形式化来源 | 软件设计 / Crate 架构 | 10+ 个文件新增 RustBelt / RustSEM / RFC 引用 |
+| P1 | 为 Crate 架构族补充学术/形式化来源 | 软件设计 / Crate 架构 | 10+ 个文件新增 RustBelt / RustSEM / RFC 引用（Reference） |
 | P1 | 补齐形式化模块的学术来源 | 形式化模块、形式化模块 / 反例边界、形式化模块 / 代码实践 | 引用 RFC 2126、Rust Reference Modules、RustBelt |
 | P1 | 补齐边界系统与速查卡的学术来源 | 软件设计 / 边界系统、速查卡 | 引用 Rust Reference、RustBelt |
 | P2 | 补齐形式化模块与软件设计的社区来源 | 形式化模块、软件设计 / 边界系统 | 引用 Rust Design Patterns、Rust API Guidelines |
@@ -138,7 +138,7 @@ python scripts/maintenance/suggest_authoritative_sources.py --output=suggestions
 补全原则：
 
 1. **P0 优先**：任何缺少 P0 官方来源的文件应优先补齐，确保概念定义有官方规范支撑。
-2. **P1 次之**：形式化/学术来源为定理、证明、语义模型提供背书，特别针对所有权、借用、类型系统、模块等核心概念族。
+2. **P1 次之**：形式化/学术来源为定理、证明、语义模型提供背书，特别针对所有权、借用（Borrowing）、类型系统（Type System）、模块等核心概念族。
 3. **P2 再次**：社区/生态来源补充实战工具、crate、最佳实践，提升工程落地性。
 4. **按需推荐**：使用 `suggest_authoritative_sources.py` 生成建议后，由维护者人工审核链接与内容相关性，避免机械堆砌 URL。
 

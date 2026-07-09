@@ -82,7 +82,7 @@
 | 快速检查 Unsafe 代码 | Kani / MIRAI | Rudra |
 | 教学/学习目的 | Aeneas / Lean | Coq |
 | 工业级应用验证 | Creusot | Prusti |
-| 并发安全验证 | RustBelt | Kani |
+| 并发安全（Concurrency Safety）验证 | RustBelt | Kani |
 | 死锁检测 | Lockbud | - |
 
 ### 2.2 按经验水平选择 {#22-按经验水平选择}
@@ -514,7 +514,7 @@
 - [ ] 项目时间预算是多少？
 - [ ] 是否需要 Rust 原生工具链集成？
 - [ ] 是否需要持续集成支持？
-- [ ] 验证范围是完整项目还是关键模块？
+- [ ] 验证范围是完整项目还是关键模块（Module）？
 
 ---
 

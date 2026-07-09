@@ -19,7 +19,7 @@
   - [目录 {#目录}](#目录-目录)
   - [一、对齐说明 {#一对齐说明}](#一对齐说明-一对齐说明)
   - [二、Future 与 async/await {#二future-与-asyncawait}](#二future-与-asyncawait-二future-与-asyncawait)
-  - [三、Pin 与自引用 {#三pin-与自引用}](#三pin-与自引用-三pin-与自引用)
+  - [三、Pin 与自引用（Reference） {#三pin-与自引用}](#三pin-与自引用-三pin-与自引用)
   - [四、执行器与 Waker {#四执行器与-waker}](#四执行器与-waker-四执行器与-waker)
   - [五、IO 与并发 {#五io-与并发}](#五io-与并发-五io-与并发)
   - [六、状态机与编译 {#六状态机与编译}](#六状态机与编译-六状态机与编译)
@@ -33,7 +33,7 @@
 
 ## 一、对齐说明 {#一对齐说明}
 
-本文档将 `docs/research_notes/` 中关于异步编程、Future、Pin、执行器的内容与 [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) 建立映射。
+本文档将 `docs/research_notes/` 中关于异步（Async）编程、Future、Pin、执行器的内容与 [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) 建立映射。
 
 ---
 

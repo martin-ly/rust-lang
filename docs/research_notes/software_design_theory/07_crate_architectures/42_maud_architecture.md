@@ -1,4 +1,4 @@
-> **Canonical 说明**: 本文件专注 **Maud 编译期 HTML DSL 宏与 Render trait 架构**。
+> **Canonical 说明**: 本文件专注 **Maud 编译期 HTML DSL 宏（Macro）与 Render trait 架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
@@ -37,7 +37,7 @@
 
 > **[来源: [maud crates.io](https://crates.io/crates/maud)]**
 
-`Maud` 是 Rust 生态中独特的**编译期 HTML 模板宏**。与其他模板引擎不同，它不解析外部模板文件，而是提供一个 `html!` 过程宏，让开发者直接在 Rust 代码中编写类型安全的 HTML。
+`Maud` 是 Rust 生态中独特的**编译期 HTML 模板宏**。与其他模板引擎不同，它不解析外部模板文件，而是提供一个 `html!` 过程宏（Procedural Macro），让开发者直接在 Rust 代码中编写类型安全的 HTML。
 
 > [来源: [maud docs.rs](https://docs.rs/maud/latest/maud/)]
 
@@ -46,7 +46,7 @@ Maud 的核心设计取舍：
 | 维度 | 设计选择 | 工程价值 |
 |:--|:--|:--|
 | **DSL 形态** | Rust 过程宏 `html! { ... }` | 模板即 Rust 代码，共享类型与作用域 |
-| **渲染时机** | 编译期展开为 `fmt::Write` 调用 | 运行时零解析、零分配临时 AST |
+| **渲染时机** | 编译期展开为 `fmt::Write` 调用 | 运行时（Runtime）零解析、零分配临时 AST |
 | **类型安全** | 模板中直接嵌入 Rust 表达式 | 字段/类型错误在编译期捕获 |
 | **HTML 语义** | 宏语法强制标签配对与属性结构 | 减少手写 HTML 时的结构错误 |
 | **框架集成** | axum / actix-web / rocket / warp feature | 可直接作为响应体 |
@@ -193,7 +193,7 @@ async fn hello() -> impl axum::response::IntoResponse {
 | 在 DSL 中写裸 Rust 语法 | 宏解析错误 | 使用 `@let`、`@if`、`@for` 等 DSL 控制流 |
 | 忘记转义用户输入 | XSS 安全漏洞 | Maud 默认转义，仅在可信内容上使用 `PreEscaped` |
 | 表达式返回非 `Render` 类型 | 编译错误 | 为自定义类型实现 `Render`，或返回字符串 |
-| 在宏中捕获过长生命周期 | 编译错误 | 确保借用数据在 `Markup` 使用前有效 |
+| 在宏中捕获过长生命周期（Lifetimes） | 编译错误 | 确保借用（Borrowing）数据在 `Markup` 使用前有效 |
 | 试图运行时动态选择模板 | 不可行 | Maud 模板在编译期固定，动态场景改用 Askama/Tera |
 
 > [来源: [maud syntax reference](https://maud.lambda.xyz/)]

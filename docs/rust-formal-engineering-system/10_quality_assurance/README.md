@@ -8,7 +8,7 @@
 > **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **概念说明**: 质量保障（Quality Assurance）是通过系统化的测试、分析和验证活动确保软件满足需求的过程。Rust 的质量保障结合编译时检查（类型系统（Type System）、借用检查）、运行时测试（单元测试、集成测试、基准测试）和形式化验证（模型检查、定理证明）来提供多层次的质量保证。
+> **概念说明**: 质量保障（Quality Assurance）是通过系统化的测试、分析和验证活动确保软件满足需求的过程。Rust 的质量保障结合编译时检查（类型系统（Type System）、借用（Borrowing）检查）、运行时（Runtime）测试（单元测试、集成测试、基准测试）和形式化验证（模型检查、定理证明）来提供多层次的质量保证。
 
 ---
 
@@ -41,7 +41,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-本模块提供 Rust 形式化工程系统的质量保障体系，涵盖：
+本模块（Module）提供 Rust 形式化工程系统的质量保障体系，涵盖：
 
 1. **测试与覆盖**：单元测试、集成测试、覆盖率
 2. **性能保障**：基准测试、性能回归、MIRI/Valgrind
@@ -79,7 +79,7 @@
 
 | 验证目标 | 形式化定理 | 工具 |
 | :--- | :--- | :--- |
-| 内存安全 | ownership T2/T3、borrow T1 | MIRI、Valgrind |
+| 内存安全（Memory Safety） | ownership T2/T3、borrow T1 | MIRI、Valgrind |
 | 数据竞争自由 | async T6.2 | MIRI、ThreadSanitizer |
 | 类型安全 | type_system T1–T3 | cargo check |
 | 契约满足 | unsafe 前置/后置条件 | Prusti、Kani |
@@ -314,8 +314,8 @@ mod contracts {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 形式化方法概述 | 形式化验证基础理论 | [../../research_notes/formal_methods/README.md](../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../../research_notes/type_theory/10_type_system_foundations.md](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
-| 所有权模型形式化 | 所有权系统数学定义 | [../../research_notes/formal_methods/10_ownership_model.md](../../research_notes/formal_methods/10_ownership_model.md) |
+| 类型系统（Type System）形式化 | 类型理论数学定义 | [../../research_notes/type_theory/10_type_system_foundations.md](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
+| 所有权（Ownership）模型形式化 | 所有权系统数学定义 | [../../research_notes/formal_methods/10_ownership_model.md](../../research_notes/formal_methods/10_ownership_model.md) |
 | 借用检查器证明 | 借用检查器形式化 | [../../research_notes/formal_methods/10_borrow_checker_proof.md](../../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | 证明索引 | 形式化证明集合 | [../../research_notes/10_proof_index.md](../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 

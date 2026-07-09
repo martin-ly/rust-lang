@@ -59,8 +59,8 @@
     - [8.2 典型场景 {#82-典型场景}](#82-典型场景-82-典型场景)
     - [8.3 完整代码示例：字符串处理 {#83-完整代码示例字符串处理}](#83-完整代码示例字符串处理-83-完整代码示例字符串处理)
     - [8.4 常见陷阱 {#84-常见陷阱}](#84-常见陷阱-84-常见陷阱)
-  - [九、智能指针选型决策 {#九智能指针选型决策}](#九智能指针选型决策-九智能指针选型决策)
-  - [十、引用 {#十引用}](#十引用-十引用)
+  - [九、智能指针（Smart Pointer）选型决策 {#九智能指针选型决策}](#九智能指针选型决策-九智能指针选型决策)
+  - [十、引用（Reference） {#十引用}](#十引用-十引用)
   - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
       - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
@@ -108,7 +108,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**Def RAII1（RAII 惯用）**：资源生命周期与对象绑定；构造时获取、析构时释放；$\forall r \in \text{Resource},\, \exists x \in \text{Var}: \text{owns}(x, r) \land \text{scope\_end}(x) \rightarrow \text{release}(r)$。
+**Def RAII1（RAII 惯用）**：资源生命周期（Lifetimes）与对象绑定；构造时获取、析构时释放；$\forall r \in \text{Resource},\, \exists x \in \text{Var}: \text{owns}(x, r) \land \text{scope\_end}(x) \rightarrow \text{release}(r)$。
 
 **Axiom RAII1**：RAII 与 [ownership_model](../formal_methods/10_ownership_model.md) 规则 3 一致；drop 顺序为创建逆序。
 
@@ -206,7 +206,7 @@ let m = Mutex::new(0);
 
 **Def NW1（Newtype）**：单字段包装类型，零成本抽象（Zero-Cost Abstraction）；`struct Newtype(T)`；`repr(transparent)` 保证布局与 `T` 一致。
 
-**Axiom NW1**：Newtype 与底层类型布局相同；无运行时开销；类型层面区分语义。
+**Axiom NW1**：Newtype 与底层类型布局相同；无运行时（Runtime）开销；类型层面区分语义。
 
 **定理 NW-T1**：Newtype 满足 [ownership_model](../formal_methods/10_ownership_model.md) 规则 1–3；`T` 的 ownership 语义直接传递；由 Def 1.3 无环、接口一致。
 
@@ -293,7 +293,7 @@ impl std::ops::Add for Meter {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-**Def TS1（类型状态）**：类型参数编码状态；编译期强制合法转换；$\text{State}(F\langle S \rangle) \in \{S_1, \ldots, S_n\}$；仅允许的转换由类型系统约束。
+**Def TS1（类型状态）**：类型参数编码状态；编译期强制合法转换；$\text{State}(F\langle S \rangle) \in \{S_1, \ldots, S_n\}$；仅允许的转换由类型系统（Type System）约束。
 
 **Axiom TS1**：非法状态转换导致编译错误；类型系统保证状态机正确性。
 
@@ -316,7 +316,7 @@ impl std::ops::Add for Meter {
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
 | 状态爆炸 | 类型过多 | 合并相近状态 |
-| 泛型约束复杂 | 难以维护 | 文档化转换图 |
+| 泛型（Generics）约束复杂 | 难以维护 | 文档化转换图 |
 | 运行时分支 | 需 `dyn` | 优先编译期类型 |
 
 ### 3.4 与设计模式衔接 {#34-与设计模式衔接}
@@ -338,7 +338,7 @@ impl std::ops::Add for Meter {
 | :--- | :--- | :--- |
 | Option + ok_or | 运行时校验 | [builder](01_design_patterns_formal/01_creational/10_builder.md) |
 | 类型状态 Builder | 编译期强制 | [builder](01_design_patterns_formal/01_creational/10_builder.md) B-T2 |
-| derive_builder | 宏生成 | 同上 |
+| derive_builder | 宏（Macro）生成 | 同上 |
 
 ---
 
@@ -349,7 +349,7 @@ impl std::ops::Add for Meter {
 
 | Idiom | 23 安全 | 43 完全 |
 | :--- | :--- | :--- |
-| RAII | 与所有权、Flyweight、Proxy 衔接 | 与 Unit of Work、Gateway 衔接 |
+| RAII | 与所有权（Ownership）、Flyweight、Proxy 衔接 | 与 Unit of Work、Gateway 衔接 |
 | Newtype | 与 Adapter、Value Object 衔接 | [02_complete_43_catalog](02_workflow_safe_complete_models/02_complete_43_catalog.md) Value Object |
 | 类型状态 | 与 Builder、State 衔接 | 与 State 变体衔接 |
 
@@ -370,7 +370,7 @@ impl std::ops::Add for Meter {
 
 **Def EH1（Error handling 惯用）**：错误通过 `Result<T, E>` 显式传播；`?` 操作符实现早期返回；$\text{query}(e) \equiv \text{match } e \text{ with Ok}(v) \rightarrow v \mid \text{Err}(e) \rightarrow \text{return Err}(e.\text{into}())$。
 
-**定理 EH-T1**：`?` 与 [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) Def QUERY1 一致；错误传播不违反借用规则。
+**定理 EH-T1**：`?` 与 [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) Def QUERY1 一致；错误传播不违反借用（Borrowing）规则。
 
 ### 6.2 典型场景 {#62-典型场景}
 

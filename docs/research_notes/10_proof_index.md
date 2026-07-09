@@ -25,16 +25,16 @@
   - [📐 证明深度层次 (Proof Depth) {#证明深度层次-proof-depth}](#-证明深度层次-proof-depth-证明深度层次-proof-depth)
   - [🎯 索引说明 {#索引说明}](#-索引说明-索引说明)
   - [📚 按研究领域分类 {#按研究领域分类}](#-按研究领域分类-按研究领域分类)
-    - [所有权与借用 {#所有权与借用}](#所有权与借用-所有权与借用)
+    - [所有权（Ownership）与借用（Borrowing） {#所有权与借用}](#所有权与借用-所有权与借用)
       - [所有权模型形式化 {#所有权模型形式化}](#所有权模型形式化-所有权模型形式化)
       - [借用检查器证明 {#借用检查器证明}](#借用检查器证明-借用检查器证明)
-    - [生命周期 {#生命周期}](#生命周期-生命周期)
+    - [生命周期（Lifetimes） {#生命周期}](#生命周期-生命周期)
       - [生命周期形式化 {#生命周期形式化}](#生命周期形式化-生命周期形式化)
-    - [类型系统 {#类型系统}](#类型系统-类型系统)
+    - [类型系统（Type System） {#类型系统}](#类型系统-类型系统)
       - [类型系统基础 {#类型系统基础}](#类型系统基础-类型系统基础)
-    - [异步状态机与 Pin {#异步状态机与-pin}](#异步状态机与-pin-异步状态机与-pin)
+    - [异步（Async）状态机与 Pin {#异步状态机与-pin}](#异步状态机与-pin-异步状态机与-pin)
       - [异步状态机形式化 {#异步状态机形式化}](#异步状态机形式化-异步状态机形式化)
-      - [Pin 和自引用类型形式化 {#pin-和自引用类型形式化}](#pin-和自引用类型形式化-pin-和自引用类型形式化)
+      - [Pin 和自引用（Reference）类型形式化 {#pin-和自引用类型形式化}](#pin-和自引用类型形式化-pin-和自引用类型形式化)
     - [类型理论扩展 {#类型理论扩展}](#类型理论扩展-类型理论扩展)
       - [Trait 系统形式化 {#trait-系统形式化}](#trait-系统形式化-trait-系统形式化)
       - [型变理论 {#型变理论}](#型变理论-型变理论)
@@ -160,7 +160,7 @@
    - **关键步骤**:
      - 基础情况：初始状态唯一性
      - 归纳步骤：移动操作、复制操作、作用域结束
-2. **定理 3 (内存安全框架)** ✅ `L1`
+2. **定理 3 (内存安全（Memory Safety）框架)** ✅ `L1`
    - **形式化表示**:
      - 无悬垂指针: $\forall x: \text{valid}(x) \rightarrow \text{owner}(x) \neq \emptyset$
      - 无双重释放: $\forall x, y: x \neq y \land \text{owner}(x) = \text{owner}(y) \rightarrow \text{false}$
@@ -178,7 +178,7 @@
    - **形式化表示**: assume_init 合法仅当 initialized
    - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
 5. **Def ATOMIC1 / 定理 ATOMIC-T1（原子操作（Atomic Operations））** ✅
-   - **形式化表示**: 原子操作与数据竞争自由相容
+   - **形式化表示**: 原子操作（Atomic Operations）与数据竞争自由相容
    - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
 6. **Def UNION1（union 非活动字段）** ✅
    - **形式化表示**: 读取非活动字段为 UB
@@ -353,14 +353,14 @@
 
 **已完成的证明**:
 
-1. **定理 6.1 (状态一致性)** ✅
+1. **定理 6.1 (状态一致性（Coherence）)** ✅
    - **形式化表示**: $\forall F, s, s': \text{State}(F)=s \land \text{Transition}(F)=s' \rightarrow \text{ValidTransition}(s, s')$
    - **证明方法**: 归纳法 + 案例分析 + 不变式验证
    - **证明位置**: [10_async_state_machine.md#定理-61-状态一致性](formal_methods/10_async_state_machine.md#定理-61-状态一致性)
 2. **定理 6.2 (并发安全（Concurrency Safety）)** ✅
    - **形式化表示**: $\forall \{F_1,\ldots,F_n\}: (\forall i: \text{Send}(F_i)\land\text{Sync}(F_i)) \rightarrow \text{DataRaceFree}(\text{ConcurrentExec}[\{F_1,\ldots,F_n\}])$
-   - **证明方法**: 类型系统保证 + 运行时保证 + 组合性
-   - **证明位置**: [10_async_state_machine.md#定理-62-并发安全](formal_methods/10_async_state_machine.md#定理-62-并发安全)
+   - **证明方法**: 类型系统保证 + 运行时（Runtime）保证 + 组合性
+   - **证明位置**: [10_async_state_machine.md#定理-62-并发安全（Concurrency Safety）](formal_methods/10_async_state_machine.md#定理-62-并发安全)
 3. **定理 6.3 (进度保证)** ✅
    - **形式化表示**: $\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F,n) \land \text{State}(F)=\text{Ready}(v)$
    - **证明方法**: 有限性假设 + 进度性 + 终止性
@@ -386,7 +386,7 @@
    - **证明方法**: Pin 保证 + 位置稳定
    - **证明位置**: [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md)
 3. **定理 3 (Pin 投影安全)** ✅
-   - **形式化表示**: 从被 Pin 的结构体中按安全条件投影出的被 Pin 字段仍满足 Pin 保证
+   - **形式化表示**: 从被 Pin 的结构体（Struct）中按安全条件投影出的被 Pin 字段仍满足 Pin 保证
    - **证明方法**: 安全条件 + Pin 保证
    - **证明位置**: [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md)
 
@@ -409,7 +409,7 @@
 5. **Def RPIT1 / 定理 RPIT-T1（RPITIT）** ✅ — Trait 方法返回 impl Trait 语义；impl 解析唯一性；[证明位置](type_theory/10_trait_system_formalization.md)
 6. **Def ASYNC1 / 定理 ASYNC-T1（async fn in trait）** ✅ — Future 类型、Send 边界；[证明位置](type_theory/10_trait_system_formalization.md)
 7. **推论 RPIT-C1** ✅ — RPITIT 与 dyn Trait 对象安全交互；[证明位置](type_theory/10_trait_system_formalization.md)
-8. **Def ORPH1/NEG1、定理 NEG-T1（孤儿规则、negative impls）** ✅ — 孤儿形式化、negative impl 与 coherence 交互；[证明位置](type_theory/10_trait_system_formalization.md)
+8. **Def ORPH1/NEG1、定理 NEG-T1（孤儿规则（Orphan Rule）、negative impls）** ✅ — 孤儿形式化、negative impl 与 coherence 交互；[证明位置](type_theory/10_trait_system_formalization.md)
 9. **Def DYN-IMPL1、定理 DYN-T1、推论 DYN-C1（impl/dyn 可替换边界）** ✅ — 对象安全条件下 impl T 与 dyn T 可替换条件；[证明位置](type_theory/10_trait_system_formalization.md)
 10. **Def TRAIT-GAT1、Def SPEC1、定理 SPEC-T1（Trait+GAT、specialization）** ✅ — 泛型（Generics）+GAT 解析优先级、specialization 与 coherence；[证明位置](type_theory/10_trait_system_formalization.md)
 
@@ -464,7 +464,7 @@
 **已完成的证明**:
 
 1. **Axiom AT1** ✅ — GAT 类型推导与 type_system 定理 4、5 一致
-2. **Axiom AT2** ✅ — const 泛型参数必须为编译时常量
+2. **Axiom AT2** ✅ — const 泛型（Generics）参数必须为编译时常量
 3. **定理 AT-T1 (GAT 类型安全)** ✅ — 方法：Def 1.1–1.3 + 类型推导；[证明位置](type_theory/10_advanced_types.md)
 4. **定理 AT-T2 (const 泛型类型安全)** ✅ — 方法：Def 2.1–2.3 + 编译时常量检查；[证明位置](type_theory/10_advanced_types.md)
 5. **定理 AT-T3 (受限依赖类型安全)** ✅ — 方法：Def 3.1–3.2 + AT-T1、AT-T2；[证明位置](type_theory/10_advanced_types.md)
@@ -484,7 +484,7 @@
 1. **定理 CE-T1 (组合保持内存安全)** ✅ — 方法：由 ownership_model T2、T3 归纳；证明思路；[证明位置](software_design_theory/04_compositional_engineering/01_formal_composition.md)
 2. **定理 CE-T2 (组合保持数据竞争自由)** ✅ — 方法：由 borrow_checker_proof T1、Send/Sync 语义；证明思路；[证明位置](software_design_theory/04_compositional_engineering/01_formal_composition.md)
 3. **定理 CE-T3 (组合保持类型安全)** ✅ — 方法：由 type_system_foundations T1–T3；证明思路；[证明位置](software_design_theory/04_compositional_engineering/01_formal_composition.md)
-4. **引理 CE-L1 (模块无环)** ✅ — 方法：由 Def 1.3 无环；传递闭包；[证明位置](software_design_theory/04_compositional_engineering/01_formal_composition.md)
+4. **引理 CE-L1 (模块（Module）无环)** ✅ — 方法：由 Def 1.3 无环；传递闭包（Closures）；[证明位置](software_design_theory/04_compositional_engineering/01_formal_composition.md)
 5. **推论 CE-C1** ✅ — 组合 CE-T1–T3 可组合；有效组合为 Safe 且良型
 6. **推论 CE-C2** ✅ — 组合反例；pub 泄漏 unsafe 则 CE-T1/T2 不成立
 7. **Def CE-MAT1 (组件成熟度)** ✅ — L1 单模块/L2 多模块/L3 crate 生态/L4 架构模式；[证明位置](software_design_theory/04_compositional_engineering/README.md)
@@ -521,7 +521,7 @@
 1. **定理 SBM-T1/T2、SUM-T1/T2、EIM-T1/T2** ✅ — [safe_unsafe_matrix](software_design_theory/05_boundary_system/10_safe_unsafe_matrix.md)、[supported_unsupported_matrix](software_design_theory/05_boundary_system/10_supported_unsupported_matrix.md)、[expressive_inexpressive_matrix](software_design_theory/05_boundary_system/10_expressive_inexpressive_matrix.md)
 2. **定理 BMP-T1/T2 (设计模式边界)** ✅ — 边界唯一性、23 模式与 05 矩阵一致；[证明位置](software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
 3. **引理 BMP-L1 (近似表达模式)** ✅ — Singleton、Interpreter 等 6 种为 Approx；[证明位置](software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
-4. **推论 BMP-C1** ✅ — 等价表达模式满足零成本抽象；[证明位置](software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
+4. **推论 BMP-C1** ✅ — 等价表达模式满足零成本抽象（Zero-Cost Abstraction）；[证明位置](software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
 5. **定理 EB-T1/T2、引理 EB-EX-L1/L2、推论 EB-EX-C1/C2** ✅ — 执行模型边界；[证明位置](software_design_theory/03_execution_models/06_boundary_analysis.md)
 6. **Def EB-DET1 (执行确定性)** ✅ — Sequential/Interleaved/Parallel/Distributed；[证明位置](software_design_theory/03_execution_models/06_boundary_analysis.md)
 7. **定理 EB-DET-T1 (确定性蕴涵数据竞争自由)** ✅ — 满足 borrow T1、Send/Sync 则无数据竞争；[证明位置](software_design_theory/03_execution_models/06_boundary_analysis.md)
@@ -577,7 +577,7 @@
 
 1. **Def OR1 (Option/Result 语义)** ✅ — 无 null；显式变体编码
 2. **Axiom OR1** ✅ — 类型系统强制穷尽；排中律不成立
-3. **定理 OR-T1 (显式错误处理)** ✅ — 无 unwrap 则 None/Err 必被处理；[证明位置](10_design_mechanism_rationale.md)
+3. **定理 OR-T1 (显式错误处理（Error Handling）)** ✅ — 无 unwrap 则 None/Err 必被处理；[证明位置](10_design_mechanism_rationale.md)
 4. **推论 OR-C1** ✅ — Option/Result 与构造性逻辑 $T \lor E$ 对应
 
 #### 研究方法论 {#研究方法论}
@@ -606,7 +606,7 @@
 8. **引理 PB-L1 (统计与形式化互补)** ✅ — Criterion 置信区间、统计显著性；[证明位置](experiments/10_performance_benchmarks.md)
 9. **定理 CP-T1 (并发观测蕴涵)** ✅ — TSan 无报告与 borrow T1、async T6.2 一致；[证明位置](experiments/10_concurrency_performance.md)
 10. **引理 CP-L1 (Send/Sync 与 borrow T1 衔接)** ✅ — 跨线程 Send/Sync 与无数据竞争；[证明位置](experiments/10_concurrency_performance.md)
-11. **定理 MP-T1 (宏展开与类型保持)** ✅ — cargo check 通过即良型；[证明位置](experiments/10_macro_expansion_performance.md)
+11. **定理 MP-T1 (宏（Macro）展开与类型保持)** ✅ — cargo check 通过即良型；[证明位置](experiments/10_macro_expansion_performance.md)
 12. **引理 MP-L1 (宏展开阶段)** ✅ — 宏展开在类型检查之前；[证明位置](experiments/10_macro_expansion_performance.md)
 13. **引理 CO-L1 (优化阶段顺序)** ✅ — MIR 优化在类型检查之后；[证明位置](experiments/10_compiler_optimizations.md)
 14. **推论 MA-C1** ✅ — 循环引用逻辑泄漏不在 ownership T3 范围；[证明位置](experiments/10_memory_analysis.md)
@@ -716,7 +716,7 @@
 | 借用规则 T-BR1/T-BR2 | Ch. 6 *Expressions* / Ch. 17 *Patterns* | [Borrowing](https://doc.rust-lang.org/reference/expressions.html#borrow-expressions) | `&` / `&mut` 语义 |
 | 生命周期 LF-T1–T3 | Ch. 7 *Generics* / Ch. 8 *Trait and lifetime bounds* | [Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) | `'a`、outlives、elision |
 | 类型安全 T-TY3 | Ch. 5 *Types* / Ch. 10 *Patterns* | [Types](https://doc.rust-lang.org/reference/types.html) | 类型规则、类型错误 |
-| 智能指针 RC-T1/REFCELL-T1/BOX-T1 | Ch. 15 *Smart Pointers* | [Standard Library](https://doc.rust-lang.org/std/) | `Rc`/`RefCell`/`Box` |
+| 智能指针（Smart Pointer） RC-T1/REFCELL-T1/BOX-T1 | Ch. 15 *Smart Pointers* | [Standard Library](https://doc.rust-lang.org/std/) | `Rc`/`RefCell`/`Box` |
 | MaybeUninit MAYBEUNINIT-T1 | Appendix C *Unsafe Code Guidelines* | [MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html) | 未初始化内存 |
 | 原子操作 ATOMIC-T1 | Ch. 18 *Concurrency* | [Atomics](https://doc.rust-lang.org/reference/items/static-items.html) | `Atomic*` / `Ordering` |
 | async/await T6.1–T6.3 | Ch. 13 *Async and Await* | [Async blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) | Future / Pin |

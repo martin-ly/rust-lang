@@ -53,7 +53,7 @@
 | **API 风格** | `Regex` / `RegexBuilder` / `RegexSet` 三分层 | 从简单匹配到高级配置均有对应抽象 |
 | **Unicode** | 默认启用完整 Unicode 支持 | 多语言文本无需额外配置 |
 | **安全性** | 拒绝易导致灾难性回溯的模式 | 不可控用户输入下仍保持线性时间 |
-| **零拷贝** | `Captures` / `Match` 借用原字符串 | 避免不必要的内存分配 |
+| **零拷贝** | `Captures` / `Match` 借用（Borrowing）原字符串 | 避免不必要的内存分配 |
 
 > [regex GitHub Repository](https://github.com/rust-lang/regex)(<https://github.com/rust-lang/regex>)
 
@@ -94,7 +94,7 @@ graph TD
 | 类型 | 职责 | 典型使用场景 |
 |:--|:--|:--|
 | `Regex` | 编译后的不可变正则对象，线程安全 | 简单的 `is_match` / `find` / `replace` |
-| `RegexBuilder` | 控制大小写敏感、多行模式、Unicode 等选项 | 需要运行时配置匹配语义 |
+| `RegexBuilder` | 控制大小写敏感、多行模式、Unicode 等选项 | 需要运行时（Runtime）配置匹配语义 |
 | `RegexSet` | 同时测试多个模式，返回匹配索引集合 | 日志分类、路由表、关键词过滤 |
 
 > [regex RegexBuilder Docs](https://docs.rs/regex/latest/regex/struct.RegexBuilder.html)(<https://docs.rs/regex/latest/regex/struct.RegexBuilder.html>)
@@ -116,7 +116,7 @@ assert_eq!(&caps["month"], "06");
 
 > [来源: regex Captures Docs](https://docs.rs/regex/latest/regex/struct.Captures.html)
 
-**关键设计**：`Captures` 通过生命周期借用输入字符串，避免匹配过程中的拷贝；`caps.name("year")` 返回 `Option<Match>`，强制调用者处理缺失的分组。
+**关键设计**：`Captures` 通过生命周期（Lifetimes）借用输入字符串，避免匹配过程中的拷贝；`caps.name("year")` 返回 `Option<Match>`，强制调用者处理缺失的分组。
 
 ### 2.3 命名捕获与迭代器 {#23-命名捕获与迭代器}
 
@@ -143,7 +143,7 @@ for ident in re.find_iter("let foo = bar + 1;") {
 
 ### 2.4 替换 API {#24-替换-api}
 
-`replace_all` 与 `replacen` 支持字符串与闭包两种替换策略：
+`replace_all` 与 `replacen` 支持字符串与闭包（Closures）两种替换策略：
 
 ```rust
 use regex::Regex;
@@ -192,7 +192,7 @@ assert!(matches.contains(&2));
 | 引擎 | 时间复杂度 | 空间特征 | 适用场景 |
 |:--|:--|:--|:--|
 | **DFA（确定性有限自动机）** | O(n) | 最坏指数级状态，运行时按需构建 | 简单模式、大规模文本扫描 |
-| **NFA（非确定性有限自动机）** | O(m × n) | 状态线性于模式 | 捕获组、反向引用、复杂模式 |
+| **NFA（非确定性有限自动机）** | O(m × n) | 状态线性于模式 | 捕获组、反向引用（Reference）、复杂模式 |
 | **Literal 优化** | O(n) 或子线性 | 极小额外内存 | 纯字符串搜索、前缀加速 |
 
 > [regex Performance Notes](https://docs.rs/regex/latest/regex/#performance)(<https://docs.rs/regex/latest/regex/#performance>)
@@ -240,13 +240,13 @@ graph LR
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-| 维度 | API | 类型系统价值 |
+| 维度 | API | 类型系统（Type System）价值 |
 |:--|:--|:--|
 | **不可变性保证** | `Regex` | 编译后不可变，天然 `Send + Sync`，可跨线程共享 |
 | **生命周期借用** | `Match<'t>` / `Captures<'t>` | 匹配结果生命周期绑定输入字符串，防止悬垂引用 |
 | **错误处理（Error Handling）** | `Result<Regex, regex::Error>` | 非法模式必须在调用点显式处理 |
 | **零拷贝** | `Cow<str>` | 无替换时借用原字符串，减少堆分配 |
-| **类型安全迭代器** | `Matches` / `CaptureMatches` | 迭代元素类型在编译期确定，无运行时类型分支 |
+| **类型安全迭代器（Iterator）** | `Matches` / `CaptureMatches` | 迭代元素类型在编译期确定，无运行时类型分支 |
 
 > [来源: regex Error Docs](https://docs.rs/regex/latest/regex/enum.Error.html)
 

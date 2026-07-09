@@ -3,7 +3,7 @@
 > 已重定向至权威深度文的 crate：Tokio、Axum、SQLx（含进阶）。
 > **⚠️ 历史文档提示**：
 >
-> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用（Reference）。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 > **Rust 版本**: 1.96.1+ (Edition 2024)
@@ -22,7 +22,7 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 本目录对 Rust 生态中 **42 个核心工业级 crate / 生态专题** 进行系统性架构解构，揭示类型系统、零成本抽象（Zero-Cost Abstraction）、组合性设计在真实工程中的运用方式。
+> **定位**: 本目录对 Rust 生态中 **42 个核心工业级 crate / 生态专题** 进行系统性架构解构，揭示类型系统（Type System）、零成本抽象（Zero-Cost Abstraction）、组合性设计在真实工程中的运用方式。
 > **方法论对齐**: 软件架构分析 (Software Architecture Analysis) · 设计恢复 (Design Recovery) · 架构权衡分析方法 (ATAM)
 
 ---
@@ -39,7 +39,7 @@
   - [四、设计模式横切分析 {#四设计模式横切分析}](#四设计模式横切分析-四设计模式横切分析)
   - [五、类型系统利用对比 {#五类型系统利用对比}](#五类型系统利用对比-五类型系统利用对比)
   - [六、学习路径推荐 {#六学习路径推荐}](#六学习路径推荐-六学习路径推荐)
-    - [路径 A：异步 Web 全栈（推荐优先级：高） {#路径-a异步-web-全栈推荐优先级高}](#路径-a异步-web-全栈推荐优先级高-路径-a异步-web-全栈推荐优先级高)
+    - [路径 A：异步（Async） Web 全栈（推荐优先级：高） {#路径-a异步-web-全栈推荐优先级高}](#路径-a异步-web-全栈推荐优先级高-路径-a异步-web-全栈推荐优先级高)
     - [路径 B：数据密集型系统（推荐优先级：高） {#路径-b数据密集型系统推荐优先级高}](#路径-b数据密集型系统推荐优先级高-路径-b数据密集型系统推荐优先级高)
     - [路径 C：系统编程与图形（推荐优先级：中） {#路径-c系统编程与图形推荐优先级中}](#路径-c系统编程与图形推荐优先级中-路径-c系统编程与图形推荐优先级中)
     - [路径 D：工具与 CLI（推荐优先级：中） {#路径-d工具与-cli推荐优先级中}](#路径-d工具与-cli推荐优先级中-路径-d工具与-cli推荐优先级中)
@@ -84,30 +84,30 @@
 
 | 编号 | Crate | 领域 | 核心抽象 | 类型系统关键利用 | 零成本特性 | 文件链接 |
 |:---:|:---|:---|:---|:---|:---:|:---|
-| 01 | **Serde** | 序列化 | Serializer/Deserializer + Visitor | 编译期格式选择、单态化消除虚调用 | ✅ 无运行时反射 | [01_serde_architecture.md](01_serde_architecture.md) |
+| 01 | **Serde** | 序列化 | Serializer/Deserializer + Visitor | 编译期格式选择、单态化（Monomorphization）消除虚调用 | ✅ 无运行时（Runtime）反射 | [01_serde_architecture.md](01_serde_architecture.md) |
 | 02 | **Tower** | 中间件 | Service + Layer trait | 关联类型、Monoid 组合、无装箱栈 | ✅ 编译期中间件栈 | [02_tower_architecture.md](02_tower_architecture.md) |
 | 03 | **Diesel** | ORM/查询 | Typestate SQL 构建器 | 连贯接口类型链、FromRow 推导 | ✅ 编译期 SQL 验证 | [03_diesel_architecture.md](03_diesel_architecture.md) |
 | 04 | **Clap** | CLI 解析 | Derive macro + Builder 双 API | FromStr、ValueEnum、 exhaustive match | ✅ 无运行时反射 | [04_clap_architecture.md](04_clap_architecture.md) |
-| 05 | **Bevy** | 游戏引擎 | ECS (Entity-Component-System) | HRTB 安全借用、Archetype 存储 | ✅ 连续内存布局 | [05_bevy_architecture.md](05_bevy_architecture.md) |
+| 05 | **Bevy** | 游戏引擎 | ECS (Entity-Component-System) | HRTB 安全借用（Borrowing）、Archetype 存储 | ✅ 连续内存布局 | [05_bevy_architecture.md](05_bevy_architecture.md) |
 | 06 | **Tokio** | 异步运行时 | Runtime = Scheduler + IO Driver + Timer | Future + Pin、Send/Sync 跨 await 传播 | ✅ 工作窃取无锁队列 | [06_tokio_architecture.md](06_tokio_architecture.md)（已重定向 → [Tokio 深度解析](../../../../knowledge/06_ecosystem/deep_dives/02_tokio_deep_dive.md)） |
 | 07 | **Axum** | Web 框架 | Router → Handler → Tower Service | FromRequest、State 注入、matchit 路由 | ✅ 编译期路由匹配 | [07_axum_architecture.md](07_axum_architecture.md)（已重定向 → [Axum 深度解析](../../../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md)） |
 | 08 | **Hyper** | HTTP 实现 | Body trait + Request/Response | 泛型（Generics） Body、零拷贝解析 | ✅ httparse 零分配 | [08_hyper_architecture.md](08_hyper_architecture.md) |
-| 09 | **SQLx** | SQL 工具 | query! / query_as! 宏 + Pool | 编译期查询验证、FromRow、Database trait | ✅ 编译期 SQL 检查 | [09_sqlx_architecture.md](09_sqlx_architecture.md)（已重定向 → [SQLx 深度解析](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md)） |
-| 10 | **Reqwest** | HTTP 客户端 | ClientBuilder → RequestBuilder → Response | 泛型 JSON/Form 体、中间件扩展 | ✅ 复用 Hyper 连接池 | [10_reqwest_architecture.md](10_reqwest_architecture.md) |
+| 09 | **SQLx** | SQL 工具 | query! / query_as! 宏（Macro） + Pool | 编译期查询验证、FromRow、Database trait | ✅ 编译期 SQL 检查 | [09_sqlx_architecture.md](09_sqlx_architecture.md)（已重定向 → [SQLx 深度解析](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md)） |
+| 10 | **Reqwest** | HTTP 客户端 | ClientBuilder → RequestBuilder → Response | 泛型（Generics） JSON/Form 体、中间件扩展 | ✅ 复用 Hyper 连接池 | [10_reqwest_architecture.md](10_reqwest_architecture.md) |
 | 11 | **Wgpu** | GPU 图形 | Adapter → Device → Queue → Pipeline | BindGroup 类型安全、Naga 着色器验证 | ✅ 显式 GPU 内存管理 | [11_wgpu_architecture.md](11_wgpu_architecture.md) |
 | 12 | **Actix-web** | Web 框架 | HttpServer → App → Route (Actor 模型) | Actor trait、Transform 中间件、FromRequest | ✅ Actor 无锁消息传递 | [12_actix_web_architecture.md](12_actix_web_architecture.md) |
 | 13 | **Rayon** | 数据并行 | ParallelIterator + join() + scope() | Send 边界、fork-join 类型安全 | ✅ 顺序回退无开销 | [13_rayon_architecture.md](13_rayon_architecture.md) |
 | 14 | **nalgebra / ndarray** | 科学计算 | Matrix<T,R,C,S> / ArrayBase<S,D> | 类型级维度、Const<N>、Dimension trait | ✅ BLAS 可选后端 | [14_nalgebra_architecture.md](14_nalgebra_architecture.md) |
 | 15 | **SQLx (进阶)** | SQL 工具 | 编译期宏展开与连接池深度分析 | `query!` 宏的 Token 流处理、连接池状态机 | ✅ 编译期 SQL 检查 | [15_sqlx_advanced_architecture.md](15_sqlx_advanced_architecture.md)（已重定向 → [SQLx 深度解析](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md)） |
 | 16 | **Tonic** | gRPC 框架 | `service` 宏 + `prost` 编解码 + Tower 中间件 | gRPC 状态机类型、流式响应 `Streaming<T>` | ✅ 编译期服务定义 | [09_tonic_architecture.md](09_tonic_architecture.md) |
-| 17 | **wasm-bindgen** | WASM 绑定 | `#[wasm_bindgen]` 宏 + JS 胶水生成 | 跨语言类型映射、内存所有权桥接 | ✅ 零成本 FFI 抽象 | [10_wasm_bindgen_architecture.md](10_wasm_bindgen_architecture.md) |
+| 17 | **wasm-bindgen** | WASM 绑定 | `#[wasm_bindgen]` 宏 + JS 胶水生成 | 跨语言类型映射、内存所有权（Ownership）桥接 | ✅ 零成本 FFI 抽象 | [10_wasm_bindgen_architecture.md](10_wasm_bindgen_architecture.md) |
 | 18 | **Tracing** | 可观测性 | `Span` + `Event` + `Subscriber` + `Layer` | 结构化字段 `Value` trait、零成本条件编译 | ✅ 无 Subscriber 时零开销 | [18_tracing_architecture.md](18_tracing_architecture.md) |
 | 19 | **Crossbeam** | 无锁并发 | `epoch::pin` + 无锁队列/通道 | EBR 内存回收、`AtomicCell` 类型安全 | ✅ Lock-free 保证 | [19_crossbeam_architecture.md](19_crossbeam_architecture.md) |
 | 20 | **Ratatui** | TUI 框架 | `Widget::render` + `Buffer::diff` | 即时模式渲染、`Backend` trait 抽象 | ✅ 差分渲染 O(变更) | [20_ratatui_architecture.md](20_ratatui_architecture.md) |
 | 21 | **mio** | IO 多路复用 | `Poll` + `Registry` + `Token` + `Waker` | 跨平台 epoll/kqueue/IOCP 统一抽象 | ✅ 与直接 epoll 零额外开销 | [21_mio_architecture.md](21_mio_architecture.md) |
 | 22 | **redis-rs** | 缓存 / 消息 / 分布式协调 | `Client` → `MultiplexedConnection` / `ConnectionManager` / `PubSub` / `ClusterClient` | `FromRedisValue` / `ToRedisArgs` trait、命令返回类型静态化 | ✅ 单连接多路复用零额外连接开销 | [22_redis_architecture.md](22_redis_architecture.md) |
 | 23 | **mongodb-rust-driver** | 文档数据库 / NoSQL | `Client` → `Database` → `Collection<T>` | `Serialize`/`Deserialize` 类型参数、`bson::doc!` 编译期构造 | ✅ 内置连接池、BSON 原生模型 | [23_mongodb_architecture.md](23_mongodb_architecture.md) |
-| 24 | **regex** | 文本处理 / 模式匹配（Pattern Matching） | `Regex` / `RegexBuilder` / `RegexSet` | 不可变 `Regex` 共享、`Captures<'t>` 生命周期借用 | ✅ 线性时间保证、DFA/NFA/Hybrid 引擎 | [24_regex_architecture.md](24_regex_architecture.md) |
+| 24 | **regex** | 文本处理 / 模式匹配（Pattern Matching） | `Regex` / `RegexBuilder` / `RegexSet` | 不可变 `Regex` 共享、`Captures<'t>` 生命周期（Lifetimes）借用 | ✅ 线性时间保证、DFA/NFA/Hybrid 引擎 | [24_regex_architecture.md](24_regex_architecture.md) |
 | 25 | **chrono** | 日期时间 / 时区 | `DateTime<Tz>` / `NaiveDateTime` / `Duration` | `TimeZone` trait 类型化时区、`TimeDelta` 正负 Duration | ✅ Naive 与带时区类型在编译期分离 | [25_chrono_architecture.md](25_chrono_architecture.md) |
 | 26 | **rdkafka** | 消息队列 / 流处理 | `ClientConfig` → `FutureProducer` / `StreamConsumer` | 异步 Future / Stream、Consumer Group 语义静态化 | ✅ 复用 librdkafka 高性能协议栈 | [26_kafka_architecture.md](26_kafka_architecture.md) |
 | 27 | **kube-rs** | 云原生 / Kubernetes | `Client` → `Api<K>` / `Controller` / `watcher` | `Resource` trait、`#[derive(CustomResource)]`、类型化 API 路径 | ✅ 编译期资源类型与 API Group/Version 匹配 | [27_kube_rs_architecture.md](27_kube_rs_architecture.md) |
@@ -297,13 +297,13 @@ graph TD
 | **Command + Typeclass** | redis-rs | `FromRedisValue` / `ToRedisArgs` 将动态 RESP 协议静态类型化 |
 | **Producer/Consumer 类型化** | rdkafka | `FutureProducer` / `StreamConsumer` 在编译期区分读写语义 |
 | **宏驱动 Handler** | Salvo | `#[handler]` 在编译期将 async fn 转换为 Service |
-| **编译期模板** | Askama, Maud | 派生宏 / 过程宏在编译期生成渲染代码，消除运行时解析 |
+| **编译期模板** | Askama, Maud | 派生宏 / 过程宏（Procedural Macro）在编译期生成渲染代码，消除运行时解析 |
 | **声明式控制器** | kube-rs | `Controller::new` + `reconcile` 将 Kubernetes 控制器模式类型化 |
 | **Fork-Join** | Rayon | `join(f, g)` 类型要求 `f: FnOnce() -> R1 + Send`，编译期保证线程安全 |
 | **Command + State 注入** | Tauri | `State<T>` 在编译期保证单例被注入到命令处理器 |
 | **响应式组件** | Dioxus / Leptos | `signal` / `use_signal` 在类型级别区分读写与派生 |
 | **即时模式** | egui | 每帧 `&mut Ui` 借用避免持久组件树，交互结果立即返回 |
-| **Elm 架构** | iced | `Message` 枚举穷举交互，`update` 强制纯函数状态迁移 |
+| **Elm 架构** | iced | `Message` 枚举（Enum）穷举交互，`update` 强制纯函数状态迁移 |
 | **FFI 安全封装 + Strategy** | ort | `ExecutionProvider` trait/enum 运行时选择后端，Rust 类型隐藏 C API |
 | **纯 Rust 类型化图** | tract | `TypedModel` 与 `SimplePlan` 将神经网络图结构静态化 |
 | **代码生成客户端** | aws-sdk-rust | Smithy 生成每服务 `Client` 与强类型 Builder，编译期约束请求参数 |
@@ -598,7 +598,7 @@ graph TD
 - [concept L6: 系统可组合性](../../../../concept/06_ecosystem/03_design_patterns/30_system_composability.md) — Tower Layer、Iterator chain、Rayon pipeline 的组合性定理
 - [concept L4: 形式验证工具链](../../../../concept/04_formal/04_model_checking/05_verification_toolchain.md) — Kani、Miri 对 unsafe crate 的验证实践
 - [concept L3: 异步编程](../../../../concept/03_advanced/01_async/02_async.md) — Tokio/Axum 的 async/await 语义基础
-- [concept L3: 并发编程](../../../../concept/03_advanced/00_concurrency/01_concurrency.md) — Rayon、Bevy 系统的并发安全保证
+- [concept L3: 并发编程](../../../../concept/03_advanced/00_concurrency/01_concurrency.md) — Rayon、Bevy 系统的并发安全（Concurrency Safety）保证
 - [22_redis_architecture.md](22_redis_architecture.md) — redis-rs 缓存、消息队列与分布式协调
 - [23_mongodb_architecture.md](23_mongodb_architecture.md) — mongodb-rust-driver 文档数据库、NoSQL 与异步数据访问
 - [24_regex_architecture.md](24_regex_architecture.md) — regex 正则表达式引擎、文本匹配与验证

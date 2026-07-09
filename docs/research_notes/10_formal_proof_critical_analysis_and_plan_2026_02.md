@@ -86,10 +86,10 @@
 
 | 领域 | 本项目覆盖 | 国际权威覆盖 | 缺口 |
 | :--- | :--- | :--- | :--- |
-| 所有权唯一性 | L2 完整证明 | RustBelt L3 Coq/Iris | 缺 Iris 资源代数形式化 |
-| 数据竞争自由 | L2 完整证明 | RustBelt/Tree Borrows L3 | 缺树结构借用模型 |
+| 所有权（Ownership）唯一性 | L2 完整证明 | RustBelt L3 Coq/Iris | 缺 Iris 资源代数形式化 |
+| 数据竞争自由 | L2 完整证明 | RustBelt/Tree Borrows L3 | 缺树结构借用（Borrowing）模型 |
 | 类型安全 | L2 完整证明 | RustBelt/Oxide | 缺区域类型/可执行语义 |
-| 生命周期 | L1/L2 | RustBelt Lifetime Logic / Oxide | 缺 region inference 算法证明 |
+| 生命周期（Lifetimes） | L1/L2 | RustBelt Lifetime Logic / Oxide | 缺 region inference 算法证明 |
 | async/Pin | L1/L2 | 无直接国际对标 | 缺 Future 状态机形式化 |
 | 原子/并发 | L1 Def | RustBelt Meets Relaxed Memory | 缺松弛内存模型 |
 
@@ -102,7 +102,7 @@
 | Kani | 高（AWS 维护） | 工具映射已建立 | 未接入 CI |
 | Creusot | 中（Why3 后端） | 工具矩阵提及 | 无 Pearlite 规范库 |
 | Verus | 中-高（系统代码验证） | 映射已建立 | 无 ghost 类型占位 |
-| Miri | 高（官方动态检测） | 反例表引用 | 未系统跑测 |
+| Miri | 高（官方动态检测） | 反例表引用（Reference） | 未系统跑测 |
 
 ### 推进计划 {#推进计划}
 
@@ -148,7 +148,7 @@
 | λRust 操作语义 | `formal_methods/10_ownership_model.md` | 无 MIR 级语义模型 | P0 |
 | Iris 资源代数 | `coq_skeleton/OWNERSHIP_UNIQUENESS.v` | 仅骨架，无资源谓词 | P0 |
 | 核心库规范（`Box`/`Rc`/`RefCell`） | `10_ownership_model.md` Def RC1/REFCELL1 | 无协议级规范 | P1 |
-| 松弛内存与原子操作 | `formal_methods` Phase 4 | 仅 Def 级 | P1 |
+| 松弛内存与原子操作（Atomic Operations） | `formal_methods` Phase 4 | 仅 Def 级 | P1 |
 | `unsafe` 抽象验证 | Def UNSAFE1 | 无 proof obligation 生成 | P1 |
 
 #### Aeneas 差距 {#aeneas-差距}
@@ -167,7 +167,7 @@
 | CHC 编码验证 | `borrow_checker_proof` T1 | 无 CHC/约束 Horn 子句形式化 | P2 |
 | 所有权（Ownership） → 借用约束翻译 | `lifetime_formalization` | 无 SMT 编码 | P2 |
 | 反例引导的属性检查 | 反例表 | 未与 RustHorn 工具链对接 | P2 |
-| 高阶函数/递归数据类型 | 类型系统基础 | 无 CHC 近似处理 | P2 |
+| 高阶函数/递归数据类型 | 类型系统（Type System）基础 | 无 CHC 近似处理 | P2 |
 
 ### 风险与缓解 {#风险与缓解}
 

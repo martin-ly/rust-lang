@@ -20,8 +20,8 @@
   - [一、对齐说明 {#一对齐说明}](#一对齐说明-一对齐说明)
   - [二、编译流程概览 {#二编译流程概览}](#二编译流程概览-二编译流程概览)
   - [三、名称解析 {#三名称解析}](#三名称解析-三名称解析)
-  - [四、类型推断 {#四类型推断}](#四类型推断-四类型推断)
-  - [五、借用检查 {#五借用检查}](#五借用检查-五借用检查)
+  - [四、类型推断（Type Inference） {#四类型推断}](#四类型推断-四类型推断)
+  - [五、借用（Borrowing）检查 {#五借用检查}](#五借用检查-五借用检查)
   - [六、HIR / MIR {#六hir-mir}](#六hir--mir-六hir-mir)
   - [七、Async 与状态机 {#七async-与状态机}](#七async-与状态机-七async-与状态机)
   - [八、未覆盖缺口 {#八未覆盖缺口}](#八未覆盖缺口-八未覆盖缺口)
@@ -50,7 +50,7 @@
 
 | rustc-dev-guide 章节 | 项目文档 | 状态 | 备注 |
 |----------------------|----------|------|------|
-| [Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | 模块系统与名称解析 |
+| [Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | 模块（Module）系统与名称解析 |
 | [Modules and Source Files](https://rustc-dev-guide.rust-lang.org/compiler-src.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | crate/module/path 规则 |
 
 ---
@@ -59,7 +59,7 @@
 
 | rustc-dev-guide 章节 | 项目文档 | 状态 | 备注 |
 |----------------------|----------|------|------|
-| [Type Inference](https://rustc-dev-guide.rust-lang.org/type-inference.html) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | ✅ | 类型系统基础 |
+| [Type Inference](https://rustc-dev-guide.rust-lang.org/type-inference.html) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | ✅ | 类型系统（Type System）基础 |
 | [Trait Solving](https://rustc-dev-guide.rust-lang.org/traits/resolution.html) | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | ✅ | trait 系统形式化 |
 
 ---
@@ -69,7 +69,7 @@
 | rustc-dev-guide 章节 | 项目文档 | 状态 | 备注 |
 |----------------------|----------|------|------|
 | [Borrow Checker](https://rustc-dev-guide.rust-lang.org/borrow_check.html) | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ | 借用检查器证明 |
-| [Region Inference](https://rustc-dev-guide.rust-lang.org/borrow_check/region_inference.html) | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | ✅ | 生命周期推断 |
+| [Region Inference](https://rustc-dev-guide.rust-lang.org/borrow_check/region_inference.html) | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | ✅ | 生命周期（Lifetimes）推断 |
 | [MIR Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html) | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ | NLL / Polonius |
 
 ---
@@ -95,7 +95,7 @@
 
 ## 八、未覆盖缺口 {#八未覆盖缺口}
 
-1. 宏展开与 hygiene 的 rustc 实现章节可进一步对齐。
+1. 宏（Macro）展开与 hygiene 的 rustc 实现章节可进一步对齐。
 2. 增量编译、查询系统（query system）可补充工程层文档。
 3. 编译器诊断与错误码生成可关联到各反例文件的编译器错误。
 

@@ -80,9 +80,9 @@
 
 **判定流程**：1→不可则「不可表达」；2→需 unsafe 且可封装则「近似」；3→一致则「等价」；4→依赖则「不可表达」；5→有替代则「近似」。
 
-**反例类型**：等价违反→类型错误/所有权错误；近似违反→运行时（Runtime） panic/逻辑错误；不可表达→编译拒绝或 UB。
+**反例类型**：等价违反→类型错误/所有权（Ownership）错误；近似违反→运行时（Runtime） panic/逻辑错误；不可表达→编译拒绝或 UB。
 
-**引用**：[LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../10_language_semantics_expressiveness.md) EB1–EB6。
+**引用（Reference）**：[LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../10_language_semantics_expressiveness.md) EB1–EB6。
 
 ---
 
@@ -110,8 +110,8 @@
 
 - **Adapter**：包装 + 委托，等价
 - **Bridge**：trait 解耦抽象与实现，等价
-- **Composite**：枚举递归结构，等价
-- **Decorator**：结构体包装，等价
+- **Composite**：枚举（Enum）递归结构，等价
+- **Decorator**：结构体（Struct）包装，等价
 - **Facade**：模块（Module）/结构体（Struct），等价
 - **Flyweight**：`Arc` 共享，等价
 - **Proxy**：委托、延迟，等价
@@ -123,13 +123,13 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **Chain of Responsibility**：`Option`/链表传递，等价
-- **Command**：闭包即命令对象，等价
+- **Command**：闭包（Closures）即命令对象，等价
 - **Iterator**：`Iterator` trait 原生，等价
 - **Mediator**：结构体协调，等价
 - **State**：枚举/类型状态更严格，等价
 - **Strategy**：trait 即策略，等价
 
-**论证**：Rust 的 trait、枚举、所有权（Ownership）、借用可直接对应 OOP 的接口、多态、封装，语义一致。
+**论证**：Rust 的 trait、枚举、所有权（Ownership）、借用（Borrowing）可直接对应 OOP 的接口、多态、封装，语义一致。
 
 ---
 
@@ -158,7 +158,7 @@
 
 - 依赖全局可变 + 隐式共享的经典 OOP 模式
 - 依赖多继承的复杂层次
-- 依赖运行时反射的某些企业模式
+- 依赖运行时（Runtime）反射的某些企业模式
 
 **论证**：由 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../10_language_semantics_expressiveness.md) 表达能力边界，Rust 故意限制此类能力以换取安全与可预测性。
 
@@ -172,7 +172,7 @@
 | 模式 | 表达 | 说明 |
 | :--- | :--- | :--- |
 | Domain Model | 等价 | 结构体 + 方法；无贫血模型 |
-| Service Layer | 等价 | 模块、`pub fn` 编排 |
+| Service Layer | 等价 | 模块（Module）、`pub fn` 编排 |
 | Repository | 等价 | trait + impl |
 | Unit of Work | 等价 | 结构体收集变更、`commit()` |
 | Data Mapper | 等价 | `From`/`Into`、serde |
@@ -442,7 +442,7 @@ impl Originator {
 | 需与 GoF 语义完全一致 | 选用等价表达模式；见上表 |
 | 可接受实现差异 | 选用近似表达；Singleton、Observer 等 |
 | 跨语言团队 | 文档明确 Rust 与 OOP 差异；见各模式「与 GoF 对比」 |
-| 性能敏感 | 等价表达模式多为零成本抽象；Strategy、Iterator 等 |
+| 性能敏感 | 等价表达模式多为零成本抽象（Zero-Cost Abstraction）；Strategy、Iterator 等 |
 
 ---
 
@@ -455,7 +455,7 @@ impl Originator {
 | :--- | :--- |
 | 全局可变隐式共享 | 依赖注入、OnceLock、显式传入 |
 | 多继承 | trait 多实现 + 组合 |
-| 运行时反射 | 宏生成、trait 显式、枚举匹配 |
+| 运行时反射 | 宏（Macro）生成、trait 显式、枚举匹配 |
 | 任意子类型 | 显式 trait 约束、newtype 包装 |
 
 ---
@@ -467,7 +467,7 @@ impl Originator {
 
 | 表达类型 | 性能特征 |
 | :--- | :--- |
-| 等价表达 | 多为零成本抽象；编译时单态化 |
+| 等价表达 | 多为零成本抽象；编译时单态化（Monomorphization） |
 | 近似表达 | 可能有额外间接（如 channel）；通常可接受 |
 | 不可表达 | 无直接替代；需重新设计 |
 

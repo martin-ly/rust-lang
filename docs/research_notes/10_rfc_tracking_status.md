@@ -65,7 +65,7 @@
 | RFC 1210 | Specialization | 部分实现 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | `min_specialization`  nightly |
 | RFC 3185 | Async Drop | 设计中 | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | 尚未稳定 |
 | RFC 3516 | Gen Blocks | 不稳定 | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §3 | `gen` 关键字保留 |
-| RFC 3627 | Maybe Dangling | 讨论中 | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | 未来可能影响生命周期 |
+| RFC 3627 | Maybe Dangling | 讨论中 | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | 未来可能影响生命周期（Lifetimes） |
 
 ---
 

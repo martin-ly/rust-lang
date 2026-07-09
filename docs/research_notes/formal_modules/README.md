@@ -1,7 +1,7 @@
 # Formal Modules / 形式化模块系统 {#formal-modules-形式化模块系统}
 
 > **EN**: Formal Modules
-> **Summary**: 形式化模块系统 Formal Modules. (stub/archive redirect)
+> **Summary**: 形式化模块（Module）系统 Formal Modules. (stub/archive redirect)
 >
 > **概念族**: 形式化模块
 > **内容分级**: [核心级]

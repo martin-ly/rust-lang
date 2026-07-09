@@ -178,9 +178,13 @@ let a: Array<i32, 5> = Array { data: [0; 5] };
 let b: Array<f64, 10> = Array { data: [0.0; 10] };
 
 // const generics 表达式:
-fn double_size<T, const N: usize>(arr: [T; N]) -> [T; N * 2] {
-    // 不稳定: generic_const_exprs
-    todo!()
+fn double_size<T, const N: usize>(arr: [T; N]) -> [T; N * 2]
+where T: Default + Copy
+{
+    // 不稳定: generic_const_exprs（返回类型 [T; N * 2] 需该特性）
+    let mut out: [T; N * 2] = [T::default(); N * 2];
+    out[..N].copy_from_slice(&arr);
+    out
 }
 
 // 与 const fn 结合:
@@ -201,9 +205,14 @@ impl<T, const R: usize, const C: usize> Matrix<T, R, C> {
     fn shape(&self) -> (usize, usize) { (R, C) }
 
     fn transpose(&self) -> Matrix<T, C, R>
-    where T: Copy {
-        // ...
-        todo!()
+    where T: Copy + Default {
+        let mut out = [[T::default(); R]; C];
+        for i in 0..R {
+            for j in 0..C {
+                out[j][i] = self.data[i][j];
+            }
+        }
+        Matrix { data: out }
     }
 }
 ```
@@ -370,20 +379,19 @@ fn parse_number(s: &str) -> IntResult<i32> {
 }
 
 // 类型族 (Type Families): 通过关联类型实现
-trait Container {
+trait Container<'a> {
     type Item;
     type Iter: Iterator<Item = Self::Item>;
 
-    fn iter(&self) -> Self::Iter;
+    fn iter(&'a self) -> Self::Iter;
 }
 
-impl<T> Container for Vec<T> {
-    type Item = T;
-    type Iter = std::slice::Iter<'static, T>;
+impl<'a, T: 'a> Container<'a> for Vec<T> {
+    type Item = &'a T;
+    type Iter = std::slice::Iter<'a, T>;
 
-    fn iter(&self) -> Self::Iter {
-        // ...
-        todo!()
+    fn iter(&'a self) -> Self::Iter {
+        self.as_slice().iter()
     }
 }
 

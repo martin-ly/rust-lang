@@ -13,7 +13,7 @@
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
-> **一页纸速查** - Result、Option、错误处理模式
+> **一页纸速查** - Result、Option、错误处理（Error Handling）模式
 
 ---
 
@@ -23,7 +23,7 @@
 >
 - [错误处理速查卡 {#错误处理速查卡}](#错误处理速查卡-错误处理速查卡)
   - [📑 目录 {#目录}](#-目录-目录)
-  - [Result与Option {#result与option}](#result与option-result与option)
+  - [Result（Result）与Option（Option） {#result与option}](#result与option-result与option)
   - [常用方法 {#常用方法}](#常用方法-常用方法)
     - [Option {#option}](#option-option)
     - [Result {#result}](#result-result)
@@ -33,7 +33,7 @@
   - [🌍 权威国际化资源链接 {#权威国际化资源链接}](#-权威国际化资源链接-权威国际化资源链接)
     - [Rust Reference 核心章节 {#rust-reference-核心章节}](#rust-reference-核心章节-rust-reference-核心章节)
     - [The Rust Programming Language 核心章节 {#the-rust-programming-language-核心章节}](#the-rust-programming-language-核心章节-the-rust-programming-language-核心章节)
-    - [Rust Standard Library 核心 API / 模块 {#rust-standard-library-核心-api-模块}](#rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块)
+    - [Rust Standard Library 核心 API / 模块（Module） {#rust-standard-library-核心-api-模块}](#rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块)
     - [Rust By Example / Rust Cookbook / cheats.rs {#rust-by-example-rust-cookbook-cheatsrs}](#rust-by-example--rust-cookbook--cheatsrs-rust-by-example-rust-cookbook-cheatsrs)
     - [错误处理专属权威链接 {#错误处理专属权威链接}](#错误处理专属权威链接-错误处理专属权威链接)
       - [std::error::Error {#stderrorerror}](#stderrorerror-stderrorerror)

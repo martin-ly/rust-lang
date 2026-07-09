@@ -25,17 +25,17 @@
   - [📑 目录 {#目录}](#-目录-目录)
   - [宗旨 {#宗旨}](#宗旨-宗旨)
   - [形式化定义（完备性缺口） {#形式化定义完备性缺口}](#形式化定义完备性缺口-形式化定义完备性缺口)
-  - [1. 内存与所有权族缺口 {#1-内存与所有权族缺口}](#1-内存与所有权族缺口-1-内存与所有权族缺口)
-  - [2. 并发与异步族缺口 {#2-并发与异步族缺口}](#2-并发与异步族缺口-2-并发与异步族缺口)
+  - [1. 内存与所有权（Ownership）族缺口 {#1-内存与所有权族缺口}](#1-内存与所有权族缺口-1-内存与所有权族缺口)
+  - [2. 并发与异步（Async）族缺口 {#2-并发与异步族缺口}](#2-并发与异步族缺口-2-并发与异步族缺口)
   - [3. FFI 与不安全族缺口 {#3-ffi-与不安全族缺口}](#3-ffi-与不安全族缺口-3-ffi-与不安全族缺口)
-  - [4. 控制流与模式匹配族缺口 {#4-控制流与模式匹配族缺口}](#4-控制流与模式匹配族缺口-4-控制流与模式匹配族缺口)
+  - [4. 控制流与模式匹配（Pattern Matching）族缺口 {#4-控制流与模式匹配族缺口}](#4-控制流与模式匹配族缺口-4-控制流与模式匹配族缺口)
   - [5. Rust 1.93 新增/变更与 formal\_methods 衔接缺口 {#5-rust-193-新增变更与-formal\_methods-衔接缺口}](#5-rust-193-新增变更与-formal_methods-衔接缺口-5-rust-193-新增变更与-formal_methods-衔接缺口)
   - [6. 缺口汇总与优先级 {#6-缺口汇总与优先级}](#6-缺口汇总与优先级-6-缺口汇总与优先级)
   - [7. 与已有文档的衔接 {#7-与已有文档的衔接}](#7-与已有文档的衔接-7-与已有文档的衔接)
   - [8. 补全路线图 {#8-补全路线图}](#8-补全路线图-8-补全路线图)
   - [9. 国际权威对标 {#9-国际权威对标}](#9-国际权威对标-9-国际权威对标)
   - [10. 国际对标缺口（与阶段 1 交付物联动） {#10-国际对标缺口与阶段-1-交付物联动}](#10-国际对标缺口与阶段-1-交付物联动-10-国际对标缺口与阶段-1-交付物联动)
-  - [引用 {#引用}](#引用-引用)
+  - [引用（Reference） {#引用}](#引用-引用)
   - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
       - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
@@ -99,7 +99,7 @@ $
 | **Rc/Arc** | ✅ | Def RC1/ARC1、定理 RC-T1 | ownership_model |
 | **Cell/RefCell** | ✅ | Def CELL1/REFCELL1、定理 REFCELL-T1 | ownership_model |
 | **MaybeUninit** | ✅ | Def MAYBEUNINIT1、定理 MAYBEUNINIT-T1 | ownership_model |
-| **智能指针 Deref/Drop** | ✅ | Def DROP1/DEREF1、定理 DROP-T1/DEREF-T1 | ownership_model |
+| **智能指针（Smart Pointer） Deref/Drop** | ✅ | Def DROP1/DEREF1、定理 DROP-T1/DEREF-T1 | ownership_model |
 | **裸指针** | ✅ | Def RAW1、定理 RAW-T1、deref_nullptr | borrow_checker |
 | **内存布局** | ✅ | Def REPR1、定理 REPR-T1 | ownership_model |
 
@@ -114,7 +114,7 @@ $
 | :--- | :--- | :--- | :--- |
 | **通道 mpsc/broadcast** | ✅ | Def CHAN1、定理 CHAN-T1 | borrow_checker |
 | **Mutex/RwLock** | ✅ | Def MUTEX1、定理 MUTEX-T1 | borrow_checker |
-| **原子操作** | ✅ | Def ATOMIC1、定理 ATOMIC-T1 | ownership_model |
+| **原子操作（Atomic Operations）** | ✅ | Def ATOMIC1、定理 ATOMIC-T1 | ownership_model |
 | **thread::spawn** | ✅ | Def SPAWN1、定理 SPAWN-T1 | async_state_machine |
 | **async 1.93 变更** | ✅ | 全局分配器 thread_local、asm_cfg；见 async_state_machine | async_state_machine |
 
@@ -186,8 +186,8 @@ $
 | 文档 | 已覆盖 | 备注 |
 | :--- | :--- | :--- |
 | [ownership_model](10_ownership_model.md) | 所有权规则 1–3、T2/T3、Box/Rc/Arc/Cell/RefCell、MaybeUninit、ATOMIC/UNION/TRANSMUTE、DROP/DEREF/REPR/CONST_MUT_STATIC | 100% |
-| [borrow_checker_proof](10_borrow_checker_proof.md) | 借用规则、T1、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、EXTERN/CVARIADIC/QUERY | 100% |
-| lifetime_formalization | outlives、T2 引用有效性 | 与型变、泛型组合 |
+| [borrow_checker_proof](10_borrow_checker_proof.md) | 借用（Borrowing）规则、T1、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、EXTERN/CVARIADIC/QUERY | 100% |
+| lifetime_formalization | outlives、T2 引用有效性 | 与型变、泛型（Generics）组合 |
 | [async_state_machine](10_async_state_machine.md) | T6.1–T6.3 Future、Send/Sync、SPAWN、1.93 变更 | 100% |
 | [pin_self_referential](10_pin_self_referential.md) | Pin T1–T3 | 100% |
 

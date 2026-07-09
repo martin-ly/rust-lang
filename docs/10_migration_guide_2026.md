@@ -425,7 +425,7 @@ let wide: (i32, i32) = (narrow.0 as i32, narrow.1 as i32);
 
 | 特性 | 最低版本 | 说明 |
 |------|----------|------|
-| if let guards | 1.95.0 | match 守卫中的嵌套模式匹配 |
+| if let guards | 1.95.0 | match 守卫中的嵌套模式匹配（Pattern Matching） |
 | isqrt | 1.84 | 整数平方根运算 |
 | HashMap::get_disjoint_mut | 1.86 | 安全并行可变访问 |
 | Vec::pop_if | 1.86 | 条件弹出元素 |

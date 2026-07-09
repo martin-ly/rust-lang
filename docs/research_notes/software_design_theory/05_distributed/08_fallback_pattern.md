@@ -29,7 +29,7 @@
     - [Axiom {#axiom}](#axiom-axiom)
     - [Theorem {#theorem}](#theorem-theorem)
   - [三、Rust 实现方案 {#三rust-实现方案}](#三rust-实现方案-三rust-实现方案)
-    - [3.1 枚举策略 {#31-枚举策略}](#31-枚举策略-31-枚举策略)
+    - [3.1 枚举（Enum）策略 {#31-枚举策略}](#31-枚举策略-31-枚举策略)
     - [3.2 async 策略组合 {#32-async-策略组合}](#32-async-策略组合-32-async-策略组合)
     - [3.3 代码示例 {#33-代码示例}](#33-代码示例-33-代码示例)
   - [四、反例边界 {#四反例边界}](#四反例边界-四反例边界)
@@ -44,7 +44,7 @@
 
 在分布式系统中，服务依赖可能因网络抖动、超时、过载或局部故障而失败。若直接将失败透传给上游，可能引发级联雪崩。Fallback / Degrade 模式通过**在失败时提供替代路径或受限但可用的响应**，提升系统在部分失效下的可用性（availability）与韧性（resilience）。
 
-Rust 的强类型系统、枚举与 `async/await` 语义，使得我们可以把 fallback 策略显式建模为类型，并通过编译期约束避免隐式降级。
+Rust 的强类型系统（Type System）、枚举与 `async/await` 语义，使得我们可以把 fallback 策略显式建模为类型，并通过编译期约束避免隐式降级。
 
 ---
 
@@ -97,7 +97,7 @@ Degrade(S, S', R) :=
 ### Theorem {#theorem}
 
 - **T-FB-1（独立性保证）**: 若 fallback 函数 `F` 对 `S` 无依赖，则 `S` 的不可用不会导致 `F` 不可用。
-- **T-FB-2（降级闭包）**: 若降级服务 `S'` 的调用图是完整服务 `S` 调用图的子图，则降级路径不会引入新的外部依赖失败点。
+- **T-FB-2（降级闭包（Closures））**: 若降级服务 `S'` 的调用图是完整服务 `S` 调用图的子图，则降级路径不会引入新的外部依赖失败点。
 
 **Proof (T-FB-1 自然语言证明 L2)**: 假设 `F` 的输入仅来自请求 `a`，且 `F` 不调用 `S` 的任何方法。根据 A-FB-3，`F` 的失败原因集合与 `S` 的失败原因集合不相交。因此 `S` 的失败不会传播到 `F`，`F` 仍可按定义返回结果。∎
 
@@ -161,7 +161,7 @@ where
 
 示例包含：
 
-1. 主服务 / 备用服务异步调用；
+1. 主服务 / 备用服务异步（Async）调用；
 2. 超时后自动 fallback；
 3. 主动降级开关（degradation flag）；
 4. 结果枚举 `ServiceOutcome` 与监控指标；
@@ -209,8 +209,8 @@ match outcome {
 |--------|------|------|
 | P0 | [The Rust Programming Language](https://doc.rust-lang.org/book/) | `Result<T, E>`、枚举（Enum）、模式匹配（Pattern Matching）、错误处理（Error Handling） |
 | P0 | [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) | `async/await`、`Future`、Pin、异步状态机 |
-| P0 | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | 超时、任务调度、异步运行时 |
-| P1 | [Rust Reference](https://doc.rust-lang.org/reference/) | 类型系统（Type System）、生命周期、Send/Sync 语义 |
+| P0 | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | 超时、任务调度、异步运行时（Runtime） |
+| P1 | [Rust Reference](https://doc.rust-lang.org/reference/) | 类型系统（Type System）、生命周期（Lifetimes）、Send/Sync 语义 |
 | P1 | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | 模式分类、惯用法与最佳实践 |
 | P2 | [Tonic Docs](https://docs.rs/tonic/latest/tonic/) | gRPC / 服务中间件中的 fallback / interceptor 实践 |
 | P2 | [AWS Well-Architected Reliability Pillar](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html) | 分布式韧性设计原则（回退、降级、限流） |

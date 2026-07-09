@@ -50,7 +50,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-Rust 的常量求值在编译期执行，允许在类型系统和常量定义中使用计算。
+Rust 的常量求值在编译期执行，允许在类型系统（Type System）和常量定义中使用计算。
 
 ---
 

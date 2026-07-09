@@ -20,7 +20,7 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L3 (高级应用) / L4 (并行计算原理)
-> **目标读者**: 已掌握 Rust 迭代器与闭包，希望利用数据并行加速计算的开发者
+> **目标读者**: 已掌握 Rust 迭代器（Iterator）与闭包（Closures），希望利用数据并行加速计算的开发者
 > [Rayon 官方文档](https://docs.rs/rayon/latest/rayon/)(<https://docs.rs/rayon/latest/rayon/>)
 > [Rust Reference — Closure types](https://doc.rust-lang.org/reference/types/closure.html)(<https://doc.rust-lang.org/reference/types/closure.html>)
 > [TRPL 第 16 章 — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)(<https://doc.rust-lang.org/book/ch16-00-concurrency.html>)
@@ -47,7 +47,7 @@ Rayon 的核心 API 仅三个入口：
 | `join(f, g)` | 分叉-汇合并行：同时执行两个闭包 | `rayon::join(\|\| compute_a(), \|\| compute_b())` |
 | `scope()` | 创建作用域，支持嵌套并行任务 | `rayon::scope(\|s\| { s.spawn(\|\| ...); })` |
 
-Rayon 不引入新的并发原语（如锁或通道），而是**复用 Rust 已有的所有权与类型系统**，在编译期杜绝数据竞争。
+Rayon 不引入新的并发原语（如锁或通道），而是**复用 Rust 已有的所有权（Ownership）与类型系统（Type System）**，在编译期杜绝数据竞争。
 
 这是 "Fearless Concurrency" 理念在数据并行领域的最佳实践。
 
@@ -107,7 +107,7 @@ pub trait ParallelIterator: Sized + Send {
 
 关键观察：`ParallelIterator` 要求 `Item: Send`，这意味着迭代产生的每个元素都必须是线程安全的。
 
-这不是运行时检查，而是编译期由 Rust 类型系统强制保证的。
+这不是运行时（Runtime）检查，而是编译期由 Rust 类型系统强制保证的。
 
 ### 2.2 从 `Iterator` 到 `ParallelIterator` {#22-从-iterator-到-paralleliterator}
 
@@ -327,7 +327,7 @@ pub trait ParallelIterator: Sized + Send {
 
 - **迭代器本身**必须可跨线程发送（`Send`）
 - **每个元素**必须可跨线程发送（`Item: Send`）
-- **闭包（Closures）**必须是 `Sync`（可被多线程同时引用）且 `Send`（可跨线程调用）
+- **闭包（Closures）**必须是 `Sync`（可被多线程同时引用（Reference））且 `Send`（可跨线程调用）
 
 这些约束保证了：**在 Rayon 的并行迭代中，不可能出现数据竞争**。
 
@@ -473,7 +473,7 @@ fn process_data(data: &[u64]) -> Vec<u64> {
 }
 ```
 
-**关键点**: `scope` 保证所有 `spawn` 的任务在 `scope` 闭包返回前完成，因此可以安全地借用外部变量（如 `results`）。
+**关键点**: `scope` 保证所有 `spawn` 的任务在 `scope` 闭包返回前完成，因此可以安全地借用（Borrowing）外部变量（如 `results`）。
 
 > [Rayon 文档 — `scope`](https://docs.rs/rayon/latest/rayon/fn.scope.html)(<https://docs.rs/rayon/latest/rayon/fn.scope.html>)
 
@@ -552,8 +552,8 @@ pool.install(|| {
 > **相关文件**:
 >
 > - `docs/research_notes/software_design_theory/07_crate_architectures/10_tokio_architecture.md` — Tokio 运行时架构（任务并行 vs 数据并行）
-> - `concept/03_advanced/03_concurrency_async.md` — Rust 并发与异步核心概念
-> - `concept/03_advanced/03_unsafe_raw.md` —  Unsafe Rust 与原始指针
+> - `concept/03_advanced/03_concurrency_async.md` — Rust 并发与异步（Async）核心概念
+> - `concept/03_advanced/03_unsafe_raw.md` —  Unsafe Rust 与原始指针（Raw Pointer）
 
 ---
 

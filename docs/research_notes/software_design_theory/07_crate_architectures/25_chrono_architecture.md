@@ -254,9 +254,9 @@ let d = NaiveDate::parse_from_str("2026-6-9", "%Y-%m-%d");
 | 模式 | chrono 中的体现 | 收益 |
 |:--|:--|:--|
 | **Typestate** | `NaiveDateTime` vs `DateTime<Tz>` | 时区错误在编译期捕获 |
-| **零成本抽象（Zero-Cost Abstraction）** | `DateTime<Tz>` 运行时仅为 `NaiveDateTime + Offset` | 不牺牲性能 |
+| **零成本抽象（Zero-Cost Abstraction）** | `DateTime<Tz>` 运行时（Runtime）仅为 `NaiveDateTime + Offset` | 不牺牲性能 |
 | **显式失败** | `parse_from_str` 返回 `Result` | 非法日期不可构造 |
-| **泛型特化** | `TimeZone` trait + `Offset` trait | 支持自定义时区 |
+| **泛型（Generics）特化** | `TimeZone` trait + `Offset` trait | 支持自定义时区 |
 
 ---
 

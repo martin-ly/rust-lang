@@ -26,13 +26,13 @@
   - [五层概念体系 {#五层概念体系}](#五层概念体系-五层概念体系)
     - [L1: 元概念层 {#l1-元概念层}](#l1-元概念层-l1-元概念层)
     - [L2: 核心概念族 {#l2-核心概念族}](#l2-核心概念族-l2-核心概念族)
-      - [L2.1: 所有权概念族 {#l21-所有权概念族}](#l21-所有权概念族-l21-所有权概念族)
+      - [L2.1: 所有权（Ownership）概念族 {#l21-所有权概念族}](#l21-所有权概念族-l21-所有权概念族)
       - [L2.2: 类型概念族 {#l22-类型概念族}](#l22-类型概念族-l22-类型概念族)
       - [L2.3: 并发概念族 {#l23-并发概念族}](#l23-并发概念族-l23-并发概念族)
     - [L3: 具体概念 {#l3-具体概念}](#l3-具体概念-l3-具体概念)
       - [L3.1: 所有权具体概念 {#l31-所有权具体概念}](#l31-所有权具体概念-l31-所有权具体概念)
-      - [L3.2: 借用具体概念 {#l32-借用具体概念}](#l32-借用具体概念-l32-借用具体概念)
-      - [L3.3: 生命周期具体概念 {#l33-生命周期具体概念}](#l33-生命周期具体概念-l33-生命周期具体概念)
+      - [L3.2: 借用（Borrowing）具体概念 {#l32-借用具体概念}](#l32-借用具体概念-l32-借用具体概念)
+      - [L3.3: 生命周期（Lifetimes）具体概念 {#l33-生命周期具体概念}](#l33-生命周期具体概念-l33-生命周期具体概念)
     - [L4: 实现机制 {#l4-实现机制}](#l4-实现机制-l4-实现机制)
     - [L5: 代码实践 {#l5-代码实践}](#l5-代码实践-l5-代码实践)
       - [L5.1: 基础代码模式 {#l51-基础代码模式}](#l51-基础代码模式-l51-基础代码模式)
@@ -88,7 +88,7 @@
 | :--- | :--- | :--- | :--- |
 | **资源管理** | 计算机资源的获取和释放 | 所有权系统 | 10_ownership_model.md |
 | **类型安全** | 编译时类型正确性保证 | 类型系统（Type System） | 10_type_system_foundations.md |
-| **并发安全（Concurrency Safety）** | 多线程/异步执行安全 | Send/Sync | 10_send_sync_formalization.md |
+| **并发安全（Concurrency Safety）** | 多线程/异步（Async）执行安全 | Send/Sync | 10_send_sync_formalization.md |
 | **内存安全（Memory Safety）** | 无悬垂指针、无数据竞争 | 借用检查器 | 10_borrow_checker_proof.md |
 | **抽象能力** | 代码复用和接口定义 | Trait/泛型（Generics） | 10_trait_system_formalization.md |
 
@@ -96,7 +96,7 @@
 
 - 资源管理: $R: \text{Resource} \rightarrow \text{Lifetime} \rightarrow \text{Status}$
 - 类型安全: $\Gamma \vdash e : \tau$ (类型判断)
-- 并发安全: $T: \text{Send} \land T: \text{Sync}$
+- 并发安全（Concurrency Safety）: $T: \text{Send} \land T: \text{Sync}$
 
 ---
 
@@ -148,8 +148,8 @@
 
 | 概念 | 定义 | 层间关系 | 主文档 |
 | :--- | :--- | :--- | :--- |
-| **类型系统** | 类型判断和推导 | L1类型安全 → L2类型 | 10_type_system_foundations.md |
-| **泛型** | 参数化多态 | L2类型 → L3泛型 | 10_type_system_foundations.md |
+| **类型系统（Type System）** | 类型判断和推导 | L1类型安全 → L2类型 | 10_type_system_foundations.md |
+| **泛型（Generics）** | 参数化多态 | L2类型 → L3泛型 | 10_type_system_foundations.md |
 | **Trait** | 行为抽象接口 | L2类型 → L3Trait | 10_trait_system_formalization.md |
 | **型变** | 子类型关系 | L2类型 → L3型变 | 10_variance_theory.md |
 
@@ -196,7 +196,7 @@
 
 | 概念 | 定义 | 层间关系 | 示例 |
 | :--- | :--- | :--- | :--- |
-| **共享借用** | `&T` 只读引用 | L2借用 → L3共享 | `let r = &s;` |
+| **共享借用** | `&T` 只读引用（Reference） | L2借用 → L3共享 | `let r = &s;` |
 | **可变借用（Mutable Borrow）** | `&mut T` 独占引用 | L2借用 → L3可变 | `let r = &mut s;` |
 | **解引用** | `*` 操作符解引用 | L2借用 → L3解引用 | `*r = String::from("y");` |
 | **重新借用** | 从借用创建新借用 | L2借用 → L3重新借用 | `let r2 = &*r;` |
@@ -217,7 +217,7 @@
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-**定义**: Rust 编译器和运行时的具体实现机制
+**定义**: Rust 编译器和运行时（Runtime）的具体实现机制
 
 | 机制 | 定义 | 层间关系 | 实现细节 |
 | :--- | :--- | :--- | :--- |
@@ -225,7 +225,7 @@
 | **单态化（Monomorphization）** | 泛型编译时特化 | L2泛型 → L4单态化 | 为每个类型生成代码 |
 | **vtable** | Trait对象动态分发 | L2Trait → L4vtable | 指向方法表的指针 |
 | **ARC/Mutex** | 运行时引用计数/锁 | L2并发 → L4运行时 | Atomic Rc / Mutex 实现 |
-| **Future状态机** | 异步代码状态转换 | L2异步 → L4状态机 | Poll/await 状态转换 |
+| **Future（Future）状态机** | 异步代码状态转换 | L2异步 → L4状态机 | Poll/await 状态转换 |
 | **Drop检查** | 资源释放顺序检查 | L2Drop → L4检查 | 按构建逆序释放 |
 
 **实现机制关系图**:
@@ -271,9 +271,9 @@ graph TB
 | 模式 | 概念来源 | 代码示例 | 适用场景 |
 | :--- | :--- | :--- | :--- |
 | **RAII** | L3作用域 + L4Drop检查 | `let file = File::open("x.txt")?;` | 资源管理 |
-| **借用模式** | L3共享/可变借用 | `fn process(data: &[u8])` | 数据传递 |
+| **借用模式** | L3共享/可变借用（Mutable Borrow） | `fn process(data: &[u8])` | 数据传递 |
 | **Builder** | L3方法调用 | `Config::new().port(8080).build()` | 复杂对象构建 |
-| **迭代器** | L3迭代 + L4单态化 | `vec.iter().map(...).collect()` | 数据处理 |
+| **迭代器（Iterator）** | L3迭代 + L4单态化 | `vec.iter().map(...).collect()` | 数据处理 |
 
 #### L5.2: 高级代码模式 {#l52-高级代码模式}
 
@@ -418,7 +418,7 @@ L5 代码实践
 | 概念 (L3) | 相关定理 | 定理文档 | 证明状态 |
 | :--- | :--- | :--- | :--- |
 | 所有权唯一性 | T2 | 10_ownership_model.md | ✅ 完整 |
-| 内存安全 | T3 | 10_ownership_model.md | ✅ 完整 |
+| 内存安全（Memory Safety） | T3 | 10_ownership_model.md | ✅ 完整 |
 | 数据竞争自由 | T1 | 10_borrow_checker_proof.md | ✅ 完整 |
 | 类型安全 | T3 | 10_type_system_foundations.md | ✅ 完整 |
 | 生命周期有效性 | LF-T1~T3 | 10_lifetime_formalization.md | ✅ 完整 |

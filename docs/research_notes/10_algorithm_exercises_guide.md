@@ -47,7 +47,7 @@
 
 本文档定位 `exercises/src/algorithms/` 算法专项练习的入口说明，配套代码位于 [`exercises/src/algorithms/`](../../exercises/src/algorithms) 目录。
 练习采用"函数骨架 + 参考实现 + 单元测试"的形式，覆盖排序、搜索、图论、动态规划与经典数据结构五大主题，
-帮助学习者在 Rust 1.96.1+ 环境中掌握算法实现与所有权、借用（Borrowing）、泛型等 Rust 特性的结合。
+帮助学习者在 Rust 1.96.1+ 环境中掌握算法实现与所有权（Ownership）、借用（Borrowing）、泛型（Generics）等 Rust 特性的结合。
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
@@ -118,7 +118,7 @@
 | 难度 | 对应题目 | 建议对象 |
 |------|----------|----------|
 | L2 基础 | 快速排序、二分搜索、爬楼梯、最小栈、栈实现队列 | Rust 语法已入门，开始算法训练 |
-| L3 进阶 | 归并排序、堆排序、BFS/DFS、拓扑排序、0/1 背包、LIS、LCS、编辑距离 | 掌握所有权/借用后可稳定实现 |
+| L3 进阶 | 归并排序、堆排序、BFS/DFS、拓扑排序、0/1 背包、LIS、LCS、编辑距离 | 掌握所有权/借用（Borrowing）后可稳定实现 |
 | L4 应用 | Dijkstra、Kruskal、并查集综合、LRU、Trie、网络延迟时间 | 能结合 Rust 标准库与第三方 crate 完成 |
 
 ---
@@ -128,7 +128,7 @@
 1. **阶段 1：排序与搜索**（L2-L3）
    - 先完成 `sorting.rs` 与 `searching.rs`，熟悉递归、切片（Slice）、索引边界处理。
 2. **阶段 2：数据结构**（L2-L4）
-   - 实现 `LruCache`、`Trie`、`UnionFind` 等，练习泛型、生命周期与自定义结构体。
+   - 实现 `LruCache`、`Trie`、`UnionFind` 等，练习泛型、生命周期（Lifetimes）与自定义结构体（Struct）。
 3. **阶段 3：图论**（L3-L4）
    - 掌握 Dijkstra、拓扑排序、并查集，理解 `BinaryHeap` 与图遍历模板。
 4. **阶段 4：动态规划**（L3-L4）
@@ -174,7 +174,7 @@ cargo test -p exercises --lib algorithms
 cd scripts/maintenance && python check_research_notes.py
 ```
 
-当前算法模块已包含 **25 个独立算法函数 + 5 个数据结构实现**，配套 **47 个单元测试**，全部通过。
+当前算法模块（Module）已包含 **25 个独立算法函数 + 5 个数据结构实现**，配套 **47 个单元测试**，全部通过。
 
 > **来源: [ACM Digital Library](https://dl.acm.org/)**
 > **来源: [IEEE Standards](https://standards.ieee.org/)**

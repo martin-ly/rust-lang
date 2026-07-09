@@ -1,7 +1,7 @@
 # Pin 与自引用结构速查卡 {#pin-与自引用结构速查卡}
 
 > **EN**: Pin Cheatsheet
-> **Summary**: Pin 与自引用结构速查卡 Pin Cheatsheet.
+> **Summary**: Pin 与自引用（Reference）结构速查卡 Pin Cheatsheet.
 >
 > **Rust 版本**: 1.96.1+ (Edition 2024)
 >
@@ -10,7 +10,7 @@
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 > **适用场景**: 异步（Async） Future、自引用结构、侵入式数据结构
-> **版本**: Rust 1.68+ (`pin!` 宏稳定)
+> **版本**: Rust 1.68+ (`pin!` 宏（Macro）稳定)
 
 ---
 

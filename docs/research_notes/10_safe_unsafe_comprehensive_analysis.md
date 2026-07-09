@@ -64,7 +64,7 @@
 本文档针对「安全与非安全缺乏全面论证和分析」的缺口，系统化补全：
 
 1. **定义与边界**：安全子集、unsafe 边界、跨越方式
-2. **形式化论证**：各安全保证的定理与证明引用
+2. **形式化论证**：各安全保证的定理与证明引用（Reference）
 3. **unsafe 契约**：前置/后置条件、典型操作契约
 4. **UB 分类**：内存、类型、并发、FFI 等 UB 及反例
 5. **安全抽象**：不变式、边界、正确性论证
@@ -149,10 +149,10 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 
 | 保证 | 机制 | 定理 | 文档 |
 | :--- | :--- | :--- | :--- |
-| 无悬垂引用 | 生命周期、借用（Borrowing） | lifetime T2、ownership T3 | lifetime_formalization、ownership_model |
+| 无悬垂引用 | 生命周期（Lifetimes）、借用（Borrowing） | lifetime T2、ownership T3 | lifetime_formalization、ownership_model |
 | 无双重释放 | 所有权 | ownership T2,T3 | ownership_model |
 | 无内存泄漏 | RAII、所有权 | ownership T3 | ownership_model |
-| 数据竞争自由 | 借用、Send/Sync | borrow T1、async T6.2 | borrow_checker_proof、async_state_machine |
+| 数据竞争自由 | 借用（Borrowing）、Send/Sync | borrow T1、async T6.2 | borrow_checker_proof、async_state_machine |
 | 类型安全 | 类型系统（Type System） | type_system T1–T3 | type_system_foundations |
 | 引用有效性 | 生命周期 | lifetime T2 | lifetime_formalization |
 | 型变安全 | 协变/逆变/不变 | variance T1–T4 | variance_theory |
@@ -207,7 +207,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 | 操作 | 前置 P | 后置 Q | 说明 |
 | :--- | :--- | :--- | :--- |
-| `*ptr` | 非空、对齐、有效、无别名可变引用 | 访问有效 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) |
+| `*ptr` | 非空、对齐、有效、无别名可变引用（Mutable Reference） | 访问有效 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) |
 | `MaybeUninit::assume_init` | 内存已初始化 | 返回有效 T | 1.93 文档化 |
 | `MaybeUninit::assume_init_drop` | 内存已初始化 | 调用 drop、内存未初始化 | 1.93 新 API |
 | `ptr::read` | 指针有效、对齐 | 返回值副本 | - |
@@ -256,7 +256,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | transmute 大小不等 | transmute 前置 | 类型 UB |
 | 非 Send 跨线程 | Send 契约 | 并发 UB |
 | 移动未 Pin 自引用 | Pin 保证 | 悬垂、内存 UB |
-| 双重可变借用 | 借用规则 | 编译错误（安全子集内） |
+| 双重可变借用（Mutable Borrow） | 借用规则 | 编译错误（安全子集内） |
 | 返回局部引用 | 生命周期 | 编译错误（安全子集内） |
 
 ### 4.3 1.93 相关变更 {#43-193-相关变更}
@@ -297,7 +297,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | 抽象 | 内部 unsafe | 不变式 | 安全 API |
 | :--- | :--- | :--- | :--- |
 | `Vec<T>` | 裸指针、realloc | len ≤ capacity | push、pop、index |
-| `Box<T>` | 堆分配、释放 | 单一所有权 | new、drop |
+| `Box<T>` | 堆分配、释放 | 单一所有权（Ownership） | new、drop |
 | `Rc<T>` | 原子引用计数 | 计数一致 | clone、strong_count |
 | `Mutex<T>` | 锁、内部可变 | 互斥 | lock、try_lock |
 | `String` | 与 Vec 类似 | UTF-8 | 所有 &str 方法 |
@@ -330,7 +330,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | 维度 | 安全子集 | unsafe 拓展 | 边界 |
 | :--- | :--- | :--- | :--- |
 | **内存** | 所有权（Ownership）、借用、RAII | 裸指针、MaybeUninit、手动分配 | 编译器可验证 vs 程序员契约 |
-| **类型** | 类型系统、泛型（Generics） | transmute、union | 类型安全 vs 重解释 |
+| **类型** | 类型系统（Type System）、泛型（Generics） | transmute、union | 类型安全 vs 重解释 |
 | **并发** | Send/Sync、借用 | 裸原子、无锁 | 数据竞争自由 vs 手动同步 |
 | **引用** | 生命周期、NLL | 裸指针无生命周期 | 引用有效性 vs 手动保证 |
 | **FFI** | 无 | extern、extern "C" | 无 vs 完全手动 |
@@ -361,7 +361,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) | 理论体系、论证体系、安全边界总览 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) | 公理语义、unsafe 契约 |
 | [UNSAFE_RUST_GUIDE](../../concept/03_advanced/02_unsafe/03_unsafe.md) | Unsafe Rust 专题指南 |
-| [ownership_model](formal_methods/10_ownership_model.md) | 内存安全定理 |
+| [ownership_model](formal_methods/10_ownership_model.md) | 内存安全（Memory Safety）定理 |
 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | 数据竞争自由定理 |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 官方 unsafe 权威 |
 

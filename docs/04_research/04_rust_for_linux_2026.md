@@ -25,7 +25,7 @@
     - [2.2 适用场景 {#22-适用场景}](#22-适用场景-22-适用场景)
   - [三、内核 Rust 开发环境 {#三内核-rust-开发环境}](#三内核-rust-开发环境-三内核-rust-开发环境)
     - [3.1 工具链要求 {#31-工具链要求}](#31-工具链要求-31-工具链要求)
-    - [3.2 最小示例：内核模块 {#32-最小示例内核模块}](#32-最小示例内核模块-32-最小示例内核模块)
+    - [3.2 最小示例：内核模块（Module） {#32-最小示例内核模块}](#32-最小示例内核模块-32-最小示例内核模块)
   - [四、`kernel` Crate API 概览 {#四kernel-crate-api-概览}](#四kernel-crate-api-概览-四kernel-crate-api-概览)
     - [4.1 核心抽象 {#41-核心抽象}](#41-核心抽象-41-核心抽象)
     - [4.2 内存管理 {#42-内存管理}](#42-内存管理-42-内存管理)
@@ -82,7 +82,7 @@
 | 维度 | C 内核代码 | Rust 内核代码 |
 |------|-----------|--------------|
 | 内存安全（Memory Safety） | 手动管理，依赖 review | 编译期保证 + unsafe 边界明确 |
-| 并发安全（Concurrency Safety） | 依赖锁规则约定 | 类型系统强制（Send/Sync） |
+| 并发安全（Concurrency Safety） | 依赖锁规则约定 | 类型系统（Type System）强制（Send/Sync） |
 | 错误处理（Error Handling） | 返回码检查（易遗漏） | `Result` 强制处理 |
 | 调试成本 | 高（Use-after-free, 竞态） | 低（多数问题在编译期捕获） |
 | 与 C 互操作 | 原生 | 通过 `unsafe` FFI + bindgen |
@@ -101,7 +101,7 @@
 
 ⚠️ **需谨慎评估**：
 
-- 紧密依赖现有 C 宏和头文件的子系统
+- 紧密依赖现有 C 宏（Macro）和头文件的子系统
 - 极端性能敏感的底层路径（中断处理、调度器）
 
 ---
@@ -315,7 +315,7 @@ fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
 **Rust 组件**：
 
 - 队列管理（Submission/Completion Queues）
-- 错误处理和日志记录
+- 错误处理（Error Handling）和日志记录
 - 热插拔事件处理
 
 **性能数据**（据 2025 年基准测试）：
@@ -385,7 +385,7 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 |--------------|-------------------|
 | `knowledge/04_expert/safety_critical/` | DO-178C / IEC 61508 对内核驱动的安全要求 |
 | `crates/c13_embedded/` | 裸机/RTOS 到 Linux 内核驱动的迁移路径 |
-| `crates/c11_macro_system_proc/` | 内核宏与 `module!` 声明宏的对比 |
+| `crates/c11_macro_system_proc/` | 内核宏与 `module!` 声明宏（Declarative Macro）的对比 |
 | `docs/04_research/formal_verification/` | RustBelt 语义对内核 unsafe 代码的形式化验证 |
 
 **Ferrocene 关联**：

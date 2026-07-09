@@ -112,12 +112,12 @@
 **抽象解释 (Abstract Interpretation)**:
 
 - **定义**: 一种静态分析技术，用于在程序执行前推断程序的性质
-- **应用**: 在 Rust 中用于借用检查器的实现
+- **应用**: 在 Rust 中用于借用（Borrowing）检查器的实现
 - **相关**: [借用检查器证明](formal_methods/10_borrow_checker_proof.md)
 
 **异步状态机 (Async State Machine)**:
 
-- **定义**: 用于建模异步程序执行的状态机
+- **定义**: 用于建模异步（Async）程序执行的状态机
 - **应用**: Rust 的 async/await 机制可以转换为状态机
 - **相关**: [异步状态机形式化](formal_methods/10_async_state_machine.md)
 
@@ -130,15 +130,15 @@
 **借用检查器 (Borrow Checker)**:
 
 - **定义**: Rust 编译器的核心组件，用于检查借用规则
-- **功能**: 确保内存安全，防止数据竞争
+- **功能**: 确保内存安全（Memory Safety），防止数据竞争
 - **相关**: [借用检查器证明](formal_methods/10_borrow_checker_proof.md)
 
 **借用规则 (Borrowing Rules)**:
 
-- **定义**: Rust 的所有权系统中的规则，控制值的借用
+- **定义**: Rust 的所有权（Ownership）系统中的规则，控制值的借用
 - **规则**:
-  - 同一时间只能有一个可变借用或多个不可变借用
-  - 借用不能超过值的生命周期
+  - 同一时间只能有一个可变借用（Mutable Borrow）或多个不可变借用（Immutable Borrow）
+  - 借用不能超过值的生命周期（Lifetimes）
 - **相关**: [所有权模型形式化](formal_methods/10_ownership_model.md)
 
 ### L {#l}
@@ -149,13 +149,13 @@
 
 **生命周期 (Lifetime)**:
 
-- **定义**: Rust 中引用有效的时间范围
+- **定义**: Rust 中引用（Reference）有效的时间范围
 - **表示**: 使用 `'a` 等生命周期参数
 - **相关**: 生命周期形式化
 
 **线性类型 (Linear Type)**:
 
-- **定义**: 一种类型系统，要求每个值恰好使用一次
+- **定义**: 一种类型系统（Type System），要求每个值恰好使用一次
 - **应用**: 用于建模 Rust 的所有权转移
 - **相关**: [所有权模型形式化](formal_methods/10_ownership_model.md)
 
@@ -205,7 +205,7 @@
 
 **过程宏 (Procedural Macro)**:
 
-- **定义**: 在编译时执行的宏，可以生成代码
+- **定义**: 在编译时执行的宏（Macro），可以生成代码
 - **类型**: 函数式宏、派生宏、属性宏
 - **相关**: [宏展开性能](experiments/10_macro_expansion_performance.md)
 
@@ -299,7 +299,7 @@
 
 **常量泛型 (Const Generics)**:
 
-- **定义**: 使用常量值作为泛型参数
+- **定义**: 使用常量值作为泛型（Generics）参数
 - **示例**: `[T; N]` 中的 `N` 是常量泛型参数
 - **相关**: [高级类型特性](type_theory/10_advanced_types.md)
 

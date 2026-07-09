@@ -42,7 +42,7 @@
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** ✅
 
-**libp2p** 是 Protocol Labs 开发的模块化 P2P（点对点）网络框架，为 IPFS、Filecoin、Polkadot 等去中心化系统提供网络基础设施。
+**libp2p** 是 Protocol Labs 开发的模块（Module）化 P2P（点对点）网络框架，为 IPFS、Filecoin、Polkadot 等去中心化系统提供网络基础设施。
 
 **核心设计哲学**: 传输无关、协议模块化、安全默认。
 

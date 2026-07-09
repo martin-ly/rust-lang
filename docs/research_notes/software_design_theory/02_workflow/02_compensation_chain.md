@@ -27,7 +27,7 @@
     - [Def CC1: 补偿链 {#def-cc1-补偿链}](#def-cc1-补偿链-def-cc1-补偿链)
     - [Axiom CC1: 补偿可逆性 {#axiom-cc1-补偿可逆性}](#axiom-cc1-补偿可逆性-axiom-cc1-补偿可逆性)
     - [Axiom CC2: 补偿幂等性 {#axiom-cc2-补偿幂等性}](#axiom-cc2-补偿幂等性-axiom-cc2-补偿幂等性)
-    - [Theorem CC1: 最终一致性 {#theorem-cc1-最终一致性}](#theorem-cc1-最终一致性-theorem-cc1-最终一致性)
+    - [Theorem CC1: 最终一致性（Coherence） {#theorem-cc1-最终一致性}](#theorem-cc1-最终一致性-theorem-cc1-最终一致性)
     - [Theorem CC2: 补偿终止性 {#theorem-cc2-补偿终止性}](#theorem-cc2-补偿终止性-theorem-cc2-补偿终止性)
   - [4. Rust 实现方案 {#4-rust-实现方案}](#4-rust-实现方案-4-rust-实现方案)
   - [5. 反例与边界 {#5-反例与边界}](#5-反例与边界-5-反例与边界)
@@ -131,7 +131,7 @@ C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
-以下实现使用泛型 `Compensable` trait 与 Rust 1.75+ 的 `impl Future` 返回类型，允许同步或异步步骤统一表达。
+以下实现使用泛型（Generics） `Compensable` trait 与 Rust 1.75+ 的 `impl Future` 返回类型，允许同步或异步（Async）步骤统一表达。
 
 ```rust
 use std::future::Future;

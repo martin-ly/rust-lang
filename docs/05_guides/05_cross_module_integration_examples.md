@@ -55,7 +55,7 @@
 
 本文档提供跨模块集成的实际示例，展示如何将不同的Rust模块组合使用，构建完整的应用程序。
 
-**形式化引用**：CE-T1、CE-T2、CE-T3（组合工程定理）、[04_compositional_engineering](../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md)。
+**形式化引用（Reference）**：CE-T1、CE-T2、CE-T3（组合工程定理）、[04_compositional_engineering](../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md)。
 
 ---
 
@@ -356,7 +356,7 @@ fn test_wasm_integration() {
 > **来源: [ACM](https://dl.acm.org/)**
 
 - 每个模块应该有明确的职责
-- 使用trait定义模块接口
+- 使用trait（Trait）定义模块接口
 - 避免循环依赖
 
 ### 2. 错误处理统一 {#2-错误处理统一}
@@ -371,7 +371,7 @@ fn test_wasm_integration() {
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-- 使用零成本抽象
+- 使用零成本抽象（Zero-Cost Abstraction）
 - 避免不必要的克隆
 - 利用编译期优化
 

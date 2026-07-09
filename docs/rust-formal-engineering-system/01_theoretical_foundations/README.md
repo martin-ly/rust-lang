@@ -13,10 +13,10 @@
 | 主题 | 链接 |
 | :--- | :--- |
 | 类型系统（Type System） | [type_theory/](../../research_notes/type_theory/README.md) |
-| 所有权与借用 | [formal_methods/](../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
+| 所有权（Ownership）与借用（Borrowing） | [formal_methods/](../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
 | 所有权模型 | [10_ownership_model.md](../../research_notes/formal_methods/10_ownership_model.md) |
 | 借用检查器 | [10_borrow_checker_proof.md](../../research_notes/formal_methods/10_borrow_checker_proof.md) |
-| 生命周期 | 10_lifetime_formalization.md |
+| 生命周期（Lifetimes） | 10_lifetime_formalization.md |
 | Trait 系统 | [10_trait_system_formalization.md](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) |
 | 型变理论 | [10_variance_theory.md](../../research_notes/type_theory/10_variance_theory.md) |
 
@@ -138,7 +138,7 @@ mindmap
 
 | 主题 | 文档路径 | 关键概念 |
 | :--- | :--- | :--- |
-| **类型系统基础** | [../../research_notes/type_theory/10_type_system_foundations.md](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | Curry-Howard 对应、类型推导 |
+| **类型系统（Type System）基础** | [../../research_notes/type_theory/10_type_system_foundations.md](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | Curry-Howard 对应、类型推导 |
 | **所有权模型** | [../../research_notes/formal_methods/10_ownership_model.md](../../research_notes/formal_methods/10_ownership_model.md) | 线性类型、资源管理代数 |
 | **借用检查器** | [../../research_notes/formal_methods/10_borrow_checker_proof.md](../../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用规则、不变式证明 |
 | **生命周期形式化** | ../../research_notes/formal_methods/10_lifetime_formalization.md | 区域理论、生命周期约束 |

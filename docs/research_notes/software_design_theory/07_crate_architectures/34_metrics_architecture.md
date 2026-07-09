@@ -37,7 +37,7 @@
 
 > **[来源: [metrics crates.io](https://crates.io/crates/metrics)]**
 
-`metrics` crate 是 Rust 生态中最流行的**指标门面库**，提供一套统一的宏 API（`counter!`、`gauge!`、`histogram!` 与 `describe_*!`），将指标的记录逻辑与后端导出实现解耦。应用或库只需调用 `metrics` 的宏，实际的存储、聚合与导出由用户选择的 `Recorder` 实现（如 `metrics-exporter-prometheus`）完成。
+`metrics` crate 是 Rust 生态中最流行的**指标门面库**，提供一套统一的宏（Macro） API（`counter!`、`gauge!`、`histogram!` 与 `describe_*!`），将指标的记录逻辑与后端导出实现解耦。应用或库只需调用 `metrics` 的宏，实际的存储、聚合与导出由用户选择的 `Recorder` 实现（如 `metrics-exporter-prometheus`）完成。
 
 > [来源: [metrics docs.rs](https://docs.rs/metrics/latest/metrics/)]
 
@@ -47,7 +47,7 @@
 |:--|:--|:--|
 | **API 形态** | 过程宏（Procedural Macro） + 句柄类型（`Counter`/`Gauge`/`Histogram`） | 代码侵入性低，无需全局可变状态 |
 | **后端解耦** | `Recorder` trait | 同一业务代码可在测试、本地 Prometheus、云监控之间切换 |
-| **零成本默认** | 未安装 Recorder 时使用 noop recorder | 库可无负担埋点，不引入运行时开销 |
+| **零成本默认** | 未安装 Recorder 时使用 noop recorder | 库可无负担埋点，不引入运行时（Runtime）开销 |
 | **Key / Labels** | `Key` 组合名称与标签，`Label` 为字符串键值 | 支持高基数标签，但建议由 Recorder 过滤 |
 | **导出生态** | Prometheus、TCP、OpenTelemetry 等 | 覆盖主流指标消费端 |
 
@@ -136,7 +136,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-| 维度 | API | 类型系统价值 |
+| 维度 | API | 类型系统（Type System）价值 |
 |:--|:--|:--|
 | 指标类型分离 | `Counter` / `Gauge` / `Histogram` 句柄 | 编译期防止对 histogram 调用 `increment` 等非法操作 |
 | 键名静态化 | 宏接受 `&'static str` 名称 | 鼓励使用常量/静态键名，避免运行时构造 |
@@ -185,7 +185,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 - [Tracing 可观测性架构](18_tracing_architecture.md) — 日志/追踪与指标互补
 - [Sentry 错误追踪架构](33_sentry_architecture.md) — 错误事件与指标组合
 - [日志与可观测性](../../../../concept/06_ecosystem/00_toolchain/13_logging_observability.md)
-- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
+- [异步（Async）编程模型](../../../../concept/03_advanced/01_async/02_async.md)
 
 ---
 

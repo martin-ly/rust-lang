@@ -67,7 +67,7 @@
 
 本文档深入探讨Rust的高级主题，帮助开发者掌握更深层次的技术和最佳实践。
 
-**形式化引用**：T-OW2/T-OW3 (所有权（Ownership）)、
+**形式化引用（Reference）**：T-OW2/T-OW3 (所有权（Ownership）)、
 [advanced_types](../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md) (GAT)、
 [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)、
 SEND-T1/SYNC-T1 (并发)。
@@ -723,7 +723,7 @@ pub fn log_complexity_analysis(n: usize, base: f64) -> Complexity {
 }
 ```
 
-**性能提示**: 在高级应用中，结合 `array_windows` 的编译期优化和 `LazyLock` 的运行时优化，可实现极致性能。
+**性能提示**: 在高级应用中，结合 `array_windows` 的编译期优化和 `LazyLock` 的运行时（Runtime）优化，可实现极致性能。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
 

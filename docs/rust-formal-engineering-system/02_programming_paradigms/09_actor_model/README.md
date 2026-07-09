@@ -21,7 +21,7 @@
 Actor 模型是一种并发计算模型，其中：
 
 - 每个 Actor 是一个独立的计算实体
-- Actor 之间通过异步消息传递通信
+- Actor 之间通过异步（Async）消息传递通信
 - 每个 Actor 有自己的状态，不共享内存
 
 ### 基本 Actor 实现 {#基本-actor-实现}
@@ -452,7 +452,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | Send/Sync 形式化 | 消息传递安全 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
-| 所有权模型 | 状态隔离形式化 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
+| 所有权（Ownership）模型 | 状态隔离形式化 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 
 ---
 

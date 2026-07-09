@@ -278,7 +278,7 @@ unsafe fn very_dangerous() {
 
 | 场景 | 编译器特性 | 应用 |
 | :--- | :--- | :--- |
-| 嵌入式开发 | `#[no_std]`, 代码大小优化 | 无运行时依赖 |
+| 嵌入式开发 | `#[no_std]`, 代码大小优化 | 无运行时（Runtime）依赖 |
 | 高性能计算 | SIMD, 循环展开, 向量化 | 数值计算加速 |
 | WebAssembly | `--target wasm32-unknown-unknown` | 浏览器内运行 |
 | 内核开发 | `#[no_std]`, 自定义 alloc | 操作系统内核 |
@@ -303,15 +303,15 @@ unsafe fn very_dangerous() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 借用检查证明 | 借用检查器形式化 | 10_borrow_checker_proof.md (研究笔记) |
-| 所有权模型 | 所有权系统形式化 | 10_ownership_model.md (研究笔记) |
-| 生命周期形式化 | 生命周期系统理论 | 10_lifetime_formalization.md (研究笔记) |
+| 借用（Borrowing）检查证明 | 借用检查器形式化 | 10_borrow_checker_proof.md (研究笔记) |
+| 所有权（Ownership）模型 | 所有权系统形式化 | 10_ownership_model.md (研究笔记) |
+| 生命周期（Lifetimes）形式化 | 生命周期系统理论 | 10_lifetime_formalization.md (研究笔记) |
 
 ### 类型理论 {#类型理论}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 类型系统基础 | 类型系统理论 | 10_type_system_foundations.md (研究笔记) |
+| 类型系统（Type System）基础 | 类型系统理论 | 10_type_system_foundations.md (研究笔记) |
 | 高级类型 | 高级类型特性 | 10_advanced_types.md (研究笔记) |
 | 变型理论 | 类型变型 | 10_variance_theory.md (研究笔记) |
 
@@ -328,7 +328,7 @@ unsafe fn very_dangerous() {
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
 | c11_advanced | 高级特性实现 | crates/c11_advanced/ (crate) |
-| c12_macros | 宏系统实现 | crates/c12_macros/ (crate) |
+| c12_macros | 宏（Macro）系统实现 | crates/c12_macros/ (crate) |
 
 ---
 

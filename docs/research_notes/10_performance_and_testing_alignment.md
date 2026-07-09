@@ -26,7 +26,7 @@
     - [2.5 Clippy {#25-clippy}](#25-clippy-25-clippy)
   - [三、P2 社区/行业权威来源 {#三p2-社区行业权威来源}](#三p2-社区行业权威来源-三p2-社区行业权威来源)
     - [3.1 基准测试与 Profiling {#31-基准测试与-profiling}](#31-基准测试与-profiling-31-基准测试与-profiling)
-    - [3.2 运行时诊断与可视化 {#32-运行时诊断与可视化}](#32-运行时诊断与可视化-32-运行时诊断与可视化)
+    - [3.2 运行时（Runtime）诊断与可视化 {#32-运行时诊断与可视化}](#32-运行时诊断与可视化-32-运行时诊断与可视化)
     - [3.3 动态分析与 Sanitizer {#33-动态分析与-sanitizer}](#33-动态分析与-sanitizer-33-动态分析与-sanitizer)
   - [四、测试策略矩阵 {#四测试策略矩阵}](#四测试策略矩阵-四测试策略矩阵)
     - [4.1 单元测试 / 集成测试 / doctests {#41-单元测试-集成测试-doctests}](#41-单元测试--集成测试--doctests-41-单元测试-集成测试-doctests)
@@ -81,7 +81,7 @@
 
 | Miri 主题 | 项目文档 | 状态 | 备注 |
 |-----------|----------|------|------|
-| [Undefined Behavior detection](https://github.com/rust-lang/miri) | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) | ✅ | 栈借用、数据竞争检测 |
+| [Undefined Behavior detection](https://github.com/rust-lang/miri) | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) | ✅ | 栈借用（Borrowing）、数据竞争检测 |
 | [Concurrency with Miri](https://github.com/rust-lang/miri#miri-) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) | ✅ | 异步（Async）/并发 UB 检测 |
 | [Foreign Function Interface](https://github.com/rust-lang/miri#miri-) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) | 🔄 | FFI 行为检测 |
 
@@ -111,7 +111,7 @@
 
 | 工具/来源 | 类型 | 项目文档 | 状态 | 备注 |
 |-----------|------|----------|------|------|
-| [tokio/console](https://github.com/tokio-rs/console) | 异步运行时诊断 | [crates/c06_async/README.md](../../crates/c06_async/README.md) | ✅ | task、resource、runtime 可视化 |
+| [tokio/console](https://github.com/tokio-rs/console) | 异步（Async）运行时诊断 | [crates/c06_async/README.md](../../crates/c06_async/README.md) | ✅ | task、resource、runtime 可视化 |
 | [tokio-metrics](https://github.com/tokio-rs/tokio-metrics) | 异步指标采集 | [crates/c06_async/README.md](../../crates/c06_async/README.md) | ✅ | runtime/task 指标 |
 | [tracing](https://github.com/tokio-rs/tracing) + [opentelemetry](https://github.com/open-telemetry/opentelemetry-rust) | 分布式追踪 | [crates/c06_async/README.md](../../crates/c06_async/README.md) | ✅ | async 链路追踪 |
 
@@ -132,7 +132,7 @@
 
 | 策略 | 权威来源 | 项目文档 | 状态 | 备注 |
 |------|----------|----------|------|------|
-| 单元测试 | [Cargo Book – Tests](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | 模块内 `#[cfg(test)]` |
+| 单元测试 | [Cargo Book – Tests](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | 模块（Module）内 `#[cfg(test)]` |
 | 集成测试 | [Cargo Book – Integration Tests](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#integration-tests) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | `tests/` 目录 |
 | Doctests | [rustdoc – Documentation tests](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html) | [docs/06_toolchain/03_rustdoc_advanced.md](../06_toolchain/03_rustdoc_advanced.md) | ✅ | 文档示例即测试 |
 | 测试覆盖率 | [tarpaulin](https://github.com/xd009642/tarpaulin) / [cargo-llvm-cov](https://github.com/taiki-e/cargo-llvm-cov) | [10_tools_guide.md](10_tools_guide.md) | ✅ | CI 覆盖率报告 |

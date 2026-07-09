@@ -9,7 +9,7 @@
 > **前置依赖**: [concept L2 泛型（Generics）](../../concept/02_intermediate/01_generics/02_generics.md) · [docs 核心概念](../01_core/README.md)
 > **后置延伸**: [docs 并行前端](06_parallel_frontend.md) · [concept L7 语言演进](../../concept/07_future/04_research_and_experimental/03_evolution.md)
 > **跨层映射**: L6→L7 工具驱动映射 | 编译器→语言
-> **定理链编号**: T-030 单态化正确性 → 优化保持性
+> **定理链编号**: T-030 单态化（Monomorphization）正确性 → 优化保持性
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.1+ (Edition 2024)
@@ -73,7 +73,7 @@
     - [常见问题 {#常见问题}](#常见问题-常见问题)
   - [15. 编译器特性的形式化分析 {#15-编译器特性的形式化分析}](#15-编译器特性的形式化分析-15-编译器特性的形式化分析)
     - [15.1 编译过程的形式化模型 {#151-编译过程的形式化模型}](#151-编译过程的形式化模型-151-编译过程的形式化模型)
-    - [15.2 借用检查的形式化 {#152-借用检查的形式化}](#152-借用检查的形式化-152-借用检查的形式化)
+    - [15.2 借用（Borrowing）检查的形式化 {#152-借用检查的形式化}](#152-借用检查的形式化-152-借用检查的形式化)
     - [15.3 优化级别的形式化语义 {#153-优化级别的形式化语义}](#153-优化级别的形式化语义-153-优化级别的形式化语义)
     - [15.4 LTO 的形式化分析 {#154-lto-的形式化分析}](#154-lto-的形式化分析-154-lto-的形式化分析)
     - [15.5 PGO 的形式化模型 {#155-pgo-的形式化模型}](#155-pgo-的形式化模型-155-pgo-的形式化模型)
@@ -768,9 +768,9 @@ tokio = { version = "1.0", features = ["full"] }
 **最佳实践**:
 
 1. **减小 crate 大小**: 将大 crate 拆分为多个小 crate
-2. **避免大型泛型**: 泛型会增加编译时间
+2. **避免大型泛型（Generics）**: 泛型会增加编译时间
 3. **使用动态分发**: 在适当场景使用 `dyn Trait`
-4. **减少宏使用**: 宏展开增加编译时间
+4. **减少宏（Macro）使用**: 宏展开增加编译时间
 
 **示例**:
 
@@ -798,7 +798,7 @@ pub mod everything_in_one_file; // 10000+ lines
 
 **性能影响**:
 
-- 过程宏在编译时运行，会增加编译时间
+- 过程宏（Procedural Macro）在编译时运行，会增加编译时间
 - 建议仅在必要时使用
 
 **优化建议**:
@@ -830,7 +830,7 @@ cargo clippy --all-targets --all-features
 cargo fmt --all
 ```
 
-**Miri** (内存安全检查):
+**Miri** (内存安全（Memory Safety）检查):
 
 ```bash
 cargo +nightly miri test
@@ -1219,10 +1219,10 @@ fn pgo_workflow() {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [所有权模型形式化](../research_notes/formal_methods/10_ownership_model.md)
+- [所有权（Ownership）模型形式化](../research_notes/formal_methods/10_ownership_model.md)
 - [借用检查器证明](../research_notes/formal_methods/10_borrow_checker_proof.md)
-- [类型系统基础](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
-- 生命周期形式化
+- [类型系统（Type System）基础](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
+- 生命周期（Lifetimes）形式化
 
 ### 📦 推荐工具 {#推荐工具}
 >

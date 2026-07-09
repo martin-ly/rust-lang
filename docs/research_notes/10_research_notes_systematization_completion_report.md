@@ -34,7 +34,7 @@
 将 `docs/research_notes/` 的 258 个 Markdown 文件按 **六层两网一库** 框架进行系统化、层次化梳理：
 
 - **六层**: L0 权威来源 → L1 元概念 → L2 核心概念族 → L3 具体概念 → L4 实现机制 → L5 代码实践 → L6 反例边界 → L7 版本演进
-- **两网**: 概念关系网络 + 文档引用网络
+- **两网**: 概念关系网络 + 文档引用（Reference）网络
 - **一库**: 反例与边界库
 
 ---
@@ -55,11 +55,11 @@
 
 | 文件 | 层级 | 说明 |
 |------|------|------|
-| [formal_modules/60_module_counterexamples.md](formal_modules/60_module_counterexamples.md) | L6 | 模块系统反例边界 |
+| [formal_modules/60_module_counterexamples.md](formal_modules/60_module_counterexamples.md) | L6 | 模块（Module）系统反例边界 |
 | [formal_modules/70_module_patterns_and_refactoring.md](formal_modules/70_module_patterns_and_refactoring.md) | L5 | 模块系统代码实践模式 |
-| [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) | L6 | 所有权与借用反例边界 |
-| [type_theory/60_type_system_counterexamples.md](type_theory/60_type_system_counterexamples.md) | L6 | 类型系统反例边界 |
-| [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) | L6 | 并发与异步反例边界 |
+| [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) | L6 | 所有权（Ownership）与借用（Borrowing）反例边界 |
+| [type_theory/60_type_system_counterexamples.md](type_theory/60_type_system_counterexamples.md) | L6 | 类型系统（Type System）反例边界 |
+| [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) | L6 | 并发与异步（Async）反例边界 |
 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) | L6 | unsafe 与 FFI 反例边界 |
 | [software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) | L6 | 设计模式反例边界 |
 | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) | L6 | Crate 架构反例边界 |
@@ -111,7 +111,7 @@
 | 主-topic | L3 概念 | L4 机制 | L5 实践 | L6 反例 | L7 版本 |
 |----------|---------|---------|---------|---------|---------|
 | 所有权（Ownership）/借用（Borrowing） | ✅ | ✅ | ✅ | ✅ | — |
-| 类型系统（Type System）/生命周期 | ✅ | ✅ | ✅ | ✅ | — |
+| 类型系统（Type System）/生命周期（Lifetimes） | ✅ | ✅ | ✅ | ✅ | — |
 | 并发/异步（Async） | ✅ | ✅ | ✅ | ✅ | — |
 | 安全/unsafe | ✅ | ✅ | ✅ | ✅ | — |
 | 模块系统 | ✅ | ✅ | ✅ | ✅ | — |
@@ -143,7 +143,7 @@
 - 全部 258 个文件具备统一层级/概念族元信息。
 - 8 大主-topic 与版本演进均建立 L3-L6/L7 贯通链路。
 - 反例与边界库覆盖全部核心概念族。
-- 内部链接一致性、权威来源、Rust 版本元数据全部通过自动化检查。
+- 内部链接一致性（Coherence）、权威来源、Rust 版本元数据全部通过自动化检查。
 
 > **整体完成度**: ✅ **100% 骨架与核心内容覆盖完成**。
 

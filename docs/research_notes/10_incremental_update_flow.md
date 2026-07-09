@@ -327,9 +327,9 @@ fn api_stabilization_example() {
 
 | 类别 | 文档 | 链接 |
 | :--- | :--- | :--- |
-| 形式化方法 | 所有权模型 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) |
-| 形式化方法 | 借用检查器 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) |
-| 类型理论 | 类型系统基础 | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) |
+| 形式化方法 | 所有权（Ownership）模型 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) |
+| 形式化方法 | 借用（Borrowing）检查器 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) |
+| 类型理论 | 类型系统（Type System）基础 | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) |
 | 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) |
 
 ---

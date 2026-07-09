@@ -41,10 +41,10 @@
 | 概念 | 权威来源 | 行号锚点链接 | 对应项目文档 |
 |------|----------|--------------|--------------|
 | 所有权（Ownership） | TRPL ch04-01 | [`src/ch04-01-what-is-ownership.md#L1`](https://github.com/rust-lang/book/blob/main/src/ch04-01-what-is-ownership.md#L1) | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) |
-| 所有权规则 / 变量作用域示例 | TRPL ch04-01 Listing 4-1 | [`src/ch04-01-what-is-ownership.md#L108`](https://github.com/rust-lang/book/blob/main/src/ch04-01-what-is-ownership.md#L108) | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) |
-| 泛型函数与类型参数 | TRPL ch10-01 Listing 10-4 | [`src/ch10-01-syntax.md#L21`](https://github.com/rust-lang/book/blob/main/src/ch10-01-syntax.md#L21) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) |
+| 所有权（Ownership）规则 / 变量作用域示例 | TRPL ch04-01 Listing 4-1 | [`src/ch04-01-what-is-ownership.md#L108`](https://github.com/rust-lang/book/blob/main/src/ch04-01-what-is-ownership.md#L108) | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) |
+| 泛型（Generics）函数与类型参数 | TRPL ch10-01 Listing 10-4 | [`src/ch10-01-syntax.md#L21`](https://github.com/rust-lang/book/blob/main/src/ch10-01-syntax.md#L21) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) |
 | Trait 定义与共享行为 | TRPL ch10-02 Listing 10-12 | [`src/ch10-02-traits.md#L37`](https://github.com/rust-lang/book/blob/main/src/ch10-02-traits.md#L37) | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) |
-| 生命周期标注与约束 | TRPL ch10-03 Listing 10-18 | [`src/ch10-03-lifetime-syntax.md#L94`](https://github.com/rust-lang/book/blob/main/src/ch10-03-lifetime-syntax.md#L94) | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) |
+| 生命周期（Lifetimes）标注与约束 | TRPL ch10-03 Listing 10-18 | [`src/ch10-03-lifetime-syntax.md#L94`](https://github.com/rust-lang/book/blob/main/src/ch10-03-lifetime-syntax.md#L94) | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) |
 | `Box<T>` 与堆分配 | TRPL ch15-01 Listing 15-1 | [`src/ch15-01-box.md#L43`](https://github.com/rust-lang/book/blob/main/src/ch15-01-box.md#L43) | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) |
 | 线程创建 `thread::spawn` | TRPL ch16-01 Listing 16-1 | [`src/ch16-01-threads.md#L45`](https://github.com/rust-lang/book/blob/main/src/ch16-01-threads.md#L45) | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) |
 
@@ -55,7 +55,7 @@
 | 概念 | 权威来源 | 行号锚点链接 | 对应项目文档 |
 |------|----------|--------------|--------------|
 | 内存分配与生命周期（所有权语义基础） | Rust Reference | [`src/memory-allocation-and-lifetime.md#L2`](https://github.com/rust-lang/reference/blob/master/src/memory-allocation-and-lifetime.md#L2) | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) |
-| 借用检查与生命周期 | Rust Reference – Memory Model | [`src/memory-model.md#L2`](https://github.com/rust-lang/reference/blob/master/src/memory-model.md#L2) | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) |
+| 借用（Borrowing）检查与生命周期 | Rust Reference – Memory Model | [`src/memory-model.md#L2`](https://github.com/rust-lang/reference/blob/master/src/memory-model.md#L2) | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) |
 | Unsafe 操作清单 | Rust Reference – Unsafety | [`src/unsafety.md#L2`](https://github.com/rust-lang/reference/blob/master/src/unsafety.md#L2) | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) |
 | Unsafe 操作列表项 | Rust Reference – Unsafety | [`src/unsafety.md#L7`](https://github.com/rust-lang/reference/blob/master/src/unsafety.md#L7) | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) |
 

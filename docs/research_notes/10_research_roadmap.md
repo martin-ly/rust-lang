@@ -79,7 +79,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**目标**: 建立 Rust 类型系统和内存安全的理论基础
+**目标**: 建立 Rust 类型系统和内存安全（Memory Safety）的理论基础
 
 ### 1.1 类型系统基础 {#11-类型系统基础}
 
@@ -176,7 +176,7 @@
 
 - [x] [异步状态机形式化](formal_methods/10_async_state_machine.md) ✅ 100%
   - Future/Poll 状态机
-  - 并发安全证明
+  - 并发安全（Concurrency Safety）证明
   - async/await 语义
 
 **预期成果**: 异步系统的形式化模型
@@ -188,7 +188,7 @@
 - x] [生命周期形式化 ✅ 100%
   - 生命周期语义
   - 生命周期推断算法
-  - 引用有效性证明
+  - 引用（Reference）有效性证明
 
 **预期成果**: 生命周期系统的形式化定义
 
@@ -306,7 +306,7 @@
 
 - [x] [高级类型特性](type_theory/10_advanced_types.md) ✅ 100%
   - GATs 深入分析
-  - const 泛型影响
+  - const 泛型（Generics）影响
   - 依赖类型关系
 - [x] [Pin 和自引用类型](formal_methods/10_pin_self_referential.md) ✅ 100%
   - Pin 类型形式化

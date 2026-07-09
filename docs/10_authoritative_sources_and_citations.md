@@ -1,10 +1,10 @@
 # 权威来源与引用 {#权威来源与引用}
 
 > **EN**: Authoritative Sources And Citations
-> **Summary**: 权威来源与引用 Authoritative Sources And Citations.
+> **Summary**: 权威来源与引用（Reference） Authoritative Sources And Citations.
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
-> **文档目的**: 汇总项目中引用的所有权威来源，确保内容的准确性和可追溯性
+> **文档目的**: 汇总项目中引用的所有权（Ownership）威来源，确保内容的准确性和可追溯性
 > **更新日期**: 2026-05-12
 > **当前目标版本**: Rust 1.96.1+ (Edition 2024)
 > **维护者**: Rust学习项目团队
@@ -177,7 +177,7 @@ fn has_abba(s: &str) -> bool {
 
 | 特性 | Stacked Borrows | Tree Borrows |
 |------|-----------------|--------------|
-| 模型 | 栈式借用追踪 | 树形借用追踪 |
+| 模型 | 栈式借用（Borrowing）追踪 | 树形借用追踪 |
 | 灵活性 | 较严格 | 更灵活，允许更多合法模式 |
 | 指针算术 | 限制较多 | 更友好的支持 |
 | Miri默认 | 曾是默认 | **现为默认** |

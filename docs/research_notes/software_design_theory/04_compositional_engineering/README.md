@@ -49,7 +49,7 @@
   - [表达力×组合联合判定树（支柱 2+3） {#表达力组合联合判定树支柱-23}](#表达力组合联合判定树支柱-23-表达力组合联合判定树支柱-23)
   - [组件构建能力形式化树图（与 43 模式联合） {#组件构建能力形式化树图与-43-模式联合}](#组件构建能力形式化树图与-43-模式联合-组件构建能力形式化树图与-43-模式联合)
     - [Mermaid 形式化树图 {#mermaid-形式化树图}](#mermaid-形式化树图-mermaid-形式化树图)
-    - [ASCII 形式化树图（模块→crate→进程→网络） {#ascii-形式化树图模块crate进程网络}](#ascii-形式化树图模块crate进程网络-ascii-形式化树图模块crate进程网络)
+    - [ASCII 形式化树图（模块（Module）→crate→进程→网络） {#ascii-形式化树图模块crate进程网络}](#ascii-形式化树图模块crate进程网络-ascii-形式化树图模块crate进程网络)
   - [定理速查 {#定理速查}](#定理速查-定理速查)
   - [实践要点 {#实践要点}](#实践要点-实践要点)
   - [组合选型决策树（层次推进） {#组合选型决策树层次推进}](#组合选型决策树层次推进-组合选型决策树层次推进)
@@ -210,7 +210,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 1. **CE-T1（内存安全（Memory Safety））**：`Decorator` 持 `Box<dyn Strategy>`，所有权唯一；`execute()` 消费 `&self`，无双重释放。由 ownership T2、T3 传递。
 2. **CE-T2（数据竞争自由）**：`Strategy` 为 `dyn Trait`，无共享可变；装饰器内部 `RefCell` 若存在，限于单线程或 `Mutex` 封装。由 borrow T1、Send/Sync 约束。
-3. **CE-T3（类型安全）**：`impl Strategy for X` 满足 trait 约束；`Decorator<X>` 泛型良型。由 type T1–T3 传递。
+3. **CE-T3（类型安全）**：`impl Strategy for X` 满足 trait 约束；`Decorator<X>` 泛型（Generics）良型。由 type T1–T3 传递。
 
 **结论**：Decorator∘Strategy 满足 CE-T1、CE-T2、CE-T3，组合有效。*证明*：各子模式 Safe 且良型；组合接口无泄漏；由 CE-C1。∎
 
@@ -236,8 +236,8 @@ impl<R: OrderRepository> OrderService<R> {
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **组合的形式化**：模块（Module）、crate、trait、泛型如何组合？组合满足何种性质？
-2. **有效性**：组合后的系统保持内存安全、类型安全、无数据竞争？
-3. **与已有证明衔接**：如何引用 ownership、borrow、trait 的定理？
+2. **有效性**：组合后的系统保持内存安全（Memory Safety）、类型安全、无数据竞争？
+3. **与已有证明衔接**：如何引用（Reference） ownership、borrow、trait 的定理？
 
 ---
 
@@ -248,7 +248,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 **Def CE1（组合有效性）**：设 $C = M_1 \oplus \cdots \oplus M_n$ 为模块组合。若 $C$ 满足 CE-T1、CE-T2、CE-T3，则称 $C$ **有效**。
 
-**Axiom CE1**：组合无循环依赖；`pub` 边界为模块间唯一接口；跨模块调用保持类型与所有权 semantics。
+**Axiom CE1**：组合无循环依赖；`pub` 边界为模块间唯一接口；跨模块调用保持类型与所有权（Ownership） semantics。
 
 **定理 CE-T1–T3**：见 [01_formal_composition](01_formal_composition.md)、[02_effectiveness_proofs](02_effectiveness_proofs.md)；组合保持内存安全、数据竞争自由、类型安全。
 
@@ -303,7 +303,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 - **L1 单模块**：单一 `mod`；无跨模块依赖；构造路径唯一
 - **L2 多模块**：多 `mod` 组合；依赖图为 DAG；CE-T1–T3 可静态判定
 - **L3 crate 生态**：多 crate 组合；`Cargo.toml` 依赖；需语义版本与兼容性
-- **L4 架构模式**：跨 crate、跨进程或跨网络；Repository、Service Layer、分布式模式；部分需运行时验证
+- **L4 架构模式**：跨 crate、跨进程或跨网络；Repository、Service Layer、分布式模式；部分需运行时（Runtime）验证
 
 **Axiom CE-MAT1**：$\mathit{Level}(C) \geq \mathit{Level}(C')$ 当且仅当 $C$ 的依赖粒度不细于 $C'$；L1 ⊆ L2 ⊆ L3 ⊆ L4。
 
@@ -590,7 +590,7 @@ L4 跨进程/跨网络（分布式、微服务）
 | CE-T2 | 组合保持数据竞争自由 |
 | CE-T3 | 组合保持类型安全 |
 
-组合时所有权传递、借用规则、Send/Sync 在模块边界不变。
+组合时所有权传递、借用（Borrowing）规则、Send/Sync 在模块边界不变。
 详见 [02_effectiveness_proofs](02_effectiveness_proofs.md)。
 
 ---
@@ -639,7 +639,7 @@ L4 跨进程/跨网络（分布式、微服务）
 | :--- | :--- | :--- | :--- |
 | :--- | :--- | :--- | :--- |
 | :--- | :--- | :--- | :--- |
-| **CE-T2**（数据竞争自由） | E0499 | cannot borrow as mutable more than once | 避免并发可变借用；用 channel |
+| **CE-T2**（数据竞争自由） | E0499 | cannot borrow as mutable more than once | 避免并发可变借用（Mutable Borrow）；用 channel |
 | :--- | :--- | :--- | :--- |
 | :--- | :--- | :--- | :--- |
 | **CE-T3**（类型安全） | E0308 | mismatched types | 统一类型；检查 `From`/`Into` |
