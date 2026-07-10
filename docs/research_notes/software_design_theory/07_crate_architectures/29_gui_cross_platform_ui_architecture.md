@@ -30,7 +30,7 @@
 >
 > **知识领域**: 跨平台 GUI、Web 组件、桌面应用、响应式 UI、即时模式 GUI、Elm 架构
 >
-> **对应 Rust 版本**: 1.96.1+ (Tauri 2.11 / Dioxus 0.7 / Leptos 0.8 / egui 0.34 / iced 0.14)
+> **对应 Rust 版本**: 1.97.0+ (Tauri 2.11 / Dioxus 0.7 / Leptos 0.8 / egui 0.34 / iced 0.14)
 
 ---
 

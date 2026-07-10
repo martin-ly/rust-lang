@@ -29,7 +29,7 @@
 >
 > **知识领域**: 云厂商 SDK、AWS、异步（Async） HTTP 客户端、Smithy 代码生成、凭证链
 >
-> **对应 Rust 版本**: 1.96.1+ (aws-sdk-rust 1.x)
+> **对应 Rust 版本**: 1.97.0+ (aws-sdk-rust 1.x)
 
 ---
 

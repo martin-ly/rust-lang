@@ -29,7 +29,7 @@
 >
 > **知识领域**: 全文搜索、搜索引擎、异步（Async） IO、类型安全 REST 客户端
 >
-> **对应 Rust 版本**: 1.96.1+ (meilisearch-sdk 0.33+)
+> **对应 Rust 版本**: 1.97.0+ (meilisearch-sdk 0.33+)
 
 ---
 

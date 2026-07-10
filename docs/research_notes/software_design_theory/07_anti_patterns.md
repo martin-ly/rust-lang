@@ -10,7 +10,7 @@
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 > **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/` 迁回，正在按 [Rust Design Patterns – Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html)、[Rustonomicon](https://doc.rust-lang.org/nomicon/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) 等权威来源升级。
 >
 > **权威来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
@@ -54,7 +54,7 @@
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 
 ---
 
