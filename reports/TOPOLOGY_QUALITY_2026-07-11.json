@@ -1,0 +1,211 @@
+{
+  "summary": {
+    "date": "2026-07-11",
+    "files": 13,
+    "flagged": 6,
+    "T1_def_low_rate": 0.255,
+    "T1_def_low": [
+      100,
+      392
+    ],
+    "T2_top_rate": 0.992,
+    "T2_top_symbol": "⟹",
+    "T3_jump": [
+      31,
+      101
+    ],
+    "T3_jump_rate": 0.307,
+    "T3_dead_ends": 3,
+    "T4_quant_rate": 0.095,
+    "T5_leaks": 5,
+    "T6_placeholders": 6
+  },
+  "results": [
+    {
+      "rel": "concept/00_meta/knowledge_topology/01_concept_definition_atlas.md",
+      "lines": 474,
+      "T1": {
+        "total_rows": 392,
+        "low": 100,
+        "rate": 0.255,
+        "samples": [
+          [
+            "[Cross Reference Matrix](../04_navigatio",
+            "—"
+          ],
+          [
+            "[Concept Audit Guide](../03_audit/08_con",
+            "Concept Audit Guide. Core Rust concept."
+          ],
+          [
+            "[Rust 知识体系 A/S/P 三维认知标记规范](../03_audit/a",
+            "Asp Marking Guide. Core Rust concept."
+          ],
+          [
+            "[概念一致性检查清单](../03_audit/audit_checklist.",
+            "Audit Checklist. Core Rust concept."
+          ],
+          [
+            "[权威来源映射表](../02_sources/authority_source",
+            "Authority Source Map. Core Rust concept."
+          ],
+          [
+            "[Rust 职业市场全景：2026 年数据与分析](../04_navigati",
+            "Career Landscape. Core Rust concept."
+          ],
+          [
+            "[Rust 知识体系双维认知矩阵](../00_framework/cognit",
+            "Cognitive Dimension Matrix. Core Rust concept."
+          ],
+          [
+            "[Rust 知识体系能力图谱](../00_framework/competen",
+            "Competency Graph. Core Rust concept."
+          ],
+          [
+            "[Comprehensive Rust 课程映射](../00_framewor",
+            "Comprehensive Rust Mapping. Core Rust concept."
+          ],
+          [
+            "[概念一致性（Coherence）检查清单](../03_audit/conce",
+            "—"
+          ],
+          [
+            "[Rust 知识体系学习指南](../04_navigation/learnin",
+            "Learning Guide. Core Rust concept."
+          ],
+          [
+            "[MVP 学习路径：从零到多线程 CLI](../04_navigation/l",
+            "Learning Mvp Path. Core Rust concept."
+          ]
+        ]
+      },
+      "T6": 2,
+      "issues": {
+        "T1": "定义列套话率 25.5% (100/392)",
+        "T6": "占位字样 2 处"
+      }
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/02_attribute_relationship_atlas.md",
+      "lines": 451,
+      "T5": 5,
+      "T6": 3,
+      "issues": {
+        "T5": "单元格泄漏 5 处",
+        "T6": "占位字样 3 处"
+      }
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/03_scenario_decision_tree_atlas.md",
+      "lines": 143,
+      "T3T4": {
+        "blocks": 3,
+        "nodes": 35,
+        "jump_nodes": 11,
+        "jump_rate": 0.314,
+        "dead_ends": [],
+        "dead_end_count": 0,
+        "diamonds": 3,
+        "quant_diamonds": 0,
+        "quant_rate": 0.0
+      },
+      "issues": {
+        "T3": "跳出叶子率 31.4% (11/35)",
+        "T4": "判定定量占比 0.0% (0/3)"
+      }
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/04_example_counterexample_atlas.md",
+      "lines": 132,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/05_logical_reasoning_atlas.md",
+      "lines": 125,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/06_inter_layer_mapping_atlas.md",
+      "lines": 117,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/07_intra_layer_mapping_atlas.md",
+      "lines": 315,
+      "T2": {
+        "total": 246,
+        "counts": {
+          "→": 2,
+          "⟹": 244
+        },
+        "top_symbol": "⟹",
+        "top_rate": 0.992,
+        "collapsed": true
+      },
+      "issues": {
+        "T2": "关系塌缩: ⟹ 占 99.2% ({'→': 2, '⟹': 244})"
+      }
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/08_concept_source_alignment_atlas.md",
+      "lines": 146,
+      "T6": 1,
+      "issues": {
+        "T6": "占位字样 1 处"
+      }
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+      "lines": 155,
+      "T3T4": {
+        "blocks": 5,
+        "nodes": 66,
+        "jump_nodes": 20,
+        "jump_rate": 0.303,
+        "dead_ends": [
+          [
+            "R5",
+            "根因：生命周期省略规则不适用"
+          ],
+          [
+            "R5",
+            "根因：类型推断失败或自定义类型未实现 trait"
+          ],
+          [
+            "R5",
+            "根因：unsafe 导致 UB 或逻辑错误"
+          ]
+        ],
+        "dead_end_count": 3,
+        "diamonds": 18,
+        "quant_diamonds": 2,
+        "quant_rate": 0.111
+      },
+      "issues": {
+        "T3": "跳出叶子率 30.3% (20/66)",
+        "T3d": "死端 3: [('R5', '根因：生命周期省略规则不适用'), ('R5', '根因：类型推断失败或自定义类型未实现 trait'), ('R5', '根因：unsafe 导致 UB 或逻辑错误')]",
+        "T4": "判定定量占比 11.1% (2/18)"
+      }
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/10_gap_and_action_plan.md",
+      "lines": 125,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/README.md",
+      "lines": 68,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/kg_ontology_v2.md",
+      "lines": 320,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/kg_tlo_alignment.md",
+      "lines": 239,
+      "issues": {}
+    }
+  ]
+}
