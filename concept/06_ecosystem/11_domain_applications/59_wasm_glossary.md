@@ -57,7 +57,7 @@
     - [wasmtime](#wasmtime)
     - [wasmer](#wasmer)
   - [📚 相关资源](#-相关资源)
-  - **适用版本**: Rust 1.97.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+  - [**适用版本**: Rust 1.97.0+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1970--edition-2024-wasm-20--wasi-02)
   - [过渡段](#过渡段)
   - [定理链](#定理链)
 

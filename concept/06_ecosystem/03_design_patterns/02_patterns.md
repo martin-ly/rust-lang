@@ -1896,7 +1896,7 @@ Typestate 最适合：
   - [2. 结构型模式](#2-结构型模式)
     - [Adapter 模式](#adapter-模式)
     - [Decorator 模式](#decorator-模式)
-  - 3. 行为型模式
+  - 1. 行为型模式
     - [Strategy 模式](#43-strategy-模式)
     - [Visitor 模式](#42-visitor-模式)
     - [Iterator 模式](#decorator-模式)
@@ -1904,25 +1904,25 @@ Typestate 最适合：
     - RAII (Resource Acquisition Is Initialization)
     - [Typestate 模式](#测验-2typestate-模式应用层)
     - Extension Trait 模式
-  - 5. 并发模式
+  - 1. 并发模式
     - [Factory 模式](#factory-模式)
-  - 6. 最佳实践
+  - 1. 最佳实践
     - 组合优于继承
     - 使用 Trait 对象实现多态
-  - 6. 错误处理（Error Handling）模式
+  - 1. 错误处理（Error Handling）模式
     - Result（Result）组合模式
     - 自定义错误类型
     - Try trait（Trait）模式
-  - 7. 内存管理模式
+  - 1. 内存管理模式
     - Arena分配模式
     - 对象池模式
-  - 8. Trait对象模式
+  - 1. Trait对象模式
     - 动态分发
     - 枚举（Enum）分发（更高效）
-  - 9. 类型安全API设计
+  - 1. 类型安全API设计
     - 幻影类型参数
     - Session Types
-  - 10. 函数式模式
+  - 1. 函数式模式
     - Monad-like模式
     - Lens模式（聚焦数据）
     - 10.1 高级函数式模式：Applicative与Monad深化
@@ -1934,8 +1934,8 @@ Typestate 最适合：
     - 10.7 State Monad模式（状态转换）
     - 10.8 并发模式深化
     - 10.9 性能优化模式集
-  - 11. 总结
-  - 8. 参考资源
+  - 1. 总结
+  - 1. 参考资源
   - **🎉 完成设计模式集学习！** 🦀
 
 ---

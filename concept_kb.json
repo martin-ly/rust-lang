@@ -42530,7 +42530,7 @@
           "type": "table_row"
         },
         {
-          "text": "| sparse registry URL 被不规范归一化 ⟹ CVE-2026-5222 风险 | `.git` 后缀被错误剥离 | 升级到 1.96.1+，并隔离不同 registry 凭证 | 高 |",
+          "text": "| sparse registry URL 被不规范归一化 ⟹ CVE-2026-5222 风险 | `.git` 后缀被错误剥离 | 升级到 1.97.0+，并隔离不同 registry 凭证 | 高 |",
           "type": "table_row"
         },
         {
