@@ -528,6 +528,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.azure_core]]
+version = "1.1.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免：可选依赖 azure-sdk feature 用，尚未正式代码审计。"
+
 [[exemptions.backtrace]]
 version = "0.3.76"
 criteria = "safe-to-run"
@@ -648,11 +654,23 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.bytemuck]]
+version = "1.25.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免更新：延续 1.25.0 豁免策略，尚未正式代码审计。"
+
 [[exemptions.bytemuck_derive]]
 version = "1.10.2"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.bytemuck_derive]]
+version = "1.11.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免更新：延续 1.10.2 豁免策略，尚未正式代码审计。"
 
 [[exemptions.byteorder-lite]]
 version = "0.1.0"
@@ -3702,6 +3720,12 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.sha1]]
+version = "0.10.7"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免更新：延续 0.10.6 豁免策略，尚未正式代码审计。"
+
+[[exemptions.sha1]]
 version = "0.11.0"
 criteria = "safe-to-run"
 
@@ -3872,6 +3896,42 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.surrealdb]]
+version = "3.2.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免：可选依赖 surrealdb feature 用，尚未正式代码审计。"
+
+[[exemptions.surrealdb-collections]]
+version = "3.2.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免：surrealdb 子 crate，尚未正式代码审计。"
+
+[[exemptions.surrealdb-core]]
+version = "3.2.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免：surrealdb 子 crate，尚未正式代码审计。"
+
+[[exemptions.surrealdb-strand]]
+version = "3.2.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免：surrealdb 子 crate，尚未正式代码审计。"
+
+[[exemptions.surrealdb-types]]
+version = "3.2.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免：surrealdb 子 crate，尚未正式代码审计。"
+
+[[exemptions.surrealdb-types-derive]]
+version = "3.2.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免：surrealdb 子 crate，尚未正式代码审计。"
+
 [[exemptions.swap-buffer-queue]]
 version = "0.2.1"
 criteria = "safe-to-run"
@@ -3968,6 +4028,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.thread_local]]
+version = "1.1.10"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免更新：延续 1.1.9 豁免策略，尚未正式代码审计。"
+
 [[exemptions.tiff]]
 version = "0.11.3"
 criteria = "safe-to-run"
@@ -4021,6 +4087,12 @@ version = "1.11.0"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.tinyvec]]
+version = "1.12.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免更新：延续 1.11.0 豁免策略，尚未正式代码审计。"
 
 [[exemptions.tinyvec_macros]]
 version = "0.1.1"
@@ -4195,6 +4267,18 @@ version = "1.20.1"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.typespec]]
+version = "1.1.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免：azure_core 间接依赖，尚未正式代码审计。"
+
+[[exemptions.typespec_client_core]]
+version = "1.1.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免：azure_core 间接依赖，尚未正式代码审计。"
 
 [[exemptions.uds_windows]]
 version = "1.2.1"

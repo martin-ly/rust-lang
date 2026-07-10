@@ -248,6 +248,22 @@ jobs:
         run: python scripts/add_bilingual_annotations.py --mode check-only
         continue-on-error: false
 
+  mermaid-syntax:
+    name: Mermaid Syntax Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Mermaid syntax check
+        run: python scripts/check_mermaid_syntax.py
+        continue-on-error: false
+
   quality-gates-summary:
     name: Quality Gates Summary
     runs-on: ubuntu-latest
@@ -261,6 +277,7 @@ jobs:
       - kb-auditor-link-check
       - content-overlap
       - i18n-terms
+      - mermaid-syntax
     if: always() && github.event_name == 'pull_request'
     steps:
       - name: Generate summary comment
@@ -276,7 +293,8 @@ jobs:
               'mdBook Build': '${{ needs.mdbook-build.result }}',
               'KB Auditor Link Check': '${{ needs.kb-auditor-link-check.result }}',
               'Content Overlap Detection': '${{ needs.content-overlap.result }}',
-              'Bilingual Terminology Check': '${{ needs.i18n-terms.result }}'
+              'Bilingual Terminology Check': '${{ needs.i18n-terms.result }}',
+              'Mermaid Syntax Check': '${{ needs.mermaid-syntax.result }}'
             };
 
             let status = '✅';
@@ -301,7 +319,7 @@ jobs:
             ${summary}
 
             ---
-            *All 9 quality gates completed*`;
+            *All 10 quality gates completed*`;
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
