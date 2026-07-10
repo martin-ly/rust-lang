@@ -5,7 +5,7 @@
 > **EN**: Cross-Platform Concurrency
 > **Summary**: Platform-specific threading models, synchronization primitives, and conditional-compilation strategies for writing portable concurrent Rust across Windows, Linux, macOS, and mobile targets.
 > **受众**: [专家]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价并发设计在不同平台下的可移植性

@@ -5,7 +5,7 @@
 > **权威来源说明**: Rust 1.95 **稳定特性**的权威来源为 [`concept/07_future/rust_1_95_stabilized.md`](../../concept/07_future/00_version_tracking/rust_1_95_stabilized.md)。
 > 本文仅保留 **Nightly / 实验特性** 的工具链视角内容；[knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md](../../knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md) 与 [knowledge/06_ecosystem/emerging/03_rust_1_95.md](../../knowledge/06_ecosystem/emerging/03_rust_1_95.md) 已重定向至 `concept/07_future/rust_1_95_stabilized.md`。
 > **分级**: [A]
-> **Bloom 层级**: L3 (应用)
+> **Bloom 层级**: L3
 > **创建日期**: 2026-02-28
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.95.0 (Nightly)

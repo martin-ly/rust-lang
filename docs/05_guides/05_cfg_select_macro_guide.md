@@ -3,7 +3,7 @@
 > **EN**: Cfg Select Macro Guide
 > **Summary**: cfg_select! 宏完全指南 Cfg Select Macro Guide.
 > **分级**: [A]
-> **Bloom 层级**: L2-L3 (理解/应用)
+> **Bloom 层级**: L2-L3
 > **稳定版本**: Rust 1.95.0
 > **适用版本**: 1.95.0+
 > **Edition**: 任意 Edition

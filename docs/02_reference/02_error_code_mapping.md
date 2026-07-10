@@ -3,7 +3,7 @@
 > **EN**: Error Code Mapping
 > **Summary**: Rust 编译器错误码映射文档 Error Code Mapping.
 > **分级**: [A]
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 >
 > **层次定位**: L1-L3 基础-高级 / 编译器诊断参考
 > **前置依赖**: [docs 核心概念](../01_core/README.md) · [concept L1 所有权（Ownership）](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)

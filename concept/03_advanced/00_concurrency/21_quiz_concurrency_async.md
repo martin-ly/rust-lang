@@ -29,7 +29,7 @@
 
 ---
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **定位**: L3 嵌入式互动测验——验证并发模型（Send/Sync、Mutex/Arc、channel）与异步（Async）编程（Future、Pin、await）核心概念的掌握程度。
 > **使用方式**: 先独立思考答案，再点击展开核对解析。
 

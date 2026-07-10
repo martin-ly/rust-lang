@@ -90,7 +90,7 @@
   - [补充视角：WebAssembly 性能优化实践](#补充视角webassembly-性能优化实践)
   - [补充视角：WebAssembly 开发工具链全景](#补充视角webassembly-开发工具链全景)
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **变更日志**:
 >
 > - v1.0 (2026-05-26): 初始创建——覆盖 WASM 权威定义、执行模型、Rust 工具链、组件模型、WASI Preview 2、性能边界、安全沙箱、反命题树与边界测试

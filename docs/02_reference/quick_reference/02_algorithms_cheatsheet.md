@@ -3,7 +3,7 @@
 > **EN**: Algorithms Cheatsheet
 > **Summary**: 算法与数据结构快速参考卡片 Algorithms Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L2-L3 (理解/速查)
+> **Bloom 层级**: L2-L3
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]

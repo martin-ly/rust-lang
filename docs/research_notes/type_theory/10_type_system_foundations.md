@@ -7,7 +7,7 @@
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 >
 > **层次定位**: L4 形式化 / 类型论基础研究
 > **前置依赖**: [concept L4 类型论](../../../concept/04_formal/00_type_theory/02_type_theory.md) · [concept L2 泛型（Generics）](../../../concept/02_intermediate/01_generics/02_generics.md)

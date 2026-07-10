@@ -7,10 +7,10 @@
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 六篇形式化文档 × 六维（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）自检，确保充分完整完备
 > **上位**: [README](README.md)、[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](10_safe_decidable_mechanisms_and_formal_methods_plan.md)、[QUALITY_CHECKLIST](../10_quality_checklist.md)

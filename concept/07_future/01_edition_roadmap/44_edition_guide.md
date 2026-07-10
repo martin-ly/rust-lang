@@ -8,7 +8,7 @@
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 Edition 指南
 > **定位**: 全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。

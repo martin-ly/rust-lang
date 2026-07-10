@@ -2,7 +2,7 @@
 
 > **EN**: Fundamentals Index
 > **Summary**: 01 - Rust 基础 Fundamentals Index.
-> **Bloom 层级**: 理解
+> **Bloom 层级**: L2
 > **Rust 语言的核心基础：所有权、借用、生命周期、迭代器**
 >
 > **受众**: [初学者] / [进阶]

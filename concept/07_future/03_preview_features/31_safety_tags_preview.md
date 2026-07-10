@@ -7,7 +7,7 @@
 > **EN**: Safety Tags for Unsafe Code
 > **Summary**: RFC #3842 提案，用结构化属性标记 `unsafe` 函数的安全契约，使安全前提可被工具检查、文档生成和形式化推理。
 > **受众**: [进阶] 形式化方法、Unsafe Rust、系统级开发者
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Eva

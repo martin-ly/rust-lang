@@ -9,7 +9,7 @@
 >
 > **受众**: [进阶]
 > **层级**: L2 进阶概念
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×App
 > **前置概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [FFI](../../03_advanced/04_ffi/05_rust_ffi.md)
@@ -24,7 +24,7 @@
 
 ---
 
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **变更日志**:
 >
 > - v1.0 (2026-07-04): 初始创建

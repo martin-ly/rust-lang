@@ -5,7 +5,7 @@
 > **EN**: Glommio and Thread-per-Core Async Runtimes
 > **Summary**: High-performance Linux async runtime based on io_uring and thread-per-core architecture: design trade-offs, CPU pinning, NUMA awareness, and when to prefer Glommio over work-stealing runtimes like Tokio.
 > **受众**: [专家]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价异步（Async）运行时（Runtime）架构对目标场景的适配性

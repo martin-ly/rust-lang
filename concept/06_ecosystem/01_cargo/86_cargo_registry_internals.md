@@ -6,7 +6,7 @@
 > **EN**: Cargo Registry Internals
 > **Summary**: How Cargo registries work internally for Rust 1.97.0+: sparse vs git index, index entry format, Web API, credential provider protocol, publishing pipeline, and self-hosted registry design.
 > **受众**: [专家]
-> **Bloom 层级**: 理解 → 分析
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统

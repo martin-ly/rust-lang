@@ -12,7 +12,7 @@
 
 > **EN**: Rust 2024 Edition Future In Prelude
 > **Summary**: Rust 2024 Edition Future in Prelude 影响分析 Rust 2024 Edition Future In Prelude.
-> **Bloom 层级**: L2-L3 (理解/应用)
+> **Bloom 层级**: L2-L3
 
 ---
 

@@ -2,7 +2,7 @@
 > **Summary**: Authoritative concept page for `宏卫生性完整参考`. Content migrated from `crates/c11_macro_system_proc/docs/tier_03_references/04_macro_hygiene_reference.md`.
 > **受众**: [专家]
 > **内容分级**: [专家级]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: S×Eva — 评估宏（Macro）卫生性设计

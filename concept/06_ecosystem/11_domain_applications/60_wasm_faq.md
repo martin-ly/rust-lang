@@ -2,7 +2,7 @@
 > **Summary**: Authoritative concept page for `C12 WASM - 常见问题`. Content migrated from `crates/c12_wasm/docs/tier_01_foundations/04_faq.md`.
 > **受众**: [进阶]
 > **内容分级**: [参考级]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: A×Eva — WebAssembly FAQ 评估

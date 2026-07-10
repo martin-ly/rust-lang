@@ -12,7 +12,7 @@
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
-> **Bloom 层级**: 记忆 → 理解
+> **Bloom 层级**: L1-L2
 
 **变更日志**:
 

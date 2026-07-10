@@ -7,7 +7,7 @@
 > **Summary**: Error Handling. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 深入分析 Rust **错误处理（Error Handling）机制**——从 `Result`/`Option` 的组合子到 `?` 运算符、错误转换、自定义错误类型和错误处理框架，揭示 Rust 如何将错误处理融入类型系统（Type System）实现编译期安全。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../00_traits/01_traits.md) · [Generics](../01_generics/02_generics.md)

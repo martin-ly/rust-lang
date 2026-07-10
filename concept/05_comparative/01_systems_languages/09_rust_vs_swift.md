@@ -7,7 +7,7 @@
 > **Summary**: Rust vs Swift: comparative analysis with Rust across type systems, memory safety, and concurrency.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 对比分析 **Rust** 与 **Swift** 的设计选择——从内存管理模型、所有权（Ownership）系统到生态定位，揭示两种语言如何在"安全"与"易用"之间做出不同权衡。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md)

@@ -3,7 +3,7 @@
 > **EN**: Quick Reference Index
 > **Summary**: Rust 快速参考指南 Quick Reference Index. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L2-L3 (理解/速查)
+> **Bloom 层级**: L2-L3
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.97.0+ (Edition 2024)

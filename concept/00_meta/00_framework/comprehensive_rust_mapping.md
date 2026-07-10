@@ -7,7 +7,7 @@
 > **EN**: Comprehensive Rust Mapping
 > **Summary**: Comprehensive Rust Mapping. Core Rust concept.
 > **受众**: [初学者 → 进阶]
-> **Bloom 层级**: 知道 → 应用
+> **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: C×Kno — 将 Google 的 Comprehensive Rust 课程映射到本知识体系

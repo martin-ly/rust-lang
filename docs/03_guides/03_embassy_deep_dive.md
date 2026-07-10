@@ -46,7 +46,7 @@
   - [8. 权威来源索引 {#8-权威来源索引}](#8-权威来源索引-8-权威来源索引)
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
-> **Bloom 层级**: 应用 → 评价 → 创造
+> **Bloom 层级**: L3-L6
 > **来源: [Embassy Book](https://embassy.dev/book/)** ·
 > **[embedded-hal 文档](https://docs.rs/embedded-hal/latest/embedded_hal/)** ·
 > **[svd2rust 文档](https://docs.rs/svd2rust/latest/svd2rust/)** ·

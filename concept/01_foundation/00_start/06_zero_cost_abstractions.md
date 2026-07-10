@@ -9,7 +9,7 @@
 > **EN**: Zero Cost Abstractions
 > **Summary**: Zero Cost Abstractions: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
-> **Bloom 层级**: 理解 → 分析
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价零成本抽象（Zero-Cost Abstraction）的设计权衡

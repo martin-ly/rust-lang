@@ -3,7 +3,7 @@
 > **EN**: Practice Index
 > **Summary**: 实践项目 Practice Index.
 > **分级**: [A]
-> **Bloom 层级**: L3 (应用)
+> **Bloom 层级**: L3
 > **目标**: 通过实际项目学习Rust
 > **项目数**: 15个（入门5个 + 进阶5个 + 专家5个）
 

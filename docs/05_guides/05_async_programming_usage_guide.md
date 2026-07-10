@@ -3,7 +3,7 @@
 > **EN**: Async Programming Usage Guide
 > **Summary**: 异步编程使用指南 Async Programming Usage Guide. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L3-L4 (应用/分析)
+> **Bloom 层级**: L3-L4
 >
 > **层次定位**: L3-L6 高级-生态 / 异步（Async）工程实践
 > **前置依赖**: [concept L3 Async](../../concept/03_advanced/01_async/02_async.md) · [docs 设计模式](05_design_patterns_usage_guide.md)

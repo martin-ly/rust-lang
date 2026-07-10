@@ -14,7 +14,7 @@
 > **Summary**: Network programming patterns in Rust using std, Tokio, and async I/O.
 > Async Programming. Core Rust concept covering mechanism analysis, async/await patterns, network programming.
 > **受众**: [专家]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时（Runtime）下的 TCP/UDP 异步（Async） IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从"怎么写"到"为什么这样设计"的完整认知框架。
 > **前置概念**: [Async/Await](../01_async/02_async.md) · [Concurrency](../00_concurrency/01_concurrency.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)

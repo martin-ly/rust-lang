@@ -13,7 +13,7 @@
 
 > **EN**: Test Coverage
 > **Summary**: 代码覆盖率测试指南 Test Coverage.
-> **Bloom 层级**: L2-L3 (理解/应用)
+> **Bloom 层级**: L2-L3
 > 本文档对应 Rust 生产级工程实践体系阶段三 —— 代码覆盖率集成。
 > 参考: Microsoft Azure 测试策略、Rust Foundation 质量倡议。
 

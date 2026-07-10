@@ -5,7 +5,7 @@
 > **Summary**: Concept Audit Guide. Core Rust concept.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: P×Eva — 评价概念文件质量

@@ -8,7 +8,7 @@
 > **EN**: Testing
 > **Summary**: Testing. Core Rust concept covering testing and verification, ecosystem and tooling.
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **双维定位**: P×App — 测试框架和策略的应用

@@ -4,7 +4,7 @@
 > **Summary**: 并发与异步反例边界 Concurrency Async Counterexamples.
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
-> **Bloom 层级**: L5-L6 (分析/评价)
+> **Bloom 层级**: L5-L6
 > **概念族**: 并发安全（Concurrency Safety） / 异步（Async） / Send/Sync / Future / Pin / 反例边界
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成

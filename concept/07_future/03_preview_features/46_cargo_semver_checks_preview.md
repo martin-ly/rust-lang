@@ -30,7 +30,7 @@
 
 ---
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **A/S/P 标记**: **P** — Procedure
 > **定位**: 跟踪 `cargo-semver-checks` 从独立社区工具向 Cargo 官方生态集成的演进过程，分析其对 Rust 供应链稳定性和 API 兼容性验证的结构性影响。
 

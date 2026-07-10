@@ -17,7 +17,7 @@
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计 Rust for WASM 架构
@@ -44,7 +44,7 @@
 
 ---
 
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 **变更日志**:
 
 - v1.0 (2026-05-22): 初始版本——覆盖 wasm-bindgen/wasm-pack 工具链、Yew/Leptos 框架对比、Wasm 内存模型、JS 互操作性能分析、选型决策树、Mermaid 架构图

@@ -6,7 +6,7 @@
 > **Summary**: Rust Reference 明确列出的未定义行为（UB）清单，覆盖数据竞争、指针别名、无效值、运行时假设等核心安全契约边界。 Rust Reference list of undefined behaviors, covering data races, pointer aliasing, invalid values, and runtime assumptions.
 >
 > **受众**: [专家]
-> **Bloom 层级**: 理解 → 分析
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析

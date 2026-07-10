@@ -2,7 +2,7 @@
 
 > **EN**: Advanced Index
 > **Summary**: 03 - 高级 Rust Advanced Index. (stub/archive redirect)
-> **Bloom 层级**: 理解
+> **Bloom 层级**: L2
 > **掌握系统级编程能力**
 >
 > **受众**: [专家] / [研究者]

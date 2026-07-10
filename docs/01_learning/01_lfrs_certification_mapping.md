@@ -4,7 +4,7 @@
 > **Summary**: 认证映射 Linux Foundation Certified Rust Programmer LFRS.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [A]
-> **Bloom 层级**: L1-L2 (记忆/理解)
+> **Bloom 层级**: L1-L2
 > **创建日期**: 2026-04-24
 > **用途**: 将 LFRS 认证的 10 大考点映射到本项目内容，建立可量化的学习验证体系
 > **认证官网**: <https://www.linuxfoundation.org/certification>

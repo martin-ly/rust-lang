@@ -7,7 +7,7 @@
 > **EN**: Idiomatic Rust API Naming Conventions
 > **Summary**: Rust API naming conventions aligned with the Rust API Guidelines and std library style.
 > **受众**: [进阶]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×App — 将社区约定应用于实际 API 设计

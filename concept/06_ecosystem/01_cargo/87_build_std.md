@@ -5,7 +5,7 @@
 > **权威来源**: [Cargo build-std 文档](https://doc.rust-lang.org/cargo/reference/unstable.html#build-std) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 >
 > **受众**: [进阶 / 工程]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **前置概念**: [Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md) · [Cargo 配置与环境变量](83_cargo_configuration.md) · [所有权（Ownership）系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)

@@ -4,7 +4,7 @@
 > **Summary**: Comparative analysis: Rust versus other programming languages.
 > **受众**: [进阶]
 > **定位**：将 Rust 置于更广泛的编程语言范式和技术栈语境中，通过**多维对比**揭示其设计本体论、形式化优势与工程权衡。本层是原有 `01.md` 核心内容的结构化重组与扩展。
-> **Bloom 层级**: 评价 → 创造
+> **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **功能**: 将 L1-L4 的概念知识**综合**为工程决策能力
 > **来源:

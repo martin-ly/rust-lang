@@ -7,7 +7,7 @@
 > **Summary**: Lifetimes. Core Rust concept covering mechanism analysis, in-depth analysis, lifetime semantics.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析高级生命周期（Lifetimes）的约束传播

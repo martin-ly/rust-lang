@@ -3,7 +3,7 @@
 > **EN**: Rust 198 Nightly Preview Cheatsheet
 > **Summary**: Rust 1.98 Nightly 前瞻速查表 Rust 198 Nightly Preview Cheatsheet.
 > **分级**: [A]
-> **Bloom 层级**: L3 (应用)
+> **Bloom 层级**: L3
 > **版本**: Rust 1.98 nightly (d1fc603d1 2026-05-26)
 > **更新日期**: 2026-05-29
 > **适用版本**: nightly only

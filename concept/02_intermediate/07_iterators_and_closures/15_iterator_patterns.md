@@ -11,7 +11,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：迭代器（Iterator）
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 深入探讨 Rust 迭代器（Iterator）模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Generics](../01_generics/02_generics.md) · [Closures](../../01_foundation/00_start/15_closure_basics.md)

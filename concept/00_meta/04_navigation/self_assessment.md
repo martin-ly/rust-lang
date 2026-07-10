@@ -7,7 +7,7 @@
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**：每个层级配套的自测题，用于验证知识掌握程度。答案和解析附在每题之后（可折叠）。
 > **使用方式**：先做题，再对答案。建议配合 [`learning_guide.md`](learning_guide.md) 使用。
@@ -54,7 +54,7 @@
     - [Q21: Waker 机制](#q21-waker-机制)
     - [Q22: 宏卫生性](#q22-宏卫生性)
     - [Q23: unsafe 安全契约](#q23-unsafe-安全契约)
-  - [L4 形式化层：类型理论与证明（7 题） 题目基于 TAPL (Pierce, 2002); [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/); [Girard — Linear Logic / 1987](https://doi.org/10.1016/0304-3975(87)90045-4); [Jung — Tree Borrows (arXiv 2023)](https://arxiv.org/abs/2304.14774)](#l4-形式化层类型理论与证明7-题-题目基于-tapl-pierce-2002-rustbelt-jung-et-al-popl-2018-girard--linear-logic--198790045-4-jung--tree-borrows-arxiv-2023)
+  - [L4 形式化层：类型理论与证明（7 题） 题目基于 TAPL (Pierce, 2002); RustBelt (Jung et al., POPL 2018); Girard — Linear Logic / 1987; Jung — Tree Borrows (arXiv 2023)](#l4-形式化层类型理论与证明7-题-题目基于-tapl-pierce-2002-rustbelt-jung-et-al-popl-2018-girard--linear-logic--1987-jung--tree-borrows-arxiv-2023)
     - [Q24: 仿射逻辑](#q24-仿射逻辑)
     - [Q25: 参数性定理](#q25-参数性定理)
     - [Q26: HRTB](#q26-hrtb)
@@ -78,27 +78,27 @@
     - [Q41: 函数参数传递](#q41-函数参数传递)
     - [Q42: Copy 边界](#q42-copy-边界)
     - [Q43: 多输入引用生命周期](#q43-多输入引用生命周期)
-    - [Q45: enum 内存布局](#q4-enum-穷尽匹配)
-    - Q46: 类型推断与 Turbofish
-    - Q47: match 绑定模式
-    - Q48: const 上下文限制
+    - [Q45: enum 内存布局](#q45-enum-内存布局)
+    - [Q46: 类型推断与 Turbofish](#q46-类型推断与-turbofish)
+    - [Q47: match 绑定模式](#q47-match-绑定模式)
+    - [Q48: const 上下文限制](#q48-const-上下文限制)
   - [L2 扩展层：Trait、泛型、内存管理与错误处理（8 题） 题目基于 TRPL Ch10 (泛型), Ch9 (错误处理), Ch15 (智能指针) / 2024; Rust Reference — Generic Parameters, The ? operator / 2025; Wikipedia — Copy-on-Write(https://en.wikipedia.org/wiki/Copy-on-write)\]](#l2-扩展层trait泛型内存管理与错误处理8-题-题目基于-trpl-ch10-泛型-ch9-错误处理-ch15-智能指针--2024-rust-reference--generic-parameters-the--operator--2025-wikipedia--copy-on-writehttpsenwikipediaorgwikicopy-on-write)
-    - [Q49: Trait Bound 组合](#q9-trait-bounds)
-    - [Q50: Associated Type 约束](#q10-associated-types-vs-generics)
-    - [Q51: 结构体生命周期](#q3-生命周期省略)
-    - Q52: Drop 与 Panic 安全
-    - Q53: Cow 的用途
-    - Q54: Error Source Chain
-    - Q55: 泛型 vs Trait Object 错误处理
-    - Q56: Zero-Sized Types (ZST)
+    - [Q49: Trait Bound 组合](#q49-trait-bound-组合)
+    - [Q50: Associated Type 约束](#q50-associated-type-约束)
+    - [Q51: 结构体生命周期](#q51-结构体生命周期)
+    - [Q52: Drop 与 Panic 安全](#q52-drop-与-panic-安全)
+    - [Q53: Cow 的用途](#q53-cow-的用途)
+    - [Q54: Error Source Chain](#q54-error-source-chain)
+    - [Q55: 泛型 vs Trait Object 错误处理](#q55-泛型-vs-trait-object-错误处理)
+    - [Q56: Zero-Sized Types (ZST)](#q56-zero-sized-types-zst)
   - [L3 扩展层：并发、异步、unsafe 与宏（8 题） \[来源: 题目基于 TRPL Ch16 (并发), Rust Async Book / 2025; Rust Reference — unsafe, Macros / 2025; RFC 2349 (Pin)\](https://rust-lang.github.io/async-book/)](#l3-扩展层并发异步unsafe-与宏8-题-来源-题目基于-trpl-ch16-并发-rust-async-book--2025-rust-reference--unsafe-macros--2025-rfc-2349-pinhttpsrust-langgithubioasync-book)
-    - Q57: Atomic Ordering
-    - Q58: Stream vs Iterator
-    - Q59: Cancel Safety
-    - [Q60: UnsafeCell](#q20-unsafe-块边界)
-    - Q61: Strict Provenance
-    - [Q62: Proc Macro Hygiene](#q78-proc-macro2-与-syn)
-    - Q63: Pin Projection
+    - [Q57: Atomic Ordering](#q57-atomic-ordering)
+    - [Q58: Stream vs Iterator](#q58-stream-vs-iterator)
+    - [Q59: Cancel Safety](#q59-cancel-safety)
+    - [Q60: UnsafeCell](#q60-unsafecell)
+    - [Q61: Strict Provenance](#q61-strict-provenance)
+    - [Q62: Proc Macro Hygiene](#q62-proc-macro-hygiene)
+    - [Q63: Pin Projection](#q63-pin-projection)
   - [L4 扩展层：线性逻辑、类型论、所有权形式化与 RustBelt（8 题） 题目基于 TAPL (Pierce, 2002); RustBelt (Jung et al., POPL 2018); Girard — Linear Logic / 1987; Wikipedia — Substructural Type System(https://en.wikipedia.org/wiki/Substructural\_type\_system)\]](#l4-扩展层线性逻辑类型论所有权形式化与-rustbelt8-题-题目基于-tapl-pierce-2002-rustbelt-jung-et-al-popl-2018-girard--linear-logic--1987-wikipedia--substructural-type-systemhttpsenwikipediaorgwikisubstructural_type_system)
     - [Q65: 子结构逻辑](#q65-子结构逻辑)
     - [Q66: Curry-Howard 同构](#q66-curry-howard-同构)
@@ -118,8 +118,8 @@
     - [Q78: proc-macro2 与 syn](#q78-proc-macro2-与-syn)
     - [Q79: SemVer 与 API 演进](#q79-semver-与-api-演进)
     - [Q80: rustdoc Doctest](#q80-rustdoc-doctest)
-  - 来源与参考文献
-    - 10.3 边界测试：Bloom 层级与代码复杂度评估（概念映射）
+  - [来源与参考文献](#来源与参考文献)
+    - [10.3 边界测试：Bloom 层级与代码复杂度评估（概念映射）](#103-边界测试bloom-层级与代码复杂度评估概念映射)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)

@@ -3,7 +3,7 @@
 > **EN**: Strings Formatting Cheatsheet
 > **Summary**: 📝 Rust 字符串与格式化速查卡 Strings Formatting Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L2-L3 (理解/速查)
+> **Bloom 层级**: L2-L3
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]

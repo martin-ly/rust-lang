@@ -15,7 +15,7 @@
 > **Summary**: Testing. Core Rust concept covering formal methods foundations, verification techniques, testing strategies.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **双维定位**: P×App — 实施多层测试策略

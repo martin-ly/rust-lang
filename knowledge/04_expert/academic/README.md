@@ -2,7 +2,7 @@
 
 > **EN**: Academic Index
 > **Summary**: Academic 学术研究 Academic Index. (stub/archive redirect)
-> **Bloom 层级**: 理解
+> **Bloom 层级**: L2
 > **Rust 形式化验证与学术前沿**
 >
 > **受众**: [专家] / [研究者]

@@ -5,8 +5,8 @@
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
-> **Bloom 层级**: L4-L5 (分析/评价)
-> **Rust 版本**: 1.97.0+
+> **Bloom 层级**: L4-L5
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分析日期**: 2026-05-06
 > **状态**: Rust 已正式成为 Linux 内核永久组成部分
 > **权威来源**: [LKML](https://lore.kernel.org/lkml/), [Rust for Linux](https://rust-for-linux.com/), [Linux Kernel Docs](https://docs.kernel.org/rust/)

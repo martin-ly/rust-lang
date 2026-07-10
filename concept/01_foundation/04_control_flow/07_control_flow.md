@@ -7,7 +7,7 @@
 > **EN**: Control Flow
 > **Summary**: Control Flow: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用控制流结构和模式匹配（Pattern Matching）

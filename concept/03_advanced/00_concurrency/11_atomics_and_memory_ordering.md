@@ -8,7 +8,7 @@
 >
 > 本主题在 knowledge 中有系统化的知识索引：原子操作（Atomic Operations）
 > **受众**: [专家]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 评估原子操作（Atomic Operations）内存序的选型

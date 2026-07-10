@@ -5,7 +5,7 @@
 > **EN**: Stream Processing Semantics
 > **Summary**: Stream Processing Semantics: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析流处理系统的形式化语义与工程实现

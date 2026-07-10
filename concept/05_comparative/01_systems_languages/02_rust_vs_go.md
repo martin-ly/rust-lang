@@ -18,7 +18,7 @@
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 ---
 
-> **Bloom 层级**: 评价
+> **Bloom 层级**: L5
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，完成本体论对比、并发模型对比、内存模型对比、决策树

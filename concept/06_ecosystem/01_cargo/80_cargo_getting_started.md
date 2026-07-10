@@ -6,7 +6,7 @@
 > **EN**: Cargo Getting Started
 > **Summary**: A beginner-oriented guide to Cargo 1.97.0+: verifying the toolchain, creating a package with `cargo new`/`cargo init`, building/running/checking, adding dependencies, and choosing between binary, library, script, and workspace projects.
 > **受众**: [初学者]
-> **Bloom 层级**: 记忆 → 应用
+> **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统

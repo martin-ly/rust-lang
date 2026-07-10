@@ -9,7 +9,7 @@
 >
 > **受众**: [初学者]
 > **层级**: L1 基础概念
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: C×App
 > **前置概念**: [Error Handling Basics](../08_error_handling/32_error_handling_basics.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Strings and Text](../06_strings_and_text/09_strings_and_text.md)
@@ -26,7 +26,7 @@
 
 ---
 
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **变更日志**:
 >
 > - v1.0 (2026-07-04): 初始创建

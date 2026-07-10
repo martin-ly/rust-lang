@@ -3,7 +3,7 @@
 > **EN**: Let Chains Guide
 > **Summary**: Let Chains 全面指南 Let Chains Guide.
 > **分级**: [A]
-> **Bloom 层级**: L2 (Comprehension) — L3 (Application)
+> **Bloom 层级**: L2-L3
 > **对应 Rust 版本**: 1.97.0+ stable
 > **最后更新**: 2026-05-20
 >

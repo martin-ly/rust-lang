@@ -12,7 +12,7 @@
 >
 > 本主题在 knowledge 中有系统化的知识索引：[集合](../../../knowledge/02_intermediate/01_collections.md)
 > **受众**: [初学者]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 标准集合 API 的应用

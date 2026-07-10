@@ -4,7 +4,7 @@
 > **Summary**: 文档生命周期管理制度 Documentation Lifecycle. (stub/archive redirect)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 > **创建日期**: 2026-05-12
 > **版本**: 1.0
 > **状态**: ✅ 已生效

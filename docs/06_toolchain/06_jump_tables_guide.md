@@ -3,7 +3,7 @@
 > **EN**: Jump Tables Guide
 > **Summary**: -C jump-tables=bool 编译器优化指南 Jump Tables Guide.
 > **分级**: [A]
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 > **稳定版本**: Rust 1.93.0（原 `-Zno-jump-tables`），1.97.0+ 持续可用
 > **适用版本**: 1.97.0+ (MSRV 1.97.0)
 >

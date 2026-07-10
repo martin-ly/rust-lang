@@ -6,7 +6,7 @@
 > **权威来源**: Rust Edition 机制与迁移策略的权威解释见 [`concept/07_future/22_edition_guide.md`](../../concept/07_future/22_edition_guide.md)。本文仅作为官方 Edition Guide 与项目知识图谱的对齐矩阵保留。
 > **内容分级**: [核心级]
 > **层级**: L7
-> **Bloom 层级**: L5-L6 (分析/评价)
+> **Bloom 层级**: L5-L6
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **创建日期**: 2026-06-29

@@ -33,7 +33,7 @@
 
 ---
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **A/S/P 标记**: **S** — Structure
 > **定位**: 跟踪 Rust 对 ARM AArch64 **SVE（Scalable Vector Extension，可伸缩向量扩展）** 和 **SME（Scalable Matrix Extension，可伸缩矩阵扩展）** 的支持进展。SVE/SME 是 ARMv9-A 的关键特性，代表向量计算从固定长度向硬件自适应长度的范式转变。
 

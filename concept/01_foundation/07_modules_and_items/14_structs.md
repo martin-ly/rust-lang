@@ -5,7 +5,7 @@
 > **EN**: Structs
 > **Summary**: Structs: Rust's custom product type, covering named-field structs, tuple structs, unit-like structs, struct update syntax, methods, and field visibility.
 > **受众**: [初学者]
-> **Bloom 层级**: 记忆 → 理解 → 应用
+> **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: F×Und — 理解结构体（Struct）作为自定义复合类型的基础构造

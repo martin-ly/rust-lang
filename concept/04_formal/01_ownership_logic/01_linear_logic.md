@@ -24,7 +24,7 @@
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，完成 Girard 原始定义、结构规则矩阵、Rust 映射、命题-类型对应、思维导图、示例反例$entry

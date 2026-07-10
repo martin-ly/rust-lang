@@ -22,7 +22,7 @@
 ```bash
 # 创建新项目 {#创建新项目}
 
-> **Bloom 层级**: L3 (应用)
+> **Bloom 层级**: L3
 cargo new my_project
 cd my_project
 

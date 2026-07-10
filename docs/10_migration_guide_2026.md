@@ -3,7 +3,7 @@
 > **EN**: Migration Guide 2026
 > **Summary**: 2026年迁移指南 Migration Guide 2026.
 > **分级**: [B]
-> **Bloom 层级**: L2-L3 (理解/应用)
+> **Bloom 层级**: L2-L3
 > **日期**: 2026-04-10
 > **目标**: 从旧版Rust工具链迁移到最新生态
 

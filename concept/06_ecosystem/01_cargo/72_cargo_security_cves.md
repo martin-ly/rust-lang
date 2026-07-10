@@ -8,7 +8,7 @@
 > **Summary**: Cargo Security Advisories: CVE-2026-5222 and CVE-2026-5223: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶 / 工程]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Security
 > **双维定位**: S×Ops — 供应链安全与运维实践

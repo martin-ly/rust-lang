@@ -6,7 +6,7 @@
 > **Summary**: 将 Rust 借用（Borrowing）检查器判定的问题、三代演进（词法作用域 → NLL → Polonius）、核心形式化模型以及可判定性/复杂性直觉，提炼为面向研究者的教学类比。
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的“定理/算法/规则”为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [RustBelt](https://plv.mpi-sws.org/rustbelt/)、[Polonius](https://github.com/rust-lang/polonius)、[RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)。
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F+P** — Formal + Procedure
 > **双维定位**: F×Algo — 形式化方法与算法可判定性

@@ -5,7 +5,7 @@
 > **EN**: Zero Copy Parsing
 > **Summary**: Zero Copy Parsing: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
-> **Bloom 层级**: 分析 → 应用
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 探讨 Rust 中的**零拷贝**（Zero-Copy）技术——从字节切片（Slice）直接解析结构化数据，无需中间复制，分析内存安全（Memory Safety）与性能权衡。
 > **前置概念**:

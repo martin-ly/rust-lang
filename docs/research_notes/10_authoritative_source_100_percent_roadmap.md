@@ -6,7 +6,7 @@
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **内容分级**: [核心级]
 > **层级**: L0-L7
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **创建日期**: 2026-06-29

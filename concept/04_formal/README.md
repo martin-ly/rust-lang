@@ -6,7 +6,7 @@
 > ⚠️ **声明**: 本层使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **定位**：Rust 概念体系的**数学根基**与形式化验证。本层为 L1-L3 的所有安全保证提供严格的数学证明，是知识体系的"地基"。
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **核心功能**: 为上层概念提供**形式化直觉**与**教学类比**的安全性解释；指向可机械验证证明的权威来源（RustBelt、Iris、Coq）
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)** · **来源: [Wikipedia - Linear Logic](https://en.wikipedia.org/wiki/Linear_Logic)** · **来源: [Iris Project - iris-project.org](https://iris-project.org/)**

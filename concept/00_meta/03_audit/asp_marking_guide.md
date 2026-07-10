@@ -18,7 +18,7 @@
 > **Summary**: Asp Marking Guide. Core Rust concept.
 > **受众**: [专家]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **Bloom 层级**: 元（Meta）
+> **Bloom 层级**: Meta
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件定义 `concept/` 知识体系中的 **A(应用) / S(结构) / P(程序)** 三维认知标记规范，作为现有 Bloom 层级标注的补充维度。A/S/P 标记连接 **Krathwohl 知识维度** 与 **Bloom 认知过程维度**，将抽象的双维矩阵压缩为可操作的标签系统。
 > **对齐来源**: [Microsoft RustTraining] · [arxiv 2604.06331v1] · [Krathwohl 2002] · [Bloom 修订版 2001]
@@ -194,7 +194,7 @@ graph TB
 ```markdown
 # 概念名称
 
-> **Bloom 层级**: 理解 / 应用 / 分析 / 评价 / 创造
+> **Bloom 层级**: L2-L6
 > **A/S/P 标记**: A / S / P / A+S / S+P / A+S+P
 > **前置概念**: [链接]
 > **后置概念**: [链接]

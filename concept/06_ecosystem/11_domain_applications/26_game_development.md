@@ -8,7 +8,7 @@
 > **Summary**: Game Development. Core Rust concept covering mechanism analysis, design patterns, performance optimization.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计游戏开发架构

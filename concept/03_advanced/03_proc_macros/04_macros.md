@@ -38,7 +38,7 @@
 > **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
 
 ---
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 **变更日志**:
 
 - v4.1 (2026-05-14): 增强 §5 属性宏修改函数体——新增 `#[trace]` 完整实现（含 `proc_macro_error2` 友好错误）、AST 遍历三策略（quote 包装 / `Fold` trait / 手动 `stmts` 替换）、声明宏（Declarative Macro）能力边界对比、跨层链接
@@ -1446,7 +1446,7 @@ fn platform_specific() {
 > **[Rust Reference: Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)** 属性宏（attribute macro）接收两部分输入：属性参数 `TokenStream` 与被装饰 item 的 `TokenStream`。宏可以解析、修改或完全替换该 item，最终返回新的 `TokenStream` 交由编译器继续处理。✅ 已验证
 > **[syn crate 文档]** `syn` 为 Rust 语法树提供类型化 AST 节点（如 `ItemFn`、`ImplItemFn`），使属性宏能够精确操作函数签名（`sig`）与函数体（`block`），而非手工拼接 token。✅ 已验证
 > **[quote crate 文档]** `quote!` 通过准引用（quasiquotation）将 `syn` 解析出的 AST 片段插回生成的代码中，是属性宏生成代码的标准工具。✅ 已验证
-> **Bloom 层级**: 应用 → 综合
+> **Bloom 层级**: L3-L6
 
 #### 5.1 属性宏解析和修改函数体 AST 的原理
 

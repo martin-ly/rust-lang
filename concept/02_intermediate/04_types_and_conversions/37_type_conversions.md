@@ -9,7 +9,7 @@
 >
 > **受众**: [进阶]
 > **层级**: L2 进阶概念
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×App
 > **前置概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../00_traits/01_traits.md) · [Error Handling](../03_error_handling/04_error_handling.md)
@@ -23,9 +23,12 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
 
+> **Rust 1.97.0 变更提示**：
+> Rust 1.97.0 起，未约束浮点字面量（`{float}`）的默认回退行为发生变化，详见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
+
 ---
 
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **变更日志**:
 >
 > - v1.0 (2026-07-04): 初始创建

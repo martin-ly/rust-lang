@@ -4,7 +4,7 @@
 > **Summary**: 算法选择决策树速查卡 Algorithm Decision Cheatsheet.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [A]
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 > **适用场景**: 面试准备、算法选型、性能优化
 > **版本**: 通用
 >

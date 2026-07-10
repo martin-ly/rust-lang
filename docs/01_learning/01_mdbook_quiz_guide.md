@@ -3,7 +3,7 @@
 > **EN**: Mdbook Quiz Guide
 > **Summary**: MDBook Quiz 使用指南 Mdbook Quiz Guide. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L1-L2 (记忆/理解)
+> **Bloom 层级**: L1-L2
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]

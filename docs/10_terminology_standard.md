@@ -11,7 +11,7 @@
 > **Summary**: Rust 术语标准化文档 Terminology Standard. (stub/archive redirect)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
-> **Bloom 层级**: L2-L3 (理解/应用)
+> **Bloom 层级**: L2-L3
 > **文档版本**: 1.0.0
 > **创建日期**: 2026-03-17
 > **最后更新**: 2026-06-25（本次复审确认术语定义与 Rust 1.97.0 / FLS 一致）

@@ -4,7 +4,7 @@
 **Summary**: A practical deep dive into the Tokio async runtime: tasks, schedulers, I/O drivers, synchronization primitives, timers, and production patterns.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **Bloom 层级**: L4 应用 → L5 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 通用 Rust 异步概念（Future、async/await、Pin、Waker）请见 [`concept/03_advanced/01_async/`](../../../concept/03_advanced/01_async/)；并发原语请见 [`concept/03_advanced/00_concurrency/`](../../../concept/03_advanced/00_concurrency/)。
 
 ---

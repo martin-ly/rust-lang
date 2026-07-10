@@ -6,7 +6,7 @@
 > **EN**: Cargo Manifest Reference
 > **Summary**: A comprehensive but concise reference of `Cargo.toml` sections and fields, aligned with the Cargo Book Manifest Format.
 > **受众**: [中级 → 高级]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统

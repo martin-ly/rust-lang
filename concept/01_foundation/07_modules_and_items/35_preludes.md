@@ -6,7 +6,7 @@
 > **Summary**: Rust 中自动进入每个模块（Module）作用域的名字集合：标准库 prelude、extern prelude、language prelude、macro_use prelude 与 tool prelude。
 >
 > **受众**: [初学者] / [进阶]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Language semantics
 > **双维定位**: S×Lang — 语言名称解析机制

@@ -6,7 +6,7 @@
 > **EN**: Type Checking and Inference in rustc
 > **Summary**: Explains how rustc checks types via the `typeck` query, generates constraints, and resolves inference variables using equality, subtyping, and region constraints.
 > **受众**: [专家 / 研究者]
-> **Bloom 层级**: 理解 → 分析
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Type — 类型系统（Type System）与形式化方法

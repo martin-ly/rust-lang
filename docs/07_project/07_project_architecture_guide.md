@@ -706,7 +706,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 [dependencies]
 # 异步运行时 {#异步运行时}
 
-> **Bloom 层级**: L4-L5 (分析/评价)
+> **Bloom 层级**: L4-L5
 tokio = { version = "1.0", features = ["full"] }
 
 # 序列化 {#序列化}

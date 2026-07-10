@@ -9,7 +9,7 @@
 > **Summary**: Data Engineering. Guide to 48 Data Engineering.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust 数据工程生态的技术选型与工程权衡
@@ -74,7 +74,7 @@
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
 
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **变更日志**:
 >
 > - v1.0 (2026-05-26): 初始创建——覆盖数据摄取（批处理/流式/CDC）、数据转换（DataFrame/SQL/ETL 管道）、数据存储（Parquet/对象存储/Delta Lake）、数据服务层

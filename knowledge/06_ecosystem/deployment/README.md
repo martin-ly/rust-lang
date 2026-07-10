@@ -2,7 +2,7 @@
 
 > **EN**: Deployment Index
 > **Summary**: Deployment 部署 Deployment Index.
-> **Bloom 层级**: 理解
+> **Bloom 层级**: L2
 > **Rust 应用部署与运维**
 >
 > **受众**: [进阶] / [专家]

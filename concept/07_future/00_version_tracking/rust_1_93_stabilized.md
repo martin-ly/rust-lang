@@ -6,7 +6,7 @@
 >
 > **受众**: [进阶] / [专家]
 > **层级**: L7 未来概念
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **Rust 版本**: 1.93.0+ (历史版本)
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **状态**: 从 `crates/c12_wasm/docs/rust_193_wasm_improvements.md` 迁移整理

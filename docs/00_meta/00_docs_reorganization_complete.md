@@ -4,7 +4,7 @@
 > **Summary**: Docs目录重组完成报告 Docs Reorganization Complete. (stub/archive redirect)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 > **重组日期**: 2026-03-18
 > **状态**: ✅ 完成
 

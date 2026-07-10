@@ -7,7 +7,7 @@
 >
 > **受众**: [初学者] / [进阶]
 > **层级**: L1 基础概念
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **状态**: 从 `crates/c03_control_fn/docs/error_handling_control_flow_1_90.md` 迁移整理

@@ -5,7 +5,7 @@
 >
 > **受众**: [进阶]
 > **定位**：在掌握 L1 基础后，理解 Rust 的模块（Module）化、泛型（Generics）、内存管理和错误处理（Error Handling）等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **对应 L4 形式化**: 类型约束求解 · 参数多态 · 子类型 · 存在类型
 > **来源: [TRPL Ch10](https://doc.rust-lang.org/book/ch10-00-generics.html)** ·

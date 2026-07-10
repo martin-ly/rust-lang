@@ -9,7 +9,7 @@
 >
 > **受众**: [进阶]
 > **层级**: L2 进阶概念
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×App
 > **前置概念**: [Attributes and Declarative Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) · [Modules and Paths](../../01_foundation/07_modules_and_items/11_modules_and_paths.md)
@@ -24,7 +24,7 @@
 
 ---
 
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **变更日志**:
 >
 > - v1.0 (2026-07-04): 初始创建

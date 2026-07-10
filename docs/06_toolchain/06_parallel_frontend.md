@@ -10,7 +10,7 @@
 > **定理链编号**: T-030 单态化（Monomorphization）正确性 → 并行语义保持
 > **层级**: L6 生态工具
 > **前置概念**: [Cargo](../../concept/06_ecosystem/00_toolchain/01_toolchain.md) · [Build Systems](../../07_future)
-> **Bloom 层级**: 应用
+> **Bloom 层级**: L3
 > **[Rust Compiler Team](https://www.rust-lang.org/governance/teams/compiler)** · **[rustc_parallel_frontend 跟踪 Issue](https://github.com/rust-lang/rust/issues/48685)** ·
 > **[Rust Compiler Development Guide](https://rustc-dev-guide.rust-lang.org/)** · **[Nicholas Nethercote - How to Speed Up the Rust Compiler](https://nnethercote.github.io/2022/10/27/how-to-speed-up-the-rust-compiler-in-october-2022.html)** ✅ ·
 > **来源: [Wikipedia - Parallel Computing](https://en.wikipedia.org/wiki/Parallel_Computing)** · **来源: [Wikipedia - Compiler Optimization](https://en.wikipedia.org/wiki/Compiler_Optimization)** ·
@@ -170,7 +170,7 @@ lto = "fat"                  # 链接时优化
 > **权威来源**: [Rust Compiler Team](https://github.com/rust-lang/compiler-team), [rustc_parallel_frontend](https://github.com/rust-lang/rust/issues/107374)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.97.0+ Nightly
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 初版完成
 

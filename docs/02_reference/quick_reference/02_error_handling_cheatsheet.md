@@ -3,7 +3,7 @@
 > **EN**: Error Handling Cheatsheet
 > **Summary**: ⚠️ Rust 错误处理速查卡 Error Handling Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L2-L3 (理解/速查)
+> **Bloom 层级**: L2-L3
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]

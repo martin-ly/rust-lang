@@ -14,7 +14,7 @@
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [RFCs](https://github.com/rust-lang/rfcs)
 ---
 
-> **Bloom 层级**: 理解 → 分析
+> **Bloom 层级**: L2-L4
 
 ## 一、核心命题
 

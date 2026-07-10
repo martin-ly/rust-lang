@@ -2,7 +2,7 @@
 > **Summary**: Authoritative concept page for `syn & quote 完整参考`. Content migrated from `crates/c11_macro_system_proc/docs/tier_03_references/03_syn_quote_reference.md`.
 > **受众**: [专家]
 > **内容分级**: [参考级]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: S×App — 应用 syn/quote API

@@ -3,7 +3,7 @@
 > **EN**: Workflow Theory
 > **Summary**: 14. 工作流理论与形式化模型 Workflow Theory.
 > **分级**: [A]
-> **Bloom 层级**: L3-L4 (应用/分析)
+> **Bloom 层级**: L3-L4
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.97.0+ (Edition 2024)

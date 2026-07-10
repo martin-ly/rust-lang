@@ -3,7 +3,7 @@
 > **EN**: Design Patterns Usage Guide
 > **Summary**: 设计模式使用指南 Design Patterns Usage Guide. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L3-L4 (应用/分析)
+> **Bloom 层级**: L3-L4
 >
 > **层次定位**: L2-L6 进阶-生态 / 设计模式应用
 > **前置依赖**: [concept L2 Trait](../../concept/02_intermediate/00_traits/01_traits.md) · docs 最佳实践

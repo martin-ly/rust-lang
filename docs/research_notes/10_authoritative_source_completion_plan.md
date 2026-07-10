@@ -5,7 +5,7 @@
 > **概念族**: 权威来源对齐 / 补全计划
 > **内容分级**: [核心级]
 > **层级**: L0-L7
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)

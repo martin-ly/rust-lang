@@ -3,7 +3,7 @@
 > **EN**: Completion Status
 > **Summary**: 项目完成度矩阵 Completion Status.
 > **分级**: [A]
-> **Bloom 层级**: L4-L5 (分析/评价)
+> **Bloom 层级**: L4-L5
 > **定位**: 全项目模块（Module）与文档完成状态单一真相源
 > **最后更新**: 2026-05-08
 > **更新频率**: 每轮扩展后同步

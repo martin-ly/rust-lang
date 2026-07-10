@@ -2,7 +2,7 @@
 > **Summary**: Authoritative concept page for `03 Websocket Realtime Communication`. Content migrated from `crates/c10_networks/docs/tier_02_guides/03_websocket_realtime_communication.md`.
 > **受众**: [进阶]
 > **内容分级**: [参考级]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: A×App — WebSocket 实时通信应用
@@ -16,7 +16,7 @@
 
 > **文档版本**: v1.0.0
 > **最后更新**: 2025-12-11
-> **Rust 版本**: 1.97.0+
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **预计阅读**: 35 分钟
 
 ---

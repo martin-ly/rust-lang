@@ -21,7 +21,7 @@
 > [L4 类型论](../../04_formal/00_type_theory/02_type_theory.md) ·
 > [L6 设计模式](../../06_ecosystem/03_design_patterns/02_patterns.md)
 > **跨层映射**: L2→L4 Trait ↔ 类型类 (Type Class) | L2→L3 Send/Sync Trait
-> **定理链编号**: T-020 特质一致性（Coherence） → T-021 孤儿规则（Orphan Rule）完备性 → T-022 关联类型规范化
+> **定理链编号**: T-200 特质一致性（Coherence） → T-201 孤儿规则（Orphan Rule）完备性 → T-202 关联类型规范化
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) ·
 > [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
@@ -41,7 +41,7 @@
 > **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
 
 ---
-> **Bloom 层级**: 应用 → 分析 → 评价
+> **Bloom 层级**: L3-L5
 **变更日志**:
 
 - v2.3 (2026-05-14): 深化 Const Trait（impl const Trait vs ~const 区别、macro_rules! 替代方案）、

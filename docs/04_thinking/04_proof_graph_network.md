@@ -3,7 +3,7 @@
 > **EN**: Proof Graph Network
 > **Summary**: Rust 证明图网 Proof Graph Network. (stub/archive redirect)
 > **分级**: [B]
-> **Bloom 层级**: L4-L5 (分析/评价)
+> **Bloom 层级**: L4-L5
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.97.0+ (Edition 2024)

@@ -7,7 +7,7 @@
 > **分级**: [A]
 > **Rust 版本**: 1.97.0+ Stable
 > **跟踪 Issue**: rust#108099
-> **Bloom 层级**: 应用
+> **Bloom 层级**: L3
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** ·
 > **[RFC 未正式发布，社区长期需求](https://github.com/rust-lang/rfcs/pulls)** ·
 > **来源: [Rust Reference - Patterns](https://doc.rust-lang.org/reference/)** ·

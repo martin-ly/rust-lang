@@ -8,7 +8,7 @@
 > **Summary**: Microservice Patterns: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 创造
+> **Bloom 层级**: L3-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计微服务架构

@@ -7,7 +7,7 @@
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [NLL RFC](https://rust-lang.github.io/rfcs/2094-nll.html)
 > **创建日期**: 2026-02-10
 > **最后更新**: 2026-06-29

@@ -3,7 +3,7 @@
 > **EN**: Learning Path Planning
 > **Summary**: 学习路径规划文档 Learning Path Planning. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L1-L2 (记忆/理解)
+> **Bloom 层级**: L1-L2
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]

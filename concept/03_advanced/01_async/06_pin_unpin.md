@@ -8,7 +8,7 @@
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Pin/Unpin](../../../knowledge/03_advanced/async)
 > **受众**: [专家]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Pin 不动性对自引用（Reference）的必要性

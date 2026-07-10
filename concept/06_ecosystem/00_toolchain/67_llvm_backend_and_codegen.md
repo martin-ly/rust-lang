@@ -6,7 +6,7 @@
 > **EN**: LLVM Backend and Code Generation in rustc
 > **Summary**: Explains how rustc lowers MIR to LLVM IR, forms codegen units, uses target specifications, and performs LTO; also covers alternative backends like Cranelift and GCC.
 > **受众**: [专家 / 研究者]
-> **Bloom 层级**: 理解 → 分析
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Inf — 编译器后端基础设施

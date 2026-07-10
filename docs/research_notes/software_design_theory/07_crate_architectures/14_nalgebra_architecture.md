@@ -19,7 +19,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **分级**: [B]
-> **Bloom 层级**: L3 (高级应用) / L4 (数值计算类型系统（Type System）)
+> **Bloom 层级**: L3-L4
 > **目标读者**: 已掌握 Rust 泛型（Generics）与 trait 系统，从事科学计算、图形学或机器学习基础设施的开发者
 > [nalgebra 官方文档](https://docs.rs/nalgebra/latest/nalgebra/)(<https://docs.rs/nalgebra/latest/nalgebra/>)
 > [ndarray 官方文档](https://docs.rs/ndarray/latest/ndarray/)(<https://docs.rs/ndarray/latest/ndarray/>)

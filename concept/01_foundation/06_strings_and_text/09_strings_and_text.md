@@ -11,7 +11,7 @@
 >
 > 本主题在 knowledge 中有系统化的知识索引：[字符串与文本](../../../knowledge/02_intermediate/05_strings.md)
 > **受众**: [初学者]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用字符串处理和编码知识
@@ -23,6 +23,9 @@
 > 编码约束、格式化宏（format!/write!）的类型安全设计，以及与 C 字符串、OS 字符串的互操作。
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Type System](../02_type_system/04_type_system.md)
 > **后置概念**: [Collections](../05_collections/08_collections.md) · [FFI](../../03_advanced/04_ffi/05_rust_ffi.md)
+
+> **Rust 1.97.0 变更提示**：
+> Rust 1.97.0 将 `char::is_control` 稳定为 `const fn`，详见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
 
 ---
 

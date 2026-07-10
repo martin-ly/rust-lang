@@ -8,7 +8,7 @@
 >
 > **受众**: [专家]
 > **层级**: L3 高级概念
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 评估与优化生成代码质量
 > **前置概念**: [过程宏（Procedural Macro）](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) · [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md)

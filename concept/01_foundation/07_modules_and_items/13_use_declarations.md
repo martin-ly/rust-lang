@@ -5,7 +5,7 @@
 > **EN**: Use Declarations
 > **Summary**: Use declarations: how Rust brings paths into scope, including `use`, `pub use`, nested imports, globs, re-exports, and visibility interplay.
 > **受众**: [初学者]
-> **Bloom 层级**: 记忆 → 理解 → 应用
+> **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: F×App — 掌握模块（Module）路径的引入与重导出机制

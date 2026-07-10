@@ -8,7 +8,7 @@
 >
 > **受众**: [专家]
 > **层级**: L3 高级概念
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评估宏（Macro）库工程实践
 > **前置概念**: [过程宏（Procedural Macro）](07_proc_macro.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) · [Cargo 注册表与包发布](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md)

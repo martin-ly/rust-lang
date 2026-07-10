@@ -27,7 +27,7 @@
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 ---
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 
 ## 一、核心命题
@@ -565,7 +565,7 @@ pub struct CDrawable {
 > [Rust Foundation Interop Initiative](https://github.com/rustfoundation/interop-initiative)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.90.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — C/C++ 工程层对比
 

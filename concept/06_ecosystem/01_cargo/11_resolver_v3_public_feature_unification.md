@@ -5,7 +5,7 @@
 > **EN**: Resolver v3 and `public = true` Feature-Unification Demo
 > **Summary**: A runnable workspace example showing how Cargo resolver v3 and `public = true` interact with feature unification: crate A depends on B and C; B and C publicly depend on D with different features; A also depends on D directly. The resulting `crate-d` is built with the union of all requested features.
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — Cargo 工具链与生态系统

@@ -2,7 +2,7 @@
 > **Summary**: Authoritative concept page for `Rust 1.90 网络特性参考`. Content migrated from `crates/c10_networks/docs/tier_03_references/03_rust_190_networking_features_reference.md`.
 > **受众**: [进阶]
 > **内容分级**: [参考级]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: A×Ref — 版本特性参考

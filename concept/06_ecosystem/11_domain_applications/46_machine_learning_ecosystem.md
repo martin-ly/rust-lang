@@ -8,7 +8,7 @@
 > **Summary**: Machine Learning Ecosystem. Guide to 46 Machine Learning Ecosystem.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust ML 生态的技术选型与工程权衡
@@ -78,7 +78,7 @@
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
 
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **变更日志**:
 >
 > - v1.0 (2026-05-26): 初始创建——覆盖深度学习框架（candle/burn/tch-rs/ort）、传统 ML（linfa/smartcore）、数据科学（polars/arrow/datafusion）、模型部署与推理优化

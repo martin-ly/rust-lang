@@ -80,7 +80,7 @@ extern "C" {
 ```bash
 # 优化级别 {#优化级别}
 
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 rustc -C opt-level=0    # 无优化（调试）
 rustc -C opt-level=3    # 最大优化
 rustc -C opt-level=s    # 优化大小

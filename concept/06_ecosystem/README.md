@@ -6,7 +6,7 @@
 > **内容分级**: [综述级]
 > **受众**: [进阶]
 > **定位**：Rust 的工程实践、工具链、设计模式和生态协作机制。本层是 L1-L5 知识的**工程化落地**，将理论转化为可维护、可扩展的代码库。
-> **Bloom 层级**: 应用 + 评价
+> **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **功能**: 将概念知识转化为**工程能力**
 > **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)** · **来源: [crates.io](https://crates.io/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)**

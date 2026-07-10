@@ -2,7 +2,7 @@
 
 > **EN**: Start Index
 > **Summary**: 00 - 开始学习 Rust Start Index.
-> **Bloom 层级**: 理解
+> **Bloom 层级**: L2
 > **从这里开始你的 Rust 之旅**
 >
 > **受众**: [初学者] / [进阶]

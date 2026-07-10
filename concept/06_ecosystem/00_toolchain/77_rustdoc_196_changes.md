@@ -5,7 +5,7 @@
 > **EN**: Rustdoc 1.96 Changes
 > **Summary**: Rustdoc changes stabilized in Rust 1.96, including `target.'cfg(..)'.rustdocflags` configuration, deprecation rendering improvements, sidebar navigation enhancements, and `missing_doc_code_examples` lint updates.
 > **受众**: [进阶 / 工程]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Process / Platform
 > **双维定位**: P×App — 应用 Rustdoc 1.96 变更生成高质量 crate 文档

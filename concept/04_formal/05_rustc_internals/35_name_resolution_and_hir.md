@@ -6,7 +6,7 @@
 > **EN**: Name Resolution and HIR in rustc
 > **Summary**: Explains rustc's two-phase name resolution, namespaces and ribs, AST-to-HIR lowering, and the key identifiers (`DefId`, `HirId`, `BodyId`) used in the HIR.
 > **受众**: [专家 / 研究者]
-> **Bloom 层级**: 理解 → 分析
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Inf — 编译器前端基础设施

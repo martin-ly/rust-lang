@@ -6,7 +6,7 @@
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 > **权威来源**:
 >
 > [RustBelt](https://plv.mpi-sws.org/rustbelt/) |

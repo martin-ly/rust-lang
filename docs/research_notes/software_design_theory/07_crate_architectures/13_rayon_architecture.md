@@ -19,7 +19,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **分级**: [B]
-> **Bloom 层级**: L3 (高级应用) / L4 (并行计算原理)
+> **Bloom 层级**: L3-L4
 > **目标读者**: 已掌握 Rust 迭代器（Iterator）与闭包（Closures），希望利用数据并行加速计算的开发者
 > [Rayon 官方文档](https://docs.rs/rayon/latest/rayon/)(<https://docs.rs/rayon/latest/rayon/>)
 > [Rust Reference — Closure types](https://doc.rust-lang.org/reference/types/closure.html)(<https://doc.rust-lang.org/reference/types/closure.html>)

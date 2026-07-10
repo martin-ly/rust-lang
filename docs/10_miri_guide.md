@@ -4,7 +4,7 @@
 > **Summary**: Miri 使用指南 Miri Guide.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
-> **Bloom 层级**: L2-L3 (理解/应用)
+> **Bloom 层级**: L2-L3
 
 本文档介绍如何在项目中使用 Miri 进行内存安全（Memory Safety）测试。
 

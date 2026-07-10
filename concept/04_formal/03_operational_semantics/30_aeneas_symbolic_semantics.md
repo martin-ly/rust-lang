@@ -7,7 +7,7 @@
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Aeneas](https://github.com/AeneasVerif/aeneas)、[Coq](https://coq.inria.fr/)、[Lean](https://lean-lang.org/)。
 >
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价符号化语义对借用（Borrowing）检查声音性证明的假设边界

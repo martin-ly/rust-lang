@@ -13,7 +13,7 @@
 > **主要来源**: [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) · [POSA](https://en.wikipedia.org/wiki/Pattern-Oriented_Software_Architecture) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 ---
 
-> **Bloom 层级**: 理解 → 分析 → 评价
+> **Bloom 层级**: L2-L5
 
 ## 一、核心命题
 

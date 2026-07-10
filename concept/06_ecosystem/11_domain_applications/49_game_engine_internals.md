@@ -9,7 +9,7 @@
 > **Summary**: Game Engine Internals. Guide to 49 Game Engine Internals.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 游戏引擎核心系统的架构设计与实现权衡
@@ -79,7 +79,7 @@
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **变更日志**:
 >
 > - v1.0 (2026-05-26): 初始创建——覆盖引擎架构（主循环/子系统）、渲染管线（wgpu/Vulkan）、物理引擎（Rapier）、音频系统、资源管理、网络同步

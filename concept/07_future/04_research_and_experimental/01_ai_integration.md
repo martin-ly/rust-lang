@@ -21,7 +21,7 @@
 
 ---
 
-> **Bloom 层级**: 分析 → 创造
+> **Bloom 层级**: L4-L6
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本
@@ -236,7 +236,7 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 
 ---
 
-> **Bloom 层级**: 分析 → 创造
+> **Bloom 层级**: L4-L6
 > **[Compiler-assisted AI / RL on Compiler Feedback](https://arxiv.org/) · [PLDI](https://www.sigplan.org/Conferences/PLDI/) / ICML / NeurIPS Papers** 强化学习（RL）在编译器错误修复中的应用，本质上是将编译器视为一个**确定性环境**（deterministic environment）：给定源代码输入，编译器输出结构化诊断反馈，这种反馈可作为 RL agent 的密集奖励信号。与传统监督学习依赖大量标注数据不同，RL 通过"生成-编译-修复"的迭代循环自主学习修复策略。✅
 
 ### 6.1 研究背景与问题定义
@@ -759,7 +759,7 @@ fn correct_fix(s: &str) -> String {
 > [RustRepair-RL, ETH Zurich, 2024]
 >
 > **文档版本**: 2.0
-> **对应 Rust 版本**: 1.90.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 深度重写完成 — 删除产品罗列，增加机制剖析、反例与边界测试、定理分级标注
 

@@ -15,7 +15,7 @@
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
-> **Bloom 层级**: 分析 → 评价 → 创造
+> **Bloom 层级**: L4-L6
 
 **变更日志**:
 

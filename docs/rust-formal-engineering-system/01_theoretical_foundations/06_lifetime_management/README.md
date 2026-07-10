@@ -3,7 +3,7 @@
 > **EN**: Lifetime Management Index
 > **Summary**: 生命周期（Lifetimes）管理理论 Lifetime Management Index. (stub/archive redirect)
 > **分级**: [B]
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
 > **Rust 版本**: 1.97.0+ (Edition 2024)

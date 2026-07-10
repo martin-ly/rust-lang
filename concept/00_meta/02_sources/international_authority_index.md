@@ -5,7 +5,7 @@
 > **EN**: International Authority Index
 > **Summary**: A curated, categorized index of authoritative international sources for Rust: official docs, academic formalization, industrial ecosystems, standards bodies, and cross-language references.
 > **受众**: [研究者 / 进阶]
-> **Bloom 层级**: 理解 → 分析
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 为每个 Rust 概念提供可验证的国际权威来源映射

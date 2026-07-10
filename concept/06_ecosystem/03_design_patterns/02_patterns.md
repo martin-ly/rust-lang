@@ -19,7 +19,7 @@
 > **说明**: 本文档包含可直接编译的标准库示例（`rust`）、依赖外部 crate 或仅为示意的代码片段（`rust,ignore`），以及故意展示编译失败的边界测试（`rust,compile_fail`）。
 ---
 
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本
@@ -957,7 +957,7 @@ fn load(path: &str) -> Result<Config, Error> {
 
 ## 五、反模式（Anti-patterns）
 
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 
 反模式是"看似正确、实则有害"的惯用做法。Rust 的类型系统（Type System）与所有权模型在消除某些经典反模式（如悬空指针、数据竞争）的同时，也催生了特有的抽象陷阱——过度使用泛型（Generics）、过早拆分模块（Module）、`Rc<RefCell<...>>` 迷宫等。以下从工程直觉到成本分析，建立反模式的识别框架。
 
@@ -965,7 +965,7 @@ fn load(path: &str) -> Result<Config, Error> {
 
 ### 5.1 Over-engineering（过度工程）
 
-> **Bloom 层级**: 分析
+> **Bloom 层级**: L4
 
 **定义**：为应对不太可能出现的需求而引入不必要的抽象层次，导致代码复杂度远超实际需要。[Rust Design Patterns — Gold Plating](https://rust-unofficial.github.io/patterns/anti_patterns/gold_plating.html)
 
@@ -1022,7 +1022,7 @@ fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> 
 
 ### 5.2 Premature abstraction（过早抽象）
 >
-> **Bloom 层级**: 分析
+> **Bloom 层级**: L4
 
 **定义**：在问题域尚未稳定、需求尚不清晰时建立抽象边界，导致后续修改牵一发而动全身。来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
@@ -1085,7 +1085,7 @@ impl Transport {
 
 ### 5.3 Stringly typed（字符串类型化）
 >
-> **Bloom 层级**: 应用
+> **Bloom 层级**: L3
 
 **定义**：使用字符串替代强类型来表示结构化数据或枚举（Enum）状态，丧失编译期检查能力。来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
@@ -1133,7 +1133,7 @@ fn run_command(cmd: Command) {
 
 ### 5.4 God Object（上帝对象）
 
-> **Bloom 层级**: 分析
+> **Bloom 层级**: L4
 
 **定义**：一个对象或结构体（Struct）掌握了过多职责和状态，成为系统中所有操作的中心枢纽，违反单一职责原则。来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
@@ -1190,7 +1190,7 @@ async fn handler(db: &DatabaseLayer, sessions: &SessionLayer) { /* ... */ }
 
 ### 5.5 Spaghetti Code（意大利面条式代码）
 >
-> **Bloom 层级**: 分析
+> **Bloom 层级**: L4
 
 **定义**：控制流和数据流纠缠不清，模块间依赖关系呈网状而非树状，导致理解局部代码必须遍历全局系统。来源: [Wikipedia — Spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code)
 

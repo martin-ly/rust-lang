@@ -6,7 +6,7 @@
 > **EN**: Derivable Traits
 > **Summary**: 标准库中可通过 `#[derive(...)]` 自动实现的 trait 参考：行为、默认实现语义、对字段类型的要求及典型使用场景。
 > **受众**: [初学者] / [中级]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Language semantics
 > **双维定位**: S×Lang — 语言标准库约定

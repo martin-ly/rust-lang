@@ -7,7 +7,7 @@
 > **EN**: Cargo Build Scripts (`build.rs`)
 > **Summary**: A comprehensive guide to `build.rs`: when it runs, how to pass `cfg`/env vars to the main crate, how to link native libraries, and common pitfalls.
 > **受众**: [进阶 / 工程]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: T×Ops — 工具链与运维构建

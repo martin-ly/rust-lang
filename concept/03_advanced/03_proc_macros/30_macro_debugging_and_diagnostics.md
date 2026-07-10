@@ -8,7 +8,7 @@
 >
 > **受众**: [专家]
 > **层级**: L3 高级概念
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: P×App — 宏（Macro）调试与错误诊断流程
 > **前置概念**: [过程宏（Procedural Macro）](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)

@@ -1,9 +1,25 @@
 # c10_networks 教程和最佳实践指南
 
-> **权威来源**: [Networking](../../concept/06_ecosystem/04_web_and_networking)
-> **文档类型**: 代码示例与实践项目（crate-specific）
+**EN**: C10 Networks Tutorials and Best Practices
+**Summary**: Crate-specific runnable examples and best practices for the `c10_networks` crate; general Rust networking concepts are linked to `concept/` authority pages.
 
-本文件包含与 `Networking` 相关的可运行代码示例、练习项目和实战代码。通用概念解释请查阅上方权威来源；此处仅保留 crate 级别的示例实现与学习活动。
+> **权威来源**: 本文件保留 `c10_networks` crate 独有的代码示例与实践项目；通用 Rust 网络编程概念请见：
+> [`concept/06_ecosystem/09_networking/06_networking_basics.md`](../../../../concept/06_ecosystem/09_networking/06_networking_basics.md)
+>
+> 根据 [AGENTS.md](../../../../AGENTS.md) §2 Canonical 规则与 §6.4 `crates/` 治理规则，
+> 通用 Rust 概念解释统一维护在 `concept/` 中；本文件仅保留与本 crate 直接相关的可运行示例、配置与操作步骤。
+
+## 通用概念导航
+
+| 主题 | 权威来源 |
+| :--- | :--- |
+| 网络编程基础 | [`concept/06_ecosystem/09_networking/06_networking_basics.md`](../../../../concept/06_ecosystem/09_networking/06_networking_basics.md) |
+| Rust 网络编程快速入门 | [`concept/06_ecosystem/09_networking/04_network_programming_quick_start.md`](../../../../concept/06_ecosystem/09_networking/04_network_programming_quick_start.md) |
+| 高级网络协议 | [`concept/06_ecosystem/09_networking/01_advanced_network_protocols.md`](../../../../concept/06_ecosystem/09_networking/01_advanced_network_protocols.md) |
+| 自定义协议实现 | [`concept/06_ecosystem/09_networking/03_custom_protocol_implementation.md`](../../../../concept/06_ecosystem/09_networking/03_custom_protocol_implementation.md) |
+| 网络安全 | [`concept/06_ecosystem/09_networking/02_network_security.md`](../../../../concept/06_ecosystem/09_networking/02_network_security.md) |
+| 异步编程 | [`concept/03_advanced/01_async/02_async.md`](../../../../concept/03_advanced/01_async/02_async.md) |
+| 并发模型 | [`concept/03_advanced/00_concurrency/01_concurrency.md`](../../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
 
 ---
 

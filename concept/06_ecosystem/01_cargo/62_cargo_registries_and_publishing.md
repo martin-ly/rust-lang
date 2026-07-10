@@ -6,7 +6,7 @@
 > **EN**: Cargo Registries and Publishing
 > **Summary**: Explains how Cargo registries work, the sparse vs git index protocols, publishing workflow, yank/owner commands, authentication, and private registry setup.
 > **受众**: [中级 → 高级]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统

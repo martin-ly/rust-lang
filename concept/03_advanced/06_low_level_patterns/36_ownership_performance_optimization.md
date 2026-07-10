@@ -6,7 +6,7 @@
 > **EN**: Ownership Performance Optimization
 > **Summary**: Optimize Rust performance through ownership-aware patterns: avoid clones, use Cow, optimize memory layout, zero-copy parsing, and leverage move semantics.
 > **受众**: [专家]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **定位**: 从所有权（Ownership）视角出发，系统梳理避免不必要拷贝、使用写时复制、优化内存布局、零拷贝解析与移动语义的最佳实践。

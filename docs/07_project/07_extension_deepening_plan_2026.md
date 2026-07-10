@@ -3,7 +3,7 @@
 > **EN**: Extension Deepening Plan 2026
 > **Summary**: Rust 学习项目 100% 完成度扩展与深化计划 Extension Deepening Plan 2026.
 > **分级**: [A]
-> **Bloom 层级**: L4-L5 (分析/评价)
+> **Bloom 层级**: L4-L5
 > **创建日期**: 2026-02-28
 > **目标日期**: 2026-03-31
 > **当前完成度**: 88%

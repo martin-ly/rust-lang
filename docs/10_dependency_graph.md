@@ -4,7 +4,7 @@
 > **Summary**: 依赖关系图 Dependency Graph.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
-> **Bloom 层级**: L2-L3 (理解/应用)
+> **Bloom 层级**: L2-L3
 > **最后更新**: 2026-04-10
 > **版本**: 基于 Cargo.toml 解析
 

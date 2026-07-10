@@ -3,7 +3,7 @@
 > **EN**: Smart Pointers Cheatsheet
 > **Summary**: 🎯 Rust 智能指针（Smart Pointer）速查卡 Smart Pointers Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L2-L3 (理解/速查)
+> **Bloom 层级**: L2-L3
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]

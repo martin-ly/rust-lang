@@ -9,7 +9,7 @@
 > **Summary**: Distributed Consensus. Guide to 50 Distributed Consensus.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价分布式共识算法的安全性、活性与工程实现权衡
@@ -80,7 +80,7 @@
     - [分布式数据结构](#分布式数据结构)
     - [分布式计算模型](#分布式计算模型)
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **变更日志**:
 >
 > - v1.0 (2026-05-26): 初始创建——覆盖共识形式化定义、FLP 不可能性、Paxos/Multi-Paxos、Raft、PBFT/HotStuff/Tendermint、Rust 实现、选型决策树

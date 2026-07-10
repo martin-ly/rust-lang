@@ -24,9 +24,13 @@
 > **后置概念**: [CI/CD Integration]
 > **主要来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Rustup Documentation] · [Clippy Documentation] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+
+> **Rust 1.97.0 变更提示**：
+> Rust 1.97.0 引入 `build.warnings` 配置与 `linker_messages` lint，详情见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
+
 ---
 
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本

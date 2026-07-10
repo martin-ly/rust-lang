@@ -4,7 +4,7 @@
 > **Summary**: Cargo 编译速度优化指南 Cargo Build Optimization.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
-> **Bloom 层级**: L2-L3 (理解/应用)
+> **Bloom 层级**: L2-L3
 
 > **权威来源**: [concept/06_ecosystem/01_cargo/87_build_std.md](../concept/06_ecosystem/01_cargo/87_build_std.md)
 > 本指南保留编译优化实践与脚本示例，完整概念解释请参阅 `concept/` 权威页。

@@ -2,7 +2,7 @@
 
 > **EN**: Reference Index
 > **Summary**: 05 - 参考文档 Reference Index.
-> **Bloom 层级**: 理解
+> **Bloom 层级**: L2
 > **快速查阅和参考资料**
 >
 > **受众**: [初学者] / [进阶]

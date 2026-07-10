@@ -2,7 +2,7 @@
 > **Summary**: Authoritative concept page for `01 Networking Basics Practice`. Content migrated from `crates/c10_networks/docs/tier_02_guides/01_networking_basics_practice.md`.
 > **受众**: [初学者]
 > **内容分级**: [综述级]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: A×Mem — 网络编程基础
@@ -16,7 +16,7 @@
 
 > **文档版本**: v1.0.0
 > **最后更新**: 2025-12-11
-> **Rust 版本**: 1.97.0+
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **预计阅读**: 45 分钟
 
 ---

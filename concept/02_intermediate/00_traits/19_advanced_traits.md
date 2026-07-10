@@ -7,7 +7,7 @@
 > **Summary**: Traits. Core Rust concept covering mechanism analysis, in-depth analysis, generic programming.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 GATs 和 HRTB 的类型系统（Type System）扩展

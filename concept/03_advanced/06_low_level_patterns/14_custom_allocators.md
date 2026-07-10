@@ -5,7 +5,7 @@
 > **EN**: Custom Allocators
 > **Summary**: Custom Allocators: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 深入探讨 Rust 的**自定义分配器**机制——从 `GlobalAlloc` Trait 到 `allocator_api` 不稳定特性，分析内存布局对齐、分配策略与性能优化。
 > **前置概念**: [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Unsafe Rust](../02_unsafe/03_unsafe.md)

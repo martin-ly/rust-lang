@@ -10,7 +10,7 @@
 > **EN**: Security Practices
 > **Summary**: Security Practices. Core Rust concept covering practical examples, memory safety and UB prevention, testing and verification.
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估安全实践和审计策略

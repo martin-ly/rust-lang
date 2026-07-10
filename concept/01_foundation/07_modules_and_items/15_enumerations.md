@@ -5,7 +5,7 @@
 > **EN**: Enumerations
 > **Summary**: Enumerations: Rust's tagged unions with variants carrying data, covering variant types, `Option<T>`, `Result<T, E>`, pattern matching, and `#[non_exhaustive]`.
 > **受众**: [初学者]
-> **Bloom 层级**: 记忆 → 理解 → 应用
+> **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: F×App — 掌握枚举（Enum）作为带标签联合类型的表达力

@@ -3,7 +3,7 @@
 > **EN**: Cross Module Learning Roadmap 2025 10 25
 > **Summary**: 跨模块学习路线图 Cross Module Learning Roadmap 2025 10 25.
 > **分级**: [A]
-> **Bloom 层级**: L1-L2 (记忆/理解)
+> **Bloom 层级**: L1-L2
 > **报告日期**: 2025-10-25
 > **最后更新**: 2026-05-08
 >

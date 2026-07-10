@@ -4,7 +4,7 @@
 > **Summary**: Miri 集成总结报告 Miri Integration Summary.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
-> **Bloom 层级**: L2-L3 (理解/应用)
+> **Bloom 层级**: L2-L3
 
 ## 📑 目录 {#目录}
 >

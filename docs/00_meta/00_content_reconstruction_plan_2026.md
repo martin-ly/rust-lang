@@ -12,7 +12,7 @@
 > **EN**: Content Reconstruction Plan 2026
 > **Summary**: Rust 知识体系内容重构总体规划 Content Reconstruction Plan 2026. (stub/archive redirect)
 > **分级**: [B]
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 > **战略定位**: 双轨并行 —— 核心知识体系深度重构 + safety_critical 专项持续演进
 > **版本**: Rust 1.97.0+ | Edition 2024
 > **规划日期**: 2026-05-09

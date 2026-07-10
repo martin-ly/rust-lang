@@ -11,7 +11,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：宏（Macro）模式
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 深入分析 Rust **宏（Macro）的工程模式**——从 DRY 代码生成、API 设计到编译期计算，揭示如何在不牺牲可读性的前提下利用宏提升代码复用和类型安全。
 > **前置概念**: [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) · [Traits](../00_traits/01_traits.md)

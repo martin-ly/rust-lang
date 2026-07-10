@@ -390,7 +390,7 @@ impl UringReactor {
 ```
 
 > **[tokio-rs/tokio-uring 设计文档](https://github.com/tokio-rs/tokio-uring)** io_uring 的 `user_data` 字段天然适合存储 Waker 标识，避免了 epoll 的 fd→Waker HashMap 查找开销。但 io_uring 的共享环设计对线程安全提出更高要求——Waker 的 `wake` 需是线程安全的（`Send + Sync`），因为完成事件可能在任意 CPU 核心上产生。
-> **Bloom 层级**: 分析 —— 理解 Waker 与 OS 的交互边界，是手写 Future 和自定义运行时（Runtime）的必要知识。
+> **Bloom 层级**: L2-L4
 
 ---
 
@@ -616,7 +616,7 @@ where
 
 **`StreamExt` 常用组合子**
 
-> **Bloom 层级**: 应用 —— 掌握组合子是构建异步数据管道的工程技能。
+> **Bloom 层级**: L3
 
 | **组合子** | **签名** | **语义** | **类比 Iterator** |
 |:---|:---|:---|:---|
@@ -779,7 +779,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 
 **何时选择哪种：API 边界 vs 内部实现**
 
-> **Bloom 层级**: 分析/评价 —— 根据场景权衡抽象与性能。
+> **Bloom 层级**: L4-L5
 
 | **场景** | **推荐** | **理由** |
 |:---|:---|:---|
@@ -1060,7 +1060,7 @@ mod tests {
 }
 ```
 
-> **Bloom 层级**: 应用 —— 使用 loom 验证并发原语是生产级 Rust 并发编程的标准实践。
+> **Bloom 层级**: L3
 > **交叉链接**: 内存序模型见 [../02_intermediate/00_traits/01_traits.md](../../02_intermediate/00_traits/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/02_unsafe/03_unsafe.md](../02_unsafe/03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
 
 ### 8.13 Miri 动态验证：async 状态机的内存安全检测

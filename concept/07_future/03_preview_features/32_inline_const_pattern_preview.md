@@ -11,7 +11,7 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 应用 const 块于模式匹配（Pattern Matching）

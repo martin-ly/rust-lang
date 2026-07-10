@@ -19,7 +19,7 @@
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 >
 > **分级**: [B]
-> **Bloom 层级**: L3 (高级应用) / L4 (框架原理)
+> **Bloom 层级**: L3-L4
 > **目标读者**: 已掌握 Rust 异步（Async）编程与 Web 开发基础，希望深入理解 Actix-web 内部架构的开发者
 > [Actix-web 官方文档](https://actix.rs/)(<https://actix.rs/docs/>)
 > [Actix actor 框架文档](https://actix.rs/)(<https://actix.rs/>)

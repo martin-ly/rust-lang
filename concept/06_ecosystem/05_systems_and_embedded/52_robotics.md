@@ -8,7 +8,7 @@
 > **EN**: Robotics
 > **Summary**: Robotics: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 在机器人全栈中的适用性、实时约束满足度与 ROS2 集成成熟度
@@ -95,7 +95,7 @@
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **变更日志**:
 >
 > - v1.0 (2026-05-26): 初始创建——覆盖机器人软件栈、ROS2 架构、Rust 生态（rclrs/safe_drive/DDS）、实时执行器、传感器融合、控制理论、反命题树与边界测试

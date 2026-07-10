@@ -12,7 +12,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：[Web 框架](../../../content/ecosystem/deep_dives/01_axum_deep_dive.md)
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 Web 框架模式

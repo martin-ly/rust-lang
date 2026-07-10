@@ -4,7 +4,7 @@
 > **Summary**: Foundation concepts: ownership, borrowing, lifetimes, and the type system.
 > **受众**: [初学者]
 > **定位**：Rust 最核心的基础性概念，是所有进阶内容的**必要前提**。本层内容对齐 TRPL 第 3-10 章、Wikipedia 核心词条、Stanford/CMU 基础课程。
-> **Bloom 层级**: 记忆 → 理解
+> **Bloom 层级**: L1-L2
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **对应 L4 形式化**: 线性逻辑 ⊗ · 分离逻辑 · 区域类型系统（Type System） · 代数类型论
 > **来源: [TRPL Ch3](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)** ·

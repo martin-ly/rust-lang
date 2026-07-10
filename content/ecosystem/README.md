@@ -3,7 +3,7 @@
 **EN**: Rust Ecosystem Topics
 **Summary**: Index of in-depth Rust ecosystem topics, including framework deep dives and safety-critical system practices.
 
-> **Bloom 层级**: L4 应用
+> **Bloom 层级**: L4
 > **权威来源**: 通用 Rust 概念解释请见 [`concept/06_ecosystem/`](../../concept/06_ecosystem/)。
 
 ---

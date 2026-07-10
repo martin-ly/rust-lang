@@ -3,7 +3,7 @@
 > **EN**: Authoritative Sources And Citations
 > **Summary**: 权威来源与引用（Reference） Authoritative Sources And Citations.
 > **分级**: [B]
-> **Bloom 层级**: L2-L3 (理解/应用)
+> **Bloom 层级**: L2-L3
 > **文档目的**: 汇总项目中引用的所有权（Ownership）威来源，确保内容的准确性和可追溯性
 > **更新日期**: 2026-05-12
 > **当前目标版本**: Rust 1.97.0+ (Edition 2024)

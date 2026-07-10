@@ -5,7 +5,7 @@
 > **权威来源**: [`concept/07_future/00_version_tracking/rust_1_97_stabilized.md`](../../../concept/07_future/00_version_tracking/rust_1_97_stabilized.md)
 >
 > **分级**: [A]
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 > **版本**: Rust 1.97.0
 > **更新日期**: 2026-07-10
 > **适用版本**: stable 1.97.0+

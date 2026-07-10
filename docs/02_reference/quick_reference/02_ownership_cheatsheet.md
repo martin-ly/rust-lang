@@ -3,7 +3,7 @@
 > **EN**: Ownership Cheatsheet
 > **Summary**: 🦀 所有权系统速查卡 Ownership Cheatsheet.
 > **分级**: [A]
-> **Bloom 层级**: L2-L3 (理解/速查)
+> **Bloom 层级**: L2-L3
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]

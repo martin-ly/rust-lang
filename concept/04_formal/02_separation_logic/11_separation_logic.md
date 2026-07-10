@@ -7,7 +7,7 @@
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
-> **Bloom 层级**: 评价 → 创造
+> **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 深入讲解**分离逻辑（Separation Logic）**——从霍尔逻辑到分离合取、框架规则，揭示 Rust 所有权（Ownership）系统如何建立在严格的数学基础之上，并连接形式化验证工具如 Iris 和 Viper。
 > **前置概念**: [Linear Logic](../01_ownership_logic/01_linear_logic.md) · [Ownership Formalization](../01_ownership_logic/03_ownership_formal.md) · [RustBelt](04_rustbelt.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)

@@ -6,7 +6,7 @@
 > **Summary**: Rust 编译器支持的 crate 链接方式：bin、lib、dylib、staticlib、cdylib、rlib、proc-macro，以及 C 运行时（Runtime）静态/动态链接和混合代码库的注意事项。
 >
 > **受众**: [进阶] / [专家]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Process / Platform
 > **双维定位**: P×Sys — 编译器输出与平台链接行为

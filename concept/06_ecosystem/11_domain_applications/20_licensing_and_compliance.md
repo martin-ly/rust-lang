@@ -7,7 +7,7 @@
 > **EN**: Licensing and Compliance
 > **Summary**: Licensing and Compliance: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **双维定位**: P×Eva — 评估许可证合规性

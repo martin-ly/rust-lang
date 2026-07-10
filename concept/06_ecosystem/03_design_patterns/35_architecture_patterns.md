@@ -8,7 +8,7 @@
 > **Summary**: Design Patterns. Guide to 35 Architecture Patterns.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 分析 → 创造
+> **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Cre — 分析系统架构层级与依赖关系设计
@@ -87,7 +87,7 @@
       - [架构决策因子](#架构决策因子)
     - [架构模式对比](#架构模式对比)
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 **变更日志**:
 
 - v1.0 (2026-05-25): 初始创建——分层/六边形/洋葱/整洁/Serverless 架构模式对比，含 Rust 实现骨架与边界测试

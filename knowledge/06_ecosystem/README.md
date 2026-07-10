@@ -2,7 +2,7 @@
 
 > **EN**: Ecosystem Index
 > **Summary**: 06 - 生态系统与工具 Ecosystem Index. (stub/archive redirect)
-> **Bloom 层级**: 理解
+> **Bloom 层级**: L2
 > **Rust 生态系统的核心工具、框架和新特性**
 >
 > **受众**: [专家] / [研究者]

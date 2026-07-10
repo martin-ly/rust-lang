@@ -33,7 +33,7 @@
 
 ---
 
-> **Bloom 层级**: 理解 → 应用 → 分析
+> **Bloom 层级**: L2-L4
 > **定位**:
 > 本文档为 **Brown University Interactive Book** 中「Ownership Inventory」概念清单的本地映射。
 > Inventory 题目灵感来自真实 StackOverflow 问题，重点检验所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）在**真实代码场景**中的运用。

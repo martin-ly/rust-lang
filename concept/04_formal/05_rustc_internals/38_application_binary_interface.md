@@ -6,7 +6,7 @@
 > **Summary**: Rust 编译输出 ABI 的控制机制：`used`、`no_mangle`、`link_section`、`export_name` 属性，及其对符号可见性和对象文件布局的影响。
 >
 > **受众**: [专家]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Systems
 > **双维定位**: S×Sys — 语言与二进制接口
@@ -17,6 +17,9 @@
 
 >
 > **来源**: [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/abi.html) · [Rust Reference — extern functions](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rust Reference — external blocks](https://doc.rust-lang.org/reference/items/external-blocks.html)
+
+> **Rust 1.97.0 变更提示**：
+> Rust 1.97.0 默认启用 v0 symbol mangling 方案，ABI 与符号可见性影响见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
 
 ---
 

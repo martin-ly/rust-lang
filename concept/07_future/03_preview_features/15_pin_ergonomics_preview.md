@@ -11,7 +11,7 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 >
 > **定位**: 探讨 Rust 编译器基础设施中最影响异步（Async）编程体验的长期痛点 —— `Pin` 的 ergonomics，以及 Project Goals 2026 Flagship "Beyond the `&`" 的解决方案：Reborrow Traits、Pinned Places、Safe Pin Projection。

@@ -9,7 +9,7 @@
 > | **Ownership** | TRPL Ch4 · Reference § Ownership Types | Ralf Jung *"RustBelt: Securing the Foundations of the Rust Programming Language"* (POPL 2018) · Clarke *"Ownership Types
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **版本**: v1.1
 > **创建日期**: 2026-05-19

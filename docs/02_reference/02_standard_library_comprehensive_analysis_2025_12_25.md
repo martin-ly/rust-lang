@@ -11,7 +11,7 @@
 
 > **EN**: Standard Library Comprehensive Analysis 2025 12 25
 > **Summary**: Rust 标准库全面分析与论证文档 Standard Library Comprehensive Analysis 2025 12 25. (stub/archive redirect)
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 
 **创建日期**: 2025-12-25
 **最后更新**: 2026-05-08

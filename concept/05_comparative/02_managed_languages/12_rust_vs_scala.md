@@ -7,7 +7,7 @@
 > **Summary**: Comparative analysis of Rust and Scala across type systems, functional programming, and runtime.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 对比分析 **Rust** 与 **Scala** 的设计哲学——从类型推断（Type Inference）、模式匹配（Pattern Matching）到并发模型，揭示两种语言如何在类型表达力和运行时（Runtime）表示之间做出选择。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)

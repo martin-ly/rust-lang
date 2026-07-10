@@ -40,7 +40,7 @@
 > **文档定位**: 对齐 Rust 官方 Safety-Critical 路线与项目知识体系
 > **覆盖版本**: Rust 1.97.0+ / FLS (Ferrocene Language Specification) 24.11 / Ferrocene 26.02.0
 > **官方来源**: [Rust Project Goals 2026 — Safety-Critical Rust](https://rust-lang.github.io/rust-project-goals/2026/) · [Ferrocene](https://ferrocene.dev/) · [MISRA Rust Guidelines](https://misra.org.uk/)
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **[Ferrocene](https://ferrocene.dev/)** · **[MISRA](https://www.misra.org.uk/)** · **[IEC 61508](https://webstore.iec.ch/publication/66912)** · **[ISO 26262](https://www.iso.org/standard/68383.html)** · **[DO-178C](https://my.rtca.org/)** ✅
 
 ---

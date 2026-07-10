@@ -19,7 +19,7 @@
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 ---
 
-> **Bloom 层级**: 分析 → 评价 → 创造
+> **Bloom 层级**: L4-L6
 
 ## 一、核心命题
 
@@ -530,7 +530,7 @@ enum CircuitState {
 > [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) ·
 > [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.90.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 表征空间坐标系
 

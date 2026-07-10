@@ -27,7 +27,7 @@
 ```bash
 # 基本编译 {#基本编译}
 
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 rustc main.rs                    # 编译单个文件
 rustc --crate-type lib lib.rs    # 编译为库
 rustc --crate-type bin main.rs   # 编译为二进制（默认）

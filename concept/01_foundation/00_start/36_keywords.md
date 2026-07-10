@@ -6,7 +6,7 @@
 > **Summary**: Rust 中保留给当前或未来语言使用的关键字列表，以及 raw identifier（原始标识符）用法。 List of keywords reserved for current or future use in Rust, plus raw identifier usage.
 >
 > **受众**: [初学者]
-> **Bloom 层级**: 记忆 → 理解
+> **Bloom 层级**: L1-L2
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Language syntax
 > **双维定位**: S×Lang — 语言词法与语法

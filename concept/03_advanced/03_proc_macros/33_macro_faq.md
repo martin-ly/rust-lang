@@ -2,7 +2,7 @@
 > **Summary**: Authoritative concept page for `04 Faq`. Content migrated from `crates/c11_macro_system_proc/docs/tier_01_foundations/04_faq.md`.
 > **受众**: [进阶]
 > **内容分级**: [参考级]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: A×Eva — 评估宏（Macro）使用场景与限制

@@ -2,7 +2,7 @@
 
 > **EN**: Emerging Index
 > **Summary**: Emerging 前沿特性 Emerging Index.
-> **Bloom 层级**: 理解
+> **Bloom 层级**: L2
 > **Rust 不稳定特性和未来方向**
 >
 > **受众**: [专家] / [研究者]

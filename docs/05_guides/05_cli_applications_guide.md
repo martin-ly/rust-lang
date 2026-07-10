@@ -3,7 +3,7 @@
 > **EN**: CLI Applications Guide
 > **Summary**: CLI 应用开发指南 CLI Applications Guide.
 > **分级**: [A]
-> **Bloom 层级**: L3-L4 (应用/分析)
+> **Bloom 层级**: L3-L4
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.97.0+ (Edition 2024)

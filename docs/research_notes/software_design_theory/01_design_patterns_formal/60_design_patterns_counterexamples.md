@@ -4,7 +4,7 @@
 > **Summary**: 设计模式反例边界 Design Patterns Counterexamples.
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
-> **Bloom 层级**: L5-L6 (分析/评价)
+> **Bloom 层级**: L5-L6
 > **概念族**: 设计模式 / 反例边界
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成

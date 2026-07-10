@@ -7,7 +7,7 @@
 > **EN**: Documentation
 > **Summary**: Writing and publishing Rust documentation with rustdoc, doc tests, and crate docs.
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 文档工具和约定的应用

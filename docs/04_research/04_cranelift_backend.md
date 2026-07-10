@@ -3,7 +3,7 @@
 > **EN**: Cranelift Backend
 > **Summary**: Cranelift 后端编译加速跟踪报告 Cranelift Backend. (stub/archive redirect)
 > **分级**: [B]
-> **Bloom 层级**: L4-L5 (分析/评价)
+> **Bloom 层级**: L4-L5
 > **最后更新日期**: 2026-05-08
 > **预计下次复查日期**: 2026-07-24
 > **跟踪状态**: ⚡ 可用 (unstable，需 nightly)

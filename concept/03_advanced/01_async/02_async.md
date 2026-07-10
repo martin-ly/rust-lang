@@ -49,9 +49,12 @@
 > [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/index.html) ·
 > [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) · [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)
 
+> **Rust 1.97.0 变更提示**：
+> Rust 1.97.0 起 `pin!` 宏会阻止隐式 deref coercion，相关细节与迁移建议见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
+
 ---
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 **变更日志**:
 
 - v4.2 (2026-05-13): Phase B 验证实践——新增§8.13 Miri 动态验证场景（悬垂指针检测、无效 bool 检测、async 状态机未初始化内存检测，含实际 Miri 输出截图）
@@ -1541,7 +1544,7 @@ impl UringReactor {
 ```
 
 > **[tokio-rs/tokio-uring 设计文档](https://github.com/tokio-rs/tokio-uring)** io_uring 的 `user_data` 字段天然适合存储 Waker 标识，避免了 epoll 的 fd→Waker HashMap 查找开销。但 io_uring 的共享环设计对线程安全提出更高要求——Waker 的 `wake` 需是线程安全的（`Send + Sync`），因为完成事件可能在任意 CPU 核心上产生。
-> **Bloom 层级**: 分析 —— 理解 Waker 与 OS 的交互边界，是手写 Future 和自定义运行时的必要知识。
+> **Bloom 层级**: L2-L4
 
 ---
 
@@ -1767,7 +1770,7 @@ where
 
 **`StreamExt` 常用组合子**
 
-> **Bloom 层级**: 应用 —— 掌握组合子是构建异步数据管道的工程技能。
+> **Bloom 层级**: L3
 
 | **组合子** | **签名** | **语义** | **类比 Iterator** |
 |:---|:---|:---|:---|
@@ -1930,7 +1933,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 
 **何时选择哪种：API 边界 vs 内部实现**
 
-> **Bloom 层级**: 分析/评价 —— 根据场景权衡抽象与性能。
+> **Bloom 层级**: L4-L5
 
 | **场景** | **推荐** | **理由** |
 |:---|:---|:---|
@@ -2211,7 +2214,7 @@ mod tests {
 }
 ```
 
-> **Bloom 层级**: 应用 —— 使用 loom 验证并发原语是生产级 Rust 并发编程的标准实践。
+> **Bloom 层级**: L3
 > **交叉链接**: 内存序模型见 [../02_intermediate/00_traits/01_traits.md](../../02_intermediate/00_traits/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/02_unsafe/03_unsafe.md](../02_unsafe/03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
 
 ### 8.13 Miri 动态验证：async 状态机的内存安全检测
@@ -3192,19 +3195,19 @@ async fn safe_operation() -> std::io::Result<()> {
     - [Q1.3: `Future` 什么时候开始执行？](#q13-future-什么时候开始执行)
     - [Q1.4: `.await` 和 `poll()` 有什么区别？](#q14-await-和-poll-有什么区别)
     - Q1.5: `async fn` 返回的是什么类型？
-  - 2. 运行时选择
+  - 1. 运行时选择
     - [Q2.1: Tokio、async-std \[已归档\] 和 Smol 如何选择？](#q21-tokioasync-std-已归档-和-smol-如何选择)
     - Q2.2: 可以在同一项目中混用多个运行时吗？
     - Q2.3: 如何选择单线程还是多线程运行时？
-  - 3. Pin 与内存安全
+  - 1. Pin 与内存安全
     - Q3.1: 为什么我需要 `Pin`？它看起来非常复杂
     - Q3.2: 什么是 `Unpin`？
     - Q3.3: 如何获取 `Pin<&mut T>` 中的 `&mut T`？
-  - 4. 性能与优化
+  - 1. 性能与优化
     - Q4.1: 如何在 `async` 代码中执行 CPU 密集型任务？
     - Q4.2: 如何优化 Tokio 运行时性能？
     - Q4.3: 如何测量异步代码的性能？
-  - 5. 错误处理（Error Handling）与调试
+  - 1. 错误处理（Error Handling）与调试
     - Q5.1: 如何在异步代码中处理错误？
     - Q5.2: 如何调试异步代码？
     - Q5.3: 如何处理 Timeout？
@@ -3212,11 +3215,11 @@ async fn safe_operation() -> std::io::Result<()> {
     - [Q6.1: 为什么我的 `Future` 没有执行？](#q13-future-什么时候开始执行)
     - Q6.2: 如何在 `Drop` 中执行异步清理？
     - Q6.3: 如何优雅取消异步任务？
-  - 7. 生态系统与兼容性
+  - 1. 生态系统与兼容性
     - [Q7.1: Tokio 和 async-std \[已归档\] 的库可以互相使用吗？](#q71-tokio-和-async-std-已归档-的库可以互相使用吗)
     - Q7.2: 如何编写运行时无关的异步库？
     - Q7.3: `async-trait` crate 是做什么的？
-  - 8. 高级主题
+  - 1. 高级主题
     - Q8.1: 如何手动实现 `Future`？
     - Q8.2: 如何在 trait 中定义异步方法（Rust 1.92.0）？（自 Rust 1.90 引入）
     - Q8.3: 如何实现 `AsyncDrop`？

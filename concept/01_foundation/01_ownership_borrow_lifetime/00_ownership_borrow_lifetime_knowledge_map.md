@@ -4,7 +4,7 @@
 > **Summary**: A panoramic knowledge map of the Rust ownership-borrowing-lifetime-scope cluster, showing concept dependencies, smart-pointer ecosystems, and learning paths. Authoritative explanations of each topic remain in the dedicated concept pages.
 >
 > **受众**: [初学者] → [进阶者] → [研究者]
-> **Bloom 层级**: 理解 → 分析
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Lifetimes](./03_lifetimes.md)

@@ -8,7 +8,7 @@
 > **Summary**: CQRS & Event Sourcing. Guide to 33 Cqrs Event Sourcing.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 分析 → 创造
+> **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Cre — 设计高可靠分布式系统的数据持久化模式
@@ -79,7 +79,7 @@
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 **变更日志**:
 > **来源**: [EventStoreDB](https://developers.eventstore.com/server/v24.10/) · [Microsoft CQRS](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 

@@ -3,7 +3,7 @@
 > **EN**: Alignment Guide
 > **Summary**: Rust 对齐知识综合指南 Alignment Guide. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 > **创建日期**: 2026-02-13
 > > **权威来源**:
 >

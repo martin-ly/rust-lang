@@ -3,7 +3,7 @@
 > **EN**: Knowledge Structure Framework
 > **Summary**: Rust 知识结构框架文档 Knowledge Structure Framework. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L4-L5 (分析/评价)
+> **Bloom 层级**: L4-L5
 
 ## 📑 目录 {#目录}
 >

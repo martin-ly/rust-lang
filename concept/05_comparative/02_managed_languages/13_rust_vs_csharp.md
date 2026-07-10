@@ -16,7 +16,7 @@
 > **Summary**: Rust vs C#: comparative analysis with Rust across type systems, memory safety, and concurrency.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 对比分析 **Rust** 与 **C#** 的设计哲学——从内存管理、泛型（Generics）系统到异步（Async）模型，揭示托管语言与原生语言在工程实践中的权衡。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)

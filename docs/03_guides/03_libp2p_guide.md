@@ -7,7 +7,7 @@
 > **分级**: [A]
 > **层级**: L6 生态工具 / L3 高级网络
 > **前置概念**: [Async](../../concept/03_advanced/01_async/02_async.md) · [Network Programming](../../crates/c10_networks)
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **[libp2p Specification](https://specs.libp2p.io/)** · **[rust-libp2p crate](https://docs.rs/libp2p/latest/libp2p/)** · **[Protocol Labs - libp2p](https://libp2p.io/)** · **来源: [Wikipedia - Peer-to-Peer](https://en.wikipedia.org/wiki/Peer_to_Peer)** ✅
 >
 > **受众**: [进阶]

@@ -4,7 +4,7 @@
 > **Summary**: Verus 实战指南 —— 在 Rust 中写证明 Verus Practical Guide.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [A]
-> **Bloom 层级**: L4-L5 (形式化验证入门 → 演绎推理实践)
+> **Bloom 层级**: L4-L5
 > **对应 Rust 版本**: 1.80.0+ (nightly recommended)
 > **Verus 版本**: 0.24.0+
 > **最后更新**: 2026-05-22

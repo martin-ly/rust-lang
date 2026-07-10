@@ -3,7 +3,7 @@
 > **EN**: Cross Language Comparison
 > **Summary**: Rust 与 C++/Go/Python 跨语言对比 Cross Language Comparison. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-05-19
 > **Rust 版本**: 1.97.0+ (Edition 2024)

@@ -11,7 +11,7 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: F×App — 应用 RPITIT 于 trait 设计

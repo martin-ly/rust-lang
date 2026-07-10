@@ -4,7 +4,7 @@
 > **Summary**: 📊 年度全面评估模板 Annual Review Template. (stub/archive redirect)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 > **使用说明:** 每年年底（12月）由维护团队执行全面评估，回顾全年项目健康度并制定下一年度路线图。
 >
 > **评估年度:** ******年

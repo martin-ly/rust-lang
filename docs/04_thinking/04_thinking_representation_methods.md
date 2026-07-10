@@ -3,7 +3,7 @@
 > **EN**: Thinking Representation Methods Documentation
 > **Summary**: Rust 思维表征方式文档 Thinking Representation Methods Documentation. (stub/archive redirect)
 > **分级**: [B]
-> **Bloom 层级**: L4-L5 (分析/评价)
+> **Bloom 层级**: L4-L5
 
 ## 📑 目录 {#目录}
 >

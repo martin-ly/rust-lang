@@ -8,7 +8,7 @@
 >
 > **受众**: [研究者 / 专家]
 > **层级**: L6 生态工程
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: T×Fml — 工具链与形式化验证
 > **前置概念**: [网络协议](../04_web_and_networking/38_network_protocols.md) · [类型级编程](../../02_intermediate/01_generics/39_type_level_programming.md) · [Kani](../../04_formal/04_model_checking/32_kani.md)

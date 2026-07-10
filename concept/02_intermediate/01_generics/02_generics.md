@@ -17,7 +17,7 @@
 > **前置依赖**: L1 类型系统（Type System） · [L2 Trait](../00_traits/01_traits.md)
 > **后置延伸**: [L3 Async](../../03_advanced/01_async/02_async.md) · [L4 类型论](../../04_formal/00_type_theory/02_type_theory.md) · [L7 效果系统](../../07_future/03_preview_features/04_effects_system.md)
 > **跨层映射**: L2→L4 参数多态 ↔ System F | L2→L7 泛型（Generics）效果 → Effect System
-> **定理链编号**: T-030 参数多态保持 → T-031 单态化（Monomorphization） [来源: [Rust Reference — Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)]正确性 → T-032 约束满足可判定
+> **定理链编号**: T-230 参数多态保持 → T-231 单态化（Monomorphization） [来源: [Rust Reference — Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)]正确性 → T-232 约束满足可判定
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../00_traits/01_traits.md)
 > **后置概念**: [Advanced Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [GATs](../../03_advanced/01_async/02_async.md) · [Const Generics [来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)]]
@@ -35,7 +35,7 @@
 > **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
 
 ---
-> **Bloom 层级**: 应用 → 分析 → 评价
+> **Bloom 层级**: L3-L5
 **变更日志**:
 
 - v2.5 (2026-05-14):
@@ -692,7 +692,7 @@ graph TD
 
 ### 5.7 Const Generics 进阶用法
 
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html)** ·
 > **[RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)** ·
 > **[RFC 2920](https://rust-lang.github.io/rfcs//2920-inline-const.html)** Const Generics 将编译期常量值引入类型参数空间，是依赖类型的有限形式。自 Rust 1.51 稳定以来，表达式求值、where 约束、默认参数等能力逐步开放。✅ 已验证

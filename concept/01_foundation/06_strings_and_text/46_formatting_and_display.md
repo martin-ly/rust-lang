@@ -9,7 +9,7 @@
 >
 > **受众**: [初学者]
 > **层级**: L1 基础概念
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: C×App
 > **前置概念**: [Strings and Text](09_strings_and_text.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
@@ -24,7 +24,7 @@
 
 ---
 
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **变更日志**:
 >
 > - v1.0 (2026-07-04): 初始创建

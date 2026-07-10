@@ -7,7 +7,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **分级**: [B]
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 > **报告日期**: 2026-02-28
 > **项目**: Rust Formal Methods Research Notes
 > **版本**: 1.0

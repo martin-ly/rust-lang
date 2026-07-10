@@ -9,7 +9,7 @@
 > **Summary**: Database Access: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: C×Syn — 综合数据库系统的工程实践与架构选型

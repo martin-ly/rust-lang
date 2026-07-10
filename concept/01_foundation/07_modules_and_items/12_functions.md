@@ -5,7 +5,7 @@
 > **EN**: Functions
 > **Summary**: Functions: Rust's primary unit of executable behavior, covering declarations, parameters, return types, the `->` syntax, diverging functions, and the relationship to ownership and move semantics.
 > **受众**: [初学者]
-> **Bloom 层级**: 记忆 → 理解
+> **Bloom 层级**: L1-L2
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: F×Und — 理解函数作为 Rust 行为单元的基础结构

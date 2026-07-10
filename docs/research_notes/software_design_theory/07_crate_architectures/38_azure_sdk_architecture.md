@@ -25,11 +25,11 @@
 >
 > **分级**: [B]
 >
-> **Bloom 层级**: L3-L5 (应用/分析/评价)
+> **Bloom 层级**: L3-L5
 >
 > **知识领域**: 云厂商 SDK、Azure、异步（Async） HTTP 客户端、TokenCredential、Pager/Poller
 >
-> **对应 Rust 版本**: 1.97.0+ (azure-sdk-rust 稳定版)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 

@@ -33,7 +33,7 @@
 > **来源**: [TRPL — Variables and Mutability](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) · [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html)
 ---
 
-> **Bloom 层级**: 理解 → 分析
+> **Bloom 层级**: L2-L4
 
 ---
 
@@ -400,7 +400,7 @@ fn reference_vs_pointer() {
 > [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [SICP](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book.html)
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.90.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 通用 PL 基座层
 

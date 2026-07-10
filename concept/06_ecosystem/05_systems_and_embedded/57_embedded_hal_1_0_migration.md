@@ -5,7 +5,7 @@
 > **权威来源**: [embedded-hal 1.0.0](https://github.com/rust-embedded/embedded-hal/releases/tag/embedded-hal-v1.0.0) · [Embassy 文档](https://embassy.dev/) · [Rust Embedded Working Group](https://github.com/rust-embedded/wg)
 >
 > **受众**: [进阶 / 工程]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **前置概念**: [Rust 嵌入式系统开发](22_embedded_systems.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)

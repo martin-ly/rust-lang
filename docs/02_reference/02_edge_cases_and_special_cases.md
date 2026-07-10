@@ -13,7 +13,7 @@
 
 > **EN**: Edge Cases And Special Cases
 > **Summary**: Rust 边界条件与特例示例 Edge Cases And Special Cases. (stub/archive redirect)
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.97.0+ (Edition 2024)

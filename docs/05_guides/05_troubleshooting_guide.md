@@ -3,7 +3,7 @@
 > **EN**: Troubleshooting Guide
 > **Summary**: 故障排查指南 Troubleshooting Guide.
 > **分级**: [A]
-> **Bloom 层级**: L3-L4 (应用/分析)
+> **Bloom 层级**: L3-L4
 >
 > **受众**: [进阶]
 > **内容分级**: [专家级]

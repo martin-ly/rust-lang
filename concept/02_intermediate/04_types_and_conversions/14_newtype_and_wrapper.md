@@ -9,7 +9,7 @@
 >
 > **受众**: [进阶]
 >
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 深入分析 Rust 中 **Newtype 模式**和**包装器类型**的设计——如何通过单字段元组结构体（Struct）创建语义上不同的类型，实现编译期单位检查、API 封装和安全边界，同时保持零运行时（Runtime）开销。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Trait](../00_traits/01_traits.md) · [Generics](../01_generics/02_generics.md)

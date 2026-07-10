@@ -6,7 +6,7 @@
 > **Summary**: Rust 条件编译机制：`cfg` 配置选项、`cfg`/`cfg_attr` 属性、`cfg!`/`cfg_select!` 宏（Macro），以及常见目标平台 cfg。
 >
 > **受众**: [中级] / [进阶]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Language semantics
 > **双维定位**: S×Sys — 语言与平台交互

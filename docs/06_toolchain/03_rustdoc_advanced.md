@@ -3,7 +3,7 @@
 > **EN**: Rustdoc Advanced
 > **Summary**: Rustdoc 高级功能与文档生成 Rustdoc Advanced.
 > **分级**: [A]
-> **Bloom 层级**: L3 (应用)
+> **Bloom 层级**: L3
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.97.0+ (Edition 2024)

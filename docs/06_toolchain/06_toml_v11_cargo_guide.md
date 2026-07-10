@@ -3,13 +3,13 @@
 > **EN**: TOML V11 Cargo Guide
 > **Summary**: Cargo 与 TOML v1.1 新特性指南 TOML V11 Cargo Guide.
 > **分级**: [A]
-> **Bloom 层级**: L3 (应用)
+> **Bloom 层级**: L3
 >
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **文档状态**: 活跃维护
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.97.0+ (TOML v1.1 支持)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Edition**: 2024
 
 ---

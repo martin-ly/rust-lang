@@ -81,7 +81,7 @@
 ```toml
 # Cargo.toml {#cargotoml-1}
 
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 [dependencies]
 burn = "0.20"
 burn-ndarray = "0.20"

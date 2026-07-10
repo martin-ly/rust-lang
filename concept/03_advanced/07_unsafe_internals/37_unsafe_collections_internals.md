@@ -9,7 +9,7 @@
 >
 > **受众**: [研究者]
 > **层级**: L3 高级概念
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Exp
 > **前置概念**: [Unsafe Rust](../02_unsafe/03_unsafe.md) · [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Interior Mutability](../../02_intermediate/02_memory_management/08_interior_mutability.md)
@@ -25,7 +25,7 @@
 
 ---
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **变更日志**:
 >
 > - v1.0 (2026-07-04): 初始创建

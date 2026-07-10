@@ -2,7 +2,7 @@
 > **Summary**: Authoritative concept page for `术语表 - C11 Macro System`. Content migrated from `crates/c11_macro_system_proc/docs/tier_01_foundations/03_glossary.md`.
 > **受众**: [研究者]
 > **内容分级**: [参考级]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: S×Mem — 宏（Macro）术语结构化索引

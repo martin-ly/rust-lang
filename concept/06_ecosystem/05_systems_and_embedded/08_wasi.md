@@ -26,7 +26,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 
 **变更日志**:
 
@@ -531,7 +531,7 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 
 > **权威来源**: [WASI Preview 2 Docs](https://wasi.dev) · [WebAssembly Component Model Spec](https:/component-model.bytecodealliance.org) · [wit-bindgen Docs](https://github.com/bytecodealliance/wit-bindgen) · [WASMtime Docs](https://docs.wasmtime.dev)
 > **文档版本**: 1.2
-> **对应 Rust 版本**: 1.90.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 权威来源对齐 + 反例补充完成
 

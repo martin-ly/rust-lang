@@ -6,7 +6,7 @@
 > **EN**: Cargo Workspaces
 > **Summary**: Cargo workspace 的组成方式：root package 与 virtual workspace、`members`/`exclude`/`default-members`、`workspace.package`/`workspace.dependencies`/`workspace.lints` 继承机制，以及 resolver 设置。
 > **受众**: [中级 → 高级]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统

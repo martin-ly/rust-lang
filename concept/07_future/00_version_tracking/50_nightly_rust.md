@@ -6,7 +6,7 @@
 > **Summary**: Rust 的火车发布模型、Stability without Stagnation 原则、Nightly/Beta/Stable 三个发布通道、feature flags、rustup 通道切换以及 RFC 流程。
 >
 > **受众**: [初学者] / [中级]
-> **Bloom 层级**: 理解
+> **Bloom 层级**: L2
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Process
 > **双维定位**: P×Eco — 语言发布流程与生态演进

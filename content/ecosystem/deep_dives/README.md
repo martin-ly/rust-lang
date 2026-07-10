@@ -2,7 +2,7 @@
 
 > **EN**: Deep Dives Index
 > **Summary**: Deep Dives 深度解析 Deep Dives Index.
-> **Bloom 层级**: 理解
+> **Bloom 层级**: L2
 > **Rust 生态核心框架的深度技术解析**
 >
 > **受众**: [专家] / [研究者]

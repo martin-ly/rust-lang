@@ -3,7 +3,7 @@
 > **EN**: Learning Path Guide 2025 10 24
 > **Summary**: 学习路径指南 Learning Path Guide 2025 10 24.
 > **分级**: [A]
-> **Bloom 层级**: L1-L2 (记忆/理解)
+> **Bloom 层级**: L1-L2
 > **报告日期**: 2025-10-24
 > **最后更新**: 2026-05-08
 >

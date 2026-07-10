@@ -4,7 +4,7 @@
 > **Summary**: 模块系统代码实践模式 Module Patterns And Refactoring.
 > **内容分级**: [核心级]
 > **层级**: L5 (代码实践)
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 > **概念族**: 形式化模块（Module） / 代码实践
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成

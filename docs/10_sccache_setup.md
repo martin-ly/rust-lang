@@ -4,7 +4,7 @@
 > **Summary**: sccache 配置指南 Sccache Setup.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
-> **Bloom 层级**: L2-L3 (理解/应用)
+> **Bloom 层级**: L2-L3
 
 本文档说明如何在项目中配置和使用 sccache 来加速 Rust 编译。
 

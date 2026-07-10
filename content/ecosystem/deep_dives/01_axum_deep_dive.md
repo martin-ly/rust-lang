@@ -4,7 +4,7 @@
 **Summary**: A practical deep dive into the Axum web framework: routing, extractors, middleware, state management, error handling, testing, and production patterns.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **Bloom 层级**: L4 应用 → L5 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 通用 Rust 概念（async/await、Trait、并发、生命周期）请见 [`concept/`](../../../concept/)；Rust Web 框架选型与对比请见 [`concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md`](../../../concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md)。
 
 ---

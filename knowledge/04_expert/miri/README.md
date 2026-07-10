@@ -2,7 +2,7 @@
 
 > **EN**: Miri Index
 > **Summary**: Miri 内存模型 Miri Index. (stub/archive redirect)
-> **Bloom 层级**: 理解
+> **Bloom 层级**: L2
 > **Rust 内存安全检查与别名模型**
 >
 > **受众**: [专家] / [研究者]

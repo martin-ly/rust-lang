@@ -3,9 +3,9 @@
 > **EN**: Closures Cheatsheet
 > **Summary**: 闭包速查卡 Closures Cheatsheet.
 > **分级**: [A]
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.97.0+
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]

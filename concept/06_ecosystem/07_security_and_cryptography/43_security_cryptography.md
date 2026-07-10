@@ -10,7 +10,7 @@
 > **Summary**: Security Practices. Guide to 43 Security Cryptography.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评价密码学实现的安全性
@@ -77,7 +77,7 @@
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
 
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 **变更日志**:
 
 - v1.0 (2026-05-25): 初始创建——密码学原语（对称/非对称/哈希/KDF）、Rust 生态（ring/rustls/dalek）、常量时间操作、后量子密码学预览

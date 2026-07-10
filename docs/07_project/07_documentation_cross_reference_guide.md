@@ -3,7 +3,7 @@
 > **EN**: Documentation Cross Reference Guide
 > **Summary**: 🔗 文档交叉引用指南 Documentation Cross Reference Guide. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L4-L5 (分析/评价)
+> **Bloom 层级**: L4-L5
 
 ## 📑 目录 {#目录}
 >

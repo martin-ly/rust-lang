@@ -14,7 +14,7 @@
 
 > **EN**: cxx + bindgen
 > **Summary**: C++ 互操作指南 cxx + bindgen.
-> **Bloom 层级**: L2-L3 (理解/应用)
+> **Bloom 层级**: L2-L3
 
 ## 📑 目录 {#目录}
 >

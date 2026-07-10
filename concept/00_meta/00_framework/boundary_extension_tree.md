@@ -14,7 +14,7 @@
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
-> **Bloom 层级**: 元（Meta）
+> **Bloom 层级**: Meta
 
 **变更日志**:
 

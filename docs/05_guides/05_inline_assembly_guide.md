@@ -3,7 +3,7 @@
 > **EN**: Inline Assembly Guide
 > **Summary**: Rust 内联汇编完整指南 Inline Assembly Guide.
 > **分级**: [A]
-> **Bloom 层级**: L3-L4 (应用/分析)
+> **Bloom 层级**: L3-L4
 >
 > **受众**: [进阶] / [专家]
 > **内容分级**: [专家级]

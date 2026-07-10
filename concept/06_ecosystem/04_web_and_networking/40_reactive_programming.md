@@ -9,7 +9,7 @@
 > **Summary**: Reactive Programming & FRP. Guide to 40 Reactive Programming.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: C×Ana — 分析异步（Async）数据流的声明式组合模式
@@ -80,7 +80,7 @@
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
 
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 **变更日志**:
 
 > **补充来源**: [Reactive Streams JVM](https://github.com/reactive-streams/reactive-streams-jvm) · [Tokio Stream Internals](https://tokio.rs/tokio/topics)

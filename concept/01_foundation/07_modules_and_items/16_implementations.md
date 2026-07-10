@@ -5,7 +5,7 @@
 > **EN**: Implementations
 > **Summary**: Implementations: `impl` blocks for defining methods and trait implementations, covering associated functions, `self`, `&self`, `&mut self`, trait impls, and inherent impls.
 > **受众**: [初学者]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: F×App — 掌握 `impl` 块将行为绑定到类型的机制

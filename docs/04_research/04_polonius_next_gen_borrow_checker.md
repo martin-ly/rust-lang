@@ -5,10 +5,10 @@
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
-> **Bloom 层级**: L4-L5 (分析/评价)
+> **Bloom 层级**: L4-L5
 > **文档状态**: 活跃维护
 > **最后更新**: 2026-05-22
-> **Rust 版本**: Nightly 1.97.0 (Polonius 实验中)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **关联目标**: [Rust 2026 Project Goals — Polonius Alpha 稳定化](https://rust-lang.github.io/rust-project-goals/2026/polonius.html)
 
 ---

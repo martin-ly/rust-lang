@@ -2,7 +2,7 @@
 
 > **EN**: Expert Index
 > **Summary**: 04 - 专家级主题 Expert Index.
-> **Bloom 层级**: 理解
+> **Bloom 层级**: L2
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]

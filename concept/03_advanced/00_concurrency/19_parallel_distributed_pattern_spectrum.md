@@ -27,7 +27,7 @@
 > **来源**: [std::thread](https://doc.rust-lang.org/std/thread/) · [Rayon Docs](https://docs.rs/rayon/) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 ---
 
-> **Bloom 层级**: 分析 → 评价 → 创造
+> **Bloom 层级**: L4-L6
 > **对应 Crate**: [`c05_threads`](../../crates/c05_threads)
 > **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency)
 
@@ -615,7 +615,7 @@ fn crdt_commutativity() {
 > [Rust Atomics and Locks](https://marabos.nl/atomics/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.90.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 表征空间坐标系
 

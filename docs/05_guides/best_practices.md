@@ -44,7 +44,7 @@
 >
 # 运行 clippy {#运行-clippy}
 
-> **Bloom 层级**: L3-L4 (应用/分析)
+> **Bloom 层级**: L3-L4
 cargo clippy
 
 # 更严格的检查 {#更严格的检查}

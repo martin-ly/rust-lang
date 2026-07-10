@@ -13,7 +13,7 @@
 > **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University CRP Phrasebook](https://cel.cs.brown.edu/crp/) · [Rust Foundation Interop Initiative](https://github.com/rustfoundation/interop-initiative)
 ---
 
-> **Bloom 层级**: 理解 → 分析 → 评价
+> **Bloom 层级**: L2-L5
 
 ## 一、核心命题
 

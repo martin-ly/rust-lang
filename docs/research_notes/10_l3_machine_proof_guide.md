@@ -113,7 +113,7 @@
 ```bash
 # 使用OPAM安装Coq {#使用opam安装coq}
 
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 
 opam init
 

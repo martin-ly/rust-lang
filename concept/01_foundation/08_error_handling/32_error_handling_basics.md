@@ -12,7 +12,7 @@
 >
 > 本主题在 knowledge 中有系统化的知识索引：错误处理（Error Handling）基础
 > **受众**: [初学者]
-> **Bloom 层级**: 理解 → 应用
+> **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Result/Option 错误传播模式

@@ -3,7 +3,7 @@
 > **EN**: Polonius Tracking
 > **Summary**: Polonius 借用（Borrowing）检查器跟踪报告 Polonius Tracking. (stub/archive redirect)
 > **分级**: [B]
-> **Bloom 层级**: L4-L5 (分析/评价)
+> **Bloom 层级**: L4-L5
 > **最后更新日期**: 2026-05-08
 > **预计下次复查日期**: 2026-07-24
 > **跟踪状态**: 🔬 实验阶段 (nightly only)

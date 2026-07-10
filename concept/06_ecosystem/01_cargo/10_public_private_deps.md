@@ -33,7 +33,7 @@ pub fn flags() -> MyFlags { /* ... */ }
 
 > **受众**: [进阶]
 > **内容分级**: [综述级]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用依赖可见性规则
 > **定位**: 解决 Rust crate 图中“依赖泄漏”问题的核心机制，使 API 稳定性与依赖演进解耦；同时说明 resolver v3 在版本选择上的 MSRV-aware 行为。

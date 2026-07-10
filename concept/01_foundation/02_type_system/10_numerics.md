@@ -13,11 +13,14 @@
 > **EN**: Numerics
 > **Summary**: Numerics: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
-> **Bloom 层级**: 记忆 → 理解
+> **Bloom 层级**: L1-L2
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 系统讲解 Rust **数值类型**——从整数、浮点、饱和运算到类型转换和溢出行为，揭示 Rust 如何在安全性与性能之间做出精确的设计选择。
 > **前置概念**: [Type System](04_type_system.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)
 > **后置概念**: [Zero Cost Abstractions](../00_start/06_zero_cost_abstractions.md) · [Collections](../05_collections/08_collections.md)
+
+> **Rust 1.97.0 变更提示**：
+> Rust 1.97.0 稳定化了 `NonZero<T>` 的位操作方法，详见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
 
 ---
 

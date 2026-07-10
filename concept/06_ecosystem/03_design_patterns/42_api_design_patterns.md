@@ -9,7 +9,7 @@
 > **Summary**: Design Patterns. Guide to 42 Api Design Patterns.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 应用 → 创造
+> **Bloom 层级**: L3-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Cre — 设计类型安全的 REST/GraphQL/gRPC API
@@ -86,7 +86,7 @@
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
 
-> **Bloom 层级**: 应用 → 评价
+> **Bloom 层级**: L3-L5
 **变更日志**:
 
 > **补充来源**: [来源: [axum Documentation](https://docs.rs/axum/latest/axum/)] · [来源: [Swagger UI](https://swagger.io/tools/swagger-ui/)]

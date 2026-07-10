@@ -49,7 +49,7 @@
 ```markdown
 # 研究笔记模板 {#研究笔记模板}
 
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 
 ## 问题陈述 {#问题陈述}
 > **[Rust Official Docs](https://doc.rust-lang.org/)**

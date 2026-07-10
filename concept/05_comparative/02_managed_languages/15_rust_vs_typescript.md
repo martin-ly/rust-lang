@@ -7,7 +7,7 @@
 > **Summary**: Comparative analysis of Rust and TypeScript across type systems, compile-time guarantees, and domains.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 对比分析 **Rust**（编译期内存安全（Memory Safety）、零成本抽象（Zero-Cost Abstraction）、所有权（Ownership）系统）与 **TypeScript**（渐进式类型、JavaScript 超集、运行时（Runtime）主导）在类型系统（Type System）、编译模型、异步（Async）生态和 WASM 互操作四个维度的本质差异，建立系统化的选型决策框架。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Async](../../03_advanced/01_async/02_async.md)

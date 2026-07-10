@@ -3,7 +3,7 @@
 > **EN**: Testing Coverage Guide
 > **Summary**: 测试覆盖率指南 Testing Coverage Guide. (stub/archive redirect)
 > **分级**: [A]
-> **Bloom 层级**: L3-L4 (应用/分析)
+> **Bloom 层级**: L3-L4
 >
 > **受众**: [进阶]
 > **内容分级**: [专家级]

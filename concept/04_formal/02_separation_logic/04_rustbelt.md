@@ -28,7 +28,7 @@
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 **变更日志**:
 
 - v3.0 (2026-05-13): 新增 §3 Concurrent Separation Logic（CSL）含 Mutex/Arc 形式化；新增 §6 标准库原语验证矩阵；新增 §8 形式化验证工具链映射（含光谱图）；扩展层次一致性（Coherence）标注至 L3 Unsafe / L3 并发 / L7 形式化方法；补充章节过渡段落$entry

@@ -5,7 +5,7 @@
 > **📎 交叉引用**
 >
 > 本主题在 concept 中有深度的概念分析：[闭包](../../concept/01_foundation/00_start/15_closure_basics.md)
-> **Bloom 层级**: 理解
+> **Bloom 层级**: L2
 > **掌握 Rust 的核心抽象能力**
 >
 > **受众**: [初学者] / [进阶]

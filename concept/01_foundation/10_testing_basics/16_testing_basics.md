@@ -15,7 +15,7 @@
 > **EN**: Testing
 > **Summary**: Testing. Core Rust concept covering testing strategies, mechanism analysis.
 > **受众**: [初学者]
-> **Bloom 层级**: 应用 → 分析
+> **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: P×App — 实施测试策略和验证方法

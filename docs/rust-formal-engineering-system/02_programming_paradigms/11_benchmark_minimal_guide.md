@@ -372,7 +372,7 @@ fn bench2(c: &mut Criterion) {
 ```bash
 # 编译并运行基准测试 {#编译并运行基准测试}
 
-> **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **Bloom 层级**: L5-L6
 $ cargo bench -- --profile-time 10
 
 # 使用 perf 进行详细分析 {#使用-perf-进行详细分析}

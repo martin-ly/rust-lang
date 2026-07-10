@@ -6,7 +6,7 @@
 > **Summary**: Compares different implementation strategies for design patterns in Rust: trait objects vs generics, sync vs async, static vs dynamic dispatch, single vs multi-threaded, zero-cost vs runtime abstraction, and ownership models.
 > **受众**: [进阶]
 > **内容分级**: [参考级]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: A×Eva — 评估模式实现策略

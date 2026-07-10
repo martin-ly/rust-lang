@@ -61,7 +61,7 @@
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
 
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 **变更日志**:
 
 - v1.0 (2026-05-25): 初始创建——rustc 编译管线、HIR/MIR、类型系统（Type System）实现、借用（Borrowing）检查器（NLL/Polonius/Tree Borrows）、LLVM 后端、查询系统

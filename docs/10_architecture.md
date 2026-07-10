@@ -3,7 +3,7 @@
 > **EN**: Architecture
 > **Summary**: Rust 学习项目架构文档 Architecture.
 > **分级**: [B]
-> **Bloom 层级**: L2-L3 (理解/应用)
+> **Bloom 层级**: L2-L3
 > **版本**: Rust 1.97.0
 > **Edition**: 2024
 > **最后更新**: 2026-04-10

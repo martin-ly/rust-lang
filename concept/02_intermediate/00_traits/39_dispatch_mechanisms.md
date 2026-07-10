@@ -7,7 +7,7 @@
 > **EN**: Dispatch Mechanisms
 > **Summary**: Static and dynamic dispatch in Rust: monomorphization, trait objects, vtables, object safety, and performance trade-offs.
 > **受众**: [进阶]
-> **Bloom 层级**: 分析 → 评价
+> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **前置概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)

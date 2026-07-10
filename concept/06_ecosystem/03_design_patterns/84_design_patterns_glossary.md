@@ -2,7 +2,7 @@
 > **Summary**: Canonical glossary for Rust design patterns: GoF classifications, Rust idioms, concurrency/async terms, and cross-links to authoritative concept pages.
 > **受众**: [进阶]
 > **内容分级**: [参考级]
-> **Bloom 层级**: 记忆 → 理解
+> **Bloom 层级**: L1-L2
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: S×Mem — 设计模式术语索引

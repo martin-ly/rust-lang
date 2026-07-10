@@ -3,7 +3,7 @@
 > **EN**: Rust 190 To 193 Features Cheatsheet
 > **Summary**: Rust 1.90–1.93 特性速查表 Rust 190 To 193 Features Cheatsheet.
 > **分级**: [A]
-> **Bloom 层级**: L2 (理解)
+> **Bloom 层级**: L2
 > **版本**: Rust 1.90.0 – 1.93.1
 > **更新日期**: 2026-05-29
 > **适用版本**: stable
