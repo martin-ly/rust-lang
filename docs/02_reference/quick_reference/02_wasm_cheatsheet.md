@@ -1,5 +1,10 @@
 # WASM 快速参考卡片 {#wasm-快速参考卡片}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为WASM 速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept WASM`](../../../concept/06_ecosystem/11_domain_applications/11_webassembly.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（wasm-pack/常用 API/编译配置/浏览器使用/性能/反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Wasm Cheatsheet
 > **Summary**: WASM 快速参考卡片 Wasm Cheatsheet. (stub/archive redirect)
 > **分级**: [A]

@@ -1,5 +1,10 @@
 # Rust 1.96/1.96.1 特性速查表 {#rust-196-特性速查表}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为Rust 1.96 特性速查表（版本速查）；通用 Rust 概念解释请以 concept 权威页为准：[`concept Rust 1.96`](../../../concept/07_future/00_version_tracking/rust_1_96_stabilized.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（1.96 语法/lint/迁移检查快速参考（速查，非概念正文）），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Rust 196 Features Cheatsheet
 > **Summary**: Rust 1.96/1.96.1 特性速查表 Rust 196 Features Cheatsheet.（当前稳定 patch 1.96.1）
 > **内容重叠提示**: 本文与 [`concept/07_future/rust_1_96_stabilized.md`](../../../concept/07_future/00_version_tracking/rust_1_96_stabilized.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为快速参考。

@@ -1,5 +1,10 @@
 # 🤖 Rust AI/ML 速查卡 {#rust-aiml-速查卡}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为Rust AI/ML 速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept ML 生态`](../../../concept/06_ecosystem/11_domain_applications/46_machine_learning_ecosystem.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（Burn/Candle 框架速查、LLM 推理、反例与 Rust 1.95+ 应用），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Ai Ml Cheatsheet
 > **Summary**: 🤖 Rust AI/ML 速查卡 Ai Ml Cheatsheet. (stub/archive redirect)
 > **分级**: [A]

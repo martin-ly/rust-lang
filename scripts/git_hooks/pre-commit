@@ -26,4 +26,8 @@ python scripts/kb_auditor.py --link-check >/dev/null 2>&1 || {
     exit 1
 }
 
+# 4. Metadata consistency (semantic observe; warning only, does not block)
+echo "--- metadata consistency (observe) ---"
+python scripts/check_metadata_consistency.py || true
+
 echo "✅ Pre-commit quality checks passed."

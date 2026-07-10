@@ -1,0 +1,159 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""concept/ 权威层「国际化权威来源」覆盖率审计（P0 对齐网络的国际化权威相关内容）。
+
+复用 scripts/maintenance/authority_coverage_dashboard.py 的 P0/P1/P2 权威域分级，
+把扫描域从 docs/research_notes 扩展到 concept/ 权威层（AGENTS.md §2：concept/ 为单一权威来源）。
+只审计、不改正文（无副作用）。输出覆盖率基线 + 缺口页清单（核心 L1-L4 且无 P0 国际权威）。
+
+P0 官方: doc.rust-lang.org / rust-lang.github.io / github.com/rust-lang / rustc-dev-guide / ferrocene
+P1 学术/形式化: plv.mpi-sws(RustBelt/Jung) / arxiv / acm / ieee / springer / plf.inf.ethz / aeneas
+P2 社区/生态: verus / creusot / formal-land / AeneasVerif / docs.rs / crates.io / sea-ql / blog.rust-lang.org ...
+
+输出 reports/CONCEPT_AUTHORITY_COVERAGE_<date>.{md,json}。永远 exit 0（informational）。
+"""
+from __future__ import annotations
+
+import datetime as _dt
+import glob
+import json
+import os
+import re
+import sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, "scripts"))
+sys.path.insert(0, os.path.join(ROOT, "scripts", "maintenance"))
+CONCEPT = os.path.join(ROOT, "concept")
+TODAY = _dt.date.today().isoformat()
+
+# 复用 maintenance 的权威域分级（单一来源）；import 失败则用内置 fallback
+try:
+    from authority_coverage_dashboard import P0_DOMAINS, P1_DOMAINS, P2_DOMAINS  # type: ignore
+except Exception:  # pragma: no cover
+    P0_DOMAINS = [r"doc\.rust-lang\.org", r"rust-lang\.github\.io", r"github\.com/rust-lang",
+                  r"rustc-dev-guide\.rust-lang\.org", r"spec\.ferrocene\.dev"]
+    P1_DOMAINS = [r"plv\.mpi-sws\.org", r"arxiv\.org", r"acm\.org", r"dl\.acm\.org",
+                  r"ieee\.org", r"springer\.com", r"plf\.inf\.ethz\.ch", r"aeneas"]
+    P2_DOMAINS = [r"github\.com/verus-lang", r"github\.com/creusot-rs", r"github\.com/formal-land",
+                  r"docs\.rs", r"crates\.io", r"blog\.rust-lang\.org"]
+
+try:
+    import concept_config
+    def layer_of(p):
+        parts = os.path.relpath(p, CONCEPT).replace("\\", "/").split("/")
+        for seg in parts:
+            if seg in concept_config.LAYER_DIRS:
+                return concept_config.LAYER_DIRS[seg]
+        return "L?"
+except Exception:
+    def layer_of(p):
+        return "L?"
+
+P0_RE = re.compile("|".join(P0_DOMAINS))
+P1_RE = re.compile("|".join(P1_DOMAINS))
+P2_RE = re.compile("|".join(P2_DOMAINS))
+
+SKIP_NAMES = {"SUMMARY.md", "README.md"}
+
+
+def active_md():
+    out = []
+    for p in glob.glob(os.path.join(CONCEPT, "**", "*.md"), recursive=True):
+        rel = os.path.relpath(p, CONCEPT).replace("\\", "/")
+        if rel.startswith("archive/") or "/archive/" in rel:
+            continue
+        if os.path.basename(p) in SKIP_NAMES:
+            continue
+        # 排除重定向 stub（Summary 含 'Redirect stub' 且短页）：权威内容在目标页，不应刷 URL
+        try:
+            head = open(p, encoding="utf-8", errors="ignore").read(2048)
+        except Exception:
+            head = ""
+        if "Redirect stub" in head and head.count(chr(10)) < 30:
+            continue
+        out.append(p)
+    return out
+
+
+def main():
+    files = active_md()
+    rows = []
+    for p in files:
+        try:
+            t = open(p, encoding="utf-8", errors="ignore").read()
+        except Exception:
+            continue
+        p0 = bool(P0_RE.search(t)); p1 = bool(P1_RE.search(t)); p2 = bool(P2_RE.search(t))
+        rows.append({"path": os.path.relpath(p, ROOT).replace("\\", "/"),
+                     "layer": layer_of(p), "P0": p0, "P1": p1, "P2": p2,
+                     "any": p0 or p1 or p2, "lines": t.count("\n") + 1})
+    n = len(rows)
+    cov = lambda k: (sum(1 for r in rows if r[k]), round(100 * sum(1 for r in rows if r[k]) / n, 1)) if n else (0, 0.0)
+    p0c, p0p = cov("P0"); p1c, p1p = cov("P1"); p2c, p2p = cov("P2"); anyc, anyp = cov("any")
+    none = [r for r in rows if not r["any"]]
+    # 按层级分组
+    layers = {}
+    for r in rows:
+        layers.setdefault(r["layer"], {"n": 0, "P0": 0, "any": 0})
+        layers[r["layer"]]["n"] += 1
+        layers[r["layer"]]["P0"] += 1 if r["P0"] else 0
+        layers[r["layer"]]["any"] += 1 if r["any"] else 0
+    # 核心缺口：L1-L4 且无 P0（官方国际权威）的页
+    core_gaps = [r for r in rows if r["layer"] in ("L1", "L2", "L3", "L4") and not r["P0"]]
+    core_gaps.sort(key=lambda r: (r["layer"], -r["lines"]))
+
+    md = []
+    md.append("# concept/ 权威层 · 国际化权威来源覆盖率（2026-07-11）\n")
+    md.append("**EN**: Concept-layer International Authority Coverage")
+    md.append("**Summary**: 复用 maintenance P0/P1/P2 权威域分级，把审计扩展到 concept/ 权威层；量化覆盖率与缺口，"
+              "为『对齐网络上的国际化权威相关内容』提供机器可复核基线。仅审计，不改正文。\n")
+    md.append(f"> 生成: {TODAY} · 扫描 concept/ 活跃 md: **{n}**（排除 archive/SUMMARY/README）")
+    md.append("> P0 官方 / P1 学术形式化 / P2 社区生态，域定义复用 `scripts/maintenance/authority_coverage_dashboard.py`\n")
+    md.append("## 总体覆盖率\n")
+    md.append("| 维度 | 命中页 | 覆盖率 |")
+    md.append("|:---|---:|---:|")
+    md.append(f"| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | {p0c} | {p0p}% |")
+    md.append(f"| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | {p1c} | {p1p}% |")
+    md.append(f"| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | {p2c} | {p2p}% |")
+    md.append(f"| **任一权威（P0∪P1∪P2）** | **{anyc}** | **{anyp}%** |")
+    md.append(f"| 无任何国际权威引用（缺口） | {len(none)} | {round(100*len(none)/n,1) if n else 0}% |\n")
+    md.append("## 按层级覆盖率\n")
+    md.append("| 层级 | 页数 | P0 命中 | P0% | 任一权威 | 任一% |")
+    md.append("|:---|---:|---:|---:|---:|---:|")
+    for lv in ["L0", "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L?"]:
+        if lv in layers:
+            d = layers[lv]
+            md.append(f"| {lv} | {d['n']} | {d['P0']} | {round(100*d['P0']/d['n'],1)}% | {d['any']} | {round(100*d['any']/d['n'],1)}% |")
+    md.append("\n## 核心缺口（L1-L4 且 无 P0 官方国际权威）\n")
+    md.append(f"共 **{len(core_gaps)}** 页。下表为前 60（按层级、页长降序，优先补权威来源小节）。\n")
+    md.append("| 层级 | 文件 | 行数 |")
+    md.append("|:---|:---|---:|")
+    for r in core_gaps[:60]:
+        md.append(f"| {r['layer']} | `{r['path']}` | {r['lines']} |")
+    if len(core_gaps) > 60:
+        md.append(f"\n> … 另有 {len(core_gaps)-60} 页，见 JSON `core_gaps_l1_l4_no_p0`。")
+    md.append("\n## 方法学与诚信\n")
+    md.append("- 域分级来自现有 `maintenance/authority_coverage_dashboard.py`（单一来源），未新造口径。")
+    md.append("- 『命中』= 正文含对应域的 URL 子串（`re.search`）；不区分链接/正文引用，偏宽松（覆盖率可能略高估，缺口清单偏保守可信）。")
+    md.append("- 本审计只读，不修改任何文件；补缺口应基于 `concept/00_meta/02_sources/authority_source_map.md` 已核验映射 + 官方 URL，仅追加 References，不改正文事实。")
+    md.append("\n---\n*由 `scripts/check_concept_authority_coverage.py` 生成*")
+
+    os.makedirs(os.path.join(ROOT, "reports"), exist_ok=True)
+    md_path = os.path.join(ROOT, "reports", f"CONCEPT_AUTHORITY_COVERAGE_{TODAY}.md")
+    json_path = os.path.join(ROOT, "reports", f"CONCEPT_AUTHORITY_COVERAGE_{TODAY}.json")
+    open(md_path, "w", encoding="utf-8", newline="\n").write("\n".join(md))
+    payload = {"date": TODAY, "scanned": n,
+               "coverage": {"P0": [p0c, p0p], "P1": [p1c, p1p], "P2": [p2c, p2p], "any": [anyc, anyp],
+                            "none": len(none)},
+               "by_layer": layers, "core_gaps_l1_l4_no_p0": [r["path"] for r in core_gaps],
+               "none_any": [r["path"] for r in none]}
+    open(json_path, "w", encoding="utf-8").write(json.dumps(payload, ensure_ascii=False, indent=2))
+    print(f"[concept-authority] scanned={n}  P0={p0p}%  P1={p1p}%  P2={p2p}%  any={anyp}%  none={len(none)}")
+    print(f"[concept-authority] core L1-L4 gaps (no P0): {len(core_gaps)}")
+    print(f"[concept-authority] report: {os.path.relpath(md_path, ROOT)}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

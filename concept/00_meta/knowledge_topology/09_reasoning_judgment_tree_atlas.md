@@ -44,6 +44,10 @@ flowchart TD
     R2 --> F2[[引入新作用域 / clone 数据]]
     R3 --> F3[[先 collect 再处理 / 使用索引]]
     R4 --> F4[[见 Borrowing / Smart Pointers]]
+    F1 --> V1[验证回边：cargo check；再 cargo clippy 升 -D warnings]
+    F2 --> V1
+    F3 --> V1
+    F4 --> V1
 ```
 
 ### 3.2 生命周期判定树
@@ -63,6 +67,12 @@ flowchart TD
     R2 --> F2[[显式标注 'a / 使用生命周期省略规则]]
     R3 --> F3[[改用 owned 数据 / Pin]]
     R4 --> F4[[见 Lifetimes Advanced / HRTB]]
+    R5 --> F5[修复：补显式生命周期 'a；或改返回 owned/Box/Arc/'static 拥有数据]
+    F1 --> V2[验证回边：cargo check；闭包/迭代器再 cargo clippy 升 -D warnings]
+    F2 --> V2
+    F3 --> V2
+    F4 --> V2
+    F5 --> V2
 ```
 
 ### 3.3 类型不匹配判定树
@@ -82,6 +92,12 @@ flowchart TD
     R2 --> F2[[解引用 / 借用 / 使用 Deref]]
     R3 --> F3[[使用 ? / map_err / 定义统一错误类型]]
     R4 --> F4[[见 Return Type Notation Preview / Async Advanced]]
+    R5 --> F5[修复：加显式类型标注或 turbofish；为自定义类型 derive 或手写所需 trait]
+    F1 --> V3[验证回边：cargo check；trait bound/类型推断再 cargo clippy 升 -D warnings]
+    F2 --> V3
+    F3 --> V3
+    F4 --> V3
+    F5 --> V3
 ```
 
 ### 3.4 运行时 panic 判定树
@@ -101,6 +117,12 @@ flowchart TD
     R2 --> F2[[使用 get / checked 方法]]
     R3 --> F3[[统一锁顺序 / 使用 try_lock / 避免跨 await 锁]]
     R4 --> F4[[见 FFI Advanced / Unsafe Rust]]
+    R5 --> F5[修复：定位 unsafe 边界；用 get/checked 替换索引；持锁不跨 await；可疑 UB 走 miri]
+    F1 --> V4[验证回边：cargo test；再 cargo clippy 升 -W unwrap_used/indexing_slicing/await_holding_lock]
+    F2 --> V4
+    F3 --> V4
+    F4 --> V4
+    F5 --> V4
 ```
 
 ### 3.5 Unsafe 判定树
@@ -118,6 +140,10 @@ flowchart TD
     R2 --> F2[[使用 MaybeUninit / 严格初始化]]
     R3 --> F3[[封装 invariant / Safety Tags]]
     R4 --> F4[[见 Unsafe Rust Patterns / Safety Tags Preview]]
+    F1 --> V5[验证回边：cargo miri test 检测 Stacked/Tree Borrows；性质用 cargo kani]
+    F2 --> V5
+    F3 --> V5
+    F4 --> V5
 ```
 
 ---
@@ -148,6 +174,76 @@ flowchart TD
 - 需要查看示例/反例 → [示例与反例图谱](04_example_counterexample_atlas.md)
 - 需要逻辑推理链 → [逻辑推理图谱](05_logical_reasoning_atlas.md)
 - 需要概念定义 → [概念定义图谱](01_concept_definition_atlas.md)
+
+---
+
+## 闭环增强（可执行化）
+
+> 本小节为**纯增量**补充：为 §3 五棵判定树补上「根因 → 具体修复 → 验证回边」的闭环，并赋予稳定 ID（入口 `J-*`、验证 `V1–V5`），与 03（场景决策）/05（定理）建立跨文件回边。原 §2–§6 全部内容保持不变；§3.1–§3.5 仅在原树**末尾追加**修复与验证节点（不删不改原节点）。
+>
+> 入口稳定 ID：`J-BORROW-01`（§3.1 借用冲突）、`J-LIFE-02`（§3.2 生命周期）、`J-TYPE-03`（§3.3 类型不匹配）、`J-PANIC-04`（§3.4 运行时 panic）、`J-UNSAFE-05`（§3.5 unsafe）。
+
+### L. 死端修复（3 处：根因 → 具体修复策略）
+
+| 判定树 | 原死端根因 | 补的具体修复策略（已追加到原树） |
+|:---:|:---|:---|
+| §3.2 生命周期 | `R5` 生命周期省略规则不适用 | `F5` 补显式生命周期 `'a`；或改返回 owned/`Box`/`Arc`/`'static` 拥有数据 |
+| §3.3 类型不匹配 | `R5` 类型推断失败或自定义类型未实现 trait | `F5` 加显式类型标注或 turbofish；为自定义类型 derive 或手写所需 trait |
+| §3.4 运行时 panic | `R5` unsafe 导致 UB 或逻辑错误 | `F5` 定位 unsafe 边界；用 `get`/`checked` 替换索引；持锁不跨 await；可疑 UB 走 miri |
+
+> 修复后三处根因节点均有出边（`R5 --> F5`），不再是无修复死端。
+
+### M. 验证回边（每棵树末尾追加 V1–V5）
+
+| 验证节点 | 对应判定树 | 精确命令 | 验证概念页 |
+|:---:|:---|:---|:---|
+| `V1` | §3.1 借用冲突（`J-BORROW-01`） | `cargo check` → `cargo clippy --all-targets -- -D warnings` | [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) |
+| `V2` | §3.2 生命周期（`J-LIFE-02`） | `cargo check` → `cargo clippy --all-targets -- -D warnings` | [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) |
+| `V3` | §3.3 类型不匹配（`J-TYPE-03`） | `cargo check` → `cargo clippy --all-targets -- -D warnings` | [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) |
+| `V4` | §3.4 运行时 panic（`J-PANIC-04`） | `cargo test --all-targets` → `cargo clippy --all-targets -- -W clippy::unwrap_used -W clippy::indexing_slicing -W clippy::await_holding_lock`；可疑 UB 走 `cargo +nightly miri test --all-targets` | [Testing Strategies](../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md) · [Miri](../../04_formal/04_model_checking/31_miri.md) |
+| `V5` | §3.5 unsafe（`J-UNSAFE-05`） | `cargo +nightly miri test --all-targets` → `cargo kani` | [Miri](../../04_formal/04_model_checking/31_miri.md) · [Kani](../../04_formal/04_model_checking/32_kani.md) |
+
+> 说明：上表 clippy lint（`unwrap_used`/`indexing_slicing`/`await_holding_lock`）为真实 lint 名，但可用性随 toolchain 版本可能调整（⚠需复核）；不确定时退回通用 `cargo clippy --all-targets -- -D warnings`。
+
+### N. 闭环总图（问题 → 判定 → 推理 → 决策 → 验证 → 回边）
+
+```mermaid
+flowchart TD
+    K0[闭环入口：症状 J-*] --> K1{判定定量占比边界：含阈值/数字的判定节点≥50%？}
+    K1 -->|是| K2[根因 R* 定位]
+    K1 -->|否| K6[闭环修补：把纯是非问改写为含 阈值/边界/数字 的可判定节点]
+    K2 --> K3{死端边界：根因节点无修复边数≥1条？}
+    K3 -->|是| K7[闭环修补：为该根因补具体修复策略 F*（本次修 3 处：3.2/3.3/3.4 R5）]
+    K3 -->|否| K4[修复策略 F* 落地]
+    K6 --> K1
+    K7 --> K4
+    K4 --> K5[验证回边 V*：cargo check/test/clippy/miri/kani，链到对应验证概念页]
+    K5 --> K8{回边数量边界：跨文件回边≥4条？}
+    K8 -->|是| K9[闭环完成：问题→判定→推理→决策→验证→回边]
+    K8 -->|否| K10[闭环修补：在 03/05/09 之间补 回边：见 文件#ID]
+    K10 --> K8
+```
+
+> 叶子合规：K9/K5/K7/K6/K10 均为具体动作或状态，无 `[[` 跳出；定量判定节点 K1/K3/K8 含「≥50%/≥1条/≥4条」。
+
+### O. 跨文件回边（`J-*` → 03/05）
+
+| 入口 ID | 回边目标 | 用途 |
+|:---:|:---|:---|
+| `J-BORROW-01` | 回边：见 [`05_logical_reasoning_atlas.md#TH-BORROW-02`](05_logical_reasoning_atlas.md) | 借用冲突判定的定理依据（别名 XOR 可变性） |
+| `J-LIFE-02` | 回边：见 [`05_logical_reasoning_atlas.md#TH-LIFE-03`](05_logical_reasoning_atlas.md) | 生命周期判定的定理依据（引用不悬垂） |
+| `J-TYPE-03` | 回边：见 [`03_scenario_decision_tree_atlas.md#T-ABS-01`](03_scenario_decision_tree_atlas.md) | trait bound/对象安全错误的设计期预防入口 |
+| `J-PANIC-04` | 回边：见 [`03_scenario_decision_tree_atlas.md#T-CONC-01`](03_scenario_decision_tree_atlas.md) | 死锁（持锁跨 await）的设计期预防入口 |
+| `J-UNSAFE-05` | 回边：见 [`05_logical_reasoning_atlas.md#TH-PIN-07`](05_logical_reasoning_atlas.md) 与 [`#TH-TYPE-04`](05_logical_reasoning_atlas.md) | unsafe soundness 质疑的定理依据 |
+
+> 回边：见 [`03_scenario_decision_tree_atlas.md#T-CONC-01`](03_scenario_decision_tree_atlas.md)（`J-PANIC-04` 死锁的设计期预防）；回边：见 [`05_logical_reasoning_atlas.md#TH-SEND-06`](05_logical_reasoning_atlas.md)（`J-UNSAFE-05`/`J-PANIC-04` 并发安全的定理依据）。
+
+### P. 本文件闭环小结
+
+- 修复死端：**3 处**（§3.2/§3.3/§3.4 的 `R5`），均补具体修复策略 `F5` 并接续验证回边。
+- 追加验证回边节点：**5 个**（`V1–V5`，每棵判定树末尾各一），均含具体命令并链到 Miri/Kani/Clippy 概念页。
+- 新增 mermaid：**1 个**（闭环总图）；新增定量判定节点：**3 个**（K1/K3/K8）。
+- 跨文件回边：**7 条**（→ 05：`TH-BORROW-02`/`TH-LIFE-03`/`TH-PIN-07`/`TH-TYPE-04`/`TH-SEND-06`；→ 03：`T-ABS-01`/`T-CONC-01`）。
 
 ---
 

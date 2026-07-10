@@ -9,7 +9,7 @@
 > **A/S/P 标记**: S — Structure
 > **双维定位**: C×Eva
 > **前置概念**: [PL Foundations Roadmap](../00_framework/pl_foundations_roadmap.md) · [C/C++ Engineering Roadmap](../00_framework/cpp_rust_engineering_roadmap.md) · [Pattern Semantic Space Index](../00_framework/pattern_semantic_space_index.md)
-> **后置概念**: [Concept Audit Guide](../03_audit/08_concept_audit_guide.md)
+> **后置概念**: [Concept Audit Guide](../03_audit/concept_audit_guide.md)
 > **主要来源**: [SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md](../../../archive/reports/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RFCs](https://github.com/rust-lang/rfcs)
 ---
 

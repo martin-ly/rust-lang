@@ -149,6 +149,13 @@
     - [Option 常用方法](#option-常用方法)
     - [Result\<T, E\> 常用方法](#resultt-e-常用方法)
     - [`?` 运算符传播规则](#-运算符传播规则)
+  - [Rust 1.97.0 平台交叉补遗：Windows `WSAESHUTDOWN` → `ErrorKind::BrokenPipe` 映射与迁移判定](#rust-1970-平台交叉补遗windows-wsaeshutdown--errorkindbrokenpipe-映射与迁移判定)
+    - [一、变化事实（来源确认）](#一变化事实来源确认)
+    - [二、Windows / Unix `ErrorKind` 映射差异](#二windows--unix-errorkind-映射差异)
+    - [三、对 `match ErrorKind` 各分支的影响](#三对-match-errorkind-各分支的影响)
+    - [四、迁移前 / 后代码对比（Edition 2024 / Rust 1.97.0+）](#四迁移前--后代码对比edition-2024--rust-1970)
+    - [五、边界说明](#五边界说明)
+    - [六、来源与反链](#六来源与反链)
 
 ## 一、权威定义（Definition）
 
@@ -2715,3 +2722,97 @@ fn may_fail() -> Result<T, E> {
 ```
 
 > 完整错误处理哲学、自定义错误类型与生态库对比参见本节正文。
+
+---
+
+## Rust 1.97.0 平台交叉补遗：Windows `WSAESHUTDOWN` → `ErrorKind::BrokenPipe` 映射与迁移判定
+
+> **对应版本**：Rust **1.97.0+** / **Edition 2024**。
+> **定位**：补齐审计 §2.4 / §4 P2-2 缺口#7。本页此前仅有 1.97 横幅回链，无 Windows/Unix `ErrorKind` 映射差异。本节只补**映射差异与迁移判定**，不重复 `Result`/`?` 概念推导。完整判定树见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §7。
+
+### 一、变化事实（来源确认）
+
+> Rust 1.97.0 在 **Windows** 上把 Winsock 的 `WSAESHUTDOWN`（对已 `shutdown` 关闭**写侧**的 socket 再写）统一映射为 `std::io::ErrorKind::BrokenPipe`，使 Windows 与 Unix（写已关闭管道得 `EPIPE`）行为一致。
+> 来源（逐字）：[releases.rs 1.97.0](https://releases.rs/docs/1.97.0/) ——"On Windows, after calling `shutdown` on a socket to shut down the write side, attempting to write to the socket will now produce a `BrokenPipe` error **rather than `Other`**. Map `WSAESHUTDOWN` to `io::ErrorKind::BrokenPipe`"。即旧映射目标为 `ErrorKind::Other`。
+
+### 二、Windows / Unix `ErrorKind` 映射差异
+
+| 场景 | Unix（任意版本） | Windows < 1.97 | Windows 1.97.0+ | 对 `match err.kind()` 的影响 |
+|:---|:---|:---|:---|:---|
+| 关闭**写侧**后再写（`shutdown(Write)` → `write`） | `EPIPE` → **`BrokenPipe`** | `WSAESHUTDOWN` → **`Other`** | `WSAESHUTDOWN` → **`BrokenPipe`** | Windows 旧映射 `Other` 命中点**失效**；与 Unix 统一到 `BrokenPipe` |
+| 对端重置连接 | `ECONNRESET` → `ConnectionReset` | `WSAECONNRESET` → `ConnectionReset` | 同左（未变） | 无影响 |
+| 对端中止 | `ECONNABORTED` → `ConnectionAborted` | 对应 Winsock → `ConnectionAborted` | 同左（未变） | 无影响 |
+| 非阻塞暂不可写 | `EAGAIN/EWOULDBLOCK` → `WouldBlock` | `WSAEWOULDBLOCK` → `WouldBlock` | 同左（未变） | 无影响 |
+
+> 读法：**只有"Windows + 关闭写侧后再写"这一格发生映射变化**（`Other` → `BrokenPipe`），其余 `ErrorKind` 不变；Unix 一侧全程未变。
+
+### 三、对 `match ErrorKind` 各分支的影响
+
+| 现有匹配写法 | 1.97 前的 Windows 行为 | 1.97 起的 Windows 行为 | 是否需迁移 |
+|:---|:---|:---|:---|
+| 显式 `ErrorKind::Other =>` 用于兜底"关闭后写" | 命中该 `Other` 分支 | **不再命中**（变 `BrokenPipe`），落入处理 `BrokenPipe` 的分支或通配 | **必须**：补 `BrokenPipe` 分支，否则原 `Other` 分支逻辑静默失效 |
+| 只用 `ConnectionReset` 表示"对端关闭" | 关闭写侧再写走 `Other`（未覆盖） | 走 `BrokenPipe`（仍未覆盖，落入通配） | **必须**：把 `BrokenPipe` 并入"对端关闭"分支 |
+| 已显式处理 `BrokenPipe` | `BrokenPipe` 分支只管 Unix EPIPE | Windows 关闭写侧再写**也**进 `BrokenPipe` 分支（语义更一致） | 通常无需迁移，确认分支处理符合预期即可 |
+| 仅用通配 `other =>` 兜底（无显式 `BrokenPipe`/`Other`） | 该错误进通配 | 仍进通配（kind 值变了，但走同一通配） | 编译与分支不变；若 `other` 内按值二次分发则会错位，需复核 |
+
+> **关键边界**：`std::io::ErrorKind` 是 `#[non_exhaustive]`，穷尽匹配本就需要通配臂；因此本次变化**通常不会让现有 `match` 无法编译**，风险在于**运行期分支错位**——原先走 `Other` 的逻辑现在改走 `BrokenPipe`（或通配）。这与"硬错误"类兼容性变化不同，属**静默行为变化**，需靠回归测试暴露。
+
+### 四、迁移前 / 后代码对比（Edition 2024 / Rust 1.97.0+）
+
+**迁移前**：细分 `ErrorKind` 但未覆盖 `BrokenPipe`，并（隐式）依赖 Windows 上"关闭后写 = `Other`"。
+
+```rust,ignore
+// edition = "2024", rust = "1.96" —— Windows 上关闭写侧再写得 Other；1.97 起变 BrokenPipe
+use std::io::ErrorKind;
+
+fn classify(err: &std::io::Error) -> &'static str {
+    match err.kind() {
+        ErrorKind::ConnectionReset => "peer reset",
+        ErrorKind::Other => "windows shutdown-write (1.96)", // 1.97 起在 Windows 上不再命中
+        ErrorKind::UnexpectedEof => "eof",
+        other => {
+            let _ = other;
+            "other"
+        }
+    }
+}
+```
+
+**迁移后**：把 `BrokenPipe` 与 `ConnectionReset`/`ConnectionAborted` 聚合为统一的"对端关闭"路径，Windows `WSAESHUTDOWN` 与 Unix `EPIPE` 合并；末尾保留通配兜底，避免未来新增 `ErrorKind` 时匹配退化。
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— 统一 Windows/Unix 的"对端关闭"语义
+use std::io::ErrorKind;
+
+fn classify(err: &std::io::Error) -> &'static str {
+    match err.kind() {
+        ErrorKind::BrokenPipe
+        | ErrorKind::ConnectionReset
+        | ErrorKind::ConnectionAborted => "peer closed", // Windows WSAESHUTDOWN 与 Unix EPIPE 统一到此
+        ErrorKind::UnexpectedEof => "eof",
+        ErrorKind::WouldBlock | ErrorKind::TimedOut => "retry",
+        _ => "other", // 通配兜底；ErrorKind 为 #[non_exhaustive]，通配本就必需
+    }
+}
+```
+
+> **迁移判定**（一句话版，完整树见反链）：仅 **Windows 目标** + 代码**按 `ErrorKind` 细分匹配** + **未覆盖 `BrokenPipe` 或依赖 `Other` 兜底** → 需要补 `BrokenPipe` 分支；只看 `is_err()` / 打印错误 / 用通配且不再二次分发 → 无需迁移。
+
+### 五、边界说明
+
+1. **仅 Windows**：Unix 一侧映射未变；`#[cfg(windows)]` / `#[cfg(unix)]` 条件编译下若各自手写映射，需只改 Windows 分支。
+2. **仅"关闭写侧后再写"**：触发点是先 `shutdown(Shutdown::Write)`/`Shutdown::Both` 再 `write`；读侧（`shutdown(Read)`）与未 shutdown 的对端关闭不在这条变化上。
+3. **异步可见性**：async I/O（`tokio`/`async-std` 的 `poll_write`）最终仍落到同一 `io::Error`，故 `ErrorKind::BrokenPipe` 同样会出现在 async 路径的 `Ready(Err(e))` 中；按 `ErrorKind` 细分的重连/退避逻辑需一并覆盖 `BrokenPipe`。
+4. **`#[non_exhaustive]`**：`ErrorKind` 会持续新增变体；务必保留 `_ =>` 通配臂，避免未来版本新增 kind 时匹配退化（这同时是防御 1.97 之后变化的通用做法）。
+5. **不是编译错误**：本变化属运行期行为差异，`cargo check` 不会报错；验证靠 Windows 目标的"关闭后写"回归测试断言 `err.kind() == ErrorKind::BrokenPipe`。
+
+### 六、来源与反链
+
+- **来源**：
+  - [releases.rs 1.97.0 — Compatibility Notes](https://releases.rs/docs/1.97.0/)（"Map `WSAESHUTDOWN` to `io::ErrorKind::BrokenPipe`"、旧映射 `Other`）。
+  - [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md) §7 兼容性表（"Windows 上将 `WSAESHUTDOWN` 映射为 `BrokenPipe`"）。
+  - [`std::io::ErrorKind` 文档](https://doc.rust-lang.org/std/io/enum.ErrorKind.html)（`#[non_exhaustive]`、`BrokenPipe`/`ConnectionReset`/`Other` 变体语义）。
+- **反链**：
+  - [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)
+  - [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md)（Platform + Compat-Lint 列，#24）
+  - [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md)（§7 `WSAESHUTDOWN→BrokenPipe` 判定树与回归测试示例）

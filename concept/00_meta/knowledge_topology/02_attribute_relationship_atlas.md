@@ -13,9 +13,9 @@
 
 | 概念 | 层级 | 受众 | 分级 | A/S/P | Bloom | 定理链 |
 |:---|:---:|:---|:---|:---:|:---:|:---|
-| [Bloom Taxonomy](../00_framework/03_bloom_taxonomy.md) | L0 元信息层 | 进阶 | 综述级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Cross Reference Matrix](../04_navigation/05_cross_reference_matrix.md) | L0 元信息层 | — | — | — | — | — |
-| [Concept Audit Guide](../03_audit/08_concept_audit_guide.md) | L0 元信息层 | 专家 | 综述级 | P | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Bloom Taxonomy](../00_framework/bloom_taxonomy.md) | L0 元信息层 | 进阶 | 综述级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Cross Reference Matrix](../04_navigation/cross_reference_matrix.md) | L0 元信息层 | — | — | — | — | — |
+| [Concept Audit Guide](../03_audit/concept_audit_guide.md) | L0 元信息层 | 专家 | 综述级 | P | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Rust 知识体系 A/S/P 三维认知标记规范](../03_audit/asp_marking_guide.md) | L0 元信息层 | 专家 | 综述级 | — | 元（Meta） | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [概念一致性检查清单](../03_audit/audit_checklist.md) | L0 元信息层 | 专家 | 综述级 | — | 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [权威来源映射表](../02_sources/authority_source_map.md) | L0 元信息层 | 进阶 | 综述级 | — | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |

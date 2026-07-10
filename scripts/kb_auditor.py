@@ -623,7 +623,7 @@ def export_json(audits: list[FileAudit]) -> dict:
         "meta": {
             "version": "1.0",
             "total_files": len(audits),
-            "generated_at": os.popen("date -Iseconds").read().strip(),
+            "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         },
         "files": [
             {

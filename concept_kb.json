@@ -1,12 +1,12 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 460,
-    "generated_at": "The system cannot accept the date entered.\nEnter the new date: (yy-mm-dd)"
+    "total_files": 462,
+    "generated_at": "2026-07-10T23:15:32.858410+00:00"
   },
   "files": [
     {
-      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\00_framework\\03_bloom_taxonomy.md",
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\00_framework\\bloom_taxonomy.md",
       "layer": "L0",
       "title": "Bloom Taxonomy（Bloom 分类法）",
       "positioning": "",
@@ -35,8 +35,8 @@
       "sources": [],
       "cross_references": [
         "../../README.md",
-        "../03_audit/08_concept_audit_guide.md",
-        "../04_navigation/05_cross_reference_matrix.md",
+        "../03_audit/concept_audit_guide.md",
+        "../04_navigation/cross_reference_matrix.md",
         "../04_navigation/learning_guide.md",
         "semantic_space.md"
       ],
@@ -205,7 +205,7 @@
         "../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md",
         "../../06_ecosystem/06_data_and_distributed/04_application_domains.md",
         "../04_navigation/learning_guide.md",
-        "03_bloom_taxonomy.md"
+        "bloom_taxonomy.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -213,7 +213,7 @@
       "matrix_rows": 32,
       "pre_post": {
         "pre": [
-          "[Learning Guide](../04_navigation/learning_guide.md) · [Bloom Taxonomy](03_bloom_taxonomy.md)"
+          "[Learning Guide](../04_navigation/learning_guide.md) · [Bloom Taxonomy](bloom_taxonomy.md)"
         ],
         "post": [
           "[Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md)"
@@ -1472,43 +1472,6 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\03_audit\\08_concept_audit_guide.md",
-      "layer": "L0",
-      "title": "Concept Audit Guide（概念审计指南）",
-      "positioning": "",
-      "line_count": 105,
-      "theorem_chains": [
-        {
-          "text": "| 08 Concept Audit Guide 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
-          "type": "table_row"
-        }
-      ],
-      "anti_propositions": [
-        {
-          "title": "### 反命题"
-        }
-      ],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "../../README.md",
-        "../00_framework/03_bloom_taxonomy.md",
-        "../00_framework/semantic_space.md",
-        "../04_navigation/05_cross_reference_matrix.md",
-        "../04_navigation/learning_guide.md"
-      ],
-      "transitions": 6,
-      "has_cognitive_path": true,
-      "mermaid_blocks": 1,
-      "matrix_rows": 9,
-      "pre_post": {
-        "pre": [],
-        "post": []
-      },
-      "backward_chains": 0,
-      "templated_chains": 0
-    },
-    {
       "path": "E:\\_src\\rust-lang\\concept\\00_meta\\03_audit\\asp_marking_guide.md",
       "layer": "L0",
       "title": "Rust 知识体系 A/S/P 三维认知标记规范",
@@ -1583,6 +1546,43 @@
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 81,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\03_audit\\concept_audit_guide.md",
+      "layer": "L0",
+      "title": "Concept Audit Guide（概念审计指南）",
+      "positioning": "",
+      "line_count": 105,
+      "theorem_chains": [
+        {
+          "text": "| 08 Concept Audit Guide 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "### 反命题"
+        }
+      ],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../README.md",
+        "../00_framework/bloom_taxonomy.md",
+        "../00_framework/semantic_space.md",
+        "../04_navigation/cross_reference_matrix.md",
+        "../04_navigation/learning_guide.md"
+      ],
+      "transitions": 6,
+      "has_cognitive_path": true,
+      "mermaid_blocks": 1,
+      "matrix_rows": 9,
       "pre_post": {
         "pre": [],
         "post": []
@@ -1711,34 +1711,6 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\04_navigation\\05_cross_reference_matrix.md",
-      "layer": "L0",
-      "title": "Cross Reference Matrix（交叉引用矩阵）",
-      "positioning": "",
-      "line_count": 15,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "../00_framework/03_bloom_taxonomy.md",
-        "../00_framework/semantic_space.md",
-        "../03_audit/08_concept_audit_guide.md",
-        "concept_index.md",
-        "learning_guide.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 0,
-      "pre_post": {
-        "pre": [],
-        "post": []
-      },
-      "backward_chains": 0,
-      "templated_chains": 0
-    },
-    {
       "path": "E:\\_src\\rust-lang\\concept\\00_meta\\04_navigation\\career_landscape.md",
       "layer": "L0",
       "title": "Rust 职业市场全景：2026 年数据与分析",
@@ -1755,7 +1727,7 @@
       "cross_references": [
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/06_data_and_distributed/04_application_domains.md",
-        "../00_framework/03_bloom_taxonomy.md"
+        "../00_framework/bloom_taxonomy.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -1763,7 +1735,7 @@
       "matrix_rows": 36,
       "pre_post": {
         "pre": [
-          "[Bloom Taxonomy](../00_framework/03_bloom_taxonomy.md)"
+          "[Bloom Taxonomy](../00_framework/bloom_taxonomy.md)"
         ],
         "post": [
           "[Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md)"
@@ -1878,6 +1850,34 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\04_navigation\\cross_reference_matrix.md",
+      "layer": "L0",
+      "title": "Cross Reference Matrix（交叉引用矩阵）",
+      "positioning": "",
+      "line_count": 14,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../00_framework/bloom_taxonomy.md",
+        "../00_framework/semantic_space.md",
+        "../03_audit/concept_audit_guide.md",
+        "concept_index.md",
+        "learning_guide.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 0,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\00_meta\\04_navigation\\foundations_gap_closure_index.md",
       "layer": "L0",
       "title": "基础知识缺口补全总索引",
@@ -1910,7 +1910,7 @@
         "../00_framework/pl_foundations_roadmap.md",
         "../00_framework/semantic_bridge_algorithms_patterns.md",
         "../01_terminology/terminology_glossary.md",
-        "../03_audit/08_concept_audit_guide.md",
+        "../03_audit/concept_audit_guide.md",
         "foundations_gap_closure_index.md"
       ],
       "transitions": 0,
@@ -1922,7 +1922,7 @@
           "[PL Foundations Roadmap](../00_framework/pl_foundations_roadmap.md) · [C/C++ Engineering Roadmap](../00_framework/cpp_rust_engineering_roadmap.md) · [Pattern Semantic Space Index](../00_framework/pattern_semantic_space_index.md)"
         ],
         "post": [
-          "[Concept Audit Guide](../03_audit/08_concept_audit_guide.md)"
+          "[Concept Audit Guide](../03_audit/concept_audit_guide.md)"
         ]
       },
       "backward_chains": 0,
@@ -3398,7 +3398,7 @@
         "../../07_future/04_research_and_experimental/29_ebpf_rust.md",
         "../../07_future/04_research_and_experimental/43_rust_for_linux.md",
         "../../07_future/05_roadmaps/24_roadmap.md",
-        "../00_framework/03_bloom_taxonomy.md",
+        "../00_framework/bloom_taxonomy.md",
         "../00_framework/boundary_extension_tree.md",
         "../00_framework/cognitive_dimension_matrix.md",
         "../00_framework/competency_graph.md",
@@ -3424,16 +3424,16 @@
         "../02_sources/rustbelt_predicate_map.md",
         "../02_sources/sources.md",
         "../02_sources/topic_authority_alignment_map.md",
-        "../03_audit/08_concept_audit_guide.md",
         "../03_audit/asp_marking_guide.md",
         "../03_audit/audit_checklist.md",
+        "../03_audit/concept_audit_guide.md",
         "../03_audit/concept_consistency_audit_checklist.md",
         "../03_audit/grading_system.md",
         "../03_audit/quality_dashboard_v2.md",
         "../03_audit/template_deduplication_guide.md",
-        "../04_navigation/05_cross_reference_matrix.md",
         "../04_navigation/career_landscape.md",
         "../04_navigation/concept_index.md",
+        "../04_navigation/cross_reference_matrix.md",
         "../04_navigation/foundations_gap_closure_index.md",
         "../04_navigation/inter_layer_map.md",
         "../04_navigation/inter_layer_topology.md",
@@ -3802,7 +3802,7 @@
         "../../07_future/04_research_and_experimental/29_ebpf_rust.md",
         "../../07_future/04_research_and_experimental/43_rust_for_linux.md",
         "../../07_future/05_roadmaps/24_roadmap.md",
-        "../00_framework/03_bloom_taxonomy.md",
+        "../00_framework/bloom_taxonomy.md",
         "../00_framework/boundary_extension_tree.md",
         "../00_framework/cognitive_dimension_matrix.md",
         "../00_framework/competency_graph.md",
@@ -3828,16 +3828,16 @@
         "../02_sources/rustbelt_predicate_map.md",
         "../02_sources/sources.md",
         "../02_sources/topic_authority_alignment_map.md",
-        "../03_audit/08_concept_audit_guide.md",
         "../03_audit/asp_marking_guide.md",
         "../03_audit/audit_checklist.md",
+        "../03_audit/concept_audit_guide.md",
         "../03_audit/concept_consistency_audit_checklist.md",
         "../03_audit/grading_system.md",
         "../03_audit/quality_dashboard_v2.md",
         "../03_audit/template_deduplication_guide.md",
-        "../04_navigation/05_cross_reference_matrix.md",
         "../04_navigation/career_landscape.md",
         "../04_navigation/concept_index.md",
+        "../04_navigation/cross_reference_matrix.md",
         "../04_navigation/foundations_gap_closure_index.md",
         "../04_navigation/inter_layer_map.md",
         "../04_navigation/inter_layer_topology.md",
@@ -3879,7 +3879,7 @@
       "layer": "L0",
       "title": "场景决策树图谱（Scenario Decision Tree Atlas）",
       "positioning": "",
-      "line_count": 143,
+      "line_count": 282,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3926,12 +3926,13 @@
         "../../07_future/03_preview_features/46_cargo_semver_checks_preview.md",
         "01_concept_definition_atlas.md",
         "02_attribute_relationship_atlas.md",
+        "05_logical_reasoning_atlas.md",
         "06_inter_layer_mapping_atlas.md",
         "09_reasoning_judgment_tree_atlas.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 9,
       "matrix_rows": 27,
       "pre_post": {
         "pre": [],
@@ -4203,7 +4204,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [基础知识缺口补全总索引](../04_navigation/foundations_gap_closure_index.md) | ⟹ | [Concept Audit Guide](../03_audit/08_concept_audit_guide.md) |",
+          "text": "| [基础知识缺口补全总索引](../04_navigation/foundations_gap_closure_index.md) | ⟹ | [Concept Audit Guide](../03_audit/concept_audit_guide.md) |",
           "type": "table_row"
         },
         {
@@ -5385,7 +5386,7 @@
         "../00_framework/pattern_semantic_space_index.md",
         "../00_framework/pl_foundations_roadmap.md",
         "../00_framework/semantic_bridge_algorithms_patterns.md",
-        "../03_audit/08_concept_audit_guide.md",
+        "../03_audit/concept_audit_guide.md",
         "../03_audit/quality_dashboard_v2.md",
         "../03_audit/template_deduplication_guide.md",
         "../04_navigation/foundations_gap_closure_index.md"
@@ -5450,7 +5451,7 @@
         "../../07_future/03_preview_features/08_safety_tags_preview.md",
         "../../07_future/03_preview_features/11_const_trait_impl_preview.md",
         "../02_sources/topic_authority_alignment_map.md",
-        "../04_navigation/05_cross_reference_matrix.md",
+        "../04_navigation/cross_reference_matrix.md",
         "../placeholders/placeholder_generic.md"
       ],
       "transitions": 0,
@@ -5620,7 +5621,7 @@
         "../00_framework/cpp_rust_engineering_roadmap.md",
         "../00_framework/pattern_semantic_space_index.md",
         "../00_framework/pl_foundations_roadmap.md",
-        "../03_audit/08_concept_audit_guide.md",
+        "../03_audit/concept_audit_guide.md",
         "../04_navigation/concept_index.md",
         "../04_navigation/navigation.md"
       ],
@@ -9299,7 +9300,7 @@
       "layer": "L1",
       "title": "类型强制与转换：显式与隐式的边界",
       "positioning": "系统讲解 Rust **类型强制（coercion）**和**类型转换（casting）**——从 deref 强制、子类型强制到显式 `as` 转换，揭示 Rust 如何在安全与灵活性之间精确控制类型变换。",
-      "line_count": 913,
+      "line_count": 1000,
       "theorem_chains": [
         {
           "text": "| 类型强制与转换：显式与隐式的边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -9435,6 +9436,30 @@
           "lines": 3,
           "should_fail": false,
           "code_preview": "let raw_ptr: *const i32 = &42; let ref_ptr: &i32 = unsafe { &*raw_ptr }; ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 仅 pin! 返回值上的 coercion 被移除 use std::pin::{p..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 不能用 as 绕过；正确做法是改写法 use std::pin::{pin, Pin..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 语义对照：固定引用 ≠ 固定 pointee use std::pin::{pin,..."
         }
       ],
       "sources": [],
@@ -9444,7 +9469,11 @@
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/02_generics.md",
+        "../../03_advanced/01_async/06_pin_unpin.md",
         "../../03_advanced/04_ffi/05_rust_ffi.md",
+        "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
+        "../../07_future/00_version_tracking/migration_197_decision_tree.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
         "04_type_system.md"
       ],
@@ -16127,8 +16156,8 @@
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\00_traits\\32_editions.md",
       "layer": "L2",
       "title": "Rust Editions（语言版本）",
-      "positioning": "",
-      "line_count": 195,
+      "positioning": "补齐审计 §2.4 / §4 P2-2 缺口#6 指出的\"edition 2024 × 1.97 割裂\"。本节只做**交叉定位**，不重复版本页逐项解释；fallback 的推断推导落在承载页 [`27_type_checking_and_inference.md`](../../04_formal/00_type_theory/27_type_checking_and_inference.md) 与 [`31_never_type.md`](../../01_foundation/02_type_system/31_never_type.md)。",
+      "line_count": 317,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将编译器版本、Edition、语法行为、迁移路径串联起来。",
@@ -16170,17 +16199,46 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "fn main() {     let arr = [1, 2, 3];     for x in arr {         // 2021: 按值迭代数组；..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— crate 根（lib.rs / main.rs）  // (a) edition ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// edition = \"2021\" —— 旧行为：! 在无法推断时回退到 () // edition = \"2024\" —— 新行为：! 保持为 !，下面这..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "// rust = \"1.97\"（任意 edition）—— 依赖旧推断会触发 future-compatibility warning fn takes_f3..."
         }
       ],
       "sources": [],
       "cross_references": [
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../01_foundation/02_type_system/31_never_type.md",
         "../../03_advanced/01_async/25_async_advanced.md",
+        "../../04_formal/00_type_theory/27_type_checking_and_inference.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/01_cargo/76_cargo_196_features.md",
         "../../06_ecosystem/01_cargo/80_cargo_getting_started.md",
         "../../07_future/00_version_tracking/05_rust_version_tracking.md",
+        "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
+        "../../07_future/00_version_tracking/migration_197_decision_tree.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../../07_future/01_edition_roadmap/44_edition_guide.md",
         "../05_modules_and_visibility/10_module_system.md",
         "33_rust_release_process.md"
@@ -16188,7 +16246,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 22,
+      "matrix_rows": 35,
       "pre_post": {
         "pre": [
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Cargo Getting Started](../../06_ecosystem/01_cargo/80_cargo_getting_started.md) · [Module System](../05_modules_and_visibility/10_module_system.md)"
@@ -18700,8 +18758,8 @@
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\03_error_handling\\04_error_handling.md",
       "layer": "L2",
       "title": "Error Handling（错误处理）",
-      "positioning": "",
-      "line_count": 2718,
+      "positioning": "补齐审计 §2.4 / §4 P2-2 缺口#7。本页此前仅有 1.97 横幅回链，无 Windows/Unix `ErrorKind` 映射差异。本节只补**映射差异与迁移判定**，不重复 `Result`/`?` 概念推导。完整判定树见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §7。",
+      "line_count": 2819,
       "theorem_chains": [
         {
           "text": "- [4.1 引理：Result\\<T,E\\> ⟹ 和类型强制错误处理](#41-引理resultte--和类型强制错误处理)",
@@ -19205,6 +19263,22 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "fn may_fail() -> Result<T, E> {     let v = another_may_fail()?; // 自动调用 From 转换..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.96\" —— Windows 上关闭写侧再写得 Other；1.97 起变 BrokenPipe ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 统一 Windows/Unix 的\"对端关闭\"语义 use std::io::Err..."
         }
       ],
       "sources": [],
@@ -19220,6 +19294,8 @@
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/02_async.md",
         "../../04_formal/02_separation_logic/04_rustbelt.md",
+        "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
+        "../../07_future/00_version_tracking/migration_197_decision_tree.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../00_traits/01_traits.md",
         "../01_generics/02_generics.md"
@@ -19227,7 +19303,7 @@
       "transitions": 7,
       "has_cognitive_path": true,
       "mermaid_blocks": 8,
-      "matrix_rows": 199,
+      "matrix_rows": 211,
       "pre_post": {
         "pre": [
           "[Type System Basics](../../01_foundation/02_type_system/04_type_system.md) ·"
@@ -22601,7 +22677,7 @@
       "layer": "L3",
       "title": "原子操作与内存序：无锁并发的精确控制",
       "positioning": "深入分析 Rust **原子类型（Atomic）**和**内存排序（Memory Ordering [来源: [Atomic Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]）**——从基本的 load/store 到 compare-and-swap 和释放-获取语义，揭示无锁编程中硬件内存模型的精确控制。",
-      "line_count": 1348,
+      "line_count": 1424,
       "theorem_chains": [
         {
           "text": "| 原子操作与内存序：无锁并发的精确控制 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -22614,6 +22690,10 @@
         {
           "text": "| 原子操作与内存序：无锁并发的精确控制 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |",
           "type": "table_row"
+        },
+        {
+          "text": "本页 §1.1 列出各 `Atomic*` 类型的大小；其**对齐**由 [`42_type_layout.md`](../../04_formal/05_rustc_internals/42_type_layout.md) §二 “Size 与 Alignment” 与标准库对 `Atomic*` 的布局保证共同决定。`#[repr(align(N))]` 可主动抬高对齐（永远安全，更强对齐 ⟹ 满足较弱要求）；`#[repr(C)]` 固定字段顺序与 C-ABI 对齐但**不**单独保证原子自然对齐。细节与反例见镜像页 [`29_memory_model.md`](../02_unsafe/29_memory_model.md) §Rust 1.97.0 交叉语义 §2。",
+          "type": "inline"
         }
       ],
       "anti_propositions": [
@@ -22783,6 +22863,22 @@
           "lines": 4,
           "should_fail": false,
           "code_preview": "// 简单互斥场景：std::sync::Mutex 性能更好 // 读多写少场景：RwLock 或 RCU // 计数器场景：AtomicUsize + Re..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 用 cfg 在编译期选择原子实现路径 use std::sync::atomic::..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 两条轴互不影响：Ordering 选可见性，cfg 选指令路径 use std::s..."
         }
       ],
       "sources": [],
@@ -22793,10 +22889,15 @@
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../01_foundation/02_type_system/04_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
+        "../../04_formal/05_rustc_internals/42_type_layout.md",
         "../../04_formal/README.md",
         "../../06_ecosystem/04_web_and_networking/18_distributed_systems.md",
         "../../06_ecosystem/README.md",
+        "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
+        "../../07_future/00_version_tracking/migration_197_decision_tree.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../02_unsafe/03_unsafe.md",
+        "../02_unsafe/29_memory_model.md",
         "../README.md",
         "01_concurrency.md",
         "10_concurrency_patterns.md"
@@ -22804,7 +22905,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 34,
+      "matrix_rows": 37,
       "pre_post": {
         "pre": [
           "[Concurrency](01_concurrency.md) · [Unsafe](../02_unsafe/03_unsafe.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)",
@@ -24106,7 +24207,7 @@
       "layer": "L3",
       "title": "Pin 与 Unpin：自引用类型的不动性保证",
       "positioning": "深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。",
-      "line_count": 880,
+      "line_count": 972,
       "theorem_chains": [
         {
           "text": "| Pin 与 Unpin：自引用类型的不动性保证 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -24274,15 +24375,43 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "struct ExampleFuture {     local: String,     ref_to_local: *const String, // 指向..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— pin! 返回类型在 1.97 起严格化 use std::pin::{pin, P..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— Unpin 视角：固定引用 ≠ 固定 pointee use std::pin::{..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 自引用投影：pin!(&mut field) 不再 coerce 出 Pin<&mu..."
         }
       ],
       "sources": [],
       "cross_references": [
         "../../00_meta/04_navigation/learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/02_type_system/14_coercion_and_casting.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../04_formal/README.md",
         "../../06_ecosystem/README.md",
+        "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
+        "../../07_future/00_version_tracking/migration_197_decision_tree.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../../07_future/03_preview_features/22_gen_blocks_preview.md",
         "../02_unsafe/03_unsafe.md",
         "../README.md",
@@ -27366,7 +27495,7 @@
       "layer": "L3",
       "title": "Rust 内存模型（Memory Model）",
       "positioning": "",
-      "line_count": 256,
+      "line_count": 332,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将字节模型、provenance 和 UB 边界串联起来。",
@@ -27382,6 +27511,10 @@
         },
         {
           "text": "> **反命题 3**: \"其他语言对内存模型的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）、借用（Borrowing）和 provenance 模型具有语言特有形态。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **边界**：`#[repr(align(N))]` 可以把对齐**抬高**到超过原子自然对齐，这总是安全的（更强对齐 ⟹ 仍满足较弱要求）；危险的是反过来——当一个值的**实际对齐低于**原子操作所需对齐时对其执行原子操作，是 UB（本文 §八）。`cfg(...)` 的用途正是让代码在“目标不保证自然对齐”时**拒绝或改走保守路径**，而非“修复”对齐。",
           "type": "paragraph"
         }
       ],
@@ -27438,6 +27571,22 @@
           "lines": 8,
           "should_fail": true,
           "code_preview": "let mut x = 0; let r1 = &mut x as *mut i32; let r2 = &mut x as *mut i32; unsafe ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 作为“目标能力查询”使用的 cfg #[cfg(target_has_atomic_..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— repr(align) 抬高对齐；cfg 查询目标；二者正交 use std::sy..."
         }
       ],
       "sources": [],
@@ -27446,6 +27595,10 @@
         "../../02_intermediate/02_memory_management/03_memory_management.md",
         "../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md",
         "../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md",
+        "../../04_formal/05_rustc_internals/42_type_layout.md",
+        "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
+        "../../07_future/00_version_tracking/migration_197_decision_tree.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../00_concurrency/11_atomics_and_memory_ordering.md",
         "../05_inline_assembly/13_inline_assembly.md",
         "03_unsafe.md",
@@ -27454,7 +27607,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 24,
+      "matrix_rows": 28,
       "pre_post": {
         "pre": [
           "[Unsafe Rust](03_unsafe.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Behavior Considered Undefined](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md)"
@@ -30559,8 +30712,8 @@
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\04_ffi\\27_linkage.md",
       "layer": "L3",
       "title": "Linkage（链接）",
-      "positioning": "",
-      "line_count": 288,
+      "positioning": "本小节为 Rust 1.97.0 在「编译器符号发射 ⟷ 链接器输入 ⟷ ABI 契约」边界的**交叉语义**补全，对应审计缺口（[`GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md`](../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md) §2.4、§4 P2-2 缺口#1）。原 `mangling / linker / export_name / v0` 在本页 0 命中，现补齐。",
+      "line_count": 425,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -30656,16 +30809,53 @@
           "lines": 3,
           "should_fail": false,
           "code_preview": "#[link(name = \"myclib\", kind = \"static\")] extern \"C\" {} ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// Edition 2024 / Rust 1.97.0+ —— v0 只影响\"Rust 混淆名\"，不影响字面符号 #[unsafe(no_mangle)] ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// 或在 crate 根临时允许（建议保留为 warn 以暴露真实链接器告警） #![allow(linker_messages)] ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// ❌ Rust 1.97+ 硬错误：空导出符号名被拒绝 #[unsafe(export_name = \"\")] pub fn hook() {}  // ✅..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// #[link_name] / #[link(name)] 参数现在会被校验：非法（如空串）参数报错 #[link(name = \"mynative\")] ..."
         }
       ],
       "sources": [],
       "cross_references": [
+        "../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md",
         "../../00_meta/01_terminology/terminology_glossary.md",
         "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/07_modules_and_items/35_preludes.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
         "../../02_intermediate/02_memory_management/12_smart_pointers.md",
+        "../../04_formal/05_rustc_internals/38_application_binary_interface.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
+        "../../07_future/00_version_tracking/migration_197_decision_tree.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../02_unsafe/03_unsafe.md",
         "09_ffi_advanced.md"
       ],
@@ -33275,7 +33465,7 @@
       "layer": "L4",
       "title": "rustc 类型检查与类型推断",
       "positioning": "把“编译器如何知道 `Vec<&str>` 并对未标注类型做推断”还原为约束生成、统一与区域求解的完整算法。",
-      "line_count": 318,
+      "line_count": 429,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -33303,6 +33493,10 @@
         },
         {
           "text": "> **反命题 3**: \"其他语言对 rustc 类型检查与类型推断 的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 rustc 类型检查与类型推断 具有语言特有的形态。",
+          "type": "paragraph"
+        },
+        {
+          "text": "- **回退作为 tie-breaker**：当多个候选在语法上都可匹配、`{float}` 未被其它等值约束固定时，回退默认值决定 solver 把 `{float}` 实例化为 `f32` 还是 `f64`，从而决定**哪一个 `From` 候选被选中**。默认值变化 ⟹ 候选选择可能变化 ⟹ future-compat 警告。",
           "type": "paragraph"
         }
       ],
@@ -33367,6 +33561,30 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "let snapshot = infcx.snapshot(); // 尝试一系列约束操作... if success {     infcx.commit(s..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 演示“回退默认值”被显式约束取代的过程 fn takes_f32(_: f32) {..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 两类 fallback 的对照示例 fn float_fallback() {   ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 泛型 + From 约束下的回退影响 fn generic_from<T>() ->..."
         }
       ],
       "sources": [],
@@ -33375,6 +33593,9 @@
         "../../00_meta/02_sources/international_authority_index.md",
         "../../03_advanced/02_unsafe/08_nll_and_polonius.md",
         "../../06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md",
+        "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
+        "../../07_future/00_version_tracking/migration_197_decision_tree.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../05_rustc_internals/26_trait_solver_in_rustc.md",
         "../05_rustc_internals/35_name_resolution_and_hir.md",
         "08_type_inference.md"
@@ -33382,7 +33603,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 11,
+      "matrix_rows": 21,
       "pre_post": {
         "pre": [
           "[Name Resolution and HIR](../05_rustc_internals/35_name_resolution_and_hir.md) · [Trait Solver in rustc](../05_rustc_internals/26_trait_solver_in_rustc.md) · [Type Inference](08_type_inference.md)"
@@ -37114,8 +37335,8 @@
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\05_rustc_internals\\38_application_binary_interface.md",
       "layer": "L4",
       "title": "Application Binary Interface（ABI）",
-      "positioning": "",
-      "line_count": 180,
+      "positioning": "本小节把上方「Rust 1.97.0 变更提示」横幅**展开**为 v0 × debuginfo demangle × linker_messages × backtrace 的交互矩阵，并阐明空 `export_name`/`link_name` 校验对 ABI 契约的意义；对应审计缺口（[`GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md`](../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md) §2.4、§4 P2-2 缺口#5）。横幅原文保留。",
+      "line_count": 254,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -37163,22 +37384,41 @@
           "lines": 3,
           "should_fail": false,
           "code_preview": "#[unsafe(export_name = \"exported_symbol_name\")] pub fn name_in_rust() {} ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// Edition 2024 / Rust 1.97.0+ —— ABI 契约两端：导出字面符号 + 导入按名绑定 // 导出侧（cdylib）：固定字面符号..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// ❌ Rust 1.97+ 硬错误：空导出符号名破坏 ABI 契约的可命名性 #[unsafe(export_name = \"\")] pub fn hook..."
         }
       ],
       "sources": [],
       "cross_references": [
+        "../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md",
         "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
         "../../03_advanced/02_unsafe/03_unsafe.md",
         "../../03_advanced/04_ffi/09_ffi_advanced.md",
         "../../03_advanced/04_ffi/27_linkage.md",
         "../../03_advanced/05_inline_assembly/13_inline_assembly.md",
+        "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
+        "../../07_future/00_version_tracking/migration_197_decision_tree.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 10,
+      "matrix_rows": 15,
       "pre_post": {
         "pre": [
           "[Linkage](../../03_advanced/04_ffi/27_linkage.md) · [FFI Advanced](../../03_advanced/04_ffi/09_ffi_advanced.md) · [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md)"
@@ -54488,6 +54728,222 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\feature_domain_matrix_197.md",
+      "layer": "L7",
+      "title": "Rust 1.97.0 特性 × 领域反查矩阵",
+      "positioning": "",
+      "line_count": 268,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md",
+        "../../../reports/RUST_197_CONTENT_GAP_ANALYSIS_2026_07_11.md",
+        "../../01_foundation/02_type_system/14_coercion_and_casting.md",
+        "../../01_foundation/02_type_system/31_never_type.md",
+        "../../02_intermediate/00_traits/32_editions.md",
+        "../../02_intermediate/03_error_handling/04_error_handling.md",
+        "../../03_advanced/00_concurrency/11_atomics_and_memory_ordering.md",
+        "../../03_advanced/01_async/06_pin_unpin.md",
+        "../../03_advanced/02_unsafe/29_memory_model.md",
+        "../../03_advanced/04_ffi/27_linkage.md",
+        "../../04_formal/00_type_theory/27_type_checking_and_inference.md",
+        "../../04_formal/05_rustc_internals/26_trait_solver_in_rustc.md",
+        "../../04_formal/05_rustc_internals/38_application_binary_interface.md",
+        "../../04_formal/05_rustc_internals/42_type_layout.md",
+        "../../06_ecosystem/01_cargo/60_cargo_dependency_resolution.md",
+        "../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md",
+        "../../06_ecosystem/01_cargo/83_cargo_configuration.md",
+        "../../06_ecosystem/01_cargo/84_cargo_commands_reference.md",
+        "../../06_ecosystem/01_cargo/86_cargo_registry_internals.md",
+        "../../07_future/01_edition_roadmap/44_edition_guide.md",
+        "05_rust_version_tracking.md",
+        "rust_1_97_preview.md",
+        "rust_1_97_stabilized.md",
+        "rust_1_98_preview.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 46,
+      "pre_post": {
+        "pre": [
+          "[Rust 版本跟踪](05_rust_version_tracking.md) · [Rust 1.97.0 稳定特性](rust_1_97_stabilized.md)"
+        ],
+        "post": [
+          "[Rust 1.97.0 前沿预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿预览](rust_1_98_preview.md) · 迁移判定树（P2-5，待落地）"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\migration_197_decision_tree.md",
+      "layer": "L7",
+      "title": "Rust 1.97 兼容性迁移判定树",
+      "positioning": "",
+      "line_count": 717,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.96\" —— 1.97 起硬错误 #[unsafe(export_name = \"\")] pub ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 非空字面量 + unsafe 属性 #[unsafe(export_name = \"..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 去掉 export_name, 用 no_mangle 暴露标识符名 #[unsaf..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.96\" —— 1.97 起 {float} 回退路径变化触发警告 fn takes_f32(_: ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 显式后缀或类型标注, 消除推断歧义 fn takes_f32(_: f32) {} ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.96\" —— 1.97 起 pin!(&mut x) 不再 coerce 为 Pin<&mut i..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— pin!(x) 直接得到 Pin<&mut i32> use std::pin::{..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 标注与宏返回类型对齐 use std::pin::{pin, Pin};  let ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.96\" —— 1.97 起投影不再 coerce, 字段 Pin 类型多一层 &mut use s..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 结构投影交给 pin_project, 不显式手写 pin!(&mut field)..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 调用方用 Box::pin / pin_mut!, 不碰 pin! coerce u..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.96\" —— 1.97 起 Windows 关闭后写会得到 BrokenPipe, 未被显式处理 ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 显式把 BrokenPipe 归入\"对端关闭\"分支 use std::io::Err..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 验证关闭后写的 ErrorKind 映射 use std::io::{ErrorKi..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.96\" —— 1.97 起: 模块段 helper 不接受泛型参数 mod helper {   ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— turbofish 落在函数项 collect 上 mod helper {    ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— use 路径不写 turbofish, 在调用处给泛型 use helper::co..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md",
+        "../../../reports/RUST_197_CONTENT_GAP_ANALYSIS_2026_07_11.md",
+        "../../01_foundation/02_type_system/14_coercion_and_casting.md",
+        "../../03_advanced/01_async/06_pin_unpin.md",
+        "../../03_advanced/04_ffi/27_linkage.md",
+        "../../04_formal/05_rustc_internals/38_application_binary_interface.md",
+        "../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md",
+        "05_rust_version_tracking.md",
+        "rust_1_97_preview.md",
+        "rust_1_97_stabilized.md",
+        "rust_1_98_preview.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 8,
+      "matrix_rows": 26,
+      "pre_post": {
+        "pre": [
+          "[Rust 1.97 稳定特性](rust_1_97_stabilized.md) · [Rust 版本跟踪](05_rust_version_tracking.md) · [Pin 与 Unpin](../../03_advanced/01_async/06_pin_unpin.md) · [类型强制与转换](../../01_foundation/02_type_system/14_coercion_and_casting.md) · [ABI](../../04_formal/05_rustc_internals/38_application_binary_interface.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md)"
+        ],
+        "post": [
+          "[Rust 1.97 前沿预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿预览](rust_1_98_preview.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\rust_1_90_stabilized.md",
       "layer": "L7",
       "title": "Rust 1.90 网络特性参考",
@@ -56489,7 +56945,7 @@
       "layer": "L7",
       "title": "Edition 2024 完全指南：新特性与迁移策略",
       "positioning": "全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。",
-      "line_count": 782,
+      "line_count": 893,
       "theorem_chains": [
         {
           "text": "- **定理**: Edition 2024 完全指南：新特性与迁移策略 定义 ⟹ 类型安全保证",
@@ -56597,24 +57053,54 @@
           "lines": 14,
           "should_fail": false,
           "code_preview": "// Rust 2018 宏 macro_rules! old_macro {     () => {         let x = 1;         x..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "// edition = \"2021\" —— 旧行为：! 无法推断时回退到 () // edition = \"2024\" —— 新行为：! 保持为 !  // ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\" —— 显式固定目标类型 fn g_fixed() -> Result<(), ()> {     f::<()>()?;..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// rust = \"1.97\"（任意 edition）—— 触发 future-compat 警告的写法 fn takes_f32(_: f32) {} fn..."
         }
       ],
       "sources": [],
       "cross_references": [
         "../../../knowledge/06_ecosystem/02_edition_2024.md",
         "../../00_meta/02_sources/international_authority_index.md",
+        "../../01_foundation/02_type_system/31_never_type.md",
+        "../../02_intermediate/00_traits/32_editions.md",
         "../../02_intermediate/01_generics/02_generics.md",
         "../../03_advanced/01_async/02_async.md",
         "../../03_advanced/02_unsafe/08_nll_and_polonius.md",
+        "../../04_formal/00_type_theory/27_type_checking_and_inference.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../00_version_tracking/05_rust_version_tracking.md",
+        "../00_version_tracking/feature_domain_matrix_197.md",
+        "../00_version_tracking/migration_197_decision_tree.md",
+        "../00_version_tracking/rust_1_97_stabilized.md",
         "../04_research_and_experimental/03_evolution.md"
       ],
       "transitions": 8,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 10,
+      "matrix_rows": 29,
       "pre_post": {
         "pre": [
           "[Rust Version Tracking](../00_version_tracking/05_rust_version_tracking.md) · [Async](../../03_advanced/01_async/02_async.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)",

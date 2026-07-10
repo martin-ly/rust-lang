@@ -1,5 +1,10 @@
 # 🦀 所有权系统速查卡 {#所有权系统速查卡}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为所有权系统速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L1 ownership`](../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（常见模式/决策树/常见错误/智能指针/生命周期/性能/反例/使用场景速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Ownership Cheatsheet
 > **Summary**: 🦀 所有权系统速查卡 Ownership Cheatsheet.
 > **分级**: [A]
@@ -15,9 +20,9 @@
 - [🦀 所有权系统速查卡 {#所有权系统速查卡}](#-所有权系统速查卡-所有权系统速查卡)
   - [📋 目录 {#目录}](#-目录-目录)
   - [🧠 所有权系统思维导图 {#所有权系统思维导图}](#-所有权系统思维导图-所有权系统思维导图)
-  - [📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}](#-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证)
-  - [📐 三大规则（核心） {#三大规则核心}](#-三大规则核心-三大规则核心)
-    - [所有权转移决策树 {#所有权转移决策树}](#所有权转移决策树-所有权转移决策树)
+  - [📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证}](#-概念定义-属性关系-解释论证已压缩详见-canonical-概念定义-属性关系-解释论证)
+  - [📐 三大规则（核心，已压缩，详见 canonical） {#三大规则核心}](#-三大规则核心已压缩详见-canonical-三大规则核心)
+    - [所有权转移决策树（本文独特内容，未在 concept/ 重复） {#所有权转移决策树}](#所有权转移决策树本文独特内容未在-concept-重复-所有权转移决策树)
   - [🎯 常见模式速查 {#常见模式速查}](#-常见模式速查-常见模式速查)
     - [模式 1: 所有权转移（Move） {#模式-1-所有权转移move}](#模式-1-所有权转移move-模式-1-所有权转移move)
     - [模式 2: 不可变借用（\&T） {#模式-2-不可变借用t}](#模式-2-不可变借用t-模式-2-不可变借用t)
@@ -107,33 +112,24 @@ mindmap
 
 ---
 
-## 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}
->
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+## 📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证}
 
-| 层次 | 概念定义 | 属性关系 | 解释论证 |
-| :--- | :--- | :--- | :--- |
-| **L1 基础** | 所有权（Ownership）：值的唯一管理者 | 公理：每个值有且仅有一个所有者 | 定理 T2.1：所有权唯一性保证内存安全（Memory Safety） |
-| **L2 借用（Borrowing）** | 引用：临时访问权限 | 规则：&T 允许多重，&mut T 独占 | 定理 T2.2：借用规则防止数据竞争 |
-| **L3 生命周期** | 作用域标注：'a | 公理：引用不能 outlive 所有者 | 定理 T2.3：生命周期保证引用有效性 |
-| **L4 智能指针（Smart Pointer）** | RAII 封装：Box/Rc/Arc | 规则：运行时（Runtime）引用计数 | 定理 T2.4：智能指针保持所有权语义 |
-| **L5 形式化** | 分离逻辑模型 | 霍尔三元组 {P}C{Q} | 定理 T2.5：所有权系统可靠性 |
-
-> 形式化理论详见：[所有权模型形式化](../../research_notes/formal_methods/10_ownership_model.md)
+> 本节原为「概念定义—属性关系—解释论证」通用复述（L1–L5、公理与定理 T2.1–T2.5）。
+> 通用概念（所有权唯一性、借用规则、生命周期有效性、智能指针 RAII、分离逻辑模型）以
+> [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> 为权威来源；形式化推导见
+> [`concept/04_formal/01_ownership_logic/03_ownership_formal.md`](../../../concept/04_formal/01_ownership_logic/03_ownership_formal.md)。
+> 本速查卡不再复述通用定义，仅保留下方决策树、模式、错误与反例等独特速查内容。
 
 ---
 
-## 📐 三大规则（核心） {#三大规则核心}
->
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+## 📐 三大规则（核心，已压缩，详见 canonical） {#三大规则核心}
 
-```text
-1. 每个值有且仅有一个所有者
-2. 同一时刻只能有一个可变借用，或多个不可变借用
-3. 所有者离开作用域，值被自动 drop
-```
+> 三大规则（① 唯一所有者；② 可变借用独占、不可变借用可共享；③ 所有者离开作用域即 drop）为通用概念，
+> 权威表述见 [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)。
+> 本速查卡不重复其推导，仅保留下方「所有权转移决策树」等独特内容。
 
-### 所有权转移决策树 {#所有权转移决策树}
+### 所有权转移决策树（本文独特内容，未在 concept/ 重复） {#所有权转移决策树}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >

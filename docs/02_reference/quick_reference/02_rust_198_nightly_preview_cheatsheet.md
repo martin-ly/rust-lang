@@ -1,5 +1,10 @@
 # Rust 1.98 Nightly 前瞻速查表 (Rust 198 Nightly Preview Cheatsheet) {#rust-198-nightly-前瞻速查表}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为Rust 1.98 Nightly 前瞻速查表（版本速查）；通用 Rust 概念解释请以 concept 权威页为准：[`concept Rust 1.98 preview`](../../../concept/07_future/00_version_tracking/rust_1_98_preview.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（1.98 nightly 语言特性/标准库 API/feature gate 快速参考（速查，非概念正文）），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Rust 198 Nightly Preview Cheatsheet
 > **Summary**: Rust 1.98 Nightly 前瞻速查表 Rust 198 Nightly Preview Cheatsheet.
 > **分级**: [A]

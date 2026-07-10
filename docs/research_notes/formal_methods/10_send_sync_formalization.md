@@ -1,5 +1,10 @@
 # Send/Sync 形式化 {#sendsync-形式化}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为Send/Sync 形式化研究笔记；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 并发`](../../../concept/03_advanced/00_concurrency/01_concurrency.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（Send/Sync 形式化定义、定理/引理与 Rust 对应），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Send Sync Formalization
 > **Summary**: Send/Sync 形式化 Send Sync Formalization. (stub/archive redirect)
 > **概念族**: 并发安全（Concurrency Safety） / Send/Sync

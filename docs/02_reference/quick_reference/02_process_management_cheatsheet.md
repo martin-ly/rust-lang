@@ -10,6 +10,11 @@
 
 # 进程管理快速参考卡片 {#进程管理快速参考卡片}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为进程管理速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 进程模型`](../../../concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（进程常用 API/配置/性能/错误处理/反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Process Management Cheatsheet
 > **Summary**: 进程管理快速参考卡片 Process Management Cheatsheet. (stub/archive redirect)
 > **分级**: [A]

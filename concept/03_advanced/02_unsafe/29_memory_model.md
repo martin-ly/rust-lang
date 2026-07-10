@@ -253,3 +253,79 @@ cargo +nightly miri test
 >
 > **反向推理**: unsafe 代码在升级 Rust 版本后行为变化 ⟸ 说明之前依赖了未规范化的内存模型细节。
 >
+
+---
+
+## Rust 1.97.0 交叉语义
+
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
+> **交叉域**: 内存模型（Memory Model）× 类型布局（Type Layout）× 原子指令生成（Atomics）× 目标平台（Target）
+> **审计出处**: `reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md` §2.4、§4 P2-2 缺口 #3
+> **本小节性质**: 交叉语义补充，**只增不删**；原有字节/provenance/对齐（§二–§八）保持不变。
+
+### 1. `cfg(target_has_atomic_primitive_alignment)` 的语义定位
+
+Rust 1.97.0 稳定了条件编译标志 `cfg(target_has_atomic_primitive_alignment)`。它在 release notes 中仅被列为 *Language* 类稳定项 `"Stabilize cfg(target_has_atomic_primitive_alignment)"`；版本页 §2.4 给出其用途：**判断目标平台上原子类型的对齐是否等于其对应原始整数类型的对齐**。
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— 作为“目标能力查询”使用的 cfg
+#[cfg(target_has_atomic_primitive_alignment = "64")]
+fn assumes_native_atomic64_alignment() {
+    // 该分支仅在“64 位原子类型与 u64 对齐相同”的目标上编译
+}
+
+#[cfg(not(target_has_atomic_primitive_alignment = "64"))]
+fn assumes_native_atomic64_alignment() {
+    // 其它目标：不能假设 64 位原子按 u64 自然对齐，需走保守路径
+}
+```
+
+**与本文 §七（内存对齐与 Layout）的关系**：本 cfg 是一个**编译期目标能力查询**，它**不**改变任何类型的 `size_of`/`align_of`/字段偏移——那些仍由类型布局规则（本文 §七、[`42_type_layout.md`](../../04_formal/05_rustc_internals/42_type_layout.md) §二 “Size 与 Alignment”）决定。它只回答“在这个 target 上，原子类型的对齐保证是什么”，供 `unsafe`/可移植代码在编译期选择实现路径。
+
+### 2. 与类型对齐 / `repr(C)` / `repr(align)` 的正交关系
+
+内存模型要求：对原子类型的访问必须满足其对齐要求，否则为未定义行为（与本文 §二 “读取未初始化/未对齐是 UB”、§八 “指针转换需保证对齐” 同源）。三类机制职责不同，**不可混淆**：
+
+| 机制 | 作用层 | 是否改变类型布局 | 说明 |
+|:---|:---|:---:|:---|
+| `#[repr(align(N))]` | 类型布局 | ✅ 提高对齐到至少 `N` | 主动**抬高**某类型的对齐（[`42_type_layout.md`](../../04_formal/05_rustc_internals/42_type_layout.md) §三 `#[repr(align(n))]`） |
+| `#[repr(C)]` | 类型布局 | ✅ 固定字段顺序 + C-ABI 对齐 | 对齐遵循目标 C ABI；**不**单独保证“原子自然对齐”（同页 §三 `#[repr(C)]`） |
+| `cfg(target_has_atomic_primitive_alignment)` | 编译期查询 | ❌ 不改变布局 | 仅**查询**目标对齐保证，用于 codegen/分支选择 |
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— repr(align) 抬高对齐；cfg 查询目标；二者正交
+use std::sync::atomic::AtomicU64;
+
+#[repr(align(16))]            // 主动把对齐抬高到 16 字节（布局变化）
+struct Aligned16(AtomicU64);
+
+#[repr(C)]                     // 字段顺序按 C ABI；对齐按目标 C ABI（≠ 必然等于原子自然对齐）
+struct CRepr {
+    a: u8,
+    b: AtomicU64,
+}
+
+fn align_check() {
+    assert_eq!(core::mem::align_of::<Aligned16>(), 16);
+    // 是否能对 Aligned16.0 使用依赖自然对齐的原子指令，由 cfg 在编译期回答：
+    let _ = cfg!(target_has_atomic_primitive_alignment = "64");
+    let _ = core::mem::align_of::<CRepr>();
+}
+```
+
+> **边界**：`#[repr(align(N))]` 可以把对齐**抬高**到超过原子自然对齐，这总是安全的（更强对齐 ⟹ 仍满足较弱要求）；危险的是反过来——当一个值的**实际对齐低于**原子操作所需对齐时对其执行原子操作，是 UB（本文 §八）。`cfg(...)` 的用途正是让代码在“目标不保证自然对齐”时**拒绝或改走保守路径**，而非“修复”对齐。
+
+### 3. 与原子指令生成的关系（查询 → codegen 分支）
+
+原子指令通常要求操作数**自然对齐**：例如多字节原子的 load/store/CAS 需要地址按操作数宽度对齐；16 字节原子（如 `AtomicU128` 在支持的目标上）可能要求 16 字节对齐；32 位目标上的 64 位原子是否可由单条指令完成，取决于该目标的对齐与指令集。当对齐**不被保证**时，后端要么插入对齐检查/屏障，要么退回到 `compiler_rt` 的 `__atomic_*` libcall，要么在编译期拒绝。`cfg(target_has_atomic_primitive_alignment)` 让可移植代码**在编译期**区分这些情形（原理见 [`11_atomics_and_memory_ordering.md`](../00_concurrency/11_atomics_and_memory_ordering.md) 已引用的 LLVM Atomic Instructions；该页 §Rust 1.97.0 交叉语义 给出 codegen 侧的对称说明）。
+
+> ⚠ **需专家复核**：本 cfg 的**取值域**（除版本页示例 `"64"` 外还可取哪些值，如按位宽 `"8"/"16"/"32"/"128"` 或 `"ptr"` 形式）在 release notes 与版本页中**未完整列出**；上例沿用版本页 §2.4 的 `"64"` 写法，具体可取值以 Rust Reference — Conditional compilation / 该 cfg 的稳定化文档为准。
+
+### 4. 跨平台边界与旧名废弃说明
+
+- **跨平台边界（原则）**：在多数 64 位主流目标上，原子类型对齐与对应原始整数对齐一致；但在部分 32 位或特殊目标上，某宽度原子的**要求对齐**可能高于同宽度原始整数的“惯用”对齐，或高于指针宽度——这正是该 cfg 存在的理由。
+- ⚠ **需专家复核**：具体“哪些目标上 primitive 对齐 ≠ 指针宽度对齐”的目标清单，release notes 与版本页**未给出**；本小节不枚举目标名，避免臆测。需要精确清单时请查阅 Rust Reference — Conditional compilation 与各 target 的 `target_has_atomic_*` 定义。
+- **旧名 `target_has_atomic_equal_alignment` 的废弃**：任务背景（审计 §2.4/P2-2）指出该 cfg 曾用名 `target_has_atomic_equal_alignment`，1.97 起稳定为 `target_has_atomic_primitive_alignment`，旧名废弃。⚠ **需专家复核**：release notes 与版本页**未提及**该旧名及其废弃时间表；旧名/废弃说法当前仅来自审计背景，未在两类权威来源中核对到，使用前请以 Rust Reference 与对应稳定化 PR 为准。
+
+> **来源**: [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/) · [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§2.4）
+> **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`42_type_layout.md`](../../04_formal/05_rustc_internals/42_type_layout.md) · [`11_atomics_and_memory_ordering.md`](../00_concurrency/11_atomics_and_memory_ordering.md)

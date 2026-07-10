@@ -1,5 +1,10 @@
 # 🔀 Rust 线程与并发速查卡 {#rust-线程与并发速查卡}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为线程与并发速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 并发`](../../../concept/03_advanced/00_concurrency/01_concurrency.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（同步原语/消息传递/无锁结构/代码示例/死锁检测/反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Threads Concurrency Cheatsheet
 > **Summary**: 🔀 Rust 线程与并发速查卡 Threads Concurrency Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
@@ -15,11 +20,11 @@
 - [🔀 Rust 线程与并发速查卡 {#rust-线程与并发速查卡}](#-rust-线程与并发速查卡-rust-线程与并发速查卡)
   - [📑 目录 {#目录}](#-目录-目录)
   - [🧠 并发安全思维导图 {#并发安全思维导图}](#-并发安全思维导图-并发安全思维导图)
-  - [📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}](#-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证)
+  - [📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证}](#-概念定义-属性关系-解释论证已压缩详见-canonical-概念定义-属性关系-解释论证)
   - [🔬 并发安全证明树 {#并发安全证明树}](#-并发安全证明树-并发安全证明树)
   - [🎯 核心概念 {#核心概念}](#-核心概念-核心概念)
     - [线程创建 {#线程创建}](#线程创建-线程创建)
-    - [作用域线程 (Rust 1.97.0+) {#作用域线程-rust-1930}](#作用域线程-rust-1961-作用域线程-rust-1930)
+    - [作用域线程 (Rust 1.97.0+) {#作用域线程-rust-1930}](#作用域线程-rust-1970-作用域线程-rust-1930)
   - [📐 同步原语 {#同步原语}](#-同步原语-同步原语)
     - [Mutex {#mutex}](#mutex-mutex)
     - [RwLock {#rwlock}](#rwlock-rwlock)
@@ -105,19 +110,11 @@ mindmap
 
 ---
 
-## 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}
->
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+## 📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证}
 
-| 层次 | 概念定义 | 属性关系 | 解释论证 |
-| :--- | :--- | :--- | :--- |
-| **L1 基础** | Send：可跨线程转移所有权（Ownership） | 公理：T: Send ⟹ 线程间转移安全 | 定理 S1：Send 保证无数据竞争 |
-| **L2 共享** | Sync：可跨线程共享引用 | 公理：T: Sync ⟺ &T: Send | 定理 S2：Sync 保证并发读安全 |
-| **L3 同步** | Mutex/RwLock：互斥访问 | 规则：锁保护临界区 | 定理 S3：锁顺序一致则无死锁 |
-| **L4 通信** | Channel：消息传递 | 规则：所有权随消息转移 | 定理 S4：无共享则无数据竞争 |
-| **L5 原子** | Atomic：无锁操作 | 规则：内存顺序保证可见性 | 定理 S5：SeqCst 保证全局顺序 |
-
-> 形式化理论详见：[并发形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | [执行模型边界分析](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md)
+> 本节原为「概念定义—属性关系—解释论证」通用复述（Send/Sync/Mutex/Channel/Atomic，公理与定理 S1–S5）。
+> 通用概念以 [`concept/03_advanced/00_concurrency/01_concurrency.md`](../../../concept/03_advanced/00_concurrency/01_concurrency.md)
+> 为权威来源；本速查卡不重复通用定义，仅保留下方证明树图示、同步原语、消息传递、无锁结构与反例等独特速查内容。
 
 ---
 

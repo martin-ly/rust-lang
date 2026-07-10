@@ -1,5 +1,10 @@
 # 类型系统构造能力 {#类型系统构造能力}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为类型系统构造能力研究入口（TCON 矩阵）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L2 类型系统`](../../../concept/01_foundation/02_type_system/04_type_system.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（TCON 矩阵、类型构造决策树与确定性判定（matrix/决策树，非概念正文）），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Construction Capability
 > **Summary**: 类型系统（Type System）构造能力 Construction Capability. (stub/archive redirect)
 > **概念族**: 类型系统（Type System） / 表达能力

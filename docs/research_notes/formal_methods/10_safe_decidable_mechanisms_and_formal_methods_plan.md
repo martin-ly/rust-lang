@@ -1,5 +1,10 @@
 # formal_methods 意见与建议、安全可判定机制梳理与可持续推进计划 {#formal_methods-意见与建议安全可判定机制梳理与可持续推进计划}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为安全可判定机制梳理与推进计划（元/计划）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L4 形式化方法`](../../../concept/04_formal/04_model_checking/13_formal_methods.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（安全可判定机制清单、特性对比矩阵与推进计划（计划文档，非概念正文）），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Safe Decidable Mechanisms And Formal Methods Plan
 > **Summary**: formal_methods 意见与建议、安全可判定机制梳理与可持续推进计划 Safe Decidable Mechanisms And Formal Methods Plan. (stub/archive redirect)
 > **概念族**: 形式化方法 / 安全可判定机制

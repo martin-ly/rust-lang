@@ -12,6 +12,11 @@
 
 # 异步运行时选型决策树 {#异步运行时选型决策树}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为异步运行时选型决策树（决策树，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 async`](../../../concept/03_advanced/01_async/02_async.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（运行时选型决策树、Tokio 配置决策与代码示例），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Async Runtime Decision Tree
 > **Summary**: 异步运行时选型决策树 Async Runtime Decision Tree. (stub/archive redirect)
 > **内容分级**: [归档级]
@@ -30,7 +35,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 
-- [异步（Async）运行时选型决策树 {#异步运行时选型决策树}](#异步运行时选型决策树-异步运行时选型决策树)
+- [异步运行时选型决策树 {#异步运行时选型决策树}](#异步运行时选型决策树-异步运行时选型决策树)
   - [📑 目录 {#目录}](#-目录-目录)
   - [决策树概览 {#决策树概览}](#决策树概览-决策树概览)
   - [主流运行时对比 {#主流运行时对比}](#主流运行时对比-主流运行时对比)

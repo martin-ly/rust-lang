@@ -1,5 +1,10 @@
 # 🔄 Rust 控制流与函数速查卡 {#rust-控制流与函数速查卡}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为控制流与函数速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L1 控制流`](../../../concept/01_foundation/04_control_flow/07_control_flow.md) · [`concept L1 函数`](../../../concept/01_foundation/07_modules_and_items/12_functions.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（条件/循环/模式匹配/函数/闭包/模式/反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Control Flow Functions Cheatsheet
 > **Summary**: 🔄 Rust 控制流与函数速查卡 Control Flow Functions Cheatsheet. (stub/archive redirect)
 > **分级**: [A]

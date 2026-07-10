@@ -1,5 +1,10 @@
 # 🔷 Rust 泛型编程速查卡 {#rust-泛型编程速查卡}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为泛型编程速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L2 泛型`](../../../concept/02_intermediate/01_generics/02_generics.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（Trait 约束/高级特性/常见模式/性能/反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Generics Cheatsheet
 > **Summary**: 🔷 Rust 泛型编程速查卡 Generics Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
@@ -15,7 +20,7 @@
 - [🔷 Rust 泛型编程速查卡 {#rust-泛型编程速查卡}](#-rust-泛型编程速查卡-rust-泛型编程速查卡)
   - [📑 目录 {#目录}](#-目录-目录)
   - [🧠 泛型系统思维导图 {#泛型系统思维导图}](#-泛型系统思维导图-泛型系统思维导图)
-  - [📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}](#-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证)
+  - [📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证}](#-概念定义-属性关系-解释论证已压缩详见-canonical-概念定义-属性关系-解释论证)
   - [🔬 泛型系统证明树 {#泛型系统证明树}](#-泛型系统证明树-泛型系统证明树)
   - [🎯 核心概念 {#核心概念}](#-核心概念-核心概念)
     - [泛型函数 {#泛型函数}](#泛型函数-泛型函数)
@@ -106,19 +111,11 @@ mindmap
 
 ---
 
-## 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}
->
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+## 📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证}
 
-| 层次 | 概念定义 | 属性关系 | 解释论证 |
-| :--- | :--- | :--- | :--- |
-| **L1 基础** | 类型参数 T：占位符类型 | 公理：∀T, T 是具体类型的抽象 | 定理 G1：泛型保证类型安全 |
-| **L2 约束** | Trait Bound：能力要求 | 规则：T: Trait ⟹ T 实现 Trait | 定理 G2：约束满足则调用安全 |
-| **L3 关联** | Associated Type：输出类型 | 规则：impl 中确定具体类型 | 定理 G3：关联类型唯一性 |
-| **L4 单态化** | Monomorphization：代码生成 | 规则：每个 T 生成独立实例 | 定理 G4：零运行时（Runtime）开销 |
-| **L5 高阶** | HRTB：高阶 Trait Bound | 规则：∀'a, T: Trait<'a> | 定理 G5：生命周期泛化 |
-
-> 形式化理论详见：[类型构造能力](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) | [Trait 系统形式化](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)
+> 本节原为「概念定义—属性关系—解释论证」通用复述（类型参数/Trait Bound/关联类型/单态化/HRTB，公理与定理 G1–G5）。
+> 通用概念以 [`concept/02_intermediate/01_generics/02_generics.md`](../../../concept/02_intermediate/01_generics/02_generics.md)
+> 为权威来源；本速查卡不重复通用定义，仅保留下方证明树图示、Trait 约束、高级特性、模式与反例等独特速查内容。
 
 ---
 

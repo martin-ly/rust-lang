@@ -19,8 +19,8 @@
 ## 相关概念文件
 
 - [概念索引](../../README.md) — 知识体系总览
-- [Bloom 分类法](../00_framework/03_bloom_taxonomy.md) — 认知层级标准
-- [交叉引用矩阵](../04_navigation/05_cross_reference_matrix.md) — 概念关联映射
+- [Bloom 分类法](../00_framework/bloom_taxonomy.md) — 认知层级标准
+- [交叉引用矩阵](../04_navigation/cross_reference_matrix.md) — 概念关联映射
 - [学习指南](../04_navigation/learning_guide.md) — 分层学习路径
 - [语义空间坐标系](../00_framework/semantic_space.md) — 概念三维定位
 

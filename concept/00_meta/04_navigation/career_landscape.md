@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: C×Kno — 了解 Rust 职业市场现状
 > **定位**: 基于权威招聘数据（JetBrains、Stack Overflow、Levels.fyi、Robert Half）的 Rust 职业市场定量分析，覆盖薪资范围、岗位分布、技能需求和地域差异。
-> **前置概念**: [Bloom Taxonomy](../00_framework/03_bloom_taxonomy.md)
+> **前置概念**: [Bloom Taxonomy](../00_framework/bloom_taxonomy.md)
 > **后置概念**: [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md)
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
@@ -180,7 +180,7 @@ Rust 岗位远程工作比例（2025–2026）:
 
 ## 相关概念文件
 
-- [Bloom Taxonomy](../00_framework/03_bloom_taxonomy.md) — 认知层级框架
+- [Bloom Taxonomy](../00_framework/bloom_taxonomy.md) — 认知层级框架
 - [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) — Rust 应用领域分析
 - [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) — 工具链与开发环境
 

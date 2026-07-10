@@ -3,6 +3,11 @@
 
 # 借用检查器证明 {#借用检查器证明}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为借用检查器证明研究笔记；通用 Rust 概念解释请以 concept 权威页为准：[`concept L4 借用检查可判定性`](../../../concept/04_formal/01_ownership_logic/28_borrow_checking_decidability.md) · [`concept L1 borrowing`](../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（Tree Borrows/RustSEM/RustBelt/Oxide 对比、定理证明、Aeneas 对比、反例与代码），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Borrow Checker Proof
 > **Summary**: 借用（Borrowing）检查器证明 Borrow Checker Proof.
 > **内容分级**: [归档级]
@@ -40,7 +45,7 @@
     - [相关学术论文的详细分析 {#相关学术论文的详细分析}](#相关学术论文的详细分析-相关学术论文的详细分析)
       - [1. RustBelt: Logical Foundations for the Future of Safe Systems Programming {#1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming}](#1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming-1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming)
       - [2. The RustBelt Project: Formalizing Rust's Type System {#2-the-rustbelt-project-formalizing-rusts-type-system}](#2-the-rustbelt-project-formalizing-rusts-type-system-2-the-rustbelt-project-formalizing-rusts-type-system)
-    - [MIT 课程对齐：内存安全（Memory Safety）与数据竞争自由 {#mit-课程对齐内存安全与数据竞争自由}](#mit-课程对齐内存安全与数据竞争自由-mit-课程对齐内存安全与数据竞争自由)
+    - [MIT 课程对齐：内存安全与数据竞争自由 {#mit-课程对齐内存安全与数据竞争自由}](#mit-课程对齐内存安全与数据竞争自由-mit-课程对齐内存安全与数据竞争自由)
       - [MIT 6.826: Computer Systems Security 形式化对比 {#mit-6826-computer-systems-security-形式化对比}](#mit-6826-computer-systems-security-形式化对比-mit-6826-computer-systems-security-形式化对比)
       - [MIT 6.858: Computer Systems 与 Symbolic Execution {#mit-6858-computer-systems-与-symbolic-execution}](#mit-6858-computer-systems-与-symbolic-execution-mit-6858-computer-systems-与-symbolic-execution)
       - [数据竞争自由与 MIT 课程的联系 {#数据竞争自由与-mit-课程的联系}](#数据竞争自由与-mit-课程的联系-数据竞争自由与-mit-课程的联系)
@@ -52,7 +57,7 @@
       - [Resource Invariants 与 Mutex {#resource-invariants-与-mutex}](#resource-invariants-与-mutex-resource-invariants-与-mutex)
       - [Ghost State 与 Unsafe 契约 {#ghost-state-与-unsafe-契约}](#ghost-state-与-unsafe-契约-ghost-state-与-unsafe-契约)
       - [CMU 15-799 并发验证对齐表 {#cmu-15-799-并发验证对齐表}](#cmu-15-799-并发验证对齐表-cmu-15-799-并发验证对齐表)
-      - [差异分析：Rust 如何解决 MIT 课程中的并发安全（Concurrency Safety）问题 {#差异分析rust-如何解决-mit-课程中的并发安全问题}](#差异分析rust-如何解决-mit-课程中的并发安全问题-差异分析rust-如何解决-mit-课程中的并发安全问题)
+      - [差异分析：Rust 如何解决 MIT 课程中的并发安全问题 {#差异分析rust-如何解决-mit-课程中的并发安全问题}](#差异分析rust-如何解决-mit-课程中的并发安全问题-差异分析rust-如何解决-mit-课程中的并发安全问题)
   - [🆕 最新别名模型与操作语义（Tree Borrows / RustSEM / RustBelt / Oxide） {#最新别名模型与操作语义tree-borrows-rustsem-rustbelt-oxide}](#-最新别名模型与操作语义tree-borrows--rustsem--rustbelt--oxide-最新别名模型与操作语义tree-borrows-rustsem-rustbelt-oxide)
     - [1. Tree Borrows：借用检查器的别名语义精化 {#1-tree-borrows借用检查器的别名语义精化}](#1-tree-borrows借用检查器的别名语义精化-1-tree-borrows借用检查器的别名语义精化)
     - [2. RustSEM：内存级借用规则的可执行语义 {#2-rustsem内存级借用规则的可执行语义}](#2-rustsem内存级借用规则的可执行语义-2-rustsem内存级借用规则的可执行语义)
@@ -71,14 +76,14 @@
     - [Rust 对应 {#rust-对应}](#rust-对应-rust-对应)
   - [⚠️ 反例：违反借用规则导致数据竞争 {#反例违反借用规则导致数据竞争}](#️-反例违反借用规则导致数据竞争-反例违反借用规则导致数据竞争)
   - [💻 代码示例与实践 {#代码示例与实践}](#-代码示例与实践-代码示例与实践)
-    - [示例 1：不可变借用（Mutable Borrow） {#示例-1不可变借用}](#示例-1不可变借用-示例-1不可变借用)
+    - [示例 1：不可变借用 {#示例-1不可变借用}](#示例-1不可变借用-示例-1不可变借用)
     - [示例 2：可变借用 {#示例-2可变借用}](#示例-2可变借用-示例-2可变借用)
     - [示例 3：借用检查器拒绝数据竞争 {#示例-3借用检查器拒绝数据竞争}](#示例-3借用检查器拒绝数据竞争-示例-3借用检查器拒绝数据竞争)
-    - [示例 4：借用作用域与生命周期（Lifetimes） {#示例-4借用作用域与生命周期}](#示例-4借用作用域与生命周期-示例-4借用作用域与生命周期)
-    - [示例 5：借用检查器检测悬垂引用（Reference） {#示例-5借用检查器检测悬垂引用}](#示例-5借用检查器检测悬垂引用-示例-5借用检查器检测悬垂引用)
+    - [示例 4：借用作用域与生命周期 {#示例-4借用作用域与生命周期}](#示例-4借用作用域与生命周期-示例-4借用作用域与生命周期)
+    - [示例 5：借用检查器检测悬垂引用 {#示例-5借用检查器检测悬垂引用}](#示例-5借用检查器检测悬垂引用-示例-5借用检查器检测悬垂引用)
     - [示例 6：复杂借用场景 {#示例-6复杂借用场景}](#示例-6复杂借用场景-示例-6复杂借用场景)
   - [🔗 系统集成与实际应用 {#系统集成与实际应用}](#-系统集成与实际应用-系统集成与实际应用)
-    - [与所有权（Ownership）系统的集成 {#与所有权系统的集成}](#与所有权系统的集成-与所有权系统的集成)
+    - [与所有权系统的集成 {#与所有权系统的集成}](#与所有权系统的集成-与所有权系统的集成)
     - [与生命周期的集成 {#与生命周期的集成}](#与生命周期的集成-与生命周期的集成)
     - [实际应用案例 {#实际应用案例}](#实际应用案例-实际应用案例)
   - [✅ 证明目标 {#证明目标}](#-证明目标-证明目标)

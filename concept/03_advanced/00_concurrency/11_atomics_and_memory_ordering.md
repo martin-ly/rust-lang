@@ -84,6 +84,11 @@
     - [4.1. "无畏"的真正含义](#41-无畏的真正含义)
     - [4.2. 未来的方向：`async/await`](#42-未来的方向asyncawait)
   - [5. 最终总结](#5-最终总结)
+  - [Rust 1.97.0 交叉语义](#rust-1970-交叉语义)
+    - [1. 该 cfg 在原子 codegen 中的位置](#1-该-cfg-在原子-codegen-中的位置)
+    - [2. 与 `Ordering` 正交：对齐 vs 可见性](#2-与-ordering-正交对齐-vs-可见性)
+    - [3. 与类型布局 / std 原子类型对齐保证的关系](#3-与类型布局--std-原子类型对齐保证的关系)
+    - [4. 跨平台边界与旧名废弃说明](#4-跨平台边界与旧名废弃说明)
 
 ---
 
@@ -1345,3 +1350,74 @@ Rust 的生态系统鼓励开发者在尽可能高的抽象层次上解决问题
 
 Rust 的并发模型是其语言设计的皇冠明珠。
 它通过将所有权和类型系统（Type System）这两个核心支柱与并发原语深度融合，成功地在编译时解决了困扰系统编程领域数十年的内存安全问题，真正实现了高性能与高安全的统一。
+
+---
+
+## Rust 1.97.0 交叉语义
+
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
+> **交叉域**: 原子操作（Atomics）× 指令生成（Codegen）× 类型布局（Type Layout）× 目标平台（Target）
+> **审计出处**: `reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md` §2.4、§4 P2-2 缺口 #3
+> **本小节性质**: 交叉语义补充，**只增不删**；原有原子类型/内存序/happens-before（§一–§五）保持不变。与 [`29_memory_model.md`](../02_unsafe/29_memory_model.md) §Rust 1.97.0 交叉语义 互为镜像（该页从内存模型/有效性切入，本页从原子指令生成切入）。
+
+### 1. 该 cfg 在原子 codegen 中的位置
+
+Rust 1.97.0 稳定了 `cfg(target_has_atomic_primitive_alignment)`（release notes *Language* 类：`"Stabilize cfg(target_has_atomic_primitive_alignment)"`）。版本页 §2.4 给出的判定含义是：**目标平台上原子类型的对齐是否等于其对应原始整数类型的对齐**。对本页关心的原子操作而言，它的实际作用是**在编译期决定后端可发射哪类原子指令**：
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— 用 cfg 在编译期选择原子实现路径
+use std::sync::atomic::{AtomicU64, Ordering};
+
+#[cfg(target_has_atomic_primitive_alignment = "64")]
+fn inc64(a: &AtomicU64) {
+    // 目标保证 64 位原子按 u64 自然对齐 → 可发射原生 64 位原子指令
+    a.fetch_add(1, Ordering::Relaxed);
+}
+
+#[cfg(not(target_has_atomic_primitive_alignment = "64"))]
+fn inc64(a: &AtomicU64) {
+    // 目标不保证该对齐 → 走保守实现（如对内部计数做分片或改用锁）
+    a.fetch_add(1, Ordering::Relaxed);
+}
+```
+
+后端在无法保证操作数自然对齐时，常见处理是退回 `compiler_rt` 的 `__atomic_*` libcall、插入额外同步，或在编译期拒绝（原理见本页已引用的 [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html)）。该 cfg 让可移植/无锁代码**不必**到运行期才发现对齐假设不成立。
+
+### 2. 与 `Ordering` 正交：对齐 vs 可见性
+
+一个常见误配是把“原子是否按原生对齐发射指令”与“用哪个 `Ordering`”混为一谈。二者属于不同轴：
+
+| 轴 | 回答的问题 | 由谁决定 | 失败后果 |
+|:---|:---|:---|:---|
+| `Ordering`（Relaxed/Acquire/Release/SeqCst） | 跨线程**可见性/happens-before** | 程序员按同步需求选择（本页 §1.2、§2.2） | 逻辑错误 / 数据竞争（本页 §4.5、§10.3） |
+| `cfg(target_has_atomic_primitive_alignment)` | 单条原子**指令能否在给定对齐上原生发射** | 目标平台 ABI/ISA，编译期查询 | 退 libcall / 编译失败 / 若强用未对齐地址则 UB |
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— 两条轴互不影响：Ordering 选可见性，cfg 选指令路径
+use std::sync::atomic::{AtomicU64, Ordering};
+
+fn release_store(a: &AtomicU64) {
+    // Ordering::Release：保证之前的写对 Acquire 读者可见（可见性轴）
+    a.store(1, Ordering::Release);
+    // 该 store 是否由单条原生指令完成，由 cfg 在编译期决定（指令选择轴），
+    // 与 Ordering 的可见性语义无关。
+    let _native_aligned = cfg!(target_has_atomic_primitive_alignment = "64");
+}
+```
+
+> **边界**：即使 `cfg(target_has_atomic_primitive_alignment)` 成立（可原生发射），`Ordering::Relaxed` 仍然**不**建立 happens-before（本页 §1.3）；反之，即使目标需 libcall，`SeqCst` 仍提供全局顺序。**对齐充分性不改变内存序语义，内存序语义也不改变对齐要求。**
+
+### 3. 与类型布局 / std 原子类型对齐保证的关系
+
+本页 §1.1 列出各 `Atomic*` 类型的大小；其**对齐**由 [`42_type_layout.md`](../../04_formal/05_rustc_internals/42_type_layout.md) §二 “Size 与 Alignment” 与标准库对 `Atomic*` 的布局保证共同决定。`#[repr(align(N))]` 可主动抬高对齐（永远安全，更强对齐 ⟹ 满足较弱要求）；`#[repr(C)]` 固定字段顺序与 C-ABI 对齐但**不**单独保证原子自然对齐。细节与反例见镜像页 [`29_memory_model.md`](../02_unsafe/29_memory_model.md) §Rust 1.97.0 交叉语义 §2。
+
+> ⚠ **需专家复核**：标准库普遍保证 `AtomicU*` 与对应 `u*` **大小/对齐一致**；若该保证在所有目标上成立，则版本页所述“原子类型对齐是否等于原始整数对齐”的判定在 surface 层似乎恒真，说明该 cfg 实际测试的谓词（更可能关乎“目标 ABI 是否为该宽度原子提供自然对齐/原生指令”）比 surface 字面更细。release notes 与版本页**未**给出该谓词的精确定义，本小节不臆测；请以 Rust Reference — Conditional compilation 与该 cfg 稳定化文档为准。
+
+### 4. 跨平台边界与旧名废弃说明
+
+- **跨平台边界（原则）**：64 位主流目标上，原子对齐多与原始整数一致且可由原生指令完成；部分 32 位或特殊目标上，某宽度原子的**要求对齐**可能高于同宽度整数的惯用对齐或高于指针宽度，需保守路径。
+- ⚠ **需专家复核**：具体“哪些目标上 primitive 对齐 ≠ 指针宽度对齐”的目标清单，release notes 与版本页**未给出**；本小节不枚举目标名。
+- **旧名 `target_has_atomic_equal_alignment` 的废弃**：审计背景（§2.4/P2-2）指出该 cfg 曾用名 `target_has_atomic_equal_alignment`，1.97 起稳定为现名，旧名废弃。⚠ **需专家复核**：release notes 与版本页**未提及**旧名及废弃时间表；旧名/废弃说法当前仅来自审计背景，使用前请核对 Rust Reference 与稳定化 PR。
+
+> **来源**: [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/) · [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html) · [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§2.4）
+> **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`42_type_layout.md`](../../04_formal/05_rustc_internals/42_type_layout.md) · [`29_memory_model.md`](../02_unsafe/29_memory_model.md)

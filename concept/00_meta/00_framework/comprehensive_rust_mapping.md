@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: C×Kno — 将 Google 的 Comprehensive Rust 课程映射到本知识体系
 > **定位**: 本文件建立 **Comprehensive Rust**（Google 开发的免费 Rust 课程）与本知识体系中 `concept/` 文件的双向映射，帮助学习者将课程章节定位到深层概念文档。
-> **前置概念**: [Learning Guide](../04_navigation/learning_guide.md) · [Bloom Taxonomy](03_bloom_taxonomy.md)
+> **前置概念**: [Learning Guide](../04_navigation/learning_guide.md) · [Bloom Taxonomy](bloom_taxonomy.md)
 > **后置概念**: [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md)
 > **内容重叠提示**: 本文与 [`docs/01_learning/01_google_rust_mapping.md`](../../../docs/01_learning/01_google_rust_mapping.md) 内容高度重叠。`docs/` 版本提供学习映射；`concept/` 版本为项目权威主轨。
 
@@ -183,7 +183,7 @@ Comprehensive Rust 与本知识体系的互补关系:
 ## 相关概念文件
 
 - [Learning Guide](../04_navigation/learning_guide.md) — 本知识体系学习指南
-- [Bloom Taxonomy](03_bloom_taxonomy.md) — 认知层级框架
+- [Bloom Taxonomy](bloom_taxonomy.md) — 认知层级框架
 - [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) — Rust 应用领域分析
 
 ---

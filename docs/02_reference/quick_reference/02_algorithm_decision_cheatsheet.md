@@ -1,5 +1,10 @@
 # 算法选择决策树速查卡 {#算法选择决策树速查卡}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为算法选择决策树速查卡（速查/决策树，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept 算法`](../../../concept/06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（排序/搜索/图/DP 算法选择决策速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Algorithm Decision Cheatsheet
 > **Summary**: 算法选择决策树速查卡 Algorithm Decision Cheatsheet.
 > **Rust 版本**: 1.97.0+ (Edition 2024)

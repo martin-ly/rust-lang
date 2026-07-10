@@ -11,11 +11,12 @@
 > **后置概念**: N/A
 
 > > **权威来源**: 本文件为 `concept/` 权威页。
+
 - [Rust 概念知识体系 —— 全面分析论证与权威对齐](README.md)
 - [L0 元信息](00_meta/README.md)
-  - [Bloom Taxonomy（Bloom 分类法）](00_meta/00_framework/03_bloom_taxonomy.md)
-  - [Cross Reference Matrix（交叉引用矩阵）](00_meta/04_navigation/05_cross_reference_matrix.md)
-  - [Concept Audit Guide（概念审计指南）](00_meta/03_audit/08_concept_audit_guide.md)
+  - [Bloom Taxonomy（Bloom 分类法）](00_meta/00_framework/bloom_taxonomy.md)
+  - [Cross Reference Matrix（交叉引用矩阵）](00_meta/04_navigation/cross_reference_matrix.md)
+  - [Concept Audit Guide（概念审计指南）](00_meta/03_audit/concept_audit_guide.md)
   - [Rust 知识体系 A/S/P 三维认知标记规范](00_meta/03_audit/asp_marking_guide.md)
   - [概念审计清单（Concept Audit Checklist）](00_meta/03_audit/audit_checklist.md)
   - [概念一致性（Coherence）检查清单（Concept Consistency Audit Checklist）](00_meta/03_audit/concept_consistency_audit_checklist.md)
@@ -479,6 +480,8 @@
   - [Rust 1.96 稳定特性](07_future/00_version_tracking/rust_1_96_stabilized.md)
   - [Rust 1.97 前沿特性预览（Beta）](07_future/00_version_tracking/rust_1_97_preview.md)
   - [Rust 1.97 稳定特性](07_future/00_version_tracking/rust_1_97_stabilized.md)
+  - [Rust 1.97 特性×领域交叉矩阵](07_future/00_version_tracking/feature_domain_matrix_197.md)
+  - [Rust 1.97 兼容性迁移判定树](07_future/00_version_tracking/migration_197_decision_tree.md)
   - [Rust 1.98+ 前沿特性预览](07_future/00_version_tracking/rust_1_98_preview.md)
   - [Safety Tags（安全标签）预览](07_future/03_preview_features/31_safety_tags_preview.md)
   - [AutoVerus / Verus 预览](07_future/03_preview_features/33_autoverus_preview.md)

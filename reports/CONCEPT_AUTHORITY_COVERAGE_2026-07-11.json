@@ -1,0 +1,78 @@
+{
+  "date": "2026-07-11",
+  "scanned": 460,
+  "coverage": {
+    "P0": [
+      450,
+      97.8
+    ],
+    "P1": [
+      321,
+      69.8
+    ],
+    "P2": [
+      220,
+      47.8
+    ],
+    "any": [
+      458,
+      99.6
+    ],
+    "none": 2
+  },
+  "by_layer": {
+    "L0": {
+      "n": 60,
+      "P0": 58,
+      "any": 59
+    },
+    "L1": {
+      "n": 55,
+      "P0": 55,
+      "any": 55
+    },
+    "L2": {
+      "n": 38,
+      "P0": 38,
+      "any": 38
+    },
+    "L3": {
+      "n": 57,
+      "P0": 55,
+      "any": 57
+    },
+    "L4": {
+      "n": 53,
+      "P0": 53,
+      "any": 53
+    },
+    "L5": {
+      "n": 19,
+      "P0": 19,
+      "any": 19
+    },
+    "L6": {
+      "n": 115,
+      "P0": 111,
+      "any": 115
+    },
+    "L7": {
+      "n": 60,
+      "P0": 58,
+      "any": 59
+    },
+    "L?": {
+      "n": 3,
+      "P0": 3,
+      "any": 3
+    }
+  },
+  "core_gaps_l1_l4_no_p0": [
+    "concept/03_advanced/02_process_ipc/10_modern_process_libraries.md",
+    "concept/03_advanced/02_process_ipc/08_process_performance_engineering.md"
+  ],
+  "none_any": [
+    "concept/00_meta/00_framework/theorem_registry.md",
+    "concept/07_future/00_version_tracking/migration_197_decision_tree.md"
+  ]
+}

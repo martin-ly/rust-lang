@@ -1,5 +1,10 @@
 # 📦 Cargo 速查卡 {#cargo-速查卡}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为Cargo 速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept Cargo 命令`](../../../concept/06_ecosystem/01_cargo/84_cargo_commands_reference.md) · [`concept Cargo 入门`](../../../concept/06_ecosystem/01_cargo/80_cargo_getting_started.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（Cargo 项目/构建/测试/依赖命令速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Cargo Cheatsheet
 > **Summary**: 📦 Cargo 速查卡 Cargo Cheatsheet. (stub/archive redirect)
 > **分级**: [A]

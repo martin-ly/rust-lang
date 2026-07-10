@@ -15,9 +15,9 @@
 
 | 编号 | 中文名 | EN | 定义 | 来源数 |
 |:---|:---|:---|:---|:---:|
-| `03_bloom_taxonomy` | [Bloom Taxonomy](../00_framework/03_bloom_taxonomy.md) | Bloom Taxonomy | Bloom's taxonomy adapted for Rust cognitive skill assessment, mapping remembering to creation across knowledge dimensions. | 7 |
-| `05_cross_reference_matrix` | [Cross Reference Matrix](../04_navigation/05_cross_reference_matrix.md) | Cross Reference Matrix | — | 0 |
-| `08_concept_audit_guide` | [Concept Audit Guide](../03_audit/08_concept_audit_guide.md) | Concept Audit Guide | Concept Audit Guide. Core Rust concept. | 2 |
+| `03_bloom_taxonomy` | [Bloom Taxonomy](../00_framework/bloom_taxonomy.md) | Bloom Taxonomy | Bloom's taxonomy adapted for Rust cognitive skill assessment, mapping remembering to creation across knowledge dimensions. | 7 |
+| `05_cross_reference_matrix` | [Cross Reference Matrix](../04_navigation/cross_reference_matrix.md) | Cross Reference Matrix | — | 0 |
+| `08_concept_audit_guide` | [Concept Audit Guide](../03_audit/concept_audit_guide.md) | Concept Audit Guide | Concept Audit Guide. Core Rust concept. | 2 |
 | `asp_marking_guide` | [Rust 知识体系 A/S/P 三维认知标记规范](../03_audit/asp_marking_guide.md) | Asp Marking Guide | Asp Marking Guide. Core Rust concept. | 5 |
 | `audit_checklist` | [概念一致性检查清单](../03_audit/audit_checklist.md) | Audit Checklist | Audit Checklist. Core Rust concept. | 19 |
 | `authority_source_map` | [权威来源映射表](../02_sources/authority_source_map.md) | Authority Source Map | Authority Source Map. Core Rust concept. | 12 |
@@ -439,9 +439,9 @@
 |:---|:---:|:---|
 | A | 13 | [Rust 职业市场全景：2026 年数据与分析](../04_navigation/career_landscape.md), [Comprehensive Rust 课程映射](../00_framework/comprehensive_rust_mapping.md), [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/05_collections/08_collections.md), [模块系统与路径：Rust 的代码组织哲学](../../01_foundation/07_modules_and_items/11_modules_and_paths.md), [`assert_matches!`：模式匹配断言的形式化语义](../../02_intermediate/06_macros_and_metaprogramming/05_assert_matches.md) |
 | F | 9 | [Rustc 查询系统与增量编译](../../04_formal/05_rustc_internals/19_rustc_query_system.md), [rustc 中的 Trait Solver](../../04_formal/05_rustc_internals/26_trait_solver_in_rustc.md), [rustc 类型检查与类型推断](../../04_formal/00_type_theory/27_type_checking_and_inference.md), [Type Inference Complexity](../../04_formal/00_type_theory/29_type_inference_complexity.md), [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/35_name_resolution_and_hir.md) |
-| P | 35 | [Concept Audit Guide](../03_audit/08_concept_audit_guide.md), [常用开发工具](../../01_foundation/10_testing_basics/42_useful_development_tools.md), [Rust 发布流程](../../02_intermediate/00_traits/33_rust_release_process.md), [内联汇编 (Inline Assembly)](../../03_advanced/05_inline_assembly/13_inline_assembly.md), [Linkage](../../03_advanced/04_ffi/27_linkage.md) |
+| P | 35 | [Concept Audit Guide](../03_audit/concept_audit_guide.md), [常用开发工具](../../01_foundation/10_testing_basics/42_useful_development_tools.md), [Rust 发布流程](../../02_intermediate/00_traits/33_rust_release_process.md), [内联汇编 (Inline Assembly)](../../03_advanced/05_inline_assembly/13_inline_assembly.md), [Linkage](../../03_advanced/04_ffi/27_linkage.md) |
 | S | 81 | [语义桥：算法、设计模式与工作流模式的统一谱系](../00_framework/semantic_bridge_algorithms_patterns.md), [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md), [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md), [Type System Basics](../../01_foundation/02_type_system/04_type_system.md), [引用语义：自动解引用、Deref 强制与类型转换](../../01_foundation/03_values_and_references/05_reference_semantics.md) |
-| 未标注 | 244 | [Bloom Taxonomy](../00_framework/03_bloom_taxonomy.md), [Cross Reference Matrix](../04_navigation/05_cross_reference_matrix.md), [Rust 知识体系 A/S/P 三维认知标记规范](../03_audit/asp_marking_guide.md), [概念一致性检查清单](../03_audit/audit_checklist.md), [权威来源映射表](../02_sources/authority_source_map.md) |
+| 未标注 | 244 | [Bloom Taxonomy](../00_framework/bloom_taxonomy.md), [Cross Reference Matrix](../04_navigation/cross_reference_matrix.md), [Rust 知识体系 A/S/P 三维认知标记规范](../03_audit/asp_marking_guide.md), [概念一致性检查清单](../03_audit/audit_checklist.md), [权威来源映射表](../02_sources/authority_source_map.md) |
 
 ## 三、核心枢纽概念（被引用最多）
 

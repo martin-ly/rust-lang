@@ -37,11 +37,11 @@ graph TD
 
 | 子目录 | 职责 | 代表文件 |
 |:---|:---|:---|
-| `00_framework/` | 学习框架与语义坐标系 | [Bloom 分类法](00_framework/03_bloom_taxonomy.md) · [模式语义空间索引](00_framework/pattern_semantic_space_index.md) |
+| `00_framework/` | 学习框架与语义坐标系 | [Bloom 分类法](00_framework/bloom_taxonomy.md) · [模式语义空间索引](00_framework/pattern_semantic_space_index.md) |
 | `01_terminology/` | 术语表与双语模板 | [术语表](01_terminology/terminology_glossary.md) · [双语模板](01_terminology/bilingual_template.md) |
 | `02_sources/` | 权威来源映射 | [权威来源映射表](02_sources/authority_source_map.md) |
-| `03_audit/` | 质量审计与治理 | [Concept Audit Guide](03_audit/08_concept_audit_guide.md) · [分级体系](03_audit/grading_system.md) · [模板去同质化](03_audit/template_deduplication_guide.md) |
-| `04_navigation/` | 索引与交叉引用 | [全局概念索引](04_navigation/concept_index.md) · [交叉引用矩阵](04_navigation/05_cross_reference_matrix.md) |
+| `03_audit/` | 质量审计与治理 | [Concept Audit Guide](03_audit/concept_audit_guide.md) · [分级体系](03_audit/grading_system.md) · [模板去同质化](03_audit/template_deduplication_guide.md) |
+| `04_navigation/` | 索引与交叉引用 | [全局概念索引](04_navigation/concept_index.md) · [交叉引用矩阵](04_navigation/cross_reference_matrix.md) |
 | `knowledge_topology/` | 知识体系拓扑图谱集 | [拓扑图谱集 README](knowledge_topology/README.md) |
 | `placeholders/` | SUMMARY.md 占位符 | 待创建主题的导航占位 |
 
@@ -49,7 +49,7 @@ graph TD
 
 - [全局概念索引](04_navigation/concept_index.md) — 按字母顺序索引所有概念
 - [知识体系拓扑图谱集](knowledge_topology/README.md) — 概念定义、属性关系、场景决策树、层间/层内映射、权威来源对齐
-- [交叉引用矩阵](04_navigation/05_cross_reference_matrix.md) — 概念间依赖关系
+- [交叉引用矩阵](04_navigation/cross_reference_matrix.md) — 概念间依赖关系
 - [权威来源映射表](02_sources/authority_source_map.md) — 概念与权威来源对照
 - [语义桥：算法、设计模式与工作流模式的统一谱系](00_framework/semantic_bridge_algorithms_patterns.md) — 算法 ↔ 模式语义关联
 - [模式语义空间索引](00_framework/pattern_semantic_space_index.md) — 设计模式在概念体系中的坐标

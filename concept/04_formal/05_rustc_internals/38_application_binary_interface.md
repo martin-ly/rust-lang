@@ -177,3 +177,77 @@ pub fn name_in_rust() {}
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
+
+---
+
+## Rust 1.97.0 交叉语义（链接 / ABI）
+
+> **Edition / 版本**: Rust 1.97.0+ (Edition 2024)
+> **定位**: 本小节把上方「Rust 1.97.0 变更提示」横幅**展开**为 v0 × debuginfo demangle × linker_messages × backtrace 的交互矩阵，并阐明空 `export_name`/`link_name` 校验对 ABI 契约的意义；对应审计缺口（[`GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md`](../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md) §2.4、§4 P2-2 缺口#5）。横幅原文保留。
+
+### A. v0 × debuginfo demangle × linker_messages × backtrace 交互矩阵
+
+阅读方式：行 × 列单元格描述「行特性」在「列特性」维度上的交互；对角线为该特性的**主效应**。v0 默认混淆改变 Rust→Rust 符号名形态；`#[unsafe(no_mangle)]`/`extern "C"`/`#[unsafe(export_name = "...")]` 产生的**字面符号名绕过混淆**，因而不受 v0 影响（ABI 稳定面的边界）。
+
+| 行 ＼ 列 | v0 mangling | debuginfo demangle | linker_messages | backtrace |
+|:---|:---|:---|:---|:---|
+| **v0 mangling** | 默认混淆方案（Rust→Rust 符号）— 主效应 | v0 符号需新版 demangler（`rustfilt`/GDB 15+/LLDB）方可还原 | 链接「未解析符号」时，v0 混淆名会出现在 linker 输出，需 demangle 才可读 | 旧栈帧打印可能显示混淆名；backtrace 文本**格式可能变化**（发布说明） |
+| **debuginfo demangle** | demangle 失败时调试器/profiler 显示原始 v0 名 | debuginfo 携带类型/泛型实例信息，依赖 demangler 还原 — 主效应 | linker 输出的 v0 名可经 `rustfilt` 等 demangle 后处理还原 | panic backtrace 的符号可读性取决于运行期 demangle |
+| **linker_messages** | 链接错误中的 v0 名以 warning 形式透传到 rustc 诊断 | 默认未 demangle，原始符号直接显示 | 默认 warn 的特殊 lint（不在 `warnings` group）— 主效应 | 链接阶段告警先于运行期 backtrace，阶段不同但符号同源 |
+| **backtrace** | 栈帧符号来自 v0 混淆，文本格式可能变化 | 可读性依赖 demangle；发布说明指「格式可能变化」 | 运行期（backtrace）vs 链接期（linker_messages），共享同一符号名 | 运行期栈回溯 — 主效应 |
+
+⚠ **需专家复核**：demangler 对各工具/平台的**精确最低版本**（GDB 15+、LLDB、`rustfilt` 的 v0 覆盖度）未在版本页逐项给出；矩阵中的版本表述以 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md) §2.7 与发布说明为上限，具体 toolchain 组合请实测复核。
+
+```bash
+# 观测 v0 混淆与 demangle：链接期符号 vs 可读名
+cargo build --release
+nm target/release/lib<name>.so | rustfilt | head     # rustfilt 还原 v0 名
+# 触发一条 panic，对比 backtrace 文本格式（RUST_BACKTRACE=1）
+RUST_BACKTRACE=1 cargo run
+```
+
+### B. 空 `export_name` / `link_name` 校验对 ABI 契约的意义
+
+稳定的 ABI 契约依赖**两侧符号名的确定性**：导出侧（`export_name`/`no_mangle`）必须给出**非空、全局唯一**的字面符号，导入侧（`#[link_name]`/`#[link(name = "...")]`）必须给出**非空、合法**的目标符号/库名。Rust 1.97.0 把两类「空/非法符号名」从「可能被静默接受、链接期才暴露」提升为**编译期硬错误**，等价于把 ABI 契约的可验证性前移到编译期：
+
+- 空 `#[export_name = ""]` → 导出符号名缺失，ABI 契约无法命名 → 拒绝。
+- 非法 `#[link_name]` / `#[link(name)]` → 导入侧目标不明确，ABI 绑定无法解析 → 拒绝。
+
+在 Edition 2024 下这些属性均须写在 `#[unsafe(...)]` 内（符号冲突属不安全来源）。迁移判定见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §3。
+
+```rust,ignore
+// Edition 2024 / Rust 1.97.0+ —— ABI 契约两端：导出字面符号 + 导入按名绑定
+// 导出侧（cdylib）：固定字面符号，绕过 v0 混淆
+#[unsafe(no_mangle)]
+pub extern "C" fn ffi_add(a: i32, b: i32) -> i32 { a + b }
+
+// 导入侧：库名与符号名均须非空、合法（否则 1.97+ 编译期报错）
+#[link(name = "mynative")]
+extern "C" {
+    #[link_name = "native_add"]
+    fn native_add(a: i32, b: i32) -> i32;
+}
+```
+
+```rust,ignore
+// ❌ Rust 1.97+ 硬错误：空导出符号名破坏 ABI 契约的可命名性
+#[unsafe(export_name = "")]
+pub fn hook() {}
+
+// ✅ 非空、全局唯一的固定符号名，恢复可验证的 ABI 契约
+#[unsafe(export_name = "my_crate_hook_v1")]
+pub fn hook() {}
+```
+
+### 来源与交叉索引
+
+> **来源**:
+> · [Rust 1.97.0 Release Notes](https://releases.rs/docs/1.97.0/)（Compatibility Notes：v0 mangling 默认对 debugger/profiler/backtrace 的影响、Warn on linker output、空 `export_name` 报错、`link_name`/`link(name)` 校验）
+> · [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md) §2.7（v0 mangling）、§2.8（`linker_messages`）、§7/§7.2（空 `export_name` 与 `link_name` 校验）
+> · [Rust Reference — ABI](https://doc.rust-lang.org/reference/abi.html) · [Rust Reference — External Blocks / ABI](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html)
+>
+> **交叉索引（反链）**:
+> · 版本事实源：[`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)
+> · 特性×领域反查矩阵：[`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md)
+> · 兼容性迁移判定树：[`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md)
+> · 链接权威页（交叉语义）：[`27_linkage.md`](../../03_advanced/04_ffi/27_linkage.md)

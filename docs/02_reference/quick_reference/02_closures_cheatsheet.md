@@ -1,5 +1,10 @@
 # 闭包速查卡 (Closures Cheatsheet) {#闭包速查卡-closures-cheatsheet}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为闭包速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L1 闭包基础`](../../../concept/01_foundation/00_start/15_closure_basics.md) · [`concept L2 闭包类型`](../../../concept/02_intermediate/04_types_and_conversions/07_closure_types.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（闭包基础/Trait/常见用法速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Closures Cheatsheet
 > **Summary**: 闭包速查卡 Closures Cheatsheet.
 > **分级**: [A]

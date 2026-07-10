@@ -1,5 +1,10 @@
 # 🧪 Rust 测试速查卡 {#rust-测试速查卡}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为测试速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept 测试`](../../../concept/06_ecosystem/09_testing_and_quality/16_testing.md) · [`concept L1 测试基础`](../../../concept/01_foundation/10_testing_basics/16_testing_basics.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（单元/集成/文档/基准测试、工具库、最佳实践、覆盖率速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Testing Cheatsheet
 > **Summary**: 🧪 Rust 测试速查卡 Testing Cheatsheet. (stub/archive redirect)
 > **分级**: [A]

@@ -6,6 +6,11 @@
 
 # 生命周期形式化（形式化方法视角） {#生命周期形式化形式化方法视角}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为生命周期形式化研究笔记（形式化方法视角）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L1 lifetimes`](../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（生命周期形式化定义、公理/定理、国际形式化成果映射与代码示例），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Lifetime Formalization
 > **Summary**: 生命周期（Lifetimes）形式化 形式化方法视角 Lifetime Formalization.
 > **内容分级**: [归档级]

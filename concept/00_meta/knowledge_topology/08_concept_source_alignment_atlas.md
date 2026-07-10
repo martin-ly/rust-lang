@@ -138,7 +138,7 @@ flowchart TD
 |:---|:---:|:---:|:---|
 | [占位符页面](../placeholders/placeholder_generic.md) | L0 元信息层 | 3 | 无需外部来源 |
 | [主题-权威来源对齐图谱](../02_sources/topic_authority_alignment_map.md) | L0 元信息层 | 0 | 项目内部来源 |
-| [Cross Reference Matrix](../04_navigation/05_cross_reference_matrix.md) | L0 元信息层 | 0 | 项目内部来源 |
+| [Cross Reference Matrix](../04_navigation/cross_reference_matrix.md) | L0 元信息层 | 0 | 项目内部来源 |
 
 ---
 

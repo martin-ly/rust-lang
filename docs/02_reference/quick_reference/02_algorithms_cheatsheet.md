@@ -1,5 +1,10 @@
 # 算法与数据结构快速参考卡片 {#算法与数据结构快速参考卡片}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为算法与数据结构速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept 算法`](../../../concept/06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（常用算法/数据结构速查表、并行算法、选择指南、反例），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Algorithms Cheatsheet
 > **Summary**: 算法与数据结构快速参考卡片 Algorithms Cheatsheet. (stub/archive redirect)
 > **分级**: [A]

@@ -1,5 +1,10 @@
 # Rust 测试策略决策树 {#rust-测试策略决策树}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为测试策略决策树（决策树，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept 测试`](../../../concept/06_ecosystem/09_testing_and_quality/16_testing.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（测试策略决策树与选型维度（决策树，非概念正文）），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Testing Strategy Decision Tree
 > **Summary**: Rust 测试策略决策树 Testing Strategy Decision Tree. (stub/archive redirect)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
@@ -33,7 +38,7 @@
     - [1.6 属性测试 (Property Testing) {#16-属性测试-property-testing}](#16-属性测试-property-testing-16-属性测试-property-testing)
   - [二、测试工具选择矩阵 {#二测试工具选择矩阵}](#二测试工具选择矩阵-二测试工具选择矩阵)
     - [2.1 工具对比表 {#21-工具对比表}](#21-工具对比表-21-工具对比表)
-    - [2.2 异步（Async）测试：tokio-test {#22-异步测试tokio-test}](#22-异步测试tokio-test-22-异步测试tokio-test)
+    - [2.2 异步测试：tokio-test {#22-异步测试tokio-test}](#22-异步测试tokio-test-22-异步测试tokio-test)
     - [2.3 模拟对象：mockall {#23-模拟对象mockall}](#23-模拟对象mockall-23-模拟对象mockall)
     - [2.4 快照测试：insta {#24-快照测试insta}](#24-快照测试insta-24-快照测试insta)
     - [2.5 基准测试：Criterion {#25-基准测试criterion}](#25-基准测试criterion-25-基准测试criterion)

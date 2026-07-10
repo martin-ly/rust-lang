@@ -65,6 +65,10 @@
     - [测验 2：Unpin 自动实现（理解层）](#测验-2unpin-自动实现理解层)
     - [测验 3：Pin::new 的使用限制（应用层）](#测验-3pinnew-的使用限制应用层)
     - [测验 4：async/await 与 Pin（分析层）](#测验-4asyncawait-与-pin分析层)
+  - [Rust 1.97.0 交叉语义](#rust-1970-交叉语义)
+    - [1. 变化事实（来自 release notes，逐字可核）](#1-变化事实来自-release-notes逐字可核)
+    - [2. 与 `Unpin` auto trait 的交互：为什么多一层 `&mut` 很关键](#2-与-unpin-auto-trait-的交互为什么多一层-mut-很关键)
+    - [3. 与 async 状态机 / 自引用的交互](#3-与-async-状态机--自引用的交互)
 
 ---
 
@@ -877,3 +881,91 @@ struct ExampleFuture {
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Async Book — Pin](https://rust-lang.github.io/async-book/index.html) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html)
+
+---
+
+## Rust 1.97.0 交叉语义
+
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
+> **交叉域**: Pin/Unpin × Deref 强制（Coercion）× async 状态机（自引用）× 兼容性
+> **审计出处**: `reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md` §2.4、§4 P2-2 缺口 #4
+> **本小节性质**: 交叉语义补充，**只增不删**；原有 Pin/Unpin/自引用/async 小节（§一–§五）保持不变。迁移操作见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §5–§6。
+
+### 1. 变化事实（来自 release notes，逐字可核）
+
+Rust 1.97.0 release notes 的 *Compatibility Notes* 原文要点：
+
+- “Prevent deref coercions in `pin!`, in order to prevent unsoundness.”
+- 写 `pin!(x)` 且 `x: &mut T` 时，**现在总是**得到 `Pin<&mut &mut T>`；而此前**有时**会经 deref coercion 得到 `Pin<&mut T>`。
+- 该 coercion 自 **Rust 1.88.0** 起被“错误地允许”。
+
+即 1.97 的改动是**收窄** `std::pin::pin!` 宏返回值上原本隐式发生的 deref coercion，使“固定引用”与“固定值”在类型层严格区分：
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— pin! 返回类型在 1.97 起严格化
+use std::pin::{pin, Pin};
+
+let mut x = 42_i32;
+
+// 传“值”：宏固定 x 本身 → Pin<&mut i32>（与 1.97 前一致）
+let p_value: Pin<&mut i32> = pin!(x);
+
+// 传“引用”：宏固定的是 &mut x 这个引用 → Pin<&mut &mut i32>
+// 1.97 前：可能被隐式 coerce 成 Pin<&mut i32>（错误地允许，自 1.88.0 起）
+// 1.97 起：严格为 Pin<&mut &mut i32>，不再 coerce
+let p_ref: Pin<&mut &mut i32> = pin!(&mut x);
+```
+
+> **迁移对照**：若你的意图是“固定 `x` 并得到 `Pin<&mut T>`”，应写 `pin!(x)` 而非 `pin!(&mut x)`（详见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §5 方案 A）；若确需固定这个引用本身，则标注 `Pin<&mut &mut T>`（同页 §5 方案 B）。
+
+### 2. 与 `Unpin` auto trait 的交互：为什么多一层 `&mut` 很关键
+
+本页 §1.3 已说明 `Unpin` 是 auto trait、绝大多数类型自动实现。两条事实共同解释了 1.97 改动的语义：
+
+- **引用总是 `Unpin`**：对任意 `T`，`&mut T` 与 `&T` 都实现 `Unpin`（移动一个引用不会移动其指向的值）。
+- **`pin!(&mut x)` 固定的是“引用”这个值**：被 Pin 的目标是 `&mut T`（`Unpin`），而不是 `T`。因此 `Pin<&mut &mut T>` 的 `Pin::Target` 是 `&mut T`（`Unpin`），可以安全取出；但**内层 `T` 并未被固定**。
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— Unpin 视角：固定引用 ≠ 固定 pointee
+use std::pin::{pin, Pin};
+
+let mut x = String::from("hi"); // String: Unpin
+let p: Pin<&mut &mut String> = pin!(&mut x);
+
+// 因为 &mut String: Unpin，Pin<&mut &mut String> 可以安全解包出 &mut &mut String：
+let r: &mut &mut String = Pin::into_inner(p);
+// 但 r 只是“指向引用的引用”；它并不证明 String 被 Pin 固定。
+let _ = r;
+```
+
+> **旧 coercion 为何不健全（类型层解释）**：把 `Pin<&mut &mut T>` 隐式 coerce 成 `Pin<&mut T>`，会让类型系统“看起来”像是 `T` 被固定了，但底层实际被固定的只是引用 `&mut T`；一旦借此 `Pin<&mut T>` 对 `T` 做需要地址稳定的操作（如自引用投影、`get_unchecked_mut` 后移动），就可能违反 Pin 的“不移动”契约。release notes 以“to prevent unsoundness”定性该风险。⚠ **需专家复核**：具体可利用的 UB 触发链（含 `get_unchecked_mut` 后的精确步骤）release notes 未展开；上述为基于本页 §1.2 Pin 契约的类型层推导，完整不安全证明以 Rustonomicon — Pin 与相关 issue 为准。
+
+### 3. 与 async 状态机 / 自引用的交互
+
+本页 §2.3 已说明：`async fn` 编译后的状态机可能含跨 `.await` 的自引用，故为 `!Unpin`，且 `Future::poll(self: Pin<&mut Self>, ...)` 以 `Pin<&mut Self>` 接收。1.97 的 `pin!` 改动与这条链在**手写 `poll` / 自引用结构体**处相交：
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— 自引用投影：pin!(&mut field) 不再 coerce 出 Pin<&mut Field>
+use std::pin::{pin, Pin};
+
+struct SelfRef {
+    data: String,
+    // 真实项目应使用 PhantomPinned 标记 !Unpin；此处仅演示 pin! 类型变化
+}
+
+impl SelfRef {
+    fn poll_data(&mut self) {
+        // 1.97 前：可能靠 coerce 得到 Pin<&mut String>
+        // 1.97 起：pin!(&mut self.data) 的类型是 Pin<&mut &mut String>
+        let _p: Pin<&mut &mut String> = pin!(&mut self.data);
+    }
+}
+```
+
+- **只调用 async fn 的代码**不受影响：调用方本就用 `Box::pin(f)` 或 `futures::pin_mut!(f)` 取得 `Pin<&mut Future>`（本页 §三 模式 4/5），不经过 `pin!` 的引用 coercion。
+- **手写 `poll` / 字段投影**受影响：原先依赖 `pin!(&mut field)` coerce 出 `Pin<&mut Field>` 的写法，1.97 起类型多一层 `&mut`，需改用 `pin-project` 做结构投影（详见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §6 方案 A）。
+
+> **边界**：不要试图用 `unsafe { Pin::new_unchecked(&mut x) }` 绕过类型变化以恢复旧行为——这会重新引入地址不稳定风险（本页 §4.5）。`pin!` 收窄是**健全性修复**，正确应对是改用 `pin!(x)` 固定值本身、或用 `pin-project` 做投影。
+
+> **来源**: [Rust 1.97.0 Release Notes — Compatibility Notes](https://releases.rs/docs/1.97.0/) · [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/index.html) · [Rustonomicon — Pinning](https://doc.rust-lang.org/std/pin/index.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§7、§7.1）
+> **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`14_coercion_and_casting.md`](../../01_foundation/02_type_system/14_coercion_and_casting.md)

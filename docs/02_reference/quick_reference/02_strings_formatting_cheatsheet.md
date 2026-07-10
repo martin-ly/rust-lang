@@ -1,5 +1,10 @@
 # 📝 Rust 字符串与格式化速查卡 {#rust-字符串与格式化速查卡}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为字符串与格式化速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L1 字符串`](../../../concept/01_foundation/06_strings_and_text/09_strings_and_text.md) · [`concept L1 格式化`](../../../concept/01_foundation/06_strings_and_text/46_formatting_and_display.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（字符串类型/创建/操作/转换/格式化输出与选项/模式/反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Strings Formatting Cheatsheet
 > **Summary**: 📝 Rust 字符串与格式化速查卡 Strings Formatting Cheatsheet. (stub/archive redirect)
 > **分级**: [A]

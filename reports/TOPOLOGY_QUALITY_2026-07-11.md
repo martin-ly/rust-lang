@@ -1,14 +1,14 @@
 # 拓扑图谱实质质量（语义质量门 P0-2/P0-4）
 
-**日期**: 2026-07-11  **扫描**: 13 atlas 文件  **有问题**: 6
+**日期**: 2026-07-11  **扫描**: 13 atlas 文件  **有问题**: 5
 
 | 指标 | 值 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|
 | T1 定义列套话率 | 25.5% (100/392) | <10% | FAIL |
 | T2 关系最高频占比 | ⟹ 99.2% | <95% | FAIL |
-| T3 跳出叶子率 | 30.7% (31/101) | <20% | FAIL |
-| T3 根因死端 | 3 | 0 | FAIL |
-| T4 判定定量占比 | 9.5% (2/21) | >=50% | FAIL |
+| T3 跳出叶子率 | 16.6% (31/187) | <20% | pass |
+| T3 根因死端 | 0 | 0 | pass |
+| T4 判定定量占比 | 57.8% (26/45) | >=50% | pass |
 | T5 单元格泄漏 | 5 | 0 | FAIL |
 | T6 占位字样 | 6 | 0 | FAIL |
 
@@ -20,22 +20,18 @@
 - `concept/00_meta/knowledge_topology/02_attribute_relationship_atlas.md`
   - T5: 单元格泄漏 5 处
   - T6: 占位字样 3 处
-- `concept/00_meta/knowledge_topology/03_scenario_decision_tree_atlas.md`
-  - T3: 跳出叶子率 31.4% (11/35)
-  - T4: 判定定量占比 0.0% (0/3)
 - `concept/00_meta/knowledge_topology/07_intra_layer_mapping_atlas.md`
   - T2: 关系塌缩: ⟹ 占 99.2% ({'→': 2, '⟹': 244})
 - `concept/00_meta/knowledge_topology/08_concept_source_alignment_atlas.md`
   - T6: 占位字样 1 处
 - `concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md`
-  - T3: 跳出叶子率 30.3% (20/66)
-  - T3d: 死端 3: [('R5', '根因：生命周期省略规则不适用'), ('R5', '根因：类型推断失败或自定义类型未实现 trait'), ('R5', '根因：unsafe 导致 UB 或逻辑错误')]
-  - T4: 判定定量占比 11.1% (2/18)
+  - T3: 跳出叶子率 23.5% (20/85)
+  - T4: 判定定量占比 23.8% (5/21)
 
 ## T1 定义列套话样例
 
 - `[Cross Reference Matrix](../04_navigatio` → 「—」
-- `[Concept Audit Guide](../03_audit/08_con` → 「Concept Audit Guide. Core Rust concept.」
+- `[Concept Audit Guide](../03_audit/concep` → 「Concept Audit Guide. Core Rust concept.」
 - `[Rust 知识体系 A/S/P 三维认知标记规范](../03_audit/a` → 「Asp Marking Guide. Core Rust concept.」
 - `[概念一致性检查清单](../03_audit/audit_checklist.` → 「Audit Checklist. Core Rust concept.」
 - `[权威来源映射表](../02_sources/authority_source` → 「Authority Source Map. Core Rust concept.」
@@ -51,9 +47,6 @@
 
 - T1 定义套话率 25.5% >=10%
 - T2 关系塌缩 ⟹ 99.2% >=95%
-- T3 跳出率 31/101 >=20%
-- T3 死端 3 >0
-- T4 判定定量占比 2/21 <50%
 - T5 抽取泄漏 5 >0
 - T6 占位字样 6 >0
 

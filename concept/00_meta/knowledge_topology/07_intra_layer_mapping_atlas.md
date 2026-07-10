@@ -16,7 +16,7 @@
 | 源概念 | 关系 | 目标概念 |
 |:---|:---:|:---|
 | [C/C++ → Rust 工程层对比路线图](../00_framework/cpp_rust_engineering_roadmap.md) | ⟹ | [模式语义空间索引：设计模式在概念体系中的坐标](../00_framework/pattern_semantic_space_index.md) |
-| [基础知识缺口补全总索引](../04_navigation/foundations_gap_closure_index.md) | ⟹ | [Concept Audit Guide](../03_audit/08_concept_audit_guide.md) |
+| [基础知识缺口补全总索引](../04_navigation/foundations_gap_closure_index.md) | ⟹ | [Concept Audit Guide](../03_audit/concept_audit_guide.md) |
 | [模式语义空间索引：设计模式在概念体系中的坐标](../00_framework/pattern_semantic_space_index.md) | ⟹ | [语义桥：算法、设计模式与工作流模式的统一谱系](../00_framework/semantic_bridge_algorithms_patterns.md) |
 | [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../00_framework/pl_foundations_roadmap.md) | ⟹ | [C/C++ → Rust 工程层对比路线图](../00_framework/cpp_rust_engineering_roadmap.md) |
 | [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../00_framework/pl_foundations_roadmap.md) | ⟹ | [模式语义空间索引：设计模式在概念体系中的坐标](../00_framework/pattern_semantic_space_index.md) |

@@ -1,5 +1,10 @@
 # 网络编程快速参考卡片 {#网络编程快速参考卡片}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为网络编程速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept 网络基础`](../../../concept/06_ecosystem/09_networking/06_networking_basics.md) · [`concept L3 网络编程`](../../../concept/03_advanced/06_low_level_patterns/18_network_programming.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（常用 API/配置/异步模式/错误处理/安全/性能/反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Network Programming Cheatsheet
 > **Summary**: 网络编程快速参考卡片 Network Programming Cheatsheet. (stub/archive redirect)
 > **分级**: [A]

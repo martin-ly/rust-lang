@@ -1,5 +1,10 @@
 # 🎯 Rust 智能指针速查卡 {#rust-智能指针速查卡}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为智能指针速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L2 智能指针`](../../../concept/02_intermediate/02_memory_management/12_smart_pointers.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（Box/Rc/Arc/RefCell/Mutex/RwLock/Weak/组合模式/选择指南/反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Smart Pointers Cheatsheet
 > **Summary**: 🎯 Rust 智能指针（Smart Pointer）速查卡 Smart Pointers Cheatsheet. (stub/archive redirect)
 > **分级**: [A]

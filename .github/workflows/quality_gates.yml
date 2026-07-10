@@ -264,6 +264,76 @@ jobs:
         run: python scripts/check_mermaid_syntax.py
         continue-on-error: false
 
+  metadata-consistency:
+    name: Metadata Consistency (observe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run metadata consistency check (observe, append --strict to enforce)
+        run: python scripts/check_metadata_consistency.py
+        continue-on-error: true
+
+  content-overlap-v2:
+    name: Content Overlap v2 (observe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run content overlap v2 (observe, append --strict to enforce)
+        run: python scripts/detect_content_overlap_v2.py --budget 999999
+        continue-on-error: true
+
+  topology-quality:
+    name: Topology Quality (observe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run topology quality check (observe, append --strict to enforce)
+        run: python scripts/check_topology_quality.py
+        continue-on-error: true
+
+  kg-shacl-validation:
+    name: KG SHACL Validation (observe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run KG SHACL validation (observe, append --strict to enforce)
+        run: python scripts/check_kg_shapes.py
+        continue-on-error: true
+
+  semantic-health:
+    name: Semantic Health (observe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run semantic health dashboard (observe, append --strict to enforce)
+        run: python scripts/semantic_health.py
+        continue-on-error: true
+
   quality-gates-summary:
     name: Quality Gates Summary
     runs-on: ubuntu-latest
@@ -278,6 +348,11 @@ jobs:
       - content-overlap
       - i18n-terms
       - mermaid-syntax
+      - metadata-consistency
+      - content-overlap-v2
+      - topology-quality
+      - kg-shacl-validation
+      - semantic-health
     if: always() && github.event_name == 'pull_request'
     steps:
       - name: Generate summary comment
@@ -294,7 +369,12 @@ jobs:
               'KB Auditor Link Check': '${{ needs.kb-auditor-link-check.result }}',
               'Content Overlap Detection': '${{ needs.content-overlap.result }}',
               'Bilingual Terminology Check': '${{ needs.i18n-terms.result }}',
-              'Mermaid Syntax Check': '${{ needs.mermaid-syntax.result }}'
+              'Mermaid Syntax Check': '${{ needs.mermaid-syntax.result }}',
+              'Metadata Consistency (observe)': '${{ needs.metadata-consistency.result }}',
+              'Content Overlap v2 (observe)': '${{ needs.content-overlap-v2.result }}',
+              'Topology Quality (observe)': '${{ needs.topology-quality.result }}',
+              'KG SHACL Validation (observe)': '${{ needs.kg-shacl-validation.result }}',
+              'Semantic Health (observe)': '${{ needs.semantic-health.result }}'
             };
 
             let status = '✅';
@@ -319,7 +399,7 @@ jobs:
             ${summary}
 
             ---
-            *All 10 quality gates completed*`;
+            *All 15 quality gates completed (10 blocking + 5 semantic observe)*`;
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,

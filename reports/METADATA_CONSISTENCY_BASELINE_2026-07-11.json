@@ -1,25 +1,25 @@
 {
   "summary": {
     "date": "2026-07-11",
-    "scanned": 474,
+    "scanned": 476,
     "counts": {
-      "D1": 64,
+      "D1": 65,
       "D2": 103,
       "D3": 88,
       "D4": 1,
-      "D5": 112,
-      "D6": 108
+      "D5": 113,
+      "D6": 109
     },
     "pct": {
-      "D1": 13.5,
-      "D2": 21.7,
-      "D3": 18.6,
+      "D1": 13.7,
+      "D2": 21.6,
+      "D3": 18.5,
       "D4": 0.2,
-      "D5": 23.6,
-      "D6": 22.8
+      "D5": 23.7,
+      "D6": 22.9
     },
-    "D2_base_files_with_asp_and_bloom": 296,
-    "flagged_files": 302
+    "D2_base_files_with_asp_and_bloom": 297,
+    "flagged_files": 304
   },
   "examples": {
     "D1": [
@@ -566,7 +566,7 @@
         "内容分级 声明 2 次: ['[元层]', '[元层]']"
       ],
       "D5": [
-        "稳定层 nightly/preview 关键词 2 处"
+        "稳定层 nightly/preview 关键词 4 处"
       ]
     },
     "concept/00_meta/knowledge_topology/10_gap_and_action_plan.md": {
@@ -1329,6 +1329,9 @@
     "concept/03_advanced/04_ffi/27_linkage.md": {
       "D2": [
         "A/S/P=P 允许 [4, 5, 6, 7] 与 Bloom [2, 3] 无交集"
+      ],
+      "D5": [
+        "稳定层 nightly/preview 关键词 1 处"
       ]
     },
     "concept/03_advanced/05_inline_assembly/13_inline_assembly.md": {
@@ -2191,6 +2194,16 @@
     "concept/07_future/00_version_tracking/50_nightly_rust.md": {
       "D2": [
         "A/S/P=P 允许 [4, 5, 6, 7] 与 Bloom [2] 无交集"
+      ]
+    },
+    "concept/07_future/00_version_tracking/feature_domain_matrix_197.md": {
+      "D1": [
+        "Bloom [4, 5] 与 层次定位/层级 [7] 无交集"
+      ]
+    },
+    "concept/07_future/00_version_tracking/migration_197_decision_tree.md": {
+      "D6": [
+        "Summary 为空"
       ]
     },
     "concept/07_future/00_version_tracking/rust_1_91_stabilized.md": {

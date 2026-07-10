@@ -1,5 +1,10 @@
 # 🔷 Rust 类型系统速查卡 {#rust-类型系统速查卡}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为类型系统速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L2 类型系统`](../../../concept/01_foundation/02_type_system/04_type_system.md) · [`concept L4 类型论`](../../../concept/04_formal/00_type_theory/02_type_theory.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（基本类型/Trait/类型转换/泛型/型变/常用 Trait/高级类型/模式/性能/反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Type System
 > **Summary**: 🔷 Rust 类型系统速查卡 Type System. (stub/archive redirect)
 > **分级**: [A]

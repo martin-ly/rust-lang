@@ -1,5 +1,10 @@
 # 📦 Rust 集合与迭代器速查卡 {#rust-集合与迭代器速查卡}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为集合与迭代器速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L1 集合`](../../../concept/01_foundation/05_collections/08_collections.md) · [`concept L2 迭代器模式`](../../../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（Vec/HashMap/HashSet/迭代器适配器/消费者/模式/反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Collections Iterators Cheatsheet
 > **Summary**: 📦 Rust 集合与迭代器（Iterator）速查卡 Collections Iterators Cheatsheet. (stub/archive redirect)
 > **分级**: [A]

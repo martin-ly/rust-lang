@@ -10,6 +10,11 @@
 
 # ⚡ Rust 异步编程速查卡 {#rust-异步编程速查卡}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为Rust 异步编程速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 async`](../../../concept/03_advanced/01_async/02_async.md) · [`concept async patterns`](../../../concept/03_advanced/01_async/26_async_patterns.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（异步模式/运行时对比/共享状态/网络模式/性能/陷阱/反例/决策树速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
 > **EN**: Async Patterns
 > **Summary**: ⚡ Rust 异步编程速查卡 Async Patterns. (stub/archive redirect)
 > **分级**: [A]
@@ -25,7 +30,7 @@
 - [⚡ Rust 异步编程速查卡 {#rust-异步编程速查卡}](#-rust-异步编程速查卡-rust-异步编程速查卡)
   - [📑 目录 {#目录}](#-目录-目录)
   - [🧠 异步状态机思维导图 {#异步状态机思维导图}](#-异步状态机思维导图-异步状态机思维导图)
-  - [📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}](#-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证)
+  - [📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证}](#-概念定义-属性关系-解释论证已压缩详见-canonical-概念定义-属性关系-解释论证)
   - [🔬 异步状态机证明树 {#异步状态机证明树}](#-异步状态机证明树-异步状态机证明树)
     - [异步执行决策树 {#异步执行决策树}](#异步执行决策树-异步执行决策树)
   - [🎯 核心概念 {#核心概念}](#-核心概念-核心概念)
@@ -136,19 +141,12 @@ mindmap
 
 ---
 
-## 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}
->
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+## 📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证}
 
-| 层次 | 概念定义 | 属性关系 | 解释论证 |
-| :--- | :--- | :--- | :--- |
-| **L1 基础** | Future：异步计算抽象 | 公理：Future 可轮询至完成 | 定理 A1：poll 契约保证进度 |
-| **L2 状态** | 状态机：async fn 编译结果 | 规则：每个 await 点为一个状态 | 定理 A2：状态机正确模拟控制流 |
-| **L3 固定** | Pin：内存位置固定 | 公理：Pin<&mut T> ⟹ T 不移动 | 定理 A3：Pin 保证自引用（Reference）安全 |
-| **L4 执行** | Executor：Future 驱动者 | 规则：轮询 Ready/Pending | 定理 A4：执行器公平性保证 |
-| **L5 唤醒** | Waker：异步通知机制 | 规则：事件→Waker→poll | 定理 A5：无虚假唤醒 |
-
-> 形式化理论详见：[异步状态机形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | [Pin 和自引用类型形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md)
+> 本节原为「概念定义—属性关系—解释论证」通用复述（Future/状态机/Pin/Executor/Waker，公理与定理 A1–A5）。
+> 通用概念以 [`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md) 与
+> [`concept/03_advanced/01_async/39_future_and_executor_mechanisms.md`](../../../concept/03_advanced/01_async/39_future_and_executor_mechanisms.md)
+> 为权威来源；本速查卡不重复通用定义，仅保留下方证明树/决策树图示、模式与反例等独特速查内容。
 
 ---
 

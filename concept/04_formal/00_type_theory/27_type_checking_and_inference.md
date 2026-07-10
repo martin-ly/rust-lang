@@ -315,3 +315,114 @@ if success {
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
+
+---
+
+## Rust 1.97.0 交叉语义
+
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
+> **交叉域**: 类型系统（Type System）× Trait Solver × Edition 2024 兼容性
+> **审计出处**: `reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md` §2.4、§4 P2-2 缺口 #2
+> **本小节性质**: 交叉语义补充，**只增不删**；原有推断变量/统一/区域约束小节（§二–§七）保持不变。
+
+### 1. 从 `{integer}`/`{float}` 到“回退默认值”：1.97 的改动点
+
+本文 §四 已说明浮点字面量在类型检查初期是 `TyKind::Infer(FloatVar(?F))`（即 `{float}`），整数字面量是 `IntVar(?I)`（即 `{integer}`）。当类型检查结束时若推断变量**仍未被任何约束固定**，rustc 会为其指定一个**回退默认值（fallback default）**：
+
+| 推断变量 | 历史回退默认值 | 依据 |
+|:---|:---|:---|
+| `{integer}`（`42`） | `i32` | Rust Reference（既定） |
+| `{float}`（`3.14`） | `f64` | Rust Reference（既定，1.97 之前） |
+
+Rust 1.97.0 触及的是 **`{float}` 这一行的回退行为**，且**当前可观察形态是一条 future-compatibility warning**，而非立刻把所有未约束浮点字面量硬改为 `f32`。
+
+**事实（两个权威来源一致）**：
+
+- Rust 1.97.0 release notes 的 *Compatibility Notes*：`"Emit a future-compatibility warning when relying on f32: From<{float}> to constrain {float}"`——即当代码依赖 `f32: From<{float}>` 这条约束来固定 `{float}` 时，发出未来兼容性警告。
+- 版本页 §2.6 / §7 给出**演进方向**：在需要具体类型、且未被其它约束确定为 `f64` 时，`{float}` 将**更可能回退到 `f32`**，并通过 future-compat lint 逐步过渡。
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— 演示“回退默认值”被显式约束取代的过程
+fn takes_f32(_: f32) {}
+fn takes_f64(_: f64) {}
+
+fn main() {
+    takes_f32(1.0);        // 1.0 被参数类型 f32 约束 → 不依赖回退，无警告
+    takes_f64(1.0);        // 1.0 被参数类型 f64 约束 → 不依赖回退，无警告
+
+    let a = 1.0;           // 无上下文约束：历史回退 f64；1.97 起该回退路径进入 future-compat 过渡
+    let b: f32 = 2.0;      // 显式标注 f32 → 推断变量被标注固定，不触发 future-compat
+    let _ = (a, b);
+}
+```
+
+> **边界（哪些回退、哪些仍报错/告警）**：
+>
+> - **仍由上下文固定、不回退**：函数参数、`let x: f32/f64` 标注、结构体字段类型、`return` 类型、数组/元组元素的已知类型——这些情况下 `{float}` 在检查结束**前**已被等值约束实例化，不进入回退，也**不**触发 future-compat。
+> - **进入回退但 1.97 仅告警**：完全无上下文约束、或仅经 `From`/`Into`/泛型 bound 间接约束的 `{float}`（如 `let v = 1.0.into();` 配合下游 `let _: f32 = v;`），触发 `f32: From<{float}>` 的 **future-compatibility warning**；当前（1.97.0）仍可编译。
+> - **仍报错的情形**：当 `{float}` 同时被两个相互矛盾的具体类型约束（如同一变量既要 `f32` 又要 `f64`），统一失败 → 类型不匹配错误，与回退无关。
+>
+> ⚠ **需专家复核**：release notes 与版本页均**未逐项枚举**“哪些未约束上下文在 1.97 已实际回退到 `f32`、哪些仍停留在告警阶段”。上文“演进方向为 f32 回退、与 `{integer}`→`i32` 对称”的论断来自项目版本页 §2.6 的表述；release notes 仅确认 *future-compatibility warning* 这一可观察形态。具体逐上下文边界请以 Rust Reference — Type inference 与对应 future-compat lint 文档为准（来源：release notes；版本页 §2.6/§7）。
+
+### 2. 与 never type fallback（`!` → `()`）的统一对比
+
+Edition 2024 还调整了另一类“回退默认值”：**never type `!` 向 `()` 的回退**。两类 fallback 在 1.97/2024 被同一套“future-compat 逐步过渡”机制处理，可在类型检查层统一建模：
+
+| 维度 | `{float}` → 浮点默认 | never type `!` → `()` |
+|:---|:---|:---|
+| 触发位置 | 浮点字面量推断变量检查结束未固定 | `!` 类型需要与一个期望类型统一（如 `match`/`if` 分支、发散表达式） |
+| 历史默认 | `f64` | `()`（`!` 在许多位置回退/强转为 `()`） |
+| 1.97/2024 改动方向 | 倾向回退到 `f32`（经 future-compat 过渡） | 收窄 `!`→`()` 的回退，让 `!` 更常保持为 `!` |
+| 当前可观察形态 | future-compatibility warning（仍编译） | future-compat / dependency lint（仍编译，未来变硬错误） |
+| 统一抽象 | “推断/类型变量在求解末尾被赋予一个默认值” | 同左：`!` 作为可统一类型变量在末尾被赋予默认值 `()` |
+| 用户动作 | 给浮点字面量加 `f32`/`f64` 后缀或类型标注 | 显式写 `todo!()`/`unreachable!()` 的类型标注，或确保分支类型一致 |
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— 两类 fallback 的对照示例
+fn float_fallback() {
+    // 浮点回退：无上下文时 {float} 的默认值进入 future-compat 过渡
+    let _x = 1.0;
+}
+
+fn never_fallback(flag: bool) -> i32 {
+    // never type 回退：todo!() 类型为 !，需与 i32 统一；
+    // 历史行为允许 ! → () 类回退参与统一，Edition 2024 收窄该回退
+    if flag {
+        42
+    } else {
+        todo!()   // ! 与 i32 的统一路径在 2024 起更严格
+    }
+}
+```
+
+> ⚠ **需专家复核**：never type fallback 在 Edition 2024 的具体 lint 名称（社区中常见写法为 `dependency_on_unit_never_type_fallback`）与精确触发条件，本小节未能从 release notes / 版本页逐项确认；lint 名以 Rust Reference / Edition Guide 为准，请勿在未核对前将上述名称当作稳定 lint 名引用（来源：Rust Reference — The never type；Edition Guide）。
+
+### 3. 对 trait solver 默认值 / 泛型推断的影响
+
+`{float}` 的回退默认值是 **trait/type solver 在所有候选（candidate）求解完毕后、为仍未固定的推断变量指派的最后手段**。因此回退默认值从 `f64` 改为 `f32` 的**演进方向**，会改变泛型/`From` 上下文中的候选选择结果——这正是 `f32: From<{float}>` future-compat 警告的来源：
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— 泛型 + From 约束下的回退影响
+fn generic_from<T>() -> T
+where
+    T: From<f32>, // 注意：bound 写在 f32 上
+{
+    // 字面量 1.0 的类型 {float} 需要与 T: From<f32> 的输入 f32 协调。
+    // 当 {float} 回退默认值变化时，solver 对 {float} 的最终实例化、
+    // 以及由此选中的 From 实现候选可能改变 → 触发 future-compat。
+    T::from(1.0)
+}
+
+fn main() {
+    let _v: f32 = generic_from::<f32>();
+}
+```
+
+- **候选装配（Candidate Assembly）**：对 `T: From<{float}>`，solver 收集 `f32: From<{float}>` / `f64: From<{float}>` 等候选；参见 [`26_trait_solver_in_rustc.md`](../05_rustc_internals/26_trait_solver_in_rustc.md) §三 “Selection：候选装配与筛选”。
+- **回退作为 tie-breaker**：当多个候选在语法上都可匹配、`{float}` 未被其它等值约束固定时，回退默认值决定 solver 把 `{float}` 实例化为 `f32` 还是 `f64`，从而决定**哪一个 `From` 候选被选中**。默认值变化 ⟹ 候选选择可能变化 ⟹ future-compat 警告。
+- **仅影响“未固定”路径**：若调用点已用 `f64::from(x)`、`let y: f64 = x.into()` 或 turbofish 固定目标类型，则 `{float}` 在求解前已被约束，回退默认值不参与，行为不变（详见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §4）。
+
+> **统一建模要点**：把“回退默认值”看作 solver 输出端的**默认实例化函数** `default(FloatVar) = f32/f64`、`default(NeverVar) = ()/!`。1.97/2024 改动的是这个**默认函数**的取值，而非统一/子类型规则本身；因此受影响的是“求解末尾仍未固定”的变量，而非“已被约束固定”的变量。
+
+> **来源**: [Rust 1.97.0 Release Notes — Compatibility Notes](https://releases.rs/docs/1.97.0/) · [Rust Reference — Type inference](https://doc.rust-lang.org/reference/type-inference.html) · [Rust Reference — The never type](https://doc.rust-lang.org/reference/types/never.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§2.6、§7）
+> **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`26_trait_solver_in_rustc.md`](../05_rustc_internals/26_trait_solver_in_rustc.md)

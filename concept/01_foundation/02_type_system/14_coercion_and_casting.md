@@ -62,6 +62,10 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [Rust 1.97.0 交叉语义](#rust-1970-交叉语义)
+    - [1. 这是一处“收窄”，不是 coercion 规则的普遍改动](#1-这是一处收窄不是-coercion-规则的普遍改动)
+    - [2. 与 coercion 分类的关系：这是“隐式、安全”那类的收窄](#2-与-coercion-分类的关系这是隐式安全那类的收窄)
+    - [3. 为什么“收窄”而不是“换种写法”：健全性](#3-为什么收窄而不是换种写法健全性)
 
 ---
 
@@ -910,3 +914,86 @@ Deref 强制转换是 Rust 的隐式转换机制之一：
 ### 反命题与边界
 
 > **反命题**: "类型强制与转换：显式与隐式的边界 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## Rust 1.97.0 交叉语义
+
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
+> **交叉域**: Deref 强制（Coercion）× Pin/Unpin × async 自引用 × 兼容性
+> **审计出处**: `reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md` §2.4、§4 P2-2 缺口 #4
+> **本小节性质**: 交叉语义补充，**只增不删**；原有 coercion/cast 矩阵（§一–§五）保持不变。迁移操作见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §5–§6；Pin 侧语义见 [`06_pin_unpin.md`](../../03_advanced/01_async/06_pin_unpin.md) §Rust 1.97.0 交叉语义。
+
+### 1. 这是一处“收窄”，不是 coercion 规则的普遍改动
+
+本页 §1.2 列出 Deref 强制的触发位置（函数/方法参数、`let` 右侧、结构体字段初始化、匹配臂、`if` 条件等）。Rust 1.97.0 **没有**改动这些通用规则；它只在**`std::pin::pin!` 宏的返回值上**移除了一处此前被错误允许的 deref coercion。release notes 原文要点（*Compatibility Notes*）：
+
+- “Prevent deref coercions in `pin!`, in order to prevent unsoundness.”
+- `pin!(x)` 且 `x: &mut T` → 现在总是 `Pin<&mut &mut T>`，此前有时会 coerce 为 `Pin<&mut T>`。
+- 该 coercion 自 **Rust 1.88.0** 起被“错误地允许”。
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— 仅 pin! 返回值上的 coercion 被移除
+use std::pin::{pin, Pin};
+
+let mut x = 42_i32;
+
+// (A) 通用 Deref 强制：完全不受 1.97 影响
+fn takes_pin_i32(_: Pin<&mut i32>) {}
+let p1: Pin<&mut i32> = pin!(x);            // pin!(值) 本就是 Pin<&mut i32>
+takes_pin_i32(pin!(x));                     // 形参位置 coercion 照常工作
+
+// (B) pin! 返回值上的 coercion：1.97 起被移除
+let p2: Pin<&mut &mut i32> = pin!(&mut x);  // 严格 Pin<&mut &mut i32>
+// let p_bad: Pin<&mut i32> = pin!(&mut x); // ❌ 1.97 起类型不匹配（不再 coerce）
+let _ = (p1, p2);
+```
+
+> **边界（哪些变了、哪些没变）**：
+>
+> - **变了**：`pin!(&mut x)` 的返回类型上，从 `Pin<&mut &mut T>` 到 `Pin<&mut T>` 的隐式 deref coercion——1.97 起移除。
+> - **没变**：本页 §1.2 的通用 Deref 强制（`&Box<T>`→`&T`、`&String`→`&str`、`&Vec<T>`→`&[T]` 等）、§1.3 子类型强制、§2.1 `as` 显式转换——全部照旧。
+> - **没变**：`Box::pin` / `futures::pin_mut!` 的用法（它们不涉及该 coercion，见 [`06_pin_unpin.md`](../../03_advanced/01_async/06_pin_unpin.md) §三 模式 4/5）。
+
+### 2. 与 coercion 分类的关系：这是“隐式、安全”那类的收窄
+
+回到本页 §1.1 的分类（Coercion 隐式安全 / `as` 显式可能截断 / `From` 显式安全）：被移除的这处 coercion 原本属于**隐式**那一类，但它**并不安全**——它让 `Pin<&mut &mut T>` 看起来像 `Pin<&mut T>`，从而可能误把“只固定了引用”当成“固定了 pointee”。1.97 的处理方式是**直接禁止**这处隐式转换，而非改成显式 `as`（`as` 也无法表达这种 Pin 层级的转换）：
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— 不能用 as 绕过；正确做法是改写法
+use std::pin::{pin, Pin};
+
+let mut x = 42_i32;
+
+// ❌ as 不能完成 Pin<&mut &mut T> → Pin<&mut T>（as 不支持此类指针层级转换）
+// let p = pin!(&mut x) as Pin<&mut i32>;
+
+// ✅ 方案 1：固定值本身（绝大多数场景的意图）
+let p_a: Pin<&mut i32> = pin!(x);
+
+// ✅ 方案 2：确需固定引用，标注与宏返回类型一致
+let p_b: Pin<&mut &mut i32> = pin!(&mut x);
+let _ = (p_a, p_b);
+```
+
+> 选择判据与 async/自引用场景见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §5（类型签名层）与 §6（async/自引用层）。
+
+### 3. 为什么“收窄”而不是“换种写法”：健全性
+
+`Pin<&mut T>` 的类型承诺是“`T` 在 drop 前不会被移动”（[`06_pin_unpin.md`](../../03_advanced/01_async/06_pin_unpin.md) §1.2）。而 `pin!(&mut x)` 实际固定的是引用 `&mut x`（引用本身 `Unpin`），**并未固定 `x`**。允许 `Pin<&mut &mut T>` coerce 到 `Pin<&mut T>` 会让类型系统对一个**未被真正固定**的值给出 `Pin<&mut T>` 的承诺——这正是 release notes 所说的 “to prevent unsoundness”。
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— 语义对照：固定引用 ≠ 固定 pointee
+use std::pin::{pin, Pin};
+
+let mut x = String::from("hi");
+let p: Pin<&mut &mut String> = pin!(&mut x);
+// 被 Pin 的是 &mut x（Unpin），不是 x 指向的 String。
+// 若允许 coerce 成 Pin<&mut String>，会错误地“证明” String 已被固定。
+let _ = p;
+```
+
+> ⚠ **需专家复核**：从该误证到具体 UB 的完整利用链（如叠加 `get_unchecked_mut` 后移动 `!Unpin` 值），release notes 未展开；本小节给出的是与本页 §1.1/§1.2 一致的 coercion 层解释，完整不安全证明以 Rustonomicon — Pin 与相关 issue 为准。
+
+> **来源**: [Rust 1.97.0 Release Notes — Compatibility Notes](https://releases.rs/docs/1.97.0/) · [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html) · [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/index.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§7、§7.1）
+> **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`06_pin_unpin.md`](../../03_advanced/01_async/06_pin_unpin.md)

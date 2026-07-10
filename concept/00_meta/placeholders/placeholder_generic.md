@@ -19,4 +19,4 @@
 > - [通用 PL 基座路线图](../00_framework/pl_foundations_roadmap.md)
 > - [模式语义空间索引](../00_framework/pattern_semantic_space_index.md)
 >
-> 欢迎参考 [Concept Audit Guide](../03_audit/08_concept_audit_guide.md) 创建本主题。
+> 欢迎参考 [Concept Audit Guide](../03_audit/concept_audit_guide.md) 创建本主题。

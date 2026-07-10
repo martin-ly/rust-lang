@@ -306,7 +306,7 @@
           "@language": "en"
         }
       ],
-      "ex:path": "00_meta/00_framework/03_bloom_taxonomy.md"
+      "ex:path": "00_meta/00_framework/bloom_taxonomy.md"
     },
     {
       "@id": "ex:BoundaryExtensionTree",
@@ -1044,7 +1044,7 @@
           "@language": "en"
         }
       ],
-      "ex:path": "00_meta/03_audit/08_concept_audit_guide.md",
+      "ex:path": "00_meta/03_audit/concept_audit_guide.md",
       "ex:bloomLevel": "L3-L5",
       "ex:rustVersion": "1.97.0+ (Edition 2024)"
     },
@@ -1199,7 +1199,7 @@
           "@language": "en"
         }
       ],
-      "ex:path": "00_meta/04_navigation/05_cross_reference_matrix.md"
+      "ex:path": "00_meta/04_navigation/cross_reference_matrix.md"
     },
     {
       "@id": "ex:CareerLandscape",
@@ -75209,7 +75209,7 @@
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:BloomTaxonomy",
-      "ex:source": "body-link:00_meta/00_framework/03_bloom_taxonomy.md",
+      "ex:source": "body-link:00_meta/00_framework/bloom_taxonomy.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": false,
@@ -75221,7 +75221,7 @@
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CrossReferenceMatrix",
-      "ex:source": "body-link:00_meta/04_navigation/05_cross_reference_matrix.md",
+      "ex:source": "body-link:00_meta/04_navigation/cross_reference_matrix.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": false,
@@ -75233,7 +75233,7 @@
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConceptAuditGuide",
-      "ex:source": "body-link:00_meta/03_audit/08_concept_audit_guide.md",
+      "ex:source": "body-link:00_meta/03_audit/concept_audit_guide.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": false,

@@ -12,7 +12,7 @@
 
 ### L00（62 篇）
 
-- `concept/00_meta/00_framework/03_bloom_taxonomy.md` — Bloom Taxonomy（Bloom 分类法）
+- `concept/00_meta/00_framework/bloom_taxonomy.md` — Bloom Taxonomy（Bloom 分类法）
 - `concept/00_meta/00_framework/boundary_extension_tree.md` — Rust 安全边界扩展推理树
 - `concept/00_meta/00_framework/cognitive_dimension_matrix.md` — Rust 知识体系双维认知矩阵（Krathwohl × Bloom）
 - `concept/00_meta/00_framework/competency_graph.md` — Rust 知识体系能力图谱（Competency Graph）
@@ -40,7 +40,7 @@
 - `concept/00_meta/02_sources/rustbelt_predicate_map.md` — RustBelt 谓词映射图（RustBelt Predicate Map）
 - `concept/00_meta/02_sources/sources.md` — 权威来源清单与知识来源关系分析
 - `concept/00_meta/02_sources/topic_authority_alignment_map.md` — 主题-权威来源对齐图谱 (Topic-Authority Alignment Map)
-- `concept/00_meta/03_audit/08_concept_audit_guide.md` — Concept Audit Guide（概念审计指南）
+- `concept/00_meta/03_audit/concept_audit_guide.md` — Concept Audit Guide（概念审计指南）
 - `concept/00_meta/03_audit/asp_marking_guide.md` — Rust 知识体系 A/S/P 三维认知标记规范
 - … 共 62 篇
 
@@ -300,7 +300,7 @@
 
 > 共 357 个 concept 文件未被权威来源主题直接命中。这些多为项目特色的中文学习路径、对比分析、决策树或生态 deep-dive。
 
-- `concept/00_meta/00_framework/03_bloom_taxonomy.md` — Bloom Taxonomy（Bloom 分类法）
+- `concept/00_meta/00_framework/bloom_taxonomy.md` — Bloom Taxonomy（Bloom 分类法）
 - `concept/00_meta/00_framework/boundary_extension_tree.md` — Rust 安全边界扩展推理树
 - `concept/00_meta/00_framework/cognitive_dimension_matrix.md` — Rust 知识体系双维认知矩阵（Krathwohl × Bloom）
 - `concept/00_meta/00_framework/competency_graph.md` — Rust 知识体系能力图谱（Competency Graph）
@@ -325,14 +325,14 @@
 - `concept/00_meta/02_sources/rustbelt_predicate_map.md` — RustBelt 谓词映射图（RustBelt Predicate Map）
 - `concept/00_meta/02_sources/sources.md` — 权威来源清单与知识来源关系分析
 - `concept/00_meta/02_sources/topic_authority_alignment_map.md` — 主题-权威来源对齐图谱 (Topic-Authority Alignment Map)
-- `concept/00_meta/03_audit/08_concept_audit_guide.md` — Concept Audit Guide（概念审计指南）
+- `concept/00_meta/03_audit/concept_audit_guide.md` — Concept Audit Guide（概念审计指南）
 - `concept/00_meta/03_audit/asp_marking_guide.md` — Rust 知识体系 A/S/P 三维认知标记规范
 - `concept/00_meta/03_audit/audit_checklist.md` — 概念一致性检查清单（Concept Consistency Audit Checklist）
 - `concept/00_meta/03_audit/concept_consistency_audit_checklist.md` — 概念一致性（Coherence）检查清单
 - `concept/00_meta/03_audit/grading_system.md` — 内容分级与受众标签体系
 - `concept/00_meta/03_audit/quality_dashboard_v2.md` — Rust 知识体系思维表征覆盖率仪表板（Quality Dashboard v2）
 - `concept/00_meta/03_audit/template_deduplication_guide.md` — 模板去同质化指南
-- `concept/00_meta/04_navigation/05_cross_reference_matrix.md` — Cross Reference Matrix（交叉引用矩阵）
+- `concept/00_meta/04_navigation/cross_reference_matrix.md` — Cross Reference Matrix（交叉引用矩阵）
 - `concept/00_meta/04_navigation/career_landscape.md` — Rust 职业市场全景：2026 年数据与分析
 - `concept/00_meta/04_navigation/concept_index.md` — 全局概念索引（Concept Index）
 - `concept/00_meta/04_navigation/foundations_gap_closure_index.md` — 基础知识缺口补全总索引

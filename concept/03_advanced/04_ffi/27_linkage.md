@@ -285,3 +285,140 @@ extern "C" {}
 > **权威来源**: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html), [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html), [TRPL](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
+
+---
+
+## Rust 1.97.0 交叉语义（链接 / ABI）
+
+> **Edition / 版本**: Rust 1.97.0+ (Edition 2024)
+> **定位**: 本小节为 Rust 1.97.0 在「编译器符号发射 ⟷ 链接器输入 ⟷ ABI 契约」边界的**交叉语义**补全，对应审计缺口（[`GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md`](../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md) §2.4、§4 P2-2 缺口#1）。原 `mangling / linker / export_name / v0` 在本页 0 命中，现补齐。
+
+Rust 1.97.0 将若干链接/ABI 相关行为从「单点变更」变成了跨领域效应：v0 混淆改变符号名形态、`linker_messages` 改变链接器输出的可见性、空 `export_name`/`link_name` 校验改变 ABI 契约的可构造性。本节逐条给出**事实、边界、迁移**，并在末尾给出统一来源与反链。
+
+### A. v0 symbol mangling 默认启用：链接器输入 / demangler / debugger-profiler
+
+Rust 1.97.0 将 **v0 symbol mangling** 设为默认方案（自 1.59 起可经 `-C symbol-mangling-version=v0` 选择，现进入 stable 默认）。其跨领域影响落在**链接器输入符号的形态**上：
+
+- **链接器输入**：Rust→Rust 的混淆符号名格式变化（泛型实例保留具体值而非仅靠 hash），链接器看到的仍是合法符号，但任何按**旧混淆名文本**匹配的工具都会失配。
+- **demangler / debugger / profiler**：旧版本工具可能**无法 demangle v0 符号**，导致调试器、profiler、backtrace 显示原始混淆名；主流工具（GDB 15+、LLDB、`rustfilt`）已支持 v0。
+- **backtrace**：发布说明明确指出 v0 可能改变 backtrace 文本的**格式**（symbol 呈现）。
+
+**与 `#[no_mangle]` / `extern "C"` 的边界**：v0 只作用于 **Rust 自行混淆的符号名**。`#[unsafe(no_mangle)]` 与 `extern "C"`（以及显式 `#[unsafe(export_name = "...")]`）产生的是**字面符号名**，绕过混淆，因此**不受 v0 默认方案影响**。
+
+**何时仍需 `no_mangle`**：当符号要被 C/汇编/链接器脚本/`dlsym` 按**固定字面名**引用时，仍必须用 `#[unsafe(no_mangle)]`（通常配 `extern "C"`）或 `#[unsafe(export_name = "...")]`；否则 v0 混淆名无法被外部按名定位。
+
+```bash
+# 观察 Rust 1.97+ 默认 v0 混淆后的符号（以 cdylib 为例）
+cargo build --release
+# Linux/macOS：列出符号并 demangle（rustfilt 对 v0 支持更完整）
+nm target/release/lib<name>.so | rustfilt | head
+# 查看混淆版本选择；legacy 回退仅在 nightly 上可用（来源：版本页 §2.7）
+rustc -C symbol-mangling-version=v0 --print cfg
+```
+
+```rust,ignore
+// Edition 2024 / Rust 1.97.0+ —— v0 只影响"Rust 混淆名"，不影响字面符号
+#[unsafe(no_mangle)]
+pub extern "C" fn ffi_add(a: i32, b: i32) -> i32 { a + b }
+// 导出符号名恒为字面 `ffi_add`，不受 v0 默认方案影响。
+
+#[unsafe(export_name = "ffi_add_v0")]
+pub fn rust_add(a: i32, b: i32) -> i32 { a + b }
+// export_name 显式固定字面符号，同样绕过 v0 混淆。
+```
+
+### B. `linker_messages` lint：链接器输出默认显示，且不在 `warnings` group
+
+历史上 rustc 在链接成功时**隐藏** linker 的 stderr；Rust 1.97.0 改为**默认显示**链接器输出，并通过 `linker_messages` lint 以 warning 形式报告（发布说明："Warn on linker output by default"）。
+
+**关键边界（交叉点）**：`linker_messages` 是**特殊 lint**，**不受 `warnings` lint group 控制**。由此推出 CI 上的非显然结论：
+
+- `build.warnings = "deny"` 与 `RUSTFLAGS="-D warnings"` 作用于常规 lint/warnings 体系，**不一定**能压制 `linker_messages`。
+- 因此「CI 强制零警告」策略对 `linker_messages` 可能失效，需显式处理。
+
+⚠ **需专家复核**：上述「`-D warnings` / `build.warnings=deny` 无法压制 `linker_messages`」是由版本页 §2.8「特殊 lint、不受 warnings group 控制」与 §5.1「`build.warnings` 控制本地包常规 lint 警告」两条事实**推导**的 CI 行为结论；具体到各 toolchain 与 linker 的组合表现，建议以 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md) §2.8/§5.1 与实际编译输出复核。
+
+**CI 处理建议**：先以 `warn` 运行收集真实链接器告警并针对性修复；仅在确认为已知误报时临时 `allow`。
+
+```toml
+# Cargo.toml — 显式允许（静默）linker_messages；注意它不在 warnings group 内
+[lints.rust]
+linker_messages = "allow"
+```
+
+```rust,ignore
+// 或在 crate 根临时允许（建议保留为 warn 以暴露真实链接器告警）
+#![allow(linker_messages)]
+```
+
+```bash
+# 命令行静默（CLI 用 kebab-case）：仅在确认误报时使用
+RUSTFLAGS="-A linker-messages" cargo build
+# 对照：常规本地包 lint 仍可由 Cargo 统一强制为 deny（不影响依赖、不破坏 build cache）
+CARGO_BUILD_WARNINGS=deny cargo check --keep-going
+```
+
+### C. 空 `#[export_name]` 被拒绝；`#[link_name]` / `#[link(name)]` 校验加强；macho `link_section` 非法值报错
+
+Rust 1.97.0 在属性校验阶段新增三类**硬错误**（无向后兼容宽限），均直接收紧 ABI/链接契约的可构造性：
+
+1. **空 `#[export_name = ""]` 被拒绝**：导出符号名不得为空字符串（发布说明："Error on `#[export_name = "..."]` where the name is empty"）。
+2. **校验 `#[link_name = "..."]` 与 `#[link(name = "...")]` 参数**：非法（如空串）参数现在报错；链接导入侧与库名必须非空且合法（发布说明："validate `#[link_name]` & `#[link(name)]` parameters"）。
+3. **macho 目标 `#[link_section]` 非法说明符报错**：macOS 目标的段/节说明符（`segname,sectname` 形式）若非法，现在报错（发布说明："Error on invalid macho `link_section` specifier"）。
+
+⚠ **需专家复核**：mach-o `link_section` 的具体合法字符集与 `segname`/`sectname` 长度上限由目标 ABI 决定，本页未给出精确字节数；精确限制请复核 Rust Reference 与目标文档（来源见末尾）。
+
+**迁移要点**（逐步判定见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §3）：
+
+- 空 `export_name` → 改为非空、全局唯一的固定名，或改用 `#[unsafe(no_mangle)]` 暴露标识符字面名。
+- `link_name`/`link(name)` → 确保参数非空且为目标平台合法标识符/库名。
+- macho `link_section` → 修正为合法的 `segname,sectname` 说明符。
+
+```rust,ignore
+// ❌ Rust 1.97+ 硬错误：空导出符号名被拒绝
+#[unsafe(export_name = "")]
+pub fn hook() {}
+
+// ✅ 方案 A：提供非空、全局唯一的固定符号名
+#[unsafe(export_name = "my_crate_hook_v1")]
+pub fn hook() {}
+
+// ✅ 方案 B：不需要自定义名时，用 no_mangle 暴露标识符字面名
+#[unsafe(no_mangle)]
+pub extern "C" fn hook() {}
+```
+
+```rust,ignore
+// #[link_name] / #[link(name)] 参数现在会被校验：非法（如空串）参数报错
+#[link(name = "mynative")]           // 非空、合法的库名
+extern "C" {
+    #[link_name = "native_symbol"]   // 非空、合法的符号名
+    fn native_symbol();
+}
+
+// macho 目标：#[link_section] 说明符须符合 segname,sectname 形式
+#[unsafe(link_section = "__DATA,__mydata")]
+#[used]
+static MY_DATA: [u8; 4] = [0; 4];
+```
+
+### D. 与 `repr(C)` / 链接模型 / ABI 稳定性的关系
+
+- **`repr(C)`** 固定**类型布局**（size/alignment/padding），本页前述 `extern "C"` 固定**调用约定**与**字面符号名**；二者共同构成可被外部依赖的 ABI 面。v0 混淆不改变 `repr(C)`/`extern "C"`/`no_mangle` 已固定的 ABI 面，只影响其余 Rust 混淆符号。
+- **链接模型**：`cdylib`/`staticlib` 的导出符号在 v0 默认下，凡是未用 `no_mangle`/`export_name` 固定的 Rust 项，其符号名形态随 v0 变化；对外 ABI 应仅依赖 `extern "C"` + `no_mangle`/`export_name` 固定的字面符号。
+- **ABI 稳定性**：空 `export_name`/`link_name` 校验把「未命名/非法符号」从「可能被静默接受的 UB 风险」提升为「编译期硬错误」，使 ABI 契约在编译期即可验证。
+
+> 完整的 ABI 控制属性（`used`/`no_mangle`/`link_section`/`export_name`）与 v0 × debuginfo × linker_messages × backtrace 交互矩阵，见 [`38_application_binary_interface.md`](../../04_formal/05_rustc_internals/38_application_binary_interface.md)。
+
+### 来源与交叉索引
+
+> **来源**:
+> · [Rust 1.97.0 Release Notes](https://releases.rs/docs/1.97.0/)（Compatibility Notes：v0 mangling 默认、Warn on linker output、空 `export_name` 报错、`link_name`/`link(name)` 校验、macho `link_section` 报错）
+> · [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md) §2.7（v0 mangling）、§2.8（`linker_messages`）、§5.1（`build.warnings`）、§7/§7.2（兼容性表与空 `export_name`）
+> · [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html) · [Rust Reference — External Blocks / ABI](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rust Reference — ABI](https://doc.rust-lang.org/reference/abi.html)
+>
+> **交叉索引（反链）**:
+> · 版本事实源：[`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)
+> · 特性×领域反查矩阵：[`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md)
+> · 兼容性迁移判定树：[`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md)
+> · ABI 权威页（交互矩阵）：[`38_application_binary_interface.md`](../../04_formal/05_rustc_internals/38_application_binary_interface.md)

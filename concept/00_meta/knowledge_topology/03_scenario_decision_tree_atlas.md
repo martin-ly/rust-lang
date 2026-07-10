@@ -139,4 +139,143 @@ flowchart TD
 
 ---
 
+## 闭环增强（可执行化）
+
+> 本小节为**纯增量**补充：把 §3–§4 的导航式场景树升级为含**定量阈值/边界条件**的可执行判定树，叶子一律给出**具体机制**而非 `[[见…]]` 跳出，并与 05（定理）/09（判定树）建立稳定 ID 与跨文件回边。原 §3–§6 全部内容保持不变。
+>
+> 节点 ID 体系：本文件新增决策节点以 `T-<场景>-NN` 命名（如 `T-MEM-01`），供 05/09 回边引用。判定节点均为含阈值/边界/数字的可判定条件。
+
+### A. 内存管理场景（入口 `T-MEM-01`）
+
+```mermaid
+flowchart TD
+    M0[内存场景入口 T-MEM-01] --> M1{数据规模阈值：≥1MB 或元素数≥1024个？}
+    M1 -->|是，且跨线程共享| M2{所有者数量边界：跨线程所有者≥2个？}
+    M1 -->|否，栈上小数据| M7[机制：栈值或定长数组；元素数>1024时用 Vec::with_capacity 预分配]
+    M2 -->|是| M3[机制：Arc<T> 只读共享；需可变则用 Arc<Mutex<T>> 或 Arc<RwLock<T>>]
+    M2 -->|否，单线程| M4[机制：Rc<T>；需内部可变则 Rc<RefCell<T>>]
+    M1 -->|迭代中需修改| M5{修改次数边界：迭代内可变借用≥1次？}
+    M5 -->|是| M6[机制：先 collect 为拥有所有权的 Vec 再修改，或用索引/Vec::retain]
+    M5 -->|否| M8[机制：直接 &mut 迭代；不引入额外分配]
+    M3 --> M9[机制：写时克隆用 Cow<'_, T>；零拷贝解析用切片借用 &[u8]]
+    M4 --> M9
+    M6 --> M9
+    M7 --> M9
+    M8 --> M9
+```
+
+> 叶子合规：本树叶子均为具体机制（`Arc`/`Rc`/`Cow`/`collect`/`with_capacity`），无 `[[` 跳出。
+> 回边：见 [`09_reasoning_judgment_tree_atlas.md#J-BORROW-01`](09_reasoning_judgment_tree_atlas.md)（叶 M6「迭代中修改→先 collect」对应借用冲突判定入口）。
+> 回边：见 [`05_logical_reasoning_atlas.md#TH-OWN-01`](05_logical_reasoning_atlas.md)（单一所有权分支 M3/M4 的定理依据）。
+
+### B. 并发与异步场景（入口 `T-CONC-01`）
+
+```mermaid
+flowchart TD
+    C0[并发场景入口 T-CONC-01] --> C1{是否共享可变状态：并发写者≥2个？}
+    C1 -->|是| C2{临界区耗时阈值：持锁≥1ms 或锁跨越 await？}
+    C1 -->|否，只读共享| C6[机制：Arc<T> 只读共享；零写者则无需锁]
+    C1 -->|否，无共享状态| C7{任务数阈值：并发任务≥CPU核数×2？}
+    C2 -->|是| C3[机制：Mutex/RwLock；持锁不得跨越 .await 边界]
+    C2 -->|否，临界区<1us 且低争用| C4{同步原语边界：≤1个原子量即可？}
+    C4 -->|是| C5[机制：AtomicUsize/AtomicBool + Acquire/Release；纯计数可用 Relaxed]
+    C4 -->|否| C3
+    C7 -->|是，且 I/O 等待占比≥50%| C8[机制：async/await + runtime；阻塞调用移入 spawn_blocking]
+    C7 -->|是，CPU 密集| C9[机制：rayon par_iter 或 num_cpus 线程池；避免 oversubscription]
+    C7 -->|否| C10[机制：直接 spawn 线程或 async task]
+```
+
+> 叶子合规：本树叶子均为具体机制（`Mutex`/`Atomic*`/`rayon`/`spawn_blocking`），无 `[[` 跳出。
+> 回边：见 [`09_reasoning_judgment_tree_atlas.md#J-PANIC-04`](09_reasoning_judgment_tree_atlas.md)（叶 C3「持锁跨 await」对应运行时 panic/死锁判定入口）。
+> 回边：见 [`05_logical_reasoning_atlas.md#TH-SEND-06`](05_logical_reasoning_atlas.md)（共享/跨线程边界的定理依据）。
+
+### C. 错误处理场景（入口 `T-ERR-01`）
+
+```mermaid
+flowchart TD
+    E0[错误处理场景入口 T-ERR-01] --> E1{可恢复性边界：调用方可恢复概率≥1%？}
+    E1 -->|是，可恢复| E2{错误源数量阈值：不同错误类型≥3个？}
+    E1 -->|否，编程错误或不变式破坏| E5[机制：panic!/assert!/unreachable!；不可恢复即快速失败]
+    E2 -->|是| E3[机制：自定义 enum + thiserror 派生 Error；库边界优先 thiserror]
+    E2 -->|否，1-2 个错误源| E4[机制：anyhow::Result（应用层）或 Box<dyn Error>]
+    E3 --> E6{跨 FFI 边界：extern "C" 调用≥1处？}
+    E4 --> E6
+    E6 -->|是| E7[机制：FFI 边界用错误码/返回值约定；不把 Rust panic 传出 extern]
+    E6 -->|否| E8[机制：用 ? 传播 + map_err 统一类型；调用点 match 处理]
+```
+
+> 叶子合规：本树叶子均为具体机制（`thiserror`/`anyhow`/`?`/`panic!`/错误码），无 `[[` 跳出。
+> 回边：见 [`09_reasoning_judgment_tree_atlas.md#J-TYPE-03`](09_reasoning_judgment_tree_atlas.md)（叶 E8「错误类型不统一」对应类型不匹配判定入口）。
+
+### D. FFI 与跨语言场景（入口 `T-FFI-01`）
+
+```mermaid
+flowchart TD
+    F0[FFI 场景入口 T-FFI-01] --> F1{外部调用次数边界：extern 函数≥1个？}
+    F1 -->|是| F2{是否传字符串/切片：跨边界指针参数≥1个？}
+    F1 -->|否| F7[机制：纯 Rust，无需 FFI；保持 safe API]
+    F2 -->|是| F3[机制：#[repr(C)] 布局 + 显式 (ptr, len) 对；用 std::ffi::CString/CStr]
+    F2 -->|否，仅 POD| F4{ABI 边界：需固定布局或符号≥1项？}
+    F4 -->|是| F5[机制：#[repr(C)] + extern "C" + bindgen 生成绑定]
+    F4 -->|否| F6[机制：直接 extern "C" fn；保持 ABI 简单]
+    F3 --> F8{unsafe 封装边界：unsafe 块≥1块？}
+    F5 --> F8
+    F6 --> F8
+    F8 -->|是| F9[机制：unsafe 块外暴露 safe API，文档化 invariant]
+```
+
+> 叶子合规：本树叶子均为具体机制（`#[repr(C)]`/`bindgen`/`CString`/safe 封装），无 `[[` 跳出。
+> 回边：见 [`09_reasoning_judgment_tree_atlas.md#J-UNSAFE-05`](09_reasoning_judgment_tree_atlas.md)（叶 F9「unsafe 封装」对应 unsafe 判定入口）。
+
+### E. 抽象与设计场景（入口 `T-ABS-01`）
+
+```mermaid
+flowchart TD
+    A0[抽象场景入口 T-ABS-01] --> A1{实现数量阈值：同一行为的实现≥2个？}
+    A1 -->|是| A2{多态时机边界：调用点热路径≥1e6次/秒？}
+    A1 -->|否| A6[机制：具体类型/函数；无需抽象]
+    A2 -->|是，热路径| A3[机制：泛型单态化 + trait bound；零成本，无虚调用]
+    A2 -->|否，需运行时多态| A4{对象安全边界：trait 满足对象安全（无 Self: Sized 与泛型方法）？}
+    A4 -->|是| A5[机制：dyn Trait + Box/Arc；运行时分发]
+    A4 -->|否| A7[机制：拆分为对象安全子 trait，或改用泛型/枚举分派]
+    A3 --> A8{DSL/派生需求：重复样板≥3处？}
+    A5 --> A8
+    A6 --> A8
+    A7 --> A8
+    A8 -->|是| A9[机制：声明宏 macro_rules!；需语法扩展用 proc-macro]
+    A8 -->|否| A10[机制：保持显式代码；不引入宏]
+```
+
+> 叶子合规：本树叶子均为具体机制（泛型单态化/`dyn Trait`/`macro_rules!`/proc-macro），无 `[[` 跳出。
+> 回边：见 [`09_reasoning_judgment_tree_atlas.md#J-TYPE-03`](09_reasoning_judgment_tree_atlas.md)（叶 A3/A5「trait bound/对象安全」对应类型不匹配判定入口）。
+> 回边：见 [`05_logical_reasoning_atlas.md#TH-VAR-08`](05_logical_reasoning_atlas.md)（叶 A5 子类型/变型安全的定理依据）。
+
+### F. 工具链与生态场景（入口 `T-TOOL-01`）
+
+```mermaid
+flowchart TD
+    W0[工具链场景入口 T-TOOL-01] --> W1{crate 数量阈值：相关 crate≥2个？}
+    W1 -->|是| W2[机制：Cargo workspace + 共享 workspace.dependencies；resolver = "2"]
+    W1 -->|否| W3[机制：单 package；保持简单]
+    W2 --> W4{依赖冲突边界：同一 crate 主版本冲突≥1处？}
+    W3 --> W4
+    W4 -->|是| W5[机制：cargo tree -d 定位；用 [patch] 或升级对齐 SemVer；lockfile 锁定]
+    W4 -->|否| W6{发布前门禁：未过质量门≥1项？}
+    W5 --> W6
+    W6 -->|是| W7[机制：cargo fmt/check/test + clippy 升 -D warnings + cargo audit 全绿再发布]
+    W6 -->|否| W8[机制：cargo publish --dry-run 验证后发布]
+```
+
+> 叶子合规：本树叶子均为具体机制（workspace/`cargo tree -d`/`[patch]`/clippy/audit），无 `[[` 跳出。
+> 验证回边：本树发布门禁与 [`09_reasoning_judgment_tree_atlas.md`](09_reasoning_judgment_tree_atlas.md) 的「验证回边 V1–V5」共用同一套命令（check/clippy/test/audit）。
+
+### G. 本文件闭环小结
+
+- 新增决策树：**6 棵**（A–F），覆盖 §3 全部 6 个场景；原 §4 两棵示例树保留不动。
+- 新增定量判定节点：**21 个**（A:3 / B:4 / C:3 / D:4 / E:4 / F:3），均含阈值/边界/数字。
+- 新增 `[[` 跳出叶子：**0**（所有叶子为具体机制）。
+- 跨文件回边：→ 09 `J-BORROW-01`/`J-PANIC-04`/`J-TYPE-03`/`J-UNSAFE-05`；→ 05 `TH-OWN-01`/`TH-SEND-06`/`TH-VAR-08`（共 8 条逻辑回边）。
+
+---
+
 > **内容分级**: [元层]
