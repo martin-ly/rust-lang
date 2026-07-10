@@ -6,6 +6,7 @@
 > **Summary**: Formal Methods. Guide to 05 Formal Ecosystem Tower.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 生态工程
 > **前置概念**:
 > [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·

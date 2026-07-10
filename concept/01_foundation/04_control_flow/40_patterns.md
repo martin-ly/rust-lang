@@ -6,6 +6,7 @@
 > **受众**: [初学者]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
 > **前置依赖**: [Type System](../02_type_system/04_type_system.md) · [Control Flow](07_control_flow.md) · [Enums and Variants](../02_type_system/04_type_system.md)

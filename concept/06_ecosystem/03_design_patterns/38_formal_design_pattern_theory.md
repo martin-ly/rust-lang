@@ -7,6 +7,7 @@
 > **受众**: [研究者]
 > **内容分级**: [研究级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: S×Theo — 设计模式形式化理论
 > **前置依赖**: [Design Patterns](02_patterns.md) · [Pattern Implementation Comparison](36_pattern_implementation_comparison.md)

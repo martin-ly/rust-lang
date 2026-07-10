@@ -17,6 +17,7 @@
 > **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Kani 文档](https://model-checking.github.io/kani/) · [TCP RFC 793](https://tools.ietf.org/html/rfc793) · [RFC 8446 — TLS 1.3](https://tools.ietf.org/html/rfc8446)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
+> **权威来源**: 本文件为 `concept/` 权威页。
 
 ---
 

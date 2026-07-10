@@ -3,6 +3,7 @@
 > **受众**: [进阶]
 > **内容分级**: [参考级]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: A×App — WebSocket 实时通信应用
 > **前置依赖**: [Network Protocols](38_network_protocols.md) · [Async](../../03_advanced/01_async/02_async.md)

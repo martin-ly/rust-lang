@@ -16,6 +16,7 @@
 > **Summary**: WebAssembly. Guide to 08 Wasi.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 WASI 能力安全模型

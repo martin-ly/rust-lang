@@ -6,6 +6,7 @@
 > **EN**: Embedded Graphics Development with Rust
 > **Summary**: Embedded Graphics: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [综述级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **代码状态**: [示例级 — 已补充代码]
 >
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)

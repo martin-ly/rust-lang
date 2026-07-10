@@ -12,6 +12,7 @@
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Rust ABI 稳定性问题
 > **前置依赖**: [FFI](../../03_advanced/04_ffi/05_rust_ffi.md) · [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md)

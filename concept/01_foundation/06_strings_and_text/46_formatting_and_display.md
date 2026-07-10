@@ -20,6 +20,7 @@
 > [Rust By Example — Formatted Print](https://doc.rust-lang.org/rust-by-example/hello/print.html)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
+> **权威来源**: 本文件为 `concept/` 权威页。
 
 ---
 

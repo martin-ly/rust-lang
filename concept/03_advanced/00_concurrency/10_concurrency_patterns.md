@@ -7,6 +7,7 @@
 > **受众**: [专家]
 >
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析并发模式的设计意图
 > **定位**: 深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权（Ownership）系统如何为并发安全（Concurrency Safety）提供编译期保证。

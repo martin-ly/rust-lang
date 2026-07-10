@@ -10,6 +10,7 @@
 >
 > 本主题在 knowledge 中有系统化的知识索引：[泛型（Generics）](02_generics.md)
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层次定位**: L2 进阶概念 / 泛型（Generics）子域
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 实施泛型（Generics）参数化设计

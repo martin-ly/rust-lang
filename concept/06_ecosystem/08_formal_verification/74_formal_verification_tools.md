@@ -8,6 +8,7 @@
 > **Summary**: Formal Methods. Guide to 47 Formal Verification Tools.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 形式化验证工具的技术能力与适用边界
 > **前置依赖**: [类型系统（Type System）](../../01_foundation/02_type_system/04_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · 形式化验证 · [生命周期（Lifetimes）](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)

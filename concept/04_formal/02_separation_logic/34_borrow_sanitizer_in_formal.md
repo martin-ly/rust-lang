@@ -8,6 +8,7 @@
 > **Summary**: 基于 LLVM 插桩的动态分析工具，用于检测 Rust 别名模型（Stacked Borrows / Tree Borrows）违规，特别面向多语言（Rust/C/C++）互操作场景。
 > **受众**: [进阶] Unsafe Rust、系统级开发者、形式化方法研究者
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva
 > **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Miri](../04_model_checking/31_miri.md) · [所有权（Ownership）形式化](../01_ownership_logic/03_ownership_formal.md) · Tree Borrows

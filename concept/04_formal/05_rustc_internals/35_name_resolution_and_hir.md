@@ -7,6 +7,7 @@
 > **Summary**: Explains rustc's two-phase name resolution, namespaces and ribs, AST-to-HIR lowering, and the key identifiers (`DefId`, `HirId`, `BodyId`) used in the HIR.
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Inf — 编译器前端基础设施
 > **定位**: 把“名字怎么找到定义”和“源码如何变成编译器友好的 HIR”这两个前端核心步骤讲清楚，为理解类型检查、借用（Borrowing）检查打下基础。

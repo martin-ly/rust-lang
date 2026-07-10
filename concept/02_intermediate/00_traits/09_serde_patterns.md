@@ -7,6 +7,7 @@
 > **Summary**: Serde Patterns: intermediate Rust mechanisms, patterns, and practical examples.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Serde 序列化设计模式
 > **定位**: 深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏（Macro）、自定义序列化逻辑、以及类型系统（Type System）如何保障数据转换的安全性。

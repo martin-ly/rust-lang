@@ -5,6 +5,7 @@
 >
 > **受众**: [初学者] → [进阶者] → [研究者]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Lifetimes](./03_lifetimes.md)
 > **后置概念**: [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)

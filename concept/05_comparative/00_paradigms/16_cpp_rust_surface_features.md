@@ -6,6 +6,7 @@
 > **Summary**: A focused comparison of C++ and Rust surface-level object-oriented features: constructors/initialization, operator overloading, RTTI, and access control (friend vs module privacy).
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L3 进阶对比
 > **A/S/P 标记**: C+A — Comparison + Application
 > **双维定位**: C×Ana

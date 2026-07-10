@@ -14,6 +14,7 @@
 >
 > **EN**: Advanced 02 Async Original
 > **受众**: [归档]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层次定位**: L3 高级概念 / 异步（Async）子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析 Pin 与状态机的交互

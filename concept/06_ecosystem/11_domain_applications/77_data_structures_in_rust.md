@@ -7,6 +7,7 @@
 > **Summary**: Core data structures in Rust's standard library and common custom implementations: vectors, queues, trees, hash tables, graphs, and advanced structures, with selection guidance and ownership-aware design patterns.
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Collections](../../01_foundation/05_collections/08_collections.md)

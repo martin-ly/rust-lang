@@ -6,6 +6,7 @@
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 理解 → 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **前置概念**: [异步（Async）编程](../../03_advanced/01_async/02_async.md) · [并发模式](../../03_advanced/00_concurrency/10_concurrency_patterns.md) · [网络协议](../04_web_and_networking/38_network_protocols.md)
 > **后置概念**: [高性能网络服务架构](../04_web_and_networking/39_high_performance_network_service_architecture.md) · [网络安全](02_network_security.md)

@@ -27,6 +27,7 @@
 > **维护**: 新增来源必须先在此索引注册，获取唯一标识符，然后在概念文件中引用（Reference）。
 > **前置概念**: N/A
 > **后置概念**: N/A
+> **权威来源**: 本文件为 `concept/` 权威页。
 ---
 
 ## 一级[官方规范与设计文档](../00_meta/02_sources/international_authority_index.md)

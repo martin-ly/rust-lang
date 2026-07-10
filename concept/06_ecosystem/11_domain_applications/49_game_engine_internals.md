@@ -10,6 +10,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 游戏引擎核心系统的架构设计与实现权衡
 > **前置依赖**: [ECS 架构](07_game_ecs.md) · [游戏开发](21_game_development.md) · [并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [Async/Await](../../03_advanced/01_async/02_async.md)

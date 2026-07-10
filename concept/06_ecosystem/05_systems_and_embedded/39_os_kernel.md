@@ -6,6 +6,7 @@
 > **EN**: Rust for Operating System Kernel Development
 > **Summary**: Os Kernel: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **代码状态**: [示例级 — 已补充代码]
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **来源**: [Rust for Linux](https://rust-for-linux.com/) · [Redox OS](https://www.redox-os.org/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)

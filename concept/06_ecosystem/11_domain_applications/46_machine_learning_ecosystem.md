@@ -9,6 +9,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust ML 生态的技术选型与工程权衡
 > **前置依赖**: [类型系统（Type System）](../../01_foundation/02_type_system/04_type_system.md) · [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)

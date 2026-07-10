@@ -7,6 +7,7 @@
 >
 > **受众**: [中级] / [进阶]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Language semantics
 > **双维定位**: S×Sys — 语言与平台交互
 > **前置依赖**: [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) · [Modules and Paths](../../01_foundation/07_modules_and_items/11_modules_and_paths.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
@@ -140,7 +141,7 @@ fn not_windows() {}
 | `target_has_atomic = "8"` | 目标支持 8 位原子操作（Atomic Operations） |
 | `target_has_atomic = "ptr"` | 目标支持指针宽度原子操作（Atomic Operations） |
 
-> Rust 1.97 新增 `target_has_atomic_primitive_alignment = "ptr"`，详见 [Rust 1.97 Preview (Beta)](../../07_future/00_version_tracking/rust_1_97_preview.md)。
+> Rust 1.97 新增 `target_has_atomic_primitive_alignment = "ptr"`，详见 [Rust 1.97 稳定特性](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
 
 ---
 

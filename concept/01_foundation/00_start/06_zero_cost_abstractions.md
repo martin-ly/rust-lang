@@ -10,6 +10,7 @@
 > **Summary**: Zero Cost Abstractions: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价零成本抽象（Zero-Cost Abstraction）的设计权衡
 > **定位**: 深入分析 Rust **零成本抽象（Zero-Cost Abstraction）**（Zero-Cost Abstractions）的设计哲学——探讨泛型（Generics）、迭代器（Iterator）、Trait 对象等高层抽象如何在编译期消除运行时（Runtime）开销，以及与 C++ "零开销原则" 的对比。

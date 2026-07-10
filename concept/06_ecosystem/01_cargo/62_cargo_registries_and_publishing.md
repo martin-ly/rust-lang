@@ -7,6 +7,7 @@
 > **Summary**: Explains how Cargo registries work, the sparse vs git index protocols, publishing workflow, yank/owner commands, authentication, and private registry setup.
 > **受众**: [中级 → 高级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“怎么把 crate 发布到 crates.io / 私有 registry、registry 内部如何索引、认证如何工作”系统化。

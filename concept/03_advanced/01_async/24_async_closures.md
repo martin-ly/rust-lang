@@ -16,6 +16,7 @@
 > - [Rust 1.85.0 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html)
 >
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **前置概念**: Closures、async/await、Future、Pin
 > **后置概念**: RTN (Return Type Notation)、AFIDT、`dyn AsyncFn`
 

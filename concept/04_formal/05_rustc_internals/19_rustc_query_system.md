@@ -7,6 +7,7 @@
 > **Summary**: Explains how `rustc` uses a demand-driven query system (`TyCtxt`), dependency graphs, and the red-green algorithm to enable fine-grained incremental compilation.
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal / Infrastructure
 > **双维定位**: F×Inf — 编译器基础设施与形式化方法
 > **定位**: 将 `rustc` 从“顺序 pass 流水线”还原为“按需查询 + 缓存”的真实架构，理解增量编译的底层机制。

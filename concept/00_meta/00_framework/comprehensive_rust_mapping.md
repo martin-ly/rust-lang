@@ -8,6 +8,7 @@
 > **Summary**: Comprehensive Rust Mapping. Core Rust concept.
 > **受众**: [初学者 → 进阶]
 > **Bloom 层级**: 知道 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: C×Kno — 将 Google 的 Comprehensive Rust 课程映射到本知识体系
 > **定位**: 本文件建立 **Comprehensive Rust**（Google 开发的免费 Rust 课程）与本知识体系中 `concept/` 文件的双向映射，帮助学习者将课程章节定位到深层概念文档。

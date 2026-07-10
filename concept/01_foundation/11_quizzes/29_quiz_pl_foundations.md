@@ -6,6 +6,7 @@
 > **Summary**: Embedded quiz for the general programming-language mechanism files: variable model, evaluation strategies, effects and purity, control flow, and data abstraction spectrum.
 >
 > **受众**: [初学者]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L1 基础概念
 > **A/S/P 标记**: S — Structure
 > **双维定位**: C×Eva

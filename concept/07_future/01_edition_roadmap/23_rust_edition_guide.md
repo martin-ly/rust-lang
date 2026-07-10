@@ -4,6 +4,7 @@
 > **EN**: Rust Edition Mechanism and Migration Guide
 > **受众**: [研究者]
 > **内容分级**: [研究级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **前置概念**: [Rust Edition Guide](44_edition_guide.md)
 > **后置概念**: [Rust Edition Guide](44_edition_guide.md)
 > **主要来源**: [Rust Edition Guide](44_edition_guide.md) · [TRPL — Appendix E](https://doc.rust-lang.org/book/appendix-05-editions.html) · [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs/2052-epochs.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)

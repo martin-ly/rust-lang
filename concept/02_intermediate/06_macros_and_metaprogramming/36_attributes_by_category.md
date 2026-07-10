@@ -20,6 +20,7 @@
 > [The Rust Programming Language — Annotations](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
+> **权威来源**: 本文件为 `concept/` 权威页。
 
 ---
 

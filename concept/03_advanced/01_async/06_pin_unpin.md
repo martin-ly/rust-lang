@@ -9,6 +9,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：[Pin/Unpin](../../../knowledge/03_advanced/async)
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Pin 不动性对自引用（Reference）的必要性
 > **定位**: 深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。

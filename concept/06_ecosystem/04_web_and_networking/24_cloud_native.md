@@ -20,6 +20,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计云原生架构
 > **定位**: 分析 Rust 在云原生领域的应用——从微服务框架到容器化部署，探讨 Rust 的内存安全（Memory Safety）与性能优势如何重塑云基础设施。

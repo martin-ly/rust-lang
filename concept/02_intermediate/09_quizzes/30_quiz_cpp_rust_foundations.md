@@ -6,6 +6,7 @@
 > **Summary**: Embedded quiz for the C/C++ engineering-layer comparison files: RTTI, macros, exception safety, construction, friend, move semantics, and value/reference semantics.
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: S — Structure
 > **双维定位**: C×Eva

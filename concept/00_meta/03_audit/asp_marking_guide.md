@@ -19,6 +19,7 @@
 > **受众**: [专家]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: 元（Meta）
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件定义 `concept/` 知识体系中的 **A(应用) / S(结构) / P(程序)** 三维认知标记规范，作为现有 Bloom 层级标注的补充维度。A/S/P 标记连接 **Krathwohl 知识维度** 与 **Bloom 认知过程维度**，将抽象的双维矩阵压缩为可操作的标签系统。
 > **对齐来源**: [Microsoft RustTraining] · [arxiv 2604.06331v1] · [Krathwohl 2002] · [Bloom 修订版 2001]
 > **使用方式**: 每个概念文件的头部标注增加 A/S/P 字段；`concept_index.md` 增加 A/S/P 索引列。

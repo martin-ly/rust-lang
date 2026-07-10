@@ -9,6 +9,7 @@
 > **Summary**: Never Type: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: L3-L4 (应用/分析)
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Str — 结构型类型系统（Type System）
 > **定位**: 系统讲解 Rust 中 `!` (never type) 的形式语义、类型推导规则、控制流应用和穷尽性检查机制。

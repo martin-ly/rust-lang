@@ -7,6 +7,7 @@
 > **Summary**: 标准库中可通过 `#[derive(...)]` 自动实现的 trait 参考：行为、默认实现语义、对字段类型的要求及典型使用场景。
 > **受众**: [初学者] / [中级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Language semantics
 > **双维定位**: S×Lang — 语言标准库约定
 > **前置依赖**: [Traits](../../01_foundation/02_type_system/04_type_system.md) · [Structs and Enums](../../01_foundation/03_values_and_references/05_reference_semantics.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)

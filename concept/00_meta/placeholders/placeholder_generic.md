@@ -6,6 +6,7 @@
 > **主要来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RFCs](https://github.com/rust-lang/rfcs)
 >
 > **状态**: 🚧 待创建
+> **权威来源**: 本文件为 `concept/` 权威页。
 ---
 
 > 本页面为通用占位符。原链接指向的内容尚未创建。

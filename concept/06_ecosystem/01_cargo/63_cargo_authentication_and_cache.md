@@ -7,6 +7,7 @@
 > **Summary**: Explains Cargo's credential provider system, token storage options, registry authentication, and the layout of `CARGO_HOME`, target/build directories, dep-info files, and shared caches like sccache.
 > **受众**: [中级 → 高级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“Cargo 如何安全地存 token、如何组织缓存、如何加速构建”系统化，补齐 registry 之后的工程实践闭环。

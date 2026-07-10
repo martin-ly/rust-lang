@@ -6,6 +6,7 @@
 > **Summary**: Comparison of runtime type identification mechanisms between C++ (`typeid`, `dynamic_cast`) and Rust (`Any` trait, `TypeId`, `downcast_ref`).
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: S+A
 > **双维定位**: C×Ana

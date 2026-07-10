@@ -4,6 +4,7 @@
 > **Summary**: A unified index for general programming-language mechanism files that provide the foundational context for understanding Rust's specific design choices.
 >
 > **受众**: [初学者]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L1-L4 跨层导航
 > **A/S/P 标记**: S+S — Structure + Science
 > **双维定位**: C×Ana

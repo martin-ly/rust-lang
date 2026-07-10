@@ -6,6 +6,7 @@
 > **Summary**: Comparison of object construction and initialization between C++ (constructors, initializer lists, copy/move semantics) and Rust (struct literals, associated functions, Default, const fn).
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana

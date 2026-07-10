@@ -6,6 +6,7 @@
 > **Summary**: Locking Primitives. Core Rust concept covering mechanism analysis, in-depth analysis, memory safety guarantees.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 深入探讨 Rust 中的**无锁编程**——从原子操作（Atomic Operations）到内存序，分析 lock-free 算法的内存安全（Memory Safety）保证与性能优势。
 > **前置概念**:
 > [Concurrency](01_concurrency.md) ·

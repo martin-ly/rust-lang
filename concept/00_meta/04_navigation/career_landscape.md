@@ -8,6 +8,7 @@
 > **Summary**: Career Landscape. Core Rust concept.
 > **受众**: [入门 → 进阶]
 > **Bloom 层级**: 知道 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: C×Kno — 了解 Rust 职业市场现状
 > **定位**: 基于权威招聘数据（JetBrains、Stack Overflow、Levels.fyi、Robert Half）的 Rust 职业市场定量分析，覆盖薪资范围、岗位分布、技能需求和地域差异。

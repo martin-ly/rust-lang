@@ -9,6 +9,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计嵌入式系统架构
 > **定位**: 探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全（Memory Safety）如何保证关键系统的可靠性。

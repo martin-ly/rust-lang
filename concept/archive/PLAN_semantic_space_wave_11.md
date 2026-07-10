@@ -7,6 +7,7 @@
 > **EN**: Plan Semantic Space Wave 11
 > **受众**: [研究者]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 
 ## 一、核心问题定义

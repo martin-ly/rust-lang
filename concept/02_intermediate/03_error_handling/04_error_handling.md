@@ -9,6 +9,7 @@
 >
 > 本主题在 knowledge 中有系统化的知识索引：[错误处理（Error Handling）](../../01_foundation/08_error_handling/32_error_handling_basics.md)
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 实施 Result/Option 传播模式

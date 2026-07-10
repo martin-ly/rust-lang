@@ -8,6 +8,7 @@
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Async Drop 预览特性
 > **定位**: 分析 Rust 中 **异步（Async）资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（[Async Drop Initiative](https://github.com/rust-lang/rust/issues/126482)）、设计约束与当前 nightly 实现状态。

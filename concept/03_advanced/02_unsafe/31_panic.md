@@ -6,6 +6,7 @@
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
 > **前置依赖**: [Panic and Abort](../../01_foundation/08_error_handling/13_panic_and_abort.md) · [Unsafe Rust](03_unsafe.md) · [The Rust Runtime](30_rust_runtime.md)

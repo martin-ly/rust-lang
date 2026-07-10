@@ -7,6 +7,7 @@
 > **Summary**: Rust vs Ruby: comparative analysis with Rust across type systems, memory safety, and concurrency.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 对比分析 **Rust** 与 **Ruby** 的设计哲学——从动态类型的极致表达力到静态类型的编译期安全，揭示两种语言在Web开发、脚本编写和系统编程中的互补定位。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Rust vs Python](../02_managed_languages/07_rust_vs_python.md)
 > **后置概念**: [Web Development](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) · [Scripting](../../06_ecosystem/02_core_crates/03_core_crates.md)

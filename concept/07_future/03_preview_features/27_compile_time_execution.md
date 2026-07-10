@@ -8,6 +8,7 @@
 > **受众**: [专家]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: C×Eva — 评估编译期执行的能力边界
 > **定位**: 深入探讨 Rust 的**编译期执行**能力——从 `const fn` 到 `const` 泛型（Generics），分析 Rust 如何在编译期完成计算，实现零成本抽象（Zero-Cost Abstraction）。

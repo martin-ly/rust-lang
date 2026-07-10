@@ -10,6 +10,7 @@
 > **受众**: [研究者]
 > **定位**: Rust 概念体系的**数学根基**与形式化验证。为 L1-L3 的所有安全保证提供严格的数学证明，是知识体系的"地基"。
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **核心功能**: 为上层概念提供**可机械验证的**安全性证明
 > **规范文件**: [`04_formal/README.md`](../04_formal/README.md)
 > **[来源: Wikipedia - Linear Logic]** · **[来源: Wikipedia - Type Theory]** · **[来源: POPL 2018 - RustBelt: Securing the Foundations of the Rust Programming Language]** · **[来源: Iris Project - iris-project.org]**

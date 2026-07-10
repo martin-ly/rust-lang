@@ -4,6 +4,7 @@
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: S×Eva — 评价进程抽象与生命周期（Lifetimes）
 > **前置依赖**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Concurrency](../00_concurrency/01_concurrency.md)

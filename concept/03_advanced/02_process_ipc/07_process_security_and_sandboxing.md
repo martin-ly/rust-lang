@@ -4,6 +4,7 @@
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: A×Eva — 评价进程安全与沙箱设计
 > **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [IPC Mechanisms](05_ipc_mechanisms.md) · [Unsafe Rust](../02_unsafe/03_unsafe.md)

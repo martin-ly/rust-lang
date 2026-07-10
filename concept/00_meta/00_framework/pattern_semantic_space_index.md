@@ -4,6 +4,7 @@
 > **Summary**: A unified index and learning path for all design-pattern-related concepts across the concept hierarchy, with semantic axes, GoF-to-Rust mapping, and scenario-based decision trees.
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L2-L6 跨层导航
 > **A/S/P 标记**: S+A — Structure + Application
 > **双维定位**: C×Ana / C×Eva

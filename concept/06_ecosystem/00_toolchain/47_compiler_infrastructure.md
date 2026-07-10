@@ -7,6 +7,7 @@
 >
 > **EN**: Compiler Internals
 > **Summary**: Compiler Internals: Rust ecosystem tools, crates, and engineering practices.
+> **权威来源**: 本文件为 `concept/` 权威页。
 Compiler Internals. Core Rust concept covering mechanism analysis, parallel programming, compiler internals.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价

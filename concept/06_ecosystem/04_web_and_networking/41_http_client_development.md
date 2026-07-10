@@ -7,6 +7,7 @@
 > **Summary**: Building HTTP clients in Rust with reqwest: request construction, response handling, connection reuse, retries, cookies, proxies, and file uploads.
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **前置概念**: [Async/Await](../../03_advanced/01_async/02_async.md) · [Rust 网络编程](../../03_advanced/06_low_level_patterns/18_network_programming.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)

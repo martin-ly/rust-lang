@@ -7,6 +7,7 @@
 > **Summary**: Rust vs Python: comparative analysis with Rust across type systems, memory safety, and concurrency.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 对比分析 **Rust**（编译型、强类型、内存安全（Memory Safety））与 **Python**（解释型、动态类型、开发效率优先）在语言设计哲学、类型系统（Type System）、内存模型、并发模型和工程实践五个维度的深层差异。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [Rust vs Go](../01_systems_languages/02_rust_vs_go.md) · [Rust vs Java](06_rust_vs_java.md)

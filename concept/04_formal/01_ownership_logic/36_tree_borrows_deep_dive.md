@@ -8,6 +8,7 @@
 > **Summary**: 深入解析 Rust 别名模型的演进：从 Stacked Borrows 到 Tree Borrows，理解其设计动机、核心规则、与 Miri 的关系及生产实践影响。
 > **受众**: [进阶] Unsafe Rust、形式化方法、运行时（Runtime）工具开发者
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Str
 > **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [所有权（Ownership）形式化](03_ownership_formal.md) · [Miri](../04_model_checking/31_miri.md)

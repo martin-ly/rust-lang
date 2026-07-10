@@ -12,6 +12,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：属性与宏（Macro）
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用属性和宏（Macro）扩展
 > **定位**: 系统讲解 Rust **属性（attributes）**和**声明宏（macro_rules!）**——从编译期元编程的基础语法到模式匹配（Pattern Matching）、递归宏和卫生性，揭示 Rust 如何在编译期生成代码同时保持类型安全。

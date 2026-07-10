@@ -6,6 +6,7 @@
 > **受众**: [初学者]
 > **内容分级**: [参考级]
 > **Bloom 层级**: 记忆 → 理解
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Cargo Getting Started](../../06_ecosystem/01_cargo/80_cargo_getting_started.md)

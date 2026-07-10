@@ -8,6 +8,7 @@
 > **Summary**: Cross Compilation: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 交叉编译工具链的应用
 > **定位**: 分析 Rust **交叉编译**生态——从 target triple 的语义、条件编译（cfg）、到不同架构（x86_64/ARM/RISC-V/WASM）的编译策略，揭示 Rust 如何在不修改源代码的情况下支持从嵌入式到服务器的全谱系平台。

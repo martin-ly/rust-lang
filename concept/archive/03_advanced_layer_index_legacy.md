@@ -12,6 +12,7 @@
 > **受众**: [专家]
 > **定位**: Rust 的高级特性，涉及并发、异步（Async）、Unsafe 和元编程。L1-L2 概念在**复杂场景**中的组合应用与边界突破。
 > **Bloom 层级**: 应用 → 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **对应 L4**: 并发分离逻辑 · 线性时序逻辑 · 效果系统 · 元类型论
 > **规范文件**: [`03_advanced/README.md`](../03_advanced/README.md)
 > **[来源: Rust Reference - Concurrency]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Wikipedia - Memory Safety]**

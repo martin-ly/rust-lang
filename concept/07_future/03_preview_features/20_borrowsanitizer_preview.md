@@ -16,6 +16,7 @@
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 BorrowSanitizer 预览特性
 > **定位**: 探讨 BorrowSanitizer 作为 Rust **运行时（Runtime）借用（Borrowing）检查**工具的工业化路径，从 Miri 的纯解释执行扩展到编译后二进制检测的设计空间。

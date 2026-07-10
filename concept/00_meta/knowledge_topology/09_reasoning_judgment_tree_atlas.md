@@ -4,6 +4,7 @@
 > **Summary**: Symptom → diagnostic question → root cause → fix strategy concept paths for compiler errors and runtime issues. 编译错误/运行时问题 → 判定问题 → 根因 → 修复策略的概念路径。
 > **受众**: [研究者]
 > **内容分级**: [元层]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---

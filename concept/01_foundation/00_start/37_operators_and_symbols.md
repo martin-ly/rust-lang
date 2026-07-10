@@ -7,6 +7,7 @@
 >
 > **受众**: [初学者] / [中级]
 > **Bloom 层级**: 记忆 → 理解
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Language syntax
 > **双维定位**: S×Lang — 语言词法与语法
 > **前置依赖**: [Keywords](36_keywords.md) · [Type System](../02_type_system/04_type_system.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)

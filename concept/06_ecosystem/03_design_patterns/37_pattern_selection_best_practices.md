@@ -7,6 +7,7 @@
 > **受众**: [进阶]
 > **内容分级**: [参考级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: A×Eva — 评估模式选型
 > **前置依赖**: [Design Patterns](02_patterns.md) · [Pattern Implementation Comparison](36_pattern_implementation_comparison.md)

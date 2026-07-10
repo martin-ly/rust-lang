@@ -12,6 +12,7 @@
 > **受众**: [专家]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评价 Rust 在太空环境中的适用性
 > **前置依赖**: [Embedded Systems](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Formal Methods](../../04_formal/04_model_checking/16_aerospace_certification_formal_methods.md)

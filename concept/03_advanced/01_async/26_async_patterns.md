@@ -6,6 +6,7 @@
 > **Summary**: Concurrency. Core Rust concept covering mechanism analysis, in-depth analysis, design patterns.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析异步（Async）模式的状态机变换
 > **定位**: 深入分析 Rust **异步编程的高级模式**——从 Future 状态机、Pin 保证到并发执行和取消传播，揭示 Rust async/await 如何在零运行时（Runtime）开销下实现高效并发。

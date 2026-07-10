@@ -4,6 +4,7 @@
 > **Summary**: A reasoning tree for extending Rust's safety boundaries across unsafe, FFI, and formal-verification layers.
 > **受众**: [专家]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件从「安全边界」核心出发，推演向更底层、更通用、更危险领域的扩展路径，标注每条扩展边的条件、风险和补偿机制。
 > **原则**: 边界扩展必须是**显式的、可审计的、不可逆的**——一旦跨越边界，编译器的安全保证递减，程序员的责任递增。
 > **风险色标**: 🟢 编译期保证 / 🟡 运行时检查 / 🔴 程序员责任 / ⚫ 系统级风险

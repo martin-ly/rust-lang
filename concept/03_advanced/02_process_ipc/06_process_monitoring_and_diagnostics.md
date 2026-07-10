@@ -4,6 +4,7 @@
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: A×Eva — 评价进程监控与诊断方法
 > **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [IPC Mechanisms](05_ipc_mechanisms.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)

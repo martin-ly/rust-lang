@@ -7,6 +7,7 @@
 > **EN**: Foundation 11 Numeric Types Deprecated
 > **受众**: [归档]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 系统讲解 Rust 的**数值类型**——从整数、浮点到 wrapping/saturating 运算，分析类型安全如何防止数值错误。
 > **前置概念**: [Type System](../01_foundation/02_type_system/04_type_system.md) · [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **后置概念**: [Generics](../02_intermediate/01_generics/02_generics.md) · [Performance](../06_ecosystem/10_performance/15_performance_optimization.md)

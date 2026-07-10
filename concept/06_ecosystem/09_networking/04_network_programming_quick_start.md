@@ -4,6 +4,7 @@
 > **受众**: [进阶]
 > **内容分级**: [指南级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **定位**: 为 Rust 网络编程提供分阶段学习路径与场景化导航，链接到权威概念页获取深度解释。
 > **前置概念**: [Async](../../03_advanced/01_async/02_async.md) · [Network Protocols](../04_web_and_networking/38_network_protocols.md)

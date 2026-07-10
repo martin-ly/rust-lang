@@ -13,6 +13,7 @@
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Derive CoercePointee 预览特性
 > **定位**: 探讨 Rust 1.95+ 中通过派生宏（Macro）自动化 `CoerceUnsized` 和 `DispatchFromDyn` 实现，降低自定义智能指针（Smart Pointer）的**样板代码**和**unsafe 实现风险**。

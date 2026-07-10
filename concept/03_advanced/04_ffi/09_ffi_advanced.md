@@ -7,6 +7,7 @@
 > **受众**: [专家]
 >
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 深入分析 Rust **FFI（外部函数接口）**的高级主题——从复杂类型映射、回调函数、到线程安全和内存布局控制，揭示如何在不安全边界上维持 Rust 的安全保证。
 > **前置概念**: [Unsafe](../02_unsafe/03_unsafe.md) · [FFI Basics](05_rust_ffi.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [Cross Compilation](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md) · [WASI](../../06_ecosystem/05_systems_and_embedded/08_wasi.md)

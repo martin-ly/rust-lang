@@ -6,6 +6,7 @@
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
 > **前置依赖**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Move Semantics](../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) · [Memory Model](../02_unsafe/29_memory_model.md)

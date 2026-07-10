@@ -12,6 +12,7 @@
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: F×App — 应用 RPITIT 于 trait 设计
 > **前置依赖**: [Trait](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Advanced Traits](../../02_intermediate/00_traits/19_advanced_traits.md)

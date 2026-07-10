@@ -7,6 +7,7 @@
 >
 > **受众**: [进阶] / [专家]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Process / Platform
 > **双维定位**: P×Sys — 编译器输出与平台链接行为
 > **前置依赖**: [FFI Advanced](09_ffi_advanced.md) · [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) · [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)

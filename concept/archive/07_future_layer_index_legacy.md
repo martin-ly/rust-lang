@@ -16,6 +16,7 @@
 > **受众**: [专家]
 > **定位**: Rust 在 AI 时代、形式化方法工业化、分布式系统形式化等前沿方向的**演进预测**与**需求驱动**。知识体系的"前锋"，反向约束下层设计。
 > **Bloom 层级**: 评价 → 创造
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **功能**: 预测演进方向，反向驱动 L1-L6 的更新
 > **规范文件**: [`07_future/README.md`](../07_future/README.md)
 > **[来源: Rust RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Blog - blog.rust-lang.org]** · **[来源: Wikipedia - Artificial Intelligence]** · **[来源: Formal Methods Industry Reports 2026]**

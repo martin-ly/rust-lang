@@ -8,6 +8,7 @@
 > **Design Principle**: Every stage must have runnable code; every concept must have corresponding exercises
 > **主要来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
 > ⚠️ **草案状态**: 本文件为英文 MVP 路径草案，其中部分链接指向的概念文件编号/名称可能与当前 `concept/` 目录结构不一致。请以中文版 [`learning_mvp_path.md`](learning_mvp_path.md) 为权威学习路径。
+> **权威来源**: 本文件为 `concept/` 权威页。
 ---
 
 ## Path Overview

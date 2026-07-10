@@ -9,6 +9,7 @@
 > **内容分级**: [综述级]
 >
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估 Rust 在 AI 领域的应用
 > **定位**: 分析 Rust 在**AI/ML 基础设施**中的新兴应用——从张量运算、推理引擎到 ML 管道编排，揭示 Rust 如何在高性能 AI 系统中提供内存安全（Memory Safety）和低延迟优势。

@@ -7,6 +7,7 @@
 > **Summary**: The `assert_matches!` macro for pattern-based assertions on enums and trait objects.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 断言和模式匹配（Pattern Matching）语法应用
 > **定位**: 将 Rust 的**模式匹配（Pattern Matching）**能力从"表达式求值"扩展到"测试断言"的工程机制，实现编译期模式检查与运行时（Runtime）断言的统一。

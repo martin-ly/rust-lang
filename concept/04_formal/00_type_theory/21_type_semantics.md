@@ -5,6 +5,7 @@
 > **EN**: Type Semantics
 > **Summary**: Type Semantics. Guide to 21 Type Semantics.
 > **受众**: [研究者]
+> **权威来源**: 本文件为 `concept/` 权威页。
 >
 > ⚠️ **声明**:
 >

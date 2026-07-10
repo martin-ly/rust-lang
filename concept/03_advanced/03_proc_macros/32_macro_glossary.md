@@ -3,6 +3,7 @@
 > **受众**: [研究者]
 > **内容分级**: [参考级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: S×Mem — 宏（Macro）术语结构化索引
 > **前置依赖**: [过程宏（Procedural Macro）](07_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)

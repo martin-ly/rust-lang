@@ -15,6 +15,7 @@
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **Bloom 层级**: 评价 → 创造
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 追踪 Rust 语言层面的自动微分（Automatic Differentiation, AD）实验进展，分析其对 AI/ML 生态的潜在影响。
 > **前置概念**: [Generics](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [Machine Learning Ecosystem](../../06_ecosystem/11_domain_applications/46_machine_learning_ecosystem.md)
 > **后置延伸**: [Rust in AI](../04_research_and_experimental/21_rust_in_ai.md) · [Evolution](../04_research_and_experimental/03_evolution.md)

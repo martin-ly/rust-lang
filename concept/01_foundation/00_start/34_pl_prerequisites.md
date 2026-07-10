@@ -8,6 +8,7 @@
 > **Summary**: Pl Prerequisites: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 理解
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: L1 基础层的**前置知识补充**。理解这些通用 PL 概念后，你将能更深刻地回答"为什么 Rust 要这样设计"，而非仅仅记忆规则。
 > **阅读建议**: 可选阅读。若你已有 Haskell/Scheme/OCaml 背景，可跳过；若你只有 Python/JavaScript 背景，强烈建议先读本文。
 >

@@ -4,6 +4,7 @@
 > **Summary**: Guidelines for reducing boilerplate repetition across `concept/` files while preserving the bilingual header and core pedagogical structure.
 >
 > **受众**: [贡献者]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L0 元信息
 > **A/S/P 标记**: M — Meta
 > **双维定位**: M×Eva — Evaluation / Quality

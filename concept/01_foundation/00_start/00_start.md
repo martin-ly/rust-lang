@@ -6,6 +6,7 @@
 > **Summary**: A practical starting guide for Rust beginners: installation, toolchain setup, first Cargo project, essential commands, editor configuration, and the learning path into ownership, types, modules, error handling, and testing.
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 理解
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: Rust 学习路径的起点。本文档假设你没有任何 Rust 背景，只需基本的命令行操作经验。
 > **预计阅读时间**: 25 分钟
 > **对应练习**: [exercises/src/ownership_borrowing/ex01_hello_move.rs](../../exercises/src/ownership_borrowing)

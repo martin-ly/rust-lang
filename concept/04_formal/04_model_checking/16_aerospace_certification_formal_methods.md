@@ -8,6 +8,7 @@
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 系统讲解 **DO-178C 航空软件标准** 与 **DO-333 形式化方法补充** 的 Rust 映射——从软件等级 A~E 到定理证明、模型检查、抽象解释三类形式化方法在 Rust 生态中的工具链映射，分析 Rust 所有权（Ownership）系统在航空航天安全关键软件中的独特形式化优势。
 > **前置概念**: [形式化方法](13_formal_methods.md) · [Hoare 逻辑](../03_operational_semantics/15_hoare_logic.md) · [RustBelt](../02_separation_logic/04_rustbelt.md)
 > **后置概念**: Unsafe · 并发安全（Concurrency Safety） · 验证工具链

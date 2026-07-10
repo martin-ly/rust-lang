@@ -11,6 +11,7 @@
 > ```c struct Point { double x; double y; }; // 抽象层级: memory地址 + 偏移量 // 无行为封装、无访问控制、无types安全保证```
 > **特征**: - 抽象单位 = memory布局 - 行为 = 独立函数（`distance(struct Point a, struct Point b)`） - 封装 = 无（所有字段公开） - 多态 = 无 C++ 将数据与行为绑定，引入访问控制和构造函数：
 > **受众**: [初学者]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L1 基础概念 — 通用编程语言机制
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析数据抽象机制的演进谱系

@@ -13,6 +13,7 @@
 >
 > 本主题在 knowledge 中有系统化的知识索引：[所有权（Ownership）](01_ownership.md)
 > **受众**: [初学者]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层次定位**: L1 基础概念 / 所有权（Ownership）子域
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Und — 建立所有权（Ownership）唯一性心智模型

@@ -5,6 +5,7 @@
 > **EN**: Rust in Quantum Computing Ecosystems
 > **Summary**: Quantum Computing Rust: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [实验级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **代码状态**: [示例级 — 已补充代码]
 > **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)

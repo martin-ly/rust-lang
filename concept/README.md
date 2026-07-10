@@ -3,6 +3,7 @@
 > **EN**: Rust Concept Knowledge System
 > **Summary**: Top-level index and navigation for the Rust layered concept knowledge system.
 > **受众**: [初学者]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**：本文件夹致力于构建 Rust 编程语言的**全面、权威、国际化、可持续演进**的概念知识体系。所有内容以 **Wikipedia 权威定义**、**国际顶尖大学课程**、**著名研究机构成果** 为基准，结合多种思维表征方式（思维导图、多维矩阵、决策树、定理推理树、边界判定树等），形成层次化的理论-模型-实践结构。
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)

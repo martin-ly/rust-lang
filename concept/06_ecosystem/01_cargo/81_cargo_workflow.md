@@ -7,6 +7,7 @@
 > **Summary**: The daily Cargo development workflow for Rust 1.97.0+: standard package layout, the roles of `Cargo.toml` and `Cargo.lock`, onboarding existing projects, common commands, dependency updates, and workspace integration.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 覆盖从“创建 package”到“在团队中维护依赖锁定”的完整日常流程。

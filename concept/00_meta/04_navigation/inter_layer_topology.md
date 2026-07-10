@@ -9,6 +9,7 @@
 > **来源**: [inter_layer_map.md](inter_layer_map.md)
 > **前往权威文件**: [Rust 知识体系跨层依赖与蕴含图 — inter_layer_map.md](inter_layer_map.md)
 
+> > **权威来源**: 本文件为 `concept/` 权威页。
 ---
 
 > **认知路径**: 本主题内容已合并至 [`inter_layer_map.md`](inter_layer_map.md)。建议从该文件的目录开始阅读，重点关注跨层依赖矩阵、定理传递链与一致性检查点。

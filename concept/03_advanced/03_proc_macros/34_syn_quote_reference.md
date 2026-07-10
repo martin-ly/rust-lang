@@ -3,6 +3,7 @@
 > **受众**: [专家]
 > **内容分级**: [参考级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: S×App — 应用 syn/quote API
 > **前置依赖**: [过程宏（Procedural Macro）](07_proc_macro.md) · [宏术语表](32_macro_glossary.md)

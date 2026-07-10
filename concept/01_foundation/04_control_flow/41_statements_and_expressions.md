@@ -6,6 +6,7 @@
 > **受众**: [初学者]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
 > **前置依赖**: [Control Flow](07_control_flow.md) · [Variables and Bindings](../03_values_and_references/20_variable_model.md) · [Patterns](40_patterns.md)

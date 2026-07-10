@@ -7,6 +7,7 @@
 > **Summary**: Rust closure types, capture modes, `Fn`/`FnMut`/`FnOnce` traits, and lifetime interactions.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Und — 理解 Fn/FnMut/FnOnce 的语义差异
 > **定位**: 深入分析 Rust 闭包（Closures）的**类型系统（Type System）**——`Fn`、`FnMut`、`FnOnce` 三者的捕获规则、自动 trait 推导、以及闭包与函数指针的本质区别。

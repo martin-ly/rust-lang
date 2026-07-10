@@ -7,6 +7,7 @@
 >
 > **受众**: [初学者] / [中级]
 > **Bloom 层级**: 记忆 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: P×Tool — 工具链与工程实践
 > **前置依赖**: [Toolchain](01_toolchain.md) · [Cargo Subcommands and Plugins](../01_cargo/66_cargo_subcommands_and_plugins.md)

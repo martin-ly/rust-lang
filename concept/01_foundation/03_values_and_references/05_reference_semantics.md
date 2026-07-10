@@ -9,6 +9,7 @@
 > **Summary**: Reference Semantics: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Und — 理解引用（Reference）语义是所有权（Ownership）模型的延伸
 > **定位**: 深入分析 Rust 的**引用语义机制**——自动解引用（Auto-deref）、Deref 强制（Deref Coercion）、类型强制（Type Coercion）以及它们与借用（Borrowing）检查器的交互，澄清开发者常见的隐式转换困惑。

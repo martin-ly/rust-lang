@@ -8,6 +8,7 @@
 > **Summary**: RFC #3842 提案，用结构化属性标记 `unsafe` 函数的安全契约，使安全前提可被工具检查、文档生成和形式化推理。
 > **受众**: [进阶] 形式化方法、Unsafe Rust、系统级开发者
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Eva
 > **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [形式化验证](../04_model_checking/05_verification_toolchain.md) · [Miri](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md)

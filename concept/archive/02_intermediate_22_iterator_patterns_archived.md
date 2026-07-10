@@ -5,6 +5,7 @@
 > **内容分级**: [综述级]
 > **受众**: [进阶]
 > **Bloom 层级**: 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **状态**: 已归档（内容已迁移至主文件）
 > **归档声明**: 本文件内容已合并至 [`15_iterator_patterns.md`](../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)。
 > 原文件保留用于历史追溯。请勿独立编辑本文件。

@@ -7,6 +7,7 @@
 > **Summary**: Cargo `Cargo.toml` target definitions for Rust 1.97.0+: lib, bin, test, example, bench targets, `rust-version`, Package ID Specifications, and per-target configuration.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 补充 `64_cargo_manifest_reference.md` 未涉及的 target、rust-version、pkgid 等子主题。

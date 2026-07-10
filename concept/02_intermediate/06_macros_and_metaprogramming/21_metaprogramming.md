@@ -9,6 +9,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配（Pattern Matching）、过程宏（Procedural Macro）的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。
 > **前置概念**: [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) · [Macro Patterns](17_macro_patterns.md)
 > **后置概念**: [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) · [DSL](13_dsl_and_embedding.md)

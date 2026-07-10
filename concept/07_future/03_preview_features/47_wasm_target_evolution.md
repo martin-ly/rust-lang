@@ -23,6 +23,7 @@
 > **受众**: [专家]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: P×Ana — 分析 WASM 目标的演进方向
 > **前置依赖**: [WASI](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) · [WebAssembly](../../06_ecosystem/11_domain_applications/11_webassembly.md) · [Cross Compilation](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md)

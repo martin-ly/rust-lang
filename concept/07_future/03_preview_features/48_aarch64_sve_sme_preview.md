@@ -11,6 +11,7 @@
 > **Summary**: Aarch64 Sve Sme Preview: emerging Rust language feature or ecosystem trend.
 > **受众**: [专家]
 > **内容分级**: [实验级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **跟踪版本**: nightly 1.98.0 (2026-06-06)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 

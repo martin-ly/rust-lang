@@ -5,6 +5,7 @@
 > **EN**: Rust for Data Science and Scientific Computing
 > **Summary**: Rust For Data Science: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [综述级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **代码状态**: ✅ 含可编译示例
 >
 > **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)

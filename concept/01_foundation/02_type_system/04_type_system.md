@@ -12,6 +12,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：[类型系统（Type System）](04_type_system.md)
 >
 > **受众**: [初学者]
+> **权威来源**: 本文件为 `concept/` 权威页。
 >
 > **层级**: L1 基础概念
 > **A/S/P 标记**: **S** — Structure（心智模型）

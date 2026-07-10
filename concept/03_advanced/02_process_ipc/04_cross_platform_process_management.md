@@ -4,6 +4,7 @@
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: S×Eva — 评价跨平台进程管理可移植性
 > **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Conditional Compilation](../03_proc_macros/28_conditional_compilation.md) · [Module System](../../02_intermediate/05_modules_and_visibility/10_module_system.md)

@@ -21,6 +21,7 @@
 > Rust 从**数学结构**出发，C++ 从**物理机器**出发。
 > 这不仅是技术选型问题，更是"软件文明在 AI 时代如何组织自身"的本体论问题。
 > **Bloom 层级**: 评价 → 创造
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **对应 L4**: 线性逻辑 ⊗ · 经典逻辑 · 类型论 vs 无统一形式基础
 > **[来源: Wikipedia - Rust (programming language)]** · **[来源: Wikipedia - C++]** · **[来源: Stroustrup - The C++ Programming Language, 4th Ed.]** · **[来源: Rust Reference - Memory Model]**
 

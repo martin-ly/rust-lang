@@ -7,6 +7,7 @@
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**：本文件是 `concept/` 知识体系的全局关系骨架，显式定义 L0-L7 各层之间的**逻辑蕴含关系**、**形式化映射**、**反事实依赖**和**反向反馈**。
 > **方法论对齐**: Semantic Link Network (Zhuge 2010) · Bloom's Revised Taxonomy · KB Completeness & Consistency (Torchiano et al. 2018)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链

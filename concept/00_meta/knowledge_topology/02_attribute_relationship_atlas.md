@@ -4,6 +4,7 @@
 > **Summary**: 概念属性矩阵：每个核心概念的必备/可选属性、内容分级、A/S/P、Bloom 层级、定理链。 Attribute matrix of every core concept: required/optional attributes, content tier, A/S/P, Bloom level, and theorem chains.
 > **受众**: [研究者]
 > **内容分级**: [元层]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---

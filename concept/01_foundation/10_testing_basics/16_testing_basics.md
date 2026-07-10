@@ -16,6 +16,7 @@
 > **Summary**: Testing. Core Rust concept covering testing strategies, mechanism analysis.
 > **受众**: [初学者]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: P×App — 实施测试策略和验证方法
 > **定位**: 系统讲解 Rust **测试机制**——从单元测试、集成测试到文档测试和基准测试，揭示 Rust 如何内置测试文化并支持多种测试层级。

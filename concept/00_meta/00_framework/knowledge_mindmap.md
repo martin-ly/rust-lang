@@ -3,6 +3,7 @@
 > **EN**: Knowledge Mindmap
 > **Summary**: Knowledge Mindmap. Core Rust concept.
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件是 `concept/` 知识体系的**认知入口**——用 Mermaid `mindmap` 语法将整个 L0-L7 知识体系浓缩为一张可导航的思维导图，帮助学习者建立全局认知地图。
 > **原则**: 不做"内容重复"，聚焦"结构导航"——每个节点链接到对应的具体文件。
 > **使用方法**: 在支持 Mermaid 的 Markdown 阅读器中查看，点击节点 mentally 定位到对应主题。

@@ -16,6 +16,7 @@
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: L4 (分析)
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **定位**: 探讨 Rust 中 field projections 的提案——允许安全地从复合类型中"投影"出对字段的引用（Reference），而不暴露内部结构。分析其对内核编程、自引用结构和内存安全（Memory Safety）保证的影响。
 > **前置概念**: [Pin](../../03_advanced/01_async/06_pin_unpin.md) · [Lifetime](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)

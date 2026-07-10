@@ -8,6 +8,7 @@
 > **层级**: L7 未来概念
 > **Bloom 层级**: 理解 → 应用
 > **Rust 版本**: 1.92.0+ (历史版本)
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **状态**: 从 `crates/*/docs/` 迁移整理
 >
 > **主要来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)

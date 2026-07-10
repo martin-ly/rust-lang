@@ -9,6 +9,7 @@
 > **层级**: L1 基础概念
 > **Bloom 层级**: 理解 → 应用
 > **Rust 版本**: 1.97.0+ (Edition 2024)
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **状态**: 从 `crates/c03_control_fn/docs/error_handling_control_flow_1_90.md` 迁移整理
 >
 > **主要来源**: [The Rust Reference — The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator) · [The Rust Programming Language — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust By Example — Error handling](https://doc.rust-lang.org/rust-by-example/error.html)

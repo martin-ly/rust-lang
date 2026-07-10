@@ -20,6 +20,7 @@
 > [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/reference/types.html)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
+> **权威来源**: 本文件为 `concept/` 权威页。
 
 ---
 

@@ -3,6 +3,7 @@
 > **受众**: [进阶]
 > **内容分级**: [参考级]
 > **Bloom 层级**: 记忆 → 理解
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: S×Mem — 设计模式术语索引
 > **前置依赖**: [Design Patterns](02_patterns.md) · [Pattern Implementation Comparison](36_pattern_implementation_comparison.md)

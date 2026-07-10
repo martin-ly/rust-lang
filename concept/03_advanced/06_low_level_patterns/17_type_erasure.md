@@ -6,6 +6,7 @@
 > **Summary**: Type Erasure: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 深入探讨 Rust 中的**类型擦除**技术——从 trait object 到 vtable，分析动态分发如何在保持类型安全的同时实现运行时（Runtime）多态。
 > **前置概念**:
 > [Trait](../../02_intermediate/00_traits/01_traits.md) ·

@@ -7,6 +7,7 @@
 > **Summary**: Practical Cargo guidance for Rust 1.97.0+: dependency versioning, feature design, test organization, CI pipelines, build performance, MSRV/resolver v3, public/private dependencies, and supply-chain auditing.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把 Cargo 官方指南中散落在多章的“怎么做”聚合为一份实践速查。

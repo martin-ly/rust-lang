@@ -8,6 +8,7 @@
 > **Summary**: Design Patterns: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 生态工程 — 系统设计模式
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Eva — 评价模式组合的正确性与一致性（Coherence）

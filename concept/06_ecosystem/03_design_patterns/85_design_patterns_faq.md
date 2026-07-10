@@ -3,6 +3,7 @@
 > **受众**: [进阶]
 > **内容分级**: [参考级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: A×Eva — 设计模式 FAQ 评估
 > **前置依赖**: [Design Patterns](02_patterns.md) · [Design Patterns Glossary](84_design_patterns_glossary.md)

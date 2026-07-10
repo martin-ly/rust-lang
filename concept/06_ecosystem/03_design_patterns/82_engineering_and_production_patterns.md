@@ -8,6 +8,7 @@
 > **Summary**: Rust production-grade patterns: circuit breaker, retry, rate limiting, graceful degradation, observability, safe configuration, and graceful shutdown.
 >
 > **受众**: [专家]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **前置概念**: [Architecture Patterns](35_architecture_patterns.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)

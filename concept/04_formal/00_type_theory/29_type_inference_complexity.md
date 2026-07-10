@@ -8,6 +8,7 @@
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/定义"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Coq](https://coq.inria.fr/)、[Verus](https://github.com/verus-lang/verus) 等形式化工具。
 >
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Type — 类型系统（Type System）复杂度与可判定性
 > **定位**: 解释 Rust 类型推断（Type Inference）为什么从 HM 的 $O(n^3)$ 跃迁到 PSPACE-完全，以及这一理论结论如何在 rustc 的约束求解器中得到工程化实现。

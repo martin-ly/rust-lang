@@ -5,6 +5,7 @@
 >
 > **受众**: [进阶] / [专家]
 > **内容分级**: [参考级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **对应 Rust 版本**: **1.97.0 stable**（项目 `rust-toolchain.toml` 保持 `stable` 通道，由 rustup 自动解析为当前 latest stable 1.97.0）
 > **最后更新**: 2026-07-10
 > **状态**: ✅ 已对齐 Rust 1.97.0 stable

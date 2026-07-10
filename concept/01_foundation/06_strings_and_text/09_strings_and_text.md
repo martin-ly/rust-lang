@@ -12,6 +12,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：[字符串与文本](../../../knowledge/02_intermediate/05_strings.md)
 > **受众**: [初学者]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用字符串处理和编码知识
 > **定位**:

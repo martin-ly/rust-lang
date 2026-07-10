@@ -6,6 +6,7 @@
 > **受众**: [研究者]
 > **内容分级**: [研究级]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ref — 规范参考
 > **前置依赖**: [Notation](../06_notation/44_notation.md) · [Lexical Structure](45_lexical_structure.md) · [Items Reference](46_items_reference.md)

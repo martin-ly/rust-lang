@@ -5,6 +5,7 @@
 > **EN**: Industrial Rust Adoption Case Studies
 > **Summary**: Industrial Case Studies: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **代码状态**: [示例级 — 已补充代码]
 > **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)

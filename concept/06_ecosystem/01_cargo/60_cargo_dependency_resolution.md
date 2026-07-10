@@ -8,6 +8,7 @@
 > **Summary**: Explains how Cargo resolves crate dependency versions, selects compatible SemVer ranges, unifies features, handles lockfiles, resolver versions, and `rust-version` requirements.
 > **受众**: [中级 → 高级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“`cargo build` 时到底选了哪个版本、为什么选这个版本、特性如何合并”讲清楚。

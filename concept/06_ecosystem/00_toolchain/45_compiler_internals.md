@@ -7,6 +7,7 @@
 > **EN**: Rust Compiler Internals and Driver Architecture
 > **Summary**: Compiler Internals: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **代码状态**: ✅ 含可编译示例
 > **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)

@@ -14,6 +14,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：[生命周期（Lifetimes）](03_lifetimes.md)
 >
 > **受众**: [初学者]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L1 基础概念
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×App — 在复杂场景下正确标注生命周期（Lifetimes）

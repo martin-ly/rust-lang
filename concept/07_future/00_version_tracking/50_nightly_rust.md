@@ -7,6 +7,7 @@
 >
 > **受众**: [初学者] / [中级]
 > **Bloom 层级**: 理解
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Process
 > **双维定位**: P×Eco — 语言发布流程与生态演进
 > **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Editions](../01_edition_roadmap/44_edition_guide.md)

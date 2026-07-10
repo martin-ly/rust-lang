@@ -6,6 +6,7 @@
 > **受众**: [研究者]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: 元（Meta）
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件是 `kg_ontology.md`（v1 已不再维护）的 v2 升级版，在保留原有教学关系本体的基础上，显式对齐 W3C RDF 1.2、RDF-star、SKOS、JSON-LD 1.1 与 SHACL 数据形状标准，使项目知识图谱从"规范文档"进化为"可验证、可查询、可多语言消费"的 Linked Data。
 > **对齐来源**: [W3C RDF 1.2 Concepts] · [W3C RDF-star] · [W3C SKOS Reference] · [W3C JSON-LD 1.1] · [W3C SHACL] · [ISO 704:2022] · [ISO/IEC 21838-1:2021]
 > **定理链**: N/A — 描述性/综述性/导航性文档

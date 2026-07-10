@@ -7,6 +7,7 @@
 > **Summary**: Explains the multi-layer testing infrastructure for rustc, including compiletest, package tests, tidy, tool tests, Crater, and performance testing.
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Inf — 编译器基础设施
 > **定位**: 把“rustc 如何保证每次修改不破坏生态”讲清楚，覆盖从单元测试到全生态系统回归的多层测试策略。

@@ -9,6 +9,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 创造
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Cre — 分析系统架构层级与依赖关系设计
 > **前置依赖**: [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [生命周期（Lifetimes）](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · 设计模式

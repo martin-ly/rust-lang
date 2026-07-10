@@ -12,6 +12,7 @@
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Specialization 预览特性
 > **定位**: 分析 Rust **特化（Specialization）**机制的设计动机——允许为特定类型提供比泛型（Generics）实现更精确的 Trait 实现，解决当前 Orphan Rule 和 Coherence 规则下的表达能力限制。

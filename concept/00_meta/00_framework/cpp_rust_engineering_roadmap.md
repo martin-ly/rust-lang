@@ -4,6 +4,7 @@
 > **Summary**: A unified roadmap and index for all C/C++ engineering-level comparison files, with topic clusters, migration paths, idiomatic code comparisons, and decision trees for C++ programmers moving to Rust.
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L2-L5 跨层导航
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana / C×Eva

@@ -6,6 +6,7 @@
 > **受众**: [研究者]
 > **内容分级**: [研究级]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
 > **前置依赖**: [Patterns](../../01_foundation/04_control_flow/40_patterns.md) · [Statements and Expressions Reference](48_statements_and_expressions_reference.md) · [Variables](../../03_advanced/06_low_level_patterns/33_variables.md)

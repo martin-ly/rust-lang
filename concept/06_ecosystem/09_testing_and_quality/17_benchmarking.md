@@ -4,6 +4,7 @@
 > **受众**: [进阶]
 > **内容分级**: [指南级]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **定位**: 覆盖 Rust 生态中使用 `criterion` 进行基准测试的完整流程，从简单基准、参数化基准到回归检测与 CI 集成。
 > **前置概念**: [Testing](16_testing.md) · [Performance Optimization](../10_performance/15_performance_optimization.md)

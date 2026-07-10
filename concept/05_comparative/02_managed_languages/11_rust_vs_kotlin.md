@@ -17,6 +17,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 对比分析 **Rust** 与 **Kotlin** 的设计哲学——从空安全、并发模型到平台支持，揭示静态类型语言如何在不同生态中实现安全与表达力的平衡。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Null Safety](../../02_intermediate/03_error_handling/04_error_handling.md)
 > **后置概念**: [JVM Ecosystem](../../06_ecosystem/02_core_crates/03_core_crates.md) · [Android Development](../../06_ecosystem/06_data_and_distributed/04_application_domains.md)

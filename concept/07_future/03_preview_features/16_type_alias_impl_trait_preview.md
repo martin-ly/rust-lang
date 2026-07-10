@@ -12,6 +12,7 @@
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 TAIT 的类型系统（Type System）影响
 > **前置依赖**: [Generics](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [Advanced Traits](../../02_intermediate/00_traits/19_advanced_traits.md)

@@ -8,6 +8,7 @@
 > **Summary**: A comprehensive guide to `build.rs`: when it runs, how to pass `cfg`/env vars to the main crate, how to link native libraries, and common pitfalls.
 > **受众**: [进阶 / 工程]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: T×Ops — 工具链与运维构建
 > **定位**: 把 `build.rs` 从“神秘的编译前脚本”还原为可预测、可调试、可重用的构建阶段工具。

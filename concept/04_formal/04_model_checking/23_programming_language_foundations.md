@@ -8,6 +8,7 @@
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **Bloom 层级**: 评价 → 创造
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 从通用程序语言（PL）理论视角审视 Rust 的设计根基，建立从 λ 演算到 Rust 类型系统（Type System）的概念桥梁。
 > **前置概念**: [Type Theory](../00_type_theory/02_type_theory.md) · [Linear Logic](../01_ownership_logic/01_linear_logic.md) · [Ownership Formal](../01_ownership_logic/03_ownership_formal.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 > **后置延伸**: [Effects System](../../07_future/03_preview_features/04_effects_system.md) · [Evolution](../../07_future/04_research_and_experimental/03_evolution.md)

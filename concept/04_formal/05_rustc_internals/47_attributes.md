@@ -6,6 +6,7 @@
 > **受众**: [研究者]
 > **内容分级**: [研究级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
 > **前置依赖**: [Items Reference](46_items_reference.md) · [Macros](../../03_advanced/03_proc_macros/04_macros.md)

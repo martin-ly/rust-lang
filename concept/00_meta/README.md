@@ -4,6 +4,7 @@
 > **Summary**: Overview and entry point for the concept documentation structure: navigation, metadata, audit, and governance layers that connect L0-L7 canonical concept pages.
 > **受众**: [初学者]
 > **内容分级**: [综述级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 

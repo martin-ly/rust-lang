@@ -6,6 +6,7 @@
 > **Summary**: Borrowing. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析借用（Borrowing）检查算法的精度演进
 > **定位**: 深入分析 Rust **借用（Borrowing）检查器**的两个里程碑——Non-Lexical Lifetimes (NLL) 如何放宽词法作用域限制，以及 Polonius 如何通过数据流分析实现更精确的借用检查，揭示 Rust 类型系统（Type System）的持续演进。

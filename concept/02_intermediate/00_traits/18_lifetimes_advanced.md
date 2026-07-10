@@ -8,6 +8,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析高级生命周期（Lifetimes）的约束传播
 > **定位**: 深入分析 Rust **生命周期**的高级主题——从高阶生命周期（HRTB）、生命周期省略（Lifetime Elision）规则到自引用（Reference）结构和 Pin，揭示生命周期系统如何处理最复杂的借用（Borrowing）场景。

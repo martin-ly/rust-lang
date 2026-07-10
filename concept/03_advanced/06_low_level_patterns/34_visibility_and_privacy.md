@@ -6,6 +6,7 @@
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
 > **前置依赖**: [Modules and Paths](../../01_foundation/07_modules_and_items/11_modules_and_paths.md) · [Names, Scopes and Resolution](../../04_formal/05_rustc_internals/40_names_and_resolution.md)

@@ -8,6 +8,7 @@
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 HM 类型推断（Type Inference）算法
 > **定位**: 深入分析 **Hindley-Milner (HM) 类型推断（Type Inference）算法**——从 λ 演算到 Rust 的工业实现，探讨 HM 的完备性、Rust 对 HM 的扩展（trait 约束、泛型（Generics）、生命周期（Lifetimes）），以及类型推断与代码可读性的平衡。

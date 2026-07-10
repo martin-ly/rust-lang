@@ -7,6 +7,7 @@
 > **Summary**: Rust 2024 Edition, stabilized in Rust 1.85.0, introduces language improvements including the reserved `gen` keyword, async closures, never type fallback, lifetime capture in `impl Trait`, and narrowed `if let` temporary scopes. This concept previews the major changes, explains how the edition mechanism lets crates opt into new syntax without breaking dependencies, and provides migration guidance using `cargo fix --edition` from the 2021 Edition.
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L3 高级概念
 > **A/S/P 标记**: A+S — Application + Structure
 > **双维定位**: C×App — 应用 Edition 机制

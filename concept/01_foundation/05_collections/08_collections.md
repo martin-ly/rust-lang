@@ -13,6 +13,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：[集合](../../../knowledge/02_intermediate/01_collections.md)
 > **受众**: [初学者]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 标准集合 API 的应用
 > **定位**: 系统分析 Rust **标准库集合类型**的设计——从 Vec/VecDeque 的顺序容器，到 HashMap/BTreeMap 的关联容器，再到 HashSet/BTreeSet 的集合类型，揭示每种数据结构的所有权（Ownership）语义、性能特征和选型策略。

@@ -10,6 +10,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价分布式共识算法的安全性、活性与工程实现权衡
 > **前置依赖**: 分布式系统 · [并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · 网络协议 · [类型系统（Type System）](../../01_foundation/02_type_system/04_type_system.md)

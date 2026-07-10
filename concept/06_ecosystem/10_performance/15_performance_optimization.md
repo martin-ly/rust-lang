@@ -12,6 +12,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：[性能优化](../../../knowledge/03_advanced/05_performance_optimization.md)
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估性能优化策略
 > **定位**:

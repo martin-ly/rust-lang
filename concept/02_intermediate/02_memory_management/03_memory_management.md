@@ -6,6 +6,7 @@
 > **EN**: Memory Management
 > **Summary**: Memory Management. Rust's compile-time memory safety through ownership, borrowing, and lifetimes. Covers stack vs heap, RAII, smart pointers, and zero-cost abstractions.
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价不同指针类型的适用场景

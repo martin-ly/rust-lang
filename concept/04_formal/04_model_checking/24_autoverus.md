@@ -8,6 +8,7 @@
 > **Summary**: Verus 是用 Rust 本身编写规格与证明的 SMT 验证器；AutoVerus 是基于 LLM 的自动化证明生成系统，已在 Verus-Bench 上达到 >90% 成功率。
 > **受众**: [进阶] 形式化方法、系统软件验证研究者
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Eva
 > **前置依赖**: [形式化验证](05_verification_toolchain.md) · [形式化验证工具生态](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md)

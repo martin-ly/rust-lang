@@ -7,6 +7,7 @@
 > **Summary**: Time and space complexity analysis using Big-O, Omega, Theta, recurrence relations, and amortized analysis, with Rust code examples.
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **S** — Structure
 > **前置概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Functions](../../01_foundation/07_modules_and_items/12_functions.md) · [Collections](../../01_foundation/05_collections/08_collections.md)

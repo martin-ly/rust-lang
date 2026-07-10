@@ -10,6 +10,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 CLI 开发模式
 > **定位**: 探讨 Rust 在命令行工具开发领域的生态——从 clap 的参数解析到 indicatif 的进度条，分析 Rust 如何成为现代 CLI 工具的首选语言。

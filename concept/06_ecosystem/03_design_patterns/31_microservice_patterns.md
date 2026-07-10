@@ -9,6 +9,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 创造
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计微服务架构
 > **定位**: 从系统架构视角梳理 Rust 在微服务场景中的核心模式——服务发现、熔断、Saga、CQRS、事件溯源——揭示 Rust 的类型安全与零成本抽象（Zero-Cost Abstraction）如何支撑高可靠分布式系统。

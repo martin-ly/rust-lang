@@ -21,6 +21,7 @@
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 > **前置概念**: N/A
 > **后置概念**: N/A
+> **权威来源**: 本文件为 `concept/` 权威页。
 ---
 
 ## 一、语言核心（Language Core）

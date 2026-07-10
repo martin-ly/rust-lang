@@ -4,6 +4,7 @@
 > **Summary**: A completion index tracking the closure of foundational knowledge gaps identified in SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md across Phase A, B, and C.
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L0 元信息
 > **A/S/P 标记**: S — Structure
 > **双维定位**: C×Eva

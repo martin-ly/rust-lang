@@ -13,6 +13,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：错误处理（Error Handling）基础
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Result/Option 错误传播模式
 > **定位**: 系统讲解 Rust 的错误处理（Error Handling）机制——从 `Result` 和 `Option` 到 `?` 运算符，分析 Rust 如何将错误处理融入类型系统（Type System），实现编译期安全。

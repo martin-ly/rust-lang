@@ -6,6 +6,7 @@
 > **Summary**: Idioms Spectrum: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `02_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。
 > **原则**: 每个惯用法必须展示「非惯用写法 → 惯用写法」的等价变换，并标注效率特征与认知负荷。
 > **对齐来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [Rust Style Guide] · [Clippy Lints] · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)

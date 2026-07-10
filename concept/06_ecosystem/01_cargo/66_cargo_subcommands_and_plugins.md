@@ -7,6 +7,7 @@
 > **Summary**: Explains how Cargo's custom subcommand system works, how tools integrate via `cargo metadata` and JSON messages, and surveys common plugins in the ecosystem.
 > **受众**: [中级 → 高级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“如何扩展 Cargo”讲清楚：从自定义子命令约定到常用插件选型，覆盖 Cargo 的工具集成接口。

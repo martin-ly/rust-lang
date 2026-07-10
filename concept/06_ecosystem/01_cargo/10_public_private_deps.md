@@ -4,6 +4,7 @@
 > **Summary**: Declaring dependency visibility with `public = true/false`, resolver v3's MSRV-aware fallback, and their impact on API stability and feature unification.
 > **来源**: [Cargo Book — Dependency Resolution](https://doc.rust-lang.org/cargo/reference/resolver.html) · [Cargo Book — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) · [rust-lang/cargo#6129](https://github.com/rust-lang/cargo/issues/6129)
 
+> > **权威来源**: 本文件为 `concept/` 权威页。
 ## 代码示例：声明公共与私有依赖
 
 ```toml

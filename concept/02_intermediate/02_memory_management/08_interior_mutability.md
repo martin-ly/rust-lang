@@ -7,6 +7,7 @@
 > **Summary**: Interior Mutability: intermediate Rust mechanisms, patterns, and practical examples.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析内部可变性的安全边界
 > **定位**: 深入分析 Rust **内部可变性**（Interior Mutability）模式

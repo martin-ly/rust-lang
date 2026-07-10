@@ -3,6 +3,7 @@
 > **受众**: [初学者]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: A×Mem — 网络编程基础
 > **前置依赖**: [Std IO and Process](../../01_foundation/00_start/47_std_io_and_process.md) · [Async](../../03_advanced/01_async/02_async.md)

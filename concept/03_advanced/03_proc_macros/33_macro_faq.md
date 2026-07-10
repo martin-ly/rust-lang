@@ -3,6 +3,7 @@
 > **受众**: [进阶]
 > **内容分级**: [参考级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: A×Eva — 评估宏（Macro）使用场景与限制
 > **前置依赖**: [过程宏（Procedural Macro）](07_proc_macro.md) · [宏术语表](32_macro_glossary.md)

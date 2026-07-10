@@ -25,6 +25,7 @@
 > [Cargo Book](https://doc.rust-lang.org/cargo/index.html) ·
 > [Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)
 > **受众**: [初学者]
+> **权威来源**: 本文件为 `concept/` 权威页。
 ---
 
 ## 层级说明

@@ -6,6 +6,7 @@
 > **Summary**: A deep comparison of exception safety guarantees in C++ (strong/basic/no-throw) and Rust's error-handling model (Result, panic, Drop).
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: C+A — Comparison + Application
 > **双维定位**: C×Ana

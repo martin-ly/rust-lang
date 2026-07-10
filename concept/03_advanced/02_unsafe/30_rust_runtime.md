@@ -6,6 +6,7 @@
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Systems
 > **双维定位**: S×Sys — 语言与运行时（Runtime）系统
 > **前置依赖**: [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Custom Allocators](../06_low_level_patterns/14_custom_allocators.md) · [Linkage](../04_ffi/27_linkage.md)

@@ -9,6 +9,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 创造
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Cre — 设计高可靠分布式系统的数据持久化模式
 > **前置依赖**: [Async](../../03_advanced/01_async/02_async.md) · 事件驱动架构 · [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md)

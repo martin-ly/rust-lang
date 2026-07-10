@@ -12,6 +12,7 @@
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: F×Eva — 评价跨 await 点的借用（Borrowing）安全性
 > **前置依赖**: [Async/Await](../../03_advanced/01_async/02_async.md) · [Interior Mutability](../../02_intermediate/02_memory_management/08_interior_mutability.md) · [Concurrency Patterns](../../03_advanced/00_concurrency/10_concurrency_patterns.md)

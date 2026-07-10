@@ -3,6 +3,7 @@
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: S×Eva — 评估宏（Macro）卫生性设计
 > **前置依赖**: [过程宏（Procedural Macro）](07_proc_macro.md) · [syn/quote 参考](34_syn_quote_reference.md)

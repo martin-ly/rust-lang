@@ -6,6 +6,7 @@
 > **Summary**: Low-level inline assembly in Rust using `asm!` and `global_asm!`, covering syntax, constraints, platform-specific features, and safety boundaries.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Process / Platform
 > **双维定位**: C×Ana — 分析跨平台内联汇编（Inline Assembly）的语义差异与安全边界
 > **定位**: 深入分析 Rust `asm!` 宏（Macro）的语法、约束系统、寄存器管理，以及 x86_64、aarch64、RISC-V、s390x 四大平台的差异，重点覆盖 Rust 1.96 为 s390x 引入的向量寄存器支持。

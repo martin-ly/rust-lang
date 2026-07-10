@@ -7,6 +7,7 @@
 > **Summary**: Introduces Rust's Mid-level IR (MIR), the MIR → codegen → LLVM IR pipeline, and how to inspect MIR and LLVM IR using rustc.
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Inf — 编译器中间表示与代码生成
 > **定位**: 把 rustc 后端入口讲清楚：MIR 是什么、它如何被逐步 lower 为 LLVM IR、以及开发者如何利用 `rustc` 命令直接观察这些中间产物。

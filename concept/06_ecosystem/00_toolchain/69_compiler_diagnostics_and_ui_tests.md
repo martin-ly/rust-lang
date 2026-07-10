@@ -7,6 +7,7 @@
 > **Summary**: Explains the structure of rustc diagnostics, how lints are defined and emitted, and how UI tests in compiletest verify compiler output.
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Inf — 编译器基础设施
 > **定位**: 把“rustc 的错误信息是怎么构造的、如何测试错误输出”讲清楚，为贡献 rustc 或编写自定义 lint 打下基础。

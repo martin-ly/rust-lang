@@ -16,6 +16,7 @@
 > **Summary**: Rust Version Tracking: emerging Rust language feature or ecosystem trend.
 > **受众**: [专家]
 > **内容分级**: [综述级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权（Ownership）模型、类型系统（Type System）、异步（Async）语义、Unsafe 边界**有结构性影响的特性。
 > **原则**: 琐碎语法糖点到为止，聚焦"形式化语义发生了什么变化"。
 > **更新频率**: 每 6 周对齐 stable release，每季度审计。

@@ -11,6 +11,7 @@
 >
 > 本主题在 knowledge 中有系统化的知识索引：[借用（Borrowing）](02_borrowing.md)
 > **受众**: [初学者]
+> **权威来源**: 本文件为 `concept/` 权威页。
 >
 > **层次定位**: L1 基础概念 / 借用（Borrowing）子域
 > **A/S/P 标记**: **S** — Structure（心智模型）

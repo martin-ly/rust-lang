@@ -11,6 +11,7 @@
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 > **前置概念**: N/A
 > **后置概念**: N/A
+> **权威来源**: 本文件为 `concept/` 权威页。
 ---
 
 ## 目录

@@ -15,6 +15,7 @@
 > **Summary**: Toolchain. Guide to 01 Toolchain.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 >
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **A+P** — Application + Procedure

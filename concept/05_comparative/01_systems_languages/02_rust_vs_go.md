@@ -7,6 +7,7 @@
 > **EN**: Rust vs Go
 > **Summary**: Comparative analysis of Rust and Go across memory safety, concurrency, runtime, and error handling.
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L5 对比分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价并发模型的设计差异

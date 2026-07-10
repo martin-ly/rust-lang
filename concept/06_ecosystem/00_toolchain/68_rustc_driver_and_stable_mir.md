@@ -7,6 +7,7 @@
 > **Summary**: Explains how to drive the Rust compiler programmatically via `rustc_driver` and `rustc_interface`, the `rustc_private` feature, and the goals of Stable MIR (`rustc_public`).
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Inf — 编译器基础设施与工具接口
 > **定位**: 把“如何把 rustc 当库用”讲清楚：driver 的回调机制、interface 的低级 API、以及面向外部工具的 Stable MIR（rustc_public）愿景。

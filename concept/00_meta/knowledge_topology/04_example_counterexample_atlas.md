@@ -4,6 +4,7 @@
 > **Summary**: A navigational index of correct examples, common misuses, boundary cases, and counterexamples organized by concept layer. 按概念组织的正确示例、错误示例、边界示例与反例分析。
 > **受众**: [研究者]
 > **内容分级**: [元层]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---

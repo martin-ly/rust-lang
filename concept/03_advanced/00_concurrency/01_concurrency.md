@@ -8,6 +8,7 @@
 >
 > 本主题在 knowledge 中有系统化的知识索引：[并发](../../../knowledge/03_advanced/concurrency)
 > **受众**: [专家]
+> **权威来源**: 本文件为 `concept/` 权威页。
 >
 > **层次定位**: L3 高级概念 / 并发子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure

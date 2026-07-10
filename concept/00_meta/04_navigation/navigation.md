@@ -8,6 +8,7 @@
 > **定位**: 本文件是 `concept/` 知识体系的**统一入口**，提供按层级、按主题、按背景的多维导航路径。
 > **适用对象**: 任何希望系统掌握 Rust 语义空间的读者。
 > **Bloom 层级**: 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)

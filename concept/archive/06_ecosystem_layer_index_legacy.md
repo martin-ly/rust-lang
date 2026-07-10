@@ -12,6 +12,7 @@
 > **受众**: [进阶]
 > **定位**: Rust 的工程实践、工具链、设计模式和生态协作机制。L1-L5 知识的**工程化落地**。
 > **Bloom 层级**: 应用 + 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **功能**: 将概念知识转化为**工程能力**
 > **规范文件**: [`06_ecosystem/README.md`](../06_ecosystem/README.md)
 > **[来源: The Rust Programming Language (TRPL)]** · **[来源: Cargo Book - doc.rust-lang.org/cargo]** · **[来源: crates.io]** · **[来源: Rust RFCs]**

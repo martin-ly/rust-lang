@@ -13,6 +13,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 Web 框架模式
 > **定位**: 对比分析 Rust 主流 Web 框架——Axum、Actix-web、Rocket、Poem——从架构设计、运行时（Runtime）集成、中间件机制到性能特征，建立系统化的选型决策框架。

@@ -4,6 +4,7 @@
 > **Summary**: Cargo Script single-file programs with frontmatter dependencies and `cargo` execution.
 > **来源**: [Cargo Book — Scripts](https://doc.rust-lang.org/cargo/reference/unstable.html#script) · [Rust 1.85 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
+> > **权威来源**: 本文件为 `concept/` 权威页。
 ## 代码示例：Cargo Script 单文件程序
 
 > **代码状态**: [示例级 — 已补充代码]

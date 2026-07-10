@@ -11,6 +11,7 @@
 > **说明**: 本文件内容与 [`concept/03_advanced/02_unsafe/03_unsafe.md`](03_unsafe.md) 高度重叠。为消除重复、统一权威来源，本文件已作为重定向页保留，全部内容请在 `concept/` 权威文件中查阅。
 > **前往权威文件**: [Unsafe Rust 安全编程 — concept/03_advanced/02_unsafe/03_unsafe.md](03_unsafe.md)
 
+> > **权威来源**: 本文件为 `concept/` 权威页。
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)

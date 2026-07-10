@@ -7,6 +7,7 @@
 > **Summary**: Collections Advanced: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 深入分析 Rust **标准库高级集合类型**的设计权衡——从 BTreeMap/BTreeSet 的有序关联容器，到 HashMap 自定义 hasher，再到 VecDeque 的双端队列与 BinaryHeap 的优先队列，揭示每种数据结构的所有权（Ownership）语义、性能特征、内存布局与选型策略。
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Collections](08_collections.md)
 > **后置概念**: [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [Performance](../../06_ecosystem/10_performance/15_performance_optimization.md)

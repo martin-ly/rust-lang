@@ -6,6 +6,7 @@
 > **受众**: [研究者]
 > **内容分级**: [研究级]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
 > **前置依赖**: [Crates and Source Files](../../01_foundation/07_modules_and_items/38_crates_and_source_files.md) · [Modules and Paths](../../01_foundation/07_modules_and_items/11_modules_and_paths.md) · [Visibility and Privacy](../../03_advanced/06_low_level_patterns/34_visibility_and_privacy.md)

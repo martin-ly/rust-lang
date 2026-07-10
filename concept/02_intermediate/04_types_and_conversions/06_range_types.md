@@ -9,6 +9,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 探讨 Rust 范围类型从**运行时（Runtime）迭代器（Iterator）**到**编译期可复制的值类型**的语义演进，以及 `IntoIterator` vs `Iterator` 的设计权衡。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Generics](../01_generics/02_generics.md)
 > **后置概念**: [Version Tracking](../../07_future/00_version_tracking/05_rust_version_tracking.md)

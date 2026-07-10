@@ -6,6 +6,7 @@
 > **归档说明**: 本文件已归档，内容已迁移至 [`05_formal_ecosystem_tower.md`](05_formal_ecosystem_tower.md)。
 > **受众**: [专家]
 > **Bloom 层级**: 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **状态**: 已归档（内容已迁移至主文件）
 > **归档声明**: 本文件内容已合并至 [`05_formal_ecosystem_tower.md`](05_formal_ecosystem_tower.md)。
 > 原文件保留用于历史追溯。请勿独立编辑本文件。

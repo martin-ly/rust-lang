@@ -8,6 +8,7 @@
 > **Summary**: Rust API naming conventions aligned with the Rust API Guidelines and std library style.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×App — 将社区约定应用于实际 API 设计
 > **定位**: 系统整理 Rust 标准库与生态中反复出现的命名模式，帮助学习者写出“看起来就像 Rust”的 API。

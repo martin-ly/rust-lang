@@ -6,6 +6,7 @@
 > **Summary**: A focused comparison of move semantics in C++ (move constructors, xvalues, moved-from state) and Rust (ownership transfer, Copy/Clone, compiler-enforced invalidation).
 >
 > **受众**: [初学者]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L1 基础概念
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana

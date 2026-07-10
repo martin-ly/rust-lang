@@ -12,6 +12,7 @@
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价 const trait 的设计权衡
 > **前置依赖**: [Trait](../../02_intermediate/00_traits/01_traits.md) · [Const Generics](../../02_intermediate/01_generics/02_generics.md) · [Const Items and Const Fn](../../01_foundation/07_modules_and_items/45_const_items_and_const_fn.md)

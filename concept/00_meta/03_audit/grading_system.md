@@ -8,6 +8,7 @@
 > **强制执行**: 自 2026-06-06 起，所有新增/修改文件必须携带双标签
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+> **权威来源**: 本文件为 `concept/` 权威页。
 ---
 
 ## 一、四级内容分级标签

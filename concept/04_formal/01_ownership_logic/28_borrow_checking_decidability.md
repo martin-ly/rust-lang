@@ -7,6 +7,7 @@
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的“定理/算法/规则”为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [RustBelt](https://plv.mpi-sws.org/rustbelt/)、[Polonius](https://github.com/rust-lang/polonius)、[RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)。
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F+P** — Formal + Procedure
 > **双维定位**: F×Algo — 形式化方法与算法可判定性
 > **前置依赖**: [L1 借用（Borrowing）](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · L3 NLL 与 Polonius · [L4 所有权（Ownership）形式化](03_ownership_formal.md)

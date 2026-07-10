@@ -6,6 +6,7 @@
 > **受众**: [研究者]
 > **内容分级**: [研究级]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
 > **前置依赖**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Special Types and Traits](41_special_types_and_traits.md) · [Memory Model](../../03_advanced/02_unsafe/29_memory_model.md)

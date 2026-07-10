@@ -6,6 +6,7 @@
 >
 > **EN**: Ai Integration Original
 > **受众**: [归档]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L7 前沿趋势
 > **A/S/P 标记**: **P** — Procedure（策略决策）
 > **双维定位**: P×Cre — 设计 AI × Rust 集成策略

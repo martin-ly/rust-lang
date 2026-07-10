@@ -4,6 +4,7 @@
 > **Summary**: A navigational index that maps typical Rust development scenarios to decision questions, candidate solutions, and authoritative concept pages across L1–L7. 典型开发场景 → 决策问题 → 候选方案 → Rust 概念/工具选择。
 > **受众**: [研究者]
 > **内容分级**: [元层]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---

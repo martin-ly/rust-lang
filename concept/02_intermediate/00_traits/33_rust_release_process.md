@@ -6,6 +6,7 @@
 > **受众**: [进阶]
 > **内容分级**: [参考级]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **L1 基础入口**: [版本与工具链基础](../../01_foundation/00_start/37_operators_and_symbols.md)

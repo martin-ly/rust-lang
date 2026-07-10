@@ -3,6 +3,7 @@
 > **受众**: [进阶]
 > **内容分级**: [参考级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: A×Ref — 版本特性参考
 > **前置依赖**: [Rust Version Tracking](05_rust_version_tracking.md) · [Networking Basics](../../06_ecosystem/09_networking/06_networking_basics.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)

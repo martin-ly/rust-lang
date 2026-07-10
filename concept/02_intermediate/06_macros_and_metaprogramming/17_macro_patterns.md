@@ -12,6 +12,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 深入分析 Rust **宏（Macro）的工程模式**——从 DRY 代码生成、API 设计到编译期计算，揭示如何在不牺牲可读性的前提下利用宏提升代码复用和类型安全。
 > **前置概念**: [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) · [Traits](../00_traits/01_traits.md)
 > **后置概念**: [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) · [DSL](13_dsl_and_embedding.md)

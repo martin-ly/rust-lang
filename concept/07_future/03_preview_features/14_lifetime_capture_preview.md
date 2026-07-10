@@ -12,6 +12,7 @@
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 impl Trait 的生命周期（Lifetimes）捕获规则
 > **前置依赖**: [Lifetime](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [Advanced Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md)

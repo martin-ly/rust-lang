@@ -7,6 +7,7 @@
 >
 > **受众**: [初学者] / [进阶]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Language semantics
 > **双维定位**: S×Lang — 语言名称解析机制
 > **前置依赖**: [Modules and Paths](11_modules_and_paths.md) · [Attributes and Macros](../09_macros_basics/12_attributes_and_macros.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)

@@ -8,6 +8,7 @@
 > **Summary**: Cutting-edge algorithm technologies in Rust: probabilistic data structures, streaming algorithms, approximation and meta-heuristics, privacy-preserving computation, and links to machine learning and quantum ecosystems.
 >
 > **受众**: [专家]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **前置概念**: [算法复杂度分析](78_algorithm_complexity_analysis.md) · [算法工程实践](76_algorithm_engineering_practice.md)

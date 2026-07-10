@@ -4,6 +4,7 @@
 > **Summary**: A navigational index of theorem chains, inference rules, proof/verification paths, and formal correspondences across the Rust concept hierarchy. 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。
 > **受众**: [研究者]
 > **内容分级**: [元层]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---

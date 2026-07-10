@@ -6,6 +6,7 @@
 > **Summary**: A cross-language comparison of value semantics and reference semantics, positioning Rust's ownership model as an extreme form of value semantics.
 >
 > **受众**: [初学者]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L1 基础概念
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana

@@ -11,6 +11,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评价密码学实现的安全性
 > **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [类型系统（Type System）](../../01_foundation/02_type_system/04_type_system.md) · 安全实践

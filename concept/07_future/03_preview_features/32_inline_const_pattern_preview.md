@@ -12,6 +12,7 @@
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 应用 const 块于模式匹配（Pattern Matching）
 > **前置依赖**: [Const Generics](../../02_intermediate/01_generics/02_generics.md) · [Pattern Matching](../../01_foundation/04_control_flow/07_control_flow.md) · [Patterns](../../01_foundation/04_control_flow/40_patterns.md) · [Const Items and Const Fn](../../01_foundation/07_modules_and_items/45_const_items_and_const_fn.md)

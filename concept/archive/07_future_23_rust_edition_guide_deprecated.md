@@ -7,6 +7,7 @@
 > **EN**: Future 23 Rust Edition Guide Deprecated
 > **受众**: [归档]
 > **Bloom 层级**: 分析 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 Rust Edition 指南
 > **定位**: 深入探讨 Rust 的 **Edition 机制**——从 2015 到 2024，分析 Edition 如何实现语言演进而不破坏兼容性，以及迁移策略。

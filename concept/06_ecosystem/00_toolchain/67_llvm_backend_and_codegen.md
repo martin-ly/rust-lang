@@ -7,6 +7,7 @@
 > **Summary**: Explains how rustc lowers MIR to LLVM IR, forms codegen units, uses target specifications, and performs LTO; also covers alternative backends like Cranelift and GCC.
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Inf — 编译器后端基础设施
 > **定位**: 把“MIR 之后发生了什么”讲清楚：从 LLVM IR 生成、代码优化到目标文件与链接，覆盖 rustc 代码生成层的核心机制。

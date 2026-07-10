@@ -5,6 +5,7 @@
 > **EN**: Parallel Distributed Pattern Spectrum
 > **Summary**: Parallel Distributed Pattern Spectrum: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L3 高级概念 — 并发/分布式系统设计
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Ana — 分析并行与分布式模式的演进谱系与统一框架

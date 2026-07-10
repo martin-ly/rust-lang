@@ -10,6 +10,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评价工作流模型的形式化正确性
 > **前置依赖**: [Async/Await](../../03_advanced/01_async/02_async.md) ·

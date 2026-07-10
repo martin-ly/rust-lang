@@ -8,6 +8,7 @@
 >
 > **前往权威文件**: [全局概念索引 — concept_index.md](concept_index.md)
 
+> > **权威来源**: 本文件为 `concept/` 权威页。
 ---
 
 > **相关文件**: [概念索引](concept_index.md) · [Bloom 分类法](../00_framework/03_bloom_taxonomy.md) · [学习指南](learning_guide.md) · [概念审计指南](../03_audit/08_concept_audit_guide.md) · [语义空间坐标系](../00_framework/semantic_space.md)

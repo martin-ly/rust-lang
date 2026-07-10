@@ -4,6 +4,7 @@
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: A×App — 应用异步（Async）进程管理
 > **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Async](../01_async/02_async.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)

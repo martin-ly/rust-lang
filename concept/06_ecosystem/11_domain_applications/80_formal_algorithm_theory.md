@@ -8,6 +8,7 @@
 > **Summary**: Mathematical foundations of algorithms in Rust: computability, complexity, loop invariants, Hoare logic, and practical formal verification with Kani.
 >
 > **受众**: [专家]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L4/L6 交叉
 > **A/S/P 标记**: **S** — Structure
 > **前置概念**: [算法复杂度分析](78_algorithm_complexity_analysis.md) · [形式化方法](../../04_formal/04_model_checking/13_formal_methods.md) · [Hoare 逻辑](../../04_formal/03_operational_semantics/15_hoare_logic.md)

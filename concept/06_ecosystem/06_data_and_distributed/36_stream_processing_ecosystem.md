@@ -9,6 +9,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: C×Syn — 综合流处理生态的工程实践与选型决策
 > **定位**: 系统梳理 Rust 流处理生态（timely/differential dataflow、tokio-stream、fluvio）与工业级系统（Flink、Materialize、RisingWave）的架构、语义差异与选型策略。

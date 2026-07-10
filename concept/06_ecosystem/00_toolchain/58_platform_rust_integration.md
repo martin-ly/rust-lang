@@ -16,6 +16,7 @@
 > **Summary**: Integrating Rust into large platforms: Android, Chromium, Linux, and bare-metal firmware.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 在不同平台约束下的工程实践
 > **定位**: 系统对比 Android AOSP、Chromium、Bare Metal 三个典型场景中 Rust 的集成方式、构建系统、互操作模式与常见陷阱。

@@ -7,6 +7,7 @@
 >
 > **受众**: [专家]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Systems
 > **双维定位**: S×Sys — 语言与二进制接口
 > **前置依赖**: [Linkage](../../03_advanced/04_ffi/27_linkage.md) · [FFI Advanced](../../03_advanced/04_ffi/09_ffi_advanced.md) · [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md)

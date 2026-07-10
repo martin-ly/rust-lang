@@ -7,6 +7,7 @@
 > **Summary**: Rust vs Java: comparative analysis with Rust across type systems, memory safety, and concurrency.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 从**内存模型**、**并发语义**、**类型系统（Type System）**和**运行时（Runtime）架构**四个维度，系统对比 Rust 与 Java 的设计哲学差异，分析两种范式在系统编程、云原生和嵌入式场景的适用边界。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md)

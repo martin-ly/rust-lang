@@ -10,6 +10,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: C×Ana — 分析异步（Async）数据流的声明式组合模式
 > **前置依赖**: [Async/Await](../../03_advanced/01_async/02_async.md) ·

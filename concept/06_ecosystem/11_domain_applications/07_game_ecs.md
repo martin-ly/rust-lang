@@ -6,6 +6,7 @@
 > **Summary**: Game Development: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S+P** — 全维度
 > **双维定位**: P×Cre — 设计 ECS 游戏架构

@@ -7,6 +7,7 @@
 > **Summary**: Securing network applications in Rust: TLS configuration, certificate management, authentication, rate limiting, input validation, and common attack mitigations.
 >
 > **受众**: [专家]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **前置概念**: [Async/Await](../../03_advanced/01_async/02_async.md) · [Rust 网络编程](../../03_advanced/06_low_level_patterns/18_network_programming.md) · [Security & Cryptography](../07_security_and_cryptography/43_security_cryptography.md)

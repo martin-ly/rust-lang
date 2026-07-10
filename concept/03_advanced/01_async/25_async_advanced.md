@@ -5,6 +5,7 @@
 > **EN**: Async Advanced
 > **Summary**: Async Advanced: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层次定位**: L3 高级概念 / 异步（Async）子域 — 高级主题
 > **前置依赖**: [Async/Await 基础](02_async.md)
 > **定理链编号**: T-053 Waker 活性 ⟹ T-054 Stream 安全性

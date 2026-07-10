@@ -8,6 +8,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 评价 → 创造
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 对比 Rust 和 Elixir（Erlang VM）在并发模型、错误处理（Error Handling）、类型系统（Type System）和运行时（Runtime）的异同。
 > **前置概念**: [Rust vs Go](../01_systems_languages/02_rust_vs_go.md) · [Rust vs Haskell](../00_paradigms/03_paradigm_matrix.md) · [Async](../../03_advanced/01_async/02_async.md)
 > **后置概念**: [Ecosystem](../../README.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)

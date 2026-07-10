@@ -10,6 +10,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：闭包（Closures）
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用闭包（Closures）和捕获模式
 > **定位**: 系统讲解 Rust **闭包（Closure）**——从环境捕获、Fn/FnMut/FnOnce trait 到闭包作为参数和返回值，揭示 Rust 如何将函数式编程的灵活性与所有权（Ownership）系统的安全性结合。

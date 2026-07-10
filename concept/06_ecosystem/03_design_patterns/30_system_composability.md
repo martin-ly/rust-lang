@@ -9,6 +9,7 @@
 > **来源**: [tokio](https://docs.rs/tokio/) · [tower](https://docs.rs/tower/) · [rayon](https://docs.rs/rayon/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估系统可组合性

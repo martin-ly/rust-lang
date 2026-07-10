@@ -6,6 +6,7 @@
 > **Summary**: Comparison of C++ `friend` access control and Rust module visibility system.
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana

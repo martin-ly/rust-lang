@@ -10,6 +10,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 创造
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Cre — 设计类型安全的 REST/GraphQL/gRPC API
 > **前置依赖**: [Async/Await](../../03_advanced/01_async/02_async.md) ·

@@ -7,6 +7,7 @@
 > **Summary**: Explains how rustc checks types via the `typeck` query, generates constraints, and resolves inference variables using equality, subtyping, and region constraints.
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Type — 类型系统（Type System）与形式化方法
 > **定位**: 把“编译器如何知道 `Vec<&str>` 并对未标注类型做推断”还原为约束生成、统一与区域求解的完整算法。

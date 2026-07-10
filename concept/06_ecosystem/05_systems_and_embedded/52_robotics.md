@@ -9,6 +9,7 @@
 > **Summary**: Robotics: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 在机器人全栈中的适用性、实时约束满足度与 ROS2 集成成熟度
 > **前置依赖**: [嵌入式系统](22_embedded_systems.md) ·

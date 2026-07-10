@@ -7,6 +7,7 @@
 > **Summary**: Explains how rustc builds itself in stages using `x.py`/`x`, the role of stage0/stage1/stage2, `cfg(bootstrap)`, and the bootstrap tool modes.
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Inf — 编译器基础设施
 > **定位**: 把“Rust 编译器如何用 Rust 写、又用 Rust 编译自己”这一自举过程讲清楚，帮助理解 rustc 开发工作流。

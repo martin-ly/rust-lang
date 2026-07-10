@@ -11,6 +11,7 @@
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Trait](../../../knowledge/02_intermediate/06_traits.md)
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层次定位**: L2 进阶概念 / Trait 子域
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析 Orphan Rule 的设计意图

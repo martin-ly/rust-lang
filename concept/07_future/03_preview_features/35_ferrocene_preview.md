@@ -14,6 +14,7 @@
 > **内容分级**: [实验级]
 >
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估 Ferrocene 安全认证
 > **定位**: 探讨 **Ferrocene** —— Rust 的**安全关键认证工具链**，分析其对汽车（ISO 26262 [来源: [ISO 26262](https://www.iso.org/standard/68383.html)]）、航空（DO-178C）和工业控制等安全关键领域的影响，以及 Rust 语言在形式化验证与工业认证之间的桥梁作用。

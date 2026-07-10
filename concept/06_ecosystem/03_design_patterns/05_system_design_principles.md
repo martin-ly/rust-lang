@@ -6,6 +6,7 @@
 > **Summary**: System Design Principles: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件从**系统架构设计**视角梳理 Rust 的核心设计原则，并与国际权威内容（形式化方法、分布式系统理论、安全工程、容错计算）建立对齐关系。
 > **原则**: 不做"系统设计教程"，聚焦"Rust 的类型系统（Type System）和所有权（Ownership）模型如何为系统设计提供形式化基础，以及这些基础与国际权威理论的对应关系"。
 > **对齐来源**: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [SE L4] · [NIST Zero Trust] · [AWS TLA+] · [Erlang OTP] · [CAP Theorem] · [CALM Theorem]

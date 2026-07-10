@@ -4,6 +4,7 @@
 > **Summary**: 全部核心概念的中英名称、层级、一句话定义、权威来源、同义/近义/反义关系。 English names, layers, one-sentence definitions, authoritative sources, and synonym/near-opposite relationships of all core concepts.
 > **受众**: [研究者]
 > **内容分级**: [元层]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---

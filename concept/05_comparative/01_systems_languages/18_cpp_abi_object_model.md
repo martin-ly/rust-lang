@@ -8,6 +8,7 @@
 > **EN**: C++ Abi Object Model
 > **Summary**: C++ Abi Object Model: comparative analysis with Rust across type systems, memory safety, and concurrency.
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L5 对比分析 — 系统编程工程实践
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: P×Ana — 分析 C/C++ 与 Rust 在二进制层面的工程差异

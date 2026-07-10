@@ -16,6 +16,7 @@
 > **Summary**: Application Domains. Core Rust concept covering mental model building.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **A+S+P** — 全维度
 > **双维定位**: P×Eva — 评估 Rust 在特定领域的适用性

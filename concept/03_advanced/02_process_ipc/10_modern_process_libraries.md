@@ -4,6 +4,7 @@
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: A×Eva — 评价现代进程管理库选型
 > **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Async Process Management](03_async_process_management.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)

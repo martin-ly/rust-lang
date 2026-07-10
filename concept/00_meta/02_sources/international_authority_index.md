@@ -6,6 +6,7 @@
 > **Summary**: A curated, categorized index of authoritative international sources for Rust: official docs, academic formalization, industrial ecosystems, standards bodies, and cross-language references.
 > **受众**: [研究者 / 进阶]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 为每个 Rust 概念提供可验证的国际权威来源映射
 > **定位**: 集中维护 Rust 知识体系所需的国际权威来源 URL，便于 concept/、knowledge/、docs/ 各层统一引用，避免重复搜索与链接失效。

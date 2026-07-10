@@ -4,6 +4,7 @@
 > **Summary**: Bloom's taxonomy adapted for Rust cognitive skill assessment, mapping remembering to creation across knowledge dimensions.
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 

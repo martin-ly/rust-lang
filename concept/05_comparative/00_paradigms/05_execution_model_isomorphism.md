@@ -16,6 +16,7 @@
 > **EN**: Concurrency
 > **Summary**: Concurrency. Core Rust concept covering mental model building.
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件从**数学模型同构性**视角系统梳理 Rust 的执行模型（同步/异步（Async）/并发/并行），并与 Go、理论模型（CSP/Actor/π 演算/进程代数）建立精确的对应关系。
 > **原则**: 不做"并发编程教程"，聚焦"Rust 的执行模型在数学上与什么同构、与什么不同构、同构的精确条件是什么"。
 > **对齐来源**: [The Rust Async Book](https://rust-lang.github.io/async-book/index.html) · [Tokio Tutorial] · [Go Memory Model] · [Hoare CSP 1978] · [Milner π-Calculus 1992] · [Hewitt Actor 1973] · [Boehm & Adve PLDI 2008]

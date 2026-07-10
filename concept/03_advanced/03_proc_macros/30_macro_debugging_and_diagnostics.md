@@ -17,6 +17,7 @@
 > **主要来源**: [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html) · [cargo-expand](https://github.com/dtolnay/cargo-expand) · [rustc-dev-guide — Macro Expansion](https://rustc-dev-guide.rust-lang.org/macro-expansion.html) · [proc-macro2 crate](https://docs.rs/proc-macro2/)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
+> **权威来源**: 本文件为 `concept/` 权威页。
 
 ---
 

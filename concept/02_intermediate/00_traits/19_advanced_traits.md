@@ -8,6 +8,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 GATs 和 HRTB 的类型系统（Type System）扩展
 > **定位**: 深入分析 Rust **Trait 系统的高级特性**——从关联类型、泛型（Generics）关联类型（GATs）到特化（Specialization）和负实现，揭示 Trait 系统如何支持复杂抽象和零成本多态。

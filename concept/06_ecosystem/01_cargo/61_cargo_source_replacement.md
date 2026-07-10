@@ -7,6 +7,7 @@
 > **Summary**: Explains how to redirect Cargo's dependency sources to mirrors, local registries, or vendored directories; covers `[source]` configuration, `cargo vendor`, and offline mode.
 > **受众**: [中级 → 高级]
 > **Bloom 层级**: 理解 → 应用
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“怎么让 Cargo 从镜像/本地目录/离线缓存下载依赖”系统化，区分 source replacement、`[patch]` 与私有 registry 的适用边界。

@@ -7,6 +7,7 @@
 > **受众**: [研究者]
 > **内容分级**: [研究级]
 > **Bloom 层级**: 分析 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: A×Res — 前沿研究与创新模式
 > **前置依赖**: [Design Patterns](02_patterns.md) · [Formal Design Pattern Theory](38_formal_design_pattern_theory.md)

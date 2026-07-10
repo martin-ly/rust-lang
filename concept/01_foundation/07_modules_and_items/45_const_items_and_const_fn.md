@@ -21,6 +21,7 @@
 > [Rust By Example — Constants](https://doc.rust-lang.org/rust-by-example/custom_types/constants.html)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
+> **权威来源**: 本文件为 `concept/` 权威页。
 
 ---
 

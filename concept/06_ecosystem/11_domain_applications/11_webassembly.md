@@ -7,6 +7,7 @@
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Eva — 评估 WASM 与 Rust 的集成策略
 > **定位**:

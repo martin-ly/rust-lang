@@ -8,6 +8,7 @@
 > **Summary**: Algorithms Competitive Programming: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用算法和竞赛编程模式

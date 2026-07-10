@@ -7,6 +7,7 @@
 > **EN**: Ecosystem 26 Game Development Deprecated
 > **受众**: [归档]
 > **Bloom 层级**: 应用 → 评价
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计游戏开发架构
 > **定位**: 探讨 Rust 在游戏开发领域的应用——从 ECS 架构到渲染引擎，分析 Rust 的性能优势和开发模式。

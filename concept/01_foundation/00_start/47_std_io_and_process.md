@@ -22,6 +22,7 @@
 > [Rust By Example — Filesystem](https://doc.rust-lang.org/rust-by-example/std_misc/file.html)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
+> **权威来源**: 本文件为 `concept/` 权威页。
 
 ---
 

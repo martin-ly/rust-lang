@@ -10,6 +10,7 @@
 > **前置概念**: N/A
 > **后置概念**: N/A
 
+> > **权威来源**: 本文件为 `concept/` 权威页。
 - [Rust 概念知识体系 —— 全面分析论证与权威对齐](README.md)
 - [L0 元信息](00_meta/README.md)
   - [Bloom Taxonomy（Bloom 分类法）](00_meta/00_framework/03_bloom_taxonomy.md)

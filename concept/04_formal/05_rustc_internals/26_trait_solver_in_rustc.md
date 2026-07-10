@@ -7,6 +7,7 @@
 > **Summary**: Explains how rustc resolves trait obligations through selection, fulfillment, and evaluation; covers the current solver, the next-generation solver, and coinduction.
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: 理解 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Type — 类型系统（Type System）与形式化方法
 > **定位**: 把“这个类型是否实现了某 trait”这一核心问题，还原为候选装配、筛选、确认与约束求解的完整算法。

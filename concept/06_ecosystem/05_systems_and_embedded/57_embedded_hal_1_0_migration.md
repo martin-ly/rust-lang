@@ -6,6 +6,7 @@
 >
 > **受众**: [进阶 / 工程]
 > **Bloom 层级**: 应用 → 分析
+> **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **前置概念**: [Rust 嵌入式系统开发](22_embedded_systems.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [交叉编译](17_cross_compilation.md)
