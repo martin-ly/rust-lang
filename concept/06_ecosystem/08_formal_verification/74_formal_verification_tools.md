@@ -13,7 +13,7 @@
 > **前置依赖**: [类型系统（Type System）](../../01_foundation/02_type_system/04_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · 形式化验证 · [生命周期（Lifetimes）](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 > **后置延伸**: [编译器内部原理](../00_toolchain/45_compiler_internals.md) · [安全与密码学](../07_security_and_cryptography/43_security_cryptography.md) · [嵌入式系统](../05_systems_and_embedded/22_embedded_systems.md)
 >
-> **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://github.com/verus-lang/verus/guide/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://verus-lang.github.io/verus/guide/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 ---
 
@@ -431,7 +431,7 @@ Rust 源码 → Creusot 前端 → WhyML → Why3 → SMT 求解器 (Alt-Ergo/Z3
 
 ### 4.3 Verus：SMT-LIB 验证器
 
-> **[Verus](https://github.com/verus-lang/verus)** 是 Microsoft Research 开发的 Rust 验证器，专注于**系统软件验证**。核心设计：将 Rust 代码和规格翻译为 **SMT-LIB**，由 Z3 求解器验证。特色支持：**可执行规格**（Executable Specifications）和**幽灵类型**（Ghost Types）。[来源: [Verus Documentation](https://github.com/verus-lang/verus/guide/)]
+> **[Verus](https://github.com/verus-lang/verus)** 是 Microsoft Research 开发的 Rust 验证器，专注于**系统软件验证**。核心设计：将 Rust 代码和规格翻译为 **SMT-LIB**，由 Z3 求解器验证。特色支持：**可执行规格**（Executable Specifications）和**幽灵类型**（Ghost Types）。[来源: [Verus Documentation](https://verus-lang.github.io/verus/guide/)]
 
 ```rust
 // Verus 验证示例
@@ -480,7 +480,7 @@ fn binary_search(v: &Vec<u64>, k: u64) -> (r: usize)
 | **所有权（Ownership）追踪** | 利用 Rust 的所有权系统简化验证条件生成 |
 | **线性类型** | 支持线性 ghost 状态，追踪资源使用 |
 
-> **来源**: [Verus Paper — OSDI 2023](https://www.microsoft.com/en-us/research/publication/verus-verifying-rust-programs-using-linear-ghost-types/) · [Verus Guide](https://github.com/verus-lang/verus/guide/guide/) · [Z3 SMT Solver](https://github.com/Z3Prover/z3)
+> **来源**: [Verus Paper — OSDI 2023](https://www.microsoft.com/en-us/research/publication/verus-verifying-rust-programs-using-linear-ghost-types/) · [Verus Guide](https://verus-lang.github.io/verus/guide/) · [Z3 SMT Solver](https://github.com/Z3Prover/z3)
 
 ---
 
@@ -575,7 +575,7 @@ Rust MIR
 | **Unsafe 代码** | ✅ 支持 | ✅ 支持 | ❌ 不支持 | ❌ 不支持 | ⚠️ 有限 | ❌ 不支持 |
 | **CI 集成** | ✅ cargo kani | ✅ cargo miri | ⚠️ 复杂 | ⚠️ 复杂 | ✅ cargo verus | ⚠️ 实验性 |
 
-> **来源**: [Kani vs MIRI](https://model-checking.github.io/kani/usage.html) · [Verus vs Prusti](https://github.com/verus-lang/verus/guide/guide/compare.html)
+> **来源**: [Kani vs MIRI](https://model-checking.github.io/kani/usage.html) · [Verus vs Prusti](https://verus-lang.github.io/verus/guide/)
 
 ### 6.2 选型决策树
 

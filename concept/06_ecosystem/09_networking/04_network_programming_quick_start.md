@@ -1,5 +1,6 @@
 > **EN**: Rust Network Programming Quick Start
 > **Summary**: A learning-oriented quick-start guide for Rust network programming, from TCP/UDP basics to HTTP/WebSocket, with staged paths, code examples, Cargo.toml templates, and links to canonical concept pages.
+> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) · [Tokio 文档](https://tokio.rs/)
 > **受众**: [进阶]
 > **内容分级**: [指南级]
 > **Bloom 层级**: 理解 → 应用

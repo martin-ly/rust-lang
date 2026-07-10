@@ -26,7 +26,7 @@
 
 ## 快速索引
 
-**按字母顺序**: [A](#actor-模式) · [B](#builder-模式) · [C](#command-模式) · [D](#dependency-injection) · [F](#factory-模式) · [G](#gof-gang-of-four) · [N](#newtype-模式) · [O](#observer-模式) · [R](#reactor-模式) · [S](#singleton-模式) · [T](#trait-对象) · [V](#visitor-模式)
+**按字母顺序**: [A](#actor-模式) · [B](#零成本抽象-zero-cost-abstraction) · [C](#c09-设计模式---术语表) · [D](#设计模式-design-pattern) · [F](#gof-gang-of-four) · [G](#gof-gang-of-four) · [N](#设计模式-design-pattern) · [O](#gof-gang-of-four) · [R](#reactor-模式) · [S](#设计模式-design-pattern) · [T](#trait-对象) · V
 
 **按类别跳转**:
 

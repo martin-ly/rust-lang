@@ -1896,47 +1896,47 @@ Typestate 最适合：
   - [2. 结构型模式](#2-结构型模式)
     - [Adapter 模式](#adapter-模式)
     - [Decorator 模式](#decorator-模式)
-  - [3. 行为型模式](#3-行为型模式)
-    - [Strategy 模式](#strategy-模式)
-    - [Visitor 模式](#visitor-模式)
-    - [Iterator 模式](#iterator-模式)
-  - [4. Rust 特有模式](#4-rust-特有模式)
-    - [RAII (Resource Acquisition Is Initialization)](#raii-resource-acquisition-is-initialization)
-    - [Typestate 模式](#typestate-模式)
-    - [Extension Trait 模式](#extension-trait-模式)
-  - [5. 并发模式](#5-并发模式)
-    - [Actor 模式](#actor-模式)
-  - [6. 最佳实践](#6-最佳实践)
-    - [组合优于继承](#组合优于继承)
-    - [使用 Trait 对象实现多态](#使用-trait-对象实现多态)
-  - [6. 错误处理（Error Handling）模式](#6-错误处理模式)
-    - [Result（Result）组合模式](#result组合模式)
-    - [自定义错误类型](#自定义错误类型)
-    - [Try trait（Trait）模式](#try-trait模式)
-  - [7. 内存管理模式](#7-内存管理模式)
-    - [Arena分配模式](#arena分配模式)
-    - [对象池模式](#对象池模式)
-  - [8. Trait对象模式](#8-trait对象模式)
-    - [动态分发](#动态分发)
-    - [枚举（Enum）分发（更高效）](#枚举分发更高效)
-  - [9. 类型安全API设计](#9-类型安全api设计)
-    - [幻影类型参数](#幻影类型参数)
-    - [Session Types](#session-types)
-  - [10. 函数式模式](#10-函数式模式)
-    - [Monad-like模式](#monad-like模式)
-    - [Lens模式（聚焦数据）](#lens模式聚焦数据)
-    - [10.1 高级函数式模式：Applicative与Monad深化](#101-高级函数式模式applicative与monad深化)
-    - [10.2 Free Monad模式](#102-free-monad模式)
-    - [10.3 Zipper模式（高效导航）](#103-zipper模式高效导航)
-    - [10.4 Optics模式（Prism与Iso）](#104-optics模式prism与iso)
-    - [10.5 Reader Monad模式（依赖注入）](#105-reader-monad模式依赖注入)
-    - [10.6 Writer Monad模式（日志累积）](#106-writer-monad模式日志累积)
-    - [10.7 State Monad模式（状态转换）](#107-state-monad模式状态转换)
-    - [10.8 并发模式深化](#108-并发模式深化)
-    - [10.9 性能优化模式集](#109-性能优化模式集)
-  - [11. 总结](#11-总结)
-  - [8. 参考资源](#8-参考资源)
-  - [**🎉 完成设计模式集学习！** 🦀](#-完成设计模式集学习-)
+  - 3. 行为型模式
+    - [Strategy 模式](#43-strategy-模式)
+    - [Visitor 模式](#42-visitor-模式)
+    - [Iterator 模式](#decorator-模式)
+  - [Rust 特有模式](#rust-特有模式)
+    - RAII (Resource Acquisition Is Initialization)
+    - [Typestate 模式](#测验-2typestate-模式应用层)
+    - Extension Trait 模式
+  - 5. 并发模式
+    - [Factory 模式](#factory-模式)
+  - 6. 最佳实践
+    - 组合优于继承
+    - 使用 Trait 对象实现多态
+  - 6. 错误处理（Error Handling）模式
+    - Result（Result）组合模式
+    - 自定义错误类型
+    - Try trait（Trait）模式
+  - 7. 内存管理模式
+    - Arena分配模式
+    - 对象池模式
+  - 8. Trait对象模式
+    - 动态分发
+    - 枚举（Enum）分发（更高效）
+  - 9. 类型安全API设计
+    - 幻影类型参数
+    - Session Types
+  - 10. 函数式模式
+    - Monad-like模式
+    - Lens模式（聚焦数据）
+    - 10.1 高级函数式模式：Applicative与Monad深化
+    - 10.2 Free Monad模式
+    - 10.3 Zipper模式（高效导航）
+    - 10.4 Optics模式（Prism与Iso）
+    - 10.5 Reader Monad模式（依赖注入）
+    - 10.6 Writer Monad模式（日志累积）
+    - 10.7 State Monad模式（状态转换）
+    - 10.8 并发模式深化
+    - 10.9 性能优化模式集
+  - 11. 总结
+  - 8. 参考资源
+  - **🎉 完成设计模式集学习！** 🦀
 
 ---
 

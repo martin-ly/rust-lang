@@ -145,7 +145,7 @@ WASI 演进:
   Preview 3 (未来): 异步 I/O + 图形 GUI + 设备访问标准化
 ```
 
-> **来源**: [WASI Preview 2 Docs](https://wasi.dev) · [WASI Evolution](https://github.com/WebAssembly/WASI/blob/main/docs/wasi-tutorial.md)
+> **来源**: [WASI Preview 2 Docs](https://wasi.dev) · [WASI Evolution](https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-tutorial.md)
 
 ---
 

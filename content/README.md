@@ -4,6 +4,7 @@
 > **Summary**: Content 目录 hosting active thematic deep-dive suites that are not generic Rust concepts; canonical Rust concept explanations remain in `concept/`.
 >
 > **状态**: 2026-07-10 迁移后，`content/` 重新 hosting 以下活跃专题深度套房：
+>
 > - [`content/safety_critical/`](safety_critical/) — Rust 安全关键生态系统与合规实践
 > - [`content/ecosystem/deep_dives/`](ecosystem/deep_dives/) — Rust 生态核心框架深度解析
 >

@@ -2,6 +2,7 @@
 
 > **EN**: Topic-Authority Alignment Map
 > **Summary**: 维护 Rust 知识库中各概念主题与其权威来源（官方文档、学术论文、工业生态、路线图）之间的对齐关系，确保每个概念有单一可信解释来源。
+> **权威来源**: [international_authority_index.md](international_authority_index.md) · [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > 生成时间：2026-07-05 05:12
 > 工具：`scripts/topic_authority_aligner.py` | 数据来源：Rust 官方文档、形式化/验证生态、工业生态、项目路线图

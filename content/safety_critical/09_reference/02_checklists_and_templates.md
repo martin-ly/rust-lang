@@ -9,7 +9,7 @@
 >
 > 本文内容迁移自历史归档，已按 `AGENTS.md` 规则保留为安全关键领域专题实践。
 
-### 模块安全等级检查清单
+## 模块安全等级检查清单
 
 > **[来源: IEEE - Programming Language Standards]**
 

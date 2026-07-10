@@ -1,9 +1,9 @@
-> **内容分级**: [综述级]
->
 # Embedded-HAL 1.0 迁移与 Embassy 生产状态
 
 > **EN**: Embedded-HAL 1.0 Migration and Embassy Production Status
 > **Summary**: A guide to migrating from `embedded-hal` 0.2 to 1.0: unified `ErrorType`, `SpiDevice` vs `SpiBus`, `embedded-hal-async`, and the production-ready status of Embassy v0.5.
+> **权威来源**: [embedded-hal 1.0.0](https://github.com/rust-embedded/embedded-hal/releases/tag/embedded-hal-v1.0.0) · [Embassy 文档](https://embassy.dev/) · [Rust Embedded Working Group](https://github.com/rust-embedded/wg)
+>
 > **受众**: [进阶 / 工程]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure
@@ -213,7 +213,7 @@ impl SpiDevice<u8> for MySpi {
 |:---|:---|
 | [embedded-hal 1.0.0 Docs](https://docs.rs/embedded-hal/1.0.0) | 官方 API 文档 |
 | [Embassy Book](https://embassy.dev/book/) | Embassy 官方文档 |
-| [embedded-hal Migration Guide](https://github.com/rust-embedded/embedded-hal/blob/master/docs/migrating-0.2-to-1.0.md) | 官方迁移指南 |
+| [embedded-hal Migration Guide](https://github.com/rust-embedded/embedded-hal/blob/master/docs/migrating-from-0.2-to-1.0.md) | 官方迁移指南 |
 | [Rust Embedded WG](https://github.com/rust-embedded/wg) | 嵌入式工作组 |
 
 > **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)

@@ -1430,12 +1430,14 @@
       "layer": "L0",
       "title": "主题-权威来源对齐图谱 (Topic-Authority Alignment Map)",
       "positioning": "",
-      "line_count": 352,
+      "line_count": 353,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
-      "cross_references": [],
+      "cross_references": [
+        "international_authority_index.md"
+      ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
@@ -17517,7 +17519,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：Box ⟹ 堆分配 + 唯一所有权](#41-引理box--堆分配--唯一所有权)",
+          "text": "- [4.1 引理：Box<T> ⟹ 堆分配 + 唯一所有权](#41-引理boxt--堆分配--唯一所有权)",
           "type": "paragraph"
         },
         {
@@ -42941,7 +42943,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\01_cargo\\87_build_std.md",
       "layer": "L6",
-      "title": "Unknown",
+      "title": "Cargo build-std",
       "positioning": "",
       "line_count": 284,
       "theorem_chains": [
@@ -48765,7 +48767,7 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "17_cross_compilation.md",
         "22_embedded_systems.md",
-        "https://github.com/rust-embedded/embedded-hal/blob/master/docs/migrating-0.2-to-1.0.md"
+        "https://github.com/rust-embedded/embedded-hal/blob/master/docs/migrating-from-0.2-to-1.0.md"
       ],
       "transitions": 6,
       "has_cognitive_path": false,
@@ -50627,7 +50629,7 @@
       "layer": "L6",
       "title": "Rust 网络编程快速入门",
       "positioning": "为 Rust 网络编程提供分阶段学习路径与场景化导航，链接到权威概念页获取深度解释。",
-      "line_count": 262,
+      "line_count": 263,
       "theorem_chains": [
         {
           "text": "| std 网络 ⟹ 简单性 | 无需额外运行时（Runtime）依赖 | 适合低并发或学习场景 |",
@@ -51365,7 +51367,7 @@
       "layer": "L6",
       "title": "基准测试：Rust 代码性能测量与回归检测",
       "positioning": "覆盖 Rust 生态中使用 `criterion` 进行基准测试的完整流程，从简单基准、参数化基准到回归检测与 CI 集成。",
-      "line_count": 158,
+      "line_count": 159,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -53413,9 +53415,9 @@
         "../07_security_and_cryptography/19_security_practices.md",
         "../10_performance/15_performance_optimization.md",
         "11_webassembly.md",
-        "https://github.com/WebAssembly/WASI/blob/main/docs/wasi-tutorial.md",
         "https://github.com/WebAssembly/simd/blob/main/proposals/simd/SIMD.md",
         "https://github.com/bytecodealliance/cargo-component/blob/main/README.md",
+        "https://github.com/bytecodealliance/wasmtime/blob/main/docs/WASI-tutorial.md",
         "https://github.com/bytecodealliance/wasmtime/blob/main/docs/security.md"
       ],
       "transitions": 12,
@@ -56913,7 +56915,8 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../00_version_tracking/05_rust_version_tracking.md",
-        "../04_research_and_experimental/03_evolution.md"
+        "../04_research_and_experimental/03_evolution.md",
+        "https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md"
       ],
       "transitions": 12,
       "has_cognitive_path": true,
@@ -59043,8 +59046,7 @@
         "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
         "../02_stabilized_features/borrow_sanitizer.md",
         "20_borrowsanitizer_preview.md",
-        "33_autoverus_preview.md",
-        "https://github.com/rust-lang/rfcs/blob/master/text/3842-safety-tags.md"
+        "33_autoverus_preview.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,

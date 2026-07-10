@@ -258,7 +258,7 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/ (56文件, 691KB)
 
 **本文档集已达到生产项目参考标准，是Rust安全关键系统开发的权威完整资料。**
 
-*开始使用*: 建议阅读 `00_RUST_SAFETY_CRITICAL_ECOSYSTEM_MASTER_INDEX.md` 获取完整导航。
+*开始使用*: 建议阅读 [`02_rust_safety_critical_ecosystem_master_index.md`](02_rust_safety_critical_ecosystem_master_index.md) 获取完整导航。
 
 ---
 
@@ -269,10 +269,10 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/ (56文件, 691KB)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**文档版本**: 1.2
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-07-10
+**状态**: ✅ 专题内容已激活并回填 (Phase B2)
 
 ---
 

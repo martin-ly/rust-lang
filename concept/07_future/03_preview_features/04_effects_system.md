@@ -115,7 +115,7 @@ mindmap
 
 ## 〇之一、Rust Effects Initiative 官方定位
 
-> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiativeupdates/2024-02-09-extending-rusts-effect-system.html)(<https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md>)** ✅ ·
+> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)(<https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md>)** ✅ ·
 > **[Inside Rust Blog — Keyword Generics Progress Report (2023-02-23)](https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report.html)(<https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html>)** ✅
 
 Rust 语言团队自 2022 年起通过 **Keyword Generics Initiative** 系统性地推进 effect system 的设计。
@@ -487,7 +487,7 @@ with Ef {
 
 Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实现了效果的隐性追踪**。
 
-> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiativeupdates/2024-02-09-extending-rusts-effect-system.html)(<https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md>)** ✅
+> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)(<https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md>)** ✅
 > Rust 语言团队明确将以下五种关键字识别为 **effect types**：`async`、`.await`、`const`、`try` (`?`)、`unsafe`，以及不稳定的 `yield` (generators)。这些不是独立的语法糖，而是同一理论框架的不同实例。
 
 | 效果类别 | 当前 Rust 语法 | 效果语义 | 追踪方式 | 多态支持 |
@@ -500,7 +500,7 @@ Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实
 
 ### 2.1 Carried vs Uncarried Effects（Rust 官方分类）
 
-> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiativeupdates/2024-02-09-extending-rusts-effect-system.html)(<https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md>)** ✅ ·
+> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)(<https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md>)** ✅ ·
 > **[Inside Rust Blog — Keyword Generics Progress Report (2023-02-23)](https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report.html)(<https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html>)** ✅
 
 Rust 语言团队（由 Yoshua Wuyts 在 2024 年官方更新中明确提出）将效果分为两类，这一分类直接决定了不同效果的泛化难度和技术路径：
@@ -573,7 +573,7 @@ const {}            // always-const：强制编译期求值
 
 ### 2.2 Effect Composition：效果的组合规则
 
-> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiativeupdates/2024-02-09-extending-rusts-effect-system.html)(<https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md>)** ✅
+> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)(<https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md>)** ✅
 
 当函数携带多个 carried effects 时，Rust 需要定义它们的组合顺序。
 Rust 语言团队明确将 effects 定义为**与顺序无关的集合（order-independent sets）**，但组合规则需要硬编码：
@@ -910,7 +910,7 @@ fn block_on<T>(f: impl Future<Output = T>) -> T effects {} {
 
 ### 4.1 a-mir-formality：Rust 效果系统的形式化验证基础
 
-> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiativeupdates/2024-02-09-extending-rusts-effect-system.html)(<https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md>)** ✅ ·
+> **[Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)(<https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md>)** ✅ ·
 > **[a-mir-formality GitHub](https://github.com/rust-lang/a-mir-formality)(<https://github.com/rust-lang/a-mir-formality>)** ✅
 
 Rust 语言团队通过 **a-mir-formality**（Rust 类型系统的官方形式化模型）来验证 effect generics 的 soundness。

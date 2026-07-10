@@ -184,7 +184,7 @@
 - **Safety Tags** (Safety Tags) [L4] — 编译器自动为 unsafe 代码块生成的形式化安全契约标记，用于静态验证和文档生成 — [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/2026/)
 - **Prusti** (Prusti) [L4] — 基于 Viper 验证器基础设施的 Rust 静态验证工具，支持前置/后置条件规范 — [Prusti Project](https://www.pm.inf.ethz.ch/research/prusti.html)
 - **Creusot** (Creusot) [L4] — 基于 Why3 验证平台的 Rust 形式化验证工具，使用 ML 风格规范语言 — [Creusot Docs](https://creusot-rs.github.io/)
-- **Verus** (Verus) [L4] — 支持 Rust 的演绎验证与证明助手 — [Verus Docs](https://github.com/verus-lang/verus/guide/)
+- **Verus** (Verus) [L4] — 支持 Rust 的演绎验证与证明助手 — [Verus Docs](https://verus-lang.github.io/verus/guide/)
 - **Miri** (Miri) [L4] — 检测未定义行为的 Rust 中间表示解释器 — [Miri](https://github.com/rust-lang/miri)
 - **高级中间表示** (HIR) [L4] — High-level IR，Rust 编译器中经过类型推断和宏展开后的高级中间表示 — [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/hir.html)
 - **抽象语法树** (AST) [L4] — Abstract Syntax Tree，源代码解析后的树形结构表示，编译器前端输出 — [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/syntax-intro.html)

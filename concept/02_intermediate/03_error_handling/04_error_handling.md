@@ -67,7 +67,7 @@
     - [6.1 反命题 1: "Result 消除了所有错误"](#61-反命题-1-result-消除了所有错误)
     - [6.2 反命题 2: "? 运算符总是正确传播"](#62-反命题-2--运算符总是正确传播)
     - [6.3 反命题 3: "panic 只应在完全不可能时发生"](#63-反命题-3-panic-只应在完全不可能时发生)
-    - [6.4 反命题 4: "Option 完全替代 null"](#64-反命题-4-option-完全替代-null)
+    - [6.4 反命题 4: "Option<T> 完全替代 null"](#64-反命题-4-optiont-完全替代-null)
   - [七、边界极限测试代码（Boundary Limit Tests）](#七边界极限测试代码boundary-limit-tests)
     - [7.1 测试 1: ? 运算符在闭包中的限制](#71-测试-1--运算符在闭包中的限制)
     - [7.2 测试 2: From 转换链的边界](#72-测试-2-from-转换链的边界)
@@ -142,7 +142,7 @@
     - [测验 5：错误处理的哲学（评价层）](#测验-5错误处理的哲学评价层)
   - [实践](#实践)
   - [补充：来自 `crates/c03_control_fn` 错误处理参考的 API 速查](#补充来自-cratesc03_control_fn-错误处理参考的-api-速查)
-    - [Option 常用方法](#option-常用方法)
+    - [Option<T> 常用方法](#optiont-常用方法)
     - [Result\<T, E\> 常用方法](#resultt-e-常用方法)
     - [`?` 运算符传播规则](#-运算符传播规则)
 
@@ -2093,7 +2093,7 @@ use eyre::Result;
 fn parse() -> Result<i32> { "not a number".parse()?; Ok(0) }
 ```
 
-> 详见 [§9.4 `eyre` / `color-eyre` / `miette` / `snafu` 等生态库对比](#94-eyre--color-eyre--miette--snafu-等生态库对比)。
+> 详见 [9.4 `eyre` / `color-eyre` / `miette` / `snafu` 生态库对比](#94-eyre--color-eyre--miette--snafu-生态库对比)。
 
 ### 11.4 `#[track_caller]` 与错误定位优化
 
@@ -2130,7 +2130,7 @@ fn main() {
 }
 ```
 
-> 详见 [§9.2 补充：`Result<T, !>` 与 `!` 在错误处理中的使用](#92-补充resultt---与--never-type-在错误处理中的使用)。
+> 详见 [§9.2 补充：`Result<T, !>` 与 `!` 在错误处理中的使用](#92-补充resultt--与--never-type-在错误处理中的使用)。
 
 ### 11.6 异步错误处理（`poll_fn` / `TryFuture`）
 
@@ -2149,7 +2149,7 @@ async fn wrapper() -> Result<i32, &'static str> {
 }
 ```
 
-> 详见 [§5.5 补充：`poll_fn` / `TryFuture` 等异步错误处理](#55-补充poll_fn--tryfuture-等异步错误处理)。
+> 详见 [§5.5 补充：`poll_fn` / `TryFuture` 等异步错误处理](#55-补充异步错误处理与-poll_fn--tryfuture-模式)。
 
 ### 11.7 `Try` trait 与自定义 `?` 行为
 

@@ -63,7 +63,7 @@
       - [路径 B：核心抽象形式化（a-mir-formality → rustc 规格）](#路径-b核心抽象形式化a-mir-formality--rustc-规格)
       - [路径 C：unsafe 协议验证（RustBelt → RefinedRust 自动化）](#路径-cunsafe-协议验证rustbelt--refinedrust-自动化)
       - [三条路径的交集与协同](#三条路径的交集与协同)
-  - [理想状态下，三条路径将在 2030 年前后汇聚：a-mir-formality 提供类型系统的「根信任」，RustBelt/RefinedRust 提供 unsafe 协议的「叶子信任」，Miri/Kani 提供动态/有界验证的「快速反馈」。届时，Rust 将成为首个拥有「分层形式化保证」的主流系统编程语言——从核心类型规则到生产代码模块（Module），每一层都有可验证的数学根基](#理想状态下三条路径将在-2030-年前后汇聚a-mir-formality-提供类型系统的根信任rustbeltrefinedrust-提供-unsafe-协议的叶子信任mirikani-提供动态有界验证的快速反馈届时rust-将成为首个拥有分层形式化保证的主流系统编程语言从核心类型规则到生产代码模块module每一层都有可验证的数学根基)
+  - 理想状态下，三条路径将在 2030 年前后汇聚：a-mir-formality 提供类型系统的「根信任」，RustBelt/RefinedRust 提供 unsafe 协议的「叶子信任」，Miri/Kani 提供动态/有界验证的「快速反馈」。届时，Rust 将成为首个拥有「分层形式化保证」的主流系统编程语言——从核心类型规则到生产代码模块（Module），每一层都有可验证的数学根基
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：操作语义的编译错误](#十边界测试操作语义的编译错误)
     - [10.1 边界测试：求值顺序的未定义行为（运行时 UB）](#101-边界测试求值顺序的未定义行为运行时-ub)

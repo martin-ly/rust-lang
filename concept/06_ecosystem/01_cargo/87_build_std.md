@@ -1,14 +1,14 @@
-> **内容分级**: [综述级]
+# Cargo build-std
+
+> **EN**: Cargo `build-std`
+> **Summary**: A comprehensive guide to Cargo's unstable `build-std` feature: compiling the Rust standard library (`std`, `core`, `alloc`) from source for custom targets, `no_std` + `alloc`, custom panic handlers, LTO size optimization, and embedded systems.
+> **权威来源**: [Cargo build-std 文档](https://doc.rust-lang.org/cargo/reference/unstable.html#build-std) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 >
-> # Cargo build-std
->
-> > **EN**: Cargo `build-std`
-> > **Summary**: A comprehensive guide to Cargo's unstable `build-std` feature: compiling the Rust standard library (`std`, `core`, `alloc`) from source for custom targets, `no_std` + `alloc`, custom panic handlers, LTO size optimization, and embedded systems.
-> > **受众**: [进阶 / 工程]
-> > **Bloom 层级**: 理解 → 应用
-> > **A/S/P 标记**: **A** — Application
-> > **前置概念**: [Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md) · [Cargo 配置与环境变量](83_cargo_configuration.md) · [所有权（Ownership）系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
-> > **后置概念**: [交叉编译](../05_systems_and_embedded/17_cross_compilation.md) · [unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
+> **受众**: [进阶 / 工程]
+> **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **A** — Application
+> **前置概念**: [Rust 嵌入式系统开发](../05_systems_and_embedded/22_embedded_systems.md) · [Cargo 配置与环境变量](83_cargo_configuration.md) · [所有权（Ownership）系统](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> **后置概念**: [交叉编译](../05_systems_and_embedded/17_cross_compilation.md) · [unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 
 ---
 

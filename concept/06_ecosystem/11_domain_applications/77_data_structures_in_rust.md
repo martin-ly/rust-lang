@@ -3,16 +3,16 @@
 >
 > # Rust 数据结构实践
 >
-> > **EN**: Data Structures in Rust
-> > **Summary**: Core data structures in Rust's standard library and common custom implementations: vectors, queues, trees, hash tables, graphs, and advanced structures, with selection guidance and ownership-aware design patterns.
-> >
-> > **受众**: [进阶]
-> > **层级**: L6 应用主题
-> > **A/S/P 标记**: **A+S** — Application + Structure
-> > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Collections](../../01_foundation/05_collections/08_collections.md)
-> > **后置概念**: [算法工程实践](76_algorithm_engineering_practice.md) · [算法与竞赛编程](29_algorithms_competitive_programming.md)
-> >
-> > **来源**: [std::collections](https://doc.rust-lang.org/std/collections/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
+> **EN**: Data Structures in Rust
+> **Summary**: Core data structures in Rust's standard library and common custom implementations: vectors, queues, trees, hash tables, graphs, and advanced structures, with selection guidance and ownership-aware design patterns.
+>
+> **受众**: [进阶]
+> **层级**: L6 应用主题
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Collections](../../01_foundation/05_collections/08_collections.md)
+> **后置概念**: [算法工程实践](76_algorithm_engineering_practice.md) · [算法与竞赛编程](29_algorithms_competitive_programming.md)
+>
+> **权威来源**: [std::collections](https://doc.rust-lang.org/std/collections/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
 
 ---
 

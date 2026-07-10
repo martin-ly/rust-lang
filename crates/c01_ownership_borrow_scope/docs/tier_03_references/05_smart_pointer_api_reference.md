@@ -13,10 +13,10 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| Box<T> | [12_smart_pointers.md#12-box独占堆分配](12_smart_pointers.md#12-box独占堆分配) |
-| Rc<T> / Arc<T> | [12_smart_pointers.md#13-rc-与-arc引用计数共享](12_smart_pointers.md#13-rc-与-arc引用计数共享) |
-| RefCell<T> | [12_smart_pointers.md#21-refcell-与-cell内部可变性](12_smart_pointers.md#21-refcell-与-cell内部可变性) |
-| Weak<T> | [12_smart_pointers.md#模式-5-weak-打破循环引用](12_smart_pointers.md#模式-5-weak-打破循环引用) |
+| `Box<T>` | [12_smart_pointers.md#12-box独占堆分配](12_smart_pointers.md#12-box独占堆分配) |
+| `Rc<T>` / `Arc<T>` | [12_smart_pointers.md#13-rc-与-arc引用计数共享](12_smart_pointers.md#13-rc-与-arc引用计数共享) |
+| `RefCell<T>` | [12_smart_pointers.md#21-refcell-与-cell内部可变性](12_smart_pointers.md#21-refcell-与-cell内部可变性) |
+| `Weak<T>` | [12_smart_pointers.md#模式-5-weak-打破循环引用](12_smart_pointers.md#模式-5-weak-打破循环引用) |
 
 ## 本地资源
 
