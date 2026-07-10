@@ -3,7 +3,7 @@
 > **EN**: Error Handling Guide
 > **Summary**: Practical guide to Rust error handling with Option, Result, panic, custom error types, and the `?` operator. Migrated to the error handling authority.
 >
-> **适用 Rust 版本**: 1.96.1+
+> **适用 Rust 版本**: 1.97.0+
 > **文档类型**: 重定向 stub
 
 ---

@@ -1,6 +1,6 @@
 > **EN**: Async Process Management in Rust
 > **Summary**: Managing child processes inside Rust's async runtime: tokio::process, async I/O, timeouts, cancellation, and structured concurrency.
-> **Rust Version**: 1.96.1+
+> **Rust Version**: 1.97.0+
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价

@@ -1,5 +1,5 @@
 //! Rust 1.96/1.96.1 特性模块 —— 宏系统场景
-//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! **历史稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
 //! Rust 1.96/1.96.1 feature module —— system scenario
 //! Rust 1.96 featuremodule —— 宏systemscenario
 //! - `expr` metavariable 传递给 `cfg`

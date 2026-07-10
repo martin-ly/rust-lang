@@ -50,7 +50,7 @@ fn build_test_kg() -> KnowledgeGraph {
         meta: RelationMeta {
             source: "test".into(),
             confidence: Some(1.0),
-            version: Some("1.96.1".into()),
+            version: Some("1.97.0".into()),
             reviewed: Some(true),
         },
     });
@@ -62,7 +62,7 @@ fn build_test_kg() -> KnowledgeGraph {
         meta: RelationMeta {
             source: "test".into(),
             confidence: Some(1.0),
-            version: Some("1.96.1".into()),
+            version: Some("1.97.0".into()),
             reviewed: Some(true),
         },
     });
@@ -98,7 +98,7 @@ fn test_cycle_detection() {
         meta: RelationMeta {
             source: "test".into(),
             confidence: Some(0.5),
-            version: Some("1.96.1".into()),
+            version: Some("1.97.0".into()),
             reviewed: Some(false),
         },
     });

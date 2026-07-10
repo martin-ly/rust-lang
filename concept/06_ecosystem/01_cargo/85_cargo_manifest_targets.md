@@ -4,7 +4,7 @@
 > **本节关键术语**: Cargo Target · Lib Target · Bin Target · Test Target · Example Target · Bench Target · Rust Version · Package ID Specification — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Manifest Targets
-> **Summary**: Cargo `Cargo.toml` target definitions for Rust 1.96.1+: lib, bin, test, example, bench targets, `rust-version`, Package ID Specifications, and per-target configuration.
+> **Summary**: Cargo `Cargo.toml` target definitions for Rust 1.97.0+: lib, bin, test, example, bench targets, `rust-version`, Package ID Specifications, and per-target configuration.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **P** — Practice

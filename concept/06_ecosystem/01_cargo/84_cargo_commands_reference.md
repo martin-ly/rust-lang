@@ -4,7 +4,7 @@
 > **本节关键术语**: cargo build · cargo test · cargo check · cargo run · cargo add · cargo publish — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Commands Reference
-> **Summary**: A classified quick reference of Cargo subcommands for Rust 1.96.1+: general, build, manifest, package, publish, report, and inspection commands, plus common options and plugin integration points.
+> **Summary**: A classified quick reference of Cargo subcommands for Rust 1.97.0+: general, build, manifest, package, publish, report, and inspection commands, plus common options and plugin integration points.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **P** — Practice

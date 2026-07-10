@@ -173,7 +173,7 @@
 
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 

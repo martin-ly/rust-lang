@@ -1,5 +1,5 @@
 //! Rust 1.96 特性模块 —— 过程宏场景
-//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! **历史稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
 //! Rust 1.96 feature module —— scenario
 //! - `assert_matches!` 用于过程宏诊断测试
 //! - `assert_matches!`

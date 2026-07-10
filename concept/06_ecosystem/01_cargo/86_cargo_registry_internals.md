@@ -4,7 +4,7 @@
 > **本节关键术语**: Registry Index · Registry Web API · Credential Provider · crates.io · Sparse Index — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Registry Internals
-> **Summary**: How Cargo registries work internally for Rust 1.96.1+: sparse vs git index, index entry format, Web API, credential provider protocol, publishing pipeline, and self-hosted registry design.
+> **Summary**: How Cargo registries work internally for Rust 1.97.0+: sparse vs git index, index entry format, Web API, credential provider protocol, publishing pipeline, and self-hosted registry design.
 > **受众**: [专家]
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **P** — Practice

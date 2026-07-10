@@ -1,8 +1,8 @@
 # Rust 学习项目版本索引
 
-> **当前活跃版本**: Rust 1.96.1
-> **发布日期**: 2026-07-04
-> **最后更新**: 2026-07-04
+> **当前活跃版本**: Rust 1.97.0
+> **发布日期**: 2026-07-09
+> **最后更新**: 2026-07-10
 > **状态**: ✅ 100% 完成
 
 ---
@@ -44,8 +44,9 @@ crates/
 | Rust 1.93 | 2026-01-22 | 已归档 | `*/src/archive/rust_193_features.rs` |
 | Rust 1.94 | 2026-03-05 | 已归档 | `*/src/archive/rust_194_features.rs` |
 | Rust 1.95 | 2026-04-16 | 已归档 | `*/src/archive/rust_195_features.rs` |
-| **Rust 1.96** | **2026-05-28** | **活跃** | `*/src/rust_196_features.rs` |
-| 权威来源 | [releases.rs](https://releases.rs/docs/1.96.1/) | - | - |
+| Rust 1.96 | 2026-05-28 | 已归档 | `*/src/rust_196_features.rs` |
+| **Rust 1.97** | **2026-07-09** | **活跃** | `*/src/rust_197_features.rs` |
+| 权威来源 | [releases.rs](https://releases.rs/docs/1.97.0/) | - | - |
 
 ---
 
@@ -54,9 +55,9 @@ crates/
 ### 访问当前版本特性 (推荐)
 
 ```rust
-// 使用最新 1.96 特性
-use c01_ownership_borrow_scope::rust_196_features::*;
-use c02_type_system::rust_196_features::*;
+// 使用最新 1.97 特性
+use c01_ownership_borrow_scope::rust_197_features::*;
+use c02_type_system::rust_197_features::*;
 ```
 
 ### 访问历史版本特性

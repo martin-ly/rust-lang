@@ -610,7 +610,7 @@ graph TD
 
 - 审计 `~/.cargo/registry/cache/` 与 `~/.cargo/registry/src/` 中的 symlink
 - 联系第三方 registry 管理员，在上传阶段禁用 symlink
-- 优先升级至 Rust 1.96.1+
+- 优先升级至 Rust 1.97.0+
 
 **参考**:
 

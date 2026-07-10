@@ -2,8 +2,8 @@
 name = "edge-bin"
 version.workspace = true
 edition = "2021"
-rust-version = "1.96.1"
-description = "模拟前沿二进制：MSRV 1.96，消费 legacy-lib 与 modern-app"
+rust-version = "1.97.0"
+description = "模拟前沿二进制：MSRV 1.97，消费 legacy-lib 与 modern-app"
 license.workspace = true
 
 [dependencies]

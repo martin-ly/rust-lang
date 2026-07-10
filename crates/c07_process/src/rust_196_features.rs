@@ -1,5 +1,5 @@
 //! # Rust 1.96.0 特性 — 进程管理与系统编程模块
-//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! **历史稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
 //! # Rust 1.96.0/1.96.1 features processmanagementsystem module
 //!
 //! 本模块展示 Rust 1.96.0/1.96.1 中与进程管理、系统编程、懒加载相关的稳定特性：

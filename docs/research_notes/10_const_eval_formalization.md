@@ -260,7 +260,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### 核心研究点 {#核心研究点}
 

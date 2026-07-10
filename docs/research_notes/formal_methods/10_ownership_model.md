@@ -25,7 +25,7 @@
 > - **增强反例分析**: 8个详细反例、CVE 关联分析（CVE-2015-0235, CVE-2018-1000810, CVE-2019-15548, CVE-2020-36323, CVE-2021-29941）
 > - **深化权威来源对齐**: RustBelt Iris 框架详细对应（资源代数、断言映射）、Aeneas borrow_generated_from 深度对比
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 > **六篇并表**: README §formal_methods 六篇并表 第 1 行（所有权（Ownership））
 
 ---

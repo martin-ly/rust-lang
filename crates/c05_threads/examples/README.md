@@ -296,7 +296,7 @@ for handle in handles {
 println!("Result: {}", *counter.lock().unwrap());
 ```
 
-### 作用域线程 (Rust 1.96.1+)
+### 作用域线程 (Rust 1.97.0+)
 
 ```rust
 use std::thread;

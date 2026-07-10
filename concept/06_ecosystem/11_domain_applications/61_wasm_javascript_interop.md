@@ -19,7 +19,7 @@
 > **相关文档**: [Rust 编译 WASM](/crates/c12_wasm/docs/tier_02_guides/02_compiling_rust_to_wasm.md) | [性能优化指南](/crates/c12_wasm/docs/tier_02_guides/04_performance_optimization_guide.md)
 
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.97.0+ / Edition 2024, WASM 2.0 + WASI 0.2
 **Rust 1.92.0 特性**: 本文档已集成 Rust 1.92.0 FFI 互操作特性
 
 ---
@@ -433,7 +433,7 @@ let mut_raw_ref = union.get_integer_mut_raw();
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.97.0+ / Edition 2024, WASM 2.0 + WASI 0.2
 
 ---
 

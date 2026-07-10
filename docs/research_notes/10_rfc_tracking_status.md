@@ -35,7 +35,7 @@
 
 状态标记：
 
-- ✅ Stable — 已稳定并可在当前 Rust 1.96.1+ 中使用
+- ✅ Stable — 已稳定并可在当前 Rust 1.97.0+ 中使用
 - 🔄 In Progress — 已实现部分，或有预览特性
 - ❌ Deprecated — 被后续 RFC 替代或废弃
 

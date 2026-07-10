@@ -3,7 +3,7 @@
 > **EN**: 2026 Reorganization
 > **Summary**: 2026年3月项目重组记录 2026 Reorganization. (stub/archive redirect)
 >
-> **Rust 版本**: 1.96.1+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [C]
 > **Bloom 层级**: L2 (理解)
 > **日期**: 2026-03-18
@@ -227,7 +227,7 @@ rust-lang/
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

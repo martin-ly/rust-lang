@@ -1,5 +1,5 @@
 //! Rust 1.96 特性跟踪模块 —— 通用工具场景（参考实现）
-//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! **历史稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
 //!
 //! 本模块作为 **Rust 1.96 稳定新特性的参考实现**，集中展示所有 1.96 特性：
 //! - `core::range` 完整家族（`Range`、`RangeInclusive`、`RangeFrom`、`RangeToInclusive`）

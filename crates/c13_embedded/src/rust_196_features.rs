@@ -1,5 +1,5 @@
 //! Rust 1.96.0 嵌入式相关稳定特性实现模块
-//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! **历史稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
 //! Rust 1.96.0/1.96.1 feature module
 //! 所有公共 API 均使用 `core` 类型，保持 `no_std` 兼容性：
 //! all API `core` type ， `no_std` ：

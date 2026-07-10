@@ -520,7 +520,7 @@ exclude-files = [
 ## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### 新特性概览 {#新特性概览}
 >
@@ -549,7 +549,7 @@ orce_mut()
 ## Rust 1.95+ 在测试开发中的应用 {#rust-195-在测试开发中的应用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### array_windows 在测试数据生成中的应用 {#array_windows-在测试数据生成中的应用}
 >

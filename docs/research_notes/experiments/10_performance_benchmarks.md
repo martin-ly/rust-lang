@@ -20,7 +20,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 > **对齐说明**: 本文档已于 2026-06-29 完成按 Criterion.rs Book、The Rust Performance Book、rustc Book、Rust Reference、TRPL、Rust Standard Library 等权威国际化来源的对齐升级。
 >
 > **权威来源**:
@@ -111,7 +111,7 @@
 > **创建日期**: 2025-11-15
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 
 **完成情况**:
 
@@ -516,7 +516,7 @@ Criterion.rs 通过以下统计手段保证基准测试结果可靠：
 >
 > **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 
-- **工具链版本**：`rustup update stable`（建议 `1.96.1+`）；在 `Cargo.toml` 中设置 `edition = "2024"`。
+- **工具链版本**：`rustup update stable`（建议 `1.97.0+`）；在 `Cargo.toml` 中设置 `edition = "2024"`。
 - **基准测试**：使用工作区统一版本 `criterion = "0.8.2"`（以 `Cargo.toml` / `Cargo.lock` 为准），运行 `cargo bench --workspace`。
 - **性能分析**：`cargo flamegraph`、`perf record -g -- ./target/release/binary`、`valgrind --tool=cachegrind`。
 - **内存分析**：`cargo miri run`（需 `rustup component add miri`）、`heaptrack`、`dhat` 或自定义 `#[global_allocator]`。
@@ -1749,7 +1749,7 @@ criterion_main!(serialization_benches);
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
-- **Rust**: 1.96.1+（`rustup update stable`）
+- **Rust**: 1.97.0+（`rustup update stable`）
 - **Criterion**: 工作区已配置 `criterion = "0.8.2"`（以 `Cargo.toml` / `Cargo.lock` 为准）
 - **推荐**：关掉无关后台、固定 CPU 频率、多次运行取中位数
 

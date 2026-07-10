@@ -1,14 +1,14 @@
-# 🦀 C10 Networks - Rust 1.96.1+ 网络编程库
+# 🦀 C10 Networks - Rust 1.97.0+ 网络编程库
 
 > **模块类型**: 网络编程学习模块 | ⭐ 质量评分: **95/100**
-> **Rust版本**: 1.96.1+ | 📊 完成度: **100% 完成** ✅
+> **Rust版本**: 1.97.0+ | 📊 完成度: **100% 完成** ✅
 > **学习重点**: HTTP/HTTPS、TCP/UDP、WebSocket、gRPC、P2P、DNS
 > **适用对象**: Rust中级到高级开发者、网络工程师
-> **最后更新**: 2026-01-26 | ✅ Rust 1.96.1+ MSRV 对齐
+> **最后更新**: 2026-01-26 | ✅ Rust 1.97.0+ MSRV 对齐
 
 ## 目录
 
-- [🦀 C10 Networks - Rust 1.96.1+ 网络编程库](#-c10-networks---rust-1961-网络编程库)
+- [🦀 C10 Networks - Rust 1.97.0+ 网络编程库](#-c10-networks---rust-1961-网络编程库)
   - [目录](#目录)
   - [🎯 最新更新 (2025-11-15) ✨](#-最新更新-2025-11-15-)
     - [📖 新版文档导航](#-新版文档导航)
@@ -89,7 +89,7 @@
 > Actor [`09_actor_model/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/09_actor_model/00_index.md) ·
 > 基准指南 [`11_benchmark_minimal_guide.md`](../../rust-formal-engineering-system/02_programming_paradigms/11_benchmark_minimal_guide.md)
 
-[![Rust](https://img.shields.io/badge/rust-1.96.1+-orange.svg)](https://www.rust-lang.org/)
+[![Rust](https://img.shields.io/badge/rust-1.97.0+-orange.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
 [![Crates.io](https://img.shields.io/crates/v/c10_networks.svg)](https://crates.io/crates/c10_networks)
 
@@ -133,7 +133,7 @@
 
 **亮点**: ~7000行可运行代码 | 30+对比矩阵 | 15+可视化图表 | 生产级质量 | 涵盖微服务/IoT/实时通信/高性能I/O
 
-> 适用范围：Rust 1.96.1+ · Tokio 1.48.0+。文档风格遵循 `docs/STYLE.md`。
+> 适用范围：Rust 1.97.0+ · Tokio 1.48.0+。文档风格遵循 `docs/STYLE.md`。
 
 ## 概述
 

@@ -147,7 +147,7 @@ let result: Result<i32, &str> = Ok(42);
 assert!(matches!(result, Ok(n) if n > 10));
 // 失败时信息: "assertion failed: matches!(result, Ok(n) if n > 10)"
 
-// 方式 B: assert_matches!（Rust 1.96.1+）
+// 方式 B: assert_matches!（Rust 1.97.0+）
 assert_matches!(result, Ok(n) if n > 10);
 // 失败时信息: 显示实际值和期望模式，更易于调试
 ```

@@ -36,8 +36,8 @@
 
 ### 2. 版本信息更新 ✅
 
-- ✅ **FAQ.md** - 更新版本信息到 Rust 1.96.1+
-- ✅ **Glossary.md** - 更新版本信息到 Rust 1.96.1+
+- ✅ **FAQ.md** - 更新版本信息到 Rust 1.97.0+
+- ✅ **Glossary.md** - 更新版本信息到 Rust 1.97.0+
 - ✅ **README.md** - 更新最后更新日期
 - ✅ **00_MASTER_INDEX.md** - 更新版本信息和维护状态
 - ✅ **docs/README.md** - 更新版本信息

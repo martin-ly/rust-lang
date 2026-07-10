@@ -1,6 +1,6 @@
 ﻿# 网络编程
 
-> 适用范围：Rust 1.96.1+；本章为 `c10_networks` 的索引与导航，风格遵循 `docs/STYLE.md`。
+> 适用范围：Rust 1.97.0+；本章为 `c10_networks` 的索引与导航，风格遵循 `docs/STYLE.md`。
 
 ## 导航
 

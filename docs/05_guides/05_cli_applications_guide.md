@@ -438,7 +438,7 @@ fn main() -> ExitCode {
 ## Rust 1.95+ 在 CLI 开发中的应用 {#rust-195-在-cli-开发中的应用}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### array_windows 在参数解析中的应用 {#array_windows-在参数解析中的应用}
 >

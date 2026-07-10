@@ -473,7 +473,7 @@ pub fn process(data: &str) -> String {
 ## Rust 1.95+ 在 WASM 开发中的应用 {#rust-195-在-wasm-开发中的应用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### array_windows 在图像处理中的应用 {#array_windows-在图像处理中的应用}
 >

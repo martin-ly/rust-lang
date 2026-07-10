@@ -21,7 +21,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 > **对齐说明**: 本文档已于 2026-06-29 完成按 Criterion.rs Book、The Rust Performance Book、rustc Book、Rust Reference、TRPL、Rust Standard Library 等权威国际化来源的对齐升级。
 >
 > **权威来源**:
@@ -93,7 +93,7 @@
 > **创建日期**: 2025-11-15
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 
 ---
 
@@ -299,7 +299,7 @@ Rust 并发性能优化应关注：
 >
 > **来源: [Tokio Docs](https://docs.rs/tokio/latest/tokio/)**
 
-- **工具链版本**：`rustup update stable`（建议 `1.96.1+`）；`edition = "2024"`。
+- **工具链版本**：`rustup update stable`（建议 `1.97.0+`）；`edition = "2024"`。
 - **同步原语**：使用 `std::sync::{Mutex, RwLock, Arc, Atomic*}`、`std::sync::mpsc`。
 - **异步运行时**：`tokio = { version = "1", features = ["full"] }`；使用 `#[tokio::main]` 与 `tokio::spawn`。
 - **并发测试工具**：
@@ -580,7 +580,7 @@ async fn async_task_benchmark() {
 **测试环境**：
 
 - CPU: 8 核
-- Rust 版本: 1.96.1+
+- Rust 版本: 1.97.0+
 - 优化级别: `-O2`
 
 **结果**：
@@ -655,7 +655,7 @@ async fn async_task_benchmark() {
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-- **Rust**: 1.96.1+；**Tokio**：`tokio = { version = "1", features = ["full"] }`；**Criterion**：工作区已配置
+- **Rust**: 1.97.0+；**Tokio**：`tokio = { version = "1", features = ["full"] }`；**Criterion**：工作区已配置
 - 建议固定 CPU 频率、关闭节能；多线程 bench 需注意核心数与负载隔离
 
 ### 执行步骤 {#执行步骤}

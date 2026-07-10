@@ -7,7 +7,7 @@
   "metadata": {
     "version": "1.0",
     "generated": "2026-05-23",
-    "rust_version": "1.96.1+",
+    "rust_version": "1.97.0+",
     "source": "concept/00_meta/kg_ontology.md"
   },
   "entities": {

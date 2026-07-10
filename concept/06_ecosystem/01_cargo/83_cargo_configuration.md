@@ -4,7 +4,7 @@
 > **本节关键术语**: Configuration · Environment Variables · `.cargo/config.toml` · Credential Provider · `CARGO_*` — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Configuration
-> **Summary**: Cargo configuration for Rust 1.96.1+: `.cargo/config.toml` hierarchy, common settings, environment variable mapping, credential providers, registry authentication, resolver options, and cross-compilation setup.
+> **Summary**: Cargo configuration for Rust 1.97.0+: `.cargo/config.toml` hierarchy, common settings, environment variable mapping, credential providers, registry authentication, resolver options, and cross-compilation setup.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **P** — Practice
@@ -140,7 +140,7 @@ linker = "x86_64-linux-musl-gcc"
 
 ## 八、常用项目级配置模板
 
-一个典型的 Rust 1.96.1+ 项目 `.cargo/config.toml`：
+一个典型的 Rust 1.97.0+ 项目 `.cargo/config.toml`：
 
 ```toml
 [build]

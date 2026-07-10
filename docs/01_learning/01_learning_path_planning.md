@@ -796,7 +796,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ## Rust 1.95+ 学习路径 {#rust-195-学习路径}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### 1.95+ 新特性学习要点 {#195-新特性学习要点}
 >

@@ -304,7 +304,7 @@ jobs:
 
 **最后更新**: 2025-12-11
 **Criterion 版本**: 0.5.x
-**Rust 版本**: 1.96.1+
+**Rust 版本**: 1.97.0+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

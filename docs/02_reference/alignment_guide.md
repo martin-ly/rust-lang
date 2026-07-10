@@ -123,7 +123,7 @@
 ## Rust 1.95+ 更新 {#rust-195-更新}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 详见 Rust 1.94 发布说明
 

@@ -463,7 +463,7 @@ fn test_wasm_integration() {
 ## Rust 1.95+ 跨模块集成最佳实践 {#rust-195-跨模块集成最佳实践}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### LazyLock 在跨模块配置共享中的应用 {#lazylock-在跨模块配置共享中的应用}
 

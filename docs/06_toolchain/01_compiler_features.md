@@ -1246,7 +1246,7 @@ fn pgo_workflow() {
 ## Rust 1.96+ 更新 {#rust-196-更新}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-> **最新版本**: Rust 1.96.1+ (2026-05-28)
+> **最新版本**: Rust 1.97.0+ (2026-05-28)
 
 本文档基于 Rust 1.96.1，涵盖 1.93–1.96 关键特性。历史版本请参见：
 

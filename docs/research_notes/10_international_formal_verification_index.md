@@ -259,7 +259,7 @@
 | 2026-02-14 | 初版创建 |
 | 2026-02-14 | 补充 coq_skeleton 与 RustBelt 对应 |
 | 2026-02-14 | T-BR1/T-TY3 Coq 骨架创建；Tree Borrows PLDI 2025 补充 |
-| 2026-06-29 | 补充 Verus/Kani/Prusti/Creusot/Miri 工具链映射；升级到 Rust 1.96.1+ |
+| 2026-06-29 | 补充 Verus/Kani/Prusti/Creusot/Miri 工具链映射；升级到 Rust 1.97.0+ |
 
 ---
 

@@ -410,7 +410,7 @@ L3: 机器检查 (Coq骨架)
 ## 🆕 Rust 1.94 研究更新 {#rust-194-研究更新}
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### 核心研究点 {#核心研究点}
 

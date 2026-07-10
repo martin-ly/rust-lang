@@ -1759,7 +1759,7 @@ fn broken_test() {
 ## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### 核心特性速查 {#核心特性速查}
 >
@@ -1807,7 +1807,7 @@ let gamma = f64::consts::EULER_GAMMA;
 ## Rust 1.95+ 在测试中的深度应用 {#rust-195-在测试中的深度应用}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-> **适用版本**: Rust 1.96.1+ | **实际场景**: 测试开发
+> **适用版本**: Rust 1.97.0+ | **实际场景**: 测试开发
 
 ### ControlFlow 在测试验证管道中的应用 {#controlflow-在测试验证管道中的应用}
 >

@@ -98,7 +98,7 @@ repository.workspace = true
 homepage.workspace = true
 ```
 
-- `rust-version` 保持 `1.96.1`（本地 MSRV），文档版本号可单独维护为 `1.97.0+`。
+- `rust-version` 保持 `1.97.0`（本地 MSRV），文档版本号可单独维护为 `1.97.0+`。
 - feature 名使用 `kebab-case`；避免使用 Rust 关键字（如 `async`）作为 feature 名。
 - 已在 workspace dependencies 中声明的依赖，优先使用 `{ workspace = true }`。
 
@@ -213,4 +213,4 @@ bash scripts/git_hooks/install.sh
 
 ---
 
-**最后更新**：2026-07-10
+**最后更新**：2026-07-10（已对齐 Rust 1.97.0 stable）

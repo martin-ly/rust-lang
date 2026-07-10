@@ -1,6 +1,6 @@
 > **EN**: Modern Process Management Libraries in Rust
 > **Summary**: Ecosystem survey of Rust process management libraries: std::process, tokio::process, duct, nix, sysinfo, procfs, daemonize, caps, users.
-> **Rust Version**: 1.96.1+
+> **Rust Version**: 1.97.0+
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价

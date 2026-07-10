@@ -1,6 +1,6 @@
 > **EN**: Advanced Process Management in Rust
 > **Summary**: Enterprise-grade process patterns in Rust: process pools, load balancing, health checks, resource quotas, and fault recovery, built on `std::process` and `tokio::process`.
-> **Rust Version**: 1.96.1+
+> **Rust Version**: 1.97.0+
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价

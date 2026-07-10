@@ -540,7 +540,7 @@ $ python -m pytest
 ## Rust 1.95+ 更新 {#rust-195-更新}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [ISO C++20](https://www.iso.org/standard/83626.html), [Go Language Specification](https://go.dev/ref/spec), [Haskell 2010 Language Report](https://www.haskell.org/definition/haskell2010.pdf)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference / RFC、C++ ISO / cppreference、Go Spec、学术论文），添加 Haskell 对标索引 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)

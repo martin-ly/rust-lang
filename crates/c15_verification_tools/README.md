@@ -2,7 +2,7 @@
 
 > 本 crate 提供 [Kani](https://github.com/model-checking/kani)、[Aeneas](https://github.com/AeneasVerif/aeneas)、[Prusti](https://github.com/viperproject/prusti-dev) 的入门示例与反例边界。
 >
-> - **Rust 版本**: 1.96.1+
+> - **Rust 版本**: 1.97.0+
 > - **Edition**: 2024
 > - **状态**: 普通 `cargo check` 可通过；验证需单独安装对应工具。
 

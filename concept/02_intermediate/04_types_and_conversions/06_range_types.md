@@ -303,7 +303,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助开发者在 `std::ops::Range` 和 `core::range::Range` 之间选择。核心判断标准是"是否需要保存迭代进度"。
-> **使用建议**: 新代码优先使用 `core::range::Range`（若 1.96.1+ 可用）；需要保存进度的场景（如 `break` 后恢复）保留 `std::ops::Range`。
+> **使用建议**: 新代码优先使用 `core::range::Range`（若 1.97.0+ 可用）；需要保存进度的场景（如 `break` 后恢复）保留 `std::ops::Range`。
 > **关键洞察**: `core::range::Range` 不是 `std::ops::Range` 的替代，而是**语义分层**——前者是"纯值"，后者是"有状态迭代器"。
 
 ---

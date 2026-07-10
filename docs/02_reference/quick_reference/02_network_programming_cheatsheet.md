@@ -619,7 +619,7 @@ async fn proxy_server() -> io::Result<()> {
 ## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### 核心特性速查 {#核心特性速查}
 >
@@ -667,7 +667,7 @@ let gamma = f64::consts::EULER_GAMMA;
 ## Rust 1.95+ 在网络编程中的深度应用 {#rust-195-在网络编程中的深度应用}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.96.1+ | **实际场景**: 网络编程开发
+> **适用版本**: Rust 1.97.0+ | **实际场景**: 网络编程开发
 
 ### ControlFlow 在请求处理管道中的应用 {#controlflow-在请求处理管道中的应用}
 >

@@ -1,10 +1,10 @@
 # 🦀 Rust 线程编程模块 (c05_threads)
 
 > **模块类型**: 线程编程学习模块 | ⭐ 质量评分: **95/100**
-> **Rust版本**: 1.96.1+ | 📊 完成度: **100% 完成** ✅
+> **Rust版本**: 1.97.0+ | 📊 完成度: **100% 完成** ✅
 > **学习重点**: 线程管理、并发控制、同步原语、无锁数据结构、并行计算
 > **适用对象**: Rust中级到高级开发者、系统程序员
-> **最后更新**: 2025-12-11 | 🔄 维护模式: Rust 1.96.1+ MSRV 对齐 | ✅ 新增测试和基准测试
+> **最后更新**: 2025-12-11 | 🔄 维护模式: Rust 1.97.0+ MSRV 对齐 | ✅ 新增测试和基准测试
 > 导航：返回 [`rust-formal-engineering-system`](../../README.md)
 > · 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md)
 > · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md)
@@ -32,7 +32,7 @@
   - [精选文件索引（快速定位关键实现）](#精选文件索引快速定位关键实现)
   - [主要特性](#主要特性)
     - [0. Rust 1.93.0 Edition 2024 最新特性 ⭐ NEW](#0-rust-1930-edition-2024-最新特性--new)
-    - [1. 作用域线程 (Rust 1.96.1+ 特性)](#1-作用域线程-rust-1961-特性)
+    - [1. 作用域线程 (Rust 1.97.0+ 特性)](#1-作用域线程-rust-1961-特性)
     - [2. 工作窃取调度器](#2-工作窃取调度器)
     - [3. 无锁环形缓冲区](#3-无锁环形缓冲区)
     - [4. 自适应锁](#4-自适应锁)
@@ -145,7 +145,7 @@
 
 **亮点**: ~800行可运行代码 | 20+对比矩阵 | 10+可视化图表 | 生产级质量
 
-> 适用范围：Rust 1.96.1+ · 标准库 + rayon/crossbeam/parking_lot
+> 适用范围：Rust 1.97.0+ · 标准库 + rayon/crossbeam/parking_lot
 
 ---
 
@@ -280,7 +280,7 @@ let allocator = rust_192_features::ThreadResourceAllocator::new(
 let max_threads = allocator.max_threads();
 ```
 
-### 1. 作用域线程 (Rust 1.96.1+ 特性)
+### 1. 作用域线程 (Rust 1.97.0+ 特性)
 
 ```rust
 use std::thread;

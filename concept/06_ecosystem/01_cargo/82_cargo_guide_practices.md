@@ -4,7 +4,7 @@
 > **本节关键术语**: Dependencies · Features · CI · Build Performance · Cache · `CARGO_TARGET_DIR` — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Guide Practices
-> **Summary**: Practical Cargo guidance for Rust 1.96.1+: dependency versioning, feature design, test organization, CI pipelines, build performance, MSRV/resolver v3, public/private dependencies, and supply-chain auditing.
+> **Summary**: Practical Cargo guidance for Rust 1.97.0+: dependency versioning, feature design, test organization, CI pipelines, build performance, MSRV/resolver v3, public/private dependencies, and supply-chain auditing.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **P** — Practice

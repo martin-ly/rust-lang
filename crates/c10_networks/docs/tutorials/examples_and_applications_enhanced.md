@@ -9,7 +9,7 @@
 
 ﻿# C10 Networks 示例代码与应用场景增强版
 
-> 适用范围：Rust 1.96.1+，Tokio 1.35+。文档风格遵循 [`DOCUMENTATION_STANDARDS.md`](DOCUMENTATION_STANDARDS.md)。
+> 适用范围：Rust 1.97.0+，Tokio 1.35+。文档风格遵循 [`DOCUMENTATION_STANDARDS.md`](DOCUMENTATION_STANDARDS.md)。
 
 ## 📊 目录
 

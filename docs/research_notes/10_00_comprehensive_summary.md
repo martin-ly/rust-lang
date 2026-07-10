@@ -32,9 +32,9 @@
   - [五、各文档职责与定位 {#五各文档职责与定位}](#五各文档职责与定位-五各文档职责与定位)
   - [六、推荐阅读路径 {#六推荐阅读路径}](#六推荐阅读路径-六推荐阅读路径)
   - [七、完成度与缺口 {#七完成度与缺口}](#七完成度与缺口-七完成度与缺口)
-  - [🆕 Rust 1.96.1+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新}](#-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新)
+  - [🆕 Rust 1.97.0+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新}](#-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新)
     - [核心研究点 {#核心研究点}](#核心研究点-核心研究点)
-  - [🆕 Rust 1.96.1+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}](#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明)
+  - [🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}](#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明)
     - [升级要点 {#升级要点}](#升级要点-升级要点)
       - [权威来源对齐 {#权威来源对齐}](#权威来源对齐-权威来源对齐)
       - [形式化来源对照 {#形式化来源对照}](#形式化来源对照-形式化来源对照)
@@ -204,7 +204,7 @@
 
 ---
 
-## 🆕 Rust 1.96.1+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新}
+## 🆕 Rust 1.97.0+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新}
 >
 > **来源**: [Rust Edition Guide - Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 > **适用版本**: Rust 1.97.0+ (Edition 2024)
@@ -226,7 +226,7 @@
 
 ---
 
-## 🆕 Rust 1.96.1+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}
+## 🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}
 >
 > **来源**: [Rust Edition Guide - Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -270,7 +270,7 @@
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-06-29 (Rust 1.96.1+ / Edition 2024 权威国际化升级)
+**最后更新**: 2026-06-29 (Rust 1.97.0+ / Edition 2024 权威国际化升级)
 
 ---
 

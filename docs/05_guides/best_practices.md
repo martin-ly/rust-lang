@@ -395,7 +395,7 @@ println!("运行时长: {:?}", stopped.duration());
 ## Rust 1.95+ 最佳实践（深度指南） {#rust-195-最佳实践深度指南}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ---
 

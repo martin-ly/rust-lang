@@ -1239,7 +1239,7 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 ## Rust 1.95+ 更新 {#rust-195-更新}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 Rust 1.95+ 重要更新：
 

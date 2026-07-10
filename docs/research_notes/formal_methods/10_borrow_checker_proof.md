@@ -15,7 +15,7 @@
 >
 > - 补充 Tree Borrows / RustSEM / RustBelt / Oxide 别名模型与操作语义
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 > **六篇并表**: README §formal_methods 六篇并表 第 2 行（借用（Borrowing））
 
 ---

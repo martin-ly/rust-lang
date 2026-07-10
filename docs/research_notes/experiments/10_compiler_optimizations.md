@@ -10,7 +10,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 > **对齐说明**: 本文档已于 2026-06-29 完成按 Criterion.rs Book、The Rust Performance Book、rustc Book、Rust Reference、TRPL、Rust Standard Library 等权威国际化来源的对齐升级。
 >
 > **权威来源**: [rustc Book](https://doc.rust-lang.org/rustc/) | [The Rust Performance Book](https://nnethercote.github.io/perf-book/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -75,7 +75,7 @@
 > **创建日期**: 2025-11-15
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 
 ---
 
@@ -239,7 +239,7 @@ Rust 编译器提供以下核心优化手段：
 >
 > **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 
-- **工具链版本**：`rustup update stable`（建议 `1.96.1+`）；`edition = "2024"`。
+- **工具链版本**：`rustup update stable`（建议 `1.97.0+`）；`edition = "2024"`。
 - **优化级别切换**：
   - `cargo build --release`（默认 `opt-level = 2`）
   - `cargo rustc --release -- -C opt-level=3`
@@ -624,7 +624,7 @@ fn dead_code_example() {
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
-- **Rust**: 1.96.1+；**cargo-bloat**：`cargo install cargo-bloat`；**Criterion**：工作区已配置
+- **Rust**: 1.97.0+；**cargo-bloat**：`cargo install cargo-bloat`；**Criterion**：工作区已配置
 - 建议关掉无关后台、固定 CPU 频率，多次运行取中位数
 
 ### 执行步骤 {#执行步骤}

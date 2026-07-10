@@ -3,7 +3,7 @@
 > **EN**: Message Passing Patterns
 > **Summary**: Rust channel-based concurrency: std::sync::mpsc, Crossbeam, bounded/unbounded channels, select, and common messaging patterns. Migrated to the concurrency patterns authority.
 >
-> **适用 Rust 版本**: 1.96.1+
+> **适用 Rust 版本**: 1.97.0+
 > **文档类型**: 重定向 stub
 
 ---

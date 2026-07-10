@@ -500,7 +500,7 @@ pub fn process_task(task_json: &str) -> String {
 ## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### 核心特性速查 {#核心特性速查}
 
@@ -548,7 +548,7 @@ let gamma = f64::consts::EULER_GAMMA;
 ## Rust 1.95+ 在WASM中的深度应用 {#rust-195-在wasm中的深度应用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-> **适用版本**: Rust 1.96.1+ | **实际场景**: WASM开发
+> **适用版本**: Rust 1.97.0+ | **实际场景**: WASM开发
 
 ### array_windows 在 WASM 图像处理中的应用 {#array_windows-在-wasm-图像处理中的应用}
 >

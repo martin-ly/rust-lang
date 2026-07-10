@@ -171,7 +171,7 @@ if let Some(value) = option {
     println!("无值");
 }
 
-// 链式 if let (Rust 1.96.1+)
+// 链式 if let (Rust 1.97.0+)
 if let Some(a) = option1 && let Some(b) = option2 {
     println!("都有值: {} {}", a, b);
 }
@@ -1098,7 +1098,7 @@ fn main() {
 ## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### 核心特性速查 {#核心特性速查}
 >

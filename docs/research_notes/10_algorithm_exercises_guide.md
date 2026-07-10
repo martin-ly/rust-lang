@@ -47,7 +47,7 @@
 
 本文档定位 `exercises/src/algorithms/` 算法专项练习的入口说明，配套代码位于 [`exercises/src/algorithms/`](../../exercises/src/algorithms) 目录。
 练习采用"函数骨架 + 参考实现 + 单元测试"的形式，覆盖排序、搜索、图论、动态规划与经典数据结构五大主题，
-帮助学习者在 Rust 1.96.1+ 环境中掌握算法实现与所有权（Ownership）、借用（Borrowing）、泛型（Generics）等 Rust 特性的结合。
+帮助学习者在 Rust 1.97.0+ 环境中掌握算法实现与所有权（Ownership）、借用（Borrowing）、泛型（Generics）等 Rust 特性的结合。
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 

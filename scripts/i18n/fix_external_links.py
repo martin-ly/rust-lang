@@ -171,7 +171,7 @@ URL_REPLACEMENTS: dict[str, str | None] = {
     "https://nexte.st/book/": None,
     # Fictional future release links (to be removed)
     "https://blog.rust-lang.org/2024/12/19/Rust-1.92.0.html": None,
-    "https://blog.rust-lang.org/2025/12/04/Rust-1.96.1.html": None,
+    "https://blog.rust-lang.org/2026/07/09/Rust-1.97.0.html": None,
     "https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/": None,
     "https://blog.rust-lang.org/2026/05/14/Rust-1.95.0.html": None,
     "https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html": None,

@@ -19,7 +19,7 @@
 > **相关文档**: [项目概览](/crates/c12_wasm/docs/tier_01_foundations/01_project_overview.md) | [主索引导航](/crates/c12_wasm/docs/tier_01_foundations/02_navigation.md) | [术语表](/crates/c12_wasm/docs/tier_01_foundations/03_glossary.md)
 
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.97.0+ / Edition 2024, WASM 2.0 + WASI 0.2
 
 ---
 
@@ -54,7 +54,7 @@
     - [Q: Rust 1.92.0 性能提升如何？](#q-rust-1920-性能提升如何)
     - [Q: 如何迁移到 Rust 1.92.0？](#q-如何迁移到-rust-1920)
   - [📚 相关资源](#-相关资源)
-  - **适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
+  - **适用版本**: Rust 1.97.0+ / Edition 2024, WASM 2.0 + WASI 0.2
   - [过渡段](#过渡段)
   - [定理链](#定理链)
 
@@ -397,7 +397,7 @@ wasm-pack test --headless --firefox
 
    ```bash
    rustup update stable
-   rustc --version  # 应该显示 1.96.1+
+   rustc --version  # 应该显示 1.97.0+
    ```
 
 2. **更新配置文件**
@@ -435,7 +435,7 @@ wasm-pack test --headless --firefox
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.97.0+ / Edition 2024, WASM 2.0 + WASI 0.2
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

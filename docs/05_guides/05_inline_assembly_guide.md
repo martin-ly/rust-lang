@@ -508,7 +508,7 @@ pub fn get_cycle_count() -> u64 {
 ## Rust 1.95+ 在内联汇编中的应用 {#rust-195-在内联汇编中的应用}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### LazyLock 在汇编优化缓存中的应用 {#lazylock-在汇编优化缓存中的应用}
 >

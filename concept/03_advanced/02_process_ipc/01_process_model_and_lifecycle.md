@@ -1,6 +1,6 @@
 > **EN**: Process Model and Lifecycle in Rust
 > **Summary**: A canonical guide to Rust's process abstraction, lifecycle management, resource control, and IPC safety guarantees, grounded in `std::process` and modern async runtimes.
-> **Rust Version**: 1.96.1+
+> **Rust Version**: 1.97.0+
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价
@@ -364,7 +364,7 @@ use std::process::Command;
 
 fn main() -> std::io::Result<()> {
     let output = Command::new("echo")
-        .args(["Rust", "1.96.1+"])
+        .args(["Rust", "1.97.0+"])
         .output()?;
     assert!(output.status.success());
     println!("{}", String::from_utf8_lossy(&output.stdout));

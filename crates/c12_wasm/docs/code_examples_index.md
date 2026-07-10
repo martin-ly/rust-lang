@@ -12,7 +12,7 @@
 > **项目状态**: ✅ 完整完成
 
 **最后更新**: 2025-12-11
-**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.97.0+ / Edition 2024, WASM 2.0 + WASI 0.2
 
 ---
 
@@ -201,7 +201,7 @@ wasmedge --enable-wasi-crypto app.wasm
 
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
-**适用版本**: Rust 1.96.1+ / Edition 2024, WASM 2.0 + WASI 0.2
+**适用版本**: Rust 1.97.0+ / Edition 2024, WASM 2.0 + WASI 0.2
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

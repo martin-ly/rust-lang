@@ -924,7 +924,7 @@ fn fib(n: usize) -> usize {
 ## Rust 1.95+ 在算法中的深度应用 {#rust-195-在算法中的深度应用}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-> **适用版本**: Rust 1.96.1+ | **实际场景**: 算法优化与数值计算
+> **适用版本**: Rust 1.97.0+ | **实际场景**: 算法优化与数值计算
 
 ---
 

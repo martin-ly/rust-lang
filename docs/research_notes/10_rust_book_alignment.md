@@ -11,7 +11,7 @@
 > **创建日期**: 2026-03-05
 > **Rust Book 版本**: 2024 Edition
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 > **最后更新**: 2026-06-29
 > **用途**: 将本项目文档与 The Rust Book 逐章对齐，确保权威来源全覆盖
 
@@ -35,7 +35,7 @@
     - [补全路线图 {#补全路线图}](#补全路线图-补全路线图)
   - [引用（Reference）索引 {#引用索引}](#引用索引-引用索引)
     - [Rust Book → 本项目映射 {#rust-book-本项目映射}](#rust-book--本项目映射-rust-book-本项目映射)
-  - [Rust 1.96.1+ / Edition 2024 权威来源对齐更新 {#rust-1960-edition-2024-权威来源对齐更新}](#rust-1961--edition-2024-权威来源对齐更新-rust-1960-edition-2024-权威来源对齐更新)
+  - [Rust 1.97.0+ / Edition 2024 权威来源对齐更新 {#rust-1960-edition-2024-权威来源对齐更新}](#rust-1961--edition-2024-权威来源对齐更新-rust-1960-edition-2024-权威来源对齐更新)
     - [核心特性与文档映射 {#核心特性与文档映射}](#核心特性与文档映射-核心特性与文档映射)
     - [代码示例更新 {#代码示例更新}](#代码示例更新-代码示例更新)
     - [相关文档 {#相关文档}](#相关文档-相关文档)
@@ -193,7 +193,7 @@
 | 代码示例 | 150+ | 1100+ | 733% |
 | 反例分析 | 20+ | 80+ | 400% |
 
-> 注：本项目在 Book 基础上提供了更深入的数学形式化，并已对齐 Rust 1.96.1+ / Edition 2024 的最新来源。
+> 注：本项目在 Book 基础上提供了更深入的数学形式化，并已对齐 Rust 1.97.0+ / Edition 2024 的最新来源。
 
 ---
 
@@ -276,7 +276,7 @@ Week 3
 
 **创建日期**: 2026-03-05
 
-**状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+**状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 
 **最后更新**: 2026-06-29
 
@@ -284,13 +284,13 @@ Week 3
 
 ---
 
-## Rust 1.96.1+ / Edition 2024 权威来源对齐更新 {#rust-1960-edition-2024-权威来源对齐更新}
+## Rust 1.97.0+ / Edition 2024 权威来源对齐更新 {#rust-1960-edition-2024-权威来源对齐更新}
 
 > **来源**: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
 > **适用版本**: Rust 1.97.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
-本文档已针对 **Rust 1.96.1+ / Edition 2024** 进行权威国际化来源对齐升级，逐章映射表、权威来源链接与缺口分析均与当前 TRPL 2024 Edition 保持一致。
+本文档已针对 **Rust 1.97.0+ / Edition 2024** 进行权威国际化来源对齐升级，逐章映射表、权威来源链接与缺口分析均与当前 TRPL 2024 Edition 保持一致。
 
 ### 核心特性与文档映射 {#核心特性与文档映射}
 
@@ -307,7 +307,7 @@ Week 3
 
 本文档中的所有 Rust 代码示例均已：
 
-- ✅ 使用 Rust 1.96.1+ 语法验证
+- ✅ 使用 Rust 1.97.0+ 语法验证
 - ✅ 兼容 Edition 2024
 - ✅ 通过标准库测试
 - ✅ 与 TRPL 2024 Edition 章节链接一致
@@ -322,13 +322,13 @@ Week 3
 
 **维护者**: Rust 学习项目团队
 
-**最后更新**: 2026-06-29 (Rust 1.96.1+ / Edition 2024 权威来源对齐升级)
+**最后更新**: 2026-06-29 (Rust 1.97.0+ / Edition 2024 权威来源对齐升级)
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-06-29 升级为 Rust 1.96.1+ / Edition 2024 细粒度国际化来源对齐表，删除旧 Rust 1.94 模板 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-06-29 升级为 Rust 1.97.0+ / Edition 2024 细粒度国际化来源对齐表，删除旧 Rust 1.94 模板 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2
 
@@ -336,7 +336,7 @@ Week 3
 
 **最后更新**: 2026-06-29
 
-**状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+**状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 
 ---
 

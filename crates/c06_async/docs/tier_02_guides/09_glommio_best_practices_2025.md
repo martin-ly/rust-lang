@@ -3,7 +3,7 @@
 > **EN**: Glommio Best Practices 2025
 > **Summary**: Glommio high-performance async runtime based on io_uring and thread-per-core architecture: CPU pinning, NUMA awareness, zero-copy I/O, and deployment guidelines. Migrated to the ecosystem authority.
 >
-> **适用 Rust 版本**: 1.96.1+
+> **适用 Rust 版本**: 1.97.0+
 > **文档类型**: 重定向 stub
 
 ---

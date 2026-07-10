@@ -1,5 +1,5 @@
 //! # Rust 1.96.0 特性 — 网络编程
-//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! **历史稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
 //! # Rust 1.96.0/1.96.1 feature — network programming
 //! - **`assert_matches!`**: network Result / Option 模式断言Test for
 

@@ -29,7 +29,7 @@
   - [📋 概述 {#概述}](#-概述-概述)
   - [🚀 快速开始 {#快速开始}](#-快速开始-快速开始)
     - [基本线程创建 {#基本线程创建}](#基本线程创建-基本线程创建)
-    - [作用域线程（Rust 1.96.1+） {#作用域线程rust-189}](#作用域线程rust-1961-作用域线程rust-189)
+    - [作用域线程（Rust 1.97.0+） {#作用域线程rust-189}](#作用域线程rust-1961-作用域线程rust-189)
   - [📊 核心功能 {#核心功能}](#-核心功能-核心功能)
     - [1. 线程管理 {#1-线程管理}](#1-线程管理-1-线程管理)
       - [线程池 {#线程池}](#线程池-线程池)
@@ -115,7 +115,7 @@ let handle = thread::spawn(|| {
 handle.join().unwrap();
 ```
 
-### 作用域线程（Rust 1.96.1+） {#作用域线程rust-189}
+### 作用域线程（Rust 1.97.0+） {#作用域线程rust-189}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -1327,7 +1327,7 @@ let counter = Arc::new(Mutex::new(0));
 ## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### LazyLock 深度应用（Rust 1.95+ 增强） {#lazylock-深度应用rust-195-增强}
 

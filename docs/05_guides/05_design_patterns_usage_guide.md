@@ -2265,7 +2265,7 @@ let req2 = builder.build()?; // 可以重用
 ## 🆕 Rust 1.95+ 特性在设计模式中的应用 {#rust-195-特性在设计模式中的应用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 Rust 1.95+ 引入的新特性为设计模式实现提供了更优雅、更高效的解决方案。
 

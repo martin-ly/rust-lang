@@ -4,7 +4,7 @@
 > **本节关键术语**: Cargo · Crate · Package · Manifest · `Cargo.toml` — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Getting Started
-> **Summary**: A beginner-oriented guide to Cargo 1.96.1+: verifying the toolchain, creating a package with `cargo new`/`cargo init`, building/running/checking, adding dependencies, and choosing between binary, library, script, and workspace projects.
+> **Summary**: A beginner-oriented guide to Cargo 1.97.0+: verifying the toolchain, creating a package with `cargo new`/`cargo init`, building/running/checking, adding dependencies, and choosing between binary, library, script, and workspace projects.
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 应用
 > **A/S/P 标记**: **P** — Practice

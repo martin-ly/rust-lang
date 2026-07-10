@@ -133,7 +133,7 @@ AUTHORITY_SOURCES: Final[dict[str, str]] = {
 }
 
 # 稳定 Rust 版本（用于版本对齐）
-RUST_VERSION: Final[str] = "1.96.1"
+RUST_VERSION: Final[str] = "1.97.0"
 RUST_EDITION: Final[str] = "2024"
 
 

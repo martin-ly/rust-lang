@@ -34,7 +34,7 @@ exclude = [
 [workspace.package]
 version = "3.1.0"
 edition = "2024"
-rust-version = "1.96.1"
+rust-version = "1.97.0"
 license = "MIT OR Apache-2.0"
 authors = ["Rust Learning Community"]
 repository = "https://github.com/martin-ly/rust-lang"
@@ -61,7 +61,7 @@ codegen-units = 1
 #strip = true
 strip = "symbols"
 
-# Rust 1.95+: 分割调试信息 (macOS 上特别有效，1.96+ 仍适用)
+# Rust 1.95+: 分割调试信息 (macOS 上特别有效，1.97+ 仍适用)
 split-debuginfo = "packed"
 
 # 默认情况下，Rust 在 panic 时会进行栈展开，提供详细的调用栈信息。
@@ -69,7 +69,7 @@ split-debuginfo = "packed"
 # 这种配置不仅减小了二进制体积（因为它不需要包含栈展开的代码），还能略微提升性能。
 panic = "abort"
 
-# CPU指令集优化 - Rust 1.95+ 推荐设置 (1.96+ 仍适用)
+# CPU指令集优化 - Rust 1.95+ 推荐设置 (1.97+ 仍适用)
 # 启用所有可用的CPU指令集优化
 # 注意: target-cpu 和 target-feature 需要在编译时通过环境变量或.cargo/config.toml设置
 
@@ -96,7 +96,7 @@ incremental = true
 codegen-units = 256
 # 使用 unwind panic 可以获得更好的调试信息
 panic = "unwind"
-# Rust 1.96: 开发环境使用分割调试信息（减小目标文件体积）
+# Rust 1.97: 开发环境使用分割调试信息（减小目标文件体积）
 split-debuginfo = "unpacked"
 
 # 开发环境构建优化 - 构建依赖使用轻量级优化
@@ -182,8 +182,8 @@ codegen-units = 1024
 panic = "abort"
 
 # 工作区级别的依赖版本统一
-# 2026-07-04: Rust 1.96.1 stable / 1.98.0-nightly 同步更新
-# rust-version: 1.96.1
+# 2026-07-10: Rust 1.97.0 stable / 1.98.0-nightly 同步更新
+# rust-version: 1.97.0
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
 [workspace.dependencies]
 # 本地 crate
@@ -806,7 +806,7 @@ const-hex = "=1.19.1"
 unsafe_code = "forbid"
 double_negations = "warn"
 irrefutable_let_patterns = "allow"
-# Rust 1.95+ 新增lints (1.96+ 仍适用)
+# Rust 1.95+ 新增lints (1.97+ 仍适用)
 unused_crate_dependencies = "warn"
 missing_docs = "allow"
 # 声明 nightly 预览模块使用的自定义 cfg，避免 unexpected_cfgs 警告
@@ -825,7 +825,7 @@ cargo = { level = "allow", priority = -1 }
 # 额外有用的lints
 match_wildcard_for_single_variants = "warn"
 redundant_closure_for_method_calls = "warn"
-# Rust 1.95+ 推荐lints (1.96+ 仍适用)
+# Rust 1.95+ 推荐lints (1.97+ 仍适用)
 ignored_unit_patterns = "warn"
 manual_c_str_literals = "warn"
 unnecessary_map_on_constructor = "warn"

@@ -22,7 +22,7 @@
     - [1.1 各章节内容规范](#11-各章节内容规范)
   - [二、思维表征规范](#二思维表征规范)
     - [2.1 概念定义属性关系矩阵（Concept-Attribute-Relation Matrix） 概念属性矩阵方法论参照知识图谱表示学习 — Bordes et al. *Translating Embeddings for Modeling Multi-Relational Data* (NIPS 2013); 知识表示的三元组结构 (实体-关系-实体)](#21-概念定义属性关系矩阵concept-attribute-relation-matrix-概念属性矩阵方法论参照知识图谱表示学习--bordes-et-al-translating-embeddings-for-modeling-multi-relational-data-nips-2013-知识表示的三元组结构-实体-关系-实体)
-    - [2.2 思维导图（Mind Map） Buzan, T. — *The Mind Map Book*. BBC Books, 1993; 思维导图作为放射性思维的可视化工具; 认知科学中的图式理论 (Schema Theory)](#22-思维导图mind-map-buzan-t--the-mind-map-book-bbc-books-1993-思维导图作为放射性思维的可视化工具-认知科学中的图式理论-schema-theory)
+    - [2.2 思维导图（Mind Map） Buzan, T. — *The Mind Map Book*. BBC Books, 1993; 思维导图作为放射性思维的可视化工具; 认知科学中的图式理论 (Schema Theory)](#22-思维导图mind-map-buzan-t--the-mind-map-book-bbc-books-1993-思维导图作为放射性思维的可视化工具-认知科学中的图式理论-schema-theory-)
     - [2.3 决策树图（Decision Tree） 决策树方法论参照 Quinlan, J.R. — *Induction of Decision Trees*. Machine Learning, 1986; 信息增益与熵减作为决策分支的标准](#23-决策树图decision-tree-决策树方法论参照-quinlan-jr--induction-of-decision-trees-machine-learning-1986-信息增益与熵减作为决策分支的标准)
     - [2.4 定理推理判断树（Theorem Inference Tree） 定理证明方法论参照 Gentzen 的自然演绎 (Natural Deduction) 系统; 推理规则的树形结构化表示](#24-定理推理判断树theorem-inference-tree-定理证明方法论参照-gentzen-的自然演绎-natural-deduction-系统-推理规则的树形结构化表示)
     - [2.5 边界判定树（Boundary Decision Tree） 边界分析方法参照 Torchiano et al. (2018) 软件工程知识库边界分析研究; 反事实推理 (Counterfactual Reasoning) 在程序分析中的应用](#25-边界判定树boundary-decision-tree-边界分析方法参照-torchiano-et-al-2018-软件工程知识库边界分析研究-反事实推理-counterfactual-reasoning-在程序分析中的应用)

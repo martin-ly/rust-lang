@@ -10,7 +10,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 > **对齐说明**: 本文档已于 2026-06-29 完成按 Criterion.rs Book、The Rust Performance Book、rustc Book、Rust Reference、TRPL、Rust Standard Library 等权威国际化来源的对齐升级。
 >
 > **权威来源**: [Rust Reference – Macros](https://doc.rust-lang.org/reference/macros.html) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -69,7 +69,7 @@
 > **创建日期**: 2025-11-15
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 
 ---
 
@@ -252,7 +252,7 @@
 >
 > **来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)**
 
-- **工具链版本**：`rustup update stable`（建议 `1.96.1+`）；`edition = "2024"`。
+- **工具链版本**：`rustup update stable`（建议 `1.97.0+`）；`edition = "2024"`。
 - **查看宏展开**：`cargo install cargo-expand && cargo expand > expanded.rs`。
 - **测量编译时间**：`cargo clean && time cargo build --release`（冷编译）；`cargo build --timings`（按 crate 分解）。
 - **二进制体积分析**：`cargo install cargo-bloat && cargo bloat --release -n 30`。
@@ -403,7 +403,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 **测试环境**：
 
-- Rust 版本: 1.96.1+
+- Rust 版本: 1.97.0+
 - 项目大小: 中等规模
 
 **结果**：
@@ -478,7 +478,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-- **Rust**: 1.96.1+；**cargo-expand**：`cargo install cargo-expand`；**cargo-bloat**：`cargo install cargo-bloat`
+- **Rust**: 1.97.0+；**cargo-expand**：`cargo install cargo-expand`；**cargo-bloat**：`cargo install cargo-bloat`
 - 建议 `cargo clean` 后测量冷编译；增量编译需固定 `touch` 策略
 
 ### 执行步骤 {#执行步骤}

@@ -3,7 +3,7 @@
 > **EN**: Cross-Platform Concurrency
 > **Summary**: Platform-specific threading models, synchronization primitives, and conditional-compilation strategies for portable concurrent Rust across Windows, Linux, macOS, and mobile targets.
 >
-> **适用 Rust 版本**: 1.96.1+
+> **适用 Rust 版本**: 1.97.0+
 > **文档类型**: 重定向 stub
 
 ---

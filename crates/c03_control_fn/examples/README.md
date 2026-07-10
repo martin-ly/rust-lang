@@ -55,7 +55,7 @@ cargo run --example iterator_adapters
 
 ---
 
-*示例基于 Rust 1.96.1+，Edition 2024*
+*示例基于 Rust 1.97.0+，Edition 2024*
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

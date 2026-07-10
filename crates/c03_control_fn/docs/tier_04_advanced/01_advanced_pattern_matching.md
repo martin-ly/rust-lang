@@ -3,7 +3,7 @@
 > **EN**: Advanced Pattern Matching
 > **Summary**: Advanced Rust pattern matching techniques: nested destructuring, match guards, bindings, slice patterns, or-patterns, reference modes, and let-else. Migrated to the patterns authority.
 >
-> **适用 Rust 版本**: 1.96.1+
+> **适用 Rust 版本**: 1.97.0+
 > **文档类型**: 重定向 stub
 
 ---

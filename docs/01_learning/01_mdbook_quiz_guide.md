@@ -417,7 +417,7 @@ A: 目前 mdbook-quiz 不支持直接导出。可以通过浏览器的 Local Sto
 ## Rust 1.95+ 学习路径 {#rust-195-学习路径}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### 1.95+ 新特性学习要点 {#195-新特性学习要点}
 >

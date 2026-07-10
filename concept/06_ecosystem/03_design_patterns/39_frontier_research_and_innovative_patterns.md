@@ -519,7 +519,7 @@ pub fn linear_session_example() {
 
 ---
 
-### 4.2.3 Rust 1.96.1+ 线性类型实践
+### 4.2.3 Rust 1.97.0+ 线性类型实践
 
 ```rust
 /// 使用 Drop 检查器模拟线性约束

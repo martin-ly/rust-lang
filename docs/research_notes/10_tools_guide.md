@@ -53,7 +53,7 @@
   - [📚 Cargo Book 与 rustc dev guide 权威章节 {#cargo-book-与-rustc-dev-guide-权威章节}](#-cargo-book-与-rustc-dev-guide-权威章节-cargo-book-与-rustc-dev-guide-权威章节)
     - [Cargo Book 重点章节 {#cargo-book-重点章节}](#cargo-book-重点章节-cargo-book-重点章节)
     - [rustc dev guide 重点章节 {#rustc-dev-guide-重点章节}](#rustc-dev-guide-重点章节-rustc-dev-guide-重点章节)
-  - [🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960}](#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960)
+  - [🆕 权威国际化内容升级 (Rust 1.97.0+) {#权威国际化内容升级-rust-1960}](#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960)
     - [本次升级要点 {#本次升级要点}](#本次升级要点-本次升级要点)
   - [相关概念 {#相关概念}](#相关概念-相关概念)
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
@@ -854,7 +854,7 @@ cargo expand > expanded.rs
 
 ---
 
-## 🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960}
+## 🆕 权威国际化内容升级 (Rust 1.97.0+) {#权威国际化内容升级-rust-1960}
 >
 > **来源**: [Rust Research Community]
 > **适用版本**: Rust 1.97.0+ (Edition 2024)

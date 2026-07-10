@@ -1,7 +1,7 @@
 //! Rust 1.97 Nightly 前瞻/候选特性 —— 类型系统
 //!
 //! 本模块演示 Rust 1.97 中稳定化的类型/数值相关 API。
-//! 实际代码使用等价的 Rust 1.96.1 兼容实现；1.97 原生调用以 `#[cfg(nightly)]`
+//! 实际代码使用等价的 Rust 1.97.0 兼容实现；1.97 原生调用以 `#[cfg(nightly)]`
 //! 分支保留，可通过 `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 #![allow(clippy::incompatible_msrv)]
 #![allow(unexpected_cfgs)]

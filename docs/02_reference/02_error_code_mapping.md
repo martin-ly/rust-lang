@@ -651,7 +651,7 @@ fn main() {
 ## Rust 1.95+ 更新说明 {#rust-195-更新说明}
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 Rust 1.94 对错误诊断进行了多项改进：
 

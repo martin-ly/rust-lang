@@ -3,7 +3,7 @@
 > **EN**: Async Integration Practice
 > **Summary**: Combining threads and async runtimes: spawn_blocking bridges, mixed CPU/IO architectures, Tokio thread pool configuration, and channel interoperability. Migrated to the async patterns authority.
 >
-> **适用 Rust 版本**: 1.96.1+
+> **适用 Rust 版本**: 1.97.0+
 > **文档类型**: 重定向 stub
 
 ---

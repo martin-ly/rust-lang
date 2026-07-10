@@ -538,7 +538,7 @@ struct PluginManager {
 
 **完成时间**: 2025-10-19
 **文档状态**: ✅ 已完成并整合到文档体系
-**适用版本**: Rust 1.96.1+
+**适用版本**: Rust 1.97.0+
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >

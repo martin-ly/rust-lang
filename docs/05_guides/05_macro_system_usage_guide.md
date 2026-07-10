@@ -919,7 +919,7 @@ macro_rules! public_macro {
 ## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### 新特性概览 {#新特性概览}
 >
@@ -967,7 +967,7 @@ let result = items.iter().try_for_each(|&n| {
 ## Rust 1.95+ 在宏系统中的应用 {#rust-195-在宏系统中的应用}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### array_windows 在宏展开优化中的应用 {#array_windows-在宏展开优化中的应用}
 >

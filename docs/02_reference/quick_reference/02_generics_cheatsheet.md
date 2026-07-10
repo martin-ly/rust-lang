@@ -820,7 +820,7 @@ fn main() {
 ## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### 核心特性速查 {#核心特性速查}
 >
@@ -868,7 +868,7 @@ let gamma = f64::consts::EULER_GAMMA;
 ## Rust 1.95+ 在泛型中的深度应用 {#rust-195-在泛型中的深度应用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-> **适用版本**: Rust 1.96.1+ | **实际场景**: 泛型开发
+> **适用版本**: Rust 1.97.0+ | **实际场景**: 泛型开发
 
 ### ControlFlow 在泛型约束中的应用 {#controlflow-在泛型约束中的应用}
 >

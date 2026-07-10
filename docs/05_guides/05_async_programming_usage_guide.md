@@ -344,7 +344,7 @@ async fn main() {
 ### 6. Async Closures {#6-async-closures}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-> **Rust 版本**: 1.96.1+ Stable
+> **Rust 版本**: 1.97.0+ Stable
 > **相关文档**: [Async Closures 深度指南](../../crates/c06_async/docs/async_closures_guide.md)
 
 Rust 1.85 稳定了 async closures，引入了 `AsyncFn`、`AsyncFnMut`、`AsyncFnOnce` trait family，
@@ -1691,7 +1691,7 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 ## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### ControlFlow 在异步编程中的应用 {#controlflow-在异步编程中的应用}
 

@@ -5,7 +5,7 @@
 >
 > **受众**: [进阶] / [专家]
 > **内容分级**: [参考级]
-> **对应 Rust 版本**: **1.97.0 stable**（项目 `rust-toolchain.toml` 保持 `stable` 通道，由 rustup 自动解析；本地镜像当前可能仍为 1.96.1）
+> **对应 Rust 版本**: **1.97.0 stable**（项目 `rust-toolchain.toml` 保持 `stable` 通道，由 rustup 自动解析为当前 latest stable 1.97.0）
 > **最后更新**: 2026-07-10
 > **状态**: ✅ 已对齐 Rust 1.97.0 stable
 >
@@ -336,6 +336,6 @@ cargo build
 
 ## 10. 项目构建说明
 
-本项目 `rust-toolchain.toml` 保持 `channel = "stable"`，由 rustup 自动解析当前 latest stable。Rust 1.97.0 发布后，`stable` 将逐步解析到 1.97.0；在本地 rustup 镜像仍为 1.96.1 的环境中，代码中的等效实现（fallback）可保证向后兼容。
+本项目 `rust-toolchain.toml` 保持 `channel = "stable"`，由 rustup 自动解析当前 latest stable。Rust 1.97.0 已发布，`stable` 通道当前解析到 1.97.0；`Cargo.toml` 中的 `rust-version = "1.97.0"` 为项目 MSRV。
 
-如需在 1.96.1 环境下编译，`#[cfg(nightly)]` 分支不会启用，文档中标记为 `rust,ignore` 的 1.97 专属示例也不会参与默认构建。
+`#[cfg(nightly)]` 分支仅在 nightly 工具链下启用，文档中标记为 `rust,ignore` 的 nightly 专属示例不会参与默认 stable 构建。

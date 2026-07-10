@@ -1,6 +1,6 @@
 > **EN**: Process Performance Engineering in Rust
 > **Summary**: Performance analysis, profiling tools, zero-copy IPC, process pool optimization, and production monitoring for Rust process management.
-> **Rust Version**: 1.96.1+
+> **Rust Version**: 1.97.0+
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价

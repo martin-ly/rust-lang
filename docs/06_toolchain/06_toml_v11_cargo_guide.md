@@ -9,7 +9,7 @@
 > **内容分级**: [专家级]
 > **文档状态**: 活跃维护
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.96.1+ (TOML v1.1 支持)
+> **Rust 版本**: 1.97.0+ (TOML v1.1 支持)
 > **Edition**: 2024
 
 ---
@@ -181,7 +181,7 @@ path = "../my-lib"
 
 ```toml
 # Cargo.toml {#cargotoml}
-# 适用于：Rust 1.96.1+, TOML v1.1 {#适用于rust-1960-toml-v11}
+# 适用于：Rust 1.97.0+, TOML v1.1 {#适用于rust-1960-toml-v11}
 
 [package]
 name = "advanced-networking"

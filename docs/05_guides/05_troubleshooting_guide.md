@@ -409,7 +409,7 @@ while retries > 0 {
 
 **升级建议**：
 
-- 如果使用 musl 目标且遇到 DNS 解析问题，强烈建议升级到 Rust 1.96.1+
+- 如果使用 musl 目标且遇到 DNS 解析问题，强烈建议升级到 Rust 1.97.0+
 
 ---
 
@@ -611,7 +611,7 @@ A: 使用 `cargo tree` 查看依赖关系
 ## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >
 > **[来源: [crates.io](https://crates.io/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### 新特性概览 {#新特性概览}
 >
@@ -658,7 +658,7 @@ let result = items.iter().try_for_each(|&n| {
 ## Rust 1.95+ 故障排查指南 {#rust-195-故障排查指南}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### LazyLock 初始化问题排查 {#lazylock-初始化问题排查}
 >

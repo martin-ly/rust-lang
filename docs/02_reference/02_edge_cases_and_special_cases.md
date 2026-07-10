@@ -134,7 +134,7 @@ assert_unwind_safe::<IntoIter<*mut i32>>();  // 1.93 可行
 ## Rust 1.95+ 更新 {#rust-195-更新}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 详见 Rust 1.94 发布说明
 

@@ -3,7 +3,7 @@
 > **EN**: Synchronization Primitives Practice
 > **Summary**: Practical usage of Mutex, RwLock, Condvar, Barrier, Once, and OnceLock for coordinating shared state in concurrent Rust. Migrated to the concurrency authority.
 >
-> **适用 Rust 版本**: 1.96.1+
+> **适用 Rust 版本**: 1.97.0+
 > **文档类型**: 重定向 stub
 
 ---

@@ -1,6 +1,6 @@
 //! Rust 1.97 Nightly 前瞻/候选特性代码示例
 //! **状态**: Rust 1.97.0 nightly candidate（2026-07-09）
-//! **编译要求**: Rust 1.96.1+ 可编译（使用等效实现）；`#[cfg(nightly)]` 分支调用 1.97+ 新 API，
+//! **编译要求**: Rust 1.97.0+ 可编译（使用等效实现）；`#[cfg(nightly)]` 分支调用 1.97+ 新 API，
 //! 可通过 `RUSTFLAGS="--cfg nightly" cargo build` 启用。
 //! **来源**: [releases.rs](https://releases.rs/) · [Rust Standard Library Tracking](https://github.com/rust-lang/rust/labels/T-libs-api)
 //!
@@ -22,7 +22,7 @@ use std::num::NonZeroU32;
 ///
 /// 这些 API 避免了在查询前对零值进行特殊处理，因为 `NonZero` 类型本身已保证非零。
 ///
-/// 当前等效实现可在 Rust 1.96.1+ 编译；`#[cfg(nightly)]` 分支调用 1.97 原生 API。
+/// 当前等效实现可在 Rust 1.97.0+ 编译；`#[cfg(nightly)]` 分支调用 1.97 原生 API。
 #[cfg(nightly)]
 pub fn demo_nonzero_bit_ops() {
     let n = NonZeroU32::new(0b10100).unwrap();
@@ -48,7 +48,7 @@ pub fn demo_nonzero_bit_ops() {
 ///
 /// 使得字符分类可在编译期常量/静态项中使用。
 ///
-/// 当前等效实现可在 Rust 1.96.1+ 编译；`#[cfg(nightly)]` 分支调用 1.97 原生 API。
+/// 当前等效实现可在 Rust 1.97.0+ 编译；`#[cfg(nightly)]` 分支调用 1.97 原生 API。
 #[cfg(nightly)]
 pub fn demo_char_is_control_const() {
     const SPACE_CTRL: bool = ' '.is_control(); // false

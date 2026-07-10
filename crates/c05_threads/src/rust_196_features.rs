@@ -1,5 +1,5 @@
 //! # Rust 1.96.0 稳定特性演示模块
-//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! **历史稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
 //! # Rust 1.96.0/1.96.1 feature demonstration module
 //! # Rust 1.96.0/1.96.1 稳定featuredemonstration module
 //! # Rust 1.96.0/1.96.1 stablefeaturedemonstration module

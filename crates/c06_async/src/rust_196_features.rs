@@ -1,5 +1,5 @@
 //! # Rust 1.96.0 稳定特性演示模块（异步编程）
-//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! **历史稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
 //! # Rust 1.96.0/1.96.1 feature demonstration module （async ）
 //!
 //! 本模块展示 Rust 1.96.0/1.96.1 在异步编程中的关键新 API：

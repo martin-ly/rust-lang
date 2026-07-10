@@ -707,7 +707,7 @@ let b: Array<i32, 4> = Array { data: [1, 2, 3, 4] };
 > **关键洞察**: Const Generics 不是"依赖类型的弱化版"，而是**工程上的精确裁剪**——它保留了依赖类型在系统编程中最有用的子集（数组长度、缓冲区大小、维度参数），同时避免了完整依赖类型带来的编译期不可判定性问题。
 > **来源**: [Wikipedia: Dependent type](https://en.wikipedia.org/wiki/Dependent_type) · [RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Idris 文档: Dependent Types]
 
-### 10.1b Const Generics 的形式化演进（1.96.1+）
+### 10.1b Const Generics 的形式化演进（1.97.0+）
 
 > **来源: Rust 1.89 Release Notes; [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)** Rust 1.89 稳定了 `_` 推断 const generics 参数，使常量参数获得与类型参数同等的 HM 推断能力。
 
@@ -1523,25 +1523,25 @@ process(Vec::new());  // ✅ 从参数类型推断 T = i32
     - [2.1 仿射类型系统](#11-类型系统分类)
     - 2.2 HM 类型推断
     - 2.3 类型安全保证
-  - 3. 高阶类型
+  - 1. 高阶类型
     - [3.1 Higher-Kinded Types](#102-higher-kinded-typeshkt的缺失与-workaround)
     - 3.2 GATs (泛型关联类型)
     - 3.3 HRTB (高阶Trait边界)
     - 3.4 高阶类型的实战应用
     - 3.5 Kind 系统的深度理解
-  - 4. 类型级编程
+  - 1. 类型级编程
     - 4.1 类型级计算
     - 4.2 Phantom Types
     - 4.3 状态机类型编码
-  - 5. 子类型和型变
+  - 1. 子类型和型变
     - [5.1 子类型关系](#11-类型系统分类)
     - 5.2 型变规则
     - 5.3 生命周期（Lifetimes）的格理论
-  - 6. 线性类型和仿射类型
+  - 1. 线性类型和仿射类型
     - 6.1 线性类型
     - 6.2 仿射类型
     - 6.3 所有权和借用（Borrowing）的类型理论
-  - 7. 依赖类型模拟
+  - 1. 依赖类型模拟
     - [7.1 Const Generics](#101b-const-generics-的形式化演进1961)
     - 7.2 类型级数值
     - 7.3 约束和验证
@@ -1551,15 +1551,15 @@ process(Vec::new());  // ✅ 从参数类型推断 T = i32
     - 7.7 范畴论视角下的类型系统
     - 7.8 代数数据类型 (ADT) 的深度理解
   - 7.9 Rust类型系统的表达边界
-  - 8. 形式化验证
+  - 1. 形式化验证
     - 8.1 类型正确性
     - 8.2 类型保全性
     - 8.3 进展性
     - 8.2 类型保全性1
     - 8.3 进展性1
     - 8.4 内存安全（Memory Safety）性
-  - 9. 总结
-  - 10. 参考资源
+  - 1. 总结
+  - 1. 参考资源
     - 学术论文
     - 书籍
     - 在线资源

@@ -344,7 +344,7 @@ fn api_stabilization_example() {
 
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 

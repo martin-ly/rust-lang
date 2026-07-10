@@ -1,5 +1,5 @@
 //! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
-//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! **历史稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
 //! # Rust 1.96 feature module （feature and 1.96 before ）
 //!
 //! 本模块展示了 Rust 范围类型的应用，包括：

@@ -1,5 +1,5 @@
 //! # Rust 1.96.0 feature — 控制streamandfunction
-//! **当前稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
+//! **历史稳定 patch**: Rust 1.96.1（基于 Rust 1.96.0 特性集）
 //! - **`std::assert_matches`**: `assert_matches!` 宏用于在测试中断言模式匹配
 //!   类型字段公开，支持直接构造和重用
 //!   type field ，and

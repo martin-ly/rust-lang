@@ -49,7 +49,7 @@ class RustVersionTracker:
         except Exception as e:
             print(f"警告: 无法读取当前版本: {e}")
         
-        return "1.96.1"  # 默认值
+        return "1.97.0"  # 默认值
     
     def fetch_latest_version(self) -> Optional[str]:
         """获取最新的 Rust 稳定版本"""
@@ -66,7 +66,7 @@ class RustVersionTracker:
             try:
                 with urllib.request.urlopen(RUST_RELEASES_URL, timeout=10) as response:
                     data = json.loads(response.read().decode())
-                    return data.get('version', '1.96.1')
+                    return data.get('version', '1.97.0')
             except:
                 pass
             

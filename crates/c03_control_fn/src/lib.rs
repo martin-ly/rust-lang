@@ -113,7 +113,7 @@ pub use basic_syntax::*;
 
 // 版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
-pub const RUST_VERSION: &str = "1.96.1";
+pub const RUST_VERSION: &str = "1.97.0";
 
 /// 项目元信息。
 pub struct ProjectInfo;

@@ -516,7 +516,7 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
 ## Rust 1.95+ 在 AI/ML 开发中的应用 {#rust-195-在-aiml-开发中的应用}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### array_windows 在特征工程中的应用 {#array_windows-在特征工程中的应用}
 

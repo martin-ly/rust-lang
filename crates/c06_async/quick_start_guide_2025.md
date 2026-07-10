@@ -49,7 +49,7 @@
 -Quick Start Guide for Rust Async Programming 2025
 
 **更新日期**: 2025-10-04
-**适用版本**: Rust 1.96.1+ | Tokio 1.41+ | Smol 2.0+
+**适用版本**: Rust 1.97.0+ | Tokio 1.41+ | Smol 2.0+
 
 ---
 

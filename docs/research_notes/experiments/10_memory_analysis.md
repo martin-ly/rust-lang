@@ -10,7 +10,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 > **对齐说明**: 本文档已于 2026-06-29 完成按 Criterion.rs Book、The Rust Performance Book、rustc Book、Rust Reference、TRPL、Rust Standard Library 等权威国际化来源的对齐升级。
 >
 > **权威来源**: [The Rust Performance Book](https://nnethercote.github.io/perf-book/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -72,7 +72,7 @@
 > **创建日期**: 2025-11-15
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.1+ / Edition 2024）
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 
 ---
 
@@ -292,7 +292,7 @@ Rust 的内存性能优化可从以下维度切入：
 >
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- **工具链版本**：`rustup update stable`（建议 `1.96.1+`）；`edition = "2024"`。
+- **工具链版本**：`rustup update stable`（建议 `1.97.0+`）；`edition = "2024"`。
 - **内存泄漏检测**：`valgrind --leak-check=full --show-leak-kinds=all ./target/release/your_binary`（Linux）。
 - **未定义行为检测**：`MIRIFLAGS="-Zmiri-tag-raw-pointers" cargo +stable miri run`（Miri 需 `rustup component add miri`）。
 - **堆分析**：`heaptrack ./target/release/your_binary`、`cargo add dhat`，或自定义 `#[global_allocator]`。
@@ -586,7 +586,7 @@ fn analyze_memory_layout() {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-- **Rust**: 1.96.1+；**Valgrind**: 3.18+（Linux）；**Miri**: `rustup component add miri`
+- **Rust**: 1.97.0+；**Valgrind**: 3.18+（Linux）；**Miri**: `rustup component add miri`
 - **dhat**：`cargo add dhat` 或使用 `#[global_allocator]` + 自定义 TrackingAllocator
 
 ### 执行步骤 {#执行步骤}

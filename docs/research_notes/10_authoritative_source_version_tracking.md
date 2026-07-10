@@ -33,7 +33,7 @@
 
 状态标记：
 
-- ✅ 最新 — 已检查至当前 Rust 1.96.1+ / Edition 2024
+- ✅ 最新 — 已检查至当前 Rust 1.97.0+ / Edition 2024
 - 🔄 需更新 — 权威来源有新版本，项目文档待同步
 - ⏳ 待检查 — 尚未完成版本核对
 
@@ -43,19 +43,19 @@
 
 | 权威来源 | URL | 版本/Edition | 最后检查 | 状态 |
 |----------|-----|--------------|----------|------|
-| The Rust Book | [Rust Book](https://doc.rust-lang.org/book/) | 2024 Edition, 1.96.1+ | 2026-06-29 | ✅ |
-| Rust Reference | [Rust Reference](https://doc.rust-lang.org/reference/) | 1.96.1+ | 2026-06-29 | ✅ |
-| Rustonomicon | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 1.96.1+ | 2026-06-29 | ✅ |
-| Cargo Book | [Cargo Book](https://doc.rust-lang.org/cargo/) | 1.96.1+ | 2026-06-29 | ✅ |
+| The Rust Book | [Rust Book](https://doc.rust-lang.org/book/) | 2024 Edition, 1.97.0+ | 2026-06-29 | ✅ |
+| Rust Reference | [Rust Reference](https://doc.rust-lang.org/reference/) | 1.97.0+ | 2026-06-29 | ✅ |
+| Rustonomicon | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 1.97.0+ | 2026-06-29 | ✅ |
+| Cargo Book | [Cargo Book](https://doc.rust-lang.org/cargo/) | 1.97.0+ | 2026-06-29 | ✅ |
 | Rust Edition Guide | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) | 2024 Edition | 2026-06-29 | ✅ |
-| Async Book | [Async Book](https://rust-lang.github.io/async-book/) | 1.96.1+ | 2026-06-29 | ✅ |
+| Async Book | [Async Book](https://rust-lang.github.io/async-book/) | 1.97.0+ | 2026-06-29 | ✅ |
 | Rust RFCs | [Rust RFCs](https://rust-lang.github.io/rfcs/) | 持续更新 | 2026-06-29 | ✅ |
-| Standard Library | [Standard Library](https://doc.rust-lang.org/std/) | 1.96.1+ | 2026-06-29 | ✅ |
-| Rust By Example | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | 1.96.1+ | 2026-06-29 | ✅ |
+| Standard Library | [Standard Library](https://doc.rust-lang.org/std/) | 1.97.0+ | 2026-06-29 | ✅ |
+| Rust By Example | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | 1.97.0+ | 2026-06-29 | ✅ |
 | Unsafe Code Guidelines | [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) | 持续更新 | 2026-06-29 | ✅ |
-| Rust Error Codes | [Rust Error Codes](https://doc.rust-lang.org/error_codes/error-index.html) | 1.96.1+ | 2026-06-29 | ✅ |
+| Rust Error Codes | [Rust Error Codes](https://doc.rust-lang.org/error_codes/error-index.html) | 1.97.0+ | 2026-06-29 | ✅ |
 | Ferrocene FLS | [Ferrocene FLS](https://spec.ferrocene.dev/) | 1.76+ (stable) | 2026-06-29 | ✅ |
-| rustc-dev-guide | [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | 1.96.1+ | 2026-06-29 | ✅ |
+| rustc-dev-guide | [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | 1.97.0+ | 2026-06-29 | ✅ |
 
 ---
 

@@ -542,7 +542,7 @@ fn process_file(path: &str) -> Result<Vec<i32>, MyError> {
 ## Rust 1.95+ 高级特性深度解析 {#rust-195-高级特性深度解析}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### array_windows 的高级模式 {#array_windows-的高级模式}
 

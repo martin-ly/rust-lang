@@ -4,7 +4,7 @@
 > **Summary**: 形式化验证整合指南 Formal Verification Integration Guide.
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
-> **版本**: Rust 1.96.1+
+> **版本**: Rust 1.97.0+
 > **工具**: Miri, Kani, Prusti, Creusot, Aeneas
 > **最后更新**: 2026-05-08
 > **状态**: ✅ 生产就绪

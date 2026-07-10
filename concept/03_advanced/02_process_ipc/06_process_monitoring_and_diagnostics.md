@@ -1,6 +1,6 @@
 > **EN**: Process Monitoring and Diagnostics in Rust
 > **Summary**: Monitoring process status, resource usage, logging, and diagnostic techniques for Rust child processes.
-> **Rust Version**: 1.96.1+
+> **Rust Version**: 1.97.0+
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价

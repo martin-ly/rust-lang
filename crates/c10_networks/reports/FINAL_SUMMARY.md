@@ -1,6 +1,6 @@
 ﻿# C10 Networks 项目持续推进总结
 
-> 适用范围：Rust 1.96.1+；本总结遵循 `docs/STYLE.md`。
+> 适用范围：Rust 1.97.0+；本总结遵循 `docs/STYLE.md`。
 
 ## 📊 目录
 

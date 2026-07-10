@@ -1516,7 +1516,7 @@
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证} | `#-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证` | 同文件锚点不存在: #-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证 |
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 🔬 并发安全证明树 {#并发安全证明树} | `#-并发安全证明树-并发安全证明树` | 同文件锚点不存在: #-并发安全证明树-并发安全证明树 |
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 🎯 核心概念 {#核心概念} | `#-核心概念-核心概念` | 同文件锚点不存在: #-核心概念-核心概念 |
-| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 作用域线程 (Rust 1.96.1+) {#作用域线程-rust-1930} | `#作用域线程-rust-1961-作用域线程-rust-1930` | 同文件锚点不存在: #作用域线程-rust-1961-作用域线程-rust-1930 |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 作用域线程 (Rust 1.97.0+) {#作用域线程-rust-1930} | `#作用域线程-rust-1961-作用域线程-rust-1930` | 同文件锚点不存在: #作用域线程-rust-1961-作用域线程-rust-1930 |
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 📐 同步原语 {#同步原语} | `#-同步原语-同步原语` | 同文件锚点不存在: #-同步原语-同步原语 |
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | Arc (原子引用计数) {#arc-原子引用计数} | `#arc-原子引用计数-arc-原子引用计数` | 同文件锚点不存在: #arc-原子引用计数-arc-原子引用计数 |
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 🎯 消息传递 {#消息传递} | `#-消息传递-消息传递` | 同文件锚点不存在: #-消息传递-消息传递 |
@@ -2739,7 +2739,7 @@
 | docs\05_guides\05_threads_concurrency_usage_guide.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\05_guides\05_threads_concurrency_usage_guide.md | 📋 概述 {#概述} | `#-概述-概述` | 同文件锚点不存在: #-概述-概述 |
 | docs\05_guides\05_threads_concurrency_usage_guide.md | 🚀 快速开始 {#快速开始} | `#-快速开始-快速开始` | 同文件锚点不存在: #-快速开始-快速开始 |
-| docs\05_guides\05_threads_concurrency_usage_guide.md | 作用域线程（Rust 1.96.1+） {#作用域线程rust-189} | `#作用域线程rust-1961-作用域线程rust-189` | 同文件锚点不存在: #作用域线程rust-1961-作用域线程rust-189 |
+| docs\05_guides\05_threads_concurrency_usage_guide.md | 作用域线程（Rust 1.97.0+） {#作用域线程rust-189} | `#作用域线程rust-1961-作用域线程rust-189` | 同文件锚点不存在: #作用域线程rust-1961-作用域线程rust-189 |
 | docs\05_guides\05_threads_concurrency_usage_guide.md | 📊 核心功能 {#核心功能} | `#-核心功能-核心功能` | 同文件锚点不存在: #-核心功能-核心功能 |
 | docs\05_guides\05_threads_concurrency_usage_guide.md | 1. 线程管理 {#1-线程管理} | `#1-线程管理-1-线程管理` | 同文件锚点不存在: #1-线程管理-1-线程管理 |
 | docs\05_guides\05_threads_concurrency_usage_guide.md | 2. 消息传递 {#2-消息传递} | `#2-消息传递-2-消息传递` | 同文件锚点不存在: #2-消息传递-2-消息传递 |
@@ -3331,12 +3331,12 @@
 | docs\research_notes\10_00_comprehensive_summary.md | Rust 研究笔记：完整总结综合 {#rust-研究笔记完整总结综合} | `#rust-研究笔记完整总结综合-rust-研究笔记完整总结综合` | 同文件锚点不存在: #rust-研究笔记完整总结综合-rust-研究笔记完整总结综合 |
 | docs\research_notes\10_00_comprehensive_summary.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_00_comprehensive_summary.md | 3.1 按领域一句话 {#31-按领域一句话} | `#31-按领域一句话-31-按领域一句话` | 同文件锚点不存在: #31-按领域一句话-31-按领域一句话 |
-| docs\research_notes\10_00_comprehensive_summary.md | 🆕 Rust 1.96.1+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新} | `#-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新` | 同文件锚点不存在: #-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新 |
-| docs\research_notes\10_00_comprehensive_summary.md | 🆕 Rust 1.96.1+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
+| docs\research_notes\10_00_comprehensive_summary.md | 🆕 Rust 1.97.0+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新} | `#-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新` | 同文件锚点不存在: #-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新 |
+| docs\research_notes\10_00_comprehensive_summary.md | 🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
 | docs\research_notes\10_00_organization_and_navigation.md | research\_notes 组织架构与导航 {#research\_notes-组织架构与导航} | `#research_notes-组织架构与导航-research_notes-组织架构与导航` | 同文件锚点不存在: #research_notes-组织架构与导航-research_notes-组织架构与导航 |
 | docs\research_notes\10_00_organization_and_navigation.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_00_organization_and_navigation.md | 七、与顶层 docs 的衔接 {#七与顶层-docs-的衔接} | `#七与顶层-docs-的衔接-七与顶层-docs-的衔接` | 同文件锚点不存在: #七与顶层-docs-的衔接-七与顶层-docs-的衔接 |
-| docs\research_notes\10_00_organization_and_navigation.md | 🆕 Rust 1.96.1+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
+| docs\research_notes\10_00_organization_and_navigation.md | 🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
 | docs\research_notes\10_academic_papers_alignment.md | 7.1 顶级会议 {#71-顶级会议} | `#71-顶级会议-71-顶级会议` | 同文件锚点不存在: #71-顶级会议-71-顶级会议 |
 | docs\research_notes\10_academic_papers_alignment.md | 7.2 顶级期刊 {#72-顶级期刊} | `#72-顶级期刊-72-顶级期刊` | 同文件锚点不存在: #72-顶级期刊-72-顶级期刊 |
 | docs\research_notes\10_academic_papers_alignment.md | 8.1 ACM Digital Library (ACM DL) {#81-acm-digital-library-acm-dl} | `#81-acm-digital-library-acm-dl-81-acm-digital-library-acm-dl` | 同文件锚点不存在: #81-acm-digital-library-acm-dl-81-acm-digital-library-acm-dl |
@@ -3367,8 +3367,8 @@
 | docs\research_notes\10_application_trees.md | 6.1 学习路径文档 {#61-学习路径文档} | `#61-学习路径文档-61-学习路径文档` | 同文件锚点不存在: #61-学习路径文档-61-学习路径文档 |
 | docs\research_notes\10_application_trees.md | 6.2 领域特定资源 {#62-领域特定资源} | `#62-领域特定资源-62-领域特定资源` | 同文件锚点不存在: #62-领域特定资源-62-领域特定资源 |
 | docs\research_notes\10_application_trees.md | 6.3 应用树总览 {#63-应用树总览} | `#63-应用树总览-63-应用树总览` | 同文件锚点不存在: #63-应用树总览-63-应用树总览 |
-| docs\research_notes\10_application_trees.md | 🆕 Rust 1.96.1+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新} | `#-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新` | 同文件锚点不存在: #-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新 |
-| docs\research_notes\10_application_trees.md | 🆕 Rust 1.96.1+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
+| docs\research_notes\10_application_trees.md | 🆕 Rust 1.97.0+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新} | `#-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新` | 同文件锚点不存在: #-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新 |
+| docs\research_notes\10_application_trees.md | 🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
 | docs\research_notes\10_argumentation_chain_and_flow.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_argumentation_chain_and_flow.md | 1.1 论证五步法 {#11-论证五步法} | `#11-论证五步法-11-论证五步法` | 同文件锚点不存在: #11-论证五步法-11-论证五步法 |
 | docs\research_notes\10_argumentation_chain_and_flow.md | 1.2 论证流向（双向） {#12-论证流向双向} | `#12-论证流向双向-12-论证流向双向` | 同文件锚点不存在: #12-论证流向双向-12-论证流向双向 |
@@ -3520,7 +3520,7 @@
 | docs\research_notes\10_best_practices.md | Nomicon 重点章节 {#nomicon-重点章节} | `#nomicon-重点章节-nomicon-重点章节` | 同文件锚点不存在: #nomicon-重点章节-nomicon-重点章节 |
 | docs\research_notes\10_best_practices.md | Rust Book 重点章节 {#rust-book-重点章节} | `#rust-book-重点章节-rust-book-重点章节` | 同文件锚点不存在: #rust-book-重点章节-rust-book-重点章节 |
 | docs\research_notes\10_best_practices.md | 🔗 相关资源 {#相关资源} | `#-相关资源-相关资源` | 同文件锚点不存在: #-相关资源-相关资源 |
-| docs\research_notes\10_best_practices.md | 🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960} | `#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960` | 同文件锚点不存在: #-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960 |
+| docs\research_notes\10_best_practices.md | 🆕 权威国际化内容升级 (Rust 1.97.0+) {#权威国际化内容升级-rust-1960} | `#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960` | 同文件锚点不存在: #-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960 |
 | docs\research_notes\10_cargo_book_alignment.md | Cargo Book 对齐矩阵 {#cargo-book-对齐矩阵} | `#cargo-book-对齐矩阵-cargo-book-对齐矩阵` | 同文件锚点不存在: #cargo-book-对齐矩阵-cargo-book-对齐矩阵 |
 | docs\research_notes\10_cargo_book_alignment.md | 二、Package 与项目结构 {#二package-与项目结构} | `#二package-与项目结构-二package-与项目结构` | 同文件锚点不存在: #二package-与项目结构-二package-与项目结构 |
 | docs\research_notes\10_cargo_book_alignment.md | 六、Build 脚本与配置 {#六build-脚本与配置} | `#六build-脚本与配置-六build-脚本与配置` | 同文件锚点不存在: #六build-脚本与配置-六build-脚本与配置 |
@@ -3951,7 +3951,7 @@
 | docs\research_notes\10_cross_reference_index.md | 🌐 文档依赖关系图 {#文档依赖关系图} | `#-文档依赖关系图-文档依赖关系图` | 同文件锚点不存在: #-文档依赖关系图-文档依赖关系图 |
 | docs\research_notes\10_cross_reference_index.md | 🧭 导航指南 {#导航指南} | `#-导航指南-导航指南` | 同文件锚点不存在: #-导航指南-导航指南 |
 | docs\research_notes\10_cross_reference_index.md | 📈 映射统计 {#映射统计} | `#-映射统计-映射统计` | 同文件锚点不存在: #-映射统计-映射统计 |
-| docs\research_notes\10_cross_reference_index.md | 🆕 Rust 1.96.1+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
+| docs\research_notes\10_cross_reference_index.md | 🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
 | docs\research_notes\10_cross_reference_index.md | 层级-主题-文档三维矩阵 {#层级-主题-文档三维矩阵} | `#层级-主题-文档三维矩阵-层级-主题-文档三维矩阵` | 同文件锚点不存在: #层级-主题-文档三维矩阵-层级-主题-文档三维矩阵 |
 | docs\research_notes\10_database_storage_cloud_alignment.md | 三、KV / 缓存 / NoSQL {#三kv-缓存-nosql} | `#三kv--缓存--nosql-三kv-缓存-nosql` | 同文件锚点不存在: #三kv--缓存--nosql-三kv-缓存-nosql |
 | docs\research_notes\10_database_storage_cloud_alignment.md | 六、容器 / Docker / Kubernetes 部署参考 {#六容器-docker-kubernetes-部署参考} | `#六容器--docker--kubernetes-部署参考-六容器-docker-kubernetes-部署参考` | 同文件锚点不存在: #六容器--docker--kubernetes-部署参考-六容器-docker-kubernetes-部署参考 |
@@ -4543,7 +4543,7 @@
 | docs\research_notes\10_practical_applications.md | 🌐 案例官方文档、源码与基准索引 {#案例官方文档源码与基准索引} | `#-案例官方文档源码与基准索引-案例官方文档源码与基准索引` | 同文件锚点不存在: #-案例官方文档源码与基准索引-案例官方文档源码与基准索引 |
 | docs\research_notes\10_practical_applications.md | 🧭 Rust 机制与官方文档对照 {#rust-机制与官方文档对照} | `#-rust-机制与官方文档对照-rust-机制与官方文档对照` | 同文件锚点不存在: #-rust-机制与官方文档对照-rust-机制与官方文档对照 |
 | docs\research_notes\10_practical_applications.md | 📖 参考文献 {#参考文献} | `#-参考文献-参考文献` | 同文件锚点不存在: #-参考文献-参考文献 |
-| docs\research_notes\10_practical_applications.md | 🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960} | `#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960` | 同文件锚点不存在: #-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960 |
+| docs\research_notes\10_practical_applications.md | 🆕 权威国际化内容升级 (Rust 1.97.0+) {#权威国际化内容升级-rust-1960} | `#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960` | 同文件锚点不存在: #-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960 |
 | docs\research_notes\10_proof_index.md | 📚 形式化证明文档索引 {#形式化证明文档索引} | `#-形式化证明文档索引-形式化证明文档索引` | 同文件锚点不存在: #-形式化证明文档索引-形式化证明文档索引 |
 | docs\research_notes\10_proof_index.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_proof_index.md | 🔢 公理编号规范 (Axiom Numbering Convention) {#公理编号规范-axiom-numbering-convention} | `#-公理编号规范-axiom-numbering-convention-公理编号规范-axiom-numbering-convention` | 同文件锚点不存在: #-公理编号规范-axiom-numbering-convention-公理编号规范-axiom-numbering-convention |
@@ -4674,7 +4674,7 @@
 | docs\research_notes\10_research_methodology.md | 🔄 研究进展 {#研究进展} | `#-研究进展-研究进展` | 同文件锚点不存在: #-研究进展-研究进展 |
 | docs\research_notes\10_research_methodology.md | 进行中 🔄（已完成） {#进行中-已完成} | `#进行中-已完成-进行中-已完成` | 同文件锚点不存在: #进行中-已完成-进行中-已完成 |
 | docs\research_notes\10_research_methodology.md | 计划中 📋（已完成） {#计划中-已完成} | `#计划中-已完成-计划中-已完成` | 同文件锚点不存在: #计划中-已完成-计划中-已完成 |
-| docs\research_notes\10_research_methodology.md | 🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960} | `#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960` | 同文件锚点不存在: #-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960 |
+| docs\research_notes\10_research_methodology.md | 🆕 权威国际化内容升级 (Rust 1.97.0+) {#权威国际化内容升级-rust-1960} | `#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960` | 同文件锚点不存在: #-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960 |
 | docs\research_notes\10_research_notes_organization.md | research\_notes 全面梳理 {#research\_notes-全面梳理} | `#research_notes-全面梳理-research_notes-全面梳理` | 同文件锚点不存在: #research_notes-全面梳理-research_notes-全面梳理 |
 | docs\research_notes\10_research_notes_organization.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_research_notes_organization.md | 六、formal\_methods 文件清单（概览） {#六formal\_methods-文件清单概览} | `#六formal_methods-文件清单概览-六formal_methods-文件清单概览` | 同文件锚点不存在: #六formal_methods-文件清单概览-六formal_methods-文件清单概览 |
@@ -4711,7 +4711,7 @@
 | docs\research_notes\10_research_roadmap.md | 📅 时间规划 {#时间规划} | `#-时间规划-时间规划` | 同文件锚点不存在: #-时间规划-时间规划 |
 | docs\research_notes\10_research_roadmap.md | 🎯 成功标准 {#成功标准} | `#-成功标准-成功标准` | 同文件锚点不存在: #-成功标准-成功标准 |
 | docs\research_notes\10_research_roadmap.md | 🔗 相关资源 {#相关资源} | `#-相关资源-相关资源` | 同文件锚点不存在: #-相关资源-相关资源 |
-| docs\research_notes\10_research_roadmap.md | 🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960} | `#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960` | 同文件锚点不存在: #-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960 |
+| docs\research_notes\10_research_roadmap.md | 🆕 权威国际化内容升级 (Rust 1.97.0+) {#权威国际化内容升级-rust-1960} | `#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960` | 同文件锚点不存在: #-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960 |
 | docs\research_notes\10_resources.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_resources.md | 📚 学术资源 {#学术资源} | `#-学术资源-学术资源` | 同文件锚点不存在: #-学术资源-学术资源 |
 | docs\research_notes\10_resources.md | 📖 官方文档 {#官方文档} | `#-官方文档-官方文档` | 同文件锚点不存在: #-官方文档-官方文档 |
@@ -4795,7 +4795,7 @@
 | docs\research_notes\10_rust_book_alignment.md | Ch 15: 智能指针（Smart Pointer） {#ch-15-智能指针} | `#ch-15-智能指针-ch-15-智能指针` | 同文件锚点不存在: #ch-15-智能指针-ch-15-智能指针 |
 | docs\research_notes\10_rust_book_alignment.md | Ch 16: 无畏并发 {#ch-16-无畏并发} | `#ch-16-无畏并发-ch-16-无畏并发` | 同文件锚点不存在: #ch-16-无畏并发-ch-16-无畏并发 |
 | docs\research_notes\10_rust_book_alignment.md | Rust Book → 本项目映射 {#rust-book-本项目映射} | `#rust-book--本项目映射-rust-book-本项目映射` | 同文件锚点不存在: #rust-book--本项目映射-rust-book-本项目映射 |
-| docs\research_notes\10_rust_book_alignment.md | Rust 1.96.1+ / Edition 2024 权威来源对齐更新 {#rust-1960-edition-2024-权威来源对齐更新} | `#rust-1961--edition-2024-权威来源对齐更新-rust-1960-edition-2024-权威来源对齐更新` | 同文件锚点不存在: #rust-1961--edition-2024-权威来源对齐更新-rust-1960-edition-2024-权威来源对齐更新 |
+| docs\research_notes\10_rust_book_alignment.md | Rust 1.97.0+ / Edition 2024 权威来源对齐更新 {#rust-1960-edition-2024-权威来源对齐更新} | `#rust-1961--edition-2024-权威来源对齐更新-rust-1960-edition-2024-权威来源对齐更新` | 同文件锚点不存在: #rust-1961--edition-2024-权威来源对齐更新-rust-1960-edition-2024-权威来源对齐更新 |
 | docs\research_notes\10_rust_by_example_alignment.md | Rust By Example 对齐矩阵 {#rust-by-example-对齐矩阵} | `#rust-by-example-对齐矩阵-rust-by-example-对齐矩阵` | 同文件锚点不存在: #rust-by-example-对齐矩阵-rust-by-example-对齐矩阵 |
 | docs\research_notes\10_rust_by_example_alignment.md | 八、FFI 与 unsafe {#八ffi-与-unsafe} | `#八ffi-与-unsafe-八ffi-与-unsafe` | 同文件锚点不存在: #八ffi-与-unsafe-八ffi-与-unsafe |
 | docs\research_notes\10_rust_formal_methods_cheatsheet.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
@@ -4908,7 +4908,7 @@
 | docs\research_notes\10_system_summary.md | 🔗 形式化链接 {#形式化链接} | `#-形式化链接-形式化链接` | 同文件锚点不存在: #-形式化链接-形式化链接 |
 | docs\research_notes\10_system_summary.md | Coq 证明骨架 {#coq-证明骨架} | `#coq-证明骨架-coq-证明骨架` | 同文件锚点不存在: #coq-证明骨架-coq-证明骨架 |
 | docs\research_notes\10_system_summary.md | 📊 系统评估 {#系统评估} | `#-系统评估-系统评估` | 同文件锚点不存在: #-系统评估-系统评估 |
-| docs\research_notes\10_system_summary.md | 🆕 Rust 1.96.1+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
+| docs\research_notes\10_system_summary.md | 🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
 | docs\research_notes\10_theorems_and_proof_strategies.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_theorems_and_proof_strategies.md | 一、所有权（Ownership）唯一性定理 (T-OW2) {#一所有权唯一性定理-t-ow2} | `#一所有权唯一性定理-t-ow2-一所有权唯一性定理-t-ow2` | 同文件锚点不存在: #一所有权唯一性定理-t-ow2-一所有权唯一性定理-t-ow2 |
 | docs\research_notes\10_theorems_and_proof_strategies.md | 1.1 定理陈述 {#11-定理陈述} | `#11-定理陈述-11-定理陈述` | 同文件锚点不存在: #11-定理陈述-11-定理陈述 |
@@ -5010,7 +5010,7 @@
 | docs\research_notes\10_tools_guide.md | 📚 Cargo Book 与 rustc dev guide 权威章节 {#cargo-book-与-rustc-dev-guide-权威章节} | `#-cargo-book-与-rustc-dev-guide-权威章节-cargo-book-与-rustc-dev-guide-权威章节` | 同文件锚点不存在: #-cargo-book-与-rustc-dev-guide-权威章节-cargo-book-与-rustc-dev-guide-权威章节 |
 | docs\research_notes\10_tools_guide.md | Cargo Book 重点章节 {#cargo-book-重点章节} | `#cargo-book-重点章节-cargo-book-重点章节` | 同文件锚点不存在: #cargo-book-重点章节-cargo-book-重点章节 |
 | docs\research_notes\10_tools_guide.md | rustc dev guide 重点章节 {#rustc-dev-guide-重点章节} | `#rustc-dev-guide-重点章节-rustc-dev-guide-重点章节` | 同文件锚点不存在: #rustc-dev-guide-重点章节-rustc-dev-guide-重点章节 |
-| docs\research_notes\10_tools_guide.md | 🆕 权威国际化内容升级 (Rust 1.96.1+) {#权威国际化内容升级-rust-1960} | `#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960` | 同文件锚点不存在: #-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960 |
+| docs\research_notes\10_tools_guide.md | 🆕 权威国际化内容升级 (Rust 1.97.0+) {#权威国际化内容升级-rust-1960} | `#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960` | 同文件锚点不存在: #-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960 |
 | docs\research_notes\10_tutorial_borrow_checker.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_tutorial_borrow_checker.md | 第六部分：NLL (非词法生命周期（Lifetimes）) {#第六部分nll-非词法生命周期} | `#第六部分nll-非词法生命周期-第六部分nll-非词法生命周期` | 同文件锚点不存在: #第六部分nll-非词法生命周期-第六部分nll-非词法生命周期 |
 | docs\research_notes\10_tutorial_borrow_checker.md | 错误1: 值被移动后使用 {#错误1-值被移动后使用} | `#错误1-值被移动后使用-错误1-值被移动后使用` | 同文件锚点不存在: #错误1-值被移动后使用-错误1-值被移动后使用 |

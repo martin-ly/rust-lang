@@ -3,7 +3,7 @@
 > **EN**: Thread Basics and Lifetimes
 > **Summary**: Creating OS threads in Rust, move closures, JoinHandle, scoped threads, thread configuration, panic handling, and best practices. Migrated to the concurrency authority.
 >
-> **适用 Rust 版本**: 1.96.1+
+> **适用 Rust 版本**: 1.97.0+
 > **文档类型**: 重定向 stub
 
 ---

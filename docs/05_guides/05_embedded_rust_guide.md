@@ -487,7 +487,7 @@ fn update_data(value: u32) {
 ## Rust 1.95+ 在嵌入式开发中的应用 {#rust-195-在嵌入式开发中的应用}
 >
 > **[来源: [crates.io](https://crates.io/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### array_windows 在传感器数据处理中的应用 {#array_windows-在传感器数据处理中的应用}
 

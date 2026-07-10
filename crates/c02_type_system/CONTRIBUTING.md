@@ -147,7 +147,7 @@
 
 ```bash
 # Rust 工具链
-- Rust 1.96.1+ (推荐最新稳定版)
+- Rust 1.97.0+ (推荐最新稳定版)
 - Cargo (随 Rust 安装)
 - rustfmt (代码格式化)
 - clippy (代码检查)

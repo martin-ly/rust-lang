@@ -353,7 +353,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 
 ```rust,ignore
 const fn check_control(cf: ControlFlow<i32, ()>) -> bool {
-    cf.is_break() // 1.96.1+ 可在 const fn 中使用
+    cf.is_break() // 1.97.0+ 可在 const fn 中使用
 }
 ```
 

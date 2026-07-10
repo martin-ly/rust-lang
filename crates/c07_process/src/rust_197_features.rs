@@ -2,8 +2,8 @@
 //! Rust 1.97.0 stabilized features —— process and FFI
 //!
 //! 本文件展示与进程管理、FFI 和系统编程相关的 Rust 1.97.0 Nightly 前瞻/候选特性。
-//! 当前工具链为 Rust 1.96.1，所有 1.97 新 API 调用均保留在 `#[cfg(nightly)]` 分支；
-//! 可执行代码使用语义等价的 1.96.1 兼容实现。
+//! 当前工具链为 Rust 1.97.0，所有 1.97 新 API 调用均保留在 `#[cfg(nightly)]` 分支；
+//! 可执行代码使用语义等价的 1.97.0 兼容实现。
 //! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。
 #![allow(clippy::incompatible_msrv)]
 #![allow(unexpected_cfgs)]

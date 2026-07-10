@@ -436,7 +436,7 @@ software_design_theory
 ## 🆕 Rust 1.94 研究更新 {#rust-194-研究更新}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### 核心研究点 {#核心研究点}
 

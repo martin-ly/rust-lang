@@ -1,6 +1,6 @@
 > **EN**: Cross-Platform Process Management in Rust
 > **Summary**: Writing portable process-management code across Windows, Linux, and macOS using std::process, platform extensions, and conditional compilation.
-> **Rust Version**: 1.96.1+
+> **Rust Version**: 1.97.0+
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 分析 → 评价

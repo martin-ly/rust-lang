@@ -282,10 +282,10 @@
 
 | 文档 | 声明版本 | 实际状态 | 需更新 |
 | :--- | :--- | :--- | :--- |
-| 10_ownership_model.md | 1.96.1+ | ✅ | 无 |
-| 10_type_system_foundations.md | 1.96.1+ | ✅ | 无 |
-| 10_borrow_checker_proof.md | 1.96.1+ | ⚠️ | 更新至1.94 |
-| 10_lifetime_formalization.md | 1.96.1+ | ⚠️ | 更新至1.94 |
+| 10_ownership_model.md | 1.97.0+ | ✅ | 无 |
+| 10_type_system_foundations.md | 1.97.0+ | ✅ | 无 |
+| 10_borrow_checker_proof.md | 1.97.0+ | ⚠️ | 更新至1.94 |
+| 10_lifetime_formalization.md | 1.97.0+ | ⚠️ | 更新至1.94 |
 
 ---
 

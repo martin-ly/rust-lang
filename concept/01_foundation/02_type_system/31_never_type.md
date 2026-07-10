@@ -455,7 +455,7 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 > [RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.96.1+ stable (Edition 2024)
+> **对应 Rust 版本**: 1.97.0+ stable (Edition 2024)
 > **最后更新**: 2026-05-29
 > **状态**: ✅ 已完成
 

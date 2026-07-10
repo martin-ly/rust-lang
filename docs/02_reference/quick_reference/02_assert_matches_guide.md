@@ -5,7 +5,7 @@
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [A]
-> **Rust 版本**: 1.96.1+ Stable
+> **Rust 版本**: 1.97.0+ Stable
 > **跟踪 Issue**: rust#108099
 > **Bloom 层级**: 应用
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** ·

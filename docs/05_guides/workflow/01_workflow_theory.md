@@ -1054,7 +1054,7 @@ impl Workflow {
 ## Rust 1.95+ 工作流理论应用 {#rust-195-工作流理论应用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-> **适用版本**: Rust 1.96.1+
+> **适用版本**: Rust 1.97.0+
 
 ### array_windows 在工作流状态转换中的应用 {#array_windows-在工作流状态转换中的应用}
 

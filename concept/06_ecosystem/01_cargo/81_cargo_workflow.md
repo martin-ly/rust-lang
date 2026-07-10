@@ -4,7 +4,7 @@
 > **本节关键术语**: Package Layout · `Cargo.toml` · `Cargo.lock` · Workspace · Target Directory — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
 >
 > **EN**: Cargo Workflow
-> **Summary**: The daily Cargo development workflow for Rust 1.96.1+: standard package layout, the roles of `Cargo.toml` and `Cargo.lock`, onboarding existing projects, common commands, dependency updates, and workspace integration.
+> **Summary**: The daily Cargo development workflow for Rust 1.97.0+: standard package layout, the roles of `Cargo.toml` and `Cargo.lock`, onboarding existing projects, common commands, dependency updates, and workspace integration.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **P** — Practice
