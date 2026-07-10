@@ -1,5 +1,5 @@
 # 异步编程范式 {#异步编程范式}
-
+>
 > **EN**: Async Index
 > **Summary**: 异步编程范式 Async Index. (stub/archive redirect)
 > **分级**: [B]
@@ -9,6 +9,13 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [c06_async/](../../../../crates/c06_async/README.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/03_advanced/01_async/02_async.md`](../../../../concept/03_advanced/01_async/02_async.md)
+> - [`concept/03_advanced/01_async/39_future_and_executor_mechanisms.md`](../../../../concept/03_advanced/01_async/39_future_and_executor_mechanisms.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
 [返回主索引](../../00_master_index.md)
 

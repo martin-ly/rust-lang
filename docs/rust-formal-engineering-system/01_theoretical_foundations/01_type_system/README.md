@@ -1,5 +1,5 @@
 # 类型系统理论 {#类型系统理论}
-
+>
 > **EN**: Type System Index
 > **Summary**: 类型系统理论 Type System Index. (stub/archive redirect)
 > **分级**: [B]
@@ -9,6 +9,14 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [type_theory/](../../../research_notes/type_theory/README.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/01_foundation/02_type_system/04_type_system.md`](../../../../concept/01_foundation/02_type_system/04_type_system.md)
+> - [`concept/04_formal/00_type_theory/02_type_theory.md`](../../../../concept/04_formal/00_type_theory/02_type_theory.md)
+> - [`concept/04_formal/00_type_theory/06_subtype_variance.md`](../../../../concept/04_formal/00_type_theory/06_subtype_variance.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
 - [类型系统（Type System）基础](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
 - [Trait 系统形式化](../../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)

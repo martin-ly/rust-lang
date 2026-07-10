@@ -1,5 +1,5 @@
 # 内存安全语义 {#内存安全语义}
-
+>
 > **EN**: Memory Safety Index
 > **Summary**: 内存安全语义 Memory Safety Index. (stub/archive redirect)
 > **分级**: [B]
@@ -9,6 +9,14 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> - [`concept/04_formal/01_ownership_logic/03_ownership_formal.md`](../../../../concept/04_formal/01_ownership_logic/03_ownership_formal.md)
+> - [`concept/03_advanced/02_unsafe/29_memory_model.md`](../../../../concept/03_advanced/02_unsafe/29_memory_model.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
 ## 知识结构思维导图 {#知识结构思维导图}
 >

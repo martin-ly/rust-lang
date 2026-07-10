@@ -1,5 +1,5 @@
 # 工具链生态
-
+>
 > **EN**: Toolchain Ecosystem Index
 > **Summary**: 工具链生态 Toolchain Ecosystem Index. (stub/archive redirect)
 > **分级**: [B]
@@ -9,6 +9,13 @@
 > **状态**: ✅ 已完成
 > **概念说明**: Rust 工具链生态系统由编译器（rustc）、包管理器（Cargo）、文档生成器（rustdoc）和质量工具（Clippy、rustfmt、MIRI）组成。这些工具协同工作，提供从代码编写、编译、测试到部署的完整开发体验。
 > 内容已整合至： [06_toolchain/](../../06_toolchain/README.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/06_ecosystem/01_cargo/80_cargo_getting_started.md`](../../../concept/06_ecosystem/01_cargo/80_cargo_getting_started.md)
+> - [`concept/04_formal/05_rustc_internals/19_rustc_query_system.md`](../../../concept/04_formal/05_rustc_internals/19_rustc_query_system.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
 [返回主索引](../00_master_index.md)
 

@@ -1,5 +1,5 @@
 # 所有权与借用理论 {#所有权与借用理论}
-
+>
 > **EN**: Ownership Borrowing Index
 > **Summary**: 所有权与借用理论 Ownership Borrowing Index. (stub/archive redirect)
 > **分级**: [B]
@@ -9,6 +9,14 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [formal_methods/](../../../../archive/research_notes_2026_06_25/formal_methods/README.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> - [`concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
+> - [`concept/04_formal/01_ownership_logic/01_linear_logic.md`](../../../../concept/04_formal/01_ownership_logic/01_linear_logic.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
 - [所有权（Ownership）模型](../../../research_notes/formal_methods/10_ownership_model.md)
 - [借用（Borrowing）检查器证明](../../../research_notes/formal_methods/10_borrow_checker_proof.md)

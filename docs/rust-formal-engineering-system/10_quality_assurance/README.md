@@ -1,5 +1,5 @@
 # 质量保障 {#质量保障}
-
+>
 > **EN**: Quality Assurance Index
 > **Summary**: 质量保障 Quality Assurance Index. (stub/archive redirect)
 > **分级**: [B]
@@ -9,6 +9,14 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **概念说明**: 质量保障（Quality Assurance）是通过系统化的测试、分析和验证活动确保软件满足需求的过程。Rust 的质量保障结合编译时检查（类型系统（Type System）、借用（Borrowing）检查）、运行时（Runtime）测试（单元测试、集成测试、基准测试）和形式化验证（模型检查、定理证明）来提供多层次的质量保证。
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/01_foundation/10_testing_basics/16_testing_basics.md`](../../../concept/01_foundation/10_testing_basics/16_testing_basics.md)
+> - [`concept/06_ecosystem/09_testing_and_quality/12_testing_strategies.md`](../../../concept/06_ecosystem/09_testing_and_quality/12_testing_strategies.md)
+> - [`concept/04_formal/04_model_checking/31_miri.md`](../../../concept/04_formal/04_model_checking/31_miri.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
 ---
 

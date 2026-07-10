@@ -1,5 +1,5 @@
 # 测试 {#测试}
-
+>
 > **EN**: Testing Index
 > **Summary**: 测试 Testing Index. (stub/archive redirect)
 > **分级**: [B]
@@ -10,6 +10,13 @@
 > **状态**: ✅ 已完成
 > **概念说明**: 测试是软件质量保障的核心环节，Rust 提供内建的测试框架支持单元测试、集成测试和文档测试。形式化测试通过属性测试（Property-based Testing）和模型检查验证代码正确性。
 > 内容已整合至： [02_testing_cheatsheet.md](../../../02_reference/quick_reference/02_testing_cheatsheet.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/01_foundation/10_testing_basics/16_testing_basics.md`](../../../../concept/01_foundation/10_testing_basics/16_testing_basics.md)
+> - [`concept/06_ecosystem/09_testing_and_quality/12_testing_strategies.md`](../../../../concept/06_ecosystem/09_testing_and_quality/12_testing_strategies.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
 [返回主索引](../../00_master_index.md)
 

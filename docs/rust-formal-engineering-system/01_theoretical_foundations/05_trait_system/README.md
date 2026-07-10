@@ -1,5 +1,5 @@
 # Trait 系统理论 {#trait-系统理论}
-
+>
 > **EN**: Trait System Index
 > **Summary**: Trait 系统理论 Trait System Index. (stub/archive redirect)
 > **分级**: [B]
@@ -9,6 +9,14 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [10_trait_system_formalization.md](../../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/02_intermediate/00_traits/01_traits.md`](../../../../concept/02_intermediate/00_traits/01_traits.md)
+> - [`concept/04_formal/00_type_theory/02_type_theory.md`](../../../../concept/04_formal/00_type_theory/02_type_theory.md)
+> - [`concept/02_intermediate/00_traits/19_advanced_traits.md`](../../../../concept/02_intermediate/00_traits/19_advanced_traits.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
 [返回主索引](../../00_master_index.md)
 

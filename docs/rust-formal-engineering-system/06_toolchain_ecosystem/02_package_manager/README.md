@@ -1,5 +1,5 @@
 # 包管理器理论
-
+>
 > **EN**: Package Manager Index
 > **Summary**: 包管理器理论 Package Manager Index. (stub/archive redirect)
 > **分级**: [B]
@@ -9,6 +9,14 @@
 > **状态**: ✅ 已完成
 > **概念说明**: Cargo 是 Rust 的包管理器和构建系统，负责依赖解析、版本管理、特性标志（feature flags）和 workspace 管理。形式化上，包管理涉及依赖图的语义版本约束求解和特性组合的完备性验证。
 > 内容已整合至： 02_cargo_workspace_guide.md
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/06_ecosystem/01_cargo/09_cargo_script.md`](../../../../concept/06_ecosystem/01_cargo/09_cargo_script.md)
+> - [`concept/06_ecosystem/01_cargo/80_cargo_getting_started.md`](../../../../concept/06_ecosystem/01_cargo/80_cargo_getting_started.md)
+> - [`concept/06_ecosystem/01_cargo/78_cargo_workspaces.md`](../../../../concept/06_ecosystem/01_cargo/78_cargo_workspaces.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
 [返回主索引](../../00_master_index.md) | [返回工具链索引](../README.md)
 

@@ -1,5 +1,5 @@
 # Rust 形式化工程系统 {#rust-形式化工程系统}
-
+>
 > **EN**: Rust Formal Engineering System Index
 > **Summary**: Rust 形式化工程系统 Rust Formal Engineering System Index. (stub/archive redirect)
 > **分级**: [B]
@@ -10,6 +10,14 @@
 > **状态**: ✅ 已完成
 > **说明**: 本目录为**单一索引层**，形式化理论内容已整合至 [研究笔记](../research_notes/README.md) 及各 crates。子目录 README 仅为占位重定向，请以 [00_master_index.md](00_master_index.md) 为完整导航入口。
 > **docs 全结构**: DOCS_STRUCTURE_OVERVIEW § 2.9
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> - [`concept/01_foundation/02_type_system/04_type_system.md`](../../concept/01_foundation/02_type_system/04_type_system.md)
+> - [`concept/04_formal/00_type_theory/02_type_theory.md`](../../concept/04_formal/00_type_theory/02_type_theory.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
 ---
 

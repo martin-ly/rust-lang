@@ -1,5 +1,5 @@
 # 研究方法
-
+>
 > **EN**: Research Methods Index
 > **Summary**: 研究方法 Research Methods Index. (stub/archive redirect)
 > **分级**: [B]
@@ -9,6 +9,13 @@
 > **状态**: ✅ 已完成
 > **概念说明**: 研究方法是指在 Rust 形式化工程中进行系统探索的科学方法论，包括问题定义、形式化建模、定理陈述与证明、验证工具应用等步骤。形式化方法通过数学手段验证程序的正确性，确保代码行为符合规范。
 > 内容已整合至： [10_research_methodology.md](../../../../archive/research_notes_2026_06_25/10_research_methodology.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/04_formal/04_model_checking/13_formal_methods.md`](../../../../concept/04_formal/04_model_checking/13_formal_methods.md)
+> - [`concept/04_formal/04_model_checking/05_verification_toolchain.md`](../../../../concept/04_formal/04_model_checking/05_verification_toolchain.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
 [返回主索引](../../00_master_index.md)
 

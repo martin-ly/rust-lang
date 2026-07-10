@@ -1,5 +1,5 @@
 # 设计模式 {#设计模式}
-
+>
 > **EN**: Design Patterns Index
 > **Summary**: 设计模式 Design Patterns Index. (stub/archive redirect)
 > **分级**: [B]
@@ -9,6 +9,13 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [c09_design_pattern/](../../../crates/c09_design_pattern/README.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/06_ecosystem/03_design_patterns/02_patterns.md`](../../../concept/06_ecosystem/03_design_patterns/02_patterns.md)
+> - [`concept/06_ecosystem/03_design_patterns/38_formal_design_pattern_theory.md`](../../../concept/06_ecosystem/03_design_patterns/38_formal_design_pattern_theory.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
 ## 知识结构思维导图 {#知识结构思维导图}
 >

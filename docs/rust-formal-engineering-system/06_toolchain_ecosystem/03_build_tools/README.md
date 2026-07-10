@@ -1,5 +1,5 @@
 # 构建工具理论
-
+>
 > **EN**: Build Tools Index
 > **Summary**: 构建工具理论 Build Tools Index. (stub/archive redirect)
 > **分级**: [B]
@@ -9,6 +9,13 @@
 > **状态**: ✅ 已完成
 > **概念说明**: 构建工具负责将源代码转换为可执行程序，包括编译、链接、打包等步骤。Rust 通过 build.rs 构建脚本支持自定义构建逻辑，用于代码生成、外部库链接和条件编译配置。
 > 内容已整合至： [toolchain/](../../../06_toolchain/README.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/06_ecosystem/01_cargo/59_cargo_build_scripts.md`](../../../../concept/06_ecosystem/01_cargo/59_cargo_build_scripts.md)
+> - [`concept/06_ecosystem/01_cargo/09_cargo_script.md`](../../../../concept/06_ecosystem/01_cargo/09_cargo_script.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
 [返回主索引](../../00_master_index.md) | [返回工具链索引](../README.md)
 
