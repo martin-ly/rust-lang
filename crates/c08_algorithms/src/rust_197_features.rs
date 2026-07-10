@@ -1,326 +1,60 @@
-//! Rust 1.97.0 stable 特性代码示例
-//! **状态**: Rust 1.97.0 stable（2026-07-09）
-//! **编译要求**: Rust 1.97.0+ stable
-//! **来源**: [releases.rs](https://releases.rs/docs/1.97.0/) · [Rust Standard Library Tracking](https://github.com/rust-lang/rust/labels/T-libs-api)
+//! Rust 1.97.0 stable 特性 —— 算法与数据结构
 //!
-//! 本文件覆盖 Rust 1.97.0 已稳定的标准库新 API。1.98+ 仍未稳定的特性单独标注并在
-//! 后续迁移到 `rust_198_features.rs`。
-#![allow(unexpected_cfgs)]
-#![allow(clippy::incompatible_msrv)]
-#![allow(clippy::borrowed_box)]
+//! 本文件覆盖 Rust 1.97.0 已稳定的标准库新 API，直接调用 stable API。
+//! 1.98+ 前瞻内容请见同目录 `rust_198_features.rs`。
 
-use std::collections::VecDeque;
+use std::collections::hash_map::DefaultHasher;
+use std::hash::BuildHasherDefault;
 use std::num::NonZeroU32;
 
-// ============================================================================
-// 0. NonZero 位操作 API (Rust 1.97 候选/nightly)
-// ============================================================================
+/// Rust 1.97 算法/数据结构特性演示。
+pub struct Rust197AlgorithmFeatures;
 
-/// `NonZero` 整数新增位查询方法：`highest_one` / `lowest_one` / `bit_width`
-///
-/// 这些 API 避免了在查询前对零值进行特殊处理，因为 `NonZero` 类型本身已保证非零。
-/// Rust 1.97.0 stable。
-pub fn demo_nonzero_bit_ops() {
-    let n = NonZeroU32::new(0b10100).unwrap();
-    assert_eq!(n.highest_one(), 4); // 最高 set bit 的索引
-    assert_eq!(n.lowest_one(), 2); // 最低 set bit 的索引
-    assert_eq!(n.bit_width().get(), 5); // 表示 self 所需的最少位数；返回 NonZeroU32
-}
-
-// ============================================================================
-// 0b. char::is_control() const 稳定化 (Rust 1.97)
-// ============================================================================
-
-/// `char::is_control()` 在 Rust 1.97 中变为 `const fn`
-///
-/// 使得字符分类可在编译期常量/静态项中使用。
-///
-/// 当前等效实现可在 Rust 1.97.0+ 编译；`#[cfg(nightly)]` 分支调用 1.97 原生 API。
-#[cfg(nightly)]
-pub fn demo_char_is_control_const() {
-    const SPACE_CTRL: bool = ' '.is_control(); // false
-    const NUL_CTRL: bool = '\0'.is_control(); // true
-    assert!(!SPACE_CTRL);
-    assert!(NUL_CTRL);
-}
-
-#[cfg(not(nightly))]
-pub fn demo_char_is_control_const() {
-    // 当前等效实现 (Rust 1.96):
-    let space_ctrl: bool = ' '.is_control();
-    let nul_ctrl: bool = '\0'.is_control();
-    assert!(!space_ctrl);
-    assert!(nul_ctrl);
-}
-
-// ============================================================================
-// 1. VecDeque::truncate_front / retain_back（已推迟到 1.98）
-// ============================================================================
-
-/// `VecDeque::truncate_front(n)` — 截断前部，保留后部 `n` 个元素
-///
-/// 与 `truncate(n)`（保留前部 `n` 个，截断后部）互补，实现双端队列的对称操作。
-///
-/// ⚠️ 状态更新 (2026-06-28)：当前 nightly 仍需要 `#![feature(vec_deque_truncate_front)]`，
-/// 已确定推迟至 1.98+；本函数保留等效实现，无 native 1.97 API 可切换。
-pub fn demo_vecdeque_truncate_front() {
-    let mut deque: VecDeque<i32> = [1, 2, 3, 4, 5].into_iter().collect();
-
-    // 1.98+:
-    // deque.truncate_front(2);
-    // assert_eq!(deque.make_contiguous(), &[4, 5]);
-
-    // 当前等效实现:
-    while deque.len() > 2 {
-        deque.pop_front();
+impl Rust197AlgorithmFeatures {
+    /// `NonZero` 整数新增位查询方法：`highest_one` / `lowest_one` / `bit_width`。
+    ///
+    /// 这些 API 避免了在查询前对零值进行特殊处理，因为 `NonZero` 类型本身已保证非零。
+    /// Rust 1.97.0 stable。
+    pub fn nonzero_bit_ops() {
+        let n = NonZeroU32::new(0b10100).unwrap();
+        assert_eq!(n.highest_one(), 4); // 最高 set bit 的索引
+        assert_eq!(n.lowest_one(), 2); // 最低 set bit 的索引
+        assert_eq!(n.bit_width().get(), 5); // 表示 self 所需的最少位数；返回 NonZeroU32
     }
-    assert_eq!(deque.make_contiguous(), &[4, 5]);
-}
 
-/// `VecDeque::retain_back(f)` — 从尾部开始保留满足条件的元素
-///
-/// 与 `retain`（从头部开始）互补，在某些场景下能更早终止遍历。
-///
-/// ⚠️ 状态更新 (2026-06-09): PR #151973 "Stabilize retain_back from truncate_front"
-/// 的 FCP 已完成，但已确定错过 1.97 cutoff，推迟至 1.98+。下方等效实现仍具教学价值。
-pub fn demo_vecdeque_retain_back() {
-    let mut deque: VecDeque<i32> = [1, 2, 3, 4, 5].into_iter().collect();
-
-    // 1.98+:
-    // deque.retain_back(|x| x % 2 == 0);
-    // assert_eq!(deque.make_contiguous(), &[2, 4]);
-
-    // 当前等效实现（从尾部遍历）:
-    let len = deque.len();
-    for i in (0..len).rev() {
-        if deque[i] % 2 != 0 {
-            deque.remove(i);
-        }
+    /// `char::is_control()` 在 Rust 1.97 中变为 `const fn`。
+    ///
+    /// 使得字符分类可在编译期常量/静态项中使用。
+    pub const fn char_is_control(c: char) -> bool {
+        c.is_control()
     }
-    assert_eq!(deque.make_contiguous(), &[2, 4]);
-}
 
-// ============================================================================
-// 2. 浮点代数优化属性 (float_algebraic) — 1.98 preview
-// ============================================================================
-
-/// `#[optimize(fast_math)]` / `float_algebraic` 允许编译器重组浮点运算
-///
-/// ⚠️ 这会打破 IEEE 754 的严格语义，仅在可接受精度损失的场景使用。
-///
-/// 1.98 状态: 已合并至 master (PR #157029)，因晚于 1.97 beta cutoff，进入 1.98
-#[allow(dead_code)]
-pub fn demo_float_algebraic() {
-    // 未来语法（示意）:
-    // #[float_algebraic]
-    // fn fast_sum(a: f64, b: f64, c: f64) -> f64 {
-    //     (a + b) + c  // 编译器可能重排为 a + (b + c)
-    // }
-
-    // 当前等效做法: 使用 `fast-math` LLVM 标志（nightly-only，不稳定）
-    let a = 1.0_f64;
-    let b = 1e-16_f64;
-    let c = -1.0_f64;
-
-    // 严格 IEEE 754: (a + b) + c ≈ 1e-16
-    let strict = (a + b) + c;
-    // 代数重排: a + (b + c) ≈ 0.0（因为 b + c 在舍入后可能为 -1.0）
-
-    println!("strict (a+b)+c = {}", strict);
-    println!("注意: float_algebraic 允许编译器选择后者，可能改变结果");
-}
-
-// ============================================================================
-// 3. RandomSource / DefaultRandomSource 抽象 — 1.98 preview
-// ============================================================================
-
-/// `RandomSource` trait 提供可插拔的随机数源抽象
-///
-/// 1.98 状态: 等待 t-libs-api 决策 (PR #157168)
-/// 设计目标: 允许 `rand::thread_rng()`、`getrandom`、`OsRng` 等通过统一 trait 接入标准库 API。
-#[allow(dead_code)]
-pub fn demo_random_source_concept() {
-    // 概念性伪代码:
-    // use std::random::{RandomSource, DefaultRandomSource};
-    //
-    // fn shuffle<T, R: RandomSource>(vec: &mut [T], rng: &mut R) { ... }
-    //
-    // let mut rng = DefaultRandomSource::new();
-    // shuffle(&mut data, &mut rng);
-
-    println!("RandomSource / DefaultRandomSource: 等待 1.98+ 稳定化");
-}
-
-// ============================================================================
-// 4. C-variadic function definitions — 1.98 preview
-// ============================================================================
-
-/// C 可变参数函数定义稳定化
-///
-/// 1.98 状态: PFCP (PR #155942)
-/// 用途: 不再需要通过 `extern "C"` 声明 + 手写 C wrapper 来定义可变参数函数。
-/// 典型场景: 内核 printk、嵌入式日志、FFI 回调。
-#[allow(dead_code)]
-pub extern "C" fn demo_c_variadic_definition(_fmt: *const u8) {
-    // 未来稳定后:
-    // pub unsafe extern "C" fn my_printf(fmt: *const u8, args: ...) { ... }
-
-    // 当前限制: C variadic 定义仍需要 nightly feature `c_variadic`
-    println!("C-variadic fn definitions: 等待 1.98+ 稳定化，当前需 `#![feature(c_variadic)]`");
-}
-
-// ============================================================================
-// 5. box_vec_non_null — 1.98 preview
-// ============================================================================
-
-/// `Box::into_non_null` / `Vec::into_non_null` 提供非空指针转换
-///
-/// 1.98 状态: PFCP (PR #157226)。当前 nightly 上 `Box::into_non_null` / `Vec::into_non_null`
-/// 方法均不存在，可能名称或实现仍在调整。
-/// 设计目标: 允许 `Box<T>` 和 `Vec<T>` 直接转换为 `NonNull<T>`，避免空指针检查开销。
-#[allow(dead_code)]
-pub fn demo_box_vec_non_null() {
-    // 概念性伪代码 (1.98+ 稳定后):
-    // use std::ptr::NonNull;
-    // let boxed = Box::new(42);
-    // let ptr: NonNull<i32> = Box::into_non_null(boxed);
-    //
-    // let vec = vec![1, 2, 3];
-    // let (ptr, len, cap): (NonNull<i32>, usize, usize) = Vec::into_non_null(vec);
-
-    // 当前等效实现:
-    let boxed = Box::new(42);
-    let ptr = Box::into_raw(boxed);
-    let non_null = std::ptr::NonNull::new(ptr).expect("Box::into_raw never returns null");
-    println!("Box -> NonNull: {:?}", non_null);
-
-    let vec = vec![1, 2, 3];
-    let (ptr, len, cap) = (vec.as_ptr(), vec.len(), vec.capacity());
-    std::mem::forget(vec);
-    let non_null = std::ptr::NonNull::new(ptr.cast_mut()).expect("Vec ptr is non-null");
-    println!("Vec -> NonNull: {:?}, len={}, cap={}", non_null, len, cap);
-}
-
-// ============================================================================
-// 5b. Box::as_ptr / Box::as_mut_ptr — Rust 1.97 候选/nightly
-// ============================================================================
-
-/// `Box::as_ptr` / `Box::as_mut_ptr` — 不物化引用的原始指针访问
-///
-/// ⚠️ 截至 Rust 1.97.0 stable，`Box::as_ptr` / `Box::as_mut_ptr` 仍为 nightly-only unstable。
-/// 关键保证: 该方法不会 materialize 对底层内存的引用，因此在 aliasing model 中
-/// 与 `Box::leak` / `Box::as_ref` 不同，可与其它 raw pointer 操作安全交错。
-/// 在 stable 1.97 下保留等效实现作为语义演示。
-pub fn demo_box_as_ptr() {
-    // Rust 1.97 nightly（当前仍为 unstable）:
-    // let mut boxed = Box::new(42);
-    // let ptr: *mut i32 = Box::as_mut_ptr(&mut boxed);
-    // unsafe { *ptr = 100; }
-    // assert_eq!(*boxed, 100);
-
-    // 当前等效实现 (Rust 1.97 stable): 使用 Box::into_raw 会转移所有权，需要恢复
-    let mut boxed = Box::new(42);
-    let ptr = Box::into_raw(boxed);
-    unsafe {
-        *ptr = 100;
-        boxed = Box::from_raw(ptr); // 恢复所有权
+    /// 将 `Option<T>` 转为只读切片视图：`Some(x)` -> `[x]`，`None` -> `[]`。
+    ///
+    /// Rust 1.97.0 stable。
+    pub fn option_as_slice<T>(opt: &Option<T>) -> &[T] {
+        opt.as_slice()
     }
-    assert_eq!(*boxed, 100);
-}
 
-// ============================================================================
-// 6. int_format_into（1.98 已确认）
-// ============================================================================
+    /// 编译期计算值的大小与对齐（Rust 1.97.0 stable）。
+    pub const fn const_size_and_align_of_val<T: Sized>(value: &T) -> (usize, usize) {
+        (std::mem::size_of_val(value), std::mem::align_of_val(value))
+    }
 
-/// 整数格式化到现有缓冲区，避免堆分配
-///
-/// 1.98 状态: 已合并至 master (PR #152544)。
-/// 设计目标: `write!(buf, "{}", x)` 的零分配替代方案，用于 `no_std` 和嵌入式场景。
-#[allow(dead_code)]
-pub fn demo_int_format_into() {
-    // 概念性伪代码 (1.98+ 稳定后):
-    // let mut buf = [0u8; 20];
-    // let n = 12345i32;
-    // let written = n.format_into(&mut buf);
-    // assert_eq!(&buf[..written], b"12345");
+    /// 构造默认哈希器（Rust 1.97.0 后可在 const 上下文调用）。
+    pub const fn build_hasher_default_new() -> BuildHasherDefault<DefaultHasher> {
+        BuildHasherDefault::new()
+    }
 
-    // 当前等效实现 (使用 itoa 或手动格式化):
-    let mut buf = [0u8; 20];
-    let n = 12345i32;
-    let s = n.to_string();
-    let bytes = s.as_bytes();
-    buf[..bytes.len()].copy_from_slice(bytes);
-    println!(
-        "formatted: {:?}",
-        std::str::from_utf8(&buf[..bytes.len()]).unwrap()
-    );
-}
-
-// ============================================================================
-// 7. NonZero::from_str_radix（1.98 已确认）
-// ============================================================================
-
-/// `NonZero<T>::from_str_radix` — 按指定进制解析非零整数
-///
-/// 1.98 状态: 已合并至 master (PR #157877)，将进入 1.98。
-/// 与 `T::from_str_radix` 不同：若解析结果为 0，返回 `Err(ParseIntError::kind() == InvalidDigit)`。
-#[allow(dead_code)]
-pub fn demo_nonzero_from_str_radix() {
-    // 1.98+ 实际用法:
-    // let n = NonZeroU32::from_str_radix("1a", 16).unwrap();
-    // assert_eq!(n.get(), 26);
-    // assert!(NonZeroU32::from_str_radix("0", 10).is_err());
-
-    // 当前等效实现 (Rust 1.96):
-    let parsed = u32::from_str_radix("1a", 16)
-        .ok()
-        .and_then(std::num::NonZeroU32::new);
-    assert_eq!(parsed.unwrap().get(), 26);
-
-    let zero = "0".parse::<u32>().ok().and_then(std::num::NonZeroU32::new);
-    assert!(zero.is_none());
-}
-
-// ============================================================================
-// 8. core::range::{RangeFull, RangeTo}（1.98 已确认）
-// ============================================================================
-
-/// `core::range::RangeFull` / `RangeTo` / `legacy::*` — `core::range` 类型补全
-///
-/// 1.98 状态: 已合并至 master (PR #156629)，将进入 1.98。
-/// 设计目标: 将 `std::ops::RangeFull`、`std::ops::RangeTo` 等类型迁移到 `core::range`，
-/// 使 `no_std` 环境也能使用这些范围类型；`legacy::*` 为旧类型提供兼容重导出。
-#[allow(dead_code)]
-pub fn demo_core_range_completion() {
-    // 1.98+ 实际用法:
-    // use core::range::{RangeFull, RangeTo};
-    // let full: RangeFull = ..;
-    // let to: RangeTo<i32> = ..5;
-
-    // 当前等效实现 (Rust 1.96): 仍使用 std::ops
-    let _full = ..;
-    let _to = ..4;
-    let slice = [1, 2, 3, 4, 5];
-    assert_eq!(&slice[_to], &[1, 2, 3, 4]);
-}
-
-// ============================================================================
-// 9. proc_macro_value（等待 review）
-// ============================================================================
-
-/// `proc_macro_value` 允许过程宏在编译期产生值（而不仅是 token 流）
-///
-/// 1.98 状态: 等待 review (PR #152092)
-/// 用途: 为 `const` 泛型和编译期计算提供更强大的元编程能力。
-#[allow(dead_code)]
-pub fn demo_proc_macro_value_concept() {
-    // 概念性伪代码:
-    // #[derive(ConstValue)]
-    // struct MyConfig { threshold: u32 }
-    //
-    // const CONFIG: MyConfig = MyConfig::const_value(); // 由宏在编译期生成
-
-    println!("proc_macro_value: 等待 1.98+ 稳定化");
+    /// 演示 `cfg(target_has_atomic_primitive_alignment = "ptr")` 的使用位置。
+    ///
+    /// Rust 1.97.0 新增该 cfg 条件，用于在编译期选择指针大小原子与 `usize` 对齐相同的优化路径。
+    pub fn atomic_equal_alignment_note() -> &'static str {
+        // Rust 1.97.0:
+        // #[cfg(target_has_atomic_primitive_alignment = "ptr")]
+        // fn optimized() { /* 指针大小原子与 usize 对齐相同的平台 */ }
+        "cfg(target_has_atomic_primitive_alignment = \"ptr\") is stable in Rust 1.97.0"
+    }
 }
 
 #[cfg(test)]
@@ -329,64 +63,35 @@ mod tests {
 
     #[test]
     fn test_nonzero_bit_ops() {
-        demo_nonzero_bit_ops();
+        Rust197AlgorithmFeatures::nonzero_bit_ops();
     }
 
     #[test]
-    fn test_char_is_control_const() {
-        demo_char_is_control_const();
+    fn test_char_is_control() {
+        assert!(!Rust197AlgorithmFeatures::char_is_control(' '));
+        assert!(Rust197AlgorithmFeatures::char_is_control('\0'));
+        assert!(Rust197AlgorithmFeatures::char_is_control('\n'));
     }
 
     #[test]
-    fn test_vecdeque_truncate_front() {
-        demo_vecdeque_truncate_front();
+    fn test_option_as_slice() {
+        let opt = Some(42);
+        assert_eq!(Rust197AlgorithmFeatures::option_as_slice(&opt), &[42]);
+        let none: Option<i32> = None;
+        assert!(Rust197AlgorithmFeatures::option_as_slice(&none).is_empty());
     }
 
     #[test]
-    fn test_vecdeque_retain_back() {
-        demo_vecdeque_retain_back();
+    fn test_const_size_and_align_of_val() {
+        const BUF: [u8; 10] = [0; 10];
+        const SIZE_ALIGN: (usize, usize) =
+            Rust197AlgorithmFeatures::const_size_and_align_of_val(&BUF);
+        assert_eq!(SIZE_ALIGN.0, 10);
+        assert_eq!(SIZE_ALIGN.1, 1);
     }
 
     #[test]
-    fn test_box_vec_non_null() {
-        demo_box_vec_non_null();
-    }
-
-    #[test]
-    fn test_box_as_ptr() {
-        demo_box_as_ptr();
-    }
-
-    #[test]
-    fn test_int_format_into() {
-        demo_int_format_into();
-    }
-
-    #[test]
-    fn test_nonzero_from_str_radix() {
-        demo_nonzero_from_str_radix();
-    }
-
-    #[test]
-    fn test_core_range_completion() {
-        demo_core_range_completion();
-    }
-}
-
-/// Nightly 预览测试 — 使用 `cargo test -- --ignored` 运行
-///
-/// 这些测试需要 nightly toolchain 和对应的 feature gate。
-/// 在 1.98 稳定后，将取消注释的代码移入主测试模块并删除等效实现。
-#[cfg(test)]
-#[cfg(nightly)]
-mod nightly_tests {
-    use std::collections::VecDeque;
-
-    #[test]
-    #[ignore = "nightly-only: requires #![feature(vec_deque_truncate_front)]"]
-    fn test_truncate_front_nightly() {
-        let mut deque: VecDeque<i32> = VecDeque::from([1, 2, 3, 4, 5]);
-        deque.truncate_front(2);
-        assert_eq!(deque.make_contiguous(), &[4, 5]);
+    fn test_build_hasher_default_new() {
+        let _ = Rust197AlgorithmFeatures::build_hasher_default_new();
     }
 }

@@ -147,7 +147,7 @@ let result: Result<i32, &str> = Ok(42);
 assert!(matches!(result, Ok(n) if n > 10));
 // 失败时信息: "assertion failed: matches!(result, Ok(n) if n > 10)"
 
-// 方式 B: assert_matches!（Rust 1.97.0+）
+// 方式 B: assert_matches!（Rust 1.96.0+）
 assert_matches!(result, Ok(n) if n > 10);
 // 失败时信息: 显示实际值和期望模式，更易于调试
 ```
@@ -461,7 +461,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0 (Edition 2024)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-06-19
 **状态**: ✅ 已对齐 Rust 1.97.0 稳定版发布内容
 

@@ -22,7 +22,7 @@ use std::num::NonZeroU32;
 /// - `Box::as_ptr`（尚未稳定，保留等效实现）
 /// - `Option::as_slice` / `as_mut_slice`（Rust 1.97.0 stable）
 /// - `const size_of_val` / `align_of_val`（Rust 1.97.0 stable）
-/// - `cfg(target_has_atomic_equal_alignment = "ptr")`（Rust 1.97.0 stable cfg 条件，无运行时 API）
+/// - `cfg(target_has_atomic_primitive_alignment = "ptr")`（Rust 1.97.0 stable cfg 条件，无运行时 API）
 /// - `BuildHasherDefault::new` const 稳定化（Rust 1.97.0 stable）
 pub struct Rust197WasmFeatures;
 
@@ -75,12 +75,12 @@ impl Rust197WasmFeatures {
         BuildHasherDefault::new()
     }
 
-    /// 演示 `cfg(target_has_atomic_equal_alignment = "ptr")` 的使用位置。
+    /// 演示 `cfg(target_has_atomic_primitive_alignment = "ptr")` 的使用位置。
     pub fn atomic_equal_alignment_note() -> &'static str {
         // Rust 1.97.0:
-        // #[cfg(target_has_atomic_equal_alignment = "ptr")]
+        // #[cfg(target_has_atomic_primitive_alignment = "ptr")]
         // fn wasm_atomic_optimized() { /* 指针大小原子与 usize 对齐相同的平台 */ }
-        "cfg(target_has_atomic_equal_alignment = \"ptr\") is stable in Rust 1.97.0"
+        "cfg(target_has_atomic_primitive_alignment = \"ptr\") is stable in Rust 1.97.0"
     }
 }
 

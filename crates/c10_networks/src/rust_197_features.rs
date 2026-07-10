@@ -6,7 +6,7 @@
 //! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。
 //!
 //! 注：本文件涉及的 1.97.0 变更（WSAESHUTDOWN 错误码映射、
-//! `cfg_target_has_atomic_equal_alignment`）均为行为或 cfg 条件变更，
+//! `cfg_target_has_atomic_primitive_alignment`）均为行为或 cfg 条件变更，
 //! 没有可直接切换的 runtime API，因此保留等效实现并更新注释。
 
 use std::io;
@@ -17,7 +17,7 @@ use std::sync::atomic::AtomicUsize;
 ///
 /// 涉及特性：
 /// - Windows `WSAESHUTDOWN` 正确映射为 `io::ErrorKind::BrokenPipe`（Rust 1.97.0 stable，行为变更，无 API）
-/// - `cfg_target_has_atomic_equal_alignment = "ptr"`（Rust 1.97.0 stable，cfg 条件，无运行时 API）
+/// - `cfg_target_has_atomic_primitive_alignment = "ptr"`（Rust 1.97.0 stable，cfg 条件，无运行时 API）
 pub struct Rust197NetworkFeatures;
 
 impl Rust197NetworkFeatures {
@@ -35,13 +35,13 @@ impl Rust197NetworkFeatures {
         }
     }
 
-    /// 检测当前平台是否满足 `target_has_atomic_equal_alignment = "ptr"`。
+    /// 检测当前平台是否满足 `target_has_atomic_primitive_alignment = "ptr"`。
     ///
     /// Rust 1.97.0 新增该 cfg 条件，便于为无锁网络代码选择优化路径；
     /// 由于无运行时 API，使用运行期对齐检查作为等效判断。
     pub fn ptr_atomic_equal_alignment() -> bool {
         // Rust 1.97.0:
-        // #[cfg(target_has_atomic_equal_alignment = "ptr")]
+        // #[cfg(target_has_atomic_primitive_alignment = "ptr")]
         std::mem::align_of::<AtomicUsize>() == std::mem::align_of::<usize>()
     }
 }

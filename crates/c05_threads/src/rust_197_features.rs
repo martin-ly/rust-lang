@@ -11,7 +11,7 @@ use std::sync::atomic::AtomicU32;
 /// Rust 1.97 线程/并发特性演示
 ///
 /// 涉及特性：
-/// - `cfg(target_has_atomic_equal_alignment = "ptr")`（Rust 1.97.0 stable cfg 条件，无运行时 API）
+/// - `cfg(target_has_atomic_primitive_alignment = "ptr")`（Rust 1.97.0 stable cfg 条件，无运行时 API）
 /// - `BuildHasherDefault::new` const 稳定化（Rust 1.97.0 stable）
 /// - `Option<NonZero*>` niche 编码偏好 `-1`（Rust 1.97.0 编译器内部表示变更，无 API）
 /// - `must_use` lint 向 `Result<T, E>` / `ControlFlow<B, C>` 内部类型传播（Rust 1.97.0 lint 扩展，无 API）
@@ -27,14 +27,14 @@ impl Rust197ThreadFeatures {
         BuildHasherDefault::new()
     }
 
-    /// 演示 `cfg(target_has_atomic_equal_alignment = "ptr")` 的使用位置
+    /// 演示 `cfg(target_has_atomic_primitive_alignment = "ptr")` 的使用位置
     ///
     /// Rust 1.97.0 新增该 cfg，用于在编译期选择指针大小原子与 `usize` 对齐相同的优化路径。
     pub fn optimized_ptr_atomic() -> &'static str {
         // Rust 1.97.0:
-        // #[cfg(target_has_atomic_equal_alignment = "ptr")]
+        // #[cfg(target_has_atomic_primitive_alignment = "ptr")]
         // fn optimized_ptr_atomic() { /* 依赖指针大小原子与 usize 对齐相同的平台 */ }
-        "atomic pointer alignment check uses cfg(target_has_atomic_equal_alignment = \"ptr\") in \
+        "atomic pointer alignment check uses cfg(target_has_atomic_primitive_alignment = \"ptr\") in \
          Rust 1.97.0"
     }
 

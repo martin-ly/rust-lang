@@ -56129,7 +56129,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
-      "line_count": 342,
+      "line_count": 412,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -56170,6 +56170,22 @@
           "lines": 3,
           "should_fail": false,
           "code_preview": "use std::io::{self}; use std::io::{self, Write}; ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn takes_f32(_: f32) {}  fn main() {     // Rust 1.97+：以下代码可能触发未来兼容性警告，     // 因..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// 或在 crate 根显式允许 #![allow(linker_messages)] ..."
         },
         {
           "flags": [
@@ -56239,7 +56255,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 32,
+      "matrix_rows": 36,
       "pre_post": {
         "pre": [
           "[Rust 版本跟踪](05_rust_version_tracking.md) · [Rust 1.96 稳定特性](rust_1_96_stabilized.md)"

@@ -6,7 +6,7 @@
 //! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。
 //!
 //! 注：本文件涉及的 1.97.0 变更（`pin!` 阻止隐式解引用强制、`must_use` lint 扩展、
-//! `cfg_target_has_atomic_equal_alignment`）均为编译器行为或 cfg 条件变更，
+//! `cfg_target_has_atomic_primitive_alignment`）均为编译器行为或 cfg 条件变更，
 //! 没有可直接切换的 runtime API，因此保留等效实现并更新注释。
 
 use std::future::Future;
@@ -20,7 +20,7 @@ use thiserror::Error;
 /// 涉及特性：
 /// - `pin!` 宏阻止隐式解引用强制（Rust 1.97.0 stable；宏行为变更，无分支 API）
 /// - `must_use` lint 扩展到 `Result<must_use_type, E>`（Rust 1.97.0 stable；lint 变更，无 API）
-/// - `cfg_target_has_atomic_equal_alignment`（Rust 1.97.0 stable；cfg 条件，无运行时 API）
+/// - `cfg_target_has_atomic_primitive_alignment`（Rust 1.97.0 stable；cfg 条件，无运行时 API）
 pub struct Rust197AsyncFeatures;
 
 impl Rust197AsyncFeatures {
@@ -46,12 +46,12 @@ impl Rust197AsyncFeatures {
         Ok(MustUseToken)
     }
 
-    /// 检测当前平台是否满足 `target_has_atomic_equal_alignment = "ptr"`。
+    /// 检测当前平台是否满足 `target_has_atomic_primitive_alignment = "ptr"`。
     ///
     /// Rust 1.97.0 新增该 cfg 条件；由于无运行时 API，使用运行期对齐检查作为等效判断。
     pub fn ptr_atomic_equal_alignment() -> bool {
         // Rust 1.97.0:
-        // #[cfg(target_has_atomic_equal_alignment = "ptr")]
+        // #[cfg(target_has_atomic_primitive_alignment = "ptr")]
         std::mem::align_of::<AtomicUsize>() == std::mem::align_of::<usize>()
     }
 }

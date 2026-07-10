@@ -16,7 +16,7 @@ use std::num::NonZeroU32;
 /// # Rust 1.97 embedded/systems feature demonstration
 ///
 /// Rust 1.97.0 在嵌入式/系统编程场景中的稳定化内容：
-/// - `cfg(target_has_atomic_equal_alignment = "ptr")`（1.97.0 起 stable 的 cfg 条件）
+/// - `cfg(target_has_atomic_primitive_alignment = "ptr")`（1.97.0 起 stable 的 cfg 条件）
 /// - `const size_of_val` / `const align_of_val`
 /// - `NonZero` 位操作、`NonZeroU32::midpoint` / `isqrt`
 /// - `char::is_control()` const 稳定化
@@ -96,14 +96,14 @@ impl Rust197EmbeddedFeatures {
         std::ptr::fn_addr_eq(a, b)
     }
 
-    /// 演示 `cfg(target_has_atomic_equal_alignment = "ptr")` 的使用位置。
+    /// 演示 `cfg(target_has_atomic_primitive_alignment = "ptr")` 的使用位置。
     ///
     /// 该 cfg 条件自 Rust 1.97.0 起 stable。
     pub fn atomic_equal_alignment_note() -> &'static str {
         // Rust 1.97.0+:
-        // #[cfg(target_has_atomic_equal_alignment = "ptr")]
+        // #[cfg(target_has_atomic_primitive_alignment = "ptr")]
         // fn embedded_atomic_optimized() { /* 指针大小原子与 usize 对齐相同的平台 */ }
-        "cfg(target_has_atomic_equal_alignment = \"ptr\") is stable since Rust 1.97.0"
+        "cfg(target_has_atomic_primitive_alignment = \"ptr\") is stable since Rust 1.97.0"
     }
 }
 

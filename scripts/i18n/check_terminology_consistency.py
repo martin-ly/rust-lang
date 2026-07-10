@@ -20,7 +20,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CONCEPT_DIR = ROOT / "concept"
-GLOSSARY_PATH = CONCEPT_DIR / "00_meta" / "terminology_glossary.md"
+GLOSSARY_PATH = CONCEPT_DIR / "00_meta" / "01_terminology" / "terminology_glossary.md"
 
 EN_RE = re.compile(r"^>\s*\*\*EN\*\*:\s*(.+)$", re.MULTILINE)
 GLOSS_RE = re.compile(r"-\s*\*\*([^*]+)\*\*\s*\(([^)]+)\)")
