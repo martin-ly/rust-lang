@@ -1,17 +1,15 @@
-//! Rust 1.97 Nightly 前瞻/候选特性代码示例
-//! **状态**: Rust 1.97.0 nightly candidate（2026-07-09）
-//! **编译要求**: Rust 1.97.0+ 可编译（使用等效实现）；`#[cfg(nightly)]` 分支调用 1.97+ 新 API，
-//! 可通过 `RUSTFLAGS="--cfg nightly" cargo build` 启用。
-//! **来源**: [releases.rs](https://releases.rs/) · [Rust Standard Library Tracking](https://github.com/rust-lang/rust/labels/T-libs-api)
+//! Rust 1.97.0 stable 特性代码示例
+//! **状态**: Rust 1.97.0 stable（2026-07-09）
+//! **编译要求**: Rust 1.97.0+ stable
+//! **来源**: [releases.rs](https://releases.rs/docs/1.97.0/) · [Rust Standard Library Tracking](https://github.com/rust-lang/rust/labels/T-libs-api)
 //!
-//! 本文件覆盖 Rust 1.97.0 候选/nightly 标准库新 API。已进入 1.98 通道的特性单独标注并在
+//! 本文件覆盖 Rust 1.97.0 已稳定的标准库新 API。1.98+ 仍未稳定的特性单独标注并在
 //! 后续迁移到 `rust_198_features.rs`。
 #![allow(unexpected_cfgs)]
 #![allow(clippy::incompatible_msrv)]
 #![allow(clippy::borrowed_box)]
 
 use std::collections::VecDeque;
-#[cfg(nightly)]
 use std::num::NonZeroU32;
 
 // ============================================================================
@@ -21,23 +19,12 @@ use std::num::NonZeroU32;
 /// `NonZero` 整数新增位查询方法：`highest_one` / `lowest_one` / `bit_width`
 ///
 /// 这些 API 避免了在查询前对零值进行特殊处理，因为 `NonZero` 类型本身已保证非零。
-///
-/// 当前等效实现可在 Rust 1.97.0+ 编译；`#[cfg(nightly)]` 分支调用 1.97 原生 API。
-#[cfg(nightly)]
+/// Rust 1.97.0 stable。
 pub fn demo_nonzero_bit_ops() {
     let n = NonZeroU32::new(0b10100).unwrap();
     assert_eq!(n.highest_one(), 4); // 最高 set bit 的索引
     assert_eq!(n.lowest_one(), 2); // 最低 set bit 的索引
-    assert_eq!(n.bit_width().get(), 5); // 表示 self 所需的最少位数
-}
-
-#[cfg(not(nightly))]
-pub fn demo_nonzero_bit_ops() {
-    // 当前等效实现 (Rust 1.96):
-    let n: u32 = 0b10100;
-    assert_eq!(u32::BITS - 1 - n.leading_zeros(), 4);
-    assert_eq!(n.trailing_zeros(), 2);
-    assert_eq!(u32::BITS - n.leading_zeros(), 5);
+    assert_eq!(n.bit_width().get(), 5); // 表示 self 所需的最少位数；返回 NonZeroU32
 }
 
 // ============================================================================
@@ -220,22 +207,18 @@ pub fn demo_box_vec_non_null() {
 
 /// `Box::as_ptr` / `Box::as_mut_ptr` — 不物化引用的原始指针访问
 ///
-/// Rust 1.97 候选/nightly：`Box::as_ptr` / `Box::as_mut_ptr`。
+/// ⚠️ 截至 Rust 1.97.0 stable，`Box::as_ptr` / `Box::as_mut_ptr` 仍为 nightly-only unstable。
 /// 关键保证: 该方法不会 materialize 对底层内存的引用，因此在 aliasing model 中
 /// 与 `Box::leak` / `Box::as_ref` 不同，可与其它 raw pointer 操作安全交错。
-#[cfg(nightly)]
+/// 在 stable 1.97 下保留等效实现作为语义演示。
 pub fn demo_box_as_ptr() {
-    let mut boxed = Box::new(42);
-    let ptr: *mut i32 = Box::as_mut_ptr(&mut boxed);
-    unsafe {
-        *ptr = 100;
-    }
-    assert_eq!(*boxed, 100);
-}
+    // Rust 1.97 nightly（当前仍为 unstable）:
+    // let mut boxed = Box::new(42);
+    // let ptr: *mut i32 = Box::as_mut_ptr(&mut boxed);
+    // unsafe { *ptr = 100; }
+    // assert_eq!(*boxed, 100);
 
-#[cfg(not(nightly))]
-pub fn demo_box_as_ptr() {
-    // 当前等效实现 (Rust 1.96): 使用 Box::into_raw 会转移所有权，需要恢复
+    // 当前等效实现 (Rust 1.97 stable): 使用 Box::into_raw 会转移所有权，需要恢复
     let mut boxed = Box::new(42);
     let ptr = Box::into_raw(boxed);
     unsafe {

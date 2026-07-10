@@ -1,18 +1,10 @@
-//! Rust 1.97 Nightly 前瞻/候选特性 —— 通用工具演示
-//! Rust 1.97 nightly preview candidate features —— common utilities demonstration
+//! Rust 1.97.0 stable 特性 —— 通用工具演示
+//! Rust 1.97.0 stable features —— common utilities demonstration
 //!
-//! 本文件使用 **Rust 1.97.0 等价实现** 演示跨 crate 通用的 Rust 1.97 API 语义。
-//! 实际 Rust 1.97 调用以 `#[cfg(nightly)]` 分支保留，可通过
-//! `RUSTFLAGS="--cfg nightly" cargo build` 启用。
+//! 本文件直接调用 Rust 1.97.0 stable API 演示相关语义，不再保留 nightly 分支与等效实现。
 //!
-//! This module demonstrates general-purpose Rust 1.97 candidate APIs using
-//! equivalent implementations that compile on Rust 1.97.0. The actual Rust 1.97
-//! call sites are kept in `#[cfg(nightly)]` branches for easy migration once the
-//! toolchain is upgraded.
-
-#![allow(clippy::incompatible_msrv)]
-#![allow(unexpected_cfgs)]
-#![allow(clippy::borrowed_box)]
+//! This module directly uses Rust 1.97.0 stable APIs; no `#[cfg(nightly)]` shims
+//! or equivalent fallback implementations are kept.
 
 use std::collections::hash_map::DefaultHasher;
 use std::hash::BuildHasherDefault;
@@ -21,7 +13,7 @@ use std::num::NonZeroU32;
 /// # Rust 1.97 通用特性演示
 /// # Rust 1.97 common feature demonstration
 ///
-/// 跨 crate 通用的 Rust 1.97 API：
+/// 跨 crate 通用的 Rust 1.97.0 stable API：
 /// - `ptr::fn_addr_eq` — 函数指针地址比较
 /// - `NonZero*::midpoint` / `NonZero*::isqrt`
 /// - `BuildHasherDefault::new` const stable
@@ -30,90 +22,43 @@ pub struct Rust197CommonFeatures;
 
 impl Rust197CommonFeatures {
     /// 比较两个函数指针是否指向同一地址。
-    /// Rust 1.97 提供 `std::ptr::fn_addr_eq`，处理比较时可能涉及的 provenance 问题。
-    #[cfg(nightly)]
+    ///
+    /// Rust 1.97.0 stable 提供 `std::ptr::fn_addr_eq`，处理比较时可能涉及的 provenance 问题。
     pub fn compare_fn_pointers(a: fn(), b: fn()) -> bool {
         std::ptr::fn_addr_eq(a, b)
     }
 
-    #[cfg(not(nightly))]
-    pub fn compare_fn_pointers(a: fn(), b: fn()) -> bool {
-        a as usize == b as usize
-    }
-
     /// 计算两个非零整数的中点，结果仍为非零。
-    /// Rust 1.97 提供 `NonZeroU32::midpoint`。
-    #[cfg(nightly)]
+    ///
+    /// Rust 1.97.0 stable 提供 `NonZeroU32::midpoint`。
     pub fn nonzero_midpoint(a: NonZeroU32, b: NonZeroU32) -> NonZeroU32 {
         a.midpoint(b)
     }
 
-    #[cfg(not(nightly))]
-    pub fn nonzero_midpoint(a: NonZeroU32, b: NonZeroU32) -> NonZeroU32 {
-        let a_val = a.get();
-        let b_val = b.get();
-        let mid = (a_val & b_val) + ((a_val ^ b_val) >> 1);
-        NonZeroU32::new(mid).unwrap_or(a)
-    }
-
     /// 计算非零整数的整数平方根，结果仍为非零。
-    /// Rust 1.97 提供 `NonZeroU32::isqrt`。
-    #[cfg(nightly)]
+    ///
+    /// Rust 1.97.0 stable 提供 `NonZeroU32::isqrt`。
     pub fn nonzero_sqrt(n: NonZeroU32) -> NonZeroU32 {
         n.isqrt()
     }
 
-    #[cfg(not(nightly))]
-    pub fn nonzero_sqrt(n: NonZeroU32) -> NonZeroU32 {
-        let val = n.get();
-        let sqrt = if val < 2 {
-            val
-        } else {
-            let mut x = val;
-            let mut y = x.div_ceil(2);
-            while y < x {
-                x = y;
-                y = (x + val / x) / 2;
-            }
-            x
-        };
-        NonZeroU32::new(sqrt).unwrap_or(n)
-    }
-
     /// 演示在 const 上下文中获取值的大小。
-    /// Rust 1.97 将 `mem::size_of_val` 在 const 上下文稳定化。
-    #[cfg(nightly)]
+    ///
+    /// Rust 1.97.0 将 `std::mem::size_of_val` 在 const 上下文稳定化。
     pub const fn const_size_of_val<T>(val: &T) -> usize {
         std::mem::size_of_val(val)
     }
 
-    #[cfg(not(nightly))]
-    pub const fn const_size_of_val<T>(val: &T) -> usize {
-        let _ = val;
-        std::mem::size_of::<T>()
-    }
-
     /// 演示在 const 上下文中获取值的对齐。
-    /// Rust 1.97 将 `mem::align_of_val` 在 const 上下文稳定化。
-    #[cfg(nightly)]
+    ///
+    /// Rust 1.97.0 将 `std::mem::align_of_val` 在 const 上下文稳定化。
     pub const fn const_align_of_val<T>(val: &T) -> usize {
         std::mem::align_of_val(val)
     }
 
-    #[cfg(not(nightly))]
-    pub const fn const_align_of_val<T>(val: &T) -> usize {
-        let _ = val;
-        std::mem::align_of::<T>()
-    }
-
     /// 演示在 const 上下文中构造默认哈希器。
-    /// Rust 1.97 将 `BuildHasherDefault::new` 稳定为 `const fn`。
-    #[cfg(nightly)]
-    pub const fn const_build_hasher_default() -> BuildHasherDefault<DefaultHasher> {
-        BuildHasherDefault::new()
-    }
-
-    #[cfg(not(nightly))]
+    ///
+    /// Rust 1.97.0 将 `BuildHasherDefault::new` 稳定为 `const fn`。
     pub const fn const_build_hasher_default() -> BuildHasherDefault<DefaultHasher> {
         BuildHasherDefault::new()
     }

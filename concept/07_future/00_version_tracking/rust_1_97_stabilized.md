@@ -99,6 +99,64 @@ use std::io::{self};
 use std::io::{self, Write};
 ```
 
+### 2.6 `{float}` 在未约束时回退到 `f32`
+
+Rust 1.97.0 调整了浮点字面量类型推断：当 `{float}`（未约束的浮点字面量）出现在需要具体类型的上下文中且未通过其他约束确定为 `f64` 时，更可能回退到 `f32`。这一变更主要影响依赖旧推断行为的代码，并会触发未来兼容性警告。
+
+```rust,ignore
+fn takes_f32(_: f32) {}
+
+fn main() {
+    // Rust 1.97+：以下代码可能触发未来兼容性警告，
+    // 因为字面量 1.0 的类型推断路径发生变化。
+    takes_f32(1.0);
+}
+```
+
+**迁移建议**：对浮点字面量显式标注类型，例如 `1.0f32` 或 `1.0_f32`。
+
+### 2.7 v0 symbol mangling 默认启用
+
+Rust 1.97.0 将 v0 symbol mangling 方案设为默认。该方案自 1.59 起可通过 `-C symbol-mangling-version=v0` 选择，自 2025-11 起在 nightly 默认启用，现进入 stable。
+
+**与旧方案（Itanium ABI）相比的优势**：
+
+- 泛型参数实例保留具体值，而非仅通过 hash 追踪
+- 消除旧方案中部分条目未使用 Itanium ABI 导致的不一致
+
+**影响与迁移**：
+
+| 场景 | 影响 | 建议 |
+|:---|:---|:---|
+| 调试器 / Profiler | 旧版本可能无法 demangle v0 符号 | 升级工具链；GDB 15+、LLDB 等主流工具已支持 |
+| Backtrace | 格式可能变化 | 更新依赖旧格式的解析脚本 |
+| 链接 / 分析脚本 | 符号名格式变化 | 测试并适配 v0 格式；必要时临时通过 nightly `-C symbol-mangling-version=legacy` 回退 |
+
+```bash
+# 查看当前 mangling 版本（需要 nightly 才能显式选择 legacy）
+rustc -C symbol-mangling-version=v0 --print cfg
+```
+
+### 2.8 链接器输出默认显示 (`linker_messages` lint)
+
+历史上 rustc 在链接成功时隐藏 linker 的 stderr 输出。Rust 1.97.0 改为默认显示链接器输出，并通过 `linker_messages` lint 以 warning 形式报告。
+
+**关键语义**：
+
+- `linker_messages` 是**特殊 lint**，**不受 `warnings` lint group 控制**。
+- 已知误报或预期行为已被 rustc 过滤。
+- 若需临时静默，显式设置为 `allow`：
+
+```toml
+[lints.rust]
+linker_messages = "allow"
+```
+
+```rust,ignore
+// 或在 crate 根显式允许
+#![allow(linker_messages)]
+```
+
 ---
 
 ## 3. 目标平台
@@ -175,7 +233,7 @@ assert_eq!(0b0_u32.highest_one(), None);
 
 ### 4.5 `NonZero` 位查询方法
 
-`NonZero<{integer}>` 同步新增对应方法。由于输入保证非零，`isolate_*` 返回 `NonZero`，`highest_one` / `lowest_one` 返回 `u32`，`bit_width` 返回 `u32`。
+`NonZero<{integer}>` 同步新增对应方法。由于输入保证非零，`isolate_*` 与 `bit_width` 返回 `NonZero<{integer}>` / `NonZero<u32>`（`bit_width` 至少为 1），`highest_one` / `lowest_one` 返回 `u32`。
 
 ```rust,ignore
 use std::num::NonZeroU32;
@@ -186,7 +244,7 @@ assert_eq!(n.isolate_highest_one(), NonZeroU32::new(0b_0100_0000).unwrap());
 assert_eq!(n.isolate_lowest_one(),  NonZeroU32::new(0b_0000_0100).unwrap());
 assert_eq!(n.highest_one(), 6);
 assert_eq!(n.lowest_one(), 2);
-assert_eq!(n.bit_width(), 7);
+assert_eq!(n.bit_width().get(), 7); // bit_width 返回 NonZeroU32
 ```
 
 ### 4.6 `char::is_control` 在 const 上下文稳定
@@ -206,13 +264,25 @@ fn main() {
 
 ### 5.1 `build.warnings` 配置
 
-`[build]` 配置新增 `warnings` 字段，可统一控制本地包的 lint 警告级别，常用于 CI 强制无警告。
+`[build]` 配置新增 `warnings` 字段，可统一控制**本地包（local packages）**的 lint 警告级别，常用于 CI 强制无警告。与 `RUSTFLAGS="-Dwarnings"` 不同，该配置不会使 build cache 失效，且**不影响依赖 crate**。
 
 ```toml
 # .cargo/config.toml
 [build]
 warnings = "deny"
 ```
+
+也支持环境变量 `CARGO_BUILD_WARNINGS`：
+
+```bash
+# CI：拒绝所有本地包警告，并收集全部错误/警告而非停在第一个包
+CARGO_BUILD_WARNINGS=deny cargo check --keep-going
+
+# 本地开发：临时静默警告
+CARGO_BUILD_WARNINGS=allow cargo check
+```
+
+**取值**：`"allow"`、`"warn"`（默认）、`"deny"`。
 
 ### 5.2 `resolver.lockfile-path` 配置
 

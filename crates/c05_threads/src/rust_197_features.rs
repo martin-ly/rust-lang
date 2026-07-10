@@ -1,12 +1,7 @@
-//! Rust 1.97 Nightly 前瞻/候选特性 —— 线程与并发
+//! Rust 1.97.0 stable 特性 —— 线程与并发
 //!
-//! 本模块演示 Rust 1.97.0 候选/nightly 中的并发/原子相关 API。
-//! 由于当前工具链为 Rust 1.97.0，实际代码使用等价的 1.97.0 兼容实现；
-//! 对应的 1.97 原生 API 调用以 `#[cfg(nightly)]` 分支保留，可通过
-//! `RUSTFLAGS="--cfg nightly" cargo build` 启用。
-#![allow(clippy::incompatible_msrv)]
-#![allow(unexpected_cfgs)]
-#![allow(clippy::borrowed_box)]
+//! 本模块演示 Rust 1.97.0 stable 中与并发/原子相关的 API 和行为变更。
+//! 当前工具链为 Rust 1.97.0，直接调用 stable API。
 
 use std::collections::hash_map::DefaultHasher;
 use std::hash::BuildHasherDefault;
@@ -16,10 +11,10 @@ use std::sync::atomic::AtomicU32;
 /// Rust 1.97 线程/并发特性演示
 ///
 /// 涉及特性：
-/// - `cfg(target_has_atomic_equal_alignment = "ptr")`（cfg 条件，无运行时 API）
-/// - `BuildHasherDefault::new` const 稳定
-/// - `Option<NonZero*>` niche 编码偏好 `-1`（编译器内部表示变更，无 API）
-/// - `must_use` lint 向 `Result<T, E>` / `ControlFlow<B, C>` 内部类型传播（lint 变更，无 API）
+/// - `cfg(target_has_atomic_equal_alignment = "ptr")`（Rust 1.97.0 stable cfg 条件，无运行时 API）
+/// - `BuildHasherDefault::new` const 稳定化（Rust 1.97.0 stable）
+/// - `Option<NonZero*>` niche 编码偏好 `-1`（Rust 1.97.0 编译器内部表示变更，无 API）
+/// - `must_use` lint 向 `Result<T, E>` / `ControlFlow<B, C>` 内部类型传播（Rust 1.97.0 lint 扩展，无 API）
 pub struct Rust197ThreadFeatures;
 
 #[must_use]
@@ -27,46 +22,41 @@ pub struct Rust197ThreadFeatures;
 pub struct ImportantToken(pub u32);
 
 impl Rust197ThreadFeatures {
-    /// 构造默认哈希器（1.97 后可在 const 上下文调用）
-    #[cfg(nightly)]
-    pub const fn build_hasher_default_new() -> BuildHasherDefault<DefaultHasher> {
-        BuildHasherDefault::new()
-    }
-
-    #[cfg(not(nightly))]
+    /// 构造默认哈希器（Rust 1.97.0 起 `BuildHasherDefault::new` 可在 const 上下文调用）
     pub const fn build_hasher_default_new() -> BuildHasherDefault<DefaultHasher> {
         BuildHasherDefault::new()
     }
 
     /// 演示 `cfg(target_has_atomic_equal_alignment = "ptr")` 的使用位置
     ///
-    /// Rust 1.97 新增该 cfg；在 1.96 上无对应条件，实际逻辑在注释中说明。
+    /// Rust 1.97.0 新增该 cfg，用于在编译期选择指针大小原子与 `usize` 对齐相同的优化路径。
     pub fn optimized_ptr_atomic() -> &'static str {
-        // 1.97+:
+        // Rust 1.97.0:
         // #[cfg(target_has_atomic_equal_alignment = "ptr")]
         // fn optimized_ptr_atomic() { /* 依赖指针大小原子与 usize 对齐相同的平台 */ }
-        "atomic pointer alignment check requires Rust 1.97+ cfg"
+        "atomic pointer alignment check uses cfg(target_has_atomic_equal_alignment = \"ptr\") in \
+         Rust 1.97.0"
     }
 
     /// 返回 `Option<NonZeroU32>` 在内存中的表示字节
     ///
-    /// Rust 1.97 起 `Option<NonZero*>` 优先使用 `-1` 作为 `None` 的 niche 值，
-    /// 优化 FFI 和序列化互操作。该函数展示在 1.96 上获取同样的字节表示。
+    /// Rust 1.97.0 起 `Option<NonZero*>` 优先使用 `-1` 作为 `None` 的 niche 值，
+    /// 优化 FFI 和序列化互操作。
     pub fn nonzero_option_bytes(opt: Option<NonZeroU32>) -> [u8; 4] {
-        // 1.97+: 编译器内部表示直接使用 -1 作为 None 的 niche
         match opt {
             Some(nz) => nz.get().to_le_bytes(),
             None => (-1i32).to_le_bytes(),
         }
     }
 
-    /// 获取原子引用（等效实现）
+    /// 获取原子引用。
+    ///
+    /// Rust 1.97.0 起 `AtomicU32::from_ptr` 已稳定。
     ///
     /// # Safety
     /// 调用者必须确保指针有效、正确对齐，且在引用生命周期内独占访问该内存。
     pub unsafe fn atomic_from_ptr<'a>(ptr: *mut u32) -> &'a AtomicU32 {
-        // 1.96 等效实现；1.97 没有稳定 Atomic*::from_ptr
-        unsafe { &*(ptr as *const AtomicU32) }
+        unsafe { AtomicU32::from_ptr(ptr) }
     }
 
     /// 演示 `#[must_use]` 通过 `Result<T, E>` 传播
@@ -108,7 +98,7 @@ mod tests {
 
     #[test]
     fn test_must_use_propagation() {
-        // Rust 1.97+ 中 `Result<#[must_use] T, E>` 会触发未使用警告。
+        // Rust 1.97.0 中 `Result<#[must_use] T, E>` 会触发未使用警告。
         // 这里显式忽略以避免 lint。
         let _ = Rust197ThreadFeatures::give_token();
     }

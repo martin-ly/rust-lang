@@ -1,11 +1,7 @@
-//! Rust 1.97 Nightly 前瞻/候选特性 —— 控制流与函数
+//! Rust 1.97.0 stable 特性 —— 控制流与函数
 //!
-//! 本模块演示 Rust 1.97 中稳定化的控制流/函数相关 API。
-//! 实际代码使用等价的 Rust 1.97.0 兼容实现；1.97 原生调用以 `#[cfg(nightly)]`
-//! 分支保留，可通过 `RUSTFLAGS="--cfg nightly" cargo build` 启用。
-#![allow(clippy::incompatible_msrv)]
-#![allow(unexpected_cfgs)]
-#![allow(clippy::borrowed_box)]
+//! 本模块演示 Rust 1.97.0 稳定化的控制流/函数相关 API，
+//! 以及 Rust 1.97.0 stable 行为变更（如 `must_use` lint 扩展）。
 
 use std::hash::BuildHasher;
 
@@ -27,8 +23,7 @@ impl Rust197ControlFlowFeatures {
     /// 返回一个包含 `#[must_use]` 内部类型的 `Result`
     ///
     /// 在 Rust 1.97+ 中，忽略该 `Result` 会触发 `must_use` 警告；
-    /// Rust 1.96 同样会因 `Result` 本身标记 `must_use` 而警告，
-    /// 但 1.97 额外会将内部类型的 `must_use` 传播出来。
+    /// `Result` 本身标记 `must_use`，而 1.97 额外将内部类型的 `must_use` 传播出来。
     pub fn give_token() -> Result<ImportantToken, std::io::Error> {
         Ok(ImportantToken)
     }
@@ -44,14 +39,7 @@ impl Rust197ControlFlowFeatures {
     }
 
     /// 构造默认哈希器
-    #[cfg(nightly)]
     pub const fn build_hasher_default_new()
-    -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
-        std::hash::BuildHasherDefault::new()
-    }
-
-    #[cfg(not(nightly))]
-    pub fn build_hasher_default_new()
     -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
         std::hash::BuildHasherDefault::new()
     }
@@ -65,14 +53,8 @@ impl Rust197ControlFlowFeatures {
     }
 
     /// 可移植的函数指针地址比较
-    #[cfg(nightly)]
     pub fn fn_addr_eq(f: fn(), g: fn()) -> bool {
         std::ptr::fn_addr_eq(f, g)
-    }
-
-    #[cfg(not(nightly))]
-    pub fn fn_addr_eq(f: fn(), g: fn()) -> bool {
-        f as usize == g as usize
     }
 }
 

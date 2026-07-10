@@ -1,17 +1,11 @@
-//! Rust 1.97 Nightly 前瞻/候选特性 —— WASM 目标演示
-//! Rust 1.97 nightly preview candidate features —— WASM target demonstration
+//! Rust 1.97.0 stable 特性 —— WASM 目标演示
+//! Rust 1.97.0 stabilized features —— WASM target demonstration
 //!
-//! 本文件使用 **Rust 1.97.0 等价实现** 演示 Rust 1.97.0 候选 API 的语义。
-//! 实际 Rust 1.97 调用以 `#[cfg(nightly)]` 分支保留，可通过
-//! `RUSTFLAGS="--cfg nightly" cargo build` 启用。
+//! 本文件使用 Rust 1.97.0 stable API 演示相关特性语义。
+//! 当前工具链为 Rust 1.97.0，直接调用 stable API。
 //!
-//! This module demonstrates Rust 1.97.0 candidate APIs using equivalent
-//! implementations that compile on Rust 1.97.0. The actual Rust 1.97 call
-//! sites are kept in `#[cfg(nightly)]` branches for easy migration once the
-//! toolchain is upgraded.
+//! This module demonstrates Rust 1.97.0 stable APIs directly.
 
-#![allow(clippy::incompatible_msrv)]
-#![allow(unexpected_cfgs)]
 #![allow(clippy::borrowed_box)]
 
 use std::collections::hash_map::DefaultHasher;
@@ -22,23 +16,23 @@ use std::num::NonZeroU32;
 /// # Rust 1.97 WASM feature demonstration
 ///
 /// 涵盖的稳定 API（按 Rust 1.97.0 官方列表）：
-/// - `NonZero` 位操作：`count_ones`, `leading_zeros`, `trailing_zeros`, `bitand`, `bitor`, `bitxor`
-///   （这些位运算方法在 1.96 已可用；本函数保留垫片以演示 WASM 场景下的位模式操作）
-/// - `char::is_control()` const 稳定化
-/// - `Box::as_ptr`
-/// - `Option::as_slice` / `as_mut_slice`
-/// - `const size_of_val` / `align_of_val`
-/// - `cfg(target_has_atomic_equal_alignment = "ptr")`（cfg 条件，无运行时 API）
-/// - `BuildHasherDefault::new` const 稳定
+/// - `NonZero` 位操作：`count_ones`, `leading_zeros`, `trailing_zeros`
+///   （位运算 `BitAnd`/`BitXor` 在 1.97.0 尚未稳定，仍使用原始值运算）
+/// - `char::is_control()` const 稳定化（Rust 1.97.0 stable）
+/// - `Box::as_ptr`（尚未稳定，保留等效实现）
+/// - `Option::as_slice` / `as_mut_slice`（Rust 1.97.0 stable）
+/// - `const size_of_val` / `align_of_val`（Rust 1.97.0 stable）
+/// - `cfg(target_has_atomic_equal_alignment = "ptr")`（Rust 1.97.0 stable cfg 条件，无运行时 API）
+/// - `BuildHasherDefault::new` const 稳定化（Rust 1.97.0 stable）
 pub struct Rust197WasmFeatures;
 
 impl Rust197WasmFeatures {
     /// `NonZeroU32` 位查询与位运算。
     ///
-    /// Rust 1.97 在 `NonZeroU*` / `NonZeroI*` 上稳定了位模式查询方法，
+    /// Rust 1.97.0 在 `NonZeroU*` / `NonZeroI*` 上稳定了位模式查询方法，
     /// 便于在 WASM 等目标上直接操作非零整数的位表示。
-    /// 本函数使用的 `count_ones` / `leading_zeros` / `trailing_zeros` 及位运算
-    /// 在 Rust 1.96 已可用，因此保留垫片并更新注释；无需 `#[cfg(nightly)]` 分支。
+    /// `BitAnd` 与 `BitXor` 在 1.97.0 尚未稳定，因此仍对原始值进行运算；
+    /// `BitOr` 已稳定，可直接对 `NonZeroU32` 运算。
     pub fn nonzero_bit_ops(n: NonZeroU32) -> (u32, u32, u32, u32, u32, u32) {
         // `count_ones` 返回 NonZero<u32>，其余返回 u32；统一取原始值。
         let ones = n.count_ones().get();
@@ -46,80 +40,47 @@ impl Rust197WasmFeatures {
         let trailing = n.trailing_zeros();
 
         let mask = NonZeroU32::new(0b1010).unwrap();
-        // Rust 1.96 中 NonZeroU32 未实现 BitAnd/BitXor，需对原始值运算。
+        // BitAnd/BitXor for NonZeroU32 在 Rust 1.97.0 尚未稳定，需对原始值运算。
         let and = n.get() & mask.get();
-        let or = n.get() | mask.get();
+        let or = (n | mask).get();
         let xor = n.get() ^ mask.get();
         (ones, leading, trailing, and, or, xor)
     }
 
-    /// `char::is_control()` 在 Rust 1.97 中变为 `const fn`，
+    /// `char::is_control()` 在 Rust 1.97.0 中变为 `const fn`，
     /// 使得字符分类可在编译期常量/静态项中使用。
-    #[cfg(nightly)]
     pub const fn char_is_control(c: char) -> bool {
         c.is_control()
     }
 
-    #[cfg(not(nightly))]
-    pub const fn char_is_control(c: char) -> bool {
-        matches!(c, '\u{0}'..='\u{1F}' | '\u{7F}'..='\u{9F}')
-    }
-
     /// 获取 `Box<T>` 中堆分配对象的裸指针。
-    #[allow(clippy::borrowed_box)]
-    #[cfg(nightly)]
-    pub fn box_as_ptr<T>(b: &Box<T>) -> *const T {
-        Box::as_ptr(b)
-    }
-
-    #[allow(clippy::borrowed_box)]
-    #[cfg(not(nightly))]
+    ///
+    /// `Box::as_ptr` 在 Rust 1.97.0 尚未稳定，这里使用 `as_ref()` 转换作为等效实现。
     pub fn box_as_ptr<T>(b: &Box<T>) -> *const T {
         b.as_ref() as *const T
     }
 
     /// 将 `Option<T>` 转为只读切片视图。
-    #[cfg(nightly)]
     pub fn option_as_slice<T>(opt: &Option<T>) -> &[T] {
         opt.as_slice()
     }
 
-    #[cfg(not(nightly))]
-    pub fn option_as_slice<T>(opt: &Option<T>) -> &[T] {
-        match opt {
-            Some(x) => std::slice::from_ref(x),
-            None => &[],
-        }
-    }
-
-    /// 编译期计算值的大小与对齐（1.96 兼容版，仅支持 `Sized` 类型）。
-    #[cfg(nightly)]
+    /// 编译期计算值的大小与对齐（Rust 1.97.0 stable）。
     pub const fn const_size_and_align_of_val<T: Sized>(value: &T) -> (usize, usize) {
         (std::mem::size_of_val(value), std::mem::align_of_val(value))
     }
 
-    #[cfg(not(nightly))]
-    pub const fn const_size_and_align_of_val<T: Sized>(_: &T) -> (usize, usize) {
-        (std::mem::size_of::<T>(), std::mem::align_of::<T>())
-    }
-
-    /// 构造默认哈希器（1.97 后可在 const 上下文调用）。
-    #[cfg(nightly)]
-    pub const fn build_hasher_default_new() -> BuildHasherDefault<DefaultHasher> {
-        BuildHasherDefault::new()
-    }
-
-    #[cfg(not(nightly))]
+    /// 构造默认哈希器（Rust 1.97.0 后可在 const 上下文调用）。
     pub const fn build_hasher_default_new() -> BuildHasherDefault<DefaultHasher> {
         BuildHasherDefault::new()
     }
 
     /// 演示 `cfg(target_has_atomic_equal_alignment = "ptr")` 的使用位置。
     pub fn atomic_equal_alignment_note() -> &'static str {
-        // 1.97+:
+        // Rust 1.97.0:
         // #[cfg(target_has_atomic_equal_alignment = "ptr")]
         // fn wasm_atomic_optimized() { /* 指针大小原子与 usize 对齐相同的平台 */ }
-        "cfg(target_has_atomic_equal_alignment = \"ptr\") requires Rust 1.97+"
+        "cfg(target_has_atomic_equal_alignment = \"ptr\") is stable in Rust 1.97.0"
     }
 }
 
