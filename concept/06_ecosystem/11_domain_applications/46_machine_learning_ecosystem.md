@@ -5,7 +5,7 @@
 # Machine Learning Ecosystem（机器学习生态）
 >
 > **EN**: Machine Learning Ecosystem
-> **Summary**: Machine Learning Ecosystem. Guide to 46 Machine Learning Ecosystem.
+> **Summary**: Survey of the Rust machine-learning ecosystem: tensors, autodiff, inference frameworks (candle, burn, ort), dataframes (polars), and pipeline design.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4

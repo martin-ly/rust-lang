@@ -1,7 +1,7 @@
 # Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理）
 >
 > **EN**: Semantic Expressiveness
-> **Summary**: Rust Semantic Expressiveness: A Panoramic Survey. Guide to Semantic Expressiveness.
+> **Summary**: A panoramic survey of Rust's semantic expressiveness across seven dimensions, contrasting computational, type-level, ownership, effect, concurrency, meta-programming, and interoperability boundaries with C++, Go, and Haskell.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

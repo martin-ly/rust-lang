@@ -1,7 +1,7 @@
 # Embedded-HAL 1.0 迁移与 Embassy 生产状态
 
 > **EN**: Embedded-HAL 1.0 Migration and Embassy Production Status
-> **Summary**: A guide to migrating from `embedded-hal` 0.2 to 1.0: unified `ErrorType`, `SpiDevice` vs `SpiBus`, `embedded-hal-async`, and the production-ready status of Embassy v0.5.
+> **Summary**: Key breaking changes and migration strategies from `embedded-hal` 0.2 to 1.0, including the unified `ErrorType`, `SpiDevice` versus `SpiBus` separation, async trait support, and the production-ready status of Embassy v0.5 in embedded Rust.
 > **权威来源**: [embedded-hal 1.0.0](https://github.com/rust-embedded/embedded-hal/releases/tag/embedded-hal-v1.0.0) · [Embassy 文档](https://embassy.dev/) · [Rust Embedded Working Group](https://github.com/rust-embedded/wg)
 >
 > **受众**: [进阶 / 工程]

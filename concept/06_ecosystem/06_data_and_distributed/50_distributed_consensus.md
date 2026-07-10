@@ -6,7 +6,7 @@
 # Distributed Consensus（分布式共识）
 >
 > **EN**: Distributed Consensus
-> **Summary**: Distributed Consensus. Guide to 50 Distributed Consensus.
+> **Summary**: Formal foundations and engineering trade-offs of distributed consensus algorithms (Raft, PBFT, HotStuff) and their Rust implementations.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5

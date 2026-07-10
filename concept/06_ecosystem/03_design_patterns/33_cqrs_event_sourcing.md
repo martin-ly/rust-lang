@@ -5,7 +5,7 @@
 # CQRS & Event Sourcing（命令查询职责分离与事件溯源）
 >
 > **EN**: Cqrs Event Sourcing
-> **Summary**: CQRS & Event Sourcing. Guide to 33 Cqrs Event Sourcing.
+> **Summary**: Design patterns for separating read and write models (CQRS) and reconstructing state from immutable events (Event Sourcing) in Rust distributed systems.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L6

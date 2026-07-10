@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-KG_PATH = ROOT / "concept" / "00_meta" / "kg_data_v2.json"
+KG_PATH = ROOT / "concept" / "00_meta" / "kg_data_v3.json"
 LINKS_PATH = ROOT / "tools" / "kg_browser" / "kg_links.json"
 OUT_PATH = ROOT / "tools" / "kg_browser" / "index.html"
 
@@ -176,6 +176,7 @@ def build_html(kg: dict[str, Any], links: dict[str, str | None]) -> str:
       <label><input type="checkbox" class="filter" value="refines" checked /> <span class="legend-dot" style="background:#6f42c1"></span>refines</label>
       <label><input type="checkbox" class="filter" value="instanceOf" checked /> <span class="legend-dot" style="background:#20c997"></span>instanceOf</label>
       <label><input type="checkbox" class="filter" value="counterExample" checked /> <span class="legend-dot" style="background:#d63384"></span>counterExample</label>
+      <label><input type="checkbox" class="filter" value="relatedTo" checked /> <span class="legend-dot" style="background:#adb5bd"></span>relatedTo</label>
       <h2>图例</h2>
       <div><span class="legend-dot" style="background:var(--concept)"></span>Concept</div>
       <div><span class="legend-dot" style="background:var(--theory)"></span>Theory</div>
@@ -206,28 +207,36 @@ def build_html(kg: dict[str, Any], links: dict[str, str | None]) -> str:
       return uri.replace(/^ex:/, "");
     }}
 
-    // Flatten entities.
+    // Flatten entities from v3 flat list.
+    function inferCategory(types) {{
+      if (!Array.isArray(types)) types = [types];
+      if (types.includes("ex:Theory")) return "theories";
+      if (types.includes("ex:Property")) return "properties";
+      if (types.includes("ex:Rule")) return "rules";
+      if (types.includes("ex:Model")) return "concepts";
+      return "concepts";
+    }}
+
     const nodes = [];
     const nodeById = {{}};
-    for (const [category, items] of Object.entries(kgData.entities || {{}})) {{
-      for (const item of items) {{
-        const id = item["@id"];
-        const node = {{
-          id,
-          shortId: shortId(id),
-          category,
-          label: getLang(item["skos:prefLabel"], "en") || shortId(id),
-          labelZh: getLang(item["skos:prefLabel"], "zh"),
-          definition: getLang(item["skos:definition"], "en"),
-          definitionZh: getLang(item["skos:definition"], "zh"),
-          layer: item["ex:layer"] || "",
-          bloom: item["ex:bloom"] || "",
-          asp: item["ex:asp"] || "",
-          markdown: linksMap[id] || null,
-        }};
-        nodes.push(node);
-        nodeById[id] = node;
-      }}
+    for (const item of kgData.entities || []) {{
+      const id = item["@id"];
+      const category = inferCategory(item["@type"]);
+      const node = {{
+        id,
+        shortId: shortId(id),
+        category,
+        label: getLang(item["skos:prefLabel"], "en") || shortId(id),
+        labelZh: getLang(item["skos:prefLabel"], "zh"),
+        definition: getLang(item["skos:scopeNote"], "en") || getLang(item["skos:scopeNote"], "zh"),
+        definitionZh: "",
+        layer: item["ex:layer"] || "",
+        bloom: item["ex:bloomLevel"] || "",
+        asp: item["ex:asp"] || "",
+        markdown: linksMap[id] || null,
+      }};
+      nodes.push(node);
+      nodeById[id] = node;
     }}
 
     // Build links.

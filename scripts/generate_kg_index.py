@@ -11,6 +11,9 @@
 - 关联的 crates/ 代码示例（通过路径推断）
 
 输出: concept/00_meta/kg_index.json
+
+要生成完整的 JSON-LD 知识图谱（含关系三元组），请在运行本脚本后执行：
+    python scripts/generate_kg_v3.py
 """
 
 from __future__ import annotations

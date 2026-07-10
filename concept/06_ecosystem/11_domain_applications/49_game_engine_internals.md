@@ -6,7 +6,7 @@
 # Game Engine Internals（游戏引擎内部原理）
 >
 > **EN**: Game Engine Internals
-> **Summary**: Game Engine Internals. Guide to 49 Game Engine Internals.
+> **Summary**: Core systems of Rust game engines: entity-component-system (ECS), rendering (wgpu), physics (Rapier), audio, asset pipelines, and frame scheduling.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5

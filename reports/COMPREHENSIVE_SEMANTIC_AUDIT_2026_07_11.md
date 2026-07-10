@@ -78,7 +78,7 @@
 
 以下方向可在后续迭代中持续完善：
 
-1. **KG 深度扩展**：当前 `kg_index.json` 覆盖概念实体与关系；可进一步与 `kg_data_v2.json` 的 RDF/SKOS/SHACL 模式对齐，生成兼容的 JSON-LD。
+1. **KG 深度扩展**：✅ 已完成。新增 `scripts/generate_kg_v3.py`，将 `kg_index.json` 的 474 个实体与 5799 条关系注入 `kg_data_v3.json`，并升级 `tools/kg_browser` 以浏览完整图谱。详见 `reports/KG_V3_COMPLETION_2026_07_11.md`。
 2. **Mermaid 语义检查**：当前脚本仅检查关键语法；可引入 `mermaid-cli` 做完整渲染验证（需 Node.js 环境）。
 3. **README 精简**：`crates/` 中部分 README 可合并；`archive/` 可建立 `INDEX.md`。
 4. **版本特性追踪自动化**：在 `scripts/rust_version_tracker.py` 中增加与 releases.rs 的 diff 功能。

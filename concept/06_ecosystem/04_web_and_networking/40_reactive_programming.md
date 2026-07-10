@@ -6,7 +6,7 @@
 # Reactive Programming & FRP（响应式编程与函数式响应编程）
 >
 > **EN**: Reactive Programming
-> **Summary**: Reactive Programming & FRP. Guide to 40 Reactive Programming.
+> **Summary**: Reactive and functional reactive programming paradigms in Rust: declarative composition of asynchronous data streams, backpressure, and event-driven architectures.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
