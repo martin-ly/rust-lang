@@ -379,7 +379,7 @@ Polonius 代表了 Rust 类型系统（Type System）理论的前沿进展。在
 
 > 📌 **复查记录**
 >
-> - 2026-04-24: 初始创建，基于 Rust 1.96.1 状态
+> - 2026-04-24: 初始创建，基于 Rust 1.97.0 状态
 > - 2026-05-22: 网络权威内容对齐 Batch 9：更新 Project Goals 2026 跟踪状态、location-sensitive prototype nightly 可用性、与 concept/03_advanced/02_unsafe/08_nll_and_polonius.md 交叉引用
 > - 下次复查: 2026-07-24 (预计 Polonius 集成进展更新)
 >

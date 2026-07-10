@@ -36,8 +36,8 @@
 安装 Rust 后，确认工具链版本：
 
 ```bash
-rustc --version   # rustc 1.96.1 (or newer)
-cargo --version   # cargo 1.96.1 (or newer)
+rustc --version   # rustc 1.97.0 (or newer)
+cargo --version   # cargo 1.97.0 (or newer)
 ```
 
 建议使用 `rustup` 管理工具链，并通过 `rustup update` 保持最新稳定版。
@@ -97,7 +97,7 @@ cargo init --name my_project
 name = "hello_cargo"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.96.1"
+rust-version = "1.97.0"
 license = "MIT OR Apache-2.0"
 description = "A minimal Cargo getting-started package"
 

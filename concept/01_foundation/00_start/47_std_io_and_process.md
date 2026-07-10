@@ -445,5 +445,5 @@ D. `let _ = file.read_to_string(&mut s);`
 ---
 
 > **权威来源**: [std::io](https://doc.rust-lang.org/std/io/index.html), [std::fs](https://doc.rust-lang.org/std/fs/index.html), [std::path](https://doc.rust-lang.org/std/path/index.html), [std::process](https://doc.rust-lang.org/std/process/index.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
-> **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.96.1 std 文档与 Rust By Example 对齐](https://doc.rust-lang.org/std/index.html)
+> **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.97.0 std 文档与 Rust By Example 对齐](https://doc.rust-lang.org/std/index.html)
 > **状态**: ✅ 权威来源对齐完成

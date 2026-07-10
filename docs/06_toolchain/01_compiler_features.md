@@ -178,13 +178,13 @@ rustc --version
 # 查看详细版本信息 {#查看详细版本信息}
 rustc --version --verbose
 
-# 输出示例 (Rust 1.96.1): {#输出示例-rust-1960}
-# rustc 1.96.1 (2026-07-02) {#rustc-1961-2026-07-02}
+# 输出示例 (Rust 1.97.0): {#输出示例-rust-1960}
+# rustc 1.97.0 (2026-07-09) {#rustc-1970-2026-07-09}
 # binary: rustc {#binary-rustc}
 # commit-hash: abc123... {#commit-hash-abc123}
 # commit-date: 2026-07-02 {#commit-date-2026-07-02}
 # host: x86_64-unknown-linux-gnu {#host-x86_64-unknown-linux-gnu}
-# release: 1.96.1 {#release-1960}
+# release: 1.97.0 {#release-1970}
 # LLVM version: 21.0.0  (minimum external LLVM for building rustc from source is 21) {#llvm-version-2100-minimum-external-llvm-for-building-rustc-from-source-is-21}
 ```
 
@@ -1248,7 +1248,7 @@ fn pgo_workflow() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 > **最新版本**: Rust 1.97.0+ (2026-05-28)
 
-本文档基于 Rust 1.96.1，涵盖 1.93–1.96 关键特性。历史版本请参见：
+本文档基于 Rust 1.97.0，涵盖 1.93–1.96 关键特性。历史版本请参见：
 
 - [Rust 1.96 稳定特性全景](06_19_rust_1_96_features.md)
 - [Rust 历史版本文档索引](../README.md)

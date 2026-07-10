@@ -106,7 +106,7 @@ rustc-wrapper = "sccache"
 
 ## 六、MSRV 与 Resolver v3
 
-Rust 1.96.1 配合 Edition 2024 默认使用 **resolver v3**，其关键行为是 **MSRV-aware fallback**：
+Rust 1.97.0 配合 Edition 2024 默认使用 **resolver v3**，其关键行为是 **MSRV-aware fallback**：
 
 ```toml
 [workspace]
@@ -119,7 +119,7 @@ members = ["crates/*"]
 
 ## 七、公共/私有依赖与 Feature Unification
 
-从 Rust 1.96.1 开始，可以在 `Cargo.toml` 中声明 `public = true/false`（语法已稳定，完整语义检查需 nightly `-Zpublic-dependency`）：
+从 Rust 1.97.0 开始，可以在 `Cargo.toml` 中声明 `public = true/false`（语法已稳定，完整语义检查需 nightly `-Zpublic-dependency`）：
 
 ```toml
 [dependencies]

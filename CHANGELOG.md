@@ -1,8 +1,17 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-07-09（Rust 1.97.0 稳定支持 + 依赖更新 + AGENTS.md 合规修复）
+> **最后更新**: 2026-07-10（Rust 1.97.0 MSRV 全面对齐）
 
 ---
+
+## [3.1.2] - 2026-07-10 — Rust 1.97.0 MSRV 与全项目版本对齐
+
+- **MSRV 提升**: `Cargo.toml` `workspace.package.rust-version`、`rust-toolchain.toml` 注释、`.clippy.toml` `msrv`、CI workflow 主矩阵与脚本默认版本统一从 `1.96.1` 更新为 `1.97.0`。
+- **Workspace crate 基线刷新**: 全部 `crates/*/README.md`、`completion_status.md`、`docs/` 中 `1.96.1+` / `MSRV 1.96.1` 基线标注统一更新为 `1.97.0+`；`crates/*/src/rust_197_features.rs` 模块注释中“当前工具链为 Rust 1.96.1”统一改为“Rust 1.97.0”。
+- **示例与练习**: `examples/`、`exercises/rustlings_style/` 中硬编码 `rust-version = "1.96.1"` 的 `Cargo.toml` 更新为 `"1.97.0"`。
+- **知识库权威页**: `concept/07_future/00_version_tracking/rust_1_97_stabilized.md` 状态说明更新为 stable 已发布；`AGENTS.md`、`README.md`、`CONTRIBUTING.md`、`development.md`、`testing.md` 版本说明同步刷新。
+- **历史版本文件保留**: `rust_1_96_stabilized.md`、`rust_196_features.rs`、1.96 专题 cheatsheet 等历史特性内容仅修正“当前稳定 patch”措辞，不删除 1.96 特性正文。
+- **验证**: `cargo check --workspace`、`cargo test --workspace`、`cargo clippy --workspace`、`python scripts/kb_auditor.py --link-check`、`python scripts/detect_content_overlap.py` 均通过。
 
 ## [3.1.1] - 2026-07-04 — Rust 1.96.1 全面版本对齐
 

@@ -378,7 +378,7 @@ fn verify_vec_push_safety() {
 ---
 
 > **权威来源**: [Kani 官方文档](https://model-checking.github.io/kani/) · [Kani GitHub](https://github.com/model-checking/kani) · [CBMC](https://github.com/diffblue/cbmc)
-> **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Kani 0.66+ / Rust 1.96.1 · 2026-07-09 扩展 `c03_control_fn`、`c04_generic` Kani 示例并新增交叉引用（Reference） [P2-Q3 形式化工具示例]
+> **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Kani 0.66+ / Rust 1.97.0 · 2026-07-09 扩展 `c03_control_fn`、`c04_generic` Kani 示例并新增交叉引用（Reference） [P2-Q3 形式化工具示例]
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2

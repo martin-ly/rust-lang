@@ -4,7 +4,7 @@
 > **Summary**: 基准测试最小指南 Benchmark Minimal Guide. (stub/archive redirect)
 > **分级**: [B]
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
+> **最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [10_performance_benchmarks.md](../../../archive/research_notes_2026_06_25/experiments/10_performance_benchmarks.md)
@@ -525,7 +525,7 @@ criterion_main!(benches);
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.96.1 复审）
+**最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

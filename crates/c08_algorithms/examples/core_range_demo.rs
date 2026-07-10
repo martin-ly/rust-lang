@@ -1,4 +1,4 @@
-//! Rust 1.96.0/1.96.1 `core::range` 模块专题示例
+//! Rust 1.96+ `core::range` 模块专题示例（兼容 Rust 1.97.0）
 //! 范围类型本身也实现 `Copy`，可多次迭代而不被消费。
 //! scope type this `Copy`，while is 。
 //! 权威来源: https://releases.rs/docs/1.96.0/ | RFC 3550

@@ -181,7 +181,7 @@ Rust 的重大变更通过 **RFC（Request for Comments）** 流程决策：
 
 ```bash
 $ rustc --version
-rustc 1.96.1 (2026-06-30)
+rustc 1.97.0 (2026-06-30)
 
 $ rustc +nightly --version
 rustc 1.99.0-nightly (2026-07-08)

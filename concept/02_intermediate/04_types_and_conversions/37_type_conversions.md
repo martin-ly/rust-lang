@@ -446,5 +446,5 @@ D. 本地 newtype `struct Bytes(Vec<u8>)`
 ---
 
 > **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html), [std::convert](https://doc.rust-lang.org/std/convert/index.html)
-> **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.96.1 Reference、std::convert、Rust By Example 对齐](https://doc.rust-lang.org/std/convert/index.html)
+> **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.97.0 Reference、std::convert、Rust By Example 对齐](https://doc.rust-lang.org/std/convert/index.html)
 > **状态**: ✅ 权威来源对齐完成

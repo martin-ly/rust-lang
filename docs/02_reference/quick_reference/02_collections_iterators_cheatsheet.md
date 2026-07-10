@@ -602,7 +602,7 @@ assert_eq!(iter.collect::<Vec<_>>(), vec![0, 1, 2, 3]);
 | `RangeFromIter` | — | `RangeFrom` 的迭代器 |
 | `RangeToInclusiveIter` | — | `RangeToInclusive` 的迭代器 |
 
-> **注意**: 这些类型在 `core::range` 模块（Module）中稳定于 Rust 1.96.1，之前仅在 `std::ops` 中作为不稳定 trait 存在。
+> **注意**: 这些类型在 `core::range` 模块（Module）中稳定于 Rust 1.96.0，之前仅在 `std::ops` 中作为不稳定 trait 存在。
 
 ---
 
@@ -1419,7 +1419,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 
 **最后更新**: 2026-05-08
 **维护者**: 文档团队
-**状态**: ✅ **Rust 1.96.1 更新完成**
+**状态**: ✅ **Rust 1.97.0 更新完成**
 
 🎯 **掌握集合与迭代器，高效处理数据！**
 ---

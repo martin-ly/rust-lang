@@ -526,7 +526,7 @@ graph LR
 > [Lamport Paxos](https://doi.org/10.1145/3335772.3335939) ·
 > [Wadler Propositions as Sessions](https://doi.org/10.1145/2364527.2364568)
 >
-> **Rust 版本**: 1.96.1 stable (Edition 2024)
+> **Rust 版本**: 1.97.0 stable (Edition 2024)
 > **文档版本**: 1.1
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 系统设计原则与国际权威对齐 v1.1 — 新增知识流动图

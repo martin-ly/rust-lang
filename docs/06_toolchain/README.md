@@ -179,7 +179,7 @@ lto = true
 - 文档质量提升
 - 文档部署
 
-#### 4. [Rust 1.96.1 稳定特性综述](06_22_rust_1_96_features.md) 🆕 {#4-rust-1960-稳定特性综述06_22_rust_1_96_featuresmd}
+#### 4. [Rust 1.97.0 稳定特性综述](06_22_rust_1_96_features.md) 🆕 {#4-rust-1960-稳定特性综述06_22_rust_1_96_featuresmd}
 
 > **来源: [Rust Blog](https://blog.rust-lang.org/)**
 >
@@ -197,7 +197,7 @@ lto = true
 
 **适用场景**:
 
-- 跟进 Rust 1.96.1 新特性
+- 跟进 Rust 1.97.0 新特性
 - 升级项目到 1.96+
 - 学习 range 类型演进与测试断言改进
 

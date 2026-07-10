@@ -305,7 +305,7 @@ graph TD
 ---
 
 > **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Miri](https://github.com/rust-lang/miri)
-> **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Rust 1.96.1 / Miri nightly · 2026-07-09 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用（Reference） [P2-Q3 形式化工具交叉引用]
+> **权威来源对齐变更日志**: 2026-06-26 创建，对齐 Rust 1.97.0 / Miri nightly · 2026-07-09 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用（Reference） [P2-Q3 形式化工具交叉引用]
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1

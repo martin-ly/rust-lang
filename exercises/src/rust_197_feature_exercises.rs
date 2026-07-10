@@ -1,5 +1,5 @@
 //! Rust 1.97 Nightly 前瞻/候选特性练习
-//! **编译要求**: Rust 1.96.1+ stable（使用等效实现）
+//! **编译要求**: Rust 1.97.0+ stable（使用等效实现）
 //! **说明**: 本文件使用等效实现模拟 1.97 特性（当前为 nightly 候选），待 1.97 稳定后将替换为实际 API 调用。
 
 use std::collections::VecDeque;

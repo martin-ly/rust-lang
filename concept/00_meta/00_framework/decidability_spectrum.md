@@ -686,7 +686,7 @@ graph TD
 
 ### 10.2 Rust 特性可判定性状态 1.95+
 
-下表更新至 Rust 1.96.1 stable，评估新引入或稳定的语言特性对类型系统可判定性的影响：
+下表更新至 Rust 1.97.0 stable，评估新引入或稳定的语言特性对类型系统可判定性的影响：
 
 | 特性 | 稳定版本 | 可判定性状态 | 论证 |
 |:---|:---:|:---:|:---|
@@ -800,7 +800,7 @@ Rust 社区正在逐步探索 effects 系统（如 `const`、`async`、`unsafe` 
 > [Pierce *TAPL*](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [Sipser *ITOC*](https://math.mit.edu/~sipser/book.html)
 >
-> **Rust 版本**: 1.96.1 stable (Edition 2024)
+> **Rust 版本**: 1.97.0 stable (Edition 2024)
 > **文档版本**: 1.0
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 可判定性谱系全景 v1.0

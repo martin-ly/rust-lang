@@ -117,7 +117,7 @@ indexmap = { version = "2", public = false }
 - `public = true` 的依赖类型可出现在 `pub` / `pub(crate)` API 中。
 - `public = false` 的依赖类型**仅限私有模块（Module）**使用；若出现在公共接口中，则产生警告。
 
-截至 Rust 1.96.1，stable Cargo 已接受 `public` 字段的语法，但会发出“ignoring `public` … pass `-Zpublic-dependency`”警告并忽略其语义；完整强制执行仍依赖 nightly。
+截至 Rust 1.97.0，stable Cargo 已接受 `public` 字段的语法，但会发出“ignoring `public` … pass `-Zpublic-dependency`”警告并忽略其语义；完整强制执行仍依赖 nightly。
 
 ### 2.3 SemVer 影响
 
@@ -238,5 +238,5 @@ serde = { workspace = true, public = false, features = ["derive"] }
 - **三级**: [cargo-semver-checks 文档](https://docs.rs/cargo-semver-checks) — SemVer 自动化检查工具
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1 (stable) / nightly with `-Zpublic-dependency`
+**对应 Rust 版本**: 1.97.0 (stable) / nightly with `-Zpublic-dependency`
 **最后更新**: 2026-07-09

@@ -1150,7 +1150,7 @@ quadrantChart
 
 > **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/idioms/) · [Rust Style Guide](https://doc.rust-lang.org/style-guide/) · [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html) · [TRPL §13](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
 >
-> **Rust 版本**: 1.96.1 stable (Edition 2024)
+> **Rust 版本**: 1.97.0 stable (Edition 2024)
 > **文档版本**: 1.1
 > **最后更新: 2026-05-21
 > **状态**: ✅ 惯用法谱系全景 v1.1 — 新增认知路径

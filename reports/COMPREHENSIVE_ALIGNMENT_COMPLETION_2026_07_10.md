@@ -1,7 +1,7 @@
 # 项目全面对齐完成报告
 
 **日期**: 2026-07-10
-**范围**: Cargo 配置统一、`knowledge/` 规范化为重定向 stub、`docs/` 权威链接补齐、`concept/` 版本元数据清理
+**范围**: Cargo 配置统一、`knowledge/` 规范化为重定向 stub、`docs/` 权威链接补齐、`concept/` 版本元数据清理、Rust 1.97.0 MSRV 全面对齐
 **目标**: 建立单一、可维护的一致性基线
 
 ---
@@ -10,7 +10,7 @@
 
 | 决策项 | 选择 |
 |---|---|
-| MSRV / `rust-version` | 保持 `1.96.1`（本地可构建） |
+| MSRV / `rust-version` | `1.97.0`（Rust 1.97.0 stable 已发布） |
 | crate 版本号 | 全部继承 workspace `3.1.0` |
 | `knowledge/` 长篇内容 | 全部改为 ≤12 行 stub，指向 `concept/` 权威页 |
 

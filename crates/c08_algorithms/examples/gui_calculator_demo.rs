@@ -222,7 +222,7 @@ impl App for CalculatorApp {
 
                 ui.add_space(20.0);
                 ui.label(
-                    egui::RichText::new("Rust 1.96.1 + egui 0.35 + eframe 0.35")
+                    egui::RichText::new("Rust 1.97.0 + egui 0.35 + eframe 0.35")
                         .size(12.0)
                         .color(ui.visuals().weak_text_color()),
                 );

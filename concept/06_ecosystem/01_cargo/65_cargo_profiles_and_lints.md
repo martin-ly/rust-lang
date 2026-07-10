@@ -299,7 +299,7 @@ Cargo lints 目前仍为 nightly-only 不稳定特性，需要在 nightly 工具
 ---
 
 > **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
-> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 / Cargo profiles & lints
+> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 / Cargo profiles & lints
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

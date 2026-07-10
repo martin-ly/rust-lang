@@ -240,7 +240,7 @@ cargo tarpaulin --workspace --out Html
 
 ### 测试矩阵
 
-- Rust 版本: 1.96.1
+- Rust 版本: 1.97.0
 - 平台: Ubuntu, macOS, Windows
 - 测试类型: 单元、集成、文档、Miri
 

@@ -203,10 +203,8 @@ pub fn network_delay_time(times: &[(usize, usize, u32)], n: usize, k: usize) -> 
     let dist = dijkstra(&graph, k - 1);
     let mut max_dist = 0u32;
     for d in dist {
-        match d {
-            Some(v) => max_dist = max_dist.max(v),
-            None => return None,
-        }
+        let v = d?;
+        max_dist = max_dist.max(v);
     }
     Some(max_dist)
 }

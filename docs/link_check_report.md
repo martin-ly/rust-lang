@@ -7245,7 +7245,7 @@
 | docs\research_notes\type_theory\10_type_system_foundations.md | MaybeUninit API 增强 {#maybeuninit-api-增强} | `#maybeuninit-api-增强-maybeuninit-api-增强` | 同文件锚点不存在: #maybeuninit-api-增强-maybeuninit-api-增强 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | const 上下文增强（Rust 1.91.1+） {#const-上下文增强rust-1911} | `#const-上下文增强rust-1911-const-上下文增强rust-1911` | 同文件锚点不存在: #const-上下文增强rust-1911-const-上下文增强rust-1911 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | Rust 1.93.0 补充 {#rust-1930-补充} | `#rust-1930-补充-rust-1930-补充` | 同文件锚点不存在: #rust-1930-补充-rust-1930-补充 |
-| docs\research_notes\type_theory\10_type_system_foundations.md | 🆕 Rust 1.96.1 更新内容 {#rust-1960-更新内容} | `#-rust-1961-更新内容-rust-1960-更新内容` | 同文件锚点不存在: #-rust-1961-更新内容-rust-1960-更新内容 |
+| docs\research_notes\type_theory\10_type_system_foundations.md | 🆕 Rust 1.97.0 更新内容 {#rust-1960-更新内容} | `#-rust-1961-更新内容-rust-1960-更新内容` | 同文件锚点不存在: #-rust-1961-更新内容-rust-1960-更新内容 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | 1. ControlFlow::ok() - 控制流与Option（Option）转换 {#1-controlflowok---控制流与option转换} | `#1-controlflowok---控制流与option转换-1-controlflowok---控制流与option转换` | 同文件锚点不存在: #1-controlflowok---控制流与option转换-1-controlflowok---控制流与option转换 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | 2. RangeToInclusive 类型 {#2-rangetoinclusive-类型} | `#2-rangetoinclusive-类型-2-rangetoinclusive-类型` | 同文件锚点不存在: #2-rangetoinclusive-类型-2-rangetoinclusive-类型 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | 3. int\_format\_into - 高性能整数格式化 {#3-int\_format\_into---高性能整数格式化} | `#3-int_format_into---高性能整数格式化-3-int_format_into---高性能整数格式化` | 同文件锚点不存在: #3-int_format_into---高性能整数格式化-3-int_format_into---高性能整数格式化 |

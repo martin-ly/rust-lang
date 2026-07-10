@@ -117,7 +117,7 @@ c17_resolver_v3_public_demo v0.1.0 (E:\_src\rust-lang\crates\c17_resolver_v3_pub
 
 ## 五、稳定版行为说明
 
-当前稳定版 Cargo（1.96.1）对本示例会发出两条警告：
+当前稳定版 Cargo（1.97.0）对本示例会发出两条警告：
 
 ```text
 warning: ...crate-b\Cargo.toml: ignoring `public` on dependency crate-d,
@@ -172,6 +172,6 @@ D (serde): Hello from crate-d / serde feature
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.1 (stable)
+**对应 Rust 版本**: 1.97.0 (stable)
 **最后更新**: 2026-07-09
 **状态**: ✅ 可运行示例已落地

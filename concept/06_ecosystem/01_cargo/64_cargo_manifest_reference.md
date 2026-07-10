@@ -89,7 +89,7 @@
 name = "my-crate"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.96.1"
+rust-version = "1.97.0"
 description = "A short description"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/you/my-crate"
@@ -316,7 +316,7 @@ serde = { path = "../serde-fix" }
 ---
 
 > **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
-> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 / Cargo manifest format
+> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 / Cargo manifest format
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

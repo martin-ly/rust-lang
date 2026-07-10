@@ -1,4 +1,4 @@
-//! Rust 1.94 引入的宏系统特性（1.96.1+ 稳定可用）
+//! Rust 1.94 引入的宏系统特性（1.97.0+ 稳定可用）
 //! Rust 1.94 system features (stable in 1.96+) module
 //! - array_windows - 切片数组窗口迭代器（用于宏解析）
 //! - array_windows - array （）

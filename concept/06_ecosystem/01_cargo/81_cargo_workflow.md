@@ -125,7 +125,7 @@ resolver = "3"
 
 [workspace.package]
 edition = "2024"
-rust-version = "1.96.1"
+rust-version = "1.97.0"
 
 [workspace.dependencies]
 serde = "1.0"

@@ -12,7 +12,7 @@
 |---|---|---|---|---|
 | `legacy-lib` | 1.70 | 底层库，公开 `LegacyFlags` | `bitflags` | `serde`, `indexmap` |
 | `modern-app` | 1.84 | 中间库，复用并扩展公共 API | `legacy-lib`, `bitflags`, `serde` | `indexmap` |
-| `edge-bin` | 1.96.1 | 顶层二进制 | （二进制无下游，默认私有） | `legacy-lib`, `modern-app`, `serde`, `serde_json` |
+| `edge-bin` | 1.97.0 | 顶层二进制 | （二进制无下游，默认私有） | `legacy-lib`, `modern-app`, `serde`, `serde_json` |
 
 ### 演示要点
 
@@ -53,7 +53,7 @@ cargo run -p modern-app
 
 ### 使用 nightly 启用完整 `public-dependency` 检查
 
-截至 Rust 1.96.1，`public = true/false` 的**语法**已被 Cargo 接受，但编译器对 `exported_private_dependencies` 的强制执行仍需 nightly 与 `-Zpublic-dependency`：
+截至 Rust 1.97.0，`public = true/false` 的**语法**已被 Cargo 接受，但编译器对 `exported_private_dependencies` 的强制执行仍需 nightly 与 `-Zpublic-dependency`：
 
 ```bash
 rustup run nightly cargo check -Zpublic-dependency --workspace

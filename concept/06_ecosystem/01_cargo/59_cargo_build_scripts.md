@@ -353,7 +353,7 @@ examples/build_script_practice/
 name = "build_script_practice"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.96.1"
+rust-version = "1.97.0"
 
 [dependencies]
 

@@ -97,10 +97,8 @@ impl Trie {
     fn find_node(&self, word: &str) -> Option<&TrieNode> {
         let mut node = &self.root;
         for ch in word.chars() {
-            match node.children.get(&ch) {
-                Some(next) => node = next,
-                None => return None,
-            }
+            let next = node.children.get(&ch)?;
+            node = next;
         }
         Some(node)
     }

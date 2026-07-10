@@ -581,7 +581,7 @@ Salsa 本身是从 `rustc` 查询系统中提取出来的通用框架，被 `rus
 ---
 
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 编译器架构；2026-06-26 新增 `examples/incremental_practice/` 可运行增量编译实验 [P2 Deep Content Sprint](../../00_meta/02_sources/international_authority_index.md)；2026-07-09 新增 4.6 节 `type_of` / `predicates_of` 查询调用链实践 [P2-Q3 2026]
+> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 编译器架构；2026-06-26 新增 `examples/incremental_practice/` 可运行增量编译实验 [P2 Deep Content Sprint](../../00_meta/02_sources/international_authority_index.md)；2026-07-09 新增 4.6 节 `type_of` / `predicates_of` 查询调用链实践 [P2-Q3 2026]
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.3

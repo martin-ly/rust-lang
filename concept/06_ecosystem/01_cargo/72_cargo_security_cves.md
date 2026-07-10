@@ -97,7 +97,7 @@ crates.io 本身：
 - 禁止上传包含任何符号链接的 crate，因此 CVE-2026-5223 不适用。
 - 其域名与 registry 架构不满足 CVE-2026-5222 的攻击前提，因此不受影响。
 
-> **结论**：只使用 crates.io 的开发者**不会因为这两个 CVE 而暴露**，但升级到 Rust 1.96.1 仍然是推荐做法，以获得最新安全补丁。
+> **结论**：只使用 crates.io 的开发者**不会因为这两个 CVE 而暴露**，但升级到 Rust 1.97.0 仍然是推荐做法，以获得最新安全补丁。
 
 ---
 
@@ -183,10 +183,10 @@ CVE-2026-5223 (Medium)
 ### 2.1 立即升级工具链
 
 ```bash
-# 推荐做法：升级到 Rust 1.96.1 或更高版本
+# 推荐做法：升级到 Rust 1.97.0 或更高版本
 rustup update stable
-rustc --version  # >= 1.96.1
-cargo --version  # >= 1.96.1
+rustc --version  # >= 1.97.0
+cargo --version  # >= 1.97.0
 ```
 
 > 两个 CVE 的受影响版本都是 **Rust 1.96.0 之前的 Cargo**（CVE-2026-5222 具体为 1.68 到 1.96 之间）。升级是最直接、最有效的缓解措施。
@@ -251,7 +251,7 @@ publish = ["my-company-registry"]
 serde = { version = "1.0.215", registry = "crates-io" }
 internal-utils = { version = "0.4", registry = "my-company-registry" }
 
-# 1.96.1 新特性：同一依赖可同时指定 git 与 registry
+# 1.97.0 新特性：同一依赖可同时指定 git 与 registry
 # 本地开发用 git fork，发布时使用 registry 版本
 experimental-feature = { git = "https://git.example.com/fork", registry = "my-company-registry", version = "0.2" }
 ```
@@ -364,7 +364,7 @@ graph TD
 
 ### 10.2 常见错误：在旧版本 Cargo 上仅做服务端限制
 
-> ❌ 错误做法：在私有 registry 服务端拒绝符号链接，但客户端仍使用 Rust < 1.96.1。
+> ❌ 错误做法：在私有 registry 服务端拒绝符号链接，但客户端仍使用 Rust < 1.97.0。
 >
 > ✅ 正确做法：服务端限制 + 客户端升级到 1.97.0+。服务端限制只能防御上传阶段，无法防御已存在的历史恶意 tarball 被旧 Cargo 解压。
 
@@ -451,7 +451,7 @@ Cargo 会**拒绝解压任何包含符号链接的 crate tarball**，无论 tarb
 > - [exercises/ 练习](../exercises) — 动手编程挑战
 > - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md)
 >
-> **建议**: 在一个测试项目中执行 `rustup update stable` 并验证 `cargo --version >= 1.96.1`；使用 `cargo metadata` 检查是否存在非 crates.io registry 来源；尝试 `cargo vendor` 并观察 vendor 目录结构。
+> **建议**: 在一个测试项目中执行 `rustup update stable` 并验证 `cargo --version >= 1.97.0`；使用 `cargo metadata` 检查是否存在非 crates.io registry 来源；尝试 `cargo vendor` 并观察 vendor 目录结构。
 
 ---
 
@@ -472,4 +472,4 @@ Cargo 会**拒绝解压任何包含符号链接的 crate tarball**，无论 tarb
 
 ### 反命题与边界
 
-> **反命题**: “因为 crates.io 用户不受影响，所以整个团队都不需要升级 Rust 1.96.1。” —— 错误。升级仍然能防止未来漏洞、获得新特性，并确保一旦项目引入第三方 registry 时立即具备防护能力。安全实践应把“保持最新稳定版”作为基线。
+> **反命题**: “因为 crates.io 用户不受影响，所以整个团队都不需要升级 Rust 1.97.0。” —— 错误。升级仍然能防止未来漏洞、获得新特性，并确保一旦项目引入第三方 registry 时立即具备防护能力。安全实践应把“保持最新稳定版”作为基线。

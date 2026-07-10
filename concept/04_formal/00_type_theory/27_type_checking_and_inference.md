@@ -307,7 +307,7 @@ if success {
 ---
 
 > **权威来源**: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html) · [Rustc Dev Guide — HIR Type checking](https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html) · [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
-> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 类型检查与推断文档
+> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 类型检查与推断文档
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0

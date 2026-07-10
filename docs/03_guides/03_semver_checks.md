@@ -173,7 +173,7 @@ semver-checks:
 
     - uses: dtolnay/rust-toolchain@stable
       with:
-        toolchain: "1.96.1"
+        toolchain: "1.97.0"
 
     - name: Install cargo-semver-checks
       run: cargo install cargo-semver-checks --locked

@@ -179,7 +179,7 @@ fn main() {
 
 ### 3.4 `const fn` 的限制
 
-在 Rust 1.96.1 中，`const fn` 不能：
+在 Rust 1.97.0 中，`const fn` 不能：
 
 - 分配堆内存（`Box::new`、`Vec::new` 等）
 - 执行 I/O
@@ -412,5 +412,5 @@ D. 返回基本类型如 `i32`
 ---
 
 > **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
-> **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.96.1 Reference 与 TRPL 对齐](https://doc.rust-lang.org/reference/introduction.html)
+> **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.97.0 Reference 与 TRPL 对齐](https://doc.rust-lang.org/reference/introduction.html)
 > **状态**: ✅ 权威来源对齐完成

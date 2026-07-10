@@ -440,7 +440,7 @@ Obligation 是需要被证明的 trait reference，例如 `i32: Clone` 或 `T: D
 ---
 
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
-> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 trait solver 文档；2026-07-09 新增 6.4 节旧/新 solver 可复现对比实验并更新 nightly flag 名称 [P2-Q3 2026]
+> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 trait solver 文档；2026-07-09 新增 6.4 节旧/新 solver 可复现对比实验并更新 nightly flag 名称 [P2-Q3 2026]
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1

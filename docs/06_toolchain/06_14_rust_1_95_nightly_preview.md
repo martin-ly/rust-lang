@@ -412,7 +412,7 @@ cargo build --timings -Zsection-timings
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 > **最新版本**: Rust 1.97.0+ (2026-05-28)
 
-本文档基于 Rust 1.96.1，涵盖 1.93–1.96 关键特性。历史版本请参见：
+本文档基于 Rust 1.97.0，涵盖 1.93–1.96 关键特性。历史版本请参见：
 
 - [Rust 1.96 稳定特性全景](06_19_rust_1_96_features.md)
 - Rust 1.94 完整发布说明（已归档）

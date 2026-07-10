@@ -414,5 +414,5 @@ D. `{:<8}`
 ---
 
 > **权威来源**: [std::fmt](https://doc.rust-lang.org/std/fmt/index.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
-> **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.96.1 std::fmt 与 TRPL 对齐](https://doc.rust-lang.org/std/fmt/index.html)
+> **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.97.0 std::fmt 与 TRPL 对齐](https://doc.rust-lang.org/std/fmt/index.html)
 > **状态**: ✅ 权威来源对齐完成

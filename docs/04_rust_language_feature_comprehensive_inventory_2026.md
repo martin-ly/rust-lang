@@ -166,7 +166,7 @@
 A Δ B = (A \ B) ∪ (B \ A)
 
 A = Rust 生态前沿知识集合
-    = { Rust 1.95.0 stable } ∪ { Rust 1.96 stable (1.96.0 于 2026-05-28 首次发布，当前 patch 1.96.1) } ∪ { 权威国际化来源 }
+    = { Rust 1.95.0 stable } ∪ { Rust 1.96 stable (1.96.0 于 2026-05-28 首次发布，当前 patch 1.97.0) } ∪ { 权威国际化来源 }
 
 B = 本项目现有知识集合
     = { crates/c01-c13 } ∪ { docs/ } ∪ { knowledge/ } ∪ { content/ }
@@ -2615,7 +2615,7 @@ graph TD
 
 *文档版本: v1.0-draft*
 *生成日期: 2026-05-08*
-*对应 Rust 版本: 1.96.1 (stable) / 1.97.0 (beta) / 1.98.0 (nightly)*
+*对应 Rust 版本: 1.97.0 (stable) / 1.97.0 (beta) / 1.98.0 (nightly)*
 *项目 MSRV: 1.97.0+ (Edition 2024)*
 
 ---

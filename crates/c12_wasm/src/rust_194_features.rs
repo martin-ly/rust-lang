@@ -1,4 +1,4 @@
-//! Rust 1.94 引入的WASM 特性（1.96.1+ 稳定可用）
+//! Rust 1.94 引入的WASM 特性（1.97.0+ 稳定可用）
 //! Rust 1.94 WASM features (stable in 1.96+) module
 //! - array_windows - 切片数组窗口迭代器（用于 WASM 数据处理）
 //! - array_windows - array （ WASM data ）

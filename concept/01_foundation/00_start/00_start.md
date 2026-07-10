@@ -56,7 +56,7 @@ irm https://rustup.rs | iex
 验证安装：
 
 ```bash
-rustc --version   # 应输出 1.96.1 或更高
+rustc --version   # 应输出 1.97.0 或更高
 cargo --version
 rustup show
 ```

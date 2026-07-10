@@ -10,7 +10,7 @@
 > **双维定位**: P×App — 将 Cargo 1.96 工具链变更应用于构建、发布与依赖治理
 > **前置概念**: · [Rust vs Go](../../05_comparative/01_systems_languages/02_rust_vs_go.md) [Toolchain](../00_toolchain/01_toolchain.md) · [Public/Private Dependencies](10_public_private_deps.md) · [Cargo Security](72_cargo_security_cves.md) · [Security Practices](../07_security_and_cryptography/19_security_practices.md)
 > **后置概念**: [Rust Version Tracking](../../07_future/00_version_tracking/05_rust_version_tracking.md) · [Rust 1.96 Stabilized](../../07_future/00_version_tracking/rust_1_96_stabilized.md)
-> **版本状态**: 当前稳定 patch 为 **1.96.1**；特性集与 Rust 1.96.0 一致。
+> **版本状态**: 当前稳定 patch 为 **1.97.0**；特性集与 Rust 1.96.0 一致。
 
 ---
 

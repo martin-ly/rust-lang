@@ -240,7 +240,7 @@ Stage 1 是用 stage0（旧 beta）编译当前源码得到的；Stage 2 是用 
 ---
 
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/)
-> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.1 / rustc bootstrap 文档
+> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 / rustc bootstrap 文档
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
