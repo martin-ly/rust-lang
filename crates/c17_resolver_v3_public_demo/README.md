@@ -6,7 +6,7 @@
 
 - Crate A 同时依赖 Crate B 与 Crate C。
 - Crate B 与 Crate C 都依赖 Crate D，但启用不同 feature。
-- 在 B/C 的 `Cargo.toml` 中使用 `public = true` 声明 Crate D 为公共依赖。
+- Crate B/C 的 `Cargo.toml` 中以注释形式保留了 `public = true` 写法：`public` 依赖目前仍是 nightly-only 特性（需 `-Zpublic-dependency`），稳定版 cargo 会忽略并告警；稳定版构建中普通依赖已足以演示 feature unification。
 - Crate A 直接依赖 Crate D 并启用第三个 feature，观察 Cargo 的 feature unification 行为。
 
 ## 目录结构
@@ -15,9 +15,9 @@
 crates/c17_resolver_v3_public_demo/
 ├── Cargo.toml          # Crate A（workspace member）
 ├── src/main.rs
-├── crate-b/Cargo.toml  # Crate B：public = true，启用 crate-d/std
+├── crate-b/Cargo.toml  # Crate B：public = true（nightly-only，稳定版以注释保留），启用 crate-d/std
 ├── crate-b/src/lib.rs
-├── crate-c/Cargo.toml  # Crate C：public = true，启用 crate-d/alloc
+├── crate-c/Cargo.toml  # Crate C：public = true（nightly-only，稳定版以注释保留），启用 crate-d/alloc
 ├── crate-c/src/lib.rs
 ├── crate-d/Cargo.toml  # Crate D：提供 std / alloc / serde 三个 additive feature
 └── crate-d/src/lib.rs

@@ -10,7 +10,10 @@ description = "Crate B: publicly depends on crate-d with the std feature"
 publish = false
 
 [dependencies]
-crate-d = { path = "../crate-d", features = ["std"], public = true }
+# 注意: `public = true` 目前仍是 nightly-only 特性（需 `-Zpublic-dependency`），
+# 稳定版 cargo 会忽略该字段并发出警告，因此这里以注释形式保留演示意图：
+# crate-d = { path = "../crate-d", features = ["std"], public = true }
+crate-d = { path = "../crate-d", features = ["std"] }
 
 [lints.rust]
 missing_docs = "allow"

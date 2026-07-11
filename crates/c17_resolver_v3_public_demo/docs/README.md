@@ -6,7 +6,11 @@
 
 - `crate-d`：底层库，提供 `serde` feature。
 - `crate-b` / `crate-c`：中间库，分别依赖 `crate-d` 并公开/私有使用。
-- 顶层 bin：通过 `public = true` 让 `crate-d` 的 feature 在最终 crate 中可见，同时避免中间 crate 内部 feature 污染。
+- 顶层 bin：直接依赖 `crate-d` 并启用 `serde` feature，观察 feature unification 结果。
+
+> 注：`public = true` 依赖目前为 nightly-only 特性（需 `-Zpublic-dependency`），稳定版 cargo 会忽略并告警，
+> 因此 `crate-b` / `crate-c` 的 `Cargo.toml` 中仅以注释形式保留该写法。nightly 下可取消注释并用
+> `cargo +nightly tree -Zpublic-dependency -e features` 观察公共依赖对 feature unification 的影响。
 
 ## 运行
 

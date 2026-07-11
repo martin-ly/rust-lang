@@ -29,6 +29,7 @@ exclude = [
     "crates/c08_algorithms/fuzz",
     "crates/c13_embedded/real-hardware-demos/embassy-demo",
     "crates/c13_embedded/real-hardware-demos/rtic-demo",
+    "vendor",
 ]
 
 [workspace.package]
@@ -862,3 +863,13 @@ similar_names = "allow"
 
 # 注: core2 补丁已移除
 # multihash 0.19.4+ / libp2p-core 已迁移到 no_std_io2，不再需要 core2 补丁
+
+# ============ [patch.crates-io] ============
+# proc-macro-error2 2.0.1（leptos_macro / reactive_stores_macro 传递依赖）触发
+# future-incompat 警告 E0365：`pub use proc_macro;` 重新导出私有 extern crate，
+# 将在未来 Rust 版本变为硬错误（rust-lang/rust#127909）。
+# 上游（GnomedDev/proc-macro-error-2）自 2024-09 后无修复发布，
+# 因此 vendor 到本地并应用官方建议的一行修复（extern crate 改为 pub extern crate）。
+# 上游发布修复版后应移除此 patch。
+[patch.crates-io]
+proc-macro-error2 = { path = "vendor/proc-macro-error2" }
