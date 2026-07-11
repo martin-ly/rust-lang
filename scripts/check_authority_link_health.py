@@ -15,6 +15,7 @@ import glob
 import json
 import os
 import re
+import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -91,6 +92,22 @@ def _probe(url, method="GET", accept_json=False):
         return None
 
 
+def fallback_probe_curl(url):
+    """当 urllib 因 TLS/EOF/UA 被重置时，使用系统 curl 做一次性 HEAD 复核。"""
+    try:
+        cp = subprocess.run(
+            ["curl", "-sI", "-o", "/dev/null", "-w", "%{http_code}",
+             "--max-time", "20", "-A", UA, url],
+            capture_output=True, text=True, timeout=25, check=False,
+        )
+        code = cp.stdout.strip()
+        if code.isdigit():
+            return int(code)
+    except Exception:
+        pass
+    return None
+
+
 def verify_cratesio(u):
     """crates.io 对非浏览器 UA 常返回 404；通过其 JSON API 校验 crate/分类/首页是否存在。"""
     parsed = urlparse(u)
@@ -128,8 +145,14 @@ def check(u):
     except HTTPError as e:
         return u, e.code, "HTTPError"
     except URLError as e:
+        code = fallback_probe_curl(u)
+        if code is not None:
+            return u, code, None
         return u, None, f"URLError:{getattr(e, 'reason', e)}"
     except Exception as e:
+        code = fallback_probe_curl(u)
+        if code is not None:
+            return u, code, None
         return u, None, f"{type(e).__name__}:{e}"
 
 
