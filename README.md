@@ -86,8 +86,8 @@ python scripts/kb_auditor.py
 # 查看仪表盘
 cat reports/kb_quality_dashboard.md
 
-# 构建概念搜索索引
-python scripts/build_search_index.py
+# 构建概念搜索索引（已退役 2026-07-12，搜索由 mdbook searchindex / tools/kg_rag 提供）
+# python scripts/build_search_index.py
 
 # 编译验证
 cargo build --workspace

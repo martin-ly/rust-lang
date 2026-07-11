@@ -1,50 +1,31 @@
 # 智能文档搜索工具
 
-> **最后更新**: 2026-03-08
+> **状态**: ⚠️ 未实现（placeholder）。本目录仅有本 README，无任何代码。
+> **最后更新**: 2026-07-12
 
 ---
 
-## 简介
+## 说明
 
-本项目提供全文搜索功能，帮助快速定位文档内容。
+本目录曾规划提供独立的全文搜索 CLI（`cargo run -- build-index` / `search`），
+但该实现从未落地，目录中不存在任何 Rust 源码或 `Cargo.toml`。
 
-## 使用方式
+当前项目的搜索能力由以下机制提供：
 
-### 在线搜索
+- **mdbook 内置搜索**：`mdbook build` 自动生成 `book/searchindex.js`，
+  在线文档平台与本地 `mdbook serve` 均可直接使用页面右上角搜索框。
+- **KG 语义检索原型**：[`tools/kg_rag/`](../kg_rag/) 提供基于
+  `concept/00_meta/kg_data_v3.json` 的向量混合检索。
 
-访问在线文档平台使用内置搜索功能：
-https://<username>.github.io/rust-lang/
-
-### 本地搜索
-
-```bash
-# 构建搜索索引
-cd tools/doc_search
-cargo run -- build-index
-
-# 执行搜索
-cargo run -- search "所有权"
-```
-
-## 功能特性
-
-- 🔍 全文搜索所有 Markdown 文档
-- 🎯 智能排序，优先显示相关结果
-- 📱 支持中文和英文搜索
-- ⚡ 快速响应，毫秒级查询
+如未来需要独立搜索 CLI，请在本目录新建 Rust crate 并更新本文件。
 
 ## 相关文档
 
 - [项目 README](../../README.md)
-- [mdBook 使用说明](../../README.md)
+- [KG-RAG 检索原型](../kg_rag/README.md)
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
+**文档版本**: 2.0
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-07-12

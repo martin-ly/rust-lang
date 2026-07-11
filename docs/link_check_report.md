@@ -3,15 +3,15 @@
 ## 统计
 | 类别 | 数量 |
 |:---|:---:|
-| 总链接数 | 45003 |
-| 有效链接 | 14174 |
-| 损坏链接 | 7557 |
-| 外部链接 | 23271 |
-| 仅锚点链接 | 13359 |
+| 总链接数 | 43137 |
+| 有效链接 | 13685 |
+| 损坏链接 | 7048 |
+| 外部链接 | 22403 |
+| 仅锚点链接 | 12410 |
 
 ## 损坏链接清单（按问题类型分组）
 
-### 锚点不存在 (7315个)
+### 锚点不存在 (6803个)
 
 | 源文件 | 链接文本 | 链接路径 | 问题 |
 |:---|:---|:---|:---|
@@ -478,27 +478,6 @@
 | docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md | 7.2 本项目相关报告 {#72-本项目相关报告} | `#72-本项目相关报告-72-本项目相关报告` | 同文件锚点不存在: #72-本项目相关报告-72-本项目相关报告 |
 | docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md | 7.3 已覆盖目标的文档索引 {#73-已覆盖目标的文档索引} | `#73-已覆盖目标的文档索引-73-已覆盖目标的文档索引` | 同文件锚点不存在: #73-已覆盖目标的文档索引-73-已覆盖目标的文档索引 |
 | docs\00_meta\history\00_2026_reorganization.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 1. 所有权：内存管理的根本创新 {#1-所有权内存管理的根本创新} | `#1-所有权内存管理的根本创新-1-所有权内存管理的根本创新` | 同文件锚点不存在: #1-所有权内存管理的根本创新-1-所有权内存管理的根本创新 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 1.1 为什么需要所有权？ {#11-为什么需要所有权} | `#11-为什么需要所有权-11-为什么需要所有权` | 同文件锚点不存在: #11-为什么需要所有权-11-为什么需要所有权 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 1.2 所有权的三条铁律 {#12-所有权的三条铁律} | `#12-所有权的三条铁律-12-所有权的三条铁律` | 同文件锚点不存在: #12-所有权的三条铁律-12-所有权的三条铁律 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 1.3 返回值与所有权转移 {#13-返回值与所有权转移} | `#13-返回值与所有权转移-13-返回值与所有权转移` | 同文件锚点不存在: #13-返回值与所有权转移-13-返回值与所有权转移 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 1.4 引用计数：共享所有权 {#14-引用计数共享所有权} | `#14-引用计数共享所有权-14-引用计数共享所有权` | 同文件锚点不存在: #14-引用计数共享所有权-14-引用计数共享所有权 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 2. 借用：不转移所有权的访问 {#2-借用不转移所有权的访问} | `#2-借用不转移所有权的访问-2-借用不转移所有权的访问` | 同文件锚点不存在: #2-借用不转移所有权的访问-2-借用不转移所有权的访问 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 2.1 不可变借用 {#21-不可变借用} | `#21-不可变借用-21-不可变借用` | 同文件锚点不存在: #21-不可变借用-21-不可变借用 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 2.2 可变借用 {#22-可变借用} | `#22-可变借用-22-可变借用` | 同文件锚点不存在: #22-可变借用-22-可变借用 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 2.3 借用规则：数据竞争的死结 {#23-借用规则数据竞争的死结} | `#23-借用规则数据竞争的死结-23-借用规则数据竞争的死结` | 同文件锚点不存在: #23-借用规则数据竞争的死结-23-借用规则数据竞争的死结 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 2.4 非词法生命周期 (NLL) {#24-非词法生命周期-nll} | `#24-非词法生命周期-nll-24-非词法生命周期-nll` | 同文件锚点不存在: #24-非词法生命周期-nll-24-非词法生命周期-nll |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 3. 生命周期：引用的有效期证明 {#3-生命周期引用的有效期证明} | `#3-生命周期引用的有效期证明-3-生命周期引用的有效期证明` | 同文件锚点不存在: #3-生命周期引用的有效期证明-3-生命周期引用的有效期证明 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 3.1 生命周期省略 {#31-生命周期省略} | `#31-生命周期省略-31-生命周期省略` | 同文件锚点不存在: #31-生命周期省略-31-生命周期省略 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 3.2 显式生命周期标注 {#32-显式生命周期标注} | `#32-显式生命周期标注-32-显式生命周期标注` | 同文件锚点不存在: #32-显式生命周期标注-32-显式生命周期标注 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 3.3 结构体中的生命周期 {#33-结构体中的生命周期} | `#33-结构体中的生命周期-33-结构体中的生命周期` | 同文件锚点不存在: #33-结构体中的生命周期-33-结构体中的生命周期 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 3.4 生命周期子类型 {#34-生命周期子类型} | `#34-生命周期子类型-34-生命周期子类型` | 同文件锚点不存在: #34-生命周期子类型-34-生命周期子类型 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 4. 常见陷阱与解决方案 {#4-常见陷阱与解决方案} | `#4-常见陷阱与解决方案-4-常见陷阱与解决方案` | 同文件锚点不存在: #4-常见陷阱与解决方案-4-常见陷阱与解决方案 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 4.1 自引用结构体 {#41-自引用结构体} | `#41-自引用结构体-41-自引用结构体` | 同文件锚点不存在: #41-自引用结构体-41-自引用结构体 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 4.2  的废弃 {#42-static-mut-的废弃} | `#42-static-mut-的废弃-42-static-mut-的废弃` | 同文件锚点不存在: #42-static-mut-的废弃-42-static-mut-的废弃 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 4.3 生命周期过长 {#43-生命周期过长} | `#43-生命周期过长-43-生命周期过长` | 同文件锚点不存在: #43-生命周期过长-43-生命周期过长 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 5. 思维模型 {#5-思维模型} | `#5-思维模型-5-思维模型` | 同文件锚点不存在: #5-思维模型-5-思维模型 |
-| docs\01_core\01_ownership_borrowing_lifetimes.md | 6. 进阶阅读 {#6-进阶阅读} | `#6-进阶阅读-6-进阶阅读` | 同文件锚点不存在: #6-进阶阅读-6-进阶阅读 |
 | docs\01_core\README.md | Rust 核心概念 (Core Concepts) {#rust-核心概念-core-concepts} | `#rust-核心概念-core-concepts-rust-核心概念-core-concepts` | 同文件锚点不存在: #rust-核心概念-core-concepts-rust-核心概念-core-concepts |
 | docs\01_core\README.md | 1. 所有权 (Ownership) {#1-所有权-ownership} | `#1-所有权-ownership-1-所有权-ownership` | 同文件锚点不存在: #1-所有权-ownership-1-所有权-ownership |
 | docs\01_core\README.md | 移动语义 (Move Semantics) {#移动语义-move-semantics} | `#移动语义-move-semantics-移动语义-move-semantics` | 同文件锚点不存在: #移动语义-move-semantics-移动语义-move-semantics |
@@ -639,207 +618,11 @@
 | docs\01_learning\01_mdbook_quiz_guide.md | 1.95+ 新特性学习要点 {#195-新特性学习要点} | `#195-新特性学习要点-195-新特性学习要点` | 同文件锚点不存在: #195-新特性学习要点-195-新特性学习要点 |
 | docs\01_learning\01_mdbook_quiz_guide.md | Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新} | `#rust-195-持续更新更新-rust-195-持续更新更新` | 同文件锚点不存在: #rust-195-持续更新更新-rust-195-持续更新更新 |
 | docs\01_learning\01_mdbook_quiz_guide.md | 本文档的Rust 1.95+更新要点 {#本文档的rust-195更新要点} | `#本文档的rust-195更新要点-本文档的rust-195更新要点` | 同文件锚点不存在: #本文档的rust-195更新要点-本文档的rust-195更新要点 |
-| docs\02_reference\02_cross_language_comparison.md | Rust 与 C++/Go/Python 跨语言对比 {#rust-与-cgopython-跨语言对比} | `#rust-与-cgopython-跨语言对比-rust-与-cgopython-跨语言对比` | 同文件锚点不存在: #rust-与-cgopython-跨语言对比-rust-与-cgopython-跨语言对比 |
-| docs\02_reference\02_cross_language_comparison.md | 📊 综合对比矩阵 {#综合对比矩阵} | `#-综合对比矩阵-综合对比矩阵` | 同文件锚点不存在: #-综合对比矩阵-综合对比矩阵 |
-| docs\02_reference\02_cross_language_comparison.md | 🔗 形式化文档链接 {#形式化文档链接} | `#-形式化文档链接-形式化文档链接` | 同文件锚点不存在: #-形式化文档链接-形式化文档链接 |
-| docs\02_reference\02_cross_language_comparison.md | Rust 形式化基础 {#rust-形式化基础} | `#rust-形式化基础-rust-形式化基础` | 同文件锚点不存在: #rust-形式化基础-rust-形式化基础 |
-| docs\02_reference\02_cross_language_comparison.md | Haskell（二级来源，Trait / 类型系统对标） {#haskell二级来源trait-类型系统对标} | `#haskell二级来源trait--类型系统对标-haskell二级来源trait-类型系统对标` | 同文件锚点不存在: #haskell二级来源trait--类型系统对标-haskell二级来源trait-类型系统对标 |
-| docs\02_reference\02_cross_language_comparison.md | Rust 1.95+ 更新 {#rust-195-更新} | `#rust-195-更新-rust-195-更新` | 同文件锚点不存在: #rust-195-更新-rust-195-更新 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | Rust 边界条件与特例示例 {#rust-边界条件与特例示例} | `#rust-边界条件与特例示例-rust-边界条件与特例示例` | 同文件锚点不存在: #rust-边界条件与特例示例-rust-边界条件与特例示例 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | 空 Vec 与零长度 {#空-vec-与零长度} | `#空-vec-与零长度-空-vec-与零长度` | 同文件锚点不存在: #空-vec-与零长度-空-vec-与零长度 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | 空 HashMap / BTreeMap {#空-hashmap-btreemap} | `#空-hashmap--btreemap-空-hashmap-btreemap` | 同文件锚点不存在: #空-hashmap--btreemap-空-hashmap-btreemap |
-| docs\02_reference\02_edge_cases_and_special_cases.md | 零个线程 / 空任务列表 {#零个线程-空任务列表} | `#零个线程--空任务列表-零个线程-空任务列表` | 同文件锚点不存在: #零个线程--空任务列表-零个线程-空任务列表 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | Mutex poison {#mutex-poison} | `#mutex-poison-mutex-poison` | 同文件锚点不存在: #mutex-poison-mutex-poison |
-| docs\02_reference\02_edge_cases_and_special_cases.md | 整数溢出（debug 下 panic） {#整数溢出debug-下-panic} | `#整数溢出debug-下-panic-整数溢出debug-下-panic` | 同文件锚点不存在: #整数溢出debug-下-panic-整数溢出debug-下-panic |
-| docs\02_reference\02_edge_cases_and_special_cases.md | unsafe 与 FFI {#unsafe-与-ffi} | `#unsafe-与-ffi-unsafe-与-ffi` | 同文件锚点不存在: #unsafe-与-ffi-unsafe-与-ffi |
-| docs\02_reference\02_edge_cases_and_special_cases.md | FFI 边界：C 传入空指针 {#ffi-边界c-传入空指针} | `#ffi-边界c-传入空指针-ffi-边界c-传入空指针` | 同文件锚点不存在: #ffi-边界c-传入空指针-ffi-边界c-传入空指针 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | WASM 特例 {#wasm-特例} | `#wasm-特例-wasm-特例` | 同文件锚点不存在: #wasm-特例-wasm-特例 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | 无 std 环境 {#无-std-环境} | `#无-std-环境-无-std-环境` | 同文件锚点不存在: #无-std-环境-无-std-环境 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | 阻塞 API 在 WASM {#阻塞-api-在-wasm} | `#阻塞-api-在-wasm-阻塞-api-在-wasm` | 同文件锚点不存在: #阻塞-api-在-wasm-阻塞-api-在-wasm |
-| docs\02_reference\02_edge_cases_and_special_cases.md | panic 边界 {#panic-边界} | `#panic-边界-panic-边界` | 同文件锚点不存在: #panic-边界-panic-边界 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | panic 与 unwrap {#panic-与-unwrap} | `#panic-与-unwrap-panic-与-unwrap` | 同文件锚点不存在: #panic-与-unwrap-panic-与-unwrap |
-| docs\02_reference\02_edge_cases_and_special_cases.md | 空 Future 与异步 {#空-future-与异步} | `#空-future-与异步-空-future-与异步` | 同文件锚点不存在: #空-future-与异步-空-future-与异步 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | 空 select {#空-select} | `#空-select-空-select` | 同文件锚点不存在: #空-select-空-select |
-| docs\02_reference\02_edge_cases_and_special_cases.md | 已完成 Future {#已完成-future} | `#已完成-future-已完成-future` | 同文件锚点不存在: #已完成-future-已完成-future |
-| docs\02_reference\02_edge_cases_and_special_cases.md | Rust 1.93 行为变更特例 {#rust-193-行为变更特例} | `#rust-193-行为变更特例-rust-193-行为变更特例` | 同文件锚点不存在: #rust-193-行为变更特例-rust-193-行为变更特例 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | BTreeMap::append 行为变更 {#btreemapappend-行为变更} | `#btreemapappend-行为变更-btreemapappend-行为变更` | 同文件锚点不存在: #btreemapappend-行为变更-btreemapappend-行为变更 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | Copy specialization 移除 {#copy-specialization-移除} | `#copy-specialization-移除-copy-specialization-移除` | 同文件锚点不存在: #copy-specialization-移除-copy-specialization-移除 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | vec::IntoIter 与 RefUnwindSafe {#vecintoiter-与-refunwindsafe} | `#vecintoiter-与-refunwindsafe-vecintoiter-与-refunwindsafe` | 同文件锚点不存在: #vecintoiter-与-refunwindsafe-vecintoiter-与-refunwindsafe |
-| docs\02_reference\02_edge_cases_and_special_cases.md | Copy 类型的隐式复制 {#copy-类型的隐式复制} | `#copy-类型的隐式复制-copy-类型的隐式复制` | 同文件锚点不存在: #copy-类型的隐式复制-copy-类型的隐式复制 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | NLL (Non-Lexical Lifetimes) 边界 {#nll-non-lexical-lifetimes-边界} | `#nll-non-lexical-lifetimes-边界-nll-non-lexical-lifetimes-边界` | 同文件锚点不存在: #nll-non-lexical-lifetimes-边界-nll-non-lexical-lifetimes-边界 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | 零大小类型 (ZST) {#零大小类型-zst} | `#零大小类型-zst-零大小类型-zst` | 同文件锚点不存在: #零大小类型-zst-零大小类型-zst |
-| docs\02_reference\02_edge_cases_and_special_cases.md | Send/Sync 自动派生边界 {#sendsync-自动派生边界} | `#sendsync-自动派生边界-sendsync-自动派生边界` | 同文件锚点不存在: #sendsync-自动派生边界-sendsync-自动派生边界 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | unsafe 边界 {#unsafe-边界-1} | `#unsafe-边界-unsafe-边界-1` | 同文件锚点不存在: #unsafe-边界-unsafe-边界-1 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | 🔗 形式化边界分析 {#形式化边界分析} | `#-形式化边界分析-形式化边界分析` | 同文件锚点不存在: #-形式化边界分析-形式化边界分析 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | unsafe 边界 {#unsafe-边界-1} | `#unsafe-边界-unsafe-边界-1-1` | 同文件锚点不存在: #unsafe-边界-unsafe-边界-1-1 |
-| docs\02_reference\02_edge_cases_and_special_cases.md | Rust 1.95+ 更新 {#rust-195-更新} | `#rust-195-更新-rust-195-更新` | 同文件锚点不存在: #rust-195-更新-rust-195-更新 |
-| docs\02_reference\02_error_code_mapping.md | Rust 编译器错误码映射文档 {#rust-编译器错误码映射文档} | `#rust-编译器错误码映射文档-rust-编译器错误码映射文档` | 同文件锚点不存在: #rust-编译器错误码映射文档-rust-编译器错误码映射文档 |
-| docs\02_reference\02_error_code_mapping.md | 借用检查错误 (E01xx-E05xx) {#借用检查错误-e01xx-e05xx} | `#借用检查错误-e01xx-e05xx-借用检查错误-e01xx-e05xx` | 同文件锚点不存在: #借用检查错误-e01xx-e05xx-借用检查错误-e01xx-e05xx |
-| docs\02_reference\02_error_code_mapping.md | E0382 - 使用已移动的值 {#e0382---使用已移动的值} | `#e0382---使用已移动的值-e0382---使用已移动的值` | 同文件锚点不存在: #e0382---使用已移动的值-e0382---使用已移动的值 |
-| docs\02_reference\02_error_code_mapping.md | E0383 - 部分移动 {#e0383---部分移动} | `#e0383---部分移动-e0383---部分移动` | 同文件锚点不存在: #e0383---部分移动-e0383---部分移动 |
-| docs\02_reference\02_error_code_mapping.md | E0499 - 重复可变借用 {#e0499---重复可变借用} | `#e0499---重复可变借用-e0499---重复可变借用` | 同文件锚点不存在: #e0499---重复可变借用-e0499---重复可变借用 |
-| docs\02_reference\02_error_code_mapping.md | E0502 - 可变与不可变借用共存 {#e0502---可变与不可变借用共存} | `#e0502---可变与不可变借用共存-e0502---可变与不可变借用共存` | 同文件锚点不存在: #e0502---可变与不可变借用共存-e0502---可变与不可变借用共存 |
-| docs\02_reference\02_error_code_mapping.md | E0503 - 使用已移动的值（在借用后） {#e0503---使用已移动的值在借用后} | `#e0503---使用已移动的值在借用后-e0503---使用已移动的值在借用后` | 同文件锚点不存在: #e0503---使用已移动的值在借用后-e0503---使用已移动的值在借用后 |
-| docs\02_reference\02_error_code_mapping.md | E0505 - 在借用时移动 {#e0505---在借用时移动} | `#e0505---在借用时移动-e0505---在借用时移动` | 同文件锚点不存在: #e0505---在借用时移动-e0505---在借用时移动 |
-| docs\02_reference\02_error_code_mapping.md | E0506 - 在借用时赋值 {#e0506---在借用时赋值} | `#e0506---在借用时赋值-e0506---在借用时赋值` | 同文件锚点不存在: #e0506---在借用时赋值-e0506---在借用时赋值 |
-| docs\02_reference\02_error_code_mapping.md | E0507 - 从借用内容中移出 {#e0507---从借用内容中移出} | `#e0507---从借用内容中移出-e0507---从借用内容中移出` | 同文件锚点不存在: #e0507---从借用内容中移出-e0507---从借用内容中移出 |
-| docs\02_reference\02_error_code_mapping.md | E0508 - 从数组/元组中移出 {#e0508---从数组元组中移出} | `#e0508---从数组元组中移出-e0508---从数组元组中移出` | 同文件锚点不存在: #e0508---从数组元组中移出-e0508---从数组元组中移出 |
-| docs\02_reference\02_error_code_mapping.md | 类型系统错误 (E02xx-E03xx) {#类型系统错误-e02xx-e03xx} | `#类型系统错误-e02xx-e03xx-类型系统错误-e02xx-e03xx` | 同文件锚点不存在: #类型系统错误-e02xx-e03xx-类型系统错误-e02xx-e03xx |
-| docs\02_reference\02_error_code_mapping.md | E0277 - Trait 约束不满足 {#e0277---trait-约束不满足} | `#e0277---trait-约束不满足-e0277---trait-约束不满足` | 同文件锚点不存在: #e0277---trait-约束不满足-e0277---trait-约束不满足 |
-| docs\02_reference\02_error_code_mapping.md | E0282 - 需要类型标注 {#e0282---需要类型标注} | `#e0282---需要类型标注-e0282---需要类型标注` | 同文件锚点不存在: #e0282---需要类型标注-e0282---需要类型标注 |
-| docs\02_reference\02_error_code_mapping.md | E0283 - 类型标注不足 {#e0283---类型标注不足} | `#e0283---类型标注不足-e0283---类型标注不足` | 同文件锚点不存在: #e0283---类型标注不足-e0283---类型标注不足 |
-| docs\02_reference\02_error_code_mapping.md | E0308 - 类型不匹配 {#e0308---类型不匹配} | `#e0308---类型不匹配-e0308---类型不匹配` | 同文件锚点不存在: #e0308---类型不匹配-e0308---类型不匹配 |
-| docs\02_reference\02_error_code_mapping.md | E0308 - 返回值类型不匹配 {#e0308---返回值类型不匹配} | `#e0308---返回值类型不匹配-e0308---返回值类型不匹配` | 同文件锚点不存在: #e0308---返回值类型不匹配-e0308---返回值类型不匹配 |
-| docs\02_reference\02_error_code_mapping.md | 生命周期错误 (E05xx-E06xx) {#生命周期错误-e05xx-e06xx} | `#生命周期错误-e05xx-e06xx-生命周期错误-e05xx-e06xx` | 同文件锚点不存在: #生命周期错误-e05xx-e06xx-生命周期错误-e05xx-e06xx |
-| docs\02_reference\02_error_code_mapping.md | E0106 - 需要生命周期标注 {#e0106---需要生命周期标注} | `#e0106---需要生命周期标注-e0106---需要生命周期标注` | 同文件锚点不存在: #e0106---需要生命周期标注-e0106---需要生命周期标注 |
-| docs\02_reference\02_error_code_mapping.md | E0107 - 生命周期参数数量不匹配 {#e0107---生命周期参数数量不匹配} | `#e0107---生命周期参数数量不匹配-e0107---生命周期参数数量不匹配` | 同文件锚点不存在: #e0107---生命周期参数数量不匹配-e0107---生命周期参数数量不匹配 |
-| docs\02_reference\02_error_code_mapping.md | E0597 - 生命周期不足 {#e0597---生命周期不足} | `#e0597---生命周期不足-e0597---生命周期不足` | 同文件锚点不存在: #e0597---生命周期不足-e0597---生命周期不足 |
-| docs\02_reference\02_error_code_mapping.md | E0310 - 参数生命周期不足 {#e0310---参数生命周期不足} | `#e0310---参数生命周期不足-e0310---参数生命周期不足` | 同文件锚点不存在: #e0310---参数生命周期不足-e0310---参数生命周期不足 |
-| docs\02_reference\02_error_code_mapping.md | E0495 - 生命周期不匹配 {#e0495---生命周期不匹配} | `#e0495---生命周期不匹配-e0495---生命周期不匹配` | 同文件锚点不存在: #e0495---生命周期不匹配-e0495---生命周期不匹配 |
-| docs\02_reference\02_error_code_mapping.md | E0381 - 使用未初始化变量 {#e0381---使用未初始化变量} | `#e0381---使用未初始化变量-e0381---使用未初始化变量` | 同文件锚点不存在: #e0381---使用未初始化变量-e0381---使用未初始化变量 |
-| docs\02_reference\02_error_code_mapping.md | E0384 - 对不可变变量赋值 {#e0384---对不可变变量赋值} | `#e0384---对不可变变量赋值-e0384---对不可变变量赋值` | 同文件锚点不存在: #e0384---对不可变变量赋值-e0384---对不可变变量赋值 |
-| docs\02_reference\02_error_code_mapping.md | E0004 - 非穷尽模式匹配 {#e0004---非穷尽模式匹配} | `#e0004---非穷尽模式匹配-e0004---非穷尽模式匹配` | 同文件锚点不存在: #e0004---非穷尽模式匹配-e0004---非穷尽模式匹配 |
-| docs\02_reference\02_error_code_mapping.md | E0005 - 不可反驳模式 {#e0005---不可反驳模式} | `#e0005---不可反驳模式-e0005---不可反驳模式` | 同文件锚点不存在: #e0005---不可反驳模式-e0005---不可反驳模式 |
-| docs\02_reference\02_error_code_mapping.md | E0297 - 模式绑定不匹配 {#e0297---模式绑定不匹配} | `#e0297---模式绑定不匹配-e0297---模式绑定不匹配` | 同文件锚点不存在: #e0297---模式绑定不匹配-e0297---模式绑定不匹配 |
-| docs\02_reference\02_error_code_mapping.md | E0424 - self 使用错误 {#e0424---self-使用错误} | `#e0424---self-使用错误-e0424---self-使用错误` | 同文件锚点不存在: #e0424---self-使用错误-e0424---self-使用错误 |
-| docs\02_reference\02_error_code_mapping.md | E0425 - 未找到函数/变量 {#e0425---未找到函数变量} | `#e0425---未找到函数变量-e0425---未找到函数变量` | 同文件锚点不存在: #e0425---未找到函数变量-e0425---未找到函数变量 |
-| docs\02_reference\02_error_code_mapping.md | E0554 - 未知特性 {#e0554---未知特性} | `#e0554---未知特性-e0554---未知特性` | 同文件锚点不存在: #e0554---未知特性-e0554---未知特性 |
-| docs\02_reference\02_error_code_mapping.md | E0432 - 未解析的导入 {#e0432---未解析的导入} | `#e0432---未解析的导入-e0432---未解析的导入` | 同文件锚点不存在: #e0432---未解析的导入-e0432---未解析的导入 |
-| docs\02_reference\02_error_code_mapping.md | E0433 - 未找到 crate {#e0433---未找到-crate} | `#e0433---未找到-crate-e0433---未找到-crate` | 同文件锚点不存在: #e0433---未找到-crate-e0433---未找到-crate |
-| docs\02_reference\02_error_code_mapping.md | E0463 - 找不到 crate {#e0463---找不到-crate} | `#e0463---找不到-crate-e0463---找不到-crate` | 同文件锚点不存在: #e0463---找不到-crate-e0463---找不到-crate |
-| docs\02_reference\02_error_code_mapping.md | E0603 - 私有模块 {#e0603---私有模块} | `#e0603---私有模块-e0603---私有模块` | 同文件锚点不存在: #e0603---私有模块-e0603---私有模块 |
-| docs\02_reference\02_error_code_mapping.md | E0596 - 无法借用不可变变量为可变 {#e0596---无法借用不可变变量为可变} | `#e0596---无法借用不可变变量为可变-e0596---无法借用不可变变量为可变` | 同文件锚点不存在: #e0596---无法借用不可变变量为可变-e0596---无法借用不可变变量为可变 |
-| docs\02_reference\02_error_code_mapping.md | E0599 - 未找到方法 {#e0599---未找到方法} | `#e0599---未找到方法-e0599---未找到方法` | 同文件锚点不存在: #e0599---未找到方法-e0599---未找到方法 |
-| docs\02_reference\02_error_code_mapping.md | E0609 - 未找到字段 {#e0609---未找到字段} | `#e0609---未找到字段-e0609---未找到字段` | 同文件锚点不存在: #e0609---未找到字段-e0609---未找到字段 |
-| docs\02_reference\02_error_code_mapping.md | E0614 - 类型不能进行此操作 {#e0614---类型不能进行此操作} | `#e0614---类型不能进行此操作-e0614---类型不能进行此操作` | 同文件锚点不存在: #e0614---类型不能进行此操作-e0614---类型不能进行此操作 |
-| docs\02_reference\02_error_code_mapping.md | E0616 - 私有字段 {#e0616---私有字段} | `#e0616---私有字段-e0616---私有字段` | 同文件锚点不存在: #e0616---私有字段-e0616---私有字段 |
-| docs\02_reference\02_error_code_mapping.md | Trait 与泛型错误 {#trait-与泛型错误} | `#trait-与泛型错误-trait-与泛型错误` | 同文件锚点不存在: #trait-与泛型错误-trait-与泛型错误 |
-| docs\02_reference\02_error_code_mapping.md | E0201 - 重复的 Trait 实现 {#e0201---重复的-trait-实现} | `#e0201---重复的-trait-实现-e0201---重复的-trait-实现` | 同文件锚点不存在: #e0201---重复的-trait-实现-e0201---重复的-trait-实现 |
-| docs\02_reference\02_error_code_mapping.md | E0323 - 错误的方法签名 {#e0323---错误的方法签名} | `#e0323---错误的方法签名-e0323---错误的方法签名` | 同文件锚点不存在: #e0323---错误的方法签名-e0323---错误的方法签名 |
-| docs\02_reference\02_error_code_mapping.md | E0392 - 参数未使用 {#e0392---参数未使用} | `#e0392---参数未使用-e0392---参数未使用` | 同文件锚点不存在: #e0392---参数未使用-e0392---参数未使用 |
-| docs\02_reference\02_error_code_mapping.md | E0275 - Trait 解析无限递归 {#e0275---trait-解析无限递归} | `#e0275---trait-解析无限递归-e0275---trait-解析无限递归` | 同文件锚点不存在: #e0275---trait-解析无限递归-e0275---trait-解析无限递归 |
-| docs\02_reference\02_error_code_mapping.md | E0373 - 闭包生命周期问题 {#e0373---闭包生命周期问题} | `#e0373---闭包生命周期问题-e0373---闭包生命周期问题` | 同文件锚点不存在: #e0373---闭包生命周期问题-e0373---闭包生命周期问题 |
-| docs\02_reference\02_error_code_mapping.md | E0378 - Send/Sync 约束不满足 {#e0378---sendsync-约束不满足} | `#e0378---sendsync-约束不满足-e0378---sendsync-约束不满足` | 同文件锚点不存在: #e0378---sendsync-约束不满足-e0378---sendsync-约束不满足 |
-| docs\02_reference\02_error_code_mapping.md | E0700 - 异步块中借用 {#e0700---异步块中借用} | `#e0700---异步块中借用-e0700---异步块中借用` | 同文件锚点不存在: #e0700---异步块中借用-e0700---异步块中借用 |
-| docs\02_reference\02_error_code_mapping.md | E0733 - 递归异步函数 {#e0733---递归异步函数} | `#e0733---递归异步函数-e0733---递归异步函数` | 同文件锚点不存在: #e0733---递归异步函数-e0733---递归异步函数 |
-| docs\02_reference\02_error_code_mapping.md | E0252 - 名称冲突 {#e0252---名称冲突} | `#e0252---名称冲突-e0252---名称冲突` | 同文件锚点不存在: #e0252---名称冲突-e0252---名称冲突 |
-| docs\02_reference\02_error_code_mapping.md | E0301 - 可变与不可变模式 {#e0301---可变与不可变模式} | `#e0301---可变与不可变模式-e0301---可变与不可变模式` | 同文件锚点不存在: #e0301---可变与不可变模式-e0301---可变与不可变模式 |
-| docs\02_reference\02_error_code_mapping.md | E0446 - 私有类型在公共接口 {#e0446---私有类型在公共接口} | `#e0446---私有类型在公共接口-e0446---私有类型在公共接口` | 同文件锚点不存在: #e0446---私有类型在公共接口-e0446---私有类型在公共接口 |
-| docs\02_reference\02_error_code_mapping.md | E0515 - 返回局部变量的引用 {#e0515---返回局部变量的引用} | `#e0515---返回局部变量的引用-e0515---返回局部变量的引用` | 同文件锚点不存在: #e0515---返回局部变量的引用-e0515---返回局部变量的引用 |
-| docs\02_reference\02_error_code_mapping.md | E0521 - 借用数据逃逸 {#e0521---借用数据逃逸} | `#e0521---借用数据逃逸-e0521---借用数据逃逸` | 同文件锚点不存在: #e0521---借用数据逃逸-e0521---借用数据逃逸 |
-| docs\02_reference\02_error_code_mapping.md | E0658 - 不稳定特性 {#e0658---不稳定特性} | `#e0658---不稳定特性-e0658---不稳定特性` | 同文件锚点不存在: #e0658---不稳定特性-e0658---不稳定特性 |
-| docs\02_reference\02_error_code_mapping.md | E0689 - 整数类型后缀 {#e0689---整数类型后缀} | `#e0689---整数类型后缀-e0689---整数类型后缀` | 同文件锚点不存在: #e0689---整数类型后缀-e0689---整数类型后缀 |
-| docs\02_reference\02_error_code_mapping.md | 警告 (W开头) {#警告-w开头} | `#警告-w开头-警告-w开头` | 同文件锚点不存在: #警告-w开头-警告-w开头 |
-| docs\02_reference\02_error_code_mapping.md | W0001 - 未使用的变量 {#w0001---未使用的变量} | `#w0001---未使用的变量-w0001---未使用的变量` | 同文件锚点不存在: #w0001---未使用的变量-w0001---未使用的变量 |
-| docs\02_reference\02_error_code_mapping.md | W0002 - 未使用的导入 {#w0002---未使用的导入} | `#w0002---未使用的导入-w0002---未使用的导入` | 同文件锚点不存在: #w0002---未使用的导入-w0002---未使用的导入 |
-| docs\02_reference\02_error_code_mapping.md | W0003 - 不可达代码 {#w0003---不可达代码} | `#w0003---不可达代码-w0003---不可达代码` | 同文件锚点不存在: #w0003---不可达代码-w0003---不可达代码 |
-| docs\02_reference\02_error_code_mapping.md | W0004 - 未使用的 mut {#w0004---未使用的-mut} | `#w0004---未使用的-mut-w0004---未使用的-mut` | 同文件锚点不存在: #w0004---未使用的-mut-w0004---未使用的-mut |
-| docs\02_reference\02_error_code_mapping.md | W0005 - 死代码 {#w0005---死代码} | `#w0005---死代码-w0005---死代码` | 同文件锚点不存在: #w0005---死代码-w0005---死代码 |
-| docs\02_reference\02_error_code_mapping.md | W0006 - 未处理的 Result {#w0006---未处理的-result} | `#w0006---未处理的-result-w0006---未处理的-result` | 同文件锚点不存在: #w0006---未处理的-result-w0006---未处理的-result |
-| docs\02_reference\02_error_code_mapping.md | Rust 1.95+ 更新说明 {#rust-195-更新说明} | `#rust-195-更新说明-rust-195-更新说明` | 同文件锚点不存在: #rust-195-更新说明-rust-195-更新说明 |
-| docs\02_reference\02_error_code_mapping.md | 思维导图：Rust 错误码体系 {#思维导图rust-错误码体系} | `#思维导图rust-错误码体系-思维导图rust-错误码体系` | 同文件锚点不存在: #思维导图rust-错误码体系-思维导图rust-错误码体系 |
 | docs\02_reference\02_rustnomicon_alignment.md | The Rustonomicon 内容对齐 {#the-rustonomicon-内容对齐} | `#the-rustonomicon-内容对齐-the-rustonomicon-内容对齐` | 同文件锚点不存在: #the-rustonomicon-内容对齐-the-rustonomicon-内容对齐 |
 | docs\02_reference\02_rustnomicon_alignment.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\02_reference\02_rustnomicon_alignment.md | c01: 布局保证 (align, size) {#c01-布局保证-align-size} | `#c01-布局保证-align-size-c01-布局保证-align-size` | 同文件锚点不存在: #c01-布局保证-align-size-c01-布局保证-align-size |
 | docs\02_reference\02_rustnomicon_alignment.md | c12: FFI 高级用法 {#c12-ffi-高级用法} | `#c12-ffi-高级用法-c12-ffi-高级用法` | 同文件锚点不存在: #c12-ffi-高级用法-c12-ffi-高级用法 |
 | docs\02_reference\02_rustnomicon_alignment.md | c13: 裸指针、volatile、内联汇编 {#c13-裸指针volatile内联汇编} | `#c13-裸指针volatile内联汇编-c13-裸指针volatile内联汇编` | 同文件锚点不存在: #c13-裸指针volatile内联汇编-c13-裸指针volatile内联汇编 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | Rust 标准库全面分析与论证文档 {#rust-标准库全面分析与论证文档} | `#rust-标准库全面分析与论证文档-rust-标准库全面分析与论证文档` | 同文件锚点不存在: #rust-标准库全面分析与论证文档-rust-标准库全面分析与论证文档 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 🎯 文档目标 {#文档目标} | `#-文档目标-文档目标` | 同文件锚点不存在: #-文档目标-文档目标 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 📚 1. 标准库概述 {#1-标准库概述} | `#-1-标准库概述-1-标准库概述` | 同文件锚点不存在: #-1-标准库概述-1-标准库概述 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.1 标准库的定义和定位 {#11-标准库的定义和定位} | `#11-标准库的定义和定位-11-标准库的定义和定位` | 同文件锚点不存在: #11-标准库的定义和定位-11-标准库的定义和定位 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.2 标准库的设计哲学 {#12-标准库的设计哲学} | `#12-标准库的设计哲学-12-标准库的设计哲学` | 同文件锚点不存在: #12-标准库的设计哲学-12-标准库的设计哲学 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.2.1 零成本抽象 (Zero-Cost Abstractions) {#121-零成本抽象-zero-cost-abstractions} | `#121-零成本抽象-zero-cost-abstractions-121-零成本抽象-zero-cost-abstractions` | 同文件锚点不存在: #121-零成本抽象-zero-cost-abstractions-121-零成本抽象-zero-cost-abstractions |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.2.2 内存安全 (Memory Safety) {#122-内存安全-memory-safety} | `#122-内存安全-memory-safety-122-内存安全-memory-safety` | 同文件锚点不存在: #122-内存安全-memory-safety-122-内存安全-memory-safety |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.2.3 显式错误处理 (Explicit Error Handling) {#123-显式错误处理-explicit-error-handling} | `#123-显式错误处理-explicit-error-handling-123-显式错误处理-explicit-error-handling` | 同文件锚点不存在: #123-显式错误处理-explicit-error-handling-123-显式错误处理-explicit-error-handling |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.3 Rust 1.92.0 标准库新特性 {#13-rust-1920-标准库新特性} | `#13-rust-1920-标准库新特性-13-rust-1920-标准库新特性` | 同文件锚点不存在: #13-rust-1920-标准库新特性-13-rust-1920-标准库新特性 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.3.1 Box::new\_zeroed 和 Box::new\_zeroed\_slice {#131-boxnew\_zeroed-和-boxnew\_zeroed\_slice} | `#131-boxnew_zeroed-和-boxnew_zeroed_slice-131-boxnew_zeroed-和-boxnew_zeroed_slice` | 同文件锚点不存在: #131-boxnew_zeroed-和-boxnew_zeroed_slice-131-boxnew_zeroed-和-boxnew_zeroed_slice |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.3.2 Rc::new\_zeroed 和 Arc::new\_zeroed {#132-rcnew\_zeroed-和-arcnew\_zeroed} | `#132-rcnew_zeroed-和-arcnew_zeroed-132-rcnew_zeroed-和-arcnew_zeroed` | 同文件锚点不存在: #132-rcnew_zeroed-和-arcnew_zeroed-132-rcnew_zeroed-和-arcnew_zeroed |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.3.3 迭代器方法特化 {#133-迭代器方法特化} | `#133-迭代器方法特化-133-迭代器方法特化` | 同文件锚点不存在: #133-迭代器方法特化-133-迭代器方法特化 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.4.1 MaybeUninit API 增强 {#141-maybeuninit-api-增强} | `#141-maybeuninit-api-增强-141-maybeuninit-api-增强` | 同文件锚点不存在: #141-maybeuninit-api-增强-141-maybeuninit-api-增强 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.4.2 String 和 Vec 原始部分访问 {#142-string-和-vec-原始部分访问} | `#142-string-和-vec-原始部分访问-142-string-和-vec-原始部分访问` | 同文件锚点不存在: #142-string-和-vec-原始部分访问-142-string-和-vec-原始部分访问 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.4.3 VecDeque 条件弹出 {#143-vecdeque-条件弹出} | `#143-vecdeque-条件弹出-143-vecdeque-条件弹出` | 同文件锚点不存在: #143-vecdeque-条件弹出-143-vecdeque-条件弹出 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.4.4 整数操作增强 {#144-整数操作增强} | `#144-整数操作增强-144-整数操作增强` | 同文件锚点不存在: #144-整数操作增强-144-整数操作增强 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.4.5 切片到数组转换 {#145-切片到数组转换} | `#145-切片到数组转换-145-切片到数组转换` | 同文件锚点不存在: #145-切片到数组转换-145-切片到数组转换 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.4.6 Duration 扩展 {#146-duration-扩展} | `#146-duration-扩展-146-duration-扩展` | 同文件锚点不存在: #146-duration-扩展-146-duration-扩展 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.4.7 char 常量 {#147-char-常量} | `#147-char-常量-147-char-常量` | 同文件锚点不存在: #147-char-常量-147-char-常量 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.4.8 fmt::from\_fn {#148-fmtfrom\_fn} | `#148-fmtfrom_fn-148-fmtfrom_fn` | 同文件锚点不存在: #148-fmtfrom_fn-148-fmtfrom_fn |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.5 Rust 1.93.0 标准库行为变更 ⚠️ {#15-rust-1930-标准库行为变更} | `#15-rust-1930-标准库行为变更-️-15-rust-1930-标准库行为变更` | 同文件锚点不存在: #15-rust-1930-标准库行为变更-️-15-rust-1930-标准库行为变更 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.5.1 Copy 特化移除 {#151-copy-特化移除} | `#151-copy-特化移除-151-copy-特化移除` | 同文件锚点不存在: #151-copy-特化移除-151-copy-特化移除 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.5.2 BTree::append 行为变更 {#152-btreeappend-行为变更} | `#152-btreeappend-行为变更-152-btreeappend-行为变更` | 同文件锚点不存在: #152-btreeappend-行为变更-152-btreeappend-行为变更 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 1.5.3 vec::IntoIter RefUnwindSafe 放宽 {#153-vecintoiter-refunwindsafe-放宽} | `#153-vecintoiter-refunwindsafe-放宽-153-vecintoiter-refunwindsafe-放宽` | 同文件锚点不存在: #153-vecintoiter-refunwindsafe-放宽-153-vecintoiter-refunwindsafe-放宽 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 📊 2. 核心标准库模块分析 {#2-核心标准库模块分析} | `#-2-核心标准库模块分析-2-核心标准库模块分析` | 同文件锚点不存在: #-2-核心标准库模块分析-2-核心标准库模块分析 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.1 集合类型 (std::collections) {#21-集合类型-stdcollections} | `#21-集合类型-stdcollections-21-集合类型-stdcollections` | 同文件锚点不存在: #21-集合类型-stdcollections-21-集合类型-stdcollections |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.1.1 HashMap\<K, V\> {#211-hashmapk-v} | `#211-hashmapk-v-211-hashmapk-v` | 同文件锚点不存在: #211-hashmapk-v-211-hashmapk-v |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.1.2  {#212-vect} | `#212-vect-212-vect` | 同文件锚点不存在: #212-vect-212-vect |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.1.3  {#213-vecdequet} | `#213-vecdequet-213-vecdequet` | 同文件锚点不存在: #213-vecdequet-213-vecdequet |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.2 并发类型 (std::sync) {#22-并发类型-stdsync} | `#22-并发类型-stdsync-22-并发类型-stdsync` | 同文件锚点不存在: #22-并发类型-stdsync-22-并发类型-stdsync |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.2.1  {#221-arct} | `#221-arct-221-arct` | 同文件锚点不存在: #221-arct-221-arct |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.2.2  {#222-mutext} | `#222-mutext-222-mutext` | 同文件锚点不存在: #222-mutext-222-mutext |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.2.3  {#223-rwlockt} | `#223-rwlockt-223-rwlockt` | 同文件锚点不存在: #223-rwlockt-223-rwlockt |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.3 I/O 类型 (std::io) {#23-io-类型-stdio} | `#23-io-类型-stdio-23-io-类型-stdio` | 同文件锚点不存在: #23-io-类型-stdio-23-io-类型-stdio |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.3.1 Read 和 Write Traits {#231-read-和-write-traits} | `#231-read-和-write-traits-231-read-和-write-traits` | 同文件锚点不存在: #231-read-和-write-traits-231-read-和-write-traits |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.3.2 BufRead Trait {#232-bufread-trait} | `#232-bufread-trait-232-bufread-trait` | 同文件锚点不存在: #232-bufread-trait-232-bufread-trait |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.4 线程类型 (std::thread) {#24-线程类型-stdthread} | `#24-线程类型-stdthread-24-线程类型-stdthread` | 同文件锚点不存在: #24-线程类型-stdthread-24-线程类型-stdthread |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.4.1 Thread {#241-thread} | `#241-thread-241-thread` | 同文件锚点不存在: #241-thread-241-thread |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.4.2  {#242-joinhandlet} | `#242-joinhandlet-242-joinhandlet` | 同文件锚点不存在: #242-joinhandlet-242-joinhandlet |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.5 进程类型 (std::process) {#25-进程类型-stdprocess} | `#25-进程类型-stdprocess-25-进程类型-stdprocess` | 同文件锚点不存在: #25-进程类型-stdprocess-25-进程类型-stdprocess |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.5.1 Command {#251-command} | `#251-command-251-command` | 同文件锚点不存在: #251-command-251-command |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.6 时间类型 (std::time) {#26-时间类型-stdtime} | `#26-时间类型-stdtime-26-时间类型-stdtime` | 同文件锚点不存在: #26-时间类型-stdtime-26-时间类型-stdtime |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.6.1 Instant {#261-instant} | `#261-instant-261-instant` | 同文件锚点不存在: #261-instant-261-instant |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.6.2 Duration {#262-duration} | `#262-duration-262-duration` | 同文件锚点不存在: #262-duration-262-duration |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.7 错误处理 (std::error, std::result) {#27-错误处理-stderror-stdresult} | `#27-错误处理-stderror-stdresult-27-错误处理-stderror-stdresult` | 同文件锚点不存在: #27-错误处理-stderror-stdresult-27-错误处理-stderror-stdresult |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.7.1 Result\<T, E\> {#271-resultt-e} | `#271-resultt-e-271-resultt-e` | 同文件锚点不存在: #271-resultt-e-271-resultt-e |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 2.7.2  {#272-optiont} | `#272-optiont-272-optiont` | 同文件锚点不存在: #272-optiont-272-optiont |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 🔍 3. 标准库设计论证 {#3-标准库设计论证} | `#-3-标准库设计论证-3-标准库设计论证` | 同文件锚点不存在: #-3-标准库设计论证-3-标准库设计论证 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 3.1 零成本抽象 {#31-零成本抽象} | `#31-零成本抽象-31-零成本抽象` | 同文件锚点不存在: #31-零成本抽象-31-零成本抽象 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 3.2 所有权系统 {#32-所有权系统} | `#32-所有权系统-32-所有权系统` | 同文件锚点不存在: #32-所有权系统-32-所有权系统 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 3.3 内存安全 {#33-内存安全} | `#33-内存安全-33-内存安全` | 同文件锚点不存在: #33-内存安全-33-内存安全 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 3.4 性能优化 {#34-性能优化} | `#34-性能优化-34-性能优化` | 同文件锚点不存在: #34-性能优化-34-性能优化 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 📝 4. 标准库使用最佳实践 {#4-标准库使用最佳实践} | `#-4-标准库使用最佳实践-4-标准库使用最佳实践` | 同文件锚点不存在: #-4-标准库使用最佳实践-4-标准库使用最佳实践 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 4.1 何时使用标准库 {#41-何时使用标准库} | `#41-何时使用标准库-41-何时使用标准库` | 同文件锚点不存在: #41-何时使用标准库-41-何时使用标准库 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 4.2 何时使用第三方库 {#42-何时使用第三方库} | `#42-何时使用第三方库-42-何时使用第三方库` | 同文件锚点不存在: #42-何时使用第三方库-42-何时使用第三方库 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 4.3 标准库与第三方库的权衡 {#43-标准库与第三方库的权衡} | `#43-标准库与第三方库的权衡-43-标准库与第三方库的权衡` | 同文件锚点不存在: #43-标准库与第三方库的权衡-43-标准库与第三方库的权衡 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 🎓 5. 项目中的标准库使用 {#5-项目中的标准库使用} | `#-5-项目中的标准库使用-5-项目中的标准库使用` | 同文件锚点不存在: #-5-项目中的标准库使用-5-项目中的标准库使用 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 5.1 各模块的标准库使用情况 {#51-各模块的标准库使用情况} | `#51-各模块的标准库使用情况-51-各模块的标准库使用情况` | 同文件锚点不存在: #51-各模块的标准库使用情况-51-各模块的标准库使用情况 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | C01 所有权与借用 {#c01-所有权与借用} | `#c01-所有权与借用-c01-所有权与借用` | 同文件锚点不存在: #c01-所有权与借用-c01-所有权与借用 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | C04 泛型编程 {#c04-泛型编程} | `#c04-泛型编程-c04-泛型编程` | 同文件锚点不存在: #c04-泛型编程-c04-泛型编程 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | C05 线程与并发 {#c05-线程与并发} | `#c05-线程与并发-c05-线程与并发` | 同文件锚点不存在: #c05-线程与并发-c05-线程与并发 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | C07 进程管理 {#c07-进程管理} | `#c07-进程管理-c07-进程管理` | 同文件锚点不存在: #c07-进程管理-c07-进程管理 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | C08 算法 {#c08-算法} | `#c08-算法-c08-算法` | 同文件锚点不存在: #c08-算法-c08-算法 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 5.2 标准库使用示例 {#52-标准库使用示例} | `#52-标准库使用示例-52-标准库使用示例` | 同文件锚点不存在: #52-标准库使用示例-52-标准库使用示例 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 示例 1: 使用 HashMap {#示例-1-使用-hashmap} | `#示例-1-使用-hashmap-示例-1-使用-hashmap` | 同文件锚点不存在: #示例-1-使用-hashmap-示例-1-使用-hashmap |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 示例 2: 使用 Arc 和 Mutex {#示例-2-使用-arc-和-mutex} | `#示例-2-使用-arc-和-mutex-示例-2-使用-arc-和-mutex` | 同文件锚点不存在: #示例-2-使用-arc-和-mutex-示例-2-使用-arc-和-mutex |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 示例 3: 使用 Command {#示例-3-使用-command} | `#示例-3-使用-command-示例-3-使用-command` | 同文件锚点不存在: #示例-3-使用-command-示例-3-使用-command |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 5.3 标准库使用最佳实践 {#53-标准库使用最佳实践} | `#53-标准库使用最佳实践-53-标准库使用最佳实践` | 同文件锚点不存在: #53-标准库使用最佳实践-53-标准库使用最佳实践 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 实践 1: 优先使用标准库 {#实践-1-优先使用标准库} | `#实践-1-优先使用标准库-实践-1-优先使用标准库` | 同文件锚点不存在: #实践-1-优先使用标准库-实践-1-优先使用标准库 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 实践 2: 充分利用标准库特性 {#实践-2-充分利用标准库特性} | `#实践-2-充分利用标准库特性-实践-2-充分利用标准库特性` | 同文件锚点不存在: #实践-2-充分利用标准库特性-实践-2-充分利用标准库特性 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 实践 3: 理解标准库的实现 {#实践-3-理解标准库的实现} | `#实践-3-理解标准库的实现-实践-3-理解标准库的实现` | 同文件锚点不存在: #实践-3-理解标准库的实现-实践-3-理解标准库的实现 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 💻 代码示例 {#代码示例} | `#-代码示例-代码示例` | 同文件锚点不存在: #-代码示例-代码示例 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 示例: 标准库类型安全验证 {#示例-标准库类型安全验证} | `#示例-标准库类型安全验证-示例-标准库类型安全验证` | 同文件锚点不存在: #示例-标准库类型安全验证-示例-标准库类型安全验证 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 示例: 标准库内存安全验证 {#示例-标准库内存安全验证} | `#示例-标准库内存安全验证-示例-标准库内存安全验证` | 同文件锚点不存在: #示例-标准库内存安全验证-示例-标准库内存安全验证 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 🔗 形式化链接 {#形式化链接} | `#-形式化链接-形式化链接` | 同文件锚点不存在: #-形式化链接-形式化链接 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 📚 相关文档 {#相关文档} | `#-相关文档-相关文档` | 同文件锚点不存在: #-相关文档-相关文档 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | Rust 1.95+ 更新 {#rust-195-更新} | `#rust-195-更新-rust-195-更新` | 同文件锚点不存在: #rust-195-更新-rust-195-更新 |
-| docs\02_reference\alignment_guide.md | Rust 对齐知识综合指南 {#rust-对齐知识综合指南} | `#rust-对齐知识综合指南-rust-对齐知识综合指南` | 同文件锚点不存在: #rust-对齐知识综合指南-rust-对齐知识综合指南 |
-| docs\02_reference\alignment_guide.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\02_reference\alignment_guide.md | 2.0 为何要对齐（Why Alignment Matters） {#20-为何要对齐why-alignment-matters} | `#20-为何要对齐why-alignment-matters-20-为何要对齐why-alignment-matters` | 同文件锚点不存在: #20-为何要对齐why-alignment-matters-20-为何要对齐why-alignment-matters |
-| docs\02_reference\alignment_guide.md | 2.1 基本概念 {#21-基本概念} | `#21-基本概念-21-基本概念` | 同文件锚点不存在: #21-基本概念-21-基本概念 |
-| docs\02_reference\alignment_guide.md | 2.2 常用 API {#22-常用-api} | `#22-常用-api-22-常用-api` | 同文件锚点不存在: #22-常用-api-22-常用-api |
-| docs\02_reference\alignment_guide.md | 2.3 repr 与对齐（完整谱系） {#23-repr-与对齐完整谱系} | `#23-repr-与对齐完整谱系-23-repr-与对齐完整谱系` | 同文件锚点不存在: #23-repr-与对齐完整谱系-23-repr-与对齐完整谱系 |
-| docs\02_reference\alignment_guide.md | 2.4 字段重排序优化 {#24-字段重排序优化} | `#24-字段重排序优化-24-字段重排序优化` | 同文件锚点不存在: #24-字段重排序优化-24-字段重排序优化 |
-| docs\02_reference\alignment_guide.md | 2.5 对齐计算（Rust 1.92+） {#25-对齐计算rust-192} | `#25-对齐计算rust-192-25-对齐计算rust-192` | 同文件锚点不存在: #25-对齐计算rust-192-25-对齐计算rust-192 |
-| docs\02_reference\alignment_guide.md | 2.6 Layout API（自定义分配） {#26-layout-api自定义分配} | `#26-layout-api自定义分配-26-layout-api自定义分配` | 同文件锚点不存在: #26-layout-api自定义分配-26-layout-api自定义分配 |
-| docs\02_reference\alignment_guide.md | 2.7 平台差异 {#27-平台差异} | `#27-平台差异-27-平台差异` | 同文件锚点不存在: #27-平台差异-27-平台差异 |
-| docs\02_reference\alignment_guide.md | 四、unsafe 与对齐 {#四unsafe-与对齐} | `#四unsafe-与对齐-四unsafe-与对齐` | 同文件锚点不存在: #四unsafe-与对齐-四unsafe-与对齐 |
-| docs\02_reference\alignment_guide.md | 4.1 裸指针解引用前提与 UB 情形 {#41-裸指针解引用前提与-ub-情形} | `#41-裸指针解引用前提与-ub-情形-41-裸指针解引用前提与-ub-情形` | 同文件锚点不存在: #41-裸指针解引用前提与-ub-情形-41-裸指针解引用前提与-ub-情形 |
-| docs\02_reference\alignment_guide.md | 4.2 未对齐访问 {#42-未对齐访问} | `#42-未对齐访问-42-未对齐访问` | 同文件锚点不存在: #42-未对齐访问-42-未对齐访问 |
-| docs\02_reference\alignment_guide.md | 4.3 transmute 对齐约束 {#43-transmute-对齐约束} | `#43-transmute-对齐约束-43-transmute-对齐约束` | 同文件锚点不存在: #43-transmute-对齐约束-43-transmute-对齐约束 |
-| docs\02_reference\alignment_guide.md | 5.1 伪共享（False Sharing） {#51-伪共享false-sharing} | `#51-伪共享false-sharing-51-伪共享false-sharing` | 同文件锚点不存在: #51-伪共享false-sharing-51-伪共享false-sharing |
-| docs\02_reference\alignment_guide.md | 5.2 数据局部性：AoS vs SoA {#52-数据局部性aos-vs-soa} | `#52-数据局部性aos-vs-soa-52-数据局部性aos-vs-soa` | 同文件锚点不存在: #52-数据局部性aos-vs-soa-52-数据局部性aos-vs-soa |
-| docs\02_reference\alignment_guide.md | 5.3 工具验证与量化数据 {#53-工具验证与量化数据} | `#53-工具验证与量化数据-53-工具验证与量化数据` | 同文件锚点不存在: #53-工具验证与量化数据-53-工具验证与量化数据 |
-| docs\02_reference\alignment_guide.md | Rust 1.95+ 更新 {#rust-195-更新} | `#rust-195-更新-rust-195-更新` | 同文件锚点不存在: #rust-195-更新-rust-195-更新 |
-| docs\02_reference\alignment_guide.md | c01 09_性能优化参考 | `../../crates/c01_ownership_borrow_scope/docs/tier_03_references/09_performance_optimization_reference.md#32-缓存友好设计` | 锚点不存在: #32-缓存友好设计 |
 | docs\02_reference\alignment_guide.md | c05/02_系统编程优化 | `../../crates/c05_threads/docs/tier_04_advanced/02_systems_programming_optimization.md#51-缓存行对齐` | 锚点不存在: #51-缓存行对齐 |
 | docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md | 🤖 Rust AI/ML 速查卡 {#rust-aiml-速查卡} | `#-rust-aiml-速查卡-rust-aiml-速查卡` | 同文件锚点不存在: #-rust-aiml-速查卡-rust-aiml-速查卡 |
 | docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md | 📋 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
@@ -944,7 +727,7 @@
 | docs\02_reference\quick_reference\02_async_patterns.md | ⚡ Rust 异步编程速查卡 {#rust-异步编程速查卡} | `#-rust-异步编程速查卡-rust-异步编程速查卡` | 同文件锚点不存在: #-rust-异步编程速查卡-rust-异步编程速查卡 |
 | docs\02_reference\quick_reference\02_async_patterns.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\02_reference\quick_reference\02_async_patterns.md | 🧠 异步状态机思维导图 {#异步状态机思维导图} | `#-异步状态机思维导图-异步状态机思维导图` | 同文件锚点不存在: #-异步状态机思维导图-异步状态机思维导图 |
-| docs\02_reference\quick_reference\02_async_patterns.md | 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证} | `#-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证` | 同文件锚点不存在: #-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证 |
+| docs\02_reference\quick_reference\02_async_patterns.md | 📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证} | `#-概念定义-属性关系-解释论证已压缩详见-canonical-概念定义-属性关系-解释论证` | 同文件锚点不存在: #-概念定义-属性关系-解释论证已压缩详见-canonical-概念定义-属性关系-解释论证 |
 | docs\02_reference\quick_reference\02_async_patterns.md | 🔬 异步状态机证明树 {#异步状态机证明树} | `#-异步状态机证明树-异步状态机证明树` | 同文件锚点不存在: #-异步状态机证明树-异步状态机证明树 |
 | docs\02_reference\quick_reference\02_async_patterns.md | 🎯 核心概念 {#核心概念} | `#-核心概念-核心概念` | 同文件锚点不存在: #-核心概念-核心概念 |
 | docs\02_reference\quick_reference\02_async_patterns.md | Future Trait（核心抽象） {#future-trait核心抽象} | `#future-trait核心抽象-future-trait核心抽象` | 同文件锚点不存在: #future-trait核心抽象-future-trait核心抽象 |
@@ -1169,7 +952,7 @@
 | docs\02_reference\quick_reference\02_generics_cheatsheet.md | 🔷 Rust 泛型编程速查卡 {#rust-泛型编程速查卡} | `#-rust-泛型编程速查卡-rust-泛型编程速查卡` | 同文件锚点不存在: #-rust-泛型编程速查卡-rust-泛型编程速查卡 |
 | docs\02_reference\quick_reference\02_generics_cheatsheet.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\02_reference\quick_reference\02_generics_cheatsheet.md | 🧠 泛型系统思维导图 {#泛型系统思维导图} | `#-泛型系统思维导图-泛型系统思维导图` | 同文件锚点不存在: #-泛型系统思维导图-泛型系统思维导图 |
-| docs\02_reference\quick_reference\02_generics_cheatsheet.md | 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证} | `#-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证` | 同文件锚点不存在: #-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证 |
+| docs\02_reference\quick_reference\02_generics_cheatsheet.md | 📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证} | `#-概念定义-属性关系-解释论证已压缩详见-canonical-概念定义-属性关系-解释论证` | 同文件锚点不存在: #-概念定义-属性关系-解释论证已压缩详见-canonical-概念定义-属性关系-解释论证 |
 | docs\02_reference\quick_reference\02_generics_cheatsheet.md | 🔬 泛型系统证明树 {#泛型系统证明树} | `#-泛型系统证明树-泛型系统证明树` | 同文件锚点不存在: #-泛型系统证明树-泛型系统证明树 |
 | docs\02_reference\quick_reference\02_generics_cheatsheet.md | 🎯 核心概念 {#核心概念} | `#-核心概念-核心概念` | 同文件锚点不存在: #-核心概念-核心概念 |
 | docs\02_reference\quick_reference\02_generics_cheatsheet.md | 📐 Trait 约束 {#trait-约束} | `#-trait-约束-trait-约束` | 同文件锚点不存在: #-trait-约束-trait-约束 |
@@ -1272,8 +1055,9 @@
 | docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 🦀 所有权系统速查卡 {#所有权系统速查卡} | `#-所有权系统速查卡-所有权系统速查卡` | 同文件锚点不存在: #-所有权系统速查卡-所有权系统速查卡 |
 | docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 📋 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 🧠 所有权系统思维导图 {#所有权系统思维导图} | `#-所有权系统思维导图-所有权系统思维导图` | 同文件锚点不存在: #-所有权系统思维导图-所有权系统思维导图 |
-| docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证} | `#-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证` | 同文件锚点不存在: #-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证 |
-| docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 📐 三大规则（核心） {#三大规则核心} | `#-三大规则核心-三大规则核心` | 同文件锚点不存在: #-三大规则核心-三大规则核心 |
+| docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证} | `#-概念定义-属性关系-解释论证已压缩详见-canonical-概念定义-属性关系-解释论证` | 同文件锚点不存在: #-概念定义-属性关系-解释论证已压缩详见-canonical-概念定义-属性关系-解释论证 |
+| docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 📐 三大规则（核心，已压缩，详见 canonical） {#三大规则核心} | `#-三大规则核心已压缩详见-canonical-三大规则核心` | 同文件锚点不存在: #-三大规则核心已压缩详见-canonical-三大规则核心 |
+| docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 所有权转移决策树（本文独特内容，未在 concept/ 重复） {#所有权转移决策树} | `#所有权转移决策树本文独特内容未在-concept-重复-所有权转移决策树` | 同文件锚点不存在: #所有权转移决策树本文独特内容未在-concept-重复-所有权转移决策树 |
 | docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 🎯 常见模式速查 {#常见模式速查} | `#-常见模式速查-常见模式速查` | 同文件锚点不存在: #-常见模式速查-常见模式速查 |
 | docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 模式 1: 所有权转移（Move） {#模式-1-所有权转移move} | `#模式-1-所有权转移move-模式-1-所有权转移move` | 同文件锚点不存在: #模式-1-所有权转移move-模式-1-所有权转移move |
 | docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 模式 2: 不可变借用（\&T） {#模式-2-不可变借用t} | `#模式-2-不可变借用t-模式-2-不可变借用t` | 同文件锚点不存在: #模式-2-不可变借用t-模式-2-不可变借用t |
@@ -1362,7 +1146,7 @@
 | docs\02_reference\quick_reference\02_rust_194_features_cheatsheet.md | 🔧 完整示例 {#完整示例} | `#-完整示例-完整示例` | 同文件锚点不存在: #-完整示例-完整示例 |
 | docs\02_reference\quick_reference\02_rust_194_features_cheatsheet.md | 📚 相关资源 {#相关资源} | `#-相关资源-相关资源` | 同文件锚点不存在: #-相关资源-相关资源 |
 | docs\02_reference\quick_reference\02_rust_194_features_cheatsheet.md | Rust 1.95+ 特性速查 - 完整版 {#rust-195-特性速查---完整版} | `#rust-195-特性速查---完整版-rust-195-特性速查---完整版` | 同文件锚点不存在: #rust-195-特性速查---完整版-rust-195-特性速查---完整版 |
-| docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md | Rust 1.95.0 特性与 API 速查表 {#rust-1950-特性与-api-速查表} | `#rust-1950-特性与-api-速查表-rust-1950-特性与-api-速查表` | 同文件锚点不存在: #rust-1950-特性与-api-速查表-rust-1950-特性与-api-速查表 |
+| docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md | Rust 1.95.0 特性与 API 速查表 (Rust 195 Features Cheatsheet) {#rust-1950-特性与-api-速查表} | `#rust-1950-特性与-api-速查表-rust-195-features-cheatsheet-rust-1950-特性与-api-速查表` | 同文件锚点不存在: #rust-1950-特性与-api-速查表-rust-195-features-cheatsheet-rust-1950-特性与-api-速查表 |
 | docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md | 1.  宏 {#1-cfg\_select-宏} | `#1-cfg_select-宏-1-cfg_select-宏` | 同文件锚点不存在: #1-cfg_select-宏-1-cfg_select-宏 |
 | docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md | 2.  guards on match arms {#2-if-let-guards-on-match-arms} | `#2-if-let-guards-on-match-arms-2-if-let-guards-on-match-arms` | 同文件锚点不存在: #2-if-let-guards-on-match-arms-2-if-let-guards-on-match-arms |
@@ -1391,7 +1175,7 @@
 | docs\02_reference\quick_reference\02_rust_196_features_cheatsheet.md | Range 常用模式 {#range-常用模式} | `#range-常用模式-range-常用模式` | 同文件锚点不存在: #range-常用模式-range-常用模式 |
 | docs\02_reference\quick_reference\02_rust_196_features_cheatsheet.md | PinCoerceUnsized 快速使用（nightly 前瞻，实验性） {#pincoerceunsized-快速使用nightly-前瞻实验性} | `#pincoerceunsized-快速使用nightly-前瞻实验性-pincoerceunsized-快速使用nightly-前瞻实验性` | 同文件锚点不存在: #pincoerceunsized-快速使用nightly-前瞻实验性-pincoerceunsized-快速使用nightly-前瞻实验性 |
 | docs\02_reference\quick_reference\02_rust_196_features_cheatsheet.md | 元组 Coercion 示例 {#元组-coercion-示例} | `#元组-coercion-示例-元组-coercion-示例` | 同文件锚点不存在: #元组-coercion-示例-元组-coercion-示例 |
-| docs\02_reference\quick_reference\02_rust_198_nightly_preview_cheatsheet.md | Rust 1.98 Nightly 前瞻速查表 {#rust-198-nightly-前瞻速查表} | `#rust-198-nightly-前瞻速查表-rust-198-nightly-前瞻速查表` | 同文件锚点不存在: #rust-198-nightly-前瞻速查表-rust-198-nightly-前瞻速查表 |
+| docs\02_reference\quick_reference\02_rust_198_nightly_preview_cheatsheet.md | Rust 1.98 Nightly 前瞻速查表 (Rust 198 Nightly Preview Cheatsheet) {#rust-198-nightly-前瞻速查表} | `#rust-198-nightly-前瞻速查表-rust-198-nightly-preview-cheatsheet-rust-198-nightly-前瞻速查表` | 同文件锚点不存在: #rust-198-nightly-前瞻速查表-rust-198-nightly-preview-cheatsheet-rust-198-nightly-前瞻速查表 |
 | docs\02_reference\quick_reference\02_rust_198_nightly_preview_cheatsheet.md |  块 — 原生生成器 {#gen-块-原生生成器} | `#gen-块--原生生成器-gen-块-原生生成器` | 同文件锚点不存在: #gen-块--原生生成器-gen-块-原生生成器 |
 | docs\02_reference\quick_reference\02_rust_198_nightly_preview_cheatsheet.md |  — 异步迭代语法糖 {#for-await-异步迭代语法糖} | `#for-await--异步迭代语法糖-for-await-异步迭代语法糖` | 同文件锚点不存在: #for-await--异步迭代语法糖-for-await-异步迭代语法糖 |
 | docs\02_reference\quick_reference\02_rust_198_nightly_preview_cheatsheet.md |  — 智能指针自动推导 {#derivecoercepointee-智能指针自动推导} | `#derivecoercepointee--智能指针自动推导-derivecoercepointee-智能指针自动推导` | 同文件锚点不存在: #derivecoercepointee--智能指针自动推导-derivecoercepointee-智能指针自动推导 |
@@ -1513,10 +1297,10 @@
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 🔀 Rust 线程与并发速查卡 {#rust-线程与并发速查卡} | `#-rust-线程与并发速查卡-rust-线程与并发速查卡` | 同文件锚点不存在: #-rust-线程与并发速查卡-rust-线程与并发速查卡 |
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 🧠 并发安全思维导图 {#并发安全思维导图} | `#-并发安全思维导图-并发安全思维导图` | 同文件锚点不存在: #-并发安全思维导图-并发安全思维导图 |
-| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证} | `#-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证` | 同文件锚点不存在: #-概念定义-属性关系-解释论证-概念定义-属性关系-解释论证 |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证} | `#-概念定义-属性关系-解释论证已压缩详见-canonical-概念定义-属性关系-解释论证` | 同文件锚点不存在: #-概念定义-属性关系-解释论证已压缩详见-canonical-概念定义-属性关系-解释论证 |
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 🔬 并发安全证明树 {#并发安全证明树} | `#-并发安全证明树-并发安全证明树` | 同文件锚点不存在: #-并发安全证明树-并发安全证明树 |
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 🎯 核心概念 {#核心概念} | `#-核心概念-核心概念` | 同文件锚点不存在: #-核心概念-核心概念 |
-| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 作用域线程 (Rust 1.97.0+) {#作用域线程-rust-1930} | `#作用域线程-rust-1961-作用域线程-rust-1930` | 同文件锚点不存在: #作用域线程-rust-1961-作用域线程-rust-1930 |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 作用域线程 (Rust 1.97.0+) {#作用域线程-rust-1930} | `#作用域线程-rust-1970-作用域线程-rust-1930` | 同文件锚点不存在: #作用域线程-rust-1970-作用域线程-rust-1930 |
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 📐 同步原语 {#同步原语} | `#-同步原语-同步原语` | 同文件锚点不存在: #-同步原语-同步原语 |
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | Arc (原子引用计数) {#arc-原子引用计数} | `#arc-原子引用计数-arc-原子引用计数` | 同文件锚点不存在: #arc-原子引用计数-arc-原子引用计数 |
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 🎯 消息传递 {#消息传递} | `#-消息传递-消息传递` | 同文件锚点不存在: #-消息传递-消息传递 |
@@ -1675,10 +1459,6 @@
 | docs\03_guides\03_embassy_deep_dive.md | 7.3 SPI DMA 传输 {#73-spi-dma-传输} | `#73-spi-dma-传输-73-spi-dma-传输` | 同文件锚点不存在: #73-spi-dma-传输-73-spi-dma-传输 |
 | docs\03_guides\03_embassy_deep_dive.md | 7.4 ESP32 WiFi 连接 {#74-esp32-wifi-连接} | `#74-esp32-wifi-连接-74-esp32-wifi-连接` | 同文件锚点不存在: #74-esp32-wifi-连接-74-esp32-wifi-连接 |
 | docs\03_guides\03_embassy_deep_dive.md | 8. 权威来源索引 {#8-权威来源索引} | `#8-权威来源索引-8-权威来源索引` | 同文件锚点不存在: #8-权威来源索引-8-权威来源索引 |
-| docs\03_guides\03_embedded_rust_guide.md | 嵌入式 Rust 指南：Embassy vs RTIC {#嵌入式-rust-指南embassy-vs-rtic} | `#嵌入式-rust-指南embassy-vs-rtic-嵌入式-rust-指南embassy-vs-rtic` | 同文件锚点不存在: #嵌入式-rust-指南embassy-vs-rtic-嵌入式-rust-指南embassy-vs-rtic |
-| docs\03_guides\03_embedded_rust_guide.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\03_guides\03_embedded_rust_guide.md | Embassy vs RTIC 对比 {#embassy-vs-rtic-对比} | `#embassy-vs-rtic-对比-embassy-vs-rtic-对比` | 同文件锚点不存在: #embassy-vs-rtic-对比-embassy-vs-rtic-对比 |
-| docs\03_guides\03_embedded_rust_guide.md | 思维导图：嵌入式 Rust 生态全景 {#思维导图嵌入式-rust-生态全景} | `#思维导图嵌入式-rust-生态全景-思维导图嵌入式-rust-生态全景` | 同文件锚点不存在: #思维导图嵌入式-rust-生态全景-思维导图嵌入式-rust-生态全景 |
 | docs\03_guides\03_fuzzing_guide.md | cargo-fuzz 模糊测试入门指南 {#cargo-fuzz-模糊测试入门指南} | `#cargo-fuzz-模糊测试入门指南-cargo-fuzz-模糊测试入门指南` | 同文件锚点不存在: #cargo-fuzz-模糊测试入门指南-cargo-fuzz-模糊测试入门指南 |
 | docs\03_guides\03_fuzzing_guide.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\03_guides\03_fuzzing_guide.md | 1. 什么是模糊测试（Fuzzing）？ {#1-什么是模糊测试fuzzing} | `#1-什么是模糊测试fuzzing-1-什么是模糊测试fuzzing` | 同文件锚点不存在: #1-什么是模糊测试fuzzing-1-什么是模糊测试fuzzing |
@@ -1759,28 +1539,6 @@
 | docs\03_guides\03_quic_http3_guide.md | QUIC 服务器（quinn） {#quic-服务器quinn} | `#quic-服务器quinn-quic-服务器quinn` | 同文件锚点不存在: #quic-服务器quinn-quic-服务器quinn |
 | docs\03_guides\03_quic_http3_guide.md | HTTP/3 客户端（h3 + quinn） {#http3-客户端h3-quinn} | `#http3-客户端h3--quinn-http3-客户端h3-quinn` | 同文件锚点不存在: #http3-客户端h3--quinn-http3-客户端h3-quinn |
 | docs\03_guides\03_quic_http3_guide.md | 与 HTTP/2 的对比 {#与-http2-的对比} | `#与-http2-的对比-与-http2-的对比` | 同文件锚点不存在: #与-http2-的对比-与-http2-的对比 |
-| docs\03_guides\03_rust_2024_edition_future_in_prelude.md | Rust 2024 Edition  in Prelude 影响分析 {#rust-2024-edition-future-in-prelude-影响分析} | `#rust-2024-edition-future-in-prelude-影响分析-rust-2024-edition-future-in-prelude-影响分析` | 同文件锚点不存在: #rust-2024-edition-future-in-prelude-影响分析-rust-2024-edition-future-in-prelude-影响分析 |
-| docs\03_guides\03_rust_2024_edition_future_in_prelude.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\03_guides\03_rust_2024_edition_future_in_prelude.md | 之前（Rust 2021 及之前） {#之前rust-2021-及之前} | `#之前rust-2021-及之前-之前rust-2021-及之前` | 同文件锚点不存在: #之前rust-2021-及之前-之前rust-2021-及之前 |
-| docs\03_guides\03_rust_2024_edition_future_in_prelude.md | 之后（Rust 2024 Edition） {#之后rust-2024-edition} | `#之后rust-2024-edition-之后rust-2024-edition` | 同文件锚点不存在: #之后rust-2024-edition-之后rust-2024-edition |
-| docs\03_guides\03_rust_2024_edition_future_in_prelude.md | 冲突 1：自定义  trait {#冲突-1自定义-future-trait} | `#冲突-1自定义-future-trait-冲突-1自定义-future-trait` | 同文件锚点不存在: #冲突-1自定义-future-trait-冲突-1自定义-future-trait |
-| docs\03_guides\03_rust_2024_edition_future_in_prelude.md | 冲突 2：第三方库中的  类型 {#冲突-2第三方库中的-future-类型} | `#冲突-2第三方库中的-future-类型-冲突-2第三方库中的-future-类型` | 同文件锚点不存在: #冲突-2第三方库中的-future-类型-冲突-2第三方库中的-future-类型 |
-| docs\03_guides\03_rust_2024_edition_future_in_prelude.md | 冲突 3：宏展开中的名称冲突 {#冲突-3宏展开中的名称冲突} | `#冲突-3宏展开中的名称冲突-冲突-3宏展开中的名称冲突` | 同文件锚点不存在: #冲突-3宏展开中的名称冲突-冲突-3宏展开中的名称冲突 |
-| docs\03_guides\03_rust_2024_edition_future_in_prelude.md | Prelude 包含的内容 {#prelude-包含的内容} | `#prelude-包含的内容-prelude-包含的内容` | 同文件锚点不存在: #prelude-包含的内容-prelude-包含的内容 |
-| docs\03_guides\03_rust_2024_edition_future_in_prelude.md | 与  的关系 {#与-asyncawait-的关系} | `#与-asyncawait-的关系-与-asyncawait-的关系` | 同文件锚点不存在: #与-asyncawait-的关系-与-asyncawait-的关系 |
-| docs\03_guides\03_rust_2024_edition_rpit_migration.md | Rust 2024 Edition RPIT Lifetime Capture 迁移指南 {#rust-2024-edition-rpit-lifetime-capture-迁移指南} | `#rust-2024-edition-rpit-lifetime-capture-迁移指南-rust-2024-edition-rpit-lifetime-capture-迁移指南` | 同文件锚点不存在: #rust-2024-edition-rpit-lifetime-capture-迁移指南-rust-2024-edition-rpit-lifetime-capture-迁移指南 |
-| docs\03_guides\03_rust_2024_edition_rpit_migration.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\03_guides\03_rust_2024_edition_rpit_migration.md | Rust 2021 及之前 {#rust-2021-及之前} | `#rust-2021-及之前-rust-2021-及之前` | 同文件锚点不存在: #rust-2021-及之前-rust-2021-及之前 |
-| docs\03_guides\03_rust_2024_edition_rpit_migration.md | Rust 2024 Edition {#rust-2024-edition} | `#rust-2024-edition-rust-2024-edition` | 同文件锚点不存在: #rust-2024-edition-rust-2024-edition |
-| docs\03_guides\03_rust_2024_edition_rpit_migration.md | 示例 1：自动捕获简化代码 {#示例-1自动捕获简化代码} | `#示例-1自动捕获简化代码-示例-1自动捕获简化代码` | 同文件锚点不存在: #示例-1自动捕获简化代码-示例-1自动捕获简化代码 |
-| docs\03_guides\03_rust_2024_edition_rpit_migration.md | 示例 2：可能的兼容性问题 {#示例-2可能的兼容性问题} | `#示例-2可能的兼容性问题-示例-2可能的兼容性问题` | 同文件锚点不存在: #示例-2可能的兼容性问题-示例-2可能的兼容性问题 |
-| docs\03_guides\03_rust_2024_edition_rpit_migration.md | 示例 3：精确控制（使用  语法） {#示例-3精确控制使用-use-语法} | `#示例-3精确控制使用-use-语法-示例-3精确控制使用-use-语法` | 同文件锚点不存在: #示例-3精确控制使用-use-语法-示例-3精确控制使用-use-语法 |
-| docs\03_guides\03_rust_2024_edition_rpit_migration.md | 步骤 1：升级到 Edition 2024 {#步骤-1升级到-edition-2024} | `#步骤-1升级到-edition-2024-步骤-1升级到-edition-2024` | 同文件锚点不存在: #步骤-1升级到-edition-2024-步骤-1升级到-edition-2024 |
-| docs\03_guides\03_rust_2024_edition_rpit_migration.md | 步骤 2：运行编译器检查 {#步骤-2运行编译器检查} | `#步骤-2运行编译器检查-步骤-2运行编译器检查` | 同文件锚点不存在: #步骤-2运行编译器检查-步骤-2运行编译器检查 |
-| docs\03_guides\03_rust_2024_edition_rpit_migration.md | 步骤 3：处理常见错误 {#步骤-3处理常见错误} | `#步骤-3处理常见错误-步骤-3处理常见错误` | 同文件锚点不存在: #步骤-3处理常见错误-步骤-3处理常见错误 |
-| docs\03_guides\03_rust_2024_edition_rpit_migration.md | 错误类型 A：生命周期过严 {#错误类型-a生命周期过严} | `#错误类型-a生命周期过严-错误类型-a生命周期过严` | 同文件锚点不存在: #错误类型-a生命周期过严-错误类型-a生命周期过严 |
-| docs\03_guides\03_rust_2024_edition_rpit_migration.md | 错误类型 B：trait bounds 不匹配 {#错误类型-btrait-bounds-不匹配} | `#错误类型-btrait-bounds-不匹配-错误类型-btrait-bounds-不匹配` | 同文件锚点不存在: #错误类型-btrait-bounds-不匹配-错误类型-btrait-bounds-不匹配 |
-| docs\03_guides\03_rust_2024_edition_rpit_migration.md | 步骤 4：使用精确捕获优化 {#步骤-4使用精确捕获优化} | `#步骤-4使用精确捕获优化-步骤-4使用精确捕获优化` | 同文件锚点不存在: #步骤-4使用精确捕获优化-步骤-4使用精确捕获优化 |
 | docs\03_guides\03_semver_checks.md | cargo-semver-checks 集成指南 {#cargo-semver-checks-集成指南} | `#cargo-semver-checks-集成指南-cargo-semver-checks-集成指南` | 同文件锚点不存在: #cargo-semver-checks-集成指南-cargo-semver-checks-集成指南 |
 | docs\03_guides\03_semver_checks.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\03_guides\03_semver_checks.md | 1. 什么是 cargo-semver-checks？ {#1-什么是-cargo-semver-checks} | `#1-什么是-cargo-semver-checks-1-什么是-cargo-semver-checks` | 同文件锚点不存在: #1-什么是-cargo-semver-checks-1-什么是-cargo-semver-checks |
@@ -2298,7 +2056,7 @@
 | docs\05_guides\05_advanced_topics_deep_dive.md | 1. 分层初始化 {#1-分层初始化} | `#1-分层初始化-1-分层初始化` | 同文件锚点不存在: #1-分层初始化-1-分层初始化 |
 | docs\05_guides\05_advanced_topics_deep_dive.md | 2. 条件初始化 {#2-条件初始化} | `#2-条件初始化-2-条件初始化` | 同文件锚点不存在: #2-条件初始化-2-条件初始化 |
 | docs\05_guides\05_advanced_topics_deep_dive.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
-| docs\05_guides\05_ai_rust_ecosystem_guide.md | AI + Rust 生态指南 {#ai-rust-生态指南} | `#ai--rust-生态指南-ai-rust-生态指南` | 同文件锚点不存在: #ai--rust-生态指南-ai-rust-生态指南 |
+| docs\05_guides\05_ai_rust_ecosystem_guide.md | AI + Rust 生态指南 (Ai Rust Ecosystem Guide) {#ai-rust-生态指南} | `#ai--rust-生态指南-ai-rust-ecosystem-guide-ai-rust-生态指南` | 同文件锚点不存在: #ai--rust-生态指南-ai-rust-ecosystem-guide-ai-rust-生态指南 |
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | 一、AI 辅助 Rust 开发 {#一ai-辅助-rust-开发} | `#一ai-辅助-rust-开发-一ai-辅助-rust-开发` | 同文件锚点不存在: #一ai-辅助-rust-开发-一ai-辅助-rust-开发 |
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | 二、Rust 构建 AI/ML 应用 {#二rust-构建-aiml-应用} | `#二rust-构建-aiml-应用-二rust-构建-aiml-应用` | 同文件锚点不存在: #二rust-构建-aiml-应用-二rust-构建-aiml-应用 |
@@ -2315,9 +2073,6 @@
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | 4.5 本地 LLM 推理 (llm crate) {#45-本地-llm-推理-llm-crate} | `#45-本地-llm-推理-llm-crate-45-本地-llm-推理-llm-crate` | 同文件锚点不存在: #45-本地-llm-推理-llm-crate-45-本地-llm-推理-llm-crate |
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | 4.6 并发数据加载器 {#46-并发数据加载器} | `#46-并发数据加载器-46-并发数据加载器` | 同文件锚点不存在: #46-并发数据加载器-46-并发数据加载器 |
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | 五、RAG 索引建议 {#五rag-索引建议} | `#五rag-索引建议-五rag-索引建议` | 同文件锚点不存在: #五rag-索引建议-五rag-索引建议 |
-| docs\05_guides\05_ai_rust_ecosystem_guide.md | 6.1 内存管理 {#61-内存管理} | `#61-内存管理-61-内存管理` | 同文件锚点不存在: #61-内存管理-61-内存管理 |
-| docs\05_guides\05_ai_rust_ecosystem_guide.md | 6.2 批量处理 {#62-批量处理} | `#62-批量处理-62-批量处理` | 同文件锚点不存在: #62-批量处理-62-批量处理 |
-| docs\05_guides\05_ai_rust_ecosystem_guide.md | 6.3 错误处理 {#63-错误处理} | `#63-错误处理-63-错误处理` | 同文件锚点不存在: #63-错误处理-63-错误处理 |
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | 场景1: AI 辅助 Rust 学习 {#场景1-ai-辅助-rust-学习} | `#场景1-ai-辅助-rust-学习-场景1-ai-辅助-rust-学习` | 同文件锚点不存在: #场景1-ai-辅助-rust-学习-场景1-ai-辅助-rust-学习 |
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | 场景2: 本地 LLM 推理服务 {#场景2-本地-llm-推理服务} | `#场景2-本地-llm-推理服务-场景2-本地-llm-推理服务` | 同文件锚点不存在: #场景2-本地-llm-推理服务-场景2-本地-llm-推理服务 |
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | 场景3: 嵌入式 AI 推理 {#场景3-嵌入式-ai-推理} | `#场景3-嵌入式-ai-推理-场景3-嵌入式-ai-推理` | 同文件锚点不存在: #场景3-嵌入式-ai-推理-场景3-嵌入式-ai-推理 |
@@ -2456,21 +2211,6 @@
 | docs\05_guides\05_cross_module_integration_examples.md | LazyLock 在跨模块配置共享中的应用 {#lazylock-在跨模块配置共享中的应用} | `#lazylock-在跨模块配置共享中的应用-lazylock-在跨模块配置共享中的应用` | 同文件锚点不存在: #lazylock-在跨模块配置共享中的应用-lazylock-在跨模块配置共享中的应用 |
 | docs\05_guides\05_cross_module_integration_examples.md | ControlFlow 在跨模块错误处理中的应用 {#controlflow-在跨模块错误处理中的应用} | `#controlflow-在跨模块错误处理中的应用-controlflow-在跨模块错误处理中的应用` | 同文件锚点不存在: #controlflow-在跨模块错误处理中的应用-controlflow-在跨模块错误处理中的应用 |
 | docs\05_guides\05_cross_module_integration_examples.md | array\_windows 在跨模块数据流中的应用 {#array\_windows-在跨模块数据流中的应用} | `#array_windows-在跨模块数据流中的应用-array_windows-在跨模块数据流中的应用` | 同文件锚点不存在: #array_windows-在跨模块数据流中的应用-array_windows-在跨模块数据流中的应用 |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | C++ ↔ Rust 互操作评估 {#c-rust-互操作评估} | `#c--rust-互操作评估-c-rust-互操作评估` | 同文件锚点不存在: #c--rust-互操作评估-c-rust-互操作评估 |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 1. 背景与目标 {#1-背景与目标} | `#1-背景与目标-1-背景与目标` | 同文件锚点不存在: #1-背景与目标-1-背景与目标 |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 2. 现有方案对比 {#2-现有方案对比} | `#2-现有方案对比-2-现有方案对比` | 同文件锚点不存在: #2-现有方案对比-2-现有方案对比 |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 3.  的安全绑定原理 {#3-cxx-的安全绑定原理} | `#3-cxx-的安全绑定原理-3-cxx-的安全绑定原理` | 同文件锚点不存在: #3-cxx-的安全绑定原理-3-cxx-的安全绑定原理 |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 4. 场景：将 Rust 库集成到 C++ {#4-场景将-rust-库集成到-c} | `#4-场景将-rust-库集成到-c-4-场景将-rust-库集成到-c` | 同文件锚点不存在: #4-场景将-rust-库集成到-c-4-场景将-rust-库集成到-c |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 5. 场景：将 C++ 库暴露给 Rust {#5-场景将-c-库暴露给-rust} | `#5-场景将-c-库暴露给-rust-5-场景将-c-库暴露给-rust` | 同文件锚点不存在: #5-场景将-c-库暴露给-rust-5-场景将-c-库暴露给-rust |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 6. 限制与边界 {#6-限制与边界} | `#6-限制与边界-6-限制与边界` | 同文件锚点不存在: #6-限制与边界-6-限制与边界 |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 7. 安全考量 {#7-安全考量} | `#7-安全考量-7-安全考量` | 同文件锚点不存在: #7-安全考量-7-安全考量 |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 8. 与 Rust for Linux 的关系 {#8-与-rust-for-linux-的关系} | `#8-与-rust-for-linux-的关系-8-与-rust-for-linux-的关系` | 同文件锚点不存在: #8-与-rust-for-linux-的关系-8-与-rust-for-linux-的关系 |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 9. 代码示例 {#9-代码示例} | `#9-代码示例-9-代码示例` | 同文件锚点不存在: #9-代码示例-9-代码示例 |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 9.1 Rust 调用 C++ {#91-rust-调用-c} | `#91-rust-调用-c-91-rust-调用-c` | 同文件锚点不存在: #91-rust-调用-c-91-rust-调用-c |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 9.2 C++ 调用 Rust {#92-c-调用-rust} | `#92-c-调用-rust-92-c-调用-rust` | 同文件锚点不存在: #92-c-调用-rust-92-c-调用-rust |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 10. 总结 {#10-总结} | `#10-总结-10-总结` | 同文件锚点不存在: #10-总结-10-总结 |
-| docs\05_guides\05_cxx_rust_interop_evaluation.md | 📋 复查记录 {#复查记录} | `#-复查记录-复查记录` | 同文件锚点不存在: #-复查记录-复查记录 |
 | docs\05_guides\05_design_patterns_usage_guide.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\05_guides\05_design_patterns_usage_guide.md | 📋 概述 {#概述} | `#-概述-概述` | 同文件锚点不存在: #-概述-概述 |
 | docs\05_guides\05_design_patterns_usage_guide.md | 🚀 快速开始 {#快速开始} | `#-快速开始-快速开始` | 同文件锚点不存在: #-快速开始-快速开始 |
@@ -2550,28 +2290,6 @@
 | docs\05_guides\05_formal_verification_integration_guide.md | 🎓 工具选择决策树 {#工具选择决策树} | `#-工具选择决策树-工具选择决策树` | 同文件锚点不存在: #-工具选择决策树-工具选择决策树 |
 | docs\05_guides\05_formal_verification_integration_guide.md | 🔗 综合示例 {#综合示例} | `#-综合示例-综合示例` | 同文件锚点不存在: #-综合示例-综合示例 |
 | docs\05_guides\05_formal_verification_integration_guide.md | 📊 验证覆盖率目标 {#验证覆盖率目标} | `#-验证覆盖率目标-验证覆盖率目标` | 同文件锚点不存在: #-验证覆盖率目标-验证覆盖率目标 |
-| docs\05_guides\05_inline_assembly_guide.md | Rust 内联汇编完整指南 {#rust-内联汇编完整指南} | `#rust-内联汇编完整指南-rust-内联汇编完整指南` | 同文件锚点不存在: #rust-内联汇编完整指南-rust-内联汇编完整指南 |
-| docs\05_guides\05_inline_assembly_guide.md | asm! 宏基本结构 {#asm-宏基本结构} | `#asm-宏基本结构-asm-宏基本结构` | 同文件锚点不存在: #asm-宏基本结构-asm-宏基本结构 |
-| docs\05_guides\05_inline_assembly_guide.md | global\_asm! 全局汇编 {#global\_asm-全局汇编} | `#global_asm-全局汇编-global_asm-全局汇编` | 同文件锚点不存在: #global_asm-全局汇编-global_asm-全局汇编 |
-| docs\05_guides\05_inline_assembly_guide.md | 1. 输入操作数 (in) {#1-输入操作数-in} | `#1-输入操作数-in-1-输入操作数-in` | 同文件锚点不存在: #1-输入操作数-in-1-输入操作数-in |
-| docs\05_guides\05_inline_assembly_guide.md | 2. 输出操作数 (out) {#2-输出操作数-out} | `#2-输出操作数-out-2-输出操作数-out` | 同文件锚点不存在: #2-输出操作数-out-2-输出操作数-out |
-| docs\05_guides\05_inline_assembly_guide.md | 3. 输入输出操作数 (inout) {#3-输入输出操作数-inout} | `#3-输入输出操作数-inout-3-输入输出操作数-inout` | 同文件锚点不存在: #3-输入输出操作数-inout-3-输入输出操作数-inout |
-| docs\05_guides\05_inline_assembly_guide.md | 4. 延迟输出 (lateout) {#4-延迟输出-lateout} | `#4-延迟输出-lateout-4-延迟输出-lateout` | 同文件锚点不存在: #4-延迟输出-lateout-4-延迟输出-lateout |
-| docs\05_guides\05_inline_assembly_guide.md | 5. 内存操作数 (mem) {#5-内存操作数-mem} | `#5-内存操作数-mem-5-内存操作数-mem` | 同文件锚点不存在: #5-内存操作数-mem-5-内存操作数-mem |
-| docs\05_guides\05_inline_assembly_guide.md | 6. 标签和跳转 {#6-标签和跳转} | `#6-标签和跳转-6-标签和跳转` | 同文件锚点不存在: #6-标签和跳转-6-标签和跳转 |
-| docs\05_guides\05_inline_assembly_guide.md | RISC-V {#risc-v} | `#risc-v-risc-v` | 同文件锚点不存在: #risc-v-risc-v |
-| docs\05_guides\05_inline_assembly_guide.md | 1. 系统调用封装 {#1-系统调用封装} | `#1-系统调用封装-1-系统调用封装` | 同文件锚点不存在: #1-系统调用封装-1-系统调用封装 |
-| docs\05_guides\05_inline_assembly_guide.md | 2. SIMD 操作 (x86\_64 AVX) {#2-simd-操作-x86\_64-avx} | `#2-simd-操作-x86_64-avx-2-simd-操作-x86_64-avx` | 同文件锚点不存在: #2-simd-操作-x86_64-avx-2-simd-操作-x86_64-avx |
-| docs\05_guides\05_inline_assembly_guide.md | 3. 原子操作（自定义实现） {#3-原子操作自定义实现} | `#3-原子操作自定义实现-3-原子操作自定义实现` | 同文件锚点不存在: #3-原子操作自定义实现-3-原子操作自定义实现 |
-| docs\05_guides\05_inline_assembly_guide.md | 与 naked 函数配合 {#与-naked-函数配合} | `#与-naked-函数配合-与-naked-函数配合` | 同文件锚点不存在: #与-naked-函数配合-与-naked-函数配合 |
-| docs\05_guides\05_inline_assembly_guide.md | 陷阱 1: 忘记标记 clobbered 寄存器 {#陷阱-1-忘记标记-clobbered-寄存器} | `#陷阱-1-忘记标记-clobbered-寄存器-陷阱-1-忘记标记-clobbered-寄存器` | 同文件锚点不存在: #陷阱-1-忘记标记-clobbered-寄存器-陷阱-1-忘记标记-clobbered-寄存器 |
-| docs\05_guides\05_inline_assembly_guide.md | 陷阱 2: 输入输出操作数混淆 {#陷阱-2-输入输出操作数混淆} | `#陷阱-2-输入输出操作数混淆-陷阱-2-输入输出操作数混淆` | 同文件锚点不存在: #陷阱-2-输入输出操作数混淆-陷阱-2-输入输出操作数混淆 |
-| docs\05_guides\05_inline_assembly_guide.md | 陷阱 3: 忘记内存屏障 {#陷阱-3-忘记内存屏障} | `#陷阱-3-忘记内存屏障-陷阱-3-忘记内存屏障` | 同文件锚点不存在: #陷阱-3-忘记内存屏障-陷阱-3-忘记内存屏障 |
-| docs\05_guides\05_inline_assembly_guide.md | 陷阱 4: 平台假设 {#陷阱-4-平台假设} | `#陷阱-4-平台假设-陷阱-4-平台假设` | 同文件锚点不存在: #陷阱-4-平台假设-陷阱-4-平台假设 |
-| docs\05_guides\05_inline_assembly_guide.md | Rust 1.95+ 在内联汇编中的应用 {#rust-195-在内联汇编中的应用} | `#rust-195-在内联汇编中的应用-rust-195-在内联汇编中的应用` | 同文件锚点不存在: #rust-195-在内联汇编中的应用-rust-195-在内联汇编中的应用 |
-| docs\05_guides\05_inline_assembly_guide.md | LazyLock 在汇编优化缓存中的应用 {#lazylock-在汇编优化缓存中的应用} | `#lazylock-在汇编优化缓存中的应用-lazylock-在汇编优化缓存中的应用` | 同文件锚点不存在: #lazylock-在汇编优化缓存中的应用-lazylock-在汇编优化缓存中的应用 |
-| docs\05_guides\05_inline_assembly_guide.md | ControlFlow 在汇编错误处理中的应用 {#controlflow-在汇编错误处理中的应用} | `#controlflow-在汇编错误处理中的应用-controlflow-在汇编错误处理中的应用` | 同文件锚点不存在: #controlflow-在汇编错误处理中的应用-controlflow-在汇编错误处理中的应用 |
-| docs\05_guides\05_inline_assembly_guide.md | 数学常量在 SIMD 优化中的应用 {#数学常量在-simd-优化中的应用} | `#数学常量在-simd-优化中的应用-数学常量在-simd-优化中的应用` | 同文件锚点不存在: #数学常量在-simd-优化中的应用-数学常量在-simd-优化中的应用 |
 | docs\05_guides\05_macro_system_usage_guide.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\05_guides\05_macro_system_usage_guide.md | 📋 概述 {#概述} | `#-概述-概述` | 同文件锚点不存在: #-概述-概述 |
 | docs\05_guides\05_macro_system_usage_guide.md | 🚀 快速开始 {#快速开始} | `#-快速开始-快速开始` | 同文件锚点不存在: #-快速开始-快速开始 |
@@ -2739,7 +2457,7 @@
 | docs\05_guides\05_threads_concurrency_usage_guide.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\05_guides\05_threads_concurrency_usage_guide.md | 📋 概述 {#概述} | `#-概述-概述` | 同文件锚点不存在: #-概述-概述 |
 | docs\05_guides\05_threads_concurrency_usage_guide.md | 🚀 快速开始 {#快速开始} | `#-快速开始-快速开始` | 同文件锚点不存在: #-快速开始-快速开始 |
-| docs\05_guides\05_threads_concurrency_usage_guide.md | 作用域线程（Rust 1.97.0+） {#作用域线程rust-189} | `#作用域线程rust-1961-作用域线程rust-189` | 同文件锚点不存在: #作用域线程rust-1961-作用域线程rust-189 |
+| docs\05_guides\05_threads_concurrency_usage_guide.md | 作用域线程（Rust 1.63+） {#作用域线程rust-189} | `#作用域线程rust-1961-作用域线程rust-189` | 同文件锚点不存在: #作用域线程rust-1961-作用域线程rust-189 |
 | docs\05_guides\05_threads_concurrency_usage_guide.md | 📊 核心功能 {#核心功能} | `#-核心功能-核心功能` | 同文件锚点不存在: #-核心功能-核心功能 |
 | docs\05_guides\05_threads_concurrency_usage_guide.md | 1. 线程管理 {#1-线程管理} | `#1-线程管理-1-线程管理` | 同文件锚点不存在: #1-线程管理-1-线程管理 |
 | docs\05_guides\05_threads_concurrency_usage_guide.md | 2. 消息传递 {#2-消息传递} | `#2-消息传递-2-消息传递` | 同文件锚点不存在: #2-消息传递-2-消息传递 |
@@ -2857,87 +2575,18 @@
 | docs\05_guides\05_wasm_usage_guide.md | Rust 1.95+ 在 WASM 开发中的应用 {#rust-195-在-wasm-开发中的应用} | `#rust-195-在-wasm-开发中的应用-rust-195-在-wasm-开发中的应用` | 同文件锚点不存在: #rust-195-在-wasm-开发中的应用-rust-195-在-wasm-开发中的应用 |
 | docs\05_guides\05_wasm_usage_guide.md | array\_windows 在图像处理中的应用 {#array\_windows-在图像处理中的应用} | `#array_windows-在图像处理中的应用-array_windows-在图像处理中的应用` | 同文件锚点不存在: #array_windows-在图像处理中的应用-array_windows-在图像处理中的应用 |
 | docs\05_guides\05_wasm_usage_guide.md | LazyLock 在 WASM 状态管理中的应用 {#lazylock-在-wasm-状态管理中的应用} | `#lazylock-在-wasm-状态管理中的应用-lazylock-在-wasm-状态管理中的应用` | 同文件锚点不存在: #lazylock-在-wasm-状态管理中的应用-lazylock-在-wasm-状态管理中的应用 |
-| docs\05_guides\best_practices.md | Rust 项目最佳实践指南 {#rust-项目最佳实践指南} | `#rust-项目最佳实践指南-rust-项目最佳实践指南` | 同文件锚点不存在: #rust-项目最佳实践指南-rust-项目最佳实践指南 |
-| docs\05_guides\best_practices.md | 📋 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\05_guides\best_practices.md | 1. 代码质量最佳实践 {#1-代码质量最佳实践} | `#1-代码质量最佳实践-1-代码质量最佳实践` | 同文件锚点不存在: #1-代码质量最佳实践-1-代码质量最佳实践 |
-| docs\05_guides\best_practices.md | 1.1 所有权和借用 {#11-所有权和借用} | `#11-所有权和借用-11-所有权和借用` | 同文件锚点不存在: #11-所有权和借用-11-所有权和借用 |
-| docs\05_guides\best_practices.md | 1.2 类型安全 {#12-类型安全} | `#12-类型安全-12-类型安全` | 同文件锚点不存在: #12-类型安全-12-类型安全 |
-| docs\05_guides\best_practices.md | 1.3 错误处理 {#13-错误处理} | `#13-错误处理-13-错误处理` | 同文件锚点不存在: #13-错误处理-13-错误处理 |
-| docs\05_guides\best_practices.md | 2. 性能优化最佳实践 {#2-性能优化最佳实践} | `#2-性能优化最佳实践-2-性能优化最佳实践` | 同文件锚点不存在: #2-性能优化最佳实践-2-性能优化最佳实践 |
-| docs\05_guides\best_practices.md | 2.1 内存管理 {#21-内存管理} | `#21-内存管理-21-内存管理` | 同文件锚点不存在: #21-内存管理-21-内存管理 |
-| docs\05_guides\best_practices.md | 2.2 迭代器优化 {#22-迭代器优化} | `#22-迭代器优化-22-迭代器优化` | 同文件锚点不存在: #22-迭代器优化-22-迭代器优化 |
-| docs\05_guides\best_practices.md | 2.3 零成本抽象 {#23-零成本抽象} | `#23-零成本抽象-23-零成本抽象` | 同文件锚点不存在: #23-零成本抽象-23-零成本抽象 |
-| docs\05_guides\best_practices.md | 3. 错误处理最佳实践 {#3-错误处理最佳实践} | `#3-错误处理最佳实践-3-错误处理最佳实践` | 同文件锚点不存在: #3-错误处理最佳实践-3-错误处理最佳实践 |
-| docs\05_guides\best_practices.md | 3.1 自定义错误类型 {#31-自定义错误类型} | `#31-自定义错误类型-31-自定义错误类型` | 同文件锚点不存在: #31-自定义错误类型-31-自定义错误类型 |
-| docs\05_guides\best_practices.md | 3.2 错误传播 {#32-错误传播} | `#32-错误传播-32-错误传播` | 同文件锚点不存在: #32-错误传播-32-错误传播 |
-| docs\05_guides\best_practices.md | 4. 测试最佳实践 {#4-测试最佳实践} | `#4-测试最佳实践-4-测试最佳实践` | 同文件锚点不存在: #4-测试最佳实践-4-测试最佳实践 |
-| docs\05_guides\best_practices.md | 4.1 单元测试 {#41-单元测试} | `#41-单元测试-41-单元测试` | 同文件锚点不存在: #41-单元测试-41-单元测试 |
-| docs\05_guides\best_practices.md | 4.2 集成测试 {#42-集成测试} | `#42-集成测试-42-集成测试` | 同文件锚点不存在: #42-集成测试-42-集成测试 |
-| docs\05_guides\best_practices.md | 4.3 文档测试 {#43-文档测试} | `#43-文档测试-43-文档测试` | 同文件锚点不存在: #43-文档测试-43-文档测试 |
-| docs\05_guides\best_practices.md | 5. 文档最佳实践 {#5-文档最佳实践} | `#5-文档最佳实践-5-文档最佳实践` | 同文件锚点不存在: #5-文档最佳实践-5-文档最佳实践 |
-| docs\05_guides\best_practices.md | 5.1 代码文档 {#51-代码文档} | `#51-代码文档-51-代码文档` | 同文件锚点不存在: #51-代码文档-51-代码文档 |
-| docs\05_guides\best_practices.md | 5.2 README 文档 {#52-readme-文档} | `#52-readme-文档-52-readme-文档` | 同文件锚点不存在: #52-readme-文档-52-readme-文档 |
-| docs\05_guides\best_practices.md | 6. 安全性最佳实践 {#6-安全性最佳实践} | `#6-安全性最佳实践-6-安全性最佳实践` | 同文件锚点不存在: #6-安全性最佳实践-6-安全性最佳实践 |
-| docs\05_guides\best_practices.md | 6.1 输入验证 {#61-输入验证} | `#61-输入验证-61-输入验证` | 同文件锚点不存在: #61-输入验证-61-输入验证 |
-| docs\05_guides\best_practices.md | 6.2 资源管理 {#62-资源管理} | `#62-资源管理-62-资源管理` | 同文件锚点不存在: #62-资源管理-62-资源管理 |
-| docs\05_guides\best_practices.md | 7. 并发编程最佳实践 {#7-并发编程最佳实践} | `#7-并发编程最佳实践-7-并发编程最佳实践` | 同文件锚点不存在: #7-并发编程最佳实践-7-并发编程最佳实践 |
-| docs\05_guides\best_practices.md | 7.1 线程安全 {#71-线程安全} | `#71-线程安全-71-线程安全` | 同文件锚点不存在: #71-线程安全-71-线程安全 |
-| docs\05_guides\best_practices.md | 7.2 无锁编程 {#72-无锁编程} | `#72-无锁编程-72-无锁编程` | 同文件锚点不存在: #72-无锁编程-72-无锁编程 |
-| docs\05_guides\best_practices.md | 8. 异步编程最佳实践 {#8-异步编程最佳实践} | `#8-异步编程最佳实践-8-异步编程最佳实践` | 同文件锚点不存在: #8-异步编程最佳实践-8-异步编程最佳实践 |
-| docs\05_guides\best_practices.md | 8.1 Future 和 async/await {#81-future-和-asyncawait} | `#81-future-和-asyncawait-81-future-和-asyncawait` | 同文件锚点不存在: #81-future-和-asyncawait-81-future-和-asyncawait |
-| docs\05_guides\best_practices.md | 8.2 错误处理 {#82-错误处理} | `#82-错误处理-82-错误处理` | 同文件锚点不存在: #82-错误处理-82-错误处理 |
-| docs\05_guides\best_practices.md | 9. 模块设计最佳实践 {#9-模块设计最佳实践} | `#9-模块设计最佳实践-9-模块设计最佳实践` | 同文件锚点不存在: #9-模块设计最佳实践-9-模块设计最佳实践 |
-| docs\05_guides\best_practices.md | 9.1 模块组织 {#91-模块组织} | `#91-模块组织-91-模块组织` | 同文件锚点不存在: #91-模块组织-91-模块组织 |
-| docs\05_guides\best_practices.md | 9.2 可见性控制 {#92-可见性控制} | `#92-可见性控制-92-可见性控制` | 同文件锚点不存在: #92-可见性控制-92-可见性控制 |
-| docs\05_guides\best_practices.md | 10. 项目组织最佳实践 {#10-项目组织最佳实践} | `#10-项目组织最佳实践-10-项目组织最佳实践` | 同文件锚点不存在: #10-项目组织最佳实践-10-项目组织最佳实践 |
-| docs\05_guides\best_practices.md | 10.1 目录结构 {#101-目录结构} | `#101-目录结构-101-目录结构` | 同文件锚点不存在: #101-目录结构-101-目录结构 |
-| docs\05_guides\best_practices.md | 10.2 特性标志 {#102-特性标志} | `#102-特性标志-102-特性标志` | 同文件锚点不存在: #102-特性标志-102-特性标志 |
-| docs\05_guides\best_practices.md | 11. 工具使用 {#11-工具使用} | `#11-工具使用-11-工具使用` | 同文件锚点不存在: #11-工具使用-11-工具使用 |
-| docs\05_guides\best_practices.md | 11.1 Clippy {#111-clippy} | `#111-clippy-111-clippy` | 同文件锚点不存在: #111-clippy-111-clippy |
-| docs\05_guides\best_practices.md | 11.2 rustfmt {#112-rustfmt} | `#112-rustfmt-112-rustfmt` | 同文件锚点不存在: #112-rustfmt-112-rustfmt |
-| docs\05_guides\best_practices.md | 11.3 依赖管理 {#113-依赖管理} | `#113-依赖管理-113-依赖管理` | 同文件锚点不存在: #113-依赖管理-113-依赖管理 |
-| docs\05_guides\best_practices.md | 12. 性能监控 {#12-性能监控} | `#12-性能监控-12-性能监控` | 同文件锚点不存在: #12-性能监控-12-性能监控 |
-| docs\05_guides\best_practices.md | 12.1 基准测试 {#121-基准测试} | `#121-基准测试-121-基准测试` | 同文件锚点不存在: #121-基准测试-121-基准测试 |
-| docs\05_guides\best_practices.md | 12.2 性能分析 {#122-性能分析} | `#122-性能分析-122-性能分析` | 同文件锚点不存在: #122-性能分析-122-性能分析 |
-| docs\05_guides\best_practices.md | 13. 代码示例 {#13-代码示例} | `#13-代码示例-13-代码示例` | 同文件锚点不存在: #13-代码示例-13-代码示例 |
-| docs\05_guides\best_practices.md | 13.1 新类型模式 {#131-新类型模式} | `#131-新类型模式-131-新类型模式` | 同文件锚点不存在: #131-新类型模式-131-新类型模式 |
-| docs\05_guides\best_practices.md | 13.2 Builder 模式 {#132-builder-模式} | `#132-builder-模式-132-builder-模式` | 同文件锚点不存在: #132-builder-模式-132-builder-模式 |
-| docs\05_guides\best_practices.md | 13.3 状态机模式 {#133-状态机模式} | `#133-状态机模式-133-状态机模式` | 同文件锚点不存在: #133-状态机模式-133-状态机模式 |
-| docs\05_guides\best_practices.md | 14. 使用场景 {#14-使用场景} | `#14-使用场景-14-使用场景` | 同文件锚点不存在: #14-使用场景-14-使用场景 |
-| docs\05_guides\best_practices.md | 场景1: 新项目启动 {#场景1-新项目启动} | `#场景1-新项目启动-场景1-新项目启动` | 同文件锚点不存在: #场景1-新项目启动-场景1-新项目启动 |
-| docs\05_guides\best_practices.md | 场景2: 代码审查 {#场景2-代码审查} | `#场景2-代码审查-场景2-代码审查` | 同文件锚点不存在: #场景2-代码审查-场景2-代码审查 |
-| docs\05_guides\best_practices.md | 场景3: 性能优化 {#场景3-性能优化} | `#场景3-性能优化-场景3-性能优化` | 同文件锚点不存在: #场景3-性能优化-场景3-性能优化 |
-| docs\05_guides\best_practices.md | 场景4: 团队代码规范 {#场景4-团队代码规范} | `#场景4-团队代码规范-场景4-团队代码规范` | 同文件锚点不存在: #场景4-团队代码规范-场景4-团队代码规范 |
-| docs\05_guides\best_practices.md | 15. 形式化链接 {#15-形式化链接} | `#15-形式化链接-15-形式化链接` | 同文件锚点不存在: #15-形式化链接-15-形式化链接 |
-| docs\05_guides\best_practices.md | 在线课程 (Coursera) {#在线课程-coursera} | `#在线课程-coursera-在线课程-coursera` | 同文件锚点不存在: #在线课程-coursera-在线课程-coursera |
-| docs\05_guides\best_practices.md | Rust 1.95+ 最佳实践（深度指南） {#rust-195-最佳实践深度指南} | `#rust-195-最佳实践深度指南-rust-195-最佳实践深度指南` | 同文件锚点不存在: #rust-195-最佳实践深度指南-rust-195-最佳实践深度指南 |
-| docs\05_guides\best_practices.md | 1. array\_windows - 零开销滑动窗口 {#1-array\_windows---零开销滑动窗口} | `#1-array_windows---零开销滑动窗口-1-array_windows---零开销滑动窗口` | 同文件锚点不存在: #1-array_windows---零开销滑动窗口-1-array_windows---零开销滑动窗口 |
-| docs\05_guides\best_practices.md | 什么时候使用 array\_windows？ {#什么时候使用-array\_windows} | `#什么时候使用-array_windows-什么时候使用-array_windows` | 同文件锚点不存在: #什么时候使用-array_windows-什么时候使用-array_windows |
-| docs\05_guides\best_practices.md | 2. ControlFlow - 清晰的提前终止语义 {#2-controlflow---清晰的提前终止语义} | `#2-controlflow---清晰的提前终止语义-2-controlflow---清晰的提前终止语义` | 同文件锚点不存在: #2-controlflow---清晰的提前终止语义-2-controlflow---清晰的提前终止语义 |
-| docs\05_guides\best_practices.md | ControlFlow vs Result/Option 选择指南 {#controlflow-vs-resultoption-选择指南} | `#controlflow-vs-resultoption-选择指南-controlflow-vs-resultoption-选择指南` | 同文件锚点不存在: #controlflow-vs-resultoption-选择指南-controlflow-vs-resultoption-选择指南 |
-| docs\05_guides\best_practices.md | 3. LazyLock/LazyCell - 延迟初始化优化 {#3-lazylocklazycell---延迟初始化优化} | `#3-lazylocklazycell---延迟初始化优化-3-lazylocklazycell---延迟初始化优化` | 同文件锚点不存在: #3-lazylocklazycell---延迟初始化优化-3-lazylocklazycell---延迟初始化优化 |
-| docs\05_guides\best_practices.md | 4. 数学常量 - 精确计算 {#4-数学常量---精确计算} | `#4-数学常量---精确计算-4-数学常量---精确计算` | 同文件锚点不存在: #4-数学常量---精确计算-4-数学常量---精确计算 |
-| docs\05_guides\best_practices.md | 5. 综合性能优化检查清单 {#5-综合性能优化检查清单-1} | `#5-综合性能优化检查清单-5-综合性能优化检查清单-1` | 同文件锚点不存在: #5-综合性能优化检查清单-5-综合性能优化检查清单-1 |
-| docs\05_guides\best_practices.md | array\_windows 优化 {#array\_windows-优化} | `#array_windows-优化-array_windows-优化` | 同文件锚点不存在: #array_windows-优化-array_windows-优化 |
-| docs\05_guides\best_practices.md | ControlFlow 优化 {#controlflow-优化} | `#controlflow-优化-controlflow-优化` | 同文件锚点不存在: #controlflow-优化-controlflow-优化 |
-| docs\05_guides\best_practices.md | LazyLock 优化 {#lazylock-优化} | `#lazylock-优化-lazylock-优化` | 同文件锚点不存在: #lazylock-优化-lazylock-优化 |
-| docs\05_guides\best_practices.md | 🆕 新增最佳实践 {#新增最佳实践} | `#-新增最佳实践-新增最佳实践` | 同文件锚点不存在: #-新增最佳实践-新增最佳实践 |
-| docs\05_guides\best_practices.md | 1. isqrt - 整数平方根运算 {#1-isqrt---整数平方根运算} | `#1-isqrt---整数平方根运算-1-isqrt---整数平方根运算` | 同文件锚点不存在: #1-isqrt---整数平方根运算-1-isqrt---整数平方根运算 |
-| docs\05_guides\best_practices.md | 什么时候使用 isqrt？ {#什么时候使用-isqrt} | `#什么时候使用-isqrt-什么时候使用-isqrt` | 同文件锚点不存在: #什么时候使用-isqrt-什么时候使用-isqrt |
-| docs\05_guides\best_practices.md | 2. HashMap::get\_disjoint\_mut - 安全并行访问 {#2-hashmapget\_disjoint\_mut---安全并行访问} | `#2-hashmapget_disjoint_mut---安全并行访问-2-hashmapget_disjoint_mut---安全并行访问` | 同文件锚点不存在: #2-hashmapget_disjoint_mut---安全并行访问-2-hashmapget_disjoint_mut---安全并行访问 |
-| docs\05_guides\best_practices.md | 什么时候使用 get\_disjoint\_mut？ {#什么时候使用-get\_disjoint\_mut} | `#什么时候使用-get_disjoint_mut-什么时候使用-get_disjoint_mut` | 同文件锚点不存在: #什么时候使用-get_disjoint_mut-什么时候使用-get_disjoint_mut |
-| docs\05_guides\best_practices.md | 3. async Fn Trait - 异步抽象改进 {#3-async-fn-trait---异步抽象改进} | `#3-async-fn-trait---异步抽象改进-3-async-fn-trait---异步抽象改进` | 同文件锚点不存在: #3-async-fn-trait---异步抽象改进-3-async-fn-trait---异步抽象改进 |
-| docs\05_guides\best_practices.md | 最佳实践：清晰的异步 Trait 定义 {#最佳实践清晰的异步-trait-定义} | `#最佳实践清晰的异步-trait-定义-最佳实践清晰的异步-trait-定义` | 同文件锚点不存在: #最佳实践清晰的异步-trait-定义-最佳实践清晰的异步-trait-定义 |
-| docs\05_guides\best_practices.md | 与 ControlFlow 结合 {#与-controlflow-结合} | `#与-controlflow-结合-与-controlflow-结合` | 同文件锚点不存在: #与-controlflow-结合-与-controlflow-结合 |
-| docs\05_guides\best_practices.md | 4. Vec::pop\_if - 条件弹出 {#4-vecpop\_if---条件弹出} | `#4-vecpop_if---条件弹出-4-vecpop_if---条件弹出` | 同文件锚点不存在: #4-vecpop_if---条件弹出-4-vecpop_if---条件弹出 |
-| docs\05_guides\best_practices.md | 5. 综合性能优化检查清单 {#5-综合性能优化检查清单-1} | `#5-综合性能优化检查清单-5-综合性能优化检查清单-1-1` | 同文件锚点不存在: #5-综合性能优化检查清单-5-综合性能优化检查清单-1-1 |
-| docs\05_guides\best_practices.md | isqrt 优化 {#isqrt-优化} | `#isqrt-优化-isqrt-优化` | 同文件锚点不存在: #isqrt-优化-isqrt-优化 |
-| docs\05_guides\best_practices.md | get\_disjoint\_mut 优化 {#get\_disjoint\_mut-优化} | `#get_disjoint_mut-优化-get_disjoint_mut-优化` | 同文件锚点不存在: #get_disjoint_mut-优化-get_disjoint_mut-优化 |
-| docs\05_guides\best_practices.md | async Fn 优化 {#async-fn-优化} | `#async-fn-优化-async-fn-优化` | 同文件锚点不存在: #async-fn-优化-async-fn-优化 |
-| docs\05_guides\best_practices.md | 6. 版本兼容性与迁移指南 {#6-版本兼容性与迁移指南} | `#6-版本兼容性与迁移指南-6-版本兼容性与迁移指南` | 同文件锚点不存在: #6-版本兼容性与迁移指南-6-版本兼容性与迁移指南 |
-| docs\05_guides\best_practices.md | 从 1.95+ 迁移到新版本 {#从-195-迁移到新版本} | `#从-195-迁移到新版本-从-195-迁移到新版本` | 同文件锚点不存在: #从-195-迁移到新版本-从-195-迁移到新版本 |
-| docs\05_guides\best_practices.md | 7. 快速参考卡片 {#7-快速参考卡片} | `#7-快速参考卡片-7-快速参考卡片` | 同文件锚点不存在: #7-快速参考卡片-7-快速参考卡片 |
-| docs\05_guides\best_practices.md | 思维导图：Rust 最佳实践体系 {#思维导图rust-最佳实践体系} | `#思维导图rust-最佳实践体系-思维导图rust-最佳实践体系` | 同文件锚点不存在: #思维导图rust-最佳实践体系-思维导图rust-最佳实践体系 |
+| docs\05_guides\best_practices.md | 项目组织最佳实践 | `#10-项目组织最佳实践` | 同文件锚点不存在: #10-项目组织最佳实践 |
+| docs\05_guides\best_practices.md | Clippy | `#111-clippy` | 同文件锚点不存在: #111-clippy |
+| docs\05_guides\best_practices.md | CI/CD 测试 | `#41-单元测试` | 同文件锚点不存在: #41-单元测试 |
+| docs\05_guides\best_practices.md | 1.1 节 | `#11-所有权和借用` | 同文件锚点不存在: #11-所有权和借用 |
+| docs\05_guides\best_practices.md | 3. 错误处理（Error Handling） | `#3-错误处理最佳实践` | 同文件锚点不存在: #3-错误处理最佳实践 |
+| docs\05_guides\best_practices.md | 2. 性能优化 | `#2-性能优化最佳实践` | 同文件锚点不存在: #2-性能优化最佳实践 |
+| docs\05_guides\best_practices.md | Criterion | `#121-基准测试` | 同文件锚点不存在: #121-基准测试 |
+| docs\05_guides\best_practices.md | 内存优化 | `#21-内存管理` | 同文件锚点不存在: #21-内存管理 |
+| docs\05_guides\best_practices.md | 迭代器优化 | `#22-迭代器优化` | 同文件锚点不存在: #22-迭代器优化 |
+| docs\05_guides\best_practices.md | 3. 错误处理 | `#3-错误处理最佳实践` | 同文件锚点不存在: #3-错误处理最佳实践 |
+| docs\05_guides\best_practices.md | 5. 文档 | `#5-文档最佳实践` | 同文件锚点不存在: #5-文档最佳实践 |
+| docs\05_guides\best_practices.md | 4. 测试 | `#4-测试最佳实践` | 同文件锚点不存在: #4-测试最佳实践 |
 | docs\05_guides\workflow\01_workflow_theory.md | 14. 工作流理论与形式化模型 {#14-工作流理论与形式化模型} | `#14-工作流理论与形式化模型-14-工作流理论与形式化模型` | 同文件锚点不存在: #14-工作流理论与形式化模型-14-工作流理论与形式化模型 |
 | docs\05_guides\workflow\01_workflow_theory.md | 14.1 工作流基础理论 {#141-工作流基础理论} | `#141-工作流基础理论-141-工作流基础理论` | 同文件锚点不存在: #141-工作流基础理论-141-工作流基础理论 |
 | docs\05_guides\workflow\01_workflow_theory.md | 14.1.1 工作流模型分类 {#1411-工作流模型分类} | `#1411-工作流模型分类-1411-工作流模型分类` | 同文件锚点不存在: #1411-工作流模型分类-1411-工作流模型分类 |
@@ -3331,12 +2980,12 @@
 | docs\research_notes\10_00_comprehensive_summary.md | Rust 研究笔记：完整总结综合 {#rust-研究笔记完整总结综合} | `#rust-研究笔记完整总结综合-rust-研究笔记完整总结综合` | 同文件锚点不存在: #rust-研究笔记完整总结综合-rust-研究笔记完整总结综合 |
 | docs\research_notes\10_00_comprehensive_summary.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_00_comprehensive_summary.md | 3.1 按领域一句话 {#31-按领域一句话} | `#31-按领域一句话-31-按领域一句话` | 同文件锚点不存在: #31-按领域一句话-31-按领域一句话 |
-| docs\research_notes\10_00_comprehensive_summary.md | 🆕 Rust 1.97.0+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新} | `#-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新` | 同文件锚点不存在: #-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新 |
-| docs\research_notes\10_00_comprehensive_summary.md | 🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
+| docs\research_notes\10_00_comprehensive_summary.md | 🆕 Rust 1.97.0+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新} | `#-rust-1970--edition-2024-研究更新-rust-1960-edition-2024-研究更新` | 同文件锚点不存在: #-rust-1970--edition-2024-研究更新-rust-1960-edition-2024-研究更新 |
+| docs\research_notes\10_00_comprehensive_summary.md | 🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1970--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1970--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
 | docs\research_notes\10_00_organization_and_navigation.md | research\_notes 组织架构与导航 {#research\_notes-组织架构与导航} | `#research_notes-组织架构与导航-research_notes-组织架构与导航` | 同文件锚点不存在: #research_notes-组织架构与导航-research_notes-组织架构与导航 |
 | docs\research_notes\10_00_organization_and_navigation.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_00_organization_and_navigation.md | 七、与顶层 docs 的衔接 {#七与顶层-docs-的衔接} | `#七与顶层-docs-的衔接-七与顶层-docs-的衔接` | 同文件锚点不存在: #七与顶层-docs-的衔接-七与顶层-docs-的衔接 |
-| docs\research_notes\10_00_organization_and_navigation.md | 🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
+| docs\research_notes\10_00_organization_and_navigation.md | 🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1970--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1970--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
 | docs\research_notes\10_academic_papers_alignment.md | 7.1 顶级会议 {#71-顶级会议} | `#71-顶级会议-71-顶级会议` | 同文件锚点不存在: #71-顶级会议-71-顶级会议 |
 | docs\research_notes\10_academic_papers_alignment.md | 7.2 顶级期刊 {#72-顶级期刊} | `#72-顶级期刊-72-顶级期刊` | 同文件锚点不存在: #72-顶级期刊-72-顶级期刊 |
 | docs\research_notes\10_academic_papers_alignment.md | 8.1 ACM Digital Library (ACM DL) {#81-acm-digital-library-acm-dl} | `#81-acm-digital-library-acm-dl-81-acm-digital-library-acm-dl` | 同文件锚点不存在: #81-acm-digital-library-acm-dl-81-acm-digital-library-acm-dl |
@@ -3367,8 +3016,8 @@
 | docs\research_notes\10_application_trees.md | 6.1 学习路径文档 {#61-学习路径文档} | `#61-学习路径文档-61-学习路径文档` | 同文件锚点不存在: #61-学习路径文档-61-学习路径文档 |
 | docs\research_notes\10_application_trees.md | 6.2 领域特定资源 {#62-领域特定资源} | `#62-领域特定资源-62-领域特定资源` | 同文件锚点不存在: #62-领域特定资源-62-领域特定资源 |
 | docs\research_notes\10_application_trees.md | 6.3 应用树总览 {#63-应用树总览} | `#63-应用树总览-63-应用树总览` | 同文件锚点不存在: #63-应用树总览-63-应用树总览 |
-| docs\research_notes\10_application_trees.md | 🆕 Rust 1.97.0+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新} | `#-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新` | 同文件锚点不存在: #-rust-1961--edition-2024-研究更新-rust-1960-edition-2024-研究更新 |
-| docs\research_notes\10_application_trees.md | 🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
+| docs\research_notes\10_application_trees.md | 🆕 Rust 1.97.0+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新} | `#-rust-1970--edition-2024-研究更新-rust-1960-edition-2024-研究更新` | 同文件锚点不存在: #-rust-1970--edition-2024-研究更新-rust-1960-edition-2024-研究更新 |
+| docs\research_notes\10_application_trees.md | 🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明} | `#-rust-1970--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明` | 同文件锚点不存在: #-rust-1970--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明 |
 | docs\research_notes\10_argumentation_chain_and_flow.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_argumentation_chain_and_flow.md | 1.1 论证五步法 {#11-论证五步法} | `#11-论证五步法-11-论证五步法` | 同文件锚点不存在: #11-论证五步法-11-论证五步法 |
 | docs\research_notes\10_argumentation_chain_and_flow.md | 1.2 论证流向（双向） {#12-论证流向双向} | `#12-论证流向双向-12-论证流向双向` | 同文件锚点不存在: #12-论证流向双向-12-论证流向双向 |
@@ -3394,7 +3043,7 @@
 | docs\research_notes\10_argumentation_gap_index.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
 | docs\research_notes\10_async_book_alignment.md | Async Book 对齐矩阵 {#async-book-对齐矩阵} | `#async-book-对齐矩阵-async-book-对齐矩阵` | 同文件锚点不存在: #async-book-对齐矩阵-async-book-对齐矩阵 |
 | docs\research_notes\10_async_book_alignment.md | 二、Future 与 async/await {#二future-与-asyncawait} | `#二future-与-asyncawait-二future-与-asyncawait` | 同文件锚点不存在: #二future-与-asyncawait-二future-与-asyncawait |
-| docs\research_notes\10_async_book_alignment.md | 三、Pin 与自引用（Reference） {#三pin-与自引用} | `#三pin-与自引用-三pin-与自引用` | 同文件锚点不存在: #三pin-与自引用-三pin-与自引用 |
+| docs\research_notes\10_async_book_alignment.md | 三、Pin 与自引用 {#三pin-与自引用} | `#三pin-与自引用-三pin-与自引用` | 同文件锚点不存在: #三pin-与自引用-三pin-与自引用 |
 | docs\research_notes\10_async_book_alignment.md | 四、执行器与 Waker {#四执行器与-waker} | `#四执行器与-waker-四执行器与-waker` | 同文件锚点不存在: #四执行器与-waker-四执行器与-waker |
 | docs\research_notes\10_async_book_alignment.md | 五、IO 与并发 {#五io-与并发} | `#五io-与并发-五io-与并发` | 同文件锚点不存在: #五io-与并发-五io-与并发 |
 | docs\research_notes\10_async_ecosystem_alignment.md | 四、网络与 IO {#四网络与-io} | `#四网络与-io-四网络与-io` | 同文件锚点不存在: #四网络与-io-四网络与-io |
@@ -3407,7 +3056,7 @@
 | docs\research_notes\10_authoritative_alignment_gap_matrix.md | 🔬 experiments/ 实验主题 {#experiments-实验主题} | `#-experiments-实验主题-experiments-实验主题` | 同文件锚点不存在: #-experiments-实验主题-experiments-实验主题 |
 | docs\research_notes\10_authoritative_alignment_gap_matrix.md | 🧮 formal\_methods/ 形式化方法 {#formal\_methods-形式化方法} | `#-formal_methods-形式化方法-formal_methods-形式化方法` | 同文件锚点不存在: #-formal_methods-形式化方法-formal_methods-形式化方法 |
 | docs\research_notes\10_authoritative_alignment_gap_matrix.md | 📐 type\_theory/ 类型理论 {#type\_theory-类型理论} | `#-type_theory-类型理论-type_theory-类型理论` | 同文件锚点不存在: #-type_theory-类型理论-type_theory-类型理论 |
-| docs\research_notes\10_authoritative_alignment_gap_matrix.md | 📦 formal\_modules/ 形式化模块（Module） {#formal\_modules-形式化模块} | `#-formal_modules-形式化模块-formal_modules-形式化模块` | 同文件锚点不存在: #-formal_modules-形式化模块-formal_modules-形式化模块 |
+| docs\research_notes\10_authoritative_alignment_gap_matrix.md | 📦 formal\_modules/ 形式化模块 {#formal\_modules-形式化模块} | `#-formal_modules-形式化模块-formal_modules-形式化模块` | 同文件锚点不存在: #-formal_modules-形式化模块-formal_modules-形式化模块 |
 | docs\research_notes\10_authoritative_alignment_gap_matrix.md | 🏗️ software\_design\_theory/ 软件设计理论 {#software\_design\_theory-软件设计理论} | `#️-software_design_theory-软件设计理论-software_design_theory-软件设计理论` | 同文件锚点不存在: #️-software_design_theory-软件设计理论-software_design_theory-软件设计理论 |
 | docs\research_notes\10_authoritative_alignment_gap_matrix.md | 🔧 形式化工具 {#形式化工具} | `#-形式化工具-形式化工具` | 同文件锚点不存在: #-形式化工具-形式化工具 |
 | docs\research_notes\10_authoritative_alignment_gap_matrix.md | 🗺️ 后续执行路线图 {#后续执行路线图} | `#️-后续执行路线图-后续执行路线图` | 同文件锚点不存在: #️-后续执行路线图-后续执行路线图 |
@@ -4432,7 +4081,7 @@
 | docs\research_notes\10_learning_path_comprehensive.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
 | docs\research_notes\10_lifetime_cheatsheet.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_lifetime_cheatsheet.md | 'static 生命周期 {#static-生命周期} | `#static-生命周期-static-生命周期` | 同文件锚点不存在: #static-生命周期-static-生命周期 |
-| docs\research_notes\10_lifetime_cheatsheet.md | 高阶Trait Bound (HRTB) {#高阶trait（Trait）-bound-hrtb} | `#高阶trait-bound-hrtb-高阶trait-bound-hrtb` | 同文件锚点不存在: #高阶trait-bound-hrtb-高阶trait-bound-hrtb |
+| docs\research_notes\10_lifetime_cheatsheet.md | 高阶Trait Bound (HRTB) {#高阶trait-bound-hrtb} | `#高阶trait-bound-hrtb-高阶trait-bound-hrtb` | 同文件锚点不存在: #高阶trait-bound-hrtb-高阶trait-bound-hrtb |
 | docs\research_notes\10_lifetime_cheatsheet.md | 模式1: 输入输出相同 {#模式1-输入输出相同} | `#模式1-输入输出相同-模式1-输入输出相同` | 同文件锚点不存在: #模式1-输入输出相同-模式1-输入输出相同 |
 | docs\research_notes\10_lifetime_cheatsheet.md | 模式2: 返回self的引用 {#模式2-返回self的引用} | `#模式2-返回self的引用-模式2-返回self的引用` | 同文件锚点不存在: #模式2-返回self的引用-模式2-返回self的引用 |
 | docs\research_notes\10_lifetime_cheatsheet.md | 模式3: 独立生命周期 {#模式3-独立生命周期} | `#模式3-独立生命周期-模式3-独立生命周期` | 同文件锚点不存在: #模式3-独立生命周期-模式3-独立生命周期 |
@@ -4445,7 +4094,7 @@
 | docs\research_notes\10_lifetime_cheatsheet.md | 🌍 权威国际化资源链接 {#权威国际化资源链接} | `#-权威国际化资源链接-权威国际化资源链接` | 同文件锚点不存在: #-权威国际化资源链接-权威国际化资源链接 |
 | docs\research_notes\10_lifetime_cheatsheet.md | Rust Reference 核心章节 {#rust-reference-核心章节} | `#rust-reference-核心章节-rust-reference-核心章节` | 同文件锚点不存在: #rust-reference-核心章节-rust-reference-核心章节 |
 | docs\research_notes\10_lifetime_cheatsheet.md | The Rust Programming Language 核心章节 {#the-rust-programming-language-核心章节} | `#the-rust-programming-language-核心章节-the-rust-programming-language-核心章节` | 同文件锚点不存在: #the-rust-programming-language-核心章节-the-rust-programming-language-核心章节 |
-| docs\research_notes\10_lifetime_cheatsheet.md | Rust Standard Library 核心 API / 模块（Module） {#rust-standard-library-核心-api-模块} | `#rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块` | 同文件锚点不存在: #rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块 |
+| docs\research_notes\10_lifetime_cheatsheet.md | Rust Standard Library 核心 API / 模块 {#rust-standard-library-核心-api-模块} | `#rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块` | 同文件锚点不存在: #rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块 |
 | docs\research_notes\10_lifetime_cheatsheet.md | Rust By Example / Rust Cookbook / cheats.rs {#rust-by-example-rust-cookbook-cheatsrs} | `#rust-by-example--rust-cookbook--cheatsrs-rust-by-example-rust-cookbook-cheatsrs` | 同文件锚点不存在: #rust-by-example--rust-cookbook--cheatsrs-rust-by-example-rust-cookbook-cheatsrs |
 | docs\research_notes\10_lifetime_cheatsheet.md | Reference Lifetime 章节 {#reference-lifetime-章节} | `#reference-lifetime-章节-reference-lifetime-章节` | 同文件锚点不存在: #reference-lifetime-章节-reference-lifetime-章节 |
 | docs\research_notes\10_lifetime_cheatsheet.md | Rust By Example / Cookbook / cheats.rs {#rust-by-example-cookbook-cheatsrs} | `#rust-by-example--cookbook--cheatsrs-rust-by-example-cookbook-cheatsrs` | 同文件锚点不存在: #rust-by-example--cookbook--cheatsrs-rust-by-example-cookbook-cheatsrs |
@@ -5011,61 +4660,6 @@
 | docs\research_notes\10_tools_guide.md | Cargo Book 重点章节 {#cargo-book-重点章节} | `#cargo-book-重点章节-cargo-book-重点章节` | 同文件锚点不存在: #cargo-book-重点章节-cargo-book-重点章节 |
 | docs\research_notes\10_tools_guide.md | rustc dev guide 重点章节 {#rustc-dev-guide-重点章节} | `#rustc-dev-guide-重点章节-rustc-dev-guide-重点章节` | 同文件锚点不存在: #rustc-dev-guide-重点章节-rustc-dev-guide-重点章节 |
 | docs\research_notes\10_tools_guide.md | 🆕 权威国际化内容升级 (Rust 1.97.0+) {#权威国际化内容升级-rust-1960} | `#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960` | 同文件锚点不存在: #-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960 |
-| docs\research_notes\10_tutorial_borrow_checker.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\research_notes\10_tutorial_borrow_checker.md | 第六部分：NLL (非词法生命周期（Lifetimes）) {#第六部分nll-非词法生命周期} | `#第六部分nll-非词法生命周期-第六部分nll-非词法生命周期` | 同文件锚点不存在: #第六部分nll-非词法生命周期-第六部分nll-非词法生命周期 |
-| docs\research_notes\10_tutorial_borrow_checker.md | 错误1: 值被移动后使用 {#错误1-值被移动后使用} | `#错误1-值被移动后使用-错误1-值被移动后使用` | 同文件锚点不存在: #错误1-值被移动后使用-错误1-值被移动后使用 |
-| docs\research_notes\10_tutorial_borrow_checker.md | 错误2: 在借用期间修改 {#错误2-在借用期间修改} | `#错误2-在借用期间修改-错误2-在借用期间修改` | 同文件锚点不存在: #错误2-在借用期间修改-错误2-在借用期间修改 |
-| docs\research_notes\10_tutorial_borrow_checker.md | 错误3: 返回局部引用 {#错误3-返回局部引用} | `#错误3-返回局部引用-错误3-返回局部引用` | 同文件锚点不存在: #错误3-返回局部引用-错误3-返回局部引用 |
-| docs\research_notes\10_tutorial_borrow_checker.md | 规则1: 要么多个不可变借用，要么一个可变借用 {#规则1-要么多个不可变借用要么一个可变借用} | `#规则1-要么多个不可变借用要么一个可变借用-规则1-要么多个不可变借用要么一个可变借用` | 同文件锚点不存在: #规则1-要么多个不可变借用要么一个可变借用-规则1-要么多个不可变借用要么一个可变借用 |
-| docs\research_notes\10_tutorial_borrow_checker.md | 规则2: 引用必须始终有效 {#规则2-引用必须始终有效} | `#规则2-引用必须始终有效-规则2-引用必须始终有效` | 同文件锚点不存在: #规则2-引用必须始终有效-规则2-引用必须始终有效 |
-| docs\research_notes\10_tutorial_borrow_checker.md | 错误1: 借用冲突 {#错误1-借用冲突} | `#错误1-借用冲突-错误1-借用冲突` | 同文件锚点不存在: #错误1-借用冲突-错误1-借用冲突 |
-| docs\research_notes\10_tutorial_borrow_checker.md | 错误2: 悬垂引用 {#错误2-悬垂引用} | `#错误2-悬垂引用-错误2-悬垂引用` | 同文件锚点不存在: #错误2-悬垂引用-错误2-悬垂引用 |
-| docs\research_notes\10_tutorial_borrow_checker.md | NLL (非词法生命周期) {#nll-非词法生命周期} | `#nll-非词法生命周期-nll-非词法生命周期` | 同文件锚点不存在: #nll-非词法生命周期-nll-非词法生命周期 |
-| docs\research_notes\10_tutorial_borrow_checker.md | 定理 T-BR1 {#定理-t-br1} | `#定理-t-br1-定理-t-br1` | 同文件锚点不存在: #定理-t-br1-定理-t-br1 |
-| docs\research_notes\10_tutorial_borrow_checker.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
-| docs\research_notes\10_tutorial_borrow_checker.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
-| docs\research_notes\10_tutorial_concurrency_models.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\research_notes\10_tutorial_concurrency_models.md | 并发 vs 并行 {#并发-vs-并行} | `#并发-vs-并行-并发-vs-并行` | 同文件锚点不存在: #并发-vs-并行-并发-vs-并行 |
-| docs\research_notes\10_tutorial_concurrency_models.md | Send 和 Sync {#send-和-sync} | `#send-和-sync-send-和-sync` | 同文件锚点不存在: #send-和-sync-send-和-sync |
-| docs\research_notes\10_tutorial_concurrency_models.md | Mutex vs RwLock {#mutex-vs-rwlock} | `#mutex-vs-rwlock-mutex-vs-rwlock` | 同文件锚点不存在: #mutex-vs-rwlock-mutex-vs-rwlock |
-| docs\research_notes\10_tutorial_concurrency_models.md | Fork-Join {#fork-join} | `#fork-join-fork-join` | 同文件锚点不存在: #fork-join-fork-join |
-| docs\research_notes\10_tutorial_concurrency_models.md | 生产者-消费者 {#生产者-消费者} | `#生产者-消费者-生产者-消费者` | 同文件锚点不存在: #生产者-消费者-生产者-消费者 |
-| docs\research_notes\10_tutorial_concurrency_models.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
-| docs\research_notes\10_tutorial_concurrency_models.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
-| docs\research_notes\10_tutorial_lifetimes.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\research_notes\10_tutorial_lifetimes.md | 'static 生命周期 {#static-生命周期} | `#static-生命周期-static-生命周期` | 同文件锚点不存在: #static-生命周期-static-生命周期 |
-| docs\research_notes\10_tutorial_lifetimes.md | 模式1: 输入输出相同 {#模式1-输入输出相同} | `#模式1-输入输出相同-模式1-输入输出相同` | 同文件锚点不存在: #模式1-输入输出相同-模式1-输入输出相同 |
-| docs\research_notes\10_tutorial_lifetimes.md | 模式2: 多个独立生命周期 {#模式2-多个独立生命周期} | `#模式2-多个独立生命周期-模式2-多个独立生命周期` | 同文件锚点不存在: #模式2-多个独立生命周期-模式2-多个独立生命周期 |
-| docs\research_notes\10_tutorial_lifetimes.md | 模式3: 方法 {#模式3-方法} | `#模式3-方法-模式3-方法` | 同文件锚点不存在: #模式3-方法-模式3-方法 |
-| docs\research_notes\10_tutorial_lifetimes.md | NLL (非词法生命周期) {#nll-非词法生命周期} | `#nll-非词法生命周期-nll-非词法生命周期` | 同文件锚点不存在: #nll-非词法生命周期-nll-非词法生命周期 |
-| docs\research_notes\10_tutorial_lifetimes.md | HRTB (高阶trait（Trait） bound) {#hrtb-高阶trait-bound} | `#hrtb-高阶trait-bound-hrtb-高阶trait-bound` | 同文件锚点不存在: #hrtb-高阶trait-bound-hrtb-高阶trait-bound |
-| docs\research_notes\10_tutorial_lifetimes.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
-| docs\research_notes\10_tutorial_lifetimes.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
-| docs\research_notes\10_tutorial_ownership_safety.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\research_notes\10_tutorial_ownership_safety.md | 浅复制的问题(Copy vs Move) {#浅复制的问题copy-vs-move} | `#浅复制的问题copy-vs-move-浅复制的问题copy-vs-move` | 同文件锚点不存在: #浅复制的问题copy-vs-move-浅复制的问题copy-vs-move |
-| docs\research_notes\10_tutorial_ownership_safety.md | 第四部分：Copy trait {#第四部分copy-trait} | `#第四部分copy-trait-第四部分copy-trait` | 同文件锚点不存在: #第四部分copy-trait-第四部分copy-trait |
-| docs\research_notes\10_tutorial_ownership_safety.md | String vs \&str {#string-vs-str} | `#string-vs-str-string-vs-str` | 同文件锚点不存在: #string-vs-str-string-vs-str |
-| docs\research_notes\10_tutorial_ownership_safety.md | 模式1: 所有权转移 {#模式1-所有权转移} | `#模式1-所有权转移-模式1-所有权转移` | 同文件锚点不存在: #模式1-所有权转移-模式1-所有权转移 |
-| docs\research_notes\10_tutorial_ownership_safety.md | 模式2: 借用检查 {#模式2-借用检查} | `#模式2-借用检查-模式2-借用检查` | 同文件锚点不存在: #模式2-借用检查-模式2-借用检查 |
-| docs\research_notes\10_tutorial_ownership_safety.md | 模式3: 可变借用（Mutable Borrow） {#模式3-可变借用} | `#模式3-可变借用-模式3-可变借用` | 同文件锚点不存在: #模式3-可变借用-模式3-可变借用 |
-| docs\research_notes\10_tutorial_ownership_safety.md | 定理 T-OW2: 所有权唯一性 {#定理-t-ow2-所有权唯一性} | `#定理-t-ow2-所有权唯一性-定理-t-ow2-所有权唯一性` | 同文件锚点不存在: #定理-t-ow2-所有权唯一性-定理-t-ow2-所有权唯一性 |
-| docs\research_notes\10_tutorial_ownership_safety.md | 定理 T-BR1: 数据竞争自由 {#定理-t-br1-数据竞争自由} | `#定理-t-br1-数据竞争自由-定理-t-br1-数据竞争自由` | 同文件锚点不存在: #定理-t-br1-数据竞争自由-定理-t-br1-数据竞争自由 |
-| docs\research_notes\10_tutorial_ownership_safety.md | 示例1: 函数参数传递 {#示例1-函数参数传递} | `#示例1-函数参数传递-示例1-函数参数传递` | 同文件锚点不存在: #示例1-函数参数传递-示例1-函数参数传递 |
-| docs\research_notes\10_tutorial_ownership_safety.md | 示例2: 返回值 {#示例2-返回值} | `#示例2-返回值-示例2-返回值` | 同文件锚点不存在: #示例2-返回值-示例2-返回值 |
-| docs\research_notes\10_tutorial_ownership_safety.md | 示例3: 借用临时使用 {#示例3-借用临时使用} | `#示例3-借用临时使用-示例3-借用临时使用` | 同文件锚点不存在: #示例3-借用临时使用-示例3-借用临时使用 |
-| docs\research_notes\10_tutorial_ownership_safety.md | Q: 所有权检查有运行时（Runtime）开销吗？ {#q-所有权检查有运行时开销吗} | `#q-所有权检查有运行时开销吗-q-所有权检查有运行时开销吗` | 同文件锚点不存在: #q-所有权检查有运行时开销吗-q-所有权检查有运行时开销吗 |
-| docs\research_notes\10_tutorial_ownership_safety.md | Q: 所有权系统限制太多？ {#q-所有权系统限制太多} | `#q-所有权系统限制太多-q-所有权系统限制太多` | 同文件锚点不存在: #q-所有权系统限制太多-q-所有权系统限制太多 |
-| docs\research_notes\10_tutorial_ownership_safety.md | Q: 学习所有权很难？ {#q-学习所有权很难} | `#q-学习所有权很难-q-学习所有权很难` | 同文件锚点不存在: #q-学习所有权很难-q-学习所有权很难 |
-| docs\research_notes\10_tutorial_ownership_safety.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
-| docs\research_notes\10_tutorial_ownership_safety.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
-| docs\research_notes\10_tutorial_type_system.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\research_notes\10_tutorial_type_system.md | if let简化 {#if-let简化} | `#if-let简化-if-let简化` | 同文件锚点不存在: #if-let简化-if-let简化 |
-| docs\research_notes\10_tutorial_type_system.md | 动态大小类型 (DST) {#动态大小类型-dst} | `#动态大小类型-dst-动态大小类型-dst` | 同文件锚点不存在: #动态大小类型-dst-动态大小类型-dst |
-| docs\research_notes\10_tutorial_type_system.md | 进展性 (Progress) {#进展性-progress} | `#进展性-progress-进展性-progress` | 同文件锚点不存在: #进展性-progress-进展性-progress |
-| docs\research_notes\10_tutorial_type_system.md | 保持性 (Preservation) {#保持性-preservation} | `#保持性-preservation-保持性-preservation` | 同文件锚点不存在: #保持性-preservation-保持性-preservation |
-| docs\research_notes\10_tutorial_type_system.md | 定理 T-TY3 {#定理-t-ty3} | `#定理-t-ty3-定理-t-ty3` | 同文件锚点不存在: #定理-t-ty3-定理-t-ty3 |
-| docs\research_notes\10_tutorial_type_system.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
-| docs\research_notes\10_tutorial_type_system.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
 | docs\research_notes\10_unified_systematic_framework.md | Rust 研究笔记：全局统一系统化框架 {#rust-研究笔记全局统一系统化框架} | `#rust-研究笔记全局统一系统化框架-rust-研究笔记全局统一系统化框架` | 同文件锚点不存在: #rust-研究笔记全局统一系统化框架-rust-研究笔记全局统一系统化框架 |
 | docs\research_notes\10_unified_systematic_framework.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_unified_systematic_framework.md | 🎯 框架宗旨 {#框架宗旨} | `#-框架宗旨-框架宗旨` | 同文件锚点不存在: #-框架宗旨-框架宗旨 |
@@ -5381,10 +4975,10 @@
 | docs\research_notes\experiments\README.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
 | docs\research_notes\experiments\README.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
 | docs\research_notes\formal_methods\00_completeness_gaps.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\research_notes\formal_methods\00_completeness_gaps.md | 1. 内存与所有权（Ownership）族缺口 {#1-内存与所有权族缺口} | `#1-内存与所有权族缺口-1-内存与所有权族缺口` | 同文件锚点不存在: #1-内存与所有权族缺口-1-内存与所有权族缺口 |
-| docs\research_notes\formal_methods\00_completeness_gaps.md | 2. 并发与异步（Async）族缺口 {#2-并发与异步族缺口} | `#2-并发与异步族缺口-2-并发与异步族缺口` | 同文件锚点不存在: #2-并发与异步族缺口-2-并发与异步族缺口 |
+| docs\research_notes\formal_methods\00_completeness_gaps.md | 1. 内存与所有权族缺口 {#1-内存与所有权族缺口} | `#1-内存与所有权族缺口-1-内存与所有权族缺口` | 同文件锚点不存在: #1-内存与所有权族缺口-1-内存与所有权族缺口 |
+| docs\research_notes\formal_methods\00_completeness_gaps.md | 2. 并发与异步族缺口 {#2-并发与异步族缺口} | `#2-并发与异步族缺口-2-并发与异步族缺口` | 同文件锚点不存在: #2-并发与异步族缺口-2-并发与异步族缺口 |
 | docs\research_notes\formal_methods\00_completeness_gaps.md | 3. FFI 与不安全族缺口 {#3-ffi-与不安全族缺口} | `#3-ffi-与不安全族缺口-3-ffi-与不安全族缺口` | 同文件锚点不存在: #3-ffi-与不安全族缺口-3-ffi-与不安全族缺口 |
-| docs\research_notes\formal_methods\00_completeness_gaps.md | 4. 控制流与模式匹配（Pattern Matching）族缺口 {#4-控制流与模式匹配族缺口} | `#4-控制流与模式匹配族缺口-4-控制流与模式匹配族缺口` | 同文件锚点不存在: #4-控制流与模式匹配族缺口-4-控制流与模式匹配族缺口 |
+| docs\research_notes\formal_methods\00_completeness_gaps.md | 4. 控制流与模式匹配族缺口 {#4-控制流与模式匹配族缺口} | `#4-控制流与模式匹配族缺口-4-控制流与模式匹配族缺口` | 同文件锚点不存在: #4-控制流与模式匹配族缺口-4-控制流与模式匹配族缺口 |
 | docs\research_notes\formal_methods\00_completeness_gaps.md | 5. Rust 1.93 新增/变更与 formal\_methods 衔接缺口 {#5-rust-193-新增变更与-formal\_methods-衔接缺口} | `#5-rust-193-新增变更与-formal_methods-衔接缺口-5-rust-193-新增变更与-formal_methods-衔接缺口` | 同文件锚点不存在: #5-rust-193-新增变更与-formal_methods-衔接缺口-5-rust-193-新增变更与-formal_methods-衔接缺口 |
 | docs\research_notes\formal_methods\00_completeness_gaps.md | 6. 缺口汇总与优先级 {#6-缺口汇总与优先级} | `#6-缺口汇总与优先级-6-缺口汇总与优先级` | 同文件锚点不存在: #6-缺口汇总与优先级-6-缺口汇总与优先级 |
 | docs\research_notes\formal_methods\00_completeness_gaps.md | 7. 与已有文档的衔接 {#7-与已有文档的衔接} | `#7-与已有文档的衔接-7-与已有文档的衔接` | 同文件锚点不存在: #7-与已有文档的衔接-7-与已有文档的衔接 |
@@ -5441,7 +5035,7 @@
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 📚 理论基础 {#理论基础} | `#-理论基础-理论基础` | 同文件锚点不存在: #-理论基础-理论基础 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 1. RustBelt: Logical Foundations for the Future of Safe Systems Programming {#1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming} | `#1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming-1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming` | 同文件锚点不存在: #1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming-1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 2. The RustBelt Project: Formalizing Rust's Type System {#2-the-rustbelt-project-formalizing-rusts-type-system} | `#2-the-rustbelt-project-formalizing-rusts-type-system-2-the-rustbelt-project-formalizing-rusts-type-system` | 同文件锚点不存在: #2-the-rustbelt-project-formalizing-rusts-type-system-2-the-rustbelt-project-formalizing-rusts-type-system |
-| docs\research_notes\formal_methods\10_borrow_checker_proof.md | MIT 课程对齐：内存安全（Memory Safety）与数据竞争自由 {#mit-课程对齐内存安全与数据竞争自由} | `#mit-课程对齐内存安全与数据竞争自由-mit-课程对齐内存安全与数据竞争自由` | 同文件锚点不存在: #mit-课程对齐内存安全与数据竞争自由-mit-课程对齐内存安全与数据竞争自由 |
+| docs\research_notes\formal_methods\10_borrow_checker_proof.md | MIT 课程对齐：内存安全与数据竞争自由 {#mit-课程对齐内存安全与数据竞争自由} | `#mit-课程对齐内存安全与数据竞争自由-mit-课程对齐内存安全与数据竞争自由` | 同文件锚点不存在: #mit-课程对齐内存安全与数据竞争自由-mit-课程对齐内存安全与数据竞争自由 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | MIT 6.826: Computer Systems Security 形式化对比 {#mit-6826-computer-systems-security-形式化对比} | `#mit-6826-computer-systems-security-形式化对比-mit-6826-computer-systems-security-形式化对比` | 同文件锚点不存在: #mit-6826-computer-systems-security-形式化对比-mit-6826-computer-systems-security-形式化对比 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | MIT 6.858: Computer Systems 与 Symbolic Execution {#mit-6858-computer-systems-与-symbolic-execution} | `#mit-6858-computer-systems-与-symbolic-execution-mit-6858-computer-systems-与-symbolic-execution` | 同文件锚点不存在: #mit-6858-computer-systems-与-symbolic-execution-mit-6858-computer-systems-与-symbolic-execution |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 数据竞争自由与 MIT 课程的联系 {#数据竞争自由与-mit-课程的联系} | `#数据竞争自由与-mit-课程的联系-数据竞争自由与-mit-课程的联系` | 同文件锚点不存在: #数据竞争自由与-mit-课程的联系-数据竞争自由与-mit-课程的联系 |
@@ -5452,7 +5046,7 @@
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | Resource Invariants 与 Mutex {#resource-invariants-与-mutex} | `#resource-invariants-与-mutex-resource-invariants-与-mutex` | 同文件锚点不存在: #resource-invariants-与-mutex-resource-invariants-与-mutex |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | Ghost State 与 Unsafe 契约 {#ghost-state-与-unsafe-契约} | `#ghost-state-与-unsafe-契约-ghost-state-与-unsafe-契约` | 同文件锚点不存在: #ghost-state-与-unsafe-契约-ghost-state-与-unsafe-契约 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | CMU 15-799 并发验证对齐表 {#cmu-15-799-并发验证对齐表} | `#cmu-15-799-并发验证对齐表-cmu-15-799-并发验证对齐表` | 同文件锚点不存在: #cmu-15-799-并发验证对齐表-cmu-15-799-并发验证对齐表 |
-| docs\research_notes\formal_methods\10_borrow_checker_proof.md | 差异分析：Rust 如何解决 MIT 课程中的并发安全（Concurrency Safety）问题 {#差异分析rust-如何解决-mit-课程中的并发安全问题} | `#差异分析rust-如何解决-mit-课程中的并发安全问题-差异分析rust-如何解决-mit-课程中的并发安全问题` | 同文件锚点不存在: #差异分析rust-如何解决-mit-课程中的并发安全问题-差异分析rust-如何解决-mit-课程中的并发安全问题 |
+| docs\research_notes\formal_methods\10_borrow_checker_proof.md | 差异分析：Rust 如何解决 MIT 课程中的并发安全问题 {#差异分析rust-如何解决-mit-课程中的并发安全问题} | `#差异分析rust-如何解决-mit-课程中的并发安全问题-差异分析rust-如何解决-mit-课程中的并发安全问题` | 同文件锚点不存在: #差异分析rust-如何解决-mit-课程中的并发安全问题-差异分析rust-如何解决-mit-课程中的并发安全问题 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 🆕 最新别名模型与操作语义（Tree Borrows / RustSEM / RustBelt / Oxide） {#最新别名模型与操作语义tree-borrows-rustsem-rustbelt-oxide} | `#-最新别名模型与操作语义tree-borrows--rustsem--rustbelt--oxide-最新别名模型与操作语义tree-borrows-rustsem-rustbelt-oxide` | 同文件锚点不存在: #-最新别名模型与操作语义tree-borrows--rustsem--rustbelt--oxide-最新别名模型与操作语义tree-borrows-rustsem-rustbelt-oxide |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 1. Tree Borrows：借用检查器的别名语义精化 {#1-tree-borrows借用检查器的别名语义精化} | `#1-tree-borrows借用检查器的别名语义精化-1-tree-borrows借用检查器的别名语义精化` | 同文件锚点不存在: #1-tree-borrows借用检查器的别名语义精化-1-tree-borrows借用检查器的别名语义精化 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 2. RustSEM：内存级借用规则的可执行语义 {#2-rustsem内存级借用规则的可执行语义} | `#2-rustsem内存级借用规则的可执行语义-2-rustsem内存级借用规则的可执行语义` | 同文件锚点不存在: #2-rustsem内存级借用规则的可执行语义-2-rustsem内存级借用规则的可执行语义 |
@@ -5470,11 +5064,11 @@
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | Rust 对应 {#rust-对应} | `#rust-对应-rust-对应` | 同文件锚点不存在: #rust-对应-rust-对应 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | ⚠️ 反例：违反借用规则导致数据竞争 {#反例违反借用规则导致数据竞争} | `#️-反例违反借用规则导致数据竞争-反例违反借用规则导致数据竞争` | 同文件锚点不存在: #️-反例违反借用规则导致数据竞争-反例违反借用规则导致数据竞争 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 💻 代码示例与实践 {#代码示例与实践} | `#-代码示例与实践-代码示例与实践` | 同文件锚点不存在: #-代码示例与实践-代码示例与实践 |
-| docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 1：不可变借用（Mutable Borrow） {#示例-1不可变借用} | `#示例-1不可变借用-示例-1不可变借用` | 同文件锚点不存在: #示例-1不可变借用-示例-1不可变借用 |
+| docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 1：不可变借用 {#示例-1不可变借用} | `#示例-1不可变借用-示例-1不可变借用` | 同文件锚点不存在: #示例-1不可变借用-示例-1不可变借用 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 2：可变借用 {#示例-2可变借用} | `#示例-2可变借用-示例-2可变借用` | 同文件锚点不存在: #示例-2可变借用-示例-2可变借用 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 3：借用检查器拒绝数据竞争 {#示例-3借用检查器拒绝数据竞争} | `#示例-3借用检查器拒绝数据竞争-示例-3借用检查器拒绝数据竞争` | 同文件锚点不存在: #示例-3借用检查器拒绝数据竞争-示例-3借用检查器拒绝数据竞争 |
-| docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 4：借用作用域与生命周期（Lifetimes） {#示例-4借用作用域与生命周期} | `#示例-4借用作用域与生命周期-示例-4借用作用域与生命周期` | 同文件锚点不存在: #示例-4借用作用域与生命周期-示例-4借用作用域与生命周期 |
-| docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 5：借用检查器检测悬垂引用（Reference） {#示例-5借用检查器检测悬垂引用} | `#示例-5借用检查器检测悬垂引用-示例-5借用检查器检测悬垂引用` | 同文件锚点不存在: #示例-5借用检查器检测悬垂引用-示例-5借用检查器检测悬垂引用 |
+| docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 4：借用作用域与生命周期 {#示例-4借用作用域与生命周期} | `#示例-4借用作用域与生命周期-示例-4借用作用域与生命周期` | 同文件锚点不存在: #示例-4借用作用域与生命周期-示例-4借用作用域与生命周期 |
+| docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 5：借用检查器检测悬垂引用 {#示例-5借用检查器检测悬垂引用} | `#示例-5借用检查器检测悬垂引用-示例-5借用检查器检测悬垂引用` | 同文件锚点不存在: #示例-5借用检查器检测悬垂引用-示例-5借用检查器检测悬垂引用 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 6：复杂借用场景 {#示例-6复杂借用场景} | `#示例-6复杂借用场景-示例-6复杂借用场景` | 同文件锚点不存在: #示例-6复杂借用场景-示例-6复杂借用场景 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 🔗 系统集成与实际应用 {#系统集成与实际应用} | `#-系统集成与实际应用-系统集成与实际应用` | 同文件锚点不存在: #-系统集成与实际应用-系统集成与实际应用 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | ✅ 证明目标 {#证明目标} | `#-证明目标-证明目标` | 同文件锚点不存在: #-证明目标-证明目标 |
@@ -5562,115 +5156,9 @@
 | docs\research_notes\formal_methods\10_macro_system.md | 反例 1：宏规则歧义 {#反例-1宏规则歧义} | `#反例-1宏规则歧义-反例-1宏规则歧义` | 同文件锚点不存在: #反例-1宏规则歧义-反例-1宏规则歧义 |
 | docs\research_notes\formal_methods\10_macro_system.md | 反例 2：过程宏生成非法代码 {#反例-2过程宏生成非法代码} | `#反例-2过程宏生成非法代码-反例-2过程宏生成非法代码` | 同文件锚点不存在: #反例-2过程宏生成非法代码-反例-2过程宏生成非法代码 |
 | docs\research_notes\formal_methods\10_ownership_model.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 📊 目录 {#目录-1} | `#-目录-目录-1` | 同文件锚点不存在: #-目录-目录-1 |
 | docs\research_notes\formal_methods\10_ownership_model.md | 🎯 研究目标 {#研究目标} | `#-研究目标-研究目标` | 同文件锚点不存在: #-研究目标-研究目标 |
 | docs\research_notes\formal_methods\10_ownership_model.md | 📚 理论基础 {#理论基础} | `#-理论基础-理论基础` | 同文件锚点不存在: #-理论基础-理论基础 |
-| docs\research_notes\formal_methods\10_ownership_model.md | Rust 所有权三原则 {#rust-所有权三原则} | `#rust-所有权三原则-rust-所有权三原则` | 同文件锚点不存在: #rust-所有权三原则-rust-所有权三原则 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 1. RustBelt: Logical Foundations for the Future of Safe Systems Programming {#1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming} | `#1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming-1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming` | 同文件锚点不存在: #1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming-1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming |
-| docs\research_notes\formal_methods\10_ownership_model.md | **与 RustBelt Iris 框架的详细对应** {#与-rustbelt-iris-框架的详细对应} | `#与-rustbelt-iris-框架的详细对应-与-rustbelt-iris-框架的详细对应` | 同文件锚点不存在: #与-rustbelt-iris-框架的详细对应-与-rustbelt-iris-框架的详细对应 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 2. The RustBelt Project: Formalizing Rust's Type System {#2-the-rustbelt-project-formalizing-rusts-type-system} | `#2-the-rustbelt-project-formalizing-rusts-type-system-2-the-rustbelt-project-formalizing-rusts-type-system` | 同文件锚点不存在: #2-the-rustbelt-project-formalizing-rusts-type-system-2-the-rustbelt-project-formalizing-rusts-type-system |
-| docs\research_notes\formal_methods\10_ownership_model.md | 顶级会议论文对齐 (POPL) {#顶级会议论文对齐-popl} | `#顶级会议论文对齐-popl-顶级会议论文对齐-popl` | 同文件锚点不存在: #顶级会议论文对齐-popl-顶级会议论文对齐-popl |
-| docs\research_notes\formal_methods\10_ownership_model.md | Patina (Microsoft Research) {#patina-microsoft-research} | `#patina-microsoft-research-patina-microsoft-research` | 同文件锚点不存在: #patina-microsoft-research-patina-microsoft-research |
-| docs\research_notes\formal_methods\10_ownership_model.md | Verus (POPL 2023) {#verus-popl-2023} | `#verus-popl-2023-verus-popl-2023` | 同文件锚点不存在: #verus-popl-2023-verus-popl-2023 |
-| docs\research_notes\formal_methods\10_ownership_model.md | Prusti (Viper Framework) {#prusti-viper-framework} | `#prusti-viper-framework-prusti-viper-framework` | 同文件锚点不存在: #prusti-viper-framework-prusti-viper-framework |
-| docs\research_notes\formal_methods\10_ownership_model.md | ICFP (International Conference on Functional Programming) {#icfp-international-conference-on-functional-programming} | `#icfp-international-conference-on-functional-programming-icfp-international-conference-on-functional-programming` | 同文件锚点不存在: #icfp-international-conference-on-functional-programming-icfp-international-conference-on-functional-programming |
-| docs\research_notes\formal_methods\10_ownership_model.md | Linear Types can Change the World (Wadler) {#linear-types-can-change-the-world-wadler} | `#linear-types-can-change-the-world-wadler-linear-types-can-change-the-world-wadler` | 同文件锚点不存在: #linear-types-can-change-the-world-wadler-linear-types-can-change-the-world-wadler |
-| docs\research_notes\formal_methods\10_ownership_model.md | Ownership Types for Flexible Alias Protection {#ownership-types-for-flexible-alias-protection} | `#ownership-types-for-flexible-alias-protection-ownership-types-for-flexible-alias-protection` | 同文件锚点不存在: #ownership-types-for-flexible-alias-protection-ownership-types-for-flexible-alias-protection |
-| docs\research_notes\formal_methods\10_ownership_model.md | CAV (Computer Aided Verification) {#cav-computer-aided-verification} | `#cav-computer-aided-verification-cav-computer-aided-verification` | 同文件锚点不存在: #cav-computer-aided-verification-cav-computer-aided-verification |
-| docs\research_notes\formal_methods\10_ownership_model.md | Kani Rust Verifier {#kani-rust-verifier} | `#kani-rust-verifier-kani-rust-verifier` | 同文件锚点不存在: #kani-rust-verifier-kani-rust-verifier |
-| docs\research_notes\formal_methods\10_ownership_model.md | Mirai (Microsoft Research) {#mirai-microsoft-research} | `#mirai-microsoft-research-mirai-microsoft-research` | 同文件锚点不存在: #mirai-microsoft-research-mirai-microsoft-research |
-| docs\research_notes\formal_methods\10_ownership_model.md | SMACK for Rust {#smack-for-rust} | `#smack-for-rust-smack-for-rust` | 同文件锚点不存在: #smack-for-rust-smack-for-rust |
-| docs\research_notes\formal_methods\10_ownership_model.md | Aeneas 函数式翻译方法 {#aeneas-函数式翻译方法} | `#aeneas-函数式翻译方法-aeneas-函数式翻译方法` | 同文件锚点不存在: #aeneas-函数式翻译方法-aeneas-函数式翻译方法 |
-| docs\research_notes\formal_methods\10_ownership_model.md | Aeneas 核心概念 {#aeneas-核心概念} | `#aeneas-核心概念-aeneas-核心概念` | 同文件锚点不存在: #aeneas-核心概念-aeneas-核心概念 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 1. Characteristic Prophecy Variables (CPV) {#1-characteristic-prophecy-variables-cpv} | `#1-characteristic-prophecy-variables-cpv-1-characteristic-prophecy-variables-cpv` | 同文件锚点不存在: #1-characteristic-prophecy-variables-cpv-1-characteristic-prophecy-variables-cpv |
-| docs\research_notes\formal_methods\10_ownership_model.md | 2. borrow\_generated\_from 关系 {#2-borrow\_generated\_from-关系} | `#2-borrow_generated_from-关系-2-borrow_generated_from-关系` | 同文件锚点不存在: #2-borrow_generated_from-关系-2-borrow_generated_from-关系 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 3. 函数式翻译与所有权 {#3-函数式翻译与所有权} | `#3-函数式翻译与所有权-3-函数式翻译与所有权` | 同文件锚点不存在: #3-函数式翻译与所有权-3-函数式翻译与所有权 |
-| docs\research_notes\formal_methods\10_ownership_model.md | Aeneas 与 RustBelt 对比 {#aeneas-与-rustbelt-对比} | `#aeneas-与-rustbelt-对比-aeneas-与-rustbelt-对比` | 同文件锚点不存在: #aeneas-与-rustbelt-对比-aeneas-与-rustbelt-对比 |
-| docs\research_notes\formal_methods\10_ownership_model.md | Aeneas 验证后端 {#aeneas-验证后端} | `#aeneas-验证后端-aeneas-验证后端` | 同文件锚点不存在: #aeneas-验证后端-aeneas-验证后端 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 🆕 最新形式化成果集成（Tree Borrows / RustSEM / RustBelt / Oxide） {#最新形式化成果集成tree-borrows-rustsem-rustbelt-oxide} | `#-最新形式化成果集成tree-borrows--rustsem--rustbelt--oxide-最新形式化成果集成tree-borrows-rustsem-rustbelt-oxide` | 同文件锚点不存在: #-最新形式化成果集成tree-borrows--rustsem--rustbelt--oxide-最新形式化成果集成tree-borrows-rustsem-rustbelt-oxide |
-| docs\research_notes\formal_methods\10_ownership_model.md | 1. Tree Borrows（PLDI 2025）别名模型 {#1-tree-borrowspldi-2025别名模型} | `#1-tree-borrowspldi-2025别名模型-1-tree-borrowspldi-2025别名模型` | 同文件锚点不存在: #1-tree-borrowspldi-2025别名模型-1-tree-borrowspldi-2025别名模型 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 2. RustSEM（FMSD 2024）可执行操作语义 {#2-rustsemfmsd-2024可执行操作语义} | `#2-rustsemfmsd-2024可执行操作语义-2-rustsemfmsd-2024可执行操作语义` | 同文件锚点不存在: #2-rustsemfmsd-2024可执行操作语义-2-rustsemfmsd-2024可执行操作语义 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 3. RustBelt（POPL 2018）Iris 分离逻辑基础 {#3-rustbeltpopl-2018iris-分离逻辑基础} | `#3-rustbeltpopl-2018iris-分离逻辑基础-3-rustbeltpopl-2018iris-分离逻辑基础` | 同文件锚点不存在: #3-rustbeltpopl-2018iris-分离逻辑基础-3-rustbeltpopl-2018iris-分离逻辑基础 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 4. Oxide（ICFP 2023）类型系统语义 {#4-oxideicfp-2023类型系统语义} | `#4-oxideicfp-2023类型系统语义-4-oxideicfp-2023类型系统语义` | 同文件锚点不存在: #4-oxideicfp-2023类型系统语义-4-oxideicfp-2023类型系统语义 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 5. 国际成果与本项目证明索引的映射 {#5-国际成果与本项目证明索引的映射} | `#5-国际成果与本项目证明索引的映射-5-国际成果与本项目证明索引的映射` | 同文件锚点不存在: #5-国际成果与本项目证明索引的映射-5-国际成果与本项目证明索引的映射 |
-| docs\research_notes\formal_methods\10_ownership_model.md | ETH Zurich (瑞士联邦理工学院) {#eth-zurich-瑞士联邦理工学院} | `#eth-zurich-瑞士联邦理工学院-eth-zurich-瑞士联邦理工学院` | 同文件锚点不存在: #eth-zurich-瑞士联邦理工学院-eth-zurich-瑞士联邦理工学院 |
-| docs\research_notes\formal_methods\10_ownership_model.md | University of Cambridge {#university-of-cambridge} | `#university-of-cambridge-university-of-cambridge` | 同文件锚点不存在: #university-of-cambridge-university-of-cambridge |
-| docs\research_notes\formal_methods\10_ownership_model.md | MIT 课程对齐：计算机系统安全与内存安全 {#mit-课程对齐计算机系统安全与内存安全} | `#mit-课程对齐计算机系统安全与内存安全-mit-课程对齐计算机系统安全与内存安全` | 同文件锚点不存在: #mit-课程对齐计算机系统安全与内存安全-mit-课程对齐计算机系统安全与内存安全 |
-| docs\research_notes\formal_methods\10_ownership_model.md | MIT 6.826: Computer Systems Security {#mit-6826-computer-systems-security} | `#mit-6826-computer-systems-security-mit-6826-computer-systems-security` | 同文件锚点不存在: #mit-6826-computer-systems-security-mit-6826-computer-systems-security |
-| docs\research_notes\formal_methods\10_ownership_model.md | MIT 6.858: Computer Systems {#mit-6858-computer-systems} | `#mit-6858-computer-systems-mit-6858-computer-systems` | 同文件锚点不存在: #mit-6858-computer-systems-mit-6858-computer-systems |
-| docs\research_notes\formal_methods\10_ownership_model.md | Memory Safety vs Capability-based Security 对比分析 {#memory-safety-vs-capability-based-security-对比分析} | `#memory-safety-vs-capability-based-security-对比分析-memory-safety-vs-capability-based-security-对比分析` | 同文件锚点不存在: #memory-safety-vs-capability-based-security-对比分析-memory-safety-vs-capability-based-security-对比分析 |
-| docs\research_notes\formal_methods\10_ownership_model.md | Spatial/Temporal Safety 形式化定义 {#spatialtemporal-safety-形式化定义} | `#spatialtemporal-safety-形式化定义-spatialtemporal-safety-形式化定义` | 同文件锚点不存在: #spatialtemporal-safety-形式化定义-spatialtemporal-safety-形式化定义 |
-| docs\research_notes\formal_methods\10_ownership_model.md | MIT 课程对齐表 {#mit-课程对齐表} | `#mit-课程对齐表-mit-课程对齐表` | 同文件锚点不存在: #mit-课程对齐表-mit-课程对齐表 |
-| docs\research_notes\formal_methods\10_ownership_model.md | Stanford CS110L (Safety in Systems Programming) {#stanford-cs110l-safety-in-systems-programming} | `#stanford-cs110l-safety-in-systems-programming-stanford-cs110l-safety-in-systems-programming` | 同文件锚点不存在: #stanford-cs110l-safety-in-systems-programming-stanford-cs110l-safety-in-systems-programming |
-| docs\research_notes\formal_methods\10_ownership_model.md | Safety without GC: Rust vs Traditional Approaches {#safety-without-gc-rust-vs-traditional-approaches} | `#safety-without-gc-rust-vs-traditional-approaches-safety-without-gc-rust-vs-traditional-approaches` | 同文件锚点不存在: #safety-without-gc-rust-vs-traditional-approaches-safety-without-gc-rust-vs-traditional-approaches |
-| docs\research_notes\formal_methods\10_ownership_model.md | CMU 15-799 (Formal Methods for Systems) {#cmu-15-799-formal-methods-for-systems} | `#cmu-15-799-formal-methods-for-systems-cmu-15-799-formal-methods-for-systems` | 同文件锚点不存在: #cmu-15-799-formal-methods-for-systems-cmu-15-799-formal-methods-for-systems |
-| docs\research_notes\formal_methods\10_ownership_model.md | 分离逻辑与 Rust 所有权 {#分离逻辑与-rust-所有权} | `#分离逻辑与-rust-所有权-分离逻辑与-rust-所有权` | 同文件锚点不存在: #分离逻辑与-rust-所有权-分离逻辑与-rust-所有权 |
-| docs\research_notes\formal_methods\10_ownership_model.md | Hoare Triple 与 Rust {#hoare-triple-与-rust} | `#hoare-triple-与-rust-hoare-triple-与-rust` | 同文件锚点不存在: #hoare-triple-与-rust-hoare-triple-与-rust |
-| docs\research_notes\formal_methods\10_ownership_model.md | Separation Logic 在 Rust 中的体现 {#separation-logic-在-rust-中的体现} | `#separation-logic-在-rust-中的体现-separation-logic-在-rust-中的体现` | 同文件锚点不存在: #separation-logic-在-rust-中的体现-separation-logic-在-rust-中的体现 |
-| docs\research_notes\formal_methods\10_ownership_model.md | CMU 15-799 课程对齐表 {#cmu-15-799-课程对齐表} | `#cmu-15-799-课程对齐表-cmu-15-799-课程对齐表` | 同文件锚点不存在: #cmu-15-799-课程对齐表-cmu-15-799-课程对齐表 |
-| docs\research_notes\formal_methods\10_ownership_model.md | Ferrocene Language Specification (FLS) 对齐 {#ferrocene-language-specification-fls-对齐} | `#ferrocene-language-specification-fls-对齐-ferrocene-language-specification-fls-对齐` | 同文件锚点不存在: #ferrocene-language-specification-fls-对齐-ferrocene-language-specification-fls-对齐 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 差异分析：Rust 如何解决 MIT 课程中的问题 {#差异分析rust-如何解决-mit-课程中的问题} | `#差异分析rust-如何解决-mit-课程中的问题-差异分析rust-如何解决-mit-课程中的问题` | 同文件锚点不存在: #差异分析rust-如何解决-mit-课程中的问题-差异分析rust-如何解决-mit-课程中的问题 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 🔬 形式化定义 {#形式化定义} | `#-形式化定义-形式化定义` | 同文件锚点不存在: #-形式化定义-形式化定义 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 1. 值与环境 {#1-值与环境} | `#1-值与环境-1-值与环境` | 同文件锚点不存在: #1-值与环境-1-值与环境 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 2. 所有权规则 {#2-所有权规则} | `#2-所有权规则-2-所有权规则` | 同文件锚点不存在: #2-所有权规则-2-所有权规则 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 3. 线程安全与并发所有权 {#3-线程安全与并发所有权} | `#3-线程安全与并发所有权-3-线程安全与并发所有权` | 同文件锚点不存在: #3-线程安全与并发所有权-3-线程安全与并发所有权 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 4. 智能指针所有权 {#4-智能指针所有权} | `#4-智能指针所有权-4-智能指针所有权` | 同文件锚点不存在: #4-智能指针所有权-4-智能指针所有权 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 5. 内存安全 {#5-内存安全} | `#5-内存安全-5-内存安全` | 同文件锚点不存在: #5-内存安全-5-内存安全 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **引理 5.1 (无空指针)** {#引理-51-无空指针} | `#引理-51-无空指针-引理-51-无空指针` | 同文件锚点不存在: #引理-51-无空指针-引理-51-无空指针 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **引理 5.2 (无悬垂指针)** {#引理-52-无悬垂指针} | `#引理-52-无悬垂指针-引理-52-无悬垂指针` | 同文件锚点不存在: #引理-52-无悬垂指针-引理-52-无悬垂指针 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **引理 5.3 (无数据竞争)** {#引理-53-无数据竞争} | `#引理-53-无数据竞争-引理-53-无数据竞争` | 同文件锚点不存在: #引理-53-无数据竞争-引理-53-无数据竞争 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **引理 5.4 (无 use-after-free)** {#引理-54-无-use-after-free} | `#引理-54-无-use-after-free-引理-54-无-use-after-free` | 同文件锚点不存在: #引理-54-无-use-after-free-引理-54-无-use-after-free |
-| docs\research_notes\formal_methods\10_ownership_model.md | **与分离逻辑 (Separation Logic) 的正式对应** {#与分离逻辑-separation-logic-的正式对应} | `#与分离逻辑-separation-logic-的正式对应-与分离逻辑-separation-logic-的正式对应` | 同文件锚点不存在: #与分离逻辑-separation-logic-的正式对应-与分离逻辑-separation-logic-的正式对应 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 6. 补充引理与推论 {#6-补充引理与推论} | `#6-补充引理与推论-6-补充引理与推论` | 同文件锚点不存在: #6-补充引理与推论-6-补充引理与推论 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **引理 6.1 (所有权转移的传递性)** {#引理-61-所有权转移的传递性} | `#引理-61-所有权转移的传递性-引理-61-所有权转移的传递性` | 同文件锚点不存在: #引理-61-所有权转移的传递性-引理-61-所有权转移的传递性 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **引理 6.2 (Copy 类型与 Move 类型的行为差异)** {#引理-62-copy-类型与-move-类型的行为差异} | `#引理-62-copy-类型与-move-类型的行为差异-引理-62-copy-类型与-move-类型的行为差异` | 同文件锚点不存在: #引理-62-copy-类型与-move-类型的行为差异-引理-62-copy-类型与-move-类型的行为差异 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **推论 6.3 (Safe Rust 子集的内存安全保证)** {#推论-63-safe-rust-子集的内存安全保证} | `#推论-63-safe-rust-子集的内存安全保证-推论-63-safe-rust-子集的内存安全保证` | 同文件锚点不存在: #推论-63-safe-rust-子集的内存安全保证-推论-63-safe-rust-子集的内存安全保证 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **引理 6.4 (借用与所有权的代数性质)** {#引理-64-借用与所有权的代数性质} | `#引理-64-借用与所有权的代数性质-引理-64-借用与所有权的代数性质` | 同文件锚点不存在: #引理-64-借用与所有权的代数性质-引理-64-借用与所有权的代数性质 |
-| docs\research_notes\formal_methods\10_ownership_model.md | Rust 对应 {#rust-对应} | `#rust-对应-rust-对应` | 同文件锚点不存在: #rust-对应-rust-对应 |
-| docs\research_notes\formal_methods\10_ownership_model.md | ⚠️ 反例：违反所有权规则 {#反例违反所有权规则} | `#️-反例违反所有权规则-反例违反所有权规则` | 同文件锚点不存在: #️-反例违反所有权规则-反例违反所有权规则 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **反例 1: 使用已移动值 (Use After Move)** {#反例-1-使用已移动值-use-after-move} | `#反例-1-使用已移动值-use-after-move-反例-1-使用已移动值-use-after-move` | 同文件锚点不存在: #反例-1-使用已移动值-use-after-move-反例-1-使用已移动值-use-after-move |
-| docs\research_notes\formal_methods\10_ownership_model.md | **反例 2: 双重可变借用 (Double Mutable Borrow)** {#反例-2-双重可变借用-double-mutable-borrow} | `#反例-2-双重可变借用-double-mutable-borrow-反例-2-双重可变借用-double-mutable-borrow` | 同文件锚点不存在: #反例-2-双重可变借用-double-mutable-borrow-反例-2-双重可变借用-double-mutable-borrow |
-| docs\research_notes\formal_methods\10_ownership_model.md | **反例 3: 悬垂引用 (Dangling Reference)** {#反例-3-悬垂引用-dangling-reference} | `#反例-3-悬垂引用-dangling-reference-反例-3-悬垂引用-dangling-reference` | 同文件锚点不存在: #反例-3-悬垂引用-dangling-reference-反例-3-悬垂引用-dangling-reference |
-| docs\research_notes\formal_methods\10_ownership_model.md | **反例 4: 可变与不可变借用共存 (Mixed Borrow Violation)** {#反例-4-可变与不可变借用共存-mixed-borrow-violation} | `#反例-4-可变与不可变借用共存-mixed-borrow-violation-反例-4-可变与不可变借用共存-mixed-borrow-violation` | 同文件锚点不存在: #反例-4-可变与不可变借用共存-mixed-borrow-violation-反例-4-可变与不可变借用共存-mixed-borrow-violation |
-| docs\research_notes\formal_methods\10_ownership_model.md | **反例 5: 部分移动后使用整体 (Partial Move)** {#反例-5-部分移动后使用整体-partial-move} | `#反例-5-部分移动后使用整体-partial-move-反例-5-部分移动后使用整体-partial-move` | 同文件锚点不存在: #反例-5-部分移动后使用整体-partial-move-反例-5-部分移动后使用整体-partial-move |
-| docs\research_notes\formal_methods\10_ownership_model.md | **反例 6: 迭代器失效 (Iterator Invalidation)** {#反例-6-迭代器失效-iterator-invalidation} | `#反例-6-迭代器失效-iterator-invalidation-反例-6-迭代器失效-iterator-invalidation` | 同文件锚点不存在: #反例-6-迭代器失效-iterator-invalidation-反例-6-迭代器失效-iterator-invalidation |
-| docs\research_notes\formal_methods\10_ownership_model.md | **反例 7: 自引用结构移动 (Self-Referential Struct Move)** {#反例-7-自引用结构移动-self-referential-struct-move} | `#反例-7-自引用结构移动-self-referential-struct-move-反例-7-自引用结构移动-self-referential-struct-move` | 同文件锚点不存在: #反例-7-自引用结构移动-self-referential-struct-move-反例-7-自引用结构移动-self-referential-struct-move |
-| docs\research_notes\formal_methods\10_ownership_model.md | **反例 8: 跨线程共享可变状态 (Data Race)** {#反例-8-跨线程共享可变状态-data-race} | `#反例-8-跨线程共享可变状态-data-race-反例-8-跨线程共享可变状态-data-race` | 同文件锚点不存在: #反例-8-跨线程共享可变状态-data-race-反例-8-跨线程共享可变状态-data-race |
-| docs\research_notes\formal_methods\10_ownership_model.md | CVE 关联总结 {#cve-关联总结} | `#cve-关联总结-cve-关联总结` | 同文件锚点不存在: #cve-关联总结-cve-关联总结 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 🌳 公理-定理证明树 {#公理-定理证明树} | `#-公理-定理证明树-公理-定理证明树` | 同文件锚点不存在: #-公理-定理证明树-公理-定理证明树 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总} | `#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总` | 同文件锚点不存在: #概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总 |
-| docs\research_notes\formal_methods\10_ownership_model.md | ✅ 证明目标 {#证明目标} | `#-证明目标-证明目标` | 同文件锚点不存在: #-证明目标-证明目标 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **定理 5: 内存安全 (已证明)** {#定理-5-内存安全-已证明} | `#定理-5-内存安全-已证明-定理-5-内存安全-已证明` | 同文件锚点不存在: #定理-5-内存安全-已证明-定理-5-内存安全-已证明 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **定理 6: 所有权唯一性 (已证明)** {#定理-6-所有权唯一性-已证明} | `#定理-6-所有权唯一性-已证明-定理-6-所有权唯一性-已证明` | 同文件锚点不存在: #定理-6-所有权唯一性-已证明-定理-6-所有权唯一性-已证明 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **定理 7: 内存安全框架 (已证明)** {#定理-7-内存安全框架-已证明} | `#定理-7-内存安全框架-已证明-定理-7-内存安全框架-已证明` | 同文件锚点不存在: #定理-7-内存安全框架-已证明-定理-7-内存安全框架-已证明 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **引理 6.1-6.4: 补充性质 (已证明)** {#引理-61-64-补充性质-已证明} | `#引理-61-64-补充性质-已证明-引理-61-64-补充性质-已证明` | 同文件锚点不存在: #引理-61-64-补充性质-已证明-引理-61-64-补充性质-已证明 |
-| docs\research_notes\formal_methods\10_ownership_model.md | **推论 6.3: Safe Rust 安全保证 (已证明)** {#推论-63-safe-rust-安全保证-已证明} | `#推论-63-safe-rust-安全保证-已证明-推论-63-safe-rust-安全保证-已证明` | 同文件锚点不存在: #推论-63-safe-rust-安全保证-已证明-推论-63-safe-rust-安全保证-已证明 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 💻 代码示例与实践 {#代码示例与实践} | `#-代码示例与实践-代码示例与实践` | 同文件锚点不存在: #-代码示例与实践-代码示例与实践 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 示例 1: 所有权转移 {#示例-1-所有权转移} | `#示例-1-所有权转移-示例-1-所有权转移` | 同文件锚点不存在: #示例-1-所有权转移-示例-1-所有权转移 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 示例 2: 借用 {#示例-2-借用} | `#示例-2-借用-示例-2-借用` | 同文件锚点不存在: #示例-2-借用-示例-2-借用 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 示例 3: 复制语义 {#示例-3-复制语义} | `#示例-3-复制语义-示例-3-复制语义` | 同文件锚点不存在: #示例-3-复制语义-示例-3-复制语义 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 示例 4: 作用域规则 {#示例-4-作用域规则} | `#示例-4-作用域规则-示例-4-作用域规则` | 同文件锚点不存在: #示例-4-作用域规则-示例-4-作用域规则 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 示例 5: 复杂所有权场景 {#示例-5-复杂所有权场景} | `#示例-5-复杂所有权场景-示例-5-复杂所有权场景` | 同文件锚点不存在: #示例-5-复杂所有权场景-示例-5-复杂所有权场景 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 示例 6: 所有权与函数返回 {#示例-6-所有权与函数返回} | `#示例-6-所有权与函数返回-示例-6-所有权与函数返回` | 同文件锚点不存在: #示例-6-所有权与函数返回-示例-6-所有权与函数返回 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 📖 参考文献 {#参考文献-1} | `#-参考文献-参考文献-1` | 同文件锚点不存在: #-参考文献-参考文献-1 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 🔄 研究进展 {#研究进展} | `#-研究进展-研究进展` | 同文件锚点不存在: #-研究进展-研究进展 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 进行中 🔄（已完成） {#进行中-已完成} | `#进行中-已完成-进行中-已完成` | 同文件锚点不存在: #进行中-已完成-进行中-已完成 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 计划中 📋（已完成） {#计划中-已完成} | `#计划中-已完成-计划中-已完成` | 同文件锚点不存在: #计划中-已完成-计划中-已完成 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 示例 7: 所有权转移与函数参数 {#示例-7-所有权转移与函数参数} | `#示例-7-所有权转移与函数参数-示例-7-所有权转移与函数参数` | 同文件锚点不存在: #示例-7-所有权转移与函数参数-示例-7-所有权转移与函数参数 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 示例 8: 复杂所有权场景 - 结构体字段移动 {#示例-8-复杂所有权场景---结构体字段移动} | `#示例-8-复杂所有权场景---结构体字段移动-示例-8-复杂所有权场景---结构体字段移动` | 同文件锚点不存在: #示例-8-复杂所有权场景---结构体字段移动-示例-8-复杂所有权场景---结构体字段移动 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 示例 9: 错误示例 - 使用已移动的值 {#示例-9-错误示例---使用已移动的值} | `#示例-9-错误示例---使用已移动的值-示例-9-错误示例---使用已移动的值` | 同文件锚点不存在: #示例-9-错误示例---使用已移动的值-示例-9-错误示例---使用已移动的值 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 示例 10: 所有权与借用结合 {#示例-10-所有权与借用结合} | `#示例-10-所有权与借用结合-示例-10-所有权与借用结合` | 同文件锚点不存在: #示例-10-所有权与借用结合-示例-10-所有权与借用结合 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 🔗 系统集成与实际应用 {#系统集成与实际应用} | `#-系统集成与实际应用-系统集成与实际应用` | 同文件锚点不存在: #-系统集成与实际应用-系统集成与实际应用 |
-| docs\research_notes\formal_methods\10_ownership_model.md | Rust 1.93 与智能指针扩展（形式化占位） {#rust-193-与智能指针扩展形式化占位} | `#rust-193-与智能指针扩展形式化占位-rust-193-与智能指针扩展形式化占位` | 同文件锚点不存在: #rust-193-与智能指针扩展形式化占位-rust-193-与智能指针扩展形式化占位 |
-| docs\research_notes\formal_methods\10_ownership_model.md | MaybeUninit、原子操作、union、transmute（Phase 4） {#maybeuninit原子操作uniontransmutephase-4} | `#maybeuninit原子操作uniontransmutephase-4-maybeuninit原子操作uniontransmutephase-4` | 同文件锚点不存在: #maybeuninit原子操作uniontransmutephase-4-maybeuninit原子操作uniontransmutephase-4 |
-| docs\research_notes\formal_methods\10_ownership_model.md | Deref/Drop、repr、const \&mut static（Phase 6） {#derefdropreprconst-mut-staticphase-6} | `#derefdropreprconst-mut-staticphase-6-derefdropreprconst-mut-staticphase-6` | 同文件锚点不存在: #derefdropreprconst-mut-staticphase-6-derefdropreprconst-mut-staticphase-6 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 📊 目录 {#目录-1} | `#-目录-目录-1` | 同文件锚点不存在: #-目录-目录-1 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 🎯 研究目标 {#研究目标} | `#-研究目标-研究目标` | 同文件锚点不存在: #-研究目标-研究目标 |
-| docs\research_notes\formal_methods\10_ownership_model.md | 📚 理论基础 {#理论基础} | `#-理论基础-理论基础` | 同文件锚点不存在: #-理论基础-理论基础 |
-| docs\research_notes\formal_methods\10_ownership_model.md | Rust 所有权三原则 {#rust-所有权三原则} | `#rust-所有权三原则-rust-所有权三原则` | 同文件锚点不存在: #rust-所有权三原则-rust-所有权三原则 |
+| docs\research_notes\formal_methods\10_ownership_model.md | Rust 所有权三原则（已压缩，详见 canonical） {#rust-所有权三原则} | `#rust-所有权三原则已压缩详见-canonical-rust-所有权三原则` | 同文件锚点不存在: #rust-所有权三原则已压缩详见-canonical-rust-所有权三原则 |
 | docs\research_notes\formal_methods\10_ownership_model.md | 1. RustBelt: Logical Foundations for the Future of Safe Systems Programming {#1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming} | `#1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming-1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming` | 同文件锚点不存在: #1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming-1-rustbelt-logical-foundations-for-the-future-of-safe-systems-programming |
 | docs\research_notes\formal_methods\10_ownership_model.md | **与 RustBelt Iris 框架的详细对应** {#与-rustbelt-iris-框架的详细对应} | `#与-rustbelt-iris-框架的详细对应-与-rustbelt-iris-框架的详细对应` | 同文件锚点不存在: #与-rustbelt-iris-框架的详细对应-与-rustbelt-iris-框架的详细对应 |
 | docs\research_notes\formal_methods\10_ownership_model.md | 2. The RustBelt Project: Formalizing Rust's Type System {#2-the-rustbelt-project-formalizing-rusts-type-system} | `#2-the-rustbelt-project-formalizing-rusts-type-system-2-the-rustbelt-project-formalizing-rusts-type-system` | 同文件锚点不存在: #2-the-rustbelt-project-formalizing-rusts-type-system-2-the-rustbelt-project-formalizing-rusts-type-system |
@@ -5793,7 +5281,7 @@
 | docs\research_notes\formal_methods\10_pin_self_referential.md | 示例 1: Pin 基础 {#示例-1-pin-基础} | `#示例-1-pin-基础-示例-1-pin-基础` | 同文件锚点不存在: #示例-1-pin-基础-示例-1-pin-基础 |
 | docs\research_notes\formal_methods\10_pin_self_referential.md | 示例 2: 自引用结构 {#示例-2-自引用结构} | `#示例-2-自引用结构-示例-2-自引用结构` | 同文件锚点不存在: #示例-2-自引用结构-示例-2-自引用结构 |
 | docs\research_notes\formal_methods\10_pin_self_referential.md | 示例 3: Future 和 Pin {#示例-3-future-和-pin} | `#示例-3-future-和-pin-示例-3-future-和-pin` | 同文件锚点不存在: #示例-3-future-和-pin-示例-3-future-和-pin |
-| docs\research_notes\formal_methods\10_pin_self_referential.md | 示例 4: 自引用结构体（Struct） {#示例-4-自引用结构体} | `#示例-4-自引用结构体-示例-4-自引用结构体` | 同文件锚点不存在: #示例-4-自引用结构体-示例-4-自引用结构体 |
+| docs\research_notes\formal_methods\10_pin_self_referential.md | 示例 4: 自引用结构体 {#示例-4-自引用结构体} | `#示例-4-自引用结构体-示例-4-自引用结构体` | 同文件锚点不存在: #示例-4-自引用结构体-示例-4-自引用结构体 |
 | docs\research_notes\formal_methods\10_pin_self_referential.md | 示例 5: Pin 投影 {#示例-5-pin-投影} | `#示例-5-pin-投影-示例-5-pin-投影` | 同文件锚点不存在: #示例-5-pin-投影-示例-5-pin-投影 |
 | docs\research_notes\formal_methods\10_pin_self_referential.md | 📖 参考文献 {#参考文献} | `#-参考文献-参考文献` | 同文件锚点不存在: #-参考文献-参考文献 |
 | docs\research_notes\formal_methods\10_pin_self_referential.md | 🔄 研究进展 {#研究进展} | `#-研究进展-研究进展` | 同文件锚点不存在: #-研究进展-研究进展 |
@@ -5843,7 +5331,7 @@
 | docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md | 1.5 模糊测试 (Fuzz Testing) {#15-模糊测试-fuzz-testing} | `#15-模糊测试-fuzz-testing-15-模糊测试-fuzz-testing` | 同文件锚点不存在: #15-模糊测试-fuzz-testing-15-模糊测试-fuzz-testing |
 | docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md | 1.6 属性测试 (Property Testing) {#16-属性测试-property-testing} | `#16-属性测试-property-testing-16-属性测试-property-testing` | 同文件锚点不存在: #16-属性测试-property-testing-16-属性测试-property-testing |
 | docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md | 2.1 工具对比表 {#21-工具对比表} | `#21-工具对比表-21-工具对比表` | 同文件锚点不存在: #21-工具对比表-21-工具对比表 |
-| docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md | 2.2 异步（Async）测试：tokio-test {#22-异步测试tokio-test} | `#22-异步测试tokio-test-22-异步测试tokio-test` | 同文件锚点不存在: #22-异步测试tokio-test-22-异步测试tokio-test |
+| docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md | 2.2 异步测试：tokio-test {#22-异步测试tokio-test} | `#22-异步测试tokio-test-22-异步测试tokio-test` | 同文件锚点不存在: #22-异步测试tokio-test-22-异步测试tokio-test |
 | docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md | 2.3 模拟对象：mockall {#23-模拟对象mockall} | `#23-模拟对象mockall-23-模拟对象mockall` | 同文件锚点不存在: #23-模拟对象mockall-23-模拟对象mockall |
 | docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md | 2.4 快照测试：insta {#24-快照测试insta} | `#24-快照测试insta-24-快照测试insta` | 同文件锚点不存在: #24-快照测试insta-24-快照测试insta |
 | docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md | 2.5 基准测试：Criterion {#25-基准测试criterion} | `#25-基准测试criterion-25-基准测试criterion` | 同文件锚点不存在: #25-基准测试criterion-25-基准测试criterion |
@@ -5862,8 +5350,8 @@
 | docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
 | docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
 | docs\research_notes\formal_methods\10_variance_concept_mindmap.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
-| docs\research_notes\formal_methods\10_variance_concept_mindmap.md | 影响1: 生命周期（Lifetimes）子类型 {#影响1-生命周期子类型} | `#影响1-生命周期子类型-影响1-生命周期子类型` | 同文件锚点不存在: #影响1-生命周期子类型-影响1-生命周期子类型 |
-| docs\research_notes\formal_methods\10_variance_concept_mindmap.md | 影响2: 智能指针（Smart Pointer）的使用 {#影响2-智能指针的使用} | `#影响2-智能指针的使用-影响2-智能指针的使用` | 同文件锚点不存在: #影响2-智能指针的使用-影响2-智能指针的使用 |
+| docs\research_notes\formal_methods\10_variance_concept_mindmap.md | 影响1: 生命周期子类型 {#影响1-生命周期子类型} | `#影响1-生命周期子类型-影响1-生命周期子类型` | 同文件锚点不存在: #影响1-生命周期子类型-影响1-生命周期子类型 |
+| docs\research_notes\formal_methods\10_variance_concept_mindmap.md | 影响2: 智能指针的使用 {#影响2-智能指针的使用} | `#影响2-智能指针的使用-影响2-智能指针的使用` | 同文件锚点不存在: #影响2-智能指针的使用-影响2-智能指针的使用 |
 | docs\research_notes\formal_methods\10_variance_concept_mindmap.md | 影响3: 回调函数的类型 {#影响3-回调函数的类型} | `#影响3-回调函数的类型-影响3-回调函数的类型` | 同文件锚点不存在: #影响3-回调函数的类型-影响3-回调函数的类型 |
 | docs\research_notes\formal_methods\10_variance_concept_mindmap.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
 | docs\research_notes\formal_methods\10_variance_concept_mindmap.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
@@ -5882,15 +5370,15 @@
 | docs\research_notes\formal_methods\60_concurrency_async_counterexamples.md | 7. 错误实现  的  {#7-错误实现-future-的-poll} | `#7-错误实现-future-的-poll-7-错误实现-future-的-poll` | 同文件锚点不存在: #7-错误实现-future-的-poll-7-错误实现-future-的-poll |
 | docs\research_notes\formal_methods\60_concurrency_async_counterexamples.md | RFC 参考 {#rfc-参考} | `#rfc-参考-rfc-参考` | 同文件锚点不存在: #rfc-参考-rfc-参考 |
 | docs\research_notes\formal_methods\60_ownership_counterexamples.md | 1. 使用已移动的值 {#1-使用已移动的值} | `#1-使用已移动的值-1-使用已移动的值` | 同文件锚点不存在: #1-使用已移动的值-1-使用已移动的值 |
-| docs\research_notes\formal_methods\60_ownership_counterexamples.md | 2. 同一作用域内多次可变借用（Mutable Borrow） {#2-同一作用域内多次可变借用} | `#2-同一作用域内多次可变借用-2-同一作用域内多次可变借用` | 同文件锚点不存在: #2-同一作用域内多次可变借用-2-同一作用域内多次可变借用 |
-| docs\research_notes\formal_methods\60_ownership_counterexamples.md | 3. 可变与不可变借用（Immutable Borrow）重叠 {#3-可变与不可变借用重叠} | `#3-可变与不可变借用重叠-3-可变与不可变借用重叠` | 同文件锚点不存在: #3-可变与不可变借用重叠-3-可变与不可变借用重叠 |
-| docs\research_notes\formal_methods\60_ownership_counterexamples.md | 4. 返回悬垂引用（Reference） {#4-返回悬垂引用} | `#4-返回悬垂引用-4-返回悬垂引用` | 同文件锚点不存在: #4-返回悬垂引用-4-返回悬垂引用 |
-| docs\research_notes\formal_methods\60_ownership_counterexamples.md | 5. 自引用结构体（Struct）被移动 {#5-自引用结构体被移动} | `#5-自引用结构体被移动-5-自引用结构体被移动` | 同文件锚点不存在: #5-自引用结构体被移动-5-自引用结构体被移动 |
+| docs\research_notes\formal_methods\60_ownership_counterexamples.md | 2. 同一作用域内多次可变借用 {#2-同一作用域内多次可变借用} | `#2-同一作用域内多次可变借用-2-同一作用域内多次可变借用` | 同文件锚点不存在: #2-同一作用域内多次可变借用-2-同一作用域内多次可变借用 |
+| docs\research_notes\formal_methods\60_ownership_counterexamples.md | 3. 可变与不可变借用重叠 {#3-可变与不可变借用重叠} | `#3-可变与不可变借用重叠-3-可变与不可变借用重叠` | 同文件锚点不存在: #3-可变与不可变借用重叠-3-可变与不可变借用重叠 |
+| docs\research_notes\formal_methods\60_ownership_counterexamples.md | 4. 返回悬垂引用 {#4-返回悬垂引用} | `#4-返回悬垂引用-4-返回悬垂引用` | 同文件锚点不存在: #4-返回悬垂引用-4-返回悬垂引用 |
+| docs\research_notes\formal_methods\60_ownership_counterexamples.md | 5. 自引用结构体被移动 {#5-自引用结构体被移动} | `#5-自引用结构体被移动-5-自引用结构体被移动` | 同文件锚点不存在: #5-自引用结构体被移动-5-自引用结构体被移动 |
 | docs\research_notes\formal_methods\60_ownership_counterexamples.md | 6. 错误实现 Send / Sync {#6-错误实现-send-sync} | `#6-错误实现-send--sync-6-错误实现-send-sync` | 同文件锚点不存在: #6-错误实现-send--sync-6-错误实现-send-sync |
-| docs\research_notes\formal_methods\60_ownership_counterexamples.md | 7. 生命周期（Lifetimes）参数不足 {#7-生命周期参数不足} | `#7-生命周期参数不足-7-生命周期参数不足` | 同文件锚点不存在: #7-生命周期参数不足-7-生命周期参数不足 |
+| docs\research_notes\formal_methods\60_ownership_counterexamples.md | 7. 生命周期参数不足 {#7-生命周期参数不足} | `#7-生命周期参数不足-7-生命周期参数不足` | 同文件锚点不存在: #7-生命周期参数不足-7-生命周期参数不足 |
 | docs\research_notes\formal_methods\60_ownership_counterexamples.md | RFC 参考 {#rfc-参考} | `#rfc-参考-rfc-参考` | 同文件锚点不存在: #rfc-参考-rfc-参考 |
 | docs\research_notes\formal_methods\60_unsafe_counterexamples.md | Unsafe 与 FFI 反例边界 {#unsafe-与-ffi-反例边界} | `#unsafe-与-ffi-反例边界-unsafe-与-ffi-反例边界` | 同文件锚点不存在: #unsafe-与-ffi-反例边界-unsafe-与-ffi-反例边界 |
-| docs\research_notes\formal_methods\60_unsafe_counterexamples.md | 1. 解引用（Reference）悬空裸指针 {#1-解引用悬空裸指针} | `#1-解引用悬空裸指针-1-解引用悬空裸指针` | 同文件锚点不存在: #1-解引用悬空裸指针-1-解引用悬空裸指针 |
+| docs\research_notes\formal_methods\60_unsafe_counterexamples.md | 1. 解引用悬空裸指针 {#1-解引用悬空裸指针} | `#1-解引用悬空裸指针-1-解引用悬空裸指针` | 同文件锚点不存在: #1-解引用悬空裸指针-1-解引用悬空裸指针 |
 | docs\research_notes\formal_methods\60_unsafe_counterexamples.md | 2. 越界访问裸指针 {#2-越界访问裸指针} | `#2-越界访问裸指针-2-越界访问裸指针` | 同文件锚点不存在: #2-越界访问裸指针-2-越界访问裸指针 |
 | docs\research_notes\formal_methods\60_unsafe_counterexamples.md | 3. 数据竞争：裸指针并发写 {#3-数据竞争裸指针并发写} | `#3-数据竞争裸指针并发写-3-数据竞争裸指针并发写` | 同文件锚点不存在: #3-数据竞争裸指针并发写-3-数据竞争裸指针并发写 |
 | docs\research_notes\formal_methods\60_unsafe_counterexamples.md | 4. 类型双关（Type Pun）导致错位 {#4-类型双关type-pun导致错位} | `#4-类型双关type-pun导致错位-4-类型双关type-pun导致错位` | 同文件锚点不存在: #4-类型双关type-pun导致错位-4-类型双关type-pun导致错位 |
@@ -6081,8 +5569,8 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | Abstract Factory 形式化分析 {#abstract-factory-形式化分析} | `#abstract-factory-形式化分析-abstract-factory-形式化分析` | 同文件锚点不存在: #abstract-factory-形式化分析-abstract-factory-形式化分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | 📊 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | Def 1.1（Abstract Factory 结构） {#def-11abstract-factory-结构} | `#def-11abstract-factory-结构-def-11abstract-factory-结构` | 同文件锚点不存在: #def-11abstract-factory-结构-def-11abstract-factory-结构 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | Axiom AF1（产品族一致性（Coherence）公理） {#axiom-af1产品族一致性公理} | `#axiom-af1产品族一致性公理-axiom-af1产品族一致性公理` | 同文件锚点不存在: #axiom-af1产品族一致性公理-axiom-af1产品族一致性公理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | Axiom AF2（所有权（Ownership）转移公理） {#axiom-af2所有权转移公理} | `#axiom-af2所有权转移公理-axiom-af2所有权转移公理` | 同文件锚点不存在: #axiom-af2所有权转移公理-axiom-af2所有权转移公理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | Axiom AF1（产品族一致性公理） {#axiom-af1产品族一致性公理} | `#axiom-af1产品族一致性公理-axiom-af1产品族一致性公理` | 同文件锚点不存在: #axiom-af1产品族一致性公理-axiom-af1产品族一致性公理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | Axiom AF2（所有权转移公理） {#axiom-af2所有权转移公理} | `#axiom-af2所有权转移公理-axiom-af2所有权转移公理` | 同文件锚点不存在: #axiom-af2所有权转移公理-axiom-af2所有权转移公理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | 定理 AF-T1（关联类型安全定理） {#定理-af-t1关联类型安全定理} | `#定理-af-t1关联类型安全定理-定理-af-t1关联类型安全定理` | 同文件锚点不存在: #定理-af-t1关联类型安全定理-定理-af-t1关联类型安全定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | 定理 AF-T2（产品族完整性定理） {#定理-af-t2产品族完整性定理} | `#定理-af-t2产品族完整性定理-定理-af-t2产品族完整性定理` | 同文件锚点不存在: #定理-af-t2产品族完整性定理-定理-af-t2产品族完整性定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | 推论 AF-C1（纯 Safe 抽象工厂） {#推论-af-c1纯-safe-抽象工厂} | `#推论-af-c1纯-safe-抽象工厂-推论-af-c1纯-safe-抽象工厂` | 同文件锚点不存在: #推论-af-c1纯-safe-抽象工厂-推论-af-c1纯-safe-抽象工厂 |
@@ -6090,9 +5578,9 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | Rust 所有权、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | 与 Rust 类型系统的联系 {#与-rust-类型系统的联系} | `#与-rust-类型系统的联系-与-rust-类型系统的联系` | 同文件锚点不存在: #与-rust-类型系统的联系-与-rust-类型系统的联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | 反例 1：混用不同族产品 {#反例-1混用不同族产品} | `#反例-1混用不同族产品-反例-1混用不同族产品` | 同文件锚点不存在: #反例-1混用不同族产品-反例-1混用不同族产品 |
@@ -6107,22 +5595,22 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | Def 1.1（Builder 结构） {#def-11builder-结构} | `#def-11builder-结构-def-11builder-结构` | 同文件锚点不存在: #def-11builder-结构-def-11builder-结构 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | Axiom B1（必填字段公理） {#axiom-b1必填字段公理} | `#axiom-b1必填字段公理-axiom-b1必填字段公理` | 同文件锚点不存在: #axiom-b1必填字段公理-axiom-b1必填字段公理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | Axiom B2（单次构建公理） {#axiom-b2单次构建公理} | `#axiom-b2单次构建公理-axiom-b2单次构建公理` | 同文件锚点不存在: #axiom-b2单次构建公理-axiom-b2单次构建公理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 定理 B-T1（所有权（Ownership）消费定理） {#定理-b-t1所有权消费定理} | `#定理-b-t1所有权消费定理-定理-b-t1所有权消费定理` | 同文件锚点不存在: #定理-b-t1所有权消费定理-定理-b-t1所有权消费定理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 定理 B-T1（所有权消费定理） {#定理-b-t1所有权消费定理} | `#定理-b-t1所有权消费定理-定理-b-t1所有权消费定理` | 同文件锚点不存在: #定理-b-t1所有权消费定理-定理-b-t1所有权消费定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 定理 B-T2（类型状态安全定理） {#定理-b-t2类型状态安全定理} | `#定理-b-t2类型状态安全定理-定理-b-t2类型状态安全定理` | 同文件锚点不存在: #定理-b-t2类型状态安全定理-定理-b-t2类型状态安全定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 推论 B-C1（纯 Safe Builder） {#推论-b-c1纯-safe-builder} | `#推论-b-c1纯-safe-builder-推论-b-c1纯-safe-builder` | 同文件锚点不存在: #推论-b-c1纯-safe-builder-推论-b-c1纯-safe-builder |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总} | `#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总` | 同文件锚点不存在: #概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | Rust 所有权、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 与 Rust 类型系统的联系 {#与-rust-类型系统的联系} | `#与-rust-类型系统的联系-与-rust-类型系统的联系` | 同文件锚点不存在: #与-rust-类型系统的联系-与-rust-类型系统的联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 完整场景示例：HTTP 请求构建器 {#完整场景示例http-请求构建器} | `#完整场景示例http-请求构建器-完整场景示例http-请求构建器` | 同文件锚点不存在: #完整场景示例http-请求构建器-完整场景示例http-请求构建器 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 反例 1：缺少必填字段 {#反例-1缺少必填字段} | `#反例-1缺少必填字段-反例-1缺少必填字段` | 同文件锚点不存在: #反例-1缺少必填字段-反例-1缺少必填字段 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 反例 2：重复 build {#反例-2重复-build} | `#反例-2重复-build-反例-2重复-build` | 同文件锚点不存在: #反例-2重复-build-反例-2重复-build |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 反例 3：可变借用（Mutable Borrow）链式冲突 {#反例-3可变借用链式冲突} | `#反例-3可变借用链式冲突-反例-3可变借用链式冲突` | 同文件锚点不存在: #反例-3可变借用链式冲突-反例-3可变借用链式冲突 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 反例 3：可变借用链式冲突 {#反例-3可变借用链式冲突} | `#反例-3可变借用链式冲突-反例-3可变借用链式冲突` | 同文件锚点不存在: #反例-3可变借用链式冲突-反例-3可变借用链式冲突 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 与 GoF 对比 {#与-gof-对比} | `#与-gof-对比-与-gof-对比` | 同文件锚点不存在: #与-gof-对比-与-gof-对比 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 与 Rust 1.93 的对应 {#与-rust-193-的对应} | `#与-rust-193-的对应-与-rust-193-的对应` | 同文件锚点不存在: #与-rust-193-的对应-与-rust-193-的对应 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
@@ -6155,17 +5643,17 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | 📊 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | Def 1.1（Prototype 结构） {#def-11prototype-结构} | `#def-11prototype-结构-def-11prototype-结构` | 同文件锚点不存在: #def-11prototype-结构-def-11prototype-结构 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | Axiom P1（独立副本公理） {#axiom-p1独立副本公理} | `#axiom-p1独立副本公理-axiom-p1独立副本公理` | 同文件锚点不存在: #axiom-p1独立副本公理-axiom-p1独立副本公理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | Axiom P2（引用（Reference）语义公理） {#axiom-p2引用语义公理} | `#axiom-p2引用语义公理-axiom-p2引用语义公理` | 同文件锚点不存在: #axiom-p2引用语义公理-axiom-p2引用语义公理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | Axiom P2（引用语义公理） {#axiom-p2引用语义公理} | `#axiom-p2引用语义公理-axiom-p2引用语义公理` | 同文件锚点不存在: #axiom-p2引用语义公理-axiom-p2引用语义公理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | 定理 P-T1（Clone 类型安全定理） {#定理-p-t1clone-类型安全定理} | `#定理-p-t1clone-类型安全定理-定理-p-t1clone-类型安全定理` | 同文件锚点不存在: #定理-p-t1clone-类型安全定理-定理-p-t1clone-类型安全定理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | 定理 P-T2（借用（Borrowing）安全定理） {#定理-p-t2借用安全定理} | `#定理-p-t2借用安全定理-定理-p-t2借用安全定理` | 同文件锚点不存在: #定理-p-t2借用安全定理-定理-p-t2借用安全定理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | 定理 P-T2（借用安全定理） {#定理-p-t2借用安全定理} | `#定理-p-t2借用安全定理-定理-p-t2借用安全定理` | 同文件锚点不存在: #定理-p-t2借用安全定理-定理-p-t2借用安全定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | 推论 P-C1（Clone 安全使用） {#推论-p-c1clone-安全使用} | `#推论-p-c1clone-安全使用-推论-p-c1clone-安全使用` | 同文件锚点不存在: #推论-p-c1clone-安全使用-推论-p-c1clone-安全使用 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总} | `#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总` | 同文件锚点不存在: #概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | Rust 所有权（Ownership）、借用、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | 与 Rust 类型系统的联系 {#与-rust-类型系统的联系} | `#与-rust-类型系统的联系-与-rust-类型系统的联系` | 同文件锚点不存在: #与-rust-类型系统的联系-与-rust-类型系统的联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md | 反例 1：未实现 Clone {#反例-1未实现-clone} | `#反例-1未实现-clone-反例-1未实现-clone` | 同文件锚点不存在: #反例-1未实现-clone-反例-1未实现-clone |
@@ -6207,23 +5695,23 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | Def 1.1（Adapter 结构） {#def-11adapter-结构} | `#def-11adapter-结构-def-11adapter-结构` | 同文件锚点不存在: #def-11adapter-结构-def-11adapter-结构 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | Axiom AD1（语义保持公理） {#axiom-ad1语义保持公理} | `#axiom-ad1语义保持公理-axiom-ad1语义保持公理` | 同文件锚点不存在: #axiom-ad1语义保持公理-axiom-ad1语义保持公理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | Axiom AD2（委托借用（Borrowing）公理） {#axiom-ad2委托借用公理} | `#axiom-ad2委托借用公理-axiom-ad2委托借用公理` | 同文件锚点不存在: #axiom-ad2委托借用公理-axiom-ad2委托借用公理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 定理 AD-T1（所有权（Ownership）安全定理） {#定理-ad-t1所有权安全定理} | `#定理-ad-t1所有权安全定理-定理-ad-t1所有权安全定理` | 同文件锚点不存在: #定理-ad-t1所有权安全定理-定理-ad-t1所有权安全定理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | Axiom AD2（委托借用公理） {#axiom-ad2委托借用公理} | `#axiom-ad2委托借用公理-axiom-ad2委托借用公理` | 同文件锚点不存在: #axiom-ad2委托借用公理-axiom-ad2委托借用公理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 定理 AD-T1（所有权安全定理） {#定理-ad-t1所有权安全定理} | `#定理-ad-t1所有权安全定理-定理-ad-t1所有权安全定理` | 同文件锚点不存在: #定理-ad-t1所有权安全定理-定理-ad-t1所有权安全定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 定理 AD-T2（借用冲突避免定理） {#定理-ad-t2借用冲突避免定理} | `#定理-ad-t2借用冲突避免定理-定理-ad-t2借用冲突避免定理` | 同文件锚点不存在: #定理-ad-t2借用冲突避免定理-定理-ad-t2借用冲突避免定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 推论 AD-C1（纯 Safe Adapter） {#推论-ad-c1纯-safe-adapter} | `#推论-ad-c1纯-safe-adapter-推论-ad-c1纯-safe-adapter` | 同文件锚点不存在: #推论-ad-c1纯-safe-adapter-推论-ad-c1纯-safe-adapter |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总} | `#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总` | 同文件锚点不存在: #概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | Rust 所有权、借用、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 与 Rust 类型系统的联系 {#与-rust-类型系统的联系} | `#与-rust-类型系统的联系-与-rust-类型系统的联系` | 同文件锚点不存在: #与-rust-类型系统的联系-与-rust-类型系统的联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 完整场景示例：第三方 HTTP 客户端适配 {#完整场景示例第三方-http-客户端适配} | `#完整场景示例第三方-http-客户端适配-完整场景示例第三方-http-客户端适配` | 同文件锚点不存在: #完整场景示例第三方-http-客户端适配-完整场景示例第三方-http-客户端适配 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 反例 1：返回被适配者内部可变引用（Mutable Reference） {#反例-1返回被适配者内部可变引用} | `#反例-1返回被适配者内部可变引用-反例-1返回被适配者内部可变引用` | 同文件锚点不存在: #反例-1返回被适配者内部可变引用-反例-1返回被适配者内部可变引用 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 反例 2：引用（Reference）型 Adapter 生命周期不匹配 {#反例-2引用型-adapter-生命周期不匹配} | `#反例-2引用型-adapter-生命周期不匹配-反例-2引用型-adapter-生命周期不匹配` | 同文件锚点不存在: #反例-2引用型-adapter-生命周期不匹配-反例-2引用型-adapter-生命周期不匹配 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 反例 3：委托链中出现可变借用（Mutable Borrow）冲突 {#反例-3委托链中出现可变借用冲突} | `#反例-3委托链中出现可变借用冲突-反例-3委托链中出现可变借用冲突` | 同文件锚点不存在: #反例-3委托链中出现可变借用冲突-反例-3委托链中出现可变借用冲突 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 反例 1：返回被适配者内部可变引用 {#反例-1返回被适配者内部可变引用} | `#反例-1返回被适配者内部可变引用-反例-1返回被适配者内部可变引用` | 同文件锚点不存在: #反例-1返回被适配者内部可变引用-反例-1返回被适配者内部可变引用 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 反例 2：引用型 Adapter 生命周期不匹配 {#反例-2引用型-adapter-生命周期不匹配} | `#反例-2引用型-adapter-生命周期不匹配-反例-2引用型-adapter-生命周期不匹配` | 同文件锚点不存在: #反例-2引用型-adapter-生命周期不匹配-反例-2引用型-adapter-生命周期不匹配 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 反例 3：委托链中出现可变借用冲突 {#反例-3委托链中出现可变借用冲突} | `#反例-3委托链中出现可变借用冲突-反例-3委托链中出现可变借用冲突` | 同文件锚点不存在: #反例-3委托链中出现可变借用冲突-反例-3委托链中出现可变借用冲突 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 与 GoF 对比 {#与-gof-对比} | `#与-gof-对比-与-gof-对比` | 同文件锚点不存在: #与-gof-对比-与-gof-对比 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 与 Rust 1.93 的对应 {#与-rust-193-的对应} | `#与-rust-193-的对应-与-rust-193-的对应` | 同文件锚点不存在: #与-rust-193-的对应-与-rust-193-的对应 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
@@ -6232,7 +5720,7 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | Def 1.1（Bridge 结构） {#def-11bridge-结构} | `#def-11bridge-结构-def-11bridge-结构` | 同文件锚点不存在: #def-11bridge-结构-def-11bridge-结构 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | Axiom BR1（解耦公理） {#axiom-br1解耦公理} | `#axiom-br1解耦公理-axiom-br1解耦公理` | 同文件锚点不存在: #axiom-br1解耦公理-axiom-br1解耦公理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | Axiom BR2（委托借用（Borrowing）公理） {#axiom-br2委托借用公理} | `#axiom-br2委托借用公理-axiom-br2委托借用公理` | 同文件锚点不存在: #axiom-br2委托借用公理-axiom-br2委托借用公理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | Axiom BR2（委托借用公理） {#axiom-br2委托借用公理} | `#axiom-br2委托借用公理-axiom-br2委托借用公理` | 同文件锚点不存在: #axiom-br2委托借用公理-axiom-br2委托借用公理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | 定理 BR-T1（trait 类型安全定理） {#定理-br-t1trait-类型安全定理} | `#定理-br-t1trait-类型安全定理-定理-br-t1trait-类型安全定理` | 同文件锚点不存在: #定理-br-t1trait-类型安全定理-定理-br-t1trait-类型安全定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | 定理 BR-T2（组合优于继承定理） {#定理-br-t2组合优于继承定理} | `#定理-br-t2组合优于继承定理-定理-br-t2组合优于继承定理` | 同文件锚点不存在: #定理-br-t2组合优于继承定理-定理-br-t2组合优于继承定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | 推论 BR-C1（纯 Safe Bridge） {#推论-br-c1纯-safe-bridge} | `#推论-br-c1纯-safe-bridge-推论-br-c1纯-safe-bridge` | 同文件锚点不存在: #推论-br-c1纯-safe-bridge-推论-br-c1纯-safe-bridge |
@@ -6240,9 +5728,9 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | Rust 所有权（Ownership）、借用、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | 与 Rust 类型系统的联系 {#与-rust-类型系统的联系} | `#与-rust-类型系统的联系-与-rust-类型系统的联系` | 同文件锚点不存在: #与-rust-类型系统的联系-与-rust-类型系统的联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md | 反例 1：实现层方法需要 \&mut 但抽象层为 \&self {#反例-1实现层方法需要-mut-但抽象层为-self} | `#反例-1实现层方法需要-mut-但抽象层为-self-反例-1实现层方法需要-mut-但抽象层为-self` | 同文件锚点不存在: #反例-1实现层方法需要-mut-但抽象层为-self-反例-1实现层方法需要-mut-但抽象层为-self |
@@ -6256,7 +5744,7 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | Def 1.1（Composite 结构） {#def-11composite-结构} | `#def-11composite-结构-def-11composite-结构` | 同文件锚点不存在: #def-11composite-结构-def-11composite-结构 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | Axiom CO1（树结构无环公理） {#axiom-co1树结构无环公理} | `#axiom-co1树结构无环公理-axiom-co1树结构无环公理` | 同文件锚点不存在: #axiom-co1树结构无环公理-axiom-co1树结构无环公理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | Axiom CO2（遍历借用（Borrowing）公理） {#axiom-co2遍历借用公理} | `#axiom-co2遍历借用公理-axiom-co2遍历借用公理` | 同文件锚点不存在: #axiom-co2遍历借用公理-axiom-co2遍历借用公理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | Axiom CO2（遍历借用公理） {#axiom-co2遍历借用公理} | `#axiom-co2遍历借用公理-axiom-co2遍历借用公理` | 同文件锚点不存在: #axiom-co2遍历借用公理-axiom-co2遍历借用公理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | 定理 CO-T1（递归结构安全定理） {#定理-co-t1递归结构安全定理} | `#定理-co-t1递归结构安全定理-定理-co-t1递归结构安全定理` | 同文件锚点不存在: #定理-co-t1递归结构安全定理-定理-co-t1递归结构安全定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | 定理 CO-T2（遍历安全定理） {#定理-co-t2遍历安全定理} | `#定理-co-t2遍历安全定理-定理-co-t2遍历安全定理` | 同文件锚点不存在: #定理-co-t2遍历安全定理-定理-co-t2遍历安全定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | 推论 CO-C1（纯 Safe Composite） {#推论-co-c1纯-safe-composite} | `#推论-co-c1纯-safe-composite-推论-co-c1纯-safe-composite` | 同文件锚点不存在: #推论-co-c1纯-safe-composite-推论-co-c1纯-safe-composite |
@@ -6264,12 +5752,12 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | Rust 所有权（Ownership）、借用、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | 与 Rust 类型系统的联系 {#与-rust-类型系统的联系} | `#与-rust-类型系统的联系-与-rust-类型系统的联系` | 同文件锚点不存在: #与-rust-类型系统的联系-与-rust-类型系统的联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | 反例 1：循环引用（Reference）导致内存泄漏 {#反例-1循环引用导致内存泄漏} | `#反例-1循环引用导致内存泄漏-反例-1循环引用导致内存泄漏` | 同文件锚点不存在: #反例-1循环引用导致内存泄漏-反例-1循环引用导致内存泄漏 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | 反例 1：循环引用导致内存泄漏 {#反例-1循环引用导致内存泄漏} | `#反例-1循环引用导致内存泄漏-反例-1循环引用导致内存泄漏` | 同文件锚点不存在: #反例-1循环引用导致内存泄漏-反例-1循环引用导致内存泄漏 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | 反例 2：递归过深栈溢出 {#反例-2递归过深栈溢出} | `#反例-2递归过深栈溢出-反例-2递归过深栈溢出` | 同文件锚点不存在: #反例-2递归过深栈溢出-反例-2递归过深栈溢出 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | 反例 3：遍历时修改子组件 {#反例-3遍历时修改子组件} | `#反例-3遍历时修改子组件-反例-3遍历时修改子组件` | 同文件锚点不存在: #反例-3遍历时修改子组件-反例-3遍历时修改子组件 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md | 与 GoF 对比 {#与-gof-对比} | `#与-gof-对比-与-gof-对比` | 同文件锚点不存在: #与-gof-对比-与-gof-对比 |
@@ -6281,20 +5769,20 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | Def 1.1（Decorator 结构） {#def-11decorator-结构} | `#def-11decorator-结构-def-11decorator-结构` | 同文件锚点不存在: #def-11decorator-结构-def-11decorator-结构 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | Axiom DE1（同接口可叠加公理） {#axiom-de1同接口可叠加公理} | `#axiom-de1同接口可叠加公理-axiom-de1同接口可叠加公理` | 同文件锚点不存在: #axiom-de1同接口可叠加公理-axiom-de1同接口可叠加公理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | Axiom DE2（委托链公理） {#axiom-de2委托链公理} | `#axiom-de2委托链公理-axiom-de2委托链公理` | 同文件锚点不存在: #axiom-de2委托链公理-axiom-de2委托链公理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 定理 DE-T1（委托借用（Borrowing）安全定理） {#定理-de-t1委托借用安全定理} | `#定理-de-t1委托借用安全定理-定理-de-t1委托借用安全定理` | 同文件锚点不存在: #定理-de-t1委托借用安全定理-定理-de-t1委托借用安全定理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 定理 DE-T1（委托借用安全定理） {#定理-de-t1委托借用安全定理} | `#定理-de-t1委托借用安全定理-定理-de-t1委托借用安全定理` | 同文件锚点不存在: #定理-de-t1委托借用安全定理-定理-de-t1委托借用安全定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 定理 DE-T2（透明性定理） {#定理-de-t2透明性定理} | `#定理-de-t2透明性定理-定理-de-t2透明性定理` | 同文件锚点不存在: #定理-de-t2透明性定理-定理-de-t2透明性定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 推论 DE-C1（纯 Safe Decorator） {#推论-de-c1纯-safe-decorator} | `#推论-de-c1纯-safe-decorator-推论-de-c1纯-safe-decorator` | 同文件锚点不存在: #推论-de-c1纯-safe-decorator-推论-de-c1纯-safe-decorator |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总} | `#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总` | 同文件锚点不存在: #概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | Rust 所有权（Ownership）、借用、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 与 Rust 类型系统的联系 {#与-rust-类型系统的联系} | `#与-rust-类型系统的联系-与-rust-类型系统的联系` | 同文件锚点不存在: #与-rust-类型系统的联系-与-rust-类型系统的联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 完整场景示例：HTTP 客户端装饰链（日志 + 重试） {#完整场景示例http-客户端装饰链日志-重试} | `#完整场景示例http-客户端装饰链日志--重试-完整场景示例http-客户端装饰链日志-重试` | 同文件锚点不存在: #完整场景示例http-客户端装饰链日志--重试-完整场景示例http-客户端装饰链日志-重试 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 反例 1：泛型（Generics）装饰器递归类型无限 {#反例-1泛型装饰器递归类型无限} | `#反例-1泛型装饰器递归类型无限-反例-1泛型装饰器递归类型无限` | 同文件锚点不存在: #反例-1泛型装饰器递归类型无限-反例-1泛型装饰器递归类型无限 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 反例 1：泛型装饰器递归类型无限 {#反例-1泛型装饰器递归类型无限} | `#反例-1泛型装饰器递归类型无限-反例-1泛型装饰器递归类型无限` | 同文件锚点不存在: #反例-1泛型装饰器递归类型无限-反例-1泛型装饰器递归类型无限 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 反例 2：装饰器持有 \&mut 导致借用冲突 {#反例-2装饰器持有-mut-导致借用冲突} | `#反例-2装饰器持有-mut-导致借用冲突-反例-2装饰器持有-mut-导致借用冲突` | 同文件锚点不存在: #反例-2装饰器持有-mut-导致借用冲突-反例-2装饰器持有-mut-导致借用冲突 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 反例 3：trait object 装饰丢失 Send {#反例-3trait-object-装饰丢失-send} | `#反例-3trait-object-装饰丢失-send-反例-3trait-object-装饰丢失-send` | 同文件锚点不存在: #反例-3trait-object-装饰丢失-send-反例-3trait-object-装饰丢失-send |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md | 与 GoF 对比 {#与-gof-对比} | `#与-gof-对比-与-gof-对比` | 同文件锚点不存在: #与-gof-对比-与-gof-对比 |
@@ -6307,18 +5795,18 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | Axiom FA1（简化接口公理） {#axiom-fa1简化接口公理} | `#axiom-fa1简化接口公理-axiom-fa1简化接口公理` | 同文件锚点不存在: #axiom-fa1简化接口公理-axiom-fa1简化接口公理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | Axiom FA2（协调调用公理） {#axiom-fa2协调调用公理} | `#axiom-fa2协调调用公理-axiom-fa2协调调用公理` | 同文件锚点不存在: #axiom-fa2协调调用公理-axiom-fa2协调调用公理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 定理 FA-T1（封装边界定理） {#定理-fa-t1封装边界定理} | `#定理-fa-t1封装边界定理-定理-fa-t1封装边界定理` | 同文件锚点不存在: #定理-fa-t1封装边界定理-定理-fa-t1封装边界定理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 定理 FA-T2（所有权（Ownership）协调定理） {#定理-fa-t2所有权协调定理} | `#定理-fa-t2所有权协调定理-定理-fa-t2所有权协调定理` | 同文件锚点不存在: #定理-fa-t2所有权协调定理-定理-fa-t2所有权协调定理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 定理 FA-T2（所有权协调定理） {#定理-fa-t2所有权协调定理} | `#定理-fa-t2所有权协调定理-定理-fa-t2所有权协调定理` | 同文件锚点不存在: #定理-fa-t2所有权协调定理-定理-fa-t2所有权协调定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 推论 FA-C1（纯 Safe Facade） {#推论-fa-c1纯-safe-facade} | `#推论-fa-c1纯-safe-facade-推论-fa-c1纯-safe-facade` | 同文件锚点不存在: #推论-fa-c1纯-safe-facade-推论-fa-c1纯-safe-facade |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总} | `#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总` | 同文件锚点不存在: #概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | Rust 所有权、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 与 Rust 类型系统的联系 {#与-rust-类型系统的联系} | `#与-rust-类型系统的联系-与-rust-类型系统的联系` | 同文件锚点不存在: #与-rust-类型系统的联系-与-rust-类型系统的联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 反例 1：Facade 持有子系统局部引用（Reference） {#反例-1facade-持有子系统局部引用} | `#反例-1facade-持有子系统局部引用-反例-1facade-持有子系统局部引用` | 同文件锚点不存在: #反例-1facade-持有子系统局部引用-反例-1facade-持有子系统局部引用 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 反例 1：Facade 持有子系统局部引用 {#反例-1facade-持有子系统局部引用} | `#反例-1facade-持有子系统局部引用-反例-1facade-持有子系统局部引用` | 同文件锚点不存在: #反例-1facade-持有子系统局部引用-反例-1facade-持有子系统局部引用 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 反例 2：高层方法破坏子系统不变式 {#反例-2高层方法破坏子系统不变式} | `#反例-2高层方法破坏子系统不变式-反例-2高层方法破坏子系统不变式` | 同文件锚点不存在: #反例-2高层方法破坏子系统不变式-反例-2高层方法破坏子系统不变式 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 反例 3：跨线程共享未同步 {#反例-3跨线程共享未同步} | `#反例-3跨线程共享未同步-反例-3跨线程共享未同步` | 同文件锚点不存在: #反例-3跨线程共享未同步-反例-3跨线程共享未同步 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md | 与 GoF 对比 {#与-gof-对比} | `#与-gof-对比-与-gof-对比` | 同文件锚点不存在: #与-gof-对比-与-gof-对比 |
@@ -6361,12 +5849,12 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | Rust 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | 与 Rust 类型系统的联系 {#与-rust-类型系统的联系} | `#与-rust-类型系统的联系-与-rust-类型系统的联系` | 同文件锚点不存在: #与-rust-类型系统的联系-与-rust-类型系统的联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | 反例 1：RefCell 运行时（Runtime）借用冲突 {#反例-1refcell-运行时借用冲突} | `#反例-1refcell-运行时借用冲突-反例-1refcell-运行时借用冲突` | 同文件锚点不存在: #反例-1refcell-运行时借用冲突-反例-1refcell-运行时借用冲突 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | 反例 1：RefCell 运行时借用冲突 {#反例-1refcell-运行时借用冲突} | `#反例-1refcell-运行时借用冲突-反例-1refcell-运行时借用冲突` | 同文件锚点不存在: #反例-1refcell-运行时借用冲突-反例-1refcell-运行时借用冲突 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | 反例 2：代理生命周期短于主题 {#反例-2代理生命周期短于主题} | `#反例-2代理生命周期短于主题-反例-2代理生命周期短于主题` | 同文件锚点不存在: #反例-2代理生命周期短于主题-反例-2代理生命周期短于主题 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | 反例 3：保护代理未验证权限 {#反例-3保护代理未验证权限} | `#反例-3保护代理未验证权限-反例-3保护代理未验证权限` | 同文件锚点不存在: #反例-3保护代理未验证权限-反例-3保护代理未验证权限 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md | 与 GoF 对比 {#与-gof-对比} | `#与-gof-对比-与-gof-对比` | 同文件锚点不存在: #与-gof-对比-与-gof-对比 |
@@ -6385,9 +5873,9 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md | Rust 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md | 与 Rust 类型系统的联系 {#与-rust-类型系统的联系} | `#与-rust-类型系统的联系-与-rust-类型系统的联系` | 同文件锚点不存在: #与-rust-类型系统的联系-与-rust-类型系统的联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md | 完整场景示例：HTTP 中间件链 {#完整场景示例http-中间件链} | `#完整场景示例http-中间件链-完整场景示例http-中间件链` | 同文件锚点不存在: #完整场景示例http-中间件链-完整场景示例http-中间件链 |
@@ -6434,9 +5922,9 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md | Rust 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md | 与 Rust 类型系统的联系 {#与-rust-类型系统的联系} | `#与-rust-类型系统的联系-与-rust-类型系统的联系` | 同文件锚点不存在: #与-rust-类型系统的联系-与-rust-类型系统的联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md | 完整 DSL 示例：简易查询语言 {#完整-dsl-示例简易查询语言} | `#完整-dsl-示例简易查询语言-完整-dsl-示例简易查询语言` | 同文件锚点不存在: #完整-dsl-示例简易查询语言-完整-dsl-示例简易查询语言 |
@@ -6451,21 +5939,21 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 📊 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | Def 1.1（Iterator 结构） {#def-11iterator-结构} | `#def-11iterator-结构-def-11iterator-结构` | 同文件锚点不存在: #def-11iterator-结构-def-11iterator-结构 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | Axiom IT1（单次访问公理） {#axiom-it1单次访问公理} | `#axiom-it1单次访问公理-axiom-it1单次访问公理` | 同文件锚点不存在: #axiom-it1单次访问公理-axiom-it1单次访问公理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | Axiom IT2（可变借用（Mutable Borrow）公理） {#axiom-it2可变借用公理} | `#axiom-it2可变借用公理-axiom-it2可变借用公理` | 同文件锚点不存在: #axiom-it2可变借用公理-axiom-it2可变借用公理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | Axiom IT2（可变借用公理） {#axiom-it2可变借用公理} | `#axiom-it2可变借用公理-axiom-it2可变借用公理` | 同文件锚点不存在: #axiom-it2可变借用公理-axiom-it2可变借用公理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 定理 IT-T1（Iterator trait 类型安全定理） {#定理-it-t1iterator-trait-类型安全定理} | `#定理-it-t1iterator-trait-类型安全定理-定理-it-t1iterator-trait-类型安全定理` | 同文件锚点不存在: #定理-it-t1iterator-trait-类型安全定理-定理-it-t1iterator-trait-类型安全定理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 定理 IT-T2（可变借用（Borrowing）安全定理） {#定理-it-t2可变借用安全定理} | `#定理-it-t2可变借用安全定理-定理-it-t2可变借用安全定理` | 同文件锚点不存在: #定理-it-t2可变借用安全定理-定理-it-t2可变借用安全定理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 定理 IT-T2（可变借用安全定理） {#定理-it-t2可变借用安全定理} | `#定理-it-t2可变借用安全定理-定理-it-t2可变借用安全定理` | 同文件锚点不存在: #定理-it-t2可变借用安全定理-定理-it-t2可变借用安全定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 推论 IT-C1（纯 Safe Iterator） {#推论-it-c1纯-safe-iterator} | `#推论-it-c1纯-safe-iterator-推论-it-c1纯-safe-iterator` | 同文件锚点不存在: #推论-it-c1纯-safe-iterator-推论-it-c1纯-safe-iterator |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总} | `#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总` | 同文件锚点不存在: #概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | Rust 所有权（Ownership）、借用、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 与 Rust 类型系统的联系 {#与-rust-类型系统的联系} | `#与-rust-类型系统的联系-与-rust-类型系统的联系` | 同文件锚点不存在: #与-rust-类型系统的联系-与-rust-类型系统的联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 反例 1：迭代中修改集合 {#反例-1迭代中修改集合} | `#反例-1迭代中修改集合-反例-1迭代中修改集合` | 同文件锚点不存在: #反例-1迭代中修改集合-反例-1迭代中修改集合 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 反例 2：返回局部引用（Reference） {#反例-2返回局部引用} | `#反例-2返回局部引用-反例-2返回局部引用` | 同文件锚点不存在: #反例-2返回局部引用-反例-2返回局部引用 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 反例 2：返回局部引用 {#反例-2返回局部引用} | `#反例-2返回局部引用-反例-2返回局部引用` | 同文件锚点不存在: #反例-2返回局部引用-反例-2返回局部引用 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 反例 3：违反 Iterator 契约 {#反例-3违反-iterator-契约} | `#反例-3违反-iterator-契约-反例-3违反-iterator-契约` | 同文件锚点不存在: #反例-3违反-iterator-契约-反例-3违反-iterator-契约 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 与 Rust 1.93 的对应 {#与-rust-193-的对应} | `#与-rust-193-的对应-与-rust-193-的对应` | 同文件锚点不存在: #与-rust-193-的对应-与-rust-193-的对应 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
@@ -6474,7 +5962,7 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 📊 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | Def 1.1（Mediator 结构） {#def-11mediator-结构} | `#def-11mediator-结构-def-11mediator-结构` | 同文件锚点不存在: #def-11mediator-结构-def-11mediator-结构 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | Axiom ME1（无直接耦合公理） {#axiom-me1无直接耦合公理} | `#axiom-me1无直接耦合公理-axiom-me1无直接耦合公理` | 同文件锚点不存在: #axiom-me1无直接耦合公理-axiom-me1无直接耦合公理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | Axiom ME2（无循环引用（Reference）公理） {#axiom-me2无循环引用公理} | `#axiom-me2无循环引用公理-axiom-me2无循环引用公理` | 同文件锚点不存在: #axiom-me2无循环引用公理-axiom-me2无循环引用公理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | Axiom ME2（无循环引用公理） {#axiom-me2无循环引用公理} | `#axiom-me2无循环引用公理-axiom-me2无循环引用公理` | 同文件锚点不存在: #axiom-me2无循环引用公理-axiom-me2无循环引用公理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 定理 ME-T1（循环引用避免定理） {#定理-me-t1循环引用避免定理} | `#定理-me-t1循环引用避免定理-定理-me-t1循环引用避免定理` | 同文件锚点不存在: #定理-me-t1循环引用避免定理-定理-me-t1循环引用避免定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 定理 ME-T2（消息路由安全定理） {#定理-me-t2消息路由安全定理} | `#定理-me-t2消息路由安全定理-定理-me-t2消息路由安全定理` | 同文件锚点不存在: #定理-me-t2消息路由安全定理-定理-me-t2消息路由安全定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 推论 ME-C1（纯 Safe Mediator） {#推论-me-c1纯-safe-mediator} | `#推论-me-c1纯-safe-mediator-推论-me-c1纯-safe-mediator` | 同文件锚点不存在: #推论-me-c1纯-safe-mediator-推论-me-c1纯-safe-mediator |
@@ -6482,13 +5970,13 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | Rust 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 完整场景示例：聊天室（channel 实现） {#完整场景示例聊天室channel-实现} | `#完整场景示例聊天室channel-实现-完整场景示例聊天室channel-实现` | 同文件锚点不存在: #完整场景示例聊天室channel-实现-完整场景示例聊天室channel-实现 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 反例 1：组件直接引用彼此 {#反例-1组件直接引用彼此} | `#反例-1组件直接引用彼此-反例-1组件直接引用彼此` | 同文件锚点不存在: #反例-1组件直接引用彼此-反例-1组件直接引用彼此 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 反例 2：Mediator 持有组件可变引用（Mutable Reference）导致借用冲突 {#反例-2mediator-持有组件可变引用导致借用冲突} | `#反例-2mediator-持有组件可变引用导致借用冲突-反例-2mediator-持有组件可变引用导致借用冲突` | 同文件锚点不存在: #反例-2mediator-持有组件可变引用导致借用冲突-反例-2mediator-持有组件可变引用导致借用冲突 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 反例 2：Mediator 持有组件可变引用导致借用冲突 {#反例-2mediator-持有组件可变引用导致借用冲突} | `#反例-2mediator-持有组件可变引用导致借用冲突-反例-2mediator-持有组件可变引用导致借用冲突` | 同文件锚点不存在: #反例-2mediator-持有组件可变引用导致借用冲突-反例-2mediator-持有组件可变引用导致借用冲突 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 反例 3：channel 关闭后发送 {#反例-3channel-关闭后发送} | `#反例-3channel-关闭后发送-反例-3channel-关闭后发送` | 同文件锚点不存在: #反例-3channel-关闭后发送-反例-3channel-关闭后发送 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 与 GoF 对比 {#与-gof-对比} | `#与-gof-对比-与-gof-对比` | 同文件锚点不存在: #与-gof-对比-与-gof-对比 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md | 与 Rust 1.93 的对应 {#与-rust-193-的对应} | `#与-rust-193-的对应-与-rust-193-的对应` | 同文件锚点不存在: #与-rust-193-的对应-与-rust-193-的对应 |
@@ -6500,17 +5988,17 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | Axiom MO1（状态完整公理） {#axiom-mo1状态完整公理} | `#axiom-mo1状态完整公理-axiom-mo1状态完整公理` | 同文件锚点不存在: #axiom-mo1状态完整公理-axiom-mo1状态完整公理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | Axiom MO2（兼容性公理） {#axiom-mo2兼容性公理} | `#axiom-mo2兼容性公理-axiom-mo2兼容性公理` | 同文件锚点不存在: #axiom-mo2兼容性公理-axiom-mo2兼容性公理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | 定理 MO-T1（Clone 实现定理） {#定理-mo-t1clone-实现定理} | `#定理-mo-t1clone-实现定理-定理-mo-t1clone-实现定理` | 同文件锚点不存在: #定理-mo-t1clone-实现定理-定理-mo-t1clone-实现定理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | 定理 MO-T2（状态一致性（Coherence）定理） {#定理-mo-t2状态一致性定理} | `#定理-mo-t2状态一致性定理-定理-mo-t2状态一致性定理` | 同文件锚点不存在: #定理-mo-t2状态一致性定理-定理-mo-t2状态一致性定理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | 定理 MO-T2（状态一致性定理） {#定理-mo-t2状态一致性定理} | `#定理-mo-t2状态一致性定理-定理-mo-t2状态一致性定理` | 同文件锚点不存在: #定理-mo-t2状态一致性定理-定理-mo-t2状态一致性定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | 推论 MO-C1（近似表达） {#推论-mo-c1近似表达} | `#推论-mo-c1近似表达-推论-mo-c1近似表达` | 同文件锚点不存在: #推论-mo-c1近似表达-推论-mo-c1近似表达 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总} | `#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总` | 同文件锚点不存在: #概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | Rust 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | 反例 1：备忘录持有发起者引用（Reference） {#反例-1备忘录持有发起者引用} | `#反例-1备忘录持有发起者引用-反例-1备忘录持有发起者引用` | 同文件锚点不存在: #反例-1备忘录持有发起者引用-反例-1备忘录持有发起者引用 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | 反例 1：备忘录持有发起者引用 {#反例-1备忘录持有发起者引用} | `#反例-1备忘录持有发起者引用-反例-1备忘录持有发起者引用` | 同文件锚点不存在: #反例-1备忘录持有发起者引用-反例-1备忘录持有发起者引用 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | 反例 2：恢复后修改备忘录影响发起者 {#反例-2恢复后修改备忘录影响发起者} | `#反例-2恢复后修改备忘录影响发起者-反例-2恢复后修改备忘录影响发起者` | 同文件锚点不存在: #反例-2恢复后修改备忘录影响发起者-反例-2恢复后修改备忘录影响发起者 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | 反例 3：备忘录字段未完整捕获状态 {#反例-3备忘录字段未完整捕获状态} | `#反例-3备忘录字段未完整捕获状态-反例-3备忘录字段未完整捕获状态` | 同文件锚点不存在: #反例-3备忘录字段未完整捕获状态-反例-3备忘录字段未完整捕获状态 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md | 与 GoF 对比 {#与-gof-对比} | `#与-gof-对比-与-gof-对比` | 同文件锚点不存在: #与-gof-对比-与-gof-对比 |
@@ -6544,16 +6032,16 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | 📊 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | Def 1.1（State 结构） {#def-11state-结构} | `#def-11state-结构-def-11state-结构` | 同文件锚点不存在: #def-11state-结构-def-11state-结构 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | Axiom ST1（状态机全定义公理） {#axiom-st1状态机全定义公理} | `#axiom-st1状态机全定义公理-axiom-st1状态机全定义公理` | 同文件锚点不存在: #axiom-st1状态机全定义公理-axiom-st1状态机全定义公理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | 定理 ST-T1（枚举（Enum）穷尽定理） {#定理-st-t1枚举穷尽定理} | `#定理-st-t1枚举穷尽定理-定理-st-t1枚举穷尽定理` | 同文件锚点不存在: #定理-st-t1枚举穷尽定理-定理-st-t1枚举穷尽定理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | 定理 ST-T1（枚举穷尽定理） {#定理-st-t1枚举穷尽定理} | `#定理-st-t1枚举穷尽定理-定理-st-t1枚举穷尽定理` | 同文件锚点不存在: #定理-st-t1枚举穷尽定理-定理-st-t1枚举穷尽定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | 定理 ST-T2（类型状态编译期消除定理） {#定理-st-t2类型状态编译期消除定理} | `#定理-st-t2类型状态编译期消除定理-定理-st-t2类型状态编译期消除定理` | 同文件锚点不存在: #定理-st-t2类型状态编译期消除定理-定理-st-t2类型状态编译期消除定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | 推论 ST-C1（纯 Safe State） {#推论-st-c1纯-safe-state} | `#推论-st-c1纯-safe-state-推论-st-c1纯-safe-state` | 同文件锚点不存在: #推论-st-c1纯-safe-state-推论-st-c1纯-safe-state |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总} | `#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总` | 同文件锚点不存在: #概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | Rust 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | 反例 1：状态转移后仍使用旧状态 {#反例-1状态转移后仍使用旧状态} | `#反例-1状态转移后仍使用旧状态-反例-1状态转移后仍使用旧状态` | 同文件锚点不存在: #反例-1状态转移后仍使用旧状态-反例-1状态转移后仍使用旧状态 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md | 反例 2：状态未实现 Send 导致跨线程失败 {#反例-2状态未实现-send-导致跨线程失败} | `#反例-2状态未实现-send-导致跨线程失败-反例-2状态未实现-send-导致跨线程失败` | 同文件锚点不存在: #反例-2状态未实现-send-导致跨线程失败-反例-2状态未实现-send-导致跨线程失败 |
@@ -6566,21 +6054,21 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 📊 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | Def 1.1（Strategy 结构） {#def-11strategy-结构} | `#def-11strategy-结构-def-11strategy-结构` | 同文件锚点不存在: #def-11strategy-结构-def-11strategy-结构 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | Axiom SR1（接口一致公理） {#axiom-sr1接口一致公理} | `#axiom-sr1接口一致公理-axiom-sr1接口一致公理` | 同文件锚点不存在: #axiom-sr1接口一致公理-axiom-sr1接口一致公理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | Axiom SR2（所有权（Ownership）独立公理） {#axiom-sr2所有权独立公理} | `#axiom-sr2所有权独立公理-axiom-sr2所有权独立公理` | 同文件锚点不存在: #axiom-sr2所有权独立公理-axiom-sr2所有权独立公理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | Axiom SR2（所有权独立公理） {#axiom-sr2所有权独立公理} | `#axiom-sr2所有权独立公理-axiom-sr2所有权独立公理` | 同文件锚点不存在: #axiom-sr2所有权独立公理-axiom-sr2所有权独立公理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 定理 SR-T1（trait 多态安全定理） {#定理-sr-t1trait-多态安全定理} | `#定理-sr-t1trait-多态安全定理-定理-sr-t1trait-多态安全定理` | 同文件锚点不存在: #定理-sr-t1trait-多态安全定理-定理-sr-t1trait-多态安全定理 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 定理 SR-T2（借用（Borrowing）互斥定理） {#定理-sr-t2借用互斥定理} | `#定理-sr-t2借用互斥定理-定理-sr-t2借用互斥定理` | 同文件锚点不存在: #定理-sr-t2借用互斥定理-定理-sr-t2借用互斥定理 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 定理 SR-T2（借用互斥定理） {#定理-sr-t2借用互斥定理} | `#定理-sr-t2借用互斥定理-定理-sr-t2借用互斥定理` | 同文件锚点不存在: #定理-sr-t2借用互斥定理-定理-sr-t2借用互斥定理 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 推论 SR-C1（纯 Safe Strategy） {#推论-sr-c1纯-safe-strategy} | `#推论-sr-c1纯-safe-strategy-推论-sr-c1纯-safe-strategy` | 同文件锚点不存在: #推论-sr-c1纯-safe-strategy-推论-sr-c1纯-safe-strategy |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总} | `#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总` | 同文件锚点不存在: #概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | Rust 所有权、借用、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 反例 1：引用（Reference）策略生命周期不足 {#反例-1引用策略生命周期不足} | `#反例-1引用策略生命周期不足-反例-1引用策略生命周期不足` | 同文件锚点不存在: #反例-1引用策略生命周期不足-反例-1引用策略生命周期不足 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 反例 1：引用策略生命周期不足 {#反例-1引用策略生命周期不足} | `#反例-1引用策略生命周期不足-反例-1引用策略生命周期不足` | 同文件锚点不存在: #反例-1引用策略生命周期不足-反例-1引用策略生命周期不足 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 反例 2：策略需要 \&mut 但上下文为 \&self {#反例-2策略需要-mut-但上下文为-self} | `#反例-2策略需要-mut-但上下文为-self-反例-2策略需要-mut-但上下文为-self` | 同文件锚点不存在: #反例-2策略需要-mut-但上下文为-self-反例-2策略需要-mut-但上下文为-self |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 反例 3：泛型（Generics）策略导致代码膨胀 {#反例-3泛型策略导致代码膨胀} | `#反例-3泛型策略导致代码膨胀-反例-3泛型策略导致代码膨胀` | 同文件锚点不存在: #反例-3泛型策略导致代码膨胀-反例-3泛型策略导致代码膨胀 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 反例 3：泛型策略导致代码膨胀 {#反例-3泛型策略导致代码膨胀} | `#反例-3泛型策略导致代码膨胀-反例-3泛型策略导致代码膨胀` | 同文件锚点不存在: #反例-3泛型策略导致代码膨胀-反例-3泛型策略导致代码膨胀 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 与 GoF 对比 {#与-gof-对比} | `#与-gof-对比-与-gof-对比` | 同文件锚点不存在: #与-gof-对比-与-gof-对比 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 与 Rust 1.93 的对应 {#与-rust-193-的对应} | `#与-rust-193-的对应-与-rust-193-的对应` | 同文件锚点不存在: #与-rust-193-的对应-与-rust-193-的对应 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
@@ -6597,9 +6085,9 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | Rust 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | 反例 1：覆盖默认模板方法 {#反例-1覆盖默认模板方法} | `#反例-1覆盖默认模板方法-反例-1覆盖默认模板方法` | 同文件锚点不存在: #反例-1覆盖默认模板方法-反例-1覆盖默认模板方法 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | 反例 2：Hook 签名不匹配 {#反例-2hook-签名不匹配} | `#反例-2hook-签名不匹配-反例-2hook-签名不匹配` | 同文件锚点不存在: #反例-2hook-签名不匹配-反例-2hook-签名不匹配 |
@@ -6619,13 +6107,13 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | Rust 实现与代码示例 {#rust-实现与代码示例} | `#rust-实现与代码示例-rust-实现与代码示例` | 同文件锚点不存在: #rust-实现与代码示例-rust-实现与代码示例 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新} | `#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新` | 同文件锚点不存在: #rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | Edition 2024 关键兼容点 {#edition-2024-关键兼容点} | `#edition-2024-关键兼容点-edition-2024-关键兼容点` | 同文件锚点不存在: #edition-2024-关键兼容点-edition-2024-关键兼容点 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | Rust 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析} | `#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析` | 同文件锚点不存在: #rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | trait 系统约束 {#trait-系统约束} | `#trait-系统约束-trait-系统约束` | 同文件锚点不存在: #trait-系统约束-trait-系统约束 |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | 与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系} | `#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系` | 同文件锚点不存在: #与-rust-类型系统的综合联系-与-rust-类型系统的综合联系 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | 完整场景示例：AST 美化打印 {#完整场景示例ast-美化打印} | `#完整场景示例ast-美化打印-完整场景示例ast-美化打印` | 同文件锚点不存在: #完整场景示例ast-美化打印-完整场景示例ast-美化打印 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | 安全边界（Safety Boundary） {#安全边界safety-boundary} | `#安全边界safety-boundary-安全边界safety-boundary` | 同文件锚点不存在: #安全边界safety-boundary-安全边界safety-boundary |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | 反例 1：新增元素类型未实现 visit {#反例-1新增元素类型未实现-visit} | `#反例-1新增元素类型未实现-visit-反例-1新增元素类型未实现-visit` | 同文件锚点不存在: #反例-1新增元素类型未实现-visit-反例-1新增元素类型未实现-visit |
-| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | 反例 2：访问者中可变借用（Mutable Borrow）元素 {#反例-2访问者中可变借用元素} | `#反例-2访问者中可变借用元素-反例-2访问者中可变借用元素` | 同文件锚点不存在: #反例-2访问者中可变借用元素-反例-2访问者中可变借用元素 |
+| docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | 反例 2：访问者中可变借用元素 {#反例-2访问者中可变借用元素} | `#反例-2访问者中可变借用元素-反例-2访问者中可变借用元素` | 同文件锚点不存在: #反例-2访问者中可变借用元素-反例-2访问者中可变借用元素 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | 反例 3：遍历中修改元素集合 {#反例-3遍历中修改元素集合} | `#反例-3遍历中修改元素集合-反例-3遍历中修改元素集合` | 同文件锚点不存在: #反例-3遍历中修改元素集合-反例-3遍历中修改元素集合 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | 与 GoF 对比 {#与-gof-对比} | `#与-gof-对比-与-gof-对比` | 同文件锚点不存在: #与-gof-对比-与-gof-对比 |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | 与 Rust 1.93 的对应 {#与-rust-193-的对应} | `#与-rust-193-的对应-与-rust-193-的对应` | 同文件锚点不存在: #与-rust-193-的对应-与-rust-193-的对应 |
@@ -6885,7 +6373,7 @@
 | docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md | 2. 基本假设 (Axiom) {#2-基本假设-axiom} | `#2-基本假设-axiom-2-基本假设-axiom` | 同文件锚点不存在: #2-基本假设-axiom-2-基本假设-axiom |
 | docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md | Axiom S1: 补偿幂等性 {#axiom-s1-补偿幂等性} | `#axiom-s1-补偿幂等性-axiom-s1-补偿幂等性` | 同文件锚点不存在: #axiom-s1-补偿幂等性-axiom-s1-补偿幂等性 |
 | docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md | Axiom S2: 偏序无环性 {#axiom-s2-偏序无环性} | `#axiom-s2-偏序无环性-axiom-s2-偏序无环性` | 同文件锚点不存在: #axiom-s2-偏序无环性-axiom-s2-偏序无环性 |
-| docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md | Axiom S3: 最终一致性（Coherence） {#axiom-s3-最终一致性} | `#axiom-s3-最终一致性-axiom-s3-最终一致性` | 同文件锚点不存在: #axiom-s3-最终一致性-axiom-s3-最终一致性 |
+| docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md | Axiom S3: 最终一致性 {#axiom-s3-最终一致性} | `#axiom-s3-最终一致性-axiom-s3-最终一致性` | 同文件锚点不存在: #axiom-s3-最终一致性-axiom-s3-最终一致性 |
 | docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md | 3. 定理 (Theorem) {#3-定理-theorem} | `#3-定理-theorem-3-定理-theorem` | 同文件锚点不存在: #3-定理-theorem-3-定理-theorem |
 | docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md | Theorem S1: Saga 原子性 {#theorem-s1-saga-原子性} | `#theorem-s1-saga-原子性-theorem-s1-saga-原子性` | 同文件锚点不存在: #theorem-s1-saga-原子性-theorem-s1-saga-原子性 |
 | docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md | Theorem S2: 补偿终止性 {#theorem-s2-补偿终止性} | `#theorem-s2-补偿终止性-theorem-s2-补偿终止性` | 同文件锚点不存在: #theorem-s2-补偿终止性-theorem-s2-补偿终止性 |
@@ -6898,7 +6386,7 @@
 | docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md | 1. 概念定义 (Def) {#1-概念定义-def} | `#1-概念定义-def-1-概念定义-def` | 同文件锚点不存在: #1-概念定义-def-1-概念定义-def |
 | docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md | Def CQ1: CQRS (Command Query Responsibility Segregation) {#def-cq1-cqrs-command-query-responsibility-segregation} | `#def-cq1-cqrs-command-query-responsibility-segregation-def-cq1-cqrs-command-query-responsibility-segregation` | 同文件锚点不存在: #def-cq1-cqrs-command-query-responsibility-segregation-def-cq1-cqrs-command-query-responsibility-segregation |
 | docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md | Def CQ2: 命令与查询的分离 {#def-cq2-命令与查询的分离} | `#def-cq2-命令与查询的分离-def-cq2-命令与查询的分离` | 同文件锚点不存在: #def-cq2-命令与查询的分离-def-cq2-命令与查询的分离 |
-| docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md | Def CQ3: 最终一致性（Coherence）边界 {#def-cq3-最终一致性边界} | `#def-cq3-最终一致性边界-def-cq3-最终一致性边界` | 同文件锚点不存在: #def-cq3-最终一致性边界-def-cq3-最终一致性边界 |
+| docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md | Def CQ3: 最终一致性边界 {#def-cq3-最终一致性边界} | `#def-cq3-最终一致性边界-def-cq3-最终一致性边界` | 同文件锚点不存在: #def-cq3-最终一致性边界-def-cq3-最终一致性边界 |
 | docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md | 2. 基本假设 (Axiom) {#2-基本假设-axiom} | `#2-基本假设-axiom-2-基本假设-axiom` | 同文件锚点不存在: #2-基本假设-axiom-2-基本假设-axiom |
 | docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md | Axiom CQ1: 命令不可重复 {#axiom-cq1-命令不可重复} | `#axiom-cq1-命令不可重复-axiom-cq1-命令不可重复` | 同文件锚点不存在: #axiom-cq1-命令不可重复-axiom-cq1-命令不可重复 |
 | docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md | Axiom CQ2: 投影单调性 {#axiom-cq2-投影单调性} | `#axiom-cq2-投影单调性-axiom-cq2-投影单调性` | 同文件锚点不存在: #axiom-cq2-投影单调性-axiom-cq2-投影单调性 |
@@ -7062,7 +6550,7 @@
 | docs\research_notes\type_theory\10_advanced_types.md | 🎯 研究目标 {#研究目标} | `#-研究目标-研究目标` | 同文件锚点不存在: #-研究目标-研究目标 |
 | docs\research_notes\type_theory\10_advanced_types.md | 📚 理论基础 {#理论基础} | `#-理论基础-理论基础` | 同文件锚点不存在: #-理论基础-理论基础 |
 | docs\research_notes\type_theory\10_advanced_types.md | GATs (Generic Associated Types) {#gats-generic-associated-types} | `#gats-generic-associated-types-gats-generic-associated-types` | 同文件锚点不存在: #gats-generic-associated-types-gats-generic-associated-types |
-| docs\research_notes\type_theory\10_advanced_types.md | const 泛型（Generics） {#const-泛型} | `#const-泛型-const-泛型` | 同文件锚点不存在: #const-泛型-const-泛型 |
+| docs\research_notes\type_theory\10_advanced_types.md | const 泛型 {#const-泛型} | `#const-泛型-const-泛型` | 同文件锚点不存在: #const-泛型-const-泛型 |
 | docs\research_notes\type_theory\10_advanced_types.md | GATs 的理论基础 {#gats-的理论基础} | `#gats-的理论基础-gats-的理论基础` | 同文件锚点不存在: #gats-的理论基础-gats-的理论基础 |
 | docs\research_notes\type_theory\10_advanced_types.md | const 泛型的理论基础 {#const-泛型的理论基础} | `#const-泛型的理论基础-const-泛型的理论基础` | 同文件锚点不存在: #const-泛型的理论基础-const-泛型的理论基础 |
 | docs\research_notes\type_theory\10_advanced_types.md | 1. Generic Associated Types in Rust {#1-generic-associated-types-in-rust} | `#1-generic-associated-types-in-rust-1-generic-associated-types-in-rust` | 同文件锚点不存在: #1-generic-associated-types-in-rust-1-generic-associated-types-in-rust |
@@ -7072,7 +6560,7 @@
 | docs\research_notes\type_theory\10_advanced_types.md | 1. GATs 形式化 {#1-gats-形式化} | `#1-gats-形式化-1-gats-形式化` | 同文件锚点不存在: #1-gats-形式化-1-gats-形式化 |
 | docs\research_notes\type_theory\10_advanced_types.md | 2. const 泛型形式化 {#2-const-泛型形式化} | `#2-const-泛型形式化-2-const-泛型形式化` | 同文件锚点不存在: #2-const-泛型形式化-2-const-泛型形式化 |
 | docs\research_notes\type_theory\10_advanced_types.md | 3. 依赖类型关系 {#3-依赖类型关系} | `#3-依赖类型关系-3-依赖类型关系` | 同文件锚点不存在: #3-依赖类型关系-3-依赖类型关系 |
-| docs\research_notes\type_theory\10_advanced_types.md | 4. 类型系统（Type System）扩展 {#4-类型系统扩展} | `#4-类型系统扩展-4-类型系统扩展` | 同文件锚点不存在: #4-类型系统扩展-4-类型系统扩展 |
+| docs\research_notes\type_theory\10_advanced_types.md | 4. 类型系统扩展 {#4-类型系统扩展} | `#4-类型系统扩展-4-类型系统扩展` | 同文件锚点不存在: #4-类型系统扩展-4-类型系统扩展 |
 | docs\research_notes\type_theory\10_advanced_types.md | ⚠️ 反例：违反高级类型规则 {#反例违反高级类型规则} | `#️-反例违反高级类型规则-反例违反高级类型规则` | 同文件锚点不存在: #️-反例违反高级类型规则-反例违反高级类型规则 |
 | docs\research_notes\type_theory\10_advanced_types.md | 🌳 公理-定理证明树 {#公理-定理证明树} | `#-公理-定理证明树-公理-定理证明树` | 同文件锚点不存在: #-公理-定理证明树-公理-定理证明树 |
 | docs\research_notes\type_theory\10_advanced_types.md | ✅ 证明目标 {#证明目标} | `#-证明目标-证明目标` | 同文件锚点不存在: #-证明目标-证明目标 |
@@ -7081,10 +6569,10 @@
 | docs\research_notes\type_theory\10_advanced_types.md | 示例 2: const 泛型 {#示例-2-const-泛型} | `#示例-2-const-泛型-示例-2-const-泛型` | 同文件锚点不存在: #示例-2-const-泛型-示例-2-const-泛型 |
 | docs\research_notes\type_theory\10_advanced_types.md | 示例 3: 类型族 {#示例-3-类型族} | `#示例-3-类型族-示例-3-类型族` | 同文件锚点不存在: #示例-3-类型族-示例-3-类型族 |
 | docs\research_notes\type_theory\10_advanced_types.md | 示例 4: const 泛型与数组 {#示例-4-const-泛型与数组} | `#示例-4-const-泛型与数组-示例-4-const-泛型与数组` | 同文件锚点不存在: #示例-4-const-泛型与数组-示例-4-const-泛型与数组 |
-| docs\research_notes\type_theory\10_advanced_types.md | 示例 5: GATs 与迭代器（Iterator） {#示例-5-gats-与迭代器} | `#示例-5-gats-与迭代器-示例-5-gats-与迭代器` | 同文件锚点不存在: #示例-5-gats-与迭代器-示例-5-gats-与迭代器 |
+| docs\research_notes\type_theory\10_advanced_types.md | 示例 5: GATs 与迭代器 {#示例-5-gats-与迭代器} | `#示例-5-gats-与迭代器-示例-5-gats-与迭代器` | 同文件锚点不存在: #示例-5-gats-与迭代器-示例-5-gats-与迭代器 |
 | docs\research_notes\type_theory\10_advanced_types.md | 示例 6: GATs 与类型级函数 {#示例-6-gats-与类型级函数} | `#示例-6-gats-与类型级函数-示例-6-gats-与类型级函数` | 同文件锚点不存在: #示例-6-gats-与类型级函数-示例-6-gats-与类型级函数 |
 | docs\research_notes\type_theory\10_advanced_types.md | 示例 7: const 泛型与矩阵 {#示例-7-const-泛型与矩阵} | `#示例-7-const-泛型与矩阵-示例-7-const-泛型与矩阵` | 同文件锚点不存在: #示例-7-const-泛型与矩阵-示例-7-const-泛型与矩阵 |
-| docs\research_notes\type_theory\10_advanced_types.md | 示例 8: GATs 与异步（Async）编程 {#示例-8-gats-与异步编程} | `#示例-8-gats-与异步编程-示例-8-gats-与异步编程` | 同文件锚点不存在: #示例-8-gats-与异步编程-示例-8-gats-与异步编程 |
+| docs\research_notes\type_theory\10_advanced_types.md | 示例 8: GATs 与异步编程 {#示例-8-gats-与异步编程} | `#示例-8-gats-与异步编程-示例-8-gats-与异步编程` | 同文件锚点不存在: #示例-8-gats-与异步编程-示例-8-gats-与异步编程 |
 | docs\research_notes\type_theory\10_advanced_types.md | 📖 参考文献 {#参考文献} | `#-参考文献-参考文献` | 同文件锚点不存在: #-参考文献-参考文献 |
 | docs\research_notes\type_theory\10_advanced_types.md | 🔄 研究进展 {#研究进展} | `#-研究进展-研究进展` | 同文件锚点不存在: #-研究进展-研究进展 |
 | docs\research_notes\type_theory\10_advanced_types.md | 进行中 🔄（已完成） {#进行中-已完成} | `#进行中-已完成-进行中-已完成` | 同文件锚点不存在: #进行中-已完成-进行中-已完成 |
@@ -7130,7 +6618,7 @@
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 📚 理论基础 {#理论基础} | `#-理论基础-理论基础` | 同文件锚点不存在: #-理论基础-理论基础 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | Trait 核心概念 {#trait-核心概念} | `#trait-核心概念-trait-核心概念` | 同文件锚点不存在: #trait-核心概念-trait-核心概念 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | Trait 对象的理论基础 {#trait-对象的理论基础} | `#trait-对象的理论基础-trait-对象的理论基础` | 同文件锚点不存在: #trait-对象的理论基础-trait-对象的理论基础 |
-| docs\research_notes\type_theory\10_trait_system_formalization.md | 泛型（Generics） Trait 的理论基础 {#泛型-trait-的理论基础} | `#泛型-trait-的理论基础-泛型-trait-的理论基础` | 同文件锚点不存在: #泛型-trait-的理论基础-泛型-trait-的理论基础 |
+| docs\research_notes\type_theory\10_trait_system_formalization.md | 泛型 Trait 的理论基础 {#泛型-trait-的理论基础} | `#泛型-trait-的理论基础-泛型-trait-的理论基础` | 同文件锚点不存在: #泛型-trait-的理论基础-泛型-trait-的理论基础 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 1. Type Classes: An Exploration of the Design Space {#1-type-classes-an-exploration-of-the-design-space} | `#1-type-classes-an-exploration-of-the-design-space-1-type-classes-an-exploration-of-the-design-space` | 同文件锚点不存在: #1-type-classes-an-exploration-of-the-design-space-1-type-classes-an-exploration-of-the-design-space |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 2. Existential Types for Object-Oriented Programming {#2-existential-types-for-object-oriented-programming} | `#2-existential-types-for-object-oriented-programming-2-existential-types-for-object-oriented-programming` | 同文件锚点不存在: #2-existential-types-for-object-oriented-programming-2-existential-types-for-object-oriented-programming |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 3. The RustBelt Project: Formalizing Rust's Type System {#3-the-rustbelt-project-formalizing-rusts-type-system} | `#3-the-rustbelt-project-formalizing-rusts-type-system-3-the-rustbelt-project-formalizing-rusts-type-system` | 同文件锚点不存在: #3-the-rustbelt-project-formalizing-rusts-type-system-3-the-rustbelt-project-formalizing-rusts-type-system |
@@ -7141,7 +6629,7 @@
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 4. Trait 解析算法 {#4-trait-解析算法} | `#4-trait-解析算法-4-trait-解析算法` | 同文件锚点不存在: #4-trait-解析算法-4-trait-解析算法 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 5. Trait 对象语义 {#5-trait-对象语义} | `#5-trait-对象语义-5-trait-对象语义` | 同文件锚点不存在: #5-trait-对象语义-5-trait-对象语义 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | Trait Coherence（一致性）形式化 {#trait-coherence一致性形式化} | `#trait-coherence一致性形式化-trait-coherence一致性形式化` | 同文件锚点不存在: #trait-coherence一致性形式化-trait-coherence一致性形式化 |
-| docs\research_notes\type_theory\10_trait_system_formalization.md | 孤儿规则（Orphan Rule）与 Negative Impls {#孤儿规则与-negative-impls} | `#孤儿规则与-negative-impls-孤儿规则与-negative-impls` | 同文件锚点不存在: #孤儿规则与-negative-impls-孤儿规则与-negative-impls |
+| docs\research_notes\type_theory\10_trait_system_formalization.md | 孤儿规则与 Negative Impls {#孤儿规则与-negative-impls} | `#孤儿规则与-negative-impls-孤儿规则与-negative-impls` | 同文件锚点不存在: #孤儿规则与-negative-impls-孤儿规则与-negative-impls |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | RPITIT 与 async fn in trait（Rust 1.75.0 稳定化） {#rpitit-与-async-fn-in-traitrust-1750-稳定化} | `#rpitit-与-async-fn-in-traitrust-1750-稳定化-rpitit-与-async-fn-in-traitrust-1750-稳定化` | 同文件锚点不存在: #rpitit-与-async-fn-in-traitrust-1750-稳定化-rpitit-与-async-fn-in-traitrust-1750-稳定化 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | impl Trait 与 dyn Trait 可替换边界 {#impl-trait-与-dyn-trait-可替换边界} | `#impl-trait-与-dyn-trait-可替换边界-impl-trait-与-dyn-trait-可替换边界` | 同文件锚点不存在: #impl-trait-与-dyn-trait-可替换边界-impl-trait-与-dyn-trait-可替换边界 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | Trait + 泛型 + GAT 组合与 Specialization {#trait-泛型-gat-组合与-specialization} | `#trait--泛型--gat-组合与-specialization-trait-泛型-gat-组合与-specialization` | 同文件锚点不存在: #trait--泛型--gat-组合与-specialization-trait-泛型-gat-组合与-specialization |
@@ -7155,7 +6643,7 @@
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 示例 4: 关联类型 {#示例-4-关联类型} | `#示例-4-关联类型-示例-4-关联类型` | 同文件锚点不存在: #示例-4-关联类型-示例-4-关联类型 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 示例 5: Trait 对象与动态分发 {#示例-5-trait-对象与动态分发} | `#示例-5-trait-对象与动态分发-示例-5-trait-对象与动态分发` | 同文件锚点不存在: #示例-5-trait-对象与动态分发-示例-5-trait-对象与动态分发 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 示例 6: Trait 约束 {#示例-6-trait-约束} | `#示例-6-trait-约束-示例-6-trait-约束` | 同文件锚点不存在: #示例-6-trait-约束-示例-6-trait-约束 |
-| docs\research_notes\type_theory\10_trait_system_formalization.md | 示例 7: Trait 对象与生命周期（Lifetimes） {#示例-7-trait-对象与生命周期} | `#示例-7-trait-对象与生命周期-示例-7-trait-对象与生命周期` | 同文件锚点不存在: #示例-7-trait-对象与生命周期-示例-7-trait-对象与生命周期 |
+| docs\research_notes\type_theory\10_trait_system_formalization.md | 示例 7: Trait 对象与生命周期 {#示例-7-trait-对象与生命周期} | `#示例-7-trait-对象与生命周期-示例-7-trait-对象与生命周期` | 同文件锚点不存在: #示例-7-trait-对象与生命周期-示例-7-trait-对象与生命周期 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 示例 8: 高级 Trait 特性 - 默认实现和关联函数 {#示例-8-高级-trait-特性---默认实现和关联函数} | `#示例-8-高级-trait-特性---默认实现和关联函数-示例-8-高级-trait-特性---默认实现和关联函数` | 同文件锚点不存在: #示例-8-高级-trait-特性---默认实现和关联函数-示例-8-高级-trait-特性---默认实现和关联函数 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 示例 9: Trait 对象集合 {#示例-9-trait-对象集合} | `#示例-9-trait-对象集合-示例-9-trait-对象集合` | 同文件锚点不存在: #示例-9-trait-对象集合-示例-9-trait-对象集合 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 📖 参考文献 {#参考文献} | `#-参考文献-参考文献` | 同文件锚点不存在: #-参考文献-参考文献 |
@@ -7165,15 +6653,15 @@
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 🆕 Rust 1.93.0 相关更新 {#rust-1930-相关更新} | `#-rust-1930-相关更新-rust-1930-相关更新` | 同文件锚点不存在: #-rust-1930-相关更新-rust-1930-相关更新 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 全局分配器与 Trait 对象 {#全局分配器与-trait-对象} | `#全局分配器与-trait-对象-全局分配器与-trait-对象` | 同文件锚点不存在: #全局分配器与-trait-对象-全局分配器与-trait-对象 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | MaybeUninit 新方法与 Trait 对象 {#maybeuninit-新方法与-trait-对象} | `#maybeuninit-新方法与-trait-对象-maybeuninit-新方法与-trait-对象` | 同文件锚点不存在: #maybeuninit-新方法与-trait-对象-maybeuninit-新方法与-trait-对象 |
-| docs\research_notes\type_theory\10_trait_system_formalization.md | 🆕 Rust Book Ch 15.2 对齐: Deref Trait形式化 {#rust-book-ch-152-对齐-deref-trait（Trait）形式化} | `#-rust-book-ch-152-对齐-deref-trait形式化-rust-book-ch-152-对齐-deref-trait形式化` | 同文件锚点不存在: #-rust-book-ch-152-对齐-deref-trait形式化-rust-book-ch-152-对齐-deref-trait形式化 |
+| docs\research_notes\type_theory\10_trait_system_formalization.md | 🆕 Rust Book Ch 15.2 对齐: Deref Trait形式化 {#rust-book-ch-152-对齐-deref-trait形式化} | `#-rust-book-ch-152-对齐-deref-trait形式化-rust-book-ch-152-对齐-deref-trait形式化` | 同文件锚点不存在: #-rust-book-ch-152-对齐-deref-trait形式化-rust-book-ch-152-对齐-deref-trait形式化 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 定义 DEREF-1 (Deref Trait) {#定义-deref-1-deref-trait} | `#定义-deref-1-deref-trait-定义-deref-1-deref-trait` | 同文件锚点不存在: #定义-deref-1-deref-trait-定义-deref-1-deref-trait |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 定义 DEREF-2 (DerefMut Trait) {#定义-deref-2-derefmut-trait} | `#定义-deref-2-derefmut-trait-定义-deref-2-derefmut-trait` | 同文件锚点不存在: #定义-deref-2-derefmut-trait-定义-deref-2-derefmut-trait |
-| docs\research_notes\type_theory\10_trait_system_formalization.md | 定义 DEREF-3 (解引用（Reference）强制转换 Deref Coercion) {#定义-deref-3-解引用强制转换-deref-coercion} | `#定义-deref-3-解引用强制转换-deref-coercion-定义-deref-3-解引用强制转换-deref-coercion` | 同文件锚点不存在: #定义-deref-3-解引用强制转换-deref-coercion-定义-deref-3-解引用强制转换-deref-coercion |
+| docs\research_notes\type_theory\10_trait_system_formalization.md | 定义 DEREF-3 (解引用强制转换 Deref Coercion) {#定义-deref-3-解引用强制转换-deref-coercion} | `#定义-deref-3-解引用强制转换-deref-coercion-定义-deref-3-解引用强制转换-deref-coercion` | 同文件锚点不存在: #定义-deref-3-解引用强制转换-deref-coercion-定义-deref-3-解引用强制转换-deref-coercion |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 定理 DEREF-T1 (Deref一致性) {#定理-deref-t1-deref一致性} | `#定理-deref-t1-deref一致性-定理-deref-t1-deref一致性` | 同文件锚点不存在: #定理-deref-t1-deref一致性-定理-deref-t1-deref一致性 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 定理 DEREF-T2 (Deref传递性) {#定理-deref-t2-deref传递性} | `#定理-deref-t2-deref传递性-定理-deref-t2-deref传递性` | 同文件锚点不存在: #定理-deref-t2-deref传递性-定理-deref-t2-deref传递性 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 定理 DEREF-T3 (DerefMut排他性) {#定理-deref-t3-derefmut排他性} | `#定理-deref-t3-derefmut排他性-定理-deref-t3-derefmut排他性` | 同文件锚点不存在: #定理-deref-t3-derefmut排他性-定理-deref-t3-derefmut排他性 |
-| docs\research_notes\type_theory\10_trait_system_formalization.md | 示例1: Box（Box）解引用 {#示例1-box解引用} | `#示例1-box解引用-示例1-box解引用` | 同文件锚点不存在: #示例1-box解引用-示例1-box解引用 |
-| docs\research_notes\type_theory\10_trait_system_formalization.md | 示例2: 自定义智能指针（Smart Pointer） {#示例2-自定义智能指针} | `#示例2-自定义智能指针-示例2-自定义智能指针` | 同文件锚点不存在: #示例2-自定义智能指针-示例2-自定义智能指针 |
+| docs\research_notes\type_theory\10_trait_system_formalization.md | 示例1: Box解引用 {#示例1-box解引用} | `#示例1-box解引用-示例1-box解引用` | 同文件锚点不存在: #示例1-box解引用-示例1-box解引用 |
+| docs\research_notes\type_theory\10_trait_system_formalization.md | 示例2: 自定义智能指针 {#示例2-自定义智能指针} | `#示例2-自定义智能指针-示例2-自定义智能指针` | 同文件锚点不存在: #示例2-自定义智能指针-示例2-自定义智能指针 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 示例3: 函数参数中的Deref强制转换 {#示例3-函数参数中的deref强制转换} | `#示例3-函数参数中的deref强制转换-示例3-函数参数中的deref强制转换` | 同文件锚点不存在: #示例3-函数参数中的deref强制转换-示例3-函数参数中的deref强制转换 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 示例4: DerefMut {#示例4-derefmut} | `#示例4-derefmut-示例4-derefmut` | 同文件锚点不存在: #示例4-derefmut-示例4-derefmut |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
@@ -7218,9 +6706,9 @@
 | docs\research_notes\type_theory\10_type_system_foundations.md | 反例 2: 未绑定变量 {#反例-2-未绑定变量} | `#反例-2-未绑定变量-反例-2-未绑定变量` | 同文件锚点不存在: #反例-2-未绑定变量-反例-2-未绑定变量 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | 反例 3: 类型推导冲突（无限类型） {#反例-3-类型推导冲突无限类型} | `#反例-3-类型推导冲突无限类型-反例-3-类型推导冲突无限类型` | 同文件锚点不存在: #反例-3-类型推导冲突无限类型-反例-3-类型推导冲突无限类型 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | 反例 4: 多态限制违反 {#反例-4-多态限制违反} | `#反例-4-多态限制违反-反例-4-多态限制违反` | 同文件锚点不存在: #反例-4-多态限制违反-反例-4-多态限制违反 |
-| docs\research_notes\type_theory\10_type_system_foundations.md | 反例 5: 类型不安全操作（运行时（Runtime）错误） {#反例-5-类型不安全操作运行时错误} | `#反例-5-类型不安全操作运行时错误-反例-5-类型不安全操作运行时错误` | 同文件锚点不存在: #反例-5-类型不安全操作运行时错误-反例-5-类型不安全操作运行时错误 |
+| docs\research_notes\type_theory\10_type_system_foundations.md | 反例 5: 类型不安全操作（运行时错误） {#反例-5-类型不安全操作运行时错误} | `#反例-5-类型不安全操作运行时错误-反例-5-类型不安全操作运行时错误` | 同文件锚点不存在: #反例-5-类型不安全操作运行时错误-反例-5-类型不安全操作运行时错误 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | 反例 6: 约束求解失败 {#反例-6-约束求解失败} | `#反例-6-约束求解失败-反例-6-约束求解失败` | 同文件锚点不存在: #反例-6-约束求解失败-反例-6-约束求解失败 |
-| docs\research_notes\type_theory\10_type_system_foundations.md | 反例 7: 生命周期（Lifetimes）错误（类型系统扩展） {#反例-7-生命周期错误类型系统扩展} | `#反例-7-生命周期错误类型系统扩展-反例-7-生命周期错误类型系统扩展` | 同文件锚点不存在: #反例-7-生命周期错误类型系统扩展-反例-7-生命周期错误类型系统扩展 |
+| docs\research_notes\type_theory\10_type_system_foundations.md | 反例 7: 生命周期错误（类型系统扩展） {#反例-7-生命周期错误类型系统扩展} | `#反例-7-生命周期错误类型系统扩展-反例-7-生命周期错误类型系统扩展` | 同文件锚点不存在: #反例-7-生命周期错误类型系统扩展-反例-7-生命周期错误类型系统扩展 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | 反例 8: Trait 解析失败 {#反例-8-trait-解析失败} | `#反例-8-trait-解析失败-反例-8-trait-解析失败` | 同文件锚点不存在: #反例-8-trait-解析失败-反例-8-trait-解析失败 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | 🌳 公理-定理证明树 {#公理-定理证明树} | `#-公理-定理证明树-公理-定理证明树` | 同文件锚点不存在: #-公理-定理证明树-公理-定理证明树 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | ✅ 证明目标 {#证明目标} | `#-证明目标-证明目标` | 同文件锚点不存在: #-证明目标-证明目标 |
@@ -7245,8 +6733,8 @@
 | docs\research_notes\type_theory\10_type_system_foundations.md | MaybeUninit API 增强 {#maybeuninit-api-增强} | `#maybeuninit-api-增强-maybeuninit-api-增强` | 同文件锚点不存在: #maybeuninit-api-增强-maybeuninit-api-增强 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | const 上下文增强（Rust 1.91.1+） {#const-上下文增强rust-1911} | `#const-上下文增强rust-1911-const-上下文增强rust-1911` | 同文件锚点不存在: #const-上下文增强rust-1911-const-上下文增强rust-1911 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | Rust 1.93.0 补充 {#rust-1930-补充} | `#rust-1930-补充-rust-1930-补充` | 同文件锚点不存在: #rust-1930-补充-rust-1930-补充 |
-| docs\research_notes\type_theory\10_type_system_foundations.md | 🆕 Rust 1.97.0 更新内容 {#rust-1960-更新内容} | `#-rust-1961-更新内容-rust-1960-更新内容` | 同文件锚点不存在: #-rust-1961-更新内容-rust-1960-更新内容 |
-| docs\research_notes\type_theory\10_type_system_foundations.md | 1. ControlFlow::ok() - 控制流与Option（Option）转换 {#1-controlflowok---控制流与option转换} | `#1-controlflowok---控制流与option转换-1-controlflowok---控制流与option转换` | 同文件锚点不存在: #1-controlflowok---控制流与option转换-1-controlflowok---控制流与option转换 |
+| docs\research_notes\type_theory\10_type_system_foundations.md | 🆕 Rust 1.97.0 更新内容 {#rust-1960-更新内容} | `#-rust-1970-更新内容-rust-1960-更新内容` | 同文件锚点不存在: #-rust-1970-更新内容-rust-1960-更新内容 |
+| docs\research_notes\type_theory\10_type_system_foundations.md | 1. ControlFlow::ok() - 控制流与Option转换 {#1-controlflowok---控制流与option转换} | `#1-controlflowok---控制流与option转换-1-controlflowok---控制流与option转换` | 同文件锚点不存在: #1-controlflowok---控制流与option转换-1-controlflowok---控制流与option转换 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | 2. RangeToInclusive 类型 {#2-rangetoinclusive-类型} | `#2-rangetoinclusive-类型-2-rangetoinclusive-类型` | 同文件锚点不存在: #2-rangetoinclusive-类型-2-rangetoinclusive-类型 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | 3. int\_format\_into - 高性能整数格式化 {#3-int\_format\_into---高性能整数格式化} | `#3-int_format_into---高性能整数格式化-3-int_format_into---高性能整数格式化` | 同文件锚点不存在: #3-int_format_into---高性能整数格式化-3-int_format_into---高性能整数格式化 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | 4. 其他类型系统相关改进 {#4-其他类型系统相关改进} | `#4-其他类型系统相关改进-4-其他类型系统相关改进` | 同文件锚点不存在: #4-其他类型系统相关改进-4-其他类型系统相关改进 |
@@ -7262,7 +6750,7 @@
 | docs\research_notes\type_theory\10_variance_theory.md | 3. 不变 (Invariance) {#3-不变-invariance} | `#3-不变-invariance-3-不变-invariance` | 同文件锚点不存在: #3-不变-invariance-3-不变-invariance |
 | docs\research_notes\type_theory\10_variance_theory.md | 4. 型变规则 {#4-型变规则} | `#4-型变规则-4-型变规则` | 同文件锚点不存在: #4-型变规则-4-型变规则 |
 | docs\research_notes\type_theory\10_variance_theory.md | ⚠️ 反例：型变规则必要性 {#反例型变规则必要性} | `#️-反例型变规则必要性-反例型变规则必要性` | 同文件锚点不存在: #️-反例型变规则必要性-反例型变规则必要性 |
-| docs\research_notes\type_theory\10_variance_theory.md | 反例 1： 若协变则悬垂引用（Reference） {#反例-1mut-t-若协变则悬垂引用} | `#反例-1mut-t-若协变则悬垂引用-反例-1mut-t-若协变则悬垂引用` | 同文件锚点不存在: #反例-1mut-t-若协变则悬垂引用-反例-1mut-t-若协变则悬垂引用 |
+| docs\research_notes\type_theory\10_variance_theory.md | 反例 1： 若协变则悬垂引用 {#反例-1mut-t-若协变则悬垂引用} | `#反例-1mut-t-若协变则悬垂引用-反例-1mut-t-若协变则悬垂引用` | 同文件锚点不存在: #反例-1mut-t-若协变则悬垂引用-反例-1mut-t-若协变则悬垂引用 |
 | docs\research_notes\type_theory\10_variance_theory.md | 反例 2：函数参数若协变则悬垂 {#反例-2函数参数若协变则悬垂} | `#反例-2函数参数若协变则悬垂-反例-2函数参数若协变则悬垂` | 同文件锚点不存在: #反例-2函数参数若协变则悬垂-反例-2函数参数若协变则悬垂 |
 | docs\research_notes\type_theory\10_variance_theory.md | 反例 3： 若协变则悬垂 {#反例-3cellt-若协变则悬垂} | `#反例-3cellt-若协变则悬垂-反例-3cellt-若协变则悬垂` | 同文件锚点不存在: #反例-3cellt-若协变则悬垂-反例-3cellt-若协变则悬垂 |
 | docs\research_notes\type_theory\10_variance_theory.md | 🌳 公理-定理证明树 {#公理-定理证明树} | `#-公理-定理证明树-公理-定理证明树` | 同文件锚点不存在: #-公理-定理证明树-公理-定理证明树 |
@@ -7273,7 +6761,7 @@
 | docs\research_notes\type_theory\10_variance_theory.md | 示例 3: 不变类型 {#示例-3-不变类型} | `#示例-3-不变类型-示例-3-不变类型` | 同文件锚点不存在: #示例-3-不变类型-示例-3-不变类型 |
 | docs\research_notes\type_theory\10_variance_theory.md | 示例 4: PhantomData 与型变 {#示例-4-phantomdata-与型变} | `#示例-4-phantomdata-与型变-示例-4-phantomdata-与型变` | 同文件锚点不存在: #示例-4-phantomdata-与型变-示例-4-phantomdata-与型变 |
 | docs\research_notes\type_theory\10_variance_theory.md | 示例 5: 函数指针型变 {#示例-5-函数指针型变} | `#示例-5-函数指针型变-示例-5-函数指针型变` | 同文件锚点不存在: #示例-5-函数指针型变-示例-5-函数指针型变 |
-| docs\research_notes\type_theory\10_variance_theory.md | 示例 6: 型变与内存安全（Memory Safety） {#示例-6-型变与内存安全} | `#示例-6-型变与内存安全-示例-6-型变与内存安全` | 同文件锚点不存在: #示例-6-型变与内存安全-示例-6-型变与内存安全 |
+| docs\research_notes\type_theory\10_variance_theory.md | 示例 6: 型变与内存安全 {#示例-6-型变与内存安全} | `#示例-6-型变与内存安全-示例-6-型变与内存安全` | 同文件锚点不存在: #示例-6-型变与内存安全-示例-6-型变与内存安全 |
 | docs\research_notes\type_theory\10_variance_theory.md | 示例 7: 实际应用场景 {#示例-7-实际应用场景} | `#示例-7-实际应用场景-示例-7-实际应用场景` | 同文件锚点不存在: #示例-7-实际应用场景-示例-7-实际应用场景 |
 | docs\research_notes\type_theory\10_variance_theory.md | 来自 RustBelt/Oxide 的额外证据 {#来自-rustbeltoxide-的额外证据} | `#来自-rustbeltoxide-的额外证据-来自-rustbeltoxide-的额外证据` | 同文件锚点不存在: #来自-rustbeltoxide-的额外证据-来自-rustbeltoxide-的额外证据 |
 | docs\research_notes\type_theory\10_variance_theory.md | 📖 参考文献 {#参考文献} | `#-参考文献-参考文献` | 同文件锚点不存在: #-参考文献-参考文献 |
@@ -7281,11 +6769,11 @@
 | docs\research_notes\type_theory\10_variance_theory.md | 进行中 🔄（已完成） {#进行中-已完成} | `#进行中-已完成-进行中-已完成` | 同文件锚点不存在: #进行中-已完成-进行中-已完成 |
 | docs\research_notes\type_theory\10_variance_theory.md | 计划中 📋（已完成） {#计划中-已完成} | `#计划中-已完成-计划中-已完成` | 同文件锚点不存在: #计划中-已完成-计划中-已完成 |
 | docs\research_notes\type_theory\10_variance_theory.md | 🔗 系统集成与实际应用 {#系统集成与实际应用} | `#-系统集成与实际应用-系统集成与实际应用` | 同文件锚点不存在: #-系统集成与实际应用-系统集成与实际应用 |
-| docs\research_notes\type_theory\10_variance_theory.md | 组合法则：类型 + 生命周期（Lifetimes） + 型变 {#组合法则类型-生命周期-型变} | `#组合法则类型--生命周期--型变-组合法则类型-生命周期-型变` | 同文件锚点不存在: #组合法则类型--生命周期--型变-组合法则类型-生命周期-型变 |
+| docs\research_notes\type_theory\10_variance_theory.md | 组合法则：类型 + 生命周期 + 型变 {#组合法则类型-生命周期-型变} | `#组合法则类型--生命周期--型变-组合法则类型-生命周期-型变` | 同文件锚点不存在: #组合法则类型--生命周期--型变-组合法则类型-生命周期-型变 |
 | docs\research_notes\type_theory\10_variance_theory.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
 | docs\research_notes\type_theory\10_variance_theory.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
 | docs\research_notes\type_theory\60_type_system_counterexamples.md | 1. 型变误用：数组与 Vec 的协变差异 {#1-型变误用数组与-vec-的协变差异} | `#1-型变误用数组与-vec-的协变差异-1-型变误用数组与-vec-的协变差异` | 同文件锚点不存在: #1-型变误用数组与-vec-的协变差异-1-型变误用数组与-vec-的协变差异 |
-| docs\research_notes\type_theory\60_type_system_counterexamples.md | 2. 生命周期（Lifetimes）子类型误判 {#2-生命周期子类型误判} | `#2-生命周期子类型误判-2-生命周期子类型误判` | 同文件锚点不存在: #2-生命周期子类型误判-2-生命周期子类型误判 |
+| docs\research_notes\type_theory\60_type_system_counterexamples.md | 2. 生命周期子类型误判 {#2-生命周期子类型误判} | `#2-生命周期子类型误判-2-生命周期子类型误判` | 同文件锚点不存在: #2-生命周期子类型误判-2-生命周期子类型误判 |
 | docs\research_notes\type_theory\60_type_system_counterexamples.md | 3.  对象大小不固定 {#3-dyn-trait-对象大小不固定} | `#3-dyn-trait-对象大小不固定-3-dyn-trait-对象大小不固定` | 同文件锚点不存在: #3-dyn-trait-对象大小不固定-3-dyn-trait-对象大小不固定 |
 | docs\research_notes\type_theory\60_type_system_counterexamples.md | 4.  返回类型泄露限制 {#4-impl-trait-返回类型泄露限制} | `#4-impl-trait-返回类型泄露限制-4-impl-trait-返回类型泄露限制` | 同文件锚点不存在: #4-impl-trait-返回类型泄露限制-4-impl-trait-返回类型泄露限制 |
 | docs\research_notes\type_theory\60_type_system_counterexamples.md | 5. Orphan 规则冲突 {#5-orphan-规则冲突} | `#5-orphan-规则冲突-5-orphan-规则冲突` | 同文件锚点不存在: #5-orphan-规则冲突-5-orphan-规则冲突 |
@@ -7331,7 +6819,7 @@
 | docs\templates\10_versioned_doc_template.md | 🧪 测试用例 {#测试用例} | `#-测试用例-测试用例` | 同文件锚点不存在: #-测试用例-测试用例 |
 | docs\templates\10_versioned_doc_template.md | 📚 深入阅读 {#深入阅读} | `#-深入阅读-深入阅读` | 同文件锚点不存在: #-深入阅读-深入阅读 |
 
-### 文件不存在 (242个)
+### 文件不存在 (245个)
 
 | 源文件 | 链接文本 | 链接路径 | 问题 |
 |:---|:---|:---|:---|
@@ -7352,7 +6840,6 @@
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | AI_ASSISTED_RUST_PROGRAMMING_GUIDE | `../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md` | 文件不存在: guides\AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md |
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | AI_ASSISTED_RUST_PROGRAMMING_GUIDE | `../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md` | 文件不存在: guides\AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md |
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | AI 辅助编程指南 | `../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md` | 文件不存在: guides\AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md |
-| docs\05_guides\05_async_programming_usage_guide.md | Tokio 异步运行时深度解析 | `../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\02_tokio_deep_dive.md |
 | docs\05_guides\05_cxx_rust_interop_evaluation.md | Rust for Linux 工具链指南 | `../../concept/07_future/19_rust_for_linux.md` | 文件不存在: concept\07_future\19_rust_for_linux.md |
 | docs\05_guides\best_practices.md | concept L1-L2 基础-进阶 | `../../01_foundation` | 文件不存在: 01_foundation |
 | docs\06_toolchain\06_parallel_frontend.md | Build Systems | `../../07_future` | 文件不存在: 07_future |
@@ -7457,6 +6944,7 @@
 | docs\research_notes\10_knowledge_graph_index.md | 10_rust_194_195_feature_matrix.md | `10_rust_194_195_feature_matrix.md` | 文件不存在: docs\research_notes\10_rust_194_195_feature_matrix.md |
 | docs\research_notes\10_knowledge_graph_index.md | 10_rust_194_research_update.md | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
 | docs\research_notes\10_knowledge_graph_index.md | 10_rust_194_195_feature_matrix.md | `10_rust_194_195_feature_matrix.md` | 文件不存在: docs\research_notes\10_rust_194_195_feature_matrix.md |
+| docs\research_notes\10_learning_and_interview_alignment.md | data/i18n_terminology.yaml | `../../data/i18n_terminology.yaml` | 文件不存在: data\i18n_terminology.yaml |
 | docs\research_notes\10_learning_path_comprehensive.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
 | docs\research_notes\10_proof_index.md | COQ_ISABELLE_PROOF_SCAFFOLDING | `10_coq_isabelle_proof_scaffolding.md` | 文件不存在: docs\research_notes\10_coq_isabelle_proof_scaffolding.md |
 | docs\research_notes\10_proof_index.md | FORMAL_VERIFICATION_GUIDE | `10_formal_verification_guide.md` | 文件不存在: docs\research_notes\10_formal_verification_guide.md |
@@ -7478,6 +6966,8 @@
 | docs\research_notes\10_rustbelt_alignment.md | COQ_ISABELLE_PROOF_SCAFFOLDING | `10_coq_isabelle_proof_scaffolding.md` | 文件不存在: docs\research_notes\10_coq_isabelle_proof_scaffolding.md |
 | docs\research_notes\10_rustbelt_alignment.md | AENEAS_INTEGRATION_PLAN | `10_aeneas_integration_plan.md` | 文件不存在: docs\research_notes\10_aeneas_integration_plan.md |
 | docs\research_notes\10_rustbelt_alignment.md | COQ_OF_RUST_INTEGRATION_PLAN | `10_coq_of_rust_integration_plan.md` | 文件不存在: docs\research_notes\10_coq_of_rust_integration_plan.md |
+| docs\research_notes\10_rustbelt_alignment.md | 国际化术语库 | `../../data/i18n_terminology.yaml` | 文件不存在: data\i18n_terminology.yaml |
+| docs\research_notes\10_rustsem_semantics.md | 国际化术语库 | `../../data/i18n_terminology.yaml` | 文件不存在: data\i18n_terminology.yaml |
 | docs\research_notes\10_rust_book_alignment.md | docs/research_notes/10_cargo_194_features.md | `10_cargo_194_features.md` | 文件不存在: docs\research_notes\10_cargo_194_features.md |
 | docs\research_notes\10_rust_book_alignment.md | docs/research_notes/10_rust_194_comprehensive_analysis.md | `10_rust_194_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_194_comprehensive_analysis.md |
 | docs\research_notes\10_safe_decidable_mechanisms_overview.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
@@ -7554,29 +7044,30 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | RUST_193_COUNTEREXAMPLES_INDEX | `../../../10_rust_193_counterexamples_index.md` | 文件不存在: docs\research_notes\10_rust_193_counterexamples_index.md |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | RUST_193_COUNTEREXAMPLES_INDEX | `../../../10_rust_193_counterexamples_index.md` | 文件不存在: docs\research_notes\10_rust_193_counterexamples_index.md |
 | docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `../../10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\00_crate_architecture_master_index.md | Tokio 深度解析 | `../../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\02_tokio_deep_dive.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\00_crate_architecture_master_index.md | Axum 深度解析 | `../../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\01_axum_deep_dive.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\00_crate_architecture_master_index.md | content/ecosystem/deep_dives/02_tokio_deep_dive.md | `../../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\02_tokio_deep_dive.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\00_crate_architecture_master_index.md | content/ecosystem/deep_dives/01_axum_deep_dive.md | `../../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\01_axum_deep_dive.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md | Serde 最佳实践 | `../../../../content/ecosystem/serialization/serde_best_practices.md` | 文件不存在: content\ecosystem\serialization\serde_best_practices.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md | Tower 形式化生态 | `../../../../concept/06_ecosystem/05_formal_ecosystem_tower.md` | 文件不存在: concept\06_ecosystem\05_formal_ecosystem_tower.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md | Tokio 深度解析 | `../../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\02_tokio_deep_dive.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md | Tokio 运行时（Runtime）生态指南 | `../../../../content/ecosystem/async_runtimes/tokio_deep_dive.md` | 文件不存在: content\ecosystem\async_runtimes\tokio_deep_dive.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md | Tokio 深度解析 | `../../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\02_tokio_deep_dive.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md | Axum 深度解析 | `../../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\01_axum_deep_dive.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md | Axum Web 框架指南 | `../../../../content/ecosystem/web_frameworks/axum_deep_dive.md` | 文件不存在: content\ecosystem\web_frameworks\axum_deep_dive.md |
-| docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md | Axum 深度解析 | `../../../../../content/ecosystem/deep_dives/01_axum_deep_dive.md` | 文件不存在: E:\_src\content\ecosystem\deep_dives\01_axum_deep_dive.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md | SQLx 数据库指南 | `../../../../content/ecosystem/database/sqlx_deep_dive.md` | 文件不存在: content\ecosystem\database\sqlx_deep_dive.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md | gRPC 微服务指南 | `../../../../content/ecosystem/web_frameworks/grpc_microservices_guide.md` | 文件不存在: content\ecosystem\web_frameworks\grpc_microservices_guide.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md | Actix-web vs Axum | `../../../../content/ecosystem/web_frameworks/actix_web_vs_axum.md` | 文件不存在: content\ecosystem\web_frameworks\actix_web_vs_axum.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\15_sqlx_advanced_architecture.md | SQLx 数据库指南 | `../../../../content/ecosystem/database/sqlx_deep_dive.md` | 文件不存在: content\ecosystem\database\sqlx_deep_dive.md |
+| docs\research_notes\software_design_theory\07_crate_architectures\26_kafka_architecture.md | 来源: [c10_networks Crate | `../../../../../crates/c10_networks` | 文件不存在: E:\_src\crates\c10_networks |
+| docs\research_notes\software_design_theory\07_crate_architectures\27_kube_rs_architecture.md | 来源: [c10_networks Crate | `../../../../../crates/c10_networks` | 文件不存在: E:\_src\crates\c10_networks |
+| docs\research_notes\software_design_theory\07_crate_architectures\28_lapin_architecture.md | 来源: [c10_networks Crate | `../../../../../crates/c10_networks` | 文件不存在: E:\_src\crates\c10_networks |
 | docs\research_notes\software_design_theory\07_crate_architectures\33_sentry_architecture.md | 错误处理（Error Handling）深入 | `../../../../concept/02_intermediate/15_error_handling_deep_dive.md` | 文件不存在: concept\02_intermediate\15_error_handling_deep_dive.md |
+| docs\research_notes\software_design_theory\07_crate_architectures\35_ort_architecture.md | 来源: [c08_algorithms Crate | `../../../../../crates/c08_algorithms` | 文件不存在: E:\_src\crates\c08_algorithms |
+| docs\research_notes\software_design_theory\07_crate_architectures\36_tract_architecture.md | 来源: [c08_algorithms Crate | `../../../../../crates/c08_algorithms` | 文件不存在: E:\_src\crates\c08_algorithms |
+| docs\research_notes\software_design_theory\07_crate_architectures\37_aws_sdk_architecture.md | 来源: [c10_networks Crate | `../../../../../crates/c10_networks` | 文件不存在: E:\_src\crates\c10_networks |
+| docs\research_notes\software_design_theory\07_crate_architectures\39_salvo_architecture.md | 来源: [c06_async Crate | `../../../../../crates/c06_async` | 文件不存在: E:\_src\crates\c06_async |
 | docs\research_notes\software_design_theory\07_crate_architectures\39_salvo_architecture.md | concept L6: Web 框架与中间件 | `../../../../06_ecosystem` | 文件不存在: 06_ecosystem |
+| docs\research_notes\software_design_theory\07_crate_architectures\40_ntex_architecture.md | 来源: [c06_async Crate | `../../../../../crates/c06_async` | 文件不存在: E:\_src\crates\c06_async |
 | docs\research_notes\software_design_theory\07_crate_architectures\40_ntex_architecture.md | concept L6: Web 框架与中间件 | `../../../../06_ecosystem` | 文件不存在: 06_ecosystem |
+| docs\research_notes\software_design_theory\07_crate_architectures\41_askama_architecture.md | 来源: [c06_async Crate | `../../../../../crates/c06_async` | 文件不存在: E:\_src\crates\c06_async |
 | docs\research_notes\software_design_theory\07_crate_architectures\41_askama_architecture.md | concept L6: Web 框架与中间件 | `../../../../06_ecosystem` | 文件不存在: 06_ecosystem |
+| docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md | 来源: [c06_async Crate | `../../../../../crates/c06_async` | 文件不存在: E:\_src\crates\c06_async |
 | docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md | concept L6: Web 框架与中间件 | `../../../../06_ecosystem` | 文件不存在: 06_ecosystem |
 | docs\research_notes\type_theory\10_construction_capability.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `../10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\rust-formal-engineering-system\00_master_index.md | content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md | `../../../content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md` | 文件不存在: E:\_src\content\safety_critical\02_rust_safety_critical_ecosystem_master_index.md |
 
 ## 修复建议
 
@@ -7598,14 +7089,11 @@
 
 | 源文件 | 损坏链接数 |
 |:---|:---:|
-| docs\research_notes\formal_methods\10_ownership_model.md | 210 |
 | docs\04_rust_language_feature_comprehensive_inventory_2026.md | 108 |
-| docs\05_guides\best_practices.md | 82 |
-| docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md | 78 |
+| docs\research_notes\formal_methods\10_ownership_model.md | 104 |
 | docs\research_notes\experiments\10_performance_benchmarks.md | 74 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | 74 |
 | docs\research_notes\10_faq_comprehensive.md | 66 |
-| docs\02_reference\02_error_code_mapping.md | 65 |
 | docs\06_toolchain\03_rustdoc_advanced.md | 60 |
 | docs\research_notes\10_comprehensive_systematic_review_and_100_percent_plan.md | 60 |
 | docs\06_toolchain\01_compiler_features.md | 59 |
@@ -7621,10 +7109,10 @@
 | docs\05_guides\05_design_patterns_usage_guide.md | 47 |
 | docs\02_reference\quick_reference\02_type_system.md | 46 |
 | docs\research_notes\experiments\10_memory_analysis.md | 46 |
+| docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 45 |
 | docs\02_reference\quick_reference\02_testing_cheatsheet.md | 45 |
-| docs\05_guides\05_async_programming_usage_guide.md | 45 |
 | docs\research_notes\formal_methods\10_error_handling_decision_tree.md | 45 |
-| docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 44 |
+| docs\05_guides\05_async_programming_usage_guide.md | 44 |
 | docs\research_notes\10_faq.md | 44 |
 | docs\research_notes\10_code_doc_formal_mapping.md | 43 |
 | docs\05_guides\05_macro_system_usage_guide.md | 42 |
@@ -7642,12 +7130,15 @@
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 34 |
 | docs\research_notes\10_theorem_rust_example_mapping.md | 34 |
 | docs\02_reference\quick_reference\02_modules_cheatsheet.md | 33 |
-| docs\05_guides\05_ai_rust_ecosystem_guide.md | 33 |
 | docs\research_notes\10_system_summary.md | 33 |
 | docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | 32 |
 | docs\05_guides\05_testing_coverage_guide.md | 32 |
 | docs\research_notes\type_theory\10_variance_theory.md | 32 |
 | docs\02_reference\quick_reference\02_algorithms_cheatsheet.md | 31 |
-| ... 还有 369 个文件 | |
+| docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md | 31 |
+| docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md | 31 |
+| docs\05_guides\05_wasm_usage_guide.md | 31 |
+| docs\07_project\07_documentation_cross_reference_guide.md | 31 |
+| ... 还有 360 个文件 | |
 
-**总计 419 个文件包含损坏链接**
+**总计 410 个文件包含损坏链接**

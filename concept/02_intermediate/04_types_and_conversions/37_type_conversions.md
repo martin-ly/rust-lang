@@ -37,14 +37,6 @@
 
 ---
 
-> **过渡**: 从 类型转换 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语与规则。
-
-> **过渡**: 在建立 类型转换 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
-
-> **过渡**: 最后，将 类型转换 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
----
-
 - [类型转换（Type Conversions）](#类型转换type-conversions)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
@@ -452,7 +444,6 @@ D. 本地 newtype `struct Bytes(Vec<u8>)`
 > **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html), [std::convert](https://doc.rust-lang.org/std/convert/index.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.97.0 Reference、std::convert、Rust By Example 对齐](https://doc.rust-lang.org/std/convert/index.html)
 > **状态**: ✅ 权威来源对齐完成
-
 
 ---
 

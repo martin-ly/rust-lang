@@ -18,6 +18,8 @@ const VALID_RELATIONS: &[&str] = &[
     "ex:counterExample",
     "ex:instanceOf",
     "ex:appliesTo",
+    // v3 新增谓词（见 kg_data_v3.json properties 段）
+    "ex:relatedTo",
 ];
 
 /// 验证问题。

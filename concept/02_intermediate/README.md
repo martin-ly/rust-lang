@@ -207,7 +207,7 @@ Trait Bounds 是 L2 的"枢纽概念"：
 - [构造与初始化：C++ 的构造函数 vs Rust 的结构体（Struct）字面量](00_traits/28_construction_and_initialization.md)
 - [友元 vs 模块（Module）可见性：C++ 的 `friend` 与 Rust 的隐私边界](05_modules_and_visibility/29_friend_vs_module_privacy.md)
 - [测验：C/C++ → Rust 基础知识对比](09_quizzes/30_quiz_cpp_rust_foundations.md)
-- [生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型](00_traits/18_lifetimes_advanced.md)
+- [生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型](../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md)（原 `00_traits/18_lifetimes_advanced.md` 已合并重定向）
 - [高级 Trait 主题：从关联类型到特化](00_traits/19_advanced_traits.md)
 - [高级类型系统（Type System）：从关联类型到类型级编程](04_types_and_conversions/20_type_system_advanced.md)
 - [元编程：Rust 的编译期代码生成与变换](06_macros_and_metaprogramming/21_metaprogramming.md)

@@ -15,5 +15,5 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | Generics and Lifetimes | [concept/02_intermediate/01_generics/02_generics.md](../../../../concept/02_intermediate/01_generics/02_generics.md) |
-| Advanced Lifetimes | [concept/02_intermediate/00_traits/18_lifetimes_advanced.md](../../../../concept/02_intermediate/00_traits/18_lifetimes_advanced.md) |
+| Advanced Lifetimes | [concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md) |
 | HRTB | [concept/03_advanced/02_unsafe/08_nll_and_polonius.md](../../../../concept/03_advanced/02_unsafe/08_nll_and_polonius.md) |

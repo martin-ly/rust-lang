@@ -133,7 +133,7 @@
 | [Rust 迭代器模式](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) | L2 进阶概念层 | 进阶 | 综述级 | — | 应用 → 分析 | — |
 | [错误处理深入：从 Result 到自定义错误生态](../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md) | L2 进阶概念层 | 进阶 | 综述级 | — | 应用 → 分析 | — |
 | [宏模式：编译期代码生成的工程实践](../../02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md) | L2 进阶概念层 | 进阶 | 综述级 | — | 应用 → 分析 | — |
-| [生命周期高级主题：从 HRTB 到自引用类型](../../02_intermediate/00_traits/18_lifetimes_advanced.md) | L2 进阶概念层 | 进阶 | 综述级 | S | 分析 → 评价 | — |
+| [生命周期高级主题：从 HRTB 到自引用类型](../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md)（原 L2 页已合并重定向） | L2 进阶概念层 | 进阶 | 综述级 | S | 分析 → 评价 | — |
 | [高级 Trait 主题：从关联类型到特化](../../02_intermediate/00_traits/19_advanced_traits.md) | L2 进阶概念层 | 进阶 | 综述级 | S | 分析 → 评价 | — |
 | [高级类型系统：从关联类型到类型级编程](../../02_intermediate/04_types_and_conversions/20_type_system_advanced.md) | L2 进阶概念层 | 进阶 | 综述级 | S | 分析 → 评价 | — |
 | [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) | L2 进阶概念层 | 进阶 | 综述级 | — | 分析 → 评价 | — |
@@ -216,7 +216,7 @@
 | [Aeneas Symbolic Semantics](../../04_formal/03_operational_semantics/30_aeneas_symbolic_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | — | 分析 → 评价 | — |
 | [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/31_miri.md) | L4 形式化理论层 | 进阶 / 工程 / 形式化 | 综述级 | A | 理解 → 应用 → 分析 | — |
 | [Kani：Rust 有界模型检查器](../../04_formal/04_model_checking/32_kani.md) | L4 形式化理论层 | 进阶 / 工程 / 形式化 | 综述级 | A | 理解 → 应用 → 分析 | — |
-| [Safety Tags](../../04_formal/02_separation_logic/33_safety_tags_in_formal.md) | L4 形式化理论层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 语言设计/静态分析提案 |
+| [Safety Tags](../../07_future/03_preview_features/08_safety_tags_preview.md) | L4 形式化理论层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 语言设计/静态分析提案 |
 | [BorrowSanitizer 运行时别名模型检测](../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md) | L4 形式化理论层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 工具链/运行时（Runtime）研究 |
 | [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/35_name_resolution_and_hir.md) | L4 形式化理论层 | 专家 / 研究者 | 综述级 | F | 理解 → 分析 | — |
 | [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md) | L4 形式化理论层 | 进阶 | 专家级 | S | 分析 → 评价 | N/A — 操作语义研究 |
@@ -370,7 +370,7 @@
 | [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](../../07_future/04_research_and_experimental/28_rust_for_webassembly.md) | L7 前沿趋势层 | 专家 | 综述级 | — | 应用 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [eBPF / Aya / Rex 的 Rust 映射](../../07_future/04_research_and_experimental/29_ebpf_rust.md) | L7 前沿趋势层 | 专家 | 综述级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Stable ABI Preview](../../07_future/03_preview_features/30_stable_abi_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | 理解 → 分析 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Safety Tags（安全标签）预览](../../07_future/03_preview_features/31_safety_tags_preview.md) | L7 前沿趋势层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 语言设计提案跟踪 |
+| [Safety Tags（安全标签）预览](../../07_future/03_preview_features/08_safety_tags_preview.md) | L7 前沿趋势层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 语言设计提案跟踪 |
 | [Inline Const Pattern 预览](../../07_future/03_preview_features/32_inline_const_pattern_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | A | 理解 → 应用 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [AutoVerus / Verus 预览](../../07_future/03_preview_features/33_autoverus_preview.md) | L7 前沿趋势层 | 进阶 | 专家级 | — | 分析 → 评价 | N/A — 形式化验证工具/AI 辅助证明研究跟踪 |
 | [`must_not_suspend` Lint Preview](../../07_future/03_preview_features/34_must_not_suspend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | P | 分析 → 评价 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |

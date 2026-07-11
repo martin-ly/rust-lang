@@ -34,14 +34,6 @@
 
 ---
 
-> **过渡**: 从 unsafe 集合内部实现 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语与规则。
-
-> **过渡**: 在建立 unsafe 集合内部实现 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
-
-> **过渡**: 最后，将 unsafe 集合内部实现 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
----
-
 - [Unsafe 集合内部实现：Vec、Arc、Mutex（Unsafe Collections Internals）](#unsafe-集合内部实现vecarcmutexunsafe-collections-internals)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
@@ -487,7 +479,6 @@ D. `Ordering::SeqCst`
 > **权威来源**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html), [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
 > **权威来源对齐变更日志**: 2026-07-04 创建 来源: [Rustonomicon Vec/Arc/Mutex 章节对齐](https://doc.rust-lang.org/nomicon/index.html)
 > **状态**: ✅ 权威来源对齐完成
-
 
 ---
 

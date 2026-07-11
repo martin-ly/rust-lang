@@ -22,20 +22,6 @@
 
 ---
 
-> **过渡**: 从 Cargo Profiles 与 Lints 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
-
-> **过渡**: 在建立 Cargo Profiles 与 Lints 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
-
-> **过渡**: 最后，将 Cargo Profiles 与 Lints 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
----
-
-> **定理 1** [Tier 2]: Cargo Profiles 与 Lints 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
->
-> **定理 2** [Tier 2]: 正确理解 Cargo Profiles 与 Lints 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
->
-> **定理 3** [Tier 3]: 将 Cargo Profiles 与 Lints 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 ## 📑 目录
 
 - [Cargo Profiles 与 Lints](#cargo-profiles-与-lints)
@@ -59,6 +45,7 @@
     - [测验 3：Profile override 不能设置哪三个字段？](#测验-3profile-override-不能设置哪三个字段)
     - [测验 4：Cargo lints 在 Rust 1.96 上是什么状态？](#测验-4cargo-lints-在-rust-196-上是什么状态)
   - [权威来源索引](#权威来源索引)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -306,7 +293,6 @@ Cargo lints 目前仍为 nightly-only 不稳定特性，需要在 nightly 工具
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Cargo Book profiles / lints 文档
-
 
 ---
 

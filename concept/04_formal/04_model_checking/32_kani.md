@@ -24,48 +24,9 @@
 > [Kani 教程](https://model-checking.github.io/kani/tutorial-first-steps.html)
 
 ---
-
-## 认知路径
-
-> **认知路径**: 本节从 "Kani" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
-
-1. **问题识别**: 为什么 Kani 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
-2. **概念建立**: 掌握 Kani 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
-3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
-4. **边界辨析**: 借助反命题/反例理解常见错误与Kani的适用边界。
-5. **迁移应用**: 将 Kani 与前置/后置概念链接，形成跨层知识网络。
-
----
-
-> **过渡**: 从 Kani 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
-
-> **过渡**: 在建立 Kani 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
-
-> **过渡**: 最后，将 Kani 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
----
-
-> **定理 1** [Tier 2]: Kani 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
->
-> **定理 2** [Tier 2]: 正确理解 Kani 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
->
-> **定理 3** [Tier 3]: 将 Kani 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
----
-
-## 反命题决策树
-
-> **反命题 1**: "Kani 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
-
-> **反命题 2**: "忽略 Kani 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Kani 规则被违反的直接信号。
-
-> **反命题 3**: "其他语言对 Kani 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Kani 具有语言特有的形态。
-
 ## 📑 目录
 
 - [Kani：Rust 有界模型检查器](#kanirust-有界模型检查器)
-  - [认知路径](#认知路径)
-  - [反命题决策树](#反命题决策树)
   - [📑 目录](#-目录)
   - [一、Kani 是什么](#一kani-是什么)
     - [与测试、Miri、Verus 的定位差异](#与测试miriverus-的定位差异)
@@ -372,7 +333,7 @@ fn verify_vec_push_safety() {
 | [Miri](31_miri.md) | Rust MIR 解释器，动态检测 UB，与 Kani 形成“动态 + 有界静态”互补 | [Miri GitHub](https://github.com/rust-lang/miri) |
 | [Tree Borrows](../01_ownership_logic/36_tree_borrows_deep_dive.md) | Rust 别名模型演进方向，影响 Kani 对内存安全（Memory Safety）属性的建模 | [Tree Borrows 论文/博客](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) |
 | [Stacked Borrows](../01_ownership_logic/36_tree_borrows_deep_dive.md) | 早期 Rust 别名模型，与 Tree Borrows 共同构成 Kani/Miri 的内存模型基础 | [Stacked Borrows 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) |
-| [Safety Tags](../02_separation_logic/33_safety_tags_in_formal.md) | RFC #3842 提案，可将 `unsafe` 安全契约转化为 Kani 假设/断言 | [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
+| [Safety Tags](../../07_future/03_preview_features/08_safety_tags_preview.md) | RFC #3842 提案，可将 `unsafe` 安全契约转化为 Kani 假设/断言 | [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
 | [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md) | 运行时（Runtime）别名模型检测，与 Kani 共同覆盖“证明 + 运行期审计” | [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) |
 | [AutoVerus / Verus](24_autoverus.md) | SMT 演绎验证，适合需要无界完整证明的场景，与 Kani 的自动化模型检查形成选型对照 | [Verus GitHub](https://github.com/verus-lang/verus) |
 

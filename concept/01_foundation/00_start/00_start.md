@@ -16,11 +16,7 @@
 > **后置概念**: [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) · [借用（Borrowing）](../01_ownership_borrow_lifetime/02_borrowing.md) · [类型系统（Type System）](../02_type_system/04_type_system.md) · [模块（Module）与路径](../07_modules_and_items/11_modules_and_paths.md) · [错误处理（Error Handling）基础](../08_error_handling/32_error_handling_basics.md) · [测试基础](../10_testing_basics/16_testing_basics.md)
 ---
 
----
-
 ## 认知路径
-
-> **认知路径**: 本节从 "Rust 起步指南" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
 
 1. **问题识别**: 为什么 Rust 需要一套专门的起步流程？它与编译型、垃圾回收型语言在项目结构和工具链上有何不同？
 2. **概念建立**: 掌握 `rustup`、`cargo`、`rustc` 的角色，理解 crate、模块（Module）、依赖与版本控制的基本关系。

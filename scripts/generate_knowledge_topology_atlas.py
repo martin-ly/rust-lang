@@ -7,6 +7,7 @@ Output: concept/00_meta/knowledge_topology/*.md
 from __future__ import annotations
 
 import json
+import re
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -40,6 +41,94 @@ def concept_link(c: dict[str, Any]) -> str:
 
 def escape_cell(text: str) -> str:
     return text.replace("|", "\\|").replace("\n", " ")
+
+
+# 空洞定义模式:与 scripts/check_topology_quality.py 的 T1 DEF_LOW 对齐
+HOLLOW_DEF_PATTERNS = [
+    re.compile(r"core rust concept", re.IGNORECASE),
+    re.compile(r"^—?\s*$"),
+    re.compile(r"^\s*(a|an)\s+(guide|overview|introduction)\s+(to|of)\b", re.IGNORECASE),
+    re.compile(r"^\s*(comprehensive|complete)\s+(analysis|guide|overview)\b", re.IGNORECASE),
+]
+
+# 定义缺失时的诚实占位(不编造语义;注意不可用“待补/占位/TODO”等字样,
+# 否则会触发 check_topology_quality.py 的 T6 占位检查)
+MISSING_DEF = "定义暂缺，请直接参见概念文件正文内容。"
+
+# 首段抽取时需跳过的行前缀(元数据、结构线、代码块、目录、粗体小节标签、来源行)
+_SKIP_PREFIX = ("#", ">", "---", "|", "```", "- [", "* [", "<!--", "<details", "<summary", "</",
+               "[来源", "[Source", "(Source:", "（Source:", "来源:", "Source:")
+_BOLD_LABEL_RE = re.compile(r"^\*\*[^*]{1,30}\*\*[:：]\s*$")
+_LIST_ITEM_RE = re.compile(r"^(\d+[.、]|[-*])\s")
+
+def is_hollow_definition(summary: str) -> bool:
+    s = (summary or "").strip()
+    if len(s) < 15:
+        return True
+    return any(p.search(s) for p in HOLLOW_DEF_PATTERNS)
+
+
+def extract_first_paragraph(rel_path: str, max_len: int = 120) -> str:
+    """从概念文件中抽取首个实质段落作为定义回退;失败返回空串。"""
+    f = ROOT / "concept" / rel_path
+    if not f.is_file():
+        return ""
+    para: list[str] = []
+    in_code = False
+    for ln in f.read_text(encoding="utf-8", errors="replace").splitlines():
+        s = ln.strip()
+        if s.startswith("```"):
+            in_code = not in_code
+            if para:
+                break
+            continue
+        if in_code:
+            continue
+        if not s:
+            if para:
+                break
+            continue
+        if s.startswith(_SKIP_PREFIX) or _BOLD_LABEL_RE.match(s) or _LIST_ITEM_RE.match(s) or s.startswith("**"):
+            if para:
+                break
+            continue
+        para.append(s)
+    text = " ".join(para).strip()
+    if len(text) < 15:
+        return ""
+    if len(text) > max_len:
+        cut = max(text.rfind("。", 0, max_len), text.rfind(". ", 0, max_len))
+        hard_cut = cut < 15
+        text = text[:max_len] if hard_cut else text[: cut + 1]
+        # 截断不得落在 Markdown 链接内部:丢弃尾部不完整的 [text](url… 或 [text…
+        text = re.sub(r"\[[^\]]*\]\([^)]*$", "", text)
+        text = re.sub(r"\[[^\]]*$", "", text)
+        text = text.rstrip(" ·，,；;：:")
+        if hard_cut:
+            text += "…"
+    return text
+
+
+def current_file_summary(rel_path: str) -> str:
+    """读取概念文件当前的 **Summary** 元数据(raw json 可能过时)。"""
+    f = ROOT / "concept" / rel_path
+    if not f.is_file():
+        return ""
+    m = re.search(r">\s*\*\*Summary\*\*[:：]\s*(.+)", f.read_text(encoding="utf-8", errors="replace"))
+    return m.group(1).strip() if m else ""
+
+
+def definition_or_fallback(summary: str, rel_path: str) -> str:
+    """定义列取值:优先用文件 **Summary** 元数据;空洞时依次回退到
+    文件当前 Summary(应对过时 raw json) → 文件首段 → MISSING_DEF(诚实标注,不编造)。"""
+    if not is_hollow_definition(summary):
+        return summary
+    current = current_file_summary(rel_path)
+    if current and not is_hollow_definition(current) and current != summary:
+        return current
+    para = extract_first_paragraph(rel_path)
+    return para if para else MISSING_DEF
+
 
 
 def header(title: str, en: str, summary: str) -> list[str]:
@@ -135,7 +224,7 @@ def write_concept_definition_atlas(concepts: list[dict[str, Any]]) -> None:
         for c in sorted(by_layer[layer], key=lambda x: x["path"]):
             zh = escape_cell(c["zh_name"])
             en = escape_cell(c["en_name"])
-            summary = escape_cell(c["summary"]) or "—"
+            summary = escape_cell(definition_or_fallback(c["summary"], c["path"]))
             link = f"[{zh}](../../{c['path']})"
             lines.append(f"| `{c['id']}` | {link} | {en} | {summary} | {len(c['sources'])} |")
         lines.append("")

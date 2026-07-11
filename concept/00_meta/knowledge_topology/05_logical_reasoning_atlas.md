@@ -73,7 +73,7 @@ flowchart LR
 | 借用 / 别名互斥 | 分离逻辑 / RustBelt | [Separation Logic](../../04_formal/02_separation_logic/11_separation_logic.md), [RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) |
 | 类型系统 | 类型论 / HM 推断 | [Type Theory](../../04_formal/00_type_theory/02_type_theory.md), [Type Inference](../../04_formal/00_type_theory/08_type_inference.md) |
 | 求值语义 | 操作语义 / 指称语义 | [Operational Semantics](../../04_formal/03_operational_semantics/17_operational_semantics.md), [Denotational Semantics](../../04_formal/03_operational_semantics/12_denotational_semantics.md) |
-| unsafe 契约 | Hoare 逻辑 / Safety Tags | [Hoare Logic](../../04_formal/03_operational_semantics/15_hoare_logic.md), [Safety Tags](../../04_formal/02_separation_logic/33_safety_tags_in_formal.md) |
+| unsafe 契约 | Hoare 逻辑 / Safety Tags | [Hoare Logic](../../04_formal/03_operational_semantics/15_hoare_logic.md), [Safety Tags](../../07_future/03_preview_features/08_safety_tags_preview.md) |
 
 ---
 

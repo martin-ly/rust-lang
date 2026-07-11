@@ -25,12 +25,9 @@
 
 ## 认知路径
 
-> **认知路径**: 本节从 "Rust 内存模型（Memory Model）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
-
 1. **问题识别**: 为什么 Rust 内存模型值得关注？正确编写 `unsafe` 代码、FFI 和内联汇编（Inline Assembly）都需要理解内存模型边界。
 2. **概念建立**: 掌握抽象字节、初始化/未初始化字节、provenance 和别名规则的核心定义。
 3. **机制推理**: 通过 ⟹ 定理链将字节模型、provenance 和 UB 边界串联起来。
-4. **边界辨析**: 借助反命题/反例理解常见错误与 Rust 内存模型的适用边界。
 5. **迁移应用**: 将 Rust 内存模型与原子操作（Atomic Operations）、内联汇编（Inline Assembly）、Tree Borrows 等概念链接，形成跨层知识网络。
 
 ---
@@ -329,7 +326,6 @@ fn align_check() {
 
 > **来源**: [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/) · [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§2.4）
 > **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`42_type_layout.md`](../../04_formal/05_rustc_internals/42_type_layout.md) · [`11_atomics_and_memory_ordering.md`](../00_concurrency/11_atomics_and_memory_ordering.md)
-
 
 ---
 

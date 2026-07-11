@@ -22,22 +22,6 @@
 
 ---
 
----
-
-> **过渡**: 从 Cargo Workspaces（工作区） 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
-
-> **过渡**: 在建立 Cargo Workspaces（工作区） 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
-
-> **过渡**: 最后，将 Cargo Workspaces（工作区） 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
----
-
-> **定理 1** [Tier 2]: Cargo Workspaces（工作区） 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
->
-> **定理 2** [Tier 2]: 正确理解 Cargo Workspaces（工作区） 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
->
-> **定理 3** [Tier 3]: 将 Cargo Workspaces（工作区） 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 ## 一、什么是 Workspace
 
 **Workspace（工作区）** 是一组被一起管理的 package，称为 **workspace members**。使用 workspace 的核心收益：
@@ -266,7 +250,6 @@ tool = ["npm", "run", "build"]
 | [Cargo Manifest Reference](64_cargo_manifest_reference.md) | workspace 成员仍遵循 manifest 格式 |
 | [Cargo Profiles and Lints](65_cargo_profiles_and_lints.md) | `[profile]` 和 `[workspace.lints]` 在 workspace root 生效 |
 | [Cargo Source Replacement](61_cargo_source_replacement.md) | `[patch]`/`[replace]` 只在 workspace root 生效 |
-
 
 ---
 

@@ -159,7 +159,6 @@
   - [错误处理（Error Handling）深入：从 Result 到自定义错误生态](02_intermediate/03_error_handling/16_error_handling_deep_dive.md)
   - [Rust 迭代器（Iterator）模式](02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
   - [宏（Macro）模式：编译期代码生成的工程实践](02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md)
-  - [生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型](02_intermediate/00_traits/18_lifetimes_advanced.md)
   - [高级 Trait 主题：从关联类型到特化](02_intermediate/00_traits/19_advanced_traits.md)
   - [高级类型系统（Type System）：从关联类型到类型级编程](02_intermediate/04_types_and_conversions/20_type_system_advanced.md)
   - [元编程：Rust 的编译期代码生成与变换](02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)
@@ -271,7 +270,6 @@
   - [Aeneas Symbolic Semantics（Aeneas 符号化语义）](04_formal/03_operational_semantics/30_aeneas_symbolic_semantics.md)
   - [Miri：Rust 未定义行为动态检测器](04_formal/04_model_checking/31_miri.md)
   - [Kani：Rust 有界模型检查器](04_formal/04_model_checking/32_kani.md)
-  - [Safety Tags（安全标签）](04_formal/02_separation_logic/33_safety_tags_in_formal.md)
   - [BorrowSanitizer 运行时（Runtime）别名模型检测](04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md)
   - [Rustc 名称解析与 HIR](04_formal/05_rustc_internals/35_name_resolution_and_hir.md)
   - [Tree Borrows 深度解析](04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md)
@@ -483,7 +481,6 @@
   - [Rust 1.97 特性×领域交叉矩阵](07_future/00_version_tracking/feature_domain_matrix_197.md)
   - [Rust 1.97 兼容性迁移判定树](07_future/00_version_tracking/migration_197_decision_tree.md)
   - [Rust 1.98+ 前沿特性预览](07_future/00_version_tracking/rust_1_98_preview.md)
-  - [Safety Tags（安全标签）预览](07_future/03_preview_features/31_safety_tags_preview.md)
   - [AutoVerus / Verus 预览](07_future/03_preview_features/33_autoverus_preview.md)
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)

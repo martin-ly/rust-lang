@@ -2,7 +2,7 @@
 """
 多语言 KG 对齐漂移检测（P2-2 / i18n-6）
 
-读取 concept/00_meta/kg_data_v2.json 中的中英 skos:prefLabel 对，
+读取 concept/00_meta/kg_data_v3.json 中的中英 skos:prefLabel 对，
 使用 sentence-transformers 计算跨语言语义相似度，对低于阈值的术语对生成审校清单。
 
 优先使用 LaBSE/XLM-R 类模型；若本地未缓存，则回退到已缓存的 all-MiniLM-L6-v2
@@ -48,8 +48,8 @@ from sentence_transformers import SentenceTransformer  # noqa: E402
 from huggingface_hub import try_to_load_from_cache  # noqa: E402
 import numpy as np  # noqa: E402
 
-KG_PATH = ROOT / "concept" / "00_meta" / "kg_data_v2.json"
-REPORT_PATH = ROOT / "reports" / "MULTILINGUAL_ALIGNMENT_DRIFT_2026_06_27.md"
+KG_PATH = ROOT / "concept" / "00_meta" / "kg_data_v3.json"
+REPORT_PATH = ROOT / "reports" / "MULTILINGUAL_ALIGNMENT_DRIFT_2026_07_12.md"
 
 # Preferred cross-lingual models in order. The first one locally cached is used.
 PREFERRED_MODELS = [
@@ -88,11 +88,18 @@ def load_kg(path: Path) -> dict[str, Any]:
 
 
 def iter_entities(kg: dict[str, Any]) -> list[dict[str, Any]]:
+    """Flatten entities (v3 flat list; legacy v2 grouped dict also accepted)."""
+    raw = kg.get("entities", [])
     entities: list[dict[str, Any]] = []
-    for category, items in kg.get("entities", {}).items():
-        for item in items:
-            item["_category"] = category
+    if isinstance(raw, list):
+        for item in raw:
+            item.setdefault("_category", item.get("@type", "unknown"))
             entities.append(item)
+    else:
+        for category, items in raw.items():
+            for item in items:
+                item["_category"] = category
+                entities.append(item)
     return entities
 
 

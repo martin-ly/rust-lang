@@ -19,47 +19,6 @@
 > **来源**: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html) · [Rust Reference — crate_type](https://doc.rust-lang.org/reference/linkage.html)
 
 ---
-
----
-
-## 认知路径
-
-> **认知路径**: 本节从 "Linkage（链接）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
-
-1. **问题识别**: 为什么 Linkage（链接） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
-2. **概念建立**: 掌握 Linkage（链接） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
-3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
-4. **边界辨析**: 借助反命题/反例理解常见错误与Linkage（链接）的适用边界。
-5. **迁移应用**: 将 Linkage（链接） 与前置/后置概念链接，形成跨层知识网络。
-
----
-
-> **过渡**: 从 Linkage（链接） 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
-> **过渡**: 在建立 Linkage（链接） 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
-> **过渡**: 最后，将 Linkage（链接） 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
----
-
-> **定理 1** [Tier 2]: Linkage（链接） 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
->
-> **定理 2** [Tier 2]: 正确理解 Linkage（链接） 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
->
-> **定理 3** [Tier 3]: 将 Linkage（链接） 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
----
-
-## 反命题决策树
-
-> **反命题 1**: "Linkage（链接） 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
-> **反命题 2**: "忽略 Linkage（链接） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Linkage（链接） 规则被违反的直接信号。
-> **反命题 3**: "其他语言对 Linkage（链接） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Linkage（链接） 具有语言特有的形态。
-
----
-
-> **反向推理 1**: 如果程序在 Linkage（链接） 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
->
-> **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 Linkage（链接） 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
-
 ## 一、概述
 
 本节主要从**编译器**而非语言语义的角度，介绍 Rust 支持的 crate 链接方式。Rust 编译器可以通过命令行标志或 `#![crate_type = "..."]` 属性生成多种输出产物。(Source: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html))
@@ -422,7 +381,6 @@ static MY_DATA: [u8; 4] = [0; 4];
 > · 特性×领域反查矩阵：[`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md)
 > · 兼容性迁移判定树：[`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md)
 > · ABI 权威页（交互矩阵）：[`38_application_binary_interface.md`](../../04_formal/05_rustc_internals/38_application_binary_interface.md)
-
 
 ---
 

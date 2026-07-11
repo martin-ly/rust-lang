@@ -4,7 +4,7 @@
 功能:
 - 为缺少 EN 标题的文件生成英文标题（基于 # 标题 + 术语表）。
 - 为缺少 Summary 的文件生成英文摘要（基于标题、层级、定义）。
-- 为缺少前置/后置概念的文件基于 kg_data_v2.json 的 dependsOn 关系补全。
+- 为缺少前置/后置概念的文件基于 kg_data_v3.json 的 dependsOn 关系补全。
 
 用法:
     python scripts/generate_en_skeleton.py --dry-run
@@ -25,7 +25,7 @@ from pathlib import Path
 from typing import Iterable
 
 ROOT = Path(__file__).resolve().parent.parent
-KG_PATH = ROOT / "concept/00_meta/kg_data_v2.json"
+KG_PATH = ROOT / "concept/00_meta/kg_data_v3.json"
 TERM_GLOSSARY_PATH = ROOT / "concept/00_meta/terminology_glossary.md"
 
 
@@ -52,12 +52,13 @@ def build_dependency_maps(kg: dict) -> tuple[dict[str, set[str]], dict[str, set[
 
 def label_for(kg: dict, entity_id: str, lang: str = "en") -> str:
     """从 KG 获取实体的指定语言标签。"""
-    for items in kg.get("entities", {}).values():
-        for item in items:
-            if item.get("@id") == entity_id:
-                for lbl in item.get("skos:prefLabel", []):
-                    if lbl.get("@language") == lang:
-                        return lbl["@value"]
+    raw = kg.get("entities", [])
+    items = raw if isinstance(raw, list) else [i for group in raw.values() for i in group]
+    for item in items:
+        if item.get("@id") == entity_id:
+            for lbl in item.get("skos:prefLabel", []):
+                if lbl.get("@language") == lang:
+                    return lbl["@value"]
     # 去掉 ex: 前缀作为回退
     return entity_id.replace("ex:", "")
 

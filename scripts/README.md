@@ -2,7 +2,7 @@
 
 > **项目**: Rust 系统化学习项目
 > **维护者**: Rust 学习项目团队
-> **最后更新**: 2026-07-04
+> **最后更新**: 2026-07-12
 > **状态**: ✅ 已完成（Phase 3 C4）。文件名规范化、archive/ 边界与重复脚本版本清理已确认。
 
 ---
@@ -58,6 +58,8 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `version_fact_check.py` | 版本相关事实核查 |
 | `lint_filenames.py` | 文件名 snake_case 命名检查 |
 | `detect_content_overlap.py` | 检测 `concept/`、`knowledge/`、`docs/` 三轨内容相似度，生成去重报告 |
+| `check_canonical_uniqueness.py` | `concept/` 权威页唯一性检查（AGENTS.md §2）：检测双权威页声明与同目录同主题重复文件；`--strict` 发现 ERROR 级违规时 exit 1 |
+| `check_template_cliches.py` | `concept/` 模板套话黑名单扫描（反命题/定理/过渡/反向推理/认知路径五步骤等 17 类注入模板句，见 `reports/TEMPLATE_CLICHE_CLEANUP_2026_07_12.md`）；默认 exit 0，`--strict` 发现命中即 exit 1 |
 | `auto_dedup_redirect.py` | 对高相似度非 `concept/` 文件自动生成指向 `concept/` 权威来源的重定向页 |
 
 ### 🔗 链接检查与修复
@@ -94,7 +96,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `add_missing_sources.py` | 补充缺失来源 |
 | `auto_toc_generator.py` | 自动生成目录 |
 | `auto_link_concepts.py` | 自动添加概念交叉链接 |
-| `build_search_index.py` | 构建搜索索引 |
+| `build_search_index.py` | ⚠️ 已退役（2026-07-12）：构建搜索索引，无活跃消费者，搜索由 mdbook searchindex / tools/kg_rag 提供 |
 | `generate_crate_docs_boilerplate.py` | 批量生成 crate 文档样板 |
 | `generate_en_skeleton.py` | 生成英文骨架 |
 | `generate_summary.py` | 生成汇总 |

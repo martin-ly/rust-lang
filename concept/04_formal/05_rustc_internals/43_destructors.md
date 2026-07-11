@@ -19,28 +19,6 @@
 
 ---
 
----
-
-## 认知路径
-
-> **认知路径**: 本节从 "析构函数与 Drop Scope（Destructors）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
-
-1. **问题识别**: 为什么 析构函数与 Drop Scope（Destructors） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
-2. **概念建立**: 掌握 析构函数与 Drop Scope（Destructors） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
-3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
-4. **边界辨析**: 借助反命题/反例理解常见错误与析构函数与 Drop Scope（Destructors）的适用边界。
-5. **迁移应用**: 将 析构函数与 Drop Scope（Destructors） 与前置/后置概念链接，形成跨层知识网络。
-
----
-
-## 反命题决策树
-
-> **反命题 1**: "析构函数与 Drop Scope（Destructors） 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
-
-> **反命题 2**: "忽略 析构函数与 Drop Scope（Destructors） 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 析构函数与 Drop Scope（Destructors） 规则被违反的直接信号。
-
-> **反命题 3**: "其他语言对 析构函数与 Drop Scope（Destructors） 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 析构函数与 Drop Scope（Destructors） 具有语言特有的形态。
-
 ## 一、什么是析构函数
 
 当已初始化的变量或临时值离开作用域时，会运行其**析构函数（destructor）**，也称为被 **drop**。赋值也会运行左操作数的析构函数（如果已初始化）。部分初始化的变量只 drop 已初始化的字段。
@@ -187,7 +165,6 @@ println!("{}", x);
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
-
 
 ---
 

@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Str
 > **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [所有权（Ownership）形式化](03_ownership_formal.md) · [Miri](../04_model_checking/31_miri.md)
-> **后置延伸**: [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md) · [BorrowSanitizer 预览/活跃跟踪](../../07_future/02_stabilized_features/borrow_sanitizer.md) · [Safety Tags](../../07_future/03_preview_features/31_safety_tags_preview.md) · [AutoVerus / Verus](../../07_future/03_preview_features/33_autoverus_preview.md) · [Miri](../04_model_checking/31_miri.md)
+> **后置延伸**: [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md) · [BorrowSanitizer 预览/活跃跟踪](../../07_future/02_stabilized_features/borrow_sanitizer.md) · [Safety Tags](../../07_future/03_preview_features/08_safety_tags_preview.md) · [AutoVerus / Verus](../../07_future/03_preview_features/33_autoverus_preview.md) · [Miri](../04_model_checking/31_miri.md)
 >
 > **来源**: [Villani et al. — Tree Borrows (PLDI 2025)](https://perso.crans.org/vanile/treebor/) · [Tree Borrows — DOI 10.1145/3735592](https://doi.org/10.1145/3735592) · [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/mod.rs) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > **内容重叠提示**: 本文与 [`archive/docs/content/academic/10_tree_borrows_guide.md`](../../../archive/docs/content/academic/10_tree_borrows_guide.md) 内容高度重叠。`docs/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
@@ -20,18 +20,6 @@
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
-
----
-
-## 认知路径
-
-> **认知路径**: 本节从 "Tree Borrows 深度解析" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
-
-1. **问题识别**: 为什么 Tree Borrows 深度解析 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
-2. **概念建立**: 掌握 Tree Borrows 深度解析 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
-3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
-4. **边界辨析**: 借助反命题/反例理解常见错误与Tree Borrows 深度解析的适用边界。
-5. **迁移应用**: 将 Tree Borrows 深度解析 与前置/后置概念链接，形成跨层知识网络。
 
 ## 一、权威定义
 
@@ -154,7 +142,7 @@ B
 
 - [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md)
 - [BorrowSanitizer 预览/活跃跟踪](../../07_future/02_stabilized_features/borrow_sanitizer.md)
-- [Safety Tags](../../07_future/03_preview_features/31_safety_tags_preview.md) · [深度形式化](../02_separation_logic/33_safety_tags_in_formal.md)
+- [Safety Tags](../../07_future/03_preview_features/08_safety_tags_preview.md) · [深度形式化](../../07_future/03_preview_features/08_safety_tags_preview.md)
 - [AutoVerus / Verus](../../07_future/03_preview_features/33_autoverus_preview.md) · [深度](../04_model_checking/24_autoverus.md)
 - [Miri](../04_model_checking/31_miri.md)
 - [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
@@ -170,7 +158,6 @@ B
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
-
 
 ---
 

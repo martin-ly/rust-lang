@@ -106,7 +106,7 @@
 
 - `concept/02_intermediate/00_traits/01_traits.md` — Traits（Trait 系统）
 - `concept/02_intermediate/00_traits/09_serde_patterns.md` — Serde 序列化模式：Rust 的类型驱动数据转换
-- `concept/02_intermediate/00_traits/18_lifetimes_advanced.md` — 生命周期高级主题：从 HRTB 到自引用类型
+- `concept/02_intermediate/00_traits/18_lifetimes_advanced.md` — 生命周期高级主题：从 HRTB 到自引用类型（⚠️ 2026-07-12 已合并至 `concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md`，本路径为重定向 stub）
 - `concept/02_intermediate/00_traits/19_advanced_traits.md` — 高级 Trait 主题：从关联类型到特化
 - `concept/02_intermediate/00_traits/28_construction_and_initialization.md` — 构造与初始化：C++ 的构造函数 vs Rust 的结构体字面量
 - `concept/02_intermediate/00_traits/31_derive_traits.md` — 可派生 Trait（Derive Traits）
@@ -189,7 +189,7 @@
 - `concept/04_formal/01_ownership_logic/37_behavior_considered_undefined.md` — 未定义行为清单（Behavior Considered Undefined）
 - `concept/04_formal/02_separation_logic/04_rustbelt.md` — RustBelt & Verification Toolchain（RustBelt 与验证工具链）
 - `concept/04_formal/02_separation_logic/11_separation_logic.md` — 分离逻辑：Rust 所有权的形式化根基
-- `concept/04_formal/02_separation_logic/33_safety_tags_in_formal.md` — Safety Tags（安全标签）
+- `concept/04_formal/02_separation_logic/33_safety_tags_in_formal.md` — Safety Tags（安全标签）（⚠️ 2026-07-12 已合并至 `concept/07_future/03_preview_features/08_safety_tags_preview.md`，本路径为重定向 stub）
 - `concept/04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md` — BorrowSanitizer 运行时别名模型检测
 - `concept/04_formal/03_operational_semantics/12_denotational_semantics.md` — 指称语义与领域理论
 - `concept/04_formal/03_operational_semantics/15_hoare_logic.md` — Hoare 逻辑：程序验证的形式化基础与 Rust 契约

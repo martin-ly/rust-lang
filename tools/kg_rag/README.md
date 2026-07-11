@@ -1,6 +1,6 @@
 # KG-RAG 语义搜索工具
 
-基于 `concept/00_meta/kg_data_v2.json` 的轻量级混合检索原型。
+基于 `concept/00_meta/kg_data_v3.json` 的轻量级混合检索原型。
 
 ## 环境
 
@@ -11,6 +11,7 @@ cd tools/kg_rag
 python -m venv .venv
 .venv/Scripts/pip install -r requirements.txt
 ```
+
 依赖：
 
 - `sentence-transformers`
@@ -33,6 +34,7 @@ python -m venv .venv
 .venv/Scripts/python tools/kg_rag/query.py \
   --query "lifetime elision" --rebuild
 ```
+
 首次运行会自动下载 `all-MiniLM-L6-v2` 模型并缓存到 `tools/kg_rag/.cache/`。
 
 ## 设计

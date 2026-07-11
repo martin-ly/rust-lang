@@ -2,7 +2,7 @@ use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet, VecDeque};
 
-/// 知识图谱中的实体类型，对应 v2 本体的六类节点。
+/// 知识图谱中的实体类型，对应本体的六类节点（v3 实际使用 Concept/Theory/Model/Primitive）。
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize)]
 #[serde(rename_all = "PascalCase")]
 pub enum EntityType {
@@ -71,6 +71,12 @@ pub struct Entity {
     pub alt_label: Vec<LangString>,
     #[serde(rename = "skos:definition", default)]
     pub definition: Vec<LangString>,
+    /// v3 实体使用 `skos:scopeNote` 作为英文摘要（v2 使用 `skos:definition`）。
+    #[serde(rename = "skos:scopeNote", default)]
+    pub scope_note: Vec<LangString>,
+    /// v3 实体指向 concept/ 下的相对路径。
+    #[serde(rename = "ex:path", default)]
+    pub path: Option<String>,
     #[serde(rename = "ex:layer", default)]
     pub layer: Option<String>,
     #[serde(rename = "ex:bloom", default)]
@@ -81,9 +87,26 @@ pub struct Entity {
 
 impl Entity {
     /// 获取指定语言的首选标签。
+    ///
+    /// v3 中部分实体的 `zh` 标签为空字符串；此时回退到 `en` 标签。
     pub fn label_for(&self, lang: &str) -> Option<&str> {
-        self.pref_label
+        for wanted in [lang, "en"] {
+            if let Some(label) = self
+                .pref_label
+                .iter()
+                .find(|l| l.language == wanted && !l.value.is_empty())
+            {
+                return Some(label.value.as_str());
+            }
+        }
+        None
+    }
+
+    /// 获取实体的英文摘要（优先 `skos:definition`，v3 回退到 `skos:scopeNote`）。
+    pub fn summary_for(&self, lang: &str) -> Option<&str> {
+        self.definition
             .iter()
+            .chain(self.scope_note.iter())
             .find(|l| l.language == lang)
             .map(|l| l.value.as_str())
     }

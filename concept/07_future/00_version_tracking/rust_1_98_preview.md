@@ -47,22 +47,6 @@
 
 ---
 
----
-
-> **过渡**: 从 Rust 1.98+ 前沿特性预览 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
-
-> **过渡**: 在建立 Rust 1.98+ 前沿特性预览 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
-
-> **过渡**: 最后，将 Rust 1.98+ 前沿特性预览 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
----
-
-> **定理 1** [Tier 2]: Rust 1.98+ 前沿特性预览 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
->
-> **定理 2** [Tier 2]: 正确理解 Rust 1.98+ 前沿特性预览 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
->
-> **定理 3** [Tier 3]: 将 Rust 1.98+ 前沿特性预览 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
 ## 一、语言特性预览
 
 ### 1.1 Pin Ergonomics（&pin mut / &pin const）
@@ -506,7 +490,7 @@ serde = { version = "1.0", public = true }
 - `#[safety::checked(...)]` 标注调用处已检查的条件
 - Clippy / rust-analyzer 未来可提供 IDE 支持
 
-**深度文档**: [33_safety_tags_in_formal.md](../../04_formal/02_separation_logic/33_safety_tags_in_formal.md)
+**深度文档**: [08_safety_tags_preview.md](../03_preview_features/08_safety_tags_preview.md)（原 `33_safety_tags_in_formal.md` 已合并重定向）
 
 ---
 
@@ -579,7 +563,7 @@ serde = { version = "1.0", public = true }
 - [Pin Ergonomics 预览](../03_preview_features/15_pin_ergonomics_preview.md)
 - [Return Type Notation 预览](../03_preview_features/12_return_type_notation_preview.md)
 - [Async Drop 预览](../03_preview_features/18_async_drop_preview.md)
-- [Safety Tags](../../04_formal/02_separation_logic/33_safety_tags_in_formal.md)
+- [Safety Tags](../03_preview_features/08_safety_tags_preview.md)
 - [BorrowSanitizer](../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md)
 - [AutoVerus / Verus](../../04_formal/04_model_checking/24_autoverus.md)
 - [Tree Borrows 深度](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md)

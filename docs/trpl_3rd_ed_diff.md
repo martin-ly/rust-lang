@@ -44,7 +44,7 @@
 | **Ch 7: Packages, Crates, Modules** | [11_modules_and_paths.md](../concept/01_foundation/07_modules_and_items/11_modules_and_paths.md) · [10_module_system.md](../concept/02_intermediate/05_modules_and_visibility/10_module_system.md) | ✅ | 模块（Module）系统完全覆盖；concept/ L2 额外包含 workspace 深入分析 |
 | **Ch 8: Common Collections** | [08_collections.md](../concept/01_foundation/05_collections/08_collections.md) · [17_collections_advanced.md](../concept/01_foundation/05_collections/17_collections_advanced.md) | ✅ | Vec、String、HashMap 完全覆盖；concept/ 额外包含 BTreeMap/Set |
 | **Ch 9: Error Handling** | [10_error_handling_basics.md](../concept/01_foundation/10_error_handling_basics.md) · [04_error_handling.md](../concept/02_intermediate/03_error_handling/04_error_handling.md) · [15_error_handling_deep_dive.md](../concept/02_intermediate/15_error_handling_deep_dive.md) | ✅ | panic、Result、? 完全覆盖；concept/ L2 额外包含 anyhow/thiserror |
-| **Ch 10: Generics, Traits, Lifetimes** | [01_traits.md](../concept/02_intermediate/00_traits/01_traits.md) · [02_generics.md](../concept/02_intermediate/01_generics/02_generics.md) · [03_lifetimes.md](../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [18_lifetimes_advanced.md](../concept/02_intermediate/00_traits/18_lifetimes_advanced.md) | ✅ | 三大核心主题完全覆盖；concept/ 拆分更细 |
+| **Ch 10: Generics, Traits, Lifetimes** | [01_traits.md](../concept/02_intermediate/00_traits/01_traits.md) · [02_generics.md](../concept/02_intermediate/01_generics/02_generics.md) · [03_lifetimes.md](../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [30_lifetimes_advanced.md](../concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md) | ✅ | 三大核心主题完全覆盖；concept/ 拆分更细 |
 | **Ch 11: Writing Automated Tests** | [16_testing_basics.md](../concept/01_foundation/10_testing_basics/16_testing_basics.md) · [12_testing_strategies.md](../concept/06_ecosystem/09_testing_and_quality/12_testing_strategies.md) | ✅ | 单元测试、集成测试完全覆盖；concept/ 额外包含属性测试 |
 | **Ch 12: I/O Project: CLI** | [MVP 学习路径](../concept/00_meta/04_navigation/learning_mvp_path.md) | ⚠️ | TRPL 以完整 CLI 项目贯穿；concept/ MVP 路径更宏（Macro）观 |
 | **Ch 13: Iterators and Closures** | [15_closure_basics.md](../concept/01_foundation/00_start/15_closure_basics.md) · [07_closure_types.md](../concept/02_intermediate/04_types_and_conversions/07_closure_types.md) · [15_iterator_patterns.md](../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) | ✅ | 闭包、迭代器（Iterator）完全覆盖；concept/ 额外包含自定义迭代器 |
@@ -107,7 +107,7 @@
 TRPL Ch 1-3  →  concept/01_foundation/ (L1 基础)
 TRPL Ch 4-6  →  concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md ~ 04_type_system.md
 TRPL Ch 7-9  →  concept/01_foundation/05_collections/08_collections.md ~ 10_error_handling_basics.md
-TRPL Ch 10   →  concept/02_intermediate/00_traits/01_traits.md + 02_generics.md + 18_lifetimes_advanced.md
+TRPL Ch 10   →  concept/02_intermediate/00_traits/01_traits.md + 02_generics.md + 01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md（原 18_lifetimes_advanced.md 已合并）
 TRPL Ch 11   →  concept/01_foundation/10_testing_basics/16_testing_basics.md
 TRPL Ch 12   →  concept/00_meta/learning_mvp_path.md (Week 1 Day 7)
 TRPL Ch 13   →  concept/02_intermediate/04_types_and_conversions/07_closure_types.md + 15_iterator_patterns.md

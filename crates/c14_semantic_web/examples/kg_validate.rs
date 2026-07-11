@@ -5,7 +5,7 @@ use std::env;
 fn main() {
     let path = env::args()
         .nth(1)
-        .unwrap_or_else(|| "concept/00_meta/kg_data_v2.json".to_string());
+        .unwrap_or_else(|| "concept/00_meta/kg_data_v3.json".to_string());
 
     println!("加载知识图谱: {}", path);
     let kg = load_kg_from_json(&path).expect("加载失败");

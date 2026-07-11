@@ -1,7 +1,7 @@
 """
 KG-RAG: Hybrid semantic search over the Rust knowledge graph.
 
-Reads ``concept/00_meta/kg_data_v2.json``, embeds entity summaries in English,
+Reads ``concept/00_meta/kg_data_v3.json``, embeds entity summaries in English,
 builds a lightweight numpy vector index, and supports hybrid retrieval that
 combines dense similarity with KG structure (``dependsOn`` neighbours).
 """
@@ -42,7 +42,7 @@ _ensure_venv()
 
 from sentence_transformers import SentenceTransformer  # noqa: E402
 
-KG_PATH = Path("concept/00_meta/kg_data_v2.json")
+KG_PATH = Path("concept/00_meta/kg_data_v3.json")
 CACHE_DIR = ROOT / ".cache"
 INDEX_PATH = CACHE_DIR / "index.pkl"
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
@@ -50,18 +50,28 @@ DEFAULT_ALPHA = 0.75
 
 
 def load_kg(path: Path | str = KG_PATH) -> dict[str, Any]:
-    """Load the JSON-LD v2 knowledge graph."""
+    """Load the JSON-LD knowledge graph (v3; v2 grouped layout also accepted)."""
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def iter_entities(kg: dict[str, Any]) -> list[dict[str, Any]]:
-    """Flatten all entities (concepts, theories, properties, rules, ...)."""
+    """Flatten all entities (concepts, theories, models, primitives, ...).
+
+    Supports both the v3 flat list layout and the legacy v2 layout where
+    entities were grouped by category in a dict.
+    """
+    raw = kg.get("entities", [])
     entities: list[dict[str, Any]] = []
-    for category, items in kg.get("entities", {}).items():
-        for item in items:
-            item["_category"] = category
+    if isinstance(raw, list):  # v3: flat list of entities
+        for item in raw:
+            item.setdefault("_category", item.get("@type", "unknown").removeprefix("ex:").lower() + "s")
             entities.append(item)
+    else:  # v2 legacy: {category: [entities]}
+        for category, items in raw.items():
+            for item in items:
+                item["_category"] = category
+                entities.append(item)
     return entities
 
 
@@ -72,15 +82,27 @@ def get_lang_value(values: list[dict[str, str]], lang: str) -> str | None:
     return None
 
 
+def entity_summary(entity: dict[str, Any]) -> str | None:
+    """Return the English summary of an entity.
+
+    v3 entities use ``skos:scopeNote``; legacy v2 entities used
+    ``skos:definition``. Fall back to the short id when neither exists.
+    """
+    return (
+        get_lang_value(entity.get("skos:definition", []), "en")
+        or get_lang_value(entity.get("skos:scopeNote", []), "en")
+    )
+
+
 def entity_text(entity: dict[str, Any]) -> str:
     """Return the English summary text used for embedding."""
     parts: list[str] = []
     label = get_lang_value(entity.get("skos:prefLabel", []), "en")
     if label:
         parts.append(label)
-    definition = get_lang_value(entity.get("skos:definition", []), "en")
-    if definition:
-        parts.append(definition)
+    summary = entity_summary(entity)
+    if summary:
+        parts.append(summary)
     alt = get_lang_value(entity.get("skos:altLabel", []), "en")
     if alt:
         parts.append(f"({alt})")
@@ -105,7 +127,7 @@ def build_index(
         try:
             with open(cache_path, "rb") as f:
                 cached = pickle.load(f)
-            if cached.get("model") == model_name:
+            if cached.get("model") == model_name and cached.get("kg_path") == str(kg_path):
                 print(f"[kg_rag] Loaded cached index from {cache_path}", file=sys.stderr)
                 return cached["vectors"], cached["entities"], SentenceTransformer(model_name)
         except Exception as exc:
@@ -126,7 +148,7 @@ def build_index(
     norms[norms == 0] = 1.0
     vectors = vectors / norms
 
-    cache = {"model": model_name, "vectors": vectors, "entities": entities}
+    cache = {"model": model_name, "kg_path": str(kg_path), "vectors": vectors, "entities": entities}
     with open(cache_path, "wb") as f:
         pickle.dump(cache, f)
     print(f"[kg_rag] Saved index to {cache_path}", file=sys.stderr)
@@ -223,7 +245,7 @@ def hybrid_search(
                 "short_id": short_id(entity["@id"]),
                 "label": get_lang_value(entity.get("skos:prefLabel", []), "en"),
                 "label_zh": get_lang_value(entity.get("skos:prefLabel", []), "zh"),
-                "definition": get_lang_value(entity.get("skos:definition", []), "en"),
+                "definition": entity_summary(entity),
                 "category": entity.get("_category", "unknown"),
                 "vector_score": round(float(vector_scores[idx]), 4),
                 "graph_score": round(float(graph_scores[idx]), 4),
@@ -256,7 +278,7 @@ def main() -> int:
     parser.add_argument("--query", required=True, help="Natural language query.")
     parser.add_argument("--top-k", type=int, default=5, help="Number of top results.")
     parser.add_argument("--alpha", type=float, default=DEFAULT_ALPHA, help="Vector weight in hybrid score.")
-    parser.add_argument("--kg", default=str(KG_PATH), help="Path to kg_data_v2.json.")
+    parser.add_argument("--kg", default=str(KG_PATH), help="Path to kg_data_v3.json.")
     parser.add_argument("--rebuild", action="store_true", help="Force rebuild the embedding index.")
     parser.add_argument("--json", action="store_true", help="Output raw JSON instead of formatted text.")
     args = parser.parse_args()

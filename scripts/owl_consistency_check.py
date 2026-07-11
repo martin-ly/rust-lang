@@ -2,7 +2,7 @@
 """
 OWL 2 一致性检查（P2-4）
 
-读取 concept/00_meta/kg_data_v2.json，检查以下 OWL 语义约束：
+读取 concept/00_meta/kg_data_v3.json，检查以下 OWL 语义约束：
 - ``ex:mutexWith``：对称（Symmetric）、反自反（Irreflexive）
 - ``ex:dependsOn``：传递闭包中无环
 - ``ex:equivalentTo``：对称（Symmetric）、传递（Transitive）
@@ -20,8 +20,8 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
-KG_PATH = ROOT / "concept" / "00_meta" / "kg_data_v2.json"
-REPORT_PATH = ROOT / "reports" / "OWL_CONSISTENCY_CHECK_2026_06_27.md"
+KG_PATH = ROOT / "concept" / "00_meta" / "kg_data_v3.json"
+REPORT_PATH = ROOT / "reports" / "OWL_CONSISTENCY_CHECK_2026_07_12.md"
 
 
 def load_kg(path: Path) -> dict[str, Any]:
@@ -30,11 +30,18 @@ def load_kg(path: Path) -> dict[str, Any]:
 
 
 def iter_entities(kg: dict[str, Any]) -> list[dict[str, Any]]:
+    """Flatten entities (v3 flat list; legacy v2 grouped dict also accepted)."""
+    raw = kg.get("entities", [])
     entities: list[dict[str, Any]] = []
-    for category, items in kg.get("entities", {}).items():
-        for item in items:
-            item["_category"] = category
+    if isinstance(raw, list):
+        for item in raw:
+            item.setdefault("_category", item.get("@type", "unknown"))
             entities.append(item)
+    else:
+        for category, items in raw.items():
+            for item in items:
+                item["_category"] = category
+                entities.append(item)
     return entities
 
 

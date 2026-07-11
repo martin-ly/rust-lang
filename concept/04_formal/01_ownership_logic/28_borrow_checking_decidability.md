@@ -18,32 +18,6 @@
 > **后置概念**: N/A
 ---
 
----
-
-> **过渡**: 从 Borrow Checking Decidability（借 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
-
-> **过渡**: 在建立 Borrow Checking Decidability（借 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
-
-> **过渡**: 最后，将 Borrow Checking Decidability（借 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
----
-
-> **定理 1** [Tier 2]: Borrow Checking Decidability（借 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
->
-> **定理 2** [Tier 2]: 正确理解 Borrow Checking Decidability（借 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
->
-> **定理 3** [Tier 3]: 将 Borrow Checking Decidability（借 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
----
-
-## 反命题决策树
-
-> **反命题 1**: "Borrow Checking Decidability（借 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
-
-> **反命题 2**: "忽略 Borrow Checking Decidability（借 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 Borrow Checking Decidability（借 规则被违反的直接信号。
-
-> **反命题 3**: "其他语言对 Borrow Checking Decidability（借 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 Borrow Checking Decidability（借 具有语言特有的形态。
-
 ## 零、认知路径（Cognitive Path）
 
 ```text
@@ -407,7 +381,6 @@ fn two_phase_borrow() {
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
-
 
 ---
 

@@ -17,9 +17,10 @@ pub enum KgIoError {
     UnexpectedType(String),
 }
 
-/// 从 JSON-LD v2 文件加载知识图谱。
+/// 从 JSON-LD v2/v3 文件加载知识图谱。
 ///
 /// 当前实现解析项目自定义的 JSON-LD 简化格式，尚未使用完整 JSON-LD 处理算法。
+/// v3 的 `entities` 为扁平数组；v2 为按类别分组的字典，两种布局均可解析。
 /// 后续可替换为 sophia_jsonld 或 json-ld crate。
 pub fn load_kg_from_json<P: AsRef<Path>>(path: P) -> Result<KnowledgeGraph, KgIoError> {
     let content = fs::read_to_string(path)?;
@@ -34,13 +35,20 @@ pub fn load_kg_from_json<P: AsRef<Path>>(path: P) -> Result<KnowledgeGraph, KgIo
         }
     }
 
-    // 加载实体
-    if let Some(entities) = value.get("entities").and_then(|v| v.as_object()) {
-        for (_category, items) in entities {
-            if let Some(arr) = items.as_array() {
-                for item in arr {
-                    let entity: Entity = serde_json::from_value(item.clone())?;
-                    kg.add_entity(entity);
+    // 加载实体：v3 为扁平数组，v2 为按类别分组的字典
+    if let Some(entities) = value.get("entities") {
+        if let Some(arr) = entities.as_array() {
+            for item in arr {
+                let entity: Entity = serde_json::from_value(item.clone())?;
+                kg.add_entity(entity);
+            }
+        } else if let Some(groups) = entities.as_object() {
+            for (_category, items) in groups {
+                if let Some(arr) = items.as_array() {
+                    for item in arr {
+                        let entity: Entity = serde_json::from_value(item.clone())?;
+                        kg.add_entity(entity);
+                    }
                 }
             }
         }

@@ -548,7 +548,7 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 - [x] **中**: 补充 HRTB 与全称量词（∀）的形式化对应关系 —— ✅ 已完成，参见 `04_formal/02_type_theory.md` §10.4
 - [x] **低**: 追踪 Rust 语言演进对 L4 形式化模型的影响（如 Tree Borrows vs Stacked Borrows） —— ✅ 已完成，参见 `04_formal/03_ownership_formal.md` §11
 - [x] **高**: Wave 11 表征空间元分析（semantic_space.md）+ 索引同步
-- [x] **低**: 建立机器可解析的层间关系格式（YAML/JSON 导出） —— 已纳入 `concept_index.json`
+- [x] **低**: 建立机器可解析的层间关系格式（YAML/JSON 导出） —— 原 `concept_index.json` 已于 2026-07-12 退役（移入 `archive/2026/`）；现以 `concept/00_meta/kg_data_v3.json` 为唯一真相源
 
 ---
 

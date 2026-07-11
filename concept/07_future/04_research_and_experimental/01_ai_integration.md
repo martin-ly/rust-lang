@@ -38,20 +38,6 @@
 
 ---
 
-> **过渡**: 从 AI × Rust 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
-> **过渡**: 在建立 AI × Rust 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
-> **过渡**: 最后，将 AI × Rust 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
----
-
-> **定理 1** [Tier 2]: AI × Rust 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
->
-> **定理 2** [Tier 2]: 正确理解 AI × Rust 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
->
-> **定理 3** [Tier 3]: 将 AI × Rust 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
-## 一、核心命题
-
 ## 认知路径（精简版）
 
 > **学习递进**: AI × Rust 的核心逻辑链
@@ -163,8 +149,6 @@ graph TD
 
 ---
 
-## 五、AI + Rust 工具链详解
-
 ## 五、AI 辅助 Rust 编程的机制剖析
 
 ### 5.1 编译器作为确定性 RL 环境
@@ -240,7 +224,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 > **[Compiler-assisted AI / RL on Compiler Feedback](https://arxiv.org/) · [PLDI](https://www.sigplan.org/Conferences/PLDI/) / ICML / NeurIPS Papers** 强化学习（RL）在编译器错误修复中的应用，本质上是将编译器视为一个**确定性环境**（deterministic environment）：给定源代码输入，编译器输出结构化诊断反馈，这种反馈可作为 RL agent 的密集奖励信号。与传统监督学习依赖大量标注数据不同，RL 通过"生成-编译-修复"的迭代循环自主学习修复策略。✅
 
 ### 6.1 研究背景与问题定义
->
 
 传统 LLM 通过监督学习在代码语料上训练，但编译错误作为一种强信号被严重低估。编译器提供的错误信息具有三个关键特性，使其成为理想的 RL 环境：
 
@@ -253,7 +236,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 > **[Yasunaga & Liang, ICML 2021 — Break-It-Fix-It](https://doi.org/10.48550/arXiv.2106.08309)** 将编译器/类型检查器视为 critic，其输出（错误存在/不存在）构成自然的二元奖励，无需人工标注修复对。✅
 
 ### 6.2 状态空间、动作空间与奖励函数
->
 
 将编译错误修复形式化为马尔可夫决策过程（MDP）：
 
@@ -283,8 +265,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 
 > **[Gupta et al., AAAI 2019 — Deep RL for Syntactic Error Repair](https://arxiv.org/abs/1707.05632)** 在学生程序修复任务中，使用编译通过作为最终奖励，中间奖励为错误数量变化，agent 在 5,156 个错误消息上训练，成功完全修复 1,625 个程序。✅
 > **语义等价验证**：编译通过仅是必要条件。工业级 RL 系统还需运行 `cargo test` 或 Miri 验证修复的语义等价性，避免"通过编译但逻辑错误"的补丁。[Monperrus, Living Review on Automated Program Repair](https://hal.science/hal-01390516/document)
-
-### 6.3 代表性研究
 
 ### 6.3 代表性研究（方法论迁移视角）
 
@@ -388,7 +368,6 @@ Break-It-Fix-It 训练循环:
 > **定位**：Prophet 属于**监督学习**（学习历史补丁特征），而非 RL。但它是"编译器/测试反馈驱动程序修复"思想的早期工业级实践，为后续 RL 方法奠定了问题定义基础。[MIT News, 2016](https://news.mit.edu/)
 
 ### 6.4 Rust 编译器错误信息的结构化优势
->
 
 Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，使其成为 RL 环境的理想选择：
 
@@ -441,7 +420,6 @@ Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，
 > **定理**：Rust 编译器诊断的**结构化密度**（每字节源码对应的诊断信息量）远高于 C++（文本诊断）或 Python（运行时（Runtime）堆栈），这使得 Rust 的 RL 状态表示更紧凑、奖励信号更密集。`rustc` 的确定性（相同输入总是产生相同诊断）进一步保证了 MDP 转移函数的稳定性。来源: [Rust Reference: JSON Diagnostic Format](https://doc.rust-lang.org/reference/introduction.html) · [rustc-dev-guide]
 
 ### 6.5 与 LLM-based 修复的对比
->
 
 | **维度** | **RL on Compiler Errors** | **LLM-based 修复（Copilot / ChatGPT）** |
 |:---|:---|:---|
@@ -494,7 +472,6 @@ python -m rust_rl_repair --env rustc --reward compile+test \
 > **来源**: [RustRepair-RL, ETH Zurich, 2024] · [Compiler-Guided Fine-Tuning, CMU, 2025] · [Error2Learn, MPI-SWS] · [PLDI 2024/2025 Compiler-Guided Code Generation] · [rustc JSON Diagnostic Format]
 
 ### 7.1 概念定义
->
 >
 > **来源**: [Deterministic Container Concepts] · [Nix / Reproducible Builds]
 
@@ -600,7 +577,6 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 
 ### 10.1 LLM for Code Generation
 >
->
 > **来源**: [arXiv:2302.05319] · [Google DeepMind AlphaCode] · [OpenAI Codex Paper]
 
 核心发现：
@@ -637,8 +613,6 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 | AI 类型推断（Type Inference）辅助 | L1 类型系统（Type System）需更易推断 | `01_foundation/02_type_system/04_type_system.md` | 反向约束 |
 | AI 错误修复 | L2 错误处理（Error Handling）模式需标准化 | `02_intermediate/03_error_handling/04_error_handling.md` | 反向约束 |
 | 确定性容器 | L1 所有权（Ownership）需扩展确定性语义 | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | 潜在扩展 |
-
----
 
 ---
 

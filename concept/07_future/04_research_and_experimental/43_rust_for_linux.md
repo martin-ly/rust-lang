@@ -497,7 +497,7 @@ Rust for Linux 采用状态 (2024+):
 
 Rust for Linux 是 Rust 形式化工具与运行时（Runtime）检查的重要落地场景：
 
-- **[Safety Tags](../../04_formal/02_separation_logic/33_safety_tags_in_formal.md)**：内核中存在大量 `unsafe` 边界，Safety Tags（RFC #3842）可将 `# Safety` 文档注释转化为机器可读契约，帮助内核维护者审查 `unsafe` 调用点。
+- **[Safety Tags](../03_preview_features/08_safety_tags_preview.md)**：内核中存在大量 `unsafe` 边界，Safety Tags（RFC #3842）可将 `# Safety` 文档注释转化为机器可读契约，帮助内核维护者审查 `unsafe` 调用点。
 - **[BorrowSanitizer](../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md)**：在 Rust/C 混合代码中检测别名模型违规，补充 Miri 无法覆盖的生产环境。
 - **[Tree Borrows](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md)**：相比 Stacked Borrows 更适合内核中常见的复杂借用（Borrowing）模式，已被 Miri 支持。
 - **[AutoVerus / Verus](../../04_formal/04_model_checking/24_autoverus.md)**：未来可用于验证内核抽象层（如 `kernel::sync`）的功能正确性。

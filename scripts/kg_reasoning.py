@@ -3,9 +3,9 @@
 知识图谱推理脚本：调用 c14_semantic_web crate 的 kg_query example。
 
 用法:
-    python scripts/kg_reasoning.py --kg concept/00_meta/kg_data_v2.json
-    python scripts/kg_reasoning.py --kg concept/00_meta/kg_data_v2.json --validate
-    python scripts/kg_reasoning.py --kg concept/00_meta/kg_data_v2.json --prerequisites ex:Lifetimes
+    python scripts/kg_reasoning.py --kg concept/00_meta/kg_data_v3.json
+    python scripts/kg_reasoning.py --kg concept/00_meta/kg_data_v3.json --validate
+    python scripts/kg_reasoning.py --kg concept/00_meta/kg_data_v3.json --prerequisites ex:Lifetimes
 """
 
 import argparse
@@ -67,18 +67,23 @@ def find_prerequisites(kg: dict, target: str, transitive: bool = True) -> set[st
 
 
 def label_of(kg: dict, entity_id: str, lang: str = "zh") -> str:
-    for category, items in kg.get("entities", {}).items():
-        for item in items:
-            if item.get("@id") == entity_id:
-                for lbl in item.get("skos:prefLabel", []):
-                    if lbl.get("@language") == lang:
+    raw = kg.get("entities", [])
+    items = raw if isinstance(raw, list) else [i for group in raw.values() for i in group]
+    for item in items:
+        if item.get("@id") == entity_id:
+            labels = item.get("skos:prefLabel", [])
+            # v3 部分实体 zh 标签为空字符串，回退到 en
+            for wanted in (lang, "en"):
+                for lbl in labels:
+                    if lbl.get("@language") == wanted and lbl.get("@value"):
                         return lbl["@value"]
+            return entity_id
     return entity_id
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="KG reasoning wrapper")
-    parser.add_argument("--kg", default="concept/00_meta/kg_data_v2.json", help="KG JSON-LD v2 path")
+    parser.add_argument("--kg", default="concept/00_meta/kg_data_v3.json", help="KG JSON-LD v3 path")
     parser.add_argument("--validate", action="store_true", help="run validation")
     parser.add_argument("--prerequisites", help="find prerequisites for an entity (e.g. ex:Lifetimes)")
     args = parser.parse_args()

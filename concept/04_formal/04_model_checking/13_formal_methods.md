@@ -508,7 +508,7 @@ fn main() {
 | [Kani](32_kani.md) | Rust 有界模型检查器，基于 CBMC 符号执行验证安全属性 | [Kani 官方文档](https://model-checking.github.io/kani/) |
 | [Miri](31_miri.md) | Rust MIR 解释器，动态检测 UB（含 Stacked/Tree Borrows） | [Miri GitHub](https://github.com/rust-lang/miri) |
 | [Tree Borrows](../01_ownership_logic/36_tree_borrows_deep_dive.md) | Rust 别名模型演进方向，比 Stacked Borrows 更宽松 | [Tree Borrows 论文/博客](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) |
-| [Safety Tags](../02_separation_logic/33_safety_tags_in_formal.md) | RFC #3842 提案，将 `unsafe` 安全契约结构化、机器可读 | [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
+| [Safety Tags](../../07_future/03_preview_features/08_safety_tags_preview.md) | RFC #3842 提案，将 `unsafe` 安全契约结构化、机器可读 | [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
 | [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md) | 运行时（Runtime）别名模型检测，面向 Rust/C/C++ 互操作 | [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) |
 | [AutoVerus / Verus](24_autoverus.md) | SMT 演绎验证与 LLM 辅助自动证明生态 | [Verus GitHub](https://github.com/verus-lang/verus) · [AutoVerus 论文](https://arxiv.org/abs/2409.13082) |
 

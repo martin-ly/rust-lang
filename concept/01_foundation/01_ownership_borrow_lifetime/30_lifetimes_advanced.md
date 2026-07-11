@@ -81,6 +81,12 @@
     - [10.3 边界测试：HRTB（高阶 trait bound）的推导失败（编译错误）](#103-边界测试hrtb高阶-trait-bound的推导失败编译错误)
     - [10.4 边界测试：NLL（非词法生命周期）的边界（编译错误）](#104-边界测试nll非词法生命周期的边界编译错误)
     - [10.3 边界测试：HRTB 与闭包生命周期不匹配（编译错误）](#103-边界测试hrtb-与闭包生命周期不匹配编译错误)
+  - [十八、变型、闭包生命周期与常见陷阱（合并自 L2 traits 专题页）](#十八变型闭包生命周期与常见陷阱合并自-l2-traits-专题页)
+    - [18.1 变型（Variance）：子类型关系在泛型参数上的传播](#181-变型variance子类型关系在泛型参数上的传播)
+    - [18.2 生命周期与闭包：三种捕获模式](#182-生命周期与闭包三种捕获模式)
+    - [18.3 生命周期模式矩阵](#183-生命周期模式矩阵)
+    - [18.4 常见陷阱](#184-常见陷阱)
+    - [18.5 边界测试：lifetime bounds 与 trait object 的交互（编译错误）](#185-边界测试lifetime-bounds-与-trait-object-的交互编译错误)
   - [定理链补充](#定理链补充)
   - [反命题与边界](#反命题与边界)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -89,6 +95,7 @@
     - [测验 3：自引用结构（分析层）](#测验-3自引用结构分析层)
     - [测验 4：生命周期子类型（分析层）](#测验-4生命周期子类型分析层)
     - [测验 5：悬垂引用的编译器防护（理解层）](#测验-5悬垂引用的编译器防护理解层)
+    - [测验 6：生命周期 bound `+ 'a` 的含义（应用层）](#测验-6生命周期-bound--a-的含义应用层)
   - [实践](#实践)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
@@ -1402,6 +1409,204 @@ fn main() {
 > HRTB 是 Rust 类型系统的强大特性，但也是闭包与 trait 交互时的常见陷阱。
 > [来源: [Rust Reference — Higher-Ranked Trait Bounds](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds)]
 
+## 十八、变型、闭包生命周期与常见陷阱（合并自 L2 traits 专题页）
+
+> **合并说明**: 本节内容于 2026-07-12 合并自原 `concept/02_intermediate/00_traits/18_lifetimes_advanced.md`（该文件已按 AGENTS.md §2 Canonical 规则改为重定向 stub）。保留其独有内容：变型（Variance）完整体系、闭包捕获生命周期、生命周期模式矩阵、常见陷阱、trait object 边界测试；HRTB、Elision、Pin/自引用主题以本文前文章节为准。
+
+### 18.1 变型（Variance）：子类型关系在泛型参数上的传播
+
+```text
+变型: 子类型关系在泛型参数上的传播
+
+  三种变型:
+  ├── 协变（Covariant）: T <: U ⇒ Container<T> <: Container<U>
+  │   └── &'a T（生命周期越长，类型越小）
+  ├── 逆变（Contravariant）: T <: U ⇒ Container<U> <: Container<T>
+  │   └── fn(T)（参数类型越宽，函数越窄）
+  └── 不变（Invariant）: T <: U ⇏ Container<T> <: Container<U>
+      └── &mut T, Cell<T>, Mutex<T>
+
+  生命周期变型:
+  ├── &'static T <: &'a T（'static 更长，是子类型）
+  ├── 协变: 长生命周期可转为短生命周期
+  └── fn(&'static str) 可传入 fn(&'a str)
+
+  Rust 中的变型:
+  ┌─────────────────┬─────────────────┐
+  │ 类型构造器      │ 变型            │
+  ├─────────────────┼─────────────────┤
+  │ &T              │ 对 T 协变       │
+  │ &mut T          │ 对 T 不变       │
+  │ Box<T>          │ 对 T 协变       │
+  │ Vec<T>          │ 对 T 协变       │
+  │ Cell<T>         │ 对 T 不变       │
+  │ fn(T) -> U      │ 对 T 逆变，对 U 协变│
+  │ *const T        │ 对 T 协变       │
+  │ *mut T          │ 对 T 不变       │
+  └─────────────────┴─────────────────┘
+
+  变型的影响:
+  ├── 协变允许放宽生命周期约束
+  ├── 不变阻止危险的生命周期缩短
+  └── 理解变型有助于解决生命周期错误
+```
+
+> **变型洞察**: **变型**是 Rust 类型系统（Type System）的**隐藏齿轮**——它解释了为什么某些生命周期转换合法而另一些不合法。
+> [来源: [The Rustonomicon — Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html)] · [TRPL — Advanced Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
+
+### 18.2 生命周期与闭包：三种捕获模式
+
+```rust,ignore
+// 闭包捕获与生命周期
+
+fn closure_lifetimes() {
+    let s = String::from("hello");
+
+    // 1. 通过引用捕获
+    let closure = |x: &str| -> String {
+        format!("{} {}", s, x)  // s 被 &String 捕获
+    };
+    // closure 的生命周期与 s 绑定
+
+    // 2. 通过 move 捕获
+    let closure = move |x: &str| -> String {
+        format!("{} {}", s, x)  // s 被 move 进闭包
+    };
+    // s 被消耗，closure 拥有数据
+
+    // 3. 闭包作为返回值（需要 'static）
+    fn make_closure() -> impl Fn(i32) -> i32 {
+        let factor = 2;
+        move |x| x * factor  // factor 被 move，闭包是 'static
+    }
+
+    // 4. 借用闭包（非 'static）
+    fn make_borrowed_closure<'a>(s: &'a str) -> impl Fn() -> &'a str + 'a {
+        move || s  // 返回借用的引用
+    }
+}
+
+// 闭包 Trait:
+// ├── Fn: 不可变借用捕获 (&T)
+// ├── FnMut: 可变借用捕获 (&mut T)
+// └── FnOnce: 移动捕获（T），只能调用一次
+
+// 选择:
+// ├── 需要多次调用 + 不可变 → Fn
+// ├── 需要多次调用 + 可变 → FnMut
+// └── 只需要一次/消耗数据 → FnOnce
+```
+
+> **闭包（Closures）洞察**: 闭包的**三种 Fn trait**对应三种借用（Borrowing）模式——它们是 Rust **所有权（Ownership）系统**在闭包上的自然延伸。
+> [来源: [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)]
+
+### 18.3 生命周期模式矩阵
+
+```text
+场景 → 方案 → 代码模式
+
+简单借用:
+  → 生命周期省略
+  → fn foo(x: &str) -> &str
+
+多个输入一个输出:
+  → 显式生命周期标注
+  → fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
+
+泛型结构体借用:
+  → 结构体生命周期参数
+  → struct Parser<'a> { input: &'a str }
+
+闭包回调:
+  → HRTB
+  → F: for<'a> Fn(&'a str)
+
+自引用:
+  → Pin + PhantomPinned
+  → Pin<Box<MyStruct>>
+
+异步生命周期:
+  → 'static Future
+  → async fn 自动处理
+```
+
+> **模式矩阵**: 生命周期是 Rust **最陡峭的学习曲线**——但一旦掌握，它成为编译期保证的强大工具。
+> [来源: [Rust Lifetime Visualization](https://rustc-dev-guide.rust-lang.org/borrow_check/region_inference.html)]
+
+### 18.4 常见陷阱
+
+```text
+陷阱 1: 返回局部引用
+  ❌ fn bad() -> &str {
+         let s = String::from("hello");
+         &s  // s 在函数结束时被 drop
+     }
+
+  ✅ fn good() -> String {
+         String::from("hello")  // 转移所有权
+     }
+
+陷阱 2: 生命周期标注不足
+  ❌ fn bad(x: &str, y: &str) -> &str { x }
+     // 编译错误：无法推断返回生命周期
+
+  ✅ fn good<'a>(x: &'a str, y: &str) -> &'a str { x }
+
+陷阱 3: 在结构体中存储引用
+  ❌ struct Bad { data: &str }
+     // 需要生命周期参数
+
+  ✅ struct Good<'a> { data: &'a str }
+     // 或 struct Good { data: String }
+
+陷阱 4: HRTB 使用错误
+  ❌ fn bad<F>(f: F) where F: Fn(&str) { }
+     // 某些闭包不满足
+
+  ✅ fn good<F>(f: F) where F: for<'a> Fn(&'a str) { }
+
+陷阱 5: 忘记 move 闭包
+  ❌ let s = String::from("hello");
+     let c = || println!("{}", s);
+     drop(s);  // 编译错误！s 被借用
+
+  ✅ let c = move || println!("{}", s);
+     // s 被 move 进闭包
+```
+
+> **陷阱总结**: 生命周期陷阱主要与**返回局部引用**、**标注不足**、**结构体（Struct）存储引用**、**HRTB**和**闭包（Closures）捕获**相关。
+> [来源: [Common Lifetime Mistakes](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html)]
+
+### 18.5 边界测试：lifetime bounds 与 trait object 的交互（编译错误）
+
+```rust,compile_fail
+trait Processor<'a> {
+    fn process(&self, data: &'a str) -> &'a str;
+}
+
+fn use_processor(p: &dyn Processor<'static>) {
+    let s = String::from("temporary");
+    // ❌ 编译错误: Processor<'static> 要求 &'static str，但 &s 不是 'static
+    let _result = p.process(&s);
+}
+
+fn main() {}
+```
+
+> **修正**:
+>
+> Trait object `dyn Trait<'a>` 将生命周期参数**固化**为具体值。
+> `dyn Processor<'static>` 要求所有输入输出都是 `'static`，不能处理临时字符串。
+> 修复：
+>
+> 1) `fn use_processor<'a>(p: &dyn Processor<'a>, data: &'a str)` — 泛型（Generics）生命周期；
+> 2) `dyn for<'a> Processor<'a>` — HRTB（Higher-Ranked Trait Bounds），接受任意生命周期。
+> HRTB 的语法：`dyn for<'a> Fn(&'a str) -> &'a str` 表示闭包对所有 `'a` 有效。
+> 这与 Java 的泛型（Generics）通配符（`? extends T`）或 C++ 的模板（无显式生命周期参数）不同——Rust 的 HRTB 允许 trait object 保持生命周期泛型，是高级类型系统（Type System）的核心特性。
+> [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] · [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
+
+---
+
 ## 定理链补充
 
 - **定理**: 引用的生命周期标注 ⟹ 编译器可验证的借用安全
@@ -1555,6 +1760,38 @@ fn dangle() -> &String {
 `s` 是函数局部变量，在函数返回时被 drop。返回 `&s` 会创建一个指向已释放内存的引用。Rust 编译器通过生命周期检查阻止此类代码。
 
 修复方案：返回 `String`（转移所有权（Ownership））或返回 `'static` 字面量（`"hello"`）。
+</details>
+
+---
+
+### 测验 6：生命周期 bound `+ 'a` 的含义（应用层）
+
+以下 trait bound 的含义是什么？
+
+```rust,ignore
+fn foo<T>(x: T)
+where
+    T: Trait + 'static,
+{
+}
+```
+
+- A. `T` 必须实现 `Trait` 且为 `'static` 类型
+- B. `T` 必须实现 `Trait` 且所有引用都活至少 `'static`
+- C. `T` 必须是 `static` 变量
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `T` 必须实现 `Trait` 且所有引用都活至少 `'static`**。
+
+`T: 'a` 是**生命周期（Lifetimes） bound**，表示"`T` 中不包含短于 `'a` 的引用"。因此：
+
+- `T: 'static` 表示 `T` 可以安全地存活整个程序运行期
+- `String: 'static`（它不含引用）
+- `&'a str: 'static` 仅当 `'a` 是 `'static`
+
+这与 `T: Trait` 不同：前者是生命周期约束，后者是 trait 约束。
 </details>
 
 ---

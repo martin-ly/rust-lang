@@ -5,6 +5,8 @@
 **工具链基线**: Rust 1.97.0 stable
 **状态**: ✅ 审计发现的关键问题已全部修复，10 大质量门全部通过
 
+> **勘误（2026-07-12 补充）**：上述“10 大质量门全部通过”仅指**阻断门**。同日 6 个语义观察门实际状态为：METADATA_CONSISTENCY 5/6 规则 FAIL（242/476 文件 flagged）、TOPOLOGY_QUALITY 4 项 FAIL、SEMANTIC_HEALTH 总分 64.5/100 = WARN。本报告未提及观察门，表述有误导性；语义层真实状态以 `reports/SEMANTIC_HEALTH_2026-07-12.md` 及 `.kimi/CRITICAL_SEMANTIC_AUDIT_AND_SUSTAINABLE_PLAN_2026_07_12.md` 为准。
+
 ---
 
 ## 执行摘要

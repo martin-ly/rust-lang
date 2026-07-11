@@ -22,6 +22,8 @@ fn build_test_kg() -> KnowledgeGraph {
         ],
         alt_label: vec![],
         definition: vec![],
+        scope_note: vec![],
+        path: None,
         layer: Some("L1".into()),
         bloom: Some("Understand".into()),
         asp: Some("S".into()),

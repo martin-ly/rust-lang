@@ -150,6 +150,8 @@ Rust 社区已存在 `#[safety]` 相关的实验性讨论：
 > **演进关系**: `unsafe extern` + `safe` 是 Safety Tags 的**前序步骤**——它已经在 FFI 边界引入了"安全/不安全"的显式标注概念。Safety Tags 将这一概念从 FFI 扩展到所有 unsafe 代码。
 > [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
 
+> **RFC #3842 进展（2026-07-12 自同主题重复页合并）**: Safety Tags 研究原型（[safety-tool slides](https://os-checker.github.io/slides/safety-tags)）已梳理出 **21 个基础标签**，可覆盖 std 中约 **96%** 的公开 `unsafe` API；RFC #3842 提案使用 `#[safety::requires(...)]` 在 unsafe 函数上声明安全前提、`#[safety::checked(...)]` 在调用点显式消除标签，并与 Verus 的 `requires`/`ensures`、Kani 的 harness 假设、Miri/BorrowSanitizer 的动态检查标签集形成映射。(Source: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [Safety Tags 研究仓库](https://github.com/safer-rust/safety-tags))
+
 ---
 
 ## 二、形式化语义
@@ -344,6 +346,9 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
+| [RFC #3842 — Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) | ✅ 一级 | 提案原文 |
+| [safety-tool slides](https://os-checker.github.io/slides/safety-tags) | ✅ 一级 | 研究原型与 21 标签词兑表 |
+| [Safety Tags 研究仓库](https://github.com/safer-rust/safety-tags) | ✅ 一级 | 标注工具原型 |
 | [Rust Reference — Unsafe Functions](https://doc.rust-lang.org/reference/items/functions.html) | ✅ 一级 | unsafe 函数规范 |
 | [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) | ✅ 一级 | 官方项目目标 |
 | [Rust for Linux](https://rust-for-linux.com/) | ✅ 一级 | 内核 Rust 项目 |

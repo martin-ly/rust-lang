@@ -713,7 +713,7 @@
 - [x] **中**: 为每个概念补充"常见编译错误代码 → 概念"映射（如 E0382 → Move）
 - [x] **中**: 建立"反例 → 概念"索引（如 Rc 循环引用 → 所有权边界）
 - [x] **中**: 边界极限测试代码的 `cargo check` 编译验证 —— ✅ 232/232 通过 100%（`scripts/code_block_compiler.py`）
-- [x] **低**: 导出为机器可解析格式（JSON/YAML）供自动一致性检查 —— 已完成 `concept_index.json`
+- [x] **低**: 导出为机器可解析格式（JSON/YAML）供自动一致性检查 —— 原 `concept_index.json` 已于 2026-07-12 退役（移入 `archive/2026/`）；现以 `concept/00_meta/kg_data_v3.json` 为唯一真相源
 - [x] **高**: Wave 11 表征空间元分析（semantic_space.md）
 - [x] **低**: 与 `inter_layer_map.md` 的层间映射同步更新 —— ✅ 已完成
 - [x] **高**: Phase 7 五维主线升华（9 个新文件 + 四层全局关系图谱）— ✅ 2026-05-21 完成

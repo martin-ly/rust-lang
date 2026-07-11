@@ -26,50 +26,9 @@
 > **对应 Crate**: [`c03_control_fn`](../../crates/c03_control_fn) (底层控制流)
 
 ---
-
-## 认知路径
-
-> **认知路径**: 本节从 "内联汇编（Inline Assembly）" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
-
-1. **问题识别**: 为什么 内联汇编（Inline Assembly） 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
-2. **概念建立**: 掌握 内联汇编（Inline Assembly） 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
-3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
-4. **边界辨析**: 借助反命题/反例理解常见错误与内联汇编（Inline Assembly）的适用边界。
-5. **迁移应用**: 将 内联汇编（Inline Assembly） 与前置/后置概念链接，形成跨层知识网络。
-
----
-
-> **过渡**: 从 内联汇编（Inline Assembly） 的直观描述转向其形式化定义，需要先把日常经验中的模糊直觉转化为可验证的术语。
-> **过渡**: 在建立 内联汇编 的核心命题之后，下一步是审视这些命题在边界条件下的稳定性——这正是反命题与反例的价值所在。
-> **过渡**: 最后，将 内联汇编 与相邻概念连接，形成从 L1 到 L7 的纵向认知路径，避免孤立记忆。
-
----
-
-> **定理 1** [Tier 2]: 内联汇编 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。
->
-> **定理 2** [Tier 2]: 正确理解 内联汇编 的语义 ⟹ 开发者能够写出既安全又零成本抽象（Zero-Cost Abstraction）的代码。
->
-> **定理 3** [Tier 3]: 将 内联汇编 与 Rust 的所有权（Ownership）/生命周期（Lifetimes）模型结合 ⟹ 可以在更大系统中进行可扩展的推理。
-
----
-
-## 反命题决策树
-
-> **反命题 1**: "内联汇编 在所有场景下都适用" ⟹ 不成立。存在特定的边界条件（如 `unsafe`、FFI、递归类型）会使常规推理失效。
-> **反命题 2**: "忽略 内联汇编 的细节也能写出正确代码" ⟹ 不成立。编译错误通常是 内联汇编 规则被违反的直接信号。
-> **反命题 3**: "其他语言对 内联汇编 的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的所有权（Ownership）和借用（Borrowing）约束使 内联汇编 具有语言特有的形态。
-
----
-
-> **反向推理 1**: 如果程序在 内联汇编 相关代码处出现编译错误 ⟸ 应首先检查所有权（Ownership）、生命周期（Lifetimes）或类型约束是否被违反。
->
-> **反向推理 2**: 如果某段代码在运行时（Runtime）表现出非预期行为且与 内联汇编 有关 ⟸ 应回溯到其形式化语义或安全边界假设，定位隐式契约。
-
 ## 📑 目录
 
 - [内联汇编 (Inline Assembly)](#内联汇编-inline-assembly)
-  - [认知路径](#认知路径)
-  - [反命题决策树](#反命题决策树)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 为什么需要内联汇编](#11-为什么需要内联汇编)
@@ -811,7 +770,6 @@ unsafe {
 > **权威来源**: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html), [RFC 2873 — Inline Assembly](https://rust-lang.github.io/rfcs/2873-inline-asm.html), [Rust By Example — Inline Assembly](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html)
 >
 > **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
-
 
 ---
 

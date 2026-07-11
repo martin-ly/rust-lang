@@ -12,24 +12,12 @@
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Eva
 > **前置依赖**: [形式化验证](05_verification_toolchain.md) · [形式化验证工具生态](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md)
-> **后置延伸**: [Safety Tags](../02_separation_logic/33_safety_tags_in_formal.md) · [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md)
+> **后置延伸**: [Safety Tags](../../07_future/03_preview_features/08_safety_tags_preview.md) · [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md)
 >
 > **来源**: [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://verus-lang.github.io/verus/guide/) · [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
-
----
-
-## 认知路径
-
-> **认知路径**: 本节从 "AutoVerus / Verus 自动证明生态" 的核心问题出发，依次建立直观理解、形式化模型与工程实践之间的联系。
-
-1. **问题识别**: 为什么 AutoVerus / Verus 自动证明生态 在 Rust 中值得关注？它与日常编程中的哪些痛点相关？
-2. **概念建立**: 掌握 AutoVerus / Verus 自动证明生态 的核心定义、关键术语与类型系统（Type System）/运行时（Runtime）边界。
-3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。
-4. **边界辨析**: 借助反命题/反例理解常见错误与AutoVerus / Verus 自动证明生态的适用边界。
-5. **迁移应用**: 将 AutoVerus / Verus 自动证明生态 与前置/后置概念链接，形成跨层知识网络。
 
 ## 一、权威定义
 
@@ -180,7 +168,7 @@ B
 
 - [形式化验证](05_verification_toolchain.md)
 - [形式化验证工具生态](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md)
-- [Safety Tags](../02_separation_logic/33_safety_tags_in_formal.md)
+- [Safety Tags](../../07_future/03_preview_features/08_safety_tags_preview.md)
 - [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md)
 - [Rust 1.98+ 预览](../../07_future/00_version_tracking/rust_1_98_preview.md)
 

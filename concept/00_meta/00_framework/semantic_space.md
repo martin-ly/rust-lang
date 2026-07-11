@@ -1210,7 +1210,7 @@ graph TD
 - [x] **高**: 补充 const trait 和 generic const items 的表征能力扩展分析 — v1.1 §3.5.1
 - [x] **中**: 补充 Rust 与 dependent types（Idris、Agda）的表征空间对比 — v1.1 §6.3
 - [x] **中**: 补充 Miri / Kani 在验证等价表达语义保持中的应用 — v1.1 §4.6
-- [x] **低**: 建立表征空间的机器可解析模型（JSON/YAML 导出） —— 已纳入 `concept_index.json`（53 文件索引）
+- [x] **低**: 建立表征空间的机器可解析模型（JSON/YAML 导出） —— 原 `concept_index.json` 已于 2026-07-12 退役（过期，101 文件 vs 实际 476 文件，移入 `archive/2026/`）；现以 `concept/00_meta/kg_data_v3.json` 为唯一机器可解析真相源
 - [x] **低**: 与 `concept_index.md` 和 `inter_layer_map.md` 同步更新 — v1.1 Phase 4
 
 ---

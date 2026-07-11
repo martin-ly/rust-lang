@@ -16,7 +16,7 @@
 | 生命周期基础 | [03_lifetimes.md](03_lifetimes.md) |
 | 生命周期省略规则 | [03_lifetimes.md#23-生命周期省略规则elision-rules](03_lifetimes.md#23-生命周期省略规则elision-rules) |
 | 'static 生命周期 | [03_lifetimes.md#46-推论static-生命周期--全局泄漏数据的安全性](03_lifetimes.md#46-推论static-生命周期--全局泄漏数据的安全性) |
-| 高级生命周期 | [30_lifetimes_advanced.md](30_lifetimes_advanced.md) |
+| 高级生命周期 | [30_lifetimes_advanced.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md) |
 
 ## 本地资源
 

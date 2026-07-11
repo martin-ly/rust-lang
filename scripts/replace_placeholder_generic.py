@@ -16,7 +16,7 @@ CONCEPT_MAP = {
     "借用（Borrowing）": "01_foundation/02_borrowing.md",
     "L1 借用（Borrowing）": "01_foundation/02_borrowing.md",
     "生命周期（Lifetimes）": "01_foundation/03_lifetimes.md",
-    "生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型": "02_intermediate/18_lifetimes_advanced.md",
+    "生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型": "01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md",  # 2026-07-12: 原 02_intermediate/18_lifetimes_advanced.md 已合并重定向
     "泛型（Generics）": "02_intermediate/02_generics.md",
     "L2 泛型（Generics）": "02_intermediate/02_generics.md",
     "Trait": "02_intermediate/01_traits.md",

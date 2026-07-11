@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""基于 concept_kb.json 构建概念搜索索引"""
+"""基于 concept_kb.json 构建概念搜索索引
+
+.. deprecated:: 2026-07-12
+    已退役：无任何活跃消费者（不在 CI 质量门中，输出的
+    ``concept_search_index.json`` 无任何读取方）。搜索能力由 mdbook 内置
+    searchindex 与 ``tools/kg_rag/`` 提供；知识图谱以
+    ``concept/00_meta/kg_data_v3.json`` 为唯一真相源。
+    保留本脚本仅供历史参考，请勿在新流程中调用。
+"""
 
 import json, re, os
 from collections import defaultdict

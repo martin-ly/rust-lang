@@ -2,7 +2,7 @@
 """
 构建可直接在浏览器打开的 KG 浏览器。
 
-将 kg_data_v2.json 和 kg_links.json 内嵌到单个 index.html 中，
+将 kg_data_v3.json 和 kg_links.json 内嵌到单个 index.html 中，
 避免 file:// 协议下的 CORS 限制。
 """
 from __future__ import annotations

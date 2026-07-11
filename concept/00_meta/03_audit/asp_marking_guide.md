@@ -277,7 +277,7 @@ graph TB
 | `15_error_handling_deep_dive` | 分析 | **S+P** | 错误处理深层机制（S），错误架构设计（P） |
 | `16_iterator_patterns` | 应用 | **A+S** | 迭代器 API（A），惰性求值理解（S） |
 | `17_macro_patterns` | 分析 | **S+P** | 宏模式理解（S），元编程设计（P） |
-| `18_lifetimes_advanced` | 分析 | **S** | 高级生命周期是纯粹的结构分析 |
+| `30_lifetimes_advanced`（原 `18_lifetimes_advanced`，2026-07-12 合并至 L1 权威页） | 分析 | **S** | 高级生命周期是纯粹的结构分析 |
 | `19_advanced_traits` | 分析 | **S** | GATs、HRTB 等是类型系统的结构分析 |
 | `20_type_system_advanced` | 分析 | **S** | 高级类型系统特性分析 |
 | `21_metaprogramming` | 创造 | **P** | 元编程设计是高级策略决策 |
