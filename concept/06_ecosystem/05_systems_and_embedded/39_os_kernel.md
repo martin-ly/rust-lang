@@ -489,7 +489,6 @@ fn open_resource_fixed(url: &str) -> Result<Resource, Error> {
 
 > **反命题**: "操作系统与内核：Rust 的系统级编程 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）

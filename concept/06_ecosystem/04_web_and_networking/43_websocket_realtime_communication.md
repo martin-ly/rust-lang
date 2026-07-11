@@ -56,6 +56,7 @@
   - [**下一步**: 学习 TCP/UDP 编程，掌握底层网络协议](#下一步-学习-tcpudp-编程掌握底层网络协议)
   - [过渡段](#过渡段)
   - [定理链](#定理链)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ## 📐 知识结构
 
@@ -720,7 +721,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 | 持久连接 ⟹ 更低延迟 | 避免重复建立 HTTP 连接 | 适合实时推送场景 |
 | 帧协议 ⟹ 高效解析 | 二进制帧头与掩码机制 | 降低解析开销 |
 | 背压 ⟹ 稳定广播 | 控制发送速率 | 防止慢消费者拖垮系统 |
-
 
 ---
 

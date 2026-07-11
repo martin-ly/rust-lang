@@ -789,7 +789,6 @@ pub fn clone_example() {
 | Trait Object 实现 ⟹ 运行时多态 | 通过 vtable 动态分发 | 提升灵活性并减少代码膨胀 |
 | async 变体 ⟹ 可扩展并发 | 与异步运行时集成 | 适合高并发 I/O 场景 |
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）

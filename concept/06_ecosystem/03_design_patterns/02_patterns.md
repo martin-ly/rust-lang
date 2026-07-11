@@ -957,13 +957,11 @@ fn load(path: &str) -> Result<Config, Error> {
 
 ## 五、反模式（Anti-patterns）
 
-
 反模式是"看似正确、实则有害"的惯用做法。Rust 的类型系统（Type System）与所有权模型在消除某些经典反模式（如悬空指针、数据竞争）的同时，也催生了特有的抽象陷阱——过度使用泛型（Generics）、过早拆分模块（Module）、`Rc<RefCell<...>>` 迷宫等。以下从工程直觉到成本分析，建立反模式的识别框架。
 
 ---
 
 ### 5.1 Over-engineering（过度工程）
-
 
 **定义**：为应对不太可能出现的需求而引入不必要的抽象层次，导致代码复杂度远超实际需要。[Rust Design Patterns — Gold Plating](https://rust-unofficial.github.io/patterns/))
 
@@ -1128,7 +1126,6 @@ fn run_command(cmd: Command) {
 ---
 
 ### 5.4 God Object（上帝对象）
-
 
 **定义**：一个对象或结构体（Struct）掌握了过多职责和状态，成为系统中所有操作的中心枢纽，违反单一职责原则。来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 

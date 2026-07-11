@@ -64,6 +64,8 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `auto_dedup_redirect.py` | 对高相似度非 `concept/` 文件自动生成指向 `concept/` 权威来源的重定向页 |
 | `check_glossary_alignment.py` | 术语表对齐检查：以 `concept/00_meta/01_terminology/terminology_glossary.md` 为权威术语表，抽取其他术语表同名术语定义，报告关键语义缺失/低相似度/译名差异；stub 术语表自动豁免，支持 `<!-- glossary-waive: 术语 -->` 领域义项豁免；默认 exit 0，`--strict` 有差异 exit 1（见 `reports/GLOSSARY_MSRV_ALIGNMENT_2026_07_12.md`） |
 | `check_msrv_consistency.py` | MSRV 单一事实源检查：根 `Cargo.toml` `[workspace.package] rust-version`（1.97.0）为唯一事实源；校验 crates/*/Cargo.toml 继承或一致、活跃文档 MSRV 声明一致、`.clippy.toml` msrv 一致；豁免 workspace exclude 路径/独立 workspace/历史快照/第三方 MSRV；默认 exit 0，`--strict` 不一致 exit 1（见 `reports/GLOSSARY_MSRV_ALIGNMENT_2026_07_12.md`） |
+| `check_association_blocks.py` | `concept/` 关联区块存在性与命名合规检查（P3-3，见 `reports/L4_REFERENCE_AND_ASSOCIATION_BLOCKS_2026_07_12.md`）：A1 弃用变体「相关概念文件」「关联概念」、A2 内容页缺关联区块且无前置/后置元数据、A3 观察「相关概念链接」待归并变体与上层/下层概念子项覆盖率；默认 exit 0，`--strict` A1/A2 不合规 exit 1 |
+| `unify_association_headings.py` | 关联区块标题统一（「相关概念文件」「关联概念」→「相关概念」，保留层级与编号前缀）与核心 30 页上层/下层概念补全（`--enrich-core`）；默认 dry-run，`--apply` 写入 |
 
 ### 🔗 链接检查与修复
 

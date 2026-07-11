@@ -224,7 +224,6 @@ fn main() {
 | io_uring ⟹ 更少系统调用 | 批量处理 I/O 请求 | 降低内核态开销 |
 | 协作式任务 ⟹ 可预测尾延迟 | 避免抢占式调度抖动 | 适合延迟敏感型服务 |
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）

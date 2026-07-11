@@ -978,7 +978,6 @@ pub fn quantum_pattern_example() {
 | 类型系统进展 ⟹ 新抽象能力 | GAT、 effects 等语言特性 | 使 previously 不可能的模式成为可能 |
 | 原型验证 ⟹  adoption | 通过真实场景检验 | 决定创新模式是否值得推广 |
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）

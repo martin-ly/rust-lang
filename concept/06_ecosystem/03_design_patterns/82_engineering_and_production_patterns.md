@@ -315,7 +315,6 @@ pub async fn server_loop(
 | 结构化日志 ⟹ 快速恢复 | 统一日志格式与上下文 | 缩短平均故障定位时间 |
 | 负载 shedding ⟹ 稳定性 | 在过载时保护核心路径 | 避免雪崩效应 |
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）

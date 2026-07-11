@@ -1,7 +1,7 @@
 # Rust 游戏开发（已合并）
 
 > **EN**: Game Development (Merged Redirect)
-> **Summary**: This page has been merged into the canonical Game Development page at `concept/06_ecosystem/11_domain_applications/21_game_development.md`.
+> **Summary**: Merged Redirect stub — this page has been merged into the canonical Game Development page at `concept/06_ecosystem/11_domain_applications/21_game_development.md`.
 
 > **权威来源**: 本主题已合并至同目录唯一权威页：
 > [`21_game_development.md`](21_game_development.md)

@@ -66,12 +66,13 @@ def active_md():
             continue
         if os.path.basename(p) in SKIP_NAMES:
             continue
-        # 排除重定向 stub（Summary 含 'Redirect stub' 且短页）：权威内容在目标页，不应刷 URL
+        # 排除重定向 stub（Summary 含 'Redirect stub' 或 'Merged Redirect' 且短页）：
+        # 权威内容在目标页，stub 本身不应刷 URL；两种措辞均为 AGENTS.md §2 允许的重定向形式
         try:
             head = open(p, encoding="utf-8", errors="ignore").read(2048)
         except Exception:
             head = ""
-        if "Redirect stub" in head and head.count(chr(10)) < 30:
+        if ("Redirect stub" in head or "Merged Redirect" in head) and head.count(chr(10)) < 30:
             continue
         out.append(p)
     return out

@@ -751,7 +751,6 @@ pub enum PatternError {
 | 并发约束 ⟹ Send/Sync 要求 | Rust 所有权（Ownership）模型 | 排除不满足线程安全的设计 |
 | 团队能力 ⟹ 可维护性 | 熟悉度与工具链支持 | 影响模式的长期落地效果 |
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）

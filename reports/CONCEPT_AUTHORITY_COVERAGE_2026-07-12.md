@@ -3,33 +3,31 @@
 **EN**: Concept-layer International Authority Coverage
 **Summary**: 复用 maintenance P0/P1/P2 权威域分级，把审计扩展到 concept/ 权威层；量化覆盖率与缺口，为『对齐网络上的国际化权威相关内容』提供机器可复核基线。仅审计，不改正文。
 
-> 生成: 2026-07-12 · 扫描 concept/ 活跃 md: **463**（排除 archive/SUMMARY/README）
+> 生成: 2026-07-12 · 扫描 concept/ 活跃 md: **461**（排除 archive/SUMMARY/README）
 > P0 官方 / P1 学术形式化 / P2 社区生态，域定义复用 `scripts/maintenance/authority_coverage_dashboard.py`
 
 ## 总体覆盖率
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 461 | 99.6% |
-| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 436 | 94.2% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 393 | 84.9% |
-| **任一权威（P0∪P1∪P2）** | **461** | **99.6%** |
-| 无任何国际权威引用（缺口） | 2 | 0.4% |
+| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 461 | 100.0% |
+| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 436 | 94.6% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 393 | 85.2% |
+| **任一权威（P0∪P1∪P2）** | **461** | **100.0%** |
+| 无任何国际权威引用（缺口） | 0 | 0.0% |
 
 ## 内容页口径覆盖率（排除 00_meta 工具页 / quiz / placeholders / sources 索引）
 
-> 内容页 **385** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
+> 内容页 **383** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方 | 383 | 99.5% |
-| P1 学术/形式化 | 383 | 99.5% |
-| P2 社区/生态 | 382 | 99.2% |
-| **任一权威** | **383** | **99.5%** |
+| P0 官方 | 383 | 100.0% |
+| P1 学术/形式化 | 383 | 100.0% |
+| P2 社区/生态 | 382 | 99.7% |
+| **任一权威** | **383** | **100.0%** |
 
-内容页 P1 缺口（2）: `concept/04_formal/04_model_checking/13_formal_methods.md` · `concept/06_ecosystem/11_domain_applications/26_game_development.md`
-
-内容页 P2 缺口（3）: `concept/03_advanced/02_unsafe/32_unsafe_boundary_panorama.md` · `concept/04_formal/04_model_checking/13_formal_methods.md` · `concept/06_ecosystem/11_domain_applications/26_game_development.md`
+内容页 P2 缺口（1）: `concept/03_advanced/02_unsafe/32_unsafe_boundary_panorama.md`
 
 ## 按层级覆盖率
 
@@ -39,19 +37,18 @@
 | L1 | 55 | 55 | 100.0% | 55 | 100.0% |
 | L2 | 38 | 38 | 100.0% | 38 | 100.0% |
 | L3 | 60 | 60 | 100.0% | 60 | 100.0% |
-| L4 | 52 | 51 | 98.1% | 51 | 98.1% |
+| L4 | 51 | 51 | 100.0% | 51 | 100.0% |
 | L5 | 19 | 19 | 100.0% | 19 | 100.0% |
-| L6 | 115 | 114 | 99.1% | 114 | 99.1% |
+| L6 | 114 | 114 | 100.0% | 114 | 100.0% |
 | L7 | 61 | 61 | 100.0% | 61 | 100.0% |
 | L? | 3 | 3 | 100.0% | 3 | 100.0% |
 
 ## 核心缺口（L1-L4 且 无 P0 官方国际权威）
 
-共 **1** 页。下表为前 60（按层级、页长降序，优先补权威来源小节）。
+共 **0** 页。下表为前 60（按层级、页长降序，优先补权威来源小节）。
 
 | 层级 | 文件 | 行数 |
 |:---|:---|---:|
-| L4 | `concept/04_formal/04_model_checking/13_formal_methods.md` | 23 |
 
 ## 方法学与诚信
 

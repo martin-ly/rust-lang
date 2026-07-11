@@ -997,7 +997,6 @@ impl<S: Strategy, O: Observer> StrategyObserver<S, O> {
 | 范畴论 ⟹ 模式组合 | 对象、态射与函子 | 提供模式组合与变换的框架 |
 | 语言映射 ⟹ 可应用边界 | Rust 所有权与生命周期（Lifetimes）约束 | 决定哪些形式模式可直接实现 |
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）

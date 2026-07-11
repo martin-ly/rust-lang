@@ -79,6 +79,7 @@
   - [**返回**: Tier 4 README](#返回-tier-4-readme)
   - [过渡段](#过渡段)
   - [定理链](#定理链)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -2055,7 +2056,6 @@ echo "✅ 系统调优完成！"
 | 零拷贝 ⟹ 降低延迟 | 避免用户态与内核态间数据拷贝 | 提升网络 I/O 吞吐 |
 | io_uring ⟹ 高 IOPS | 批量提交与完成事件 | 减少系统调用开销 |
 | 无锁结构 ⟹ 可扩展并发 | 避免互斥锁竞争 | 提升多核场景下的吞吐量 |
-
 
 ---
 
