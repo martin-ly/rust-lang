@@ -2535,11 +2535,10 @@ pub fn log_error(error: &str) {
 | 类型系统增强 ⟹ 更灵活抽象 | 泛型与 trait 能力扩展 | 支持更简洁的 API 设计 |
 | 标准库 API 改进 ⟹ 代码简化 | 新增或稳定的方法 | 减少自定义实现 |
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
-- **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: Prophecy-Verified Safe Rust (POPL 2022)](https://dl.acm.org/doi/10.1145/3591285)
+- **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: A Semantic Foundation for Functional Verification of Rust Programs (PLDI 2022)](https://dl.acm.org/doi/10.1145/3519939.3523704)

@@ -186,4 +186,4 @@ let matrix: Vec<f64> = vec![0.0; n * 1024];
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
-- **P1 学术/形式化**: [Stacked Borrows: An Aliasing Model for Rust (POPL 2021)](https://dl.acm.org/doi/10.1145/3371109) · [Tree Borrows: A New Aliasing Model for Rust (PLDI 2025, Distinguished Paper)](https://dl.acm.org/doi/10.1145/3591283)
+- **P1 学术/形式化**: [Stacked Borrows: An Aliasing Model for Rust (POPL 2021)](https://dl.acm.org/doi/10.1145/3371109) · [Tree Borrows: A New Aliasing Model for Rust (PLDI 2025, Distinguished Paper)](https://dl.acm.org/doi/10.1145/3735592)

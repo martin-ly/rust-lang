@@ -452,3 +452,12 @@ D. 本地 newtype `struct Bytes(Vec<u8>)`
 > **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html), [std::convert](https://doc.rust-lang.org/std/convert/index.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.97.0 Reference、std::convert、Rust By Example 对齐](https://doc.rust-lang.org/std/convert/index.html)
 > **状态**: ✅ 权威来源对齐完成
+
+
+---
+
+## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)

@@ -23,7 +23,7 @@
 
 > **来源**: [Akidau et al. — The Dataflow Model, VLDB 2015](https://www.vldb.org/pvldb/vol8/p1792-Akidau.pdf) ·
 > [Murray et al. — Naiad, SOSP 2013](https://dl.acm.org/doi/10.1145/2517349.2522738) ·
-> [McSherry et al. — Differential Dataflow, CIDR 2013](https://dl.acm.org/doi/10.1145/2452376.2452396) ·
+> [McSherry et al. — Differential Dataflow, CIDR 2013](http://cidrdb.org/cidr2013/Papers/CIDR13_Paper111.pdf) ·
 > [Carbone et al. — Apache Flink, IEEE BigData 2015](https://ieeexplore.ieee.org/document/7414846) ·
 > [Chandy & Lamport — Distributed Snapshots, 1985](https://lamport.azurewebsites.net/pubs/chandy.pdf) ·
 > [Flink Documentation — State & Fault Tolerance](https://nightlies.apache.org/flink/flink-docs-stable/docs/concepts/stateful-stream-processing/) ·
@@ -615,7 +615,7 @@ async fn main() {
 > **权威来源**:
 > [Akidau et al. — The Dataflow Model, VLDB 2015](https://www.vldb.org/pvldb/vol8/p1792-Akidau.pdf) ·
 > [Murray et al. — Naiad, SOSP 2013](https://dl.acm.org/doi/10.1145/2517349.2522738) ·
-> [McSherry et al. — Differential Dataflow, CIDR 2013](https://dl.acm.org/doi/10.1145/2452376.2452396) ·
+> [McSherry et al. — Differential Dataflow, CIDR 2013](http://cidrdb.org/cidr2013/Papers/CIDR13_Paper111.pdf) ·
 > [Flink Documentation](https://nightlies.apache.org/flink/flink-docs-stable/) ·
 > [Materialize Documentation](https://materialize.com/docs/)
 >

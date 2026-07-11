@@ -350,4 +350,4 @@ jobs:
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
-- **P1 学术/形式化**: [Kohlbecker et al.: Syntactic Extensions in the Programming Language LISP (POPL 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/512644.512645)
+- **P1 学术/形式化**: [Kohlbecker et al.: Hygienic Macro Expansion (LFP 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/319838.319859)

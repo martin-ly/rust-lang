@@ -484,3 +484,12 @@ trait Observer {
 | 问题覆盖 ⟹ 减少重复询问 | 集中回答高频困惑 | 降低支持成本 |
 | 示例验证 ⟹ 答案可信 | 可运行的最小代码 | 确保 FAQ 解决方案正确 |
 | 决策规则 ⟹ 一致性（Coherence） | 将 FAQ 提炼为选型原则 | 提升工程一致性 |
+
+---
+
+## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)
+- **P2 生态/社区**: [Refactoring.Guru — Design Patterns](https://refactoring.guru/design-patterns)

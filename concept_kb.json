@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 462,
-    "generated_at": "2026-07-11T09:08:11.801900+00:00"
+    "generated_at": "2026-07-11T09:39:00.599624+00:00"
   },
   "files": [
     {
@@ -56,7 +56,7 @@
       "layer": "L0",
       "title": "Rust 安全边界扩展推理树",
       "positioning": "本文件从「安全边界」核心出发，推演向更底层、更通用、更危险领域的扩展路径，标注每条扩展边的条件、风险和补偿机制。",
-      "line_count": 351,
+      "line_count": 360,
       "theorem_chains": [
         {
           "text": "| Boundary Extension Tree 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -273,7 +273,7 @@
       "layer": "L0",
       "title": "C/C++ → Rust 工程层对比路线图",
       "positioning": "",
-      "line_count": 229,
+      "line_count": 238,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -523,7 +523,7 @@
       "layer": "L0",
       "title": "Rust 知识体系全局思维导图（Knowledge Mindmap）",
       "positioning": "本文件是 `concept/` 知识体系的**认知入口**——用 Mermaid `mindmap` 语法将整个 L0-L7 知识体系浓缩为一张可导航的思维导图，帮助学习者建立全局认知地图。",
-      "line_count": 297,
+      "line_count": 306,
       "theorem_chains": [
         {
           "text": "| Knowledge Mindmap 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -615,7 +615,7 @@
       "layer": "L0",
       "title": "Rust 范式转换模式矩阵（Paradigm Transition Matrix）",
       "positioning": "本文件系统化梳理从其他编程语言（主要是 C++）迁移到 Rust 时的**范式转换模式**，以矩阵形式呈现\"源语言模式 → Rust 模式 → 转换影响 → 学习难点\"。与 `05_comparative/` 的对比文件（如 `01_rust_vs_cpp.md`）形成互补：后者是\"逐项对比\"，本文件是\"转换模式矩阵\"。",
-      "line_count": 315,
+      "line_count": 324,
       "theorem_chains": [
         {
           "text": "| Paradigm Transition Matrix 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -653,7 +653,7 @@
       "layer": "L0",
       "title": "模式语义空间索引：设计模式在概念体系中的坐标",
       "positioning": "",
-      "line_count": 182,
+      "line_count": 192,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -695,7 +695,7 @@
       "layer": "L0",
       "title": "通用 PL 基座路线图：Rust 在编程语言坐标系中的位置",
       "positioning": "",
-      "line_count": 164,
+      "line_count": 173,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -1070,7 +1070,7 @@
       "layer": "L0",
       "title": "定理链全局注册表（Theorem Registry）",
       "positioning": "",
-      "line_count": 196,
+      "line_count": 205,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3068,7 +3068,7 @@
       "layer": "L0",
       "title": "概念定义图谱（Concept Definition Atlas）",
       "positioning": "",
-      "line_count": 474,
+      "line_count": 483,
       "theorem_chains": [
         {
           "text": "| `05_logical_reasoning_atlas` | [逻辑推理图谱](05_logical_reasoning_atlas.md) | Logical Reasoning Atlas | 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。 | 2 |",
@@ -3477,7 +3477,7 @@
       "layer": "L0",
       "title": "属性关系图谱（Attribute Relationship Atlas）",
       "positioning": "",
-      "line_count": 451,
+      "line_count": 460,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3881,7 +3881,7 @@
       "layer": "L0",
       "title": "场景决策树图谱（Scenario Decision Tree Atlas）",
       "positioning": "",
-      "line_count": 282,
+      "line_count": 291,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3948,7 +3948,7 @@
       "layer": "L0",
       "title": "示例与反例图谱（Example and Counterexample Atlas）",
       "positioning": "",
-      "line_count": 132,
+      "line_count": 141,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -4015,7 +4015,7 @@
       "layer": "L0",
       "title": "逻辑推理图谱（Logical Reasoning Atlas）",
       "positioning": "",
-      "line_count": 180,
+      "line_count": 189,
       "theorem_chains": [
         {
           "text": "> **Summary**: A navigational index of theorem chains, inference rules, proof/verification paths, and formal correspondences across the Rust concept hierarchy. 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。",
@@ -4135,7 +4135,7 @@
       "layer": "L0",
       "title": "层间映射图谱（Inter-Layer Mapping Atlas）",
       "positioning": "",
-      "line_count": 117,
+      "line_count": 126,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -4203,7 +4203,7 @@
       "layer": "L0",
       "title": "层内映射图谱（Intra-Layer Mapping Atlas）",
       "positioning": "",
-      "line_count": 315,
+      "line_count": 324,
       "theorem_chains": [
         {
           "text": "| [C/C++ → Rust 工程层对比路线图](../00_framework/cpp_rust_engineering_roadmap.md) | ⟹ | [模式语义空间索引：设计模式在概念体系中的坐标](../00_framework/pattern_semantic_space_index.md) |",
@@ -5413,7 +5413,7 @@
       "layer": "L0",
       "title": "概念-权威来源对齐图谱（Concept-Source Alignment Atlas）",
       "positioning": "",
-      "line_count": 146,
+      "line_count": 155,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -5476,7 +5476,7 @@
       "layer": "L0",
       "title": "推理判定树图谱（Reasoning Judgment Tree Atlas）",
       "positioning": "",
-      "line_count": 251,
+      "line_count": 260,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -5516,7 +5516,7 @@
       "layer": "L0",
       "title": "缺口与行动计划（Gap and Action Plan）",
       "positioning": "",
-      "line_count": 125,
+      "line_count": 134,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -5576,7 +5576,7 @@
       "layer": "L0",
       "title": "Rust 知识体系知识图谱本体规范 v2.0（RDF 1.2 / RDF-star / SKOS 对齐版）",
       "positioning": "本文件是 `kg_ontology.md`（v1 已不再维护）的 v2 升级版，在保留原有教学关系本体的基础上，显式对齐 W3C RDF 1.2、RDF-star、SKOS、JSON-LD 1.1 与 SHACL 数据形状标准，使项目知识图谱从\"规范文档\"进化为\"可验证、可查询、可多语言消费\"的 Linked Data。",
-      "line_count": 320,
+      "line_count": 329,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -5598,7 +5598,7 @@
       "layer": "L0",
       "title": "Rust 知识体系顶层本体（TLO）对齐",
       "positioning": "",
-      "line_count": 239,
+      "line_count": 248,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -6397,7 +6397,7 @@
       "layer": "L1",
       "title": "Rust 关键字（Keywords）",
       "positioning": "",
-      "line_count": 175,
+      "line_count": 174,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -6703,7 +6703,7 @@
       "layer": "L1",
       "title": "Ownership（所有权）",
       "positioning": "",
-      "line_count": 1906,
+      "line_count": 1907,
       "theorem_chains": [
         {
           "text": "> 引理 L1（所有权唯一性）⟹",
@@ -7129,7 +7129,7 @@
       "layer": "L1",
       "title": "Borrowing（借用）",
       "positioning": "",
-      "line_count": 2051,
+      "line_count": 2052,
       "theorem_chains": [
         {
           "text": "> **推理链全景**: 引理 L1（&T 共享读安全）⟹ 引理 L2（&mut T 独占写安全）⟹ 定理 T1（AXM: Alias-XOR-Mutation）⟹ 定理 T2（引用有效性）⟹ 定理 T3（Reborrow 安全）⟹ 定理 T4（NLL 流敏感安全）⟹ 定理 T5（借用（Borrowing） ⟹ 无数据竞争）⟹ 定理 T6（Two-Phase Borrow 安全）⟹ 推论 C1（内部可变性安全）",
@@ -7583,7 +7583,7 @@
       "layer": "L1",
       "title": "Lifetimes（生命周期）",
       "positioning": "",
-      "line_count": 1492,
+      "line_count": 1493,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡",
@@ -8000,7 +8000,7 @@
       "layer": "L1",
       "title": "Move 语义：C++ 与 Rust 的资源转移模型",
       "positioning": "",
-      "line_count": 292,
+      "line_count": 291,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -8091,7 +8091,7 @@
       "layer": "L1",
       "title": "所有权清单自测：Brown University Ownership Inventory",
       "positioning": "> 本文档为 **Brown University Interactive Book** 中「Ownership Inventory」概念清单的本地映射。",
-      "line_count": 234,
+      "line_count": 233,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -10142,7 +10142,7 @@
       "layer": "L1",
       "title": "值语义 vs 引用语义：从 C++、Java、Python 到 Rust",
       "positioning": "",
-      "line_count": 212,
+      "line_count": 211,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -10214,7 +10214,7 @@
       "layer": "L1",
       "title": "变量模型：从通用 PL 视角看 Rust 的所有权",
       "positioning": "",
-      "line_count": 631,
+      "line_count": 630,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -12257,7 +12257,7 @@
       "layer": "L1",
       "title": "Preludes（预导入模块）",
       "positioning": "",
-      "line_count": 240,
+      "line_count": 239,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -12335,7 +12335,7 @@
       "layer": "L1",
       "title": "Crate 与源文件（Crates and Source Files）",
       "positioning": "",
-      "line_count": 281,
+      "line_count": 280,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块（Module）路径解析串联起来。",
@@ -12417,7 +12417,7 @@
       "layer": "L1",
       "title": "项（Items）",
       "positioning": "",
-      "line_count": 312,
+      "line_count": 311,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块（Module）、item、名称解析与可见性串联起来。",
@@ -13334,7 +13334,7 @@
       "layer": "L1",
       "title": "属性与声明宏：编译期元编程基础",
       "positioning": "系统讲解 Rust **属性（attributes）**和**声明宏（macro_rules!）**——从编译期元编程的基础语法到模式匹配（Pattern Matching）、递归宏和卫生性，揭示 Rust 如何在编译期生成代码同时保持类型安全。",
-      "line_count": 924,
+      "line_count": 923,
       "theorem_chains": [
         {
           "text": "| 属性与声明宏（Declarative Macro）：编译期元编程基础 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -13614,7 +13614,7 @@
       "layer": "L1",
       "title": "常用开发工具（Useful Development Tools）",
       "positioning": "",
-      "line_count": 237,
+      "line_count": 236,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将代码编写、格式化、lint、测试、文档、发布串联为可重复工作流。",
@@ -15571,7 +15571,7 @@
       "layer": "L2",
       "title": "生命周期高级主题：从 HRTB 到自引用类型",
       "positioning": "深入分析 Rust **生命周期**的高级主题——从高阶生命周期（HRTB）、生命周期省略（Lifetime Elision）规则到自引用（Reference）结构和 Pin，揭示生命周期系统如何处理最复杂的借用（Borrowing）场景。",
-      "line_count": 908,
+      "line_count": 907,
       "theorem_chains": [
         {
           "text": "| 生命周期高级主题：从 HRTB 到自引用类型 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -15943,7 +15943,7 @@
       "layer": "L2",
       "title": "构造与初始化：C++ 的构造函数 vs Rust 的结构体字面量",
       "positioning": "",
-      "line_count": 282,
+      "line_count": 281,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -16039,7 +16039,7 @@
       "layer": "L2",
       "title": "可派生 Trait（Derive Traits）",
       "positioning": "",
-      "line_count": 278,
+      "line_count": 277,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -16165,7 +16165,7 @@
       "layer": "L2",
       "title": "Rust Editions（语言版本）",
       "positioning": "补齐审计 §2.4 / §4 P2-2 缺口#6 指出的\"edition 2024 × 1.97 割裂\"。本节只做**交叉定位**，不重复版本页逐项解释；fallback 的推断推导落在承载页 [`27_type_checking_and_inference.md`](../../04_formal/00_type_theory/27_type_checking_and_inference.md) 与 [`31_never_type.md`](../../01_foundation/02_type_system/31_never_type.md)。",
-      "line_count": 327,
+      "line_count": 326,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将编译器版本、Edition、语法行为、迁移路径串联起来。",
@@ -16271,7 +16271,7 @@
       "layer": "L2",
       "title": "Rust 发布流程（Rust Release Process）",
       "positioning": "",
-      "line_count": 163,
+      "line_count": 162,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -19459,7 +19459,7 @@
       "layer": "L2",
       "title": "异常安全：C++ 与 Rust 的错误处理哲学",
       "positioning": "",
-      "line_count": 276,
+      "line_count": 275,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -20410,7 +20410,7 @@
       "layer": "L2",
       "title": "类型转换（Type Conversions）",
       "positioning": "",
-      "line_count": 455,
+      "line_count": 464,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`as` 转换总是安全的\" ⟹ 不成立。`as` 可能截断、改变符号或产生未定义行为（如指针转换）。",
@@ -20705,7 +20705,7 @@
       "layer": "L2",
       "title": "Rust API 命名约定",
       "positioning": "系统整理 Rust 标准库与生态中反复出现的命名模式，帮助学习者写出“看起来就像 Rust”的 API。",
-      "line_count": 462,
+      "line_count": 463,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -20880,7 +20880,7 @@
       "layer": "L2",
       "title": "友元 vs 模块可见性：C++ 的 `friend` 与 Rust 的隐私边界",
       "positioning": "",
-      "line_count": 269,
+      "line_count": 268,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -21539,7 +21539,7 @@
       "layer": "L2",
       "title": "C 预处理器 vs Rust 宏：从文本替换到语法树",
       "positioning": "",
-      "line_count": 271,
+      "line_count": 270,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -23534,7 +23534,7 @@
       "layer": "L3",
       "title": "Cross-Platform Concurrency（跨平台并发）",
       "positioning": "",
-      "line_count": 182,
+      "line_count": 181,
       "theorem_chains": [
         {
           "text": "| 平台线程模型差异 ⟹ 同步原语选择必须显式 | 不同 OS 使用不同内核对象 | 代码中应避免隐式依赖默认排序或固定线程数 |",
@@ -25202,7 +25202,7 @@
       "layer": "L3",
       "title": "Future 与 Executor 机制 (Future and Executor Mechanisms)",
       "positioning": "",
-      "line_count": 1057,
+      "line_count": 1058,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 Future ⟹ Poll ⟹ Waker ⟹ Executor 的定理链理解异步任务生命周期（Lifetimes）。",
@@ -25371,7 +25371,7 @@
       "layer": "L3",
       "title": "Rust 进程模型与生命周期",
       "positioning": "",
-      "line_count": 424,
+      "line_count": 423,
       "theorem_chains": [
         {
           "text": "> **定理链**: OS Process ⟹ std::process::Command ⟹ Resource Control",
@@ -25465,7 +25465,7 @@
       "layer": "L3",
       "title": "Rust 高级进程管理",
       "positioning": "",
-      "line_count": 317,
+      "line_count": 316,
       "theorem_chains": [
         {
           "text": "> **定理链**: Process Pool ⟹ Health Check ⟹ Fault Recovery",
@@ -29314,7 +29314,7 @@
       "layer": "L3",
       "title": "术语表 - C11 Macro System",
       "positioning": "",
-      "line_count": 663,
+      "line_count": 673,
       "theorem_chains": [
         {
           "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
@@ -29548,7 +29548,7 @@
       "layer": "L3",
       "title": "常见问题 (FAQ) - C11 Macro System",
       "positioning": "",
-      "line_count": 783,
+      "line_count": 793,
       "theorem_chains": [
         {
           "text": "> **定理链**: Common Question ⟹ Mechanism Explanation ⟹ Best Practice",
@@ -42248,7 +42248,7 @@
       "layer": "L6",
       "title": "Cargo `public = true` 与 Resolver v3",
       "positioning": "解决 Rust crate 图中“依赖泄漏”问题的核心机制，使 API 稳定性与依赖演进解耦；同时说明 resolver v3 在版本选择上的 MSRV-aware 行为。",
-      "line_count": 244,
+      "line_count": 253,
       "theorem_chains": [
         {
           "text": "| Resolver v3 启用 `fallback` ⟹ MSRV 兼容版本优先 | workspace 存在 `rust-version` 约束 | 依赖解析不会选择超过成员 MSRV 的版本 | 高 |",
@@ -42310,7 +42310,7 @@
       "layer": "L6",
       "title": "Resolver v3 与 `public = true` 的 feature unification 演示",
       "positioning": "把“resolver v3 + public dependency”从概念落到可运行的 Cargo workspace，观察 `cargo tree -e features` 的实际输出。",
-      "line_count": 188,
+      "line_count": 189,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -42967,7 +42967,7 @@
       "layer": "L6",
       "title": "Cargo 入门（Cargo Getting Started）",
       "positioning": "让初学者在 5 分钟内理解 Cargo 是什么、能做什么、如何创建并运行第一个 Rust package。",
-      "line_count": 170,
+      "line_count": 179,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -43004,7 +43004,7 @@
       "layer": "L6",
       "title": "Cargo 工作流（Cargo Workflow）",
       "positioning": "覆盖从“创建 package”到“在团队中维护依赖锁定”的完整日常流程。",
-      "line_count": 171,
+      "line_count": 180,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -43039,7 +43039,7 @@
       "layer": "L6",
       "title": "Cargo 指南实践（Cargo Guide Practices）",
       "positioning": "把 Cargo 官方指南中散落在多章的“怎么做”聚合为一份实践速查。",
-      "line_count": 176,
+      "line_count": 177,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -43079,7 +43079,7 @@
       "layer": "L6",
       "title": "Cargo 配置与环境变量（Cargo Configuration）",
       "positioning": "把 Cargo 的“配置”与“环境变量”两大参考章节集中为一份可查阅权威页。",
-      "line_count": 181,
+      "line_count": 190,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -43115,7 +43115,7 @@
       "layer": "L6",
       "title": "Cargo 命令参考（Cargo Commands Reference）",
       "positioning": "覆盖开发者日常最高频的 Cargo 命令，作为官方命令参考的浓缩权威页。",
-      "line_count": 169,
+      "line_count": 178,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -43154,7 +43154,7 @@
       "layer": "L6",
       "title": "Cargo Manifest 目标与元数据（Cargo Manifest Targets）",
       "positioning": "补充 `64_cargo_manifest_reference.md` 未涉及的 target、rust-version、pkgid 等子主题。",
-      "line_count": 180,
+      "line_count": 181,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -43189,7 +43189,7 @@
       "layer": "L6",
       "title": "Cargo Registry 内部机制（Cargo Registry Internals）",
       "positioning": "为需要自建 registry、审计依赖来源或集成内部凭证系统的团队提供权威参考。",
-      "line_count": 161,
+      "line_count": 170,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -43225,7 +43225,7 @@
       "layer": "L6",
       "title": "Cargo build-std",
       "positioning": "",
-      "line_count": 294,
+      "line_count": 295,
       "theorem_chains": [
         {
           "text": "| 源码构建 std ⟹ 自定义目标支持 | 编译目标平台未预编译的标准库 | 支持新硬件与操作系统 |",
@@ -46588,7 +46588,7 @@
       "layer": "L6",
       "title": "C09 设计模式 - 术语表",
       "positioning": "",
-      "line_count": 258,
+      "line_count": 267,
       "theorem_chains": [
         {
           "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
@@ -46668,7 +46668,7 @@
       "layer": "L6",
       "title": "C09 设计模式 - 常见问题",
       "positioning": "",
-      "line_count": 487,
+      "line_count": 497,
       "theorem_chains": [
         {
           "text": "> **定理链**: Common Question ⟹ Pattern Mechanism ⟹ Best Practice",
@@ -47623,7 +47623,7 @@
       "layer": "L6",
       "title": "HTTP 客户端开发",
       "positioning": "",
-      "line_count": 196,
+      "line_count": 197,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -48993,7 +48993,7 @@
       "layer": "L6",
       "title": "Embedded-HAL 1.0 迁移与 Embassy 生产状态",
       "positioning": "",
-      "line_count": 238,
+      "line_count": 247,
       "theorem_chains": [
         {
           "text": "| 稳定 HAL API ⟹ 生态可移植性 | 统一硬件抽象接口 | 驱动与板级支持代码复用性提升 |",
@@ -50765,7 +50765,7 @@
       "layer": "L6",
       "title": "网络安全",
       "positioning": "",
-      "line_count": 331,
+      "line_count": 332,
       "theorem_chains": [
         {
           "text": "| 内存安全（Memory Safety） ⟹ 更少攻击面 | Rust 所有权（Ownership）与借用（Borrowing）检查 | 消除大量传统 C/C++ 漏洞类 |",
@@ -50855,7 +50855,7 @@
       "layer": "L6",
       "title": "自定义协议实现",
       "positioning": "",
-      "line_count": 195,
+      "line_count": 196,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -51647,7 +51647,7 @@
       "layer": "L6",
       "title": "基准测试：Rust 代码性能测量与回归检测",
       "positioning": "覆盖 Rust 生态中使用 `criterion` 进行基准测试的完整流程，从简单基准、参数化基准到回归检测与 CI 集成。",
-      "line_count": 160,
+      "line_count": 169,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -53721,7 +53721,7 @@
       "layer": "L6",
       "title": "C12 WASM - 术语表",
       "positioning": "",
-      "line_count": 369,
+      "line_count": 379,
       "theorem_chains": [
         {
           "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
@@ -53773,7 +53773,7 @@
       "layer": "L6",
       "title": "C12 WASM - 常见问题",
       "positioning": "",
-      "line_count": 471,
+      "line_count": 481,
       "theorem_chains": [
         {
           "text": "> **定理链**: Common Question ⟹ Mechanism Explanation ⟹ Best Practice",
@@ -53865,7 +53865,7 @@
       "layer": "L6",
       "title": "C12 WASM - JavaScript 互操作",
       "positioning": "",
-      "line_count": 479,
+      "line_count": 480,
       "theorem_chains": [
         {
           "text": "> **定理链**: wasm-bindgen ⟹ Type Mapping ⟹ Runtime Interaction",
@@ -54743,7 +54743,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 特性 × 领域反查矩阵",
       "positioning": "",
-      "line_count": 268,
+      "line_count": 277,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -58623,7 +58623,7 @@
       "layer": "L7",
       "title": "Const Trait 实现预览",
       "positioning": "",
-      "line_count": 244,
+      "line_count": 243,
       "theorem_chains": [
         {
           "text": "| Const Trait Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -58958,7 +58958,7 @@
       "layer": "L7",
       "title": "Gen Blocks 预研：超越异步的泛化生成器",
       "positioning": "探讨 Rust 中 **gen blocks**（生成器块）的提案——将 `async`/`.await` 的模式从**异步（Async）计算**泛化到**惰性迭代**和**协程**，分析其对迭代器（Iterator）生态、流处理（Stream）和异步生成器的影响。",
-      "line_count": 660,
+      "line_count": 659,
       "theorem_chains": [
         {
           "text": "- **定理**: Gen Blocks 预研：超越异步的泛化生成器 定义 ⟹ 类型安全保证",
@@ -59475,7 +59475,7 @@
       "layer": "L7",
       "title": "Stable ABI Preview",
       "positioning": "",
-      "line_count": 250,
+      "line_count": 249,
       "theorem_chains": [
         {
           "text": "| Stable ABI Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -59613,7 +59613,7 @@
       "layer": "L7",
       "title": "Inline Const Pattern 预览（Rust 1.98+ Nightly）",
       "positioning": "",
-      "line_count": 261,
+      "line_count": 260,
       "theorem_chains": [
         {
           "text": "| Inline Const Pattern Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -59767,7 +59767,7 @@
       "layer": "L7",
       "title": "`must_not_suspend` Lint Preview",
       "positioning": "",
-      "line_count": 241,
+      "line_count": 240,
       "theorem_chains": [
         {
           "text": "| `must_not_suspend` Lint Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -60807,7 +60807,7 @@
       "layer": "L7",
       "title": "WASM Target Evolution Preview",
       "positioning": "",
-      "line_count": 252,
+      "line_count": 251,
       "theorem_chains": [
         {
           "text": "| WASM Target Evolution Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",

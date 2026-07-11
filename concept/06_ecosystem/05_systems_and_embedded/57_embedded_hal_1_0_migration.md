@@ -235,3 +235,11 @@ impl SpiDevice<u8> for MySpi {
 | 稳定 HAL API ⟹ 生态可移植性 | 统一硬件抽象接口 | 驱动与板级支持代码复用性提升 |
 | 类型级错误 ⟹ 编译期检查 | 1.0 引入的错误关联类型 | 更多问题在编译期暴露 |
 | 验证矩阵 ⟹ 硬件覆盖 | 在目标硬件上运行测试 | 降低迁移回归风险 |
+
+---
+
+## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P0 官方**: [core — Rust 核心库（no_std 官方 API 文档）](https://doc.rust-lang.org/core/index.html)

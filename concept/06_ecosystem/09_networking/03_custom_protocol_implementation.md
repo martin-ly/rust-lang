@@ -184,7 +184,6 @@ fn encode_frame_zero_copy(frame: &Frame) -> Bytes {
 
 > **来源**: [Tokio](https://tokio.rs/) · [bytes crate](https://docs.rs/bytes/) · [byteorder crate](https://docs.rs/byteorder/)
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
@@ -192,3 +191,4 @@ fn encode_frame_zero_copy(frame: &Frame) -> Bytes {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+- **P0 官方**: [std::net — Rust 标准库网络模块（官方 API 文档）](https://doc.rust-lang.org/std/net/index.html)

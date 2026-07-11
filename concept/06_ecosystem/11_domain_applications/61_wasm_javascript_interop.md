@@ -468,7 +468,6 @@ let mut_raw_ref = union.get_integer_mut_raw();
 | 显式内存所有权（Ownership） ⟹ 安全性 | Rust 管理 wasm 线性内存 | 避免 use-after-free |
 | 类型化接口 ⟹ 更少 bug | 强类型绑定替代动态调用 | 编译期捕获接口错误 |
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
@@ -476,3 +475,4 @@ let mut_raw_ref = union.get_integer_mut_raw();
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/wasm-bindgen — 生态权威 API 文档](https://docs.rs/wasm-bindgen) · [docs.rs/wasmtime — 生态权威 API 文档](https://docs.rs/wasmtime)
+- **P1 学术/形式化**: [Haas et al.: Bringing the Web up to Speed with WebAssembly (PLDI 2017)](https://dl.acm.org/doi/10.1145/3062341.3062363)

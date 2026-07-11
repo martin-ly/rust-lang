@@ -1,8 +1,8 @@
 # 内容重叠检测 v2（语义质量门 P0-3）
 
 **日期**: 2026-07-11  **扫描**: 1901 文件（concept/knowledge/docs/content/crates，排除 archive/book/target）
-**纳入索引**: 1412（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 533367
-**阈值**: 0.5  **命中对**: 558（同目录 548 / 跨目录 10）
+**纳入索引**: 1412（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 533866
+**阈值**: 0.5  **命中对**: 557（同目录 547 / 跨目录 10）
 
 > 本版修正旧版『0 重复』假象：全文关键词（非前50）、纳入 crates、不豁免假 stub、同目录也检、去掉标题 x1.5 主导。
 
@@ -19,7 +19,7 @@
 | 0.949 | 0.949 | 0.0 | 17 | Y | `docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/README.md`(140) | `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/README.md`(145) |
 | 0.949 | 0.949 | 0.0 | 17 | Y | `docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/README.md`(140) | `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/README.md`(153) |
 | 0.949 | 0.949 | 0.0 | 13 | Y | `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/README.md`(145) | `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/README.md`(153) |
-| 0.855 | 0.855 | 0.75 | 41 | Y | `concept/04_formal/02_separation_logic/33_safety_tags_in_formal.md`(187) | `concept/07_future/03_preview_features/31_safety_tags_preview.md`(166) |
+| 0.855 | 0.855 | 0.75 | 37 | Y | `concept/04_formal/02_separation_logic/33_safety_tags_in_formal.md`(187) | `concept/07_future/03_preview_features/31_safety_tags_preview.md`(166) |
 | 0.855 | 0.855 | 0.75 | 9 | Y | `concept/07_future/03_preview_features/31_safety_tags_preview.md`(166) | `concept/04_formal/02_separation_logic/33_safety_tags_in_formal.md`(187) |
 | 0.846 | 0.846 | 0.667 | 6 | Y | `crates/c01_ownership_borrow_scope/docs/tier_03_references/03_lifetimes_reference.md`(24) | `crates/c01_ownership_borrow_scope/docs/tier_04_advanced/01_advanced_lifetime_patterns.md`(24) |
 | 0.833 | 0.833 | 0.5 | 7 | Y | `crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md`(15) | `crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md`(15) |

@@ -258,7 +258,7 @@ db.use_ns("test").use_db("test").await?;
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [Graph Databases: New Opportunities for Connected Data](https://www.oreilly.com/library/view/graph-databases/9781491935811/)] — 图数据库模型基础
-> - [来源: [FoundationDB: A Distributed Key-Value Store](https://dl.acm.org/doi/10.1145/3296957.3190648)] — 分布式键值存储与 TiKV 相关参考
+> - [来源: [FoundationDB: A Distributed Unbundled Transactional Key Value Store (SIGMOD 2021)](https://dl.acm.org/doi/10.1145/3448016.3457559)] — 分布式键值存储权威论文
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [surrealdb GitHub Repository](https://github.com/surrealdb/surrealdb)]

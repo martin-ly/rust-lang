@@ -599,7 +599,7 @@ struct LongTermStore<T: 'static> {
 
 ### 5.5 参数性定理（Theorems for Free）
 
-> **[Wadler 1989 — "Theorems for Free!", POPL](https://dl.acm.org/doi/10.1145/75277.75305)** · **[Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/)** 参数性定理（Reynolds 1983 / Wadler 1989）是参数多态的核心元定理：多态函数的行为仅由其类型决定，与具体类型无关。 ✅ 已验证
+> **[Wadler 1989 — "Theorems for Free!", FPCA](https://dl.acm.org/doi/10.1145/99370.99404)** · **[Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/)** 参数性定理（Reynolds 1983 / Wadler 1989）是参数多态的核心元定理：多态函数的行为仅由其类型决定，与具体类型无关。 ✅ 已验证
 
 **核心定理**: 对于任意无 Trait Bound 的多态函数 `f: ∀T. τ(T)`，其可观察行为完全由类型结构 `τ` 决定，函数不能基于 `T` 的具体内部表示做分支。[Wadler 1989 — Theorems for Free!](https://doi.org/10.1145/99370.99404)
 
@@ -1526,7 +1526,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 | 参数多态对应 System F | [Wikipedia: System F](https://en.wikipedia.org/wiki/System_F) · [Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ |
 | System F 原始论文 | [Girard 1972 — PhD Thesis](https://www.unige.ch/~girard/thesis.pdf) | ✅ |
 | 类型推断算法 W | [Damas & Milner 1982 — POPL](https://dl.acm.org/doi/10.1145/582153.582176) | ✅ |
-| Parametricity / Theorems for Free | [Wadler 1989 — POPL](https://dl.acm.org/doi/10.1145/75277.75305) | ✅ |
+| Parametricity / Theorems for Free | [Wadler 1989 — FPCA](https://dl.acm.org/doi/10.1145/99370.99404) | ✅ |
 | 约束多态 | [Cardelli & Wegner 1985](https://dl.acm.org/doi/10.1145/6041.6042) | ✅ |
 | Const Generics 与依赖类型 | [Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html) · 原创分析 | 💡 |
 | 最小能力原则与泛型约束 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//flexibility.html) · 原创分析 | 💡 |

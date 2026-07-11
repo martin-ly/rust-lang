@@ -23,7 +23,7 @@
 > **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Wikipedia: Type theory](https://en.wikipedia.org/wiki/Type_theory) ·
 > [Pierce 2002, *Types and Programming Languages*](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
-> [Cardelli 1996, *Type Systems* (ACM Computing Surveys)](https://dl.acm.org/doi/10.1145/6041.6042)
+> [Cardelli & Wegner 1985, *On Understanding Types, Data Abstraction, and Polymorphism* (ACM Comput. Surv.)](https://dl.acm.org/doi/10.1145/6041.6042)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
@@ -642,7 +642,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 | [Wikipedia: Type theory](https://en.wikipedia.org/wiki/Type_theory) | 类型论通用定义 | §1.1 | ✅ |
 | [Wikipedia: Simply typed lambda calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus) | λ→ 基础定义 | §1.1 | ✅ |
 | [Pierce 2002, *TAPL*](https://www.cis.upenn.edu/~bcpierce/tapl/) Ch.8-9,11,15,20,22-24 | λ→, System F, HM, 子类型, 递归类型, 存在类型 | 贯穿全章 | ✅ |
-| [Cardelli 1996, *Type Systems*](https://dl.acm.org/doi/10.1145/6041.6042) | 类型系统综述与 soundness 定义 | §1.3, §5.2 | ✅ |
+| [Cardelli & Wegner 1985, *On Understanding Types, Data Abstraction, and Polymorphism*](https://dl.acm.org/doi/10.1145/6041.6042) | 类型系统综述与 soundness 定义 | §1.3, §5.2 | ✅ |
 | Wright & Felleisen 1994 | Progress + Preservation 证明框架 | §4 | ✅ |
 | Wadler 1989, *Theorems for Free* | Parametricity 参数性定理 | §6 Step 4 | ✅ |
 | Damas & Milner 1982 POPL | 算法 W 与 Principal Type | §3 | ✅ |
@@ -952,7 +952,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 > 演进方向见 [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)（语言演进路线图）与 [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化方法的未来）。
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli 1996 — Type Systems](https://dl.acm.org/doi/10.1145/6041.6042) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism](https://dl.acm.org/doi/10.1145/6041.6042) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 

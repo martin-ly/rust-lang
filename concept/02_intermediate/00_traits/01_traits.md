@@ -2526,7 +2526,7 @@ fn main() {}
 > [来源: [RFC 0447 — Noisy Fields](https://rust-lang.github.io/rfcs//0447-no-unused-impl-parameters.html)]
 > [来源: [RFC 1210 — Specialization](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)]
 > [来源: [RFC 0443 — Derive](https://github.com/rust-lang/rfcs/pull/443)]
-> [来源: [PLDI 2023 — Rust Traits Formalization](https://dl.acm.org/doi/10.1145/3591285)]
+> [来源: [ICSE 2022 — Verifying Dynamic Trait Objects in Rust](https://dl.acm.org/doi/10.1145/3510457.3513031)]
 
 ---
 

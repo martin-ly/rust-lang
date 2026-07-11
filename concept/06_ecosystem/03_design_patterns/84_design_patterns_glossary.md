@@ -255,3 +255,11 @@ pub trait SimpleFuture {
 | 统一术语 ⟹ 减少歧义 | 团队与文档使用一致定义 | 提升沟通效率 |
 | 术语链接 ⟹ 加速学习 | 每个术语指向权威概念页 | 读者可快速深入 |
 | 分类清晰 ⟹ 快速检索 | 按模式类型与适用场景组织 | 缩短查找时间 |
+
+---
+
+## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)

@@ -102,14 +102,14 @@ RustBelt 的形式化证明表明：Rust 的扩展进步/保持定理**蕴含内
 
 ### 1.2 类型安全到内存安全
 >
-> **[Cardelli 1996 — Type Systems (ACM Computing Surveys 28(1))](https://dl.acm.org/doi/10.1145/6041.6042)** Cardelli 区分了两种"安全"：
+> **[Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 17(4))](https://dl.acm.org/doi/10.1145/6041.6042)** Cardelli 区分了两种"安全"：
 >
 > - **类型安全**（Type Safety）：well-typed 程序不会触发未定义的类型错误
 > - **内存安全**（Memory Safety）：程序不会访问无效内存地址
 >
 > 在大多数语言中，类型安全 ≠ 内存安全（C/C++ 是典型反例）。Rust 的独特贡献在于：**类型系统（Type System）被设计为内存安全的充分条件**。
 
-Rust 的类型安全 → 内存安全（Memory Safety） 的推理链 (Source: [Cardelli 1996 — Type Systems](https://dl.acm.org/doi/10.1145/6041.6042) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/))：
+Rust 的类型安全 → 内存安全（Memory Safety） 的推理链 (Source: [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism](https://dl.acm.org/doi/10.1145/6041.6042) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/))：
 
 ```text
 Progress + Preservation（类型安全）
@@ -892,7 +892,7 @@ fn pinned_self_ref() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli 1996 — Type Systems](https://dl.acm.org/doi/10.1145/6041.6042) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism](https://dl.acm.org/doi/10.1145/6041.6042) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0

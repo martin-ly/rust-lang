@@ -92,6 +92,18 @@ def main():
     cov = lambda k: (sum(1 for r in rows if r[k]), round(100 * sum(1 for r in rows if r[k]) / n, 1)) if n else (0, 0.0)
     p0c, p0p = cov("P0"); p1c, p1p = cov("P1"); p2c, p2p = cov("P2"); anyc, anyp = cov("any")
     none = [r for r in rows if not r["any"]]
+    # 内容页口径: 排除 00_meta 内部工具页 / quiz 测验页 / placeholders / sources 索引页
+    # (这些页不是 Rust 概念内容, 不存在合适的国际学术/生态来源, 其权威基线为 P0 官方文档)
+    def is_content(r):
+        p = r["path"]
+        return not (p.startswith("concept/00_meta/") or p.startswith("concept/sources/")
+                    or "quiz" in p or "placeholders/" in p)
+    crows = [r for r in rows if is_content(r)]
+    cn = len(crows)
+    ccov = lambda k: (sum(1 for r in crows if r[k]), round(100 * sum(1 for r in crows if r[k]) / cn, 1)) if cn else (0, 0.0)
+    cp0c, cp0p = ccov("P0"); cp1c, cp1p = ccov("P1"); cp2c, cp2p = ccov("P2"); canyc, canyp = ccov("any")
+    c_gaps_p1 = [r["path"] for r in crows if not r["P1"]]
+    c_gaps_p2 = [r["path"] for r in crows if not r["P2"]]
     # 按层级分组
     layers = {}
     for r in rows:
@@ -118,6 +130,19 @@ def main():
     md.append(f"| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | {p2c} | {p2p}% |")
     md.append(f"| **任一权威（P0∪P1∪P2）** | **{anyc}** | **{anyp}%** |")
     md.append(f"| 无任何国际权威引用（缺口） | {len(none)} | {round(100*len(none)/n,1) if n else 0}% |\n")
+    md.append("## 内容页口径覆盖率（排除 00_meta 工具页 / quiz / placeholders / sources 索引）\n")
+    md.append(f"> 内容页 **{cn}** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，"
+              "其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。\n")
+    md.append("| 维度 | 命中页 | 覆盖率 |")
+    md.append("|:---|---:|---:|")
+    md.append(f"| P0 官方 | {cp0c} | {cp0p}% |")
+    md.append(f"| P1 学术/形式化 | {cp1c} | {cp1p}% |")
+    md.append(f"| P2 社区/生态 | {cp2c} | {cp2p}% |")
+    md.append(f"| **任一权威** | **{canyc}** | **{canyp}%** |\n")
+    if c_gaps_p1:
+        md.append(f"内容页 P1 缺口（{len(c_gaps_p1)}）: " + " · ".join(f"`{g}`" for g in c_gaps_p1[:30]) + "\n")
+    if c_gaps_p2:
+        md.append(f"内容页 P2 缺口（{len(c_gaps_p2)}）: " + " · ".join(f"`{g}`" for g in c_gaps_p2[:30]) + "\n")
     md.append("## 按层级覆盖率\n")
     md.append("| 层级 | 页数 | P0 命中 | P0% | 任一权威 | 任一% |")
     md.append("|:---|---:|---:|---:|---:|---:|")
@@ -146,10 +171,14 @@ def main():
     payload = {"date": TODAY, "scanned": n,
                "coverage": {"P0": [p0c, p0p], "P1": [p1c, p1p], "P2": [p2c, p2p], "any": [anyc, anyp],
                             "none": len(none)},
+               "content_scope": {"scanned": cn, "P0": [cp0c, cp0p], "P1": [cp1c, cp1p],
+                                 "P2": [cp2c, cp2p], "any": [canyc, canyp],
+                                 "gaps_p1": c_gaps_p1, "gaps_p2": c_gaps_p2},
                "by_layer": layers, "core_gaps_l1_l4_no_p0": [r["path"] for r in core_gaps],
                "none_any": [r["path"] for r in none]}
     open(json_path, "w", encoding="utf-8").write(json.dumps(payload, ensure_ascii=False, indent=2))
     print(f"[concept-authority] scanned={n}  P0={p0p}%  P1={p1p}%  P2={p2p}%  any={anyp}%  none={len(none)}")
+    print(f"[concept-authority] content-scope n={cn}  P0={cp0p}%  P1={cp1p}%  P2={cp2p}%  any={canyp}%")
     print(f"[concept-authority] core L1-L4 gaps (no P0): {len(core_gaps)}")
     print(f"[concept-authority] report: {os.path.relpath(md_path, ROOT)}")
     return 0

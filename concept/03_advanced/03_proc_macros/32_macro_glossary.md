@@ -660,3 +660,13 @@ const SIZE: usize = compute_size!(some_input);
 >
 > **过渡**: 从导航体验过渡到与卫生性、参考页的结合，可以形成宏系统学习的完整入口。
 >
+
+
+---
+
+## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Kohlbecker et al.: Hygienic Macro Expansion (LFP 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/319838.319859)
+- **P2 生态/社区**: [docs.rs/syn — 宏开发权威 API 文档](https://docs.rs/syn) · [docs.rs/quote — 宏开发权威 API 文档](https://docs.rs/quote)

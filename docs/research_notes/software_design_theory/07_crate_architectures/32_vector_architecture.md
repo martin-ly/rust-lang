@@ -216,7 +216,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 > - [来源: [HNSW: Efficient and Robust ANN Search](https://arxiv.org/abs/1603.09320)]
 > **P1（学术论文/演讲）**:
 >
-> - [来源: [Approximate Nearest Neighbor Search in High Dimensions](https://dl.acm.org/doi/10.1145/3186725)] — 高维 ANN 综述
+> - [来源: [Andoni & Indyk — Near-Optimal Hashing Algorithms for Approximate Nearest Neighbor in High Dimensions (CACM 2008)](https://dl.acm.org/doi/10.1145/1327452.1327494)] — 高维 ANN 权威综述
 > - [来源: [FANN: Fast Approximate Nearest Neighbors](https://ieeexplore.ieee.org/document/5346045)] — 快速近似最近邻库方法论
 > **P2（仓库/社区文章）**:
 >

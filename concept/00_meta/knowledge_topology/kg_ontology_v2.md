@@ -317,3 +317,11 @@ cargo run --bin kg-validate -- concept/00_meta/kg_data.json concept/00_meta/kg_s
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-06-27
 **状态**: 🔄 v2 规范已冻结，待数据迁移与工具链落地
+
+---
+
+## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Hogan et al.: Knowledge Graphs (ACM Comput. Surv. 2021)](https://dl.acm.org/doi/10.1145/3447772)

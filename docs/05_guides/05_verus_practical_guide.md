@@ -266,7 +266,7 @@ fn push_with_ghost<T>(vec: &mut Vec<T>, value: T, ghost_old_len: Ghost<usize>)
 | `Tracked<T>` | ✅ | ✅ | 线性 ghost（所有权（Ownership）跟踪） |
 
 > [来源: [Verus Guide — Ghost Entities](https://verus-lang.github.io/verus/guide/ghost.html)]
-> [来源: [PLDI 2023 — Linear Ghost Types](https://dl.acm.org/doi/10.1145/3591285)]
+> [来源: [OOPSLA 2023 — Verus: Verifying Rust Programs using Linear Ghost Types](https://dl.acm.org/doi/10.1145/3586037)]
 
 ### 4.2 `Proof` 类型与归纳证明 {#42-proof-类型与归纳证明}
 >
@@ -482,7 +482,7 @@ impl<T> Stack<T> {
 ```
 
 > [来源: [Verus Guide — Concurrency](https://verus-lang.github.io/verus/guide/concurrency.html)]
-> [来源: [PLDI 2023 — Verified Storage Systems with Linear Ghost Types](https://dl.acm.org/doi/10.1145/3591285)]
+> [来源: [OOPSLA 2023 — Verus: Verifying Rust Programs using Linear Ghost Types](https://dl.acm.org/doi/10.1145/3586037)]
 
 ---
 
@@ -858,7 +858,7 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 | Verus GitHub | <https://github.com/verus-lang/verus> | 源码、示例、issue |
 | Verus Examples | <https://github.com/verus-lang/verus> | 工业级案例 |
 | Z3 SMT Solver | <https://github.com/Z3Prover/z3> | 底层求解器 |
-| PLDI 2023 Paper | <https://dl.acm.org/doi/10.1145/3591285> | 线性 Ghost 类型理论 |
+| OOPSLA 2023 Paper | <https://dl.acm.org/doi/10.1145/3586037> | 线性 Ghost 类型理论（Verus） |
 | Rust Reference | <https://doc.rust-lang.org/reference/> | 语言语义基准 |
 | IronFleet (前身) | <https://github.com/microsoft/IronFleet> | 分布式系统验证 |
 

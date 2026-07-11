@@ -780,3 +780,13 @@ let v = temp;
 >
 > **过渡**: 从最佳实践过渡到生产级开发，可以将 FAQ 融入团队宏开发流程。
 >
+
+
+---
+
+## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Kohlbecker et al.: Hygienic Macro Expansion (LFP 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/319838.319859)
+- **P2 生态/社区**: [docs.rs/syn — 宏开发权威 API 文档](https://docs.rs/syn) · [docs.rs/proc-macro2 — 宏开发权威 API 文档](https://docs.rs/proc-macro2)

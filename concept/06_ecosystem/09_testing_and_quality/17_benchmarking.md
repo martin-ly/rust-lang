@@ -157,3 +157,11 @@ fn throughput_benchmark(c: &mut Criterion) {
 
 - [Criterion.rs Book](https://bheisler.github.io/criterion.rs/book/)
 - [Rust Performance Book](https://nnethercote.github.io/perf-book/)
+
+---
+
+## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Mytkowicz et al.: Producing Wrong Data Without Doing Anything Obviously Wrong! (ASPLOS 2009)](https://dl.acm.org/doi/10.1145/1508284.1508275)

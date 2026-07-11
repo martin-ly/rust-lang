@@ -321,5 +321,5 @@ fn demo_fixed() {
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
-- **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [Wadler & Blott: How to Make Ad-hoc Polymorphism Less Ad Hoc (POPL 1989)](https://dl.acm.org/doi/10.1145/75277.75305)
+- **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [Wadler & Blott: How to Make Ad-hoc Polymorphism Less Ad Hoc (POPL 1989)](https://dl.acm.org/doi/10.1145/75277.75283)
 - **P2 生态/社区**: [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml) · [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata)

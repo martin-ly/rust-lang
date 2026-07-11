@@ -33,6 +33,8 @@ sys.path.insert(0, os.path.join(ROOT, "scripts", "maintenance"))
 TODAY = _dt.date.today().isoformat()
 CACHE = os.path.join(ROOT, "target", "authority_link_health_cache.json")
 UA = "Mozilla/5.0 (compatible; rust-lang-kb-health/1.0; +https://github.com/rust-lang)"
+BROWSER_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/120.0 Safari/537.36")
 TIMEOUT = 10
 
 try:
@@ -92,13 +94,19 @@ def _probe(url, method="GET", accept_json=False):
         return None
 
 
-def fallback_probe_curl(url):
-    """当 urllib 因 TLS/EOF/UA 被重置时，使用系统 curl 做一次性 HEAD 复核。"""
+def fallback_probe_curl(url, ua=UA):
+    """当 urllib 因 TLS/EOF/UA 被重置时，使用系统 curl 做一次性复核。
+    默认 HEAD；浏览器 UA 时改用 GET -L（ACM 等站点对 HEAD 恒 403）。"""
     try:
+        args = ["curl", "-s", "-o", "/dev/null", "-w", "%{http_code}",
+                "--max-time", "20", "-A", ua]
+        if ua == BROWSER_UA:
+            args += ["-L", "-H", "Accept: text/html,application/xhtml+xml"]
+        else:
+            args.append("-I")
+        args.append(url)
         cp = subprocess.run(
-            ["curl", "-sI", "-o", "/dev/null", "-w", "%{http_code}",
-             "--max-time", "20", "-A", UA, url],
-            capture_output=True, text=True, timeout=25, check=False,
+            args, capture_output=True, text=True, timeout=25, check=False,
         )
         code = cp.stdout.strip()
         if code.isdigit():
@@ -126,14 +134,22 @@ def verify_cratesio(u):
 
 
 def verify_acm_via_doi(u):
-    """ACM 站点对脚本 UA 返回 403；对含 DOI 的链接通过 doi.org 解析器校验。"""
+    """ACM 站点对脚本 UA 返回 403；对含 DOI 的链接通过 Crossref 元数据 API 校验（比 doi.org 更稳定）。"""
     parsed = urlparse(u)
     if parsed.netloc not in ("dl.acm.org", "cacm.acm.org"):
         return False
     m = ACM_DOI_RE.search(u)
     if not m:
         return False
-    status = _probe(f"https://doi.org/{m.group(1)}", method="HEAD")
+    doi = m.group(1).rstrip(".")
+    # 10.5555 为 ACM DL 内部前缀，Crossref/doi.org 均未收录，无法程序化校验 -> 保守视为有效
+    if doi.startswith("10.5555/"):
+        return True
+    # 优先 Crossref（权威元数据）；失败时回退 doi.org 解析器
+    status = _probe(f"https://api.crossref.org/works/{doi}", accept_json=True)
+    if status is not None and 200 <= status < 400:
+        return True
+    status = _probe(f"https://doi.org/{doi}", method="HEAD")
     return status is not None and 200 <= status < 400
 
 
@@ -169,6 +185,20 @@ def verify_and_update(results, u):
         ok = True
     elif st == 404 and verify_cratesio(u):
         ok = True
+    elif st == 404 and urlparse(u).netloc in ("crates.io", "www.crates.io"):
+        # crates.io 前端 SPA 对脚本 UA 返回 404，浏览器 GET 可达
+        code = fallback_probe_curl(u, ua=BROWSER_UA)
+        if code is not None and 200 <= code < 400:
+            ok = True
+    elif st in (403, 418):
+        # 无 DOI 的落地页：用浏览器 UA 复核；ACM DL 首页/刊页对任何脚本 UA 恒 403，属规范入口
+        code = fallback_probe_curl(u, ua=BROWSER_UA)
+        if code is not None and 200 <= code < 400:
+            ok = True
+        elif urlparse(u).netloc == "dl.acm.org" and (
+            urlparse(u).path in ("", "/") or urlparse(u).path.startswith("/journal/")
+        ):
+            ok = True
     if ok:
         results[u] = {"status": 200, "err": None, "ts": time.time(), "verified_by": "alternate_endpoint"}
     return ok

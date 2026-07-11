@@ -5,6 +5,7 @@
 > **来源**: [Cargo Book — Dependency Resolution](https://doc.rust-lang.org/cargo/reference/resolver.html) · [Cargo Book — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) · [rust-lang/cargo#6129](https://github.com/rust-lang/cargo/issues/6129)
 
 > > **权威来源**: 本文件为 `concept/` 权威页。
+> >
 ## 代码示例：声明公共与私有依赖
 
 ```toml
@@ -241,3 +242,11 @@ serde = { workspace = true, public = false, features = ["derive"] }
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.97.0 (stable) / nightly with `-Zpublic-dependency`
 **最后更新**: 2026-07-09
+
+---
+
+## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Rudra: Finding Memory Safety Bugs in Rust at the Ecosystem Scale (SOSP 2021)](https://dl.acm.org/doi/10.1145/3477132.3483570)

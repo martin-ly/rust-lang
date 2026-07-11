@@ -1293,7 +1293,7 @@ fn main() {
 
 > [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html#lifetime-parameters)]
 > [来源: [RFC 0387 — Higher-Ranked Trait Bounds](https://rust-lang.github.io/rfcs//0387-higher-ranked-trait-bounds.html)]
-> [来源: [PLDI 2023 — Polonius](https://dl.acm.org/doi/10.1145/3591283)]
+> [来源: [PLDI 2025 — Tree Borrows: A New Aliasing Model for Rust](https://dl.acm.org/doi/10.1145/3735592)]
 
 ---
 

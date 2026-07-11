@@ -468,3 +468,12 @@ wasm-pack test --headless --firefox
 | FAQ 覆盖 ⟹ 减少上手摩擦 | 集中回答高频问题 | 加速新用户入门 |
 | 示例验证 ⟹ 答案可靠 | 提供可运行代码 | 避免误导性回答 |
 | 工具链指导 ⟹ 快速迭代 | 推荐 wasm-pack、wasm-bindgen 等 | 提升开发效率 |
+
+---
+
+## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Haas et al.: Bringing the Web up to Speed with WebAssembly (PLDI 2017)](https://dl.acm.org/doi/10.1145/3062341.3062363)
+- **P2 生态/社区**: [docs.rs/wasmtime — WASM 运行时权威 API 文档](https://docs.rs/wasmtime)

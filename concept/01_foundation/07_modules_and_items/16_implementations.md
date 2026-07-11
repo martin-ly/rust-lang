@@ -235,5 +235,5 @@ impl MyTrait for String {} // ❌ 当前 crate 既未定义 MyTrait 也未定义
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
-- **P1 学术/形式化**: [Strachey: Fundamental Concepts in Programming Languages (1967)](https://dl.acm.org/doi/10.1145/6041.6042)
+- **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
 - **P2 生态/社区**: [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver) · [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml)

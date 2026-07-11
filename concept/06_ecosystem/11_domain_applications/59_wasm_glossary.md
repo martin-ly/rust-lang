@@ -366,3 +366,12 @@
 | 统一 wasm 术语 ⟹ 文档清晰 | 模块、实例、内存等概念一致 | 降低学习门槛 |
 | 宿主 API 链接 ⟹ 快速定位 | 指向 WASI、JS API 等权威来源 | 缩短查阅时间 |
 | 性能术语 ⟹ 优化焦点 | 加载、实例化、调用开销 | 指导性能调优方向 |
+
+---
+
+## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Haas et al.: Bringing the Web up to Speed with WebAssembly (PLDI 2017)](https://dl.acm.org/doi/10.1145/3062341.3062363)
+- **P2 生态/社区**: [docs.rs/wasm-bindgen — WASM 绑定权威 API 文档](https://docs.rs/wasm-bindgen)

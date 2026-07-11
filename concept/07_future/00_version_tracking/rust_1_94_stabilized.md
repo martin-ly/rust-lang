@@ -411,12 +411,11 @@ pub fn advanced_example<T>(value: T) -> T {
 | 网络特性增强 ⟹ 更高效的 I/O | 新 API 与优化 | 提升网络服务性能 |
 | 特性迁移 ⟹ 渐进升级 | 评估影响面后逐步采用 | 降低版本切换风险 |
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
-- **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: Prophecy-Verified Safe Rust (POPL 2022)](https://dl.acm.org/doi/10.1145/3591285)
+- **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: A Semantic Foundation for Functional Verification of Rust Programs (PLDI 2022)](https://dl.acm.org/doi/10.1145/3519939.3523704)
 - **P2 生态/社区**: [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio) · [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures)

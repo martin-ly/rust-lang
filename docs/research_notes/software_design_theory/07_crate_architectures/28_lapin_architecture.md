@@ -340,7 +340,7 @@ let conn = Connection::connect(&addr, props).await?;
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [Advanced Message Queuing Protocol (AMQP) White Paper](https://www.amqp.org/sites/amqp.org/files/amqp.pdf)] — AMQP 设计目标与模型
-> - [来源: [The End of Cloud Computing as a Platform for the Internet of Things](https://dl.acm.org/doi/10.1145/3093744.3093746)] — 消息中间件在分布式系统中的应用参考
+> - [来源: [OASIS AMQP 1.0 标准 — Advanced Message Queuing Protocol 核心规范](https://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html)] — 消息中间件协议规范
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [lapin GitHub Repository](https://github.com/amqp-rs/lapin)]
