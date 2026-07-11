@@ -22,7 +22,6 @@
 > **定位**: 系统对比 Android AOSP、Chromium、Bare Metal 三个典型场景中 Rust 的集成方式、构建系统、互操作模式与常见陷阱。
 > **前置概念**: [Cross Compilation](../05_systems_and_embedded/17_cross_compilation.md) · [Embedded Systems](../05_systems_and_embedded/22_embedded_systems.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [FFI](../../03_advanced/04_ffi/05_rust_ffi.md) · [安全边界](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md)
 > **后置概念**: [Industrial Case Studies](../11_domain_applications/75_industrial_case_studies.md) · [OS Kernel](../05_systems_and_embedded/39_os_kernel.md)
-> **来源**:
 >
 > [Android Rust](https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html) ·
 > [Chromium Rust](https://www.chromium.org/chromium-os/developer-library/guides/rust/rust-on-cros/) ·

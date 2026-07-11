@@ -1,7 +1,6 @@
 # Rust 1.96 稳定特性（当前 patch 1.96.1）
 
 > **EN**: Rust 1.96 Stabilized Features (current patch 1.96.1)
-> **EN**: Rust 1.96 Stabilized Features (current patch 1.96.1)
 > **Summary**: Rust 1.96.0 于 2026-05-28 首次稳定，当前最新 patch 为 1.96.1。本文档覆盖 1.96 列车引入的关键语言与库特性：Copy-compatible range 类型、assert_matches! 宏（Macro）、NonZero 范围迭代、AssertUnwindSafe / LazyCell / LazyLock 的 From 实现、s390x vector assembly 以及 Cargo 安全修复。
 >
 > **受众**: [进阶] / [专家]

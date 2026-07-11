@@ -38,7 +38,7 @@ except Exception:  # pragma: no cover
 TIER = [(re.compile("|".join(P0_DOMAINS)), "P0"),
         (re.compile("|".join(P1_DOMAINS)), "P1"),
         (re.compile("|".join(P2_DOMAINS)), "P2")]
-URL_RE = re.compile(r"https?://[^\s)\"'>\]]+")  # 排除 ] 避免把 markdown 嵌套链接 ](url2) 误拼进 url1
+URL_RE = re.compile(r"https?://[^\s()\"'>\]`]+")  # 排除 () ] ` 避免 markdown 语法字符污染 URL
 
 
 def classify(u):
