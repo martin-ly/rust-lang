@@ -24,7 +24,10 @@
 从直觉到形式化的过渡需要六步递进的认知脚手架。
 每一步不仅提供新知识，还解释"为什么这一步必须接在上一步之后"。
 
-> **后置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)
+> **后置概念**:
+>
+> [Traits](../../02_intermediate/00_traits/01_traits.md) ·
+> [Generics](../../02_intermediate/01_generics/02_generics.md)
 
 ## 📑 目录
 
@@ -219,9 +222,9 @@
 ---
 
 ## 十一、相关概念链接
+
 - **上层概念**: [Lifetimes 基础](03_lifetimes.md)
 - **下层概念**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)
-
 
 - [Ownership](01_ownership.md) — 生命周期建立在所有权转移规则之上
 - [Borrowing](02_borrowing.md) — 借用检查是生命周期约束的执行机制

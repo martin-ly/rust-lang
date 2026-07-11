@@ -50,6 +50,7 @@
     - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时 UB）](#44-边界测试原子操作与非原子操作混用数据竞争--运行时-ub)
     - [4.5 边界测试：`Ordering::Relaxed` 导致逻辑错误（编译通过但语义错误）](#45-边界测试orderingrelaxed-导致逻辑错误编译通过但语义错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [判定表：内存序选择判定](#判定表内存序选择判定)
   - [相关概念](#相关概念)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
@@ -704,10 +705,21 @@ fn fixed() {
 
 ---
 
+## 判定表：内存序选择判定
+
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| 独立计数器（统计/性能计数） | `Relaxed` | §2.2 内存序选择决策树 | 与其他数据存在依赖 ⟹ `Relaxed` 不足 |
+| 标志位 + 数据传递 | `Release`（写）/ `Acquire`（读） | §2.2 决策树 | 需要双向同步 ⟹ 用 `AcqRel` |
+| 无锁队列的 CAS | `AcqRel` | §2.2 决策树 | 纯读或纯写操作 ⟹ 可降级 |
+| 多生产者单消费者 | `Release` 写 / `Acquire` 读 | §2.2 决策树 | — |
+| 全局顺序敏感或不确定 | `SeqCst` | §2.2「不确定 → SeqCst」 | 性能瓶颈经 profile 证实后才降级 |
+| 选型总原则 | 从 `SeqCst` 开始，瓶颈证实后再降级 | §2.2 选择洞察 | 盲目降级 ⟹ 弱序 bug 极难复现 |
+
 ## 相关概念
+
 - **上层概念**: [Concurrency](01_concurrency.md) · [Unsafe](../02_unsafe/03_unsafe.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
 - **下层概念**: [Lockfree Data Structures](https://en.wikipedia.org/wiki/Non-blocking_algorithm) · [Distributed Systems](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md)
-
 
 - [Concurrency](01_concurrency.md) — 并发基础
 - [Unsafe](../02_unsafe/03_unsafe.md) — 不安全代码

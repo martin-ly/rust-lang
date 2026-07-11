@@ -165,6 +165,7 @@
       - [9.6.2 语法变化](#962-语法变化)
       - [9.6.3 为什么需要 unsafe 包装？](#963-为什么需要-unsafe-包装)
       - [9.6.4 迁移与 lint](#964-迁移与-lint)
+  - [判定表：unsafe 使用与 UB 边界判定](#判定表unsafe-使用与-ub-边界判定)
   - [相关概念链接](#相关概念链接)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
@@ -2580,6 +2581,20 @@ fn main() {
 > **来源**: [Rust 2024 Edition Guide — Unsafe extern blocks](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-extern.html) · [Unsafe attributes](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-attributes.html) · [RFC 3484](https://rust-lang.github.io/rfcs/3484-unsafe-extern-blocks.html) · [RFC 3325](https://rust-lang.github.io/rfcs/3325-unsafe-attributes.html)
 
 ---
+
+## 判定表：unsafe 使用与 UB 边界判定
+
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| Safe Rust 能实现需求 | 不用 unsafe | §6.1 决策树 Q1/A1 | — |
+| FFI 调用外部函数 | 用 unsafe 封装 FFI 边界 | §6.1 决策树 A2 | 未封装散落调用 ⟹ 安全审查困难 |
+| 性能优化诉求 | 先 profile 确认瓶颈，再用 unsafe + 基准测试 | §6.1 决策树 Q4/A3 | 未经验证的性能假设 ⟹ unsafe 滥用首要根源 |
+| 底层内存布局控制 | 用 unsafe，最小化范围 | §6.1 决策树 A4 | 范围越大，不变量维护成本越高 |
+| 解引用可能为 null 的裸指针 | UB：段错误/任意行为 | §6.2 E1 | 仅创建不解引用 ⟹ 尚未 UB（§6.2 W1） |
+| `transmute` 无关类型 | UB：类型混淆/对齐错误 | §6.2 E2 | 编译通过 ≠ 安全 |
+| `unsafe impl Send for Rc<T>` | UB：数据竞争 | §6.2 E3 | auto trait 契约被破坏（见 Send/Sync 权威页） |
+| 读取未初始化内存 | UB：读取任意值 | §6.2 E4 | `MaybeUninit` 是合法途径 |
+| 验证 unsafe 代码行为 | 用 Miri 按 Tree Borrows 操作语义检测 | §五 别名模型 | Miri 未覆盖全部 UB 种类 ⟹ 通过 Miri ≠ 无 UB |
 
 ## 相关概念链接
 - **上层概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Concurrency](../00_concurrency/01_concurrency.md)

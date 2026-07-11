@@ -38,6 +38,7 @@
   - [四、常见陷阱](#四常见陷阱)
   - [五、来源与延伸阅读](#五来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
+  - [判定表：可见性与 crate 组织判定](#判定表可见性与-crate-组织判定)
   - [相关概念](#相关概念)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
@@ -431,10 +432,20 @@ fn main() {
 }
 ```
 
+## 判定表：可见性与 crate 组织判定
+
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| 公开 API 项 | `pub` | §3.1 反命题树 TRUE | 过度 `pub` ⟹ API 表面积过大、破坏变更风险上升 |
+| crate 内部跨模块共享 | `pub(crate)` | §3.1 反命题树 CRATE | 误升为 `pub` ⟹ 泄漏内部实现细节 |
+| 模块内部实现细节 | 默认 private | §3.1 反命题树 PRIVATE | 测试需访问 ⟹ 用 `#[cfg(test)]` 子模块 |
+| 可见性提升顺序 | private → `pub(crate)` → `pub` 逐步开放 | §3.1 使用建议 | 一步到位 `pub` ⟹ 最小公开接口原则被破坏 |
+| 多 crate 项目依赖管理 | workspace 统一依赖版本 | Cargo Workspace（§二 技术细节） | 各自锁定版本 ⟹ 同一 crate 多版本并存 |
+
 ## 相关概念
+
 - **上层概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)
 - **下层概念**: [Macros](../../03_advanced/03_proc_macros/04_macros.md) · [Cargo Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
-
 
 - [Cargo Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) — Cargo 与 Workspace
 - Macros — 宏（Macro）与模块交互

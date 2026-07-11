@@ -31,7 +31,10 @@
 > **Bloom 层级**: L1-L4
 
 ---
-> **权威来源**: [Rust Reference — Moved and Copied Types](https://doc.rust-lang.org/reference/expressions.html#moved-and-copied-types) · [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [TRPL — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
+> **权威来源**:
+> [Rust Reference — Moved and Copied Types](https://doc.rust-lang.org/reference/expressions.html#moved-and-copied-types) ·
+> [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) ·
+> [TRPL — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
 >
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
@@ -244,12 +247,21 @@ move: T@src → T@dst
 
 ---
 
+## 判定表：Move / Copy / Clone 处置判定
+
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| 非 `Copy` 类型赋值、传参、返回 | move：bitwise copy + 源变量编译期标记无效 | §3.1 Rust move 语义 | `Copy` 类型 ⟹ 源变量仍可用（§3.2） |
+| 需要保留源变量且类型可复制 | 隐式 `Copy`（仅限 `Copy` 类型） | §3.2 `Copy` vs `Clone` | 含堆资源的类型不能 `Copy` |
+| 需要深拷贝堆数据 | 显式 `.clone()` | `Clone` trait（§3.2） | 误以为赋值是深拷贝 ⟹ 实际是 move |
+| 期待 C++ 式 moved-from 状态 | 不存在：变量要么有效要么不存在 | §4 核心对比 | 用 `Option::take` 表达「可取空」语义 |
+| 依赖 RVO/NRVO 避免拷贝 | Rust 无需：move 本身是 bitwise copy | §5 RVO 与 Copy Elision | 大型栈数组 move 仍是 memcpy，注意栈占用 |
+| 自定义资源管理（三/五法则场景） | 实现 `Drop`；通常无需手写移动构造 | §6 三/五/零法则 vs Copy/Clone/Drop | 同时实现 `Copy` 与 `Drop` ⟹ 编译禁止 |
 
 ## 相关概念
 
 - **上层概念**: [Ownership](01_ownership.md) · [Variable Model](../03_values_and_references/20_variable_model.md) · [Borrowing](02_borrowing.md) · [学习指南](../../00_meta/04_navigation/learning_guide.md)
 - **下层概念**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Construction](../../02_intermediate/00_traits/28_construction_and_initialization.md)
-
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 

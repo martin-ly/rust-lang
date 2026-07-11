@@ -159,6 +159,7 @@
     - [13.1 语法与语义](#131-语法与语义)
     - [13.2 与 `async` 的对偶关系](#132-与-async-的对偶关系)
     - [13.3 形式化定位](#133-形式化定位)
+  - [判定表：异步选型与 await 边界判定](#判定表异步选型与-await-边界判定)
   - [相关概念链接](#相关概念链接)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
@@ -2637,10 +2638,21 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 ---
 
+## 判定表：异步选型与 await 边界判定
+
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| IO 密集 + 高并发连接 | async + 运行时（如 Tokio） | §7.1 决策树 A1 | 低并发 IO ⟹ 线程或 async 皆可（A2） |
+| CPU 密集 + 共享可变状态 | 线程 + `Mutex` | §7.1 决策树 A3 | 用 async 反而增加调度开销 |
+| 纯 CPU 密集并行 | 线程 / rayon | §7.1 决策树 A4 | async 不为计算提速 |
+| future 需跨线程移动 | await 点跨越的状态必须 `Send` | §8.6 跨越 await 的 Send 约束 | 持 `Rc`/`RefCell` 跨 await ⟹ `!Send` 编译错误 |
+| 自引用 future | `Pin` 固定后 poll（见 [06_pin_unpin.md](06_pin_unpin.md)） | §7.2 Pin 使用边界 | 移动已固定的 `!Unpin` 值 ⟹ UB |
+| 需要取消正在进行的 future | drop 即取消，检查取消安全性 | [37_async_cancellation_safety.md](37_async_cancellation_safety.md) | `select!`/超时分支丢弃未完成操作 ⟹ 状态不一致风险 |
+
 ## 相关概念链接
+
 - **上层概念**: [L2 泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md)
 - **下层概念**: [L4 异步（Async）语义形式化](../../04_formal/01_ownership_logic/03_ownership_formal.md) · [L6 Tokio](../../06_ecosystem/02_core_crates/03_core_crates.md) · [L7 效果系统](../../07_future/03_preview_features/04_effects_system.md)
-
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|

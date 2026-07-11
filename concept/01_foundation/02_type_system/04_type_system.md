@@ -100,6 +100,7 @@
     - [Step 6: 边界测试（Boundary Testing）](#step-6-边界测试boundary-testing)
   - [九、国际课程与论文对齐](#九国际课程与论文对齐)
   - [十、知识来源关系（Provenance）](#十知识来源关系provenance)
+  - [判定表：多态机制与类型层级判定](#判定表多态机制与类型层级判定)
   - [十一、相关概念链接](#十一相关概念链接)
     - [补充章节：`impl Trait` 与 `dyn Trait` 的类型论差异](#补充章节impl-trait-与-dyn-trait-的类型论差异)
       - [存在类型 vs 全称类型](#存在类型-vs-全称类型)
@@ -197,6 +198,7 @@
   - [2. 结构体 (Struct)](#2-结构体-struct)
     - [2.1 命名字段结构体](#21-命名字段结构体)
       - [定义和创建](#定义和创建)
+  - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
 
 ## 一、权威定义（Definition）
 
@@ -963,9 +965,20 @@ fn main() {
 
 ---
 
-## 十一、相关概念链接
-- **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)
+## 判定表：多态机制与类型层级判定
 
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| 返回具体类型且隐藏实现细节 | `impl Trait`（零成本 + 抽象） | 选择决策树 Q1/A1 | 需要运行时异构集合 ⟹ 不适用 |
+| 需要异构集合或运行时多态 | `dyn Trait` / `Box<dyn Trait>` | 选择决策树 Q2/A2 | Trait 不满足对象安全 ⟹ 编译拒绝 |
+| Trait 含泛型方法或返回 `Self` | 非对象安全，拆分为对象安全子 Trait + `Sized` 方法 | 选择决策树 A3 | 强行 `dyn` ⟹ 编译错误 |
+| 性能敏感且类型编译期已知 | 泛型约束 `<T: Trait>` 单态化 | 选择决策树 Q4/A4 | 代价是二进制膨胀与编译时间上升 |
+| `dyn Trait` 值的调用开销 | 额外 8 字节 vtable 指针 + 间接调用 | vtable 开销分析 | 高频调用路径 ⟹ 考虑单态化消除间接 |
+| 函数必然发散（`panic!`/`loop {}`） | 返回类型用 `!`（Never） | Never 类型语义（§11.1） | 把 `!` 当普通类型求值 ⟹ 不可能构造其值 |
+
+## 十一、相关概念链接
+
+- **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)
 
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 类型系统与所有权规则共同构成 Safe Rust 的内存安全（Memory Safety）基础
 - [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) — 引用类型 `&T`、`&mut T` 是类型系统对内存别名的约束表达

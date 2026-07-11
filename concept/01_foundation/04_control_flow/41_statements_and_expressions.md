@@ -143,9 +143,9 @@ let result = match option {
 ---
 
 ## 六、相关概念
+
 - **上层概念**: [Control Flow](07_control_flow.md) · [Variables and Bindings](../03_values_and_references/20_variable_model.md) · [Patterns](40_patterns.md)
 - **下层概念**: [Closures](../00_start/15_closure_basics.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Async/Await](../../03_advanced/01_async/02_async.md)
-
 
 | 概念 | 关系 |
 |:---|:---|

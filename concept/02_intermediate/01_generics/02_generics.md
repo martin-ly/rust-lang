@@ -143,6 +143,7 @@
     - [10.2 解决方案：显式捕获](#102-解决方案显式捕获)
     - [10.3 形式化视角：存在类型的区域量化](#103-形式化视角存在类型的区域量化)
     - [10.4 与 2024 Edition 的关系](#104-与-2024-edition-的关系)
+  - [判定表：泛型使用与边界判定](#判定表泛型使用与边界判定)
   - [十一、相关概念链接](#十一相关概念链接)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
     - [11.1 `min_specialization` 的当前状态与使用](#111-min_specialization-的当前状态与使用)
@@ -2242,10 +2243,22 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 
 ---
 
+## 判定表：泛型使用与边界判定
+
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| 对多种类型复用同一逻辑 | 泛型参数 + Trait Bound | 单态化机制（§5.6） | 类型集合运行期才知 ⟹ 改用 `dyn Trait` |
+| 需要编译期已知的长度/容量 | const generics（见 [32_const_generics.md](32_const_generics.md)） | 泛型参数空间（类型/生命周期/const） | 需要常量算术（`N+1`）⟹ `generic_const_exprs` 未稳定 |
+| 关联类型每个实现唯一 | 关联类型 | 泛型参数空间对比 | 每实现需多个 ⟹ 改用泛型参数 |
+| 关联类型需借用 `Self` 数据 | GAT（见 [40_generic_associated_types.md](../00_traits/40_generic_associated_types.md)） | GAT 规则 | 用 HRTB 绕行可行但表达力受限 |
+| 无约束纯参数多态 | 享有参数性「免费定理」 | Wadler 1989（§5.5） | unsafe/`transmute`/构造性 Bound ⟹ 参数性失效 |
+| Trait Bound 不满足 | 编译错误 E0277 | 约束系统规则（§十二 边界测试） | 补充 impl 或放宽约束 |
+| 类型递归无限展开 | E0275 溢出 | 单态化实例化规则 | 用 `Box`/`dyn` 打破递归 |
+
 ## 十一、相关概念链接
+
 - **上层概念**: [L2 Trait](../00_traits/01_traits.md) · [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../00_traits/01_traits.md)
 - **下层概念**: [L3 Async](../../03_advanced/01_async/02_async.md) · [L4 类型论](../../04_formal/00_type_theory/02_type_theory.md) · [L7 效果系统](../../07_future/03_preview_features/04_effects_system.md) · [Advanced Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [GATs](../../03_advanced/01_async/02_async.md) · [Const Generics [来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)
-
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|

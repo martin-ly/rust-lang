@@ -47,6 +47,7 @@
     - [编译错误 4：`OnceCell` 重复初始化（编译错误）](#编译错误-4oncecell-重复初始化编译错误)
     - [编译错误 5：`RwLock` 读锁升级写锁（死锁风险）](#编译错误-5rwlock-读锁升级写锁死锁风险)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [判定表：内部可变性选型判定](#判定表内部可变性选型判定)
   - [相关概念](#相关概念)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
@@ -551,10 +552,22 @@ fn correct_upgrade() {
 
 ---
 
+## 判定表：内部可变性选型判定
+
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| 独占访问即可满足可变性 | 外部可变性（`&mut`），编译期安全零开销 | §4.1 反命题树 TRUE | 共享所有权下 ⟹ 编译拒绝 |
+| 单线程共享 + `Copy` 类型可变 | `Cell<T>` | 选型矩阵 | 非 `Copy` 类型 ⟹ 用 `RefCell` |
+| 单线程共享 + 非 `Copy` 类型可变 | `RefCell<T>` | 选型矩阵 | 嵌套 `borrow_mut` ⟹ 运行时 panic（§4.2 边界 1） |
+| 多线程共享可变 | `Mutex<T>`/`RwLock<T>` | §4.1 反命题树 TRUE2 | 死锁属逻辑错误，编译期不可判定 |
+| 多线程、仅标量状态 | `Atomic*` 无锁 | §4.1 反命题树 ALT2 | 复合不变量 ⟹ 单个原子无法保证 |
+| 性能敏感路径 | 优先 `Cell`/原子，避免锁 | §4.1 认知功能 | 未经测量的优化 ⟹ 可能引入数据竞争 |
+| 对外暴露的 API | 内部可变性封装在模块内，暴露 safe API | 最佳实践 | `RefCell` 泄漏到公共接口 ⟹ 设计意图存疑 |
+
 ## 相关概念
+
 - **上层概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 - **下层概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)
-
 
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）模型
 - [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用与生命周期（Lifetimes）

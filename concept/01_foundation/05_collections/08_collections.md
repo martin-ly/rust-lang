@@ -483,9 +483,9 @@ graph TD
 ---
 
 ## 相关概念
+
 - **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)
 - **下层概念**: [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md)
-
 
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 所有权模型
 - [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) — 借用规则

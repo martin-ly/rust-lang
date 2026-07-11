@@ -112,6 +112,7 @@
       - [9.5.5 与 `anyhow` / `thiserror` 的集成](#955-与-anyhow--thiserror-的集成)
       - [9.5.6 限制与演进边界](#956-限制与演进边界)
     - [9.6 `Try` trait 与自定义 `?` 行为（稳定化中）](#96-try-trait-与自定义--行为稳定化中)
+  - [判定表：错误处理策略判定](#判定表错误处理策略判定)
   - [十、相关概念链接](#十相关概念链接)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
     - [11.1 `std::backtrace::Backtrace` 与错误追踪](#111-stdbacktracebacktrace-与错误追踪)
@@ -2032,10 +2033,23 @@ fn compute() -> Maybe<i32> {
 
 ---
 
+## 判定表：错误处理策略判定
+
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| 函数不会失败 | 返回裸类型 `T` | 策略决策树根节点 | — |
+| 可恢复错误、调用方应处理 | `Result<T, E>` | 策略决策树 D（TRPL Ch9） | 库中对预期错误 panic ⟹ 剥夺调用方选择权 |
+| 不可恢复/程序 bug | `panic!` | 策略决策树 E（API Guidelines） | 在库代码滥用 panic ⟹ 反模式（决策树 N） |
+| 值可能缺失（非错误） | `Option<T>` | 策略决策树 F/P | 缺失即错误 ⟹ 升级为 `Result`（决策树 Q） |
+| 传播错误给调用方 | `?` 运算符 | 策略决策树 H | 函数返回类型非 `Result`/`Option` ⟹ `?` 不可用 |
+| 应用层聚合多种错误 | `anyhow`/`eyre` | §9.4 生态库对比 | 库代码使用 ⟹ 丢失结构化错误类型 |
+| 库代码定义错误类型 | `thiserror` 自定义错误枚举 | §9.4 生态库对比 | 用 `anyhow` ⟹ 调用方无法按错误变体分支 |
+| 转换错误并保留上下文 | `map_err`/`.context()` | 策略决策树 I | `unwrap`/`expect` ⟹ panic，丢失恢复机会 |
+
 ## 十、相关概念链接
+
 - **上层概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md)
 - **下层概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)
-
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|

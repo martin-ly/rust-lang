@@ -76,22 +76,22 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/04_example_counterexample_atlas.md",
-      "lines": 140,
+      "lines": 139,
       "issues": {}
     },
     {
       "rel": "concept/00_meta/knowledge_topology/05_logical_reasoning_atlas.md",
-      "lines": 188,
+      "lines": 187,
       "issues": {}
     },
     {
       "rel": "concept/00_meta/knowledge_topology/06_inter_layer_mapping_atlas.md",
-      "lines": 99,
+      "lines": 97,
       "issues": {}
     },
     {
       "rel": "concept/00_meta/knowledge_topology/07_intra_layer_mapping_atlas.md",
-      "lines": 543,
+      "lines": 541,
       "T2": {
         "total": 426,
         "counts": {
@@ -109,12 +109,12 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/08_concept_source_alignment_atlas.md",
-      "lines": 53,
+      "lines": 51,
       "issues": {}
     },
     {
       "rel": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
-      "lines": 264,
+      "lines": 263,
       "T3T4": {
         "blocks": 6,
         "nodes": 86,
@@ -132,7 +132,7 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/10_gap_and_action_plan.md",
-      "lines": 85,
+      "lines": 83,
       "issues": {}
     },
     {
@@ -142,7 +142,7 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/kg_ontology_v2.md",
-      "lines": 328,
+      "lines": 329,
       "issues": {}
     },
     {

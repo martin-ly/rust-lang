@@ -47,6 +47,7 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [判定表：模块可见性与路径判定](#判定表模块可见性与路径判定)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：模块系统的编译错误](#十边界测试模块系统的编译错误)
@@ -490,10 +491,22 @@ graph TD
 
 ---
 
+## 判定表：模块可见性与路径判定
+
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| 项仅在当前模块内使用 | 默认私有 | 可见性系统（§1.2） | 跨模块访问 ⟹ 编译错误（§10.1） |
+| crate 内跨模块共享 | `pub(crate)` | §1.2 可见性系统 | 误用 `pub` ⟹ API 表面积泄漏 |
+| 仅父模块可见 | `pub(super)` | §1.2 可见性系统 | 层级混淆 ⟹ 编译错误（§10.3） |
+| 对外公开 API | `pub` | §1.2 可见性系统 | 公开后收回 ⟹ 破坏 semver |
+| 简化深层路径书写 | `use` 引入 | §2.2 use 语句与重导出 | 循环 `use` ⟹ 编译错误（§10.2） |
+| 对外重塑 API 结构 | `pub use` 重导出 | §2.2 | 重导出私有项 ⟹ 编译错误（§10.6） |
+| 多 crate 统一管理 | workspace 共享依赖版本 | §2.3 工作空间 | 成员各自锁定版本 ⟹ 重复编译与类型不一致 |
+
 ## 相关概念
+
 - **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/04_type_system.md)
 - **下层概念**: [Crate Ecosystem](../../06_ecosystem/02_core_crates/03_core_crates.md) · [Workspace](../../06_ecosystem/00_toolchain/01_toolchain.md)
-
 
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）系统
 - [Type System](../02_type_system/04_type_system.md) — 类型系统（Type System）

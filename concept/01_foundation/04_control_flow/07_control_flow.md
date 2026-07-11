@@ -17,7 +17,12 @@
 
 ---
 
-> **来源**: [Rust Reference — Expressions](https://doc.rust-lang.org/reference/expressions.html) · · [Peyton Jones — The Implementation of Functional Programming Languages](https://www.microsoft.com/en-us/research/publication/the-implementation-of-functional-programming-languages/) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust Reference — Expressions](https://doc.rust-lang.org/reference/expressions.html) ·
+> · [Peyton Jones — The Implementation of Functional Programming Languages](https://www.microsoft.com/en-us/research/publication/the-implementation-of-functional-programming-languages/) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL Ch3 — Control Flow](https://doc.rust-lang.org/book/ch03-05-control-flow.html) ·
 > [TRPL Ch6 — Match](https://doc.rust-lang.org/book/ch06-02-match.html) ·
 > [Rust Reference — Loop Expressions](https://doc.rust-lang.org/reference/expressions/loop-expr.html) ·
@@ -569,9 +574,9 @@ graph TD
 ---
 
 ## 相关概念
+
 - **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/04_type_system.md)
 - **下层概念**: [Generics](../../02_intermediate/01_generics/02_generics.md) · [Async](../../03_advanced/01_async/02_async.md)
-
 
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）模型
 - [Type System](../02_type_system/04_type_system.md) — 类型系统（Type System）

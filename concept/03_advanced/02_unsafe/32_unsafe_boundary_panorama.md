@@ -25,6 +25,7 @@
 
 > **前置概念**: [Unsafe Rust](03_unsafe.md) · [Rust 内存模型](29_memory_model.md) · [NLL 与 Polonius](08_nll_and_polonius.md)
 > **后置概念**: [Miri](../../04_formal/04_model_checking/31_miri.md) · [Kani](../../04_formal/04_model_checking/32_kani.md) · [Async 边界全景](../01_async/38_async_boundary_panorama.md)
+> **下层概念（L2）**: [内部可变性](../../02_intermediate/02_memory_management/08_interior_mutability.md) · [智能指针](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [内存管理](../../02_intermediate/02_memory_management/03_memory_management.md)
 
 ## 📑 目录
 
@@ -409,6 +410,7 @@ flowchart TD
 | [31_miri.md](../../04_formal/04_model_checking/31_miri.md) / [32_kani.md](../../04_formal/04_model_checking/32_kani.md) | 验证工具链 | §六 工具能力的权威页 |
 | [04_safety_boundaries.md](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md) | 全局安全边界全景 | 本页是其在 unsafe 域的纵深 |
 | [38_async_boundary_panorama.md](../01_async/38_async_boundary_panorama.md) | async 域边界全景 | Pin/自引用边界交汇（手写自引用结构） |
+| [08_interior_mutability.md](../../02_intermediate/02_memory_management/08_interior_mutability.md) | 内部可变性（L2） | UnsafeCell 作为 unsafe 边界的合法入口 |
 
 > **分工声明（再确认）**: 概念推导留 [03_unsafe.md](03_unsafe.md)，边界全景在本页。两页通过本节与 [03_unsafe.md](03_unsafe.md) 的"相关概念链接"建立双向引用。
 

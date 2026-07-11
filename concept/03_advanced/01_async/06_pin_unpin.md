@@ -48,6 +48,7 @@
     - [4.4 边界测试：`Pin` 固定栈值后离开作用域（编译错误）](#44-边界测试pin-固定栈值后离开作用域编译错误)
     - [4.5 边界测试：手动实现 `Unpin` 破坏自引用保证（unsafe 逻辑错误）](#45-边界测试手动实现-unpin-破坏自引用保证unsafe-逻辑错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [判定表：Pin 使用判定](#判定表pin-使用判定)
   - [相关概念](#相关概念)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
@@ -542,6 +543,17 @@ fn main() {
 | [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs//2394-async_await.html) | ✅ 一级 | async 状态机 RFC |
 
 ---
+
+## 判定表：Pin 使用判定
+
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| 结构可重新设计消除自引用 | 重新设计：用索引/arena 替代内部指针 | §4.1 反命题树 ALT | — |
+| 必须自引用且固定后不再移动 | `Pin<Box<T>>` 或 `pin_mut!` | §4.1 反命题树 TRUE | 之后仍需移动 ⟹ 违反 Pin 契约 |
+| 类型实现 `Unpin` | Pin 无实际约束，可自由移动 | `Unpin` auto trait | 手写 `!Unpin`（`PhantomPinned`）才真正固定 |
+| 实现自定义 Future/Generator | `pin-project` 或手写 unsafe Pin 代码 | 最佳实践（模式 4/5） | 字段投影误用 ⟹ UB |
+| `async fn` 生成的 future | 默认 `!Unpin`，poll 前需固定 | RFC 2394 | 移动已 poll 的 future ⟹ UB |
+| 堆上固定 | `Box::pin`（safe） | 模式 4 | 栈上 `pin_mut!` 生命周期受限（模式 5） |
 
 ## 相关概念
 

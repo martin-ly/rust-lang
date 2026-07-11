@@ -45,6 +45,7 @@
   - [五、反命题与边界分析](#五反命题与边界分析)
   - [六、常见陷阱](#六常见陷阱)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
+  - [判定表：迭代器适配器与消费者判定](#判定表迭代器适配器与消费者判定)
   - [相关概念](#相关概念)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
@@ -842,10 +843,24 @@ fn main() {
 }
 ```
 
+## 判定表：迭代器适配器与消费者判定
+
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| 逐元素变换 | `map`（惰性适配器） | §1.3 惰性求值 | 没有消费者 ⟹ 不执行任何计算（§10.2） |
+| 筛选元素 | `filter` | §2.1 map-filter-collect | 变换+筛选一步完成 ⟹ `filter_map` |
+| 收集为集合 | `collect`（消费者） | §1.4 消费者与适配器 | 目标类型歧义 ⟹ 编译错误（§10.1），需类型标注 |
+| 归约为单值 | `fold`/`sum` | §2.2 fold 与归约 | 初始值类型不匹配 ⟹ 编译错误（§10.6） |
+| 并行遍历两个迭代器 | `zip` | §2.3 zip 与并行迭代 | 长度不一致 ⟹ 长迭代器尾部被丢弃（§10.3） |
+| 拥有集合并消费迭代 | `into_iter()`/`for` | §2.4 IntoIterator 与 for 循环 | 之后再使用原集合 ⟹ move 错误 |
+| 只读遍历 | `iter()`（产生 `&T`） | §2.4 | 需要修改元素 ⟹ `iter_mut()` |
+| 展平嵌套迭代 | `flat_map` | §10.5 | 内部迭代器所有权处理不当 ⟹ 编译错误（§10.5） |
+| 按条件截断序列 | `take_while`/`skip_while` | §12.1 | 二者语义互斥易混，误用 ⟹ 逻辑错误（§12.1） |
+
 ## 相关概念
+
 - **上层概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Generics](../01_generics/02_generics.md) · [Closures](../../01_foundation/00_start/15_closure_basics.md)
 - **下层概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Performance](../../06_ecosystem/10_performance/15_performance_optimization.md)
-
 
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Generics](../01_generics/02_generics.md) — 泛型（Generics）

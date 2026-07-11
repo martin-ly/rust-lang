@@ -444,9 +444,9 @@ graph TD
 ---
 
 ## 相关概念
+
 - **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Type System](../02_type_system/04_type_system.md) · [Lifetime](../01_ownership_borrow_lifetime/03_lifetimes.md)
 - **下层概念**: [Smart Pointers](../../02_intermediate/02_memory_management/03_memory_management.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Formal Methods](../../04_formal/01_ownership_logic/01_linear_logic.md)
-
 
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 所有权模型
 - [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) — 借用与生命周期（Lifetimes）

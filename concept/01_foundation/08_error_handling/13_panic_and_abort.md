@@ -41,6 +41,7 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [判定表：Panic vs Result 处置判定](#判定表panic-vs-result-处置判定)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Panic 与 Abort 的编译错误](#十边界测试panic-与-abort-的编译错误)
@@ -491,6 +492,17 @@ graph TD
 | [Rust Reference — Panic](https://doc.rust-lang.org/reference/runtime.html#panics) | ✅ 一级 | 参考 |
 
 ---
+
+## 判定表：Panic vs Result 处置判定
+
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| 错误由调用者引起且调用者可修复 | `Result` | §1.2 决策树 | 库中 panic ⟹ 剥夺调用方处理策略选择权 |
+| 程序 bug / 不可恢复状态 | `panic!` | §1.2 决策树 | 预期错误用 panic ⟹ 违反 API Guidelines |
+| 快速原型/示例代码 | 暂时 `unwrap`/`expect` | §1.2 unwrap 适用场景 | 生产代码残留 `unwrap` ⟹ 崩溃风险 |
+| 需要隔离单线程失败并恢复 | `catch_unwind`（栈展开） | §1.3 Panic 传播与栈展开 | `panic = "abort"` 配置下不可用 |
+| 嵌入式/FFI 边界、二进制体积敏感 | `panic = "abort"` | §1.3 中止（Abort） | 析构函数不运行 ⟹ 资源清理缺失 |
+| panic 可能跨越 FFI 边界 | 用 `catch_unwind` 拦截或 abort | §1.3 | 直接 unwind 出 `extern "C"` 边界 ⟹ UB |
 
 ## 相关概念
 

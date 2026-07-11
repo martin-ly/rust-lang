@@ -48,6 +48,7 @@
     - [4.4 边界测试：`Rc` 循环引用导致内存泄漏（逻辑错误）](#44-边界测试rc-循环引用导致内存泄漏逻辑错误)
     - [4.5 边界测试：`Box::leak` 后尝试回收（编译错误）](#45-边界测试boxleak-后尝试回收编译错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [判定表：智能指针选型判定](#判定表智能指针选型判定)
   - [相关概念](#相关概念)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
@@ -593,10 +594,23 @@ fn fixed() {
 
 ---
 
+## 判定表：智能指针选型判定
+
+| 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
+|:---|:---|:---|:---|
+| 独占堆分配 | `Box<T>` | §三 选型决策矩阵 | 需要共享 ⟹ `Box` 不适用 |
+| 单线程共享只读 | `Rc<T>` | §三 选型决策矩阵 | 跨线程 ⟹ `!Send`，编译拒绝 |
+| 多线程共享只读 | `Arc<T>` | §三 选型决策矩阵 | 单线程使用 ⟹ 原子开销浪费 |
+| 单线程共享可变 | `Rc<RefCell<T>>` | §三 选型决策矩阵 | 重复 `borrow_mut` ⟹ 运行时 panic（§4.2 边界 2） |
+| 多线程共享可变、读写均衡 | `Arc<Mutex<T>>` | §4.1 反命题树 | 锁竞争高 ⟹ 考虑 `RwLock` 或无锁结构 |
+| 多线程共享、读多写少 | `Arc<RwLock<T>>` | §4.1 反命题树 | 写频繁 ⟹ `RwLock` 劣于 `Mutex` |
+| `Rc`/`Arc` 循环引用 | `Weak<T>` 打破循环 | §4.2 边界 1 | `upgrade` 失败返回 `None`，需处理 |
+| 指针可能为空 | `Option<Rc<T>>` | §三 选型决策矩阵 | `Rc` 本身不可空 |
+
 ## 相关概念
+
 - **上层概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](03_memory_management.md)
 - **下层概念**: [Pin](../../03_advanced/01_async/06_pin_unpin.md) · [Cow](11_cow_and_borrowed.md)
-
 
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权模型
 - [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用规则
