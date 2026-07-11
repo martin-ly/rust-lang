@@ -22,6 +22,11 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from urllib.parse import urlparse
 
+# 反爬站点的备用校验正则
+CRATESIO_CRATE_RE = re.compile(r"^/crates/([^/]+)(?:/([^/]+))?$")
+CRATESIO_CATEGORY_RE = re.compile(r"^/categories/([^/]+)$")
+ACM_DOI_RE = re.compile(r"/doi/(?:pdf/|book/)?(10\.\d{4,9}/[^\s\"]+)")
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts", "maintenance"))
 TODAY = _dt.date.today().isoformat()
@@ -72,6 +77,49 @@ def collect():
     return seen
 
 
+def _probe(url, method="GET", accept_json=False):
+    try:
+        headers = {"User-Agent": UA}
+        if accept_json:
+            headers["Accept"] = "application/json"
+        req = Request(url, headers=headers, method=method)
+        with urlopen(req, timeout=TIMEOUT) as r:
+            return r.status
+    except HTTPError as e:
+        return e.code
+    except Exception:
+        return None
+
+
+def verify_cratesio(u):
+    """crates.io 对非浏览器 UA 常返回 404；通过其 JSON API 校验 crate/分类/首页是否存在。"""
+    parsed = urlparse(u)
+    if parsed.netloc not in ("crates.io", "www.crates.io"):
+        return False
+    path = parsed.path or "/"
+    if path in ("", "/"):
+        return 200 <= (_probe("https://crates.io/api/v1/summary", accept_json=True) or 0) < 400
+    m = CRATESIO_CRATE_RE.match(path)
+    if m:
+        return 200 <= (_probe(f"https://crates.io/api/v1/crates/{m.group(1)}", accept_json=True) or 0) < 400
+    m = CRATESIO_CATEGORY_RE.match(path)
+    if m:
+        return 200 <= (_probe(f"https://crates.io/api/v1/categories/{m.group(1)}", accept_json=True) or 0) < 400
+    return False
+
+
+def verify_acm_via_doi(u):
+    """ACM 站点对脚本 UA 返回 403；对含 DOI 的链接通过 doi.org 解析器校验。"""
+    parsed = urlparse(u)
+    if parsed.netloc not in ("dl.acm.org", "cacm.acm.org"):
+        return False
+    m = ACM_DOI_RE.search(u)
+    if not m:
+        return False
+    status = _probe(f"https://doi.org/{m.group(1)}", method="HEAD")
+    return status is not None and 200 <= status < 400
+
+
 def check(u):
     try:
         req = Request(u, headers={"User-Agent": UA})
@@ -83,6 +131,24 @@ def check(u):
         return u, None, f"URLError:{getattr(e, 'reason', e)}"
     except Exception as e:
         return u, None, f"{type(e).__name__}:{e}"
+
+
+def verify_and_update(results, u):
+    """对缓存中的反爬结果用备用端点复核；若可解析则视为有效并更新缓存。"""
+    r = results.get(u)
+    if not r:
+        return False
+    st = r.get("status")
+    if isinstance(st, int) and 200 <= st < 400:
+        return False
+    ok = False
+    if st in (403, 418) and verify_acm_via_doi(u):
+        ok = True
+    elif st == 404 and verify_cratesio(u):
+        ok = True
+    if ok:
+        results[u] = {"status": 200, "err": None, "ts": time.time(), "verified_by": "alternate_endpoint"}
+    return ok
 
 
 def main():
@@ -117,8 +183,20 @@ def main():
                 done += 1
                 if done % 50 == 0:
                     print(f"  ... {done}/{len(todo)}")
-        os.makedirs(os.path.dirname(CACHE), exist_ok=True)
-        json.dump(results, open(CACHE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+
+    # 对反爬结果使用备用端点复核（不影响原链接，只修正测量口径）
+    verified = 0
+    for u in urls:
+        old = results.get(u, {})
+        if isinstance(old.get("status"), int) and 200 <= old["status"] < 400:
+            continue
+        if verify_and_update(results, u):
+            verified += 1
+    if verified:
+        print(f"  ... 通过备用端点复核有效: {verified}")
+
+    os.makedirs(os.path.dirname(CACHE), exist_ok=True)
+    json.dump(results, open(CACHE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
     bad = []
     anti_bot = []      # 403/418 等站点主动反爬

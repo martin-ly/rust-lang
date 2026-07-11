@@ -1,16 +1,16 @@
 {
   "date": "2026-07-11",
-  "total_score": 54.2,
-  "grade": "FAIL",
-  "metadata_score": 36.3,
-  "topology_score": 15.5,
+  "total_score": 64.5,
+  "grade": "WARN",
+  "metadata_score": 49.2,
+  "topology_score": 41.2,
   "dedup_score": 84.7,
   "kg_score": 90,
   "inputs": {
-    "metadata_flagged": "302/474",
+    "metadata_flagged": "242/476",
     "topology_T1_def_low_rate": 0.255,
     "topology_T2_top_rate": 0.992,
-    "overlap_hits": 572,
+    "overlap_hits": 567,
     "overlap_actionable_MERGE_DOCSINTERNAL": 54,
     "kg": {
       "K1_missing_required": 0,

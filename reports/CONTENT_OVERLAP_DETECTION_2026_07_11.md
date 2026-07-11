@@ -1,11 +1,12 @@
 # 四轨内容相似度检测报告
 
-- **扫描文件数**: 977
+- **扫描文件数**: 981
 - **相似度阈值**: 0.6
-- **潜在重复对**: 0
+- **潜在重复对**: 1
 
 | 相似度 | 文件1 | 文件2 | 标题1 | 标题2 |
 |:---|:---|:---|:---|:---|
+| 0.60 | `concept\07_future\00_version_tracking\migration_197_decision_tree.md` | `docs\02_reference\quick_reference\02_rust_197_features_cheatsheet.md` | Rust 1.97 兼容性迁移判定树 | Rust 1.97 特性速查表 {#rust-197-特性速 |
 
 ## 建议
 

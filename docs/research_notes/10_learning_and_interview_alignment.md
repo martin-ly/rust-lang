@@ -167,7 +167,7 @@
 |------------|------------|------------|----------|----------|
 | `impl Trait` 和 `dyn Trait` 的区别？ | 静态/动态分发 | L3-L4 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q17 | [TRPL Ch 18.2](https://doc.rust-lang.org/book/ch18-02-trait-objects.html)、[Reference Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) |
 | 什么是型变（Variance）？ | 子类型与型变 | L4-L5 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q19 | [Rustonomicon Subtyping](https://doc.rust-lang.org/nomicon/subtyping.html) |
-| 什么是 GAT？ | 泛型关联类型 | L5-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q22 | [RFC 1590 GAT [已失效]]<!-- 原链接: https://github.com/rust-lang/rfcs/blob/master/text/1590-generic-associated-types.md --> |
+| 什么是 GAT？ | 泛型关联类型 | L5-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q22 | [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) |
 | 空指针优化（NPO）是什么？ | 布局优化 | L4-L5 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q24 | [Rust Reference Niche](https://doc.rust-lang.org/reference/type-layout.html#reprc-enums)、[Rustonomicon NPO](https://doc.rust-lang.org/nomicon/exotic-sizes.html#niche-values) |
 
 ### 并发与异步 {#并发与异步}

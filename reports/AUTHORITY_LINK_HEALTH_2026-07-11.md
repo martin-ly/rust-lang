@@ -3,13 +3,13 @@
 **EN**: International Authority URL Health
 **Summary**: 仅检查 P0/P1/P2 权威域 URL 的有效性，验证『对齐国际化权威』不仅是『有引用』且『引用有效』。带缓存，可增量。**口径**：403/418 及 crates.io 的 404 单列 anti_bot（站点对脚本 UA 反爬，链接本身可能有效，需浏览器人工复核），不计入失效 bad。
 
-> 扫描 concept/+knowledge/+docs/ 权威域唯一 URL: **1940** · 真失效（不含反爬）: **0** · 反爬 403/418: **54** · crates.io 反爬 404: **52**
+> 扫描 concept/+knowledge/+docs/ 权威域唯一 URL: **1933** · 真失效（不含反爬）: **0** · 反爬 403/418: **54** · crates.io 反爬 404: **42**
 
 | 分级 | 真失效（不含反爬） | 反爬 403/418 | crates.io 反爬 404 |
 |:---|---:|---:|---:|
-| P0 | 0 | 0 | 9 |
+| P0 | 0 | 0 | 0 |
 | P1 | 0 | 54 | 0 |
-| P2 | 0 | 0 | 43 |
+| P2 | 0 | 0 | 42 |
 
 ✅ 本次扫描的权威域 URL 无真失效（2xx/3xx；403 反爬已单列）。
 
@@ -60,15 +60,6 @@
 ## crates.io 反爬 404（前 40，真实 crate/根页在浏览器中通常可达，不计入失效）
 | 分级 | URL | 引用文件（≤3） |
 |:---|:---|:---|
-| P0 | https://github.com/rust-lang/rfcs/blob/master/text/1590-generic-associated-types.md | docs/research_notes/10_learning_and_interview_alignment.md |
-| P0 | https://github.com/rust-lang/rfcs/blob/master/text/1665.md | concept/00_meta/00_framework/theorem_inference_forest.md |
-| P0 | https://github.com/rust-lang/rfcs/blob/master/text/2616-iterable.md | docs/03_practice/03_project_11_web_server.md |
-| P0 | https://github.com/rust-lang/rfcs/blob/master/text/2645-transparent-enums.md | docs/research_notes/10_rfc_alignment_index.md |
-| P0 | https://github.com/rust-lang/rfcs/blob/master/text/3101-reserved-prefix.md | docs/research_notes/10_rfc_alignment_index.md |
-| P0 | https://github.com/rust-lang/rfcs/blob/master/text/3185-async-drop.md | docs/research_notes/10_rfc_alignment_index.md |
-| P0 | https://github.com/rust-lang/rfcs/blob/master/text/3271-rustdoc-json.md | concept/06_ecosystem/00_toolchain/77_rustdoc_196_changes.md |
-| P0 | https://github.com/rust-lang/rfcs/blob/master/text/3516-gen-blocks.md | docs/research_notes/10_async_ecosystem_alignment.md; docs/research_notes/10_version_evolution_alignment.md |
-| P0 | https://github.com/rust-lang/rfcs/blob/master/text/3560-alignment.md | docs/04_rust_language_feature_comprehensive_inventory_2026.md |
 | P2 | https://crates.io | concept/06_ecosystem/02_core_crates/03_core_crates.md; concept/06_ecosystem/08_formal_verification/44_formal_ecosystem_tower.md; concept/07_future/00_version_tracking/rust_1_90_stabilized.md |
 | P2 | https://crates.io/ | concept/02_intermediate/03_error_handling/04_error_handling.md; concept/03_advanced/00_concurrency/01_concurrency.md; concept/03_advanced/02_process_ipc/08_process_performance_engineering.md |
 | P2 | https://crates.io/categories/database | knowledge/06_ecosystem/databases/README.md |
@@ -100,6 +91,15 @@
 | P2 | https://crates.io/crates/rustls-post-quantum | concept/06_ecosystem/11_domain_applications/51_quantum_computing_rust.md |
 | P2 | https://crates.io/crates/salvo | docs/research_notes/software_design_theory/07_crate_architectures/39_salvo_architecture.md |
 | P2 | https://crates.io/crates/sentry | docs/research_notes/software_design_theory/07_crate_architectures/33_sentry_architecture.md |
+| P2 | https://crates.io/crates/session-types | concept/06_ecosystem/03_design_patterns/39_frontier_research_and_innovative_patterns.md |
+| P2 | https://crates.io/crates/skiplist | docs/research_notes/10_advanced_data_structures_guide.md |
+| P2 | https://crates.io/crates/surrealdb | docs/research_notes/software_design_theory/07_crate_architectures/31_surrealdb_architecture.md |
+| P2 | https://crates.io/crates/toasty | concept/06_ecosystem/06_data_and_distributed/23_database_access.md |
+| P2 | https://crates.io/crates/tract-onnx | docs/research_notes/software_design_theory/07_crate_architectures/36_tract_architecture.md |
+| P2 | https://crates.io/crates/typenum | concept/02_intermediate/01_generics/39_type_level_programming.md |
+| P2 | https://crates.io/crates/vector | docs/research_notes/software_design_theory/07_crate_architectures/32_vector_architecture.md |
+| P2 | https://crates.io/policies | concept/06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md; concept/06_ecosystem/07_security_and_cryptography/19_security_practices.md; docs/research_notes/10_cicd_supply_chain_alignment.md |
+| P2 | https://crates.io/security | docs/research_notes/10_crate_architecture_authoritative_alignment.md |
 
 ## 诚信
 - 仅查 P0/P1/P2 权威域（单一来源：maintenance/authority_coverage_dashboard.py）；不查其它外部域。

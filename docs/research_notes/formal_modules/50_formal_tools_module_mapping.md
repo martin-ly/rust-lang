@@ -235,7 +235,7 @@ End BoundedCounter.
 | `pub(crate)` 作为公开边界 | 所有工具 | 工具通常以 crate 为单位验证，此时 `pub(crate)` 视为公开 |
 | 宏（Macro）生成代码 | coq-of-rust / Aeneas | 通常先由 rustc 展开，工具处理展开后的代码 |
 
-> **来源:** [Aeneas – Limitations](https://github.com/AeneasVerif/aeneas/blob/main/PROGRESS.md)
+> **来源:** [Aeneas – Limitations](https://github.com/AeneasVerif/aeneas#targeted-subset-and-current-limitations)
 
 ---
 

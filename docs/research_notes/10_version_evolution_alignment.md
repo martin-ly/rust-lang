@@ -68,7 +68,7 @@
 | let-else | 1.65 | [Rust 1.65](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html) | [10_rust_book_alignment.md](10_rust_book_alignment.md) |
 | RPITIT | 1.75 | [Rust 1.75](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html) | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) |
 | async fn in trait | 1.75 | [Rust 1.75](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) |
-| `gen` blocks | 1.95 (nightly) | [RFC 3516 [已失效]]<!-- 原链接: https://github.com/rust-lang/rfcs/blob/master/text/3516-gen-blocks.md --> | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §3 |
+| `gen` blocks | 1.95 (nightly) | [RFC 3513 — gen blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §3 |
 | unsafe extern blocks | 1.82 | [Rust 1.82](https://blog.rust-lang.org/2024/10/17/Rust-1.82.0.html) | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) §5 |
 
 ---

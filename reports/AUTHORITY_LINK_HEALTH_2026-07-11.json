@@ -1,16 +1,15 @@
 {
   "date": "2026-07-11",
-  "scanned": 1940,
+  "scanned": 1933,
   "bad": 0,
   "anti_bot_403": 54,
-  "anti_bot_404_cratesio": 52,
+  "anti_bot_404_cratesio": 42,
   "by_tier": {},
   "anti_bot_by_tier": {
     "P1": 54
   },
   "anti_bot_404_by_tier": {
-    "P0": 9,
-    "P2": 43
+    "P2": 42
   },
   "bad_list": [],
   "anti_bot_list": [
@@ -533,88 +532,6 @@
   ],
   "anti_bot_404_list": [
     {
-      "url": "https://github.com/rust-lang/rfcs/blob/master/text/1590-generic-associated-types.md",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_learning_and_interview_alignment.md"
-      ]
-    },
-    {
-      "url": "https://github.com/rust-lang/rfcs/blob/master/text/1665.md",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/00_meta/00_framework/theorem_inference_forest.md"
-      ]
-    },
-    {
-      "url": "https://github.com/rust-lang/rfcs/blob/master/text/2616-iterable.md",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/03_practice/03_project_11_web_server.md"
-      ]
-    },
-    {
-      "url": "https://github.com/rust-lang/rfcs/blob/master/text/2645-transparent-enums.md",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_rfc_alignment_index.md"
-      ]
-    },
-    {
-      "url": "https://github.com/rust-lang/rfcs/blob/master/text/3101-reserved-prefix.md",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_rfc_alignment_index.md"
-      ]
-    },
-    {
-      "url": "https://github.com/rust-lang/rfcs/blob/master/text/3185-async-drop.md",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_rfc_alignment_index.md"
-      ]
-    },
-    {
-      "url": "https://github.com/rust-lang/rfcs/blob/master/text/3271-rustdoc-json.md",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/06_ecosystem/00_toolchain/77_rustdoc_196_changes.md"
-      ]
-    },
-    {
-      "url": "https://github.com/rust-lang/rfcs/blob/master/text/3516-gen-blocks.md",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_async_ecosystem_alignment.md",
-        "docs/research_notes/10_version_evolution_alignment.md"
-      ]
-    },
-    {
-      "url": "https://github.com/rust-lang/rfcs/blob/master/text/3560-alignment.md",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/04_rust_language_feature_comprehensive_inventory_2026.md"
-      ]
-    },
-    {
       "url": "https://crates.io",
       "tier": "P2",
       "status": 404,
@@ -999,15 +916,6 @@
       "err": "HTTPError",
       "files": [
         "concept/06_ecosystem/07_security_and_cryptography/19_security_practices.md"
-      ]
-    },
-    {
-      "url": "https://github.com/AeneasVerif/aeneas/blob/main/PROGRESS.md",
-      "tier": "P2",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/formal_modules/50_formal_tools_module_mapping.md"
       ]
     }
   ]

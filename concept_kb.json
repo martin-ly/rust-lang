@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 462,
-    "generated_at": "2026-07-10T23:33:24.459659+00:00"
+    "generated_at": "2026-07-11T01:33:11.933249+00:00"
   },
   "files": [
     {
@@ -8091,7 +8091,7 @@
       "layer": "L1",
       "title": "所有权清单自测：Brown University Ownership Inventory",
       "positioning": "> 本文档为 **Brown University Interactive Book** 中「Ownership Inventory」概念清单的本地映射。",
-      "line_count": 226,
+      "line_count": 225,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -13669,7 +13669,7 @@
       "layer": "L1",
       "title": "测验：类型系统（试点扩展）",
       "positioning": "嵌入式互动测验扩展——验证 L1 类型系统（Type System）核心概念（标量/复合类型、enum、模式匹配（Pattern Matching）、类型转换）的掌握程度。",
-      "line_count": 540,
+      "line_count": 539,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -13833,7 +13833,7 @@
       "layer": "L1",
       "title": "测验：错误处理（试点扩展）",
       "positioning": "嵌入式互动测验扩展——验证 L1 错误处理（Error Handling）核心概念（Result/Option、`?` 运算符、panic、自定义错误）的掌握程度。",
-      "line_count": 653,
+      "line_count": 652,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -14026,7 +14026,7 @@
       "layer": "L1",
       "title": "测验：模块系统与测试（L1 试点扩展）",
       "positioning": "L1 嵌入式互动测验——验证模块系统（package/crate/module、可见性、路径）与测试（单元测试、集成测试、文档测试）核心概念的掌握程度。",
-      "line_count": 742,
+      "line_count": 741,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -14242,7 +14242,7 @@
       "layer": "L1",
       "title": "测验：闭包与迭代器（L1 试点扩展）",
       "positioning": "L1 嵌入式互动测验——验证闭包（捕获环境、Fn/FnMut/FnOnce、move 闭包（Closures））与迭代器（Iterator trait、适配器、消费者、惰性求值）核心概念的掌握程度。",
-      "line_count": 728,
+      "line_count": 727,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -14602,7 +14602,7 @@
       "layer": "L1",
       "title": "测验：所有权、借用与生命周期（试点）",
       "positioning": "> 本文件为**嵌入式互动测验试点**，采用 `<details>` 交互标签实现\"自测-展开-核对\"的轻量级学习闭环。",
-      "line_count": 538,
+      "line_count": 537,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -14643,7 +14643,7 @@
           "flags": [
             "fn main() { let s1 = String::from(\"hello\"); let s2 = s1; println!(\"{s1}\"); }```"
           ],
-          "lines": 95,
+          "lines": 94,
           "should_fail": false,
           "code_preview": "> <details> <summary>💡 点击展开答案与解析</summary> **答案**：❌ 不能编译。 > **错误信息**：`borrow of ..."
         },
@@ -15441,7 +15441,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\00_traits\\09_serde_patterns.md",
       "layer": "L2",
       "title": "Serde 序列化模式：Rust 的类型驱动数据转换",
-      "positioning": "深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏（Macro）、自定义序列化逻辑、以及类型系统（Type System）如何保障数据转换的安全性。",
+      "positioning": "深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/)]`/`Deserialize` derive 宏（Macro）、自定义序列化逻辑、以及类型系统（Type System）如何保障数据转换的安全性。",
       "line_count": 902,
       "theorem_chains": [
         {
@@ -17286,7 +17286,7 @@
       "layer": "L2",
       "title": "测验：Trait 与泛型（试点扩展）",
       "positioning": "嵌入式互动测验扩展——验证 L2 Trait 与泛型（Generics）核心概念（trait 定义与实现、泛型约束、关联类型、trait 对象）的掌握程度。",
-      "line_count": 701,
+      "line_count": 700,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -17329,7 +17329,7 @@
             "} fn main() { let article = Article { headline: String::from(\"News\") }; println!(\"{}\"",
             "article.summarize()); }```"
           ],
-          "lines": 77,
+          "lines": 76,
           "should_fail": false,
           "code_preview": "> <details> <summary>💡 点击展开答案与解析</summary> > **答案**：❌ 不能编译。 > **错误信息**：`no metho..."
         },
@@ -18515,7 +18515,7 @@
       "layer": "L2",
       "title": "测验：内存管理（L2 试点扩展）",
       "positioning": "L2 嵌入式互动测验——验证智能指针（Smart Pointer）核心概念（Box、Rc/Arc、RefCell/Mutex、内部可变性模式）的掌握程度。",
-      "line_count": 747,
+      "line_count": 746,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -18557,7 +18557,7 @@
             "fn main() { let b = Box::new(5); println!(\"{}\"",
             "b); }```"
           ],
-          "lines": 87,
+          "lines": 86,
           "should_fail": false,
           "code_preview": "> <details> <summary>💡 点击展开答案与解析</summary> > **答案**：✅ 能编译，输出 `5`。 > **解析**： > | ..."
         },
@@ -23337,7 +23337,7 @@
       "layer": "L3",
       "title": "测验：并发与异步（L3 试点扩展）",
       "positioning": "L3 嵌入式互动测验——验证并发模型（Send/Sync、Mutex/Arc、channel）与异步（Async）编程（Future、Pin、await）核心概念的掌握程度。",
-      "line_count": 738,
+      "line_count": 737,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -27299,7 +27299,7 @@
       "layer": "L3",
       "title": "测验：Unsafe Rust（L3 试点扩展）",
       "positioning": "L3 嵌入式互动测验——验证 Unsafe Rust 核心概念（原始指针（Raw Pointer）、unsafe 块/函数/Trait、 FFI、 Miri 验证）的掌握程度。",
-      "line_count": 647,
+      "line_count": 646,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -28617,7 +28617,7 @@
       "layer": "L3",
       "title": "测验：宏系统（L3 试点扩展）",
       "positioning": "L3 嵌入式互动测验——验证宏系统核心概念（声明宏（Declarative Macro） `macro_rules!`、重复模式、卫生性、过程宏（Procedural Macro））的掌握程度。",
-      "line_count": 707,
+      "line_count": 706,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -28660,7 +28660,7 @@
             "2",
             "3] 展开为： { let mut temp_vec = Vec::new(); temp_vec.push(1); temp_vec.push(2); temp_vec.push(3); temp_vec }```"
           ],
-          "lines": 85,
+          "lines": 84,
           "should_fail": false,
           "code_preview": "> **解析**：`vec!` 是 Rust 标准库中的**声明宏**（declarative macro），使用 `macro_rules!` 定义。 > *..."
         },
@@ -36583,7 +36583,7 @@
       "layer": "L4",
       "title": "测验：形式化方法概念（L4 试点扩展）",
       "positioning": "L4 嵌入式互动测验——验证形式化方法核心概念（分离逻辑、RustBelt、类型安全、验证工具链）的概念掌握程度。",
-      "line_count": 622,
+      "line_count": 621,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -38770,7 +38770,7 @@
       "layer": "L5",
       "title": "C++ vs Rust：构造、运算符、RTTI、友元",
       "positioning": "",
-      "line_count": 231,
+      "line_count": 242,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -39380,7 +39380,7 @@
       "layer": "L5",
       "title": "Rust vs C++：ABI、对象模型与内存布局",
       "positioning": "",
-      "line_count": 840,
+      "line_count": 851,
       "theorem_chains": [
         {
           "text": "| Rust vs C++：ABI、对象模型与内存布局 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -39899,7 +39899,7 @@
       "layer": "L5",
       "title": "Rust vs JavaScript：系统编程与脚本执行的范式差异",
       "positioning": "对比分析 **Rust**（编译型、强类型、内存安全（Memory Safety））与 **JavaScript**（解释型、动态类型、事件驱动）在语言语义、运行时（Runtime）模型、异步（Async）处理和生态工具链四个维度的本质差异，特别关注 WASM 作为两者交汇点的作用。",
-      "line_count": 685,
+      "line_count": 696,
       "theorem_chains": [
         {
           "text": "| Rust vs JavaScript：系统编程与脚本执行的范式差异 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -40209,7 +40209,7 @@
       "layer": "L5",
       "title": "Rust vs C#：托管与原生之路",
       "positioning": "对比分析 **Rust** 与 **C#** 的设计哲学——从内存管理、泛型（Generics）系统到异步（Async）模型，揭示托管语言与原生语言在工程实践中的权衡。",
-      "line_count": 823,
+      "line_count": 834,
       "theorem_chains": [
         {
           "text": "| Rust vs C：托管与原生之路 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -40528,7 +40528,7 @@
       "layer": "L5",
       "title": "Rust 安全保证的边界条件全景（Safety Boundary Panorama）",
       "positioning": "本文件汇总 Rust 所有**编译期安全保证**的边界条件、失效场景和反例，形成完整的\"安全 ⇄ 不安全\"边界地图。",
-      "line_count": 1005,
+      "line_count": 1018,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -40643,6 +40643,7 @@
         "../../00_meta/00_framework/boundary_extension_tree.md",
         "../../00_meta/00_framework/fault_tree_analysis_collection.md",
         "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/02_sources/authority_source_map.md",
         "../../00_meta/02_sources/international_authority_index.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -40675,7 +40676,7 @@
       "layer": "L5",
       "title": "测验：Rust vs 系统编程语言（L5 试点扩展）",
       "positioning": "L5 嵌入式互动测验——通过代码对比验证 Rust 与 C/C++/Go 在内存安全（Memory Safety）、并发模型、错误处理（Error Handling）等维度的核心差异。",
-      "line_count": 726,
+      "line_count": 725,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将语法规则、编译期检查与运行时（Runtime）语义串联起来。",
@@ -41032,7 +41033,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\00_toolchain\\13_logging_observability.md",
       "layer": "L6",
       "title": "日志与可观测性：Rust 服务端监控生态",
-      "positioning": "覆盖 Rust 生态中 **日志（log/tracing [来源: [tokio tracing](https://docs.rs/tracing/latest/tracing/)]）**、**指标（metrics）**、**分布式追踪（distributed tracing）**三大可观测性支柱，分析各 crate 的设计哲学与选型策略。",
+      "positioning": "覆盖 Rust 生态中 **日志（log/tracing [来源: [tokio tracing](https://docs.rs/tracing/latest/tracing/trait.Instrument.html)]）**、**指标（metrics）**、**分布式追踪（distributed tracing）**三大可观测性支柱，分析各 crate 的设计哲学与选型策略。",
       "line_count": 721,
       "theorem_chains": [
         {
@@ -41501,7 +41502,7 @@
       "layer": "L6",
       "title": "测验：Rust 工具链（L6 试点扩展）",
       "positioning": "L6 嵌入式互动测验——验证 Rust 工具链核心概念（Cargo 依赖管理、Clippy lint、Miri UB 检测、rustfmt、文档生成）的掌握程度。",
-      "line_count": 559,
+      "line_count": 558,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: 测验 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -41590,7 +41591,7 @@
       "layer": "L6",
       "title": "将 Rust 集成到现有平台",
       "positioning": "系统对比 Android AOSP、Chromium、Bare Metal 三个典型场景中 Rust 的集成方式、构建系统、互操作模式与常见陷阱。",
-      "line_count": 314,
+      "line_count": 312,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: 将 Rust 集成到现有平台 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -48917,7 +48918,7 @@
       "layer": "L6",
       "title": "C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）",
       "positioning": "",
-      "line_count": 456,
+      "line_count": 455,
       "theorem_chains": [
         {
           "text": "- **定理**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 定义 ⟹ 类型安全保证",
@@ -49071,7 +49072,7 @@
       "line_count": 1527,
       "theorem_chains": [
         {
-          "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]",
+          "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))]",
           "type": "paragraph"
         },
         {
@@ -56507,7 +56508,7 @@
       "layer": "L7",
       "title": "Rust 1.96 稳定特性（当前 patch 1.96.1）",
       "positioning": "",
-      "line_count": 316,
+      "line_count": 315,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: Rust 1.96 稳定特性（当前 patch 1.96.1 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -60755,7 +60756,7 @@
       "layer": "L7",
       "title": "cargo-semver-checks：从社区工具到 Cargo 官方集成",
       "positioning": "跟踪 `cargo-semver-checks` 从独立社区工具向 Cargo 官方生态集成的演进过程，分析其对 Rust 供应链稳定性和 API 兼容性验证的结构性影响。",
-      "line_count": 221,
+      "line_count": 220,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: cargo-semver-checks 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
@@ -60865,7 +60866,7 @@
       "layer": "L7",
       "title": "AArch64 SVE / SME：可伸缩向量扩展预览",
       "positioning": "跟踪 Rust 对 ARM AArch64 **SVE（Scalable Vector Extension，可伸缩向量扩展）** 和 **SME（Scalable Matrix Extension，可伸缩矩阵扩展）** 的支持进展。SVE/SME 是 ARMv9-A 的关键特性，代表向量计算从固定长度向硬件自适应长度的范式转变。",
-      "line_count": 269,
+      "line_count": 268,
       "theorem_chains": [
         {
           "text": "> **定理 1** [Tier 2]: AArch64 SVE / SME 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时（Runtime）错误。",
