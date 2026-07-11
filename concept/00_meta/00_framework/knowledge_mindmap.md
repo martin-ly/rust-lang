@@ -35,6 +35,7 @@
     - [测验 1：本文档《Rust 知识体系全局思维导图（Knowledge Mindmap）》在 Rust 知识体系中属于哪一层级的元数据？（理解层）](#测验-1本文档rust-知识体系全局思维导图knowledge-mindmap在-rust-知识体系中属于哪一层级的元数据理解层)
     - [测验 2：《Rust 知识体系全局思维导图（Knowledge Mindmap）》的主要用途是什么？（理解层）](#测验-2rust-知识体系全局思维导图knowledge-mindmap的主要用途是什么理解层)
     - [测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）](#测验-3元数据层文档能否替代-l1-l7-的核心概念学习理解层)
+  - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
 
 ## 一、L0-L7 全局知识体系 Mindmap
 

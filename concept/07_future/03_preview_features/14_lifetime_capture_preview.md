@@ -240,7 +240,6 @@ fn main() {}
 Rust 2024 Edition（1.85.0）已稳定 lifetime capture 改进；`use<..>` 精确捕获语法自 Rust 1.82.0 起已稳定。`gen {}` / `yield`、`async_drop`、`RTN` 等仍为 nightly 特性。
 </details>
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）

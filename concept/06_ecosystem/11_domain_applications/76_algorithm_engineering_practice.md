@@ -86,6 +86,7 @@
     - [生产实践](#生产实践)
   - [过渡段](#过渡段)
   - [定理链](#定理链)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -1938,7 +1939,6 @@ pub async fn rate_limited_api(limiter: &TokenBucket, request: String) -> Result<
 | 复杂度分析 ⟹ 可扩展性预测 | 大 O 与内存占用评估 | 指导算法选型 |
 | 属性测试 ⟹ 正确性保障 | 随机输入验证不变量 | 发现边界缺陷 |
 | 性能分析 ⟹ 针对性优化 | 定位真正热点 | 避免无效微优化 |
-
 
 ---
 

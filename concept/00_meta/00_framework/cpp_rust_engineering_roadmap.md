@@ -37,6 +37,7 @@
   - [六、与 Phase B 计划的衔接](#六与-phase-b-计划的衔接)
   - [七、L1 / L2 / L3 总结](#七l1--l2--l3-总结)
   - [八、延伸阅读](#八延伸阅读)
+  - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
 
 ## 一、核心命题
 

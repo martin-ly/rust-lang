@@ -2,7 +2,7 @@
 """模板套话 lint：扫描 concept/ 中批量注入风格的通用模板句黑名单。
 
 背景：2026-07 审计发现 59-95 个 concept/ 文件被批量脚本
-（add_backward_reasoning.py / add_backward_l2l3.py 等）注入了仅主题名不同的
+（已归档的一次性脚本 scripts/archive/one_off_2026/add_backward_reasoning.py / add_backward_l2l3.py 等）注入了仅主题名不同的
 通用模板句（反命题决策树、认知路径五步骤、定理套话、过渡套话、反向推理），
 已于 2026-07-12 清理（见 reports/TEMPLATE_CLICHE_CLEANUP_2026_07_12.md）。
 本脚本内置该黑名单，防止回归。

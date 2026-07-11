@@ -93,6 +93,4 @@
 - 层内模型映射见 [../04_navigation/intra_layer_model_map.md](../04_navigation/intra_layer_model_map.md)
 - 形式化本体规范见 [kg_ontology_v2.md](kg_ontology_v2.md)
 
-
 ---
-

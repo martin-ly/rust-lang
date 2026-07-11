@@ -42,7 +42,7 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见困惑解析](#五常见困惑解析)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
+  - [相关概念](#相关概念)
   - [七、多级引用（Reference）语义与部分重借用（Multi-level References \& Partial Reborrows）](#七多级引用语义与部分重借用multi-level-references--partial-reborrows)
     - [7.1 多级引用（Reference）类型](#71-多级引用类型)
       - [7.1.1 共享引用（Reference）的嵌套：`&T` → `&&T` → `&&&T`](#711-共享引用的嵌套t--t--t)

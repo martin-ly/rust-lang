@@ -9,7 +9,6 @@
 > **EN**: Table of Contents
 > **前置概念**: N/A
 > **后置概念**: N/A
-
 > > **权威来源**: 本文件为 `concept/` 权威页。
 
 - [Rust 概念知识体系 —— 全面分析论证与权威对齐](README.md)

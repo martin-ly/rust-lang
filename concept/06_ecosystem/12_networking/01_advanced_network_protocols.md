@@ -281,7 +281,6 @@ flowchart TD
 | 零拷贝解析 ⟹ 高吞吐 | 直接引用（Reference）原始缓冲区 | 减少数据拷贝开销 |
 | 属性测试 ⟹ 协议符合性 | 自动生成输入验证解析器 | 发现边界情况缺陷 |
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）

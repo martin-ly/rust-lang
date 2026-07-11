@@ -54,6 +54,7 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ## 一、核心概念
 >
@@ -400,7 +401,6 @@ impl<T> TaggedPtr<T> {
 ### 反命题与边界
 
 > **反命题**: "Arbitrary Self Types 预览：自定义方法接收器 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
-
 
 ---
 

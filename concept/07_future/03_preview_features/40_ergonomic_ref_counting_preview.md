@@ -57,7 +57,7 @@
     - [blocker](#blocker)
   - [四、演进路线](#四演进路线)
   - [五、与 Rust for Linux 的关系](#五与-rust-for-linux-的关系)
-  - [六、相关概念文件](#六相关概念文件)
+  - [六、相关概念](#六相关概念)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1："人机工程学的引用计数"指什么？（理解层）](#测验-1人机工程学的引用计数指什么理解层)
     - [测验 2：`Arc::clone(&arc)` 与 `arc.clone()` 在语义上有什么区别？（理解层）](#测验-2arcclonearc-与-arcclone-在语义上有什么区别理解层)

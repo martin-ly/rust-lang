@@ -38,7 +38,7 @@
     - [2.4 Day 4 — Android \& 高级主题](#24-day-4--android--高级主题)
   - [三、互补性分析](#三互补性分析)
   - [四、来源与延伸阅读](#四来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
+  - [相关概念](#相关概念)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：本文档《Comprehensive Rust 课程映射》在 Rust 知识体系中属于哪一层级的元数据？（理解层）](#测验-1本文档comprehensive-rust-课程映射在-rust-知识体系中属于哪一层级的元数据理解层)
     - [测验 2：《Comprehensive Rust 课程映射》的主要用途是什么？（理解层）](#测验-2comprehensive-rust-课程映射的主要用途是什么理解层)

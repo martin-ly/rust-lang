@@ -89,5 +89,5 @@
 |:---|:---|
 | `scripts/kb_auditor.py` | 检查模板化 ⟹ 标记、元数据完整性 |
 | `scripts/detect_content_overlap.py` | 发现跨文件重复正文 |
-| `scripts/add_backward_reasoning.py` | 补充反向推理语句 |
-| `scripts/add_backward_l2l3.py` | 补充 L2/L3 总结段落 |
+| `scripts/archive/one_off_2026/add_backward_reasoning.py`（已归档） | 补充反向推理语句 |
+| `scripts/archive/one_off_2026/add_backward_l2l3.py`（已归档） | 补充 L2/L3 总结段落 |

@@ -34,6 +34,7 @@
   - [七、与 Phase C 表征空间坐标系的衔接](#七与-phase-c-表征空间坐标系的衔接)
   - [八、L1 / L2 / L3 总结](#八l1--l2--l3-总结)
   - [九、延伸阅读](#九延伸阅读)
+  - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
 
 ## 一、核心命题
 

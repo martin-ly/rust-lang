@@ -236,7 +236,6 @@ fn main() {}
 部分功能已在 stable 中可用（关联类型位置）。完整的 TAIT 预计在 2026-2027 年间逐步稳定化。
 </details>
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）

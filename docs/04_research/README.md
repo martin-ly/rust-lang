@@ -25,7 +25,7 @@ docs/04_research/
 1. 禁止在 C 类目录新建文件（除非明确标记为临时研究）。
 2. 每季度运行一次 `scripts/detect_content_overlap.py` 检测重复。
 3. 研究笔记完成 90 天后必须决定：迁移到主轨 / 归档 / 删除。
-4. 每次归档后运行 `scripts/maintenance/fix_archived_research_notes_links.py` 清理引用（Reference）残留。
+4. 每次归档后运行 `scripts/archive/one_off_2026/fix_archived_research_notes_links.py`（已归档） 清理引用（Reference）残留。
 
 ---
 

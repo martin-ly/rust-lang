@@ -29,6 +29,7 @@
   - [5. 使用规范](#5-使用规范)
   - [6. 维护责任](#6-维护责任)
   - [7. 权威来源（References · 国际权威对齐）](#7-权威来源references--国际权威对齐)
+  - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
 
 ## 1. 注册表目的
 

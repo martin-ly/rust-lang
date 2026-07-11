@@ -725,7 +725,6 @@ flowchart TD
 - **P0 版本事实**: [`rust_1_97_stabilized.md`](rust_1_97_stabilized.md)（31 项特性与 §2.6/§2.7/§2.8 / §7）
 - **映射维护**: [`feature_domain_matrix_197.md`](feature_domain_matrix_197.md) · [`authority_source_map.md`](../../00_meta/02_sources/authority_source_map.md)
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）

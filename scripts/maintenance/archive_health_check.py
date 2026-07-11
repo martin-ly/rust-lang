@@ -27,7 +27,7 @@ RESEARCH_NOTES = ROOT / "docs" / "research_notes"
 ARCHIVE_RESEARCH_NOTES = ROOT / "archive" / "research_notes_2026_06_25"
 TMP_DIR = ROOT / "tmp"
 
-# 与 archive_research_notes_candidates.py 保持一致的黑名单
+# 与已归档脚本 scripts/archive/one_off_2026/archive_research_notes_candidates.py 保持一致的黑名单
 BLACKLIST_PATTERNS = [
     r"(^|/)10_template\.md$",
     r"(^|/)10_feature_template\.md$",

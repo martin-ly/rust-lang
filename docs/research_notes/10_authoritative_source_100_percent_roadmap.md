@@ -59,8 +59,8 @@
 | 里程碑 | 说明 | 验证方式 |
 |--------|------|----------|
 | **P0 官方来源 100%** | 全部 311 篇 Markdown 文件均引用至少一个 P0 官方来源 | [`authority_coverage_dashboard.py`](../../scripts/maintenance/authority_coverage_dashboard.py) |
-| **P1 学术来源 100%** | 全部 311 篇 Markdown 文件均引用至少一个 P1 学术/形式化来源 | [`p1_coverage_sprint.py`](../../scripts/maintenance/p1_coverage_sprint.py) + 手工补齐 |
-| **P2 社区来源 100%** | 全部 311 篇 Markdown 文件均引用至少一个 P2 社区/生态来源 | [`p2_coverage_sprint.py`](../../scripts/maintenance/p2_coverage_sprint.py) + 手工补齐 |
+| **P1 学术来源 100%** | 全部 311 篇 Markdown 文件均引用至少一个 P1 学术/形式化来源 | [`p1_coverage_sprint.py`](../../scripts/archive/one_off_2026/p1_coverage_sprint.py) + 手工补齐 |
+| **P2 社区来源 100%** | 全部 311 篇 Markdown 文件均引用至少一个 P2 社区/生态来源 | [`p2_coverage_sprint.py`](../../scripts/archive/one_off_2026/p2_coverage_sprint.py) + 手工补齐 |
 | **P0+P1+P2 全层级 100%** | 全部 311 篇 Markdown 文件同时覆盖 P0/P1/P2 三个层级 | [`final_authoritative_source_checklist.py`](../../scripts/maintenance/final_authoritative_source_checklist.py) |
 | **所有文件具备权威来源标记** | 每篇研究笔记均在元信息或正文中标注 `> **来源**` / `> **权威来源**` | [`check_research_notes.py`](../../scripts/maintenance/check_research_notes.py) 检查项 #2 |
 | **反例文件 RFC 链接 100%** | 所有 `60_*_counterexamples.md` 反例边界文件均映射到对应 RFC 或官方规范 | [`check_research_notes.py`](../../scripts/maintenance/check_research_notes.py) 检查项 #10 |
@@ -102,7 +102,7 @@
 |--------|----------|----------|
 | 扫描所有缺少 P1 的文件 | [`check_authoritative_source_gaps.py`](../../scripts/maintenance/check_authoritative_source_gaps.py) | P1 缺口清单 |
 | 按概念族生成 P1 补全建议 | [`suggest_authoritative_sources.py`](../../scripts/maintenance/suggest_authoritative_sources.py) | 每族推荐学术链接 |
-| 执行 Crate 架构、形式化模块、边界系统等重点族 P1 补全 | [`p1_coverage_sprint.py`](../../scripts/maintenance/p1_coverage_sprint.py) | 33 个文件新增 P1 引用 |
+| 执行 Crate 架构、形式化模块、边界系统等重点族 P1 补全 | [`p1_coverage_sprint.py`](../../scripts/archive/one_off_2026/p1_coverage_sprint.py) | 33 个文件新增 P1 引用 |
 | 手工补齐枢纽文档与速查卡 P1 缺口 | 人工审核 | 8 个文件补充 ACM/IEEE/RustBelt 等 P1 来源 |
 | 验证 P1 覆盖率达标 | [`authority_coverage_dashboard.py`](../../scripts/maintenance/authority_coverage_dashboard.py) | P1 = 100% 报告 |
 
@@ -122,7 +122,7 @@
 |--------|----------|----------|
 | 扫描所有缺少 P2 的文件 | [`check_authoritative_source_gaps.py`](../../scripts/maintenance/check_authoritative_source_gaps.py) | P2 缺口清单 |
 | 按概念族生成 P2 补全建议 | [`suggest_authoritative_sources.py`](../../scripts/maintenance/suggest_authoritative_sources.py) | 每族推荐社区链接 |
-| 执行权威来源对齐专题文档、反例边界文件、速查卡等 P2 补全 | [`p2_coverage_sprint.py`](../../scripts/maintenance/p2_coverage_sprint.py) | 45 个文件新增 P2 引用 |
+| 执行权威来源对齐专题文档、反例边界文件、速查卡等 P2 补全 | [`p2_coverage_sprint.py`](../../scripts/archive/one_off_2026/p2_coverage_sprint.py) | 45 个文件新增 P2 引用 |
 | 手工补齐根目录索引 P2 缺口 | 人工审核 | INDEX.md / README.md 补充 Rust Design Patterns / This Week in Rust |
 | 验证 P2 覆盖率达标 | [`authority_coverage_dashboard.py`](../../scripts/maintenance/authority_coverage_dashboard.py) | P2 = 100% 报告 |
 
@@ -158,11 +158,11 @@
 | [`authority_coverage_dashboard.py`](../../scripts/maintenance/authority_coverage_dashboard.py) | 按概念族统计 P0/P1/P2 覆盖率及 P0+P1+P2 综合覆盖率 | Markdown 覆盖率仪表板 |
 | [`check_authoritative_source_gaps.py`](../../scripts/maintenance/check_authoritative_source_gaps.py) | 识别各概念族缺少 P0/P1/P2 的具体文件 | 缺口报告 |
 | [`suggest_authoritative_sources.py`](../../scripts/maintenance/suggest_authoritative_sources.py) | 基于概念族关键词推荐应补充的 P0/P1/P2 权威来源链接 | Markdown 补全建议 |
-| [`p1_coverage_sprint.py`](../../scripts/maintenance/p1_coverage_sprint.py) | 对 P1 覆盖率 < 50% 的概念族文件自动追加「学术权威参考」小节（幂等） | 已修改文件清单 |
-| [`p2_coverage_sprint.py`](../../scripts/maintenance/p2_coverage_sprint.py) | 对存在 P2 缺口的概念族文件自动追加「社区权威参考」小节（幂等，支持 `--dry-run`） | 已修改文件清单 |
+| [`p1_coverage_sprint.py`](../../scripts/archive/one_off_2026/p1_coverage_sprint.py) | 对 P1 覆盖率 < 50% 的概念族文件自动追加「学术权威参考」小节（幂等） | 已修改文件清单 |
+| [`p2_coverage_sprint.py`](../../scripts/archive/one_off_2026/p2_coverage_sprint.py) | 对存在 P2 缺口的概念族文件自动追加「社区权威参考」小节（幂等，支持 `--dry-run`） | 已修改文件清单 |
 | [`final_authoritative_source_checklist.py`](../../scripts/maintenance/final_authoritative_source_checklist.py) | 最终质量门禁检查，输出各概念族 P0/P1/P2 达标状态与推荐操作 | 检查清单报告 |
-| [`p1_coverage_sprint.py`](../../scripts/maintenance/p1_coverage_sprint.py) | 对 P1 覆盖率 < 50% 的概念族文件自动追加「学术权威参考」小节（跳过枢纽文档与已覆盖文件） | 已修改文件清单 |
-| [`p2_coverage_sprint.py`](../../scripts/maintenance/p2_coverage_sprint.py) | 对存在 P2 缺口的概念族文件自动追加「社区权威参考」小节，支持 `--dry-run` 预览（幂等） | 已修改/待修改文件清单 |
+| [`p1_coverage_sprint.py`](../../scripts/archive/one_off_2026/p1_coverage_sprint.py) | 对 P1 覆盖率 < 50% 的概念族文件自动追加「学术权威参考」小节（跳过枢纽文档与已覆盖文件） | 已修改文件清单 |
+| [`p2_coverage_sprint.py`](../../scripts/archive/one_off_2026/p2_coverage_sprint.py) | 对存在 P2 缺口的概念族文件自动追加「社区权威参考」小节，支持 `--dry-run` 预览（幂等） | 已修改/待修改文件清单 |
 
 ---
 

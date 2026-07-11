@@ -293,7 +293,7 @@ ex:AffineLogic a ex:Theory ;
 | 前缀 `c:` / `t:` / `m:` / `p:` / `r:` / `prim:` | 映射为 `ex:` 命名空间下的类 | ⚠️ 需脚本转换 |
 | Turtle 示例 | v1 Turtle 仍有效；v2 新增 RDF-star 注解 | ✅ 向后兼容 |
 
-**迁移脚本计划**：后续提供 `scripts/migrate_kg_v1_to_v2.py`，自动将 v1 `kg_data.json` 转换为 v2 JSON-LD，并为所有关系附加默认元数据（confidence=1.0, reviewed=false）。
+**迁移脚本计划**：迁移脚本 `scripts/archive/one_off_2026/migrate_kg_v1_to_v2.py`（已执行完成并归档），自动将 v1 `kg_data.json` 转换为 v2 JSON-LD，并为所有关系附加默认元数据（confidence=1.0, reviewed=false）。
 
 ---
 
