@@ -362,7 +362,7 @@ flowchart TD
    <https://blog.rust-lang.org/2017/06/08/Rust-1.18.html>
 
 3. **Rust Compiler Team**. "Trait Solver Refactor". MCP (Major Change Proposal) #529, 2021.
-   [https://rust-lang.github.io/compiler-team/minutes/design-meeting/2021-03-17-next-generation-trait-solver.html [已失效]]<!-- 原链接: https://rust-lang.github.io/compiler-team/minutes/design-meeting/2021-03-17-next-generation-trait-solver.html -->
+   [https://rust-lang.github.io/compiler-team/ [已失效]]<!-- 原链接: https://rust-lang.github.io/compiler-team/ -->
 
 ### RFC 与设计文档 {#rfc-与设计文档}
 >

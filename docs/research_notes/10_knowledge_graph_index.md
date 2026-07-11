@@ -227,7 +227,7 @@
 > [Rust Reference](https://doc.rust-lang.org/reference/) |
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) |
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) |
-> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) |
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) |
 > [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
 

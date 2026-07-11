@@ -199,7 +199,7 @@
 
 #### Rust Performance Book 内存视角 {#rust-performance-book-内存视角}
 
-> **来源: [The Rust Performance Book – Memory](https://nnethercote.github.io/perf-book/memory.html)**
+> **来源: [The Rust Performance Book – Memory](https://nnethercote.github.io/perf-book/)**
 
 Rust 的内存性能优化可从以下维度切入：
 
@@ -288,7 +288,7 @@ Rust 的内存性能优化可从以下维度切入：
 
 ### Rust 1.96+ / Edition 2024 工具链 {#rust-196-edition-2024-工具链}
 
-> **来源: [The Rust Performance Book – Memory](https://nnethercote.github.io/perf-book/memory.html)**
+> **来源: [The Rust Performance Book – Memory](https://nnethercote.github.io/perf-book/)**
 >
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -681,7 +681,7 @@ fn analyze_memory_layout() {
 
 - [Rust 内存模型](https://doc.rust-lang.org/nomicon/)
 - [Valgrind 文档](https://valgrind.org/docs/manual/manual.html)
-- [The Rust Performance Book – Memory](https://nnethercote.github.io/perf-book/memory.html) - Rust 内存优化权威指南
+- [The Rust Performance Book – Memory](https://nnethercote.github.io/perf-book/) - Rust 内存优化权威指南
 - [Rustonomicon](https://doc.rust-lang.org/nomicon/) - Rust 内存模型与安全边界
 - [Rust Standard Library](https://doc.rust-lang.org/std/) - `GlobalAlloc`、`Vec`、`HashMap` API
 - [Rust Reference – Type Layout](https://doc.rust-lang.org/reference/type-layout.html) - 类型布局与对齐
@@ -768,7 +768,7 @@ fn analyze_memory_layout() {
 
 | 概念/方法 | 权威来源 URL | 章节/要点 |
 | :--- | :--- | :--- |
-| 内存布局与优化 | [The Rust Performance Book – Memory](https://nnethercote.github.io/perf-book/memory.html) | 堆/栈、缓存、布局、分配器 |
+| 内存布局与优化 | [The Rust Performance Book – Memory](https://nnethercote.github.io/perf-book/) | 堆/栈、缓存、布局、分配器 |
 | 全局分配器 | [Rust Standard Library – std::alloc::GlobalAlloc](https://doc.rust-lang.org/std/) | `GlobalAlloc`、`Layout`、`#[global_allocator]` |
 | 未定义行为检测 | [Miri README](https://github.com/rust-lang/miri) | `-Zmiri-tag-raw-pointers`、数据竞争检测 |
 | Vec/HashMap 内存行为 | [Rust Standard Library](https://doc.rust-lang.org/std/) | `capacity`、`reserve`、`shrink_to_fit` |

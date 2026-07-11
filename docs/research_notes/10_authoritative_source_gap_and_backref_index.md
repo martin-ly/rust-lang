@@ -107,7 +107,7 @@
 | 权威来源 | 类型 | 项目文档 |
 |----------|------|----------|
 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | 最佳实践 | [10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) |
-| [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | 设计模式 | [10_design_patterns_authoritative_alignment.md](10_design_patterns_authoritative_alignment.md)、[10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) |
+| [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | 设计模式 | [10_design_patterns_authoritative_alignment.md](10_design_patterns_authoritative_alignment.md)、[10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) |
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | 性能优化 | [10_performance_and_testing_alignment.md](10_performance_and_testing_alignment.md)、[10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) |
 | [This Week in Rust](https://this-week-in-rust.org/) | 社区周报 | 持续追踪，尚未建立固定反向索引 |
 | [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) | 官方博客 | 持续追踪，尚未建立固定反向索引 |

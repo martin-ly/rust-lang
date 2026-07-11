@@ -543,7 +543,7 @@ fn main() {
 > Cranelift 的目标不是替代 LLVM 的 release 构建，而是提供更快的 debug 迭代。
 >
 > [来源: [Cranelift Debug Info](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/ir.md)] ·
-> [来源: [rustc Developer Guide](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)]
+> [来源: [rustc Developer Guide](https://rustc-dev-guide.rust-lang.org/overview.html)]
 
 ### 10.5 边界测试：Cranelift 的调试构建与发布构建行为差异（运行时性能/语义差异）
 
@@ -581,7 +581,7 @@ fn main() {
 > 这与 Go 的 gc 编译器（自研，简单快速）vs gccgo（GCC 后端，优化强）或 Java 的 C1（客户端编译器，快）vs C2（服务器编译器，优化强）的分层策略类似——Rust 的双后端策略提供开发/生产的最优组合。
 >
 > [来源: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift/docs)] ·
-> [来源: [Rust Compiler Explorer](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)]
+> [来源: [Rust Compiler Explorer](https://rustc-dev-guide.rust-lang.org/overview.html)]
 
 ### 10.3 边界测试：Cranelift 与 LLVM 的调试信息质量差异（运行时行为差异）
 
@@ -615,7 +615,7 @@ fn main() {
 >
 > 这与 Go 的 gc 编译器 vs gccgo 或 Java 的 C1 vs C2 类似——Rust 的双后端策略提供开发/生产的最优组合。
 > [来源: [Cranelift](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift/docs)] ·
-> [来源: [Rust Compiler Explorer](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)]
+> [来源: [Rust Compiler Explorer](https://rustc-dev-guide.rust-lang.org/overview.html)]
 >
 > **过渡**: Cranelift 后端预研：Rust 编译器的快速调试编译 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 

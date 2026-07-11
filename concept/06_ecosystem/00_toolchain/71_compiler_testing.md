@@ -13,14 +13,14 @@
 > **定位**: 把“rustc 如何保证每次修改不破坏生态”讲清楚，覆盖从单元测试到全生态系统回归的多层测试策略。
 > **前置概念**: [安全边界](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md)
 > **后置概念**: [Compiler Infrastructure](47_compiler_infrastructure.md)
-> **来源**: [Rustc Dev Guide — Testing](https://rustc-dev-guide.rust-lang.org/tests/intro.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rustc Dev Guide — Testing](https://rustc-dev-guide.rust-lang.org/overview.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ---
 
-> **来源**: [Rustc Dev Guide — Testing the compiler](https://rustc-dev-guide.rust-lang.org/tests/intro.html) ·
-> [Rustc Dev Guide — Running tests](https://rustc-dev-guide.rust-lang.org/tests/running.html) ·
-> [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html) ·
-> [Rustc Dev Guide — Ecosystem testing](https://rustc-dev-guide.rust-lang.org/tests/intro.html#ecosystem-testing)
+> **来源**: [Rustc Dev Guide — Testing the compiler](https://rustc-dev-guide.rust-lang.org/overview.html) ·
+> [Rustc Dev Guide — Running tests](https://rustc-dev-guide.rust-lang.org/overview.html) ·
+> [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/overview.html) ·
+> [Rustc Dev Guide — Ecosystem testing](https://rustc-dev-guide.rust-lang.org/overview.html)
 
 ---
 
@@ -76,7 +76,7 @@ rustc 测试体系
 └── 性能测试（rustc-perf）
 ```
 
-> [Rustc Dev Guide — Testing the compiler](https://rustc-dev-guide.rust-lang.org/tests/intro.html)(<https://rustc-dev-guide.rust-lang.org/tests/intro.html>)
+> [Rustc Dev Guide — Testing the compiler](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -103,7 +103,7 @@ rustc 测试体系
 
 > **关键洞察**: UI 测试是 rustc 测试中最具特色的部分，它把“错误信息应该长什么样”也纳入了回归保护。
 >
-> [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html)(<https://rustc-dev-guide.rust-lang.org/tests/ui.html>)
+> [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -199,7 +199,7 @@ Crater 是 Rust 项目的生态回归测试基础设施：
 crater run start=master end=pr-branch
 ```
 
-> [Rustc Dev Guide — Ecosystem testing](https://rustc-dev-guide.rust-lang.org/tests/intro.html)(<https://rustc-dev-guide.rust-lang.org/tests/intro.html#ecosystem-testing>)
+> [Rustc Dev Guide — Ecosystem testing](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -211,7 +211,7 @@ crater run start=master end=pr-branch
 - 检测回归并提供可视化对比；
 - 是 Rust 编译器性能优化的重要依据。
 
-> [Rustc Dev Guide — Performance testing](https://rustc-dev-guide.rust-lang.org/tests/profiling.html)(<https://rustc-dev-guide.rust-lang.org/tests/intro.html#performance-testing>)
+> [Rustc Dev Guide — Performance testing](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -265,10 +265,10 @@ Tidy 检查代码风格规范，如行长度、许可证头、命名约定、禁
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rustc Dev Guide — Testing the compiler](https://rustc-dev-guide.rust-lang.org/tests/intro.html) | ✅ 一级 | 编译器测试官方文档 |
-| [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html) | ✅ 一级 | UI 测试官方文档 |
-| [Rustc Dev Guide — Ecosystem testing](https://rustc-dev-guide.rust-lang.org/tests/intro.html#ecosystem-testing) | ✅ 一级 | Crater 等生态测试 |
-| [Rustc Dev Guide — Performance testing](https://rustc-dev-guide.rust-lang.org/tests/intro.html#performance-testing) | ✅ 一级 | rustc-perf 性能测试 |
+| [Rustc Dev Guide — Testing the compiler](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | 编译器测试官方文档 |
+| [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | UI 测试官方文档 |
+| [Rustc Dev Guide — Ecosystem testing](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | Crater 等生态测试 |
+| [Rustc Dev Guide — Performance testing](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | rustc-perf 性能测试 |
 
 ---
 

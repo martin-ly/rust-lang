@@ -898,7 +898,7 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **[来源: [Verus Documentation](https://github.com/verus-lang/verusverus/)]**
+> **[来源: [Verus Documentation](https://github.com/verus-lang/verus/)]**
 > **[来源: [Microsoft Verus Blog](https://verus-lang.github.io/verus/guide/)]**
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**

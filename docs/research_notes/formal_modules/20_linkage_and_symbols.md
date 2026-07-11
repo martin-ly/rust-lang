@@ -202,5 +202,5 @@ pub extern "C" fn add(a: i32, b: i32) -> i32 {
 ## 学术/社区来源参考 {#学术社区来源参考}
 
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
-> **来源**: [Aeneas](https://aeneas-verification.github.io/)
-> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **来源**: [Aeneas](https://aeneasverif.github.io/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))

@@ -142,7 +142,7 @@ python scripts/maintenance/check_i18n_translation_gap.py
 2. 法语、德语、西班牙语等其他语言社区资源未建立版本跟踪。
 3. 术语对照表未覆盖 variance、coercion、orphan rules 等高级术语。
 
-> **权威来源**: [TRPL 中文](https://kaisery.github.io/trpl-zh-cn/) | [TRPL 日文](https://doc.rust-jp.rs/book-ja/) | [rust-lang/book](https://github.com/rust-lang/book) | [rust-lang-cn/book](https://github.com/rust-lang-cn/book) | [rust-jp/book](https://github.com/rust-jp/book)
+> **权威来源**: [TRPL 中文](https://kaisery.github.io/trpl-zh-cn/) | [TRPL 日文](https://doc.rust-jp.rs/book-ja/) | [rust-lang/book](https://github.com/rust-lang/book) | [rust-lang-cn/book](https://github.com/rust-lang-cn/book-cn) | [rust-jp/book](https://github.com/rust-jp/book)
 
 ## 相关概念 {#相关概念}
 
@@ -161,7 +161,7 @@ python scripts/maintenance/check_i18n_translation_gap.py
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)
 
 ## 社区权威参考 {#社区权威参考}
 

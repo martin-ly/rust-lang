@@ -283,7 +283,7 @@ sccache --start-server
 > **[Mozilla - sccache](https://github.com/mozilla/sccache)**
 > **[ACM - Build System Optimization](https://dl.acm.org/)**
 > **[IEEE - Software Build Automation](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
-> **[Rust CI Best Practices](https://rustc-dev-guide.rust-lang.org/tests/intro.html)**
+> **[Rust CI Best Practices](https://rustc-dev-guide.rust-lang.org/overview.html)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

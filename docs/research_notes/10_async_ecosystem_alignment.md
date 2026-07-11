@@ -18,7 +18,7 @@
 - [异步生态权威来源对齐矩阵 {#异步生态权威来源对齐矩阵}](#异步生态权威来源对齐矩阵-异步生态权威来源对齐矩阵)
   - [目录 {#目录}](#目录-目录)
   - [一、对齐说明 {#一对齐说明}](#一对齐说明-一对齐说明)
-  - [二、核心运行时（Runtime） {#二核心运行时}](#二核心运行时-二核心运行时)
+  - [二、核心运行时 {#二核心运行时}](#二核心运行时-二核心运行时)
   - [三、并发原语 {#三并发原语}](#三并发原语-三并发原语)
   - [四、网络与 IO {#四网络与-io}](#四网络与-io-四网络与-io)
   - [五、流与通道 {#五流与通道}](#五流与通道-五流与通道)
@@ -74,7 +74,7 @@
 | 概念/库 | 来源 | 项目文档 | 备注 |
 |---------|------|----------|------|
 | Stream trait | [futures-rs](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 异步迭代 |
-| async_iter (gen blocks) | [RFC 3516 [已失效]]<!-- 原链接: https://rust-lang.github.io/rfcs/3516-gen-blocks.html --> | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §3 | 不稳定 |
+| async_iter (gen blocks) | [RFC 3516 [已失效]]<!-- 原链接: https://github.com/rust-lang/rfcs/blob/master/text/3516-gen-blocks.md --> | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §3 | 不稳定 |
 | channels (mpsc) | [Tokio Docs](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html) | [crates/c05_threads/](../../crates/c05_threads/README.md) | 消息传递 |
 
 ---
@@ -133,4 +133,4 @@
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)

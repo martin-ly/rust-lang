@@ -34,7 +34,7 @@
 > **来源: [Wikipedia — Competitive Programming](https://en.wikipedia.org/wiki/Competitive_Programming)** Competitive programming is a mind sport usually held over the internet or a local network, involving participants trying to program according to provided specifications.
 > **来源**: <https://en.wikipedia.org/wiki/Competitive_programming>
 > **[VeriContest arXiv 2026-05-08](https://arxiv.org/)** VeriContest: A Benchmark of 946 LeetCode and Codeforces Problems for Rust + Verus Formal Verification.
-> **来源**: <https://arxiv.org/abs/2026.05.08> (概念引用（Reference）)
+> **来源**: 待正式 arXiv 编号 (概念引用（Reference）)
 
 ---
 

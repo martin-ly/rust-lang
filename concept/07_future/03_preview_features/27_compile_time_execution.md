@@ -348,7 +348,7 @@ Const Generics:
 ```
 
 > **状态机洞察**: **类型状态机是 Rust 零成本类型安全的极致**——编译期保证正确的状态转换序列。
-> [来源: [Type State Pattern](https://rust-unofficial.github.io/patterns/)]
+> [来源: [Type State Pattern](https://rust-unofficial.github.io/patterns/))]
 
 ---
 
@@ -463,7 +463,7 @@ graph TD
 | [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html) | ✅ 一级 | Const Generics |
 | [Rust Blog — Const](https://blog.rust-lang.org/) | ✅ 一级 | 官方博客 |
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 二级 | 性能优化 |
-| [Type State Pattern](https://rust-unofficial.github.io/patterns/) | ✅ 二级 | 类型状态 |
+| [Type State Pattern](https://rust-unofficial.github.io/patterns/)) | ✅ 二级 | 类型状态 |
 
 ---
 

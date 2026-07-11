@@ -17,7 +17,7 @@
 >
 > **主要来源**: [The Rust Reference — Unions](https://doc.rust-lang.org/reference/items/unions.html) ·
 > [The Rustonomicon — Unions](https://doc.rust-lang.org/nomicon/other-reprs.html) ·
-> [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/reference/types.html)
+> [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -227,7 +227,7 @@ fn main() {
 
 > **错误诊断**: 代码可以编译，但运行时（Runtime）行为未定义。
 > **修正**: 维护一个外部标签（如 C 的 tagged union），或仅读取最后写入的字段。
-> [来源: [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/reference/types.html)]
+> [来源: [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/)]
 
 ### 4.3 反例：为非 Copy 字段实现 Copy
 
@@ -361,7 +361,7 @@ graph TD
 
 - [The Rust Reference — Unions](https://doc.rust-lang.org/reference/items/unions.html)
 - [The Rustonomicon — Unions](https://doc.rust-lang.org/nomicon/other-reprs.html)
-- [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/reference/types.html)
+- [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/)
 - [The Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)
 
 ---

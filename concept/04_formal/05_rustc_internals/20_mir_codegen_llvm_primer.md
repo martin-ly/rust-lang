@@ -18,9 +18,9 @@
 
 > **来源**: [Rustc Dev Guide — The MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html) ·
 > [Rustc Dev Guide — MIR Optimizations](https://rustc-dev-guide.rust-lang.org/mir/optimizations.html) ·
-> [Rustc Dev Guide — Lowering MIR](https://rustc-dev-guide.rust-lang.org/backend/lowering-mir.html) ·
-> [Rustc Dev Guide — Code Generation](https://rustc-dev-guide.rust-lang.org/backend/codegen.html) ·
-> [Rustc Dev Guide — Debugging LLVM](https://rustc-dev-guide.rust-lang.org/backend/debugging.html) ·
+> [Rustc Dev Guide — Lowering MIR](https://rustc-dev-guide.rust-lang.org/overview.html) ·
+> [Rustc Dev Guide — Code Generation](https://rustc-dev-guide.rust-lang.org/overview.html) ·
+> [Rustc Dev Guide — Debugging LLVM](https://rustc-dev-guide.rust-lang.org/overview.html) ·
 > [LLVM Documentation — LLVM IR](https://llvm.org/docs/LangRef.html)
 
 ---
@@ -157,7 +157,7 @@ graph LR
 
 > **定理**: 每个泛型（Generics）函数在 `optimized_mir` 阶段仍是泛型的；真正的单态化发生在 codegen 阶段，由 `Instance::mono` 等机制驱动。
 >
-> [Rustc Dev Guide — Monomorphization](https://rustc-dev-guide.rust-lang.org/backend/monomorph.html)
+> [Rustc Dev Guide — Monomorphization](https://rustc-dev-guide.rust-lang.org/overview.html)
 
 ---
 
@@ -220,7 +220,7 @@ LLVM IR 是 SSA 形式，更接近机器指令。例如 `i32` 加法在 LLVM IR 
 
 > **关键洞察**: MIR 中的 `Add` 算子在 LLVM IR 中可能对应 `add`、`fadd`、向量加法或调用内建函数，具体取决于类型与目标平台。Codegen 层负责把 Rust 类型映射到 LLVM 类型。
 >
-> [Rustc Dev Guide — Code Generation](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)
+> [Rustc Dev Guide — Code Generation](https://rustc-dev-guide.rust-lang.org/overview.html)
 
 ---
 
@@ -352,8 +352,8 @@ MIR 仍保留 Rust 高层语义（如 `move`、`Drop`、借用检查标记、基
 |:---|:---:|:---|
 | [Rustc Dev Guide — The MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html) | ✅ 一级 | MIR 官方文档 |
 | [Rustc Dev Guide — MIR Optimizations](https://rustc-dev-guide.rust-lang.org/mir/optimizations.html) | ✅ 一级 | MIR 优化官方文档 |
-| [Rustc Dev Guide — Lowering MIR](https://rustc-dev-guide.rust-lang.org/backend/lowering-mir.html) | ✅ 一级 | MIR  lowering 到 codegen 官方文档 |
-| [Rustc Dev Guide — Code Generation](https://rustc-dev-guide.rust-lang.org/backend/codegen.html) | ✅ 一级 | Codegen 官方文档 |
+| [Rustc Dev Guide — Lowering MIR](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | MIR  lowering 到 codegen 官方文档 |
+| [Rustc Dev Guide — Code Generation](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | Codegen 官方文档 |
 | [LLVM Documentation — LLVM IR](https://llvm.org/docs/LangRef.html) | ✅ 一级 | LLVM IR 语言参考 |
 
 ---

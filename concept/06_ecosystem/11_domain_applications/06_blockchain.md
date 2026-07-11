@@ -143,7 +143,7 @@ fn process_instruction(
 }
 ```
 
-> **Solana 运行时借用（Borrowing）检查**: Sealevel 并行执行引擎在**运行时（Runtime）**对账户状态进行借用检查（与 Rust 编译期借用检查同构），确保并行交易无数据竞争。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+> **Solana 运行时借用（Borrowing）检查**: Sealevel 并行执行引擎在**运行时（Runtime）**对账户状态进行借用检查（与 Rust 编译期借用检查同构），确保并行交易无数据竞争。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))]
 
 ---
 

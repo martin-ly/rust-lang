@@ -72,8 +72,8 @@
    - 仅关注文件名包含 `counterexample` 或 `反例` 的 Markdown 文件。
 2. **RFC 链接识别**
    - 匹配以下两类权威 URL：
-     - `https://rust-lang.github.io/rfcs/NNNN-*.html`
-     - `https://github.com/rust-lang/rfcs/(pull|issues|blob)/NNNN*`
+     - `rust-lang.github.io/rfcs/NNNN-*.html`
+     - `github.com/rust-lang/rfcs/(pull|issues|blob)/NNNN*`
    - 从 URL 中提取 RFC 编号。
 3. **映射输出**
    - 对每个反例文件，输出其中引用的 RFC 编号列表；
@@ -116,7 +116,7 @@
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)
 
 ## 社区权威参考 {#社区权威参考}
 

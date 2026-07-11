@@ -167,7 +167,7 @@
 |------------|------------|------------|----------|----------|
 | `impl Trait` 和 `dyn Trait` 的区别？ | 静态/动态分发 | L3-L4 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q17 | [TRPL Ch 18.2](https://doc.rust-lang.org/book/ch18-02-trait-objects.html)、[Reference Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) |
 | 什么是型变（Variance）？ | 子类型与型变 | L4-L5 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q19 | [Rustonomicon Subtyping](https://doc.rust-lang.org/nomicon/subtyping.html) |
-| 什么是 GAT？ | 泛型关联类型 | L5-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q22 | [RFC 1590 GAT [已失效]]<!-- 原链接: https://rust-lang.github.io/rfcs/1590-generic-associated-types.html --> |
+| 什么是 GAT？ | 泛型关联类型 | L5-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q22 | [RFC 1590 GAT [已失效]]<!-- 原链接: https://github.com/rust-lang/rfcs/blob/master/text/1590-generic-associated-types.md --> |
 | 空指针优化（NPO）是什么？ | 布局优化 | L4-L5 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q24 | [Rust Reference Niche](https://doc.rust-lang.org/reference/type-layout.html#reprc-enums)、[Rustonomicon NPO](https://doc.rust-lang.org/nomicon/exotic-sizes.html#niche-values) |
 
 ### 并发与异步 {#并发与异步}
@@ -193,9 +193,9 @@
 
 | 常见面试题 | 核心考察点 | Bloom 层级 | 项目文档 | 权威来源 |
 |------------|------------|------------|----------|----------|
-| 什么是内部可变性模式？ | 设计模式应用 | L3-L4 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q7 | [TRPL Ch 15.5](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)、[Rust Design Patterns Interior Mutability](https://rust-unofficial.github.io/patterns/patterns/behavioural/interior-mutability.html) |
+| 什么是内部可变性模式？ | 设计模式应用 | L3-L4 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q7 | [TRPL Ch 15.5](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)、[Rust Design Patterns Interior Mutability](https://rust-unofficial.github.io/patterns/)) |
 | 如何用 Trait 对象实现多态？ | 面向 trait 的设计 | L3-L4 | [10_rust_book_alignment.md](10_rust_book_alignment.md) §Ch 18 | [TRPL Ch 18](https://doc.rust-lang.org/book/ch18-00-oop.html) |
-| Builder / 类型状态模式如何实现？ | 惯用法 | L4-L5 | [software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §4 | [Rust Design Patterns Builder](https://rust-unofficial.github.io/patterns/patterns/creational/builder.html) |
+| Builder / 类型状态模式如何实现？ | 惯用法 | L4-L5 | [software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §4 | [Rust Design Patterns Builder](https://rust-unofficial.github.io/patterns/)) |
 | 如何保证 API 的未来兼容性？ | API 设计 | L5-L6 | [formal_modules/70_module_patterns_and_refactoring.md](formal_modules/70_module_patterns_and_refactoring.md) §3 | [Rust API Guidelines Future-proofing](https://rust-lang.github.io/api-guidelines/future-proofing.html) |
 
 ---
@@ -275,7 +275,7 @@
 > **来源**: [Rust Japan](https://rust-jp.rs/)
 > **来源**: [Exercism Rust track](https://exercism.org/tracks/rust)
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
-> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 
 ---
 

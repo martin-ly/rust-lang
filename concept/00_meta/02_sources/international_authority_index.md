@@ -82,7 +82,7 @@
 | Verus | <https://verus-lang.github.io/verus/> | 低级系统验证 Rust |
 | Miri | <https://github.com/rust-lang/miri> | UB 检测解释器 |
 | Ferrocene | <https://ferrocene.dev/> | 安全关键领域 Rust |
-| Safety Tags RFC | <https://rust-lang.github.io/rfcs/0000-safety-tags.html> | 类型安全标签（预览） |
+| Safety Tags RFC | 待正式 RFC 编号 | 类型安全标签（预览） |
 | Borrow Sanitizer MCP | <https://github.com/rust-lang/compiler-team/issues/958> | 运行时借用检查 sanitizer |
 | a-mir-formality | <https://github.com/rust-lang/a-mir-formality> | Rust 核心类型系统形式化 |
 

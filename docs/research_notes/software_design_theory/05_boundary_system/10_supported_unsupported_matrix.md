@@ -454,4 +454,4 @@ async fn serve() {
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)

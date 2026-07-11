@@ -233,7 +233,7 @@ std::autodiff 适合所有 Rust 数值计算?
 
 > **权威来源**: [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/), [Rust Compiler Team](https://rust-lang.github.io/compiler-team/)
 >
-> **权威来源对齐变更日志**: 2026-06-01 创建，对齐 Rust Project Goals 2026H2 [rust-lang.github.io](https://rust-lang.github.io/)
+> **权威来源对齐变更日志**: 2026-06-01 创建，对齐 Rust Project Goals 2026H2 [rust-lang.github.io](https://github.com/rust-lang)
 > **过渡**: `std::autodiff`：Rust 官方自动微分前沿追踪 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: `std::autodiff`：Rust 官方自动微分前沿追踪 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: `std::autodiff`：Rust 官方自动微分前沿追踪 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

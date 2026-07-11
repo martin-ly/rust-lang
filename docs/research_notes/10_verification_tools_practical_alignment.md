@@ -46,7 +46,7 @@
 | Unsafe / 裸指针 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) | ⚠️ 低 | Aeneas 主要支持 safe Rust |
 | 异步（Async）状态机 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 🔄 中 | 实验性支持 |
 
-> **权威来源**: [Aeneas](https://aeneas-verification.github.io/)
+> **权威来源**: [Aeneas](https://aeneasverif.github.io/)
 
 ---
 
@@ -121,7 +121,7 @@
 2. 工具版本兼容性（Aeneas 0.x、Kani 0.x 等）需持续更新。
 3. 与项目「核心定理完整证明」文档的逐项映射可进一步细化。
 
-> **权威来源**: [Aeneas](https://aeneas-verification.github.io/) | [coq-of-rust](https://github.com/formal-land/coq-of-rust) | [Kani](https://github.com/model-checking/kani) | [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) | [Creusot](https://github.com/creusot-rs/creusot)
+> **权威来源**: [Aeneas](https://aeneasverif.github.io/) | [coq-of-rust](https://github.com/formal-land/coq-of-rust) | [Kani](https://github.com/model-checking/kani) | [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) | [Creusot](https://github.com/creusot-rs/creusot)
 > **官方来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ---

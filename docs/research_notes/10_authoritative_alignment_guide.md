@@ -144,7 +144,7 @@
 **对齐标记**:
 
 ```markdown
-> **社区来源**: [Rust Design Patterns - Builder](https://rust-unofficial.github.io/patterns/patterns/creational/builder.html)
+> **社区来源**: [Rust Design Patterns - Builder](https://rust-unofficial.github.io/patterns/))
 > **对齐状态**: ✅ 一致（本项目有扩展）
 > **差异说明**: 本项目添加了形式化定义
 ```

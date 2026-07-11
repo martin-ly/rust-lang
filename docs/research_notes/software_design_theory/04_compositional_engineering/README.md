@@ -11,13 +11,13 @@
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
-> **对齐说明**: 本目录已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/` 迁回，正在按 [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、[Tower Layer/Service Docs](https://docs.rs/tower/latest/tower/trait.Layer.html)、[Rust Design Patterns](https://rust-unofficial.github.io/patterns/) 等权威来源升级。
+> **对齐说明**: 本目录已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/` 迁回，正在按 [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、[Tower Layer/Service Docs](https://docs.rs/tower/latest/tower/trait.Layer.html)、[Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) 等权威来源升级。
 >
 > **权威来源**:
 >
 > [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) |
 > [Tower Docs](https://docs.rs/tower/latest/tower/) |
-> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) |
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) |
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) |
 > [Rust Reference](https://doc.rust-lang.org/reference/)
 >
@@ -715,7 +715,7 @@ L4 跨进程/跨网络（分布式、微服务）
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **来源: [Tower Layer/Service Docs](https://docs.rs/tower/latest/tower/trait.Layer.html)**
 > **来源: [Tower Service Trait](https://docs.rs/tower/latest/tower/trait.Service.html)**
-> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
+> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**

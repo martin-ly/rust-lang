@@ -172,7 +172,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 
 ## 📊 核心模式 {#核心模式}
 
-> **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/)** · **来源: [GoF - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/))** · **来源: [GoF - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -2117,7 +2117,7 @@ impl ShapeCollection {
 
 ## 🦀 Rust 特有模式 {#rust-特有模式}
 
-> **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)** · **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/)**
+> **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)** · **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/))**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 

@@ -319,7 +319,7 @@ match producer.send(record, timeout).await {
 | 异步 Producer | [`crates/c10_networks/examples/kafka_async_producer.rs`](../../../../crates/c10_networks/examples/kafka_async_producer.rs) | 使用 FutureProducer 发送带 key 的消息 |
 | Consumer Group | [`crates/c10_networks/examples/kafka_consumer_group.rs`](../../../../crates/c10_networks/examples/kafka_consumer_group.rs) | 使用 StreamConsumer 订阅 topic 并手动提交 offset |
 
-> [来源: [c10_networks Crate](https://github.com/rust-lang/rust-lang-learning/tree/main/crates/c10_networks)]
+> [来源: [c10_networks Crate](../../../../../crates/c10_networks)]
 
 ---
 
@@ -373,5 +373,5 @@ match producer.send(record, timeout).await {
 ## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)
 - [Oxide](https://arxiv.org/abs/1903.00982)

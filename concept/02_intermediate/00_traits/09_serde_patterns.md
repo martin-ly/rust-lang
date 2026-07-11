@@ -123,7 +123,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Serde 的**三层架构**——Rust 类型 ↔ Serde 数据模型 ↔ 具体格式。
-> [Serde Docs](https://docs.rs/Serde/latest/Serde/)
+> [Serde Docs](https://docs.rs/serde/latest/serde/)
 > **使用建议**: 绝大多数场景使用 `#[derive(Serialize, Deserialize)]`；仅在需要自定义行为时手动实现 Trait。
 > **关键洞察**: `Serialize`/`Deserialize` 是**编译期**的契约——一旦类型实现了这些 Trait，任何支持 Serde 的格式都可以与之交互。
 > [来源: [Serde Book](https://serde.rs/impl-serialize.html)]

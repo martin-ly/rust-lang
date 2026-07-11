@@ -23,7 +23,7 @@
 > 本文档按 [Rust Reference – FFI](https://doc.rust-lang.org/reference/items/external-blocks.html)、
 > [libloading docs](https://docs.rs/libloading/latest/libloading/)、
 > [Cargo Book – crate-type](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-crate-type-field)、
-> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) 与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) 组织。
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) 与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) 组织。
 >
 > **权威来源**:
 >
@@ -31,7 +31,7 @@
 > [libloading docs](https://docs.rs/libloading/latest/libloading/) |
 > [Cargo Book](https://doc.rust-lang.org/cargo/reference/) |
 > [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) |
-> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) |
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) |
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
 ---
@@ -64,7 +64,7 @@
 
 ## 一、动机与应用场景 {#一动机与应用场景}
 
-> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
+> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))**
 
 插件架构（Plugin Architecture）通过**运行时（Runtime）或编译期扩展点**，允许核心系统在不修改自身代码的情况下加载、替换或卸载功能模块（Module）。
 

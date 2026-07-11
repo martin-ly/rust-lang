@@ -262,4 +262,4 @@
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)

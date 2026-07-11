@@ -299,7 +299,7 @@ fn main() {
 
 - [Rust 标准库文档](https://doc.rust-lang.org/std/)
 - [Rust 1.93.0 发布说明](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0) 🆕
-- [Rust 1.92.0 发布说明 [已失效]]<!-- 原链接: https://blog.rust-lang.org/2024/12/19/Rust-1.92.0.html -->
+- [Rust 1.92.0 发布说明 [已失效]]<!-- 原链接: https://github.com/rust-lang/rust/releases/tag/1.92.0 -->
 - [项目标准库算法参考](../../crates/c08_algorithms/docs/tier_03_references/05_standard_library_algorithms_reference.md)
 - [Rust 1.92.0 特性对齐文档](../../archive/docs/version_reports/RUST_192_FEATURES_ALIGNMENT.md)
 

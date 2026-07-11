@@ -19,9 +19,9 @@
   - [目录 {#目录}](#目录-目录)
   - [一、对齐说明 {#一对齐说明}](#一对齐说明-一对齐说明)
   - [二、形式化语义与内存模型 {#二形式化语义与内存模型}](#二形式化语义与内存模型-二形式化语义与内存模型)
-  - [三、所有权（Ownership）与借用（Borrowing）形式化 {#三所有权与借用形式化}](#三所有权与借用形式化-三所有权与借用形式化)
-  - [四、类型系统（Type System）形式化 {#四类型系统形式化}](#四类型系统形式化-四类型系统形式化)
-  - [五、并发与异步（Async）形式化 {#五并发与异步形式化}](#五并发与异步形式化-五并发与异步形式化)
+  - [三、所有权与借用形式化 {#三所有权与借用形式化}](#三所有权与借用形式化-三所有权与借用形式化)
+  - [四、类型系统形式化 {#四类型系统形式化}](#四类型系统形式化-四类型系统形式化)
+  - [五、并发与异步形式化 {#五并发与异步形式化}](#五并发与异步形式化-五并发与异步形式化)
   - [六、验证工具 {#六验证工具}](#六验证工具-六验证工具)
   - [七、顶级会议/期刊资源 {#七顶级会议期刊资源}](#七顶级会议期刊资源-七顶级会议期刊资源)
     - [7.1 顶级会议 {#71-顶级会议}](#71-顶级会议-71-顶级会议)
@@ -89,7 +89,7 @@
 
 | 工具 | 类型 | 主要论文/来源 | 项目文档 | 状态 |
 |------|------|---------------|----------|------|
-| [Aeneas](https://aeneas-verification.github.io/) | 基于借用的验证 | [ICFP 2022, DOI 10.1145/3547647](https://dl.acm.org/doi/10.1145/3547647) | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) | ✅ |
+| [Aeneas](https://aeneasverif.github.io/) | 基于借用的验证 | [ICFP 2022, DOI 10.1145/3547647](https://dl.acm.org/doi/10.1145/3547647) | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) | ✅ |
 | [coq-of-rust](https://github.com/formal-land/coq-of-rust) | Coq/Rocq 翻译 | [GitHub / Formal Land](https://github.com/formal-land/coq-of-rust) | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) | ✅ |
 | [RustHorn](https://github.com/sosnek/rusthorn) | CHC 验证 | [PLDI 2020 / arXiv](https://arxiv.org/abs/2002.09002) | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) | 🔄 |
 | [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) | 合约验证 | [OOPSLA 2019, DOI 10.1145/3360573](https://dl.acm.org/doi/10.1145/3360573) / [NFM 2022, DOI 10.1007/978-3-031-06773-0_5](https://link.springer.com/chapter/10.1007/978-3-031-06773-0_5) | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) / [10_verification_tools_practical_alignment.md](10_verification_tools_practical_alignment.md) | 🔄 |
@@ -178,7 +178,7 @@
 5. **异步 Rust 的学术论文**（如 async/await 语义、Future/poll 形式化）可专门整理。
 6. **形式化验证工具的最新进展**（RefinedRust、Verus、Miri 论文）需持续跟踪。
 
-> **权威来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) | [Aeneas](https://aeneas-verification.github.io/) | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3) | [ACM DL](https://dl.acm.org/) | [IEEE Xplore](https://ieeexplore.ieee.org/) <!-- link: known-broken --> | [Springer](https://link.springer.com/) | [arXiv](https://arxiv.org/)
+> **权威来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) | [Aeneas](https://aeneasverif.github.io/) | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3) | [ACM DL](https://dl.acm.org/) | [IEEE Xplore](https://ieeexplore.ieee.org/) <!-- link: known-broken --> | [Springer](https://link.springer.com/) | [arXiv](https://arxiv.org/)
 
 ## 相关概念 {#相关概念}
 

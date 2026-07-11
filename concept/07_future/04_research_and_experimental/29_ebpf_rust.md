@@ -231,7 +231,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 4. Rex 革命性方案
 
-Rex（Rust for eBPF Extended）是 2025-2026 年间发表的一系列学术研究的实现项目，其核心命题是：**用 Rust 编译器替代 eBPF 验证器** [Rex: Safe Rust for eBPF, arXiv:2501.xxxxx](https://arxiv.org/abs/2501.xxxxx)。
+Rex（Rust for eBPF Extended）是 2025-2026 年间发表的一系列学术研究的实现项目，其核心命题是：**用 Rust 编译器替代 eBPF 验证器** Rex: Safe Rust for eBPF, arXiv:2501.xxxxx（待正式 arXiv 编号）。
 
 ### 4.1 问题域：eBPF 验证器的本质局限
 >

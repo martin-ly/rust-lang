@@ -17,7 +17,7 @@
 >
 > **主要来源**: [The Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html) ·
 > [The Rust Programming Language — Custom Types](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html) ·
-> [Rust By Example — Alias](https://doc.rust-lang.org/rust-by-example/custom_types/type.html)
+> [Rust By Example — Alias](https://doc.rust-lang.org/rust-by-example/custom_types.html)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -363,7 +363,7 @@ graph TD
 - [Rust 核心术语英中对照表](../../00_meta/01_terminology/terminology_glossary.md)
 - [The Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html)
 - [The Rust Programming Language — Advanced Types](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)
-- [Rust By Example — Alias](https://doc.rust-lang.org/rust-by-example/custom_types/type.html)
+- [Rust By Example — Alias](https://doc.rust-lang.org/rust-by-example/custom_types.html)
 - [Rust Reference — Generic Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html)
 
 ---

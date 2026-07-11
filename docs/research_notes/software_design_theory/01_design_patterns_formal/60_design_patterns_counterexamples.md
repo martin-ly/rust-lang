@@ -252,7 +252,7 @@ struct Service {
 | 过度泛型化 | 泛型设计 | 可读性差 | 关联类型 / 上下文对象 |
 | 锁粒度过大 | 并发架构 | 性能瓶颈 | 拆分锁 / DashMap |
 
-> **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language – Ch 17](https://doc.rust-lang.org/book/ch17-00-oop.html) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [Rustonomicon – Interior Mutability](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)
+> **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language – Ch 17](https://doc.rust-lang.org/book/ch17-00-oop.html) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | [Rustonomicon – Interior Mutability](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)
 
 ## 相关概念 {#相关概念}
 
@@ -275,11 +275,11 @@ struct Service {
 
 本反例汇编参考以下 P1/P1.5/P2 权威来源：
 
-- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 - [Refactoring Guru](https://refactoring.guru/design-patterns)
 
 ## 学术权威参考 {#学术权威参考}
 
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)

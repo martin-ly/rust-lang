@@ -509,7 +509,7 @@ stateDiagram-v2
 > **认知功能**: 强度层级导航图，帮助程序员根据同步需求选择"最弱且足够"的 Ordering。从 Relaxed 出发按需升级，避免"SeqCst 最安全所以默认用它"的性能陷阱。核心洞察：内存序选择是性能与正确性的工程权衡，而非安全等级的单向攀升。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [Rust Reference: Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html)]
 > **思维表征说明**: `stateDiagram-v2` 将五种 `Ordering` 建模为**状态层次**而非流程——从 Relaxed（最弱、成本最低）到 SeqCst（最强、成本最高），状态之间的转移对应「何时需要升级内存序」。
-> 这帮助程序员建立直觉：不是「SeqCst 最安全所以总是用它」，而是「根据同步需求选择最弱且足够的 Ordering」。 [Rust std::sync::atomic docs; C++ Standard §33.5](<https://doc.rust-lang.org/std/ync/atomic> docs; C++ Standard §33.5.html)
+> 这帮助程序员建立直觉：不是「SeqCst 最安全所以总是用它」，而是「根据同步需求选择最弱且足够的 Ordering」。 [Rust std::sync::atomic docs; C++ Standard §33.5](<https://doc.rust-lang.org/std/sync/atomic> docs; C++ Standard §33.5.html)
 
 #### SeqCst 的全局序与适用边界
 

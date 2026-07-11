@@ -322,7 +322,7 @@ let committed = txn.commit();
 ```
 
 > **类型状态洞察**: **类型状态模式**是线性逻辑在 Rust 中的**最直接工程应用**——它将状态机从运行时（Runtime）检查转化为编译期类型约束。
-> [来源: [Rust Patterns — Typestate](https://rust-unofficial.github.io/patterns/)]
+> [来源: [Rust Patterns — Typestate](https://rust-unofficial.github.io/patterns/))]
 
 ---
 
@@ -478,7 +478,7 @@ graph TD
 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ 一级 | Rust 形式化验证 |
 | [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsub/linearsub.ps) | ✅ 一级 | Session Types |
 | [Session Types in Rust](https://munksgaard.me/papers/laumann-munksgaard-larsen.pdf) | ✅ 一级 | 工程实现 |
-| [Rust Patterns — Typestate](https://rust-unofficial.github.io/patterns/) | ✅ 二级 | 模式库 |
+| [Rust Patterns — Typestate](https://rust-unofficial.github.io/patterns/)) | ✅ 二级 | 模式库 |
 
 ---
 (Source: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/))

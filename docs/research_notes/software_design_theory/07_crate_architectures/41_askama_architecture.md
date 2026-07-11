@@ -195,7 +195,7 @@ async fn page() -> impl IntoResponse {
 |:--|:--|:--|
 | Askama 模板渲染 | [`crates/c06_async/examples/askama_template_rendering.rs`](../../../../crates/c06_async/examples/askama_template_rendering.rs) | `#[derive(Template)]`、内联模板、循环渲染 |
 
-> [来源: [c06_async Crate](https://github.com/rust-lang/rust-lang-learning/tree/main/crates/c06_async)]
+> [来源: [c06_async Crate](../../../../../crates/c06_async)]
 
 ---
 
@@ -243,5 +243,5 @@ async fn page() -> impl IntoResponse {
 ## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)
 - [Oxide](https://arxiv.org/abs/1903.00982)

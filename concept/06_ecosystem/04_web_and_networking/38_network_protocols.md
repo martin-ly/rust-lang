@@ -522,5 +522,5 @@ Rust 生态：纯 Rust QUIC 实现 `quinn`、HTTP/3 实现 `h3`、AWS `s2n-quic`
 ### 速查与练习
 
 - **速查卡**: [network_programming_cheatsheet](../../../docs/02_reference/quick_reference/02_network_programming_cheatsheet.md)
-- **RBE 练习**: [TCP](https://doc.rust-lang.org/rust-by-example/std_misc/net.html) <!-- link: known-broken -->
+- **RBE 练习**: [TCP](https://doc.rust-lang.org/rust-by-example/std_misc.html) <!-- link: known-broken -->
 - **Rustlings**: 无网络专题；参考 C10 模块（Module）与 Tokio 教程

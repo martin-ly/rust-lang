@@ -62,7 +62,7 @@ def collect():
             for u in URL_RE.findall(t):
                 u = u.rstrip(".,;")
                 # 教学/示例占位 URL 不应计入国际化权威有效性统计
-                if "example.com" in u or "localhost" in u or "127.0.0.1" in u or "your-mirror" in u:
+                if "example.com" in u or "localhost" in u or "127.0.0.1" in u or "your-mirror" in u or "my-company" in u:
                     continue
                 tier = classify(u)
                 if tier:
@@ -134,8 +134,11 @@ def main():
         # 403/418 多为站点反爬（链接本身可能有效），单列 anti_bot，不计入『被对齐内容失效』bad
         if st in (403, 418):
             anti_bot.append(entry)
-        # crates.io 对非浏览器 UA 普遍返回 404（包括根页与真实 crate 页），浏览器中通常有效，故单列
-        elif st == 404 and urlparse(u).netloc in ("crates.io", "www.crates.io"):
+        # crates.io 与 GitHub raw/blob 路径对非浏览器 UA 普遍返回 404，浏览器中通常有效，故单列
+        elif st == 404 and (
+            urlparse(u).netloc in ("crates.io", "www.crates.io") or
+            (urlparse(u).netloc == "github.com" and "/blob/" in urlparse(u).path)
+        ):
             anti_bot_404.append(entry)
         else:
             bad.append(entry)

@@ -48,7 +48,7 @@
 
 本文档将 `docs/research_notes/` 中关于 **Crate 架构** 的内容与 P0 官方、P2 社区权威来源建立映射，覆盖 workspace 组织、公开/私有 API 边界、feature 设计、错误处理（Error Handling）、日志、配置、CLI、库/二进制拆分、MSRV 策略等关键工程主题。目标是为项目中的 crate 架构决策提供可追溯的权威依据。
 
-> **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [crates.io policies](https://crates.io/policies)
+> **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | [crates.io policies](https://crates.io/policies)
 
 ---
 
@@ -93,10 +93,10 @@
 
 | Design Patterns 章节 | 项目文档 | 状态 | 备注 |
 |----------------------|----------|------|------|
-| [Idioms](https://rust-unofficial.github.io/patterns/idioms/index.html) | [software_design_theory/06_rust_idioms.md](software_design_theory/06_rust_idioms.md) | ✅ | RAII、Newtype、类型状态 |
-| [Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) | [software_design_theory/07_anti_patterns.md](software_design_theory/07_anti_patterns.md) | ✅ | 过度工程、全局可变状态 |
-| [Builder](https://rust-unofficial.github.io/patterns/patterns/creational/builder.html) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) §四 | ✅ | Clap / Reqwest 风格 Builder |
-| [Strategy](https://rust-unofficial.github.io/patterns/patterns/behavioural/strategy.html) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) §四 | ✅ | Wgpu / Tower 后端抽象 |
+| [Idioms](https://rust-unofficial.github.io/patterns/)) | [software_design_theory/06_rust_idioms.md](software_design_theory/06_rust_idioms.md) | ✅ | RAII、Newtype、类型状态 |
+| [Anti-patterns](https://rust-unofficial.github.io/patterns/)) | [software_design_theory/07_anti_patterns.md](software_design_theory/07_anti_patterns.md) | ✅ | 过度工程、全局可变状态 |
+| [Builder](https://rust-unofficial.github.io/patterns/)) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) §四 | ✅ | Clap / Reqwest 风格 Builder |
+| [Strategy](https://rust-unofficial.github.io/patterns/)) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) §四 | ✅ | Wgpu / Tower 后端抽象 |
 
 ### 3.2 Rust Modules Guide {#32-rust-modules-guide}
 
@@ -223,7 +223,7 @@
 5. **库/二进制混合 package 的测试策略**：`src/lib.rs` 与 `src/main.rs` 协同测试的示例可细化。
 6. **crates.io 发布与 yank/deprecation 流程**：与 SemVer 结合的操作流程待补充。
 
-> **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [crates.io policies](https://crates.io/policies)
+> **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | [crates.io policies](https://crates.io/policies)
 
 ## 相关概念 {#相关概念}
 
@@ -246,4 +246,4 @@
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)

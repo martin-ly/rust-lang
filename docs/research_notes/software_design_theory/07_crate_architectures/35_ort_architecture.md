@@ -179,7 +179,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 |:--|:--|:--|
 | 加载 ONNX 模型并执行推理 | [`crates/c08_algorithms/examples/ort_basic_inference.rs`](../../../../crates/c08_algorithms/examples/ort_basic_inference.rs) | 使用 `Session::builder`、`Tensor::from_array` 与 `try_extract_tensor` |
 
-> [来源: [c08_algorithms Crate](https://github.com/rust-lang/rust-lang-learning/tree/main/crates/c08_algorithms)]
+> [来源: [c08_algorithms Crate](../../../../../crates/c08_algorithms)]
 
 ---
 
@@ -234,5 +234,5 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 ## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)
 - [Oxide](https://arxiv.org/abs/1903.00982)

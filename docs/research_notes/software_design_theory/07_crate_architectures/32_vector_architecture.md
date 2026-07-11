@@ -227,5 +227,5 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 ## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)
 - [Oxide](https://arxiv.org/abs/1903.00982)

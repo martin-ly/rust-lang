@@ -2128,7 +2128,7 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 | 统计显著性、置信区间 | [Criterion.rs Book – Analysis](https://bheisler.github.io/criterion.rs/book/analysis.html) | 测量噪声、置信区间、异常值剔除 |
 | 回归检测与基线对比 | [Criterion.rs Book – Comparing Functions](https://bheisler.github.io/criterion.rs/book/user_guide/comparing_functions.html) | `--save-baseline`、`--baseline` |
 | 性能测试方法论 | [The Rust Performance Book – Profiling](https://nnethercote.github.io/perf-book/profiling.html) | 先测量后优化、profiler 选型 |
-| 内存布局与分配 | [The Rust Performance Book – Memory](https://nnethercote.github.io/perf-book/memory.html) | 堆/栈、缓存、分配器 |
+| 内存布局与分配 | [The Rust Performance Book – Memory](https://nnethercote.github.io/perf-book/) | 堆/栈、缓存、分配器 |
 | Rust 基准测试 API | [Rust Standard Library – std::hint::black_box](https://doc.rust-lang.org/std/) | `black_box`、编译器屏障 |
 | 实验可重复性 | [Rust Reference](https://doc.rust-lang.org/reference/) | 编译选项、edition、目标三元组 |
 

@@ -478,7 +478,7 @@ graph TD
 ```
 
 > **陷阱总结**: 测试的陷阱主要与**flakiness**、**过度 mock**、**错误忽略**、**实现耦合**和**成功路径偏见**相关。
-> [来源: [Rust Testing Best Practices](https://rustc-dev-guide.rust-lang.org/tests/intro.html)]
+> [来源: [Rust Testing Best Practices](https://rustc-dev-guide.rust-lang.org/overview.html)]
 
 ---
 

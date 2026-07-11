@@ -43,7 +43,7 @@
 | [Observer](https://refactoring.guru/design-patterns/observer) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §2 | 使用 `Weak<dyn Observer>` 或 channel |
 | [Builder](https://refactoring.guru/design-patterns/builder) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §4 | 类型状态模式 |
 | [Strategy](https://refactoring.guru/design-patterns/strategy) | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | trait 作为策略接口 |
-| [Type State](https://rust-unofficial.github.io/patterns/patterns/behavioural/state.html) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §4 | 编译期状态迁移 |
+| [Type State](https://rust-unofficial.github.io/patterns/)) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §4 | 编译期状态迁移 |
 | [Adapter](https://refactoring.guru/design-patterns/adapter) | [software_design_theory/01_design_patterns_formal/README.md](software_design_theory/01_design_patterns_formal/README.md) | newtype 包装 |
 
 ---
@@ -76,7 +76,7 @@
 | 反模式 | 来源 | 项目文档 | 备注 |
 |--------|------|----------|------|
 | 全局可变状态 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §1 | 单例反模式 |
-| 过度泛型（Generics）化 | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §6 | 类型参数过多 |
+| 过度泛型（Generics）化 | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §6 | 类型参数过多 |
 | 滥用内部可变性 | [Rustonomicon](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §3 | RefCell 过度使用 |
 
 ---
@@ -98,7 +98,7 @@
 2. 并发模式（Thread Pool、Work Stealing）与 tokio/rayon 的对齐待扩展。
 3. 微服务模式（API Gateway、CQRS、Event Sourcing）可补充。
 
-> **权威来源**: [Refactoring Guru](https://refactoring.guru/design-patterns) | [GoF Book](https://en.wikipedia.org/wiki/Design_Patterns) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [microservices.io](https://microservices.io/) | [Release It!](https://pragprog.com/titles/mnee2/release-it-second-edition/)
+> **权威来源**: [Refactoring Guru](https://refactoring.guru/design-patterns) | [GoF Book](https://en.wikipedia.org/wiki/Design_Patterns) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | [microservices.io](https://microservices.io/) | [Release It!](https://pragprog.com/titles/mnee2/release-it-second-edition/)
 
 ## 相关概念 {#相关概念}
 
@@ -116,4 +116,4 @@
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)

@@ -23,7 +23,7 @@
 > [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) |
 > [Cargo Book – Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html) |
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) |
-> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) |
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) |
 > [config crate docs](https://docs.rs/config/latest/config/) |
 > [clap docs](https://docs.rs/clap/latest/clap/) |
 > [envy docs](https://docs.rs/envy/latest/envy/) |
@@ -53,7 +53,7 @@
 
 ## 概述 {#概述}
 
-> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 
 配置管理是组合工程在**运行期参数维度**的延伸：将应用程序的行为参数从代码中解耦，通过可组合、可覆盖的来源（CLI 参数、环境变量、配置文件、默认值）构建出最终生效配置。良好的配置管理需要满足：
 
@@ -267,14 +267,14 @@ let cfg: AppConfig = load_config().unwrap();
 | P1 | [clap docs](https://docs.rs/clap/latest/clap/) | 命令行参数解析与派生宏（Macro） |
 | P1 | [envy docs](https://docs.rs/envy/latest/envy/) | 环境变量到结构体反序列化 |
 | P1 | [figment docs](https://docs.rs/figment/latest/figment/) | Profile 化配置组合 |
-| P2 | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | Builder、Strategy、依赖注入等设计模式 |
+| P2 | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | Builder、Strategy、依赖注入等设计模式 |
 | P2 | [12-Factor App – Config](https://12factor.net/config) | 环境变量优先的配置哲学 |
 
 ---
 
 ## 相关概念 {#相关概念}
 
-> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 
 - [服务组合](README.md)：配置管理是服务组合的参数化延伸。
 - [01_formal_composition](01_formal_composition.md)：组合工程的形式化定义。

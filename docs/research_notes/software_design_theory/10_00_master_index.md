@@ -11,9 +11,9 @@
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
-> **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/` 迁回，正在按 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) 等权威来源升级。
+> **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/` 迁回，正在按 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) 等权威来源升级。
 >
-> **权威来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📑 目录 {#目录}
 
@@ -248,7 +248,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Refactoring.Guru](https://refactoring.guru/design-patterns)：各模式结构图
-- [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/)：Rust 惯用模式
+- [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/))：Rust 惯用模式
 - [Fowler EAA](https://martinfowler.com/eaaCatalog/)：43 完全扩展模式来源
 
 ---

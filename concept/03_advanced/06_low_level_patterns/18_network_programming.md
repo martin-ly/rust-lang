@@ -36,7 +36,7 @@
 > [RFC 768 — UDP](https://tools.ietf.org/html/rfc768) ·
 > [Linux socket man pages](https://man7.org/linux/man-pages/man2/socket.2.html) ·
 > [mio crate](https://docs.rs/mio/latest/mio/) ·
-> [AFIT（async fn in trait，Rust 1.75.0+ 稳定） crate](<https://docs.rs/AFIT（async> fn in trait，Rust 1.75.0+ 稳定）/latest/async_trait/) ·
+> [AFIT（async fn in trait，Rust 1.75.0+ 稳定） crate](https://docs.rs/async-trait/latest/async_trait/) ·
 > [pin-project crate](https://docs.rs/pin-project/latest/pin_project/)
 
 ## 📑 目录
@@ -728,7 +728,7 @@ graph LR
 | [mio crate](https://docs.rs/mio/latest/mio/) | ✅ 二级 | Tokio 底层的跨平台 IO 多路复用库 |
 | [Hyper](https://hyper.rs/) | ✅ 二级 | Rust HTTP 实现，基于 Tokio |
 | [Linux socket man pages](https://man7.org/linux/man-pages/man2/socket.2.html) | ✅ 三级 | Linux socket 系统调用手册 |
-| [AFIT（async fn in trait，Rust 1.75.0+ 稳定） crate](<https://docs.rs/AFIT（async> fn in trait，Rust 1.75.0+ 稳定）/latest/async_trait/) | ✅ 三级 | trait 中 async fn 的过渡方案 |
+| [AFIT（async fn in trait，Rust 1.75.0+ 稳定） crate](https://docs.rs/async-trait/latest/async_trait/) | ✅ 三级 | trait 中 async fn 的过渡方案 |
 | pin-project crate | ✅ 三级 | 自引用（Reference）结构体（Struct）的 Pin 投影 |
 | [Tokio TCP Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) | ✅ 一级 | TcpListener API 文档 |
 | [Tokio UDP Docs](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html) | ✅ 一级 | UdpSocket API 文档 |

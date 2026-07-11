@@ -397,7 +397,7 @@ fn main() {
 ```
 
 > **自定义洞察**: **Enum 类型擦除比 trait object 更快**——但限制了可扩展性。
-> [来源: [Rust Design Patterns — Type Erasure](https://rust-unofficial.github.io/patterns/)]
+> [来源: [Rust Design Patterns — Type Erasure](https://rust-unofficial.github.io/patterns/))]
 
 ---
 
@@ -560,7 +560,7 @@ graph TD
 | [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) | ✅ 一级 | 参考 |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) | ✅ 一级 | unsafe 指南 |
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 二级 | 性能 |
-| [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | ✅ 二级 | 设计模式 |
+| [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | ✅ 二级 | 设计模式 |
 
 ---
 

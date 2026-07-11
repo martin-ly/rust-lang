@@ -9,7 +9,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `02_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。
 > **原则**: 每个惯用法必须展示「非惯用写法 → 惯用写法」的等价变换，并标注效率特征与认知负荷。
-> **对齐来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [Rust Style Guide] · [Clippy Lints] · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **对齐来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · [Rust Style Guide] · [Clippy Lints] · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 > **基准版本**: Rust 1.97.0 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -391,7 +391,7 @@ impl Meters {
 
 ### 4.2
 
-> [Rust Design Patterns, Typestate](https://rust-unofficial.github.io/patterns/patterns/typestate.html) Typestate 模式
+> [Rust Design Patterns, Typestate](https://rust-unofficial.github.io/patterns/)) Typestate 模式
 > **惯用**: 利用泛型（Generics）和 `PhantomData` 将状态编码到类型中，使非法状态不可表示。
 
 ```rust,ignore
@@ -1149,7 +1149,7 @@ quadrantChart
 
 ---
 
-> **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/idioms/) · [Rust Style Guide](https://doc.rust-lang.org/style-guide/) · [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html) · [TRPL §13](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
+> **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · [Rust Style Guide](https://doc.rust-lang.org/style-guide/) · [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html) · [TRPL §13](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
 >
 > **Rust 版本**: 1.97.0 stable (Edition 2024)
 > **文档版本**: 1.1

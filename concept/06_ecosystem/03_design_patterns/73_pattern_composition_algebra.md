@@ -14,7 +14,7 @@
 > **双维定位**: C×Eva — 评价模式组合的正确性与一致性（Coherence）
 > **前置概念**: [Patterns](02_patterns.md) · [Concurrency Patterns](../../03_advanced/00_concurrency/10_concurrency_patterns.md) · [Async Patterns](../../03_advanced/01_async/26_async_patterns.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)
 > **后置概念**: [Distributed Systems](../04_web_and_networking/18_distributed_systems.md) · [System Design Principles](05_system_design_principles.md)
-> **主要来源**: [GoF — Design Patterns] · [POSA — Pattern-Oriented Software Architecture] · [Category Theory for Programmers, Bartosz Milewski] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**: [GoF — Design Patterns] · [POSA — Pattern-Oriented Software Architecture] · [Category Theory for Programmers, Bartosz Milewski] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 ---
@@ -519,7 +519,7 @@ enum CircuitState {
 | 模式组合代数 | [POSA] · [💡 原创分析] | ✅/💡 | Tier 3 |
 | 协同组合矩阵 | [GoF] · [💡 原创分析] | ✅/💡 | Tier 3 |
 | 冲突矩阵 | [POSA] · [💡 原创分析] | ✅/💡 | Tier 3 |
-| Rust Typestate + Builder | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | ✅ | Tier 2 |
+| Rust Typestate + Builder | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | ✅ | Tier 2 |
 | Saga 模式 | [Hector & Kenneth — Sagas] | ✅ | Tier 2 |
 | 组合安全性定理 | [💡 原创分析] | ⚠️ | Tier 3 |
 
@@ -527,7 +527,7 @@ enum CircuitState {
 
 > **权威来源**: [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) ·
 > [POSA](https://en.wikipedia.org/wiki/Pattern-Oriented_Software_Architecture) ·
-> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) ·
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) ·
 > [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)

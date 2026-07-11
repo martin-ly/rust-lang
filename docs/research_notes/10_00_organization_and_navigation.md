@@ -30,7 +30,7 @@
   - [五、常见困惑与解答 {#五常见困惑与解答}](#五常见困惑与解答-五常见困惑与解答)
   - [六、权威来源与版本约定 {#六权威来源与版本约定}](#六权威来源与版本约定-六权威来源与版本约定)
   - [七、与顶层 docs 的衔接 {#七与顶层-docs-的衔接}](#七与顶层-docs-的衔接-七与顶层-docs-的衔接)
-  - [🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}](#-rust-1961--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明)
+  - [🆕 Rust 1.97.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}](#-rust-1970--edition-2024-权威国际化升级说明-rust-1960-edition-2024-权威国际化升级说明)
     - [升级要点 {#升级要点}](#升级要点-升级要点)
       - [权威来源对齐 {#权威来源对齐}](#权威来源对齐-权威来源对齐)
       - [形式化来源对照 {#形式化来源对照}](#形式化来源对照-形式化来源对照)
@@ -226,7 +226,7 @@ research_notes/
 
 #### 形式化来源对照 {#形式化来源对照}
 
-> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) / [Aeneas](https://aeneas-verification.github.io/) / [Ferrocene FLS](https://spec.ferrocene.dev/)
+> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) / [Aeneas](https://aeneasverif.github.io/) / [Ferrocene FLS](https://spec.ferrocene.dev/)
 
 | 形式化主题 | RustBelt | Aeneas | Ferrocene FLS |
 | :--- | :--- | :--- | :--- |
@@ -248,7 +248,7 @@ research_notes/
 
 ---
 
-> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/), [RustBelt](https://plv.mpi-sws.org/rustbelt/), [Aeneas](https://aeneas-verification.github.io/), [Ferrocene FLS](https://spec.ferrocene.dev/)
+> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/), [RustBelt](https://plv.mpi-sws.org/rustbelt/), [Aeneas](https://aeneasverif.github.io/), [Ferrocene FLS](https://spec.ferrocene.dev/)
 >
 > **权威来源对齐变更日志**: 2026-06-29 完成 Batch 9：将泛化 Rust Official Docs 替换为具体章节/API/模块链接，并补充 P1 形式化来源对照 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 
@@ -280,7 +280,7 @@ research_notes/
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 > **形式化来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) — Rust 语义与形式化安全性证明
-> **形式化来源**: [Aeneas](https://aeneas-verification.github.io/) — Rust 程序到 Lean 的验证前端
+> **形式化来源**: [Aeneas](https://aeneasverif.github.io/) — Rust 程序到 Lean 的验证前端
 > **形式化来源**: [Ferrocene FLS](https://spec.ferrocene.dev/) — Rust 语言形式化规范
 
 ---

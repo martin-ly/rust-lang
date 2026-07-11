@@ -117,9 +117,9 @@ Web 框架职能分层:
   │     [hyper docs](https://docs.rs/hyper/latest/hyper/) 底层 HTTP 实现    │
   ├─────────────────────────────────────────┤
   │  L1: 运行时层 — async/await 调度、IO 事件  │
-  │     [Tokio docs](https://docs.rs/Tokio/latest/Tokio/) Runtime 模型      │
+  │     [Tokio docs](https://docs.rs/tokio/latest/tokio/) Runtime 模型      │
   └─────────────────────────────────────────┘
-> [Axum Docs](https://docs.rs/Axum/latest/Axum/)
+> [Axum Docs](https://docs.rs/axum/latest/axum/)
 ```
 
 > **认知功能**: Rust Web 框架的竞争力来自 L1+L2 的零成本抽象（Zero-Cost Abstraction）——无 GC、无运行时解释器，编译后即为高效原生代码。[💡 原创分析](../../00_meta/00_framework/methodology.md)
@@ -141,7 +141,7 @@ Rust Web 框架演进:
         [Actix-web GitHub history](https://actix.rs/)
 
   2018: Warp (基于 hyper + filter 组合) — 函数式路由探索
-        [Warp docs](https://docs.rs/Warp/latest/Warp/)
+        [Warp docs](https://docs.rs/warp/latest/warp/)
 
   2021: Axum v0.1 — Tokio 官方出品，Tower 生态原生集成
         [Axum GitHub release history](https://docs.rs/axum/latest/axum/)
@@ -225,7 +225,7 @@ graph TD
 
 ```text
 Axum 架构特征:
-  运行时绑定: Tokio 独占 [Tokio docs](https://docs.rs/Tokio/latest/Tokio/)
+  运行时绑定: Tokio 独占 [Tokio docs](https://docs.rs/tokio/latest/tokio/)
   路由模型: 组合式（Router::merge、nest、route）
   提取器: 类型安全（impl FromRequestParts / FromRequest）
   状态共享: with_state（任意类型，通常 Arc<T>）

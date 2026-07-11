@@ -177,7 +177,7 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 |:--|:--|:--|
 | 加载 ONNX 模型并执行纯 Rust 推理 | [`crates/c08_algorithms/examples/tract_basic_inference.rs`](../../../../crates/c08_algorithms/examples/tract_basic_inference.rs) | 使用 `tract_onnx::onnx()`、`into_optimized`、`into_runnable` |
 
-> [来源: [c08_algorithms Crate](https://github.com/rust-lang/rust-lang-learning/tree/main/crates/c08_algorithms)]
+> [来源: [c08_algorithms Crate](../../../../../crates/c08_algorithms)]
 
 ---
 
@@ -228,5 +228,5 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 ## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)
 - [Oxide](https://arxiv.org/abs/1903.00982)

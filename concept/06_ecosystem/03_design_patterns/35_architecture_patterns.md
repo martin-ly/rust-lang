@@ -15,7 +15,7 @@
 > **前置依赖**: [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [生命周期（Lifetimes）](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · 设计模式
 > **后置延伸**: [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) · [微服务架构模式](31_microservice_patterns.md) · [事件驱动架构](32_event_driven_architecture.md)
 >
-> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 ---
 
@@ -500,7 +500,7 @@ async fn main() {
 > - 依赖注入 = 泛型（Generics）参数或 `Arc<dyn Trait>`（动态分发）
 > - 编译器强制依赖规则 = `cargo` 的模块（Module）可见性和 workspace 依赖约束
 >
-> **来源**: [Cockburn — Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **来源**: [Cockburn — Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 
 ---
 

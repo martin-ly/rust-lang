@@ -509,7 +509,7 @@ graph TD
 ```
 
 > **边界要点**: 高级类型系统的边界主要与**递归限制**、**常量表达式**、**推断失败**、**编译时间**和**FFI**相关。
-> [来源: [Rust Compiler — Monomorphization](https://rustc-dev-guide.rust-lang.org/backend/monomorph.html)]
+> [来源: [Rust Compiler — Monomorphization](https://rustc-dev-guide.rust-lang.org/overview.html)]
 
 ---
 

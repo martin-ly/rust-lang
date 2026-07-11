@@ -677,7 +677,7 @@ let r = &x;  // 编译器自动推断
 
 - [RFC 2094 - Non-Lexical Lifetimes (NLL)](https://rust-lang.github.io/rfcs/2094-nll.html)
 - [RustBelt: Securing the Foundations of the Rust Programming Language](https://plv.mpi-sws.org/rustbelt/)
-- [RustBelt paper (PDF)](https://plv.mpi-sws.org/rustbelt/rustbelt.pdf)
+- [RustBelt paper (PDF)](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf)
 - [Stacked Borrows](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md)
 - [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)
 - [Rustonomicon - Lifetimes](https://doc.rust-lang.org/nomicon/lifetimes.html)

@@ -374,7 +374,7 @@ async 块:
 ```
 
 > **模式矩阵**: 闭包是 Rust **函数式编程风格的核心**——它们与迭代器（Iterator）、异步（Async）和并发深度集成。
-> [来源: [Rust Patterns — Closures](https://rust-unofficial.github.io/patterns/)]
+> [来源: [Rust Patterns — Closures](https://rust-unofficial.github.io/patterns/))]
 
 ---
 

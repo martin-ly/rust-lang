@@ -565,7 +565,7 @@ LLVM 优化管道:
   - Rust 特有的优化: 单态化后的函数去重、panic 路径优化
 ```
 
-> **来源**: [LLVM Documentation](https://llvm.org/docs/) · [Rustc Dev Guide — Code Generation](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)
+> **来源**: [LLVM Documentation](https://llvm.org/docs/) · [Rustc Dev Guide — Code Generation](https://rustc-dev-guide.rust-lang.org/overview.html)
 
 ### 8.2 增量编译
 >

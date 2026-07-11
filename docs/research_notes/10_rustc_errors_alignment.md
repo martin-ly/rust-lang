@@ -93,7 +93,7 @@
 2. 编译器 warnings（如 `unsafe_op_in_unsafe_fn`）与 Edition 2024 变化可补充。
 3. 未来可自动生成「项目反例 → rustc 错误码」反向索引。
 
-> **权威来源**: [Rust Error Codes Index](https://doc.rust-lang.org/error_codes/error-index.html) | [rustc-dev-guide – Diagnostics](https://rustc-dev-guide.rust-lang.org/diagnostics.html)
+> **权威来源**: [Rust Error Codes Index](https://doc.rust-lang.org/error_codes/error-index.html) | [rustc-dev-guide – Diagnostics](https://rustc-dev-guide.rust-lang.org/overview.html)
 
 ## 相关概念 {#相关概念}
 
@@ -110,7 +110,7 @@
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)
 
 ## 社区权威参考 {#社区权威参考}
 

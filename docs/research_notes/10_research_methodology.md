@@ -559,7 +559,7 @@ def take_max (a b : U32) : Result U32 :=
 - [Miri](https://github.com/rust-lang/miri) — Rust MIR 解释器与 UB 检测
 - [Creusot](https://creusot-rs.github.io/) — 基于 Why3/SMT 的 Rust 演绎验证
 - [Aeneas](https://aeneas-verif.github.io/aeneas/) — 函数式翻译验证工具链
-- [Verus](https://github.com/verus-lang/verusverus/) — 面向系统代码的 SMT 验证器
+- [Verus](https://github.com/verus-lang/verus/) — 面向系统代码的 SMT 验证器
 - [Criterion.rs](https://bheisler.github.io/criterion.rs/book/) — 统计驱动基准测试
 
 ### 最佳实践 {#最佳实践}

@@ -648,5 +648,5 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
+> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))**
 > **来源: [This Week in Rust](https://this-week-in-rust.org/)**

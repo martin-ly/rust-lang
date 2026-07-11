@@ -252,7 +252,7 @@ define_enum_with_display! {
 ```
 
 > **DRY 洞察**: 宏的**批量 Trait 实现**是大型项目中减少样板代码的标准技术——尤其适用于 Newtype 和枚举（Enum）。
-> [来源: [Rust Patterns — Macros](https://rust-unofficial.github.io/patterns/)]
+> [来源: [Rust Patterns — Macros](https://rust-unofficial.github.io/patterns/))]
 
 ---
 

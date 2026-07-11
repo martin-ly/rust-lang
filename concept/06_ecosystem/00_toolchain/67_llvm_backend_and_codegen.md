@@ -16,9 +16,9 @@
 
 ---
 
-> **来源**: [Rustc Dev Guide — Backend](https://rustc-dev-guide.rust-lang.org/backend/codegen.html) · [LLVM Documentation](https://llvm.org/docs/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rustc Dev Guide — Backend](https://rustc-dev-guide.rust-lang.org/overview.html) · [LLVM Documentation](https://llvm.org/docs/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rustc Dev Guide — The MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html) ·
-> [Rustc Dev Guide — Backend Agnostic Codegen](https://rustc-dev-guide.rust-lang.org/backend/backend-agnostic.html) ·
+> [Rustc Dev Guide — Backend Agnostic Codegen](https://rustc-dev-guide.rust-lang.org/overview.html) ·
 > [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html)
 
 ---
@@ -89,7 +89,7 @@ LLVM 是一套模块（Module）化的编译器工具链，核心是**可插拔�
 - 自动支持 LLVM 支持的所有平台；
 - 安全漏洞（如 Spectre/Meltdown）只需更新 LLVM。
 
-> [Rustc Dev Guide — What is LLVM?](https://rustc-dev-guide.rust-lang.org/backend/backend.html)(<https://rustc-dev-guide.rust-lang.org/backend/codegen.html#what-is-llvm>)
+> [Rustc Dev Guide — What is LLVM?](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -138,7 +138,7 @@ cargo build --release --config 'profile.release.codegen-units=1'
 
 > **关键洞察**: Codegen unit 是编译时间与运行时（Runtime）性能之间的调优杠杆。
 >
-> [Rustc Dev Guide — Code generation — Codegen units](https://rustc-dev-guide.rust-lang.org/backend/mono.html)(<https://rustc-dev-guide.rust-lang.org/backend/codegen.html#what-is-llvm>)
+> [Rustc Dev Guide — Code generation — Codegen units](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -160,7 +160,7 @@ Target spec 包含 ABI、数据布局、调用约定、可用特性等。自定�
 rustc --target my-target.json
 ```
 
-> [Rustc Dev Guide — Adding a new target](https://rustc-dev-guide.rust-lang.org/building/new-target.html)(<https://rustc-dev-guide.rust-lang.org/building/new-target.html>)
+> [Rustc Dev Guide — Adding a new target](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -192,7 +192,7 @@ cargo rustc --release -- -C lto=thin
 | `thin` | 快 | 接近 fat |
 | `off` | 最快 | 无跨 crate 优化 |
 
-> [Rustc Dev Guide — Code generation — LTO](https://rustc-dev-guide.rust-lang.org/backend/mono.html)(<https://rustc-dev-guide.rust-lang.org/backend/codegen.html#what-is-llvm>)
+> [Rustc Dev Guide — Code generation — LTO](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -213,7 +213,7 @@ rustup component add rustc-codegen-cranelift --toolchain nightly
 cargo +nightly build -Zcodegen-backend=cranelift
 ```
 
-> [Rustc Dev Guide — Codegen backend testing](https://rustc-dev-guide.rust-lang.org/tests/intro.html)(<https://rustc-dev-guide.rust-lang.org/tests/intro.html#codegen-backend-testing>)
+> [Rustc Dev Guide — Codegen backend testing](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -284,8 +284,8 @@ Cranelift 编译速度快但优化较弱，适合 debug 构建或需要快速反
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rustc Dev Guide — Code generation](https://rustc-dev-guide.rust-lang.org/backend/codegen.html) | ✅ 一级 | 代码生成官方文档 |
-| [Rustc Dev Guide — Backend Agnostic Codegen](https://rustc-dev-guide.rust-lang.org/backend/backend-agnostic.html) | ✅ 一级 | 后端无关代码生成 |
+| [Rustc Dev Guide — Code generation](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | 代码生成官方文档 |
+| [Rustc Dev Guide — Backend Agnostic Codegen](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | 后端无关代码生成 |
 | [Rustc Dev Guide — The MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html) | ✅ 一级 | MIR 官方文档 |
 | [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html) | ✅ 一级 | 链接规则 |
 

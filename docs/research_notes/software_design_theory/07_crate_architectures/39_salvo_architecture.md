@@ -203,7 +203,7 @@ let router = Router::new().hoop(logger).get(hello);
 |:--|:--|:--|
 | Salvo 路由与路径参数 | [`crates/c06_async/examples/salvo_web_routing.rs`](../../../../crates/c06_async/examples/salvo_web_routing.rs) | `Router` 注册、`#[handler]`、路径参数提取 |
 
-> [来源: [c06_async Crate](https://github.com/rust-lang/rust-lang-learning/tree/main/crates/c06_async)]
+> [来源: [c06_async Crate](../../../../../crates/c06_async)]
 
 ---
 
@@ -251,5 +251,5 @@ let router = Router::new().hoop(logger).get(hello);
 ## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)
 - [Oxide](https://arxiv.org/abs/1903.00982)

@@ -437,7 +437,7 @@ impl EtlPipeline {
 }
 ```
 
-> **来源**: [Rust Design Patterns — Pipeline](https://rust-unofficial.github.io/patterns/patterns/creational/builder.html) ·
+> **来源**: [Rust Design Patterns — Pipeline](https://rust-unofficial.github.io/patterns/)) ·
 > [Tokio Task Spawning](https://docs.rs/tokio/latest/tokio/task/index.html)
 
 ---

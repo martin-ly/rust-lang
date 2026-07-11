@@ -11,9 +11,9 @@
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
-> **对齐说明**: 本目录已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
+> **对齐说明**: 本目录已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
 >
-> **权威来源**: [Rust Design Patterns – Structural](https://rust-unofficial.github.io/patterns/patterns/structural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Design Patterns – Structural](https://rust-unofficial.github.io/patterns/)) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -108,7 +108,7 @@
 ## 权威国际化来源对齐状态 {#权威国际化来源对齐状态}
 
 >
-> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)** | **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** | **来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))** | **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** | **来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
 | 模式文件 | Rust Design Patterns | Rust API Guidelines | GoF 原典 | Rust 1.96+ 示例 | 所有权（Ownership）/生命周期（Lifetimes）分析 | 形式化属性 | 反例升级 |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -128,7 +128,7 @@
 
 ## 权威来源索引 {#权威来源索引}
 
-> **来源: [Rust Design Patterns – 结构型模式形式化](https://rust-unofficial.github.io/patterns/patterns/structural/index.html)**
+> **来源: [Rust Design Patterns – 结构型模式形式化](https://rust-unofficial.github.io/patterns/))**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

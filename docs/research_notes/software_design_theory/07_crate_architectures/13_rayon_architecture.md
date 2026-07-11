@@ -583,5 +583,5 @@ pool.install(|| {
 ## 权威来源参考 {#权威来源参考}
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
-> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 > **来源**: [This Week in Rust](https://this-week-in-rust.org/)

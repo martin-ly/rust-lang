@@ -205,7 +205,7 @@ HttpServer::new(|| async {
 |:--|:--|:--|
 | ntex 路由与路径参数 | [`crates/c06_async/examples/ntex_web_routing.rs`](../../../../crates/c06_async/examples/ntex_web_routing.rs) | `App` / `HttpServer` / `#[web::get]` / 异步工厂 |
 
-> [来源: [c06_async Crate](https://github.com/rust-lang/rust-lang-learning/tree/main/crates/c06_async)]
+> [来源: [c06_async Crate](../../../../../crates/c06_async)]
 
 ---
 
@@ -240,7 +240,7 @@ HttpServer::new(|| async {
 
 > - [来源: [Tokio 文档](https://docs.rs/tokio/latest/tokio/)]
 > - [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
-> - [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+> - [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))]
 
 ### P2 — 仓库与社区文章 {#p2-仓库与社区文章}
 
@@ -251,5 +251,5 @@ HttpServer::new(|| async {
 ## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)
 - [Oxide](https://arxiv.org/abs/1903.00982)

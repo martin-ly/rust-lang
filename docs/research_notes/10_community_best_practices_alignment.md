@@ -50,10 +50,10 @@
 
 | Design Patterns 章节 | 项目文档 | 状态 | 备注 |
 |----------------------|----------|------|------|
-| [Idioms](https://rust-unofficial.github.io/patterns/idioms/index.html) | [software_design_theory/06_rust_idioms.md](software_design_theory/06_rust_idioms.md) | ✅ | Rust 惯用法 |
-| [Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) | [software_design_theory/07_anti_patterns.md](software_design_theory/07_anti_patterns.md) | ✅ | 反模式 |
-| [Functional Patterns](https://rust-unofficial.github.io/patterns/patterns/functional.html) | [software_design_theory/01_design_patterns_formal/README.md](software_design_theory/01_design_patterns_formal/README.md) | 🔄 | 函数式模式 |
-| [Builder](https://rust-unofficial.github.io/patterns/patterns/creational/builder.html) | [software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §4 | ✅ | Builder / 类型状态 |
+| [Idioms](https://rust-unofficial.github.io/patterns/)) | [software_design_theory/06_rust_idioms.md](software_design_theory/06_rust_idioms.md) | ✅ | Rust 惯用法 |
+| [Anti-patterns](https://rust-unofficial.github.io/patterns/)) | [software_design_theory/07_anti_patterns.md](software_design_theory/07_anti_patterns.md) | ✅ | 反模式 |
+| [Functional Patterns](https://rust-unofficial.github.io/patterns/)) | [software_design_theory/01_design_patterns_formal/README.md](software_design_theory/01_design_patterns_formal/README.md) | 🔄 | 函数式模式 |
+| [Builder](https://rust-unofficial.github.io/patterns/)) | [software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §4 | ✅ | Builder / 类型状态 |
 
 ---
 
@@ -83,7 +83,7 @@
 2. Rust Design Patterns 中「Structural Patterns」与项目设计模式文档的映射可细化。
 3. 性能书中的「SIMD」、「Cache」等底层优化可补充示例。
 
-> **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [Rust Performance Book](https://nnethercote.github.io/perf-book/)
+> **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | [Rust Performance Book](https://nnethercote.github.io/perf-book/)
 
 ## 相关概念 {#相关概念}
 
@@ -101,4 +101,4 @@
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)

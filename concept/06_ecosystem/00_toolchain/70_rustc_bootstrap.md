@@ -13,14 +13,14 @@
 > **定位**: 把“Rust 编译器如何用 Rust 写、又用 Rust 编译自己”这一自举过程讲清楚，帮助理解 rustc 开发工作流。
 > **前置概念**: [安全边界](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md)
 > **后置概念**: [Compiler Testing](71_compiler_testing.md)（待补）
-> **来源**: [Rustc Dev Guide — Bootstrapping](https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rustc Dev Guide — Bootstrapping](https://rustc-dev-guide.rust-lang.org/overview.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ---
 
-> **来源**: [Rustc Dev Guide — How to build and run the compiler](https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html) ·
-> [Rustc Dev Guide — What Bootstrapping does](https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html) ·
-> [Rustc Dev Guide — cfg(bootstrap) in dependencies](https://rustc-dev-guide.rust-lang.org/building/bootstrapping/bootstrap-in-dependencies.html) ·
-> [Rustc Dev Guide — Writing tools in Bootstrap](https://rustc-dev-guide.rust-lang.org/building/bootstrapping/writing-tools-in-bootstrap.html)
+> **来源**: [Rustc Dev Guide — How to build and run the compiler](https://rustc-dev-guide.rust-lang.org/overview.html) ·
+> [Rustc Dev Guide — What Bootstrapping does](https://rustc-dev-guide.rust-lang.org/overview.html) ·
+> [Rustc Dev Guide — cfg(bootstrap) in dependencies](https://rustc-dev-guide.rust-lang.org/overview.html) ·
+> [Rustc Dev Guide — Writing tools in Bootstrap](https://rustc-dev-guide.rust-lang.org/overview.html)
 
 ---
 
@@ -69,7 +69,7 @@
 
 > **关键洞察**: 自举让 Rust 编译器“吃自己的狗粮”，同时也确保编译器能稳定地构建自身。
 >
-> [Rustc Dev Guide — Bootstrapping](https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html)(<https://rustc-dev-guide.rust-lang.org/overview.html#bootstrapping>)
+> [Rustc Dev Guide — Bootstrapping](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -100,7 +100,7 @@ Stage 3: 可选，验证 stage2 输出与 stage1 一致
 
 > **定理**: 日常开发通常只需 `./x build library`（得到 stage1），完整发布才需要 stage2。
 >
-> [Rustc Dev Guide — What Bootstrapping does](https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html)(<https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html>)
+> [Rustc Dev Guide — What Bootstrapping does](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -165,7 +165,7 @@ fn new_impl() { ... }
 
 > **警告**: `RUSTC_BOOTSTRAP=1` 只在自举 rustc 时使用，**永远不要**在普通项目中使用，因为它会破坏稳定性保证。
 >
-> [Rustc Dev Guide — What Bootstrapping does](https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html)(<https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html#complications-of-bootstrapping>)
+> [Rustc Dev Guide — What Bootstrapping does](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -179,7 +179,7 @@ Bootstrap 支持三种工具构建模式：
 | `ToolStd` | 依赖本地构建的 std，如 `compiletest` |
 | `ToolRustcPrivate` | 使用 `rustc_private`，依赖本地 rustc 产物，如 Clippy |
 
-> [Rustc Dev Guide — Writing tools in Bootstrap](https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html)(<https://rustc-dev-guide.rust-lang.org/building/bootstrapping/writing-tools-in-bootstrap.html>)
+> [Rustc Dev Guide — Writing tools in Bootstrap](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -233,10 +233,10 @@ Stage 1 是用 stage0（旧 beta）编译当前源码得到的；Stage 2 是用 
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rustc Dev Guide — How to build and run the compiler](https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html) | ✅ 一级 | 构建 rustc 官方文档 |
-| [Rustc Dev Guide — What Bootstrapping does](https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html) | ✅ 一级 | 自举 stage 官方文档 |
-| [Rustc Dev Guide — cfg(bootstrap) in dependencies](https://rustc-dev-guide.rust-lang.org/building/bootstrapping/bootstrap-in-dependencies.html) | ✅ 一级 | `cfg(bootstrap)` 官方文档 |
-| [Rustc Dev Guide — Writing tools in Bootstrap](https://rustc-dev-guide.rust-lang.org/building/bootstrapping/writing-tools-in-bootstrap.html) | ✅ 一级 | Bootstrap 工具类型 |
+| [Rustc Dev Guide — How to build and run the compiler](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | 构建 rustc 官方文档 |
+| [Rustc Dev Guide — What Bootstrapping does](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | 自举 stage 官方文档 |
+| [Rustc Dev Guide — cfg(bootstrap) in dependencies](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | `cfg(bootstrap)` 官方文档 |
+| [Rustc Dev Guide — Writing tools in Bootstrap](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | Bootstrap 工具类型 |
 
 ---
 

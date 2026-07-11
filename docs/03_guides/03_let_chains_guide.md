@@ -394,7 +394,7 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 
 - [Rust Reference: Let Chains](https://doc.rust-lang.org/reference/expressions/if-expr.html)
 - [The Rust Programming Language, Chapter 6.3](https://doc.rust-lang.org/book/ch06-03-if-let.html)
-- [Rust 1.95 Release Notes [已失效]]<!-- 原链接: https://blog.rust-lang.org/2026/05/14/Rust-1.95.0.html -->
+- [Rust 1.95 Release Notes [已失效]]<!-- 原链接: https://github.com/rust-lang/rust/releases/tag/1.95.0 -->
 
 ---
 

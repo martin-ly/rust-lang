@@ -54,7 +54,7 @@
 | [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/) | MPI-SWS | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | 别名模型、UB |
 | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | ETH Zürich | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | 改进别名模型 |
 | [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3) | 多机构 | [10_rustsem_semantics.md](10_rustsem_semantics.md) | 操作语义、unsafe 行为 |
-| [Aeneas](https://aeneas-verification.github.io/) | EPFL | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) | 可验证子集、unsafe 边界 |
+| [Aeneas](https://aeneasverif.github.io/) | EPFL | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) | 可验证子集、unsafe 边界 |
 | [Kani](https://model-checking.github.io/kani/) | AWS | [10_verification_tools_practical_alignment.md](10_verification_tools_practical_alignment.md) | 模型检查、unsafe 断言 |
 
 ---

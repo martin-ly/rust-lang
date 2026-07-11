@@ -521,7 +521,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
-> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
+> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))**
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 

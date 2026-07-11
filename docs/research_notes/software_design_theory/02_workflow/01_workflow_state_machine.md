@@ -13,7 +13,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
 > **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/02_workflow/` 迁回，正在按 [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)、[Tokio Tutorial](https://tokio.rs/tokio/tutorial)、[Rust Reference](https://doc.rust-lang.org/reference/) 等权威来源升级。
-> **权威来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ---
 
@@ -116,7 +116,7 @@ M := (S, E, T ⊆ S × E × S, s₀ ∈ S, F ⊆ S)
 
 ## 4. Rust 实现方案 {#4-rust-实现方案}
 
-> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 
 ### 4.1 枚举状态机 {#41-枚举状态机}
 
@@ -402,7 +402,7 @@ t2.join().unwrap();
 >
 > - [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
 > - [Tokio Tutorial](https://tokio.rs/tokio/tutorial)
-> - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 > - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **P2 权威来源（学术与行业经典）**:
 >
@@ -414,7 +414,7 @@ t2.join().unwrap();
 
 ## 学术权威参考 {#学术权威参考}
 
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 

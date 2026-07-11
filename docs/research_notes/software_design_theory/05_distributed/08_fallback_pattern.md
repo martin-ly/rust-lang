@@ -86,7 +86,7 @@ Degrade(S, S', R) :=
 | 与 Circuit Breaker 关系 | 常与熔断器配合：Open 状态直接走 fallback | 常与负载/健康指标配合 |
 | Rust 建模 | `Result<T, E>` + `or_else` / `unwrap_or_else` | 枚举状态机 + 策略分发 |
 
-> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 
 ### Axiom {#axiom}
 
@@ -211,7 +211,7 @@ match outcome {
 | P0 | [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) | `async/await`、`Future`、Pin、异步状态机 |
 | P0 | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | 超时、任务调度、异步运行时（Runtime） |
 | P1 | [Rust Reference](https://doc.rust-lang.org/reference/) | 类型系统（Type System）、生命周期（Lifetimes）、Send/Sync 语义 |
-| P1 | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | 模式分类、惯用法与最佳实践 |
+| P1 | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | 模式分类、惯用法与最佳实践 |
 | P2 | [Tonic Docs](https://docs.rs/tonic/latest/tonic/) | gRPC / 服务中间件中的 fallback / interceptor 实践 |
 | P2 | [AWS Well-Architected Reliability Pillar](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html) | 分布式韧性设计原则（回退、降级、限流） |
 

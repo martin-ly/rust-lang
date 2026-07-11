@@ -250,11 +250,11 @@
 
 ## 📜 定理跨文档引用网络 {#定理跨文档引用网络}
 >
-> **来源**: [Rust Reference - 形式化基础](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [RustBelt](https://plv.mpi-sws.org/rustbelt/), [Aeneas](https://aeneas-verification.github.io/), [Ferrocene FLS](https://spec.ferrocene.dev/)
+> **来源**: [Rust Reference - 形式化基础](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [RustBelt](https://plv.mpi-sws.org/rustbelt/), [Aeneas](https://aeneasverif.github.io/), [Ferrocene FLS](https://spec.ferrocene.dev/)
 
 ### 定理依赖图 {#定理依赖图}
 >
-> **来源**: [Rust Reference - 形式化基础](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [RustBelt](https://plv.mpi-sws.org/rustbelt/), [Aeneas](https://aeneas-verification.github.io/), [Ferrocene FLS](https://spec.ferrocene.dev/)
+> **来源**: [Rust Reference - 形式化基础](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [RustBelt](https://plv.mpi-sws.org/rustbelt/), [Aeneas](https://aeneasverif.github.io/), [Ferrocene FLS](https://spec.ferrocene.dev/)
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -513,7 +513,7 @@ graph TD
 
 #### 形式化来源对照 {#形式化来源对照}
 
-> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) / [Aeneas](https://aeneas-verification.github.io/) / [Ferrocene FLS](https://spec.ferrocene.dev/)
+> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) / [Aeneas](https://aeneasverif.github.io/) / [Ferrocene FLS](https://spec.ferrocene.dev/)
 
 | 形式化主题 | RustBelt | Aeneas | Ferrocene FLS |
 | :--- | :--- | :--- | :--- |
@@ -570,7 +570,7 @@ graph TD
 
 ---
 
-> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/), [RustBelt](https://plv.mpi-sws.org/rustbelt/), [Aeneas](https://aeneas-verification.github.io/), [Ferrocene FLS](https://spec.ferrocene.dev/)
+> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/), [RustBelt](https://plv.mpi-sws.org/rustbelt/), [Aeneas](https://aeneasverif.github.io/), [Ferrocene FLS](https://spec.ferrocene.dev/)
 >
 > **权威来源对齐变更日志**: 2026-06-29 完成 Batch 9：将泛化 Rust Official Docs 替换为具体章节/API/模块链接，并补充 P1 形式化来源对照 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 
@@ -601,7 +601,7 @@ graph TD
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 > **形式化来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) — Rust 语义与形式化安全性证明
-> **形式化来源**: [Aeneas](https://aeneas-verification.github.io/) — Rust 程序到 Lean 的验证前端
+> **形式化来源**: [Aeneas](https://aeneasverif.github.io/) — Rust 程序到 Lean 的验证前端
 > **形式化来源**: [Ferrocene FLS](https://spec.ferrocene.dev/) — Rust 语言形式化规范
 
 ---

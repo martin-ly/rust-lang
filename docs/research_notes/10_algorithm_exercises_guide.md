@@ -178,4 +178,4 @@ cd scripts/maintenance && python check_research_notes.py
 
 > **来源: [ACM Digital Library](https://dl.acm.org/)**
 > **来源: [IEEE Standards](https://standards.ieee.org/)**
-> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
+> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))**

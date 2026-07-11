@@ -11,9 +11,9 @@
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
-> **对齐说明**: 本文档已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
+> **对齐说明**: 本文档已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
 >
-> **权威来源**: [Rust Design Patterns – Creational](https://rust-unofficial.github.io/patterns/patterns/creational/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Design Patterns – Creational](https://rust-unofficial.github.io/patterns/)) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📑 目录 {#目录}
 
@@ -91,11 +91,11 @@
 ## 权威来源对照 {#权威来源对照}
 
 >
-> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)** | **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** | **来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))** | **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** | **来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
 | 权威来源 | 对应章节 / 条款 | 与本模式关系 |
 | :--- | :--- | :--- |
-| Rust Design Patterns | [Creational Patterns – Singleton](https://rust-unofficial.github.io/patterns/patterns/creational/singleton.html) | Rust 惯用实现与模式定位 |
+| Rust Design Patterns | [Creational Patterns – Singleton](https://rust-unofficial.github.io/patterns/)) | Rust 惯用实现与模式定位 |
 | Rust API Guidelines | [C-SINGLETON / C-LAZY-STATIC](https://rust-lang.github.io/api-guidelines/type-safety.html) | API 设计与类型安全约束 |
 | GoF *Design Patterns* | Chapter 3.5 (Creational Patterns – Singleton) | 经典意图、结构与适用性 |
 | The Rust Programming Language | [Traits & Generics](https://doc.rust-lang.org/book/ch10-00-generics.html) | trait 抽象与多态 |

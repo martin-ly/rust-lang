@@ -703,7 +703,7 @@ graph TD
 
 ### 编译验证：serde 与 tokio 核心抽象
 
-以下代码验证核心 crate 的关键抽象在编译期保持类型安全： [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+以下代码验证核心 crate 的关键抽象在编译期保持类型安全： [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))]
 
 ```rust
 // 模拟 serde 的核心抽象：编译期派生与类型同构

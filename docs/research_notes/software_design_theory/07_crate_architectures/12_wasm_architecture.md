@@ -32,7 +32,7 @@
 
 > **来源: [The Rust and WebAssembly Book](https://rustwasm.github.io/docs/book/)**
 > **来源: [WebAssembly Official](https://webassembly.org/)**
-> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
+> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))**
 > **来源: [ACM Digital Library](https://dl.acm.org/)**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

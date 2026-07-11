@@ -775,7 +775,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 ```
 
 > **来源**: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [without.boats blog: The cost of dynamic dispatch in Rust]
-> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats blog: "The cost of dynamic dispatch in Rust"](https://without.boats/blog/the-cost-of-dynamic-dispatch/) <!-- link: known-broken -->; [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/dynamic-dispatch.html)
+> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats blog: "The cost of dynamic dispatch in Rust"](https://without.boats/blog/the-cost-of-dynamic-dispatch/) <!-- link: known-broken -->; [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/)
 
 **何时选择哪种：API 边界 vs 内部实现**
 

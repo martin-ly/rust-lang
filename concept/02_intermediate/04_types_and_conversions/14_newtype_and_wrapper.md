@@ -23,7 +23,7 @@
 > [TRPL — Newtype Pattern](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types) ·
 > [Wikipedia — Newtype](https://en.wikipedia.org/wiki/Newtype) ·
 > [Rust Reference — Tuple Structs](https://doc.rust-lang.org/reference/items/structs.html) ·
-> [Rust Patterns — Newtype](https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html)
+> [Rust Patterns — Newtype](https://rust-unofficial.github.io/patterns/))
 >
 
 ## 📑 目录
@@ -467,7 +467,7 @@ graph TD
 |:---|:---:|:---|
 | [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines//type-safety.html#c-newtype) | ✅ 一级 | 官方指南 |
 | [TRPL — Newtype Pattern](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | ✅ 一级 | 模式介绍 |
-| [Rust Patterns — Newtype](https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html) | ✅ 二级 | 模式库 |
+| [Rust Patterns — Newtype](https://rust-unofficial.github.io/patterns/)) | ✅ 二级 | 模式库 |
 | [uom crate](https://docs.rs/uom/latest/uom/) | ✅ 一级 | 单位类型库 |
 | [derive_more](https://docs.rs/derive_more/latest/derive_more/) | ✅ 一级 | 减少 Newtype 样板 |
 
@@ -664,7 +664,7 @@ fn main() {
 }
 ```
 
-> **修正**: newtype 模式（`struct Meters(u32)`）创建语义不同的类型，但 `Deref` 自动解引用（Reference）使 newtype 像底层类型一样行为。这导致**方法解析困惑**：`m.saturating_add(50)` 调用 `u32::saturating_add`，而非 `Meters` 的方法（若存在）。设计原则：newtype 用于**类型安全**（防止混淆 Meters 和 Seconds），但 `Deref` 削弱了这一优势。替代方案：1) 不显式实现 `Deref`，只提供必要方法；2) 使用 `From`/`Into` 显式转换；3) 使用 `as_ref()` / `into_inner()` 访问内部值。这与 Haskell 的 `newtype`（无运行时（Runtime）开销，无 Deref 等价物，需显式解包）或 Ada 的派生类型（类似 newtype，无隐式转换）相同——Rust 的 newtype 最纯粹的形式是不实现 `Deref`，完全通过显式 API 交互。[来源: [Newtype Pattern](https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+> **修正**: newtype 模式（`struct Meters(u32)`）创建语义不同的类型，但 `Deref` 自动解引用（Reference）使 newtype 像底层类型一样行为。这导致**方法解析困惑**：`m.saturating_add(50)` 调用 `u32::saturating_add`，而非 `Meters` 的方法（若存在）。设计原则：newtype 用于**类型安全**（防止混淆 Meters 和 Seconds），但 `Deref` 削弱了这一优势。替代方案：1) 不显式实现 `Deref`，只提供必要方法；2) 使用 `From`/`Into` 显式转换；3) 使用 `as_ref()` / `into_inner()` 访问内部值。这与 Haskell 的 `newtype`（无运行时（Runtime）开销，无 Deref 等价物，需显式解包）或 Ada 的派生类型（类似 newtype，无隐式转换）相同——Rust 的 newtype 最纯粹的形式是不实现 `Deref`，完全通过显式 API 交互。[来源: [Newtype Pattern](https://rust-unofficial.github.io/patterns/))] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ## 嵌入式测验（Embedded Quiz）
 

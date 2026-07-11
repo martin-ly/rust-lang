@@ -16,9 +16,9 @@
 
 ---
 
-> **来源**: [Rustc Dev Guide — Diagnostics](https://rustc-dev-guide.rust-lang.org/diagnostics.html) · [compiletest](https://rustc-dev-guide.rust-lang.org/tests/compiletest.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html) ·
-> [Rustc Dev Guide — Compiletest](https://rustc-dev-guide.rust-lang.org/tests/intro.html) ·
+> **来源**: [Rustc Dev Guide — Diagnostics](https://rustc-dev-guide.rust-lang.org/overview.html) · [compiletest](https://rustc-dev-guide.rust-lang.org/overview.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/overview.html) ·
+> [Rustc Dev Guide — Compiletest](https://rustc-dev-guide.rust-lang.org/overview.html) ·
 > [Rust Reference — Lint Levels](https://doc.rust-lang.org/reference/attributes/diagnostics.html#lint-check-attributes)
 
 ---
@@ -83,7 +83,7 @@ error[E0308]: mismatched types
 | **Span** | 指向源码位置的 `Span`，包含主次 label |
 | **Sub-diagnostics** | `note`、`help`、建议等补充信息 |
 
-> [Rustc Dev Guide — Diagnostic structure](https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html)(<https://rustc-dev-guide.rust-lang.org/diagnostics.html#diagnostic-structure>)
+> [Rustc Dev Guide — Diagnostic structure](https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -141,7 +141,7 @@ err.span_suggestion(
 
 > 结构化建议是 `cargo fix` 和 IDE 自动修复的基础。
 >
-> [Rustc Dev Guide — Suggestions](https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html)(<https://rustc-dev-guide.rust-lang.org/diagnostics.html#suggestions>)
+> [Rustc Dev Guide — Suggestions](https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -178,7 +178,7 @@ Lint 运行的时机：
 | Late | HIR 后、类型检查等分析后 | 完整类型信息 |
 | MIR | MIR 上 | 控制流 |
 
-> [Rustc Dev Guide — Lints](https://rustc-dev-guide.rust-lang.org/diagnostics/lint-guidelines.html)(<https://rustc-dev-guide.rust-lang.org/diagnostics.html#lints>)
+> [Rustc Dev Guide — Lints](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -220,7 +220,7 @@ fn main() {
 
 > **警告**: `--bless` 会覆盖 `.stderr` 文件，应仔细审查变更。
 >
-> [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html)(<https://rustc-dev-guide.rust-lang.org/tests/ui.html>)
+> [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/overview.html)(<https://rustc-dev-guide.rust-lang.org/overview.html>)
 
 ---
 
@@ -274,9 +274,9 @@ Late lint pass 在类型检查等分析之后运行，可以使用完整的类�
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rustc Dev Guide — Errors and lints](https://rustc-dev-guide.rust-lang.org/diagnostics.html) | ✅ 一级 | 诊断官方文档 |
-| [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/tests/ui.html) | ✅ 一级 | UI 测试官方文档 |
-| [Rustc Dev Guide — Compiletest](https://rustc-dev-guide.rust-lang.org/tests/intro.html) | ✅ 一级 | compiletest 官方文档 |
+| [Rustc Dev Guide — Errors and lints](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | 诊断官方文档 |
+| [Rustc Dev Guide — UI tests](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | UI 测试官方文档 |
+| [Rustc Dev Guide — Compiletest](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | compiletest 官方文档 |
 | [Rust Reference — Lint Levels](https://doc.rust-lang.org/reference/attributes/diagnostics.html#lint-check-attributes) | ✅ 一级 | lint 等级语言规则 |
 
 ---

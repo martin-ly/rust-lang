@@ -283,7 +283,7 @@ fn main() {
 
 > **错误诊断**: 代码可编译，但运行时（Runtime）行为未定义。
 > **修正**: 使用 `ptr::write` 初始化后再读取。
-> [来源: [Unsafe Code Guidelines — Validity of References](https://rust-lang.github.io/unsafe-code-guidelines/reference/types.html)]
+> [来源: [Unsafe Code Guidelines — Validity of References](https://rust-lang.github.io/unsafe-code-guidelines/)]
 
 ### 4.3 反例：Arc 引用计数管理错误
 

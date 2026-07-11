@@ -77,7 +77,7 @@
 | 权威来源 | 类型 | 最后检查 | 状态 |
 |----------|------|----------|------|
 | Rust API Guidelines | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | 2026-06-29 | ✅ |
-| Rust Design Patterns | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | 2026-06-29 | ✅ |
+| Rust Design Patterns | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | 2026-06-29 | ✅ |
 | Rust Performance Book | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | 2026-06-29 | ✅ |
 | This Week in Rust | [This Week in Rust](https://this-week-in-rust.org/) | 2026-06-29 | ✅ 持续 |
 | Inside Rust Blog | [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) | 2026-06-29 | ✅ 持续 |
@@ -111,4 +111,4 @@
 - [知识图谱索引](10_knowledge_graph_index.md)
 
 > **来源: [RustSEM: A Formal Semantics for Rust](https://link.springer.com/article/10.1007/s10703-024-00460-3)**
-> **来源: [Aeneas Verification](https://aeneas-verification.github.io/)**
+> **来源: [Aeneas Verification](https://aeneasverif.github.io/)**

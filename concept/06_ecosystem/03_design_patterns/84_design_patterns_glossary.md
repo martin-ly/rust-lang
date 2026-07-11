@@ -231,7 +231,7 @@ pub trait SimpleFuture {
 
 ---
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 >
 > **权威来源对齐变更日志**: 2026-07-09 将内部链接迁移至 `concept/` 权威页，补全 Rust 代码示例、术语表与决策树
 

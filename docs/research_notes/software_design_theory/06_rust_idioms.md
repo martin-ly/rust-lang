@@ -11,9 +11,9 @@
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
-> **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/` 迁回，正在按 [Rust Design Patterns – Idioms](https://rust-unofficial.github.io/patterns/idioms/index.html)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) 等权威来源升级。
+> **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/` 迁回，正在按 [Rust Design Patterns – Idioms](https://rust-unofficial.github.io/patterns/))、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) 等权威来源升级。
 >
-> **权威来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📑 目录 {#目录}
 
@@ -653,7 +653,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/)：Rust Idioms 官方来源
+- [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/))：Rust Idioms 官方来源
 - [ownership_model](../formal_methods/10_ownership_model.md)
 - [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) Def QUERY1
 - [01_design_patterns_formal](01_design_patterns_formal/README.md)

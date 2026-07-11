@@ -486,7 +486,7 @@ fn inspect_item(tcx: TyCtxt<'_>, def_id: DefId) {
 
 **实验目标**：
 
-1. 在本地克隆 `rust-lang/rust`，按 [Rustc Dev Guide — Building](https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html) 编译 stage1 编译器。
+1. 在本地克隆 `rust-lang/rust`，按 [Rustc Dev Guide — Building](https://rustc-dev-guide.rust-lang.org/overview.html) 编译 stage1 编译器。
 2. 在 `compiler/rustc_hir_analysis/src/collect/type_of.rs` 的 `type_of` 实现中插入 `tracing` 日志，观察它何时被触发。
 3. 对比 `tcx.type_of(def_id)` 与直接读取 HIR 类型节点的区别：前者会走查询缓存，后者不会。
 

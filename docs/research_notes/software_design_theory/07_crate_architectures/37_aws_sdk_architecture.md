@@ -180,7 +180,7 @@ while let Some(obj) = paginator.next().await {
 |:--|:--|:--|
 | 列出 S3 Bucket | [`crates/c10_networks/examples/aws_sdk_list_buckets.rs`](../../../../crates/c10_networks/examples/aws_sdk_list_buckets.rs) | 使用 `aws_config` 加载配置并调用 `list_buckets` |
 
-> [来源: [c10_networks Crate](https://github.com/rust-lang/rust-lang-learning/tree/main/crates/c10_networks)]
+> [来源: [c10_networks Crate](../../../../../crates/c10_networks)]
 
 ---
 
@@ -234,5 +234,5 @@ while let Some(obj) = paginator.next().await {
 ## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
-- [Aeneas](https://aeneas-verification.github.io/)
+- [Aeneas](https://aeneasverif.github.io/)
 - [Oxide](https://arxiv.org/abs/1903.00982)

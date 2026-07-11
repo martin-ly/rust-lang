@@ -11,10 +11,10 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×App — 应用设计模式解决类型安全问题
 > **前置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
-> **主要来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 >
 > **说明**: 本文档包含可直接编译的标准库示例（`rust`）、依赖外部 crate 或仅为示意的代码片段（`rust,ignore`），以及故意展示编译失败的边界测试（`rust,compile_fail`）。
 ---
@@ -31,7 +31,7 @@
 
 ## 一、权威定义
 
-> **[Rust Design Patterns](https://rust-unofficial.github.io/patterns/)** Rust design patterns are recurring solutions to common problems in software design using the Rust programming language. They leverage Rust's unique features such as ownership, traits, and the type system.
+> **[Rust Design Patterns](https://rust-unofficial.github.io/patterns/))** Rust design patterns are recurring solutions to common problems in software design using the Rust programming language. They leverage Rust's unique features such as ownership, traits, and the type system.
 > **[Wikipedia — Design pattern](https://en.wikipedia.org/wiki/Design_pattern)** A design pattern is the re-usable form of a solution to a design problem. The idea was introduced by the architect Christopher Alexander and has been adapted for various other disciplines, most notably computer science.
 > **来源**: <https://en.wikipedia.org/wiki/Design_pattern>
 > **[Wikipedia — Resource acquisition is initialization (RAII)](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization)** Resource acquisition is initialization (RAII) is a programming idiom used in several object-oriented, statically-typed programming languages to describe a particular language behavior. In RAII, holding a resource is a class invariant, and is tied to object lifetime: resource allocation (or acquisition) is done during object creation (specifically initialization), by the constructor, while resource deallocation (release) is done during object destruction (specifically finalization), by the destructor. In other words, resource acquisition must succeed for initialization to succeed.
@@ -79,7 +79,7 @@
 | **Plugin** | 结构型 | 运行时（Runtime）扩展能力 | `dyn Trait` + 注册表 | 模块（Module）热插拔 |
 | **Observer** | 行为型 | 一对多状态通知 | `Vec<Box<dyn Fn(&T)>>` / `broadcast` / `event-listener` | 解耦状态变化与响应 |
 
-> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [GoF Design Patterns] · 可信度: ✅
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · [GoF Design Patterns] · 可信度: ✅
 
 ### 2.3 断言/推理矩阵
 
@@ -130,7 +130,7 @@ graph TD
 ```
 
 > **认知功能**: 提供设计模式的全景认知框架，帮助学习者建立"模式类型→具体问题→Rust实现"的三层检索路径。建议将其作为查阅具体模式前的导航图，快速定位问题所属的模式类别。
-> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))]
 > **关键洞察**: Rust特有模式（Typestate、Zero-cost Abstraction）并非GoF分类的补丁，而是所有权（Ownership）类型系统（Type System）的自然涌现。
 > [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
@@ -186,7 +186,7 @@ impl Invoker {
 - **Java/C++**: 通常依赖 GC 或智能指针（Smart Pointer）管理命令对象生命周期（Lifetimes）；Rust 需显式处理所有权（Ownership），`Box<dyn Command>` 提供了堆分配动态分发。
 - **Go**: 使用函数值或接口；Rust 的 trait 对象在 vtable 布局上与 Go interface 类似，但 Rust 要求显式 `Box`/`&dyn`。
 
-> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · 可信度: ✅
 
 ### 4.2 Visitor 模式
 
@@ -277,7 +277,7 @@ classDiagram
 - **Java/C++**: 经典双重分发（`accept` + `visit`）；Rust 通过 `match` 枚举实现单分发，避免虚函数膨胀，但无法直接扩展现有 enum 的变体（需用 enum/struct 模拟开放访问者）。
 - **Haskell**: 利用类型类（type class）和代数数据类型直接建模，Rust 的 enum + trait 在表达能力上非常接近。
 
-> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · 可信度: ✅
 
 ### 4.3 Strategy 模式
 
@@ -414,7 +414,7 @@ impl Connection<Open> {
 - **Rust**: `match` 穷尽性检查强制处理所有状态；Typestate 变体将非法转换上移至编译期。
 - **TypeScript**: 可用 discriminated union 模拟，但运行期仍可能处于无效状态。
 
-> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 可信度: ✅
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 可信度: ✅
 
 ### 4.5 Plugin 模式
 >
@@ -807,7 +807,7 @@ struct WriterVTable {
 
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > **关键洞察**: `Box<dyn Write>` 是**动态擦除**，运行时通过 vtable 分发；`enum Either<L, R>` 是**静态擦除**，编译期确定分支，零运行时开销。
-[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))]
 
 #### async/await 设计模式
 
@@ -967,7 +967,7 @@ fn load(path: &str) -> Result<Config, Error> {
 
 > **Bloom 层级**: L4
 
-**定义**：为应对不太可能出现的需求而引入不必要的抽象层次，导致代码复杂度远超实际需要。[Rust Design Patterns — Gold Plating](https://rust-unofficial.github.io/patterns/anti_patterns/gold_plating.html)
+**定义**：为应对不太可能出现的需求而引入不必要的抽象层次，导致代码复杂度远超实际需要。[Rust Design Patterns — Gold Plating](https://rust-unofficial.github.io/patterns/))
 
 **Rust 表现**：
 
@@ -997,7 +997,7 @@ fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> 
 }
 ```
 
-> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))]
 
 **成本分析**：
 
@@ -1016,7 +1016,7 @@ fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> 
 
 **与 L1-L4 的关联**：过度工程的泛型滥用直接违背 [L2 泛型](../../02_intermediate/01_generics/02_generics.md) 中"约束即文档"的原则——无约束的泛型参数丧失类型信息；过度使用 `dyn Trait` 则绕过了 [L1 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 的编译期精确分析，引入运行时间接调用。
 
-> **来源**: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines//flexibility.html) · [Rust Design Patterns — Gold Plating](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
+> **来源**: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines//flexibility.html) · [Rust Design Patterns — Gold Plating](https://rust-unofficial.github.io/patterns/)) · 可信度: ✅
 
 ---
 
@@ -1184,7 +1184,7 @@ async fn handler(db: &DatabaseLayer, sessions: &SessionLayer) { /* ... */ }
 
 **与 L1-L4 的关联**：上帝对象的 `Mutex<GlobalState>` 模式违背了 L1 所有权 的核心理念——"单一所有者决定生命周期"。通过 Actor / Channel 模型将状态拆分，正是 L3 并发 中"共享状态转化为消息传递"原则的实践。参见 [L1 借用（Borrowing）](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) §内部可变性、L3 并发 §Actor 模型。
 
-> **来源**: [Rust API Guidelines — Structs](https://rust-lang.github.io/api-guidelines//predictability.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) · 可信度: ✅
+> **来源**: [Rust API Guidelines — Structs](https://rust-lang.github.io/api-guidelines//predictability.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/)) · 可信度: ✅
 
 ---
 
@@ -1239,7 +1239,7 @@ fn process_items(mut items: Vec<Item>) -> Vec<Processed> {
 
 **与 L1-L4 的关联**：Spaghetti Code 在 Rust 中最危险的变体是生命周期意大利面——过度复杂的生命周期标注往往意味着违背了 L1 所有权 的"单一所有者"原则，或需要 L3 异步（Async） 中的 `Pin` 来安全表达自引用。`Rc<RefCell<...>>` 的滥用则是 L2 内存管理 中内部可变性机制的误用，参见该文件 §`RefCell<T>` 边界。
 
-> **来源**: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Wikipedia — Spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code) · 可信度: ✅
+> **来源**: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/)) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Wikipedia — Spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code) · 可信度: ✅
 
 ---
 
@@ -1668,7 +1668,7 @@ fn eval(e: &Expr) -> i32 {
 }
 ```
 
-访问者模式仅在"频繁添加新操作，不频繁添加新变体"时优势——Rust 的枚举（Enum）匹配在"频繁添加新变体"时更有优势（编译器检查遗漏）。这与 Haskell 的代数数据类型（同样偏好模式匹配（Pattern Matching））或 Java 的 Visitor（因无枚举匹配而必需）不同——Rust 的类型系统使某些传统设计模式过时。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-00-patterns.html)]
+访问者模式仅在"频繁添加新操作，不频繁添加新变体"时优势——Rust 的枚举（Enum）匹配在"频繁添加新变体"时更有优势（编译器检查遗漏）。这与 Haskell 的代数数据类型（同样偏好模式匹配（Pattern Matching））或 Java 的 Visitor（因无枚举匹配而必需）不同——Rust 的类型系统使某些传统设计模式过时。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-00-patterns.html)]
 
 ### 10.3 边界测试：builder 模式的链式调用与移动语义（编译错误）
 
@@ -1696,7 +1696,7 @@ fn main() {
 }
 ```
 
-> **修正**: Builder 模式的**链式调用**在 Rust 中需处理所有权：`fn name(mut self, ...)` 消耗 `self` 并返回新的 `Self`，旧的 `self` 不可用。修复：1) `fn name(&mut self, ...)` — 借用（Borrowing），支持链式但不返回 `Self`（需分开调用：`builder.name(...); builder.age(...);`）；2) `fn name(mut self, ...) -> Self` — 消耗式，但要求一次性链式调用：`Builder::new().name(...).age(...).build()`；3) `fn name(self, ...) -> Self` — 无 `mut`，在函数内重新绑定。Rust 的 builder 模式通常采用**消耗式**（`mut self`），因为构建完成后 builder 不再需要。这与 Java 的 builder（总是返回 `this`，无所有权问题）或 Python 的 builder（同样无所有权）不同——Rust 的 builder 需显式处理移动语义。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/print.html#builder)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **修正**: Builder 模式的**链式调用**在 Rust 中需处理所有权：`fn name(mut self, ...)` 消耗 `self` 并返回新的 `Self`，旧的 `self` 不可用。修复：1) `fn name(&mut self, ...)` — 借用（Borrowing），支持链式但不返回 `Self`（需分开调用：`builder.name(...); builder.age(...);`）；2) `fn name(mut self, ...) -> Self` — 消耗式，但要求一次性链式调用：`Builder::new().name(...).age(...).build()`；3) `fn name(self, ...) -> Self` — 无 `mut`，在函数内重新绑定。Rust 的 builder 模式通常采用**消耗式**（`mut self`），因为构建完成后 builder 不再需要。这与 Java 的 builder（总是返回 `this`，无所有权问题）或 Python 的 builder（同样无所有权）不同——Rust 的 builder 需显式处理移动语义。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 

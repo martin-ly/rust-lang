@@ -128,7 +128,7 @@
 
 **重点来源**：
 
-- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 - [Rust Performance Book](https://nnethercote.github.io/perf-book/)
 - [This Week in Rust](https://this-week-in-rust.org/)

@@ -273,7 +273,7 @@ graph TD
 定理 T-030: 局部类型推断可判定性 [来源: 04_type_system.md T-030, Pierce TAPL §22]
     「函数签名显式注解 + 无 HKT ⟹ 函数体内推断可判定」
     ↓
-定理 T-031: Trait 约束求解受限可判定性 [02_generics.md T-032, RFC 1665](https://rust-lang.github.io/rfcs/1665.html)
+定理 T-031: Trait 约束求解受限可判定性 [02_generics.md T-032, RFC 1665](https://github.com/rust-lang/rfcs/blob/master/text/1665.md)
     「孤儿规则 + 一致性检查 ⟹ Trait 求解可判定」
     ↓
 推论 C-030: 全局类型一致性 来源: [Rust Reference §6](https://doc.rust-lang.org/reference/introduction.html)
