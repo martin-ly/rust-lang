@@ -142,6 +142,9 @@ pub trait Graph {
 ---
 
 ### 1.2 泛型关联类型（GATs）
+
+> **权威来源**: GAT 的完整论述（`where Self: 'a` 规则、与 HRTB 边界、1.97 限制、选型判定表）集中于
+> [40_generic_associated_types.md](40_generic_associated_types.md)；本节保留与高级 Trait 主题的关联摘要。
 >
 
 ```rust,ignore
@@ -504,6 +507,7 @@ graph TD
 - [Generics](../01_generics/02_generics.md) — 泛型系统
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Type Inference](../../04_formal/00_type_theory/08_type_inference.md) — 类型推断（Type Inference）
+- [Send 与 Sync：Auto Trait 的并发安全契约](../../03_advanced/00_concurrency/17_send_sync_auto_traits.md) — marker/auto trait 与负实现的权威页
 
 ---
 

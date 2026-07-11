@@ -101,12 +101,12 @@ Day 4: Android 与高级主题 (4 小时)
 | Comprehensive Rust 章节 | 本知识体系对应文件 | 对应章节 | 补充深度 |
 |:---|:---|:---|:---|
 | **Welcome** | [`00_meta/learning_guide.md`](../04_navigation/learning_guide.md) | 〇、学习路径选择全景 | 本体系提供更细粒度的背景适配 |
-| **Hello, World** | [`06_ecosystem/01_toolchain.md`](../../06_ecosystem/00_toolchain/01_toolchain.md) | §1.1 安装与配置 | 补充 `rustup` 原理和交叉编译 |
+| **Hello, World** | [`06_ecosystem/01_toolchain.md`](../../06_ecosystem/00_toolchain/01_toolchain.md) | §2.6 rustup 工具链管理 | 补充 `rustup` 原理和交叉编译 |
 | **Variables** | [`01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | §2.1 变量绑定 | 补充移动语义的前置形式化 |
 | **Scalar Types** | [`01_foundation/02_type_system/04_type_system.md`](../../01_foundation/02_type_system/04_type_system.md) | §2.1 标量类型 | 补充类型推导与类型别名 |
 | **Compound Types** | [`01_foundation/02_type_system/04_type_system.md`](../../01_foundation/02_type_system/04_type_system.md) | §2.2 复合类型 | 补充元组 fanout 模式 (Rust 1.85+) |
 | **Control Flow** | [`01_foundation/04_control_flow/07_control_flow.md`](../../01_foundation/04_control_flow/07_control_flow.md) | §1 核心概念 | 补充 `if let` temporary scope (Ed 2024) |
-| **User-Defined Types** | [`01_foundation/02_type_system/04_type_system.md`](../../01_foundation/02_type_system/04_type_system.md) | §3 结构体与枚举 | 补充 `#[repr(C)]` 内存布局 |
+| **User-Defined Types** | [`01_foundation/02_type_system/04_type_system.md`](../../01_foundation/02_type_system/04_type_system.md) | §4.1 ADT（枚举 + 结构体） | 补充 `#[repr(C)]` 内存布局 |
 
 ### 2.2 Day 2 — 所有权与类型系统
 
@@ -115,7 +115,7 @@ Day 4: Android 与高级主题 (4 小时)
 | **Ownership** | [`01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | §3 Move 语义 | 补充线性逻辑形式化映射 |
 | **Borrowing** | [`01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | §2 借用规则 | 补充借用冲突矩阵 |
 | **Strings & Slices** | [`01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | §3.2 切片 | 补充 `str` 的 UTF-8 不变式 |
-| **Pattern Matching** | [`01_foundation/04_control_flow/07_control_flow.md`](../../01_foundation/04_control_flow/07_control_flow.md) | §3.2 模式匹配 | 补充穷尽性检查原理 |
+| **Pattern Matching** | [`01_foundation/04_control_flow/07_control_flow.md`](../../01_foundation/04_control_flow/07_control_flow.md) | §1.2 模式匹配 | 补充穷尽性检查原理 |
 | **Methods & Traits** | [`02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) | §1–3 全部 | 补充 coherence 与 orphan rules |
 | **Generics** | [`02_intermediate/01_generics/02_generics.md`](../../02_intermediate/01_generics/02_generics.md) | §1–3 全部 | 补充单态化与编译膨胀 |
 | **Standard Library Types** | [`01_foundation/05_collections/08_collections.md`](../../01_foundation/05_collections/08_collections.md) | §1–3 全部 | 补充 `FromIterator` for tuples |

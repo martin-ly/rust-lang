@@ -177,7 +177,6 @@ incompatible-rust-versions = "fallback"
 ---
 
 > **权威来源**: [Cargo Book — Configuration](https://doc.rust-lang.org/cargo/reference/config.html)
-> **内容分级**: [参考级]
 
 
 ---

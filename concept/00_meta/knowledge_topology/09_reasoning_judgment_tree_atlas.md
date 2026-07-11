@@ -33,11 +33,11 @@
 
 ```mermaid
 flowchart TD
-    B[借用冲突] --> Q1{是否同时存在 &T 和 &mut T？}
+    B[借用冲突] --> Q1{"活跃别名数是否 ≥2（&T 与 &mut T 在重叠区域同时活跃）？"}
     Q1 -->|是| R1[根因：别名 XOR 可变性被破坏]
-    Q1 -->|否| Q2{借用范围是否重叠？}
+    Q1 -->|否| Q2{"两次借用的活跃区间重叠行数是否 ≥1 行？"}
     Q2 -->|是| R2[根因：借用生命周期重叠]
-    Q2 -->|否| Q3{是否在迭代器内部修改集合？}
+    Q2 -->|否| Q3{"迭代期间对集合的增删操作次数是否 ≥1 次？"}
     Q3 -->|是| R3[根因：集合迭代期间可变借用]
     Q3 -->|否| R4[根因：reborrow 或 split borrow 误用]
     R1 --> F1[[缩小可变借用范围 / 使用 Cell/RefCell/Mutex]]
@@ -54,13 +54,13 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    L[生命周期错误] --> Q1{引用是否从函数返回？}
-    Q1 -->|是| Q2{是否依赖局部变量？}
+    L[生命周期错误] --> Q1{"返回类型含引用且显式生命周期参数数 = 0？"}
+    Q1 -->|是| Q2{"被引用局部变量的作用域结束行是否 < 引用最后使用行？"}
     Q2 -->|是| R1[根因：返回悬垂引用]
     Q2 -->|否| R2[根因：缺少显式生命周期参数]
-    Q1 -->|否| Q3{是否跨 await 保存引用？}
+    Q1 -->|否| Q3{"引用活跃区间跨越的 await 点数是否 ≥1 个？"}
     Q3 -->|是| R3[根因：async 状态机需要 'static 或自引用]
-    Q3 -->|否| Q4{是否涉及 trait object 或 HRTB？}
+    Q3 -->|否| Q4{"签名中 for<'a> HRTB 或 dyn Trait 出现次数是否 ≥1 次？"}
     Q4 -->|是| R4[根因：高阶生命周期约束不足]
     Q4 -->|否| R5[根因：生命周期省略规则不适用]
     R1 --> F1[[返回 owned 数据 / 使用 Arc/Box]]
@@ -79,13 +79,13 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    T[类型不匹配] --> Q1{是否缺少 trait bound？}
+    T[类型不匹配] --> Q1{"'trait bound is not satisfied' 报错数是否 ≥1 条？"}
     Q1 -->|是| R1[根因：泛型参数未实现所需 trait]
-    Q1 -->|否| Q2{是否混用了 &T 与 T？}
+    Q1 -->|否| Q2{"期望与实际类型的引用层级差是否 ≥1 层？"}
     Q2 -->|是| R2[根因：引用与值类型混淆]
-    Q2 -->|否| Q3{是否使用了不同错误类型？}
+    Q2 -->|否| Q3{"同一 ? 链上出现的不同错误类型数是否 ≥2 种？"}
     Q3 -->|是| R3[根因：Result 错误类型不统一]
-    Q3 -->|否| Q4{是否 async fn 返回类型受限？}
+    Q3 -->|否| Q4{"async fn / RPITIT 返回位置涉及的 impl Trait 数是否 ≥1 个？"}
     Q4 -->|是| R4[根因：impl Trait / RPITIT 边界]
     Q4 -->|否| R5[根因：类型推断失败或自定义类型未实现 trait]
     R1 --> F1[[添加 where T: Trait]]
@@ -104,13 +104,13 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    P[运行时 panic] --> Q1{是否由 unwrap/expect 触发？}
+    P[运行时 panic] --> Q1{"unwrap/expect 调用点的 panic 次数是否 ≥1 次？"}
     Q1 -->|是| R1[根因：未处理的可恢复错误]
-    Q1 -->|否| Q2{是否越界/切片越界？}
+    Q1 -->|否| Q2{"索引 i 与长度 len 是否满足 i ≥ len？"}
     Q2 -->|是| R2[根因：索引未验证]
-    Q2 -->|否| Q3{是否 deadlock？}
+    Q2 -->|否| Q3{"持锁等待环中的任务/线程数是否 ≥2 个？"}
     Q3 -->|是| R3[根因：锁顺序或 await 中持有锁]
-    Q3 -->|否| Q4{是否跨 FFI 边界？}
+    Q3 -->|否| Q4{"跨 FFI 边界调用次数 ≥1 次且 panic 穿越 extern 边界？"}
     Q4 -->|是| R4[根因：ABI/生命周期/指针约定错误]
     Q4 -->|否| R5[根因：unsafe 导致 UB 或逻辑错误]
     R1 --> F1[[改用 ? / match / unwrap_or]]
@@ -129,11 +129,11 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    U[unsafe 问题] --> Q1{Miri 是否报 UB？}
-    Q1 -->|是| Q2{是否涉及 raw pointer？}
+    U[unsafe 问题] --> Q1{"cargo miri test 的 UB 报错数是否 ≥1 条？"}
+    Q1 -->|是| Q2{"裸指针解引用（*ptr）次数是否 ≥1 次？"}
     Q2 -->|是| R1[根因：别名规则或 provenance 违规]
     Q2 -->|否| R2[根因：未初始化内存/类型混淆]
-    Q1 -->|否| Q3{是否在 safe API 中暴露 unsafe 不变式？}
+    Q1 -->|否| Q3{"safe 公开 API 依赖的 unsafe 不变式数是否 ≥1 个？"}
     Q3 -->|是| R3[根因：safe 抽象违反 soundness]
     Q3 -->|否| R4[根因：unsafe 块范围过大或契约不清]
     R1 --> F1[[遵守 Stacked/Tree Borrows / 使用 NonNull]]
@@ -247,7 +247,6 @@ flowchart TD
 
 ---
 
-> **内容分级**: [元层]
 
 ---
 

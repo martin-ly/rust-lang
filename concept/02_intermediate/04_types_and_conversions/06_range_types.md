@@ -64,6 +64,7 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
 
 ---
 
@@ -625,3 +626,11 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "Rust 范围类型语义：`std::ops::Range` → `core::range` 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/rangemap — 生态权威 API 文档（范围映射数据结构的生态实践）](https://docs.rs/rangemap)（2026-07-12 验证 HTTP 200）

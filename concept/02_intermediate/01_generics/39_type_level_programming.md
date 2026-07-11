@@ -12,6 +12,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **前置概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)
 > **后置概念**: [Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md)
+> **Const Generics 权威页**: 常量泛型（`<const N: usize>`）的语法与 stable 边界见 [32_const_generics.md](32_const_generics.md)；本页保留 Peano/typenum 等类型级编码技术。
 > **主要来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
 ---

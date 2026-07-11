@@ -9,7 +9,7 @@
 >
 > **受众**: [初学者]
 > **层级**: L1 基础概念
-> **Bloom 层级**: L2-L3
+> **Bloom 层级**: L1-L3
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: C×App
 > **前置概念**: [Strings and Text](09_strings_and_text.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
@@ -19,12 +19,10 @@
 > [The Rust Programming Language — Printing Values](https://doc.rust-lang.org/book/ch01-02-hello-world.html) ·
 > [Rust By Example — Formatted Print](https://doc.rust-lang.org/rust-by-example/hello/print.html)
 >
-> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
 
 ---
 
-> **Bloom 层级**: L2-L3
 > **变更日志**:
 >
 > - v1.0 (2026-07-04): 初始创建
@@ -417,4 +415,5 @@ D. `{:<8}`
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
+- **P1 学术/形式化**: [Weiss, Patterson, Matsakis & Ahmed: Oxide — The Essence of Rust（Rust 类型系统/trait 的学术形式化, arXiv:1903.00982）](https://arxiv.org/abs/1903.00982)（2026-07-12 验证 HTTP 200）
 - **P2 生态/社区**: [docs.rs/regex — 生态权威 API 文档](https://docs.rs/regex) · [docs.rs/serde_json — 生态权威 API 文档](https://docs.rs/serde_json)

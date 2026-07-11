@@ -220,3 +220,11 @@ Rust 编译器检查 `match` 表达式是否穷尽所有可能的值。不可穷
 | [Destructuring](../../02_intermediate/01_generics/02_generics.md) | 模式解构与泛型（Generics）结合使用 |
 | [Control Flow](07_control_flow.md) | `if let`、`while let`、`for` 依赖模式 |
 | [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md) | 术语表（元层参考） |
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [Rust 官方博客 — Rust 1.65.0 发布公告（`let`-`else` 模式稳定化）](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html)（2026-07-12 验证 HTTP 200）

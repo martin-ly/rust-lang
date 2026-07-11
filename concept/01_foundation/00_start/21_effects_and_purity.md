@@ -30,7 +30,7 @@
 > [Rust Project Goals — const traits](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html)
 ---
 
-> **Bloom 层级**: L2-L5
+> **Bloom 层级**: L1-L5
 
 ---
 
@@ -648,7 +648,6 @@ fn main() {
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
 > [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 权威来源对照
 
@@ -671,3 +670,11 @@ fn main() {
 - **L1**：副作用改变程序状态或产生可观察的 IO；纯函数满足引用透明，可被安全替换为结果。
 - **L2**：Rust 通过 `const`、`unsafe` 边界和所有权（Ownership）系统，把效果限制在显式标记的区域内；`const fn` 是无副作用计算的核心工具。
 - **L3**：效果系统（effect system）是类型安全与编译期优化的共同基础；Rust 的 `const` 泛化和未来 effect 特性正在把“无副作用”从约定推向类型系统的一部分。
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/effing-mad — 生态权威 API 文档（Rust 效果处理 effect handlers 实验 crate）](https://docs.rs/effing-mad)（2026-07-12 验证 HTTP 200）

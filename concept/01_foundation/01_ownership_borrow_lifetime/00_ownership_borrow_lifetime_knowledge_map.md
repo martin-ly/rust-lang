@@ -382,3 +382,12 @@ graph TB
 >
 > **过渡**: 从借用过渡到生命周期，可以建立“引用有效范围由编译器静态验证”的核心直觉。
 >
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Jung, Jourdan, Krebbers & Dreyer: RustBelt — Securing the Foundations of the Rust Programming Language（POPL 2018，所有权/借用/生命周期的形式化基线）](https://plv.mpi-sws.org/rustbelt/) · [Jung, Dang, Kang & Dreyer: Stacked Borrows — An Aliasing Model for Rust（POPL 2020, arXiv:1909.03995）](https://arxiv.org/abs/1909.03995)（2026-07-12 验证 HTTP 200）
+- **P2 生态/社区**: [Rust 官方博客 — Niko Matsakis: NLL by default（非词法生命周期全面启用的权威说明）](https://blog.rust-lang.org/2022/08/05/nll-by-default.html)（2026-07-12 验证 HTTP 200）

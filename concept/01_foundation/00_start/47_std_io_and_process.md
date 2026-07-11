@@ -9,7 +9,7 @@
 >
 > **受众**: [初学者]
 > **层级**: L1 基础概念
-> **Bloom 层级**: L2-L3
+> **Bloom 层级**: L1-L3
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: C×App
 > **前置概念**: [Error Handling Basics](../08_error_handling/32_error_handling_basics.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Strings and Text](../06_strings_and_text/09_strings_and_text.md)
@@ -21,12 +21,10 @@
 > [Rust By Example — Std I/O](https://doc.rust-lang.org/rust-by-example/std.html) ·
 > [Rust By Example — Filesystem](https://doc.rust-lang.org/rust-by-example/std_misc/file.html)
 >
-> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
 
 ---
 
-> **Bloom 层级**: L2-L3
 > **变更日志**:
 >
 > - v1.0 (2026-07-04): 初始创建

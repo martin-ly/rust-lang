@@ -334,7 +334,7 @@ Rust 的两种运行模式:
 ```
 
 > **平台矩阵**: Rust 的 **Tier 系统**反映了平台支持的成熟度——Tier 1 有 CI 保证，Tier 2 保证可构建，Tier 3 是社区维护。
-> [来源: [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)] · [来源: [AWS Docs](https://aws.amazon.com/)]
+> [来源: [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html)] · [来源: [AWS Docs](https://aws.amazon.com/)]
 
 ---
 
@@ -456,7 +456,7 @@ graph TD
 | [The rustc Book — Targets](https://doc.rust-lang.org/rustc/targets/index.html) | ✅ 一级 | 目标平台文档 |
 | [Embedded Rust Book](https://docs.rust-embedded.org/book/index.html) | ✅ 一级 | 嵌入式开发 |
 | [cross crate](https://github.com/cross-rs/cross) | ✅ 一级 | 交叉编译工具 |
-| [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) | ✅ 一级 | 平台支持列表 |
+| [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) | ✅ 一级 | 平台支持列表 |
 | [Cargo Book — Targets](https://doc.rust-lang.org/cargo/reference/config.html#target) | ✅ 一级 | Cargo 目标配置 |
 | [Rust Book](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | 官方教程 |
 
@@ -471,7 +471,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) · [LLVM Target Triples](https://clang.llvm.org/docs/CrossCompilation.html#target-triple)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · [LLVM Target Triples](https://clang.llvm.org/docs/CrossCompilation.html#target-triple)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 

@@ -22,7 +22,7 @@
 > **跨层映射**: L1→L4 形式化嵌入 | L1→L3 工程扩展
 > **定理链编号**: T-001 所有权（Ownership）唯一性 → T-002 移动语义完备性 → T-003 Drop 安全性
 > **层级**: L1 基础概念
-> **前置概念**: [Stack vs Heap](../02_type_system/04_type_system.md) · [Scope and Drop](../02_type_system/04_type_system.md)
+> **相关概念**: [Type System](../02_type_system/04_type_system.md)（所有权规则由类型系统静态强制执行，但本文无前置依赖，见上「前置依赖: 无」）
 > **后置概念**: [Borrowing](02_borrowing.md) · [Lifetimes](03_lifetimes.md) · [Smart Pointers](../../02_intermediate/02_memory_management/03_memory_management.md)
 > **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
@@ -33,7 +33,7 @@
 
 ---
 
-> **Bloom 层级**: L2-L4
+> **Bloom 层级**: L1-L4
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、属性矩阵、形式化根基、思维导图、示例反例

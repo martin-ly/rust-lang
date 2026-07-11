@@ -20,7 +20,6 @@
 > [Rust By Example — Conversion](https://doc.rust-lang.org/rust-by-example/conversion.html) ·
 > [The Rust Programming Language — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 >
-> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
 
 > **Rust 1.97.0 变更提示**：
@@ -28,7 +27,6 @@
 
 ---
 
-> **Bloom 层级**: L2-L3
 > **变更日志**:
 >
 > - v1.0 (2026-07-04): 初始创建
@@ -68,6 +66,7 @@
     - [测验 1：转换方式选择](#测验-1转换方式选择)
     - [测验 2：孤儿规则](#测验-2孤儿规则)
   - [认知路径](#认知路径)
+  - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
 
 ---
 
@@ -452,3 +451,4 @@ D. 本地 newtype `struct Bytes(Vec<u8>)`
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
+- **P2 生态/社区**: [docs.rs/az — 生态权威 API 文档（checked/wrapping 数值转换 crate）](https://docs.rs/az)（2026-07-12 验证 HTTP 200）

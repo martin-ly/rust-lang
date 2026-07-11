@@ -27,7 +27,7 @@
 > **来源**: [std::thread](https://doc.rust-lang.org/std/thread/) · [Rayon Docs](https://docs.rs/rayon/) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 ---
 
-> **Bloom 层级**: L4-L6
+> **Bloom 层级**: L3-L6
 > **对应 Crate**: [`c05_threads`](../../crates/c05_threads)
 > **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency)
 
@@ -798,7 +798,6 @@ fn main() {}
 > [来源: [Apache Arrow Rust](https://arrow.apache.org/rust/)]
 > [来源: [Rust Concurrency Patterns](https://rust-lang.github.io/async-book/index.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）
 

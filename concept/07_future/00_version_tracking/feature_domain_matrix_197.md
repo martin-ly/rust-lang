@@ -7,7 +7,7 @@
 > **内容分级**: [参考级]
 > **权威来源**: 本文件为 `concept/` 权威页（P2-1 交付物）。
 > **对应 Rust 版本**: **1.97.0+**（Edition 2024）
-> **Bloom 层级**: L4（分析）/ L5（评价：跨领域一致性判定）
+> **Bloom 层级**: L4（分析）/ L5（评价：跨领域一致性判定）/ L7（版本治理）
 > **层次定位**: L7 未来/版本治理（横向反查层，依附于各核心领域权威页）
 > **最后更新**: 2026-07-11
 > **状态**: ✅ 已对齐 Rust 1.97.0 stable；缺口标注对齐 `reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md` §2.4 / §4 P2
@@ -273,3 +273,4 @@ flowchart LR
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P0 官方**: [Rust RFCs 索引（官方特性提案库）](https://rust-lang.github.io/rfcs/)
+- **P1 学术/形式化**: [Jung, Jourdan, Krebbers & Dreyer: RustBelt — Securing the Foundations of the Rust Programming Language（POPL 2018，类型系统形式化基线）](https://plv.mpi-sws.org/rustbelt/)（2026-07-12 验证 HTTP 200）

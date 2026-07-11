@@ -15,7 +15,7 @@
 > **主要来源**: [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html) · [TRPL Ch 5 — Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) · [TRPL Ch 19 — Advanced Features](https://doc.rust-lang.org/book/ch19-00-advanced-features.html) · [Rust Reference — Operators and Overloading](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementations) · [Rust Reference — std::ops](https://doc.rust-lang.org/std/ops/index.html) · [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) · [cppreference — Constructors](https://en.cppreference.com/w/cpp/language/constructor) · [cppreference — typeid](https://en.cppreference.com/w/cpp/language/typeid) · [cppreference — dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) · [cppreference — Friend](https://en.cppreference.com/w/cpp/language/friend) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
-> **Bloom 层级**: L4-L5
+> **Bloom 层级**: L3-L5
 
 ---
 
@@ -213,3 +213,11 @@ C++ 的 OO 特性是**语法内建**的：构造函数、运算符、`friend` �
 - **C++ Core Guidelines**: <https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html>
 - **Rust Reference（对照）**: <https://doc.rust-lang.org/reference/>
 - **TRPL（对照）**: <https://doc.rust-lang.org/book/title-page.html>
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/bindgen — 生态权威 API 文档（C/C++ 接口绑定的 Rust 侧生态工具）](https://docs.rs/bindgen)（2026-07-12 验证 HTTP 200）

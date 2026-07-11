@@ -357,7 +357,7 @@ RUSTFLAGS="-Zpolonius" cargo build
 
 ## 十三、Lifetime Elision 的完整形式化描述
 
-> **Bloom 层级**: L4-L5
+> **Bloom 层级**: L1-L5
 
 Elision 不是语法便捷性的简单堆砌，而是一组基于 Hindley-Milner 风格模式匹配（Pattern Matching）的完备推导规则。
 以下给出三条规则在函数签名层面的形式化定义，并证明其 soundness。
@@ -554,7 +554,6 @@ fn longest(x: &str, y: &str) -> &str;    // ❌ E0106
 
 ## 十四、`impl Trait` 与生命周期推断的交互
 
-> **Bloom 层级**: L2-L4
 
 `impl Trait` 作为类型抽象机制，在返回位置（RPIT）和参数位置（APIT）的生命周期推断遵循不同的捕获策略。理解其差异对于设计封装引用的 API 至关重要。
 
@@ -835,7 +834,6 @@ Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where 
 
 ## 十六、union 的类型安全边界
 
-> **Bloom 层级**: L4-L5
 > `union` 是 Rust 中唯一允许在同一内存位置存储不同类型的语言构造。它与 `enum` 形成鲜明对比：enum 用 tag 保证类型安全，union 则将类型安全的责任完全交给程序员。本节从内存布局、drop 语义、`ManuallyDrop` 机制、impl 限制与 FFI 互操作五个维度，建立 union 的完整安全模型。
 > **交叉链接**: [L1 类型系统（Type System）: ADT 与 Union 对比](../02_type_system/04_type_system.md) · [L3 unsafe: union 字段访问](../../03_advanced/02_unsafe/03_unsafe.md) · [L3 unsafe: ManuallyDrop](../../03_advanced/02_unsafe/03_unsafe.md)
 

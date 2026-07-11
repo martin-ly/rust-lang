@@ -103,4 +103,5 @@ fn demo() {
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
+- **P1 学术/形式化**: [Matsushita, Denis, Jourdan & Dreyer: RustHornBelt — A Semantic Foundation for Functional Verification of Rust Programs with Unsafe Code（POPL 2022, arXiv:2203.00944）](https://arxiv.org/abs/2203.00944)（2026-07-12 验证 HTTP 200）
 - **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)

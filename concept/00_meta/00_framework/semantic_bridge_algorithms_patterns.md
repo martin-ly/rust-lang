@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **层级**: L0 元信息 — 跨域语义关联
+> **层级**: L4-L6 元信息 — 跨域语义关联
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: F×Eva — 评价算法、模式与工作流之间的语义同构
 > **前置概念**: [Algorithms](../../06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md) ·

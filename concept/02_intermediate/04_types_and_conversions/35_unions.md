@@ -19,12 +19,10 @@
 > [The Rustonomicon — Unions](https://doc.rust-lang.org/nomicon/other-reprs.html) ·
 > [Unsafe Code Guidelines — Unions](https://rust-lang.github.io/unsafe-code-guidelines/)
 >
-> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
 
 ---
 
-> **Bloom 层级**: L2-L3
 > **变更日志**:
 >
 > - v1.0 (2026-07-04): 初始创建
@@ -422,3 +420,4 @@ D. 取决于是否实现 Copy
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
+- **P2 生态/社区**: [Rust 官方博客 — Rust 1.19 发布公告（`union` 类型首次稳定化）](https://blog.rust-lang.org/2017/07/20/Rust-1.19.html)（2026-07-12 验证 HTTP 200）

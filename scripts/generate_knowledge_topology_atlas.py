@@ -121,6 +121,8 @@ def current_file_summary(rel_path: str) -> str:
 def definition_or_fallback(summary: str, rel_path: str) -> str:
     """定义列取值:优先用文件 **Summary** 元数据;空洞时依次回退到
     文件当前 Summary(应对过时 raw json) → 文件首段 → MISSING_DEF(诚实标注,不编造)。"""
+    # 交叉引用尾注是面向原文件目录的相对链接,嵌入 atlas 后会变成死链,剥离
+    summary = re.split(r"\s*\*\*📎 交叉引用", summary or "", maxsplit=1)[0].strip()
     if not is_hollow_definition(summary):
         return summary
     current = current_file_summary(rel_path)
@@ -387,9 +389,9 @@ def write_inter_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
 
     lines.append("## 三、与现有元文件的关系")
     lines.append("")
-    lines.append("- 更详细的层间依赖图见 [../inter_layer_map.md](../inter_layer_map.md)")
-    lines.append("- 层内模型映射见 [../intra_layer_model_map.md](../intra_layer_model_map.md)")
-    lines.append("- 形式化本体规范见 [../kg_ontology_v2.md](../kg_ontology_v2.md)")
+    lines.append("- 更详细的层间依赖图见 [../04_navigation/inter_layer_map.md](../04_navigation/inter_layer_map.md)")
+    lines.append("- 层内模型映射见 [../04_navigation/intra_layer_model_map.md](../04_navigation/intra_layer_model_map.md)")
+    lines.append("- 形式化本体规范见 [kg_ontology_v2.md](kg_ontology_v2.md)")
     lines.append("")
 
     lines.extend(footer())
@@ -400,13 +402,74 @@ def write_intra_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
     lines = header(
         "层内映射图谱（Intra-Layer Mapping Atlas）",
         "Intra-Layer Mapping Atlas",
-        "每层内部核心模型/概念间的等价、蕴含、依赖、互斥关系，基于同层前置/后置引用。",
+        "每层内部核心模型/概念间的等价、蕴含、依赖、互斥关系，基于同层前置/后置引用与策展语义标注。",
     )
+
+    # ---- 关系语义推断规则（T2 反塌缩）--------------------------------------
+    # 符号与 KG 属性对齐（scripts/type_kg_core_edges.py 使用同一策展依据）：
+    #   → dependsOn   源依赖目标（目标出现在源的前置元数据中）
+    #   ⟹ entails     源蕴含/导向目标（后置概念引用，默认）
+    #   ⊑ refines     精化关系：名称含“进阶/机制/模式”的一侧精化另一侧（同主题目录）
+    #   ⊥ mutexWith   两概念互斥、不能同时成立（策展标注，依据见“依据”列）
+    #   ⇔ 对比/等价    对比型页面（vs/对比）间的对照关系
+    #   ↔ 互参        互为后置概念的强互参关系
+    _VS_HINT = re.compile(r"\bvs\b|对比|比较", re.IGNORECASE)
+    _REFINE_HINT = re.compile(r"进阶|深入|高级|advanced|deep dive|internals|机制|模式|patterns", re.IGNORECASE)
+    # “模式匹配”是控制流概念而非“设计模式”精化页，排除
+    _REFINE_EXCLUDE = {"模式匹配"}
+
+    # 策展互斥对（与 scripts/type_kg_core_edges.py CURATED_MUTEX 同源）：
+    # key = 无序概念 id 对，value = 依据（文件:行号 + 引述）
+    CURATED_MUTEX: dict[frozenset[str], str] = {
+        frozenset({"02_borrowing", "23_move_semantics"}):
+            "move 与活跃借用互斥（03_lifetimes.md:942 “所有权转移(move)与借用是互斥的”）",
+        frozenset({"13_panic_and_abort", "32_error_handling_basics"}):
+            "不可恢复(panic/abort)与可恢复(Result 传播)在同一错误现场二选一（13_panic_and_abort.md:5/91）",
+        frozenset({"35_unions", "03_memory_management"}):
+            "union 默认不 drop 字段，与 RAII 自动析构纪律互斥（35_unions.md:105/250）",
+        frozenset({"39_type_level_programming", "25_rtti_and_dynamic_typing"}):
+            "编译期类型计算与运行期类型识别互斥（25_rtti_and_dynamic_typing.md:203 “RTTI 是静态类型系统向运行时的有限泄漏”）",
+    }
+
+    def link_ids(links: list[dict[str, str]]) -> set[str]:
+        return {Path(l.get("href", "")).stem for l in links if l.get("href", "").endswith(".md")}
+
+    def infer_relation(src: dict[str, Any], dst: dict[str, Any]) -> tuple[str, str]:
+        """返回 (关系符号, 依据说明)。按语义特异度从高到低匹配。"""
+        pair = frozenset({src["id"], dst["id"]})
+        if pair in CURATED_MUTEX:
+            return "⊥", "策展互斥：" + CURATED_MUTEX[pair]
+        if _VS_HINT.search(src["zh_name"]) or _VS_HINT.search(dst["zh_name"]):
+            return "⇔", "对比型页面（名称含 vs/对比）"
+        src_pre, src_post = link_ids(src["prereqs"]), link_ids(src["postreqs"])
+        dst_post = link_ids(dst["postreqs"])
+        if dst["id"] in src_post and src["id"] in dst_post:
+            return "↔", "互为后置概念（互参）"
+        if dst["id"] in src_pre:
+            return "→", "目标在源的前置元数据中（源依赖目标）"
+        same_dir = Path(src["path"]).parent == Path(dst["path"]).parent
+        refine_side = (
+            (_REFINE_HINT.search(dst["zh_name"]) and dst["zh_name"] not in _REFINE_EXCLUDE)
+            or (_REFINE_HINT.search(src["zh_name"]) and src["zh_name"] not in _REFINE_EXCLUDE)
+        )
+        if same_dir and refine_side:
+            return "⊑", "同主题目录，一端为进阶/机制/模式（精化关系）"
+        return "⟹", "后置概念引用（蕴含/导向）"
 
     id_to_concept = {c["id"]: c for c in concepts}
     by_layer = defaultdict(list)
     for c in concepts:
         by_layer[c["layer"]].append(c)
+
+    lines.append("**关系符号约定**（与 KG v3 属性对齐；推断规则见 `scripts/generate_knowledge_topology_atlas.py` `infer_relation`）：")
+    lines.append("")
+    lines.append("- `→` dependsOn：源依赖目标（目标在源的前置元数据中）")
+    lines.append("- `⟹` entails：源蕴含/导向目标（后置概念引用，默认）")
+    lines.append("- `⊑` refines：精化关系，名称含“进阶/机制/模式”的一侧精化另一侧（同主题目录）")
+    lines.append("- `⊥` mutexWith：两概念互斥（策展标注，依据见各行）")
+    lines.append("- `⇔` 对比/等价：对比型页面（vs/对比）间的对照关系")
+    lines.append("- `↔` 互参：互为后置概念的强互参关系")
+    lines.append("")
 
     for layer in sorted(by_layer.keys()):
         label = layer_label(layer)
@@ -425,23 +488,39 @@ def write_intra_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
                     if target and target["layer"] == layer:
                         intra_refs[c["id"]][tid] += 1
 
-        if not any(intra_refs.values()):
+        # 策展互斥对：即使无直接引用边也补一行（语义关系独立于引用关系）
+        layer_ids = {c["id"] for c in layer_concepts}
+        curated_rows = []
+        for pair, why in CURATED_MUTEX.items():
+            if pair <= layer_ids:
+                a, b = sorted(pair)
+                if b not in intra_refs.get(a, {}) and a not in intra_refs.get(b, {}):
+                    curated_rows.append((a, b, why))
+
+        if not any(intra_refs.values()) and not curated_rows:
             lines.append("> 本层内部引用较少，主要作为独立主题存在。")
             lines.append("")
             continue
 
         lines.append("### 层内引用关系")
         lines.append("")
-        lines.append("| 源概念 | 关系 | 目标概念 |")
-        lines.append("|:---|:---:|:---|")
+        lines.append("| 源概念 | 关系 | 目标概念 | 依据 |")
+        lines.append("|:---|:---:|:---|:---|")
         for src_id, targets in sorted(intra_refs.items()):
             src = id_to_concept[src_id]
             for dst_id, cnt in sorted(targets.items(), key=lambda x: -x[1]):
                 dst = id_to_concept[dst_id]
+                sym, why = infer_relation(src, dst)
                 lines.append(
-                    f"| [{escape_cell(src['zh_name'])}](../../{src['path']}) | ⟹ | "
-                    f"[{escape_cell(dst['zh_name'])}](../../{dst['path']}) |"
+                    f"| [{escape_cell(src['zh_name'])}](../../{src['path']}) | {sym} | "
+                    f"[{escape_cell(dst['zh_name'])}](../../{dst['path']}) | {escape_cell(why)} |"
                 )
+        for a, b, why in curated_rows:
+            ca, cb = id_to_concept[a], id_to_concept[b]
+            lines.append(
+                f"| [{escape_cell(ca['zh_name'])}](../../{ca['path']}) | ⊥ | "
+                f"[{escape_cell(cb['zh_name'])}](../../{cb['path']}) | 策展互斥：{escape_cell(why)}（无直接引用边，语义补全） |"
+            )
         lines.append("")
 
     lines.extend(footer())
@@ -630,6 +709,12 @@ def write_remaining_stubs() -> None:
 
     for filename, (title, en, summary) in stubs.items():
         path = OUT_DIR / filename
+        # 防覆盖护栏：若文件已存在且不是本函数生成的 stub（不含“待构建内容”标记），
+        # 说明已有人工策展内容（如 03/09 的 mermaid 判定树），跳过以免误删。
+        if path.exists():
+            existing = path.read_text(encoding="utf-8", errors="ignore")
+            if "## 一、待构建内容" not in existing:
+                continue
         lines = header(title, en, summary)
         lines.append("## 一、待构建内容")
         lines.append("")

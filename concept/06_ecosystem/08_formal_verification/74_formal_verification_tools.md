@@ -77,7 +77,6 @@
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
 
-> **Bloom 层级**: L4-L5
 > **变更日志**:
 >
 > - v1.2 (2026-06-22): 更新 Kani 到 0.66，补充 quantifiers、autoharness、loop contracts 示例

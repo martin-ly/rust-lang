@@ -18,6 +18,7 @@
 > **来源**: [Rust Reference — Variables](https://doc.rust-lang.org/reference/variables.html)
 
 ---
+
 ## 一、什么是变量
 
 **变量（variable）** 是栈帧的组成部分，包括：(Source: [Rust Reference — Variables](https://doc.rust-lang.org/reference/variables.html))
@@ -157,3 +158,11 @@ unsafe {
 > **权威来源**: [Rust Reference — Variables](https://doc.rust-lang.org/reference/variables.html), [TRPL Ch3 — Variables and Mutability](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
 > **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch Batch 10](../../00_meta/02_sources/international_authority_index.md)
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/lazy_static — 生态权威 API 文档（静态变量惰性初始化的生态实践）](https://docs.rs/lazy_static)（2026-07-12 验证 HTTP 200）

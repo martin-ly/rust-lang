@@ -314,6 +314,9 @@ async fn fixed() {
 
 ### 10.2 边界测试：取消安全（Cancellation Safety）违反（逻辑错误）
 
+> **权威来源**: 取消安全的完整论述（形式化定义、Tokio API 判定表、选型判定树）集中于
+> [37_async_cancellation_safety.md](37_async_cancellation_safety.md)；本节保留模式视角的边界测试。
+
 ```rust
 use tokio::sync::mpsc;
 

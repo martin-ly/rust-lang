@@ -30,7 +30,7 @@
 
 ---
 
-> **Bloom 层级**: L3-L5
+> **Bloom 层级**: L3-L6
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本
@@ -746,7 +746,7 @@ cargo bloat --no-default-features
 - `wasm32-unknown-unknown` — 无宿主 WASM
 - `thumbv7em-none-eabihf` — ARM Cortex-M4F 嵌入式
 
-> **来源**: [LLVM Target Triple](https://llvm.org/doxygen/classllvm_1_1Triple.html) · [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) · 可信度: ✅
+> **来源**: [LLVM Target Triple](https://llvm.org/doxygen/classllvm_1_1Triple.html) · [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · 可信度: ✅
 
 ### 4.2 工具链配置
 
@@ -782,7 +782,7 @@ docker run -v $(pwd):/src rust:1.78-alpine sh -c \
 ```
 
 > **关键洞察**: `x86_64-unknown-linux-musl` 是 Rust CLI 工具（如 ripgrep、fd）的首选发布目标，因其生成**真正独立的单二进制文件**，无需考虑目标系统的 glibc 版本。
-> **来源**: [musl libc](https://musl.libc.org/) · [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) · 可信度: ✅
+> **来源**: [musl libc](https://musl.libc.org/) · [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · 可信度: ✅
 
 ### 4.2.2 链接器配置与交叉编译环境
 

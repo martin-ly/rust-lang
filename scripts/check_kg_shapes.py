@@ -10,9 +10,10 @@
   K4  @id 唯一
   K5  relations 无悬空引用（object 端 @id 不在实体集）
   K6  decision_trees / fault_trees 节点完整性（若存在）
+  K7  实体须有 ex:layer 与 ex:domain（taxonomy.yaml 分类模型；缺失即报告）
 
 默认 warning（退出 0）；--strict 超阈值退出 1。
-阈值：K1>0；K2>0；K3>0；K4>0；K5>0；K6>0。K1b 仅记录。
+阈值：K1>0；K2>0；K3>0；K4>0；K5>0；K6>0；K7>0。K1b 仅记录。
 输出 reports/KG_SHAPES_VALIDATION_<date>.{md,json}
 """
 from __future__ import annotations
@@ -68,6 +69,7 @@ def main():
     k2_badpath = []
     k3_bilingual = []
     k4_dup = []
+    k7_missing = []   # 缺 ex:layer / ex:domain
     required = ["@id", "@type", "skos:prefLabel", "skos:scopeNote", "ex:path"]
 
     for e in entities:
@@ -85,6 +87,9 @@ def main():
         ls = langs(e.get("skos:prefLabel"))
         if not ({"zh", "en"} <= ls):
             k3_bilingual.append((eid, sorted(ls)))
+        miss_ld = [f for f in ("ex:layer", "ex:domain") if not e.get(f)]
+        if miss_ld:
+            k7_missing.append((eid, miss_ld))
 
     # K5 悬空引用
     k5_dangling = []
@@ -118,6 +123,7 @@ def main():
         "K4_duplicate_id": len(k4_dup),
         "K5_dangling_relations": len(k5_dangling),
         "K6_bad_tree_nodes": len(k6_bad),
+        "K7_missing_layer_domain": len(k7_missing),
     }
     would_fail = []
     if summary["K1_missing_required"] > 0:
@@ -132,6 +138,8 @@ def main():
         would_fail.append(f"K5 悬空引用 {summary['K5_dangling_relations']}")
     if summary["K6_bad_tree_nodes"] > 0:
         would_fail.append(f"K6 树节点缺 {summary['K6_bad_tree_nodes']}")
+    if summary["K7_missing_layer_domain"] > 0:
+        would_fail.append(f"K7 缺 layer/domain {summary['K7_missing_layer_domain']}")
 
     out_md = os.path.join(ROOT, "reports", f"KG_SHAPES_VALIDATION_{args.out_date}.md")
     out_json = os.path.join(ROOT, "reports", f"KG_SHAPES_VALIDATION_{args.out_date}.json")
@@ -139,7 +147,8 @@ def main():
         json.dump({"summary": summary, "relation_sample": rel_sample,
                    "K1_missing": k1_missing[:30], "K1b_bloom_missing_sample": k1b_bloom[:10],
                    "K2_bad_path": k2_badpath[:30], "K3_not_bilingual": k3_bilingual[:30],
-                   "K4_dup": k4_dup[:30], "K5_dangling": k5_dangling[:30], "K6_bad": k6_bad[:30]},
+                   "K4_dup": k4_dup[:30], "K5_dangling": k5_dangling[:30], "K6_bad": k6_bad[:30],
+                   "K7_missing_layer_domain": k7_missing[:30]},
                   f, ensure_ascii=False, indent=2)
     with open(out_md, "w", encoding="utf-8") as f:
         f.write(f"# KG SHACL 子集校验（语义质量门 P3-4）\n\n")
@@ -152,7 +161,8 @@ def main():
                 ("K3 prefLabel 非双语", summary["K3_not_bilingual"], "0"),
                 ("K4 @id 重复", summary["K4_duplicate_id"], "0"),
                 ("K5 关系悬空引用", summary["K5_dangling_relations"], "0"),
-                ("K6 树节点不完整", summary["K6_bad_tree_nodes"], "0")]
+                ("K6 树节点不完整", summary["K6_bad_tree_nodes"], "0"),
+                ("K7 缺 ex:layer/ex:domain", summary["K7_missing_layer_domain"], "0")]
         for nm, v, thr in rows:
             fail = (thr == "0" and v > 0)
             f.write(f"| {nm} | {v} | {thr} | {'FAIL' if fail else ('记录' if thr == '记录' else 'pass')} |\n")
@@ -167,7 +177,8 @@ def main():
     print(f"[P3-4] entities={len(entities)} relations={len(relations)}")
     print(f"  K1={summary['K1_missing_required']} K1b(no_bloom)={summary['K1b_missing_bloomLevel']} "
           f"K2={summary['K2_bad_path']} K3={summary['K3_not_bilingual']} K4={summary['K4_duplicate_id']} "
-          f"K5={summary['K5_dangling_relations']} K6={summary['K6_bad_tree_nodes']}")
+          f"K5={summary['K5_dangling_relations']} K6={summary['K6_bad_tree_nodes']} "
+          f"K7={summary['K7_missing_layer_domain']}")
     print(f"[P3-4] report: {os.path.relpath(out_md, ROOT).replace(chr(92),'/')}")
     for w in would_fail:
         print(f"   WOULD-FAIL: {w}")

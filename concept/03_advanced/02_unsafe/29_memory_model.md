@@ -28,7 +28,7 @@
 1. **问题识别**: 为什么 Rust 内存模型值得关注？正确编写 `unsafe` 代码、FFI 和内联汇编（Inline Assembly）都需要理解内存模型边界。
 2. **概念建立**: 掌握抽象字节、初始化/未初始化字节、provenance 和别名规则的核心定义。
 3. **机制推理**: 通过 ⟹ 定理链将字节模型、provenance 和 UB 边界串联起来。
-5. **迁移应用**: 将 Rust 内存模型与原子操作（Atomic Operations）、内联汇编（Inline Assembly）、Tree Borrows 等概念链接，形成跨层知识网络。
+4. **迁移应用**: 将 Rust 内存模型与原子操作（Atomic Operations）、内联汇编（Inline Assembly）、Tree Borrows 等概念链接，形成跨层知识网络。
 
 ---
 
@@ -233,7 +233,6 @@ cargo +nightly miri test
 ---
 
 > **权威来源**: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
-> **内容分级**: [专家级]
 
 ## 过渡段
 

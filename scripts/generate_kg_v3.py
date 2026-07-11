@@ -108,7 +108,8 @@ def build_entities(index: dict) -> tuple[list[dict], dict[str, str]]:
 
     for ent in index["entities"]:
         path: str = ent["path"]
-        title: str = ent.get("title", "")
+        # 标题为空时回退到英文名，再回退到路径词干，避免 zh prefLabel 为空字符串。
+        title: str = ent.get("title", "") or ent.get("en", "") or Path(path).stem
         en: str = ent.get("en", "")
         summary: str = ent.get("summary", "") or ""
         bloom: str | None = ent.get("bloom")

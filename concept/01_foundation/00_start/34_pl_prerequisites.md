@@ -501,3 +501,11 @@ unsafe {
 ### 反命题与边界
 
 > **反命题**: "编程语言理论基础（PL Prerequisites） 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [This Week in Rust — Rust 社区官方周刊（语言理论落地实践的持续跟踪入口）](https://this-week-in-rust.org/)（2026-07-12 验证 HTTP 200）

@@ -209,7 +209,6 @@ unsafe 代码必须遵守 Rust 内存模型：(Source: [Rust Reference — Memor
 ---
 
 > **权威来源**: [Rust Reference — Unsafe Keyword](https://doc.rust-lang.org/reference/unsafe-keyword.html) · [Rust Reference — Behavior Not Considered Unsafe](https://doc.rust-lang.org/reference/behavior-not-considered-unsafe.html) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#unsafe-blocks) · [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)
-> **内容分级**: [专家级]
 
 ## 过渡段
 

@@ -187,7 +187,6 @@ flowchart TD
 ---
 
 > **权威来源**: [TRPL — Appendix E](https://doc.rust-lang.org/book/appendix-05-editions.html) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html)
-> **内容分级**: [参考级]
 
 ---
 

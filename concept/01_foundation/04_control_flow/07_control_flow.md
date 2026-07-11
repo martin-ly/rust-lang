@@ -1607,3 +1607,11 @@ goto 的错误清理模式
 
 在 `release` 模式下，三种循环通常会被优化为相似的机器码；
 `for` 配合迭代器（Iterator）往往是首选，兼顾可读性与向量化潜力。
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/itertools — 生态权威 API 文档（迭代器与 `for` 控制流的生态扩展）](https://docs.rs/itertools)（2026-07-12 验证 HTTP 200）

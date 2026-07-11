@@ -280,7 +280,6 @@ flowchart TD
 ---
 
 > **权威来源**: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) · [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html)
-> **内容分级**: [综述级]
 
 ## 过渡段
 

@@ -149,7 +149,6 @@ channel = "stable"
 ---
 
 > **权威来源**: [TRPL — Appendix G](https://doc.rust-lang.org/book/appendix-07-nightly-rust.html) · [Rust Forge — Release Process](https://forge.rust-lang.org/release/process.html)
-> **内容分级**: [参考级]
 
 ---
 

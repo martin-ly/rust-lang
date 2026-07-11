@@ -9,7 +9,7 @@
 >
 > **受众**: [研究者]
 > **层级**: L3 高级概念
-> **Bloom 层级**: L4-L5
+> **Bloom 层级**: L3-L5
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Exp
 > **前置概念**: [Unsafe Rust](../02_unsafe/03_unsafe.md) · [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Interior Mutability](../../02_intermediate/02_memory_management/08_interior_mutability.md)
@@ -20,12 +20,10 @@
 > [The Rust Reference — Raw Pointers](https://doc.rust-lang.org/reference/types/pointer.html) ·
 > [std::alloc](https://doc.rust-lang.org/std/alloc/index.html)
 >
-> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
 
 ---
 
-> **Bloom 层级**: L4-L5
 > **变更日志**:
 >
 > - v1.0 (2026-07-04): 初始创建
@@ -63,6 +61,7 @@
     - [测验 1：Vec 的未初始化内存](#测验-1vec-的未初始化内存)
     - [测验 2：Arc 的内存序](#测验-2arc-的内存序)
   - [认知路径](#认知路径)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 

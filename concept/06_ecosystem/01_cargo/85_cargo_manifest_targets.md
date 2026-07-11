@@ -167,7 +167,6 @@ required-features = ["serde"]
 ---
 
 > **权威来源**: [Cargo Book — Cargo Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html)
-> **内容分级**: [参考级]
 
 ---
 

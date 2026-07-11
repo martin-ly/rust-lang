@@ -280,7 +280,7 @@ map.retain(|k, v| *v > 1);
 
 ### 2.4 `FromIterator`/`Extend` for Tuples (Rust 1.85+)
 
-> **Rust 版本**: 1.85.0+ Stable · [来源: [Rust 1.85.0 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html)]
+> **版本说明**: 1.85.0+ Stable · [来源: [Rust 1.85.0 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html)]
 
 Rust 1.85.0 将 `FromIterator` 和 `Extend` 支持扩展到 **1-12 元组 arity**，允许单次 `collect()` 将迭代器（Iterator） fanout 到多个集合：
 

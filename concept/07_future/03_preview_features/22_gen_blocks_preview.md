@@ -655,4 +655,5 @@ fn early_return() -> impl Iterator<Item = i32> {
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
+- **P1 学术/形式化**: [Anton & Thiemann: Deriving Type Systems and Implementations for Coroutines（APLAS 2010, LNCS 6461；协程/生成器类型系统的学术推导）](https://link.springer.com/chapter/10.1007/978-3-642-17164-2_5)（2026-07-12 验证 HTTP 200）
 - **P2 生态/社区**: [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper) · [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio)

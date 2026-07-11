@@ -243,3 +243,4 @@ impl SpiDevice<u8> for MySpi {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P0 官方**: [core — Rust 核心库（no_std 官方 API 文档）](https://doc.rust-lang.org/core/index.html)
+- **P1 学术/形式化**: [Sharma, Sharma, Torres-Arias & Machiry: Rust for Embedded Systems — Current State, Challenges and Open Problems（CCS 2024 扩展报告, arXiv:2311.05063）](https://arxiv.org/abs/2311.05063)（2026-07-12 验证 HTTP 200）

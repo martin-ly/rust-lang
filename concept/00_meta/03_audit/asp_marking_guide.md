@@ -194,7 +194,7 @@ graph TB
 ```markdown
 # 概念名称
 
-> **Bloom 层级**: L2-L6
+  > **Bloom 层级**: L2-L6
 > **A/S/P 标记**: A / S / P / A+S / S+P / A+S+P
 > **前置概念**: [链接]
 > **后置概念**: [链接]

@@ -270,3 +270,11 @@ flowchart TD
 >
 > **反向推理**: 新手对 borrow checker 报错感到困惑 ⟸ 说明需要从 00_start 过渡到所有权概念进行系统学习。
 >
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [This Week in Rust — Rust 社区官方周刊（生态动态与学习资源入口）](https://this-week-in-rust.org/)（2026-07-12 验证 HTTP 200）

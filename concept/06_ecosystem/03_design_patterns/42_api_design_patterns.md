@@ -86,7 +86,6 @@
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
 
-> **Bloom 层级**: L3-L5
 **变更日志**:
 
 > **补充来源**: [来源: [axum Documentation](https://docs.rs/axum/latest/axum/)] · [来源: [Swagger UI](https://swagger.io/tools/swagger-ui/)]

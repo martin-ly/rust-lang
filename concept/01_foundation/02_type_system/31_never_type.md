@@ -551,3 +551,11 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 ### 反命题与边界
 
 > **反命题**: "Never Type (`!`)：底类型与穷尽性 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/never-say-never — 生态权威 API 文档（`!` never 类型稳定化前的多版本兼容实践）](https://docs.rs/never-say-never)（2026-07-12 验证 HTTP 200）

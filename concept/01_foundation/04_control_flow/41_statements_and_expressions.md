@@ -150,3 +150,11 @@ let result = match option {
 | [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) | `?` 运算符是基于表达式的错误传播 |
 | [Async/Await](../../03_advanced/01_async/02_async.md) | `.await` 是表达式求值的挂起点 |
 | [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md) | 术语表（元层参考） |
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/if_chain — 生态权威 API 文档（嵌套 `if let` 表达式的宏化实践）](https://docs.rs/if_chain)（2026-07-12 验证 HTTP 200）

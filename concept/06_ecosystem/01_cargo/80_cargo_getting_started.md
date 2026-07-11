@@ -166,7 +166,6 @@ flowchart TD
 ---
 
 > **权威来源**: [Cargo Book — Getting Started](https://doc.rust-lang.org/cargo/getting-started/index.html)
-> **内容分级**: [参考级]
 
 ---
 

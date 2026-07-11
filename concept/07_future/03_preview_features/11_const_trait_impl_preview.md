@@ -380,6 +380,7 @@ graph TD
 ## 相关概念文件
 
 - [Generics](../../02_intermediate/01_generics/02_generics.md) — 泛型与参数多态
+- [Const Generics（常量泛型）](../../02_intermediate/01_generics/32_const_generics.md) — 值级参数，与 const trait（效果级）互补
 - [Traits](../../02_intermediate/00_traits/01_traits.md) — Trait 系统与接口抽象
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — Rust 类型系统（Type System）基础
 - [Evolution](../04_research_and_experimental/03_evolution.md) — 语言演进机制

@@ -6,7 +6,7 @@
 > **Summary**: Formal foundations of design patterns: type theory, category theory, Curry-Howard correspondence, linear/affine types, session types, algebraic data types, and verification practice with Kani.
 > **受众**: [研究者]
 > **内容分级**: [研究级]
-> **Bloom 层级**: L4-L5
+> **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: S×Theo — 设计模式形式化理论

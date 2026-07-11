@@ -457,3 +457,11 @@ Workers（边缘计算运行时（Runtime））、QUIC 协议栈（Quiche）、H
 ### 反命题与边界
 
 > **反命题**: "Rust 工业级案例研究 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [This Week in Rust — Rust 社区官方周刊（工业落地案例与生产采用动态的持续跟踪入口）](https://this-week-in-rust.org/)（2026-07-12 验证 HTTP 200）

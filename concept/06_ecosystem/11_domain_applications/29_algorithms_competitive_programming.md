@@ -19,7 +19,7 @@
 > **来源**: [std::collections](https://doc.rust-lang.org/std/collections/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) · [The Algorithms — Rust](https://github.com/TheAlgorithms/Rust)
 ---
 
-> **Bloom 层级**: L3-L4
+> **Bloom 层级**: L3-L6
 
 **变更日志**:
 

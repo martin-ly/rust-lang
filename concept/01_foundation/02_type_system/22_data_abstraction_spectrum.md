@@ -33,7 +33,7 @@
 >
 ---
 
-> **Bloom 层级**: L2-L5
+> **Bloom 层级**: L1-L5
 
 ---
 
@@ -727,3 +727,11 @@ ZST 不占用内存，可用于类型级标记（phantom types）、空迭代器
 - **L1**：数据抽象从 C struct 到 C++ class 再到 Rust enum + trait，逐步引入封装、类型安全与行为抽象。
 - **L2**：Rust 用 `pub`/`priv`、trait bound 和泛型（Generics）实现零成本抽象（Zero-Cost Abstraction）；不需要继承即可获得多态与代码复用。
 - **L3**：抽象机制的选择是表达力与可预测性之间的权衡；Rust 倾向于显式约束，使抽象边界成为编译期可检查的合同。
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/enum_dispatch — 生态权威 API 文档（enum 分发 vs trait object 抽象谱系实践）](https://docs.rs/enum_dispatch)（2026-07-12 验证 HTTP 200）

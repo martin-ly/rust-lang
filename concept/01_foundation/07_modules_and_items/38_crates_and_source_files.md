@@ -248,7 +248,6 @@ flowchart TD
 ---
 
 > **权威来源**: [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
-> **内容分级**: [综述级]
 
 ## 过渡段
 

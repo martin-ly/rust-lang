@@ -1,6 +1,6 @@
 # KG SHACL 子集校验（语义质量门 P3-4）
 
-**日期**: 2026-07-12  **实体**: 474  **关系**: 5799  **决策树**: 3  **故障树**: 2
+**日期**: 2026-07-12  **实体**: 474  **关系**: 5807  **决策树**: 3  **故障树**: 2
 
 | 规则 | 命中 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|
@@ -11,6 +11,7 @@
 | K4 @id 重复 | 0 | 0 | pass |
 | K5 关系悬空引用 | 0 | 0 | pass |
 | K6 树节点不完整 | 0 | 0 | pass |
+| K7 缺 ex:layer/ex:domain | 0 | 0 | pass |
 
 关系结构样例: `{"@id": "_:rel1", "@type": "ex:RelationAnnotation", "ex:subject": "ex:ComprehensiveRustMapping", "ex:predicate": "ex:dependsOn", "ex:object": "ex:LearningGuide", "ex:source": "prerequisite:../04_navigation/learning_guide.md", "ex:confidence": 1.0, "ex:version": "1.97.0", "ex:reviewed": false, "dcter`
 

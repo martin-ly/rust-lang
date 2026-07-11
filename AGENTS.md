@@ -175,9 +175,9 @@ bash scripts/run_quality_gates.sh
 bash scripts/git_hooks/install.sh
 ```
 
-### 5.1 CI 质量门（17 项：10 阻断 + 7 语义观察）
+### 5.1 CI 质量门（18 项：10 阻断 + 8 语义观察）
 
-所有合并到 `main`/`master` 的变更必须通过以下 **10 个阻断质量门**；另有 **6 个语义观察门**（warning，不阻断，默认 exit 0，加 `--strict` 可转阻断）持续追踪语义健康：
+所有合并到 `main`/`master` 的变更必须通过以下 **10 个阻断质量门**；另有 **8 个语义观察门**（warning，不阻断，默认 exit 0，加 `--strict` 可转阻断）持续追踪语义健康：
 
 **阻断门（10）**：
 
@@ -192,16 +192,17 @@ bash scripts/git_hooks/install.sh
 9. `python scripts/add_bilingual_annotations.py --mode check-only`
 10. `mermaid` 语法检查（CI job；本地见 `scripts/run_quality_gates.sh`）
 
-**语义观察门（7，非阻断）**：
+**语义观察门（8，非阻断）**：
 11. `python scripts/check_metadata_consistency.py`（元数据 D1–D6）
 12. `python scripts/detect_content_overlap_v2.py --budget 999999`（段落级重叠 v2）
 13. `python scripts/check_topology_quality.py`（atlas 拓扑 T1–T6）
 14. `python scripts/check_kg_shapes.py`（KG SHACL/形态）
 15. `python scripts/semantic_health.py`（综合语义健康分）
 16. `python scripts/check_concept_authority_coverage.py`（concept 权威层国际化权威来源覆盖率）
-17. `python scripts/check_canonical_uniqueness.py`（concept 权威页唯一性：双权威页声明/同目录同主题编号双文件，ERROR 级可用 `--strict` 转阻断）
+17. `python scripts/check_canonical_uniqueness.py`（concept 权威页唯一性：双权威页声明/同目录同主题编号双文件；含 basics/advanced/deep_dive 进阶关系豁免，ERROR 级可用 `--strict` 转阻断）
+18. `python scripts/concept_consistency_auditor.py`（跨文件概念定义一致性：Send/Sync、所有权、借用、生命周期、内部可变性、Pin/Unpin、协变逆变、unsafe 及跨文件 § 引用有效性；报告输出至 `reports/CONCEPT_CONSISTENCY_AUDIT_<date>.md`）
 
-> 说明：语义观察门用于“可机器复核的语义趋势”，不因单项退化阻断 PR；但当任一观察门指标显著恶化时，应在 PR 描述中说明原因与后续治理计划。权威覆盖门（16）当前基线为 concept/ 真内容页 any=100%、none=0、核心 L1–L4 无 P0 缺口=0。权威页唯一性门（17）当前基线为 ERROR 3 处（formal_methods L4/L7 双页、game_development 21/26 同目录双页，待治理），WARN 级仅观察不阻断。
+> 说明：语义观察门用于“可机器复核的语义趋势”，不因单项退化阻断 PR；但当任一观察门指标显著恶化时，应在 PR 描述中说明原因与后续治理计划。权威覆盖门（16）当前基线为 concept/ 真内容页 any=100%、none=0、核心 L1–L4 无 P0 缺口=0。权威页唯一性门（17）当前基线为 ERROR 0（2026-07-12 已完成 formal_methods L4/L7 双页、game_development 21/26 同目录双页治理），WARN 级仅观察不阻断。概念一致性门（18）基线为错误 0 / 警告 0（2026-07-12 复活接入）。
 
 ---
 

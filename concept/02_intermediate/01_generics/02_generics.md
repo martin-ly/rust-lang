@@ -35,7 +35,7 @@
 > **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
 
 ---
-> **Bloom 层级**: L3-L5
+> **Bloom 层级**: L2-L5
 **变更日志**:
 
 - v2.5 (2026-05-14):
@@ -692,7 +692,6 @@ graph TD
 
 ### 5.7 Const Generics 进阶用法
 
-> **Bloom 层级**: L3-L4
 > **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html)** ·
 > **[RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)** ·
 > **[RFC 2920](https://rust-lang.github.io/rfcs//2920-inline-const.html)** Const Generics 将编译期常量值引入类型参数空间，是依赖类型的有限形式。自 Rust 1.51 稳定以来，表达式求值、where 约束、默认参数等能力逐步开放。✅ 已验证
@@ -2075,6 +2074,9 @@ type Huge = <U1000 as Add<U1000>>::Output;  // 可能触发递归深度限制
 
 ### 9.5 补充：Generic Associated Types (GATs) 的完整形式化视角
 
+> **权威来源**: GAT 的完整论述（语法规则、与 HRTB 边界、稳定化历程、选型判定表）集中于
+> [../00_traits/40_generic_associated_types.md](../00_traits/40_generic_associated_types.md)；本节保留泛型系统中的形式化定位。
+
 > **[RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)** · **[System F_ω](https://en.wikipedia.org/wiki/System_F)** GATs 将关联类型从"零阶类型别名"扩展为"类型族"（type family），对应类型论中 System F_ω 的类型构造器抽象。✅
 
 #### GATs 与 System F_ω 的映射
@@ -2244,6 +2246,7 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
+| Const Generics（常量泛型） | [32_const_generics.md](32_const_generics.md) | const 参数语法与 stable 边界的权威页 |
 | Trait 与约束 | [01_traits.md](../00_traits/01_traits.md) | 泛型约束的载体 |
 | 所有权（Ownership）与生命周期 | [01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 泛型生命周期参数的基础 |
 | 类型系统基础 | [01_foundation/02_type_system/04_type_system.md](../../01_foundation/02_type_system/04_type_system.md) | 泛型的理论前提 |

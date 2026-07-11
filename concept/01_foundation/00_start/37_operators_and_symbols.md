@@ -222,3 +222,11 @@
 | [Traits](../02_type_system/04_type_system.md) | 多数运算符通过 trait 重载 |
 | [Generics](../../02_intermediate/01_generics/02_generics.md) | `<>`、`:`、`where` 用于泛型约束 |
 | [Macros](../../03_advanced/03_proc_macros/04_macros.md) | `!`、`$`、`$(...)` 用于宏系统 |
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/derive_more — 生态权威 API 文档（运算符 trait 的 derive 宏实践）](https://docs.rs/derive_more)（2026-07-12 验证 HTTP 200）

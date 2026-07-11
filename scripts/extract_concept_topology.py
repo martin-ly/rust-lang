@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CONCEPT_DIR = ROOT / "concept"
 OUT_PATH = ROOT / "tmp" / "concept_topology_raw.json"
 
-EXCLUDE_DIRS = {"archive", "deprecated", "sources"}
+EXCLUDE_DIRS = {"archive", "deprecated", "sources", "placeholders"}
 EXCLUDE_FILES = {"README.md", "SUMMARY.md", "00.md", "01.md", "02.md", "03.md", "04.md", "05.md", "06.md", "07.md"}
 
 
@@ -46,6 +46,39 @@ def detect_layer(rel_path: Path) -> str:
     return f"L{num}"
 
 
+_FIELD_START_RE = re.compile(r"^\*\*[^*]+\*\*[:：]")
+
+
+def normalize_blockquote_header(content: str, max_lines: int = 150) -> str:
+    """把文件顶部 blockquote 元数据规整为“每字段一行”的文本。
+
+    原文件常见多行 blockquote 写法::
+
+        > **后置概念**:
+        >
+        > [Lifetimes](03_lifetimes.md)
+
+    直接跨行正则抽取会把续行符 `>` 抽成脏数据（如 `> > [元层`，
+    即 atlas 02 的 T5 单元格泄漏）或丢失链接。规整后该字段变为
+    `**后置概念**: [Lifetimes](03_lifetimes.md)`，供逐字段正则使用。
+    """
+    fields: list[str] = []
+    for ln in content.splitlines()[:max_lines]:
+        s = ln.strip()
+        if s == "---":
+            break
+        if not s.startswith(">"):
+            continue
+        body = s[1:].strip()
+        if not body:
+            continue
+        if _FIELD_START_RE.match(body):
+            fields.append(body)
+        elif fields:
+            fields[-1] += " " + body
+    return "\n".join(fields)
+
+
 def parse_header_metadata(content: str) -> dict[str, Any]:
     """Parse the block-quotes metadata at the top of concept files."""
     meta: dict[str, Any] = {
@@ -71,49 +104,59 @@ def parse_header_metadata(content: str) -> dict[str, Any]:
         if title_match.group(2):
             meta["en_name"] = title_match.group(2).strip()
 
+    # 其余字段在规整后的 blockquote 头部上抽取（多行续行已合并为单行）；
+    # 若头部未命中（字段写在 --- 之后等非常规位置），回退到全文旧式正则。
+    header = normalize_blockquote_header(content)
+
+    def field(header_pat: str, legacy_pat: str, flags: int = 0) -> re.Match | None:
+        m = re.search(header_pat, header, flags)
+        if m:
+            return m
+        return re.search(legacy_pat, content, flags)
+
     # EN name may also be explicitly stated
-    en_match = re.search(r">\s*\*\*EN\*\*[:：]\s*(.+)", content)
+    en_match = field(r"\*\*EN\*\*[:：]\s*(.+)", r">\s*\*\*EN\*\*[:：]\s*(.+)")
     if en_match:
         meta["en_name"] = en_match.group(1).strip()
 
-    summary_match = re.search(r">\s*\*\*Summary\*\*[:：]\s*(.+)", content, re.IGNORECASE)
+    summary_match = field(r"\*\*Summary\*\*[:：]\s*(.+)", r">\s*\*\*Summary\*\*[:：]\s*(.+)", re.IGNORECASE)
     if summary_match:
         meta["summary"] = summary_match.group(1).strip()
 
-    audience_match = re.search(r">\s*\*\*受众\*\*[:：]\s*\[?([^\]]+)\]?", content)
+    audience_match = field(r"\*\*受众\*\*[:：]\s*\[?([^\]]+)\]?", r">\s*\*\*受众\*\*[:：]\s*\[?([^\]]+)\]?")
     if audience_match:
         meta["audience"] = audience_match.group(1).strip()
 
-    level_match = re.search(r">\s*\*\*内容分级\*\*[:：]\s*\[?([^\]]+)\]?", content)
+    level_match = field(r"\*\*内容分级\*\*[:：]\s*\[?([^\]]+)\]?", r">\s*\*\*内容分级\*\*[:：][ \t]*\[?([^\]\n]+)\]?")
     if level_match:
         meta["level"] = level_match.group(1).strip()
 
-    bloom_match = re.search(r">\s*\*\*Bloom\s*层级\*\*[:：]\s*(.+)", content, re.IGNORECASE)
+    bloom_match = field(r"\*\*Bloom\s*层级\*\*[:：]\s*(.+)", r">\s*\*\*Bloom\s*层级\*\*[:：]\s*(.+)", re.IGNORECASE)
     if bloom_match:
         meta["bloom"] = bloom_match.group(1).strip()
 
-    asp_match = re.search(r">\s*\*\*A/S/P\s*标记\*\*[:：]\s*\*\*(\w)\*\*", content)
+    asp_match = field(r"\*\*A/S/P\s*标记\*\*[:：]\s*\*\*(\w)\*\*", r">\s*\*\*A/S/P\s*标记\*\*[:：]\s*\*\*(\w)\*\*")
     if asp_match:
         meta["asp"] = asp_match.group(1).strip()
 
-    dual_match = re.search(r">\s*\*\*双维定位\*\*[:：]\s*(.+)", content)
+    dual_match = field(r"\*\*双维定位\*\*[:：]\s*(.+)", r">\s*\*\*双维定位\*\*[:：]\s*(.+)")
     if dual_match:
         meta["dual"] = dual_match.group(1).strip()
 
-    positioning_match = re.search(r">\s*\*\*定位\*\*[:：]\s*(.+)", content)
+    positioning_match = field(r"\*\*定位\*\*[:：]\s*(.+)", r">\s*\*\*定位\*\*[:：]\s*(.+)")
     if positioning_match:
         meta["positioning"] = positioning_match.group(1).strip()
 
-    # prereqs/postreqs can be 前置依赖/后置概念 or 前置概念/后置概念
-    prereq_match = re.search(r">\s*\*\*前置(?:概念|依赖)\*\*[:：]\s*(.+)", content)
+    # prereqs/postreqs can be 前置概念/前置依赖/后置概念/后置延伸
+    prereq_match = field(r"\*\*前置(?:概念|依赖)\*\*[:：]\s*(.+)", r">\s*\*\*前置(?:概念|依赖)\*\*[:：][ \t]*([^\n]+)")
     if prereq_match:
         meta["prereqs"] = extract_links(prereq_match.group(1))
 
-    postreq_match = re.search(r">\s*\*\*后置概念\*\*[:：]\s*(.+)", content)
+    postreq_match = field(r"\*\*后置(?:概念|延伸)\*\*[:：]\s*(.+)", r">\s*\*\*后置(?:概念|延伸)\*\*[:：][ \t]*([^\n]+)")
     if postreq_match:
         meta["postreqs"] = extract_links(postreq_match.group(1))
 
-    theorem_match = re.search(r">\s*\*\*定理链\*\*[:：]\s*(.+)", content)
+    theorem_match = field(r"\*\*定理链\*\*[:：]\s*(.+)", r">\s*\*\*定理链\*\*[:：]\s*(.+)")
     if theorem_match:
         meta["theorem_chain"] = theorem_match.group(1).strip()
 

@@ -1,16 +1,16 @@
 # OWL 2 一致性检查报告
 
-- 生成时间：2026-07-12T04:02:10
+- 生成时间：2026-07-12T04:23:15
 - 知识图谱：E:\_src\rust-lang\concept\00_meta\kg_data_v3.json
 - 实体总数：474
 
-## 总体结果：❌ 失败
+## 总体结果：✅ 通过
 
 | 检查项 | 状态 | 说明 |
 | --- | --- | --- |
 | mutexWith 对称性 | ✅ | 0 条违反 |
 | mutexWith 反自反性 | ✅ | 0 条违反 |
-| dependsOn 无环性 | ❌ | 1 个环 |
+| dependsOn 无环性 | ✅ | 0 个环 |
 | equivalentTo 对称性 | ✅ | 0 条违反 |
 | equivalentTo 传递性 | ✅ | 0 条缺失 |
 | 关系端点存在性 | ✅ | 0 条悬空 |
@@ -25,7 +25,7 @@
 
 ## dependsOn 循环依赖
 
-- TypeSystem -> Ownership -> TypeSystem
+✅ 未发现 dependsOn 循环依赖。
 
 ## equivalentTo 对称性违反
 

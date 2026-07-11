@@ -1409,7 +1409,7 @@ fn release_store(a: &AtomicU64) {
 
 ### 3. 与类型布局 / std 原子类型对齐保证的关系
 
-本页 §1.1 列出各 `Atomic*` 类型的大小；其**对齐**由 [`42_type_layout.md`](../../04_formal/05_rustc_internals/42_type_layout.md) §二 “Size 与 Alignment” 与标准库对 `Atomic*` 的布局保证共同决定。`#[repr(align(N))]` 可主动抬高对齐（永远安全，更强对齐 ⟹ 满足较弱要求）；`#[repr(C)]` 固定字段顺序与 C-ABI 对齐但**不**单独保证原子自然对齐。细节与反例见镜像页 [`29_memory_model.md`](../02_unsafe/29_memory_model.md) §Rust 1.97.0 交叉语义 §2。
+本页 §1.1 列出各 `Atomic*` 类型的大小；其**对齐**由 [`42_type_layout.md`](../../04_formal/05_rustc_internals/42_type_layout.md) §二 “Size 与 Alignment” 与标准库对 `Atomic*` 的布局保证共同决定。`#[repr(align(N))]` 可主动抬高对齐（永远安全，更强对齐 ⟹ 满足较弱要求）；`#[repr(C)]` 固定字段顺序与 C-ABI 对齐但**不**单独保证原子自然对齐。细节与反例见镜像页 [`29_memory_model.md`](../02_unsafe/29_memory_model.md) §Rust 1.97.0 交叉语义。
 
 > ⚠ **需专家复核**：标准库普遍保证 `AtomicU*` 与对应 `u*` **大小/对齐一致**；若该保证在所有目标上成立，则版本页所述“原子类型对齐是否等于原始整数对齐”的判定在 surface 层似乎恒真，说明该 cfg 实际测试的谓词（更可能关乎“目标 ABI 是否为该宽度原子提供自然对齐/原生指令”）比 surface 字面更细。release notes 与版本页**未**给出该谓词的精确定义，本小节不臆测；请以 Rust Reference — Conditional compilation 与该 cfg 稳定化文档为准。
 

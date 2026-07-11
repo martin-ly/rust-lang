@@ -1,0 +1,345 @@
+# taxonomy.yaml — Rust 分层概念知识库机器可读领域/层级模型
+#
+# 作用：
+#   1. 定义 L0-L7 八层认知架构（层号、目录、名称、职责、Bloom 范围）；
+#   2. 定义领域（domain）分类模型，每个领域给出路径前缀，供脚本按 ex:path 推断；
+#   3. 说明「层 × 领域矩阵」的生成规则。
+#
+# 消费方：
+#   - scripts/add_kg_layer_domain.py  （为 kg_data_v3.json 实体补 ex:layer / ex:domain）
+#   - scripts/check_kg_shapes.py      （K7 检查 layer/domain 覆盖率）
+#
+# 维护规则：
+#   - concept/ 新增一级目录时，必须同步更新 layers；
+#   - 新增二级主题目录时，必须归入某个 domain 的 path_prefixes，否则该目录下实体会
+#     落入 fallback_domain: uncategorized 并被 K7/报告标记。
+
+version: "1.0"
+generated: "2026-07-12"
+rust_version: "1.97.0+"
+
+# ---------------------------------------------------------------------------
+# 一、层级模型（L0-L7 八层认知架构）
+# ---------------------------------------------------------------------------
+# layer 推断规则：取实体 ex:path 第一段（相对 concept/）查 directory；
+# 根目录散落文件（README.md / SUMMARY.md / sources/）归入 L0。
+layers:
+  - id: L0
+    directory: "00_meta"
+    name_zh: 元框架
+    name_en: Meta Framework
+    responsibility: >
+      知识库自身的元数据、术语表、导航、审计、知识图谱与框架定义；
+      不承载 Rust 概念正文，是其他七层的组织与治理层。
+    bloom_range: [Meta]
+    extra_prefixes: ["README.md", "SUMMARY.md", "sources/"]
+
+  - id: L1
+    directory: "01_foundation"
+    name_zh: 基础
+    name_en: Foundation
+    responsibility: >
+      Rust 入门与核心心智模型：所有权/借用/生命周期、类型系统基础、值与引用、
+      控制流、集合、字符串、模块、错误处理、宏入门、测试入门。
+    bloom_range: [L1, L2]   # Remember / Understand
+
+  - id: L2
+    directory: "02_intermediate"
+    name_zh: 中级
+    name_en: Intermediate
+    responsibility: >
+      抽象机制与工程化用法：trait、泛型、内存管理、错误处理进阶、
+      类型转换、模块可见性、宏与元编程、迭代器与闭包。
+    bloom_range: [L2, L3]   # Understand / Apply
+
+  - id: L3
+    directory: "03_advanced"
+    name_zh: 高级
+    name_en: Advanced
+    responsibility: >
+      系统级高级主题：并发、异步、进程与 IPC、unsafe、过程宏、FFI、
+      内联汇编、底层模式与 unsafe 内部机制。
+    bloom_range: [L3, L4]   # Apply / Analyze
+
+  - id: L4
+    directory: "04_formal"
+    name_zh: 形式化
+    name_en: Formal
+    responsibility: >
+      形式化理论与编译器内部：类型论、所有权逻辑、分离逻辑、操作语义、
+      模型检查、rustc 内部、形式化记号。
+    bloom_range: [L4, L5]   # Analyze / Evaluate
+
+  - id: L5
+    directory: "05_comparative"
+    name_zh: 比较
+    name_en: Comparative
+    responsibility: >
+      跨语言与跨范式比较：编程范式、系统语言（C/C++/Go/Zig/Swift）、
+      托管语言（Java/Python/JS/Ruby/Kotlin/Scala/C#/TS）、领域对比。
+    bloom_range: [L5]       # Evaluate
+
+  - id: L6
+    directory: "06_ecosystem"
+    name_zh: 生态
+    name_en: Ecosystem
+    responsibility: >
+      工程生态与实践：工具链、Cargo、核心 crate、设计模式、Web/网络、
+      系统/嵌入式、数据/分布式、安全/密码学、形式化验证工具、测试质量、
+      性能、领域应用。
+    bloom_range: [L5, L6]   # Evaluate / Create
+
+  - id: L7
+    directory: "07_future"
+    name_zh: 未来
+    name_en: Future Evolution
+    responsibility: >
+      版本演进与前沿：版本跟踪、Edition 路线图、已稳定特性、预览特性、
+      研究与实验方向、长期路线图。
+    bloom_range: [L6]       # Create
+
+# ---------------------------------------------------------------------------
+# 二、领域模型（domain）
+# ---------------------------------------------------------------------------
+# domain 推断规则：按 path_prefixes 最长前缀匹配（相对 concept/）；
+# 未命中任何前缀的实体归入 fallback_domain。
+fallback_domain: uncategorized
+
+domains:
+  - id: meta_framework
+    name_zh: 元框架与治理
+    name_en: Meta Framework & Governance
+    description: >
+      知识库框架、术语表、权威来源索引、审计清单、导航与知识图谱自身的描述性页面。
+    path_prefixes:
+      - "00_meta/"
+      - "README.md"
+      - "SUMMARY.md"
+      - "sources/"
+    representative_concepts: [BloomTaxonomy, TerminologyGlossary, ConceptConsistencyAuditChecklist]
+
+  - id: ownership_memory
+    name_zh: 所有权与内存
+    name_en: Ownership & Memory
+    description: >
+      所有权、借用、生命周期、移动语义、内存管理、智能指针、内部可变性。
+    path_prefixes:
+      - "01_foundation/01_ownership_borrow_lifetime/"
+      - "02_intermediate/02_memory_management/"
+    representative_concepts: [Ownership, Lifetimes, MoveSemantics, SmartPointers, InteriorMutability]
+
+  - id: type_system
+    name_zh: 类型系统
+    name_en: Type System
+    description: >
+      类型系统基础、值/引用语义、trait、泛型、类型转换、类型级编程、数值与数据抽象。
+    path_prefixes:
+      - "01_foundation/02_type_system/"
+      - "01_foundation/03_values_and_references/"
+      - "02_intermediate/00_traits/"
+      - "02_intermediate/01_generics/"
+      - "02_intermediate/04_types_and_conversions/"
+    representative_concepts: [TypeSystem, Traits, Generics, TypeConversions, NeverType]
+
+  - id: language_core
+    name_zh: 语言核心
+    name_en: Language Core
+    description: >
+      入门与语言基础构件：起步、控制流、集合、字符串与文本、模块与条目、
+      错误处理、测试基础、迭代器与闭包、可见性、配套测验。
+    path_prefixes:
+      - "01_foundation/00_start/"
+      - "01_foundation/04_control_flow/"
+      - "01_foundation/05_collections/"
+      - "01_foundation/06_strings_and_text/"
+      - "01_foundation/07_modules_and_items/"
+      - "01_foundation/08_error_handling/"
+      - "01_foundation/10_testing_basics/"
+      - "01_foundation/11_quizzes/"
+      - "01_foundation/README.md"
+      - "02_intermediate/03_error_handling/"
+      - "02_intermediate/05_modules_and_visibility/"
+      - "02_intermediate/07_iterators_and_closures/"
+      - "02_intermediate/09_quizzes/"
+      - "02_intermediate/README.md"
+    representative_concepts: [ControlFlow, Collections, StringsAndText, Modules, ErrorHandling, Iterators]
+
+  - id: macros_metaprogramming
+    name_zh: 宏与元编程
+    name_en: Macros & Metaprogramming
+    description: >
+      声明宏入门、宏与元编程进阶、过程宏。
+    path_prefixes:
+      - "01_foundation/09_macros_basics/"
+      - "02_intermediate/06_macros_and_metaprogramming/"
+      - "03_advanced/03_proc_macros/"
+    representative_concepts: [Macros, ProceduralMacros]
+
+  - id: concurrency
+    name_zh: 并发
+    name_en: Concurrency
+    description: >
+      线程、消息传递、共享状态、同步原语与并发模式。
+    path_prefixes:
+      - "03_advanced/00_concurrency/"
+    representative_concepts: [Concurrency]
+
+  - id: async
+    name_zh: 异步
+    name_en: Async
+    description: >
+      async/await、Future、执行器、Pin/Unpin 与异步运行时机制。
+    path_prefixes:
+      - "03_advanced/01_async/"
+    representative_concepts: [AsyncProgramming, PinAndUnpin, FutureAndExecutorMechanisms]
+
+  - id: process_ipc
+    name_zh: 进程与 IPC
+    name_en: Process & IPC
+    description: >
+      进程管理、进程间通信、信号与系统接口。
+    path_prefixes:
+      - "03_advanced/02_process_ipc/"
+    representative_concepts: [StandardIOAndProcess]
+
+  - id: unsafe_lowlevel
+    name_zh: Unsafe 与底层
+    name_en: Unsafe & Low-level
+    description: >
+      unsafe Rust、FFI、内联汇编、底层模式、unsafe 内部机制、自定义分配器、零拷贝。
+    path_prefixes:
+      - "03_advanced/02_unsafe/"
+      - "03_advanced/04_ffi/"
+      - "03_advanced/05_inline_assembly/"
+      - "03_advanced/06_low_level_patterns/"
+      - "03_advanced/07_unsafe_internals/"
+      - "03_advanced/README.md"
+    representative_concepts: [SafeAndEffectiveUnsafeRust, ForeignFunctionInterfaceFFI, CustomAllocators]
+
+  - id: formal_methods
+    name_zh: 形式化方法
+    name_en: Formal Methods
+    description: >
+      类型论、所有权逻辑、分离逻辑、操作语义、模型检查、rustc 内部与形式化记号。
+    path_prefixes:
+      - "04_formal/"
+    representative_concepts: [TypeTheory, LinearLogic, MiriRustUndefinedBehaviorDetector, KaniRustBoundedModelChecker]
+
+  - id: comparative
+    name_zh: 跨语言比较
+    name_en: Comparative
+    description: >
+      编程范式比较、系统语言与托管语言对比、领域对比研究。
+    path_prefixes:
+      - "05_comparative/"
+    representative_concepts: [RustVsGo, RustVsZig, RustVsJava, RustVsPython, RustVsTypeScript]
+
+  - id: ecosystem_toolchain
+    name_zh: 生态·工具链
+    name_en: Ecosystem Toolchain
+    description: >
+      Rust 工具链、Cargo 构建系统、核心 crate 生态。
+    path_prefixes:
+      - "06_ecosystem/00_toolchain/"
+      - "06_ecosystem/01_cargo/"
+      - "06_ecosystem/02_core_crates/"
+      - "06_ecosystem/README.md"
+    representative_concepts: [Toolchain, CargoBuildStd, CoreCrates]
+
+  - id: ecosystem_design
+    name_zh: 生态·设计与质量
+    name_en: Ecosystem Design & Quality
+    description: >
+      设计模式、系统可组合性、测试与质量保障、性能优化。
+    path_prefixes:
+      - "06_ecosystem/03_design_patterns/"
+      - "06_ecosystem/09_testing_and_quality/"
+      - "06_ecosystem/10_performance/"
+    representative_concepts: [DesignPatterns, SystemComposability, PerformanceOptimization]
+
+  - id: ecosystem_web
+    name_zh: 生态·Web 与网络
+    name_en: Ecosystem Web & Networking
+    description: >
+      Web 框架、网络协议、高性能网络服务架构、WebAssembly。
+    path_prefixes:
+      - "06_ecosystem/04_web_and_networking/"
+      - "06_ecosystem/09_networking/"
+    representative_concepts: [NetworkProtocols, HighPerformanceNetworkServiceArchitecture, WebAssembly]
+
+  - id: ecosystem_embedded
+    name_zh: 生态·系统与嵌入式
+    name_en: Ecosystem Systems & Embedded
+    description: >
+      系统编程、嵌入式开发、交叉编译、CLI 开发。
+    path_prefixes:
+      - "06_ecosystem/05_systems_and_embedded/"
+    representative_concepts: [CrossCompilation, CLIDevelopment]
+
+  - id: ecosystem_data
+    name_zh: 生态·数据与分布式
+    name_en: Ecosystem Data & Distributed
+    description: >
+      数据库访问、数据处理、分布式系统。
+    path_prefixes:
+      - "06_ecosystem/06_data_and_distributed/"
+    representative_concepts: [DatabaseAccess]
+
+  - id: ecosystem_security
+    name_zh: 生态·安全与验证
+    name_en: Ecosystem Security & Verification
+    description: >
+      安全实践、密码学、形式化验证工具链。
+    path_prefixes:
+      - "06_ecosystem/07_security_and_cryptography/"
+      - "06_ecosystem/08_formal_verification/"
+    representative_concepts: [SecurityPractices_07securityan, FormalMethods_08formalveri]
+
+  - id: ecosystem_domains
+    name_zh: 生态·领域应用
+    name_en: Ecosystem Domain Applications
+    description: >
+      领域应用：游戏开发、算法竞赛、数据结构、AI 集成等。
+    path_prefixes:
+      - "06_ecosystem/11_domain_applications/"
+    representative_concepts: [ApplicationDomains, GameDevelopment_11domainappl_1, AlgorithmsCompetitiveProgramming]
+
+  - id: version_evolution
+    name_zh: 版本演进
+    name_en: Version Evolution
+    description: >
+      Rust 版本跟踪、Edition 路线图、已稳定/预览特性、研究与实验方向。
+    path_prefixes:
+      - "07_future/"
+    representative_concepts: [Rust191StabilizedFeatures, Rust193StabilizedFeatures, ConstTraitImplPreview]
+
+  - id: uncategorized
+    name_zh: 未分类
+    name_en: Uncategorized
+    description: >
+      兜底领域：未命中任何 path_prefixes 的实体。正常情况下应为空；
+      非空意味着 concept/ 新增目录未同步到本文件，属于治理待办。
+    path_prefixes: []
+    representative_concepts: []
+
+# ---------------------------------------------------------------------------
+# 三、层 × 领域矩阵生成规则
+# ---------------------------------------------------------------------------
+matrix_rules:
+  description: >
+    层 × 领域矩阵 M[L][D] = 同时满足 layer(entity)=L 且 domain(entity)=D 的实体集合，
+    用于覆盖率审计、跨层引用分析与学习路径生成。
+  layer_inference: >
+    layer = layers 中 directory == path 第一段 的条目；
+    根目录散落文件按 layers[*].extra_prefixes 匹配，默认 L0。
+  domain_inference: >
+    domain = 所有 domain.path_prefixes 中最长匹配 path 的前缀所属 domain；
+    无匹配时 domain = fallback_domain（uncategorized）。
+  expectations:
+    - "每个实体恰好属于一个 layer 与一个 domain（单值，非多标签）。"
+    - "对角线附近应稠密：如 (L1, ownership_memory)、(L4, formal_methods)、(L7, version_evolution)。"
+    - "跨层同领域（如 ownership_memory 在 L1/L2/L4 均有实体）是预期的跨层映射信号，"
+    - "uncategorized 行/列必须为空；非空即 taxonomy.yaml 与 concept/ 目录结构失同步。"
+  consumers:
+    - scripts/add_kg_layer_domain.py
+    - scripts/check_kg_shapes.py

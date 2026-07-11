@@ -78,7 +78,6 @@
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
 
-> **Bloom 层级**: L3-L4
 > **变更日志**:
 >
 > - v1.0 (2026-05-26): 初始创建——覆盖深度学习框架（candle/burn/tch-rs/ort）、传统 ML（linfa/smartcore）、数据科学（polars/arrow/datafusion）、模型部署与推理优化

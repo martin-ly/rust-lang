@@ -41,7 +41,7 @@
 > **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
 
 ---
-> **Bloom 层级**: L3-L5
+> **Bloom 层级**: L2-L5
 **变更日志**:
 
 - v2.3 (2026-05-14): 深化 Const Trait（impl const Trait vs ~const 区别、macro_rules! 替代方案）、
@@ -690,6 +690,9 @@ fn returns_iter() -> impl Iterator<Item = u32> {
 ```
 
 ### 5.6 正确示例：Generic Associated Types (GATs)
+
+> **权威来源**: GAT 的完整论述（语法规则、与 HRTB 边界、稳定化历程、选型判定表）集中于
+> [40_generic_associated_types.md](40_generic_associated_types.md)；本节保留入门示例。
 
 > **[RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)** ·
 > **[Rust Reference: Generic Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types)**
@@ -1664,6 +1667,7 @@ fn notify<T: Summary>(item: &T) { ... }
 | 所有权（Ownership）与生命周期（Lifetimes） | [01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Trait 方法签名的基础约束 |
 | 类型系统基础 | [01_foundation/02_type_system/04_type_system.md](../../01_foundation/02_type_system/04_type_system.md) | Trait 的理论前提 |
 | 并发与 Send/Sync | [03_advanced/00_concurrency/01_concurrency.md](../../03_advanced/00_concurrency/01_concurrency.md) | Auto Trait 的核心应用 |
+| Send/Sync Auto Trait 契约 | [17_send_sync_auto_traits.md](../../03_advanced/00_concurrency/17_send_sync_auto_traits.md) | auto 推导与判定矩阵的权威页 |
 | 异步（Async）与 Future | 03_advanced/01_async/02_async.md | 关联类型 Trait 的典型场景 |
 | 形式化验证 | [04_formal/04_rustbelt.md](../../04_formal/02_separation_logic/04_rustbelt.md) | Trait 系统的逻辑基础 |
 

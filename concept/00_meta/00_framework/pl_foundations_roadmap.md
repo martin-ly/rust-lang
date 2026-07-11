@@ -5,7 +5,7 @@
 >
 > **受众**: [初学者]
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **层级**: L1-L4 跨层导航
+> **层级**: L2-L4 跨层导航
 > **A/S/P 标记**: S+S — Structure + Science
 > **双维定位**: C×Ana
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
@@ -34,6 +34,7 @@
   - [六、与 L1 概念的对接表](#六与-l1-概念的对接表)
   - [七、反命题](#七反命题)
   - [八、延伸阅读](#八延伸阅读)
+  - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
 
 ## 一、核心命题
 

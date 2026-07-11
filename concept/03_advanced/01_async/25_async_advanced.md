@@ -60,6 +60,7 @@
 ### 8.8 Waker 契约与活性
 
 > **章节过渡**：取消安全回答了"Future 被丢弃时会发生什么"，而 Waker 契约则回答"Future 被挂起后如何复活"。
+> 取消安全（Cancellation Safety）的完整论述集中于 [37_async_cancellation_safety.md](37_async_cancellation_safety.md)（权威来源）。
 > 二者共同构成异步（Async）执行的生命周期（Lifetimes）闭环：从 poll 到 Pending，从 wake 到再 poll，任何一环断裂都会导致活锁或资源泄漏。
 
 **Waker 契约（Waker Contract）**：
@@ -616,8 +617,6 @@ where
 
 **`StreamExt` 常用组合子**
 
-> **Bloom 层级**: L3
-
 | **组合子** | **签名** | **语义** | **类比 Iterator** |
 |:---|:---|:---|:---|
 | `map` | `Stream<Item=T> → (T→U) → Stream<Item=U>` | 元素转换 | `Iterator::map` |
@@ -778,8 +777,6 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 > **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats blog: "The cost of dynamic dispatch in Rust"](https://without.boats/blog/the-cost-of-dynamic-dispatch/) <!-- link: known-broken -->; [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/)
 
 **何时选择哪种：API 边界 vs 内部实现**
-
-> **Bloom 层级**: L4-L5
 
 | **场景** | **推荐** | **理由** |
 |:---|:---|:---|
@@ -1060,7 +1057,6 @@ mod tests {
 }
 ```
 
-> **Bloom 层级**: L3
 > **交叉链接**: 内存序模型见 [../02_intermediate/00_traits/01_traits.md](../../02_intermediate/00_traits/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/02_unsafe/03_unsafe.md](../02_unsafe/03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
 
 ### 8.13 Miri 动态验证：async 状态机的内存安全检测

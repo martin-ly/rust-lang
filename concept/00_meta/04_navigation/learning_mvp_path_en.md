@@ -162,7 +162,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 | Read [concept/03_advanced/00_concurrency/01_concurrency.md](../../03_advanced/00_concurrency/01_concurrency.md) | 45m | Explains `spawn`, `join`, `Mutex`, `Arc` |
 | Read [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../03_advanced/00_concurrency/10_concurrency_patterns.md) §1–2 | 30m | Identifies deadlock risks |
 | Practice: Parallel word count | 30m | Uses `rayon` or manual threads |
-| Take [L3 Concurrency Quiz](../../03_advanced/00_concurrency/21_quiz_concurrency_async.md) §1–2 | 15m | Score ≥ 3/4 |
+| Take [L3 Concurrency Quiz](../../03_advanced/00_concurrency/21_quiz_concurrency_async.md) §一 | 15m | Score ≥ 3/4 |
 
 **Key Concepts**: `std::thread`, `Mutex`, `Arc`, `RwLock`, data races, deadlocks.
 
@@ -170,7 +170,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../03_advanced/00_concurrency/10_concurrency_patterns.md) §3–4 | 45m | Implements producer-consumer pattern |
+| Read [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../03_advanced/00_concurrency/10_concurrency_patterns.md) §2.1 | 45m | Implements producer-consumer pattern |
 | Practice: Multi-stage pipeline | 45m | Bounded channels, backpressure |
 | Debug: Channel closed errors | 15m | Handles `SendError` gracefully |
 | Benchmark: Channel vs. Mutex | 15m | Measures throughput difference |
@@ -184,7 +184,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 | Read [concept/03_advanced/01_async/02_async.md](../../03_advanced/01_async/02_async.md) | 45m | Explains `Future`, `.await`, executor |
 | Read [concept/03_advanced/01_async/26_async_patterns.md](../../03_advanced/01_async/26_async_patterns.md) §1–2 | 30m | Uses `tokio::select!` for timeouts |
 | Practice: Async HTTP client | 30m | Fetches 3 URLs concurrently |
-| Take [L3 Async Quiz](../../03_advanced/00_concurrency/21_quiz_concurrency_async.md) §3–4 | 15m | Score ≥ 2/3 |
+| Take [L3 Async Quiz](../../03_advanced/00_concurrency/21_quiz_concurrency_async.md) §二 | 15m | Score ≥ 2/3 |
 
 **Key Concepts**: `async fn`, `.await`, `tokio`, `Future`, cancellation safety.
 

@@ -253,7 +253,6 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 ---
 
 > **权威来源**: [Rust Reference — The Rust Runtime](https://doc.rust-lang.org/reference/runtime.html) · [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html) · [Rust Embedded Book](https://docs.rust-embedded.org/book/)
-> **内容分级**: [专家级]
 
 ## 过渡段
 

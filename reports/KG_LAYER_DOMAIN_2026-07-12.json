@@ -1,0 +1,80 @@
+{
+  "date": "2026-07-12",
+  "total": 474,
+  "changed": 474,
+  "coverage_pct": 100.0,
+  "layer_counts": {
+    "L0": 71,
+    "L1": 56,
+    "L2": 39,
+    "L3": 58,
+    "L4": 54,
+    "L5": 20,
+    "L6": 116,
+    "L7": 60
+  },
+  "domain_counts": {
+    "meta_framework": 71,
+    "language_core": 49,
+    "ownership_memory": 12,
+    "type_system": 27,
+    "macros_metaprogramming": 18,
+    "concurrency": 7,
+    "async": 6,
+    "process_ipc": 10,
+    "unsafe_lowlevel": 24,
+    "formal_methods": 54,
+    "comparative": 20,
+    "ecosystem_toolchain": 38,
+    "ecosystem_design": 23,
+    "ecosystem_web": 15,
+    "ecosystem_embedded": 9,
+    "ecosystem_data": 7,
+    "ecosystem_security": 4,
+    "ecosystem_domains": 20,
+    "version_evolution": 60
+  },
+  "matrix": {
+    "L0": {
+      "meta_framework": 71
+    },
+    "L1": {
+      "language_core": 40,
+      "ownership_memory": 7,
+      "type_system": 8,
+      "macros_metaprogramming": 1
+    },
+    "L2": {
+      "type_system": 19,
+      "ownership_memory": 5,
+      "language_core": 9,
+      "macros_metaprogramming": 6
+    },
+    "L3": {
+      "concurrency": 7,
+      "async": 6,
+      "process_ipc": 10,
+      "unsafe_lowlevel": 24,
+      "macros_metaprogramming": 11
+    },
+    "L4": {
+      "formal_methods": 54
+    },
+    "L5": {
+      "comparative": 20
+    },
+    "L6": {
+      "ecosystem_toolchain": 38,
+      "ecosystem_design": 23,
+      "ecosystem_web": 15,
+      "ecosystem_embedded": 9,
+      "ecosystem_data": 7,
+      "ecosystem_security": 4,
+      "ecosystem_domains": 20
+    },
+    "L7": {
+      "version_evolution": 60
+    }
+  },
+  "unclassified": []
+}

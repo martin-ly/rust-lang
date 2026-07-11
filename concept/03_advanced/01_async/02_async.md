@@ -54,7 +54,7 @@
 
 ---
 
-> **Bloom 层级**: L4-L5
+> **Bloom 层级**: L3-L5
 **变更日志**:
 
 - v4.2 (2026-05-13): Phase B 验证实践——新增§8.13 Miri 动态验证场景（悬垂指针检测、无效 bool 检测、async 状态机未初始化内存检测，含实际 Miri 输出截图）
@@ -1111,6 +1111,9 @@ fn main() {
 
 ### 8.7 边界极限测试：取消安全系统分析
 
+> **权威来源**: 取消安全（Cancellation Safety）的完整论述（形式化定义、Tokio API 判定表、反例修正、选型判定树）集中于
+> [37_async_cancellation_safety.md](37_async_cancellation_safety.md)；本节保留状态机视角的边界测试。
+
 > **章节过渡**：Send 约束确保状态机可安全跨线程迁移，但当 Future 被主动丢弃（如 `select!` 分支落选）时，状态机的局部效应如何处理？取消安全（cancellation safety）是 async 编程中最易被忽视的正确性维度——每个 `.await` 都是一个潜在的取消点。
 
 **取消点（Cancellation Point）的形式化定义**：
@@ -1544,7 +1547,6 @@ impl UringReactor {
 ```
 
 > **[tokio-rs/tokio-uring 设计文档](https://github.com/tokio-rs/tokio-uring)** io_uring 的 `user_data` 字段天然适合存储 Waker 标识，避免了 epoll 的 fd→Waker HashMap 查找开销。但 io_uring 的共享环设计对线程安全提出更高要求——Waker 的 `wake` 需是线程安全的（`Send + Sync`），因为完成事件可能在任意 CPU 核心上产生。
-> **Bloom 层级**: L2-L4
 
 ---
 
@@ -1770,8 +1772,6 @@ where
 
 **`StreamExt` 常用组合子**
 
-> **Bloom 层级**: L3
-
 | **组合子** | **签名** | **语义** | **类比 Iterator** |
 |:---|:---|:---|:---|
 | `map` | `Stream<Item=T> → (T→U) → Stream<Item=U>` | 元素转换 | `Iterator::map` |
@@ -1932,8 +1932,6 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 > **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats blog: "The cost of dynamic dispatch in Rust"](https://without.boats/blog/the-cost-of-dynamic-dispatch/); [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/)
 
 **何时选择哪种：API 边界 vs 内部实现**
-
-> **Bloom 层级**: L4-L5
 
 | **场景** | **推荐** | **理由** |
 |:---|:---|:---|
@@ -2214,7 +2212,6 @@ mod tests {
 }
 ```
 
-> **Bloom 层级**: L3
 > **交叉链接**: 内存序模型见 [../02_intermediate/00_traits/01_traits.md](../../02_intermediate/00_traits/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/02_unsafe/03_unsafe.md](../02_unsafe/03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
 
 ### 8.13 Miri 动态验证：async 状态机的内存安全检测

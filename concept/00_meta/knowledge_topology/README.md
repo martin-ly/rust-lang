@@ -1,14 +1,13 @@
 # 知识体系拓扑图谱集（Knowledge Topology Atlas）
 
 > **EN**: Knowledge Topology Atlas
-> **Summary**: Rust 知识体系的全局拓扑视图：概念定义、属性关系、场景决策树、示例反例、逻辑推理、层间/层内映射、权威来源对齐。 Global topological view of the Rust knowledge system: concept definitions, attribute relations, scenario decision trees, examples/counterexamples, logical reasoning, inter/intra-layer mappings, and source alignment.
+> **Summary**: Rust 知识体系的全局拓扑视图：概念定义、属性关系、场景决策树、示例反例、逻辑推理、层间/层内映射、权威来源对齐。
 >
 > **受众**: [研究者]
 > **内容分级**: [元层]
-> **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本目录是 `concept/` 的元层索引，帮助学习者从多个维度（定义、属性、场景、推理、来源）快速定位和理解 Rust 概念。
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
 ---
 
@@ -16,7 +15,7 @@
 
 | 文件 | 主题 | 覆盖范围 |
 |:---|:---|:---|
-| [01_concept_definition_atlas.md](01_concept_definition_atlas.md) | 概念定义图谱 | 全部 382 个核心概念的中英名称、层级、定义、同义/反义 |
+| [01_concept_definition_atlas.md](01_concept_definition_atlas.md) | 概念定义图谱 | 全部 465 个核心概念的中英名称、层级、定义、同义/反义 |
 | [02_attribute_relationship_atlas.md](02_attribute_relationship_atlas.md) | 属性关系图谱 | 概念属性矩阵与属性间约束 |
 | [03_scenario_decision_tree_atlas.md](03_scenario_decision_tree_atlas.md) | 场景决策树图谱 | 开发场景 → 决策 → Rust 概念/工具 |
 | [04_example_counterexample_atlas.md](04_example_counterexample_atlas.md) | 示例与反例图谱 | 按概念组织的示例、反例、边界示例 |
@@ -40,28 +39,6 @@
 - 人工策展内容以 `<!-- MANUAL -->` 标记。
 - 当 `concept/` 文件更新后，应重新运行生成脚本并审阅变更。
 
-## 典型使用流程
-
-```bash
-# 1. 生成或更新图谱集
-python scripts/generate_knowledge_topology_atlas.py
-
-# 2. 检查链接与跨层引用
-python scripts/kb_auditor.py --link-check
-
-# 3. 检查内容重复
-python scripts/detect_content_overlap.py
-```
-
-## 与质量门禁的关系
-
-| 门禁 | 作用 | 本目录支持 |
-|:---|:---|:---|
-| `kb_auditor.py` | 链接、跨层引用、元数据 | 提供引用统计与缺口追踪 |
-| `detect_content_overlap.py` | 内容去重 | 通过图谱定位重复主题 |
-| `mdbook build` | 构建可读书 | 保证图谱页可被渲染 |
-
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
-> **内容分级**: [元层]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)

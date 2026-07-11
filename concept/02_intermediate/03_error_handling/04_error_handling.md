@@ -30,7 +30,7 @@
 ---
 **变更日志**:
 
-> **Bloom 层级**: L3-L4
+> **Bloom 层级**: L2-L4
 
 - v2.1 (2026-05-14): 扩展 §9.4——补充 `miette` / `snafu` 生态库详解，六库综合对比矩阵与决策树
 - v2.0 (2026-05-12): 深度重构——定理推理链、反命题决策树、边界极限测试、6步认知路径与章节过渡
@@ -1157,7 +1157,6 @@ where
 
 ### 9.3 `std::backtrace::Backtrace` 与错误追踪
 
-> **Bloom 层级**: L3-L4
 > **[Rust Standard Library: Backtrace]** · **[RFC 2504: Catch Unwind](https://github.com/rust-lang/rfcs/pull/2504)** Rust 1.65 将 `std::backtrace::Backtrace` 纳入 stable，使得可恢复错误也能携带完整的调用栈上下文，填补了"错误发生点"与"错误报告点"之间的信息鸿沟。 ✅
 
 #### 9.3.1 基本获取与显示
@@ -1433,7 +1432,6 @@ fn parse_config_bad(path: &str) -> Result<Config, AppError> {
 
 ### 9.4 `eyre` / `color-eyre` / `miette` / `snafu` 生态库对比
 
-> **Bloom 层级**: L3-L4
 > **[eyre docs](https://docs.rs/eyre/latest/eyre/) · [color-eyre docs] · [miette docs] · [snafu docs] · [Rust CLI Book](https://rust-cli.github.io/book/index.html) · [thiserror docs] · [anyhow docs]** Rust 错误处理生态在 `anyhow` / `thiserror` 之外，已形成多个专攻不同场景的库：`eyre` 强调可定制的报告格式，`color-eyre` 提供富媒体诊断输出，`miette` 专注于源码级诊断标注，`snafu` 则强制显式上下文附件。以下逐一分析其设计哲学、API 风格与适用边界。✅
 
 #### 9.4.1 `eyre`：可定制报告的错误处理
@@ -1682,7 +1680,6 @@ graph TD
 
 ### 9.5 `#[track_caller]` 与错误定位优化
 
-> **Bloom 层级**: L3-L4
 > **[Rust Reference: The track_caller attribute](https://doc.rust-lang.org/reference/introduction.html)** · **[RFC 2091: Implicit caller location](https://github.com/rust-lang/rfcs/pull/2091)** · **[Rust Standard Library: core::panic::Location]** `#[track_caller]` 在 Rust 1.46 稳定化，它通过修改函数的调用约定（calling convention），在编译期隐式注入调用者位置信息，使 panic、错误包装器和断言宏（Macro）能够报告**调用点**而非被调用函数内部位置。✅
 
 #### 9.5.1 工作原理：编译器隐式传递 `Location`

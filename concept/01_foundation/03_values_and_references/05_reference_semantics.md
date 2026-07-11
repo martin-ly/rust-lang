@@ -463,7 +463,6 @@ graph TD
 
 ## 七、多级引用语义与部分重借用（Multi-level References & Partial Reborrows）
 
-> **Bloom 层级**: L2-L4
 > **定位**: 深入 Rust 的**多级引用**（`&&T`、`&mut &T`）与**部分重借用**（partial reborrow）机制，澄清嵌套引用在借用检查器中的行为、编译器对结构体（Struct）字段级粒度的跟踪，以及 Tree Borrows 模型下的权限语义。
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Lifetime](../01_ownership_borrow_lifetime/03_lifetimes.md)
 > **后置概念**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Formal Methods](../../04_formal/01_ownership_logic/01_linear_logic.md)
@@ -592,7 +591,6 @@ let r_shared = &x;
 ### 7.2 部分重借用（Partial Reborrows）
 
 > [来源: [Rust Internals — quinedot, kpreid, 2023](https://internals.rust-lang.org/)]
-> **Bloom 层级**: L4
 
 #### 7.2.1 编译器的字段级借用粒度
 
@@ -682,7 +680,6 @@ graph LR
 
 ### 7.3 返回可变引用的形式化语义
 
-> **Bloom 层级**: L4
 > [来源: [Verus Project — After Blocks](https://verus-lang.github.io/verus/guide/)]（二级来源）
 
 #### 7.3.1 两次移动模型
@@ -746,7 +743,6 @@ graph TD
 
 ### 7.4 Tree Borrows 模型
 
-> **Bloom 层级**: L3-L4
 > [来源: [PLDI 2025 — Ralf Jung et al., "Tree Borrows"](https://plv.mpi-sws.org/rustbelt/)]（一级来源，学术论文）
 
 #### 7.4.1 从 Stacked Borrows 到 Tree Borrows
@@ -807,7 +803,6 @@ let r2 = &mut r1;      // 树节点 B: Unique (指向 r1), 节点 A 变为 Reser
 
 ### 7.5 `as_ref()` / `as_mut()` 与嵌套引用
 
-> **Bloom 层级**: L3
 > [来源: [Rust Standard Library — Option](https://doc.rust-lang.org/std/option/enum.Option.html)]（一级来源）
 
 #### 7.5.1 嵌套引用的类型转换
@@ -854,7 +849,6 @@ fn demo_lifetime_propagation<'a>(opt: &'a Option<&'a mut i32>) -> Option<&'a i32
 
 ### 7.6 代码示例集
 
-> **Bloom 层级**: L3
 
 #### 7.6.1 嵌套引用的构造与模式匹配
 
@@ -937,7 +931,6 @@ fn iterator_mut_chains() {
 
 ### 7.7 边界分析
 
-> **Bloom 层级**: L4
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 #### 7.7.1 命题与反命题
@@ -1007,7 +1000,6 @@ fn union_demo(u: &mut MyUnion) {
 
 ### 7.8 常见困惑解析
 
-> **Bloom 层级**: L2-L4
 
 #### 困惑 1: `let r: &&i32 = &&5;` —— 中间引用的生命周期
 
@@ -1079,7 +1071,6 @@ let target: &mut i32 = *r_mut;    // ✅ 必须显式解引用
 
 ### 7.9 形式化视角
 
-> **Bloom 层级**: L4
 > [来源: [RustBelt / Iris](https://plv.mpi-sws.org/rustbelt/)]（一级来源，POPL 论文）
 
 从形式化验证的角度，多级引用可以用**分离逻辑（Separation Logic）**建模：
@@ -1104,7 +1095,6 @@ Tree Borrows 的权限树在 Iris 框架中可以建模为**分式权限（Fract
 
 ### 7.10 名义与结构类型的引用边界
 
-> **Bloom 层级**: L4
 
 多级引用语义与名义/结构类型系统（Type System）的交叉点，决定了**复杂借用场景中类型检查的精确行为**：
 

@@ -7,7 +7,7 @@
 >
 > **受众**: [初学者] / [进阶]
 > **层级**: L1 基础概念
-> **Bloom 层级**: L2-L3
+> **Bloom 层级**: L1-L3
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **状态**: 从 `crates/c03_control_fn/docs/error_handling_control_flow_1_90.md` 迁移整理
@@ -275,4 +275,5 @@ flowchart TD
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
+- **P1 学术/形式化**: [Liu et al.: Towards Fixing Panic Bugs for Real-world Rust Programs（Panic4R 数据集, arXiv:2408.03262）](https://arxiv.org/abs/2408.03262) · [Lagaillardie, Neykova & Yoshida: Stay Safe Under Panic — Affine Rust Programming with Multiparty Session Types（ECOOP 2022 全文, arXiv:2204.13464）](https://arxiv.org/abs/2204.13464)（2026-07-12 验证 HTTP 200）
 - **P2 生态/社区**: [docs.rs/thiserror — 生态权威 API 文档](https://docs.rs/thiserror) · [docs.rs/anyhow — 生态权威 API 文档](https://docs.rs/anyhow)

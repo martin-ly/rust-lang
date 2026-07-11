@@ -348,6 +348,20 @@ jobs:
         run: python scripts/check_concept_authority_coverage.py
         continue-on-error: true
 
+  concept-consistency-audit:
+    name: Concept Consistency Audit (observe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run concept consistency audit (observe, append --strict to enforce)
+        run: python scripts/concept_consistency_auditor.py
+        continue-on-error: true
+
   quality-gates-summary:
     name: Quality Gates Summary
     runs-on: ubuntu-latest
@@ -368,6 +382,7 @@ jobs:
       - kg-shacl-validation
       - semantic-health
       - concept-authority-coverage
+      - concept-consistency-audit
     if: always() && github.event_name == 'pull_request'
     steps:
       - name: Generate summary comment
@@ -390,7 +405,8 @@ jobs:
               'Topology Quality (observe)': '${{ needs.topology-quality.result }}',
               'KG SHACL Validation (observe)': '${{ needs.kg-shacl-validation.result }}',
               'Semantic Health (observe)': '${{ needs.semantic-health.result }}',
-              'Concept Authority Coverage (observe)': '${{ needs.concept-authority-coverage.result }}'
+              'Concept Authority Coverage (observe)': '${{ needs.concept-authority-coverage.result }}',
+              'Concept Consistency Audit (observe)': '${{ needs.concept-consistency-audit.result }}'
             };
 
             let status = '✅';
@@ -415,7 +431,7 @@ jobs:
             ${summary}
 
             ---
-            *All 16 quality gates completed (10 blocking + 6 semantic observe)*`;
+            *All 17 quality gates completed (10 blocking + 7 semantic observe)*`;
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,

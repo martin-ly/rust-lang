@@ -135,7 +135,6 @@ pub fn advanced_example<T>(value: T) -> T {
 # c11_macro_system_proc - Rust 1.94 更新概览
 
 > **最后更新**: 2026-03-10
-> **Rust 版本**: 1.94.0
 > **Edition**: 2024
 > **状态**: ✅ 已更新
 
@@ -266,7 +265,6 @@ pub fn advanced_example<T>(value: T) -> T {
 # c12_wasm - Rust 1.94 更新概览
 
 > **最后更新**: 2026-03-10
-> **Rust 版本**: 1.94.0
 > **Edition**: 2024
 > **状态**: ✅ 已更新
 

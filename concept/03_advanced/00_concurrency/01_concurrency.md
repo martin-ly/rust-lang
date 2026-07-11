@@ -9,6 +9,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：[并发](../../../knowledge/03_advanced/concurrency)
 > **受众**: [专家]
 > **权威来源**: 本文件为 `concept/` 权威页。
+> **Send/Sync 契约权威页**: Send/Sync 的形式化契约、auto 推导规则与判定矩阵已收敛至 [Send 与 Sync：Auto Trait 的并发安全契约](17_send_sync_auto_traits.md)，本页保留并发模型全景与场景章节。
 >
 > **层次定位**: L3 高级概念 / 并发子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -38,7 +39,7 @@
 
 ---
 
-> **Bloom 层级**: L4-L5
+> **Bloom 层级**: L3-L5
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、Send/Sync 矩阵、同步原语对比、fearless concurrency 形式化论证、思维导图、示例反例

@@ -27,7 +27,7 @@
 >
 ---
 
-> **Bloom 层级**: L2-L4
+> **Bloom 层级**: L1-L4
 
 ---
 > **权威来源**: [Rust Reference — Moved and Copied Types](https://doc.rust-lang.org/reference/expressions.html#moved-and-copied-types) · [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [TRPL — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)

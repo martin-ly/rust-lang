@@ -33,7 +33,7 @@
 > **来源**: [TRPL — Variables and Mutability](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) · [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html)
 ---
 
-> **Bloom 层级**: L2-L4
+> **Bloom 层级**: L1-L4
 
 ---
 ## 一、核心命题

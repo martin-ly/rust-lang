@@ -693,3 +693,11 @@ Rust 模块（Module）系统是编译期静态的，路径和可见性由编译
 - **TC39（ECMAScript 标准）**: <https://tc39.es/>
 - **Rust Reference（对照）**: <https://doc.rust-lang.org/reference/>
 - **TRPL（对照）**: <https://doc.rust-lang.org/book/title-page.html>
+
+---
+
+## 国际权威参考 / International Authority References（P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/wasm-bindgen — 生态权威 API 文档（Rust 与 JavaScript/WASM 互操作，跨语言对照实践）](https://docs.rs/wasm-bindgen)（2026-07-12 验证 HTTP 200）

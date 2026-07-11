@@ -2,7 +2,7 @@
   "summary": {
     "date": "2026-07-12",
     "entities": 474,
-    "relations": 5799,
+    "relations": 5807,
     "decision_trees": 3,
     "fault_trees": 2,
     "K1_missing_required": 0,
@@ -11,7 +11,8 @@
     "K3_not_bilingual": 0,
     "K4_duplicate_id": 0,
     "K5_dangling_relations": 0,
-    "K6_bad_tree_nodes": 0
+    "K6_bad_tree_nodes": 0,
+    "K7_missing_layer_domain": 0
   },
   "relation_sample": {
     "@id": "_:rel1",
@@ -42,5 +43,6 @@
   "K3_not_bilingual": [],
   "K4_dup": [],
   "K5_dangling": [],
-  "K6_bad": []
+  "K6_bad": [],
+  "K7_missing_layer_domain": []
 }

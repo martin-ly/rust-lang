@@ -9,7 +9,7 @@
 >
 > **受众**: [初学者]
 > **层级**: L1 基础概念
-> **Bloom 层级**: L2-L3
+> **Bloom 层级**: L1-L3
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×App
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Lifetimes](../01_ownership_borrow_lifetime/03_lifetimes.md) · [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md)
@@ -19,12 +19,10 @@
 > [The Rust Programming Language — Constants and Statics](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) ·
 > [Rust By Example — Statics](https://doc.rust-lang.org/rust-by-example/custom_types/constants.html)
 >
-> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
 
 ---
 
-> **Bloom 层级**: L2-L3
 > **变更日志**:
 >
 > - v1.0 (2026-07-04): 初始创建

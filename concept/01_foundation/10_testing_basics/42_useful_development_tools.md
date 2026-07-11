@@ -204,7 +204,6 @@ flowchart TD
 ---
 
 > **权威来源**: [TRPL — Appendix D](https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html) · [Rust Analyzer Manual](https://rust-analyzer.github.io/manual.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
-> **内容分级**: [参考级]
 
 ## 过渡段
 
@@ -228,4 +227,5 @@ flowchart TD
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
+- **P1 学术/形式化**: [Bae et al.: RUDRA — Finding Memory Safety Bugs in Rust at the Ecosystem Scale（SOSP 2021；部分算法已集成进官方 Clippy）](https://dl.acm.org/doi/10.1145/3477132.3483570)（2026-07-12 验证可访问，ACM DOI 页面）
 - **P2 生态/社区**: [docs.rs/criterion — 生态权威 API 文档](https://docs.rs/criterion) · [docs.rs/proptest — 生态权威 API 文档](https://docs.rs/proptest)

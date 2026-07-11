@@ -13,7 +13,7 @@
 > **前置依赖**: [Concurrency](01_concurrency.md) · [Conditional Compilation](../03_proc_macros/28_conditional_compilation.md)
 > **后置概念**: [Rust for Linux](../../07_future/04_research_and_experimental/43_rust_for_linux.md)
 >
-> **主要来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [std::thread](https://doc.rust-lang.org/std/thread/) · [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)
+> **主要来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [std::thread](https://doc.rust-lang.org/std/thread/) · [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html)
 
 ---
 
@@ -164,10 +164,10 @@ strategy:
 ## 权威来源索引
 
 - [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)
-- [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)
+- [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html)
 - [std::thread](https://doc.rust-lang.org/std/thread/)
 
-> **权威来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html), [std::thread](https://doc.rust-lang.org/std/thread/), [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html), [TRPL Ch16 — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
+> **权威来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html), [std::thread](https://doc.rust-lang.org/std/thread/), [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html), [TRPL Ch16 — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 >
 > **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
