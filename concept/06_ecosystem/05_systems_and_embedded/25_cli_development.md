@@ -167,7 +167,7 @@ fn main() {
 ```
 
 > **参数洞察**: **clap 的 derive 宏（Macro）让 CLI 定义变得声明式**——结构体（Struct）即命令行接口。
-> [来源: [clap derive](https://docs.rs/clap/latest/clap/_derive/index.html)]
+> [来源: [clap derive](https://docs.rs/clap/latest/clap/)]
 
 ---
 

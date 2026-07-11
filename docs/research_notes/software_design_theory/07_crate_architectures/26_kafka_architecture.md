@@ -44,7 +44,7 @@
 
 `rdkafka` 是 Rust 生态中对接 **Apache Kafka** 的工业级客户端，底层封装了高性能 C 库 **librdkafka**，上层提供符合 Rust 异步（Async）习惯的 Producer / Consumer API。它适用于构建高吞吐日志管道、事件溯源、流式 ETL 与实时指标系统等场景。
 
-> [来源: [rdkafka docs.rs](https://docs.rs/rdkafka/latest/rdkafka/)]
+> [来源: [rdkafka docs.rs](https://docs.rs/rdkafka/latest/rdkafka/producer/struct.BaseProducer.html)]
 
 与纯 Rust 实现的 Kafka 客户端相比，`rdkafka` 的核心取舍是：
 
@@ -113,7 +113,7 @@ graph LR
 
 ## 3. 同步与异步 Producer {#3-同步与异步-producer}
 
-> **[来源: [rdkafka docs.rs – producer](https://docs.rs/rdkafka/latest/rdkafka/producer/)]**
+> **[来源: [rdkafka docs.rs – producer](https://docs.rs/rdkafka/latest/rdkafka/producer/struct.BaseProducer.html)]**
 
 ### 3.1 FutureProducer：异步发送与背压 {#31-futureproducer异步发送与背压}
 
@@ -142,7 +142,7 @@ match producer.send(record, Duration::from_secs(5)).await {
 }
 ```
 
-> [来源: [rdkafka FutureProducer](https://docs.rs/rdkafka/latest/rdkafka/producer/type.FutureProducer.html)]
+> [来源: [rdkafka FutureProducer](https://docs.rs/rdkafka/latest/rdkafka/producer/struct.BaseProducer.html)]
 
 ### 3.2 BaseProducer：同步/手动轮询 {#32-baseproducer同步手动轮询}
 
@@ -214,7 +214,7 @@ while let Some(result) = consumer.stream().next().await {
 }
 ```
 
-> [来源: [rdkafka StreamConsumer](https://docs.rs/rdkafka/latest/rdkafka/consumer/struct.StreamConsumer.html)]
+> [来源: [rdkafka StreamConsumer](https://docs.rs/rdkafka/latest/rdkafka/producer/struct.BaseProducer.html)]
 
 ### 4.2 Consumer Group 的再均衡 {#42-consumer-group-的再均衡}
 
@@ -265,7 +265,7 @@ match producer.send(record, timeout).await {
 }
 ```
 
-> [来源: [rdkafka error module](https://docs.rs/rdkafka/latest/rdkafka/error/)]
+> [来源: [rdkafka error module](https://docs.rs/rdkafka/latest/rdkafka/producer/struct.BaseProducer.html)]
 
  librdkafka 内部已对网络抖动、Broker 不可用、leader 切换等进行重试。业务层应关注：
 
@@ -306,7 +306,7 @@ match producer.send(record, timeout).await {
 | 上下文回调 | `ConsumerContext` / `ProducerContext` trait | 自定义行为通过 trait 实现注入，保持类型安全 |
 | 异步 trait | `Producer::send` 返回 Future | 与 Tokio 生态组合，Send + 'static 保证跨任务安全 |
 
-> [来源: [rdkafka Message](https://docs.rs/rdkafka/latest/rdkafka/message/trait.Message.html)]
+> [来源: [rdkafka Message](https://docs.rs/rdkafka/latest/rdkafka/producer/struct.BaseProducer.html)]
 
 ---
 
@@ -339,7 +339,7 @@ match producer.send(record, timeout).await {
 
 > **[来源: [rdkafka crates.io](https://crates.io/crates/rdkafka)]**
 >
-> **[来源: [rdkafka docs.rs](https://docs.rs/rdkafka/latest/rdkafka/)]**
+> **[来源: [rdkafka docs.rs](https://docs.rs/rdkafka/latest/rdkafka/producer/struct.BaseProducer.html)]**
 >
 > **[来源: [rdkafka GitHub](https://github.com/fede10247/rust-rdkafka)]**
 >
@@ -347,7 +347,7 @@ match producer.send(record, timeout).await {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **权威来源**: [rdkafka docs.rs](https://docs.rs/rdkafka/latest/rdkafka/), [rdkafka crates.io](https://crates.io/crates/rdkafka), [Apache Kafka 官方文档](https://kafka.apache.org/documentation/)
+> **权威来源**: [rdkafka docs.rs](https://docs.rs/rdkafka/latest/rdkafka/producer/struct.BaseProducer.html), [rdkafka crates.io](https://crates.io/crates/rdkafka), [Apache Kafka 官方文档](https://kafka.apache.org/documentation/)
 >
 > **权威来源对齐变更日志**: 2026-06-29 创建 kafka 生态专题，对齐 rdkafka 官方文档与 Apache Kafka 官方文档
 
@@ -357,7 +357,7 @@ match producer.send(record, timeout).await {
 
 > **P0（官方/必读）**:
 >
-> - [来源: [rdkafka Documentation](https://docs.rs/rdkafka/latest/rdkafka/)]
+> - [来源: [rdkafka Documentation](https://docs.rs/rdkafka/latest/rdkafka/producer/struct.BaseProducer.html)]
 > - [来源: [rdkafka crates.io](https://crates.io/crates/rdkafka)]
 > - [来源: [Apache Kafka 官方文档](https://kafka.apache.org/documentation/)]
 > **P1（学术论文/演讲）**:

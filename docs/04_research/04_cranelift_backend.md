@@ -346,7 +346,7 @@ cargo +nightly build
 
 3. **Stichert, J.** "Speeding up Rust compile times with Cranelift". RustConf 2023.
 4. **Bytecode Alliance**. "Cranelift IR Reference".
-   <https://docs.rs/cranelift-codegen/latest/cranelift_codegen/ir/index.html>
+   <https://docs.rs/cranelift-codegen/latest/>
 
 5. **Rust Compiler Team**. "MCP: Pluggable Codegen Backends". 2022.
 

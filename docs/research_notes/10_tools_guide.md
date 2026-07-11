@@ -293,8 +293,8 @@ verus! {
 - 推荐版本：以 [Verus GitHub](https://github.com/verus-lang/verus) 最新 commit / release 为准。
 - [Verus 官方文档](https://github.com/verus-lang/verus/)
 - [Verus GitHub](https://github.com/verus-lang/verus)
-- [Verus 教程与参考](https://github.com/verus-lang/verusverus/guide/)
-- [Verus 标准库 API](https://github.com/verus-lang/verusverus/verusdoc/vstd/)
+- [Verus 教程与参考](https://verus-lang.github.io/verus/guide/)
+- [Verus 标准库 API](https://verus-lang.github.io/verus/verusdoc/vstd/)
 
 ---
 

@@ -40,7 +40,7 @@
 
 `vector` crate 是一个轻量级的**向量最近邻搜索库**，基于 HNSW（Hierarchical Navigable Small World）风格的图索引实现。它允许在内存中快速构建索引并对浮点向量执行近似最近邻（ANN）查询，适用于嵌入向量（embedding）相似性检索、推荐系统、图像/文本语义搜索等场景。
 
-> [来源: [vector docs.rs](https://docs.rs/vector/latest/vector/)]
+> [来源: [vector docs.rs](https://docs.rs/vector/latest/vector/struct.Index.html#method.search)]
 
 与重量级向量数据库（如 pgvector、Milvus、Pinecone）不同，`vector` 的设计哲学是**"零依赖、纯内存、API 极简"**：
 
@@ -80,7 +80,7 @@ graph LR
     QUERY -->|k| RESULT[Vec<(usize, f64)><br/>邻居索引与距离]
 ```
 
-> [来源: [vector Index Docs](https://docs.rs/vector/latest/vector/struct.Index.html)]
+> [来源: [vector Index Docs](https://docs.rs/vector/latest/vector/struct.Index.html#method.search)]
 
 | 类型 | 职责 | 关键方法 |
 |:--|:--|:--|
@@ -89,7 +89,7 @@ graph LR
 | `usize` | 返回的邻居在原向量集合中的索引 | — |
 | `f64` | 欧氏距离（或实现定义的距离） | — |
 
-> [来源: [vector Vector Docs](https://docs.rs/vector/latest/vector/trait.Vector.html)]
+> [来源: [vector Vector Docs](https://docs.rs/vector/latest/vector/struct.Index.html#method.search)]
 
 ### 2.2 索引构建参数 {#22-索引构建参数}
 
@@ -145,7 +145,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 | 距离类型 | `f64` | 明确标量距离，避免隐式精度转换 |
 | 零拷贝构建 | `Index::build(&vectors, ...)` | 借用（Borrowing）原始集合，生命周期（Lifetimes）由调用者管理 |
 
-> [来源: [vector API docs](https://docs.rs/vector/latest/vector/)]
+> [来源: [vector API docs](https://docs.rs/vector/latest/vector/struct.Index.html#method.search)]
 
 ---
 
@@ -193,7 +193,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 
 > **[来源: [vector crates.io](https://crates.io/crates/vector)]**
 >
-> **[来源: [vector docs.rs](https://docs.rs/vector/latest/vector/)]**
+> **[来源: [vector docs.rs](https://docs.rs/vector/latest/vector/struct.Index.html#method.search)]**
 >
 > **[来源: [vector GitHub](https://github.com/stainless-steel/vector)]**
 >
@@ -201,7 +201,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **权威来源**: [vector crates.io](https://crates.io/crates/vector), [vector docs.rs](https://docs.rs/vector/latest/vector/), [HNSW Paper](https://arxiv.org/abs/1603.09320)
+> **权威来源**: [vector crates.io](https://crates.io/crates/vector), [vector docs.rs](https://docs.rs/vector/latest/vector/struct.Index.html#method.search), [HNSW Paper](https://arxiv.org/abs/1603.09320)
 >
 > **权威来源对齐变更日志**: 2026-06-29 创建 vector 生态专题，对齐 vector crate 文档与 HNSW 论文
 
@@ -211,7 +211,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 
 > **P0（官方/必读）**:
 >
-> - [来源: [vector Documentation](https://docs.rs/vector/latest/vector/)]
+> - [来源: [vector Documentation](https://docs.rs/vector/latest/vector/struct.Index.html#method.search)]
 > - [来源: [vector crates.io](https://crates.io/crates/vector)]
 > - [来源: [HNSW: Efficient and Robust ANN Search](https://arxiv.org/abs/1603.09320)]
 > **P1（学术论文/演讲）**:

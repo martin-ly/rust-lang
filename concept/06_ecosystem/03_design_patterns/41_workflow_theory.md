@@ -500,7 +500,7 @@ where G: FnMut() -> bool, W: FnMut() -> Future<Output = Result<T>>
 }
 ```
 
-> **来源**: [Rust async-book](https://rust-lang.github.io/async-book/index.html) · [Tokio — Combinators](https://docs.rs/tokio/latest/tokio/macro.join.html)
+> **来源**: [Rust async-book](https://rust-lang.github.io/async-book/index.html) · [Tokio — Combinators](https://docs.rs/tokio/latest/tokio/)
 
 ### 4.2 类型系统映射
 >

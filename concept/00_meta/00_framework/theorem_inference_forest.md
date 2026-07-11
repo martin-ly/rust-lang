@@ -307,7 +307,7 @@ graph TD
 定理 T-041: fearless concurrency 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
     「Safe Rust + Send/Sync ⟹ 无数据竞争」
     ↓
-推论 C-040: MutexGuard 自动释放 [RAII 原则, Rust std docs](https://docs.rs/raii/latest/raii/)
+推论 C-040: MutexGuard 自动释放 [RAII 原则, Rust std docs](https://doc.rust-lang.org/std/ops/trait.Drop.html)
     「锁守卫在作用域结束时自动释放（RAII）」
 ```
 

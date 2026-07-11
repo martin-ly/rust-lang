@@ -2002,7 +2002,7 @@ type ProdResult = <U2 as Mul<U3>>::Output; // U6
 type CmpResult = <U2 as Cmp<U3>>::Output;  // LT (Less Than)
 ```
 
-> **来源**: [typenum crate docs](https://docs.rs/typenum/latest/typenum/) · [typenum source: uint.rs](https://docs.rs/typenum/latest/src/typenum/uint.rs.html)
+> **来源**: [typenum crate docs](https://docs.rs/typenum/latest/typenum/) · [typenum source: uint.rs](https://docs.rs/typenum/latest/typenum/)
 
 #### 与 Const Generics 的对比：Type-level vs Value-level
 

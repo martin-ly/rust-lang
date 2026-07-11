@@ -22,9 +22,9 @@
 >
 > **状态**: ✅ 已完成
 >
-> **对齐说明**: 本文档按 [Tower 限流中间件](https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html)、[Tokio 时间原语](https://docs.rs/tokio/latest/tokio/time/index.html)、[Rust 标准库](https://doc.rust-lang.org/std/) 与分布式系统经典文献进行权威来源对齐。
+> **对齐说明**: 本文档按 [Tower 限流中间件](https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html)、[Tokio 时间原语](https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html)、[Rust 标准库](https://doc.rust-lang.org/std/) 与分布式系统经典文献进行权威来源对齐。
 >
-> **权威来源**: [Tower Docs](https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html) | [Tokio Time](https://docs.rs/tokio/latest/tokio/time/index.html) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Tower Docs](https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html) | [Tokio Time](https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
 
 ---
 
@@ -197,7 +197,7 @@ capacity ≥ 0 ∧ limit ≥ 0
 
 ### Axiom RL2: 请求计数单调 {#axiom-rl2-请求计数单调}
 
-> **来源: [Tokio Time](https://docs.rs/tokio/latest/tokio/time/index.html)**
+> **来源: [Tokio Time](https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html)**
 
 ```text
 t₁ < t₂ → count(t₁) ≤ count(t₂)
@@ -502,7 +502,7 @@ Instance 2: 执行完成，覆盖 key
 ### P0（核心官方 / 生产级文档） {#p0核心官方-生产级文档}
 
 > **来源: [Tower Docs - RateLimit](https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html)**
-> **来源: [Tokio Time](https://docs.rs/tokio/latest/tokio/time/index.html)**
+> **来源: [Tokio Time](https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html)**
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

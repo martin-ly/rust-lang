@@ -574,7 +574,7 @@ fn create_tls_server(cert_chain: Vec<CertificateDer<'static>>, key: PrivateKeyDe
 > - 默认禁用压缩（CRIME/BREACH 攻击防护）
 > - 证书验证使用 **webpki**（Rust 实现的 X.509 验证）
 >
-> **来源**: [rustls Documentation](https://docs.rs/rustls/latest/rustls/) · [rustls Book](https://docs.rs/rustls/latest/rustls/manual/index.html) · [Let's Encrypt — Rustls](https://letsencrypt.org/docs/client-options/)
+> **来源**: [rustls Documentation](https://docs.rs/rustls/latest/rustls/) · [rustls Book](https://docs.rs/rustls/latest/rustls/) · [Let's Encrypt — Rustls](https://letsencrypt.org/docs/client-options/)
 
 ### 6.3 dalek-cryptography：零知识友好
 >

@@ -266,7 +266,7 @@ impl<T: AsyncClose> Drop for CloseOnDrop<T> {
 ```
 
 > **Workaround 评价**: 当前 workaround 都是**部分解决方案**——要么依赖程序员记住调用 close()，要么将异步关闭委托给运行时（Runtime）（可能不可靠）。没有一种方案能像 AsyncDrop 那样在编译期保证正确性。
-> [来源: [Tokio Documentation — Graceful Shutdown](https://docs.rs/tokio/latest/tokio/runtime/struct.Runtime.html#method.shutdown_timeout)]
+> [来源: [Tokio Documentation — Graceful Shutdown](https://docs.rs/tokio/latest/tokio/)]
 
 ---
 

@@ -39,7 +39,7 @@ Tracing 的四大设计支柱：
 | **Subscriber** | 可插拔的消费后端 | `fmt`、`jaeger`、`opentelemetry` 等后端通过 trait 解耦 |
 | **Layer** | 中间件式组合 | 复用 Tower 的 `Layer` 模式实现遥测管道的可组合性 |
 
-> [Tracing Docs — Core Concepts](https://docs.rs/tracing/latest/tracing/)(<https://docs.rs/tracing/latest/tracing/>)
+> [Tracing Docs — Core Concepts](https://docs.rs/tracing/latest/tracing/span/struct.Span.html)(<https://docs.rs/tracing/latest/tracing/span/struct.Span.html>)
 > [Tokio Blog — Introducing Tracing](https://tokio.rs/blog/2019-08-tracing)(<https://tokio.rs/blog/2019-08-tracing>)
 
 ```rust,ignore
@@ -133,7 +133,7 @@ graph TB
 ```
 
 > **认知功能**: 此图展示 Tracing 的核心分层——应用代码通过宏（Macro）生成事件，分发器根据 `Level` 和 `Filter` 进行快速路由决策，最终由 `Subscriber` + `Layer` 组合消费。与 `log` crate 的"全局 Logger"不同，Tracing 支持**线程局部和作用域级的 Subscriber 切换**。
-> [Tracing Docs — Subscriber](https://docs.rs/tracing/latest/tracing/subscriber/index.html)(<https://docs.rs/tracing-subscriber/latest/tracing_subscriber/>)
+> [Tracing Docs — Subscriber](https://docs.rs/tracing/latest/tracing/span/struct.Span.html)(<https://docs.rs/tracing-subscriber/latest/tracing_subscriber/>)
 
 ### 2.2 Span 生命周期状态机 {#22-span-生命周期状态机}
 
@@ -225,7 +225,7 @@ info!(data = vec![1,2,3]);      // ❌ 编译错误：Vec<i32> 未实现 Value
 ```
 
 > **定理 T1**: Tracing 的 `Value` trait 系统确保所有记录到 Span/Event 的字段都在编译期通过类型检查，消除了传统日志中 `"key=" + value.to_string()` 的运行时格式化错误。
-> [来源: Tracing Docs — `Value` trait](https://docs.rs/tracing-core/latest/tracing_core/field/trait.Value.html)
+> [来源: Tracing Docs — `Value` trait](https://docs.rs/tracing/latest/tracing/attr.instrument.html)
 
 ### 3.2 `#[instrument]` 宏：零成本自动埋点 {#32-instrument-宏零成本自动埋点}
 
@@ -260,7 +260,7 @@ async fn handle_request(req: Request, _ctx: Context) -> Result<Response, Error> 
 - 如果当前 Subscriber 的 `max_level_hint()` 低于 `INFO`，`span!` 宏展开为**无操作 (no-op)**，运行时开销为 0
 - `skip` 属性避免为大体积参数生成 `Value` 实现，减少单态化（Monomorphization）膨胀
 
-> [Tracing Docs — `#[instrument]`](https://docs.rs/tracing/latest/tracing/attr.instrument.html)(<https://docs.rs/tracing/latest/tracing/attr.instrument.html>)
+> [Tracing Docs — `#[instrument]`](https://docs.rs/tracing/latest/tracing/span/struct.Span.html)(<https://docs.rs/tracing/latest/tracing/span/struct.Span.html>)
 
 ### 3.3 `Layer` 组合：Tower 模式的遥测复用 {#33-layer-组合tower-模式的遥测复用}
 
@@ -293,7 +293,7 @@ subscriber.init();
 - `Layer::with_subscriber` 满足**结合律**：`(L1.with(L2)).with(L3) ≡ L1.with(L2.with(L3))`
 - `IdentityLayer` 提供**单位元**：`Identity.with(L) ≡ L.with(Identity) ≡ L`
 
-> [来源: Tracing Docs — `Layer` trait](https://docs.rs/tracing-subscriber/latest/tracing_subscriber/layer/trait.Layer.html)
+> [来源: Tracing Docs — `Layer` trait](https://docs.rs/tracing-core/latest/tracing_core/metadata/struct.Metadata.html)
 > [来源: Tower Docs — Composability](https://docs.rs/tower/latest/tower/)
 
 ---
@@ -338,7 +338,7 @@ subscriber.init();
 | Level < Filter | 0 | 同上，静态 `Metadata` 的比较可在编译期常量传播 |
 | 活跃 Subscriber | ~2-3 次虚调用 | `Dispatch::event` 通过 `dyn Subscriber` 分发 |
 
-> [Tracing Docs — Performance](https://docs.rs/tracing/latest/tracing/)(<https://docs.rs/tracing/latest/tracing/#performance>)
+> [Tracing Docs — Performance](https://docs.rs/tracing/latest/tracing/span/struct.Span.html)(<https://docs.rs/tracing/latest/tracing/span/struct.Span.html>)
 > [Rust Reference — Dead Code Elimination](https://doc.rust-lang.org/reference/introduction.html)(<https://doc.rust-lang.org/rustc/codegen-options/index.html>)
 
 ### 4.2 静态 Metadata {#42-静态-metadata}
@@ -374,7 +374,7 @@ static MY_EVENT_METADATA: Metadata<'static> = Metadata::new(
 - **比较开销**: `Metadata` 指针相等性比较（`ptr::eq`）替代字符串比较，O(1)
 - **缓存局部性**: 频繁访问的 `Metadata` 常驻 L1 缓存
 
-> [来源: Tracing Core — Metadata](https://docs.rs/tracing-core/latest/tracing_core/metadata/struct.Metadata.html)
+> [来源: Tracing Core — Metadata](https://docs.rs/tracing/latest/tracing/attr.instrument.html)
 
 ---
 
@@ -410,7 +410,7 @@ std::thread::spawn(move || {
 - `Entered` guard 不实现 `Send`，防止 `exit()` 在错误线程被调用导致状态不一致
 - `#[instrument]` 宏生成的代码自动满足 `Send` 边界，因为 `Span` 在函数体外部构造
 
-> [Tracing Docs — Thread Safety](https://docs.rs/tracing/latest/tracing/)(<https://docs.rs/tracing/latest/tracing/span/struct.Span.html>)
+> [Tracing Docs — Thread Safety](https://docs.rs/tracing/latest/tracing/span/struct.Span.html)(<https://docs.rs/tracing/latest/tracing/span/struct.Span.html>)
 
 ### 5.2 内存安全：无泄漏保证 {#52-内存安全无泄漏保证}
 

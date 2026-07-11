@@ -274,7 +274,7 @@ async fn process_stream() {
 ```
 
 > **并发洞察**: **tokio::join! 和 tokio::select! 是异步（Async）并发的核心原语**——它们对应同步并发中的 join 和 select 系统调用。
-> [来源: [tokio::select!](https://docs.rs/tokio/latest/tokio/macro.select.html)]
+> [来源: [tokio::select!](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)]
 
 ---
 
@@ -541,7 +541,7 @@ async fn process_image(data: Vec<u8>) -> Result<Vec<u8>, task::JoinError> {
 - 混合工作负载 → 异步 + `spawn_blocking` 组合
 
 > **认知功能**: `spawn_blocking` 是**异步与同步世界之间的桥接器**——它保留了 async/await 的编程模型，同时避免阻塞异步执行器。
-> [来源: [Tokio — spawn_blocking](https://docs.rs/tokio/latest/tokio/task/fn.spawn_blocking.html)]
+> [来源: [Tokio — spawn_blocking](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)]
 > [来源: [Async Patterns](https://rust-lang.github.io/async-book/index.html)]
 
 ---
@@ -670,7 +670,7 @@ graph TD
 | [tokio.rs](https://tokio.rs/) | ✅ 一级 | Tokio 文档 |
 | [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs//2394-async_await.html) | ✅ 一级 | 设计 RFC |
 | [TRPL — Async](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ 一级 | 基础教程 |
-| [tokio::select!](https://docs.rs/tokio/latest/tokio/macro.select.html) | ✅ 一级 | 并发原语 |
+| [tokio::select!](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html) | ✅ 一级 | 并发原语 |
 | [Rust Reference — Await](https://doc.rust-lang.org/reference/expressions/await-expr.html) | ✅ 一级 | 语言参考 |
 | [RFC 2592 — Pin](https://rust-lang.github.io/rfcs//2592-futures.html) | ✅ 一级 | Pin 设计 RFC |
 | [std::task::Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) | ✅ 一级 | 标准库 API |

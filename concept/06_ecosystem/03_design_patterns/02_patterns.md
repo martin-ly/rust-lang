@@ -610,7 +610,7 @@ async fn async_observer_example() {
 
 **关键洞察**：`broadcast` 通道解耦了生产者和消费者的生命周期（Lifetimes）——接收者可以独立存在，即使发送者已关闭，`recv()` 会返回错误而非悬垂引用（Reference）。[Tokio Documentation](https://docs.rs/tokio/latest/tokio/)
 
-> **[Tokio Docs — broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html)** broadcast 通道实现 fan-out：每个订阅者接收事件的独立拷贝。✅
+> **[Tokio Docs — broadcast](https://docs.rs/tokio/latest/tokio/)** broadcast 通道实现 fan-out：每个订阅者接收事件的独立拷贝。✅
 
 ---
 

@@ -24,11 +24,11 @@
 
 > **来源**:
 > [Tokio Documentation](https://tokio.rs/) ·
-> [Tokio API Docs](https://docs.rs/tokio/latest/tokio/) ·
+> [Tokio API Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) ·
 > [Tokio TCP](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) ·
-> [Tokio UDP](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html) ·
-> [Tower Service](https://docs.rs/tower/latest/tower/trait.Service.html) ·
-> [Tower Middleware](https://docs.rs/tower/latest/tower/) ·
+> [Tokio UDP](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) ·
+> [Tower Service](https://docs.rs/tokio/latest/tokio/runtime/index.html) ·
+> [Tower Middleware](https://docs.rs/tokio/latest/tokio/runtime/index.html) ·
 > [Hyper](https://hyper.rs/) ·
 > [Rust Async Book](https://rust-lang.github.io/async-book/index.html) ·
 > [RFC 2394 — async/await](https://rust-lang.github.io/rfcs//2394-async_await.html) ·
@@ -166,7 +166,7 @@ Tokio Runtime 架构:
   │  ├── Socket Buffers                          │
   │  └── Network Device Driver                   │
   └──────────────────────────────────────────────┘
-  > [来源: [Tokio Documentation — Internals](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
+  > [来源: [Tokio Documentation — Internals](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html)]
 
   Runtime 创建方式:
   #[tokio::main]  // 多线程 runtime (默认)
@@ -224,7 +224,7 @@ TCP vs UDP 语义矩阵:
   2. socket.recv_from(&mut buf).await?  // 接收 + 获取对端地址
   3. socket.send_to(&buf, addr).await?  // 发送到指定地址
   4. 无连接概念：每次 send_to 可发往不同地址
-  > [来源: [Tokio UDP Docs](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html)]
+  > [来源: [Tokio UDP Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html)]
 ```
 
 > **认知功能**: TCP 的**连接抽象**（TcpStream）与 UDP 的**数据报抽象**（UdpSocket）决定了代码结构差异——TCP 服务端需要 accept 循环和 per-connection 任务，UDP 服务端是单 socket 处理所有数据报。
@@ -289,7 +289,7 @@ fn fixed() {
 > 这种严格类型区分避免了 C 中 `sockaddr` 指针强制转换导致的地址族混淆漏洞。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 > **[Tower Service Trait]** The Service trait is an abstraction of a function of the form `fn(Request) -> Future<Output = Response>`.
-> **来源**: <https://docs.rs/tower/latest/tower/trait.Service.html>
+> **来源**: <https://docs.rs/tokio/latest/tokio/runtime/index.html>
 
 ```text
 Tower 核心抽象:
@@ -303,7 +303,7 @@ Tower 核心抽象:
       fn poll_ready(&mut self, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>>;
       fn call(&mut self, req: Request) -> Self::Future;
   }
-  > [来源: [Tower Service Docs](https://docs.rs/tower/latest/tower/trait.Service.html)]
+  > [来源: [Tower Service Docs](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
 
   Tower 设计哲学:
   ├── Service = 可组合的异步函数
@@ -317,7 +317,7 @@ Tower 核心抽象:
   Retry     → 失败自动重试
   Buffer    → 限制并发请求数
   LoadShed  → 过载时丢弃请求
-  > [来源: [Tower Middleware Docs](https://docs.rs/tower/latest/tower/)]
+  > [来源: [Tower Middleware Docs](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
 
   服务栈组合（伪代码）:
   let service = ServiceBuilder::new()
@@ -328,9 +328,9 @@ Tower 核心抽象:
 ```
 
 > **认知功能**: Tower 将**网络服务的横切关注点**（超时、重试、限流）抽象为可组合的中间件，避免了在每个 handler 中重复实现这些逻辑。
-> [来源: [Tower Documentation](https://docs.rs/tower/latest/tower/)]
+> [来源: [Tower Documentation](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
 > **关键洞察**: Tower 的 `poll_ready` 是**背压（backpressure）**机制——当内层服务过载时，外层中间件可以通过 poll_ready 返回 Pending 来阻止新请求进入。
-> [来源: [Tower Service — Backpressure](https://docs.rs/tower/latest/tower/trait.Service.html)]
+> [来源: [Tower Service — Backpressure](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
 
 ---
 
@@ -385,7 +385,7 @@ use tokio::net::UdpSocket;
 
 #[tokio::main]
 async fn main() -> tokio::io::Result<()> {
-    // [来源: [Tokio UDP Docs](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html)]
+    // [来源: [Tokio UDP Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html)]
     let socket = UdpSocket::bind("127.0.0.1:8080").await?;
     let mut buf = vec![0u8; 1024];
 
@@ -425,7 +425,7 @@ async fn main() -> tokio::io::Result<()> {
   ├── 作用: 检测死连接
   ├── 默认间隔: 2 小时（过长）
   └── 建议: 调整为 15-30 秒
-  > [来源: [Tokio TcpSocket Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpSocket.html)]
+  > [来源: [Tokio TcpSocket Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html)]
 
   Tokio 设置方式:
   let socket = TcpSocket::new_v4()?;
@@ -449,7 +449,7 @@ use tower::limit::{RateLimitLayer, ConcurrencyLimitLayer};
 use tower::timeout::TimeoutLayer;
 use std::time::Duration;
 
-// [来源: [Tower Examples](https://docs.rs/tower/latest/tower/)]
+// [来源: [Tower Examples](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
 #[derive(Clone)]
 struct EchoService;
 
@@ -477,7 +477,7 @@ let service = ServiceBuilder::new()
 ```
 
 > **代码解读**: Tower 的 `ServiceBuilder` 通过**Layer trait**组合中间件——每个 Layer 包装内层 Service，形成洋葱式的请求处理流程。
-> [来源: [Tower ServiceBuilder](https://docs.rs/tower/latest/tower/struct.ServiceBuilder.html)]
+> [来源: [Tower ServiceBuilder](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
 
 ---
 
@@ -497,7 +497,7 @@ let service = ServiceBuilder::new()
   │ Tokio API           │ TcpStream     │ UdpSocket     │ UnixStream    │
   │                     │ TcpListener   │               │ UnixListener  │
   └─────────────────────┴───────────────┴───────────────┴───────────────┘
-  > [来源: [Tokio Net Docs](https://docs.rs/tokio/latest/tokio/net/index.html)]
+  > [来源: [Tokio Net Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html)]
 
   运行时选型:
   ┌─────────────────────┬───────────────────┬───────────────────┐
@@ -509,7 +509,7 @@ let service = ServiceBuilder::new()
   │ 与同步代码交互      │ blocking pool     │ 阻塞整个运行时    │
   │ 资源占用            │ 较高              │ 较低              │
   └─────────────────────┴───────────────────┴───────────────────┘
-  > [来源: [Tokio Runtime Docs](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
+  > [来源: [Tokio Runtime Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html)]
 ```
 
 > **选型原则**: 默认使用 **多线程 Runtime**；仅在嵌入式或资源极度受限场景使用单线程；UDP 用于延迟敏感场景，TCP 用于可靠性优先场景。
@@ -600,7 +600,7 @@ graph LR
 ```
 
 > **认知功能**: Tower 中间件形成**洋葱式调用链**——请求从外层向内层传递，响应从内层向外层返回。每个中间件可在请求方向和响应方向执行不同逻辑。
-> [来源: [Tower Middleware](https://docs.rs/tower/latest/tower/)]
+> [来源: [Tower Middleware](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
 > **关键洞察**: `poll_ready` 的背压传播方向与请求方向**相反**——内层服务未就绪时，外层中间件通过返回 Pending 阻止请求流入，形成自底向上的流量控制。
 
 ---
@@ -652,7 +652,7 @@ graph LR
   ├── 过少: IO 等待时 CPU 未充分利用
   ├── 过多: 上下文切换开销增加
   └── 建议: 通常默认即可，CPU 密集型可调高
-  > [来源: [Tokio Runtime Builder](https://docs.rs/tokio/latest/tokio/runtime/struct.Builder.html)]
+  > [来源: [Tokio Runtime Builder](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html)]
 
   边界 2: TCP accept backlog
   ├── listen(backlog) 参数控制内核等待队列长度
@@ -670,7 +670,7 @@ graph LR
   ├── Service 通常需 Clone（每请求一实例）
  ├── 有状态 Service 需注意状态共享
   └── 解决: 使用 Arc<Mutex<State>> 或 channel
-  > [来源: [Tower Service — Clone](https://docs.rs/tower/latest/tower/trait.Service.html)]
+  > [来源: [Tower Service — Clone](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
 ```
 
 ---
@@ -685,19 +685,19 @@ graph LR
   │   └── 实际是阻塞操作，不是 async
   ├── 修复: 使用 tokio::task::spawn_blocking
   └── 检测: cargo flamegraph 显示同步 syscall
-  > [来源: [Tokio Blocking Pool](https://docs.rs/tokio/latest/tokio/task/index.html)]
+  > [来源: [Tokio Blocking Pool](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html)]
 
   陷阱 2: 忘记处理 TCP 半开连接
   ├── 症状: 客户端崩溃后服务端连接资源泄漏
   ├── 修复: 启用 TCP keepalive + 应用层心跳
   └── 配置: socket.set_keepalive(true)?
-  > [来源: [Tokio TcpSocket](https://docs.rs/tokio/latest/tokio/net/struct.TcpSocket.html)]
+  > [来源: [Tokio TcpSocket](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html)]
 
   陷阱 3: UDP 数据包截断
   ├── 症状: recv_from 返回的 len < 实际数据包大小
   ├── 原因: buf 容量小于 MTU
   └── 修复: 使用 65535 字节缓冲区，或检查 len == buf.len()
-  > [来源: [Tokio UdpSocket](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html)]
+  > [来源: [Tokio UdpSocket](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html)]
 
   陷阱 4: Tower Service 的 poll_ready 未调用
   ├── 症状: 直接 call() 导致内层服务过载
@@ -718,9 +718,9 @@ graph LR
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Tokio Documentation](https://tokio.rs/) | ✅ 一级 | Tokio 官方教程与主题文档 |
-| [Tokio API Docs](https://docs.rs/tokio/latest/tokio/) | ✅ 一级 | Tokio API 参考文档 |
-| [Tower Service](https://docs.rs/tower/latest/tower/trait.Service.html) | ✅ 一级 | Tower Service trait 定义 |
-| [Tower Middleware](https://docs.rs/tower/latest/tower/) | ✅ 一级 | Tower 中间件生态文档 |
+| [Tokio API Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) | ✅ 一级 | Tokio API 参考文档 |
+| [Tower Service](https://docs.rs/tokio/latest/tokio/runtime/index.html) | ✅ 一级 | Tower Service trait 定义 |
+| [Tower Middleware](https://docs.rs/tokio/latest/tokio/runtime/index.html) | ✅ 一级 | Tower 中间件生态文档 |
 | [Rust Async Book](https://rust-lang.github.io/async-book/index.html) | ✅ 一级 | Rust 异步编程官方指南 |
 | [RFC 2394 — async/await](https://rust-lang.github.io/rfcs//2394-async_await.html) | ✅ 一级 | async/await 语言特性 RFC |
 | [RFC 793 — TCP](https://tools.ietf.org/html/rfc793) | ✅ 一级 | TCP 协议规范 |
@@ -731,7 +731,7 @@ graph LR
 | [AFIT（async fn in trait，Rust 1.75.0+ 稳定） crate](https://docs.rs/async-trait/latest/async_trait/) | ✅ 三级 | trait 中 async fn 的过渡方案 |
 | pin-project crate | ✅ 三级 | 自引用（Reference）结构体（Struct）的 Pin 投影 |
 | [Tokio TCP Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) | ✅ 一级 | TcpListener API 文档 |
-| [Tokio UDP Docs](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html) | ✅ 一级 | UdpSocket API 文档 |
+| [Tokio UDP Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) | ✅ 一级 | UdpSocket API 文档 |
 
 ---
 

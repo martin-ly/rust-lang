@@ -10,7 +10,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **双维定位**: P×App — 实施可观测性工程实践
-> **定位**: 覆盖 Rust 生态中 **日志（log/tracing [来源: [tokio tracing](https://docs.rs/tracing/latest/tracing/)]）**、**指标（metrics）**、**分布式追踪（distributed tracing）**三大可观测性支柱，分析各 crate 的设计哲学与选型策略。
+> **定位**: 覆盖 Rust 生态中 **日志（log/tracing [来源: [tokio tracing](https://docs.rs/tracing/latest/tracing/trait.Instrument.html)]）**、**指标（metrics）**、**分布式追踪（distributed tracing）**三大可观测性支柱，分析各 crate 的设计哲学与选型策略。
 > **前置概念**: [Async](../../03_advanced/01_async/02_async.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
 > **后置概念**: [WebAssembly](../11_domain_applications/11_webassembly.md) · [Rust Version Tracking](../../07_future/00_version_tracking/05_rust_version_tracking.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -18,7 +18,7 @@
 > **来源**: [log crate](https://docs.rs/log/) · [tracing](https://docs.rs/tracing/) · [std::fmt](https://doc.rust-lang.org/std/fmt/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
-> **来源**: [tracing Documentation](https://docs.rs/tracing/latest/tracing/) ·
+> **来源**: [tracing Documentation](https://docs.rs/tracing/latest/tracing/trait.Instrument.html) ·
 > [log crate](https://docs.rs/log/latest/log/) ·
 > [OpenTelemetry [来源: [opentelemetry.io](https://opentelemetry.io/)] Rust](<https://github.com/open-telemetry/opentelemetry-rust>) ·
 > [tokio/tracing](https://github.com/tokio-rs/tracing) ·
@@ -186,7 +186,7 @@ async fn handle_request(req: Request) {
 ```
 
 > **Span 设计**: tracing 的核心创新是 **Span**——不是记录离散日志行，而是记录**带有上下文的结构化事件**。Span 自动在异步边界传播上下文，解决了 async/await 中日志上下文丢失的问题。
-> [来源: [tracing Documentation](https://docs.rs/tracing/latest/tracing/)]
+> [来源: [tracing Documentation](https://docs.rs/tracing/latest/tracing/trait.Instrument.html)]
 
 ---
 
@@ -215,7 +215,7 @@ tracing 日志级别层次:
 ```
 
 > **性能**: tracing 的**编译期过滤**是真正的零成本——未启用的日志在编译时被完全消除，不生成任何机器码。这比运行期检查（如 C++ 的 if (level >= DEBUG)）更高效。
-> [来源: [tracing Performance Guide](https://docs.rs/tracing/latest/tracing/#performance)]
+> [来源: [tracing Performance Guide](https://docs.rs/tracing/latest/tracing/trait.Instrument.html)]
 
 ---
 
@@ -307,7 +307,7 @@ WebAssembly:
 ```
 
 > **选型原则**: 异步服务首选 tracing，同步服务 log 足够，微服务全栈用 OpenTelemetry 统一出口。
-> [来源: [Rust Logging Comparison](https://docs.rs/tracing/latest/tracing/)] · [来源: [Tokio Docs](https://tokio.rs/)]
+> [来源: [Rust Logging Comparison](https://docs.rs/tracing/latest/tracing/trait.Instrument.html)] · [来源: [Tokio Docs](https://tokio.rs/)]
 
 ---
 
@@ -425,7 +425,7 @@ graph TD
 
 | [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
-| [tracing Documentation](https://docs.rs/tracing/latest/tracing/) | ✅ 一级 | 官方文档 |
+| [tracing Documentation](https://docs.rs/tracing/latest/tracing/trait.Instrument.html) | ✅ 一级 | 官方文档 |
 | [log crate](https://docs.rs/log/latest/log/) | ✅ 一级 | Rust 日志 facade |
 | [OpenTelemetry Rust](https://github.com/open-telemetry/opentelemetry-rust) | ✅ 一级 | 跨语言可观测性标准 |
 | [tokio.rs Blog — tracing](https://tokio.rs/blog/2019-08-tracing) | ✅ 二级 | 设计动机与架构 |

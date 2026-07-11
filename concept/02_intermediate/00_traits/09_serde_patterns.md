@@ -10,7 +10,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Serde 序列化设计模式
-> **定位**: 深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏（Macro）、自定义序列化逻辑、以及类型系统（Type System）如何保障数据转换的安全性。
+> **定位**: 深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/)]`/`Deserialize` derive 宏（Macro）、自定义序列化逻辑、以及类型系统（Type System）如何保障数据转换的安全性。
 > **前置概念**: [Traits](01_traits.md) · [Macros](../../03_advanced/03_proc_macros/04_macros.md) · [Generics](../01_generics/02_generics.md)
 > **后置概念**: [Core Crates](../../06_ecosystem/02_core_crates/03_core_crates.md) · [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md)
 

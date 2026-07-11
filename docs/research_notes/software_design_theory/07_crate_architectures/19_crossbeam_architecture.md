@@ -245,7 +245,7 @@ impl Guard {
 - `defer` 要求闭包（Closures）为 `Send + 'static`，防止在线程局部存储中捕获非 `Send` 数据
 - `Guard` 不实现 `Clone`，防止同一个线程多次 `pin` 造成 epoch 计数错误
 
-> [Crossbeam Epoch — Guard](https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/struct.Guard.html)(<https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/struct.Guard.html>)
+> [Crossbeam Epoch — Guard](https://docs.rs/crossbeam-utils/latest/crossbeam_utils/thread/struct.Scope.html)(<https://docs.rs/crossbeam-utils/latest/crossbeam_utils/thread/struct.Scope.html>)
 
 ### 3.2 `Atomic<T>` 与内存排序的类型化封装 {#32-atomict-与内存排序的类型化封装}
 
@@ -324,7 +324,7 @@ crossbeam::scope(|s| {
 - `JoinHandle` 的 `join()` 方法在 scope 结束时隐式调用，编译器通过 `Drop` 顺序保证
 - 不会发生 use-after-free，因为 Rust 的借用检查器在编译期验证了所有引用（Reference）的有效性
 
-> [来源: Crossbeam Utils — Scope](https://docs.rs/crossbeam-utils/latest/crossbeam_utils/thread/struct.Scope.html)
+> [来源: Crossbeam Utils — Scope](https://docs.rs/crossbeam-queue/latest/crossbeam_queue/struct.ArrayQueue.html)
 > [来源: Rust RFC 3151 — Scoped Threads](https://rust-lang.github.io/rfcs/3151-scoped-threads.html)
 
 ---
@@ -389,7 +389,7 @@ pub fn push(&self, value: T) -> Result<(), T> {
 - **无锁**：即使某个线程在任意时刻停止，其他线程的 `push`/`pop` 仍能在有限步内完成
 - **ABA 安全**：`stamp` 同时编码世代信息，避免经典的 ABA 问题（`tail` 绕回整圈时 `stamp` 不匹配）
 
-> [Crossbeam Queue — ArrayQueue](https://docs.rs/crossbeam-queue/latest/crossbeam_queue/struct.ArrayQueue.html)(<https://docs.rs/crossbeam-queue/latest/crossbeam_queue/struct.ArrayQueue.html>)
+> [Crossbeam Queue — ArrayQueue](https://docs.rs/crossbeam-queue/latest/crossbeam_queue/struct.SegQueue.html)(<https://docs.rs/crossbeam-queue/latest/crossbeam_queue/struct.SegQueue.html>)
 > [Herlihy & Shavit (2011). "The Art of Multiprocessor Programming". Chapter 10](https://booksite.elsevier.com/9780123705914/)
 
 ### 4.2 `SegQueue` 的动态扩展 {#42-segqueue-的动态扩展}
@@ -433,7 +433,7 @@ graph LR
 | **线程局部** | `thread_local!` | `CachePadded<T>` | Crossbeam 提供缓存行对齐，避免伪共享 |
 
 > [std::sync docs](https://doc.rust-lang.org/std/sync/index.html)(<https://doc.rust-lang.org/std/sync/>)
-> [来源: Crossbeam vs std comparison](https://docs.rs/crossbeam/latest/crossbeam/#comparison-with-the-standard-library)
+> [来源: Crossbeam vs std comparison](https://docs.rs/crossbeam/latest/crossbeam/)
 
 ---
 

@@ -100,7 +100,7 @@ fn generate_getter(field: &syn::Field) -> proc_macro2::TokenStream {
 }
 ```
 
-> **关键洞察**: `quote_spanned!` 让生成的代码错误指向用户输入的字段，而不是宏定义位置，是提升宏用户体验的核心手段 (Source: [quote docs](https://docs.rs/quote/latest/quote/macro.quote_spanned.html))。
+> **关键洞察**: `quote_spanned!` 让生成的代码错误指向用户输入的字段，而不是宏定义位置，是提升宏用户体验的核心手段 (Source: [quote docs](https://docs.rs/quote/latest/quote/))。
 
 ---
 

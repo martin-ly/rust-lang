@@ -27,7 +27,7 @@
 
 Tower 是 Rust 异步（Async）生态中**服务组合 (Service Composition)** 的基础设施层。hyper（HTTP 客户端/服务器）、tonic（gRPC）、axum（Web 框架）等重量级项目均构建于 Tower 之上。它提供了一套极简的 trait 体系——核心仅 `Service` 和 `Layer` 两个 trait——却支撑起了整个 Rust 异步服务中间件的组合代数。
 
-> [来源: [Tower 官方文档](https://docs.rs/tower/latest/tower/)]
+> [来源: [Tower 官方文档](https://docs.rs/tower/latest/tower/trait.Layer.html)]
 > [来源: [hyper 文档](https://docs.rs/hyper/latest/hyper/)]
 
 Tower 的设计哲学可以概括为：**请求即函数，中间件即高阶函数，服务栈即函数复合**。这一哲学使得 HTTP 处理、RPC 调用、消息队列消费等异构场景能够被统一到同一套组合框架中。
@@ -67,7 +67,7 @@ pub trait Service<Request> {
 }
 ```
 
-> [来源: [Tower Service Trait](https://docs.rs/tower/latest/tower/trait.Service.html)]
+> [来源: [Tower Service Trait](https://docs.rs/tower/latest/tower/trait.Layer.html)]
 
 ### 2.1 为什么需要 `poll_ready`？ {#21-为什么需要-poll_ready}
 
@@ -264,7 +264,7 @@ let service = ServiceBuilder::new()
     .service(core_handler);
 ```
 
-> [来源: [Tower ServiceBuilder](https://docs.rs/tower/latest/tower/struct.ServiceBuilder.html)]
+> [来源: [Tower ServiceBuilder](https://docs.rs/tower/latest/tower/trait.Layer.html)]
 
 ---
 

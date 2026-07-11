@@ -182,7 +182,7 @@ bytes::Bytes:
 ```
 
 > **Bytes 洞察**: **bytes::Bytes 是 Rust 网络生态的基石**——Tokio、Hyper、Tonic 都依赖其实现零拷贝 I/O。
-> [来源: [Tokio Bytes](https://docs.rs/bytes/latest/bytes/struct.Bytes.html)]
+> [来源: [Tokio Bytes](https://docs.rs/bytes/latest/bytes/)]
 
 ---
 

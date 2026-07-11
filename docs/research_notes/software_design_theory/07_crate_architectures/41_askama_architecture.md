@@ -39,7 +39,7 @@
 
 `Askama` 是 Rust 生态中**类型安全、编译期渲染**的模板引擎，采用 Jinja-like 语法。它的核心设计是将模板文件或内联模板在编译期转换为 Rust 代码，从而把运行时（Runtime）语法错误和字段名错误转变为编译错误。
 
-> [来源: [askama docs.rs](https://docs.rs/askama/latest/askama/)]
+> [来源: [askama docs.rs](https://docs.rs/askama/latest/askama/index.html#integrations)]
 
 与动态模板引擎（如 Handlebars、Tera）相比，Askama 的取舍是：
 
@@ -87,7 +87,7 @@ struct HelloTemplate<'a> {
 }
 ```
 
-> [来源: [askama::Template trait](https://docs.rs/askama/latest/askama/trait.Template.html)]
+> [来源: [askama::Template trait](https://docs.rs/askama/latest/askama/index.html#integrations)]
 
 宏展开后，结构体字段成为模板上下文。模板中引用（Reference）的变量必须在 struct 中定义，否则编译报错。
 
@@ -211,7 +211,7 @@ async fn page() -> impl IntoResponse {
 
 ---
 
-> **权威来源**: [askama docs.rs](https://docs.rs/askama/latest/askama/) · [askama crates.io](https://crates.io/crates/askama) · [askama book](https://djc.github.io/askama/) · [askama GitHub](https://github.com/djc/askama)
+> **权威来源**: [askama docs.rs](https://docs.rs/askama/latest/askama/index.html#integrations) · [askama crates.io](https://crates.io/crates/askama) · [askama book](https://djc.github.io/askama/) · [askama GitHub](https://github.com/djc/askama)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)
@@ -224,7 +224,7 @@ async fn page() -> impl IntoResponse {
 
 ### P0 — 核心官方文档 {#p0-核心官方文档}
 
-> - [来源: [askama docs.rs](https://docs.rs/askama/latest/askama/)]
+> - [来源: [askama docs.rs](https://docs.rs/askama/latest/askama/index.html#integrations)]
 > - [来源: [askama book](https://djc.github.io/askama/)]
 > - [来源: [askama crates.io](https://crates.io/crates/askama)]
 

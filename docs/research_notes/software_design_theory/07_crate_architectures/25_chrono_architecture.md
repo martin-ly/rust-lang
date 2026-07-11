@@ -31,7 +31,7 @@
 
 ## 1. 引言：chrono 在 Rust 生态中的定位 {#1-引言chrono-在-rust-生态中的定位}
 
-> **[来源: [chrono docs.rs](https://docs.rs/chrono/latest/chrono/)]**
+> **[来源: [chrono docs.rs](https://docs.rs/chrono/latest/chrono/offset/trait.TimeZone.html)]**
 
 `chrono` 是 Rust 生态中**事实标准的日期时间库**，提供对 ISO 8601 日期、时间、Duration、时区的类型安全抽象。它与标准库 `std::time` 形成互补：
 
@@ -52,7 +52,7 @@
 
 ### 2.1 日期时间类型谱系 {#21-日期时间类型谱系}
 
-> **[来源: [chrono docs.rs – DateTime](https://docs.rs/chrono/latest/chrono/struct.DateTime.html)]**
+> **[来源: [chrono docs.rs – DateTime](https://docs.rs/chrono/latest/chrono/offset/trait.TimeZone.html)]**
 
 ```mermaid
 graph TD
@@ -105,7 +105,7 @@ let local = utc.with_timezone(&Local);
 
 ### 2.3 `Duration` 与 `TimeDelta` {#23-duration-与-timedelta}
 
-> **[来源: [chrono docs.rs – TimeDelta](https://docs.rs/chrono/latest/chrono/struct.TimeDelta.html)]**
+> **[来源: [chrono docs.rs – TimeDelta](https://docs.rs/chrono/latest/chrono/offset/trait.TimeZone.html)]**
 
 `chrono::Duration`（在 0.4.40+ 后别名 `TimeDelta`）表示**日历语义的时间差**，可为负，精确到纳秒：
 
@@ -134,7 +134,7 @@ let diff = later - now;
 
 ### 3.1 `strftime` / `parse_from_str` {#31-strftime-parse_from_str}
 
-> **[来源: [chrono docs.rs – format::strftime](https://docs.rs/chrono/latest/chrono/format/strftime/index.html)]**
+> **[来源: [chrono docs.rs – format::strftime](https://docs.rs/chrono/latest/chrono/offset/trait.TimeZone.html)]**
 
 ```rust
 use chrono::{DateTime, FixedOffset, NaiveDateTime};
@@ -175,7 +175,7 @@ let dt: DateTime<Utc> = s.parse::<DateTime<Utc>>()?;
 
 ## 4. 时区处理最佳实践 {#4-时区处理最佳实践}
 
-> **[来源: [chrono docs.rs – offset](https://docs.rs/chrono/latest/chrono/offset/index.html)]**
+> **[来源: [chrono docs.rs – offset](https://docs.rs/chrono/latest/chrono/offset/trait.TimeZone.html)]**
 
 1. **存储用 UTC**：所有持久化、网络传输、数据库字段优先使用 `DateTime<Utc>`。
 2. **展示转 Local**：在最终渲染给用户时再 `with_timezone(&Local)`。
@@ -193,7 +193,7 @@ let display = stored.with_timezone(&Local); // 展示给用户
 
 ## 5. 反例边界 {#5-反例边界}
 
-> **[来源: [chrono docs.rs – NaiveDateTime](https://docs.rs/chrono/latest/chrono/naive/struct.NaiveDateTime.html)]**
+> **[来源: [chrono docs.rs – NaiveDateTime](https://docs.rs/chrono/latest/chrono/offset/trait.TimeZone.html)]**
 
 ### 5.1 Naive 类型误用 {#51-naive-类型误用}
 
@@ -270,7 +270,7 @@ let d = NaiveDate::parse_from_str("2026-6-9", "%Y-%m-%d");
 
 ---
 
-> **权威来源**: [chrono docs.rs](https://docs.rs/chrono/latest/chrono/) · [Rust Standard Library – std::time](https://doc.rust-lang.org/std/time/) · [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+> **权威来源**: [chrono docs.rs](https://docs.rs/chrono/latest/chrono/offset/trait.TimeZone.html) · [Rust Standard Library – std::time](https://doc.rust-lang.org/std/time/) · [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)
@@ -283,7 +283,7 @@ let d = NaiveDate::parse_from_str("2026-6-9", "%Y-%m-%d");
 
 ### P0 — 核心官方文档 {#p0-核心官方文档}
 
-- [chrono docs.rs](https://docs.rs/chrono/latest/chrono/)
+- [chrono docs.rs](https://docs.rs/chrono/latest/chrono/offset/trait.TimeZone.html)
 - [Rust Standard Library – std::time](https://doc.rust-lang.org/std/time/)
 
 ### P1 — 标准与学术论文 {#p1-标准与学术论文}

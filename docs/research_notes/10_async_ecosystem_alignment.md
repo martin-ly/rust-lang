@@ -51,10 +51,10 @@
 
 | 原语 | 来源 | 项目文档 | 备注 |
 |------|------|----------|------|
-| `tokio::sync::Mutex` | [Tokio Docs](https://docs.rs/tokio/latest/tokio/sync/struct.Mutex.html) | [60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §4 | 异步锁 |
-| `tokio::sync::RwLock` | [Tokio Docs](https://docs.rs/tokio/latest/tokio/sync/struct.RwLock.html) | [60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §4 | 异步读写锁 |
-| `tokio::sync::oneshot` | [Tokio Docs](https://docs.rs/tokio/latest/tokio/sync/oneshot/index.html) | [60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §7 | 单次通道 |
-| `tokio::task` | [Tokio Docs](https://docs.rs/tokio/latest/tokio/task/index.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | spawn、JoinHandle |
+| `tokio::sync::Mutex` | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §4 | 异步锁 |
+| `tokio::sync::RwLock` | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §4 | 异步读写锁 |
+| `tokio::sync::oneshot` | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §7 | 单次通道 |
+| `tokio::task` | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | spawn、JoinHandle |
 
 ---
 
@@ -73,9 +73,9 @@
 
 | 概念/库 | 来源 | 项目文档 | 备注 |
 |---------|------|----------|------|
-| Stream trait | [futures-rs](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 异步迭代 |
+| Stream trait | [futures-rs](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 异步迭代 |
 | async_iter (gen blocks) | [RFC 3516 [已失效]]<!-- 原链接: https://github.com/rust-lang/rfcs/blob/master/text/3516-gen-blocks.md --> | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §3 | 不稳定 |
-| channels (mpsc) | [Tokio Docs](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html) | [crates/c05_threads/](../../crates/c05_threads/README.md) | 消息传递 |
+| channels (mpsc) | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [crates/c05_threads/](../../crates/c05_threads/README.md) | 消息传递 |
 
 ---
 
@@ -83,7 +83,7 @@
 
 | 工具 | 来源 | 项目文档 | 备注 |
 |------|------|----------|------|
-| tokio::test | [Tokio Docs](https://docs.rs/tokio/latest/tokio/attr.test.html) | [crates/c06_async/](../../crates/c06_async/README.md) | 异步测试 |
+| tokio::test | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [crates/c06_async/](../../crates/c06_async/README.md) | 异步测试 |
 | tokio-console | [Tokio Console](https://github.com/tokio-rs/console) | [experiments/10_concurrency_performance.md](experiments/10_concurrency_performance.md) | 异步任务调试 |
 
 ---

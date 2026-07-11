@@ -459,7 +459,7 @@ impl<T> LockFreeStack<T> {
 ```
 
 > **模式矩阵**: 原子操作的**核心模式**可以归纳为几类——计数器、标志、初始化和 CAS 循环覆盖了大多数应用场景。
-> [来源: [crossbeam::atomic](https://docs.rs/crossbeam/latest/crossbeam/atomic/index.html)]
+> [来源: [crossbeam::atomic](https://docs.rs/crossbeam/latest/crossbeam/epoch/index.html)]
 
 ---
 
@@ -698,7 +698,7 @@ fn fixed() {
 |:---|:---:|:---|
 | [Rust Atomics and Locks](https://marabos.nl/atomics/) | ✅ 一级 | 权威指南 |
 | [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) | ✅ 一级 | 标准库文档 |
-| [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/) | ✅ 一级 | 无锁并发库 |
+| [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/epoch/index.html) | ✅ 一级 | 无锁并发库 |
 | [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) | ✅ 一级 | 内存序参考 |
 | [loom](https://docs.rs/loom/latest/loom/) | ✅ 一级 | 并发测试 |
 

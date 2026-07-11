@@ -1859,7 +1859,7 @@ fn load_config(path: &str) -> Result<String> {
 }
 ```
 
-> **[anyhow source — macro rules](https://docs.rs/anyhow/latest/anyhow/macro.anyhow.html)** `anyhow!` 宏利用 `#[track_caller]` 将错误位置绑定到调用方源码坐标，使错误链中的 `location()` 方法返回用户代码位置。 ✅
+> **[anyhow source — macro rules](https://docs.rs/anyhow/latest/anyhow/)** `anyhow!` 宏利用 `#[track_caller]` 将错误位置绑定到调用方源码坐标，使错误链中的 `location()` 方法返回用户代码位置。 ✅
 
 **`thiserror` 中 `#[backtrace]` 与 `#[track_caller]` 的协同**：
 

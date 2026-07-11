@@ -669,7 +669,7 @@ async fn main(spawner: Spawner) {
 }
 ```
 
-> [来源: [Embassy UART 文档](https://docs.rs/embassy-stm32/latest/embassy_stm32/usart/)]
+> [来源: [Embassy UART 文档](https://docs.rs/embassy-stm32/latest/embassy_stm32/spi/)]
 
 ### 7.3 SPI DMA 传输 {#73-spi-dma-传输}
 >

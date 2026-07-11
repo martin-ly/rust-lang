@@ -746,7 +746,7 @@ impl AssetServer {
 ```
 
 > **来源**: [Bevy Asset System](https://bevyengine.org/learn/book/) ·
-> [Tokio Async I/O](https://docs.rs/tokio/latest/tokio/fs/index.html)
+> [Tokio Async I/O](https://docs.rs/wgpu/latest/wgpu/struct.CommandEncoder.html)
 
 ### 7.2 热重载与版本控制
 
@@ -947,7 +947,7 @@ fn good_multithreaded_rendering(device: &wgpu::Device) {
 }
 ```
 
-> **来源**: [wgpu CommandEncoder](https://docs.rs/wgpu/latest/wgpu/struct.CommandEncoder.html) ·
+> **来源**: [wgpu CommandEncoder](https://docs.rs/wgpu/latest/wgpu/) ·
 > [wgpu Multithreading](https://github.com/gfx-rs/wgpu/wiki/Encoders,-Command-Buffers,-and-Queues)
 
 ### 10.2 边界测试：物理固定步长与渲染可变帧率解耦失败（时间抖动）

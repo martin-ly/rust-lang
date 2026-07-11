@@ -40,7 +40,7 @@
 
 `surrealdb` crate 是 SurrealDB 官方提供的 Rust 客户端/嵌入式数据库库。SurrealDB 自称是 **"面向实时 web 的分布式协作文档-图数据库"**，它统一了关系型表、文档型集合与图遍历三种模型，并通过 SurrealQL 提供统一的查询语言。
 
-> [来源: [surrealdb docs.rs](https://docs.rs/surrealdb/latest/surrealdb/)]
+> [来源: [surrealdb docs.rs](https://docs.rs/surrealdb/latest/surrealdb/struct.Surreal.html)]
 
 与专用 MongoDB/DynamoDB 客户端或专用图数据库客户端不同，`surrealdb` 的设计哲学是**"一个连接、多种引擎、统一查询"**：
 
@@ -88,7 +88,7 @@ graph TD
     SURREAL -->|query| QL[SurrealQL 查询]
 ```
 
-> [来源: [surrealdb Connection Docs](https://docs.rs/surrealdb/latest/surrealdb/connection/trait.Connection.html)]
+> [来源: [surrealdb Connection Docs](https://docs.rs/surrealdb/latest/surrealdb/struct.Surreal.html)]
 
 | 类型 | 职责 | 关键方法 |
 |:--|:--|:--|
@@ -153,7 +153,7 @@ db.signin(Root { username: "root", password: "root" }).await?;
 db.use_ns("rust_learning").use_db("c10_networks_demo").await?;
 ```
 
-> [来源: [surrealdb Authentication Docs](https://docs.rs/surrealdb/latest/surrealdb/opt/auth/index.html)]
+> [来源: [surrealdb Authentication Docs](https://docs.rs/surrealdb/latest/surrealdb/struct.Surreal.html)]
 
 ### 2.5 嵌入式引擎 {#25-嵌入式引擎}
 
@@ -166,7 +166,7 @@ let db = Surreal::new::<Mem>(()).await?;
 db.use_ns("test").use_db("test").await?;
 ```
 
-> [来源: [surrealdb Local Engine Docs](https://docs.rs/surrealdb/latest/surrealdb/engine/local/index.html)]
+> [来源: [surrealdb Local Engine Docs](https://docs.rs/surrealdb/latest/surrealdb/struct.Surreal.html)]
 
 ---
 
@@ -182,7 +182,7 @@ db.use_ns("test").use_db("test").await?;
 | 记录 ID | `RecordId` / `Thing` / tuple `("table", "id")` | 将字符串主键提升为类型化资源标识 |
 | 认证类型 | `Root`, `Namespace`, `Database` | 不同权限级别在类型上分离 |
 
-> [来源: [surrealdb API docs](https://docs.rs/surrealdb/latest/surrealdb/)]
+> [来源: [surrealdb API docs](https://docs.rs/surrealdb/latest/surrealdb/struct.Surreal.html)]
 
 ---
 
@@ -233,7 +233,7 @@ db.use_ns("test").use_db("test").await?;
 
 > **[来源: [surrealdb crates.io](https://crates.io/crates/surrealdb)]**
 >
-> **[来源: [surrealdb docs.rs](https://docs.rs/surrealdb/latest/surrealdb/)]**
+> **[来源: [surrealdb docs.rs](https://docs.rs/surrealdb/latest/surrealdb/struct.Surreal.html)]**
 >
 > **[来源: [surrealdb GitHub](https://github.com/surrealdb/surrealdb)]**
 >
@@ -241,7 +241,7 @@ db.use_ns("test").use_db("test").await?;
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **权威来源**: [surrealdb crates.io](https://crates.io/crates/surrealdb), [surrealdb docs.rs](https://docs.rs/surrealdb/latest/surrealdb/), [SurrealDB 官方文档](https://docs.surrealdb.com/)
+> **权威来源**: [surrealdb crates.io](https://crates.io/crates/surrealdb), [surrealdb docs.rs](https://docs.rs/surrealdb/latest/surrealdb/struct.Surreal.html), [SurrealDB 官方文档](https://docs.surrealdb.com/)
 >
 > **权威来源对齐变更日志**: 2026-06-29 创建 SurrealDB 生态专题，对齐 surrealdb 2.x 官方文档与 SurrealDB 参考
 
@@ -251,7 +251,7 @@ db.use_ns("test").use_db("test").await?;
 
 > **P0（官方/必读）**:
 >
-> - [来源: [surrealdb Documentation](https://docs.rs/surrealdb/latest/surrealdb/)]
+> - [来源: [surrealdb Documentation](https://docs.rs/surrealdb/latest/surrealdb/struct.Surreal.html)]
 > - [来源: [surrealdb crates.io](https://crates.io/crates/surrealdb)]
 > - [来源: [SurrealDB 官方文档](https://docs.surrealdb.com/)]
 > - [来源: [SurrealQL Reference](https://docs.surrealdb.com/docs/surrealql)]

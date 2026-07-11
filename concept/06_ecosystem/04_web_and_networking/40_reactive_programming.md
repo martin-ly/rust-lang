@@ -157,7 +157,7 @@ Processor<T,R>:
 ```
 
 > **来源**: [Reactive Streams Specification](https://www.reactive-streams.org/) ·
-> [来源: [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)] · [来源: [Tokio mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)]
+> [来源: [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)] · [来源: [Tokio mpsc](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)]
 > [Reactive Streams JVM](https://github.com/reactive-streams/reactive-streams-jvm)
 
 ### 1.3 FRP：函数式响应编程
@@ -337,8 +337,8 @@ let results: Vec<_> = pipeline.collect().await;
 | `fold` | `Stream<A> → b → (b→A→b) → Future<b>` | 聚合 | 消费全部 |
 | `merge` | `Stream<A> × Stream<A> → Stream<A>` | 合并 | 竞争消费 |
 
-> **来源**: [futures-rs StreamExt](https://docs.rs/futures/latest/futures/stream/trait.StreamExt.html) ·
-> [Tokio StreamExt](https://docs.rs/tokio-stream/latest/tokio_stream/trait.StreamExt.html)
+> **来源**: [futures-rs StreamExt](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) ·
+> [Tokio StreamExt](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)
 
 ---
 
@@ -434,8 +434,8 @@ impl<T> CreditBasedChannel<T> {
 ```
 
 > **来源**: [Reactive Streams Spec — Backpressure](https://www.reactive-streams.org/) ·
-> [Tokio mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html) ·
-> [Tokio broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html)
+> [Tokio mpsc](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) ·
+> [Tokio broadcast](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
 
 ---
 
@@ -634,13 +634,13 @@ Rust Stream = Pull-based 的数据流抽象
           → 显式控制流
 ```
 
-> **来源**: [Tokio Stream](https://docs.rs/tokio-stream/latest/tokio_stream/) · [futures-rs](https://docs.rs/futures/latest/futures/stream/index.html)
+> **来源**: [Tokio Stream](https://docs.rs/tokio-stream/latest/tokio_stream/) · [futures-rs](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
 
 ---
 
 ## 七、Rust 实现
 
-> **来源**: [async-stream](https://docs.rs/async-stream/latest/async_stream/) · [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
+> **来源**: [async-stream](https://docs.rs/futures/latest/futures/stream/index.html) · [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
 
 ### 7.1 tokio-stream
 >
@@ -713,7 +713,7 @@ let network_stream = stream! {
 };
 ```
 
-> **来源**: [来源: [async-stream](https://docs.rs/async-stream/latest/async_stream/)]
+> **来源**: [来源: [async-stream](https://docs.rs/futures/latest/futures/stream/index.html)]
 
 ### 7.3 完整数据流处理骨架
 >
@@ -780,8 +780,8 @@ async fn send_alert(log: &LogEntry) -> Result<(), AlertError> {
 ```
 
 > **来源**: [tokio-stream](https://docs.rs/tokio-stream/latest/tokio_stream/) ·
-> [async-stream](https://docs.rs/async-stream/latest/async_stream/) ·
-> [futures-rs](https://docs.rs/futures/latest/futures/stream/index.html)
+> [async-stream](https://docs.rs/futures/latest/futures/stream/index.html) ·
+> [futures-rs](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
 
 ---
 
@@ -874,7 +874,7 @@ async fn unbounded_channel_oom() {
 > tx.send(data).await.unwrap();  // 满时阻塞 → 背压传递给上游
 > ```
 >
-> **来源**: [Tokio mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html) ·
+> **来源**: [Tokio mpsc](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) ·
 > [Reactive Streams — Backpressure](https://www.reactive-streams.org/)
 
 ### 9.2 边界测试：跨线程 Stream 发送违反 Send（编译错误）
@@ -972,9 +972,9 @@ fn circular_signal_deadlock() {
 
 ---
 
-> **补充来源索引**: [来源: [Reactive Streams JVM](https://github.com/reactive-streams/reactive-streams-jvm)] · [来源: [Tokio broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html)]
+> **补充来源索引**: [来源: [Reactive Streams JVM](https://github.com/reactive-streams/reactive-streams-jvm)] · [来源: [Tokio broadcast](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)]
 > **来源**: [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
-> **来源**: [Tokio mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)
+> **来源**: [Tokio mpsc](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
 
 ## 相关概念文件
 

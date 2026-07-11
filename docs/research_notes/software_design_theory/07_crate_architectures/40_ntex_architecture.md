@@ -39,7 +39,7 @@
 
 `ntex` 是由原 Actix 核心开发者创建的**可组合网络服务框架**，可视为 Actix-web 设计理念在 `async/await` 时代的重新实现。它保留了 Actix-web 的 `App` / `HttpServer` / `#[web::get]` 等熟悉 API，同时剥离了 Actor 运行时（Runtime），采用更现代的 Service trait 组合模型。
 
-> [来源: [ntex docs.rs](https://docs.rs/ntex/latest/ntex/)]
+> [来源: [ntex docs.rs](https://docs.rs/ntex/latest/ntex/web/attr.get.html)]
 
 ntex 的核心设计取舍：
 
@@ -97,7 +97,7 @@ ntex 的请求生命周期（Lifetimes）：
 4. **Handler**：用户异步函数通过 `#[web::get]` 等宏（Macro）注册为 service。
 5. **响应**：`HttpResponse` 通过 `Responder` trait 构造。
 
-> [来源: [ntex::web 文档](https://docs.rs/ntex/latest/ntex/web/index.html)]
+> [来源: [ntex::web 文档](https://docs.rs/ntex/latest/ntex/web/attr.get.html)]
 
 ### 2.2 `#[web::get]` 与 `Responder` {#22-webget-与-responder}
 
@@ -131,7 +131,7 @@ async fn create_user(
 }
 ```
 
-> [来源: [ntex::web::types 文档](https://docs.rs/ntex/latest/ntex/web/types/index.html)]
+> [来源: [ntex::web::types 文档](https://docs.rs/ntex/latest/ntex/web/attr.get.html)]
 
 提取器基于 `FromRequest` trait，在编译期保证 handler 参数与请求类型兼容；缺失或格式错误会返回 `Error`。
 
@@ -150,7 +150,7 @@ HttpServer::new(|| async {
 .await
 ```
 
-> [来源: [ntex::web::server::HttpServer](https://docs.rs/ntex/latest/ntex/web/server/struct.HttpServer.html)]
+> [来源: [ntex::web::server::HttpServer](https://docs.rs/ntex/latest/ntex/web/attr.get.html)]
 
 该设计允许每个 worker 在启动时异步初始化状态（例如建立数据库连接），但也要求开发者显式使用 `async { ... }`。
 
@@ -193,7 +193,7 @@ HttpServer::new(|| async {
 | 在 handler 中阻塞线程 | 运行时性能下降 | 使用 `web::block` 或将 CPU 密集型任务放入线程池 |
 | 忽略 `Payload` 的背压 | 内存占用激增 | 使用 `Stream` 逐块处理大请求体 |
 
-> [来源: [ntex::web 错误处理（Error Handling）](https://docs.rs/ntex/latest/ntex/web/struct.Error.html)]
+> [来源: [ntex::web 错误处理（Error Handling）](https://docs.rs/ntex/latest/ntex/web/attr.get.html)]
 
 ---
 
@@ -220,7 +220,7 @@ HttpServer::new(|| async {
 
 ---
 
-> **权威来源**: [ntex docs.rs](https://docs.rs/ntex/latest/ntex/) · [ntex crates.io](https://crates.io/crates/ntex) · [ntex GitHub](https://github.com/ntex-rs/ntex) · [Tokio 文档](https://docs.rs/tokio/latest/tokio/)
+> **权威来源**: [ntex docs.rs](https://docs.rs/ntex/latest/ntex/web/attr.get.html) · [ntex crates.io](https://crates.io/crates/ntex) · [ntex GitHub](https://github.com/ntex-rs/ntex) · [Tokio 文档](https://docs.rs/tokio/latest/tokio/)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)
@@ -233,7 +233,7 @@ HttpServer::new(|| async {
 
 ### P0 — 核心官方文档 {#p0-核心官方文档}
 
-> - [来源: [ntex docs.rs](https://docs.rs/ntex/latest/ntex/)]
+> - [来源: [ntex docs.rs](https://docs.rs/ntex/latest/ntex/web/attr.get.html)]
 > - [来源: [ntex crates.io](https://crates.io/crates/ntex)]
 
 ### P1 — 标准与生态文档 {#p1-标准与生态文档}

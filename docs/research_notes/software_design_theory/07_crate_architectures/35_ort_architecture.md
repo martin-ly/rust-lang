@@ -69,7 +69,7 @@ let outputs = session.run(ort::inputs![input])?;
 let (_shape, data) = outputs[0].try_extract_tensor::<f32>()?;
 ```
 
-> [来源: [ort docs.rs – Session](https://docs.rs/ort/latest/ort/session/struct.Session.html)]
+> [来源: [ort docs.rs – Session](https://docs.rs/ort/latest/ort/value/struct.Value.html)]
 
 ---
 
@@ -104,7 +104,7 @@ let session = Session::builder()?
     .commit_from_file("yolov8m.onnx")?;
 ```
 
-> [来源: [ort docs.rs – GraphOptimizationLevel](https://docs.rs/ort/latest/ort/session/builder/enum.GraphOptimizationLevel.html)]
+> [来源: [ort docs.rs – GraphOptimizationLevel](https://docs.rs/ort/latest/ort/value/struct.Value.html)]
 
 ### 2.2 张量输入输出 {#22-张量输入输出}
 
@@ -116,7 +116,7 @@ let outputs = session.run(ort::inputs!["image" => input])?;
 let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 ```
 
-> [来源: [ort docs.rs – Tensor](https://docs.rs/ort/latest/ort/value/struct.Tensor.html)]
+> [来源: [ort docs.rs – Tensor](https://docs.rs/ort/latest/ort/value/struct.Value.html)]
 
 ### 2.3 执行提供者（Execution Provider） {#23-执行提供者execution-provider}
 
@@ -167,7 +167,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 | 输入命名 | `ort::inputs!["name" => tensor]` | 用字符串名称映射到模型输入，减少顺序错误 |
 | 线程安全 | `Session::run(&mut self)` | 通过 `&mut` 在编译期防止数据竞争 |
 
-> [来源: [ort API docs](https://docs.rs/ort/latest/ort/)]
+> [来源: [ort API docs](https://docs.rs/ort/latest/ort/value/struct.Value.html)]
 
 ---
 
@@ -199,7 +199,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 
 > **[来源: [ort crates.io](https://crates.io/crates/ort)]**
 >
-> **[来源: [ort docs.rs](https://docs.rs/ort/latest/ort/)]**
+> **[来源: [ort docs.rs](https://docs.rs/ort/latest/ort/value/struct.Value.html)]**
 >
 > **[来源: [ort 官方文档](https://ort.pyke.io/)]**
 >
@@ -207,7 +207,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 >
 > **[来源: [ONNX Runtime 官方文档](https://onnxruntime.ai/docs/)]**
 >
-> **权威来源**: [ort docs.rs](https://docs.rs/ort/latest/ort/), [ort crates.io](https://crates.io/crates/ort), [ONNX Runtime 官方文档](https://onnxruntime.ai/docs/)
+> **权威来源**: [ort docs.rs](https://docs.rs/ort/latest/ort/value/struct.Value.html), [ort crates.io](https://crates.io/crates/ort), [ONNX Runtime 官方文档](https://onnxruntime.ai/docs/)
 >
 > **权威来源对齐变更日志**: 2026-06-29 创建 ort 生态专题，对齐 ort 2.0.0-rc.12 与 ONNX Runtime 官方文档
 
@@ -217,7 +217,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 
 > **P0（官方/必读）**:
 >
-> - [来源: [ort Documentation](https://docs.rs/ort/latest/ort/)]
+> - [来源: [ort Documentation](https://docs.rs/ort/latest/ort/value/struct.Value.html)]
 > - [来源: [ort crates.io](https://crates.io/crates/ort)]
 > - [来源: [ONNX Runtime 官方文档](https://onnxruntime.ai/docs/)]
 > - [来源: [ort 官方教程](https://ort.pyke.io/)]

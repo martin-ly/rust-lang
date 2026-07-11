@@ -40,7 +40,7 @@
 
 `lapin` 是 Rust 生态中主流的 **AMQP 0-9-1** 异步（Async）客户端，主要面向 **RabbitMQ** 消息代理。它基于纯 Rust 实现 AMQP 协议，提供运行时（Runtime）无关的异步 API（默认集成 Tokio），适用于任务队列、事件驱动微服务、发布-订阅、RPC 等场景。
 
-> [来源: [lapin docs.rs](https://docs.rs/lapin/latest/lapin/)]
+> [来源: [lapin docs.rs](https://docs.rs/lapin/latest/lapin/consumer/struct.Consumer.html)]
 
 与 Kafka 等日志型消息系统相比，RabbitMQ / lapin 的核心取舍是：
 
@@ -143,7 +143,7 @@ match confirm.await? {
 }
 ```
 
-> [来源: [lapin publisher_confirm](https://docs.rs/lapin/latest/lapin/publisher_confirm/)]
+> [来源: [lapin publisher_confirm](https://docs.rs/lapin/latest/lapin/consumer/struct.Consumer.html)]
 
 ### 2.2 Consumer 与 ACK/NACK {#22-consumer-与-acknack}
 
@@ -245,7 +245,7 @@ let conn = Connection::connect(&addr, props).await?;
 
 恢复后，通道、队列、交换机、绑定与消费者会被自动重建，但发布中的消息仍可能丢失，业务层应设计重试/幂等。
 
-> [来源: [lapin Connection Recovery](https://docs.rs/lapin/latest/lapin/struct.Connection.html)]
+> [来源: [lapin Connection Recovery](https://docs.rs/lapin/latest/lapin/consumer/struct.Consumer.html)]
 
 ---
 
@@ -282,7 +282,7 @@ let conn = Connection::connect(&addr, props).await?;
 | 异步 trait | `Consumer` 实现 `Stream` | 与 futures/tokio 生态组合，`Send` 保证跨任务安全 |
 | 路由类型 | `ExchangeKind` 枚举（Enum） | 交换机类型在编译期选择，避免字符串拼写错误 |
 
-> [来源: [lapin API docs](https://docs.rs/lapin/latest/lapin/)]
+> [来源: [lapin API docs](https://docs.rs/lapin/latest/lapin/consumer/struct.Consumer.html)]
 
 ---
 
@@ -315,7 +315,7 @@ let conn = Connection::connect(&addr, props).await?;
 
 > **[来源: [lapin crates.io](https://crates.io/crates/lapin)]**
 >
-> **[来源: [lapin docs.rs](https://docs.rs/lapin/latest/lapin/)]**
+> **[来源: [lapin docs.rs](https://docs.rs/lapin/latest/lapin/consumer/struct.Consumer.html)]**
 >
 > **[来源: [lapin GitHub](https://github.com/amqp-rs/lapin)]**
 >
@@ -323,7 +323,7 @@ let conn = Connection::connect(&addr, props).await?;
 >
 > **[来源: [AMQP 0-9-1 Specification](https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)]**
 >
-> **权威来源**: [lapin docs.rs](https://docs.rs/lapin/latest/lapin/), [lapin crates.io](https://crates.io/crates/lapin), [RabbitMQ 官方文档](https://www.rabbitmq.com/docs)
+> **权威来源**: [lapin docs.rs](https://docs.rs/lapin/latest/lapin/consumer/struct.Consumer.html), [lapin crates.io](https://crates.io/crates/lapin), [RabbitMQ 官方文档](https://www.rabbitmq.com/docs)
 >
 > **权威来源对齐变更日志**: 2026-06-29 创建 lapin 生态专题，对齐 lapin 官方文档与 RabbitMQ 官方文档
 
@@ -333,7 +333,7 @@ let conn = Connection::connect(&addr, props).await?;
 
 > **P0（官方/必读）**:
 >
-> - [来源: [lapin Documentation](https://docs.rs/lapin/latest/lapin/)]
+> - [来源: [lapin Documentation](https://docs.rs/lapin/latest/lapin/consumer/struct.Consumer.html)]
 > - [来源: [lapin crates.io](https://crates.io/crates/lapin)]
 > - [来源: [RabbitMQ 官方文档](https://www.rabbitmq.com/docs)]
 > - [来源: [AMQP 0-9-1 Specification](https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)]

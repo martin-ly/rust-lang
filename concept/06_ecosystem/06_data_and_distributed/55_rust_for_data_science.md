@@ -250,7 +250,7 @@ fn linear_regression(x: &DMatrix<f64>, y: &DVector<f64>) -> Result<DVector<f64>,
 }
 ```
 
-> **来源**: [ndarray for NumPy Users](https://docs.rs/ndarray/latest/ndarray/doc/ndarray_for_numpy_users/index.html)
+> **来源**: [ndarray for NumPy Users](https://docs.rs/ndarray/latest/ndarray/)
 
 ---
 

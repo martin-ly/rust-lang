@@ -428,7 +428,7 @@ Hyper 通过 `h2` crate 暴露的 API 管理每个流的窗口大小。
 
 `Body::poll_frame()` 的实现会在下游未准备好时返回 `Pending`，`h2` 据此控制 WINDOW_UPDATE 帧的发送节奏。
 
-> [来源: [HTTP/2 Flow Control RFC 7540 §5.2](https://tools.ietf.org/html/rfc7540#section-5.2), [h2::FlowControl 文档](https://docs.rs/h2/latest/h2/struct.FlowControl.html)]
+> [来源: [HTTP/2 Flow Control RFC 7540 §5.2](https://tools.ietf.org/html/rfc7540#section-5.2), [h2::FlowControl 文档](https://docs.rs/h2/latest/h2/)]
 
 ---
 

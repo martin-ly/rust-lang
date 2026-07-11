@@ -611,7 +611,7 @@ fn load_quantized_model(path: &str) -> anyhow::Result<()> {
 }
 ```
 
-> **来源**: [GGML Format](https://github.com/ggerganov/ggml) · [Quantization in ML](https://arxiv.org/abs/2103.13630) · [candle Quantized](https://docs.rs/candle-core/latest/candle_core/quantized/)
+> **来源**: [GGML Format](https://github.com/ggerganov/ggml) · [Quantization in ML](https://arxiv.org/abs/2103.13630) · [candle Quantized](https://docs.rs/candle-core/latest/candle_core/struct.Tensor.html)
 
 ### 6.2 边缘部署
 

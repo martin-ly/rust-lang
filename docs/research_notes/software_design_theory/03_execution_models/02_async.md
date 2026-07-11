@@ -268,7 +268,7 @@ Future 执行流程（简化）：
 ### Stream、异步迭代与背压 {#stream异步迭代与背压}
 
 > **来源: [Rust Reference – Async/Await](https://doc.rust-lang.org/reference/expressions/await-expr.html)**
-> **来源: [futures-rs docs](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)**
+> **来源: [futures-rs docs](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety)**
 
 **Def 1.6（Stream）**：
 
@@ -288,7 +288,7 @@ use futures::stream::Stream;
 
 ### 取消安全（Cancellation Safety） {#取消安全cancellation-safety}
 
-> **来源: [Tokio Docs – Cancellation Safety](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety)**
+> **来源: [Tokio Docs – Cancellation Safety](https://docs.rs/tokio/latest/tokio/)**
 > **来源: [Rust Async Book](https://rust-lang.github.io/async-book/)**
 
 **Def 1.7（取消安全）**：Future 在 `select!` 未被选中分支被 drop 后，仍保持内部状态一致性；再次 poll 不会丢失事件或违反不变式。

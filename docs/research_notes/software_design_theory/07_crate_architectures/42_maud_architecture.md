@@ -39,7 +39,7 @@
 
 `Maud` 是 Rust 生态中独特的**编译期 HTML 模板宏**。与其他模板引擎不同，它不解析外部模板文件，而是提供一个 `html!` 过程宏（Procedural Macro），让开发者直接在 Rust 代码中编写类型安全的 HTML。
 
-> [来源: [maud docs.rs](https://docs.rs/maud/latest/maud/)]
+> [来源: [maud docs.rs](https://docs.rs/maud/latest/maud/trait.Render.html)]
 
 Maud 的核心设计取舍：
 
@@ -97,7 +97,7 @@ fn page(title: &str, items: &[&str]) -> Markup {
 }
 ```
 
-> [来源: [maud::html macro](https://docs.rs/maud/latest/maud/macro.html.html)]
+> [来源: [maud::html macro](https://docs.rs/maud/latest/maud/trait.Render.html)]
 
 DSL 规则：
 
@@ -224,7 +224,7 @@ async fn hello() -> impl axum::response::IntoResponse {
 
 ---
 
-> **权威来源**: [maud docs.rs](https://docs.rs/maud/latest/maud/) · [maud crates.io](https://crates.io/crates/maud) · [maud book](https://maud.lambda.xyz/) · [maud GitHub](https://github.com/lambda-fairy/maud)
+> **权威来源**: [maud docs.rs](https://docs.rs/maud/latest/maud/trait.Render.html) · [maud crates.io](https://crates.io/crates/maud) · [maud book](https://maud.lambda.xyz/) · [maud GitHub](https://github.com/lambda-fairy/maud)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)
@@ -237,7 +237,7 @@ async fn hello() -> impl axum::response::IntoResponse {
 
 ### P0 — 核心官方文档 {#p0-核心官方文档}
 
-> - [来源: [maud docs.rs](https://docs.rs/maud/latest/maud/)]
+> - [来源: [maud docs.rs](https://docs.rs/maud/latest/maud/trait.Render.html)]
 > - [来源: [maud book](https://maud.lambda.xyz/)]
 > - [来源: [maud crates.io](https://crates.io/crates/maud)]
 

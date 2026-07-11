@@ -18,9 +18,9 @@
 
 > **来源**: [The Rust Programming Language — Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [rayon](https://docs.rs/rayon/latest/rayon/) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Atomics and Locks](https://marabos.nl/atomics/) ·
-> [crossbeam crate](https://docs.rs/crossbeam/latest/crossbeam/) ·
+> [crossbeam crate](https://docs.rs/crossbeam/latest/crossbeam/epoch/index.html) ·
 > [rayon crate](https://docs.rs/rayon/latest/rayon/) ·
-> [tokio::sync](https://docs.rs/tokio/latest/tokio/sync/index.html) ·
+> [tokio::sync](https://docs.rs/crossbeam/latest/crossbeam/channel/index.html) ·
 > [Wikipedia — Non-blocking Algorithm](https://en.wikipedia.org/wiki/Non-blocking_algorithm)
 > **对应 Crate**: [`c05_threads`](../../crates/c05_threads)
 > **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency)
@@ -291,7 +291,7 @@ let (tx, mut rx) = mpsc::channel(100);
 ```
 
 > **通道洞察**: **crossbeam 通道**是 Rust **同步并发**的标准选择——它比 std::sync::mpsc 更快且支持 select。
-> [来源: [crossbeam::channel](https://docs.rs/crossbeam/latest/crossbeam/channel/index.html)]
+> [来源: [crossbeam::channel](https://docs.rs/crossbeam/latest/crossbeam/epoch/index.html)]
 
 ---
 
@@ -680,9 +680,9 @@ fn fixed() {
 |:---|:---:|:---|
 | [Rust Atomics and Locks](https://marabos.nl/atomics/) | ✅ 一级 | 并发权威 |
 | [TRPL — Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | ✅ 一级 | 基础教程 |
-| [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/) | ✅ 一级 | 无锁并发 |
+| [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/epoch/index.html) | ✅ 一级 | 无锁并发 |
 | [rayon](https://docs.rs/rayon/latest/rayon/) | ✅ 一级 | 数据并行 |
-| [tokio::sync](https://docs.rs/tokio/latest/tokio/sync/index.html) | ✅ 一级 | 异步（Async）同步 |
+| [tokio::sync](https://docs.rs/crossbeam/latest/crossbeam/channel/index.html) | ✅ 一级 | 异步（Async）同步 |
 
 ---
 

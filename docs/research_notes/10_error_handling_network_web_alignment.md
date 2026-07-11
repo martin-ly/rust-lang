@@ -60,7 +60,7 @@
 
 | 库/框架 | 权威来源 | 项目文档 | 备注 |
 |---------|----------|----------|------|
-| `tokio::net` | [Tokio Docs - tokio::net](https://docs.rs/tokio/latest/tokio/net/index.html) | [crates/c10_networks/](../../crates/c10_networks/README.md) | TCP/UDP 异步（Async） IO |
+| `tokio::net` | [Tokio Docs - tokio::net](https://docs.rs/tokio/latest/tokio/) | [crates/c10_networks/](../../crates/c10_networks/README.md) | TCP/UDP 异步（Async） IO |
 | `hyper` | [hyper.rs](https://hyper.rs/) | [crates/c10_networks/](../../crates/c10_networks/README.md) / [software_design_theory/07_crate_architectures/08_hyper_architecture.md](software_design_theory/07_crate_architectures/08_hyper_architecture.md) | HTTP/1、HTTP/2 客户端/服务端 |
 | `tonic` | [docs.rs - tonic](https://docs.rs/tonic/) | [crates/c10_networks/](../../crates/c10_networks/README.md) / [software_design_theory/07_crate_architectures/09_tonic_architecture.md](software_design_theory/07_crate_architectures/09_tonic_architecture.md) | gRPC over HTTP/2 |
 | `mio` | [docs.rs - mio](https://docs.rs/mio/) | [software_design_theory/07_crate_architectures/21_mio_architecture.md](software_design_theory/07_crate_architectures/21_mio_architecture.md) | 跨平台 epoll/kqueue/IOCP |

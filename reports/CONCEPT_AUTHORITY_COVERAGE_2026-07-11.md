@@ -12,7 +12,7 @@
 |:---|---:|---:|
 | P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 454 | 98.7% |
 | P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 321 | 69.8% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 220 | 47.8% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 218 | 47.4% |
 | **任一权威（P0∪P1∪P2）** | **460** | **100.0%** |
 | 无任何国际权威引用（缺口） | 0 | 0.0% |
 

@@ -94,7 +94,7 @@ graph TD
     QUERY -->|execute<T>| RESULT[SearchResults<T><br/>类型化命中]
 ```
 
-> [来源: [meilisearch-sdk Client Docs](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/client/struct.Client.html)]
+> [来源: [meilisearch-sdk Client Docs](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/indexes/struct.Index.html)]
 
 | 类型 | 职责 | 关键方法 |
 |:--|:--|:--|
@@ -122,7 +122,7 @@ let raw: SearchResults<serde_json::Value> = index
     .await?;
 ```
 
-> [来源: [meilisearch-sdk Search Docs](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/search/struct.SearchQuery.html)]
+> [来源: [meilisearch-sdk Search Docs](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/indexes/struct.Index.html)]
 
 ### 2.3 任务模型：异步索引的状态机 {#23-任务模型异步索引的状态机}
 
@@ -138,7 +138,7 @@ match status {
 }
 ```
 
-> [来源: [meilisearch-sdk Tasks Docs](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/tasks/)]
+> [来源: [meilisearch-sdk Tasks Docs](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/indexes/struct.Index.html)]
 
 ### 2.4 搜索 Builder 与过滤语法 {#24-搜索-builder-与过滤语法}
 

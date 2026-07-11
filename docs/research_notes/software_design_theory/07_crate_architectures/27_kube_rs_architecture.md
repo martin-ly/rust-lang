@@ -45,7 +45,7 @@
 
 `kube-rs` 是 Rust 生态中对接 **Kubernetes** 的工业级客户端，提供类型安全的 API 访问、资源监听与控制器运行时（Runtime）。它适用于构建 Kubernetes Operator、集群自动化工具、GitOps 控制器、CI/CD 触发器与可观测性 Agent 等场景。
 
-> [来源: [kube-rs docs.rs](https://docs.rs/kube/latest/kube/)]
+> [来源: [kube-rs docs.rs](https://docs.rs/kube/latest/kube/runtime/watcher/index.html)]
 
 与官方 Go client 相比，`kube-rs` 的核心取舍是：
 
@@ -91,7 +91,7 @@ let client = Client::try_default().await?;
 let pods: Api<Pod> = Api::namespaced(client, "default");
 ```
 
-> [来源: [kube docs.rs – Api](https://docs.rs/kube/latest/kube/struct.Api.html)]
+> [来源: [kube docs.rs – Api](https://docs.rs/kube/latest/kube/runtime/watcher/index.html)]
 
 ### 2.2 Controller / Controller::new {#22-controller-controllernew}
 
@@ -198,7 +198,7 @@ struct MyAppSpec {
 | CRD 安全 | `#[derive(CustomResource)]` | 宏生成 `Resource` 实现，保证 Group/Version/Kind 一致 |
 | 异步 trait | `Controller::run` 返回 Stream/Future | `Send + 'static` 保证跨任务安全 |
 
-> [来源: [kube docs.rs – Resource](https://docs.rs/kube/latest/kube/trait.Resource.html)]
+> [来源: [kube docs.rs – Resource](https://docs.rs/kube/latest/kube/runtime/watcher/index.html)]
 
 ---
 
@@ -231,7 +231,7 @@ struct MyAppSpec {
 
 > **[来源: [kube-rs crates.io](https://crates.io/crates/kube)]**
 >
-> **[来源: [kube-rs docs.rs](https://docs.rs/kube/latest/kube/)]**
+> **[来源: [kube-rs docs.rs](https://docs.rs/kube/latest/kube/runtime/watcher/index.html)]**
 >
 > **[来源: [kube-rs GitHub](https://github.com/kube-rs/kube)]**
 >
@@ -241,7 +241,7 @@ struct MyAppSpec {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **权威来源**: [kube-rs docs.rs](https://docs.rs/kube/latest/kube/), [kube-rs crates.io](https://crates.io/crates/kube), [Kubernetes 官方文档](https://kubernetes.io/docs/home/)
+> **权威来源**: [kube-rs docs.rs](https://docs.rs/kube/latest/kube/runtime/watcher/index.html), [kube-rs crates.io](https://crates.io/crates/kube), [Kubernetes 官方文档](https://kubernetes.io/docs/home/)
 >
 > **权威来源对齐变更日志**: 2026-06-29 创建 kube-rs 生态专题，对齐 kube-rs 官方文档与 Kubernetes 官方文档
 
@@ -251,7 +251,7 @@ struct MyAppSpec {
 
 > **P0（官方/必读）**:
 >
-> - [来源: [kube-rs Documentation](https://docs.rs/kube/latest/kube/)]
+> - [来源: [kube-rs Documentation](https://docs.rs/kube/latest/kube/runtime/watcher/index.html)]
 > - [来源: [kube-rs crates.io](https://crates.io/crates/kube)]
 > - [来源: [Kubernetes 官方文档](https://kubernetes.io/docs/home/)]
 > - [来源: [k8s-openapi Documentation](https://docs.rs/k8s-openapi/latest/k8s_openapi/)]

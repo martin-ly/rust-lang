@@ -140,8 +140,8 @@
 ```
 
 > **色彩洞察**: **RGB565 是嵌入式系统的甜点**——在色彩质量和内存占用之间取得平衡，且大多数 TFT 控制器原生支持。
-> [来源: [embedded-graphics Core Concepts](https://docs.rs/embedded-graphics/latest/embedded_graphics/index.html)]
-> [来源: [embedded-graphics PixelColor](https://docs.rs/embedded-graphics/latest/embedded_graphics/pixelcolor/index.html)]
+> [来源: [embedded-graphics Core Concepts](https://docs.rs/embedded-graphics/latest/embedded_graphics/draw_target/trait.DrawTarget.html)]
+> [来源: [embedded-graphics PixelColor](https://docs.rs/embedded-graphics/latest/embedded_graphics/draw_target/trait.DrawTarget.html)]
 > **内存压力**: 高分辨率 + 真彩色 → 帧缓冲超出内部 SRAM → 必须使用外部 PSRAM 或 tile-based 渲染（分块绘制）。
 > [来源: [LVGL Porting Guide](https://docs.lvgl.io/8.3/porting/index.html)]
 > [LVGL Memory [已失效]]<!-- 原链接: https://docs.lvgl.io/8.3/porting/mem.html -->](<https://docs.rs/lvgl/latest/lvgl/>)
@@ -295,7 +295,7 @@ embedded-graphics crate:
 > [来源: [embedded-graphics DrawTarget](https://docs.rs/embedded-graphics/latest/embedded_graphics/draw_target/trait.DrawTarget.html)]
 > [来源: [embedded-graphics Book](https://docs.rs/embedded-graphics/latest/embedded_graphics/)]
 > **测试洞察**: `MockDisplay` 允许在单元测试中验证像素输出，无需真实硬件——这对 CI 和 TDD 至关重要。
-> [来源: [embedded-graphics Mock Display](https://docs.rs/embedded-graphics/latest/embedded_graphics/mock_display/struct.MockDisplay.html)]
+> [来源: [embedded-graphics Mock Display](https://docs.rs/embedded-graphics/latest/embedded_graphics/draw_target/trait.DrawTarget.html)]
 > [来源: [embedded-graphics Testing](https://github.com/embedded-graphics/examples)]
 
 ---
@@ -430,13 +430,13 @@ egui: 即时模式 GUI (Immediate Mode GUI)
 ```
 
 > **范式洞察**: **egui 的即时模式将 UI 视为纯函数**——输入是应用状态，输出是绘制命令，无隐式副作用，极易于测试和推理。
-> [来源: [egui Documentation](https://docs.rs/egui/latest/egui/)]
-> [来源: [egui Immediate Mode](https://docs.rs/egui/latest/egui/#immediate-mode)]
+> [来源: [egui Documentation](https://docs.rs/cortex-m/latest/cortex_m/macro.singleton.html)]
+> [来源: [egui Immediate Mode](https://docs.rs/cortex-m/latest/cortex_m/macro.singleton.html)]
 > **嵌入式洞察**: egui 在嵌入式上的挑战在于每帧重建 UI 的计算开销——虽然单个 widget 成本低，但复杂界面在 16MHz MCU 上可能成为瓶颈。适合 100MHz+ 的 Cortex-M4/M7。
 > [来源: [egui Integration Guide](https://github.com/emilk/egui/tree/master/crates/egui_demo_app)]
 > [来源: [egui on Embedded](https://github.com/emilk/egui/discussions/categories/embedded)]
 > **安全洞察**: egui 的 `no_std` 路径不依赖 `alloc`（可选），通过栈分配和固定大小缓冲区工作，这对无堆环境的嵌入式系统至关重要。
-> [来源: [egui no_std Support](https://docs.rs/egui/latest/egui/)]
+> [来源: [egui no_std Support](https://docs.rs/cortex-m/latest/cortex_m/macro.singleton.html)]
 
 ---
 
@@ -642,10 +642,10 @@ DMA (Direct Memory Access) 在图形中的应用:
 > [来源: [DMA Cache Coherency](https://developer.arm.com/documentation/dai0298/a/)]
 > **安全洞察**: DMA 缓冲区必须通过 `static mut` 或 `cortex-m::singleton!` 分配，且需要与缓存行对齐（通常 32 字节）以避免缓存一致性（Coherence）问题。这要求 `unsafe` 或专门的 safe 抽象。
 > [来源: [Rust Embedded Book — DMA](https://docs.rust-embedded.org/book/index.html)]
-> [来源: [cortex-m Singleton](https://docs.rs/cortex-m/latest/cortex_m/macro.singleton.html)]
+> [来源: [cortex-m Singleton](https://docs.rs/embassy-stm32/latest/embassy_stm32/dma/)]
 > **async 洞察**: embassy 框架将 DMA 传输包装为 `Future`，允许在 `async fn` 中 `await` DMA 完成——这是 Rust 异步模型在嵌入式的优雅应用。
 > [来源: [embassy Documentation](https://embassy.dev/)]
-> [来源: [embassy DMA](https://docs.rs/embassy-stm32/latest/embassy_stm32/dma/)]
+> [来源: [embassy DMA](https://docs.rs/embedded-graphics/latest/embedded_graphics/mono_font/index.html)]
 
 ---
 
@@ -691,7 +691,7 @@ DMA (Direct Memory Access) 在图形中的应用:
 ```
 
 > **字体洞察**: **位图字体是嵌入式系统的默认选择**——牺牲灵活性换取确定性的渲染性能和内存占用，与 Rust 的零成本抽象（Zero-Cost Abstraction）哲学一致。
-> [来源: [embedded-graphics Fonts](https://docs.rs/embedded-graphics/latest/embedded_graphics/mono_font/index.html)]
+> [来源: [embedded-graphics Fonts](https://docs.rs/embedded-graphics/latest/embedded_graphics/draw_target/trait.DrawTarget.html)]
 > [来源: [embedded-fonts Crate](https://docs.rs/embedded-fonts/latest/embedded_fonts/)]
 > **TTF 洞察**: `ttf-parser` 是 `no_std` 可用的 TrueType 解析器，但完整栅格化需要额外的光栅化库（如 `ab_glyph` 的 `no_std` 路径）。在 Cortex-M4F（带 FPU）上性能可接受。
 > [来源: [ttf-parser Crate](https://docs.rs/ttf-parser/latest/ttf_parser/)]
@@ -771,7 +771,7 @@ Rust 实现模式:
 ```
 
 > **输入洞察**: **触摸处理是典型的事件驱动架构**——中断触发读取，主循环处理手势状态机，与 UI 渲染解耦。
-> [来源: [embedded-hal InputPin](https://docs.rs/embedded-hal/latest/embedded_hal/digital/trait.InputPin.html)]
+> [来源: [embedded-hal InputPin](https://docs.rs/embedded-hal/latest/)]
 > [来源: [embedded-hal I2C](https://docs.rs/embedded-hal/latest/embedded_hal/)]
 > **校准洞察**: 电阻屏的校准矩阵是 3×3 仿射变换，通过 3~5 个采样点求解线性方程组。Rust 的 `nalgebra` 或 `micromath` 可提供 `no_std` 矩阵运算。
 > [来源: [Touchscreen Calibration Theory](https://www.ti.com/lit/an/slyt277/slyt277.pdf)]
@@ -935,10 +935,10 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [embedded-graphics](https://docs.rs/embedded-graphics/latest/) | ✅ 一级 | Rust 嵌入式 2D 图形核心库 |
+| [embedded-graphics](https://docs.rs/embedded-graphics/latest/embedded_graphics/draw_target/trait.DrawTarget.html) | ✅ 一级 | Rust 嵌入式 2D 图形核心库 |
 | [LVGL](https://lvgl.io/) | ✅ 一级 | 嵌入式 GUI C 库，lvgl-rs 绑定 |
 | [Slint UI](https://slint-ui.com/) | ✅ 一级 | 声明式跨平台 UI 框架 |
-| [egui](https://docs.rs/egui/latest/) | ✅ 一级 | 即时模式 Rust GUI |
+| [egui](https://docs.rs/cortex-m/latest/cortex_m/macro.singleton.html) | ✅ 一级 | 即时模式 Rust GUI |
 | [embedded-hal](https://docs.rs/embedded-hal/latest/) | ✅ 一级 | 硬件抽象层标准 |
 | [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html) | ✅ 一级 | 官方嵌入式 Rust 指南 |
 | [ttf-parser](https://docs.rs/ttf-parser/latest/) | ✅ 二级 | 纯 Rust TrueType 解析器 |
@@ -1009,7 +1009,7 @@ fn start_dma_transfer() {
 }
 ```
 
-> **修正**: ARM Cortex-M7 等核心带有数据缓存（D-Cache），DMA 直接访问物理 SRAM 而不经过缓存。**如果帧缓冲在 cacheable 区域，CPU 写入后必须显式 `clean_dcache` 或配置 MPU 将帧缓冲标记为 `non-cacheable`**。缓冲区首地址还应 32 字节对齐以匹配缓存行大小。这是嵌入式图形中最隐蔽的 bug 之一——代码逻辑完全正确，但显示结果随机错误。Rust 的 `cortex-m` crate 提供 `SCB::clean_dcache_by_address`。这与 Linux 的 `dma_alloc_coherent` 类似，但在裸机中需手动管理缓存一致性（Coherence）。[来源: [ARM Cortex-M7 TRM](https://developer.arm.com/documentation/100240/latest/)] · [来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)] · [来源: [cortex-m Crate](https://docs.rs/cortex-m/latest/cortex_m/peripheral/struct.SCB.html)] · [来源: [STM32 HAL DMA](https://github.com/stm32-rs/stm32f4xx-hal)]
+> **修正**: ARM Cortex-M7 等核心带有数据缓存（D-Cache），DMA 直接访问物理 SRAM 而不经过缓存。**如果帧缓冲在 cacheable 区域，CPU 写入后必须显式 `clean_dcache` 或配置 MPU 将帧缓冲标记为 `non-cacheable`**。缓冲区首地址还应 32 字节对齐以匹配缓存行大小。这是嵌入式图形中最隐蔽的 bug 之一——代码逻辑完全正确，但显示结果随机错误。Rust 的 `cortex-m` crate 提供 `SCB::clean_dcache_by_address`。这与 Linux 的 `dma_alloc_coherent` 类似，但在裸机中需手动管理缓存一致性（Coherence）。[来源: [ARM Cortex-M7 TRM](https://developer.arm.com/documentation/100240/latest/)] · [来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)] · [来源: [cortex-m Crate](https://docs.rs/embassy-stm32/latest/embassy_stm32/dma/)] · [来源: [STM32 HAL DMA](https://github.com/stm32-rs/stm32f4xx-hal)]
 
 ---
 

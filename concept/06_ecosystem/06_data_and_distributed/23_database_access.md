@@ -278,7 +278,7 @@ Toasty:
 ```
 
 > **SQL 洞察**: **原始 SQL 提供最大灵活性**——SQLx 的编译期检查保证了安全性。
-> [来源: [SQLx Queries](https://docs.rs/sqlx/latest/sqlx/macro.query.html)]
+> [来源: [SQLx Queries](https://docs.rs/sqlx/latest/sqlx/pool/struct.Pool.html)]
 
 ---
 
@@ -429,7 +429,7 @@ Toasty:
 ```
 
 > **事务洞察**: **事务保证数据一致性（Coherence）**——Rust 的类型系统（Type System）确保事务不会意外提交。
-> [来源: [SQLx Transactions](https://docs.rs/sqlx/latest/sqlx/struct.Transaction.html)]
+> [来源: [SQLx Transactions](https://docs.rs/sqlx/latest/sqlx/pool/struct.Pool.html)]
 
 ---
 
@@ -543,7 +543,7 @@ graph TD
 ```
 
 > **陷阱总结**: 数据库访问的陷阱主要与**N+1**、**连接泄漏**、**类型**、**NULL**和**连接池**相关。
-> [来源: [SQLx Best Practices](https://docs.rs/sqlx/latest/sqlx/)]
+> [来源: [SQLx Best Practices](https://docs.rs/sqlx/latest/sqlx/pool/struct.Pool.html)]
 
 ---
 

@@ -259,7 +259,7 @@ async fn stream_ingest_kafka(
 ```
 
 > **来源**: [rdkafka Documentation](https://docs.rs/rdkafka/latest/rdkafka/) ·
-> [Tokio Channels](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)
+> [Tokio Channels](https://docs.rs/tokio/latest/tokio/task/index.html)
 
 ### 3.3 变更数据捕获（CDC）
 
@@ -780,8 +780,8 @@ async fn good_download(store: &dyn ObjectStore, path: &Path) -> anyhow::Result<(
 }
 ```
 
-> **来源**: [object_store Streaming](https://docs.rs/object_store/latest/object_store/trait.ObjectStore.html#method.get) ·
-> [Tokio Async I/O](https://docs.rs/tokio/latest/tokio/io/index.html)
+> **来源**: [object_store Streaming](https://docs.rs/object_store/latest/object_store/) ·
+> [Tokio Async I/O](https://docs.rs/tokio/latest/tokio/task/index.html)
 
 ### 9.3 边界测试：ETL 管道中类型推断失败导致运行时 panic（类型错误）
 

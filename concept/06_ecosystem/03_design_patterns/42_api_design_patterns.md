@@ -34,7 +34,7 @@
 > [OpenAPI Specification](https://spec.openapis.org/oas/latest.html) ·
 > [RFC 7231 — HTTP/1.1 Semantics and Content](https://tools.ietf.org/html/rfc7231) ·
 > [axum](https://docs.rs/axum/latest/axum/) ·
-> [tonic](https://docs.rs/tonic/latest/tonic/) ·
+> [tonic](https://docs.rs/tonic/latest/tonic/service/interceptor/index.html) ·
 > [async-graphql](https://docs.rs/async-graphql/latest/async_graphql/)
 > **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
@@ -163,7 +163,7 @@ query GetUserWithOrders($userId: ID!) {
 ```
 
 > **来源**: [GraphQL Spec](https://spec.graphql.org/) ·
-> [来源: [RFC 7807](https://tools.ietf.org/html/rfc7807)] · [来源: [tonic](https://docs.rs/tonic/latest/tonic/)]
+> [来源: [RFC 7807](https://tools.ietf.org/html/rfc7807)] · [来源: [tonic](https://docs.rs/tonic/latest/tonic/service/interceptor/index.html)]
 > [GraphQL Best Practices](https://graphql.org/learn/best-practices/) ·
 > [Apollo Server Documentation](https://www.apollographql.com/docs/apollo-server/)
 
@@ -682,7 +682,7 @@ impl User {
 
 > **来源**: [GraphQL N+1 Problem](https://graphql.org/learn/best-practices/#graphql-n-1-problem) ·
 > [DataLoader Pattern](https://github.com/graphql/dataloader) ·
-> [async-graphql DataLoader](https://docs.rs/async-graphql/latest/async_graphql/dataloader/index.html)
+> [async-graphql DataLoader](https://docs.rs/async-graphql/latest/async_graphql/attr.Subscription.html)
 
 ### 5.3 订阅与实时数据
 >
@@ -807,7 +807,7 @@ impl UserService for UserServiceImpl {
 }
 ```
 
-> **来源**: [tonic Documentation](https://docs.rs/tonic/latest/tonic/) ·
+> **来源**: [tonic Documentation](https://docs.rs/tonic/latest/tonic/service/interceptor/index.html) ·
 > [Protocol Buffers Guide](https://developers.google.com/protocol-buffers/docs/proto3) ·
 > [gRPC Basics](https://grpc.io/docs/languages/rust/basics/)
 
@@ -868,7 +868,7 @@ impl UserService for UserServiceImpl {
 }
 ```
 
-> **来源**: [tonic — Streaming](https://docs.rs/tonic/latest/tonic/codec/) ·
+> **来源**: [tonic — Streaming](https://docs.rs/tonic/latest/tonic/service/interceptor/index.html) ·
 > [gRPC Streaming](https://grpc.io/docs/what-is-grpc/core-concepts/)
 
 ### 6.3 拦截器与中间件

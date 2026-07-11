@@ -16,7 +16,7 @@
 > **权威来源**:
 >
 > [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) |
-> [Tower Docs](https://docs.rs/tower/latest/tower/) |
+> [Tower Docs](https://docs.rs/tower/latest/tower/trait.Layer.html) |
 > [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) |
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) |
 > [Rust Reference](https://doc.rust-lang.org/reference/)
@@ -714,7 +714,7 @@ L4 跨进程/跨网络（分布式、微服务）
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **来源: [Tower Layer/Service Docs](https://docs.rs/tower/latest/tower/trait.Layer.html)**
-> **来源: [Tower Service Trait](https://docs.rs/tower/latest/tower/trait.Service.html)**
+> **来源: [Tower Service Trait](https://docs.rs/tower/latest/tower/trait.Layer.html)**
 > **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

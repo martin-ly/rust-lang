@@ -38,7 +38,7 @@ Ratatui 的三大设计支柱：
 | **Widget trait 组合** | `Widget::render` + `StatefulWidget` | 声明式 UI：布局（`Layout`）与表现（`Widget`）分离 |
 | **Backend 可插拔** | `Backend` trait（crossterm / termion / termwiz） | 同一应用代码可在不同终端后端上运行 |
 
-> [Ratatui Docs — Overview](https://docs.rs/ratatui/latest/ratatui/)(<https://ratatui.rs/>)
+> [Ratatui Docs — Overview](https://docs.rs/ratatui/latest/ratatui/widgets/index.html)(<https://ratatui.rs/>)
 > [Ratatui GitHub — Architecture](https://github.com/ratatui/ratatui)(<https://github.com/ratatui/ratatui>)
 
 ```rust,ignore
@@ -154,7 +154,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Ratatui 的渲染管线——与传统 GUI 框架的"保留模式"（维护一棵 widget 树）不同，Ratatui 的每帧都是**纯函数**：`fn ui(state) -> Buffer`。这种设计消除了状态同步的复杂性，但要求用户自行管理跨帧状态。
-> [Ratatui Docs — Concepts](https://docs.rs/ratatui/latest/ratatui/)(<https://ratatui.rs/concepts/>)
+> [Ratatui Docs — Concepts](https://docs.rs/ratatui/latest/ratatui/widgets/index.html)(<https://ratatui.rs/concepts/>)
 
 ### 2.2 Buffer 与 Cell 的内存模型 {#22-buffer-与-cell-的内存模型}
 
@@ -193,7 +193,7 @@ pub struct Cell {
 - 索引计算：`index = (y - area.y) * area.width + (x - area.x)`，O(1)
 - `Cell` 总大小约 32 字节，典型 80×24 终端仅需 ~61KB
 
-> [来源: Ratatui Buffer Docs](https://docs.rs/ratatui/latest/ratatui/buffer/struct.Buffer.html)
+> [来源: Ratatui Buffer Docs](https://docs.rs/ratatui/latest/ratatui/widgets/index.html)
 
 ---
 
@@ -237,7 +237,7 @@ impl Widget for Block<'_> {
 - **传入 `&mut Buffer`**：允许多个 widget 顺序渲染到同一个 buffer，合成最终画面
 - **不返回任何值**：渲染是副作用（side effect），纯函数式的设计使测试困难，但符合终端 IO 的本质
 
-> [Ratatui Widget Docs](https://docs.rs/ratatui/latest/ratatui/widgets/index.html)(<https://docs.rs/ratatui/latest/ratatui/widgets/trait.Widget.html>)
+> [Ratatui Widget Docs](https://docs.rs/ratatui/latest/ratatui/widgets/index.html)(<https://docs.rs/ratatui/latest/ratatui/widgets/index.html>)
 
 ### 3.2 `StatefulWidget`：有状态组件的借用模式 {#32-statefulwidget有状态组件的借用模式}
 
@@ -272,7 +272,7 @@ frame.render_stateful_widget(list, area, &mut list_state);
 - `&mut Self::State` 确保状态可变，同时与 widget 的**消费语义**分离
 - 用户必须在应用层管理 `State` 的生命周期（Lifetimes），Ratatui 不隐式保存任何状态
 
-> [来源: Ratatui StatefulWidget Docs](https://docs.rs/ratatui/latest/ratatui/widgets/trait.StatefulWidget.html)
+> [来源: Ratatui StatefulWidget Docs](https://docs.rs/ratatui/latest/ratatui/widgets/index.html)
 
 ### 3.3 `Layout` 约束系统：编译期不可解，运行期可靠 {#33-layout-约束系统编译期不可解运行期可靠}
 
@@ -311,7 +311,7 @@ let layout = Layout::default()
   - 每个约束至少被满足到最小要求
 - 由于布局依赖运行时 `area` 尺寸（终端窗口大小），约束求解无法静态化，但算法本身是 O(n) 的贪心近似
 
-> [Ratatui Layout Docs](https://docs.rs/ratatui/latest/ratatui/layout/index.html)(<https://ratatui.rs/concepts/layout/>)
+> [Ratatui Layout Docs](https://docs.rs/ratatui/latest/ratatui/widgets/index.html)(<https://ratatui.rs/concepts/layout/>)
 
 ---
 
@@ -369,7 +369,7 @@ impl Terminal {
 - 连续变更区域合并为批量输出，减少 `write` 系统调用次数
 
 > **定理 T1**: 对于静态 UI（无动画），Ratatui 的差分渲染在第二帧及之后的输出字节数为 O(0)，即仅输出光标定位和零字符更新。
-> [来源: Ratatui Terminal Docs](https://docs.rs/ratatui/latest/ratatui/terminal/struct.Terminal.html)
+> [来源: Ratatui Terminal Docs](https://docs.rs/ratatui/latest/ratatui/widgets/index.html)
 
 ---
 
@@ -420,7 +420,7 @@ pub trait Backend {
 | `TermwizBackend` | `termwiz` | Windows / Unix | WezTerm 团队维护 |
 | `TestBackend` | — | 测试 | 内存中的 buffer，用于单元测试 |
 
-> [Ratatui Backend Docs](https://docs.rs/ratatui/latest/ratatui/backend/index.html)(<https://docs.rs/ratatui/latest/ratatui/backend/trait.Backend.html>)
+> [Ratatui Backend Docs](https://docs.rs/ratatui/latest/ratatui/widgets/index.html)(<https://docs.rs/ratatui/latest/ratatui/widgets/index.html>)
 
 ### 5.2 测试策略：纯函数的 UI 验证 {#52-测试策略纯函数的-ui-验证}
 
@@ -515,7 +515,7 @@ loop {
 }
 ```
 
-> [Ratatui Async Guide](https://docs.rs/ratatui/latest/ratatui/)(<https://ratatui.rs/concepts/rendering/>)
+> [Ratatui Async Guide](https://docs.rs/ratatui/latest/ratatui/widgets/index.html)(<https://ratatui.rs/concepts/rendering/>)
 
 ---
 

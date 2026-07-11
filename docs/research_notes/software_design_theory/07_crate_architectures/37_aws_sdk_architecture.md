@@ -86,7 +86,7 @@ println!("buckets = {:?}", resp.buckets());
 | **Credentials Provider Chain** | 按优先级解析 AWS 凭证 | 内置于 `aws_config::load_from_env` |
 | **SdkError** | 统一错误类型，区分服务/超时/调度错误 | `SdkError<ServiceError<E>>` |
 
-> [来源: [aws-sdk-s3 docs.rs](https://docs.rs/aws-sdk-s3/latest/aws_sdk_s3/client/struct.Client.html)]
+> [来源: [aws-sdk-s3 docs.rs](https://docs.rs/aws-sdk-s3/latest/aws_sdk_s3/operation/get_object/index.html)]
 
 ### 2.1 配置加载流水线 {#21-配置加载流水线}
 

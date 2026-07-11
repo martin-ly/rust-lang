@@ -491,7 +491,7 @@ Rust 元编程的演进方向:
   ✅ 使用 syn::Error 或 proc_macro::Diagnostic
      // return Err(syn::Error::new_spanned(input, "invalid input").into())
      // 错误指向调用点的具体 token
-> [来源: [syn — Error Handling](https://docs.rs/syn/latest/syn/struct.Error.html)]
+> [来源: [syn — Error Handling](https://docs.rs/syn/latest/syn/)]
 
 陷阱 2:  hygiene 的意外行为
   ❌ 期望宏内部变量与外部隔离，但通过 ident 参数绕过

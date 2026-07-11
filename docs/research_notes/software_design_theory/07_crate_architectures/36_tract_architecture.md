@@ -86,7 +86,7 @@ println!("output shape = {:?}", view.shape());
 | **Tensor** | 运行时张量值 | `Tensor::zero::<f32>(...)` / `tensor1(&[...])` |
 | **TVec** | 小型向量优化容器 | `tvec![tensor]` 作为算子输入 |
 
-> [来源: [tract-onnx prelude docs](https://docs.rs/tract-onnx/latest/tract_onnx/prelude/index.html)]
+> [来源: [tract-onnx prelude docs](https://docs.rs/tract-core/latest/tract_core/index.html)]
 
 ### 2.1 模型加载与优化流水线 {#21-模型加载与优化流水线}
 
@@ -99,7 +99,7 @@ let model = tract_onnx::onnx()
     .into_runnable()?;                   // 3. 生成可执行计划
 ```
 
-> [来源: [tract docs.rs – Onnx](https://docs.rs/tract-onnx/latest/tract_onnx/struct.Onnx.html)]
+> [来源: [tract docs.rs – Onnx](https://docs.rs/tract-core/latest/tract_core/index.html)]
 
 ### 2.2 程序化构造计算图 {#22-程序化构造计算图}
 
@@ -123,7 +123,7 @@ let plan = SimplePlan::new(&model)?;
 let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 ```
 
-> [来源: [tract-core examples](https://docs.rs/tract-core/latest/tract_core/index.html)]
+> [来源: [tract-core examples](https://docs.rs/tract-core/latest/)]
 
 ### 2.3 量化与体积优化 {#23-量化与体积优化}
 

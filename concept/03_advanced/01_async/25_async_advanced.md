@@ -612,7 +612,7 @@ where
 | **背压支持** | 拉取天然背压 | 拉取天然背压 + `tokio::sync::mpsc` 通道缓冲 |
 | **典型使用场景** | 通用异步管道、跨运行时（Runtime）兼容 | Tokio 生态（axum、tonic 流处理） |
 
-> **[tokio-stream docs](https://docs.rs/tokio-stream/latest/tokio_stream/); [futures-rs docs](https://docs.rs/futures/latest/futures/)** `tokio_stream::wrappers` 提供了将 Tokio 原语（`TcpListener`, `UnixSignal`, `WatchReceiver`）包装为 `Stream` 的适配器，这是 `futures::stream` 不提供的运行时（Runtime）专属扩展。
+> **[tokio-stream docs](https://docs.rs/tokio-stream/latest/tokio_stream/); [futures-rs docs](https://docs.rs/loom/latest/loom/future/index.html)** `tokio_stream::wrappers` 提供了将 Tokio 原语（`TcpListener`, `UnixSignal`, `WatchReceiver`）包装为 `Stream` 的适配器，这是 `futures::stream` 不提供的运行时（Runtime）专属扩展。
 
 **`StreamExt` 常用组合子**
 
@@ -648,7 +648,7 @@ async fn pipeline() {
 }
 ```
 
-> **[futures-rs: StreamExt API 文档](https://docs.rs/futures/latest/futures/stream/trait.StreamExt.html)** `buffer_unordered` 是异步编程的核心组合子——它允许在保持背压的同时最大化并发度。与 `tokio::join!` 不同，`buffer_unordered` 按完成顺序产出结果，而非输入顺序。
+> **[futures-rs: StreamExt API 文档](https://docs.rs/loom/latest/loom/future/index.html)** `buffer_unordered` 是异步编程的核心组合子——它允许在保持背压的同时最大化并发度。与 `tokio::join!` 不同，`buffer_unordered` 按完成顺序产出结果，而非输入顺序。
 > **交叉链接**: `Stream` 的异步惰性求值与 1.3 形式化定义 中 Future 的惰性语义一致；`Sink` 的线性状态机与 [../04_formal/03_ownership_formal.md](../../04_formal/01_ownership_logic/03_ownership_formal.md) §5.2 的线性类型资源管理形成对偶。
 
 ---
@@ -970,7 +970,7 @@ fn test_async_ready_flag() {
 }
 ```
 
-> **注意**: `loom::future` 的异步支持主要用于测试**同步原语在异步上下文中的使用**（如 `Mutex`、`Atomic` 在 async 块中的交互），而非测试 async/await 本身的调度语义。async 调度语义由执行器（Tokio 等）保证，不在 loom 的验证范围内。[loom docs: loom::future module](https://docs.rs/loom/latest/loom/future/index.html)
+> **注意**: `loom::future` 的异步支持主要用于测试**同步原语在异步上下文中的使用**（如 `Mutex`、`Atomic` 在 async 块中的交互），而非测试 async/await 本身的调度语义。async 调度语义由执行器（Tokio 等）保证，不在 loom 的验证范围内。[loom docs: loom::future module](https://docs.rs/tokio/latest/tokio/runtime/index.html)
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 **实际用例：验证自定义并发原语**
@@ -1335,7 +1335,7 @@ fn main() {
 > [来源: [RFC 2515 — Pinning](https://rust-lang.github.io/rfcs//2515-type_alias_impl_trait.html)]
 > [来源: [Pin API Documentation](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
 > [来源: [Futures crate](https://docs.rs/futures/)]
-> [来源: [Tokio Internals](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
+> [来源: [Tokio Internals](https://docs.rs/tokio/latest/tokio/)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 

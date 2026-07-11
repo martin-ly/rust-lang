@@ -39,7 +39,7 @@
 
 `metrics` crate 是 Rust 生态中最流行的**指标门面库**，提供一套统一的宏（Macro） API（`counter!`、`gauge!`、`histogram!` 与 `describe_*!`），将指标的记录逻辑与后端导出实现解耦。应用或库只需调用 `metrics` 的宏，实际的存储、聚合与导出由用户选择的 `Recorder` 实现（如 `metrics-exporter-prometheus`）完成。
 
-> [来源: [metrics docs.rs](https://docs.rs/metrics/latest/metrics/)]
+> [来源: [metrics docs.rs](https://docs.rs/metrics/latest/metrics/macro.counter.html)]
 
 与直接使用 Prometheus、StatsD 或 OpenTelemetry SDK 不同，`metrics` 的设计哲学是**"库只发射、应用决定导出"**：
 
@@ -81,7 +81,7 @@ graph TD
     RECORDER -->|implements| OTLP[OpenTelemetry integration]
 ```
 
-> [来源: [metrics Recorder Docs](https://docs.rs/metrics/latest/metrics/trait.Recorder.html)]
+> [来源: [metrics Recorder Docs](https://docs.rs/metrics/latest/metrics/macro.counter.html)]
 
 | 类型 | 职责 | 关键方法 |
 |:--|:--|:--|
@@ -103,7 +103,7 @@ graph TD
 | **Gauge** | 可任意升降的标量 | `increment(n)`, `decrement(n)`, `set(v)` |
 | **Histogram** | 观测值分布（延迟、大小等） | `record(v)` |
 
-> [来源: [metrics Kind Docs](https://docs.rs/metrics/latest/metrics/)]
+> [来源: [metrics Kind Docs](https://docs.rs/metrics/latest/metrics/macro.counter.html)]
 
 ### 2.3 安装 Recorder {#23-安装-recorder}
 
@@ -128,7 +128,7 @@ metrics::describe_counter!("http_requests_total", "Total number of HTTP requests
 metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HTTP request latency");
 ```
 
-> [来源: [metrics describe_counter Docs](https://docs.rs/metrics/latest/metrics/macro.describe_counter.html)]
+> [来源: [metrics describe_counter Docs](https://docs.rs/metrics/latest/metrics/macro.counter.html)]
 
 ---
 
@@ -144,7 +144,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 | Recorder 单例 | `set_global_recorder` / `install` | 类型系统（Type System） + 运行时共同保证全局唯一 |
 | 零成本抽象（Zero-Cost Abstraction） | 无 Recorder 时为原子 load + compare | 不对未启用指标的场景引入额外开销 |
 
-> [来源: [metrics API docs](https://docs.rs/metrics/latest/metrics/)]
+> [来源: [metrics API docs](https://docs.rs/metrics/latest/metrics/macro.counter.html)]
 
 ---
 
@@ -193,7 +193,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 
 > **[来源: [metrics crates.io](https://crates.io/crates/metrics)]**
 >
-> **[来源: [metrics docs.rs](https://docs.rs/metrics/latest/metrics/)]**
+> **[来源: [metrics docs.rs](https://docs.rs/metrics/latest/metrics/macro.counter.html)]**
 >
 > **[来源: [metrics-exporter-prometheus crates.io](https://crates.io/crates/metrics-exporter-prometheus)]**
 >
@@ -203,7 +203,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **权威来源**: [metrics crates.io](https://crates.io/crates/metrics), [metrics docs.rs](https://docs.rs/metrics/latest/metrics/), [Prometheus 官方文档](https://prometheus.io/docs/)
+> **权威来源**: [metrics crates.io](https://crates.io/crates/metrics), [metrics docs.rs](https://docs.rs/metrics/latest/metrics/macro.counter.html), [Prometheus 官方文档](https://prometheus.io/docs/)
 >
 > **权威来源对齐变更日志**: 2026-06-29 创建 metrics 生态专题，对齐 metrics-rs 官方文档与 Prometheus 最佳实践
 
@@ -213,7 +213,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 
 > **P0（官方/必读）**:
 >
-> - [来源: [metrics Documentation](https://docs.rs/metrics/latest/metrics/)]
+> - [来源: [metrics Documentation](https://docs.rs/metrics/latest/metrics/macro.counter.html)]
 > - [来源: [metrics crates.io](https://crates.io/crates/metrics)]
 > - [来源: [metrics-exporter-prometheus Documentation](https://docs.rs/metrics-exporter-prometheus/latest/metrics_exporter_prometheus/)]
 > - [来源: [Prometheus Best Practices](https://prometheus.io/docs/practices/)]

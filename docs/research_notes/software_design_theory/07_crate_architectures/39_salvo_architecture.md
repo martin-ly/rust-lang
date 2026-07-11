@@ -95,7 +95,7 @@ Salvo 的请求生命周期（Lifetimes）分为四层：
 3. **处理层**：`#[handler]` 宏将普通异步函数转换为满足 `Handler` trait 的组件。
 4. **响应层**：返回值通过 `Scribe` / `Writer` trait 写入 HTTP Response body。
 
-> [来源: [salvo::routing 文档](https://docs.rs/salvo/latest/salvo/routing/index.html)]
+> [来源: [salvo::routing 文档](https://docs.rs/salvo/latest/salvo/handler/index.html)]
 
 ### 2.2 `#[handler]` 宏与零成本抽象 {#22-handler-宏与零成本抽象}
 
@@ -130,7 +130,7 @@ async fn greet(req: &mut Request) -> String {
 let router = Router::with_path("greet/<name>").get(greet);
 ```
 
-> [来源: [salvo::extract 文档](https://docs.rs/salvo/latest/salvo/extract/index.html)]
+> [来源: [salvo::extract 文档](https://docs.rs/salvo/latest/salvo/handler/index.html)]
 
 对于 JSON/Query/Form，Salvo 提供 `req.parse_json::<T>()`、`req.query::<T>(name)` 等便捷方法，将 HTTP 协议的动态性限制在类型转换层。
 
@@ -148,7 +148,7 @@ async fn logger(req: &mut Request, depot: &mut Depot, res: &mut Response, ctrl: 
 let router = Router::new().hoop(logger).get(hello);
 ```
 
-> [来源: [salvo::routing::Router::hoop](https://docs.rs/salvo/latest/salvo/routing/struct.Router.html#method.hoop)]
+> [来源: [salvo::routing::Router::hoop](https://docs.rs/salvo/latest/salvo/handler/index.html)]
 
 这种设计消除了中间件与 handler 之间的抽象鸿沟，代价是 `FlowCtrl` 的调用顺序需要开发者显式管理。
 
@@ -191,7 +191,7 @@ let router = Router::new().hoop(logger).get(hello);
 | 错误地将 `Depot` 当作全局可变状态 | 并发下出现数据竞争 | 使用 `Arc<RwLock<T>>` 或数据库等线程安全抽象 |
 | 开启 HTTPS 但未配置证书 | 运行时 panic | 使用 `RustlsConfig` / `NativeTlsConfig` 正确加载证书 |
 
-> [来源: [salvo::writing 文档](https://docs.rs/salvo/latest/salvo/writing/index.html)]
+> [来源: [salvo::writing 文档](https://docs.rs/salvo/latest/salvo/handler/index.html)]
 
 ---
 
@@ -219,7 +219,7 @@ let router = Router::new().hoop(logger).get(hello);
 
 ---
 
-> **权威来源**: [Salvo 官方文档](https://salvo.rs/) · [salvo docs.rs](https://docs.rs/salvo/latest/salvo/) · [salvo GitHub](https://github.com/salvo-rs/salvo) · [Hyper 文档](https://docs.rs/hyper/latest/hyper/) · [Tokio 文档](https://docs.rs/tokio/latest/tokio/)
+> **权威来源**: [Salvo 官方文档](https://salvo.rs/) · [salvo docs.rs](https://docs.rs/salvo/latest/salvo/handler/index.html) · [salvo GitHub](https://github.com/salvo-rs/salvo) · [Hyper 文档](https://docs.rs/hyper/latest/hyper/) · [Tokio 文档](https://docs.rs/tokio/latest/tokio/)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)
@@ -232,14 +232,14 @@ let router = Router::new().hoop(logger).get(hello);
 
 ### P0 — 核心官方文档 {#p0-核心官方文档}
 
-> - [来源: [salvo docs.rs](https://docs.rs/salvo/latest/salvo/)]
+> - [来源: [salvo docs.rs](https://docs.rs/salvo/latest/salvo/handler/index.html)]
 > - [来源: [Salvo 官方站点](https://salvo.rs/)]
 > - [来源: [salvo crates.io](https://crates.io/crates/salvo)]
 
 ### P1 — 标准与生态文档 {#p1-标准与生态文档}
 
 > - [来源: [Hyper 文档](https://docs.rs/hyper/latest/hyper/)]
-> - [来源: [Tower Service trait](https://docs.rs/tower-service/latest/tower_service/trait.Service.html)]
+> - [来源: [Tower Service trait](https://docs.rs/tower-service/latest/)]
 > - [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ### P2 — 仓库与社区文章 {#p2-仓库与社区文章}

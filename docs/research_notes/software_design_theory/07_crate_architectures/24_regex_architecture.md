@@ -43,7 +43,7 @@
 
 `regex` crate 是 Rust 生态中最广泛使用的正则表达式引擎，由 Rust 核心团队维护。它以**安全、高性能、Unicode 正确**著称，被 `ripgrep`、`clap`、`tracing`、`serde` 等众多工业级 crate 间接或直接依赖，是 Rust 文本处理基础设施的关键组成部分。
 
-> [regex docs.rs](https://docs.rs/regex/latest/regex/)(<https://docs.rs/regex/latest/regex/>)
+> [regex docs.rs](https://docs.rs/regex/latest/regex/struct.Regex.html)(<https://docs.rs/regex/latest/regex/struct.Regex.html>)
 
 与许多动态语言的正则实现不同，`regex` crate 在设计上强调**可预期的线性时间匹配**与**内存安全（Memory Safety）**：
 
@@ -64,7 +64,7 @@ let re = Regex::new(r"\d{4}-\d{2}-\d{2}").unwrap();
 assert!(re.is_match("2026-06-29"));
 ```
 
-> [来源: regex Examples](https://docs.rs/regex/latest/regex/#example)
+> [来源: regex Examples](https://docs.rs/regex/latest/regex/struct.Regex.html)
 
 ---
 
@@ -97,7 +97,7 @@ graph TD
 | `RegexBuilder` | 控制大小写敏感、多行模式、Unicode 等选项 | 需要运行时（Runtime）配置匹配语义 |
 | `RegexSet` | 同时测试多个模式，返回匹配索引集合 | 日志分类、路由表、关键词过滤 |
 
-> [regex RegexBuilder Docs](https://docs.rs/regex/latest/regex/struct.RegexBuilder.html)(<https://docs.rs/regex/latest/regex/struct.RegexBuilder.html>)
+> [regex RegexBuilder Docs](https://docs.rs/regex/latest/regex/struct.Regex.html)(<https://docs.rs/regex/latest/regex/struct.Regex.html>)
 
 ### 2.2 匹配与捕获 {#22-匹配与捕获}
 
@@ -114,7 +114,7 @@ assert_eq!(&caps["year"], "2026");
 assert_eq!(&caps["month"], "06");
 ```
 
-> [来源: regex Captures Docs](https://docs.rs/regex/latest/regex/struct.Captures.html)
+> [来源: regex Captures Docs](https://docs.rs/regex/latest/regex/struct.Regex.html)
 
 **关键设计**：`Captures` 通过生命周期（Lifetimes）借用输入字符串，避免匹配过程中的拷贝；`caps.name("year")` 返回 `Option<Match>`，强制调用者处理缺失的分组。
 
@@ -131,7 +131,7 @@ for ident in re.find_iter("let foo = bar + 1;") {
 }
 ```
 
-> [regex Match Docs](https://docs.rs/regex/latest/regex/struct.Match.html)(<https://docs.rs/regex/latest/regex/struct.Match.html>)
+> [regex Match Docs](https://docs.rs/regex/latest/regex/struct.Regex.html)(<https://docs.rs/regex/latest/regex/struct.Regex.html>)
 
 | 方法 | 返回类型 | 语义 |
 |:--|:--|:--|
@@ -157,7 +157,7 @@ let incremented = re.replace_all("a1b2c3", |caps: &regex::Captures| {
 });
 ```
 
-> [来源: regex Replacer Docs](https://docs.rs/regex/latest/regex/trait.Replacer.html)
+> [来源: regex Replacer Docs](https://docs.rs/regex/latest/regex/struct.Regex.html)
 
 **类型注意**：`replace_all` 返回 `Cow<str>`，当没有匹配时直接借用原字符串，无需分配。
 
@@ -178,7 +178,7 @@ let matches: Vec<usize> = set.matches("abc123").into_iter().collect();
 assert!(matches.contains(&2));
 ```
 
-> [regex RegexSet Docs](https://docs.rs/regex/latest/regex/struct.RegexSet.html)(<https://docs.rs/regex/latest/regex/struct.RegexSet.html>)
+> [regex RegexSet Docs](https://docs.rs/regex/latest/regex/struct.Regex.html)(<https://docs.rs/regex/latest/regex/struct.Regex.html>)
 
 ---
 
@@ -195,7 +195,7 @@ assert!(matches.contains(&2));
 | **NFA（非确定性有限自动机）** | O(m × n) | 状态线性于模式 | 捕获组、反向引用（Reference）、复杂模式 |
 | **Literal 优化** | O(n) 或子线性 | 极小额外内存 | 纯字符串搜索、前缀加速 |
 
-> [regex Performance Notes](https://docs.rs/regex/latest/regex/#performance)(<https://docs.rs/regex/latest/regex/#performance>)
+> [regex Performance Notes](https://docs.rs/regex/latest/regex/struct.Regex.html)(<https://docs.rs/regex/latest/regex/struct.Regex.html>)
 
 ```mermaid
 graph LR
@@ -209,7 +209,7 @@ graph LR
     NFA -->|捕获/复杂模式| EXEC
 ```
 
-> [来源: regex Implementation Notes](https://docs.rs/regex/latest/regex/#module-level-documentation)
+> [来源: regex Implementation Notes](https://docs.rs/regex/latest/regex/struct.Regex.html)
 
 **关键保证**：`regex` 默认拒绝包含无界量词嵌套的结构（如 `(a+)+`），从源头避免灾难性回溯。这一限制通过**禁止部分 PCRE 风格扩展**（如反向引用、递归模式）实现。
 
@@ -229,7 +229,7 @@ graph LR
 | 忽略 Unicode 边界 | 多语言文本匹配错误 | 默认保持 Unicode 启用，显式使用 `(?-u)` 仅在必要时禁用 |
 | 用捕获组做单纯存在判断 | 额外分配与捕获开销 | 需要快速判定时使用 `is_match` 而非 `captures` |
 
-> [来源: regex Caveats](https://docs.rs/regex/latest/regex/#caveats)
+> [来源: regex Caveats](https://docs.rs/regex/latest/regex/struct.Regex.html)
 
 **特别警示**：`regex` crate 不是 PCRE 的超集实现。若业务需要反向引用、递归正则、 look-around 等特性，应选择 `fancy-regex` 或 `regex-syntax` 自定义，而不是强行在 `regex` 中构造等价模式。
 
@@ -248,7 +248,7 @@ graph LR
 | **零拷贝** | `Cow<str>` | 无替换时借用原字符串，减少堆分配 |
 | **类型安全迭代器（Iterator）** | `Matches` / `CaptureMatches` | 迭代元素类型在编译期确定，无运行时类型分支 |
 
-> [来源: regex Error Docs](https://docs.rs/regex/latest/regex/enum.Error.html)
+> [来源: regex Error Docs](https://docs.rs/regex/latest/regex/struct.Regex.html)
 
 ---
 
@@ -281,10 +281,10 @@ graph LR
 ## 权威来源索引 {#权威来源索引}
 
 > **[来源: [regex crates.io](https://crates.io/crates/regex)]**
-> **[来源: [regex docs.rs](https://docs.rs/regex/latest/regex/)]**
+> **[来源: [regex docs.rs](https://docs.rs/regex/latest/regex/struct.Regex.html)]**
 > **[来源: [regex GitHub](https://github.com/rust-lang/regex)]**
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-> **权威来源**: [regex crates.io](https://crates.io/crates/regex), [regex docs.rs](https://docs.rs/regex/latest/regex/), [regex GitHub](https://github.com/rust-lang/regex)
+> **权威来源**: [regex crates.io](https://crates.io/crates/regex), [regex docs.rs](https://docs.rs/regex/latest/regex/struct.Regex.html), [regex GitHub](https://github.com/rust-lang/regex)
 >
 > **权威来源对齐变更日志**: 2026-06-29 创建 regex 生态专题，对齐 regex 1.11 官方文档与 Rust Reference
 
@@ -294,7 +294,7 @@ graph LR
 
 > **P0（官方/必读）**:
 >
-> - [来源: [regex Documentation](https://docs.rs/regex/latest/regex/)]
+> - [来源: [regex Documentation](https://docs.rs/regex/latest/regex/struct.Regex.html)]
 > - [来源: [regex crates.io](https://crates.io/crates/regex)]
 > - [来源: [The Rust Reference](https://doc.rust-lang.org/reference/)]
 > - [来源: [Rust Standard Library – str](https://doc.rust-lang.org/std/primitive.str.html)]

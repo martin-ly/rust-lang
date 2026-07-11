@@ -224,7 +224,7 @@ Bully 算法等经典选主协议可用于进程组中的 leader 选举；leader
 
 ---
 
-> **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/process/) · [Tokio Process](https://docs.rs/tokio/latest/tokio/process/) · [nix crate](https://docs.rs/nix/latest/nix/sys/resource/)
+> **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/process/) · [Tokio Process](https://docs.rs/tokio/latest/tokio/) · [nix crate](https://docs.rs/nix/latest/nix/)
 
 ---
 

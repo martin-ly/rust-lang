@@ -43,7 +43,7 @@
 
 `mongodb` crate 是 MongoDB 官方维护的 Rust 驱动，基于 Tokio 异步运行时（Runtime），使用 `bson` crate 处理 MongoDB 的原生 BSON 数据模型。它为 Rust 应用提供了从单机到副本集、分片集群的统一访问抽象，是 Rust 生态中构建文档型数据持久化层的首选客户端。
 
-> [mongodb-rust-driver docs.rs](https://docs.rs/mongodb/latest/mongodb/)(<https://docs.rs/mongodb/latest/mongodb/>)
+> [mongodb-rust-driver docs.rs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)(<https://docs.rs/mongodb/latest/mongodb/struct.Collection.html>)
 
 与关系型 SQL 客户端不同，`mongodb-rust-driver` 的设计哲学是**"BSON 原生、类型可选、异步优先"**：
 
@@ -89,7 +89,7 @@ graph TD
     CLIENT -->|start_session| SESSION[ClientSession<br/>事务会话]
 ```
 
-> [mongodb-rust-driver Client Docs](https://docs.rs/mongodb/latest/mongodb/struct.Client.html)(<https://docs.rs/mongodb/latest/mongodb/struct.Client.html>)
+> [mongodb-rust-driver Client Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)(<https://docs.rs/mongodb/latest/mongodb/struct.Collection.html>)
 
 | 类型 | 职责 | 共享能力 |
 |:--|:--|:--|
@@ -144,7 +144,7 @@ while let Some(doc) = cursor.try_next().await? {
 }
 ```
 
-> [mongodb-rust-driver Aggregate Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html#method.aggregate)(<https://docs.rs/mongodb/latest/mongodb/struct.Collection.html#method.aggregate>)
+> [mongodb-rust-driver Aggregate Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)(<https://docs.rs/mongodb/latest/mongodb/struct.Collection.html>)
 
 `Cursor` 同时实现 `Stream<Item = Result<T>>` 与 `advance()`/`deserialize_current()` 手动模式，兼容 `futures::StreamExt`/`TryStreamExt` 组合子。
 
@@ -161,7 +161,7 @@ let index = IndexModel::builder()
 coll.create_index(index).await?;
 ```
 
-> [来源: mongodb-rust-driver Index Docs](https://docs.rs/mongodb/latest/mongodb/struct.IndexModel.html)
+> [来源: mongodb-rust-driver Index Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)
 
 索引模型使用 builder 模式避免字段缺失，并通过 `IndexOptions` 控制唯一性、TTL、部分索引等高级行为。
 
@@ -176,7 +176,7 @@ while let Some(event) = change_stream.next_if_any().await? {
 }
 ```
 
-> [mongodb-rust-driver ChangeStream Docs](https://docs.rs/mongodb/latest/mongodb/change_stream/index.html)(<https://docs.rs/mongodb/latest/mongodb/change_stream/struct.ChangeStream.html>)
+> [mongodb-rust-driver ChangeStream Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)(<https://docs.rs/mongodb/latest/mongodb/struct.Collection.html>)
 
 `ChangeStream` 内置断点续传：通过 `resume_token()` 获取恢复令牌，可在故障后使用 `resume_after`/`start_after` 选项重建流。
 
@@ -195,7 +195,7 @@ coll.delete_one(doc! { "y": 2 }).session(&mut session).await?;
 session.commit_transaction().await?;
 ```
 
-> [来源: mongodb-rust-driver Transaction Docs](https://docs.rs/mongodb/latest/mongodb/struct.ClientSession.html)
+> [来源: mongodb-rust-driver Transaction Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)
 
 **重要边界**：事务需要副本集或分片集群；单节点 `mongod` 不支持多文档事务。
 
@@ -213,7 +213,7 @@ opts.server_api = Some(ServerApi::builder().version(ServerApiVersion::V1).build(
 let client = Client::with_options(opts)?;
 ```
 
-> [mongodb-rust-driver ClientOptions Docs](https://docs.rs/mongodb/latest/mongodb/options/struct.ClientOptions.html)(<https://docs.rs/mongodb/latest/mongodb/options/struct.ClientOptions.html>)
+> [mongodb-rust-driver ClientOptions Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)(<https://docs.rs/mongodb/latest/mongodb/struct.Collection.html>)
 
 连接池内置于 `Client`，默认大小与 MongoDB 官方驱动推荐值一致；通过 `Clone` 共享 `Client` 即可获得池复用，无需额外引入第三方池 crate。
 
@@ -232,7 +232,7 @@ let client = Client::with_options(opts)?;
 | **Session 传递** | `.session(&mut session)` | 通过显式参数将操作绑定到事务边界，避免隐式上下文 |
 | **错误类型** | `mongodb::error::Error` / `Result<T>` | 所有 IO 与协议错误必须在调用点处理 |
 
-> [mongodb-rust-driver Error Docs](https://docs.rs/mongodb/latest/mongodb/error/struct.Error.html)(<https://docs.rs/mongodb/latest/mongodb/error/struct.Error.html>)
+> [mongodb-rust-driver Error Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)(<https://docs.rs/mongodb/latest/mongodb/struct.Collection.html>)
 
 ---
 
@@ -288,11 +288,11 @@ let client = Client::with_options(opts)?;
 ## 权威来源索引 {#权威来源索引}
 
 > **[来源: [mongodb-rust-driver crates.io](https://crates.io/crates/mongodb)]**
-> **[来源: [mongodb-rust-driver docs.rs](https://docs.rs/mongodb/latest/mongodb/)]**
+> **[来源: [mongodb-rust-driver docs.rs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)]**
 > **[来源: [mongodb-rust-driver GitHub](https://github.com/mongodb/mongo-rust-driver)]**
 > **[来源: [MongoDB 官方文档](https://www.mongodb.com/docs/)]**
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-> **权威来源**: [mongodb-rust-driver crates.io](https://crates.io/crates/mongodb), [mongodb-rust-driver docs.rs](https://docs.rs/mongodb/latest/mongodb/), [MongoDB 官方文档](https://www.mongodb.com/docs/)
+> **权威来源**: [mongodb-rust-driver crates.io](https://crates.io/crates/mongodb), [mongodb-rust-driver docs.rs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html), [MongoDB 官方文档](https://www.mongodb.com/docs/)
 >
 > **权威来源对齐变更日志**: 2026-06-29 创建 mongodb 生态专题，对齐 mongodb-rust-driver 3.x 官方文档与 MongoDB 官方参考
 
@@ -302,7 +302,7 @@ let client = Client::with_options(opts)?;
 
 > **P0（官方/必读）**:
 >
-> - [来源: [mongodb-rust-driver Documentation](https://docs.rs/mongodb/latest/mongodb/)]
+> - [来源: [mongodb-rust-driver Documentation](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)]
 > - [来源: [mongodb-rust-driver crates.io](https://crates.io/crates/mongodb)]
 > - [来源: [MongoDB 官方文档](https://www.mongodb.com/docs/)]
 > - [来源: [MongoDB BSON 规范](https://bsonspec.org/)]

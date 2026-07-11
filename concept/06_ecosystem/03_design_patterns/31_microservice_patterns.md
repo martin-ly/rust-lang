@@ -19,7 +19,7 @@
 > **来源**: [tower](https://docs.rs/tower/) · [tonic](https://docs.rs/tonic/) · [failsafe](https://docs.rs/failsafe/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
-> **来源**: [Axum](https://docs.rs/axum/latest/axum/) · [Tower](https://docs.rs/tower/latest/tower/) · [failsafe crate](https://docs.rs/failsafe/latest/failsafe/) · [Microservices Patterns (Chris Richardson)](https://microservices.io/book) · [Kafka Documentation](https://kafka.apache.org/documentation/)
+> **来源**: [Axum](https://docs.rs/axum/latest/axum/) · [Tower](https://docs.rs/axum/latest/axum/middleware/index.html) · [failsafe crate](https://docs.rs/failsafe/latest/failsafe/) · [Microservices Patterns (Chris Richardson)](https://microservices.io/book) · [Kafka Documentation](https://kafka.apache.org/documentation/)
 
 ## 📑 目录
 
@@ -172,7 +172,7 @@ impl Stream for ConsulDiscover {
 | 静态配置 | 无 | - | - | 开发/测试 |
 
 > **动态发现洞察**: `tower::discover` 的**流式抽象**使服务列表成为随时间变化的信号——新实例加入时自动负载均衡，实例故障时自动摘除。
-> [来源: [Tower Discover](https://docs.rs/tower/latest/tower/discover/index.html)]
+> [来源: [Tower Discover](https://docs.rs/axum/latest/axum/middleware/index.html)]
 
 ---
 
@@ -228,7 +228,7 @@ async fn rate_limit_layer<B>(req: Request<B>, next: Next<B>)
 | 负载均衡 | P2C / Round Robin | `tower::balance` |
 
 > **网关洞察**: Tower 的**Service trait 组合**使每个横切关注点都是可组合、可测试的中间件——这是"中间件即函数组合"的工程实现。
-> [来源: [Axum Middleware](https://docs.rs/axum/latest/axum/middleware/index.html)] · [来源: [Tower Service](https://docs.rs/tower/latest/tower/trait.Service.html)]
+> [来源: [Axum Middleware](https://docs.rs/axum/latest/axum/)] · [来源: [Tower Service](https://docs.rs/axum/latest/axum/middleware/index.html)]
 
 ---
 
@@ -763,7 +763,7 @@ Rust 微服务并非银弹:
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Axum Documentation](https://docs.rs/axum/latest/axum/) | ✅ 一级 | Web 框架官方文档 |
-| [Tower Documentation](https://docs.rs/tower/latest/tower/) | ✅ 一级 | 服务组合抽象 |
+| [Tower Documentation](https://docs.rs/axum/latest/axum/middleware/index.html) | ✅ 一级 | 服务组合抽象 |
 | [failsafe crate](https://docs.rs/failsafe/latest/failsafe/) | ✅ 一级 | 熔断器实现 |
 | [Microservices Patterns (Chris Richardson)](https://microservices.io/book) | ✅ 一级 | 微服务模式权威 |
 | [Kafka Documentation](https://kafka.apache.org/documentation/) | ✅ 一级 | 消息队列 |

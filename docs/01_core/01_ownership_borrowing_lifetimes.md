@@ -22,6 +22,7 @@
 ---
 
 > **权威来源**: 本文件为 `docs/` 学习路径入口，完整概念解释请见：
+>
 > - [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > - [`concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
 > - [`concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
@@ -47,5 +48,6 @@
 ## 代码练习 {#代码练习}
 
 参见对应 crate：
+
 - [`crates/c01_ownership_borrow_scope/`](../../crates/c01_ownership_borrow_scope/)
 - [`exercises/rustlings_style/`](../../exercises/rustlings_style/)

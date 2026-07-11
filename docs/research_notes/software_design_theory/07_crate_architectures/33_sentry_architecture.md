@@ -39,7 +39,7 @@
 
 `sentry` crate 是 [Sentry](https://sentry.io/) 官方提供的 Rust 客户端，用于捕获错误、异常、崩溃、性能事务（Performance Transactions）与自定义消息，并将它们发送到 Sentry 服务端进行聚合、告警与分析。它是 Rust 生态中生产级可观测性栈的核心组件之一。
 
-> [来源: [sentry docs.rs](https://docs.rs/sentry/latest/sentry/)]
+> [来源: [sentry docs.rs](https://docs.rs/sentry/latest/sentry/struct.Client.html)]
 
 与纯日志库或纯指标库不同，Sentry 的设计哲学是**"事件为中心、范围（Scope）为上下文、Hub 为并发边界"**：
 
@@ -82,7 +82,7 @@ graph TD
     EVENT -->|Transport| SENTRY[Sentry Server]
 ```
 
-> [来源: [sentry Hub Docs](https://docs.rs/sentry/latest/sentry/struct.Hub.html)]
+> [来源: [sentry Hub Docs](https://docs.rs/sentry/latest/sentry/struct.Client.html)]
 
 | 类型 | 职责 | 关键方法 |
 |:--|:--|:--|
@@ -106,7 +106,7 @@ let _guard = sentry::init(("https://key@sentry.io/42", sentry::ClientOptions {
 }));
 ```
 
-> [来源: [sentry init Docs](https://docs.rs/sentry/latest/sentry/fn.init.html)]
+> [来源: [sentry init Docs](https://docs.rs/sentry/latest/sentry/struct.Client.html)]
 
 ### 2.3 错误与消息捕获 {#23-错误与消息捕获}
 
@@ -118,7 +118,7 @@ if let Err(e) = do_something().await {
 }
 ```
 
-> [来源: [sentry capture_error Docs](https://docs.rs/sentry/latest/sentry/fn.capture_error.html)]
+> [来源: [sentry capture_error Docs](https://docs.rs/sentry/latest/sentry/struct.Client.html)]
 
 ### 2.4 Scope 与 Breadcrumb {#24-scope-与-breadcrumb}
 
@@ -139,7 +139,7 @@ sentry::configure_scope(|scope| {
 });
 ```
 
-> [来源: [sentry Scope Docs](https://docs.rs/sentry/latest/sentry/struct.Scope.html)]
+> [来源: [sentry Scope Docs](https://docs.rs/sentry/latest/sentry/struct.Client.html)]
 
 ### 2.5 性能监控：Transaction 与 Span {#25-性能监控transaction-与-span}
 
@@ -169,7 +169,7 @@ tx.finish();
 | 事件构造 | `Event<'static>` / `protocol` 模块（Module） | 将动态 JSON 事件约束为类型化结构 |
 | 集成 trait | `Integration` | 通过 trait 对象扩展 panic/tracing/anyhow 等集成 |
 
-> [来源: [sentry API docs](https://docs.rs/sentry/latest/sentry/)]
+> [来源: [sentry API docs](https://docs.rs/sentry/latest/sentry/struct.Client.html)]
 
 ---
 
@@ -219,7 +219,7 @@ tx.finish();
 
 > **[来源: [sentry crates.io](https://crates.io/crates/sentry)]**
 >
-> **[来源: [sentry docs.rs](https://docs.rs/sentry/latest/sentry/)]**
+> **[来源: [sentry docs.rs](https://docs.rs/sentry/latest/sentry/struct.Client.html)]**
 >
 > **[来源: [sentry-rust GitHub](https://github.com/getsentry/sentry-rust)]**
 >
@@ -227,7 +227,7 @@ tx.finish();
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **权威来源**: [sentry crates.io](https://crates.io/crates/sentry), [sentry docs.rs](https://docs.rs/sentry/latest/sentry/), [Sentry 官方文档](https://docs.sentry.io/platforms/rust/)
+> **权威来源**: [sentry crates.io](https://crates.io/crates/sentry), [sentry docs.rs](https://docs.rs/sentry/latest/sentry/struct.Client.html), [Sentry 官方文档](https://docs.sentry.io/platforms/rust/)
 >
 > **权威来源对齐变更日志**: 2026-06-29 创建 Sentry 生态专题，对齐 sentry-rust 官方文档与 Sentry 平台参考
 
@@ -237,7 +237,7 @@ tx.finish();
 
 > **P0（官方/必读）**:
 >
-> - [来源: [sentry Documentation](https://docs.rs/sentry/latest/sentry/)]
+> - [来源: [sentry Documentation](https://docs.rs/sentry/latest/sentry/struct.Client.html)]
 > - [来源: [sentry crates.io](https://crates.io/crates/sentry)]
 > - [来源: [Sentry Rust Platform Docs](https://docs.sentry.io/platforms/rust/)]
 > **P1（学术论文/演讲）**:
