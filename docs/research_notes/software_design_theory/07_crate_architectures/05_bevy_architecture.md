@@ -214,7 +214,7 @@ fn complex_system(
 }
 ```
 
-> [TRPL — Trait 与泛型](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)(<https://doc.rust-lang.org/book/ch10-00-generics.html>)
+> [TRPL — Trait 与泛型](https://doc.rust-lang.org/book/title-page.html)(<https://doc.rust-lang.org/book/ch10-00-generics.html>)
 
 ---
 

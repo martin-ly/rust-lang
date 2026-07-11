@@ -20,6 +20,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+from urllib.parse import urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts", "maintenance"))
@@ -60,6 +61,9 @@ def collect():
                 continue
             for u in URL_RE.findall(t):
                 u = u.rstrip(".,;")
+                # 教学/示例占位 URL 不应计入国际化权威有效性统计
+                if "example.com" in u or "localhost" in u or "127.0.0.1" in u or "your-mirror" in u:
+                    continue
                 tier = classify(u)
                 if tier:
                     key = u.split("#")[0]
@@ -117,7 +121,8 @@ def main():
         json.dump(results, open(CACHE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
     bad = []
-    anti_bot = []
+    anti_bot = []      # 403/418 等站点主动反爬
+    anti_bot_404 = []  # 对脚本 UA 返回 404 但浏览器通常可达（如 crates.io）
     for u in urls:
         r = results.get(u, {})
         st = r.get("status"); err = r.get("err")
@@ -126,29 +131,36 @@ def main():
             continue
         entry = {"url": u, "tier": seen[u]["tier"], "status": st, "err": err,
                  "files": sorted(seen[u]["files"])[:5]}
-        # 403 多为站点反爬（链接本身可能有效），单列 anti_bot，不计入『被对齐内容失效』bad
-        if st == 403:
+        # 403/418 多为站点反爬（链接本身可能有效），单列 anti_bot，不计入『被对齐内容失效』bad
+        if st in (403, 418):
             anti_bot.append(entry)
+        # crates.io 对非浏览器 UA 普遍返回 404（包括根页与真实 crate 页），浏览器中通常有效，故单列
+        elif st == 404 and urlparse(u).netloc in ("crates.io", "www.crates.io"):
+            anti_bot_404.append(entry)
         else:
             bad.append(entry)
     bad.sort(key=lambda x: (x["tier"], str(x["status"]), x["url"]))
     anti_bot.sort(key=lambda x: (x["tier"], x["url"]))
+    anti_bot_404.sort(key=lambda x: (x["tier"], x["url"]))
 
     md = [f"# 国际化权威来源 URL 健康（{TODAY}）", "",
           "**EN**: International Authority URL Health", "**Summary**: 仅检查 P0/P1/P2 权威域 URL 的有效性，"
           "验证『对齐国际化权威』不仅是『有引用』且『引用有效』。带缓存，可增量。"
-          "**口径**：403 单列 anti_bot（站点反爬，链接本身可能有效，需浏览器人工复核），不计入失效 bad。", "",
-          f"> 扫描 concept/+knowledge/+docs/ 权威域唯一 URL: **{len(urls)}** · 真失效（4xx/5xx/超时/连接错，不含 403）: **{len(bad)}** · 反爬 403（待人工）: **{len(anti_bot)}**", ""]
+          "**口径**：403/418 及 crates.io 的 404 单列 anti_bot（站点对脚本 UA 反爬，链接本身可能有效，需浏览器人工复核），不计入失效 bad。", "",
+          f"> 扫描 concept/+knowledge/+docs/ 权威域唯一 URL: **{len(urls)}** · 真失效（不含反爬）: **{len(bad)}** · 反爬 403/418: **{len(anti_bot)}** · crates.io 反爬 404: **{len(anti_bot_404)}**", ""]
     by_tier = {}
     ab_tier = {}
+    ab404_tier = {}
     for b in bad:
         by_tier.setdefault(b["tier"], []).append(b)
     for b in anti_bot:
         ab_tier.setdefault(b["tier"], []).append(b)
-    md.append("| 分级 | 真失效（不含 403） | 反爬 403（人工） |")
-    md.append("|:---|---:|---:|")
+    for b in anti_bot_404:
+        ab404_tier.setdefault(b["tier"], []).append(b)
+    md.append("| 分级 | 真失效（不含反爬） | 反爬 403/418 | crates.io 反爬 404 |")
+    md.append("|:---|---:|---:|---:|")
     for t in ("P0", "P1", "P2"):
-        md.append(f"| {t} | {len(by_tier.get(t, []))} | {len(ab_tier.get(t, []))} |")
+        md.append(f"| {t} | {len(by_tier.get(t, []))} | {len(ab_tier.get(t, []))} | {len(ab404_tier.get(t, []))} |")
     md.append("")
     if bad:
         md.append("## 真失效清单（前 80，需查证新址后替换）")
@@ -162,13 +174,20 @@ def main():
         md.append("✅ 本次扫描的权威域 URL 无真失效（2xx/3xx；403 反爬已单列）。")
     if anti_bot:
         md.append("")
-        md.append("## 反爬 403（前 40，链接可能有效，需浏览器人工复核，不计入失效）")
+        md.append("## 反爬 403/418（前 40，链接可能有效，需浏览器人工复核，不计入失效）")
+        md.append("| 分级 | 状态 | URL | 引用文件（≤3） |")
+        md.append("|:---|:---|:---|:---|")
+        for b in anti_bot[:40]:
+            md.append(f"| {b['tier']} | {b['status']} | {b['url']} | {'; '.join(b['files'][:3])} |")
+    if anti_bot_404:
+        md.append("")
+        md.append("## crates.io 反爬 404（前 40，真实 crate/根页在浏览器中通常可达，不计入失效）")
         md.append("| 分级 | URL | 引用文件（≤3） |")
         md.append("|:---|:---|:---|")
-        for b in anti_bot[:40]:
+        for b in anti_bot_404[:40]:
             md.append(f"| {b['tier']} | {b['url']} | {'; '.join(b['files'][:3])} |")
     md += ["", "## 诚信", "- 仅查 P0/P1/P2 权威域（单一来源：maintenance/authority_coverage_dashboard.py）；不查其它外部域。",
-           "- 403 反爬不视为『被对齐内容失效』：链接本身可能有效，仅是脚本 UA 被拦，需浏览器人工复核后决定是否保留。",
+           "- 403/418 及 crates.io 404 不视为『被对齐内容失效』：链接本身可能有效，仅是脚本 UA 被拦，需浏览器人工复核后决定是否保留。",
            "- 瞬时网络抖动可能导致个别误判；真失效项需人工/后台查证新址后替换，勿据此脚本自动删正文。", "", "*由 `scripts/check_authority_link_health.py` 生成*"]
 
     os.makedirs(os.path.join(ROOT, "reports"), exist_ok=True)
@@ -176,11 +195,13 @@ def main():
     json_path = os.path.join(ROOT, "reports", f"AUTHORITY_LINK_HEALTH_{TODAY}.json")
     open(md_path, "w", encoding="utf-8", newline="\n").write("\n".join(md))
     json.dump({"date": TODAY, "scanned": len(urls), "bad": len(bad), "anti_bot_403": len(anti_bot),
+               "anti_bot_404_cratesio": len(anti_bot_404),
                "by_tier": {t: len(v) for t, v in by_tier.items()},
                "anti_bot_by_tier": {t: len(v) for t, v in ab_tier.items()},
-               "bad_list": bad, "anti_bot_list": anti_bot},
+               "anti_bot_404_by_tier": {t: len(v) for t, v in ab404_tier.items()},
+               "bad_list": bad, "anti_bot_list": anti_bot, "anti_bot_404_list": anti_bot_404},
               open(json_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    print(f"[auth-health] scanned={len(urls)} bad(real)={len(bad)} anti_bot_403={len(anti_bot)} by_tier={ {t: len(v) for t, v in by_tier.items()} }")
+    print(f"[auth-health] scanned={len(urls)} bad(real)={len(bad)} anti_bot_403={len(anti_bot)} anti_bot_404_cratesio={len(anti_bot_404)} by_tier={ {t: len(v) for t, v in by_tier.items()} }")
     print(f"[auth-health] report: {os.path.relpath(md_path, ROOT)}")
     return 0
 

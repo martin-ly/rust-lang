@@ -117,7 +117,7 @@ fn consume(data: Vec<u8>) -> usize {
 
 ## 七、枚举与 Option 布局优化
 
-`Option<Box<T>>` 可利用 null pointer optimization，使 `None` 不占用额外空间：(Source: [Rustonomicon — Option and Nullable Pointers](https://doc.rust-lang.org/nomicon/option-zipper.html))
+`Option<Box<T>>` 可利用 null pointer optimization，使 `None` 不占用额外空间：(Source: [Rustonomicon — Option and Nullable Pointers](https://doc.rust-lang.org/nomicon/))
 
 ```rust
 use std::mem::size_of;

@@ -13,7 +13,7 @@
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
-> **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/05_distributed/` 迁回，正在按 [Tokio Tutorial](https://tokio.rs/tokio/tutorial)、[Tonic Docs](https://docs.rs/tonic/latest/tonic/)、[Async Book – Streams](https://rust-lang.github.io/async-book/part-guide/streams.html) 等权威来源升级。
+> **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/05_distributed/` 迁回，正在按 [Tokio Tutorial](https://tokio.rs/tokio/tutorial)、[Tonic Docs](https://docs.rs/tonic/latest/tonic/)、[Async Book – Streams](https://rust-lang.github.io/async-book/) 等权威来源升级。
 >
 > **权威来源**: [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | [Tonic Docs](https://docs.rs/tonic/latest/tonic/) | [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
@@ -30,7 +30,7 @@
   - [1. 概念定义 (Def) {#1-概念定义-def}](#1-概念定义-def-1-概念定义-def)
     - [Def CQ1: CQRS (Command Query Responsibility Segregation) {#def-cq1-cqrs-command-query-responsibility-segregation}](#def-cq1-cqrs-command-query-responsibility-segregation-def-cq1-cqrs-command-query-responsibility-segregation)
     - [Def CQ2: 命令与查询的分离 {#def-cq2-命令与查询的分离}](#def-cq2-命令与查询的分离-def-cq2-命令与查询的分离)
-    - [Def CQ3: 最终一致性（Coherence）边界 {#def-cq3-最终一致性边界}](#def-cq3-最终一致性边界-def-cq3-最终一致性边界)
+    - [Def CQ3: 最终一致性边界 {#def-cq3-最终一致性边界}](#def-cq3-最终一致性边界-def-cq3-最终一致性边界)
   - [2. 基本假设 (Axiom) {#2-基本假设-axiom}](#2-基本假设-axiom-2-基本假设-axiom)
     - [Axiom CQ1: 命令不可重复 {#axiom-cq1-命令不可重复}](#axiom-cq1-命令不可重复-axiom-cq1-命令不可重复)
     - [Axiom CQ2: 投影单调性 {#axiom-cq2-投影单调性}](#axiom-cq2-投影单调性-axiom-cq2-投影单调性)

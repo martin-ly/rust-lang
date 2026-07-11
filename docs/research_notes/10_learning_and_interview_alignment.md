@@ -29,10 +29,10 @@
     - [Rust Japan {#rust-japan}](#rust-japan-rust-japan)
     - [Exercism Rust track {#exercism-rust-track}](#exercism-rust-track-exercism-rust-track)
   - [四、面试评估与权威来源映射 {#四面试评估与权威来源映射}](#四面试评估与权威来源映射-四面试评估与权威来源映射)
-    - [所有权（Ownership） {#所有权}](#所有权-所有权)
-    - [借用（Borrowing）与生命周期（Lifetimes） {#借用与生命周期}](#借用与生命周期-借用与生命周期)
-    - [类型系统（Type System） {#类型系统}](#类型系统-类型系统)
-    - [并发与异步（Async） {#并发与异步}](#并发与异步-并发与异步)
+    - [所有权 {#所有权}](#所有权-所有权)
+    - [借用与生命周期 {#借用与生命周期}](#借用与生命周期-借用与生命周期)
+    - [类型系统 {#类型系统}](#类型系统-类型系统)
+    - [并发与异步 {#并发与异步}](#并发与异步-并发与异步)
     - [Unsafe 与 FFI {#unsafe-与-ffi}](#unsafe-与-ffi-unsafe-与-ffi)
     - [设计模式与工程实践 {#设计模式与工程实践}](#设计模式与工程实践-设计模式与工程实践)
   - [五、Bloom 层级对应矩阵 {#五bloom-层级对应矩阵}](#五bloom-层级对应矩阵-五bloom-层级对应矩阵)
@@ -177,8 +177,8 @@
 | `Send` 和 `Sync` 的区别？ | 并发安全（Concurrency Safety）标记 | L2-L3 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q26 | [TRPL Ch 16.4](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)、[Rustonomicon Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) |
 | `Mutex` 和 `RwLock` 怎么选？ | 锁选型 | L3-L4 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q27 | [std sync](https://doc.rust-lang.org/std/sync/index.html) |
 | 为什么 `Cell` 不是 `Sync`？ | 内部可变性与线程安全 | L4-L5 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q31 | [Rustonomicon Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) |
-| 什么是 `Pin`？为什么 async/await 需要它？ | 自引用与状态机 | L4-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q11、Q32 | [Rustonomicon Pin](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)、[Async Book Pin [已失效]]<!-- 原链接: https://rust-lang.github.io/async-book/04_pinning/01_chapter.html --> |
-| 跨 await 持锁有什么风险？ | 异步并发安全 | L5-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q33 | [Async Book Shared State](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html) |
+| 什么是 `Pin`？为什么 async/await 需要它？ | 自引用与状态机 | L4-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q11、Q32 | [Rustonomicon Pin](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)、[Async Book Pin [已失效]]<!-- 原链接: https://rust-lang.github.io/async-book/ --> |
+| 跨 await 持锁有什么风险？ | 异步并发安全 | L5-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q33 | [Async Book Shared State](https://rust-lang.github.io/async-book/) |
 
 ### Unsafe 与 FFI {#unsafe-与-ffi}
 

@@ -21,14 +21,14 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 
-- [异步（Async）执行模型形式化 {#异步执行模型形式化}](#异步执行模型形式化-异步执行模型形式化)
+- [异步执行模型形式化 {#异步执行模型形式化}](#异步执行模型形式化-异步执行模型形式化)
   - [📑 目录 {#目录}](#-目录-目录)
   - [形式化定义 {#形式化定义}](#形式化定义-形式化定义)
   - [操作语义（简化） {#操作语义简化}](#操作语义简化-操作语义简化)
   - [Rust 实现与代码示例 {#rust-实现与代码示例}](#rust-实现与代码示例-rust-实现与代码示例)
   - [典型场景 {#典型场景}](#典型场景-典型场景)
   - [与同步/并发对比 {#与同步并发对比}](#与同步并发对比-与同步并发对比)
-  - [运行时（Runtime）与任务调度 {#运行时与任务调度}](#运行时与任务调度-运行时与任务调度)
+  - [运行时与任务调度 {#运行时与任务调度}](#运行时与任务调度-运行时与任务调度)
     - [Waker 与 Executor {#waker-与-executor}](#waker-与-executor-waker-与-executor)
     - [多任务组合 {#多任务组合}](#多任务组合-多任务组合)
     - [Stream、异步迭代与背压 {#stream异步迭代与背压}](#stream异步迭代与背压-stream异步迭代与背压)
@@ -289,7 +289,7 @@ use futures::stream::Stream;
 ### 取消安全（Cancellation Safety） {#取消安全cancellation-safety}
 
 > **来源: [Tokio Docs – Cancellation Safety](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety)**
-> **来源: [Rust Async Book](https://rust-lang.github.io/async-book/06_multiple_futures/03_select.html)**
+> **来源: [Rust Async Book](https://rust-lang.github.io/async-book/)**
 
 **Def 1.7（取消安全）**：Future 在 `select!` 未被选中分支被 drop 后，仍保持内部状态一致性；再次 poll 不会丢失事件或违反不变式。
 
@@ -304,7 +304,7 @@ use futures::stream::Stream;
 ### 结构化并发（Structured Concurrency） {#结构化并发structured-concurrency}
 
 > **来源: [Tokio Docs – Spawning](https://tokio.rs/tokio/tutorial/spawning)**
-> **来源: [rust-lang/async-book](https://rust-lang.github.io/async-book/06_multiple_futures/02_join.html)**
+> **来源: [rust-lang/async-book](https://rust-lang.github.io/async-book/)**
 
 **Def 1.8（结构化并发）**：子任务生命周期（Lifetimes）受父任务作用域约束；父任务退出时子任务必须完成或被取消。
 

@@ -69,7 +69,6 @@
     - [相关文档](#相关文档)
     - [外部资源](#外部资源)
   - [📝 总结](#-总结)
-  - [**最后更新**: 2025-12-11 | **Rust 版本**: 1.97.0+](#最后更新-2025-12-11--rust-版本-1970)
   - [认知路径](#认知路径)
   - [定理链](#定理链)
   - [反命题](#反命题)
@@ -970,7 +969,7 @@ impl Future for MyFuture {
 
 ### 外部资源
 
-- [Async Book - Pinning](https://rust-lang.github.io/async-book/04_pinning/index.html)
+- [Async Book - Pinning](https://rust-lang.github.io/async-book/)
 - [Tokio Internals](https://tokio.rs/blog/2019-10-scheduler)
 
 ---
@@ -995,6 +994,7 @@ impl Future for MyFuture {
 
 **文档维护**: C06 Async Team | **质量评分**: 95/100
 **最后更新**: 2025-12-11 | **Rust 版本**: 1.97.0+
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

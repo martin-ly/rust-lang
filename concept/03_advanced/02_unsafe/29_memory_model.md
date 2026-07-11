@@ -83,7 +83,7 @@ let restored = addr as *mut u8; // provenance 可能无效
 
 ## 四、初始化与 MaybeUninit
 
-`MaybeUninit<T>` 是处理未初始化内存的核心类型：(Source: [Rust Reference — MaybeUninit](https://doc.rust-lang.org/reference/standard-library-mem.html#maybeuninit), [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html))
+`MaybeUninit<T>` 是处理未初始化内存的核心类型：(Source: [Rust Reference — MaybeUninit](https://doc.rust-lang.org/reference/introduction.html#maybeuninit), [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html))
 
 ```rust
 use std::mem::MaybeUninit;

@@ -29,22 +29,22 @@
     - [Def 1.1（Builder 结构） {#def-11builder-结构}](#def-11builder-结构-def-11builder-结构)
     - [Axiom B1（必填字段公理） {#axiom-b1必填字段公理}](#axiom-b1必填字段公理-axiom-b1必填字段公理)
     - [Axiom B2（单次构建公理） {#axiom-b2单次构建公理}](#axiom-b2单次构建公理-axiom-b2单次构建公理)
-    - [定理 B-T1（所有权（Ownership）消费定理） {#定理-b-t1所有权消费定理}](#定理-b-t1所有权消费定理-定理-b-t1所有权消费定理)
+    - [定理 B-T1（所有权消费定理） {#定理-b-t1所有权消费定理}](#定理-b-t1所有权消费定理-定理-b-t1所有权消费定理)
     - [定理 B-T2（类型状态安全定理） {#定理-b-t2类型状态安全定理}](#定理-b-t2类型状态安全定理-定理-b-t2类型状态安全定理)
     - [推论 B-C1（纯 Safe Builder） {#推论-b-c1纯-safe-builder}](#推论-b-c1纯-safe-builder-推论-b-c1纯-safe-builder)
     - [概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}](#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例 {#rust-实现与代码示例}](#rust-实现与代码示例-rust-实现与代码示例)
   - [Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}](#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点 {#edition-2024-关键兼容点}](#edition-2024-关键兼容点-edition-2024-关键兼容点)
-  - [Rust 所有权、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
+  - [Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束 {#所有权约束}](#所有权约束-所有权约束)
     - [借用与生命周期约束 {#借用与生命周期约束}](#借用与生命周期约束-借用与生命周期约束)
     - [trait 系统约束 {#trait-系统约束}](#trait-系统约束-trait-系统约束)
-    - [与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
+    - [与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
   - [完整证明 {#完整证明}](#完整证明-完整证明)
     - [形式化论证链 {#形式化论证链}](#形式化论证链-形式化论证链)
     - [与 Rust 类型系统的联系 {#与-rust-类型系统的联系}](#与-rust-类型系统的联系-与-rust-类型系统的联系)
-    - [内存安全（Memory Safety）保证 {#内存安全保证}](#内存安全保证-内存安全保证)
+    - [内存安全保证 {#内存安全保证}](#内存安全保证-内存安全保证)
   - [形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}](#形式化属性不变式前置后置条件与安全边界-形式化属性不变式前置后置条件与安全边界)
     - [不变式（Invariants） {#不变式invariants}](#不变式invariants-不变式invariants)
     - [前置条件（Preconditions） {#前置条件preconditions}](#前置条件preconditions-前置条件preconditions)
@@ -58,8 +58,8 @@
   - [反例：常见误用及编译器错误 {#反例常见误用及编译器错误}](#反例常见误用及编译器错误-反例常见误用及编译器错误)
     - [反例 1：缺少必填字段 {#反例-1缺少必填字段}](#反例-1缺少必填字段-反例-1缺少必填字段)
     - [反例 2：重复 build {#反例-2重复-build}](#反例-2重复-build-反例-2重复-build)
-    - [反例 3：可变借用（Mutable Borrow）链式冲突 {#反例-3可变借用链式冲突}](#反例-3可变借用链式冲突-反例-3可变借用链式冲突)
-  - [错误处理（Error Handling） {#错误处理}](#错误处理-错误处理)
+    - [反例 3：可变借用链式冲突 {#反例-3可变借用链式冲突}](#反例-3可变借用链式冲突-反例-3可变借用链式冲突)
+  - [错误处理 {#错误处理}](#错误处理-错误处理)
   - [选型决策树 {#选型决策树}](#选型决策树-选型决策树)
   - [与 GoF 对比 {#与-gof-对比}](#与-gof-对比-与-gof-对比)
   - [边界 {#边界}](#边界-边界)
@@ -353,7 +353,7 @@ fn main() -> Result<(), String> {
 ## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
-> **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
+> **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/introduction.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
 
 以下示例已在 **Rust 1.97.0+ (Edition 2024)** 语义下校验，使用 `消费 self、类型状态、Option` 等现代惯用法。
 
@@ -471,7 +471,7 @@ fn main() {
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
-> **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
+> **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/introduction.html)**
 
 ### 所有权约束 {#所有权约束}
 

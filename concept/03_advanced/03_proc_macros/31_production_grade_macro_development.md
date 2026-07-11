@@ -63,7 +63,7 @@ v2.0.0 (MSRV 1.70) ✅ Major 可更新
 
 ### 2.2 Edition 兼容
 
-过程宏（Procedural Macro） crate 本身的 `edition` 不影响使用方的 edition，但生成代码中使用的语法特性需要兼容目标 edition (Source: [Rust Reference — Editions](https://doc.rust-lang.org/reference/editions.html))：
+过程宏（Procedural Macro） crate 本身的 `edition` 不影响使用方的 edition，但生成代码中使用的语法特性需要兼容目标 edition (Source: [Rust Reference — Editions](https://doc.rust-lang.org/reference/introduction.html))：
 
 ```rust
 // 生成代码时使用全限定路径，避免 edition 相关解析差异

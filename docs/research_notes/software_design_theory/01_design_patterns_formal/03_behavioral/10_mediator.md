@@ -26,7 +26,7 @@
   - [形式化定义 {#形式化定义}](#形式化定义-形式化定义)
     - [Def 1.1（Mediator 结构） {#def-11mediator-结构}](#def-11mediator-结构-def-11mediator-结构)
     - [Axiom ME1（无直接耦合公理） {#axiom-me1无直接耦合公理}](#axiom-me1无直接耦合公理-axiom-me1无直接耦合公理)
-    - [Axiom ME2（无循环引用（Reference）公理） {#axiom-me2无循环引用公理}](#axiom-me2无循环引用公理-axiom-me2无循环引用公理)
+    - [Axiom ME2（无循环引用公理） {#axiom-me2无循环引用公理}](#axiom-me2无循环引用公理-axiom-me2无循环引用公理)
     - [定理 ME-T1（循环引用避免定理） {#定理-me-t1循环引用避免定理}](#定理-me-t1循环引用避免定理-定理-me-t1循环引用避免定理)
     - [定理 ME-T2（消息路由安全定理） {#定理-me-t2消息路由安全定理}](#定理-me-t2消息路由安全定理-定理-me-t2消息路由安全定理)
     - [推论 ME-C1（纯 Safe Mediator） {#推论-me-c1纯-safe-mediator}](#推论-me-c1纯-safe-mediator-推论-me-c1纯-safe-mediator)
@@ -34,11 +34,11 @@
   - [Rust 实现与代码示例 {#rust-实现与代码示例}](#rust-实现与代码示例-rust-实现与代码示例)
   - [Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}](#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点 {#edition-2024-关键兼容点}](#edition-2024-关键兼容点-edition-2024-关键兼容点)
-  - [Rust 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
+  - [Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束 {#所有权约束}](#所有权约束-所有权约束)
     - [借用与生命周期约束 {#借用与生命周期约束}](#借用与生命周期约束-借用与生命周期约束)
     - [trait 系统约束 {#trait-系统约束}](#trait-系统约束-trait-系统约束)
-    - [与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
+    - [与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
   - [完整证明 {#完整证明}](#完整证明-完整证明)
     - [形式化论证链 {#形式化论证链}](#形式化论证链-形式化论证链)
   - [形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}](#形式化属性不变式前置后置条件与安全边界-形式化属性不变式前置后置条件与安全边界)
@@ -53,7 +53,7 @@
   - [实现变体 {#实现变体}](#实现变体-实现变体)
   - [反例：常见误用及编译器错误 {#反例常见误用及编译器错误}](#反例常见误用及编译器错误-反例常见误用及编译器错误)
     - [反例 1：组件直接引用彼此 {#反例-1组件直接引用彼此}](#反例-1组件直接引用彼此-反例-1组件直接引用彼此)
-    - [反例 2：Mediator 持有组件可变引用（Mutable Reference）导致借用冲突 {#反例-2mediator-持有组件可变引用导致借用冲突}](#反例-2mediator-持有组件可变引用导致借用冲突-反例-2mediator-持有组件可变引用导致借用冲突)
+    - [反例 2：Mediator 持有组件可变引用导致借用冲突 {#反例-2mediator-持有组件可变引用导致借用冲突}](#反例-2mediator-持有组件可变引用导致借用冲突-反例-2mediator-持有组件可变引用导致借用冲突)
     - [反例 3：channel 关闭后发送 {#反例-3channel-关闭后发送}](#反例-3channel-关闭后发送-反例-3channel-关闭后发送)
   - [选型决策树 {#选型决策树}](#选型决策树-选型决策树)
   - [与 GoF 对比 {#与-gof-对比}](#与-gof-对比-与-gof-对比)
@@ -281,7 +281,7 @@ m.broadcast("hello");
 ## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
-> **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
+> **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/introduction.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
 
 以下示例已在 **Rust 1.97.0+ (Edition 2024)** 语义下校验，使用 `mpsc/broadcast channel、事件总线` 等现代惯用法。
 
@@ -345,7 +345,7 @@ fn main() {
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
-> **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
+> **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/introduction.html)**
 
 ### 所有权约束 {#所有权约束}
 

@@ -100,7 +100,7 @@
 
 > **关键洞察**: Rust 的类型检查 = 为每个节点计算类型 + 生成并求解一组约束。
 >
-> [Rustc Dev Guide — HIR Type checking](https://rustc-dev-guide.rust-lang.org/type-checking.html)(<https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html>)
+> [Rustc Dev Guide — HIR Type checking](https://rustc-dev-guide.rust-lang.org/)(<https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html>)
 
 ---
 (Source: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html))
@@ -424,5 +424,5 @@ fn main() {
 
 > **统一建模要点**：把“回退默认值”看作 solver 输出端的**默认实例化函数** `default(FloatVar) = f32/f64`、`default(NeverVar) = ()/!`。1.97/2024 改动的是这个**默认函数**的取值，而非统一/子类型规则本身；因此受影响的是“求解末尾仍未固定”的变量，而非“已被约束固定”的变量。
 
-> **来源**: [Rust 1.97.0 Release Notes — Compatibility Notes](https://releases.rs/docs/1.97.0/) · [Rust Reference — Type inference](https://doc.rust-lang.org/reference/type-inference.html) · [Rust Reference — The never type](https://doc.rust-lang.org/reference/types/never.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§2.6、§7）
+> **来源**: [Rust 1.97.0 Release Notes — Compatibility Notes](https://releases.rs/docs/1.97.0/) · [Rust Reference — Type inference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference — The never type](https://doc.rust-lang.org/reference/types/never.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§2.6、§7）
 > **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`26_trait_solver_in_rustc.md`](../05_rustc_internals/26_trait_solver_in_rustc.md)

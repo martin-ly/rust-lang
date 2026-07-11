@@ -26,19 +26,19 @@
   - [形式化定义 {#形式化定义}](#形式化定义-形式化定义)
     - [Def 1.1（Strategy 结构） {#def-11strategy-结构}](#def-11strategy-结构-def-11strategy-结构)
     - [Axiom SR1（接口一致公理） {#axiom-sr1接口一致公理}](#axiom-sr1接口一致公理-axiom-sr1接口一致公理)
-    - [Axiom SR2（所有权（Ownership）独立公理） {#axiom-sr2所有权独立公理}](#axiom-sr2所有权独立公理-axiom-sr2所有权独立公理)
+    - [Axiom SR2（所有权独立公理） {#axiom-sr2所有权独立公理}](#axiom-sr2所有权独立公理-axiom-sr2所有权独立公理)
     - [定理 SR-T1（trait 多态安全定理） {#定理-sr-t1trait-多态安全定理}](#定理-sr-t1trait-多态安全定理-定理-sr-t1trait-多态安全定理)
-    - [定理 SR-T2（借用（Borrowing）互斥定理） {#定理-sr-t2借用互斥定理}](#定理-sr-t2借用互斥定理-定理-sr-t2借用互斥定理)
+    - [定理 SR-T2（借用互斥定理） {#定理-sr-t2借用互斥定理}](#定理-sr-t2借用互斥定理-定理-sr-t2借用互斥定理)
     - [推论 SR-C1（纯 Safe Strategy） {#推论-sr-c1纯-safe-strategy}](#推论-sr-c1纯-safe-strategy-推论-sr-c1纯-safe-strategy)
     - [概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}](#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例 {#rust-实现与代码示例}](#rust-实现与代码示例-rust-实现与代码示例)
   - [Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}](#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点 {#edition-2024-关键兼容点}](#edition-2024-关键兼容点-edition-2024-关键兼容点)
-  - [Rust 所有权、借用、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
+  - [Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束 {#所有权约束}](#所有权约束-所有权约束)
     - [借用与生命周期约束 {#借用与生命周期约束}](#借用与生命周期约束-借用与生命周期约束)
     - [trait 系统约束 {#trait-系统约束}](#trait-系统约束-trait-系统约束)
-    - [与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
+    - [与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
   - [完整证明 {#完整证明}](#完整证明-完整证明)
     - [形式化论证链 {#形式化论证链}](#形式化论证链-形式化论证链)
   - [形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}](#形式化属性不变式前置后置条件与安全边界-形式化属性不变式前置后置条件与安全边界)
@@ -52,9 +52,9 @@
   - [相关模式 {#相关模式}](#相关模式-相关模式)
   - [实现变体 {#实现变体}](#实现变体-实现变体)
   - [反例：常见误用及编译器错误 {#反例常见误用及编译器错误}](#反例常见误用及编译器错误-反例常见误用及编译器错误)
-    - [反例 1：引用（Reference）策略生命周期不足 {#反例-1引用策略生命周期不足}](#反例-1引用策略生命周期不足-反例-1引用策略生命周期不足)
+    - [反例 1：引用策略生命周期不足 {#反例-1引用策略生命周期不足}](#反例-1引用策略生命周期不足-反例-1引用策略生命周期不足)
     - [反例 2：策略需要 \&mut 但上下文为 \&self {#反例-2策略需要-mut-但上下文为-self}](#反例-2策略需要-mut-但上下文为-self-反例-2策略需要-mut-但上下文为-self)
-    - [反例 3：泛型（Generics）策略导致代码膨胀 {#反例-3泛型策略导致代码膨胀}](#反例-3泛型策略导致代码膨胀-反例-3泛型策略导致代码膨胀)
+    - [反例 3：泛型策略导致代码膨胀 {#反例-3泛型策略导致代码膨胀}](#反例-3泛型策略导致代码膨胀-反例-3泛型策略导致代码膨胀)
   - [选型决策树 {#选型决策树}](#选型决策树-选型决策树)
   - [与 GoF 对比 {#与-gof-对比}](#与-gof-对比-与-gof-对比)
   - [边界 {#边界}](#边界-边界)
@@ -283,7 +283,7 @@ assert_eq!(ctx.run(), 6);
 ## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
-> **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
+> **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/introduction.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
 
 以下示例已在 **Rust 1.97.0+ (Edition 2024)** 语义下校验，使用 `trait Strategy、泛型或 trait object` 等现代惯用法。
 
@@ -343,7 +343,7 @@ fn main() {
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
-> **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
+> **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/introduction.html)**
 
 ### 所有权约束 {#所有权约束}
 

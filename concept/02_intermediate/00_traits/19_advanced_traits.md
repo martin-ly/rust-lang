@@ -603,7 +603,7 @@ struct Buffer<C: Config> {
 }
 ```
 
-> **修正**: Rust 的关联常量（associated constants）在 trait 中声明，在实现中定义。但**泛型参数**的关联常量不能在类型定义中用于确定数组大小——`[u8; C::MAX_SIZE]` 中 `C` 是泛型参数，编译器无法在单态化（Monomorphization）前知道 `MAX_SIZE` 的具体值。这是 Rust 常量泛化的限制：只有具体类型（如 `[u8; 1024]`）或 const 泛型参数（`[u8; N]`）可用于数组大小。Workaround：1) 使用 `GenericArray`（`typenum` crate，通过类型级数字模拟常量）；2) 使用 `Vec<u8>` 替代数组；3) 使用宏（Macro）为每个具体配置生成代码。这与 C++ 的 `template<size_t N>`（非类型模板参数可用于数组大小）或 Zig 的 `comptime`（编译期常量可用于任何类型位置）不同——Rust 的 const 泛型仍在扩展中。来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs/2000-2000-const-generics.html) · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **修正**: Rust 的关联常量（associated constants）在 trait 中声明，在实现中定义。但**泛型参数**的关联常量不能在类型定义中用于确定数组大小——`[u8; C::MAX_SIZE]` 中 `C` 是泛型参数，编译器无法在单态化（Monomorphization）前知道 `MAX_SIZE` 的具体值。这是 Rust 常量泛化的限制：只有具体类型（如 `[u8; 1024]`）或 const 泛型参数（`[u8; N]`）可用于数组大小。Workaround：1) 使用 `GenericArray`（`typenum` crate，通过类型级数字模拟常量）；2) 使用 `Vec<u8>` 替代数组；3) 使用宏（Macro）为每个具体配置生成代码。这与 C++ 的 `template<size_t N>`（非类型模板参数可用于数组大小）或 Zig 的 `comptime`（编译期常量可用于任何类型位置）不同——Rust 的 const 泛型仍在扩展中。来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html) · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 
 ### 10.6 边界测试：trait alias 与 bound 的冗余（编译错误）
 

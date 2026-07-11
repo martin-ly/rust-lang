@@ -233,7 +233,7 @@ impl rustc_driver::Callbacks for MyCallbacks {
 }
 ```
 
-> **关键洞察**: 自定义 `rustc` 回调是强大的诊断手段，但它将代码绑定到 nightly 编译器内部 API，通常只用于研究和教学工具，不推荐用于生产宏库 (Source: [rustc-dev-guide — Rustc Driver](https://rustc-dev-guide.rust-lang.org/rustc-driver.html))。
+> **关键洞察**: 自定义 `rustc` 回调是强大的诊断手段，但它将代码绑定到 nightly 编译器内部 API，通常只用于研究和教学工具，不推荐用于生产宏库 (Source: [rustc-dev-guide — Rustc Driver](https://rustc-dev-guide.rust-lang.org/))。
 
 ---
 

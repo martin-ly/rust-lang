@@ -33,11 +33,11 @@
   - [Rust 实现与代码示例 {#rust-实现与代码示例}](#rust-实现与代码示例-rust-实现与代码示例)
   - [Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}](#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点 {#edition-2024-关键兼容点}](#edition-2024-关键兼容点-edition-2024-关键兼容点)
-  - [Rust 所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
+  - [Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束 {#所有权约束}](#所有权约束-所有权约束)
     - [借用与生命周期约束 {#借用与生命周期约束}](#借用与生命周期约束-借用与生命周期约束)
     - [trait 系统约束 {#trait-系统约束}](#trait-系统约束-trait-系统约束)
-    - [与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
+    - [与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
   - [完整证明 {#完整证明}](#完整证明-完整证明)
     - [形式化论证链 {#形式化论证链}](#形式化论证链-形式化论证链)
   - [完整场景示例：AST 美化打印 {#完整场景示例ast-美化打印}](#完整场景示例ast-美化打印-完整场景示例ast-美化打印)
@@ -52,7 +52,7 @@
   - [实现变体 {#实现变体}](#实现变体-实现变体)
   - [反例：常见误用及编译器错误 {#反例常见误用及编译器错误}](#反例常见误用及编译器错误-反例常见误用及编译器错误)
     - [反例 1：新增元素类型未实现 visit {#反例-1新增元素类型未实现-visit}](#反例-1新增元素类型未实现-visit-反例-1新增元素类型未实现-visit)
-    - [反例 2：访问者中可变借用（Mutable Borrow）元素 {#反例-2访问者中可变借用元素}](#反例-2访问者中可变借用元素-反例-2访问者中可变借用元素)
+    - [反例 2：访问者中可变借用元素 {#反例-2访问者中可变借用元素}](#反例-2访问者中可变借用元素-反例-2访问者中可变借用元素)
     - [反例 3：遍历中修改元素集合 {#反例-3遍历中修改元素集合}](#反例-3遍历中修改元素集合-反例-3遍历中修改元素集合)
   - [选型决策树 {#选型决策树}](#选型决策树-选型决策树)
   - [与 GoF 对比 {#与-gof-对比}](#与-gof-对比-与-gof-对比)
@@ -269,7 +269,7 @@ impl Visitor for PrintVisitor {
 ## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
-> **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
+> **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/introduction.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
 
 以下示例已在 **Rust 1.97.0+ (Edition 2024)** 语义下校验，使用 `双分派、trait Visitor、enum accept` 等现代惯用法。
 
@@ -341,7 +341,7 @@ fn main() {
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
-> **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
+> **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/introduction.html)**
 
 ### 所有权约束 {#所有权约束}
 

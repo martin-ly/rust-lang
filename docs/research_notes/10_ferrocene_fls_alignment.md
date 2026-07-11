@@ -42,7 +42,7 @@
 | FLS 章节 | 项目文档 | 状态 | 备注 |
 |----------|----------|------|------|
 | [Lexical Elements](https://spec.ferrocene.dev/lexical-elements.html) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | 🔄 | 基础词法说明 |
-| [Syntax](https://spec.ferrocene.dev/syntax.html) | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | 🔄 | 表达式级语法在所有权模型中示例 |
+| [Syntax](https://spec.ferrocene.dev/) | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | 🔄 | 表达式级语法在所有权模型中示例 |
 
 ---
 
@@ -50,10 +50,10 @@
 
 | FLS 章节 | 项目文档 | 状态 | 备注 |
 |----------|----------|------|------|
-| [Types](https://spec.ferrocene.dev/types.html) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | ✅ | 标量、复合、trait 对象 |
+| [Types](https://spec.ferrocene.dev/) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | ✅ | 标量、复合、trait 对象 |
 | [Generics](https://spec.ferrocene.dev/generics.html) | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | ✅ | 泛型参数、约束 |
-| [Traits](https://spec.ferrocene.dev/traits.html) | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | ✅ | trait 定义、实现、关联类型 |
-| [Subtyping](https://spec.ferrocene.dev/subtyping.html) | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | ✅ | 子类型与型变 |
+| [Traits](https://spec.ferrocene.dev/) | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | ✅ | trait 定义、实现、关联类型 |
+| [Subtyping](https://spec.ferrocene.dev/) | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | ✅ | 子类型与型变 |
 
 ---
 
@@ -61,9 +61,9 @@
 
 | FLS 章节 | 项目文档 | 状态 | 备注 |
 |----------|----------|------|------|
-| [Ownership](https://spec.ferrocene.dev/ownership.html) | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | ✅ | 所有权三规则 |
-| [Borrowing](https://spec.ferrocene.dev/borrowing.html) | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ | 借用检查器 |
-| [Lifetimes](https://spec.ferrocene.dev/lifetimes.html) | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | ✅ | 生命周期参数与约束 |
+| [Ownership](https://spec.ferrocene.dev/) | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | ✅ | 所有权三规则 |
+| [Borrowing](https://spec.ferrocene.dev/) | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ | 借用检查器 |
+| [Lifetimes](https://spec.ferrocene.dev/) | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | ✅ | 生命周期参数与约束 |
 
 ---
 
@@ -72,7 +72,7 @@
 | FLS 章节 | 项目文档 | 状态 | 备注 |
 |----------|----------|------|------|
 | [Concurrency](https://spec.ferrocene.dev/concurrency.html) | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | ✅ | Send/Sync |
-| [Unsafe Rust](https://spec.ferrocene.dev/unsafe-rust.html) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) | ✅ | unsafe 操作边界 |
+| [Unsafe Rust](https://spec.ferrocene.dev/) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) | ✅ | unsafe 操作边界 |
 | [Foreign Function Interface](https://spec.ferrocene.dev/ffi.html) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §6 | ✅ | FFI 内存协议 |
 
 ---
@@ -82,8 +82,8 @@
 | FLS 章节 | 项目文档 | 状态 | 备注 |
 |----------|----------|------|------|
 | [Items](https://spec.ferrocene.dev/items.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | module、function、struct、enum 等 |
-| [Modules and Crates](https://spec.ferrocene.dev/modules-and-crates.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | crate 结构与可见性 |
-| [Linkage](https://spec.ferrocene.dev/linkage.html) | [formal_modules/20_linkage_and_symbols.md](formal_modules/20_linkage_and_symbols.md) | ✅ | crate-type、符号可见性 |
+| [Modules and Crates](https://spec.ferrocene.dev/) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | crate 结构与可见性 |
+| [Linkage](https://spec.ferrocene.dev/) | [formal_modules/20_linkage_and_symbols.md](formal_modules/20_linkage_and_symbols.md) | ✅ | crate-type、符号可见性 |
 
 ---
 
@@ -91,7 +91,7 @@
 
 | FLS 章节 | 项目文档 | 状态 | 备注 |
 |----------|----------|------|------|
-| [Notation](https://spec.ferrocene.dev/notation.html) | [10_formal_language_and_proofs.md](10_formal_language_and_proofs.md) | ✅ | 形式化符号与推理规则 |
+| [Notation](https://spec.ferrocene.dev/) | [10_formal_language_and_proofs.md](10_formal_language_and_proofs.md) | ✅ | 形式化符号与推理规则 |
 | [Glossary](https://spec.ferrocene.dev/glossary.html) | [10_glossary.md](10_glossary.md) | ✅ | 术语表 |
 
 ---

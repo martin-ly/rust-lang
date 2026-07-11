@@ -28,22 +28,22 @@
     - [Def 1.1（Decorator 结构） {#def-11decorator-结构}](#def-11decorator-结构-def-11decorator-结构)
     - [Axiom DE1（同接口可叠加公理） {#axiom-de1同接口可叠加公理}](#axiom-de1同接口可叠加公理-axiom-de1同接口可叠加公理)
     - [Axiom DE2（委托链公理） {#axiom-de2委托链公理}](#axiom-de2委托链公理-axiom-de2委托链公理)
-    - [定理 DE-T1（委托借用（Borrowing）安全定理） {#定理-de-t1委托借用安全定理}](#定理-de-t1委托借用安全定理-定理-de-t1委托借用安全定理)
+    - [定理 DE-T1（委托借用安全定理） {#定理-de-t1委托借用安全定理}](#定理-de-t1委托借用安全定理-定理-de-t1委托借用安全定理)
     - [定理 DE-T2（透明性定理） {#定理-de-t2透明性定理}](#定理-de-t2透明性定理-定理-de-t2透明性定理)
     - [推论 DE-C1（纯 Safe Decorator） {#推论-de-c1纯-safe-decorator}](#推论-de-c1纯-safe-decorator-推论-de-c1纯-safe-decorator)
     - [概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}](#概念定义-属性关系-解释论证-层次汇总-概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例 {#rust-实现与代码示例}](#rust-实现与代码示例-rust-实现与代码示例)
   - [Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}](#rust-196--edition-2024-代码示例更新-rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点 {#edition-2024-关键兼容点}](#edition-2024-关键兼容点-edition-2024-关键兼容点)
-  - [Rust 所有权（Ownership）、借用、生命周期（Lifetimes）与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
+  - [Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}](#rust-所有权借用生命周期与-trait-系统约束分析-rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束 {#所有权约束}](#所有权约束-所有权约束)
     - [借用与生命周期约束 {#借用与生命周期约束}](#借用与生命周期约束-借用与生命周期约束)
     - [trait 系统约束 {#trait-系统约束}](#trait-系统约束-trait-系统约束)
-    - [与 Rust 类型系统（Type System）的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
+    - [与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}](#与-rust-类型系统的综合联系-与-rust-类型系统的综合联系)
   - [完整证明 {#完整证明}](#完整证明-完整证明)
     - [形式化论证链 {#形式化论证链}](#形式化论证链-形式化论证链)
     - [与 Rust 类型系统的联系 {#与-rust-类型系统的联系}](#与-rust-类型系统的联系-与-rust-类型系统的联系)
-    - [内存安全（Memory Safety）保证 {#内存安全保证}](#内存安全保证-内存安全保证)
+    - [内存安全保证 {#内存安全保证}](#内存安全保证-内存安全保证)
   - [形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}](#形式化属性不变式前置后置条件与安全边界-形式化属性不变式前置后置条件与安全边界)
     - [不变式（Invariants） {#不变式invariants}](#不变式invariants-不变式invariants)
     - [前置条件（Preconditions） {#前置条件preconditions}](#前置条件preconditions-前置条件preconditions)
@@ -55,7 +55,7 @@
   - [相关模式 {#相关模式}](#相关模式-相关模式)
   - [实现变体 {#实现变体}](#实现变体-实现变体)
   - [反例：常见误用及编译器错误 {#反例常见误用及编译器错误}](#反例常见误用及编译器错误-反例常见误用及编译器错误)
-    - [反例 1：泛型（Generics）装饰器递归类型无限 {#反例-1泛型装饰器递归类型无限}](#反例-1泛型装饰器递归类型无限-反例-1泛型装饰器递归类型无限)
+    - [反例 1：泛型装饰器递归类型无限 {#反例-1泛型装饰器递归类型无限}](#反例-1泛型装饰器递归类型无限-反例-1泛型装饰器递归类型无限)
     - [反例 2：装饰器持有 \&mut 导致借用冲突 {#反例-2装饰器持有-mut-导致借用冲突}](#反例-2装饰器持有-mut-导致借用冲突-反例-2装饰器持有-mut-导致借用冲突)
     - [反例 3：trait object 装饰丢失 Send {#反例-3trait-object-装饰丢失-send}](#反例-3trait-object-装饰丢失-send-反例-3trait-object-装饰丢失-send)
   - [选型决策树 {#选型决策树}](#选型决策树-选型决策树)
@@ -307,7 +307,7 @@ assert_eq!(coffee.cost(), 2.5);
 ## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
-> **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
+> **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/introduction.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
 
 以下示例已在 **Rust 1.97.0+ (Edition 2024)** 语义下校验，使用 `组合 + trait 实现、动态扩展` 等现代惯用法。
 
@@ -363,7 +363,7 @@ fn main() {
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
-> **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
+> **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/introduction.html)**
 
 ### 所有权约束 {#所有权约束}
 

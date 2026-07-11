@@ -883,7 +883,7 @@ for i in 0..1000 {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust 所有权文档](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
-- [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
+- [Rust Reference - Ownership](https://doc.rust-lang.org/reference/introduction.html)
 
 ### 项目内部文档 {#项目内部文档}
 >

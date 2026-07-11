@@ -1,180 +1,17 @@
 {
   "date": "2026-07-11",
-  "scanned": 2243,
-  "bad": 194,
+  "scanned": 2191,
+  "bad": 157,
   "anti_bot_403": 53,
   "by_tier": {
-    "P0": 72,
-    "P1": 9,
-    "P2": 113
+    "P0": 39,
+    "P1": 7,
+    "P2": 111
   },
   "anti_bot_by_tier": {
     "P1": 53
   },
   "bad_list": [
-    {
-      "url": "https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/01_learning/learning_mvp_path.md",
-        "docs/research_notes/software_design_theory/07_crate_architectures/05_bevy_architecture.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/book/ch13-00-functional-features-of-rust.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_iterator.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/book/ch17-02-async-fn-and-messages.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/03_advanced/01_async/02_async.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/book/ch17-04-pin.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/03_advanced/01_async/02_async.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/book/ch17-05-concurrency.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/03_advanced/01_async/02_async.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/book/ch21-00-final-project.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/01_learning/learning_mvp_path.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/nomicon/option-zipper.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/03_advanced/06_low_level_patterns/36_ownership_performance_optimization.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/nomicon/self-referential-structs.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_unsafe_code_guidelines_alignment.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/nomicon/unions.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_unsafe_code_guidelines_alignment.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/reference/editions.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/03_advanced/03_proc_macros/31_production_grade_macro_development.md",
-        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_abstract_factory.md",
-        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_builder.md",
-        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_prototype.md",
-        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_adapter.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/reference/higher-ranked-trait-bounds.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_lifetime_cheatsheet.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/reference/lifetime-meaning.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_abstract_factory.md",
-        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_builder.md",
-        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_prototype.md",
-        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_adapter.md",
-        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_bridge.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/reference/lifetime-rules.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/reference/ownership.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/06_ecosystem/05_systems_and_embedded/08_wasi.md",
-        "docs/02_reference/quick_reference/02_ownership_cheatsheet.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/reference/standard-library-mem.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/03_advanced/02_unsafe/29_memory_model.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/reference/subtyping-and-variance.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_lifetime_cheatsheet.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/reference/type-inference.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/04_formal/00_type_theory/27_type_checking_and_inference.md"
-      ]
-    },
     {
       "url": "https://doc.rust-lang.org/rust-by-example/custom_types/type.html",
       "tier": "P0",
@@ -194,24 +31,6 @@
       ]
     },
     {
-      "url": "https://doc.rust-lang.org/rustc/`",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/05_guides/workflow/01_workflow_theory.md"
-      ]
-    },
-    {
-      "url": "https://doc.rust-lang.org/std/sync.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/07_crate_architectures/19_crossbeam_architecture.md"
-      ]
-    },
-    {
       "url": "https://doc.rust-lang.org/std/ync/atomic",
       "tier": "P0",
       "status": 404,
@@ -227,15 +46,6 @@
       "err": "HTTPError",
       "files": [
         "docs/research_notes/10_i18n_translation_gap_analysis.md"
-      ]
-    },
-    {
-      "url": "https://github.com/rust-lang/rfcs/(pull|issues|blob",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_rfc_to_counterexample_mapping.md"
       ]
     },
     {
@@ -314,44 +124,6 @@
       ]
     },
     {
-      "url": "https://rust-lang.github.io/async-book/02_execution/03_async_lifetimes.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_async_book_alignment.md"
-      ]
-    },
-    {
-      "url": "https://rust-lang.github.io/async-book/04_pinning/01_chapter.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_async_book_alignment.md",
-        "docs/research_notes/10_knowledge_graph_index.md",
-        "docs/research_notes/10_learning_and_interview_alignment.md"
-      ]
-    },
-    {
-      "url": "https://rust-lang.github.io/async-book/04_pinning/index.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/03_advanced/01_async/39_future_and_executor_mechanisms.md"
-      ]
-    },
-    {
-      "url": "https://rust-lang.github.io/async-book/`",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/05_guides/workflow/01_workflow_theory.md"
-      ]
-    },
-    {
       "url": "https://rust-lang.github.io/compiler-team/minutes/design-meeting/2021-03-17-next-generation-trait-solver.html",
       "tier": "P0",
       "status": 404,
@@ -385,15 +157,6 @@
       "err": "HTTPError",
       "files": [
         "concept/00_meta/00_framework/theorem_inference_forest.md"
-      ]
-    },
-    {
-      "url": "https://rust-lang.github.io/rfcs/2000-2000-const-generics.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/02_intermediate/00_traits/19_advanced_traits.md"
       ]
     },
     {
@@ -461,7 +224,7 @@
       ]
     },
     {
-      "url": "https://rust-lang.github.io/rfcs/NNNN-*.html`",
+      "url": "https://rust-lang.github.io/rfcs/NNNN-*.html",
       "tier": "P0",
       "status": 404,
       "err": "HTTPError",
@@ -561,16 +324,6 @@
       ]
     },
     {
-      "url": "https://rustc-dev-guide.rust-lang.org/rustc-driver.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "concept/03_advanced/03_proc_macros/30_macro_debugging_and_diagnostics.md",
-        "concept/06_ecosystem/00_toolchain/68_rustc_driver_and_stable_mir.md"
-      ]
-    },
-    {
       "url": "https://rustc-dev-guide.rust-lang.org/tests/profiling.html",
       "tier": "P0",
       "status": 404,
@@ -580,111 +333,52 @@
       ]
     },
     {
-      "url": "https://rustc-dev-guide.rust-lang.org/type-checking.html",
+      "url": "https://doc.rust-lang.org/reference/items/functions.html",
       "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
+      "status": null,
+      "err": "TimeoutError:The read operation timed out",
       "files": [
-        "concept/04_formal/00_type_theory/27_type_checking_and_inference.md"
+        "concept/01_foundation/00_start/21_effects_and_purity.md",
+        "concept/01_foundation/07_modules_and_items/12_functions.md",
+        "concept/01_foundation/11_quizzes/25_quiz_error_handling.md",
+        "concept/01_foundation/11_quizzes/33_quiz_ownership_borrowing.md",
+        "concept/02_intermediate/03_error_handling/04_error_handling.md"
       ]
     },
     {
-      "url": "https://spec.ferrocene.dev/borrowing.html",
+      "url": "https://rust-lang.github.io/wg-async/",
       "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
+      "status": null,
+      "err": "URLError:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)",
       "files": [
-        "docs/research_notes/10_ferrocene_fls_alignment.md"
+        "concept/07_future/03_preview_features/18_async_drop_preview.md"
       ]
     },
     {
-      "url": "https://spec.ferrocene.dev/lifetimes.html",
+      "url": "https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html",
       "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
+      "status": null,
+      "err": "URLError:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)",
       "files": [
-        "docs/research_notes/10_ferrocene_fls_alignment.md"
+        "concept/06_ecosystem/00_toolchain/70_rustc_bootstrap.md"
       ]
     },
     {
-      "url": "https://spec.ferrocene.dev/linkage.html",
+      "url": "https://rustc-dev-guide.rust-lang.org/building/bootstrapping/writing-tools-in-bootstrap.html",
       "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
+      "status": null,
+      "err": "URLError:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)",
       "files": [
-        "docs/research_notes/10_ferrocene_fls_alignment.md"
+        "concept/06_ecosystem/00_toolchain/70_rustc_bootstrap.md"
       ]
     },
     {
-      "url": "https://spec.ferrocene.dev/modules-and-crates.html",
+      "url": "https://rustc-dev-guide.rust-lang.org/tests/compiletest.html",
       "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
+      "status": null,
+      "err": "URLError:_ssl.c:999: The handshake operation timed out",
       "files": [
-        "docs/research_notes/10_ferrocene_fls_alignment.md"
-      ]
-    },
-    {
-      "url": "https://spec.ferrocene.dev/notation.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_ferrocene_fls_alignment.md"
-      ]
-    },
-    {
-      "url": "https://spec.ferrocene.dev/ownership.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_ferrocene_fls_alignment.md"
-      ]
-    },
-    {
-      "url": "https://spec.ferrocene.dev/subtyping.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_ferrocene_fls_alignment.md"
-      ]
-    },
-    {
-      "url": "https://spec.ferrocene.dev/syntax.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_ferrocene_fls_alignment.md"
-      ]
-    },
-    {
-      "url": "https://spec.ferrocene.dev/traits.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_ferrocene_fls_alignment.md"
-      ]
-    },
-    {
-      "url": "https://spec.ferrocene.dev/types.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_ferrocene_fls_alignment.md"
-      ]
-    },
-    {
-      "url": "https://spec.ferrocene.dev/unsafe-rust.html",
-      "tier": "P0",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_ferrocene_fls_alignment.md"
+        "concept/06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md"
       ]
     },
     {
@@ -759,33 +453,6 @@
       ]
     },
     {
-      "url": "https://standards.ieee.org/standard/1012-2012.html",
-      "tier": "P1",
-      "status": null,
-      "err": "TimeoutError:The read operation timed out",
-      "files": [
-        "concept/00_meta/00_framework/todos.md"
-      ]
-    },
-    {
-      "url": "https://standards.ieee.org/standard/754-2019.html",
-      "tier": "P1",
-      "status": null,
-      "err": "TimeoutError:The read operation timed out",
-      "files": [
-        "concept/01_foundation/03_values_and_references/05_reference_semantics.md"
-      ]
-    },
-    {
-      "url": "https://crates.io/svelte/`",
-      "tier": "P2",
-      "status": 400,
-      "err": "HTTPError",
-      "files": [
-        "concept/06_ecosystem/07_security_and_cryptography/19_security_practices.md"
-      ]
-    },
-    {
       "url": "https://docs.rs/crate/latest/crate/",
       "tier": "P2",
       "status": 400,
@@ -819,15 +486,6 @@
       "err": "HTTPError",
       "files": [
         "docs/research_notes/10_version_evolution_alignment.md"
-      ]
-    },
-    {
-      "url": "https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/",
-      "tier": "P2",
-      "status": 404,
-      "err": "HTTPError",
-      "files": [
-        "docs/02_reference/quick_reference/02_rust_190_to_193_features_cheatsheet.md"
       ]
     },
     {
@@ -1233,6 +891,15 @@
       "err": "HTTPError",
       "files": [
         "docs/research_notes/10_cicd_supply_chain_alignment.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/svelte/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/07_security_and_cryptography/19_security_practices.md"
       ]
     },
     {
@@ -1802,15 +1469,6 @@
       "err": "UnicodeEncodeError:'ascii' codec can't encode character '\\uff08' in position 9: ordinal not in range(128)",
       "files": [
         "concept/03_advanced/06_low_level_patterns/18_network_programming.md"
-      ]
-    },
-    {
-      "url": "https://mirrors.example.com/crates.io-index/",
-      "tier": "P2",
-      "status": null,
-      "err": "URLError:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)",
-      "files": [
-        "concept/06_ecosystem/01_cargo/61_cargo_source_replacement.md"
       ]
     },
     {
