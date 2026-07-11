@@ -167,16 +167,18 @@ cargo test --workspace
 # mdbook 构建（输出到 book/，不应提交）
 mdbook build
 
-# 本地一键运行全部 9 个质量门
+# 本地一键运行全部 16 个质量门（10 阻断 + 6 语义观察）
 bash scripts/run_quality_gates.sh
 
 # 安装 pre-commit hook（会在每次 commit 前自动跑重叠/i18n/死链检查）
 bash scripts/git_hooks/install.sh
 ```
 
-### 5.1 CI 九大质量门
+### 5.1 CI 质量门（16 项：10 阻断 + 6 语义观察）
 
-所有合并到 `main`/`master` 的变更必须通过以下 9 个质量门：
+所有合并到 `main`/`master` 的变更必须通过以下 **10 个阻断质量门**；另有 **6 个语义观察门**（warning，不阻断，默认 exit 0，加 `--strict` 可转阻断）持续追踪语义健康：
+
+**阻断门（10）**：
 
 1. `cargo check --workspace`
 2. `cargo test --workspace --quiet`
@@ -184,9 +186,20 @@ bash scripts/git_hooks/install.sh
 4. `cargo audit --no-fetch`
 5. `cargo vet --locked`
 6. `mdbook build`
-7. `python scripts/kb_auditor.py --link-check`
+7. `python scripts/kb_auditor.py`（死链/跨层/模板化 ⟹，EXIT 非 0 即阻断）
 8. `python scripts/detect_content_overlap.py`
 9. `python scripts/add_bilingual_annotations.py --mode check-only`
+10. `mermaid` 语法检查（CI job；本地见 `scripts/run_quality_gates.sh`）
+
+**语义观察门（6，非阻断）**：
+11. `python scripts/check_metadata_consistency.py`（元数据 D1–D6）
+12. `python scripts/detect_content_overlap_v2.py --budget 999999`（段落级重叠 v2）
+13. `python scripts/check_topology_quality.py`（atlas 拓扑 T1–T6）
+14. `python scripts/check_kg_shapes.py`（KG SHACL/形态）
+15. `python scripts/semantic_health.py`（综合语义健康分）
+16. `python scripts/check_concept_authority_coverage.py`（concept 权威层国际化权威来源覆盖率）
+
+> 说明：语义观察门用于“可机器复核的语义趋势”，不因单项退化阻断 PR；但当任一观察门指标显著恶化时，应在 PR 描述中说明原因与后续治理计划。权威覆盖门（16）当前基线为 concept/ 真内容页 any=100%、none=0、核心 L1–L4 无 P0 缺口=0。
 
 ---
 

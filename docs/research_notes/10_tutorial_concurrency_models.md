@@ -27,3 +27,15 @@
 | 异步编程 | [`concept/03_advanced/01_async/02_async.md`](../../concept/03_advanced/01_async/02_async.md) |
 | 所有权 | [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
 | 形式化视角 | [`concept/04_formal/02_separation_logic/04_rustbelt.md`](../../concept/04_formal/02_separation_logic/04_rustbelt.md) |
+
+---
+
+## 权威来源（References · 国际权威对齐）
+
+> 仅追加来源链接以闭合权威覆盖，不改本文正文；通用概念请以 `concept/` 权威页为准（AGENTS.md §2）。
+
+- **P0 官方**: <https://doc.rust-lang.org/book/ch16-00-concurrency.html>
+- **P0 Reference — Send/Sync**: <https://doc.rust-lang.org/reference/>
+- **P0 Nomicon — Concurrency**: <https://doc.rust-lang.org/nomicon/>
+- **P1 RustBelt — Data Race Freedom**: <https://plv.mpi-sws.org/rustbelt/>
+- **P2 tokio**: <https://docs.rs/tokio/>

@@ -1,5 +1,10 @@
 # TRPL 3rd Ed 章节映射表
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为 `docs/` 侧 **TRPL 3rd Ed → `concept/` 逐章映射权威页**（[`concept/00_meta/trpl_3rd_ed_mapping.md`](../../concept/00_meta/trpl_3rd_ed_mapping.md) 为重定向 stub 指向本文件）。表中各 Rust 概念的深度解释以其对应的 `concept/` 权威页为准；按能力阶段的学习路径总览见 [`concept/00_meta/04_navigation/learning_mvp_path.md`](../../concept/00_meta/04_navigation/learning_mvp_path.md)。
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留 TRPL 章节到 concept 页的映射关系、覆盖缺口（gap）标注与使用建议等独特内容，不重复各 concept 页中的概念定义、规则与定理推导。
+
 > **EN**: TRPL 3rd Edition Chapter Mapping Table
 > **Summary**: Maps each chapter of *The Rust Programming Language* 3rd Edition to the corresponding `concept/` authority page(s) in this knowledge base, with notes on coverage gaps.
 > **Rust 版本**: 1.97.0+ (Edition 2024)

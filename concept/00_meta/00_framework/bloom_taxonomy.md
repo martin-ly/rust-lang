@@ -8,6 +8,24 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
+## 📑 目录
+
+- [Bloom Taxonomy（Bloom 分类法）](#bloom-taxonomybloom-分类法)
+  - [📑 目录](#-目录)
+  - [10.4 边界测试：Bloom 层级 L5-L7 的形式化定义与 Rust 概念映射（认知陷阱）](#104-边界测试bloom-层级-l5-l7-的形式化定义与-rust-概念映射认知陷阱)
+  - [Augmented Cognition Framework (ACF) 2026 集成](#augmented-cognition-framework-acf-2026-集成)
+    - [双模式认知结构](#双模式认知结构)
+    - [L8: Orchestration（编排）— 第八层级](#l8-orchestration编排-第八层级)
+    - [本知识体系的 ACF 对齐](#本知识体系的-acf-对齐)
+  - [相关概念文件](#相关概念文件)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：本文档《Bloom Taxonomy（Bloom 分类法）》在 Rust 知识体系中属于哪一层级的元数据？（理解层）](#测验-1本文档bloom-taxonomybloom-分类法在-rust-知识体系中属于哪一层级的元数据理解层)
+    - [测验 2：《Bloom Taxonomy（Bloom 分类法）》的主要用途是什么？（理解层）](#测验-2bloom-taxonomybloom-分类法的主要用途是什么理解层)
+    - [测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）](#测验-3元数据层文档能否替代-l1-l7-的核心概念学习理解层)
+
 ## 10.4 边界测试：Bloom 层级 L5-L7 的形式化定义与 Rust 概念映射（认知陷阱）
 
 ```rust,ignore

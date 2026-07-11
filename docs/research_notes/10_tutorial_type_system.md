@@ -28,3 +28,13 @@
 | 模式匹配 | [`concept/01_foundation/04_control_flow/40_patterns.md`](../../concept/01_foundation/04_control_flow/40_patterns.md) |
 | 高级类型 | [`concept/02_intermediate/04_types_and_conversions/20_type_system_advanced.md`](../../concept/02_intermediate/04_types_and_conversions/20_type_system_advanced.md) |
 | 形式化视角 | [`concept/04_formal/00_type_theory/50_type_system_reference.md`](../../concept/04_formal/00_type_theory/50_type_system_reference.md) |
+
+---
+
+## 权威来源（References · 国际权威对齐）
+
+> 仅追加来源链接以闭合权威覆盖，不改本文正文；通用概念请以 `concept/` 权威页为准（AGENTS.md §2）。
+
+- **P0 Reference — Types**: <https://doc.rust-lang.org/reference/types.html>
+- **P0 RFCs**: <https://rust-lang.github.io/rfcs/>
+- **P1 TAPL (Pierce)**: <https://www.cis.upenn.edu/~bcpierce/tapl/>

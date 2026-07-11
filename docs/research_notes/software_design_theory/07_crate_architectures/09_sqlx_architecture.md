@@ -13,3 +13,13 @@
 >
 > - [数据库访问](../../../../concept/06_ecosystem/06_data_and_distributed/23_database_access.md)
 > - [数据库系统](../../../../concept/06_ecosystem/06_data_and_distributed/37_database_systems.md)
+
+---
+
+## 权威来源（References · 国际权威对齐）
+
+> 仅追加来源链接以闭合权威覆盖，不改本文正文；通用概念请以 `concept/` 权威页为准（AGENTS.md §2）。
+
+- **P2 SQLx (docs.rs)**: <https://docs.rs/sqlx/>
+- **P2 SQLx 官方**: <https://github.com/launchbadge/sqlx>
+- **P2 SeaQL**: <https://www.sea-ql.org/>

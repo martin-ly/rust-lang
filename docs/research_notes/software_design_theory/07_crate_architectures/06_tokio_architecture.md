@@ -13,3 +13,13 @@
 >
 > - [异步（Async）编程](../../../../concept/03_advanced/01_async/02_async.md)
 > - [并发编程](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
+
+---
+
+## 权威来源（References · 国际权威对齐）
+
+> 仅追加来源链接以闭合权威覆盖，不改本文正文；通用概念请以 `concept/` 权威页为准（AGENTS.md §2）。
+
+- **P2 tokio (docs.rs)**: <https://docs.rs/tokio/>
+- **P2 tokio 官方**: <https://tokio.rs/>
+- **P0 Reference**: <https://doc.rust-lang.org/reference/>

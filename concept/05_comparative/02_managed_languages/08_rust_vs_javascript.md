@@ -682,3 +682,14 @@ Rust 模块（Module）系统是编译期静态的，路径和可见性由编译
 ### 反命题与边界
 
 > **反命题**: "Rust vs JavaScript：系统编程与脚本执行的范式差异 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 权威来源（References · 跨语言国际权威对齐）
+
+> 仅追加被对比语言的官方权威入口与 Rust 对照，闭合跨语言对标覆盖；不改本文正文（AGENTS.md §2）。
+
+- **MDN Web Docs（JavaScript）**: <https://developer.mozilla.org/en-US/docs/Web/JavaScript>
+- **TC39（ECMAScript 标准）**: <https://tc39.es/>
+- **Rust Reference（对照）**: <https://doc.rust-lang.org/reference/>
+- **TRPL（对照）**: <https://doc.rust-lang.org/book/title-page.html>

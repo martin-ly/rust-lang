@@ -13,3 +13,13 @@
 >
 > - [Web 框架生态](../../../../concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md)
 > - [异步（Async）编程](../../../../concept/03_advanced/01_async/02_async.md)
+
+---
+
+## 权威来源（References · 国际权威对齐）
+
+> 仅追加来源链接以闭合权威覆盖，不改本文正文；通用概念请以 `concept/` 权威页为准（AGENTS.md §2）。
+
+- **P2 axum (docs.rs)**: <https://docs.rs/axum/>
+- **P2 tokio (docs.rs)**: <https://docs.rs/tokio/>
+- **P2 hyper (docs.rs)**: <https://docs.rs/hyper/>

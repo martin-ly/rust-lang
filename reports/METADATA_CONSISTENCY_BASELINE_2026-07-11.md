@@ -6,12 +6,12 @@
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 65 | 13.7% | >0 | FAIL |
 | D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 103 (基=297) | 21.6% | >=5% | FAIL |
-| D3 关键字段同文件重声明 | 88 | 18.5% | >0 | FAIL |
+| D3 关键字段同文件重声明 | 71 | 14.9% | >0 | FAIL |
 | D4 文首块 Rust 版本号自矛盾 | 1 | 0.2% | >0 | FAIL |
 | D5 稳定层正文残留 nightly/preview/unstable | 113 | 23.7% | >0 | FAIL |
 | D6 Summary 低信息量模板套话 | 109 | 22.9% | >=3% | FAIL |
 
-**受影响文件总数**: 304 / 476
+**受影响文件总数**: 301 / 476
 
 ## 各类 Top 样例
 
@@ -45,7 +45,7 @@
 - `concept/03_advanced/02_process_ipc/02_advanced_process_management.md` — A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集
 - `concept/03_advanced/02_process_ipc/03_async_process_management.md` — A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集
 
-### D3 关键字段同文件重声明（88）
+### D3 关键字段同文件重声明（71）
 
 - `concept/00_meta/03_audit/asp_marking_guide.md` — Bloom 层级 声明 2 次: ['Meta', 'L2-L6']
 - `concept/00_meta/03_audit/grading_system.md` — 内容分级 声明 2 次: ['[综述级]', '[实验级]']
@@ -98,7 +98,7 @@
 
 - D1 Bloom互斥 65 (>0)
 - D2 A/S/P脱节 103/297 (>=5%)
-- D3 字段重声明 88 (>0)
+- D3 字段重声明 71 (>0)
 - D4 版本自矛盾 1 (>0)
 - D5 稳定层nightly残留 113 (>0)
 - D6 Summary套话 109 (22.9%>=3%)

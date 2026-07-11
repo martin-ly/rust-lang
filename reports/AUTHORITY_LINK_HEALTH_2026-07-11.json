@@ -1,0 +1,2325 @@
+{
+  "date": "2026-07-11",
+  "scanned": 2243,
+  "bad": 247,
+  "by_tier": {
+    "P0": 72,
+    "P1": 62,
+    "P2": 113
+  },
+  "bad_list": [
+    {
+      "url": "https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/01_learning/learning_mvp_path.md",
+        "docs/research_notes/software_design_theory/07_crate_architectures/05_bevy_architecture.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/book/ch13-00-functional-features-of-rust.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_iterator.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/book/ch17-02-async-fn-and-messages.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/01_async/02_async.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/book/ch17-04-pin.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/01_async/02_async.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/book/ch17-05-concurrency.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/01_async/02_async.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/book/ch21-00-final-project.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/01_learning/learning_mvp_path.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/nomicon/option-zipper.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/06_low_level_patterns/36_ownership_performance_optimization.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/nomicon/self-referential-structs.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_unsafe_code_guidelines_alignment.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/nomicon/unions.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_unsafe_code_guidelines_alignment.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/reference/editions.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/03_proc_macros/31_production_grade_macro_development.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_abstract_factory.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_builder.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_prototype.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_adapter.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/reference/higher-ranked-trait-bounds.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_lifetime_cheatsheet.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/reference/lifetime-meaning.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_abstract_factory.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_builder.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_prototype.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_adapter.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_bridge.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/reference/lifetime-rules.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/reference/ownership.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/05_systems_and_embedded/08_wasi.md",
+        "docs/02_reference/quick_reference/02_ownership_cheatsheet.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/reference/standard-library-mem.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/02_unsafe/29_memory_model.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/reference/subtyping-and-variance.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_lifetime_cheatsheet.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/reference/type-inference.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/04_formal/00_type_theory/27_type_checking_and_inference.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/rust-by-example/custom_types/type.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/07_modules_and_items/43_type_aliases.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/rust-by-example/std_misc/net.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/04_web_and_networking/38_network_protocols.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/rustc/`",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/05_guides/workflow/01_workflow_theory.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/std/sync.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/19_crossbeam_architecture.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/std/ync/atomic",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/00_concurrency/01_concurrency.md"
+      ]
+    },
+    {
+      "url": "https://github.com/rust-lang-cn/book",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_i18n_translation_gap_analysis.md"
+      ]
+    },
+    {
+      "url": "https://github.com/rust-lang/rfcs/(pull|issues|blob",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_rfc_to_counterexample_mapping.md"
+      ]
+    },
+    {
+      "url": "https://github.com/rust-lang/rfcs/pull/9000",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/03_guides/03_quic_http3_guide.md"
+      ]
+    },
+    {
+      "url": "https://github.com/rust-lang/rfcs/pull/9114",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/03_guides/03_quic_http3_guide.md"
+      ]
+    },
+    {
+      "url": "https://github.com/rust-lang/rust-lang-learning/tree/main/crates/c06_async",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/22_redis_architecture.md",
+        "docs/research_notes/software_design_theory/07_crate_architectures/39_salvo_architecture.md",
+        "docs/research_notes/software_design_theory/07_crate_architectures/40_ntex_architecture.md",
+        "docs/research_notes/software_design_theory/07_crate_architectures/41_askama_architecture.md",
+        "docs/research_notes/software_design_theory/07_crate_architectures/42_maud_architecture.md"
+      ]
+    },
+    {
+      "url": "https://github.com/rust-lang/rust-lang-learning/tree/main/crates/c08_algorithms",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/35_ort_architecture.md",
+        "docs/research_notes/software_design_theory/07_crate_architectures/36_tract_architecture.md"
+      ]
+    },
+    {
+      "url": "https://github.com/rust-lang/rust-lang-learning/tree/main/crates/c10_networks",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/26_kafka_architecture.md",
+        "docs/research_notes/software_design_theory/07_crate_architectures/27_kube_rs_architecture.md",
+        "docs/research_notes/software_design_theory/07_crate_architectures/28_lapin_architecture.md",
+        "docs/research_notes/software_design_theory/07_crate_architectures/37_aws_sdk_architecture.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/07_future/03_preview_features/45_std_autodiff_preview.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/api-guidelines/safety.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_abstract_factory.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_builder.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_prototype.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_adapter.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_bridge.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/async-book/02_execution/03_async_lifetimes.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_async_book_alignment.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/async-book/04_pinning/01_chapter.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_async_book_alignment.md",
+        "docs/research_notes/10_knowledge_graph_index.md",
+        "docs/research_notes/10_learning_and_interview_alignment.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/async-book/04_pinning/index.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/01_async/39_future_and_executor_mechanisms.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/async-book/`",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/05_guides/workflow/01_workflow_theory.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/compiler-team/minutes/design-meeting/2021-03-17-next-generation-trait-solver.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/04_research/04_next_generation_trait_solver.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rfcs/0000-safety-tags.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/00_meta/02_sources/international_authority_index.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rfcs/1590-generic-associated-types.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_learning_and_interview_alignment.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rfcs/1665.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/00_meta/00_framework/theorem_inference_forest.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rfcs/2000-2000-const-generics.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/00_traits/19_advanced_traits.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rfcs/2616-iterable.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/03_practice/03_project_11_web_server.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rfcs/2645-transparent-enums.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_rfc_alignment_index.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rfcs/3101-reserved-prefix.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_rfc_alignment_index.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rfcs/3185-async-drop.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_rfc_alignment_index.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rfcs/3271-rustdoc-json.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/00_toolchain/77_rustdoc_196_changes.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rfcs/3516-gen-blocks.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_async_ecosystem_alignment.md",
+        "docs/research_notes/10_version_evolution_alignment.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rfcs/3560-alignment.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/04_rust_language_feature_comprehensive_inventory_2026.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rfcs/NNNN-*.html`",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_rfc_to_counterexample_mapping.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rust-formal-methods/",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_authoritative_source_alignment_network.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rust-project-goals/2024h2/formal-methods.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/04_formal/04_model_checking/05_verification_toolchain.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rust-project-goals/2025h1/Rust-for-Linux.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/06_data_and_distributed/04_application_domains.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/rust-project-goals/2025h1/const-traits.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/07_future/03_preview_features/04_effects_system.md"
+      ]
+    },
+    {
+      "url": "https://rust-lang.github.io/unsafe-code-guidelines/reference/types.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/04_types_and_conversions/35_unions.md",
+        "concept/03_advanced/07_unsafe_internals/37_unsafe_collections_internals.md"
+      ]
+    },
+    {
+      "url": "https://rustc-dev-guide.rust-lang.org/backend/backend.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md"
+      ]
+    },
+    {
+      "url": "https://rustc-dev-guide.rust-lang.org/backend/mono.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md"
+      ]
+    },
+    {
+      "url": "https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/00_toolchain/70_rustc_bootstrap.md"
+      ]
+    },
+    {
+      "url": "https://rustc-dev-guide.rust-lang.org/codegen/implicit-caller-location.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/03_error_handling/04_error_handling.md"
+      ]
+    },
+    {
+      "url": "https://rustc-dev-guide.rust-lang.org/diagnostics/lint-guidelines.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/00_toolchain/69_compiler_diagnostics_and_ui_tests.md"
+      ]
+    },
+    {
+      "url": "https://rustc-dev-guide.rust-lang.org/rustc-driver.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/03_proc_macros/30_macro_debugging_and_diagnostics.md",
+        "concept/06_ecosystem/00_toolchain/68_rustc_driver_and_stable_mir.md"
+      ]
+    },
+    {
+      "url": "https://rustc-dev-guide.rust-lang.org/tests/profiling.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/00_toolchain/71_compiler_testing.md"
+      ]
+    },
+    {
+      "url": "https://rustc-dev-guide.rust-lang.org/type-checking.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/04_formal/00_type_theory/27_type_checking_and_inference.md"
+      ]
+    },
+    {
+      "url": "https://spec.ferrocene.dev/borrowing.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_ferrocene_fls_alignment.md"
+      ]
+    },
+    {
+      "url": "https://spec.ferrocene.dev/lifetimes.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_ferrocene_fls_alignment.md"
+      ]
+    },
+    {
+      "url": "https://spec.ferrocene.dev/linkage.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_ferrocene_fls_alignment.md"
+      ]
+    },
+    {
+      "url": "https://spec.ferrocene.dev/modules-and-crates.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_ferrocene_fls_alignment.md"
+      ]
+    },
+    {
+      "url": "https://spec.ferrocene.dev/notation.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_ferrocene_fls_alignment.md"
+      ]
+    },
+    {
+      "url": "https://spec.ferrocene.dev/ownership.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_ferrocene_fls_alignment.md"
+      ]
+    },
+    {
+      "url": "https://spec.ferrocene.dev/subtyping.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_ferrocene_fls_alignment.md"
+      ]
+    },
+    {
+      "url": "https://spec.ferrocene.dev/syntax.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_ferrocene_fls_alignment.md"
+      ]
+    },
+    {
+      "url": "https://spec.ferrocene.dev/traits.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_ferrocene_fls_alignment.md"
+      ]
+    },
+    {
+      "url": "https://spec.ferrocene.dev/types.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_ferrocene_fls_alignment.md"
+      ]
+    },
+    {
+      "url": "https://spec.ferrocene.dev/unsafe-rust.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_ferrocene_fls_alignment.md"
+      ]
+    },
+    {
+      "url": "https://cacm.acm.org/",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/05_comparative/00_paradigms/03_paradigm_matrix.md"
+      ]
+    },
+    {
+      "url": "https://cacm.acm.org/magazines/2021/4/251364-safe-systems-programming-in-rust/",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/formal_methods/10_ownership_model.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/00_meta/03_audit/audit_checklist.md",
+        "concept/05_comparative/01_systems_languages/02_rust_vs_go.md",
+        "docs/00_meta/00_annual_review_template.md",
+        "docs/00_meta/00_content_reconstruction_plan_2026.md",
+        "docs/00_meta/00_docs_reorganization_complete.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1109/TSE.1982.235252",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/03_design_patterns/41_workflow_theory.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/1273496.1273513",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/30_meilisearch_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/138403.138440",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_advanced_data_structures_guide.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/143165.143169",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/00_start/21_effects_and_purity.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/1640089.1640095",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/03_design_patterns/02_patterns.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/2452376.2452396",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/06_low_level_patterns/20_stream_processing_semantics.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/248052.248106",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/00_concurrency/16_lock_free.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/2517349.2522738",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/06_low_level_patterns/20_stream_processing_semantics.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/2628136.2628161",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/00_start/21_effects_and_purity.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/263690.263806",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/30_meilisearch_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/2660193.2660205",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/33_sentry_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/2674005.2674994",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_cache_eviction_policies_guide.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/2741948.2741950",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/34_metrics_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3093744.3093746",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/28_lapin_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3149.214121",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/06_data_and_distributed/50_distributed_consensus.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3158154",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "concept/04_formal/00_type_theory/02_type_theory.md",
+        "concept/04_formal/01_ownership_logic/01_linear_logic.md",
+        "concept/04_formal/01_ownership_logic/03_ownership_formal.md",
+        "concept/04_formal/02_separation_logic/04_rustbelt.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3186725",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/32_vector_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3190508.3190528",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/34_metrics_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/324133.324234",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/13_rayon_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3290380",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/04_formal/00_type_theory/02_type_theory.md",
+        "concept/04_formal/01_ownership_logic/01_linear_logic.md",
+        "concept/04_formal/01_ownership_logic/03_ownership_formal.md",
+        "concept/04_formal/02_separation_logic/04_rustbelt.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3296957.3190648",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/31_surrealdb_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3360573",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3371073",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3371109",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3473597",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3510457.3513031",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3547647",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/355592.365646",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/00_start/34_pl_prerequisites.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/356635.356640",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/10_performance/15_performance_optimization.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/357172.357176",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/06_data_and_distributed/50_distributed_consensus.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3591283",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3591285",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/00_traits/01_traits.md",
+        "docs/05_guides/05_verus_practical_guide.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3656422",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3689738",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/04_formal/03_operational_semantics/17_operational_semantics.md",
+        "concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3704886",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3735592",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/567446.567462",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/03_design_patterns/41_workflow_theory.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/582153.582176",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/01_generics/02_generics.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/6041.6042",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/02_type_system/22_data_abstraction_spectrum.md",
+        "concept/01_foundation/03_values_and_references/19_value_vs_reference_semantics.md",
+        "concept/02_intermediate/01_generics/02_generics.md",
+        "concept/04_formal/00_type_theory/02_type_theory.md",
+        "concept/04_formal/00_type_theory/21_type_semantics.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/74878.74880",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/05_comparative/00_paradigms/03_paradigm_matrix.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/75277.75305",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/01_generics/02_generics.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/78973.78977",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_advanced_data_structures_guide.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.5555/2385452",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/04_control_flow/41_statements_and_expressions.md",
+        "concept/01_foundation/10_testing_basics/16_testing_basics.md",
+        "concept/03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md",
+        "concept/03_advanced/00_concurrency/21_quiz_concurrency_async.md",
+        "concept/03_advanced/01_async/06_pin_unpin.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.5555/2488256.2488257",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/33_sentry_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/book/10.5555/1243380",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/04_formal/03_operational_semantics/15_hoare_logic.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/book/10.5555/2385452",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/00_concurrency/10_concurrency_patterns.md",
+        "concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md",
+        "concept/03_advanced/00_concurrency/16_lock_free.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/pdf/10.1145/3547647",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_research_methodology.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/pdf/10.1145/3735592",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/formal_methods/00_completeness_gaps.md",
+        "docs/research_notes/formal_methods/10_borrow_checker_proof.md",
+        "docs/research_notes/formal_methods/10_ownership_model.md",
+        "docs/research_notes/formal_methods/README.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/journal/csur",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/05_comparative/00_paradigms/03_paradigm_matrix.md"
+      ]
+    },
+    {
+      "url": "https://queue.acm.org/detail.cfm?id=2898444",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/27_kube_rs_architecture.md"
+      ]
+    },
+    {
+      "url": "https://aeneas-verification.github.io/",
+      "tier": "P1",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/00_archive_link_audit_report.md",
+        "docs/research_notes/10_00_comprehensive_summary.md",
+        "docs/research_notes/10_00_organization_and_navigation.md",
+        "docs/research_notes/10_academic_papers_alignment.md",
+        "docs/research_notes/10_application_trees.md"
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2026.05.08",
+      "tier": "P1",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md"
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2501.xxxxx",
+      "tier": "P1",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/07_future/04_research_and_experimental/29_ebpf_rust.md"
+      ]
+    },
+    {
+      "url": "https://plv.mpi-sws.org/rustbelt/rustbelt.pdf",
+      "tier": "P1",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_lifetime_cheatsheet.md"
+      ]
+    },
+    {
+      "url": "https://plv.mpi-sws.org/semantics-of-memory-safety/",
+      "tier": "P1",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+      ]
+    },
+    {
+      "url": "https://ieeexplore.ieee.org/",
+      "tier": "P1",
+      "status": 418,
+      "err": "HTTPError",
+      "files": [
+        "concept/05_comparative/README.md",
+        "docs/01_learning/01_cross_module_learning_roadmap_2025_10_25.md",
+        "docs/01_learning/01_learning_path_guide_2025_10_24.md",
+        "docs/02_reference/02_error_code_mapping.md",
+        "docs/02_reference/02_standard_library_comprehensive_analysis_2025_12_25.md"
+      ]
+    },
+    {
+      "url": "https://aeneas-verif.org/",
+      "tier": "P1",
+      "status": null,
+      "err": "URLError:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)",
+      "files": [
+        "docs/research_notes/10_authoritative_alignment_gap_matrix.md"
+      ]
+    },
+    {
+      "url": "https://standards.ieee.org/standard/1012-2012.html",
+      "tier": "P1",
+      "status": null,
+      "err": "TimeoutError:The read operation timed out",
+      "files": [
+        "concept/00_meta/00_framework/todos.md"
+      ]
+    },
+    {
+      "url": "https://standards.ieee.org/standard/754-2019.html",
+      "tier": "P1",
+      "status": null,
+      "err": "TimeoutError:The read operation timed out",
+      "files": [
+        "concept/01_foundation/03_values_and_references/05_reference_semantics.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/svelte/`",
+      "tier": "P2",
+      "status": 400,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/07_security_and_cryptography/19_security_practices.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/crate/latest/crate/",
+      "tier": "P2",
+      "status": 400,
+      "err": "HTTPError",
+      "files": [
+        "concept/07_future/00_version_tracking/05_rust_version_tracking.md"
+      ]
+    },
+    {
+      "url": "https://blog.rust-lang.org/2023/06/01/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/00_meta/00_framework/decidability_spectrum.md"
+      ]
+    },
+    {
+      "url": "https://blog.rust-lang.org/2024/12/19/Rust-1.92.0.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/02_reference/02_standard_library_comprehensive_analysis_2025_12_25.md"
+      ]
+    },
+    {
+      "url": "https://blog.rust-lang.org/2025/12/04/Rust-1.96.1.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_version_evolution_alignment.md"
+      ]
+    },
+    {
+      "url": "https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/02_reference/quick_reference/02_rust_190_to_193_features_cheatsheet.md"
+      ]
+    },
+    {
+      "url": "https://blog.rust-lang.org/2026/05/14/Rust-1.95.0.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/03_guides/03_let_chains_guide.md"
+      ]
+    },
+    {
+      "url": "https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md"
+      ]
+    },
+    {
+      "url": "https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/07_future/03_preview_features/04_effects_system.md"
+      ]
+    },
+    {
+      "url": "https://crates.io",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/02_core_crates/03_core_crates.md",
+        "concept/06_ecosystem/08_formal_verification/44_formal_ecosystem_tower.md",
+        "concept/07_future/00_version_tracking/rust_1_90_stabilized.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/03_error_handling/04_error_handling.md",
+        "concept/03_advanced/00_concurrency/01_concurrency.md",
+        "concept/03_advanced/02_process_ipc/08_process_performance_engineering.md",
+        "concept/03_advanced/02_process_ipc/10_modern_process_libraries.md",
+        "concept/03_advanced/02_unsafe/03_unsafe.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/categories/database",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "knowledge/06_ecosystem/databases/README.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/askama",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/41_askama_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/cached",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_cache_eviction_policies_guide.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/cargo-local-registry",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/01_cargo/61_cargo_source_replacement.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/dynosaur",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/01_async/02_async.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/effect-monad",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/03_design_patterns/39_frontier_research_and_innovative_patterns.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/frunk",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/01_generics/39_type_level_programming.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/generic-array",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/01_generics/39_type_level_programming.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/kube",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/27_kube_rs_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/lapin",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/28_lapin_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/lru",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_cache_eviction_policies_guide.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/maud",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/42_maud_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/meilisearch-sdk",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/30_meilisearch_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/metrics",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/34_metrics_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/metrics-exporter-prometheus",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/34_metrics_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/mongodb",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/23_mongodb_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/ntex",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/40_ntex_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/ort",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/35_ort_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/q1tsim",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/11_domain_applications/51_quantum_computing_rust.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/qforge",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/11_domain_applications/51_quantum_computing_rust.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/qip",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/11_domain_applications/51_quantum_computing_rust.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/quantrs2",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/11_domain_applications/51_quantum_computing_rust.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/rdkafka",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/26_kafka_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/redis",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/22_redis_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/regex",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/24_regex_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/roqoqo",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/11_domain_applications/51_quantum_computing_rust.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/rustls-post-quantum",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/11_domain_applications/51_quantum_computing_rust.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/salvo",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/39_salvo_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/sentry",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/33_sentry_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/session-types",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/03_design_patterns/39_frontier_research_and_innovative_patterns.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/skiplist",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_advanced_data_structures_guide.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/surrealdb",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/31_surrealdb_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/toasty",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/06_data_and_distributed/23_database_access.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/tract-onnx",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/36_tract_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/typenum",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/01_generics/39_type_level_programming.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/crates/vector",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/32_vector_architecture.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/policies",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md",
+        "concept/06_ecosystem/07_security_and_cryptography/19_security_practices.md",
+        "docs/research_notes/10_cicd_supply_chain_alignment.md",
+        "docs/research_notes/10_crate_architecture_authoritative_alignment.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/security",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_crate_architecture_authoritative_alignment.md"
+      ]
+    },
+    {
+      "url": "https://crates.io/settings/tokens",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_cicd_supply_chain_alignment.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/Axum/latest/Axum/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/Serde/latest/Serde/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/00_traits/09_serde_patterns.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/Tokio/latest/Tokio/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/Warp/latest/Warp/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/lapin/latest/lapin/publisher_confirm/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/28_lapin_architecture.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/ndarray/latest/ndarray/doc/ndarray/struct.ArrayBase.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/14_nalgebra_architecture.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/ntex/latest/ntex/web/struct.Error.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/40_ntex_architecture.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/ort/latest/ort/value/struct.Tensor.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/35_ort_architecture.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/raii/latest/raii/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/00_meta/00_framework/theorem_inference_forest.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/ratatui/latest/ratatui/terminal/struct.Terminal.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/20_ratatui_architecture.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/rdkafka/latest/rdkafka/producer/type.FutureProducer.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/26_kafka_architecture.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/rustc/latest/rustc/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/02_reference/02_error_code_mapping.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/surrealdb/latest/surrealdb/connection/trait.Connection.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/31_surrealdb_architecture.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/tract-onnx/latest/tract_onnx/struct.Onnx.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/36_tract_architecture.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/vector/latest/vector/trait.Vector.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/32_vector_architecture.md"
+      ]
+    },
+    {
+      "url": "https://github.com/AeneasVerif/aeneas/blob/main/PROGRESS.md",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/formal_modules/50_formal_tools_module_mapping.md"
+      ]
+    },
+    {
+      "url": "https://github.com/verus-lang/verus/tree/main/source/rust_verify/example",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/05_guides/05_verus_practical_guide.md"
+      ]
+    },
+    {
+      "url": "https://github.com/verus-lang/verusverus/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/04_research/04_verusbelt_pldi_2026.md",
+        "docs/05_guides/05_verus_practical_guide.md",
+        "docs/research_notes/10_authoritative_alignment_gap_matrix.md",
+        "docs/research_notes/10_research_methodology.md",
+        "docs/research_notes/10_tools_guide.md"
+      ]
+    },
+    {
+      "url": "https://github.com/verus-lang/verusverus/guide/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/05_guides/05_verus_practical_guide.md",
+        "docs/research_notes/10_tools_guide.md"
+      ]
+    },
+    {
+      "url": "https://github.com/verus-lang/verusverus/guide/concurrency.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/05_guides/05_verus_practical_guide.md"
+      ]
+    },
+    {
+      "url": "https://github.com/verus-lang/verusverus/guide/ghost.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/05_guides/05_verus_practical_guide.md"
+      ]
+    },
+    {
+      "url": "https://github.com/verus-lang/verusverus/guide/install.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/05_guides/05_verus_practical_guide.md"
+      ]
+    },
+    {
+      "url": "https://github.com/verus-lang/verusverus/guide/limitations.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/05_guides/05_verus_practical_guide.md"
+      ]
+    },
+    {
+      "url": "https://github.com/verus-lang/verusverus/guide/loops.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/05_guides/05_verus_practical_guide.md"
+      ]
+    },
+    {
+      "url": "https://github.com/verus-lang/verusverus/guide/mut-ref.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/05_guides/05_verus_practical_guide.md"
+      ]
+    },
+    {
+      "url": "https://github.com/verus-lang/verusverus/guide/spec.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/05_guides/05_verus_practical_guide.md"
+      ]
+    },
+    {
+      "url": "https://github.com/verus-lang/verusverus/verusdoc/vstd/",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_tools_guide.md"
+      ]
+    },
+    {
+      "url": "https://nnethercote.github.io/perf-book/dynamic-dispatch.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/01_async/02_async.md",
+        "concept/03_advanced/01_async/25_async_advanced.md"
+      ]
+    },
+    {
+      "url": "https://nnethercote.github.io/perf-book/heap-alloc.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_authoritative_alignment_gap_matrix.md"
+      ]
+    },
+    {
+      "url": "https://nnethercote.github.io/perf-book/memory.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/experiments/10_memory_analysis.md",
+        "docs/research_notes/experiments/10_performance_benchmarks.md"
+      ]
+    },
+    {
+      "url": "https://nnethercote.github.io/perf-book/procedural-macros.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_authoritative_alignment_gap_matrix.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/anti_patterns/gold_plating.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/03_design_patterns/02_patterns.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/idioms/ffi.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_authoritative_alignment_gap_matrix.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/idioms/privatize-errors.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_authoritative_alignment_gap_matrix.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/idioms/raii.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_authoritative_alignment_gap_matrix.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/idioms/type-state.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/04_compositional_engineering/01_formal_composition.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/behavioural/chain-of-responsibility.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_chain_of_responsibility.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/behavioural/index.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_chain_of_responsibility.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_command.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_interpreter.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_iterator.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_mediator.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/behavioural/interior-mutability.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_learning_and_interview_alignment.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/behavioural/iterator.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_iterator.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/behavioural/mediator.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_mediator.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/behavioural/memento.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_memento.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/behavioural/observer.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_observer.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/behavioural/state.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_design_patterns_authoritative_alignment.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_state.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/behavioural/template-method.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_template_method.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/creational/abstract-factory.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_abstract_factory.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/creational/factory.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_factory_method.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/creational/index.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_abstract_factory.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_builder.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_factory_method.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_prototype.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_singleton.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/creational/prototype.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_prototype.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/creational/singleton.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_singleton.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/functional.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_community_best_practices_alignment.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/structural/adapter.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_adapter.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/structural/bridge.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_bridge.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/structural/composite.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_composite.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/structural/decorator.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_decorator.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/structural/facade.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_facade.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/structural/flyweight.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_flyweight.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/structural/index.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_adapter.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_bridge.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_composite.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_decorator.md",
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_facade.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/structural/proxy.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_proxy.md"
+      ]
+    },
+    {
+      "url": "https://rust-unofficial.github.io/patterns/patterns/typestate.html",
+      "tier": "P2",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/03_design_patterns/34_idioms_spectrum.md"
+      ]
+    },
+    {
+      "url": "https://docs.rs/AFIT（async",
+      "tier": "P2",
+      "status": null,
+      "err": "UnicodeEncodeError:'ascii' codec can't encode character '\\uff08' in position 9: ordinal not in range(128)",
+      "files": [
+        "concept/03_advanced/06_low_level_patterns/18_network_programming.md"
+      ]
+    },
+    {
+      "url": "https://mirrors.example.com/crates.io-index/",
+      "tier": "P2",
+      "status": null,
+      "err": "URLError:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)",
+      "files": [
+        "concept/06_ecosystem/01_cargo/61_cargo_source_replacement.md"
+      ]
+    },
+    {
+      "url": "https://mirrors.my-company.com/crates.io-index/",
+      "tier": "P2",
+      "status": null,
+      "err": "URLError:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)",
+      "files": [
+        "concept/06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md"
+      ]
+    }
+  ]
+}

@@ -9,6 +9,27 @@
 
 ---
 
+## 📑 目录
+
+- [定理链全局注册表（Theorem Registry）](#定理链全局注册表theorem-registry)
+  - [📑 目录](#-目录)
+  - [1. 注册表目的](#1-注册表目的)
+  - [2. 编号范围分配](#2-编号范围分配)
+  - [3. 已注册定理清单](#3-已注册定理清单)
+    - [3.1 所有权域（T-001 – T-009）](#31-所有权域t-001--t-009)
+    - [3.2 借用域（T-010 – T-019）](#32-借用域t-010--t-019)
+    - [3.3 生命周期域（T-020 – T-029）](#33-生命周期域t-020--t-029)
+    - [3.4 类型系统域（T-030 – T-039）](#34-类型系统域t-030--t-039)
+    - [3.5 并发域（T-040 – T-049）](#35-并发域t-040--t-049)
+    - [3.6 异步域（T-050 – T-059）](#36-异步域t-050--t-059)
+    - [3.7 Trait 工程扩展域（T-200 – T-229）](#37-trait-工程扩展域t-200--t-229)
+    - [3.8 泛型工程扩展域（T-230 – T-259）](#38-泛型工程扩展域t-230--t-259)
+    - [3.9 形式化域（T-100 – T-159）](#39-形式化域t-100--t-159)
+  - [4. 冲突解决记录](#4-冲突解决记录)
+  - [5. 使用规范](#5-使用规范)
+  - [6. 维护责任](#6-维护责任)
+  - [7. 权威来源（References · 国际权威对齐）](#7-权威来源references--国际权威对齐)
+
 ## 1. 注册表目的
 
 本项目在 `concept/` 层使用 `T-xxx` 编号标注定理链（theorem chains）。历史上，不同概念文件独立分配编号，导致同一 `T-xxx` 在不同文件中指向不同命题（例如 `T-020` 既被用作“特质一致性（Coherence）”，也被用作“生命周期偏序约束可满足性”）。
@@ -162,3 +183,13 @@
 - 新增 `T-xxx` 时同步更新本注册表。
 - 每季度运行一次定理编号审计脚本，检测冲突。
 - 本注册表由 `concept/00_meta/00_framework/theorem_inference_forest.md` 维护者负责最终审核。
+
+---
+
+## 7. 权威来源（References · 国际权威对齐）
+
+> 本注册表规范的 `T-xxx` 定理编号，其命题出处对齐下列国际权威来源（仅作来源登记，不改正文事实）：
+
+- **P0 官方**: [Rust Reference — Type System / Traits / Lifetimes](https://doc.rust-lang.org/reference/) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
+- **P1 学术/形式化**: Ralf Jung et al. _RustBelt: Securing the Foundations of the Rust Programming Language_ (POPL 2018) · _Stacked Borrows: An Aliasing Model for Rust_ (POPL 2019) · Villani / Hostert / Dreyer / Jung _Tree Borrows: A New Aliasing Model for Rust_ (PLDI 2025, Distinguished Paper)
+- **映射维护**: 见 [`concept/00_meta/02_sources/authority_source_map.md`](../02_sources/authority_source_map.md)

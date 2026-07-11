@@ -1,5 +1,10 @@
 # `-C jump-tables=bool` 编译器优化指南 {#c-jump-tablesbool-编译器优化指南}
 
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为 `-C jump-tables=bool` 编译器代码生成选项的专题指南（`concept/` 无本专题独立权威页，保留为 docs 专题页）；LLVM/代码生成相关背景见 [`concept/06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md`](../../concept/06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md)。
+>
+> 根据 AGENTS.md §2/§3.4：本专题在 `concept/` 无对应权威页，故保留全文（工作原理、Spectre 缓解、基准测试、配置模式等独特内容），仅补充一条相关 concept 链接，不删除正文。
+
 > **EN**: Jump Tables Guide
 > **Summary**: -C jump-tables=bool 编译器优化指南 Jump Tables Guide.
 > **分级**: [A]

@@ -714,3 +714,14 @@ flowchart TD
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-11
 **状态**: ✅ 迁移判定树建立完成（覆盖 §3–§8 六类兼容性变化）
+
+---
+
+## 12. 权威来源（References · P0 官方对齐）
+
+> 本迁移判定树涉及的兼容性事实出处（仅作来源登记；判定逻辑见 §3–§8 正文，不改正文事实）：
+
+- **P0 官方 Reference**: [§ ABI / `export_name`](https://doc.rust-lang.org/reference/abi.html) · [§ `std::io::ErrorKind`](https://doc.rust-lang.org/std/io/enum.ErrorKind.html) · [§ Pin / `std::pin`](https://doc.rust-lang.org/std/pin/index.html) · [Error Index](https://doc.rust-lang.org/error_codes/error-index.html)
+- **P0 官方 RFCs / lints**: [Rust RFCs（含 future-incompatible lint 组）](https://rust-lang.github.io/rfcs/)
+- **P0 版本事实**: [`rust_1_97_stabilized.md`](rust_1_97_stabilized.md)（31 项特性与 §2.6/§2.7/§2.8 / §7）
+- **映射维护**: [`feature_domain_matrix_197.md`](feature_domain_matrix_197.md) · [`authority_source_map.md`](../../00_meta/02_sources/authority_source_map.md)

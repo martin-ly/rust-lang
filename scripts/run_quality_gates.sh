@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Run all quality gates locally.
-# 10 blocking gates (Cargo/mdbook/KB/i18n/mermaid) + 5 semantic observe gates (warning, non-blocking).
+# 10 blocking gates (Cargo/mdbook/KB/i18n/mermaid) + 6 semantic observe gates (warning, non-blocking).
 # Semantic gates default to warning mode (exit 0); append --strict to make them blocking.
 set -euo pipefail
 
@@ -39,10 +39,11 @@ run_gate "Content Overlap v2 (observe)" python scripts/detect_content_overlap_v2
 run_gate "Topology Quality (observe)" python scripts/check_topology_quality.py
 run_gate "KG SHACL Validation (observe)" python scripts/check_kg_shapes.py
 run_gate "Semantic Health (observe)" python scripts/semantic_health.py
+run_gate "Concept Authority Coverage (observe)" python scripts/check_concept_authority_coverage.py
 
 echo ""
 if [ "$FAILED" -eq 0 ]; then
-    echo "✅ All 15 quality gates passed (10 blocking + 5 semantic observe)."
+    echo "✅ All 16 quality gates passed (10 blocking + 6 semantic observe)."
     exit 0
 else
     echo "❌ Some quality gates failed."

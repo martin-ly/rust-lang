@@ -32,6 +32,28 @@
 
 ---
 
+## 📑 目录
+
+- [权威来源映射表（Authority Source Map）](#权威来源映射表authority-source-map)
+  - [📑 目录](#-目录)
+  - [一、一级来源：Rust 官方与形式化 来源分级方法论基于证据金字塔模型 — 官方标准 \> 学术论文 \> 社区权威 \> 实践经验](#一一级来源rust-官方与形式化-来源分级方法论基于证据金字塔模型--官方标准--学术论文--社区权威--实践经验)
+  - [二、二级来源：跨语言权威入口 跨语言对比方法论参照 concept/05\_comparative/ 系列文件的对比框架](#二二级来源跨语言权威入口-跨语言对比方法论参照-concept05_comparative-系列文件的对比框架)
+    - [C++](#c)
+    - [Haskell](#haskell)
+    - [Go](#go)
+  - [三、网络权威锚点（永久链接） 永久链接选择标准: 域名稳定性 \> 版本归档 \> 社区镜像; 参照 PURL (Persistent Uniform Resource Locator) 标准和 DOI 数字对象标识符的设计原则](#三网络权威锚点永久链接-永久链接选择标准-域名稳定性--版本归档--社区镜像-参照-purl-persistent-uniform-resource-locator-标准和-doi-数字对象标识符的设计原则)
+    - [Rust 官方](#rust-官方)
+    - [学术](#学术)
+    - [社区权威博客](#社区权威博客)
+  - [四、执行批次 Authority Source Sprint 执行记录; 对齐方法论参照 AGENTS.md 质量铁三角 — Bloom 层级 100%、来源标注率 ≥15%、跨文件链接 ≥3/文件](#四执行批次-authority-source-sprint-执行记录-对齐方法论参照-agentsmd-质量铁三角--bloom-层级-100来源标注率-15跨文件链接-3文件)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：本文档《权威来源映射表（Authority Source Map）》在 Rust 知识体系中属于哪一层级的元数据？（理解层）](#测验-1本文档权威来源映射表authority-source-map在-rust-知识体系中属于哪一层级的元数据理解层)
+    - [测验 2：《权威来源映射表（Authority Source Map）》的主要用途是什么？（理解层）](#测验-2权威来源映射表authority-source-map的主要用途是什么理解层)
+    - [测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）](#测验-3元数据层文档能否替代-l1-l7-的核心概念学习理解层)
+
 ## 一、一级来源：Rust 官方与形式化 [来源分级方法论基于证据金字塔模型 — 官方标准 > 学术论文 > 社区权威 > 实践经验](https://en.wikipedia.org/wiki/Evidence_hierarchy)
 
 | 概念 | 官方来源 | 学术来源 | 社区权威 | C++ 对标 | Haskell 对标 | Go 对标 | 备注 |

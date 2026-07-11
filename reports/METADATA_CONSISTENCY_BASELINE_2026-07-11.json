@@ -5,7 +5,7 @@
     "counts": {
       "D1": 65,
       "D2": 103,
-      "D3": 88,
+      "D3": 71,
       "D4": 1,
       "D5": 113,
       "D6": 109
@@ -13,13 +13,13 @@
     "pct": {
       "D1": 13.7,
       "D2": 21.6,
-      "D3": 18.5,
+      "D3": 14.9,
       "D4": 0.2,
       "D5": 23.7,
       "D6": 22.9
     },
     "D2_base_files_with_asp_and_bloom": 297,
-    "flagged_files": 304
+    "flagged_files": 301
   },
   "examples": {
     "D1": [
@@ -640,9 +640,6 @@
       ]
     },
     "concept/01_foundation/01_ownership_borrow_lifetime/28_ownership_inventories_brown_book.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[综述级]', '[综述级]']"
-      ],
       "D6": [
         "套话: Brown University Ownership Inventory: core Rust concepts, sy"
       ]
@@ -862,25 +859,16 @@
       ]
     },
     "concept/01_foundation/11_quizzes/24_quiz_type_system.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[综述级]', '[综述级]']"
-      ],
       "D6": [
         "套话: Quiz Type System. Core Rust concept."
       ]
     },
     "concept/01_foundation/11_quizzes/25_quiz_error_handling.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[综述级]', '[综述级]']"
-      ],
       "D6": [
         "套话: Quiz Error Handling. Core Rust concept."
       ]
     },
     "concept/01_foundation/11_quizzes/26_quiz_modules_testing.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[综述级]', '[综述级]']"
-      ],
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
       ],
@@ -889,9 +877,6 @@
       ]
     },
     "concept/01_foundation/11_quizzes/27_quiz_closures_iterators.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[综述级]', '[综述级]']"
-      ],
       "D6": [
         "套话: Quiz Closures Iterators. Core Rust concept."
       ]
@@ -902,9 +887,6 @@
       ]
     },
     "concept/01_foundation/11_quizzes/33_quiz_ownership_borrowing.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[综述级]', '[综述级]']"
-      ],
       "D6": [
         "套话: Quiz Ownership Borrowing. Core Rust concept."
       ]
@@ -972,9 +954,6 @@
       ]
     },
     "concept/02_intermediate/01_generics/23_quiz_traits_and_generics.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[综述级]', '[综述级]']"
-      ],
       "D6": [
         "套话: Quiz Traits And Generics. Core Rust concept."
       ]
@@ -996,9 +975,6 @@
       ]
     },
     "concept/02_intermediate/02_memory_management/24_quiz_memory_management.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[综述级]', '[综述级]']"
-      ],
       "D6": [
         "套话: Quiz Memory Management. Core Rust concept."
       ]
@@ -1121,9 +1097,6 @@
       ]
     },
     "concept/03_advanced/00_concurrency/21_quiz_concurrency_async.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[专家级]', '[专家级]']"
-      ],
       "D6": [
         "套话: Quiz Concurrency Async. Core Rust concept."
       ]
@@ -1225,9 +1198,6 @@
       ]
     },
     "concept/03_advanced/02_unsafe/22_quiz_unsafe.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[专家级]', '[专家级]']"
-      ],
       "D6": [
         "套话: Quiz Unsafe. Core Rust concept."
       ]
@@ -1267,9 +1237,6 @@
       ]
     },
     "concept/03_advanced/03_proc_macros/23_quiz_macros.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[专家级]', '[专家级]']"
-      ],
       "D6": [
         "套话: Quiz Macros. Core Rust concept."
       ]
@@ -1450,9 +1417,6 @@
       ]
     },
     "concept/04_formal/04_model_checking/25_quiz_formal_methods.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[专家级]', '[专家级]']"
-      ],
       "D6": [
         "套话: Quiz Formal Methods. Core Rust concept."
       ]
@@ -1542,9 +1506,6 @@
       ]
     },
     "concept/05_comparative/03_domain_comparisons/17_quiz_rust_vs_systems.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[综述级]', '[综述级]']"
-      ],
       "D6": [
         "套话: Quiz Rust Vs Systems. Core Rust concept."
       ]
@@ -1587,9 +1548,6 @@
       ]
     },
     "concept/06_ecosystem/00_toolchain/57_quiz_toolchain.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[综述级]', '[综述级]']"
-      ],
       "D6": [
         "套话: Quiz Toolchain. Core Rust concept."
       ]
@@ -1959,11 +1917,6 @@
         "Bloom 层级 声明 2 次: ['L4-L5', 'L4-L5']"
       ]
     },
-    "concept/06_ecosystem/05_systems_and_embedded/56_c_to_rust_translation.md": {
-      "D3": [
-        "Bloom 层级 声明 2 次: ['L4-L5', 'L4-L5']"
-      ]
-    },
     "concept/06_ecosystem/05_systems_and_embedded/57_embedded_hal_1_0_migration.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集"
@@ -2262,16 +2215,6 @@
     "concept/07_future/03_preview_features/38_cranelift_backend_preview.md": {
       "D6": [
         "套话: Compiler Internals. Core Rust concept covering mechanism ana"
-      ]
-    },
-    "concept/07_future/03_preview_features/46_cargo_semver_checks_preview.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[实验级]', '[实验级]']"
-      ]
-    },
-    "concept/07_future/03_preview_features/48_aarch64_sve_sme_preview.md": {
-      "D3": [
-        "内容分级 声明 2 次: ['[实验级]', '[实验级]']"
       ]
     },
     "concept/07_future/03_preview_features/49_rust_in_space.md": {

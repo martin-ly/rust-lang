@@ -210,3 +210,11 @@ flowchart TD
 >
 > **过渡**: 从通信优化过渡到资源回收，可以形成全链路性能工程的闭环。
 >
+
+---
+
+## 权威来源（References · 国际权威对齐）
+
+- **P0 官方**: [Rust `std::process` / `std::thread`](https://doc.rust-lang.org/std/process/) · [The Rustonomicon — 并发与 FFI](https://doc.rust-lang.org/nomicon/)
+- **P2 生态**: [The Rust Performance Book (nnethercote)](https://nnethercote.github.io/perf-book/) · [docs.rs](https://docs.rs/) · [crates.io](https://crates.io/)
+- **映射维护**: [`concept/00_meta/02_sources/authority_source_map.md`](../../00_meta/02_sources/authority_source_map.md)

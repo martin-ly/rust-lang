@@ -26,3 +26,15 @@
 | 借用 | [`concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
 | 所有权 | [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
 | 形式化视角 | [`concept/04_formal/01_ownership_logic/03_ownership_formal.md`](../../concept/04_formal/01_ownership_logic/03_ownership_formal.md) |
+
+---
+
+## 权威来源（References · 国际权威对齐）
+
+> 仅追加来源链接以闭合权威覆盖，不改本文正文；通用概念请以 `concept/` 权威页为准（AGENTS.md §2）。
+
+- **P0 官方 — TRPL Ch4 Ownership**: <https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html>
+- **P0 官方 — TRPL Ch10 Lifetimes**: <https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html>
+- **P0 Reference**: <https://doc.rust-lang.org/reference/>
+- **P0 Nomicon**: <https://doc.rust-lang.org/nomicon/>
+- **P1 RustBelt / Stacked & Tree Borrows (Jung et al.)**: <https://plv.mpi-sws.org/rustbelt/>

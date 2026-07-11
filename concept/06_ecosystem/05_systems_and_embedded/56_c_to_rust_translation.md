@@ -17,7 +17,6 @@
 > [FFI](../../03_advanced/04_ffi/09_ffi_advanced.md)
 > **后置概念**: [Formal Verification Tools](../08_formal_verification/74_formal_verification_tools.md) ·
 > [Compiler Internals](../00_toolchain/45_compiler_internals.md)
-> **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 >
 > **主要来源**: [DARPA TRACTOR] · [C2Rust] · [Scylla (OOPSLA 2026)] · [&inator (PLDI 2026)] · [His2Trans] · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)

@@ -820,3 +820,14 @@ CLR JIT 可根据运行时 profile 动态优化（如去虚拟化）。Rust LLVM
 ### 反命题与边界
 
 > **反命题**: "Rust vs C：托管与原生之路 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 权威来源（References · 跨语言国际权威对齐）
+
+> 仅追加被对比语言的官方权威入口与 Rust 对照，闭合跨语言对标覆盖；不改本文正文（AGENTS.md §2）。
+
+- **C# 官方 (Microsoft Learn)**: <https://learn.microsoft.com/dotnet/csharp/>
+- **.NET 官方**: <https://dotnet.microsoft.com/>
+- **Rust Reference（对照）**: <https://doc.rust-lang.org/reference/>
+- **TRPL（对照）**: <https://doc.rust-lang.org/book/title-page.html>

@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 462,
-    "generated_at": "2026-07-10T23:15:32.858410+00:00"
+    "generated_at": "2026-07-10T23:33:24.459659+00:00"
   },
   "files": [
     {
@@ -10,7 +10,7 @@
       "layer": "L0",
       "title": "Bloom Taxonomy（Bloom 分类法）",
       "positioning": "",
-      "line_count": 179,
+      "line_count": 197,
       "theorem_chains": [
         {
           "text": "| 03 Bloom Taxonomy 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -273,7 +273,7 @@
       "layer": "L0",
       "title": "C/C++ → Rust 工程层对比路线图",
       "positioning": "",
-      "line_count": 207,
+      "line_count": 229,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -653,7 +653,7 @@
       "layer": "L0",
       "title": "模式语义空间索引：设计模式在概念体系中的坐标",
       "positioning": "",
-      "line_count": 163,
+      "line_count": 182,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -695,7 +695,7 @@
       "layer": "L0",
       "title": "通用 PL 基座路线图：Rust 在编程语言坐标系中的位置",
       "positioning": "",
-      "line_count": 145,
+      "line_count": 164,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -1070,12 +1070,14 @@
       "layer": "L0",
       "title": "定理链全局注册表（Theorem Registry）",
       "positioning": "",
-      "line_count": 165,
+      "line_count": 196,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
-      "cross_references": [],
+      "cross_references": [
+        "../02_sources/authority_source_map.md"
+      ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
@@ -1275,7 +1277,7 @@
       "layer": "L0",
       "title": "权威来源映射表（Authority Source Map）",
       "positioning": "",
-      "line_count": 189,
+      "line_count": 211,
       "theorem_chains": [
         {
           "text": "| Authority Source Map 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -1452,7 +1454,7 @@
       "layer": "L0",
       "title": "主题-权威来源对齐图谱 (Topic-Authority Alignment Map)",
       "positioning": "",
-      "line_count": 354,
+      "line_count": 378,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -4013,7 +4015,7 @@
       "layer": "L0",
       "title": "逻辑推理图谱（Logical Reasoning Atlas）",
       "positioning": "",
-      "line_count": 125,
+      "line_count": 180,
       "theorem_chains": [
         {
           "text": "> **Summary**: A navigational index of theorem chains, inference rules, proof/verification paths, and formal correspondences across the Rust concept hierarchy. 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。",
@@ -4078,6 +4080,10 @@
         {
           "text": "| ⟹ | 前提保证结论 | 所有权 ⟹ 无 use-after-free |",
           "type": "table_row"
+        },
+        {
+          "text": "> 本小节为**纯增量**补充：为 §3 现有每条 `X ⟹ Y` 增补「前提 → 推论 → 证明草图 → 反例/边界」四元组，并赋予稳定 ID（`TH-*`），供 03（场景决策）/09（判定树）回边引用。原 §2–§6 全部内容保持不变。",
+          "type": "paragraph"
         }
       ],
       "anti_propositions": [],
@@ -4115,8 +4121,8 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 3,
-      "matrix_rows": 27,
+      "mermaid_blocks": 4,
+      "matrix_rows": 42,
       "pre_post": {
         "pre": [],
         "post": []
@@ -5470,7 +5476,7 @@
       "layer": "L0",
       "title": "推理判定树图谱（Reasoning Judgment Tree Atlas）",
       "positioning": "",
-      "line_count": 155,
+      "line_count": 251,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -5487,6 +5493,8 @@
         "../../04_formal/02_separation_logic/04_rustbelt.md",
         "../../04_formal/04_model_checking/31_miri.md",
         "../../04_formal/04_model_checking/32_kani.md",
+        "../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md",
+        "../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md",
         "01_concept_definition_atlas.md",
         "03_scenario_decision_tree_atlas.md",
         "04_example_counterexample_atlas.md",
@@ -5494,8 +5502,8 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 5,
-      "matrix_rows": 13,
+      "mermaid_blocks": 6,
+      "matrix_rows": 29,
       "pre_post": {
         "pre": [],
         "post": []
@@ -26146,7 +26154,7 @@
       "layer": "L3",
       "title": "Rust 进程性能工程",
       "positioning": "",
-      "line_count": 213,
+      "line_count": 221,
       "theorem_chains": [
         {
           "text": "> **定理链**: Spawn Latency ⟹ Throughput ⟹ Resource Reclaim",
@@ -26214,6 +26222,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/authority_source_map.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../06_ecosystem/10_performance/15_performance_optimization.md",
@@ -26362,7 +26371,7 @@
       "layer": "L3",
       "title": "Rust 现代进程管理库",
       "positioning": "",
-      "line_count": 230,
+      "line_count": 238,
       "theorem_chains": [
         {
           "text": "> **定理链**: Requirement ⟹ Library Selection ⟹ Ecosystem Integration",
@@ -26454,6 +26463,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/02_sources/authority_source_map.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/03_error_handling/04_error_handling.md",
         "../../06_ecosystem/02_core_crates/03_core_crates.md",
@@ -54783,7 +54793,7 @@
       "layer": "L7",
       "title": "Rust 1.97 兼容性迁移判定树",
       "positioning": "",
-      "line_count": 717,
+      "line_count": 728,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -54918,12 +54928,14 @@
       "cross_references": [
         "../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md",
         "../../../reports/RUST_197_CONTENT_GAP_ANALYSIS_2026_07_11.md",
+        "../../00_meta/02_sources/authority_source_map.md",
         "../../01_foundation/02_type_system/14_coercion_and_casting.md",
         "../../03_advanced/01_async/06_pin_unpin.md",
         "../../03_advanced/04_ffi/27_linkage.md",
         "../../04_formal/05_rustc_internals/38_application_binary_interface.md",
         "../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md",
         "05_rust_version_tracking.md",
+        "feature_domain_matrix_197.md",
         "rust_1_97_preview.md",
         "rust_1_97_stabilized.md",
         "rust_1_98_preview.md"

@@ -227,3 +227,11 @@ flowchart TD
 >
 > **过渡**: 从库选型过渡到性能、安全与测试，可以理解生态选择需要与整个工程质量体系协同。
 >
+
+---
+
+## 权威来源（References · 国际权威对齐）
+
+- **P0 官方**: [Rust `std::process`](https://doc.rust-lang.org/std/process/) · [The Rustonomicon — FFI / 平台互操作](https://doc.rust-lang.org/nomicon/)
+- **P2 生态**: [tokio::process (docs.rs)](https://docs.rs/tokio/latest/tokio/process/) · [duct (docs.rs)](https://docs.rs/duct/) · [nix (docs.rs)](https://docs.rs/nix/) · [crates.io](https://crates.io/)
+- **映射维护**: [`concept/00_meta/02_sources/authority_source_map.md`](../../00_meta/02_sources/authority_source_map.md)

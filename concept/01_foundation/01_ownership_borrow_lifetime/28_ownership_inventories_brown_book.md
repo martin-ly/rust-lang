@@ -5,7 +5,6 @@
 > **EN**: Brown University Ownership Inventory
 > **Summary**: Brown University Ownership Inventory: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
-> **内容分级**: [综述级]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定理链**: N/A — 测验性/互动性文档

@@ -3,8 +3,8 @@
   "scanned": 460,
   "coverage": {
     "P0": [
-      450,
-      97.8
+      454,
+      98.7
     ],
     "P1": [
       321,
@@ -15,16 +15,16 @@
       47.8
     ],
     "any": [
-      458,
-      99.6
+      460,
+      100.0
     ],
-    "none": 2
+    "none": 0
   },
   "by_layer": {
     "L0": {
       "n": 60,
-      "P0": 58,
-      "any": 59
+      "P0": 59,
+      "any": 60
     },
     "L1": {
       "n": 55,
@@ -38,7 +38,7 @@
     },
     "L3": {
       "n": 57,
-      "P0": 55,
+      "P0": 57,
       "any": 57
     },
     "L4": {
@@ -58,8 +58,8 @@
     },
     "L7": {
       "n": 60,
-      "P0": 58,
-      "any": 59
+      "P0": 59,
+      "any": 60
     },
     "L?": {
       "n": 3,
@@ -67,12 +67,6 @@
       "any": 3
     }
   },
-  "core_gaps_l1_l4_no_p0": [
-    "concept/03_advanced/02_process_ipc/10_modern_process_libraries.md",
-    "concept/03_advanced/02_process_ipc/08_process_performance_engineering.md"
-  ],
-  "none_any": [
-    "concept/00_meta/00_framework/theorem_registry.md",
-    "concept/07_future/00_version_tracking/migration_197_decision_tree.md"
-  ]
+  "core_gaps_l1_l4_no_p0": [],
+  "none_any": []
 }

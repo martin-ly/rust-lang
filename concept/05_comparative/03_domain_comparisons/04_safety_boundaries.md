@@ -1002,3 +1002,16 @@ fn main() {
 
 在 `unsafe` 块前用 `// SAFETY: ...` 注释说明为什么这段代码是安全的。这是代码审查和后续维护的重要文档，也是 unsafe 代码审计的起点。
 </details>
+
+---
+
+## 权威来源（References · 跨语言安全边界国际权威对齐）
+
+> 仅追加跨语言安全边界 / unsafe 的国际权威参照，闭合对标覆盖；不改本文正文（AGENTS.md §2）。
+
+- **Rust Nomicon — Unsafe / UB（对照）**: <https://doc.rust-lang.org/nomicon/>
+- **Rust Reference（对照）**: <https://doc.rust-lang.org/reference/>
+- **C++ Core Guidelines（安全 / 类型 / 边界）**: <https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html>
+- **Go Memory Model（对照）**: <https://go.dev/ref/mem>
+- **GHC User Guide — Safe FFI（对照）**: <https://downloads.haskell.org/ghc/latest/docs/users_guide/>
+- **映射维护**: [`concept/00_meta/02_sources/authority_source_map.md`](../../00_meta/02_sources/authority_source_map.md)
