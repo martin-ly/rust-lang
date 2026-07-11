@@ -1,9 +1,10 @@
 > **EN**: Benchmarking with Criterion in Rust
 > **Summary**: Core Rust concept covering statistical benchmarking with Criterion, regression detection, CI integration, and measurement best practices.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: [Criterion.rs Book](https://bheisler.github.io/criterion.rs/book/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 > **受众**: [进阶]
 > **内容分级**: [指南级]
-> **Bloom 层级**: L3-L4
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **定位**: 覆盖 Rust 生态中使用 `criterion` 进行基准测试的完整流程，从简单基准、参数化基准到回归检测与 CI 集成。

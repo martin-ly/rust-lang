@@ -471,8 +471,8 @@ pub fn process_task(task_json: &str) -> String {
 | :--- | :--- | :--- |
 | **所有权（Ownership）模型** | [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) | WASM 内存安全（Memory Safety）保证 |
 | **生命周期（Lifetimes）** | lifetime_formalization | JS 互操作引用（Reference）有效性 |
-| **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | Web Worker 安全 |
-| **类型系统（Type System）** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | JS 绑定类型安全 |
+| **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/10_send_sync_formalization.md) | Web Worker 安全 |
+| **类型系统（Type System）** | [type_system_foundations](../../research_notes/type_theory/10_type_system_foundations.md) | JS 绑定类型安全 |
 
 ### 形式化定理 {#形式化定理}
 

@@ -370,10 +370,10 @@ fn make_dyn() -> Box<dyn Fn(i32) -> std::pin::Pin<Box<dyn std::future::Future<Ou
 
 ### 5.2 Send 约束与 RTN
 
-如果需要在 trait bound 中表达“返回的 Future 是 `Send`”，目前需要 **Return Type Notation (RTN)**，该特性仍在 nightly / RFC 阶段：
+如果需要在 trait bound 中表达“返回的 Future 是 `Send`”，目前需要 **Return Type Notation (RTN)**，该特性仍在每日构建版 / RFC 阶段：
 
 ```rust,ignore
-// RTN 语法（ nightly，尚未 stable ）
+// RTN 语法（每日构建版，尚未 stable）
 F: AsyncFn(i32) -> bool + AsyncFn(i32) -> Send,
 ```
 
@@ -455,19 +455,19 @@ Future trait          (1.36)
     → Future/IntoFuture in prelude      (2024 edition / 1.85)
       → AFIT: async fn in trait          (1.75.0)
         → AsyncFn traits + async closures stable  (1.85.0)
-          → AFIDT: async fn in dyn trait   (nightly 实验中，暂无稳定时间表；dyn Trait 仍需 async_trait，跟踪 rust-lang/rust#133882)
-            → RTN: Return Type Notation     (nightly / RFC)
-              → Async Drop                  (nightly)
-                → Gen blocks / AsyncIterator  (nightly)
+          → AFIDT: async fn in dyn trait   (每日构建版实验中，暂无稳定时间表；dyn Trait 仍需 async_trait，跟踪 rust-lang/rust#133882)
+            → RTN: Return Type Notation     (每日构建版 / RFC)
+              → Async Drop                  (每日构建版)
+                → Gen blocks / AsyncIterator  (每日构建版)
 ```
 
 > **状态标注模板**：
 >
 > - ✅ `async closures` — **stable 1.85.0**
-> - 🧪 `AFIDT` — nightly 实验中，暂无稳定时间表；`dyn Trait` 场景继续使用 `async_trait`，跟踪 issue [#133882](https://github.com/rust-lang/rust/issues/133882)
-> - 🧪 `RTN` — nightly / RFC 阶段
-> - 🧪 `Async Drop` — nightly，跟踪 issue [#126494](https://github.com/rust-lang/rust/issues/126494)
-> - 🧪 `Gen blocks` — nightly，需 `#![feature(gen_blocks, yield_expr)]`
+> - 🧪 `AFIDT` — 每日构建版实验中，暂无稳定时间表；`dyn Trait` 场景继续使用 `async_trait`，跟踪 issue [#133882](https://github.com/rust-lang/rust/issues/133882)
+> - 🧪 `RTN` — 每日构建版 / RFC 阶段
+> - 🧪 `Async Drop` — 每日构建版，跟踪 issue [#126494](https://github.com/rust-lang/rust/issues/126494)
+> - 🧪 `Gen blocks` — 每日构建版，需启用实验特性门 `gen_blocks, yield_expr`
 
 ---
 
@@ -526,7 +526,7 @@ let process = async |items: Vec<i32>| -> i32 {
 
 ### 练习 2：判断正误
 
-1. async closures 需要 nightly feature gate。（❌，1.85.0+ stable）
+1. async closures 需要每日构建版特性门。（❌，1.85.0+ stable）
 2. `AsyncFn` traits 在 Rust 2024 edition 中已进入 prelude。（✅）
 3. `Box<dyn AsyncFn(i32) -> bool>` 当前合法。（❌，非 dyn-compatible）
 
@@ -549,6 +549,6 @@ let process = async |items: Vec<i32>| -> i32 {
 > [Rust 1.85.0 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html)
 >
 > **文档版本**: 2.0
-> **对应 Rust 版本**: 1.85.0+ (Edition 2024 / 2021)
+> **Rust 版本**: 1.85.0+ (Edition 2024 / 2021)
 > **最后更新**: 2026-06-28
 > **状态**: ✅ 权威来源对齐完成（对齐 Rust 1.97.0 stable）

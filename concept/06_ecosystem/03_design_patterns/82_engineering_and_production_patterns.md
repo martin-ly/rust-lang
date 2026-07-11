@@ -6,6 +6,7 @@
 >
 > **EN**: Engineering Practice and Production-Grade Patterns
 > **Summary**: Rust production-grade patterns: circuit breaker, retry, rate limiting, graceful degradation, observability, safe configuration, and graceful shutdown.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [专家]
 > **权威来源**: 本文件为 `concept/` 权威页。

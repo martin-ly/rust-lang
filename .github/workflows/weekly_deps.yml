@@ -1,3 +1,6 @@
+# 职责分工（2026-07-12 厘清）：本工作流 = 写操作『自动更新』——cargo update 后跑测试/clippy/doc
+# 并自动创建依赖更新 PR。配套的 weekly_dependency_check.yml = 只读『检测/报告』——周报 + issue。
+# 两者功能互补，非重复，均保留。
 name: Weekly Dependency Update
 
 on:

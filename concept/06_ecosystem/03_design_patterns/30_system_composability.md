@@ -11,7 +11,7 @@
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 生态工程
-> **A/S/P 标记**: **S+P** — StructureProcedure
+> **A/S/P 标记**: **P+S** — Procedure + Structure
 > **双维定位**: P×Eva — 评估系统可组合性
 > **前置概念**: · [Rust vs Go](../../05_comparative/01_systems_languages/02_rust_vs_go.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Async](../../03_advanced/01_async/02_async.md) · [Iterator](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
 > **后置概念**: [Tower 架构](../../04_formal/00_type_theory/10_category_theory.md) · [应用域](../06_data_and_distributed/04_application_domains.md)
@@ -575,7 +575,7 @@ async fn good() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Tokio 文档](https://docs.rs/tokio/), [Tower 文档](https://docs.rs/tower/), [rayon 文档](https://docs.rs/rayon/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-22
 > **状态**: ✅ 初版完成
 

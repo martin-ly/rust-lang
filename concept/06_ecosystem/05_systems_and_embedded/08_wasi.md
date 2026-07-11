@@ -18,7 +18,7 @@
 > **内容分级**: [综述级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
-> **A/S/P 标记**: **A+S** — Application + Structure
+> **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×App — 应用 WASI 能力安全模型
 > **前置概念**: · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) · [FFI](../../03_advanced/02_unsafe/03_unsafe.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)
 > **后置概念**: [Application Domains](../06_data_and_distributed/04_application_domains.md) · [Formal Ecosystem Tower](../08_formal_verification/44_formal_ecosystem_tower.md)
@@ -368,7 +368,7 @@ impl GuestFile for File {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -531,7 +531,6 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 
 > **权威来源**: [WASI Preview 2 Docs](https://wasi.dev) · [WebAssembly Component Model Spec](https:/component-model.bytecodealliance.org) · [wit-bindgen Docs](https://github.com/bytecodealliance/wit-bindgen) · [WASMtime Docs](https://docs.wasmtime.dev)
 > **文档版本**: 1.2
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 权威来源对齐 + 反例补充完成
 

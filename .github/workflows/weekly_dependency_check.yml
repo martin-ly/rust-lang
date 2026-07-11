@@ -1,3 +1,6 @@
+# 职责分工（2026-07-12 厘清）：本工作流 = 只读『检测/报告』——cargo-outdated + cargo-audit
+# 生成周报，发现更新或漏洞时创建 issue，不修改代码。配套的 weekly_deps.yml = 写操作
+# 『自动更新』——cargo update + 测试 + 创建 PR。两者功能互补，非重复，均保留。
 name: Weekly Dependency Check
 
 on:

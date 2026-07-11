@@ -8,7 +8,7 @@
 > **最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [10_trait_system_formalization.md](../../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)
+> 内容已整合至： [10_trait_system_formalization.md](../../../research_notes/type_theory/10_trait_system_formalization.md)
 
 > **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
 >
@@ -295,11 +295,11 @@ fn heterogeneous_collection() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| Trait 系统形式化 | Trait 系统的完整形式化 | [../../../research_notes/type_theory/10_trait_system_formalization.md](../../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) |
-| 类型系统（Type System）基础 | 类型理论基础 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
+| Trait 系统形式化 | Trait 系统的完整形式化 | [../../../research_notes/type_theory/10_trait_system_formalization.md](../../../research_notes/type_theory/10_trait_system_formalization.md) |
+| 类型系统（Type System）基础 | 类型理论基础 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../research_notes/type_theory/10_type_system_foundations.md) |
 | 型变理论 | 型变与子类型关系 | [../../../research_notes/type_theory/10_variance_theory.md](../../../research_notes/type_theory/10_variance_theory.md) |
-| 证明索引 | Trait 相关证明 | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
-| 工具指南 | Trait 验证工具 | [../../../research_notes/10_tools_guide.md](../../../../archive/research_notes_2026_06_25/10_tools_guide.md) |
+| 证明索引 | Trait 相关证明 | [../../../research_notes/10_proof_index.md](../../../research_notes/10_proof_index.md) |
+| 工具指南 | Trait 验证工具 | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) |
 
 ---
 

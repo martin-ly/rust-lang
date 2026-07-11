@@ -5,10 +5,11 @@
 >
 > **EN**: Ownership Performance Optimization
 > **Summary**: Optimize Rust performance through ownership-aware patterns: avoid clones, use Cow, optimize memory layout, zero-copy parsing, and leverage move semantics.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+P** — Application + Procedure
+> **A/S/P 标记**: **P+A** — Procedure + Application
 > **定位**: 从所有权（Ownership）视角出发，系统梳理避免不必要拷贝、使用写时复制、优化内存布局、零拷贝解析与移动语义的最佳实践。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md)
 > **后置概念**: [Performance Optimization](../../06_ecosystem/10_performance/15_performance_optimization.md) · [Zero-Copy Parsing](15_zero_copy_parsing.md)
@@ -32,6 +33,7 @@
   - [九、常见反模式](#九常见反模式)
   - [认知路径](#认知路径)
   - [反命题](#反命题)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -178,7 +180,6 @@ let matrix: Vec<f64> = vec![0.0; n * 1024];
 > **权威来源**: [TRPL — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html), [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html), [Rust Performance Book](https://nnethercote.github.io/perf-book/)
 >
 > **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
-
 
 ---
 

@@ -1,6 +1,6 @@
 > **⚠️ 已更新**:
 >
-> 本文件的深度内容已迁移至 [borrow_sanitizer.md](../02_stabilized_features/borrow_sanitizer.md)（2026-06-08 新建，2026-06-19 已同步 April 2026 更新）。本文件保留为历史参考，不再主动维护。
+> 本文件的深度内容已迁移至 [borrow_sanitizer.md](borrow_sanitizer.md)（2026-06-08 新建，2026-06-19 已同步 April 2026 更新）。本文件保留为历史参考，不再主动维护。
 > **代码状态**: ✅ 含可编译示例
 
 # BorrowSanitizer 概念预研：运行时借用检查工业化
@@ -341,12 +341,12 @@ fn main() {
 }
 ```
 
-## 相关概念文件
+## 相关概念
 
 - [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) — Unsafe 边界与借用（Borrowing）规则
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权系统的形式化根基
 - [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用检查的核心机制
-- [BorrowSanitizer（活跃跟踪）](../02_stabilized_features/borrow_sanitizer.md) — 最新动态与使用方式
+- [BorrowSanitizer（活跃跟踪）](borrow_sanitizer.md) — 最新动态与使用方式
 - [Safety Tags 预览](08_safety_tags_preview.md) — `unsafe` 契约的机器可读标注
 - [AutoVerus / Verus 预览](33_autoverus_preview.md) — 自动化形式化证明
 - [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md) — BSan 底层别名模型
@@ -360,7 +360,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成（待调研结果补充 Shadow Stack 技术细节）
 

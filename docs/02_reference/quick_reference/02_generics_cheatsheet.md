@@ -803,9 +803,9 @@ fn main() {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [类型系统完备性缺口](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) — 泛型相关的完备性保证
-- [类型构造能力](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) — 泛型类型的构造性分析
-- [Trait 系统形式化](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) — Trait 约束的形式化理论
+- [类型系统完备性缺口](../../research_notes/formal_methods/00_completeness_gaps.md) — 泛型相关的完备性保证
+- [类型构造能力](../../research_notes/type_theory/10_construction_capability.md) — 泛型类型的构造性分析
+- [Trait 系统形式化](../../research_notes/type_theory/10_trait_system_formalization.md) — Trait 约束的形式化理论
 
 ---
 

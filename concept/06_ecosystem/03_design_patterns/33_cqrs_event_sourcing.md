@@ -6,11 +6,12 @@
 >
 > **EN**: Cqrs Event Sourcing
 > **Summary**: Design patterns for separating read and write models (CQRS) and reconstructing state from immutable events (Event Sourcing) in Rust distributed systems.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 设计高可靠分布式系统的数据持久化模式
 > **前置依赖**: [Async](../../03_advanced/01_async/02_async.md) · 事件驱动架构 · [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md)
 > **后置延伸**: [分布式系统](../04_web_and_networking/18_distributed_systems.md) · [微服务架构模式](31_microservice_patterns.md) · [云原生](../04_web_and_networking/24_cloud_native.md)
@@ -29,7 +30,7 @@
 > [来源: [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))]
 > [来源: [Young — CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)] ·
 > [来源: [Axon Framework](https://docs.axoniq.io/reference-guide/)]
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -1359,7 +1360,7 @@ fn good_deserialization() {
 > [来源: [Microsoft — Event Sourcing Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing)]
 > [来源: [AWS — CQRS Pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html)]
 
-## 相关概念文件
+## 相关概念
 
 - [微服务架构模式](31_microservice_patterns.md) — 服务发现、熔断、Saga
 - [事件驱动架构](32_event_driven_architecture.md) — 发布-订阅、消息队列、Reactive Streams

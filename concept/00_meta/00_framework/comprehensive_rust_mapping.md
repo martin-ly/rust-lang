@@ -180,7 +180,7 @@ Comprehensive Rust 与本知识体系的互补关系:
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Learning Guide](../04_navigation/learning_guide.md) — 本知识体系学习指南
 - [Bloom Taxonomy](bloom_taxonomy.md) — 认知层级框架
@@ -192,7 +192,7 @@ Comprehensive Rust 与本知识体系的互补关系:
 > **权威来源对齐变更日志**: 2026-06-02 创建，映射 Comprehensive Rust 2026 版
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-02
 **状态**: ✅ 概念文件创建完成
 

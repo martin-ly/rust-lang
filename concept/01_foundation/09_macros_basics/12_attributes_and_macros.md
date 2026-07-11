@@ -550,7 +550,10 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
+- **上层概念**: [Type System](../02_type_system/04_type_system.md) · [Modules](../07_modules_and_items/11_modules_and_paths.md)
+- **下层概念**: [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) · [DSL](../../02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md)
+
 
 - [Type System](../02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Modules](../07_modules_and_items/11_modules_and_paths.md) — 模块（Module）系统
@@ -564,7 +567,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

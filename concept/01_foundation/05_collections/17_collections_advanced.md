@@ -660,7 +660,7 @@ fn main() {
 }
 ```
 
-## 相关概念文件
+## 相关概念
 
 - [Type System](../02_type_system/04_type_system.md) — 类型系统（Type System）基础
 - [Collections](08_collections.md) — 基础集合类型
@@ -675,7 +675,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 
 ---

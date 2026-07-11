@@ -26,7 +26,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **Bloom 层级**: L3-L6
+> **Bloom 层级**: L2-L6
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，覆盖 12 个功能域、40+ 核心 crate、选型矩阵、L1-L5 概念映射
@@ -1165,7 +1165,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

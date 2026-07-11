@@ -162,8 +162,8 @@ rustc --emit=mir example.rs
 # 通常需要开启优化等级以观察优化后的 MIR
 rustc -O --emit=mir example.rs
 
-# 使用 nightly 可输出更详细的 borrowck / drop elaboration 信息
-rustc +nightly -Zmir-opt-level=3 --emit=mir example.rs
+# 使用每日构建版工具链可输出更详细的 borrowck / drop elaboration 信息
+rustc +<每日构建版工具链> -Zmir-opt-level=3 --emit=mir example.rs
 ```
 
 输出文件名为 `example.mir`，内容大致如下：
@@ -353,7 +353,7 @@ MIR 仍保留 Rust 高层语义（如 `move`、`Drop`、借用检查标记、基
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-09
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

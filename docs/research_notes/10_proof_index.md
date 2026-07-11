@@ -661,7 +661,7 @@
 | :--- | :--- |
 | **L1** | 所有权（Ownership） T3、借用（Borrowing） T2、生命周期 LF-T1–T3、类型 T1/T2/T4/T5、异步（Async） T6.1–T6.3、Pin T1–T3、Trait T1–T3、设计模式推论、实验定理 |
 | **L2** | 所有权 T2、借用 T1、类型 T3（见 [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md)）；型变 T1–T4、组合工程 CE-T1–T3、边界 BMP-T1/T2 |
-| **L3** | Coq 骨架已创建 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)（证明 Admitted）；补全见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[L3_MACHINE_PROOF_GUIDE](10_l3_machine_proof_guide.md) |
+| **L3** | Coq 骨架已创建 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)（归档只读）（证明 Admitted）；补全见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[L3_MACHINE_PROOF_GUIDE](10_l3_machine_proof_guide.md) |
 
 ---
 

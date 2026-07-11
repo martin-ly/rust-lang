@@ -7,7 +7,7 @@
 > **EN**: Documentation
 > **Summary**: Writing and publishing Rust documentation with rustdoc, doc tests, and crate docs.
 > **受众**: [进阶]
-> **Bloom 层级**: L3-L4
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 文档工具和约定的应用
@@ -342,7 +342,7 @@ API 文档规范（RFC 1574 推荐）:
   //!
   //! ## 最低支持 Rust 版本（MSRV）
   //!
-  //! 本 crate 的 MSRV 是 1.70.0。
+  //! 本 crate 的 MSRV 是 1.97.0。
 
   文档质量检查清单:
   ├── 所有 pub 项都有文档注释
@@ -481,7 +481,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Cargo Toolchain](../00_toolchain/01_toolchain.md) — Cargo 与 rustdoc 集成
 - [Macros](../../03_advanced/03_proc_macros/04_macros.md) — 文档宏（doc comments）
@@ -494,7 +494,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

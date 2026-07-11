@@ -78,6 +78,7 @@ THEME_SUBDIRS: Final[dict[str, list[str]]] = {
         "05_inline_assembly",
         "06_low_level_patterns",
         "07_unsafe_internals",
+        "08_process_ipc",
     ],
     "04_formal": [
         "00_type_theory",
@@ -107,14 +108,13 @@ THEME_SUBDIRS: Final[dict[str, list[str]]] = {
         "09_testing_and_quality",
         "10_performance",
         "11_domain_applications",
+        "12_networking",
     ],
     "07_future": [
         "00_version_tracking",
         "01_edition_roadmap",
-        "02_stabilized_features",
         "03_preview_features",
         "04_research_and_experimental",
-        "05_roadmaps",
     ],
 }
 

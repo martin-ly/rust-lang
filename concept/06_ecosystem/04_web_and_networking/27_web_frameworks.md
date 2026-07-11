@@ -14,7 +14,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S** — ApplicationStructure
+> **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×App — 应用 Web 框架模式
 > **定位**: 对比分析 Rust 主流 Web 框架——Axum、Actix-web、Rocket、Poem——从架构设计、运行时（Runtime）集成、中间件机制到性能特征，建立系统化的选型决策框架。
 > **前置概念**: [Async](../../03_advanced/01_async/02_async.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
@@ -134,7 +134,7 @@ Rust Web 框架演进:
   2015: Iron (基于 hyper 0.x) — 最早的主流框架，现已归档
         [来源: Iron GitHub archive]
 
-  2016: Rocket v0.x — 声明式路由先驱，需 nightly
+  2016: Rocket v0.x — 声明式路由先驱，当时需每日构建版工具链
         [Rocket v0.4 docs](https://docs.rs/rocket/latest/rocket/)
 
   2017: Actix-web v0.x — Actor 模型高性能框架崛起
@@ -778,7 +778,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Async/Await](../../03_advanced/01_async/02_async.md) — 异步编程基础
 - [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) — 并发模型
@@ -793,7 +793,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

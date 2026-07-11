@@ -6,7 +6,7 @@
 > 确保学习者能顺利对接 crates.io、RFC、GitHub Issue 等英文生态。
 >
 > **标准来源**: TRPL · Rust Reference · std API Docs · Rustnomicon · Async Book · Cargo Book · Edition Guide
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ v3.2 — 已覆盖 183 个高频术语（超过 150 目标），全部含英文对照；关键术语已在 L1–L3 概念文档完成首次出现双语标注
 > **冻结日期**: 2026-06-10（v3.0 冻结）；2026-06-22 起跟踪 1.97 术语；2026-06-24 完成双语标注
 > **维护规则**: 仅当 Rust 官方术语变更或新增核心语言关键字/API 时才更新，常规生态术语不扩展

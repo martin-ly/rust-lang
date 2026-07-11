@@ -97,7 +97,7 @@ fn main() {
 
 > **受众**: [进阶]
 > **内容分级**: [综述级]
-> **Bloom 层级**: L3-L5
+> **Bloom 层级**: L2-L5
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — Cargo script 工具的应用
 > **定位**: 将 Rust 从"项目级语言"扩展为"脚本级语言"的工程机制，使单文件可执行成为一等公民。
@@ -111,7 +111,7 @@ fn main() {
 > [Cargo Book — Scripts](https://doc.rust-lang.org/cargo/reference/unstable.html#script) ·
 > [rust-lang/cargo#12207](https://github.com/rust-lang/cargo/issues/12207) ·
 > [rust-lang/rust#136889](https://github.com/rust-lang/rust/issues/136889)
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -463,7 +463,7 @@ Cargo Script:  File = Crate (单模块，无子模块)
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [工具链总览](../00_toolchain/01_toolchain.md) — Cargo 工作空间与编译器生态
 - [核心 Crate 选型](../02_core_crates/03_core_crates.md) — 脚本中常用依赖的选择策略

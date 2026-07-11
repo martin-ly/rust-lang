@@ -10,7 +10,7 @@
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L5 对比分析 — 系统编程工程实践
-> **A/S/P 标记**: **A+S** — Application + Structure
+> **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: P×Ana — 分析 C/C++ 与 Rust 在二进制层面的工程差异
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
 > [Type System](../../01_foundation/02_type_system/04_type_system.md) ·
@@ -565,7 +565,7 @@ pub struct CDrawable {
 > [Rust Foundation Interop Initiative](https://github.com/rustfoundation/interop-initiative)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — C/C++ 工程层对比
 
@@ -784,9 +784,9 @@ C++ vtable 通常位于对象头部或尾部，含类型信息、虚析构函数
 
 ---
 
-### 测验 3：Rust 的 ABI 为什么默认不稳定（unstable）？这对动态链接有什么影响？（理解层）
+### 测验 3：Rust 的 ABI 为什么默认不稳定？这对动态链接有什么影响？（理解层）
 
-**题目**: Rust 的 ABI 为什么默认不稳定（unstable）？这对动态链接有什么影响？
+**题目**: Rust 的 ABI 为什么默认不稳定？这对动态链接有什么影响？
 
 <details>
 <summary>✅ 答案与解析</summary>

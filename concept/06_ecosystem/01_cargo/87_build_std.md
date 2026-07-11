@@ -2,6 +2,7 @@
 
 > **EN**: Cargo `build-std`
 > **Summary**: A comprehensive guide to Cargo's unstable `build-std` feature: compiling the Rust standard library (`std`, `core`, `alloc`) from source for custom targets, `no_std` + `alloc`, custom panic handlers, LTO size optimization, and embedded systems.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: [Cargo build-std 文档](https://doc.rust-lang.org/cargo/reference/unstable.html#build-std) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 >
 > **受众**: [进阶 / 工程]

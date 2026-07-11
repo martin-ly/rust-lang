@@ -50,7 +50,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `audit_source_links.py` | 来源链接标注审计 |
 | `audit_stable_apis.py` | 文档中稳定 API 标注审计 |
 | `concept_audit.py` | 概念知识体系一致性检查 |
-| `concept_consistency_auditor.py` | 跨文档概念对齐检查 |
+| `concept_consistency_auditor.py` | 跨文件概念定义一致性审计（质量门 18，语义观察门）：抽取 Send/Sync、所有权、借用、生命周期、内部可变性、Pin/Unpin、协变逆变、unsafe 定义并检测跨文件矛盾（极性/变型/Send-Sync 属性）与跨文件 § 引用有效性；报告输出 `reports/CONCEPT_CONSISTENCY_AUDIT_<date>.md`；默认 exit 0，`--strict` 发现 ERROR 级发现时 exit 1 |
 | `cross_concept_diff.py` | 交叉概念 Diff |
 | `docs_value_audit.py` | 文档价值分级审计 |
 | `kb_auditor.py` | 知识库完整性检查 |
@@ -60,7 +60,10 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `detect_content_overlap.py` | 检测 `concept/`、`knowledge/`、`docs/` 三轨内容相似度，生成去重报告 |
 | `check_canonical_uniqueness.py` | `concept/` 权威页唯一性检查（AGENTS.md §2）：检测双权威页声明与同目录同主题重复文件；`--strict` 发现 ERROR 级违规时 exit 1 |
 | `check_template_cliches.py` | `concept/` 模板套话黑名单扫描（反命题/定理/过渡/反向推理/认知路径五步骤等 17 类注入模板句，见 `reports/TEMPLATE_CLICHE_CLEANUP_2026_07_12.md`）；默认 exit 0，`--strict` 发现命中即 exit 1 |
+| `check_decision_trees.py` | 决策树机器可读层校验（`concept/00_meta/knowledge_topology/decision_trees.yaml`）：结构完整性（必填字段/节点 id 唯一/边引用合法）、无死端（decision 节点必有出边、叶子必为 conclusion）、`covered_concepts` 在 KG v3 中存在、判定定量占比统计（基线 ≥50%）；结构错误始终 exit 1，`--strict` 时死端>0/概念缺失/定量占比<50% exit 1 |
 | `auto_dedup_redirect.py` | 对高相似度非 `concept/` 文件自动生成指向 `concept/` 权威来源的重定向页 |
+| `check_glossary_alignment.py` | 术语表对齐检查：以 `concept/00_meta/01_terminology/terminology_glossary.md` 为权威术语表，抽取其他术语表同名术语定义，报告关键语义缺失/低相似度/译名差异；stub 术语表自动豁免，支持 `<!-- glossary-waive: 术语 -->` 领域义项豁免；默认 exit 0，`--strict` 有差异 exit 1（见 `reports/GLOSSARY_MSRV_ALIGNMENT_2026_07_12.md`） |
+| `check_msrv_consistency.py` | MSRV 单一事实源检查：根 `Cargo.toml` `[workspace.package] rust-version`（1.97.0）为唯一事实源；校验 crates/*/Cargo.toml 继承或一致、活跃文档 MSRV 声明一致、`.clippy.toml` msrv 一致；豁免 workspace exclude 路径/独立 workspace/历史快照/第三方 MSRV；默认 exit 0，`--strict` 不一致 exit 1（见 `reports/GLOSSARY_MSRV_ALIGNMENT_2026_07_12.md`） |
 
 ### 🔗 链接检查与修复
 
@@ -300,7 +303,7 @@ docs/ crate 文档样板模板。
 | 配置目录 | `.cargo/`、`.github/`、`.vscode/` | 工具/平台约定目录 |
 | GitHub 模板 | `.github/ISSUE_TEMPLATE/` | GitHub  issue 模板目录名 |
 | 日期风格报告 | `reports/`、各 `crates/*/reports/` | NAMING_CONVENTION 过渡期日期风格例外 |
-| 归档目录 | `archive/`、各 `*/archive/`（如 `concept/archive/`、`crates/*/src/archive/`） | 只读历史归档 |
+| 归档目录 | `archive/`（含 `archive/2026/concept_archive/`，原 `concept/archive/` 已于 2026-07-12 迁入）、各 `*/archive/`（如 `crates/*/src/archive/`） | 只读历史归档 |
 | Agent 工作区 | `.kimi/` 及其 `archive/` | Agent 会话与日期风格例外 |
 | 虚拟环境 | `tools/kg_rag/.venv/` | 第三方依赖，不应提交 |
 | 构建产物 | `target/`、`book/` | 生成目录 |

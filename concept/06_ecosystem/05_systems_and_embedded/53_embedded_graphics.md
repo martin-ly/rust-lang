@@ -956,7 +956,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-26 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-26
 **状态**: ✅ 概念文件创建完成
 
@@ -964,7 +964,7 @@ graph TD
 
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
-## 相关概念文件
+## 相关概念
 
 - [Embedded Systems](22_embedded_systems.md) — 嵌入式系统基础
 - [Performance Optimization](../10_performance/15_performance_optimization.md) — 性能优化

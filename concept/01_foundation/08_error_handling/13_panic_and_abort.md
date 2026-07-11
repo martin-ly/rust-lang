@@ -228,7 +228,7 @@ panic::set_hook(Box::new(|info| {
 let old_hook = panic::take_hook();
 
 // 在 no_std 环境中:
-// #![feature(panic_handler)]
+// 需启用实验特性门 panic_handler（每日构建版工具链）
 // #[panic_handler]
 // fn panic(info: &PanicInfo) -> ! {
 //     // 自定义 panic 处理（嵌入式）
@@ -343,7 +343,7 @@ fn configure_panic() {
 未实现功能:
   → todo!() 或 unimplemented!()
   → 编译通过但运行时 panic
-  → fn new_feature() { todo!("Implement in Phase 2") }
+  → fn new_capability() { todo!("Implement in Phase 2") }
 
 不应到达的代码:
   → unreachable!()
@@ -492,7 +492,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Error Handling](../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md) — 错误处理（Error Handling）
 - [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) — 不安全代码
@@ -505,7 +505,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

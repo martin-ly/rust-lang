@@ -1221,7 +1221,7 @@ fn pgo_workflow() {
 
 - [所有权（Ownership）模型形式化](../research_notes/formal_methods/10_ownership_model.md)
 - [借用检查器证明](../research_notes/formal_methods/10_borrow_checker_proof.md)
-- [类型系统（Type System）基础](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
+- [类型系统（Type System）基础](../research_notes/type_theory/10_type_system_foundations.md)
 - 生命周期（Lifetimes）形式化
 
 ### 📦 推荐工具 {#推荐工具}

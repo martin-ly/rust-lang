@@ -7,10 +7,11 @@
 >
 > **EN**: Robotics
 > **Summary**: Robotics: Rust ecosystem tools, crates, and engineering practices.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: C×Eva — 评价 Rust 在机器人全栈中的适用性、实时约束满足度与 ROS2 集成成熟度
 > **前置依赖**: [嵌入式系统](22_embedded_systems.md) ·
 > [并发编程](../../03_advanced/00_concurrency/01_concurrency.md) ·
@@ -48,7 +49,7 @@
 > [ROS2 Executor Paper — Casini et al. 2019](https://doi.org/10.1109/LRA.2020.2967328) ·
 > [PREEMPT_RT Wiki](https://wiki.linuxfoundation.org/realtime/start) ·
 > [Rust Embedded Book](https://docs.rust-embedded.org/book/index.html)
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -905,7 +906,7 @@ impl GoodNode {
 > [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > [来源: [OMG DDS Spec](https://www.omg.org/spec/DDS/)]
 
-## 相关概念文件
+## 相关概念
 
 - [嵌入式系统](22_embedded_systems.md) — `no_std`、硬件抽象层、交叉编译
 - [并发编程](../../03_advanced/00_concurrency/01_concurrency.md) — Send/Sync、Mutex、线程池

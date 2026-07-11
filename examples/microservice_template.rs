@@ -107,8 +107,8 @@ impl ServiceRegistry {
     
     pub async fn register(&self, name: String, addr: SocketAddr) {
         let mut services = self.services.write().await;
-        services.insert(name, addr);
         println!("✅ Registered service: {} at {}", name, addr);
+        services.insert(name, addr);
     }
     
     pub async fn discover(&self, name: &str) -> Option<SocketAddr> {

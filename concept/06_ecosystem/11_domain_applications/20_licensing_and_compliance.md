@@ -9,7 +9,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+P** — ApplicationProcedure
+> **A/S/P 标记**: **P+A** — Procedure + Application
 > **双维定位**: P×Eva — 评估许可证合规性
 > **定位**: 系统讲解 Rust **开源许可证选择**、**依赖合规**和**版权管理**
 > ——从 MIT [来源: [MIT License](https://opensource.org/licenses/MIT)]/Apache [来源: [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)]
@@ -492,7 +492,7 @@ fn main() {
 }
 ```
 
-## 相关概念文件
+## 相关概念
 
 - [Toolchain](../00_toolchain/01_toolchain.md) — 工具链
 - [Security Practices](../07_security_and_cryptography/19_security_practices.md) — 安全实践
@@ -505,7 +505,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

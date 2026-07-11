@@ -2,6 +2,7 @@
 
 > **EN**: Attribute Relationship Atlas
 > **Summary**: 概念属性矩阵：每个核心概念的必备/可选属性、内容分级、A/S/P、Bloom 层级、定理链。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **内容分级**: [元层]
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
@@ -136,8 +137,8 @@
 | [高级 Trait 主题：从关联类型到特化](../../02_intermediate/00_traits/19_advanced_traits.md) | L2 进阶概念层 | 进阶 | 综述级 | S | L4-L5 | — |
 | [构造与初始化：C++ 的构造函数 vs Rust 的结构体字面量](../../02_intermediate/00_traits/28_construction_and_initialization.md) | L2 进阶概念层 | 进阶 | 参考级 | — | L2-L4 | — |
 | [可派生 Trait](../../02_intermediate/00_traits/31_derive_traits.md) | L2 进阶概念层 | 初学者 | 参考级 | S | L2-L3 | N/A — 参考级文档 |
-| [Rust Editions](../../02_intermediate/00_traits/32_editions.md) | L2 进阶概念层 | 进阶 | 参考级 | S | L2-L3 | Compiler Version → Edition → Syntax/Behavior → Migration |
-| [Rust 发布流程](../../02_intermediate/00_traits/33_rust_release_process.md) | L2 进阶概念层 | 进阶 | 参考级 | P | L2-L4 | Nightly → Beta → Stable → Release Channel |
+| [Rust Editions](../../07_future/00_version_tracking/32_editions.md) | L7 前沿趋势层 | 进阶 | 参考级 | S | L2-L3 | Compiler Version → Edition → Syntax/Behavior → Migration |
+| [Rust 发布流程](../../07_future/00_version_tracking/33_rust_release_process.md) | L7 前沿趋势层 | 进阶 | 参考级 | P | L2-L4 | 每日构建 → Beta → Stable → Release Channel |
 | [分发机制 (Dispatch Mechanisms)](../../02_intermediate/00_traits/39_dispatch_mechanisms.md) | L2 进阶概念层 | 进阶 | 专家级 | S | L4-L5 | — |
 | [泛型关联类型](../../02_intermediate/00_traits/40_generic_associated_types.md) | L2 进阶概念层 | 进阶 | 综述级 | S | L2-L4 | — |
 | [Generics](../../02_intermediate/01_generics/02_generics.md) | L2 进阶概念层 | 进阶 | 综述级 | — | L3-L5 | — |
@@ -185,24 +186,24 @@
 | [异步模式：从 Future 到生产级并发](../../03_advanced/01_async/26_async_patterns.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | — |
 | [Async 取消安全](../../03_advanced/01_async/37_async_cancellation_safety.md) | L3 高级概念层 | 进阶-专家 | 专家级 | S | L3 | — |
 | [Future 与 Executor 机制 (Future and Executor Mechanisms)](../../03_advanced/01_async/39_future_and_executor_mechanisms.md) | L3 高级概念层 | 进阶 | 专家级 | S | L4-L5 | — |
-| [Rust 进程模型与生命周期](../../03_advanced/02_process_ipc/01_process_model_and_lifecycle.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | OS Process ⟹ std::process::Command ⟹ Resource Control |
-| [Rust 高级进程管理](../../03_advanced/02_process_ipc/02_advanced_process_management.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Process Pool ⟹ Health Check ⟹ Fault Recovery |
-| [Rust 异步进程管理](../../03_advanced/02_process_ipc/03_async_process_management.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Async Runtime ⟹ tokio::process ⟹ Cancellation Safety |
-| [Rust 跨平台进程管理](../../03_advanced/02_process_ipc/04_cross_platform_process_management.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Platform Differences ⟹ cfg Abstraction ⟹ Portable API |
-| [Rust 进程间通信机制](../../03_advanced/02_process_ipc/05_ipc_mechanisms.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | IPC Mechanism ⟹ Latency/Throughput Trade-off ⟹ Safety |
-| [Rust 进程监控与诊断](../../03_advanced/02_process_ipc/06_process_monitoring_and_diagnostics.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Observable Metrics ⟹ Diagnostic Loop ⟹ Recovery |
-| [Rust 进程安全与沙箱](../../03_advanced/02_process_ipc/07_process_security_and_sandboxing.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Least Privilege ⟹ Isolation Boundary ⟹ Attack Surface Reduction |
-| [Rust 进程性能工程](../../03_advanced/02_process_ipc/08_process_performance_engineering.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Spawn Latency ⟹ Throughput ⟹ Resource Reclaim |
-| [Rust 进程测试与基准](../../03_advanced/02_process_ipc/09_process_testing_and_benchmarking.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Unit Test ⟹ Integration Pipeline ⟹ CI Gate |
-| [Rust 现代进程管理库](../../03_advanced/02_process_ipc/10_modern_process_libraries.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Requirement ⟹ Library Selection ⟹ Ecosystem Integration |
+| [Rust 进程模型与生命周期](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | OS Process ⟹ std::process::Command ⟹ Resource Control |
+| [Rust 高级进程管理](../../03_advanced/08_process_ipc/02_advanced_process_management.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Process Pool ⟹ Health Check ⟹ Fault Recovery |
+| [Rust 异步进程管理](../../03_advanced/08_process_ipc/03_async_process_management.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Async Runtime ⟹ tokio::process ⟹ Cancellation Safety |
+| [Rust 跨平台进程管理](../../03_advanced/08_process_ipc/04_cross_platform_process_management.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Platform Differences ⟹ cfg Abstraction ⟹ Portable API |
+| [Rust 进程间通信机制](../../03_advanced/08_process_ipc/05_ipc_mechanisms.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | IPC Mechanism ⟹ Latency/Throughput Trade-off ⟹ Safety |
+| [Rust 进程监控与诊断](../../03_advanced/08_process_ipc/06_process_monitoring_and_diagnostics.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Observable Metrics ⟹ Diagnostic Loop ⟹ Recovery |
+| [Rust 进程安全与沙箱](../../03_advanced/08_process_ipc/07_process_security_and_sandboxing.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Least Privilege ⟹ Isolation Boundary ⟹ Attack Surface Reduction |
+| [Rust 进程性能工程](../../03_advanced/08_process_ipc/08_process_performance_engineering.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Spawn Latency ⟹ Throughput ⟹ Resource Reclaim |
+| [Rust 进程测试与基准](../../03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Unit Test ⟹ Integration Pipeline ⟹ CI Gate |
+| [Rust 现代进程管理库](../../03_advanced/08_process_ipc/10_modern_process_libraries.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | Requirement ⟹ Library Selection ⟹ Ecosystem Integration |
 | [是否需要进入 L4 形式化层？](../../03_advanced/02_unsafe/00_before_formal.md) | L3 高级概念层 | 进阶 | 综述级 | — | — | — |
 | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/03_unsafe.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | — |
 | [NLL 与 Polonius：借用检查器的演进](../../03_advanced/02_unsafe/08_nll_and_polonius.md) | L3 高级概念层 | 专家 | 专家级 | S | L4-L5 | — |
 | [Unsafe Rust 模式：安全抽象的核心技术](../../03_advanced/02_unsafe/12_unsafe_rust_patterns.md) | L3 高级概念层 | 专家 | 专家级 | — | — | — |
 | [测验：Unsafe Rust](../../03_advanced/02_unsafe/22_quiz_unsafe.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
 | [Rust 内存模型](../../03_advanced/02_unsafe/29_memory_model.md) | L3 高级概念层 | 专家 | 专家级 | S | L2-L4 | Byte Model → Provenance → UB Boundary |
-| [Rust 运行时](../../03_advanced/02_unsafe/30_rust_runtime.md) | L3 高级概念层 | 专家 | 专家级 | S | L2-L3 | Runtime Attribute → Allocation / Subsystem → Binary Behavior |
-| [Panic 机制](../../03_advanced/02_unsafe/31_panic.md) | L3 高级概念层 | 专家 | 专家级 | S | L2-L4 | Panic → Handler → Strategy → Unwind → UB Boundary |
+| [Rust 运行时](../../03_advanced/06_low_level_patterns/30_rust_runtime.md) | L3 高级概念层 | 专家 | 专家级 | S | L2-L3 | Runtime Attribute → Allocation / Subsystem → Binary Behavior |
+| [Panic 机制](../../02_intermediate/03_error_handling/31_panic.md) | L2 进阶概念层 | 专家 | 专家级 | S | L2-L4 | Panic → Handler → Strategy → Unwind → UB Boundary |
 | [Unsafe 参考](../../03_advanced/02_unsafe/35_unsafe_reference.md) | L3 高级概念层 | 专家 | 专家级 | S | L2-L4 | Unsafe Keyword → Unsafe Block → Unsafe Operation → UB Contract |
 | [Macros](../../03_advanced/03_proc_macros/04_macros.md) | L3 高级概念层 | 专家 | 专家级 | — | L3-L4 | — |
 | [过程宏：编译期代码生成的元编程工具](../../03_advanced/03_proc_macros/07_proc_macro.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | — |
@@ -385,12 +386,12 @@
 | [Security & Cryptography](../../06_ecosystem/07_security_and_cryptography/43_security_cryptography.md) | L6 生态工程层 | 进阶 | 综述级 | — | L3-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Formal Ecosystem Tower](../../06_ecosystem/08_formal_verification/44_formal_ecosystem_tower.md) | L6 生态工程层 | 进阶 | 专家级 | — | L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Formal Verification Tools](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md) | L6 生态工程层 | 进阶 | 专家级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 高级网络协议概览](../../06_ecosystem/09_networking/01_advanced_network_protocols.md) | L6 生态工程层 | 进阶 | 综述级 | — | L2-L4 | — |
-| [网络安全](../../06_ecosystem/09_networking/02_network_security.md) | L6 生态工程层 | 专家 | 专家级 | — | — | — |
-| [自定义协议实现](../../06_ecosystem/09_networking/03_custom_protocol_implementation.md) | L6 生态工程层 | 专家 | 专家级 | — | — | — |
-| [Rust 网络编程快速入门](../../06_ecosystem/09_networking/04_network_programming_quick_start.md) | L6 生态工程层 | 进阶 | 指南级 | — | L2-L3 | — |
-| [形式化网络协议理论](../../06_ecosystem/09_networking/05_formal_network_protocol_theory.md) | L6 生态工程层 | 研究者 / 专家 | 专家级 | — | L4-L5 | — |
-| [C10 Networks - Tier 2: 网络基础实践](../../06_ecosystem/09_networking/06_networking_basics.md) | L6 生态工程层 | 初学者 | 综述级 | — | L2-L3 | Socket ⟹ Protocol ⟹ Application |
+| [Rust 高级网络协议概览](../../06_ecosystem/12_networking/01_advanced_network_protocols.md) | L6 生态工程层 | 进阶 | 综述级 | — | L2-L4 | — |
+| [网络安全](../../06_ecosystem/12_networking/02_network_security.md) | L6 生态工程层 | 专家 | 专家级 | — | — | — |
+| [自定义协议实现](../../06_ecosystem/12_networking/03_custom_protocol_implementation.md) | L6 生态工程层 | 专家 | 专家级 | — | — | — |
+| [Rust 网络编程快速入门](../../06_ecosystem/12_networking/04_network_programming_quick_start.md) | L6 生态工程层 | 进阶 | 指南级 | — | L2-L3 | — |
+| [形式化网络协议理论](../../06_ecosystem/12_networking/05_formal_network_protocol_theory.md) | L6 生态工程层 | 研究者 / 专家 | 专家级 | — | L4-L5 | — |
+| [C10 Networks - Tier 2: 网络基础实践](../../06_ecosystem/12_networking/06_networking_basics.md) | L6 生态工程层 | 初学者 | 综述级 | — | L2-L3 | Socket ⟹ Protocol ⟹ Application |
 | [Rust 测试策略：从单元测试到属性验证](../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md) | L6 生态工程层 | 进阶 | 专家级 | — | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [文档生态：rustdoc、文档测试与 API 文档规范](../../06_ecosystem/09_testing_and_quality/14_documentation.md) | L6 生态工程层 | 进阶 | 综述级 | A | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [测试生态：单元测试、集成测试与验证策略](../../06_ecosystem/09_testing_and_quality/16_testing.md) | L6 生态工程层 | 进阶 | 综述级 | — | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
@@ -417,7 +418,7 @@
 | [前沿算法技术](../../06_ecosystem/11_domain_applications/79_cutting_edge_algorithms.md) | L6 生态工程层 | 专家 | 综述级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [形式化算法理论](../../06_ecosystem/11_domain_applications/80_formal_algorithm_theory.md) | L6 生态工程层 | 专家 | 形式化级 | S | — | 形式化算法理论为程序正确性提供数学基础 |
 | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 的发布流程与 Nightly Rust](../../07_future/00_version_tracking/50_nightly_rust.md) | L7 前沿趋势层 | 初学者 | 研究级 | P | L2 | N/A — 流程/生态文档 |
+| [Rust 的发布流程与每日构建频道](../../07_future/00_version_tracking/50_nightly_rust.md) | L7 前沿趋势层 | 初学者 | 研究级 | P | L2 | N/A — 流程/生态文档 |
 | [Rust 1.97.0 特性 × 领域反查矩阵](../../07_future/00_version_tracking/feature_domain_matrix_197.md) | L7 前沿趋势层 | 进阶 | 参考级 | — | L4（分析）/ L5（评价：跨领域一致性判定） | — |
 | [Rust 1.97 兼容性迁移判定树](../../07_future/00_version_tracking/migration_197_decision_tree.md) | L7 前沿趋势层 | 进阶 | 参考级 | P | L3-L4（应用/分析：将版本变更映射到具体代码修复） | — |
 | [Rust 1.90 网络特性参考](../../07_future/00_version_tracking/rust_1_90_stabilized.md) | L7 前沿趋势层 | 进阶 | 参考级 | — | L2-L3 | Version Context ⟹ Feature Set ⟹ Migration Impact |
@@ -433,7 +434,7 @@
 | [Rust 2024 Edition (1.85.0+ stable)](../../07_future/01_edition_roadmap/19_rust_edition_preview.md) | L7 前沿趋势层 | 进阶 | 研究级 | — | — | — |
 | [Rust Edition 机制与迁移指南](../../07_future/01_edition_roadmap/23_rust_edition_guide.md) | L7 前沿趋势层 | 研究者 | 研究级 | — | — | — |
 | [Edition 2024 完全指南：新特性与迁移策略](../../07_future/01_edition_roadmap/44_edition_guide.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L3-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [BorrowSanitizer：动态别名规则验证工具](../../07_future/02_stabilized_features/borrow_sanitizer.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/工具链文档 |
+| [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/borrow_sanitizer.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/工具链文档 |
 | [Effects System: Concept Pre-study](../../07_future/03_preview_features/04_effects_system.md) | L7 前沿趋势层 | 专家 | 综述级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](../../07_future/03_preview_features/07_mcdc_coverage_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/08_safety_tags_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
@@ -442,9 +443,9 @@
 | [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/03_preview_features/11_const_trait_impl_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/03_preview_features/12_return_type_notation_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/03_preview_features/13_unsafe_fields_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Lifetime Capture in `impl Trait` Preview](../../07_future/03_preview_features/14_lifetime_capture_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Lifetime Capture in `impl Trait` 预研](../../07_future/03_preview_features/14_lifetime_capture_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/03_preview_features/15_pin_ergonomics_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | L4-L5 | — |
-| [TAIT Preview](../../07_future/03_preview_features/16_type_alias_impl_trait_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [TAIT 预研](../../07_future/03_preview_features/16_type_alias_impl_trait_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Const Trait 实现预览](../../07_future/03_preview_features/17_const_trait_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/18_async_drop_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/03_preview_features/20_borrowsanitizer_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
@@ -452,11 +453,11 @@
 | [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/03_preview_features/25_open_enums_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Specialization：Trait 实现的精确化与重叠解析](../../07_future/03_preview_features/26_specialization_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [编译期执行与常量求值](../../07_future/03_preview_features/27_compile_time_execution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Stable ABI Preview](../../07_future/03_preview_features/30_stable_abi_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L2-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Stable ABI 预研](../../07_future/03_preview_features/30_stable_abi_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L2-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Safety Tags（安全标签）预览](../../07_future/03_preview_features/31_safety_tags_preview.md) | L7 前沿趋势层 | — | — | — | — | — |
 | [Inline Const Pattern 预览](../../07_future/03_preview_features/32_inline_const_pattern_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | A | L2-L3 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [AutoVerus / Verus 预览](../../07_future/03_preview_features/33_autoverus_preview.md) | L7 前沿趋势层 | 进阶 | 专家级 | — | L4-L5 | N/A — 形式化验证工具/AI 辅助证明研究跟踪 |
-| [`must_not_suspend` Lint Preview](../../07_future/03_preview_features/34_must_not_suspend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | P | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [`must_not_suspend` Lint 预研](../../07_future/03_preview_features/34_must_not_suspend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | P | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Ferrocene 预研：Rust 的安全关键认证之路](../../07_future/03_preview_features/35_ferrocene_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [特质中返回位置 impl Trait（RPITIT）预览](../../07_future/03_preview_features/37_rpitit_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/03_preview_features/38_cranelift_backend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
@@ -466,9 +467,9 @@
 | [Field Projections 预览：安全的字段级投影](../../07_future/03_preview_features/42_field_projections_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [`std::autodiff`：Rust 官方自动微分前沿追踪](../../07_future/03_preview_features/45_std_autodiff_preview.md) | L7 前沿趋势层 | 研究者 | 实验级 | — | L5-L6 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [cargo-semver-checks：从社区工具到 Cargo 官方集成](../../07_future/03_preview_features/46_cargo_semver_checks_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | P | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [WASM Target Evolution Preview](../../07_future/03_preview_features/47_wasm_target_evolution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L2-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [WASM Target Evolution 预研](../../07_future/03_preview_features/47_wasm_target_evolution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L2-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/03_preview_features/48_aarch64_sve_sme_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust in Space Preview](../../07_future/03_preview_features/49_rust_in_space.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust in Space 预研](../../07_future/03_preview_features/49_rust_in_space.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [AI × Rust：生成-验证闭环与确定性容器](../../07_future/04_research_and_experimental/01_ai_integration.md) | L7 前沿趋势层 | 专家 | 实验级 | P | L4-L6 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | L7 前沿趋势层 | 专家 | 实验级 | P | L5-L6 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
@@ -476,7 +477,7 @@
 | [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](../../07_future/04_research_and_experimental/28_rust_for_webassembly.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L3-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [eBPF / Aya / Rex 的 Rust 映射](../../07_future/04_research_and_experimental/29_ebpf_rust.md) | L7 前沿趋势层 | 专家 | 综述级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/43_rust_for_linux.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 2027 Edition 及未来路线图](../../07_future/05_roadmaps/24_roadmap.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 2027 Edition 及未来路线图](../../07_future/01_edition_roadmap/24_roadmap.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 
 ## 二、属性分布统计
 

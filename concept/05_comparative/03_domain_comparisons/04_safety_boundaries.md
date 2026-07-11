@@ -520,6 +520,8 @@ graph LR
 | 并发死锁 | [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md) §7.1 反命题与边界分析 |
 | Pin 不动性突破 | [`../03_advanced/01_async/02_async.md`](../../03_advanced/01_async/02_async.md) §7.1 反命题与边界分析 |
 | unsafe 契约失效 | [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md) §7.1 反命题与边界分析 |
+| async 语义边界（await/取消/Pin/Send/executor/dyn） | [Async 边界全景](../../03_advanced/01_async/38_async_boundary_panorama.md) — 本全景在 async 域的纵深 |
+| unsafe 语义边界（UB/别名模型/Miri 可检测性/契约/FFI） | [Unsafe 边界全景](../../03_advanced/02_unsafe/32_unsafe_boundary_panorama.md) — 本全景在 unsafe 域的纵深 |
 | RustBelt 证明边界 | [`../04_formal/04_rustbelt.md`](../../04_formal/02_separation_logic/04_rustbelt.md) §7.1 反命题与边界分析 |
 
 ---
@@ -801,7 +803,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

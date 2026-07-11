@@ -25,7 +25,7 @@
 - 安全关键系统专题：[`content/safety_critical/README.md`](safety_critical/README.md)
 - 生态框架深度解析：[`content/ecosystem/deep_dives/README.md`](ecosystem/deep_dives/README.md)
 - Rust 概念权威解释：[`concept/`](../concept)
-- 历史专题文件：[`archive/content/`](../archive/content)
+- 历史专题文件：[`archive/content/`](../archive/content)（归档只读）
 
 ---
 

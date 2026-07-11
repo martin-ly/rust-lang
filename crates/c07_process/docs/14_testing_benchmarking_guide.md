@@ -22,4 +22,4 @@ canonical 链接。
 | :--- | :--- |
 | Rust 测试生态 | [`concept/06_ecosystem/09_testing_and_quality/16_testing.md`](../../../concept/06_ecosystem/09_testing_and_quality/16_testing.md) |
 | 性能优化 | [`concept/06_ecosystem/10_performance/15_performance_optimization.md`](../../../concept/06_ecosystem/10_performance/15_performance_optimization.md) |
-| 进程模型与生命周期 | [`concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`](../../../concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md) |
+| 进程模型与生命周期 | [`concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md`](../../../concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) |

@@ -454,7 +454,7 @@ fn closure_effect() {
 > [Wadler 1992 — The Essence of Functional Programming](https://dl.acm.org/doi/10.1145/143165.143169) ·
 > [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 通用 PL 基座层
 

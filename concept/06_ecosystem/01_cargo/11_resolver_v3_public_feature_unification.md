@@ -173,7 +173,7 @@ D (serde): Hello from crate-d / serde feature
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0 (stable)
+**Rust 版本**: 1.97.0 (stable)
 **最后更新**: 2026-07-09
 **状态**: ✅ 可运行示例已落地
 

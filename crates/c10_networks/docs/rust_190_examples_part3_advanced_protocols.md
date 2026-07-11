@@ -4,11 +4,11 @@
 # Rust 1.90 网络编程实战示例大全 Part 3 — 高级协议（c10_networks 示例索引）
 
 > **权威来源**: gRPC、MQTT、QUIC、AMQP、GraphQL over HTTP、SSE 等协议概念、选型与学习路径见
-> [`concept/06_ecosystem/09_networking/01_advanced_network_protocols.md`](../../../concept/06_ecosystem/09_networking/01_advanced_network_protocols.md)。
+> [`concept/06_ecosystem/12_networking/01_advanced_network_protocols.md`](../../../concept/06_ecosystem/12_networking/01_advanced_network_protocols.md)。
 
 本文件原为 `c10_networks` crate 的高级协议代码示例集合，同时包含大量通用协议理论叙述。
 根据 AGENTS.md §6.4 治理规则，通用协议概念解释已迁移至
-`concept/06_ecosystem/09_networking/`，此处仅保留索引与 canonical 链接。
+`concept/06_ecosystem/12_networking/`，此处仅保留索引与 canonical 链接。
 
 ## 本 crate 相关示例
 
@@ -20,7 +20,7 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| 高级网络协议概览与选型 | [`concept/06_ecosystem/09_networking/01_advanced_network_protocols.md`](../../../concept/06_ecosystem/09_networking/01_advanced_network_protocols.md) |
+| 高级网络协议概览与选型 | [`concept/06_ecosystem/12_networking/01_advanced_network_protocols.md`](../../../concept/06_ecosystem/12_networking/01_advanced_network_protocols.md) |
 | 异步编程 | [`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md) |
 | 并发模型 | [`concept/03_advanced/00_concurrency/01_concurrency.md`](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
 

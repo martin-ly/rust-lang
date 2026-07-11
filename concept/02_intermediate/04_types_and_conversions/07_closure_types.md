@@ -394,7 +394,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Traits](../00_traits/01_traits.md) — Trait 系统与接口抽象
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权模型
@@ -409,7 +409,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 

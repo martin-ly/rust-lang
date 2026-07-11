@@ -1015,28 +1015,28 @@ graph TD
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
-- [DESIGN_MECHANISM_RATIONALE](../../archive/research_notes_2026_06_25/10_design_mechanism_rationale.md) - Pin 堆/栈区分、设计机制论证
-- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../../archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
+- [DESIGN_MECHANISM_RATIONALE](../research_notes/10_design_mechanism_rationale.md) - Pin 堆/栈区分、设计机制论证
+- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
 
 ### 表达能力与边界 {#表达能力与边界}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-- [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../archive/research_notes_2026_06_25/10_language_semantics_expressiveness.md) - 表达能力边界
-- [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../../archive/research_notes_2026_06_25/10_safe_decidable_mechanisms_overview.md) - 安全可判定机制
+- [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/10_language_semantics_expressiveness.md) - 表达能力边界
+- [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../research_notes/10_safe_decidable_mechanisms_overview.md) - 安全可判定机制
 
 ### 证明与安全 {#证明与安全}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [04_proof_graph_network.md](04_proof_graph_network.md) - 证明图网详细文档
-- [10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) - 形式化证明索引
+- [10_proof_index.md](../research_notes/10_proof_index.md) - 形式化证明索引
 
 ### 分布式与工作流决策树（formal_methods 独立） {#分布式与工作流决策树formal_methods-独立}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-- [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](../../archive/research_notes_2026_06_25/10_distributed_architecture_decision_tree.md) - 分布式架构选型（Saga/CQRS/熔断器）
+- [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](../research_notes/10_distributed_architecture_decision_tree.md) - 分布式架构选型（Saga/CQRS/熔断器）
 - WORKFLOW_ENGINE_DECISION_TREE - 工作流引擎选型（Temporal/自研/状态机）
 
 ### 相关文档 {#相关文档-2}

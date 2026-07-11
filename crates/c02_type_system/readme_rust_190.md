@@ -148,7 +148,7 @@ name = "c02_type_system"
 version = "0.1.0"
 edition = "2024"           # Edition 2024 支持
 resolver = "3"             # 依赖解析器 3
-rust-version = "1.90"      # 最低 Rust 版本要求
+rust-version = "1.97.0"      # 最低 Rust 版本要求
 
 # 工作空间继承
 [workspace]
@@ -211,7 +211,7 @@ resolver = "3"
 [workspace.package]
 version = "1.0.0"
 edition = "2024"
-rust-version = "1.90"
+rust-version = "1.97.0"
 license = "MIT"
 authors = ["Your Name"]
 
@@ -327,7 +327,7 @@ cargo publish --dry-run --allow-dirty
 name = "my-package"
 version = "1.0.0"
 edition = "2024"
-rust-version = "1.90"    # 指定最低 Rust 版本
+rust-version = "1.97.0"    # 指定最低 Rust 版本
 
 # 发布元数据
 description = "A powerful type system library"
@@ -484,7 +484,7 @@ fn main() {
 // Cargo.toml配置
 edition = "2024"
 resolver = "3"
-rust-version = "1.90"
+rust-version = "1.97.0"
 
 // 新的模块系统改进
 pub use super::advanced_features::*;

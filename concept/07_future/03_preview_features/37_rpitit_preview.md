@@ -4,6 +4,7 @@
 >
 > **EN**: Return Position Impl Trait In Traits (RPITIT) Preview
 > **Summary**: Preview of RPITIT, which allows `impl Trait` as return types in trait methods; stabilized in Rust 1.75.0 and extended with precise lifetime capture in Rust 1.82+.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ Rust 1.75.0 已稳定；Rust 1.82+ 支持 `use<>` 精确捕获
 > **Rust 属性标记**: `#[stable_since_1_75]`
 > **跟踪版本**: stable 1.75.0（基础 RPITIT）；stable 1.82.0+（精确捕获扩展）
@@ -13,7 +14,7 @@
 > **内容分级**: [实验级]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S** — Application + Structure
+> **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: F×App — 应用 RPITIT 于 trait 设计
 > **前置依赖**: [Trait](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Advanced Traits](../../02_intermediate/00_traits/19_advanced_traits.md)
 > **后置延伸**: [Type Alias Impl Trait](16_type_alias_impl_trait_preview.md) · [Lifetime Capture](14_lifetime_capture_preview.md)

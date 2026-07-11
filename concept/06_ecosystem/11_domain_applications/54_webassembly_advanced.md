@@ -768,7 +768,7 @@ fn main() {
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [WebAssembly 基础](11_webassembly.md) — Wasm 入门、MVP 设计与 Rust 编译基础
 - [WASI](../05_systems_and_embedded/08_wasi.md) — WASI 系统接口、能力安全与组件模型架构
@@ -810,7 +810,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-26 初始创建，对齐 Rust 1.97.0+ (Edition 2024) 与 WASI Preview 2 / Component Model 最新规范
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-26
 **状态**: ✅ 概念文件创建完成
 > **过渡**: Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

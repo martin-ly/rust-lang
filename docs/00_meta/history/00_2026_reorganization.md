@@ -212,7 +212,7 @@ rust-lang/
 
 ## 参考 {#参考}
 
-- [PROJECT_100_PERCENT_COMPLETION_FINAL.md](../../../archive/docs/2026_03_reorganization/PROJECT_100_PERCENT_COMPLETION_FINAL.md) - 完成报告
+- [PROJECT_100_PERCENT_COMPLETION_FINAL.md](../../../archive/docs/2026_03_reorganization/PROJECT_100_PERCENT_COMPLETION_FINAL.md)（归档只读） - 完成报告
 
 ---
 

@@ -386,7 +386,7 @@ fn main() {
 }
 ```
 
-## 相关概念文件
+## 相关概念
 
 - [Formal Methods](../04_research_and_experimental/02_formal_methods.md) — 形式化方法工业化
 - [RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) — Rust 所有权（Ownership）的形式化模型
@@ -400,7 +400,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 

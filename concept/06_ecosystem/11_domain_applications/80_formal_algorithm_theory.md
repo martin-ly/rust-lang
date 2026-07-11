@@ -6,6 +6,7 @@
 >
 > **EN**: Formal Algorithm Theory
 > **Summary**: Mathematical foundations of algorithms in Rust: computability, complexity, loop invariants, Hoare logic, and practical formal verification with Kani.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [专家]
 > **权威来源**: 本文件为 `concept/` 权威页。

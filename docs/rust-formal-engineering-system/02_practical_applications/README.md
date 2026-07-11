@@ -19,9 +19,9 @@
 
 | 主题 | 链接 |
 | :--- | :--- |
-| 性能优化 | [experiments/](../../../archive/research_notes_2026_06_25/experiments/README.md) |
-| 内存管理 | [experiments/10_memory_analysis.md](../../../archive/research_notes_2026_06_25/experiments/10_memory_analysis.md) |
-| 性能基准 | [experiments/10_performance_benchmarks.md](../../../archive/research_notes_2026_06_25/experiments/10_performance_benchmarks.md) |
+| 性能优化 | [experiments/](../../research_notes/experiments/README.md) |
+| 内存管理 | [experiments/10_memory_analysis.md](../../research_notes/experiments/10_memory_analysis.md) |
+| 性能基准 | [experiments/10_performance_benchmarks.md](../../research_notes/experiments/10_performance_benchmarks.md) |
 
 ---
 

@@ -311,7 +311,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) — 安全关键代码的 unsafe 边界
 - [Formal Methods](../04_research_and_experimental/02_formal_methods.md) — 形式化验证替代方案
@@ -324,7 +324,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 

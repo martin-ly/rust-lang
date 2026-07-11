@@ -660,10 +660,10 @@
 
 ### 研究笔记 {#研究笔记}
 
-- [研究笔记快速参考](../../../archive/research_notes_2026_06_25/10_quick_reference.md) - 形式化方法、类型理论、软件设计理论索引；与速查卡互为补充
-- [形式化方法研究](../../../archive/research_notes_2026_06_25/formal_methods/README.md)
+- [研究笔记快速参考](../../research_notes/10_quick_reference.md) - 形式化方法、类型理论、软件设计理论索引；与速查卡互为补充
+- [形式化方法研究](../../research_notes/formal_methods/README.md)
 - [类型理论研究](../../research_notes/type_theory/README.md)
-- [实验研究](../../../archive/research_notes_2026_06_25/experiments/README.md)
+- [实验研究](../../research_notes/experiments/README.md)
 
 ---
 

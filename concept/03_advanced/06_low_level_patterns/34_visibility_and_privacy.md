@@ -2,6 +2,7 @@
 
 > **EN**: Visibility and Privacy
 > **Summary**: Rust 模块（Module）系统中 item 的可见性规则：`pub`、`pub(crate)`、`pub(super)`、`pub(in path)` 以及重导出的影响。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [专家]
 > **内容分级**: [专家级]
@@ -18,6 +19,7 @@
 > **来源**: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
 
 ---
+
 ## 一、可见性的核心问题
 
 **可见性（visibility）** 与 **隐私（privacy）** 回答同一个问题：*“这个 item 在当前位置能否被使用？”*
@@ -167,7 +169,7 @@ flowchart TD
 
 ---
 
-## 十一、关联概念
+## 十一、相关概念
 
 | 概念 | 关系 |
 |:---|:---|

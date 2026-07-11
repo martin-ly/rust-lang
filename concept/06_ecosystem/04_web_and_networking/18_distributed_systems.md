@@ -10,7 +10,7 @@
 >
 > **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 设计分布式系统架构
 > **定位**: 分析 Rust 在**分布式系统**中的独特价值——从 gRPC 服务网格、分布式共识到消息队列和 actor 模型，揭示 Rust 如何在云原生基础设施中提供 C++ 的性能和 Go 的开发效率。
 > **前置概念**: [Async](../../03_advanced/01_async/02_async.md) ·
@@ -509,7 +509,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Async](../../03_advanced/01_async/02_async.md) — 异步编程
 - [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) — 并发模型
@@ -524,7 +524,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

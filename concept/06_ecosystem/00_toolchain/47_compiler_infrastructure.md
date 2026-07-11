@@ -18,7 +18,7 @@ Compiler Internals. Core Rust concept covering mechanism analysis, parallel prog
 ---
 
 > **来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [rustc_driver](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_driver/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -250,7 +250,7 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (nightly for Cranelift/build-std/sanitizer)
+**Rust 版本**: 1.97.0+ (nightly for Cranelift/build-std/sanitizer)
 **最后更新**: 2026-06-01
 **状态**: ✅ 概念文档创建完成
 

@@ -24,7 +24,7 @@
 
 ---
 
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置概念**: [Architecture Patterns](35_architecture_patterns.md)
 
 ## 📑 目录
@@ -458,7 +458,7 @@ graph TD
 | 安全边界 | unsafe | FFI | Miri | RustBelt | vs C 安全 | WASI | 零信任 |
 | 容错设计 | Result / panic | 错误处理（Error Handling） | 并发容错 | 进程代数 | vs Erlang OTP | Actor 框架 | 混沌工程 |
 
-### 相关概念文件
+### 相关概念
 >
 
 - [L7 形式化方法工业化](../../07_future/04_research_and_experimental/02_formal_methods.md) —— 五层形式化扩展的详细展开

@@ -871,7 +871,7 @@ fn test_mutex_concurrent_access() {
 | 执行方式 | 模型检测（穷举交错） | 解释执行（动态分析） |
 | 覆盖范围 | 小状态空间（需控制并发度） | 单执行路径 |
 | 适用场景 | 验证并发算法正确性 | 验证 unsafe 代码内存安全（Memory Safety） |
-| 使用方式 | 替换 `std::sync` 为 `loom::sync` | `cargo +nightly miri test` |
+| 使用方式 | 替换 `std::sync` 为 `loom::sync` | `cargo miri test`（需每日构建版工具链） |
 
 **反例：loom 状态空间爆炸**
 
@@ -1333,7 +1333,7 @@ fn main() {
 > [来源: [Futures crate](https://docs.rs/futures/)]
 > [来源: [Tokio Internals](https://docs.rs/tokio/latest/tokio/)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 认知路径
 

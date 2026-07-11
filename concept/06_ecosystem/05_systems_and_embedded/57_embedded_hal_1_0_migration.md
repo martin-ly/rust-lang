@@ -2,10 +2,11 @@
 
 > **EN**: Embedded-HAL 1.0 Migration and Embassy Production Status
 > **Summary**: Key breaking changes and migration strategies from `embedded-hal` 0.2 to 1.0, including the unified `ErrorType`, `SpiDevice` versus `SpiBus` separation, async trait support, and the production-ready status of Embassy v0.5 in embedded Rust.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: [embedded-hal 1.0.0](https://github.com/rust-embedded/embedded-hal/releases/tag/embedded-hal-v1.0.0) · [Embassy 文档](https://embassy.dev/) · [Rust Embedded Working Group](https://github.com/rust-embedded/wg)
 >
 > **受众**: [进阶 / 工程]
-> **Bloom 层级**: L3-L4
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **前置概念**: [Rust 嵌入式系统开发](22_embedded_systems.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
@@ -131,7 +132,7 @@ Embassy 是 Rust 嵌入式生态的 **async/await 运行时（Runtime）**，允
 
 | 特性 | 说明 | 状态 |
 |:---|:---|:---:|
-| **Stable Rust 支持** | MSRV 1.75，无需 nightly | ✅ |
+| **Stable Rust 支持** | Embassy MSRV 1.75，无需每日构建版工具链 | ✅ |
 | **Time Driver** | 硬件定时器驱动异步（Async） Timer/Ticker | ✅ |
 | **USB 协议栈** | 全栈 async USB device/host | ✅ |
 | **TCP/UDP 网络** | async smoltcp 集成 | ✅ |

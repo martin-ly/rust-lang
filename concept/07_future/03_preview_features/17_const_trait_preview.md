@@ -4,6 +4,7 @@
 >
 > **EN**: Const Trait Implementation Preview
 > **Summary**: Preview of const traits (`~const Trait`, `const impl`) that allow generic trait bounds inside `const fn` and other const contexts; still nightly/experimental.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]` `feature(const_trait_impl)`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

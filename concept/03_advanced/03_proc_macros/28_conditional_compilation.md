@@ -4,6 +4,7 @@
 
 > **EN**: Conditional Compilation
 > **Summary**: Rust 条件编译机制：`cfg` 配置选项、`cfg`/`cfg_attr` 属性、`cfg!`/`cfg_select!` 宏（Macro），以及常见目标平台 cfg。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [中级] / [进阶]
 > **Bloom 层级**: L2-L3
@@ -19,6 +20,7 @@
 > **来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)
 
 ---
+
 ## 一、什么是条件编译
 
 **条件编译** 指仅在特定条件下才编译某段源代码。Rust 通过以下方式实现：(Source: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html))
@@ -204,7 +206,7 @@ rustc --cfg foo main.rs
 
 ```rust
 #[cfg(foo)]
-fn custom_feature() {}
+fn custom_item() {}
 ```
 
 Cargo 中通过 `RUSTFLAGS` 或在 `.cargo/config.toml` 中设置。
@@ -220,7 +222,7 @@ Cargo 中通过 `RUSTFLAGS` 或在 `.cargo/config.toml` 中设置。
 
 ---
 
-## 十、关联概念
+## 十、相关概念
 
 | 概念 | 关系 |
 |:---|:---|

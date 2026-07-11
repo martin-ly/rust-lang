@@ -321,7 +321,7 @@ python scripts/cross_concept_diff.py
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [知识体系方法论](../00_framework/methodology.md) — 内容结构与思维表征规范
 - [权威来源清单](../02_sources/sources.md) — 来源分级与引用规范

@@ -537,7 +537,7 @@ graph TD
     end
 ```
 
-## 相关概念文件
+## 相关概念
 
 - [Ownership Formalization](../01_ownership_logic/03_ownership_formal.md) — 所有权形式化理论
 - [Verification Toolchain](../04_model_checking/05_verification_toolchain.md) — 验证工具链选型
@@ -553,7 +553,7 @@ graph TD
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

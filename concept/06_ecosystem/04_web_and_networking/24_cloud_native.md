@@ -21,7 +21,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 设计云原生架构
 > **定位**: 分析 Rust 在云原生领域的应用——从微服务框架到容器化部署，探讨 Rust 的内存安全（Memory Safety）与性能优势如何重塑云基础设施。
 > **前置概念**: [Async](../../03_advanced/01_async/02_async.md) · [Network](18_distributed_systems.md) · [Performance](../10_performance/15_performance_optimization.md)
@@ -504,7 +504,7 @@ fn main() {
 }
 ```
 
-## 相关概念文件
+## 相关概念
 
 - [Async](../../03_advanced/01_async/02_async.md) — 异步编程
 - [Network](18_distributed_systems.md) — 网络
@@ -518,7 +518,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

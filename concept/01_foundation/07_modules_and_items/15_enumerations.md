@@ -4,6 +4,7 @@
 >
 > **EN**: Enumerations
 > **Summary**: Enumerations: Rust's tagged unions with variants carrying data, covering variant types, `Option<T>`, `Result<T, E>`, pattern matching, and `#[non_exhaustive]`.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [初学者]
 > **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。

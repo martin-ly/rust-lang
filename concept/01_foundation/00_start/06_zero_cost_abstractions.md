@@ -353,7 +353,7 @@ Rust 性能分析工具链:
 
   基准测试:
   ├── Criterion.rs: 统计显著的基准测试框架
-  ├── cargo bench: 内置基准测试（nightly）
+  ├── cargo bench: 内置基准测试（每日构建版）
   └── iai-callgrind: 指令计数基准（确定性）
 
   性能分析:
@@ -397,7 +397,7 @@ Rust 性能分析工具链:
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Generics](../../02_intermediate/01_generics/02_generics.md) — 泛型与单态化
 - [Traits](../../02_intermediate/00_traits/01_traits.md) — Trait 系统与动态分发
@@ -412,7 +412,7 @@ Rust 性能分析工具链:
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 

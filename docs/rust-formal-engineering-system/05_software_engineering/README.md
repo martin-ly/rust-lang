@@ -20,9 +20,9 @@
 
 | 主题 | 链接 |
 | :--- | :--- |
-| 设计模式 | [software_design_theory/01_design_patterns_formal/](../../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md) |
-| 工作流模型 | [software_design_theory/02_workflow_safe_complete_models/](../../../archive/research_notes_2026_06_25/software_design_theory/02_workflow_safe_complete_models/README.md) |
-| 组合工程 | [software_design_theory/04_compositional_engineering/](../../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md) |
+| 设计模式 | [software_design_theory/01_design_patterns_formal/](../../research_notes/software_design_theory/01_design_patterns_formal/README.md) |
+| 工作流模型 | [software_design_theory/02_workflow_safe_complete_models/](../../research_notes/software_design_theory/02_workflow_safe_complete_models/README.md) |
+| 组合工程 | [software_design_theory/04_compositional_engineering/](../../research_notes/software_design_theory/04_compositional_engineering/README.md) |
 
 ---
 

@@ -2,6 +2,7 @@
 >
 > **EN**: C/C++ to Rust Engineering Comparison Roadmap
 > **Summary**: A unified roadmap and index for all C/C++ engineering-level comparison files, with topic clusters, migration paths, idiomatic code comparisons, and decision trees for C++ programmers moving to Rust.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -198,7 +199,7 @@ flowchart TD
 
 ## 六、与 Phase B 计划的衔接
 
-本路线图属于 **Phase B（C/C++ 工程层对比）** 的导航层。审计报告 [SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md](../../../archive/reports/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md) 指出的 Phase B 缺口包括：
+本路线图属于 **Phase B（C/C++ 工程层对比）** 的导航层。审计报告 [SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md](../../../archive/reports/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md)（归档只读） 指出的 Phase B 缺口包括：
 
 - ABI 与对象模型 ✅ [C++ ABI Object Model](../../05_comparative/01_systems_languages/18_cpp_abi_object_model.md)
 - Move 语义系统对比 ✅ [Rust vs C++ §7.3](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)

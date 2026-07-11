@@ -3,7 +3,7 @@
 **EN**: Sustainable Roadmap And Plans
 **Summary**: Rust安全关键系统 - 可持续推进路线图与计划 Sustainable Roadmap And Plans.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/07_future/05_roadmaps/24_roadmap.md](../../../concept/07_future/05_roadmaps/24_roadmap.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/07_future/01_edition_roadmap/24_roadmap.md](../../../concept/07_future/01_edition_roadmap/24_roadmap.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

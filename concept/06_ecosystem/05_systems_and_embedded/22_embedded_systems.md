@@ -10,7 +10,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 设计嵌入式系统架构
 > **定位**: 探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全（Memory Safety）如何保证关键系统的可靠性。
 > **前置概念**: [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) ·
@@ -708,7 +708,7 @@ fn main() {
 }
 ```
 
-## 相关概念文件
+## 相关概念
 
 - [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) — unsafe Rust
 - [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) — 内存管理
@@ -722,7 +722,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

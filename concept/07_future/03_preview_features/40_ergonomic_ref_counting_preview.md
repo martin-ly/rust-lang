@@ -4,11 +4,13 @@
 >
 > **EN**: Ergonomic Ref Counting Preview
 > **Summary**: Ergonomic Ref Counting Preview: emerging Rust language feature or ecosystem trend.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: 🧪 RFC 决策与预览阶段
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-06-02)
 > **预计稳定**: 待定（RFC 决策阶段，2026 持续推进）
 > **受众**: [专家]
+> **Bloom 层级**: L4-L5
 > **内容分级**: [实验级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **Rust Project Goals 2026 状态**: **Continued**（持续中）
@@ -200,7 +202,7 @@ let device = Arc::clone(&self.device);
 
 Ergonomic ref-counting 可显著降低内核绑定的样板代码量，提升可维护性。
 
-## 六、相关概念文件
+## 六、相关概念
 
 - [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) — `Rc`/`Arc`/`Weak` 详解
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权模型基础

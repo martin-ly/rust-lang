@@ -2,6 +2,7 @@
 
 > **EN**: Crates and Source Files
 > **Summary**: The Rust compilation model: crate as the unit of compilation, linking, versioning, and runtime loading; source file conventions, crate-level attributes, `main` function rules, and how the module tree maps to the filesystem.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者]
 > **内容分级**: [综述级]
@@ -10,7 +11,7 @@
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
 > **前置依赖**: [Modules and Paths](11_modules_and_paths.md) · [Attributes and Macros](../09_macros_basics/12_attributes_and_macros.md) · [Functions](12_functions.md)
-> **后置概念**: [Items](39_items.md) · [Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md) · [Cargo Manifest Reference](../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md) · [The Rust Runtime](../../03_advanced/02_unsafe/30_rust_runtime.md)
+> **后置概念**: [Items](39_items.md) · [Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md) · [Cargo Manifest Reference](../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md) · [The Rust Runtime](../../03_advanced/06_low_level_patterns/30_rust_runtime.md)
 > **定理链**: Crate → Module Tree → Source File → Item
 > **主要来源**: [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
 
@@ -22,7 +23,7 @@
 2. **概念建立**: 掌握 crate、crate root、源文件、模块（Module）树、crate-level 属性等关键术语。
 3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块（Module）路径解析串联起来。
 4. **边界辨析**: 借助反命题/反例理解 `crate_type`、`no_main`、混合 crate 等边界情况。
-5. **迁移应用**: 将 crate 模型与 [Cargo workspace](../../06_ecosystem/01_cargo/78_cargo_workspaces.md)、[链接](../../03_advanced/04_ffi/27_linkage.md)、[运行时（Runtime）](../../03_advanced/02_unsafe/30_rust_runtime.md) 等后置概念链接。
+5. **迁移应用**: 将 crate 模型与 [Cargo workspace](../../06_ecosystem/01_cargo/78_cargo_workspaces.md)、[链接](../../03_advanced/04_ffi/27_linkage.md)、[运行时（Runtime）](../../03_advanced/06_low_level_patterns/30_rust_runtime.md) 等后置概念链接。
 
 ---
 
@@ -232,7 +233,7 @@ flowchart TD
 
 ---
 
-## 九、关联概念
+## 九、相关概念
 
 | 概念 | 关系 |
 |:---|:---|
@@ -242,7 +243,7 @@ flowchart TD
 | [Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md) | Cargo 在 crate 之上组织 workspace |
 | [Cargo Manifest Reference](../../06_ecosystem/01_cargo/64_cargo_manifest_reference.md) | `Cargo.toml` 完整字段说明 |
 | [Linkage](../../03_advanced/04_ffi/27_linkage.md) | crate 输出参与链接 |
-| [The Rust Runtime](../../03_advanced/02_unsafe/30_rust_runtime.md) | crate 运行时行为由运行时定义 |
+| [The Rust Runtime](../../03_advanced/06_low_level_patterns/30_rust_runtime.md) | crate 运行时行为由运行时定义 |
 | [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md) | 术语表（元层参考） |
 
 ---

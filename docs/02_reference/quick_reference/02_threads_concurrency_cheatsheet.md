@@ -338,7 +338,7 @@ Ordering::AcqRel
 Ordering::Relaxed
 ```
 
-**内存顺序选型决策树**（详见 [06_boundary_analysis](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md)）：
+**内存顺序选型决策树**（详见 [06_boundary_analysis](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md)）：
 
 | 场景 | 推荐 | 说明 |
 | :--- | :--- | :--- |
@@ -645,7 +645,7 @@ fn main() {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-**说明**：死锁无法静态判定（见 [06_boundary_analysis](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md) § 静态判定 vs 运行时验证）。需以下工具辅助：
+**说明**：死锁无法静态判定（见 [06_boundary_analysis](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) § 静态判定 vs 运行时验证）。需以下工具辅助：
 
 | 工具 | 用途 | 使用方式 |
 | :--- | :--- | :--- |
@@ -868,18 +868,18 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-- [执行模型边界分析](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md) — Def EB-DET1、确定性判定、静态 vs 运行时验证
-- [执行模型选型决策树](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md#决策树选择执行模型)
-- [确定性判定决策树](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md#确定性判定决策树) — 执行顺序→Sync/Async/Concurrent/Parallel 选型
+- [执行模型边界分析](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) — Def EB-DET1、确定性判定、静态 vs 运行时验证
+- [执行模型选型决策树](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md#决策树选择执行模型)
+- [确定性判定决策树](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md#确定性判定决策树) — 执行顺序→Sync/Async/Concurrent/Parallel 选型
 
 ### 形式化理论与类型系统 {#形式化理论与类型系统}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-- [执行模型边界分析](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md) — 确定性判定、静态 vs 运行时验证
-- [执行模型选型决策树](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md#决策树选择执行模型)
-- [并发形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) — Send/Sync trait 形式化定义
-- [状态机形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) — 并发状态机模型
+- [执行模型边界分析](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) — 确定性判定、静态 vs 运行时验证
+- [执行模型选型决策树](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md#决策树选择执行模型)
+- [并发形式化](../../research_notes/formal_methods/10_send_sync_formalization.md) — Send/Sync trait 形式化定义
+- [状态机形式化](../../research_notes/formal_methods/10_async_state_machine.md) — 并发状态机模型
 - 生命周期（Lifetimes）形式化 — 借用（Borrowing）与生命周期
 - [所有权模型](../../research_notes/formal_methods/10_ownership_model.md) — 所有权系统形式化基础
 

@@ -5,10 +5,11 @@
 >
 > **EN**: Cargo Commands Reference
 > **Summary**: A classified quick reference of Cargo subcommands for Rust 1.97.0+: general, build, manifest, package, publish, report, and inspection commands, plus common options and plugin integration points.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **P** — Practice
+> **A/S/P 标记**: **A** — Application
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 覆盖开发者日常最高频的 Cargo 命令，作为官方命令参考的浓缩权威页。
 > **前置概念**: [Cargo Getting Started](80_cargo_getting_started.md) · [Cargo Workflow](81_cargo_workflow.md) · [Cargo Configuration](83_cargo_configuration.md)
@@ -76,7 +77,7 @@
 # 查看未来不兼容报告
 cargo report future-incompatibilities
 
-# 查看编译耗时（需 nightly 或已稳定版本）
+# 查看编译耗时（稳定版可用）
 cargo build --timings
 
 # 检查依赖重复

@@ -208,10 +208,10 @@ pub fn timed_macro(input: TokenStream) -> TokenStream {
 
 ## 六、编译器回调（高级）
 
-> ⚠️ 以下代码需要 nightly 工具链与 `#![feature(rustc_private)]`。
+> ⚠️ 以下代码需要每日构建版工具链与实验特性门 `rustc_private`。
 
 ```rust,ignore
-#![feature(rustc_private)]
+// 需启用实验特性门 rustc_private（每日构建版工具链）
 
 extern crate rustc_driver;
 extern crate rustc_interface;
@@ -233,7 +233,7 @@ impl rustc_driver::Callbacks for MyCallbacks {
 }
 ```
 
-> **关键洞察**: 自定义 `rustc` 回调是强大的诊断手段，但它将代码绑定到 nightly 编译器内部 API，通常只用于研究和教学工具，不推荐用于生产宏库 (Source: [rustc-dev-guide — Rustc Driver](https://rustc-dev-guide.rust-lang.org/))。
+> **关键洞察**: 自定义 `rustc` 回调是强大的诊断手段，但它将代码绑定到每日构建版编译器内部 API，通常只用于研究和教学工具，不推荐用于生产宏库 (Source: [rustc-dev-guide — Rustc Driver](https://rustc-dev-guide.rust-lang.org/))。
 
 ---
 
@@ -254,7 +254,6 @@ impl rustc_driver::Callbacks for MyCallbacks {
 > **权威来源对齐变更日志**: 2026-07-09 由 `crates/c11_macro_system_proc/docs/tier_04_advanced/04_macro_debugging_in_depth.md` 按 AGENTS.md §6.4 迁移至此
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-09
 **状态**: ✅ 权威来源对齐完成
 
@@ -296,7 +295,6 @@ impl rustc_driver::Callbacks for MyCallbacks {
 >
 > **过渡**: 从 span 保留过渡到诊断 API，可以形成用户友好的宏错误信息工程实践。
 >
-
 
 ---
 

@@ -17,7 +17,7 @@
 > **内容分级**: [专家级]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+P** — ApplicationProcedure
+> **A/S/P 标记**: **P+A** — Procedure + Application
 > **双维定位**: P×App — 实施多层测试策略
 > **定位**: 系统分析 Rust 生态中的**测试方法论**——从内置测试框架到属性测试（proptest）、模糊测试（cargo-fuzz）、Miri 验证和形式化测试（Kani），构建多层次的质量保证体系。
 > **前置概念**: [Toolchain](../00_toolchain/01_toolchain.md) · [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) · [FFI](../../03_advanced/04_ffi/05_rust_ffi.md)
@@ -242,7 +242,7 @@ fn test_public_api() {
 > 1. `#[cfg(test)]` 模块（Module）：单元测试，可访问私有函数
 > 2. `tests/` 目录：集成测试，只能访问 public API
 > 3. 文档测试：确保代码示例始终正确
-> 4. `#[bench]`（nightly）：基准测试
+> 4. `#[bench]`（每日构建版）：基准测试
 > [来源: [Cargo Test Documentation](https://doc.rust-lang.org/cargo/commands/cargo-test.html)]
 
 ---
@@ -308,7 +308,7 @@ Miri 的局限:
 ├── 运行极慢（解释执行）
 ├── 无法检测所有 UB（仅覆盖已实现的检查）
 ├── 不保证"无 Miri 报错 = 无 UB"
-└── 需要 nightly Rust
+└── 需要每日构建版 Rust
 
 使用场景:
 ├── 任何包含 unsafe 的代码库
@@ -426,8 +426,8 @@ jobs:
       # L5: 模糊测试（仅在发布前）
       # - run: cargo fuzz run my_target -- -max_total_time=300
 
-      # L6: Miri（nightly，unsafe 代码）
-      # - run: rustup run nightly cargo miri test
+      # L6: Miri（每日构建版，unsafe 代码）
+      # - run: rustup run <每日构建版工具链> cargo miri test
 
       # L7: Kani（关键模块）
       # - run: cargo kani --harness my_harness
@@ -451,7 +451,7 @@ jobs:
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Toolchain](../00_toolchain/01_toolchain.md) — Rust 工具链
 - [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) — unsafe Rust
@@ -464,7 +464,7 @@ jobs:
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 

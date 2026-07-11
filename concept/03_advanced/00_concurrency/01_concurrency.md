@@ -4,6 +4,7 @@
 >
 > **EN**: Concurrency
 > **Summary**: Rust's concurrency model uses ownership and the Send and Sync traits to rule out data races at compile time. The chapter covers spawning threads, message passing with channels, shared mutable state via Mutex and Arc, and deadlock-free design patterns, showing how to write fearless concurrent programs.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[并发](../../../knowledge/03_advanced/concurrency)
@@ -1378,6 +1379,13 @@ fn main() {
 > - E0277 (`Rc<Mutex<T>>` cannot be sent between threads safely) → L1(Send 不满足) → 改用 Arc
 > - E0277 (`&T` cannot be sent between threads safely) → Sync 不满足 → 检查 T 的字段类型
 > - E0499 (cannot borrow data in `Arc` as mutable) → T2(Arc 只共享) 违反 → 使用 Mutex/RwLock 或 Atomic
+
+
+## 相关概念
+
+- **上层概念**: [L1 所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [L1 借用（Borrowing）](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md)
+- **下层概念**: [L4 RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) · [L6 Tokio 生态](../../06_ecosystem/02_core_crates/03_core_crates.md) · [L7 AI 并发](../../07_future/04_research_and_experimental/01_ai_integration.md) · [Async/Await](../01_async/02_async.md)
+
 
 ## 参考来源
 

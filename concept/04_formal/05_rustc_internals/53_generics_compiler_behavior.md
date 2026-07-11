@@ -154,7 +154,7 @@ fn make_iter() -> impl Iterator<Item = i32> {
 
 `dyn Trait` 的 VTable 布局、`Any::downcast_ref` 的类型擦除与恢复，以及 `core::raw_vtable` 等底层操作都涉及 unsafe 语义。详见 [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)。
 
-## 七、关联概念
+## 七、相关概念
 
 | 概念 | 关系 |
 |:---|:---|
@@ -169,7 +169,7 @@ fn make_iter() -> impl Iterator<Item = i32> {
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

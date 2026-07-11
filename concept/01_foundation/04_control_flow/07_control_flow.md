@@ -97,6 +97,7 @@
     - [`loop` / `while` / `for` 功能对比](#loop--while--for-功能对比)
     - [选择指南](#选择指南)
     - [性能提示](#性能提示)
+  - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
 
 ---
 
@@ -567,7 +568,10 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
+- **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/04_type_system.md)
+- **下层概念**: [Generics](../../02_intermediate/01_generics/02_generics.md) · [Async](../../03_advanced/01_async/02_async.md)
+
 
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）模型
 - [Type System](../02_type_system/04_type_system.md) — 类型系统（Type System）
@@ -581,7 +585,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

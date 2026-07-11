@@ -2,6 +2,7 @@
 
 > **EN**: Top-level Ontology Alignment for Rust Knowledge Graph
 > **Summary**: Maps project knowledge-graph entities to upper ontologies (BFO / DOLCE) for semantic-web interoperability and engineering reference.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **任务**: P2-3 顶层本体对齐
 > **目标**: 将项目知识图谱 v2 的六类实体与 ISO/IEC 21838 推荐的顶层本体（BFO / DOLCE）进行显式映射，建立 `TLO → 中层本体 → 领域本体` 的分层架构，并讨论边界案例。

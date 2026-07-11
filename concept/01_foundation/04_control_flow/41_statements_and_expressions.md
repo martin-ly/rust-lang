@@ -2,6 +2,7 @@
 
 > **EN**: Statements and Expressions
 > **Summary**: Rust 作为表达式语言的核心特征：表达式嵌套、求值顺序，以及语句如何封装和显式排序表达式求值。 Core characteristics of Rust as an expression language: nested expressions, evaluation order, and how statements sequence expression evaluation.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者]
 > **内容分级**: [综述级]
@@ -23,6 +24,7 @@
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ---
+
 ## 一、Rust 是表达式语言
 
 > (Source: [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html))
@@ -140,7 +142,10 @@ let result = match option {
 
 ---
 
-## 六、关联概念
+## 六、相关概念
+- **上层概念**: [Control Flow](07_control_flow.md) · [Variables and Bindings](../03_values_and_references/20_variable_model.md) · [Patterns](40_patterns.md)
+- **下层概念**: [Closures](../00_start/15_closure_basics.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Async/Await](../../03_advanced/01_async/02_async.md)
+
 
 | 概念 | 关系 |
 |:---|:---|

@@ -31,12 +31,13 @@
   - [七、JSON-LD 1.1 示例](#七json-ld-11-示例)
   - [八、与 v1 的兼容性](#八与-v1-的兼容性)
   - [九、SHACL 验证入口](#九shacl-验证入口)
+  - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
 
 ---
 
 ## 一、升级动机与目标
 
-v1 本体（`kg_ontology.md`，已归档为 `archive/kg_ontology_v1_archived.md`）已成功定义了 Rust 知识体系的显式关系类型，并生成了机器可读的 `kg_data.json`。v2 升级目标：
+v1 本体（`kg_ontology.md`，已归档为 `archive/2026/concept_archive/kg_ontology_v1_archived.md`，归档只读）已成功定义了 Rust 知识体系的显式关系类型，并生成了机器可读的 `kg_data.json`。v2 升级目标：
 
 1. **标准对齐**：显式映射到 RDF 1.2、SKOS、JSON-LD 1.1，降低与国际工具链的集成成本。
 2. **三元组元数据**：引入 RDF-star，使每条关系边可附加来源、版本、置信度、审校状态。

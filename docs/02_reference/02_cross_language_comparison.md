@@ -477,9 +477,9 @@ $ python -m pytest
 | 所有权 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | T2 唯一性, T3 内存安全 |
 | 借用（Borrowing） | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) | T1 数据竞争自由 |
 | 生命周期 | lifetime_formalization | LF-T2 引用有效性 |
-| 并发 | [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | SEND-T1, SYNC-T1 |
-| 异步（Async） | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | T6.1-T6.3 |
-| 类型系统 | [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | T1-T3 类型安全 |
+| 并发 | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) | SEND-T1, SYNC-T1 |
+| 异步（Async） | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) | T6.1-T6.3 |
+| 类型系统 | [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) | T1-T3 类型安全 |
 
 ### 权威来源索引 {#权威来源索引-1}
 
@@ -532,7 +532,7 @@ $ python -m pytest
 
 - [多维概念矩阵](../04_thinking/04_multi_dimensional_concept_matrix.md)
 - [应用分析视图](../04_thinking/04_applications_analysis_view.md)
-- [形式化方法研究](../../archive/research_notes_2026_06_25/formal_methods/README.md)
+- [形式化方法研究](../research_notes/formal_methods/README.md)
 - [错误码映射](02_error_code_mapping.md)
 
 ---

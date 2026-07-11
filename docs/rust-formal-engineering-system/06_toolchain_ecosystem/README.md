@@ -295,12 +295,12 @@ fn main() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 形式化方法概述 | 形式化验证基础理论 | [../../research_notes/formal_methods/README.md](../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
-| 类型系统（Type System）形式化 | 类型理论数学定义 | [../../research_notes/type_theory/10_type_system_foundations.md](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
+| 形式化方法概述 | 形式化验证基础理论 | [../../research_notes/formal_methods/README.md](../../research_notes/formal_methods/README.md) |
+| 类型系统（Type System）形式化 | 类型理论数学定义 | [../../research_notes/type_theory/10_type_system_foundations.md](../../research_notes/type_theory/10_type_system_foundations.md) |
 | 所有权（Ownership）模型形式化 | 所有权系统数学定义 | [../../research_notes/formal_methods/10_ownership_model.md](../../research_notes/formal_methods/10_ownership_model.md) |
 | 借用（Borrowing）检查器证明 | 借用检查器形式化证明 | [../../research_notes/formal_methods/10_borrow_checker_proof.md](../../research_notes/formal_methods/10_borrow_checker_proof.md) |
-| Send/Sync 形式化 | 线程安全形式化定义 | [../../research_notes/formal_methods/10_send_sync_formalization.md](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
-| 证明索引 | 形式化证明集合 | [../../research_notes/10_proof_index.md](../../../archive/research_notes_2026_06_25/10_proof_index.md) |
+| Send/Sync 形式化 | 线程安全形式化定义 | [../../research_notes/formal_methods/10_send_sync_formalization.md](../../research_notes/formal_methods/10_send_sync_formalization.md) |
+| 证明索引 | 形式化证明集合 | [../../research_notes/10_proof_index.md](../../research_notes/10_proof_index.md) |
 
 ## 相关研究笔记 {#相关研究笔记}
 >
@@ -312,12 +312,12 @@ fn main() {
 | 编译器特性 | 完整编译器指南 | [../../06_toolchain/01_compiler_features.md](../../06_toolchain/01_compiler_features.md) |
 | Cargo 工作空间 | 工作空间配置 | ../../06_toolchain/02_cargo_workspace_guide.md |
 | Rustdoc 高级 | 文档生成高级用法 | [../../06_toolchain/03_rustdoc_advanced.md](../../06_toolchain/03_rustdoc_advanced.md) |
-| 编译器优化实验 | 优化分析 | [../../research_notes/experiments/10_compiler_optimizations.md](../../../archive/research_notes_2026_06_25/experiments/10_compiler_optimizations.md) |
-| 性能基准 | 性能测试方法论 | [../../research_notes/experiments/10_performance_benchmarks.md](../../../archive/research_notes_2026_06_25/experiments/10_performance_benchmarks.md) |
-| 研究方法论 | 研究方法指南 | [../../research_notes/10_research_methodology.md](../../../archive/research_notes_2026_06_25/10_research_methodology.md) |
-| 工具指南 | 验证工具使用 | [../../research_notes/10_tools_guide.md](../../../archive/research_notes_2026_06_25/10_tools_guide.md) |
-| 质量检查清单 | 代码质量检查 | [../../research_notes/10_quality_checklist.md](../../../archive/research_notes_2026_06_25/10_quality_checklist.md) |
-| 最佳实践 | 工程最佳实践 | [../../research_notes/10_best_practices.md](../../../archive/research_notes_2026_06_25/10_best_practices.md) |
+| 编译器优化实验 | 优化分析 | [../../research_notes/experiments/10_compiler_optimizations.md](../../research_notes/experiments/10_compiler_optimizations.md) |
+| 性能基准 | 性能测试方法论 | [../../research_notes/experiments/10_performance_benchmarks.md](../../research_notes/experiments/10_performance_benchmarks.md) |
+| 研究方法论 | 研究方法指南 | [../../research_notes/10_research_methodology.md](../../research_notes/10_research_methodology.md) |
+| 工具指南 | 验证工具使用 | [../../research_notes/10_tools_guide.md](../../research_notes/10_tools_guide.md) |
+| 质量检查清单 | 代码质量检查 | [../../research_notes/10_quality_checklist.md](../../research_notes/10_quality_checklist.md) |
+| 最佳实践 | 工程最佳实践 | [../../research_notes/10_best_practices.md](../../research_notes/10_best_practices.md) |
 
 ---
 

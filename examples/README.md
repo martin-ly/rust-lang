@@ -44,6 +44,19 @@
 | 文件 | 内容 | 运行方式 |
 | :--- | :--- | :--- |
 | `cargo_script_demo.rs` | Cargo Script 单文件脚本演示 | `cargo +nightly -Zscript cargo_script_demo.rs` |
+| `module_system_patterns.rs` | 模块系统代码实践模式（Cargo Script frontmatter 格式） | `cargo +nightly -Zscript module_system_patterns.rs` |
+
+## 编译保护（质量门）
+
+本目录 14 个游离 `.rs` 文件由 `scripts/check_examples_compile.py` 统一编译检查
+（`run_quality_gates.sh` 观察门）：
+
+- 9 个标准库示例：`rustc --edition 2024` 直接编译；
+- 3 个依赖示例（`comprehensive_web_server.rs`、`microservice_template.rs`、
+  `rust_194_controlflow_patterns.rs`）：经 `examples_check/` crate 编译；
+- 2 个 Cargo Script 文件豁免（需 nightly `-Zscript`）。
+
+新增游离 `.rs` 文件时，必须在 `scripts/check_examples_compile.py` 中登记，否则该门失败。
 
 ## 独立 Cargo 示例
 
@@ -52,6 +65,7 @@
 | `build_script_practice/` | build script 与外部 C 代码链接练习 | `cd build_script_practice && cargo build` |
 | `incremental_practice/` | 观测 rustc 增量编译的 dep-graph 与 Red-Green 复用 | `cd incremental_practice && cargo test` |
 | `resolver_v3_practice/` | resolver v3 与 MSRV 感知依赖解析实践 | `cd resolver_v3_practice && cargo tree` |
+| `examples_check/` | **编译保护 crate**：为需要 tokio/axum 依赖的游离示例提供 `[[bin]]` 编译目标（独立 workspace，非根 workspace 成员） | `cd examples_check && cargo check --offline` |
 
 ## 可运行示例
 
@@ -71,7 +85,7 @@ cargo run -p c06_async --example async_basic
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../concept/00_meta/02_sources/international_authority_index.md)
 
-**文档版本**: 1.2
+**文档版本**: 1.3
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
-**最后更新**: 2026-06-01
+**最后更新**: 2026-07-12
 **状态**: ✅ 示例目录编译清理完成

@@ -4,11 +4,12 @@
 
 > **EN**: Linkage
 > **Summary**: Rust 编译器支持的 crate 链接方式：bin、lib、dylib、staticlib、cdylib、rlib、proc-macro，以及 C 运行时（Runtime）静态/动态链接和混合代码库的注意事项。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶] / [专家]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **P** — Process / Platform
+> **A/S/P 标记**: **S** — Structure
 > **双维定位**: P×Sys — 编译器输出与平台链接行为
 > **前置依赖**: [FFI Advanced](09_ffi_advanced.md) · [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) · [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
 > **后置概念**: [Unsafe Rust](../02_unsafe/03_unsafe.md) · [Preludes](../../01_foundation/07_modules_and_items/35_preludes.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -19,6 +20,7 @@
 > **来源**: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html) · [Rust Reference — crate_type](https://doc.rust-lang.org/reference/linkage.html)
 
 ---
+
 ## 一、概述
 
 本节主要从**编译器**而非语言语义的角度，介绍 Rust 支持的 crate 链接方式。Rust 编译器可以通过命令行标志或 `#![crate_type = "..."]` 属性生成多种输出产物。(Source: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html))
@@ -233,7 +235,7 @@ extern "C" {}
 
 ---
 
-## 九、关联概念
+## 九、相关概念
 
 | 概念 | 关系 |
 |:---|:---|
@@ -271,7 +273,7 @@ Rust 1.97.0 将 **v0 symbol mangling** 设为默认方案（自 1.59 起可经 `
 cargo build --release
 # Linux/macOS：列出符号并 demangle（rustfilt 对 v0 支持更完整）
 nm target/release/lib<name>.so | rustfilt | head
-# 查看混淆版本选择；legacy 回退仅在 nightly 上可用（来源：版本页 §2.7）
+# 查看混淆版本选择；legacy 回退仅在每日构建版上可用（来源：版本页 §2.7）
 rustc -C symbol-mangling-version=v0 --print cfg
 ```
 

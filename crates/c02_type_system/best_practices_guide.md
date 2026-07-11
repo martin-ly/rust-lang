@@ -958,7 +958,7 @@ name = "c02_type_system"
 version = "0.1.0"
 edition = "2024"
 resolver = "3"
-rust-version = "1.90"
+rust-version = "1.97.0"
 
 [features]
 default = ["simd", "wasm"]

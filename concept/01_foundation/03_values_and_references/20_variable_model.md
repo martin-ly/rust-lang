@@ -36,6 +36,7 @@
 > **Bloom 层级**: L1-L4
 
 ---
+
 ## 一、核心命题
 
 > **变量不是内存地址的别名，而是环境（Environment）中名字与存储（Store）中资源之间的映射关系。
@@ -367,7 +368,7 @@ fn reference_vs_pointer() {
 > [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [SICP](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book.html)
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 通用 PL 基座层
 

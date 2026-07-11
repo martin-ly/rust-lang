@@ -9,7 +9,8 @@
 >
 > 本主题在 knowledge 中有系统化的知识索引：[错误处理（Error Handling）](../../01_foundation/08_error_handling/32_error_handling_basics.md)
 > **受众**: [进阶]
-> **权威来源**: 本文件为 `concept/` 权威页。
+> **权威来源**: 本文件为 `concept/` 权威页（L2 主层）。
+> **层级定位**: 本页为错误处理的 **L2 主权威页**，覆盖 `Result`/`Option`/`?` 传播模式、自定义错误与 thiserror/anyhow 工程实践；入门基础见 L1 [`32_error_handling_basics.md`](../../01_foundation/08_error_handling/32_error_handling_basics.md)，组合子代数/错误链/框架生态深入见 [`16_error_handling_deep_dive.md`](16_error_handling_deep_dive.md)。三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 实施 Result/Option 传播模式
@@ -1918,8 +1919,8 @@ impl AppError {
 | 泛型（Generics）函数 | ✅ 稳定 | 单态化（Monomorphization）后隐式参数正确传递 |
 | `const fn` | ✅ 稳定 | 编译期错误定位 |
 | trait 方法 | ✅ 稳定 | [RFC 2091](https://rust-lang.github.io/rfcs//2091-inline-semantic.html) 最初因 MIR 传递时机限制而禁止；后实现改为 monomorphization 之后注入，解除限制 [rustc-dev-guide — track_caller in traits](https://rustc-dev-guide.rust-lang.org/overview.html) |
-| `async fn` | ⚠️ 部分支持 | Stable 上为 **no-op**（编译通过但 `Location::caller()` 返回 async fn 自身位置）；完整支持需 nightly `#![feature(async_fn_track_caller)]`（Tracking: [rust-lang/rust#110011]） |
-| 闭包（Closures） | ❌ 不稳定 | 需 nightly `#![feature(closure_track_caller)]`（Tracking: [rust-lang/rust#87417]） |
+| `async fn` | ⚠️ 部分支持 | Stable 上为 **no-op**（编译通过但 `Location::caller()` 返回 async fn 自身位置）；完整支持需每日构建版启用实验特性门 `async_fn_track_caller`（Tracking: [rust-lang/rust#110011]） |
+| 闭包（Closures） | ❌ 不稳定 | 需每日构建版启用实验特性门 `closure_track_caller`（Tracking: [rust-lang/rust#87417]） |
 | `dyn Fn()` / 函数指针 | ❌ 不支持 | 动态分发无法传递隐式 `Location` 参数；通过 trait object 调用时丢失 caller 信息 |
 | `#[naked]` / 自定义 ABI | ❌ 不支持 | 与显式 ABI 冲突 |
 
@@ -2026,12 +2027,15 @@ fn compute() -> Maybe<i32> {
 ```
 
 > **定理**：`Try` trait 将 `?` 从 `Result`/`Option` 的语法糖提升为**通用的控制流抽象**。任何满足代数结构的类型（含成功/失败两种分支）都可实现 `Try`。
-> **边界**：`Try` trait 当前尚未完全稳定（`Residual` 关联类型在演进中）。`ControlFlow` 本身已稳定（Rust 1.55+），但直接实现 `Try` 需要 nightly。
+> **边界**：`Try` trait 当前尚未完全稳定（`Residual` 关联类型在演进中）。`ControlFlow` 本身已稳定（Rust 1.55+），但直接实现 `Try` 需要每日构建版工具链。
 > **来源**: [RFC 3058: Try trait v2](https://github.com/rust-lang/rfcs/pull/3058) · [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator) · [Rust Standard Library: ControlFlow]
 
 ---
 
 ## 十、相关概念链接
+- **上层概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md)
+- **下层概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)
+
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -2166,7 +2170,7 @@ async fn wrapper() -> Result<i32, &'static str> {
 **动机**：统一 `Result`、`Option`、`ControlFlow` 乃至用户自定义类型的 `?` 行为，使 `try {}` 块与自定义错误类型拥有相同的一等公民支持。
 
 ```rust,ignore
-#![feature(try_trait_v2)]
+// 需启用实验特性门 try_trait_v2（每日构建版工具链）
 use std::ops::{ControlFlow, FromResidual, Try};
 
 // 自定义类型实现 Try 后可直接使用 ?
@@ -2204,7 +2208,7 @@ impl<T, E> Try for MyResult<T, E> {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

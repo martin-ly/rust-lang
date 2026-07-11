@@ -1669,7 +1669,7 @@ trait Generator<R> {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.3
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-02
 **状态**: ✅ 权威来源对齐完成 (Batch 10) — Yoshua Wuyts 2025-2026 核心输出全面整合
 

@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 # Run all quality gates locally.
-# 10 blocking gates (Cargo/mdbook/KB/i18n/mermaid) + 8 semantic observe gates (warning, non-blocking).
-# Semantic gates default to warning mode (exit 0); append --strict to make them blocking.
+# 14 blocking gates (10 Cargo/mdbook/KB/i18n/mermaid + 4 promoted semantic gates in --strict mode)
+# + 5 semantic observe gates (warning, non-blocking).
+#
+# 观察门转正机制（见 AGENTS.md §5.2）：连续 4 周或连续 10 次 CI 运行达标后可评估转阻断。
+# 2026-07-12 已转正（本地 --strict 实跑 exit=0）：topology / kg_shapes / canonical_uniqueness /
+# concept_consistency_auditor。仍观察：metadata_consistency（D2=1/D5=17）、semantic_health、
+# concept_authority_coverage（--strict 当前 exit=1：any=99.5%/none=2/core_gap=1）、overlap v2
+# （可处理项 MERGE+DOCS_INTERNAL=53>0）。
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -22,6 +28,7 @@ run_gate() {
     fi
 }
 
+# --- Blocking gates (10) ---
 run_gate "Cargo Check" cargo check --workspace
 run_gate "Cargo Test" cargo test --workspace --quiet
 run_gate "Cargo Clippy" cargo clippy --workspace -- -D warnings
@@ -33,19 +40,47 @@ run_gate "Content Overlap Detection" python scripts/detect_content_overlap.py
 run_gate "i18n Term Coverage" python scripts/add_bilingual_annotations.py --mode check-only
 run_gate "Mermaid Syntax Check" python scripts/check_mermaid_syntax.py
 
+# --- Promoted semantic gates (blocking, --strict; promoted 2026-07-12 per AGENTS.md §5.2) ---
+run_gate "Topology Quality (strict)" python scripts/check_topology_quality.py --strict
+run_gate "KG SHACL Validation (strict)" python scripts/check_kg_shapes.py --strict
+run_gate "Canonical Uniqueness (strict)" python scripts/check_canonical_uniqueness.py --strict
+run_gate "Concept Consistency Audit (strict)" python scripts/concept_consistency_auditor.py --strict
+
 # --- Semantic quality gates (observe / warning, non-blocking) ---
 run_gate "Metadata Consistency (observe)" python scripts/check_metadata_consistency.py
-run_gate "Content Overlap v2 (observe)" python scripts/detect_content_overlap_v2.py --budget 999999
-run_gate "Topology Quality (observe)" python scripts/check_topology_quality.py
-run_gate "KG SHACL Validation (observe)" python scripts/check_kg_shapes.py
-run_gate "Semantic Health (observe)" python scripts/semantic_health.py
 run_gate "Concept Authority Coverage (observe)" python scripts/check_concept_authority_coverage.py
-run_gate "Canonical Uniqueness (observe)" python scripts/check_canonical_uniqueness.py
-run_gate "Concept Consistency Audit (observe)" python scripts/concept_consistency_auditor.py
+run_gate "Semantic Health (observe)" python scripts/semantic_health.py
+run_gate "Examples Compile Check (observe)" python scripts/check_examples_compile.py
+
+# --- Content Overlap v2 (observe, actionable-baseline WARN escalation) ---
+# 基线（2026-07-12）：可处理项 = MERGE 4 + DOCS_INTERNAL 49 = 53（总命中 592，SERIES 22 白名单，REVIEW 517）。
+# 判定升级：可处理项 > 基线 ⇒ WARN 升级提示（新增重复，需先 triage 处置）；
+#           可处理项 = 0     ⇒ 具备转阻断资格（届时改为 v2 --strict，可处理项>0 即 exit 1）。
+# 当前仍为观察门：无论结果如何不置 FAILED。
+OVERLAP_V2_ACTIONABLE_BASELINE=53
+echo ""
+echo "=== Content Overlap v2 (observe, actionable baseline=$OVERLAP_V2_ACTIONABLE_BASELINE) ==="
+python scripts/detect_content_overlap_v2.py --budget 999999
+python scripts/triage_overlap.py
+ACTIONABLE=$(python - <<'EOF'
+import glob, json
+p = sorted(glob.glob("reports/OVERLAP_TRIAGE_*.json"))[-1]
+s = json.load(open(p, encoding="utf-8"))["summary"]
+print(s.get("MERGE", 0) + s.get("DOCS_INTERNAL", 0))
+EOF
+)
+echo "[overlap-v2] actionable (MERGE+DOCS_INTERNAL) = $ACTIONABLE (baseline $OVERLAP_V2_ACTIONABLE_BASELINE)"
+if [ "$ACTIONABLE" -gt "$OVERLAP_V2_ACTIONABLE_BASELINE" ]; then
+    echo "⚠️ WARN 升级: 可处理重复对 ($ACTIONABLE) 超过基线 ($OVERLAP_V2_ACTIONABLE_BASELINE) — 新增重复内容，请先 triage 处置（MERGE 合并 / DOCS_INTERNAL 互链）。"
+elif [ "$ACTIONABLE" -eq 0 ]; then
+    echo "✅ 可处理项=0 — 具备转阻断资格：可将本门改为 'python scripts/detect_content_overlap_v2.py --strict --budget 0'。"
+else
+    echo "✅ 可处理项 ($ACTIONABLE) 未超基线，维持观察。"
+fi
 
 echo ""
 if [ "$FAILED" -eq 0 ]; then
-    echo "✅ All 18 quality gates passed (10 blocking + 8 semantic observe)."
+    echo "✅ All 19 quality gates passed (14 blocking + 5 semantic observe)."
     exit 0
 else
     echo "❌ Some quality gates failed."

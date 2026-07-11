@@ -3,11 +3,11 @@
 > **代码状态**: ✅ 含可编译示例
 >
 > **EN**: Formal Methods
-> **Summary**: Formal Methods. Core Rust concept covering practical examples.
+> **Summary**: Formal methods in Rust — from model checking (Kani) and deductive verification (Creusot/Verus/Prusti) to runtime UB detection (Miri) and protocol-level specification (TLA+/P): the five-layer verification model, the type-system-to-theorem-proving spectrum, CI/CD integration, and industrial case studies.
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-> **权威来源**: 本文件为 `concept/` 权威页。
+> **权威来源**: 本文件为 `concept/` 权威页。形式化方法（Formal Methods）的概念定义、工具光谱与工业化实践统一收敛于本页；原 L4 页 [`04_formal/04_model_checking/13_formal_methods.md`](../../04_formal/04_model_checking/13_formal_methods.md) 已于 2026-07-12 合并至本页并改为重定向 stub。
 > **层级**: L7 前沿趋势
 > **A/S/P 标记**: **P** — Procedure（策略决策）
 > **双维定位**: P×Eva — 评估形式化验证的工业 ROI
@@ -1511,7 +1511,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.3
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 权威来源对齐完成 (Batch 9)
 

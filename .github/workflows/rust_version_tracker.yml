@@ -1,8 +1,10 @@
-name: Rust Version Tracker
+# ⚠️ DEPRECATED (2026-07-12)：与 rust_version_tracking.yml 真重复（同功能：检测最新 stable
+# vs 项目 MSRV 并创建 issue）。保留功能更全的 rust_version_tracking.yml（迁移计划报告、
+# outputs、force_check 输入、180 天产物留存）。调度已移除，仅保留手动触发。
+name: Rust Version Tracker (DEPRECATED — use rust_version_tracking.yml)
 
 on:
-  schedule:
-    - cron: '0 0 1 * *'  # 每月1日运行
+  # 原调度 '0 0 1 * *'（每月1日）已停用，功能由 rust_version_tracking.yml（半年度）覆盖
   workflow_dispatch:
 
 env:

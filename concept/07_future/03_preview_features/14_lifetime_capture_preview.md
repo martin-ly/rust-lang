@@ -4,6 +4,7 @@
 >
 > **EN**: Precise Lifetime Capture in `impl Trait` Preview
 > **Summary**: Preview of precise lifetime capture rules (`use<'lt>` syntax) for `impl Trait` return types, stabilized in Rust 1.82 and enabled by default in Rust 2024 Edition.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ Rust 1.82.0 已稳定 `use<>` 精确捕获；Rust 2024 Edition 默认启用新捕获规则
 > **Rust 属性标记**: `#[stable_since_1_82]` `#[edition_2024]`
 > **跟踪版本**: stable 1.82.0（精确捕获语法）；nightly 1.98.0（完整 RTN 扩展）

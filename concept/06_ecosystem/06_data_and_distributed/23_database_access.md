@@ -10,7 +10,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S** — ApplicationStructure
+> **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×App — 应用数据库访问模式
 > **定位**: 分析 Rust 的数据库访问生态——从 SQLx 的编译期检查到 Diesel 的 ORM [来源: [Wikipedia — ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)]，探讨类型安全如何消除运行时（Runtime）查询错误。
 > **前置概念**: [Async](../../03_advanced/01_async/02_async.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
@@ -590,7 +590,7 @@ fn main() {
 }
 ```
 
-## 相关概念文件
+## 相关概念
 
 - [Async](../../03_advanced/01_async/02_async.md) — 异步编程
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
@@ -604,7 +604,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-26
 **状态**: ✅ 概念文件创建完成
 

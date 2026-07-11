@@ -2,6 +2,7 @@
 >
 > **EN**: Pattern Semantic Space Index
 > **Summary**: A unified index and learning path for all design-pattern-related concepts across the concept hierarchy, with semantic axes, GoF-to-Rust mapping, and scenario-based decision trees.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。

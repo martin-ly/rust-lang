@@ -6,6 +6,7 @@
 >
 > **EN**: Cutting-Edge Algorithm Technologies
 > **Summary**: Cutting-edge algorithm technologies in Rust: probabilistic data structures, streaming algorithms, approximation and meta-heuristics, privacy-preserving computation, and links to machine learning and quantum ecosystems.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [专家]
 > **权威来源**: 本文件为 `concept/` 权威页。

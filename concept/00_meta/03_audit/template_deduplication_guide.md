@@ -2,6 +2,7 @@
 >
 > **EN**: Template Deduplication Guide
 > **Summary**: Guidelines for reducing boilerplate repetition across `concept/` files while preserving the bilingual header and core pedagogical structure.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [贡献者]
 > **权威来源**: 本文件为 `concept/` 权威页。

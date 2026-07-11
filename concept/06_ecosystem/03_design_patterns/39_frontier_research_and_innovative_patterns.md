@@ -4,11 +4,12 @@
 >
 > **EN**: Frontier Research and Innovative Patterns
 > **Summary**: Frontier topics in Rust design patterns: effect systems, algebraic effects, advanced session types, linear types, capability-based security, dependent types, quantum computing patterns, and future directions.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **内容分级**: [研究级]
 > **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S** — Application + Structure
+> **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: A×Res — 前沿研究与创新模式
 > **前置依赖**: [Design Patterns](02_patterns.md) · [Formal Design Pattern Theory](38_formal_design_pattern_theory.md)
 > **后置概念**: [Engineering and Production Patterns](82_engineering_and_production_patterns.md) · [Industrial Case Studies](../11_domain_applications/75_industrial_case_studies.md)

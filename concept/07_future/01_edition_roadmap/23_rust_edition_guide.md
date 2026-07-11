@@ -1,8 +1,10 @@
 # Rust Edition 机制与迁移指南
 
 > **Summary**: Redirect stub for Rust Edition mechanism and migration guide; authoritative content is in 44_edition_guide.md.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **EN**: Rust Edition Mechanism and Migration Guide
 > **受众**: [研究者]
+> **Bloom 层级**: L2-L3
 > **内容分级**: [研究级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **前置概念**: [Rust Edition Guide](44_edition_guide.md)

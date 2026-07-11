@@ -62,6 +62,7 @@
   - [反命题](#反命题)
   - [反向推理](#反向推理)
   - [过渡段](#过渡段)
+  - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
 
 ---
 
@@ -86,7 +87,7 @@
 
 ### Declarative Macro (声明宏)
 
-使用 `macro_rules!` 定义的模式匹配（Pattern Matching）宏。
+基于模式匹配（Pattern Matching）的 `macro_rules!` 代码生成宏。
 
 ```rust
 macro_rules! vec_of_strings {
@@ -106,7 +107,7 @@ macro_rules! vec_of_strings {
 
 ### Procedural Macro (过程宏)
 
-使用 Rust 代码处理 TokenStream 的宏。
+编译期操作 token 流（TokenStream）的 Rust 代码宏。
 
 **三种类型**:
 
@@ -141,7 +142,9 @@ macro_rules! say_hello {
 
 ### Pattern Matching (模式匹配)
 
-宏的参数匹配规则。
+<!-- glossary-waive: Pattern Matching — 本处为宏领域特指义项（macro_rules! 参数匹配），区别于语言级模式匹配，后者以 concept/00_meta/01_terminology/terminology_glossary.md 权威定义为准 -->
+
+宏的参数匹配规则（`macro_rules!` 领域特指；语言级“解构值并根据结构执行分支”的模式匹配见权威术语表）。
 
 **片段说明符** (Fragment Specifiers):
 
@@ -231,7 +234,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 ### Derive Macro (派生宏)
 
-自动为类型实现 trait 的宏。
+通过 `#[derive(...)]` 自动为类型生成 trait 实现的过程宏。
 
 ```rust
 #[derive(Debug, Clone, MyTrait)]
@@ -253,7 +256,7 @@ pub fn my_trait_derive(input: TokenStream) -> TokenStream {
 
 ### Attribute Macro (属性宏)
 
-为代码添加元数据或修改代码的宏。
+以 `#[...]` 形式附加到项的过程宏，可为代码添加元数据、重写或包装被标注代码。
 
 ```rust
 #[route(GET, "/")]
@@ -505,7 +508,7 @@ fn ui_tests() {
 
 ### AST (抽象语法树)
 
-代码的树状表示。
+Abstract Syntax Tree，源代码解析后的树形结构表示，是编译器前端的输出。
 
 ```rust
 // 代码
@@ -574,7 +577,7 @@ let user = User::builder()
 
 ### Zero-Cost Abstraction (零成本抽象)
 
-宏展开后的代码性能与手写代码相同。
+高级语言特性编译后不产生运行时开销的设计原则：宏展开后的代码性能与手写代码相同。
 
 ```rust
 // 宏定义的高层抽象
@@ -614,7 +617,7 @@ const SIZE: usize = compute_size!(some_input);
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -660,7 +663,6 @@ const SIZE: usize = compute_size!(some_input);
 >
 > **过渡**: 从导航体验过渡到与卫生性、参考页的结合，可以形成宏系统学习的完整入口。
 >
-
 
 ---
 

@@ -9,7 +9,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: C×Eva — 评价 Rust 形式化验证工具的技术能力与适用边界
 > **前置依赖**: [类型系统（Type System）](../../01_foundation/02_type_system/04_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · 形式化验证 · [生命周期（Lifetimes）](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 > **后置延伸**: [编译器内部原理](../00_toolchain/45_compiler_internals.md) · [安全与密码学](../07_security_and_cryptography/43_security_cryptography.md) · [嵌入式系统](../05_systems_and_embedded/22_embedded_systems.md)
@@ -28,7 +28,7 @@
 > [RefinedRust — Iris-based](https://gitlab.mpi-sws.org/lgaeher/refinedrust) ·
 > [hax — Cryspen/Inria](https://github.com/hacspec/hax) ·
 > [Kani verify-std](https://github.com/model-checking/verify-rust-std)
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -318,10 +318,10 @@ fn unaligned_read() {
 rustup component add miri
 
 # 运行 Miri
-cargo +nightly miri run
+cargo miri run（需每日构建版工具链）
 
 # 测试整个 crate
-cargo +nightly miri test
+cargo miri test（需每日构建版工具链）
 ```
 
 > **来源**: [MIRI README](https://github.com/rust-lang/miri) ·
@@ -835,7 +835,7 @@ fn caller() {
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - 编译器内部原理 — rustc 管线、MIR、借用（Borrowing）检查器
 - [安全与密码学](../07_security_and_cryptography/43_security_cryptography.md) — 侧信道防护、常量时间操作
@@ -848,7 +848,7 @@ fn caller() {
 - [版本跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) — Rust 语言演进对验证工具的影响
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: Formal Verification Tools（形式化验证工具生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Formal Verification Tools（形式化验证工具生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Formal Verification Tools（形式化验证工具生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

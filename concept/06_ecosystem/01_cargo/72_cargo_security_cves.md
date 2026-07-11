@@ -6,6 +6,7 @@
 >
 > **EN**: Cargo Security Advisories: CVE-2026-5222 and CVE-2026-5223
 > **Summary**: Cargo Security Advisories: CVE-2026-5222 and CVE-2026-5223: Rust ecosystem tools, crates, and engineering practices.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶 / 工程]
 > **Bloom 层级**: L2-L3
@@ -339,7 +340,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Toolchain](../00_toolchain/01_toolchain.md) — Rust 工具链与 rustup
 - [Public/Private Dependencies](10_public_private_deps.md) — 依赖可见性与 registry 选择

@@ -82,6 +82,7 @@
   - [反命题](#反命题)
   - [反向推理](#反向推理)
   - [过渡段](#过渡段)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -271,10 +272,10 @@ let result = 42;  // result 在调用点作用域
 
 ### 3.2 def_site()
 
-**不卫生**，标识符使用宏定义点的作用域（需要 nightly）：
+**不卫生**，标识符使用宏定义点的作用域（需要每日构建版工具链）：
 
 ```rust
-#![feature(proc_macro_def_site)]
+// 需启用实验特性门 proc_macro_def_site（每日构建版工具链）
 
 use proc_macro::Span;
 
@@ -633,7 +634,7 @@ fn test_hygiene() {
 ### 8.1 宏 2.0 (未稳定)
 
 ```rust
-#![feature(decl_macro)]
+// 需启用实验特性门 decl_macro（每日构建版工具链）
 
 pub macro my_macro($e:expr) {
     $e * 2
@@ -672,7 +673,7 @@ pub macro my_macro($e:expr) {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -749,6 +750,7 @@ pub macro my_macro($e:expr) {
   - [反命题](#反命题)
   - [反向推理](#反向推理)
   - [过渡段](#过渡段)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ## 1. 什么是宏卫生性
 
@@ -981,7 +983,6 @@ macro_rules! hygienic_macro {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -1027,7 +1028,6 @@ macro_rules! hygienic_macro {
 >
 > **过渡**: 从 span 决策过渡到生产级实践，可以将 hygiene 规则融入宏开发与测试流程。
 >
-
 
 ---
 

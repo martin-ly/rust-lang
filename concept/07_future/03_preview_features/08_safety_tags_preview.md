@@ -18,7 +18,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析安全标签预览特性
 > **定位**: 探讨 Safety Tags 作为 Rust **unsafe 代码契约**的机器可读标注机制，从人工文档注释演进为编译器可理解、工具可验证的安全契约格式。
-> **前置概念**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [BorrowSanitizer](../02_stabilized_features/borrow_sanitizer.md)
+> **前置概念**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [BorrowSanitizer](../03_preview_features/borrow_sanitizer.md)
 > **后置概念**: [Formal Methods](../04_research_and_experimental/02_formal_methods.md) · [AI Integration](../04_research_and_experimental/01_ai_integration.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -358,10 +358,10 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) — Unsafe 边界与借用（Borrowing）规则
-- [BorrowSanitizer](../02_stabilized_features/borrow_sanitizer.md) — 运行时（Runtime）借用（Borrowing）检查验证
+- [BorrowSanitizer](../03_preview_features/borrow_sanitizer.md) — 运行时（Runtime）借用（Borrowing）检查验证
 - [BorrowSanitizer 预览](20_borrowsanitizer_preview.md) — 历史预览版本（内容已迁移至活跃跟踪页）
 - [Formal Methods](../04_research_and_experimental/02_formal_methods.md) — 形式化验证工具链
 - [AI Integration](../04_research_and_experimental/01_ai_integration.md) — AI 生成代码的安全边界
@@ -378,7 +378,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 

@@ -4,6 +4,7 @@
 >
 > **EN**: Value Semantics vs Reference Semantics
 > **Summary**: A cross-language comparison of value semantics and reference semantics, positioning Rust's ownership model as an extreme form of value semantics.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -31,6 +32,7 @@
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ---
+
 ## 一、核心命题
 
 > **变量赋值时，传递的到底是"值的副本"还是"引用（Reference）的副本"？

@@ -6,7 +6,7 @@
 > **EN**: Serde Patterns
 > **Summary**: Serde Patterns: intermediate Rust mechanisms, patterns, and practical examples.
 > **受众**: [进阶]
-> **Bloom 层级**: L3-L4
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Serde 序列化设计模式
@@ -509,7 +509,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Traits](01_traits.md) — Trait 系统与 derive
 - [Macros](../../03_advanced/03_proc_macros/04_macros.md) — 过程宏（Procedural Macro）机制
@@ -524,7 +524,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 
@@ -806,7 +806,6 @@ fn main() {
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）
 

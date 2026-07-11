@@ -4,10 +4,10 @@
 # C07-02. 进程间通信机制（IPC Mechanisms）（c07_process 示例索引）
 
 > **权威来源**: 管道、命名管道、套接字、共享内存、信号、消息队列等 IPC 机制的完整解释见
-> [`concept/03_advanced/02_process_ipc/05_ipc_mechanisms.md`](../../../concept/03_advanced/02_process_ipc/05_ipc_mechanisms.md)。
+> [`concept/03_advanced/08_process_ipc/05_ipc_mechanisms.md`](../../../concept/03_advanced/08_process_ipc/05_ipc_mechanisms.md)。
 
 本文件原为 `c07_process` crate 的通用 IPC 概念教程。根据 AGENTS.md §6.4 治理规则，
-通用 Rust 概念解释已迁移至 `concept/03_advanced/02_process_ipc/`，此处仅保留索引与
+通用 Rust 概念解释已迁移至 `concept/03_advanced/08_process_ipc/`，此处仅保留索引与
 canonical 链接。
 
 ## 本 crate 相关示例
@@ -19,6 +19,6 @@ canonical 链接。
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| IPC 机制 | [`concept/03_advanced/02_process_ipc/05_ipc_mechanisms.md`](../../../concept/03_advanced/02_process_ipc/05_ipc_mechanisms.md) |
-| 进程模型与生命周期 | [`concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`](../../../concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md) |
-| 高级进程管理 | [`concept/03_advanced/02_process_ipc/02_advanced_process_management.md`](../../../concept/03_advanced/02_process_ipc/02_advanced_process_management.md) |
+| IPC 机制 | [`concept/03_advanced/08_process_ipc/05_ipc_mechanisms.md`](../../../concept/03_advanced/08_process_ipc/05_ipc_mechanisms.md) |
+| 进程模型与生命周期 | [`concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md`](../../../concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) |
+| 高级进程管理 | [`concept/03_advanced/08_process_ipc/02_advanced_process_management.md`](../../../concept/03_advanced/08_process_ipc/02_advanced_process_management.md) |

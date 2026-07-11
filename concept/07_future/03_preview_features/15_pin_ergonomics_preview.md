@@ -4,6 +4,7 @@
 >
 > **EN**: Pin Ergonomics Preview
 > **Summary**: Preview of ergonomic improvements to working with `Pin` in Rust.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: 🧪 Nightly 实验性（MCP 已通过，RFC 推进中）
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

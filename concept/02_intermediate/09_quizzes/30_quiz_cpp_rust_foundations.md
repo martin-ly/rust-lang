@@ -4,6 +4,7 @@
 >
 > **EN**: Quiz: C/C++ to Rust Foundations
 > **Summary**: Embedded quiz for the C/C++ engineering-layer comparison files: RTTI, macros, exception safety, construction, friend, move semantics, and value/reference semantics.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -27,6 +28,7 @@
 > **Bloom 层级**: L2-L4
 
 ---
+
 ## 一、RTTI 与动态类型识别
 
 ### 问题 1：C++ `dynamic_cast` 和 Rust `Any::downcast_ref` 的核心语义差异是什么？

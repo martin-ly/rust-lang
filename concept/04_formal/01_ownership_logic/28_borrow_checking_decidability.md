@@ -101,7 +101,7 @@ fn nll_allows() {
 
 ### 2.3 Polonius
 
-以 Datalog 风格将借用检查表达为约束传播，可处理 NLL 拒绝的部分安全模式（条件借用、循环内精确分析）。`-Zpolonius` 在 nightly 可用，被视为未来默认路线。 (Source: [Polonius Repository](https://github.com/rust-lang/polonius))
+以 Datalog 风格将借用检查表达为约束传播，可处理 NLL 拒绝的部分安全模式（条件借用、循环内精确分析）。`-Zpolonius` 在每日构建版可用，被视为未来默认路线。 (Source: [Polonius Repository](https://github.com/rust-lang/polonius))
 
 ```rust
 fn polonius_friendly(flag: bool, data: &mut [i32]) -> &mut i32 {
@@ -302,7 +302,7 @@ flowchart TB
                               └── 区域约束、借用状态、数据流结果在此统一求解
 ```
 
-> **实践提示**：通过 `RUSTFLAGS=-Zpolonius cargo +nightly build` 体验 Polonius；阅读源码可从 `rustc_borrowck::do_mir_borrowck` 入手。
+> **实践提示**：通过 `RUSTFLAGS=-Zpolonius cargo build`（每日构建版工具链）体验 Polonius；阅读源码可从 `rustc_borrowck::do_mir_borrowck` 入手。
 
 ---
 
@@ -378,7 +378,7 @@ fn two_phase_borrow() {
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

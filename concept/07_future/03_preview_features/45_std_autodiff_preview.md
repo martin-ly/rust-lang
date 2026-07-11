@@ -227,7 +227,7 @@ std::autodiff 适合所有 Rust 数值计算?
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: nightly 1.98.0+ (experimental)
+**Rust 版本**: nightly 1.98.0+ (experimental)
 **最后更新**: 2026-06-01
 **状态**: 🧪 前沿追踪
 

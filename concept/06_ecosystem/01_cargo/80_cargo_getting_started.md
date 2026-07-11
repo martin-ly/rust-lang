@@ -5,10 +5,11 @@
 >
 > **EN**: Cargo Getting Started
 > **Summary**: A beginner-oriented guide to Cargo 1.97.0+: verifying the toolchain, creating a package with `cargo new`/`cargo init`, building/running/checking, adding dependencies, and choosing between binary, library, script, and workspace projects.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [初学者]
 > **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **P** — Practice
+> **A/S/P 标记**: **A** — Application
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 让初学者在 5 分钟内理解 Cargo 是什么、能做什么、如何创建并运行第一个 Rust package。
 > **前置概念**: [Toolchain](../00_toolchain/01_toolchain.md) · [Rust Installation](../../00_meta/04_navigation/learning_mvp_path.md)

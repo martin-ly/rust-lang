@@ -553,7 +553,7 @@ pub fn my_macro(input: String) -> String {
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Macros](04_macros.md) — macro_rules! 声明式宏
 - [Trait](../../02_intermediate/00_traits/01_traits.md) — Trait 系统（Derive 的目标）
@@ -566,7 +566,7 @@ pub fn my_macro(input: String) -> String {
 > **权威来源对齐变更日志**: 2026-07-10 Stage F L3 更新权威来源块 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -923,7 +923,7 @@ Derive 宏不是"魔法"——它只是自动编写你本来可以手写的 `imp
 - `cargo expand` 高级用法与差异比较
 - 宏展开追踪：`eprintln!`、`RUSTC_LOG`、计时
 - 精确错误定位：`syn::Error`、`quote_spanned!`、`proc-macro-error`
-- 编译器回调与 lint（nightly）
+- 编译器回调与 lint（每日构建版）
 
 👉 详见 [宏调试与诊断](30_macro_debugging_and_diagnostics.md)
 

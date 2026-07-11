@@ -290,7 +290,7 @@ Safety Tags
 ### 状态
 
 - **RFC 阶段**: Draft（2025-2026）
-- **编译器支持**: 尚未实现，需 `#[feature(...)]`
+- **编译器支持**: 尚未实现，需编译器实验特性门支持
 - **工具支持**: rustdoc 的 Safety Tag 渲染已在设计中
 
 **权威来源**: [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
@@ -360,7 +360,7 @@ pub fn safe_wrapper(data: &[u8]) -> u32 {
 | C/Rust FFI 混合验证 | **ESBMC** | TrustInSoft | Rust 前端成熟度有限 |
 | 遗留 C 代码审计 | **TrustInSoft** | ESBMC | 商业工具，需许可证 |
 | unsafe API 标准化文档 | **Safety Tags** (未来) | rustdoc + 手写 | RFC 尚未批准 |
-| 生产环境借用（Borrowing）检查（运行时） | **BorrowSanitizer** (BSan) | Miri | 2-5x 性能开销，需 nightly |
+| 生产环境借用（Borrowing）检查（运行时） | **BorrowSanitizer** (BSan) | Miri | 2-5x 性能开销，需每日构建版工具链 |
 | 编译器本身验证 | **a-mir-formality** | — | 研究工具，非程序验证 |
 
 ---
@@ -404,7 +404,7 @@ kani autoharness --function increment_all
 # 编译并运行带 BorrowSanitizer 检查的程序
 RUSTFLAGS="-Zsanitizer=borrow" cargo run --target x86_64-unknown-linux-gnu
 
-# 注意: BSan 需要 nightly toolchain 和目标平台的 sanitizer 运行时支持
+# 注意: BSan 需要每日构建版工具链和目标平台的 sanitizer 运行时支持
 ```
 
 **适用场景**: 生产环境部署前的借用（Borrowing）安全检查，Miri 太慢（100-1000x）时的替代方案。
@@ -412,7 +412,7 @@ RUSTFLAGS="-Zsanitizer=borrow" cargo run --target x86_64-unknown-linux-gnu
 **关键限制**: 仅检测运行时可达路径；静态分析覆盖不如 Miri 全面。
 
 > **与 Miri 的对比**: Miri 解释执行 MIR（100-1000x  slowdown），BSan 编译期插桩（2-5x slowdown）。BSan 适合 CI 集成，Miri 适合深度调试。
-> **深度文档**: [BorrowSanitizer 深度解析](../../07_future/02_stabilized_features/borrow_sanitizer.md)
+> **深度文档**: [BorrowSanitizer 深度解析](../../07_future/03_preview_features/borrow_sanitizer.md)
 
 ---
 
@@ -453,12 +453,11 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 
 > **权威来源**: [AutoVerus arXiv 2025] · [Kani 0.65 Release Notes](https://model-checking.github.io/kani/) · [ESBMC GitHub](https://github.com/esbmc/esbmc) · [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [TrustInSoft](https://trust-in-soft.com/)
 > **文档版本**: 1.1
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-07-09
 > **权威来源对齐变更日志**: 2026-07-09 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用（Reference） [P2-Q3 形式化工具交叉引用]; 2026-07-10 L4 形式化层权威来源对齐复审 [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

@@ -15,6 +15,7 @@
 >
 > **EN**: WebAssembly Target Evolution Preview
 > **Summary**: Preview of Rust WebAssembly target evolution, including WASI p1/p2, component model, SIMD, threads, GC, and exception handling proposals.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: 🧪 部分 target 已稳定；部分提案仍在实验阶段
 > **Rust 属性标记**: `#[stable_target]`（`wasm32-unknown-unknown`、`wasm32-wasip1`）`#[experimental]`（`wasm32-wasip2`、新提案）
 > **跟踪版本**: stable 1.82.0+（`wasm32-wasip2` Tier 2）；stable 1.84.0（移除旧 `wasm32-wasi`）

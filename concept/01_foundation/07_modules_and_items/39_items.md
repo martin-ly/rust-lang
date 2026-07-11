@@ -2,6 +2,7 @@
 
 > **EN**: Items
 > **Summary**: The building blocks of a Rust crate: modules, `use` declarations, functions, type definitions, constants, statics, traits, implementations, and `extern` blocks, with examples of their syntax, visibility, and scope rules.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者]
 > **内容分级**: [综述级]
@@ -260,7 +261,7 @@ flowchart TD
 
 ---
 
-## 九、关联概念
+## 九、相关概念
 
 | 概念 | 关系 |
 |:---|:---|

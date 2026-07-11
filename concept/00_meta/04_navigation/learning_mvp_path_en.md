@@ -1,6 +1,7 @@
 # Rust Minimum Viable Learning Path (MVP Path)
 
 > **Summary**: A 3-week beginner path to independently write a multi-threaded CLI in Rust, with runnable code and exercises for each stage.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **EN**: Rust Minimum Viable Learning Path
 > **Target Audience**: Beginners with programming experience in at least one other language
 > **Estimated Time**: 35–45 hours (≈ 3 weeks at 2 hours/day)

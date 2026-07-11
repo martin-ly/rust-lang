@@ -24,10 +24,10 @@
 
 ---
 
-> ⚠️ **不稳定特性警告**: 本文件包含 `#![feature(...)]` 标注的代码示例，需要 **nightly 工具链** 编译。
+> ⚠️ **不稳定特性警告**: 本文件包含实验特性门（feature gate）标注的代码示例，需要**每日构建版工具链**编译。
 >
-> **使用方式**: `rustup run nightly rustc ...` 或 `cargo +nightly ...`
-> **状态查询**: <https://doc.rust-lang.org/nightly/unstable-book/index.html>
+> **使用方式**: 通过 `rustup` 安装每日构建版工具链后，以 `cargo +<每日构建版工具链> ...` 运行
+> **状态查询**: Rust 实验特性手册（随每日构建版发布）
 > **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
 
 ---
@@ -98,7 +98,7 @@
       - [数组初始化示例](#数组初始化示例)
     - [5.7 补充：自定义 Allocator（`#[global_allocator]`）](#57-补充自定义-allocatorglobal_allocator)
       - [替换全局分配器](#替换全局分配器)
-      - [`Allocator` trait（nightly，实验性）](#allocator-traitnightly实验性)
+      - [`Allocator` trait（每日构建版，实验性）](#allocator-trait每日构建版实验性)
     - [5.8 补充：`ManuallyDrop<T>` 与 `mem::forget` 的形式化分析](#58-补充manuallydropt-与-memforget-的形式化分析)
       - [形式化对比：`mem::forget` vs `ManuallyDrop`](#形式化对比memforget-vs-manuallydrop)
       - [`mem::forget` 的安全用例：FFI 边界](#memforget-的安全用例ffi-边界)
@@ -1097,6 +1097,9 @@ c.borrow_mut().push_str("hello");     // 运行时检查的可变借用
 ---
 
 ## 十、相关概念链接
+- **上层概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+- **下层概念**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
+
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -1219,10 +1222,10 @@ fn main() {
 | **mimalloc** | 极致小规模分配性能、安全加固 | 游戏、实时系统、微服务 |
 | **dlmalloc** | 简单、可移植、无外部依赖 | 嵌入式、`no_std` 环境 |
 
-#### `Allocator` trait（nightly，实验性）
+#### `Allocator` trait（每日构建版，实验性）
 
 ```rust,ignore
-#![feature(allocator_api)]
+// 需启用实验特性门 allocator_api（每日构建版工具链）
 
 use std::alloc::{Allocator, Global, AllocError, Layout};
 
@@ -1610,7 +1613,7 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 
 ### 12.1 自定义 Allocator（`#[global_allocator]`）
 
-**定义**：Rust 允许通过 `#[global_allocator]` 替换默认全局分配器，也支持 nightly 的 `Allocator` trait 为特定容器指定局部分配器。
+**定义**：Rust 允许通过 `#[global_allocator]` 替换默认全局分配器，也支持每日构建版的 `Allocator` trait 为特定容器指定局部分配器。
 
 **动机**：不同场景对分配延迟、碎片、并发扩展性要求不同；替换为 `jemalloc`/`mimalloc` 可显著提升大型服务或游戏引擎的性能。
 
@@ -1687,7 +1690,7 @@ static GLOBAL: Jemalloc = Jemalloc;
 
 ### 12.5 `MaybeUninit<T>` 与 `MaybeDangling` 的边界分析
 
-**定义**：`MaybeUninit<T>` 是一块可能未初始化的 `T` 内存，允许安全地逐字段构造；`MaybeDangling`（nightly 实验）允许持有已释放或悬垂的引用而不触发 UB。
+**定义**：`MaybeUninit<T>` 是一块可能未初始化的 `T` 内存，允许安全地逐字段构造；`MaybeDangling`（每日构建版实验）允许持有已释放或悬垂的引用而不触发 UB。
 
 **动机**：在实现 `Vec`、channels、FFI 绑定时，经常需要先分配内存再初始化；`MaybeUninit` 提供了未初始化内存的安全抽象。
 
@@ -1733,7 +1736,7 @@ impl SelfRef {
 
 **定义**：Field projections 关注如何安全地投影智能指针/容器到其字段，例如 `Pin<Box<T>>` 投影到 `Pin<Box<T.field>>`，或在原地初始化未初始化内存。
 
-**动机**：当前 Safe Rust 对 Pin 投影和未初始化字段的“最后一公里”支持不足，需要借助 unsafe 或 nightly 提案（如 `Pin::map_unchecked`、`field_init`）。
+**动机**：当前 Safe Rust 对 Pin 投影和未初始化字段的“最后一公里”支持不足，需要借助 unsafe 或每日构建版提案（如 `Pin::map_unchecked`、`field_init`）。
 
 ```rust,ignore
 // Pin 投影的常见模式：安全地获取结构体子字段的 Pin
@@ -1765,7 +1768,7 @@ let mut pinned: Pin<Box<SelfRef>> = SelfRef::new(String::from("x"));
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

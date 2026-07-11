@@ -189,10 +189,10 @@ fn structural_derivation() {
 // impl<T: ?Sized> !Sync for *mut T {}
 ```
 
-在用户代码中，显式 negative impl 仍是 **nightly**（`#![feature(negative_impls)]`，截至 Rust 1.97.0 未稳定）：
+在用户代码中，显式 negative impl 仍需**每日构建版工具链**（实验特性门 `negative_impls`，截至 Rust 1.97.0 未稳定）：
 
 ```rust
-// #![feature(negative_impls)] —— 仅 nightly 可编译
+// 需启用实验特性门 negative_impls —— 仅每日构建版可编译
 // struct MainThreadOnly { _p: () }
 // impl !Send for MainThreadOnly {}   // 显式否定：该类型绑定创建它的线程
 ```
@@ -227,7 +227,7 @@ struct ThreadBoundSendable { id: u64 } // 对照：无毒化字段 ⟹ 自动 Se
 |:---|:---|:---|
 | `!Send + !Sync` | `PhantomData<Rc<()>>` 或 `PhantomData<*const ()>` | 最常用；`*const ()` 不引入堆分配语义暗示 |
 | 仅 `!Sync`（保留 Send） | `PhantomData<Cell<()>>` | `Cell<()>: Send + !Sync` |
-| 仅 `!Send`（保留 Sync） | 无现成 std 类型组合，需 nightly `impl !Send` | 实践中极少需要 |
+| 仅 `!Send`（保留 Sync） | 无现成 std 类型组合，需每日构建版 `impl !Send` | 实践中极少需要 |
 
 ### 3.4 orphan 规则边界
 
@@ -256,7 +256,7 @@ unsafe impl Send for MyHandle {}
 
 1. auto trait 的手动 `unsafe impl` 只能加在**本 crate 定义**的类型上（orphan 规则）；显式 impl **覆盖**自动推导结果（auto trait 的特性，不产生 E0119 冲突）——典型场景：含原始指针字段的类型（规则 3 使其默认 `!Send`/`!Sync`）需要手动翻案；
 2. 不能给外部 crate 的类型“补”Send/Sync——那等于单方面宣布别人的类型线程安全，破坏一致性（Coherence），编译器报 E0117；
-3. stable 上不能给用户类型加 negative impl——只能重构类型（加毒化字段，§3.3），或使用 nightly `negative_impls`。
+3. stable 上不能给用户类型加 negative impl——只能重构类型（加毒化字段，§3.3），或使用每日构建版的 `negative_impls`。
 
 ## 四、与泛型、组合类型、UnsafeCell 的交互
 
@@ -477,5 +477,4 @@ flowchart TD
 - [docs.rs/rayon — 生态权威 API 文档](https://docs.rs/rayon)（P2 生态：数据并行库对 Send/Sync 约束的大规模实践，2026-07-12 验证 HTTP 200）
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-12

@@ -46,6 +46,7 @@
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Brown Book、TRPL、Rust Reference）
 
 ---
+
 ## 一、四个 Inventory 节点
 
 > (Source: [Brown University Interactive Rust Book](https://rust-book.cs.brown.edu/))

@@ -8,7 +8,7 @@
 > **受众**: [中级 → 高级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **P** — Practice
+> **A/S/P 标记**: **A** — Application
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把 `Cargo.toml` 的核心字段按用途整理成可速查的参考表，方便快速查阅而非从头阅读。
 > **前置概念**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -53,7 +53,7 @@
 | `name` | ✅ | 包名（crate 名），crates.io 限制 ASCII、64 字符 |
 | `version` | 发布时 | SemVer，如 `1.2.3`；无则默认 `0.0.0` |
 | `edition` | ❌ | Rust Edition，`2015`/`2018`/`2021`/`2024`；默认 `2015` |
-| `rust-version` | ❌ | MSRV，如 `"1.70.0"` |
+| `rust-version` | ❌ | MSRV，如 `"1.97.0"` |
 | `authors` | ❌ | 已废弃，但兼容 |
 | `description` | 发布 crates.io | 纯文本简介 |
 | `documentation` | ❌ | 文档 URL；未设置则自动指向 docs.rs |
@@ -217,7 +217,7 @@ enum_glob_use = "deny"
 # 目前尚无稳定 hint
 ```
 
-> 注意：Cargo lints 目前仍需 nightly。
+> 注意：Cargo lints 目前仍需每日构建版工具链。
 
 ---
 
@@ -306,6 +306,6 @@ serde = { path = "../serde-fix" }
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 / Cargo manifest format
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Cargo Book manifest 参考文档

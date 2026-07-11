@@ -10,7 +10,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S** — Application + Structure
+> **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Cre — 分析系统架构层级与依赖关系设计
 > **前置依赖**: [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [生命周期（Lifetimes）](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · 设计模式
 > **后置延伸**: [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) · [微服务架构模式](31_microservice_patterns.md) · [事件驱动架构](32_event_driven_architecture.md)
@@ -27,7 +27,7 @@
 > [AWS Lambda Best Practices](https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html)
 > [来源: [Fowler — EAA](https://martinfowler.com/books/eaa.html)] ·
 > [来源: [Cockburn — Hexagonal](https://alistair.cockburn.us/hexagonal-architecture/)]
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -1113,7 +1113,7 @@ async fn risky_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Error>
 > [来源: [Martin — Clean Architecture Book](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)]
 > [来源: [Fowler — Patterns of Enterprise Application Architecture](https://martinfowler.com/eaaCatalog/)]
 
-## 相关概念文件
+## 相关概念
 
 - [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) — 命令查询分离、事件溯源、Saga
 - [微服务架构模式](31_microservice_patterns.md) — 服务发现、熔断、Saga
@@ -1124,7 +1124,7 @@ async fn risky_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Error>
 - [公理语义](../../04_formal/03_operational_semantics/20_axiomatic_semantics.md) — Hoare 逻辑、正确性证明
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: Architecture Patterns（架构设计模式） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Architecture Patterns（架构设计模式） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Architecture Patterns（架构设计模式） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

@@ -3,15 +3,15 @@
 ## 统计
 | 类别 | 数量 |
 |:---|:---:|
-| 总链接数 | 43137 |
-| 有效链接 | 13685 |
-| 损坏链接 | 7048 |
-| 外部链接 | 22403 |
-| 仅锚点链接 | 12410 |
+| 总链接数 | 43640 |
+| 有效链接 | 13924 |
+| 损坏链接 | 7029 |
+| 外部链接 | 22686 |
+| 仅锚点链接 | 12579 |
 
 ## 损坏链接清单（按问题类型分组）
 
-### 锚点不存在 (6803个)
+### 锚点不存在 (6869个)
 
 | 源文件 | 链接文本 | 链接路径 | 问题 |
 |:---|:---|:---|:---|
@@ -2992,6 +2992,28 @@
 | docs\research_notes\10_academic_papers_alignment.md | 8.2 IEEE Xplore {#82-ieee-xplore} | `#82-ieee-xplore-82-ieee-xplore` | 同文件锚点不存在: #82-ieee-xplore-82-ieee-xplore |
 | docs\research_notes\10_academic_papers_alignment.md | 8.3 Springer {#83-springer} | `#83-springer-83-springer` | 同文件锚点不存在: #83-springer-83-springer |
 | docs\research_notes\10_academic_papers_alignment.md | 8.4 arXiv {#84-arxiv} | `#84-arxiv-84-arxiv` | 同文件锚点不存在: #84-arxiv-84-arxiv |
+| docs\research_notes\10_aeneas_integration_plan.md | Aeneas 集成计划 {#aeneas-集成计划} | `#aeneas-集成计划-aeneas-集成计划` | 同文件锚点不存在: #aeneas-集成计划-aeneas-集成计划 |
+| docs\research_notes\10_aeneas_integration_plan.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
+| docs\research_notes\10_aeneas_integration_plan.md | 二、Aeneas 简介 {#二aeneas-简介} | `#二aeneas-简介-二aeneas-简介` | 同文件锚点不存在: #二aeneas-简介-二aeneas-简介 |
+| docs\research_notes\10_aeneas_integration_plan.md | 2.1 什么是 Aeneas {#21-什么是-aeneas} | `#21-什么是-aeneas-21-什么是-aeneas` | 同文件锚点不存在: #21-什么是-aeneas-21-什么是-aeneas |
+| docs\research_notes\10_aeneas_integration_plan.md | 2.2 核心能力 {#22-核心能力} | `#22-核心能力-22-核心能力` | 同文件锚点不存在: #22-核心能力-22-核心能力 |
+| docs\research_notes\10_aeneas_integration_plan.md | 2.3 与类似工具对比 {#23-与类似工具对比} | `#23-与类似工具对比-23-与类似工具对比` | 同文件锚点不存在: #23-与类似工具对比-23-与类似工具对比 |
+| docs\research_notes\10_aeneas_integration_plan.md | 3.1 主要目标 {#31-主要目标} | `#31-主要目标-31-主要目标` | 同文件锚点不存在: #31-主要目标-31-主要目标 |
+| docs\research_notes\10_aeneas_integration_plan.md | 3.2 验证范围 {#32-验证范围} | `#32-验证范围-32-验证范围` | 同文件锚点不存在: #32-验证范围-32-验证范围 |
+| docs\research_notes\10_aeneas_integration_plan.md | 4.1 架构设计 {#41-架构设计} | `#41-架构设计-41-架构设计` | 同文件锚点不存在: #41-架构设计-41-架构设计 |
+| docs\research_notes\10_aeneas_integration_plan.md | 4.2 项目集成点 {#42-项目集成点} | `#42-项目集成点-42-项目集成点` | 同文件锚点不存在: #42-项目集成点-42-项目集成点 |
+| docs\research_notes\10_aeneas_integration_plan.md | 4.3 注释规范 {#43-注释规范} | `#43-注释规范-43-注释规范` | 同文件锚点不存在: #43-注释规范-43-注释规范 |
+| docs\research_notes\10_aeneas_integration_plan.md | 5.1 阶段规划 {#51-阶段规划} | `#51-阶段规划-51-阶段规划` | 同文件锚点不存在: #51-阶段规划-51-阶段规划 |
+| docs\research_notes\10_aeneas_integration_plan.md | 5.2 里程碑 {#52-里程碑} | `#52-里程碑-52-里程碑` | 同文件锚点不存在: #52-里程碑-52-里程碑 |
+| docs\research_notes\10_aeneas_integration_plan.md | 6.1 所有权验证示例 {#61-所有权验证示例} | `#61-所有权验证示例-61-所有权验证示例` | 同文件锚点不存在: #61-所有权验证示例-61-所有权验证示例 |
+| docs\research_notes\10_aeneas_integration_plan.md | 6.2 数据结构验证示例 {#62-数据结构验证示例} | `#62-数据结构验证示例-62-数据结构验证示例` | 同文件锚点不存在: #62-数据结构验证示例-62-数据结构验证示例 |
+| docs\research_notes\10_aeneas_integration_plan.md | 6.3 算法验证示例 {#63-算法验证示例} | `#63-算法验证示例-63-算法验证示例` | 同文件锚点不存在: #63-算法验证示例-63-算法验证示例 |
+| docs\research_notes\10_aeneas_integration_plan.md | 7.1 内部文档 {#71-内部文档} | `#71-内部文档-71-内部文档` | 同文件锚点不存在: #71-内部文档-71-内部文档 |
+| docs\research_notes\10_aeneas_integration_plan.md | 7.2 外部资源 {#72-外部资源} | `#72-外部资源-72-外部资源` | 同文件锚点不存在: #72-外部资源-72-外部资源 |
+| docs\research_notes\10_aeneas_integration_plan.md | 7.3 相关工具链 {#73-相关工具链} | `#73-相关工具链-73-相关工具链` | 同文件锚点不存在: #73-相关工具链-73-相关工具链 |
+| docs\research_notes\10_aeneas_integration_plan.md | 🆕 Rust 1.94 研究更新 {#rust-194-研究更新} | `#-rust-194-研究更新-rust-194-研究更新` | 同文件锚点不存在: #-rust-194-研究更新-rust-194-研究更新 |
+| docs\research_notes\10_aeneas_integration_plan.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
+| docs\research_notes\10_aeneas_integration_plan.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
 | docs\research_notes\10_algorithm_exercises_guide.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_algorithm_exercises_guide.md | 2.1 排序 () {#21-排序-sortingrs} | `#21-排序-sortingrs-21-排序-sortingrs` | 同文件锚点不存在: #21-排序-sortingrs-21-排序-sortingrs |
 | docs\research_notes\10_algorithm_exercises_guide.md | 2.2 搜索 () {#22-搜索-searchingrs} | `#22-搜索-searchingrs-22-搜索-searchingrs` | 同文件锚点不存在: #22-搜索-searchingrs-22-搜索-searchingrs |
@@ -3507,6 +3529,10 @@
 | docs\research_notes\10_content_enhancement.md | 🔗 相关资源 {#相关资源} | `#-相关资源-相关资源` | 同文件锚点不存在: #-相关资源-相关资源 |
 | docs\research_notes\10_content_enhancement.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
 | docs\research_notes\10_content_enhancement.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
+| docs\research_notes\10_coq_of_rust_integration_plan.md | Coq of Rust 集成计划（已归档） {#coq-of-rust-集成计划已归档} | `#coq-of-rust-集成计划已归档-coq-of-rust-集成计划已归档` | 同文件锚点不存在: #coq-of-rust-集成计划已归档-coq-of-rust-集成计划已归档 |
+| docs\research_notes\10_coq_of_rust_integration_plan.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
+| docs\research_notes\10_coq_of_rust_integration_plan.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
+| docs\research_notes\10_coq_of_rust_integration_plan.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
 | docs\research_notes\10_core_features_full_chain.md | Rust 核心特性完整链：定义→示例→论证→证明 {#rust-核心特性完整链定义示例论证证明} | `#rust-核心特性完整链定义示例论证证明-rust-核心特性完整链定义示例论证证明` | 同文件锚点不存在: #rust-核心特性完整链定义示例论证证明-rust-核心特性完整链定义示例论证证明 |
 | docs\research_notes\10_core_features_full_chain.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_core_features_full_chain.md | 1. 所有权 {#1-所有权} | `#1-所有权-1-所有权` | 同文件锚点不存在: #1-所有权-1-所有权 |
@@ -3905,6 +3931,27 @@
 | docs\research_notes\10_formal_proof_system_guide.md | 6.1 L1 证明思路 {#61-l1-证明思路} | `#61-l1-证明思路-61-l1-证明思路` | 同文件锚点不存在: #61-l1-证明思路-61-l1-证明思路 |
 | docs\research_notes\10_formal_proof_system_guide.md | 6.2 L2 完整证明 {#62-l2-完整证明} | `#62-l2-完整证明-62-l2-完整证明` | 同文件锚点不存在: #62-l2-完整证明-62-l2-完整证明 |
 | docs\research_notes\10_formal_proof_system_guide.md | 6.3 L3 Coq/Iris 草图 {#63-l3-coqiris-草图} | `#63-l3-coqiris-草图-63-l3-coqiris-草图` | 同文件锚点不存在: #63-l3-coqiris-草图-63-l3-coqiris-草图 |
+| docs\research_notes\10_formal_verification_guide.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
+| docs\research_notes\10_formal_verification_guide.md | 🎯 概述 {#概述} | `#-概述-概述` | 同文件锚点不存在: #-概述-概述 |
+| docs\research_notes\10_formal_verification_guide.md | 🛠️ 工具选择 {#工具选择} | `#️-工具选择-工具选择` | 同文件锚点不存在: #️-工具选择-工具选择 |
+| docs\research_notes\10_formal_verification_guide.md | 📚 验证准备工作 {#验证准备工作} | `#-验证准备工作-验证准备工作` | 同文件锚点不存在: #-验证准备工作-验证准备工作 |
+| docs\research_notes\10_formal_verification_guide.md | 1. 环境准备 {#1-环境准备} | `#1-环境准备-1-环境准备` | 同文件锚点不存在: #1-环境准备-1-环境准备 |
+| docs\research_notes\10_formal_verification_guide.md | 2. 理论准备 {#2-理论准备} | `#2-理论准备-2-理论准备` | 同文件锚点不存在: #2-理论准备-2-理论准备 |
+| docs\research_notes\10_formal_verification_guide.md | 3. 验证框架设计 {#3-验证框架设计} | `#3-验证框架设计-3-验证框架设计` | 同文件锚点不存在: #3-验证框架设计-3-验证框架设计 |
+| docs\research_notes\10_formal_verification_guide.md | 🔬 验证实施步骤 {#验证实施步骤} | `#-验证实施步骤-验证实施步骤` | 同文件锚点不存在: #-验证实施步骤-验证实施步骤 |
+| docs\research_notes\10_formal_verification_guide.md | 步骤 1: 所有权模型验证 {#步骤-1-所有权模型验证} | `#步骤-1-所有权模型验证-步骤-1-所有权模型验证` | 同文件锚点不存在: #步骤-1-所有权模型验证-步骤-1-所有权模型验证 |
+| docs\research_notes\10_formal_verification_guide.md | 步骤 2: 借用检查器验证 {#步骤-2-借用检查器验证} | `#步骤-2-借用检查器验证-步骤-2-借用检查器验证` | 同文件锚点不存在: #步骤-2-借用检查器验证-步骤-2-借用检查器验证 |
+| docs\research_notes\10_formal_verification_guide.md | 步骤 3: 生命周期验证 {#步骤-3-生命周期验证} | `#步骤-3-生命周期验证-步骤-3-生命周期验证` | 同文件锚点不存在: #步骤-3-生命周期验证-步骤-3-生命周期验证 |
+| docs\research_notes\10_formal_verification_guide.md | 步骤 4: 类型系统验证 {#步骤-4-类型系统验证} | `#步骤-4-类型系统验证-步骤-4-类型系统验证` | 同文件锚点不存在: #步骤-4-类型系统验证-步骤-4-类型系统验证 |
+| docs\research_notes\10_formal_verification_guide.md | 步骤 5: 异步状态机验证 {#步骤-5-异步状态机验证} | `#步骤-5-异步状态机验证-步骤-5-异步状态机验证` | 同文件锚点不存在: #步骤-5-异步状态机验证-步骤-5-异步状态机验证 |
+| docs\research_notes\10_formal_verification_guide.md | 步骤 6: Pin 与自引用验证 {#步骤-6-pin-与自引用验证} | `#步骤-6-pin-与自引用验证-步骤-6-pin-与自引用验证` | 同文件锚点不存在: #步骤-6-pin-与自引用验证-步骤-6-pin-与自引用验证 |
+| docs\research_notes\10_formal_verification_guide.md | 📋 验证任务清单 {#验证任务清单} | `#-验证任务清单-验证任务清单` | 同文件锚点不存在: #-验证任务清单-验证任务清单 |
+| docs\research_notes\10_formal_verification_guide.md | Pin 与自引用验证 {#pin-与自引用验证} | `#pin-与自引用验证-pin-与自引用验证` | 同文件锚点不存在: #pin-与自引用验证-pin-与自引用验证 |
+| docs\research_notes\10_formal_verification_guide.md | 🔗 相关资源 {#相关资源} | `#-相关资源-相关资源` | 同文件锚点不存在: #-相关资源-相关资源 |
+| docs\research_notes\10_formal_verification_guide.md | 工具链扩展任务（Rust → 证明助手） {#工具链扩展任务rust-证明助手} | `#工具链扩展任务rust--证明助手-工具链扩展任务rust-证明助手` | 同文件锚点不存在: #工具链扩展任务rust--证明助手-工具链扩展任务rust-证明助手 |
+| docs\research_notes\10_formal_verification_guide.md | 🆕 Rust 1.94 更新 {#rust-194-更新} | `#-rust-194-更新-rust-194-更新` | 同文件锚点不存在: #-rust-194-更新-rust-194-更新 |
+| docs\research_notes\10_formal_verification_guide.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
+| docs\research_notes\10_formal_verification_guide.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
 | docs\research_notes\10_glossary.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_glossary.md | 🔤 术语索引 {#术语索引} | `#-术语索引-术语索引` | 同文件锚点不存在: #-术语索引-术语索引 |
 | docs\research_notes\10_glossary.md | 📚 形式化方法术语 {#形式化方法术语} | `#-形式化方法术语-形式化方法术语` | 同文件锚点不存在: #-形式化方法术语-形式化方法术语 |
@@ -4258,6 +4305,24 @@
 | docs\research_notes\10_proof_tree_type_safety.md | 🔗 相关证明 {#相关证明} | `#-相关证明-相关证明` | 同文件锚点不存在: #-相关证明-相关证明 |
 | docs\research_notes\10_proof_tree_type_safety.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
 | docs\research_notes\10_proof_tree_type_safety.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
+| docs\research_notes\10_quality_checklist.md | 📊 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
+| docs\research_notes\10_quality_checklist.md | 📋 元信息检查 {#元信息检查} | `#-元信息检查-元信息检查` | 同文件锚点不存在: #-元信息检查-元信息检查 |
+| docs\research_notes\10_quality_checklist.md | research\_notes 元信息统一模板 {#research\_notes-元信息统一模板} | `#research_notes-元信息统一模板-research_notes-元信息统一模板` | 同文件锚点不存在: #research_notes-元信息统一模板-research_notes-元信息统一模板 |
+| docs\research_notes\10_quality_checklist.md | 📝 内容质量检查 {#内容质量检查} | `#-内容质量检查-内容质量检查` | 同文件锚点不存在: #-内容质量检查-内容质量检查 |
+| docs\research_notes\10_quality_checklist.md | 证明目标 / 实验目标 {#证明目标-实验目标} | `#证明目标--实验目标-证明目标-实验目标` | 同文件锚点不存在: #证明目标--实验目标-证明目标-实验目标 |
+| docs\research_notes\10_quality_checklist.md | 🔬 学术质量检查 {#学术质量检查} | `#-学术质量检查-学术质量检查` | 同文件锚点不存在: #-学术质量检查-学术质量检查 |
+| docs\research_notes\10_quality_checklist.md | 💻 代码质量检查 {#代码质量检查} | `#-代码质量检查-代码质量检查` | 同文件锚点不存在: #-代码质量检查-代码质量检查 |
+| docs\research_notes\10_quality_checklist.md | 🔗 链接和引用检查 {#链接和引用检查} | `#-链接和引用检查-链接和引用检查` | 同文件锚点不存在: #-链接和引用检查-链接和引用检查 |
+| docs\research_notes\10_quality_checklist.md | 📐 格式检查 {#格式检查} | `#-格式检查-格式检查` | 同文件锚点不存在: #-格式检查-格式检查 |
+| docs\research_notes\10_quality_checklist.md | Markdown 格式 {#markdown-格式} | `#markdown-格式-markdown-格式` | 同文件锚点不存在: #markdown-格式-markdown-格式 |
+| docs\research_notes\10_quality_checklist.md | ✅ 完整性检查 {#完整性检查} | `#-完整性检查-完整性检查` | 同文件锚点不存在: #-完整性检查-完整性检查 |
+| docs\research_notes\10_quality_checklist.md | 概念定义-属性关系-解释论证 层次化（核心研究笔记建议） {#概念定义-属性关系-解释论证-层次化核心研究笔记建议} | `#概念定义-属性关系-解释论证-层次化核心研究笔记建议-概念定义-属性关系-解释论证-层次化核心研究笔记建议` | 同文件锚点不存在: #概念定义-属性关系-解释论证-层次化核心研究笔记建议-概念定义-属性关系-解释论证-层次化核心研究笔记建议 |
+| docs\research_notes\10_quality_checklist.md | 🎯 质量等级 {#质量等级} | `#-质量等级-质量等级` | 同文件锚点不存在: #-质量等级-质量等级 |
+| docs\research_notes\10_quality_checklist.md | 🔧 使用建议 {#使用建议} | `#-使用建议-使用建议` | 同文件锚点不存在: #-使用建议-使用建议 |
+| docs\research_notes\10_quality_checklist.md | 📖 相关资源 {#相关资源} | `#-相关资源-相关资源` | 同文件锚点不存在: #-相关资源-相关资源 |
+| docs\research_notes\10_quality_checklist.md | 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新} | `#-rust-194-深度整合更新-rust-194-深度整合更新` | 同文件锚点不存在: #-rust-194-深度整合更新-rust-194-深度整合更新 |
+| docs\research_notes\10_quality_checklist.md | 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点} | `#本文档的rust-194更新要点-本文档的rust-194更新要点` | 同文件锚点不存在: #本文档的rust-194更新要点-本文档的rust-194更新要点 |
+| docs\research_notes\10_quality_checklist.md | 研究笔记规范 | `../../README.md#研究笔记规范` | 锚点不存在: #研究笔记规范 |
 | docs\research_notes\10_quick_find.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\10_quick_find.md | 🎯 使用说明 {#使用说明} | `#-使用说明-使用说明` | 同文件锚点不存在: #-使用说明-使用说明 |
 | docs\research_notes\10_quick_find.md | 🔍 按关键词查找 {#按关键词查找} | `#-按关键词查找-按关键词查找` | 同文件锚点不存在: #-按关键词查找-按关键词查找 |
@@ -5155,6 +5220,7 @@
 | docs\research_notes\formal_methods\10_macro_system.md | 三、Rust 实现 {#三rust-实现} | `#三rust-实现-三rust-实现` | 同文件锚点不存在: #三rust-实现-三rust-实现 |
 | docs\research_notes\formal_methods\10_macro_system.md | 反例 1：宏规则歧义 {#反例-1宏规则歧义} | `#反例-1宏规则歧义-反例-1宏规则歧义` | 同文件锚点不存在: #反例-1宏规则歧义-反例-1宏规则歧义 |
 | docs\research_notes\formal_methods\10_macro_system.md | 反例 2：过程宏生成非法代码 {#反例-2过程宏生成非法代码} | `#反例-2过程宏生成非法代码-反例-2过程宏生成非法代码` | 同文件锚点不存在: #反例-2过程宏生成非法代码-反例-2过程宏生成非法代码 |
+| docs\research_notes\formal_methods\10_macro_system_mindmap.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\formal_methods\10_ownership_model.md | 📑 目录 {#目录} | `#-目录-目录` | 同文件锚点不存在: #-目录-目录 |
 | docs\research_notes\formal_methods\10_ownership_model.md | 🎯 研究目标 {#研究目标} | `#-研究目标-研究目标` | 同文件锚点不存在: #-研究目标-研究目标 |
 | docs\research_notes\formal_methods\10_ownership_model.md | 📚 理论基础 {#理论基础} | `#-理论基础-理论基础` | 同文件锚点不存在: #-理论基础-理论基础 |
@@ -6819,7 +6885,7 @@
 | docs\templates\10_versioned_doc_template.md | 🧪 测试用例 {#测试用例} | `#-测试用例-测试用例` | 同文件锚点不存在: #-测试用例-测试用例 |
 | docs\templates\10_versioned_doc_template.md | 📚 深入阅读 {#深入阅读} | `#-深入阅读-深入阅读` | 同文件锚点不存在: #-深入阅读-深入阅读 |
 
-### 文件不存在 (245个)
+### 文件不存在 (160个)
 
 | 源文件 | 链接文本 | 链接路径 | 问题 |
 |:---|:---|:---|:---|
@@ -6844,115 +6910,54 @@
 | docs\05_guides\best_practices.md | concept L1-L2 基础-进阶 | `../../01_foundation` | 文件不存在: 01_foundation |
 | docs\06_toolchain\06_parallel_frontend.md | Build Systems | `../../07_future` | 文件不存在: 07_future |
 | docs\research_notes\10_00_comprehensive_summary.md | RUST_193_COUNTEREXAMPLES_INDEX | `10_rust_193_counterexamples_index.md` | 文件不存在: docs\research_notes\10_rust_193_counterexamples_index.md |
-| docs\research_notes\10_00_comprehensive_summary.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
 | docs\research_notes\10_00_organization_and_navigation.md | CONTRIBUTING | `10_contributing.md` | 文件不存在: docs\research_notes\10_contributing.md |
-| docs\research_notes\10_00_organization_and_navigation.md | QUALITY_CHECKLIST | `10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
-| docs\research_notes\10_00_organization_and_navigation.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\10_academic_papers_alignment.md | 10_aeneas_integration_plan.md | `10_aeneas_integration_plan.md` | 文件不存在: docs\research_notes\10_aeneas_integration_plan.md |
-| docs\research_notes\10_academic_papers_alignment.md | 10_aeneas_integration_plan.md | `10_aeneas_integration_plan.md` | 文件不存在: docs\research_notes\10_aeneas_integration_plan.md |
-| docs\research_notes\10_academic_papers_alignment.md | 10_aeneas_integration_plan.md | `10_aeneas_integration_plan.md` | 文件不存在: docs\research_notes\10_aeneas_integration_plan.md |
-| docs\research_notes\10_academic_papers_alignment.md | Aeneas 整合计划 | `10_aeneas_integration_plan.md` | 文件不存在: docs\research_notes\10_aeneas_integration_plan.md |
-| docs\research_notes\10_application_trees.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_argumentation_chain_and_flow.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_argumentation_gap_index.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
+| docs\research_notes\10_aeneas_integration_plan.md | 国际化术语库 | `../../data/i18n_terminology.yaml` | 文件不存在: data\i18n_terminology.yaml |
 | docs\research_notes\10_argumentation_gap_index.md | FEATURE_TEMPLATE | `10_feature_template.md` | 文件不存在: docs\research_notes\10_feature_template.md |
-| docs\research_notes\10_authoritative_alignment_guide.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_authoritative_source_gap_and_backref_index.md | 10_aeneas_integration_plan.md | `10_aeneas_integration_plan.md` | 文件不存在: docs\research_notes\10_aeneas_integration_plan.md |
-| docs\research_notes\10_authoritative_source_gap_and_backref_index.md | 10_aeneas_integration_plan.md | `10_aeneas_integration_plan.md` | 文件不存在: docs\research_notes\10_aeneas_integration_plan.md |
-| docs\research_notes\10_authoritative_source_gap_and_backref_index.md | 10_coq_of_rust_integration_plan.md | `10_coq_of_rust_integration_plan.md` | 文件不存在: docs\research_notes\10_coq_of_rust_integration_plan.md |
 | docs\research_notes\10_best_practices.md | 研究笔记模板 | `10_template.md` | 文件不存在: docs\research_notes\10_template.md |
 | docs\research_notes\10_best_practices.md | 贡献指南 | `10_contributing.md` | 文件不存在: docs\research_notes\10_contributing.md |
-| docs\research_notes\10_best_practices.md | 质量检查清单 | `10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
 | docs\research_notes\10_best_practices.md | 研究笔记模板 | `10_template.md` | 文件不存在: docs\research_notes\10_template.md |
 | docs\research_notes\10_best_practices.md | 贡献指南 | `10_contributing.md` | 文件不存在: docs\research_notes\10_contributing.md |
-| docs\research_notes\10_best_practices.md | 质量检查清单 | `10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
 | docs\research_notes\10_best_practices.md | 维护指南 | `10_maintenance_guide.md` | 文件不存在: docs\research_notes\10_maintenance_guide.md |
 | docs\research_notes\10_changelog.md | RUST_193_COUNTEREXAMPLES_INDEX | `10_rust_193_counterexamples_index.md` | 文件不存在: docs\research_notes\10_rust_193_counterexamples_index.md |
 | docs\research_notes\10_changelog.md | FEATURE_TEMPLATE | `10_feature_template.md` | 文件不存在: docs\research_notes\10_feature_template.md |
-| docs\research_notes\10_changelog.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\10_classification.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\10_classification.md | FORMAL_VERIFICATION_GUIDE | `10_formal_verification_guide.md` | 文件不存在: docs\research_notes\10_formal_verification_guide.md |
 | docs\research_notes\10_classification.md | WRITING_GUIDE | `10_writing_guide.md` | 文件不存在: docs\research_notes\10_writing_guide.md |
 | docs\research_notes\10_classification.md | CONTRIBUTING | `10_contributing.md` | 文件不存在: docs\research_notes\10_contributing.md |
 | docs\research_notes\10_classification.md | MAINTENANCE_GUIDE | `10_maintenance_guide.md` | 文件不存在: docs\research_notes\10_maintenance_guide.md |
 | docs\research_notes\10_classification.md | STATISTICS | `10_statistics.md` | 文件不存在: docs\research_notes\10_statistics.md |
-| docs\research_notes\10_classification.md | QUALITY_CHECKLIST | `10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
 | docs\research_notes\10_classification.md | EXAMPLE | `10_example.md` | 文件不存在: docs\research_notes\10_example.md |
 | docs\research_notes\10_classification.md | GETTING_STARTED | `10_getting_started.md` | 文件不存在: docs\research_notes\10_getting_started.md |
 | docs\research_notes\10_classification.md | TASK_CHECKLIST | `10_task_checklist.md` | 文件不存在: docs\research_notes\10_task_checklist.md |
 | docs\research_notes\10_classification.md | PROGRESS_TRACKING | `10_progress_tracking.md` | 文件不存在: docs\research_notes\10_progress_tracking.md |
-| docs\research_notes\10_classification.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\10_cognitive_argumentation_framework.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_community_best_practices_alignment.md | 10_rust_194_research_update.md | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_comprehensive_project_report.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_comprehensive_systematic_overview.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\10_comprehensive_systematic_overview.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_concept_axiom_theorem_matrix.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_concept_comparison_tables.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_concept_hierarchy_framework.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_concept_relationship_network.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_const_eval_formalization.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_content_enhancement.md | QUALITY_CHECKLIST | `10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
 | docs\research_notes\10_content_enhancement.md | MAINTENANCE_GUIDE | `10_maintenance_guide.md` | 文件不存在: docs\research_notes\10_maintenance_guide.md |
-| docs\research_notes\10_core_features_full_chain.md | RUST_193 | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\10_core_features_full_chain.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\10_core_theorems_en_summary.md | AENEAS_INTEGRATION_PLAN | `10_aeneas_integration_plan.md` | 文件不存在: docs\research_notes\10_aeneas_integration_plan.md |
-| docs\research_notes\10_crate_architecture_authoritative_alignment.md | 10_rust_194_research_update.md | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_cross_reference_index.md | 10_rust_194_research_update.md | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_design_mechanism_rationale.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\10_domain_analysis_framework.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_executable_semantics_roadmap.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
 | docs\research_notes\10_faq.md | 快速入门指南 | `10_getting_started.md` | 文件不存在: docs\research_notes\10_getting_started.md |
 | docs\research_notes\10_faq.md | 快速入门指南 | `10_getting_started.md` | 文件不存在: docs\research_notes\10_getting_started.md |
 | docs\research_notes\10_faq.md | 研究笔记模板 | `10_template.md` | 文件不存在: docs\research_notes\10_template.md |
 | docs\research_notes\10_faq.md | 贡献指南 | `10_contributing.md` | 文件不存在: docs\research_notes\10_contributing.md |
 | docs\research_notes\10_faq.md | 研究笔记模板 | `10_template.md` | 文件不存在: docs\research_notes\10_template.md |
 | docs\research_notes\10_faq.md | 研究笔记模板 | `10_template.md` | 文件不存在: docs\research_notes\10_template.md |
-| docs\research_notes\10_faq.md | 质量检查清单 | `10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
-| docs\research_notes\10_faq.md | 质量检查清单 | `10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
 | docs\research_notes\10_faq.md | 贡献指南 | `10_contributing.md` | 文件不存在: docs\research_notes\10_contributing.md |
 | docs\research_notes\10_faq.md | 贡献指南 | `10_contributing.md` | 文件不存在: docs\research_notes\10_contributing.md |
 | docs\research_notes\10_faq.md | 研究笔记模板 | `10_template.md` | 文件不存在: docs\research_notes\10_template.md |
-| docs\research_notes\10_faq.md | 质量检查清单 | `10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
 | docs\research_notes\10_faq.md | 贡献指南 | `10_contributing.md` | 文件不存在: docs\research_notes\10_contributing.md |
 | docs\research_notes\10_faq.md | 快速入门指南 | `10_getting_started.md` | 文件不存在: docs\research_notes\10_getting_started.md |
 | docs\research_notes\10_faq.md | 贡献指南 | `10_contributing.md` | 文件不存在: docs\research_notes\10_contributing.md |
-| docs\research_notes\10_faq.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_faq_comprehensive.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_formal_concepts_encyclopedia.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_formal_full_model_en_summary.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_formal_full_model_overview.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_formal_language_and_proofs.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_glossary.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_hierarchical_mapping_and_summary.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_incremental_update_flow.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
+| docs\research_notes\10_formal_verification_guide.md | coq_skeleton/OWNERSHIP_UNIQUENESS.v | `../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v` | 文件不存在: docs\deprecated\coq_skeleton\OWNERSHIP_UNIQUENESS.v |
+| docs\research_notes\10_formal_verification_guide.md | COQ_ISABELLE_PROOF_SCAFFOLDING | `10_coq_isabelle_proof_scaffolding.md` | 文件不存在: docs\research_notes\10_coq_isabelle_proof_scaffolding.md |
 | docs\research_notes\10_incremental_update_flow.md | 10_maintenance_guide.md | `10_maintenance_guide.md` | 文件不存在: docs\research_notes\10_maintenance_guide.md |
-| docs\research_notes\10_incremental_update_flow.md | 10_rust_193_language_features_comprehensive_analysis.md | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
 | docs\research_notes\10_incremental_update_flow.md | 10_feature_template.md | `10_feature_template.md` | 文件不存在: docs\research_notes\10_feature_template.md |
 | docs\research_notes\10_incremental_update_flow.md | 10_rust_191_research_update_2025_11_15.md | `10_rust_191_research_update_2025_11_15.md` | 文件不存在: docs\research_notes\10_rust_191_research_update_2025_11_15.md |
 | docs\research_notes\10_incremental_update_flow.md | 10_rust_192_research_update_2025_12_11.md | `10_rust_192_research_update_2025_12_11.md` | 文件不存在: docs\research_notes\10_rust_192_research_update_2025_12_11.md |
 | docs\research_notes\10_incremental_update_flow.md | 10_coq_isabelle_proof_scaffolding.md | `10_coq_isabelle_proof_scaffolding.md` | 文件不存在: docs\research_notes\10_coq_isabelle_proof_scaffolding.md |
-| docs\research_notes\10_incremental_update_flow.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_international_formal_verification_index.md | AENEAS_INTEGRATION_PLAN | `10_aeneas_integration_plan.md` | 文件不存在: docs\research_notes\10_aeneas_integration_plan.md |
-| docs\research_notes\10_international_formal_verification_index.md | AENEAS_INTEGRATION_PLAN | `10_aeneas_integration_plan.md` | 文件不存在: docs\research_notes\10_aeneas_integration_plan.md |
-| docs\research_notes\10_knowledge_graph_index.md | 10_rust_194_research_update.md | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_knowledge_graph_index.md | 10_rust_194_research_update.md | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_knowledge_graph_index.md | 10_rust_194_research_update.md | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_knowledge_graph_index.md | 10_rust_194_research_update.md | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_knowledge_graph_index.md | 10_rust_194_research_update.md | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\10_knowledge_graph_index.md | 10_rust_194_research_update.md | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
 | docs\research_notes\10_knowledge_graph_index.md | 10_rust_194_195_feature_matrix.md | `10_rust_194_195_feature_matrix.md` | 文件不存在: docs\research_notes\10_rust_194_195_feature_matrix.md |
-| docs\research_notes\10_knowledge_graph_index.md | 10_rust_194_research_update.md | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
 | docs\research_notes\10_knowledge_graph_index.md | 10_rust_194_195_feature_matrix.md | `10_rust_194_195_feature_matrix.md` | 文件不存在: docs\research_notes\10_rust_194_195_feature_matrix.md |
 | docs\research_notes\10_learning_and_interview_alignment.md | data/i18n_terminology.yaml | `../../data/i18n_terminology.yaml` | 文件不存在: data\i18n_terminology.yaml |
-| docs\research_notes\10_learning_path_comprehensive.md | RUST_194_RESEARCH_UPDATE | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
 | docs\research_notes\10_proof_index.md | COQ_ISABELLE_PROOF_SCAFFOLDING | `10_coq_isabelle_proof_scaffolding.md` | 文件不存在: docs\research_notes\10_coq_isabelle_proof_scaffolding.md |
-| docs\research_notes\10_proof_index.md | FORMAL_VERIFICATION_GUIDE | `10_formal_verification_guide.md` | 文件不存在: docs\research_notes\10_formal_verification_guide.md |
-| docs\research_notes\10_proof_index.md | QUALITY_CHECKLIST | `10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
 | docs\research_notes\10_proof_index.md | COQ_ISABELLE_PROOF_SCAFFOLDING | `10_coq_isabelle_proof_scaffolding.md` | 文件不存在: docs\research_notes\10_coq_isabelle_proof_scaffolding.md |
 | docs\research_notes\10_proof_index.md | 研究进展跟踪 | `10_progress_tracking.md` | 文件不存在: docs\research_notes\10_progress_tracking.md |
 | docs\research_notes\10_proof_index.md | 研究任务清单 | `10_task_checklist.md` | 文件不存在: docs\research_notes\10_task_checklist.md |
-| docs\research_notes\10_proof_index.md | 形式化工具验证指南 | `10_formal_verification_guide.md` | 文件不存在: docs\research_notes\10_formal_verification_guide.md |
+| docs\research_notes\10_quality_checklist.md | 模板 | `10_template.md` | 文件不存在: docs\research_notes\10_template.md |
+| docs\research_notes\10_quality_checklist.md | 研究笔记模板 | `10_template.md` | 文件不存在: docs\research_notes\10_template.md |
+| docs\research_notes\10_quality_checklist.md | 贡献指南 | `10_contributing.md` | 文件不存在: docs\research_notes\10_contributing.md |
 | docs\research_notes\10_quick_find.md | 研究笔记写作指南 | `10_writing_guide.md` | 文件不存在: docs\research_notes\10_writing_guide.md |
 | docs\research_notes\10_quick_find.md | 研究进展跟踪 | `10_progress_tracking.md` | 文件不存在: docs\research_notes\10_progress_tracking.md |
 | docs\research_notes\10_quick_find.md | 研究任务清单 | `10_task_checklist.md` | 文件不存在: docs\research_notes\10_task_checklist.md |
@@ -6964,29 +6969,19 @@
 | docs\research_notes\10_quick_reference.md | 特性精简模板 | `10_feature_template.md` | 文件不存在: docs\research_notes\10_feature_template.md |
 | docs\research_notes\10_rustbelt_alignment.md | COQ_ISABELLE_PROOF_SCAFFOLDING | `10_coq_isabelle_proof_scaffolding.md` | 文件不存在: docs\research_notes\10_coq_isabelle_proof_scaffolding.md |
 | docs\research_notes\10_rustbelt_alignment.md | COQ_ISABELLE_PROOF_SCAFFOLDING | `10_coq_isabelle_proof_scaffolding.md` | 文件不存在: docs\research_notes\10_coq_isabelle_proof_scaffolding.md |
-| docs\research_notes\10_rustbelt_alignment.md | AENEAS_INTEGRATION_PLAN | `10_aeneas_integration_plan.md` | 文件不存在: docs\research_notes\10_aeneas_integration_plan.md |
-| docs\research_notes\10_rustbelt_alignment.md | COQ_OF_RUST_INTEGRATION_PLAN | `10_coq_of_rust_integration_plan.md` | 文件不存在: docs\research_notes\10_coq_of_rust_integration_plan.md |
 | docs\research_notes\10_rustbelt_alignment.md | 国际化术语库 | `../../data/i18n_terminology.yaml` | 文件不存在: data\i18n_terminology.yaml |
 | docs\research_notes\10_rustsem_semantics.md | 国际化术语库 | `../../data/i18n_terminology.yaml` | 文件不存在: data\i18n_terminology.yaml |
 | docs\research_notes\10_rust_book_alignment.md | docs/research_notes/10_cargo_194_features.md | `10_cargo_194_features.md` | 文件不存在: docs\research_notes\10_cargo_194_features.md |
 | docs\research_notes\10_rust_book_alignment.md | docs/research_notes/10_rust_194_comprehensive_analysis.md | `10_rust_194_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_194_comprehensive_analysis.md |
-| docs\research_notes\10_safe_decidable_mechanisms_overview.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\10_safe_decidable_mechanisms_overview.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
 | docs\research_notes\10_system_summary.md | 研究笔记模板 | `10_template.md` | 文件不存在: docs\research_notes\10_template.md |
-| docs\research_notes\10_system_summary.md | 质量检查清单 | `10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
 | docs\research_notes\10_system_summary.md | 贡献指南 | `10_contributing.md` | 文件不存在: docs\research_notes\10_contributing.md |
 | docs\research_notes\10_system_summary.md | 10_getting_started.md | `10_getting_started.md` | 文件不存在: docs\research_notes\10_getting_started.md |
 | docs\research_notes\10_system_summary.md | 10_contributing.md | `10_contributing.md` | 文件不存在: docs\research_notes\10_contributing.md |
-| docs\research_notes\10_system_summary.md | 10_quality_checklist.md | `10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
 | docs\research_notes\10_system_summary.md | 10_template.md | `10_template.md` | 文件不存在: docs\research_notes\10_template.md |
-| docs\research_notes\10_theoretical_and_argumentation_system_architecture.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
 | docs\research_notes\10_toolchain_ecosystem_alignment.md | 10_cargo_194_features.md | `10_cargo_194_features.md` | 文件不存在: docs\research_notes\10_cargo_194_features.md |
 | docs\research_notes\10_unified_systematic_framework.md | RUST_193_FEATURE_MATRIX | `10_rust_193_feature_matrix.md` | 文件不存在: docs\research_notes\10_rust_193_feature_matrix.md |
-| docs\research_notes\10_unified_systematic_framework.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
 | docs\research_notes\10_unified_systematic_framework.md | FEATURE_TEMPLATE | `10_feature_template.md` | 文件不存在: docs\research_notes\10_feature_template.md |
-| docs\research_notes\10_verification_tools_decision_tree.md | AENEAS_INTEGRATION_PLAN | `10_aeneas_integration_plan.md` | 文件不存在: docs\research_notes\10_aeneas_integration_plan.md |
 | docs\research_notes\10_verification_tools_decision_tree.md | COQ_ISABELLE_PROOF_SCAFFOLDING | `10_coq_isabelle_proof_scaffolding.md` | 文件不存在: docs\research_notes\10_coq_isabelle_proof_scaffolding.md |
-| docs\research_notes\10_version_evolution_counterexamples.md | Rust 1.94 研究更新 | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
 | docs\research_notes\10_version_evolution_counterexamples.md | Rust 1.94/1.95 特性矩阵 | `10_rust_194_195_feature_matrix.md` | 文件不存在: docs\research_notes\10_rust_194_195_feature_matrix.md |
 | docs\research_notes\10_version_evolution_counterexamples.md | Rust 1.93 反例索引 | `10_rust_193_counterexamples_index.md` | 文件不存在: docs\research_notes\10_rust_193_counterexamples_index.md |
 | docs\research_notes\10_visualization_index.md | 任务清单 | `10_task_checklist.md` | 文件不存在: docs\research_notes\10_task_checklist.md |
@@ -6994,12 +6989,9 @@
 | docs\research_notes\10_visualization_index.md | 10_coq_isabelle_proof_scaffolding.md | `10_coq_isabelle_proof_scaffolding.md` | 文件不存在: docs\research_notes\10_coq_isabelle_proof_scaffolding.md |
 | docs\research_notes\10_visualization_index.md | 10_coq_isabelle_proof_scaffolding.md | `10_coq_isabelle_proof_scaffolding.md` | 文件不存在: docs\research_notes\10_coq_isabelle_proof_scaffolding.md |
 | docs\research_notes\10_visualization_index.md | 10_coq_isabelle_proof_scaffolding.md | `10_coq_isabelle_proof_scaffolding.md` | 文件不存在: docs\research_notes\10_coq_isabelle_proof_scaffolding.md |
-| docs\research_notes\README.md | 10_rust_193_language_features_comprehensive_analysis.md | `10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
 | docs\research_notes\README.md | 快速入门指南 | `10_getting_started.md` | 文件不存在: docs\research_notes\10_getting_started.md |
 | docs\research_notes\README.md | 研究笔记模板 | `10_template.md` | 文件不存在: docs\research_notes\10_template.md |
-| docs\research_notes\README.md | 质量检查清单 | `10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
 | docs\research_notes\README.md | 贡献指南 | `10_contributing.md` | 文件不存在: docs\research_notes\10_contributing.md |
-| docs\research_notes\README.md | 质量检查清单 | `10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
 | docs\research_notes\README.md | 研究笔记模板 | `10_template.md` | 文件不存在: docs\research_notes\10_template.md |
 | docs\research_notes\README.md | 研究进展跟踪 | `10_progress_tracking.md` | 文件不存在: docs\research_notes\10_progress_tracking.md |
 | docs\research_notes\README.md | 研究任务清单 | `10_task_checklist.md` | 文件不存在: docs\research_notes\10_task_checklist.md |
@@ -7010,16 +7002,7 @@
 | docs\research_notes\README.md | 维护指南 | `10_maintenance_guide.md` | 文件不存在: docs\research_notes\10_maintenance_guide.md |
 | docs\research_notes\README.md | 研究笔记示例 | `10_example.md` | 文件不存在: docs\research_notes\10_example.md |
 | docs\research_notes\README.md | 快速入门指南 | `10_getting_started.md` | 文件不存在: docs\research_notes\10_getting_started.md |
-| docs\research_notes\README.md | Rust 1.94 研究更新 | `10_rust_194_research_update.md` | 文件不存在: docs\research_notes\10_rust_194_research_update.md |
-| docs\research_notes\experiments\10_macro_expansion_performance.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `../10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\formal_methods\00_completeness_gaps.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `../10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\formal_methods\10_formal_methods_completeness_checklist.md | QUALITY_CHECKLIST | `../10_quality_checklist.md` | 文件不存在: docs\research_notes\10_quality_checklist.md |
 | docs\research_notes\formal_methods\10_formal_methods_completeness_checklist.md | MAINTENANCE_GUIDE | `../10_maintenance_guide.md` | 文件不存在: docs\research_notes\10_maintenance_guide.md |
-| docs\research_notes\formal_methods\10_safe_decidable_mechanisms_and_formal_methods_plan.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `../10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\formal_methods\10_safe_decidable_mechanisms_and_formal_methods_plan.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `../10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\formal_methods\10_safe_decidable_mechanisms_and_formal_methods_plan.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `../10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\formal_methods\10_safe_decidable_mechanisms_and_formal_methods_plan.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `../10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
-| docs\research_notes\formal_methods\README.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `../10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md | RUST_193_COUNTEREXAMPLES_INDEX | `../../../10_rust_193_counterexamples_index.md` | 文件不存在: docs\research_notes\10_rust_193_counterexamples_index.md |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md | RUST_193_COUNTEREXAMPLES_INDEX | `../../../10_rust_193_counterexamples_index.md` | 文件不存在: docs\research_notes\10_rust_193_counterexamples_index.md |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md | RUST_193_COUNTEREXAMPLES_INDEX | `../../../10_rust_193_counterexamples_index.md` | 文件不存在: docs\research_notes\10_rust_193_counterexamples_index.md |
@@ -7043,7 +7026,6 @@
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md | RUST_193_COUNTEREXAMPLES_INDEX | `../../../10_rust_193_counterexamples_index.md` | 文件不存在: docs\research_notes\10_rust_193_counterexamples_index.md |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md | RUST_193_COUNTEREXAMPLES_INDEX | `../../../10_rust_193_counterexamples_index.md` | 文件不存在: docs\research_notes\10_rust_193_counterexamples_index.md |
 | docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md | RUST_193_COUNTEREXAMPLES_INDEX | `../../../10_rust_193_counterexamples_index.md` | 文件不存在: docs\research_notes\10_rust_193_counterexamples_index.md |
-| docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `../../10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md | Serde 最佳实践 | `../../../../content/ecosystem/serialization/serde_best_practices.md` | 文件不存在: content\ecosystem\serialization\serde_best_practices.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md | Tower 形式化生态 | `../../../../concept/06_ecosystem/05_formal_ecosystem_tower.md` | 文件不存在: concept\06_ecosystem\05_formal_ecosystem_tower.md |
 | docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md | Tokio 运行时（Runtime）生态指南 | `../../../../content/ecosystem/async_runtimes/tokio_deep_dive.md` | 文件不存在: content\ecosystem\async_runtimes\tokio_deep_dive.md |
@@ -7067,7 +7049,6 @@
 | docs\research_notes\software_design_theory\07_crate_architectures\41_askama_architecture.md | concept L6: Web 框架与中间件 | `../../../../06_ecosystem` | 文件不存在: 06_ecosystem |
 | docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md | 来源: [c06_async Crate | `../../../../../crates/c06_async` | 文件不存在: E:\_src\crates\c06_async |
 | docs\research_notes\software_design_theory\07_crate_architectures\42_maud_architecture.md | concept L6: Web 框架与中间件 | `../../../../06_ecosystem` | 文件不存在: 06_ecosystem |
-| docs\research_notes\type_theory\10_construction_capability.md | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | `../10_rust_193_language_features_comprehensive_analysis.md` | 文件不存在: docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md |
 
 ## 修复建议
 
@@ -7093,7 +7074,7 @@
 | docs\research_notes\formal_methods\10_ownership_model.md | 104 |
 | docs\research_notes\experiments\10_performance_benchmarks.md | 74 |
 | docs\research_notes\type_theory\10_type_system_foundations.md | 74 |
-| docs\research_notes\10_faq_comprehensive.md | 66 |
+| docs\research_notes\10_faq_comprehensive.md | 65 |
 | docs\06_toolchain\03_rustdoc_advanced.md | 60 |
 | docs\research_notes\10_comprehensive_systematic_review_and_100_percent_plan.md | 60 |
 | docs\06_toolchain\01_compiler_features.md | 59 |
@@ -7101,23 +7082,23 @@
 | docs\02_reference\quick_reference\02_async_patterns.md | 57 |
 | docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md | 56 |
 | docs\02_reference\quick_reference\02_cargo_cheatsheet.md | 56 |
-| docs\research_notes\10_content_enhancement.md | 56 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 56 |
+| docs\research_notes\10_content_enhancement.md | 55 |
 | docs\research_notes\type_theory\10_trait_system_formalization.md | 54 |
 | docs\05_guides\05_performance_tuning_guide.md | 48 |
-| docs\research_notes\10_best_practices.md | 48 |
 | docs\05_guides\05_design_patterns_usage_guide.md | 47 |
 | docs\02_reference\quick_reference\02_type_system.md | 46 |
+| docs\research_notes\10_best_practices.md | 46 |
 | docs\research_notes\experiments\10_memory_analysis.md | 46 |
 | docs\02_reference\quick_reference\02_ownership_cheatsheet.md | 45 |
 | docs\02_reference\quick_reference\02_testing_cheatsheet.md | 45 |
 | docs\research_notes\formal_methods\10_error_handling_decision_tree.md | 45 |
 | docs\05_guides\05_async_programming_usage_guide.md | 44 |
-| docs\research_notes\10_faq.md | 44 |
 | docs\research_notes\10_code_doc_formal_mapping.md | 43 |
 | docs\05_guides\05_macro_system_usage_guide.md | 42 |
 | docs\02_reference\quick_reference\02_error_handling_cheatsheet.md | 41 |
 | docs\02_reference\quick_reference\02_generics_cheatsheet.md | 41 |
+| docs\research_notes\10_faq.md | 40 |
 | docs\research_notes\formal_methods\10_async_state_machine.md | 40 |
 | docs\01_learning\01_learning_path_planning.md | 39 |
 | docs\05_guides\05_troubleshooting_guide.md | 39 |
@@ -7130,7 +7111,6 @@
 | docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 34 |
 | docs\research_notes\10_theorem_rust_example_mapping.md | 34 |
 | docs\02_reference\quick_reference\02_modules_cheatsheet.md | 33 |
-| docs\research_notes\10_system_summary.md | 33 |
 | docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | 32 |
 | docs\05_guides\05_testing_coverage_guide.md | 32 |
 | docs\research_notes\type_theory\10_variance_theory.md | 32 |
@@ -7139,6 +7119,7 @@
 | docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md | 31 |
 | docs\05_guides\05_wasm_usage_guide.md | 31 |
 | docs\07_project\07_documentation_cross_reference_guide.md | 31 |
-| ... 还有 360 个文件 | |
+| docs\research_notes\10_system_summary.md | 31 |
+| ... 还有 365 个文件 | |
 
-**总计 410 个文件包含损坏链接**
+**总计 415 个文件包含损坏链接**

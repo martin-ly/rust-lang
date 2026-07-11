@@ -2,6 +2,7 @@
 
 > **EN**: Concept-Source Alignment Atlas
 > **Summary**: 每个核心概念与国际化权威来源的对齐：Rust Reference、TRPL、RFCs、学术、课程、工业、标准。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **内容分级**: [元层]
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
@@ -46,6 +47,4 @@
 | [生命周期高级主题：从 HRTB 到自引用类型](../../02_intermediate/00_traits/18_lifetimes_advanced.md) | L2 进阶概念层 | 1 | Rust Reference / TRPL |
 | [Safety Tags（安全标签）预览](../../07_future/03_preview_features/31_safety_tags_preview.md) | L7 前沿趋势层 | 1 | RFCs + 工业/标准来源 |
 
-
 ---
-

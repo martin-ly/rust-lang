@@ -256,7 +256,7 @@
 
 - **定义**: 类型可安全跨线程转移所有权
 - **示例**: `i32`、`String`、`Box<T>`（若 `T: Send`）
-- **反例**: `Rc` 非 Send（多线程持会导致竞态）
+- **反例**: `Rc` 非 Send（引用计数非原子，跨线程共享会导致数据竞争；详见 [Send/Sync 自动 trait](../../concept/03_advanced/00_concurrency/17_send_sync_auto_traits.md)）
 - **相关**: [异步状态机形式化](formal_methods/10_async_state_machine.md)
 
 **Sync**:

@@ -21,4 +21,4 @@ canonical 链接。
 | :--- | :--- |
 | Rust 网络编程 | [`concept/03_advanced/06_low_level_patterns/18_network_programming.md`](../../../../concept/03_advanced/06_low_level_patterns/18_network_programming.md) |
 | HTTP 客户端开发 | [`concept/06_ecosystem/04_web_and_networking/41_http_client_development.md`](../../../../concept/06_ecosystem/04_web_and_networking/41_http_client_development.md) |
-| 自定义协议实现 | [`concept/06_ecosystem/09_networking/03_custom_protocol_implementation.md`](../../../../concept/06_ecosystem/09_networking/03_custom_protocol_implementation.md) |
+| 自定义协议实现 | [`concept/06_ecosystem/12_networking/03_custom_protocol_implementation.md`](../../../../concept/06_ecosystem/12_networking/03_custom_protocol_implementation.md) |

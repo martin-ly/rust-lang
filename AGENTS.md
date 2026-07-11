@@ -157,6 +157,12 @@ python scripts/kb_auditor.py
 # 内容重叠检测（关键！新增/修改前运行）
 python scripts/detect_content_overlap.py
 
+# 术语表对齐检查（以 concept/00_meta/01_terminology/terminology_glossary.md 为权威表）
+python scripts/check_glossary_alignment.py --strict
+
+# MSRV 单一事实源检查（根 Cargo.toml rust-version = 1.97.0 为唯一事实源）
+python scripts/check_msrv_consistency.py --strict
+
 # 死链检查
 python scripts/kb_auditor.py --link-check
 # 或根据项目实际命令调整
@@ -168,18 +174,18 @@ cargo test --workspace
 # mdbook 构建（输出到 book/，不应提交）
 mdbook build
 
-# 本地一键运行全部 17 个质量门（10 阻断 + 7 语义观察）
+# 本地一键运行全部 19 个质量门（14 阻断 + 5 语义观察）
 bash scripts/run_quality_gates.sh
 
 # 安装 pre-commit hook（会在每次 commit 前自动跑重叠/i18n/死链检查）
 bash scripts/git_hooks/install.sh
 ```
 
-### 5.1 CI 质量门（18 项：10 阻断 + 8 语义观察）
+### 5.1 CI 质量门（19 项：14 阻断 + 5 语义观察）
 
-所有合并到 `main`/`master` 的变更必须通过以下 **10 个阻断质量门**；另有 **8 个语义观察门**（warning，不阻断，默认 exit 0，加 `--strict` 可转阻断）持续追踪语义健康：
+所有合并到 `main`/`master` 的变更必须通过以下 **14 个阻断质量门**；另有 **5 个语义观察门**（warning，不阻断，默认 exit 0，加 `--strict` 可转阻断）持续追踪语义健康：
 
-**阻断门（10）**：
+**阻断门（14）**：
 
 1. `cargo check --workspace`
 2. `cargo test --workspace --quiet`
@@ -191,18 +197,38 @@ bash scripts/git_hooks/install.sh
 8. `python scripts/detect_content_overlap.py`
 9. `python scripts/add_bilingual_annotations.py --mode check-only`
 10. `mermaid` 语法检查（CI job；本地见 `scripts/run_quality_gates.sh`）
+11. `python scripts/check_topology_quality.py --strict`（atlas 拓扑 T1–T6；2026-07-12 转正，见 §5.2）
+12. `python scripts/check_kg_shapes.py --strict`（KG SHACL/形态；2026-07-12 转正）
+13. `python scripts/check_canonical_uniqueness.py --strict`（concept 权威页唯一性；2026-07-12 转正）
+14. `python scripts/concept_consistency_auditor.py --strict`（跨文件概念定义一致性；2026-07-12 转正）
 
-**语义观察门（8，非阻断）**：
-11. `python scripts/check_metadata_consistency.py`（元数据 D1–D6）
-12. `python scripts/detect_content_overlap_v2.py --budget 999999`（段落级重叠 v2）
-13. `python scripts/check_topology_quality.py`（atlas 拓扑 T1–T6）
-14. `python scripts/check_kg_shapes.py`（KG SHACL/形态）
-15. `python scripts/semantic_health.py`（综合语义健康分）
-16. `python scripts/check_concept_authority_coverage.py`（concept 权威层国际化权威来源覆盖率）
-17. `python scripts/check_canonical_uniqueness.py`（concept 权威页唯一性：双权威页声明/同目录同主题编号双文件；含 basics/advanced/deep_dive 进阶关系豁免，ERROR 级可用 `--strict` 转阻断）
-18. `python scripts/concept_consistency_auditor.py`（跨文件概念定义一致性：Send/Sync、所有权、借用、生命周期、内部可变性、Pin/Unpin、协变逆变、unsafe 及跨文件 § 引用有效性；报告输出至 `reports/CONCEPT_CONSISTENCY_AUDIT_<date>.md`）
+**语义观察门（5，非阻断）**：
+15. `python scripts/check_metadata_consistency.py`（元数据 D1–D6；D2=1/D5=17 未达标）
+16. `python scripts/detect_content_overlap_v2.py --budget 999999`（段落级重叠 v2；可处理项 MERGE+DOCS_INTERNAL=53>0，超基线 WARN 升级判定见 `run_quality_gates.sh` 与 §5.2）
+17. `python scripts/semantic_health.py`（综合语义健康分；grade=FAIL 时 --strict 才阻断）
+18. `python scripts/check_concept_authority_coverage.py`（concept 权威层国际化权威来源覆盖率；--strict 已支持但当前 exit=1，见 §5.2）
+19. `python scripts/check_examples_compile.py`（根 examples/ 游离示例编译保护；9 stdlib rustc 直编 + 3 依赖示例经 `examples/examples_check/` crate + 2 Cargo Script 豁免；2026-07-12 新增，P3-5）
 
-> 说明：语义观察门用于“可机器复核的语义趋势”，不因单项退化阻断 PR；但当任一观察门指标显著恶化时，应在 PR 描述中说明原因与后续治理计划。权威覆盖门（16）当前基线为 concept/ 真内容页 any=100%、none=0、核心 L1–L4 无 P0 缺口=0。权威页唯一性门（17）当前基线为 ERROR 0（2026-07-12 已完成 formal_methods L4/L7 双页、game_development 21/26 同目录双页治理），WARN 级仅观察不阻断。概念一致性门（18）基线为错误 0 / 警告 0（2026-07-12 复活接入）。
+> 说明：语义观察门用于“可机器复核的语义趋势”，不因单项退化阻断 PR；但当任一观察门指标显著恶化时，应在 PR 描述中说明原因与后续治理计划。权威覆盖门（18）目标基线为 concept/ 真内容页 any=100%、none=0、核心 L1–L4 无 P0 缺口=0。
+
+### 5.2 观察门转正机制（P3-7，2026-07-12 建立）
+
+**转正规则**：任一语义观察门**连续 4 周（或连续 10 次 CI 运行）达标**，经评估后转为阻断门（在 `run_quality_gates.sh` 与 `quality_gates.yml` 中改为 `--strict` 且 `continue-on-error: false`）。转正前提：本地实跑 `--strict` 当前 exit=0。转正后若指标退化阻断 PR，按正常阻断门流程处置，不自动降级。
+
+**当前各观察门基线状态（2026-07-12，摘自 `reports/` 最新基线）**：
+
+| 门 | 基线指标（2026-07-12） | --strict 实跑 | 状态 |
+|---|---|:---:|---|
+| topology quality | T1 套话率 1.1% / T2 高频关系 83.3% pass / T3 跳出 16.5% 且死端 0 / T4 定量 93.3% / T5=0 / T6=0 | exit 0 | ✅ **已转阻断** |
+| KG SHACL | K1–K6 全 0（K1b 缺 bloomLevel=55，仅扣分不阻断） | exit 0 | ✅ **已转阻断** |
+| canonical uniqueness | 0 处双权威页/同主题重复 | exit 0 | ✅ **已转阻断** |
+| concept consistency | 0 错误级发现（decision trees 等跨文件引用全有效） | exit 0 | ✅ **已转阻断** |
+| metadata consistency | D1=0 / D2=1 / D3=0 / D4=0 / D5=17 / D6=13（flagged 30/483） | exit 1 | ⏳ 维持观察（D2/D5 未达标） |
+| overlap v2 | 命中 592；可处理 MERGE=4 + DOCS_INTERNAL=49 = **53**（SERIES 22 白名单 / REVIEW 517） | — | ⏳ 维持观察（可处理项>0；超基线 53 即 WARN 升级，归零后可转阻断 `--strict --budget 0`） |
+| semantic health | 总分 90.3 grade OK（元数据 93.8 / 拓扑 90.7 / 去重 85.0 / KG 90） | exit 0 | ⏳ 维持观察（聚合门，待去重分量归零后再评估） |
+| authority coverage | 内容页 any=99.5% / none=2 / 核心 L1–L4 无 P0 缺口=1（较 07-11 基线 any=100%/none=0/缺口=0 退化） | exit 1 | ⏳ 维持观察（--strict 已实现，达标后可转正） |
+
+**去重 v2 转阻断评估（P2-5，2026-07-12）**：v1（阻断门 8）报 1 对而 v2 报 592 对，v1 漏检属实；但 v2 当前可处理项 53>0（前序 P0-5 已处置 54 对后仍有存量），**暂不转阻断**。过渡方案：`run_quality_gates.sh` 中 v2 观察门由“计数报告”升级为“可处理项（MERGE+DOCS_INTERNAL）> 基线 53 即 WARN 升级提示”；可处理项归零后再转为阻断（`--strict --budget 0`）。
 
 ---
 
@@ -213,7 +239,7 @@ bash scripts/git_hooks/install.sh
 3. **不要** 在 `archive/` 中创建新的活跃内容副本。
 4. **不要** 在 `crates/*/docs/` 中复制通用概念解释；应链接到 `concept/`。
 5. **新增重复内容必须被 CI 或人工 review 拦截**。
-6. **禁止未经验证的“完成”声明**：任何“已完成/全部通过/100%”类结论必须引用可机器复核的证据（质量门报告、脚本输出、CI 记录），且必须同时核对 10 阻断门与 7 语义观察门；仅阻断门通过不得宣称“质量门全部通过”。报告与观察门状态矛盾时，以观察门最新报告为准并勘误原报告。
+6. **禁止未经验证的“完成”声明**：任何“已完成/全部通过/100%”类结论必须引用可机器复核的证据（质量门报告、脚本输出、CI 记录），且必须同时核对 14 阻断门与 4 语义观察门；仅阻断门通过不得宣称“质量门全部通过”。报告与观察门状态矛盾时，以观察门最新报告为准并勘误原报告。
 
 ---
 

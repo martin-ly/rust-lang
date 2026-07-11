@@ -1289,6 +1289,12 @@ fn main() {
 > - E0623 (lifetime mismatch) → L2(偏序集约束) 违反 → 显式标注生命周期关系
 > - E0308 (mismatched types involving lifetimes) → T3(Variance) 违反 → 检查协变/逆变/不变位置
 
+
+## 相关概念
+
+- **上层概念**: [Ownership](01_ownership.md) · [Borrowing](02_borrowing.md)
+
+
 ## 参考来源
 
 > [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html#lifetime-parameters)]
@@ -1481,7 +1487,6 @@ Rust 1.31 引入的 **Non-Lexical Lifetimes (NLL)** 使借用的有效期基于*
 - 显式标注所有生命周期以理解编译器错误。
 - 使用单元测试验证引用作用域边界。
 - 仔细阅读编译器建议，通常可直接定位问题。
-
 
 ---
 

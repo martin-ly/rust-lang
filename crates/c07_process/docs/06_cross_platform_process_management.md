@@ -4,10 +4,10 @@
 # C07-06. 跨平台进程管理（c07_process 示例索引）
 
 > **权威来源**: Windows/Linux/macOS 进程管理、平台特定扩展、条件编译、服务集成等完整解释见
-> [`concept/03_advanced/02_process_ipc/04_cross_platform_process_management.md`](../../../concept/03_advanced/02_process_ipc/04_cross_platform_process_management.md)。
+> [`concept/03_advanced/08_process_ipc/04_cross_platform_process_management.md`](../../../concept/03_advanced/08_process_ipc/04_cross_platform_process_management.md)。
 
 本文件原为 `c07_process` crate 的通用进程概念教程。根据 AGENTS.md §6.4 治理规则，
-通用 Rust 概念解释已迁移至 `concept/03_advanced/02_process_ipc/`，此处仅保留索引与
+通用 Rust 概念解释已迁移至 `concept/03_advanced/08_process_ipc/`，此处仅保留索引与
 canonical 链接。
 
 ## 本 crate 相关示例
@@ -19,6 +19,6 @@ canonical 链接。
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| 跨平台进程管理 | [`concept/03_advanced/02_process_ipc/04_cross_platform_process_management.md`](../../../concept/03_advanced/02_process_ipc/04_cross_platform_process_management.md) |
-| 进程模型与生命周期 | [`concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`](../../../concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md) |
+| 跨平台进程管理 | [`concept/03_advanced/08_process_ipc/04_cross_platform_process_management.md`](../../../concept/03_advanced/08_process_ipc/04_cross_platform_process_management.md) |
+| 进程模型与生命周期 | [`concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md`](../../../concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) |
 | 条件编译 | [`concept/03_advanced/03_proc_macros/28_conditional_compilation.md`](../../../concept/03_advanced/03_proc_macros/28_conditional_compilation.md) |

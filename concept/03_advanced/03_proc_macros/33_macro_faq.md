@@ -2,7 +2,7 @@
 > **Summary**: Authoritative concept page for `04 Faq`. Content migrated from `crates/c11_macro_system_proc/docs/tier_01_foundations/04_faq.md`.
 > **受众**: [进阶]
 > **内容分级**: [参考级]
-> **Bloom 层级**: L4-L5
+> **Bloom 层级**: L2-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: A×Eva — 评估宏（Macro）使用场景与限制
@@ -54,6 +54,7 @@
   - [反命题](#反命题)
   - [反向推理](#反向推理)
   - [过渡段](#过渡段)
+  - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
 
 ---
 
@@ -734,7 +735,7 @@ let v = temp;
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -780,7 +781,6 @@ let v = temp;
 >
 > **过渡**: 从最佳实践过渡到生产级开发，可以将 FAQ 融入团队宏开发流程。
 >
-
 
 ---
 

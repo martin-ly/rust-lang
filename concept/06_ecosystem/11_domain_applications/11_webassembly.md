@@ -8,7 +8,7 @@
 > **内容分级**: [综述级]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Eva — 评估 WASM 与 Rust 的集成策略
 > **定位**:
 > 系统分析 Rust 在 **WebAssembly (Wasm)** 生态中的核心地位，
@@ -46,7 +46,7 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、工具链与运行时](#五工具链与运行时)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
+  - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：WebAssembly 的编译错误](#十边界测试webassembly-的编译错误)
     - [10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）](#101-边界测试wasm32-目标的标准库限制编译错误)
@@ -449,7 +449,7 @@ Rust Wasm 工具链:
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Toolchain](../00_toolchain/01_toolchain.md) — Rust 工具链
 - [WASI](../05_systems_and_embedded/08_wasi.md) — WebAssembly System Interface
@@ -462,7 +462,7 @@ Rust Wasm 工具链:
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 

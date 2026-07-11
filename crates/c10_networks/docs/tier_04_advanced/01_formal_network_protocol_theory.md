@@ -1,7 +1,7 @@
 > **EN**: Formal Network Protocol Theory
 > **Summary**: Formal methods for network protocols in Rust: finite state machines, invariants, model checking, process calculus, Petri nets, TCP/IP formalization, HTTP semantics, protocol composition, and type-state verification with phantom types.
 >
-> **权威来源**: [concept/06_ecosystem/09_networking/05_formal_network_protocol_theory.md](../../../../concept/06_ecosystem/09_networking/05_formal_network_protocol_theory.md)
+> **权威来源**: [concept/06_ecosystem/12_networking/05_formal_network_protocol_theory.md](../../../../concept/06_ecosystem/12_networking/05_formal_network_protocol_theory.md)
 
 # 形式化网络协议理论
 
@@ -26,4 +26,4 @@
 
 ---
 
-> **权威来源**: [concept/06_ecosystem/09_networking/05_formal_network_protocol_theory.md](../../../../concept/06_ecosystem/09_networking/05_formal_network_protocol_theory.md)
+> **权威来源**: [concept/06_ecosystem/12_networking/05_formal_network_protocol_theory.md](../../../../concept/06_ecosystem/12_networking/05_formal_network_protocol_theory.md)

@@ -5,10 +5,11 @@
 >
 > **EN**: Cargo Guide Practices
 > **Summary**: Practical Cargo guidance for Rust 1.97.0+: dependency versioning, feature design, test organization, CI pipelines, build performance, MSRV/resolver v3, public/private dependencies, and supply-chain auditing.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **P** — Practice
+> **A/S/P 标记**: **A** — Application
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把 Cargo 官方指南中散落在多章的“怎么做”聚合为一份实践速查。
 > **前置概念**: [Cargo Workflow](81_cargo_workflow.md) · [Cargo Dependency Resolution](60_cargo_dependency_resolution.md) · [Testing Strategies](../09_testing_and_quality/12_testing_strategies.md)
@@ -115,12 +116,12 @@ resolver = "3"
 members = ["crates/*"]
 ```
 
-- 当 workspace 成员声明 `rust-version = "1.70"` 时，Cargo 会优先选择满足该 MSRV 的依赖版本。
+- 当 workspace 成员声明 `rust-version = "1.97.0"` 时，Cargo 会优先选择满足该 MSRV 的依赖版本。
 - 如需验证最新依赖，使用 `cargo update --ignore-rust-version`。
 
 ## 七、公共/私有依赖与 Feature Unification
 
-从 Rust 1.97.0 开始，可以在 `Cargo.toml` 中声明 `public = true/false`（语法已稳定，完整语义检查需 nightly `-Zpublic-dependency`）：
+从 Rust 1.97.0 开始，可以在 `Cargo.toml` 中声明 `public = true/false`（语法已稳定，完整语义检查需每日构建版 `-Zpublic-dependency`）：
 
 ```toml
 [dependencies]

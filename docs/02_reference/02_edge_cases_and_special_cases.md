@@ -127,7 +127,7 @@ assert_unwind_safe::<IntoIter<*mut i32>>();  // 1.93 可行
 - [所有权模型形式化](../research_notes/formal_methods/10_ownership_model.md)
 - [借用检查器证明](../research_notes/formal_methods/10_borrow_checker_proof.md)
 - 生命周期形式化
-- [Send/Sync 形式化](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md)
+- [Send/Sync 形式化](../research_notes/formal_methods/10_send_sync_formalization.md)
 
 ---
 

@@ -278,8 +278,8 @@ fn main() {
 | :--- | :--- | :--- |
 | 形式化方法 | [../research_notes/formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | 所有权模型 |
 | 借用检查器 | [../research_notes/formal_methods/10_borrow_checker_proof.md](../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用检查器证明 |
-| 类型系统 | [../research_notes/type_theory/10_type_system_foundations.md](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 类型系统基础 |
-| 核心定理 | [../research_notes/10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 完整定理证明 |
+| 类型系统 | [../research_notes/type_theory/10_type_system_foundations.md](../research_notes/type_theory/10_type_system_foundations.md) | 类型系统基础 |
+| 核心定理 | [../research_notes/10_core_theorems_full_proofs.md](../research_notes/10_core_theorems_full_proofs.md) | 完整定理证明 |
 
 ### 项目文档 {#项目文档}
 
@@ -287,9 +287,9 @@ fn main() {
 
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
-| 研究笔记系统 | [../research_notes/10_system_summary.md](../../archive/research_notes_2026_06_25/10_system_summary.md) | 系统总结 |
-| 增量更新流程 | [../research_notes/10_incremental_update_flow.md](../../archive/research_notes_2026_06_25/10_incremental_update_flow.md) | 版本更新流程 |
-| 理论体系 | [../research_notes/10_theoretical_and_argumentation_system_architecture.md](../../archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md) | 理论体系架构 |
+| 研究笔记系统 | [../research_notes/10_system_summary.md](../research_notes/10_system_summary.md) | 系统总结 |
+| 增量更新流程 | [../research_notes/10_incremental_update_flow.md](../research_notes/10_incremental_update_flow.md) | 版本更新流程 |
+| 理论体系 | [../research_notes/10_theoretical_and_argumentation_system_architecture.md](../research_notes/10_theoretical_and_argumentation_system_architecture.md) | 理论体系架构 |
 
 ---
 
@@ -301,7 +301,7 @@ fn main() {
 - [Rust 1.93.0 发布说明](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0) 🆕
 - [Rust 1.92.0 发布说明 [已失效]]<!-- 原链接: https://github.com/rust-lang/rust/releases/tag/1.92.0 -->
 - [项目标准库算法参考](../../crates/c08_algorithms/docs/tier_03_references/05_standard_library_algorithms_reference.md)
-- [Rust 1.92.0 特性对齐文档](../../archive/docs/version_reports/RUST_192_FEATURES_ALIGNMENT.md)
+- [Rust 1.92.0 特性对齐文档](../../archive/docs/version_reports/RUST_192_FEATURES_ALIGNMENT.md)（归档只读）
 
 ---
 

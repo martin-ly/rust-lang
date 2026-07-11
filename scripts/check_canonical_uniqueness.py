@@ -13,6 +13,9 @@
   - concept/archive/、concept/sources/ 及其任意子路径
   - 文件名含 placeholder 的文件
   - stub 文件（重定向/学习入口 stub，见 STUB_MARKERS）
+  - 进阶关系豁免：两文件名词干构成「同一基础词干 + 进阶后缀」（如
+    error_handling / error_handling_basics / error_handling_deep_dive），视为合法
+    分层（L1 基础 → L2 主页 → 深入专题），不报双权威页（见 PROGRESSION_SUFFIXES）
 
 用法：
   python scripts/check_canonical_uniqueness.py            # 输出报告，exit 0
@@ -57,6 +60,29 @@ TITLE_SIMILARITY = 0.85
 STEM_SIMILARITY = 0.6
 # 词干过短不比较（避免 "01_a.md" vs "02_b.md" 的噪音）
 MIN_STEM_LEN = 4
+
+# 进阶关系豁免后缀：词干 = 基础词干 + 后缀 视为合法分层（如 L1 basics → L2 主页 → deep dive）
+PROGRESSION_SUFFIXES = ("basics", "basic", "advanced", "deep_dive")
+
+
+def _strip_progression(s: str) -> str:
+    """去掉词干末尾的进阶后缀(仅一层)。"""
+    for suffix in PROGRESSION_SUFFIXES:
+        tail = f"_{suffix}"
+        if s.endswith(tail):
+            return s[: -len(tail)]
+    return s
+
+
+def progression_related(s1: str, s2: str) -> bool:
+    """两词干是否构成「同一基础主题 + 进阶后缀」的合法分层关系。
+
+    例：error_handling ~ error_handling_basics ~ error_handling_deep_dive、
+    lifetimes ~ lifetimes_advanced。此类跨层进阶页不按双权威页处理，
+    但应在各自文件中声明层级定位并互链（AGENTS.md §2）。
+    """
+    b1, b2 = _strip_progression(s1), _strip_progression(s2)
+    return b1 == b2 and (b1 != s1 or b2 != s2)
 
 
 def normalize(text: str) -> str:
@@ -132,6 +158,8 @@ def check_a(pages: list[dict]) -> list[dict]:
         s1, s2 = stem_of(p1["path"].name), stem_of(p2["path"].name)
         if len(s1) < MIN_STEM_LEN or len(s2) < MIN_STEM_LEN:
             continue
+        if progression_related(s1, s2):
+            continue  # 进阶关系豁免（basics/advanced/deep_dive 合法分层）
         same_dir = p1["path"].parent == p2["path"].parent
         stem_ratio = difflib.SequenceMatcher(None, s1, s2).ratio()
         en_eq = bool(p1["en"] and p2["en"] and normalize(p1["en"]) == normalize(p2["en"]))
@@ -185,6 +213,8 @@ def check_b(pages: list[dict]) -> list[dict]:
             s1, s2 = stem_of(p1["path"].name), stem_of(p2["path"].name)
             if len(s1) < MIN_STEM_LEN or len(s2) < MIN_STEM_LEN:
                 continue
+            if progression_related(s1, s2):
+                continue  # 进阶关系豁免（basics/advanced/deep_dive 合法分层）
             if s1 == s2:
                 findings.append(
                     {

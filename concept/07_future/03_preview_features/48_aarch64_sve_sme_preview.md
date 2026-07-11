@@ -9,6 +9,7 @@
 >
 > **EN**: Aarch64 Sve Sme Preview
 > **Summary**: Aarch64 Sve Sme Preview: emerging Rust language feature or ecosystem trend.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **跟踪版本**: nightly 1.98.0 (2026-06-06)

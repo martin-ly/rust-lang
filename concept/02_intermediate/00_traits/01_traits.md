@@ -1660,6 +1660,9 @@ fn notify<T: Summary>(item: &T) { ... }
 ---
 
 ## 十、相关概念链接
+- **上层概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md)
+- **下层概念**: [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md) · [Generics](../01_generics/02_generics.md)
+
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -2434,7 +2437,7 @@ trait LendingIterator {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

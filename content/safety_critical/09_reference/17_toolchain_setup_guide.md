@@ -142,7 +142,7 @@ version = "1.0.0"
 edition = "2021"
 authors = ["Your Name <email@example.com>"]
 license = "MIT OR Apache-2.0"
-rust-version = "1.70"  # MSRV
+rust-version = "1.97.0"  # MSRV
 
 [dependencies]
 # 仅使用no_std兼容库

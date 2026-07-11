@@ -7,6 +7,7 @@
 > **内容分级**: [研究级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
+> **定位声明**: 本页为 Rust Reference 对应章节的**规范摘译与注解**（规范条文摘译 + 示例 + 交叉引用），非形式化推导或机器验证证明；形式化理论内容见 [MIR、Codegen 与 LLVM IR 入门](20_mir_codegen_llvm_primer.md)。依据 [A/S/P 标记规范](../../00_meta/03_audit/asp_marking_guide.md) §3.4，L4 形式化层同时容纳 S（Specification）规范分析类内容，故本页保留于 L4，Bloom 层级维持与内容相符的标注（理解/分析层的规范内容）。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
 > **前置依赖**: [Items Reference](46_items_reference.md) · [Macros](../../03_advanced/03_proc_macros/04_macros.md)
@@ -59,7 +60,7 @@ struct Point { x: i32, y: i32 }
 | Derive | `#[derive(Trait)]` | 自动生成 trait 实现 |
 | 诊断 | `#[allow]`, `#[warn]`, `#[deny]`, `#[forbid]`, `#[deprecated]` | 控制 lint 与弃用 |
 | 代码生成 | `#[inline]`, `#[cold]`, `#[no_mangle]`, `#[repr(...)]` | 影响代码生成 |
-| 限制 | `#[allow(...)]`, `#[feature(...)]`（nightly） | 能力开关 |
+| 限制 | `#[allow(...)]`、特性门（feature gate，每日构建版） | 能力开关 |
 | 类型系统（Type System） | `#[non_exhaustive]`, `#[must_use]` | 影响类型/接口语义 |
 | 调试器 | `#[debugger_visualizer]` | 调试器可视化 |
 | 运行时（Runtime） | `#[global_allocator]`, `#[windows_subsystem]` | 运行时行为 |
@@ -68,7 +69,7 @@ struct Point { x: i32, y: i32 }
 
 | 位置 | 示例 | 说明 |
 |:---|:---|:---|
-| Crate | `#![feature(...)]` | 内层属性，作用于整个 crate |
+| Crate | 特性门属性（`#![...]` 内层形式） | 内层属性，作用于整个 crate |
 | Module | `#![allow(...)]` | 作用于当前模块 |
 | 函数 | `#[test]` | 作用于单个函数 |
 | 结构体（Struct）/枚举（Enum） | `#[derive(Debug)]` | 作用于类型定义 |
@@ -153,7 +154,7 @@ fn decorated() {}
 
 这些属性经常与 [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) 和 FFI 代码配合使用。
 
-## 七、关联概念
+## 七、相关概念
 
 | 概念 | 关系 |
 |:---|:---|
@@ -169,7 +170,7 @@ fn decorated() {}
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

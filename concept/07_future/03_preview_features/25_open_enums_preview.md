@@ -514,7 +514,7 @@ pub enum ConstExample {
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 枚举类型的形式化根基
 - [Traits](../../02_intermediate/00_traits/01_traits.md) — Sealed Traits 与开放/封闭设计
@@ -528,7 +528,7 @@ pub enum ConstExample {
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 

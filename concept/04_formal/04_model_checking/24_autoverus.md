@@ -9,7 +9,7 @@
 > **受众**: [进阶] 形式化方法、系统软件验证研究者
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S** — Application + Structure
+> **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Eva
 > **前置依赖**: [形式化验证](05_verification_toolchain.md) · [形式化验证工具生态](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md)
 > **后置延伸**: [Safety Tags](../../07_future/03_preview_features/08_safety_tags_preview.md) · [BorrowSanitizer](../02_separation_logic/34_borrow_sanitizer_in_formal.md)
@@ -178,6 +178,6 @@ B
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)

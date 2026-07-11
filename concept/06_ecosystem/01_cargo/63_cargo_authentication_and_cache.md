@@ -8,7 +8,7 @@
 > **受众**: [中级 → 高级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **P** — Practice
+> **A/S/P 标记**: **A** — Application
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“Cargo 如何安全地存 token、如何组织缓存、如何加速构建”系统化，补齐 registry 之后的工程实践闭环。
 > **前置概念**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -275,6 +275,6 @@ rustc-wrapper = "sccache"
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 / Cargo 认证与缓存文档
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Cargo Book authentication/cache 文档

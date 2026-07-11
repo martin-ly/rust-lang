@@ -343,7 +343,7 @@ fn main() {
 }
 ```
 
-## 相关概念文件
+## 相关概念
 
 - [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) — Rust 工具链与编译器
 - [Evolution](../04_research_and_experimental/03_evolution.md) — 语言演进机制
@@ -358,7 +358,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 权威来源对齐完成 (Batch 9)
 

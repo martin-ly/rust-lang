@@ -422,7 +422,7 @@ a-mir-formality (Coq/Lean)
 检测概率:       Kani 对边界条件 ≈ 90%
 学习成本:       2 周/工程师
 标注成本:       低（harness 代码 ≈ 20% 实现量）
-运行成本:       CI  nightly，~$200/月
+运行成本:       CI 每日定时，~$200/月
 ─────────────────────────────────────────
 ROI: ★★★★★ 极高 — AWS s2n-quic 已验证
 ```
@@ -507,7 +507,7 @@ Layer 1 ──→ Layer 2 ──→ Layer 3 ──→ Layer 4 ──→ Layer 5
 | :--- | :--- | :--- | :--- | :--- |
 | **L1 编译期** | `rustc` + `clippy` + `a-mir-formality` | 类型安全、lint、规范对齐 | 每次保存 | 零 |
 | **L2 动态** | `cargo test` + `Miri` | UB 检测、回归 | 每次提交 | 低 |
-| **L3 符号** | `Kani` + `cargo-fuzz` | 边界条件、反例 | 每次 PR / nightly | 中 |
+| **L3 符号** | `Kani` + `cargo-fuzz` | 边界条件、反例 | 每次 PR / 每日定时 | 中 |
 | **L4 契约** | `Verus` / `Creusot` | 功能正确性 | 核心模块（Module）变更 | 高 |
 | **L5 协议** | `TLA+` / `P` | 分布式安全 | 设计阶段 | 中 |
 
@@ -545,7 +545,7 @@ jobs:
 
   l4_verus:  # 仅核心状态机模块
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule'  # nightly
+    if: github.event_name == 'schedule'  # 每日定时
     steps:
       - uses: actions/checkout@v4
       - run: ./tools/verify.sh  # Verus 验证连接状态机
@@ -580,13 +580,13 @@ sequenceDiagram
     end
 
     rect rgb(240, 255, 240)
-        Note over Dev,L3: 每次 PR / Nightly
+        Note over Dev,L3: 每次 PR / 每日定时
         Dev->>L3: cargo kani --harness *
         L3-->>Dev: 边界条件覆盖报告<br/>反例或 exhaustive 确认
     end
 
     rect rgb(255, 240, 245)
-        Note over CI,L4: 核心模块变更 / Nightly
+        Note over CI,L4: 核心模块变更 / 每日定时
         CI->>L4: verus verify / creusot prove
         L4-->>CI: 功能正确性证明<br/>规格一致性检查
     end
@@ -648,14 +648,14 @@ flowchart TD
 
 | 工具 | 最新版本 | 关键更新 | 跟踪 |
 |:---|:---:|:---|:---|
-| **Miri** | nightly | Tree Borrows 默认启用；**POPL 2026 论文发表** | rust#60914 |
+| **Miri** | 每日构建版 | Tree Borrows 默认启用；**POPL 2026 论文发表** | rust#60914 |
 | **Kani** | 0.61+ | 并发验证增强；**与 VeriFast 联合验证 Rust 标准库** | model-checking/kani |
 | **Verus** | 0.2026+ | GhostCell 验证；IronRDP 生产部署；**KVerus/AutoVerus 自动证明生成** | verus-lang/verus |
 | **Creusot** | 0.10+ | Why3 后端优化；**POPL 2026 Tutorial**；更多标准库覆盖 | creusot-rs/creusot |
 | **Prusti** | 维护模式 | 社区维护；Viper 后端更新 | viperproject/prusti |
 | **Aeneas** | 0.9+ | Lean 4 后端；更多 Rust 特性支持 | AeneasVerif/aeneas |
 | **RefinedRust** | 原型 | **PLDI 2024 论文**；自动推导算法改进；Iris 集成 | plv/refinedrust |
-| **a-mir-formality** | nightly | MIR 翻译完善；trait solver 对齐 | rust-lang/rustc-dev-guide |
+| **a-mir-formality** | 每日构建版 | MIR 翻译完善；trait solver 对齐 | rust-lang/rustc-dev-guide |
 | **KVerus** | 研究原型 | **arXiv 2026-05**；基于 RAG 的 Verus 自动证明生成 | KVerus (arXiv:2605.03822) |
 | **AutoVerus** | 研究原型 | **OOPSLA 2025**；LLM 辅助 Verus 证明生成 | AutoVerus |
 
@@ -1281,7 +1281,7 @@ fn fixed() {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md); 2026-05-21 补充 Wikipedia 概念对齐、a-mir-formality 工具链、2026 工具状态更新 [Formal Methods Deep Dive](https://rust-lang.github.io/rust-project-goals/); 2026-05-22 网络权威内容对齐：Miri POPL 2026、KVerus arXiv 2026、AutoVerus OOPSLA 2025、Vest USENIX Security 2025、Rustlantis OOPSLA 2024、Kani+VeriFast 联合 std 验证 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md); 2026-07-10 L4 形式化层权威来源对齐复审 [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

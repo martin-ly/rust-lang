@@ -368,10 +368,10 @@ fn main() {
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- **形式化证明**: [10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) - 证明索引与公理编号规范
+- **形式化证明**: [10_proof_index.md](../research_notes/10_proof_index.md) - 证明索引与公理编号规范
 - **证明图网**: [04_proof_graph_network.md](../04_thinking/04_proof_graph_network.md) - 形式化证明结构
 - **决策图网**: [04_decision_graph_network.md](../04_thinking/04_decision_graph_network.md) - 技术选型决策支持
-- **类型理论**: [10_type_system_foundations.md](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) - 类型理论基础
+- **类型理论**: [10_type_system_foundations.md](../research_notes/type_theory/10_type_system_foundations.md) - 类型理论基础
 
 ### 实施场景 {#实施场景}
 
@@ -960,7 +960,7 @@ graph TD
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [全面系统化梳理总览](../../archive/research_notes_2026_06_25/10_comprehensive_systematic_overview.md) - 全局一致性（Coherence）、语义归纳、概念族谱、论证缺口追踪、思维表征全索引
+- [全面系统化梳理总览](../research_notes/10_comprehensive_systematic_overview.md) - 全局一致性（Coherence）、语义归纳、概念族谱、论证缺口追踪、思维表征全索引
 - [决策图网](../04_thinking/04_decision_graph_network.md) - 技术选型决策支持
 - [证明图网](../04_thinking/04_proof_graph_network.md) - 形式化证明结构
 - [项目架构指南](07_project_architecture_guide.md) - 整体架构设计

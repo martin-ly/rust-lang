@@ -182,7 +182,7 @@
 | `02_formal_methods.md` | 补充具体 TLA+ 规约示例 | Phase 3 | ✅ 已完成 §8.5 —— 2026-05-14 |
 | `02_formal_methods.md` | 补充 CI/CD 集成方案 | Phase 3 | ✅ 已完成 §7.5 —— 2026-05-14 |
 | `03_evolution.md` | 补充每个 edition 的完整变更清单 | Phase 3 | ✅ 已完成 §2.3 —— 2026-05-14 |
-| `03_evolution.md` | 补充不稳定特性的 nightly 使用指南 | Phase 3 | ✅ 已完成 §5.5 —— 2026-05-14 |
+| `03_evolution.md` | 补充不稳定特性的每日构建版使用指南 | Phase 3 | ✅ 已完成 §5.5 —— 2026-05-14 |
 
 ---
 
@@ -283,7 +283,6 @@
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

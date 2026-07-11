@@ -4,10 +4,10 @@
 # C10 Networks 新增文档快速入门（c10_networks 示例索引）
 
 > **权威来源**: Rust 网络编程的分阶段学习路径、协议选型与学习目标等完整解释见
-> [`concept/06_ecosystem/09_networking/04_network_programming_quick_start.md`](../../../concept/06_ecosystem/09_networking/04_network_programming_quick_start.md)。
+> [`concept/06_ecosystem/12_networking/04_network_programming_quick_start.md`](../../../concept/06_ecosystem/12_networking/04_network_programming_quick_start.md)。
 
 本文件原为 `c10_networks` crate 的通用网络编程快速入门。根据 AGENTS.md §6.4 治理规则，
-通用 Rust 概念解释已迁移至 `concept/06_ecosystem/09_networking/`，此处仅保留索引与 canonical 链接。
+通用 Rust 概念解释已迁移至 `concept/06_ecosystem/12_networking/`，此处仅保留索引与 canonical 链接。
 
 ## 本 crate 相关示例
 
@@ -18,7 +18,7 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| 网络编程快速入门 | [`concept/06_ecosystem/09_networking/04_network_programming_quick_start.md`](../../../concept/06_ecosystem/09_networking/04_network_programming_quick_start.md) |
+| 网络编程快速入门 | [`concept/06_ecosystem/12_networking/04_network_programming_quick_start.md`](../../../concept/06_ecosystem/12_networking/04_network_programming_quick_start.md) |
 | 网络协议 | [`concept/06_ecosystem/04_web_and_networking/38_network_protocols.md`](../../../concept/06_ecosystem/04_web_and_networking/38_network_protocols.md) |
 | HTTP 客户端开发 | [`concept/06_ecosystem/04_web_and_networking/41_http_client_development.md`](../../../concept/06_ecosystem/04_web_and_networking/41_http_client_development.md) |
 | 异步编程 | [`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md) |

@@ -58,7 +58,7 @@ def infer_crates(path: Path) -> list[str]:
         "01_generics": "c04_generic",
         "00_concurrency": "c05_threads",
         "01_async": "c06_async",
-        "02_process_ipc": "c07_process",
+        "08_process_ipc": "c07_process",
         "00_traits": "c09_design_pattern",
         "03_proc_macros": "c11_macro_system_proc",
         "05_comparative": "c14_semantic_web",

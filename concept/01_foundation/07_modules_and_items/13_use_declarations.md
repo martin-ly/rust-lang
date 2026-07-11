@@ -4,6 +4,7 @@
 >
 > **EN**: Use Declarations
 > **Summary**: Use declarations: how Rust brings paths into scope, including `use`, `pub use`, nested imports, globs, re-exports, and visibility interplay.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [初学者]
 > **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。

@@ -4,6 +4,7 @@
 >
 > **EN**: Arbitrary Self Types Preview
 > **Summary**: Preview of arbitrary self types: extending method receivers beyond `&self`, `&mut self`, and `Box<Self>`.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **来源**: [RFC 3519 — Arbitrary Self Types v2](https://rust-lang.github.io/rfcs//3519-arbitrary-self-types-v2.html) · [Rust Reference — Methods](https://doc.rust-lang.org/reference/items/associated-items.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **状态**: 🧪 Nightly 实验性

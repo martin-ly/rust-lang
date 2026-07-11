@@ -4,6 +4,7 @@
 >
 > **EN**: Quiz: General PL Foundations
 > **Summary**: Embedded quiz for the general programming-language mechanism files: variable model, evaluation strategies, effects and purity, control flow, and data abstraction spectrum.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -29,6 +30,7 @@
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（TRPL、Rust Reference、Rustonomicon）
 
 ---
+
 ## 一、变量模型
 
 ### 问题 1：在通用 PL 的"环境-存储"模型中，Rust 的所有权系统主要约束的是哪一层？

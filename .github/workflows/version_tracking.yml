@@ -1,9 +1,11 @@
-name: Rust Version Tracking
+# ⚠️ DEPRECATED (2026-07-12)：与 rust_version_tracking.yml 真重复——两者 name 均为
+# "Rust Version Tracking"，均为『检测新 stable 并创建 issue』。本文件为周频、委托
+# scripts/rust_version_tracker.py；统一保留 rust_version_tracking.yml（半年度、迁移计划报告）。
+# 调度已移除，仅保留手动触发。
+name: Rust Version Tracking (DEPRECATED — use rust_version_tracking.yml)
 
 on:
-  schedule:
-    # 每周一运行
-    - cron: '0 0 * * 1'
+  # 原调度 '0 0 * * 1'（每周一）已停用，功能由 rust_version_tracking.yml 覆盖
   workflow_dispatch:
 
 env:

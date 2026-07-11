@@ -66,6 +66,7 @@
     - [1. 这是一处“收窄”，不是 coercion 规则的普遍改动](#1-这是一处收窄不是-coercion-规则的普遍改动)
     - [2. 与 coercion 分类的关系：这是“隐式、安全”那类的收窄](#2-与-coercion-分类的关系这是隐式安全那类的收窄)
     - [3. 为什么“收窄”而不是“换种写法”：健全性](#3-为什么收窄而不是换种写法健全性)
+  - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
 
 ---
 
@@ -495,7 +496,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Type System](04_type_system.md) — 类型系统（Type System）
 - [Traits](../../02_intermediate/00_traits/01_traits.md) — Trait 系统
@@ -509,7 +510,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -734,7 +735,6 @@ fn main() {}
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
 > [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**:
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·

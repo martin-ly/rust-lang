@@ -113,12 +113,12 @@ fn integer_types<const A: u8, const B: i32, const C: usize, const D: isize>() {}
 fn bool_and_char<const FLAG: bool, const CH: char>() {}
 // fn no_floats<const X: f64>() {}       // ❌ 编译错误：f64 不允许作为 const 参数类型
 // fn no_strs<const S: &str>() {}        // ❌ 编译错误：&str 不允许
-// fn no_structs<const S: MyStruct>() {} // ❌ 需 nightly adt_const_params
+// fn no_structs<const S: MyStruct>() {} // ❌ 需每日构建版 adt_const_params
 ```
 
 允许：`u8 u16 u32 u64 u128 usize` / `i8 i16 i32 i64 i128 isize` / `bool` / `char`，共 14 种整数 + `bool` + `char`。
 
-禁止（stable）：浮点（无结构相等性（structural equality），`0.0 == -0.0` 等问题）、`&str`、引用、以及任何 ADT（struct/enum）。ADT 作为 const 参数由 `adt_const_params`（feature，截至 1.97.0 仍 nightly）解锁，要求类型派生 `PartialEq + Eq + StructuralPartialEq + StructuralEq`。
+禁止（stable）：浮点（无结构相等性（structural equality），`0.0 == -0.0` 等问题）、`&str`、引用、以及任何 ADT（struct/enum）。ADT 作为 const 参数由 `adt_const_params`（特性门，截至 1.97.0 仍未稳定）解锁，要求类型派生 `PartialEq + Eq + StructuralPartialEq + StructuralEq`。
 
 **排序规则**：const 参数可以在类型参数之后声明；调用时按位置或推断提供：
 
@@ -138,8 +138,8 @@ fn ordering_demo() {
 | 特性 | 状态（1.97.0） | 能力 |
 |:---|:---|:---|
 | `min_const_generics` | ✅ stable（1.51，2021-03） | const 参数**独立**出现在数组长度等位置：`[T; N]`、`[0u8; N]` |
-| `generic_const_exprs` | ⚠️ nightly only | const 参数参与**运算**的常量表达式：`[T; N + 1]`、`[T; N * M]`、where `[(); N - 1]:` |
-| `adt_const_params` | ⚠️ nightly only | struct/enum/`&'static str` 等作为 const 参数类型 |
+| `generic_const_exprs` | ⚠️ 仅每日构建版 | const 参数参与**运算**的常量表达式：`[T; N + 1]`、`[T; N * M]`、where `[(); N - 1]:` |
+| `adt_const_params` | ⚠️ 仅每日构建版 | struct/enum/`&'static str` 等作为 const 参数类型 |
 
 **min_const_generics 的精确边界**（stable 可做 / 不可做）：
 
@@ -157,12 +157,12 @@ fn ok_literal() -> [u8; 2 + 3] { [0; 5] } // 2+3 不含泛型参数，普通 con
 //   同上
 ```
 
-边界规则一句话：**只要常量表达式中出现了 const 泛型参数的运算（而非原样引用），就需要 nightly `generic_const_exprs`**。原因是 `[T; N + 1]` 这类类型在求值前无法判定相等性（`N + 1 == M + 1 ⟺ N == M`？对抽象 N、M 不可判定），会冲击类型检查的可判定性（Decidability）——这正是 RFC 2000 把 MVP 限制为"独立参数"的理论动机。
+边界规则一句话：**只要常量表达式中出现了 const 泛型参数的运算（而非原样引用），就需要每日构建版的 `generic_const_exprs`**。原因是 `[T; N + 1]` 这类类型在求值前无法判定相等性（`N + 1 == M + 1 ⟺ N == M`？对抽象 N、M 不可判定），会冲击类型检查的可判定性（Decidability）——这正是 RFC 2000 把 MVP 限制为"独立参数"的理论动机。
 
-nightly 上的对应形态（仅供认知，1.97.0 stable 不可用）：
+每日构建版上的对应形态（仅供认知，1.97.0 stable 不可用）：
 
 ```rust
-// #![feature(generic_const_exprs)] —— nightly only
+// 需启用实验特性门 generic_const_exprs —— 仅每日构建版
 // fn grow<T: Copy + Default, const N: usize>(a: [T; N]) -> [T; N + 1]
 // where
 //     [(); N + 1]:,   // 必需的 "where 证明"：承诺 N+1 可求值
@@ -183,7 +183,7 @@ nightly 上的对应形态（仅供认知，1.97.0 stable 不可用）：
 trait Bytes {
     const SIZE: usize;                    // 关联常量：由实现者定义
     fn as_bytes(&self) -> Vec<u8>;        // 长度运行时可知；Self::SIZE 直接用作
-}                                         // 数组长度需 nightly（见下方边界）
+}                                         // 数组长度需每日构建版（见下方边界）
 
 // 组合用法：关联常量作为 const 参数的"实参"——stable 合法
 fn zero_buf<T: Bytes, const N: usize>() -> [u8; N] { [0; N] }
@@ -205,7 +205,7 @@ fn assoc_const_as_argument() {
 > **边界警告（1.97.0 stable）**：在 trait 签名或泛型函数中把关联常量投影用作数组长度——
 > `fn as_bytes(&self) -> [u8; Self::SIZE]`——会被拒绝：
 > `error: generic parameters may not be used in const operations (cannot perform const operation using Self)`，
-> 需 `#![feature(generic_const_exprs)]`。stable 上让关联常量"影响类型"的唯一路径是
+> 需启用实验特性门 `generic_const_exprs`。stable 上让关联常量"影响类型"的唯一路径是
 > 在调用点把它作为 const 实参显式传入（如上 `zero_buf::<Header, 24>`）。
 
 关系总结：
@@ -446,7 +446,7 @@ fn scaled_demo() {
 
 ## 九、与既有内容的关系声明
 
-按 AGENTS.md §2 Canonical 规则，const generics 的语法、stable/nightly 边界与判定规则以本页为唯一权威来源：
+按 AGENTS.md §2 Canonical 规则，const generics 的语法、stable/每日构建版 边界与判定规则以本页为唯一权威来源：
 
 | 文件 | 保留内容 | 与本页关系 |
 |:---|:---|:---|
@@ -454,16 +454,22 @@ fn scaled_demo() {
 | [39_type_level_programming.md](39_type_level_programming.md) | Peano 数、typenum、HList、类型级计算编码 | const generics 表达力不足时的替代方案，边界对照指向本页 §8 |
 | [11_const_trait_impl_preview.md](../../07_future/03_preview_features/11_const_trait_impl_preview.md) | `const trait`/`const fn` 在 trait 上下文的效果（const 计算的另一轴） | 互补：const generics 是"值级参数"，const trait 是"效果级参数" |
 
+
+## 相关概念
+
+- **上层概念**: [Generics](02_generics.md) · [Traits](../00_traits/01_traits.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)
+- **下层概念**: [Type-Level Programming](39_type_level_programming.md) · [const Trait Impl（预览）](../../07_future/03_preview_features/11_const_trait_impl_preview.md) · [Const Eval](../../01_foundation/04_control_flow/41_statements_and_expressions.md)
+
+
 ## 十、来源与延伸阅读
 
 - [Rust Reference — Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html)：const 参数的规范语法与约束
 - [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)：设计动机、MVP 边界、相等性与可判定性论证
 - [rust-lang blog — Const Generics MVP Hits Beta](https://blog.rust-lang.org/2021/02/26/const-generics-mvp-beta.html)：1.51 稳定公告与 min_const_generics 边界示例
 - [Tracking Issue #74878 — min_const_generics](https://github.com/rust-lang/rust/issues/74878)（已稳定）
-- [Tracking Issue #76560 — generic_const_exprs](https://github.com/rust-lang/rust/issues/76560)：截至 Rust 1.97.0 仍 nightly，关注其稳定化进展
+- [Tracking Issue #76560 — generic_const_exprs](https://github.com/rust-lang/rust/issues/76560)：截至 Rust 1.97.0 仍未稳定，关注其稳定化进展
 - [Tracking Issue #95174 — adt_const_params](https://github.com/rust-lang/rust/issues/95174)：ADT 作为 const 参数类型的进展
 - [Jung, Jourdan, Krebbers & Dreyer: RustBelt — Securing the Foundations of the Rust Programming Language（POPL 2018）](https://plv.mpi-sws.org/rustbelt/)（P1 学术：Rust 类型系统形式化基线，2026-07-12 验证 HTTP 200）
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-12

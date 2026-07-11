@@ -547,7 +547,7 @@ Salsa 本身是从 `rustc` 查询系统中提取出来的通用框架，被 `rus
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.3
-**对应 Rust 版本**: 1.97.0+ / nightly 1.99 (Edition 2024)
+**Rust 版本**: 1.97.0+ / nightly 1.99 (Edition 2024)
 **最后更新**: 2026-07-09
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

@@ -35,7 +35,7 @@
 
 | 模块（Module） | 入口路径 | 说明 |
 | :--- | :--- | :--- |
-| **形式化方法** | [research_notes/formal_methods/](../../archive/research_notes_2026_06_25/formal_methods/README.md) | 所有权（Ownership）模型、借用（Borrowing）检查器、生命周期（Lifetimes）、Pin、异步（Async）状态机 |
+| **形式化方法** | [research_notes/formal_methods/](../research_notes/formal_methods/README.md) | 所有权（Ownership）模型、借用（Borrowing）检查器、生命周期（Lifetimes）、Pin、异步（Async）状态机 |
 | **类型理论** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型系统（Type System）基础、Trait 形式化、型变理论、生命周期 |
 | **主索引** | [00_master_index.md](00_master_index.md) | 完整模块（Module）映射与导航 |
 
@@ -47,11 +47,11 @@
 
 - [所有权与借用理论](../research_notes/formal_methods/10_ownership_model.md)
 - [借用检查器证明](../research_notes/formal_methods/10_borrow_checker_proof.md)
-- [类型系统基础](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
-- [Trait 系统形式化](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)
+- [类型系统基础](../research_notes/type_theory/10_type_system_foundations.md)
+- [Trait 系统形式化](../research_notes/type_theory/10_trait_system_formalization.md)
 - 生命周期形式化
 - [型变理论](../research_notes/type_theory/10_variance_theory.md)
-- [形式化验证工具](../../archive/research_notes_2026_06_25/10_tools_guide.md)
+- [形式化验证工具](../research_notes/10_tools_guide.md)
 
 ---
 
@@ -138,11 +138,11 @@ fn render<T: Drawable>(item: T) {
 | **所有权模型** | [../research_notes/formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | 所有权系统的形式化定义与证明 |
 | **借用检查器** | [../research_notes/formal_methods/10_borrow_checker_proof.md](../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用检查的形式化正确性证明 |
 | **生命周期** | ../research_notes/formal_methods/10_lifetime_formalization.md | 生命周期的形式化模型 |
-| **类型系统（Type System）** | [../research_notes/type_theory/10_type_system_foundations.md](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 类型理论基础 |
-| **Trait 系统** | [../research_notes/type_theory/10_trait_system_formalization.md](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) | Trait 系统的形式化 |
+| **类型系统（Type System）** | [../research_notes/type_theory/10_type_system_foundations.md](../research_notes/type_theory/10_type_system_foundations.md) | 类型理论基础 |
+| **Trait 系统** | [../research_notes/type_theory/10_trait_system_formalization.md](../research_notes/type_theory/10_trait_system_formalization.md) | Trait 系统的形式化 |
 | **型变理论** | [../research_notes/type_theory/10_variance_theory.md](../research_notes/type_theory/10_variance_theory.md) | 型变规则与证明 |
-| **证明索引** | [../research_notes/10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) | 87+ 个形式化证明的完整索引 |
-| **工具指南** | [../research_notes/10_tools_guide.md](../../archive/research_notes_2026_06_25/10_tools_guide.md) | Prusti/Kani/Creusot 使用指南 |
+| **证明索引** | [../research_notes/10_proof_index.md](../research_notes/10_proof_index.md) | 87+ 个形式化证明的完整索引 |
+| **工具指南** | [../research_notes/10_tools_guide.md](../research_notes/10_tools_guide.md) | Prusti/Kani/Creusot 使用指南 |
 
 ---
 
@@ -158,11 +158,11 @@ fn render<T: Drawable>(item: T) {
 
 | 研究笔记目录 | 路径 | 内容概述 |
 | :--- | :--- | :--- |
-| **formal_methods/** | [../research_notes/formal_methods/](../../archive/research_notes_2026_06_25/formal_methods/README.md) | 所有权模型、借用检查器、生命周期、异步状态机、Pin |
+| **formal_methods/** | [../research_notes/formal_methods/](../research_notes/formal_methods/README.md) | 所有权模型、借用检查器、生命周期、异步状态机、Pin |
 | **type_theory/** | [../research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型系统、Trait 系统、型变理论、类型推导 |
-| **experiments/** | [../research_notes/experiments/](../../archive/research_notes_2026_06_25/experiments/README.md) | 性能实验、内存分析、编译器优化 |
-| **10_proof_index.md** | [../research_notes/10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) | 形式化证明索引（87+ 个证明） |
-| **10_tools_guide.md** | [../research_notes/10_tools_guide.md](../../archive/research_notes_2026_06_25/10_tools_guide.md) | 形式化验证工具（Prusti、Kani、Creusot） |
+| **experiments/** | [../research_notes/experiments/](../research_notes/experiments/README.md) | 性能实验、内存分析、编译器优化 |
+| **10_proof_index.md** | [../research_notes/10_proof_index.md](../research_notes/10_proof_index.md) | 形式化证明索引（87+ 个证明） |
+| **10_tools_guide.md** | [../research_notes/10_tools_guide.md](../research_notes/10_tools_guide.md) | 形式化验证工具（Prusti、Kani、Creusot） |
 | **10_safe_unsafe_comprehensive_analysis.md** | [../research_notes/10_safe_unsafe_comprehensive_analysis.md](../research_notes/10_safe_unsafe_comprehensive_analysis.md) | 安全/非安全边界分析 |
 
 ---

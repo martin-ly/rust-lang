@@ -218,10 +218,10 @@ L5: paradigm_matrix（Rust 在设计空间中的位置）
 
 ## 四、质量报告
 
-- [质量基线报告 v1.9](../../../archive/reports/2026_07/QUALITY_BASELINE_v1_9.md)
-- [概念审计报告](../../../archive/reports/2026_07/concept_audit_report.md)
-- [概念一致性报告](../../../archive/reports/2026_07/concept_consistency_report.md)
-- [代码块编译报告](../../../archive/reports/2026_07/code_block_compile_report.md)
+- [质量基线报告 v1.9](../../../archive/reports/2026_07/QUALITY_BASELINE_v1_9.md)（归档只读）
+- [概念审计报告](../../../archive/reports/2026_07/concept_audit_report.md)（归档只读）
+- [概念一致性报告](../../../archive/reports/2026_07/concept_consistency_report.md)（归档只读）
+- [代码块编译报告](../../../archive/reports/2026_07/code_block_compile_report.md)（归档只读）
 
 ---
 
@@ -231,7 +231,6 @@ L5: paradigm_matrix（Rust 在设计空间中的位置）
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 与知识体系 v2.0 同步
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 认知路径
 

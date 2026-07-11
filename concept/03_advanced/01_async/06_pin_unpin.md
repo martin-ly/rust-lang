@@ -143,7 +143,7 @@ Unpin trait 的语义:
   自动实现:
   ├── 几乎所有类型自动实现 Unpin
   ├── 包含自引用的类型（如 async Future）不实现 Unpin
-  └── 可通过 !Unpin 显式标记（unstable）
+  └── 可通过 !Unpin 显式标记（未稳定）
 
   常见 Unpin 类型:
   ├── 所有标量类型（i32, bool, f64...）
@@ -360,7 +360,7 @@ graph TD
 └── 使用 pin-project 处理这类场景
 
 边界 4: 协程/生成器中的 Pin
-├── gen block（nightly）生成的 Generator 也是 !Unpin
+├── gen block（每日构建版）生成的 Generator 也是 !Unpin
 ├── yield 点可能持有自引用
 ├── Pin 保证生成器在 yield 之间不被移动
 └── async 和 gen 都是"挂起/恢复型效果"，共享自引用状态机 + Pin 机制
@@ -543,7 +543,7 @@ fn main() {
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Async](02_async.md) — 异步（Async）编程（Pin 的核心用例）
 - [Unsafe](../02_unsafe/03_unsafe.md) — unsafe Rust
@@ -557,7 +557,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 
@@ -647,7 +647,6 @@ fn main() {
 
 > **修正**: **`Unpin`** 是**auto trait**：1) 编译器自动为大多数类型实现 `Unpin`；2) 包含 `PhantomPinned` 或 `!Unpin` 字段的类型自动 `!Unpin`；3) 不能为 `!Unpin` 类型手动实现 `Unpin`（不安全）。`Pin<P<T>>` 的行为：1) `T: Unpin` — `Pin` 允许 `get_mut()`（数据可安全移动）；2) `T: !Unpin` — `Pin` 禁止 `get_mut()`（数据不可移动）。自引用结构：1) 使用 `PhantomPinned` 标记 `!Unpin`；2) 通过 `Pin<&mut Self>` 访问；3) `unsafe` 创建 `Pin`（需保证数据不移动）。这与 C++ 的 `std::pin`（无原生支持，需手动管理）或 Swift 的引用类型（始终堆分配，无 move 问题）不同——Rust 的 `Pin` 是零成本抽象（Zero-Cost Abstraction），通过类型系统（Type System）保证。[来源: [Pin API](https://doc.rust-lang.org/std/pin/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/std/pin/index.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 认知路径
 
@@ -774,7 +773,7 @@ struct ReallySelfRef {
 }
 ```
 
-或使用 nightly 的 `impl !Unpin for Test {}`（需要 `negative_impls` feature）。
+或使用每日构建版的 `impl !Unpin for Test {}`（需要 `negative_impls` 特性门）。
 </details>
 
 ---

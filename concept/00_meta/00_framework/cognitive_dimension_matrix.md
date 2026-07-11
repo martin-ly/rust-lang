@@ -182,7 +182,7 @@ mindmap
 |:---|:---|:---|:---|:---| :--- | :--- |
 | **L5 对比层** | F×Mem: 各语言特性对照表 F×App: 编写跨语言等价代码 | C×Und: 范式差异的本体论根源 C×Ana: 分析 Rust vs C++ 内存模型同构性 | P×App: 执行 C++→Rust 范式转换 P×Eva: 评估技术选型的形式化论据 | M×Eva: 评估自身语言偏见的认知影响 |
 | **L6 生态层** | F×Mem: Crate 名称 / 版本 / API 签名 F×App: Cargo.toml 依赖配置 | C×Und: 设计模式 = 类型系统的工程投影 C×Ana: 分析生态系统中的安全性依赖链 | P×App: 设计可组合的系统架构 P×Eva: 评估 unsafe 依赖的可审计性 | M×Cre: 设计团队 Rust 能力建设计划 |
-| **L7 前沿层** | F×Mem: RFC 编号 / Edition 变更清单 F×App: 使用 nightly preview 特性 | C×Und: 语言演进的类型论约束 C×Ana: 分析 Effects 系统对 async 的统一潜力 | P×App: 参与 RFC 社区讨论 P×Eva: 评估新特性的生产就绪度 | M×Cre: 预测 Rust 5 年演进方向 |
+| **L7 前沿层** | F×Mem: RFC 编号 / Edition 变更清单 F×App: 使用每日构建版实验特性 | C×Und: 语言演进的类型论约束 C×Ana: 分析 Effects 系统对 async 的统一潜力 | P×App: 参与 RFC 社区讨论 P×Eva: 评估新特性的生产就绪度 | M×Cre: 预测 Rust 5 年演进方向 |
 
 ---
 

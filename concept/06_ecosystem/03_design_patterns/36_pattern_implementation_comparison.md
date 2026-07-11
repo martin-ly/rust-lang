@@ -4,11 +4,12 @@
 >
 > **EN**: Pattern Implementation Comparison
 > **Summary**: Compares different implementation strategies for design patterns in Rust: trait objects vs generics, sync vs async, static vs dynamic dispatch, single vs multi-threaded, zero-cost vs runtime abstraction, and ownership models.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **内容分级**: [参考级]
 > **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S** — Application + Structure
+> **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: A×Eva — 评估模式实现策略
 > **前置依赖**: [Design Patterns](02_patterns.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/02_generics.md)
 > **后置概念**: [Pattern Selection Best Practices](37_pattern_selection_best_practices.md) · [Engineering and Production Patterns](82_engineering_and_production_patterns.md)

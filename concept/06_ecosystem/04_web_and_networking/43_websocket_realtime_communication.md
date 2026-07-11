@@ -2,7 +2,7 @@
 > **Summary**: Authoritative concept page for `03 Websocket Realtime Communication`. Content migrated from `crates/c10_networks/docs/tier_02_guides/03_websocket_realtime_communication.md`.
 > **受众**: [进阶]
 > **内容分级**: [参考级]
-> **Bloom 层级**: L3-L4
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: A×App — WebSocket 实时通信应用
@@ -697,7 +697,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

@@ -5,6 +5,7 @@
 >
 > **EN**: Derivable Traits
 > **Summary**: 标准库中可通过 `#[derive(...)]` 自动实现的 trait 参考：行为、默认实现语义、对字段类型的要求及典型使用场景。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [初学者] / [中级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -19,6 +20,7 @@
 > **来源**: [TRPL — Appendix C: Derivable Traits](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)
 
 ---
+
 ## 一、`#[derive]` 的作用
 
 `#[derive(TraitName)]` 可以自动为 struct 或 enum 生成 trait 实现。编译器使用默认实现，其行为通常基于字段的逐字段/逐变体推导。(Source: [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html))
@@ -214,7 +216,7 @@ struct User {
 
 ---
 
-## 六、关联概念
+## 六、相关概念
 
 | 概念 | 关系 |
 |:---|:---|

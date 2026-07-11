@@ -3,7 +3,7 @@
 
 # Tier 2: 跨平台实践
 
-> **权威来源**: [concept/03_advanced/02_process_ipc/04_cross_platform_process_management.md](../../../../concept/03_advanced/02_process_ipc/04_cross_platform_process_management.md)
+> **权威来源**: [concept/03_advanced/08_process_ipc/04_cross_platform_process_management.md](../../../../concept/03_advanced/08_process_ipc/04_cross_platform_process_management.md)
 
 本文件为 `crates/c07_process` 的专题实践材料。通用 Rust 跨平台进程管理概念请参见上方权威页；完整代码示例、练习与案例仍保留在本书。
 

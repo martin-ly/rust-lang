@@ -2,6 +2,7 @@
 
 > **EN**: Memory Allocation and Lifetime
 > **Summary**: Rust 内存分配模型：item、heap、stack 与 box 的生命周期（Lifetimes）关系。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [专家]
 > **内容分级**: [专家级]
@@ -10,7 +11,7 @@
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
 > **前置依赖**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Memory Model](../02_unsafe/29_memory_model.md) · [Variables](33_variables.md)
-> **后置概念**: [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [Custom Allocators](14_custom_allocators.md) · [The Rust Runtime](../02_unsafe/30_rust_runtime.md)
+> **后置概念**: [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [Custom Allocators](14_custom_allocators.md) · [The Rust Runtime](30_rust_runtime.md)
 > **定理链**: Allocation → Box Lifetime → Heap Stability
 > **主要来源**: [Rust Reference — Memory Allocation and Lifetime](https://doc.rust-lang.org/reference/memory-allocation-and-lifetime.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
@@ -18,6 +19,7 @@
 > **来源**: [Rust Reference — Memory Allocation and Lifetime](https://doc.rust-lang.org/reference/memory-allocation-and-lifetime.html)
 
 ---
+
 ## 一、Item 的生命周期
 
 程序中的 **item**（函数、模块（Module）、类型）在编译期计算其值，并在 Rust 进程的内存映像中唯一存储。(Source: [Rust Reference — Memory Allocation and Lifetime](https://doc.rust-lang.org/reference/memory-allocation-and-lifetime.html#items))
@@ -138,7 +140,7 @@ let v = vec![ZeroSized; 1000]; // 无内存开销
 
 ---
 
-## 六、关联概念
+## 六、相关概念
 
 | 概念 | 关系 |
 |:---|:---|
@@ -146,7 +148,7 @@ let v = vec![ZeroSized; 1000]; // 无内存开销
 | [Variables](33_variables.md) | 局部变量在栈帧中分配 |
 | [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) | `Box`、`Rc`、`Arc` 管理堆内存 |
 | [Custom Allocators](14_custom_allocators.md) | 自定义分配器改变堆分配行为 |
-| [The Rust Runtime](../02_unsafe/30_rust_runtime.md) | `#[global_allocator]` 影响堆分配 |
+| [The Rust Runtime](30_rust_runtime.md) | `#[global_allocator]` 影响堆分配 |
 
 > **权威来源**: [Rust Reference — Memory Allocation and Lifetime](https://doc.rust-lang.org/reference/memory-allocation-and-lifetime.html), [TRPL Ch4 — Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html), [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html)
 >

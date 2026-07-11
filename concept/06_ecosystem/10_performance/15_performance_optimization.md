@@ -354,7 +354,7 @@ struct Compact {
   → 减少分配次数，重用缓冲区
 
 SIMD 向量化:
-  → std::simd (nightly) 或 packed_simd
+  → std::simd（每日构建版）或 packed_simd
   → 2-8x 数据并行加速
 
 缓存优化:
@@ -503,7 +503,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Zero Cost Abstractions](../../01_foundation/00_start/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）模型
@@ -517,7 +517,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -667,7 +667,7 @@ fn main() {
 }
 ```
 
-> **修正**: SIMD（AVX/AVX2/SSE）指令对**内存对齐**有严格要求：1) `__m128`（SSE）需 16 字节对齐；2) `__m256`（AVX）需 32 字节对齐；3) `__m512`（AVX-512）需 64 字节对齐。未对齐加载（`_mm256_loadu_si256`，`u` = unaligned）性能稍低但安全。Rust 的 `std::arch` 模块（Module）提供平台特定的 SIMD 内联函数，是 `unsafe` 的。安全 SIMD 抽象：`packed_simd`（已废弃）、`std::simd`（nightly，portable SIMD）、`auto_vectorization`（编译器自动向量化）。最佳实践：1) 使用 `#[repr(align(32))]` 保证对齐；2) 优先用 `loadu` 除非在极致性能路径；3) 用 `std::simd`（稳定后）替代裸内联函数。这与 C 的 `__m256`（同样对齐要求）或编译器自动向量化（无对齐控制）不同——Rust 的 SIMD 显式暴露硬件约束。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/arch/index.html)] · [来源: [Portable SIMD](https://doc.rust-lang.org/std/simd/index.html)]
+> **修正**: SIMD（AVX/AVX2/SSE）指令对**内存对齐**有严格要求：1) `__m128`（SSE）需 16 字节对齐；2) `__m256`（AVX）需 32 字节对齐；3) `__m512`（AVX-512）需 64 字节对齐。未对齐加载（`_mm256_loadu_si256`，`u` = unaligned）性能稍低但安全。Rust 的 `std::arch` 模块（Module）提供平台特定的 SIMD 内联函数，是 `unsafe` 的。安全 SIMD 抽象：`packed_simd`（已废弃）、`std::simd`（每日构建版，portable SIMD）、`auto_vectorization`（编译器自动向量化）。最佳实践：1) 使用 `#[repr(align(32))]` 保证对齐；2) 优先用 `loadu` 除非在极致性能路径；3) 用 `std::simd`（稳定后）替代裸内联函数。这与 C 的 `__m256`（同样对齐要求）或编译器自动向量化（无对齐控制）不同——Rust 的 SIMD 显式暴露硬件约束。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/arch/index.html)] · [来源: [Portable SIMD](https://doc.rust-lang.org/std/simd/index.html)]
 > **过渡**: 性能优化：Rust 代码的测量与调优 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 性能优化：Rust 代码的测量与调优 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 性能优化：Rust 代码的测量与调优 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -768,7 +768,6 @@ Release 开启优化：内联、循环展开、LTO、向量化等。Debug 关闭
 
 > **文档定位**: Tier 2 实践指南
 > **最后更新**: 2025-12-25
-> **Rust版本**: 1.97.0+ (Edition 2024)
 > **相关文档**: 主索引 | FAQ | Glossary
 
 ## 📋 目录

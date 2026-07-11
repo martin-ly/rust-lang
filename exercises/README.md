@@ -1,8 +1,8 @@
 # Rust 编程练习体系
 
-> **最后更新**: 2026-04-24
+> **最后更新**: 2026-07-12
 > **版本**: 阶段六 — 练习体系与权威认证对接
-> **状态**: 30 道练习题已上线（目标 100+）
+> **状态**: 42 道编号练习 + 8 道 Brown Ownership Inventories + 10 道 Rustlings 风格编译修复 + 7 道 Unsafe Rust + 5 个算法专题模块 + 3 个版本特性模块（1.95/1.96/1.97）（目标 100+）
 
 ---
 
@@ -27,14 +27,18 @@ exercises/
 ├── Cargo.toml                    # 练习库 crate 配置
 ├── src/
 │   ├── lib.rs                    # 练习库入口
-│   ├── ownership_borrowing/      # 所有权与借用（5/10 道）
-│   ├── type_system/              # 类型系统（5/10 道）
-│   ├── generics_traits/          # 泛型与特质（5/10 道）
-│   ├── concurrency/              # 并发编程（5/10 道）
-│   ├── async_programming/        # 异步编程（5/10 道）
-│   ├── error_handling/           # 错误处理（3/5 道）
-│   ├── macros/                   # 宏系统（2/5 道）
-│   └── unsafe_rust/              # Unsafe Rust（7 道，已完成）
+│   ├── ownership_borrowing/      # 所有权与借用（12 道 + 8 道 Brown inventories）
+│   ├── type_system/              # 类型系统（8 道）
+│   ├── generics_traits/          # 泛型与特质（5 道）
+│   ├── concurrency/              # 并发编程（6 道）
+│   ├── async_programming/        # 异步编程（6 道）
+│   ├── error_handling/           # 错误处理（3 道）
+│   ├── macros/                   # 宏系统（2 道）
+│   ├── algorithms/               # 算法与数据结构（5 个专题模块）
+│   ├── unsafe_rust/              # Unsafe Rust（7 道，已完成）
+│   ├── rust_195_feature_exercises.rs  # Rust 1.95 特性练习
+│   ├── rust_196_feature_exercises.rs  # Rust 1.96 特性练习
+│   └── rust_197_feature_exercises.rs  # Rust 1.97 特性练习
 ├── docs/
 │   └── <topic>/                  # 每道题的 README.md + hint.md
 ├── tests/                        # 集成测试（预留）
@@ -88,7 +92,7 @@ cargo test -p exercises ownership_borrowing::ex01_borrow_checker_fix
 
 ## 练习题清单
 
-### 所有权与借用 (5/10)
+### 所有权与借用 (12 道 + 8 道 Brown Ownership Inventories)
 
 | 编号 | 题目 | 难度 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -97,8 +101,16 @@ cargo test -p exercises ownership_borrowing::ex01_borrow_checker_fix
 | ex03 | mutable_borrow | Easy | ✅ |
 | ex04 | lifetime_basic | Medium | ✅ |
 | ex05 | smart_pointer_rc | Medium | ✅ |
+| ex06 | string_replace_chain | Medium | ✅ |
+| ex07 | vec_slice_borrow | Medium | ✅ |
+| ex08 | dangling_reference | Easy | ✅ |
+| ex09 | dangling_stack_reference | Medium | ✅ |
+| ex10 | vec_reallocation | Medium | ✅ |
+| ex11 | hashmap_borrow | Medium | ✅ |
+| ex12 | string_in_loop | Medium | ✅ |
+| inventory_01–08 | Brown Ownership Inventories（见 `brown_inventories/README.md`） | Easy–Medium | ✅ |
 
-### 类型系统 (5/10)
+### 类型系统 (8 道)
 
 | 编号 | 题目 | 难度 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -107,8 +119,11 @@ cargo test -p exercises ownership_borrowing::ex01_borrow_checker_fix
 | ex03 | type_conversion | Easy | ✅ |
 | ex04 | generics_intro | Medium | ✅ |
 | ex05 | trait_object | Medium | ✅ |
+| ex06 | if_let_guards | Medium | ✅ |
+| ex07 | builder_pattern | Medium | ✅ |
+| ex08 | luhn_algorithm | Medium | ✅ |
 
-### 泛型与特质 (5/10)
+### 泛型与特质 (5 道)
 
 | 编号 | 题目 | 难度 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -118,7 +133,7 @@ cargo test -p exercises ownership_borrowing::ex01_borrow_checker_fix
 | ex04 | default_trait | Easy | ✅ |
 | ex05 | trait_composition | Hard | ✅ |
 
-### 并发编程 (5/10)
+### 并发编程 (6 道)
 
 | 编号 | 题目 | 难度 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -127,8 +142,9 @@ cargo test -p exercises ownership_borrowing::ex01_borrow_checker_fix
 | ex03 | channel_mpsc | Easy | ✅ |
 | ex04 | rwlock_shared | Medium | ✅ |
 | ex05 | arc_atomic | Medium | ✅ |
+| ex06 | link_checker | Hard | ✅ |
 
-### 异步编程 (5/10)
+### 异步编程 (6 道)
 
 | 编号 | 题目 | 难度 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -137,8 +153,9 @@ cargo test -p exercises ownership_borrowing::ex01_borrow_checker_fix
 | ex03 | tokio_task | Medium | ✅ |
 | ex04 | async_channel | Medium | ✅ |
 | ex05 | timeout_retry | Hard | ✅ |
+| ex06 | async_fn_traits | Hard | ✅ |
 
-### 错误处理 (3/5)
+### 错误处理 (3 道)
 
 | 编号 | 题目 | 难度 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -146,7 +163,7 @@ cargo test -p exercises ownership_borrowing::ex01_borrow_checker_fix
 | ex02 | custom_error | Medium | ✅ |
 | ex03 | error_propagation | Medium | ✅ |
 
-### 宏系统 (2/5)
+### 宏系统 (2 道)
 
 | 编号 | 题目 | 难度 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -236,7 +253,7 @@ cargo test     # 验证修复
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../concept/00_meta/02_sources/international_authority_index.md)
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新**: 2026-07-12
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

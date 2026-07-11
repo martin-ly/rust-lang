@@ -19,10 +19,10 @@
 > **内容分级**: [综述级]
 > **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 设计 Rust for WASM 架构
 > **定位**: 深度评价 Rust 在 **WebAssembly (Wasm)** 全栈开发中的技术成熟度——从 wasm-bindgen/wasm-pack 工具链到 Yew/Leptos 前端框架，分析 Rust→Wasm 编译模型、JS 互操作内存模型、性能权衡边界与工程选型决策。
-> **前置概念**: [Rust 路线图](../05_roadmaps/24_roadmap.md) · [WebAssembly 生态](../../06_ecosystem/11_domain_applications/11_webassembly.md) · [Web 框架](../../06_ecosystem/04_web_and_networking/27_web_frameworks.md)
+> **前置概念**: [Rust 路线图](../01_edition_roadmap/24_roadmap.md) · [WebAssembly 生态](../../06_ecosystem/11_domain_applications/11_webassembly.md) · [Web 框架](../../06_ecosystem/04_web_and_networking/27_web_frameworks.md)
 > **后置概念**: [WASI 预览](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) · [形式化方法](02_formal_methods.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -110,7 +110,7 @@ Rust → Wasm 编译管线:
   ├── 词法/语法分析 → HIR → MIR
   ├── 借用检查与生命周期验证（与原生目标完全一致）
   └── 类型系统检查（Trait 求解、泛型单态化）
-        [来源: [Rust 路线图](../05_roadmaps/24_roadmap.md)]
+        [来源: [Rust 路线图](../01_edition_roadmap/24_roadmap.md)]
 
   LLVM 后端:
   ├── MIR → LLVM IR
@@ -634,9 +634,9 @@ Rust panic in Wasm:
 
 ---
 
-## 相关概念文件
+## 相关概念
 
-- [Rust 路线图](../05_roadmaps/24_roadmap.md) — Rust 语言演进方向与 Wasm 目标支持策略
+- [Rust 路线图](../01_edition_roadmap/24_roadmap.md) — Rust 语言演进方向与 Wasm 目标支持策略
 - [WebAssembly 生态](../../06_ecosystem/11_domain_applications/11_webassembly.md) — Wasm 通用生态与工具链概览
 - [Web 框架](../../06_ecosystem/04_web_and_networking/27_web_frameworks.md) — Rust 服务端 Web 框架对比
 - [WASI 预览](../../06_ecosystem/05_systems_and_embedded/08_wasi.md) — WebAssembly 系统接口标准
@@ -649,7 +649,7 @@ Rust panic in Wasm:
 > **权威来源对齐变更日志**: 2026-05-22 初始创建，覆盖工具链、框架、性能、内存模型与互操作 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 权威来源对齐完成
 

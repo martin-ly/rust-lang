@@ -231,7 +231,7 @@ graph LR
 - [concept/ 方法论规范](../../concept/00_meta/00_framework/methodology.md)
 - [docs/ 核心概念](../01_core/README.md)
 - [docs/ 编译器特性](../06_toolchain/01_compiler_features.md)
-- [ROD 形式语义](../../archive/rust-ownership-decidability/formal-foundations/RUST_FORMAL_SEMANTICS_DEEP.md)
+- [ROD 形式语义](../../archive/rust-ownership-decidability/formal-foundations/RUST_FORMAL_SEMANTICS_DEEP.md)（归档只读）
 
 ---
 

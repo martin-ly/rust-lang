@@ -68,8 +68,8 @@
 本文档深入探讨Rust的高级主题，帮助开发者掌握更深层次的技术和最佳实践。
 
 **形式化引用（Reference）**：T-OW2/T-OW3 (所有权（Ownership）)、
-[advanced_types](../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md) (GAT)、
-[type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)、
+[advanced_types](../research_notes/type_theory/10_advanced_types.md) (GAT)、
+[type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md)、
 SEND-T1/SYNC-T1 (并发)。
 
 ---

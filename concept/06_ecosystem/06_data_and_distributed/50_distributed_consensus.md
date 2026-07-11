@@ -11,7 +11,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: C×Eva — 评价分布式共识算法的安全性、活性与工程实现权衡
 > **前置依赖**: 分布式系统 · [并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · 网络协议 · [类型系统（Type System）](../../01_foundation/02_type_system/04_type_system.md)
 > **后置延伸**: [区块链](../11_domain_applications/06_blockchain.md) · [云原生](../04_web_and_networking/24_cloud_native.md) · [微服务架构](../03_design_patterns/31_microservice_patterns.md)
@@ -27,7 +27,7 @@
 > [FLP Result — Fischer, Lynch, Paterson 1985](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf) ·
 > [Paxos Made Simple — Lamport 2001](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf) ·
 > [Tendermint BFT](https://docs.tendermint.com/master/introduction/what-is-tendermint.html)
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -724,7 +724,7 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [分布式系统](../04_web_and_networking/18_distributed_systems.md) — CAP 定理、一致性（Coherence）模型、分区容错
 - [区块链](../11_domain_applications/06_blockchain.md) — 智能合约、共识激励、密码学原语
@@ -737,7 +737,7 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 - [安全与密码学](../07_security_and_cryptography/43_security_cryptography.md) — 数字签名、阈值密码学
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: Distributed Consensus（分布式共识） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Distributed Consensus（分布式共识） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Distributed Consensus（分布式共识） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

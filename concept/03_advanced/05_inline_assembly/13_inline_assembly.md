@@ -4,6 +4,7 @@
 
 > **EN**: Inline Assembly
 > **Summary**: Low-level inline assembly in Rust using `asm!` and `global_asm!`, covering syntax, constraints, platform-specific features, and safety boundaries.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -26,6 +27,7 @@
 > **对应 Crate**: [`c03_control_fn`](../../crates/c03_control_fn) (底层控制流)
 
 ---
+
 ## 📑 目录
 
 - [内联汇编 (Inline Assembly)](#内联汇编-inline-assembly)
@@ -55,6 +57,7 @@
     - [测验 2：操作数约束（理解层）](#测验-2操作数约束理解层)
     - [测验 3：用内联汇编实现原子操作（应用层）](#测验-3用内联汇编实现原子操作应用层)
     - [测验 4：clobber 与内存屏障（分析层）](#测验-4clobber-与内存屏障分析层)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -215,7 +218,7 @@ unsafe fn read_cycle() -> u64 {
 }
 ```
 
-**特点**: 模块（Module）化 ISA 扩展；标准寄存器约束为 `reg`；浮点寄存器为 `freg`；向量扩展 (RVV) 的约束仍在 nightly 演进中。
+**特点**: 模块（Module）化 ISA 扩展；标准寄存器约束为 `reg`；浮点寄存器为 `freg`；向量扩展 (RVV) 的约束仍在每日构建版演进中。
 
 ### 2.4 s390x (IBM Z / LinuxONE)
 
@@ -325,7 +328,7 @@ mod s390x_vector_demo {
 ```rust,ignore
 // x86_64 SSE2 等效实现
 #[cfg(target_arch = "x86_64")]
-#[target_feature(enable = "sse2")]
+// （实际代码需加 #[target_feature] 属性启用 sse2）
 unsafe fn sse2_xor(a: &[u32; 4], b: &[u32; 4]) -> [u32; 4] {
     let mut result: [u32; 4] = [0; 4];
     asm!(
@@ -514,7 +517,7 @@ unsafe {
 }
 ```
 
-> **注意**: 从 Rust 1.59 开始，`asm!` 是稳定功能（无需 nightly）。之前需要使用 `llvm_asm!`（已废弃）。
+> **注意**: 从 Rust 1.59 开始，`asm!` 是稳定功能（无需每日构建版）。之前需要使用 `llvm_asm!`（已废弃）。
 </details>
 
 ---

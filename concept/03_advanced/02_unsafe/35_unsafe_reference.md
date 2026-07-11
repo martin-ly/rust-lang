@@ -2,6 +2,7 @@
 
 > **EN**: Unsafe Reference
 > **Summary**: Rust Reference 对 `unsafe` 的规范：`unsafe` 关键字、`unsafe` 块、函数、trait、实现的外部契约，以及"不被视为 unsafe 的行为"。 Normative description of Rust `unsafe`: the keyword, unsafe blocks, functions, traits, implementations, external contracts, and behaviors not considered unsafe.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [专家]
 > **内容分级**: [专家级]
@@ -192,16 +193,16 @@ unsafe 代码必须遵守 Rust 内存模型：(Source: [Rust Reference — Memor
 - `panic_handler` 在 `no_std` 环境中常用 unsafe。
 - FFI 调用必须在 unsafe 块中。
 
-详见 [Rust Runtime](30_rust_runtime.md) 和 [Panic](31_panic.md)。
+详见 [Rust Runtime](../06_low_level_patterns/30_rust_runtime.md) 和 [Panic](../../02_intermediate/03_error_handling/31_panic.md)。
 
-## 八、关联概念
+## 八、相关概念
 
 | 概念 | 关系 |
 |:---|:---|
 | [Unsafe Rust](03_unsafe.md) | 本页是 `unsafe` 的规范参考视图 |
 | [Memory Model](29_memory_model.md) | unsafe 代码必须遵守内存模型 |
-| [Rust Runtime](30_rust_runtime.md) | 运行时组件依赖 unsafe 实现 |
-| [Panic](31_panic.md) | panic 处理涉及 unsafe 边界 |
+| [Rust Runtime](../06_low_level_patterns/30_rust_runtime.md) | 运行时组件依赖 unsafe 实现 |
+| [Panic](../../02_intermediate/03_error_handling/31_panic.md) | panic 处理涉及 unsafe 边界 |
 | [Behavior Considered Undefined](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md) | unsafe 代码必须避免 UB |
 | [Inline Assembly](../05_inline_assembly/13_inline_assembly.md) | 内联汇编在 unsafe 块中使用 |
 | [FFI Advanced](../04_ffi/09_ffi_advanced.md) | FFI 调用需要 unsafe |

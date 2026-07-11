@@ -1079,7 +1079,7 @@ impl<T> MyVec<T> {
         Self { ptr: std::ptr::NonNull::dangling().as_ptr(), len: 0, cap: 0 }
     }
 
-> **[Rust Reference: NonNull](https://doc.rust-lang.org/reference/introduction.html)** `std::ptr::NonNull<T>` evolved from unstable `Unique<T>` and `Shared<T>` to provide a covariant raw pointer with a non-null invariant. ✅ 已验证
+> **[Rust Reference: NonNull](https://doc.rust-lang.org/reference/introduction.html)** `std::ptr::NonNull<T>` evolved from the experimental `Unique<T>` and `Shared<T>` to provide a covariant raw pointer with a non-null invariant. ✅ 已验证
 
     pub fn push(&mut self, value: T) {
         if self.len == self.cap { self.grow(); }
@@ -1376,7 +1376,7 @@ pub struct TcpHeader {
 #### 安装与基本使用
 
 ```bash
-# 安装 Miri（需要 nightly toolchain）
+# 安装 Miri（需要每日构建版工具链）
 rustup component add miri
 
 # 运行测试
@@ -1387,8 +1387,8 @@ cargo miri run
 
 # CI 集成（GitHub Actions 示例）
 # .github/workflows/miri.yml
-# - run: rustup toolchain install nightly --component miri
-# - run: MIRIFLAGS=-Zmiri-tree-borrows cargo +nightly miri test
+# - run: rustup toolchain install <每日构建版工具链> --component miri
+# - run: MIRIFLAGS=-Zmiri-tree-borrows cargo +<每日构建版工具链> miri test
 ```
 
 > **[Rust Blog: Miri on CI]** Miri 已集成到 Rust CI 中，成为标准库 unsafe 代码的持续验证工具。第三方项目同样可在 CI 中运行 `cargo miri test` 以捕获 UB。✅ 已验证
@@ -2582,6 +2582,8 @@ fn main() {
 ---
 
 ## 相关概念链接
+- **上层概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Concurrency](../00_concurrency/01_concurrency.md)
+
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -2592,6 +2594,7 @@ fn main() {
 | 安全边界 | [](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md) | 全局边界汇总 |
 | Rust 版本特性演进 | [](../../07_future/00_version_tracking/05_rust_version_tracking.md) | `unsafe_op_in_unsafe_fn`、`naked_functions`、`unsafe extern` |
 | 异步（Async）与 Unsafe | [](../01_async/02_async.md) | `AsyncFn` 与 unsafe 边界的交互 |
+| Unsafe 边界全景 | [32_unsafe_boundary_panorama.md](32_unsafe_boundary_panorama.md) | 边界视角汇总（概念推导在本页，边界全景在该页） |
 
 > **过渡: L3 → L1**
 > `unsafe` 不是 Rust 的例外——它是所有权系统的延伸。`unsafe` 块中的原始指针（Raw Pointer）解引用之所以危险，正是因为它绕过了借用（Borrowing）检查器对 `&T`/`&mut T` 的约束。理解 unsafe 的安全契约，需要首先理解 safe Rust 中这些约束的精确含义。
@@ -2620,7 +2623,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -2999,7 +3002,6 @@ fn inspect(ring: &IoUring) {
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## Null 指针有效性定义
 

@@ -535,7 +535,7 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Unsafe](../02_unsafe/03_unsafe.md) — unsafe Rust 与内存安全（Memory Safety）
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — Rust 类型系统基础
@@ -548,7 +548,7 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 
@@ -610,7 +610,6 @@ fn main() {
 
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 
 ## 认知路径

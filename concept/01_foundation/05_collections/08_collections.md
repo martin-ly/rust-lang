@@ -12,7 +12,7 @@
 >
 > 本主题在 knowledge 中有系统化的知识索引：[集合](../../../knowledge/02_intermediate/01_collections.md)
 > **受众**: [初学者]
-> **Bloom 层级**: L3-L4
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 标准集合 API 的应用
@@ -404,7 +404,7 @@ graph TD
 
 边界 4: 自定义分配器
 ├── 标准库集合使用全局分配器
-├── nightly 支持自定义 Allocator API
+├── 每日构建版支持自定义 Allocator API
 ├── stable 需要包装或使用第三方 crate
 └── 嵌入式/特殊场景需要关注
 
@@ -482,7 +482,10 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
+- **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)
+- **下层概念**: [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md)
+
 
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 所有权模型
 - [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) — 借用规则
@@ -496,7 +499,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

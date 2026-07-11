@@ -4,11 +4,12 @@
 
 > **EN**: Useful Development Tools
 > **Summary**: Rust 官方/社区推荐的开发工具：rustfmt、rustfix/cargo fix、Clippy、rust-analyzer，以及它们在日常开发中的典型用法。 Official and community recommended Rust development tools: rustfmt, rustfix/cargo fix, Clippy, rust-analyzer, and typical daily workflows.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者] / [中级]
 > **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **P** — Practice
+> **A/S/P 标记**: **A** — Application
 > **双维定位**: P×Tool — 工具链与工程实践
 > **前置依赖**: [Toolchain](01_toolchain.md) · [Cargo Subcommands and Plugins](../01_cargo/66_cargo_subcommands_and_plugins.md)
 > **后置概念**: [Cargo Profiles and Lints](../01_cargo/65_cargo_profiles_and_lints.md) · [Testing Basics](../../01_foundation/10_testing_basics/16_testing_basics.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -182,7 +183,7 @@ cargo test
 
 ---
 
-## 六、关联概念
+## 六、相关概念
 
 | 概念 | 关系 |
 |:---|:---|

@@ -589,7 +589,7 @@ jobs:
 name = "safety-critical-module"
 version = "1.0.0"
 edition = "2021"
-rust-version = "1.70"  # MSRV
+rust-version = "1.97.0"  # MSRV
 license = "MIT OR Apache-2.0"
 authors = ["Your Name <you@example.com>"]
 description = "Safety-critical Rust module"

@@ -3,7 +3,7 @@
 
 # Tier 4: 测试与基准
 
-> **权威来源**: [concept/03_advanced/02_process_ipc/09_process_testing_and_benchmarking.md](../../../../concept/03_advanced/02_process_ipc/09_process_testing_and_benchmarking.md)
+> **权威来源**: [concept/03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md](../../../../concept/03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md)
 
 本文件为 `crates/c07_process` 的专题实践材料。通用 Rust 进程测试与基准概念请参见上方权威页；完整代码示例、练习与案例仍保留在本书。
 

@@ -146,7 +146,7 @@ Box<T> 的设计:
   │ 所有权          │ 唯一            │ 唯一            │
   │ 可否为空        │ 否（必须初始化） │ 可以（nullptr）  │
   │ 释放            │ 自动（Drop）     │ 自动            │
-  │ 自定义分配器    │ nightly (Allocator API) │ 支持         │
+  │ 自定义分配器    │ 每日构建版 (Allocator API) │ 支持         │
   │ 大小            │ 1 指针          │ 1-2 指针        │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
@@ -593,7 +593,10 @@ fn fixed() {
 
 ---
 
-## 相关概念文件
+## 相关概念
+- **上层概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](03_memory_management.md)
+- **下层概念**: [Pin](../../03_advanced/01_async/06_pin_unpin.md) · [Cow](11_cow_and_borrowed.md)
+
 
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权模型
 - [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用规则
@@ -608,7 +611,7 @@ fn fixed() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -699,7 +702,6 @@ fn main() {
 > [来源: [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)]
 > [来源: [Rustonomicon — Rc and Arc](https://doc.rust-lang.org/std/rc/struct.Rc.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）
 

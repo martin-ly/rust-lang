@@ -732,7 +732,7 @@ Rust 的宏系统分为两层：
 |:---|:---|:---|:---|:---|
 | **声明宏** | ✅ `macro_rules!`（hygienic） | ⚠️ 预处理器（无卫生） | ❌ 无 | ❌ 无（Template Haskell 是过程式） |
 | **过程宏 / 编译器插件** | ✅ 完整 AST 访问 | ❌ 无标准机制（clang plugin） | ❌ 无 | ✅ Template Haskell |
-| **泛型特化** | ⚠️ 最小化特化（unstable） | ✅ 模板特化 + SFINAE | ❌ 无 | ✅ 实例选择（type classes） |
+| **泛型特化** | ⚠️ 最小化特化（未稳定） | ✅ 模板特化 + SFINAE | ❌ 无 | ✅ 实例选择（type classes） |
 | **模块化** | ✅ crates + modules + visibility | ⚠️ 头文件 + 命名空间 | ✅ 包 + 模块 | ✅ 模块 + 类型类 |
 | **FFI** | ✅ `extern` + `bindgen` | ✅ `extern "C"` | ✅ `cgo`（有开销） | ✅ FFI（GHC） |
 | **编译期反射** | ⚠️ 有限（`Any` trait） | ✅ RTTI / 模板元编程 | ❌ 无 | ❌ 无（运行时类型信息弱） |
@@ -1051,7 +1051,7 @@ mindmap
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Rust vs C++ 对比](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) — 四语言对比矩阵详情
 - [L4 形式化验证](../../04_formal/02_separation_logic/04_rustbelt.md) — RustBelt 与 Oxide 语义
@@ -1064,7 +1064,6 @@ mindmap
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

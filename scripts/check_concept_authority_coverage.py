@@ -14,6 +14,7 @@ P2 社区/生态: verus / creusot / formal-land / AeneasVerif / docs.rs / crates
 """
 from __future__ import annotations
 
+import argparse
 import datetime as _dt
 import glob
 import json
@@ -77,6 +78,11 @@ def active_md():
 
 
 def main():
+    ap = argparse.ArgumentParser(description="concept/ 权威层国际化权威来源覆盖率审计")
+    ap.add_argument("--strict", action="store_true",
+                    help="阻断模式：内容页 any<100%% / none>0 / 核心 L1-L4 无 P0 缺口>0 时 exit 1")
+    args = ap.parse_args()
+
     files = active_md()
     rows = []
     for p in files:
@@ -181,6 +187,18 @@ def main():
     print(f"[concept-authority] content-scope n={cn}  P0={cp0p}%  P1={cp1p}%  P2={cp2p}%  any={canyp}%")
     print(f"[concept-authority] core L1-L4 gaps (no P0): {len(core_gaps)}")
     print(f"[concept-authority] report: {os.path.relpath(md_path, ROOT)}")
+    if args.strict:
+        fails = []
+        if canyp < 100.0:
+            fails.append(f"内容页 any 覆盖率 {canyp}% < 100%")
+        if len(none) > 0:
+            fails.append(f"无任何权威引用页 {len(none)} > 0")
+        if len(core_gaps) > 0:
+            fails.append(f"核心 L1-L4 无 P0 缺口 {len(core_gaps)} > 0")
+        if fails:
+            print("[concept-authority] FAIL (--strict): " + "; ".join(fails))
+            return 1
+        print("[concept-authority] PASS (--strict): any=100% none=0 core_gaps=0")
     return 0
 
 

@@ -19,5 +19,5 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | 性能优化 | [`concept/06_ecosystem/10_performance/15_performance_optimization.md`](../../../concept/06_ecosystem/10_performance/15_performance_optimization.md) |
-| 异步进程管理 | [`concept/03_advanced/02_process_ipc/03_async_process_management.md`](../../../concept/03_advanced/02_process_ipc/03_async_process_management.md) |
+| 异步进程管理 | [`concept/03_advanced/08_process_ipc/03_async_process_management.md`](../../../concept/03_advanced/08_process_ipc/03_async_process_management.md) |
 | 并发模式 | [`concept/03_advanced/00_concurrency/01_concurrency.md`](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |

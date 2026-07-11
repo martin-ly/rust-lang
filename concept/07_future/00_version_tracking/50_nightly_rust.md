@@ -4,11 +4,12 @@
 
 > **EN**: How Rust is Made and “Nightly Rust”
 > **Summary**: Rust 的火车发布模型、Stability without Stagnation 原则、Nightly/Beta/Stable 三个发布通道、feature flags、rustup 通道切换以及 RFC 流程。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者] / [中级]
 > **Bloom 层级**: L2
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **P** — Process
+> **A/S/P 标记**: **S** — Structure
 > **双维定位**: P×Eco — 语言发布流程与生态演进
 > **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Editions](../01_edition_roadmap/44_edition_guide.md)
 > **后置概念**: [Rust Version Tracking](05_rust_version_tracking.md) · [Rust 1.97 Preview (Beta)](rust_1_97_preview.md)
@@ -206,7 +207,7 @@ components = ["rust-src", "miri", "rustfmt", "clippy"]
 
 ---
 
-## 十、关联概念
+## 十、相关概念
 
 | 概念 | 关系 |
 |:---|:---|

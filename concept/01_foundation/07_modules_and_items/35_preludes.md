@@ -4,6 +4,7 @@
 
 > **EN**: Preludes
 > **Summary**: Rust 中自动进入每个模块（Module）作用域的名字集合：标准库 prelude、extern prelude、language prelude、macro_use prelude 与 tool prelude。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者] / [进阶]
 > **Bloom 层级**: L2-L3

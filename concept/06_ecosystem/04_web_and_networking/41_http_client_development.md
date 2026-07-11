@@ -5,6 +5,7 @@
 >
 > **EN**: HTTP Client Development in Rust
 > **Summary**: Building HTTP clients in Rust with reqwest: request construction, response handling, connection reuse, retries, cookies, proxies, and file uploads.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -179,7 +180,7 @@ fn client_with_proxy() -> Result<reqwest::Client, reqwest::Error> {
 
 - [Rust 网络编程](../../03_advanced/06_low_level_patterns/18_network_programming.md)
 - [Web 框架对比](27_web_frameworks.md)
-- [网络安全](../09_networking/02_network_security.md)
+- [网络安全](../12_networking/02_network_security.md)
 
 ---
 

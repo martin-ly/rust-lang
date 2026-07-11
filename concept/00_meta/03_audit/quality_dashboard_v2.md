@@ -2,6 +2,7 @@
 >
 > **EN**: Quality Dashboard V2
 > **Summary**: Quality Dashboard V2 — A dashboard tracking coverage, source-alignment, and consistency trends for every representation type in the concept base.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]
 > **Bloom 层级**: Meta
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -266,7 +267,7 @@ graph LR
 
 ---
 
-> **相关文件**: [导航中心](../04_navigation/navigation.md) · [审计清单](audit_checklist.md) · [概念索引](../04_navigation/concept_index.md) · [质量基线](../../../archive/reports/2026_07/QUALITY_BASELINE_v2_0.md)
+> **相关文件**: [导航中心](../04_navigation/navigation.md) · [审计清单](audit_checklist.md) · [概念索引](../04_navigation/concept_index.md) · [质量基线](../../../archive/reports/2026_07/QUALITY_BASELINE_v2_0.md)（归档只读）
 
 ## 认知路径
 

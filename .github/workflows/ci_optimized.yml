@@ -1,10 +1,13 @@
-name: CI Optimized
+# ⚠️ DEPRECATED (2026-07-12)：与 ci.yml 真重复，保留 ci.yml 为准。
+# 本工作流的 fmt/clippy/test/doc 与 ci.yml 在每次 PR 上重复运行；miri/bench 已由
+# miri.yml / performance.yml 专职覆盖。唯一独有价值是多 OS 测试矩阵
+# （ubuntu/windows/macos），后续应迁入 ci.yml 后删除本文件。
+# 调度已移除，仅保留 workflow_dispatch 手动触发，避免重复消耗 CI 额度。
+name: CI Optimized (DEPRECATED — use ci.yml)
 
 on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+  # push/pull_request 触发已停用（与 ci.yml 重复）；仅手动触发
+  workflow_dispatch:
 
 env:
   CARGO_TERM_COLOR: always

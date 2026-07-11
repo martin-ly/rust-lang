@@ -4,11 +4,12 @@
 >
 > **EN**: C++ vs Rust: Construction, Operators, RTTI, and Friends
 > **Summary**: A focused comparison of C++ and Rust surface-level object-oriented features: constructors/initialization, operator overloading, RTTI, and access control (friend vs module privacy).
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L3 进阶对比
-> **A/S/P 标记**: C+A — Comparison + Application
+> **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Ana
 > **前置概念**: [Rust vs C++](../01_systems_languages/01_rust_vs_cpp.md) · [Variable Model](../../01_foundation/03_values_and_references/20_variable_model.md) · [RTTI](../../02_intermediate/04_types_and_conversions/25_rtti_and_dynamic_typing.md) · [所有权（Ownership）形式化](../../04_formal/01_ownership_logic/03_ownership_formal.md)
 > **后置概念**: [C++ ABI Object Model](../01_systems_languages/18_cpp_abi_object_model.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)

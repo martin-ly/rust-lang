@@ -5,6 +5,7 @@
 >
 > **EN**: Algorithm Complexity Analysis in Rust
 > **Summary**: Time and space complexity analysis using Big-O, Omega, Theta, recurrence relations, and amortized analysis, with Rust code examples.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。

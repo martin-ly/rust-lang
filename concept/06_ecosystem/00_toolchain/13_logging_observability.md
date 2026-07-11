@@ -6,7 +6,7 @@
 > **Summary**: Logging Observability: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
-> **Bloom 层级**: L3-L4
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **双维定位**: P×App — 实施可观测性工程实践
@@ -435,7 +435,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Async](../../03_advanced/01_async/02_async.md) — 异步编程（tracing 的核心用例）
 - [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) — 错误处理（Error Handling）（与日志紧密关联）
@@ -448,7 +448,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

@@ -140,7 +140,7 @@ impl Email<Verified> {
 
 ### 零成本抽象 (Zero-Cost Abstraction)
 
-抽象不引入运行时开销；泛型单态化（Monomorphization）、迭代器（Iterator）链、`const` 计算均遵循此原则。详见 [零成本抽象（Zero-Cost Abstraction）](../../01_foundation/00_start/06_zero_cost_abstractions.md)。
+高级语言特性编译后不产生运行时开销的设计原则；泛型单态化（Monomorphization）、迭代器（Iterator）链、`const` 计算均遵循此原则。详见 [零成本抽象（Zero-Cost Abstraction）](../../01_foundation/00_start/06_zero_cost_abstractions.md)。
 
 ### OnceLock / LazyLock
 
@@ -236,7 +236,7 @@ pub trait SimpleFuture {
 > **权威来源对齐变更日志**: 2026-07-09 将内部链接迁移至 `concept/` 权威页，补全 Rust 代码示例、术语表与决策树
 
 **文档版本**: 2.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **状态**: ✅ 权威页（canonical）
 
 ## 过渡段

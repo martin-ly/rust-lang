@@ -18,7 +18,7 @@
 > **内容分级**: [综述级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 生态工程
-> **A/S/P 标记**: **A+S+P** — 全维度
+> **A/S/P 标记**: **S+A+P** — 全维度
 > **双维定位**: P×Eva — 评估 Rust 在特定领域的适用性
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Async](../../03_advanced/01_async/02_async.md) · [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) · [Core Crates](../02_core_crates/03_core_crates.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
 > **后置概念**: [AI Integration](../../07_future/04_research_and_experimental/01_ai_integration.md) · [Formal Methods](../../07_future/04_research_and_experimental/02_formal_methods.md)
@@ -279,7 +279,7 @@ Rust 在嵌入式领域的独特价值：
 | **维度** | **详情** |
 |:---|:---|
 | 稳定化范围 | `esp_hal::init`、GPIO、UART、SPI、I2C（Blocking + Async）、time 模块（Module）、`#[main]` 宏（Macro） |
-| 不稳定特性 | WiFi/BLE（`esp-radio`/`esp-wifi`）、其他外设驱动需启用 `unstable` feature |
+| 不稳定特性 | WiFi/BLE（`esp-radio`/`esp-wifi`）、其他外设驱动需启用未稳定 feature |
 | 支持芯片 | ESP32、ESP32-C2/C3/C5/C6/C61、ESP32-H2、ESP32-S2/S3（Xtensa + RISC-V） |
 | 工具链 | `esp-generate` 项目生成器、`espflash` 烧录工具 |
 | 下载量 | ~39k/月（2026-05），93 个下游 crate 依赖 |
@@ -1314,7 +1314,7 @@ graph TD
 - **L6 工具链**: Cargo Script 不是语言特性，而是**包管理系统的语法压缩**。但它改变了 Rust 的**最小可运行单元**——从"crate + Cargo.toml"压缩为"单文件"。
 - **L4 形式化**: 单文件脚本的形式化语义等价于一个**匿名 crate**——文件即模块，frontmatter 即 `Cargo.toml` 的语法糖。这对形式化验证工具的影响是：验证目标从"crate 级"变为"文件级"，粒度更细。
 
-**关键限制**: Cargo Script 的 frontmatter 语法（`cargo +nightly -Zscript`）仍在 nightly 中稳定化进程中，尚未进入 stable。
+**关键限制**: Cargo Script 的 frontmatter 语法（每日构建版 `cargo -Zscript`）仍在稳定化进程中，尚未进入 stable。
 
 > **来源**: [RFC 3502 — cargo-script](https://rust-lang.github.io/rfcs/3502-cargo-script.html) · [RFC 3503 — frontmatter](https://rust-lang.github.io/rfcs/3503-frontmatter.html)
 
@@ -1355,7 +1355,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

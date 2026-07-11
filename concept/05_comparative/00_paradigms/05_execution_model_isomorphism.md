@@ -702,7 +702,7 @@ graph TD
 | 内存共享 | — | — | `Mutex` / `Atomic` | C11 内存模型 | vs C++ atomic | 无锁结构 | 新内存模型 |
 | 事件驱动 | — | — | `mio` / `tokio` | Reactor 模式 | vs Go netpoller | 网络框架 | io_uring |
 
-### 相关概念文件
+### 相关概念
 
 - [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) —— Send/Sync / Mutex / 内存模型
 - [L3 异步编程](../../03_advanced/01_async/02_async.md) —— Future / Pin / async/await

@@ -185,7 +185,7 @@ graph TB
 - [Gen Blocks Preview](03_preview_features/22_gen_blocks_preview.md)
 - [`std::autodiff`：Rust 官方自动微分前沿追踪](03_preview_features/45_std_autodiff_preview.md)
 - [Rust Edition 机制与迁移指南](01_edition_roadmap/23_rust_edition_guide.md)
-- [Rust 2027 Edition 及未来路线图](05_roadmaps/24_roadmap.md)
+- [Rust 2027 Edition 及未来路线图](01_edition_roadmap/24_roadmap.md)
 - [WASM Target Evolution Preview](03_preview_features/47_wasm_target_evolution.md)
 - [cargo-semver-checks 预览：从社区工具到 Cargo 官方集成](03_preview_features/46_cargo_semver_checks_preview.md)
 - [AArch64 SVE / SME 预览：可伸缩向量扩展](03_preview_features/48_aarch64_sve_sme_preview.md)

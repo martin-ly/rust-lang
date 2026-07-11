@@ -7,11 +7,12 @@
 >
 > **EN**: Formal Methods
 > **Summary**: Formal Methods. Guide to 41 Workflow Theory.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Eva — 评价工作流模型的形式化正确性
 > **前置依赖**: [Async/Await](../../03_advanced/01_async/02_async.md) ·
 > 异步（Async）状态机 ·
@@ -33,7 +34,7 @@
 > [Clarke & Emerson — Design and Synthesis of Synchronization Skeletons](https://dl.acm.org/doi/10.1145/567446.567462) ·
 > [Rust async-book](https://rust-lang.github.io/async-book/index.html)
 > [来源: [WfMC — Reference Model](https://wfmc.org/public-documents/)] · [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)] · [来源: [Workflow Patterns](http://www.workflowpatterns.com/)]
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -1304,7 +1305,7 @@ async fn unbounded_backoff() -> Result<Output> {
 > [来源: [Hoare — Communicating Sequential Processes](https://www.amazon.com/Communicating-Sequential-Processes-Prentice-Hall-International/dp/0131532715)]
 > [来源: [Petri Nets — Formal Definition](https://www.informatik.uni-hamburg.de/TGI/PetriNets/)]
 
-## 相关概念文件
+## 相关概念
 
 - [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) — 事件溯源持久化、Saga 编排
 - [Reactive Programming](../04_web_and_networking/40_reactive_programming.md) — Stream、背压、数据流

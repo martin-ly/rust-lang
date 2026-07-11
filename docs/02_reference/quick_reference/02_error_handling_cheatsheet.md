@@ -984,8 +984,8 @@ fn main() {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [类型系统完备性缺口](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) — 错误处理相关的形式化保证
-- [Send/Sync 形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) — 错误在多线程间的传递
+- [类型系统完备性缺口](../../research_notes/formal_methods/00_completeness_gaps.md) — 错误处理相关的形式化保证
+- [Send/Sync 形式化](../../research_notes/formal_methods/10_send_sync_formalization.md) — 错误在多线程间的传递
 
 ---
 

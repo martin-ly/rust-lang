@@ -9,8 +9,8 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
-> **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **权威来源**: 本文件为 `concept/` 权威页。Rust 游戏开发（Game Development）主题统一收敛于本页；原同目录 `26_game_development.md` 已于 2026-07-12 合并至本页并改为重定向 stub。
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 设计游戏开发架构
 > **定位**: 分析 Rust 在游戏开发领域的生态格局——从 Bevy ECS 到 WGPU 图形渲染，探讨 Rust 的内存安全（Memory Safety）与性能优势如何重塑游戏引擎设计。
 > **前置概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
@@ -427,6 +427,11 @@ graph TD
 | [Rust GameDev WG](https://gamedev.rs/) | ✅ 二级 | 社区新闻 |
 | [rust-gpu](https://github.com/EmbarkStudios/rust-gpu) | ✅ 二级 | GPU 着色器 |
 
+> **补充生态工具（2026-07-12 自 `26_game_development.md` 合并）**：窗口与输入层 [winit](https://github.com/rust-windowing/winit)；
+> 资产管道的 [gltf](https://docs.rs/gltf/) crate；轻量 ECS 实现 [hecs](https://docs.rs/hecs/)（与 `bevy_ecs` 的 archetype-based 存储设计形成对照）；
+> 热重载（Hot Reloading）在 Rust 中受编译期单态化与类型布局稳定性约束，工程上通常以动态库重载（如 `hot-lib-reloader`）或脚本层（Lua/Rhai）折衷实现。
+> 进阶边界场景（archetype 变更与迭代器失效、游戏状态序列化的循环引用、ECS system 参数顺序冲突）见 [ECS 架构](07_game_ecs.md) 与 [游戏引擎内部机制](49_game_engine_internals.md)。
+
 ---
 
 ```rust
@@ -483,7 +488,7 @@ fn main() {
 }
 ```
 
-## 相关概念文件
+## 相关概念
 
 - [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) — 并发
 - [Performance](../10_performance/15_performance_optimization.md) — 性能优化
@@ -497,7 +502,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

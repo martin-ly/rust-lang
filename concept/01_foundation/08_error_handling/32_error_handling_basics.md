@@ -13,7 +13,8 @@
 > 本主题在 knowledge 中有系统化的知识索引：错误处理（Error Handling）基础
 > **受众**: [初学者]
 > **Bloom 层级**: L2-L3
-> **权威来源**: 本文件为 `concept/` 权威页。
+> **权威来源**: 本文件为 `concept/` 权威页（L1 基础层）。
+> **层级定位**: 本页为错误处理的 **L1 基础权威页**，覆盖 `Result`/`Option`/`?` 的入门语义；进阶传播模式见 L2 主权威页 [`04_error_handling.md`](../../02_intermediate/03_error_handling/04_error_handling.md)，组合子/错误转换/框架生态深入见 [`16_error_handling_deep_dive.md`](../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md)。三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Result/Option 错误传播模式
 > **定位**: 系统讲解 Rust 的错误处理（Error Handling）机制——从 `Result` 和 `Option` 到 `?` 运算符，分析 Rust 如何将错误处理融入类型系统（Type System），实现编译期安全。
@@ -607,7 +608,10 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
+- **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/04_type_system.md) · [Control Flow](../04_control_flow/07_control_flow.md)
+- **下层概念**: [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
+
 
 - [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) — 进阶错误处理
 - [Type System](../02_type_system/04_type_system.md) — 类型系统（Type System）
@@ -621,7 +625,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -792,7 +795,6 @@ fn main() {}
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
 > [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**:
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·

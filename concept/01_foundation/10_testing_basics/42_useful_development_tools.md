@@ -2,12 +2,13 @@
 
 > **EN**: Useful Development Tools
 > **Summary**: A tour of the Rust toolchain and ecosystem tooling: rustfmt, clippy, rustdoc, cargo, rust-analyzer, plus popular community plugins like cargo-watch, cargo-expand, cargo-audit, and cargo-deny, with configuration examples and CI workflow guidance.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者]
 > **内容分级**: [参考级]
 > **Bloom 层级**: L1-L2
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **P** — Practice
+> **A/S/P 标记**: **A** — Application
 > **双维定位**: E×Tool — 工具链与生态系统
 > **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Cargo Getting Started](../../06_ecosystem/01_cargo/80_cargo_getting_started.md)
 > **后置概念**: [Testing Basics](16_testing_basics.md) · [Documentation](../../06_ecosystem/09_testing_and_quality/14_documentation.md) · [DevOps and CI/CD](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) · [Cargo Subcommands](../../06_ecosystem/01_cargo/66_cargo_subcommands_and_plugins.md)
@@ -190,7 +191,7 @@ flowchart TD
 
 ---
 
-## 八、关联概念
+## 八、相关概念
 
 | 概念 | 关系 |
 |:---|:---|

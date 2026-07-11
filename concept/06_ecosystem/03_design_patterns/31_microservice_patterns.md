@@ -10,7 +10,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 设计微服务架构
 > **定位**: 从系统架构视角梳理 Rust 在微服务场景中的核心模式——服务发现、熔断、Saga、CQRS、事件溯源——揭示 Rust 的类型安全与零成本抽象（Zero-Cost Abstraction）如何支撑高可靠分布式系统。
 > **前置概念**: [Async](../../03_advanced/01_async/02_async.md) · 分布式系统 · [错误处理（Error Handling）](../../01_foundation/08_error_handling/32_error_handling_basics.md)
@@ -792,7 +792,7 @@ Rust 微服务并非银弹:
 > **权威来源对齐变更日志**: 2026-05-22 创建微服务架构模式概念文件 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

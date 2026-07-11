@@ -199,7 +199,7 @@ domains:
     description: >
       进程管理、进程间通信、信号与系统接口。
     path_prefixes:
-      - "03_advanced/02_process_ipc/"
+      - "03_advanced/08_process_ipc/"
     representative_concepts: [StandardIOAndProcess]
 
   - id: unsafe_lowlevel
@@ -264,7 +264,7 @@ domains:
       Web 框架、网络协议、高性能网络服务架构、WebAssembly。
     path_prefixes:
       - "06_ecosystem/04_web_and_networking/"
-      - "06_ecosystem/09_networking/"
+      - "06_ecosystem/12_networking/"
     representative_concepts: [NetworkProtocols, HighPerformanceNetworkServiceArchitecture, WebAssembly]
 
   - id: ecosystem_embedded

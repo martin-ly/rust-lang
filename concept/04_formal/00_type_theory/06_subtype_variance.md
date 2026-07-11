@@ -390,7 +390,7 @@ graph TD
 ---
 (Source: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html))
 
-## 相关概念文件
+## 相关概念
 
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — Rust 类型系统（Type System）
 - [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) — 生命周期与借用（Borrowing）
@@ -405,7 +405,7 @@ graph TD
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

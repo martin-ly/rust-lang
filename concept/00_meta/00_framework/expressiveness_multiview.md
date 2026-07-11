@@ -323,7 +323,7 @@ graph LR
 
 ### 4.3 生成器（Generator）与协程
 
-Rust 的 `gen` blocks（nightly 实验性，`#![feature(gen_blocks)]`）进一步扩展了控制流表达力：
+Rust 的 `gen` blocks（实验特性门 `gen_blocks`，截至 1.97 未稳定）进一步扩展了控制流表达力：
 
 ```rust,ignore
 // gen block: 懒性迭代器生成
@@ -684,7 +684,7 @@ graph TD
 | 抽象语义 | struct / enum | Trait | 宏系统 | 参数性 / 范畴论 | vs Haskell Typeclass | 设计模式 | 范型扩展 |
 | 安全语义 | 安全边界 | 错误处理 | unsafe 边界 | RustBelt / IFC | vs C 内存安全 | Miri / Kani | 形式化验证 |
 
-### 相关概念文件
+### 相关概念
 
 - [L0 语义表达力光谱](semantic_expressiveness.md) —— 横向七维光谱（D1-D7）
 - [L0 可判定性谱系](decidability_spectrum.md) —— 可判定性-表达力权衡

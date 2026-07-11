@@ -7,7 +7,7 @@
 > **内容分级**: [实验级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **代码状态**: [示例级 — 已补充代码]
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) · [std API Docs](https://doc.rust-lang.org/std/index.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 
@@ -637,7 +637,7 @@ fn setup_pq_client() -> ClientConfig {
 rustls 后量子 TLS 状态:
   · rustls 0.23.22+: ML-KEM 密钥交换内置（prefer-post-quantum）
   · rustls-post-quantum crate: 提供基于 aws-lc-rs 的 CryptoProvider
-  · 实验性 ML-DSA 签名: 通过 aws-lc-rs-unstable feature
+  · 实验性 ML-DSA 签名: 通过 aws-lc-rs 的未稳定 API feature
   · 生产状态: 混合 KEX 已可用；纯 PQC 签名证书链仍需生态成熟
 ```
 
@@ -892,7 +892,7 @@ fn main() {
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [安全与密码学](../07_security_and_cryptography/43_security_cryptography.md) — 对称/非对称加密、TLS、侧信道防护
 - [性能优化](../10_performance/15_performance_optimization.md) — SIMD、缓存优化、内存布局、零拷贝
@@ -906,7 +906,7 @@ fn main() {
 - [WebAssembly](11_webassembly.md) — 浏览器内量子模拟、跨平台部署
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: Quantum Computing in Rust（量子计算与 Rust） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Quantum Computing in Rust（量子计算与 Rust） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Quantum Computing in Rust（量子计算与 Rust） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

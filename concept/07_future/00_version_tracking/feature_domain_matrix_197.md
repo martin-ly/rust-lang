@@ -6,7 +6,7 @@
 > **受众**: [进阶] / [专家]
 > **内容分级**: [参考级]
 > **权威来源**: 本文件为 `concept/` 权威页（P2-1 交付物）。
-> **对应 Rust 版本**: **1.97.0+**（Edition 2024）
+> **Rust 版本**: **1.97.0+**（Edition 2024）
 > **Bloom 层级**: L4（分析）/ L5（评价：跨领域一致性判定）/ L7（版本治理）
 > **层次定位**: L7 未来/版本治理（横向反查层，依附于各核心领域权威页）
 > **最后更新**: 2026-07-11
@@ -52,7 +52,7 @@
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1 | Symbol mangling v0 enabled by default | ○ 符号命名 | ✗ | ✗ | ✓ [38_ABI](../../04_formal/05_rustc_internals/38_application_binary_interface.md)（**仅横幅**）⚠缺口→应补于 03_advanced/04_ffi/27_linkage.md | ✗ | ✗ | ✗ | ○ 调试器/Profiler 因平台而异 | ✓ 旧工具 demangle 失效 |
 | 2 | Cargo `build.warnings` config | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ [83_config](../../06_ecosystem/01_cargo/83_cargo_configuration.md) · [65_lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) | ✗ | ✗ | ○ 仅控 local packages，控的是 lint 级别 |
-| 3 | Linker output 默认显示（`linker_messages` lint） | ✗ | ✗ | ✗ | ⚠缺口→应补于 03_advanced/04_ffi/27_linkage.md | ✗ | ○ 与 `build.warnings` 组合（#2）但 `linker_messages` 不受 `warnings` group 控制 | ✗ | ✗ | ✓ 特殊 lint（不在 `warnings` group）⚠缺口→应补于 02_intermediate/00_traits/32_editions.md（lint-level 矩阵） |
+| 3 | Linker output 默认显示（`linker_messages` lint） | ✗ | ✗ | ✗ | ⚠缺口→应补于 03_advanced/04_ffi/27_linkage.md | ✗ | ○ 与 `build.warnings` 组合（#2）但 `linker_messages` 不受 `warnings` group 控制 | ✗ | ✗ | ✓ 特殊 lint（不在 `warnings` group）⚠缺口→应补于 07_future/00_version_tracking/32_editions.md（lint-level 矩阵） |
 | 4 | `Default for RepeatN` | ✗ | ○ `Default` trait | ✗ | ✗ | ✗ | ✗ | ✓ std 表面 API（无专属概念页） | ✗ | ✗ |
 | 5 | `Copy for ffi::FromBytesUntilNulError` | ✗ | ○ `Copy` trait 语义 | ✗ | ○ FFI 边界类型 | ✗ | ✗ | ✓ std 表面 API | ✗ | ✗ |
 | 6 | `Send for std::fs::File` on UEFI | ✗ | ○ `Send` auto trait | ✗ | ✗ | ○ `Send` 约束影响跨 await 移动 | ✗ | ✓ std 表面 API | ✓ UEFI 目标（`x86_64-unknown-uefi`） | ✗ |
@@ -60,7 +60,7 @@
 | 8 | `NonZero` 位查询方法（`bit_width` 返回 `NonZero<u32>`） | ✗ | ○ `NonZero` 类型 | ✗ | ✗ | ✗ | ✗ | ✓ std 表面 API（返回类型已修正为 `NonZero<u32>`，示例 `.get()`） | ✗ | ✗ |
 | 9 | `char::is_control` const stable | ○ const eval 上下文 | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ std 表面 API | ✗ | ✗ |
 | 10 | `must_use` on `Result<T, !>` / `ControlFlow<!, T>` | ✓ uninhabited 等价 | ✓ [31_never_type](../../01_foundation/02_type_system/31_never_type.md) | ✗ | ✗ | ✗ | ✗ | ○ `Result`/`ControlFlow` 表面 | ✗ | ✓ `must_use` 诊断范围扩大（新 warning） |
-| 11 | `dead_code_pub_in_binary` lint | ✓ 新 allow-by-default lint | ✗ | ✗ | ✗ | ✗ | ○ 二进制 crate 可见性 | ✗ | ✗ | ✓ lint 新增 ⚠缺口→应补于 02_intermediate/00_traits/32_editions.md（lint-level 矩阵） |
+| 11 | `dead_code_pub_in_binary` lint | ✓ 新 allow-by-default lint | ✗ | ✗ | ✗ | ✗ | ○ 二进制 crate 可见性 | ✗ | ✗ | ✓ lint 新增 ⚠缺口→应补于 07_future/00_version_tracking/32_editions.md（lint-level 矩阵） |
 | 12 | 新 target features（`div32`/`lam-bh`/`lamcas`/`ld-seq-sa`/`scq`） | ✓ `#[target_feature]` 稳定集 | ✗ | ○ 部分特性与原子/顺序相关（`scq` 等） | ✗ | ✗ | ✗ | ✗ | ✓ aarch64 / x86_64 特性门 | ✗ |
 | 13 | `cfg(target_has_atomic_primitive_alignment)` | ✓ 新增 cfg 标志 | ○ 对齐/布局边界 | ⚠缺口→应补于 03_advanced/02_unsafe/29_memory_model.md + 03_advanced/00_concurrency/11_atomics_and_memory_ordering.md | ✗ | ✗ | ✗ | ✗ | ○ 取值随目标平台 | ✗ |
 | 14 | import 中允许尾随 `self` | ✓ `use` 语法放宽 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
@@ -76,7 +76,7 @@
 | 24 | `WSAESHUTDOWN` → `BrokenPipe`（Windows） | ✗ | ✗ | ✗ | ✗ | ○ 套接字错误对 async I/O 可见 | ✗ | ○ `io::ErrorKind` 表面 | ✓ Windows 套接字行为统一 | ⚠缺口→应补于 02_intermediate/03_error_handling/04_error_handling.md（Windows/Unix `ErrorKind` 迁移） |
 | 25 | Fallback `{float}` 到 `f32`（部分情形） | ✓ 浮点字面量推断 | ⚠缺口→应补于 04_formal/00_type_theory/27_type_checking_and_inference.md（与 edition 2024 never type fallback 统一） | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ 依赖旧推断的代码触发警告 |
 | 26 | `std::char` 常量/函数弃用 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ `char::` 直接调用替代 | ✗ | ✓ deprecation 警告 |
-| 27 | `varargs_without_pattern` lint 在依赖中报告 | ○ 变参 FFI 模式 | ✗ | ✗ | ○ 变参函数 FFI 边界 | ✗ | ✗ | ✗ | ✗ | ✓ 依赖代码亦暴露 ⚠缺口→应补于 02_intermediate/00_traits/32_editions.md（lint-level 矩阵） |
+| 27 | `varargs_without_pattern` lint 在依赖中报告 | ○ 变参 FFI 模式 | ✗ | ✗ | ○ 变参函数 FFI 边界 | ✗ | ✗ | ✗ | ✗ | ✓ 依赖代码亦暴露 ⚠缺口→应补于 07_future/00_version_tracking/32_editions.md（lint-level 矩阵） |
 | 28 | 拒绝向模块路径段传泛型参数 | ✓ 路径语法校验 | ○ 泛型参数位置 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ 非法泛型路径报错 |
 | 29 | 无效 macho `link_section` 报错 | ○ 属性校验 | ✗ | ○ 段/节布局 | ⚠缺口→应补于 03_advanced/04_ffi/27_linkage.md | ✗ | ✗ | ✗ | ✓ mach-O（macOS）目标 | ✓ 非法段/节名报错 |
 | 30 | 某些 `enum` 编码改变 | ✗ | ✓ [42_type_layout](../../04_formal/05_rustc_internals/42_type_layout.md)（无布局保证） | ○ 判别式/字段布局 | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ 不得依赖具体二进制布局 |
@@ -150,7 +150,7 @@ flowchart LR
 | 3 | `03_advanced/02_unsafe/29_memory_model.md` + `03_advanced/00_concurrency/11_atomics_and_memory_ordering.md` | #13 | 1 处（Memory 列） |
 | 4 | `03_advanced/01_async/06_pin_unpin.md` + `01_foundation/02_type_system/14_coercion_and_casting.md` | #21 | 2 处（Async + Type 列） |
 | 5 | `04_formal/05_rustc_internals/38_application_binary_interface.md` | #1 #3 | 1 处显性（Link-ABI 列，标"仅横幅"） |
-| 6 | `02_intermediate/00_traits/32_editions.md` + `07_future/01_edition_roadmap/44_edition_guide.md` | #3 #11 #27 | 3 处（Compat-Lint 列，lint-level 矩阵） |
+| 6 | `07_future/00_version_tracking/32_editions.md` + `07_future/01_edition_roadmap/44_edition_guide.md` | #3 #11 #27 | 3 处（Compat-Lint 列，lint-level 矩阵） |
 | 7 | `02_intermediate/03_error_handling/04_error_handling.md` | #24 | 1 处（Compat-Lint 列） |
 | 8 | 迁移判定树页（P2-5，待落地） | #22 #23 #21 | §5 引用，标记"待落地" |
 
@@ -213,7 +213,7 @@ flowchart LR
 ### 4.9 Compat-Lint（兼容性与 Lint）
 
 - **涉及特性**：#21 #22 #23 #24 #25 #26 #27 #28 #29 #30 #31（直接）；#1 #3 #10 #11 #15（已直接/间接）
-- **应反向嵌入核心页**：[`32_editions.md`](../../02_intermediate/00_traits/32_editions.md)、[`44_edition_guide.md`](../../07_future/01_edition_roadmap/44_edition_guide.md)、[`04_error_handling.md`](../../02_intermediate/03_error_handling/04_error_handling.md)、迁移判定树（P2-5，待落地）
+- **应反向嵌入核心页**：[`32_editions.md`](../../07_future/00_version_tracking/32_editions.md)、[`44_edition_guide.md`](../../07_future/01_edition_roadmap/44_edition_guide.md)、[`04_error_handling.md`](../../02_intermediate/03_error_handling/04_error_handling.md)、迁移判定树（P2-5，待落地）
 - **覆盖状态**：**多处缺口**——edition 2024 默认 lint（`unsafe_op_in_unsafe_fn`）与 1.97 新 lint（`dead_code_pub_in_binary`/`linker_messages`/`varargs_without_pattern`）的 **lint-level 矩阵缺失**；`44_edition_guide.md` grep 1.97/fallback/linker = 0（末更 2026-05-22）；`WSAESHUTDOWN→BrokenPipe` 的 `ErrorKind` 迁移判定缺失。**五处 ⚠缺口**（含迁移树待落地）。
 
 ---

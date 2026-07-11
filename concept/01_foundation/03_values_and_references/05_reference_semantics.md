@@ -443,7 +443,10 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
+- **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Type System](../02_type_system/04_type_system.md) · [Lifetime](../01_ownership_borrow_lifetime/03_lifetimes.md)
+- **下层概念**: [Smart Pointers](../../02_intermediate/02_memory_management/03_memory_management.md) · [Generics](../../02_intermediate/01_generics/02_generics.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Formal Methods](../../04_formal/01_ownership_logic/01_linear_logic.md)
+
 
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 所有权模型
 - [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) — 借用与生命周期（Lifetimes）
@@ -457,7 +460,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 新增第七节“多级引用语义与部分重借用（Borrowing）”
 
@@ -849,7 +852,6 @@ fn demo_lifetime_propagation<'a>(opt: &'a Option<&'a mut i32>) -> Option<&'a i32
 
 ### 7.6 代码示例集
 
-
 #### 7.6.1 嵌套引用的构造与模式匹配
 
 ```rust
@@ -1000,7 +1002,6 @@ fn union_demo(u: &mut MyUnion) {
 
 ### 7.8 常见困惑解析
 
-
 #### 困惑 1: `let r: &&i32 = &&5;` —— 中间引用的生命周期
 
 ```rust
@@ -1094,7 +1095,6 @@ Tree Borrows 的权限树在 Iris 框架中可以建模为**分式权限（Fract
 ---
 
 ### 7.10 名义与结构类型的引用边界
-
 
 多级引用语义与名义/结构类型系统（Type System）的交叉点，决定了**复杂借用场景中类型检查的精确行为**：
 

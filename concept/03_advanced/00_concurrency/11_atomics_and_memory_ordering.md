@@ -704,7 +704,10 @@ fn fixed() {
 
 ---
 
-## 相关概念文件
+## 相关概念
+- **上层概念**: [Concurrency](01_concurrency.md) · [Unsafe](../02_unsafe/03_unsafe.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
+- **下层概念**: [Lockfree Data Structures](https://en.wikipedia.org/wiki/Non-blocking_algorithm) · [Distributed Systems](../../06_ecosystem/04_web_and_networking/18_distributed_systems.md)
+
 
 - [Concurrency](01_concurrency.md) — 并发基础
 - [Unsafe](../02_unsafe/03_unsafe.md) — 不安全代码
@@ -718,7 +721,7 @@ fn fixed() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -837,7 +840,6 @@ fn main() {
 > [来源: [RFC 1505 — Atomic Ordering](https://github.com/rust-lang/rfcs/pull/1505)]
 > [来源: [Herlihy & Shavit — Art of Multiprocessor Programming](https://dl.acm.org/doi/book/10.5555/2385452)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 认知路径
 

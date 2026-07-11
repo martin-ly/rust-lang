@@ -635,7 +635,7 @@ graph TD
 | 可判定性谱系 | 所有权/借用/生命周期的编译期判定 | 类型推断 / Trait 求解 | NLL / Polonius / Send/Sync | 线性逻辑判定 / RustBelt Soundness | Rust vs Go 判定性对比 | Clippy / Miri / Kani 静态检测 | Effects 系统对判定性的影响 |
 | 不可判定性边界 | — | — | `unsafe` 逃逸门 | Rice 定理 / 停机问题 | C++ 模板元编程的不可判定性 | 运行时检测工具 | 形式化验证的覆盖率极限 |
 
-### 相关概念文件
+### 相关概念
 
 - [L1 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) —— 所有权唯一性的编译期判定
 - [L1 借用](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) —— AXM 规则与借用检查

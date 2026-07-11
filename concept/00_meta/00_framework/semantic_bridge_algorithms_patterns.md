@@ -10,7 +10,7 @@
 > **双维定位**: F×Eva — 评价算法、模式与工作流之间的语义同构
 > **前置概念**: [Algorithms](../../06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md) ·
 > [Patterns](../../06_ecosystem/03_design_patterns/02_patterns.md) ·
-> [Workflow Patterns](../../../archive/rust-ownership-decidability/16-program-semantics/workflow-patterns)
+> [Workflow Patterns](../../../archive/rust-ownership-decidability/16-program-semantics/workflow-patterns)（归档只读）
 > **后置概念**: [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md) ·
 > [Parallel Distributed Spectrum](../../03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md)
 > **主要来源**: [arXiv 2605.07788 — Multilingual Shared Semantic Space] ·
@@ -642,7 +642,6 @@ Iterator 的惰性本质把图这一余代数结构展开为**最终的 `Option<
 > [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) ·
 > [Wikipedia: Workflow patterns](https://en.wikipedia.org/wiki/Workflow_patterns)
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 表征空间坐标系
 

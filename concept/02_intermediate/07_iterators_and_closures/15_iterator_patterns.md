@@ -728,7 +728,7 @@ graph TD
 
 > **认知功能**: **适配器链和 for 循环各有适用场景**——简单转换用链，复杂控制用循环。迭代器的边界主要与编译时间、错误信息、递归限制、特殊算法和异步（Async）相关。
 > (Source: [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html))
-> [来源: [Rust Style Guide](https://doc.rust-lang.org/nightly/style-guide/)] · [来源: [async-iter RFC](https://rust-lang.github.io/rfcs//2996-async-iterator.html)]
+> [来源: [Rust Style Guide](https://github.com/rust-lang/rust/tree/master/src/doc/style-guide)] · [来源: [async-iter RFC](https://rust-lang.github.io/rfcs//2996-async-iterator.html)]
 
 ---
 
@@ -842,7 +842,10 @@ fn main() {
 }
 ```
 
-## 相关概念文件
+## 相关概念
+- **上层概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Generics](../01_generics/02_generics.md) · [Closures](../../01_foundation/00_start/15_closure_basics.md)
+- **下层概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Performance](../../06_ecosystem/10_performance/15_performance_optimization.md)
+
 
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Generics](../01_generics/02_generics.md) — 泛型（Generics）
@@ -860,7 +863,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 13](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

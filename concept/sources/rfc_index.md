@@ -29,7 +29,7 @@
 | RFC | 标题 | 状态 | 稳定版本 | 概念文件 |
 | :--- | :--- | :---: | :---: | :--- |
 | [RFC 0243](https://rust-lang.github.io/rfcs//0243-trait-based-exception-handling.html) | Trait-based exception handling (`Try` trait) | ✅ | 1.26 | `04_error_handling.md` |
-| [RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html) | Specialization | 🚧 | nightly | `01_traits.md` §5.7 |
+| [RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html) | Specialization | 🚧 | 每日构建版 | `01_traits.md` §5.7 |
 | [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) | Generic Associated Types (GATs) | ✅ | 1.65 | `01_traits.md` §4.6 |
 | [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html) | Const Generics | ✅ | 1.51 | `02_generics.md` §5.7 |
 | [RFC 2086](https://rust-lang.github.io/rfcs//2086-allow-if-let-irrefutables.html) | Allow `if let` guards in match arms | ✅ | 1.95 | `05_rust_version_tracking.md` §2.2 |
@@ -42,7 +42,7 @@
 | [RFC 2930](https://rust-lang.github.io/rfcs//2930-read-buf.html) | Readiness and waking for async I/O | ✅ | 1.36 | `02_async.md` §3.4 |
 | [RFC 3191](https://rust-lang.github.io/rfcs//3191-debugger-visualizer.html) | Destructuring assignment | ✅ | 1.59 | — |
 | [RFC 3243](https://rust-lang.github.io/rfcs//3243-packages-as-optional-namespaces.html) | Collapse `impl Trait` in associated types | 🚧 | — | `01_traits.md` |
-| [RFC 3382](https://github.com/rust-lang/rfcs/pull/3382) | `const` trait bounds | 🚧 | nightly | `01_traits.md` §4.7 |
+| [RFC 3382](https://github.com/rust-lang/rfcs/pull/3382) | `const` trait bounds | 🚧 | 每日构建版 | `01_traits.md` §4.7 |
 
 ## 二、类型系统与泛型
 
@@ -63,7 +63,7 @@
 | RFC | 标题 | 状态 | 稳定版本 | 概念文件 |
 | :--- | :--- | :---: | :---: | :--- |
 | [RFC 0769](https://rust-lang.github.io/rfcs//0769-sound-generic-drop.html) | Sound generic drop | ✅ | 1.0 | `03_memory_management.md` |
-| [RFC 1861](https://rust-lang.github.io/rfcs//1861-extern-types.html) | Extern types | 🚧 | nightly | `05_rust_ffi.md` |
+| [RFC 1861](https://rust-lang.github.io/rfcs//1861-extern-types.html) | Extern types | 🚧 | 每日构建版 | `05_rust_ffi.md` |
 | [RFC 2581](https://github.com/rust-lang/rfcs/pull/2581) | `&mut` reborrows for `DerefMut` | ✅ | — | `02_borrowing.md` |
 | [RFC 2753](https://github.com/rust-lang/rfcs/pull/2753) | Union types | ✅ | 1.19 | `04_type_system.md` |
 | [RFC 2807](https://github.com/rust-lang/rfcs/pull/2807) | Target feature support | ✅ | 1.27 | `03_unsafe.md` |
@@ -87,18 +87,18 @@
 | [RFC 3101](https://rust-lang.github.io/rfcs//3101-reserved_prefixes.html) | Reserved prefixes | ✅ | 1.53 (2021Ed) | `22_edition_guide.md` |
 | [RFC 3501](https://rust-lang.github.io/rfcs//3501-edition-2024.html) | Edition 2024 | ✅ | 1.85 | `22_edition_guide.md` |
 
-## 六、前沿提案（Preview / Unstable）
+## 六、前沿提案（预研 / 未稳定）
 
 | RFC/跟踪 | 标题 | 状态 | 目标版本 | 概念文件 |
 | :--- | :--- | :---: | :---: | :--- |
-| [RFC 3627](https://rust-lang.github.io/rfcs//3627-match-ergonomics-2024.html) | Return type notation (RTN) | 🚧 | nightly | `12_return_type_notation_preview.md` |
-| 无 RFC | `gen` blocks / sync generators | 🔍 | 1.95+ nightly | `15_gen_blocks_preview.md` |
-| 无 RFC | `unsafe` fields | 🔍 | nightly | `13_unsafe_fields_preview.md` |
+| [RFC 3627](https://rust-lang.github.io/rfcs//3627-match-ergonomics-2024.html) | Return type notation (RTN) | 🚧 | 每日构建版 | `12_return_type_notation_preview.md` |
+| 无 RFC | `gen` blocks / sync generators | 🔍 | 1.95+ 每日构建版 | `15_gen_blocks_preview.md` |
+| 无 RFC | `unsafe` fields | 🔍 | 每日构建版 | `13_unsafe_fields_preview.md` |
 | 无 RFC | Effects system / `const` effects | 🔍 | 远期 | `04_effects_system.md` |
-| 无 RFC | Arbitrary self types v2 | 🔍 | nightly | — |
-| 无 RFC | Async drop | 🔍 | nightly | `18_async_drop_preview.md` |
-| 无 RFC | Specialization (完整版) | 🚧 | nightly | `26_specialization_preview.md` |
-| 无 RFC | Const trait impl | 🚧 | nightly | `11_const_trait_impl_preview.md` |
+| 无 RFC | Arbitrary self types v2 | 🔍 | 每日构建版 | — |
+| 无 RFC | Async drop | 🔍 | 每日构建版 | `18_async_drop_preview.md` |
+| 无 RFC | Specialization (完整版) | 🚧 | 每日构建版 | `26_specialization_preview.md` |
+| 无 RFC | Const trait impl | 🚧 | 每日构建版 | `11_const_trait_impl_preview.md` |
 
 ---
 

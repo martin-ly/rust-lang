@@ -669,7 +669,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 | **E0520** | requires `Sync` bound | 跨线程共享非 Sync 类型 | 使用 `Mutex`/`RwLock` 包装 | [01_concurrency](../../03_advanced/00_concurrency/01_concurrency.md) |
 | **E0596** | cannot borrow data in dereference of ... as mutable | 不可变上下文中需要可变引用 | 检查 `Deref` 返回的是否为 `&mut` | [02_borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
 | **E0603** | module is private | 访问私有模块 | 使用 `pub` 暴露或检查可见性 | [04_type_system](../../01_foundation/02_type_system/04_type_system.md) |
-| **E0658** | feature is unstable | 使用了不稳定特性 | 添加 `#![feature(...)]` 或使用稳定替代 | [03_evolution](../../07_future/04_research_and_experimental/03_evolution.md) |
+| **E0658** | 特性未稳定（E0658） | 使用了不稳定特性 | 添加实验特性门声明或使用稳定替代 | [03_evolution](../../07_future/04_research_and_experimental/03_evolution.md) |
 | **E0716** | temporary value dropped while borrowed | 临时值的引用被延长 | 将临时值绑定到变量 | [03_lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
 
 [来源: [Rust Reference — Compiler Errors](https://doc.rust-lang.org/error_codes/) · [TRPL — Appendix: Error Codes](https://doc.rust-lang.org/book/appendix-02-operators.html)]
@@ -757,7 +757,6 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 > [Authority Source Sprint Batch 8](../02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

@@ -447,8 +447,8 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 分布式执行模型 | 分布式模型理论 | [../../../research_notes/software_design_theory/03_execution_models/05_distributed.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/05_distributed.md) |
-| 组合工程 | 组件组合理论 | [../../../research_notes/software_design_theory/04_compositional_engineering/README.md](../../../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md) |
+| 分布式执行模型 | 分布式模型理论 | [../../../research_notes/software_design_theory/03_execution_models/05_distributed.md](../../../research_notes/software_design_theory/03_execution_models/05_distributed.md) |
+| 组合工程 | 组件组合理论 | [../../../research_notes/software_design_theory/04_compositional_engineering/README.md](../../../research_notes/software_design_theory/04_compositional_engineering/README.md) |
 
 ### 形式化方法 {#形式化方法}
 
@@ -458,7 +458,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| Send/Sync 形式化 | 消息传递安全 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
+| Send/Sync 形式化 | 消息传递安全 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../research_notes/formal_methods/10_send_sync_formalization.md) |
 | 所有权（Ownership）模型 | 状态隔离形式化 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 
 ---

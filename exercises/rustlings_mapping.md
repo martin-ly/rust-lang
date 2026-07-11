@@ -1,7 +1,7 @@
 # Rustlings 习题与项目模块映射表
 
 > **创建日期**: 2026-02-13
-> **用途**: 本项目 C01–C12 模块 ↔ Rustlings 习题主题对应
+> **用途**: 本项目 C01–C17 模块 ↔ Rustlings 习题主题对应
 > **Rustlings 仓库**: <https://github.com/rust-lang/rustlings>
 
 ---
@@ -33,6 +33,11 @@ rustlings watch
 | **C11 宏系统** | 21_macros | [21_macros](https://github.com/rust-lang/rustlings/tree/main/exercises/21_macros) | 学完基础后 |
 | **Unsafe Rust** | - | Rustlings 无 unsafe 专题 | 参考 `exercises/src/unsafe_rust/mod.rs` 与 `exercises/tests/l3_unsafe_rust.rs` |
 | **C12 WASM** | - | Rustlings 无 WASM 专题 | 参考 C12 模块 |
+| **C13 嵌入式** | - | Rustlings 无嵌入式专题 | 最近主题 04_primitive_types；参考 [RBE no_std](https://doc.rust-lang.org/rust-by-example/) 与 C13 模块 |
+| **C14 语义网** | - | Rustlings 无语义网专题 | 参考 C14 模块 |
+| **C15 验证工具** | 22_clippy | [22_clippy](https://github.com/rust-lang/rustlings/tree/main/exercises/22_clippy) | 工具链/代码质量主题最接近；形式化验证参考 C15 模块 |
+| **C16 GUI** | - | Rustlings 无 GUI 专题 | 参考 C16 模块 |
+| **C17 Resolver V3** | 10_modules | [10_modules](https://github.com/rust-lang/rustlings/tree/main/exercises/10_modules) | 模块系统最接近；依赖解析参考 C17 模块 |
 
 ---
 
@@ -100,7 +105,7 @@ rustlings watch
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../concept/00_meta/02_sources/international_authority_index.md)
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新**: 2026-07-12
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -1,6 +1,6 @@
 # 贡献指南
 
-**项目名称**: Rust 算法与数据结构 (Rust 1.89 特性对齐版)
+**项目名称**: Rust 算法与数据结构 (Rust 1.97 特性对齐版)
 **版本**: 1.0
 **创建日期**: 2025年1月27日
 
@@ -55,7 +55,7 @@
 
 ### 1. 前置要求
 
-- **Rust 版本**: 1.89.0 或更高版本
+- **Rust 版本**: 1.97.0 或更高版本
 - **Cargo**: 最新版本
 - **Git**: 用于版本控制
 
@@ -132,7 +132,7 @@ git checkout -b fix/your-bug-fix
 - 使用有意义的变量和函数名
 - 添加适当的注释和文档
 
-#### 4.2 Rust 1.89 特性使用
+#### 4.2 Rust 1.97 特性使用
 
 - 充分利用 `async fn` in traits
 - 使用 GATs 设计灵活的接口
@@ -191,7 +191,7 @@ git add .
 # 2. 提交代码（使用清晰的提交信息）
 git commit -m "feat: add new sorting algorithm
 
-- Implemented async quick sort with Rust 1.89 features
+- Implemented async quick sort with Rust 1.97 features
 - Added parallel processing support
 - Improved performance by 25%
 - Added comprehensive tests"
@@ -415,7 +415,7 @@ mod benchmarks {
 ### 2. 学习资源
 
 - **Rust 官方文档**: <https://doc.rust-lang.org/>
-- **Rust 1.89 特性**: 查看项目文档
+- **Rust 1.97 特性**: 查看项目文档
 - **算法学习**: 推荐经典算法书籍
 - **Rust 最佳实践**: 社区最佳实践指南
 

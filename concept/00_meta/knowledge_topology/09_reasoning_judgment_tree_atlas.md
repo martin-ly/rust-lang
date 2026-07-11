@@ -2,6 +2,7 @@
 
 > **EN**: Reasoning Judgment Tree Atlas
 > **Summary**: Symptom → diagnostic question → root cause → fix strategy concept paths for compiler errors and runtime issues. 编译错误/运行时问题 → 判定问题 → 根因 → 修复策略的概念路径。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **内容分级**: [元层]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -12,6 +13,11 @@
 ## 一、使用说明
 
 本图谱将常见编译错误与运行时问题抽象为**判定树**。每个节点提出一个诊断问题，最终叶子给出根因与应进入的权威概念页。本页不展开具体修复代码，只提供导航。
+
+> **机器可读层**: 本页 §3 的五棵判定树与「闭环增强」的闭环总图，已导出为可遍历的机器可读结构
+> [`decision_trees.yaml`](decision_trees.yaml)（节点 id/类型/判定条件/定量阈值 + 是/否/条件边 + 覆盖概念 + 来源锚点），
+> 由 `python scripts/check_decision_trees.py` 校验结构完整性（无死端、叶子即结论、引用概念在 KG v3 中存在）并统计判定定量占比。
+> §3.1–§3.5 的判定节点（菱形）均含可辩护的定量阈值（别名数、重叠行数、await 点数、报错条数、锁等待环长度等），判定定量占比 21/21 = 100%。
 
 ---
 
@@ -91,7 +97,7 @@ flowchart TD
     R1 --> F1[[添加 where T: Trait]]
     R2 --> F2[[解引用 / 借用 / 使用 Deref]]
     R3 --> F3[[使用 ? / map_err / 定义统一错误类型]]
-    R4 --> F4[[见 Return Type Notation Preview / Async Advanced]]
+    R4 --> F4[[见 Return Type Notation 预研 / Async Advanced]]
     R5 --> F5[修复：加显式类型标注或 turbofish；为自定义类型 derive 或手写所需 trait]
     F1 --> V3[验证回边：cargo check；trait bound/类型推断再 cargo clippy 升 -D warnings]
     F2 --> V3
@@ -139,7 +145,7 @@ flowchart TD
     R1 --> F1[[遵守 Stacked/Tree Borrows / 使用 NonNull]]
     R2 --> F2[[使用 MaybeUninit / 严格初始化]]
     R3 --> F3[[封装 invariant / Safety Tags]]
-    R4 --> F4[[见 Unsafe Rust Patterns / Safety Tags Preview]]
+    R4 --> F4[[见 Unsafe Rust Patterns / Safety Tags 预研]]
     F1 --> V5[验证回边：cargo miri test 检测 Stacked/Tree Borrows；性质用 cargo kani]
     F2 --> V5
     F3 --> V5
@@ -200,8 +206,8 @@ flowchart TD
 | `V1` | §3.1 借用冲突（`J-BORROW-01`） | `cargo check` → `cargo clippy --all-targets -- -D warnings` | [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) |
 | `V2` | §3.2 生命周期（`J-LIFE-02`） | `cargo check` → `cargo clippy --all-targets -- -D warnings` | [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) |
 | `V3` | §3.3 类型不匹配（`J-TYPE-03`） | `cargo check` → `cargo clippy --all-targets -- -D warnings` | [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) |
-| `V4` | §3.4 运行时 panic（`J-PANIC-04`） | `cargo test --all-targets` → `cargo clippy --all-targets -- -W clippy::unwrap_used -W clippy::indexing_slicing -W clippy::await_holding_lock`；可疑 UB 走 `cargo +nightly miri test --all-targets` | [Testing Strategies](../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md) · [Miri](../../04_formal/04_model_checking/31_miri.md) |
-| `V5` | §3.5 unsafe（`J-UNSAFE-05`） | `cargo +nightly miri test --all-targets` → `cargo kani` | [Miri](../../04_formal/04_model_checking/31_miri.md) · [Kani](../../04_formal/04_model_checking/32_kani.md) |
+| `V4` | §3.4 运行时 panic（`J-PANIC-04`） | `cargo test --all-targets` → `cargo clippy --all-targets -- -W clippy::unwrap_used -W clippy::indexing_slicing -W clippy::await_holding_lock`；可疑 UB 走 `cargo miri test --all-targets`（需每日构建版工具链） | [Testing Strategies](../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md) · [Miri](../../04_formal/04_model_checking/31_miri.md) |
+| `V5` | §3.5 unsafe（`J-UNSAFE-05`） | `cargo miri test --all-targets`（需每日构建版工具链） → `cargo kani` | [Miri](../../04_formal/04_model_checking/31_miri.md) · [Kani](../../04_formal/04_model_checking/32_kani.md) |
 
 > 说明：上表 clippy lint（`unwrap_used`/`indexing_slicing`/`await_holding_lock`）为真实 lint 名，但可用性随 toolchain 版本可能调整（⚠需复核）；不确定时退回通用 `cargo clippy --all-targets -- -D warnings`。
 
@@ -246,7 +252,6 @@ flowchart TD
 - 跨文件回边：**7 条**（→ 05：`TH-BORROW-02`/`TH-LIFE-03`/`TH-PIN-07`/`TH-TYPE-04`/`TH-SEND-06`；→ 03：`T-ABS-01`/`T-CONC-01`）。
 
 ---
-
 
 ---
 

@@ -13,7 +13,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 >
-> **研究笔记写作最佳实践** → [research_notes/10_best_practices.md](../../archive/research_notes_2026_06_25/10_best_practices.md)
+> **研究笔记写作最佳实践** → [research_notes/10_best_practices.md](../research_notes/10_best_practices.md)
 > **权威来源**: [concept/06_ecosystem/03_design_patterns/37_pattern_selection_best_practices.md](../../concept/06_ecosystem/03_design_patterns/37_pattern_selection_best_practices.md)
 
 ---
@@ -26,7 +26,7 @@
 
 本文档提供 Rust 项目开发的综合最佳实践，涵盖从代码编写到项目组织的各个方面，合并了项目级代码质量、性能、测试、文档、工具使用等主题。
 
-**形式化引用（Reference）**：T-OW2、T-BR1、T-TY3、SEND-T1、SYNC-T1。综合见 [formal_methods](../../archive/research_notes_2026_06_25/formal_methods/README.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/10_theorem_rust_example_mapping.md)。
+**形式化引用（Reference）**：T-OW2、T-BR1、T-TY3、SEND-T1、SYNC-T1。综合见 [formal_methods](../research_notes/formal_methods/README.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/10_theorem_rust_example_mapping.md)。
 
 ---
 
@@ -371,7 +371,7 @@ println!("运行时长: {:?}", stopped.duration());
 - [Rust 官方文档](https://doc.rust-lang.org/)
 - [Rust API 指南](https://rust-lang.github.io/api-guidelines/)
 - [Rust 性能书](https://nnethercote.github.io/perf-book/)
-- [研究笔记最佳实践](../../archive/research_notes_2026_06_25/10_best_practices.md) - 研究笔记写作规范
+- [研究笔记最佳实践](../research_notes/10_best_practices.md) - 研究笔记写作规范
 
 ### 在线课程 (Coursera) {#在线课程-coursera}
 

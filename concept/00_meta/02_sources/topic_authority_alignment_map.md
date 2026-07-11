@@ -110,8 +110,8 @@
 - `concept/02_intermediate/00_traits/19_advanced_traits.md` — 高级 Trait 主题：从关联类型到特化
 - `concept/02_intermediate/00_traits/28_construction_and_initialization.md` — 构造与初始化：C++ 的构造函数 vs Rust 的结构体字面量
 - `concept/02_intermediate/00_traits/31_derive_traits.md` — 可派生 Trait（Derive Traits）
-- `concept/02_intermediate/00_traits/32_editions.md` — Rust Editions（语言版本）
-- `concept/02_intermediate/00_traits/33_rust_release_process.md` — Rust 发布流程（Rust Release Process）
+- `concept/07_future/00_version_tracking/32_editions.md` — Rust Editions（语言版本）
+- `concept/07_future/00_version_tracking/33_rust_release_process.md` — Rust 发布流程（Rust Release Process）
 - `concept/02_intermediate/01_generics/02_generics.md` — Generics（泛型系统）
 - `concept/02_intermediate/01_generics/23_quiz_traits_and_generics.md` — 测验：Trait 与泛型（试点扩展）
 - `concept/02_intermediate/02_memory_management/03_memory_management.md` — Memory Management（内存管理）
@@ -155,8 +155,8 @@
 - `concept/03_advanced/02_unsafe/12_unsafe_rust_patterns.md` — Unsafe Rust 模式：安全抽象的核心技术
 - `concept/03_advanced/02_unsafe/22_quiz_unsafe.md` — 测验：Unsafe Rust（L3 试点扩展）
 - `concept/03_advanced/02_unsafe/29_memory_model.md` — Rust 内存模型（Memory Model）
-- `concept/03_advanced/02_unsafe/30_rust_runtime.md` — Rust 运行时（The Rust Runtime）
-- `concept/03_advanced/02_unsafe/31_panic.md` — Panic 机制
+- `concept/03_advanced/06_low_level_patterns/30_rust_runtime.md` — Rust 运行时（The Rust Runtime）
+- `concept/02_intermediate/03_error_handling/31_panic.md` — Panic 机制
 - `concept/03_advanced/02_unsafe/35_unsafe_reference.md` — Unsafe 参考（Unsafe Reference）
 - `concept/03_advanced/03_proc_macros/04_macros.md` — Macros（宏系统）
 - `concept/03_advanced/03_proc_macros/07_proc_macro.md` — 过程宏：编译期代码生成的元编程工具
@@ -199,7 +199,7 @@
 - `concept/04_formal/03_operational_semantics/30_aeneas_symbolic_semantics.md` — Aeneas Symbolic Semantics（Aeneas 符号化语义）
 - `concept/04_formal/03_operational_semantics/39_constant_evaluation.md` — 常量求值（Constant Evaluation）
 - `concept/04_formal/04_model_checking/05_verification_toolchain.md` — Verification Toolchain Selection Guide（验证工具链选择指南）
-- `concept/04_formal/04_model_checking/13_formal_methods.md` — 形式化方法在 Rust 中的应用
+- `concept/04_formal/04_model_checking/13_formal_methods.md` — 形式化方法在 Rust 中的应用（2026-07-12 起为重定向 stub，权威页为 `concept/07_future/04_research_and_experimental/02_formal_methods.md`）
 - `concept/04_formal/04_model_checking/16_aerospace_certification_formal_methods.md` — 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)
 - `concept/04_formal/04_model_checking/22_modern_verification_tools.md` — 现代 Rust 验证工具生态（2025-2026）
 - … 共 51 篇
@@ -263,7 +263,7 @@
 ### L07（54 篇）
 
 - `concept/07_future/00_version_tracking/05_rust_version_tracking.md` — Rust 形式模型演进跟踪（1.79–1.97+）
-- `concept/07_future/00_version_tracking/50_nightly_rust.md` — Rust 的发布流程与 Nightly Rust
+- `concept/07_future/00_version_tracking/50_nightly_rust.md` — Rust 的发布流程与每日构建频道
 - `concept/07_future/00_version_tracking/rust_1_95_stabilized.md` — Rust 1.95.0 稳定特性
 - `concept/07_future/00_version_tracking/rust_1_96_stabilized.md` — Rust 1.96 稳定特性（历史版本 patch 1.96.1）
 - `concept/07_future/00_version_tracking/rust_1_97_stabilized.md` — Rust 1.97.0 稳定特性（当前 stable 参考）
@@ -272,7 +272,7 @@
 - `concept/07_future/01_edition_roadmap/19_rust_edition_preview.md` — Rust 2024 Edition (1.85.0+ stable)
 - `concept/07_future/01_edition_roadmap/23_rust_edition_guide.md` — Rust Edition 机制与迁移指南
 - `concept/07_future/01_edition_roadmap/44_edition_guide.md` — Edition 2024 完全指南：新特性与迁移策略
-- `concept/07_future/02_stabilized_features/borrow_sanitizer.md` — BorrowSanitizer：动态别名规则验证工具
+- `concept/07_future/03_preview_features/borrow_sanitizer.md` — BorrowSanitizer：动态别名规则验证工具
 - `concept/07_future/03_preview_features/04_effects_system.md` — Effects System: Concept Pre-study（效果系统：概念预研）
 - `concept/07_future/03_preview_features/07_mcdc_coverage_preview.md` — MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证
 - `concept/07_future/03_preview_features/08_safety_tags_preview.md` — Safety Tags 概念预研：Unsafe 契约的机器可读标注
@@ -281,9 +281,9 @@
 - `concept/07_future/03_preview_features/11_const_trait_impl_preview.md` — Const Trait Impl 预研：常量上下文中的 Trait 泛化
 - `concept/07_future/03_preview_features/12_return_type_notation_preview.md` — Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界
 - `concept/07_future/03_preview_features/13_unsafe_fields_preview.md` — Unsafe Fields 预研：字段级安全边界的精确标注
-- `concept/07_future/03_preview_features/14_lifetime_capture_preview.md` — Lifetime Capture in `impl Trait` Preview
+- `concept/07_future/03_preview_features/14_lifetime_capture_preview.md` — Lifetime Capture in `impl Trait` 预研
 - `concept/07_future/03_preview_features/15_pin_ergonomics_preview.md` — Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`
-- `concept/07_future/03_preview_features/16_type_alias_impl_trait_preview.md` — TAIT Preview
+- `concept/07_future/03_preview_features/16_type_alias_impl_trait_preview.md` — TAIT 预研
 - `concept/07_future/03_preview_features/17_const_trait_preview.md` — Const Trait 实现预览
 - `concept/07_future/03_preview_features/18_async_drop_preview.md` — Async Drop：异步资源的优雅销毁
 - `concept/07_future/03_preview_features/20_borrowsanitizer_preview.md` — BorrowSanitizer 概念预研：运行时借用检查工业化
@@ -291,7 +291,7 @@
 - `concept/07_future/03_preview_features/25_open_enums_preview.md` — Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举
 - `concept/07_future/03_preview_features/26_specialization_preview.md` — Specialization：Trait 实现的精确化与重叠解析
 - `concept/07_future/03_preview_features/27_compile_time_execution.md` — 编译期执行与常量求值
-- `concept/07_future/03_preview_features/30_stable_abi_preview.md` — Stable ABI Preview
+- `concept/07_future/03_preview_features/30_stable_abi_preview.md` — Stable ABI 预研
 - … 共 54 篇
 
 ### L0_meta（3 篇）

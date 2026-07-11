@@ -52,7 +52,7 @@
 
 - ✅ 代码编译状态：无错误
 - ✅ Linter 检查：通过
-- ✅ Cargo.toml 配置：正确（rust-version = "1.92"）
+- ✅ Cargo.toml 配置：正确（rust-version.workspace = true，继承 workspace MSRV 1.97.0）
 
 ---
 

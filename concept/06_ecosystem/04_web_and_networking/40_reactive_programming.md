@@ -9,7 +9,7 @@
 > **Summary**: Reactive and functional reactive programming paradigms in Rust: declarative composition of asynchronous data streams, backpressure, and event-driven architectures.
 >
 > **受众**: [进阶]
-> **Bloom 层级**: L3-L4
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: C×Ana — 分析异步（Async）数据流的声明式组合模式
@@ -31,7 +31,7 @@
 > [Tokio Streams](https://docs.rs/tokio-stream/latest/tokio_stream/) ·
 > [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) ·
 > [RxRust](https://docs.rs/rxrust/latest/rxrust/)
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 
 ## 📑 目录
 
@@ -975,7 +975,7 @@ fn circular_signal_deadlock() {
 > **来源**: [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
 > **来源**: [Tokio mpsc](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
 
-## 相关概念文件
+## 相关概念
 
 - [事件驱动架构](../03_design_patterns/32_event_driven_architecture.md) — 发布-订阅、消息队列、Reactive Streams
 - [CQRS & Event Sourcing](../03_design_patterns/33_cqrs_event_sourcing.md) — 事件流、投影处理器
@@ -987,7 +987,7 @@ fn circular_signal_deadlock() {
 - [范型矩阵](../../05_comparative/00_paradigms/03_paradigm_matrix.md) — 多语言范式对比
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: Reactive Programming & FRP（响应式编程与函数式响应编程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Reactive Programming & FRP（响应式编程与函数式响应编程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Reactive Programming & FRP（响应式编程与函数式响应编程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

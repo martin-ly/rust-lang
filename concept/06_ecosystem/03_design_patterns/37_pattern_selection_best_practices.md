@@ -4,11 +4,12 @@
 >
 > **EN**: Pattern Selection Best Practices
 > **Summary**: Provides a systematic guide for selecting design patterns in Rust, including decision trees, scenario-driven recommendations, anti-patterns, pattern composition, Rust-specific concerns, and production checklists.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **内容分级**: [参考级]
 > **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+P** — Application + Procedure
+> **A/S/P 标记**: **P+A** — Procedure + Application
 > **双维定位**: A×Eva — 评估模式选型
 > **前置依赖**: [Design Patterns](02_patterns.md) · [Pattern Implementation Comparison](36_pattern_implementation_comparison.md)
 > **后置概念**: [Engineering and Production Patterns](82_engineering_and_production_patterns.md) · [Architecture Patterns](35_architecture_patterns.md)

@@ -890,9 +890,9 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
 这些示例可帮助你把 Cargo 的核心命令串成完整工作流：
 
 - **Cargo 项目模板（文档示例，已归档）**：`archive/cargo_package_management_from_c02/examples/`
-  - [简单 CLI 项目](../../../archive/cargo_package_management_from_c02/examples/01_simple_cli.md)
-  - [带 features 的库](../../../archive/cargo_package_management_from_c02/examples/02_library_with_features.md)
-  - [Workspace 项目](../../../archive/cargo_package_management_from_c02/examples/03_workspace_project.md)
+  - [简单 CLI 项目](../../../archive/cargo_package_management_from_c02/examples/01_simple_cli.md)（归档只读）
+  - [带 features 的库](../../../archive/cargo_package_management_from_c02/examples/02_library_with_features.md)（归档只读）
+  - [Workspace 项目](../../../archive/cargo_package_management_from_c02/examples/03_workspace_project.md)（归档只读）
 - **运行 examples（真实 workspace 例子）**：
   - `cargo run -p c03_control_fn --example control_flow_example`
   - `cargo run -p c05_threads --example message_passing_demo`
@@ -1060,9 +1060,9 @@ $ cargo bloat --release
 
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
-| **类型系统（Type System）** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 依赖版本解析的类型理论 |
-| **类型构造** | [construction_capability](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) | 包组合的类型构造能力 |
-| **Trait 系统** | [trait_system_formalization](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) | 特征组合的兼容性 |
+| **类型系统（Type System）** | [type_system_foundations](../../research_notes/type_theory/10_type_system_foundations.md) | 依赖版本解析的类型理论 |
+| **类型构造** | [construction_capability](../../research_notes/type_theory/10_construction_capability.md) | 包组合的类型构造能力 |
+| **Trait 系统** | [trait_system_formalization](../../research_notes/type_theory/10_trait_system_formalization.md) | 特征组合的兼容性 |
 
 ### 形式化定理 {#形式化定理}
 >
@@ -1070,7 +1070,7 @@ $ cargo bloat --release
 
 **定理 CARGO-T1（依赖解析正确性）**: 若 Cargo.toml 中的依赖约束可满足，则存在唯一的版本选择满足所有约束。
 
-*证明*: 由 [construction_capability](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) 定理 TCON-T1，依赖版本选择作为类型构造问题，满足确定性判定。∎
+*证明*: 由 [construction_capability](../../research_notes/type_theory/10_construction_capability.md) 定理 TCON-T1，依赖版本选择作为类型构造问题，满足确定性判定。∎
 
 ---
 

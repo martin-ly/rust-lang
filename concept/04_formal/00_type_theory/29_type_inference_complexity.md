@@ -388,6 +388,6 @@ PSPACE-完全。Rehman et al. (2023) 给出 Rust 类型推断复杂度的 PSPACE
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-25
 **状态**: ✅ 权威来源对齐完成 (Batch L4)

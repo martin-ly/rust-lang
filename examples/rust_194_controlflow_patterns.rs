@@ -34,7 +34,7 @@ impl ConnectionPool {
     pub fn has_available(&self) -> bool {
         matches!(
             self.connections.iter().try_fold(
-                ControlFlow::Continue(()),
+                (),
                 |_, conn| {
                     if conn.is_available() {
                         ControlFlow::Break(true)
@@ -51,7 +51,7 @@ impl ConnectionPool {
     /// first
     pub fn find_first_available(&self) -> Option<&Connection> {
         match self.connections.iter().try_fold(
-            ControlFlow::Continue(None),
+            None::<&Connection>,
             |_, conn| {
                 if conn.is_available() {
                     ControlFlow::Break(Some(conn))
@@ -69,7 +69,7 @@ impl ConnectionPool {
     /// ，first
     pub fn find_first_invalid(&self) -> Option<&Connection> {
         match self.connections.iter().try_fold(
-            ControlFlow::Continue(()),
+            (),
             |_, conn| {
                 if conn.is_valid() {
                     ControlFlow::Continue(())
@@ -157,12 +157,13 @@ impl<T: Clone> BatchProcessor<T> {
                 Err(e) => {
                     failed.push((item.clone(), e));
                     if failed.len() >= self.config.error_threshold {
+                        let actual = failed.len();
                         return BatchResult {
                             processed,
                             failed,
                             reason: CompletionReason::ErrorThresholdReached {
                                 threshold: self.config.error_threshold,
-                                actual: failed.len(),
+                                actual,
                             },
                         };
                     }

@@ -2,6 +2,7 @@
 
 > **EN**: Patterns
 > **Summary**: Rust 模式匹配的权威规范：解构、可反驳性、各种模式形式（literal、identifier、wildcard、rest、range、reference、struct、tuple、slice、path、or-patterns）及其绑定模式。 Authoritative specification of Rust pattern matching: destructuring, refutability, all pattern forms, and binding modes.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者]
 > **内容分级**: [综述级]
@@ -23,6 +24,7 @@
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ---
+
 ## 一、什么是模式
 
 **模式（pattern）** 用于将值与结构进行匹配，并可选地将变量绑定到这些结构内部的值。模式还用于变量声明、函数/闭包（Closures）参数等场景。
@@ -211,7 +213,10 @@ Rust 编译器检查 `match` 表达式是否穷尽所有可能的值。不可穷
 
 ---
 
-## 六、关联概念
+## 六、相关概念
+- **上层概念**: [Type System](../02_type_system/04_type_system.md) · [Control Flow](07_control_flow.md) · [Enums and Variants](../02_type_system/04_type_system.md)
+- **下层概念**: [Match Expressions](41_statements_and_expressions.md) · [Destructuring](../../02_intermediate/01_generics/02_generics.md) · [Refutability Analysis](../../02_intermediate/04_types_and_conversions/20_type_system_advanced.md)
+
 
 | 概念 | 关系 |
 |:---|:---|

@@ -4,6 +4,7 @@
 >
 > **EN**: Stable Application Binary Interface (ABI) Preview
 > **Summary**: Preview of Rust's long-term effort to define a stable ABI (`crabi`) for cross-version dynamic linking and FFI, currently experimental and under discussion.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: 🧪 设计/MCP 阶段；`crabi` 提案仍在讨论
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

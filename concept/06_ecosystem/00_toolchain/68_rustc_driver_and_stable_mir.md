@@ -38,7 +38,7 @@
   - [六、典型应用场景](#六典型应用场景)
   - [嵌入式测验](#嵌入式测验)
     - [测验 1：`rustc_driver` 和 `rustc_interface` 的主要区别是什么？](#测验-1rustc_driver-和-rustc_interface-的主要区别是什么)
-    - [测验 2：外部 crate 使用 `rustc_driver` 需要什么 nightly feature 和组件？](#测验-2外部-crate-使用-rustc_driver-需要什么-nightly-feature-和组件)
+    - [测验 2：外部 crate 使用 `rustc_driver` 需要什么每日构建版特性门和组件？](#测验-2外部-crate-使用-rustc_driver-需要什么每日构建版特性门和组件)
     - [测验 3：Stable MIR（rustc\_public）试图解决什么问题？](#测验-3stable-mirrustc_public试图解决什么问题)
     - [测验 4：为什么 rustdoc 更适合用 `rustc_interface` 而不是 `rustc_driver`？](#测验-4为什么-rustdoc-更适合用-rustc_interface-而不是-rustc_driver)
   - [权威来源索引](#权威来源索引)
@@ -65,7 +65,7 @@
 `rustc_driver::run_compiler` 等价于命令行 `rustc` 的 `main` 函数：
 
 ```rust,ignore
-#![feature(rustc_private)]
+// 需启用实验特性门 rustc_private（每日构建版工具链）
 
 extern crate rustc_driver;
 extern crate rustc_interface;
@@ -133,7 +133,7 @@ interface::run_compiler(config, |compiler| {
 
 ## 四、`rustc_private` 与外部 Driver
 
-要在 crate 外部使用 rustc 内部 API，需要启用 `#![feature(rustc_private)]` 并安装额外组件：
+要在 crate 外部使用 rustc 内部 API，需要启用实验特性门 `rustc_private` 并安装额外组件：
 
 ```bash
 rustup component add rustc-dev llvm-tools
@@ -168,7 +168,7 @@ rustup component add rustc-dev llvm-tools
 - SemVer 版本控制；
 - 最终发布到 crates.io，使工具无需依赖 `rustc_private`。
 
-目前仍在 nightly 迭代，预计会先发布 crate 到 crates.io（Rust Project Goal 2025 H1）。
+目前仍在每日构建版迭代，预计会先发布 crate 到 crates.io（Rust Project Goal 2025 H1）。
 
 > [Rust Project Goals — StableMIR](https://rust-lang.github.io/rust-project-goals/2025h1/stable-mir.html)(<https://rust-lang.github.io/rust-project-goals/2025h1/stable-mir.html>)
 
@@ -198,12 +198,12 @@ rustup component add rustc-dev llvm-tools
 
 ---
 
-### 测验 2：外部 crate 使用 `rustc_driver` 需要什么 nightly feature 和组件？
+### 测验 2：外部 crate 使用 `rustc_driver` 需要什么每日构建版特性门和组件？
 
 <details>
 <summary>✅ 答案与解析</summary>
 
-需要 `#![feature(rustc_private)]`，并安装 `rustc-dev` 和 `llvm-tools` 组件。
+需要启用实验特性门 `rustc_private`，并安装 `rustc-dev` 和 `llvm-tools` 组件。
 
 </details>
 
@@ -246,6 +246,6 @@ rustdoc 需要拿到类型检查结果来生成文档，但不需要生成二进
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 / rustc_driver / Stable MIR 项目目标
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Rustc Dev Guide driver/interface 文档

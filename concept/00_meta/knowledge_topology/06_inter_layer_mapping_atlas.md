@@ -2,6 +2,7 @@
 
 > **EN**: Inter-Layer Mapping Atlas
 > **Summary**: L0–L7 各层之间的依赖、蕴含、反馈关系，基于前置/后置概念引用统计。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **内容分级**: [元层]
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)

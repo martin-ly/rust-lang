@@ -31,10 +31,10 @@
 
 ---
 
-> ⚠️ **不稳定特性警告**: 本文件包含 `#![feature(...)]` 标注的代码示例，需要 **nightly 工具链** 编译。
+> ⚠️ **不稳定特性警告**: 本文件包含实验特性门（feature gate）标注的代码示例，需要**每日构建版工具链**编译。
 >
-> **使用方式**: `rustup run nightly rustc ...` 或 `cargo +nightly ...`
-> **状态查询**: <https://doc.rust-lang.org/nightly/unstable-book/index.html>
+> **使用方式**: 通过 `rustup` 安装每日构建版工具链后，以 `cargo +<每日构建版工具链> ...` 运行
+> **状态查询**: Rust 实验特性手册（随每日构建版发布）
 > **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
 
 ---
@@ -918,10 +918,10 @@ cargo install cargo-expand
 cargo expand --lib path::to::module::function_name
 ```
 
-**技巧 2：使用 `trace_macros!` 调试匹配过程**（nightly）
+**技巧 2：使用 `trace_macros!` 调试匹配过程**（每日构建版）
 
 ```rust
-#![feature(trace_macros)]
+// 需启用实验特性门 trace_macros（每日构建版工具链）
 
 macro_rules! test {
     ($x:expr) => { $x + 1 };
@@ -1946,7 +1946,7 @@ macro_rules! trace_fn {
 ### 6. `macro_rules!` 与 `macro` 关键字（声明宏 2.0）的演进对比
 
 > **[RFC 1584: Macros](https://rust-lang.github.io/rfcs/1584-macros.html)** `macro` 关键字（声明宏 2.0）旨在解决 `macro_rules!` 的诸多限制：更好的作用域控制、模块（Module）路径支持、可见性修饰符，以及更像函数的语法。✅ 已验证
-> **[Rust Reference: macro keyword](https://doc.rust-lang.org/reference/introduction.html)** 截至 Rust 1.78，`macro` 关键字仍为不稳定特性（`#![feature(decl_macro)]`），但已在 `std` 内部广泛使用（如 `vec!`、`println!` 的标准库实现已迁移）。✅ 已验证
+> **[Rust Reference: macro keyword](https://doc.rust-lang.org/reference/introduction.html)** 截至 Rust 1.78，`macro` 关键字仍为不稳定特性（实验特性门 `decl_macro`），但已在 `std` 内部广泛使用（如 `vec!`、`println!` 的标准库实现已迁移）。✅ 已验证
 
 **`macro_rules!` 的局限性**
 
@@ -1961,8 +1961,8 @@ macro_rules! trace_fn {
 **`macro` 关键字的改进**
 
 ```rust,ignore
-// ✅ macro 关键字语法（不稳定，需 #![feature(decl_macro)]）
-#![feature(decl_macro)]
+// ✅ macro 关键字语法（不稳定，需启用实验特性门 decl_macro）
+// 需启用实验特性门 decl_macro（每日构建版工具链）
 
 pub(crate) macro my_vec {
     ($($x:expr),* $(,)?) => {
@@ -2002,8 +2002,8 @@ macro（声明宏 2.0，不稳定）:
 
 ```rust
 // ❌ 反例: macro 关键字尚未稳定，不能在 stable Rust 使用
-// 以下代码仅在 nightly 编译：
-#![feature(decl_macro)]
+// 以下代码仅在每日构建版编译：
+// 需启用实验特性门 decl_macro（每日构建版工具链）
 
 macro greet {
     () => { println!("Hello!"); },
@@ -2098,6 +2098,8 @@ mod internal {
 ---
 
 ## 相关概念链接
+- **上层概念**: 无（入口概念，无前置依赖）
+
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -2127,7 +2129,7 @@ mod internal {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -2176,7 +2178,7 @@ pub fn my_debug(input: TokenStream) -> TokenStream {
 // struct Point { x: i32, y: i32 }
 ```
 
-> **修正**: 过程宏（procedural macro）是 Rust 的**编译期代码生成**机制，三类：1) `#[proc_macro_derive]` — 自定义 derive；2) `#[proc_macro_attribute]` — 自定义属性；3) `#[proc_macro]` — 函数式宏。过程宏 crate 的特殊要求：1) `Cargo.toml` 中 `crate-type = ["proc-macro"]`；2) 只能导出过程宏，无其他公共 API；3) 依赖 `proc_macro` crate（编译器提供的 API）。常见第三方库：`proc-macro2`（与 `proc_macro` 兼容但可测试）、`quote`（生成 TokenStream）、`syn`（解析 TokenStream 为 AST）。过程宏的错误处理（Error Handling）：`compile_error!` 在生成的代码中插入编译错误，或使用 `proc_macro::Diagnostic`（nightly）。这与 C 的预处理器宏（纯文本替换）或 Lisp 的宏（代码即数据，同语言操作）不同——Rust 的过程宏操作的是 Token 流，在编译器的宏展开阶段执行。[来源: [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
+> **修正**: 过程宏（procedural macro）是 Rust 的**编译期代码生成**机制，三类：1) `#[proc_macro_derive]` — 自定义 derive；2) `#[proc_macro_attribute]` — 自定义属性；3) `#[proc_macro]` — 函数式宏。过程宏 crate 的特殊要求：1) `Cargo.toml` 中 `crate-type = ["proc-macro"]`；2) 只能导出过程宏，无其他公共 API；3) 依赖 `proc_macro` crate（编译器提供的 API）。常见第三方库：`proc-macro2`（与 `proc_macro` 兼容但可测试）、`quote`（生成 TokenStream）、`syn`（解析 TokenStream 为 AST）。过程宏的错误处理（Error Handling）：`compile_error!` 在生成的代码中插入编译错误，或使用 `proc_macro::Diagnostic`（每日构建版）。这与 C 的预处理器宏（纯文本替换）或 Lisp 的宏（代码即数据，同语言操作）不同——Rust 的过程宏操作的是 Token 流，在编译器的宏展开阶段执行。[来源: [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
 
 ### 10.4 边界测试：声明宏的 hygiene 与跨 crate 标识符冲突（编译错误）
 
@@ -2208,7 +2210,6 @@ fn main() {}
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## `expr` → `cfg` 迁移（Rust 1.96）
 

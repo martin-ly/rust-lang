@@ -231,7 +231,7 @@ Stage 1 是用 stage0（旧 beta）编译当前源码得到的；Stage 2 是用 
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 / rustc bootstrap 文档
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Rustc Dev Guide bootstrapping 文档
 

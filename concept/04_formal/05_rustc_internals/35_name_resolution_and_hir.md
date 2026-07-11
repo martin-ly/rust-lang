@@ -208,7 +208,7 @@ cargo rustc -- -Z unpretty=hir
 cargo rustc -- -Z unpretty=hir-tree
 ```
 
-> ⚠️ 这些选项需要 nightly 工具链。
+> ⚠️ 这些选项需要每日构建版工具链。
 
 ---
 
@@ -299,7 +299,7 @@ HIR 更接近编译器分析的需要：做了部分解糖（如 `for` 循环变
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

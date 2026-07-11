@@ -8,7 +8,7 @@
 > **内容分级**: [专家级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
-> **A/S/P 标记**: **A+S+P** — 全维度
+> **A/S/P 标记**: **S+A+P** — 全维度
 > **双维定位**: P×Cre — 设计 ECS 游戏架构
 > **前置概念**: · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 >
@@ -31,10 +31,10 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> ⚠️ **不稳定特性警告**: 本文件包含 `#![feature(...)]` 标注的代码示例，需要 **nightly 工具链** 编译。
+> ⚠️ **不稳定特性警告**: 本文件包含实验特性门（feature gate）标注的代码示例，需要**每日构建版工具链**编译。
 >
-> **使用方式**: `rustup run nightly rustc ...` 或 `cargo +nightly ...`
-> **状态查询**: <https://doc.rust-lang.org/nightly/unstable-book/index.html>
+> **使用方式**: 通过 `rustup` 安装每日构建版工具链后，以 `cargo +<每日构建版工具链> ...` 运行
+> **状态查询**: Rust 实验特性手册（随每日构建版发布）
 > **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
 
 ---
@@ -368,7 +368,6 @@ queue.submit(std::iter::once(encoder.finish()));
 
 ### 2.4 `no_std` 游戏开发与 ECS 约束
 
-
 当游戏目标平台从桌面/主机收缩到嵌入式 MCU、复古掌机或 FPGA 仿真器时，`std` 的缺失（`no_std`）成为首要约束。ECS 架构在此环境下的适配不仅涉及 API 裁剪，更触及 Rust 所有权（Ownership）模型的深层表达——从动态堆分配到编译期静态布局，从 `HashMap` 到固定数组，每一处替代都对应着资源受限场景下的工程权衡。
 
 #### 2.4.1 `no_std` 环境下 ECS 的核心约束
@@ -565,7 +564,7 @@ enum Command {
 
 ```rust,ignore
 #![no_std]
-#![feature(lang_items)]
+// 需启用实验特性门 lang_items（每日构建版工具链，no_std 场景）
 extern crate alloc;
 
 use alloc::vec::Vec;
@@ -1166,7 +1165,7 @@ struct ChildOf {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

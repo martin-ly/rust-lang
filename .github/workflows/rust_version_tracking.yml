@@ -1,3 +1,5 @@
+# 版本跟踪权威工作流（2026-07-12 确认）：rust_version_tracker.yml 与 version_tracking.yml
+# 与本文件真重复，已标记 DEPRECATED 并停用调度；版本跟踪统一由本文件负责。
 name: Rust Version Tracking
 
 on:

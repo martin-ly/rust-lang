@@ -3,7 +3,7 @@
 > 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
-> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI 第 2 版（wasip2）对应目标为 **`wasm32-wasip2`**。
 
 ---
 
@@ -2026,7 +2026,7 @@ fn test_mutex_concurrent_access() {
 | 执行方式 | 模型检测（穷举交错） | 解释执行（动态分析） |
 | 覆盖范围 | 小状态空间（需控制并发度） | 单执行路径 |
 | 适用场景 | 验证并发算法正确性 | 验证 unsafe 代码内存安全（Memory Safety） |
-| 使用方式 | 替换 `std::sync` 为 `loom::sync` | `cargo +nightly miri test` |
+| 使用方式 | 替换 `std::sync` 为 `loom::sync` | `cargo miri test`（需每日构建版工具链） |
 
 **反例：loom 状态空间爆炸**
 
@@ -2430,7 +2430,7 @@ impl AsyncProcessor for MyProcessor {
 ```text
 1. AFIT 方法不能直接用 dyn Trait（类型擦除问题）
    解决: 使用 `async_trait` crate（当前 stable 主流）、`dynosaur 0.3.1`（stable 兼容的 dyn async trait 宏，MSRV 1.75），或手动 Box::pin
-   注意: 原生 AFIDT（`async fn in dyn trait`）截至 2026-07-09 仍未进入 stable Rust。Rust 1.97.0 stable 下含 `async fn` 的 trait 仍不是 dyn-compatible；nightly 上仍需 `#![feature(async_fn_in_dyn_trait)]` 且编译器标记其为 incomplete feature。跟踪 issue [rust-lang/rust#133119](https://github.com/rust-lang/rust/issues/133119)。
+   注意: 原生 AFIDT（`async fn in dyn trait`）截至 2026-07-09 仍未进入 stable Rust。Rust 1.97.0 stable 下含 `async fn` 的 trait 仍不是 dyn-compatible；每日构建版上仍需启用实验特性门 `async_fn_in_dyn_trait`，且编译器标记其为 incomplete feature。跟踪 issue [rust-lang/rust#133119](https://github.com/rust-lang/rust/issues/133119)。
 
 2. 关联类型生命周期推断可能复杂
    解决: 显式标注或简化签名
@@ -2576,7 +2576,7 @@ async fn async_fn(f: impl AsyncFn(i32) -> i32) -> i32 { f(42).await }
 
 ## 十三、`gen` blocks：同步协程的语义定位
 
-> **稳定版本**: Rust 1.95 (stable，需 nightly feature gate) · **预计全面稳定**: 1.98+
+> **稳定版本**: Rust 1.95 (stable，需每日构建版特性门) · **预计全面稳定**: 1.98+
 > **形式化意义**: 同步协程（Coroutine）的语法糖——`Iterator` 状态机的自动化生成
 
 ### 13.1 语法与语义
@@ -2638,6 +2638,9 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 ---
 
 ## 相关概念链接
+- **上层概念**: [L2 泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md)
+- **下层概念**: [L4 异步（Async）语义形式化](../../04_formal/01_ownership_logic/03_ownership_formal.md) · [L6 Tokio](../../06_ecosystem/02_core_crates/03_core_crates.md) · [L7 效果系统](../../07_future/03_preview_features/04_effects_system.md)
+
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -2650,6 +2653,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | Rust 版本特性演进 | [](../../07_future/00_version_tracking/05_rust_version_tracking.md) | `AsyncFn`、`gen` blocks 等异步语义扩展 |
 | 泛型（Generics）与类型系统（Type System） | [](../../02_intermediate/01_generics/02_generics.md) | `use<..>` precise capturing、GATs |
 | Unsafe 权限分离 | [](../02_unsafe/03_unsafe.md) | `unsafe_op_in_unsafe_fn` 的权限模型 |
+| Async 边界全景 | [38_async_boundary_panorama.md](38_async_boundary_panorama.md) | 边界视角汇总（概念推导在本页，边界全景在该页） |
 
 > **过渡: L3 → L2**
 > `async fn` 的本质是状态机——编译器将 `await` 点转换为 enum 变体。这种转换依赖于泛型（Generics）（`impl Future<Output = T>`）和 Trait（`Future::poll`）的协同。理解 async 的底层实现，需要回到泛型和 Trait 的基础。
@@ -2678,7 +2682,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 > **权威来源对齐变更日志**: 2026-07-10 Stage F L3 更新权威来源块 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -2900,7 +2904,7 @@ impl Service for MyService {
 fn main() {}
 ```
 
-> **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75.0+ 已稳定！）。`async_trait` crate 提供过程宏（Procedural Macro） workaround：`// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75.0+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait`（或 `dynosaur 0.3.1` 等 stable 宏）或手动 `Box::pin`；原生 AFIDT 仍为 nightly 实验（[#133119](https://github.com/rust-lang/rust/issues/133119)）。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/async-trait/latest/async_trait/)]
+> **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75.0+ 已稳定！）。`async_trait` crate 提供过程宏（Procedural Macro） workaround：`// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75.0+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait`（或 `dynosaur 0.3.1` 等 stable 宏）或手动 `Box::pin`；原生 AFIDT 仍为每日构建版实验（[#133119](https://github.com/rust-lang/rust/issues/133119)）。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/async-trait/latest/async_trait/)]
 
 ## 逆向推理链（Backward Reasoning）
 
@@ -2926,7 +2930,6 @@ fn main() {}
 > [来源: [Tokio Documentation](https://tokio.rs/)]
 > [来源: [Tokio crate](https://docs.rs/Tokio/)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 
@@ -3171,7 +3174,7 @@ async fn safe_operation() -> std::io::Result<()> {
 > 请注意：
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
-> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI 第 2 版（wasip2）对应目标为 **`wasm32-wasip2`**。
 
 ---
 

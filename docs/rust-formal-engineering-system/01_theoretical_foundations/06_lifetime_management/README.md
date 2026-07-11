@@ -31,8 +31,8 @@
 | **生命周期形式化** | ../../../research_notes/formal_methods/10_lifetime_formalization.md | 区域理论、生命周期约束 |
 | **型变理论** | [../../../research_notes/type_theory/10_variance_theory.md](../../../research_notes/type_theory/10_variance_theory.md) | 生命周期与子类型关系 |
 | **借用（Borrowing）检查器证明** | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) | 生命周期验证的形式化 |
-| **证明索引** | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) | 生命周期相关证明 |
-| **工具指南** | [../../../research_notes/10_tools_guide.md](../../../../archive/research_notes_2026_06_25/10_tools_guide.md) | 生命周期验证工具 |
+| **证明索引** | [../../../research_notes/10_proof_index.md](../../../research_notes/10_proof_index.md) | 生命周期相关证明 |
+| **工具指南** | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) | 生命周期验证工具 |
 
 ---
 

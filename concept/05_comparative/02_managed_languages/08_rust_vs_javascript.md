@@ -478,7 +478,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [WebAssembly](../../06_ecosystem/11_domain_applications/11_webassembly.md) — WebAssembly 生态
 - [Async](../../03_advanced/01_async/02_async.md) — 异步编程
@@ -492,7 +492,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

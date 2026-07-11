@@ -3,7 +3,7 @@
 
 # Tier 2: 进程管理快速入门
 
-> **权威来源**: [concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md](../../../../concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md)
+> **权威来源**: [concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md](../../../../concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md)
 
 本文件为 `crates/c07_process` 的专题实践材料。通用 Rust 进程模型与生命周期概念请参见上方权威页；完整代码示例、练习与案例仍保留在本书。
 

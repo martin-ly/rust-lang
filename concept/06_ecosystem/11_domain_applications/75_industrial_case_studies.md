@@ -7,7 +7,7 @@
 > **内容分级**: [专家级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **代码状态**: [示例级 — 已补充代码]
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **来源**: [Rust in Production](https://www.rust-lang.org/) · [Rust Foundation](https://foundation.rust-lang.org/) · [PyO3](https://pyo3.rs/) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -360,7 +360,7 @@ fn main() {
 ---
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+
+**Rust 版本**: 1.97.0+
 **最后更新**: 2026-06-01
 **状态**: ✅ 概念文档创建完成
 

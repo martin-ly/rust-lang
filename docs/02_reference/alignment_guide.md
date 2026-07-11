@@ -49,7 +49,7 @@
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 > **说明**：此处「对齐」指项目文档与官方发布的一致性（Coherence），与内存对齐无技术关联。技术读者可跳过。
 
-版本追踪与权威来源： [版本对齐检查清单](../00_meta/00_rust_version_alignment_checklist.md)、[INCREMENTAL_UPDATE_FLOW](../../archive/research_notes_2026_06_25/10_incremental_update_flow.md)。
+版本追踪与权威来源： [版本对齐检查清单](../00_meta/00_rust_version_alignment_checklist.md)、[INCREMENTAL_UPDATE_FLOW](../research_notes/10_incremental_update_flow.md)。
 
 ---
 
@@ -109,8 +109,8 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ownership_model](../research_notes/formal_methods/10_ownership_model.md) - transmute 形式化约束
-- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../../archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md) - 指针有效性
-- [memory_analysis](../../archive/research_notes_2026_06_25/experiments/10_memory_analysis.md) - align_of 实验
+- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 指针有效性
+- [memory_analysis](../research_notes/experiments/10_memory_analysis.md) - align_of 实验
 
 ---
 

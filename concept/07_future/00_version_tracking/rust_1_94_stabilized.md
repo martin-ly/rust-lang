@@ -6,7 +6,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: A×Ref — 版本特性参考
-> **前置依赖**: [Rust Version Tracking](05_rust_version_tracking.md) · [Networking Basics](../../06_ecosystem/09_networking/06_networking_basics.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
+> **前置依赖**: [Rust Version Tracking](05_rust_version_tracking.md) · [Networking Basics](../../06_ecosystem/12_networking/06_networking_basics.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
 > **后置概念**: [Rust 1.95 Stabilized](rust_1_95_stabilized.md) · [Network Protocols](../../06_ecosystem/04_web_and_networking/38_network_protocols.md)
 > **定理链**: Version Context ⟹ Feature Set ⟹ Migration Impact
 >
@@ -124,7 +124,6 @@ pub fn advanced_example<T>(value: T) -> T {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -254,7 +253,6 @@ pub fn advanced_example<T>(value: T) -> T {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -384,7 +382,6 @@ pub fn advanced_example<T>(value: T) -> T {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

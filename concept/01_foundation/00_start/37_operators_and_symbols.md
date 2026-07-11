@@ -4,6 +4,7 @@
 
 > **EN**: Operators and Symbols
 > **Summary**: Rust 语法中运算符与各类符号的速查参考，包括可重载运算符对应的 trait、路径/泛型/trait bound/宏（Macro）/注释/括号等上下文中的符号含义。 Quick reference of Rust operators and symbols, including overloadable traits and meanings in paths, generics, trait bounds, macros, comments, and brackets.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者] / [中级]
 > **Bloom 层级**: L1-L2
@@ -24,6 +25,7 @@
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ---
+
 ## 一、运算符
 
 > (Source: [Rust Reference — Tokens](https://doc.rust-lang.org/reference/tokens.html))
@@ -214,7 +216,7 @@
 
 ---
 
-## 九、关联概念
+## 九、相关概念
 
 | 概念 | 关系 |
 |:---|:---|

@@ -4,8 +4,10 @@
 >
 > **EN**: Rust 1.98+ Preview
 > **Summary**: Rust 1.98 and beyond: nightly language features, compiler infrastructure, and ecosystem trends tracked for future stabilization.
+> **Rust 版本**: 1.98.0 (nightly preview)
 >
 > **受众**: [专家]
+> **Bloom 层级**: L2-L3
 > **内容分级**: [实验级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **跟踪版本**: nightly 1.99.0 (2026-06-22)
@@ -317,7 +319,7 @@ fn demo_stable_apis() {
 ### 2.3 Nightly 探测结果（2026-06-28）
 
 > 探测脚本: [`scripts/probe_rust_198_apis.rs`](../../../scripts/probe_rust_198_apis.rs)
-> 完整报告: [`archive/reports/2026_07/RUST_198_NIGHTLY_PROBE_2026_06_28.md`](../../../archive/reports/2026_07/RUST_198_NIGHTLY_PROBE_2026_06_28.md)
+> 完整报告: [`archive/reports/2026_07/RUST_198_NIGHTLY_PROBE_2026_06_28.md`](../../../archive/reports/2026_07/RUST_198_NIGHTLY_PROBE_2026_06_28.md)（归档只读）
 
 使用 `rustc 1.98.0-nightly (2026-06-26)` 对 17 项候选 API 进行无 feature gate 编译探测：
 

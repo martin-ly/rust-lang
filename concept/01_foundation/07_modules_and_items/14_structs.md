@@ -4,6 +4,7 @@
 >
 > **EN**: Structs
 > **Summary**: Structs: Rust's custom product type, covering named-field structs, tuple structs, unit-like structs, struct update syntax, methods, and field visibility.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [初学者]
 > **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。

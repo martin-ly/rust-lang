@@ -432,7 +432,7 @@ graph TD
 ---
 
 ```rust
-// 自定义分配器示例（需要 nightly）
+// 自定义分配器示例（需要每日构建版工具链）
 use std::alloc::{GlobalAlloc, Layout, System};
 
 struct MyAllocator;
@@ -486,7 +486,7 @@ fn main() {
 }
 ```
 
-## 相关概念文件
+## 相关概念
 
 - [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) — 内存管理基础
 - [Unsafe Rust](../02_unsafe/03_unsafe.md) — unsafe Rust 基础
@@ -500,7 +500,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -555,21 +555,21 @@ unsafe impl GlobalAlloc for MyAlloc {
 
 fn main() {
     // ❌ 编译错误: Vec 的自定义分配器参数不稳定
-    // Rust 1.95+ 中 Vec<T, A> 的分配器参数仍为 nightly 特性
+    // Rust 1.95+ 中 Vec<T, A> 的分配器参数仍为每日构建版特性
     let _v: Vec<i32, MyAlloc> = Vec::new();
 }
 
-// 正确: 使用 nightly feature
-#![feature(allocator_api)]
+// 正确: 使用每日构建版特性门
+// 需启用实验特性门 allocator_api（每日构建版工具链）
 
 use std::alloc::Allocator;
 
 fn fixed() {
-    // let _v = Vec::new_in(MyAlloc); // nightly 支持
+    // let _v = Vec::new_in(MyAlloc); // 每日构建版支持
 }
 ```
 
-> **修正**: Rust 的自定义分配器 API（`Allocator` trait）截至 1.95+ 仍为**不稳定特性**（`#![feature(allocator_api)]`）。`Vec<T, A>`、`Box<T, A>` 等类型的第二个泛型（Generics）参数只在 nightly 可用。稳定 Rust 中，自定义分配通常通过全局分配器替换（`#[global_allocator]`）实现，而非为单个集合指定分配器。这与 C++ 的 `std::allocator`（稳定且广泛使用）形成对比——Rust 的分配器设计更强调全局优化和安全性，牺牲了部分灵活性。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)]
+> **修正**: Rust 的自定义分配器 API（`Allocator` trait）截至 1.95+ 仍为**不稳定特性**（实验特性门 `allocator_api`）。`Vec<T, A>`、`Box<T, A>` 等类型的第二个泛型（Generics）参数只在每日构建版可用。稳定 Rust 中，自定义分配通常通过全局分配器替换（`#[global_allocator]`）实现，而非为单个集合指定分配器。这与 C++ 的 `std::allocator`（稳定且广泛使用）形成对比——Rust 的分配器设计更强调全局优化和安全性，牺牲了部分灵活性。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)]
 
 ### 10.3 边界测试：全局分配器的 `#[global_allocator]` 重复定义（编译错误）
 
@@ -749,7 +749,6 @@ fn main() {}
 
 > **修正**: **名称唯一性**：1) 同一作用域内不能有两个同名函数；2) trait 方法可同名（通过 trait 区分）；3) 重载（overloading）不支持（除 trait 外）。
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）
 

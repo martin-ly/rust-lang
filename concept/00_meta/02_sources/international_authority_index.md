@@ -4,6 +4,7 @@
 >
 > **EN**: International Authority Index
 > **Summary**: A curated, categorized index of authoritative international sources for Rust: official docs, academic formalization, industrial ecosystems, standards bodies, and cross-language references.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者 / 进阶]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。

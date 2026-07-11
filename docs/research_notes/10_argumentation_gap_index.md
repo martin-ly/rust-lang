@@ -149,7 +149,7 @@
 
 [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) L2 完整证明；
 
-[coq_skeleton](../../archive/deprecated/coq_skeleton/README.md) T-OW2 Coq 骨架；
+[coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)（归档只读） T-OW2 Coq 骨架；
 
 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](10_international_formal_verification_index.md) 国际对标；
 

@@ -7,6 +7,7 @@
 > **受众**: [专家]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
+> **目录归属说明**: NLL/Polonius 属借用检查器演进主题，但其数据流分析精度直接决定 unsafe 代码中别名与生命周期推断的可靠性边界（RustBelt 形式化链条的一环），与 `02_unsafe/` 的 unsafe 语义强相关，故保留在本目录；基础借用概念见 [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析借用（Borrowing）检查算法的精度演进
 > **定位**: 深入分析 Rust **借用（Borrowing）检查器**的两个里程碑——Non-Lexical Lifetimes (NLL) 如何放宽词法作用域限制，以及 Polonius 如何通过数据流分析实现更精确的借用检查，揭示 Rust 类型系统（Type System）的持续演进。
@@ -166,7 +167,7 @@ Polonius: 下一代借用检查器
 
   当前状态 (2026-06):
   ├── ✅ #150551 已落地 — Polonius 核心实现完成
-  ├── 🧪 `-Zpolonius` 标志在 nightly 可用
+  ├── 🧪 `-Zpolonius` 标志在每日构建版可用
   ├── 📋 **感觉可稳定化（stabilizable）** — Project Goals 2026 最新评估
   ├── 📅 目标 **2026 年内稳定化 alpha 版本**（Rust Project Goals 2026 一级目标）
   └── 🎯 预计最终成为默认借用检查器
@@ -510,7 +511,7 @@ fn drop_order_nll() {
 | [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | ✅ 一级 | 基础教程 |
 | [Rustonomicon — NLL](https://doc.rust-lang.org/nomicon/borrow-splitting.html) | ✅ 一级 | 深入分析 |
 | [Polonius Project Goal 2026](https://rust-lang.github.io/rust-project-goals/2026/polonius.html) | ✅ 一级 | Rust Project Goals 2026 — Polonius Alpha 稳定化 |
-| [Rust Blog — Project Goals Update April 2026](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) | ✅ 一级 | 2025H2 目标期总结；Location-sensitive Polonius 已进入 nightly |
+| [Rust Blog — Project Goals Update April 2026](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) | ✅ 一级 | 2025H2 目标期总结；Location-sensitive Polonius 已进入每日构建版 |
 
 ---
 
@@ -543,7 +544,7 @@ fn main() {
 }
 ```
 
-## 相关概念文件
+## 相关概念
 
 - [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) — 借用系统
 - [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) — 生命周期（Lifetimes）
@@ -558,7 +559,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -634,7 +635,7 @@ fn main() {
 > 2) 循环中的可变借用（Mutable Borrow）；
 > 3) 部分借用（`&mut v[0]` 与 `&mut v[1]` 不冲突）。
 >
-> Polonius 当前在 nightly 可用（`-Z polonius`），预计在未来 stable 中取代 NLL。
+> Polonius 当前在每日构建版可用（`-Z polonius`），预计在未来 stable 中取代 NLL。
 > 这与 C++ 的借用检查（无，完全信任程序员）或 Swift 的 exclusivity enforcement（运行时（Runtime）检查，非编译期）不同——Rust 的借用检查器持续演进，目标是允许更多合法程序同时保持安全保证。
 > [来源: [Polonius](https://github.com/rust-lang/polonius)] ·
 > [来源: [NLL](https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/non-lexical-lifetimes.html)]
@@ -643,7 +644,6 @@ fn main() {
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）
 

@@ -85,7 +85,7 @@
 本指南介绍如何使用 C05 线程与并发模块（Module）的功能，包括线程管理、并发控制、同步原语、无锁数据结构等。
 
 **形式化引用（Reference）**：SEND-T1 (Send 安全)、SYNC-T1 (Sync 安全)、T-BR1 (数据竞争自由)。
-详见 [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/10_theorem_rust_example_mapping.md)。
+详见 [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/10_theorem_rust_example_mapping.md)。
 
 ---
 
@@ -1322,7 +1322,7 @@ let counter = Arc::new(Mutex::new(0));
 - [线程管理指南](../../crates/c05_threads/docs/tier_02_guides/01_thread_basics_and_lifetimes.md)
 - [并发控制指南](../../crates/c05_threads/docs/tier_02_guides/02_synchronization_primitives_practice.md)
 - [无锁数据结构](../../crates/c05_threads/docs/tier_03_references/02_lock_free_programming_reference.md)
-- [Send/Sync 形式化](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) - Send/Sync Trait 形式化定义与安全保证
+- [Send/Sync 形式化](../research_notes/formal_methods/10_send_sync_formalization.md) - Send/Sync Trait 形式化定义与安全保证
 
 ## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >

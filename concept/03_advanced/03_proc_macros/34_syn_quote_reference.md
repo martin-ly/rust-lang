@@ -69,6 +69,7 @@
   - [反命题](#反命题)
   - [反向推理](#反向推理)
   - [过渡段](#过渡段)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -928,7 +929,7 @@ mod tests {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -974,7 +975,6 @@ mod tests {
 >
 > **过渡**: 从 quote 生成过渡到卫生性，可以理解生成代码与调用方上下文之间的边界控制。
 >
-
 
 ---
 

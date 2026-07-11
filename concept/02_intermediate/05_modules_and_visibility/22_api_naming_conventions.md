@@ -6,6 +6,7 @@
 >
 > **EN**: Idiomatic Rust API Naming Conventions
 > **Summary**: Rust API naming conventions aligned with the Rust API Guidelines and std library style.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -20,6 +21,7 @@
 > **定理链**: N/A — 描述性/约定性文档，不涉及形式化定理链
 
 ---
+
 ## 📑 目录
 
 - [Rust API 命名约定](#rust-api-命名约定)

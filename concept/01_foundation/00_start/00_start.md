@@ -4,6 +4,7 @@
 
 > **EN**: Getting Started with Rust
 > **Summary**: A practical starting guide for Rust beginners: installation, toolchain setup, first Cargo project, essential commands, editor configuration, and the learning path into ownership, types, modules, error handling, and testing.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [初学者]
 > **Bloom 层级**: L1-L2
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -21,7 +22,7 @@
 1. **问题识别**: 为什么 Rust 需要一套专门的起步流程？它与编译型、垃圾回收型语言在项目结构和工具链上有何不同？
 2. **概念建立**: 掌握 `rustup`、`cargo`、`rustc` 的角色，理解 crate、模块（Module）、依赖与版本控制的基本关系。
 3. **机制推理**: 通过 ⟹ 定理链将安装、构建、测试、文档生成串联为可重复的开发工作流。
-4. **边界辨析**: 借助反命题/反例理解 `stable`/`nightly` 通道、单 crate 与 workspace 等常见选择误区。
+4. **边界辨析**: 借助反命题/反例理解 `stable`/每日构建 通道、单 crate 与 workspace 等常见选择误区。
 5. **迁移应用**: 将起步知识与 [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md)、[类型系统（Type System）](../02_type_system/04_type_system.md)、[错误处理（Error Handling）](../08_error_handling/32_error_handling_basics.md) 等后置概念链接。
 
 ---
@@ -32,7 +33,7 @@
 
 > **反命题 2**: "任何 Rust 项目都必须从 `cargo new` 开始" ⟹ 不成立。单文件脚本、workspace、已有代码库都可以作为起点，选择取决于交付形态。
 
-> **反命题 3**: "初学者应该直接 nightly 以获取最新特性" ⟹ 不成立。Stable 通道提供最佳兼容性与学习资料，nightly 仅在学习高级/实验特性时使用。
+> **反命题 3**: "初学者应该直接使用每日构建版以获取最新特性" ⟹ 不成立。Stable 通道提供最佳兼容性与学习资料，每日构建版仅在学习高级/实验特性时使用。
 
 ---
 
@@ -75,7 +76,7 @@ profile = "default"
 
 | 字段 | 作用 |
 |:---|:---|
-| `channel` | 工具链通道：`stable`、`beta`、`nightly` 或具体版本号 |
+| `channel` | 工具链通道：`stable`、`beta`、每日构建频道 或具体版本号 |
 | `components` | 额外组件：格式化、lint、源码、文档生成等 |
 | `profile` | 预置组件集合：`minimal`、`default`、`complete` |
 
@@ -206,7 +207,7 @@ flowchart TD
 >
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（TRPL、Cargo Book、rustup.rs）
 
-## 关联概念
+## 相关概念
 
 | 概念 | 关系 |
 |:---|:---|

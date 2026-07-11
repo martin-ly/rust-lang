@@ -9,7 +9,7 @@
 > **内容分级**: [专家级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **代码状态**: ✅ 含可编译示例
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
@@ -109,7 +109,7 @@ rustc 核心架构:
 > - **TyCtxt**: 编译期间的只读全局上下文，包含所有类型信息、解析结果、中间表示
 > - **多阶段降级**: Source → TokenStream → AST → HIR → MIR → LLVM IR → Machine Code
 >
-> **来源**: [Rustc Dev Guide — Overview](https://rustc-dev-guide.rust-lang.org/overview.html) · [rustc_driver](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_driver/)
+> **来源**: [Rustc Dev Guide — Overview](https://rustc-dev-guide.rust-lang.org/overview.html) · rustc_driver（内部 API 文档随每日构建版发布）
 
 ### 1.2 编译管线
 >
@@ -509,7 +509,7 @@ Polonius 的方法:
   3. 检查是否存在从出借点到使用点的有效路径
 
 Polonius 状态（2025）:
-  - Alpha 版本已进入 nightly（-Zpolonius）
+  - Alpha 版本已进入每日构建版（-Zpolonius）
   - 2026 目标: 稳定化（替代 NLL 成为默认）
   - 解决了 NLL problem case #3（lending iterator）
 ```
@@ -725,7 +725,7 @@ fn undefined_behavior() {
 }
 
 // Miri 运行:
-// $ cargo +nightly miri run
+// $ cargo miri run（需每日构建版工具链）
 // error: Undefined Behavior: attempting a write access using <tag>
 //        at alloc[...], but that tag does not exist in the borrow stack
 ```
@@ -736,7 +736,7 @@ fn undefined_behavior() {
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [类型系统（Type System）](../../01_foundation/02_type_system/04_type_system.md) — 类型论基础
 - [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) — 单态化（Monomorphization）、Trait bound
@@ -750,7 +750,7 @@ fn undefined_behavior() {
 - [工具链](01_toolchain.md) — Cargo、编译器标志、目标平台
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: Compiler Internals（Rust 编译器内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Compiler Internals（Rust 编译器内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Compiler Internals（Rust 编译器内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

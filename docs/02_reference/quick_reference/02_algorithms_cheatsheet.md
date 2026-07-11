@@ -904,10 +904,10 @@ fn fib(n: usize) -> usize {
 
 > **来源: [ACM](https://dl.acm.org/)**
 
-- [类型系统基础](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) — 算法与类型的关系
-- [构造能力理论](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) — 算法表达能力边界
-- [执行模型边界分析](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md) — 算法复杂度与执行模型
-- [工作流安全完整模型](../../../archive/research_notes_2026_06_25/software_design_theory/02_workflow_safe_complete_models/README.md) — 算法正确性验证
+- [类型系统基础](../../research_notes/type_theory/10_type_system_foundations.md) — 算法与类型的关系
+- [构造能力理论](../../research_notes/type_theory/10_construction_capability.md) — 算法表达能力边界
+- [执行模型边界分析](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) — 算法复杂度与执行模型
+- [工作流安全完整模型](../../research_notes/software_design_theory/02_workflow_safe_complete_models/README.md) — 算法正确性验证
 
 ### 相关速查卡 {#相关速查卡}
 

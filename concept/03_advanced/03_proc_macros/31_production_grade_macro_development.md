@@ -9,7 +9,7 @@
 > **受众**: [专家]
 > **层级**: L3 高级概念
 > **Bloom 层级**: L3-L5
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Eva — 评估宏（Macro）库工程实践
 > **前置概念**: [过程宏（Procedural Macro）](07_proc_macro.md) · [宏调试与诊断](30_macro_debugging_and_diagnostics.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md) · [Cargo 注册表与包发布](../../06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md)
 > **后置概念**: [Cargo semver-checks](../../07_future/03_preview_features/46_cargo_semver_checks_preview.md) · [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/82_engineering_and_production_patterns.md)
@@ -45,7 +45,7 @@
 [package]
 name = "my_macro"
 version = "1.0.0"
-rust-version = "1.70.0"  # 最低支持的 Rust 版本
+rust-version = "1.70.0"  # 最低支持的 Rust 版本（示例值，摘自 Cargo Book 原文；本项目 MSRV 为 1.97.0）
 ```
 
 (Source: [Cargo Book — The rust-version field](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field))
@@ -300,7 +300,6 @@ jobs:
 > **权威来源对齐变更日志**: 2026-07-09 由 `crates/c11_macro_system_proc/docs/tier_04_advanced/05_production_grade_macro_development.md` 按 AGENTS.md §6.4 迁移至此
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-09
 **状态**: ✅ 权威来源对齐完成
 
@@ -318,7 +317,7 @@ jobs:
 |:---|:---|:---|
 | 明确 MSRV 策略 ⟹ 降低兼容性风险 | 在文档与 CI 中声明最低 Rust 版本 | 下游用户可以预测升级成本 |
 | span 感知诊断 ⟹ 减少 issue 噪音 | 错误信息指向用户代码而非宏内部 | 维护者处理支持请求的时间下降 |
-| 多工具链 CI ⟹ 及早发现回归 | 覆盖 stable、beta、nightly 及多 edition | 破坏性变更在发布前暴露 |
+| 多工具链 CI ⟹ 及早发现回归 | 覆盖 stable、beta 与每日构建版及多 edition | 破坏性变更在发布前暴露 |
 
 ## 反命题
 

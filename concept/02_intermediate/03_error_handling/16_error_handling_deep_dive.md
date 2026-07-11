@@ -8,7 +8,8 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
-> **权威来源**: 本文件为 `concept/` 权威页。
+> **权威来源**: 本文件为 `concept/` 权威页（L2 深入专题）。
+> **层级定位**: 本页为错误处理的 **L2 深入专题页**（deep dive），聚焦 `Result`/`Option` 组合子代数、`From` 错误转换、错误链（`Error::source()`）与 thiserror/anyhow/eyre 框架生态；入门基础见 L1 [`32_error_handling_basics.md`](../../01_foundation/08_error_handling/32_error_handling_basics.md)，L2 主权威页（传播模式与工程实践总览）见 [`04_error_handling.md`](04_error_handling.md)。三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
 > **定位**: 深入分析 Rust **错误处理（Error Handling）机制**——从 `Result`/`Option` 的组合子到 `?` 运算符、错误转换、自定义错误类型和错误处理框架，揭示 Rust 如何将错误处理融入类型系统（Type System）实现编译期安全。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Traits](../00_traits/01_traits.md) · [Generics](../01_generics/02_generics.md)
 > **后置概念**: [Async](../../03_advanced/01_async/02_async.md) · [Logging](../../06_ecosystem/00_toolchain/13_logging_observability.md)
@@ -506,7 +507,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）
 - [Traits](../00_traits/01_traits.md) — Trait 系统
@@ -520,7 +521,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

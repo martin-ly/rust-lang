@@ -20,5 +20,5 @@ canonical 链接。
 | 主题 | 权威来源 |
 | :--- | :--- |
 | QUIC/HTTP-3 网络协议 | [`concept/06_ecosystem/04_web_and_networking/38_network_protocols.md`](../../../concept/06_ecosystem/04_web_and_networking/38_network_protocols.md) |
-| 高级网络协议概览 | [`concept/06_ecosystem/09_networking/01_advanced_network_protocols.md`](../../../concept/06_ecosystem/09_networking/01_advanced_network_protocols.md) |
+| 高级网络协议概览 | [`concept/06_ecosystem/12_networking/01_advanced_network_protocols.md`](../../../concept/06_ecosystem/12_networking/01_advanced_network_protocols.md) |
 | 异步编程 | [`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md) |

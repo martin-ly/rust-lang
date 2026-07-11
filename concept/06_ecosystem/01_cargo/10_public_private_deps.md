@@ -35,7 +35,7 @@ pub fn flags() -> MyFlags { /* ... */ }
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **Bloom 层级**: L4-L5
-> **A/S/P 标记**: **A+S** — ApplicationStructure
+> **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×App — 应用依赖可见性规则
 > **定位**: 解决 Rust crate 图中“依赖泄漏”问题的核心机制，使 API 稳定性与依赖演进解耦；同时说明 resolver v3 在版本选择上的 MSRV-aware 行为。
 > **对标**: [Java 模块（Module）系统](https://docs.oracle.com/javase/specs/jls/se17/html/jls-7.html) `requires transitive` / `requires` · [C++ 前置声明 vs 完整包含](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -240,7 +240,7 @@ serde = { workspace = true, public = false, features = ["derive"] }
 - **三级**: [cargo-semver-checks 文档](https://docs.rs/cargo-semver-checks) — SemVer 自动化检查工具
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0 (stable) / nightly with `-Zpublic-dependency`
+**Rust 版本**: 1.97.0 (stable) / nightly with `-Zpublic-dependency`
 **最后更新**: 2026-07-09
 
 ---

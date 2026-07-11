@@ -11,7 +11,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+P** — ApplicationProcedure
+> **A/S/P 标记**: **P+A** — Procedure + Application
 > **双维定位**: P×App — 实施 DevOps 和 CI/CD
 > **定位**: 系统分析 Rust **DevOps 工程实践**——从 GitHub Actions 工作流设计、cargo-release 发布自动化、交叉编译 CI 集成，到 Docker 镜像优化、构建缓存策略、CI 测试矩阵与安全审计（cargo-audit、cargo-deny），揭示 Rust 项目如何从代码提交到生产部署实现高可靠持续交付。
 > **前置概念**: [Toolchain](01_toolchain.md) · [Cross Compilation](../05_systems_and_embedded/17_cross_compilation.md)
@@ -158,7 +158,7 @@ API_PORT="8080"
         }
     }
 
-    println!("\nConfig preview:");
+    println!("\nConfig dump:");
     for (k, v) in &config {
         println!("  {} = {}", k, v);
     }
@@ -265,9 +265,9 @@ Rust DevOps 工具全景:
 
   阶段 2: 测试矩阵（并行，5-15 分钟）
   ├── 平台矩阵: ubuntu / macos / windows
-  ├── Rust 版本矩阵: stable / beta / nightly
+  ├── Rust 版本矩阵: stable / beta / 每日构建版
   ├── 特征矩阵: --all-features / --no-default-features
-  └── Miri 测试（仅 nightly）
+  └── Miri 测试（仅每日构建版）
 
   阶段 3: 安全审计（并行，< 1 分钟）
   ├── cargo audit
@@ -651,7 +651,7 @@ fn main() {
 }
 ```
 
-## 相关概念文件
+## 相关概念
 
 - [Toolchain](01_toolchain.md) — Cargo 与 Rust 工具链
 - [Cross Compilation](../05_systems_and_embedded/17_cross_compilation.md) — 交叉编译技术
@@ -666,7 +666,7 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

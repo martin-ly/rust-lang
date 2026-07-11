@@ -17,7 +17,7 @@
 
 ---
 
-> **Rust 版本**: 1.97.0+ (Edition 2024) · GATs MVP 自 **1.65** (2022-11) 稳定
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **来源**: [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) · [Rust Reference — Associated Items](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types) · [Rust 1.65 Release Notes](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html) · [Niko Matsakis — GATs stabilization push](https://smallcultfollowing.com/babysteps/blog/2022/06/27/many-modes-a-gats-report/) · [RFC 2289 — Associated Type Bounds](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)
 > **对应 Crate**: [`c04_generic`](../../crates/c04_generic)
 > **对应练习**: [`exercises/src/generics/`](../../exercises/src/generics)
@@ -236,7 +236,7 @@ trait Service {
 | 时间 | 版本/事件 | 内容 |
 |---|---|---|
 | 2016-04 | RFC 1598 提出 | 以"associated type constructors"名义提出，定位为 HKT 的受限替代 |
-| 2021 | nightly MVP 实现 | `generic_associated_types` feature 可用，但 implied bounds 等存在大量 ICE |
+| 2021 | 每日构建版 MVP 实现 | `generic_associated_types` feature 可用，但 implied bounds 等存在大量 ICE |
 | 2022-11 | **Rust 1.65 稳定（MVP）** | 生命周期/类型/常量参数的 GAT 稳定；强制 `where` 子句规则；关联类型上的**约束（bounds）**仍受限 |
 | 2023-06 | Rust 1.70 | 若干 GAT 相关的 trait solver 修复 |
 | 2024-06 | Rust 1.79 | associated type bounds（`T: Iterator<Item: Display>`，RFC 2289）稳定——可与 GAT 组合 |

@@ -680,7 +680,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Async](02_async.md) — 异步基础
 - [Pin](06_pin_unpin.md) — Pin 与 Unpin
@@ -694,7 +694,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -843,7 +843,6 @@ fn main() {}
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 认知路径
 

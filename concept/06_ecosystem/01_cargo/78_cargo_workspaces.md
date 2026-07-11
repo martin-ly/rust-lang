@@ -5,10 +5,11 @@
 >
 > **EN**: Cargo Workspaces
 > **Summary**: Cargo workspace 的组成方式：root package 与 virtual workspace、`members`/`exclude`/`default-members`、`workspace.package`/`workspace.dependencies`/`workspace.lints` 继承机制，以及 resolver 设置。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [中级 → 高级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **P** — Practice
+> **A/S/P 标记**: **A** — Application
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“何时该用 workspace、如何组织多 crate 项目、如何统一依赖与 lint 配置”讲清楚。
 > **前置概念**: [Cargo Dependency Resolution](60_cargo_dependency_resolution.md) · [Cargo Manifest Reference](64_cargo_manifest_reference.md) · [Terminology Glossary](../../00_meta/01_terminology/terminology_glossary.md)
@@ -242,7 +243,7 @@ tool = ["npm", "run", "build"]
 
 ---
 
-## 十一、关联概念
+## 十一、相关概念
 
 | 概念 | 关系 |
 |:---|:---|

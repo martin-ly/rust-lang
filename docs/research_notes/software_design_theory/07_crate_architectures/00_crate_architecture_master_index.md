@@ -620,7 +620,7 @@ graph TD
 - [40_ntex_architecture.md](40_ntex_architecture.md) — ntex 可组合网络服务框架架构
 - [41_askama_architecture.md](41_askama_architecture.md) — Askama 编译期模板引擎架构
 - [42_maud_architecture.md](42_maud_architecture.md) — Maud 编译期 HTML DSL 宏架构
-- [docs: Workflow Patterns 所有权分析](../../../../archive/rust-ownership-decidability/16-program-semantics/09-workflow-ownership-analysis.md) — 分布式系统中工作流模式与 Rust 所有权的交互
+- [docs: Workflow Patterns 所有权分析](../../../../archive/rust-ownership-decidability/16-program-semantics/09-workflow-ownership-analysis.md)（归档只读） — 分布式系统中工作流模式与 Rust 所有权的交互
 
 ---
 

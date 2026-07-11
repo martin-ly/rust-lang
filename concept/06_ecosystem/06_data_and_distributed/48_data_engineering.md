@@ -11,7 +11,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Ana — 分析 Rust 数据工程生态的技术选型与工程权衡
 > **前置依赖**: [类型系统（Type System）](../../01_foundation/02_type_system/04_type_system.md) · [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · Async/Await · Machine Learning Ecosystem
 > **后置延伸**: [流处理生态](36_stream_processing_ecosystem.md) · [云原生](../04_web_and_networking/24_cloud_native.md) · [性能优化](../10_performance/15_performance_optimization.md)
@@ -27,7 +27,7 @@
 > [Delta Lake](https://delta.io/) ·
 > [Object Store](https://docs.rs/object_store/latest/object_store/) ·
 > [Rust ETL Patterns](https://github.com/apache/arrow-datafusion)
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -834,7 +834,7 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 > [来源: [Apache Parquet](https://parquet.apache.org/)]
 > [来源: [Kafka Documentation](https://kafka.apache.org/documentation/)]
 
-## 相关概念文件
+## 相关概念
 
 - [Machine Learning Ecosystem](../11_domain_applications/46_machine_learning_ecosystem.md) — polars、arrow、DataFusion、candle
 - [流处理生态](36_stream_processing_ecosystem.md) — Kafka、Timely Dataflow、实时计算
@@ -847,7 +847,7 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 - [安全与密码学](../07_security_and_cryptography/43_security_cryptography.md) — 数据加密、合规性
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: Data Engineering（数据工程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Data Engineering（数据工程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Data Engineering（数据工程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

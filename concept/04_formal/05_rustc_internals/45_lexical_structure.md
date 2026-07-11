@@ -7,6 +7,7 @@
 > **内容分级**: [研究级]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
+> **定位声明**: 本页为 Rust Reference 对应章节的**规范摘译与注解**（规范条文摘译 + 示例 + 交叉引用），非形式化推导或机器验证证明；形式化理论内容见 [Notation](../06_notation/44_notation.md)。依据 [A/S/P 标记规范](../../00_meta/03_audit/asp_marking_guide.md) §3.4，L4 形式化层同时容纳 S（Specification）规范分析类内容，故本页保留于 L4，Bloom 层级维持与内容相符的标注（理解/分析层的规范内容）。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
 > **前置依赖**: [Notation](../06_notation/44_notation.md) · [Programming Language Foundations](../04_model_checking/23_programming_language_foundations.md)
@@ -228,7 +229,7 @@ DelimitedTree ::= "(" TokenTree* ")"
 
 宏（Macro）展开阶段，编译器在 token tree 层面匹配和替换，随后再次进行名称解析和类型检查。
 
-## 十、关联概念
+## 十、相关概念
 
 | 概念 | 关系 |
 |:---|:---|
@@ -252,7 +253,7 @@ DelimitedTree ::= "(" TokenTree* ")"
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

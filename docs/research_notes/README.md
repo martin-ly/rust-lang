@@ -38,7 +38,7 @@
 | 目标 | 入口 |
 | :--- | :--- |
 | 理解形式化证明 | [FORMAL_FULL_MODEL_OVERVIEW](10_formal_full_model_overview.md) → [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) |
-| Rust 所有权（Ownership）系统深度形式化 | [`rust-ownership-decidability/`](../../archive/rust-ownership-decidability) — 600K+ 字完整知识库 |
+| Rust 所有权（Ownership）系统深度形式化 | [`rust-ownership-decidability/`](../../archive/rust-ownership-decidability)（归档只读） — 600K+ 字完整知识库 |
 | 查概念/证明 | [QUICK_FIND](10_quick_find.md) |
 | 选设计模式/并发模型 | [software_design_theory/00_MASTER_INDEX](software_design_theory/10_00_master_index.md) |
 | 理解三大支柱 | [AUTHORITATIVE_ALIGNMENT_GUIDE](10_authoritative_alignment_guide.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） |

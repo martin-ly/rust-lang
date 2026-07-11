@@ -2,6 +2,7 @@
 >
 > **EN**: Bloom Taxonomy
 > **Summary**: Bloom's taxonomy adapted for Rust cognitive skill assessment, mapping remembering to creation across knowledge dimensions.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -132,7 +133,7 @@ ACF 引入的第七层级（在传统 L6-L7 之上），指定管理双模式切
 2. 在练习题中增加 **"无 AI 辅助"** 和 **"AI 辅助"** 两种验证标准
 3. 在 L5+ 文件中增加 AI 辅助审查的边界条件说明
 
-## 相关概念文件
+## 相关概念
 
 - [概念索引](../../README.md) — 知识体系总览与导航
 - [学习指南](../04_navigation/learning_guide.md) — 分层学习路径建议

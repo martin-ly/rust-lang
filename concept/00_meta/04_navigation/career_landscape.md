@@ -176,7 +176,7 @@ Rust 岗位远程工作比例（2025–2026）:
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Bloom Taxonomy](../00_framework/bloom_taxonomy.md) — 认知层级框架
 - [Application Domains](../../06_ecosystem/06_data_and_distributed/04_application_domains.md) — Rust 应用领域分析
@@ -188,7 +188,7 @@ Rust 岗位远程工作比例（2025–2026）:
 > **权威来源对齐变更日志**: 2026-06-02 创建，数据覆盖 2025–2026
 
 **文档版本**: 1.0
-**对应 Rust 版本**: N/A（市场数据）
+**Rust 版本**: N/A（市场数据）
 **最后更新**: 2026-06-02
 **状态**: ✅ 概念文件创建完成
 

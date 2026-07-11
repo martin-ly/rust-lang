@@ -2,7 +2,7 @@
 > **Summary**: Authoritative concept page for `C12 WASM - JavaScript 互操作`. Content migrated from `crates/c12_wasm/docs/tier_02_guides/03_javascript_interop.md`.
 > **受众**: [进阶]
 > **内容分级**: [参考级]
-> **Bloom 层级**: L3-L4
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: A×App — wasm/JS 互操作应用
@@ -443,7 +443,7 @@ let mut_raw_ref = union.get_integer_mut_raw();
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

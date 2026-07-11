@@ -2371,7 +2371,7 @@
         },
         {
           "title": "The Rust Runtime",
-          "path": "../../03_advanced/02_unsafe/30_rust_runtime.md"
+          "path": "../../03_advanced/06_low_level_patterns/30_rust_runtime.md"
         }
       ],
       "theorems": [],
@@ -3041,8 +3041,8 @@
       ]
     },
     {
-      "id": "concept:02_intermediate/00_traits/32_editions.md",
-      "path": "02_intermediate/00_traits/32_editions.md",
+      "id": "concept:07_future/00_version_tracking/32_editions.md",
+      "path": "07_future/00_version_tracking/32_editions.md",
       "title": "Rust Editions（语言版本）",
       "en": "Rust Editions",
       "summary": "The Rust Edition mechanism: 2015, 2018, 2021, and 2024 editions, their key differences, how to choose and migrate using `cargo fix --edition`, and the relationship between edition and toolchain version.",
@@ -3073,8 +3073,8 @@
       ]
     },
     {
-      "id": "concept:02_intermediate/00_traits/33_rust_release_process.md",
-      "path": "02_intermediate/00_traits/33_rust_release_process.md",
+      "id": "concept:07_future/00_version_tracking/33_rust_release_process.md",
+      "path": "07_future/00_version_tracking/33_rust_release_process.md",
       "title": "Rust 发布流程（Rust Release Process）",
       "en": "Rust Release Process",
       "summary": "The Rust release model: stable, beta, and nightly channels, the six-week release train, SemVer version numbering, feature gates and stabilization, plus how to use rustup to switch channels.",
@@ -4419,8 +4419,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/02_process_ipc/01_process_model_and_lifecycle.md",
-      "path": "03_advanced/02_process_ipc/01_process_model_and_lifecycle.md",
+      "id": "concept:03_advanced/08_process_ipc/01_process_model_and_lifecycle.md",
+      "path": "03_advanced/08_process_ipc/01_process_model_and_lifecycle.md",
       "title": "",
       "en": "Process Model and Lifecycle in Rust",
       "summary": "A canonical guide to Rust's process abstraction, lifecycle management, resource control, and IPC safety guarantees, grounded in `std::process` and modern async runtimes.",
@@ -4447,8 +4447,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/02_process_ipc/02_advanced_process_management.md",
-      "path": "03_advanced/02_process_ipc/02_advanced_process_management.md",
+      "id": "concept:03_advanced/08_process_ipc/02_advanced_process_management.md",
+      "path": "03_advanced/08_process_ipc/02_advanced_process_management.md",
       "title": "",
       "en": "Advanced Process Management in Rust",
       "summary": "Enterprise-grade process patterns in Rust: process pools, load balancing, health checks, resource quotas, and fault recovery, built on `std::process` and `tokio::process`.",
@@ -4475,8 +4475,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/02_process_ipc/03_async_process_management.md",
-      "path": "03_advanced/02_process_ipc/03_async_process_management.md",
+      "id": "concept:03_advanced/08_process_ipc/03_async_process_management.md",
+      "path": "03_advanced/08_process_ipc/03_async_process_management.md",
       "title": "",
       "en": "Async Process Management in Rust",
       "summary": "Managing child processes inside Rust's async runtime: tokio::process, async I/O, timeouts, cancellation, and structured concurrency.",
@@ -4503,8 +4503,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/02_process_ipc/04_cross_platform_process_management.md",
-      "path": "03_advanced/02_process_ipc/04_cross_platform_process_management.md",
+      "id": "concept:03_advanced/08_process_ipc/04_cross_platform_process_management.md",
+      "path": "03_advanced/08_process_ipc/04_cross_platform_process_management.md",
       "title": "",
       "en": "Cross-Platform Process Management in Rust",
       "summary": "Writing portable process-management code across Windows, Linux, and macOS using std::process, platform extensions, and conditional compilation.",
@@ -4531,8 +4531,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/02_process_ipc/05_ipc_mechanisms.md",
-      "path": "03_advanced/02_process_ipc/05_ipc_mechanisms.md",
+      "id": "concept:03_advanced/08_process_ipc/05_ipc_mechanisms.md",
+      "path": "03_advanced/08_process_ipc/05_ipc_mechanisms.md",
       "title": "",
       "en": "Inter-Process Communication Mechanisms in Rust",
       "summary": "IPC patterns in Rust: anonymous pipes, named pipes, Unix sockets, TCP/UDP sockets, shared memory, message queues, and signal handling.",
@@ -4559,8 +4559,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/02_process_ipc/06_process_monitoring_and_diagnostics.md",
-      "path": "03_advanced/02_process_ipc/06_process_monitoring_and_diagnostics.md",
+      "id": "concept:03_advanced/08_process_ipc/06_process_monitoring_and_diagnostics.md",
+      "path": "03_advanced/08_process_ipc/06_process_monitoring_and_diagnostics.md",
       "title": "",
       "en": "Process Monitoring and Diagnostics in Rust",
       "summary": "Monitoring process status, resource usage, logging, and diagnostic techniques for Rust child processes.",
@@ -4587,8 +4587,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/02_process_ipc/07_process_security_and_sandboxing.md",
-      "path": "03_advanced/02_process_ipc/07_process_security_and_sandboxing.md",
+      "id": "concept:03_advanced/08_process_ipc/07_process_security_and_sandboxing.md",
+      "path": "03_advanced/08_process_ipc/07_process_security_and_sandboxing.md",
       "title": "",
       "en": "Process Security and Sandboxing in Rust",
       "summary": "Process isolation, privilege dropping, resource limits, namespaces, seccomp, and sandbox design for Rust child processes.",
@@ -4615,8 +4615,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/02_process_ipc/08_process_performance_engineering.md",
-      "path": "03_advanced/02_process_ipc/08_process_performance_engineering.md",
+      "id": "concept:03_advanced/08_process_ipc/08_process_performance_engineering.md",
+      "path": "03_advanced/08_process_ipc/08_process_performance_engineering.md",
       "title": "",
       "en": "Process Performance Engineering in Rust",
       "summary": "Performance analysis, profiling tools, zero-copy IPC, process pool optimization, and production monitoring for Rust process management.",
@@ -4643,8 +4643,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/02_process_ipc/09_process_testing_and_benchmarking.md",
-      "path": "03_advanced/02_process_ipc/09_process_testing_and_benchmarking.md",
+      "id": "concept:03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md",
+      "path": "03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md",
       "title": "",
       "en": "Process Testing and Benchmarking in Rust",
       "summary": "Testing strategies, process-specific test techniques, benchmarking, stress testing, and CI integration for Rust process management.",
@@ -4671,8 +4671,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/02_process_ipc/10_modern_process_libraries.md",
-      "path": "03_advanced/02_process_ipc/10_modern_process_libraries.md",
+      "id": "concept:03_advanced/08_process_ipc/10_modern_process_libraries.md",
+      "path": "03_advanced/08_process_ipc/10_modern_process_libraries.md",
       "title": "",
       "en": "Modern Process Management Libraries in Rust",
       "summary": "Ecosystem survey of Rust process management libraries: std::process, tokio::process, duct, nix, sysinfo, procfs, daemonize, caps, users.",
@@ -4844,8 +4844,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:03_advanced/02_unsafe/30_rust_runtime.md",
-      "path": "03_advanced/02_unsafe/30_rust_runtime.md",
+      "id": "concept:03_advanced/06_low_level_patterns/30_rust_runtime.md",
+      "path": "03_advanced/06_low_level_patterns/30_rust_runtime.md",
       "title": "Rust 运行时（The Rust Runtime）",
       "en": "The Rust Runtime",
       "summary": "Rust 运行时的关键属性：`#[global_allocator]` 自定义全局分配器、`#[windows_subsystem]` Windows 子系统设置，以及 panic、栈展开和启动流程等运行时组件。 Key properties of the Rust runtime: `#[global_allocator]`, `#[windows_subsystem]`, and runtime components including panic, stack unwinding, and startup.",
@@ -4870,8 +4870,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:03_advanced/02_unsafe/31_panic.md",
-      "path": "03_advanced/02_unsafe/31_panic.md",
+      "id": "concept:02_intermediate/03_error_handling/31_panic.md",
+      "path": "02_intermediate/03_error_handling/31_panic.md",
       "title": "Panic 机制",
       "en": "Panic",
       "summary": "Rust panic 的规范语义：panic handler、标准行为、panic strategy、unwind 与跨 FFI boundary 的规则。",
@@ -5527,7 +5527,7 @@
         },
         {
           "title": "The Rust Runtime",
-          "path": "../02_unsafe/30_rust_runtime.md"
+          "path": "30_rust_runtime.md"
         }
       ],
       "theorems": [],
@@ -6905,7 +6905,7 @@
       "postrequisites": [
         {
           "title": "Panic",
-          "path": "../../03_advanced/02_unsafe/31_panic.md"
+          "path": "../../02_intermediate/03_error_handling/31_panic.md"
         },
         {
           "title": "Memory Model",
@@ -7878,7 +7878,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -7905,7 +7905,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -8176,7 +8176,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -8933,7 +8933,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -8956,7 +8956,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -9075,7 +9075,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -9098,7 +9098,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -9116,7 +9116,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -9222,7 +9222,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -9240,7 +9240,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -9535,7 +9535,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -9777,7 +9777,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -10010,7 +10010,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -10028,7 +10028,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -10046,7 +10046,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -10099,7 +10099,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -10144,15 +10144,15 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
       "related_crates": []
     },
     {
-      "id": "concept:06_ecosystem/09_networking/01_advanced_network_protocols.md",
-      "path": "06_ecosystem/09_networking/01_advanced_network_protocols.md",
+      "id": "concept:06_ecosystem/12_networking/01_advanced_network_protocols.md",
+      "path": "06_ecosystem/12_networking/01_advanced_network_protocols.md",
       "title": "",
       "en": "Advanced Network Protocols in Rust",
       "summary": "A canonical overview of gRPC, MQTT, QUIC, AMQP, GraphQL over HTTP, and Server-Sent Events, with selection guidance, architecture diagrams, and idiomatic Rust ecosystem examples.",
@@ -10186,8 +10186,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:06_ecosystem/09_networking/02_network_security.md",
-      "path": "06_ecosystem/09_networking/02_network_security.md",
+      "id": "concept:06_ecosystem/12_networking/02_network_security.md",
+      "path": "06_ecosystem/12_networking/02_network_security.md",
       "title": "",
       "en": "Network Security in Rust",
       "summary": "Securing network applications in Rust: TLS configuration, certificate management, authentication, rate limiting, input validation, and common attack mitigations.",
@@ -10221,8 +10221,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:06_ecosystem/09_networking/03_custom_protocol_implementation.md",
-      "path": "06_ecosystem/09_networking/03_custom_protocol_implementation.md",
+      "id": "concept:06_ecosystem/12_networking/03_custom_protocol_implementation.md",
+      "path": "06_ecosystem/12_networking/03_custom_protocol_implementation.md",
       "title": "",
       "en": "Custom Network Protocol Implementation in Rust",
       "summary": "Designing and implementing custom binary protocols in Rust: framing, state machines, zero-copy serialization, batching, streaming, and RPC patterns.",
@@ -10256,8 +10256,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:06_ecosystem/09_networking/04_network_programming_quick_start.md",
-      "path": "06_ecosystem/09_networking/04_network_programming_quick_start.md",
+      "id": "concept:06_ecosystem/12_networking/04_network_programming_quick_start.md",
+      "path": "06_ecosystem/12_networking/04_network_programming_quick_start.md",
       "title": "",
       "en": "Rust Network Programming Quick Start",
       "summary": "A learning-oriented quick-start guide for Rust network programming, from TCP/UDP basics to HTTP/WebSocket, with staged paths, code examples, Cargo.toml templates, and links to canonical concept pages.",
@@ -10287,8 +10287,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:06_ecosystem/09_networking/05_formal_network_protocol_theory.md",
-      "path": "06_ecosystem/09_networking/05_formal_network_protocol_theory.md",
+      "id": "concept:06_ecosystem/12_networking/05_formal_network_protocol_theory.md",
+      "path": "06_ecosystem/12_networking/05_formal_network_protocol_theory.md",
       "title": "",
       "en": "Formal Network Protocol Theory",
       "summary": "Modeling and verifying network protocols in Rust using finite state machines, invariants, model checking, process calculus, Petri nets, and phantom types to enforce protocol states at compile time.",
@@ -10322,8 +10322,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:06_ecosystem/09_networking/06_networking_basics.md",
-      "path": "06_ecosystem/09_networking/06_networking_basics.md",
+      "id": "concept:06_ecosystem/12_networking/06_networking_basics.md",
+      "path": "06_ecosystem/12_networking/06_networking_basics.md",
       "title": "",
       "en": "Networking Basics",
       "summary": "Authoritative concept page for `01 Networking Basics Practice`. Content migrated from `crates/c10_networks/docs/tier_02_guides/01_networking_basics_practice.md`.",
@@ -10718,7 +10718,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -10736,7 +10736,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -10754,7 +10754,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -10851,7 +10851,7 @@
       "postrequisites": [
         {
           "title": "Future Roadmap",
-          "path": "../../07_future/05_roadmaps/24_roadmap.md"
+          "path": "../../07_future/01_edition_roadmap/24_roadmap.md"
         }
       ],
       "theorems": [],
@@ -11088,7 +11088,7 @@
         },
         {
           "title": "Networking Basics",
-          "path": "../../06_ecosystem/09_networking/06_networking_basics.md"
+          "path": "../../06_ecosystem/12_networking/06_networking_basics.md"
         }
       ],
       "theorems": [],
@@ -11415,8 +11415,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/02_stabilized_features/borrow_sanitizer.md",
-      "path": "07_future/02_stabilized_features/borrow_sanitizer.md",
+      "id": "concept:07_future/03_preview_features/borrow_sanitizer.md",
+      "path": "07_future/03_preview_features/borrow_sanitizer.md",
       "title": "BorrowSanitizer：动态别名规则验证工具",
       "en": "BorrowSanitizer (BSan) — Dynamic aliasing rule verification for Rust",
       "summary": "BorrowSanitizer (BSan) — Dynamic aliasing rule verification for Rust: emerging Rust language feature or ecosystem trend.",
@@ -11522,7 +11522,7 @@
         },
         {
           "title": "BorrowSanitizer",
-          "path": "../02_stabilized_features/borrow_sanitizer.md"
+          "path": "../03_preview_features/borrow_sanitizer.md"
         }
       ],
       "postrequisites": [
@@ -12512,7 +12512,7 @@
       "prerequisites": [
         {
           "title": "Rust 路线图",
-          "path": "../05_roadmaps/24_roadmap.md"
+          "path": "../01_edition_roadmap/24_roadmap.md"
         },
         {
           "title": "WebAssembly 生态",
@@ -12594,8 +12594,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/05_roadmaps/24_roadmap.md",
-      "path": "07_future/05_roadmaps/24_roadmap.md",
+      "id": "concept:07_future/01_edition_roadmap/24_roadmap.md",
+      "path": "07_future/01_edition_roadmap/24_roadmap.md",
       "title": "Rust 2027 Edition 及未来路线图",
       "en": "Roadmap",
       "summary": "Roadmap: emerging Rust language feature or ecosystem trend.",

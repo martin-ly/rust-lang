@@ -70,7 +70,7 @@ version = "0.1.0"
 # Rust 版本（Rust 1.92.0 新增）
 edition = "2024"              # Edition 2024 稳定版
 resolver = "3"                # 使用 Resolver 3
-rust-version = "1.90"         # 最低 Rust 版本要求
+rust-version = "1.97.0"       # 最低 Rust 版本要求
 
 # 作者信息
 authors = ["Your Name <email@example.com>"]
@@ -240,7 +240,7 @@ resolver = "3"
 [workspace.package]
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.90"
+rust-version = "1.97.0"
 license = "MIT"
 authors = ["Your Name"]
 

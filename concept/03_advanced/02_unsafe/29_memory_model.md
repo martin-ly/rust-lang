@@ -2,11 +2,13 @@
 
 > **EN**: Memory Model
 > **Summary**: Rust 内存模型的核心概念：抽象字节、初始化字节、未初始化字节与 provenance，及其对未定义行为的影响。 Core concepts of the Rust memory model: abstract bytes, initialized/uninitialized bytes, provenance, and their impact on undefined behavior.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
+> **目录归属说明**: 本文件虽非 unsafe 语法主题，但内存模型（抽象字节、provenance、未初始化内存）是 unsafe 代码未定义行为（UB）判定的语义基础，与 `02_unsafe/` 的 unsafe 语义强相关，故保留在本目录；其并发内存序维度见 [Atomics and Memory Ordering](../00_concurrency/11_atomics_and_memory_ordering.md)。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
 > **前置依赖**: [Unsafe Rust](03_unsafe.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Behavior Considered Undefined](../../04_formal/01_ownership_logic/37_behavior_considered_undefined.md)
@@ -216,10 +218,10 @@ unsafe {
 5. **优先使用安全抽象**: 如 `Vec`、`Box`、`UnsafeCell` 等，它们已封装内存模型细节。
 
 ```bash
-cargo +nightly miri test
+cargo miri test（需每日构建版工具链）
 ```
 
-## 十一、关联概念
+## 十一、相关概念
 
 | 概念 | 关系 |
 |:---|:---|
@@ -228,7 +230,7 @@ cargo +nightly miri test
 | [Atomics and Memory Ordering](../00_concurrency/11_atomics_and_memory_ordering.md) | 并发内存语义依赖内存模型 |
 | [Inline Assembly](../05_inline_assembly/13_inline_assembly.md) | 内联汇编必须遵守内存模型约束 |
 | [Unsafe Rust](03_unsafe.md) | 内存模型主要约束 unsafe 代码 |
-| [Panic](31_panic.md) | panic 时的栈展开必须保持内存安全（Memory Safety） |
+| [Panic](../../02_intermediate/03_error_handling/31_panic.md) | panic 时的栈展开必须保持内存安全（Memory Safety） |
 
 ---
 

@@ -222,6 +222,20 @@ L5 的综合分析输出到：
 
 ---
 
+## 七、L2 跨语言对比专题登记
+
+以下文件位于 L2（`02_intermediate/`），属 **C++ ↔ Rust 跨语言对比专题**。因内容服务于对应 L2 概念的就近对照学习，保留在 L2；本层（L5）登记反链，不重复正文（参见 AGENTS.md §2 Canonical 规则）：
+
+| L2 文件 | 对比主题 | 对应 L5 入口 |
+|---|---|---|
+| [RTTI 与动态类型识别](../02_intermediate/04_types_and_conversions/25_rtti_and_dynamic_typing.md) | C++ `typeid`/`dynamic_cast` vs Rust `Any`/`TypeId` | [Rust vs C++](01_systems_languages/01_rust_vs_cpp.md) |
+| [C 预处理器 vs Rust 宏](../02_intermediate/06_macros_and_metaprogramming/26_c_preprocessor_vs_rust_macros.md) | 文本替换宏 vs 卫生宏/过程宏 | [Rust vs C++](01_systems_languages/01_rust_vs_cpp.md) |
+| [异常安全：C++ 与 Rust 的错误处理哲学](../02_intermediate/03_error_handling/27_exception_safety_rust_cpp.md) | 异常安全保证 vs `Result`/panic 边界 | [Safety Boundaries](03_domain_comparisons/04_safety_boundaries.md) |
+| [构造与初始化：C++ 构造函数 vs Rust 结构体字面量](../02_intermediate/00_traits/28_construction_and_initialization.md) | 构造函数/RAII vs 字面量/Builder | [Rust vs C++](01_systems_languages/01_rust_vs_cpp.md) |
+| [友元 vs 模块可见性](../02_intermediate/05_modules_and_visibility/29_friend_vs_module_privacy.md) | C++ `friend` vs Rust `pub(crate)` 隐私边界 | [Safety Boundaries](03_domain_comparisons/04_safety_boundaries.md) |
+
+---
+
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../00_meta/02_sources/international_authority_index.md)

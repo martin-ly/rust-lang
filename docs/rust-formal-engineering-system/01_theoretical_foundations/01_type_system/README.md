@@ -18,8 +18,8 @@
 >
 > 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
-- [类型系统（Type System）基础](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
-- [Trait 系统形式化](../../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)
+- [类型系统（Type System）基础](../../../research_notes/type_theory/10_type_system_foundations.md)
+- [Trait 系统形式化](../../../research_notes/type_theory/10_trait_system_formalization.md)
 - [型变理论](../../../research_notes/type_theory/10_variance_theory.md)
 - 生命周期（Lifetimes）形式化
 
@@ -66,12 +66,12 @@ mindmap
 
 | 文档 | 路径 | 内容 |
 | :--- | :--- | :--- |
-| **类型系统基础** | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | Curry-Howard 对应、类型推导算法 |
-| **Trait 系统形式化** | [../../../research_notes/type_theory/10_trait_system_formalization.md](../../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) | 类型类、关联类型、Orphan 规则 |
+| **类型系统基础** | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../research_notes/type_theory/10_type_system_foundations.md) | Curry-Howard 对应、类型推导算法 |
+| **Trait 系统形式化** | [../../../research_notes/type_theory/10_trait_system_formalization.md](../../../research_notes/type_theory/10_trait_system_formalization.md) | 类型类、关联类型、Orphan 规则 |
 | **型变理论** | [../../../research_notes/type_theory/10_variance_theory.md](../../../research_notes/type_theory/10_variance_theory.md) | 型变规则证明、类型构造器 |
 | **生命周期形式化** | ../../../research_notes/formal_methods/10_lifetime_formalization.md | 生命周期作为区域、子类型关系 |
-| **证明索引** | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) | 类型安全相关证明 |
-| **工具指南** | [../../../research_notes/10_tools_guide.md](../../../../archive/research_notes_2026_06_25/10_tools_guide.md) | 类型验证工具使用 |
+| **证明索引** | [../../../research_notes/10_proof_index.md](../../../research_notes/10_proof_index.md) | 类型安全相关证明 |
+| **工具指南** | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) | 类型验证工具使用 |
 
 ---
 

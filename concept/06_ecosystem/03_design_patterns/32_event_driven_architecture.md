@@ -10,7 +10,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 设计事件驱动架构
 > **定位**: 从系统架构视角分析 Rust 实现事件驱动架构的核心模式——类型安全事件总线、消息队列集成、幂等处理、背压传播——揭示所有权（Ownership）系统与不可变事件流的深层契合。
 > **前置概念**: [Async](../../03_advanced/01_async/02_async.md) ·
@@ -749,7 +749,7 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
 > **权威来源对齐变更日志**: 2026-05-22 创建事件驱动架构概念文件 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

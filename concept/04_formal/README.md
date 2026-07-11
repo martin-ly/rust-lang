@@ -200,7 +200,7 @@ graph TB
 - [线性逻辑在 Rust 中的工程应用](01_ownership_logic/09_linear_logic_applications.md)
 - [范畴论与 Rust：从函子到单子](00_type_theory/10_category_theory.md)
 - [指称语义与领域理论](03_operational_semantics/12_denotational_semantics.md)
-- [形式化方法在 Rust 中的应用](04_model_checking/13_formal_methods.md)
+- [形式化方法（Formal Methods）](04_model_checking/13_formal_methods.md) — 已合并至 L7 权威页 [`07_future/04_research_and_experimental/02_formal_methods.md`](../07_future/04_research_and_experimental/02_formal_methods.md)
 - [Lambda 演算与 Rust 计算模型](00_type_theory/14_lambda_calculus.md)
 - [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](04_model_checking/16_aerospace_certification_formal_methods.md)
 - [现代 Rust 验证工具生态（2025-2026）](04_model_checking/22_modern_verification_tools.md)
@@ -251,6 +251,23 @@ L4 → L1 映射中的信息损失:
 | **Type Theory** | 类型即命题 (Curry-Howard) | HM / System F / 代数类型 | 类型规则、推断算法 | L1-L2 类型系统（Type System） |
 | **Ownership Formal** | 所有权操作语义 | COR、区域约束图 | 借用（Borrowing）检查器算法 | L1 编译器核心 |
 | **RustBelt** | 程序逻辑验证 | Iris 分离逻辑、Protocol | Kani/Creusot/Verus | L3 并发/unsafe 验证 |
+
+### 4.1 `05_rustc_internals/` 子目录的混合定位（P3-2 裁决，2026-07-12）
+
+`05_rustc_internals/` 是一个**混合定位**子目录，容纳两类内容：
+
+| 类型 | 文件 | 定位 |
+|:---|:---|:---|
+| ① 编译器原理 / 形式化基础设施 | [19_rustc_query_system.md](05_rustc_internals/19_rustc_query_system.md)、[20_mir_codegen_llvm_primer.md](05_rustc_internals/20_mir_codegen_llvm_primer.md)、[26_trait_solver_in_rustc.md](05_rustc_internals/26_trait_solver_in_rustc.md)、[35_name_resolution_and_hir.md](05_rustc_internals/35_name_resolution_and_hir.md)、[53_generics_compiler_behavior.md](05_rustc_internals/53_generics_compiler_behavior.md) | 类型检查/推断、HIR/MIR、查询系统、单态化等**原理性**内容，保留 L4 |
+| ② Rust Reference 规范摘译与注解 | 38、40、41、42、43、45、46、47、48、49、51、52（共 12 页） | 规范条文摘译 + 示例 + 交叉引用，**非形式化推导**；各页头部均有「定位声明」标明摘译身份并指向同层形式化内容 |
+
+② 类页面保留于 L4 而非迁移至 `01_foundation/` 的裁定理由：
+
+1. **引用成本**:12 页被 `concept/`、`knowledge/`、`docs/` 外部引用 3–13 处/页，且同目录互引密集（前置/后置概念链），迁移需改动数十处链接,风险高于收益;
+2. **规范依据**:依据 [A/S/P 标记规范](../00_meta/03_audit/asp_marking_guide.md) §3.4,L4 层以 S/P 标记为主,S(Specification)规范分析类内容属于 L4 合法组成;
+3. **D1 规则**:`scripts/check_metadata_consistency.py` 的 D1 仅约束**文件内** Bloom 与「层次定位/层级」一致,不要求 Bloom 与目录层级一致,故②类页面维持 L2-L4 的内容相符标注不违规。
+
+阅读②类页面时，请以各页「定位声明」为准：需要形式化推导时跳转至①类页面或 `00_type_theory/`、`01_ownership_logic/`、`03_operational_semantics/` 子目录。
 
 ---
 

@@ -97,8 +97,8 @@
 本指南介绍如何在 Rust 中使用常见的设计模式，包括 GoF 模式和 Rust 特有的模式。
 
 **形式化引用（Reference）**：CE-T1、CE-T2、CE-T3（组合工程定理）。
-详见 [04_compositional_engineering](../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md)、
-[01_design_patterns_formal](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md)。
+详见 [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md)、
+[01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md)。
 
 ---
 
@@ -2260,7 +2260,7 @@ let req2 = builder.build()?; // 可以重用
 - [完整文档](../../crates/c09_design_pattern/README.md)
 - [GoF 模式](../../crates/c09_design_pattern/docs/tier_02_guides/01_creational_patterns_guide.md)
 - [Rust 特有模式](../../crates/c09_design_pattern/docs/tier_02_guides/05_best_practices_and_antipatterns.md)
-- [设计模式形式化文档](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md) - 23种设计模式的形式化定义与分析
+- [设计模式形式化文档](../research_notes/software_design_theory/01_design_patterns_formal/README.md) - 23种设计模式的形式化定义与分析
 
 ## 🆕 Rust 1.95+ 特性在设计模式中的应用 {#rust-195-特性在设计模式中的应用}
 >

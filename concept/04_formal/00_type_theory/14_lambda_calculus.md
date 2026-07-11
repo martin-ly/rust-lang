@@ -435,7 +435,7 @@ fn main() {
 
 (Source: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/))
 
-## 相关概念文件
+## 相关概念
 
 - [Type Theory](02_type_theory.md) — 类型论
 - [Operational Semantics](../03_operational_semantics/17_operational_semantics.md) — 操作语义
@@ -450,7 +450,7 @@ fn main() {
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

@@ -11,7 +11,7 @@
 >
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 设计 Rust for Linux 架构
 > **定位**: 深入分析 **Rust for Linux** 项目——如何将 Rust 引入 Linux 内核开发，从驱动程序编写、C 互操作到内核特定的安全保证，揭示系统编程范式的历史性转变。
 > **前置概念**: [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) · [FFI](../../03_advanced/04_ffi/05_rust_ffi.md) · [Cross Compilation](../../06_ecosystem/05_systems_and_embedded/17_cross_compilation.md)
@@ -657,7 +657,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) — 不安全代码
 - [FFI](../../03_advanced/04_ffi/05_rust_ffi.md) — 外部函数接口
@@ -671,7 +671,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.2
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-20
 **状态**: ✅ 权威来源对齐完成 (Batch 34)
 

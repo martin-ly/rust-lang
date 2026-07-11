@@ -4,9 +4,10 @@
 > **Summary**: Rust 1.95.0（2026-04-16 stable）引入的关键语言与库特性：`cfg_select!` 宏（Macro）、`if let` guards、路径段关键字重命名导入、`core::range` 模块（Module）、原子 `update` / `try_update`、集合可变引用（Mutable Reference）插入、`as_ref_unchecked` / `as_mut_unchecked`、`Layout` 新 API、`cold_path` 提示、布尔 `TryFrom<{integer}>`、`MaybeUninit` 与 `Cell` 数组互转，以及 PowerPC/PowerPC64 内联汇编（Inline Assembly）稳定化。
 >
 > **受众**: [进阶] / [专家]
+> **Bloom 层级**: L2-L3
 > **内容分级**: [参考级]
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **对应 Rust 版本**: **1.95.0 stable**
+> **Rust 版本**: **1.95.0 stable**
 > **最后更新**: 2026-07-01
 > **状态**: ✅ 已对齐 Rust 1.95.0 stable
 >

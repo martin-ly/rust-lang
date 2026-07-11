@@ -8,7 +8,7 @@
 > **受众**: [中级 → 高级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **P** — Practice
+> **A/S/P 标记**: **A** — Application
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“如何调优编译参数”和“如何在 Cargo.toml 中统一管理 lint”讲清楚，覆盖 Profile 与 Cargo 自有 lint 两层机制。
 > **前置概念**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -169,7 +169,7 @@ opt-level = 3
 
 ## 六、Cargo Lints
 
-Cargo 自带一套 lint，用于检查 `Cargo.toml` 本身的问题。截至 Rust 1.96，Cargo lints 仍为 **nightly-only**。
+Cargo 自带一套 lint，用于检查 `Cargo.toml` 本身的问题。截至 Rust 1.96，Cargo lints 仍为**仅每日构建版**。
 
 ### Lint 分组
 
@@ -224,7 +224,7 @@ unsafe_code = "forbid"
 workspace = true
 ```
 
-> **注意**: `lints.rust` 控制 rustc lint；`lints.clippy` 控制 Clippy；`lints.cargo` 控制 Cargo 自身 lint。Cargo lints 目前需 nightly。
+> **注意**: `lints.rust` 控制 rustc lint；`lints.clippy` 控制 Clippy；`lints.cargo` 控制 Cargo 自身 lint。Cargo lints 目前需每日构建版工具链。
 >
 > [Cargo Book — Lints](https://doc.rust-lang.org/cargo/index.html)(<https://doc.rust-lang.org/cargo/reference/lints.html>)
 
@@ -270,7 +270,7 @@ workspace = true
 <details>
 <summary>✅ 答案与解析</summary>
 
-Cargo lints 目前仍为 nightly-only 不稳定特性，需要在 nightly 工具链上使用。
+Cargo lints 目前仍为仅每日构建版的不稳定特性，需要在每日构建版工具链上使用。
 
 </details>
 
@@ -290,7 +290,7 @@ Cargo lints 目前仍为 nightly-only 不稳定特性，需要在 nightly 工具
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 / Cargo profiles & lints
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Cargo Book profiles / lints 文档
 

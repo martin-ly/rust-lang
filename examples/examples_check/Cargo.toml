@@ -1,0 +1,26 @@
+[package]
+name = "examples_check"
+version = "0.1.0"
+edition = "2024"
+description = "Compile guard for dependency-using loose examples in examples/ (not a workspace member)"
+publish = false
+
+# Detach from the root virtual workspace: this crate only guards example compilation.
+[workspace]
+
+[[bin]]
+name = "comprehensive_web_server"
+path = "../comprehensive_web_server.rs"
+
+[[bin]]
+name = "microservice_template"
+path = "../microservice_template.rs"
+
+[[bin]]
+name = "rust_194_controlflow_patterns"
+path = "../rust_194_controlflow_patterns.rs"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+axum = "0.8"
+async-trait = "0.1"

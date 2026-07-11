@@ -212,7 +212,7 @@ type PositiveInt = u32 where PositiveInt > 0;
 fn main() {}
 ```
 
-> **错误诊断**: `error[E0658]: where clauses on type aliases are unstable`（在 stable Rust 1.96 中不支持在类型别名 where 子句中放置值约束）。
+> **错误诊断**: `error[E0658]`（类型别名 where 子句放置值约束为未稳定特性；stable Rust 1.96 不支持）。
 > **修正**: 使用 newtype 模式 + 构造函数校验。
 >
 > ```rust

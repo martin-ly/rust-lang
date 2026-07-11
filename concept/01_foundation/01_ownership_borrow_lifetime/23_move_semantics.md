@@ -4,6 +4,7 @@
 >
 > **EN**: Move Semantics
 > **Summary**: A focused comparison of move semantics in C++ (move constructors, xvalues, moved-from state) and Rust (ownership transfer, Copy/Clone, compiler-enforced invalidation).
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -35,6 +36,7 @@
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ---
+
 ## 一、核心命题
 
 > **Move 语义解决同一个问题：如何在不复制大量数据的情况下转移资源所有权（Ownership）。
@@ -241,6 +243,13 @@ move: T@src → T@dst
 - [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html)
 
 ---
+
+
+## 相关概念
+
+- **上层概念**: [Ownership](01_ownership.md) · [Variable Model](../03_values_and_references/20_variable_model.md) · [Borrowing](02_borrowing.md) · [学习指南](../../00_meta/04_navigation/learning_guide.md)
+- **下层概念**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Construction](../../02_intermediate/00_traits/28_construction_and_initialization.md)
+
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 

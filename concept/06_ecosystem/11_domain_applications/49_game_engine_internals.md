@@ -11,7 +11,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: C×Eva — 评价 Rust 游戏引擎核心系统的架构设计与实现权衡
 > **前置依赖**: [ECS 架构](07_game_ecs.md) · [游戏开发](21_game_development.md) · [并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [Async/Await](../../03_advanced/01_async/02_async.md)
 > **后置延伸**: [性能优化](../10_performance/15_performance_optimization.md) · [嵌入式系统](../05_systems_and_embedded/22_embedded_systems.md) · [内存管理](../../02_intermediate/02_memory_management/03_memory_management.md)
@@ -28,7 +28,7 @@
 > [Real-Time Rendering — Tomas Akenine-Möller](https://www.realtimerendering.com/) ·
 > [Vulkan Specification](https://www.khronos.org/registry/vulkan/specs/1.3/html/vkspec.html) ·
 > [WGPU Documentation](https://docs.rs/wgpu/latest/wgpu/)
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -641,7 +641,7 @@ PCM 样本流
                                         音频输出 (OS 音频后端)
 ```
 
-> **来源**: [Game Audio Programming](https://api.pageplace.de/preview/DT0400.9781498746748_A28523397/preview-9781498746748_A28523397.pdf) ·
+> **来源**: Game Audio Programming（书籍试读 PDF） ·
 > [OpenAL Specification](https://www.openal.org/documentation/)
 
 ### 6.2 Rust 音频生态
@@ -1026,7 +1026,7 @@ enum AssetState {
 > [来源: [gilrs Gamepad](https://docs.rs/gilrs/latest/gilrs/)]
 > [来源: [hecs ECS](https://docs.rs/hecs/latest/hecs/)]
 
-## 相关概念文件
+## 相关概念
 
 - [ECS 架构](07_game_ecs.md) — Entity-Component-System 设计模式
 - [游戏开发](21_game_development.md) — 游戏开发概述与工具链
@@ -1040,7 +1040,7 @@ enum AssetState {
 - [架构设计模式](../03_design_patterns/35_architecture_patterns.md) — 分层/六边形架构
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: Game Engine Internals（游戏引擎内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Game Engine Internals（游戏引擎内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Game Engine Internals（游戏引擎内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

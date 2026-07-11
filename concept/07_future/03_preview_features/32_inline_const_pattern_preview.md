@@ -4,6 +4,7 @@
 >
 > **EN**: Inline Const Pattern Preview
 > **Summary**: Preview of inline const patterns (`const { expr }` in match arms), extending stable inline const expressions into pattern matching contexts; nightly experimental.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

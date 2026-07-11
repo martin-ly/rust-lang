@@ -8,7 +8,7 @@
 > **内容分级**: [专家级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
-> **A/S/P 标记**: **A+S+P** — 全维度
+> **A/S/P 标记**: **S+A+P** — 全维度
 > **双维定位**: P×Cre — 设计区块链系统的 Rust 架构
 > **前置概念**: · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
@@ -690,7 +690,7 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

@@ -430,7 +430,7 @@ graph TD
 
 > **认知功能**: **泛型（Generics） > 宏（Macro）**——当类型系统（Type System）可以表达时，优先使用泛型（更好的错误信息、IDE 支持、编译速度）。
 > (Source: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html))
-> [来源: [Rust Style Guide](https://doc.rust-lang.org/nightly/style-guide/)]
+> [来源: [Rust Style Guide](https://github.com/rust-lang/rust/tree/master/src/doc/style-guide)]
 
 ---
 
@@ -549,7 +549,10 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
+- **上层概念**: [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) · [Traits](../00_traits/01_traits.md)
+- **下层概念**: [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) · [DSL](13_dsl_and_embedding.md)
+
 
 - [Attributes and Macros](../../01_foundation/09_macros_basics/12_attributes_and_macros.md) — 属性与宏基础
 - [Proc Macros](../../03_advanced/03_proc_macros/07_proc_macro.md) — 过程宏（Procedural Macro）
@@ -563,7 +566,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

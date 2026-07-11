@@ -8,7 +8,7 @@
 > **最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [formal_methods/](../../../../archive/research_notes_2026_06_25/formal_methods/README.md)
+> 内容已整合至： [formal_methods/](../../../research_notes/formal_methods/README.md)
 
 > **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
 >
@@ -72,8 +72,8 @@ mindmap
 | **所有权模型** | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) | 所有权系统的形式化定义 |
 | **借用检查器证明** | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用规则的形式化证明 |
 | **生命周期形式化** | ../../../research_notes/formal_methods/10_lifetime_formalization.md | 生命周期与区域理论 |
-| **证明索引** | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) | 所有权（Ownership）/借用相关证明 |
-| **工具指南** | [../../../research_notes/10_tools_guide.md](../../../../archive/research_notes_2026_06_25/10_tools_guide.md) | 借用检查验证工具 |
+| **证明索引** | [../../../research_notes/10_proof_index.md](../../../research_notes/10_proof_index.md) | 所有权（Ownership）/借用相关证明 |
+| **工具指南** | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) | 借用检查验证工具 |
 
 ---
 

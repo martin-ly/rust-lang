@@ -53,11 +53,14 @@ jobs:
       - name: Install mdbook
         run: cargo install mdbook --locked
 
+      # 与 scripts/run_quality_gates.sh 对齐：14 阻断门 + 4 语义观察门。
+      # 阻断门（10 基础 + 4 已转正 strict）失败才创建 issue；观察门仅记录结果（continue-on-error 语义）。
       - name: Run all quality gates
         id: gates
         continue-on-error: true
         run: |
           set +e
+          # --- 10 基础阻断门 ---
           echo "cargo_check="$(cargo check --workspace >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           echo "cargo_test="$(cargo test --workspace --quiet >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           echo "cargo_clippy="$(cargo clippy --workspace -- -D warnings >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
@@ -67,6 +70,21 @@ jobs:
           echo "kb_auditor="$(python scripts/kb_auditor.py --link-check >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           echo "overlap="$(python scripts/detect_content_overlap.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           echo "i18n="$(python scripts/add_bilingual_annotations.py --mode check-only >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          echo "mermaid="$(python scripts/check_mermaid_syntax.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          # --- 4 已转正阻断门（--strict，AGENTS.md §5.2） ---
+          echo "topology="$(python scripts/check_topology_quality.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          echo "kg_shapes="$(python scripts/check_kg_shapes.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          echo "canonical_uniqueness="$(python scripts/check_canonical_uniqueness.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          echo "concept_consistency="$(python scripts/concept_consistency_auditor.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          # --- 4 语义观察门（continue-on-error，不触发 issue） ---
+          echo "metadata="$(python scripts/check_metadata_consistency.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          python scripts/detect_content_overlap_v2.py --budget 999999 >/dev/null 2>&1
+          python scripts/triage_overlap.py >/dev/null 2>&1
+          ACTIONABLE=$(python -c "import glob,json; s=json.load(open(sorted(glob.glob('reports/OVERLAP_TRIAGE_*.json'))[-1],encoding='utf-8'))['summary']; print(s.get('MERGE',0)+s.get('DOCS_INTERNAL',0))")
+          echo "overlap_v2_actionable=$ACTIONABLE" >> $GITHUB_OUTPUT
+          if [ "$ACTIONABLE" -gt 53 ]; then echo "overlap_v2=warn" >> $GITHUB_OUTPUT; else echo "overlap_v2=passed" >> $GITHUB_OUTPUT; fi
+          echo "semantic_health="$(python scripts/semantic_health.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          echo "authority_coverage="$(python scripts/check_concept_authority_coverage.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
 
       - name: Upload reports as artifacts
         uses: actions/upload-artifact@v4
@@ -75,11 +93,20 @@ jobs:
           path: |
             reports/kb_quality_dashboard.md
             reports/CONTENT_OVERLAP_DETECTION_*.md
+            reports/CONTENT_OVERLAP_V2_*.md
+            reports/OVERLAP_TRIAGE_*.md
+            reports/METADATA_CONSISTENCY_BASELINE_*.md
+            reports/TOPOLOGY_QUALITY_*.md
+            reports/KG_SHAPES_VALIDATION_*.md
+            reports/SEMANTIC_HEALTH_*.md
+            reports/CONCEPT_AUTHORITY_COVERAGE_*.md
+            reports/CANONICAL_UNIQUENESS_*.md
+            reports/CONCEPT_CONSISTENCY_AUDIT_*.md
             reports/internal_link_check_report.md
           retention-days: 7
 
       - name: Create issue on failure
-        if: steps.gates.outputs.cargo_check == 'failed' || steps.gates.outputs.cargo_test == 'failed' || steps.gates.outputs.cargo_clippy == 'failed' || steps.gates.outputs.cargo_audit == 'failed' || steps.gates.outputs.cargo_vet == 'failed' || steps.gates.outputs.mdbook_build == 'failed' || steps.gates.outputs.kb_auditor == 'failed' || steps.gates.outputs.overlap == 'failed' || steps.gates.outputs.i18n == 'failed'
+        if: steps.gates.outputs.cargo_check == 'failed' || steps.gates.outputs.cargo_test == 'failed' || steps.gates.outputs.cargo_clippy == 'failed' || steps.gates.outputs.cargo_audit == 'failed' || steps.gates.outputs.cargo_vet == 'failed' || steps.gates.outputs.mdbook_build == 'failed' || steps.gates.outputs.kb_auditor == 'failed' || steps.gates.outputs.overlap == 'failed' || steps.gates.outputs.i18n == 'failed' || steps.gates.outputs.mermaid == 'failed' || steps.gates.outputs.topology == 'failed' || steps.gates.outputs.kg_shapes == 'failed' || steps.gates.outputs.canonical_uniqueness == 'failed' || steps.gates.outputs.concept_consistency == 'failed'
         uses: actions/github-script@v7
         with:
           script: |
@@ -92,10 +119,19 @@ jobs:
               'mdbook Build': '${{ steps.gates.outputs.mdbook_build }}',
               'KB Auditor': '${{ steps.gates.outputs.kb_auditor }}',
               'Content Overlap': '${{ steps.gates.outputs.overlap }}',
-              'i18n Terms': '${{ steps.gates.outputs.i18n }}'
+              'i18n Terms': '${{ steps.gates.outputs.i18n }}',
+              'Mermaid Syntax': '${{ steps.gates.outputs.mermaid }}',
+              'Topology Quality (strict)': '${{ steps.gates.outputs.topology }}',
+              'KG SHACL (strict)': '${{ steps.gates.outputs.kg_shapes }}',
+              'Canonical Uniqueness (strict)': '${{ steps.gates.outputs.canonical_uniqueness }}',
+              'Concept Consistency (strict)': '${{ steps.gates.outputs.concept_consistency }}',
+              'Metadata Consistency (observe)': '${{ steps.gates.outputs.metadata }}',
+              'Content Overlap v2 (observe, actionable=${{ steps.gates.outputs.overlap_v2_actionable }})': '${{ steps.gates.outputs.overlap_v2 }}',
+              'Semantic Health (observe)': '${{ steps.gates.outputs.semantic_health }}',
+              'Authority Coverage (observe)': '${{ steps.gates.outputs.authority_coverage }}'
             };
             const summary = Object.entries(jobs)
-              .map(([name, result]) => `- ${result === 'passed' ? '✅' : '❌'} ${name}`)
+              .map(([name, result]) => `- ${result === 'passed' ? '✅' : result === 'warn' ? '⚠️' : '❌'} ${name}`)
               .join('\n');
             const body = `## ❌ Nightly Quality Gates Failed\n\n${summary}\n\n---\n*Workflow: .github/workflows/nightly_quality_report.yml*`;
             await github.rest.issues.create({

@@ -293,7 +293,7 @@ jobs:
         continue-on-error: true
 
   topology-quality:
-    name: Topology Quality (observe)
+    name: Topology Quality (strict)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -302,12 +302,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run topology quality check (observe, append --strict to enforce)
-        run: python scripts/check_topology_quality.py
-        continue-on-error: true
+      - name: Run topology quality check (blocking, promoted 2026-07-12 per AGENTS.md §5.2)
+        run: python scripts/check_topology_quality.py --strict
+        continue-on-error: false
 
   kg-shacl-validation:
-    name: KG SHACL Validation (observe)
+    name: KG SHACL Validation (strict)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -316,9 +316,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run KG SHACL validation (observe, append --strict to enforce)
-        run: python scripts/check_kg_shapes.py
-        continue-on-error: true
+      - name: Run KG SHACL validation (blocking, promoted 2026-07-12 per AGENTS.md §5.2)
+        run: python scripts/check_kg_shapes.py --strict
+        continue-on-error: false
 
   semantic-health:
     name: Semantic Health (observe)
@@ -348,8 +348,8 @@ jobs:
         run: python scripts/check_concept_authority_coverage.py
         continue-on-error: true
 
-  concept-consistency-audit:
-    name: Concept Consistency Audit (observe)
+  canonical-uniqueness:
+    name: Canonical Uniqueness (strict)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -358,9 +358,23 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run concept consistency audit (observe, append --strict to enforce)
-        run: python scripts/concept_consistency_auditor.py
-        continue-on-error: true
+      - name: Run canonical uniqueness check (blocking, promoted 2026-07-12 per AGENTS.md §5.2)
+        run: python scripts/check_canonical_uniqueness.py --strict
+        continue-on-error: false
+
+  concept-consistency-audit:
+    name: Concept Consistency Audit (strict)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run concept consistency audit (blocking, promoted 2026-07-12 per AGENTS.md §5.2)
+        run: python scripts/concept_consistency_auditor.py --strict
+        continue-on-error: false
 
   quality-gates-summary:
     name: Quality Gates Summary
@@ -382,6 +396,7 @@ jobs:
       - kg-shacl-validation
       - semantic-health
       - concept-authority-coverage
+      - canonical-uniqueness
       - concept-consistency-audit
     if: always() && github.event_name == 'pull_request'
     steps:
@@ -402,11 +417,12 @@ jobs:
               'Mermaid Syntax Check': '${{ needs.mermaid-syntax.result }}',
               'Metadata Consistency (observe)': '${{ needs.metadata-consistency.result }}',
               'Content Overlap v2 (observe)': '${{ needs.content-overlap-v2.result }}',
-              'Topology Quality (observe)': '${{ needs.topology-quality.result }}',
-              'KG SHACL Validation (observe)': '${{ needs.kg-shacl-validation.result }}',
+              'Topology Quality (strict)': '${{ needs.topology-quality.result }}',
+              'KG SHACL Validation (strict)': '${{ needs.kg-shacl-validation.result }}',
               'Semantic Health (observe)': '${{ needs.semantic-health.result }}',
               'Concept Authority Coverage (observe)': '${{ needs.concept-authority-coverage.result }}',
-              'Concept Consistency Audit (observe)': '${{ needs.concept-consistency-audit.result }}'
+              'Canonical Uniqueness (strict)': '${{ needs.canonical-uniqueness.result }}',
+              'Concept Consistency Audit (strict)': '${{ needs.concept-consistency-audit.result }}'
             };
 
             let status = '✅';
@@ -431,7 +447,7 @@ jobs:
             ${summary}
 
             ---
-            *All 17 quality gates completed (10 blocking + 7 semantic observe)*`;
+            *All 18 quality gates completed (14 blocking + 4 semantic observe)*`;
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,

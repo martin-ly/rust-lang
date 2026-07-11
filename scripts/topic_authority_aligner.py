@@ -322,7 +322,7 @@ ROADMAP_TOPICS = [
 AUTHORITY_TOPIC_ALIASES = {
     # 形式化/验证生态
     "Iris: Higher-Order Concurrent Separation Logic Framework": "concept/04_formal/02_separation_logic/11_separation_logic.md",
-    "Borrow Sanitizer": "concept/07_future/02_stabilized_features/borrow_sanitizer.md",
+    "Borrow Sanitizer": "concept/07_future/03_preview_features/borrow_sanitizer.md",
     "Miri: Rust Interpreter for Undefined Behavior": "concept/04_formal/04_model_checking/31_miri.md",
     "Ferrocene: Rust for Safety-Critical Systems": "concept/07_future/03_preview_features/35_ferrocene_preview.md",
     "Verus: Verified Rust for Low-Level Systems": "concept/04_formal/04_model_checking/22_modern_verification_tools.md",

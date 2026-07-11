@@ -138,7 +138,7 @@
    - ASCII 艺术知识结构 + 完整学习路径 (初/中/高级)
    - 问题诊断树 + 性能优化金字塔
    - 技术选型决策树 + 检查清单
-4. **[Rust 1.93.0 实战示例](../../archive/docs/version_reports/README.md)** ⭐⭐⭐⭐⭐
+4. **[Rust 1.93.0 实战示例](../../archive/docs/version_reports/README.md)（归档只读）** ⭐⭐⭐⭐⭐
    - 线程创建与管理 (8个示例) + thread::scope 实战
    - Channel 消息传递 (4个示例) + 同步原语 (7个示例)
    - 综合项目：并发 Web 爬虫 + 任务调度器

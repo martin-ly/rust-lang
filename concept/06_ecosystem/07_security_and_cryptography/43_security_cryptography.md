@@ -12,7 +12,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Eva — 评价密码学实现的安全性
 > **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [类型系统（Type System）](../../01_foundation/02_type_system/04_type_system.md) · 安全实践
 > **后置延伸**: [区块链与智能合约安全](../11_domain_applications/06_blockchain.md) · [网络协议](../04_web_and_networking/38_network_protocols.md) · [TLS/QUIC](../04_web_and_networking/38_network_protocols.md)
@@ -30,7 +30,7 @@
 > [ring crate](https://briansmith.org/rustdoc/ring/) ·
 > [rustls](https://docs.rs/rustls/latest/rustls/) ·
 > [dalek-cryptography](https://docs.rs/ed25519-dalek/latest/ed25519_dalek/)
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -826,7 +826,7 @@ fn weak_hash_password(password: &str) -> String {
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [安全实践](19_security_practices.md) — 防御性编程、安全模式
 - [网络协议](../04_web_and_networking/38_network_protocols.md) — QUIC/HTTP-3、TLS 底层
@@ -838,7 +838,7 @@ fn weak_hash_password(password: &str) -> String {
 - [形式化验证](../../04_formal/04_model_checking/05_verification_toolchain.md) — 密码学实现的形式化证明
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: Security & Cryptography（安全与密码学） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Security & Cryptography（安全与密码学） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Security & Cryptography（安全与密码学） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

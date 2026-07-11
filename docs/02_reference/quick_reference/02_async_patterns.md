@@ -860,8 +860,8 @@ tokio = { version = "1", features = [
 
 - [异步语义理论](../../../crates/c06_async/src/async_semantics_theory.rs)
 - [CSP vs Actor](../../../crates/c06_async/src/csp_model_comparison.rs)
-- [异步状态机形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) — Def 4.1–5.2、定理 T6.1–T6.3
-- [Pin 和自引用类型形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) — Def 1.1–2.2、定理 T1–T3
+- [异步状态机形式化](../../research_notes/formal_methods/10_async_state_machine.md) — Def 4.1–5.2、定理 T6.1–T6.3
+- [Pin 和自引用类型形式化](../../research_notes/formal_methods/10_pin_self_referential.md) — Def 1.1–2.2、定理 T1–T3
 
 ---
 
@@ -1194,7 +1194,7 @@ async fn process_stream() {
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [异步编程完整文档](../../../crates/c06_async/docs/README.md)
-- [异步状态机研究](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md)
+- [异步状态机研究](../../research_notes/formal_methods/10_async_state_machine.md)
 
 ### 相关速查卡 {#相关速查卡}
 >

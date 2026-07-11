@@ -11,7 +11,7 @@
 # 进程管理快速参考卡片 {#进程管理快速参考卡片}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为进程管理速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 进程模型`](../../../concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md)
+> **权威来源（Canonical）**: 本文件为进程管理速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 进程模型`](../../../concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（进程常用 API/配置/性能/错误处理/反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
 
@@ -519,8 +519,8 @@ impl ProcessMonitor {
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
 | **所有权（Ownership）模型** | [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) | 进程资源生命周期（Lifetimes）管理 |
-| **异步状态机** | [async_state_machine](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 异步进程管理语义 |
-| **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 跨线程进程句柄安全 |
+| **异步状态机** | [async_state_machine](../../research_notes/formal_methods/10_async_state_machine.md) | 异步进程管理语义 |
+| **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/10_send_sync_formalization.md) | 跨线程进程句柄安全 |
 
 ### 形式化定理 {#形式化定理}
 
@@ -550,7 +550,7 @@ impl ProcessMonitor {
 - [完整文档](../../../crates/c07_process/README.md)
 - [异步IO指南](../../../crates/c07_process/docs/async_stdio_guide.md)
 - [性能优化指南](../../../crates/c07_process/docs/performance_optimization_usage_guide.md)
-- [形式化方法研究](../../../archive/research_notes_2026_06_25/formal_methods/README.md)
+- [形式化方法研究](../../research_notes/formal_methods/README.md)
 
 ### 相关速查卡 {#相关速查卡}
 

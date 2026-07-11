@@ -180,7 +180,7 @@ graph TB
 - [Rust 数据库访问生态](06_data_and_distributed/23_database_access.md)
 - [Rust 云原生生态](04_web_and_networking/24_cloud_native.md)
 - [Rust CLI 开发生态](05_systems_and_embedded/25_cli_development.md)
-- [Rust 游戏开发](11_domain_applications/26_game_development.md)
+- [Rust 游戏开发](11_domain_applications/26_game_development.md) — 已合并至 [21_game_development.md](11_domain_applications/21_game_development.md)（重定向 stub）
 - [Rust Web 框架对比与选型](04_web_and_networking/27_web_frameworks.md)
 - [DevOps 与 CI/CD：Rust 的持续交付工程实践](00_toolchain/28_devops_and_ci_cd.md)
 - [算法与竞赛编程 (Algorithms & Competitive Programming)](11_domain_applications/29_algorithms_competitive_programming.md)
@@ -200,6 +200,8 @@ graph TB
 - [Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust）](11_domain_applications/54_webassembly_advanced.md)
 - [Rust for Data Science（Rust 数据科学）](06_data_and_distributed/55_rust_for_data_science.md)
 - [C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）](05_systems_and_embedded/56_c_to_rust_translation.md)
+
+> **目录分工说明（04 vs 12）**: `04_web_and_networking/` 聚焦 **Web/云原生应用架构层**（Web 框架、HTTP 客户端、WebSocket、云原生、分布式系统、响应式编程）；`12_networking/` 聚焦 **网络编程基础与协议实现层**（socket 编程、协议快速入门、高级协议 gRPC/MQTT/QUIC、网络安全、自定义协议、形式化协议理论）。两者互补不重复；原 `09_networking` 因与 `09_testing_and_quality` 编号冲突，已重编号为 `12_networking`（2026-07-12）。
 
 ## 三、L1-L5 → L6 的工程映射
 

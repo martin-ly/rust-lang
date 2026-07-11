@@ -178,7 +178,7 @@ fn main() {
 - 分配堆内存（`Box::new`、`Vec::new` 等）
 - 执行 I/O
 - 调用非 `const fn`
-- 使用 `unsafe` 块（部分 unstable 特性除外）
+- 使用 `unsafe` 块（部分未稳定特性除外）
 - 使用 `for` 循环（稳定版需用 `while`/`loop`）
 
 > [来源: [The Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html)]

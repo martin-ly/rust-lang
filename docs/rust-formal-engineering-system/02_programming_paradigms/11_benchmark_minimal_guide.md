@@ -7,7 +7,7 @@
 > **最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [10_performance_benchmarks.md](../../../archive/research_notes_2026_06_25/experiments/10_performance_benchmarks.md)
+> 内容已整合至： [10_performance_benchmarks.md](../../research_notes/experiments/10_performance_benchmarks.md)
 
 [返回主索引](../00_master_index.md)
 
@@ -19,11 +19,11 @@
 
 | 文档 | 路径 | 内容 |
 | :--- | :--- | :--- |
-| **性能基准实验** | [../../research_notes/experiments/10_performance_benchmarks.md](../../../archive/research_notes_2026_06_25/experiments/10_performance_benchmarks.md) | 基准测试方法论、统计分析 |
-| **编译器优化** | [../../research_notes/experiments/10_compiler_optimizations.md](../../../archive/research_notes_2026_06_25/experiments/10_compiler_optimizations.md) | 编译器优化分析 |
+| **性能基准实验** | [../../research_notes/experiments/10_performance_benchmarks.md](../../research_notes/experiments/10_performance_benchmarks.md) | 基准测试方法论、统计分析 |
+| **编译器优化** | [../../research_notes/experiments/10_compiler_optimizations.md](../../research_notes/experiments/10_compiler_optimizations.md) | 编译器优化分析 |
 | **性能调优指南** | [../../05_guides/05_performance_tuning_guide.md](../../05_guides/05_performance_tuning_guide.md) | 实用优化技巧 |
-| **证明索引** | [../../research_notes/10_proof_index.md](../../../archive/research_notes_2026_06_25/10_proof_index.md) | 性能相关证明 |
-| **工具指南** | [../../research_notes/10_tools_guide.md](../../../archive/research_notes_2026_06_25/10_tools_guide.md) | 基准测试工具使用 |
+| **证明索引** | [../../research_notes/10_proof_index.md](../../research_notes/10_proof_index.md) | 性能相关证明 |
+| **工具指南** | [../../research_notes/10_tools_guide.md](../../research_notes/10_tools_guide.md) | 基准测试工具使用 |
 
 ---
 
@@ -493,9 +493,9 @@ criterion_main!(benches);
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 性能基准实验 | 基准测试方法论 | [../../research_notes/experiments/10_performance_benchmarks.md](../../../archive/research_notes_2026_06_25/experiments/10_performance_benchmarks.md) |
-| 编译器优化 | 编译器优化分析 | [../../research_notes/experiments/10_compiler_optimizations.md](../../../archive/research_notes_2026_06_25/experiments/10_compiler_optimizations.md) |
-| 并发性能 | 并发性能测试 | [../../research_notes/experiments/10_concurrency_performance.md](../../../archive/research_notes_2026_06_25/experiments/10_concurrency_performance.md) |
+| 性能基准实验 | 基准测试方法论 | [../../research_notes/experiments/10_performance_benchmarks.md](../../research_notes/experiments/10_performance_benchmarks.md) |
+| 编译器优化 | 编译器优化分析 | [../../research_notes/experiments/10_compiler_optimizations.md](../../research_notes/experiments/10_compiler_optimizations.md) |
+| 并发性能 | 并发性能测试 | [../../research_notes/experiments/10_concurrency_performance.md](../../research_notes/experiments/10_concurrency_performance.md) |
 
 ### 工具链 {#工具链}
 >

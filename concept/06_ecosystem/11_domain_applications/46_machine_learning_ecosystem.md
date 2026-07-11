@@ -10,7 +10,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Ana — 分析 Rust ML 生态的技术选型与工程权衡
 > **前置依赖**: [类型系统（Type System）](../../01_foundation/02_type_system/04_type_system.md) · [泛型（Generics）](../../02_intermediate/01_generics/02_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
 > **后置延伸**: [嵌入式系统](../05_systems_and_embedded/22_embedded_systems.md) · [性能优化](../10_performance/15_performance_optimization.md) · [并发编程](../../03_advanced/00_concurrency/01_concurrency.md)
@@ -29,7 +29,7 @@
 > [polars — DataFrame Library](https://pola.rs/) ·
 > [Apache Arrow Rust](https://arrow.apache.org/rust/) ·
 > [DataFusion — Query Engine](https://arrow.apache.org/datafusion/)
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -838,7 +838,7 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [性能优化](../10_performance/15_performance_optimization.md) — SIMD、缓存优化、内存布局
 - [嵌入式系统](../05_systems_and_embedded/22_embedded_systems.md) — `#![no_std]`、资源受限环境
@@ -850,7 +850,7 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 - [WebAssembly](11_webassembly.md) — WASM 目标、浏览器内推理
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: Machine Learning Ecosystem（机器学习生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Machine Learning Ecosystem（机器学习生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Machine Learning Ecosystem（机器学习生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

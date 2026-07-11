@@ -1,6 +1,7 @@
 # Cross Reference Matrix（交叉引用矩阵）
 
 > **Summary**: Redirect stub for the cross-reference matrix; the authoritative index is concept_index.md.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **EN**: Cross Reference Matrix
 > **状态**: 已合并
 > **说明**: 本文件为交叉引用矩阵占位页，内容与 [`concept_index.md`](concept_index.md) 的交叉引用索引高度重叠。为统一权威来源，本文件作为重定向 stub 保留。

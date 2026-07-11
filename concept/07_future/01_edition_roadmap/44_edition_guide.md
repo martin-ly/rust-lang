@@ -9,7 +9,7 @@
 > **受众**: [专家]
 > **内容分级**: [综述级]
 > **Bloom 层级**: L3-L5
-> **A/S/P 标记**: **A+S** — ApplicationStructure
+> **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×App — 应用 Edition 指南
 > **定位**: 全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。
 > **注意**: Rust 2024 Edition 已在 **Rust 1.85.0** 稳定；`gen {}` blocks / `gen fn` 仍为 nightly（feature `gen_blocks`，跟踪 issue #117078），本文档将其作为前瞻特性介绍。
@@ -497,7 +497,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Rust Version Tracking](../00_version_tracking/05_rust_version_tracking.md) — 版本跟踪
 - [Evolution](../04_research_and_experimental/03_evolution.md) — 语言演进
@@ -511,7 +511,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -889,4 +889,4 @@ fn demo_fixed() { takes_f32(1.0_f32); let _: f64 = f64::from(2.0_f64); }
   - [`rust_1_97_stabilized.md`](../00_version_tracking/rust_1_97_stabilized.md)
   - [`feature_domain_matrix_197.md`](../00_version_tracking/feature_domain_matrix_197.md)（Compat-Lint 列、§4.9、§5.4）
   - [`migration_197_decision_tree.md`](../00_version_tracking/migration_197_decision_tree.md)（§4 `f32: From<{float}>` 迁移判定树）
-- **交叉**：edition 概览视角见 [`32_editions.md`](../../02_intermediate/00_traits/32_editions.md) §八；fallback 推断承载页 [`27_type_checking_and_inference.md`](../../04_formal/00_type_theory/27_type_checking_and_inference.md)、[`31_never_type.md`](../../01_foundation/02_type_system/31_never_type.md)。
+- **交叉**：edition 概览视角见 [`32_editions.md`](../../07_future/00_version_tracking/32_editions.md) §八；fallback 推断承载页 [`27_type_checking_and_inference.md`](../../04_formal/00_type_theory/27_type_checking_and_inference.md)、[`31_never_type.md`](../../01_foundation/02_type_system/31_never_type.md)。

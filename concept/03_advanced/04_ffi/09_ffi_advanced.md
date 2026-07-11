@@ -554,7 +554,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Unsafe](../02_unsafe/03_unsafe.md) — 不安全代码
 - [FFI Basics](05_rust_ffi.md) — FFI 基础
@@ -568,7 +568,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -766,7 +766,7 @@ fn main() {
 }
 ```
 
-> **修正**: C 的**可变参数函数**（variadic function，如 `printf`、`sprintf`）在 Rust FFI 中绑定是 `unsafe` 的：1) 参数类型不匹配 → UB（如 `i32` 传给期望 `c_int` 的位置，在 LP64 平台上可能正确，但在 ILP32 上可能错误）；2) 格式字符串与参数数量不匹配 → 缓冲区溢出或读取无效内存；3) Rust 字符串（UTF-8）与 C 字符串（null-terminated bytes）的编码差异。安全策略：1) 避免直接绑定 C 可变参数函数；2) 使用 `libc` crate 的标准绑定（已验证）；3) 用 Rust 的 `format!` + `CString::new` 构造参数，再传递。`va_list` 在 Rust 中可通过 `c_variadic` feature（nightly）或 `va_list-rs` crate 处理。这与 Go 的 cgo（CGO 自动处理部分类型转换）或 Java 的 JNI（JVM 管理类型安全）不同——Rust 的 FFI 是零成本但需完全手动验证。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/ffi.html)] · [来源: [libc crate](https://docs.rs/libc/)]
+> **修正**: C 的**可变参数函数**（variadic function，如 `printf`、`sprintf`）在 Rust FFI 中绑定是 `unsafe` 的：1) 参数类型不匹配 → UB（如 `i32` 传给期望 `c_int` 的位置，在 LP64 平台上可能正确，但在 ILP32 上可能错误）；2) 格式字符串与参数数量不匹配 → 缓冲区溢出或读取无效内存；3) Rust 字符串（UTF-8）与 C 字符串（null-terminated bytes）的编码差异。安全策略：1) 避免直接绑定 C 可变参数函数；2) 使用 `libc` crate 的标准绑定（已验证）；3) 用 Rust 的 `format!` + `CString::new` 构造参数，再传递。`va_list` 在 Rust 中可通过 `c_variadic` 特性门（每日构建版）或 `va_list-rs` crate 处理。这与 Go 的 cgo（CGO 自动处理部分类型转换）或 Java 的 JNI（JVM 管理类型安全）不同——Rust 的 FFI 是零成本但需完全手动验证。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/ffi.html)] · [来源: [libc crate](https://docs.rs/libc/)]
 
 ### 10.4 边界测试：C 结构体的内存对齐与 Rust 的 `#[repr(C)]`（运行时 ABI 不匹配）
 

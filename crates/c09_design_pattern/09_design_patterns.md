@@ -1806,7 +1806,7 @@ fn main() {
 
 兼容性与版本建议（2025-09）：
 
-- Rust：MSRV 1.90（Edition 2024）。
+- Rust：MSRV 1.97.0（Edition 2024）。
 - Tokio：1.x（features: full）；Rayon：1.x；Crossbeam：0.8；Serde：1.x；Tracing：0.1。
 - 学术型库（Rumpsteak、Ferrite）用于参考与实验分支，避免引入核心库的强依赖。
 

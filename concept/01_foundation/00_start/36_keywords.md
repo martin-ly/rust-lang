@@ -4,6 +4,7 @@
 
 > **EN**: Keywords
 > **Summary**: Rust 中保留给当前或未来语言使用的关键字列表，以及 raw identifier（原始标识符）用法。 List of keywords reserved for current or future use in Rust, plus raw identifier usage.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者]
 > **Bloom 层级**: L1-L2
@@ -24,6 +25,7 @@
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 
 ---
+
 ## 一、关键字概述
 
 关键字（keywords）是 Rust 保留给语言本身使用的词，**不能用作标识符**（变量名、函数名、类型名等），除非使用 **raw identifier** 语法 `r#`。
@@ -135,7 +137,7 @@ fn main() {
 
 ---
 
-## 六、关联概念
+## 六、相关概念
 
 | 概念 | 关系 |
 |:---|:---|

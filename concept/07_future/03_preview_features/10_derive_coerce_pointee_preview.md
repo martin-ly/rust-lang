@@ -381,7 +381,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — Rust 类型系统（Type System）基础
 - [Generics](../../02_intermediate/01_generics/02_generics.md) — 泛型（Generics）与 Trait Bounds
@@ -395,7 +395,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 

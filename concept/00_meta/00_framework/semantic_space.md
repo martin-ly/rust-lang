@@ -516,7 +516,7 @@ fn main() {
 // const generics 的当前边界：泛型常量表达式不稳定
 fn concat<const M: usize, const N: usize>(a: [i32; M], b: [i32; N]) -> [i32; M + N] {
     // error: generic parameters may not be used in const operations
-    // 需要 `#![feature(generic_const_exprs)]` 才能使用 M + N
+    // 需要实验特性门 generic_const_exprs（未稳定）才能使用 M + N
 }
 ```
 
@@ -1219,7 +1219,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

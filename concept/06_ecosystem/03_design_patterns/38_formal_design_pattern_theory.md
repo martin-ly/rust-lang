@@ -4,6 +4,7 @@
 >
 > **EN**: Formal Design Pattern Theory
 > **Summary**: Formal foundations of design patterns: type theory, category theory, Curry-Howard correspondence, linear/affine types, session types, algebraic data types, and verification practice with Kani.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **内容分级**: [研究级]
 > **Bloom 层级**: L4-L6

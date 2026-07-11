@@ -347,7 +347,7 @@ graph TB
 | L7 | `03_evolution` | 评价 | **S+P** | 演进分析（S），技术路线图（P） |
 | L7 | `04_effects_system` | 分析 | **S** | Effects 系统是概念预研 |
 | L7 | `05_rust_version_tracking` | 应用 | **A+S** | 版本特性（A），演进理解（S） |
-| L7 | `07_mcdc_coverage_preview` ~ `29_ebpf_rust` | 分析/评价 | **S+P** | Preview 特性分析均为 S+P |
+| L7 | `07_mcdc_coverage_preview` ~ `29_ebpf_rust` | 分析/评价 | **S+P** | 预研特性分析均为 S+P |
 
 > **统计摘要**: 全部 58 个核心概念文件的 A/S/P 标记分布：
 >

@@ -2,6 +2,7 @@
 
 > **EN**: Scenario Decision Tree Atlas
 > **Summary**: A navigational index that maps typical Rust development scenarios to decision questions, candidate solutions, and authoritative concept pages across L1–L7. 典型开发场景 → 决策问题 → 候选方案 → Rust 概念/工具选择。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **内容分级**: [元层]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -85,7 +86,7 @@ flowchart LR
 | 决策问题 | 候选方案 | 关键概念页 |
 |:---|:---|:---|
 | 单 crate 还是多 crate 工作区？ | Workspace / single package | [Cargo Workspaces](../../06_ecosystem/01_cargo/78_cargo_workspaces.md), [Cargo Getting Started](../../06_ecosystem/01_cargo/80_cargo_getting_started.md) |
-| 依赖版本冲突如何解决？ | SemVer / lockfile / resolver | [Cargo Dependency Resolution](../../06_ecosystem/01_cargo/60_cargo_dependency_resolution.md), [cargo-semver-checks Preview](../../07_future/03_preview_features/46_cargo_semver_checks_preview.md) |
+| 依赖版本冲突如何解决？ | SemVer / lockfile / resolver | [Cargo Dependency Resolution](../../06_ecosystem/01_cargo/60_cargo_dependency_resolution.md), [cargo-semver-checks 预研](../../07_future/03_preview_features/46_cargo_semver_checks_preview.md) |
 | 发布前需要哪些质量门禁？ | `clippy` / `rustfmt` / tests / docs | [Testing Strategies](../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md), [DevOps and CI/CD](../../06_ecosystem/00_toolchain/28_devops_and_ci_cd.md) |
 
 ---

@@ -15,7 +15,7 @@
 > **EN**: Testing
 > **Summary**: Testing — Testing basics: unit, integration, documentation, and benchmark tests built into Rust's toolchain.
 > **受众**: [初学者]
-> **Bloom 层级**: L3-L4
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: P×App — 实施测试策略和验证方法
@@ -188,7 +188,7 @@ pub fn add(a: i32, b: i32) -> i32 {
   └── common/mod.rs            # 共享测试辅助代码
 
   benches/
-  └── my_benchmark.rs          # 基准测试（需 nightly 或 criterion）
+  └── my_benchmark.rs          # 基准测试（需每日构建版或 criterion）
 
   examples/
   └── simple.rs                # 可运行示例
@@ -550,7 +550,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Modules](../07_modules_and_items/11_modules_and_paths.md) — 模块（Module）系统
 - [Error Handling](../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md) — 错误处理（Error Handling）
@@ -564,7 +564,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

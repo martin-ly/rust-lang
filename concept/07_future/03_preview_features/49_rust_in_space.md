@@ -4,6 +4,7 @@
 >
 > **EN**: Rust in Space Preview
 > **Summary**: Preview of Rust's adoption in aerospace and safety-critical systems, covering Ferrocene certification, no_std embedded deployment, and comparison with Ada/SPARK.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: 📡 生态趋势/预研阶段
 > **Rust 属性标记**: N/A（语言特性层面稳定，领域应用仍在扩展）
 > **跟踪版本**: stable Rust（核心语言）；Ferrocene（认证工具链）
@@ -13,7 +14,7 @@
 > **内容分级**: [综述级]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Eva — 评价 Rust 在太空环境中的适用性
 > **前置依赖**: [Embedded Systems](../../06_ecosystem/05_systems_and_embedded/22_embedded_systems.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Formal Methods](../../04_formal/04_model_checking/16_aerospace_certification_formal_methods.md)
 > **后置延伸**: [Rust for Linux](../04_research_and_experimental/43_rust_for_linux.md) · [Ferrocene](35_ferrocene_preview.md)

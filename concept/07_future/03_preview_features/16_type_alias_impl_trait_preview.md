@@ -4,6 +4,7 @@
 >
 > **EN**: Type Alias Impl Trait (TAIT) Preview
 > **Summary**: Preview of Type Alias Impl Trait (TAIT), which allows `impl Trait` inside type aliases to hide concrete types while preserving zero-cost abstraction; stabilized in Rust 1.75.0.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ Rust 1.75.0 已稳定；关联类型位置与模块（Module）级抽象可用
 > **Rust 属性标记**: `#[stable_since_1_75]`
 > **跟踪版本**: stable 1.75.0

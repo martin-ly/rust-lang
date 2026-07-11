@@ -8,7 +8,7 @@
 > **EN**: Testing
 > **Summary**: Testing — Rust's testing ecosystem: unit and integration tests plus verification strategies.
 > **受众**: [进阶]
-> **Bloom 层级**: L3-L4
+> **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **双维定位**: P×App — 测试框架和策略的应用
@@ -105,7 +105,7 @@ Rust 测试的三种内置形式:
   ├── #[test]: 标记测试函数
   ├── #[ignore]: 忽略测试（需显式运行）
   ├── #[should_panic]: 期望 panic
-  ├── #[bench] (nightly): 基准测试
+  ├── #[bench]（每日构建版）: 基准测试
   └── #[test_case] (第三方): 参数化测试
 ```
 
@@ -502,7 +502,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) — 错误处理（Error Handling）
 - [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md) — unsafe 代码测试
@@ -515,7 +515,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

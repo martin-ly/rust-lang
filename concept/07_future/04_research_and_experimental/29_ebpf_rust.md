@@ -4,9 +4,11 @@
 >
 > **EN**: eBPF Rust
 > **Summary**: eBPF Rust: emerging Rust language feature or ecosystem trend.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **来源**: [Aya Book](https://aya-rs.dev/book/index.html) · [Linux Kernel BPF Docs](https://docs.kernel.org/bpf/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **受众**: [专家]
+> **Bloom 层级**: L5-L7
 > **内容分级**: [综述级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链

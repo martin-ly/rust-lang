@@ -498,7 +498,7 @@ graph TD
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [AI Integration](01_ai_integration.md) — AI 集成
 - [WebAssembly](../../06_ecosystem/11_domain_applications/11_webassembly.md) — WebAssembly
@@ -512,7 +512,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)；2026-05-22 Batch 9 对齐完成
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 权威来源对齐完成 (Batch 9)
 

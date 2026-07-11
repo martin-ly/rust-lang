@@ -24,7 +24,7 @@
 
 ---
 
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置概念**: [Patterns](02_patterns.md)
 
 ## 📑 目录
@@ -1108,7 +1108,7 @@ quadrantChart
 | 并发级惯用法 | — | Send/Sync | 线程 / async | π 演算 | vs Go channel | crossbeam | 异步 trait |
 | 架构级惯用法 | — | — | unsafe 架构 | 进程代数 | vs Erlang OTP | Tower / Bevy | 微服务框架 |
 
-### 相关概念文件
+### 相关概念
 
 - [L6 设计模式](02_patterns.md) —— 设计模式（面向问题）与本文件惯用法（面向表达）的互补
 - [L1 所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) —— 所有权与 RAII 的根基

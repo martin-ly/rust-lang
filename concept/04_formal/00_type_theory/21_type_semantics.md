@@ -350,7 +350,7 @@ fn bar() -> i32                         // 效果 = {}
 | 类型论概念 | Koka 表达 | Rust 工程对应 | 差距 |
 |:---|:---|:---|:---|
 | **效果行** | `<io, async>` | `impl Future<Output = T>` + `?` 传播 | Rust 无统一语法，各效果独立实现 |
-| **行多态** | `fun map(f: a -> e b): e b` | `AsyncFn` (1.85.0 stable) / `~const Trait` (unstable) | 无显式效果变量 `e` |
+| **行多态** | `fun map(f: a -> e b): e b` | `AsyncFn` (1.85.0 stable) / `~const Trait`（未稳定） | 无显式效果变量 `e` |
 | **效果子类型** | `<io> <: <io, async>` | 无直接对应 | Rust 未引入效果子类型关系 |
 | **效果消除** | `handle { ... }` | `block_on(future)` / `match result` | Rust 将 handler 外化到库层 |
 
@@ -873,7 +873,7 @@ fn pinned_self_ref() {
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [类型论基础](02_type_theory.md) — HM 类型系统（Type System）、System F、多态
 - [所有权（Ownership）形式化](../01_ownership_logic/03_ownership_formal.md) — COR、RustBelt、权限系统
@@ -896,6 +896,6 @@ fn pinned_self_ref() {
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)

@@ -26,6 +26,7 @@
 > **使用方式**: 先独立思考答案，再点击展开核对解析。
 
 ---
+
 ## 一、模块系统
 
 ### Q1. 以下代码能否编译？解释 `mod`、`use` 和 `pub` 的关系
@@ -588,7 +589,7 @@ fn generate_id() -> u64 {
 mod tests {
     #[test]
     #[ignore = "not yet implemented"]
-    fn test_future_feature() {
+    fn test_future_capability() {
         assert_eq!(2 + 2, 5);
     }
 

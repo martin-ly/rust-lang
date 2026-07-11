@@ -3,7 +3,7 @@
 
 # Tier 4: 性能工程实践
 
-> **权威来源**: [concept/03_advanced/02_process_ipc/08_process_performance_engineering.md](../../../../concept/03_advanced/02_process_ipc/08_process_performance_engineering.md)
+> **权威来源**: [concept/03_advanced/08_process_ipc/08_process_performance_engineering.md](../../../../concept/03_advanced/08_process_ipc/08_process_performance_engineering.md)
 
 本文件为 `crates/c07_process` 的专题实践材料。通用 Rust 进程性能工程概念请参见上方权威页；完整代码示例、练习与案例仍保留在本书。
 

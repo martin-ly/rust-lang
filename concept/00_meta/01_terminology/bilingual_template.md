@@ -2,6 +2,7 @@
 
 > **EN**: Bilingual Concept Template
 > **Summary**: Standardized bilingual header template for all `concept/` files to support internationalization.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **主要来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RFCs](https://github.com/rust-lang/rfcs)
 >

@@ -16,7 +16,7 @@
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 >
 
-## 相关概念文件
+## 相关概念
 
 - [概念索引](../../README.md) — 知识体系总览
 - [Bloom 分类法](../00_framework/bloom_taxonomy.md) — 认知层级标准

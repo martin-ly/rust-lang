@@ -620,7 +620,7 @@ async fn main() {
 > [Materialize Documentation](https://materialize.com/docs/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 流处理语义空间
 

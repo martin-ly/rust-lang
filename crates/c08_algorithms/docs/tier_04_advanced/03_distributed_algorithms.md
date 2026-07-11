@@ -15,5 +15,5 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | 分布式共识 | [../../../concept/06_ecosystem/06_data_and_distributed/50_distributed_consensus.md](../../../concept/06_ecosystem/06_data_and_distributed/50_distributed_consensus.md) |
-| 分布式系统 | [../../../concept/06_ecosystem/04_web_and_networking/18_distributed_systems.md](../../../concept/06_ecosystem/04_web_and_networking/18_distributed_systems.md) |
+| 分布式系统 | [../../../concept/06_ecosystem/04_web_and_networking/18_distributed_systems.md](../../../../concept/06_ecosystem/04_web_and_networking/18_distributed_systems.md) |
 | 并发编程 | [../../../concept/03_advanced/00_concurrency/01_concurrency.md](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |

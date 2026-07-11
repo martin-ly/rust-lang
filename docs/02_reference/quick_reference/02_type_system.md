@@ -832,12 +832,12 @@ fn take_slice<T>(t: &[T]) {}
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 - [类型理论深度](../../../crates/c02_type_system/docs/tier_04_advanced/01_type_theory_in_depth.md)
-- [类型构造能力](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) — Def TCON1、TCON 矩阵、类型构造决策树、Rust 1.93 新特性
-- [类型构造决策树（直达）](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md#类型构造决策树) — 目标类型→构造路径选择、确定性判定
-- [类型理论完备性缺口](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) — 缺口与对构造能力的影响
-- [类型系统基础](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) — 类型系统的数学基础
+- [类型构造能力](../../research_notes/type_theory/10_construction_capability.md) — Def TCON1、TCON 矩阵、类型构造决策树、Rust 1.93 新特性
+- [类型构造决策树（直达）](../../research_notes/type_theory/10_construction_capability.md#类型构造决策树) — 目标类型→构造路径选择、确定性判定
+- [类型理论完备性缺口](../../research_notes/formal_methods/00_completeness_gaps.md) — 缺口与对构造能力的影响
+- [类型系统基础](../../research_notes/type_theory/10_type_system_foundations.md) — 类型系统的数学基础
 - [型变理论](../../research_notes/type_theory/10_variance_theory.md) — 型变的形式化定义
-- [Trait 系统形式化](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) — Trait 系统的类型理论
+- [Trait 系统形式化](../../research_notes/type_theory/10_trait_system_formalization.md) — Trait 系统的类型理论
 
 ---
 

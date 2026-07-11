@@ -323,9 +323,9 @@ fn thread_local_demo() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 同步执行模型 | 同步模型理论 | [../../../research_notes/software_design_theory/03_execution_models/01_synchronous.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/01_synchronous.md) |
-| 并发执行模型 | 并发模型理论 | [../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/03_concurrent.md) |
-| 并行执行模型 | 并行模型理论 | [../../../research_notes/software_design_theory/03_execution_models/04_parallel.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/04_parallel.md) |
+| 同步执行模型 | 同步模型理论 | [../../../research_notes/software_design_theory/03_execution_models/01_synchronous.md](../../../research_notes/software_design_theory/03_execution_models/01_synchronous.md) |
+| 并发执行模型 | 并发模型理论 | [../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md](../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md) |
+| 并行执行模型 | 并行模型理论 | [../../../research_notes/software_design_theory/03_execution_models/04_parallel.md](../../../research_notes/software_design_theory/03_execution_models/04_parallel.md) |
 
 ### 形式化方法 {#形式化方法}
 
@@ -335,7 +335,7 @@ fn thread_local_demo() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| Send/Sync 形式化 | 线程安全 trait 形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
+| Send/Sync 形式化 | 线程安全 trait 形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../research_notes/formal_methods/10_send_sync_formalization.md) |
 | 所有权（Ownership）模型 | 所有权与并发 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 
 ### 实验分析 {#实验分析}
@@ -346,7 +346,7 @@ fn thread_local_demo() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 并发性能 | 并发性能测试 | [../../../research_notes/experiments/10_concurrency_performance.md](../../../../archive/research_notes_2026_06_25/experiments/10_concurrency_performance.md) |
+| 并发性能 | 并发性能测试 | [../../../research_notes/experiments/10_concurrency_performance.md](../../../research_notes/experiments/10_concurrency_performance.md) |
 
 ---
 

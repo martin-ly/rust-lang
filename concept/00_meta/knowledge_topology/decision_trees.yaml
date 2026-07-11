@@ -1,0 +1,886 @@
+# 决策树机器可读层（Machine-Readable Decision Tree Layer）
+# EN: Machine-Readable Decision Tree Layer
+# Summary: Traversable node/edge structures for the reasoning judgment trees
+#   (09 atlas) and the concept definition decision forest, with quantitative
+#   thresholds, covered KG v3 concepts, and source anchors.
+#
+# 定位: KG v3 (concept/00_meta/kg_data_v3.json) 中 decision_trees 目前只是
+#   {concept, tree} 指针 stub，不可遍历。本文件提供可遍历的完整结构，
+#   由 scripts/check_decision_trees.py 校验。
+#
+# 节点类型（node.type）:
+#   decision   判定节点 —— 提出诊断问题，必须有 ≥1 条出边（通常是 是/否）
+#   conclusion 结论节点 —— 根因/修复策略/验证回边/边界结论；叶子必须为此类型
+#   condition  条件节点 —— 症状入口/定义/前提/规则/边界条件
+#
+# 边标签约定: 是 / 否 / 条件:<描述> / 入口 / 回边
+#
+# 校验: python scripts/check_decision_trees.py [--strict]
+
+version: "1.0"
+date: "2026-07-12"
+maintainer: "concept/00_meta/knowledge_topology"
+validator: "scripts/check_decision_trees.py"
+kg: "concept/00_meta/kg_data_v3.json"
+
+trees:
+
+  # ==========================================================================
+  # 来源一: 09_reasoning_judgment_tree_atlas.md（症状 → 根因 → 修复 → 验证）
+  # ==========================================================================
+
+  - id: J-BORROW-01
+    title_zh: 借用冲突判定树
+    title_en: Borrow Conflict Judgment Tree
+    source:
+      file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
+      anchor: "#31-借用冲突判定树"
+    covered_concepts: [ex:Borrowing, ex:InteriorMutability, ex:SmartPointers]
+    nodes:
+      - {id: B, type: condition, label: "症状：借用冲突（cannot borrow as mutable/immutable）"}
+      - id: Q1
+        type: decision
+        condition: "活跃别名数是否 ≥2（&T 与 &mut T 在重叠区域同时活跃）？"
+        quantitative: true
+        threshold: "活跃别名数 ≥ 2"
+      - id: Q2
+        type: decision
+        condition: "两次借用的活跃区间重叠行数是否 ≥1 行？"
+        quantitative: true
+        threshold: "活跃区间重叠 ≥ 1 行"
+      - id: Q3
+        type: decision
+        condition: "迭代期间对集合的增删操作次数是否 ≥1 次？"
+        quantitative: true
+        threshold: "迭代期增删 ≥ 1 次"
+      - {id: R1, type: conclusion, label: "根因：别名 XOR 可变性被破坏"}
+      - {id: R2, type: conclusion, label: "根因：借用生命周期重叠"}
+      - {id: R3, type: conclusion, label: "根因：集合迭代期间可变借用"}
+      - {id: R4, type: conclusion, label: "根因：reborrow 或 split borrow 误用"}
+      - {id: F1, type: conclusion, label: "修复：缩小可变借用范围 / 使用 Cell/RefCell/Mutex"}
+      - {id: F2, type: conclusion, label: "修复：引入新作用域 / clone 数据"}
+      - {id: F3, type: conclusion, label: "修复：先 collect 再处理 / 使用索引"}
+      - {id: F4, type: conclusion, label: "修复：见 Borrowing / Smart Pointers 权威页"}
+      - {id: V1, type: conclusion, label: "验证回边：cargo check；再 cargo clippy 升 -D warnings"}
+    edges:
+      - {from: B, to: Q1, label: "入口"}
+      - {from: Q1, to: R1, label: "是"}
+      - {from: Q1, to: Q2, label: "否"}
+      - {from: Q2, to: R2, label: "是"}
+      - {from: Q2, to: Q3, label: "否"}
+      - {from: Q3, to: R3, label: "是"}
+      - {from: Q3, to: R4, label: "否"}
+      - {from: R1, to: F1, label: "修复"}
+      - {from: R2, to: F2, label: "修复"}
+      - {from: R3, to: F3, label: "修复"}
+      - {from: R4, to: F4, label: "修复"}
+      - {from: F1, to: V1, label: "验证"}
+      - {from: F2, to: V1, label: "验证"}
+      - {from: F3, to: V1, label: "验证"}
+      - {from: F4, to: V1, label: "验证"}
+
+  - id: J-LIFE-02
+    title_zh: 生命周期判定树
+    title_en: Lifetime Judgment Tree
+    source:
+      file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
+      anchor: "#32-生命周期判定树"
+    covered_concepts: [ex:Lifetimes, ex:PinAndUnpin, ex:SmartPointers]
+    nodes:
+      - {id: L, type: condition, label: "症状：生命周期错误（lifetime may not live long enough）"}
+      - id: Q1
+        type: decision
+        condition: "返回类型含引用且显式生命周期参数数 = 0？"
+        quantitative: true
+        threshold: "显式生命周期参数数 = 0"
+      - id: Q2
+        type: decision
+        condition: "被引用局部变量的作用域结束行是否 < 引用最后使用行？"
+        quantitative: true
+        threshold: "作用域结束行 < 引用最后使用行"
+      - id: Q3
+        type: decision
+        condition: "引用活跃区间跨越的 await 点数是否 ≥1 个？"
+        quantitative: true
+        threshold: "跨 await 点数 ≥ 1"
+      - id: Q4
+        type: decision
+        condition: "签名中 for<'a> HRTB 或 dyn Trait 出现次数是否 ≥1 次？"
+        quantitative: true
+        threshold: "HRTB/dyn Trait 出现 ≥ 1 次"
+      - {id: R1, type: conclusion, label: "根因：返回悬垂引用"}
+      - {id: R2, type: conclusion, label: "根因：缺少显式生命周期参数"}
+      - {id: R3, type: conclusion, label: "根因：async 状态机需要 'static 或自引用"}
+      - {id: R4, type: conclusion, label: "根因：高阶生命周期约束不足"}
+      - {id: R5, type: conclusion, label: "根因：生命周期省略规则不适用"}
+      - {id: F1, type: conclusion, label: "修复：返回 owned 数据 / 使用 Arc/Box"}
+      - {id: F2, type: conclusion, label: "修复：显式标注 'a / 使用生命周期省略规则"}
+      - {id: F3, type: conclusion, label: "修复：改用 owned 数据 / Pin"}
+      - {id: F4, type: conclusion, label: "修复：见 Lifetimes Advanced / HRTB 权威页"}
+      - {id: F5, type: conclusion, label: "修复：补显式生命周期 'a；或改返回 owned/Box/Arc/'static 拥有数据"}
+      - {id: V2, type: conclusion, label: "验证回边：cargo check；闭包/迭代器再 cargo clippy 升 -D warnings"}
+    edges:
+      - {from: L, to: Q1, label: "入口"}
+      - {from: Q1, to: Q2, label: "是"}
+      - {from: Q1, to: Q3, label: "否"}
+      - {from: Q2, to: R1, label: "是"}
+      - {from: Q2, to: R2, label: "否"}
+      - {from: Q3, to: R3, label: "是"}
+      - {from: Q3, to: Q4, label: "否"}
+      - {from: Q4, to: R4, label: "是"}
+      - {from: Q4, to: R5, label: "否"}
+      - {from: R1, to: F1, label: "修复"}
+      - {from: R2, to: F2, label: "修复"}
+      - {from: R3, to: F3, label: "修复"}
+      - {from: R4, to: F4, label: "修复"}
+      - {from: R5, to: F5, label: "修复"}
+      - {from: F1, to: V2, label: "验证"}
+      - {from: F2, to: V2, label: "验证"}
+      - {from: F3, to: V2, label: "验证"}
+      - {from: F4, to: V2, label: "验证"}
+      - {from: F5, to: V2, label: "验证"}
+
+  - id: J-TYPE-03
+    title_zh: 类型不匹配判定树
+    title_en: Type Mismatch Judgment Tree
+    source:
+      file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
+      anchor: "#33-类型不匹配判定树"
+    covered_concepts: [ex:Traits, ex:Generics, ex:ErrorHandling, ex:AsyncAdvanced]
+    nodes:
+      - {id: T, type: condition, label: "症状：类型不匹配（expected ... found ... / trait bound unsatisfied）"}
+      - id: Q1
+        type: decision
+        condition: "'trait bound is not satisfied' 报错数是否 ≥1 条？"
+        quantitative: true
+        threshold: "trait bound 报错 ≥ 1 条"
+      - id: Q2
+        type: decision
+        condition: "期望与实际类型的引用层级差是否 ≥1 层？"
+        quantitative: true
+        threshold: "引用层级差 ≥ 1 层"
+      - id: Q3
+        type: decision
+        condition: "同一 ? 链上出现的不同错误类型数是否 ≥2 种？"
+        quantitative: true
+        threshold: "错误类型数 ≥ 2 种"
+      - id: Q4
+        type: decision
+        condition: "async fn / RPITIT 返回位置涉及的 impl Trait 数是否 ≥1 个？"
+        quantitative: true
+        threshold: "impl Trait 返回位置 ≥ 1 个"
+      - {id: R1, type: conclusion, label: "根因：泛型参数未实现所需 trait"}
+      - {id: R2, type: conclusion, label: "根因：引用与值类型混淆"}
+      - {id: R3, type: conclusion, label: "根因：Result 错误类型不统一"}
+      - {id: R4, type: conclusion, label: "根因：impl Trait / RPITIT 边界"}
+      - {id: R5, type: conclusion, label: "根因：类型推断失败或自定义类型未实现 trait"}
+      - {id: F1, type: conclusion, label: "修复：添加 where T: Trait"}
+      - {id: F2, type: conclusion, label: "修复：解引用 / 借用 / 使用 Deref"}
+      - {id: F3, type: conclusion, label: "修复：使用 ? / map_err / 定义统一错误类型"}
+      - {id: F4, type: conclusion, label: "修复：见 Return Type Notation Preview / Async Advanced 权威页"}
+      - {id: F5, type: conclusion, label: "修复：加显式类型标注或 turbofish；为自定义类型 derive 或手写所需 trait"}
+      - {id: V3, type: conclusion, label: "验证回边：cargo check；trait bound/类型推断再 cargo clippy 升 -D warnings"}
+    edges:
+      - {from: T, to: Q1, label: "入口"}
+      - {from: Q1, to: R1, label: "是"}
+      - {from: Q1, to: Q2, label: "否"}
+      - {from: Q2, to: R2, label: "是"}
+      - {from: Q2, to: Q3, label: "否"}
+      - {from: Q3, to: R3, label: "是"}
+      - {from: Q3, to: Q4, label: "否"}
+      - {from: Q4, to: R4, label: "是"}
+      - {from: Q4, to: R5, label: "否"}
+      - {from: R1, to: F1, label: "修复"}
+      - {from: R2, to: F2, label: "修复"}
+      - {from: R3, to: F3, label: "修复"}
+      - {from: R4, to: F4, label: "修复"}
+      - {from: R5, to: F5, label: "修复"}
+      - {from: F1, to: V3, label: "验证"}
+      - {from: F2, to: V3, label: "验证"}
+      - {from: F3, to: V3, label: "验证"}
+      - {from: F4, to: V3, label: "验证"}
+      - {from: F5, to: V3, label: "验证"}
+
+  - id: J-PANIC-04
+    title_zh: 运行时 panic 判定树
+    title_en: Runtime Panic Judgment Tree
+    source:
+      file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
+      anchor: "#34-运行时-panic-判定树"
+    covered_concepts: [ex:Panic, ex:ErrorHandling, ex:Concurrency, ex:ForeignFunctionInterfaceFFI, ex:UnsafeRust]
+    nodes:
+      - {id: P, type: condition, label: "症状：运行时 panic（unwrap panic / index out of bounds / deadlock）"}
+      - id: Q1
+        type: decision
+        condition: "unwrap/expect 调用点的 panic 次数是否 ≥1 次？"
+        quantitative: true
+        threshold: "unwrap/expect panic ≥ 1 次"
+      - id: Q2
+        type: decision
+        condition: "索引 i 与长度 len 是否满足 i ≥ len？"
+        quantitative: true
+        threshold: "i ≥ len"
+      - id: Q3
+        type: decision
+        condition: "持锁等待环中的任务/线程数是否 ≥2 个？"
+        quantitative: true
+        threshold: "等待环长度 ≥ 2"
+      - id: Q4
+        type: decision
+        condition: "跨 FFI 边界调用次数 ≥1 次且 panic 穿越 extern 边界？"
+        quantitative: true
+        threshold: "跨 FFI 调用 ≥ 1 次且 panic 越界"
+      - {id: R1, type: conclusion, label: "根因：未处理的可恢复错误"}
+      - {id: R2, type: conclusion, label: "根因：索引未验证"}
+      - {id: R3, type: conclusion, label: "根因：锁顺序或 await 中持有锁"}
+      - {id: R4, type: conclusion, label: "根因：ABI/生命周期/指针约定错误"}
+      - {id: R5, type: conclusion, label: "根因：unsafe 导致 UB 或逻辑错误"}
+      - {id: F1, type: conclusion, label: "修复：改用 ? / match / unwrap_or"}
+      - {id: F2, type: conclusion, label: "修复：使用 get / checked 方法"}
+      - {id: F3, type: conclusion, label: "修复：统一锁顺序 / 使用 try_lock / 避免跨 await 锁"}
+      - {id: F4, type: conclusion, label: "修复：见 FFI Advanced / Unsafe Rust 权威页"}
+      - {id: F5, type: conclusion, label: "修复：定位 unsafe 边界；用 get/checked 替换索引；持锁不跨 await；可疑 UB 走 miri"}
+      - {id: V4, type: conclusion, label: "验证回边：cargo test；再 cargo clippy 升 -W unwrap_used/indexing_slicing/await_holding_lock"}
+    edges:
+      - {from: P, to: Q1, label: "入口"}
+      - {from: Q1, to: R1, label: "是"}
+      - {from: Q1, to: Q2, label: "否"}
+      - {from: Q2, to: R2, label: "是"}
+      - {from: Q2, to: Q3, label: "否"}
+      - {from: Q3, to: R3, label: "是"}
+      - {from: Q3, to: Q4, label: "否"}
+      - {from: Q4, to: R4, label: "是"}
+      - {from: Q4, to: R5, label: "否"}
+      - {from: R1, to: F1, label: "修复"}
+      - {from: R2, to: F2, label: "修复"}
+      - {from: R3, to: F3, label: "修复"}
+      - {from: R4, to: F4, label: "修复"}
+      - {from: R5, to: F5, label: "修复"}
+      - {from: F1, to: V4, label: "验证"}
+      - {from: F2, to: V4, label: "验证"}
+      - {from: F3, to: V4, label: "验证"}
+      - {from: F4, to: V4, label: "验证"}
+      - {from: F5, to: V4, label: "验证"}
+
+  - id: J-UNSAFE-05
+    title_zh: Unsafe 判定树
+    title_en: Unsafe Judgment Tree
+    source:
+      file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
+      anchor: "#35-unsafe-判定树"
+    covered_concepts: [ex:UnsafeRust, ex:MiriRustUndefinedBehaviorDetector, ex:KaniRustBoundedModelChecker]
+    nodes:
+      - {id: U, type: condition, label: "症状：unsafe 相关问题（UB / Miri 报错 / soundness 质疑）"}
+      - id: Q1
+        type: decision
+        condition: "cargo miri test 的 UB 报错数是否 ≥1 条？"
+        quantitative: true
+        threshold: "Miri UB 报错 ≥ 1 条"
+      - id: Q2
+        type: decision
+        condition: "裸指针解引用（*ptr）次数是否 ≥1 次？"
+        quantitative: true
+        threshold: "裸指针解引用 ≥ 1 次"
+      - id: Q3
+        type: decision
+        condition: "safe 公开 API 依赖的 unsafe 不变式数是否 ≥1 个？"
+        quantitative: true
+        threshold: "safe API 依赖 unsafe 不变式 ≥ 1 个"
+      - {id: R1, type: conclusion, label: "根因：别名规则或 provenance 违规"}
+      - {id: R2, type: conclusion, label: "根因：未初始化内存/类型混淆"}
+      - {id: R3, type: conclusion, label: "根因：safe 抽象违反 soundness"}
+      - {id: R4, type: conclusion, label: "根因：unsafe 块范围过大或契约不清"}
+      - {id: F1, type: conclusion, label: "修复：遵守 Stacked/Tree Borrows / 使用 NonNull"}
+      - {id: F2, type: conclusion, label: "修复：使用 MaybeUninit / 严格初始化"}
+      - {id: F3, type: conclusion, label: "修复：封装 invariant / Safety Tags"}
+      - {id: F4, type: conclusion, label: "修复：见 Unsafe Rust Patterns / Safety Tags Preview 权威页"}
+      - {id: V5, type: conclusion, label: "验证回边：cargo miri test 检测 Stacked/Tree Borrows；性质用 cargo kani"}
+    edges:
+      - {from: U, to: Q1, label: "入口"}
+      - {from: Q1, to: Q2, label: "是"}
+      - {from: Q1, to: Q3, label: "否"}
+      - {from: Q2, to: R1, label: "是"}
+      - {from: Q2, to: R2, label: "否"}
+      - {from: Q3, to: R3, label: "是"}
+      - {from: Q3, to: R4, label: "否"}
+      - {from: R1, to: F1, label: "修复"}
+      - {from: R2, to: F2, label: "修复"}
+      - {from: R3, to: F3, label: "修复"}
+      - {from: R4, to: F4, label: "修复"}
+      - {from: F1, to: V5, label: "验证"}
+      - {from: F2, to: V5, label: "验证"}
+      - {from: F3, to: V5, label: "验证"}
+      - {from: F4, to: V5, label: "验证"}
+
+  - id: J-CLOSED-06
+    title_zh: 闭环总图（问题 → 判定 → 推理 → 决策 → 验证 → 回边）
+    title_en: Closed-Loop Meta Judgment Tree
+    source:
+      file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
+      anchor: "#n-闭环总图问题--判定--推理--决策--验证--回边"
+    covered_concepts: [ex:Borrowing, ex:Lifetimes, ex:Concurrency, ex:UnsafeRust]
+    nodes:
+      - {id: K0, type: condition, label: "闭环入口：症状 J-*"}
+      - id: K1
+        type: decision
+        condition: "判定定量占比边界：含阈值/数字的判定节点 ≥50%？"
+        quantitative: true
+        threshold: "定量判定节点占比 ≥ 50%"
+      - id: K3
+        type: decision
+        condition: "死端边界：根因节点无修复边数 ≥1 条？"
+        quantitative: true
+        threshold: "无修复边根因 ≥ 1 条"
+      - id: K8
+        type: decision
+        condition: "回边数量边界：跨文件回边 ≥4 条？"
+        quantitative: true
+        threshold: "跨文件回边 ≥ 4 条"
+      - {id: K2, type: conclusion, label: "根因 R* 定位"}
+      - {id: K4, type: conclusion, label: "修复策略 F* 落地"}
+      - {id: K5, type: conclusion, label: "验证回边 V*：cargo check/test/clippy/miri/kani，链到对应验证概念页"}
+      - {id: K6, type: conclusion, label: "闭环修补：把纯是非问改写为含 阈值/边界/数字 的可判定节点"}
+      - {id: K7, type: conclusion, label: "闭环修补：为该根因补具体修复策略 F*（本次修 3 处：3.2/3.3/3.4 R5）"}
+      - {id: K9, type: conclusion, label: "闭环完成：问题→判定→推理→决策→验证→回边"}
+      - {id: K10, type: conclusion, label: "闭环修补：在 03/05/09 之间补 回边：见 文件#ID"}
+    edges:
+      - {from: K0, to: K1, label: "入口"}
+      - {from: K1, to: K2, label: "是"}
+      - {from: K1, to: K6, label: "否"}
+      - {from: K6, to: K1, label: "条件: 修补后重判"}
+      - {from: K2, to: K3, label: "入口"}
+      - {from: K3, to: K7, label: "是"}
+      - {from: K3, to: K4, label: "否"}
+      - {from: K7, to: K4, label: "条件: 修补后落地"}
+      - {from: K4, to: K5, label: "验证"}
+      - {from: K5, to: K8, label: "入口"}
+      - {from: K8, to: K9, label: "是"}
+      - {from: K8, to: K10, label: "否"}
+      - {from: K10, to: K8, label: "条件: 补回边后重判"}
+
+  # ==========================================================================
+  # 来源二: concept_definition_decision_forest.md（定义 → 前提 → 规则 → 判定）
+  # 说明: 每棵树保留核心路径（D → P* → R* → C* → L*）与边界节点 B*；
+  #       边界节点为"前提被打破"的结论，进入特殊处理路径。
+  # ==========================================================================
+
+  - id: DF-OWN-01
+    title_zh: 所有权判定树
+    title_en: Ownership Decision Tree
+    source:
+      file: concept/00_meta/00_framework/concept_definition_decision_forest.md
+      anchor: "#二所有权判定树"
+    covered_concepts: [ex:Ownership, ex:MoveSemantics]
+    nodes:
+      - {id: D, type: condition, label: "概念定义：每个值在任意时刻有且只有一个所有者"}
+      - {id: P1, type: condition, label: "前提 P1：值有确定类型 T"}
+      - {id: P2, type: condition, label: "前提 P2：类型 T 决定移动/复制语义"}
+      - {id: P3, type: condition, label: "前提 P3：所有者离开作用域时值被释放（Drop）"}
+      - {id: R1, type: condition, label: "规则 R1：赋值语句 x = y ⟹ y 的所有权转移给 x"}
+      - {id: R2, type: condition, label: "规则 R2：T: Copy ⟹ 按位复制，原变量仍可用"}
+      - {id: R3, type: condition, label: "规则 R3：Drop::drop() 由唯一所有者调用且仅一次"}
+      - id: C1
+        type: decision
+        condition: "赋值后原变量 y 的访问次数是否 ≥1 次？"
+        quantitative: true
+        threshold: "移动后访问 ≥ 1 次 ⟹ use-after-move"
+      - id: C2
+        type: decision
+        condition: "类型 T 的 Copy trait 实现数是否 = 1？"
+        quantitative: true
+        threshold: "Copy impl 数 = 1"
+      - id: C3
+        type: decision
+        condition: "对同一值调用 Drop 的所有者数是否 ≥2 个？"
+        quantitative: true
+        threshold: "Drop 调用者数 ≥ 2 ⟹ double free"
+      - {id: L1, type: conclusion, label: "✅ 合法：Move 语义"}
+      - {id: L2, type: conclusion, label: "❌ 失效：使用已移动值（编译期阻止）"}
+      - {id: L3, type: conclusion, label: "✅ 合法：Copy 语义"}
+      - {id: L4, type: conclusion, label: "❌ 失效：双重释放（编译期不可达）"}
+      - {id: L5, type: conclusion, label: "✅ 合法：Drop 正确"}
+      - {id: B1, type: conclusion, label: "边界结论：Rc/Arc 共享所有权 ⟹ 唯一性前提被打破"}
+      - {id: B2, type: conclusion, label: "边界结论：mem::forget 阻止 Drop ⟹ 释放前提被打破（非 UB）"}
+      - {id: B3, type: conclusion, label: "边界结论：ManuallyDrop 手动控制释放 ⟹ 程序员承担唯一性"}
+    edges:
+      - {from: D, to: P1, label: "分解"}
+      - {from: D, to: P2, label: "分解"}
+      - {from: D, to: P3, label: "分解"}
+      - {from: P1, to: R1, label: "推导"}
+      - {from: P2, to: R2, label: "推导"}
+      - {from: P3, to: R3, label: "推导"}
+      - {from: R1, to: C1, label: "生成判定"}
+      - {from: R2, to: C2, label: "生成判定"}
+      - {from: R3, to: C3, label: "生成判定"}
+      - {from: C1, to: L2, label: "是"}
+      - {from: C1, to: L1, label: "否"}
+      - {from: C2, to: L3, label: "是"}
+      - {from: C2, to: L1, label: "否"}
+      - {from: C3, to: L4, label: "是"}
+      - {from: C3, to: L5, label: "否"}
+      - {from: D, to: B1, label: "条件: 边界 Rc/Arc"}
+      - {from: D, to: B2, label: "条件: 边界 mem::forget"}
+      - {from: D, to: B3, label: "条件: 边界 ManuallyDrop"}
+
+  - id: DF-BORROW-02
+    title_zh: 借用判定树
+    title_en: Borrowing Decision Tree
+    source:
+      file: concept/00_meta/00_framework/concept_definition_decision_forest.md
+      anchor: "#三借用判定树"
+    covered_concepts: [ex:Borrowing, ex:InteriorMutability, ex:UnsafeRust]
+    nodes:
+      - {id: D, type: condition, label: "概念定义：借用是通过引用（&T / &mut T）临时访问值，不转移所有权"}
+      - {id: P1, type: condition, label: "前提 P1：借用必须从有效所有权派生"}
+      - {id: P2, type: condition, label: "前提 P2：&T 允许多个不可变引用共存"}
+      - {id: P3, type: condition, label: "前提 P3：&mut T 要求唯一且排他"}
+      - {id: R1, type: condition, label: "规则 R1：引用的生命周期必须 ≤ 被引用数据的生命周期"}
+      - {id: R2, type: condition, label: "规则 R2：多个 &T 可同时活跃"}
+      - {id: R3, type: condition, label: "规则 R3：存在 &mut T 时，不允许任何其他引用"}
+      - id: C1
+        type: decision
+        condition: "引用生命周期超出数据生命周期的程序点数是否 ≥1 个？"
+        quantitative: true
+        threshold: "超出生存期的程序点 ≥ 1 ⟹ 悬垂引用"
+      - id: C2
+        type: decision
+        condition: "重叠活跃借用中 &mut 数 ≥1 且其他引用数 ≥1？"
+        quantitative: true
+        threshold: "重叠 &mut ≥ 1 且其他引用 ≥ 1 ⟹ AXM 违反"
+      - {id: L1, type: conclusion, label: "✅ 合法：共享不可变借用"}
+      - {id: L2, type: conclusion, label: "❌ 失效：悬垂引用（编译期阻止）"}
+      - {id: L3, type: conclusion, label: "❌ 失效：AXM 违反（编译期阻止）"}
+      - {id: L4, type: conclusion, label: "✅ 合法：独占可变借用"}
+      - {id: B1, type: conclusion, label: "边界结论：Reborrow —— &mut T 可临时重借出为 &T"}
+      - {id: B2, type: conclusion, label: "边界结论：RefCell —— 运行时借用检查，panic 替代编译错误"}
+      - {id: B3, type: conclusion, label: "边界结论：UnsafeCell —— unsafe 突破借用规则，程序员保证正确性"}
+      - {id: B4, type: conclusion, label: "边界结论：裸指针 *const/*mut —— 完全绕过借用检查"}
+    edges:
+      - {from: D, to: P1, label: "分解"}
+      - {from: D, to: P2, label: "分解"}
+      - {from: D, to: P3, label: "分解"}
+      - {from: P1, to: R1, label: "推导"}
+      - {from: P2, to: R2, label: "推导"}
+      - {from: P3, to: R3, label: "推导"}
+      - {from: R1, to: C1, label: "生成判定"}
+      - {from: R2, to: C2, label: "生成判定"}
+      - {from: R3, to: C2, label: "生成判定"}
+      - {from: C1, to: C2, label: "是"}
+      - {from: C1, to: L2, label: "否"}
+      - {from: C2, to: L3, label: "条件: 存在重叠 &mut"}
+      - {from: C2, to: L1, label: "条件: 无重叠 &mut + 有 &T"}
+      - {from: C2, to: L4, label: "条件: 无其他引用"}
+      - {from: D, to: B1, label: "条件: 边界 Reborrow"}
+      - {from: D, to: B2, label: "条件: 边界 RefCell"}
+      - {from: D, to: B3, label: "条件: 边界 UnsafeCell"}
+      - {from: D, to: B4, label: "条件: 边界 裸指针"}
+
+  - id: DF-LIFE-03
+    title_zh: 生命周期判定树
+    title_en: Lifetime Decision Tree
+    source:
+      file: concept/00_meta/00_framework/concept_definition_decision_forest.md
+      anchor: "#四生命周期判定树"
+    covered_concepts: [ex:Lifetimes, ex:Borrowing]
+    nodes:
+      - {id: D, type: condition, label: "概念定义：生命周期是引用有效的程序点集合，编译期构造，不进入机器码"}
+      - {id: P1, type: condition, label: "前提 P1：每个引用类型都有生命周期参数"}
+      - {id: P2, type: condition, label: "前提 P2：生命周期形成偏序关系（'a: 'b ⟹ 'a 包含 'b）"}
+      - {id: P3, type: condition, label: "前提 P3：生命周期满足包含约束（'a ⊇ 'b）"}
+      - {id: R1, type: condition, label: "规则 R1：Elision 三条规则自动推导生命周期参数"}
+      - {id: R2, type: condition, label: "规则 R2：输出生命周期 = 输入生命周期的最小公共超集"}
+      - {id: R3, type: condition, label: "规则 R3：实现中的生命周期约束必须满足 Trait 声明"}
+      - id: C1
+        type: decision
+        condition: "无法由 3 条省略规则推导的引用参数数是否 ≥1 个？"
+        quantitative: true
+        threshold: "省略规则覆盖失败 ≥ 1 个参数 ⟹ 需显式标注"
+      - id: C2
+        type: decision
+        condition: "输出引用超出输入最小公共超集的程序点数是否 ≥1 个？"
+        quantitative: true
+        threshold: "超出输入范围程序点 ≥ 1 ⟹ 悬垂引用"
+      - id: C3
+        type: decision
+        condition: "impl 中弱于 Trait 声明的生命周期约束数是否 ≥1 个？"
+        quantitative: true
+        threshold: "约束缺口 ≥ 1 ⟹ 约束不足"
+      - {id: L1, type: conclusion, label: "✅ 合法：自动推导（省略规则覆盖）"}
+      - {id: L2, type: conclusion, label: "需显式标注（编译期阻止，非安全问题）"}
+      - {id: L3, type: conclusion, label: "❌ 失效：悬垂引用（编译期阻止）"}
+      - {id: L4, type: conclusion, label: "✅ 合法：生命周期安全"}
+      - {id: L5, type: conclusion, label: "❌ 失效：约束不足（编译期阻止）"}
+      - {id: B1, type: conclusion, label: "边界结论：'static —— 存活于整个程序的生命周期"}
+      - {id: B2, type: conclusion, label: "边界结论：HRTB —— ∀<'a> 高阶 Trait Bound"}
+      - {id: B3, type: conclusion, label: "边界结论：Variance —— 协变/逆变/不变影响子类型推导"}
+      - {id: B4, type: conclusion, label: "边界结论：NLL/Polonius —— 更精确的借用分析（NLL 拒绝而 Polonius 接受）"}
+    edges:
+      - {from: D, to: P1, label: "分解"}
+      - {from: D, to: P2, label: "分解"}
+      - {from: D, to: P3, label: "分解"}
+      - {from: P1, to: R1, label: "推导"}
+      - {from: P2, to: R2, label: "推导"}
+      - {from: P3, to: R3, label: "推导"}
+      - {from: R1, to: C1, label: "生成判定"}
+      - {from: R2, to: C2, label: "生成判定"}
+      - {from: R3, to: C3, label: "生成判定"}
+      - {from: C1, to: L1, label: "否"}
+      - {from: C1, to: L2, label: "是"}
+      - {from: C2, to: L4, label: "否"}
+      - {from: C2, to: L3, label: "是"}
+      - {from: C3, to: L4, label: "否"}
+      - {from: C3, to: L5, label: "是"}
+      - {from: D, to: B1, label: "条件: 边界 'static"}
+      - {from: D, to: B2, label: "条件: 边界 HRTB"}
+      - {from: D, to: B3, label: "条件: 边界 Variance"}
+      - {from: D, to: B4, label: "条件: 边界 NLL/Polonius"}
+
+  - id: DF-TRAIT-04
+    title_zh: Trait 判定树
+    title_en: Trait Decision Tree
+    source:
+      file: concept/00_meta/00_framework/concept_definition_decision_forest.md
+      anchor: "#五trait-判定树"
+    covered_concepts: [ex:Traits, ex:Generics]
+    nodes:
+      - {id: D, type: condition, label: "概念定义：Trait 是定义共享行为的接口，可被类型实现，可被泛型约束"}
+      - {id: P1, type: condition, label: "前提 P1：Trait 可被外部类型实现"}
+      - {id: P2, type: condition, label: "前提 P2：Orphan Rule 限制 impl 位置，防止一致性破坏"}
+      - {id: P3, type: condition, label: "前提 P3：Trait 对象安全要求方法有确定性"}
+      - {id: R1, type: condition, label: "规则 R1：impl Trait for Type 需要类型在本 crate 或 Trait 本地"}
+      - {id: R2, type: condition, label: "规则 R2：Orphan Rule —— Type 本地 ∨ Trait 本地 ∨ 覆盖规则"}
+      - {id: R3, type: condition, label: "规则 R3：dyn Trait 要求方法无泛型参数、无 Self: Sized、关联类型可推断"}
+      - id: C1
+        type: decision
+        condition: "impl 目标中本地定义的类型或 Trait 数是否 ≥1 个？"
+        quantitative: true
+        threshold: "本地定义项 ≥ 1 ⟹ 可直接 impl"
+      - id: C2
+        type: decision
+        condition: "Orphan Rule 三条件（Type 本地 / Trait 本地 / 覆盖规则）满足数是否 ≥1 个？"
+        quantitative: true
+        threshold: "满足条件数 ≥ 1 ⟹ 合法 impl"
+      - id: C3
+        type: decision
+        condition: "dyn Trait 使用位置数是否 ≥1 个？"
+        quantitative: true
+        threshold: "dyn 使用 ≥ 1 ⟹ 需对象安全子判定"
+      - id: C4
+        type: decision
+        condition: "违反对象安全的方法数（泛型方法或 Self: Sized）是否 ≥1 个？"
+        quantitative: true
+        threshold: "违规方法数 ≥ 1 ⟹ 非对象安全"
+      - {id: L1, type: conclusion, label: "✅ 合法：直接 impl"}
+      - {id: L2, type: conclusion, label: "考虑 blanket impl"}
+      - {id: L3, type: conclusion, label: "❌ 失效：Orphan Rule 违反（编译期阻止）"}
+      - {id: L4, type: conclusion, label: "中间结论：需检查对象安全"}
+      - {id: L5, type: conclusion, label: "✅ 合法：静态分发"}
+      - {id: L6, type: conclusion, label: "✅ 合法：动态分发"}
+      - {id: L7, type: conclusion, label: "❌ 失效：非对象安全（编译期阻止）"}
+      - {id: B1, type: conclusion, label: "边界结论：GATs —— 泛型关联类型增加 Trait 表达力"}
+      - {id: B2, type: conclusion, label: "边界结论：Auto Traits —— Send/Sync 编译器自动推导"}
+      - {id: B3, type: conclusion, label: "边界结论：Specialization —— 重叠 impl 的优先级（未稳定）"}
+    edges:
+      - {from: D, to: P1, label: "分解"}
+      - {from: D, to: P2, label: "分解"}
+      - {from: D, to: P3, label: "分解"}
+      - {from: P1, to: R1, label: "推导"}
+      - {from: P2, to: R2, label: "推导"}
+      - {from: P3, to: R3, label: "推导"}
+      - {from: R1, to: C1, label: "生成判定"}
+      - {from: R2, to: C2, label: "生成判定"}
+      - {from: R3, to: C3, label: "生成判定"}
+      - {from: C1, to: L1, label: "是"}
+      - {from: C1, to: L2, label: "否"}
+      - {from: C2, to: L1, label: "是"}
+      - {from: C2, to: L3, label: "否"}
+      - {from: C3, to: L4, label: "是"}
+      - {from: C3, to: L5, label: "否"}
+      - {from: L4, to: C4, label: "子判定"}
+      - {from: C4, to: L6, label: "否"}
+      - {from: C4, to: L7, label: "是"}
+      - {from: D, to: B1, label: "条件: 边界 GATs"}
+      - {from: D, to: B2, label: "条件: 边界 Auto Traits"}
+      - {from: D, to: B3, label: "条件: 边界 Specialization"}
+
+  - id: DF-GENERIC-05
+    title_zh: 泛型判定树
+    title_en: Generics Decision Tree
+    source:
+      file: concept/00_meta/00_framework/concept_definition_decision_forest.md
+      anchor: "#六泛型判定树"
+    covered_concepts: [ex:Generics, ex:Traits]
+    nodes:
+      - {id: D, type: condition, label: "概念定义：泛型是参数化多态，编译器通过单态化生成具体代码"}
+      - {id: P1, type: condition, label: "前提 P1：泛型参数必须满足 Trait Bound 约束"}
+      - {id: P2, type: condition, label: "前提 P2：类型推断基于 HM 算法约束统一化"}
+      - {id: P3, type: condition, label: "前提 P3：单态化生成具体代码，无运行时开销"}
+      - {id: R1, type: condition, label: "规则 R1：调用泛型函数时，实参类型必须满足所有 Trait Bounds"}
+      - {id: R2, type: condition, label: "规则 R2：若类型可推断，则无需显式写出类型参数"}
+      - {id: R3, type: condition, label: "规则 R3：每个具体类型组合生成独立的 monomorph"}
+      - id: C1
+        type: decision
+        condition: "实参类型未满足的 Trait Bound 数是否 ≥1 个？"
+        quantitative: true
+        threshold: "未满足 bound ≥ 1 ⟹ 约束不足"
+      - id: C2
+        type: decision
+        condition: "满足约束的候选类型数是否 ≥2 个（推断歧义）？"
+        quantitative: true
+        threshold: "候选类型数 ≥ 2 ⟹ 推断歧义"
+      - id: C3
+        type: decision
+        condition: "单态化实例增量占二进制体积比例是否 >10%？"
+        quantitative: true
+        threshold: "单态化体积占比 > 10% ⟹ 代码膨胀警告"
+      - {id: L1, type: conclusion, label: "✅ 合法：泛型约束满足"}
+      - {id: L2, type: conclusion, label: "❌ 失效：Trait Bound 不满足（编译期阻止）"}
+      - {id: L3, type: conclusion, label: "需显式标注（编译期阻止，非安全问题）"}
+      - {id: L4, type: conclusion, label: "✅ 合法：零成本抽象"}
+      - {id: L5, type: conclusion, label: "⚠️ 警告：代码膨胀（工程问题，改用 &dyn Trait 或重构）"}
+      - {id: B1, type: conclusion, label: "边界结论：Const Generics —— 值参数化"}
+      - {id: B2, type: conclusion, label: "边界结论：GATs —— 类型构造子参数化"}
+      - {id: B3, type: conclusion, label: "边界结论：impl Trait —— 存在类型 / 抽象返回类型"}
+      - {id: B4, type: conclusion, label: "边界结论：HRTB —— ∀<'a> 泛型生命周期"}
+    edges:
+      - {from: D, to: P1, label: "分解"}
+      - {from: D, to: P2, label: "分解"}
+      - {from: D, to: P3, label: "分解"}
+      - {from: P1, to: R1, label: "推导"}
+      - {from: P2, to: R2, label: "推导"}
+      - {from: P3, to: R3, label: "推导"}
+      - {from: R1, to: C1, label: "生成判定"}
+      - {from: R2, to: C2, label: "生成判定"}
+      - {from: R3, to: C3, label: "生成判定"}
+      - {from: C1, to: L1, label: "否"}
+      - {from: C1, to: L2, label: "是"}
+      - {from: C2, to: L4, label: "否"}
+      - {from: C2, to: L3, label: "是"}
+      - {from: C3, to: L4, label: "否"}
+      - {from: C3, to: L5, label: "是"}
+      - {from: D, to: B1, label: "条件: 边界 Const Generics"}
+      - {from: D, to: B2, label: "条件: 边界 GATs"}
+      - {from: D, to: B3, label: "条件: 边界 impl Trait"}
+      - {from: D, to: B4, label: "条件: 边界 HRTB"}
+
+  - id: DF-CONC-06
+    title_zh: 并发判定树
+    title_en: Concurrency Decision Tree
+    source:
+      file: concept/00_meta/00_framework/concept_definition_decision_forest.md
+      anchor: "#七并发判定树"
+    covered_concepts: [ex:Concurrency, ex:Ownership, ex:Borrowing]
+    nodes:
+      - {id: D, type: condition, label: "概念定义：Rust 通过类型系统（Send/Sync）在编译期排除数据竞争"}
+      - {id: P1, type: condition, label: "前提 P1：Send —— 类型可安全跨线程转移所有权"}
+      - {id: P2, type: condition, label: "前提 P2：Sync —— 类型可安全跨线程共享引用"}
+      - {id: P3, type: condition, label: "前提 P3：共享可变状态需通过 Mutex/RwLock/Atomic"}
+      - {id: R1, type: condition, label: "规则 R1：thread::spawn 要求 F: Send"}
+      - {id: R2, type: condition, label: "规则 R2：&T: Sync ⟺ T: Sync"}
+      - {id: R3, type: condition, label: "规则 R3：Mutex<T> 提供互斥，但程序员需避免死锁"}
+      - id: C1
+        type: decision
+        condition: "闭包捕获的非 Send 变量数是否 ≥1 个？"
+        quantitative: true
+        threshold: "非 Send 捕获 ≥ 1 ⟹ 编译期阻止"
+      - id: C2
+        type: decision
+        condition: "通过共享引用跨线程访问的数据项数是否 ≥1 个？"
+        quantitative: true
+        threshold: "共享引用访问 ≥ 1 ⟹ 需 Sync 子判定"
+      - id: C3
+        type: decision
+        condition: "锁获取顺序不一致的锁对数是否 ≥1 对（等待环长度 ≥2）？"
+        quantitative: true
+        threshold: "顺序冲突锁对 ≥ 1 ⟹ 死锁风险"
+      - {id: L1, type: conclusion, label: "✅ 合法：线程安全"}
+      - {id: L2, type: conclusion, label: "❌ 失效：捕获非 Send 数据（编译期阻止）"}
+      - {id: L3, type: conclusion, label: "中间结论：需检查 Sync"}
+      - {id: L4, type: conclusion, label: "✅ 合法：无共享引用"}
+      - {id: L5, type: conclusion, label: "❌ 失效：死锁风险（运行时阻塞）"}
+      - {id: B1, type: conclusion, label: "边界结论：unsafe impl Send/Sync —— 程序员承担安全责任"}
+      - {id: B2, type: conclusion, label: "边界结论：Atomic —— 无锁并发（需正确选择 Ordering）"}
+      - {id: B3, type: conclusion, label: "边界结论：Rayon —— join/scope 安全数据并行抽象"}
+      - {id: B4, type: conclusion, label: "边界结论：async Send —— 任务跨线程要求 Future: Send"}
+    edges:
+      - {from: D, to: P1, label: "分解"}
+      - {from: D, to: P2, label: "分解"}
+      - {from: D, to: P3, label: "分解"}
+      - {from: P1, to: R1, label: "推导"}
+      - {from: P2, to: R2, label: "推导"}
+      - {from: P3, to: R3, label: "推导"}
+      - {from: R1, to: C1, label: "生成判定"}
+      - {from: R2, to: C2, label: "生成判定"}
+      - {from: R3, to: C3, label: "生成判定"}
+      - {from: C1, to: L1, label: "否"}
+      - {from: C1, to: L2, label: "是"}
+      - {from: C2, to: L3, label: "是"}
+      - {from: C2, to: L4, label: "否"}
+      - {from: C3, to: L1, label: "否"}
+      - {from: C3, to: L5, label: "是"}
+      - {from: D, to: B1, label: "条件: 边界 unsafe impl"}
+      - {from: D, to: B2, label: "条件: 边界 Atomic"}
+      - {from: D, to: B3, label: "条件: 边界 Rayon"}
+      - {from: D, to: B4, label: "条件: 边界 async Send"}
+
+  - id: DF-ASYNC-07
+    title_zh: 异步判定树
+    title_en: Async Decision Tree
+    source:
+      file: concept/00_meta/00_framework/concept_definition_decision_forest.md
+      anchor: "#八异步判定树"
+    covered_concepts: [ex:AsyncProgramming, ex:Futures, ex:PinAndUnpin]
+    nodes:
+      - {id: D, type: condition, label: "概念定义：async/await 是协作式多任务的语法糖，编译器将 async fn 变换为状态机"}
+      - {id: P1, type: condition, label: "前提 P1：async fn 被编译为状态机"}
+      - {id: P2, type: condition, label: "前提 P2：.await 是异步协作点，可能让出执行权"}
+      - {id: P3, type: condition, label: "前提 P3：自引用结构需 Pin 保证内存稳定"}
+      - {id: R1, type: condition, label: "规则 R1：跨 await 点持有的引用必须是合法的"}
+      - {id: R2, type: condition, label: "规则 R2：状态机实现 Send 才可跨线程调度"}
+      - {id: R3, type: condition, label: "规则 R3：Pin<&mut T> 禁止移动 T，除非 T: Unpin"}
+      - id: C1
+        type: decision
+        condition: "跨 await 点保持活跃的引用数是否 ≥1 个？"
+        quantitative: true
+        threshold: "跨 await 活跃引用 ≥ 1 ⟹ 需生命周期检查"
+      - id: C2
+        type: decision
+        condition: "Future 状态机捕获的非 Send 字段数是否 ≥1 个？"
+        quantitative: true
+        threshold: "非 Send 字段 ≥ 1 ⟹ Future 非 Send"
+      - id: C3
+        type: decision
+        condition: "状态机中的自引用字段数是否 ≥1 个？"
+        quantitative: true
+        threshold: "自引用字段 ≥ 1 ⟹ 需 Pin"
+      - id: C4
+        type: decision
+        condition: "对自引用值的 Pin 包装层数是否 = 0？"
+        quantitative: true
+        threshold: "Pin 包装层数 = 0 ⟹ 自引用悬垂 UB"
+      - {id: L1, type: conclusion, label: "中间结论：需检查生命周期"}
+      - {id: L2, type: conclusion, label: "✅ 合法：状态内引用安全"}
+      - {id: L3, type: conclusion, label: "✅ 合法：可跨线程调度"}
+      - {id: L4, type: conclusion, label: "❌ 失效：非 Send Future（编译期阻止）"}
+      - {id: L5, type: conclusion, label: "中间结论：需使用 Pin"}
+      - {id: L6, type: conclusion, label: "✅ 合法：无自引用"}
+      - {id: L7, type: conclusion, label: "✅ 合法：Pin 保证内存稳定"}
+      - {id: L8, type: conclusion, label: "❌ 失效：自引用悬垂（运行时 UB）"}
+      - {id: B1, type: conclusion, label: "边界结论：Stream —— 多个异步值的 trait"}
+      - {id: B2, type: conclusion, label: "边界结论：select! —— 并发等待多个 Future 竞争"}
+      - {id: B3, type: conclusion, label: "边界结论：Spawn —— 任务生成与运行时调度"}
+      - {id: B4, type: conclusion, label: "边界结论：block_on —— 在同步上下文中运行异步"}
+    edges:
+      - {from: D, to: P1, label: "分解"}
+      - {from: D, to: P2, label: "分解"}
+      - {from: D, to: P3, label: "分解"}
+      - {from: P1, to: R1, label: "推导"}
+      - {from: P2, to: R2, label: "推导"}
+      - {from: P3, to: R3, label: "推导"}
+      - {from: R1, to: C1, label: "生成判定"}
+      - {from: R2, to: C2, label: "生成判定"}
+      - {from: R3, to: C3, label: "生成判定"}
+      - {from: C1, to: L1, label: "是"}
+      - {from: C1, to: L2, label: "否"}
+      - {from: C2, to: L3, label: "否"}
+      - {from: C2, to: L4, label: "是"}
+      - {from: C3, to: L5, label: "是"}
+      - {from: C3, to: L6, label: "否"}
+      - {from: L5, to: C4, label: "子判定"}
+      - {from: C4, to: L7, label: "否"}
+      - {from: C4, to: L8, label: "是"}
+      - {from: D, to: B1, label: "条件: 边界 Stream"}
+      - {from: D, to: B2, label: "条件: 边界 select!"}
+      - {from: D, to: B3, label: "条件: 边界 Spawn"}
+      - {from: D, to: B4, label: "条件: 边界 block_on"}
+
+  - id: DF-UNSAFE-08
+    title_zh: Unsafe 判定树
+    title_en: Unsafe Decision Tree
+    source:
+      file: concept/00_meta/00_framework/concept_definition_decision_forest.md
+      anchor: "#九unsafe-判定树"
+    covered_concepts: [ex:UnsafeRust, ex:ForeignFunctionInterfaceFFI, ex:MiriRustUndefinedBehaviorDetector, ex:KaniRustBoundedModelChecker]
+    nodes:
+      - {id: D, type: condition, label: "概念定义：unsafe 是安全边界逃逸舱口，标记程序员手动维护的不变式"}
+      - {id: P1, type: condition, label: "前提 P1：unsafe 块内可执行 5 类 unsafe 操作"}
+      - {id: P2, type: condition, label: "前提 P2：unsafe fn 的调用者必须保证前置条件"}
+      - {id: P3, type: condition, label: "前提 P3：unsafe trait 的实现者必须保证安全契约"}
+      - {id: R1, type: condition, label: "规则 R1：解引用裸指针 *ptr 需保证 ptr 有效且对齐"}
+      - {id: R2, type: condition, label: "规则 R2：每个 unsafe 块必须有 SAFETY 注释"}
+      - {id: R3, type: condition, label: "规则 R3：unsafe 抽象的公开 API 必须安全封装"}
+      - id: C1
+        type: decision
+        condition: "无效/未对齐/已释放的裸指针解引用次数是否 ≥1 次？"
+        quantitative: true
+        threshold: "无效解引用 ≥ 1 次 ⟹ UB"
+      - id: C2
+        type: decision
+        condition: "缺少 SAFETY 注释的 unsafe 块数是否 ≥1 个？"
+        quantitative: true
+        threshold: "无 SAFETY 注释块 ≥ 1 ⟹ 文档不足"
+      - id: C3
+        type: decision
+        condition: "暴露 unsafe 不变式的 safe 公开 API 数是否 ≥1 个？"
+        quantitative: true
+        threshold: "暴露不变式的 safe API ≥ 1 ⟹ 封装泄漏风险"
+      - {id: L1, type: conclusion, label: "✅ 合法：裸指针安全"}
+      - {id: L2, type: conclusion, label: "❌ 失效：UB —— 无效指针（Miri/ASan 可检测）"}
+      - {id: L3, type: conclusion, label: "✅ 合法：文档完整"}
+      - {id: L4, type: conclusion, label: "❌ 失效：文档不足（代码审查/cargo geiger）"}
+      - {id: L5, type: conclusion, label: "✅ 合法：安全抽象"}
+      - {id: L6, type: conclusion, label: "⚠️ 风险：unsafe 暴露（API 审计）"}
+      - {id: B1, type: conclusion, label: "边界结论：FFI —— extern 调用，C 代码可能破坏不变式"}
+      - {id: B2, type: conclusion, label: "边界结论：Union —— 字段访问即类型双关"}
+      - {id: B3, type: conclusion, label: "边界结论：asm! —— 内联汇编完全绕过编译器"}
+      - {id: B4, type: conclusion, label: "边界结论：Miri —— 解释器动态 UB 检测"}
+      - {id: B5, type: conclusion, label: "边界结论：Kani —— 模型检测自动验证 unsafe"}
+    edges:
+      - {from: D, to: P1, label: "分解"}
+      - {from: D, to: P2, label: "分解"}
+      - {from: D, to: P3, label: "分解"}
+      - {from: P1, to: R1, label: "推导"}
+      - {from: P2, to: R2, label: "推导"}
+      - {from: P3, to: R3, label: "推导"}
+      - {from: R1, to: C1, label: "生成判定"}
+      - {from: R2, to: C2, label: "生成判定"}
+      - {from: R3, to: C3, label: "生成判定"}
+      - {from: C1, to: L1, label: "否"}
+      - {from: C1, to: L2, label: "是"}
+      - {from: C2, to: L3, label: "否"}
+      - {from: C2, to: L4, label: "是"}
+      - {from: C3, to: L5, label: "否"}
+      - {from: C3, to: L6, label: "是"}
+      - {from: D, to: B1, label: "条件: 边界 FFI"}
+      - {from: D, to: B2, label: "条件: 边界 Union"}
+      - {from: D, to: B3, label: "条件: 边界 asm!"}
+      - {from: D, to: B4, label: "条件: 边界 Miri"}
+      - {from: D, to: B5, label: "条件: 边界 Kani"}
+
+  - id: DF-CROSS-09
+    title_zh: 判定森林交叉一致性图
+    title_en: Decision Forest Cross-Consistency Graph
+    source:
+      file: concept/00_meta/00_framework/concept_definition_decision_forest.md
+      anchor: "#十判定森林交叉一致性"
+    covered_concepts: [ex:Ownership, ex:Borrowing, ex:Lifetimes, ex:Traits, ex:Generics, ex:Concurrency, ex:AsyncProgramming, ex:UnsafeRust]
+    nodes:
+      - {id: O, type: conclusion, label: "所有权判定树（DF-OWN-01）"}
+      - {id: B, type: conclusion, label: "借用判定树（DF-BORROW-02）"}
+      - {id: L, type: conclusion, label: "生命周期判定树（DF-LIFE-03）"}
+      - {id: T, type: conclusion, label: "Trait 判定树（DF-TRAIT-04）"}
+      - {id: G, type: conclusion, label: "泛型判定树（DF-GENERIC-05）"}
+      - {id: C, type: conclusion, label: "并发判定树（DF-CONC-06）"}
+      - {id: A, type: conclusion, label: "异步判定树（DF-ASYNC-07）"}
+      - {id: U, type: conclusion, label: "Unsafe 判定树（DF-UNSAFE-08）—— 交叉点之王"}
+    edges:
+      - {from: O, to: B, label: "条件: 所有权唯一性 ⟹ 借用来源"}
+      - {from: B, to: L, label: "条件: 借用合法性 ⟹ 生命周期约束"}
+      - {from: O, to: C, label: "条件: Send/Sync 源于所有权"}
+      - {from: B, to: C, label: "条件: &mut 排他 ⟹ 并发安全"}
+      - {from: L, to: A, label: "条件: 生命周期约束 ⟹ 跨 await 引用安全"}
+      - {from: B, to: A, label: "条件: Pin 基于借用"}
+      - {from: T, to: G, label: "条件: Trait Bound ⟹ 泛型约束"}
+      - {from: U, to: C, label: "条件: unsafe 实现 Send/Sync"}
+      - {from: U, to: A, label: "条件: unsafe 突破 Pin"}
+      - {from: U, to: B, label: "条件: unsafe 绕过借用检查"}

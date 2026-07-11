@@ -11,7 +11,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 设计类型安全的 REST/GraphQL/gRPC API
 > **前置依赖**: [Async/Await](../../03_advanced/01_async/02_async.md) ·
 > [Trait](../../02_intermediate/00_traits/01_traits.md) ·
@@ -36,7 +36,7 @@
 > [axum](https://docs.rs/axum/latest/axum/) ·
 > [tonic](https://docs.rs/tonic/latest/tonic/service/interceptor/index.html) ·
 > [async-graphql](https://docs.rs/async-graphql/latest/async_graphql/)
-> **后置概念**: [Future Roadmap](../../07_future/05_roadmaps/24_roadmap.md)
+> **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -1191,7 +1191,7 @@ struct UserV2 {
 
 > **补充来源索引**: [来源: [async-graphql](https://docs.rs/async-graphql/latest/async_graphql/)] · [来源: [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)]
 
-## 相关概念文件
+## 相关概念
 
 - [微服务架构模式](31_microservice_patterns.md) — 服务发现、熔断、API Gateway
 - [事件驱动架构](32_event_driven_architecture.md) — 发布-订阅、消息队列
@@ -1205,7 +1205,7 @@ struct UserV2 {
 - [云原生](../04_web_and_networking/24_cloud_native.md) — Kubernetes、容器化、可观测性
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: API Design Patterns（API 设计模式） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: API Design Patterns（API 设计模式） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: API Design Patterns（API 设计模式） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

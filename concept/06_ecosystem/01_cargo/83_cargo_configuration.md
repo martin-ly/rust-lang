@@ -5,10 +5,11 @@
 >
 > **EN**: Cargo Configuration
 > **Summary**: Cargo configuration for Rust 1.97.0+: `.cargo/config.toml` hierarchy, common settings, environment variable mapping, credential providers, registry authentication, resolver options, and cross-compilation setup.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **P** — Practice
+> **A/S/P 标记**: **A** — Application
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把 Cargo 的“配置”与“环境变量”两大参考章节集中为一份可查阅权威页。
 > **前置概念**: [Cargo Workflow](81_cargo_workflow.md) · [Cargo Registries and Publishing](62_cargo_registries_and_publishing.md) · [Cargo Authentication and Cache](63_cargo_authentication_and_cache.md)
