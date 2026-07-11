@@ -3,12 +3,12 @@
 **EN**: International Authority URL Health
 **Summary**: 仅检查 P0/P1/P2 权威域 URL 的有效性，验证『对齐国际化权威』不仅是『有引用』且『引用有效』。带缓存，可增量。**口径**：403/418 及 crates.io 的 404 单列 anti_bot（站点对脚本 UA 反爬，链接本身可能有效，需浏览器人工复核），不计入失效 bad。
 
-> 扫描 concept/+knowledge/+docs/ 权威域唯一 URL: **1933** · 真失效（不含反爬）: **0** · 反爬 403/418: **53** · crates.io 反爬 404: **4**
+> 扫描 concept/+knowledge/+docs/ 权威域唯一 URL: **1976** · 真失效（不含反爬）: **0** · 反爬 403/418: **56** · crates.io 反爬 404: **4**
 
 | 分级 | 真失效（不含反爬） | 反爬 403/418 | crates.io 反爬 404 |
 |:---|---:|---:|---:|
 | P0 | 0 | 0 | 0 |
-| P1 | 0 | 53 | 0 |
+| P1 | 0 | 56 | 0 |
 | P2 | 0 | 0 | 4 |
 
 ✅ 本次扫描的权威域 URL 无真失效（2xx/3xx；403 反爬已单列）。
@@ -34,7 +34,7 @@
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/2741948.2741950> | docs/research_notes/software_design_theory/07_crate_architectures/34_metrics_architecture.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3093744.3093746> | docs/research_notes/software_design_theory/07_crate_architectures/28_lapin_architecture.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3149.214121> | concept/06_ecosystem/06_data_and_distributed/50_distributed_consensus.md |
-| P1 | 403 | <https://dl.acm.org/doi/10.1145/3158154> | concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md; concept/04_formal/00_type_theory/02_type_theory.md; concept/04_formal/01_ownership_logic/01_linear_logic.md |
+| P1 | 403 | <https://dl.acm.org/doi/10.1145/3158154> | concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md; concept/03_advanced/00_concurrency/22_cross_platform_concurrency.md; concept/03_advanced/07_unsafe_internals/37_unsafe_collections_internals.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3186725> | docs/research_notes/software_design_theory/07_crate_architectures/32_vector_architecture.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3190508.3190528> | docs/research_notes/software_design_theory/07_crate_architectures/34_metrics_architecture.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/324133.324234> | docs/research_notes/software_design_theory/07_crate_architectures/13_rayon_architecture.md |
@@ -42,21 +42,21 @@
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3296957.3190648> | docs/research_notes/software_design_theory/07_crate_architectures/31_surrealdb_architecture.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3360573> | docs/research_notes/10_academic_papers_alignment.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3371073> | docs/research_notes/10_academic_papers_alignment.md |
-| P1 | 403 | <https://dl.acm.org/doi/10.1145/3371109> | docs/research_notes/10_academic_papers_alignment.md |
+| P1 | 403 | <https://dl.acm.org/doi/10.1145/3371109> | concept/03_advanced/06_low_level_patterns/36_ownership_performance_optimization.md; docs/research_notes/10_academic_papers_alignment.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3473597> | docs/research_notes/10_academic_papers_alignment.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3510457.3513031> | docs/research_notes/10_academic_papers_alignment.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3547647> | docs/research_notes/10_academic_papers_alignment.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/355592.365646> | concept/01_foundation/00_start/34_pl_prerequisites.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/356635.356640> | concept/06_ecosystem/10_performance/15_performance_optimization.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/357172.357176> | concept/06_ecosystem/06_data_and_distributed/50_distributed_consensus.md |
-| P1 | 403 | <https://dl.acm.org/doi/10.1145/3591283> | concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md |
-| P1 | 403 | <https://dl.acm.org/doi/10.1145/3591285> | concept/02_intermediate/00_traits/01_traits.md; docs/05_guides/05_verus_practical_guide.md |
+| P1 | 403 | <https://dl.acm.org/doi/10.1145/3591283> | concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md; concept/03_advanced/06_low_level_patterns/36_ownership_performance_optimization.md |
+| P1 | 403 | <https://dl.acm.org/doi/10.1145/3591285> | concept/02_intermediate/00_traits/01_traits.md; concept/04_formal/05_rustc_internals/45_lexical_structure.md; concept/04_formal/05_rustc_internals/53_generics_compiler_behavior.md |
+| P1 | 403 | <https://dl.acm.org/doi/10.1145/359576.359585> | concept/01_foundation/00_start/47_std_io_and_process.md; concept/02_intermediate/00_traits/33_rust_release_process.md; concept/03_advanced/00_concurrency/22_cross_platform_concurrency.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3656422> | docs/research_notes/10_academic_papers_alignment.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3689738> | concept/04_formal/03_operational_semantics/17_operational_semantics.md; concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3704886> | concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md |
 | P1 | 403 | <https://dl.acm.org/doi/10.1145/3735592> | docs/research_notes/10_academic_papers_alignment.md |
-| P1 | 403 | <https://dl.acm.org/doi/10.1145/567446.567462> | concept/06_ecosystem/03_design_patterns/41_workflow_theory.md |
-| P1 | 403 | <https://dl.acm.org/doi/10.1145/582153.582176> | concept/02_intermediate/01_generics/02_generics.md |
+| P1 | 403 | <https://dl.acm.org/doi/10.1145/512644.512645> | concept/02_intermediate/06_macros_and_metaprogramming/36_attributes_by_category.md; concept/03_advanced/03_proc_macros/29_proc_macro_code_generation_optimization.md; concept/03_advanced/03_proc_macros/30_macro_debugging_and_diagnostics.md |
 
 ## crates.io 反爬 404（前 40，真实 crate/根页在浏览器中通常可达，不计入失效）
 

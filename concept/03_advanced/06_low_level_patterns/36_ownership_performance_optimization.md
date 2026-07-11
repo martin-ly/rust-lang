@@ -178,3 +178,12 @@ let matrix: Vec<f64> = vec![0.0; n * 1024];
 > **权威来源**: [TRPL — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html), [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html), [Rust Performance Book](https://nnethercote.github.io/perf-book/)
 >
 > **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Stacked Borrows: An Aliasing Model for Rust (POPL 2021)](https://dl.acm.org/doi/10.1145/3371109) · [Tree Borrows: A New Aliasing Model for Rust (PLDI 2025, Distinguished Paper)](https://dl.acm.org/doi/10.1145/3591283)

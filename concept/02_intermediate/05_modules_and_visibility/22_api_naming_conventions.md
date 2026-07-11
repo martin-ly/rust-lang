@@ -94,6 +94,7 @@
   - [八、快速对照表](#八快速对照表)
   - [九、练习题](#九练习题)
     - [练习 1：为 `Config` 设计 API](#练习-1为-config-设计-api)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -450,3 +451,12 @@ impl From<(&str, u16)> for Config {
 > **权威来源**: [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines/naming.html), [TRPL](https://doc.rust-lang.org/book/title-page.html), [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html), [Unicode UAX #31](https://www.unicode.org/reports/tr31/)
 > **权威来源对齐变更日志**: 2026-07-10 对齐权威来源
 > **状态**: ✅ 权威来源对齐完成
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml) · [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata)

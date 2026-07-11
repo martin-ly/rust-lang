@@ -557,3 +557,13 @@ impl SimpleHttpSemantics {
 | 形式模型 ⟹ 无歧义规范 | 使用状态机或进程代数 | 精确描述协议行为 |
 | 精化关系 ⟹ 实现正确性 | 证明代码满足模型 | 降低实现偏离规范的风险 |
 | 模型检查 ⟹ 缺陷发现 | 自动遍历状态空间 | 暴露罕见交互路径中的 bug |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [RustHornBelt: Prophecy-Verified Safe Rust (POPL 2022)](https://dl.acm.org/doi/10.1145/3591285) · [Aeneas: Rust Verification by Functional Translation (arXiv:2206.07185)](https://arxiv.org/abs/2206.07185)
+- **P2 生态/社区**: [model-checking/kani — 模型检查器](https://github.com/model-checking/kani) · [model-checking/verify-rust-std](https://github.com/model-checking/verify-rust-std)

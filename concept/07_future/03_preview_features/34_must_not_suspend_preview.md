@@ -229,3 +229,11 @@ fn main() {}
 
 已在 nightly 中作为实验性 lint 提供。预计在未来版本中稳定化，可能成为默认启用的警告。
 </details>
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)

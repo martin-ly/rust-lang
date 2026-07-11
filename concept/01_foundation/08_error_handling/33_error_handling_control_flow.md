@@ -40,6 +40,7 @@
     - [定理链](#定理链)
     - [反向推理](#反向推理)
     - [反命题](#反命题)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 本篇聚焦 `Result`/`Option` 与 `?` 运算符、`Try`/`FromResidual` 残差机制、`try` 块、错误转换与边界设计。
 
@@ -267,3 +268,11 @@ flowchart TD
 > **过渡**: 从控制流机制过渡到自定义错误类型，可以形成在 API 边界精确表达失败原因的工程实践。
 >
 > **过渡提示**：掌握控制流层面的错误处理后，可继续阅读 [Error Handling 深入](../../02_intermediate/03_error_handling/04_error_handling.md) 了解自定义错误类型、`Error` trait 与生态库实践。
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/thiserror — 生态权威 API 文档](https://docs.rs/thiserror) · [docs.rs/anyhow — 生态权威 API 文档](https://docs.rs/anyhow)

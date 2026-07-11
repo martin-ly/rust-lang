@@ -225,3 +225,11 @@ flowchart TD
 >
 > **反向推理**: 出现本可避免的常见错误 ⟸ 说明 clippy 未启用或未处理 warn 级别提示。
 >
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/criterion — 生态权威 API 文档](https://docs.rs/criterion) · [docs.rs/proptest — 生态权威 API 文档](https://docs.rs/proptest)

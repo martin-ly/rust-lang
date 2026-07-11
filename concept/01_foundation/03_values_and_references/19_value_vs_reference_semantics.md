@@ -200,3 +200,11 @@ Java/Python object ..... 引用语义
 - [cppreference: Value Categories](https://en.cppreference.com/w/cpp/language/value_category)
 - [Bjarne Stroustrup — New Value Terminology](https://www.stroustrup.com/terminology.pdf)
 - [CppCon 2023 — Mateusz Pusz: Value Categories](https://www.youtube.com/watch?v=U7xx6gyaiio)
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)

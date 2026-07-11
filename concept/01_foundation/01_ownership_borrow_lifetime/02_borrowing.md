@@ -151,6 +151,7 @@
     - [测验 4：借用与所有权转移（应用层）](#测验-4借用与所有权转移应用层)
     - [测验 5：Split Borrow（分析层）](#测验-5split-borrow分析层)
   - [十、延伸阅读与自测](#十延伸阅读与自测)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ## 一、权威定义（Definition）
 
@@ -2039,3 +2040,12 @@ Rust 支持 **Split Borrow**（字段级借用分析）：编译器能识别 `p.
 > - Brown Book 交互式题目：[Ownership Inventory #1](https://rust-book.cs.brown.edu/ch06-04-inventory.html)
 >
 > Inventory 题目灵感来自真实 StackOverflow 问题，能有效暴露对「移动、借用、生命周期」的常见误解。
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)

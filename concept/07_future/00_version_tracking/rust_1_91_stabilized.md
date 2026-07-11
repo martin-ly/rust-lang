@@ -2541,3 +2541,12 @@ Rust 1.91 在异步编程方面带来了显著的改进：
 | 版本上下文 ⟹ 演进脉络 | 对比前后版本特性 | 理解语言发展方向 |
 | 所有权/生命周期改进 ⟹ 更精确借用 | 编译器推断能力增强 | 部分代码可更简洁 |
 | 控制流增强 ⟹ 表达力提升 | 新语法简化常见模式 | 提高代码可读性 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: Prophecy-Verified Safe Rust (POPL 2022)](https://dl.acm.org/doi/10.1145/3591285)

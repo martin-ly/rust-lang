@@ -108,3 +108,11 @@ cargo fix --edition
 ---
 
 > **Checklist**: 已提供 Rust 2024 Edition 核心特性预览 / 说明 Edition 机制 / 给出迁移命令 / 引用（Reference）官方 Edition Guide 与 RFC。
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper) · [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio)

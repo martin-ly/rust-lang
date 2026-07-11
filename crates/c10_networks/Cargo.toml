@@ -43,6 +43,8 @@ url = { workspace = true }
 rustls = { workspace = true, optional = true }
 
 # Kafka support (optional, requires librdkafka build environment)
+# 2026-07-11: 锁定 0.37 (0.39 已发布但为 0.x 破坏性升级，且需 librdkafka/cmake 环境验证，
+#       Windows 主机无法编译验证，故保守保持；kafka 为可选 feature)
 rdkafka = { version = "0.37", features = ["tokio"], optional = true }
 
 # Kubernetes ecosystem examples
@@ -80,6 +82,8 @@ azure_storage_blob = { version = "1.0.0", optional = true }
 # io_uring 仅 Linux 可用
 # 2026-06-08: tokio-uring 0.5.0 (crates.io 最新版) 锁定 io-uring ^0.6.0，无法升级至 0.7.x
 #       验证: tokio-uring 无新版本发布，状态未变
+# 2026-07-11 复核: io-uring 0.7.13 已发布但 builder API 有破坏性变更且 tokio-uring 0.5 仍锁定 ^0.6，
+#       继续保持 0.6 (非本仓库可直接修复项)
 tokio-uring = { version = "0.5", optional = true }
 io-uring = { version = "0.6", optional = true }
 
@@ -122,9 +126,13 @@ axum = { workspace = true }
 ring = { workspace = true }
 # 2026-07-04: cargo update 后同步到当前解析版本
 mongodb = "3.7.0"
+# 2026-07-11: 锁定 2.5.5 (lapin 3.x/4.x 为大版本 API 重写，amq-protocol 生态尚未迁移；
+#       作为 dev-dependency 仅用于示例，保守保持)
 lapin = "2.5.5"
 # 2026-07-08: kube 0.98 -> 4.0.0，k8s-openapi 0.24 -> 0.25，消除 backoff unmaintained 传递依赖
 
+# 2026-07-11: 锁定 0.10 (aes-gcm 0.11 已发布但切换至 aead 0.6 / hybrid-array 新栈；
+#       cookie/sqlx 生态仍在 aead 0.5 + digest 0.10，保守保持)
 aes-gcm = "0.10"
 sha2 = { workspace = true }
 lru = { workspace = true }

@@ -1,12 +1,12 @@
 {
   "date": "2026-07-11",
-  "scanned": 1933,
+  "scanned": 1976,
   "bad": 0,
-  "anti_bot_403": 53,
+  "anti_bot_403": 56,
   "anti_bot_404_cratesio": 4,
   "by_tier": {},
   "anti_bot_by_tier": {
-    "P1": 53
+    "P1": 56
   },
   "anti_bot_404_by_tier": {
     "P2": 4
@@ -177,10 +177,10 @@
       "err": "HTTPError",
       "files": [
         "concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "concept/03_advanced/00_concurrency/22_cross_platform_concurrency.md",
+        "concept/03_advanced/07_unsafe_internals/37_unsafe_collections_internals.md",
         "concept/04_formal/00_type_theory/02_type_theory.md",
-        "concept/04_formal/01_ownership_logic/01_linear_logic.md",
-        "concept/04_formal/01_ownership_logic/03_ownership_formal.md",
-        "concept/04_formal/02_separation_logic/04_rustbelt.md"
+        "concept/04_formal/01_ownership_logic/01_linear_logic.md"
       ]
     },
     {
@@ -255,6 +255,7 @@
       "status": 403,
       "err": "HTTPError",
       "files": [
+        "concept/03_advanced/06_low_level_patterns/36_ownership_performance_optimization.md",
         "docs/research_notes/10_academic_papers_alignment.md"
       ]
     },
@@ -318,7 +319,8 @@
       "status": 403,
       "err": "HTTPError",
       "files": [
-        "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md"
+        "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "concept/03_advanced/06_low_level_patterns/36_ownership_performance_optimization.md"
       ]
     },
     {
@@ -328,7 +330,23 @@
       "err": "HTTPError",
       "files": [
         "concept/02_intermediate/00_traits/01_traits.md",
-        "docs/05_guides/05_verus_practical_guide.md"
+        "concept/04_formal/05_rustc_internals/45_lexical_structure.md",
+        "concept/04_formal/05_rustc_internals/53_generics_compiler_behavior.md",
+        "concept/06_ecosystem/00_toolchain/45_compiler_internals.md",
+        "concept/06_ecosystem/09_networking/05_formal_network_protocol_theory.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/359576.359585",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/00_start/47_std_io_and_process.md",
+        "concept/02_intermediate/00_traits/33_rust_release_process.md",
+        "concept/03_advanced/00_concurrency/22_cross_platform_concurrency.md",
+        "concept/03_advanced/01_async/39_future_and_executor_mechanisms.md",
+        "concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md"
       ]
     },
     {
@@ -369,6 +387,19 @@
       ]
     },
     {
+      "url": "https://dl.acm.org/doi/10.1145/512644.512645",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/36_attributes_by_category.md",
+        "concept/03_advanced/03_proc_macros/29_proc_macro_code_generation_optimization.md",
+        "concept/03_advanced/03_proc_macros/30_macro_debugging_and_diagnostics.md",
+        "concept/03_advanced/03_proc_macros/31_production_grade_macro_development.md",
+        "concept/03_advanced/03_proc_macros/34_syn_quote_reference.md"
+      ]
+    },
+    {
       "url": "https://dl.acm.org/doi/10.1145/567446.567462",
       "tier": "P1",
       "status": 403,
@@ -394,9 +425,9 @@
       "files": [
         "concept/01_foundation/02_type_system/22_data_abstraction_spectrum.md",
         "concept/01_foundation/03_values_and_references/19_value_vs_reference_semantics.md",
-        "concept/02_intermediate/01_generics/02_generics.md",
-        "concept/04_formal/00_type_theory/02_type_theory.md",
-        "concept/04_formal/00_type_theory/21_type_semantics.md"
+        "concept/01_foundation/07_modules_and_items/12_functions.md",
+        "concept/01_foundation/07_modules_and_items/13_use_declarations.md",
+        "concept/01_foundation/07_modules_and_items/14_structs.md"
       ]
     },
     {
@@ -414,6 +445,8 @@
       "status": 403,
       "err": "HTTPError",
       "files": [
+        "concept/02_intermediate/00_traits/32_editions.md",
+        "concept/02_intermediate/00_traits/39_dispatch_mechanisms.md",
         "concept/02_intermediate/01_generics/02_generics.md"
       ]
     },
@@ -466,6 +499,19 @@
         "concept/03_advanced/00_concurrency/10_concurrency_patterns.md",
         "concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md",
         "concept/03_advanced/00_concurrency/16_lock_free.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/book/10.5555/95489",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/03_design_patterns/36_pattern_implementation_comparison.md",
+        "concept/06_ecosystem/03_design_patterns/37_pattern_selection_best_practices.md",
+        "concept/06_ecosystem/03_design_patterns/38_formal_design_pattern_theory.md",
+        "concept/06_ecosystem/03_design_patterns/39_frontier_research_and_innovative_patterns.md",
+        "concept/06_ecosystem/03_design_patterns/82_engineering_and_production_patterns.md"
       ]
     },
     {

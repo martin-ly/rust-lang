@@ -132,6 +132,7 @@
     - [测验 4：Drop 语义（理解层）](#测验-4drop-语义理解层)
     - [测验 5：反例分析（分析层）](#测验-5反例分析分析层)
   - [十二、延伸阅读与自测](#十二延伸阅读与自测)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ## 一、权威定义（Definition）
 
@@ -1894,3 +1895,12 @@ let word = get_first_word(s.clone()); // s 仍有效
 > - Brown Book 交互式题目：[Ownership Inventory #1](https://rust-book.cs.brown.edu/ch06-04-inventory.html)
 >
 > Inventory 题目基于 StackOverflow 真实问题设计，能有效暴露「移动语义、所有权转移、借用边界」等常见误解。
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)

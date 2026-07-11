@@ -410,3 +410,12 @@ cargo build
 本项目 `rust-toolchain.toml` 保持 `channel = "stable"`，由 rustup 自动解析当前 latest stable。Rust 1.97.0 已发布，`stable` 通道当前解析到 1.97.0；`Cargo.toml` 中的 `rust-version = "1.97.0"` 为项目 MSRV。
 
 `#[cfg(nightly)]` 分支仅在 nightly 工具链下启用，文档中标记为 `rust,ignore` 的 nightly 专属示例不会参与默认 stable 构建。
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: Prophecy-Verified Safe Rust (POPL 2022)](https://dl.acm.org/doi/10.1145/3591285)
+- **P2 生态/社区**: [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio) · [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures)

@@ -111,11 +111,6 @@
 ## 相关概念
 
 - [并发编程](concurrency/03_threads.md)
-
----
-
-## 相关概念
-
 - [NLL 与 Polonius (concept)](../../concept/03_advanced/02_unsafe/08_nll_and_polonius.md) — 三代借用检查器演进分析
 
 ## 📚 模块 8: 国际化对齐

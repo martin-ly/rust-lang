@@ -240,3 +240,11 @@ WASM GC 提供托管对象支持。Rust 目前不使用 WASM GC（线性内存 +
 
 通过 target feature flags（`-C target-feature=+simd128`）和 `wasm-bindgen` 的功能检测。随着提案成熟，feature 逐渐默认启用。
 </details>
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/wasm-bindgen — 生态权威 API 文档](https://docs.rs/wasm-bindgen) · [docs.rs/wasmtime — 生态权威 API 文档](https://docs.rs/wasmtime)

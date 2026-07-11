@@ -122,6 +122,7 @@
     - [常见陷阱](#常见陷阱)
     - [最佳实践](#最佳实践)
     - [调试技巧](#调试技巧)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ## 一、权威定义（Definition）
 
@@ -1480,3 +1481,12 @@ Rust 1.31 引入的 **Non-Lexical Lifetimes (NLL)** 使借用的有效期基于*
 - 显式标注所有生命周期以理解编译器错误。
 - 使用单元测试验证引用作用域边界。
 - 仔细阅读编译器建议，通常可直接定位问题。
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)

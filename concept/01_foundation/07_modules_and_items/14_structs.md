@@ -70,6 +70,7 @@
     - [6.2 字段名与变量名相同](#62-字段名与变量名相同)
     - [6.3 试图给不可变结构体字段赋值](#63-试图给不可变结构体字段赋值)
   - [七、权威来源索引](#七权威来源索引)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -231,3 +232,12 @@ fn main() {
 |:---|:---:|:---|
 | [TRPL — Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) | ✅ 一级 | 官方教程 |
 | [Rust Reference — Structs](https://doc.rust-lang.org/reference/items/structs.html) | ✅ 一级 | 语言规范 |
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Strachey: Fundamental Concepts in Programming Languages (1967)](https://dl.acm.org/doi/10.1145/6041.6042)
+- **P2 生态/社区**: [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver) · [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml)

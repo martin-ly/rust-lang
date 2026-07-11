@@ -4,7 +4,6 @@
 **Summary**: Rust生态系统思维导图 Rust Ecosystem Mind Map.
 
 > **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/11_domain_applications/46_machine_learning_ecosystem.md](../../../concept/06_ecosystem/11_domain_applications/46_machine_learning_ecosystem.md)；本文聚焦安全关键系统工程实践。
-
 > **Bloom 层级**: L4-L6
 >
 > 本文内容迁移自历史归档，已按 `AGENTS.md` 规则保留为安全关键领域专题实践。
@@ -93,11 +92,8 @@
 ## 权威来源索引
 
 > **[来源: ISO 26262 - Functional Safety]**
-
 > **[来源: IEC 61508 - Safety Standards]**
-
 > **[来源: MISRA Rust Guidelines]**
-
 > **[来源: Ferrocene Language Specification]**
 
 ---

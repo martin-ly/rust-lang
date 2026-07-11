@@ -271,3 +271,13 @@ Rust 的所有权（Ownership）模型直接影响数据结构实现：
 | 合适结构 ⟹ 算法效率 | 根据访问模式选择 | 时间/空间复杂度最优 |
 | 所有权清晰 ⟹ 更少 bug | Rust 借用（Borrowing）规则约束 | 避免悬垂与数据竞争 |
 | 缓存友好布局 ⟹ 吞吐提升 | 控制结构体（Struct）字段顺序 | 减少缓存未命中 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/itertools — 生态权威 API 文档](https://docs.rs/itertools) · [docs.rs/rayon — 生态权威 API 文档](https://docs.rs/rayon)
+- **P1 学术/形式化**: [Skiena: The Algorithm Design Manual (2nd ed., Springer)](https://link.springer.com/book/10.1007/978-1-84800-070-4)

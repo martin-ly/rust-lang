@@ -230,3 +230,12 @@ unsafe 代码必须遵守 Rust 内存模型：(Source: [Rust Reference — Memor
 >
 > **反向推理**: unsafe trait 实现被标记为 unsound ⟸ 说明实现未维持 trait 文档声明的不变量。
 >
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/zerocopy — 生态权威 API 文档](https://docs.rs/zerocopy) · [docs.rs/memmap2 — 生态权威 API 文档](https://docs.rs/memmap2)

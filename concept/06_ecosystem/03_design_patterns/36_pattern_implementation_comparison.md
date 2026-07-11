@@ -787,3 +787,13 @@ pub fn clone_example() {
 | 泛型实现 ⟹ 零成本运行时 | 编译期单态化 | 性能最优但二进制体积增大 |
 | Trait Object 实现 ⟹ 运行时多态 | 通过 vtable 动态分发 | 提升灵活性并减少代码膨胀 |
 | async 变体 ⟹ 可扩展并发 | 与异步运行时集成 | 适合高并发 I/O 场景 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)
+- **P2 生态/社区**: [The Pragmatic Bookshelf](https://pragprog.com) · [Microservices.io — 架构模式](https://microservices.io)

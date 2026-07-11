@@ -753,3 +753,12 @@ pub async fn modern_websocket_server() -> std::io::Result<()> {
 | 版本上下文 ⟹ 特性定位 | 了解 1.90 在 release train 中的位置 | 判断是否需要升级 |
 | RPITIT 稳定 ⟹ 异步 trait 人体工学 | `impl Trait` 在 trait 中的返回类型 | 简化异步接口设计 |
 | 特性迁移 ⟹ 渐进升级 | 评估影响面后逐步采用 | 降低版本切换风险 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: Prophecy-Verified Safe Rust (POPL 2022)](https://dl.acm.org/doi/10.1145/3591285)

@@ -266,3 +266,12 @@ tool = ["npm", "run", "build"]
 | [Cargo Manifest Reference](64_cargo_manifest_reference.md) | workspace 成员仍遵循 manifest 格式 |
 | [Cargo Profiles and Lints](65_cargo_profiles_and_lints.md) | `[profile]` 和 `[workspace.lints]` 在 workspace root 生效 |
 | [Cargo Source Replacement](61_cargo_source_replacement.md) | `[patch]`/`[replace]` 只在 workspace root 生效 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml) · [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata)

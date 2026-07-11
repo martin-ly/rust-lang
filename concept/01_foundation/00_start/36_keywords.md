@@ -163,3 +163,11 @@ fn main() {
 | [Modules and Paths](../07_modules_and_items/11_modules_and_paths.md) | `crate`、`self`、`super` 用于路径 |
 | [Attributes and Macros](../09_macros_basics/12_attributes_and_macros.md) | 宏（Macro）可能生成以关键字命名的标识符 |
 | [Control Flow](../04_control_flow/07_control_flow.md) | `if`、`else`、`match`、`loop`、`while`、`for`、`break`、`continue` 控制流关键字 |
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/regex — 生态权威 API 文档](https://docs.rs/regex) · [docs.rs/serde_json — 生态权威 API 文档](https://docs.rs/serde_json)

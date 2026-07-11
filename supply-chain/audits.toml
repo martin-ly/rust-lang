@@ -6,6 +6,21 @@ criteria = "safe-to-deploy"
 version = "0.2.5"
 notes = 'Formal audit stub for RUSTSEC-2026-0110. bare-metal is only pulled in by c13_embedded when target_arch = "arm"; it is not compiled on the host. Risk is limited to embedded targets and the crate is a low-level target-abstraction library with no network or crypto surface.'
 
+[[audits.candle-core]]
+criteria = "safe-to-run"
+version = "0.11.0"
+notes = "2026-07-11: candle-core 0.11.0 (huggingface/candle 官方维护) 用于 c08_algorithms 的 AI/ML 示例；不处理网络输入，攻击面限于本地模型权重加载。"
+
+[[audits.candle-nn]]
+criteria = "safe-to-run"
+version = "0.11.0"
+notes = "2026-07-11: candle-nn 0.11.0 (huggingface/candle 官方维护) 为 candle-core 的神经网络扩展，仅用于 c08 示例。"
+
+[[audits.cc]]
+criteria = "safe-to-run"
+version = "1.2.67"
+notes = "2026-07-11: cc 1.2.67 (rust-lang/cc-rs 官方维护) 为构建脚本通用 C 编译驱动，patch 升级 (1.2.66->1.2.67)，仅构建期执行。"
+
 [[audits.hickory-proto]]
 criteria = "safe-to-deploy"
 version = "0.25.2"
@@ -21,6 +36,36 @@ criteria = "safe-to-deploy"
 version = "1.0.15"
 notes = "Formal audit stub for RUSTSEC-2024-0436. paste is a compile-time proc-macro helper used transitively by dev/benchmark dependencies (candle-core, libp2p, tokenizers, etc.). It has no runtime attack surface in this project."
 
+[[audits.safetensors]]
+criteria = "safe-to-run"
+version = "0.8.0"
+notes = "2026-07-11: safetensors 0.8.0 (huggingface 官方维护) 为 candle-core 0.11 传递依赖，用于本地模型权重反序列化，无网络面。"
+
+[[audits.salvo]]
+criteria = "safe-to-run"
+version = "0.94.0"
+notes = "2026-07-11: salvo 0.94.0 (salvo-rs 官方维护) 仅作为 c06_async 的 dev-dependency 用于 Web 框架示例，不参与默认构建产物。"
+
+[[audits.salvo-proxy]]
+criteria = "safe-to-run"
+version = "0.94.0"
+notes = "2026-07-11: salvo-proxy 0.94.0 (salvo-rs 官方维护) 为 salvo 0.94 传递依赖，dev 示例用途。"
+
+[[audits.salvo-serde-util]]
+criteria = "safe-to-run"
+version = "0.94.0"
+notes = "2026-07-11: salvo-serde-util 0.94.0 (salvo-rs 官方维护) 为 salvo 0.94 传递依赖，dev 示例用途。"
+
+[[audits.salvo_core]]
+criteria = "safe-to-run"
+version = "0.94.0"
+notes = "2026-07-11: salvo_core 0.94.0 (salvo-rs 官方维护) 为 salvo 0.94 核心传递依赖，dev 示例用途。"
+
+[[audits.salvo_macros]]
+criteria = "safe-to-run"
+version = "0.94.0"
+notes = "2026-07-11: salvo_macros 0.94.0 (salvo-rs 官方维护) 为 salvo 0.94 过程宏传递依赖，编译期执行。"
+
 [[audits.zerocopy]]
 criteria = "safe-to-run"
 version = "0.8.54"
@@ -30,3 +75,8 @@ notes = "Local exemption for zerocopy 0.8.54. This is a safe-to-run (test/dev) d
 criteria = "safe-to-run"
 version = "0.8.54"
 notes = "Local exemption for zerocopy-derive 0.8.54. Proc-macro derive companion to zerocopy; safe-to-run (test/dev) only."
+
+[[audits.zip]]
+criteria = "safe-to-run"
+version = "8.6.0"
+notes = "2026-07-11: zip 8.6.0 (zip-rs 官方维护) 为 candle-core 0.11 传递依赖，仅用于本地权重文件读取；已知解压路径问题不影响本项目本地可信文件场景。"

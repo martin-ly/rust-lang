@@ -218,3 +218,12 @@ flowchart TD
 - **P0 官方**: [Rust `std::process` / `std::thread`](https://doc.rust-lang.org/std/process/) · [The Rustonomicon — 并发与 FFI](https://doc.rust-lang.org/nomicon/)
 - **P2 生态**: [The Rust Performance Book (nnethercote)](https://nnethercote.github.io/perf-book/) · [docs.rs](https://docs.rs/) · [crates.io](https://crates.io/)
 - **映射维护**: [`concept/00_meta/02_sources/authority_source_map.md`](../../00_meta/02_sources/authority_source_map.md)
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)

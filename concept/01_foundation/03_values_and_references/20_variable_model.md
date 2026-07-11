@@ -619,3 +619,11 @@ Rust 编译器要求所有变量在使用前必须初始化。读取未初始化
 - **L1**：变量是名字到值/存储地址的映射；Rust 在这一映射上增加了所有权（Ownership）状态。
 - **L2**：Rust 用 `Copy`/`Move`/`Borrow`/`Drop` 显式管理资源生命周期（Lifetimes），替代了手动内存管理。
 - **L3**：所有权不是新模型，而是把 C++ 的 RAII/move 约定提升为类型系统（Type System）公理，使内存安全（Memory Safety）可在编译期证明。
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)

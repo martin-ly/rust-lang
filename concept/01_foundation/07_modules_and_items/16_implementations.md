@@ -70,6 +70,7 @@
     - [6.2 调用获取所有权的方法后继续使用](#62-调用获取所有权的方法后继续使用)
     - [6.3 Orphan Rule 违规](#63-orphan-rule-违规)
   - [七、权威来源索引](#七权威来源索引)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -227,3 +228,12 @@ impl MyTrait for String {} // ❌ 当前 crate 既未定义 MyTrait 也未定义
 |:---|:---:|:---|
 | [TRPL — Method Syntax](https://doc.rust-lang.org/book/ch05-03-method-syntax.html) | ✅ 一级 | 方法与 impl 入门 |
 | [Rust Reference — Implementations](https://doc.rust-lang.org/reference/items/implementations.html) | ✅ 一级 | 完整规范 |
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Strachey: Fundamental Concepts in Programming Languages (1967)](https://dl.acm.org/doi/10.1145/6041.6042)
+- **P2 生态/社区**: [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver) · [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml)

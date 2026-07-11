@@ -296,3 +296,12 @@ impl rustc_driver::Callbacks for MyCallbacks {
 >
 > **过渡**: 从 span 保留过渡到诊断 API，可以形成用户友好的宏错误信息工程实践。
 >
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Kohlbecker et al.: Syntactic Extensions in the Programming Language LISP (POPL 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/512644.512645)

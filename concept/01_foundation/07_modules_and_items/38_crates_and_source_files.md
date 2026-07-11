@@ -269,3 +269,11 @@ flowchart TD
 >
 > **反向推理**: 二进制 crate 与库 crate 行为不一致 ⟸ 说明未正确理解 crate type 与 `main` 函数规则。
 >
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Strachey: Fundamental Concepts in Programming Languages (1967)](https://dl.acm.org/doi/10.1145/6041.6042)

@@ -71,6 +71,7 @@
     - [测验 1：Display vs Debug](#测验-1display-vs-debug)
     - [测验 2：格式化说明符](#测验-2格式化说明符)
   - [认知路径](#认知路径)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -417,3 +418,11 @@ D. `{:<8}`
 > **权威来源**: [std::fmt](https://doc.rust-lang.org/std/fmt/index.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.97.0 std::fmt 与 TRPL 对齐](https://doc.rust-lang.org/std/fmt/index.html)
 > **状态**: ✅ 权威来源对齐完成
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/regex — 生态权威 API 文档](https://docs.rs/regex) · [docs.rs/serde_json — 生态权威 API 文档](https://docs.rs/serde_json)

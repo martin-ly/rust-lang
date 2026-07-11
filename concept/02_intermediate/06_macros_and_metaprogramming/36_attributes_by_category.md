@@ -72,6 +72,7 @@
     - [测验 1：属性位置](#测验-1属性位置)
     - [测验 2：条件编译](#测验-2条件编译)
   - [认知路径](#认知路径)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -464,3 +465,12 @@ D. `#[serde]`
 > **权威来源**: [The Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html), [The Rust Reference — Built-in Attributes Index](https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index), [The Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html), [The Rust Programming Language — Derivable Traits](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.97.0 Reference 属性章节对齐](https://doc.rust-lang.org/reference/attributes.html)
 > **状态**: ✅ 权威来源对齐完成
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/proc-macro2 — 生态权威 API 文档](https://docs.rs/proc-macro2) · [docs.rs/pin-project — 生态权威 API 文档](https://docs.rs/pin-project)
+- **P1 学术/形式化**: [Kohlbecker et al.: Syntactic Extensions in the Programming Language LISP (POPL 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/512644.512645)

@@ -857,3 +857,13 @@ fn main() {
 | Socket 抽象 ⟹ 可移植性 | 统一接口屏蔽操作系统差异 | 代码可跨平台编译 |
 | 协议分层 ⟹ 关注点分离 | 传输层与应用层解耦 | 每层独立演进与测试 |
 | 异步运行时 ⟹ 并发连接 | 单线程或多线程事件驱动 | 支持大量同时连接 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/quinn — 生态权威 API 文档](https://docs.rs/quinn) · [docs.rs/tokio-tungstenite — 生态权威 API 文档](https://docs.rs/tokio-tungstenite)
+- **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)

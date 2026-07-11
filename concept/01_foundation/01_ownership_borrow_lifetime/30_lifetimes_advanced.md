@@ -90,6 +90,7 @@
     - [测验 4：生命周期子类型（分析层）](#测验-4生命周期子类型分析层)
     - [测验 5：悬垂引用的编译器防护（理解层）](#测验-5悬垂引用的编译器防护理解层)
   - [实践](#实践)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ### Step 1: 直觉困惑（Intuitive Confusion）
 
@@ -1567,3 +1568,11 @@ fn dangle() -> &String {
 > - [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)

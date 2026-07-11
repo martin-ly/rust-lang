@@ -313,3 +313,12 @@ pub async fn server_loop(
 | 熔断器 ⟹ 故障隔离 | 快速失败并限制级联影响 | 提升系统整体可用性 |
 | 结构化日志 ⟹ 快速恢复 | 统一日志格式与上下文 | 缩短平均故障定位时间 |
 | 负载 shedding ⟹ 稳定性 | 在过载时保护核心路径 | 避免雪崩效应 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)

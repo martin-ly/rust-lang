@@ -239,3 +239,13 @@ flowchart LR
 >
 > **过渡**: 从防御性测试过渡到压力与 CI 集成，可以形成高可信度的进程代码交付流程。
 >
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+- **P2 生态/社区**: [docs.rs/interprocess — 生态权威 API 文档](https://docs.rs/interprocess) · [docs.rs/ipc-channel — 生态权威 API 文档](https://docs.rs/ipc-channel)

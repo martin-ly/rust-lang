@@ -233,3 +233,13 @@ where
 | Rust 内存安全（Memory Safety） ⟹ 更少并发 bug | 所有权与借用检查 | 降低新算法实现风险 |
 | 类型系统 ⟹ 不变量强制 | 将算法前提编码为类型 | 编译期排除非法状态 |
 | 基准测试 ⟹ 真实有效性 | 与现有实现对比 | 确认性能假设 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/rayon — 生态权威 API 文档](https://docs.rs/rayon) · [docs.rs/petgraph — 生态权威 API 文档](https://docs.rs/petgraph)
+- **P1 学术/形式化**: [Skiena: The Algorithm Design Manual (2nd ed., Springer)](https://link.springer.com/book/10.1007/978-1-84800-070-4)

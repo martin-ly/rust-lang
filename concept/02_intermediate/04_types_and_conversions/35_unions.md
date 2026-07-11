@@ -70,6 +70,7 @@
     - [测验 1：联合体 vs 枚举](#测验-1联合体-vs-枚举)
     - [测验 2：联合体的 Drop 语义](#测验-2联合体的-drop-语义)
   - [认知路径](#认知路径)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -421,3 +422,11 @@ D. 取决于是否实现 Copy
 > **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html), [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
 > **权威来源对齐变更日志**: 2026-07-04 创建 来源: Rust 1.97.0 Reference、[Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)、Unsafe Code Guidelines 对齐
 > **状态**: ✅ 权威来源对齐完成
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Strachey: Fundamental Concepts in Programming Languages (1967)](https://dl.acm.org/doi/10.1145/6041.6042)

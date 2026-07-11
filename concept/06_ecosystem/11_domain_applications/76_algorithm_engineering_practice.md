@@ -1938,3 +1938,12 @@ pub async fn rate_limited_api(limiter: &TokenBucket, request: String) -> Result<
 | 复杂度分析 ⟹ 可扩展性预测 | 大 O 与内存占用评估 | 指导算法选型 |
 | 属性测试 ⟹ 正确性保障 | 随机输入验证不变量 | 发现边界缺陷 |
 | 性能分析 ⟹ 针对性优化 | 定位真正热点 | 避免无效微优化 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Skiena: The Algorithm Design Manual (2nd ed., Springer)](https://link.springer.com/book/10.1007/978-1-84800-070-4)

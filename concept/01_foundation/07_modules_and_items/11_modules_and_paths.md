@@ -65,6 +65,7 @@
     - [测验 2：路径解析（理解层）](#测验-2路径解析理解层)
     - [测验 3：文件系统映射（应用层）](#测验-3文件系统映射应用层)
     - [测验 4：`pub use` 重导出（分析层）](#测验-4pub-use-重导出分析层)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -887,3 +888,11 @@ mod external_user {
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [Brown University Interactive Rust Book — Quiz Design](https://rust-book.cs.brown.edu/) · [RFC 2126 — Path Clarity](https://rust-lang.github.io/rfcs//2126-path-clarity.html)
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver) · [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml)

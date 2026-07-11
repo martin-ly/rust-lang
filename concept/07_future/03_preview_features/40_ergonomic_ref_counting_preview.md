@@ -74,6 +74,7 @@
     - [测验 3：为什么 Rust 不直接提供类似 Swift 的自动引用计数（ARC）？（理解层）](#测验-3为什么-rust-不直接提供类似-swift-的自动引用计数arc理解层)
     - [测验 4：`Weak` 指针在 Rust 中解决什么问题？（理解层）](#测验-4weak-指针在-rust-中解决什么问题理解层)
     - [测验 5：这个提案对 Rust 的 GC 讨论有什么影响？（理解层）](#测验-5这个提案对-rust-的-gc-讨论有什么影响理解层)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ## 一、核心概念
 
@@ -285,3 +286,11 @@ Rust 的所有权（Ownership）系统更安全，但引用计数只是众多所
 更 ergonomic 的引用计数可能减少社区对 GC 的需求。
 但真正的 GC（如 cycle collection）仍可能在未来作为可选 crate 出现。
 </details>
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)

@@ -314,3 +314,12 @@ fn demo_fixed() {
   - [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)
   - [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md)（Compat-Lint 列、§4.9、§5.4）
   - [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md)（§4 `f32: From<{float}>` 迁移判定树）
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [Wadler & Blott: How to Make Ad-hoc Polymorphism Less Ad Hoc (POPL 1989)](https://dl.acm.org/doi/10.1145/75277.75305)
+- **P2 生态/社区**: [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml) · [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata)

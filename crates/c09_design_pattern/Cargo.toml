@@ -20,7 +20,8 @@ crossbeam = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 futures = { workspace = true }
-libloading = "0.8"
+# 2026-07-11: 0.8 -> 0.9 (cargo update 提示落后最新，plugin_dynamic_loading 示例已验证)
+libloading = "0.9"
 
 [features]
 tokio-bench = []

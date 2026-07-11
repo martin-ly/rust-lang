@@ -721,3 +721,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 | 持久连接 ⟹ 更低延迟 | 避免重复建立 HTTP 连接 | 适合实时推送场景 |
 | 帧协议 ⟹ 高效解析 | 二进制帧头与掩码机制 | 降低解析开销 |
 | 背压 ⟹ 稳定广播 | 控制发送速率 | 防止慢消费者拖垮系统 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)

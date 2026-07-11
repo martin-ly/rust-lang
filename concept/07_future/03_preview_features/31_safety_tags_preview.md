@@ -154,3 +154,12 @@ B
 - [BorrowSanitizer 预览](20_borrowsanitizer_preview.md) · [活跃跟踪](../02_stabilized_features/borrow_sanitizer.md) · [深度](../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md)
 - [AutoVerus/Verus 预览](33_autoverus_preview.md) · [深度](../../04_formal/04_model_checking/24_autoverus.md)
 - [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md) · [Miri](../../04_formal/04_model_checking/31_miri.md)
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper) · [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio)

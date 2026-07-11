@@ -203,6 +203,7 @@
     - [数据库抽象层](#数据库抽象层)
     - [Parser Combinator](#parser-combinator)
     - [关联类型 vs 泛型参数决策](#关联类型-vs-泛型参数决策)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ## 一、权威定义（Definition）
 
@@ -3078,3 +3079,11 @@ trait Parser<'a> {
 | 调用方标注 | 不需要 | 通常需要 |
 | 表达关系 | 一对一 | 一对多 |
 | 典型场景 | Iterator::Item、Backend::Row | Container<T>、Map<K, V> |
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/enum_dispatch — 生态权威 API 文档](https://docs.rs/enum_dispatch) · [docs.rs/serde — 生态权威 API 文档](https://docs.rs/serde)

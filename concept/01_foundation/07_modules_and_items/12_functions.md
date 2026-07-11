@@ -75,6 +75,7 @@
     - [函数 BNF 语法概要](#函数-bnf-语法概要)
     - [参数传递语义](#参数传递语义)
     - [返回值要点](#返回值要点)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -300,3 +301,12 @@ function_qualifiers :=
 - 返回 `impl Trait` 隐藏具体类型，但调用方只能使用该 trait 的方法。
 
 > 更多示例与所有权交互分析参见本节正文。
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Strachey: Fundamental Concepts in Programming Languages (1967)](https://dl.acm.org/doi/10.1145/6041.6042)
+- **P2 生态/社区**: [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml) · [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata)

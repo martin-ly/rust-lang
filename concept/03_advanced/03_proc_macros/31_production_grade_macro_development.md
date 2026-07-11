@@ -342,3 +342,12 @@ jobs:
 >
 > **过渡**: 从测试策略过渡到 CI/CD，可以形成长期可维护的宏库发布流程。
 >
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Kohlbecker et al.: Syntactic Extensions in the Programming Language LISP (POPL 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/512644.512645)

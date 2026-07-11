@@ -276,3 +276,12 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 >
 > **反向推理**: 全局分配器行为与预期不符 ⟸ 说明 `#[global_allocator]` 未正确注册或实现未满足 `GlobalAlloc` 契约。
 >
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/memmap2 — 生态权威 API 文档](https://docs.rs/memmap2) · [docs.rs/embedded-hal — 生态权威 API 文档](https://docs.rs/embedded-hal)

@@ -164,3 +164,12 @@ flowchart TD
 
 > **权威来源**: [Cargo Book — Guide](https://doc.rust-lang.org/cargo/guide/index.html)
 > **内容分级**: [参考级]
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata) · [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver)

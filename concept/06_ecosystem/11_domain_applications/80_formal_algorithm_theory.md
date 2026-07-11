@@ -263,3 +263,13 @@ mod fifo_tests {
 | 形式规约 ⟹ 无歧义需求 | 使用谓词与状态转换 | 精确定义期望行为 |
 | 正确性证明 ⟹ 可靠性 | 循环不变量与终止性 | 保证算法输出符合规约 |
 | 复杂度界 ⟹ 资源预测 | 最坏/平均/均摊分析 | 评估算法可行性 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Aeneas: Rust Verification by Functional Translation (arXiv:2206.07185)](https://arxiv.org/abs/2206.07185) · [RustHorn: CHC-based Verification for Rust Programs (ESOP 2020, Springer LNCS)](https://link.springer.com/chapter/10.1007/978-3-030-44914-8_18)
+- **P2 生态/社区**: [AeneasVerif/aeneas](https://github.com/AeneasVerif/aeneas) · [model-checking/kani — 模型检查器](https://github.com/model-checking/kani)

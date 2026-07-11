@@ -74,6 +74,7 @@
     - [测验 1：路径拼接](#测验-1路径拼接)
     - [测验 2：I/O 错误处理](#测验-2io-错误处理)
   - [认知路径](#认知路径)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 
@@ -448,3 +449,12 @@ D. `let _ = file.read_to_string(&mut s);`
 > **权威来源**: [std::io](https://doc.rust-lang.org/std/io/index.html), [std::fs](https://doc.rust-lang.org/std/fs/index.html), [std::path](https://doc.rust-lang.org/std/path/index.html), [std::process](https://doc.rust-lang.org/std/process/index.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.97.0 std 文档与 Rust By Example 对齐](https://doc.rust-lang.org/std/index.html)
 > **状态**: ✅ 权威来源对齐完成
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+- **P2 生态/社区**: [docs.rs/num_cpus — 生态权威 API 文档](https://docs.rs/num_cpus) · [docs.rs/interprocess — 生态权威 API 文档](https://docs.rs/interprocess)

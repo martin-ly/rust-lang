@@ -305,3 +305,11 @@ async fn health_check_loop(program: &str) {
 >
 > **过渡**: 从故障恢复过渡到监控与性能工程，可以形成完整的进程管理闭环。
 >
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)

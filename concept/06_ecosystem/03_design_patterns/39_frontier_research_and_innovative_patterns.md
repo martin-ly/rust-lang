@@ -976,3 +976,12 @@ pub fn quantum_pattern_example() {
 | 新问题 ⟹ 新模式 | 现有模式无法覆盖的领域 | 催生针对性抽象 |
 | 类型系统进展 ⟹ 新抽象能力 | GAT、 effects 等语言特性 | 使 previously 不可能的模式成为可能 |
 | 原型验证 ⟹  adoption | 通过真实场景检验 | 决定创新模式是否值得推广 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)

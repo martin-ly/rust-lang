@@ -467,3 +467,12 @@ let mut_raw_ref = union.get_integer_mut_raw();
 | wasm-bindgen ⟹ 人体工学绑定 | 自动生成 JS/TS 胶水代码 | 大幅减少手写样板 |
 | 显式内存所有权（Ownership） ⟹ 安全性 | Rust 管理 wasm 线性内存 | 避免 use-after-free |
 | 类型化接口 ⟹ 更少 bug | 强类型绑定替代动态调用 | 编译期捕获接口错误 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/wasm-bindgen — 生态权威 API 文档](https://docs.rs/wasm-bindgen) · [docs.rs/wasmtime — 生态权威 API 文档](https://docs.rs/wasmtime)

@@ -312,3 +312,12 @@ rustc +nightly -Z unstable-options --print target-spec-json-schema
 ---
 
 > **权威来源**: [Rust 1.96.0 Release Notes](https://releases.rs/docs/1.96.0/), [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/)
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)

@@ -184,3 +184,12 @@ fn client_with_proxy() -> Result<reqwest::Client, reqwest::Error> {
 ---
 
 > **来源**: [reqwest Documentation](https://docs.rs/reqwest/) · [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html)
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)

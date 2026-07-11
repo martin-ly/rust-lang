@@ -222,3 +222,13 @@ fn main() {
 | 专用核心 ⟹ 缓存亲和性 | 任务固定到特定 CPU | 减少缓存失效与上下文切换 |
 | io_uring ⟹ 更少系统调用 | 批量处理 I/O 请求 | 降低内核态开销 |
 | 协作式任务 ⟹ 可预测尾延迟 | 避免抢占式调度抖动 | 适合延迟敏感型服务 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585) · [RustBelt: Securing the Foundations of the Rust Programming Language (POPL 2018)](https://dl.acm.org/doi/10.1145/3158154)
+- **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)

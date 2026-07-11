@@ -190,3 +190,12 @@ cargo test
 | [Cargo Profiles and Lints](../01_cargo/65_cargo_profiles_and_lints.md) | Clippy lint 与 Cargo lint 继承配合使用 |
 | [Cargo Subcommands and Plugins](../01_cargo/66_cargo_subcommands_and_plugins.md) | `cargo fmt`、`cargo clippy`、`cargo fix` 都是 Cargo 子命令 |
 | [Testing Basics](../../01_foundation/10_testing_basics/16_testing_basics.md) | 工具链最终服务于代码质量保证 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/rstest — 生态权威 API 文档](https://docs.rs/rstest) · [docs.rs/mockall — 生态权威 API 文档](https://docs.rs/mockall)

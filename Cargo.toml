@@ -241,7 +241,8 @@ actix-rt = "2.11.0"
 
 # 2026-06-29: 二线 Web 框架与模板引擎专题
 # salvo: 现代 Rust Web 框架，强调高性能与可扩展性
-salvo = "0.93.0"
+# 2026-07-11: 0.93.0 -> 0.94.0 (cargo update 提示落后最新，c06_async 示例已验证)
+salvo = "0.94.0"
 # ntex: 可组合网络服务框架，与 actix-web 同源设计
 ntex = { version = "3.10.1", features = ["tokio"] }
 # askama: 类型安全、编译期 Jinja-like 模板引擎
@@ -539,11 +540,12 @@ cargo-audit = "0.22.1"
 
 # 2025-10-11: AI 和机器学习最新稳定版本
 # candle-core: 极简主义ML框架的核心库
-candle-core = "0.10.2"
+# 2026-07-11: candle 系列 0.10.2 -> 0.11.0 (cargo update 提示落后最新，c08 示例已验证)
+candle-core = "0.11.0"
 # candle-nn: candle的神经网络支持
-candle-nn = "0.10.2"
+candle-nn = "0.11.0"
 # candle-transformers: candle的Transformer模型支持
-candle-transformers = "0.10.2"
+candle-transformers = "0.11.0"
 # tch: PyTorch的Rust绑定，提供深度学习支持
 tch = "0.24.0"
 # petgraph: 图数据结构和算法库
@@ -570,7 +572,8 @@ bitflags = "2.13.0"
 # hashbrown: 高性能HashMap实现
 hashbrown = "0.17.1"  # 2026-05-09: cargo update
 # itertools: 迭代器工具库
-itertools = "0.14.0"
+# 2026-07-11: 0.14.0 -> 0.15.0 (cargo update 提示落后最新，c04 示例已验证)
+itertools = "0.15.0"
 # lru: LRU缓存实现 - 2026-04-18: 升级至 0.17.0
 lru = "0.18.0"
 
@@ -661,7 +664,9 @@ universal-hash = "=0.5.1"
 # 2026-06-10: cargo update 验证，crypto-common 0.1.7 (digest/aead 等传递依赖)
 #       精确锁定 generic-array = "=0.14.7"，无法升级至 0.14.9。需等 crypto-common 新版解锁
 #       验证: crypto-common 0.2.2 已可用但改用 hybrid-array；digest 0.11.x / sha2 0.11.x
-#       / aead 0.6.0-rc / aes-gcm 0.11.0-rc 尚未稳定，sqlx-core 0.9.0 仍锁定 sha2 ^0.10.0
+#       / aead 0.6.0 / aes-gcm 0.11.0 虽已稳定，但 sqlx-core 0.9.0 仍锁定 sha2 ^0.10.0
+# 2026-07-11 复核: crypto-common 0.1.7 对 generic-array 声明了 "=0.14.7" 精确约束，
+#       升级 0.14.9 会导致解析失败，故继续保持精确锁定 (非本仓库可直接修复项)
 # 注: 此为传递依赖，无子 crate 直接引用，workspace 版本仅作记录
 generic-array = "=0.14.7"
 

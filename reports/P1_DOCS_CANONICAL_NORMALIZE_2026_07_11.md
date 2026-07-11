@@ -86,7 +86,7 @@ git diff -- docs/05_guides/05_cfg_select_macro_guide.md \
 
 抽样明细（前 15）：
 
-```
+```text
 OK   concept/00_meta/00_framework/comprehensive_rust_mapping.md
 OK   concept/00_meta/02_sources/international_authority_index.md
 OK   concept/00_meta/04_navigation/learning_mvp_path.md

@@ -749,3 +749,13 @@ pub enum PatternError {
 | 需求明确 ⟹ 模式选型准确 | 清晰的功能与非功能需求 | 避免过度设计或选型失误 |
 | 并发约束 ⟹ Send/Sync 要求 | Rust 所有权（Ownership）模型 | 排除不满足线程安全的设计 |
 | 团队能力 ⟹ 可维护性 | 熟悉度与工具链支持 | 影响模式的长期落地效果 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)
+- **P2 生态/社区**: [Refactoring.Guru — Design Patterns](https://refactoring.guru/design-patterns) · [The Pragmatic Bookshelf](https://pragprog.com)

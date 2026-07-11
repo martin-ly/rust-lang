@@ -995,3 +995,13 @@ impl<S: Strategy, O: Observer> StrategyObserver<S, O> {
 | 形式模型 ⟹ 精确推理 | 消除自然语言描述的歧义 | 支持严格验证模式适用性 |
 | 范畴论 ⟹ 模式组合 | 对象、态射与函子 | 提供模式组合与变换的框架 |
 | 语言映射 ⟹ 可应用边界 | Rust 所有权与生命周期（Lifetimes）约束 | 决定哪些形式模式可直接实现 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)
+- **P2 生态/社区**: [formal-land/coq-of-rust](https://github.com/formal-land/coq-of-rust) · [AeneasVerif/aeneas](https://github.com/AeneasVerif/aeneas)

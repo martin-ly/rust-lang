@@ -251,3 +251,12 @@ pub fn hook() {}
 > · 特性×领域反查矩阵：[`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md)
 > · 兼容性迁移判定树：[`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md)
 > · 链接权威页（交叉语义）：[`27_linkage.md`](../../03_advanced/04_ffi/27_linkage.md)
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [verus-lang/verus — SMT 验证器](https://github.com/verus-lang/verus) · [creusot-rs/creusot — Rust 演绎验证](https://github.com/creusot-rs/creusot)

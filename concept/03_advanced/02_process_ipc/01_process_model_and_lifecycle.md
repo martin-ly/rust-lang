@@ -411,3 +411,12 @@ fn main() -> std::io::Result<()> {
 >
 > **过渡**: 从资源控制过渡到后续 IPC 与安全主题，可以理解进程模型是更高阶机制的底座。
 >
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+- **P2 生态/社区**: [docs.rs/ipc-channel — 生态权威 API 文档](https://docs.rs/ipc-channel) · [docs.rs/sysinfo — 生态权威 API 文档](https://docs.rs/sysinfo)

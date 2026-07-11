@@ -222,3 +222,11 @@ fn main() {
     - [`ex11_hashmap_borrow.rs`](../../exercises/src/ownership_borrowing/ex11_hashmap_borrow.rs) — HashMap 借用（Borrowing）冲突
     - [`ex12_string_in_loop.rs`](../../exercises/src/ownership_borrowing/ex12_string_in_loop.rs) — 循环中的所有权
   - [`02_borrowing.md`](02_borrowing.md) — 系统学习「Fixing Ownership Errors」的 5 种常见模式
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)

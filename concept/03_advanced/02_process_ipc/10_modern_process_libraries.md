@@ -235,3 +235,12 @@ flowchart TD
 - **P0 官方**: [Rust `std::process`](https://doc.rust-lang.org/std/process/) · [The Rustonomicon — FFI / 平台互操作](https://doc.rust-lang.org/nomicon/)
 - **P2 生态**: [tokio::process (docs.rs)](https://docs.rs/tokio/latest/tokio/process/) · [duct (docs.rs)](https://docs.rs/duct/) · [nix (docs.rs)](https://docs.rs/nix/) · [crates.io](https://crates.io/)
 - **映射维护**: [`concept/00_meta/02_sources/authority_source_map.md`](../../00_meta/02_sources/authority_source_map.md)
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)

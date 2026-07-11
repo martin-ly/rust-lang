@@ -279,3 +279,13 @@ flowchart TD
 | 类型状态 ⟹ 更少运行时（Runtime）错误 | 将协议阶段编码为类型 | 非法状态转移被编译器拦截 |
 | 零拷贝解析 ⟹ 高吞吐 | 直接引用（Reference）原始缓冲区 | 减少数据拷贝开销 |
 | 属性测试 ⟹ 协议符合性 | 自动生成输入验证解析器 | 发现边界情况缺陷 |
+
+
+---
+
+## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
+
+> 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+
+- **P2 生态/社区**: [docs.rs/tower — 生态权威 API 文档](https://docs.rs/tower) · [docs.rs/libp2p — 生态权威 API 文档](https://docs.rs/libp2p)
+- **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
