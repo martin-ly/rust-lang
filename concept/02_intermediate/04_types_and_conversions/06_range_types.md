@@ -343,7 +343,7 @@ let rev = 10..0;
 
 ---
 
-## 相关概念文件
+## 相关概念
 
 - [Type System](../../01_foundation/02_type_system/04_type_system.md) — 类型系统（Type System）的形式化根基
 - [Generics](../01_generics/02_generics.md) — 泛型（Generics）与 trait bound
