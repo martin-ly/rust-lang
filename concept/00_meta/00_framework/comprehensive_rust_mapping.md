@@ -5,7 +5,7 @@
 # Comprehensive Rust 课程映射
 >
 > **EN**: Comprehensive Rust Mapping
-> **Summary**: Comprehensive Rust Mapping. Core Rust concept.
+> **Summary**: Comprehensive Rust Mapping — A bidirectional map between Google's free Comprehensive Rust course and this knowledge base's concept pages.
 > **受众**: [初学者 → 进阶]
 > **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。

@@ -1,7 +1,7 @@
 # Rust 知识体系定理推理森林
 >
 > **EN**: Theorem Inference Forest
-> **Summary**: Theorem Inference Forest. Core Rust concept.
+> **Summary**: Theorem Inference Forest — A forest of axiom-to-lemma-to-theorem inference chains across L1-L4 models, with premises and counterexamples.
 >
 > **受众**: [研究者]
 >

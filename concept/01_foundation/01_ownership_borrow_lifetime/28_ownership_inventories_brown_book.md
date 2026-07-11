@@ -3,7 +3,7 @@
 # 所有权清单自测：Brown University Ownership Inventory
 
 > **EN**: Brown University Ownership Inventory
-> **Summary**: Brown University Ownership Inventory: core Rust concepts, syntax, and examples.
+> **Summary**: Brown University Ownership Inventory — An inventory-style self-test for ownership understanding, based on Brown University's ownership-inventory method.
 > **受众**: [初学者]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。

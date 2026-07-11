@@ -6,7 +6,7 @@
 # 性能优化：Rust 代码的测量与调优
 >
 > **EN**: Performance Optimization
-> **Summary**: Performance Optimization. Core Rust concept covering performance optimization, testing and verification.
+> **Summary**: Performance Optimization — Measuring and tuning Rust code: the measure-first, optimize-second performance workflow.
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[性能优化](../../../knowledge/03_advanced/05_performance_optimization.md)

@@ -3,7 +3,7 @@
 # NLL 与 Polonius：借用检查器的演进
 >
 > **EN**: Borrowing
-> **Summary**: Borrowing. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics.
+> **Summary**: Borrowing — NLL and Polonius: how non-lexical lifetimes and data-flow analysis make borrow checking more precise.
 > **受众**: [专家]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。

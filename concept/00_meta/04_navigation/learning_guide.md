@@ -1,7 +1,7 @@
 # Rust 知识体系学习指南（Learning Guide）
 >
 > **EN**: Learning Guide
-> **Summary**: Learning Guide. Core Rust concept.
+> **Summary**: Learning Guide — The user manual for the concept base: where to start, in what order, and how to verify mastery.
 >
 > **受众**: [初学者]
 >

@@ -4,7 +4,7 @@
 # Lifetimes 高级主题
 >
 > **EN**: Lifetimes Advanced
-> **Summary**: Lifetimes Advanced: core Rust concepts, syntax, and examples.
+> **Summary**: Lifetimes Advanced — Polonius, Rust's next-generation borrow checker, using Datalog constraint solving to accept more valid programs.
 > **受众**: [初学者]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层次定位**: L1-L3 进阶 / 生命周期（Lifetimes）高级主题

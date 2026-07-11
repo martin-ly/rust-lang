@@ -3,7 +3,7 @@
 # WebAssembly 生态：Rust 的浏览器外运行时
 >
 > **EN**: WebAssembly
-> **Summary**: WebAssembly. Core Rust concept covering mechanism analysis, ecosystem and tooling, web and network programming.
+> **Summary**: WebAssembly — Rust's WebAssembly ecosystem: a portable, safe, efficient bytecode for running beyond the browser.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **Bloom 层级**: L3-L4

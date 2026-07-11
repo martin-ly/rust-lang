@@ -1,7 +1,7 @@
 # Rust 编译期可判定性谱系全景（Decidability Spectrum）
 >
 > **EN**: Decidability Spectrum
-> **Summary**: Decidability Spectrum. Core Rust concept.
+> **Summary**: Decidability Spectrum — A vertical survey of decidability questions across Rust's whole compilation pipeline.
 > **受众**: [研究者]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件从**纵向判定链路**梳理 Rust 编译器在全编译流程中的可判定性问题，与 `semantic_expressiveness.md` 的横向七维光谱形成正交互补。

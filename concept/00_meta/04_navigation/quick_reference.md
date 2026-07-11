@@ -1,7 +1,7 @@
 # Rust 概念速查卡片（Quick Reference）
 >
 > **EN**: Quick Reference
-> **Summary**: Quick Reference. Core Rust concept.
+> **Summary**: Quick Reference — One-page quick-reference cards: definition, code, error codes, and related concepts for interview or coding.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]

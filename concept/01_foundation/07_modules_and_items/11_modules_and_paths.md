@@ -8,7 +8,7 @@
 
 >
 > **EN**: Modules
-> **Summary**: Modules. Core Rust concept covering practical examples, aerospace and fault-tolerant systems.
+> **Summary**: Modules — The module system: mod, use, pub, filesystem mapping, visibility, and workspace organization.
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：模块（Module）系统

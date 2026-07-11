@@ -5,7 +5,7 @@
 # 类型强制与转换：显式与隐式的边界
 >
 > **EN**: Coercion and Casting
-> **Summary**: Coercion and Casting: core Rust concepts, syntax, and examples.
+> **Summary**: Coercion and Casting — Deref and subtype coercions versus explicit `as` conversions, and their safety boundaries.
 > **受众**: [初学者]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。

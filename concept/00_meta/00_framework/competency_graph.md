@@ -1,7 +1,7 @@
 # Rust 知识体系能力图谱（Competency Graph）
 >
 > **EN**: Competency Graph
-> **Summary**: Competency Graph. Core Rust concept.
+> **Summary**: Competency Graph — A six-dimension radar model for self-assessment, gap diagnosis, and personalized Rust training paths.
 > **受众**: [进阶]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: Meta

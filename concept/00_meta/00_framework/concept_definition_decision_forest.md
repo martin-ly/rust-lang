@@ -1,7 +1,7 @@
 # Rust 知识体系概念定义判定森林（Concept Definition Decision Forest）
 >
 > **EN**: Concept Definition Decision Forest
-> **Summary**: Concept Definition Decision Forest. Core Rust concept.
+> **Summary**: Concept Definition Decision Forest — Definition-driven decision chains for L1-L4 concepts: premises, rules, conditions, boundaries, and failure modes.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]
 > **Bloom 层级**: Meta

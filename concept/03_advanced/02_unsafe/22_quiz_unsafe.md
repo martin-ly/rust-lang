@@ -3,7 +3,7 @@
 # 测验：Unsafe Rust（L3 试点扩展）
 >
 > **EN**: Unsafe Rust
-> **Summary**: Quiz Unsafe. Core Rust concept.
+> **Summary**: Unsafe Rust — An interactive quiz checking Unsafe Rust: raw pointers, unsafe blocks/functions/traits, FFI, and Miri validation.
 > **受众**: [专家]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。

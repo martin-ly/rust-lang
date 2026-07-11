@@ -15,7 +15,7 @@
 # Rust 知识体系 A/S/P 三维认知标记规范
 >
 > **EN**: Asp Marking Guide
-> **Summary**: Asp Marking Guide. Core Rust concept.
+> **Summary**: Asp Marking Guide — The A (application) / S (structure) / P (procedure) three-dimensional cognitive marking scheme for the concept base.
 > **受众**: [专家]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: Meta

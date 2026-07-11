@@ -14,7 +14,7 @@
 # Rust 核心术语英中对照表
 >
 > **EN**: Terminology Glossary
-> **Summary**: Terminology Glossary. Core Rust concept.
+> **Summary**: Terminology Glossary — An English-Chinese glossary of core Rust terms, tiered by Bloom cognitive complexity.
 > **来源**:
 >
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·

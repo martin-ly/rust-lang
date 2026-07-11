@@ -13,7 +13,7 @@
 > **代码状态**: ✅ 含可编译示例
 >
 > **EN**: WebAssembly
-> **Summary**: WebAssembly. Core Rust concept covering mental model building, mechanism analysis, performance optimization.
+> **Summary**: WebAssembly — Rust for WebAssembly: wasm-bindgen/wasm-pack, Yew/Leptos, the compile model, JS interop, and performance trade-offs.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

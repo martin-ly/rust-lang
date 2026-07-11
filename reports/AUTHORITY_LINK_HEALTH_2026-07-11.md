@@ -1,17 +1,17 @@
 # 国际化权威来源 URL 健康（2026-07-11）
 
 **EN**: International Authority URL Health
-**Summary**: 仅检查 P0/P1/P2 权威域 URL 的有效性（4xx/5xx/超时/连接错），验证『对齐国际化权威』不仅是『有引用』且『引用有效』。带缓存，可增量。
+**Summary**: 仅检查 P0/P1/P2 权威域 URL 的有效性，验证『对齐国际化权威』不仅是『有引用』且『引用有效』。带缓存，可增量。**口径**：403 单列 anti_bot（站点反爬，链接本身可能有效，需浏览器人工复核），不计入失效 bad。
 
-> 扫描 concept/+knowledge/+docs/ 权威域唯一 URL: **2243** · 失效/异常: **247**
+> 扫描 concept/+knowledge/+docs/ 权威域唯一 URL: **2243** · 真失效（4xx/5xx/超时/连接错，不含 403）: **194** · 反爬 403（待人工）: **53**
 
-| 分级 | 失效/异常数 |
-|:---|---:|
-| P0 | 72 |
-| P1 | 62 |
-| P2 | 113 |
+| 分级 | 真失效（不含 403） | 反爬 403（人工） |
+|:---|---:|---:|
+| P0 | 72 | 0 |
+| P1 | 9 | 53 |
+| P2 | 113 | 0 |
 
-## 失效/异常清单（前 80）
+## 真失效清单（前 80，需查证新址后替换）
 | 分级 | 状态 | 错误 | URL | 引用文件（≤5） |
 |:---|:---|:---|:---|:---|
 | P0 | 404 | HTTPError | https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html | docs/01_learning/learning_mvp_path.md; docs/research_notes/software_design_theory/07_crate_architectures/05_bevy_architecture.md |
@@ -86,18 +86,63 @@
 | P0 | 404 | HTTPError | https://spec.ferrocene.dev/traits.html | docs/research_notes/10_ferrocene_fls_alignment.md |
 | P0 | 404 | HTTPError | https://spec.ferrocene.dev/types.html | docs/research_notes/10_ferrocene_fls_alignment.md |
 | P0 | 404 | HTTPError | https://spec.ferrocene.dev/unsafe-rust.html | docs/research_notes/10_ferrocene_fls_alignment.md |
-| P1 | 403 | HTTPError | https://cacm.acm.org/ | concept/05_comparative/00_paradigms/03_paradigm_matrix.md |
-| P1 | 403 | HTTPError | https://cacm.acm.org/magazines/2021/4/251364-safe-systems-programming-in-rust/ | docs/research_notes/formal_methods/10_ownership_model.md |
-| P1 | 403 | HTTPError | https://dl.acm.org/ | concept/00_meta/03_audit/audit_checklist.md; concept/05_comparative/01_systems_languages/02_rust_vs_go.md; docs/00_meta/00_annual_review_template.md; docs/00_meta/00_content_reconstruction_plan_2026.md; docs/00_meta/00_docs_reorganization_complete.md |
-| P1 | 403 | HTTPError | https://dl.acm.org/doi/10.1109/TSE.1982.235252 | concept/06_ecosystem/03_design_patterns/41_workflow_theory.md |
-| P1 | 403 | HTTPError | https://dl.acm.org/doi/10.1145/1273496.1273513 | docs/research_notes/software_design_theory/07_crate_architectures/30_meilisearch_architecture.md |
-| P1 | 403 | HTTPError | https://dl.acm.org/doi/10.1145/138403.138440 | docs/research_notes/10_advanced_data_structures_guide.md |
-| P1 | 403 | HTTPError | https://dl.acm.org/doi/10.1145/143165.143169 | concept/01_foundation/00_start/21_effects_and_purity.md |
-| P1 | 403 | HTTPError | https://dl.acm.org/doi/10.1145/1640089.1640095 | concept/06_ecosystem/03_design_patterns/02_patterns.md |
-> … 另有 167 条，见 JSON。
+| P1 | 404 | HTTPError | https://aeneas-verification.github.io/ | docs/research_notes/00_archive_link_audit_report.md; docs/research_notes/10_00_comprehensive_summary.md; docs/research_notes/10_00_organization_and_navigation.md; docs/research_notes/10_academic_papers_alignment.md; docs/research_notes/10_application_trees.md |
+| P1 | 404 | HTTPError | https://arxiv.org/abs/2026.05.08 | concept/06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md |
+| P1 | 404 | HTTPError | https://arxiv.org/abs/2501.xxxxx | concept/07_future/04_research_and_experimental/29_ebpf_rust.md |
+| P1 | 404 | HTTPError | https://plv.mpi-sws.org/rustbelt/rustbelt.pdf | docs/research_notes/10_lifetime_cheatsheet.md |
+| P1 | 404 | HTTPError | https://plv.mpi-sws.org/semantics-of-memory-safety/ | concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md |
+| P1 | 418 | HTTPError | https://ieeexplore.ieee.org/ | concept/05_comparative/README.md; docs/01_learning/01_cross_module_learning_roadmap_2025_10_25.md; docs/01_learning/01_learning_path_guide_2025_10_24.md; docs/02_reference/02_error_code_mapping.md; docs/02_reference/02_standard_library_comprehensive_analysis_2025_12_25.md |
+| P1 | None | URLError:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016) | https://aeneas-verif.org/ | docs/research_notes/10_authoritative_alignment_gap_matrix.md |
+| P1 | None | TimeoutError:The read operation timed out | https://standards.ieee.org/standard/1012-2012.html | concept/00_meta/00_framework/todos.md |
+> … 另有 114 条，见 JSON。
+
+## 反爬 403（前 40，链接可能有效，需浏览器人工复核，不计入失效）
+| 分级 | URL | 引用文件（≤3） |
+|:---|:---|:---|
+| P1 | https://cacm.acm.org/ | concept/05_comparative/00_paradigms/03_paradigm_matrix.md |
+| P1 | https://cacm.acm.org/magazines/2021/4/251364-safe-systems-programming-in-rust/ | docs/research_notes/formal_methods/10_ownership_model.md |
+| P1 | https://dl.acm.org/ | concept/00_meta/03_audit/audit_checklist.md; concept/05_comparative/01_systems_languages/02_rust_vs_go.md; docs/00_meta/00_annual_review_template.md |
+| P1 | https://dl.acm.org/doi/10.1109/TSE.1982.235252 | concept/06_ecosystem/03_design_patterns/41_workflow_theory.md |
+| P1 | https://dl.acm.org/doi/10.1145/1273496.1273513 | docs/research_notes/software_design_theory/07_crate_architectures/30_meilisearch_architecture.md |
+| P1 | https://dl.acm.org/doi/10.1145/138403.138440 | docs/research_notes/10_advanced_data_structures_guide.md |
+| P1 | https://dl.acm.org/doi/10.1145/143165.143169 | concept/01_foundation/00_start/21_effects_and_purity.md |
+| P1 | https://dl.acm.org/doi/10.1145/1640089.1640095 | concept/06_ecosystem/03_design_patterns/02_patterns.md |
+| P1 | https://dl.acm.org/doi/10.1145/2452376.2452396 | concept/03_advanced/06_low_level_patterns/20_stream_processing_semantics.md |
+| P1 | https://dl.acm.org/doi/10.1145/248052.248106 | concept/03_advanced/00_concurrency/16_lock_free.md |
+| P1 | https://dl.acm.org/doi/10.1145/2517349.2522738 | concept/03_advanced/06_low_level_patterns/20_stream_processing_semantics.md |
+| P1 | https://dl.acm.org/doi/10.1145/2628136.2628161 | concept/01_foundation/00_start/21_effects_and_purity.md |
+| P1 | https://dl.acm.org/doi/10.1145/263690.263806 | docs/research_notes/software_design_theory/07_crate_architectures/30_meilisearch_architecture.md |
+| P1 | https://dl.acm.org/doi/10.1145/2660193.2660205 | docs/research_notes/software_design_theory/07_crate_architectures/33_sentry_architecture.md |
+| P1 | https://dl.acm.org/doi/10.1145/2674005.2674994 | docs/research_notes/10_cache_eviction_policies_guide.md |
+| P1 | https://dl.acm.org/doi/10.1145/2741948.2741950 | docs/research_notes/software_design_theory/07_crate_architectures/34_metrics_architecture.md |
+| P1 | https://dl.acm.org/doi/10.1145/3093744.3093746 | docs/research_notes/software_design_theory/07_crate_architectures/28_lapin_architecture.md |
+| P1 | https://dl.acm.org/doi/10.1145/3149.214121 | concept/06_ecosystem/06_data_and_distributed/50_distributed_consensus.md |
+| P1 | https://dl.acm.org/doi/10.1145/3158154 | concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md; concept/04_formal/00_type_theory/02_type_theory.md; concept/04_formal/01_ownership_logic/01_linear_logic.md |
+| P1 | https://dl.acm.org/doi/10.1145/3186725 | docs/research_notes/software_design_theory/07_crate_architectures/32_vector_architecture.md |
+| P1 | https://dl.acm.org/doi/10.1145/3190508.3190528 | docs/research_notes/software_design_theory/07_crate_architectures/34_metrics_architecture.md |
+| P1 | https://dl.acm.org/doi/10.1145/324133.324234 | docs/research_notes/software_design_theory/07_crate_architectures/13_rayon_architecture.md |
+| P1 | https://dl.acm.org/doi/10.1145/3290380 | concept/04_formal/00_type_theory/02_type_theory.md; concept/04_formal/01_ownership_logic/01_linear_logic.md; concept/04_formal/01_ownership_logic/03_ownership_formal.md |
+| P1 | https://dl.acm.org/doi/10.1145/3296957.3190648 | docs/research_notes/software_design_theory/07_crate_architectures/31_surrealdb_architecture.md |
+| P1 | https://dl.acm.org/doi/10.1145/3360573 | docs/research_notes/10_academic_papers_alignment.md |
+| P1 | https://dl.acm.org/doi/10.1145/3371073 | docs/research_notes/10_academic_papers_alignment.md |
+| P1 | https://dl.acm.org/doi/10.1145/3371109 | docs/research_notes/10_academic_papers_alignment.md |
+| P1 | https://dl.acm.org/doi/10.1145/3473597 | docs/research_notes/10_academic_papers_alignment.md |
+| P1 | https://dl.acm.org/doi/10.1145/3510457.3513031 | docs/research_notes/10_academic_papers_alignment.md |
+| P1 | https://dl.acm.org/doi/10.1145/3547647 | docs/research_notes/10_academic_papers_alignment.md |
+| P1 | https://dl.acm.org/doi/10.1145/355592.365646 | concept/01_foundation/00_start/34_pl_prerequisites.md |
+| P1 | https://dl.acm.org/doi/10.1145/356635.356640 | concept/06_ecosystem/10_performance/15_performance_optimization.md |
+| P1 | https://dl.acm.org/doi/10.1145/357172.357176 | concept/06_ecosystem/06_data_and_distributed/50_distributed_consensus.md |
+| P1 | https://dl.acm.org/doi/10.1145/3591283 | concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md |
+| P1 | https://dl.acm.org/doi/10.1145/3591285 | concept/02_intermediate/00_traits/01_traits.md; docs/05_guides/05_verus_practical_guide.md |
+| P1 | https://dl.acm.org/doi/10.1145/3656422 | docs/research_notes/10_academic_papers_alignment.md |
+| P1 | https://dl.acm.org/doi/10.1145/3689738 | concept/04_formal/03_operational_semantics/17_operational_semantics.md; concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md |
+| P1 | https://dl.acm.org/doi/10.1145/3704886 | concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md |
+| P1 | https://dl.acm.org/doi/10.1145/3735592 | docs/research_notes/10_academic_papers_alignment.md |
+| P1 | https://dl.acm.org/doi/10.1145/567446.567462 | concept/06_ecosystem/03_design_patterns/41_workflow_theory.md |
 
 ## 诚信
 - 仅查 P0/P1/P2 权威域（单一来源：maintenance/authority_coverage_dashboard.py）；不查其它外部域。
-- 瞬时网络抖动可能导致个别误判；失效项需人工复核后替换/移除，勿据此脚本自动改文件。
+- 403 反爬不视为『被对齐内容失效』：链接本身可能有效，仅是脚本 UA 被拦，需浏览器人工复核后决定是否保留。
+- 瞬时网络抖动可能导致个别误判；真失效项需人工/后台查证新址后替换，勿据此脚本自动删正文。
 
 *由 `scripts/check_authority_link_health.py` 生成*

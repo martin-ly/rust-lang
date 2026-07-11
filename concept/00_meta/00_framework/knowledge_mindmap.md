@@ -1,7 +1,7 @@
 # Rust 知识体系全局思维导图（Knowledge Mindmap）
 >
 > **EN**: Knowledge Mindmap
-> **Summary**: Knowledge Mindmap. Core Rust concept.
+> **Summary**: Knowledge Mindmap — The cognitive entry point: a single navigable Mermaid mindmap condensing the whole L0-L7 knowledge base.
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件是 `concept/` 知识体系的**认知入口**——用 Mermaid `mindmap` 语法将整个 L0-L7 知识体系浓缩为一张可导航的思维导图，帮助学习者建立全局认知地图。

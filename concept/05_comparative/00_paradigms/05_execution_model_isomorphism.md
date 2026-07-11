@@ -14,7 +14,7 @@
 # Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行
 >
 > **EN**: Concurrency
-> **Summary**: Concurrency. Core Rust concept covering mental model building.
+> **Summary**: Concurrency — An isomorphism matrix mapping Rust's sync/async/concurrent/parallel execution models to Go, CSP, Actor, and pi-calculus.
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件从**数学模型同构性**视角系统梳理 Rust 的执行模型（同步/异步（Async）/并发/并行），并与 Go、理论模型（CSP/Actor/π 演算/进程代数）建立精确的对应关系。

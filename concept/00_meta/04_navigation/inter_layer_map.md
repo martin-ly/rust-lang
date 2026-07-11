@@ -1,7 +1,7 @@
 # 跨层知识图谱（Inter-Layer Dependency Map）
 >
 > **EN**: Inter Layer Map
-> **Summary**: Inter Layer Map. Core Rust concept.
+> **Summary**: Inter Layer Map — The global dependency skeleton defining logical implication, formal mapping, and counterfactual links across L0-L7.
 >
 > **受众**: [进阶]
 >

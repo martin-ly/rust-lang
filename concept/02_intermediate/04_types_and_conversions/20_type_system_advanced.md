@@ -8,7 +8,7 @@
 # 高级类型系统：从关联类型到类型级编程
 >
 > **EN**: Type System
-> **Summary**: Type System. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics.
+> **Summary**: Type System — Advanced type system: GATs, impl Trait, type-level computation, and const generics under compile-time safety.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5

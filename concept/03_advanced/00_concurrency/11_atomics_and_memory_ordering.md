@@ -3,7 +3,7 @@
 # 原子操作与内存序：无锁并发的精确控制
 >
 > **EN**: Concurrency
-> **Summary**: Concurrency. Core Rust concept covering mental model building, mechanism analysis, in-depth analysis.
+> **Summary**: Concurrency — Atomic types and memory ordering: load/store, compare-and-swap, and release-acquire for precise lock-free control.
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：原子操作（Atomic Operations）

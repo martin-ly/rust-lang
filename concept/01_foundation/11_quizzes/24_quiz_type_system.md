@@ -3,7 +3,7 @@
 # 测验：类型系统（试点扩展）
 >
 > **EN**: Type System
-> **Summary**: Quiz Type System. Core Rust concept.
+> **Summary**: Type System — An interactive quiz checking L1 type-system fundamentals: scalar and compound types, enums, and matching.
 > **受众**: [初学者]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。

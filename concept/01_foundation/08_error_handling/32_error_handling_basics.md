@@ -7,7 +7,7 @@
 # Rust 错误处理基础
 >
 > **EN**: Error Handling
-> **Summary**: Error Handling. Core Rust concept covering mechanism analysis, type system mechanics, error handling strategies.
+> **Summary**: Error Handling — Error-handling basics: Result, Option, and the `?` operator, embedding errors into the type system.
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：错误处理（Error Handling）基础

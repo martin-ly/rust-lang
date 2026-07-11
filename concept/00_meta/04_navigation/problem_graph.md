@@ -12,7 +12,7 @@
 # Rust 知识体系问题图谱（Problem Graph）
 >
 > **EN**: Problem Graph
-> **Summary**: Problem Graph. Core Rust concept.
+> **Summary**: Problem Graph — A problem-decomposition network mapping system-level engineering problems to concepts and then to methods.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

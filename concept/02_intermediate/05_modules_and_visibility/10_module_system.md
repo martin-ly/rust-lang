@@ -4,7 +4,7 @@
 # 模块系统：Rust 的代码组织与可见性规则
 >
 > **EN**: Modules
-> **Summary**: Modules. Core Rust concept covering mechanism analysis, in-depth analysis.
+> **Summary**: Modules — The module system in depth: filesystem mapping, visibility rules, crate boundaries, and contrasts with C++/Java/Python.
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。

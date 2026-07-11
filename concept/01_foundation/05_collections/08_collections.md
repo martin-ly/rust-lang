@@ -7,7 +7,7 @@
 # 集合类型：Rust 标准库的数据结构谱系
 >
 > **EN**: Collections
-> **Summary**: Collections: core Rust concepts, syntax, and examples.
+> **Summary**: Collections — The standard collections (Vec, VecDeque, HashMap, BTreeMap, sets): ownership semantics, performance, and selection.
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[集合](../../../knowledge/02_intermediate/01_collections.md)

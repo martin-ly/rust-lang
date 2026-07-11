@@ -1,7 +1,7 @@
 # 概念一致性检查清单（Concept Consistency Audit Checklist）
 >
 > **EN**: Audit Checklist
-> **Summary**: Audit Checklist. Core Rust concept.
+> **Summary**: Audit Checklist — Quality gates for auditing concept files' consistency, completeness, and clarity of relationships.
 > **受众**: [专家]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L3

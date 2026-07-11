@@ -4,7 +4,7 @@
 # 高级 Trait 主题：从关联类型到特化
 >
 > **EN**: Traits
-> **Summary**: Traits. Core Rust concept covering mechanism analysis, in-depth analysis, generic programming.
+> **Summary**: Traits — Advanced traits: associated types, generic associated types, specialization, and negative impls.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5

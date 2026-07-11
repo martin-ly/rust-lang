@@ -5,7 +5,7 @@
 # 编程语言理论基础（PL Prerequisites）
 >
 > **EN**: Pl Prerequisites
-> **Summary**: Pl Prerequisites: core Rust concepts, syntax, and examples.
+> **Summary**: Pl Prerequisites — Prerequisite programming-language theory that explains why Rust is designed the way it is.
 > **受众**: [初学者]
 > **Bloom 层级**: L1-L2
 > **权威来源**: 本文件为 `concept/` 权威页。

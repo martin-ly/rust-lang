@@ -1,7 +1,7 @@
 # Rust 语义表达力多视角深化（Multiview Expressiveness Analysis）
 >
 > **EN**: Expressiveness Multiview
-> **Summary**: Expressiveness Multiview. Core Rust concept.
+> **Summary**: Expressiveness Multiview — A longitudinal, theory-driven view of Rust's expressiveness across computation, types, control, memory, and safety.
 > **受众**: [研究者]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件从**纵向理论视角**（计算/类型/控制/内存/并发/抽象/安全）深化 Rust 的表达能力，与 `semantic_expressiveness.md` 的**横向七维光谱**形成正交互补。前者回答「Rust 能表达什么」，后者回答「Rust 从哪些维度表达」。

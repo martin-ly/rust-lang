@@ -3,7 +3,7 @@
 # 异步模式：从 Future 到生产级并发
 >
 > **EN**: Concurrency
-> **Summary**: Concurrency. Core Rust concept covering mechanism analysis, in-depth analysis, design patterns.
+> **Summary**: Concurrency — Advanced async patterns: Future state machines, Pin guarantees, concurrent execution, and cancellation propagation.
 > **受众**: [专家]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。

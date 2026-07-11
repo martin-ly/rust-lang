@@ -4,7 +4,7 @@
 # 闭包基础：捕获环境与匿名函数
 >
 > **EN**: Closures
-> **Summary**: Closures. Core Rust concept covering type system mechanics, ownership and borrowing, AI/ML integration patterns.
+> **Summary**: Closures — Closures: environment capture, the Fn/FnMut/FnOnce traits, and using closures as parameters and return values.
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：闭包（Closures）

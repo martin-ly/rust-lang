@@ -3,7 +3,7 @@
 # Pin 与 Unpin：自引用类型的不动性保证
 >
 > **EN**: Pin and Unpin
-> **Summary**: Pin and Unpin. Core Rust concept covering mechanism analysis, in-depth analysis, async/await patterns.
+> **Summary**: Pin and Unpin — Guaranteeing immovability for self-referential types, and their interaction with futures and generators.
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Pin/Unpin](../../../knowledge/03_advanced/async)

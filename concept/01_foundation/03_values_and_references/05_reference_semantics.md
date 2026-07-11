@@ -6,7 +6,7 @@
 # 引用语义：自动解引用、Deref 强制与类型转换
 >
 > **EN**: Reference Semantics
-> **Summary**: Reference Semantics: core Rust concepts, syntax, and examples.
+> **Summary**: Reference Semantics — Auto-deref, deref coercion, type coercion, and how they interact with the borrow checker.
 > **受众**: [初学者]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。

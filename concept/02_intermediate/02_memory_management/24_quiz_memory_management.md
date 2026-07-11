@@ -3,7 +3,7 @@
 # 测验：内存管理（L2 试点扩展）
 >
 > **EN**: Memory Management
-> **Summary**: Quiz Memory Management. Core Rust concept.
+> **Summary**: Memory Management — An interactive quiz checking L2 smart pointers: Box, Rc/Arc, RefCell/Mutex, and interior mutability.
 >
 > ```rust fn main() { let b = Box::new(5); println!("{}", b); }```
 > <details> <summary>💡 点击展开答案与解析</summary>

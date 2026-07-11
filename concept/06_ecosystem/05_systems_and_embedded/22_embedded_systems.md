@@ -5,7 +5,7 @@
 # Rust 嵌入式系统开发
 >
 > **EN**: Embedded Systems
-> **Summary**: Embedded Systems. Core Rust concept covering mechanism analysis, memory safety guarantees, embedded systems programming.
+> **Summary**: Embedded Systems — Rust for embedded systems: no_std and bare-metal programming, where memory safety ensures reliability.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4

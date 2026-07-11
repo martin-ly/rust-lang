@@ -1,7 +1,7 @@
 # Rust 范式转换模式矩阵（Paradigm Transition Matrix）
 >
 > **EN**: Paradigm Transition Matrix
-> **Summary**: Paradigm Transition Matrix. Core Rust concept.
+> **Summary**: Paradigm Transition Matrix — A matrix of paradigm-shift patterns: source-language idiom to Rust idiom, with impact and learning difficulty.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

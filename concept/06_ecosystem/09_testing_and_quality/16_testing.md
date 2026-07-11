@@ -6,7 +6,7 @@
 # 测试生态：单元测试、集成测试与验证策略
 >
 > **EN**: Testing
-> **Summary**: Testing. Core Rust concept covering testing and verification, ecosystem and tooling.
+> **Summary**: Testing — Rust's testing ecosystem: unit and integration tests plus verification strategies.
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。

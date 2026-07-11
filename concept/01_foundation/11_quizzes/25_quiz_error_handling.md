@@ -3,7 +3,7 @@
 # 测验：错误处理（试点扩展）
 >
 > **EN**: Error Handling
-> **Summary**: Quiz Error Handling. Core Rust concept.
+> **Summary**: Error Handling — An interactive quiz checking L1 error handling: Result, Option, the `?` operator, panic, and custom errors.
 > **受众**: [初学者]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。

@@ -3,7 +3,7 @@
 > **代码状态**: ✅ 含可编译示例
 >
 > **EN**: Compiler Internals
-> **Summary**: Compiler Internals. Core Rust concept covering mechanism analysis, parallel programming, threading and synchronization.
+> **Summary**: Compiler Internals — The compiler front end's shift from single-threaded to multi-core parallel, and its impact on build times and IDE responsiveness.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`

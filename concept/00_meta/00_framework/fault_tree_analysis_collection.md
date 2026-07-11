@@ -1,7 +1,7 @@
 # Rust 知识体系失效分析树集（Fault Tree Analysis Collection）
 >
 > **EN**: Fault Tree Analysis Collection
-> **Summary**: Fault Tree Analysis Collection. Core Rust concept.
+> **Summary**: Fault Tree Analysis Collection — A collection of fault-tree analyses organized around five top events: memory, concurrency, and type-system failures.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]

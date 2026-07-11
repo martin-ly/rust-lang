@@ -6,7 +6,7 @@
 # Never Type (`!`)：底类型与穷尽性
 >
 > **EN**: Never Type
-> **Summary**: Never Type: core Rust concepts, syntax, and examples.
+> **Summary**: Never Type — The never type `!`: its formal semantics, inference rules, control-flow use, and exhaustiveness checking.
 > **受众**: [初学者]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。

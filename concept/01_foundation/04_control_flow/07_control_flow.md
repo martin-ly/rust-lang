@@ -5,7 +5,7 @@
 # 控制流：表达式导向的流程控制
 >
 > **EN**: Control Flow
-> **Summary**: Control Flow: core Rust concepts, syntax, and examples.
+> **Summary**: Control Flow — Expression-oriented control flow: if, match, loop, if-let, and while-let as value-producing expressions.
 > **受众**: [初学者]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。

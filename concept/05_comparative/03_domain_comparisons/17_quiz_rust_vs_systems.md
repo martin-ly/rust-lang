@@ -3,7 +3,7 @@
 # 测验：Rust vs 系统编程语言（L5 试点扩展）
 >
 > **EN**: Quiz Rust Vs Systems
-> **Summary**: Quiz Rust Vs Systems. Core Rust concept.
+> **Summary**: Quiz Rust Vs Systems — An interactive quiz contrasting Rust with C/C++/Go on memory safety, concurrency, and error handling.
 > **受众**: [进阶]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。

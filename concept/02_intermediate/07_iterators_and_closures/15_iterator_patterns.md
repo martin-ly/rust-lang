@@ -4,7 +4,7 @@
 # Rust 迭代器模式
 >
 > **EN**: Iterators
-> **Summary**: Iterators. Core Rust concept covering practical applications, mechanism analysis, in-depth analysis, performance optimization.
+> **Summary**: Iterators — Iterator patterns: adapter chains, custom iterators, lazy evaluation, performance, and best practices.
 >
 > **📎 交叉引用（Reference）**
 >

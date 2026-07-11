@@ -1,7 +1,7 @@
 # 内容分级与受众标签体系
 >
 > **EN**: Grading System
-> **Summary**: Grading System. Core Rust concept.
+> **Summary**: Grading System — The content-grading and audience-label scheme, with rules for applying each tier across the concept base.
 > **状态**: ✅ v3.0 标准
 > **创建日期**: 2026-06-06
 > **适用范围**: `concept/` / `knowledge/` / `book/` 全部内容文件

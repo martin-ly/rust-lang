@@ -1,11 +1,15 @@
 {
   "date": "2026-07-11",
   "scanned": 2243,
-  "bad": 247,
+  "bad": 194,
+  "anti_bot_403": 53,
   "by_tier": {
     "P0": 72,
-    "P1": 62,
+    "P1": 9,
     "P2": 113
+  },
+  "anti_bot_by_tier": {
+    "P1": 53
   },
   "bad_list": [
     {
@@ -681,509 +685,6 @@
       "err": "HTTPError",
       "files": [
         "docs/research_notes/10_ferrocene_fls_alignment.md"
-      ]
-    },
-    {
-      "url": "https://cacm.acm.org/",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/05_comparative/00_paradigms/03_paradigm_matrix.md"
-      ]
-    },
-    {
-      "url": "https://cacm.acm.org/magazines/2021/4/251364-safe-systems-programming-in-rust/",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/formal_methods/10_ownership_model.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/00_meta/03_audit/audit_checklist.md",
-        "concept/05_comparative/01_systems_languages/02_rust_vs_go.md",
-        "docs/00_meta/00_annual_review_template.md",
-        "docs/00_meta/00_content_reconstruction_plan_2026.md",
-        "docs/00_meta/00_docs_reorganization_complete.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1109/TSE.1982.235252",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/06_ecosystem/03_design_patterns/41_workflow_theory.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/1273496.1273513",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/07_crate_architectures/30_meilisearch_architecture.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/138403.138440",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_advanced_data_structures_guide.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/143165.143169",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/01_foundation/00_start/21_effects_and_purity.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/1640089.1640095",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/06_ecosystem/03_design_patterns/02_patterns.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/2452376.2452396",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/03_advanced/06_low_level_patterns/20_stream_processing_semantics.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/248052.248106",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/03_advanced/00_concurrency/16_lock_free.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/2517349.2522738",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/03_advanced/06_low_level_patterns/20_stream_processing_semantics.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/2628136.2628161",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/01_foundation/00_start/21_effects_and_purity.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/263690.263806",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/07_crate_architectures/30_meilisearch_architecture.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/2660193.2660205",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/07_crate_architectures/33_sentry_architecture.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/2674005.2674994",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_cache_eviction_policies_guide.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/2741948.2741950",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/07_crate_architectures/34_metrics_architecture.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3093744.3093746",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/07_crate_architectures/28_lapin_architecture.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3149.214121",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/06_ecosystem/06_data_and_distributed/50_distributed_consensus.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3158154",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
-        "concept/04_formal/00_type_theory/02_type_theory.md",
-        "concept/04_formal/01_ownership_logic/01_linear_logic.md",
-        "concept/04_formal/01_ownership_logic/03_ownership_formal.md",
-        "concept/04_formal/02_separation_logic/04_rustbelt.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3186725",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/07_crate_architectures/32_vector_architecture.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3190508.3190528",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/07_crate_architectures/34_metrics_architecture.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/324133.324234",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/07_crate_architectures/13_rayon_architecture.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3290380",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/04_formal/00_type_theory/02_type_theory.md",
-        "concept/04_formal/01_ownership_logic/01_linear_logic.md",
-        "concept/04_formal/01_ownership_logic/03_ownership_formal.md",
-        "concept/04_formal/02_separation_logic/04_rustbelt.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3296957.3190648",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/07_crate_architectures/31_surrealdb_architecture.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3360573",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_academic_papers_alignment.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3371073",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_academic_papers_alignment.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3371109",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_academic_papers_alignment.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3473597",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_academic_papers_alignment.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3510457.3513031",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_academic_papers_alignment.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3547647",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_academic_papers_alignment.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/355592.365646",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/01_foundation/00_start/34_pl_prerequisites.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/356635.356640",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/06_ecosystem/10_performance/15_performance_optimization.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/357172.357176",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/06_ecosystem/06_data_and_distributed/50_distributed_consensus.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3591283",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3591285",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/02_intermediate/00_traits/01_traits.md",
-        "docs/05_guides/05_verus_practical_guide.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3656422",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_academic_papers_alignment.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3689738",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/04_formal/03_operational_semantics/17_operational_semantics.md",
-        "concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3704886",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/3735592",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_academic_papers_alignment.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/567446.567462",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/06_ecosystem/03_design_patterns/41_workflow_theory.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/582153.582176",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/02_intermediate/01_generics/02_generics.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/6041.6042",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/01_foundation/02_type_system/22_data_abstraction_spectrum.md",
-        "concept/01_foundation/03_values_and_references/19_value_vs_reference_semantics.md",
-        "concept/02_intermediate/01_generics/02_generics.md",
-        "concept/04_formal/00_type_theory/02_type_theory.md",
-        "concept/04_formal/00_type_theory/21_type_semantics.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/74878.74880",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/05_comparative/00_paradigms/03_paradigm_matrix.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/75277.75305",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/02_intermediate/01_generics/02_generics.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.1145/78973.78977",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_advanced_data_structures_guide.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.5555/2385452",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/01_foundation/04_control_flow/41_statements_and_expressions.md",
-        "concept/01_foundation/10_testing_basics/16_testing_basics.md",
-        "concept/03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md",
-        "concept/03_advanced/00_concurrency/21_quiz_concurrency_async.md",
-        "concept/03_advanced/01_async/06_pin_unpin.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/10.5555/2488256.2488257",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/07_crate_architectures/33_sentry_architecture.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/book/10.5555/1243380",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/04_formal/03_operational_semantics/15_hoare_logic.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/book/10.5555/2385452",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/03_advanced/00_concurrency/10_concurrency_patterns.md",
-        "concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md",
-        "concept/03_advanced/00_concurrency/16_lock_free.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/pdf/10.1145/3547647",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/10_research_methodology.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/doi/pdf/10.1145/3735592",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/formal_methods/00_completeness_gaps.md",
-        "docs/research_notes/formal_methods/10_borrow_checker_proof.md",
-        "docs/research_notes/formal_methods/10_ownership_model.md",
-        "docs/research_notes/formal_methods/README.md"
-      ]
-    },
-    {
-      "url": "https://dl.acm.org/journal/csur",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "concept/05_comparative/00_paradigms/03_paradigm_matrix.md"
-      ]
-    },
-    {
-      "url": "https://queue.acm.org/detail.cfm?id=2898444",
-      "tier": "P1",
-      "status": 403,
-      "err": "HTTPError",
-      "files": [
-        "docs/research_notes/software_design_theory/07_crate_architectures/27_kube_rs_architecture.md"
       ]
     },
     {
@@ -2319,6 +1820,511 @@
       "err": "URLError:[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)",
       "files": [
         "concept/06_ecosystem/01_cargo/62_cargo_registries_and_publishing.md"
+      ]
+    }
+  ],
+  "anti_bot_list": [
+    {
+      "url": "https://cacm.acm.org/",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/05_comparative/00_paradigms/03_paradigm_matrix.md"
+      ]
+    },
+    {
+      "url": "https://cacm.acm.org/magazines/2021/4/251364-safe-systems-programming-in-rust/",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/formal_methods/10_ownership_model.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/00_meta/03_audit/audit_checklist.md",
+        "concept/05_comparative/01_systems_languages/02_rust_vs_go.md",
+        "docs/00_meta/00_annual_review_template.md",
+        "docs/00_meta/00_content_reconstruction_plan_2026.md",
+        "docs/00_meta/00_docs_reorganization_complete.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1109/TSE.1982.235252",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/03_design_patterns/41_workflow_theory.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/1273496.1273513",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/30_meilisearch_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/138403.138440",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_advanced_data_structures_guide.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/143165.143169",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/00_start/21_effects_and_purity.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/1640089.1640095",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/03_design_patterns/02_patterns.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/2452376.2452396",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/06_low_level_patterns/20_stream_processing_semantics.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/248052.248106",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/00_concurrency/16_lock_free.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/2517349.2522738",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/06_low_level_patterns/20_stream_processing_semantics.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/2628136.2628161",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/00_start/21_effects_and_purity.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/263690.263806",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/30_meilisearch_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/2660193.2660205",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/33_sentry_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/2674005.2674994",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_cache_eviction_policies_guide.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/2741948.2741950",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/34_metrics_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3093744.3093746",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/28_lapin_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3149.214121",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/06_data_and_distributed/50_distributed_consensus.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3158154",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "concept/04_formal/00_type_theory/02_type_theory.md",
+        "concept/04_formal/01_ownership_logic/01_linear_logic.md",
+        "concept/04_formal/01_ownership_logic/03_ownership_formal.md",
+        "concept/04_formal/02_separation_logic/04_rustbelt.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3186725",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/32_vector_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3190508.3190528",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/34_metrics_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/324133.324234",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/13_rayon_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3290380",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/04_formal/00_type_theory/02_type_theory.md",
+        "concept/04_formal/01_ownership_logic/01_linear_logic.md",
+        "concept/04_formal/01_ownership_logic/03_ownership_formal.md",
+        "concept/04_formal/02_separation_logic/04_rustbelt.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3296957.3190648",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/31_surrealdb_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3360573",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3371073",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3371109",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3473597",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3510457.3513031",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3547647",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/355592.365646",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/00_start/34_pl_prerequisites.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/356635.356640",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/10_performance/15_performance_optimization.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/357172.357176",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/06_data_and_distributed/50_distributed_consensus.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3591283",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3591285",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/00_traits/01_traits.md",
+        "docs/05_guides/05_verus_practical_guide.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3656422",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3689738",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/04_formal/03_operational_semantics/17_operational_semantics.md",
+        "concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3704886",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3735592",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_academic_papers_alignment.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/567446.567462",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/03_design_patterns/41_workflow_theory.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/582153.582176",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/01_generics/02_generics.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/6041.6042",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/02_type_system/22_data_abstraction_spectrum.md",
+        "concept/01_foundation/03_values_and_references/19_value_vs_reference_semantics.md",
+        "concept/02_intermediate/01_generics/02_generics.md",
+        "concept/04_formal/00_type_theory/02_type_theory.md",
+        "concept/04_formal/00_type_theory/21_type_semantics.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/74878.74880",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/05_comparative/00_paradigms/03_paradigm_matrix.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/75277.75305",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/02_intermediate/01_generics/02_generics.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/78973.78977",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_advanced_data_structures_guide.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.5555/2385452",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/01_foundation/04_control_flow/41_statements_and_expressions.md",
+        "concept/01_foundation/10_testing_basics/16_testing_basics.md",
+        "concept/03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md",
+        "concept/03_advanced/00_concurrency/21_quiz_concurrency_async.md",
+        "concept/03_advanced/01_async/06_pin_unpin.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.5555/2488256.2488257",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/33_sentry_architecture.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/book/10.5555/1243380",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/04_formal/03_operational_semantics/15_hoare_logic.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/book/10.5555/2385452",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/03_advanced/00_concurrency/10_concurrency_patterns.md",
+        "concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md",
+        "concept/03_advanced/00_concurrency/16_lock_free.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/pdf/10.1145/3547647",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/10_research_methodology.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/pdf/10.1145/3735592",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/formal_methods/00_completeness_gaps.md",
+        "docs/research_notes/formal_methods/10_borrow_checker_proof.md",
+        "docs/research_notes/formal_methods/10_ownership_model.md",
+        "docs/research_notes/formal_methods/README.md"
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/journal/csur",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/05_comparative/00_paradigms/03_paradigm_matrix.md"
+      ]
+    },
+    {
+      "url": "https://queue.acm.org/detail.cfm?id=2898444",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/research_notes/software_design_theory/07_crate_architectures/27_kube_rs_architecture.md"
       ]
     }
   ]

@@ -5,7 +5,7 @@
 # Rust 游戏开发
 >
 > **EN**: Game Development
-> **Summary**: Game Development. Core Rust concept covering mechanism analysis, design patterns, performance optimization.
+> **Summary**: Game Development — Rust for game development: ECS architecture and rendering engines, with performance and developer ergonomics.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L5

@@ -4,7 +4,7 @@
 # 测验：Rust 工具链（L6 试点扩展）
 >
 > **EN**: Toolchain
-> **Summary**: Quiz Toolchain. Core Rust concept.
+> **Summary**: Toolchain — An interactive quiz checking the Rust toolchain: Cargo dependencies, Clippy, Miri, rustfmt, and documentation.
 > **受众**: [进阶]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。

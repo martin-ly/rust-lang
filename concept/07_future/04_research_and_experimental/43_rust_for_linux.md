@@ -4,7 +4,7 @@
 > **代码状态**: [示例级 — 已补充代码]
 >
 > **EN**: Operating Systems
-> **Summary**: Operating Systems. Core Rust concept covering mechanism analysis, in-depth analysis, FFI interoperability.
+> **Summary**: Operating Systems — Rust for Linux: bringing Rust into kernel development, from drivers and C interop to kernel-specific safety guarantees.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

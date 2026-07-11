@@ -4,7 +4,7 @@
 # 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析
 >
 > **EN**: Collections Advanced
-> **Summary**: Collections Advanced: core Rust concepts, syntax, and examples.
+> **Summary**: Collections Advanced — Advanced collections: BTreeMap/BTreeSet, custom hashers, VecDeque, and BinaryHeap, with layout and trade-offs.
 > **受众**: [初学者]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。

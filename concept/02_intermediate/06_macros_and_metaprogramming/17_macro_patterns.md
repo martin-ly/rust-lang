@@ -4,7 +4,7 @@
 # 宏模式：编译期代码生成的工程实践
 >
 > **EN**: Macros
-> **Summary**: Macros. Core Rust concept covering practical examples, mechanism analysis, in-depth analysis.
+> **Summary**: Macros — Macro engineering patterns: DRY code generation, API design, and compile-time computation without harming readability.
 >
 > **📎 交叉引用（Reference）**
 >

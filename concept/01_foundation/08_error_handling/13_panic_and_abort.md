@@ -5,7 +5,7 @@
 # Panic 与 Abort：不可恢复错误的处理机制
 >
 > **EN**: Panic and Abort
-> **Summary**: Panic and Abort: core Rust concepts, syntax, and examples.
+> **Summary**: Panic and Abort — Unrecoverable-error handling, unwinding versus abort, and custom panic hooks.
 > **受众**: [初学者]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。

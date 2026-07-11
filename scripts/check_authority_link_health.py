@@ -117,29 +117,41 @@ def main():
         json.dump(results, open(CACHE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
     bad = []
+    anti_bot = []
     for u in urls:
         r = results.get(u, {})
         st = r.get("status"); err = r.get("err")
         ok = isinstance(st, int) and 200 <= st < 400 and err is None
-        if not ok:
-            bad.append({"url": u, "tier": seen[u]["tier"], "status": st, "err": err,
-                        "files": sorted(seen[u]["files"])[:5]})
+        if ok:
+            continue
+        entry = {"url": u, "tier": seen[u]["tier"], "status": st, "err": err,
+                 "files": sorted(seen[u]["files"])[:5]}
+        # 403 多为站点反爬（链接本身可能有效），单列 anti_bot，不计入『被对齐内容失效』bad
+        if st == 403:
+            anti_bot.append(entry)
+        else:
+            bad.append(entry)
     bad.sort(key=lambda x: (x["tier"], str(x["status"]), x["url"]))
+    anti_bot.sort(key=lambda x: (x["tier"], x["url"]))
 
     md = [f"# 国际化权威来源 URL 健康（{TODAY}）", "",
-          "**EN**: International Authority URL Health", "**Summary**: 仅检查 P0/P1/P2 权威域 URL 的有效性（4xx/5xx/超时/连接错），"
-          "验证『对齐国际化权威』不仅是『有引用』且『引用有效』。带缓存，可增量。", "",
-          f"> 扫描 concept/+knowledge/+docs/ 权威域唯一 URL: **{len(urls)}** · 失效/异常: **{len(bad)}**", ""]
+          "**EN**: International Authority URL Health", "**Summary**: 仅检查 P0/P1/P2 权威域 URL 的有效性，"
+          "验证『对齐国际化权威』不仅是『有引用』且『引用有效』。带缓存，可增量。"
+          "**口径**：403 单列 anti_bot（站点反爬，链接本身可能有效，需浏览器人工复核），不计入失效 bad。", "",
+          f"> 扫描 concept/+knowledge/+docs/ 权威域唯一 URL: **{len(urls)}** · 真失效（4xx/5xx/超时/连接错，不含 403）: **{len(bad)}** · 反爬 403（待人工）: **{len(anti_bot)}**", ""]
     by_tier = {}
+    ab_tier = {}
     for b in bad:
         by_tier.setdefault(b["tier"], []).append(b)
-    md.append("| 分级 | 失效/异常数 |")
-    md.append("|:---|---:|")
+    for b in anti_bot:
+        ab_tier.setdefault(b["tier"], []).append(b)
+    md.append("| 分级 | 真失效（不含 403） | 反爬 403（人工） |")
+    md.append("|:---|---:|---:|")
     for t in ("P0", "P1", "P2"):
-        md.append(f"| {t} | {len(by_tier.get(t, []))} |")
+        md.append(f"| {t} | {len(by_tier.get(t, []))} | {len(ab_tier.get(t, []))} |")
     md.append("")
     if bad:
-        md.append("## 失效/异常清单（前 80）")
+        md.append("## 真失效清单（前 80，需查证新址后替换）")
         md.append("| 分级 | 状态 | 错误 | URL | 引用文件（≤5） |")
         md.append("|:---|:---|:---|:---|:---|")
         for b in bad[:80]:
@@ -147,18 +159,28 @@ def main():
         if len(bad) > 80:
             md.append(f"> … 另有 {len(bad)-80} 条，见 JSON。")
     else:
-        md.append("✅ 本次扫描的权威域 URL 全部有效（2xx/3xx）。")
+        md.append("✅ 本次扫描的权威域 URL 无真失效（2xx/3xx；403 反爬已单列）。")
+    if anti_bot:
+        md.append("")
+        md.append("## 反爬 403（前 40，链接可能有效，需浏览器人工复核，不计入失效）")
+        md.append("| 分级 | URL | 引用文件（≤3） |")
+        md.append("|:---|:---|:---|")
+        for b in anti_bot[:40]:
+            md.append(f"| {b['tier']} | {b['url']} | {'; '.join(b['files'][:3])} |")
     md += ["", "## 诚信", "- 仅查 P0/P1/P2 权威域（单一来源：maintenance/authority_coverage_dashboard.py）；不查其它外部域。",
-           "- 瞬时网络抖动可能导致个别误判；失效项需人工复核后替换/移除，勿据此脚本自动改文件。", "", "*由 `scripts/check_authority_link_health.py` 生成*"]
+           "- 403 反爬不视为『被对齐内容失效』：链接本身可能有效，仅是脚本 UA 被拦，需浏览器人工复核后决定是否保留。",
+           "- 瞬时网络抖动可能导致个别误判；真失效项需人工/后台查证新址后替换，勿据此脚本自动删正文。", "", "*由 `scripts/check_authority_link_health.py` 生成*"]
 
     os.makedirs(os.path.join(ROOT, "reports"), exist_ok=True)
     md_path = os.path.join(ROOT, "reports", f"AUTHORITY_LINK_HEALTH_{TODAY}.md")
     json_path = os.path.join(ROOT, "reports", f"AUTHORITY_LINK_HEALTH_{TODAY}.json")
     open(md_path, "w", encoding="utf-8", newline="\n").write("\n".join(md))
-    json.dump({"date": TODAY, "scanned": len(urls), "bad": len(bad),
-               "by_tier": {t: len(v) for t, v in by_tier.items()}, "bad_list": bad},
+    json.dump({"date": TODAY, "scanned": len(urls), "bad": len(bad), "anti_bot_403": len(anti_bot),
+               "by_tier": {t: len(v) for t, v in by_tier.items()},
+               "anti_bot_by_tier": {t: len(v) for t, v in ab_tier.items()},
+               "bad_list": bad, "anti_bot_list": anti_bot},
               open(json_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    print(f"[auth-health] scanned={len(urls)} bad={len(bad)} by_tier={ {t: len(v) for t, v in by_tier.items()} }")
+    print(f"[auth-health] scanned={len(urls)} bad(real)={len(bad)} anti_bot_403={len(anti_bot)} by_tier={ {t: len(v) for t, v in by_tier.items()} }")
     print(f"[auth-health] report: {os.path.relpath(md_path, ROOT)}")
     return 0
 

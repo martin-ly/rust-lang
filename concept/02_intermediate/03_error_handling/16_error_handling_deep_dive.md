@@ -4,7 +4,7 @@
 # 错误处理深入：从 Result 到自定义错误生态
 >
 > **EN**: Error Handling
-> **Summary**: Error Handling. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics.
+> **Summary**: Error Handling — A deep dive into error handling: combinators, the `?` operator, conversions, custom errors, and frameworks.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4

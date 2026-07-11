@@ -11,7 +11,7 @@
 # 数值类型与运算：从整数到浮点的完整图景
 >
 > **EN**: Numerics
-> **Summary**: Numerics: core Rust concepts, syntax, and examples.
+> **Summary**: Numerics — Rust's numeric types: integers, floats, saturating arithmetic, conversions, and overflow behavior.
 > **受众**: [初学者]
 > **Bloom 层级**: L1-L2
 > **权威来源**: 本文件为 `concept/` 权威页。

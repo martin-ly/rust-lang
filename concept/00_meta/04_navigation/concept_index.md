@@ -1,7 +1,7 @@
 # 全局概念索引（Concept Index）
 >
 > **EN**: Concept Index
-> **Summary**: Concept Index. Core Rust concept.
+> **Summary**: Concept Index — An inverted index from concept names to definitions, cross-references, Bloom levels, and semantic links.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]

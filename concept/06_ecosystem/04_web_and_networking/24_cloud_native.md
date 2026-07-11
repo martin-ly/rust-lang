@@ -16,7 +16,7 @@
 # Rust 云原生生态
 >
 > **EN**: Cloud Native
-> **Summary**: Cloud Native. Core Rust concept covering mechanism analysis, memory safety guarantees, performance optimization.
+> **Summary**: Cloud Native — Rust in cloud-native systems: microservices and containerized deployment, where safety and performance reshape infrastructure.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4

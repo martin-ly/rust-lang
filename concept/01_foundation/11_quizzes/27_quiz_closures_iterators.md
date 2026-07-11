@@ -3,7 +3,7 @@
 # 测验：闭包与迭代器（L1 试点扩展）
 >
 > **EN**: Closures
-> **Summary**: Quiz Closures Iterators. Core Rust concept.
+> **Summary**: Closures — An interactive quiz checking closures (capture, Fn traits, move) and iterators (adapters, consumers, laziness).
 > **受众**: [初学者]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。

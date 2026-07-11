@@ -1,7 +1,7 @@
 # Rust 表征空间（Semantic / Representational Space）
 >
 > **EN**: Semantic Space
-> **Summary**: Semantic Space. Core Rust concept.
+> **Summary**: Semantic Space — A meta-level study of Rust's representational and semantic space: what it can, cannot, and equivalently express.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **Bloom 层级**: L4-L5

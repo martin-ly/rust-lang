@@ -3,7 +3,7 @@
 # 并发 模式：从消息 传递到锁自由的数据结构
 >
 > **EN**: Concurrency
-> **Summary**: Concurrency. Core Rust concept covering mental model building, mechanism analysis, in-depth analysis.
+> **Summary**: Concurrency — Advanced concurrency: actors, channels, lock-free structures, and memory ordering under ownership-based safety.
 > **受众**: [专家]
 >
 > **Bloom 层级**: L4-L5

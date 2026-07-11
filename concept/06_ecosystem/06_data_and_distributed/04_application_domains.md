@@ -13,7 +13,7 @@
 > **代码状态**: ✅ 含可编译示例
 >
 > **EN**: Application Domains
-> **Summary**: Application Domains. Core Rust concept covering mental model building.
+> **Summary**: Application Domains — A formal-model view of ecosystem frontiers, focusing on each domain's interaction with ownership and the type system.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **权威来源**: 本文件为 `concept/` 权威页。

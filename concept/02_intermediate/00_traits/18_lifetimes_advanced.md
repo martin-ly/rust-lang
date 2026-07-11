@@ -4,7 +4,7 @@
 # 生命周期高级主题：从 HRTB 到自引用类型
 >
 > **EN**: Lifetimes
-> **Summary**: Lifetimes. Core Rust concept covering mechanism analysis, in-depth analysis, lifetime semantics.
+> **Summary**: Lifetimes — Advanced lifetimes: higher-ranked trait bounds, elision rules, self-referential structs, and Pin.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5

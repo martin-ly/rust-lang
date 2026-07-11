@@ -8,7 +8,7 @@
       "D3": 71,
       "D4": 1,
       "D5": 113,
-      "D6": 109
+      "D6": 8
     },
     "pct": {
       "D1": 13.7,
@@ -16,10 +16,10 @@
       "D3": 14.9,
       "D4": 0.2,
       "D5": 23.7,
-      "D6": 22.9
+      "D6": 1.7
     },
     "D2_base_files_with_asp_and_bloom": 297,
-    "flagged_files": 301
+    "flagged_files": 242
   },
   "examples": {
     "D1": [
@@ -234,48 +234,32 @@
         "Summary 为空"
       ],
       [
-        "concept/00_meta/00_framework/cognitive_dimension_matrix.md",
-        "套话: Cognitive Dimension Matrix. Core Rust concept."
+        "concept/00_meta/02_sources/authority_source_map.md",
+        "套话: Authority Source Map. Core Rust concept."
       ],
       [
-        "concept/00_meta/00_framework/competency_graph.md",
-        "套话: Competency Graph. Core Rust concept."
+        "concept/00_meta/03_audit/concept_audit_guide.md",
+        "套话: Concept Audit Guide. Core Rust concept."
       ],
       [
-        "concept/00_meta/00_framework/comprehensive_rust_mapping.md",
-        "套话: Comprehensive Rust Mapping. Core Rust concept."
+        "concept/06_ecosystem/01_cargo/59_cargo_build_scripts.md",
+        "套话: A comprehensive guide to `build.rs`: when it runs, how to pa"
       ],
       [
-        "concept/00_meta/00_framework/concept_definition_decision_forest.md",
-        "套话: Concept Definition Decision Forest. Core Rust concept."
+        "concept/06_ecosystem/01_cargo/87_build_std.md",
+        "套话: A comprehensive guide to Cargo's unstable `build-std` featur"
       ],
       [
-        "concept/00_meta/00_framework/decidability_spectrum.md",
-        "套话: Decidability Spectrum. Core Rust concept."
+        "concept/06_ecosystem/09_testing_and_quality/17_benchmarking.md",
+        "套话: Core Rust concept covering statistical benchmarking with Cri"
       ],
       [
-        "concept/00_meta/00_framework/expressiveness_multiview.md",
-        "套话: Expressiveness Multiview. Core Rust concept."
+        "concept/07_future/00_version_tracking/migration_197_decision_tree.md",
+        "Summary 为空"
       ],
       [
-        "concept/00_meta/00_framework/fault_tree_analysis_collection.md",
-        "套话: Fault Tree Analysis Collection. Core Rust concept."
-      ],
-      [
-        "concept/00_meta/00_framework/knowledge_mindmap.md",
-        "套话: Knowledge Mindmap. Core Rust concept."
-      ],
-      [
-        "concept/00_meta/00_framework/paradigm_transition_matrix.md",
-        "套话: Paradigm Transition Matrix. Core Rust concept."
-      ],
-      [
-        "concept/00_meta/00_framework/semantic_space.md",
-        "套话: Semantic Space. Core Rust concept."
-      ],
-      [
-        "concept/00_meta/00_framework/theorem_inference_forest.md",
-        "套话: Theorem Inference Forest. Core Rust concept."
+        "concept/07_future/04_research_and_experimental/02_formal_methods.md",
+        "套话: Formal Methods. Core Rust concept covering practical example"
       ]
     ]
   },
@@ -291,57 +275,16 @@
     "concept/00_meta/00_framework/cognitive_dimension_matrix.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 2 处"
-      ],
-      "D6": [
-        "套话: Cognitive Dimension Matrix. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/00_framework/competency_graph.md": {
-      "D6": [
-        "套话: Competency Graph. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/00_framework/comprehensive_rust_mapping.md": {
-      "D6": [
-        "套话: Comprehensive Rust Mapping. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/00_framework/concept_definition_decision_forest.md": {
-      "D6": [
-        "套话: Concept Definition Decision Forest. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/00_framework/decidability_spectrum.md": {
-      "D6": [
-        "套话: Decidability Spectrum. Core Rust concept."
       ]
     },
     "concept/00_meta/00_framework/expressiveness_multiview.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 2 处"
-      ],
-      "D6": [
-        "套话: Expressiveness Multiview. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/00_framework/fault_tree_analysis_collection.md": {
-      "D6": [
-        "套话: Fault Tree Analysis Collection. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/00_framework/knowledge_mindmap.md": {
-      "D6": [
-        "套话: Knowledge Mindmap. Core Rust concept."
       ]
     },
     "concept/00_meta/00_framework/methodology.md": {
       "D1": [
         "Bloom [2, 3] 与 层次定位/层级 [1] 无交集"
-      ]
-    },
-    "concept/00_meta/00_framework/paradigm_transition_matrix.md": {
-      "D6": [
-        "套话: Paradigm Transition Matrix. Core Rust concept."
       ]
     },
     "concept/00_meta/00_framework/pl_foundations_roadmap.md": {
@@ -362,14 +305,6 @@
     "concept/00_meta/00_framework/semantic_space.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ],
-      "D6": [
-        "套话: Semantic Space. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/00_framework/theorem_inference_forest.md": {
-      "D6": [
-        "套话: Theorem Inference Forest. Core Rust concept."
       ]
     },
     "concept/00_meta/00_framework/todos.md": {
@@ -385,19 +320,11 @@
     "concept/00_meta/01_terminology/terminology_glossary.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 18 处"
-      ],
-      "D6": [
-        "套话: Terminology Glossary. Core Rust concept."
       ]
     },
     "concept/00_meta/02_sources/authority_source_map.md": {
       "D6": [
         "套话: Authority Source Map. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/02_sources/rustbelt_predicate_map.md": {
-      "D6": [
-        "套话: RustBelt. Core Rust concept covering formal methods foundati"
       ]
     },
     "concept/00_meta/02_sources/sources.md": {
@@ -416,14 +343,6 @@
       ],
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ],
-      "D6": [
-        "套话: Asp Marking Guide. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/03_audit/audit_checklist.md": {
-      "D6": [
-        "套话: Audit Checklist. Core Rust concept."
       ]
     },
     "concept/00_meta/03_audit/concept_audit_guide.md": {
@@ -437,24 +356,6 @@
       ],
       "D5": [
         "稳定层 nightly/preview 关键词 8 处"
-      ],
-      "D6": [
-        "套话: Grading System. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/03_audit/quality_dashboard_v2.md": {
-      "D6": [
-        "套话: Quality Dashboard V2. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/04_navigation/career_landscape.md": {
-      "D6": [
-        "套话: Career Landscape. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/04_navigation/concept_index.md": {
-      "D6": [
-        "套话: Concept Index. Core Rust concept."
       ]
     },
     "concept/00_meta/04_navigation/foundations_gap_closure_index.md": {
@@ -465,42 +366,9 @@
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5] 无交集"
       ]
     },
-    "concept/00_meta/04_navigation/inter_layer_map.md": {
-      "D6": [
-        "套话: Inter Layer Map. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/04_navigation/intra_layer_model_map.md": {
-      "D6": [
-        "套话: Intra Layer Model Map. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/04_navigation/learning_guide.md": {
-      "D6": [
-        "套话: Learning Guide. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/04_navigation/learning_mvp_path.md": {
-      "D6": [
-        "套话: Learning Mvp Path. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/04_navigation/problem_graph.md": {
-      "D6": [
-        "套话: Problem Graph. Core Rust concept."
-      ]
-    },
     "concept/00_meta/04_navigation/quick_reference.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 2 处"
-      ],
-      "D6": [
-        "套话: Quick Reference. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/04_navigation/self_assessment.md": {
-      "D6": [
-        "套话: Self Assessment. Core Rust concept."
       ]
     },
     "concept/00_meta/knowledge_topology/01_concept_definition_atlas.md": {
@@ -587,14 +455,6 @@
     "concept/01_foundation/00_start/06_zero_cost_abstractions.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ],
-      "D6": [
-        "套话: Zero Cost Abstractions: core Rust concepts, syntax, and exam"
-      ]
-    },
-    "concept/01_foundation/00_start/15_closure_basics.md": {
-      "D6": [
-        "套话: Closures. Core Rust concept covering type system mechanics, "
       ]
     },
     "concept/01_foundation/00_start/21_effects_and_purity.md": {
@@ -603,11 +463,6 @@
       ],
       "D3": [
         "对应 Rust 版本 声明 2 次: ['1.97.0+ (Edition 2024)', '1.97.0+ (Edition 2024)']"
-      ]
-    },
-    "concept/01_foundation/00_start/34_pl_prerequisites.md": {
-      "D6": [
-        "套话: Pl Prerequisites: core Rust concepts, syntax, and examples."
       ]
     },
     "concept/01_foundation/00_start/47_std_io_and_process.md": {
@@ -639,11 +494,6 @@
         "Bloom [2, 3, 4] 与 层次定位/层级 [1] 无交集"
       ]
     },
-    "concept/01_foundation/01_ownership_borrow_lifetime/28_ownership_inventories_brown_book.md": {
-      "D6": [
-        "套话: Brown University Ownership Inventory: core Rust concepts, sy"
-      ]
-    },
     "concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md": {
       "D1": [
         "Bloom 多区间冲突: ['L4-L5', 'L2-L4', 'L4-L5']",
@@ -654,9 +504,6 @@
       ],
       "D5": [
         "稳定层 nightly/preview 关键词 5 处"
-      ],
-      "D6": [
-        "套话: Lifetimes Advanced: core Rust concepts, syntax, and examples"
       ]
     },
     "concept/01_foundation/02_type_system/04_type_system.md": {
@@ -674,30 +521,16 @@
     "concept/01_foundation/02_type_system/10_numerics.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ],
-      "D6": [
-        "套话: Numerics: core Rust concepts, syntax, and examples."
       ]
     },
     "concept/01_foundation/02_type_system/14_coercion_and_casting.md": {
       "D3": [
         "对应 Rust 版本 声明 2 次: ['1.97.0+ (Edition 2024)', '1.97.0+ (Edition 2024)']"
-      ],
-      "D6": [
-        "套话: Coercion and Casting: core Rust concepts, syntax, and exampl"
       ]
     },
     "concept/01_foundation/02_type_system/22_data_abstraction_spectrum.md": {
       "D1": [
         "Bloom [2, 3, 4, 5] 与 层次定位/层级 [1] 无交集"
-      ],
-      "D6": [
-        "套话: Data Abstraction Spectrum: core Rust concepts, syntax, and e"
-      ]
-    },
-    "concept/01_foundation/02_type_system/31_never_type.md": {
-      "D6": [
-        "套话: Never Type: core Rust concepts, syntax, and examples."
       ]
     },
     "concept/01_foundation/03_values_and_references/05_reference_semantics.md": {
@@ -706,9 +539,6 @@
       ],
       "D3": [
         "Bloom 层级 声明 11 次: ['L2-L3', 'L2-L4', 'L4', 'L4', 'L3-L4', 'L3', 'L3', 'L4', 'L2-L4', 'L4', 'L4']"
-      ],
-      "D6": [
-        "套话: Reference Semantics: core Rust concepts, syntax, and example"
       ]
     },
     "concept/01_foundation/03_values_and_references/19_value_vs_reference_semantics.md": {
@@ -719,11 +549,6 @@
     "concept/01_foundation/03_values_and_references/20_variable_model.md": {
       "D1": [
         "Bloom [2, 3, 4] 与 层次定位/层级 [1] 无交集"
-      ]
-    },
-    "concept/01_foundation/04_control_flow/07_control_flow.md": {
-      "D6": [
-        "套话: Control Flow: core Rust concepts, syntax, and examples."
       ]
     },
     "concept/01_foundation/05_collections/08_collections.md": {
@@ -738,22 +563,11 @@
       ],
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ],
-      "D6": [
-        "套话: Collections: core Rust concepts, syntax, and examples."
-      ]
-    },
-    "concept/01_foundation/05_collections/17_collections_advanced.md": {
-      "D6": [
-        "套话: Collections Advanced: core Rust concepts, syntax, and exampl"
       ]
     },
     "concept/01_foundation/06_strings_and_text/09_strings_and_text.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集"
-      ],
-      "D6": [
-        "套话: Strings and Text: core Rust concepts, syntax, and examples."
       ]
     },
     "concept/01_foundation/06_strings_and_text/46_formatting_and_display.md": {
@@ -763,11 +577,6 @@
       "D3": [
         "Bloom 层级 声明 2 次: ['L2-L3', 'L2-L3']",
         "Rust 版本 声明 2 次: ['1.97.0+ (Edition 2024)', '1.97.0+ (Edition 2024)']"
-      ]
-    },
-    "concept/01_foundation/07_modules_and_items/11_modules_and_paths.md": {
-      "D6": [
-        "套话: Modules. Core Rust concept covering practical examples, aero"
       ]
     },
     "concept/01_foundation/07_modules_and_items/38_crates_and_source_files.md": {
@@ -816,27 +625,16 @@
     "concept/01_foundation/08_error_handling/13_panic_and_abort.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 2 处"
-      ],
-      "D6": [
-        "套话: Panic and Abort: core Rust concepts, syntax, and examples."
       ]
     },
     "concept/01_foundation/08_error_handling/32_error_handling_basics.md": {
       "D3": [
         "对应 Rust 版本 声明 2 次: ['1.97.0+ (Edition 2024)', '1.97.0+ (Edition 2024)']"
-      ],
-      "D6": [
-        "套话: Error Handling. Core Rust concept covering mechanism analysi"
       ]
     },
     "concept/01_foundation/08_error_handling/33_error_handling_control_flow.md": {
       "D1": [
         "Bloom [2, 3] 与 层次定位/层级 [1] 无交集"
-      ]
-    },
-    "concept/01_foundation/09_macros_basics/12_attributes_and_macros.md": {
-      "D6": [
-        "套话: Macros. Core Rust concept covering practical examples, desig"
       ]
     },
     "concept/01_foundation/10_testing_basics/16_testing_basics.md": {
@@ -845,9 +643,6 @@
       ],
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ],
-      "D6": [
-        "套话: Testing. Core Rust concept covering testing strategies, mech"
       ]
     },
     "concept/01_foundation/10_testing_basics/42_useful_development_tools.md": {
@@ -858,37 +653,14 @@
         "内容分级 声明 2 次: ['[参考级]', '[参考级]']"
       ]
     },
-    "concept/01_foundation/11_quizzes/24_quiz_type_system.md": {
-      "D6": [
-        "套话: Quiz Type System. Core Rust concept."
-      ]
-    },
-    "concept/01_foundation/11_quizzes/25_quiz_error_handling.md": {
-      "D6": [
-        "套话: Quiz Error Handling. Core Rust concept."
-      ]
-    },
     "concept/01_foundation/11_quizzes/26_quiz_modules_testing.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ],
-      "D6": [
-        "套话: Quiz Modules Testing. Core Rust concept."
-      ]
-    },
-    "concept/01_foundation/11_quizzes/27_quiz_closures_iterators.md": {
-      "D6": [
-        "套话: Quiz Closures Iterators. Core Rust concept."
       ]
     },
     "concept/01_foundation/11_quizzes/29_quiz_pl_foundations.md": {
       "D1": [
         "Bloom [2, 3] 与 层次定位/层级 [1] 无交集"
-      ]
-    },
-    "concept/01_foundation/11_quizzes/33_quiz_ownership_borrowing.md": {
-      "D6": [
-        "套话: Quiz Ownership Borrowing. Core Rust concept."
       ]
     },
     "concept/02_intermediate/00_traits/01_traits.md": {
@@ -904,17 +676,9 @@
         "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集"
       ]
     },
-    "concept/02_intermediate/00_traits/18_lifetimes_advanced.md": {
-      "D6": [
-        "套话: Lifetimes. Core Rust concept covering mechanism analysis, in"
-      ]
-    },
     "concept/02_intermediate/00_traits/19_advanced_traits.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 14 处"
-      ],
-      "D6": [
-        "套话: Traits. Core Rust concept covering mechanism analysis, in-de"
       ]
     },
     "concept/02_intermediate/00_traits/32_editions.md": {
@@ -953,11 +717,6 @@
         "稳定层 nightly/preview 关键词 25 处"
       ]
     },
-    "concept/02_intermediate/01_generics/23_quiz_traits_and_generics.md": {
-      "D6": [
-        "套话: Quiz Traits And Generics. Core Rust concept."
-      ]
-    },
     "concept/02_intermediate/02_memory_management/03_memory_management.md": {
       "D1": [
         "Bloom [3, 4] 与 层次定位/层级 [2] 无交集"
@@ -969,14 +728,6 @@
     "concept/02_intermediate/02_memory_management/12_smart_pointers.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ],
-      "D6": [
-        "套话: Smart Pointers. Core Rust concept covering mechanism analysi"
-      ]
-    },
-    "concept/02_intermediate/02_memory_management/24_quiz_memory_management.md": {
-      "D6": [
-        "套话: Quiz Memory Management. Core Rust concept."
       ]
     },
     "concept/02_intermediate/03_error_handling/04_error_handling.md": {
@@ -993,22 +744,12 @@
         "稳定层 nightly/preview 关键词 6 处"
       ]
     },
-    "concept/02_intermediate/03_error_handling/16_error_handling_deep_dive.md": {
-      "D6": [
-        "套话: Error Handling. Core Rust concept covering mechanism analysi"
-      ]
-    },
     "concept/02_intermediate/03_error_handling/27_exception_safety_rust_cpp.md": {
       "D1": [
         "Bloom [4, 5] 与 层次定位/层级 [2] 无交集"
       ],
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
-      ]
-    },
-    "concept/02_intermediate/04_types_and_conversions/20_type_system_advanced.md": {
-      "D6": [
-        "套话: Type System. Core Rust concept covering mechanism analysis, "
       ]
     },
     "concept/02_intermediate/04_types_and_conversions/25_rtti_and_dynamic_typing.md": {
@@ -1028,11 +769,6 @@
         "Rust 版本 声明 2 次: ['1.97.0+ (Edition 2024)', '1.97.0+ (Edition 2024)']"
       ]
     },
-    "concept/02_intermediate/05_modules_and_visibility/10_module_system.md": {
-      "D6": [
-        "套话: Modules. Core Rust concept covering mechanism analysis, in-d"
-      ]
-    },
     "concept/02_intermediate/06_macros_and_metaprogramming/05_assert_matches.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集"
@@ -1044,9 +780,6 @@
     "concept/02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ],
-      "D6": [
-        "套话: Macros. Core Rust concept covering practical examples, mecha"
       ]
     },
     "concept/02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md": {
@@ -1063,29 +796,11 @@
     "concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ],
-      "D6": [
-        "套话: Iterators. Core Rust concept covering practical applications"
       ]
     },
     "concept/03_advanced/00_concurrency/01_concurrency.md": {
       "D1": [
         "Bloom [4, 5] 与 层次定位/层级 [3] 无交集"
-      ]
-    },
-    "concept/03_advanced/00_concurrency/10_concurrency_patterns.md": {
-      "D6": [
-        "套话: Concurrency. Core Rust concept covering mental model buildin"
-      ]
-    },
-    "concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md": {
-      "D6": [
-        "套话: Concurrency. Core Rust concept covering mental model buildin"
-      ]
-    },
-    "concept/03_advanced/00_concurrency/16_lock_free.md": {
-      "D6": [
-        "套话: Locking Primitives. Core Rust concept covering mechanism ana"
       ]
     },
     "concept/03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md": {
@@ -1094,11 +809,6 @@
       ],
       "D3": [
         "对应 Rust 版本 声明 2 次: ['1.97.0+ (Edition 2024)', '1.97.0+ (Edition 2024)']"
-      ]
-    },
-    "concept/03_advanced/00_concurrency/21_quiz_concurrency_async.md": {
-      "D6": [
-        "套话: Quiz Concurrency Async. Core Rust concept."
       ]
     },
     "concept/03_advanced/00_concurrency/22_cross_platform_concurrency.md": {
@@ -1120,9 +830,6 @@
     "concept/03_advanced/01_async/06_pin_unpin.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 3 处"
-      ],
-      "D6": [
-        "套话: Pin and Unpin. Core Rust concept covering mechanism analysis"
       ]
     },
     "concept/03_advanced/01_async/24_async_closures.md": {
@@ -1139,11 +846,6 @@
       ],
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/03_advanced/01_async/26_async_patterns.md": {
-      "D6": [
-        "套话: Concurrency. Core Rust concept covering mechanism analysis, "
       ]
     },
     "concept/03_advanced/02_process_ipc/02_advanced_process_management.md": {
@@ -1192,14 +894,6 @@
     "concept/03_advanced/02_unsafe/08_nll_and_polonius.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 3 处"
-      ],
-      "D6": [
-        "套话: Borrowing. Core Rust concept covering mechanism analysis, in"
-      ]
-    },
-    "concept/03_advanced/02_unsafe/22_quiz_unsafe.md": {
-      "D6": [
-        "套话: Quiz Unsafe. Core Rust concept."
       ]
     },
     "concept/03_advanced/02_unsafe/29_memory_model.md": {
@@ -1234,11 +928,6 @@
     "concept/03_advanced/03_proc_macros/07_proc_macro.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/03_advanced/03_proc_macros/23_quiz_macros.md": {
-      "D6": [
-        "套话: Quiz Macros. Core Rust concept."
       ]
     },
     "concept/03_advanced/03_proc_macros/28_conditional_compilation.md": {
@@ -1280,17 +969,11 @@
     "concept/03_advanced/04_ffi/05_rust_ffi.md": {
       "D3": [
         "对应 Rust 版本 声明 2 次: ['1.97.0+ (Edition 2024)', '1.97.0+ (Edition 2024)']"
-      ],
-      "D6": [
-        "套话: Foreign Function Interface (FFI). Core Rust concept covering"
       ]
     },
     "concept/03_advanced/04_ffi/09_ffi_advanced.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ],
-      "D6": [
-        "套话: Foreign Function Interface (FFI). Core Rust concept covering"
       ]
     },
     "concept/03_advanced/04_ffi/27_linkage.md": {
@@ -1340,11 +1023,6 @@
         "稳定层 nightly/preview 关键词 2 处"
       ]
     },
-    "concept/04_formal/00_type_theory/06_subtype_variance.md": {
-      "D6": [
-        "套话: Type System. Core Rust concept covering mechanism analysis, "
-      ]
-    },
     "concept/04_formal/00_type_theory/10_category_theory.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
@@ -1353,11 +1031,6 @@
     "concept/04_formal/00_type_theory/21_type_semantics.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/04_formal/01_ownership_logic/09_linear_logic_applications.md": {
-      "D6": [
-        "套话: Linear Logic. Core Rust concept covering formal methods foun"
       ]
     },
     "concept/04_formal/01_ownership_logic/28_borrow_checking_decidability.md": {
@@ -1381,29 +1054,9 @@
         "稳定层 nightly/preview 关键词 1 处"
       ]
     },
-    "concept/04_formal/03_operational_semantics/15_hoare_logic.md": {
-      "D6": [
-        "套话: Formal Methods. Core Rust concept covering formal methods fo"
-      ]
-    },
-    "concept/04_formal/03_operational_semantics/17_operational_semantics.md": {
-      "D6": [
-        "套话: Formal Methods. Core Rust concept covering formal methods fo"
-      ]
-    },
     "concept/04_formal/04_model_checking/05_verification_toolchain.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 7 处"
-      ]
-    },
-    "concept/04_formal/04_model_checking/13_formal_methods.md": {
-      "D6": [
-        "套话: Formal Methods. Core Rust concept covering formal methods fo"
-      ]
-    },
-    "concept/04_formal/04_model_checking/16_aerospace_certification_formal_methods.md": {
-      "D6": [
-        "套话: Formal Methods. Core Rust concept covering formal methods fo"
       ]
     },
     "concept/04_formal/04_model_checking/22_modern_verification_tools.md": {
@@ -1414,11 +1067,6 @@
     "concept/04_formal/04_model_checking/24_autoverus.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
-      ]
-    },
-    "concept/04_formal/04_model_checking/25_quiz_formal_methods.md": {
-      "D6": [
-        "套话: Quiz Formal Methods. Core Rust concept."
       ]
     },
     "concept/04_formal/04_model_checking/31_miri.md": {
@@ -1466,11 +1114,6 @@
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5] 无交集"
       ]
     },
-    "concept/05_comparative/00_paradigms/05_execution_model_isomorphism.md": {
-      "D6": [
-        "套话: Concurrency. Core Rust concept covering mental model buildin"
-      ]
-    },
     "concept/05_comparative/00_paradigms/16_cpp_rust_surface_features.md": {
       "D1": [
         "Bloom [4, 5] 与 层次定位/层级 [3] 无交集"
@@ -1500,16 +1143,6 @@
         "稳定层 nightly/preview 关键词 2 处"
       ]
     },
-    "concept/05_comparative/03_domain_comparisons/04_safety_boundaries.md": {
-      "D6": [
-        "套话: Security Practices. Core Rust concept covering security prac"
-      ]
-    },
-    "concept/05_comparative/03_domain_comparisons/17_quiz_rust_vs_systems.md": {
-      "D6": [
-        "套话: Quiz Rust Vs Systems. Core Rust concept."
-      ]
-    },
     "concept/06_ecosystem/00_toolchain/01_toolchain.md": {
       "D1": [
         "Bloom [3, 4, 5] 与 层次定位/层级 [6] 无交集"
@@ -1532,9 +1165,6 @@
       ],
       "D5": [
         "稳定层 nightly/preview 关键词 3 处"
-      ],
-      "D6": [
-        "套话: DevOps and CI/CD. Core Rust concept covering testing strateg"
       ]
     },
     "concept/06_ecosystem/00_toolchain/45_compiler_internals.md": {
@@ -1545,11 +1175,6 @@
     "concept/06_ecosystem/00_toolchain/47_compiler_infrastructure.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 14 处"
-      ]
-    },
-    "concept/06_ecosystem/00_toolchain/57_quiz_toolchain.md": {
-      "D6": [
-        "套话: Quiz Toolchain. Core Rust concept."
       ]
     },
     "concept/06_ecosystem/00_toolchain/58_platform_rust_integration.md": {
@@ -1843,9 +1468,6 @@
     "concept/06_ecosystem/04_web_and_networking/24_cloud_native.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集"
-      ],
-      "D6": [
-        "套话: Cloud Native. Core Rust concept covering mechanism analysis,"
       ]
     },
     "concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md": {
@@ -1894,9 +1516,6 @@
     "concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集"
-      ],
-      "D6": [
-        "套话: Embedded Systems. Core Rust concept covering mechanism analy"
       ]
     },
     "concept/06_ecosystem/05_systems_and_embedded/25_cli_development.md": {
@@ -1934,17 +1553,11 @@
       ],
       "D5": [
         "稳定层 nightly/preview 关键词 3 处"
-      ],
-      "D6": [
-        "套话: Application Domains. Core Rust concept covering mental model"
       ]
     },
     "concept/06_ecosystem/06_data_and_distributed/23_database_access.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集"
-      ],
-      "D6": [
-        "套话: Database Access. Core Rust concept covering mechanism analys"
       ]
     },
     "concept/06_ecosystem/06_data_and_distributed/48_data_engineering.md": {
@@ -1961,11 +1574,6 @@
       ],
       "D3": [
         "Bloom 层级 声明 2 次: ['L4-L5', 'L4-L5']"
-      ]
-    },
-    "concept/06_ecosystem/07_security_and_cryptography/19_security_practices.md": {
-      "D6": [
-        "套话: Security Practices. Core Rust concept covering practical exa"
       ]
     },
     "concept/06_ecosystem/07_security_and_cryptography/43_security_cryptography.md": {
@@ -2006,9 +1614,6 @@
       ],
       "D5": [
         "稳定层 nightly/preview 关键词 4 处"
-      ],
-      "D6": [
-        "套话: Testing. Core Rust concept covering formal methods foundatio"
       ]
     },
     "concept/06_ecosystem/09_testing_and_quality/14_documentation.md": {
@@ -2022,9 +1627,6 @@
       ],
       "D5": [
         "稳定层 nightly/preview 关键词 1 处"
-      ],
-      "D6": [
-        "套话: Testing. Core Rust concept covering testing and verification"
       ]
     },
     "concept/06_ecosystem/09_testing_and_quality/17_benchmarking.md": {
@@ -2038,9 +1640,6 @@
     "concept/06_ecosystem/10_performance/15_performance_optimization.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 2 处"
-      ],
-      "D6": [
-        "套话: Performance Optimization. Core Rust concept covering perform"
       ]
     },
     "concept/06_ecosystem/11_domain_applications/06_blockchain.md": {
@@ -2071,9 +1670,6 @@
       ],
       "D5": [
         "稳定层 nightly/preview 关键词 5 处"
-      ],
-      "D6": [
-        "套话: WebAssembly. Core Rust concept covering mechanism analysis, "
       ]
     },
     "concept/06_ecosystem/11_domain_applications/20_licensing_and_compliance.md": {
@@ -2084,17 +1680,11 @@
     "concept/06_ecosystem/11_domain_applications/21_game_development.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集"
-      ],
-      "D6": [
-        "套话: Game Development. Core Rust concept covering mechanism analy"
       ]
     },
     "concept/06_ecosystem/11_domain_applications/26_game_development.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4, 5] 无交集"
-      ],
-      "D6": [
-        "套话: Game Development. Core Rust concept covering mechanism analy"
       ]
     },
     "concept/06_ecosystem/11_domain_applications/29_algorithms_competitive_programming.md": {
@@ -2187,14 +1777,6 @@
     "concept/07_future/03_preview_features/04_effects_system.md": {
       "D1": [
         "Bloom [4, 5] 与 层次定位/层级 [7] 无交集"
-      ],
-      "D6": [
-        "套话: Effect System. Core Rust concept covering practical applicat"
-      ]
-    },
-    "concept/07_future/03_preview_features/09_parallel_frontend_preview.md": {
-      "D6": [
-        "套话: Compiler Internals. Core Rust concept covering mechanism ana"
       ]
     },
     "concept/07_future/03_preview_features/31_safety_tags_preview.md": {
@@ -2210,11 +1792,6 @@
     "concept/07_future/03_preview_features/37_rpitit_preview.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集"
-      ]
-    },
-    "concept/07_future/03_preview_features/38_cranelift_backend_preview.md": {
-      "D6": [
-        "套话: Compiler Internals. Core Rust concept covering mechanism ana"
       ]
     },
     "concept/07_future/03_preview_features/49_rust_in_space.md": {
@@ -2249,17 +1826,11 @@
       ],
       "D3": [
         "Bloom 层级 声明 2 次: ['L3-L5', 'L3-L5']"
-      ],
-      "D6": [
-        "套话: WebAssembly. Core Rust concept covering mental model buildin"
       ]
     },
     "concept/07_future/04_research_and_experimental/43_rust_for_linux.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
-      ],
-      "D6": [
-        "套话: Operating Systems. Core Rust concept covering mechanism anal"
       ]
     },
     "concept/sources/INDEX.md": {
@@ -2270,14 +1841,6 @@
     "concept/sources/rfc_index.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 12 处"
-      ],
-      "D6": [
-        "套话: Rfc Index. Core Rust concept."
-      ]
-    },
-    "concept/sources/theorem_tier_spec.md": {
-      "D6": [
-        "套话: Theorem Tier Spec. Core Rust concept."
       ]
     }
   }

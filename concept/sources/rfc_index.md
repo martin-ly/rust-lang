@@ -7,7 +7,7 @@
 # RFC 索引：关键设计提案跟踪
 >
 > **EN**: Rfc Index
-> **Summary**: Rfc Index. Core Rust concept.
+> **Summary**: Rfc Index — An index tracking RFCs with structural impact on Rust's semantics, type system, memory model, concurrency, and ecosystem.
 >
 > | RFC | 标题 | 状态 | 稳定版本 | 概念文件 |
 > | :--- | :--- | :---: | :---: | :--- |

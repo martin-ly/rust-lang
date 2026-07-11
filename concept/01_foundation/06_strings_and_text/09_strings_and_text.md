@@ -6,7 +6,7 @@
 # 字符串与文本：Rust 的 Unicode 处理与格式化系统
 >
 > **EN**: Strings and Text
-> **Summary**: Strings and Text: core Rust concepts, syntax, and examples.
+> **Summary**: Strings and Text — Rust's string and text types, Unicode handling, and the formatting system.
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[字符串与文本](../../../knowledge/02_intermediate/05_strings.md)

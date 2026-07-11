@@ -3,7 +3,7 @@
 # Rust FFI：与外部代码的安全边界
 >
 > **EN**: Foreign Function Interface (FFI)
-> **Summary**: Foreign Function Interface (FFI). Core Rust concept covering practical examples, mechanism analysis, unsafe Rust and memory safety.
+> **Summary**: Foreign Function Interface (FFI) — Extern blocks, ABI compatibility, unsafe boundary management, and the bindgen/cbindgen tooling.
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[FFI](../../../knowledge/03_advanced/02_ffi.md)

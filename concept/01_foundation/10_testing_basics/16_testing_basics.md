@@ -13,7 +13,7 @@
 # 测试基础：从单元测试到集成测试
 >
 > **EN**: Testing
-> **Summary**: Testing. Core Rust concept covering testing strategies, mechanism analysis.
+> **Summary**: Testing — Testing basics: unit, integration, documentation, and benchmark tests built into Rust's toolchain.
 > **受众**: [初学者]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。

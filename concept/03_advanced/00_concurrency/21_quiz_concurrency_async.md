@@ -3,7 +3,7 @@
 # 测验：并发与异步（L3 试点扩展）
 >
 > **EN**: Concurrency
-> **Summary**: Quiz Concurrency Async. Core Rust concept.
+> **Summary**: Concurrency — An interactive quiz checking L3 concurrency (Send/Sync, Mutex/Arc, channels) and async (Future, Pin, await).
 > **受众**: [专家]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。

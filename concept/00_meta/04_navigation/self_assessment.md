@@ -1,7 +1,7 @@
 # Rust 知识体系自测题库（Self-Assessment）
 >
 > **EN**: Self Assessment
-> **Summary**: Self Assessment. Core Rust concept.
+> **Summary**: Self Assessment — Per-level self-test questions with answers and explanations to verify knowledge mastery.
 >
 > **受众**: [初学者]
 >

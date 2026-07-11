@@ -3,7 +3,7 @@
 > **代码状态**: ✅ 含可编译示例
 >
 > **EN**: Compiler Internals
-> **Summary**: Compiler Internals. Core Rust concept covering mechanism analysis, compiler internals, compiler backend.
+> **Summary**: Compiler Internals — Cranelift as an alternative rustc backend: effects on compile time, debug experience, and iteration speed versus LLVM.
 >
 > **状态**: 🧪 Nightly 实验性 | ⚠️ **官方因资金不足进展停滞 (2026-05)**
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`

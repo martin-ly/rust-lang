@@ -1,7 +1,7 @@
 # Rust 知识体系层次内模型间映射图
 >
 > **EN**: Intra Layer Model Map
-> **Summary**: Intra Layer Model Map. Core Rust concept.
+> **Summary**: Intra Layer Model Map — How core models within each layer (L1-L4) define, support, and constrain one another.
 >
 > **受众**: [进阶]
 >

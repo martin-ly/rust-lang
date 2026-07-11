@@ -5,7 +5,7 @@
 # Rust 游戏开发生态
 >
 > **EN**: Game Development
-> **Summary**: Game Development. Core Rust concept covering mechanism analysis, memory safety guarantees, performance optimization.
+> **Summary**: Game Development — Rust in game development: Bevy ECS and WGPU rendering, where safety and performance reshape engine design.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4

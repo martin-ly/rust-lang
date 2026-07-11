@@ -1,7 +1,7 @@
 # RustBelt 谓词映射图（RustBelt Predicate Map）
 >
 > **EN**: RustBelt
-> **Summary**: RustBelt. Core Rust concept covering formal methods foundations, practical examples.
+> **Summary**: RustBelt — A visual map from RustBelt's own and shr predicates to L1-L3 engineering concepts, bridging symbols and code intuition.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

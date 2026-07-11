@@ -7,7 +7,7 @@
 # 零成本抽象：Rust 的性能哲学
 >
 > **EN**: Zero Cost Abstractions
-> **Summary**: Zero Cost Abstractions: core Rust concepts, syntax, and examples.
+> **Summary**: Zero Cost Abstractions — How generics, iterators, and trait objects remove runtime overhead at compile time, contrasted with C++'s zero-overhead principle.
 > **受众**: [初学者]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。

@@ -4,7 +4,7 @@
 # Rust 安全保证的边界条件全景（Safety Boundary Panorama）
 >
 > **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept covering security practices.
+> **Summary**: Security Practices — A panorama of the boundary conditions, failure cases, and counterexamples of Rust's compile-time safety guarantees.
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件汇总 Rust 所有**编译期安全保证**的边界条件、失效场景和反例，形成完整的"安全 ⇄ 不安全"边界地图。

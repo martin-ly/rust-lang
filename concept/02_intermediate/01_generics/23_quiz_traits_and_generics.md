@@ -3,7 +3,7 @@
 # 测验：Trait 与泛型（试点扩展）
 >
 > **EN**: Generics
-> **Summary**: Quiz Traits And Generics. Core Rust concept.
+> **Summary**: Generics — An interactive quiz checking L2 traits and generics: definitions, bounds, associated types, and trait objects.
 > ```rust trait Summary { fn summarize(&self) -> String; } struct Article { headline: String, } fn main() { let article = Article { headline: String::from("News") }; println!("{}", article.summarize()); }```
 > <details> <summary>💡 点击展开答案与解析</summary>
 > **答案**：❌ 不能编译。

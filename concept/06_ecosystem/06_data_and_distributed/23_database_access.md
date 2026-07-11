@@ -5,7 +5,7 @@
 # Rust 数据库访问生态
 >
 > **EN**: Database Access
-> **Summary**: Database Access. Core Rust concept covering mechanism analysis, ecosystem and tooling, HTTP and web services.
+> **Summary**: Database Access — SQLx compile-time checking and the Diesel ORM, using type safety to eliminate runtime query errors.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4

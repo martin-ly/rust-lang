@@ -3,7 +3,7 @@
 # 无锁编程与内存模型
 >
 > **EN**: Locking Primitives
-> **Summary**: Locking Primitives. Core Rust concept covering mechanism analysis, in-depth analysis, memory safety guarantees.
+> **Summary**: Locking Primitives — Lock-free programming: atomic operations and memory ordering, with memory-safety guarantees and performance benefits.
 > **受众**: [专家]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。

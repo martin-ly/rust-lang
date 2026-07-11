@@ -13,7 +13,7 @@
 > **代码状态**: ✅ 含可编译示例
 >
 > **EN**: Effect System
-> **Summary**: Effect System. Core Rust concept covering practical applications, type system mechanics.
+> **Summary**: Effect System — A speculative pre-study tracking the type system's move toward explicit effect tracking.
 > **来源**:
 >
 > [Rust Project Goals 2025H1 — const traits](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html) ·

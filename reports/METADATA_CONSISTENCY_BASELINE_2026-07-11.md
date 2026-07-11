@@ -9,9 +9,9 @@
 | D3 关键字段同文件重声明 | 71 | 14.9% | >0 | FAIL |
 | D4 文首块 Rust 版本号自矛盾 | 1 | 0.2% | >0 | FAIL |
 | D5 稳定层正文残留 nightly/preview/unstable | 113 | 23.7% | >0 | FAIL |
-| D6 Summary 低信息量模板套话 | 109 | 22.9% | >=3% | FAIL |
+| D6 Summary 低信息量模板套话 | 8 | 1.7% | >=3% | pass |
 
-**受影响文件总数**: 301 / 476
+**受影响文件总数**: 242 / 476
 
 ## 各类 Top 样例
 
@@ -79,20 +79,16 @@
 - `concept/00_meta/03_audit/grading_system.md` — 稳定层 nightly/preview 关键词 8 处
 - `concept/00_meta/04_navigation/quick_reference.md` — 稳定层 nightly/preview 关键词 2 处
 
-### D6 Summary 低信息量模板套话（109）
+### D6 Summary 低信息量模板套话（8）
 
 - `concept/SUMMARY.md` — Summary 为空
-- `concept/00_meta/00_framework/cognitive_dimension_matrix.md` — 套话: Cognitive Dimension Matrix. Core Rust concept.
-- `concept/00_meta/00_framework/competency_graph.md` — 套话: Competency Graph. Core Rust concept.
-- `concept/00_meta/00_framework/comprehensive_rust_mapping.md` — 套话: Comprehensive Rust Mapping. Core Rust concept.
-- `concept/00_meta/00_framework/concept_definition_decision_forest.md` — 套话: Concept Definition Decision Forest. Core Rust concept.
-- `concept/00_meta/00_framework/decidability_spectrum.md` — 套话: Decidability Spectrum. Core Rust concept.
-- `concept/00_meta/00_framework/expressiveness_multiview.md` — 套话: Expressiveness Multiview. Core Rust concept.
-- `concept/00_meta/00_framework/fault_tree_analysis_collection.md` — 套话: Fault Tree Analysis Collection. Core Rust concept.
-- `concept/00_meta/00_framework/knowledge_mindmap.md` — 套话: Knowledge Mindmap. Core Rust concept.
-- `concept/00_meta/00_framework/paradigm_transition_matrix.md` — 套话: Paradigm Transition Matrix. Core Rust concept.
-- `concept/00_meta/00_framework/semantic_space.md` — 套话: Semantic Space. Core Rust concept.
-- `concept/00_meta/00_framework/theorem_inference_forest.md` — 套话: Theorem Inference Forest. Core Rust concept.
+- `concept/00_meta/02_sources/authority_source_map.md` — 套话: Authority Source Map. Core Rust concept.
+- `concept/00_meta/03_audit/concept_audit_guide.md` — 套话: Concept Audit Guide. Core Rust concept.
+- `concept/06_ecosystem/01_cargo/59_cargo_build_scripts.md` — 套话: A comprehensive guide to `build.rs`: when it runs, how to pa
+- `concept/06_ecosystem/01_cargo/87_build_std.md` — 套话: A comprehensive guide to Cargo's unstable `build-std` featur
+- `concept/06_ecosystem/09_testing_and_quality/17_benchmarking.md` — 套话: Core Rust concept covering statistical benchmarking with Cri
+- `concept/07_future/00_version_tracking/migration_197_decision_tree.md` — Summary 为空
+- `concept/07_future/04_research_and_experimental/02_formal_methods.md` — 套话: Formal Methods. Core Rust concept covering practical example
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
@@ -101,7 +97,6 @@
 - D3 字段重声明 71 (>0)
 - D4 版本自矛盾 1 (>0)
 - D5 稳定层nightly残留 113 (>0)
-- D6 Summary套话 109 (22.9%>=3%)
 
 ## 机器可读
 

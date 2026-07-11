@@ -1,7 +1,7 @@
 # Rust 知识体系思维表征覆盖率仪表板（Quality Dashboard v2）
 >
 > **EN**: Quality Dashboard V2
-> **Summary**: Quality Dashboard V2. Core Rust concept.
+> **Summary**: Quality Dashboard V2 — A dashboard tracking coverage, source-alignment, and consistency trends for every representation type in the concept base.
 > **受众**: [专家]
 > **Bloom 层级**: Meta
 > **权威来源**: 本文件为 `concept/` 权威页。

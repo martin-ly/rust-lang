@@ -13,7 +13,7 @@
 # Rust 知识体系双维认知矩阵（Krathwohl × Bloom）
 >
 > **EN**: Cognitive Dimension Matrix
-> **Summary**: Cognitive Dimension Matrix. Core Rust concept.
+> **Summary**: Cognitive Dimension Matrix — A two-dimensional matrix crossing Krathwohl knowledge types with Bloom cognitive processes to position every concept.
 > **受众**: [研究者]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: Meta

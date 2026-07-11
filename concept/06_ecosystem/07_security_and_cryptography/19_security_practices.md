@@ -8,7 +8,7 @@
 
 >
 > **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept covering practical examples, memory safety and UB prevention, testing and verification.
+> **Summary**: Security Practices — Security practices: input validation, cryptography, auditing, and supply-chain security atop memory safety.
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。

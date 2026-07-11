@@ -6,7 +6,7 @@
 # DevOps 与 CI/CD：Rust 的持续交付工程实践
 >
 > **EN**: DevOps and CI/CD
-> **Summary**: DevOps and CI/CD. Core Rust concept covering testing strategies, practical examples, practical applications.
+> **Summary**: DevOps and CI/CD — Rust DevOps and CI/CD: GitHub Actions, cargo-release, cross-compilation, Docker, build caching, and security audits.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L5
