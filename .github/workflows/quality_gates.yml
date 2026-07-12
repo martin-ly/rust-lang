@@ -398,6 +398,22 @@ jobs:
         run: python scripts/check_naming_convention.py
         continue-on-error: true
 
+  concept-code-blocks:
+    name: Concept Code Blocks (observe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@1.97.0
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run concept/ code block compile check (observe; sample 300 + all compile_fail blocks)
+        run: python scripts/check_concept_code_blocks.py
+        continue-on-error: true
+
   quality-gates-summary:
     name: Quality Gates Summary
     runs-on: ubuntu-latest
@@ -421,6 +437,7 @@ jobs:
       - canonical-uniqueness
       - concept-consistency-audit
       - naming-convention
+      - concept-code-blocks
     if: always() && github.event_name == 'pull_request'
     steps:
       - name: Generate summary comment
@@ -446,7 +463,8 @@ jobs:
               'Concept Authority Coverage (observe)': '${{ needs.concept-authority-coverage.result }}',
               'Canonical Uniqueness (strict)': '${{ needs.canonical-uniqueness.result }}',
               'Concept Consistency Audit (strict)': '${{ needs.concept-consistency-audit.result }}',
-              'Naming Convention (observe)': '${{ needs.naming-convention.result }}'
+              'Naming Convention (observe)': '${{ needs.naming-convention.result }}',
+              'Concept Code Blocks (observe)': '${{ needs.concept-code-blocks.result }}'
             };
 
             let status = '✅';
@@ -471,7 +489,7 @@ jobs:
             ${summary}
 
             ---
-            *All 20 quality gates completed (14 blocking + 6 semantic observe)*`;
+            *All 21 quality gates completed (15 blocking + 6 semantic observe)*`;
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,

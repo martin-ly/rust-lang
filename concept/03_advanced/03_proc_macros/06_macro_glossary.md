@@ -69,7 +69,13 @@
 
 ## 🎨 宏类型术语
 
-本节围绕「宏类型术语」展开，依次讨论 Macro (宏)、Declarative Macro (声明宏)与Procedural Macro (过程宏)。
+本页是宏系统术语的权威速查表。宏类型三个核心术语的精确定义：
+
+- **Macro（宏）**：编译期执行的「代码生成规则/程序」，输入语法结构、输出代码。Rust 宏的统一特征：在解析后展开、输出必须是合法 token 树、遵循卫生性规则。与「函数」的分界线是执行时机（编译期 vs 运行期），与「泛型」的分界线是「生成代码 vs 实例化代码」。
+- **Declarative Macro（声明宏）**：`macro_rules!` 定义的宏——「声明」指其定义形式是「一组模式-转录规则的陈述」而非算法。别名「示例宏」（macro by example, MBE）更贴近其本质：每条规则是一个「输入示例 → 输出示例」的模板。能力边界：只能做语法结构变换，不能分析语义（看不到类型、看不到值）。
+- **Procedural Macro（过程宏）**：以 Rust 函数（过程）实现的宏——「过程」指其定义是命令式算法。编译为编译器插件动态库，在展开阶段执行。三种注册形式（derive/attribute/function-like）决定「它能标注/出现在什么语法位置」，不决定能力（三者都操作完整 TokenStream）。
+
+术语辨析速记：「声明 vs 过程」是**实现方式**之分（规则 vs 算法），「derive/attribute/function-like」是**注册形式**之分（语法位置），两组术语正交——所有 derive 宏都是过程宏，但过程宏不只有 derive。
 
 ### Macro (宏)
 
@@ -373,7 +379,14 @@ let span = ident.span();       // 标识符位置
 
 ## 🧹 卫生性与作用域
 
-本节将「卫生性与作用域」分解为若干主题： Hygiene (卫生性)、Call Site (调用点)、Definition Site (定义点)与Mixed Site (混合点)。
+卫生性（hygiene）相关四个术语定义了「宏生成代码中的名字如何解析」的完整规则体系：
+
+- **Hygiene（卫生性）**：宏展开代码中的标识符解析遵循「定义点可见性」与「调用点可见性」的分离规则——宏内部定义的 `let tmp` 不与调用点的 `tmp` 冲突，宏参数 `$e` 中的标识符按调用点解析。形式化来源：Kohlbecker (1986) 的 hygiene 条件——「宏展开等价于先把所有标识符按来源染色，再按颜色解析绑定」。Rust 的 `macro_rules!` 是部分卫生（局部变量/标签卫生，项级路径不卫生——宏内 `println!` 需调用点可解析或写 `::std::` 全路径）。
+- **Call Site（调用点）**：宏被调用的源码位置。`Span::call_site()` 使生成标识符按「调用处可见的名字」解析——过程宏生成「引用用户类型」的代码时的默认选择。
+- **Definition Site（定义点）**：宏定义所在的源码位置。按定义点解析的标识符只能看到宏 crate 内部的绑定——`macro_rules!` 的局部变量默认如此（这是卫生性的实现），过程宏需 nightly 的 `Span::def_site()`。
+- **Mixed Site（混合点）**：`Span::mixed_site()`——局部变量按定义点（卫生）、项路径与宏调用按调用点（可解析用户代码），复刻 `macro_rules!` 的混合卫生行为，是过程宏模拟声明宏语义的标准选择。
+
+判定一个「cannot find X in this scope」宏错误：看 X 是什么——局部变量冲突是卫生性问题（改名或用 mixed_site），项/路径找不到是 span 选择问题（改 call_site + 全路径），`$crate` 缺失是声明宏跨 crate 问题。
 
 ### Hygiene (卫生性)
 
@@ -444,7 +457,13 @@ let span = Span::mixed_site();
 
 ## 🛠️ 工具与库
 
-本节从 cargo-expand、proc-macro2与trybuild切入，剖析「工具与库」的核心内容。
+宏工程生态的三个必备工具/库，覆盖「调试 → 基础 → 测试」全流程：
+
+- **cargo-expand**：`cargo expand` 子命令，展示宏完全展开后的源码——调试「宏生成了什么」的唯一权威手段（编译器错误信息指向展开后代码时尤其必需）。原理是调用 rustc 的 `-Zunpretty=expanded`（nightly）或内置等效路径；大型项目用 `cargo expand --lib path::to::module` 缩小输出范围。
+- **proc-macro2**：`proc_macro` API 的「宏外可用」镜像——`proc_macro::TokenStream` 只能在编译器插件进程内存在，`proc_macro2::TokenStream` 是功能等价的自有类型，使「代码生成逻辑」可在普通二进制/测试进程中构造与断言。生态事实标准：syn/quote 全部建立在 proc-macro2 之上；写过程宏时，生成逻辑一律针对 `proc_macro2::TokenStream`，只在入口边界与 `proc_macro` 互转（`From` 双向实现）。
+- **trybuild**：过程宏的「编译期望测试」框架——测试用例是「应当编译通过/应当编译失败且错误信息匹配」的 `.rs` 文件，失败用例配 `.stderr` 快照。它把「宏的报错质量」纳入回归测试：错误 span 漂移、诊断文本变化都会 fail CI。这是过程宏质量与「 toy 宏」的分水岭工具。
+
+工具链组合：开发期 `cargo expand` 看展开 → 逻辑层 proc-macro2 单元测试 → 集成层 trybuild 编译期望测试——三层覆盖「生成正确内容、内容能编译、报错可理解」的全部验收维度。
 
 ### cargo-expand
 

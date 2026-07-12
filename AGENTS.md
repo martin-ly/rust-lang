@@ -188,8 +188,11 @@ cargo test --workspace
 # mdbook 构建（输出到 book/，不应提交）
 mdbook build
 
-# 本地一键运行全部 20 个质量门（15 阻断 + 5 语义观察）
+# 本地一键运行全部 21 个质量门（15 阻断 + 6 语义观察）
 bash scripts/run_quality_gates.sh
+
+# concept/ 代码块批量编译实测（观察门 20；--with-deps 需先 cargo build --workspace）
+python scripts/check_concept_code_blocks.py --sample 0 --with-deps --json tmp/cb.json --report reports/xxx.md
 
 # 命名规范 lint（AGENTS.md §4.0：N1–N6；默认观察 exit 0，--strict 转阻断）
 python scripts/check_naming_convention.py
@@ -198,9 +201,9 @@ python scripts/check_naming_convention.py
 bash scripts/git_hooks/install.sh
 ```
 
-### 5.1 CI 质量门（20 项：15 阻断 + 5 语义观察）
+### 5.1 CI 质量门（21 项：15 阻断 + 6 语义观察）
 
-所有合并到 `main`/`master` 的变更必须通过以下 **15 个阻断质量门**；另有 **5 个语义观察门**（warning，不阻断，默认 exit 0，加 `--strict` 可转阻断）持续追踪语义健康：
+所有合并到 `main`/`master` 的变更必须通过以下 **15 个阻断质量门**；另有 **6 个语义观察门**（warning，不阻断，默认 exit 0，加 `--strict` 可转阻断）持续追踪语义健康：
 
 **阻断门（15）**：
 
@@ -220,12 +223,13 @@ bash scripts/git_hooks/install.sh
 14. `python scripts/concept_consistency_auditor.py --strict`（跨文件概念定义一致性；2026-07-12 转正）
 15. `python scripts/detect_content_overlap_v2.py --budget 999999` + `python scripts/triage_overlap.py`（段落级重叠 v2；可处理项 MERGE+DOCS_INTERNAL 基线 0，超 0 即阻断；2026-07-12 转正，清零证据见 `reports/DEDUP_V2_ZERO_2026_07_12.md` 与 §5.2）
 
-**语义观察门（5，非阻断）**：
+**语义观察门（6，非阻断）**：
 16. `python scripts/check_metadata_consistency.py`（元数据 D1–D6；2026-07-13 D1–D6 全 0 且 --strict exit 0：D2 豁免 2 项 / D5 豁免 29 项（15 项 2026-07-12 + 14 项 2026-07-13 W0–W5 新建页逐文件复核）均已显式登记于检查器白名单并附理由；2026-07-13 另修复 NIGHTLY_RE 词边界误报（`target_feature(` 误匹配 `feature\s*\(`））
 17. `python scripts/semantic_health.py`（综合语义健康分；grade=FAIL 时 --strict 才阻断）
 18. `python scripts/check_concept_authority_coverage.py`（concept 权威层国际化权威来源覆盖率；--strict 已支持且当前 exit=0，见 §5.2；`--include-crates` 附加 crates/*/docs 覆盖小节：crates 非 stub 内容页 64/64=100%，默认观察 exit 0，--strict 时 crates 缺口>0 亦阻断；2026-07-12 扩展）
 19. `python scripts/check_examples_compile.py`（根 examples/ 游离示例编译保护；9 stdlib rustc 直编 + 3 依赖示例经 `examples/examples_check/` crate + 2 Cargo Script 豁免；2026-07-12 新增，P3-5）
-20. `python scripts/check_naming_convention.py`（命名规范 lint，AGENTS.md §4.0 N1–N6；扫描 concept/knowledge/docs/content/crates/*/docs；基线 ERROR=0/WARN=78（2026-07-12 命名收尾后）；2026-07-12 新增）
+20. `python scripts/check_concept_code_blocks.py`（concept/ 代码块批量编译实测；提取 ```rust 块分类 10 桶，compile_fail 验证确实失败+E0xxx/editionNNNN 校验，std-only 候选 >300 分层抽样 rustc 1.97 --edition 2024 直编（自动包 fn main），`--with-deps` 用 target/debug/deps rmeta --extern 实测依赖块；默认观察 exit 0，`--strict` 时“应过但失败/标注腐烂”>0 → exit 1；2026-07-13 由附加小节提升为独立观察门，基线 `reports/CONCEPT_CODE_BLOCKS_BASELINE_2026_07_13.md`：4751 块 / 实测 2934 / 腐烂修复 30 块后 rot=371，其中缺上下文类 ~250 已登记清单）
+21. `python scripts/check_naming_convention.py`（命名规范 lint，AGENTS.md §4.0 N1–N6；扫描 concept/knowledge/docs/content/crates/*/docs；基线 ERROR=0/WARN=78（2026-07-12 命名收尾后）；2026-07-12 新增）
 
 > 说明：语义观察门用于“可机器复核的语义趋势”，不因单项退化阻断 PR；但当任一观察门指标显著恶化时，应在 PR 描述中说明原因与后续治理计划。权威覆盖门（18）目标基线为 concept/ 真内容页 any=100%、none=0、核心 L1–L4 无 P0 缺口=0。
 
@@ -233,7 +237,7 @@ bash scripts/git_hooks/install.sh
 
 **转正规则**：任一语义观察门**连续 4 周（或连续 10 次 CI 运行）达标**，经评估后转为阻断门（在 `run_quality_gates.sh` 与 `quality_gates.yml` 中改为 `--strict` 且 `continue-on-error: false`）。转正前提：本地实跑 `--strict` 当前 exit=0。转正后若指标退化阻断 PR，按正常阻断门流程处置，不自动降级。
 
-**当前各观察门基线状态（2026-07-12，摘自 `reports/` 最新基线）**：
+**当前各观察门基线状态（2026-07-13 更新，concept code blocks 新增；其余摘自 `reports/` 最新基线）**：
 
 | 门 | 基线指标（2026-07-12） | --strict 实跑 | 状态 |
 |---|---|:---:|---|
@@ -247,6 +251,7 @@ bash scripts/git_hooks/install.sh
 | semantic health | 总分 99.6 grade OK（元数据 100.0 / 拓扑 98.4 / 去重 100.0 / KG 100.0；2026-07-13 W0–W5 收尾复核同值） | exit 0 | ⏳ 维持观察（聚合门） |
 | authority coverage | 内容页 P0/P1/P2/any 全 100% / none=0 / 核心 L1–L4 无 P0 缺口=0（2026-07-12 补齐唯一 P2 缺口页）；`--include-crates` 扩展：crates docs 576 文件（含嵌套子 crate）中非 stub 内容页 64/64=100%（stub 509 / 纯索引 README 2 / 代码清单豁免 1 登记） | exit 0 | ⏳ 维持观察（--strict 已实现且 exit 0，连续达标后可评估转正） |
 | examples compile | 14 游离示例：9 stdlib ✅ + 3 deps ✅（经 `examples/examples_check/` crate）+ 2 Cargo Script 豁免 | exit 0 | ⏳ 新增观察门（2026-07-12，P3-5；连续达标后可评估转正） |
+| concept code blocks | 4751 块分 10 桶；全量实测 2934（candidate 1703 pass/202 fail + compile_fail 706 ok/1 标注腐烂 + dep 116 pass/167 fail/39 无 rmeta）；2026-07-13 修复腐烂 30 块（误标 compile_fail 16 + 缺上下文/真腐烂 14），剩余 rot=371 中缺上下文类 ~250 登记清单待后续轮次（`reports/CONCEPT_CODE_BLOCKS_BASELINE_2026_07_13.md`） | exit 0（观察；--strict 当前 rot>0 会 exit 1，未启用） | ⏳ 新增观察门（2026-07-13，P2；缺上下文清单治理后可评估转正） |
 
 **去重 v2 转阻断完成（P2-5 收尾，2026-07-12）**：v1（阻断门 8）报 1 对而 v2 报 552 对，v1 漏检属实；v2 可处理项 54 已于 2026-07-12 清零——autoverus 近克隆对（双向计数 2）按 canonical 裁定差异化改写（L4 `04_formal/04_model_checking/07_autoverus.md` 保留为概念权威页，L7 `07_future/03_preview_features/33_autoverus_preview.md` 改写为预览跟踪页），其余 52 对逐对人工复核后登记 SERIES 白名单（docs/05_practice 项目指南系列 48 对 + design_theory 子目录索引系列 4 对，证据注释见 `scripts/triage_overlap.py` `SERIES_PATH_RE`）。本门已转阻断：`run_quality_gates.sh` 与 `quality_gates.yml` 中可处理项（MERGE+DOCS_INTERNAL）> 0 即 exit 1，nightly 同步纳入 issue 触发条件。SERIES 白名单：`triage_overlap.py` 正则 + `SERIES_PATH_RE` 路径族 + 显式 `SERIES_PAIRS` 登记（2026-07-12 人工复核：c10 examples_collection/part2 分章、c02 readme_rust_189/190 版本系列、docs/05_practice 项目系列、design_theory 索引系列）。
 
@@ -259,7 +264,7 @@ bash scripts/git_hooks/install.sh
 3. **不要** 在 `archive/` 中创建新的活跃内容副本。
 4. **不要** 在 `crates/*/docs/` 中复制通用概念解释；应链接到 `concept/`。
 5. **新增重复内容必须被 CI 或人工 review 拦截**。
-6. **禁止未经验证的“完成”声明**：任何“已完成/全部通过/100%”类结论必须引用可机器复核的证据（质量门报告、脚本输出、CI 记录），且必须同时核对 15 阻断门与 5 语义观察门；仅阻断门通过不得宣称“质量门全部通过”。报告与观察门状态矛盾时，以观察门最新报告为准并勘误原报告。
+6. **禁止未经验证的“完成”声明**：任何“已完成/全部通过/100%”类结论必须引用可机器复核的证据（质量门报告、脚本输出、CI 记录），且必须同时核对 15 阻断门与 6 语义观察门；仅阻断门通过不得宣称“质量门全部通过”。报告与观察门状态矛盾时，以观察门最新报告为准并勘误原报告。
 
 ---
 
