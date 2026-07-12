@@ -96,6 +96,8 @@ mindmap
     - [测验 3：NonZero 类型优化（应用层）](#测验-3nonzero-类型优化应用层)
     - [测验 4：浮点数陷阱（分析层）](#测验-4浮点数陷阱分析层)
     - [测验 5：`usize` 的平台相关性与跨平台风险（理解层）](#测验-5usize-的平台相关性与跨平台风险理解层)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -832,7 +834,7 @@ fn main() {
 
 ### 12.8 边界测试：`usize`/`isize` 平台相关大小（编译错误）
 
-```rust,compile_fail
+```rust,no_run
 fn main() {
     let x: usize = 1_000_000_000_000;
     // usize 与 u64 即使同宽也是不同类型，需要显式 as 转换
@@ -1087,3 +1089,21 @@ fn main() {
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [Brown University Interactive Rust Book — Quiz Design](https://rust-book.cs.brown.edu/) · [IEEE 754 Standard](https://ieeexplore.ieee.org/document/8766229)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 类型谱系 | `i8`–`i128` / `u8`–`u128` / `isize` / `usize` / `f32` / `f64` | 固定宽度 + 指针宽度整数 |
+| 溢出语义 | debug 构建 panic，release 默认环绕（two's complement） | Reference 算术溢出规则 |
+| 显式控制 | `checked_` / `saturating_` / `wrapping_` / `overflowing_` 四族方法 | 标准库 API |
+| 字面量推断 | 无后缀整数字面量默认 `i32`，浮点默认 `f64` | 类型推断回退规则 |
+| 浮点模型 | IEEE 754-2008；`NaN` 破坏全序，仅实现 `PartialOrd` | `f32`/`f64` 文档 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Type System](01_type_system.md) 的标量类型子族。
+- **下位（实例）**：`u32`、`i64`、`f64` 等具体宽度类型及 const 泛型 `[T; N]` 实例见本页「数值类型矩阵」。
+- **对偶**：与变长堆数据相对（定长栈值 vs 堆缓冲），见 [Collections](../05_collections/01_collections.md)。
+- **组合**：溢出检查与 [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) 组合（`checked_add` 返回 `Option`）。
+- **依赖**：无开销数值抽象依赖 [Zero Cost Abstractions](../00_start/02_zero_cost_abstractions.md)。

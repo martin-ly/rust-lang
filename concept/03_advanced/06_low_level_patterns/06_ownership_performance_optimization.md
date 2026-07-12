@@ -43,7 +43,7 @@
 
 ```rust
 // ❌ 不必要的 clone
-fn process(data: &String) {
+fn process_bad(data: &String) {
     let owned = data.clone();
 }
 

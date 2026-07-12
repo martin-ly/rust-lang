@@ -157,7 +157,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 
 | 脚本 | 功能 |
 |------|------|
-| `run_quality_gates.sh` | 本地一键运行全部 19 个质量门（14 阻断 + 5 观察） |
+| `run_quality_gates.sh` | 本地一键运行全部 21 个质量门（15 阻断 + 6 观察） |
 | `cargo_build_optimized.sh` / `.ps1` | 优化编译 |
 | `cargo_update_check.sh` / `.ps1` | 依赖更新检查 |
 | `run_miri.sh` / `.bat` | Miri 测试 |
@@ -165,7 +165,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `code_block_compiler.py` | 代码块编译验证 |
 | `verify_compile_fail_v3.py` | `compile_fail` 代码块验证 |
 | `check_examples_compile.py` | 根 `examples/` 游离示例编译保护（质量门 19，观察）：9 个 stdlib 示例 rustc 直编 + 3 个依赖示例经 `examples/examples_check/` crate + 2 个 Cargo Script 豁免；未登记的新游离文件视为失败；`--strict` 失败 exit 1 |
-| `check_concept_code_blocks.py` | concept/ 代码块批量编译实测（run_quality_gates.sh 中 Examples Compile Check 段附加小节，观察）：提取全部 ```rust 块并分类（flag_skip/pseudo/nightly/nostd/dep*/candidate），std-only 候选 >300 时按文件分层抽样（默认 300，seed 固定）`rustc --edition 2024` 编译；`--strict` 通过率 <95% exit 1；`--with-deps` 附加 workspace 依赖块实测 |
+| `check_concept_code_blocks.py` | concept/ 代码块批量编译实测（质量门 20，观察；2026-07-13 重构为独立观察门）：提取全部 ```rust 块并分类（anno_ignore/compile_fail/should_panic/pseudo/nightly/nostd/dep_skip/dep_untested/dep/candidate）；compile_fail 块验证确实失败且与标注 E0xxx 一致（支持 editionNNNN fence）；std-only 候选 >300 时按文件分层抽样（默认 300，seed 固定）`rustc --edition 2024` 自动包 `fn main` 直编；`--with-deps` 用 `target/debug/deps` 的 rmeta 做 `--extern` 实测依赖块（多 feature 产物轮换重试，找不到依赖归“需依赖未测”）；分批 300 块防超时；结果写 `--json`/`--report`；默认观察 exit 0，`--strict` 时“应过但失败/标注腐烂”>0 → exit 1。基线：`reports/CONCEPT_CODE_BLOCKS_BASELINE_2026_07_13.md` |
 
 ### 📋 日常工具
 

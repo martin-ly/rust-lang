@@ -262,7 +262,7 @@ impl<T> MyVec<T> {
 
 ### 4.2 反例：读取未初始化内存
 
-```rust,compile_fail
+```rust,no_run
 use std::alloc::{alloc, Layout};
 use std::ptr;
 
@@ -282,7 +282,7 @@ fn main() {
 
 ### 4.3 反例：Arc 引用计数管理错误
 
-```rust,compile_fail
+```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 struct BadArc<T> {

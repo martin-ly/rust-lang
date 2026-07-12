@@ -735,14 +735,14 @@ pub fn recursive_call(n: i32) -> i32 {
 
 ### 9.3 边界测试：在 `wasm32-unknown-unknown` 中使用 `std::fs`
 
-```rust,compile_fail
+```rust,ignore
 #![no_main]
 
 use std::fs::File;
 use std::io::Read;
 
 fn main() {
-    // ❌ 编译错误: `std::fs::File` 在 wasm32-unknown-unknown 目标不可用
+    // ❌ 编译错误: `std::fs::File` 在 wasm32-unknown-unknown 目标不可用（仅该目标报错，需 --target wasm32-unknown-unknown 验证）
     let mut file = File::open("config.txt").unwrap();
     let mut contents = String::new();
     file.read_to_string(&mut contents).unwrap();

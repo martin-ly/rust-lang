@@ -390,8 +390,6 @@ fn main() {
 
 ---
 
-
-
 ## 十、边界测试：Cranelift 后端预览的编译错误
 
 理解「边界测试：Cranelift 后端预览的编译错误」需要把握边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行…、边界测试：Cranelift 不支持的平台特定内联汇编（编译错误）、边界测试：Cranelift 的尾调用优化缺失（运行时栈溢出）、边界测试：Cranelift 的 SIMD 向量类型宽度限制（编译错误）等8个方面，本节依次展开。
@@ -551,7 +549,7 @@ fn main() {
 
 ### 10.5 边界测试：Cranelift 的调试构建与发布构建行为差异（运行时性能/语义差异）
 
-```rust,compile_fail
+```rust,no_run
 // ❌ 运行时差异: Cranelift 的 debug 优化级别与 LLVM 不同
 // 某些 LLVM 的激进优化在 Cranelift debug 模式下不存在
 // 可能导致: 溢出检查、panic 位置、调试信息质量差异

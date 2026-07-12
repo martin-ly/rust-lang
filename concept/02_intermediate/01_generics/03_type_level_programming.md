@@ -124,7 +124,13 @@ mindmap
 
 ## 1️⃣ 类型级自然数 (Peano Numbers)
 
-「1️⃣ 类型级自然数 (Peano Numbers)」涉及基础定义、类型级加法与类型级乘法，本节逐一说明其要点。
+类型级编程（type-level programming）是利用「类型作为编译期值」的计算范式。Peano 自然数是其入门构造：用零类型 `Z` 与后继类型 `S<N>` 把自然数编码进类型层级——`S<S<Z>>` 即类型层面的 2。
+
+- **基础定义**：`struct Z; struct S<N>(PhantomData<N>);`——类型本身不存储数据（`PhantomData` 零大小），数值信息完全由类型的嵌套深度携带。这依赖 Rust 的类型递归与泛型实例化在编译期完成。
+- **类型级加法**：以 trait 实现加法函数——`trait Add<Rhs> { type Output; }`，基例 `impl<R> Add<R> for Z { type Output = R; }`，递归例 `impl<N, R> Add<R> for S<N> where N: Add<R> { type Output = S<N::Output>; }`。类型检查器在解析 `N::Output` 时执行「编译期递归求值」，这正是类型级计算的引擎。
+- **类型级乘法**：在加法之上递归定义（`mul(m, S<n>) = add(m, mul(m, n))`），展示「类型级函数可组合」。
+
+判定一段代码是否在做类型级计算，标准是：计算的输入输出是否都是类型（`type Output`、trait bound），运行时是否零数据流动。Peano 构造的价值不在实用（const generics 已覆盖数值需求），而在演示「trait 系统即编译期函数式语言」这一事实的最小模型。
 
 ### 基础定义
 
@@ -460,7 +466,28 @@ where
 
 ## 5️⃣ 类型级状态机
 
-本节聚焦「5️⃣ 类型级状态机」，核心内容为编译时验证的协议。
+类型级状态机（typestate pattern）把「对象所处的协议状态」编码为类型参数，使非法的状态迁移成为编译错误：
+
+**核心构造**：
+
+```rust
+struct Connection<State> { /* 共享字段 */ _state: PhantomData<State> }
+struct Disconnected; struct Connected; struct Authenticated;
+
+impl Connection<Disconnected> {
+    fn connect(self) -> Connection<Connected> { /* ... */ }
+}
+impl Connection<Connected> {
+    fn authenticate(self, cred: &str) -> Result<Connection<Authenticated>, Self> { /* ... */ }
+}
+impl Connection<Authenticated> {
+    fn send(&self, msg: &str) { /* 只有认证后才能调用 */ }
+}
+```
+
+**编译时验证的协议**：`send` 只定义在 `Connection<Authenticated>` 上——「未认证就发送」在方法解析阶段即失败（E0599），无需任何运行时状态检查。状态迁移函数按值取 `self`（消耗旧状态）并返回新状态类型，旧状态值随之失效，「迁移后仍用旧句柄」也被所有权系统拒绝（E0382）。
+
+**适用判定**：协议状态数有限、迁移规则静态可知、违规代价高（网络协议握手、文件打开模式、构建器分步校验）。代价是每个状态 × 方法组合都要写 impl 块，状态爆炸时需权衡；运行时才知的动态状态不适用（应退化为 enum + 运行时检查）。
 
 ### 编译时验证的协议
 
@@ -620,7 +647,12 @@ impl<T, const N: usize> Array<T, N> {
 
 ## 🎯 实战项目
 
-本节从项目 1: 类型安全的 SQL DSL 与 项目 2: 编译时验证的状态机框架 两个层面剖析「实战项目」。
+本节把类型级技术落地为两个完整项目，展示「类型级约束如何替代运行时校验」：
+
+1. **类型安全的 SQL DSL**：用泛型标记查询的「已选列 / 表 / WHERE 状态」，`select::<(Id, Name)>()` 返回 `Query<Users, (Id, Name), NoWhere>`，`.where_()` 消耗并改写状态参数；`execute` 只定义在「至少一次 select」的状态上。类型参数在编译期拼出查询形状，SQL 注入与「忘写 WHERE 的全表删除」分别被类型与方法可用性拒绝。diesel 是这一范式的工业实现。
+2. **编译时验证的状态机框架**：把状态机定义（状态集、迁移表）编码为 trait 关联类型，框架经 blanket impl 为「合法迁移对」生成迁移方法——迁移表中的一行缺失即对应方法不存在（编译期暴露）。与手写 typestate 相比，框架把「状态 × 迁移」的笛卡尔积代码生成收敛到一处声明。
+
+两个项目共享同一判定原则：**能用类型参数表达的不变量，就不要留到运行时断言**——编译期拒绝的成本是写约束的时间，运行时漏检的成本是事故。
 
 ### 项目 1: 类型安全的 SQL DSL
 
@@ -794,3 +826,21 @@ impl Not for False { type Output = True; }
 **A、C、D 正确**。按本页「反命题」节：反命题 1（类型级编程非银弹，可读性与编译时间是代价）、反命题 2（Rust **没有**完整 HKT，只能经关联类型与 trait 模拟部分能力——B 错）、反命题 3（类型级递归显著增加编译耗时）。工程结论与本页「认知路径」第 4 步一致：类型级技术应用于状态机（typestate）等收益明确的场景，而非默认选择。
 
 </details>
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 求值时机 | 全部计算在编译期完成 | 单态化 |
+| 编码手段 | Peano 数、trait 递归、关联类型输出 | 类型论编码 |
+| 运行时成本 | 零（类型在编译后完全擦除） | 零成本抽象 |
+| 与 const 泛型 | const generics 承接数值型类型级计算 | const generics |
+| 复杂度代价 | 编译时间随递归深度增长 | 工程权衡 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Generics](01_generics.md) 泛型系统的极限用法。
+- **下位（实例）**：类型级自然数/布尔/列表实例见本页正文。
+- **对偶**：与运行时类型信息相对，见 [RTTI and Dynamic Typing](../04_types_and_conversions/05_rtti_and_dynamic_typing.md)。
+- **组合**：与 [Advanced Traits](../00_traits/04_advanced_traits.md) 的关联类型组合。
+- **依赖**：合法性检查依赖 [Traits](../00_traits/01_traits.md) 的约束求解。

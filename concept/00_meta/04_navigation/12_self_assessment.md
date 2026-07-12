@@ -1045,7 +1045,7 @@ Rust 如何保证向后兼容？
 
 以下代码能否编译？
 
-```rust
+```rust,compile_fail
 fn take(s: String) -> String { s }
 fn main() {
     let s = String::from("hello");

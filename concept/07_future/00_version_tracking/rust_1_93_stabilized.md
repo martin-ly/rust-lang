@@ -52,8 +52,8 @@ rustup run 1.93.0 cargo build
 use std::mem::MaybeUninit;
 
 let mut buf: [MaybeUninit<u8>; 16] = [MaybeUninit::uninit(); 16];
-MaybeUninit::write_copy_of_slice(&mut buf, b"hello");
-let init = MaybeUninit::assume_init_ref(&buf[..5]);
+buf.write_copy_of_slice(b"hello");
+let init = unsafe { buf[..5].assume_init_ref() };
 ```
 
 ### 3.2 `String` / `Vec` 原始部分拆分

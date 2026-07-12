@@ -78,7 +78,14 @@
 
 ## 一、权威定义与核心概念
 
-「权威定义与核心概念」部分按 BTreeMap/BTreeSet：有序关联容器、VecDeque：循环缓冲双端队列、BinaryHeap：二叉堆优先队列与HashMap 自定义 Hasher的顺序逐层展开。
+进阶集合围绕四种数据结构展开，各自针对 `Vec`/`HashMap` 覆盖不到的访问模式：
+
+- **BTreeMap/BTreeSet**：有序关联容器，键要求 `Ord`。基于 B 树（每个节点存多键，适配缓存行）而非红黑树，迭代有序、支持 `range(..)` 区间查询；查找 O(log n) 但常数优于平衡二叉树。适用场景：需要有序遍历或区间查询，且无法承担哈希无序性的场合。
+- **VecDeque**：循环缓冲（ring buffer）实现的双端队列，`push_front`/`pop_front` 均摊 O(1)——弥补 `Vec` 前端操作 O(n) 的短板。代价是内存不再连续，`as_slices()` 可能返回两段。
+- **BinaryHeap**：数组表示的二叉最大堆，`push`/`pop` O(log n)、`peek` O(1)。标准库只保证「最大元素在堆顶」，迭代无序；需要最小堆时用 `Reverse<T>` 包装。
+- **HashMap 自定义 Hasher**：`HashMap<K, V, S>` 的第三个参数 `S: BuildHasher` 可替换默认 SipHash（抗 HashDoS 但慢）。高频小键场景换用 `FxHashMap`（rustc-hash）或 `ahash` 常获 2–5 倍吞吐提升，代价是失去 HashDoS 防护。
+
+选型判定：先问「访问模式是否需要有序/双端/优先级」，再问「哈希是否为瓶颈」——两个问题分别定位到容器选择与 hasher 选择。
 
 ### 1.1 BTreeMap/BTreeSet：有序关联容器
 
@@ -233,7 +240,12 @@ Rust HashMap 的 Hasher 生态:
 
 ## 二、内存布局与性能特征
 
-「内存布局与性能特征」部分按 BTreeMap 节点布局、VecDeque 环形缓冲区布局、BinaryHeap 数组表示与自定义 Hasher 的性能影响的顺序逐层展开。
+四种集合的内存布局直接决定其缓存行为与复杂度常数，是性能选型的定量依据：
+
+- **BTreeMap 节点布局**：每个节点存放 B−1 个键值对（Rust 实现 B=6，即每节点至多 11 个元素）加子节点指针数组，整节点对齐到缓存行。相比红黑树每节点 1 键 3 指针，B 树的树高减半、指针追逐次数减少，这是「理论 O(log n) 相同但实测更快」的来源。
+- **VecDeque 环形缓冲区布局**：单块连续缓冲区 + head/tail 两个索引，逻辑索引经 `(head + i) mod cap` 映射到物理位置。扩容时整体搬迁并「解环」为线性布局。布局解释了为什么随机访问是 O(1) 但比 `Vec` 多一次取模。
+- **BinaryHeap 数组表示**：完全二叉树隐式存于 `Vec`：节点 i 的左子 2i+1、右子 2i+2、父 (i−1)/2。无任何指针，缓存局部性优于链式堆，但 sift-up/sift-down 仍是 O(log n) 次交换。
+- **自定义 Hasher 的性能影响**：哈希函数在 `HashMap` 热路径上执行两次（查找 + 插入各至少一次）；SipHash 对短键约 10–20ns/次，FxHash 约 1–2ns/次。键为整数且 QPS 高时，hasher 切换是标准库内收益最大的单行改动。
 
 ### 2.1 BTreeMap 节点布局
 
@@ -994,3 +1006,21 @@ fn main() {
 
 > 内存安全（Memory Safety）数据结构 ⟸ 所有权（Ownership）自动管理 ⟸ Vec/HashMap 实现
 > 迭代器（Iterator）安全 ⟸ 借用检查器验证 ⟸ 集合 API 设计
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| `BTreeMap` | 有序键值，O(log n)，缓存友好的 B 树 | std |
+| `VecDeque` | 双端队列，环形缓冲，两端 O(1) | std |
+| `BinaryHeap` | 最大堆，push/pop O(log n) | std |
+| 自定义 Hasher | `BuildHasher` 可替换哈希算法 | 泛型参数 |
+| 内存布局 | 各结构布局与缓存行为差异显著 | 本页「内存布局与性能特征」 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Collections](01_collections.md) 集合谱系的进阶成员。
+- **下位（实例）**：各结构布局实例见本页「内存布局与性能特征」节。
+- **对偶**：与 `HashMap`（无序、均摊 O(1)）相对——有序遍历 vs 哈希查找。
+- **组合**：与 [Performance](../../06_ecosystem/10_performance/01_performance_optimization.md) 的缓存优化组合。
+- **依赖**：元素约束依赖 [Traits](../../02_intermediate/00_traits/01_traits.md)（`Ord`/`Hash`）。

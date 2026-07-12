@@ -332,3 +332,21 @@ if let Some(y) = x {
 **B 正确，`y: &i32`**。按本页「绑定模式（Binding modes）」：当引用值被非引用模式匹配时，编译器会**自动按 `ref` 绑定**，避免手动写 `&`——`Some(y)` 匹配 `&Option<i32>` 时，`y` 自动转为 `ref y`，类型为 `&i32`。这是默认绑定模式（default binding modes）机制，而非隐式解引用复制。
 
 </details>
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 可反驳性 | 模式分可反驳（refutable）与不可反驳（irrefutable）；`let` 要求不可反驳 | Reference 模式分类 |
+| 穷尽性 | `match` 必须覆盖所有可能值（编译期检查） | 穷尽性检查 |
+| 解构能力 | 结构体、元组、枚举、引用、切片、嵌套均可解构 | 模式文法 |
+| 绑定模式 | 默认按值绑定；`ref`/`ref mut` 或 match ergonomics 按引用 | Rust 2018 match ergonomics |
+| 组合扩展 | `\|` 或模式、`@` 子模式绑定、`if` 守卫 | 模式扩展语法 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Control Flow](01_control_flow.md) 中分支结构的数据驱动形式。
+- **下位（实例）**：字面量/通配/范围/或模式等具体形式见本页「模式形式」节。
+- **对偶**：与命令式 `if let` 早退相对；`match` 本身是表达式，见 [Statements and Expressions](03_statements_and_expressions.md)。
+- **组合**：与 [Enumerations](../07_modules_and_items/05_enumerations.md) 组合实现和类型的穷尽解构。
+- **依赖**：空匹配的合法性依赖 [Never Type](../02_type_system/02_never_type.md) 的不可实例化性。

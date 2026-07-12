@@ -271,3 +271,21 @@ Point::new(x, y) = Point { x, y }
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/enum_dispatch — 生态权威 API 文档](https://docs.rs/enum_dispatch) · [docs.rs/serde — 生态权威 API 文档](https://docs.rs/serde)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 无构造函数 | Rust 无 C++ 式构造函数；字面量直接初始化全部字段 | 语言设计 |
+| 初始化保证 | 变量必须先初始化后使用（编译期强制） | 借用检查器 |
+| 惯例构造 | `new` / `Default::default()` / 构建器三种惯例 | API Guidelines |
+| 三/五/零法则 | Rust 以 `Drop`/`Copy`/`Clone` 正交 trait 替代 | trait 设计 |
+| 部分 move | 构造后字段可部分 move，整体随之失效 | 所有权规则 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Traits](01_traits.md) 中 `Default`/`Drop` 契约的应用层。
+- **下位（实例）**：结构体字面量初始化实例见 [Structs](../../01_foundation/07_modules_and_items/04_structs.md)。
+- **对偶**：与 C++ 构造/析构体系相对（本页主线对比）。
+- **组合**：与 [Move Semantics](../../01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md) 组合决定资源转移时机。
+- **依赖**：析构顺序依赖 [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 的 drop 规则。

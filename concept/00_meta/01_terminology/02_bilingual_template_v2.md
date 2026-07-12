@@ -8,8 +8,7 @@
 > **适用范围**: `concept/` 目录下所有 L1-L7 概念文件
 > **版本**: 2.0
 > **状态**: ✅ 活跃
-
-> > **权威来源**: 本文件为 `concept/` 权威页。
+> **权威来源**: 本文件为 `concept/` 权威页。
 ---
 
 ## 一、文件头模板（必填）
@@ -107,7 +106,9 @@ fn ok_example() {}
 ### 4.2 反例（Anti-patterns）
 
 ```rust,compile_fail
-fn bad_example() {}
+fn bad_example() {
+    let x: i32 = "类型错误"; // E0308: mismatched types
+}
 ```
 
 > **错误诊断**: `error[E0XXX]: ...`
@@ -133,6 +134,9 @@ fn bad_example() {}
 ### 6.1 边界测试：...（编译错误）
 
 ```rust,compile_fail
+fn boundary_test() {
+    let _: u8 = 256; // E0308: 字面量超出 u8 范围
+}
 ```
 
 ### 6.2 边界测试：...（运行时行为）

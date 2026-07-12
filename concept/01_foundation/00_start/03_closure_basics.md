@@ -87,6 +87,8 @@ mindmap
     - [测验 2：`move` 关键字（应用层）](#测验-2move-关键字应用层)
     - [测验 3：Fn/FnMut/FnOnce（分析层）](#测验-3fnfnmutfnonce分析层)
     - [测验 4：闭包与生命周期（分析层）](#测验-4闭包与生命周期分析层)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -911,3 +913,21 @@ fn make_closure() -> impl Fn() -> i32 {
 ```
 
 </details>
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 捕获 | 闭包捕获环境变量（借用 / 可变借用 / 按值） | 捕获规则 |
+| trait 实现 | 自动实现 `Fn` / `FnMut` / `FnOnce` 之一 | 编译器合成 |
+| 匿名类型 | 每个闭包类型唯一且不可命名 | 类型系统 |
+| 函数指针 | 无捕获闭包可强转为 `fn()` | 类型转换 |
+| 推断 | 参数与返回类型可省略，由上下文推断 | 推断规则 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Functions](../07_modules_and_items/02_functions.md) 的环境捕获泛化。
+- **下位（实例）**：完整捕获语义矩阵见 [Closure Types](../../02_intermediate/04_types_and_conversions/02_closure_types.md)。
+- **对偶**：与普通函数（无环境捕获）相对，见 [Functions](../07_modules_and_items/02_functions.md)。
+- **组合**：与 [Iterator Patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) 组合使用。
+- **依赖**：捕获的所有权规则依赖 [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)。

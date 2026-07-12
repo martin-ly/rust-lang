@@ -102,12 +102,20 @@ mindmap
     - [测验 3：unwrap vs expect（分析层）](#测验-3unwrap-vs-expect分析层)
     - [测验 4：错误传播链（应用层）](#测验-4错误传播链应用层)
     - [测验 5：panic! 的适用场景（评价层）](#测验-5panic-的适用场景评价层)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
 ## 一、核心概念
 
-理解「核心概念」需要把握 Result 类型、Option 类型与运算符，本节依次展开。
+Rust 错误处理的三个核心概念构成「可恢复错误进类型系统、不可恢复错误走 panic」的二分设计：
+
+1. **`Result<T, E>`**：可恢复错误的类型化表示。`Ok(T)` 与 `Err(E)` 两个变体迫使调用方用 `match`/`?`/组合子显式处理失败路径——「忘记处理错误」在 Rust 中是编译期 `#[must_use]` 警告而非运行时事故。
+2. **`Option<T>`**：「值可能不存在」的类型化表示，消除 null。`Some(T)`/`None` 与 `Result` 同构（`Option<T> ≈ Result<T, ()>`），二者经 `ok_or`/`ok` 互转。用 `Option` 还是 `Result`，判定标准是：「缺失」是否需要携带原因——需要原因用 `Result`，纯有无用 `Option`。
+3. **`?` 运算符**：错误传播的语法糖。`expr?` 在 `Err(e)` 时等价于 `return Err(From::from(e))`——隐式执行 `From` 转换并提前返回；在 `Ok(v)`/`Some(v)` 时解包出 `v`。它把「逐层 `match` 传播错误」压缩为单个字符，同时保持类型系统对转换路径的完整检查。
+
+三者的组合规则：`Result`/`Option` 负责「表示」，`?` 负责「传播」，`From`/`Into` 负责「跨错误类型转换」——错误处理代码的全部结构都可分解到这三个角色上。
 
 ### 1.1 Result 类型
 
@@ -291,7 +299,13 @@ fn main() {
 
 ## 二、错误转换与组合
 
-本节将「错误转换与组合」分解为若干主题： From trait、map 与 and_then与组合模式。
+错误在跨层传播时需要「转换」与「组合」，本节给出三个机制的判定规则：
+
+- **`From` trait**：`?` 隐式调用的转换入口。`impl From<E1> for E2` 声明「`E1` 可以无损升格为 `E2`」，通常用于把底层错误（`io::Error`、`ParseIntError`）包装进应用错误枚举。手写 `From` impl 或用 `thiserror` 的 `#[from]` 派生，是库错误设计的标准做法。
+- **`map` 与 `and_then`**：`map` 变换成功值（`T → U`），`and_then` 串联可能失败的操作（`T → Result<U, E>`，flatMap）。判定用哪个：闭包返回普通值用 `map`，返回 `Result`/`Option` 用 `and_then`——用错会得到 `Result<Result<...>>` 的嵌套类型（编译器以类型不匹配提示）。
+- **组合模式**：`map_err` 转换错误侧、`or`/`or_else` 提供回退、`transpose` 交换 `Result<Option<T>>` 与 `Option<Result<T>>`。这组组合子使错误处理保持表达式风格，与迭代器链无缝衔接。
+
+类型层面的一致性约束：同一条 `?` 链上所有错误必须能 `From` 到函数的返回错误类型——这条约束是设计错误枚举层级（`thiserror`）或动态错误对象（`anyhow::Error`）的分水岭。
 
 ### 2.1 From trait
 >
@@ -430,7 +444,12 @@ Result/Option 组合:
 
 ## 三、Panic 与不可恢复错误
 
-本节从 panic! 宏 (panic! Macro) 与  unwrap 与 expect 两个层面剖析「Panic 与不可恢复错误」。
+panic 是 Rust 的「不可恢复错误」通道，与 `Result` 形成明确的职责分工：
+
+- **`panic!` 宏**：触发线程级展开（unwinding，默认 `panic = "unwind"`），逐层执行栈上值的 `Drop` 后终止当前线程；配置 `panic = "abort"` 则直接终止进程（嵌入式/FFI 边界常用）。panic 的语义承诺是「进程内其他线程的内存安全不受影响」——毒化（poisoning）的 `Mutex` 会拒绝后续加锁，防止观察到半成品状态。
+- **`unwrap` 与 `expect`**：`Result`/`Option` 的「我断言这里不会失败」出口，失败即 panic。`expect("理由")` 强制留下断言依据，是工程规范对 `unwrap` 的改进。二者的合法使用场景只有三种：不变量明显成立的局部推理（如「刚插入的键必存在」）、原型/测试代码、以及「失败即程序 bug」的契约违反。
+
+判定「用 `Result` 还是 panic」的标准：错误是否属于调用方应当处理的正常业务情况（如文件不存在、解析失败）——是则 `Result`；是否表示程序员错误/不变量破坏（如索引越界、空堆弹出后的 unwrap）——是则 panic 合理。`catch_unwind` 只应用于 FFI 边界与任务隔离层（如线程池、测试框架），不作常规控制流。
 
 ### 3.1 panic! 宏 (panic! Macro)
 >
@@ -1010,3 +1029,21 @@ fn may_fail() -> Result<i32, anyhow::Error> {
 
 > **原则**: `panic!` 用于**程序 bug**（不可恢复的内部错误），`Result` 用于**预期内的失败**（可恢复的外部错误）。
 </details>
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 二分模型 | 可恢复 `Result<T, E>` vs 不可恢复 panic | 语言设计决策 |
+| 错误即值 | 错误是普通值，经类型系统强制处理 | 无异常机制 |
+| 传播 | `?` 运算符编译期转换 + 早退 | `Try`/`FromResidual` |
+| 开销 | `Result` 返回零额外运行时开销 | ABI 设计 |
+| 组合 | `map` / `and_then` / `or_else` 组合子链式处理 | 标准库 API |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Control Flow](../04_control_flow/01_control_flow.md) 的错误分支建模。
+- **下位（实例）**：传播语法细节见 [Error Handling Control Flow](02_error_handling_control_flow.md)；不可恢复路径见 [Panic and Abort](03_panic_and_abort.md)。
+- **对偶**：与 C++ 异常相对，见 [Exception Safety](../../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md)。
+- **组合**：与 [Enumerations](../07_modules_and_items/05_enumerations.md) 的 `Result`/`Option` 组合。
+- **依赖**：错误转换依赖 [Traits](../../02_intermediate/00_traits/01_traits.md)（`From`/`Into`）。

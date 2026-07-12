@@ -72,6 +72,8 @@
   - [补充视角：无锁数据结构选择指南](#补充视角无锁数据结构选择指南)
     - [数据结构选择矩阵](#数据结构选择矩阵)
     - [内存回收策略](#内存回收策略)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -1212,3 +1214,21 @@ hp[0].store(null_mut(), Ordering::SeqCst);
 - **Epoch-Based Reclamation (EBR)**：`crossbeam::epoch` 提供，适合多数场景。
 - **Hazard Pointers**：延迟更低，但实现更复杂。
 - **QSBR**：适合线程数固定且有明确静止点的系统。
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 定义 | 无锁：至少一个线程在有限步内推进 | 并发理论的进展保证分级 |
+| 基石 | 原子操作 + CAS 循环 | `std::sync::atomic` |
+| 内存序 | `Relaxed`/`Acquire`/`Release`/`AcqRel`/`SeqCst` 五档 | 继承 C++11 内存模型 |
+| ABA 问题 | 无锁结构经典陷阱，需版本戳或 hazard pointer | 并发文献 |
+| 生态 | `crossbeam` / `arc-swap` 等成熟结构 | crates.io |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Concurrency](01_concurrency.md) 同步机制的无阻塞极端。
+- **下位（实例）**：无锁队列/栈实例见本页「关键数据结构」节。
+- **对偶**：与锁（阻塞同步）相对，见 [Concurrency Patterns](03_concurrency_patterns.md)。
+- **组合**：与 [Atomics and Memory Ordering](05_atomics_and_memory_ordering.md) 组合实现。
+- **依赖**：跨线程安全性依赖 [Send/Sync](02_send_sync_auto_traits.md) auto trait。

@@ -72,6 +72,8 @@
     - [选型决策树](#选型决策树)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -867,3 +869,21 @@ fn main() {
 
 > 编译期反射安全 ⟸ 过程宏（Procedural Macro） hygiene ⟸ token 树操作
 > 常量泛型正确 ⟸ const 表达式求值 ⟸ 类型级别计算
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 手段谱系 | 声明宏、过程宏（derive/attr/fn）、build.rs 三族 | 编译管线 |
+| 求值时机 | 全部在编译期；运行时无元编程能力 | 语言边界 |
+| 输入输出 | `TokenStream` → `TokenStream`（过程宏） | proc_macro API |
+| 能力边界 | 无任意反射；以语法扩展为主 | 设计约束 |
+| 工具 | `syn` / `quote` / `cargo-expand` 生态支撑 | 生态 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：编译期计算在概念层的另一分支对应 [Type-Level Programming](../01_generics/03_type_level_programming.md)。
+- **下位（实例）**：过程宏工程实例见 [Production Grade Macro Development](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md)。
+- **对偶**：与运行时反射（Java/Python 式）相对，见 [RTTI and Dynamic Typing](../04_types_and_conversions/05_rtti_and_dynamic_typing.md)。
+- **组合**：与 [Macro Patterns](03_macro_patterns.md) 组合落地。
+- **依赖**：基础见 [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md)。

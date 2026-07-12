@@ -100,6 +100,8 @@ mindmap
     - [测验 1：方法 Receiver 的所有权语义（🟢 基础）](#测验-1方法-receiver-的所有权语义-基础)
     - [测验 2：关联函数与方法的分界（🟡 进阶）](#测验-2关联函数与方法的分界-进阶)
     - [测验 3：Orphan Rule 违规与修复（🔴 专家）](#测验-3orphan-rule-违规与修复-专家)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -256,8 +258,13 @@ fn main() {
 ### 6.3 Orphan Rule 违规
 
 ```rust,compile_fail
-trait MyTrait {}
-impl MyTrait for String {} // ❌ 当前 crate 既未定义 MyTrait 也未定义 String
+// ❌ 孤儿规则违反：trait（`Display`）与类型（`Vec`）均来自外部 crate，
+// 当前 crate 两者都未定义，禁止实现。
+impl std::fmt::Display for Vec<u8> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{} bytes", self.len())
+    }
+}
 ```
 
 **修正**: 使用 newtype 包装 `struct MyString(String); impl MyTrait for MyString {}`。
@@ -342,3 +349,21 @@ impl MyTrait for String {}
 **B 正确**。按本页 §6.3 与定理 3：`impl Trait for Type` 受 **Orphan Rule** 约束——Trait 或类型**至少有一个由当前 crate 定义**，防止不相关 crate 间的冲突实现。本例二者皆外部定义，故拒绝；标准修复是 **newtype 包装**使类型成为本地类型。
 
 </details>
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 分类 | 固有 impl（inherent）与 trait impl 二分 | Reference |
+| 方法 receiver | `self` / `&self` / `&mut self` 三种接收形式 | 方法文法 |
+| 关联函数 | 无 receiver 的命名空间函数（如 `new`） | API 惯例 |
+| 多块 | 同一类型可拆分多个 impl 块 | 文法 |
+| 孤儿规则 | trait impl 要求 trait 或类型至少一方在本地定义 | 一致性规则 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Items](12_items.md) 项体系的行为附加机制。
+- **下位（实例）**：trait impl 的进阶形态见 [Advanced Traits](../../02_intermediate/00_traits/04_advanced_traits.md)。
+- **对偶**：与 C++ 构造函数体系相对，见 [构造与初始化](../../02_intermediate/00_traits/05_construction_and_initialization.md)。
+- **组合**：与 [Structs](04_structs.md) / [Enumerations](05_enumerations.md) 组合定义类型行为。
+- **依赖**：方法调用解析依赖 [Traits](../../02_intermediate/00_traits/01_traits.md) 的查找规则。

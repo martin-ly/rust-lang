@@ -133,6 +133,7 @@ struct Optimized {
 ### 5.5 零大小类型 (ZST)
 
 ```rust
+#[derive(Clone)]
 struct ZeroSized; // size = 0
 
 let v = vec![ZeroSized; 1000]; // 无内存开销

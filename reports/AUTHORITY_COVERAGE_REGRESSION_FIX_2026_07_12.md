@@ -58,7 +58,7 @@
 
 ## 5. 验证证据
 
-```
+```text
 $ python scripts/check_concept_authority_coverage.py --strict
 [concept-authority] scanned=461  P0=100.0%  P1=94.6%  P2=85.2%  any=100.0%  none=0
 [concept-authority] content-scope n=383  P0=100.0%  P1=100.0%  P2=99.7%  any=100.0%

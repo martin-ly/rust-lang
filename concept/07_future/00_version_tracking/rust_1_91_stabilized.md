@@ -1744,6 +1744,7 @@ fn optimized_pattern_matching(value: Option<i32>) -> String {
         Some(n) if n > 0 => format!("正数: {}", n),
         Some(n) if n < 0 => format!("负数: {}", n),
         Some(0) => "零".to_string(),
+        Some(_) => unreachable!("正/负数已由守卫分支覆盖"),
         None => "无值".to_string(),
     }
 }

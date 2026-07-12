@@ -118,7 +118,7 @@ unsafe {
 ```rust
 use core::range::RangeInclusive;
 
-let range = RangeInclusive::new(1, 5);
+let range = RangeInclusive::from(1..=5);
 for i in range {
     print!("{} ", i); // 1 2 3 4 5
 }

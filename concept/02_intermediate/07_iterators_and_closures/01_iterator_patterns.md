@@ -85,12 +85,21 @@
     - [常用适配器与消费者速查](#常用适配器与消费者速查)
     - [IntoIterator 与 for 循环](#intoiterator-与-for-循环)
     - [自定义迭代器最小实现](#自定义迭代器最小实现)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
 ## 一、核心概念
 
-理解「核心概念」需要把握 Iterator Trait、适配器链、惰性求值与消费者与适配器，本节依次展开。
+迭代器模式的四个核心概念构成「惰性流处理」的完整模型：
+
+1. **Iterator trait**：核心是 `fn next(&mut self) -> Option<Self::Item>`——「拉取式」协议，每次调用产出一个元素或 `None`（终止）。`Item` 关联类型决定流的内容；`next` 取 `&mut self` 意味着迭代器自身是被消耗的状态机（`for` 循环消耗它，迭代两次需重新获取）。
+2. **适配器链（adapters）**：`map`/`filter`/`take`/`zip` 等消费迭代器、返回新迭代器——每个适配器是「包一层的状态机」，`next` 调用沿链向内传导，元素向外流回时逐层变换。链的类型是嵌套结构体（`Map<Filter<vec::IntoIter<T>, F>, G>`），单态化后整条链内联为一个循环体。
+3. **惰性求值（laziness）**：适配器不做任何工作——`v.iter().map(f)` 只构造状态机，元素变换发生在 `next` 被调用时。推论：无消费者的链是空操作（`iter.map(f)` 不调 `collect` 则 `f` 一次都不执行，编译器对此发 `unused_must_use` 风格警告）。
+4. **消费者与适配器的分界**：消费者（`collect`/`fold`/`for_each`/`find`）取 `self` by value、驱动 `next` 循环、产出非迭代器值——一条链必须恰好以一个消费者结尾才产生效果。判定一个方法是适配器还是消费者：返回 `impl Iterator` 的是适配器，返回其他的是消费者。
+
+四个概念合起来回答「为什么迭代器链零成本」：惰性 + 单态化使抽象在编译期消解为等效手写循环。
 
 ### 1.1 Iterator Trait
 >
@@ -312,7 +321,14 @@ let result: Vec<i32> = vec![1, 2, 3, 4, 5]
 
 ## 二、常用模式
 
-理解「常用模式」需要把握 map-filter-collect、fold 与归约、zip 与并行迭代、IntoIterator 与 for 循环等5个方面，本节依次展开。
+迭代器的高频模式按「流的形状变换」分类：
+
+- **map-filter-collect**：变换-筛选-物化的主干模式。`collect` 的目标类型由 `FromIterator` 决定——`Vec`、`HashSet`、`String`、`Result<Vec<_>, E>`（遇到 `Err` 短路）皆可，类型标注或 `turbofish`（`collect::<Vec<_>>()`）消歧。
+- **fold 与归约**：`fold(init, |acc, x| ...)` 是最一般的消费者——`sum`/`product`/`max`/`count` 都是其特例；`reduce`（无初值，返回 `Option`）与 `try_fold`（可短路，`Result`/`Option` 控制流）覆盖变体。判定用哪个：有单位元用 `fold`，空流需区分用 `reduce`，中间可失败用 `try_fold`。
+- **zip 与并行迭代**：`zip` 把两流配对（短者耗尽即止——长度不一致静默截断，是逻辑错误来源）；`enumerate` 附加序号；rayon 的 `par_iter()` 把同一条适配器链变为数据并行（`ParallelIterator` trait），代码改动常只有一行。
+- **`IntoIterator` 与 `for` 循环**：`for x in e` 糖化为 `IntoIterator::into_iter(e)` + `next` 循环——`Vec` 的 `into_iter` 按值消耗（`T`）、`&Vec` 按引用（`&T`）、`&mut Vec` 按可变引用（`&mut T`），`for` 循环的「捕获方式」由被迭代表达式的引用层级决定。
+
+模式选择判定：产出集合 → collect 系；产出单值 → fold 系；需要索引/配对 → zip/enumerate；需要并行 → rayon；读 `for` 循环先确认元素的引用层级。
 
 ### 2.1 map-filter-collect
 >
@@ -1380,3 +1396,21 @@ impl Iterator for Counter {
 ```
 
 > 完整推理、性能权衡与边界测试参见本节正文。
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 求值 | 惰性：适配器不消费数据，消费者触发求值 | `Iterator` 契约 |
+| 适配器 | `map`/`filter`/`fold` 等零成本内联 | 单态化 |
+| 消费方式 | `collect`/`sum`/`for_each` 等消费者终止链 | API 分类 |
+| 迭代形式 | 内部迭代（适配器链）替代外部迭代 | 设计哲学 |
+| 语法糖 | `for` 循环是 `IntoIterator` 的语法糖 | 语言 desugar |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Collections](../../01_foundation/05_collections/01_collections.md) 数据访问的统一抽象。
+- **下位（实例）**：异步流对应物见 [Stream Algebra](../../03_advanced/01_async/09_stream_algebra_and_backpressure.md)。
+- **对偶**：与 C++ 外部迭代器相对（内部 vs 外部迭代），见 [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)。
+- **组合**：与 [Closure Types](../04_types_and_conversions/02_closure_types.md) 组合传递适配逻辑。
+- **依赖**：适配器契约依赖 [Traits](../00_traits/01_traits.md)。

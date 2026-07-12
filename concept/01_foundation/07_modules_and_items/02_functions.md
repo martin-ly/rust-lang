@@ -405,3 +405,21 @@ fn wrong() -> i32 {
 **A 正确**。按本页「五、发散函数」与定理 3：发散函数返回 `!`，承诺永不正常返回；由于 never 的**底类型性质**，发散分支可被合并到任意返回类型——任何需要 `T` 的位置都可安全替换为发散函数调用（这正是它能出现在 `match` 分支中的原因，D 错）。B/C 与 `!` 的语义矛盾。
 
 </details>
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 项类别 | 函数是项（item），非表达式，可前向引用 | Reference items |
+| 参数传递 | 参数模式绑定 + 所有权 move / 借用规则 | 所有权模型 |
+| 返回标注 | 返回类型必须显式标注（无返回即 `()`） | 函数文法 |
+| 发散函数 | `-> !` 声明永不返回 | never type |
+| 递归 | 允许直接/间接递归，无尾调用优化保证 | 实现约定 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Items](12_items.md) 项体系的可执行成员。
+- **下位（实例）**：带环境捕获的函数见 [Closure Basics](../00_start/03_closure_basics.md) 与 [Closure Types](../../02_intermediate/04_types_and_conversions/02_closure_types.md)。
+- **对偶**：与方法（带 receiver）相对，见 [Implementations](06_implementations.md)。
+- **组合**：函数体是块表达式，求值规则见 [Statements and Expressions](../04_control_flow/03_statements_and_expressions.md)。
+- **依赖**：参数与返回值的所有权转移依赖 [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)。

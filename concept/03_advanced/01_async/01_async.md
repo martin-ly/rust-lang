@@ -2725,7 +2725,13 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 ## 十五、Stream trait 与流处理语义
 
-本节从 Stream = 异步 Iterator、Stream 与 Dataflow Model 的映射与从 Stream 到 differential-dataflow切入，剖析「Stream trait 与流处理语义」的核心内容。
+`Stream` 是异步世界对 `Iterator` 的对偶构造，本节建立三层映射：
+
+- **Stream = 异步 Iterator**：`trait Stream { type Item; fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>>; }`——与 `Iterator::next` 的唯一差别是「可返回 `Pending` 并注册唤醒」。适配器生态（`futures::StreamExt` 的 `map`/`filter`/`buffer_unordered`）与迭代器一一对应；`collect` 是 `.await` 的消费者。判定一个异步序列该是 `Stream` 还是「`Vec` 的一次性 future」：元素是否随时间逐个到达——是则 Stream，否则 Future。
+- **Stream 与 Dataflow Model 的映射**：数据流模型把计算组织为「源 → 变换算子 → 汇」的有向图，Stream 链是其在单进程内的特例（每个适配器 = 一个算子，`poll_next` 的传导 = 拉取式数据流）。`buffer_unordered(n)` 对应数据流的「并行窗口」——同时驱动 n 个子 future，是背压与并发的交汇点。
+- **从 Stream 到 differential-dataflow**：增量数据流（differential dataflow）把「流」推广为「变化的多重集」——数据带（时间戳, 差量）标注，算子对差量增量计算，使「输入变一行，输出只重算受影响部分」。`timely-dataflow`/`differential-dataflow`（Rust 实现）是流处理从「逐条处理」到「增量视图维护」的跃迁，适用于需要低延迟增量更新的分析系统。
+
+三层映射的用法：写流处理代码时先定层——事件逐条处理用 `Stream`；需要算子并行/背压拓扑用数据流框架；需要增量维护聚合视图用 differential。
 
 ### 15.1 Stream = 异步 Iterator
 
@@ -2777,7 +2783,14 @@ differential-dataflow (增量计算)
 
 ## 十六、边界测试：异步规则的编译错误
 
-「边界测试：异步规则的编译错误」涉及边界测试：非 Send 类型跨 await 点（编译错误）、边界测试：在 async 块中调用阻塞函数（逻辑错误）、边界测试：递归 async fn（编译错误）、边界测试：在 async 块中借用局部变量生命周期不足（编译错误）等6个方面，本节逐一说明其要点。
+异步规则的编译错误源于「`.await` 把函数切成可挂起的多个阶段」这一本质，按阶段间约束分类：
+
+- **非 Send 类型跨 await 点**（编译错误）：`Rc`/`RefCell` 守卫等 `!Send` 值在 `.await` 前后都被使用 → 它成为状态机的一个字段 → 整个 future `!Send` → `tokio::spawn`（要求 `Send`）拒绝。修复三选一：`.await` 前结束该值的借用（缩小作用域）、换 `Send` 等价物（`Arc<Mutex>`）、或留在 `LocalSet`/单线程运行时。错误信息会指出「哪个值被持有跨越了哪个 await」——这是排查的起点。
+- **在 async 块中调用阻塞函数**（逻辑错误）：`std::thread::sleep`、`reqwest::blocking` 在 async 任务中阻塞的是「整个 worker 线程」而非当前任务——不报错但吞吐坍塌（N 个阻塞任务占满 N 个 worker 后全线饿死）。修复：`tokio::time::sleep`、`spawn_blocking` 包裹、或换异步库。clippy 与 tokio 的 `#[tokio::main]` 文档均将此列为反模式。
+- **递归 async fn**（编译错误 E0733）：`async fn f() { f().await }` 的状态机类型自引用，大小无限——必须用 `Box::pin` 间接（`fn f() -> Pin<Box<dyn Future<...>>>` 或 `async_recursion` 宏）。这是「状态机即类型」的直接推论。
+- **借用局部变量生命周期不足**：`async` 块捕获的引用必须活到 future 结束——`tokio::spawn(async { &x })` 报「borrowed value does not live long enough」，因为 spawn 要求 `'static`。修复：`move` 转移所有权、或 `tokio::scope`/`join!` 等有界并发原语。
+
+统一判定法：把 `async fn` 想象成「状态机结构体」——编译错误都对应「某个字段不合法」（`!Send`、自引用、借用短命），逻辑错误都对应「挂起/阻塞语义误解」。
 
 ### 16.1 边界测试：非 Send 类型跨 await 点（编译错误）
 

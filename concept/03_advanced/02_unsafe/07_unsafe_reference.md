@@ -76,7 +76,7 @@ assert_eq!(x, 6);
 
 ```rust
 unsafe trait Zeroable {
-    /// 实现者必须保证该类型的所有位模式都是合法的
+    // 实现者必须保证该类型的所有位模式都是合法的
 }
 
 unsafe impl Zeroable for u32 {}

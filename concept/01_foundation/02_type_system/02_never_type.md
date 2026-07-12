@@ -98,7 +98,12 @@ mindmap
 
 ## 一、核心概念
 
-本节将「核心概念」分解为若干主题：什么是 `!`、形式语义：底类型与Coercion 规则。
+`!`（Never type，又称底类型 / bottom type）是 Rust 类型系统中「无任何值」的类型。它的核心概念可归纳为两点：
+
+- **什么是 `!`**：表示「计算永远不会正常返回」——发散函数（如 `panic!`、`loop {}`、`std::process::exit`）的返回类型。它 inhabitant（居留项）为空，与空枚举 `enum Void {}` 同构，但 `!` 由语言内建且享有特殊的强制规则。
+- **强制规则（coercion）**：`!` 可以隐式强制到任意类型 `T`。直观理由是「一个永远不会产生的值，可以承诺是任何类型而不被拆穿」。这正是 `let x: i32 = loop {};` 能编译、以及 `match` 中发散臂不破坏类型一致性的形式依据。
+
+判定一个表达式是否为 `!` 类型，标准是控制流：该表达式求值后，程序的控制流是否还能到达后继语句。不能到达（panic、无限循环、return、break、continue）则为发散表达式，类型为 `!`。
 
 ### 1.1 什么是 `!`
 
@@ -183,7 +188,13 @@ fn demo_coercion(flag: bool) -> String {
 
 ## 二、控制流应用
 
-「控制流应用」部分按发散函数、`Result<T, !>` — 不可能失败与`Option<!>` — 不可能存在的顺序逐层展开。
+`!` 在控制流中的三类典型应用，分别利用「底类型可强制到任意类型」这一规则的不同侧面：
+
+1. **发散函数**：`fn die() -> ! { panic!("fatal") }` 的返回类型是 `!`，因此可以出现在任何期望返回值的上下文中，如 `let v = if ok { v } else { die() };`——`else` 臂类型为 `!`，强制到 `V` 后整个 `if` 表达式类型一致。
+2. **`Result<T, !>`**：表示「不可能失败」的计算。`Result<T, !>` 与 `T` 在类型论上同构（可通过 `unwrap` 的特例 `match r { Ok(t) => t }` 无风险解包），用于占位未来可能引入错误的 API，或与要求 `Result` 的泛型接口适配。
+3. **`Option<!>`**：表示「不可能存在」的值。`Option<!>` 恒为 `None`，在类型级编程中用作「此分支已被排除」的标记。
+
+三者的共同判定依据：类型参数中出现 `!` 的位置，对应的运行时情况在类型论上不可达，编译器允许（并要求）你不为它编写处理代码。
 
 ### 2.1 发散函数
 
@@ -324,7 +335,13 @@ fn new_style() -> Result<i32, !> {
 
 ## 四、Never Type 稳定化进展
 
-「Never Type 稳定化进展」涉及完整稳定化仍在进行中、Rust 1.92：deny-by-default 的 future-…与Rust 1.96：Tuple Coercion，本节逐一说明其要点。
+Never type 的稳定化是一个跨越多年的渐进过程，本节按时间线梳理其状态（截至 Rust 1.97）：
+
+- **未完整稳定的部分**：`!` 作为一等类型在任意位置书写（如 `fn f() -> !` 已稳定，但泛型参数 `Result<T, !>` 中的显式 `!` 标注、trait 中关联类型为 `!` 等）仍受 `never_type` feature gate 约束，跟踪 issue 为 rust-lang/rust#35121。稳定化的主要障碍是「`!` 与 `()` 的历史兼容」：早期代码中发散函数的实际类型被推为 `()`，全量切换会破坏部分 trait impl 的匹配。
+- **Rust 1.92 的进展**：与 never type 相关的 future-incompat lint 转为 deny-by-default，推动生态代码为最终稳定化提前修复。
+- **Rust 1.96 的进展**：元组强制（tuple coercion）相关的 `!` 边角案例修复，使 `(T, !)` 这类复合位置的行为与理论一致。
+
+实践建议：stable 上需要「不可能错误」语义时，使用 `std::convert::Infallible`——它是稳定的空枚举，与 `!` 同构，且 `From<!>` / `Into<!>` 方向的转换在稳定化后将无缝衔接。
 
 ### 4.1 完整稳定化仍在进行中
 
@@ -620,3 +637,21 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/never-say-never — 生态权威 API 文档（`!` never 类型稳定化前的多版本兼容实践）](https://docs.rs/never-say-never)（2026-07-12 验证 HTTP 200）
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 类型地位 | 底类型（bottom type），无值可实例化（uninhabited） | 类型论；`enum Void {}` 同构 |
+| 子类型关系 | `!` 是任意类型的子类型，可强转为任何类型 | 发散表达式类型规则（Reference） |
+| 稳定状态 | `-> !` 返回标注稳定；完整 never type 仍为 nightly（`never_type` feature） | RFC 1216 跟踪 |
+| 控制流角色 | `panic!`、`loop {}`、`return`、`continue` 的类型为 `!` | 发散（diverging）表达式 |
+| 穷尽性 | 对空类型 `match x {}` 无需分支即穷尽 | 穷尽性检查规则 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Type System](01_type_system.md) 类型格中的底元素。
+- **下位（实例）**：空枚举 `enum Void {}`、永不返回函数签名等实例见本页「常见模式」节。
+- **对偶**：与单元类型 `()`（恰好一个值）相对，见 [语句与表达式](../04_control_flow/03_statements_and_expressions.md)。
+- **组合**：与 [Error Handling](../08_error_handling/01_error_handling_basics.md) 组合为 `Result<T, !>` 表达「不可能失败」。
+- **依赖**：穷尽性分析依赖 [Patterns](../04_control_flow/02_patterns.md) 的可反驳性规则。

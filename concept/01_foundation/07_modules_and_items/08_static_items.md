@@ -209,7 +209,7 @@ fn main() {
 
 ### 4.3 反例：用 `static` 替代 `const` 导致内联问题
 
-```rust,compile_fail
+```rust
 // 不推荐：将纯常量声明为 static
 static PI: f64 = 3.14;
 

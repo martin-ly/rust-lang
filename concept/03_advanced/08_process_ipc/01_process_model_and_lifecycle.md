@@ -219,12 +219,15 @@ flowchart LR
 使用 `Command::output()` 一次性执行并收集标准输出/错误：
 
 ```rust
+# fn main() -> Result<(), Box<dyn std::error::Error>> {
 use std::process::Command;
 
 let output = Command::new("ls").arg("-la").output()?;
 if output.status.success() {
     println!("{}", String::from_utf8_lossy(&output.stdout));
 }
+# Ok(())
+# }
 ```
 
 ### 流式读取子进程输出
@@ -232,6 +235,7 @@ if output.status.success() {
 使用 `BufReader` 逐行读取，避免一次性加载大量数据：
 
 ```rust
+# fn main() -> Result<(), Box<dyn std::error::Error>> {
 use std::io::{BufRead, BufReader};
 use std::process::{Command, Stdio};
 
@@ -246,6 +250,8 @@ if let Some(stdout) = child.stdout.take() {
     }
 }
 let status = child.wait()?;
+# Ok(())
+# }
 ```
 
 ### 环境变量管理

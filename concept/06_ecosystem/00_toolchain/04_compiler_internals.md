@@ -719,6 +719,7 @@ process::<Vec<u8>>(vec); // 生成 process_Vec_u8
 > **修正**: 使用 `dyn Trait` 动态分发替代泛型（Generics）：
 >
 > ```rust
+> # use std::fmt::Debug;
 > fn process(items: Vec<Box<dyn Debug>>) { /* 单份代码 */ }
 > ```
 >

@@ -211,7 +211,12 @@ BTreeMap<K, V>:
 
 ## 二、技术细节
 
-理解「技术细节」需要把握容量管理与重新分配、Entry API、Drain 与保留模式与`FromIterator`/`Extend` for Tuples…，本节依次展开。
+标准库集合的四个技术细节决定其工程行为，均与「所有权 + 迭代器」的交互直接相关：
+
+- **容量管理与重新分配**：`Vec` 的扩容策略为「容量不足时至少翻倍」（`Vec::grow`  amortized O(1) push 的来源），`reserve`/`reserve_exact` 可预分配；`shrink_to_fit` 归还多余容量。判定一次 `push` 是否触发分配，只需比较 `len == capacity`。
+- **Entry API**：`map.entry(k).or_insert(v)` 把「查-改-插」三步合并为一次哈希查找，同时用 `Entry` 枚举把「键已存在 / 不存在」编码进类型——调用方必须用 `match` 或组合子处理两种情形，消除了「先 contains 再 insert」的竞态与双重查找。
+- **Drain 与保留模式**：`drain(range)` 移出区间元素并返回迭代器，`retain(f)` 原地过滤；二者都利用所有权转移避免逐元素 clone，且 `drain` 的迭代器 drop 时会移除剩余范围内元素（内存安全由 Drop 保证）。
+- **`FromIterator`/`Extend` for 元组**：`(A, B): FromIterator<(T, U)>` 使 `collect()` 可一步把成对迭代器分流进两个集合（unzip 模式），是迭代器适配器与集合的零成本接合点。
 
 ### 2.1 容量管理与重新分配
 
@@ -542,7 +547,12 @@ graph TD
 
 ## 十四、边界测试：集合的编译错误
 
-本节将「边界测试：集合的编译错误」分解为若干主题：边界测试：`HashMap` 键未实现 `Hash` + `Eq`（编…、边界测试：迭代器消费后重复使用（编译错误）、边界测试：`Vec::drain` 的范围越界（运行时 panic）、边界测试：`HashMap` 的自定义哈希器与 `BuildHashe…等6个方面。
+集合边界测试按「编译期拒绝」与「运行时 panic」两类组织，区分标准是错误能否在类型层面表达：
+
+- **编译错误**：`HashMap` 键未实现 `Hash + Eq`（E0277，约束不满足）；迭代器消费后重复使用（E0382，`into_iter` 已 move 集合）；`Entry` 持有时再借用同一 map（E0502，可变借用冲突）。这些错误反映集合 API 的类型契约：键的能力要求、迭代的所有权语义、借用的排他性。
+- **运行时 panic**：`Vec::drain` 范围越界、索引越界（`v[i]` 的 `Index` impl 调用 `panic!`）、`remove` 空 `BinaryHeap` 返回 `None` 后的 `unwrap`。这类错误无法用类型静态排除（索引值依赖运行时数据），标准库的选择是 panic 而非 UB——与 C++ `vector::operator[]` 的未定义行为形成对照。
+
+判定某个集合操作属于哪类错误，只需查其签名：返回 `Option`/`Result` 或带 `#[track_caller]` panic 文档的是运行时检查；要求 trait bound 或产生借用冲突的则是编译期拒绝。
 
 ### 14.1 边界测试：`HashMap` 键未实现 `Hash` + `Eq`（编译错误）
 
@@ -885,3 +895,21 @@ fn main() {
 >
 > - 本地映射与样题：[所有权清单自测：Brown University Ownership Inventory](../01_ownership_borrow_lifetime/06_ownership_inventories_brown_book.md)
 > - Brown Book 交互式题目：[Ownership Inventory #2](https://rust-book.cs.brown.edu/ch08-04-inventory.html)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 布局谱系 | 连续缓冲（`Vec`/`VecDeque`）、哈希表、B 树、二叉堆四大族 | `std::collections` |
+| 所有权 | 集合拥有元素；迭代经借用或 `into_iter` 转移 | 所有权模型 |
+| 扩容成本 | `Vec::push` 均摊 O(1)，容量倍增策略 | 标准库实现 |
+| 迭代 | 迭代器适配器零成本，编译期单态化内联 | `Iterator` trait |
+| 安全性 | 内部 `unsafe` 封装，对外仅暴露安全 API | 标准库安全边界 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Type System](../02_type_system/01_type_system.md) 上的泛型容器族。
+- **下位（实例）**：`BTreeMap`、`VecDeque`、`BinaryHeap` 等进阶成员见 [高级集合](02_collections_advanced.md)。
+- **对偶**：与定长数组 `[T; N]` 相对（动态容量 vs 编译期定长），见 [Numerics](../02_type_system/03_numerics.md) 的 const 泛型讨论。
+- **组合**：与 [Iterators](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) 组合成数据处理管线。
+- **依赖**：元素生命周期管理依赖 [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)。

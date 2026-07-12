@@ -65,12 +65,20 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
 ## 一、核心概念
 
-本节从范围类型的数学语义、`std::ops::Range`：运行时迭代器语义、`core::range`：编译期值语义与`IntoIterator` vs `Iterator`：设计权衡切入，剖析「核心概念」的核心内容。
+范围类型（Range Types）在 Rust 中同时承载两种语义，区分它们是理解本节的前提：
+
+- **数学语义**：`a..b` 表示区间 [a, b)（半开），`a..=b` 表示 [a, b]（闭区间），`a..`、`..b`、`..` 分别表示无界变体。作为模式（pattern）时，`1..=5` 是穷尽性检查可分析的「值集合描述」。
+- **`std::ops::Range`：运行时迭代器语义**：`Range<Idx>` 是持有 `start`/`end` 字段的结构体，实现 `Iterator`（`Idx: Step` 时）——`for i in 0..n` 经 `IntoIterator` 协议展开为迭代循环。它是「值 + 迭代器」的双重身份：存字段是值，`next()` 消耗自身产生序列。
+- **`core::range` 与 `IntoIterator` vs `Iterator` 的设计权衡**：`for` 循环要求 `IntoIterator`（比 `Iterator` 更宽：集合本身、引用、迭代器均可进入循环）；`Range` 自身实现 `Iterator`，而 `&Range` 不实现——这解释了「`for` 消耗 range 变量」与「range 不能无成本复制后复用」的行为。`RangeInclusive` 因需记录「已耗尽」状态（内部 `Option` 标记）而不实现 `Copy`，是迭代器语义侵入值语义的典型案例。
+
+判定一个范围用法的语义类别：出现在 `match` 模式位置 → 数学集合语义；出现在 `for`/迭代器链位置 → 迭代器语义；作为字段/参数传递 → 普通值语义。
 
 ### 1.1 范围类型的数学语义
 
@@ -226,7 +234,13 @@ for i in r { /* r 被消费 */ }
 
 ## 三、跨语言对比
 
-理解「跨语言对比」需要把握 Python：`range()` 函数、C++20：`std::ranges`与Rust：`core::range::Range`，本节依次展开。
+三种语言的范围机制代表了「运行时对象 → 编译期视图 → 类型化值」的谱系：
+
+- **Python `range()`**：返回惰性序列对象，迭代协议由 `__iter__`/`__next__` 实现，全部运行时动态分派。`range(10**9)` 不分配内存（与 `list(range(...))` 的区别）——惰性是靠解释器的迭代协议而非类型系统保证。
+- **C++20 `std::ranges`**：视图（view）是「不拥有数据的范围适配器」，`views::iota(0, n) | views::filter(...)` 在编译期经模板组合成管道，迭代时惰性求值。与 Rust 迭代器几乎同构（都借鉴了迭代器/ sentinel 分离设计），差异在错误诊断：C++ concept 失败在实例化点报长模板错误，Rust trait bound 在定义点检查。
+- **Rust `core::range::Range`**：普通结构体 + `Iterator` impl，无特殊语言机制——范围的一切行为（惰性、消耗性、类型参数化）都由 trait 系统的一般规则推导。这是「库定义语言特性」的范例：范围不是语法内建语义（`..` 只是构造该结构体的糖），迭代行为完全可由用户类型复现。
+
+横向判定：需要「运行时动态组合管道」选 Python 风格；需要「编译期组合 + 零成本」选 C++/Rust 风格，两者间按错误诊断质量与借用安全性选 Rust。
 
 ### 3.1 Python：`range()` 函数
 >
@@ -389,7 +403,14 @@ let rev = 10..0;
 
 ## 十、边界测试：范围类型的编译错误
 
-「边界测试：范围类型的编译错误」部分按边界测试：范围模式在非 match 中使用（编译错误）、边界测试：`Range` 与 `RangeInclusive` 的类型…、边界测试：`RangeInclusive` 的 `Copy` 缺失（编…、边界测试：`Iterator::size_hint` 与无限范围（逻辑…等6个方面的顺序逐层展开。
+范围类型的边界测试按「语义错位」分类——把一种语义的范围用在了另一种语义的位置：
+
+- **范围模式在非 match 中使用**（编译错误）：`let 1..=5 = x;` 非法——模式语义只存在于 `match`/`if let`/`let` 的 irrefutable 单模式等模式位置；`if 1..=5 == x` 是把模式当表达式（`..=` 在表达式位构造 `RangeInclusive` 值而非谓词）。
+- **`Range` 与 `RangeInclusive` 的类型混用**：`0..5` 与 `0..=5` 是不同类型（`Range` vs `RangeInclusive`），函数签名写死其一则另一种需显式转换（无自动 coercion）；迭代行为差异（`RangeInclusive` 的 `next` 需处理终点相等情形）使泛型约束 `R: Iterator` 是兼容两者的唯一方式。
+- **`RangeInclusive` 的 `Copy` 缺失**：迭代一半的 `RangeInclusive` 内部状态使它不能 `Copy`——`let r2 = r1;` 是 move，后续用 `r1` 报 E0382。`Range`（两端点 `Copy` 时）则可复制。
+- **`size_hint` 与无限范围**：`(0..).size_hint()` 返回 `(usize::MAX, None)`——下界饱和是上界缺失的信号，依赖精确长度的逻辑（如 `collect` 预分配）在无限范围上退化为反复扩容。
+
+判定一个范围错误，先标注该处的语义位（模式/表达式/迭代器），再核对类型与消耗性——六个测试是三类语义位错配的具体形态。
 
 ### 10.1 边界测试：范围模式在非 match 中使用（编译错误）
 
@@ -634,3 +655,21 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/rangemap — 生态权威 API 文档（范围映射数据结构的生态实践）](https://docs.rs/rangemap)（2026-07-12 验证 HTTP 200）
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 区间惯例 | 半开区间 `[start, end)` 为默认 | API Guidelines |
+| 变体 | `Range`/`RangeInclusive`/`RangeFrom`/`RangeTo`/`RangeFull` 五族 | `std::ops` |
+| 迭代 | 整数范围实现 `Iterator` | trait impl |
+| 可空性 | `start > end` 合法但迭代为空 | 语义约定 |
+| 演进 | `core::range` 新 API 演进中 | 跟踪特性 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Type System](../../01_foundation/02_type_system/01_type_system.md) 的区间建模类型。
+- **下位（实例）**：`for i in 0..n` 语法糖实例见 [Control Flow](../../01_foundation/04_control_flow/01_control_flow.md)。
+- **对偶**：与切片索引 `&[a..b]` 的越界检查相对，见 [Collections](../../01_foundation/05_collections/01_collections.md)。
+- **组合**：与 [Iterators](../07_iterators_and_closures/01_iterator_patterns.md) 组合成惰性序列。
+- **依赖**：迭代能力依赖 [Traits](../00_traits/01_traits.md)（`Iterator`）。

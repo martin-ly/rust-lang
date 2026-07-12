@@ -102,6 +102,8 @@ mindmap
     - [关联常量](#关联常量)
     - [RPITIT（Rust 1.75+）](#rpititrust-175)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -1001,3 +1003,21 @@ trait Foo {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/enum_dispatch — 生态权威 API 文档](https://docs.rs/enum_dispatch) · [docs.rs/serde — 生态权威 API 文档](https://docs.rs/serde)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 关联类型 | 每个 impl 唯一绑定，避免泛型参数爆炸 | trait 文法 |
+| GAT | 泛型关联类型允许借用返回（Rust 1.65 稳定） | RFC 1598 |
+| 特化 | specialization 仍为 nightly 特性 | 跟踪特性 |
+| 对象安全 | `dyn Trait` 要求方法无泛型参数、无 `Self` 返回等约束 | 对象安全规则 |
+| 超 trait | `trait A: B` 声明隐含约束 | 继承规则 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Traits](01_traits.md) trait 系统的进阶层。
+- **下位（实例）**：对象擦除实例见 [Type Erasure](../../03_advanced/06_low_level_patterns/03_type_erasure.md)。
+- **对偶**：与 [Generics](../01_generics/01_generics.md) 单态化静态分派相对（`dyn` 动态分派）。
+- **组合**：与 [Derive Traits](06_derive_traits.md) 组合自动生成基础 impl。
+- **依赖**：关联类型求值依赖 [Type-Level Programming](../01_generics/03_type_level_programming.md)。

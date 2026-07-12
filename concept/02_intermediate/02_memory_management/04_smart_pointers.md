@@ -69,6 +69,8 @@
     - [决策流程](#决策流程)
     - [选型矩阵](#选型矩阵)
     - [典型组合模式](#典型组合模式)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -914,3 +916,21 @@ fn main() {
 - `Rc<RefCell<T>>`：单线程共享可变图/树结构。
 - `Arc<Mutex<T>>` / `Arc<RwLock<T>>`：多线程共享状态。
 - `Weak<T>`：打破 `Rc`/`Arc` 循环引用，常用于缓存键或观察者模式。
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 驱动 trait | `Deref`/`DerefMut`/`Drop` 定义指针行为 | trait 契约 |
+| `Box<T>` | 独占堆所有权，固定一层间接 | std |
+| `Rc`/`Arc` | 共享所有权 + 引用计数（非线程安全 / 线程安全） | std |
+| `Cow<'a, T>` | 写时克隆，读路径零分配 | `std::borrow` |
+| 组合性 | 可与 `Cell`/`RefCell`/`Mutex` 正交嵌套 | 类型组合 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Memory Management](01_memory_management.md) 堆资源管理工具族。
+- **下位（实例）**：自引用结构的固定见 [Pin](../../03_advanced/01_async/08_pin_unpin.md)。
+- **对偶**：与栈上直接值相对（间接 vs 内联），见 [Value vs Reference Semantics](../../01_foundation/03_values_and_references/02_value_vs_reference_semantics.md)。
+- **组合**：与 [Interior Mutability](02_interior_mutability.md) 组合共享可变状态。
+- **依赖**：析构语义依赖 [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)。

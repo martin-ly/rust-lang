@@ -89,6 +89,8 @@ mindmap
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -975,3 +977,21 @@ catch_unwind(AssertUnwindSafe(|| {
 
 > 程序不异常终止 ⟸ panic 路径受控 ⟸ unwind/abort 选择
 > 安全性保证 ⟸ catch_unwind 隔离 ⟸ 线程边界
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 展开策略 | 默认 unwind（栈展开）；`panic=abort` 直接终止 | Cargo profile |
+| FFI 边界 | panic 穿越 `extern "C"` 为 UB；需 `extern "C-unwind"` | ABI 规则 |
+| 捕获 | `catch_unwind` 可捕获，要求 `UnwindSafe` | 标准库 |
+| 定位 | panic 是 bug 信号，非正常控制流手段 | 设计哲学 |
+| 线程局部 | panic 默认仅终止当前线程 | 运行时行为 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Error Handling Basics](01_error_handling_basics.md) 的不可恢复分支。
+- **下位（实例）**：`#[should_panic]` 等测试用法见 [Testing Basics](../10_testing_basics/01_testing_basics.md)。
+- **对偶**：与 `Result` 可恢复路径相对，见 [Error Handling Basics](01_error_handling_basics.md)。
+- **组合**：FFI 边界的 panic 防护见 [Rust FFI](../../03_advanced/04_ffi/01_rust_ffi.md)。
+- **依赖**：`panic!` 的发散类型依赖 [Never Type](../02_type_system/02_never_type.md)。

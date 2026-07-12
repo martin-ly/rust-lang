@@ -92,6 +92,8 @@ mindmap
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -769,3 +771,21 @@ fn main() {}
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/criterion — 生态权威 API 文档](https://docs.rs/criterion) · [docs.rs/proptest — 生态权威 API 文档](https://docs.rs/proptest)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 内置 harness | `cargo test` 内置测试运行器，零外部依赖 | Cargo |
+| 三分层 | 单元测试（`#[cfg(test)]`）、集成测试（`tests/`）、文档测试 | Cargo 约定 |
+| 注册 | `#[test]` 编译期注册用例 | 属性宏 |
+| 断言模型 | 断言失败 = panic，harness 逐用例捕获 | panic 机制 |
+| 组织 | 私有代码可经 `#[cfg(test)] mod tests` 直接测试 | 模块规则 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：失败信号模型对应 [Error Handling Basics](../08_error_handling/01_error_handling_basics.md) 的不可恢复分支。
+- **下位（实例）**：断言宏与 `should_panic` 实例见本页正文。
+- **对偶**：与编译期保障相对（运行时验证 vs 静态证明），对照 [Type System](../02_type_system/01_type_system.md)。
+- **组合**：断言 panic 机制见 [Panic and Abort](../08_error_handling/03_panic_and_abort.md)。
+- **依赖**：`#[test]` 属性依赖 [Attributes and Macros](../09_macros_basics/01_attributes_and_macros.md)。

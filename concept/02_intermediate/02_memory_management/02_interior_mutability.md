@@ -69,7 +69,13 @@
 
 ## 一、核心概念
 
-「核心概念」涉及外部可变性与内部可变性的对比、内部可变性的类型谱系与运行时借用检查，本节逐一说明其要点。
+内部可变性（Interior Mutability）是「经共享引用 `&T` 修改数据」的受控机制，与默认的外部可变性（`&mut T` 独占写）形成互补。三个核心概念：
+
+1. **外部 vs 内部可变性对比**：外部可变性在「引用创建点」检查——`&mut T` 存在期间禁止任何其他访问路径（编译期）；内部可变性把检查推迟到「数据访问点」——`Cell`/`RefCell` 的每次读写执行规则校验（复制语义或运行时借用计数）。前者零成本但约束强，后者灵活但检查有运行时代价或能力限制。
+2. **类型谱系**：`Cell<T>`（单线程，按位复制，`T: Copy` 语义最简）→ `RefCell<T>`（单线程，运行时借用检查，`borrow`/`borrow_mut` 动态守卫）→ `Mutex<T>`/`RwLock<T>`（多线程，操作系统级互斥）→ `Atomic*`（多线程，无锁原子操作）。谱系的横轴是「线程安全性」（`Send`/`Sync` 约束递增），纵轴是「检查时机」（编译期 → 运行时 → 硬件）。
+3. **运行时借用检查**：`RefCell` 用两个计数器（共享借用数、可变借用标志）在运行时执行「别名 XOR 可变」规则——违规时 panic（`borrow_mut` 在已有借用存活时触发）。这把编译器 E0502 的静态规则原样搬到了运行时。
+
+判定选用哪个类型：单线程 + `Copy` 小值 → `Cell`；单线程 + 需要借用语义 → `RefCell`；跨线程 → `Mutex`/`RwLock`/原子。选错方向的典型信号是「`RefCell` 出现在 `Arc` 里」（应换 `Mutex`）。
 
 ### 1.1 外部可变性与内部可变性的对比
 
@@ -177,7 +183,13 @@ RefCell<T> 的运行时借用规则:
 
 ## 二、技术细节
 
-本节将「技术细节」分解为若干主题： `Cell<T>`：无借用语义的复制、`RefCell<T>`：动态借用规则与`Mutex<T>` 与 `RwLock<T>`：线程安全版本。
+三个基础类型的技术细节决定其成本模型与失败模式：
+
+- **`Cell<T>`：无借用语义的复制**：读写都经复制完成——`get()` 要求 `T: Copy` 返回副本，`set()` 整体写入，`replace()`/`swap()` 原子换入换出。因为不存在「指向内部的引用」（`Cell` 不提供 `&T` 视图），借用规则无从违反——安全性的来源是「只给副本」而非「检查引用」。成本：零（复制本来就要做）。
+- **`RefCell<T>`：动态借用规则**：`borrow()` → `Ref<T>`（共享计数 +1，守卫 drop 时 −1），`borrow_mut()` → `RefMut<T>`（独占标志置位）。规则与编译期借用完全同构：可变借用存在时任何借用 panic，共享借用存在时 `borrow_mut` panic。`try_borrow` 系列把 panic 换为 `Result`。成本：每次借用一次计数读写（约 1–2ns），加潜在的 panic 分支。
+- **`Mutex<T>` 与 `RwLock<T>`：线程安全版本**：锁守卫（`MutexGuard`）实现 `DerefMut`，访问 = 加锁 + 借用；毒化（poisoning）机制在持锁 panic 后使后续 `lock()` 返回 `Err`——防止观察到半更新的不变量（可经 `unwrap_or_else(|e| e.into_inner())` 显式忽略毒化）。`RwLock` 区分读写锁，读并发写独占。成本：无竞争时约 20ns（原子操作），竞争时陷入系统调用（µs 级）。
+
+三者的共同设计：可变性权限与「守卫值的生命周期」绑定（RAII），权限的获取与释放都经类型系统追踪——内部可变性从未绕过借用规则，只是改变了检查时机。
 
 ### 2.1 `Cell<T>`：无借用语义的复制
 
@@ -885,3 +897,21 @@ fn main() {
 - `Rc<RefCell<T>>`：单线程共享可变图/树结构。
 - `Arc<Mutex<T>>` / `Arc<RwLock<T>>`：多线程共享状态。
 - `Weak<T>`：打破 `Rc`/`Arc` 循环引用（Reference），常用于缓存键或观察者模式。
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 本质 | 编译期借用规则改为运行时执行 | `UnsafeCell` 根基 |
+| `Cell<T>` | 零开销、`!Sync`，值拷贝进出 | 标准库 |
+| `RefCell<T>` | 运行时借用计数，违规即 panic | 动态检查 |
+| 线程安全版 | `Mutex`/`RwLock` 提供跨线程内部可变 | `std::sync` |
+| 不变量 | 对外仍暴露 `&self` 接口，内部封装可变性 | 封装原则 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Memory Management](01_memory_management.md) 内存访问控制机制。
+- **下位（实例）**：跨线程组合实例见 [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)。
+- **对偶**：与编译期借用检查相对（运行时 vs 静态），见 [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)。
+- **组合**：与 [Smart Pointers](04_smart_pointers.md) 组合为 `Rc<RefCell<T>>`。
+- **依赖**：安全封装依赖 unsafe 边界纪律，见 [Unsafe Rust Patterns](../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md)。

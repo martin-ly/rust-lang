@@ -99,7 +99,7 @@ PatternWithoutRange ::= LiteralPattern | IdentifierPattern
 默认绑定为 `move`；使用 `ref` 和 `ref mut` 可改为按引用绑定：
 
 ```rust
-let x = &mut 5;
+let mut x = &mut 5;
 match x {
     ref mut n => **n += 1,
 }

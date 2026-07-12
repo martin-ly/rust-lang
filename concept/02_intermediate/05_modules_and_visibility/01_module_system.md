@@ -60,6 +60,8 @@
     - [测验 4：`pub(crate)` 与 `pub(super)`（分析层）](#测验-4pubcrate-与-pubsuper分析层)
     - [测验 5：模块与文件分离（应用层）](#测验-5模块与文件分离应用层)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -178,7 +180,13 @@ graph LR
 
 ## 二、技术细节
 
-本节从 use 声明与路径解析、Edition 2018 路径规则变更与Workspace 组织切入，剖析「技术细节」的核心内容。
+模块系统的三个技术细节，分别处理「名字引入」「版本演进」「多 crate 组织」：
+
+- **`use` 声明与路径解析**：`use` 在当前模块的命名空间中创建绑定，解析顺序为「`use` 导入 → 当前模块定义 → 外层模块（2018 edition 起不再隐式向外回溯，裸路径首段必须是 crate 名/`crate`/`self`/`super`/`use` 引入的名字）」。`use a::b as c` 重命名、`use a::{b, c}` 分组、`use a::*` glob（仅导入 `pub` 项，且显式绑定优先于 glob 冲突项）。
+- **Edition 2018 路径规则变更**：2015 中 `use foo::bar` 的 `foo` 默认从 crate 根解析，2018 起从「当前作用域」解析，外部 crate 名经 extern prelude 可用，`crate::foo` 显式表示根锚定。迁移工具 `cargo fix --edition` 自动改写；混用 edition 的 workspace 中，同一路径文本在两个 edition 语义可能不同——排查「路径在旧代码能编译、新模块报错」时先查两边 edition。
+- **Workspace 组织**：workspace 根 `Cargo.toml` 的 `[workspace] members` 声明成员 crate，共享 `Cargo.lock` 与 `target/`；`workspace.dependencies`/`workspace.package` 让成员继承依赖版本与元数据（`xxx.workspace = true`）。成员间引用用路径依赖（`path = "../foo"`），发布时需补 `version`。
+
+判定一个路径问题归属：单个 crate 内查 use/edition 规则；跨 crate 查 workspace 依赖声明与版本解析。
 
 ### 2.1 use 声明与路径解析
 >
@@ -481,7 +489,14 @@ fn main() {
 
 ## 十、边界测试：模块系统的编译错误
 
-本节将「边界测试：模块系统的编译错误」分解为若干主题：边界测试：`pub(crate)` 与 `pub(super)` 的可…、边界测试：模块文件与目录的命名冲突（编译错误）、边界测试：`use self::` 与 `use crate::` 的…、边界测试：路径重导出（re-export）的循环（编译错误）等5个方面。
+模块系统边界测试按「可见性计算」与「文件布局」两类失效组织：
+
+- **`pub(crate)` 与 `pub(super)` 的可见性边界**：`pub(crate)` 开放到整个 crate（含不相关模块），`pub(super)` 只放大一层。常见误用：把测试辅助函数标 `pub(crate)`（应用 `#[cfg(test)]` + 私有）；把「只对父模块工具开放」标成 `pub`（泄漏 API 面）。可见性标注过宽不报错但破坏封装——`#[warn(private_interfaces)]` 等 lint 可捕获部分泄漏。
+- **模块文件与目录的命名冲突**（E0761/E0583）：同时存在 `foo.rs` 与 `foo/mod.rs` 编译器拒绝（歧义）；`mod foo;` 声明后文件缺失报「file not found for module」。2018 风格（`foo.rs` + `foo/` 子目录）与 `mod.rs` 风格混用是此类错误的主要来源。
+- **`use self::` 与 `use crate::` 的锚点差异**：`self::` 锚定当前模块（随模块移动而变），`crate::` 锚定根（稳定）。重构模块层级时 `self::` 路径可能静默改变所指——重导出场景优先 `crate::` 绝对锚定。
+- **重导出循环**：`pub use a::X;` 与 `a` 中 `pub use crate::X;` 互指形成解析循环（E0365/无限解析错误）；打破方式是确定唯一「定义模块」，其他位置只重导出它。
+
+统一判定：可见性错误（E0603）说明路径对、权限错；解析错误（E0432/E0583）说明路径本身不成立——错误码的第一位区分两类。
 
 ### 10.1 边界测试：`pub(crate)` 与 `pub(super)` 的可见性层级（编译错误）
 
@@ -845,3 +860,21 @@ pub mod evaluator;
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml) · [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 双层结构 | crate 树（编译单元）× 模块树（隐私边界） | Cargo + 语言 |
+| 可见性粒度 | `pub` / `pub(crate)` / `pub(super)` / `pub(in path)` / 私有五级 | Reference |
+| 检查时机 | 隐私检查全部在编译期 | 静态规则 |
+| 路径澄清 | 2018 edition 统一 `crate::` 与外部包名前缀 | edition 变更 |
+| workspace | 多 crate 共享 lockfile 与目标目录 | Cargo |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md) 基础规则的工程化扩展。
+- **下位（实例）**：细粒度可见性对比例见 [Friend vs Module Privacy](02_friend_vs_module_privacy.md)。
+- **对偶**：与 C++ 头文件/链接模型相对，见 [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)。
+- **组合**：与 [API Naming Conventions](03_api_naming_conventions.md) 组合定义公共接口。
+- **依赖**：项解析依赖 [Items](../../01_foundation/07_modules_and_items/12_items.md)。

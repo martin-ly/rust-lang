@@ -216,3 +216,21 @@ Java/Python object ..... 引用语义
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 默认语义 | 复合类型默认按值 move / copy | 所有权模型 |
+| 引用方式 | 借用 `&T`/`&mut T` 或共享指针 `Rc`/`Arc`，需显式标注 | 区别于 Java/Python 默认引用语义 |
+| 别名规则 | `&mut` 独占、任意多 `&` 共享，编译期强制 | 借用检查器 |
+| 内存位置 | 值语义对象可完整驻留栈帧，无强制堆分配 | 零成本抽象 |
+| 拷贝语义 | 无隐式拷贝构造；复制需 `Copy` / `Clone` | trait 契约 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Variable Model](03_variable_model.md) 变量绑定模型的语义谱系。
+- **下位（实例）**：Rust move 作为值语义极值的实例分析见 [Move Semantics](../01_ownership_borrow_lifetime/05_move_semantics.md)。
+- **对偶**：与引用语义语言（Java/Python）的对象模型相对，见 [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)。
+- **组合**：与 [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) 共同定义对象生命周期边界。
+- **依赖**：跨线程值共享合法性依赖 [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) auto trait。

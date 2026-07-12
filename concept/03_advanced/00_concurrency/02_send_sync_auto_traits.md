@@ -77,7 +77,13 @@ pub unsafe auto trait Sync { /* 无方法，纯标记 */ }
 
 ## 二、形式化契约（Formal Contract）
 
-理解「形式化契约（Formal Contract）」需要把握 Send 契约、Sync 契约 ⟺ &T: Send与契约与线程 API 的连接点，本节依次展开。
+`Send` 与 `Sync` 的形式化契约是 Rust 并发安全的公理化表述：
+
+- **Send 契约**：`T: Send` ⟺ 「`T` 类型的值的所有权可以安全地转移到另一个线程」。「安全」的精确含义：转移后，原线程不再持有任何对该值的访问路径（move 语义保证），且值的析构发生在新线程不会违反任何线程亲和性约束（如 `Rc` 的计数增减非原子——跨线程析构会与原线程的计数操作竞争）。
+- **Sync 契约 ⟺ `&T: Send`**：`T: Sync` ⟺ 「`&T` 可以安全地跨线程共享」，即多个线程同时持有 `&T` 不会引入数据竞争。由于 `&T` 只提供只读访问，契约实质是「`T` 的所有经 `&T` 可达的修改路径都有同步保护」——`Cell`/`RefCell` 的修改路径无同步（`!Sync`），`Mutex`/`Atomic` 的有（`Sync`）。
+- **契约与线程 API 的连接点**：`thread::spawn<F: FnOnce() -> R + Send + 'static, R: Send + 'static>`——签名把契约写进了 API：闭包（含其捕获环境）与返回值都必须 `Send + 'static`。`'static` 约束排除「借用栈上数据的闭包」（除非用 `thread::scope` 的作用域线程，它把借用安全性编码为作用域 join 保证）。
+
+契约的使用方式：任何「这个类型能跨线程吗」的问题，先分解为 `Send`（移动）与 `Sync`（共享）两问，再按结构化规则（复合类型 ⟺ 全字段满足）递归判定——编译器执行的就是同一算法。
 
 ### 2.1 Send 契约
 
@@ -150,7 +156,13 @@ fn sync_contract_in_action() {
 
 ## 三、Auto Trait 机制：自动推导与负实现
 
-「Auto Trait 机制：自动推导与负实现」涉及结构化推导规则、负实现（Negative Impl）：显式 `!Send` / `!S…、stable 上的 opt-out 惯用法：`PhantomData`与orphan 规则边界，本节逐一说明其要点。
+`Send`/`Sync` 是 auto trait——编译器按结构自动推导实现，人工干预只在三条受控通道：
+
+- **结构化推导规则**：编译器对每个具体类型递归判定——`struct S { a: A, b: B }` 自动 `Send` ⟺ `A: Send` 且 `B: Send`（`Sync` 同理）。推导是「语法驱动」的：不需要任何标注，新类型定义完成即获得（或失去）两个标记。泛型类型 `Vec<T>: Send ⟺ T: Send`——推导沿类型参数传播。
+- **负实现（Negative Impl）**：`impl !Send for Rc<T> {}` 形式显式声明「永不实现」——标准库用它标记 `Rc`、裸指针等。负 impl 在 stable 不可写（`negative_impls` feature），它是编译器与标准库的保留机制。
+- **stable 上的 opt-out 惯用法**：用户类型需 `!Send` 时，嵌入 `PhantomData<Rc<()>>` 或 `PhantomData<*mut ()>`（裸指针 `!Send + !Sync`）使自动推导失败；反之，`unsafe impl Send for T {}` 是人工签署「我保证该类型满足契约」——孤儿规则允许此 impl 当且仅当类型在本地定义。
+
+判定一个类型的 `Send`/`Sync` 状态，按顺序查：有无显式（`unsafe`）impl → 有无负 impl（标准库类型）→ 结构化推导（字段递归）→ `PhantomData` 标记。四级机制覆盖了从「全自动」到「全人工」的完整干预谱。
 
 ### 3.1 结构化推导规则
 
@@ -336,7 +348,11 @@ fn assert_send_dyn() {
 
 ## 六、反例：编译期拒绝与 unsafe 手动 impl 对照
 
-「反例：编译期拒绝与 unsafe 手动 impl 对照」部分按反例 1：`Rc` 跨线程（编译期拒绝 E0277）、反例 2：`Arc<Cell<T>>` 共享可变（编译期拒绝 E027…与反例 3：unsafe 手动 impl 的正确/错误对照的顺序逐层展开。
+三组反例展示「编译期拒绝」与「人工 `unsafe` 契约」的边界——这是 `Send`/`Sync` 机制全部可信度的来源：
+
+- **反例 1：`Rc` 跨线程（E0277）**：`thread::spawn(move || drop(rc))` 报 `Rc<i32> cannot be sent between threads safely`。拒绝依据：`Rc` 的引用计数增减是非原子的读-改-写，两线程并发操作同一计数即数据竞争。修复：`Arc`（原子计数，成本是每次克隆一次原子 RMW）。
+- **反例 2：`Arc<Cell<T>>` 共享可变（E0277）**：`Cell<T>: !Sync` 使 `Arc<Cell<T>>: !Sync`——`Arc` 只解决「跨线程移动」（`Send`），不解决「共享后的同步访问」（`Sync`）。这是 `Send`/`Sync` 正交性的典型考题：两层约束分别由两层类型回答，修复是 `Arc<Mutex<T>>` 或 `Arc<AtomicT>`。
+- **反例 3：`unsafe` 手动 impl 的正误对照**：正确情形——类型用 `AtomicUsize` 实现计数但字段组合使自动推导保守失败，人工 `unsafe impl Sync` 并在注释中给出「所有共享访问经原子操作」的论证；错误情形——为消编译错误给含 `Cell` 字段的类型 impl `Sync`，把数据竞争从编译期推迟到生产环境。判定人工 impl 是否合法的标准：能否写出「任意线程交错下，所有经 `&T` 的修改都经同步原语」的完整论证——写不出即非法。
 
 ### 反例 1：`Rc` 跨线程（编译期拒绝 E0277）
 

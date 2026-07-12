@@ -231,3 +231,21 @@ access(item, module) = visible  iff  item 在 module 的可见范围内
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml) · [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 机制对比 | C++ `friend` 例外授权 vs Rust 模块边界无例外 | 语言设计 |
+| 粒度 | Rust 以 `pub(in path)` 等细粒度可见性替代 | Reference |
+| 检查时机 | Rust 隐私全部编译期检查 | 静态规则 |
+| 封装强度 | 模块边界不可被声明突破 | 隐私规则 |
+| 模拟方案 | 同模块子模块 / `pub(crate)` 达成近似效果 | 工程模式 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Module System](01_module_system.md) 可见性规则的跨语言对照。
+- **下位（实例）**：`pub(crate)` 等模拟场景见本页「Rust 中模拟 friend 的场景」节。
+- **对偶**：C++ `friend` 机制本身即对偶对象（本页主线）。
+- **组合**：与 [Use Declarations](../../01_foundation/07_modules_and_items/03_use_declarations.md) 的引入端规则组合。
+- **依赖**：模块基础见 [Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md)。

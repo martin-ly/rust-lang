@@ -101,6 +101,8 @@ mindmap
     - [测验 1：枚举的本质（🟢 基础）](#测验-1枚举的本质-基础)
     - [测验 2：穷尽性检查（🟡 进阶）](#测验-2穷尽性检查-进阶)
     - [测验 3：`#[non_exhaustive]` 的语义边界（🔴 专家）](#测验-3non_exhaustive-的语义边界-专家)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -223,7 +225,7 @@ pub enum ApiError {
 
 ### 6.1 未处理 `None`
 
-```rust,compile_fail
+```rust,no_run
 fn unwrap_unsafe(x: Option<i32>) -> i32 {
     x.unwrap() // 运行时 panic if None
 }
@@ -362,3 +364,21 @@ fn handle(msg: Message) {
 **A 正确**。按本页「五、`#[non_exhaustive]`」：对外部 crate 的消费者，`match` 必须包含 `_ =>` 分支；允许库作者在未来版本添加新变体而不破坏下游编译；**不影响定义该枚举的 crate 内部穷尽性检查**（B 错）。C/D 与语义无关。
 
 </details>
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 类型类别 | 和类型（sum type）：值恰为某变体之一 | 类型论 |
+| 负载 | 变体可携带命名字段 / 元组 / 无负载 | 枚举文法 |
+| 内存布局 | tag + 最大负载大小；含 niche 优化（如 `Option<&T>`） | 布局优化 |
+| 标准实例 | `Option<T>`、`Result<T, E>` 是核心空值/错误模型 | std |
+| 演进 | `#[non_exhaustive]` 允许未来新增变体不破坏下游 | semver 惯例 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Items](12_items.md) 项体系的和类型。
+- **下位（实例）**：`Option`/`Result` 的工程用法见 [Error Handling Basics](../08_error_handling/01_error_handling_basics.md)。
+- **对偶**：与 [Structs](04_structs.md) 积类型相对。
+- **组合**：与 [Patterns](../04_control_flow/02_patterns.md) 组合实现穷尽解构。
+- **依赖**：匹配语义依赖 [Type System](../02_type_system/01_type_system.md) 的穷尽性检查。

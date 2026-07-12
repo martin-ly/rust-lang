@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 # Run all quality gates locally.
 # 15 blocking gates (10 Cargo/mdbook/KB/i18n/mermaid + 5 promoted semantic gates in --strict mode)
-# + 5 semantic observe gates (warning, non-blocking).
+# + 6 semantic observe gates (warning, non-blocking).
 #
 # 观察门转正机制（见 AGENTS.md §5.2）：连续 4 周或连续 10 次 CI 运行达标后可评估转阻断。
 # 2026-07-12 已转正（本地 --strict 实跑 exit=0）：topology / kg_shapes / canonical_uniqueness /
 # concept_consistency_auditor / overlap v2（可处理项清零，见 reports/DEDUP_V2_ZERO_2026_07_12.md）。
 # 仍观察：metadata_consistency（D2/D5 豁免登记）、semantic_health、concept_authority_coverage
 # （--strict exit=0：any=100%/none=0/core_gap=0；--include-crates 附加 crates docs 小节，
-# crates 非 stub 内容页 64/64=100%）、naming_convention（2026-07-12 新增，ERROR=0/WARN=85）。
+# crates 非 stub 内容页 64/64=100%）、examples_compile（P3-5）、naming_convention（2026-07-12 新增，
+# ERROR=0/WARN=78）、concept_code_blocks（2026-07-13 独立观察门，基线见
+# reports/CONCEPT_CODE_BLOCKS_BASELINE_2026_07_13.md）。
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -52,11 +54,12 @@ run_gate "Metadata Consistency (observe)" python scripts/check_metadata_consiste
 run_gate "Concept Authority Coverage (observe)" python scripts/check_concept_authority_coverage.py --include-crates
 run_gate "Semantic Health (observe)" python scripts/semantic_health.py
 run_gate "Examples Compile Check (observe)" python scripts/check_examples_compile.py
-# 同段附加小节（不计入门数）：concept/ 代码块分层抽样编译实测（观察，2026-07-12 建立）。
-# 提取 concept/ ```rust 块并分类（跳过 ignore/compile_fail/no_run、todo!()/unimplemented!()、
-# 外部 crate 依赖块），std-only 候选 >300 时按文件分层抽样 300 块 rustc --edition 2024 编译，
-# 输出通过率；--strict 时通过率 <95% exit 1（观察期不加 --strict）。
-run_gate "Concept Code Blocks Sample Compile (observe, 附加小节)" python scripts/check_concept_code_blocks.py
+# 独立观察门（2026-07-13，原 Examples Compile Check 段附加小节提升）：concept/ 代码块编译实测。
+# 提取 concept/ ```rust 块并分类；compile_fail 验证确实失败（E0xxx 校验 + editionNNNN fence）；
+# std-only 候选 >300 按文件分层抽样 300 块 rustc --edition 2024 编译（自动包 fn main）；
+# --with-deps 用 target/debug/deps rmeta 做 --extern 实测依赖块（默认门内不启用，需先 cargo build）。
+# 默认观察 exit 0；--strict 时“应过但失败/标注腐烂”>0 exit 1（观察期不加 --strict）。
+run_gate "Concept Code Blocks (observe)" python scripts/check_concept_code_blocks.py
 run_gate "Naming Convention (observe)" python scripts/check_naming_convention.py
 
 # --- Content Overlap v2 (blocking, promoted 2026-07-12 per AGENTS.md §5.2) ---
@@ -88,7 +91,7 @@ fi
 
 echo ""
 if [ "$FAILED" -eq 0 ]; then
-    echo "✅ All 20 quality gates passed (15 blocking + 5 semantic observe)."
+    echo "✅ All 21 quality gates passed (15 blocking + 6 semantic observe)."
     exit 0
 else
     echo "❌ Some quality gates failed."

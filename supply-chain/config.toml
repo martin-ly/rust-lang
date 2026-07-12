@@ -4179,7 +4179,7 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.uuid]]
-version = "1.23.4"
+version = "1.23.5"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
@@ -4915,7 +4915,7 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.zmij]]
-version = "1.0.21"
+version = "1.0.22"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"

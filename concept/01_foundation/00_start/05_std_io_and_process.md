@@ -270,13 +270,13 @@ fn main() -> io::Result<()> {
 
 ### 4.2 反例：忽略 Result
 
-```rust,compile_fail
+```rust
 use std::fs::File;
 use std::io::Write;
 
 fn main() {
     let mut file = File::create("log.txt").unwrap();
-    file.write_all(b"entry\n"); // 错误：未处理 Result
+    file.write_all(b"entry\n"); // 错误：未处理 Result（unused_must_use 警告，非编译错误）
 }
 ```
 

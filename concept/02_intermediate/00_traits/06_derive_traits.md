@@ -325,3 +325,21 @@ struct User {
 **B 正确**。按本页「一、`#[derive]` 的作用」注意项与知识结构图「不可派生：Display、Drop」：如果默认行为不满足需求，需要手动实现——例如 `Display` **没有合理的默认用户可见格式**，因此不能 derive。对比：`Debug` 有面向开发者的合理默认（按字段顺序输出调试表示），故可派生。
 
 </details>
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 机制 | `#[derive]` 在编译期按字段递归生成 impl | 内置宏 |
+| 覆盖范围 | `Debug`/`Clone`/`Copy`/`PartialEq`/`Eq`/`PartialOrd`/`Ord`/`Hash`/`Default` 等 | std |
+| 条件 | 所有字段均实现目标 trait 才可派生 | 生成规则 |
+| 不可派生 | `Display` 等需手写或第三方宏 crate | 生态惯例 |
+| 组合 | 多个 derive 可叠加于同一类型 | 文法 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Traits](01_traits.md) trait impl 的自动生成入口。
+- **下位（实例）**：自定义 derive 需 [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md)。
+- **对偶**：与手写 impl 相对，见 [Implementations](../../01_foundation/07_modules_and_items/06_implementations.md)。
+- **组合**：与 [Structs](../../01_foundation/07_modules_and_items/04_structs.md) / [Enumerations](../../01_foundation/07_modules_and_items/05_enumerations.md) 组合。
+- **依赖**：展开卫生见 [Macro Hygiene](../../03_advanced/03_proc_macros/09_macro_hygiene.md)。

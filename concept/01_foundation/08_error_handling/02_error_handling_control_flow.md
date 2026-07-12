@@ -67,6 +67,8 @@ mindmap
     - [反向推理](#反向推理)
     - [反命题](#反命题)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 本篇聚焦 `Result`/`Option` 与 `?` 运算符、`Try`/`FromResidual` 残差机制、`try` 块、错误转换与边界设计。
 
@@ -308,3 +310,21 @@ flowchart TD
 
 - **P1 学术/形式化**: [Liu et al.: Towards Fixing Panic Bugs for Real-world Rust Programs（Panic4R 数据集, arXiv:2408.03262）](https://arxiv.org/abs/2408.03262) · [Lagaillardie, Neykova & Yoshida: Stay Safe Under Panic — Affine Rust Programming with Multiparty Session Types（ECOOP 2022 全文, arXiv:2204.13464）](https://arxiv.org/abs/2204.13464)（2026-07-12 验证 HTTP 200）
 - **P2 生态/社区**: [docs.rs/thiserror — 生态权威 API 文档](https://docs.rs/thiserror) · [docs.rs/anyhow — 生态权威 API 文档](https://docs.rs/anyhow)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| `?` 语义 | 经 `FromResidual`/`Try` 转换并早退 | Reference |
+| 跨类型传播 | `From<E1> for E2` 自动转换错误类型 | trait 契约 |
+| `try` 块 | 捕获块内 `?` 早退（nightly 特性） | 跟踪特性 |
+| 显式转换 | `map_err` / `ok_or` 手动映射 | 组合子 API |
+| 自定义错误 | 枚举 + `Display`/`Error` 实现惯例 | 生态惯例 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Error Handling Basics](01_error_handling_basics.md) 的传播机制细化。
+- **下位（实例）**：生态级错误设计见 [Error Handling Deep Dive](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md)。
+- **对偶**：与 panic 不可恢复路径相对，见 [Panic and Abort](03_panic_and_abort.md)。
+- **组合**：与 [Enumerations](../07_modules_and_items/05_enumerations.md) 的 `Result` 变体组合。
+- **依赖**：转换合法性依赖 [Traits](../../02_intermediate/00_traits/01_traits.md) 的 `From`/`Into` 契约。

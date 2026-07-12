@@ -121,7 +121,7 @@ pub fn unstable_abi_function(x: String) -> String {
 
 ## 五、边界测试：稳定 ABI 与 extern "C" 的符号兼容性（链接错误）
 
-```rust,compile_fail
+```rust
 // Rust 的默认 ABI 不稳定（随编译器版本变化）
 #[unsafe(no_mangle)]
 pub extern "C" fn rust_function(x: i32) -> i32 {

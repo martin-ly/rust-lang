@@ -193,7 +193,12 @@ debug_assert_matches!(config, Some(true));
 
 ## 二、形式化语义
 
-本节围绕「形式化语义」展开，覆盖与 `assert!` / `assert_eq!` 的对比 与 绑定捕获与作用域 两个方面。
+`assert_matches!` 的形式语义可以经与既有断言宏的对比精确刻画：
+
+- **与 `assert!` / `assert_eq!` 的对比**：`assert!(matches!(x, pat))` 与 `assert_matches!(x, pat)` 语义等价，但失败信息不同——`assert_matches!` 在失败时打印「实际值 : 模式」的对照（经 `Debug`），而 `assert!(matches!(...))` 只报 `matches! 返回 false`。与 `assert_eq!` 的区别更深：`assert_eq!` 要求 `PartialEq + Debug` 且比较整个值；`assert_matches!` 用模式匹配，可断言「结构性形状」而忽略字段细节（`Some(_)`, `Err(Error::Io(_))`），也不要求 `PartialEq`——这使它能断言不可比较类型（如含闭包的枚举）。
+- **绑定捕获与作用域**：`assert_matches!(x, Some(v) if v > 0)` 中的绑定 `v` 只在断言内部（宏展开生成的 `match` 臂）有效，不泄漏到外围作用域；守卫表达式 `if ...` 与 `match` 守卫语义完全一致。带守卫的版本语义为「`match x { pat if guard => (), _ => panic!() }`」的宏封装。
+
+形式化：`assert_matches!(e, p)` ⟺ `match e { p => {}, _ => panic!("assertion failed: {:?} does not match {}", e, stringify!(p)) }`——它是「单臂 match + 调试输出」的命名化，价值在诊断质量而非新语义。
 
 ### 2.1 与 `assert!` / `assert_eq!` 的对比
 >
@@ -269,7 +274,13 @@ if let Message::Coord { x, y } = msg {
 
 ## 三、使用场景与最佳实践
 
-本节从测试中的 Result/Option 断言、复杂枚举变体验证与与 `if let` 的互补关系切入，剖析「使用场景与最佳实践」的核心内容。
+`assert_matches!` 的最佳实践场景按「断言对象的形状复杂度」递进：
+
+- **测试中的 `Result`/`Option` 断言**：`assert_matches!(resp, Ok(body) if body.status() == 200)` 把「成功 + 内容条件」压成一行，替代「`unwrap` 后再 `assert_eq!`」两步（且失败时不会 panic 在 unwrap 而丢失「是 Err」的诊断信息）。这是它最高频的用途：错误路径测试（`assert_matches!(f(bad), Err(E::Invalid(_)))`）比任何 `is_err()` 断言都精确。
+- **复杂枚举变体验证**：多层嵌套枚举（AST、协议消息）的断言，模式可以写到任意深度（`Message::Response { id, payload: Payload::Data(d) } if !d.is_empty()`），而 `assert_eq!` 需要构造完整期望值——对含随机 id/时间戳的消息，模式断言是唯一实用手段。
+- **与 `if let` 的互补关系**：`if let` 是生产代码的「条件解构」（不匹配则跳过），`assert_matches!` 是测试代码的「强制匹配」（不匹配则失败）。二者共享同一模式语法——测试中用 `assert_matches!` 锁定的形状，与生产代码 `if let`/`match` 处理的形状形成对照，构成「期望与实际处理」的一致性校验。
+
+实践判定：断言对象是「值相等」用 `assert_eq!`；是「形状匹配 + 忽略细节」用 `assert_matches!`；是「布尔条件」用 `assert!`。三者不互斥，按精度需求选择。
 
 ### 3.1 测试中的 Result/Option 断言
 >

@@ -69,6 +69,7 @@ fn main() {
 | 类型信息 | 保留完整类型 | 擦除为 trait 对象 |
 
 ```rust
+# use std::fmt::Debug;
 fn static_dispatch<T: Debug>(x: T) { println!("{:?}", x); }
 fn dynamic_dispatch(x: &dyn Debug) { println!("{:?}", x); }
 ```

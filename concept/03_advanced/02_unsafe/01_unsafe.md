@@ -1546,7 +1546,13 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
 
 #### 语义精确定义
 
-「语义精确定义」部分按 `std::ptr::read<T>(src: *const T) -…、`std::ptr::write<T>(dst: *mut T, sr…与`*ptr` 解引用（`DerefMut`）的顺序逐层展开。
+`std::ptr::read` / `write` 与裸指针解引用是 unsafe 内存操作的三个精度不同的工具，语义差异在「所有权的移动轨迹」：
+
+- **`std::ptr::read<T>(src: *const T) -> T`**：从 `src` **按位复制**出 `T` 并返回——源内存不变，但语义上「值的所有权被移出」（编译器视为 move）。双重所有权的责任转移给调用者：源位置必须被视为已消耗（否则 double-drop）。它是 `mem::replace`/`Option::take` 的 unsafe 原型。
+- **`std::ptr::write<T>(dst: *mut T, src: T)`**：把 `src` 按位写入 `dst`，**不读取也不 drop `dst` 原有内容**——这是它与 `*dst = src` 的唯一差别，也是对未初始化内存唯一合法的写入方式（`*dst = src` 会先 drop 旧值，对未初始化内存即 UB）。
+- **`*ptr` 解引用（`DerefMut`）**：`*ptr = val` 等价于「drop 旧值 + write 新值」——前提是指针有效、对齐、指向已初始化的 `T`。三条前提任一不满足即 UB，且编译器不提示。
+
+判定用哪个：源/目标是「未初始化内存」→ 必须 `ptr::write`/`read`（`MaybeUninit` 是其安全封装）；目标是「已初始化且要替换」→ `*ptr = val` 或 `ptr::replace`；需要「移出但保留源不变」→ `ptr::read`（然后负责使源失效）。错误混用的后果直接对应三类经典 UB：double-free、内存泄漏、读未初始化。
 
 ##### `std::ptr::read<T>(src: *const T) -> T`
 
@@ -1724,7 +1730,13 @@ unsafe fn construct_in_place<T>(ptr: *mut T, f: impl FnOnce() -> T) {
 
 #### 危险模式与常见错误
 
-本节围绕「危险模式与常见错误」展开，依次讨论危险模式 1：`ptr::read` 后原位置未失效导致的 doubl…、危险模式 2：`ptr::write` 覆盖已初始化值导致的内存泄漏与危险模式 3：对未初始化内存使用 `*ptr = val`。
+三个危险模式覆盖 unsafe 内存操作最高频的 UB 来源，每模式给出「错误形态 → 后果 → 正确姿势」：
+
+- **危险模式 1：`ptr::read` 后原位置未失效导致 double-free**：`let v = ptr::read(p);` 后原 `*p` 仍会在作用域末正常 drop——同一分配被 drop 两次。正确姿势：`read` 后立即 `mem::forget` 原持有者，或改用 `ManuallyDrop<T>` 包装使 drop 不再自动发生（`Vec::pop` 内部即「`read` 末尾元素 + `set_len(len-1)` 使该区域脱离 Vec 的 drop 范围」）。
+- **危险模式 2：`ptr::write` 覆盖已初始化值导致内存泄漏**：`ptr::write(p, new)` 不 drop `*p` 的旧值——旧值持有的堆资源（`String` 缓冲区、`Box`）永久泄漏。正确姿势：覆盖已初始化内存用 `ptr::replace`（返回旧值由调用方处理）或 `*p = new`（自动 drop 旧值）；`ptr::write` 只用于「确认未初始化」的槽位。
+- **危险模式 3：对未初始化内存使用 `*ptr = val`**：赋值语义先 drop 后写——对未初始化内存执行 drop 是「对垃圾字节调用析构函数」，UB 中最难调试的一类（可能「碰巧工作」直到分配器状态改变）。正确姿势：`MaybeUninit<T>` 生命周期管理（`uninit()` → `write()` → `assume_init()`），或 `ptr::write` 直写裸指针。
+
+三模式的统一识别信号：代码中「`read`/`write`/解引用」与「初始化状态」的配对——每次操作前自问「这块内存此刻是否已初始化、之后谁负责 drop」，两问都有明确答案才合法。Miri 能动态捕获全部三类错误。
 
 ##### 危险模式 1：`ptr::read` 后原位置未失效导致的 double-free
 
@@ -2809,7 +2821,13 @@ Gheri & Watt 提出了 **Provenance** 模型：
 
 ## 十六、边界测试：Unsafe 代码的编译错误与运行时灾难
 
-本节将「边界测试：Unsafe 代码的编译错误与运行时灾难」分解为若干主题：边界测试：裸指针解引用前的空检查（编译错误）、边界测试：将 &T 转换为 &mut T（编译错误）、边界测试：无效 UTF-8 的 str::from_utf8_unch…、边界测试：通过 `&T` 获取 `&mut T`（编译错误）等7个方面。
+Unsafe 的边界测试按「编译期仍可拦截的错误」与「已进入 UB 领域的灾难」分档——分界线是 `unsafe` 内哪些检查仍然有效：
+
+- **编译错误（unsafe 不豁免的检查）**：裸指针解引用必须在 `unsafe` 块内（E0133，unsafe 外全禁）；`&T → &mut T` 的强制转换（`&*(p as *mut _)` 之外的任何类型系统路径）被借用检查拒绝——unsafe 放宽的是「指针操作」，不是「借用规则」；`static mut` 的引用创建（2024 edition 起 `static_mut_refs` 为 deny）在编译期报错。
+- **运行时灾难（unsafe 豁免后的人工责任区）**：`str::from_utf8_unchecked` 传入无效 UTF-8——后续任何 `str` 方法可读到非法状态，UB 经安全代码放大（「安全代码的信任被 unsafe 破坏」是 UB 传播的标准路径）；通过裸指针制造「同一内存的 `&mut` 与 `&` 共存」（违反 Stacked Borrows，Miri 必报）；`transmute` 改变 `&'a T` 的生命周期为 `'static`——悬垂引用经安全接口流出。
+- **判定框架**：unsafe 代码审查按「五步清单」——① 指针有效性（分配内、对齐、非空）；② 初始化状态（读前已写）；③ 别名规则（`&mut` 独占性人工维持）；④ 生命周期（引用不超过数据存活期）；⑤ panic 安全（unsafe 块内 panic 不留下半更新状态）。七项边界测试分别命中清单的不同条目。
+
+Miri（`cargo miri test`）是「运行时灾难」档的动态裁判：Stacked Borrows 模型 + 未初始化内存追踪 + 数据竞争检测，能拦截本节全部 UB 形态——unsafe 代码的最低验收标准应是 Miri 全绿。
 
 ### 16.1 边界测试：裸指针解引用前的空检查（编译错误）
 

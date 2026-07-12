@@ -234,7 +234,7 @@ fn main() {}
 
 ### 4.3 反例：混淆别名与 newtype
 
-```rust,compile_fail
+```rust
 type UserId = u64;
 type ProductId = u64;
 

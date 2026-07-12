@@ -1,28 +1,43 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""concept/ 代码块批量编译实测门（P3-x，2026-07-12 建立）。
+"""concept/ 代码块批量编译实测工具（P2，2026-07-13 重构；初版 2026-07-12）。
 
 背景：
-    concept/ 权威概念层有约 4600+ 个 ```rust 代码块（kb_auditor 统计），
-    此前仅零星验证。本脚本提取全部分类并批量编译实测：
+    concept/ 权威概念层有 4700+ 个 ```rust 代码块，此前仅零星验证（约 60 页）。
+    本工具提取全部分类并批量实测，建立全库可机器复核的编译基线。
 
-    1. 标注跳过：ignore / compile_fail / should_panic / no_run / edition* 等
-       fence flag → 跳过编译但统计；
-    2. 伪代码跳过：含 todo!()/unimplemented!()/占位省略行/伪代码标记 → 跳过；
-    3. nightly / no_std / no_main → 跳过（非 stable-2024 可直接验证范围）；
-    4. 无外部依赖候选 → rustc --edition 2024 逐块编译（自动包装 fn main）；
-       候选超过 --sample（默认 300）时按文件分层随机抽样（固定 seed，可复现）；
-    5. 引用外部 crate 的块：默认归为"需外部依赖未测"；--with-deps 模式下
-       生成 target/code_check/ 临时 crate 借用 workspace 已有依赖编译。
+分类（category）：
+    标注类（fence flag）：
+      - anno_ignore   : ignore / no_run / allow_fail → 仅统计，不编译
+      - compile_fail  : 实测「确实编译失败」；fence 标注 E0xxx 时校验错误码一致
+      - should_panic  : 实测编译通过（运行期 panic 语义不执行验证）
+    跳过类：
+      - pseudo        : 含 todo!()/unimplemented!()/整行省略号(.../…)/伪代码注释
+      - nightly       : 含 #![feature(...)]
+      - nostd         : no_std / no_main
+    依赖类：
+      - dep_skip      : 嵌入式/wasm/验证工具等环境不可用 crate
+      - dep_untested  : 引用的 crate 在 target/debug/deps 中找不到 rmeta/rlib（需依赖未测）
+      - dep           : 依赖可解析 → 用 target/debug/deps 的 rmeta 做 --extern 实测
+    可编译候选：
+      - candidate     : std-only，rustc --edition 2024 直编（无 fn main 自动包装）
+
+依赖解析（--with-deps）：
+    先 `cargo build --workspace`（或 --ensure-deps 自动执行）确保 target/debug/deps
+    存在 rmeta；块中引用的 crate 逐一映射 lib<name>-*.rmeta/.rlib（proc-macro 用
+    动态库），全部可解析才编译，找不到的归入 dep_untested。
+
+执行：
+    分批（每批 --batch 300 块）ThreadPoolExecutor 并行 rustc，防单次运行超时。
+    候选超过 --sample（默认 300）时按文件分层随机抽样（固定 seed，可复现）；
+    --sample 0 全量。compile_fail/should_panic/dep 块不抽样，全部实测。
 
 用法：
-    python scripts/check_concept_code_blocks.py                 # 观察模式：失败告警 exit 0（输出通过率）
-    python scripts/check_concept_code_blocks.py --strict        # 阻断模式：通过率 <95% exit 1
-    python scripts/check_concept_code_blocks.py --sample 0      # 不抽样，全量编译（慢）
-    python scripts/check_concept_code_blocks.py --with-deps     # 附加依赖块实测（慢，一次性审计用）
+    python scripts/check_concept_code_blocks.py                 # 观察模式：抽样 300 候选，exit 0
+    python scripts/check_concept_code_blocks.py --strict        # 阻断：应过但失败 > 0 → exit 1
+    python scripts/check_concept_code_blocks.py --sample 0 --with-deps --json tmp/cb.json --report reports/x.md
     python scripts/check_concept_code_blocks.py --stats-only    # 只提取分类，不编译
-    python scripts/check_concept_code_blocks.py --limit 200 --offset 0   # 分批（不走抽样）
-    python scripts/check_concept_code_blocks.py --report reports/xxx.md  # 输出报告
+    python scripts/check_concept_code_blocks.py --ensure-deps   # 先 cargo build --workspace
 """
 
 from __future__ import annotations
@@ -41,18 +56,22 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CONCEPT_DIR = ROOT / "concept"
-SCRATCH_CRATE = ROOT / "target" / "code_check"
+DEPS_DIR = ROOT / "target" / "debug" / "deps"
 
-# --- fence flags: 跳过编译但统计 ---
-SKIP_FLAGS = {"ignore", "compile_fail", "should_panic", "no_run", "allow_fail", "norun", "test_harness"}
+# --- fence flags ---
+IGNORE_FLAGS = {"ignore", "no_run", "norun", "allow_fail", "test_harness", "notest"}
+COMPILE_FAIL_FLAGS = {"compile_fail"}
+SHOULD_PANIC_FLAGS = {"should_panic"}
+EDITION_FLAG_RE = re.compile(r"^edition(2015|2018|2021|2024)$")
+ERRCODE_RE = re.compile(r"^E\d{4}$")
 
-# --- 已知外部 crate（出现在 use/extern crate 中即视为依赖块） ---
+# --- 已知外部 crate（出现在 use/extern crate/路径中即视为依赖块） ---
 KNOWN_CRATES = {
     "tokio", "tokio_stream", "tokio_util", "futures", "futures_util", "async_std",
     "serde", "serde_json", "serde_derive", "serde_yaml", "toml", "ron",
     "anyhow", "thiserror", "eyre", "snafu",
     "rayon", "crossbeam", "crossbeam_channel", "crossbeam_utils", "dashmap",
-    "parking_lot", "flume", "tokio_util",
+    "parking_lot", "flume",
     "reqwest", "hyper", "hyper_util", "hyper_tls", "h2", "http", "axum", "axum_core",
     "actix_web", "actix", "actix_rt", "tower", "tower_http", "warp", "rocket", "tide",
     "salvo", "ntex", "poem",
@@ -65,7 +84,7 @@ KNOWN_CRATES = {
     "wasm_bindgen", "js_sys", "web_sys", "pyo3", "napi", "napi_derive", "uniffi",
     "libc", "winapi", "windows", "nix", "mio", "socket2",
     "libloading", "dlopen", "cxx", "bindgen", "cc",
-    "bevy", "bevy_ecs", "amethyst", "ggez", "macroquad", "winit", "wgpu", "glow",
+    "bevy", "bevy_ec2", "bevy_ecs", "amethyst", "ggez", "macroquad", "winit", "wgpu", "glow",
     "egui", "iced", "slint", "tauri", "dioxus", "yew", "leptos", "seed",
     "sqlx", "diesel", "sea_orm", "sea_query", "rusqlite", "tokio_postgres", "redis",
     "mongodb", "surrealdb",
@@ -95,7 +114,7 @@ KNOWN_CRATES = {
     "sled", "rocksdb", "redb", "heed", "lmdb", "fjall",
     "tempfile", "tempdir", "walkdir", "glob", "fs_extra", "camino",
     "dirs", "directories", "home", "which", "is_terminal", "atty",
-    "signal_hook", "ctrlc", "daemonize", "nix",
+    "signal_hook", "ctrlc", "daemonize",
     "url", "urlencoding", "percent_encoding", "idna", "publicsuffix",
     "jsonschema", "schemars", "validator", "garde",
     "html5ever", "scraper", "select", "kuchiki", "markup5ever",
@@ -126,119 +145,19 @@ KNOWN_CRATES = {
     "vulkano", "ash", "gfx", "gfx_hal", "rend3", "three_d",
     "rusttype", "fontdue", "ab_glyph", "cosmic_text", "swash",
     "usvg", "resvg", "tiny_skia", "raqote", "plotters", "svg",
-    "include_dir", "rust_embed", "include_flate",
+    "include_dir", "rust_embed",
     "mlua", "rlua", "rhai", "gluon", "deno_core", "rune", "starlark",
     "tree_sitter", "tree_sitter_rust",
     "insta", "expect_test", "goldenfile", "assert_cmd", "predicates", "wiremock",
     "httpmock", "mockito", "httptest", "test_context",
     "ctor", "inventory", "linkme", "typetag", "erased_serde",
-    "ghost", "static_assertions", "const_panic",
+    "ghost", "const_panic",
     "measure_time", "coarsetime", "quanta", "tikv_jemallocator", "mimalloc",
     "miri", "kani", "verus", "prusti", "creusot", "autoverus",
-    "ratatui", "cursive", "termion", "termwiz", "vt100",
+    "cursive", "termion", "termwiz", "vt100",
     "threadpool", "scheduled_thread_pool", "cron", "tokio_cron_scheduler",
     "dynosaur", "miniextendr_api", "extendr_api", "r_vector",
     "orthrus", "numcodecs",
-}
-
-# workspace 已有（可离线编译）的依赖子集 → --with-deps 模式用
-# name in code -> cargo package name (None = same)
-WORKSPACE_DEPS = {
-    "tokio": None, "futures": None, "serde": None, "serde_json": None,
-    "anyhow": None, "thiserror": None, "rayon": None, "crossbeam": None,
-    "dashmap": None, "parking_lot": None, "reqwest": None, "hyper": None,
-    "hyper_util": "hyper-util", "axum": None, "tower": None, "tower_http": "tower-http",
-    "clap": None, "rand": None, "regex": None, "lazy_static": "lazy_static",
-    "once_cell": "once_cell", "chrono": None, "uuid": None, "itertools": None,
-    "log": None, "tracing": None, "async_trait": "async-trait",
-    "pin_project": "pin-project", "bytes": None, "libc": None,
-    "proptest": None, "criterion": None, "tempfile": None, "url": None,
-    "bitflags": None, "indexmap": None, "smallvec": None, "slab": None,
-    "either": None, "paste": None, "derive_more": "derive_more",
-    "strum": None, "nom": None, "syn": None, "quote": None, "proc_macro2": "proc-macro2",
-    "sha2": None, "base64": None, "hex": None, "md5": "md-5", "flate2": None,
-    "csv": None, "toml": None, "serde_yaml": "serde_yaml", "jsonwebtoken": None,
-    "num": None, "num_traits": "num-traits", "num_bigint": "num-bigint",
-    "ordered_float": "ordered-float", "rust_decimal": "rust_decimal",
-    "unicode_segmentation": "unicode-segmentation", "encoding_rs": "encoding_rs",
-    "memchr": None, "aho_corasick": "aho-corasick",
-    "walkdir": None, "glob": None, "dirs": None, "which": None,
-    "colored": None, "indicatif": None, "console": None,
-    "sqlx": None, "tokio_postgres": "tokio-postgres", "rusqlite": None, "redis": None,
-    "sea_orm": "sea-orm", "diesel": None,
-    "libp2p": None, "h2": None, "http": None,
-    "salvo": None, "ntex": None, "askama": None,
-    "actix_web": "actix-web", "actix": None,
-    "mockall": None, "rstest": None, "insta": None, "assert_cmd": "assert_cmd",
-    "predicates": None, "wiremock": None,
-    "loom": None, "arbitrary": None,
-    "nalgebra": None, "ndarray": None,
-    "notify": None, "config": None, "dotenvy": None,
-    "sled": None, "polars": None,
-    "opentelemetry": None, "prometheus": None, "metrics": None,
-    "backtrace": None, "color_eyre": "color-eyre",
-    "jsonschema": None, "schemars": None, "validator": None,
-    "pulldown_cmark": "pulldown-cmark", "comrak": None,
-    "tera": None, "handlebars": None,
-    "criterion": None, "quickcheck": None,
-    "socket2": None, "mio": None, "nix": None,
-    "wasm_bindgen": "wasm-bindgen",
-    "serde_with": "serde_with", "serde_repr": "serde_repr",
-    "smol": None, "async_lock": "async-lock", "async_channel": "async-channel",
-    "event_listener": "event-listener",
-    "bytemuck": None, "zerocopy": None, "scopeguard": None, "self_cell": "self_cell",
-    "static_assertions": "static_assertions", "enum_dispatch": "enum_dispatch",
-    "bumpalo": None, "typed_arena": "typed-arena", "slotmap": None, "petgraph": None,
-    "hashbrown": None, "tinyvec": None, "arrayvec": None,
-    "bincode": None, "postcard": None, "rmp_serde": "rmp-serde",
-    "crossterm": None, "ratatui": None, "termcolor": None,
-    "dialoguer": None, "inquire": None, "comfy_table": "comfy-table",
-    "image": None, "plotters": None, "resvg": None, "usvg": None, "tiny_skia": "tiny-skia",
-    "rodio": None, "cpal": None, "hound": None, "symphonia": None,
-    "glam": None, "cgmath": None,
-    "rustls": None, "native_tls": "native-tls", "ring": None, "blake3": None,
-    "zeroize": None, "subtle": None, "hkdf": None, "hmac": None, "pbkdf2": None,
-    "x509_parser": "x509-parser", "rcgen": None, "pem": None, "rustls_pemfile": "rustls-pemfile",
-    "openssl": None,
-    "goblin": None, "object": None, "xmas_elf": "xmas-elf",
-    "capstone": None, "iced_x86": "iced-x86",
-    "include_dir": "include_dir", "rust_embed": "rust-embed",
-    "mlua": None, "rhai": None,
-    "ctor": None, "inventory": None, "linkme": None, "typetag": None, "erased_serde": "erased-serde",
-    "expect_test": "expect-test",
-    "threadpool": None, "cron": None,
-    "approx": None, "float_cmp": "float-cmp", "noisy_float": "noisy_float",
-    "fixed": None, "bigdecimal": None,
-    "unicode_normalization": "unicode-normalization", "unicode_width": "unicode-width",
-    "bstr": None, "simd_json": "simd-json", "sonic_rs": "sonic-rs",
-    "zstd": None, "brotli": None, "snap": None, "lz4": None, "xz2": None, "bzip2": None,
-    "zip": None, "tar": None,
-    "nom": None, "pest": None, "logos": None, "chumsky": None, "winnow": None,
-    "pnet": None, "smoltcp": None,
-    "rusttype": None, "fontdue": None, "ab_glyph": "ab_glyph",
-    "async_executor": "async-executor", "async_task": "async-task", "async_io": "async-io",
-    "async_net": "async-net", "polling": None,
-    "kanal": None,
-    "coarsetime": None, "quanta": None,
-    "auto_impl": "auto_impl", "derive_builder": "derive_builder", "delegate": None,
-    "strum_macros": "strum_macros", "num_enum": "num_enum",
-    "percent_encoding": "percent-encoding", "idna": None,
-    "html5ever": None, "scraper": None,
-    "sentry": None,
-    "serde_path_to_error": "serde_path_to_error",
-    "futures_util": "futures-util", "futures_executor": "futures-executor",
-    "darling": None, "proc_macro_error": "proc-macro-error",
-    "multibase": None, "multiaddr": None,
-    "prost": None, "tonic": None, "tarpc": None,
-    "hyper_rustls": "hyper-rustls", "hyper_tls": "hyper-tls", "hyper_timeout": "hyper-timeout",
-    "serde_derive": "serde_derive",
-    "env_logger": "env_logger", "tracing_subscriber": "tracing-subscriber",
-    "crossbeam_channel": "crossbeam-channel", "crossbeam_utils": "crossbeam-utils",
-    "flume": None,
-    "tokio_stream": "tokio-stream", "tokio_util": "tokio-util",
-    "rand_chacha": "rand_chacha",
-    "dynosaur": None,
-    "extendr_api": "extendr-api", "miniextendr_api": "miniextendr-api",
 }
 
 WORKSPACE_MEMBER_CRATES = {
@@ -249,11 +168,6 @@ WORKSPACE_MEMBER_CRATES = {
     "c17_resolver_v3_public_demo", "common",
 }
 
-# 抽样：候选超过该数量时按文件分层随机抽样（默认 300，固定 seed 可复现）
-SAMPLE_CAP = 300
-SAMPLE_SEED = 20260712
-STRICT_PASS_RATE = 0.95
-
 # 已知不可能编译的环境（嵌入式/nightly-only crate）→ 直接跳过
 SKIP_CRATES = {
     "cortex_m", "cortex_m_rt", "embedded_hal", "embassy", "rtic", "riscv",
@@ -262,29 +176,35 @@ SKIP_CRATES = {
     "miri", "kani", "verus", "prusti", "creusot", "autoverus",
 }
 
-PSEUDO_MARKERS = [
-    "todo!()", "unimplemented!()", "unreachable!(\"TODO",
-]
-PSEUDO_LINE_RE = re.compile(
-    r"^\s*(//\s*)?(…|\.\.\.)\s*(//.*)?$"  # 整行只有 ... 或 …
-)
+PSEUDO_MARKERS = ["todo!()", "unimplemented!()"]
+PSEUDO_LINE_RE = re.compile(r"^\s*(//\s*)?(…|\.\.\.)\s*(//.*)?$")  # 整行只有 ... 或 …
 PSEUDO_COMMENT_RE = re.compile(
     r"(伪代码|示意代码|示意：|简化示意|此处省略|代码省略|省略实现|省略细节|pseudocode|pseudo-code|placeholder)",
     re.IGNORECASE,
 )
 
-TOP_LEVEL_ITEM_RE = re.compile(
-    r"^(?:pub(?:\([^)]*\))?\s+)?(?:async\s+)?(?:unsafe\s+)?(?:extern\s+\"[^\"]+\"\s+)?"
-    r"(?:fn|struct|enum|trait|impl|mod|use|const|static|type|macro_rules!|extern crate)\b"
-)
-ATTR_RE = re.compile(r"^\s*#\s*!?\[")
 FEATURE_RE = re.compile(r"#\s*!\s*\[\s*feature\s*\(")
-
-FENCE_RE = re.compile(r"^([ \t]*(?:>[ \t]*)?)```(rust[^\n]*)\n(.*?)^\1```", re.DOTALL | re.IGNORECASE | re.MULTILINE)
+FENCE_RE = re.compile(
+    r"^([ \t]*(?:>[ \t]*)?)```(rust[^\n]*)\n(.*?)^\1```",
+    re.DOTALL | re.IGNORECASE | re.MULTILINE,
+)
 CRATE_USE_RE = re.compile(
     r"(?:^|\n)\s*(?:use\s+([a-zA-Z_][a-zA-Z0-9_]*)|extern\s+crate\s+([a-zA-Z_][a-zA-Z0-9_]*))"
 )
 CRATE_PATH_RE = re.compile(r"\b([a-z][a-z0-9_]*)::")
+PRELUDE_PATHS = {
+    "std", "core", "alloc", "self", "crate", "super",
+    "fmt", "io", "fs", "env", "mem", "ptr", "str", "string", "vec", "option", "result",
+    "iter", "ops", "cmp", "hash", "borrow", "cell", "rc", "sync", "thread", "time",
+    "collections", "convert", "default", "clone", "marker", "num", "char", "error",
+    "future", "task", "pin", "any", "ascii", "ffi", "path", "process", "net", "panic",
+    "range", "slice", "array", "prelude", "hint", "intrinsics", "raw", "f32", "f64",
+}
+
+SAMPLE_CAP = 300
+SAMPLE_SEED = 20260713
+BATCH_SIZE = 300
+RUSTC_TIMEOUT = 60
 
 
 def extract_blocks(path: Path) -> list[dict]:
@@ -314,15 +234,34 @@ def extract_blocks(path: Path) -> list[dict]:
     return blocks
 
 
+def referenced_crates(code: str) -> set[str]:
+    """块中引用的疑似外部 crate（use/extern crate + 已知 crate 路径前缀）。"""
+    crates: set[str] = set()
+    for m in CRATE_USE_RE.finditer(code):
+        name = m.group(1) or m.group(2)
+        if name not in PRELUDE_PATHS:
+            crates.add(name)
+    for m in CRATE_PATH_RE.finditer(code):
+        name = m.group(1)
+        if name in PRELUDE_PATHS:
+            continue
+        if name in KNOWN_CRATES or name in WORKSPACE_MEMBER_CRATES:
+            crates.add(name)
+    return crates
+
+
 def classify(block: dict) -> tuple[str, str]:
-    """返回 (category, reason)。category:
-    flag_skip / pseudo / nightly / nostd / dep_skip / dep / candidate
-    """
+    """返回 (category, reason)。"""
     flags = set(block["flags"])
     code = block["code"]
 
-    if flags & SKIP_FLAGS:
-        return "flag_skip", "fence: " + ",".join(sorted(flags & SKIP_FLAGS))
+    if flags & COMPILE_FAIL_FLAGS:
+        codes = sorted(f for f in flags if ERRCODE_RE.match(f))
+        return "compile_fail", "标注错误码: " + ",".join(codes) if codes else "未标注错误码"
+    if flags & SHOULD_PANIC_FLAGS:
+        return "should_panic", ""
+    if flags & IGNORE_FLAGS:
+        return "anno_ignore", "fence: " + ",".join(sorted(flags & IGNORE_FLAGS))
 
     stripped = code.strip()
     if not stripped or stripped in {"// ...", "...", "…"}:
@@ -343,26 +282,15 @@ def classify(block: dict) -> tuple[str, str]:
     if re.search(r"#\s*!\s*\[\s*no_std\s*\]", code) or re.search(r"#\s*!\s*\[\s*no_main\s*\]", code):
         return "nostd", "no_std/no_main"
 
-    crates = set()
-    for m in CRATE_USE_RE.finditer(code):
-        name = (m.group(1) or m.group(2))
-        if name in {"std", "core", "alloc", "self", "crate", "super"}:
-            continue
-        crates.add(name)
-    for m in CRATE_PATH_RE.finditer(code):
-        name = m.group(1)
-        if name in {"std", "core", "alloc", "self", "crate", "super"}:
-            continue
-        if name in KNOWN_CRATES or name in WORKSPACE_MEMBER_CRATES:
-            crates.add(name)
-    ext = {c for c in crates if c in KNOWN_CRATES or c in WORKSPACE_MEMBER_CRATES}
-    if ext:
-        if ext & SKIP_CRATES:
-            return "dep_skip", "环境不可用: " + ",".join(sorted(ext & SKIP_CRATES))
-        missing = {c for c in ext if c not in WORKSPACE_DEPS and c not in WORKSPACE_MEMBER_CRATES}
-        if missing:
-            return "dep_untested", "外部依赖(workspace外): " + ",".join(sorted(missing))
-        return "dep", "workspace依赖: " + ",".join(sorted(ext))
+    crates = referenced_crates(code)
+    if crates:
+        if crates & SKIP_CRATES:
+            return "dep_skip", "环境不可用: " + ",".join(sorted(crates & SKIP_CRATES))
+        known = {c for c in crates if c in KNOWN_CRATES or c in WORKSPACE_MEMBER_CRATES}
+        unknown = crates - known
+        if unknown:
+            return "dep_untested", "未知外部 crate: " + ",".join(sorted(unknown))
+        return "dep", "引用 crate: " + ",".join(sorted(known))
     return "candidate", ""
 
 
@@ -393,46 +321,153 @@ def wrap_code(code: str) -> str:
     return f"{head}fn main() {{\n{indented}\n}}\n"
 
 
+def find_extern_artifacts(deps_dir: Path, crate: str) -> list[Path]:
+    """在 target/debug/deps 中定位 crate 的全部候选 rmeta/rlib（proc-macro 为动态库）。
+    同一 crate 可能因 feature 差异存在多个构建产物（如 tokio full vs 子集），
+    返回全部候选，编译失败时轮换重试。"""
+    hits: list[Path] = []
+    for pat in (
+        f"lib{crate}-*.rmeta", f"lib{crate}-*.rlib",
+        f"{crate}-*.dll", f"lib{crate}-*.so", f"{crate}-*.so", f"lib{crate}-*.dylib",
+    ):
+        hits.extend(sorted(deps_dir.glob(pat)))
+    return hits
+
+
+def block_edition(block: dict) -> str:
+    """fence 上的 editionNNNN 标注 → 对应 edition；否则默认 2024。"""
+    for f in block["flags"]:
+        m = EDITION_FLAG_RE.match(f)
+        if m:
+            return m.group(1)
+    return "2024"
+
+
+def rustc_compile(src: str, tmpdir: Path, tag: str, externs: list[tuple[str, Path]],
+                  crate_type: str = "bin", edition: str = "2024") -> subprocess.CompletedProcess:
+    f = tmpdir / f"{tag}.rs"
+    f.write_text(src, encoding="utf-8")
+    cmd = ["rustc", "--edition", edition, "--emit=metadata", "--crate-type", crate_type,
+           "-o", str(tmpdir / f"{tag}.out"), str(f)]
+    for name, art in externs:
+        cmd += ["--extern", f"{name}={art}"]
+    if externs:
+        cmd += ["-L", f"dependency={DEPS_DIR}"]
+    return subprocess.run(cmd, capture_output=True, text=True, timeout=RUSTC_TIMEOUT)
+
+
 def compile_one(block: dict, tmpdir: Path) -> dict:
     """rustc 直接编译无依赖块。包装为 bin 失败时，回退按 lib（不包装）再试一次：
     部分纯 item 块（含 super::/mod 语义）包入 fn main 会改变模块语义。"""
     src = wrap_code(block["code"])
-    h = hashlib.sha1(src.encode()).hexdigest()[:12]
-    f = tmpdir / f"b_{h}.rs"
-    f.write_text(src, encoding="utf-8")
-    out = tmpdir / f"b_{h}.out"
-
-    def _run(source: str, crate_type: str, suffix: str) -> subprocess.CompletedProcess:
-        ff = tmpdir / f"b_{h}{suffix}.rs"
-        ff.write_text(source, encoding="utf-8")
-        return subprocess.run(
-            ["rustc", "--edition", "2024", "--emit=metadata", "--crate-type", crate_type,
-             "-o", str(tmpdir / f"b_{h}{suffix}.out"), str(ff)],
-            capture_output=True, text=True, timeout=60,
-        )
-
+    h = hashlib.sha1((block["file"] + str(block["line"]) + src).encode()).hexdigest()[:12]
+    ed = block_edition(block)
     try:
-        r = _run(src, "bin", "")
+        r = rustc_compile(src, tmpdir, f"b_{h}", [], edition=ed)
         if r.returncode != 0 and not re.search(r"fn\s+main\s*\(", block["code"]):
-            r2 = _run(unhide_lines(block["code"]), "lib", "_lib")
+            r2 = rustc_compile(unhide_lines(block["code"]), tmpdir, f"b_{h}_lib", [], "lib", ed)
             if r2.returncode == 0:
                 return {**block, "status": "pass", "stderr": "", "mode": "lib"}
     except subprocess.TimeoutExpired:
-        return {**block, "status": "timeout", "stderr": "rustc timeout 60s"}
+        return {**block, "status": "timeout", "stderr": f"rustc timeout {RUSTC_TIMEOUT}s"}
     ok = r.returncode == 0
-    stderr = "" if ok else r.stderr
-    return {**block, "status": "pass" if ok else "fail", "stderr": stderr}
+    return {**block, "status": "pass" if ok else "fail", "stderr": "" if ok else r.stderr}
+
+
+def compile_dep_one(block: dict, tmpdir: Path) -> dict:
+    """依赖块：rmeta --extern 解析后编译；找不到依赖 → dep_untested。
+    多构建产物（feature 差异）时轮换候选重试，最多 4 轮；全部失败且错误为
+    feature 缺失 → dep_untested（环境限制，不计入腐烂）。"""
+    crates = referenced_crates(block["code"])
+    cands: dict[str, list[Path]] = {}
+    missing = []
+    for c in sorted(crates):
+        arts = find_extern_artifacts(DEPS_DIR, c)
+        if not arts:
+            missing.append(c)
+        else:
+            cands[c] = arts
+    if missing:
+        return {**block, "status": "dep_untested",
+                "stderr": "deps 目录无 rmeta/rlib: " + ",".join(missing)}
+    src = wrap_code(block["code"])
+    has_main = bool(re.search(r"fn\s+main\s*\(", block["code"]))
+    lib_src = unhide_lines(block["code"])
+    ed = block_edition(block)
+    h = hashlib.sha1((block["file"] + str(block["line"]) + src).encode()).hexdigest()[:12]
+    rounds = min(max(len(v) for v in cands.values()), 4)
+    last: subprocess.CompletedProcess | None = None
+    try:
+        for k in range(rounds):
+            externs = [(c, arts[min(k, len(arts) - 1)]) for c, arts in cands.items()]
+            r = rustc_compile(src, tmpdir, f"d_{h}_r{k}", externs, edition=ed)
+            if r.returncode == 0:
+                return {**block, "status": "pass", "stderr": ""}
+            last = r
+            if not has_main:
+                r2 = rustc_compile(lib_src, tmpdir, f"d_{h}_r{k}_lib", externs, "lib", ed)
+                if r2.returncode == 0:
+                    return {**block, "status": "pass", "stderr": "", "mode": "lib"}
+    except subprocess.TimeoutExpired:
+        return {**block, "status": "timeout", "stderr": f"rustc timeout {RUSTC_TIMEOUT}s"}
+    stderr = last.stderr if last else ""
+    if "feature is disabled" in stderr or "feature may not be used" in stderr:
+        return {**block, "status": "dep_untested",
+                "stderr": "workspace 构建未启用所需 feature: " + summarize_stderr(stderr, 200)}
+    return {**block, "status": "fail", "stderr": stderr}
+
+
+def verify_compile_fail(block: dict, tmpdir: Path) -> dict:
+    """compile_fail 块：期望编译失败；标注 E0xxx 时校验错误码。意外通过 → 标注腐烂。"""
+    src = wrap_code(block["code"])
+    h = hashlib.sha1((block["file"] + str(block["line"]) + src).encode()).hexdigest()[:12]
+    want_codes = sorted(f for f in block["flags"] if ERRCODE_RE.match(f))
+    ed = block_edition(block)
+    try:
+        r = rustc_compile(src, tmpdir, f"c_{h}", [], edition=ed)
+        if r.returncode == 0 and not re.search(r"fn\s+main\s*\(", block["code"]):
+            r2 = rustc_compile(unhide_lines(block["code"]), tmpdir, f"c_{h}_lib", [], "lib", ed)
+            if r2.returncode != 0:
+                r = r2  # lib 模式下确实失败，以 lib 诊断为准
+    except subprocess.TimeoutExpired:
+        return {**block, "status": "timeout", "stderr": f"rustc timeout {RUSTC_TIMEOUT}s"}
+    if r.returncode == 0:
+        return {**block, "status": "cf_unexpected_pass",
+                "stderr": "compile_fail 块编译通过（标注腐烂或编译器已修复该诊断）"}
+    if want_codes:
+        got = set(re.findall(r"error\[(E\d{4})\]", r.stderr))
+        missing = [c for c in want_codes if c not in got]
+        if missing:
+            return {**block, "status": "cf_wrong_code",
+                    "stderr": f"标注 {','.join(want_codes)} 但实得 {','.join(sorted(got)) or '(无错误码)'}: "
+                              + summarize_stderr(r.stderr, 200)}
+    return {**block, "status": "cf_ok", "stderr": ""}
+
+
+def verify_should_panic(block: dict, tmpdir: Path) -> dict:
+    """should_panic 块：仅验证编译通过（运行期 panic 语义不执行验证）。"""
+    src = wrap_code(block["code"])
+    h = hashlib.sha1((block["file"] + str(block["line"]) + src).encode()).hexdigest()[:12]
+    ed = block_edition(block)
+    try:
+        r = rustc_compile(src, tmpdir, f"s_{h}", [], edition=ed)
+        if r.returncode != 0 and not re.search(r"fn\s+main\s*\(", block["code"]):
+            r2 = rustc_compile(unhide_lines(block["code"]), tmpdir, f"s_{h}_lib", [], "lib", ed)
+            if r2.returncode == 0:
+                return {**block, "status": "pass", "stderr": "", "mode": "lib"}
+    except subprocess.TimeoutExpired:
+        return {**block, "status": "timeout", "stderr": f"rustc timeout {RUSTC_TIMEOUT}s"}
+    ok = r.returncode == 0
+    return {**block, "status": "pass" if ok else "fail", "stderr": "" if ok else r.stderr}
 
 
 def summarize_stderr(stderr: str, limit: int = 600) -> str:
-    lines = [ln for ln in stderr.splitlines() if ln.strip().startswith(("error", "warning: unused"))]
     errs = [ln for ln in stderr.splitlines() if ln.startswith("error")]
     return "\n".join(errs)[:limit] if errs else stderr[:limit]
 
 
 def stratified_sample(candidates: list[dict], cap: int, seed: int) -> list[dict]:
-    """按文件分层随机抽样：每层（文件）按候选占比分配名额（最大余数法取整），
-    层内固定 seed 随机抽取，保证可复现且覆盖不同文件。"""
+    """按文件分层随机抽样（最大余数法 + 固定 seed），可复现且覆盖不同文件。"""
     rng = random.Random(seed)
     by_file: dict[str, list[dict]] = {}
     for b in candidates:
@@ -456,185 +491,66 @@ def stratified_sample(candidates: list[dict], cap: int, seed: int) -> list[dict]
     return sampled
 
 
-def block_crates(block: dict) -> set[str]:
-    """提取块中引用的已知外部/workspace crate。"""
-    crates = set()
-    for m in CRATE_USE_RE.finditer(block["code"]):
-        name = m.group(1) or m.group(2)
-        if name in KNOWN_CRATES or name in WORKSPACE_MEMBER_CRATES:
-            crates.add(name)
-    for m in CRATE_PATH_RE.finditer(block["code"]):
-        name = m.group(1)
-        if name in KNOWN_CRATES or name in WORKSPACE_MEMBER_CRATES:
-            crates.add(name)
-    return crates
-
-
-def load_lock_versions() -> dict[str, str]:
-    """从根 Cargo.lock 读取 name -> version（离线精确钉版）。"""
-    lock = ROOT / "Cargo.lock"
-    versions: dict[str, str] = {}
-    if not lock.exists():
-        return versions
-    name = None
-    for line in lock.read_text(encoding="utf-8").splitlines():
-        m = re.match(r'^name = "(.+)"$', line)
-        if m:
-            name = m.group(1)
-            continue
-        m = re.match(r'^version = "(.+)"$', line)
-        if m and name:
-            versions.setdefault(name, m.group(1))
-            name = None
-    return versions
-
-
-def run_dep_mode(dep_blocks: list[dict]) -> list[dict]:
-    """借用 workspace 依赖，在 target/code_check/ 临时 crate 中编译依赖块。"""
-    if not dep_blocks:
-        return []
-    needed_ext: set[str] = set()
-    needed_members: set[str] = set()
-    for b in dep_blocks:
-        for c in block_crates(b):
-            if c in WORKSPACE_MEMBER_CRATES:
-                needed_members.add(c)
-            elif c in WORKSPACE_DEPS:
-                pkg = WORKSPACE_DEPS[c] or c
-                needed_ext.add(pkg)
-
-    lock_versions = load_lock_versions()
-    unresolvable = {p for p in needed_ext if p not in lock_versions}
-    if unresolvable:
-        print(f"[deps] 不在 Cargo.lock，无法离线解析（跳过）: {sorted(unresolvable)}")
-
-    SCRATCH_CRATE.mkdir(parents=True, exist_ok=True)
-    (SCRATCH_CRATE / "src" / "bin").mkdir(parents=True, exist_ok=True)
-    # 清理旧 bin
-    for old in (SCRATCH_CRATE / "src" / "bin").glob("b_*.rs"):
-        old.unlink()
-
-    dep_lines = []
-    for pkg in sorted(needed_ext - unresolvable):
-        dep_lines.append(f'{pkg} = "={lock_versions[pkg]}"')
-    for mem in sorted(needed_members):
-        dep_lines.append(f'{mem} = {{ path = "../../crates/{mem}" }}')
-    cargo_toml = (
-        "[package]\nname = \"code_check\"\nversion = \"0.0.0\"\n"
-        "edition = \"2024\"\n\n[workspace]\n\n[dependencies]\n" + "\n".join(dep_lines) + "\n"
-    )
-    (SCRATCH_CRATE / "Cargo.toml").write_text(cargo_toml, encoding="utf-8")
-
-    name_of = {}
-    skipped_unresolvable: list[dict] = []
-    for b in dep_blocks:
-        b_crates = {WORKSPACE_DEPS.get(c) or c for c in block_crates(b) if c in WORKSPACE_DEPS}
-        if b_crates & unresolvable:
-            skipped_unresolvable.append(
-                {**b, "status": "dep_env_fail",
-                 "stderr": "依赖不在 Cargo.lock: " + ",".join(sorted(b_crates & unresolvable))})
-            continue
-        src = wrap_code(b["code"])
-        h = hashlib.sha1((b["file"] + str(b["line"]) + src).encode()).hexdigest()[:12]
-        name = f"b_{h}"
-        name_of[name] = b
-        (SCRATCH_CRATE / "src" / "bin" / f"{name}.rs").write_text(src, encoding="utf-8")
-
-    print(f"[deps] scratch crate: {len(needed_ext)} ext pkgs + {len(needed_members)} workspace members, "
-          f"{len(dep_blocks)} bins -> cargo check --offline")
-    env = dict(os.environ, CARGO_TARGET_DIR=str(ROOT / "target"))
-    try:
-        r = subprocess.run(
-            ["cargo", "check", "--offline", "--bins", "--message-format=json"],
-            cwd=SCRATCH_CRATE, capture_output=True, text=True, timeout=280, env=env,
-        )
-    except subprocess.TimeoutExpired:
-        print("[deps] cargo check timeout 280s")
-        return [{**b, "status": "timeout", "stderr": "cargo check timeout"} for b in dep_blocks]
-
-    # 解析 json 诊断
-    errors_by_bin: dict[str, list[str]] = {}
-    saw_compiler_message = False
-    for line in r.stdout.splitlines():
-        try:
-            msg = json.loads(line)
-        except json.JSONDecodeError:
-            continue
-        if msg.get("reason") != "compiler-message":
-            continue
-        saw_compiler_message = True
-        m = msg.get("message", {})
-        if m.get("level") not in ("error", "error: internal compiler error"):
-            continue
-        # 找到对应 bin 文件
-        target_bin = None
-        for sp in m.get("spans", []):
-            fn = sp.get("file_name", "")
-            mm = re.search(r"(b_[0-9a-f]{12})\.rs", fn)
-            if mm:
-                target_bin = mm.group(1)
-                break
-        if target_bin:
-            rendered = (m.get("rendered") or m.get("message") or "").splitlines()[0]
-            errors_by_bin.setdefault(target_bin, []).append(rendered)
-
-    # crate 级失败（依赖本身编译不了）→ 所有块标 dep_env_fail
-    # 判定：错误来自非 code_check 包（依赖包编译失败）
-    crate_level = []
-    unattributed = 0
-    for line in r.stdout.splitlines():
-        try:
-            msg = json.loads(line)
-        except json.JSONDecodeError:
-            continue
-        if msg.get("reason") == "compiler-message":
-            m = msg.get("message", {})
-            if m.get("level", "").startswith("error"):
-                if not any("b_" in (sp.get("file_name") or "") for sp in m.get("spans", [])):
-                    if "code_check" not in msg.get("package_id", ""):
-                        crate_level.append((m.get("rendered") or m.get("message") or "").splitlines()[0])
+def run_batches(jobs: list[tuple[dict, str]], batch: int, n_jobs: int, with_deps: bool) -> list[dict]:
+    """分批执行（每批 batch 块），批内线程池并行。jobs: (block, kind)
+    kind ∈ candidate / dep / compile_fail / should_panic"""
+    results: list[dict] = []
+    n_batches = (len(jobs) + batch - 1) // batch
+    with tempfile.TemporaryDirectory(prefix="concept_cb_") as td:
+        tmpdir = Path(td)
+        for bi in range(n_batches):
+            chunk = jobs[bi * batch: (bi + 1) * batch]
+            with ThreadPoolExecutor(max_workers=n_jobs) as ex:
+                futs = []
+                for b, kind in chunk:
+                    if kind == "candidate":
+                        futs.append(ex.submit(compile_one, b, tmpdir))
+                    elif kind == "dep":
+                        futs.append(ex.submit(compile_dep_one, b, tmpdir))
+                    elif kind == "compile_fail":
+                        futs.append(ex.submit(verify_compile_fail, b, tmpdir))
                     else:
-                        unattributed += 1
-    if unattributed:
-        print(f"[deps] {unattributed} 个无法归因到具体 bin 的 code_check 错误（见 cargo 输出）")
-    if crate_level:
-        print("[deps] crate-level errors (dep build failures):")
-        for e in crate_level[:10]:
-            print("   ", e[:160])
-    resolution_failed = r.returncode != 0 and not saw_compiler_message
-    if resolution_failed:
-        print("[deps] cargo 解析/构建失败（非编译诊断），全部按 dep_env_fail 处理:")
-        print("   ", (r.stderr or "").splitlines()[-1][:200] if r.stderr else "")
-
-    results = list(skipped_unresolvable)
-    for name, b in name_of.items():
-        if name in errors_by_bin:
-            results.append({**b, "status": "fail", "stderr": "\n".join(errors_by_bin[name])})
-        elif crate_level or resolution_failed:
-            reason = (crate_level[0] if crate_level else "cargo 解析失败")
-            results.append({**b, "status": "dep_env_fail", "stderr": "依赖编译失败: " + reason})
-        else:
-            results.append({**b, "status": "pass", "stderr": ""})
-    npass = sum(1 for x in results if x["status"] == "pass")
-    print(f"[deps] pass={npass} fail={sum(1 for x in results if x['status'] == 'fail')} "
-          f"dep_env_fail={sum(1 for x in results if x['status'] == 'dep_env_fail')}")
+                        futs.append(ex.submit(verify_should_panic, b, tmpdir))
+                for f in futs:
+                    results.append(f.result())
+            if n_batches > 1:
+                print(f"[batch {bi + 1}/{n_batches}] done ({len(results)}/{len(jobs)})", flush=True)
     return results
+
+
+def ensure_workspace_build() -> bool:
+    """cargo build --workspace 确保 target/debug/deps 存在 rmeta。"""
+    print("[deps] cargo build --workspace ...", flush=True)
+    try:
+        r = subprocess.run(["cargo", "build", "--workspace"], cwd=ROOT,
+                           capture_output=True, text=True, timeout=3600)
+    except subprocess.TimeoutExpired:
+        print("[deps] cargo build timeout")
+        return False
+    if r.returncode != 0:
+        print("[deps] cargo build 失败:", (r.stderr or "").splitlines()[-1][:200])
+        return False
+    return True
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--strict", action="store_true")
-    ap.add_argument("--with-deps", action="store_true")
+    ap.add_argument("--strict", action="store_true",
+                    help="阻断模式：应过但失败（candidate/dep/should_panic 失败 + compile_fail 标注腐烂）> 0 → exit 1")
+    ap.add_argument("--with-deps", action="store_true", help="附加依赖块 rmeta --extern 实测")
+    ap.add_argument("--ensure-deps", action="store_true", help="先 cargo build --workspace 确保 rmeta 存在")
     ap.add_argument("--stats-only", action="store_true")
-    ap.add_argument("--limit", type=int, default=0)
-    ap.add_argument("--offset", type=int, default=0)
     ap.add_argument("--sample", type=int, default=SAMPLE_CAP,
                     help="候选超过该数量时按文件分层抽样的样本上限；0=不抽样")
     ap.add_argument("--seed", type=int, default=SAMPLE_SEED)
+    ap.add_argument("--batch", type=int, default=BATCH_SIZE, help="每批块数（防超时）")
     ap.add_argument("--jobs", type=int, default=8)
     ap.add_argument("--report", type=str, default="")
     ap.add_argument("--json", type=str, default="")
     args = ap.parse_args()
+
+    if args.ensure_deps and not ensure_workspace_build():
+        return 1
 
     files = sorted(CONCEPT_DIR.rglob("*.md"))
     files = [f for f in files if "sources" not in f.parts]
@@ -642,7 +558,6 @@ def main() -> int:
     for f in files:
         all_blocks.extend(extract_blocks(f))
 
-    # 分类
     buckets: dict[str, list[dict]] = {}
     for b in all_blocks:
         cat, reason = classify(b)
@@ -652,133 +567,135 @@ def main() -> int:
 
     total = len(all_blocks)
     print(f"[extract] files={len(files)} blocks={total}")
-    for cat in ["flag_skip", "pseudo", "nightly", "nostd", "dep_skip", "dep_untested", "dep", "candidate"]:
+    for cat in ["anno_ignore", "compile_fail", "should_panic", "pseudo", "nightly",
+                "nostd", "dep_skip", "dep_untested", "dep", "candidate"]:
         n = len(buckets.get(cat, []))
         if n:
             print(f"  {cat:14s} {n}")
 
+    if args.stats_only:
+        return 0
+
     candidates = buckets.get("candidate", [])
     sampled_note = ""
-    if args.limit:
-        candidates = candidates[args.offset: args.offset + args.limit]
-        sampled_note = f"（--limit 分批 {args.offset}:{args.offset + args.limit}）"
-    elif args.sample and len(candidates) > args.sample:
+    if args.sample and len(candidates) > args.sample:
         before = len(candidates)
         candidates = stratified_sample(candidates, args.sample, args.seed)
         sampled_note = f"（分层抽样 {len(candidates)}/{before}，seed={args.seed}）"
     if sampled_note:
         print(f"[sample] {sampled_note}")
 
-    results: list[dict] = []
-    if not args.stats_only and candidates:
-        print(f"[compile] candidates={len(candidates)} jobs={args.jobs}")
-        with tempfile.TemporaryDirectory(prefix="concept_cb_") as td:
-            tmpdir = Path(td)
-            with ThreadPoolExecutor(max_workers=args.jobs) as ex:
-                results = list(ex.map(lambda b: compile_one(b, tmpdir), candidates))
-        passed = sum(1 for r in results if r["status"] == "pass")
-        failed = [r for r in results if r["status"] == "fail"]
-        timeouts = [r for r in results if r["status"] == "timeout"]
-        rate = passed / len(results) if results else 1.0
-        print(f"[result] pass={passed} fail={len(failed)} timeout={len(timeouts)} "
-              f"pass_rate={rate:.1%}")
-        for r in failed[:40]:
-            print(f"  FAIL {r['file']}:{r['line']} :: {summarize_stderr(r['stderr'], 200).splitlines()[0] if r['stderr'] else ''}")
-        if len(failed) > 40:
-            print(f"  ... and {len(failed) - 40} more (see --json/--report)")
+    jobs: list[tuple[dict, str]] = [(b, "candidate") for b in candidates]
+    jobs += [(b, "compile_fail") for b in buckets.get("compile_fail", [])]
+    jobs += [(b, "should_panic") for b in buckets.get("should_panic", [])]
+    if args.with_deps:
+        jobs += [(b, "dep") for b in buckets.get("dep", [])]
 
-    dep_results: list[dict] = []
-    if args.with_deps and not args.stats_only:
-        dep_blocks = buckets.get("dep", [])
-        dep_results = run_dep_mode(dep_blocks)
+    print(f"[compile] total={len(jobs)} batch={args.batch} jobs={args.jobs} with_deps={args.with_deps}")
+    results = run_batches(jobs, args.batch, args.jobs, args.with_deps)
+
+    def cnt(status: str, kind: str | None = None) -> int:
+        return sum(1 for r in results if r["status"] == status
+                   and (kind is None or r["category"] == kind))
 
     summary = {
         "total": total,
         "buckets": {k: len(v) for k, v in buckets.items()},
-        "compiled": len(results),
-        "pass": sum(1 for r in results if r["status"] == "pass"),
-        "fail": sum(1 for r in results if r["status"] == "fail"),
-        "timeout": sum(1 for r in results if r["status"] == "timeout"),
-        "dep_compiled": len(dep_results),
-        "dep_pass": sum(1 for r in dep_results if r["status"] == "pass"),
-        "dep_fail": sum(1 for r in dep_results if r["status"] == "fail"),
-        "dep_env_fail": sum(1 for r in dep_results if r["status"] == "dep_env_fail"),
+        "tested": len(results),
+        "candidate_pass": cnt("pass", "candidate"),
+        "candidate_fail": cnt("fail", "candidate"),
+        "compile_fail_ok": cnt("cf_ok"),
+        "compile_fail_unexpected_pass": cnt("cf_unexpected_pass"),
+        "compile_fail_wrong_code": cnt("cf_wrong_code"),
+        "should_panic_pass": cnt("pass", "should_panic"),
+        "should_panic_fail": cnt("fail", "should_panic"),
+        "dep_pass": cnt("pass", "dep"),
+        "dep_fail": cnt("fail", "dep"),
+        "dep_untested_runtime": cnt("dep_untested"),
+        "timeout": cnt("timeout"),
     }
+    rot = summary["candidate_fail"] + summary["compile_fail_unexpected_pass"] \
+        + summary["compile_fail_wrong_code"] + summary["should_panic_fail"] \
+        + summary["dep_fail"] + summary["timeout"]
+    summary["rot_total"] = rot
+    print(f"[result] candidate pass={summary['candidate_pass']} fail={summary['candidate_fail']} | "
+          f"compile_fail ok={summary['compile_fail_ok']} unexpected_pass={summary['compile_fail_unexpected_pass']} "
+          f"wrong_code={summary['compile_fail_wrong_code']} | "
+          f"should_panic pass={summary['should_panic_pass']} fail={summary['should_panic_fail']} | "
+          f"dep pass={summary['dep_pass']} fail={summary['dep_fail']} untested={summary['dep_untested_runtime']} | "
+          f"timeout={summary['timeout']}")
+
+    bad_statuses = {"fail", "cf_unexpected_pass", "cf_wrong_code", "timeout"}
+    failures = [r for r in results if r["status"] in bad_statuses]
+    for r in failures[:40]:
+        first = summarize_stderr(r.get("stderr", ""), 200).splitlines()[0] if r.get("stderr") else ""
+        print(f"  {r['status'].upper()} {r['file']}:{r['line']} [{r['category']}] :: {first}")
+    if len(failures) > 40:
+        print(f"  ... and {len(failures) - 40} more (see --json/--report)")
 
     if args.json:
         payload = {
             "summary": summary,
-            "failures": [
+            "results": [
                 {"file": r["file"], "line": r["line"], "index": r["index"],
-                 "error": summarize_stderr(r.get("stderr", "")), "dep": False}
-                for r in results if r["status"] != "pass"
-            ] + [
-                {"file": r["file"], "line": r["line"], "index": r["index"],
-                 "error": summarize_stderr(r.get("stderr", "")), "dep": True,
-                 "status": r["status"]}
-                for r in dep_results if r["status"] != "pass"
+                 "category": r["category"], "status": r["status"],
+                 "reason": r.get("reason", ""),
+                 "error": summarize_stderr(r.get("stderr", "")) if r["status"] in bad_statuses else ""}
+                for r in results
             ],
         }
         Path(args.json).write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"[json] -> {args.json}")
 
     if args.report:
-        write_report(Path(args.report), summary, results, dep_results, buckets)
+        write_report(Path(args.report), summary, results, failures)
 
-    failed_real = [r for r in results if r["status"] in ("fail", "timeout")]
-    if failed_real:
-        print(f"[gate] {len(failed_real)} 个无依赖块编译失败/超时（详见 --json/--report）")
-    if results:
-        rate = summary["pass"] / len(results)
-        if args.strict and rate < STRICT_PASS_RATE:
-            print(f"[gate] STRICT: pass_rate={rate:.1%} < {STRICT_PASS_RATE:.0%} → exit 1")
-            return 1
+    if rot:
+        print(f"[gate] 应过但失败/标注腐烂: {rot} 块（详见 --json/--report）")
+    if args.strict and rot > 0:
+        print(f"[gate] STRICT: rot={rot} > 0 → exit 1")
+        return 1
     if not args.strict:
         print("[gate] 观察模式：exit 0")
     return 0
 
 
-def write_report(path: Path, summary: dict, results: list[dict], dep_results: list[dict], buckets: dict):
+def write_report(path: Path, summary: dict, results: list[dict], failures: list[dict]):
     lines = ["# concept/ 代码块编译实测报告", "", "## 分类统计", ""]
     lines.append("| 分类 | 数量 |")
     lines.append("|---|---:|")
     labels = {
-        "flag_skip": "标注跳过(ignore/compile_fail/no_run/should_panic)",
+        "anno_ignore": "标注跳过(ignore/no_run)",
+        "compile_fail": "compile_fail（验证确实失败）",
+        "should_panic": "should_panic（验证编译通过）",
         "pseudo": "伪代码/占位跳过",
         "nightly": "nightly-only(#![feature])",
         "nostd": "no_std/no_main",
         "dep_skip": "依赖环境不可用(嵌入式/wasm/验证工具)",
-        "dep_untested": "需外部依赖未测(workspace外)",
-        "dep": "需外部依赖(workspace内,可测)",
+        "dep_untested": "需依赖未测(未知 crate)",
+        "dep": "依赖块(workspace 依赖,可测)",
         "candidate": "无依赖编译候选",
     }
     for k, label in labels.items():
         if summary["buckets"].get(k):
             lines.append(f"| {label} | {summary['buckets'][k]} |")
     lines.append(f"| **合计** | **{summary['total']}** |")
-    lines += ["", "## 无依赖块实测", "",
-              f"- 编译候选: {summary['compiled']}",
-              f"- 通过: {summary['pass']}",
-              f"- 失败（真实腐烂）: {summary['fail']}",
-              f"- 超时: {summary['timeout']}", ""]
-    fails = [r for r in results if r["status"] != "pass"]
-    if fails:
-        lines += ["## 失败清单（无依赖块）", "", "| 文件 | 行 | 错误摘要 |", "|---|---:|---|"]
-        for r in fails:
+    lines += ["", "## 实测统计", "",
+              f"- 实测块: {summary['tested']}",
+              f"- candidate: pass={summary['candidate_pass']} fail={summary['candidate_fail']}",
+              f"- compile_fail: ok={summary['compile_fail_ok']} "
+              f"unexpected_pass={summary['compile_fail_unexpected_pass']} "
+              f"wrong_code={summary['compile_fail_wrong_code']}",
+              f"- should_panic: pass={summary['should_panic_pass']} fail={summary['should_panic_fail']}",
+              f"- dep: pass={summary['dep_pass']} fail={summary['dep_fail']} "
+              f"untested(无 rmeta)={summary['dep_untested_runtime']}",
+              f"- timeout: {summary['timeout']}",
+              f"- **应过但失败/标注腐烂合计: {summary['rot_total']}**", ""]
+    if failures:
+        lines += ["## 失败/腐烂清单", "", "| 文件 | 行 | 分类 | 状态 | 错误摘要 |", "|---|---:|---|---|---|"]
+        for r in failures:
             err = summarize_stderr(r.get("stderr", ""), 300).replace("|", "\\|").replace("\n", "<br>")
-            lines.append(f"| `{r['file']}` | {r['line']} | {err} |")
-    if dep_results:
-        lines += ["", "## 依赖块实测（--with-deps）", "",
-                  f"- 依赖块: {summary['dep_compiled']}",
-                  f"- 通过: {summary['dep_pass']}",
-                  f"- 失败: {summary['dep_fail']}",
-                  f"- 依赖环境失败（未测）: {summary['dep_env_fail']}", ""]
-        dfails = [r for r in dep_results if r["status"] != "pass"]
-        if dfails:
-            lines += ["| 文件 | 行 | 状态 | 错误摘要 |", "|---|---:|---|---|"]
-            for r in dfails:
-                err = summarize_stderr(r.get("stderr", ""), 300).replace("|", "\\|").replace("\n", "<br>")
-                lines.append(f"| `{r['file']}` | {r['line']} | {r['status']} | {err} |")
+            lines.append(f"| `{r['file']}` | {r['line']} | {r['category']} | {r['status']} | {err} |")
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"[report] -> {path}")
 

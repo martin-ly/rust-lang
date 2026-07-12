@@ -234,7 +234,13 @@ mindmap
 
 ## 一、权威定义（Definition）
 
-本节围绕「权威定义（Definition）」展开，依次讨论 Wikipedia 对齐定义、TRPL 与 RFC 官方定义与形式化定义。
+Trait 是 Rust 的「类型类」（type class）机制，三个权威定义视角分别定位其角色：
+
+- **Wikipedia 对齐视角**：trait 是「一组方法签名的集合，类型通过实现它声明自己具备某种能力」——与 Haskell type class、Scala trait 同属「约束多态（bounded polymorphism）」家族，区别于面向对象的接口继承（无数据继承、无实现继承的层级）。
+- **TRPL 与 RFC 官方视角**：trait 定义「共享行为」；编译器以 trait bound 为约束检查泛型，以 trait object（`dyn Trait`）提供运行时多态。孤儿规则（Orphan Rule）与一致性（coherence）检查保证 impl 全局唯一可判定。
+- **形式化视角**：trait 对应有界量化（bounded quantification, `∀T:Bound. τ`）的类型规则；关联类型是类型族（type family）的受限形式， blanket impl 是条件量化（`∀T:Bound. T: Trait`）。
+
+判定一个语言特性是否应建模为 trait，标准是：它描述的是「类型具备的能力」而非「类型的结构」——能力用 trait，结构用 struct/enum，混合需求用「struct + trait impl」组合。
 
 ### 1.1 Wikipedia 对齐定义
 
@@ -283,7 +289,11 @@ Trait 作为逻辑命题:
 
 ## 二、概念属性矩阵（Attribute Matrix）
 
-「概念属性矩阵（Attribute Matrix）」涉及 Trait 类型分类矩阵、Trait vs 其他语言机制对比与Orphan Rule 判定矩阵，本节逐一说明其要点。
+Trait 的属性矩阵沿三个维度组织，每个维度都附带可机械判定的规则：
+
+1. **Trait 类型分类矩阵**：按语法特征分为五类——标记 trait（无方法，如 `Send`/`Sized`）、带方法 trait、带关联类型 trait（`Iterator::Item`）、泛型 trait（`From<T>` 按输入参数化）、auto trait（编译器自动实现，`Send`/`Sync`）。分类决定用法：标记 trait 用于 bound，泛型 trait 用于转换抽象，auto trait 由编译器推导不可随意手写。
+2. **Trait vs 其他语言机制对比**：与 Java interface 的差异在「可为外部类型实现本地 trait」（接口做不到）与「无默认继承层级」；与 C++ concept 的差异在「trait 是已实例化的约束（checked at definition + use），concept 是惰性约束（checked at use）」；与 Haskell type class 最接近，差异是 Rust 无高阶类型类（HKT 需 GAT 近似）。
+3. **Orphan Rule 判定矩阵**：`impl Trait for Type` 合法 ⟺ trait 或 type 至少一方定义在当前 crate（覆盖 `#[fundamental]` 与 uncovered 参数的精化规则见 RFC 2451）。判定一个 impl 是否违反孤儿规则，只需问：trait 的 crate 与 type 的 crate 是否都不是当前 crate——皆否则违规（E0117）。
 
 ### 2.1 Trait 类型分类矩阵
 
@@ -625,7 +635,11 @@ fn main() {
 
 ## 五、示例与反例（Examples & Counter-examples）
 
-本节从正确示例：Trait 定义与实现、正确示例：关联类型、反例：违反 Orphan Rule（E0117）、反例：重叠实现（E0119）等8个方面切入，剖析「示例与反例（Examples & Counter-exam…」的核心内容。
+本节示例按「能力声明 → 约束使用 → 违规拒绝」的完整链条组织，全部以 rustc 1.97.0 行为为准：
+
+- **正确示例**：trait 定义与实现展示「签名集合 + 默认方法」的基本形态；关联类型示例展示「实现时确定一次」与泛型 trait「每次调用可不同」的语义分界（`Iterator::Item` vs `Add<Rhs>`）——选用标准是：一个类型对该能力是否只有一个合理的输出类型。
+- **反例**：违反 Orphan Rule（E0117）与重叠实现（E0119）是 trait 系统两条全局不变量的直接投影。E0117 保护「impl 的归属唯一」，E0119 保护「方法解析无歧义」；两条规则共同保证 coherence——任何类型的方法调用在全局最多匹配一个 impl。
+- **阅读方法**：正例关注「trait 如何改变类型的可用操作集合」，反例关注「编译器在哪个程序点执行全局唯一性检查」——后者解释了为什么孤儿规则错误指向 impl 而非调用点。
 
 ### 5.1 正确示例：Trait 定义与实现
 

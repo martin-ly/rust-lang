@@ -491,13 +491,13 @@ Rust Wasm 工具链:
 
 ### 10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #![no_main]
 
 use std::thread;
 
 fn main() {
-    // ❌ 编译错误: `std::thread` 在 wasm32-unknown-unknown 目标不可用
+    // ❌ 编译错误: `std::thread` 在 wasm32-unknown-unknown 目标不可用（仅该目标报错，需 --target wasm32-unknown-unknown 验证）
     // WebAssembly 是单线程模型（无原生线程支持）
     thread::spawn(|| {
         println!("hello from thread");

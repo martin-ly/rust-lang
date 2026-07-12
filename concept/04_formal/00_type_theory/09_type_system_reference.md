@@ -76,7 +76,7 @@ DST 在编译期大小未知，必须置于指针之后 (Source: [Rust Reference
 类型参数可受约束：
 
 ```rust
-fn foo<T: Clone + Send + 'a>(x: T) {}
+fn foo<'a, T: Clone + Send + 'a>(x: T) {}
 ```
 
 - Trait bound：`T: Trait`

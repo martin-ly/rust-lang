@@ -1559,7 +1559,7 @@ fn main() {
 
 ### 12.1 边界测试：Builder 模式未消费 self（编译错误）
 
-```rust,compile_fail
+```rust
 struct Builder {
     value: i32,
 }

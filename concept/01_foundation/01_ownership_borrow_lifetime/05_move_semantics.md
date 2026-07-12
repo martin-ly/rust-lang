@@ -299,3 +299,21 @@ move: T@src → T@dst
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 触发条件 | 非 `Copy` 类型在赋值、传参、返回时转移所有权 | Rust 默认值语义，无隐式复制构造 |
+| 源状态 | move 后原变量不可再使用（E0382） | 借用检查器编译期静态判定 |
+| 运行时成本 | 栈上按位拷贝 + 源失效，无堆数据复制、无引用计数 | 零成本抽象原则 |
+| 与 C++ 差异 | C++ move 后源处于「有效但未指定」状态；Rust 源直接失效 | 所有权模型 vs 类不变量模型 |
+| 可恢复性 | 需 `Clone`（显式深拷贝）或 `Copy`（隐式按位复制）恢复共享 | `Copy`/`Clone` trait 契约 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：Move 语义是 [Ownership](01_ownership.md) 所有权转移机制的核心操作，作用于 [Variable Model](../03_values_and_references/03_variable_model.md) 定义的变量-值绑定。
+- **下位（实例）**：`String`、`Vec<T>` 等堆类型的 move 实例分析见 [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)。
+- **对偶**：与显式深拷贝 `Clone` / 按位复制 `Copy` 相对，工程抉择见 [构造与初始化](../../02_intermediate/00_traits/05_construction_and_initialization.md)。
+- **组合**：与 [Borrowing](02_borrowing.md) 互斥协作——move 转移所有权，借用只临时出让访问权。
+- **依赖**：语义正确性依赖 [Lifetimes](03_lifetimes.md) 对引用存活期的静态验证。

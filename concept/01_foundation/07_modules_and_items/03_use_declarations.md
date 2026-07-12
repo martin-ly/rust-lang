@@ -67,6 +67,8 @@
     - [6.3 Glob 导入遮蔽标准库](#63-glob-导入遮蔽标准库)
   - [七、权威来源索引](#七权威来源索引)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -250,7 +252,7 @@ fn main() {
 
 ### 6.3 Glob 导入遮蔽标准库
 
-```rust,compile_fail
+```rust
 use std::io::*;
 
 fn read() {} // 如果某个 trait/类型也叫 read，可能产生歧义
@@ -275,3 +277,21 @@ fn read() {} // 如果某个 trait/类型也叫 read，可能产生歧义
 
 - **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
 - **P2 生态/社区**: [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver) · [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 本质 | 仅引入路径绑定，不产生代码或运行时效果 | Reference |
+| 默认可见性 | `use` 导入默认私有，不向外泄漏 | 隐私规则 |
+| 重导出 | `pub use` 将内部路径提升为公共 API | API 设计惯例 |
+| 嵌套导入 | `use a::{b, c}` 与 glob `*` 两种批量形式 | 路径文法 |
+| 别名 | `as` 重命名解决命名冲突 | 文法 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Modules and Paths](01_modules_and_paths.md) 路径系统的消费端。
+- **下位（实例）**：glob/嵌套/重导出三类实例见本页正文。
+- **对偶**：与 `pub` 定义端可见性相对（定义可见 vs 引入可见），见 [Module System](../../02_intermediate/05_modules_and_visibility/01_module_system.md)。
+- **组合**：与 [Structs](04_structs.md) 等项定义组合构成模块接口。
+- **依赖**：路径解析依赖 [Items](12_items.md) 的作用域规则。

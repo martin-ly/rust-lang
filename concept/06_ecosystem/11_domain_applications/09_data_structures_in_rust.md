@@ -32,7 +32,7 @@ fn vec_demo() {
 
     let first = v[0];               // O(1) 索引
     let second = v.get(1);          // 安全访问
-    let mut v2 = Vec::with_capacity(1024); // 预分配
+    let mut v2: Vec<i32> = Vec::with_capacity(1024); // 预分配
 }
 ```
 
