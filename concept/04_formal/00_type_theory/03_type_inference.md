@@ -63,7 +63,6 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [复杂度视角](#复杂度视角)
-    - [反命题与边界](#反命题与边界)
   - [补充视角：Rust 类型推断的实用技巧](#补充视角rust-类型推断的实用技巧)
     - [Turbofish 使用场景](#turbofish-使用场景)
     - [何时需要类型标注](#何时需要类型标注)
@@ -530,10 +529,6 @@ graph TD
 
 ---
 
----
-
----
-
 ### 10.3 边界测试：闭包参数的类型推断歧义（编译错误）
 
 ```rust,compile_fail
@@ -707,10 +702,6 @@ Rust 的 trait 系统（尤其是关联类型和重载）可能导致歧义。`c
 | 类型推断：Hindley-Milner 算法与 Rust 的工业实现 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 类型推断：Hindley-Milner 算法与 Rust 的工业实现 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> **过渡**: 掌握 类型推断：Hindley-Milner 算法与 Rust 的工业实现 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-> **过渡**: 在实践中应用 类型推断：Hindley-Milner 算法与 Rust 的工业实现 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 类型推断：Hindley-Milner 算法与 Rust 的工业实现 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
-
 ## 复杂度视角
 
 > **来源**: [Typing is Hard — 类型推断复杂度与可判定性](https://3fx.ch/typing-is-hard.html) · [Vytiniotis et al. 2011 — Practical Type Inference for Arbitrary-Rank Types](https://www.cambridge.org/core/journals/journal-of-functional-programming/article/practical-type-inference-for-arbitraryrank-types/5339FB9DAB968768874D4C20FA6F8CB6)
@@ -727,12 +718,6 @@ HM 类型推断本身可在多项式时间（$O(n^3)$）内完成，但 Rust 的
 > **教学类比**: 把类型推断想象成“解一个巨大的逻辑谜题”。HM 的谜题规模适中；Rust 的谜题因为 trait、生命周期和关联类型叠加，虽然理论上仍可在有限空间内解决，但实际求解空间可能指数级膨胀，因此编译器需要启发式、限制和显式标注来保持工程可用性。
 
 更系统的形式化分析见 [Type Inference Complexity](08_type_inference_complexity.md)。
-
----
-
-### 反命题与边界
-
-> **反命题**: "类型推断：Hindley-Milner 算法与 Rust 的工业实现 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
 
 ---
 

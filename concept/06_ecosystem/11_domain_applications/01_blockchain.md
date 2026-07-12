@@ -864,9 +864,6 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 ```
 
 嵌入式和区块链（Substrate pallet）常用 `no_std`。其他限制：1) 无 `println!`（无标准输出）；2) 无 `Vec`/`String`（需 `alloc` crate）；3) 无堆分配默认支持（需自定义 `#[global_allocator]`）。Substrate 的 `sp-io` crate 提供 `no_std` 兼容的打印和 panic 处理。这与 Solidity（无 std 概念，运行时是 EVM）或 Go（无 `no_std` 等价物）不同——Rust 的 `no_std` 使资源受限环境开发成为可能，但需要手动提供底层设施。[来源: [The Rust Reference](https://doc.rust-lang.org/reference/names/preludes.html)] · [来源: [Substrate no_std](https://docs.substrate.io/build/)]
-> **过渡**: Blockchain & Smart Contract Security（区块链与智能合约安全） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Blockchain & Smart Contract Security（区块链与智能合约安全） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Blockchain & Smart Contract Security（区块链与智能合约安全） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ## 嵌入式测验（Embedded Quiz）
 

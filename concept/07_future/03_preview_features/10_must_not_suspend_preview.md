@@ -164,14 +164,6 @@ fn main() {}
 | `must_not_suspend` Lint Preview 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | `must_not_suspend` Lint Preview 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
-> **过渡**: 掌握 `must_not_suspend` Lint Preview 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 `must_not_suspend` Lint Preview 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: `must_not_suspend` Lint Preview 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "`must_not_suspend` Lint Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
-
 ## 嵌入式测验（Embedded Quiz）
 
 本节从测验 1：`must_not_suspend` lint 的作用是什么…、测验 2：为什么 `MutexGuard` 不应该跨越 await 点…、测验 3：`must_not_suspend` 与 `Send` tr…、测验 4：这个 lint 对异步代码质量有什么帮助？（理解层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。

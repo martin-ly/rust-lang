@@ -95,7 +95,8 @@
   算法控制流  ↔  设计模式中的交互时序      ↔  工作流控制流模式
   算法数据结构 ↔ 设计模式中的对象结构       ↔  工作流数据对象
 
-> **语义桥洞察**: 算法、设计模式和工作流模式在语义空间中是同构的——三者都可以用"输入 → 变换 → 输出"的抽象统一描述。[来源: [Wikipedia — Algorithm](https://en.wikipedia.org/wiki/Algorithm)] · [来源: [Wikipedia — Software Design Pattern](https://en.wikipedia.org/wiki/Software_design_pattern)]
+> **语义桥洞察**: 算法、设计模式和工作流模式在语义空间中是同构的——三者都可以用"输入 → 变换 → 输出"的抽象统一描述。
+[来源: [Wikipedia — Algorithm](https://en.wikipedia.org/wiki/Algorithm)] · [来源: [Wikipedia — Software Design Pattern](https://en.wikipedia.org/wiki/Software_design_pattern)]
 ```
 
 ### 2.2 同构映射表

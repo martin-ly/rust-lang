@@ -57,7 +57,6 @@
     - [10.3 边界测试：内核模块（Module）的 `no_std` 与 `alloc` 的谨慎使用（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-的谨慎使用编译错误)
     - 10.4 边界测试：内核锁的 `spinlock` 与睡眠的互斥（运行时（Runtime）死锁）
     - [10.5 边界测试：内核模块（Module）的 `no_std` 与 alloc 限制（编译错误）](#105-边界测试内核模块的-no_std-与-alloc-限制编译错误)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust for Linux 项目的核心目标是什么？（理解层）](#测验-1rust-for-linux-项目的核心目标是什么理解层)
     - [测验 2：为什么 Linus Torvalds 对在内核中引入 Rust 持谨慎但开放的态度？（理解层）](#测验-2为什么-linus-torvalds-对在内核中引入-rust-持谨慎但开放的态度理解层)
@@ -66,7 +65,6 @@
     - [测验 5：Rust for Linux 对 Rust 语言本身有什么反馈影响？（理解层）](#测验-5rust-for-linux-对-rust-语言本身有什么反馈影响理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
   - [自 docs/06\_toolchain/06\_rust\_for\_linux\_tooling\_guide.md 合并的补充内容](#自-docs06_toolchain06_rust_for_linux_tooling_guidemd-合并的补充内容)
     - [工具链需求](#工具链需求)
     - [内核编译目标](#内核编译目标)
@@ -693,10 +691,6 @@ graph TD
 
 ---
 
----
-
----
-
 > **补充来源**
 
 ## 十、边界测试：Rust for Linux 的编译错误
@@ -857,11 +851,6 @@ fn main() {}
 > 2) 编译时间（内核代码量大）；
 > 3) 社区接受度。这与 Linux 内核的 C 代码（40 年历史，大量遗留代码）或 Windows 内核的 Rust 实验（Microsoft 也在探索）不同——Rust for Linux 是操作系统内核现代化的前沿尝试。
 > [来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Documentation](https://docs.kernel.org/rust/)]
-> **过渡**: Rust for Linux ：操作系统内核中的内存安全（Memory Safety） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Rust for Linux ：操作系统内核中的内存安全（Memory Safety） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -936,14 +925,6 @@ fn main() {}
 | Rust for Linux ：操作系统内核中的内存安全（Memory Safety） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Rust for Linux ：操作系统内核中的内存安全 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust for Linux ：操作系统内核中的内存安全 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 Rust for Linux ：操作系统内核中的内存安全 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Rust for Linux ：操作系统内核中的内存安全 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Rust for Linux ：操作系统内核中的内存安全 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Rust for Linux ：操作系统内核中的内存安全 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ## 自 docs/06_toolchain/06_rust_for_linux_tooling_guide.md 合并的补充内容
 

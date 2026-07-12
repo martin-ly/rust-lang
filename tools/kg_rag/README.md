@@ -43,3 +43,21 @@ python -m venv .venv
 - 向量索引使用 L2 归一化的 numpy 矩阵，通过点积计算余弦相似度。
 - hybrid score：`alpha * vector_score + (1 - alpha) * graph_score`，其中
   `graph_score` 为 `dependsOn` / `equivalentTo` 邻居的平均向量相似度。
+
+## 模块与测试
+
+- `kg_core.py` — stdlib-only v3 KG 数据访问层（加载、实体展开、类型化边
+  邻接表、路径遍历），不依赖 numpy / sentence-transformers。
+- `kg_rag.py` — 向量索引与混合检索。缓存键包含 KG 文件 mtime 与实体数，
+  KG 重新生成后自动重建索引。
+- `smoke_test.py` — 可复跑冒烟测试（2026-07-12 新增）：
+
+```bash
+# 结构检查（stdlib，任意 Python 可跑；向量检索自动 SKIP）
+python tools/kg_rag/smoke_test.py
+# 完整检查（含向量检索，用 venv）
+tools/kg_rag/.venv/Scripts/python tools/kg_rag/smoke_test.py
+```
+
+覆盖：v3 数据规模、实体查询、`instanceOf`/`appliesTo`/`equivalentTo`
+类型化边遍历、多跳路径、关系端点完整性、混合检索排序。

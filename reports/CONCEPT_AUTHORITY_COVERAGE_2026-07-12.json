@@ -1,45 +1,53 @@
 {
   "date": "2026-07-12",
-  "scanned": 460,
+  "scanned": 464,
   "coverage": {
     "P0": [
-      460,
+      464,
       100.0
     ],
     "P1": [
-      435,
-      94.6
+      436,
+      94.0
     ],
     "P2": [
-      394,
-      85.7
+      395,
+      85.1
     ],
     "any": [
-      460,
+      464,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 382,
+    "scanned": 386,
     "P0": [
-      382,
+      386,
       100.0
     ],
     "P1": [
-      382,
-      100.0
+      383,
+      99.2
     ],
     "P2": [
-      382,
-      100.0
+      383,
+      99.2
     ],
     "any": [
-      382,
+      386,
       100.0
     ],
-    "gaps_p1": [],
-    "gaps_p2": []
+    "gaps_p1": [
+      "concept/07_future/03_preview_features/36_unsafe_pinned_preview.md",
+      "concept/07_future/03_preview_features/37_default_field_values_preview.md",
+      "concept/07_future/03_preview_features/38_complex_numbers_preview.md"
+    ],
+    "gaps_p2": [
+      "concept/07_future/03_preview_features/35_f16_f128_preview.md",
+      "concept/07_future/03_preview_features/36_unsafe_pinned_preview.md",
+      "concept/07_future/03_preview_features/37_default_field_values_preview.md"
+    ]
   },
   "by_layer": {
     "L0": {
@@ -78,9 +86,9 @@
       "any": 114
     },
     "L7": {
-      "n": 60,
-      "P0": 60,
-      "any": 60
+      "n": 64,
+      "P0": 64,
+      "any": 64
     },
     "L?": {
       "n": 3,
@@ -89,82 +97,5 @@
     }
   },
   "core_gaps_l1_l4_no_p0": [],
-  "none_any": [],
-  "crates_docs": {
-    "total": 576,
-    "kinds": {
-      "stub": 509,
-      "content": 64,
-      "code_listing": 1,
-      "index_readme": 2
-    },
-    "content": 64,
-    "covered": 64,
-    "pct": 100.0,
-    "gaps": [],
-    "per_crate": {
-      "c01_ownership_borrow_scope": {
-        "content": 5,
-        "covered": 5
-      },
-      "c02_type_system": {
-        "content": 4,
-        "covered": 4
-      },
-      "c03_control_fn": {
-        "content": 4,
-        "covered": 4
-      },
-      "c04_generic": {
-        "content": 2,
-        "covered": 2
-      },
-      "c05_threads": {
-        "content": 4,
-        "covered": 4
-      },
-      "c06_async": {
-        "content": 4,
-        "covered": 4
-      },
-      "c07_process": {
-        "content": 13,
-        "covered": 13
-      },
-      "c08_algorithms": {
-        "content": 9,
-        "covered": 9
-      },
-      "c09_design_pattern": {
-        "content": 4,
-        "covered": 4
-      },
-      "c10_networks": {
-        "content": 10,
-        "covered": 10
-      },
-      "c11_macro_system_proc": {
-        "content": 1,
-        "covered": 1
-      },
-      "c12_wasm": {
-        "content": 3,
-        "covered": 3
-      },
-      "c17_resolver_v3_public_demo": {
-        "content": 1,
-        "covered": 1
-      }
-    },
-    "skipped": {
-      "index_readme": [
-        "crates/c15_verification_tools/docs/README.md",
-        "crates/c16_gui/docs/README.md"
-      ],
-      "code_listing": [
-        "crates/c03_control_fn/docs/snippets/README.md"
-      ],
-      "quiz": []
-    }
-  }
+  "none_any": []
 }

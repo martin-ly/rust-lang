@@ -16,7 +16,7 @@
 
 | 文件 | 主题 | 覆盖范围 |
 |:---|:---|:---|
-| [01_concept_definition_atlas.md](01_concept_definition_atlas.md) | 概念定义图谱 | 全部 467 个核心概念的中英名称、层级、定义、同义/反义 |
+| [01_concept_definition_atlas.md](01_concept_definition_atlas.md) | 概念定义图谱 | 全部 464 个核心概念的中英名称、层级、定义、同义/反义 |
 | [02_attribute_relationship_atlas.md](02_attribute_relationship_atlas.md) | 属性关系图谱 | 概念属性矩阵与属性间约束 |
 | [03_scenario_decision_tree_atlas.md](03_scenario_decision_tree_atlas.md) | 场景决策树图谱 | 开发场景 → 决策 → Rust 概念/工具 |
 | [04_example_counterexample_atlas.md](04_example_counterexample_atlas.md) | 示例与反例图谱 | 按概念组织的示例、反例、边界示例 |
@@ -36,9 +36,10 @@
 
 ## 维护规则
 
-- 本目录文件由 `scripts/generate_knowledge_topology_atlas.py` 从 `concept/**/*.md` 半自动生成。
-- 人工策展内容以 `<!-- MANUAL -->` 标记。
-- 当 `concept/` 文件更新后，应重新运行生成脚本并审阅变更。
+- 本目录文件由 `scripts/generate_knowledge_topology_atlas.py` 从 `concept/**/*.md` 生成，**只重生成、不手改**。
+- 数据驱动页（01/02/06/07/08/10/README）的人工策展内容已固化进生成器模板与规则。
+- 纯人工策展页（03/04/05/09）的单一事实源是 `scripts/templates/atlas_pages/`，生成器原样拷贝；修改请改模板后重跑。
+- 当 `concept/` 文件更新后，应先运行 `scripts/extract_concept_topology.py` 刷新 `tmp/concept_topology_raw.json`，再运行本生成脚本并审阅变更。
 
 ---
 

@@ -71,7 +71,6 @@
     - [10.2 边界测试：跨层依赖导致循环依赖（编译错误）](#102-边界测试跨层依赖导致循环依赖编译错误)
     - [10.3 边界测试：Serverless 超时导致状态不一致（运行时错误）](#103-边界测试serverless-超时导致状态不一致运行时错误)
   - [相关概念](#相关概念)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 中常用的分层架构（Layered Architecture）如何划分？（理解层）](#测验-1rust-中常用的分层架构layered-architecture如何划分理解层)
     - [测验 2：六边形架构（Hexagonal Architecture / Ports and Adapters）在 Rust 中如何体现？（理解层）](#测验-2六边形架构hexagonal-architecture--ports-and-adapters在-rust-中如何体现理解层)
@@ -80,7 +79,6 @@
     - [测验 5：在 Rust 中，为什么 Repository 模式比直接在 Service 中调用 SQL 更受推荐？（理解层）](#测验-5在-rust-中为什么-repository-模式比直接在-service-中调用-sql-更受推荐理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
   - [十一、架构演进与对比（crates 迁移）](#十一架构演进与对比crates-迁移)
     - [架构演进路径](#架构演进路径)
       - [单体 → 分布式演进](#单体--分布式演进)
@@ -1141,15 +1139,6 @@ async fn risky_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Error>
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **过渡**: Architecture Patterns（架构设计模式） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Architecture Patterns（架构设计模式） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Architecture Patterns（架构设计模式） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Architecture Patterns（架构设计模式） 定义 ⟹ 类型安全保证
-- **定理**: Architecture Patterns（架构设计模式） 定义 ⟹ 类型安全保证
-- **定理**: Architecture Patterns（架构设计模式） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -1224,14 +1213,6 @@ Repository 将数据访问逻辑隔离，便于：1) 切换存储后端（Postgr
 | Architecture Patterns（架构设计模式） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Architecture Patterns（架构设计模式） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Architecture Patterns（架构设计模式） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 Architecture Patterns（架构设计模式） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Architecture Patterns（架构设计模式） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Architecture Patterns（架构设计模式） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Architecture Patterns（架构设计模式） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ## 十一、架构演进与对比（crates 迁移）
 

@@ -94,7 +94,6 @@
     - [10.5 边界测试：`Default::default()` 与类型推断的歧义（编译错误）](#105-边界测试defaultdefault-与类型推断的歧义编译错误)
     - [10.7 边界测试：`std::mem::replace` 与 `take` 的惯用选择（逻辑错误）](#107-边界测试stdmemreplace-与-take-的惯用选择逻辑错误)
     - [10.3 边界测试：`Default` 派生与手动实现的语义差异（逻辑错误）](#103-边界测试default-派生与手动实现的语义差异逻辑错误)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`Default` trait 的用途是什么？如何为自定义类型实现它？（理解层）](#测验-1default-trait-的用途是什么如何为自定义类型实现它理解层)
     - [测验 2：`AsRef` 与 `Borrow` trait 在语义上有什么区别？（理解层）](#测验-2asref-与-borrow-trait-在语义上有什么区别理解层)
@@ -103,7 +102,6 @@
     - [测验 5：Rust 的 `must_use` 属性有什么作用？什么类型的返回值通常应该标记它？（理解层）](#测验-5rust-的-must_use-属性有什么作用什么类型的返回值通常应该标记它理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
 
 ---
 
@@ -1340,15 +1338,6 @@ fn main() {
 ```
 
 > **修正**: `#[derive(Default)]` 为所有字段调用 `Default::default()`，可能产生**语义无效**的默认值。`u16::default() = 0`，`String::default() = ""`。修复：1) **手动实现** `Default`：`impl Default for Config { fn default() -> Self { Self { port: 8080, host: "localhost".to_string() } } }`；2) **builder 模式**：强制显式设置关键字段；3) **`#[serde(default = "default_port")]`**：自定义反序列化默认值。`Default` 的设计目的：类型系统的"空值"概念，用于泛型（Generics）代码（`Vec::resize_with`、`Option::unwrap_or_default`）。这与 C++ 的默认构造函数（类似，但可能执行复杂逻辑）或 Java 的 `null`（无默认值概念）不同——Rust 的 `Default` 是纯函数，无副作用，语义简单。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/default/trait.Default.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//interoperability.html#c-common-traits)]
-> **过渡**: Rust 惯用法谱系全景（Idioms Spectrum） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust 惯用法谱系全景（Idioms Spectrum） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust 惯用法谱系全景（Idioms Spectrum） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Rust 惯用法谱系全景（Idioms Spectrum） 定义 ⟹ 类型安全保证
-- **定理**: Rust 惯用法谱系全景（Idioms Spectrum） 定义 ⟹ 类型安全保证
-- **定理**: Rust 惯用法谱系全景（Idioms Spectrum） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -1423,11 +1412,3 @@ fn main() {
 | Rust 惯用法谱系全景（Idioms Spectrum） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Rust 惯用法谱系全景（Idioms Spectrum） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust 惯用法谱系全景（Idioms Spectrum） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 Rust 惯用法谱系全景（Idioms Spectrum） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Rust 惯用法谱系全景（Idioms Spectrum） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Rust 惯用法谱系全景（Idioms Spectrum） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Rust 惯用法谱系全景（Idioms Spectrum） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

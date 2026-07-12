@@ -429,9 +429,7 @@ fn main() {
 
 ---
 
----
 
----
 
 ## 十、边界测试：形式化生态塔的编译错误
 
@@ -535,14 +533,6 @@ fn main() {
 ```
 
 > **修正**: Rust 形式化工具（Prusti、Kani、Creusot）大多依赖**每日构建版编译器**：1) `proc_macro_hygiene`（宏（Macro）卫生扩展）；2) `rustc_private`（访问编译器内部 API）；3) 自定义 MIR  pass。这导致：1) 生产代码不能使用形式化工具（需每日构建版）；2) 每日构建版版本漂移（工具可能滞后于最新每日构建版）；3) CI 复杂（需固定每日构建版版本）。Ferrocene 项目致力于提供**经过认证的稳定 Rust 工具链**，包含形式化验证支持。替代方案：1) `contracts` crate（轻量级运行时契约检查，stable）；2) `assertion-rs`（运行时断言库）；3) 外部验证（F*、Coq 提取后独立验证）。这与 Java 的 JML（标准注释，但工具支持分散）或 .NET 的 Code Contracts（已停止维护）类似——Rust 的形式化生态仍在成熟中，每日构建版依赖是主要采纳障碍。[来源: [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html)] · [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)]
-> **过渡**: Formal Ecosystem Tower（Rust 生态形式化分层塔） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Formal Ecosystem Tower（Rust 生态形式化分层塔） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Formal Ecosystem Tower（Rust 生态形式化分层塔） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Formal Ecosystem Tower（Rust 生态形式化分层塔） 定义 ⟹ 类型安全保证
-- **定理**: Formal Ecosystem Tower（Rust 生态形式化分层塔） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 

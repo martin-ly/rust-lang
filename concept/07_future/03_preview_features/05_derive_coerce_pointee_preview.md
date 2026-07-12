@@ -61,7 +61,6 @@
     - [10.3 边界测试：CoercePointee 与自定义 DST 的元数据（编译错误）](#103-边界测试coercepointee-与自定义-dst-的元数据编译错误)
     - [10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期交互（编译错误）](#104-边界测试phantomdata-与-coercepointee-的生命周期交互编译错误)
     - [10.5 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）](#105-边界测试coercepointee-与智能指针的自动转换编译错误未来特性)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`CoercePointee` trait 的作用是什么？它解决了智能指针的什么问题？（理解层）](#测验-1coercepointee-trait-的作用是什么它解决了智能指针的什么问题理解层)
     - [测验 2：为什么自定义智能指针默认不能强制转换为 `dyn Trait`？（理解层）](#测验-2为什么自定义智能指针默认不能强制转换为-dyn-trait理解层)
@@ -70,7 +69,6 @@
     - [测验 5：这个特性对 Rust 生态有什么长期影响？（理解层）](#测验-5这个特性对-rust-生态有什么长期影响理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
@@ -555,11 +553,6 @@ fn main() {}
 > 3) 与 `Pin` 结合的自定义指针。这与 C++ 的隐式转换（`std::shared_ptr<Derived>` → `std::shared_ptr<Base>` 自动）或 Swift 的引用（Reference）类型（始终支持多态转换）不同——Rust 的 trait object 转换需显式支持，`CoercePointee` 是类型系统（Type System）的扩展。
 > [来源: [CoercePointee RFC](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html)] ·
 > [来源: [Rust Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
-> **过渡**: 派生 CoercePointee 预研：智能指针的自动类型强制 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: 派生 CoercePointee 预研：智能指针的自动类型强制 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -634,14 +627,6 @@ fn main() {}
 | 派生 CoercePointee 预研：智能指针的自动类型强制 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | 派生 CoercePointee 预研：智能指针的自动类型强制 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | 派生 CoercePointee 预研：智能指针的自动类型强制 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 派生 CoercePointee 预研：智能指针的自动类型强制 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 派生 CoercePointee 预研：智能指针的自动类型强制 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: 派生 CoercePointee 预研：智能指针的自动类型强制 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "派生 CoercePointee 预研：智能指针的自动类型强制 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ---
 

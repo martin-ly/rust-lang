@@ -149,6 +149,7 @@
 | **Const Generics** | [L2: 泛型](../../02_intermediate/01_generics/01_generics.md) | L4 类型论、L7 演进 | 分析 | ← 泛型 → 类型级编程 |
 | **Copy Trait** | [L1: 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | L2 Trait、L4 线性逻辑 | 理解 | ⊘ Move ≡ 线性逻辑 weakening |
 | **Concurrency** | [L3: 并发](../../03_advanced/00_concurrency/01_concurrency.md) | L1 借用、L2 Send/Sync、L4 CSL | 分析 | ← 借用 + Send/Sync → 异步 |
+| **Complex Numbers (复数类型)** | [L7: Complex Numbers 预研](../../07_future/03_preview_features/38_complex_numbers_preview.md) | L1 数值类型、L7 f16/f128 | 分析 | ← RFC 3892 → 标准库词汇类型 |
 | **CSP (Communicating Sequential Processes)** | [L5: Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) | L3 并发、L5 范式矩阵 | 评价 | ⊘ 所有权并发 |
 | **Career Landscape** | [L0: 职业市场](02_career_landscape.md) | L0 Bloom、L6 应用领域 | 知道 | ← 市场数据 → 职业决策 |
 | **Comprehensive Rust** | [L0: 课程映射](../00_framework/comprehensive_rust_mapping.md) | L0 学习指南、L1-L3 | 知道 | ← Google 课程 → 本体系映射
@@ -161,6 +162,7 @@
 | **Compiler Diagnostics and UI Tests** | [L6: Compiler Diagnostics](../../06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md) | L4 rustc、L6 基础设施 | 分析 | ← rustc_driver → Lint / UI Test |
 | **Compiler Testing** | [L6: Compiler Testing](../../06_ecosystem/00_toolchain/13_compiler_testing.md) | L4 rustc、L6 基础设施 | 应用 | ← UI Test → Crater / rustc-perf
 | **Drop Trait** | [L1: 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | L2 Trait、L4 线性逻辑 | 理解 | ← 所有权 → RAII ≡ 资源消耗 |
+| **Default Field Values (字段默认值)** | [L7: Default Field Values 预研](../../07_future/03_preview_features/37_default_field_values_preview.md) | L1 Structs、L2 构造与初始化 | 应用 | ← RFC 3681 → FRU 语法扩展 |
 | **dyn Trait** | [L1: 类型系统](../../01_foundation/02_type_system/01_type_system.md) | L2 Trait、L4 类型论 | 分析 | ⊘ impl Trait → 动态分发 |
 
 ### E 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / 学术论文
@@ -192,6 +194,7 @@
 | **Formal Methods (形式化方法)** | [L7: 形式化方法](../../07_future/04_research_and_experimental/02_formal_methods.md) | L4 RustBelt、L6 工具链 | 创造 | ← RustBelt → 工业验证 |
 | **Fractional Permissions** | [L4: RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md) | L1 借用、L3 并发 | 评价 | ≡ 借用规则的形式化根基 |
 | **Future** | [L3: 异步](../../03_advanced/01_async/01_async.md) | L2 Trait、L3 Pin | 分析 | ← Trait + 状态机 → async/await |
+| **f16 / f128 (半/四精度浮点)** | [L7: f16/f128 预研](../../07_future/03_preview_features/35_f16_f128_preview.md) | L1 数值类型、L4 ABI | 分析 | ← RFC 3453 → IEEE 754 谱系扩展 |
 
 ### G
 
@@ -327,6 +330,7 @@
 | **Unsafe Rust** | [L3: Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) | L1 所有权、L4 RustBelt、L5 对比 | 评价 | ⚡ 所有 safe 定理的边界 |
 | **Unsafe Escape Hatch** | [L0: 语义空间](../00_framework/semantic_space.md) | L3 Unsafe、L5 对比 | 分析 | ⊘ safe 封闭性 → 局部逃逸 |
 | **Unpin** | [L3: 异步](../../03_advanced/01_async/01_async.md) | L3 Pin | 分析 | ⊘ Pin → 默认可移动 |
+| **UnsafePinned** | [L7: UnsafePinned 预研](../../07_future/03_preview_features/36_unsafe_pinned_preview.md) | L3 Unsafe/Pin、L4 内存模型 | 分析 | ← RFC 3467 → &mut 别名豁免显式化 |
 
 ### V
 

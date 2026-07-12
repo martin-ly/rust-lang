@@ -37,7 +37,7 @@
 
 ## 一、升级动机与目标
 
-v1 本体（`kg_ontology.md`，已归档为 `archive/2026/concept_archive/kg_ontology_v1_archived.md`，归档只读）已成功定义了 Rust 知识体系的显式关系类型，并生成了机器可读的 `kg_data.json`。v2 升级目标：
+v1 本体（`kg_ontology.md`，已归档为 `archive/2026/concept_archive/kg_ontology_v1_archived.md`，归档只读）已成功定义了 Rust 知识体系的显式关系类型，并生成了机器可读的 `kg_data.json`（v1 数据已于 2026-07-12 退役至 `archive/2026/kg_data_v1_retired_2026-05-23.json`，现行数据为 `kg_data_v3.json`）。v2 升级目标：
 
 1. **标准对齐**：显式映射到 RDF 1.2、SKOS、JSON-LD 1.1，降低与国际工具链的集成成本。
 2. **三元组元数据**：引入 RDF-star，使每条关系边可附加来源、版本、置信度、审校状态。
@@ -310,7 +310,7 @@ v2 配套 SHACL shapes 定义在 `concept/00_meta/kg_shapes.ttl`，可验证：
 **运行方式**（待 `crates/c13_semantic_web/` 落地后）：
 
 ```bash
-cargo run --bin kg-validate -- concept/00_meta/kg_data.json concept/00_meta/kg_shapes.ttl
+cargo run --bin kg-validate -- concept/00_meta/kg_data_v3.json concept/00_meta/kg_shapes.ttl
 ```
 
 ---

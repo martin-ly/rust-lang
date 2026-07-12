@@ -44,7 +44,6 @@
     - [4.2 设计决策](#42-设计决策)
   - [五、演进路线](#五演进路线)
   - [参考](#参考)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Arbitrary Self Types 允许什么目前不允许的操作？（理解层）](#测验-1arbitrary-self-types-允许什么目前不允许的操作理解层)
     - [测验 2：这个特性对自定义智能指针有什么意义？（理解层）](#测验-2这个特性对自定义智能指针有什么意义理解层)
@@ -53,7 +52,6 @@
     - [测验 5：这个特性目前的状态是什么？（理解层）](#测验-5这个特性目前的状态是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ## 一、核心概念
@@ -312,16 +310,6 @@ impl<T> TaggedPtr<T> {
 | Tracking Issue | <https://github.com/rust-lang/rust/issues/44874> |
 | Rust for Linux 需求 | <https://rust-lang.github.io/rust-project-goals/2026/> |
 
-> **过渡**: Arbitrary Self Types 预览：自定义方法接收器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Arbitrary Self Types 预览：自定义方法接收器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Arbitrary Self Types 预览：自定义方法接收器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Arbitrary Self Types 预览：自定义方法接收器 定义 ⟹ 类型安全保证
-- **定理**: Arbitrary Self Types 预览：自定义方法接收器 定义 ⟹ 类型安全保证
-- **定理**: Arbitrary Self Types 预览：自定义方法接收器 定义 ⟹ 类型安全保证
-
 ## 嵌入式测验（Embedded Quiz）
 
 理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：Arbitrary Self Types 允许什么目前不允许…、测验 2：这个特性对自定义智能指针有什么意义？（理解层）、测验 3：`Receiver` trait 在这个特性中起什么作用？（…、测验 4：Arbitrary Self Types 与 `Deref`…等5个方面，本节依次展开。
@@ -395,14 +383,6 @@ impl<T> TaggedPtr<T> {
 | Arbitrary Self Types 预览：自定义方法接收器 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Arbitrary Self Types 预览：自定义方法接收器 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Arbitrary Self Types 预览：自定义方法接收器 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 Arbitrary Self Types 预览：自定义方法接收器 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Arbitrary Self Types 预览：自定义方法接收器 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Arbitrary Self Types 预览：自定义方法接收器 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Arbitrary Self Types 预览：自定义方法接收器 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ---
 

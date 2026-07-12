@@ -4,19 +4,19 @@ KG-RAG: Hybrid semantic search over the Rust knowledge graph.
 Reads ``concept/00_meta/kg_data_v3.json``, embeds entity summaries in English,
 builds a lightweight numpy vector index, and supports hybrid retrieval that
 combines dense similarity with KG structure (``dependsOn`` neighbours).
+
+Data-access helpers live in ``kg_core.py`` (stdlib-only) so that structural
+validation (``smoke_test.py``) does not require the heavy vector deps.
 """
 from __future__ import annotations
 
 import argparse
 import json
-import math
 import os
 import pickle
 import sys
 from pathlib import Path
 from typing import Any
-
-import numpy as np
 
 # Re-execute inside the project venv when dependencies are missing.
 ROOT = Path(__file__).resolve().parent
@@ -25,6 +25,7 @@ VENV_PYTHON = ROOT / ".venv" / "Scripts" / "python.exe"
 
 def _ensure_venv() -> None:
     try:
+        import numpy  # noqa: F401
         import sentence_transformers  # noqa: F401
         import sklearn  # noqa: F401
     except ImportError:
@@ -40,77 +41,41 @@ def _ensure_venv() -> None:
 
 _ensure_venv()
 
+import numpy as np  # noqa: E402
 from sentence_transformers import SentenceTransformer  # noqa: E402
 
-KG_PATH = Path("concept/00_meta/kg_data_v3.json")
+from kg_core import (  # noqa: E402
+    KG_PATH,
+    entity_summary,
+    entity_text,
+    get_lang_value,
+    iter_entities,
+    kg_adjacency,
+    kg_paths,
+    load_kg,
+    short_id,
+)
+
 CACHE_DIR = ROOT / ".cache"
 INDEX_PATH = CACHE_DIR / "index.pkl"
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 DEFAULT_ALPHA = 0.75
 
 
-def load_kg(path: Path | str = KG_PATH) -> dict[str, Any]:
-    """Load the JSON-LD knowledge graph (v3; v2 grouped layout also accepted)."""
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
+def _fingerprint(kg_path: Path, entity_count: int) -> dict[str, Any]:
+    """Cache key: model + absolute KG path + KG file mtime + entity count.
 
-
-def iter_entities(kg: dict[str, Any]) -> list[dict[str, Any]]:
-    """Flatten all entities (concepts, theories, models, primitives, ...).
-
-    Supports both the v3 flat list layout and the legacy v2 layout where
-    entities were grouped by category in a dict.
+    Guards against stale caches when kg_data_v3.json is regenerated (the
+    previous key only compared the path string and silently served outdated
+    embeddings).
     """
-    raw = kg.get("entities", [])
-    entities: list[dict[str, Any]] = []
-    if isinstance(raw, list):  # v3: flat list of entities
-        for item in raw:
-            item.setdefault("_category", item.get("@type", "unknown").removeprefix("ex:").lower() + "s")
-            entities.append(item)
-    else:  # v2 legacy: {category: [entities]}
-        for category, items in raw.items():
-            for item in items:
-                item["_category"] = category
-                entities.append(item)
-    return entities
-
-
-def get_lang_value(values: list[dict[str, str]], lang: str) -> str | None:
-    for v in values:
-        if v.get("@language") == lang:
-            return v.get("@value")
-    return None
-
-
-def entity_summary(entity: dict[str, Any]) -> str | None:
-    """Return the English summary of an entity.
-
-    v3 entities use ``skos:scopeNote``; legacy v2 entities used
-    ``skos:definition``. Fall back to the short id when neither exists.
-    """
-    return (
-        get_lang_value(entity.get("skos:definition", []), "en")
-        or get_lang_value(entity.get("skos:scopeNote", []), "en")
-    )
-
-
-def entity_text(entity: dict[str, Any]) -> str:
-    """Return the English summary text used for embedding."""
-    parts: list[str] = []
-    label = get_lang_value(entity.get("skos:prefLabel", []), "en")
-    if label:
-        parts.append(label)
-    summary = entity_summary(entity)
-    if summary:
-        parts.append(summary)
-    alt = get_lang_value(entity.get("skos:altLabel", []), "en")
-    if alt:
-        parts.append(f"({alt})")
-    return " ".join(parts)
-
-
-def short_id(uri: str) -> str:
-    return uri.removeprefix("ex:")
+    stat = kg_path.stat()
+    return {
+        "model": EMBEDDING_MODEL,
+        "kg_path": str(kg_path.resolve()),
+        "kg_mtime_ns": stat.st_mtime_ns,
+        "entity_count": entity_count,
+    }
 
 
 def build_index(
@@ -120,24 +85,29 @@ def build_index(
     force: bool = False,
 ) -> tuple[np.ndarray, list[dict[str, Any]], SentenceTransformer]:
     """Build or load the vector index for the knowledge graph."""
+    kg_path = Path(kg_path)
     cache_path = Path(cache_path)
     cache_path.parent.mkdir(parents=True, exist_ok=True)
+
+    kg = load_kg(kg_path)
+    entities = iter_entities(kg)
+    fingerprint = _fingerprint(kg_path, len(entities))
+    fingerprint["model"] = model_name
 
     if not force and cache_path.exists():
         try:
             with open(cache_path, "rb") as f:
                 cached = pickle.load(f)
-            if cached.get("model") == model_name and cached.get("kg_path") == str(kg_path):
+            if cached.get("fingerprint") == fingerprint:
                 print(f"[kg_rag] Loaded cached index from {cache_path}", file=sys.stderr)
                 return cached["vectors"], cached["entities"], SentenceTransformer(model_name)
+            print("[kg_rag] Cache fingerprint mismatch, rebuilding.", file=sys.stderr)
         except Exception as exc:
             print(f"[kg_rag] Cache load failed ({exc}), rebuilding.", file=sys.stderr)
 
     print(f"[kg_rag] Loading model {model_name} ...", file=sys.stderr)
     model = SentenceTransformer(model_name)
 
-    kg = load_kg(kg_path)
-    entities = iter_entities(kg)
     texts = [entity_text(e) for e in entities]
 
     print(f"[kg_rag] Encoding {len(texts)} entities ...", file=sys.stderr)
@@ -148,7 +118,11 @@ def build_index(
     norms[norms == 0] = 1.0
     vectors = vectors / norms
 
-    cache = {"model": model_name, "kg_path": str(kg_path), "vectors": vectors, "entities": entities}
+    cache = {
+        "fingerprint": fingerprint,
+        "vectors": vectors,
+        "entities": entities,
+    }
     with open(cache_path, "wb") as f:
         pickle.dump(cache, f)
     print(f"[kg_rag] Saved index to {cache_path}", file=sys.stderr)
@@ -159,42 +133,6 @@ def build_index(
 def cosine_scores(query_vec: np.ndarray, index: np.ndarray) -> np.ndarray:
     """Return cosine similarity scores for a normalised query vector."""
     return np.dot(index, query_vec)
-
-
-def kg_adjacency(entities: list[dict[str, Any]], kg: dict[str, Any]) -> dict[str, dict[str, list[str]]]:
-    """Build adjacency per entity: {id: {predicate: [object_id]}}."""
-    adj: dict[str, dict[str, list[str]]] = {e["@id"]: {} for e in entities}
-    for rel in kg.get("relations", []):
-        subj = rel.get("ex:subject", "")
-        pred = rel.get("ex:predicate", "")
-        obj = rel.get("ex:object", "")
-        if subj and pred and obj:
-            adj.setdefault(subj, {}).setdefault(pred, []).append(obj)
-    return adj
-
-
-def kg_paths(adj: dict[str, dict[str, list[str]]], entity_id: str, max_depth: int = 2) -> list[str]:
-    """Return short KG paths rooted at ``entity_id`` with readable IDs."""
-    paths: list[str] = []
-    seen = set()
-
-    def fmt(uri: str) -> str:
-        return short_id(uri)
-
-    def walk(current: str, depth: int, trail: list[str]) -> None:
-        if depth > max_depth:
-            return
-        for pred, objects in adj.get(current, {}).items():
-            for obj in objects:
-                path_str = " -> ".join(trail + [fmt(pred), fmt(obj)])
-                if path_str not in seen:
-                    seen.add(path_str)
-                    paths.append(path_str)
-                if depth + 1 <= max_depth:
-                    walk(obj, depth + 1, trail + [fmt(pred), fmt(obj)])
-
-    walk(entity_id, 1, [fmt(entity_id)])
-    return paths[:10]
 
 
 def hybrid_search(

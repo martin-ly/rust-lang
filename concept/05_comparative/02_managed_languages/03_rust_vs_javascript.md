@@ -66,7 +66,6 @@
     - [测验 5：Node.js 的 `require`/`import` 模块系统与 Rust 的 `crate`/`mod` 系统有什么主要区别？（理解层）](#测验-5nodejs-的-requireimport-模块系统与-rust-的-cratemod-系统有什么主要区别理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
   - [权威来源（References · 跨语言国际权威对齐）](#权威来源references--跨语言国际权威对齐)
   - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
 
@@ -512,10 +511,6 @@ graph TD
 
 ---
 
----
-
----
-
 ## 十、边界测试：Rust 与 JavaScript 的编译错误对比
 
 本节围绕「边界测试：Rust 与 JavaScript 的编译错误对比」展开，依次讨论边界测试：JavaScript 的隐式转换 vs Rust 的显式转换…、边界测试：JavaScript 的闭包变量捕获与 Rust 的所有权（…、边界测试：JavaScript 的 `this` 动态绑定与 Rust…与边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译…。
@@ -684,14 +679,6 @@ Rust 模块（Module）系统是编译期静态的，路径和可见性由编译
 | Rust vs JavaScript：系统编程与脚本执行的范式差异 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | Rust vs JavaScript：系统编程与脚本执行的范式差异 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Rust vs JavaScript：系统编程与脚本执行的范式差异 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
-
-> **过渡**: 掌握 Rust vs JavaScript：系统编程与脚本执行的范式差异 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-> **过渡**: 在实践中应用 Rust vs JavaScript：系统编程与脚本执行的范式差异 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: Rust vs JavaScript：系统编程与脚本执行的范式差异 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
-
-### 反命题与边界
-
-> **反命题**: "Rust vs JavaScript：系统编程与脚本执行的范式差异 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
 
 ---
 

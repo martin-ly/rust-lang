@@ -54,7 +54,6 @@
     - [10.2 边界测试：覆盖率检测的编译器标志冲突（编译错误）](#102-边界测试覆盖率检测的编译器标志冲突编译错误)
     - [10.3 边界测试：MCDC 与短路求值的复杂交互（逻辑错误）](#103-边界测试mcdc-与短路求值的复杂交互逻辑错误)
     - [10.4 边界测试：覆盖率工具的 LLVM IR 级别插桩（编译错误/性能下降）](#104-边界测试覆盖率工具的-llvm-ir-级别插桩编译错误性能下降)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：MCDC（Modified Condition/Decision Coverage）是什么级别的代码覆盖标准？（理解层）](#测验-1mcdcmodified-conditiondecision-coverage是什么级别的代码覆盖标准理解层)
     - [测验 2：Rust 编译器为什么难以直接支持 MCDC 覆盖报告？（理解层）](#测验-2rust-编译器为什么难以直接支持-mcdc-覆盖报告理解层)
@@ -63,7 +62,6 @@
     - [测验 5：目前 Rust 社区如何 workaround MCDC 覆盖的缺失？（理解层）](#测验-5目前-rust-社区如何-workaround-mcdc-覆盖的缺失理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
 
 ---
 
@@ -484,11 +482,6 @@ fn main() {
 > 这与 C/C++ 的 `gcov`（同样 IR 插桩，同样性能影响）或 Java 的 JaCoCo（字节码插桩，运行时（Runtime） overhead）类似——覆盖率收集的精确性与性能是权衡。
 > [来源: [Rust Coverage Documentation](https://doc.rust-lang.org/rustc/instrument-coverage.html)] ·
 > [来源: [LLVM Coverage](https://clang.llvm.org/docs/SourceBasedCodeCoverage.html)]
-> **过渡**: MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -564,10 +557,3 @@ Rust 的布尔表达式经过 LLVM 优化后可能改变结构（短路求值、
 | MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
-> **过渡**: 掌握 MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

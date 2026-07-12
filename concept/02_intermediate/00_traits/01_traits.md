@@ -84,6 +84,7 @@
       - [`unsafe impl` 的例外情况](#unsafe-impl-的例外情况)
     - [4.4 Trait + 泛型 ⟹ 零成本抽象](#44-trait--泛型--零成本抽象)
     - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
+      - [Supertrait 条目遮蔽 v2（RFC 3624）](#supertrait-条目遮蔽-v2rfc-3624)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：Trait 定义与实现](#51-正确示例trait-定义与实现)
     - [5.2 正确示例：关联类型](#52-正确示例关联类型)
@@ -570,6 +571,29 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/04_inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
 > **过渡到示例与反例**:
 > 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？
+
+#### Supertrait 条目遮蔽 v2（RFC 3624）
+
+> **来源**: [RFC 3624 — Supertrait item shadowing v2](https://rust-lang.github.io/rfcs/3624-supertrait-item-shadowing-v2.html)
+
+当 supertrait 与子 trait 声明同名条目（方法/关联类型）时，名称解析的遮蔽规则经 RFC 3624 修订（v2）：**子 trait 的同名条目在方法查找（Method Lookup）中遮蔽 supertrait 条目**，且该规则在 trait upcasting 与 `dyn` 分派中保持一致。这消除了旧规则下“同名条目经不同 trait 路径可达时行为不确定”的灰色地带。
+
+```rust
+// rustc 1.97.0 --edition 2024 实测通过
+trait A { fn f(&self) -> &'static str { "A" } }
+trait B: A { fn f(&self) -> &'static str { "B" } } // 遮蔽 A::f
+struct S;
+impl A for S {}
+impl B for S {}
+
+fn main() {
+    let s = S;
+    assert_eq!(B::f(&s), "B");      // 子 trait 版本
+    assert_eq!(A::f(&s), "A");      // 显式限定仍可访问 supertrait 版本
+}
+```
+
+工程影响：设计 trait 层次时，同名条目不再是未定义灰色区——子 trait 版本是方法解析的稳定结果；如需 supertrait 语义，必须显式限定（`A::f(&s)`）或改名。
 > 下一节通过正例展示定理的适用场景，通过反例揭示定理失效的精确条件——特别是 E0117、E0119、E0038 等编译错误的触发机制，将抽象定理映射到具体代码行为。
 
 ---

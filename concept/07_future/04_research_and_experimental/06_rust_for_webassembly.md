@@ -84,7 +84,6 @@
     - [10.3 边界测试：WASM 组件模型（Component Model）的类型映射（编译错误）](#103-边界测试wasm-组件模型component-model的类型映射编译错误)
     - [10.4 边界测试：WASI Preview 2 的功能性权限（运行时错误）](#104-边界测试wasi-preview-2-的功能性权限运行时错误)
     - [10.3 边界测试：WASM 模块的线性内存与 Rust 的 Vec 增长策略（运行时 OOM）](#103-边界测试wasm-模块的线性内存与-rust-的-vec-增长策略运行时-oom)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 在 WASM 生态中的长期愿景是什么？（理解层）](#测验-1rust-在-wasm-生态中的长期愿景是什么理解层)
     - [测验 2：WASI Preview 2 的组件模型对 Rust 开发有什么影响？（理解层）](#测验-2wasi-preview-2-的组件模型对-rust-开发有什么影响理解层)
@@ -868,11 +867,6 @@ fn main() {
 > 这与 JavaScript 的 `Array`（V8 自动管理，无显式内存页概念）或 Native 的 `Vec`（操作系统管理虚拟内存）不同——WASM 的内存模型显式且受限。
 > [来源: [WebAssembly Memory](https://webassembly.org/docs/modules/#linear-memory)] ·
 > [来源: [WASM Rust](https://rustwasm.github.io/docs/book/index.html)]
-> **过渡**: Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -947,10 +941,6 @@ fn main() {
 | Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界
 

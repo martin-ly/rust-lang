@@ -14,10 +14,10 @@
 | 缺口类型 | 数量 | 说明 |
 |:---|:---:|:---|
 | 无权威来源标注 | 0 | 概念文件未引用任何外部权威来源 |
-| 来源标注薄弱（≤2） | 2 | 概念文件仅引用 1–2 个来源 |
-| 无定理链 | 201 | 概念文件缺少定理链 |
-| 无 A/S/P 标记 | 239 | 概念文件缺少 A/S/P 维度标记 |
-| 无知识表征章节 | 289 | 概念文件无决策树/矩阵/示例等表征 |
+| 来源标注薄弱（≤2） | 0 | 概念文件仅引用 1–2 个来源 |
+| 无定理链 | 199 | 概念文件缺少定理链 |
+| 无 A/S/P 标记 | 237 | 概念文件缺少 A/S/P 维度标记 |
+| 无知识表征章节 | 286 | 概念文件无决策树/矩阵/示例等表征 |
 
 ## 二、优先修复任务
 
@@ -27,24 +27,22 @@
 
 | 概念 | 层级 | 当前来源数 | 建议行动 |
 |:---|:---:|:---:|:---|
-| [生命周期高级主题：从 HRTB 到自引用类型](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md) | L2 进阶概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [Safety Tags（安全标签）预览](../../07_future/03_preview_features/03_safety_tags_preview.md) | L7 前沿趋势层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
 
 ### P1：增强知识表征
 
 | 概念 | 层级 | 缺失表征 | 建议行动 |
 |:---|:---:|:---|:---|
+| [编程语言理论基础](../../01_foundation/00_start/01_pl_prerequisites.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [零成本抽象：Rust 的性能哲学](../../01_foundation/00_start/02_zero_cost_abstractions.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [闭包基础：捕获环境与匿名函数](../../01_foundation/00_start/03_closure_basics.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [编程语言理论基础](../../01_foundation/00_start/01_pl_prerequisites.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Rust 关键字](../../01_foundation/00_start/06_keywords.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Rust 运算符与符号](../../01_foundation/00_start/07_operators_and_symbols.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Rust 所有权-借用-生命周期知识图谱](../../01_foundation/01_ownership_borrow_lifetime/00_ownership_borrow_lifetime_knowledge_map.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Move 语义：C++ 与 Rust 的资源转移模型](../../01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [所有权清单自测：Brown University Ownership Inventory](../../01_foundation/01_ownership_borrow_lifetime/06_ownership_inventories_brown_book.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
+| [Never Type (`!`)：底类型与穷尽性](../../01_foundation/02_type_system/02_never_type.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [数值类型与运算：从整数到浮点的完整图景](../../01_foundation/02_type_system/03_numerics.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [类型强制与转换：显式与隐式的边界](../../01_foundation/02_type_system/04_coercion_and_casting.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [Never Type (`!`)：底类型与穷尽性](../../01_foundation/02_type_system/02_never_type.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [引用语义：自动解引用、Deref 强制与类型转换](../../01_foundation/03_values_and_references/01_reference_semantics.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [值语义 vs 引用语义：从 C++、Java、Python 到 Rust](../../01_foundation/03_values_and_references/02_value_vs_reference_semantics.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [控制流：表达式导向的流程控制](../../01_foundation/04_control_flow/01_control_flow.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
@@ -60,9 +58,9 @@
 | [Enumerations](../../01_foundation/07_modules_and_items/05_enumerations.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Implementations](../../01_foundation/07_modules_and_items/06_implementations.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Preludes](../../01_foundation/07_modules_and_items/10_preludes.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [Panic 与 Abort：不可恢复错误的处理机制](../../01_foundation/08_error_handling/03_panic_and_abort.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Rust 错误处理基础](../../01_foundation/08_error_handling/01_error_handling_basics.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [错误处理控制流](../../01_foundation/08_error_handling/02_error_handling_control_flow.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
+| [Panic 与 Abort：不可恢复错误的处理机制](../../01_foundation/08_error_handling/03_panic_and_abort.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [属性与声明宏：编译期元编程基础](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 
 ### P2：对齐国际标准

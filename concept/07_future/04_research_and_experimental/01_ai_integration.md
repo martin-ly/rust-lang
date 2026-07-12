@@ -920,11 +920,6 @@ fn main() {
 >
 > [来源: [GitHub Copilot](https://github.com/features/copilot)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
-> **过渡**: AI × Rust：生成-验证闭环与确定性容器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: AI × Rust：生成-验证闭环与确定性容器 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 

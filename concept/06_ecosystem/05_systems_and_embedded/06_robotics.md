@@ -85,7 +85,6 @@
     - [8.2 边界测试：ROS2 回调阻塞执行器（实时性违反）](#82-边界测试ros2-回调阻塞执行器实时性违反)
     - [8.3 边界测试：多线程 ROS2 节点共享可变状态（数据竞争）](#83-边界测试多线程-ros2-节点共享可变状态数据竞争)
   - [相关概念](#相关概念)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：为什么 Rust 在机器人学（Robotics）领域越来越受关注？（理解层）](#测验-1为什么-rust-在机器人学robotics领域越来越受关注理解层)
     - [测验 2：`ROS 2`（机器人操作系统）对 Rust 的支持现状如何？（理解层）](#测验-2ros-2机器人操作系统对-rust-的支持现状如何理解层)
@@ -94,7 +93,6 @@
     - [测验 5：机器人学中的"传感器融合"（Sensor Fusion）在 Rust 中通常如何实现？（理解层）](#测验-5机器人学中的传感器融合sensor-fusion在-rust-中通常如何实现理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
 
 > **变更日志**:
 >
@@ -935,16 +933,6 @@ impl GoodNode {
 - [形式化验证工具](../08_formal_verification/02_formal_verification_tools.md) — 模型检查、定理证明、Kani
 - [分布式共识](../06_data_and_distributed/06_distributed_consensus.md) — 多机器人协同、一致性（Coherence）
 
-> **过渡**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 定义 ⟹ 类型安全保证
-- **定理**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 定义 ⟹ 类型安全保证
-- **定理**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 定义 ⟹ 类型安全保证
-
 ## 嵌入式测验（Embedded Quiz）
 
 理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：为什么 Rust 在机器人学（Robotics）领域越来越受…、测验 2：`ROS 2`（机器人操作系统）对 Rust 的支持现状如何…、测验 3：实时系统（Real-Time）中，为什么 Rust 比 Py…、测验 4：`nalgebra` 和 `nphysics` 在 Rust…等5个方面，本节依次展开。
@@ -1018,11 +1006,3 @@ impl GoodNode {
 | Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

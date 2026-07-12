@@ -173,14 +173,6 @@ fn main() {}
 | Lifetime Capture in `impl Trait` Preview 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Lifetime Capture in `impl Trait` Preview 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
-> **过渡**: 掌握 Lifetime Capture in `impl Trait` Preview 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Lifetime Capture in `impl Trait` Preview 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Lifetime Capture in `impl Trait` Preview 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Lifetime Capture in `impl Trait` Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
-
 ## 嵌入式测验（Embedded Quiz）
 
 本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1："生命周期捕获规则"的改进解决了什么问题？（理解层）、测验 2：`impl Trait + use<'a>` 语法中的 `u…、测验 3：这个特性对 API 设计有什么影响？（理解层）、测验 4：生命周期捕获规则与 Return Type Notation…等5个方面。

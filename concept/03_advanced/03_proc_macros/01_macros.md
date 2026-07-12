@@ -1957,6 +1957,7 @@ macro_rules! trace_fn {
 ### 6. `macro_rules!` 与 `macro` 关键字（声明宏 2.0）的演进对比
 
 > **[RFC 1584: Macros](https://rust-lang.github.io/rfcs/1584-macros.html)** `macro` 关键字（声明宏 2.0）旨在解决 `macro_rules!` 的诸多限制：更好的作用域控制、模块（Module）路径支持、可见性修饰符，以及更像函数的语法。✅ 已验证
+> **[RFC 1584: Macros](https://rust-lang.github.io/rfcs/1584-macros.html) 后续**：声明宏能力扩展已由两个配套 RFC 接棒——[RFC 3697 — Declarative attribute macros](https://rust-lang.github.io/rfcs/3697-declarative-attribute-macros.html)（声明式属性宏：`macro` 定义可直接用作 `#[attr]` 属性）与 [RFC 3698 — Declarative derive macros](https://rust-lang.github.io/rfcs/3698-declarative-derive-macros.html)（声明式 derive 宏：无需 proc-macro crate 即可定义 `#[derive(...)]`）。二者均处于 accepted/未稳定状态，目标是把“简单属性宏/derive”从过程宏的重型工具链（syn/quote）中解放出来。✅ 链接已验证 2026-07-12
 > **[Rust Reference: macro keyword](https://doc.rust-lang.org/reference/introduction.html)** 截至 Rust 1.78，`macro` 关键字仍为不稳定特性（实验特性门 `decl_macro`），但已在 `std` 内部广泛使用（如 `vec!`、`println!` 的标准库实现已迁移）。✅ 已验证
 
 **`macro_rules!` 的局限性**

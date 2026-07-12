@@ -41,6 +41,7 @@
     - [6.1 配置私有 Registry](#61-配置私有-registry)
     - [6.2 Source Replacement（源替换）](#62-source-replacement源替换)
   - [七、发布前的检查清单](#七发布前的检查清单)
+  - [八、依赖冷却：最小发布时间（RFC 3923）](#八依赖冷却最小发布时间rfc-3923)
   - [嵌入式测验](#嵌入式测验)
     - [测验 1：sparse 协议相比 git 协议的主要优势是什么？](#测验-1sparse-协议相比-git-协议的主要优势是什么)
     - [测验 2：`cargo yank` 会删除已经发布的 crate 源码吗？](#测验-2cargo-yank-会删除已经发布的-crate-源码吗)
@@ -223,6 +224,20 @@ registry = "sparse+https://mirrors.my-company.com/crates.io-index/"
 - [ ] 版本号符合 SemVer 规范
 - [ ] 若存在破坏性变更，已升级主版本号
 ```
+
+---
+
+## 八、依赖冷却：最小发布时间（RFC 3923）
+
+> **来源**: [RFC 3923 — Cargo minimum publish age](https://rust-lang.github.io/rfcs/3923-cargo-min-publish-age.html) · [Cargo 1.96 新特性与工具链变更 — `pubtime`](04_cargo_196_features.md)
+
+针对“发布即投毒”类供应链攻击（恶意版本发布后数小时内被大量拉取），RFC 3923 为 Cargo 引入**最小发布时间（minimum publish age）**机制：解析器在选择依赖版本时，跳过发布时间晚于阈值的版本，使新发布版本经过社区审查“冷却期”后才进入默认解析结果。
+
+- **数据基础**：依赖 registry index 中的 `pubtime` 字段（见 [Cargo 1.96 新特性](04_cargo_196_features.md) §二），锁文件同样记录发布时间供审计；
+- **与 yank 的关系**：yank 是事后撤回，min-publish-age 是事前缓冲，二者与 [Cargo 安全公告](13_cargo_security_cves.md) 中的投毒响应流程互补；
+- **策略形态**：组织级策略（如“仅使用发布超过 7 天的版本”）可通过配置启用，紧急修复可用显式覆盖。
+
+该机制不改变 SemVer 解析语义（见 [Cargo 依赖解析](06_cargo_dependency_resolution.md)），只是在候选版本集合上增加时间过滤。
 
 ---
 

@@ -66,7 +66,6 @@
     - [10.2 边界测试：Nonce 复用破坏 AES-GCM 机密性（逻辑错误）](#102-边界测试nonce-复用破坏-aes-gcm-机密性逻辑错误)
     - [10.3 边界测试：低迭代次数 KDF 导致暴力破解（安全漏洞）](#103-边界测试低迭代次数-kdf-导致暴力破解安全漏洞)
   - [相关概念](#相关概念)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 的 `ring` crate 在密码学中提供什么功能？（理解层）](#测验-1rust-的-ring-crate-在密码学中提供什么功能理解层)
     - [测验 2：为什么密码学代码中绝对不应该使用 `unsafe` 或原始指针？（理解层）](#测验-2为什么密码学代码中绝对不应该使用-unsafe-或原始指针理解层)
@@ -75,7 +74,6 @@
     - [测验 5：在 Rust 中存储密码时，为什么必须使用 Argon2 / bcrypt / scrypt 而非 SHA-256？（理解层）](#测验-5在-rust-中存储密码时为什么必须使用-argon2--bcrypt--scrypt-而非-sha-256理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
 
 **变更日志**:
 
@@ -851,15 +849,6 @@ fn weak_hash_password(password: &str) -> String {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **过渡**: Security & Cryptography（安全与密码学） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Security & Cryptography（安全与密码学） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Security & Cryptography（安全与密码学） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Security & Cryptography（安全与密码学） 定义 ⟹ 类型安全保证
-- **定理**: Security & Cryptography（安全与密码学） 定义 ⟹ 类型安全保证
-- **定理**: Security & Cryptography（安全与密码学） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -935,10 +924,3 @@ SHA-256 设计为快速计算，易被 GPU/ASIC 暴力破解。Argon2 等是"密
 | Security & Cryptography（安全与密码学） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Security & Cryptography（安全与密码学） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
-> **过渡**: 掌握 Security & Cryptography（安全与密码学） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Security & Cryptography（安全与密码学） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Security & Cryptography（安全与密码学） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Security & Cryptography（安全与密码学） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

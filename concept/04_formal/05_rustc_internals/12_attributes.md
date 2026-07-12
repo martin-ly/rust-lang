@@ -155,6 +155,12 @@ fn decorated() {}
 
 这些属性经常与 [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) 和 FFI 代码配合使用。
 
+### Feature 元数据（RFC 3416）
+
+> **来源**: [RFC 3416 — Feature metadata](https://rust-lang.github.io/rfcs/3416-feature-metadata.html)
+
+RFC 3416 为 `#![feature(...)]` 属性引入**结构化元数据**要求：nightly 特性门需携带可机器读取的说明信息（如关联 tracking issue、责任团队），使编译器与工具链能对特性使用进行审计与统计。这是 T-compiler 内部治理 RFC，对终端用户语法无直接影响，但决定了 `--check-cfg` 类工具与不稳定特性报告的元数据基础（参见 [Compiler Infrastructure](../../06_ecosystem/00_toolchain/05_compiler_infrastructure.md) 与 [rustc 编译器诊断与 UI Tests](../../06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md)）。
+
 ## 七、相关概念
 
 | 概念 | 关系 |

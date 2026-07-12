@@ -15,8 +15,9 @@
      路径形式、同目录相对形式）同样重写。
 3. 数据文件同步（结构化 JSON 更新 + 文本兜底）：
    - `concept_kb.json`（绝对路径 path 字段）
-   - `concept/00_meta/kg_data.json` / `kg_data_v3.json` / `kg_index.json`
-     （ex:path / path / id 字段，含去序号归一化兜底匹配）
+   - `concept/00_meta/kg_data_v3.json` / `kg_index.json`
+     （ex:path / path / id 字段，含去序号归一化兜底匹配；v1 `kg_data.json`
+     已于 2026-07-12 退役至 archive/2026/，保留在跳过集合中作防御）
    - `concept/00_meta/taxonomy.yaml` 仅含目录前缀，目录不改名时通常无需动
      （走通用文本兜底）。
 4. SUMMARY.md 重新生成：按映射替换路径（保留层级与标题文本），输出到

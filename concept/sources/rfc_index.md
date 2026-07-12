@@ -102,6 +102,31 @@
 
 ---
 
+## 七、2023–2026 重要已合并 RFC（语义影响）
+
+> 2026-07-12 补充，来源：[RFC Book Active List](https://rust-lang.github.io/rfcs/)；完整主题覆盖矩阵见 `reports/AUTHORITY_SOURCE_TOPIC_COVERAGE_2026_07_12.md`。
+
+| RFC | 标题 | 状态 | 稳定版本 | 概念文件 |
+| :--- | :--- | :---: | :---: | :--- |
+| [RFC 3416](https://rust-lang.github.io/rfcs/3416-feature-metadata.html) | Feature metadata | 🚧 | — | `12_attributes.md` §Feature 元数据 |
+| [RFC 3453](https://rust-lang.github.io/rfcs/3453-f16-and-f128.html) | `f16` / `f128` 浮点类型 | 🚧 | nightly | `35_f16_f128_preview.md` |
+| [RFC 3467](https://rust-lang.github.io/rfcs/3467-unsafe-pinned.html) | `UnsafePinned` | 🚧 | nightly | `36_unsafe_pinned_preview.md` |
+| [RFC 3484](https://rust-lang.github.io/rfcs/3484-unsafe-extern-blocks.html) | `unsafe extern` blocks | ✅ | 1.82 / 2024Ed | `02_edition_guide.md` · `01_rust_ffi.md` |
+| [RFC 3514](https://rust-lang.github.io/rfcs/3514-float-semantics.html) | Float semantics | 🚧 | — | `03_numerics.md` |
+| [RFC 3559](https://rust-lang.github.io/rfcs/3559-rust-has-provenance.html) | Rust has provenance | ✅ | — | `06_memory_model.md` · `semantic_space.md` |
+| [RFC 3617](https://rust-lang.github.io/rfcs/3617-precise-capturing.html) | Precise capturing (`use<>`) | ✅ | 1.82 / 2024Ed | `13_lifetime_capture_preview.md` |
+| [RFC 3624](https://rust-lang.github.io/rfcs/3624-supertrait-item-shadowing-v2.html) | Supertrait item shadowing v2 | ✅ | — | `01_traits.md` §4.5.1 |
+| [RFC 3627](https://rust-lang.github.io/rfcs/3627-match-ergonomics-2024.html) | Match ergonomics 2024 | ✅ | 1.85 (2024Ed) | `02_edition_guide.md` · `01_reference_semantics.md` |
+| [RFC 3668](https://rust-lang.github.io/rfcs/3668-async-closures.html) | Async closures | ✅ | 1.85 | `07_async_closures.md` |
+| [RFC 3681](https://rust-lang.github.io/rfcs/3681-default-field-values.html) | Default field values | 🚧 | nightly | `37_default_field_values_preview.md` |
+| [RFC 3695](https://rust-lang.github.io/rfcs/3695-cfg-boolean-literals.html) | `cfg(true)` / `cfg(false)` 布尔字面量 | ✅ | 1.88 | `11_conditional_compilation.md` §布尔字面量谓词 |
+| [RFC 3697](https://rust-lang.github.io/rfcs/3697-declarative-attribute-macros.html) / [3698](https://rust-lang.github.io/rfcs/3698-declarative-derive-macros.html) | 声明式属性/derive 宏 | 🚧 | — | `01_macros.md` §6 |
+| [RFC 3722](https://rust-lang.github.io/rfcs/3722-explicit-extern-abis.html) | Explicit extern ABIs | 🚧 | — | `03_linkage.md` §显式 extern ABI |
+| [RFC 3892](https://rust-lang.github.io/rfcs/3892-complex-numbers.html) | Complex numbers | 🚧 | — | `38_complex_numbers_preview.md` |
+| [RFC 3923](https://rust-lang.github.io/rfcs/3923-cargo-min-publish-age.html) | Cargo minimum publish age | 🚧 | — | `08_cargo_registries_and_publishing.md` §八 |
+
+---
+
 ## 使用规范
 
 ### 概念文件中引用 RFC 的标准格式

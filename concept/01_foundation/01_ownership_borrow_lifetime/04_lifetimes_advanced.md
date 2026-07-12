@@ -91,6 +91,7 @@
     - [18.3 生命周期模式矩阵](#183-生命周期模式矩阵)
     - [18.4 常见陷阱](#184-常见陷阱)
     - [18.5 边界测试：lifetime bounds 与 trait object 的交互（编译错误）](#185-边界测试lifetime-bounds-与-trait-object-的交互编译错误)
+  - [十九、无界生命周期（Unbounded Lifetimes，Rustonomicon 3.6）](#十九无界生命周期unbounded-lifetimesrustonomicon-36)
   - [定理链补充](#定理链补充)
   - [反命题与边界](#反命题与边界)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -1613,6 +1614,18 @@ fn main() {}
 > [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] · [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
 
 ---
+
+## 十九、无界生命周期（Unbounded Lifetimes，Rustonomicon 3.6）
+
+> **来源**: [The Rustonomicon — Unbounded Lifetimes](https://doc.rust-lang.org/nomicon/unbounded-lifetimes.html)
+
+**无界生命周期**指函数签名中未被任何输入约束、由调用点自由推断的生命周期——典型来源是裸指针转引用、或将 `&'static` 收窄为任意 `'a` 的协变（Covariance）。Rustonomicon 3.6 警示：
+
+- 生命周期在函数边界处可以**比实际存活范围推得更长**（unbounded），调用方据此持有“看似合法”的引用，造成悬垂。
+- 防御手段：让输出生命周期**始终受输入约束**（`'a` 必须出现在参数中），或在 unsafe 边界处用文档化的 safety contract 限定最长有效区间。
+- 与变型的交互：因为 `&'static T` 协变到 `&'a T`，`'static` 常被当作“最长生命周期”误用为无界生命周期的来源；正确姿势见 §18.1 变型分析与 [Subtyping and Variance](../../04_formal/00_type_theory/02_subtype_variance.md)。
+
+> 该节与 [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/01_unsafe.md) 的“生命周期诚实性（lifetime honesty）”规则互为表里：unsafe 代码不得制造签名上看不出来的无界生命周期。
 
 ## 定理链补充
 

@@ -241,9 +241,10 @@ def write_readme(data: dict[str, Any]) -> None:
 
 ## 维护规则
 
-- 本目录文件由 `scripts/generate_knowledge_topology_atlas.py` 从 `concept/**/*.md` 半自动生成。
-- 人工策展内容以 `<!-- MANUAL -->` 标记。
-- 当 `concept/` 文件更新后，应重新运行生成脚本并审阅变更。
+- 本目录文件由 `scripts/generate_knowledge_topology_atlas.py` 从 `concept/**/*.md` 生成，**只重生成、不手改**。
+- 数据驱动页（01/02/06/07/08/10/README）的人工策展内容已固化进生成器模板与规则。
+- 纯人工策展页（03/04/05/09）的单一事实源是 `scripts/templates/atlas_pages/`，生成器原样拷贝；修改请改模板后重跑。
+- 当 `concept/` 文件更新后，应先运行 `scripts/extract_concept_topology.py` 刷新 `tmp/concept_topology_raw.json`，再运行本生成脚本并审阅变更。
 
 ---
 
@@ -324,7 +325,7 @@ def write_concept_definition_atlas(concepts: list[dict[str, Any]]) -> None:
     lines.append("")
 
     lines.extend(footer())
-    (OUT_DIR / "01_concept_definition_atlas.md").write_text("\n".join(lines), encoding="utf-8")
+    write_out(OUT_DIR / "01_concept_definition_atlas.md", "\n".join(lines))
 
 
 def write_attribute_relationship_atlas(concepts: list[dict[str, Any]]) -> None:
@@ -389,7 +390,7 @@ def write_attribute_relationship_atlas(concepts: list[dict[str, Any]]) -> None:
     lines.append("")
 
     lines.extend(footer())
-    (OUT_DIR / "02_attribute_relationship_atlas.md").write_text("\n".join(lines), encoding="utf-8")
+    write_out(OUT_DIR / "02_attribute_relationship_atlas.md", "\n".join(lines))
 
 
 def write_inter_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
@@ -453,7 +454,7 @@ def write_inter_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
     lines.append("")
 
     lines.extend(footer())
-    (OUT_DIR / "06_inter_layer_mapping_atlas.md").write_text("\n".join(lines), encoding="utf-8")
+    write_out(OUT_DIR / "06_inter_layer_mapping_atlas.md", "\n".join(lines))
 
 
 def write_intra_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
@@ -477,17 +478,21 @@ def write_intra_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
     # “模式匹配”是控制流概念而非“设计模式”精化页，排除
     _REFINE_EXCLUDE = {"模式匹配"}
 
-    # 策展互斥对（与 scripts/type_kg_core_edges.py CURATED_MUTEX 同源）：
-    # key = 无序概念 id 对，value = 依据（文件:行号 + 引述）
+    # 策展互斥对（与 scripts/type_kg_core_edges.py CURATED_MUTEX 同源，引用行号已核实）：
+    # key = 无序概念 id 对（概念文件主干名），value = 依据（文件:行号 + 引述）
     CURATED_MUTEX: dict[frozenset[str], str] = {
-        frozenset({"02_borrowing", "23_move_semantics"}):
-            "move 与活跃借用互斥（03_lifetimes.md:942 “所有权转移(move)与借用是互斥的”）",
-        frozenset({"13_panic_and_abort", "32_error_handling_basics"}):
-            "不可恢复(panic/abort)与可恢复(Result 传播)在同一错误现场二选一（13_panic_and_abort.md:5/91）",
-        frozenset({"35_unions", "03_memory_management"}):
-            "union 默认不 drop 字段，与 RAII 自动析构纪律互斥（35_unions.md:105/250）",
-        frozenset({"39_type_level_programming", "25_rtti_and_dynamic_typing"}):
-            "编译期类型计算与运行期类型识别互斥（25_rtti_and_dynamic_typing.md:203 “RTTI 是静态类型系统向运行时的有限泄漏”）",
+        frozenset({"02_borrowing", "05_move_semantics"}):
+            "move 与活跃借用互斥（01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md:946 "
+            "“Rust 的所有权（Ownership）转移（move）与借用是互斥的”）",
+        frozenset({"08_pin_unpin", "05_move_semantics"}):
+            "Pin 禁止移动 !Unpin 值（03_advanced/01_async/08_pin_unpin.md:752 "
+            "“Pin 通过禁止移动（对 !Unpin 类型）来解决这个问题”）",
+        frozenset({"03_panic_and_abort", "01_error_handling_basics"}):
+            "不可恢复(panic/abort)与可恢复(Result 传播)在同一错误现场二选一（01_foundation/08_error_handling/03_panic_and_abort.md:5 “不可恢复错误的处理机制”）",
+        frozenset({"06_unions", "01_memory_management"}):
+            "union 默认不 drop 字段，与 RAII 自动析构纪律互斥（02_intermediate/04_types_and_conversions/06_unions.md:103/254 “默认不 drop 字段”）",
+        frozenset({"03_type_level_programming", "05_rtti_and_dynamic_typing"}):
+            "编译期类型计算与运行期类型识别互斥（02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md:212 “RTTI 是静态类型系统向运行时的有限泄漏”）",
     }
 
     def link_ids(links: list[dict[str, str]]) -> set[str]:
@@ -600,7 +605,7 @@ def write_intra_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
         lines.append("")
 
     lines.extend(footer())
-    (OUT_DIR / "07_intra_layer_mapping_atlas.md").write_text("\n".join(lines), encoding="utf-8")
+    write_out(OUT_DIR / "07_intra_layer_mapping_atlas.md", "\n".join(lines))
 
 
 def write_concept_source_alignment_atlas(concepts: list[dict[str, Any]]) -> None:
@@ -687,7 +692,7 @@ def write_concept_source_alignment_atlas(concepts: list[dict[str, Any]]) -> None
     lines.append("")
 
     lines.extend(footer())
-    (OUT_DIR / "08_concept_source_alignment_atlas.md").write_text("\n".join(lines), encoding="utf-8")
+    write_out(OUT_DIR / "08_concept_source_alignment_atlas.md", "\n".join(lines))
 
 
 def write_gap_and_action_plan(concepts: list[dict[str, Any]]) -> None:
@@ -759,71 +764,29 @@ def write_gap_and_action_plan(concepts: list[dict[str, Any]]) -> None:
     lines.append("")
 
     lines.extend(footer())
-    (OUT_DIR / "10_gap_and_action_plan.md").write_text("\n".join(lines), encoding="utf-8")
+    write_out(OUT_DIR / "10_gap_and_action_plan.md", "\n".join(lines))
 
 
-def write_remaining_stubs() -> None:
-    stubs = {
-        "03_scenario_decision_tree_atlas.md": (
-            "场景决策树图谱（Scenario Decision Tree Atlas）",
-            "Scenario Decision Tree Atlas",
-            "典型开发场景 → 决策问题 → 候选方案 → Rust 概念/工具选择。",
-        ),
-        "04_example_counterexample_atlas.md": (
-            "示例与反例图谱（Example and Counterexample Atlas）",
-            "Example and Counterexample Atlas",
-            "按概念组织的正确示例、错误示例、边界示例与反例分析。",
-        ),
-        "05_logical_reasoning_atlas.md": (
-            "逻辑推理图谱（Logical Reasoning Atlas）",
-            "Logical Reasoning Atlas",
-            "定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。",
-        ),
-        "09_reasoning_judgment_tree_atlas.md": (
-            "推理判定树图谱（Reasoning Judgment Tree Atlas）",
-            "Reasoning Judgment Tree Atlas",
-            "编译错误/运行时问题 → 判定问题 → 根因 → 修复策略的概念路径。",
-        ),
-    }
+# 纯人工策展页（场景决策树/示例反例/逻辑推理/推理判定树）：内容无法从 raw 合成，
+# 整页固化为 scripts/templates/atlas_pages/ 下的模板，生成器原样拷贝。
+# 修改这些页请改模板后重跑生成器，禁止直接手改生成结果（纪律：只重生成、不手改）。
+MANUAL_PAGES = (
+    "03_scenario_decision_tree_atlas.md",
+    "04_example_counterexample_atlas.md",
+    "05_logical_reasoning_atlas.md",
+    "09_reasoning_judgment_tree_atlas.md",
+)
 
-    for filename, (title, en, summary) in stubs.items():
-        path = OUT_DIR / filename
-        # 防覆盖护栏：若文件已存在且不是本函数生成的 stub（不含“待构建内容”标记），
-        # 说明已有人工策展内容（如 03/09 的 mermaid 判定树），跳过以免误删。
-        if path.exists():
-            existing = path.read_text(encoding="utf-8", errors="ignore")
-            if "## 一、待构建内容" not in existing:
-                continue
-        lines = header(title, en, summary)
-        lines.append("## 一、待构建内容")
-        lines.append("")
-        lines.append("<!-- MANUAL: 本文件需要人工策展，从各 concept 文件中抽取场景、示例、推理链、判定树。 -->")
-        lines.append("")
-        lines.append("本图谱将按以下维度组织：")
-        lines.append("")
-        if "Scenario" in en:
-            lines.append("- 内存管理场景：栈 vs 堆、所有权转移、借用选择")
-            lines.append("- 并发场景：共享状态 vs 消息传递、同步 vs 异步")
-            lines.append("- 错误处理场景：Result vs panic、自定义错误类型")
-            lines.append("- FFI 场景：安全封装、ABI 选择、生命周期桥接")
-        elif "Example" in en:
-            lines.append("- 正确示例：展示概念的标准用法")
-            lines.append("- 错误示例：展示常见误用及编译器报错")
-            lines.append("- 边界示例：展示边界条件和特殊情形")
-            lines.append("- 反例分析：解释为何某些写法不成立")
-        elif "Logical" in en:
-            lines.append("- 所有权推理链：Ownership → Borrowing → Lifetimes")
-            lines.append("- 类型系统推理链：Type → Trait → Generic → Lifetime")
-            lines.append("- 并发安全推理链：Send/Sync → Mutex → Atomic → Memory Ordering")
-            lines.append("- 形式化对应：Rust 概念 ↔ 线性逻辑 / 分离逻辑 / 类型论")
-        elif "Judgment" in en:
-            lines.append("- Borrow checker 错误判定树")
-            lines.append("- 生命周期错误判定树")
-            lines.append("- 类型不匹配错误判定树")
-            lines.append("- 运行时 panic 根因判定树")
-        lines.append("")
-        lines.extend(footer())
-        path.write_text("\n".join(lines), encoding="utf-8")
+
+def write_manual_curated_pages() -> None:
+    for filename in MANUAL_PAGES:
+        template = MANUAL_PAGES_DIR / filename
+        if not template.is_file():
+            raise FileNotFoundError(
+                f"人工策展页模板缺失：{template}（03/04/05/09 的单一事实源，请勿删除）"
+            )
+        text = template.read_text(encoding="utf-8")
+        write_out(OUT_DIR / filename, text)
 
 
 def main() -> None:
@@ -838,7 +801,7 @@ def main() -> None:
     write_intra_layer_mapping_atlas(concepts)
     write_concept_source_alignment_atlas(concepts)
     write_gap_and_action_plan(concepts)
-    write_remaining_stubs()
+    write_manual_curated_pages()
 
     print(f"Generated atlas files in {OUT_DIR}")
 

@@ -49,7 +49,6 @@
     - [5.2 长期时间轴](#52-长期时间轴)
     - [相关已稳定特性](#相关已稳定特性)
   - [参考](#参考)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Pinned field projections 解决的是什么问题？（理解层）](#测验-1pinned-field-projections-解决的是什么问题理解层)
     - [测验 2：为什么自引用结构体的字段投影是 unsafe 的？（理解层）](#测验-2为什么自引用结构体的字段投影是-unsafe-的理解层)
@@ -58,7 +57,6 @@
     - [测验 5：这个特性目前的实现状态如何？（理解层）](#测验-5这个特性目前的实现状态如何理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ## 一、核心概念
@@ -309,12 +307,6 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 | Pin 投影模式 | <https://doc.rust-lang.org/std/pin/index.html#pin-projection> |
 | Rust for Linux 需求 | <https://rust-lang.github.io/rust-project-goals/2026/> |
 
-> **过渡**: Field Projections 预览：安全的字段级投影 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Field Projections 预览：安全的字段级投影 定义 ⟹ 类型安全保证
-
 ## 嵌入式测验（Embedded Quiz）
 
 本节从测验 1：Pinned field projections 解决的是什…、测验 2：为什么自引用结构体的字段投影是 unsafe 的？（理解层）、测验 3：`pin-project` crate 目前如何解决这个问题…、测验 4：语言级 field projection 支持对 `asyn…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
@@ -388,14 +380,6 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 | Field Projections 预览：安全的字段级投影 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Field Projections 预览：安全的字段级投影 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Field Projections 预览：安全的字段级投影 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 Field Projections 预览：安全的字段级投影 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Field Projections 预览：安全的字段级投影 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Field Projections 预览：安全的字段级投影 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Field Projections 预览：安全的字段级投影 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ---
 

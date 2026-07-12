@@ -40,6 +40,15 @@ TOC_LINE_RE = re.compile(r"^\s*[-*]\s+\[.*\]\(#.*\)\s*$")
 META_LINE_RE = re.compile(r"^>\s*\*\*")
 VERSION_LOG_RE = re.compile(r"^\s*[-*]\s*v?\d+\.\d+")
 
+# 占位性引导语（2026-07-12 空父章节填充脚本 tmp/fill_empty_sections.py 的 9 种句式开头；
+# 见 reports/TEMPLATE_BACKFILL_QUALITY_2026_07_12.md）。单节正文 <2 句且全为引导句式
+# 记为 PLACEHOLDER_SECTION（观察指标，默认不阻断）。
+GUIDE_RE = re.compile(
+    r"^(本节围绕「.*」展开|「.*」部分(按|包含)|本节将「.*」分解|理解「.*」需要把握|"
+    r"本节从.*切入|「.*」涉及|本节聚焦「.*」|「.*」部分的核心主题|本节专门讨论「|"
+    r"本节从.*两个层面剖析)"
+)
+
 
 def iter_files() -> list[Path]:
     out = []
@@ -78,6 +87,7 @@ def audit_file(path: Path) -> dict:
         "markers": [],          # (lineno, kind, text)
         "empty_leaf": [],       # (lineno, heading)
         "empty_parent": [],     # (lineno, heading)
+        "placeholder_sections": [],  # (lineno, heading, guide_text)
     }
     # --- markers (skip code fences) ---
     in_code = False
@@ -108,6 +118,19 @@ def audit_file(path: Path) -> dict:
         end = nxt[0] if nxt else len(lines)
         body = [ln for ln in lines[idx + 1 : end] if ln.strip()]
         if body:
+            # PLACEHOLDER_SECTION：本节正文（子标题前）<2 句且全为引导句式
+            own = []
+            for ln in body:
+                if HEADING_RE.match(ln):
+                    break
+                s = ln.strip()
+                if s == "---" or META_LINE_RE.match(ln) or TOC_LINE_RE.match(ln):
+                    continue
+                own.append(s)
+            if own and all(GUIDE_RE.match(s) for s in own):
+                nsent = sum(len(re.findall(r"[。！？]", s)) for s in own)
+                if nsent < 2:
+                    result["placeholder_sections"].append((idx + 1, text, own[0][:80]))
             continue
         if nxt is None or nxt[1] <= level:
             result["empty_leaf"].append((idx + 1, text))
@@ -119,6 +142,7 @@ def audit_file(path: Path) -> dict:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--json", help="输出 JSON 明细到指定路径")
+    ap.add_argument("--strict", help="存在 PLACEHOLDER_SECTION 时 exit 1（默认仅观察）", action="store_true")
     args = ap.parse_args()
 
     records = [audit_file(p) for p in iter_files()]
@@ -142,6 +166,9 @@ def main() -> int:
         print(f"   - {k}: {v}")
     print(f"② 空章节(真叶子): {n_leaf} 处 / {len(leaf_files)} 文件")
     print(f"② 空章节(父容器无引导语): {n_parent} 处 / {len(parent_files)} 文件")
+    ph_files = [r for r in active if r["placeholder_sections"]]
+    n_ph = sum(len(r["placeholder_sections"]) for r in ph_files)
+    print(f"③ 占位引导章节(PLACEHOLDER_SECTION，观察): {n_ph} 处 / {len(ph_files)} 文件")
     print()
     print("基线对比（2026-07-09）: 标记文件 126 →", len(marker_files),
           "；空章节文件 420 →", len(set(id(r) for r in leaf_files) | set(id(r) for r in parent_files)))
@@ -152,6 +179,9 @@ def main() -> int:
             json.dumps(records, ensure_ascii=False, indent=1), encoding="utf-8"
         )
         print(f"JSON 明细: {out}")
+    if args.strict and n_ph:
+        print("--strict: 存在 PLACEHOLDER_SECTION，exit 1")
+        return 1
     return 0
 
 

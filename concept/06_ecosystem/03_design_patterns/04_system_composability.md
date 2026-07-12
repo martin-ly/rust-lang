@@ -599,10 +599,6 @@ async fn good() {
 
 ---
 
----
-
----
-
 > **补充来源**
 
 ## 十、边界测试：系统可组合性的编译错误
@@ -739,15 +735,6 @@ fn main() {}
 > [来源: [Wikipedia — System Design](https://en.wikipedia.org/wiki/Systems_design)]
 > [来源: [Wikipedia — Software Architecture](https://en.wikipedia.org/wiki/Software_architecture)]
 > [来源: [RFCs — Rust Language](https://rust-lang.github.io/rfcs/index.html)]
-> **过渡**: 系统可组合性 (System Composability) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: 系统可组合性 (System Composability) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: 系统可组合性 (System Composability) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: 系统可组合性 (System Composability) 定义 ⟹ 类型安全保证
-- **定理**: 系统可组合性 (System Composability) 定义 ⟹ 类型安全保证
-- **定理**: 系统可组合性 (System Composability) 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 

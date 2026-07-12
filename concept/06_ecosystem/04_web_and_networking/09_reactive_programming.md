@@ -69,7 +69,6 @@
     - [9.2 边界测试：跨线程 Stream 发送违反 Send（编译错误）](#92-边界测试跨线程-stream-发送违反-send编译错误)
     - [9.3 边界测试：FRP 信号循环引用导致死锁（运行时错误）](#93-边界测试frp-信号循环引用导致死锁运行时错误)
   - [相关概念](#相关概念)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：响应式编程（Reactive Programming）的核心抽象是什么？（理解层）](#测验-1响应式编程reactive-programming的核心抽象是什么理解层)
     - [测验 2：Rust 的 `futures::Stream` 与响应式编程中的 Observable 有什么对应关系？（理解层）](#测验-2rust-的-futuresstream-与响应式编程中的-observable-有什么对应关系理解层)
@@ -78,7 +77,6 @@
     - [测验 5：响应式编程中的"冷流"（Cold Stream）与"热流"（Hot Stream）有什么区别？（理解层）](#测验-5响应式编程中的冷流cold-stream与热流hot-stream有什么区别理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
 
 **变更日志**:
 
@@ -1002,15 +1000,6 @@ fn circular_signal_deadlock() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **过渡**: Reactive Programming & FRP（响应式编程与函数式响应编程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Reactive Programming & FRP（响应式编程与函数式响应编程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Reactive Programming & FRP（响应式编程与函数式响应编程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Reactive Programming & FRP（响应式编程与函数式响应编程） 定义 ⟹ 类型安全保证
-- **定理**: Reactive Programming & FRP（响应式编程与函数式响应编程） 定义 ⟹ 类型安全保证
-- **定理**: Reactive Programming & FRP（响应式编程与函数式响应编程） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -1085,11 +1074,3 @@ fn circular_signal_deadlock() {
 | Reactive Programming & FRP（响应式编程与函数式响应编程） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Reactive Programming & FRP（响应式编程与函数式响应编程） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Reactive Programming & FRP（响应式编程与函数式响应编程） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 Reactive Programming & FRP（响应式编程与函数式响应编程） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Reactive Programming & FRP（响应式编程与函数式响应编程） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Reactive Programming & FRP（响应式编程与函数式响应编程） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Reactive Programming & FRP（响应式编程与函数式响应编程） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

@@ -71,7 +71,6 @@
     - [8.2 边界测试：Petri 网可达性分析的 state explosion（运行时性能）](#82-边界测试petri-网可达性分析的-state-explosion运行时性能)
     - [8.3 边界测试：工作流循环缺乏终止条件导致无限执行（运行时错误）](#83-边界测试工作流循环缺乏终止条件导致无限执行运行时错误)
   - [相关概念](#相关概念)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：工作流编排（Workflow Orchestration）与事件驱动架构（EDA）有什么区别？（理解层）](#测验-1工作流编排workflow-orchestration与事件驱动架构eda有什么区别理解层)
     - [测验 2：Rust 中实现状态机工作流时，`enum` 和 `match` 有什么优势？（理解层）](#测验-2rust-中实现状态机工作流时enum-和-match-有什么优势理解层)
@@ -80,7 +79,6 @@
     - [测验 5：为什么长时间运行的工作流需要"持久化状态"（Durable State）？（理解层）](#测验-5为什么长时间运行的工作流需要持久化状态durable-state理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
 
 **变更日志**:
 
@@ -1332,16 +1330,6 @@ async fn unbounded_backoff() -> Result<Output> {
 - [类型语义](../../04_formal/00_type_theory/06_type_semantics.md) — 类型系统（Type System）、Progress & Preservation
 - [操作语义](../../04_formal/03_operational_semantics/03_operational_semantics.md) — 结构化操作语义
 
-> **过渡**: Workflow Theory & Formalization（工作流理论与形式化） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Workflow Theory & Formalization（工作流理论与形式化） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Workflow Theory & Formalization（工作流理论与形式化） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Workflow Theory & Formalization（工作流理论与形式化） 定义 ⟹ 类型安全保证
-- **定理**: Workflow Theory & Formalization（工作流理论与形式化） 定义 ⟹ 类型安全保证
-- **定理**: Workflow Theory & Formalization（工作流理论与形式化） 定义 ⟹ 类型安全保证
-
 ## 嵌入式测验（Embedded Quiz）
 
 「嵌入式测验（Embedded Quiz）」涉及测验 1：工作流编排（Workflow Orchestration）与…、测验 2：Rust 中实现状态机工作流时，`enum` 和 `matc…、测验 3：什么是" Saga 模式"的补偿事务（Compensatin…、测验 4：在 Rust 中，`tokio::task::JoinSet…等5个方面，本节逐一说明其要点。
@@ -1415,11 +1403,3 @@ async fn unbounded_backoff() -> Result<Output> {
 | Workflow Theory & Formalization（工作流理论与形式化） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Workflow Theory & Formalization（工作流理论与形式化） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Workflow Theory & Formalization（工作流理论与形式化） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 Workflow Theory & Formalization（工作流理论与形式化） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Workflow Theory & Formalization（工作流理论与形式化） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Workflow Theory & Formalization（工作流理论与形式化） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Workflow Theory & Formalization（工作流理论与形式化） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

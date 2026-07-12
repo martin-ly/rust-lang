@@ -29,7 +29,7 @@ scripts/
 ├── maintenance/                       # 项目结构维护工具（可重复运行）
 ├── links/                             # 外部链接批量修复工具（RFC/外链/断链批次）
 ├── utils/                             # 通用辅助工具
-├── templates/                         # 文档模板
+├── templates/                         # 文档模板（含 atlas_pages/ 人工策展页单一事实源）
 ├── i18n/                              # 国际化/双语检查工具（check_*）
 └── git_hooks/                         # pre-commit 等 Git 钩子
 ```
@@ -129,7 +129,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `validate_summary.py` | 汇总校验 |
 | `generate_version_features.py` | 生成版本特性表 |
 | `generate_kg_index.py` / `generate_kg_v3.py` | 知识图谱索引 / KG v3 生成 |
-| `generate_knowledge_topology_atlas.py` | 知识拓扑 atlas 生成 |
+| `generate_knowledge_topology_atlas.py` | 知识拓扑 atlas 生成（数据驱动页 01/02/06/07/08/10/README + 人工策展页 03/04/05/09 从 `templates/atlas_pages/` 原样拷贝；纪律：只重生成、不手改） |
 | `extract_concept_topology.py` | 概念拓扑抽取 |
 | `extract_runnable_quizzes.py` | 提取可运行测验 |
 | `grade_concept.py` | 概念分级 |
@@ -319,7 +319,7 @@ python scripts/apply_renumber.py --mapping tmp/renumber/mapping_concept.csv --sc
 
 ### `templates/`
 
-docs/ crate 文档样板模板。
+docs/ crate 文档样板模板；`templates/atlas_pages/` 为知识拓扑 atlas 人工策展页（03/04/05/09）的单一事实源，由 `generate_knowledge_topology_atlas.py` 原样拷贝到 `concept/00_meta/knowledge_topology/`（LF 行尾）。修改这些页请改模板后重跑生成器。
 
 ---
 

@@ -77,12 +77,11 @@
     - [测验 5：`crossbeam::channel` 与 `std::sync::mpsc` 的主要改进是什么？（理解层）](#测验-5crossbeamchannel-与-stdsyncmpsc-的主要改进是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
   - [实践](#实践)
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
-  - [迁移内容（来自 `crates/c05_threads/docs/08_parallelism_and_beyond.md`）](#迁移内容来自-cratesc05_threadsdocs04_parallelism_and_beyondmd)
+  - [迁移内容（来自 `crates/c05_threads/docs/08_parallelism_and_beyond.md`）](#迁移内容来自-cratesc05_threadsdocs08_parallelism_and_beyondmd)
   - [1. 并发 (Concurrency) vs. 并行 (Parallelism)](#1-并发-concurrency-vs-并行-parallelism)
     - [1.1. 形式化区分](#11-形式化区分)
     - [1.2. Rust 的模型映射](#12-rust-的模型映射)
@@ -815,7 +814,7 @@ fn main() {}
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」部分按测验 1：`std::thread::spawn` 与 `tokio:…、测验 2：Rayon 的 `par_iter()` 与标准库的 `it…、测验 3：Actor 模型在 Rust 中的典型实现方式是什么？（理解…、测验 4：分布式系统中，Rust 的 Serde + 强类型系统在消息…等5个方面的顺序逐层展开。
+「嵌入式测验（Embedded Quiz）」部分按测验 1：`std::thread::spawn` 与 `tokio:…、测验 2：Rayon 的`par_iter()` 与标准库的 `it…、测验 3：Actor 模型在 Rust 中的典型实现方式是什么？（理解…、测验 4：分布式系统中，Rust 的 Serde + 强类型系统在消息…等5个方面的顺序逐层展开。
 
 ### 测验 1：`std::thread::spawn` 与 `tokio::spawn` 创建的"任务"有什么本质区别？（理解层）
 
@@ -889,15 +888,6 @@ API 几乎相同（得益于相同的 `Iterator`/`ParallelIterator` 接口），
 
 > 分布式容错 ⟸ 错误传播边界 ⟸ 效果系统追踪
 > 并行计算正确 ⟸ rayon 工作窃取 ⟸ Send 边界
-> **过渡**: 掌握 并行与分布式模式谱系：从线程池到共识算法 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-> **过渡**: 在实践中应用 并行与分布式模式谱系：从线程池到共识算法 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 并行与分布式模式谱系：从线程池到共识算法 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
-
-### 反命题与边界
-
-> **反命题**: "并行与分布式模式谱系：从线程池到共识算法 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
-
----
 
 ---
 

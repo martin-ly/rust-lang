@@ -90,7 +90,6 @@
     - [测验 5：在流处理中，为什么通常使用 `tokio::sync::mpsc` 而不是无界通道（`unbounded_channel`）？（理解层）](#测验-5在流处理中为什么通常使用-tokiosyncmpsc-而不是无界通道unbounded_channel理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
   - [实践](#实践)
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
@@ -827,15 +826,6 @@ fn main() {
 
 > 流处理一致性（Coherence） ⟸ 背压控制 ⟸ 生产者-消费者协议
 > 异步（Async）流安全 ⟸ Stream/AsyncRead 生命周期（Lifetimes） ⟸ Pin 约束
-> **过渡**: 掌握 流处理语义：从 Dataflow Model 到 Differential Dataflow 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-> **过渡**: 在实践中应用 流处理语义：从 Dataflow Model 到 Differential Dataflow 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 流处理语义：从 Dataflow Model 到 Differential Dataflow 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
-
-### 反命题与边界
-
-> **反命题**: "流处理语义：从 Dataflow Model 到 Differential Dataflow 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
-
----
 
 ---
 

@@ -64,7 +64,6 @@
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
   - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
 
 ---
@@ -386,10 +385,6 @@ let rev = 10..0;
 
 ---
 
----
-
----
-
 > **补充来源**
 
 ## 十、边界测试：范围类型的编译错误
@@ -631,13 +626,6 @@ fn main() {
 
 > 区间操作安全 ⟸ RangeInclusive 边界 ⟸ 迭代器协议
 > 切片（Slice）索引正确 ⟸ Range 范围检查 ⟸ 借用（Borrowing）规则
-> **过渡**: 掌握 Rust 范围类型语义：`std::ops::Range` → `core::range` 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-> **过渡**: 在实践中应用 Rust 范围类型语义：`std::ops::Range` → `core::range` 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: Rust 范围类型语义：`std::ops::Range` → `core::range` 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
-
-### 反命题与边界
-
-> **反命题**: "Rust 范围类型语义：`std::ops::Range` → `core::range` 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
 
 ---
 

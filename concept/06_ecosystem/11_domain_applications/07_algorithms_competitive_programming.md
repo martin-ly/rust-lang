@@ -833,9 +833,7 @@ temp.extend_from_slice(&nums[..]);
 
 ---
 
----
 
----
 
 ## 十、边界测试：算法竞赛的编译错误
 
@@ -973,15 +971,6 @@ fn main() {
 ```
 
 > **修正**: `BinaryHeap::peek_mut()` 返回 `PeekMut` guard，允许修改堆顶元素，drop 时自动 `sift_down` 恢复堆性质。若通过 `std::mem::forget(peek_mut)` 阻止 drop：1) 堆性质破坏（父节点 < 子节点）；2) 后续 `pop()` 返回错误元素；3) 但不触发内存不安全（`forget` 是 safe）。这是 Rust "leak safety" 的体现：泄漏只破坏逻辑不变量，不导致 UB。安全使用：1) 避免 `mem::forget`；2) 不在 `peek_mut` 活跃时修改堆的其他元素；3) 使用 `pop` + `push` 替代（若需完全替换堆顶）。这与 C++ 的 `std::priority_queue::top()`（const 引用（Reference），不可修改）或 Java 的 `PriorityQueue.peek()`（不可修改）不同——Rust 的 `peek_mut` 是独特设计，修改 + 自动恢复。来源: [Rust Standard Library] · 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
-> **过渡**: 算法与竞赛编程 (Algorithms & Competitive Programming) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: 算法与竞赛编程 (Algorithms & Competitive Programming) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: 算法与竞赛编程 (Algorithms & Competitive Programming) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: 算法与竞赛编程 (Algorithms & Competitive Programming) 定义 ⟹ 类型安全保证
-- **定理**: 算法与竞赛编程 (Algorithms & Competitive Programming) 定义 ⟹ 类型安全保证
-- **定理**: 算法与竞赛编程 (Algorithms & Competitive Programming) 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 

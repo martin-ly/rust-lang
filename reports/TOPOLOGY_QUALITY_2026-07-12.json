@@ -6,9 +6,9 @@
     "T1_def_low_rate": 0.0,
     "T1_def_low": [
       0,
-      467
+      464
     ],
-    "T2_top_rate": 0.762,
+    "T2_top_rate": 0.759,
     "T2_top_symbol": "⟹",
     "T3_jump": [
       6,
@@ -23,9 +23,9 @@
   "results": [
     {
       "rel": "concept/00_meta/knowledge_topology/01_concept_definition_atlas.md",
-      "lines": 561,
+      "lines": 558,
       "T1": {
-        "total_rows": 467,
+        "total_rows": 464,
         "low": 0,
         "rate": 0.0,
         "samples": []
@@ -34,7 +34,7 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/02_attribute_relationship_atlas.md",
-      "lines": 554,
+      "lines": 552,
       "issues": {}
     },
     {
@@ -70,26 +70,26 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/07_intra_layer_mapping_atlas.md",
-      "lines": 564,
+      "lines": 562,
       "T2": {
-        "total": 437,
+        "total": 436,
         "counts": {
           "→": 9,
-          "⟸": 31,
-          "⟹": 333,
+          "⟸": 32,
+          "⟹": 331,
           "⊥": 5,
           "⇔": 20,
           "↔": 39
         },
         "top_symbol": "⟹",
-        "top_rate": 0.762,
+        "top_rate": 0.759,
         "collapsed": false
       },
       "issues": {}
     },
     {
       "rel": "concept/00_meta/knowledge_topology/08_concept_source_alignment_atlas.md",
-      "lines": 53,
+      "lines": 51,
       "issues": {}
     },
     {
@@ -110,12 +110,12 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/10_gap_and_action_plan.md",
-      "lines": 87,
+      "lines": 85,
       "issues": {}
     },
     {
       "rel": "concept/00_meta/knowledge_topology/README.md",
-      "lines": 46,
+      "lines": 47,
       "issues": {}
     },
     {

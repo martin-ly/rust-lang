@@ -63,7 +63,6 @@
     - [9.2 边界测试：对象存储流式下载内存溢出（运行时错误）](#92-边界测试对象存储流式下载内存溢出运行时错误)
     - [9.3 边界测试：ETL 管道中类型推断失败导致运行时 panic（类型错误）](#93-边界测试etl-管道中类型推断失败导致运行时-panic类型错误)
   - [相关概念](#相关概念)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`polars` 在 Rust 数据工程中与 `pandas` 有什么对应关系？（理解层）](#测验-1polars-在-rust-数据工程中与-pandas-有什么对应关系理解层)
     - [测验 2：`arrow-rs` 在数据生态中扮演什么角色？（理解层）](#测验-2arrow-rs-在数据生态中扮演什么角色理解层)
@@ -72,7 +71,6 @@
     - [测验 5：Rust 的内存安全如何帮助数据管道避免生产事故？（理解层）](#测验-5rust-的内存安全如何帮助数据管道避免生产事故理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
 
 > **变更日志**:
 >
@@ -862,15 +860,6 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **过渡**: Data Engineering（数据工程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Data Engineering（数据工程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Data Engineering（数据工程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Data Engineering（数据工程） 定义 ⟹ 类型安全保证
-- **定理**: Data Engineering（数据工程） 定义 ⟹ 类型安全保证
-- **定理**: Data Engineering（数据工程） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -946,10 +935,3 @@ Apache Arrow 的 Rust 实现，提供列式内存格式标准。`polars`、`data
 | Data Engineering（数据工程） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Data Engineering（数据工程） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
-> **过渡**: 掌握 Data Engineering（数据工程） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Data Engineering（数据工程） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Data Engineering（数据工程） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Data Engineering（数据工程） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

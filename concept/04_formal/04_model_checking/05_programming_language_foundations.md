@@ -52,7 +52,6 @@
     - [测验 5：类型论中的"依赖类型"（Dependent Types）是什么？Rust 目前支持依赖类型吗？（理解层）](#测验-5类型论中的依赖类型dependent-types是什么rust-目前支持依赖类型吗理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
 
 ## 一、为什么需要 PL 基座
 
@@ -425,13 +424,6 @@ fn example() {
 | 通用程序语言理论基础：Rust 的 PL 基座 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 通用程序语言理论基础：Rust 的 PL 基座 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> **过渡**: 掌握 通用程序语言理论基础：Rust 的 PL 基座 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-> **过渡**: 在实践中应用 通用程序语言理论基础：Rust 的 PL 基座 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 通用程序语言理论基础：Rust 的 PL 基座 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
-
-### 反命题与边界
-
-> **反命题**: "通用程序语言理论基础：Rust 的 PL 基座 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
 ---
 
 > **权威来源**: [Verus](https://github.com/verus-lang/verus) · [Kani](https://model-checking.github.io/kani/) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Oxide](https://arxiv.org/abs/1903.00982)

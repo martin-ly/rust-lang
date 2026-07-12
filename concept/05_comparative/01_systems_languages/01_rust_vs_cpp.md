@@ -1883,14 +1883,6 @@ fn main() {
 
 ---
 
----
-
----
-
----
-
----
-
 ## 九、边界测试：Rust 与 C++ 的编译错误对比
 
 本节围绕「边界测试：Rust 与 C++ 的编译错误对比」展开，依次讨论边界测试：C++ 隐式转换 vs Rust 显式转换（编译错误）、边界测试：C++ 空悬指针 vs Rust 编译期阻止、边界测试：C++ 隐式复制 vs Rust 显式 Clone（编译错误）、边界测试：C++ 模板 SFINAE vs Rust Trait Bo…等8个方面。
@@ -2077,9 +2069,6 @@ fn main() {
 > [来源: [Wikipedia — Type System](https://en.wikipedia.org/wiki/Type_system)]
 > [来源: [Wikipedia — Programming Language](https://en.wikipedia.org/wiki/Programming_language)]
 > [来源: [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))]
-> **过渡**: Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证> 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证> 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证> 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ## 嵌入式测验（Embedded Quiz）
 

@@ -68,10 +68,10 @@
     - [10.4 边界测试：`PhantomData` 的语义必要性（编译错误）](#104-边界测试phantomdata-的语义必要性编译错误)
     - [10.5 边界测试：`Pin<T>` 的类型语义（编译错误）](#105-边界测试pint-的类型语义编译错误)
   - [相关概念](#相关概念)
-    - [补充定理链](#补充定理链)
 
 ## 一、权威定义（Definition）
->
+
+「权威定义」部分按类型作为规约：进步与保持 与 类型安全到内存安全 两条主线，本节依次说明。
 
 ### 1.1 类型作为规约：进步与保持
 >
@@ -902,12 +902,6 @@ fn pinned_self_ref() {
 - [RustBelt 与验证工具链](../02_separation_logic/01_rustbelt.md) — 高阶幽灵状态、验证工具生态
 - [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) — 类型不变量可被手动突破的语义边界
 - [Memory Model](../../03_advanced/02_unsafe/06_memory_model.md) — 内存操作语义的形式化对应
-
-### 补充定理链
-
-- **定理**: Type Semantics（类型语义） 定义 ⟹ 类型安全保证
-- **定理**: Type Semantics（类型语义） 定义 ⟹ 类型安全保证
-- **定理**: Type Semantics（类型语义） 定义 ⟹ 类型安全保证
 
 ---
 

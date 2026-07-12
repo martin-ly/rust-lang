@@ -210,6 +210,12 @@ extern "C" {}
 
 ---
 
+### 显式 extern ABI（RFC 3722）
+
+> **来源**: [RFC 3722 — Explicit extern ABIs](https://rust-lang.github.io/rfcs/3722-explicit-extern-abis.html)
+
+RFC 3722 要求 `extern` 块与 `extern fn` 的 ABI 字符串**显式化**：裸 `extern {}` / `extern fn`（隐含 `"C"`）将逐步淘汰，统一书写为 `extern "C" {}` / `extern "C" fn`。该变化与 2024 Edition 的 `unsafe extern` 块要求（见 [Edition 2024 完全指南](../../07_future/01_edition_roadmap/02_edition_guide.md)）同属“FFI 边界显式化”治理线：ABI 字符串是链接语义的单一事实源，隐式默认在跨版本演进中是隐患。当前（1.97）裸写法仍可用但已有迁移 lint 路径；新代码应一律显式标注 ABI。
+
 ## 七、Panic 展开与链接一致性
 
 如果 Rust 产物是 **potentially unwinding** 的，则所有 crate 必须使用 `unwind` panic 策略，否则可能导致未定义行为。(Source: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html#linking-and-unwinding))

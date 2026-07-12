@@ -20,7 +20,7 @@
 | L4 形式化理论层 | 0 | 2 | 6 | 14 | 71 | 1 | 7 | 12 |
 | L5 对比分析层 | 0 | 0 | 2 | 3 | 0 | 6 | 16 | 1 |
 | L6 生态工程层 | 0 | 1 | 1 | 5 | 3 | 3 | 185 | 18 |
-| L7 前沿趋势层 | 0 | 2 | 0 | 5 | 3 | 0 | 8 | 79 |
+| L7 前沿趋势层 | 0 | 2 | 0 | 5 | 2 | 0 | 8 | 77 |
 
 ## 二、跨层关键桥接概念
 
@@ -31,7 +31,9 @@
 | L0 元信息层 | [模式语义空间索引：设计模式在概念体系中的坐标](../../00_meta/00_framework/pattern_semantic_space_index.md) | L6 生态工程层 | Pattern Composition Algebra |
 | L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/00_framework/semantic_bridge_algorithms_patterns.md) | L6 生态工程层 | Pattern Composition Algebra |
 | L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/00_framework/semantic_bridge_algorithms_patterns.md) | L3 高级概念层 | Parallel Distributed Spectrum |
-| L0 元信息层 | [Rust 职业市场全景：2026 年数据与分析](../04_navigation/02_career_landscape.md) | L6 生态工程层 | Application Domains |
+| L0 元信息层 | [Rust 职业市场全景：2026 年数据与分析](../../00_meta/04_navigation/02_career_landscape.md) | L6 生态工程层 | Application Domains |
+| L1 基础概念层 | [编程语言理论基础](../../01_foundation/00_start/01_pl_prerequisites.md) | L2 进阶概念层 | Traits |
+| L1 基础概念层 | [编程语言理论基础](../../01_foundation/00_start/01_pl_prerequisites.md) | L2 进阶概念层 | Generics |
 | L1 基础概念层 | [零成本抽象：Rust 的性能哲学](../../01_foundation/00_start/02_zero_cost_abstractions.md) | L5 对比分析层 | Rust vs C++ |
 | L1 基础概念层 | [零成本抽象：Rust 的性能哲学](../../01_foundation/00_start/02_zero_cost_abstractions.md) | L6 生态工程层 | Toolchain |
 | L1 基础概念层 | [闭包基础：捕获环境与匿名函数](../../01_foundation/00_start/03_closure_basics.md) | L2 进阶概念层 | Iterator |
@@ -39,12 +41,10 @@
 | L1 基础概念层 | [闭包基础：捕获环境与匿名函数](../../01_foundation/00_start/03_closure_basics.md) | L2 进阶概念层 | Functional Patterns |
 | L1 基础概念层 | [副作用与纯度：从引用透明到 Rust 的所有权效果](../../01_foundation/00_start/04_effects_and_purity.md) | L7 前沿趋势层 | Effects System |
 | L1 基础概念层 | [副作用与纯度：从引用透明到 Rust 的所有权效果](../../01_foundation/00_start/04_effects_and_purity.md) | L3 高级概念层 | Async |
-| L1 基础概念层 | [编程语言理论基础](../../01_foundation/00_start/01_pl_prerequisites.md) | L2 进阶概念层 | Traits |
-| L1 基础概念层 | [编程语言理论基础](../../01_foundation/00_start/01_pl_prerequisites.md) | L2 进阶概念层 | Generics |
-| L1 基础概念层 | [Rust 运算符与符号](../../01_foundation/00_start/07_operators_and_symbols.md) | L2 进阶概念层 | Generics |
-| L1 基础概念层 | [Rust 运算符与符号](../../01_foundation/00_start/07_operators_and_symbols.md) | L3 高级概念层 | Macros |
 | L1 基础概念层 | [标准 I/O 与进程](../../01_foundation/00_start/05_std_io_and_process.md) | L3 高级概念层 | Async I/O |
 | L1 基础概念层 | [标准 I/O 与进程](../../01_foundation/00_start/05_std_io_and_process.md) | L6 生态工程层 | Command Line Apps |
+| L1 基础概念层 | [Rust 运算符与符号](../../01_foundation/00_start/07_operators_and_symbols.md) | L2 进阶概念层 | Generics |
+| L1 基础概念层 | [Rust 运算符与符号](../../01_foundation/00_start/07_operators_and_symbols.md) | L3 高级概念层 | Macros |
 | L1 基础概念层 | [Rust 所有权-借用-生命周期知识图谱](../../01_foundation/01_ownership_borrow_lifetime/00_ownership_borrow_lifetime_knowledge_map.md) | L2 进阶概念层 | Smart Pointers |
 | L1 基础概念层 | [Rust 所有权-借用-生命周期知识图谱](../../01_foundation/01_ownership_borrow_lifetime/00_ownership_borrow_lifetime_knowledge_map.md) | L3 高级概念层 | Concurrency |
 | L1 基础概念层 | [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | L2 进阶概念层 | L2 泛型（Generics） |
@@ -59,13 +59,13 @@
 | L1 基础概念层 | [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) | L2 进阶概念层 | Traits |
 | L1 基础概念层 | [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) | L2 进阶概念层 | Generics |
 | L1 基础概念层 | [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) | L2 进阶概念层 | Algebraic Data Types |
+| L1 基础概念层 | [Never Type (`!`)：底类型与穷尽性](../../01_foundation/02_type_system/02_never_type.md) | L2 进阶概念层 | 泛型（Generics） |
+| L1 基础概念层 | [Never Type (`!`)：底类型与穷尽性](../../01_foundation/02_type_system/02_never_type.md) | L3 高级概念层 | Async |
 | L1 基础概念层 | [类型强制与转换：显式与隐式的边界](../../01_foundation/02_type_system/04_coercion_and_casting.md) | L3 高级概念层 | FFI |
 | L1 基础概念层 | [类型强制与转换：显式与隐式的边界](../../01_foundation/02_type_system/04_coercion_and_casting.md) | L2 进阶概念层 | Generics |
 | L1 基础概念层 | [数据抽象谱系：从 C struct 到 Rust enum + trait](../../01_foundation/02_type_system/05_data_abstraction_spectrum.md) | L2 进阶概念层 | Traits |
 | L1 基础概念层 | [数据抽象谱系：从 C struct 到 Rust enum + trait](../../01_foundation/02_type_system/05_data_abstraction_spectrum.md) | L2 进阶概念层 | Generics |
 | L1 基础概念层 | [数据抽象谱系：从 C struct 到 Rust enum + trait](../../01_foundation/02_type_system/05_data_abstraction_spectrum.md) | L3 高级概念层 | Type Erasure |
-| L1 基础概念层 | [Never Type (`!`)：底类型与穷尽性](../../01_foundation/02_type_system/02_never_type.md) | L2 进阶概念层 | 泛型（Generics） |
-| L1 基础概念层 | [Never Type (`!`)：底类型与穷尽性](../../01_foundation/02_type_system/02_never_type.md) | L3 高级概念层 | Async |
 | L1 基础概念层 | [引用语义：自动解引用、Deref 强制与类型转换](../../01_foundation/03_values_and_references/01_reference_semantics.md) | L2 进阶概念层 | Smart Pointers |
 | L1 基础概念层 | [引用语义：自动解引用、Deref 强制与类型转换](../../01_foundation/03_values_and_references/01_reference_semantics.md) | L2 进阶概念层 | Generics |
 | L1 基础概念层 | [变量模型：从通用 PL 视角看 Rust 的所有权](../../01_foundation/03_values_and_references/03_variable_model.md) | L2 进阶概念层 | Memory Management |
@@ -92,7 +92,6 @@
 - 更详细的层间依赖图见 [../04_navigation/04_inter_layer_map.md](../04_navigation/04_inter_layer_map.md)
 - 层内模型映射见 [../04_navigation/06_intra_layer_model_map.md](../04_navigation/06_intra_layer_model_map.md)
 - 形式化本体规范见 [kg_ontology_v2.md](kg_ontology_v2.md)
-
 
 ---
 

@@ -39,7 +39,6 @@
     - [8.2 边界测试：PyO3 GIL 死锁](#82-边界测试pyo3-gil-死锁)
     - [8.3 边界测试：未处理 CSV 解析中的畸形数据](#83-边界测试未处理-csv-解析中的畸形数据)
   - [相关概念](#相关概念)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 在数据科学领域的定位与 Python 有什么不同？（理解层）](#测验-1rust-在数据科学领域的定位与-python-有什么不同理解层)
     - [测验 2：`polars` 相比 `pandas` 在性能上的主要优势来源是什么？（理解层）](#测验-2polars-相比-pandas-在性能上的主要优势来源是什么理解层)
@@ -48,7 +47,6 @@
     - [测验 5：Rust 如何通过 Arrow FFI 与 Python 的 `pyarrow` / `pandas` 零拷贝交换数据？（理解层）](#测验-5rust-如何通过-arrow-ffi-与-python-的-pyarrow--pandas-零拷贝交换数据理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
 
 > **Bloom 层级**: L4-L5
 > **变更日志**:
@@ -532,15 +530,6 @@ fn robust_csv_read() -> Result<DataFrame, PolarsError> {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **过渡**: Rust for Data Science（Rust 数据科学） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust for Data Science（Rust 数据科学） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust for Data Science（Rust 数据科学） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Rust for Data Science（Rust 数据科学） 定义 ⟹ 类型安全保证
-- **定理**: Rust for Data Science（Rust 数据科学） 定义 ⟹ 类型安全保证
-- **定理**: Rust for Data Science（Rust 数据科学） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -617,10 +606,3 @@ Arrow 的列式内存格式是语言无关的。Rust `arrow-rs` 和 Python `pyar
 | Rust for Data Science（Rust 数据科学） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust for Data Science（Rust 数据科学） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
-> **过渡**: 掌握 Rust for Data Science（Rust 数据科学） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Rust for Data Science（Rust 数据科学） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Rust for Data Science（Rust 数据科学） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Rust for Data Science（Rust 数据科学） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

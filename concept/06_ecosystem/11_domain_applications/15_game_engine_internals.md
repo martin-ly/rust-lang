@@ -68,7 +68,6 @@
     - [10.2 边界测试：物理固定步长与渲染可变帧率解耦失败（时间抖动）](#102-边界测试物理固定步长与渲染可变帧率解耦失败时间抖动)
     - [10.3 边界测试：资源加载 panic 导致游戏状态不一致（运行时错误）](#103-边界测试资源加载-panic-导致游戏状态不一致运行时错误)
   - [相关概念](#相关概念)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：游戏引擎的"渲染管线"（Render Pipeline）通常分为哪几个阶段？（理解层）](#测验-1游戏引擎的渲染管线render-pipeline通常分为哪几个阶段理解层)
     - [测验 2：`wgpu` 的渲染通道（Render Pass）概念与 Vulkan 的有什么对应关系？（理解层）](#测验-2wgpu-的渲染通道render-pass概念与-vulkan-的有什么对应关系理解层)
@@ -77,7 +76,6 @@
     - [测验 5：`SPIR-V` 在 Rust 图形管线中扮演什么角色？（理解层）](#测验-5spir-v-在-rust-图形管线中扮演什么角色理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
 
 > **变更日志**:
 >
@@ -1059,15 +1057,6 @@ enum AssetState {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **过渡**: Game Engine Internals（游戏引擎内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Game Engine Internals（游戏引擎内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Game Engine Internals（游戏引擎内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Game Engine Internals（游戏引擎内部原理） 定义 ⟹ 类型安全保证
-- **定理**: Game Engine Internals（游戏引擎内部原理） 定义 ⟹ 类型安全保证
-- **定理**: Game Engine Internals（游戏引擎内部原理） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -1143,10 +1132,3 @@ SPIR-V 是 Vulkan 的标准中间着色器语言。Rust 的 `rust-gpu` 项目允
 | Game Engine Internals（游戏引擎内部原理） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Game Engine Internals（游戏引擎内部原理） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
-> **过渡**: 掌握 Game Engine Internals（游戏引擎内部原理） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Game Engine Internals（游戏引擎内部原理） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Game Engine Internals（游戏引擎内部原理） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Game Engine Internals（游戏引擎内部原理） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

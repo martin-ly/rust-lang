@@ -12668,6 +12668,102 @@
       "ex:domain": "formal_methods",
       "ex:bloomLevel": "L4-L5",
       "ex:rustVersion": "1.97.0+ (Edition 2024)"
+    },
+    {
+      "@id": "ex:F16F128Preview",
+      "@type": "ex:Concept",
+      "skos:prefLabel": [
+        {
+          "@value": "f16 and f128 Preview",
+          "@language": "en"
+        },
+        {
+          "@value": "f16 / f128 预研：半精度与四精度浮点类型",
+          "@language": "zh"
+        }
+      ],
+      "skos:scopeNote": [
+        {
+          "@value": "Preview of the f16 (IEEE 754 binary16) and f128 (binary128) primitive float types introduced by RFC 3453: syntax, semantics, ABI caveats, and ecosystem impact.",
+          "@language": "en"
+        }
+      ],
+      "ex:path": "07_future/03_preview_features/35_f16_f128_preview.md",
+      "ex:bloomLevel": "L3-L4",
+      "ex:layer": "L7",
+      "ex:domain": "version_evolution"
+    },
+    {
+      "@id": "ex:UnsafePinnedPreview",
+      "@type": "ex:Concept",
+      "skos:prefLabel": [
+        {
+          "@value": "UnsafePinned Preview",
+          "@language": "en"
+        },
+        {
+          "@value": "UnsafePinned 预研：可变引用别名语义的精确标注",
+          "@language": "zh"
+        }
+      ],
+      "skos:scopeNote": [
+        {
+          "@value": "Preview of core::pin::UnsafePinned (RFC 3467): opting a field out of &mut-based aliasing guarantees, replacing the unsound Unpin-based noalias hack for self-referential futures.",
+          "@language": "en"
+        }
+      ],
+      "ex:path": "07_future/03_preview_features/36_unsafe_pinned_preview.md",
+      "ex:bloomLevel": "L4-L5",
+      "ex:layer": "L7",
+      "ex:domain": "version_evolution"
+    },
+    {
+      "@id": "ex:DefaultFieldValuesPreview",
+      "@type": "ex:Concept",
+      "skos:prefLabel": [
+        {
+          "@value": "Default Field Values Preview",
+          "@language": "en"
+        },
+        {
+          "@value": "Default Field Values 预研：结构体字段默认值",
+          "@language": "zh"
+        }
+      ],
+      "skos:scopeNote": [
+        {
+          "@value": "Preview of struct default field values (RFC 3681): per-field defaults applied via functional record update syntax and their interaction with the Default trait.",
+          "@language": "en"
+        }
+      ],
+      "ex:path": "07_future/03_preview_features/37_default_field_values_preview.md",
+      "ex:bloomLevel": "L2-L3",
+      "ex:layer": "L7",
+      "ex:domain": "version_evolution"
+    },
+    {
+      "@id": "ex:ComplexNumbersPreview",
+      "@type": "ex:Concept",
+      "skos:prefLabel": [
+        {
+          "@value": "Complex Numbers Preview",
+          "@language": "en"
+        },
+        {
+          "@value": "Complex Numbers 预研：标准库复数类型",
+          "@language": "zh"
+        }
+      ],
+      "skos:scopeNote": [
+        {
+          "@value": "Preview of core::num::Complex (RFC 3892): a standard-library vocabulary complex number type with basic arithmetic and polar/Cartesian conversions.",
+          "@language": "en"
+        }
+      ],
+      "ex:path": "07_future/03_preview_features/38_complex_numbers_preview.md",
+      "ex:bloomLevel": "L2-L3",
+      "ex:layer": "L7",
+      "ex:domain": "version_evolution"
     }
   ],
   "relations": [
@@ -83099,6 +83195,90 @@
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
+      "dcterms:created": "2026-07-12"
+    },
+    {
+      "@id": "_:rel5856",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:F16F128Preview",
+      "ex:predicate": "ex:relatedTo",
+      "ex:object": "ex:Numerics",
+      "ex:source": "authority-topic-coverage-2026-07-12",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": false,
+      "dcterms:created": "2026-07-12"
+    },
+    {
+      "@id": "_:rel5857",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:F16F128Preview",
+      "ex:predicate": "ex:relatedTo",
+      "ex:object": "ex:ComplexNumbersPreview",
+      "ex:source": "authority-topic-coverage-2026-07-12",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": false,
+      "dcterms:created": "2026-07-12"
+    },
+    {
+      "@id": "_:rel5858",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:UnsafePinnedPreview",
+      "ex:predicate": "ex:relatedTo",
+      "ex:object": "ex:SafeAndEffectiveUnsafeRust",
+      "ex:source": "authority-topic-coverage-2026-07-12",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": false,
+      "dcterms:created": "2026-07-12"
+    },
+    {
+      "@id": "_:rel5859",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:UnsafePinnedPreview",
+      "ex:predicate": "ex:relatedTo",
+      "ex:object": "ex:PinAndUnpin",
+      "ex:source": "authority-topic-coverage-2026-07-12",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": false,
+      "dcterms:created": "2026-07-12"
+    },
+    {
+      "@id": "_:rel5860",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:DefaultFieldValuesPreview",
+      "ex:predicate": "ex:relatedTo",
+      "ex:object": "ex:Structs",
+      "ex:source": "authority-topic-coverage-2026-07-12",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": false,
+      "dcterms:created": "2026-07-12"
+    },
+    {
+      "@id": "_:rel5861",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:ComplexNumbersPreview",
+      "ex:predicate": "ex:relatedTo",
+      "ex:object": "ex:Numerics",
+      "ex:source": "authority-topic-coverage-2026-07-12",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": false,
+      "dcterms:created": "2026-07-12"
+    },
+    {
+      "@id": "_:rel5862",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:ComplexNumbersPreview",
+      "ex:predicate": "ex:relatedTo",
+      "ex:object": "ex:F16F128Preview",
+      "ex:source": "authority-topic-coverage-2026-07-12",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": false,
       "dcterms:created": "2026-07-12"
     }
   ],

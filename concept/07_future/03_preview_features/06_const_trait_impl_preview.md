@@ -69,7 +69,6 @@
     - [10.6 边界测试：`~const` bound 与默认实现的交互（编译错误）](#106-边界测试const-bound-与默认实现的交互编译错误)
     - [10.5 边界测试：const trait 的默认实现与泛型约束（编译错误）](#105-边界测试const-trait-的默认实现与泛型约束编译错误)
     - [10.3 边界测试：`~const` 边界的语法演进与兼容性（编译错误）](#103-边界测试const-边界的语法演进与兼容性编译错误)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`const trait` 与 `const fn` 有什么区别？（理解层）](#测验-1const-trait-与-const-fn-有什么区别理解层)
     - [测验 2：为什么 `Vec::new()` 在 Rust 1.96 中还不是 `const fn`？（理解层）](#测验-2为什么-vecnew-在-rust-196-中还不是-const-fn理解层)
@@ -78,7 +77,6 @@
     - [测验 5：`const trait` 的实现目前有什么限制？（理解层）](#测验-5const-trait-的实现目前有什么限制理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
@@ -415,9 +413,7 @@ graph TD
 
 ---
 
----
 
----
 
 ## 十、边界测试：const trait impl 的编译错误
 
@@ -575,13 +571,6 @@ fn main() {
 > 当前状态（nightly 1.97）：`const_trait_impl` 已部分可用，但 `~const` 语法和默认实现处理仍在讨论。
 > 这与 C++ 的 `constexpr`（类似演进路径）或 D 语言的 `enum` 强制编译期求值不同——Rust 的 const 系统趋向更灵活的泛型支持，但保守推进以避免设计锁定。
 > [来源: [RFC 2632](https://github.com/rust-lang/rust/issues/67792)] · [来源: [Rust Internals](https://internals.rust-lang.org/)]
-> **过渡**: Const Trait Impl 预研：常量上下文中的 Trait 泛化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Const Trait Impl 预研：常量上下文中的 Trait 泛化 定义 ⟹ 类型安全保证
-- **定理**: Const Trait Impl 预研：常量上下文中的 Trait 泛化 定义 ⟹ 类型安全保证
-- **定理**: Const Trait Impl 预研：常量上下文中的 Trait 泛化 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -656,14 +645,6 @@ fn main() {
 | Const Trait Impl 预研：常量上下文中的 Trait 泛化 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Const Trait Impl 预研：常量上下文中的 Trait 泛化 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Const Trait Impl 预研：常量上下文中的 Trait 泛化 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 Const Trait Impl 预研：常量上下文中的 Trait 泛化 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Const Trait Impl 预研：常量上下文中的 Trait 泛化 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Const Trait Impl 预研：常量上下文中的 Trait 泛化 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "Const Trait Impl 预研：常量上下文中的 Trait 泛化 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ---
 

@@ -52,7 +52,6 @@
     - [近期学术进展补充](#近期学术进展补充)
   - [五、挑战与未来方向](#五挑战与未来方向)
   - [可编译示例：使用 `bindgen` 生成 C FFI 绑定](#可编译示例使用-bindgen-生成-c-ffi-绑定)
-    - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：将 C 代码迁移到 Rust 的常见策略有哪些？（理解层）](#测验-1将-c-代码迁移到-rust-的常见策略有哪些理解层)
     - [测验 2：`c2rust` 工具能自动完成哪些工作？它的局限性是什么？（理解层）](#测验-2c2rust-工具能自动完成哪些工作它的局限性是什么理解层)
@@ -61,7 +60,6 @@
     - [测验 5：Linux 内核的 Rust 驱动开发采用了什么增量迁移策略？（理解层）](#测验-5linux-内核的-rust-驱动开发采用了什么增量迁移策略理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
 
 ---
 
@@ -368,15 +366,6 @@ pub fn call_c_function() {
 **文档版本**: 1.0
 **最后更新**: 2026-05-26
 **状态**: ✅ 初始创建
-> **过渡**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 定义 ⟹ 类型安全保证
-- **定理**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 定义 ⟹ 类型安全保证
-- **定理**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -452,11 +441,3 @@ pub fn call_c_function() {
 | C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

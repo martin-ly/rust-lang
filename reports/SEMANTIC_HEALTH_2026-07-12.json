@@ -9,8 +9,8 @@
   "inputs": {
     "metadata_flagged": "0/480",
     "topology_T1_def_low_rate": 0.0,
-    "topology_T2_top_rate": 0.762,
-    "overlap_hits": 559,
+    "topology_T2_top_rate": 0.759,
+    "overlap_hits": 573,
     "overlap_actionable_MERGE_DOCSINTERNAL": 0,
     "kg": {
       "K1_missing_required": 0,

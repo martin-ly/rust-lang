@@ -378,8 +378,6 @@ impl GuestFile for File {
 
 ---
 
----
-
 ## 八、反例与边界测试（Examples & Counter-examples）
 >
 
@@ -566,14 +564,6 @@ fn main() {
 ```
 
 > **修正**: WASI 的 **capability-based security** 要求程序显式声明所需权限。标准 Rust 网络代码（`std::net::TcpStream`）在 WASI 目标（``wasm32-wasip1``）下可能不可用或需要特殊运行时支持。当前 WASI 预览：1) `wasmtime` 支持 TCP/UDP 的实验性扩展；2) `wasip2`（组件模型）提供更丰富的网络 API；3) 多数网络框架（`hyper`、`tokio`）的 WASI 支持仍在开发中。Rust 的边缘计算部署（Cloudflare Workers、Fastly Compute）通常使用平台特定的 API 而非标准库网络。这与 Docker 的 `--cap-add NET_BIND_SERVICE` 或 Linux 的 seccomp 类似——WASI 在 WASM 层面实现细粒度沙箱，安全粒度更细但功能受限。[来源: [WASI Overview](https://wasi.dev/)] · [来源: [Wasmtime Networking](https://docs.wasmtime.dev/)]
-> **过渡**: WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 定义 ⟹ 类型安全保证
-- **定理**: WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -648,14 +638,6 @@ Rust 无运行时、二进制小、性能高，且所有权系统与 WASM 的沙
 | WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
-
-### 反命题与边界
-
-> **反命题**: "WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ## 补充视角：WASI 0.2 组件模型实战
 

@@ -60,6 +60,28 @@ fn on_linux_or_macos() {}
 fn not_windows() {}
 ```
 
+### 布尔字面量谓词（RFC 3695，Rust 1.88 稳定）
+
+> **来源**: [RFC 3695 — Allow boolean literals as cfg predicates](https://rust-lang.github.io/rfcs/3695-cfg-boolean-literals.html) · [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Rust 1.88.0 Release Blog](https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/)
+
+自 Rust 1.88 起，配置谓词语言支持布尔字面量 `true` / `false`，分别表示恒启用与恒禁用：
+
+```rust
+// rustc 1.97.0 --edition 2024 实测通过
+#[cfg(false)]
+fn never_compiled() {}   // 等价于旧式 #[cfg(any())]，但语义显式
+
+#[cfg(true)]
+fn always_compiled() {}  // 等价于旧式 #[cfg(all())]
+
+fn main() {
+    always_compiled();
+    if cfg!(false) { unreachable!() }  // cfg! 宏同样支持
+}
+```
+
+适用范围：`#[cfg]`、`#[cfg_attr]`、内置 `cfg!` 宏，以及 Cargo 清单与配置中的 `[target.'cfg(...)']` 表。注意 `cfg(r#true)` / `cfg(r#false)` 保留旧行为（作为自定义 cfg 选项名，由 `--cfg true` 控制），与布尔字面量区分。
+
 ---
 
 ## 三、编译器内置配置选项
