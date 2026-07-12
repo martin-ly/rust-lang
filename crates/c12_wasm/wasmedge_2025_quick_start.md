@@ -376,6 +376,7 @@ kubectl describe pod/wasm-microservice-xxx -n wasm-prod
 **项目版本**: C12 WASM v0.2.0
 
 **开始你的 WasmEdge 容器之旅吧！** 🚀
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

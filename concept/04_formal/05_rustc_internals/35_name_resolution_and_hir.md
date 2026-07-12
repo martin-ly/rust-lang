@@ -22,6 +22,7 @@
 > [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html)
 
 ---
+
 ## 📑 目录
 
 - [Rustc 名称解析与 HIR](#rustc-名称解析与-hir)
@@ -47,6 +48,7 @@
     - [测验 3：HIR 和 AST 的主要区别是什么？](#测验-3hir-和-ast-的主要区别是什么)
     - [测验 4：`DefId` 和 `HirId` 分别适合引用什么粒度的实体？](#测验-4defid-和-hirid-分别适合引用什么粒度的实体)
   - [权威来源索引](#权威来源索引)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 

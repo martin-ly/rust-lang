@@ -179,7 +179,6 @@ incompatible-rust-versions = "fallback"
 
 > **权威来源**: [Cargo Book — Configuration](https://doc.rust-lang.org/cargo/reference/config.html)
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）

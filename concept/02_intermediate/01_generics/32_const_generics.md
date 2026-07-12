@@ -42,6 +42,7 @@
     - [反例 3：非法的 const 参数类型](#反例-3非法的-const-参数类型)
   - [八、判定表：const generics vs 宏 vs 类型级自然数](#八判定表const-generics-vs-宏-vs-类型级自然数)
   - [九、与既有内容的关系声明](#九与既有内容的关系声明)
+  - [相关概念](#相关概念)
   - [十、来源与延伸阅读](#十来源与延伸阅读)
 
 ---
@@ -454,12 +455,10 @@ fn scaled_demo() {
 | [39_type_level_programming.md](39_type_level_programming.md) | Peano 数、typenum、HList、类型级计算编码 | const generics 表达力不足时的替代方案，边界对照指向本页 §8 |
 | [11_const_trait_impl_preview.md](../../07_future/03_preview_features/11_const_trait_impl_preview.md) | `const trait`/`const fn` 在 trait 上下文的效果（const 计算的另一轴） | 互补：const generics 是"值级参数"，const trait 是"效果级参数" |
 
-
 ## 相关概念
 
 - **上层概念**: [Generics](02_generics.md) · [Traits](../00_traits/01_traits.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)
 - **下层概念**: [Type-Level Programming](39_type_level_programming.md) · [const Trait Impl（预览）](../../07_future/03_preview_features/11_const_trait_impl_preview.md) · [Const Eval](../../01_foundation/04_control_flow/41_statements_and_expressions.md)
-
 
 ## 十、来源与延伸阅读
 

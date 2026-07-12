@@ -609,9 +609,9 @@ graph TD
 ---
 
 ## 相关概念
+
 - **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/04_type_system.md) · [Control Flow](../04_control_flow/07_control_flow.md)
 - **下层概念**: [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
-
 
 - [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) — 进阶错误处理
 - [Type System](../02_type_system/04_type_system.md) — 类型系统（Type System）

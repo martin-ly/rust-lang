@@ -75,6 +75,7 @@
     - [测验 3：单态化发生在流水线的哪一步？](#测验-3单态化发生在流水线的哪一步)
     - [测验 4：为什么 LLVM IR 不适合作为长期稳定的后端接口？](#测验-4为什么-llvm-ir-不适合作为长期稳定的后端接口)
   - [权威来源索引](#权威来源索引)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 

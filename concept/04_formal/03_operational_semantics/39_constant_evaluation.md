@@ -18,6 +18,7 @@
 > **来源**: [Rust Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 
 ---
+
 ## 一、什么是常量求值
 
 **常量求值（Constant Evaluation）** 是指在编译期计算表达式结果的过程。Rust 只允许一部分表达式在编译期求值，这些表达式称为**常量表达式（constant expressions）**。

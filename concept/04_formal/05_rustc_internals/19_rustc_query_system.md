@@ -23,6 +23,7 @@
 > [Salsa](https://salsa-rs.github.io/salsa/)
 
 ---
+
 ## 📑 目录
 
 - [Rustc 查询系统与增量编译](#rustc-查询系统与增量编译)
@@ -56,6 +57,7 @@
     - [测验 3：增量编译的粒度是“文件”还是“查询结果”？](#测验-3增量编译的粒度是文件还是查询结果)
     - [测验 4：为什么 borrow checker 目前会全量执行？](#测验-4为什么-borrow-checker-目前会全量执行)
   - [权威来源索引](#权威来源索引)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 

@@ -66,6 +66,8 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [权威来源（References · 跨语言国际权威对齐）](#权威来源references--跨语言国际权威对齐)
+  - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
 
 ---
 

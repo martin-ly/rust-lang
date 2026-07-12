@@ -169,7 +169,6 @@ cargo doc --no-deps  # 生成文档
 
 > **权威来源**: [Cargo Book — Guide](https://doc.rust-lang.org/cargo/guide/index.html)
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）

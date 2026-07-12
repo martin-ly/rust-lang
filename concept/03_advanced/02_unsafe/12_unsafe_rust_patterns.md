@@ -32,7 +32,6 @@
 > **反命题 2**: "把 safe 代码放进 unsafe 块可以提升性能" ⟹ 不成立。不必要的 unsafe 不会带来优化，反而增加风险。
 >
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）

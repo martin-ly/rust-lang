@@ -16,6 +16,6 @@
 - 核心改进
 - 性能对比
 - 使用示例
-- 2. NonZero::div_ceil 在 WASM 缓冲区分配中的应用
+- 1. NonZero::div_ceil 在 WASM 缓冲区分配中的应用
 - Rust 1.92.0 改进概述
 - 核心改进

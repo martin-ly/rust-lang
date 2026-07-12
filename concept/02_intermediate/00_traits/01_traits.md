@@ -1660,9 +1660,9 @@ fn notify<T: Summary>(item: &T) { ... }
 ---
 
 ## 十、相关概念链接
+
 - **上层概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md)
 - **下层概念**: [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md) · [Generics](../01_generics/02_generics.md)
-
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|

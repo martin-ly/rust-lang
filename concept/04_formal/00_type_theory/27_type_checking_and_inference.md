@@ -22,6 +22,7 @@
 > [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html)
 
 ---
+
 ## 反命题决策树
 
 (Source: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html))

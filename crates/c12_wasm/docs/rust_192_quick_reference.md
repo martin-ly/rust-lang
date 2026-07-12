@@ -12,10 +12,10 @@
 - 快速查找
 - 核心特性速查
 - 1. MaybeUninit 文档化
-- 2. NonZero::div_ceil
-- 3. 联合体原始引用
-- 4. 迭代器方法特化
-- 5. rotate_right
-- 6. Location::file_as_c_str
+- 1. NonZero::div_ceil
+- 1. 联合体原始引用
+- 1. 迭代器方法特化
+- 1. rotate_right
+- 1. Location::file_as_c_str
 - 性能提升速查
 - 代码模板

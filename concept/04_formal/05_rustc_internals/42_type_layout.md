@@ -19,6 +19,7 @@
 > **来源**: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)
 
 ---
+
 ## 一、什么是类型布局
 
 **类型布局（type layout）** 指类型的：

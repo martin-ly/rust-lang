@@ -71,6 +71,7 @@ pub fn flags() -> MyFlags { /* ... */ }
     - [7.2 与 `workspace.dependencies` 协同](#72-与-workspacedependencies-协同)
     - [7.3 可运行示例](#73-可运行示例)
   - [八、来源与延伸阅读](#八来源与延伸阅读)
+  - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
 
 ---
 

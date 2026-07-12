@@ -192,7 +192,6 @@ cargo test
 | [Cargo Subcommands and Plugins](../01_cargo/66_cargo_subcommands_and_plugins.md) | `cargo fmt`、`cargo clippy`、`cargo fix` 都是 Cargo 子命令 |
 | [Testing Basics](../../01_foundation/10_testing_basics/16_testing_basics.md) | 工具链最终服务于代码质量保证 |
 
-
 ---
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）

@@ -23,6 +23,7 @@
 > Rust 1.97.0 默认启用 v0 symbol mangling 方案，ABI 与符号可见性影响见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
 
 ---
+
 ## 一、什么是 ABI
 
 **ABI（Application Binary Interface）** 定义了编译后的代码在二进制层面如何与其他代码交互，包括：

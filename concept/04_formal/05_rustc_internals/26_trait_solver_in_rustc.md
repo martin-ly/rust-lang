@@ -22,6 +22,7 @@
 > [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)
 
 ---
+
 ## 📑 目录
 
 - [rustc 中的 Trait Solver](#rustc-中的-trait-solver)
@@ -47,6 +48,7 @@
     - [测验 3：Winnowing 解决什么问题？](#测验-3winnowing-解决什么问题)
     - [测验 4：新一代 trait solver 与旧 solver 相比，主要优势是什么？](#测验-4新一代-trait-solver-与旧-solver-相比主要优势是什么)
   - [权威来源索引](#权威来源索引)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 

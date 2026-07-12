@@ -2597,8 +2597,8 @@ fn main() {
 | 验证 unsafe 代码行为 | 用 Miri 按 Tree Borrows 操作语义检测 | §五 别名模型 | Miri 未覆盖全部 UB 种类 ⟹ 通过 Miri ≠ 无 UB |
 
 ## 相关概念链接
-- **上层概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Concurrency](../00_concurrency/01_concurrency.md)
 
+- **上层概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](../../02_intermediate/02_memory_management/03_memory_management.md) · [Concurrency](../00_concurrency/01_concurrency.md)
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|

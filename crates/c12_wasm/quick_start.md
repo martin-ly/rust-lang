@@ -393,6 +393,7 @@ du -h pkg/c12_wasm_bg.wasm
 
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.97.0+ / Edition 2024
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

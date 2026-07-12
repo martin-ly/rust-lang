@@ -252,6 +252,7 @@
 **最后更新**: 2026-01-26（历史记录文档，当前版本为 Rust 1.93.0+）
 **维护者**: C12 WASM 文档团队
 **状态**: ✅ 完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

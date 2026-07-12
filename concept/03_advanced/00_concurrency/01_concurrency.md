@@ -119,6 +119,7 @@
     - [10.3 边界测试：`Mutex` 的毒化（poisoning）与错误恢复（运行时 panic）](#103-边界测试mutex-的毒化poisoning与错误恢复运行时-panic)
     - [10.4 边界测试：`std::sync::mpsc` 的多生产者单消费者限制（编译错误）](#104-边界测试stdsyncmpsc-的多生产者单消费者限制编译错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
+  - [相关概念](#相关概念)
   - [参考来源](#参考来源)
   - [实践](#实践)
     - [对应代码示例](#对应代码示例)
@@ -1380,12 +1381,10 @@ fn main() {
 > - E0277 (`&T` cannot be sent between threads safely) → Sync 不满足 → 检查 T 的字段类型
 > - E0499 (cannot borrow data in `Arc` as mutable) → T2(Arc 只共享) 违反 → 使用 Mutex/RwLock 或 Atomic
 
-
 ## 相关概念
 
 - **上层概念**: [L1 所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [L1 借用（Borrowing）](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md)
 - **下层概念**: [L4 RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) · [L6 Tokio 生态](../../06_ecosystem/02_core_crates/03_core_crates.md) · [L7 AI 并发](../../07_future/04_research_and_experimental/01_ai_integration.md) · [Async/Await](../01_async/02_async.md)
-
 
 ## 参考来源
 

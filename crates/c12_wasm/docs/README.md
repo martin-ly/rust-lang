@@ -15,7 +15,7 @@
 - Rust 版本特性文档
 - 核心概念概览
 - 1. WASM 基础
-- 2. wasm-bindgen 集成
-- 3. WASI 开发
-- 4. 性能优化
+- 1. wasm-bindgen 集成
+- 1. WASI 开发
+- 1. 性能优化
 - 学习路径指引
