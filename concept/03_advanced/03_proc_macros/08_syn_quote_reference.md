@@ -77,7 +77,13 @@
 
 ## 1. syn 库概述
 
-理解「syn 库概述」需要把握核心功能、features 配置与基本使用，本节依次展开。
+`syn` 是「把 `TokenStream` 解析为类型化 Rust AST」的事实标准库，三个使用要点：
+
+- **核心功能**：syn 为 Rust 语法定义了完整的 AST 类型树（`DeriveInput`、`ItemFn`、`Expr`、`Type`、`Pat` 等百余种节点），并提供「`TokenStream → AST 节点」的 `Parse` trait 实现。它的定位是「解析器即库」——过程宏作者无需手写 token 级解析，直接获得「字段列表是什么、属性写了什么」的结构化答案。
+- **features 配置**：syn 体积大、编译慢（完整构建常占宏 crate 编译时间的 70%+），按需开启 feature 是工程惯例——`default-features = false` 后只开 `derive`（derive 宏）、`parsing`/`printing`（解析与输出）、`full`（解析完整 Rust 文件，属性宏/函数宏需要）、`extra-traits`（AST 节点的 `Debug`/`Eq`，测试需要）。裁剪后编译时间可降一半以上。
+- **基本使用**：入口模式固定为两步——`let input = parse_macro_input!(tokens as DeriveInput);`（失败自动生成编译错误并提前返回）→ 读 `input.ident`/`input.generics`/`input.data` 驱动代码生成。`parse_macro_input!` 的「错误即编译错误」语义是 syn  ergonomics 的核心：宏内的 `Result` 一律可用 `?` 传播，最终经 `to_compile_error()` 落到用户代码的 span 上。
+
+判定 syn 的引入范围：derive 宏用 `derive + parsing + printing` 三 feature 起步；需要解析函数体/表达式时加 `full`；只在「确知性能瓶颈」时才考虑手写 token 解析替代 syn（极少正当）。
 
 ### 1.1 核心功能
 
@@ -134,7 +140,14 @@ pub fn my_trait(input: TokenStream) -> TokenStream {
 
 ## 2. syn 解析 API
 
-理解「syn 解析 API」需要把握 parse_macro_input、DeriveInput、ItemFn与自定义解析，本节依次展开。
+syn 的解析 API 按「输入语法类别」分层，四个常用入口：
+
+- **`parse_macro_input!`**：过程宏入口的标准宏——`parse_macro_input!(tokens as T)` 等价于「`T::parse(tokens)` 失败时 `return err.to_compile_error().into()`」。它强制了「解析错误 = 编译错误」的正确流向，避免新手把解析失败写成 panic（宏 panic 会显示为「proc macro panicked」的无信息错误）。
+- **`DeriveInput`**：derive 宏的输入类型——三字段覆盖全部信息：`ident`（类型名）、`generics`（泛型参数 + where 子句，生成 impl 时用 `split_for_impl()` 拆成 `impl_generics`/`ty_generics`/`where_clause` 三件套）、`data`（`Data::Struct`/`Enum`/`Union` 的字段/变体详情）。derive 宏 80% 的逻辑是「遍历 `data` 的字段，为每个字段生成一段代码」。
+- **`ItemFn`**：属性宏标注函数时的输入——`sig`（签名：`fn` 名、参数、返回类型）、`block`（函数体）、`attrs`/`vis`（外层属性与可见性）。典型改写模式：保留 `sig`，把 `block` 包进「前置逻辑 + 原调用 + 后置逻辑」（`#[instrument]` 的 tracing 注入即此模式）。
+- **自定义解析**：DSL 式属性参数（`#[my(key = "val", list(a, b))]`）需实现 `Parse` trait——`ParseStream` 提供 `parse::<Ident>()`、`peek`/`lookahead1()` 前瞻、`parse_terminated` 列表解析等组合子，错误经 `lookahead.error()` 生成带 span 的诊断。
+
+选型判定：derive → `DeriveInput`；标注函数/结构 → `ItemFn`/`ItemStruct`；属性带参数 → 自定义 `Parse`；只需标识符/字面量 → `parse_macro_input!(tokens as Ident/LitStr)` 直接到位。
 
 ### 2.1 parse_macro_input
 
@@ -551,7 +564,13 @@ let expanded = quote! {
 
 ## 6. quote! 宏详解
 
-本节从插值 (#var)、重复 (#(...)\*)与条件生成切入，剖析「quote! 宏详解」的核心内容。
+`quote!` 是「用 Rust 语法写代码模板」的宏——参数是「像 Rust 代码的模板」，输出是 `proc_macro2::TokenStream`。三个核心机制：
+
+- **插值（`#var`）**：`#` 后接实现 `ToTokens` 的变量，把该值「展开为 token」嵌入模板。`syn` 的全部 AST 节点、基础类型（`String` → 字符串字面量、`usize` → 数字字面量、`Ident` → 标识符）都实现了 `ToTokens`。构造标识符用 `quote::format_ident!("{}_impl", name)`（拼接用户类型名生成新标识符，带 span 控制）。
+- **重复（`#(...)*`）**：模板段内出现「重复变量」（`Vec`/`Iterator` 的 `ToTokens` 项）时，`#( ... ),*` 按「每项一次、`,` 分隔」展开——`#(#fields),*` 生成字段列表，分隔符可为 `,`/`;`/省略。多变量同步重复要求长度一致（`#(#names: #types),*`）；`#(...)?` 处理 `Option`（有值展开一次）。
+- **条件生成**：quote 本身无 `if`——条件逻辑写在 quote 外面：先 `let extra = if cond { quote!(...) } else { quote!() };`（空 `quote!()` 是零 token 的单位元），再 `#extra` 插入。这是「模板保持声明式、逻辑保持命令式」的分工惯例。
+
+组合范式：`let methods = fields.iter().map(|f| { let name = &f.ident; quote!( pub fn #name(&self) -> &#ty { &self.#name } ) });` 然后 `quote!( impl #ident { #(#methods)* } )`——「map 生成片段列表 + 外层一次性组装」是 quote 的标准结构，覆盖绝大多数 derive 宏场景。
 
 ### 6.1 插值 (#var)
 
@@ -844,7 +863,11 @@ pub fn create_struct(input: TokenStream) -> TokenStream {
 
 ## 10. 最佳实践
 
-「最佳实践」涉及错误处理 (Error Handling)、性能优化与可测试性，本节逐一说明其要点。
+过程宏工程的三条最佳实践，分别针对「用户面对的错误」「编译性能」「回归防护」：
+
+- **错误处理（Error Handling）**：宏内一切可失败操作返回 `syn::Result`，用 `?` 传播；错误构造用 `syn::Error::new_spanned(node, "消息")`——`node` 的 span 决定 rustc 报错的红线画在用户代码哪个 token 下（指向 `DeriveInput.ident` 即指向类型名，指向某字段即指向该字段）。多个错误用 `Error::combine` 聚合一次报出。反模式：`.unwrap()`（宏 panic = 无定位的「proc macro panicked」）、`Span::call_site()` 笼统定位（用户不知道错在哪个字段）。
+- **性能优化**：syn 按需开 feature（见 §1）；生成逻辑避免「`quote!` 结果 `to_string()` 再 `parse`」的往返（每次往返是一次完整解析，应直接构造 `TokenStream`）；大宏（如 serde）采用「预分配 + `extend` 追加」而非反复 `quote!` 嵌套。宏的编译成本 = 「宏 crate 自身编译」+「每次调用的解析/生成」，前者由 feature 裁剪控制，后者由避免重解析控制。
+- **可测试性**：生成逻辑写成「`proc_macro2::TokenStream → TokenStream`」的纯函数，单元测试直接断言输出（`prettyplease` 格式化后快照对比）；集成测试用 `trybuild` 锁定「应通过/应失败 + stderr」；复杂宏用「测试 crate」模拟真实调用（含泛型、where 子句、生命周期等边界输入）。三层测试使「宏升级 syn 版本」从盲改变为可验证重构。
 
 ### 10.1 错误处理 (Error Handling)
 
