@@ -110,6 +110,8 @@
 
 ## 二、七项核心设计原则
 
+「七项核心设计原则」部分按内存安全：Capability-Based Security、并发安全：Session Types 编译期编码、零成本抽象：Stroustrup 原则、组件组合：范畴论态射复合等7个方面的顺序逐层展开。
+
 ### 2.1 内存安全：Capability-Based Security
 
 > **Capability-Based Security**: 由 Dennis & Van Horn 1966 提出，核心思想是——进程对资源的访问权限不基于身份（identity），而基于**不可伪造的令牌（capability）**。拥有 capability 即可访问资源，无需额外检查。 [Dennis & Van Horn, CACM 1966](https://doi.org/10.1145/365230.365252)
@@ -382,6 +384,8 @@ graph TD
 
 ## 六、思维表征体系
 
+「思维表征体系」部分包含设计原则依赖图 与 系统架构决策树 两条主线，本节依次说明。
+
 ### 6.1 设计原则依赖图
 >
 
@@ -430,6 +434,8 @@ graph TD
 
 ## 七、定理推理链
 
+本节聚焦「定理推理链」，核心内容为定理一致性矩阵（系统设计专集）。
+
 ### 定理一致性矩阵（系统设计专集）
 >
 
@@ -444,6 +450,8 @@ graph TD
 ---
 
 ## 八、相关概念链接（L0-L7 映射）
+
+本节围绕「相关概念链接（L0-L7 映射）」展开，覆盖 L0-L7 纵向映射 与 相关概念 两个方面。
 
 ### L0-L7 纵向映射
 >
@@ -544,6 +552,8 @@ graph LR
 > **相关文件**: [问题图谱](../../00_meta/04_navigation/problem_graph.md) · [能力图谱](../../00_meta/00_framework/competency_graph.md) · [安全边界](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md)
 
 ## 十、边界测试：系统设计原则的编译错误
+
+理解「边界测试：系统设计原则的编译错误」需要把握边界测试：Send/Sync 违反导致跨线程共享状态（编译错误）、边界测试：trait 对象的安全性约束（编译错误）、边界测试：依赖注入与 trait object 的性能权衡（运行时开销）、边界测试：过度工程化的类型状态机（编译复杂度爆炸）等6个方面，本节依次展开。
 
 ### 10.1 边界测试：Send/Sync 违反导致跨线程共享状态（编译错误）
 
@@ -662,6 +672,8 @@ fn main() {
 - **定理**: Rust 系统设计原则与国际权威对齐 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：Rust 中"零成本抽象"（Zero-Cost Abstra…、测验 2：在 Rust 微服务架构中，为什么选择 `tokio` 而非…、测验 3：Rust 的 `trait` 系统在解耦模块时有什么优势？（…、测验 4：什么是"错误即类型"（Errors as Values）？R…等5个方面，本节依次展开。
 
 ### 测验 1：Rust 中"零成本抽象"（Zero-Cost Abstractions）对系统架构设计意味着什么？（理解层）
 

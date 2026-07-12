@@ -30,6 +30,8 @@
 
 ## 一、内存安全对比
 
+本节围绕「内存安全对比」展开，覆盖 Q1. 以下 C 代码有什么问题？Rust 如何防止同样的问题？ 与  Q2. 以下 Go 代码有什么问题？Rust 如何处理同样的场景？ 两个方面。
+
 ### Q1. 以下 C 代码有什么问题？Rust 如何防止同样的问题？
 
 ```c
@@ -145,6 +147,8 @@ fn main() {
 ---
 
 ## 二、并发模型对比
+
+「并发模型对比」部分包含 Q3. 以下 C++ 代码存在什么数据竞争？Rust 如何防止？ 与  Q4. 以下 Go 代码的 goroutine 泄漏风险是什么？Rus… 两条主线，本节依次说明。
 
 ### Q3. 以下 C++ 代码存在什么数据竞争？Rust 如何防止？
 
@@ -298,6 +302,8 @@ async fn main() {
 
 ## 三、错误处理对比
 
+「错误处理对比」部分的核心主题是 Q5. 以下 C 代码的错误处理有什么问题？Rust 的 `Resul…，本节展开说明。
+
 ### Q5. 以下 C 代码的错误处理有什么问题？Rust 的 `Result` 如何改进？
 
 ```c
@@ -359,6 +365,8 @@ fn main() {
 
 ## 四、抽象与零成本
 
+「抽象与零成本」部分的核心主题是 Q6. 以下 C++ 模板和 Rust 泛型的输出是否相同？零成本抽象…，本节展开说明。
+
 ### Q6. 以下 C++ 模板和 Rust 泛型的输出是否相同？零成本抽象的含义是什么？
 
 ```cpp
@@ -415,6 +423,8 @@ fn add_generic<T: Add>(a: T, b: T) -> T { a + b }
 ---
 
 ## 五、综合对比
+
+「综合对比」涉及 Q7. 以下代码在 C、C++、Go、Rust 中的行为对比、Q8. 以下场景最适合哪种语言？为什么？、Q9. 以下代码在 Rust 和 C++ 中的生命周期管理对比与Q10. 以下代码在 Rust、Go、C++ 中的错误处理哲学对比，本节逐一说明其要点。
 
 ### Q7. 以下代码在 C、C++、Go、Rust 中的行为对比
 
@@ -660,6 +670,8 @@ fn read_config() -> Result<i32, Box<dyn std::error::Error>> {
 > **权威来源**: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [The Rust Programming Language — Ch19](https://doc.rust-lang.org/book/ch19-00-advanced-features.html) · [Rust vs Other Languages — Rust Book](https://doc.rust-lang.org/book/appendix-06-translation.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：本文件是 测验：Rust vs 系统编程语言（L5 试点扩展…、测验 2：在 测验：Rust vs 系统编程语言（L5 试点扩展） 的…与测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层），本节逐一说明其要点。
 
 ### 测验 1：本文件是 测验：Rust vs 系统编程语言（L5 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 

@@ -96,6 +96,8 @@
 
 ## 1️⃣ 类型级自然数 (Peano Numbers)
 
+「1️⃣ 类型级自然数 (Peano Numbers)」涉及基础定义、类型级加法与类型级乘法，本节逐一说明其要点。
+
 ### 基础定义
 
 ```rust
@@ -182,6 +184,8 @@ type Product = <Two as Mul<Three>>::Output;  // Six = Two * Three
 
 ## 2️⃣ 类型级布尔逻辑
 
+「2️⃣ 类型级布尔逻辑」部分的核心主题是布尔类型，本节展开说明。
+
 ### 布尔类型
 
 ```rust
@@ -252,6 +256,8 @@ type Result3 = <False as Not>::Output;        // True
 ---
 
 ## 3️⃣ 类型级列表
+
+本节聚焦「3️⃣ 类型级列表」，核心内容为 HList (Heterogeneous List)。
 
 ### HList (Heterogeneous List)
 
@@ -342,6 +348,8 @@ fn hlist_operations() {
 
 ## 4️⃣ Higher-Kinded Types (HKT) 模拟
 
+「4️⃣ Higher-Kinded Types (HKT)…」部分包含什么是 HKT？ 与 使用关联类型模拟 HKT 两条主线，本节依次说明。
+
 ### 什么是 HKT？
 
 HKT 允许对类型构造器进行抽象。Rust 原生不支持，但可以模拟。(Source: [RFC 1598 — GATs](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html))
@@ -403,6 +411,8 @@ where
 ---
 
 ## 5️⃣ 类型级状态机
+
+本节聚焦「5️⃣ 类型级状态机」，核心内容为编译时验证的协议。
 
 ### 编译时验证的协议
 
@@ -499,6 +509,8 @@ fn protocol_example() {
 
 ## 6️⃣ 类型级证明
 
+本节聚焦「6️⃣ 类型级证明」，核心内容为编译时验证不变量。
+
 ### 编译时验证不变量
 
 ```rust
@@ -558,6 +570,8 @@ impl<T, const N: usize> Array<T, N> {
 ---
 
 ## 🎯 实战项目
+
+本节从项目 1: 类型安全的 SQL DSL 与 项目 2: 编译时验证的状态机框架 两个层面剖析「实战项目」。
 
 ### 项目 1: 类型安全的 SQL DSL
 

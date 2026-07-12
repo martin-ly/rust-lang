@@ -680,6 +680,8 @@ fn spawn_enemy(
 
 ## 四、数据导向设计 (DOD) 与 Rust 零成本抽象的协同
 
+本节围绕「数据导向设计 (DOD) 与 Rust 零成本抽象的协同」展开，覆盖零成本抽象的 DOD 验证 与  SIMD 与 Unsafe 边界 两个方面。
+
 ### 4.1 零成本抽象的 DOD 验证
 
 | 抽象层次 | 手写 C++ 等价物 | Rust/Bevy 抽象 | 成本 |
@@ -712,6 +714,8 @@ pub fn update_positions_simd(
 ---
 
 ## 五、并发渲染：Send/Sync 在多线程游戏循环中的保证
+
+本节从多线程渲染管线 与  `!Send` / `!Sync` 资源的游戏引擎处理 两个层面剖析「并发渲染：Send/Sync 在多线程游戏循环中的保证」。
 
 ### 5.1 多线程渲染管线
 
@@ -1187,6 +1191,8 @@ struct ChildOf {
 
 ## 十、边界测试：游戏 ECS 的编译错误
 
+理解「边界测试：游戏 ECS 的编译错误」需要把握边界测试：Bevy 的 Query 与组件缺失（编译错误）、边界测试：ECS 中的可变引用冲突（编译错误）、边界测试：ECS 的 archetype 变更与引用失效（运行时 pa…、边界测试：多线程 ECS 与 `Send`/`Sync` 的组件约束（…等6个方面，本节依次展开。
+
 ### 10.1 边界测试：Bevy 的 Query 与组件缺失（编译错误）
 
 ```rust,compile_fail
@@ -1300,6 +1306,8 @@ fn main() {}
 - **定理**: Game Development & ECS Architecture（游戏开发与 ECS 架构） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：ECS（Entity-Component-System）架构…、测验 2：ECS 相比传统 OOP 继承树在缓存性能上有什么优势？（理…、测验 3：`bevy_ecs` 的 `Query<&Position,…、测验 4：`Commands` 队列在 ECS 中解决什么问题？（理解…等5个方面。
 
 ### 测验 1：ECS（Entity-Component-System）架构的三个核心概念是什么？（理解层）
 

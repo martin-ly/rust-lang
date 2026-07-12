@@ -37,6 +37,8 @@
 
 ## 1. 语言层
 
+「语言层」部分按 `assert_matches!` / `debug_assert_m…、`expr` metavariable 在 `cfg` 中的使用与s390x inline assembly vector regist…的顺序逐层展开。
+
 ### 1.1 `assert_matches!` / `debug_assert_matches!`
 
 稳定版本：**1.96.0**
@@ -66,6 +68,8 @@ debug_assert_matches!(result, Ok(n) if n > 0);
 ---
 
 ## 2. 标准库层
+
+「标准库层」涉及 `core::range` Copy 类型、`NonZero` 范围迭代、`From<T>` 扩展与`valid for read/write` 定义重构，本节逐一说明其要点。
 
 ### 2.1 `core::range` Copy 类型
 
@@ -132,6 +136,8 @@ let _: LazyLock<i32, fn() -> i32> = LazyLock::from(2026);
 
 ## 3. Cargo 与工具链
 
+本节将「Cargo 与工具链」分解为若干主题： git + alternate registry 共存、安全修复与rustdoc。
+
 ### 3.1 git + alternate registry 共存
 
 ```toml
@@ -170,6 +176,8 @@ my-crate = { version = "1.2", registry = "internal", git = "https://github.com/m
 
 ## 6. 工具链与兼容性细节
 
+「工具链与兼容性细节」涉及 Rustdoc 改进、Cargo 细节、编译器改进、平台支持等6个方面，本节逐一说明其要点。
+
 ### 6.1 Rustdoc 改进
 
 | 改进 | 说明 | 影响 |
@@ -179,6 +187,8 @@ my-crate = { version = "1.2", registry = "internal", git = "https://github.com/m
 | Sidebar 分离 | 方法和关联函数在侧边栏中分开显示 | 导航更清晰 |
 
 ### 6.2 Cargo 细节
+
+「Cargo 细节」部分包含 Git + Alternate Registry 共存 与  `target.'cfg(..)'.rustdocflags` 两条主线，本节依次说明。
 
 #### Git + Alternate Registry 共存
 
@@ -217,6 +227,8 @@ rustdocflags = ["--cfg", "docsrs"]
 | `s390x-unknown-linux-gnu` | 向量寄存器内联汇编（Inline Assembly）支持 |
 
 ### 6.5 底层与兼容性
+
+本节从指针 “valid for read/write” 契约重构 与  JSON Target Spec 内部变更 两个层面剖析「底层与兼容性」。
 
 #### 指针 “valid for read/write” 契约重构
 

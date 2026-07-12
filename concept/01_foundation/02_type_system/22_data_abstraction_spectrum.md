@@ -50,6 +50,8 @@
 
 ## 二、数据抽象的六层谱系
 
+本节将「数据抽象的六层谱系」分解为若干主题：第一层：内存布局抽象（C struct）、第二层：行为封装（C++ class）、第三层：接口与实现分离（Java interface + class）、第四层：代数数据类型（Haskell/ML enum/variant）等6个方面。
+
 ### 2.1 第一层：内存布局抽象（C struct）
 
 C 的 `struct` 是**最底层的数据抽象**——仅定义内存中字段的顺序和类型：
@@ -247,6 +249,8 @@ Rust + Ownership    → 代数类型 + 行为契约 + 资源安全保证
 
 ## 三、关键对比：C++ 继承 vs Rust trait
 
+本节从开放/封闭原则的差异 与 多继承与 Trait 组合 两个层面剖析「关键对比：C++ 继承 vs Rust trait」。
+
 ### 3.1 开放/封闭原则的差异
 
 | 原则 | C++ 继承 | Rust trait |
@@ -318,6 +322,8 @@ fn process<T: Drawable + Serializable>(item: T) {
 
 ## 四、代数数据类型的工程价值
 
+本节围绕「代数数据类型的工程价值」展开，覆盖消除空指针：Option<T> 替代 nullable 与 错误处理：Result<T, E> 替代异常 两个方面。
+
 ### 4.1 消除空指针：Option<T> 替代 nullable
 
 | 语言 | nullable 表示 | 安全性 |
@@ -366,6 +372,8 @@ let content = match read_file("config.txt") {
 ---
 
 ## 五、反例与边界测试
+
+「反例与边界测试」部分包含反例：C++ 的 std::variant vs Rust enum 与 边界测试：为外部类型实现 trait（Orphan Rule） 两条主线，本节依次说明。
 
 ### 5.1 反例：C++ 的 std::variant  vs Rust enum
 
@@ -470,6 +478,8 @@ impl std::fmt::Display for MyVec {
 > **状态**: ✅ 新建 — 通用 PL 基座层
 
 ## 十、边界测试：数据抽象的编译错误
+
+「边界测试：数据抽象的编译错误」部分按边界测试：零大小类型（ZST）的内存布局假设（编译错误 / 运行时 U…、边界测试：枚举变体内存布局的不可变性（逻辑错误）、边界测试：零大小类型的 `Box` 分配（编译错误/运行时差异）、边界测试：`ManuallyDrop` 的内存泄漏风险（逻辑错误）等6个方面的顺序逐层展开。
 
 ### 10.1 边界测试：零大小类型（ZST）的内存布局假设（编译错误 / 运行时 UB）
 
@@ -637,6 +647,8 @@ fn main() {
 > [来源: [Rust Reference — Moved Values](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：C 的 `struct`、Java 的 `class`、Ru…、测验 2：Rust 的 `enum` 为什么比 C 的 `union`…、测验 3：`trait` 在 Rust 数据抽象中扮演什么角色？它解决…、测验 4：Rust 的零大小类型（ZST，如 `()`）有什么实际用途…等5个方面，本节依次展开。
 
 ### 测验 1：C 的 `struct`、Java 的 `class`、Rust 的 `struct + impl` 在数据抽象上的核心区别是什么？（理解层）
 

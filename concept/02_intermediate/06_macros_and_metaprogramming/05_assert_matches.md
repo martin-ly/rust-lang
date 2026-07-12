@@ -193,6 +193,8 @@ debug_assert_matches!(config, Some(true));
 
 ## 二、形式化语义
 
+本节围绕「形式化语义」展开，覆盖与 `assert!` / `assert_eq!` 的对比 与 绑定捕获与作用域 两个方面。
+
 ### 2.1 与 `assert!` / `assert_eq!` 的对比
 >
 
@@ -266,6 +268,8 @@ if let Message::Coord { x, y } = msg {
 ---
 
 ## 三、使用场景与最佳实践
+
+本节从测试中的 Result/Option 断言、复杂枚举变体验证与与 `if let` 的互补关系切入，剖析「使用场景与最佳实践」的核心内容。
 
 ### 3.1 测试中的 Result/Option 断言
 >
@@ -345,6 +349,8 @@ flowchart TD
 ---
 
 ## 四、反命题与边界分析
+
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
 
 ### 4.1 反命题树
 
@@ -493,6 +499,8 @@ fn main() {
 
 ## 十、边界测试：assert_matches 的编译错误
 
+「边界测试：assert_matches 的编译错误」部分按边界测试：`assert_matches!` 在非 Option/Re…、边界测试：嵌套模式匹配中的绑定冲突（编译错误）、边界测试：`assert_matches!` 与嵌套模式的绑定（编译错…、边界测试：自定义断言失败消息的类型约束（编译错误）等5个方面的顺序逐层展开。
+
 ### 10.1 边界测试：`assert_matches!` 在非 Option/Result 上使用（编译错误）
 
 ```rust,compile_fail
@@ -603,6 +611,8 @@ fn main() {
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用（Reference） `&s`。
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：`assert_matches!(value, patter…、测验 2：`assert_matches!` 是否可以在模式中绑定变量…、测验 3：如果 `assert_matches!`在你的 stabl…、测验 4：`assert_matches!(x, Some(_))`…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：`assert_matches!(value, pattern)` 的主要用途是什么？与 `assert!(matches!(value, pattern))` 相比有什么优势？（理解层）
 

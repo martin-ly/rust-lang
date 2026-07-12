@@ -48,6 +48,8 @@
 
 ## 一、课程概览
 
+本节围绕「课程概览」展开，覆盖 Comprehensive Rust 是什么 与 课程结构 两个方面。
+
 ### 1.1 Comprehensive Rust 是什么
 
 > **[Comprehensive Rust](https://google.github.io/comprehensive-rust/)** 是 Google Android 团队于 2022 年发布、持续维护的免费 Rust 课程，目标是在 **4 天**内将有经验的程序员（C++/Java/Go 背景）培训到能阅读、修改和编写 Rust 代码的水平。课程特点：
@@ -95,6 +97,8 @@ Day 4: Android 与高级主题 (4 小时)
 ---
 
 ## 二、章节映射表
+
+理解「章节映射表」需要把握 Day 1 — Rust 基础、Day 2 — 所有权与类型系统、Day 3 — 泛型与 Trait与Day 4 — Android & 高级主题，本节依次展开。
 
 ### 2.1 Day 1 — Rust 基础
 
@@ -197,6 +201,8 @@ Comprehensive Rust 与本知识体系的互补关系:
 **状态**: ✅ 概念文件创建完成
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：本文档《Comprehensive Rust 课程映射》在…、测验 2：《Comprehensive Rust 课程映射》的主要用途…与测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：本文档《Comprehensive Rust 课程映射》在 Rust 知识体系中属于哪一层级的元数据？（理解层）
 

@@ -69,6 +69,8 @@ flowchart LR
 
 ## 嵌入式测验（Embedded Quiz）
 
+「嵌入式测验（Embedded Quiz）」部分按测验 1：本文档《Concept Audit Guide（概念审计指南…、测验 2：《Concept Audit Guide（概念审计指南）》的…与测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）的顺序逐层展开。
+
 ### 测验 1：本文档《Concept Audit Guide（概念审计指南）》在 Rust 知识体系中属于哪一层级的元数据？（理解层）
 
 **题目**: 本文档《Concept Audit Guide（概念审计指南）》在 Rust 知识体系中属于哪一层级的元数据？

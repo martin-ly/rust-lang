@@ -85,6 +85,8 @@ protocol = "git"
 
 ## 三、发布流程：cargo publish
 
+本节围绕「发布流程：cargo publish」展开，覆盖准备工作 与  Cargo.toml 必填字段 两个方面。
+
 ### 3.1 准备工作
 
 ```bash
@@ -122,6 +124,8 @@ rust-version = "1.97.0"
 ---
 
 ## 四、Yank 与 Owner 管理
+
+「Yank 与 Owner 管理」部分包含 Yank（撤回） 与  Owner 管理 两条主线，本节依次说明。
 
 ### 4.1 Yank（撤回）
 
@@ -169,6 +173,8 @@ Cargo 支持多种 token 存储方式：
 ---
 
 ## 六、私有 Registry 与 Source Replacement
+
+「私有 Registry 与 Source Replacem…」部分包含配置私有 Registry 与  Source Replacement（源替换） 两条主线，本节依次说明。
 
 ### 6.1 配置私有 Registry
 
@@ -220,6 +226,8 @@ registry = "sparse+https://mirrors.my-company.com/crates.io-index/"
 ---
 
 ## 嵌入式测验
+
+本节将「嵌入式测验」分解为若干主题：测验 1：sparse 协议相比 git 协议的主要优势是什么？、测验 2：`cargo yank` 会删除已经发布的 crate 源码…、测验 3：发布 crate 到 crates.io 时，`licens…与测验 4：Source replacement 会改变 crate 名…。
 
 ### 测验 1：sparse 协议相比 git 协议的主要优势是什么？
 

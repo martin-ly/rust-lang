@@ -175,6 +175,8 @@ fn main() {
 
 ## 二、并发模型
 
+本节从 BEAM 并发模型 与  Rust 并发模型 两个层面剖析「并发模型」。
+
 ### 2.1 BEAM 并发模型
 >
 
@@ -279,6 +281,8 @@ Rust 并发模型:
 ---
 
 ## 三、类型系统
+
+本节围绕「类型系统」展开，覆盖静态 vs 动态 与 模式匹配 两个方面。
 
 ### 3.1 静态 vs 动态
 >
@@ -484,6 +488,8 @@ Rust ↔ Elixir 互操作:
 
 ## 六、反命题与适用场景
 
+「反命题与适用场景」部分包含反命题树 与 适用场景矩阵 两条主线，本节依次说明。
+
 ### 6.1 反命题树
 >
 
@@ -636,6 +642,8 @@ graph TD
 
 ## 十、边界测试：Rust 与 Elixir 的编译错误对比
 
+「边界测试：Rust 与 Elixir 的编译错误对比」部分的核心主题是边界测试：Elixir 的动态类型与 Rust 的静态模式（编译错误），本节展开说明。
+
 ### 10.1 边界测试：Elixir 的动态类型与 Rust 的静态模式（编译错误）
 
 ```rust,ignore
@@ -661,6 +669,8 @@ fn fixed() {
 > **Elixir 对比**: Elixir 是动态类型——变量是值的标签，`x = 42; x =
 
 ## 十、边界测试：Rust 与 Elixir 的编译错误对比
+
+本节从边界测试：Elixir 的动态类型与 Rust 的静态模式（编译错误）、边界测试：Elixir 的进程邮箱与 Rust 的 channel（编…与边界测试：Elixir 的进程隔离与 Rust 的共享内存并发（编译错…切入，剖析「边界测试：Rust 与 Elixir 的编译错误对比」的核心内容。
 
 ### 10.1 边界测试：Elixir 的动态类型与 Rust 的静态模式（编译错误）
 
@@ -738,6 +748,8 @@ fn main() {
 > **修正**: Elixir/Erlang 的 **Actor 模型** 中，进程完全隔离——不共享内存，所有通信通过异步（Async）消息传递。Rust 支持 Actor 模型（`actix`），但默认是**共享内存并发**：线程共享地址空间，通过锁/原子同步。Elixir 的优势：1) 无数据竞争（无共享内存）；2) 容错（进程崩溃不影响其他进程，supervisor 重启）；3) 热代码升级。Rust 的优势：1) 性能（无消息序列化开销）；2) 细粒度控制（可选择共享或无共享）；3) 类型安全（编译期防止数据竞争）。从 Elixir 迁移到 Rust 时，需注意：1) 不再有进程隔离的保护；2) 共享状态需 `Mutex`/`RwLock`；3) 错误处理（Error Handling）从"let it crash"变为显式 `Result` 传播。这与 Go 的 goroutine + channel（可选择共享或通信）类似——Rust 提供两种并发模型，但共享内存是默认和最高效的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)] · [来源: [Elixir Processes](https://elixir-lang.org/getting-started/processes.html)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：Elixir 的 Actor 模型（进程隔离）与 Rust…、测验 2：Elixir 的"容错设计"（Let it crash）与…、测验 3：Elixir 运行在 BEAM 上，为什么能达到极高的并发数…、测验 4：Rust 的 `match` 穷尽性检查与 Elixir 的…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：Elixir 的 Actor 模型（进程隔离）与 Rust 的共享内存并发有什么根本区别？（理解层）
 

@@ -20,6 +20,8 @@
 
 ## 为什么需要 build-std
 
+本节从嵌入式场景 与 体积优化 两个层面剖析「为什么需要 build-std」。
+
 ### 嵌入式场景
 
 - **定制标准库**: 为特定目标裁剪 `std` 功能
@@ -52,6 +54,8 @@ graph LR
 ```
 
 ## 使用方法
+
+理解「使用方法」需要把握安装 nightly 工具链、配置 cargo、指定目标与Cargo.toml 配置，本节依次展开。
 
 ### 1. 安装 nightly 工具链
 
@@ -102,6 +106,8 @@ flowchart TD
 ```
 
 ## 典型配置示例
+
+本节围绕「典型配置示例」展开，覆盖自定义 target JSON 与  no_std + 全局分配器 两个方面。
 
 ### 自定义 target JSON
 
@@ -170,6 +176,8 @@ fn panic(_info: &PanicInfo) -> ! { loop {} }
 | `optimize_for_size` | 针对代码体积极致优化 | `opt-level = z` 时配合 |
 
 ## HAL 设计模式深化
+
+本节从类型状态模式（Type State） 与 寄存器访问模式 两个层面剖析「HAL 设计模式深化」。
 
 ### 类型状态模式（Type State）
 

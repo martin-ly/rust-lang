@@ -35,6 +35,8 @@ Rust 1.97.0 的变更集中在以下几类：
 
 ## 2. 语言与编译器
 
+「语言与编译器」部分按 `must_use` lint 扩展至 `Result<T, Unin…、`dead_code_pub_in_binary`lint、新稳定 target features、`cfg(target_has_atomic_primitive_al…等8个方面的顺序逐层展开。
+
 ### 2.1 `must_use` lint 扩展至 `Result<T, Uninhabited>` 与 `ControlFlow<Uninhabited, T>`
 
 当 `Result` 的错误类型或 `ControlFlow` 的断裂类型为不可构造类型（uninhabited）时，编译器将其等价于内部成功/继续类型 `T` 来触发 `must_use` 诊断。
@@ -163,6 +165,8 @@ linker_messages = "allow"
 
 ## 3. 目标平台
 
+本节聚焦「目标平台」，核心内容为 `nvptx64-nvidia-cuda` 基线提升。
+
 ### 3.1 `nvptx64-nvidia-cuda` 基线提升
 
 Rust 1.97.0 提升了 NVIDIA PTX 目标的硬件与 ISA 基线：
@@ -178,6 +182,8 @@ Rust 1.97.0 提升了 NVIDIA PTX 目标的硬件与 ISA 基线：
 ---
 
 ## 4. 标准库 API
+
+本节将「标准库 API」分解为若干主题： `Default for RepeatN`、`Copy for ffi::FromBytesUntilNulErr…、`Send for std::fs::File` on UEFI、整数位查询方法等6个方面。
 
 ### 4.1 `Default for RepeatN`
 
@@ -264,6 +270,8 @@ fn main() {
 
 ## 5. Cargo
 
+本节围绕「Cargo」展开，依次讨论 `build.warnings` 配置、`resolver.lockfile-path` 配置、`cargo-clean` 目标目录校验、`-m` 简写等5个方面。
+
 ### 5.1 `build.warnings` 配置
 
 `[build]` 配置新增 `warnings` 字段，可统一控制**本地包（local packages）**的 lint 警告级别，常用于 CI 强制无警告。与 `RUSTFLAGS="-Dwarnings"` 不同，该配置不会使 build cache 失效，且**不影响依赖 crate**。
@@ -315,6 +323,8 @@ Cargo 内部 `crates-io` crate 不再依赖 `curl`，减少构建依赖与平台
 ---
 
 ## 6. Rustdoc
+
+「Rustdoc」部分包含 `--emit` 标志 与  `--remap-path-prefix` 两条主线，本节依次说明。
 
 ### 6.1 `--emit` 标志
 

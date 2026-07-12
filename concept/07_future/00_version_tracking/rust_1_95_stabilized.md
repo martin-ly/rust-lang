@@ -37,6 +37,8 @@
 
 ## 1. 语言层
 
+「语言层」部分按 `cfg_select!` 宏、`if let` guards on match arms、路径段关键字重命名导入与PowerPC/PowerPC64 内联汇编稳定化的顺序逐层展开。
+
 ### 1.1 `cfg_select!` 宏
 
 稳定版本：**1.95.0**
@@ -99,6 +101,8 @@ unsafe {
 ---
 
 ## 2. 标准库层
+
+本节从 `core::range` 模块、原子操作 — `update` / `try_update`、集合 — 获取可变引用的插入操作、裸指针 — 不安全转引用等9个方面切入，剖析「标准库层」的核心内容。
 
 ### 2.1 `core::range` 模块
 
@@ -241,6 +245,8 @@ let ref_slice: &[Cell<i32>] = cell_arr.as_ref();
 ---
 
 ## 3. 编译器与平台
+
+本节围绕「编译器与平台」展开，依次讨论 `--remap-path-scope` 稳定化、平台支持提升与重要兼容性变更。
 
 ### 3.1 `--remap-path-scope` 稳定化
 

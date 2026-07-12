@@ -53,6 +53,8 @@ pub fn create_tls_config() -> Result<rustls::ServerConfig, Box<dyn std::error::E
 
 ## 2. 证书管理
 
+「证书管理」部分包含自签名证书（仅开发与测试） 与 生产证书 两条主线，本节依次说明。
+
 ### 2.1 自签名证书（仅开发与测试）
 
 ```rust
@@ -77,6 +79,8 @@ pub fn generate_self_signed_cert() -> Result<Certificate, Box<dyn std::error::Er
 - 验证证书链和主机名，不要禁用验证。
 
 ## 3. 认证与授权
+
+「认证与授权」部分包含 JWT 与  OAuth2 / OpenID Connect 两条主线，本节依次说明。
 
 ### 3.1 JWT
 
@@ -110,6 +114,8 @@ fn generate_jwt(user_id: &str, role: &str, secret: &str) -> Result<String, jsonw
 - 校验文件上传类型和大小。
 
 ## 5. DoS 防护
+
+「DoS 防护」部分包含速率限制 与 连接限制 两条主线，本节依次说明。
 
 ### 5.1 速率限制
 
@@ -194,6 +200,8 @@ impl IpFilter {
 > **关键洞察**: 黑名单优先于白名单。仅当白名单为空时，才默认允许所有非黑名单 IP，这是最常见的访问控制语义。
 
 ## 8. DDoS 与慢速攻击防护
+
+本节从连接速率限制 与 慢速攻击防护 两个层面剖析「DDoS 与慢速攻击防护」。
 
 ### 8.1 连接速率限制
 

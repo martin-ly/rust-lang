@@ -104,6 +104,8 @@
 
 ## 一、权威定义（Definition）
 
+本节从 Wikipedia 权威定义 与  RustBelt 与 Iris 核心定义 两个层面剖析「权威定义（Definition）」。
+
 ### 1.1 Wikipedia 权威定义
 
 > **[Wikipedia: Formal verification](https://en.wikipedia.org/wiki/Formal_verification)** Formal verification is the act of proving or disproving the correctness of intended algorithms underlying a system with respect to a certain formal specification or property, using formal methods of mathematics. It is used in software engineering to ensure that systems operate correctly and reliably. (Source: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system))
@@ -508,6 +510,8 @@ graph TD
 > **过渡**: 反命题决策树澄清了 RustBelt 的能力边界。从定理证明到工业落地，需要一系列验证工具链的桥接——下一节给出标准库原语验证现状，随后 §8 建立完整工具链光谱。 (Source: [POPL 2019 — Stacked Borrows](https://dl.acm.org/doi/10.1145/3290380))
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：RustBelt 的安全保证范围（理解层）、测验 2：Iris 逻辑中的权限断言（应用层）、测验 3：Concurrent Separation Logic (C…、测验 4：验证工具选择（评价层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：RustBelt 的安全保证范围（理解层）
 
@@ -1291,6 +1295,8 @@ unsafe {
 ---
 
 ## 十一、边界测试：所有权公理的编译错误
+
+理解「边界测试：所有权公理的编译错误」需要把握边界测试：违反唯一所有权（编译错误）、边界测试：Send/Sync 自动推导失败（编译错误）、边界测试：drop 后使用（编译错误）、边界测试：共享借用期间可变借用（编译错误）等7个方面，本节依次展开。
 
 ### 11.1 边界测试：违反唯一所有权（编译错误）
 

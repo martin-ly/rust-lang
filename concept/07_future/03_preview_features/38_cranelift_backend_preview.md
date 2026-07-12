@@ -75,6 +75,8 @@
 
 ## 一、核心概念
 
+「核心概念」部分按问题：LLVM 的编译时间瓶颈、Cranelift 的定位与设计哲学与rustc_codegen_cranelift的顺序逐层展开。
+
 ### 1.1 问题：LLVM 的编译时间瓶颈
 
 Rust 编译器使用 **LLVM** 作为代码生成后端。LLVM 提供卓越的优化能力，但编译时间长：
@@ -158,6 +160,8 @@ rustc_codegen_cranelift 项目:
 ---
 
 ## 二、技术细节
+
+本节从架构对比：LLVM vs Cranelift、优化级别权衡与与并行前端的协同切入，剖析「技术细节」的核心内容。
 
 ### 2.1 架构对比：LLVM vs Cranelift
 >
@@ -247,6 +251,8 @@ graph TD
 ---
 
 ## 四、反命题与边界分析
+
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
 
 ### 4.1 反命题树
 >
@@ -391,6 +397,8 @@ fn main() {
 ---
 
 ## 十、边界测试：Cranelift 后端预览的编译错误
+
+理解「边界测试：Cranelift 后端预览的编译错误」需要把握边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行…、边界测试：Cranelift 不支持的平台特定内联汇编（编译错误）、边界测试：Cranelift 的尾调用优化缺失（运行时栈溢出）、边界测试：Cranelift 的 SIMD 向量类型宽度限制（编译错误）等8个方面，本节依次展开。
 
 ### 10.1 边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行时差异）
 
@@ -626,6 +634,8 @@ fn main() {
 - **定理**: Cranelift 后端预研：Rust 编译器的快速调试编译 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：Cranelift 与 LLVM 在 Rust 编译中分别扮…、测验 2：为什么 Cranelift 的 debug 构建速度比 LL…、测验 3：`cargo build -Z codegen-backen…、测验 4：Cranelift 对 Rust 开发体验的预期改善是什么？…等5个方面，本节依次展开。
 
 ### 测验 1：Cranelift 与 LLVM 在 Rust 编译中分别扮演什么角色？（理解层）
 

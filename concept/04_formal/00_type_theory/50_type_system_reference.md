@@ -193,6 +193,8 @@ Rust 在特定位置自动执行类型强制（coercion）：
 
 ## 📐 知识结构
 
+本节从概念定义、属性特征、关系连接、思维导图等7个方面切入，剖析「知识结构」的核心内容。
+
 ### 概念定义
 
 **类型系统形式化 (Type System Formalization)**:
@@ -312,6 +314,8 @@ Rust 类型系统的形式化基于：
 (Source: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html))
 
 ## 1. 语法定义
+
+本节聚焦「语法定义」，核心内容为核心语法。
 
 ### 1.1 核心语法
 

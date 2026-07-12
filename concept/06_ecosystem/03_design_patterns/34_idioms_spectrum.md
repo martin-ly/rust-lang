@@ -268,6 +268,8 @@ graph TD
 
 ## 三、L0 词法级惯用法
 
+「L0 词法级惯用法」涉及 3.1、3.2、3.3与3.4，本节逐一说明其要点。
+
 ### 3.1
 
 > 来源: [Rust Reference §6.13](https://doc.rust-lang.org/reference/introduction.html) `?` 传播运算符
@@ -367,6 +369,8 @@ for &n in &numbers {
 ---
 
 ## 四、L1 类型级惯用法
+
+本节将「L1 类型级惯用法」分解为若干主题： 4.1、4.2、4.3与4.4。
 
 ### 4.1
 
@@ -472,6 +476,8 @@ impl FileHandle<WritePermission> {
 
 ## 五、L2 接口级惯用法
 
+本节围绕「L2 接口级惯用法」展开，依次讨论 5.1、5.2、5.3与5.4。
+
 ### 5.1
 
 > 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Into/From 转换链
@@ -559,6 +565,8 @@ greeting(&"Rust".to_owned());    // &String
 
 ## 六、L3 资源级惯用法
 
+本节从 6.1、6.2、6.3与6.4切入，剖析「L3 资源级惯用法」的核心内容。
+
 ### 6.1
 
 > 来源: [Rust Reference §10.8](https://doc.rust-lang.org/reference/introduction.html) RAII 守卫模式
@@ -643,6 +651,8 @@ impl SelfReferential {
 ---
 
 ## 七、L4 控制级惯用法
+
+本节从 7.1、7.2、7.3与7.4切入，剖析「L4 控制级惯用法」的核心内容。
 
 ### 7.1
 
@@ -732,6 +742,8 @@ let squares = (0..10).map(|n| n * n).collect::<Vec<i32>>();
 ---
 
 ## 八、L5 并发级惯用法
+
+理解「L5 并发级惯用法」需要把握 8.1、8.2、8.3与8.4，本节依次展开。
 
 ### 8.1
 
@@ -846,6 +858,8 @@ fn pop<T>(head: &Atomic<Node<T>>) -> Option<T> {
 ---
 
 ## 九、L6 架构级惯用法
+
+「L6 架构级惯用法」部分按 9.1、9.2、9.3与9.4的顺序逐层展开。
 
 ### 9.1
 
@@ -1080,6 +1094,8 @@ quadrantChart
 
 ## 十三、定理推理链
 
+「定理推理链」部分的核心主题是定理一致性矩阵（惯用法谱系专集），本节展开说明。
+
 ### 定理一致性矩阵（惯用法谱系专集）
 
 | 编号 | 定理 | 前提 | 结论 | L4 公理依赖 | 失效条件 | 错误码映射 |
@@ -1095,6 +1111,8 @@ quadrantChart
 ---
 
 ## 十四、相关概念链接（L0-L7 映射）
+
+「相关概念链接（L0-L7 映射）」部分包含 L0-L7 纵向映射 与 相关概念 两条主线，本节依次说明。
 
 ### L0-L7 纵向映射
 
@@ -1170,6 +1188,8 @@ quadrantChart
 >
 
 ## 十、边界测试：惯用法谱系的编译错误
+
+本节从边界测试：`unwrap` 的滥用（运行时 panic）、边界测试：`clone` 的隐式成本（逻辑错误）、边界测试：Clippy 警告的编译错误等价（编译错误）、边界测试：`String` 与 `&str` 的类型不匹配（编译错误）等8个方面切入，剖析「边界测试：惯用法谱系的编译错误」的核心内容。
 
 ### 10.1 边界测试：`unwrap` 的滥用（运行时 panic）
 
@@ -1331,6 +1351,8 @@ fn main() {
 - **定理**: Rust 惯用法谱系全景（Idioms Spectrum） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：`Default` trait 的用途是什么？如何为自定义类…、测验 2：`AsRef` 与 `Borrow` trait 在语义上有…、测验 3：什么是"早返回"（Early Return）模式？Rust…、测验 4：`todo!()` 和 `unimplemented!()`…等5个方面的顺序逐层展开。
 
 ### 测验 1：`Default` trait 的用途是什么？如何为自定义类型实现它？（理解层）
 

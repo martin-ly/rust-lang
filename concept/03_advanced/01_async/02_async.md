@@ -2720,6 +2720,8 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 ## 十五、Stream trait 与流处理语义
 
+本节从 Stream = 异步 Iterator、Stream 与 Dataflow Model 的映射与从 Stream 到 differential-dataflow切入，剖析「Stream trait 与流处理语义」的核心内容。
+
 ### 15.1 Stream = 异步 Iterator
 
 `Stream` trait 是 Rust 异步编程中对**流（连续数据序列）**的核心抽象：
@@ -2769,6 +2771,8 @@ differential-dataflow (增量计算)
 ---
 
 ## 十六、边界测试：异步规则的编译错误
+
+「边界测试：异步规则的编译错误」涉及边界测试：非 Send 类型跨 await 点（编译错误）、边界测试：在 async 块中调用阻塞函数（逻辑错误）、边界测试：递归 async fn（编译错误）、边界测试：在 async 块中借用局部变量生命周期不足（编译错误）等6个方面，本节逐一说明其要点。
 
 ### 16.1 边界测试：非 Send 类型跨 await 点（编译错误）
 
@@ -2979,6 +2983,8 @@ fn main() {}
 ---
 
 ## 嵌入式测验
+
+理解「嵌入式测验」需要把握测验 1：async fn 的本质（记忆层）、测验 2：`.await` 的语义（理解层）、测验 3：运行时选择（应用层）与测验 4：取消安全（分析层），本节依次展开。
 
 ### 测验 1：async fn 的本质（记忆层）
 
@@ -3244,6 +3250,8 @@ async fn safe_operation() -> std::io::Result<()> {
 ---
 
 ## 1. 基础概念
+
+「基础概念」涉及 Q1.1: `async/await` 和普通的线程有什么区别？我应该…、Q1.2: 什么时候不应该使用 `async/await`？、Q1.3: `Future` 什么时候开始执行？与Q1.4: `.await` 和 `poll()` 有什么区别？，本节逐一说明其要点。
 
 ### Q1.1: `async/await` 和普通的线程有什么区别？我应该用哪个？
 

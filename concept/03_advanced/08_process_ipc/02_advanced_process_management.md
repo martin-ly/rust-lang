@@ -133,6 +133,8 @@ Created → Running → Waiting → Terminated
 
 ## 4. 资源限制与配额管理
 
+「资源限制与配额管理」部分包含进程级资源限制 与 配额管理系统 两条主线，本节依次说明。
+
 ### 4.1 进程级资源限制
 
 在 Unix 平台上，可通过 `nix::sys::resource::setrlimit` 设置：

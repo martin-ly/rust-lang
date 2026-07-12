@@ -107,6 +107,8 @@ registry = "sparse+https://crates.company.com/index/"
 
 ## 四、本地 Registry 与 Directory Source
 
+本节围绕「本地 Registry 与 Directory Source」展开，覆盖 Local Registry 与  Directory Source 两个方面。
+
 ### 4.1 Local Registry
 
 Local registry 是一个预下载的 `.crate` 文件集合 + 索引目录，适合内网或审计场景：
@@ -216,6 +218,8 @@ serde = { path = "../serde-fix" }
 ---
 
 ## 嵌入式测验
+
+「嵌入式测验」涉及测验 1：Source replacement 的核心约束是什么？、测验 2：`cargo vendor` 生成的 vendor 目录属于…、测验 3：Source replacement 与 `[patch]`…与测验 4：Git source replacement 能替换 cra…，本节逐一说明其要点。
 
 ### 测验 1：Source replacement 的核心约束是什么？
 

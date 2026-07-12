@@ -35,6 +35,8 @@
 
 ## 一、权威定义
 
+本节围绕「权威定义」展开，覆盖 Wikipedia 权威定义 与  Cargo / crates.io 官方定义 两个方面。
+
 ### 1.1 Wikipedia 权威定义
 
 > **[Wikipedia: Library (computing)](https://en.wikipedia.org/wiki/Library_(computing))** A library is a collection of non-volatile resources used by computer programs, often for software development. These may include configuration data, documentation, help data, message templates, pre-written code and subroutines, classes, values or type specifications.
@@ -56,6 +58,8 @@
 ---
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：serde 的核心机制（理解层）、测验 2：tokio 运行时选择（应用层）、测验 3：thiserror vs anyhow（应用层）、测验 4：bytes crate 的设计目标（分析层）等5个方面。
 
 ### 测验 1：serde 的核心机制（理解层）
 
@@ -436,6 +440,8 @@ graph TD
 
 ### 4.11 核心并发 Crate 深度解析
 
+本节围绕「核心并发 Crate 深度解析」展开，依次讨论 crossbeam：无锁并发原语、rayon：数据并行迭代器、parking_lot：轻量级同步原语与dashmap：并发 HashMap。
+
 #### crossbeam：无锁并发原语
 
 **[crossbeam](https://docs.rs/crossbeam/latest/crossbeam/)** A set of tools for concurrent programming in Rust.
@@ -623,6 +629,8 @@ graph TD
 ---
 
 ## 七、扩展内容：选型方法论与趋势
+
+本节围绕「扩展内容：选型方法论与趋势」展开，依次讨论 crates.io 生态健康度指标、2025-2026 生态趋势与学术论文引用。
 
 ### 7.1 crates.io 生态健康度指标
 
@@ -1188,6 +1196,8 @@ graph TD
 > **相关文件**: [问题图谱](../../00_meta/04_navigation/problem_graph.md) · [异步（Async）](../../03_advanced/01_async/02_async.md) · [并发](../../03_advanced/00_concurrency/01_concurrency.md)
 
 ## 十、边界测试：核心 crate 的编译错误
+
+「边界测试：核心 crate 的编译错误」部分按边界测试：`serde` 的派生宏与字段缺失（编译错误）、边界测试：`tokio` 运行时未启动时调用 `spawn`（运行时…、边界测试：`thiserror` 与 `anyhow` 的混用（编译错…、边界测试：`tokio` 与 `Tokio` 的 channel 不兼…等7个方面的顺序逐层展开。
 
 ### 10.1 边界测试：`serde` 的派生宏与字段缺失（编译错误）
 

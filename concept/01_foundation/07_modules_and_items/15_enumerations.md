@@ -184,6 +184,8 @@ pub enum ApiError {
 
 ## 六、反例与边界测试
 
+「反例与边界测试」涉及未处理 `None`、错误使用 `if let` 处理 Result、枚举变体携带的所有权移动与判定表：枚举建模与匹配处置，本节逐一说明其要点。
+
 ### 6.1 未处理 `None`
 
 ```rust,compile_fail

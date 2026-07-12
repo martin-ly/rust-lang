@@ -28,6 +28,8 @@
 
 ## 一、权威定义
 
+本节聚焦「权威定义」，核心内容为 Wikipedia 权威定义。
+
 ### 1.1 Wikipedia 权威定义
 
 > **[Wikipedia: Memory safety](https://en.wikipedia.org/wiki/Memory_safety)** Memory safety is the state of being protected from various software bugs and security vulnerabilities when dealing with memory access, such as buffer overflows and dangling pointers.
@@ -142,6 +144,8 @@ graph TD
 
 ## 三、边界条件总表
 
+本节围绕「边界条件总表」展开，依次讨论内存安全边界、并发安全边界与类型安全边界。
+
 ### 2.1 内存安全边界
 >
 
@@ -186,6 +190,8 @@ graph TD
 ---
 
 ## 四、失效条件分类学
+
+本节从按失效层级分类 与 按后果严重性分类 两个层面剖析「失效条件分类学」。
 
 ### 3.1 按失效层级分类
 
@@ -825,6 +831,8 @@ graph TD
 
 ## 十、边界测试：安全边界的编译错误
 
+本节从边界测试：Safe 与 Unsafe 的边界穿越（编译错误）、边界测试：`unsafe impl` 的 trait 契约（编译错误）、边界测试：FFI 边界的安全封装缺失（运行时 UB）、边界测试：`unsafe` 代码块的粒度与审计（编译错误/逻辑错误）等6个方面切入，剖析「边界测试：安全边界的编译错误」的核心内容。
+
 ### 10.1 边界测试：Safe 与 Unsafe 的边界穿越（编译错误）
 
 ```rust,compile_fail
@@ -945,6 +953,8 @@ fn main() {
 > **修正**: `unsafe` 函数的**契约**（contract）是调用者和实现者之间的协议：1) 调用者保证前置条件（指针有效、生命周期（Lifetimes）足够、无数据竞争）；2) 实现者保证后置条件（返回值有效、不破坏内存安全（Memory Safety））。文档化：`/// SAFETY: ptr must be non-null and properly aligned.`。标准库的 unsafe 函数都有详细的 `SAFETY` 注释。违反契约：调用者责任（即使 unsafe 块内部 panic，也是调用者提供了无效输入）。这与 C 的函数（无契约概念，无编译期检查）或 Java 的 `native` 方法（JNI 边界，JVM 不验证 native 代码）不同——Rust 的 `unsafe` 是显式的契约标记，社区强烈鼓励文档化。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html)] · [来源: [Rust Reference — Unsafe Functions](https://doc.rust-lang.org/reference/items/functions.html#unsafe-functions)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：Rust 的 `unsafe` 块定义了什么边界？（理解层）、测验 2：为什么 `unsafe` 代码应该被限制在最小面积？（理解层）、测验 3：`unsafe fn` 与 `unsafe` 块有什么区别？…、测验 4：在审计 unsafe 代码时，应该关注哪些核心问题？（理解层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：Rust 的 `unsafe` 块定义了什么边界？（理解层）
 

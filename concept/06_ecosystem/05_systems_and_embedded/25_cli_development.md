@@ -173,6 +173,8 @@ fn main() {
 
 ## 二、关键 crate
 
+理解「关键 crate」需要把握 clap、交互与输出与配置管理，本节依次展开。
+
 ### 2.1 clap
 >
 
@@ -316,6 +318,8 @@ fn default_host() -> String { "localhost".to_string() }
 
 ## 三、打包与分发
 
+本节将「打包与分发」分解为若干主题：单一二进制、安装方式与Shell 补全与文档生成。
+
 ### 3.1 单一二进制
 >
 
@@ -438,6 +442,8 @@ fn print_man_page(cmd: Command) {
 ---
 
 ## 四、反命题与边界分析
+
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
 
 ### 4.1 反命题树
 >
@@ -604,6 +610,8 @@ fn main() {
 
 ## 十、边界测试：CLI 开发的编译错误
 
+本节围绕「边界测试：CLI 开发的编译错误」展开，依次讨论边界测试：`clap` 派生宏的字段类型约束（编译错误）、边界测试：信号处理与异步代码的交互（编译错误）、边界测试：终端颜色检测与 `NO_COLOR` 标准（运行时显示问题）、边界测试：ANSI 颜色代码与 Windows 旧版控制台兼容性问题（…等6个方面。
+
 ### 10.1 边界测试：`clap` 派生宏的字段类型约束（编译错误）
 
 ```rust,compile_fail
@@ -708,6 +716,8 @@ fn main() {
 - **定理**: Rust CLI 开发生态 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：`clap` crate 在 Rust CLI 开发中提供什…、测验 2：`indicatif` 和 `console` crate…、测验 3：为什么 Rust 的 CLI 二进制文件通常比 Python…、测验 4：`shell completion`（命令自动补全）在 Ru…等5个方面，本节依次展开。
 
 ### 测验 1：`clap` crate 在 Rust CLI 开发中提供什么功能？（理解层）
 

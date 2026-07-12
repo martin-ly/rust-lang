@@ -34,6 +34,8 @@
 
 ## 一、Result 与 Option
 
+本节将「Result 与 Option」分解为若干主题： Q1. 以下代码的输出是什么？、Q2. 以下代码能否编译？`?` 运算符的作用是什么？与Q3. 以下代码能否编译？解释 `unwrap` 和 `expect`…。
+
 ### Q1. 以下代码的输出是什么？
 
 ```rust
@@ -172,6 +174,8 @@ let m = bad.parse()?;                    // 传播错误
 
 ## 二、Option 组合子
 
+本节围绕「Option 组合子」展开，覆盖 Q4. 以下代码的输出是什么？ 与  Q5. 以下代码能否编译？`if let` 与 `match` 在 O… 两个方面。
+
 ### Q4. 以下代码的输出是什么？
 
 ```rust
@@ -279,6 +283,8 @@ println!("Mode: {mode}");
 
 ## 三、Panic 与不可恢复错误
 
+「Panic 与不可恢复错误」部分包含 Q6. 以下代码能否编译？`panic!` 与 `Result` 的区… 与  Q7. 以下代码的输出是什么？ 两条主线，本节依次说明。
+
 ### Q6. 以下代码能否编译？`panic!` 与 `Result` 的区别是什么？
 
 ```rust
@@ -369,6 +375,8 @@ fn main() {
 
 ## 四、自定义错误
 
+本节聚焦「自定义错误」，核心内容为 Q8. 以下代码能否编译？解释 `From` trait 在错误处理中…。
+
 ### Q8. 以下代码能否编译？解释 `From` trait 在错误处理中的作用
 
 ```rust
@@ -433,6 +441,8 @@ let content = match std::fs::read_to_string("config.txt") {
 ---
 
 ## 五、综合应用
+
+本节从 Q9. 以下代码的输出是什么？ 与  Q10. 以下代码能否编译？解释 `Result` 的 `map` 和… 两个层面剖析「综合应用」。
 
 ### Q9. 以下代码的输出是什么？
 
@@ -571,6 +581,8 @@ result
 > **权威来源**: [The Rust Programming Language — Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust Reference — Errors](https://doc.rust-lang.org/reference/items/functions.html) · [std::result 文档](https://doc.rust-lang.org/std/result/enum.Result.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：本文件是 测验：错误处理（试点扩展） 的专项测验集。这类测验…、测验 2：在 测验：错误处理（试点扩展） 的测验中，若遇到不确定答案的…与测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层）切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：本文件是 测验：错误处理（试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 

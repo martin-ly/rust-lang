@@ -131,6 +131,8 @@ take_ownership(s);      // s 的所有权移入函数
 
 ## 二、副作用模型（Side Effects Model）
 
+「副作用模型（Side Effects Model）」部分按什么是副作用？、副作用与并发的关系与与其他语言的对比的顺序逐层展开。
+
 ### 2.1 什么是副作用？
 
 **纯函数**：给定相同输入，永远返回相同输出，且不修改外部状态。
@@ -251,6 +253,8 @@ let s2 = s1;                      // s2 → H1, s1 失效
 
 ## 四、Continuation 与 CPS
 
+「Continuation 与 CPS」涉及什么是 Continuation？、CPS：Continuation Passing Style、async/await 的本质：CPS 变换与与操作系统线程的对比，本节逐一说明其要点。
+
 ### 4.1 什么是 Continuation？
 
 **Continuation** 是"程序剩余部分的抽象"。每个表达式都有一个隐式的 continuation："计算出结果后，接下来做什么"。
@@ -341,6 +345,8 @@ impl Future for FetchDataFuture {
 
 ## 五、结构化程序定理
 
+理解「结构化程序定理」需要把握程序可以由三种结构组成、Rust 的控制流安全性与为什么 `goto` 有害？，本节依次展开。
+
 ### 5.1 程序可以由三种结构组成
 
 1966 年，Corrado Böhm 和 Giuseppe Jacopini 证明：**任何程序都可以仅用三种控制结构表达**：
@@ -415,6 +421,8 @@ unsafe {
 > - [Rust Async Book — Async/Await Primer](https://rust-lang.github.io/async-book//01_getting_started/01_chapter.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：静态类型检查与动态类型检查的核心区别是什么？Rust 属于哪…、测验 2：什么是"语法"（Syntax）和"语义"（Semantics…、测验 3："引用透明"（Referential Transparenc…、测验 4：什么是"副作用"（Side Effect）？为什么副作用使程…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：静态类型检查与动态类型检查的核心区别是什么？Rust 属于哪一类？（理解层）
 

@@ -137,6 +137,8 @@ indexmap = { version = "2", public = false }
 
 ## 三、传递依赖可见性与 feature 统一
 
+本节围绕「传递依赖可见性与 feature 统一」展开，覆盖传递可见性 与  feature 统一规则 两个方面。
+
 ### 3.1 传递可见性
 
 ```text
@@ -204,6 +206,8 @@ flowchart TD
 ---
 
 ## 七、迁移与实践
+
+本节围绕「迁移与实践」展开，依次讨论在现有 workspace 中逐步标注、与 `workspace.dependencies` 协同与可运行示例。
 
 ### 7.1 在现有 workspace 中逐步标注
 

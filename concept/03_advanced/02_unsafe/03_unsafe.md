@@ -1263,6 +1263,8 @@ fn safe_raw_pointer() {
 
 ## 十一、待补充与演进方向（TODOs）
 
+本节围绕「待补充与演进方向（TODOs）」展开，依次讨论补充章节：FFI 与 repr 属性完整规范、补充章节：Miri 的使用方法与限制、补充章节：`std::ptr::read/write` vs `*pt…、补充章节：`NonNull<T>` / `Unique<T>` / `…等5个方面。
+
 ### 补充章节：FFI 与 repr 属性完整规范
 
 > FFI 是 unsafe 最常见的使用场景之一。以下补充 ABI、内存布局和对齐属性的完整规范，作为 unsafe 实践的具体延伸。
@@ -1543,6 +1545,8 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
 
 #### 语义精确定义
 
+「语义精确定义」部分按 `std::ptr::read<T>(src: *const T) -…、`std::ptr::write<T>(dst: *mut T, sr…与`*ptr` 解引用（`DerefMut`）的顺序逐层展开。
+
 ##### `std::ptr::read<T>(src: *const T) -> T`
 
 从 `src` 指向的内存位置执行 **bitwise copy（按位浅拷贝）**，返回一个类型为 `T` 的值。
@@ -1635,6 +1639,8 @@ unsafe { std::ptr::read(p.as_ptr()); }
 
 #### 典型使用场景
 
+「典型使用场景」部分包含 `ptr::read`： `Vec::pop` 内部实现与 `Manu… 与  `ptr::write`：未初始化内存填充与 `MaybeUninit… 两条主线，本节依次说明。
+
 ##### `ptr::read`： `Vec::pop` 内部实现与 `ManuallyDrop` 配合
 
 Rust 标准库中 `Vec::pop` 的核心逻辑正是 `ptr::read` 的典型应用——从数组尾部"取出"值，同时避免触发尾部元素的 `drop`（因为该位置逻辑上已被截断，后续 `push` 会覆盖它）。
@@ -1716,6 +1722,8 @@ unsafe fn construct_in_place<T>(ptr: *mut T, f: impl FnOnce() -> T) {
 ---
 
 #### 危险模式与常见错误
+
+本节围绕「危险模式与常见错误」展开，依次讨论危险模式 1：`ptr::read` 后原位置未失效导致的 doubl…、危险模式 2：`ptr::write` 覆盖已初始化值导致的内存泄漏与危险模式 3：对未初始化内存使用 `*ptr = val`。
 
 ##### 危险模式 1：`ptr::read` 后原位置未失效导致的 double-free
 
@@ -2650,6 +2658,8 @@ fn main() {
 
 ## 十五、内存模型深度对比：C++ / Java / Rust
 
+「内存模型深度对比：C++ / Java / Rust」部分按内存模型的本质、C++ Memory Model：RC11 与 Promising S…、Java Memory Model：Happens-Before 与…、Rust 内存模型演进等5个方面的顺序逐层展开。
+
 ### 15.1 内存模型的本质
 
 内存模型（Memory Model）定义了多线程程序中**内存操作可见性**的规则。它回答：当线程 A 写入变量 `x` 后，线程 B 何时能读到新值？
@@ -2794,6 +2804,8 @@ Gheri & Watt 提出了 **Provenance** 模型：
 ---
 
 ## 十六、边界测试：Unsafe 代码的编译错误与运行时灾难
+
+本节将「边界测试：Unsafe 代码的编译错误与运行时灾难」分解为若干主题：边界测试：裸指针解引用前的空检查（编译错误）、边界测试：将 &T 转换为 &mut T（编译错误）、边界测试：无效 UTF-8 的 str::from_utf8_unch…、边界测试：通过 `&T` 获取 `&mut T`（编译错误）等7个方面。
 
 ### 16.1 边界测试：裸指针解引用前的空检查（编译错误）
 
@@ -3079,6 +3091,8 @@ assert!(!raw.is_null());  // alloc 返回的指针保证 non-null
 ---
 
 ## 嵌入式测验
+
+「嵌入式测验」部分按测验 1：unsafe 块的能力（记忆层）、测验 2：unsafe fn 与 unsafe 块的区别（理解层）、测验 3：裸指针安全解引用（应用层）与测验 4：unsafe impl 的契约（分析层）的顺序逐层展开。
 
 ### 测验 1：unsafe 块的能力（记忆层）
 

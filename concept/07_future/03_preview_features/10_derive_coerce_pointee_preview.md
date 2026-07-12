@@ -77,6 +77,8 @@
 
 ## 一、核心概念
 
+理解「核心概念」需要把握问题：自定义智能指针的样板代码、CoerceUnsized 与 DispatchFromDyn与`#[derive(CoercePointee)]` 方案，本节依次展开。
+
 ### 1.1 问题：自定义智能指针的样板代码
 
 在 Rust 中，自定义智能指针（如 `Rc<T>`、`Box<T>` 的替代实现）需要手动实现 `CoerceUnsized` 和 `DispatchFromDyn` 才能支持**自动类型强制**（如 `SmartPtr<T>` → `SmartPtr<dyn Trait>`）：
@@ -206,6 +208,8 @@ fn main() {
 
 ## 二、技术细节
 
+本节从派生宏的展开逻辑、约束条件与与现有 Trait 的交互切入，剖析「技术细节」的核心内容。
+
 ### 2.1 派生宏的展开逻辑
 
 ```text
@@ -302,6 +306,8 @@ graph LR
 ---
 
 ## 四、反命题与边界分析
+
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
 
 ### 4.1 反命题树
 >
@@ -404,6 +410,8 @@ graph TD
 ## 权威来源索引
 
 ## 十、边界测试：CoercePointee 派生的编译错误
+
+本节从边界测试：非 `#[repr(transparent)]` 类型的 C…、边界测试：多字段 struct 的 CoercePointee 尝试（…、边界测试：CoercePointee 与自定义 DST 的元数据（编译…、边界测试：`PhantomData` 与 CoercePointee…等6个方面切入，剖析「边界测试：CoercePointee 派生的编译错误」的核心内容。
 
 ### 10.1 边界测试：非 `#[repr(transparent)]` 类型的 CoercePointee（编译错误）
 
@@ -557,6 +565,8 @@ fn main() {}
 - **定理**: 派生 CoercePointee 预研：智能指针的自动类型强制 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：`CoercePointee` trait 的作用是什么？它…、测验 2：为什么自定义智能指针默认不能强制转换为 `dyn Trait…、测验 3：`#[derive(CoercePointee)]`需要满…、测验 4：`CoercePointee` 与 `CoerceUnsiz…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：`CoercePointee` trait 的作用是什么？它解决了智能指针的什么问题？（理解层）
 

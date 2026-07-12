@@ -34,6 +34,8 @@
 
 ## 1. 当前项目概念层级（L0-L7）
 
+本节将「当前项目概念层级（L0-L7）」分解为若干主题： L00（62 篇）、L01（53 篇）、L02（36 篇）、L03（37 篇）等9个方面。
+
 ### L00（62 篇）
 
 - `concept/00_meta/00_framework/bloom_taxonomy.md` — Bloom Taxonomy（Bloom 分类法）

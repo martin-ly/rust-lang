@@ -786,6 +786,8 @@ Rust 实现模式:
 
 ## 七、反命题与边界分析
 
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+
 ### 7.1 反命题树
 
 ```mermaid
@@ -1086,6 +1088,8 @@ unsafe extern "C" fn touch_isr() {
 - **定理**: Rust 嵌入式图形系统开发 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：`embedded-graphics` crate 在 Ru…、测验 2：为什么嵌入式图形库需要支持 `no_std`？（理解层）、测验 3：`lvgl`（LittlevGL）的 Rust 绑定如何在资…、测验 4：帧缓冲（Frame Buffer）驱动在嵌入式图形中如何工作…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：`embedded-graphics` crate 在 Rust 嵌入式显示中提供什么功能？（理解层）
 

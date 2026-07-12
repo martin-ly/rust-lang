@@ -207,6 +207,8 @@
 
 ## 一、权威定义（Definition）
 
+本节围绕「权威定义（Definition）」展开，依次讨论 Wikipedia 对齐定义、TRPL 与 RFC 官方定义与形式化定义。
+
 ### 1.1 Wikipedia 对齐定义
 
 > **[Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class)** A type class is a type system construct that supports ad hoc polymorphism.
@@ -253,6 +255,8 @@ Trait 作为逻辑命题:
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
+
+「概念属性矩阵（Attribute Matrix）」涉及 Trait 类型分类矩阵、Trait vs 其他语言机制对比与Orphan Rule 判定矩阵，本节逐一说明其要点。
 
 ### 2.1 Trait 类型分类矩阵
 
@@ -570,6 +574,8 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 ---
 
 ## 五、示例与反例（Examples & Counter-examples）
+
+本节从正确示例：Trait 定义与实现、正确示例：关联类型、反例：违反 Orphan Rule（E0117）、反例：重叠实现（E0119）等8个方面切入，剖析「示例与反例（Examples & Counter-exam…」的核心内容。
 
 ### 5.1 正确示例：Trait 定义与实现
 
@@ -1367,6 +1373,8 @@ graph TD
 ---
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
+
+理解「边界极限测试代码（Boundary Limit Tests）」需要把握测试 1: Orphan Rule + Coherence 多层嵌套边界、测试 2: Trait 对象安全 + dyn/impl 分发边界、测试 3: Blanket impl + 关联类型递归 + Auto…与编译错误示例，本节依次展开。
 
 ### 7.1 测试 1: Orphan Rule + Coherence 多层嵌套边界
 
@@ -2259,6 +2267,8 @@ impl !Foo for Bar<String> {}     // ❌ 错误：与正向 impl 重叠
 
 ## 十二、补充章节：Next-generation Trait Solver（2026 旗舰稳定化目标）
 
+本节围绕「补充章节：Next-generation Trait So…」展开，依次讨论为什么需要新 Solver？、Next Solver 的核心改进、对语言特性的解锁效应与迁移准备。
+
 ### 12.1 为什么需要新 Solver？
 
 Rust 的现有 trait solver（`rustc_trait_selection`）自 1.0 以来已服务十余年，但在复杂泛型场景下积累了大量技术债务：
@@ -2316,6 +2326,8 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 ---
 
 ## 十一、待补充与演进方向（TODOs）
+
+理解「待补充与演进方向（TODOs）」需要把握 `impl Trait` 在 Trait 定义中的使用（RPITIT…、`Const Trait` 与 `~const` 实验特性、`#[fundamental]` Attribute 与 Orphan…、Specialization（`min_specialization`…等6个方面，本节依次展开。
 
 ### 11.1 `impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）
 
@@ -2538,6 +2550,8 @@ fn main() {}
 ---
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：Trait 定义与实现（理解层）、测验 2：Trait Bound（应用层）、测验 3：默认实现（应用层）、测验 4：Orphan Rule（分析层）等5个方面的顺序逐层展开。
 
 ### 测验 1：Trait 定义与实现（理解层）
 
@@ -2817,6 +2831,8 @@ trait Drawable {
 
 ## 📐 知识结构
 
+本节将「知识结构」分解为若干主题：概念定义、属性特征、关系连接与思维导图。
+
 ### 概念定义
 
 **Trait 系统指南 (Trait System Guide)**:
@@ -2909,6 +2925,8 @@ Trait 系统指南
 ---
 
 ## 1. Trait 概述
+
+本节从什么是 Trait 与  Trait 的作用 两个层面剖析「Trait 概述」。
 
 ### 1.1 什么是 Trait
 

@@ -96,6 +96,8 @@
 
 ### A
 
+本节从 `async` / `await` 与  `Arc<T>` 两个层面剖析「A」。
+
 #### `async` / `await`
 
 **定义**: 协作式多任务的语法糖，`async fn` 编译为 `enum Future` 状态机
@@ -119,6 +121,8 @@ async fn foo() -> i32 { 42 }
 **深入**: [`03_memory_management.md`](../../02_intermediate/02_memory_management/03_memory_management.md)
 
 ### B
+
+「B」部分按 `Box<T>`、Borrowing（借用）与Builder Pattern的顺序逐层展开。
 
 #### `Box<T>`
 
@@ -161,6 +165,8 @@ HttpRequestBuilder::new()
 
 ### C
 
+「C」涉及 `const` / `const fn`、`Copy` Trait与`crossbeam` / Channel，本节逐一说明其要点。
+
 #### `const` / `const fn`
 
 **定义**: 编译期常量 / 编译期可执行的函数
@@ -196,6 +202,8 @@ let p2 = p1;  // p1 仍可用（Copy）
 
 ### D
 
+「D」部分包含 `Drop` Trait 与  `dyn Trait` 两条主线，本节依次说明。
+
 #### `Drop` Trait
 
 **定义**: 资源释放的钩子，值离开作用域时自动调用
@@ -222,6 +230,8 @@ impl Drop for MyType {
 [来源: [Rust Reference — Drop](https://doc.rust-lang.org/reference/destructors.html) · [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 
 ### E
+
+「E」部分包含 `enum`（代数数据类型） 与  Error Handling（`Result<T, E>`） 两条主线，本节依次说明。
 
 #### `enum`（代数数据类型）
 
@@ -256,6 +266,8 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 
 ### F
 
+本节围绕「F」展开，覆盖 `Future` Trait 与  FFI（Foreign Function Interface） 两个方面。
+
 #### `Future` Trait
 
 **定义**: 异步计算的抽象，`poll` 方法驱动状态机推进
@@ -288,6 +300,8 @@ extern "C" {
 
 ### G
 
+「G」部分包含 `Generic<T>` 与  `Generic Associated Types (GATs)` 两条主线，本节依次说明。
+
 #### `Generic<T>`
 
 **定义**: 参数多态，编译期单态化为具体类型，零运行时开销
@@ -319,6 +333,8 @@ trait LendingIterator {
 
 ### H
 
+「H」部分包含 `HashMap<K, V>` 与  `HRTB`（Higher-Ranked Trait Bounds） 两条主线，本节依次说明。
+
 #### `HashMap<K, V>`
 
 **定义**: 基于 Robin Hood 哈希的哈希表，默认使用 SipHash 防 HashDoS
@@ -335,6 +351,8 @@ trait LendingIterator {
 **深入**: [`02_type_theory.md`](../../04_formal/00_type_theory/02_type_theory.md)
 
 ### I
+
+「I」部分包含 `impl Trait` 与  Interior Mutability（内部可变性） 两条主线，本节依次说明。
 
 #### `impl Trait`
 
@@ -370,6 +388,8 @@ fn make_iter() -> impl Iterator<Item = i32> {
 
 ### L
 
+本节围绕「L」展开，覆盖 Lifetimes（生命周期） 与  `Lock` / `Mutex<T>` 两个方面。
+
 #### Lifetimes（生命周期）
 
 **定义**: 引用的有效期限，编译期约束引用不悬垂
@@ -394,6 +414,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 **深入**: [`01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md)
 
 ### M
+
+本节围绕「M」展开，覆盖 `macro_rules!` 与  `Move` Semantics 两个方面。
 
 #### `macro_rules!`
 
@@ -430,6 +452,8 @@ let s2 = s1;  // s1 被 move，之后不可用
 
 ### N
 
+本节从 Newtype Pattern 与  `no_std` 两个层面剖析「N」。
+
 #### Newtype Pattern
 
 **定义**: 用元组结构体包装已有类型，实现零成本抽象的类型区分
@@ -453,6 +477,8 @@ struct Kilometers(u32);
 **深入**: [`04_application_domains.md`](../../06_ecosystem/06_data_and_distributed/04_application_domains.md)
 
 ### O
+
+「O」部分包含 `Option<T>` 与  `Ownership` 两条主线，本节依次说明。
 
 #### `Option<T>`
 
@@ -479,6 +505,8 @@ let y = x.unwrap_or(0);  // 安全取值
 **深入**: [`01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 
 ### P
+
+本节从 `Pin<P<T>>` 与  `PhantomData<T>` 两个层面剖析「P」。
 
 #### `Pin<P<T>>`
 
@@ -509,6 +537,8 @@ struct MyPtr<T> { ptr: *mut (), _marker: PhantomData<T> }
 
 ### R
 
+本节围绕「R」展开，覆盖 `Rc<T>` / `Arc<T>` 与  `Result<T, E>` 两个方面。
+
 #### `Rc<T>` / `Arc<T>`
 
 **定义**: 引用计数共享所有权，`Arc` 是 `Rc` 的原子化线程安全版本
@@ -533,6 +563,8 @@ let val = may_fail()?;  // ? 传播错误
 **深入**: [`04_error_handling.md`](../../02_intermediate/03_error_handling/04_error_handling.md)
 
 ### S
+
+本节从 `Send` / `Sync`、`Sized` / `?Sized`与`std::mem`切入，剖析「S」的核心内容。
 
 #### `Send` / `Sync`
 
@@ -562,6 +594,8 @@ let val = may_fail()?;  // ? 传播错误
 **深入**: [`03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md)
 
 ### T
+
+本节围绕「T」展开，覆盖 `Trait` 与  Typestate Pattern 两个方面。
 
 #### `Trait`
 
@@ -594,6 +628,8 @@ impl Door<Closed> { fn open(self) -> Door<Open> { ... } }
 
 ### U
 
+「U」部分的核心主题是 `Unsafe Rust`，本节展开说明。
+
 #### `Unsafe Rust`
 
 **定义**: 打开 5 个特定逃逸门：原始指针、unsafe 函数、extern 函数、静态变量、union
@@ -612,6 +648,8 @@ unsafe {
 
 ### V
 
+本节专门讨论「V」下的 `Vec<T>`。
+
 #### `Vec<T>`
 
 **定义**: 动态数组，堆分配，连续内存，O(1) 随机访问，O(1) 平摊尾部插入
@@ -629,6 +667,8 @@ v.insert(1, 5);      // O(n)
 **深入**: [`04_type_system.md`](../../01_foundation/02_type_system/04_type_system.md)
 
 ### W
+
+「W」部分的核心主题是 `Waker`，本节展开说明。
 
 #### `Waker`
 
@@ -780,6 +820,8 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 > **内容分级**: [综述级]
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：本文档《Rust 概念速查卡片（Quick Referenc…、测验 2：《Rust 概念速查卡片（Quick Reference）》…与测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）的顺序逐层展开。
 
 ### 测验 1：本文档《Rust 概念速查卡片（Quick Reference）》在 Rust 知识体系中属于哪一层级的元数据？（理解层）
 

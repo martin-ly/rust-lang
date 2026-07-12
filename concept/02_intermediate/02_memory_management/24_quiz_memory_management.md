@@ -45,6 +45,8 @@
 
 ## 一、Box 与堆分配
 
+「Box 与堆分配」部分包含 Q1. 以下代码能否编译？`Box::new` 与栈分配的区别是什么？ 与  Q2. 以下代码能否编译？解释递归类型为什么需要 `Box` 两条主线，本节依次说明。
+
 ### Q1. 以下代码能否编译？`Box::new` 与栈分配的区别是什么？
 
 ```rust
@@ -138,6 +140,8 @@ fn main() {
 ---
 
 ## 二、Rc 与 Arc
+
+「Rc 与 Arc」部分包含 Q3. 以下代码能否编译？`Rc` 和 `Arc` 的区别是什么？ 与  Q4. 以下代码能否编译？`Rc<RefCell<T>>` 模式的作用… 两条主线，本节依次说明。
 
 ### Q3. 以下代码能否编译？`Rc` 和 `Arc` 的区别是什么？
 
@@ -259,6 +263,8 @@ let b2 = ref_cell.borrow_mut(); // ❌ 运行时 panic！
 
 ## 三、内部可变性模式
 
+本节围绕「内部可变性模式」展开，覆盖 Q5. 以下代码能否编译？`Cell<T>` 与 `RefCell<T… 与  Q6. 以下代码存在什么问题？这是 `Mutex` 使用的经典陷阱 两个方面。
+
 ### Q5. 以下代码能否编译？`Cell<T>` 与 `RefCell<T>` 的区别是什么？
 
 ```rust
@@ -378,6 +384,8 @@ println!("{}", *m.lock().unwrap());
 ---
 
 ## 四、Drop 与资源管理
+
+「Drop 与资源管理」部分包含 Q7. 以下代码的输出是什么？解释自定义 `Drop` 的行为 与  Q8. 以下代码能否编译？`std::mem::drop` 与 `Dr… 两条主线，本节依次说明。
 
 ### Q7. 以下代码的输出是什么？解释自定义 `Drop` 的行为
 
@@ -502,6 +510,8 @@ println!("{:?}", s); // ❌ 编译错误：use of moved value: s
 ---
 
 ## 五、综合应用
+
+「综合应用」部分包含 Q9. 以下代码能否编译？这是 `Weak` 指针的经典用例 与  Q10. 以下代码的输出是什么？解释 `Deref` 和 `Deref… 两条主线，本节依次说明。
 
 ### Q9. 以下代码能否编译？这是 `Weak` 指针的经典用例
 
@@ -665,6 +675,8 @@ hello(&(*m)[..]);
 > **权威来源**: [The Rust Programming Language — Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html) · [Rustonomicon — Memory Layout](https://doc.rust-lang.org/nomicon/index.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：本文件是 测验：内存管理（L2 试点扩展） 的专项测验集。这…、测验 2：在 测验：内存管理（L2 试点扩展） 的测验中，若遇到不确定…与测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层）。
 
 ### 测验 1：本文件是 测验：内存管理（L2 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 

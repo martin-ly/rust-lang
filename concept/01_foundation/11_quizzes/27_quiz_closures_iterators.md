@@ -31,6 +31,8 @@
 
 ## 一、闭包基础
 
+理解「闭包基础」需要把握 Q1. 以下代码能否编译？解释闭包的类型推断、Q2. 以下代码的输出是什么？解释闭包捕获环境的方式与Q3. 以下代码能否编译？`move` 闭包的作用是什么？，本节依次展开。
+
 ### Q1. 以下代码能否编译？解释闭包的类型推断
 
 ```rust,ignore
@@ -193,6 +195,8 @@ move |y| x + y
 
 ## 二、迭代器基础
 
+本节围绕「迭代器基础」展开，覆盖 Q4. 以下代码的输出是什么？解释迭代器的惰性求值 与  Q5. 以下代码能否编译？`Iterator` trait 的核心方法… 两个方面。
+
 ### Q4. 以下代码的输出是什么？解释迭代器的惰性求值
 
 ```rust
@@ -348,6 +352,8 @@ for val in counter { println!("{}", val); } // ❌ 编译错误：counter 已被
 
 ## 三、迭代器适配器
 
+「迭代器适配器」部分包含 Q6. 以下代码的输出是什么？解释 `filter`、`map` 和… 与  Q7. 以下代码的输出是什么？`fold` 与 `reduce` 的区别 两条主线，本节依次说明。
+
 ### Q6. 以下代码的输出是什么？解释 `filter`、`map` 和 `collect` 的组合
 
 ```rust
@@ -463,6 +469,8 @@ v.iter().all(|x| x > 0);   // 是否所有元素满足条件
 ---
 
 ## 四、综合应用
+
+本节从 Q8. 以下代码能否编译？解释 `Iterator::find` 和…、Q9. 以下代码的输出是什么？这是闭包与迭代器的经典组合与Q10. 以下代码能否编译？如何修复？这是 `move` 闭包与迭代器…切入，剖析「综合应用」的核心内容。
 
 ### Q8. 以下代码能否编译？解释 `Iterator::find` 和 `position` 的区别
 
@@ -646,6 +654,8 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
 > **权威来源**: [The Rust Programming Language — Ch13](https://doc.rust-lang.org/book/ch13-01-closures.html) · [Rust By Example — Closures](https://doc.rust-lang.org/rust-by-example/fn/closures.html) · [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：本文件是 测验：闭包与迭代器（L1 试点扩展） 的专项测验集…、测验 2：在 测验：闭包与迭代器（L1 试点扩展） 的测验中，若遇到不…与测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层）切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：本文件是 测验：闭包与迭代器（L1 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 

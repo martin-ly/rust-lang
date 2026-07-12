@@ -85,6 +85,8 @@
 
 ## 📐 知识结构
 
+本节围绕「知识结构」展开，依次讨论概念定义、属性特征、关系连接与思维导图。
+
 ### 概念定义
 
 **高性能网络服务架构 (High-Performance Network Service Architecture)**:
@@ -241,6 +243,8 @@ async fn send_file(mut stream: TcpStream, path: &str) -> io::Result<()> {
 ---
 
 ## 1. 零拷贝技术深度
+
+「零拷贝技术深度」涉及传统拷贝的性能问题、零拷贝原理与实现与Rust零拷贝实践，本节逐一说明其要点。
 
 ### 1.1 传统拷贝的性能问题
 
@@ -522,6 +526,8 @@ async fn create_test_file(path: &str, size: usize) -> io::Result<()> {
 ---
 
 ## 2. io_uring异步I/O
+
+本节将「io_uring异步I/O」分解为若干主题： io_uring架构原理、Tokio-uring集成与高性能HTTP服务器。
 
 ### 2.1 io_uring架构原理
 
@@ -812,6 +818,8 @@ Requests/sec:  156,234.12  # 仅 15万+ QPS
 ---
 
 ## 3. 无锁网络架构
+
+「无锁网络架构」部分包含 Lock-Free数据结构 与  Per-Core架构 两条主线，本节依次说明。
 
 ### 3.1 Lock-Free数据结构
 
@@ -1151,6 +1159,8 @@ Per-Core 架构:
 
 ## 4. NUMA感知优化
 
+理解「NUMA感知优化」需要把握 NUMA架构基础、内存亲和性优化与网络中断绑定，本节依次展开。
+
 ### 4.1 NUMA架构基础
 
 **NUMA (Non-Uniform Memory Access) 架构**:
@@ -1429,6 +1439,8 @@ async fn run_numa_aware_worker(node: usize) {
 
 ## 5. 多队列网络编程
 
+本节将「多队列网络编程」分解为若干主题：多队列NIC原理、RSS/RPS/RFS配置与XPS优化。
+
 ### 5.1 多队列NIC原理
 
 **网络卡多队列架构**:
@@ -1669,6 +1681,8 @@ done
 
 ## 6. 生产级架构案例
 
+本节聚焦「生产级架构案例」，核心内容为 Cloudflare Pingora 架构分析。
+
 ### Cloudflare Pingora 架构分析
 
 > **⚠️ 生态状态提示**: `pingora` crate 已被报告存在安全漏洞（RUSTSEC-2025-0037、RUSTSEC-2025-0070），且已从本仓库依赖中移除。本节仅作为**历史架构案例**保留，用于理解高性能代理的设计思路；新项目建议优先评估 Tokio / hyper / axum 等活跃维护方案，而非直接依赖 pingora。
@@ -1821,6 +1835,8 @@ Pingora风格架构 (io_uring + 零拷贝 + Per-Core):
 
 ## 7. 性能基准测试
 
+本节聚焦「性能基准测试」，核心内容为综合性能测试脚本。
+
 ### 综合性能测试脚本
 
 ```bash
@@ -1877,6 +1893,8 @@ echo "✅ 基准测试完成！"
 ---
 
 ## 8. 最佳实践
+
+本节将「最佳实践」分解为若干主题：架构选择决策树、性能优化检查清单与系统调优参数。
 
 ### 8.1 架构选择决策树
 
@@ -1990,6 +2008,8 @@ echo "✅ 系统调优完成！"
 ---
 
 ## 总结
+
+本节从关键技术对比 与 推荐组合 两个层面剖析「总结」。
 
 ### 关键技术对比
 

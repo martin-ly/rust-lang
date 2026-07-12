@@ -86,6 +86,8 @@
 
 ## 一、权威定义（Definition）
 
+本节围绕「权威定义（Definition）」展开，覆盖 Rust ML 生态定位 与 数据科学生态分层 两个方面。
+
 ### 1.1 Rust ML 生态定位
 
 > **[Rust ML Working Group](https://github.com/rust-ml)** Rust 机器学习生态是一个快速发展的领域，目标是利用 Rust 的内存安全（Memory Safety）和性能优势，构建从数据预处理到模型部署的完整流水线。
@@ -153,6 +155,8 @@ Rust ML 生态全景:
 ---
 
 ## 三、深度学习框架
+
+本节将「深度学习框架」分解为若干主题： candle：纯 Rust 推理引擎、burn：可移植深度学习框架、tch-rs：PyTorch C++ API 绑定与ort：ONNX Runtime 绑定。
 
 ### 3.1 candle：纯 Rust 推理引擎
 
@@ -380,6 +384,8 @@ TensorFlow 模型  →   tf2onnx             →   .onnx 文件
 
 ## 四、传统机器学习
 
+「传统机器学习」部分包含 linfa：scikit-learn 风格算法库 与  smartcore：无标准库 ML 两条主线，本节依次说明。
+
 ### 4.1 linfa：scikit-learn 风格算法库
 
 > **[linfa](https://github.com/rust-ml/linfa)** 是 Rust 的通用机器学习框架，提供类似 scikit-learn 的 API（fit/transform/predict）。支持聚类、降维、回归、分类等算法，每个算法是独立的子 crate。[来源: [linfa Documentation](https://docs.rs/linfa/latest/linfa/)]
@@ -456,6 +462,8 @@ fn embedded_ml() {
 ---
 
 ## 五、数据科学生态
+
+「数据科学生态」涉及 polars：高性能 DataFrame、Apache Arrow：列式内存格式与DataFusion：查询执行引擎，本节逐一说明其要点。
 
 ### 5.1 polars：高性能 DataFrame
 
@@ -584,6 +592,8 @@ async fn datafusion_query() -> datafusion::error::Result<()> {
 
 ## 六、模型部署与推理优化
 
+「模型部署与推理优化」部分包含量化与压缩 与 边缘部署 两条主线，本节依次说明。
+
 ### 6.1 量化与压缩
 
 模型量化是将模型权重从高精度（FP32）转换为低精度（FP16/INT8/INT4），减少内存占用和计算量：
@@ -643,6 +653,8 @@ Rust 优势:
 
 ## 七、Rust ML 的技术优势与限制
 
+本节围绕「Rust ML 的技术优势与限制」展开，覆盖优势分析 与 限制分析 两个方面。
+
 ### 7.1 优势分析
 
 **内存安全（Memory Safety）与性能的结合**:
@@ -678,6 +690,8 @@ Rust ML 的解决:
 ---
 
 ## 八、反命题与边界
+
+本节从反命题树 与 边界极限 两个层面剖析「反命题与边界」。
 
 ### 8.1 反命题树
 
@@ -729,6 +743,8 @@ Rust ML 的解决:
 ---
 
 ## 九、边界测试
+
+理解「边界测试」需要把握边界测试：未初始化张量内存导致信息泄露（安全漏洞）、边界测试：单线程 DataFrame 操作在并发场景下竞争（运行时错误）与边界测试：模型输入维度不匹配导致 panic（逻辑错误），本节依次展开。
 
 ### 9.1 边界测试：未初始化张量内存导致信息泄露（安全漏洞）
 
@@ -862,6 +878,8 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 - **定理**: Machine Learning Ecosystem（机器学习生态） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：Rust 在机器学习领域目前的主要定位是什么？（理解层）、测验 2：`candle`（Hugging Face）与 `PyTor…、测验 3：为什么 ML 推理引擎常用 Rust 重写（如 `llama…、测验 4：`ndarray` 在 Rust ML 生态中扮演什么角色？…等5个方面的顺序逐层展开。
 
 ### 测验 1：Rust 在机器学习领域目前的主要定位是什么？（理解层）
 

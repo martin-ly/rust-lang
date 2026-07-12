@@ -153,6 +153,8 @@
 
 ## 二、关键技术
 
+理解「关键技术」需要把握 bytes crate、zerocopy crate与memmap2，本节依次展开。
+
 ### 2.1 bytes crate
 >
 
@@ -262,6 +264,8 @@ zerocopy:
 
 ## 三、序列化优化
 
+「序列化优化」部分包含 rkyv 与  flatbuffers / capnp 两条主线，本节依次说明。
+
 ### 3.1 rkyv
 >
 
@@ -333,6 +337,8 @@ FlatBuffers / Cap'n Proto:
 ---
 
 ## 四、反命题与边界分析
+
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
 
 ### 4.1 反命题树
 >
@@ -530,6 +536,8 @@ fn main() {
 
 ## 十、边界测试：零拷贝解析的编译错误
 
+本节从边界测试：`mem::transmute` 的字节对齐假设（运行时 U…、边界测试：生命周期过短的零拷贝视图（编译错误）、边界测试：`nom` 解析器的生命周期传播（编译错误）、边界测试：零拷贝与字节序的字节对齐（运行时 UB）等8个方面切入，剖析「边界测试：零拷贝解析的编译错误」的核心内容。
+
 ### 10.1 边界测试：`mem::transmute` 的字节对齐假设（运行时 UB）
 
 ```rust
@@ -723,6 +731,8 @@ fn main() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：零拷贝的核心思想（理解层）、测验 2：`Bytes` crate 的用途（应用层）、测验 3：transmute 的字节对齐要求（分析层）、测验 4：生命周期在零拷贝中的作用（分析层）等5个方面。
 
 ### 测验 1：零拷贝的核心思想（理解层）
 

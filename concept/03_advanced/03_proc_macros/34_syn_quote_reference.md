@@ -75,6 +75,8 @@
 
 ## 1. syn 库概述
 
+理解「syn 库概述」需要把握核心功能、features 配置与基本使用，本节依次展开。
+
 ### 1.1 核心功能
 
 `syn` 是 Rust 语法解析库，提供：
@@ -129,6 +131,8 @@ pub fn my_trait(input: TokenStream) -> TokenStream {
 ---
 
 ## 2. syn 解析 API
+
+理解「syn 解析 API」需要把握 parse_macro_input、DeriveInput、ItemFn与自定义解析，本节依次展开。
 
 ### 2.1 parse_macro_input
 
@@ -315,6 +319,8 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 ## 3. syn 数据结构
 
+「syn 数据结构」部分按类型 (Type)、表达式 (Expr)、模式 (Pat)与路径 (Path)的顺序逐层展开。
+
 ### 3.1 类型 (Type)
 
 ```rust
@@ -408,6 +414,8 @@ assert_eq!(last_segment.ident, "Vec");
 ---
 
 ## 4. syn 属性处理
+
+本节将「syn 属性处理」分解为若干主题：解析属性、NestedMeta与自定义属性参数。
 
 ### 4.1 解析属性
 
@@ -507,6 +515,8 @@ pub fn my_attr(attr: TokenStream, item: TokenStream) -> TokenStream {
 
 ## 5. quote 库概述
 
+本节围绕「quote 库概述」展开，覆盖核心功能 与 基本语法 两个方面。
+
 ### 5.1 核心功能
 
 `quote` 提供类 Rust 语法生成代码：
@@ -538,6 +548,8 @@ let expanded = quote! {
 ---
 
 ## 6. quote! 宏详解
+
+本节从插值 (#var)、重复 (#(...)\*)与条件生成切入，剖析「quote! 宏详解」的核心内容。
 
 ### 6.1 插值 (#var)
 
@@ -627,6 +639,8 @@ let output = quote! {
 
 ## 7. quote_spanned
 
+本节从 Span 控制 与 错误位置 两个层面剖析「quote_spanned」。
+
 ### 7.1 Span 控制
 
 ```rust
@@ -673,6 +687,8 @@ fn generate_impl(input: &syn::DeriveInput) -> proc_macro2::TokenStream {
 ---
 
 ## 8. ToTokens trait
+
+本节围绕「ToTokens trait」展开，覆盖实现 ToTokens 与 自定义类型转换 两个方面。
 
 ### 8.1 实现 ToTokens
 
@@ -733,6 +749,8 @@ impl ToTokens for Config {
 ---
 
 ## 9. 常见模式
+
+「常见模式」部分按 Derive 宏模式、属性宏模式与函数宏模式的顺序逐层展开。
 
 ### 9.1 Derive 宏模式
 
@@ -823,6 +841,8 @@ pub fn create_struct(input: TokenStream) -> TokenStream {
 ---
 
 ## 10. 最佳实践
+
+「最佳实践」涉及错误处理 (Error Handling)、性能优化与可测试性，本节逐一说明其要点。
 
 ### 10.1 错误处理 (Error Handling)
 

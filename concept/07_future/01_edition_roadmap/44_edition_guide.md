@@ -18,7 +18,10 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) ·
 > [Rust Blog — Edition 2024](https://blog.rust-lang.org/) ·
 > [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs//3501-edition-2024.html) ·
@@ -74,6 +77,8 @@
 ---
 
 ## 一、核心概念
+
+本节从 Edition 机制回顾、Edition 2024 主要特性与迁移策略切入，剖析「核心概念」的核心内容。
 
 ### 1.1 Edition 机制回顾
 >
@@ -187,6 +192,8 @@ Edition 2024 核心特性:
 ---
 
 ## 二、技术细节
+
+「技术细节」涉及 Gen Blocks、Async Closures、Lifetime 捕获与`if let` 临时作用域收窄，本节逐一说明其要点。
 
 ### 2.1 Gen Blocks
 >
@@ -379,6 +386,8 @@ Tail Expr Drop:
 
 ## 四、反命题与边界分析
 
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+
 ### 4.1 反命题树
 >
 
@@ -536,6 +545,8 @@ graph TD
 > **补充来源**
 
 ## 十、边界测试：Edition Guide 的编译错误
+
+本节围绕「边界测试：Edition Guide 的编译错误」展开，依次讨论边界测试：Edition 2024 的尾表达式模式变更（编译错误）、边界测试：`gen` 关键字保留与宏解析冲突（编译错误）、边界测试：Edition 迁移后的 `cargo fix` 残留问题（…、边界测试：Edition 迁移的自动修复遗漏（编译中断/语义变更）等6个方面。
 
 ### 10.1 边界测试：Edition 2024 的尾表达式模式变更（编译错误）
 
@@ -707,6 +718,8 @@ fn main() {
 - **定理**: Edition 2024 完全指南：新特性与迁移策略 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：什么是 Rust 的"Edition"？它与语义版本（Sem…、测验 2：Rust 2024 Edition 引入了哪些主要变化？（理…、测验 3：为什么 Rust 可以同时支持多个 Edition？（理解层）、测验 4：Edition 迁移工具 `cargo fix --edit…等5个方面。
 
 ### 测验 1：什么是 Rust 的"Edition"？它与语义版本（SemVer）有什么关系？（理解层）
 

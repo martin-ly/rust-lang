@@ -26,6 +26,8 @@
 
 ## 二、弹性模式
 
+本节围绕「弹性模式」展开，依次讨论断路器（Circuit Breaker）、重试与指数退避（Retry + Backoff）与令牌桶限流（Token Bucket Rate Limiter）。
+
 ### 2.1 断路器（Circuit Breaker）
 
 当下游服务持续失败时，快速失败以避免线程/连接池被耗尽，并在超时后进入半开状态探测恢复。

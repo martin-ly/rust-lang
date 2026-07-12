@@ -209,6 +209,8 @@
 
 ## 二、语言特性差异
 
+本节从类型推断、隐式与 Trait与宏系统切入，剖析「语言特性差异」的核心内容。
+
 ### 2.1 类型推断
 >
 
@@ -342,6 +344,8 @@
 
 ## 三、工程实践差异
 
+本节从构建系统 与 互操作性 两个层面剖析「工程实践差异」。
+
 ### 3.1 构建系统
 >
 
@@ -413,6 +417,8 @@
 ---
 
 ## 四、反命题与边界分析
+
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
 
 ### 4.1 反命题树
 
@@ -569,6 +575,8 @@ fn main() {
 
 ## 十、边界测试：Rust 与 Scala 的编译错误对比
 
+「边界测试：Rust 与 Scala 的编译错误对比」涉及边界测试：Scala 的隐式转换与 Rust 的显式 trait（编译…、边界测试：Scala 的 null 与 Rust 的 Option（编…、边界测试：Scala 的隐式转换与 Rust 的显式 `From`/`…、边界测试：Scala 的 actor 模型与 Rust 的 async…等5个方面，本节逐一说明其要点。
+
 ### 10.1 边界测试：Scala 的隐式转换与 Rust 的显式 trait（编译错误）
 
 ```rust,ignore
@@ -686,6 +694,8 @@ fn main() {
 > **修正**: Rust **禁止隐式类型转换**（除少数自动强制：`&T` → `&U` 若 `T: U`、`&mut T` → `&T`、`T` → `U` 若 `T: Into<U>` 但在特定上下文）。`Meters` 和 `Feet` 是不同的类型，即使语义相关，也不能直接赋值。显式转换：1) `impl From<Meters> for Feet` + `let f: Feet = m.into()`；2) `impl Into<Feet> for Meters`；3) 解构：`let Feet(f) = m.into()`。Scala 的隐式转换（`implicit def` / `given` / `using`）允许库作者定义自动转换，但可能导致"隐式解析地狱"（编译时间长、错误信息难读）。Rust 的设计哲学：**显式优于隐式**。这与 C++ 的转换构造函数（单参数构造函数隐式调用）或 Go 的接口实现（隐式满足接口）不同——Rust 的显式转换使代码更易读、错误更易定位。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Scala 的"混合面向对象与函数式"与 Rust 的" m…、测验 2：Scala 的隐式参数（Implicits）与 Rust 的…、测验 3：Scala 运行在 JVM 上，Rust 编译为原生。这对…、测验 4：Scala 的 case class 与 Rust 的 `#…等5个方面。
 
 ### 测验 1：Scala 的"混合面向对象与函数式"与 Rust 的" mostly 函数式"有什么设计哲学差异？（理解层）
 

@@ -172,6 +172,8 @@ P → wp(C, Q)    ⟺    sp(P, C) → Q
 
 ## 二、概念属性矩阵
 
+「概念属性矩阵」部分的核心主题是公理语义方法对比矩阵，本节展开说明。
+
 ### 2.1 公理语义方法对比矩阵
 >
 
@@ -194,6 +196,8 @@ P → wp(C, Q)    ⟺    sp(P, C) → Q
 ---
 
 ## 三、技术细节
+
+本节从 Rust 赋值规则的公理化、所有权转移的 wp 计算、借用规则的不变式与unsafe 块的公理边界切入，剖析「技术细节」的核心内容。
 
 ### 3.1 Rust 赋值规则的公理化
 >
@@ -365,6 +369,8 @@ unsafe fn dereference_raw<T>(ptr: *const T) -> T {
 
 ## 四、工具链映射
 
+本节围绕「工具链映射」展开，依次讨论 Prusti：Viper 后端的契约推导、Creusot：Why3 逻辑下的 WP 计算与Kani：符号执行与断言验证。
+
 ### 4.1 Prusti：Viper 后端的契约推导
 >
 > **Prusti — Viper-based Verification Tool** Prusti 是 ETH Zurich 开发的 Rust 验证工具，基于 Viper 验证基础设施。它将 Rust 程序翻译为 Viper 中间语言，利用分离逻辑自动验证内存安全（Memory Safety）和用户提供的函数契约。
@@ -459,6 +465,8 @@ fn check_increment() {
 
 ## 五、反命题与边界分析
 
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+
 ### 5.1 反命题树
 >
 
@@ -536,6 +544,8 @@ L1 工程直觉          L3 高级抽象           L4 形式化理论          L
 ---
 
 ## 十、边界测试
+
+本节将「边界测试」分解为若干主题：边界测试：wp 计算的无限 descending chain（逻辑错误）、边界测试：借用不变式违反的验证失败（验证错误）与边界测试：unsafe 块的公理逃逸（运行时 UB）。
 
 ### 10.1 边界测试：wp 计算的无限 descending chain（逻辑错误）
 
@@ -619,6 +629,8 @@ fn undefined_behavior() {
 ---
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：Hoare 三元组 `{P} C {Q}` 中，P、C、Q…、测验 2：什么是"最弱前置条件"（Weakest Preconditi…、测验 3：Rust 的 `unsafe` 块为什么特别需要形式化验证？…、测验 4：分离逻辑（Separation Logic）的"框架规则"（…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：Hoare 三元组 `{P} C {Q}` 中，P、C、Q 分别代表什么？（理解层）
 
@@ -733,6 +745,8 @@ Prusti 将 Rust 翻译为 Viper 中间语言，使用分离逻辑自动验证内
 
 ## 六、定理推理链
 
+「定理推理链」部分包含定理一致性矩阵 与 反命题决策树 两条主线，本节依次说明。
+
 ### 6.1 定理一致性矩阵
 >
 
@@ -795,6 +809,8 @@ Prusti 将 Rust 翻译为 Viper 中间语言，使用分离逻辑自动验证内
 
 ## 七、工具链深度对比矩阵
 
+本节专门讨论「工具链深度对比矩阵」下的 Prusti vs Creusot vs Kani。
+
 ### 7.1 Prusti vs Creusot vs Kani
 >
 
@@ -824,6 +840,8 @@ Prusti 将 Rust 翻译为 Viper 中间语言，使用分离逻辑自动验证内
 ---
 
 ## 八、更多边界测试
+
+理解「更多边界测试」需要把握边界测试：Prusti 对泛型 Trait 的验证失败、边界测试：Kani 的路径爆炸与有界验证与边界测试：Creusot 的 Ghost 代码与零成本抽象，本节依次展开。
 
 ### 10.4 边界测试：Prusti 对泛型 Trait 的验证失败
 

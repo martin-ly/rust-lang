@@ -63,6 +63,8 @@
 
 ## 一、核心概念
 
+理解「核心概念」需要把握为什么需要内联汇编、`asm!` 宏基础语法、约束系统 (Constraints)与Clobber 与 Options，本节依次展开。
+
 ### 1.1 为什么需要内联汇编
 
 Rust 的内联汇编允许在高级代码中直接嵌入底层机器指令，绕过编译器的优化和控制流分析。(Source: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html), [RFC 2873 — Inline Assembly](https://rust-lang.github.io/rfcs/2873-inline-asm.html))典型使用场景：
@@ -168,6 +170,8 @@ unsafe {
 
 ## 二、平台差异矩阵
 
+本节围绕「平台差异矩阵」展开，依次讨论 x86_64、aarch64、RISC-V与s390x (IBM Z / LinuxONE)。
+
 ### 2.1 x86_64
 
 ```rust,ignore
@@ -240,6 +244,8 @@ unsafe fn read_tod_clock() -> u64 {
 ---
 
 ## 三、s390x 向量寄存器 (Rust 1.96+)
+
+「s390x 向量寄存器 (Rust 1.96+)」涉及背景：IBM Z 向量扩展、Rust 1.96 的变更、代码示例与与 x86_64 SIMD 的对比，本节逐一说明其要点。
 
 ### 3.1 背景：IBM Z 向量扩展
 
@@ -355,6 +361,8 @@ unsafe fn sse2_xor(a: &[u32; 4], b: &[u32; 4]) -> [u32; 4] {
 
 ## 四、安全边界与常见陷阱
 
+本节围绕「安全边界与常见陷阱」展开，覆盖编译器无法验证的契约 与 常见错误模式 两个方面。
+
 ### 4.1 编译器无法验证的契约
 
 内联汇编是 Rust 中最"不安全"的特性之一——编译器几乎不做任何验证：(Source: [Rust Reference — Inline Assembly Safety](https://doc.rust-lang.org/reference/inline-assembly.html#safety))
@@ -459,6 +467,8 @@ mod tests {
 ---
 
 ## 嵌入式测验
+
+本节将「嵌入式测验」分解为若干主题：测验 1：asm! 宏基本语法（记忆层）、测验 2：操作数约束（理解层）、测验 3：用内联汇编实现原子操作（应用层）与测验 4：clobber 与内存屏障（分析层）。
 
 ### 测验 1：asm! 宏基本语法（记忆层）
 

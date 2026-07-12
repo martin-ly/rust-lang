@@ -90,6 +90,8 @@
 
 ## 六、已知遗留问题
 
+本节从 SUMMARY.md 占位符 ✅ 已解决、内容文件中的 LINK_PLACEHOLDER、自动双语标注残留与重复文件已清理切入，剖析「已知遗留问题」的核心内容。
+
 ### 6.1 SUMMARY.md 占位符 ✅ 已解决
 
 `concept/SUMMARY.md` 中的 22 个 `LINK_PLACEHOLDER` 条目已替换为 `00_meta/placeholders/placeholder-N.md`。

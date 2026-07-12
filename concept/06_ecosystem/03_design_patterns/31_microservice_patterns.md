@@ -108,6 +108,8 @@ graph TD
 
 ## 二、服务发现与注册
 
+「服务发现与注册」部分包含 Consul / etcd 客户端集成 与  Tower::discover 动态服务列表 两条主线，本节依次说明。
+
 ### 2.1 Consul / etcd 客户端集成
 
 ```rust,compile_fail
@@ -233,6 +235,8 @@ async fn rate_limit_layer<B>(req: Request<B>, next: Next<B>)
 ---
 
 ## 四、熔断器
+
+本节围绕「熔断器」展开，覆盖状态机模型 (Closed/Open/Half-Open) 与  failsafe crate 实现 两个方面。
 
 ### 4.1 状态机模型 (Closed/Open/Half-Open)
 >
@@ -595,6 +599,8 @@ Rust sidecar 优势:
 
 ## 十、综合示例
 
+本节围绕「综合示例」展开，覆盖极简微服务（标准库实现） 与 生产级微服务骨架（依赖外部 crate） 两个方面。
+
 ### 10.1 极简微服务（标准库实现）
 >
 > 不依赖外部框架，用 `std::net::TcpListener` 展示微服务的核心请求-响应循环：
@@ -815,6 +821,8 @@ Rust 微服务并非银弹:
 
 ## 十、边界测试：微服务模式的编译错误
 
+「边界测试：微服务模式的编译错误」涉及边界测试：配置注入的生命周期（编译错误）、边界测试：gRPC trait 对象与序列化（编译错误）、边界测试：断路器模式的半开状态竞态条件（运行时雪崩）与补充定理链，本节逐一说明其要点。
+
 ### 10.1 边界测试：配置注入的生命周期（编译错误）
 
 ```rust,compile_fail
@@ -927,6 +935,8 @@ fn main() {}
 - **定理**: 微服务架构模式 (Microservice Architecture Patterns) 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：Rust 微服务中常用的服务发现机制有哪些？（理解层）、测验 2：在 Rust 微服务中，如何处理分布式事务？（理解层）、测验 3：Rust 的 `tower` 中间件栈如何实现微服务的横切关…、测验 4：gRPC 在 Rust 微服务中的优势是什么？`tonic`…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：Rust 微服务中常用的服务发现机制有哪些？（理解层）
 

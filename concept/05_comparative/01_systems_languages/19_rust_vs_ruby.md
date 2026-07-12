@@ -212,6 +212,8 @@
 
 ## 二、工程实践差异
 
+理解「工程实践差异」需要把握 Web 开发生态、性能基准与开发速度权衡，本节依次展开。
+
 ### 2.1 Web 开发生态
 >
 
@@ -357,6 +359,8 @@ Rust + Ruby 的互补模式:
 ---
 
 ## 四、反命题与边界分析
+
+本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
 
 ### 4.1 反命题树
 >
@@ -544,6 +548,8 @@ fn main() {
 
 ## 十、边界测试：Rust 与 Ruby 的编译错误对比
 
+本节从边界测试：Ruby 的 duck typing vs Rust 的 t…、边界测试：Ruby 的 open classes 与 Rust 的孤儿…、边界测试：Ruby 的 duck typing 与 Rust 的 tr…与边界测试：Ruby 的开放类与 Rust 的孤儿规则冲突（编译错误）切入，剖析「边界测试：Rust 与 Ruby 的编译错误对比」的核心内容。
+
 ### 10.1 边界测试：Ruby 的 duck typing vs Rust 的 trait bound（编译错误）
 
 ```rust,compile_fail
@@ -654,6 +660,8 @@ fn main() {
 > **修正**: Rust 的**孤儿规则（Orphan Rule）**（orphan rules）要求：为类型 `T` 实现 trait `Trait` 时，`T` 或 `Trait` 至少有一个定义在当前 crate 中。这防止了：1) 两个 crate 为同一类型实现同一 trait（冲突实现）；2) 远程 crate 的类型被意外添加行为。Ruby 的**开放类**（open classes）允许任意扩展：`class String; def greet; ...; end; end`。Rust 的替代方案：1) **newtype 模式**：`struct MyString(String); impl Greet for MyString`；2) **wrapper trait**：`trait StringExt { fn greet(&self); } impl StringExt for String`。这与 Haskell 的孤儿实例（允许但警告，或需 `{-# OVERLAPPABLE #-}`）或 Swift 的 extension（允许为外部类型添加 protocol 实现，但需导入）不同——Rust 的孤儿规则在编译期强制执行，避免链接期冲突。[来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Ruby 的"鸭子类型"与 Rust 的 trait 系统在…、测验 2：Ruby 的 GIL（全局解释器锁）与 Rust 的并发模型…、测验 3：Ruby on Rails 的"约定优于配置"与 Rust…、测验 4：为什么 Ruby 适合快速原型，而 Rust 更适合长期维护…等5个方面。
 
 ### 测验 1：Ruby 的"鸭子类型"与 Rust 的 trait 系统在运行时行为上有什么不同？（理解层）
 

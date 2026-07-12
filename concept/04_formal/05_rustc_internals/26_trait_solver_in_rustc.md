@@ -92,6 +92,8 @@ graph LR
 
 ## 三、Selection：候选装配与筛选
 
+「Selection：候选装配与筛选」涉及 Candidate Assembly（候选装配）、Winnowing（筛选）与Confirmation（确认），本节逐一说明其要点。
+
 ### 3.1 Candidate Assembly（候选装配）
 
 对于一个 obligation `T: Trait`，编译器收集所有可能适用的候选：
@@ -346,6 +348,8 @@ where
 ---
 
 ## 嵌入式测验
+
+本节从测验 1：什么是 obligation？、测验 2：Selection 和 Evaluation 的主要区别是什…、测验 3：Winnowing 解决什么问题？与测验 4：新一代 trait solver 与旧 solver 相比，…切入，剖析「嵌入式测验」的核心内容。
 
 ### 测验 1：什么是 obligation？
 

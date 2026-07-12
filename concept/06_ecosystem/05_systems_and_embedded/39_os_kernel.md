@@ -13,6 +13,8 @@
 
 ## 一、Rust for Linux：内核中的 Rust 代码
 
+「Rust for Linux：内核中的 Rust 代码」部分包含里程碑 与 内核中的 Rust 约束 两条主线，本节依次说明。
+
 ### 1.1 里程碑
 
 Rust for Linux 是 Linux 内核社区自 2022 年起正式接受的实验性项目：
@@ -410,6 +412,8 @@ fn open_resource_fixed(url: &str) -> Result<Resource, Error> {
 - **定理**: 操作系统与内核：Rust 的系统级编程 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：Rust 为什么适合编写操作系统内核？相比 C 有什么优势？…、测验 2：`no_std` + `alloc` 在操作系统开发中意味着…、测验 3：Rust 的 `volatile` 读写（`core::pt…、测验 4：为什么在操作系统上下文中，`unsafe` 的使用比用户态程…等5个方面。
 
 ### 测验 1：Rust 为什么适合编写操作系统内核？相比 C 有什么优势？（理解层）
 

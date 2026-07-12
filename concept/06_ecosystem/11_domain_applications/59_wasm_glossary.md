@@ -67,6 +67,8 @@
 
 ## 🌐 WASM 基础术语
 
+本节从 WebAssembly (WASM)、线性内存 (Linear Memory)、模块 (Module)、实例 (Instance)等8个方面切入，剖析「WASM 基础术语」的核心内容。
+
 ### WebAssembly (WASM)
 
 **定义**: 一种低级的二进制指令格式，设计为可移植的编译目标，用于在 Web 上部署高性能应用。
@@ -146,6 +148,8 @@
 
 ## 🦀 Rust 相关术语
 
+本节从 wasm32-unknown-unknown、wasm-bindgen、wasm-pack、类型映射 (Type Mapping)等5个方面切入，剖析「Rust 相关术语」的核心内容。
+
 ### wasm32-unknown-unknown
 
 **定义**: Rust 的 WASM 编译目标三元组。
@@ -202,6 +206,8 @@
 
 ## 🔗 JavaScript 相关术语
 
+本节从 WebAssembly API、互操作 (Interop)与绑定 (Binding)切入，剖析「JavaScript 相关术语」的核心内容。
+
 ### WebAssembly API
 
 **定义**: JavaScript 提供的 WASM 操作接口。
@@ -236,6 +242,8 @@
 ---
 
 ## ⚡ 性能优化术语
+
+本节从二进制大小优化、运行时优化、LTO (Link Time Optimization)与wasm-opt切入，剖析「性能优化术语」的核心内容。
 
 ### 二进制大小优化
 
@@ -282,6 +290,8 @@
 ---
 
 ## 🛠️ 工具链术语
+
+本节将「工具链术语」分解为若干主题： Cargo、rustc、wasmtime与wasmer。
 
 ### Cargo
 

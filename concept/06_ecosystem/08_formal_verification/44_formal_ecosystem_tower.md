@@ -34,6 +34,8 @@
 
 ## 权威定义
 
+「权威定义」部分的核心主题是 Wikipedia 权威定义，本节展开说明。
+
 ### Wikipedia 权威定义
 
 > **[Wikipedia: Software framework](https://en.wikipedia.org/wiki/Software_framework)** A software framework is an abstraction in which software providing generic functionality can be selectively changed by additional user-written code, thus providing application-specific software.
@@ -260,6 +262,8 @@ quadrantChart
 
 ## 待补充与演进方向（TODOs）
 
+本节围绕「待补充与演进方向（TODOs）」展开，依次讨论核心 Crate MSRV 与 Edition 兼容性矩阵、Kani + GitHub Actions：形式化验证 CI 集成、Wasmtime 形式化语义与 Rust 实现一致性与形式化视角 vs 传统功能分类映射。
+
 ### 8.1 核心 Crate MSRV 与 Edition 兼容性矩阵
 >
 
@@ -431,6 +435,8 @@ fn main() {
 
 ## 十、边界测试：形式化生态塔的编译错误
 
+理解「边界测试：形式化生态塔的编译错误」需要把握边界测试：Prusti 的前置条件验证（编译错误）、边界测试：Kani 的循环展开限制（编译错误）、边界测试：形式化工具链的生态系统碎片化（编译错误）、边界测试：依赖树中的形式化安全与 unsafe 代码传播（编译错误）等6个方面，本节依次展开。
+
 ### 10.1 边界测试：Prusti 的前置条件验证（编译错误）
 
 ```rust,ignore
@@ -539,6 +545,8 @@ fn main() {
 - **定理**: Formal Ecosystem Tower（Rust 生态形式化分层塔） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1："形式化生态塔"（Formal Ecosystem Towe…、测验 2：为什么 Rust 的形式化验证工具需要独立的生态，而不是直接…、测验 3：`rust-verification-tools` 元项目在…、测验 4：形式化生态塔对 Rust 进入安全关键行业有什么意义？（理解…等5个方面。
 
 ### 测验 1："形式化生态塔"（Formal Ecosystem Tower）是什么概念？（理解层）
 

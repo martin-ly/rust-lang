@@ -40,6 +40,8 @@
 
 ## 设计模式基础
 
+本节从设计模式 (Design Pattern) 与  GoF (Gang of Four) 两个层面剖析「设计模式基础」。
+
 ### 设计模式 (Design Pattern)
 
 在软件设计中反复出现的问题的通用、可复用解决方案。Rust 中的模式实现强调**编译期保证**与**零成本抽象（Zero-Cost Abstraction）**。
@@ -85,6 +87,8 @@
 ---
 
 ## Rust 特有概念
+
+本节将「Rust 特有概念」分解为若干主题： Trait 对象、Typestate 模式、零成本抽象 (Zero-Cost Abstraction)与OnceLock / LazyLock。
 
 ### Trait 对象
 
@@ -163,6 +167,8 @@ pub fn config() -> &'static Config {
 ---
 
 ## 并发与异步
+
+本节围绕「并发与异步」展开，依次讨论 Actor 模式、Reactor 模式、CSP (Communicating Sequential Proce…与Future / async/await。
 
 ### Actor 模式
 

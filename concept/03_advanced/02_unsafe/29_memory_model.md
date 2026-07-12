@@ -167,6 +167,8 @@ let maybe_dangling = addr as *const u64;
 
 ## 九、常见内存模型反模式
 
+本节将「常见内存模型反模式」分解为若干主题：读取未初始化 padding、通过整数重建指针与别名违规。
+
 ### 9.1 读取未初始化 padding
 
 ```rust,compile_fail

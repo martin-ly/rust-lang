@@ -655,6 +655,8 @@ Rust 进入 Linux 内核是语言演进史上最重大的外部验证事件：
 
 ### 3.7 未来语言设计方向
 
+本节围绕「未来语言设计方向」展开，依次讨论 Effects System（效应系统）、Generic Const Items（泛型 const 项）与Type Alias Impl Trait（TAIT）。
+
 #### 3.7.1 Effects System（效应系统）
 
 Effects 系统是将"计算效果"显式编码到类型系统（Type System）中的理论框架，Rust 正在探索统一的 effect 关键字：
@@ -761,6 +763,8 @@ timeline
 ---
 
 ## 五、官方来源与追踪
+
+本节围绕「官方来源与追踪」展开，依次讨论 Rust Lang Team Blog、Inside Rust、RFC 追踪、其他官方渠道等5个方面。
 
 ### 5.1 Rust Lang Team Blog
 >
@@ -1108,6 +1112,8 @@ graph TD
 
 ## 十、边界测试：语言演进的编译错误
 
+本节从边界测试：Edition 迁移中的关键字冲突（编译错误） 与 边界测试：`const generics` 的泛型参数推断（编译错误） 两个层面剖析「边界测试：语言演进的编译错误」。
+
 ### 10.1 边界测试：Edition 迁移中的关键字冲突（编译错误）
 
 ```rust,ignore
@@ -1161,6 +1167,8 @@ fn fixed() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
 ## 十、边界测试：语言演进的编译错误（续）
+
+本节围绕「边界测试：语言演进的编译错误（续）」展开，覆盖边界测试：GAT（泛型关联类型）的不稳定历史（编译错误） 与 边界测试： let-else 语法与模式匹配（编译错误） 两个方面。
 
 ### 10.3 边界测试：GAT（泛型关联类型）的不稳定历史（编译错误）
 
@@ -2116,6 +2124,8 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 > **来源**: [Rust Blog — Announcing rustup 1.29.0](https://blog.rust-lang.org/2026/03/12/Rustup-1.29.0/) · [Inside Rust — Rustup 1.29.0 beta: Call for Testing!](https://blog.rust-lang.org/inside-rust/2025/12/20/rustup-1.29.0-beta-cft/) · [Inside Rust — This Development-cycle in Cargo: 1.94](https://blog.rust-lang.org/inside-rust/) · [Cargo 1.96 CHANGELOG](https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md) · 可信度: ✅
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：Rust 语言演进的核心原则是什么？（理解层）、测验 2：什么是"Edition"机制？它如何平衡创新与稳定？（理解层）、测验 3：Rust 的 RFC 流程在语言演进中起什么作用？（理解层）、测验 4：Rust 的核心团队如何决定哪些特性优先开发？（理解层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：Rust 语言演进的核心原则是什么？（理解层）
 

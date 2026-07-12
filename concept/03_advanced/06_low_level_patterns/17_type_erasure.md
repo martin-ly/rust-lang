@@ -245,6 +245,8 @@ fn upcast(dog: &dyn Dog) -> &dyn Animal {
 
 ## 二、类型擦除模式
 
+本节从 Box<dyn Trait> 与 自定义类型擦除 两个层面剖析「类型擦除模式」。
+
 ### 2.1 Box<dyn Trait>
 >
 
@@ -403,6 +405,8 @@ fn main() {
 
 ## 三、性能权衡
 
+本节聚焦「性能权衡」，核心内容为静态 vs 动态分发。
+
 ### 3.1 静态 vs 动态分发
 >
 
@@ -447,6 +451,8 @@ fn main() {
 ---
 
 ## 四、反命题与边界分析
+
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
 
 ### 4.1 反命题树
 >
@@ -609,6 +615,8 @@ graph TD
 
 ## 十、边界测试：类型擦除的编译错误
 
+「边界测试：类型擦除的编译错误」部分按边界测试：`dyn Trait` 的大小未知（编译错误）、边界测试：trait object 的方法返回 `Self`（编译错误）、边界测试：`Any` 的 `downcast_ref` 与生命周期（编…、边界测试：vtable 与对象安全的隐性约束（编译错误）等7个方面的顺序逐层展开。
+
 ### 10.1 边界测试：`dyn Trait` 的大小未知（编译错误）
 
 ```rust,compile_fail
@@ -762,6 +770,8 @@ fn main() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：`dyn Trait` 的大小为什么在编译时未知？它如何被实…、测验 2：`&dyn Trait` 在内存中的布局是什么？（理解层）、测验 3：一个 trait 要成为"对象安全"（object-safe…、测验 4：`Box<dyn Any>` 如何安全地向下转换回原始类型？…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：`dyn Trait` 的大小为什么在编译时未知？它如何被实际使用？（理解层）
 

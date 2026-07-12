@@ -88,6 +88,8 @@
 
 ## 一、权威定义（Definition）
 
+本节将「权威定义（Definition）」分解为若干主题：共识问题的形式化定义、FLP 不可能结果与容错模型。
+
 ### 1.1 共识问题的形式化定义
 
 > **[FLP Result — Fischer, Lynch, Paterson 1985](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf)** 分布式共识是分布式计算中最基础的问题之一。在异步（Async）系统中，即使只有一个进程可能故障，也不存在确定性的共识算法。这一**不可能结果**（Impossibility Result）深刻影响了后续所有共识协议的设计——它们必须在**同步假设**、**随机化**或**故障模型限制**之间做出权衡。[来源: [FLP Paper](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf)]
@@ -172,6 +174,8 @@ FLP 不可能性的直观解释:
 
 ## 三、Paxos 与 Multi-Paxos
 
+本节围绕「Paxos 与 Multi-Paxos」展开，覆盖 Paxos 核心协议 与  Multi-Paxos 与日志复制 两个方面。
+
 ### 3.1 Paxos 核心协议
 
 > **[Paxos Made Simple — Lamport 2001](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf)** Paxos 是 Leslie Lamport 提出的经典共识算法。核心角色：**提案者**（Proposer）、**接受者**（Acceptor）、**学习者**（Learner）。协议分为两阶段：**Prepare/Promise** 和 **Accept/Accepted**。[来源: [Paxos Made Simple](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf)]
@@ -235,6 +239,8 @@ Leader 选举:
 ---
 
 ## 四、Raft：可理解的共识
+
+「Raft：可理解的共识」部分包含 Raft 核心机制 与  Rust 实现：raft-rs 两条主线，本节依次说明。
 
 ### 4.1 Raft 核心机制
 
@@ -392,6 +398,8 @@ Rust 优势:
 
 ## 五、拜占庭容错共识
 
+本节将「拜占庭容错共识」分解为若干主题： PBFT：实用拜占庭容错、HotStuff：线性通信 BFT与Tendermint：链式 BFT。
+
 ### 5.1 PBFT：实用拜占庭容错
 
 > **[PBFT — Castro & Liskov, OSDI 1999](https://pmg.csail.mit.edu/papers/osdi99.pdf)** PBFT（Practical Byzantine Fault Tolerance）是第一个实用的拜占庭容错共识算法。在异步（Async）网络 + n ≥ 3f + 1 条件下，容忍 f 个拜占庭节点。核心机制：**三阶段提交**（Pre-Prepare / Prepare / Commit）+ **视图更换**（View Change）。[来源: [PBFT Paper](https://pmg.csail.mit.edu/papers/osdi99.pdf)]
@@ -497,6 +505,8 @@ Precommit:
 
 ## 六、共识算法对比
 
+本节围绕「共识算法对比」展开，覆盖能力矩阵 与 选型决策树 两个方面。
+
 ### 6.1 能力矩阵
 
 | **评估维度** | **Paxos** | **Raft** | **PBFT** | **HotStuff** | **Tendermint** |
@@ -542,6 +552,8 @@ Precommit:
 ---
 
 ## 七、Rust 共识生态
+
+本节围绕「Rust 共识生态」展开，覆盖 raft-rs 与  hotstuff-rs / tendermint-rs 两个方面。
 
 ### 7.1 raft-rs
 
@@ -600,6 +612,8 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 
 ## 八、反命题与边界
 
+本节围绕「反命题与边界」展开，覆盖反命题树 与 边界极限 两个方面。
+
 ### 8.1 反命题树
 
 ```text
@@ -651,6 +665,8 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 ---
 
 ## 九、边界测试
+
+理解「边界测试」需要把握边界测试：网络分区导致脑裂（安全性违反）、边界测试：Leader 崩溃后未提交的日志丢失（活性违反）与边界测试：拜占庭节点发送矛盾消息（安全性违反），本节依次展开。
 
 ### 9.1 边界测试：网络分区导致脑裂（安全性违反）
 
@@ -749,6 +765,8 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 - **定理**: Distributed Consensus（分布式共识） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Raft 共识算法的核心状态有哪三种？（理解层）、测验 2：为什么分布式共识需要"多数派"（Quorum）确认？（理解层）、测验 3：Rust 的 `tikv` / `openraft` 在共识…、测验 4："脑裂"（Split-Brain）是什么？Raft 如何防止…等5个方面。
 
 ### 测验 1：Raft 共识算法的核心状态有哪三种？（理解层）
 

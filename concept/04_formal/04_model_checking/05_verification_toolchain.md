@@ -344,6 +344,8 @@ graph LR
 
 ## 三、a-mir-formality：Rust 类型系统规范
 
+「a-mir-formality：Rust 类型系统规范」部分按为什么需要类型系统规范？、技术架构、与验证工具链的关系与当前状态（2026-05）的顺序逐层展开。
+
 ### 3.1 为什么需要类型系统规范？
 
 当前 Rust 的类型系统规则分散在：
@@ -412,6 +414,8 @@ a-mir-formality (Coq/Lean)
 | **维护成本** | 规格随代码演化的同步成本 | 低 (Miri) – 高 (手写证明) |
 
 ### 4.2 场景化 ROI 评估
+
+「场景化 ROI 评估」部分按场景 A: 安全关键网络协议（如 TLS/QUIC 实现）、场景 B: 操作系统内核页表管理、场景 C: 日常 Web 服务业务逻辑与场景 D: 新并发算法研究的顺序逐层展开。
 
 #### 场景 A: 安全关键网络协议（如 TLS/QUIC 实现）
 
@@ -492,6 +496,8 @@ ROI: ★★☆☆☆ 低–中 — 仅限学术/核心基础设施 (Source: [Aen
 ---
 
 ## 五、分层验证策略
+
+本节从五层防御模型、组合策略：AWS s2n-quic 实践与分层验证流程时序图切入，剖析「分层验证策略」的核心内容。
 
 ### 5.1 五层防御模型
 
@@ -683,6 +689,8 @@ flowchart TD
 
 ## 九、常见误区与反模式
 
+理解「常见误区与反模式」需要把握误区一："验证工具可以互相替代"、误区二："形式化验证是一次性投入"与误区三："零标注工具 = 零成本"，本节依次展开。
+
 ### 误区一："验证工具可以互相替代"
 
 ```text
@@ -728,6 +736,8 @@ flowchart TD
 ---
 
 ## 七、验证工具深度原理分析
+
+「验证工具深度原理分析」部分按 Prusti：基于 Viper 的分离逻辑验证、Kani：基于 CBMC 的有界模型检测、Miri：基于 Tree Borrows 的动态 UB 检测、Verus：基于 Z3 的演绎验证等12个方面的顺序逐层展开。
 
 ### 7.1 Prusti：基于 Viper 的分离逻辑验证
 
@@ -1392,6 +1402,8 @@ fn main() {}
 > (Source: [Kani](https://github.com/model-checking/kani)) · (Source: [Rust Verification Tools](https://alastairreid.github.io/rust-verification-tools/))
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：验证工具分类（理解层）、测验 2：Miri 的检测范围（应用层）、测验 3：验证 ROI 决策（评价层）、测验 4：a-mir-formality 的作用（理解层）等5个方面。
 
 ### 测验 1：验证工具分类（理解层）
 

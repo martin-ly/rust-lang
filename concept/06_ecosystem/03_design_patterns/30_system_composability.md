@@ -36,6 +36,8 @@ Rust 的类型系统（Type System）通过**零成本抽象 (Zero-Cost Abstract
 
 ## 认知路径（Cognitive Path）
 
+本节从第 1 步：为什么 Rust 特别适合可组合系统？、第 2 步：从语法糖到代数结构与第 3 步：组合的成本与边界切入，剖析「认知路径（Cognitive Path）」的核心内容。
+
 ### 第 1 步：为什么 Rust 特别适合可组合系统？
 >
 
@@ -70,6 +72,8 @@ Rust 的类型系统（Type System）通过**零成本抽象 (Zero-Cost Abstract
 ---
 
 ## 二、四大可组合模式
+
+「四大可组合模式」部分按管道-过滤器 (Pipe-and-Filter)、数据流管道 (Dataflow Pipeline)、事件驱动组合 (Event-Driven Composition)与层组合 (Layer Composition)的顺序逐层展开。
 
 ### 2.1 管道-过滤器 (Pipe-and-Filter)
 
@@ -447,6 +451,8 @@ loop {
 
 ## 四、反模式
 
+本节从过度组合导致的类型爆炸、`dyn Trait` 在热路径上破坏单态化、忽视编译时间成本与通道组合中的死锁风险切入，剖析「反模式」的核心内容。
+
 ### 4.1 过度组合导致的类型爆炸
 >
 
@@ -601,6 +607,8 @@ async fn good() {
 
 ## 十、边界测试：系统可组合性的编译错误
 
+「边界测试：系统可组合性的编译错误」涉及边界测试：trait 对象的组合限制（编译错误）、边界测试：插件系统的 ABI 稳定性（运行时 UB）、边界测试：trait 组合子的菱形继承问题（编译错误）、边界测试：组合优于继承时的 boilerplate 问题（逻辑错误）等5个方面，本节逐一说明其要点。
+
 ### 10.1 边界测试：trait 对象的组合限制（编译错误）
 
 ```rust,compile_fail
@@ -742,6 +750,8 @@ fn main() {}
 - **定理**: 系统可组合性 (System Composability) 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：什么是"系统可组合性"（System Composabili…、测验 2：`tower` 的 Service trait 如何体现可组…、测验 3：Rust 的 `serde` 如何支持数据格式的可组合性？（…、测验 4：插件系统（Plugin System）在 Rust 中通常如…等5个方面，本节依次展开。
 
 ### 测验 1：什么是"系统可组合性"（System Composability）？（理解层）
 

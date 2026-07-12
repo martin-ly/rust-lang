@@ -481,6 +481,8 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
 
 ## 四、中间件机制深度对比
 
+「中间件机制深度对比」部分包含中间件模型分类 与 中间件对比矩阵 两条主线，本节依次说明。
+
 ### 4.1 中间件模型分类
 
 > **[Tower docs](https://docs.rs/tower/latest/tower/)** Tower is a library of modular and reusable components for building robust networking clients and servers. The core abstraction is the `Service` trait.
@@ -552,6 +554,8 @@ fn main() {
 
 ## 五、性能基准与资源效率
 
+本节围绕「性能基准与资源效率」展开，覆盖 TechEmpower 基准解读 与 资源占用对比 两个方面。
+
 ### 5.1 TechEmpower 基准解读
 
 > **[TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)** The TechEmpower Web Framework Benchmarks is a performance comparison of many web application frameworks executing fundamental tasks such as JSON serialization, database access, and server-side template composition.
@@ -606,6 +610,8 @@ TechEmpower Round 22+ 解读（JSON 序列化 / 单次查询 / 多次查询）:
 
 ## 六、选型决策框架
 
+本节从选哪个框架？" 决策树 与 场景化推荐矩阵 两个层面剖析「选型决策框架」。
+
 ### 6.1 "选哪个框架？" 决策树
 
 ```mermaid
@@ -653,6 +659,8 @@ graph TD
 ---
 
 ## 七、反命题与边界分析
+
+「反命题与边界分析」部分包含反命题："Axum 总是最佳选择" 与 反命题："Web 框架性能决定一切" 两条主线，本节依次说明。
 
 ### 7.1 反命题："Axum 总是最佳选择"
 
@@ -829,6 +837,8 @@ graph TD
 
 ## 十、边界测试：Web 框架的编译错误
 
+本节从边界测试：axum 处理函数的签名约束（编译错误）、边界测试：共享状态的生命周期与 `Clone` 约束（编译错误）、边界测试：HTTP 请求的 body 大小限制与内存 DoS（运行时…、边界测试：Axum 的 extractor 顺序与请求体消耗（运行时…等5个方面切入，剖析「边界测试：Web 框架的编译错误」的核心内容。
+
 ### 10.1 边界测试：axum 处理函数的签名约束（编译错误）
 
 ```rust,compile_fail
@@ -971,6 +981,8 @@ fn main() {}
 - **定理**: Rust Web 框架对比与选型 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：`axum` 框架的核心设计特点是什么？（理解层）、测验 2：`actix-web` 与 `axum` 在架构上有什么主要…、测验 3：`rocket` 框架的"守卫"（Guards）和"响应者"…、测验 4：在 Rust Web 开发中，为什么通常选择 `serde`…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：`axum` 框架的核心设计特点是什么？（理解层）
 

@@ -57,6 +57,8 @@
 
 ## 1. 异步特性增强
 
+理解「异步特性增强」需要把握异步Trait稳定化（RPITIT）、异步闭包改进与async fn in trait生命周期推断，本节依次展开。
+
 ### 1.1 异步Trait稳定化（RPITIT）
 
 Rust 1.75.0+稳定化了async fn in trait，无需`async-trait`宏（Macro）：
@@ -187,6 +189,8 @@ impl StreamProcessor for NetworkProcessor {
 
 ## 2. GATs在网络编程中的应用
 
+「GATs在网络编程中的应用」部分的核心主题是泛型关联类型（Generic Associated Types），本节展开说明。
+
 ### 泛型关联类型（Generic Associated Types）
 
 ```rust
@@ -240,6 +244,8 @@ pub trait Connection {
 ---
 
 ## 3. let-else模式匹配
+
+「let-else模式匹配」部分的核心主题是网络错误处理，本节展开说明。
 
 ### 网络错误处理
 
@@ -298,6 +304,8 @@ pub fn load_config() -> Result<ServerConfig, String> {
 
 ## 4. impl Trait增强
 
+本节聚焦「impl Trait增强」，核心内容为返回类型优化。
+
 ### 返回类型优化
 
 ```rust
@@ -346,6 +354,8 @@ pub fn create_tcp_acceptor(
 ---
 
 ## 5. 常量泛型改进
+
+本节聚焦「常量泛型改进」，核心内容为固定大小缓冲区。
 
 ### 固定大小缓冲区
 
@@ -410,6 +420,8 @@ impl<const PACKET_SIZE: usize> PacketSplitter<PACKET_SIZE> {
 
 ## 6. 迭代器组合子增强
 
+本节专门讨论「迭代器组合子增强」下的网络数据处理。
+
 ### 网络数据处理
 
 ```rust
@@ -470,6 +482,8 @@ pub struct Packet {
 ---
 
 ## 7. 错误处理改进
+
+本节专门讨论「错误处理改进」下的网络错误类型。
 
 ### 网络错误类型
 
@@ -540,6 +554,8 @@ pub async fn fetch_with_error_handling(url: &str) -> Result<String, NetworkError
 
 ## 8. 网络专用特性应用
 
+本节聚焦「网络专用特性应用」，核心内容为 Edition 2024 特性（1.85.0+ stable）。
+
 ### Edition 2024 特性（1.85.0+ stable）
 
 ```rust
@@ -567,6 +583,8 @@ pub async fn improved_lifetime_elision(data: &str) -> &str {
 ---
 
 ## 9. 性能优化特性
+
+「性能优化特性」部分的核心主题是零成本抽象，本节展开说明。
 
 ### 零成本抽象
 
@@ -605,6 +623,8 @@ pub fn simd_checksum(data: &[u8]) -> u32 {
 ---
 
 ## 10. 实战示例集
+
+「实战示例集」部分包含完整HTTP客户端（Rust 1.90特性集成） 与  WebSocket服务器（完整特性） 两条主线，本节依次说明。
 
 ### 完整HTTP客户端（Rust 1.90特性集成）
 

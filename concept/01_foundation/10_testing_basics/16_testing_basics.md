@@ -209,6 +209,8 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 ## 二、技术细节
 
+本节从单元测试、集成测试与文档测试切入，剖析「技术细节」的核心内容。
+
 ### 2.1 单元测试
 >
 
@@ -428,6 +430,8 @@ API 契约:
 ---
 
 ## 四、反命题与边界分析
+
+本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
 
 ### 4.1 反命题树
 >
@@ -650,6 +654,8 @@ fn main() {}
 > **修正**: Rust 的**集成测试**（`tests/` 目录）将 crate 作为外部依赖使用，只能访问 `pub` API。`InternalStruct` 不是 `pub`，集成测试无法导入。测试私有代码的方法：1) `#[cfg(test)] mod tests { use super::*; }` — 单元测试在同一文件中，可访问私有项；2) `pub(crate)` — 使项在 crate 内可见（包括单元测试）；3) `pub` — 完全公开（集成测试可用）。设计权衡：集成测试验证公共 API 的行为，单元测试验证内部实现。过度公开内部类型（仅为测试）破坏封装。这与 Java 的 `package-private`（同包内可访问，类似 `pub(crate)`）或 Python 的 `_prefix`（约定私有，但测试可导入）不同——Rust 的可见性是编译期强制的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-03-test-organization.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/workspaces.html)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：单元测试通常放在哪里？集成测试又应该放在项目的哪个目录？（理…、测验 2：`assert_eq!(a, b)` 与 `assert!(…、测验 3：如何编写一个期望测试函数 panic 的测试？如何进一步检查…、测验 4：集成测试能否访问 crate 中的私有类型和函数？如果不能，…等5个方面，本节依次展开。
 
 ### 测验 1：单元测试通常放在哪里？集成测试又应该放在项目的哪个目录？（理解层）
 

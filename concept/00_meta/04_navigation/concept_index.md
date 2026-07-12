@@ -92,6 +92,8 @@
 
 ## 一、索引使用说明 [倒排索引方法论参照信息检索标准 — Manning, Raghavan & Schütze, *Introduction to Information Retrieval* (Cambridge, 2008); 语义链接网络参照 Knowledge Graph 构建方法论](../00_framework/methodology.md)
 
+「索引使用说明 倒排索引方法论参照信息检索标准 — Mann…」部分包含概念类型标记 概念分类参照语义网络理论 — Collins & Qui… 与 语义链接标记 语义链接类型参照知识图谱关系本体 — W3C RDF/O… 两条主线，本节依次说明。
+
 ### 1.1 概念类型标记 [概念分类参照语义网络理论 — Collins & Quillian (1969) 层次语义网络模型; 概念的层级组织与属性继承](../00_framework/methodology.md)
 
 | 标记 | 含义 | 示例 |
@@ -407,6 +409,8 @@
 ---
 
 ## 五、按 Bloom 层级排序 [Bloom, B.S. et al. — *Taxonomy of Educational Objectives: The Classification of Educational Goals*. Handbook I: Cognitive Domain. Longman, 1956 (revised 2001); 认知层级作为知识结构组织的主轴](https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/)
+
+「按 Bloom 层级排序 Bloom, B.S. et a…」涉及记忆（Remember）→ 理解（Understand）、应用（Apply）→ 分析（Analyze）与评价（Evaluate）→ 创造（Create），本节逐一说明其要点。
 
 ### 记忆（Remember）→ 理解（Understand）
 
@@ -748,6 +752,8 @@
 > **内容分级**: [综述级]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：本文档《全局概念索引（Concept Index）》在 Ru…、测验 2：《全局概念索引（Concept Index）》的主要用途是什…与测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）。
 
 ### 测验 1：本文档《全局概念索引（Concept Index）》在 Rust 知识体系中属于哪一层级的元数据？（理解层）
 

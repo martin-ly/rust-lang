@@ -190,6 +190,8 @@ extend enum Event {
 
 ## 二、`#[non_exhaustive]` 的形式化语义
 
+本节围绕「`#[non_exhaustive]` 的形式化语义」展开，依次讨论编译期影响：穷尽性检查的弱化、运行时语义：无变化与与模式匹配的交互。
+
 ### 2.1 编译期影响：穷尽性检查的弱化
 >
 
@@ -276,6 +278,8 @@ fn process_external(r: Response) -> String {
 
 ## 三、跨语言对比：开放枚举的多种形态
 
+「跨语言对比：开放枚举的多种形态」部分按 Scala：Sealed Traits + 子类、Haskell：Open Data Types、OCaml：Polymorphic Variants与Rust 当前方案：`#[non_exhaustive]` + 新变体的顺序逐层展开。
+
 ### 3.1 Scala：Sealed Traits + 子类
 >
 
@@ -359,6 +363,8 @@ graph LR
 
 ## 四、API 设计中的开放枚举模式
 
+「API 设计中的开放枚举模式」部分按错误码枚举、事件/消息类型与配置/选项枚举的顺序逐层展开。
+
 ### 4.1 错误码枚举
 
 ```rust
@@ -426,6 +432,8 @@ pub enum LogLevel {
 ---
 
 ## 五、反命题与边界分析
+
+本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
 
 ### 5.1 反命题树
 
@@ -550,6 +558,8 @@ pub enum ConstExample {
 ---
 
 ## 十、边界测试：Open Enums 预览的编译错误
+
+本节将「边界测试：Open Enums 预览的编译错误」分解为若干主题：边界测试：开放枚举的穷尽匹配失效（编译错误）、边界测试：开放枚举的整数转换安全（编译错误/运行时 panic）、边界测试：open enum 的 match 穷尽性检查松弛（编译错误）、边界测试：open enum 的整数转换与有效性检查（运行时 pani…等6个方面。
 
 ### 10.1 边界测试：开放枚举的穷尽匹配失效（编译错误）
 
@@ -720,6 +730,8 @@ fn main() {}
 - **定理**: Open Enums 概念预研：从 `` 到可扩展枚举 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：什么是"开放枚举"（Open Enums）？它解决了 Rus…、测验 2：开放枚举与 `#[non_exhaustive]` 属性有什…、测验 3：开放枚举对库作者和库用户分别有什么影响？（理解层）、测验 4：这个特性对 C FFI 中的枚举映射有什么帮助？（理解层）等5个方面，本节依次展开。
 
 ### 测验 1：什么是"开放枚举"（Open Enums）？它解决了 Rust 当前枚举的什么问题？（理解层）
 

@@ -31,6 +31,8 @@
 
 ## 一、基础定义
 
+本节从形式化验证（Formal Verification）、模型检测（Model Checking）与定理证明（Theorem Proving）切入，剖析「基础定义」的核心内容。
+
 ### 1.1 形式化验证（Formal Verification）
 
 > **来源**: [Wikipedia — Formal verification](https://en.wikipedia.org/wiki/Formal_verification)
@@ -60,6 +62,8 @@
 ---
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：形式化验证 vs 测试（理解层）、测验 2：Rust 形式化验证工具分层（应用层）、测验 3：RustBelt 的证明范围（应用层）、测验 4：形式化方法的 ROI（分析层）等5个方面，本节逐一说明其要点。
 
 ### 测验 1：形式化验证 vs 测试（理解层）
 
@@ -553,6 +557,8 @@ fn swap<T>(x: &mut T, y: &mut T) {
 
 ## 六、CI/CD 集成方案
 
+理解「CI/CD 集成方案」需要把握 GitHub Actions 集成、Pre-commit Hooks、分层验证策略、Kani 在 AWS 的流水线实践等8个方面，本节依次展开。
+
 ### 6.1 GitHub Actions 集成
 
 ```yaml
@@ -876,6 +882,8 @@ flowchart TD
 
 ## 七、工业案例研究
 
+本节从 AWS Kani、Microsoft Verus与Linux Kernel Verification切入，剖析「工业案例研究」的核心内容。
+
 ### 7.1 AWS Kani
 >
 >
@@ -915,6 +923,8 @@ Microsoft Research 的 Verus 项目致力于让系统软件验证更加实用：
 ---
 
 ## 八、TLA+ / P 语言 / PObserve 的分布式验证
+
+本节将「TLA+ / P 语言 / PObserve 的分布式验证」分解为若干主题： TLA+（时序逻辑动作）、P 语言（状态机编程语言）、PObserve（运行时对齐）、分布式验证工作流等5个方面。
 
 ### 8.1 TLA+（时序逻辑动作）
 >
@@ -1523,6 +1533,8 @@ graph TD
 > **相关文件**: [RustBelt 谓词映射](../../00_meta/02_sources/rustbelt_predicate_map.md) · [能力图谱](../../00_meta/00_framework/competency_graph.md#五形式化能力) · [RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md)
 
 ## 十、边界测试：形式化方法的编译错误
+
+本节从边界测试：Kani 验证的 `unsafe` 假设冲突（编译错误/验证…、边界测试：Prusti 的前置条件违反（编译错误/验证失败）、边界测试：形式化规格与实现的不一致（验证失败）与边界测试：形式化工具的编译器版本锁定（编译错误）切入，剖析「边界测试：形式化方法的编译错误」的核心内容。
 
 ### 10.1 边界测试：Kani 验证的 `unsafe` 假设冲突（编译错误/验证失败）
 

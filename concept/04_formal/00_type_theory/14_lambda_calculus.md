@@ -187,6 +187,8 @@ Rust 闭包:
 
 ## 二、计算能力
 
+「计算能力」部分包含 Church 编码 与  Y 组合子 两条主线，本节依次说明。
+
 ### 2.1 Church 编码
 >
 
@@ -263,6 +265,8 @@ Y 组合子:
 ---
 
 ## 三、反命题与边界分析
+
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
 
 ### 3.1 反命题树
 >
@@ -473,6 +477,8 @@ fn main() {
 
 ## 十、边界测试：lambda 演算的编译错误
 
+「边界测试：lambda 演算的编译错误」涉及边界测试：Y 组合子与递归类型（编译错误）、边界测试：高阶函数的类型推断（编译错误）、边界测试：Y 组合子在 Rust 中的实现（编译错误）、边界测试：λ 演算中的变量捕获与闭包（编译错误）等5个方面，本节逐一说明其要点。
+
 ### 10.1 边界测试：Y 组合子与递归类型（编译错误）
 
 ```rust,compile_fail
@@ -581,6 +587,8 @@ fn main() {}
 > **修正**: Y 组合子（Y Combinator）是**无类型 λ 演算**中实现递归的固定点组合子：`Y f = f (Y f)`。它在有类型系统中**不可直接表达**，因为自应用 `x x` 要求 `x` 同时是函数和其参数的类型，导致类型 `X = X -> X`，这在简单类型系统中无解（不是 well-founded 类型）。Rust 中实现递归：1) `fn` 的显式递归（`fn factorial(n: u64) -> u64`）；2) `fix` 组合子使用 trait object（`Box<dyn Fn(Box<dyn Any>) -> Box<dyn Any>>`）；3) 高阶 trait（HRTB + 关联类型）。这与 Haskell 的 `fix`（`fix f = let x = f x in x`，惰性求值允许无限展开）或 Scheme 的 `letrec`（语言原生支持递归绑定）不同——Rust 的严格求值和类型系统排除了无类型的 Y 组合子，但显式递归更安全和高效。[Y Combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator)] · [Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：β-归约（理解层）、测验 2：Rust 闭包的捕获模式（应用层）、测验 3：Church 编码（应用层）、测验 4：Y 组合子在 Rust 中的限制（分析层）等5个方面的顺序逐层展开。
 
 ### 测验 1：β-归约（理解层）
 

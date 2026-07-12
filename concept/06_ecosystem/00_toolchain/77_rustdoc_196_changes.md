@@ -64,6 +64,8 @@ Rust 1.96 的 Rustdoc 与文档生成工具链主要带来以下改进：
 
 ## 二、`target.'cfg(..)'.rustdocflags`
 
+本节围绕「`target.'cfg(..)'.rustdocflag…」展开，依次讨论背景、Rust 1.96 新增语法与典型应用场景。
+
 ### 2.1 背景
 
 在 Rust 1.96 之前，`rustdocflags` 只能在 `[build]` 下全局配置：
@@ -110,6 +112,8 @@ pub mod unix_only_api {
 
 ## 三、弃用（Deprecation）渲染改进
 
+本节围绕「弃用（Deprecation）渲染改进」展开，依次讨论变更内容、示例与建议。
+
 ### 3.1 变更内容
 
 Rust 1.96 改进了 rustdoc 对 `#[deprecated]` 属性的渲染：
@@ -147,6 +151,8 @@ pub fn load_from_toml(path: &str) -> Result<Config, ConfigError> {
 
 ## 四、侧边栏导航增强
 
+本节从变更内容 与 对 crate 作者的影响 两个层面剖析「侧边栏导航增强」。
+
 ### 4.1 变更内容
 
 Rust 1.96 对 Rustdoc 生成的 HTML 侧边栏进行了多项可用性改进：
@@ -164,6 +170,8 @@ Rust 1.96 对 Rustdoc 生成的 HTML 侧边栏进行了多项可用性改进：
 ---
 
 ## 五、`missing_doc_code_examples` lint 改进
+
+理解「`missing_doc_code_examples` l…」需要把握背景、Rust 1.96 改进、启用方式与与 `cargo test --doc` 的关系，本节依次展开。
 
 ### 5.1 背景
 

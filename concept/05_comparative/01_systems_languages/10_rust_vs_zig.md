@@ -231,6 +231,8 @@
 
 ## 二、工程实践差异
 
+本节从构建系统、交叉编译与C 互操作切入，剖析「工程实践差异」的核心内容。
+
 ### 2.1 构建系统
 >
 
@@ -388,6 +390,8 @@ C 互操作对比:
 ---
 
 ## 四、反命题与边界分析
+
+本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
 
 ### 4.1 反命题树
 >
@@ -577,6 +581,8 @@ fn main() {
 
 ## 十、边界测试：Rust 与 Zig 的编译错误对比
 
+理解「边界测试：Rust 与 Zig 的编译错误对比」需要把握边界测试：Zig 的 comptime vs Rust 的 const…、边界测试：Zig 的显式内存管理与 Rust 的所有权（编译错误）、边界测试：Zig 的 `comptime` 与 Rust 的 `con…与边界测试：Zig 的显式内存分配与 Rust 的全局分配器（编译错误），本节依次展开。
+
 ### 10.1 边界测试：Zig 的 comptime vs Rust 的 const generics（编译错误）
 
 ```rust,compile_fail
@@ -684,6 +690,8 @@ fn main() {
 > **修正**: Rust 的 `const fn` 支持**编译期求值**，但能力有限：1) 不能堆分配（`Vec`、`Box`、`String`）；2) 不能调用非 `const fn`；3) 不能有 `unsafe` 块。Zig 的 `comptime` 更强大：可在编译期执行任意代码（包括内存分配、I/O、网络请求），编译失败时提供堆栈跟踪。Rust 的 `const` 系统保守但安全：保证编译期求值终止（无无限循环），避免编译期副作用。未来演进：`const Heap`（提案中，允许编译期堆分配）、`const_mut_refs`（已稳定，允许 `&mut` 在 const fn 中）。这与 C++ 的 `constexpr`（C++20 支持堆分配和虚函数）或 D 的 CTFE（Compile-Time Function Execution，类似 Zig）不同——Rust 的 const 系统逐步扩展，每次需形式化验证安全性。[来源: [Rust Reference — const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)] · [来源: [Zig Documentation](https://ziglang.org/documentation/master/)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Rust 和 Zig 的设计哲学有什么根本差异？（理解层）、测验 2：Zig 的 `comptime` 与 Rust 的宏系统（`…、测验 3：Zig 没有隐式内存分配的策略对系统编程有什么意义？（理解层）、测验 4：Rust 的所有权系统与 Zig 的显式生命周期管理相比，哪…等5个方面。
 
 ### 测验 1：Rust 和 Zig 的设计哲学有什么根本差异？（理解层）
 

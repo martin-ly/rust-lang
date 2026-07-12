@@ -122,6 +122,8 @@
 
 ## 二、时间域：事件时间 vs 处理时间 vs 摄取时间
 
+本节围绕「时间域：事件时间 vs 处理时间 vs 摄取时间」展开，覆盖三种时间语义 与 事件时间的不可替代性 两个方面。
+
 ### 2.1 三种时间语义
 
 ```text
@@ -205,6 +207,8 @@ Session  [0,3)     [6,9)          [14,18)
 
 ## 四、Watermark：事件时间进度的推断机制
 
+本节从 Watermark 的形式化定义 与  Watermark 的两种失败模式 两个层面剖析「Watermark：事件时间进度的推断机制」。
+
 ### 4.1 Watermark 的形式化定义
 
 **理想 Watermark**: `W_ideal(t) = min{ τ(e) | e 已到达系统 }`。
@@ -283,6 +287,8 @@ Accumulating+Retracting: [10] ── [-10,25] ── [-25,30] (下游需 retract
 
 ## 六、容错语义：Exactly-Once 的形式化
 
+本节围绕「容错语义：Exactly-Once 的形式化」展开，依次讨论三种处理保证、Chandy-Lamport 分布式快照与Barrier 对齐 vs 非对齐。
+
 ### 6.1 三种处理保证
 
 | 保证级别 | 定义 | 语义 | 典型实现 |
@@ -329,6 +335,8 @@ Checkpoint-1 完成（一致性全局快照）
 
 ## 七、状态管理：Operator State vs Keyed State
 
+「状态管理：Operator State vs Keyed…」部分包含状态类型 与 状态后端 两条主线，本节依次说明。
+
 ### 7.1 状态类型
 
 | 状态类型 | 作用域 | 分区方式 | 典型用途 |
@@ -351,6 +359,8 @@ Checkpoint-1 完成（一致性全局快照）
 ---
 
 ## 八、背压（Backpressure）：流量控制的语义
+
+本节从背压的本质、背压实现机制与Rust 的背压优势切入，剖析「背压（Backpressure）：流量控制的语义」的核心内容。
 
 ### 8.1 背压的本质
 
@@ -393,6 +403,8 @@ tx.send(42).await?;
 ---
 
 ## 九、增量计算：Differential Dataflow 的 diff 代数
+
+理解「增量计算：Differential Dataflow 的…」需要把握核心抽象：Collection = Stream of Diffs、增量运算符的语义与Timely Dataflow：时间感知的计算图，本节依次展开。
 
 ### 9.1 核心抽象：Collection = Stream of Diffs
 
@@ -446,6 +458,8 @@ Timely Dataflow（TD）是 DD 的底层执行引擎，核心创新是**时间戳
 ---
 
 ## 十、物化视图与 CDC：流式 SQL 的语义
+
+「物化视图与 CDC：流式 SQL 的语义」部分包含从批处理 SQL 到流式 SQL 与  CDC（Change Data Capture） 两条主线，本节依次说明。
 
 ### 10.1 从批处理 SQL 到流式 SQL
 
@@ -509,6 +523,8 @@ GROUP BY region;
 ---
 
 ## 十二、反例与边界测试
+
+本节围绕「反例与边界测试」展开，依次讨论边界测试：无 Watermark 的流处理（伪代码）、边界测试：共享状态管理器的并发访问（编译错误）、边界测试：Exactly-Once 的 Sink 陷阱与边界测试：背压与死锁。
 
 ### 12.1 边界测试：无 Watermark 的流处理（伪代码）
 
@@ -626,6 +642,8 @@ async fn main() {
 
 ## 十、边界测试：流处理语义的编译错误
 
+理解「边界测试：流处理语义的编译错误」需要把握边界测试：Tokio Stream 与所有权冲突（编译错误）、边界测试：背压传播中的类型不匹配（编译错误）与边界测试：Stream 的 `fuse` 与重复 poll 后的行为（…，本节依次展开。
+
 ### 10.1 边界测试：Tokio Stream 与所有权冲突（编译错误）
 
 ```rust,compile_fail
@@ -734,6 +752,8 @@ fn main() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch17-00-async-await.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：`Stream` trait 与 `Iterator` tr…、测验 2：`futures::StreamExt::buffered(…、测验 3：背压（Backpressure）在流处理中是什么意思？Tok…、测验 4：`Stream::merge` 与 `Stream::cha…等5个方面的顺序逐层展开。
 
 ### 测验 1：`Stream` trait 与 `Iterator` trait 的核心区别是什么？（理解层）
 

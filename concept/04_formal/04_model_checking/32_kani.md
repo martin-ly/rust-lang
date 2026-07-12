@@ -84,6 +84,8 @@
 
 ## 二、安装与基本用法
 
+「安装与基本用法」涉及安装、验证单个 harness与验证整个 crate，本节逐一说明其要点。
+
 ### 安装
 
 ```bash
@@ -118,6 +120,8 @@ Kani 会自动发现所有标注了 `#[kani::proof]` 的 harness 并逐一验证
 ---
 
 ## 三、核心概念
+
+「核心概念」涉及 Harness：`#[kani::proof]`、非确定性输入：`kani::any()`、假设与断言：`kani::assume` / `assert!`、函数合约：`#[kani::requires]` / `#[kani:…等7个方面，本节逐一说明其要点。
 
 ### Harness：`#[kani::proof]`
 
@@ -235,6 +239,8 @@ kani autoharness --function increment_all --harness-depth 2
 ---
 
 ## 四、可运行示例
+
+本节将「可运行示例」分解为若干主题：示例 1：简单函数安全证明、示例 2：循环与循环合约与示例 3：数据结构边界条件。
 
 ### 示例 1：简单函数安全证明
 

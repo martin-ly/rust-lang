@@ -417,6 +417,8 @@ Rust 元编程的演进方向:
 
 ## 四、反命题与边界分析
 
+本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
+
 ### 4.1 反命题树
 
 ```text
@@ -631,6 +633,8 @@ fn main() {
 
 ## 十、边界测试：元编程的编译错误
 
+「边界测试：元编程的编译错误」涉及边界测试：过程宏的 TokenStream 解析失败（编译错误）、边界测试：常量泛型的非常量表达式（编译错误）、边界测试：常量泛型的表达式复杂度（编译错误）、边界测试：`TypeId` 的跨 crate 稳定性（逻辑错误）等5个方面，本节逐一说明其要点。
+
 ### 10.1 边界测试：过程宏的 TokenStream 解析失败（编译错误）
 
 ```rust,compile_fail
@@ -735,6 +739,8 @@ fn main() {
 > **修正**: Rust 编译器的**宏递归限制**：默认 128 层展开，防止无限递归导致编译器栈溢出。`count!` 宏递归计数 token 数量，大量 token 会超出限制。增加限制：`#![recursion_limit = "256"]`（crate 级别）。但过度递归增加编译时间。替代方案：1) 使用 `const fn` 替代宏递归（若逻辑可在 const 中表达）；2) 使用过程宏（无递归限制，但复杂度更高）；3) 减少 token 数量（批量处理）。这与 C 的预处理器（无递归限制，可能无限展开）或 Template Haskell（编译期执行 Haskell 代码，受运行时（Runtime）栈限制）不同——Rust 的宏递归限制是编译期的安全阀。[来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：`macro_rules!` 与过程宏（proc macro…、测验 2：声明宏的"卫生性"（hygiene）意味着什么？（理解层）、测验 3：`compile_error!("msg")` 宏的作用是什…、测验 4：`concat!` 和 `stringify!` 宏分别做什…等5个方面。
 
 ### 测验 1：`macro_rules!` 与过程宏（proc macro）在元编程中的根本区别是什么？（理解层）
 

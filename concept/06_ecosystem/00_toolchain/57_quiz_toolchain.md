@@ -31,6 +31,8 @@
 
 ## 一、Cargo 依赖管理
 
+本节将「Cargo 依赖管理」分解为若干主题： Q1. 以下 `Cargo.toml` 片段中，`^`、`~`、`=`…、Q2. 以下命令的作用是什么？与Q3. 以下 `Cargo.toml` 配置的作用是什么？。
+
 ### Q1. 以下 `Cargo.toml` 片段中，`^`、`~`、`=` 版本约束的含义是什么？
 
 ```toml
@@ -148,6 +150,8 @@ tokio = { workspace = true, features = ["rt-multi-thread"] }
 ---
 
 ## 二、Clippy 与代码质量
+
+「Clippy 与代码质量」部分包含 Q4. 以下代码中，Clippy 会发出什么警告？如何修复？ 与  Q5. 以下代码在 Miri 下运行会发生什么？ 两条主线，本节依次说明。
 
 ### Q4. 以下代码中，Clippy 会发出什么警告？如何修复？
 
@@ -268,6 +272,8 @@ fn main() {
 
 ## 三、编译配置与目标平台
 
+「编译配置与目标平台」部分的核心主题是 Q6. 以下 `.cargo/config.toml` 配置的作用是什…，本节展开说明。
+
 ### Q6. 以下 `.cargo/config.toml` 配置的作用是什么？
 
 ```toml
@@ -311,6 +317,8 @@ strip = true        # 移除 debug 符号
 ---
 
 ## 四、文档与发布
+
+本节从 Q7. 以下 `cargo doc` 命令的作用是什么？ 与  Q8. 以下命令序列的作用是什么？发布 crate 到 crates.… 两个层面剖析「文档与发布」。
 
 ### Q7. 以下 `cargo doc` 命令的作用是什么？
 
@@ -405,6 +413,8 @@ cargo publish
 ---
 
 ## 五、综合应用
+
+本节从 Q9. 以下 `Cargo.toml` 中的 `[profile]`… 与  Q10. 以下命令如何帮助诊断编译问题？ 两个层面剖析「综合应用」。
 
 ### Q9. 以下 `Cargo.toml` 中的 `[profile]` 配置如何影响编译产物？
 
@@ -507,6 +517,8 @@ RUST_BACKTRACE=1 cargo run
 > **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html) · [Miri Book](https://rustc-dev-guide.rust-lang.org/miri.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：本文件是 测验：Rust 工具链（L6 试点扩展） 的专项测…、测验 2：在 测验：Rust 工具链（L6 试点扩展） 的测验中，若遇…与测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层），本节依次展开。
 
 ### 测验 1：本文件是 测验：Rust 工具链（L6 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 

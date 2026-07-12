@@ -34,6 +34,8 @@
 
 ## 一、标量与复合类型
 
+本节将「标量与复合类型」分解为若干主题： Q1. 以下代码的输出是什么？、Q2. 以下代码能否编译？与Q3. 以下代码能否编译？若不能，如何修改？。
+
 ### Q1. 以下代码的输出是什么？
 
 ```rust
@@ -133,6 +135,8 @@ match element {
 ---
 
 ## 二、枚举与模式匹配
+
+本节围绕「枚举与模式匹配」展开，依次讨论 Q4. 以下代码的输出是什么？、Q5. 以下代码能否编译？解释 `if let` 的作用与Q6. 以下代码的输出是什么？解释 `_` 和 `..` 的作用。
 
 ### Q4. 以下代码的输出是什么？
 
@@ -260,6 +264,8 @@ fn main() {
 
 ## 三、类型转换与强制
 
+本节围绕「类型转换与强制」展开，覆盖 Q7. 以下代码能否编译？ 与  Q8. 以下代码能否编译？`&str` 和 `String` 的区别是… 两个方面。
+
 ### Q7. 以下代码能否编译？
 
 ```rust,compile_fail
@@ -342,6 +348,8 @@ let s = "hello";              // ✅ 类型推断为 &str
 ---
 
 ## 四、综合应用
+
+本节从 Q9. 以下代码的输出是什么？ 与  Q10. 以下代码能否编译？解释 `#[derive(Debug)]`… 两个层面剖析「综合应用」。
 
 ### Q9. 以下代码的输出是什么？
 
@@ -458,6 +466,8 @@ Rectangle {
 > **权威来源**: [The Rust Programming Language — Ch3](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) · [The Rust Programming Language — Ch6](https://doc.rust-lang.org/book/ch06-00-enums.html) · [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：本文件是 测验：类型系统（试点扩展） 的专项测验集。这类测验…、测验 2：在 测验：类型系统（试点扩展） 的测验中，若遇到不确定答案的…与测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层）。
 
 ### 测验 1：本文件是 测验：类型系统（试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 

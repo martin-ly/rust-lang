@@ -69,6 +69,8 @@
 
 ## 一、核心概念
 
+「核心概念」涉及外部可变性与内部可变性的对比、内部可变性的类型谱系与运行时借用检查，本节逐一说明其要点。
+
 ### 1.1 外部可变性与内部可变性的对比
 
 Rust 的默认规则是**外部可变性**（External Mutability）——可变访问需要 `&mut`：
@@ -174,6 +176,8 @@ RefCell<T> 的运行时借用规则:
 ---
 
 ## 二、技术细节
+
+本节将「技术细节」分解为若干主题： `Cell<T>`：无借用语义的复制、`RefCell<T>`：动态借用规则与`Mutex<T>` 与 `RwLock<T>`：线程安全版本。
 
 ### 2.1 `Cell<T>`：无借用语义的复制
 
@@ -336,6 +340,8 @@ let rw = RwLock::new(vec![1, 2, 3]);
 ---
 
 ## 四、反命题与边界分析
+
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
 
 ### 4.1 反命题树
 >
@@ -687,6 +693,8 @@ fn main() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Cell vs RefCell（理解层）、测验 2：RefCell 的运行时借用规则（应用层）、测验 3：内部可变性的适用场景（应用层）、测验 4：`Rc<RefCell<T>>` 模式（分析层）等5个方面。
 
 ### 测验 1：Cell vs RefCell（理解层）
 

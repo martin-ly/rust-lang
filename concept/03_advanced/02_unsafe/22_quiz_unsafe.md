@@ -35,6 +35,8 @@
 
 ## 一、Unsafe 基础语义
 
+本节从 Q1. 以下代码能否编译？`unsafe` 关键字的作用是什么？ 与  Q2. 以下代码能否编译？解释 `unsafe fn` 与 `unsa… 两个层面剖析「Unsafe 基础语义」。
+
 ### Q1. 以下代码能否编译？`unsafe` 关键字的作用是什么？
 
 ```rust
@@ -139,6 +141,8 @@ fn main() {
 
 ## 二、原始指针与内存安全
 
+本节围绕「原始指针与内存安全」展开，覆盖 Q3. 以下代码能否编译？存在什么风险？ 与  Q4. 以下代码能否编译？Miri 会如何报告？ 两个方面。
+
 ### Q3. 以下代码能否编译？存在什么风险？
 
 ```rust
@@ -232,6 +236,8 @@ fn main() {
 ---
 
 ## 三、Unsafe Trait 与 FFI
+
+「Unsafe Trait 与 FFI」部分包含 Q5. 以下代码能否编译？解释 `Sync` 和 `Send` 的 `… 与  Q6. 以下代码存在什么问题？这是 FFI 的经典陷阱 两条主线，本节依次说明。
 
 ### Q5. 以下代码能否编译？解释 `Sync` 和 `Send` 的 `unsafe impl`
 
@@ -332,6 +338,8 @@ fn main() {
 ---
 
 ## 四、综合应用
+
+本节围绕「综合应用」展开，依次讨论 Q7. 以下代码能否编译？`MaybeUninit` 的作用是什么？、Q8. 以下代码的输出是什么？解释 `std::ptr::read`…、Q9. 以下代码存在什么问题？解释 `unsafe_op_in_uns…与Q10. 以下代码能否编译？Miri 会报告什么问题？。
 
 ### Q7. 以下代码能否编译？`MaybeUninit` 的作用是什么？
 
@@ -565,6 +573,8 @@ fn main() {
 > **权威来源**: [The Rust Programming Language — Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：本文件是 测验：Unsafe Rust（L3 试点扩展） 的…、测验 2：在 测验：Unsafe Rust（L3 试点扩展） 的测验中…与测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层）切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：本文件是 测验：Unsafe Rust（L3 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 

@@ -111,6 +111,8 @@ rustc 测试体系
 
 ## 四、Tidy 与 Formatting
 
+本节围绕「Tidy 与 Formatting」展开，覆盖 Tidy 与  rustfmt 两个方面。
+
 ### Tidy
 
 Tidy 是 Rust 仓库的自定义检查工具，负责：
@@ -135,6 +137,8 @@ Tidy 是 Rust 仓库的自定义检查工具，负责：
 ---
 
 ## 五、工具测试与 Book 文档测试
+
+本节从工具测试、Book 文档测试、Linkchecker与distcheck切入，剖析「工具测试与 Book 文档测试」的核心内容。
 
 ### 工具测试
 
@@ -202,6 +206,8 @@ crater run start=master end=pr-branch
 ---
 
 ## 嵌入式测验
+
+本节围绕「嵌入式测验」展开，依次讨论测验 1：`compiletest` 主要用于测试什么？、测验 2：UI 测试的独特价值是什么？、测验 3：Crater 在 Rust 生态中扮演什么角色？与测验 4：`./x test tidy` 主要检查什么？。
 
 ### 测验 1：`compiletest` 主要用于测试什么？
 

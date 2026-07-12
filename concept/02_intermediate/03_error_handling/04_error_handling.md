@@ -161,6 +161,8 @@
 
 ## 一、权威定义（Definition）
 
+本节将「权威定义（Definition）」分解为若干主题： Wikipedia 对齐定义、TRPL 官方定义与形式化定义。
+
 ### 1.1 Wikipedia 对齐定义
 
 >
@@ -198,6 +200,8 @@ Result<T, E> ≅ T + E       （余和类型: Ok(T) + Err(E)）
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
+
+本节从错误处理机制矩阵、Rust vs 其他语言错误处理对比与`Result` 组合子矩阵切入，剖析「概念属性矩阵（Attribute Matrix）」的核心内容。
 
 ### 2.1 错误处理机制矩阵
 >
@@ -275,6 +279,8 @@ graph TD
 ---
 
 ## 四、定理推理链（Theorem Chain）
+
+理解「定理推理链（Theorem Chain）」需要把握引理：Result<T,E> ⟹ 和类型强制错误处理、定理：? 运算符 ⟹ 错误传播自动化、推论：panic ⟹ 不可恢复错误的显式边界、类型安全错误处理等5个方面，本节依次展开。
 
 ### 4.1 引理：Result<T,E> ⟹ 和类型强制错误处理
 >
@@ -373,6 +379,8 @@ graph TD
 ---
 
 ## 五、示例与反例（Examples & Counter-examples）
+
+本节围绕「示例与反例（Examples & Counter-exam…」展开，依次讨论正确示例：`?` 运算符链式传播、正确示例：自定义错误类型、反例：`?` 在错误返回类型中不匹配、反例：忽略 Result 导致 bug等6个方面。
 
 ### 5.1 正确示例：`?` 运算符链式传播
 
@@ -801,6 +809,8 @@ graph TD
 ---
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
+
+本节从测试 1: ? 运算符在闭包中的限制、测试 2: From 转换链的边界、测试 3: panic 边界与 catch_unwind与测试 4: Result 与 Option 的组合边界切入，剖析「边界极限测试代码（Boundary Limit Tests）」的核心内容。
 
 ### 7.1 测试 1: ? 运算符在闭包中的限制
 
@@ -2065,6 +2075,8 @@ fn compute() -> Maybe<i32> {
 
 ## 十一、待补充与演进方向（TODOs）
 
+理解「待补充与演进方向（TODOs）」需要把握 `std::backtrace::Backtrace` 与错误追踪、`Termination` trait 与 main 返回 Result、`eyre` / `color-eyre` / `miette` /…、`#[track_caller]` 与错误定位优化等7个方面，本节依次展开。
+
 ### 11.1 `std::backtrace::Backtrace` 与错误追踪
 
 **定义**：`std::backtrace::Backtrace` 在运行时捕获当前调用栈，为 `Error` 类型提供位置上下文，无需依赖外部 crate。
@@ -2247,6 +2259,8 @@ impl<T, E> Try for MyResult<T, E> {
 
 ## 十、C++ 异常安全 vs Rust 错误处理
 
+本节从异常安全保证等级、C++ 异常 vs Rust `Result` 的 ABI 差异、C++23 `std::expected` vs Rust `Resu…与析构函数异常：C++ 的致命陷阱切入，剖析「C++ 异常安全 vs Rust 错误处理」的核心内容。
+
 ### 10.1 异常安全保证等级
 
 C++ 社区定义了三种异常安全保证（Exception Safety Guarantees）：
@@ -2343,6 +2357,8 @@ impl Drop for Safe {
 ---
 
 ## 十一、边界测试：错误处理的编译错误
+
+「边界测试：错误处理的编译错误」涉及边界测试：? 运算符在错误类型不匹配时使用（编译错误）、边界测试：panic 在 const fn 中（编译错误）、边界测试：`Result` 未处理（编译错误）、边界测试：`?` 在闭包中的类型推断失败（编译错误）等9个方面，本节逐一说明其要点。
 
 ### 11.1 边界测试：? 运算符在错误类型不匹配时使用（编译错误）
 
@@ -2550,6 +2566,8 @@ fn main() {
 > 错误类型精确 ⟸ thiserror/anyhow 分层 ⟸ 错误架构
 >
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：`?` 运算符的转换（理解层）、测验 2：自定义错误类型（应用层）、测验 3：忽略 `Result` 的危险（分析层）、测验 4：`Option` 与 `Result` 转换（应用层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：`?` 运算符的转换（理解层）
 

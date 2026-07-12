@@ -41,6 +41,8 @@ type MyIter = impl Iterator<Item = i32>;
 
 ## 二、语法说明与核心规则
 
+「语法说明与核心规则」部分按模块级 TAIT、关联类型 TAIT（最常见用法）与核心限制的顺序逐层展开。
+
 ### 2.1 模块级 TAIT
 
 ```rust,editable
@@ -176,6 +178,8 @@ fn main() {}
 > **反命题**: "TAIT Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：Type Alias Impl Trait（TAIT）是什么…、测验 2：TAIT 与 `impl Trait` 在函数返回位置有什么…、测验 3：TAIT 对递归类型和状态机有什么帮助？（理解层）、测验 4：TAIT 目前的限制是什么？（理解层）等5个方面的顺序逐层展开。
 
 ### 测验 1：Type Alias Impl Trait（TAIT）是什么？（理解层）
 

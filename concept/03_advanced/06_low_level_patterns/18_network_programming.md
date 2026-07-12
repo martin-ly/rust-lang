@@ -90,6 +90,8 @@
 
 ## 一、权威定义与核心概念
 
+本节围绕「权威定义与核心概念」展开，依次讨论异步网络 IO 模型、Tokio Runtime 架构、TCP vs UDP 语义差异与Tower Service 抽象。
+
 ### 1.1 异步网络 IO 模型
 >
 > **[Wikipedia: Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)** Asynchronous I/O (AIO) is a form of input/output processing that permits other processing to continue before the transmission has finished.
@@ -237,6 +239,8 @@ TCP vs UDP 语义矩阵:
 
 ## 十、边界测试：网络编程的编译错误
 
+「边界测试：网络编程的编译错误」部分包含边界测试：`TcpStream` 的 `move` 与分裂（编译错误） 与 边界测试：套接字地址类型不匹配（编译错误） 两条主线，本节依次说明。
+
 ### 10.1 边界测试：`TcpStream` 的 `move` 与分裂（编译错误）
 
 ```rust,compile_fail
@@ -335,6 +339,8 @@ Tower 核心抽象:
 ---
 
 ## 二、技术细节
+
+「技术细节」涉及 Tokio TCP 服务端实现、Tokio UDP 编程模型、Socket 选项与调优与Tower 中间件栈，本节逐一说明其要点。
 
 ### 2.1 Tokio TCP 服务端实现
 >
@@ -519,6 +525,8 @@ let service = ServiceBuilder::new()
 
 ## 四、思维导图（Mermaid）
 
+本节从 Tokio 网络 IO 架构图 与  Tower Service 中间件栈 两个层面剖析「思维导图（Mermaid）」。
+
 ### 4.1 Tokio 网络 IO 架构图
 
 ```mermaid
@@ -606,6 +614,8 @@ graph LR
 ---
 
 ## 五、反命题与边界分析
+
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
 
 ### 5.1 反命题树
 
@@ -874,6 +884,8 @@ fn main() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：`tokio::net::TcpListener::bind…、测验 2：在 async 函数中直接调用 `std::thread::…、测验 3：`tokio::spawn` 返回什么？任务返回值如何获取？…、测验 4：`async fn` 与同步函数在返回类型上有什么本质区别？…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：`tokio::net::TcpListener::bind(...).await` 与 `std::net::TcpListener::bind(...)` 在阻塞行为上有什么区别？（理解层）
 

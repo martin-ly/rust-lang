@@ -180,6 +180,8 @@ graph LR
 
 ## 二、技术细节
 
+本节从错误处理：Result vs Exception、并发模型：fearless vs GIL与元编程：宏 vs 装饰器/元类切入，剖析「技术细节」的核心内容。
+
 ### 2.1 错误处理：Result vs Exception
 >
 
@@ -325,6 +327,8 @@ CLI 工具:
 ---
 
 ## 四、反命题与边界分析
+
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
 
 ### 4.1 反命题树
 >
@@ -484,6 +488,8 @@ graph TD
 
 ## 十、边界测试：Rust 与 Python 的编译错误对比
 
+本节聚焦「边界测试：Rust 与 Python 的编译错误对比」，核心内容为边界测试：Python 的动态类型 vs Rust 的静态类型（编译错…。
+
 ### 10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）
 
 ```rust,ignore
@@ -509,6 +515,8 @@ fn fixed() {
 > **Python 对比**: Python 是动态类型——变量名只是标签，可以指向任何类型的对象：`x = 42; x =
 
 ## 十、边界测试：Rust 与 Python 的编译错误对比
+
+本节围绕「边界测试：Rust 与 Python 的编译错误对比」展开，依次讨论边界测试：Python 的动态类型 vs Rust 的静态类型（编译错…、边界测试：Python 的 GIL 与 Rust 的所有权并发（编译错…、边界测试：Python 的 GIL 与 Rust 的 `Arc<Mut…与边界测试：Python 式动态类型在 Rust 中的不可表达（编译错误）。
 
 ### 10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）
 
@@ -607,6 +615,8 @@ fn main() {
 > **修正**: Python 是**动态类型**：变量无固定类型，`x = 42` 后 `x = "hello"` 完全合法。Rust 是**静态类型**：变量类型在编译期确定且不可变（但值可变，若绑定为 `mut`）。Rust 模拟动态类型的方案：1) `enum`（代数数据类型）：`enum Value { Int(i32), Str(String) }`；2) `Box<dyn Any>`（运行时类型擦除）；3) `serde_json::Value`（通用 JSON 值）。代价：代码膨胀、运行时开销、模式匹配（Pattern Matching）噪音。这与 Go 的 `interface{}`（类似动态类型，但需类型断言）或 TypeScript 的 `any`（编译期绕过检查）不同——Rust 的静态类型是核心设计语言，动态类型是额外抽象。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)] · [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Rust 和 Python 在类型系统上的核心区别是什么？（…、测验 2：Python 的 GIL（全局解释器锁）对并发有什么限制？R…、测验 3：为什么 Rust 常被用来重写 Python 的性能瓶颈模块…、测验 4：Python 的"鸭子类型"（Duck Typing）与 R…等5个方面。
 
 ### 测验 1：Rust 和 Python 在类型系统上的核心区别是什么？（理解层）
 

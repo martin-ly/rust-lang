@@ -74,6 +74,8 @@
 
 ## 一、核心概念
 
+本节将「核心概念」分解为若干主题：什么是 `!`、形式语义：底类型与Coercion 规则。
+
 ### 1.1 什么是 `!`
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/types/never.html)]**
@@ -157,6 +159,8 @@ fn demo_coercion(flag: bool) -> String {
 
 ## 二、控制流应用
 
+「控制流应用」部分按发散函数、`Result<T, !>` — 不可能失败与`Option<!>` — 不可能存在的顺序逐层展开。
+
 ### 2.1 发散函数
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]**
@@ -229,6 +233,8 @@ pub fn handle_impossible(opt: Option<!>) -> &'static str {
 
 ## 三、穷尽性检查
 
+本节围绕「穷尽性检查」展开，覆盖 Match 臂完备性 与 与空枚举的对比 两个方面。
+
 ### 3.1 Match 臂完备性
 
 > **[来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]**
@@ -293,6 +299,8 @@ fn new_style() -> Result<i32, !> {
 ---
 
 ## 四、Never Type 稳定化进展
+
+「Never Type 稳定化进展」涉及完整稳定化仍在进行中、Rust 1.92：deny-by-default 的 future-…与Rust 1.96：Tuple Coercion，本节逐一说明其要点。
 
 ### 4.1 完整稳定化仍在进行中
 
@@ -372,6 +380,8 @@ impl Config {
 
 ## 五、常见模式
 
+本节将「常见模式」分解为若干主题：模式 1：编译期常量求值、模式 2：流处理中的不可能错误与模式 3：与 `ControlFlow` 结合。
+
 ### 模式 1：编译期常量求值
 
 ```rust,ignore
@@ -410,6 +420,8 @@ fn find_target(items: &[i32]) -> ControlFlow<i32, !> {
 ---
 
 ## 六、边界测试
+
+本节将「边界测试」分解为若干主题：边界测试：尝试构造 `!` 的值（编译错误）、边界测试：`Some(!)` 不可构造（编译错误）与边界测试：忘记处理 `Ok` 分支（编译错误）。
 
 ### 6.1 边界测试：尝试构造 `!` 的值（编译错误）
 
@@ -462,6 +474,8 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 > **状态**: ✅ 已完成
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：`!`（never type）在 Rust 类型系统中被称为…、测验 2：以下代码是否合法？`let x: String = pani…、测验 3：`continue`、`break`（带值除外）、`retu…、测验 4：函数签名 `fn foo() -> !` 表示什么含义？这种…等5个方面，本节依次展开。
 
 ### 测验 1：`!`（never type）在 Rust 类型系统中被称为底类型。它有一个特殊性质：它是任何类型的子类型。请问，`Result<i32, !>` 的 `Err` 分支在 match 中需要处理吗？（理解层）
 

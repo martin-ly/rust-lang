@@ -40,6 +40,8 @@
 
 ## 二、使用 cargo expand
 
+「使用 cargo expand」部分包含安装与基础用法 与 比较宏展开差异 两条主线，本节依次说明。
+
 ### 2.1 安装与基础用法
 
 ```bash
@@ -75,6 +77,8 @@ diff -u before.rs after.rs
 
 ## 三、在宏中打印诊断信息
 
+本节从过程宏中的 stderr 输出 与 声明宏中的条件调试 两个层面剖析「在宏中打印诊断信息」。
+
 ### 3.1 过程宏中的 stderr 输出
 
 ```rust
@@ -104,6 +108,8 @@ macro_rules! debug_macro {
 ---
 
 ## 四、精确错误定位
+
+「精确错误定位」部分按使用 syn::Error、组合多个错误与proc-macro-error 友好错误的顺序逐层展开。
 
 ### 4.1 使用 syn::Error
 
@@ -175,6 +181,8 @@ pub fn my_trait(input: TokenStream) -> TokenStream {
 ---
 
 ## 五、编译期性能分析
+
+「编译期性能分析」涉及 cargo build --timings、RUSTC_LOG与测量宏展开耗时，本节逐一说明其要点。
 
 ### 5.1 cargo build --timings
 

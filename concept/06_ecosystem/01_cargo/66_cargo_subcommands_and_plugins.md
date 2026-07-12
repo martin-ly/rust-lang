@@ -60,6 +60,8 @@ Cargo 通过以下机制与第三方工具集成：
 
 ## 二、自定义子命令
 
+本节将「自定义子命令」分解为若干主题：命名约定、安装方式与别名。
+
 ### 命名约定
 
 创建一个名为 `cargo-hello` 的可执行文件并放到 `PATH` 中：
@@ -98,6 +100,8 @@ fmt-check = "fmt -- --check"
 ---
 
 ## 三、`cargo metadata` 与 JSON 消息
+
+本节从 `cargo metadata` 与  `--message-format=json` 两个层面剖析「`cargo metadata` 与 JSON 消息」。
 
 ### `cargo metadata`
 
@@ -173,6 +177,8 @@ fn main() {
 ---
 
 ## 嵌入式测验
+
+本节从测验 1：自定义 Cargo 子命令的可执行文件命名规则是什么？、测验 2：`cargo metadata` 的输出格式是什么？、测验 3：`--message-format=json` 适合哪些工具…与测验 4：为什么官方建议自定义子命令使用 CLI 而不是链接 `car…切入，剖析「嵌入式测验」的核心内容。
 
 ### 测验 1：自定义 Cargo 子命令的可执行文件命名规则是什么？
 

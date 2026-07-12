@@ -54,6 +54,8 @@ trait Factory {
 
 ## 二、语法说明
 
+理解「语法说明」需要把握基础 RPITIT、`async fn` in trait（RPITIT 的特例）与精确捕获扩展（Rust 1.82+），本节依次展开。
+
 ### 2.1 基础 RPITIT
 
 ```rust,editable
@@ -198,6 +200,8 @@ fn main() {}
 > **反命题**: "RPITIT Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：RPITIT（Return Position Impl Tr…、测验 2：RPITIT 与关联类型（Associated Type）有…、测验 3：这个特性对 `async fn` 在 trait 中的支持有…、测验 4：RPITIT 在 Rust 1.75 中已稳定，但在 1.9…等5个方面。
 
 ### 测验 1：RPITIT（Return Position Impl Trait In Traits）是什么？（理解层）
 

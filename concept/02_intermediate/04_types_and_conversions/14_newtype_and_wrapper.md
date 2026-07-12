@@ -190,6 +190,8 @@ let b = SecondsNewtype(10.0);
 
 ## 二、技术细节
 
+本节围绕「技术细节」展开，依次讨论 Deref 与自动解引用、孤儿规则与 Newtype与包装器类型谱系。
+
 ### 2.1 Deref 与自动解引用
 >
 
@@ -339,6 +341,8 @@ Rust 中的包装器类型:
 ---
 
 ## 四、反命题与边界分析
+
+本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
 
 ### 4.1 反命题树
 >
@@ -514,6 +518,8 @@ graph TD
 
 ## 十、边界测试：Newtype 与包装器的编译错误
 
+理解「边界测试：Newtype 与包装器的编译错误」需要把握边界测试：Newtype 不继承原类型的 trait（编译错误）、边界测试：PhantomData 的协变/逆变误用（编译错误 / 运行…、边界测试：newtype 的 derive 限制（编译错误）、边界测试：`Deref` 滥用导致的隐式转换陷阱（编译错误/逻辑错误）等6个方面，本节依次展开。
+
 ### 10.1 边界测试：Newtype 不继承原类型的 trait（编译错误）
 
 ```rust,ignore
@@ -667,6 +673,8 @@ fn main() {
 > **修正**: newtype 模式（`struct Meters(u32)`）创建语义不同的类型，但 `Deref` 自动解引用（Reference）使 newtype 像底层类型一样行为。这导致**方法解析困惑**：`m.saturating_add(50)` 调用 `u32::saturating_add`，而非 `Meters` 的方法（若存在）。设计原则：newtype 用于**类型安全**（防止混淆 Meters 和 Seconds），但 `Deref` 削弱了这一优势。替代方案：1) 不显式实现 `Deref`，只提供必要方法；2) 使用 `From`/`Into` 显式转换；3) 使用 `as_ref()` / `into_inner()` 访问内部值。这与 Haskell 的 `newtype`（无运行时（Runtime）开销，无 Deref 等价物，需显式解包）或 Ada 的派生类型（类似 newtype，无隐式转换）相同——Rust 的 newtype 最纯粹的形式是不实现 `Deref`，完全通过显式 API 交互。[来源: [Newtype Pattern](https://rust-unofficial.github.io/patterns/))] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Newtype 模式的核心目的是什么？它如何实现"零成本"？…、测验 2：`struct Wrapper(String)` 与 `ty…、测验 3：如何为 Newtype 实现底层类型的 trait（如 `D…、测验 4：PhantomData 在 Newtype/包装器模式中有什…等5个方面。
 
 ### 测验 1：Newtype 模式的核心目的是什么？它如何实现"零成本"？（理解层）
 

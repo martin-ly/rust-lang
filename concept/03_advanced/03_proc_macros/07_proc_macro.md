@@ -88,6 +88,8 @@
 
 ## 一、核心概念
 
+本节将「核心概念」分解为若干主题：过程宏 vs macro_rules、三种过程宏类型与编译期执行模型。
+
 ### 1.1 过程宏 vs macro_rules
 
 ```text
@@ -213,6 +215,8 @@ graph TD
 ---
 
 ## 二、技术细节
+
+「技术细节」部分按 TokenStream 操作、syn + quote 工作流与卫生性与 Span的顺序逐层展开。
 
 ### 2.1 TokenStream 操作
 >
@@ -388,6 +392,8 @@ pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
 ---
 
 ## 四、反命题与边界分析
+
+本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
 
 ### 4.1 反命题树
 >
@@ -724,6 +730,8 @@ fn main() {
 > [来源: [Rust Compiler Development Guide — Proc Macros](https://rustc-dev-guide.rust-lang.org/)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：过程宏的类型（理解层）、测验 2：过程宏的执行时机（应用层）、测验 3：syn + quote 工作流（应用层）、测验 4：卫生性（Hygiene）（分析层）等5个方面，本节逐一说明其要点。
 
 ### 测验 1：过程宏的类型（理解层）
 

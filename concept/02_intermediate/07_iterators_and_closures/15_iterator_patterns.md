@@ -89,6 +89,8 @@
 
 ## 一、核心概念
 
+理解「核心概念」需要把握 Iterator Trait、适配器链、惰性求值与消费者与适配器，本节依次展开。
+
 ### 1.1 Iterator Trait
 >
 
@@ -308,6 +310,8 @@ let result: Vec<i32> = vec![1, 2, 3, 4, 5]
 ---
 
 ## 二、常用模式
+
+理解「常用模式」需要把握 map-filter-collect、fold 与归约、zip 与并行迭代、IntoIterator 与 for 循环等5个方面，本节依次展开。
 
 ### 2.1 map-filter-collect
 >
@@ -903,6 +907,8 @@ fn main() {
 
 ## 十、边界测试：迭代器模式的编译错误
 
+理解「边界测试：迭代器模式的编译错误」需要把握边界测试：`Iterator::collect` 的目标类型歧义（编译…、边界测试：迭代器适配器的惰性求值陷阱（逻辑错误）、边界测试：`Iterator::zip` 的长度不一致（逻辑错误）、边界测试：消耗型适配器与双重迭代（编译错误）等7个方面，本节依次展开。
+
 ### 10.1 边界测试：`Iterator::collect` 的目标类型歧义（编译错误）
 
 ```rust,compile_fail
@@ -1039,6 +1045,8 @@ fn main() {
 
 ## 十二、边界测试：迭代器模式的编译错误（续）
 
+本节围绕「边界测试：迭代器模式的编译错误（续）」展开，依次讨论边界测试：`skip_while` 与 `take_while` 的互…、边界测试：`cycle` 与无限迭代器（运行时死循环）、边界测试：`enumerate` 与索引类型（逻辑错误）、边界测试：`partition` 与所有权分割（编译错误）等6个方面。
+
 ### 12.1 边界测试：`skip_while` 与 `take_while` 的互斥性（逻辑错误）
 
 ```rust
@@ -1161,6 +1169,8 @@ fn main() {}
 ---
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：`Iterator::map` 和 `Iterator::f…、测验 2：`iter.next()` 返回 `Option<Self:…、测验 3：`Iterator::fold` 与 `Iterator::…、测验 4：如何实现自定义迭代器？至少需要实现哪个方法？（理解层）等10个方面的顺序逐层展开。
 
 ### 测验 1：`Iterator::map` 和 `Iterator::filter` 返回的是新迭代器还是立即执行计算？（理解层）
 

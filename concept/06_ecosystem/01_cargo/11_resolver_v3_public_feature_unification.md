@@ -48,6 +48,8 @@ A ──► B ──public──► D(std)
 
 ## 二、关键清单片段
 
+本节将「关键清单片段」分解为若干主题： Crate B、Crate C与Crate A。
+
 ### Crate B
 
 ```toml

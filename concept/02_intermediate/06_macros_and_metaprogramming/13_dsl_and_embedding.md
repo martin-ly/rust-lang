@@ -194,6 +194,8 @@ impl RequestBuilder<Ready> {
 
 ## 二、技术细节
 
+理解「技术细节」需要把握 Parser Combinators、类型安全的 DSL与编译期验证的 DSL，本节依次展开。
+
 ### 2.1 Parser Combinators
 >
 
@@ -379,6 +381,8 @@ SQL 查询:
 
 ## 四、反命题与边界分析
 
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+
 ### 4.1 反命题树
 >
 
@@ -550,6 +554,8 @@ graph TD
 
 ## 十、边界测试：DSL 与嵌入的编译错误
 
+本节围绕「边界测试：DSL 与嵌入的编译错误」展开，依次讨论边界测试：构建器模式的链式调用与所有权（编译错误）、边界测试：状态机 DSL 的非法状态转换（编译错误）、边界测试：宏递归深度限制（编译错误）、边界测试：DSL 的类型安全与运行时错误（运行时 panic）等6个方面。
+
 ### 10.1 边界测试：构建器模式的链式调用与所有权（编译错误）
 
 ```rust,compile_fail
@@ -709,6 +715,8 @@ fn main() {
 > **修正**: `macro_rules!` 的**规则顺序**：从上到下依次尝试匹配，第一个匹配的规则被使用。长模式（含 WHERE）应放在短模式之前，否则短模式提前匹配导致错误。`macro_rules!` 的限制：1) 无优先级/结合性控制（不像 yacc/bison）；2) 无左递归（规则不能自引用（Reference）左部）；3) 模式是 token 树（`tt`），不是完整表达式。复杂 DSL 建议：1) 过程宏（Procedural Macro）（`proc_macro`）解析完整语法；2) `syn` crate 解析 Rust 表达式；3) 外部 DSL parser（`nom`、`pest`）。这与 Lisp 的宏（代码即数据，无模式匹配（Pattern Matching）限制）或 Template Haskell（编译期元编程，类型安全）不同——Rust 的 `macro_rules!` 是受限但高效的文本替换机制。来源: [The Little Book of Rust Macros] · 来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：在 Rust 中嵌入 DSL 的常见技术有哪些？（理解层）、测验 2：Builder 模式在 Rust 中为什么特别受欢迎？与构造…、测验 3：过程宏（proc macro）与声明宏（`macro_rul…、测验 4：类型状态模式（Type State Pattern）如何实现…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：在 Rust 中嵌入 DSL 的常见技术有哪些？（理解层）
 

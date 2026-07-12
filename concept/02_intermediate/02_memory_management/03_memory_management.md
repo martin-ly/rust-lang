@@ -158,6 +158,8 @@
 
 ## 一、权威定义（Definition）
 
+本节围绕「权威定义（Definition）」展开，依次讨论 Wikipedia 对齐定义、TRPL 官方定义与形式化定义。
+
 ### 1.1 Wikipedia 对齐定义
 >
 > **[Wikipedia: Memory management](https://en.wikipedia.org/wiki/Memory_management)** Memory management is a form of resource management applied to computer memory. The essential requirement of memory management is to provide ways to dynamically allocate portions of memory to programs at their request, and free it for reuse when no longer needed.
@@ -283,6 +285,8 @@ graph TD
 
 ## 四、定理推理链（Theorem Chain）
 
+本节将「定理推理链（Theorem Chain）」分解为若干主题：引理：Box<T> ⟹ 堆分配 + 唯一所有权、定理：Rc/Arc ⟹ 共享所有权安全（引用计数）、推论：RefCell ⟹ 内部可变性运行时检查、RAII + 所有权 ⟹ 确定性释放等5个方面。
+
 ### 4.1 引理：Box<T> ⟹ 堆分配 + 唯一所有权
 >
 > **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference: Box](https://doc.rust-lang.org/reference/introduction.html)** Box<T> 的语义是堆分配与唯一所有权的组合，对应线性逻辑中的资源唯一拥有。 ✅ 已验证
@@ -375,6 +379,8 @@ graph TD
 ---
 
 ## 五、示例与反例（Examples & Counter-examples）
+
+「示例与反例（Examples & Counter-exam…」涉及正确示例：Box 堆分配、正确示例：Rc 共享所有权、正确示例：用 Weak 打破循环引用、反例：Rc 循环引用导致泄漏等7个方面，本节逐一说明其要点。
 
 ### 5.1 正确示例：Box 堆分配
 
@@ -810,6 +816,8 @@ graph TD
 ---
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
+
+本节将「边界极限测试代码（Boundary Limit Tests）」分解为若干主题：测试 1: Rc<RefCell<T>> 循环引用极限、测试 2: RefCell 嵌套借用边界、测试 3: Box::leak 与 ManuallyDrop 边界与测试 4: Arc 跨线程原子序边界。
 
 ### 7.1 测试 1: Rc<RefCell<T>> 循环引用极限
 
@@ -1300,6 +1308,8 @@ pub unsafe extern "C" fn rust_string_to_c(s: String) -> *mut c_char {
 
 ### 5.9 `Vec<T>` / `String` / `HashMap` 的内存布局与扩容策略
 
+本节将「`Vec<T>` / `String` / `HashMa…」分解为若干主题： `Vec<T>` 的内存布局与扩容、`String` 的 UTF-8 不变性与内存布局与`HashMap<K, V>` 的 SwissTable 算法。
+
 #### `Vec<T>` 的内存布局与扩容
 
 `Vec<T>` 是 Rust 中最常用的动态数组，其内存布局为三元组：
@@ -1624,6 +1634,8 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 
 ## 十二、待补充与演进方向（TODOs）
 
+本节围绕「待补充与演进方向（TODOs）」展开，依次讨论自定义 Allocator（`#[global_allocator]`）、`ManuallyDrop<T>` 与 `mem::forget` 的…、`Vec<T>` / `String` / `HashMap` 的内存…、`std::alloc::System` vs `jemalloc`…等7个方面。
+
 ### 12.1 自定义 Allocator（`#[global_allocator]`）
 
 **定义**：Rust 允许通过 `#[global_allocator]` 替换默认全局分配器，也支持每日构建版的 `Allocator` trait 为特定容器指定局部分配器。
@@ -1814,6 +1826,8 @@ let mut pinned: Pin<Box<SelfRef>> = SelfRef::new(String::from("x"));
 ---
 
 ## 十三、边界测试：内存管理的编译错误
+
+「边界测试：内存管理的编译错误」涉及边界测试：Box::into_raw 后双重释放（运行时 UB）、边界测试：Vec 索引越界（编译错误 vs 运行时 panic）、边界测试：Pin 误用（编译错误）、边界测试：`ManuallyDrop` 后重复访问（运行时 UB）等10个方面，本节逐一说明其要点。
 
 ### 13.1 边界测试：Box::into_raw 后双重释放（运行时 UB）
 
@@ -2008,6 +2022,8 @@ fn main() {}
 > 堆分配安全 ⟸ Box/Rc/Arc 区分 ⟸ 引用计数正确性
 >
 ## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：Stack vs Heap（理解层）、测验 2：Drop 与 RAII（应用层）、测验 3：Box 与递归类型（应用层）、测验 4：内存布局对齐（分析层）等5个方面。
 
 ### 测验 1：Stack vs Heap（理解层）
 

@@ -50,6 +50,8 @@ let r2 = &mut x; // 重新借用
 
 ## 三、Tree Borrows 核心规则
 
+「Tree Borrows 核心规则」部分按树结构、权限状态与转换规则的顺序逐层展开。
+
 ### 3.1 树结构
 
 - 每次借用（Borrowing）创建一个节点。

@@ -74,6 +74,8 @@
 
 ## 📐 知识结构
 
+「知识结构」涉及概念定义、属性特征、关系连接与思维导图，本节逐一说明其要点。
+
 ### 概念定义
 
 **JavaScript 互操作 (JavaScript Interop)**:
@@ -145,6 +147,8 @@ JavaScript 互操作
 
 ## 🔗 基础集成
 
+「基础集成」部分的核心主题是加载 WASM 模块，本节展开说明。
+
 ### 加载 WASM 模块
 
 ```javascript
@@ -170,6 +174,8 @@ const result = wasmModule.greet("World")
 ---
 
 ## ⚛️ React 集成
+
+本节围绕「React 集成」展开，覆盖基本用法 与 自定义 Hook 两个方面。
 
 ### 基本用法
 
@@ -220,6 +226,8 @@ function useWasm() {
 
 ## 🎨 Vue 集成
 
+「Vue 集成」部分的核心主题是 Vue 基本用法，本节展开说明。
+
 ### Vue 基本用法
 
 ```vue
@@ -249,6 +257,8 @@ export default {
 ---
 
 ## 🟢 Node.js 集成
+
+「Node.js 集成」部分包含 Node.js 基本用法 与  ES 模块 两条主线，本节依次说明。
 
 ### Node.js 基本用法
 
@@ -306,6 +316,8 @@ counter.increment()
 
 ## 🌐 Web API 集成
 
+本节从 Fetch API 与  Canvas API 两个层面剖析「Web API 集成」。
+
 ### Fetch API
 
 ```rust
@@ -353,6 +365,8 @@ pub fn draw_circle(canvas: &HtmlCanvasElement, x: f64, y: f64, radius: f64) {
 
 ## 🚀 实践示例
 
+「实践示例」部分包含示例 1: 简单计算 与 示例 2: 数组处理 两条主线，本节依次说明。
+
 ### 示例 1: 简单计算
 
 ```rust
@@ -384,6 +398,8 @@ const result = sum_array(new Int32Array([1, 2, 3, 4, 5])) // 15
 ---
 
 ## 🔗 Rust 1.92.0 FFI 互操作 ⭐ NEW
+
+本节专门讨论「Rust 1.92.0 FFI 互操作 ⭐ NEW」下的使用联合体原始引用进行安全的 FFI 互操作。
 
 ### 使用联合体原始引用进行安全的 FFI 互操作
 

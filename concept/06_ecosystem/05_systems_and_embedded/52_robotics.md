@@ -104,6 +104,8 @@
 
 ## 一、权威定义（Definition）
 
+「权威定义（Definition）」部分按机器人软件栈、实时约束与确定性与ROS2 架构的顺序逐层展开。
+
 ### 1.1 机器人软件栈
 
 > **[ROS2 Design](https://design.ros2.org/)** 机器人软件栈是分层构建的实时系统，经典分层为：**感知**（Perception）→ **规划**（Planning）→ **控制**（Control）→ **执行**（Actuation）。每一层对延迟、确定性和安全性的要求递增，底层控制通常需要亚毫秒级抖动保证。[来源: [ROS2 Design](https://design.ros2.org/)]
@@ -227,6 +229,8 @@ ROS2 通信原语:
 ---
 
 ## 三、ROS2 Rust 生态
+
+本节围绕「ROS2 Rust 生态」展开，依次讨论 rclrs：官方 Rust 客户端库、ros2_rust 社区与 safe_drive与DDS 绑定。
 
 ### 3.1 rclrs：官方 Rust 客户端库
 
@@ -358,6 +362,8 @@ fn dds_direct() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 ## 四、实时机器人系统
+
+「实时机器人系统」涉及 ROS2 执行器模型、优先级继承与 PREEMPT_RT与no_std + RTOS 集成，本节逐一说明其要点。
 
 ### 4.1 ROS2 执行器模型
 
@@ -518,6 +524,8 @@ mod app {
 
 ## 五、传感器融合与 SLAM
 
+本节从点云处理与线性代数、OpenRR 框架与导航栈切入，剖析「传感器融合与 SLAM」的核心内容。
+
 ### 5.1 点云处理与线性代数
 
 > **[nalgebra](https://docs.rs/nalgebra/)** 是 Rust 生态的核心线性代数库，提供向量、矩阵、变换和几何原语。机器人学中几乎所有感知和计算任务都依赖高效的线性代数运算。[来源: [nalgebra Documentation](https://docs.rs/nalgebra/)]
@@ -634,6 +642,8 @@ fn plan_path(map: &GridMap, start: (usize, usize), goal: (usize, usize))
 
 ## 六、控制理论
 
+本节围绕「控制理论」展开，覆盖 PID、MPC 与 LQR 与 状态空间与优化 两个方面。
+
 ### 6.1 PID、MPC 与 LQR
 
 > **控制理论**是机器人学的数学基础。Rust 的类型系统（Type System）和零成本抽象（Zero-Cost Abstraction）使得控制算法既可以表达为高可读性的数学公式，又能编译为无运行时（Runtime）开销的机器码。[来源: [Modern Control Engineering — Ogata](https://www.pearson.com/en-us/subject-catalog/p/modern-control-engineering/P200000005828)]
@@ -730,6 +740,8 @@ impl<const N: usize, const M: usize> KalmanFilter<N, M> {
 
 ## 七、反命题与边界
 
+本节围绕「反命题与边界」展开，覆盖反命题树 与 边界极限 两个方面。
+
 ### 7.1 反命题树
 
 ```text
@@ -786,6 +798,8 @@ impl<const N: usize, const M: usize> KalmanFilter<N, M> {
 ---
 
 ## 八、边界测试
+
+「边界测试」部分按边界测试：DDS 消息序列化无模式校验（类型混淆）、边界测试：ROS2 回调阻塞执行器（实时性违反）与边界测试：多线程 ROS2 节点共享可变状态（数据竞争）的顺序逐层展开。
 
 ### 8.1 边界测试：DDS 消息序列化无模式校验（类型混淆）
 
@@ -932,6 +946,8 @@ impl GoodNode {
 - **定理**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：为什么 Rust 在机器人学（Robotics）领域越来越受…、测验 2：`ROS 2`（机器人操作系统）对 Rust 的支持现状如何…、测验 3：实时系统（Real-Time）中，为什么 Rust 比 Py…、测验 4：`nalgebra` 和 `nphysics` 在 Rust…等5个方面，本节依次展开。
 
 ### 测验 1：为什么 Rust 在机器人学（Robotics）领域越来越受关注？（理解层）
 

@@ -173,6 +173,8 @@ Cow<'a, B> 的定义:
 
 ## 二、技术细节
 
+本节围绕「技术细节」展开，依次讨论 Cow 的核心操作、常见使用模式与与 AsRef/ToOwned 的关系。
+
 ### 2.1 Cow 的核心操作
 >
 
@@ -336,6 +338,8 @@ Cow 的性能特征:
 ---
 
 ## 四、反命题与边界分析
+
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
 
 ### 4.1 反命题树
 >
@@ -505,6 +509,8 @@ graph TD
 
 ## 十、边界测试：Cow 与借用的编译错误
 
+「边界测试：Cow 与借用的编译错误」部分按边界测试：`Cow` 的写时复制与借用冲突（编译错误）、边界测试：`Borrow` trait 与 `AsRef` 的误用（编…、边界测试：`Cow` 的 `ToOwned` 约束（编译错误）、边界测试：`Cow` 在 `match` 中的所有权转移（编译错误）等6个方面的顺序逐层展开。
+
 ### 10.1 边界测试：`Cow` 的写时复制与借用冲突（编译错误）
 
 ```rust,compile_fail
@@ -672,6 +678,8 @@ fn main() {}
 > **修正**: `Cow<'a, B>` 的**生命周期（Lifetimes）参数**：1) `'a` 是借用的最长期限；2) `Cow::Borrowed(&'a B)` 要求引用（Reference）至少存活 `'a`；3) 返回 `Cow<'static, str>` 要求数据是 `'static`（如 `String` 或字面量）。解决：1) 返回 `Cow<'a, str>` 而非 `'static`；2) 若必须 `'static`，使用 `Cow::Owned(s.to_string())`；3) 使用 `Into<Cow<'static, str>>` 让调用方决定。这与 C++ 的 `std::variant`（无生命周期，存储值或引用）或 Swift 的 `copy-on-write`（隐式，无生命周期标记）不同——Rust 的 `Cow` 显式跟踪所有权和借用生命周期。[来源: [Cow Documentation](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：`Cow<'a, str>` 的两种变体是什么？各自代表什么…、测验 2：`Cow::Borrowed(s).to_mut()` 在什…、测验 3：函数签名 `fn greet<'a>(s: Cow<'a,…、测验 4：`Cow` 适合解决什么场景的问题？（理解层）等5个方面的顺序逐层展开。
 
 ### 测验 1：`Cow<'a, str>` 的两种变体是什么？各自代表什么语义？（理解层）
 

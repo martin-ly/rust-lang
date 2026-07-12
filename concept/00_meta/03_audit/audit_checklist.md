@@ -143,6 +143,8 @@ flowchart TD
 >
 ## 二、定理一致性检查（Theorem Consistency） [形式化验证中的定理证明一致性 — 参照 TAPL (Pierce, 2002) 类型系统元理论; RustBelt (Jung et al., POPL 2018) 的协议验证框架](https://plv.mpi-sws.org/rustbelt/)
 
+本节围绕「定理一致性检查（Theorem Consistency）…」展开，覆盖每个核心文件的定理链 与 跨文件定理一致性 两个方面。
+
 ### 2.1 每个核心文件的定理链
 
 | 检查项 | 检查方法 | 通过标准 | 状态 |
@@ -169,6 +171,8 @@ flowchart TD
 
 ## 三、反例与边界完备性检查（Counter-example Completeness） [边界测试方法论 — 参照 Torchiano et al. (2018) 关于软件工程知识库边界分析的研究](https://dl.acm.org/)
 
+「反例与边界完备性检查（Counter-example Co…」部分包含每个核心概念的反例覆盖 与 否定命题分析 两条主线，本节依次说明。
+
 ### 3.1 每个核心概念的反例覆盖
 
 | 检查项 | 检查方法 | 通过标准 | 状态 |
@@ -191,6 +195,8 @@ flowchart TD
 
 ## 四、认知路径检查（Cognitive Path） [认知路径设计参照建构主义学习理论 — Bruner (1961) 发现学习理论; Ausubel (1968) 有意义学习理论; 概念文件的认知路径章节要求渐进式推导](../00_framework/methodology.md)
 
+「认知路径检查（Cognitive Path） 认知路径设计…」部分的核心主题是渐进式推导，本节展开说明。
+
 ### 4.1 渐进式推导
 
 | 检查项 | 检查方法 | 通过标准 | 状态 |
@@ -203,6 +209,8 @@ flowchart TD
 ---
 
 ## 五、来源与可信度检查（Provenance） 来源: 来源可信度分级 — 一级: Rust Reference / RFCs / 学术论文; 二级: Rust Internals / 开发者博客; 三级: TRPL / [Rustonomicon; 参照证据金字塔模型](https://doc.rust-lang.org/nomicon/index.html)
+
+「来源与可信度检查（Provenance） 来源: 来源可信…」部分的核心主题是来源标注，本节展开说明。
 
 ### 5.1 来源标注
 
@@ -293,6 +301,8 @@ python scripts/cross_concept_diff.py
 
 ## 十一、外部专家评审流程指南
 
+本节围绕「外部专家评审流程指南」展开，依次讨论评审目标、评审周期与评审检查单。
+
 ### 评审目标
 
 邀请 Rust 社区专家（语言团队成员、核心贡献者、知名教育者）对概念知识体系进行周期性评审，确保：
@@ -357,6 +367,8 @@ python scripts/cross_concept_diff.py
 > **内容分级**: [综述级]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：本文档《概念一致性检查清单（Concept Consiste…、测验 2：《概念一致性检查清单（Concept Consistency…与测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）。
 
 ### 测验 1：本文档《概念一致性检查清单（Concept Consistency Audit Checklist）》在 Rust 知识体系中属于哪一层级的元数据？（理解层）
 

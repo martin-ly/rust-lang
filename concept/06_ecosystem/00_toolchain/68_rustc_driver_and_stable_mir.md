@@ -152,6 +152,8 @@ rustup component add rustc-dev llvm-tools
 
 ## 五、Stable MIR / `rustc_public`
 
+本节从问题 与 解决方案 两个层面剖析「Stable MIR / `rustc_public`」。
+
 ### 5.1 问题
 
 直接使用 `rustc_middle::mir` 等内部 API 构建工具的问题是：
@@ -186,6 +188,8 @@ rustup component add rustc-dev llvm-tools
 ---
 
 ## 嵌入式测验
+
+理解「嵌入式测验」需要把握测验 1：`rustc_driver` 和 `rustc_interf…、测验 2：外部 crate 使用 `rustc_driver` 需要什…、测验 3：Stable MIR（rustc_public）试图解决什么…与测验 4：为什么 rustdoc 更适合用 `rustc_interf…，本节依次展开。
 
 ### 测验 1：`rustc_driver` 和 `rustc_interface` 的主要区别是什么？
 

@@ -200,6 +200,8 @@ Rust 的安全保证与密码学威胁的对应:
 
 ## 三、对称加密
 
+「对称加密」部分包含 AES-GCM 与  ChaCha20-Poly1305 两条主线，本节依次说明。
+
 ### 3.1 AES-GCM
 >
 > **[NIST FIPS 197](https://csrc.nist.gov/publications/detail/fips/197/final)** AES（Advanced Encryption Standard）是 NIST 于 2001 年标准化的分组密码，块大小 128 位，密钥长度支持 128/192/256 位。GCM（Galois/Counter Mode）提供**认证加密**（Authenticated Encryption），同时保证机密性和完整性。
@@ -290,6 +292,8 @@ fn encrypt_chacha20(key: &[u8; 32], plaintext: &[u8]) -> Result<Vec<u8>, chacha2
 
 ## 四、非对称加密与数字签名
 
+本节围绕「非对称加密与数字签名」展开，覆盖 ECC 与 Ed25519 与  X25519 密钥交换 两个方面。
+
 ### 4.1 ECC 与 Ed25519
 >
 > **[NIST FIPS 186-5](https://csrc.nist.gov/publications/detail/fips/186/5/final)** 椭圆曲线密码学（ECC）相比 RSA 提供相同安全强度下更短的密钥和更快的运算。Ed25519 是 Daniel Bernstein 设计的基于 Curve25519 的 EdDSA 签名方案，被 IETF 标准化（[RFC 8032](https://www.rfc-editor.org/info/rfc8032)），特征：**恒定时间实现、确定性签名、紧凑的 64 字节签名**。
@@ -368,6 +372,8 @@ assert_eq!(alice_shared.as_bytes(), bob_shared.as_bytes());
 ---
 
 ## 五、哈希与消息认证
+
+本节围绕「哈希与消息认证」展开，依次讨论哈希函数、HMAC与密钥派生（KDF）。
 
 ### 5.1 哈希函数
 >
@@ -497,6 +503,8 @@ fn derive_keys(master_key: &[u8], salt: &[u8]) -> ([u8; 32], [u8; 32]) {
 ---
 
 ## 六、Rust 密码学生态
+
+本节将「Rust 密码学生态」分解为若干主题： ring：安全原语聚合、rustls：纯 Rust TLS与dalek-cryptography：零知识友好。
 
 ### 6.1 ring：安全原语聚合
 >
@@ -690,6 +698,8 @@ fn ct_compare_impl(a: &[u8], b: &[u8]) -> bool {
 
 ## 九、反命题与边界
 
+「反命题与边界」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+
 ### 9.1 反命题树
 >
 
@@ -737,6 +747,8 @@ fn ct_compare_impl(a: &[u8], b: &[u8]) -> bool {
 ---
 
 ## 十、边界测试
+
+「边界测试」涉及边界测试：非常量时间比较导致定时攻击（运行时信息泄露）、边界测试：Nonce 复用破坏 AES-GCM 机密性（逻辑错误）与边界测试：低迭代次数 KDF 导致暴力破解（安全漏洞），本节逐一说明其要点。
 
 ### 10.1 边界测试：非常量时间比较导致定时攻击（运行时信息泄露）
 
@@ -850,6 +862,8 @@ fn weak_hash_password(password: &str) -> String {
 - **定理**: Security & Cryptography（安全与密码学） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：Rust 的 `ring` crate 在密码学中提供什么功…、测验 2：为什么密码学代码中绝对不应该使用 `unsafe` 或原始指…、测验 3：Rust 的常量时间比较（Constant-Time Com…、测验 4：`rustls` 与 OpenSSL 相比在安全性上有什么优…等5个方面，本节依次展开。
 
 ### 测验 1：Rust 的 `ring` crate 在密码学中提供什么功能？（理解层）
 

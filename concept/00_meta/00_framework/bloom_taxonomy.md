@@ -162,6 +162,8 @@ ACF 引入的第七层级（在传统 L6-L7 之上），指定管理双模式切
 
 ## 嵌入式测验（Embedded Quiz）
 
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：本文档《Bloom Taxonomy（Bloom 分类法）》…、测验 2：《Bloom Taxonomy（Bloom 分类法）》的主要…与测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层），本节依次展开。
+
 ### 测验 1：本文档《Bloom Taxonomy（Bloom 分类法）》在 Rust 知识体系中属于哪一层级的元数据？（理解层）
 
 **题目**: 本文档《Bloom Taxonomy（Bloom 分类法）》在 Rust 知识体系中属于哪一层级的元数据？

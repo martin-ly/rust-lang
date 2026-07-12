@@ -47,6 +47,8 @@ match x {
 
 ## 二、语法说明
 
+「语法说明」涉及稳定基础：Inline Const 表达式（Rust 1.79+）、未来语法：Inline Const in Patterns与适用场景，本节逐一说明其要点。
+
 ### 2.1 稳定基础：Inline Const 表达式（Rust 1.79+）
 
 ```rust,editable
@@ -191,6 +193,8 @@ fn main() {
 > **反命题**: "Inline Const Pattern Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：`inline const` 模式是什么？它解决了什么问题？…、测验 2：这个特性对 `match` 的表达能力有什么提升？（理解层）、测验 3：`inline const` 与 `const` 块有什么关…、测验 4：这个特性目前的实现状态如何？（理解层）等5个方面。
 
 ### 测验 1：`inline const` 模式是什么？它解决了什么问题？（理解层）
 

@@ -29,6 +29,8 @@
 
 ## 一、模块系统
 
+本节从 Q1. 以下代码能否编译？解释 `mod`、`use` 和 `pub`…、Q2. 以下代码能否编译？`super` 和 `self` 的作用是什…与Q3. 以下代码能否编译？解释 `use` 语句的多种写法切入，剖析「模块系统」的核心内容。
+
 ### Q1. 以下代码能否编译？解释 `mod`、`use` 和 `pub` 的关系
 
 ```rust
@@ -196,6 +198,8 @@ pub use shapes::circle; // 外部用户可通过 crate::circle 访问
 ---
 
 ## 二、单元测试与集成测试
+
+本节从 Q4. 以下测试代码的输出是什么？`#[cfg(test)]` 的作用…、Q5. 以下代码能否编译？集成测试如何访问被测 crate？与Q6. 以下代码的输出是什么？解释 `Result` 类型的测试断言切入，剖析「单元测试与集成测试」的核心内容。
 
 ### Q4. 以下测试代码的输出是什么？`#[cfg(test)]` 的作用是什么？
 
@@ -395,6 +399,8 @@ assert_eq!(result.unwrap_err(), expected_err);
 
 ## 三、工作区与 crate 结构
 
+本节围绕「工作区与 crate 结构」展开，覆盖 Q7. 以下项目结构中，`crate`、`package` 和 `mo… 与  Q8. 以下代码能否编译？`pub(crate)` 和 `pub(su… 两个方面。
+
 ### Q7. 以下项目结构中，`crate`、`package` 和 `module` 的关系是什么？
 
 ```
@@ -516,6 +522,8 @@ mod database {
 ---
 
 ## 四、综合应用
+
+「综合应用」部分包含 Q9. 以下代码的输出是什么？解释 `assert_ne!` 和自定义… 与  Q10. 以下代码能否编译？解释 `#[ignore]` 和 `#[s… 两条主线，本节依次说明。
 
 ### Q9. 以下代码的输出是什么？解释 `assert_ne!` 和自定义错误消息
 
@@ -660,6 +668,8 @@ cargo test -- --test-threads=1  # 单线程运行测试
 > **权威来源**: [The Rust Programming Language — Ch7](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) · [The Rust Programming Language — Ch11](https://doc.rust-lang.org/book/ch11-00-testing.html) · [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：本文件是 测验：模块系统与测试（L1 试点扩展） 的专项测验…、测验 2：在 测验：模块系统与测试（L1 试点扩展） 的测验中，若遇到…与测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层）。
 
 ### 测验 1：本文件是 测验：模块系统与测试（L1 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 

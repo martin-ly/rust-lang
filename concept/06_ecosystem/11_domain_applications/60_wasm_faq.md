@@ -64,6 +64,8 @@
 
 ## 🌐 WASM 基础问题
 
+理解「WASM 基础问题」需要把握 Q: WASM 和 JavaScript 有什么区别？、Q: WASM 可以在哪些环境中运行？与Q: WASM 的内存限制是多少？，本节依次展开。
+
 ### Q: WASM 和 JavaScript 有什么区别？
 
 **A**: WASM 和 JavaScript 的主要区别：
@@ -101,6 +103,8 @@
 ---
 
 ## 🦀 Rust 编译问题
+
+本节围绕「Rust 编译问题」展开，依次讨论 Q: 如何将 Rust 代码编译为 WASM？、Q: 编译时出现 "cannot find crate" 错误？与Q: 如何减小 WASM 二进制大小？。
 
 ### Q: 如何将 Rust 代码编译为 WASM？
 
@@ -157,6 +161,8 @@ wasm-opt -Oz -o output.wasm input.wasm
 ---
 
 ## 🔗 JavaScript 集成问题
+
+本节从 Q: 如何在 React 中使用 WASM？、Q: 如何传递复杂类型（如结构体）？与Q: WASM 和 JavaScript 之间的性能如何？切入，剖析「JavaScript 集成问题」的核心内容。
 
 ### Q: 如何在 React 中使用 WASM？
 
@@ -224,6 +230,8 @@ impl Person {
 
 ## ⚡ 性能优化问题
 
+本节从 Q: WASM 模块加载很慢怎么办？ 与  Q: 运行时性能如何优化？ 两个层面剖析「性能优化问题」。
+
 ### Q: WASM 模块加载很慢怎么办？
 
 **A**: 优化方法：
@@ -257,6 +265,8 @@ buffer.clear(); // 重用而不是重新分配
 ---
 
 ## 🛠️ 工具链问题
+
+本节从 Q: wasm-pack 安装失败？ 与  Q: wasm-bindgen 版本不匹配？ 两个层面剖析「工具链问题」。
 
 ### Q: wasm-pack 安装失败？
 
@@ -296,6 +306,8 @@ cargo tree | grep wasm-bindgen
 ---
 
 ## ❓ 其他问题
+
+本节将「其他问题」分解为若干主题： Q: WASM 支持多线程吗？、Q: 如何调试 WASM 代码？与Q: WASM 的安全性如何？。
 
 ### Q: WASM 支持多线程吗？
 
@@ -338,6 +350,8 @@ wasm-pack test --headless --firefox
 ---
 
 ## 🆕 Rust 1.92.0 特性问题
+
+本节从 Q: 如何使用 Rust 1.92.0 新特性？、Q: Rust 1.92.0 性能提升如何？与Q: 如何迁移到 Rust 1.92.0？切入，剖析「Rust 1.92.0 特性问题」的核心内容。
 
 ### Q: 如何使用 Rust 1.92.0 新特性？
 

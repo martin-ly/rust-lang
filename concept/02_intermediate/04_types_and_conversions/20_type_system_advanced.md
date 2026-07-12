@@ -260,6 +260,8 @@ Rust 的类型推断机制:
 
 ## 二、技术细节
 
+「技术细节」部分按 impl Trait 在参数位置、Const Generics 实战与类型别名与类型族的顺序逐层展开。
+
 ### 2.1 impl Trait 在参数位置
 >
 
@@ -451,6 +453,8 @@ impl AddOne for std::marker::U0 { type Result = std::marker::U1; }
 
 ## 四、反命题与边界分析
 
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+
 ### 4.1 反命题树
 >
 
@@ -562,6 +566,8 @@ graph TD
 
 ## 七、C++ 运算符重载/类型转换 vs Rust Trait 系统
 
+本节将「C++ 运算符重载/类型转换 vs Rust Trait…」分解为若干主题：运算符重载机制对比、关键差异分析、重载决议 vs Trait 解析、编译错误示例等6个方面。
+
 ### 7.1 运算符重载机制对比
 
 | 运算符 | C++（成员/友元函数） | Rust（Trait） |
@@ -579,6 +585,8 @@ graph TD
 | 类型转换 | `operator T()` / `explicit operator T()` | `From<T>` / `TryFrom<T>` / `Into<T>` |
 
 ### 7.2 关键差异分析
+
+「关键差异分析」部分包含 C++ 的 `operator*` 歧义 与  C++ 的隐式类型转换 vs Rust 的显式 Trait 两条主线，本节依次说明。
 
 #### C++ 的 `operator*` 歧义
 
@@ -906,6 +914,8 @@ fn main() {}
 
 ## 嵌入式测验（Embedded Quiz）
 
+本节从测验 1：关联类型（Associated Type）与泛型参数的区别是…、测验 2：`type Output = i32;` 这种语法出现在哪里…、测验 3：Higher-Ranked Trait Bounds（HRT…、测验 4：类型级编程（Type-Level Programming）在…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
+
 ### 测验 1：关联类型（Associated Type）与泛型参数的区别是什么？什么时候更适合用关联类型？（理解层）
 
 **题目**: 关联类型（Associated Type）与泛型参数的区别是什么？什么时候更适合用关联类型？
@@ -1082,6 +1092,8 @@ fn main() {}
 
 ## 📐 知识结构
 
+本节将「知识结构」分解为若干主题：概念定义、属性特征、关系连接、思维导图等7个方面。
+
 ### 概念定义
 
 **高级类型技巧 (Advanced Type Techniques)**:
@@ -1200,6 +1212,8 @@ fn main() {}
 ---
 
 ## 1️⃣ PhantomData 深入应用
+
+本节从什么是 PhantomData？ 与 型变 (Variance) 控制 两个层面剖析「1️⃣ PhantomData 深入应用」。
 
 ### 1.1 什么是 PhantomData？
 

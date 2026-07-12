@@ -432,6 +432,8 @@ pub fn coordinate_compress(coords: &[i64]) -> Vec<usize> {
 
 ## 三、竞赛编程惯用法
 
+本节从 Fast I/O、零分配算法、位运算技巧与模运算安全切入，剖析「竞赛编程惯用法」的核心内容。
+
 ### 3.1 Fast I/O
 
 ```rust
@@ -556,6 +558,8 @@ pub fn pow_mod(mut base: u64, mut exp: u64) -> u64 {
 
 ## 四、复杂度在类型系统中的编码
 
+本节从 Const Generics 编码数组边界、Type-Level 自然数（概念性）与Iterator `size_hint` 作为复杂度提示切入，剖析「复杂度在类型系统中的编码」的核心内容。
+
 ### 4.1 Const Generics 编码数组边界
 
 ```rust
@@ -620,6 +624,8 @@ impl ExactSizeIterator for RangeIter {}
 ---
 
 ## 五、形式验证与算法
+
+「形式验证与算法」涉及 VeriContest 案例研究、Kani 验证与何时值得形式验证？，本节逐一说明其要点。
 
 ### 5.1 VeriContest 案例研究
 
@@ -710,6 +716,8 @@ mod verification {
 
 ## 七、边界与反模式
 
+本节从递归深度限制、`usize` / `isize` 的平台依赖性、浮点精度陷阱与过度 `clone()` 导致 TLE切入，剖析「边界与反模式」的核心内容。
+
 ### 7.1 递归深度限制
 
 Rust 默认线程栈大小通常为 2MB（Linux）或 1MB（Windows）。$n = 10^5$ 的递归 DFS 必然栈溢出。
@@ -781,6 +789,8 @@ temp.extend_from_slice(&nums[..]);
 
 ## 八、总结与相关链接
 
+「总结与相关链接」部分包含核心要点回顾 与 相关概念文件 两条主线，本节依次说明。
+
 ### 8.1 核心要点回顾
 
 1. **Rust 的竞赛竞争力**: 零成本抽象（Zero-Cost Abstraction） + 编译期内存安全（Memory Safety），使 Rust 在复杂数据结构中比 C++ 更不易出错，性能同级。
@@ -828,6 +838,8 @@ temp.extend_from_slice(&nums[..]);
 ---
 
 ## 十、边界测试：算法竞赛的编译错误
+
+理解「边界测试：算法竞赛的编译错误」需要把握边界测试：递归深度与栈溢出（运行时 panic）、边界测试：`Vec` 索引越界与 `get` 的安全替代（编译错误/运…、边界测试：自定义排序的比较器错误（编译错误/运行时 panic）、边界测试：大数组栈分配导致的编译错误等7个方面，本节依次展开。
 
 ### 10.1 边界测试：递归深度与栈溢出（运行时 panic）
 
@@ -972,6 +984,8 @@ fn main() {
 - **定理**: 算法与竞赛编程 (Algorithms & Competitive Programming) 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：为什么 Rust 在算法竞赛中不如 C++ 流行？（理解层）、测验 2：Rust 在算法竞赛中的输入输出如何优化到与 C++ 竞争？…、测验 3：Rust 的 `BinaryHeap` 在竞赛中适合什么场景…、测验 4：为什么 Rust 的所有权系统在某些竞赛动态规划问题中显得繁…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：为什么 Rust 在算法竞赛中不如 C++ 流行？（理解层）
 

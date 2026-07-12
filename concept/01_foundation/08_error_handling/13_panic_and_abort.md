@@ -69,6 +69,8 @@
 
 ## 一、核心概念
 
+本节围绕「核心概念」展开，依次讨论 Panic 的语义、Panic vs Result与Panic 传播与栈展开。
+
 ### 1.1 Panic 的语义
 
 ```text
@@ -198,6 +200,8 @@ Panic 传播机制:
 ---
 
 ## 二、技术细节
+
+「技术细节」涉及自定义 Panic 处理、Panic 钩子与日志与Abort 模式，本节逐一说明其要点。
 
 ### 2.1 自定义 Panic 处理
 
@@ -369,6 +373,8 @@ fn configure_panic() {
 
 ## 四、反命题与边界分析
 
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+
 ### 4.1 反命题树
 >
 
@@ -528,6 +534,8 @@ graph TD
 > **补充来源**
 
 ## 十、边界测试：Panic 与 Abort 的编译错误
+
+本节将「边界测试：Panic 与 Abort 的编译错误」分解为若干主题：边界测试：`catch_unwind` 捕获非 `UnwindSafe…、边界测试：在 `Drop` 中 panic 导致双重 panic（运行…、边界测试：`panic=abort` 与 `catch_unwind`…、边界测试：双重 panic导致 abort（运行时行为）等9个方面。
 
 ### 10.1 边界测试：`catch_unwind` 捕获非 `UnwindSafe` 类型（编译错误）
 
@@ -791,6 +799,8 @@ fn compute_expensive_string() -> String { String::from("expensive") }
 > [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/panic.html)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Panic vs Result（理解层）、测验 2：panic=unwind vs panic=abort（应用…、测验 3：catch_unwind 的边界（应用层）、测验 4：Drop 中 panic 的危险性（分析层）等5个方面。
 
 ### 测验 1：Panic vs Result（理解层）
 

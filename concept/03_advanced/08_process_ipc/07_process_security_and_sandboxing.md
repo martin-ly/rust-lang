@@ -24,6 +24,8 @@
 
 ## 2. 权限最小化
 
+本节从用户/组降级 与  Linux Capabilities 两个层面剖析「权限最小化」。
+
 ### 2.1 用户/组降级
 
 在 Unix 上可以通过 `std::os::unix::process::CommandExt` 以低权限用户启动子进程，避免使用完整 root：
@@ -61,6 +63,8 @@ fn drop_unneeded_caps() -> Result<(), caps::CapsError> {
 
 ## 3. 资源限制
 
+「资源限制」部分包含 rlimit 与  cgroups 两条主线，本节依次说明。
+
 ### 3.1 rlimit
 
 通过 `nix::sys::resource::setrlimit` 限制 CPU 时间、虚拟内存、文件描述符、进程数等：
@@ -88,6 +92,8 @@ fn move_to_cgroup(pid: u32, cgroup: &str) -> std::io::Result<()> {
 ```
 
 ## 4. 隔离机制
+
+理解「隔离机制」需要把握 Linux Namespaces、文件系统隔离与网络隔离，本节依次展开。
 
 ### 4.1 Linux Namespaces
 
@@ -123,6 +129,8 @@ fn chroot_to(path: &str) -> std::io::Result<()> {
 通过网络命名空间与 veth 对，将子进程置于独立网络栈。
 
 ## 5. 系统调用过滤
+
+本节从 Seccomp 与 强制访问控制 两个层面剖析「系统调用过滤」。
 
 ### 5.1 Seccomp
 

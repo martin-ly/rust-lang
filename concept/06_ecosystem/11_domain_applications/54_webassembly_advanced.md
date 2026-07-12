@@ -101,6 +101,8 @@
 
 ## 一、权威定义
 
+「权威定义」部分按 WebAssembly 作为通用字节码、组件模型与模块链接与WASI：WebAssembly 系统接口的顺序逐层展开。
+
 ### 1.1 WebAssembly 作为通用字节码
 
 > **[W3C WebAssembly Specification](https://www.w3.org/wasm/)** WebAssembly (Wasm) 是一种为基于栈的虚拟机设计的二进制指令格式。Wasm 被设计为编程语言的可移植编译目标，使客户端和服务端应用程序能够在 Web 上部署。[来源: [W3C WebAssembly](https://www.w3.org/wasm/)]
@@ -151,6 +153,8 @@ WASI 演进:
 ---
 
 ## 二、WASM 执行模型全景
+
+理解「WASM 执行模型全景」需要把握浏览器宿主：JS 引擎集成、独立运行时：wasmtime 与 wasmer与边缘计算：Cloudflare Workers 与 Fastly Co…，本节依次展开。
 
 ### 2.1 浏览器宿主：JS 引擎集成
 
@@ -209,6 +213,8 @@ pub fn process_image_data(data: &[u8], width: u32, height: u32) -> Vec<u8> {
 ---
 
 ## 三、Rust WASM 工具链深度
+
+「Rust WASM 工具链深度」部分按 wasm-bindgen：JS 互操作的生成艺术、wasm-pack：构建与发布的统一入口、trunk：纯 Rust 前端应用打包器与cargo-component：WASM 组件模型原生支持的顺序逐层展开。
 
 ### 3.1 wasm-bindgen：JS 互操作的生成艺术
 
@@ -314,6 +320,8 @@ bindings::export!(Component with_types_in bindings);
 
 ## 四、WASM 组件模型详解
 
+理解「WASM 组件模型详解」需要把握 WIT：WASM 接口类型、Worlds 与 Packages与跨语言可组合性，本节依次展开。
+
 ### 4.1 WIT：WASM 接口类型
 
 > **[Component Model — WIT](https://component-model.bytecodealliance.org/design/wit.html)** WIT (Wasm Interface Types) 是组件模型的接口定义语言（IDL），定义了记录（records）、变体（variants）、结果（results）、选项（options）、列表（lists）和资源（resources）等高级类型。[来源: [WIT Design](https://component-model.bytecodealliance.org/design/wit.html)]
@@ -388,6 +396,8 @@ world app-world {
 ---
 
 ## 五、WASI Preview 2 与 Rust
+
+「WASI Preview 2 与 Rust」部分按能力安全模型、虚拟文件系统与网络与Rust 的 wasi crate 与 wasmtime 嵌入的顺序逐层展开。
 
 ### 5.1 能力安全模型
 
@@ -473,6 +483,8 @@ let instance = linker.instantiate(&mut store, &module)?;
 
 ## 六、性能考量
 
+本节从 JS↔WASM 边界穿越成本、SIMD 与批量内存操作与流式编译与代码体积优化切入，剖析「性能考量」的核心内容。
+
 ### 6.1 JS↔WASM 边界穿越成本
 
 > **[V8 Blog — Wasm Performance](https://v8.dev/blog)** JS 引擎调用 Wasm 函数时，需要执行**序列化/反序列化**和**上下文切换**（JS GC 世界 ↔ Wasm 沙箱）。频繁的细粒度调用会产生显著开销。[来源: [V8 Performance](https://v8.dev/blog)]
@@ -552,6 +564,8 @@ pub fn rgba_to_grayscale_simd(rgba: &[u8], gray: &mut [u8]) {
 ---
 
 ## 七、安全沙箱模型
+
+本节从线性内存与能力模型 与  wasm32-unknown-unknown 与 `wasm32-wa… 两个层面剖析「安全沙箱模型」。
 
 ### 7.1 线性内存与能力模型
 
@@ -649,6 +663,8 @@ pub fn hash_data(input: &[u8]) -> [u8; 32] {
 ---
 
 ## 九、边界测试
+
+「边界测试」涉及边界测试：wasm-bindgen 跨边界传递含 `String` 的…、边界测试：JS→WASM→JS 递归调用导致栈溢出与边界测试：在 `wasm32-unknown-unknown` 中使用…，本节逐一说明其要点。
 
 ### 9.1 边界测试：wasm-bindgen 跨边界传递含 `String` 的结构体
 
@@ -824,6 +840,8 @@ fn main() {
 - **定理**: Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：WASM 的"组件模型"（Component Model）解…、测验 2：`wasmtime` 与浏览器中的 WASM 运行时有什么区…、测验 3：WASM 的"WASI Preview 2"相比 Previ…、测验 4：`wit-bindgen` 在组件模型开发中起什么作用？（理…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：WASM 的"组件模型"（Component Model）解决了什么问题？（理解层）
 
@@ -1029,6 +1047,8 @@ pub fn simd_add(a: &[f32], b: &[f32]) -> Vec<f32> {
 
 ### 14.2 最佳实践清单（来自 `rust_192_best_practices.md`）
 
+本节从性能优化清单 与 安全检查清单 两个层面剖析「最佳实践清单（来自 `rust_192_best_prac…」。
+
 #### 性能优化清单
 
 - **编译时**：使用 `opt-level = "z"` 或 `"s"`、`lto = true`、`codegen-units = 1`、`strip = true`。
@@ -1058,6 +1078,8 @@ pub fn simd_add(a: &[f32], b: &[f32]) -> Vec<f32> {
 5. 验证：编译通过、功能正常、性能达标、二进制大小符合预期。
 
 ### 14.5 决策树参考（来自 `wasm_decision_tree.md`）
+
+「决策树参考（来自 `wasm_decision_tree.…」部分包含编译目标选择 与  JavaScript 互操作选择 两条主线，本节依次说明。
 
 #### 编译目标选择
 

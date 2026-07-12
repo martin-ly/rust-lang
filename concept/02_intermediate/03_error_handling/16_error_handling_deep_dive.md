@@ -183,6 +183,8 @@ pub trait Error: Debug + Display {
 
 ## 二、技术细节
 
+「技术细节」部分按错误转换与 From Trait、自定义错误类型与错误处理框架的顺序逐层展开。
+
 ### 2.1 错误转换与 From Trait
 >
 
@@ -371,6 +373,8 @@ impl std::error::Error for ManualError {
 
 ## 四、反命题与边界分析
 
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+
 ### 4.1 反命题树
 >
 
@@ -550,6 +554,8 @@ graph TD
 
 ## 十、边界测试：错误处理的编译错误
 
+理解「边界测试：错误处理的编译错误」需要把握边界测试：`thiserror` 与 `anyhow` 的混用（编译错…、边界测试：`Result` 嵌套与 `?` 的传播限制（编译错误）、边界测试：`thiserror` 的 `#[from]` 与类型歧义（…、边界测试：`eyre` 与 `anyhow` 的混用导致上下文丢失（编…等5个方面，本节依次展开。
+
 ### 10.1 边界测试：`thiserror` 与 `anyhow` 的混用（编译错误）
 
 ```rust,compile_fail
@@ -683,6 +689,8 @@ fn main() {
 > **修正**: `Error::source()` 返回错误链的**下一个错误**。标准库的 `Error::chain()` 遍历 source 链。循环引用（Reference）（`A.source = B, B.source = A`）导致无限循环。虽然 Rust 的类型系统（Type System）（`&dyn Error` 是引用，不能拥有循环所有权（Ownership））使直接循环困难，但 `Arc` 或自定义实现可能创建逻辑循环。安全模式：1) 错误链应为**线性**（无分支、无循环）；2) `source` 指向**原始错误**（底层原因），非同一级别的包装；3) 使用 `anyhow`/`eyre` 自动管理错误链。这与 Java 的 `Throwable.getCause()`（同样可能循环，但 JVM 不检测）或 Go 的 `errors.Unwrap`（Go 1.13+ 的链式错误，手动管理）不同——Rust 的 `Error` trait 提供标准化错误链接口。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/error/trait.Error.html)] · [来源: [anyhow](https://docs.rs/anyhow/)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：`?` 运算符可以自动进行错误类型转换，它依赖哪个 trai…、测验 2：`thiserror` 和 `anyhow` 在错误处理中各…、测验 3：`Error::source()` 方法返回什么？错误链遍历…、测验 4：`Box<dyn Error>` 在函数返回类型中起什么作用…等5个方面。
 
 ### 测验 1：`?` 运算符可以自动进行错误类型转换，它依赖哪个 trait？（理解层）
 

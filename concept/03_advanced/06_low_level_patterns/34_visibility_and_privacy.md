@@ -50,6 +50,8 @@ pub enum State {               // 公开枚举，变体默认公开
 
 ## 三、访问规则
 
+「访问规则」部分包含 Public item 与  Private item 两条主线，本节依次说明。
+
 ### 1. Public item
 
 如果 item 是 public 的，那么只要从模块（Module） `m` 可以访问该 item 的所有祖先模块，就可以从 `m` 外部访问它。也可以通过重导出（re-export）命名该 item。

@@ -39,6 +39,8 @@ struct User {
 
 ## 二、标准库可派生 Trait 一览
 
+本节将「标准库可派生 Trait 一览」分解为若干主题： `Debug` — 调试输出、`PartialEq` / `Eq` — 相等性比较、`PartialOrd` / `Ord` — 顺序比较、`Clone` / `Copy` — 复制值等6个方面。
+
 ### `Debug` — 调试输出
 
 - 启用 `{:?}` 格式化。
@@ -56,6 +58,8 @@ println!("{:?}", p); // Point { x: 1, y: 2 }
 ---
 
 ### `PartialEq` / `Eq` — 相等性比较
+
+本节围绕「`PartialEq` / `Eq` — 相等性比较」展开，覆盖 `PartialEq` 与  `Eq` 两个方面。
 
 #### `PartialEq`
 
@@ -86,6 +90,8 @@ struct User { id: u64 }
 
 ### `PartialOrd` / `Ord` — 顺序比较
 
+「`PartialOrd` / `Ord` — 顺序比较」部分包含 `PartialOrd` 与  `Ord` 两条主线，本节依次说明。
+
 #### `PartialOrd`
 
 - 启用 `<`、`>`、`<=`、`>=` 运算符。
@@ -107,6 +113,8 @@ struct Version { major: u32, minor: u32, patch: u32 }
 ---
 
 ### `Clone` / `Copy` — 复制值
+
+「`Clone` / `Copy` — 复制值」部分包含 `Clone` 与  `Copy` 两条主线，本节依次说明。
 
 #### `Clone`
 

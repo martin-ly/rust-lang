@@ -367,6 +367,8 @@ pub fn safe_wrapper(data: &[u8]) -> u32 {
 
 ## 快速开始：工具安装与运行
 
+「快速开始：工具安装与运行」涉及 Miri（Rust 官方动态分析器）、Kani（AWS 有界模型检查器）、BorrowSanitizer（运行时借用检查 Sanitizer）与Verus（Microsoft 演绎验证器），本节逐一说明其要点。
+
 ### Miri（Rust 官方动态分析器）
 
 > **深度概念页**: [Miri：Rust 未定义行为动态检测器](31_miri.md)
@@ -494,6 +496,8 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 > **反命题**: "现代 Rust 验证工具生态（2025-2026） 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：`cargo-kani` 与 `cargo-fuzz` 在验…、测验 2：Miri 能检测哪些类别的未定义行为（UB）？（理解层）与测验 3：为什么即使有了形式化验证，仍然需要传统测试？（理解层）的顺序逐层展开。
 
 ### 测验 1：`cargo-kani` 与 `cargo-fuzz` 在验证方法上有什么区别？（理解层）
 

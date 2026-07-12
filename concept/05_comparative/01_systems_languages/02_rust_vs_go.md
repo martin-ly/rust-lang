@@ -27,6 +27,8 @@
 
 ## 一、权威定义
 
+本节将「权威定义」分解为若干主题：设计哲学对比、核心命题、Wikipedia 定义、国际课程对齐等5个方面。
+
 ### 1.1 设计哲学对比
 
 > **[The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)** Rust's central feature is ownership — a set of rules checked by the compiler that govern how a Rust program manages memory.
@@ -277,6 +279,8 @@ graph TD
 
 ## 六、反命题与边界分析
 
+「反命题与边界分析」部分按命题: "Rust 比 Go 更适合所有后端服务"、反例: Go 的 GC 停顿 vs Rust 的无 GC与反例: Go 的接口运行时开销 vs Rust 的零成本抽象的顺序逐层展开。
+
 ### 6.1 命题: "Rust 比 Go 更适合所有后端服务"
 
 ```mermaid
@@ -333,6 +337,8 @@ func Process(s Serializer) []byte {
 > **结论**: 在每秒百万次调用的热路径（如序列化、日志、比较器）中，Go 的接口间接开销可能成为瓶颈。Rust 的零成本抽象（Zero-Cost Abstraction）在此类场景具有显著优势。但若调用频率不高，Go 接口带来的灵活性和可测试性更具工程价值。 来源: Go Data Structures: Interfaces (Russ Cox, 2009) / [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 
 ## 七、代码示例对比
+
+本节将「代码示例对比」分解为若干主题： Rust Channel（所有权转移）、Go Channel（值拷贝 + 共享堆）、对比总结与混合架构建议。
 
 ### 7.1 Rust Channel（所有权转移）
 
@@ -787,6 +793,8 @@ func ParseJSON(input string) string {
 
 ## 十、边界测试：Rust 与 Go 的编译错误对比
 
+「边界测试：Rust 与 Go 的编译错误对比」部分按边界测试：Go 的隐式接口 vs Rust 的显式 trait（编译错…、边界测试：Go 的 nil 指针与 Rust 的 `Option`（编…、边界测试：Go 的接口与 Rust 的 trait 的隐式实现差异（编…、边界测试：Go 的 nil 与 Rust 的 `Option` 的语义…等5个方面的顺序逐层展开。
+
 ### 10.1 边界测试：Go 的隐式接口 vs Rust 的显式 trait（编译错误）
 
 ```rust,ignore
@@ -915,6 +923,8 @@ fn main() {
 > **修正**: Go 的**接口 nil 陷阱**：接口值由（类型，值）对组成，nil 指针赋值给接口后，接口值不为 nil（类型信息存在）。这导致 `if r != nil` 为 true，但底层指针为 nil，解引用（Reference） panic。Rust 的 `Option<&T>` 是**显式空值**：`None` 和 `Some(&T)` 是不同的变体，编译器强制处理所有情况（`match`、`if let`、`unwrap`）。Rust 无 "nil 指针但非 None" 的概念——空值是显式的、类型安全的。这与 Haskell 的 `Maybe a`（`Nothing` / `Just a`）或 Swift 的 `Optional<T>`（`nil` / `T`）相同——Rust 的 `Option` 是代数数据类型，空值状态在类型系统（Type System）中显式编码。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Go Interface Nil](https://golang.org/doc/faq#nil_error)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：Go 和 Rust 在设计哲学上有什么根本差异？（理解层）、测验 2：Go 的 goroutine 与 Rust 的 `tokio…、测验 3：Go 的错误处理（`if err != nil`）与 Rus…、测验 4：为什么 Go 没有泛型（直到 1.18），而 Rust 从设…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：Go 和 Rust 在设计哲学上有什么根本差异？（理解层）
 

@@ -36,6 +36,8 @@
 
 ## 一、权威定义
 
+「权威定义」部分的核心主题是 Wikipedia 权威定义，本节展开说明。
+
 ### 1.1 Wikipedia 权威定义
 
 [来源: [Async Book](https://rust-lang.github.io/async-book/index.html)]
@@ -868,6 +870,8 @@ fn main() {
 
 ### 9.1 领域间迁移指南
 
+「领域间迁移指南」部分包含从 Python 迁移到 Rust 与 从 Go 迁移到 Rust 两条主线，本节依次说明。
+
 #### 从 Python 迁移到 Rust
 
 | Python 概念 | Rust 对应 | 常见陷阱 |
@@ -1379,6 +1383,8 @@ graph TD
 
 ## 十、边界测试：应用领域的编译错误
 
+本节围绕「边界测试：应用领域的编译错误」展开，依次讨论边界测试：Web 框架中的状态共享（编译错误）、边界测试：游戏引擎中的 ECS 组件查询（编译错误）、边界测试：嵌入式中的 `std` 依赖误用（编译错误）与边界测试：Web 服务中的阻塞操作与 async runtime 的冲…。
+
 ### 10.1 边界测试：Web 框架中的状态共享（编译错误）
 
 ```rust,ignore
@@ -1466,6 +1472,8 @@ async fn handler() -> String {
 > [来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/index.html)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：Rust 在哪些应用领域表现特别突出？（理解层）、测验 2：为什么 Rust 目前不是数据科学/机器学习的主流语言？（理…、测验 3：Rust 在 Web 开发中的定位是什么？（理解层）、测验 4：嵌入式开发中选择 Rust 而不是 C 的主要理由是什么？（…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：Rust 在哪些应用领域表现特别突出？（理解层）
 

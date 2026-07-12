@@ -33,6 +33,8 @@
 
 ## 二、模式组合的基本操作
 
+「模式组合的基本操作」涉及四种组合原语、并行组合（⊗）：独立共存来源: [GoF — Design Patte…、串行复合（∘）：流水线、选择和（⊕）：条件分支等5个方面，本节逐一说明其要点。
+
 ### 2.1 四种组合原语
 
 借鉴范畴论的态射复合思想，定义模式组合的四种基本操作：[来源: [Milewski — Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
@@ -147,6 +149,8 @@ impl StrategyCommand {
 
 ## 三、常见模式组合与冲突矩阵
 
+本节围绕「常见模式组合与冲突矩阵」展开，覆盖协同组合（Synergistic Compositions） 与 冲突矩阵（Conflict Matrix） 两个方面。
+
 ### 3.1 协同组合（Synergistic Compositions）
 
 | 组合 | 场景 | 协同机制 | Rust 实现 |
@@ -175,6 +179,8 @@ impl StrategyCommand {
 ---
 
 ## 四、模式选择的形式化决策树
+
+本节从问题特征 → 模式选择 与 并发场景的模式选择 两个层面剖析「模式选择的形式化决策树」。
 
 ### 4.1 问题特征 → 模式选择
 
@@ -227,6 +233,8 @@ impl StrategyCommand {
 ---
 
 ## 五、Rust 特有的模式组合
+
+理解「Rust 特有的模式组合」需要把握 Typestate + Builder：编译期状态机、Ownership + RAII + Scope Guard：资源安全…与Trait Object + Strategy：动态分发与零成本抽象的…，本节依次展开。
 
 ### 5.1 Typestate + Builder：编译期状态机
 
@@ -342,6 +350,8 @@ impl DynamicCheckout {
 
 ## 六、分布式系统的模式组合
 
+本节从弹性模式组合：CircuitBreaker ∘ Retry ∘ Tim… 与  Saga 模式：分布式事务的组合 两个层面剖析「分布式系统的模式组合」。
+
 ### 6.1 弹性模式组合：CircuitBreaker ∘ Retry ∘ Timeout
 
 ```rust
@@ -397,6 +407,8 @@ impl Saga {
 ---
 
 ## 七、反例与边界测试
+
+理解「反例与边界测试」需要把握反例：Singleton + DI 的冲突、边界测试：Observer + Singleton 组合的所有权冲突（…与边界测试：模式组合的状态空间爆炸，本节依次展开。
 
 ### 7.1 反例：Singleton + DI 的冲突
 
@@ -500,6 +512,8 @@ enum CircuitState {
 
 ## 八、模式组合的定理系统
 
+「模式组合的定理系统」部分的核心主题是组合安全性定理，本节展开说明。
+
 ### 8.1 组合安全性定理
 
 > **定理 C-001** [Tier 3]: 若模式 A 和模式 B 操作不相交的数据集，则 A ⊗ B（并行组合）是类型安全的。
@@ -535,6 +549,8 @@ enum CircuitState {
 > **状态**: ✅ 新建 — 表征空间坐标系
 
 ## 十、边界测试：模式组合代数的编译错误
+
+「边界测试：模式组合代数的编译错误」涉及边界测试：状态机组合中的无效转换（编译错误）、边界测试：组合子模式的所有权链（编译错误）与边界测试：组合子嵌套过深导致的类型爆炸（编译错误/编译超时），本节逐一说明其要点。
 
 ### 10.1 边界测试：状态机组合中的无效转换（编译错误）
 
@@ -646,6 +662,8 @@ fn option_j(_: i32) -> Option<i32> { Some(10) }
 - **定理**: 模式组合代数：设计模式的结构化关联与冲突分析 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：什么是"组合子"（Combinator）？在 Rust 中常…、测验 2：`Iterator` 的 `fold` 为什么是"catam…、测验 3：`Option` 和 `Result` 为什么可以被视为"幺…、测验 4：Rust 的 `?` 运算符在单子（Monad）理论中对应什…等5个方面的顺序逐层展开。
 
 ### 测验 1：什么是"组合子"（Combinator）？在 Rust 中常见于哪些地方？（理解层）
 

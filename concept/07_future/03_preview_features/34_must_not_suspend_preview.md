@@ -36,6 +36,8 @@
 
 ## 二、语法说明：如何启用与使用
 
+理解「语法说明：如何启用与使用」需要把握启用 lint、自定义类型标记与解决方式，本节依次展开。
+
 ### 2.1 启用 lint
 
 ```rust,ignore
@@ -171,6 +173,8 @@ fn main() {}
 > **反命题**: "`must_not_suspend` Lint Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：`must_not_suspend` lint 的作用是什么…、测验 2：为什么 `MutexGuard` 不应该跨越 await 点…、测验 3：`must_not_suspend` 与 `Send` tr…、测验 4：这个 lint 对异步代码质量有什么帮助？（理解层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：`must_not_suspend`  lint 的作用是什么？（理解层）
 

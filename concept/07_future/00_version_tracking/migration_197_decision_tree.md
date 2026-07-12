@@ -75,6 +75,8 @@ flowchart TD
 
 ## 3. 变化一：空 `#[export_name]` 被拒绝
 
+「变化一：空 `#[export_name]` 被拒绝」涉及症状与报错信息、判定树（空 export_name）、迁移前 / 后代码对比与验证方法，本节逐一说明其要点。
+
 ### 3.1 症状与报错信息
 
 - **现象**：升级到 Rust 1.97 后，原先能通过编译的代码出现**编译期硬错误（hard error）**，构建中断。
@@ -149,6 +151,8 @@ RUSTFLAGS="-D warnings" cargo check
 ---
 
 ## 4. 变化二：`f32: From<{float}>` future-compat 警告
+
+本节将「变化二：`f32: From<{float}>` futu…」分解为若干主题：症状与报错信息、判定树（f32 From float）、迁移前 / 后代码对比与验证方法。
 
 ### 4.1 症状与报错信息
 
@@ -226,6 +230,8 @@ cargo clippy --all-targets -- -D warnings
 ---
 
 ## 5. 变化三：`pin!` 不再做 deref coercion（类型签名层）
+
+「变化三：`pin!` 不再做 deref coercion…」部分按症状与报错信息、判定树（pin 类型签名）、迁移前 / 后代码对比与验证方法的顺序逐层展开。
 
 ### 5.1 症状与报错信息
 
@@ -406,6 +412,8 @@ cargo +nightly miri test --all-targets
 
 ## 7. 变化五：Windows 上 `WSAESHUTDOWN` 映射为 `ErrorKind::BrokenPipe`
 
+本节围绕「变化五：Windows 上 `WSAESHUTDOWN`…」展开，依次讨论症状与报错信息、判定树（WSAESHUTDOWN）、迁移前 / 后代码对比与验证方法。
+
 ### 7.1 症状与报错信息
 
 - **现象**：仅 **Windows 目标**出现**运行期行为差异**（非编译错误）：对已被 `shutdown` 的 socket 再写/读，得到的 `std::io::Error::kind()` 现在是 `ErrorKind::BrokenPipe`。旧代码若按 `ErrorKind` 细分匹配、且依赖此前的映射结果，分支判断会错位。
@@ -517,6 +525,8 @@ fn write_after_shutdown_is_broken_pipe() {
 ---
 
 ## 8. 变化六：拒绝向模块路径段传递泛型参数
+
+本节将「变化六：拒绝向模块路径段传递泛型参数」分解为若干主题：症状与报错信息、判定树（模块路径泛型）、迁移前 / 后代码对比与验证方法。
 
 ### 8.1 症状与报错信息
 

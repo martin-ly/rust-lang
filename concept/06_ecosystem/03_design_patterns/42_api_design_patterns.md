@@ -96,6 +96,8 @@
 
 ## 一、权威定义（Definition）
 
+本节将「权威定义（Definition）」分解为若干主题： REST：表述性状态转移、GraphQL：查询语言与运行时与gRPC：高性能 RPC 框架。
+
 ### 1.1 REST：表述性状态转移
 
 > **[Fielding 2000 — Architectural Styles and the Design of Network-based Software Architectures](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)**
@@ -216,6 +218,8 @@ gRPC 核心特征:
 ---
 
 ## 三、API 设计原则
+
+理解「API 设计原则」需要把握 RESTful 资源建模、API 版本化策略与错误处理与状态码，本节依次展开。
 
 ### 3.1 RESTful 资源建模
 >
@@ -405,6 +409,8 @@ impl From<AppError> for (StatusCode, ProblemDetails) {
 
 ## 四、REST API 设计
 
+本节将「REST API 设计」分解为若干主题：路由与处理器、请求验证与序列化与OpenAPI 文档生成。
+
 ### 4.1 路由与处理器
 >
 
@@ -564,6 +570,8 @@ fn api_with_docs() -> Router {
 
 ## 五、GraphQL API 设计
 
+理解「GraphQL API 设计」需要把握 Schema 与类型系统、Resolver 与 N+1 问题与订阅与实时数据，本节依次展开。
+
 ### 5.1 Schema 与类型系统
 >
 
@@ -710,6 +718,8 @@ impl SubscriptionRoot {
 ---
 
 ## 六、gRPC API 设计
+
+「gRPC API 设计」涉及 Protocol Buffers 与 Service 定义、流式 RPC与拦截器与中间件，本节逐一说明其要点。
 
 ### 6.1 Protocol Buffers 与 Service 定义
 >
@@ -1026,6 +1036,8 @@ async fn proxy_to_user_service(req: Request<Body>) -> Result<Response<Body>, Sta
 
 ## 九、反命题与边界
 
+「反命题与边界」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+
 ### 9.1 反命题树
 
 ```text
@@ -1074,6 +1086,8 @@ async fn proxy_to_user_service(req: Request<Body>) -> Result<Response<Body>, Sta
 ---
 
 ## 十、边界测试
+
+本节从边界测试：GraphQL N+1 查询导致数据库过载（运行时性能）、边界测试：缺少请求体大小限制导致 DoS（运行时错误）与边界测试：API 版本化破坏向后兼容（逻辑错误）切入，剖析「边界测试」的核心内容。
 
 ### 10.1 边界测试：GraphQL N+1 查询导致数据库过载（运行时性能）
 
@@ -1217,6 +1231,8 @@ struct UserV2 {
 - **定理**: API Design Patterns（API 设计模式） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Rust API 设计中，" consuming build…、测验 2：`IntoIterator` trait 在 API 设计中…、测验 3：为什么 Rust 的公共 API 中通常避免返回 `impl…、测验 4：`sealed trait` 模式在 Rust API 设计…等5个方面。
 
 ### 测验 1：Rust API 设计中，" consuming builder" 与"非 consuming builder"有什么区别？（理解层）
 

@@ -93,6 +93,8 @@ graph LR
 
 ## 四、配置示例
 
+「配置示例」部分按 `rustfmt.toml`、`.clippy.toml`与`Cargo.toml` 开发配置的顺序逐层展开。
+
 ### `rustfmt.toml`
 
 ```toml

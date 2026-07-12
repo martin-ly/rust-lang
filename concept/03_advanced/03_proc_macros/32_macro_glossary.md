@@ -68,6 +68,8 @@
 
 ## 🎨 宏类型术语
 
+本节围绕「宏类型术语」展开，依次讨论 Macro (宏)、Declarative Macro (声明宏)与Procedural Macro (过程宏)。
+
 ### Macro (宏)
 
 编译时执行的代码生成机制，在编译前展开为 Rust 代码。
@@ -125,6 +127,8 @@ pub fn my_trait_derive(input: TokenStream) -> TokenStream {
 ---
 
 ## 🔧 声明宏术语
+
+本节将「声明宏术语」分解为若干主题： macro_rules、Pattern Matching (模式匹配)、Repetition (重复)与Metavariable (元变量)。
 
 ### macro_rules
 
@@ -210,6 +214,8 @@ create_var!(x, 42); // let x = 42;
 ---
 
 ## ⚙️ 过程宏术语
+
+本节围绕「过程宏术语」展开，依次讨论 TokenStream、Derive Macro (派生宏)、Attribute Macro (属性宏)、Function-like Macro (函数式宏)等7个方面。
 
 ### TokenStream
 
@@ -366,6 +372,8 @@ let span = ident.span();       // 标识符位置
 
 ## 🧹 卫生性与作用域
 
+本节将「卫生性与作用域」分解为若干主题： Hygiene (卫生性)、Call Site (调用点)、Definition Site (定义点)与Mixed Site (混合点)。
+
 ### Hygiene (卫生性)
 
 宏内外标识符不冲突的机制。
@@ -435,6 +443,8 @@ let span = Span::mixed_site();
 
 ## 🛠️ 工具与库
 
+本节从 cargo-expand、proc-macro2与trybuild切入，剖析「工具与库」的核心内容。
+
 ### cargo-expand
 
 查看宏展开结果的工具。
@@ -493,6 +503,8 @@ fn ui_tests() {
 ---
 
 ## 📚 元编程概念
+
+本节将「元编程概念」分解为若干主题： Metaprogramming (元编程)、AST (抽象语法树)、DSL (领域特定语言)、Code Generation (代码生成)等6个方面。
 
 ### Metaprogramming (元编程)
 

@@ -79,6 +79,8 @@
 
 ## 二、Android AOSP
 
+「Android AOSP」部分按 AOSP 为什么选择 Rust、构建规则：Android.bp、AIDL 与 Binder IPC与C / C++ / Java 互操作的顺序逐层展开。
+
 ### 2.1 AOSP 为什么选择 Rust
 
 AOSP 是全球最大的开源代码库之一，数十亿设备运行。Rust 被引入主要为了：
@@ -139,6 +141,8 @@ pub trait IMyService: Interface {
 
 ## 三、Chromium
 
+「Chromium」涉及 Chromium 的 Rust 策略、GN 构建与 CXX与引入第三方 crate，本节逐一说明其要点。
+
 ### 3.1 Chromium 的 Rust 策略
 
 Chromium 对 Rust 的采用相对谨慎，核心原则：
@@ -191,6 +195,8 @@ Chromium 对第三方 crate 有严格流程：
 ---
 
 ## 四、Bare Metal
+
+理解「Bare Metal」需要把握 no_std 与 alloc、微控制器：PAC → HAL → Board Support与应用处理器与 UART 驱动，本节依次展开。
 
 ### 4.1 no_std 与 alloc
 

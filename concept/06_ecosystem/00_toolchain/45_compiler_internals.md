@@ -176,6 +176,8 @@ Phase 6 — 代码生成
 
 ## 三、前端：解析与 AST
 
+本节围绕「前端：解析与 AST」展开，覆盖词法与语法分析 与 宏展开 两个方面。
+
 ### 3.1 词法与语法分析
 >
 
@@ -228,6 +230,8 @@ pub enum ExprKind {
 ---
 
 ## 四、HIR：高级中间表示
+
+本节围绕「HIR：高级中间表示」展开，覆盖 HIR 的设计目标 与 类型检查 两个方面。
 
 ### 4.1 HIR 的设计目标
 >
@@ -283,6 +287,8 @@ use_debug(42);  // 检查 i32: Debug → 是（标准库实现）
 ---
 
 ## 五、类型系统实现
+
+本节围绕「类型系统实现」展开，覆盖 Trait 解析与 Chalk 与 类型推断 两个方面。
 
 ### 5.1 Trait 解析与 Chalk
 >
@@ -341,6 +347,8 @@ Rust 类型推断的特点:
 ---
 
 ## 六、MIR：中级中间表示
+
+理解「MIR：中级中间表示」需要把握 MIR 的结构、MIR 优化与常量求值（MIRI / Const Eval），本节依次展开。
 
 ### 6.1 MIR 的结构
 >
@@ -459,6 +467,8 @@ MIRI（MIR Interpreter）:
 
 ## 七、借用检查器
 
+「借用检查器」部分按 NLL（Non-Lexical Lifetimes）、Polonius：基于逻辑的借用检查与别名模型：Tree Borrows的顺序逐层展开。
+
 ### 7.1 NLL（Non-Lexical Lifetimes）
 >
 > **Niko Matsakis — Rust Blog** NLL 是 Rust 2018 Edition 引入的借用检查改进，核心洞察：**引用（Reference）的有效性应基于实际使用位置，而非词法作用域**。
@@ -546,6 +556,8 @@ Tree Borrows 的核心规则:
 
 ## 八、后端：代码生成
 
+「后端：代码生成」部分包含 LLVM IR 生成 与 增量编译 两条主线，本节依次说明。
+
 ### 8.1 LLVM IR 生成
 >
 
@@ -621,6 +633,8 @@ rustc 查询系统的核心设计:
 
 ## 十、反命题与边界
 
+本节从反命题树 与 边界极限 两个层面剖析「反命题与边界」。
+
 ### 10.1 反命题树
 >
 
@@ -669,6 +683,8 @@ rustc 查询系统的核心设计:
 ---
 
 ## 十一、边界测试
+
+本节从边界测试：递归宏展开导致栈溢出（编译错误）、边界测试：泛型单态化导致二进制膨胀（编译/链接错误）与边界测试：unsafe 代码在 Miri 中触发 UB（运行时错误）切入，剖析「边界测试」的核心内容。
 
 ### 11.1 边界测试：递归宏展开导致栈溢出（编译错误）
 
@@ -763,6 +779,8 @@ fn undefined_behavior() {
 - **定理**: Compiler Internals（Rust 编译器内部原理） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：Rust 编译器 `rustc` 的前端（Frontend）…、测验 2：MIR（Mid-level IR）在 Rust 编译管道中的…、测验 3：LLVM 在 Rust 编译中扮演什么角色？为什么 Rust…、测验 4：什么是"单态化"（Monomorphization）？它对编…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：Rust 编译器 `rustc` 的前端（Frontend）主要做什么？（理解层）
 

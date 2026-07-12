@@ -34,6 +34,8 @@
 
 ## 一、QUIC：基于 UDP 的安全传输协议
 
+本节从 QUIC 的设计动机、QUIC 的包结构与 Rust 表示与Rust 实现：quinn切入，剖析「QUIC：基于 UDP 的安全传输协议」的核心内容。
+
 ### 1.1 QUIC 的设计动机
 
 QUIC 解决了 TCP+TLS 的四个根本问题：
@@ -102,6 +104,8 @@ impl Connection {
 
 ## 二、HTTP/3：基于 QUIC 的应用层协议
 
+本节从 HTTP/3 与 HTTP/2 的对比 与  QPACK：HTTP/3 的头部压缩 两个层面剖析「HTTP/3：基于 QUIC 的应用层协议」。
+
 ### 2.1 HTTP/3 与 HTTP/2 的对比
 
 | 维度 | HTTP/2 (over TCP) | HTTP/3 (over QUIC) |
@@ -134,6 +138,8 @@ QPACK 解决:
 ---
 
 ## 三、eBPF：内核可编程与 Rust
+
+本节围绕「eBPF：内核可编程与 Rust」展开，依次讨论 eBPF 的本质、Rust + eBPF：aya-rs与Rust 实现 eBPF 的独特优势。
 
 ### 3.1 eBPF 的本质
 
@@ -340,6 +346,8 @@ async fn fixed_udp2(socket: &UdpSocket) {
 - **定理**: 网络协议：QUIC/HTTP-3 与 Rust 实现 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：`tokio::io::AsyncReadExt` 和 `A…、测验 2：什么是"帧"（Framing）？为什么 TCP 流需要显式帧…、测验 3：Rust 中常用的序列化协议有哪些？各自适合什么场景？（理解…、测验 4：`quinn` 在 Rust 网络生态中提供什么功能？（理解…等5个方面的顺序逐层展开。
 
 ### 测验 1：`tokio::io::AsyncReadExt` 和 `AsyncWriteExt` 在协议解析中起什么作用？（理解层）
 

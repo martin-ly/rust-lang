@@ -167,6 +167,8 @@ graph LR
 
 ## 二、技术细节
 
+理解「技术细节」需要把握 wasm32 目标三元组、wasm-bindgen 与 JS 互操作、Wasm 组件模型与Rust 1.96 链接器行为变更：`--allow-undefine…，本节依次展开。
+
 ### 2.1 wasm32 目标三元组
 >
 
@@ -337,6 +339,8 @@ RUSTFLAGS="-Clink-arg=--allow-undefined" cargo build --target wasm32-unknown-unk
 
 ## 四、反命题与边界分析
 
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+
 ### 4.1 反命题树
 >
 
@@ -487,6 +491,8 @@ Rust Wasm 工具链:
 
 ## 十、边界测试：WebAssembly 的编译错误
 
+本节围绕「边界测试：WebAssembly 的编译错误」展开，依次讨论边界测试：`wasm32` 目标的标准库限制（编译错误）、边界测试：`wasm-bindgen` 的类型映射（编译错误）、边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）、边界测试：`wasm32-unknown-unknown` 的 pan…等5个方面。
+
 ### 10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）
 
 ```rust,compile_fail
@@ -564,6 +570,8 @@ fn main() {
 - **定理**: WebAssembly 生态：Rust 的浏览器外运行时 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：WebAssembly（WASM）相比 JavaScript…、测验 2：Rust 编译为 WASM 时，为什么需要 `wasm-bi…、测验 3：`wasm-pack` 在 Rust/WASM 工作流中扮演…、测验 4：WASM 的线性内存（Linear Memory）模型是什么…等5个方面，本节依次展开。
 
 ### 测验 1：WebAssembly（WASM）相比 JavaScript 在性能上的主要优势是什么？（理解层）
 

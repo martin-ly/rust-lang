@@ -37,6 +37,8 @@
 
 ## 一、声明宏基础
 
+理解「声明宏基础」需要把握 Q1. 以下宏调用 `vec![1, 2, 3]` 展开后近似于什么代…、Q2. 以下代码能否编译？解释宏的重复模式与Q3. 以下代码能否编译？解释宏的卫生性（Hygiene），本节依次展开。
+
 ### Q1. 以下宏调用 `vec![1, 2, 3]` 展开后近似于什么代码？
 
 <details>
@@ -207,6 +209,8 @@ Rust 的卫生性避免了这种经典宏（Macro）陷阱。
 
 ## 二、过程宏
 
+「过程宏」部分包含 Q4. 以下代码的输出是什么？解释 `derive` 宏的工作原理 与  Q5. 以下代码能否编译？解释属性宏（Attribute Macro）… 两条主线，本节依次说明。
+
 ### Q4. 以下代码的输出是什么？解释 `derive` 宏的工作原理
 
 ```rust
@@ -319,6 +323,8 @@ fn add(a: i32, b: i32) -> i32 {
 ---
 
 ## 三、宏的高级技巧
+
+本节围绕「宏的高级技巧」展开，覆盖 Q6. 以下代码能否编译？`tt` 和 `expr` 的区别是什么？ 与  Q7. 以下代码能否编译？宏递归的限制是什么？ 两个方面。
 
 ### Q6. 以下代码能否编译？`tt` 和 `expr` 的区别是什么？
 
@@ -436,6 +442,8 @@ recursion limit reached while expanding macro
 ---
 
 ## 四、综合应用
+
+本节将「综合应用」分解为若干主题： Q8. 以下代码的输出是什么？`concat!` 和 `stringi…、Q9. 以下代码能否编译？宏中的 `$(...)*` 与 `$(...…与Q10. 以下代码存在什么问题？这是宏与模块交互的经典陷阱。
 
 ### Q8. 以下代码的输出是什么？`concat!` 和 `stringify!` 的区别
 
@@ -625,6 +633,8 @@ macro_rules! make_vec {
 > **权威来源**: [The Rust Programming Language — Ch19.5](https://doc.rust-lang.org/book/ch19-06-macros.html) · [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/) · [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：本文件是 测验：宏系统（L3 试点扩展） 的专项测验集。这类…、测验 2：在 测验：宏系统（L3 试点扩展） 的测验中，若遇到不确定答…与测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层）。
 
 ### 测验 1：本文件是 测验：宏系统（L3 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 

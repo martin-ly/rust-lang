@@ -51,6 +51,8 @@
 
 ## 二、C++ 的 Move 语义
 
+「C++ 的 Move 语义」部分按 `std::move` 与移动构造函数、值类别与Moved-from 状态的顺序逐层展开。
+
 ### 2.1 `std::move` 与移动构造函数
 
 ```cpp
@@ -95,6 +97,8 @@ C++ 不禁止访问 moved-from 对象，只是其值未指定。
 ---
 
 ## 三、Rust 的 Move 语义
+
+本节从所有权转移 与  `Copy` vs `Clone` 两个层面剖析「Rust 的 Move 语义」。
 
 ### 3.1 所有权转移
 
@@ -154,6 +158,8 @@ fn main() {
 ---
 
 ## 五、RVO 与 Copy Elision
+
+「RVO 与 Copy Elision」部分包含 C++ 拷贝省略（RVO/NRVO） 与  Rust 的保证省略 两条主线，本节依次说明。
 
 ### 5.1 C++ 拷贝省略（RVO/NRVO）
 

@@ -324,6 +324,8 @@ impl<T> TaggedPtr<T> {
 
 ## 嵌入式测验（Embedded Quiz）
 
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：Arbitrary Self Types 允许什么目前不允许…、测验 2：这个特性对自定义智能指针有什么意义？（理解层）、测验 3：`Receiver` trait 在这个特性中起什么作用？（…、测验 4：Arbitrary Self Types 与 `Deref`…等5个方面，本节依次展开。
+
 ### 测验 1：Arbitrary Self Types 允许什么目前不允许的操作？（理解层）
 
 **题目**: Arbitrary Self Types 允许什么目前不允许的操作？

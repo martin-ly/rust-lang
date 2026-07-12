@@ -1559,6 +1559,8 @@ fn main() {
 
 ## 十二、边界测试：设计模式的编译错误
 
+本节将「边界测试：设计模式的编译错误」分解为若干主题：边界测试：Builder 模式未消费 self（编译错误）、边界测试：Singleton 在多线程中的不安全实现（编译错误）、边界测试：Newtype 模式的孤儿规则（编译错误）、边界测试：访问者模式与 Rust 的枚举匹配（设计权衡）等5个方面。
+
 ### 12.1 边界测试：Builder 模式未消费 self（编译错误）
 
 ```rust,compile_fail
@@ -1701,6 +1703,8 @@ fn main() {
 > **修正**: Builder 模式的**链式调用**在 Rust 中需处理所有权：`fn name(mut self, ...)` 消耗 `self` 并返回新的 `Self`，旧的 `self` 不可用。修复：1) `fn name(&mut self, ...)` — 借用（Borrowing），支持链式但不返回 `Self`（需分开调用：`builder.name(...); builder.age(...);`）；2) `fn name(mut self, ...) -> Self` — 消耗式，但要求一次性链式调用：`Builder::new().name(...).age(...).build()`；3) `fn name(self, ...) -> Self` — 无 `mut`，在函数内重新绑定。Rust 的 builder 模式通常采用**消耗式**（`mut self`），因为构建完成后 builder 不再需要。这与 Java 的 builder（总是返回 `this`，无所有权问题）或 Python 的 builder（同样无所有权）不同——Rust 的 builder 需显式处理移动语义。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：RAII 模式（理解层）、测验 2：Typestate 模式（应用层）、测验 3：Builder 模式与所有权（应用层）、测验 4：Newtype 模式（分析层）等5个方面。
 
 ### 测验 1：RAII 模式（理解层）
 
@@ -1958,6 +1962,8 @@ Rust 设计模式分类：
 
 ## 1. 创建型模式
 
+本节围绕「创建型模式」展开，覆盖 Builder 模式 与  Factory 模式 两个方面。
+
 ### Builder 模式
 
 ```rust
@@ -2080,6 +2086,8 @@ fn main() {
 ---
 
 ## 2. 结构型模式
+
+「结构型模式」部分包含 Adapter 模式 与  Decorator 模式 两条主线，本节依次说明。
 
 ### Adapter 模式
 
@@ -2234,7 +2242,11 @@ fn global_config() -> &'static Config {
 
 ## 十三、补充行为型与结构型模式（crates 迁移）
 
+本节将「补充行为型与结构型模式（crates 迁移）」分解为若干主题：责任链模式 (Chain of Responsibility)、模板方法模式 (Template Method)、备忘录模式 (Memento)、中介者模式 (Mediator)等7个方面。
+
 ### 责任链模式 (Chain of Responsibility)
+
+本节围绕「责任链模式 (Chain of Responsibilit…」展开，依次讨论模式定义、Rust 实现与使用场景。
 
 #### 模式定义
 
@@ -2360,6 +2372,8 @@ fn main() {
 
 ### 模板方法模式 (Template Method)
 
+本节从模式定义、Rust 实现与模板方法与策略模式的区别切入，剖析「模板方法模式 (Template Method)」的核心内容。
+
 #### 模式定义
 
 模板方法模式在超类中定义一个算法的骨架，将某些步骤延迟到子类中实现。
@@ -2469,6 +2483,8 @@ fn main() {
 ---
 
 ### 备忘录模式 (Memento)
+
+理解「备忘录模式 (Memento)」需要把握模式定义、Rust 实现与适用场景，本节依次展开。
 
 #### 模式定义
 
@@ -2623,6 +2639,8 @@ fn main() {
 
 ### 中介者模式 (Mediator)
 
+「中介者模式 (Mediator)」涉及模式定义、Rust 实现与适用场景，本节逐一说明其要点。
+
 #### 模式定义
 
 中介者模式让你能减少对象之间混乱无序的依赖关系。
@@ -2744,6 +2762,8 @@ fn main() {
 ---
 
 ### 解释器模式 (Interpreter)
+
+「解释器模式 (Interpreter)」部分按模式定义、Rust 实现（简单表达式求值器）与适用场景的顺序逐层展开。
 
 #### 模式定义
 
@@ -2907,6 +2927,8 @@ fn main() {
 ---
 
 ### 享元模式 (Flyweight)
+
+本节从模式定义、Rust 实现与内部状态 vs 外部状态切入，剖析「享元模式 (Flyweight)」的核心内容。
 
 #### 模式定义
 

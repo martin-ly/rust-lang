@@ -95,6 +95,8 @@ let x = 1;
 
 ## 三、`typeck` Query 与 `InferCtxt`
 
+本节从 `typeck` query 与  `InferCtxt` 两个层面剖析「`typeck` Query 与 `InferCtxt`」。
+
 ### 3.1 `typeck` query
 
 `typeck` 是类型检查的主 query，输入是某个 item 的 `LocalDefId`，输出包含：
@@ -149,6 +151,8 @@ x.push("hello");    // ?T = &str
 
 ## 五、相等约束与子类型约束
 
+本节从相等约束 与 子类型约束 两个层面剖析「相等约束与子类型约束」。
+
 ### 5.1 相等约束
 
 ```rust,ignore
@@ -171,6 +175,8 @@ Rust 的子类型关系主要体现在生命周期（Lifetimes）上，例如 `&
 (Source: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html))
 
 ## 六、区域约束与求解
+
+本节从收集约束 与 求解时机 两个层面剖析「区域约束与求解」。
 
 ### 6.1 收集约束
 
@@ -218,6 +224,8 @@ if success {
 (Source: [Rustc Dev Guide — Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html))
 
 ## 嵌入式测验
+
+理解「嵌入式测验」需要把握测验 1：`typeck` query 的主要输出是什么？、测验 2：整数推断变量 `{integer}` 最终如何变成具体类型？、测验 3：Rust 的子类型关系主要体现在哪里？与测验 4：为什么区域约束要延迟到最后才求解？，本节依次展开。
 
 ### 测验 1：`typeck` query 的主要输出是什么？
 

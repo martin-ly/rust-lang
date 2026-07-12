@@ -53,6 +53,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 3. 异步生命周期管理
 
+本节围绕「异步生命周期管理」展开，覆盖超时控制 与 异步通信 两个方面。
+
 ### 3.1 超时控制
 
 ```rust

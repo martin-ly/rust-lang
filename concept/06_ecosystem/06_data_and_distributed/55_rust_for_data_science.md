@@ -60,6 +60,8 @@
 
 ## 一、权威定义（Definition）
 
+本节从数据科学的 Rust 定位 与 核心矛盾：Python 生态 vs Rust 性能 两个层面剖析「权威定义（Definition）」。
+
 ### 1.1 数据科学的 Rust 定位
 
 > **[来源: [Are We Learning Yet?](https://www.arewelearningyet.com/)]**
@@ -121,6 +123,8 @@ Python 的不可撼动地位：交互探索、可视化、ML 模型生态
 ---
 
 ## 三、数据处理与 ETL
+
+「数据处理与 ETL」部分包含 Polars：DataFrame 引擎 与  DataFusion：查询执行 两条主线，本节依次说明。
 
 ### 3.1 Polars：DataFrame 引擎
 
@@ -207,6 +211,8 @@ async fn datafusion_query() -> Result<(), DataFusionError> {
 
 ## 四、统计分析与数值计算
 
+「统计分析与数值计算」部分包含统计生态 与 线性代数 两条主线，本节依次说明。
+
 ### 4.1 统计生态
 
 > **[来源: [statrs Crate](https://docs.rs/statrs/latest/statrs/)]**
@@ -255,6 +261,8 @@ fn linear_regression(x: &DMatrix<f64>, y: &DVector<f64>) -> Result<DVector<f64>,
 ---
 
 ## 五、可视化与交互
+
+本节从绘图生态 与  Jupyter 内核 两个层面剖析「可视化与交互」。
 
 ### 5.1 绘图生态
 
@@ -374,6 +382,8 @@ fn my_data science_lib(_py: Python, m: &PyModule) -> PyResult<()> {
 
 ## 七、反命题与边界
 
+本节围绕「反命题与边界」展开，覆盖反命题树 与 边界极限 两个方面。
+
 ### 7.1 反命题树
 
 ```text
@@ -426,6 +436,8 @@ fn my_data science_lib(_py: Python, m: &PyModule) -> PyResult<()> {
 ---
 
 ## 八、边界测试
+
+本节将「边界测试」分解为若干主题：边界测试：Polars Lazy API 中过早 collect 导致…、边界测试：PyO3 GIL 死锁与边界测试：未处理 CSV 解析中的畸形数据。
 
 ### 8.1 边界测试：Polars Lazy API 中过早 collect 导致内存溢出
 
@@ -531,6 +543,8 @@ fn robust_csv_read() -> Result<DataFrame, PolarsError> {
 - **定理**: Rust for Data Science（Rust 数据科学） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：Rust 在数据科学领域的定位与 Python 有什么不同？…、测验 2：`polars` 相比 `pandas` 在性能上的主要优势…、测验 3：为什么数据科学工作流中的 ETL 步骤特别适合用 Rust…、测验 4：`plotters` 在 Rust 数据可视化中与 Pyth…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：Rust 在数据科学领域的定位与 Python 有什么不同？（理解层）
 

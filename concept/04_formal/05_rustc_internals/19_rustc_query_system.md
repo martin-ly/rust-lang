@@ -80,6 +80,8 @@
 
 ## 二、查询系统的核心抽象
 
+本节从 `TyCtxt` 与 查询的三种形态 两个层面剖析「查询系统的核心抽象」。
+
 ### 2.1 `TyCtxt`
 
 `TyCtxt<'tcx>` 是 `rustc` 中几乎所有编译器状态的**入口**。它持有：
@@ -117,6 +119,8 @@ TyCtxt<'tcx>
 ---
 
 ## 三、依赖图与 Red-Green 算法
+
+「依赖图与 Red-Green 算法」部分按 Dep Graph（依赖图）、Red-Green 算法与哈希与序列化的顺序逐层展开。
 
 ### 3.1 Dep Graph（依赖图）
 
@@ -203,6 +207,8 @@ CARGO_INCREMENTAL=1 RUSTFLAGS="-Z incremental-info" cargo +nightly build
 > **提示**: `-Z incremental-info` 在不同 nightly 版本中的输出格式会变化：旧版显示 `reusing X out of Y modules` 汇总行，新版（1.98+）改为 `DepGraph Statistics` 与 `session directory: N files hard-linked`。二者语义相同——都说明“多少中间产物被复用”。
 
 ### 4.2 典型输出解读
+
+理解「典型输出解读」需要把握冷编译（无缓存）、无修改再次编译与修改 `greet::hello` 后，本节依次展开。
 
 #### 冷编译（无缓存）
 
@@ -488,6 +494,8 @@ Salsa 本身是从 `rustc` 查询系统中提取出来的通用框架，被 `rus
 ---
 
 ## 嵌入式测验
+
+本节从测验 1：`rustc` 的查询系统主要解决什么问题？、测验 2：什么是 Red-Green 算法中的 "Green" 节点？、测验 3：增量编译的粒度是“文件”还是“查询结果”？与测验 4：为什么 borrow checker 目前会全量执行？切入，剖析「嵌入式测验」的核心内容。
 
 ### 测验 1：`rustc` 的查询系统主要解决什么问题？
 

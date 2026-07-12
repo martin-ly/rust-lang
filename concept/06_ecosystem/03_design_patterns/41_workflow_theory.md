@@ -90,6 +90,8 @@
 
 ## 一、权威定义（Definition）
 
+本节将「权威定义（Definition）」分解为若干主题：工作流管理联盟（WfMC）定义、工作流模型分类与BPMN 与形式化语义。
+
 ### 1.1 工作流管理联盟（WfMC）定义
 
 > **[Workflow Management Coalition — Terminology & Glossary](https://wfmc.org/wp-content/uploads/2022/09/TC-1011_term_glossary_v3.pdf)** 工作流（Workflow）是业务流程的全部或部分自动化，在此过程中，文档、信息或任务按照一组程序化的规则，从一个参与者传递到另一个参与者以执行动作。
@@ -225,6 +227,8 @@ BPMN 元素          Petri 网               π 演算               LTL
 ---
 
 ## 三、形式化表示
+
+「形式化表示」部分按工作流图、状态机语义与执行语义的顺序逐层展开。
 
 ### 3.1 工作流图
 >
@@ -443,6 +447,8 @@ W₁ ∥ W₂ ↓ (s₁, s₂)
 
 ## 四、Rust 中的工作流实现
 
+「Rust 中的工作流实现」部分按异步机制与工作流同构性、类型系统映射与状态机转换的顺序逐层展开。
+
 ### 4.1 异步机制与工作流同构性
 >
 
@@ -609,6 +615,8 @@ impl Future for OrderWorkflowState {
 ---
 
 ## 五、形式化验证
+
+理解「形式化验证」需要把握 Petri 网模型、π 演算与时态逻辑（CTL/LTL），本节依次展开。
 
 ### 5.1 Petri 网模型
 >
@@ -916,6 +924,8 @@ fn backward_reachability(seed: &HashSet<usize>, transitions: &[(usize, usize)]) 
 
 ## 六、工作流实现架构
 
+本节从核心组件、分布式执行模型与故障恢复切入，剖析「工作流实现架构」的核心内容。
+
 ### 6.1 核心组件
 >
 
@@ -1084,6 +1094,8 @@ async fn recover_workflow(
 
 ## 七、反命题与边界
 
+「反命题与边界」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+
 ### 7.1 反命题树
 >
 
@@ -1136,6 +1148,8 @@ async fn recover_workflow(
 ---
 
 ## 八、边界测试
+
+理解「边界测试」需要把握边界测试：状态机转换遗漏导致死代码（编译/逻辑错误）、边界测试：Petri 网可达性分析的 state explosion（…与边界测试：工作流循环缺乏终止条件导致无限执行（运行时错误），本节依次展开。
 
 ### 8.1 边界测试：状态机转换遗漏导致死代码（编译/逻辑错误）
 
@@ -1329,6 +1343,8 @@ async fn unbounded_backoff() -> Result<Output> {
 - **定理**: Workflow Theory & Formalization（工作流理论与形式化） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：工作流编排（Workflow Orchestration）与…、测验 2：Rust 中实现状态机工作流时，`enum` 和 `matc…、测验 3：什么是" Saga 模式"的补偿事务（Compensatin…、测验 4：在 Rust 中，`tokio::task::JoinSet…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：工作流编排（Workflow Orchestration）与事件驱动架构（EDA）有什么区别？（理解层）
 

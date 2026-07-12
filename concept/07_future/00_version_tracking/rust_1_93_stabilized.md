@@ -42,6 +42,8 @@ rustup run 1.93.0 cargo build
 
 ## 三、主要稳定特性
 
+「主要稳定特性」部分按 `MaybeUninit` 增强 API、`String` / `Vec` 原始部分拆分、`VecDeque` 条件弹出、切片安全转固定长度数组等7个方面的顺序逐层展开。
+
 ### 3.1 `MaybeUninit` 增强 API
 
 新增 `assume_init_ref`、`assume_init_mut`、`assume_init_drop`、`write_copy_of_slice`、`write_clone_of_slice` 等方法，使未初始化内存的批量写入与安全读取更加便利。

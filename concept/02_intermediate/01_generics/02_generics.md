@@ -195,6 +195,8 @@
 
 ## 一、权威定义（Definition）
 
+「权威定义（Definition）」涉及 Wikipedia 对齐定义、TRPL 官方定义与形式化定义，本节逐一说明其要点。
+
 ### 1.1 Wikipedia 对齐定义
 
 > **[Wikipedia: Generic programming](https://en.wikipedia.org/wiki/Generic_programming)** Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters. Rust uses monomorphization to implement generics, generating specialized code at compile time for each concrete type used.
@@ -233,6 +235,8 @@
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
+
+理解「概念属性矩阵（Attribute Matrix）」需要把握泛型参数类型矩阵、泛型实现机制对比与泛型约束演进矩阵，本节依次展开。
 
 ### 2.1 泛型参数类型矩阵
 >
@@ -325,6 +329,8 @@ graph TD
 ---
 
 ## 四、定理推理链（Theorem Chain）
+
+「定理推理链（Theorem Chain）」涉及引理：参数多态 ⟹ System F 类型规则、定理：单态化 ⟹ 零成本抽象 ⟹ 语义保持、推论：Const Generics ⟹ 类型级编程、约束多态的类型安全等5个方面，本节逐一说明其要点。
 
 ### 4.1 引理：参数多态 ⟹ System F 类型规则
 
@@ -478,6 +484,8 @@ fn draw_dyn(d: &dyn Drawable) {
 ---
 
 ## 五、示例与反例（Examples & Counter-examples）
+
+「示例与反例（Examples & Counter-exam…」部分按正确示例：泛型函数与约束、正确示例：常量泛型、反例：类型大小未知（E0277）、反例：生命周期约束不足（E0310）等7个方面的顺序逐层展开。
 
 ### 5.1 正确示例：泛型函数与约束
 
@@ -1245,6 +1253,8 @@ graph TD
 ---
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
+
+本节将「边界极限测试代码（Boundary Limit Tests）」分解为若干主题：测试 1: 单态化代码膨胀与 dyn Trait 权衡极限、测试 2: 生命周期约束递归传递与 HRTB 边界与测试 3: Const Generics 类型级运算与特化边界。
 
 ### 7.1 测试 1: 单态化代码膨胀与 dyn Trait 权衡极限
 
@@ -2276,6 +2286,8 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 
 ## 十一、待补充与演进方向（TODOs）
 
+「待补充与演进方向（TODOs）」部分按 `min_specialization` 的当前状态与使用、泛型代码的编译时间优化策略、Type-level Programming、`impl Trait` 在返回位置 vs 参数位置等6个方面的顺序逐层展开。
+
 ### 11.1 `min_specialization` 的当前状态与使用
 
 **定义**：`min_specialization` 是 Rust specialization 特性的受限子集，允许为更具体类型提供覆盖 blanket impl 的特化实现，同时避免旧 full specialization 中的已知 soundness 问题。
@@ -2447,6 +2459,8 @@ impl<T: Copy + Default + std::ops::Add<Output = T> + std::ops::Mul<Output = T>,
 ---
 
 ## 十二、边界测试：泛型规则的编译错误
+
+「边界测试：泛型规则的编译错误」涉及边界测试：泛型参数未约束（编译错误）、边界测试：递归类型的大小无限（编译错误）、边界测试：关联类型实现不一致（编译错误）、边界测试：泛型默认类型参数不满足约束（编译错误）等9个方面，本节逐一说明其要点。
 
 ### 12.1 边界测试：泛型参数未约束（编译错误）
 
@@ -2690,6 +2704,8 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：泛型函数（理解层）、测验 2：泛型结构体（应用层）、测验 3：多个 Trait Bound（应用层）、测验 4：单态化与代码膨胀（分析层）等5个方面。
+
 ### 测验 1：泛型函数（理解层）
 
 以下代码能否编译？
@@ -2915,6 +2931,8 @@ fn main() {
 
 ## 📐 知识结构
 
+本节将「知识结构」分解为若干主题：概念定义、属性特征、关系连接、思维导图等6个方面。
+
 ### 概念定义
 
 **高级泛型模式 (Advanced Generic Patterns)**:
@@ -3020,6 +3038,8 @@ fn main() {
 ---
 
 ## 1. 类型状态模式
+
+本节专门讨论「类型状态模式」下的基础类型状态。
 
 ### 1.1 基础类型状态
 

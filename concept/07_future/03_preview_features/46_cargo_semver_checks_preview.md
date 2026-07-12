@@ -58,6 +58,8 @@
 
 ## 二、2026 年关键演进方向
 
+理解「2026 年关键演进方向」需要把握 Type-Checking Lints（最大能力缺口）、策略转变：从数量到质量与`public` 依赖标记集成，本节依次展开。
+
 ### 2.1 Type-Checking Lints（最大能力缺口）
 
 当前 `cargo-semver-checks` 最大的局限是**无法执行类型检查**。例如以下变更当前无法被检测：
@@ -98,6 +100,8 @@ pub fn example(x: String) {}
 ---
 
 ## 三、对 Rust 生态的结构性影响
+
+本节围绕「对 Rust 生态的结构性影响」展开，覆盖供应链稳定性 与 与 Rust 标准库的互惠 两个方面。
 
 ### 3.1 供应链稳定性
 
@@ -144,6 +148,8 @@ pub fn example(x: String) {}
 > **后置概念**: [Public/Private Dependencies](../../06_ecosystem/01_cargo/10_public_private_deps.md) · [Rust 工具链](../../06_ecosystem/00_toolchain/01_toolchain.md)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：`cargo-semver-checks` 如何检测 bre…、测验 2：为什么 SemVer 检查对 crates.io 生态如此重…、测验 3：`cargo-semver-checks` 目前支持哪些类别…、测验 4：如何在 CI 中集成 SemVer 检查？（理解层）等5个方面。
 
 ### 测验 1：`cargo-semver-checks` 如何检测 breaking change？（理解层）
 

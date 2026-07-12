@@ -40,6 +40,8 @@
 
 ## 2. Effect 系统
 
+「Effect 系统」部分按显式 Effect 标记、Effect 多态 (Effect Polymorphism)与Effect 约束与推断的顺序逐层展开。
+
 ### 2.1 显式 Effect 标记
 
 **概念**: 在类型系统（Type System）中显式标记副作用。
@@ -207,6 +209,8 @@ pub fn effect_constraint_example() {
 
 ## 3. Algebraic Effects
 
+「Algebraic Effects」部分包含 Effect Handlers 与 可恢复效应 (Resumable Effects) 两条主线，本节依次说明。
+
 ### 3.1 Effect Handlers
 
 **概念**: 代数效应允许在调用栈中注入行为。
@@ -304,6 +308,8 @@ pub fn run_resumable<T, E: AlgebraicEffect>(mut computation: Resumable<T, E>) ->
 ---
 
 ## 4. Session Types 高级应用
+
+「Session Types 高级应用」部分的核心主题是多方会话类型 (Multiparty Session Types)，本节展开说明。
 
 ### 4.1 多方会话类型 (Multiparty Session Types)
 
@@ -564,6 +570,8 @@ pub fn must_use_example() {
 
 ## 5. Capability-based 设计
 
+本节从能力令牌 (Capability Tokens) 与 能力传递和撤销 两个层面剖析「Capability-based 设计」。
+
 ### 5.1 能力令牌 (Capability Tokens)
 
 **概念**: 通过类型系统强制执行权限检查。
@@ -666,6 +674,8 @@ impl<P> RevocableCapability<P> {
 ---
 
 ## 6. 未来方向
+
+「未来方向」部分按研究前沿、依赖类型探索 (Dependent Types)、量子计算模式 (Quantum Computing Patterns)、Rust 语言演进等6个方面的顺序逐层展开。
 
 ### 6.1 研究前沿
 

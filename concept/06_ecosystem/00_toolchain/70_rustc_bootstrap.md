@@ -134,6 +134,8 @@ debug-assertions = true
 
 ## 五、`cfg(bootstrap)` 与 `RUSTC_BOOTSTRAP`
 
+「`cfg(bootstrap)` 与 `RUSTC_BOO…」部分包含 `cfg(bootstrap)` 与  `RUSTC_BOOTSTRAP` 两条主线，本节依次说明。
+
 ### `cfg(bootstrap)`
 
 Stage0 使用较旧的 beta 编译器，可能不支持某些新特性。`cfg(bootstrap)` 用于区分 stage0 与 stage1+ 构建：
@@ -171,6 +173,8 @@ Bootstrap 支持三种工具构建模式：
 ---
 
 ## 嵌入式测验
+
+本节将「嵌入式测验」分解为若干主题：测验 1：日常 rustc 开发通常需要构建到哪个 stage？、测验 2：Stage 2 编译器与 Stage 1 编译器的主要区别是…、测验 3：`cfg(bootstrap)` 的典型用途是什么？与测验 4：为什么普通项目不应该设置 `RUSTC_BOOTSTRAP=…。
 
 ### 测验 1：日常 rustc 开发通常需要构建到哪个 stage？
 

@@ -228,6 +228,8 @@
 
 ## 二、语言特性差异
 
+「语言特性差异」部分按模式匹配、错误处理与unsafe 与不安全代码的顺序逐层展开。
+
 ### 2.1 模式匹配
 >
 
@@ -386,6 +388,8 @@ unsafe 对比:
 
 ## 三、工程实践差异
 
+「工程实践差异」部分包含构建系统 与 互操作性 两条主线，本节依次说明。
+
 ### 3.1 构建系统
 >
 
@@ -458,6 +462,8 @@ unsafe 对比:
 ---
 
 ## 四、反命题与边界分析
+
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
 
 ### 4.1 反命题树
 
@@ -622,6 +628,8 @@ fn main() {
 
 ## 十、边界测试：Rust 与 C# 的编译错误对比
 
+理解「边界测试：Rust 与 C# 的编译错误对比」需要把握边界测试：C# 的 async/await 与 Rust 的 Futu…、边界测试：C# 的 LINQ 与 Rust 的迭代器（编译错误）、边界测试：C# 的 async/await 与 Rust 的 `?`…与边界测试：C# 的属性与 Rust 的派生宏的编译期差异（编译错误），本节依次展开。
+
 ### 10.1 边界测试：C# 的 async/await 与 Rust 的 Future（编译错误）
 
 ```rust,compile_fail
@@ -743,6 +751,8 @@ fn main() {
 > **修正**: Rust 的 `async fn` 是**惰性**的：调用时不执行函数体，只创建一个 `Future` 状态机。执行在 `.await` 或 `tokio::spawn` 时开始。C# 的 `async` 方法是**立即执行**的：调用时立即执行到第一个 `await`，然后返回 `Task`。语义差异影响：1) Rust 的 `async fn` 可组合（`future::join(t1, t2).await`）而不立即执行；2) C# 的 `Task.WhenAll` 组合已运行的任务；3) Rust 的 `Drop` 在 Future 被取消时执行（异步清理），C# 的 `IDisposable` 需显式 `using`。这与 JavaScript 的 Promise（立即执行，类似 C#）或 Kotlin 的 suspend function（惰性，类似 Rust）不同——Rust 的惰性 async 提供更多控制，但需注意意外未执行。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/index.html)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：C# 的 async/await 与 Rust 的 asyn…、测验 2：C# 的 LINQ 与 Rust 的迭代器适配器（`Iter…、测验 3：C# 的`unsafe` 块与 Rust 的 `unsaf…、测验 4：C# 的属性和事件（Property/Event）在 Rus…等5个方面。
 
 ### 测验 1：C# 的 async/await 与 Rust 的 async/await 在运行时模型上有什么根本区别？（理解层）
 

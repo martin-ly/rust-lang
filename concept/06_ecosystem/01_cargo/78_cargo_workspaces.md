@@ -37,6 +37,8 @@
 
 ## 二、Root Package vs Virtual Workspace
 
+本节围绕「Root Package vs Virtual Works…」展开，覆盖 Root package 与  Virtual workspace 两个方面。
+
 ### Root package
 
 如果 `Cargo.toml` 中同时存在 `[workspace]` 和 `[package]`，则该 package 是 workspace 的 **root package**。

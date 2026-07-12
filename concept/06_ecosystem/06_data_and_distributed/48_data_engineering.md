@@ -82,6 +82,8 @@
 
 ## 一、权威定义（Definition）
 
+「权威定义（Definition）」部分包含数据工程的分层架构 与  ETL 与 ELT 范式 两条主线，本节依次说明。
+
 ### 1.1 数据工程的分层架构
 
 > **[Data Engineering Fundamentals — Joe Reis & Matt Housley](https://www.oreilly.com/library/view/fundamentals-of-data/9781098108298/)** 数据工程是设计、构建和维护数据架构、数据库和数据处理系统的学科。
@@ -162,6 +164,8 @@ ELT:
 ---
 
 ## 三、数据摄取层（Ingestion）
+
+本节围绕「数据摄取层（Ingestion）」展开，依次讨论批处理摄取、流处理摄取与变更数据捕获（CDC）。
 
 ### 3.1 批处理摄取
 
@@ -288,6 +292,8 @@ PostgreSQL WAL（Write-Ahead Log）:
 ---
 
 ## 四、数据转换层（Transformation）
+
+本节将「数据转换层（Transformation）」分解为若干主题： DataFrame 转换、SQL 查询引擎与Rust 中的 ETL 管道骨架。
 
 ### 4.1 DataFrame 转换
 
@@ -443,6 +449,8 @@ impl EtlPipeline {
 
 ## 五、数据存储层（Storage）
 
+「数据存储层（Storage）」部分按列式存储：Parquet、对象存储抽象与数据湖与 Delta Lake的顺序逐层展开。
+
 ### 5.1 列式存储：Parquet
 
 Parquet 是大数据生态的事实标准列式存储格式。Rust 通过 `parquet` crate 提供原生支持：
@@ -551,6 +559,8 @@ Rust 生态:
 ---
 
 ## 六、数据服务层（Serving）
+
+「数据服务层（Serving）」部分包含查询加速 与 数据 API 两条主线，本节依次说明。
 
 ### 6.1 查询加速
 
@@ -677,6 +687,8 @@ Python 对比:
 
 ## 八、反命题与边界
 
+本节从反命题树 与 边界极限 两个层面剖析「反命题与边界」。
+
 ### 8.1 反命题树
 
 ```text
@@ -730,6 +742,8 @@ Python 对比:
 ---
 
 ## 九、边界测试
+
+本节将「边界测试」分解为若干主题：边界测试：Parquet 写入时 schema 演化导致读取失败（兼容…、边界测试：对象存储流式下载内存溢出（运行时错误）与边界测试：ETL 管道中类型推断失败导致运行时 panic（类型错误）。
 
 ### 9.1 边界测试：Parquet 写入时 schema 演化导致读取失败（兼容性错误）
 
@@ -859,6 +873,8 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 - **定理**: Data Engineering（数据工程） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：`polars` 在 Rust 数据工程中与 `pandas…、测验 2：`arrow-rs` 在数据生态中扮演什么角色？（理解层）、测验 3：为什么列式存储（Columnar Storage）比行式存储…、测验 4：`datafusion` 在 Rust 中提供什么功能？（理…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：`polars` 在 Rust 数据工程中与 `pandas` 有什么对应关系？（理解层）
 

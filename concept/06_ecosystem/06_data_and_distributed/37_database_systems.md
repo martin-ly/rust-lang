@@ -64,6 +64,8 @@ Rust 数据库生态谱系:
 
 ## 二、TiKV：分布式事务与 Percolator 协议
 
+本节将「TiKV：分布式事务与 Percolator 协议」分解为若干主题： Percolator 事务模型、Rust 实现的优势与TiKV 中的 Rust 所有权模式。
+
 ### 2.1 Percolator 事务模型
 
 TiKV 的事务层基于 Google 的 **Percolator** 协议，采用 **乐观并发控制（OCC）** + **两阶段提交（2PC）**：
@@ -463,6 +465,8 @@ fn main() {}
 - **定理**: 数据库系统：Rust 在存储引擎中的语义 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：Rust 中为什么很少使用传统 ORM（如 Django O…、测验 2：`sled` 和 `rocksdb` 在 Rust 嵌入式数…、测验 3：Rust 的数据库连接池为什么通常基于 `deadpool`…、测验 4：在 Rust 中实现数据库迁移（Migration）通常使用…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：Rust 中为什么很少使用传统 ORM（如 Django ORM/Hibernate）的"隐式查询"模式？（理解层）
 

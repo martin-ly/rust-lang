@@ -42,6 +42,8 @@ Rust 的默认 ABI（`extern "Rust"`）是**不稳定**的。这意味着：
 
 ## 二、当前稳定 Rust 的 ABI 选择
 
+本节从 `extern "C"` 与 `#[repr(C)]` 与 为什么不直接用 `extern "Rust"`？ 两个层面剖析「当前稳定 Rust 的 ABI 选择」。
+
 ### 2.1 `extern "C"` 与 `#[repr(C)]`
 
 ```rust,editable
@@ -96,6 +98,8 @@ pub fn unstable_abi_function(x: String) -> String {
 ---
 
 ## 四、与稳定 Rust 的对比及迁移建议
+
+本节围绕「与稳定 Rust 的对比及迁移建议」展开，覆盖当前最佳实践 与 何时关注 Stable ABI？ 两个方面。
 
 ### 4.1 当前最佳实践
 
@@ -180,6 +184,8 @@ fn main() {}
 > **反命题**: "Stable ABI Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：为什么 Rust 目前没有稳定的 ABI？（理解层）、测验 2：`repr(C)` 和 `extern "C"` 如何提供稳…、测验 3：Stable ABI 提案对 Rust 的动态链接有什么意义…、测验 4：稳定 ABI 与性能之间的权衡是什么？（理解层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：为什么 Rust 目前没有稳定的 ABI？（理解层）
 

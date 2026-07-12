@@ -23,6 +23,8 @@
 
 ## 一、Embedded-HAL 生态现状（2026-06）
 
+「Embedded-HAL 生态现状（2026-06）」部分包含版本里程碑 与 为什么 1.0 是重大变革 两条主线，本节依次说明。
+
 ### 1.1 版本里程碑
 
 | Crate | 旧版本 | 当前稳定版本 | 状态 |
@@ -53,6 +55,8 @@ embedded-hal 1.0 的解决:
 ---
 
 ## 二、Embedded-HAL 1.0 核心变化
+
+本节将「Embedded-HAL 1.0 核心变化」分解为若干主题：错误类型统一、SpiDevice vs SpiBus 分离与异步 HAL (embedded-hal-async)。
 
 ### 2.1 错误类型统一
 
@@ -124,6 +128,8 @@ async fn read_sensor(spi: &mut impl SpiDevice<u8>, drdy: &mut impl Wait) {
 
 ## 三、Embassy v0.5 生产就绪状态
 
+本节围绕「Embassy v0.5 生产就绪状态」展开，依次讨论 Embassy 是什么、v0.5 关键特性与Embassy vs RTIC 选型。
+
 ### 3.1 Embassy 是什么
 
 Embassy 是 Rust 嵌入式生态的 **async/await 运行时（Runtime）**，允许在裸机（bare-metal）环境中使用异步编程模型。
@@ -154,6 +160,8 @@ Embassy 是 Rust 嵌入式生态的 **async/await 运行时（Runtime）**，允
 ---
 
 ## 四、从 0.2 迁移到 1.0 的行动指南
+
+「从 0.2 迁移到 1.0 的行动指南」部分按 Cargo.toml 更新、代码迁移要点与迁移检查清单的顺序逐层展开。
 
 ### 4.1 Cargo.toml 更新
 

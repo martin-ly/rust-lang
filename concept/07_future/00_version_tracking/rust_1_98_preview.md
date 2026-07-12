@@ -51,6 +51,8 @@
 
 ## 一、语言特性预览
 
+本节从 Pin Ergonomics（&pin mut / &pin cons…、Reborrow Traits、Field Projections、Return Type Notation (RTN)等6个方面切入，剖析「语言特性预览」的核心内容。
+
 ### 1.1 Pin Ergonomics（&pin mut / &pin const）
 
 **状态**: 🧪 Lang experiment，Project Goals 2026 旗舰目标 "Beyond the &"
@@ -339,6 +341,8 @@ fn demo_stable_apis() {
 
 ## 三、编译器与工具链预览
 
+「编译器与工具链预览」涉及 Cranelift Backend（生产级）、Parallel Frontend、build-std与Next-Generation Trait Solver，本节逐一说明其要点。
+
 ### 3.1 Cranelift Backend（生产级）
 
 **状态**: 🧪 Project Goals 2026 旗舰目标 "Flexible, fast(er) compilation"
@@ -415,6 +419,8 @@ rustflags = ["-Zcodegen-backend=cranelift"]
 
 ## 四、Cargo 与生态预览
 
+理解「Cargo 与生态预览」需要把握 Public/Private Dependencies（RFC #35…、Cargo SBOM Precursor、cargo-script 稳定化与Sized Hierarchy / const Sized / Sca…，本节依次展开。
+
 ### 4.1 Public/Private Dependencies（RFC #3516）
 
 **状态**: 🔄 FCP 准备中；Project Goals 2026 目标
@@ -480,6 +486,8 @@ serde = { version = "1.0", public = true }
 
 ## 五、形式化与安全预览
 
+本节将「形式化与安全预览」分解为若干主题： Safety Tags（RFC #3842）、BorrowSanitizer与MemorySanitizer / ThreadSanitizer 稳…。
+
 ### 5.1 Safety Tags（RFC #3842）
 
 **状态**: 🧪 RFC 讨论中
@@ -526,6 +534,8 @@ serde = { version = "1.0", public = true }
 
 ## 六、WebAssembly 与嵌入式预览
 
+本节专门讨论「WebAssembly 与嵌入式预览」下的 Wasm Components。
+
 ### 6.1 Wasm Components
 
 **状态**: 🧪 Project Goals 2026 目标
@@ -543,6 +553,8 @@ serde = { version = "1.0", public = true }
 ---
 
 ## 七、跟踪与更新机制
+
+「跟踪与更新机制」部分按更新频率、状态标记约定与关联文档的顺序逐层展开。
 
 ### 7.1 更新频率
 

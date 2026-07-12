@@ -80,6 +80,8 @@
 
 ## 二、三层语义空间的同构映射
 
+本节从统一抽象框架 与 同构映射表 两个层面剖析「三层语义空间的同构映射」。
+
 ### 2.1 统一抽象框架
 
 ```text
@@ -114,6 +116,8 @@
 ---
 
 ## 三、分治算法 ↔ Composite + Parallel Split 的完整同构
+
+理解「分治算法 ↔ Composite + Parallel S…」需要把握算法层：归并排序来源: [CLRS — Introduction to…、设计模式层：Composite + Strategy、工作流层：Parallel Split + Synchronizati…、统一语义来源: [Category Theory for Progra…等5个方面，本节依次展开。
 
 ### 3.1 算法层：归并排序[来源: [CLRS — Introduction to Algorithms, 4th Ed.](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)]
 
@@ -282,6 +286,8 @@ Composite 的 `eval` 就是一个 catamorphism；工作流 Sequence 则是把该
 ---
 
 ## 四、动态规划 ↔ Memoization + Deferred Choice[来源: [Wikipedia — Dynamic Programming](https://en.wikipedia.org/wiki/Dynamic_programming)]
+
+「动态规划 ↔ Memoization + Deferred…」部分按算法层：斐波那契 DP、设计模式层：Memoization + Strategy、工作流层：Deferred Choice + Sequence、统一语义等5个方面的顺序逐层展开。
 
 ### 4.1 算法层：斐波那契 DP
 
@@ -459,6 +465,8 @@ DP 的填表顺序则是 DAG 拓扑排序的一种具体实现。
 
 ## 五、图遍历 ↔ Visitor + Arbitrary Cycles[来源: [Wikipedia — Graph Traversal](https://en.wikipedia.org/wiki/Graph_traversal)]
 
+本节从统一语义 与 遍历细化：图遍历 ↔ Visitor ↔ Iterator 两个层面剖析「图遍历 ↔ Visitor + Arbitrary Cyc…」。
+
 ### 5.1 统一语义
 
 图遍历算法（BFS/DFS）、Visitor 设计模式、和 Arbitrary Cycles 工作流模式，共享同一语义：**"在图中系统地访问节点，处理访问状态和循环检测"**。
@@ -599,6 +607,8 @@ Iterator 的惰性本质把图这一余代数结构展开为**最终的 `Option<
 
 ## 六、语义桥的价值与应用[来源: [Workflow Patterns — van der Aalst](https://www.workflowpatterns.com/)]
 
+本节围绕「语义桥的价值与应用来源: [Workflow Patter…」展开，覆盖跨域学习迁移 与 统一设计决策框架 两个方面。
+
 ### 6.1 跨域学习迁移
 
 理解语义桥后，学习者可以：
@@ -665,6 +675,8 @@ Iterator 的惰性本质把图这一余代数结构展开为**最终的 `Option<
 > **内容分级**: [综述级]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：本文档《语义桥：算法、设计模式与工作流模式的统一谱系》在 R…、测验 2：《语义桥：算法、设计模式与工作流模式的统一谱系》的主要用途是…与测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）。
 
 ### 测验 1：本文档《语义桥：算法、设计模式与工作流模式的统一谱系》在 Rust 知识体系中属于哪一层级的元数据？（理解层）
 

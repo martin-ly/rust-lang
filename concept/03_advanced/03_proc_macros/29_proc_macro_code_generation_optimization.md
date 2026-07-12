@@ -41,6 +41,8 @@
 
 ## 二、生成代码质量
 
+理解「生成代码质量」需要把握可读性与文档、文档注释与保留 Span 信息，本节依次展开。
+
 ### 2.1 可读性与文档
 
 ```rust
@@ -106,6 +108,8 @@ fn generate_getter(field: &syn::Field) -> proc_macro2::TokenStream {
 
 ## 三、编译时间优化
 
+本节围绕「编译时间优化」展开，依次讨论避免宏递归爆炸、限制递归深度、减少单态化开销与共享非泛型实现。
+
 ### 3.1 避免宏递归爆炸
 
 ```rust
@@ -170,6 +174,8 @@ macro_rules! generate_impl {
 
 ## 四、代码膨胀控制
 
+本节从静态 vs 动态分发、条件编译隔离与常量折叠切入，剖析「代码膨胀控制」的核心内容。
+
 ### 4.1 静态 vs 动态分发
 
 | 特性 | 静态分发 `impl Trait` | 动态分发 `dyn Trait` |
@@ -202,6 +208,8 @@ const FACT_10: u32 = factorial(10);
 ---
 
 ## 五、性能测量
+
+本节从 cargo build --timings、cargo-llvm-lines、cargo-bloat与Criterion 基准测试切入，剖析「性能测量」的核心内容。
 
 ### 5.1 cargo build --timings
 

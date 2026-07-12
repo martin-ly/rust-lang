@@ -50,6 +50,8 @@
 
 ## 四、迁移前后代码对比
 
+本节将「迁移前后代码对比」分解为若干主题： Async closures、`if let` 临时作用域与Never type fallback。
+
 ### Async closures
 
 ```rust

@@ -129,6 +129,8 @@ graph TD
 
 ## 一、如何使用本指南
 
+「如何使用本指南」部分包含选择你的起点 与 选择你的目标 两条主线，本节依次说明。
+
 ### 1.1 选择你的起点
 
 本知识体系按层级组织（L0 Meta → L7 Future），但**不建议从 L0 开始线性阅读**。根据你的背景选择最合适的起点：
@@ -161,6 +163,8 @@ graph TD
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)** 不同背景的学习者有不同的概念迁移路径。
 
 ## 二、按背景的详细起点指南
+
+本节从完全新手路径（无系统编程经验） 来源: TRPL Ch1-3; Rus…、C/C++ 开发者路径 概念迁移理论 — 已有 RAII/指针/内存管…、Java/Go 开发者路径 Java JLS § — GC 背景下的所…与Haskell/ML 开发者路径 Hindley-Milner 类型推…切入，剖析「按背景的详细起点指南」的核心内容。
 
 ### 2.1 完全新手路径（无系统编程经验） 来源: [TRPL Ch1-3; Rust by Example; 前置依赖: 无; 认知负荷管理参照 Sweller — *Cognitive Load Theory* / 1988](https://doc.rust-lang.org/book/ch01-00-getting-started.html)
 
@@ -339,6 +343,8 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 
 ## 四、阅读策略与技巧
 
+理解「阅读策略与技巧」需要把握三遍阅读法、间隔重复建议与代码实践建议，本节依次展开。
+
 ### 4.1 三遍阅读法
 
 > **第一遍：建立框架（速读）**
@@ -380,6 +386,8 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 > **Rust 社区常见学习障碍调查; [Rust Internals 论坛](https://internals.rust-lang.org/)** 常见困难基于社区反馈统计。
 
 ## 五、常见困难与突破建议
+
+「常见困难与突破建议」涉及生命周期理解不了"、async 太抽象"、形式化部分看不懂"与读了就忘"，本节逐一说明其要点。
 
 ### 5.1 "生命周期理解不了"
 
@@ -444,6 +452,8 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 > **[rustc 错误码大全](https://doc.rust-lang.org/error_codes/error-index.html); [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)** 本索引将最常见的 Rust 编译错误码映射到概念知识体系中的定义文件和修复路径，实现"遇到错误 → 定位概念 → 理解原理 → 修复代码"的闭环。
 
 ### 按错误类别分组
+
+「按错误类别分组」涉及生命周期类错误（L1 基础概念）、所有权与借用类错误（L1 基础概念）、Trait 与泛型类错误（L2 进阶概念）、并发类错误（L3 高级概念）等6个方面，本节逐一说明其要点。
 
 #### 生命周期类错误（L1 基础概念）
 
@@ -621,6 +631,8 @@ rustc 错误信息结构:
 > **内容分级**: [综述级]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：本文档《Rust 知识体系学习指南（Learning Gui…、测验 2：《Rust 知识体系学习指南（Learning Guide）…与测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：本文档《Rust 知识体系学习指南（Learning Guide）》在 Rust 知识体系中属于哪一层级的元数据？（理解层）
 

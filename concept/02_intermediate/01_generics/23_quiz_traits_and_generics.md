@@ -38,6 +38,8 @@
 
 ## 一、Trait 基础
 
+理解「Trait 基础」需要把握 Q1. 以下代码能否编译？若不能，为什么？、Q2. 以下代码的输出是什么？解释默认实现的用法与Q3. 以下代码能否编译？解释 `trait bound` 的作用，本节依次展开。
+
 ### Q1. 以下代码能否编译？若不能，为什么？
 
 ```rust,ignore
@@ -195,6 +197,8 @@ where
 
 ## 二、泛型与单态化
 
+本节围绕「泛型与单态化」展开，覆盖 Q4. 以下代码能否编译？`Option<T>` 和 `Result<… 与  Q5. 以下代码能否编译？解释关联类型的作用 两个方面。
+
 ### Q4. 以下代码能否编译？`Option<T>` 和 `Result<T, E>` 的本质是什么？
 
 ```rust
@@ -300,6 +304,8 @@ fn main() {
 ---
 
 ## 三、Trait 对象与动态分发
+
+「Trait 对象与动态分发」部分包含 Q6. 以下代码能否编译？`&dyn Drawable` 和 `imp… 与  Q7. 以下代码能否编译？解释 `Sized` 和 `?Sized`… 两条主线，本节依次说明。
 
 ### Q6. 以下代码能否编译？`&dyn Drawable` 和 `impl Drawable` 的区别是什么？
 
@@ -424,6 +430,8 @@ fn print_it<T: ?Sized>(t: &T) {
 ---
 
 ## 四、综合应用
+
+本节围绕「综合应用」展开，依次讨论 Q8. 以下代码能否编译？解释 `impl Trait` 作为返回类型…、Q9. 以下代码的输出是什么？解释泛型结构体的实现与Q10. 以下代码能否编译？解释 `Copy` 和 `Clone` 的…。
 
 ### Q8. 以下代码能否编译？解释 `impl Trait` 作为返回类型的限制
 
@@ -623,6 +631,8 @@ fn main() {
 > **权威来源**: [The Rust Programming Language — Ch10](https://doc.rust-lang.org/book/ch10-00-generics.html) · [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) · [Rust By Example — Traits](https://doc.rust-lang.org/rust-by-example/trait.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：本文件是 测验：Trait 与泛型（试点扩展） 的专项测验集…、测验 2：在 测验：Trait 与泛型（试点扩展） 的测验中，若遇到不…与测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层），本节逐一说明其要点。
 
 ### 测验 1：本文件是 测验：Trait 与泛型（试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 

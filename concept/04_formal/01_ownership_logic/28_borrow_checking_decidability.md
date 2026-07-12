@@ -113,6 +113,8 @@ fn polonius_friendly(flag: bool, data: &mut [i32]) -> &mut i32 {
 
 ## 三、形式化模型（Teaching Analogies）
 
+「形式化模型（Teaching Analogies）」部分按区域约束系统（Region Constraints）、路径与借用状态（Paths & Borrow States）与借用规则（Borrow Rules）的顺序逐层展开。
+
 ### 3.1 区域约束系统（Region Constraints）
 
 把生命周期（Lifetimes） `'a` 形式化为 CFG 上的**路径集合** $\rho$：
@@ -164,6 +166,8 @@ $$
 ---
 
 ## 四、NLL：数据流分析 + 约束求解
+
+「NLL：数据流分析 + 约束求解」部分包含数据流方程 与 区域约束求解 两条主线，本节依次说明。
 
 ### 4.1 数据流方程
 
@@ -255,6 +259,8 @@ flowchart TB
 
 ## 六、可判定性与复杂性
 
+理解「可判定性与复杂性」需要把握终止性（Termination）、正确性直觉（Correctness Intuition）与P-完全性（P-Completeness），本节依次展开。
+
 ### 6.1 终止性（Termination）
 
 | 算法 | 终止依据 |
@@ -307,6 +313,8 @@ flowchart TB
 ---
 
 ## 八、可运行示例
+
+本节从 NLL：最后一次使用点后重新借用、可变借用的独占性、共享与可变不能共存与两阶段借用切入，剖析「可运行示例」的核心内容。
 
 ### 8.1 NLL：最后一次使用点后重新借用
 

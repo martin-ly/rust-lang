@@ -60,6 +60,8 @@
 
 ## 📐 知识结构
 
+「知识结构」部分按概念定义、属性特征、关系连接、思维导图等5个方面的顺序逐层展开。
+
 ### 概念定义
 
 **WebSocket**:
@@ -138,6 +140,8 @@ WebSocket 实时通信
 
 ## 1. WebSocket 基础
 
+「WebSocket 基础」部分包含 WebSocket vs HTTP 与  WebSocket 握手 两条主线，本节依次说明。
+
 ### 1.1 WebSocket vs HTTP
 
 | 特性         | HTTP              | WebSocket    |
@@ -172,6 +176,8 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
 ---
 
 ## 2. 使用 tokio-tungstenite
+
+本节围绕「使用 tokio-tungstenite」展开，覆盖基础客户端 与 基础服务器 两个方面。
 
 ### 2.1 基础客户端
 
@@ -237,6 +243,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 ## 3. 客户端开发
+
+本节围绕「客户端开发」展开，覆盖完整客户端 与 自动重连 两个方面。
 
 ### 3.1 完整客户端
 
@@ -364,6 +372,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 4. 服务器开发
 
+本节从广播服务器 与 房间管理 两个层面剖析「服务器开发」。
+
 ### 4.1 广播服务器
 
 ```rust
@@ -484,6 +494,8 @@ fn main() {
 
 ## 5. 消息格式与编解码
 
+本节从 JSON 消息 与 二进制消息 两个层面剖析「消息格式与编解码」。
+
 ### 5.1 JSON 消息
 
 ```rust
@@ -567,6 +579,8 @@ fn main() {
 ---
 
 ## 6. 实战案例
+
+「实战案例」部分包含聊天室 与 实时数据推送 两条主线，本节依次说明。
 
 ### 6.1 聊天室
 
@@ -664,6 +678,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 ## 7. 总结
+
+本节从核心要点 与 最佳实践 两个层面剖析「总结」。
 
 ### 核心要点
 

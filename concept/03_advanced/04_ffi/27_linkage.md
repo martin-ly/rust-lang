@@ -31,6 +31,8 @@
 
 ## 二、Crate 类型
 
+本节围绕「Crate 类型」展开，依次讨论 `bin` — 可执行文件、`lib` — 编译器推荐的库、`dylib` — 动态 Rust 库、`staticlib` — 静态系统库等7个方面。
+
 ### `bin` — 可执行文件
 
 ```rust

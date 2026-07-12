@@ -47,6 +47,8 @@ const fn double<T: std::ops::Add<Output = T> + Copy>(x: T) -> T {
 
 ## 二、语法说明
 
+本节将「语法说明」分解为若干主题：声明 const trait、`~const Trait` 的含义与与稳定 Rust 的对比。
+
 ### 2.1 声明 const trait
 
 ```rust,ignore
@@ -94,6 +96,8 @@ const fn add_if_possible<T: ~const std::ops::Add<Output = T>>(a: T, b: T) -> T {
 ---
 
 ## 三、与稳定 Rust 的对比及迁移建议
+
+本节从当前替代方案 与 迁移建议 两个层面剖析「与稳定 Rust 的对比及迁移建议」。
 
 ### 3.1 当前替代方案
 
@@ -174,6 +178,8 @@ fn main() {
 > **反命题**: "Const Trait Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：`const trait` 与 `const fn` 有什么…、测验 2：为什么 `Vec::new()` historically…、测验 3：`~const Trait` 语法是什么意思？（理解层）、测验 4：`const trait` 对嵌入式开发有什么意义？（理解层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：`const trait` 与 `const fn` 有什么区别？（理解层）
 

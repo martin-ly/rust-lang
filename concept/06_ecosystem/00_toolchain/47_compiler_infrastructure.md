@@ -53,6 +53,8 @@ Rust 编译器（rustc）流水线:
 
 ## 二、并行前端（Parallel Frontend）
 
+「并行前端（Parallel Frontend）」部分按核心机制、性能数据与启用方式的顺序逐层展开。
+
 ### 2.1 核心机制
 
 rustc 传统上是**单线程**的，编译大型 crate 时瓶颈明显。并行前端通过以下技术提速：
@@ -90,6 +92,8 @@ CARGO_BUILD_RUSTC_WRAPPER="" RUSTFLAGS="-Z threads=8" cargo build --verbose
 ---
 
 ## 三、Cranelift 后端
+
+理解「Cranelift 后端」需要把握设计目标、为什么开发构建需要 Cranelift、使用方式与与 LLVM 的互补关系，本节依次展开。
 
 ### 3.1 设计目标
 
@@ -145,6 +149,8 @@ CI/发布: LLVM → 极致优化
 
 ## 四、build-std（从源码构建标准库）
 
+理解「build-std（从源码构建标准库）」需要把握 RFC 3873 核心内容、使用方式与限制与注意事项，本节依次展开。
+
 ### 4.1 [RFC 3873](https://rust-lang.github.io/rfcs//3873-build-std-context.html) 核心内容
 
 `build-std` 允许从源码重新编译 `core`/`std`/`alloc`/`panic_abort`/`panic_unwind`，而非使用预编译的标准库。
@@ -178,6 +184,8 @@ RUSTFLAGS="-Z build-std -Z sanitizer=memory" cargo build --target x86_64-unknown
 ---
 
 ## 五、Sanitizer 生态
+
+本节从 Rust 支持的 Sanitizer、与 Miri 的分工与实战示例切入，剖析「Sanitizer 生态」的核心内容。
 
 ### 5.1 Rust 支持的 Sanitizer
 
@@ -213,6 +221,8 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 ---
 
 ## 六、反命题与选型建议
+
+本节从编译后端选型决策树 与  build-std 适用场景 两个层面剖析「反命题与选型建议」。
 
 ### 6.1 编译后端选型决策树
 
@@ -264,6 +274,8 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 - **定理**: Rust 编译器基础设施深度解析 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：`syn` crate 在 Rust 过程宏开发中起什么作用…、测验 2：`quote!` 宏在过程宏中的用途是什么？（理解层）、测验 3：为什么过程宏必须在独立的 crate 中定义？（理解层）、测验 4：`proc-macro2` 与标准库 `proc_macro…等5个方面。
 
 ### 测验 1：`syn` crate 在 Rust 过程宏开发中起什么作用？（理解层）
 

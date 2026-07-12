@@ -73,6 +73,8 @@
 
 ## 二、二级来源：跨语言权威入口 [跨语言对比方法论参照 concept/05_comparative/ 系列文件的对比框架](https://doc.rust-lang.org/reference/introduction.html)
 
+「二级来源：跨语言权威入口 跨语言对比方法论参照 conce…」涉及 C++、Haskell与Go，本节逐一说明其要点。
+
 ### C++
 
 - **cppreference.com**: <https://en.cppreference.com/> —— ISO C++ 标准参考
@@ -94,6 +96,8 @@
 ---
 
 ## 三、网络权威锚点（永久链接） [永久链接选择标准: 域名稳定性 > 版本归档 > 社区镜像; 参照 PURL (Persistent Uniform Resource Locator) 标准和 DOI 数字对象标识符的设计原则](https://en.wikipedia.org/wiki/Persistent_uniform_resource_locator)
+
+本节将「网络权威锚点（永久链接） 永久链接选择标准: 域名稳定性…」分解为若干主题： Rust 官方、学术与社区权威博客。
 
 ### Rust 官方
 
@@ -173,6 +177,8 @@ dtolnay:               https://dtolnay.github.io/
 > **内容分级**: [综述级]
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：本文档《权威来源映射表（Authority Source M…、测验 2：《权威来源映射表（Authority Source Map）…与测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层），本节依次展开。
 
 ### 测验 1：本文档《权威来源映射表（Authority Source Map）》在 Rust 知识体系中属于哪一层级的元数据？（理解层）
 

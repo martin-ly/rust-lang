@@ -148,6 +148,8 @@ stateDiagram-v2
 
 ## 一、权威定义（Definition）
 
+本节从 Wikipedia 权威定义、Reed 2009：所有权类型的逻辑框架基础、COR（Calculus of Ownership and Refer…与RustBelt 形式化切入，剖析「权威定义（Definition）」的核心内容。
+
 ### 1.1 Wikipedia 权威定义
 
 > **[Wikipedia: Operational semantics](https://en.wikipedia.org/wiki/Operational_semantics)** In computer science, operational semantics is a category of formal programming language semantics in which certain desired properties of a program, such as correctness, safety or security, are verified by constructing proofs from logical statements about its execution and procedures, rather than by attaching mathematical meanings to its terms.
@@ -343,6 +345,8 @@ graph TD
 
 ### 5.2 反命题决策树
 
+「反命题决策树」部分按决策树 1: "形式化所有权证明所有程序安全"、决策树 2: "线性类型和 Rust 所有权完全等价"与决策树 3: "权限系统可自动化验证所有属性"的顺序逐层展开。
+
 #### 决策树 1: "形式化所有权证明所有程序安全"
 
 ```mermaid
@@ -532,6 +536,8 @@ Oxide 视角:
 ---
 
 ## 九、Polonius：Loan-based 形式化语义
+
+本节从从区域到 Loans、Polonius 的 Datalog 规则（核心）、Polonius 对 T3（区域约束）的影响、Polonius 的复杂度等10个方面切入，剖析「Polonius：Loan-based 形式化语义」的核心内容。
 
 ### 9.1 从区域到 Loans
 
@@ -1208,6 +1214,8 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 
 ## 十、边界测试：所有权形式化的编译错误
 
+「边界测试：所有权形式化的编译错误」部分按边界测试：线性类型与 `Drop` 的冲突（编译错误）、边界测试：分离逻辑与共享可变状态的不可兼得（编译错误）、边界测试：子类型化与生命周期协变（编译错误）、边界测试：悬垂指针的形式化禁止（编译错误）等7个方面的顺序逐层展开。
+
 ### 10.1 边界测试：线性类型与 `Drop` 的冲突（编译错误）
 
 ```rust,ignore
@@ -1381,6 +1389,8 @@ fn main() {}
 ---
 
 ## 嵌入式测验
+
+本节围绕「嵌入式测验」展开，依次讨论测验 1：所有权的形式化直觉（记忆层）、测验 2：借用作为能力（理解层）、测验 3：Hoare 三元组与 Unsafe（应用层）与测验 4：分离逻辑与并发（分析层）。
 
 ### 测验 1：所有权的形式化直觉（记忆层）
 

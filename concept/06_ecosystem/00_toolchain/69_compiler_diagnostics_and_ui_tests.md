@@ -134,6 +134,8 @@ err.span_suggestion(
 
 ## 四、Lint 与 Lint Pass
 
+本节从 Lint 定义 与  Lint Pass 两个层面剖析「Lint 与 Lint Pass」。
+
 ### Lint 定义
 
 ```rust,ignore
@@ -183,6 +185,8 @@ rustc --explain E0308
 
 ## 六、UI Tests 与 `--bless`
 
+「UI Tests 与 `--bless`」部分包含 UI Test 是什么 与  `--bless` 两条主线，本节依次说明。
+
 ### UI Test 是什么
 
 UI test 是 rustc 测试的一种，验证编译器对特定代码产生的诊断输出。测试文件放在 `tests/ui/` 目录：
@@ -212,6 +216,8 @@ fn main() {
 ---
 
 ## 嵌入式测验
+
+理解「嵌入式测验」需要把握测验 1：一条 rustc 诊断至少包含哪三个核心部分？、测验 2：`Applicability::MachineApplica…、测验 3：Late lint pass 相比 Early lint p…与测验 4：`--bless` 在 UI testing 中的作用是什么？，本节依次展开。
 
 ### 测验 1：一条 rustc 诊断至少包含哪三个核心部分？
 

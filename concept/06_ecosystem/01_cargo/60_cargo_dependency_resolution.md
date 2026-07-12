@@ -127,6 +127,8 @@ Cargo 的解析器本质上是一个 SAT-like 约束求解器：
 
 ## 四、特性合并（Feature Unification）
 
+本节从同一个 crate 在一个主版本内只编译一次 与  Feature unification 的副作用 两个层面剖析「特性合并（Feature Unification）」。
+
 ### 4.1 同一个 crate 在一个主版本内只编译一次
 
 ```toml
@@ -261,6 +263,8 @@ CARGO_RESOLVER_INCOMPATIBLE_RUST_VERSIONS=allow cargo update
 ---
 
 ## 八、Yanked 版本与冲突诊断
+
+「Yanked 版本与冲突诊断」部分包含 Yanked 版本 与 诊断工具 两条主线，本节依次说明。
 
 ### 8.1 Yanked 版本
 
@@ -436,6 +440,8 @@ cargo check --workspace
 ---
 
 ## 嵌入式测验
+
+「嵌入式测验」涉及测验 1：`serde = "1.2.3"` 与 `serde = "…、测验 2：为什么同一 crate 的 `^1` 和 `^2` 可以共存…、测验 3：什么是 feature unification？它可能带来什…与测验 4：二进制 crate 和库 crate 对 `Cargo.lo…，本节逐一说明其要点。
 
 ### 测验 1：`serde = "1.2.3"` 与 `serde = "=1.2.3"` 的区别是什么？
 

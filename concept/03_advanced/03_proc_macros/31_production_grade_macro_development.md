@@ -39,6 +39,8 @@
 
 ## 二、版本兼容性
 
+本节从 MSRV 管理、Edition 兼容与核心依赖固定切入，剖析「版本兼容性」的核心内容。
+
 ### 2.1 MSRV 管理
 
 ```toml
@@ -84,6 +86,8 @@ proc-macro2 = "1.0"
 ---
 
 ## 三、错误诊断最佳实践
+
+理解「错误诊断最佳实践」需要把握保留原始 Span、提供上下文和帮助与多错误聚合，本节依次展开。
 
 ### 3.1 保留原始 Span
 
@@ -139,6 +143,8 @@ match validate_all(&input) {
 
 ## 四、文档生成
 
+「文档生成」涉及完整示例、隐藏实现细节与Doc Tests，本节逐一说明其要点。
+
 ### 4.1 完整示例
 
 ````rust
@@ -192,6 +198,8 @@ pub fn derive_builder(input: TokenStream) -> TokenStream { /* ... */ }
 
 ## 五、发布策略
 
+「发布策略」部分按语义化版本、预发布版本、Breaking Changes 处理与CI/CD 发布流程的顺序逐层展开。
+
 ### 5.1 语义化版本
 
 (Source: [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html))
@@ -243,6 +251,8 @@ jobs:
 ---
 
 ## 六、维护策略
+
+本节围绕「维护策略」展开，依次讨论安全审计、依赖更新节奏与长期支持承诺。
 
 ### 6.1 安全审计
 

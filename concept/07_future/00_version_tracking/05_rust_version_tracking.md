@@ -141,6 +141,8 @@ graph TD
 
 ## 二、维度一：所有权与别名模型
 
+本节将「维度一：所有权与别名模型」分解为若干主题： `&raw const` / `&raw mut`（1.82 stab…、`if let` guards in match arms（1.95…、`let chains`（1.88 stable in 2024 Ed…与集合 API 的借用模型创新（1.85–1.95）。
+
 ### 2.1 `&raw const` / `&raw mut`（1.82 stable，[RFC 2582](https://rust-lang.github.io/rfcs//2582-raw-reference-mir-operator.html)）
 >
 
@@ -214,6 +216,8 @@ graph TD
 
 ## 三、维度二：类型系统扩展
 
+本节从 `+ use<'lt>` precise capturing（1.82…、Trait object upcasting（1.86 stable）、`_` 推断 const generics 参数（1.89 stabl…与Bounds on associated types in bound…切入，剖析「维度二：类型系统扩展」的核心内容。
+
 ### 3.1 `+ use<'lt>` precise capturing（1.82 stable，[RFC 3617](https://rust-lang.github.io/rfcs//3617-precise-capturing.html)）
 >
 
@@ -283,6 +287,8 @@ graph TD
 ---
 
 ## 四、维度三：异步与效果系统
+
+本节从 Async closures（1.85 stable，RFC 3668）、Rust 2024 Edition：RPIT lifetime cap…与`gen` blocks（1.95 nightly，tracking）切入，剖析「维度三：异步与效果系统」的核心内容。
 
 ### 4.1 Async closures（1.85 stable，[RFC 3668](https://rust-lang.github.io/rfcs//3668-async-closures.html)）
 
@@ -413,6 +419,8 @@ unsafe extern "C" {
 
 ## 六、维度五：编译期计算能力
 
+「维度五：编译期计算能力」部分按 Inline const blocks（1.79 stable）、Const in inline assembly（1.82/1.87…与`core::hint::cold_path`（1.95 stable）的顺序逐层展开。
+
 ### 6.1 Inline const blocks（1.79 stable）
 
 **语法**: `[u8; const { 4 + 4 }]` / `let x = const { std::mem::size_of::<u64>() };`
@@ -491,6 +499,8 @@ timeline
 ---
 
 ## 八、形式化洞察：三个趋势
+
+理解「形式化洞察：三个趋势」需要把握趋势 1：从隐式推断到显式契约、趋势 2：效果系统（Effect System）的原型化与趋势 3：Unsafe 边界的模块化与内推，本节依次展开。
 
 ### 趋势 1：从隐式推断到显式契约
 >
@@ -958,6 +968,8 @@ Rust 1.96.0 已按计划进入 stable 通道；1.96.1 为 1.96 系列推荐 patc
 ---
 
 ## 十四、社区与生态动态（2025–2026）
+
+「社区与生态动态（2025–2026）」部分按 2025 State of Rust Survey 关键发现、WebAssembly 目标重大变更（Rust 1.96）、NVIDIA GPU 目标（nvptx64-nvidia-cuda）基…、Rust Foundation 2026–2028 战略发布等59个方面的顺序逐层展开。
 
 ### 12.1 2025 State of Rust Survey 关键发现
 
@@ -2397,6 +2409,8 @@ fn main() {
 - **定理**: Rust 形式模型演进跟踪（1.79–1.97+） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：MSRV 的定义（理解层）、测验 2：Stable / Beta / Nightly（应用层）、测验 3：Edition 的含义（应用层）、测验 4：条件编译处理版本差异（分析层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：MSRV 的定义（理解层）
 

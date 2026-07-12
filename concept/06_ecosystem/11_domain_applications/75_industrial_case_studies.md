@@ -29,6 +29,8 @@
 
 ## 二、Rust for Linux
 
+「Rust for Linux」部分按项目背景、架构模式、关键技术挑战、代码示例：简单内核模块等5个方面的顺序逐层展开。
+
 ### 2.1 项目背景
 
 Rust for Linux 是将 Rust 作为**Linux 内核第二语言**的官方项目，由 Miguel Ojeda 领导，Linus Torvalds 支持。
@@ -111,6 +113,8 @@ impl Drop for RustMinimal {
 
 ## 三、Ferrocene：安全认证 Rust
 
+理解「Ferrocene：安全认证 Rust」需要把握什么是 Ferrocene、为什么需要认证编译器、Ferrocene 的技术路径与对 Rust 生态的意义，本节依次展开。
+
 ### 3.1 什么是 Ferrocene
 
 Ferrocene 是 **Rust 工具链的安全认证版本**，由 Ferrous Systems 开发，目标是通过汽车（ISO 26262）和航空（DO-178C/DO-330）功能安全认证。
@@ -158,6 +162,8 @@ Rust 工具链认证挑战:
 
 ## 四、Android Rust 化
 
+本节围绕「Android Rust 化」展开，依次讨论 Google 的战略决策、覆盖范围与与 Java 的互操作。
+
 ### 4.1 Google 的战略决策
 
 Google 在 Android 12+ 中系统性引入 Rust：
@@ -199,6 +205,8 @@ impl IMyService for MyService {
 
 ## 五、Firecracker：微虚拟化
 
+本节从架构特点 与 为什么用 Rust 两个层面剖析「Firecracker：微虚拟化」。
+
 ### 5.1 架构特点
 
 Firecracker 是 AWS 开发的**微虚拟机监视器 (MicroVMM)**，用于 AWS Lambda 和 AWS Fargate。
@@ -221,6 +229,8 @@ Firecracker 是 AWS 开发的**微虚拟机监视器 (MicroVMM)**，用于 AWS L
 ---
 
 ## 代码示例：工业案例中的典型 Rust 模式
+
+「代码示例：工业案例中的典型 Rust 模式」部分按示例 1：Linux 内核模块骨架（Rust for Linux）、示例 2：类型安全的缓冲区抽象（Firecracker / Rustl…与示例 3： fearless 并发的请求计数器（TiKV / 网络服务…的顺序逐层展开。
 
 ### 示例 1：Linux 内核模块骨架（Rust for Linux）
 
@@ -379,6 +389,8 @@ fn main() {
 - **定理**: Rust 工业级案例研究 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：Dropbox 为什么将核心文件同步引擎从 Go 迁移到 R…、测验 2：Discord 为什么将其消息路由服务从 Go 重写为 Ru…、测验 3：AWS Firecracker 为什么选择 Rust 作为实…、测验 4：Cloudflare 在哪些基础设施组件中使用了 Rust？…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：Dropbox 为什么将核心文件同步引擎从 Go 迁移到 Rust？（理解层）
 

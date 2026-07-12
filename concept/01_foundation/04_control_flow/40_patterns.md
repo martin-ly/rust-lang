@@ -87,6 +87,8 @@ if let (a, 3) = (1, 2) { }     // 可反驳
 
 ## 四、模式形式
 
+本节围绕「模式形式」展开，依次讨论 Literal patterns、Identifier patterns、绑定模式（Binding modes）、Wildcard pattern (`_`)等11个方面。
+
 ### Literal patterns
 
 匹配与字面量完全相同的值。总是可反驳。

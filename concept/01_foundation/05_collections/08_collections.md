@@ -187,6 +187,8 @@ BTreeMap<K, V>:
 
 ## 二、技术细节
 
+理解「技术细节」需要把握容量管理与重新分配、Entry API、Drain 与保留模式与`FromIterator`/`Extend` for Tuples…，本节依次展开。
+
 ### 2.1 容量管理与重新分配
 
 ```rust
@@ -520,6 +522,8 @@ graph TD
 
 ## 十四、边界测试：集合的编译错误
 
+本节将「边界测试：集合的编译错误」分解为若干主题：边界测试：`HashMap` 键未实现 `Hash` + `Eq`（编…、边界测试：迭代器消费后重复使用（编译错误）、边界测试：`Vec::drain` 的范围越界（运行时 panic）、边界测试：`HashMap` 的自定义哈希器与 `BuildHashe…等6个方面。
+
 ### 14.1 边界测试：`HashMap` 键未实现 `Hash` + `Eq`（编译错误）
 
 ```rust,compile_fail
@@ -714,6 +718,8 @@ fn main() {
 ---
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：Vec 与容量（理解层）、测验 2：HashMap 所有权（应用层）、测验 3：迭代器与借用（分析层）、测验 4：BTreeMap vs HashMap（评价层）等5个方面的顺序逐层展开。
 
 ### 测验 1：Vec 与容量（理解层）
 

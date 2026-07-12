@@ -80,6 +80,8 @@
 
 ## 📐 知识结构
 
+本节围绕「知识结构」展开，依次讨论概念定义、属性特征、关系连接与思维导图。
+
 ### 概念定义
 
 **Future Trait**:
@@ -162,6 +164,8 @@ Future 与 Executor 机制
 
 ## 1. Future Trait 详解
 
+「Future Trait 详解」部分按 Future 的定义、Poll 枚举 (Poll Enum)与Context 和 Waker的顺序逐层展开。
+
 ### 1.1 Future 的定义
 
 **完整定义** (`std::future::Future`):
@@ -233,6 +237,8 @@ impl<'a> Context<'a> {
 ---
 
 ## 2. Poll 与 Waker 机制
+
+本节围绕「Poll 与 Waker 机制」展开，覆盖完整执行流程 与  Waker 示例 两个方面。
 
 ### 2.1 完整执行流程
 
@@ -316,6 +322,8 @@ impl Future for MyFuture {
 ---
 
 ## 3. Executor 工作原理
+
+理解「Executor 工作原理」需要把握 Executor 的职责、简化的 Executor 实现与Tokio Executor 架构，本节依次展开。
 
 ### 3.1 Executor 的职责
 
@@ -467,6 +475,8 @@ fn main() {
 
 ## 4. 手动实现 Future
 
+「手动实现 Future」涉及示例 1: 简单的 Future、示例 2: 延迟 Future与示例 3: 复合 Future，本节逐一说明其要点。
+
 ### 4.1 示例 1: 简单的 Future
 
 ```rust
@@ -614,6 +624,8 @@ where
 
 ## 5. async/await 状态机
 
+「async/await 状态机」涉及从 async 到状态机、状态机可视化与零成本抽象验证，本节逐一说明其要点。
+
 ### 5.1 从 async 到状态机
 
 **原始代码**:
@@ -758,6 +770,8 @@ impl Future for ManualVersion {
 
 ## 6. 实战案例
 
+本节从自定义定时器 Future 与 可取消的 Future 两个层面剖析「实战案例」。
+
 ### 6.1 自定义定时器 Future
 
 ```rust
@@ -885,6 +899,8 @@ async fn main() {
 
 ## 7. 最佳实践
 
+「最佳实践」部分按何时手动实现 Future？、Pin 使用建议与性能优化技巧的顺序逐层展开。
+
 ### 7.1 何时手动实现 Future？
 
 **应该手动实现**:
@@ -961,6 +977,8 @@ impl Future for MyFuture {
 ---
 
 ## 📚 延伸阅读
+
+本节围绕「延伸阅读」展开，覆盖相关文档 与 外部资源 两个方面。
 
 ### 相关文档
 

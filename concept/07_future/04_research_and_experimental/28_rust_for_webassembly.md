@@ -98,6 +98,8 @@
 
 ## 一、权威定义与核心概念
 
+「权威定义与核心概念」部分按 Rust → Wasm 的编译模型、wasm-bindgen 的互操作语义与wasm-pack 的工程化角色的顺序逐层展开。
+
 ### 1.1 Rust → Wasm 的编译模型
 >
 
@@ -246,6 +248,8 @@ wasm-pack 工作流:
 ---
 
 ## 二、前端框架深度对比
+
+理解「前端框架深度对比」需要把握 Yew：React 范式的 Rust 实现、Leptos：细粒度响应式与性能优先与框架选型矩阵，本节依次展开。
 
 ### 2.1 Yew：React 范式的 Rust 实现
 >
@@ -445,6 +449,8 @@ pub fn deallocate_vec(ptr: *mut u8, size: usize) {
 
 ## 四、工具链与工程实践
 
+本节从目标三元组与编译配置 与 调试与测试策略 两个层面剖析「工具链与工程实践」。
+
 ### 4.1 目标三元组与编译配置
 
 ```text
@@ -498,6 +504,8 @@ Wasm 调试工具链:
 ---
 
 ## 五、反命题与边界分析
+
+「反命题与边界分析」部分包含反命题决策树 与 边界极限测试 两条主线，本节依次说明。
 
 ### 5.1 反命题决策树
 
@@ -660,6 +668,8 @@ Rust panic in Wasm:
 > **补充来源**
 
 ## 十、边界测试：WebAssembly 的编译错误
+
+本节围绕「边界测试：WebAssembly 的编译错误」展开，依次讨论边界测试：WASI 的文件系统权限（运行时错误）、边界测试：`wasm-bindgen` 的类型不匹配（编译错误）、边界测试：WASM 模块的大小限制与 `wee_alloc`（运行时错…、边界测试：WASM 组件模型（Component Model）的类型映…等7个方面。
 
 ### 10.1 边界测试：WASI 的文件系统权限（运行时错误）
 
@@ -865,6 +875,8 @@ fn main() {
 - **定理**: Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Rust 在 WASM 生态中的长期愿景是什么？（理解层）、测验 2：WASI Preview 2 的组件模型对 Rust 开发有…、测验 3：`wasm32-wasip1` 与 `wasm32-unkn…、测验 4：Rust 如何通过`wasmtime` 嵌入到现有应用中作…等5个方面。
 
 ### 测验 1：Rust 在 WASM 生态中的长期愿景是什么？（理解层）
 

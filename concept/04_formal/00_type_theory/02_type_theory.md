@@ -45,6 +45,8 @@
 
 ## 一、权威定义（Definition）
 
+「权威定义（Definition）」部分包含 Wikipedia 定义 与  Pierce *TAPL* 与 Cardelli 定义 两条主线，本节依次说明。
+
 ### 1.1 Wikipedia 定义
 
 > **[Wikipedia: Type theory](https://en.wikipedia.org/wiki/Type_theory)** In mathematics, logic, and computer science, a type theory is any of a class of formal systems, some of which can serve as alternatives to set theory as a foundation for mathematics. In type theory, every term has a "type", and operations are restricted to terms of a certain type.
@@ -70,6 +72,8 @@ Rust 扩展:
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
+
+本节将「概念属性矩阵（Attribute Matrix）」分解为若干主题：类型论层次矩阵、Variance 矩阵与Rust 类型的 Variance。
 
 ### 2.1 类型论层次矩阵
 >
@@ -467,6 +471,8 @@ Rust 类型系统 = λ→ + System F + HM + λ<: + 线性类型 + 约束类型
 
 ## 七、层次一致性标注（Layer Consistency Annotations）
 
+本节从 L4 → L1 下行映射、L4 → L2 下行映射与L2/L1 → L4 上行映射切入，剖析「层次一致性标注（Layer Consistency Ann…」的核心内容。
+
 ### 7.1 L4 → L1 下行映射
 
 | **L4 形式化概念** | **L1 基础文件** | **映射精度** | **标注** |
@@ -541,6 +547,8 @@ graph TD
 ---
 
 ## 九、示例与反例
+
+「示例与反例」涉及 Variance 示例、递归类型边界、类型论到 Rust 的映射精度评估与HRTB 与全称量词的形式化语义，本节逐一说明其要点。
 
 ### 9.1 Variance 示例
 
@@ -856,6 +864,8 @@ Curry-Howard 在 Rust 中的具体实例:
 
 ### 10.4 Pierce *TAPL* Ch.15 子类型与 Rust 生命周期映射
 
+本节围绕「Pierce *TAPL* Ch.15 子类型与 Rust…」展开，覆盖子类型的核心规则（TAPL Ch.15） 与  Rust 生命周期作为子类型关系 两个方面。
+
 #### 子类型的核心规则（TAPL Ch.15）
 
 子类型关系 `S <: T`（S 是 T 的子类型）的核心规则集：
@@ -984,6 +994,8 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 > **相关判定树**: [Trait 判定树](../../00_meta/00_framework/concept_definition_decision_forest.md#五trait-判定树) · [泛型判定树](../../00_meta/00_framework/concept_definition_decision_forest.md#六泛型判定树)
 
 ## 十、边界测试：类型论的编译错误
+
+「边界测试：类型论的编译错误」涉及边界测试：单位类型与空类型的混淆（编译错误）、边界测试：代数数据类型的穷尽匹配（编译错误）、边界测试：GAT 与高阶类型（编译错误）、边界测试：依赖类型与数组长度（编译错误）等6个方面，本节逐一说明其要点。
 
 ### 10.1 边界测试：单位类型与空类型的混淆（编译错误）
 
@@ -1188,6 +1200,8 @@ fn main() {}
 ---
 
 ## 嵌入式测验
+
+理解「嵌入式测验」需要把握测验 1：类型系统的分类（记忆层）、测验 2：参数多态 vs 特设多态（理解层）、测验 3：生命周期作为类型（应用层）与测验 4：类型推断与 Hindley-Milner（分析层），本节依次展开。
 
 ### 测验 1：类型系统的分类（记忆层）
 
@@ -1571,6 +1585,8 @@ process(Vec::new());  // ✅ 从参数类型推断 T = i32
 
 ## 📐 知识结构
 
+本节从概念定义、属性特征、关系连接、思维导图等7个方面切入，剖析「知识结构」的核心内容。
+
 ### 概念定义
 
 **类型理论深度 (Type Theory Depth)**:
@@ -1696,6 +1712,8 @@ Rust 的类型系统基于**仿射类型系统** (Affine Type System) 和 **Hind
 (Source: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/))
 
 ## 1. 类型理论基础
+
+本节聚焦「类型理论基础」，核心内容为类型系统分类。
 
 ### 1.1 类型系统分类
 

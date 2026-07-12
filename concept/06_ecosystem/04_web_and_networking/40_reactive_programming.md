@@ -91,6 +91,8 @@
 
 ## 一、权威定义（Definition）
 
+理解「权威定义（Definition）」需要把握 Reactive Manifesto：响应式系统的四大特质、Reactive Streams：背压感知的异步数据流与FRP：函数式响应编程，本节依次展开。
+
 ### 1.1 Reactive Manifesto：响应式系统的四大特质
 
 > **[The Reactive Manifesto](https://www.reactivemanifesto.org/)** 响应式系统具备四个核心特质：
@@ -202,6 +204,8 @@ FRP 组合子:
 
 ## 二、概念属性矩阵
 
+「概念属性矩阵」部分的核心主题是 Reactive 编程模型对比矩阵，本节展开说明。
+
 ### 2.1 Reactive 编程模型对比矩阵
 
 | **维度** | **Reactive Streams** | **FRP (Signal/Event)** | **Dataflow** | **Rust Stream** |
@@ -221,6 +225,8 @@ FRP 组合子:
 ---
 
 ## 三、Reactive Streams 核心
+
+「Reactive Streams 核心」涉及四元接口模型、Rust 中的 Stream trait与组合子代数，本节逐一说明其要点。
 
 ### 3.1 四元接口模型
 
@@ -343,6 +349,8 @@ let results: Vec<_> = pipeline.collect().await;
 
 ## 四、背压机制
 
+本节从背压策略对比 与  Rust 实现 两个层面剖析「背压机制」。
+
 ### 4.1 背压策略对比
 >
 
@@ -439,6 +447,8 @@ impl<T> CreditBasedChannel<T> {
 ---
 
 ## 五、FRP 模型
+
+本节围绕「FRP 模型」展开，依次讨论 Signal vs Event、连续语义 vs 离散语义与Rust 中的 FRP 限制。
 
 ### 5.1 Signal vs Event
 >
@@ -786,6 +796,8 @@ async fn send_alert(log: &LogEntry) -> Result<(), AlertError> {
 
 ## 八、反命题与边界
 
+本节从反命题树 与 边界极限 两个层面剖析「反命题与边界」。
+
 ### 8.1 反命题树
 >
 
@@ -838,6 +850,8 @@ async fn send_alert(log: &LogEntry) -> Result<(), AlertError> {
 ---
 
 ## 九、边界测试
+
+本节将「边界测试」分解为若干主题：边界测试：无背压导致内存溢出（运行时错误）、边界测试：跨线程 Stream 发送违反 Send（编译错误）与边界测试：FRP 信号循环引用导致死锁（运行时错误）。
 
 ### 9.1 边界测试：无背压导致内存溢出（运行时错误）
 
@@ -999,6 +1013,8 @@ fn circular_signal_deadlock() {
 - **定理**: Reactive Programming & FRP（响应式编程与函数式响应编程） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：响应式编程（Reactive Programming）的核心…、测验 2：Rust 的 `futures::Stream` 与响应式编…、测验 3：`tokio::sync::watch` 在响应式状态中有什…、测验 4：为什么 Rust 的响应式 UI 框架（如 `iced`、`…等5个方面的顺序逐层展开。
 
 ### 测验 1：响应式编程（Reactive Programming）的核心抽象是什么？（理解层）
 

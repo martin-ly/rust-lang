@@ -269,6 +269,8 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 
 ## 五、演进路线
 
+「演进路线」涉及 2026 年官方三步计划（Rust Project Goals 202…、长期时间轴与相关已稳定特性，本节逐一说明其要点。
+
 ### 5.1 2026 年官方三步计划（Rust Project Goals 2026 — Beyond the `&`）
 
 | 阶段 | 状态 | 说明 |
@@ -314,6 +316,8 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 - **定理**: Field Projections 预览：安全的字段级投影 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：Pinned field projections 解决的是什…、测验 2：为什么自引用结构体的字段投影是 unsafe 的？（理解层）、测验 3：`pin-project` crate 目前如何解决这个问题…、测验 4：语言级 field projection 支持对 `asyn…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：Pinned field projections 解决的是什么问题？（理解层）
 

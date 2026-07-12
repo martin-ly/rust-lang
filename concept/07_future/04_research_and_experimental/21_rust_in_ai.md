@@ -191,6 +191,8 @@ Rust 在 AI 流水线中的定位:
 
 ## 二、技术细节
 
+本节围绕「技术细节」展开，依次讨论 Candle：纯 Rust ML 框架、ONNX Runtime 集成、WebAssembly 推理与NVIDIA GPU 目标基线提升（Rust 1.97）。
+
 ### 2.1 Candle：纯 Rust ML 框架
 >
 
@@ -377,6 +379,8 @@ rustc -C target-cpu=sm_70 --target nvptx64-nvidia-cuda ...
 
 ## 四、反命题与边界分析
 
+本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
+
 ### 4.1 反命题树
 
 ```mermaid
@@ -533,6 +537,8 @@ graph TD
 ---
 
 ## 十、边界测试：Rust in AI 的编译错误
+
+理解「边界测试：Rust in AI 的编译错误」需要把握边界测试：`candle` 的张量形状不匹配（编译错误/运行时 pan…、边界测试：`unsafe` 与 SIMD 的内在函数约束（编译错误）、边界测试：AI 模型的序列化与版本兼容性（运行时加载失败）、边界测试：Rust AI 推理框架的张量生命周期与 GPU 内存管理（…等6个方面，本节依次展开。
 
 ### 10.1 边界测试：`candle` 的张量形状不匹配（编译错误/运行时 panic）
 
@@ -697,6 +703,8 @@ fn main() {}
 - **定理**: Rust 在 AI 与机器学习中的新兴角色 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Rust 在 AI 生态中目前主要扮演什么角色？（理解层）、测验 2：为什么 AI 推理服务特别需要 Rust 的性能和安全性？（…、测验 3：`candle` 与 `PyTorch` 在部署上有什么区别…、测验 4：Rust 如何通过 `ort` 与 ONNX 生态集成？（理…等5个方面。
 
 ### 测验 1：Rust 在 AI 生态中目前主要扮演什么角色？（理解层）
 

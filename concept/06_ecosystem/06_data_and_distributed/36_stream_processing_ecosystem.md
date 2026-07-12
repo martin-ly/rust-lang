@@ -61,6 +61,8 @@ Rust Stream Processing Ecosystem
 
 ## 二、timely-dataflow：Rust 的分布式数据流引擎
 
+本节从核心设计 与 代码示例 两个层面剖析「timely-dataflow：Rust 的分布式数据流引擎」。
+
 ### 2.1 核心设计
 
 timely-dataflow（TD）是 Microsoft Research Naiad 系统的 Rust 重新实现。其核心设计包括：
@@ -91,6 +93,8 @@ fn main() {
 ---
 
 ## 三、differential-dataflow：增量计算的 diff 代数
+
+本节从核心抽象 与  DD 的增量运算符 两个层面剖析「differential-dataflow：增量计算的 d…」。
 
 ### 3.1 核心抽象
 
@@ -194,6 +198,8 @@ Fluvio 是一个用 Rust 从头构建的分布式流处理平台，定位为 Kaf
 ---
 
 ## 六、Materialize：流式 SQL 数据库
+
+本节从架构三层 与 与 Flink 的对比 两个层面剖析「Materialize：流式 SQL 数据库」。
 
 ### 6.1 架构三层
 
@@ -387,6 +393,8 @@ async fn kafka_consumer() {
 
 ## 十、边界测试：流处理生态的编译错误
 
+本节从边界测试：Kafka 消费者的 `Deserialize` 约束（编译…、边界测试：背压与无界缓冲的内存风险（运行时 UB / OOM）、边界测试：背压（backpressure）与无界通道的内存爆炸（运行时…、边界测试：窗口操作的 watermark 与延迟数据（运行时逻辑错误）等5个方面切入，剖析「边界测试：流处理生态的编译错误」的核心内容。
+
 ### 10.1 边界测试：Kafka 消费者的 `Deserialize` 约束（编译错误）
 
 ```rust,compile_fail
@@ -489,6 +497,8 @@ fn windowed_sum(events: Stream<Event>) -> Stream<WindowResult> {
 - **定理**: 流处理生态：Rust 实现与工业系统全景 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Rust 的 `futures::Stream` 与 Apa…、测验 2：在流处理中，"恰好一次"（Exactly-Once）语义为什…、测验 3：`timely-dataflow` 和 `different…、测验 4：窗口操作（Windowing）在流处理中解决什么问题？Rus…等5个方面。
 
 ### 测验 1：Rust 的 `futures::Stream` 与 Apache Kafka 的 consumer 在概念上有什么对应关系？（理解层）
 

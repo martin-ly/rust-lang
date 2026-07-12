@@ -36,6 +36,8 @@
 
 ## 一、并发基础：Send 与 Sync
 
+「并发基础：Send 与 Sync」部分按 Q1. 以下代码能否编译？解释 `Send` 和 `Sync` 的语义、Q2. 以下代码的输出是什么？存在什么问题？与Q3. 以下代码的输出是什么？解释 `mpsc` channel 的语义的顺序逐层展开。
+
 ### Q1. 以下代码能否编译？解释 `Send` 和 `Sync` 的语义
 
 ```rust,compile_fail
@@ -221,6 +223,8 @@ Got: 3
 
 ## 二、异步编程
 
+本节从 Q4. 以下代码的输出是什么？解释 `.await` 的作用、Q5. 以下代码能否编译？解释 `Pin` 的作用与Q6. 以下代码存在什么问题？如何修复？切入，剖析「异步编程」的核心内容。
+
 ### Q4. 以下代码的输出是什么？解释 `.await` 的作用
 
 ```rust
@@ -389,6 +393,8 @@ async fn main() {
 ---
 
 ## 三、综合应用
+
+理解「综合应用」需要把握 Q7. 以下代码的输出是什么？解释 `join!` 与顺序 await…、Q8. 以下代码能否编译？解释 `'static` 在并发中的含义、Q9. 以下代码的输出是什么？解释 `RwLock` 与 `Mutex…与Q10. 以下代码存在什么问题？这是 Rust 并发的经典陷阱，本节依次展开。
 
 ### Q7. 以下代码的输出是什么？解释 `join!` 与顺序 await 的区别
 
@@ -660,6 +666,8 @@ println!("Result: {}", *counter.lock().unwrap());
 > **权威来源**: [The Rust Programming Language — Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [The Rust Programming Language — Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Atomics and Locks](https://marabos.nl/atomics/)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：本文件是 测验：并发与异步（L3 试点扩展） 的专项测验集。…、测验 2：在 测验：并发与异步（L3 试点扩展） 的测验中，若遇到不确…与测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层）切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：本文件是 测验：并发与异步（L3 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 

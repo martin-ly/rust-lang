@@ -74,6 +74,8 @@
 
 ## 一、核心概念
 
+理解「核心概念」需要把握智能指针谱系、Box：独占堆分配与Rc 与 Arc：引用计数共享，本节依次展开。
+
 ### 1.1 智能指针谱系
 
 ```mermaid
@@ -194,6 +196,8 @@ let weak = Rc::downgrade(&data);
 ---
 
 ## 二、技术细节
+
+「技术细节」部分按 RefCell 与 Cell：内部可变性、智能指针的组合模式与性能特征对比的顺序逐层展开。
 
 ### 2.1 RefCell 与 Cell：内部可变性
 >
@@ -358,6 +362,8 @@ struct Node {
 ---
 
 ## 四、反命题与边界分析
+
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
 
 ### 4.1 反命题树
 >
@@ -718,6 +724,8 @@ fn main() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：Box<T> 的用途（理解层）、测验 2：Rc vs Arc（应用层）、测验 3：Weak 指针的作用（应用层）、测验 4：Deref 与智能指针（分析层）等5个方面，本节依次展开。
 
 ### 测验 1：Box<T> 的用途（理解层）
 

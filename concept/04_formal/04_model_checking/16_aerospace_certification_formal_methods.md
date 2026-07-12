@@ -899,6 +899,8 @@ graph TD
 
 ## 十、边界测试：航空航天认证形式化方法的编译错误
 
+「边界测试：航空航天认证形式化方法的编译错误」部分按边界测试：MISRA C 规则的 Rust 类比（编译错误）、边界测试：确定性执行与 `const fn`（编译错误）、边界测试：SPARK 模式的 Rust 近似与 `no_panic`（…、边界测试：MC/DC 覆盖率与短路逻辑（逻辑错误）等5个方面的顺序逐层展开。
+
 ### 10.1 边界测试：MISRA C 规则的 Rust 类比（编译错误）
 
 ```rust,compile_fail
@@ -1009,6 +1011,8 @@ fn main() {}
 > **修正**: DO-178C（航空软件认证）要求 **MC/DC**（Modified Condition/Decision Coverage）：每个条件必须独立影响决策结果。`a && (b || c)` 需要 5 个测试用例满足 MC/DC。Kani 等模型检查器验证**所有可能输入**（有界），自然满足 MC/DC，但工具链认证是障碍：1) 形式化工具本身需通过 DO-330（工具鉴定）；2) 生成的证据需被认证机构接受；3) Rust 缺乏 DO-178C 的 A 级认证历史。Ferrocene 项目：提供经过认证的 Rust 工具链，支持 DO-178C、ISO 26262（汽车）、IEC 61508（工业）。这与 Ada/SPARK（长期用于航空，有完整认证历史）或 C（广泛认证但需大量测试）不同——Rust 的形式化验证生态正在成熟，但工业认证仍需时间积累。(Source: [DO-178C](https://en.wikipedia.org/wiki/DO-178C) · [Ferrocene](https://ferrous-systems.com/ferrocene/) · [MC/DC](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage))
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：DO-178C 标准中的 A/B/C/D/E 五个软件等级（…、测验 2：Ferrocene 是什么？它在 Rust 航空航天认证中解…、测验 3：为什么航空航天领域特别需要形式化验证，而普通 Web 应用通…、测验 4：MISRA C 和 Rust 在安全性保证上有什么根本区别？…等5个方面。
 
 ### 测验 1：DO-178C 标准中的 A/B/C/D/E 五个软件等级（DAL）分别对应什么失效条件？（理解层）
 

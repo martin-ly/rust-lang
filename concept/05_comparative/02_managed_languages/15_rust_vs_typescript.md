@@ -226,6 +226,8 @@ TypeScript 核心特征:
 
 ## 二、技术细节
 
+「技术细节」部分按类型系统对比矩阵、异步模型对比、错误处理：Result vs Throw与WASM 互操作的顺序逐层展开。
+
 ### 2.1 类型系统对比矩阵
 >
 
@@ -449,6 +451,8 @@ WASM 互操作模型:
 
 ## 四、思维导图（Mermaid）
 
+本节从类型系统哲学对比图 与 工程选型决策树 两个层面剖析「思维导图（Mermaid）」。
+
 ### 4.1 类型系统哲学对比图
 
 ```mermaid
@@ -540,6 +544,8 @@ graph TD
 ---
 
 ## 五、反命题与边界分析
+
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
 
 ### 5.1 反命题树
 
@@ -714,6 +720,8 @@ fn main() {
 
 ## 十、边界测试：Rust 与 TypeScript 的编译错误对比
 
+本节将「边界测试：Rust 与 TypeScript 的编译错误对比」分解为若干主题：边界测试：TypeScript 的 any 与 Rust 的显式类型（…、边界测试：TypeScript 的可选属性与 Rust 的 Optio…、边界测试：TypeScript 的结构类型与 Rust 的名义类型的互…、边界测试：TypeScript 的 `any` 与 Rust 的 `u…等5个方面。
+
 ### 10.1 边界测试：TypeScript 的 any 与 Rust 的显式类型（编译错误）
 
 ```rust,ignore
@@ -837,6 +845,8 @@ fn main() {
 > **修正**: Rust 使用**名义类型系统**（nominal typing）：类型的同一性由名称决定，而非结构。`Point` 和 `Coordinate` 有相同字段但不同名称，是完全不同的类型。TypeScript 使用**结构性类型系统**（structural typing）：`{ x: number, y: number }` 与 `Point` 兼容，只要结构匹配。Rust 的名义类型：优势——重构安全（重命名字段不影响其他类型）、清晰的错误信息；劣势——需显式转换（`From` trait）。TypeScript 的结构类型：优势——灵活、易于接口组合；劣势——意外兼容（两个不相关的类型因结构相同而混用）。Rust 的 newtype 模式（`struct Meters(u32)`）利用名义类型创建零成本抽象（Zero-Cost Abstraction）。这与 Go 的接口（结构性满足）或 Haskell 的 `newtype`（名义类型包装）类似——Rust 在名义类型的基础上提供结构化的模式匹配（Pattern Matching）（`match`）。
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Rust 和 TypeScript 的静态类型检查最根本的区…、测验 2：TypeScript 的渐进类型系统（Gradual Typ…、测验 3：Rust 的 `enum`（代数数据类型）与 TypeScr…、测验 4：为什么 TypeScript 的类型系统不能防止运行时类型错…等5个方面。
 
 ### 测验 1：Rust 和 TypeScript 的静态类型检查最根本的区别是什么？（理解层）
 

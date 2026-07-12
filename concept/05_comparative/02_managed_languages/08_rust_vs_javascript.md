@@ -195,6 +195,8 @@ graph LR
 
 ## 二、技术细节
 
+理解「技术细节」需要把握异步模型对比、错误处理：Result vs Throw与WASM：两个世界的桥梁，本节依次展开。
+
 ### 2.1 异步模型对比
 >
 
@@ -358,6 +360,8 @@ CLI 工具:
 
 ## 四、反命题与边界分析
 
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+
 ### 4.1 反命题树
 >
 
@@ -514,6 +518,8 @@ graph TD
 
 ## 十、边界测试：Rust 与 JavaScript 的编译错误对比
 
+本节围绕「边界测试：Rust 与 JavaScript 的编译错误对比」展开，依次讨论边界测试：JavaScript 的隐式转换 vs Rust 的显式转换…、边界测试：JavaScript 的闭包变量捕获与 Rust 的所有权（…、边界测试：JavaScript 的 `this` 动态绑定与 Rust…与边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译…。
+
 ### 10.1 边界测试：JavaScript 的隐式转换 vs Rust 的显式转换（编译错误）
 
 ```rust,compile_fail
@@ -606,6 +612,8 @@ fn main() {
 > **修正**: JavaScript 的**弱类型**系统允许大量隐式转换：`"5" + 3` → `"53"`、`"5" - 3` → `2`、`true + 1` → `2`。这些规则复杂且易错（`[] + {}` → `"[object Object]"`）。Rust 是**强类型**的：几乎所有操作都要求操作数类型匹配，无隐式转换（`i32` → `u32` 需 `as`，`String` → `&str` 需 `&` 或 `Deref`）。这是设计哲学的根本差异：JavaScript 追求灵活和快速开发，Rust 追求安全和可维护。从 JavaScript 迁移到 Rust 的开发者常感"繁琐"，但类型错误在编译期被捕获，而非运行期成为 Heisenbug。这与 Python 的隐式转换（类似 JavaScript）或 Go 的强类型（类似 Rust，但有隐式接口实现）类似——Rust 在强类型谱系中属于最严格的一端。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [JavaScript Type Coercion](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality#type_coercion)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：Rust 和 JavaScript 在内存管理上的根本区别是…、测验 2：JavaScript 的 `Promise` 与 Rust…、测验 3：为什么 Rust 编译为 WebAssembly 后可以与…、测验 4：JavaScript 的"原型继承"与 Rust 的 `tr…等5个方面，本节依次展开。
 
 ### 测验 1：Rust 和 JavaScript 在内存管理上的根本区别是什么？（理解层）
 

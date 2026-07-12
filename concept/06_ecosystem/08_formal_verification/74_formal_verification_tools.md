@@ -87,6 +87,8 @@
 
 ## 一、权威定义（Definition）
 
+本节从形式化验证的层次模型 与  Rust 形式化验证的独特挑战 两个层面剖析「权威定义（Definition）」。
+
 ### 1.1 形式化验证的层次模型
 
 > **[Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1145/363235.363259)** 形式化验证是使用数学方法证明程序满足其规范的过程。
@@ -183,6 +185,8 @@ struct MyData(*mut i32);  // 包含裸指针 → 默认不实现 Send/Sync
 ---
 
 ## 三、模型检验工具
+
+本节从 Kani：基于 CBMC 的 Rust 验证器 与  MIRI：运行时 UB 检测器 两个层面剖析「模型检验工具」。
 
 ### 3.1 Kani：基于 CBMC 的 Rust 验证器
 
@@ -331,6 +335,8 @@ cargo miri test（需每日构建版工具链）
 ---
 
 ## 四、演绎验证工具
+
+本节将「演绎验证工具」分解为若干主题： Prusti：Viper 分离逻辑验证器、Creusot：Why3/WhyML 验证器与Verus：SMT-LIB 验证器。
 
 ### 4.1 Prusti：Viper 分离逻辑验证器
 
@@ -486,6 +492,8 @@ fn binary_search(v: &Vec<u64>, k: u64) -> (r: usize)
 
 ## 五、类型系统扩展
 
+本节围绕「类型系统扩展」展开，覆盖 Flux：精化类型（Refinement Types） 与  Aeneas：向函数式语言的转换 两个方面。
+
 ### 5.1 Flux：精化类型（Refinement Types）
 
 > **[Flux](https://github.com/liquid-rust/flux)** 是 UC San Diego 开发的 Rust 精化类型系统（Type System）扩展。精化类型将**逻辑谓词**附加到类型上，例如 `i32{v: 0 <= v && v < 100}` 表示范围在 [0, 100) 的整数。Flux 在编译期自动推断和检查这些谓词。[来源: [Flux Paper — PLDI 2023](https://ranjitjhala.github.io/static/flux-pldi23.pdf)]
@@ -562,6 +570,8 @@ Rust MIR
 
 ## 六、验证工具对比与选型
 
+本节从能力矩阵 与 选型决策树 两个层面剖析「验证工具对比与选型」。
+
 ### 6.1 能力矩阵
 
 | **验证目标** | **Kani** | **MIRI** | **Prusti** | **Creusot** | **Verus** | **Flux** |
@@ -602,6 +612,8 @@ Rust MIR
 ---
 
 ## 七、Rust 形式化验证的前沿
+
+「Rust 形式化验证的前沿」涉及 RefinedRust：Iris 分离逻辑、RustBelt 验证框架、hax：翻译到 F* 和 Rocq 的验证工具链与Kani verify-std：标准库验证计划，本节逐一说明其要点。
 
 ### 7.1 RefinedRust：Iris 分离逻辑
 
@@ -707,6 +719,8 @@ F* / Rocq 规范
 
 ## 八、反命题与边界
 
+本节围绕「反命题与边界」展开，覆盖反命题树 与 边界极限 两个方面。
+
 ### 8.1 反命题树
 
 ```text
@@ -757,6 +771,8 @@ F* / Rocq 规范
 ---
 
 ## 九、边界测试
+
+本节将「边界测试」分解为若干主题：边界测试：Kani 数组越界未被 harness 覆盖（验证盲区）、边界测试：MIRI 无法检测未执行的 unsafe 路径（运行时盲区）与边界测试：Prusti 前置条件过强导致合法调用被拒绝（假阴性）。
 
 ### 9.1 边界测试：Kani 数组越界未被 harness 覆盖（验证盲区）
 
@@ -860,6 +876,8 @@ fn caller() {
 - **定理**: Formal Verification Tools（形式化验证工具生态） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」涉及测验 1：`cargo-kani` 与 `cargo-fuzz` 在验…、测验 2：`Prusti` 使用什么技术验证 Rust 程序？（理解层）、测验 3：Miri 能检测哪些类别的未定义行为（UB）？（理解层）、测验 4：形式化验证工具链在 Rust 中的主要瓶颈是什么？（理解层）等5个方面，本节逐一说明其要点。
 
 ### 测验 1：`cargo-kani` 与 `cargo-fuzz` 在验证方法上有什么区别？（理解层）
 

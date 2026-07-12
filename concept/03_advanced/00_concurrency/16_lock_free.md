@@ -205,6 +205,8 @@ ABA 问题:
 
 ## 二、关键数据结构
 
+本节将「关键数据结构」分解为若干主题： Treiber Stack、Michael-Scott Queue与Hazard Pointer。
+
 ### 2.1 Treiber Stack
 >
 
@@ -333,6 +335,8 @@ Hazard Pointer:
 
 ## 三、Rust 无锁生态
 
+本节围绕「Rust 无锁生态」展开，覆盖 crossbeam 与  lockfree 两个方面。
+
 ### 3.1 crossbeam
 >
 
@@ -401,6 +405,8 @@ lockfree crate:
 ---
 
 ## 四、反命题与边界分析
+
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
 
 ### 4.1 反命题树
 
@@ -810,6 +816,8 @@ fn main() {}
 ---
 
 ## 嵌入式测验
+
+「嵌入式测验」涉及测验 1：CAS 循环（记忆层）、测验 2：ABA 问题（理解层）、测验 3：Treiber Stack 实现（应用层）与测验 4：Hazard Pointer vs Epoch-Based（…，本节逐一说明其要点。
 
 ### 测验 1：CAS 循环（记忆层）
 

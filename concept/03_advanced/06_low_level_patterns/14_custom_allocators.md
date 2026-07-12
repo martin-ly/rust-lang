@@ -144,6 +144,8 @@ GlobalAlloc:
 
 ## 二、实践模式
 
+本节将「实践模式」分解为若干主题： bumpalo — Bump 分配器、jemalloc / mimalloc与arena 分配器。
+
 ### 2.1 bumpalo — Bump 分配器
 >
 
@@ -245,6 +247,8 @@ Arena 分配器模式:
 
 ## 三、内存布局与对齐
 
+本节从 Layout 与 对齐约束 两个层面剖析「内存布局与对齐」。
+
 ### 3.1 Layout
 >
 
@@ -316,6 +320,8 @@ Arena 分配器模式:
 ---
 
 ## 四、反命题与边界分析
+
+本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
 
 ### 4.1 反命题树
 >
@@ -521,6 +527,8 @@ fn main() {
 > **补充来源**
 
 ## 十、边界测试：自定义分配器的编译错误
+
+本节从边界测试：分配器布局不匹配（运行时 UB）、边界测试：`Vec` 自定义分配器的泛型参数（编译错误）、边界测试：全局分配器的 `#[global_allocator]` 重…、边界测试：自定义分配器的 `Layout` 对齐要求（运行时 UB）等8个方面切入，剖析「边界测试：自定义分配器的编译错误」的核心内容。
 
 ### 10.1 边界测试：分配器布局不匹配（运行时 UB）
 
@@ -751,6 +759,8 @@ fn main() {}
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：`GlobalAlloc` trait 需要实现哪两个核心方…、测验 2：`#[global_allocator]` 属性的作用是什么…、测验 3：`Layout` 结构体描述内存分配的哪些属性？（理解层）、测验 4：`Allocator` trait 与 `GlobalAll…等5个方面。
 
 ### 测验 1：`GlobalAlloc` trait 需要实现哪两个核心方法？（理解层）
 

@@ -153,6 +153,8 @@ rustc --target my-target.json
 
 ## 六、链接与 LTO
 
+「链接与 LTO」部分包含链接 与  LTO（Link Time Optimization） 两条主线，本节依次说明。
+
 ### 6.1 链接
 
 LLVM 生成 `.o` 目标文件后，rustc 调用系统链接器（如 `ld`、`lld`、`link.exe`），传入：
@@ -222,6 +224,8 @@ cargo rustc -- --emit=asm -C llvm-args=-x86-asm-syntax=intel
 ---
 
 ## 嵌入式测验
+
+本节围绕「嵌入式测验」展开，依次讨论测验 1：`rustc` 默认使用哪个后端生成机器码？、测验 2：Codegen unit 的作用是什么？、测验 3：Fat LTO 和 Thin LTO 的主要权衡是什么？与测验 4：Cranelift 后端适合什么场景？。
 
 ### 测验 1：`rustc` 默认使用哪个后端生成机器码？
 

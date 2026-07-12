@@ -343,6 +343,8 @@ Unicode Normalization（规范化）:
 
 ## 三、选型决策矩阵
 
+本节围绕「选型决策矩阵」展开，覆盖字符串类型选型 与 编码转换策略 两个方面。
+
 ### 3.1 字符串类型选型
 >
 
@@ -373,6 +375,8 @@ Unicode Normalization（规范化）:
 ---
 
 ## 四、反命题与边界分析
+
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
 
 ### 4.1 反命题树
 
@@ -588,6 +592,8 @@ fn main() {
 
 ## 十二、边界测试：字符串编码的编译错误
 
+「边界测试：字符串编码的编译错误」涉及边界测试：无效 UTF-8 的字节切片转 `str`（运行时 pani…、边界测试：`OsStr` 与 `str` 的跨平台差异（编译错误）、边界测试：`String` 与 `OsString` 的编码差异（编译…、边界测试：字符串切片的字符边界（运行时 panic）等6个方面，本节逐一说明其要点。
+
 ### 12.1 边界测试：无效 UTF-8 的字节切片转 `str`（运行时 panic）
 
 ```rust
@@ -738,6 +744,8 @@ fn main() {
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：`String` 与 `&str` 在所有权和可变性上的核心…、测验 2：`String::from("hello")` 和 `"he…、测验 3：`OsStr`/`OsString` 与 `str`/`St…、测验 4：`CString` 与 `String` 在用途上有什么不同…等5个方面。
 
 ### 测验 1：`String` 与 `&str` 在所有权和可变性上的核心区别是什么？（理解层）
 

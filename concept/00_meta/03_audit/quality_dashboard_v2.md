@@ -155,6 +155,8 @@ pie title 思维表征类型分布（总计 332 个图表）
 
 ## 六、认知维度覆盖
 
+本节围绕「认知维度覆盖」展开，覆盖 Krathwohl × Bloom 双维覆盖 与  A/S/P 标记分布 两个方面。
+
 ### 6.1 Krathwohl × Bloom 双维覆盖
 
 ```mermaid
@@ -289,6 +291,8 @@ graph LR
 > **内容分级**: [综述级]
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：本文档《Rust 知识体系思维表征覆盖率仪表板（Qualit…、测验 2：《Rust 知识体系思维表征覆盖率仪表板（Quality D…与测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）的顺序逐层展开。
 
 ### 测验 1：本文档《Rust 知识体系思维表征覆盖率仪表板（Quality Dashboard v2）》在 Rust 知识体系中属于哪一层级的元数据？（理解层）
 

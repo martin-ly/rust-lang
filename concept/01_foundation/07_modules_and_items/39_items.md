@@ -91,6 +91,8 @@ Rust 中的 item 包括：
 
 ## 三、常见 Item 示例
 
+本节从函数、类型别名、结构体与枚举、常量与静态项等6个方面切入，剖析「常见 Item 示例」的核心内容。
+
 ### 函数
 
 ```rust
@@ -187,6 +189,8 @@ mod outer {
 ---
 
 ## 六、关联项与外部项
+
+「关联项与外部项」部分包含关联项（Associated items） 与 外部项（External items） 两条主线，本节依次说明。
 
 ### 关联项（Associated items）
 

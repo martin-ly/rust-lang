@@ -35,6 +35,8 @@
 
 ## 二、UB 清单
 
+本节从数据竞争（Data races）、访问悬垂或基于未对齐指针的 place、越界 place projection、破坏指针别名规则等11个方面切入，剖析「UB 清单」的核心内容。
+
 ### 1. 数据竞争（Data races）
 
 多个线程同时访问同一内存位置，且至少一个是写操作，没有同步。 (Source: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html))
@@ -108,6 +110,8 @@
 ---
 
 ## 三、悬垂指针与未对齐指针细节
+
+「悬垂指针与未对齐指针细节」部分包含悬垂指针 与 未对齐指针 两条主线，本节依次说明。
 
 ### 悬垂指针
 

@@ -84,6 +84,8 @@
 
 ## 一、核心概念
 
+理解「核心概念」需要把握 Result 类型、Option 类型与运算符，本节依次展开。
+
 ### 1.1 Result 类型
 
 ```text
@@ -266,6 +268,8 @@ fn main() {
 
 ## 二、错误转换与组合
 
+本节将「错误转换与组合」分解为若干主题： From trait、map 与 and_then与组合模式。
+
 ### 2.1 From trait
 >
 
@@ -403,6 +407,8 @@ Result/Option 组合:
 
 ## 三、Panic 与不可恢复错误
 
+本节从 panic! 宏 (panic! Macro) 与  unwrap 与 expect 两个层面剖析「Panic 与不可恢复错误」。
+
 ### 3.1 panic! 宏 (panic! Macro)
 >
 
@@ -484,6 +490,8 @@ unwrap / expect:
 ---
 
 ## 四、反命题与边界分析
+
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
 
 ### 4.1 反命题树
 
@@ -646,6 +654,8 @@ graph TD
 > **补充来源**
 
 ## 十二、边界测试：错误处理的编译错误
+
+本节围绕「边界测试：错误处理的编译错误」展开，依次讨论边界测试：`unwrap()` 在 `Result::Err` 上 p…、边界测试：`?` 在返回 `()` 的函数中使用（编译错误）、边界测试：`Result` 与 `Option` 的混用（编译错误）、边界测试：`catch_unwind` 与 `UnwindSafe`（…等6个方面。
 
 ### 12.1 边界测试：`unwrap()` 在 `Result::Err` 上 panic（运行时错误）
 
@@ -835,6 +845,8 @@ fn main() {}
 ---
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：Result 与 ? 运算符（理解层）、测验 2：Option 与 Result 的转换（应用层）、测验 3：unwrap vs expect（分析层）、测验 4：错误传播链（应用层）等5个方面。
 
 ### 测验 1：Result 与 ? 运算符（理解层）
 

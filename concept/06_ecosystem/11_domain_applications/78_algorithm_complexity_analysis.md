@@ -112,6 +112,8 @@ fn merge_sort_space<T: Ord + Clone>(arr: &[T]) -> Vec<T> {
 
 ## 4. 递归分析
 
+本节围绕「递归分析」展开，覆盖主定理（Master Theorem） 与 递归树 两个方面。
+
 ### 4.1 主定理（Master Theorem）
 
 对于形如 `T(n) = aT(n/b) + f(n)` 的递归式，主定理可直接给出渐近解：

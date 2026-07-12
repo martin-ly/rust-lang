@@ -227,6 +227,8 @@ fn main() { /* ... */ }
 
 ## 二、Frontmatter 语法详解
 
+本节从完整字段支持 与 依赖解析机制 两个层面剖析「Frontmatter 语法详解」。
+
 ### 2.1 完整字段支持
 >
 
@@ -351,6 +353,8 @@ graph TD
 
 ## 四、工程实践
 
+理解「工程实践」需要把握快速 CLI 原型、CI/CD 辅助脚本与数据处理与临时任务，本节依次展开。
+
 ### 4.1 快速 CLI 原型
 
 ```rust,ignore
@@ -419,6 +423,8 @@ fn main() {
 ---
 
 ## 五、形式化定位
+
+「形式化定位」部分包含匿名 Crate 语义 与 与模块系统的关系 两条主线，本节依次说明。
 
 ### 5.1 匿名 Crate 语义
 
@@ -510,6 +516,8 @@ Cargo Script:  File = Crate (单模块，无子模块)
 ---
 
 ## 十、边界测试：Cargo Script 的编译错误
+
+「边界测试：Cargo Script 的编译错误」涉及边界测试：`cargo script` 的依赖解析（编译错误）、边界测试：单文件脚本的模块限制（编译错误）、边界测试：`cargo script` 的缓存与依赖版本漂移（运行时行…、边界测试：cargo script 的依赖解析与版本冲突（运行时/编译…等6个方面，本节逐一说明其要点。
 
 ### 10.1 边界测试：`cargo script` 的依赖解析（编译错误）
 
@@ -657,6 +665,8 @@ fn main() {
 - **定理**: Cargo Script：单文件 Rust 程序 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：Cargo Script（单文件 Rust 程序）相比传统…、测验 2：在 Cargo Script 文件中，如何声明外部依赖？（理…、测验 3：Cargo Script 适合替代哪些传统脚本语言（如 Py…、测验 4：Cargo Script 的编译产物会被缓存吗？（理解层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：Cargo Script（单文件 Rust 程序）相比传统 `cargo new` 项目有什么优势？（理解层）
 

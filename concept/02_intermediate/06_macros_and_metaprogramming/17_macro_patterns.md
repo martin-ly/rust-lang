@@ -191,6 +191,8 @@
 
 ## 二、技术细节
 
+「技术细节」涉及 DRY 代码生成、条件编译模式与编译期计算，本节逐一说明其要点。
+
 ### 2.1 DRY 代码生成
 >
 
@@ -411,6 +413,8 @@ Builder 生成:
 
 ## 四、反命题与边界分析
 
+本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+
 ### 4.1 反命题树
 >
 
@@ -595,6 +599,8 @@ graph TD
 
 ## 十、边界测试：宏模式的编译错误
 
+理解「边界测试：宏模式的编译错误」需要把握边界测试：`macro_rules!` 的优先级与贪婪匹配（编译错误）、边界测试：宏中的 hygiene 与变量捕获（编译错误）、边界测试：`tt` muncher 的 token 消耗（编译错误）、边界测试：宏生成的 `unsafe` 块边界（编译错误）等6个方面，本节依次展开。
+
 ### 10.1 边界测试：`macro_rules!` 的优先级与贪婪匹配（编译错误）
 
 ```rust,ignore
@@ -729,6 +735,8 @@ fn main() {
 > **修正**: `macro_rules!` 的**片段分类器**（fragment specifiers）：1) `expr` — 匹配完整表达式（不含顶层逗号）；2) `tt` — 匹配 token tree（任何括号对的内容，最灵活）；3) `stmt` — 匹配语句；4) `pat` — 匹配模式；5) `ty` — 匹配类型。`expr` 的限制：不能匹配 `foo(1, 2)`（逗号被视为宏参数分隔符），需用 `tt` 或嵌套宏。复杂宏设计：1) 内部宏（`macro_rules! internal { ... }`）处理递归；2) `tt` 作为通用匹配器，再进一步解析；3) 过程宏（Procedural Macro）（`proc_macro`）替代 `macro_rules!` 处理复杂语法。这与 C 的宏（无分类器，纯文本替换，逗号无特殊含义）或 Scheme 的宏（语法对象，结构化匹配）不同——Rust 的 `macro_rules!` 在灵活性和类型安全之间取得平衡。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：`macro_rules!` 中的 `$x:expr` 与…、测验 2：声明宏的"卫生性"（hygiene）主要解决什么问题？（理解…、测验 3：`macro_rules!` 宏可以递归调用自身吗？有什么限…、测验 4：过程宏（proc macro）分为哪三类？它们分别用于什么场…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：`macro_rules!` 中的 `$x:expr` 与 `$x:tt` 有什么区别？（理解层）
 

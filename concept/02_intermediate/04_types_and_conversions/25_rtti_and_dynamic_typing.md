@@ -40,6 +40,8 @@
 
 ## 二、C++ 的 RTTI 机制
 
+「C++ 的 RTTI 机制」涉及 `typeid`：获取类型信息、`dynamic_cast`：安全的向下转换与C++ RTTI 的代价，本节逐一说明其要点。
+
 ### 2.1 `typeid`：获取类型信息
 
 ```cpp
@@ -81,6 +83,8 @@ if (d) {
 ---
 
 ## 三、Rust 的动态类型识别
+
+「Rust 的动态类型识别」部分按 `Any` trait：显式的运行时类型擦除、`TypeId`：编译期稳定的类型指纹与`downcast_ref`：受限的向下转换的顺序逐层展开。
 
 ### 3.1 `Any` trait：显式的运行时类型擦除
 
@@ -149,6 +153,8 @@ fn extract_string(value: Box<dyn Any>) -> Option<String> {
 ---
 
 ## 五、Rust 中的典型用例
+
+「Rust 中的典型用例」部分包含错误类型的动态擦除 与 插件系统的类型分发 两条主线，本节依次说明。
 
 ### 5.1 错误类型的动态擦除
 

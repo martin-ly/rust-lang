@@ -40,6 +40,8 @@
 
 ## 二、ABI（Application Binary Interface）对比
 
+「ABI（Application Binary Interf…」涉及什么是 ABI、C++ ABI 的困境、Rust ABI 的设计与调用约定对比，本节逐一说明其要点。
+
 ### 2.1 什么是 ABI
 
 ABI 定义了程序在二进制层面的交互规则：
@@ -99,7 +101,11 @@ Rust 特有的类型（`String`, `Vec<T>`, `enum`）不能通过 C ABI 直接传
 
 ## 三、对象模型与内存布局
 
+本节围绕「对象模型与内存布局」展开，依次讨论 C++ 对象模型、Rust 对象模型与结构体内存布局对比。
+
 ### 3.1 C++ 对象模型
+
+本节从简单类（POD）、含虚函数的类与多重继承切入，剖析「C++ 对象模型」的核心内容。
 
 #### 3.1.1 简单类（POD）
 
@@ -167,6 +173,8 @@ A a = c; // 切片！只复制 A 部分，vptr 指向 A 的 vtable，B 部分丢
 
 ### 3.2 Rust 对象模型
 
+「Rust 对象模型」部分包含 `dyn Trait` 的内存布局 与 无对象切片 两条主线，本节依次说明。
+
 #### 3.2.1 `dyn Trait` 的内存布局
 
 ```rust,ignore
@@ -216,6 +224,8 @@ fn draw_shape(shape: &dyn Drawable) {
 > **关键洞察**: Rust 通过禁止 `dyn Trait` 的值类型（必须配合 `&`、`Box` 或 `Rc` 使用），**在类型层面消除了对象切片（Slice）问题**。这是 Rust 设计优于 C++ 的核心工程决策之一。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 3.3 结构体内存布局对比
+
+本节从 Padding 与对齐 与 字段重排 两个层面剖析「结构体内存布局对比」。
 
 #### 3.3.1 Padding 与对齐
 
@@ -271,6 +281,8 @@ struct Packed {
 
 ## 四、名称修饰（Name Mangling）
 
+「名称修饰（Name Mangling）」部分包含 C++ 名称修饰 与  Rust 名称修饰 两条主线，本节依次说明。
+
 ### 4.1 C++ 名称修饰
 
 C++ 编译器将函数签名编码为符号名，支持函数重载和命名空间：
@@ -305,6 +317,8 @@ mod math {
 ---
 
 ## 五、枚举的内存布局对比
+
+本节围绕「枚举的内存布局对比」展开，覆盖 C++ `enum` 与 `std::variant` 与  Rust `enum` 两个方面。
 
 ### 5.1 C++ `enum` 与 `std::variant`
 
@@ -356,6 +370,8 @@ enum Value {
 ---
 
 ## 六、Move 语义与析构的 ABI 层面
+
+「Move 语义与析构的 ABI 层面」部分包含 C++ 移动构造与 ABI 与  Rust 移动与 ABI 两条主线，本节依次说明。
 
 ### 6.1 C++ 移动构造与 ABI
 
@@ -410,6 +426,8 @@ fn main() {
 
 ## 七、异常处理与栈展开
 
+本节从 C++ 异常 ABI 与  Rust Panic ABI 两个层面剖析「异常处理与栈展开」。
+
 ### 7.1 C++ 异常 ABI
 
 C++ 异常处理依赖复杂的运行时（Runtime）机制：
@@ -456,6 +474,8 @@ panic = "abort"  // 二进制体积更小，无栈展开开销
 ---
 
 ## 八、反例与边界测试
+
+理解「反例与边界测试」需要把握反例：FFI 中因布局差异导致的数据损坏、边界测试：`Option<&T>` 的 null pointer op…与边界测试：dyn Trait 胖指针的 FFI 传递，本节依次展开。
 
 ### 8.1 反例：FFI 中因布局差异导致的数据损坏
 
@@ -570,6 +590,8 @@ pub struct CDrawable {
 > **状态**: ✅ 新建 — C/C++ 工程层对比
 
 ## 十、边界测试：C++ ABI 与 Rust 的编译错误对比
+
+本节从边界测试：C++ 的多重继承 vs Rust 的 trait 组合（编…、边界测试：C++ 的隐式构造 vs Rust 的显式构造（编译错误）、边界测试：C++ 虚函数表与 Rust trait 对象的 ABI 差…、边界测试：C++ 的 RAII 与 Rust 的 Drop 顺序差异（…等5个方面切入，剖析「边界测试：C++ ABI 与 Rust 的编译错误对比」的核心内容。
 
 ### 10.1 边界测试：C++ 的多重继承 vs Rust 的 trait 组合（编译错误）
 
@@ -759,6 +781,8 @@ fn main() {
 > [来源: [Wikipedia — Virtual Method Table](https://en.wikipedia.org/wiki/Virtual_method_table)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：C++ 的 vtable 与 Rust 的 `dyn Tra…、测验 2：`#[repr(C)]` 对 Rust struct 的字段…、测验 3：Rust 的 ABI 为什么默认不稳定？这对动态链接有什么影…、测验 4：C++ 的 RAII 与 Rust 的所有权系统在资源释放时…等5个方面，本节依次展开。
 
 ### 测验 1：C++ 的 vtable 与 Rust 的 `dyn Trait` vtable 在布局上有什么主要区别？（理解层）
 

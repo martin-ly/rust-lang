@@ -65,6 +65,8 @@
 
 ## 二、Credential Providers
 
+本节从内置 Providers 与 推荐全局配置 两个层面剖析「Credential Providers」。
+
 ### 2.1 内置 Providers
 
 | Provider | 平台 | 说明 |
@@ -95,6 +97,8 @@ global-credential-providers = [
 ---
 
 ## 三、Token 的存储与使用
+
+理解「Token 的存储与使用」需要把握 `cargo login`、环境变量与自定义 Provider，本节依次展开。
 
 ### 3.1 `cargo login`
 
@@ -148,6 +152,8 @@ global-credential-providers = ["cargo-credential-1password --account my.1passwor
 ---
 
 ## 五、Target Dir 与 Build Dir
+
+理解「Target Dir 与 Build Dir」需要把握 `target/` 目录、目录布局与Build Dir（中间产物），本节依次展开。
 
 ### 5.1 `target/` 目录
 
@@ -215,6 +221,8 @@ rustc-wrapper = "sccache"
 ---
 
 ## 嵌入式测验
+
+「嵌入式测验」涉及测验 1：为什么认证 registry 必须配置 credential…、测验 2：`cargo:token` provider 有什么安全注意…、测验 3：`CARGO_REGISTRIES_<NAME>_TOKEN…与测验 4：`sccache` 与普通 Cargo 缓存有什么区别？，本节逐一说明其要点。
 
 ### 测验 1：为什么认证 registry 必须配置 credential provider？
 

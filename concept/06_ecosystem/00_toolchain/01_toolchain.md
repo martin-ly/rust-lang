@@ -156,6 +156,8 @@ graph LR
 
 ## 二、概念属性矩阵
 
+「概念属性矩阵」涉及核心工具矩阵、Cargo.toml vs package.json / go.mod…、Clippy Lint 分类矩阵、编译器优化等级矩阵等7个方面，本节逐一说明其要点。
+
 ### 2.1 核心工具矩阵
 >
 
@@ -379,6 +381,8 @@ graph LR
 ---
 
 ## 三、Cargo 深层机制
+
+「Cargo 深层机制」部分按 Workspace 高级用法、Features 与条件编译、Cargo.toml 完整字段解析与SemVer 兼容性规则详解的顺序逐层展开。
 
 ### 3.1 Workspace 高级用法
 
@@ -725,6 +729,8 @@ cargo bloat --no-default-features
 ---
 
 ## 四、Cross-compilation（交叉编译）
+
+本节将「Cross-compilation（交叉编译）」分解为若干主题：目标三元组（Target Triple）、工具链配置、musl vs glibc：静态链接的权衡、链接器配置与交叉编译环境等5个方面。
 
 ### 4.1 目标三元组（Target Triple）
 
@@ -1180,6 +1186,8 @@ flowchart LR
 
 ## 七、国际来源：Rust 编译器架构
 
+本节围绕「国际来源：Rust 编译器架构」展开，依次讨论 rustc_driver、LLVM IR、Cranelift 后端（Rust 2026 Project Goal）、gccrs — GCC 前端替代实现等5个方面。
+
 ### 7.1 rustc_driver
 
 **[rustc Dev Guide]** The `rustc_driver` crate serves as the main entry point to the compiler. It parses command-line arguments, sets up the compilation session, and orchestrates the various compiler queries.
@@ -1633,6 +1641,8 @@ export SCCACHE_REGION=us-east-1        # AWS 区域
 
 ## 十、边界测试：工具链的编译错误
 
+本节围绕「边界测试：工具链的编译错误」展开，依次讨论边界测试：`cargo` 特性开关的依赖冲突（编译错误）、边界测试：Edition 迁移中的语法变化（编译错误）、边界测试：`cargo` 工作空间的成员路径错误（编译错误）、边界测试：`rustc` 的链接时优化（LTO）与动态链接的冲突（编译…等5个方面。
+
 ### 10.1 边界测试：`cargo` 特性开关的依赖冲突（编译错误）
 
 ```toml
@@ -1735,6 +1745,8 @@ fn main() {
 > **修正**: Cargo feature 是**累加**的：依赖树中任何 crate 启用 feature，该 feature 对整棵树生效。互斥 feature 的设计：1) `cfg_mutually_exclusive!`（第三方宏（Macro））；2) 运行时检查（`panic!("feat-a and feat-b are mutually exclusive")`）；3) 文档明确说明（但不强制）。Cargo 的 feature resolver v2（2021+）改进了特性解析：dev-dependencies 不激活 features，弱依赖（`dep-name?/feature-name`）按需启用。feature 滥用是 Rust 生态的常见问题：1) 过多 feature 导致测试矩阵爆炸；2) 隐式 feature 依赖（`tokio/rt` 启用 `tokio/rt-multi-thread`）；3) 编译时间增加（每个 feature 组合可能触发重新编译）。这与 npm 的 `optionalDependencies` 或 Python 的 `extras_require` 类似——Rust 的 feature 系统是编译期的条件编译，影响代码包含和依赖解析。来源: [The Cargo Book] · 来源: [RFC 2957 — Weak Dependencies](https://github.com/rust-lang/rfcs/pull/2957)
 
 ## 嵌入式测验（Embedded Quiz）
+
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：Cargo.toml vs package.json（理解层）、测验 2：Feature 统一机制（应用层）、测验 3：Clippy lint 级别（应用层）、测验 4：交叉编译目标三元组（分析层）等5个方面，本节依次展开。
 
 ### 测验 1：Cargo.toml vs package.json（理解层）
 

@@ -79,6 +79,8 @@
 
 ## 一、核心概念
 
+本节将「核心概念」分解为若干主题：问题定义：编译期检查的边界、Miri：解释执行的 UB 检测、BorrowSanitizer 的设计目标与Shadow Stack 与 Lock-and-Key 策略。
+
 ### 1.1 问题定义：编译期检查的边界
 
 Rust 的所有权（Ownership）系统通过**编译期检查**消除数据竞争和内存安全（Memory Safety）问题：
@@ -203,6 +205,8 @@ Miri 使用 tracing GC（stop-the-world 扫描所有可达 provenance）。Borro
 
 ## 三、形式化语义
 
+本节围绕「形式化语义」展开，覆盖借用标签的生命周期 与 从 Tree Borrows 到运行时检测 两个方面。
+
 ### 3.1 借用标签的生命周期
 >
 
@@ -249,6 +253,8 @@ graph TD
 ---
 
 ## 四、反命题与边界分析
+
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
 
 ### 4.1 反命题树
 >
@@ -383,6 +389,8 @@ fn main() {
 ---
 
 ## 十、边界测试：BorrowSanitizer 预览的编译错误
+
+本节从边界测试：BorrowSanitizer 的别名分析误报（编译错误/运…、边界测试：Sanitizer 与优化的交互（运行时检测丢失）、边界测试：BorrowSanitizer 与 FFI 的交互盲区（运行…、边界测试：BorrowSanitizer 与 `unsafe` 块内的…等7个方面切入，剖析「边界测试：BorrowSanitizer 预览的编译错误」的核心内容。
 
 ### 10.1 边界测试：BorrowSanitizer 的别名分析误报（编译错误/运行时检测）
 
@@ -584,6 +592,8 @@ fn main() {
 - **定理**: BorrowSanitizer 概念预研：运行时借用检查工业化 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：BorrowSanitizer 是什么？它与 Miri 有什…、测验 2：BorrowSanitizer 基于什么技术实现？（理解层）、测验 3：BorrowSanitizer 对生产环境代码有什么意义？（…、测验 4：为什么需要 BorrowSanitizer 而不是仅依赖编译…等5个方面的顺序逐层展开。
 
 ### 测验 1：BorrowSanitizer 是什么？它与 Miri 有什么区别？（理解层）
 

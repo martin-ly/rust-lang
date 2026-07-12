@@ -30,6 +30,8 @@ BorrowSanitizer（常缩写为 BSAN）是 Rust 2026 Project Goal 之一，目标
 
 ## 二、核心机制
 
+本节围绕「核心机制」展开，依次讨论别名模型基础、LLVM 插桩与 Retag Intrinsics与错误报告示例。
+
 ### 2.1 别名模型基础
 
 Rust 的内存安全（Memory Safety）建立在严格的别名规则之上，主要有两种操作语义解释：
@@ -81,6 +83,8 @@ BorrowSanitizer 填补了 Miri 无法覆盖的**多语言场景**：当 Rust 代
 ---
 
 ## 四、2026 目标与进展
+
+本节从目标 与 时间线 两个层面剖析「2026 目标与进展」。
 
 ### 4.1 目标
 

@@ -92,6 +92,8 @@
 
 ## 📐 知识结构
 
+「知识结构」部分按概念定义、属性特征、关系连接、思维导图等6个方面的顺序逐层展开。
+
 ### 概念定义
 
 **算法工程实践 (Algorithm Engineering Practice)**:
@@ -189,7 +191,11 @@
 
 ## 1. 大规模系统设计
 
+本节将「大规模系统设计」分解为若干主题：海量数据处理、缓存策略与负载均衡。
+
 ### 1.1 海量数据处理
+
+本节从外部排序 (External Sorting) 与  Bloom Filter（大数据去重） 两个层面剖析「海量数据处理」。
 
 #### 外部排序 (External Sorting)
 
@@ -405,6 +411,8 @@ pub fn url_deduplication_example() {
 
 ### 1.2 缓存策略
 
+「缓存策略」部分包含 LRU Cache (多线程安全版本) 与 缓存预热与更新策略 两条主线，本节依次说明。
+
 #### LRU Cache (多线程安全版本)
 
 ```rust
@@ -617,6 +625,8 @@ impl<K: Clone + Eq + std::hash::Hash + Send + Sync + 'static, V: Clone + Send + 
 
 ### 1.3 负载均衡
 
+「负载均衡」部分的核心主题是一致性哈希负载均衡，本节展开说明。
+
 #### 一致性哈希负载均衡
 
 ```rust
@@ -733,7 +743,11 @@ impl WeightedRoundRobinBalancer {
 
 ## 2. 性能调优实战
 
+「性能调优实战」涉及 CPU 优化、内存优化与I/O 优化，本节逐一说明其要点。
+
 ### 2.1 CPU 优化
+
+本节从 SIMD 优化 与 缓存友好的数据布局 两个层面剖析「CPU 优化」。
 
 #### SIMD 优化
 
@@ -842,6 +856,8 @@ pub fn update_particles_soa(particles: &mut ParticlesSOA, dt: f32) {
 ```
 
 ### 2.2 内存优化
+
+本节围绕「内存优化」展开，覆盖对象池 与 内存映射文件 (mmap) 两个方面。
 
 #### 对象池
 
@@ -986,6 +1002,8 @@ pub fn mmap_large_file_example() -> std::io::Result<()> {
 
 ### 2.3 I/O 优化
 
+本节专门讨论「I/O 优化」下的异步批量写入。
+
 #### 异步批量写入
 
 ```rust
@@ -1048,7 +1066,11 @@ pub async fn batch_write_example() {
 
 ## 3. 算法可靠性
 
+「算法可靠性」部分按容错设计、降级策略与监控与告警的顺序逐层展开。
+
 ### 3.1 容错设计
+
+本节聚焦「容错设计」，核心内容为重试机制。
 
 #### 重试机制
 
@@ -1343,7 +1365,11 @@ pub struct MetricsStats {
 
 ## 4. 代码质量
 
+本节将「代码质量」分解为若干主题：算法设计模式、单元测试与性能基准测试。
+
 ### 4.1 算法设计模式
+
+本节专门讨论「算法设计模式」下的策略模式。
 
 #### 策略模式
 
@@ -1412,6 +1438,8 @@ pub fn strategy_pattern_example() {
 
 ### 4.2 单元测试
 
+「单元测试」部分的核心主题是参数化测试，本节展开说明。
+
 #### 参数化测试
 
 ```rust
@@ -1447,6 +1475,8 @@ mod tests {
 ```
 
 ### 4.3 性能基准测试
+
+「性能基准测试」部分的核心主题是 Criterion 基准测试，本节展开说明。
 
 #### Criterion 基准测试
 
@@ -1484,6 +1514,8 @@ criterion_main!(benches);
 ---
 
 ## 5. 生产环境最佳实践
+
+「生产环境最佳实践」部分按配置管理、灰度发布与故障恢复的顺序逐层展开。
 
 ### 5.1 配置管理
 
@@ -1660,6 +1692,8 @@ impl<T: Clone + Serialize + for<'de> Deserialize<'de>> SnapshotManager<T> {
 ---
 
 ## 6. 实战案例
+
+「实战案例」部分按推荐系统、实时排行榜与分布式限流的顺序逐层展开。
 
 ### 6.1 推荐系统
 
@@ -1885,6 +1919,8 @@ pub async fn rate_limited_api(limiter: &TokenBucket, request: String) -> Result<
 ---
 
 ## 7. 参考资料
+
+本节将「参考资料」分解为若干主题：教材、性能优化与生产实践。
 
 ### 教材
 

@@ -202,6 +202,8 @@
 
 ## 一、权威定义（Definition）
 
+「权威定义（Definition）」涉及 Wikipedia 定义、TRPL 官方定义与形式化定义，本节逐一说明其要点。
+
 ### 1.1 Wikipedia 定义
 
 > **[Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system)** In computer programming, a type system is a logical system comprising a set of rules that assigns a property called a type to every term.
@@ -2199,6 +2201,8 @@ Rust 名义类型的刚性:
 
 #### 11.7.8 反命题与边界分析
 
+本节将「反命题与边界分析」分解为若干主题：命题 1: "名义类型阻止了所有非预期的类型等价"、命题 2: "结构类型系统可以解决孤儿规则（Orphan Rule）的…与命题 3: "新类型模式（Newtype）具有零运行时成本"。
+
 ##### 命题 1: "名义类型阻止了所有非预期的类型等价"
 
 ```mermaid
@@ -2379,6 +2383,8 @@ let p: &Point = &Point(1, 2);
 
 ## 十二、待补充与演进方向（TODOs）
 
+理解「待补充与演进方向（TODOs）」需要把握补充：`impl Trait` 与 `dyn Trait` 的类型论差异、补充：`!` (Never type) 的形式化分析与控制流图、补充：Const Generics 的类型系统扩展、补充：Type Inference 的 HM 算法与 Rust 扩展等8个方面，本节依次展开。
+
 ### 补充：`impl Trait` 与 `dyn Trait` 的类型论差异
 
 > **定义**：`impl Trait` 是**存在量化类型**的语法糖，表示“某个实现了该 trait 的具体类型”，编译器在单态化时知道具体类型；`dyn Trait` 是**trait 对象**，通过 vtable 实现动态分发，运行时只知道 trait 接口而不知道具体类型。
@@ -2553,6 +2559,8 @@ let m = Meters(3.0);
 
 ## 十二、边界测试：类型系统的编译错误
 
+本节将「边界测试：类型系统的编译错误」分解为若干主题：边界测试：类型不匹配（编译错误）、边界测试：泛型约束不满足（编译错误）、边界测试：match 非穷尽（编译错误）、边界测试：impl Trait 在参数位置与返回位置的差异（编译错误）等6个方面。
+
 ### 12.1 边界测试：类型不匹配（编译错误）
 
 ```rust,compile_fail
@@ -2710,6 +2718,8 @@ let pair: (i32, String) = (42, diverge());  // ! 强制为 String
 ---
 
 ## 嵌入式测验（Embedded Quiz）
+
+「嵌入式测验（Embedded Quiz）」部分按测验 1：结构体与元组结构体（理解层）、测验 2：枚举与模式匹配穷尽性（应用层）、测验 3：Option 与 unwrap（分析层）、测验 4：类型推断边界（应用层）等5个方面的顺序逐层展开。
 
 ### 测验 1：结构体与元组结构体（理解层）
 
@@ -2882,6 +2892,8 @@ fn main() {
 ---
 
 ## 十二、补充：运算符重载（Operator Overloading）
+
+「补充：运算符重载（Operator Overloading）」涉及核心命题、C++ 自由运算符重载、Rust 的 `std::ops` Trait 约束、常用 `std::ops` trait等7个方面，本节逐一说明其要点。
 
 ### 12.1 核心命题
 
@@ -3132,6 +3144,8 @@ error[E0369]: cannot add `Foo` to `Foo`
 
 ## 📐 知识结构
 
+本节将「知识结构」分解为若干主题：概念定义、属性特征、关系连接与思维导图。
+
 ### 概念定义
 
 **复合类型指南 (Compound Types Guide)**:
@@ -3218,6 +3232,8 @@ error[E0369]: cannot add `Foo` to `Foo`
 
 ## 1. 复合类型概述
 
+本节围绕「复合类型概述」展开，覆盖什么是复合类型 与  Rust 复合类型分类 两个方面。
+
 ### 1.1 什么是复合类型
 
 **复合类型** (Compound Types) 是将多个值组合成一个类型的数据结构。
@@ -3257,6 +3273,8 @@ Rust 复合类型
 结构体是 Rust 中最常用的复合类型，用于创建自定义的数据类型。
 
 ### 2.1 命名字段结构体
+
+本节聚焦「命名字段结构体」，核心内容为定义和创建。
 
 #### 定义和创建
 

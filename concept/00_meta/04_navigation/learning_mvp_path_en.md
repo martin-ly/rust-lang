@@ -41,6 +41,8 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 ## Week 1: Rust Fundamentals & Ownership (12h)
 
+本节将「Week 1: Rust Fundamentals & O…」分解为若干主题： Day 1: Hello World + Toolchain (2h)、Day 2: Ownership & Move Semantics (…、Day 3: Borrowing & References (2h)、Day 4: Basic Types & Collections (2…等5个方面。
+
 ### Day 1: Hello World + Toolchain (2h)
 
 | Task | Time | Verification |
@@ -99,6 +101,8 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 ## Week 2: Type System & Error Handling (12h)
 
+本节从 Day 7: Structs, Enums & Pattern Mat…、Day 8: Traits & Generics Intro (2h)、Day 9: Error Handling (2h)、Day 10: Modules & Cargo (2h)等5个方面切入，剖析「Week 2: Type System & Error H…」的核心内容。
+
 ### Day 7: Structs, Enums & Pattern Matching (2h)
 
 | Task | Time | Verification |
@@ -155,6 +159,8 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 ---
 
 ## Week 3: Concurrency & CLI Project (12h)
+
+理解「Week 3: Concurrency & CLI Pro…」需要把握 Day 13: Threads & Shared State (2h)、Day 14: Channels & Message Passing…、Day 15: Async/Await Intro (2h) [Rec…、Day 16: Building a CLI Tool (2h)等5个方面，本节依次展开。
 
 ### Day 13: Threads & Shared State (2h)
 
@@ -213,6 +219,8 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 ---
 
 ## Resource Index
+
+本节从 Required Reading、Cheat Sheets与Exercise Sources切入，剖析「Resource Index」的核心内容。
 
 ### Required Reading
 

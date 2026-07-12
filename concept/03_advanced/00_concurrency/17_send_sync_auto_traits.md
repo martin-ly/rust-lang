@@ -73,6 +73,8 @@ pub unsafe auto trait Sync { /* 无方法，纯标记 */ }
 
 ## 二、形式化契约（Formal Contract）
 
+理解「形式化契约（Formal Contract）」需要把握 Send 契约、Sync 契约 ⟺ &T: Send与契约与线程 API 的连接点，本节依次展开。
+
 ### 2.1 Send 契约
 
 > **Send 契约**：`T: Send` ⟹ 将 `T` 的**所有权（Ownership）转移**到另一个线程是安全的。
@@ -143,6 +145,8 @@ fn sync_contract_in_action() {
 `'static` 约束与 Send/Sync 正交：它排除"捕获了栈引用的闭包逃到可能活得更久的线程"（scoped threads 用 `scope` 的生命周期（Lifetimes）担保放宽此约束）。
 
 ## 三、Auto Trait 机制：自动推导与负实现
+
+「Auto Trait 机制：自动推导与负实现」涉及结构化推导规则、负实现（Negative Impl）：显式 `!Send` / `!S…、stable 上的 opt-out 惯用法：`PhantomData`与orphan 规则边界，本节逐一说明其要点。
 
 ### 3.1 结构化推导规则
 
@@ -327,6 +331,8 @@ fn assert_send_dyn() {
 > 判定心法：先问"**共享引用能造成什么并发访问**"（决定 Sync），再问"**转移后析构/独占使用是否依赖线程**"（决定 Send）。
 
 ## 六、反例：编译期拒绝与 unsafe 手动 impl 对照
+
+「反例：编译期拒绝与 unsafe 手动 impl 对照」部分按反例 1：`Rc` 跨线程（编译期拒绝 E0277）、反例 2：`Arc<Cell<T>>` 共享可变（编译期拒绝 E027…与反例 3：unsafe 手动 impl 的正确/错误对照的顺序逐层展开。
 
 ### 反例 1：`Rc` 跨线程（编译期拒绝 E0277）
 

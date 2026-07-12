@@ -78,6 +78,8 @@
 
 ## 一、权威定义与核心概念
 
+「权威定义与核心概念」部分按 BTreeMap/BTreeSet：有序关联容器、VecDeque：循环缓冲双端队列、BinaryHeap：二叉堆优先队列与HashMap 自定义 Hasher的顺序逐层展开。
+
 ### 1.1 BTreeMap/BTreeSet：有序关联容器
 
 > **[Wikipedia: B-tree](https://en.wikipedia.org/wiki/B_tree)** A B-tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.
@@ -230,6 +232,8 @@ Rust HashMap 的 Hasher 生态:
 ---
 
 ## 二、内存布局与性能特征
+
+「内存布局与性能特征」部分按 BTreeMap 节点布局、VecDeque 环形缓冲区布局、BinaryHeap 数组表示与自定义 Hasher 的性能影响的顺序逐层展开。
 
 ### 2.1 BTreeMap 节点布局
 
@@ -406,6 +410,8 @@ Hasher 性能基准对比（64-bit key，单线程）:
 
 ## 四、思维导图（Mermaid）
 
+本节围绕「思维导图（Mermaid）」展开，覆盖集合选型决策树 与 内存布局对比图 两个方面。
+
 ### 4.1 集合选型决策树
 
 ```mermaid
@@ -487,6 +493,8 @@ graph LR
 ---
 
 ## 五、反命题与边界分析
+
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
 
 ### 5.1 反命题树
 
@@ -696,6 +704,8 @@ fn main() {
 
 ## 十二、边界测试：高级集合的编译错误
 
+「边界测试：高级集合的编译错误」部分按边界测试：`BTreeMap` 键未实现 `Ord`（编译错误）、边界测试：`VecDeque` 容量与索引的环绕（逻辑错误）、边界测试：`HashMap` 的 `Entry` API 与借用冲突（…、边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错…等6个方面的顺序逐层展开。
+
 ### 12.1 边界测试：`BTreeMap` 键未实现 `Ord`（编译错误）
 
 ```rust,compile_fail
@@ -904,6 +914,8 @@ fn main() {
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：`BTreeMap` 与 `HashMap` 在键的遍历顺序…、测验 2：`VecDeque` 相比 `Vec` 在哪些操作上具有明显…、测验 3：`BinaryHeap<T>` 默认是大顶堆还是小顶堆？如果…、测验 4：`HashMap` 的键类型必须实现哪些 trait？如果自…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：`BTreeMap` 与 `HashMap` 在键的遍历顺序上有什么本质区别？（理解层）
 

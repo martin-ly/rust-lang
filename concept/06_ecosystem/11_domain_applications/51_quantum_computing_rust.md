@@ -72,6 +72,8 @@
 
 ## 一、权威定义（Definition）
 
+「权威定义（Definition）」涉及量子比特与量子态、量子叠加与测量、量子纠缠与贝尔态与量子门与量子电路，本节逐一说明其要点。
+
 ### 1.1 量子比特与量子态
 
 > **[Nielsen & Chuang](https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE)** 量子计算的基本信息单元是**量子比特**（qubit），与经典比特只能处于 0 或 1 不同，qubit 可以处于这两个基态的任意线性组合。
@@ -195,6 +197,8 @@
 ---
 
 ## 三、Rust 量子计算生态
+
+本节将「Rust 量子计算生态」分解为若干主题： roqoqo / qoqo：量子电路表示工具包、rustqip：图构建式量子模拟、q1tsim、qasmsim、rusq 等模拟器、与 Python 量子生态的交互等5个方面。
 
 ### 3.1 roqoqo / qoqo：量子电路表示工具包
 
@@ -326,6 +330,8 @@ Rust ↔ Python 量子生态的交互路径:
 ---
 
 ## 四、经典硬件上的量子模拟
+
+「经典硬件上的量子模拟」涉及态向量模拟、张量网络收缩与Rust 性能优势：SIMD 与并行化，本节逐一说明其要点。
 
 ### 4.1 态向量模拟
 
@@ -505,6 +511,8 @@ fn main() {
 
 ## 五、量子安全密码学
 
+「量子安全密码学」部分按 NIST PQC 标准与迁移时间线、CRYSTALS-Kyber / Dilithium 原理、pqclean-rust、pqcrypto、liboqs-rust与rustls 的后量子 TLS 实践的顺序逐层展开。
+
 ### 5.1 NIST PQC 标准与迁移时间线
 
 > **[NIST PQC Standardization](https://csrc.nist.gov/projects/post-quantum-cryptography)** NIST 于 2024 年 8 月正式发布了首批后量子密码学标准，标志着全球密码学迁移进入执行阶段：
@@ -647,6 +655,8 @@ rustls 后量子 TLS 状态:
 
 ## 六、量子-经典混合工作流
 
+本节从变分量子算法（VQE / QAOA） 与 参数移位与梯度计算 两个层面剖析「量子-经典混合工作流」。
+
 ### 6.1 变分量子算法（VQE / QAOA）
 
 > **[Peruzzo et al. 2014 — VQE](https://arxiv.org/abs/1304.3061)** 和 **[Farhi, Goldstone, Gutmann 2014 — QAOA](https://arxiv.org/abs/1411.4028)** 是当前**含噪中等规模量子**（NISQ）时代最有实用前景的算法。
@@ -728,6 +738,8 @@ Rust 在量子-经典混合工作流中的优势:
 
 ## 七、反命题与边界
 
+「反命题与边界」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+
 ### 7.1 反命题树
 
 ```text
@@ -790,6 +802,8 @@ Rust 在量子-经典混合工作流中的优势:
 ---
 
 ## 八、边界测试
+
+理解「边界测试」需要把握边界测试：尝试克隆量子态（不可克隆定理违反）、边界测试：在笔记本上模拟 30 量子比特（内存爆炸）与边界测试：使用非厄米算符进行量子演化（类型/逻辑错误），本节依次展开。
 
 ### 8.1 边界测试：尝试克隆量子态（不可克隆定理违反）
 
@@ -916,6 +930,8 @@ fn main() {
 - **定理**: Quantum Computing in Rust（量子计算与 Rust） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节从测验 1：量子计算中的"量子比特"（Qubit）与经典比特有什么根本区…、测验 2：Rust 在量子计算生态中目前主要扮演什么角色？（理解层）、测验 3：什么是"量子纠错"（Quantum Error Correc…、测验 4：QIR（Quantum Intermediate Repre…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：量子计算中的"量子比特"（Qubit）与经典比特有什么根本区别？（理解层）
 

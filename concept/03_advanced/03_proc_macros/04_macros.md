@@ -56,6 +56,8 @@
 
 ## 一、权威定义（Definition）
 
+本节围绕「权威定义（Definition）」展开，依次讨论 Wikipedia 权威定义、TRPL 官方定义与形式化定义。
+
 ### 1.1 Wikipedia 权威定义
 
 > **[Wikipedia: Macro (computer science)](https://en.wikipedia.org/wiki/Macro_(computer_science))** A macro (short for "macroinstruction") is a rule or pattern that specifies how a certain input sequence should be mapped to a replacement output sequence according to a defined procedure. The mapping process that instantiates a macro use into a specific sequence is known as macro expansion.
@@ -90,6 +92,8 @@ Rust 宏 hygiene:
 <!-- 层级一致性（Coherence）: L2 概念分类矩阵 — 横向对比四种宏（Macro）类型，纵向对比多语言元编程机制 -->
 
 ## 二、概念属性矩阵（Attribute Matrix）
+
+理解「概念属性矩阵（Attribute Matrix）」需要把握宏类型对比矩阵、Rust 宏 vs 其他语言元编程对比与宏展开在编译管道中的位置，本节依次展开。
 
 ### 2.1 宏类型对比矩阵
 
@@ -529,6 +533,8 @@ graph TD
 
 ## 七、示例与反例（Examples & Counter-examples）
 
+本节从正确示例：`macro_rules!` 声明宏 与 正确示例：Derive 过程宏框架 两个层面剖析「示例与反例（Examples & Counter-exam…」。
+
 ### 7.1 正确示例：`macro_rules!` 声明宏
 
 ```rust
@@ -597,6 +603,8 @@ macro_rules! infinite {
 
 ```
 ### 7.5 边界极限测试
+
+「边界极限测试」部分的核心主题是边界测试 1：宏展开后的错误信息定位，本节展开说明。
 
 #### 边界测试 1：宏展开后的错误信息定位
 
@@ -674,6 +682,8 @@ macro_rules! break_label {
 
 ```
 ### 7.6 反命题与边界分析补充
+
+本节从命题: "宏生成代码总是安全的" 与 命题: "卫生宏完全防止命名冲突" 两个层面剖析「反命题与边界分析补充」。
 
 #### 命题: "宏生成代码总是安全的"
 
@@ -2274,6 +2284,8 @@ macro_rules! conditional_feature {
 ---
 
 ## 嵌入式测验
+
+理解「嵌入式测验」需要把握测验 1：声明宏 vs 过程宏（记忆层）、测验 2：`macro_rules!` 模式匹配（理解层）、测验 3：派生宏实战（应用层）与测验 4：宏卫生性（分析层），本节依次展开。
 
 ### 测验 1：声明宏 vs 过程宏（记忆层）
 

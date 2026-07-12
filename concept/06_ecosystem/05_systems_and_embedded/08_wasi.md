@@ -121,6 +121,8 @@ graph TD
 
 ## 三、WASI 架构与能力安全
 
+本节从 WASI 的三层架构 与 能力安全模型 两个层面剖析「WASI 架构与能力安全」。
+
 ### 3.1 WASI 的三层架构
 >
 
@@ -277,6 +279,8 @@ World = 导入接口集 + 导出接口集
 ---
 
 ## 五、Rust `wasm32-wasip1` 或 `wasm32-wasip2` 目标
+
+本节从 `no_std` + `wasm32` 的约束与模式 与 错误处理跨边界 两个层面剖析「Rust `wasm32-wasip1` 或 `wasm3…」。
 
 ### 5.1 `no_std` + `wasm32` 的约束与模式
 >
@@ -572,6 +576,8 @@ fn main() {
 - **定理**: WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：WASI（WebAssembly System Interf…、测验 2：WASI 的"能力安全"（Capability-Based…、测验 3：Rust 的 `wasm32-wasip1` target…、测验 4：Component Model 中的 `wit-bindge…等5个方面。
 
 ### 测验 1：WASI（WebAssembly System Interface）的核心目标是什么？（理解层）
 
