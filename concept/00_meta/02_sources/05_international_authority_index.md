@@ -101,6 +101,7 @@
 | Tokio Scheduler Internals（Carl Lerche, 2019） | <https://tokio.rs/blog/2019-10-scheduler> |
 | futures-rs 官方文档 | <https://docs.rs/futures/latest/futures/> |
 | Async WG 路线图（async-fundamentals-initiative） | <https://rust-lang.github.io/async-fundamentals-initiative/roadmap.html> |
+| Writing an OS in Rust — Async/Await 章（phil-opp，深度实现源：手写 executor/Waker） | <https://os.phil-opp.com/async-await/> |
 | async-std | <https://async.rs/> |
 | Axum | <https://docs.rs/axum/latest/axum/> |
 | Actix-web | <https://actix.rs/> |

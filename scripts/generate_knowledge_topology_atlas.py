@@ -888,7 +888,8 @@ def build_example_counterexample_index(concepts: list[dict[str, Any]]) -> str:
     lines = [
         "## 七、数据驱动索引：示例/反例覆盖全量概念（自动生成）",
         "",
-        "> 以下来自 `extract_concept_topology.py` 的表征信号抽取：概念页含「示例/反例/陷阱/边界测试/误用/易错」类章节，"
+        "> 以下来自 `extract_concept_topology.py` 的表征信号抽取：概念页含「示例/反例/陷阱/边界测试/误用/易错」类章节"
+        "（`##`–`####` 级标题，含「⚠️ 反例与陷阱」「### N.N 反例」等深层小节），"
         "或含 `compile_fail` 编译反例代码块，即收录。每行仅给出入口与信号，正文以权威页为准。",
         "",
     ]
@@ -922,7 +923,8 @@ def build_scenario_decision_index(concepts: list[dict[str, Any]]) -> str:
     lines = [
         "## 数据驱动索引：场景/决策表征覆盖全量概念（自动生成）",
         "",
-        "> 以下来自 `extract_concept_topology.py` 的表征信号抽取：概念页含「决策树/判定树/选型/判断推理/何时用/场景」类章节，"
+        "> 以下来自 `extract_concept_topology.py` 的表征信号抽取：概念页含「决策树/判定树/选型/判断推理/何时用/场景」类章节"
+        "（`##`–`####` 级标题，含判定表/选型矩阵等深层小节），"
         "或含带菱形判定节点的 mermaid 图，即收录。每行仅给出入口与信号，决策正文以权威页为准。",
         "",
     ]
@@ -955,7 +957,8 @@ def build_reasoning_judgment_index(concepts: list[dict[str, Any]]) -> str:
     lines = [
         "## 数据驱动索引：推理/判定表征覆盖全量概念（自动生成）",
         "",
-        "> 以下来自 `extract_concept_topology.py` 的表征信号抽取：概念页含「核心推理链/定理链/反命题树/证明树/逆向推理」类章节，"
+        "> 以下来自 `extract_concept_topology.py` 的表征信号抽取：概念页含「核心推理链/定理链/反命题(树)/证明树/逆向推理」类章节"
+        "（`##`–`####` 级标题，含「反命题与边界分析」「### 核心推理链」等深层小节），"
         "或头部有定理链元数据，即收录。每行仅给出入口与信号，推理正文以权威页为准。",
         "",
     ]

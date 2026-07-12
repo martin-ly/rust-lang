@@ -207,4 +207,103 @@
 
 ---
 
-> **变更记录**: 2026-07-12 新建（W3-b：L6 数据库/存储 quiz，10 题：单选 3 / 代码阅读 3 / 多选 2 / 判断 2；难度 🟢2 / 🟡5 / 🔴3）。
+## 三、分布式共识与 CRDT（W3-b 扩展）
+
+### Q11. 🟢【单选】按 [分布式共识](../06_data_and_distributed/06_distributed_consensus.md)，Raft 相对 Paxos 的核心设计目标是？
+
+- A. 更高的拜占庭容错能力
+- B. 可理解性（understandability）：通过强 leader、日志复制与成员变更的分解降低实现与推理难度
+- C. 完全消除网络分区的影响
+- D. 支持无领导者的完全对等写入
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：B**
+
+**解析**：Raft（Ongaro & Ousterhout 2014）的论文目标就是可理解性：把共识分解为 leader 选举、日志复制、安全性与成员变更几个相对独立的子问题。A 错——Raft 是 CFT（崩溃容错）算法，不防拜占庭节点（那是 PBFT/HotStuff 的领域）；C 违反 CAP 直觉，分区下一致性以可用性为代价保持；D 与 Raft 的强 leader 模型相反。Rust 实现代表为 raft-rs。
+
+</details>
+
+---
+
+### Q12. 🟡 状态基 CRDT（CvRDT）的合并函数 `m` 必须满足哪组代数性质？
+
+```rust,ignore
+// 伪代码：CvRDT 的 merge 约束
+trait CvRdt {
+    fn merge(&self, other: &Self) -> Self;
+}
+// merge(a, b) 必须使 (S, merge) 构成联结半格
+```
+
+| 选项 | 判断 |
+|:---|:---|
+| A | 只需结合律 |
+| B | 交换律 + 结合律 + 幂等律（构成 join semilattice），保证任意顺序/重复合并收敛 |
+| C | 分配律 + 消去律 |
+| D | 无需任何代数性质，靠时间戳裁决即可 |
+
+<details>
+<summary>💡 点击展开答案与解析</summary>
+
+**答案**：B。
+
+**解析**：按 [CRDT 类型谱系](../06_data_and_distributed/08_crdt_type_zoo.md) 的合并格形式化（Shapiro 2011）：状态基 CRDT 的 `merge` 必须满足交换律、结合律、幂等律，使状态集合构成**联结半格（join semilattice）**——三律共同保证副本以任意顺序、任意次数合并都收敛到同一状态（强最终一致性）。D 描述的 LWW 时间戳裁决只是半格的一种具体实例（取 max），不是对性质的豁免。
+
+</details>
+
+---
+
+### Q13. 🟡【多选】关于向量时钟（Fidge/Mattern 算法），下列说法正确的有？（选出所有正确项）
+
+- A. 每个进程维护一个长度为 N 的计数器向量，本地事件自增本地分量
+- B. 两个事件的向量时钟不可比较（逐分量互有大小）时，二者是并发的
+- C. Lamport 标量时钟与向量时钟表达能力完全等价
+- D. 向量时钟可以精确检测因果序 `happens-before`，而标量时钟只能给出与因果序一致的偏序近似
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：A、B、D**
+
+**解析**：按 [因果序与向量时钟](../06_data_and_distributed/09_causal_ordering_vector_clocks.md)：向量时钟每进程维护 N 维向量、本地事件自增、消息携带并逐分量取 max（A）；两时钟逐分量比较互有大小即判定并发（B）；D 正确——向量时钟精确刻画 Lamport 1978 定义的 happens-before 偏序，标量时钟只能保持"因果 ⟹ 序号小"的单向蕴含。C 错：标量时钟无法区分并发与因果，表达能力严格弱于向量时钟。
+
+</details>
+
+---
+
+### Q14. 🔴【判断】协作编辑场景（如类 Google Docs）通常选用操作基 CRDT（CmRDT）实现（如 yrs），因为文本序列的并发插入用状态基合并难以天然收敛。（对 / 错）
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：对**
+
+**解析**：按 [CRDT 类型谱系](../06_data_and_distributed/08_crdt_type_zoo.md) §5.2，yrs（y-crdt 的 Rust 实现）是协作编辑的 CmRDT 引擎：操作基 CRDT 通过可交换的操作传播（在可靠、至多一次、因果序投递的通道假设下）实现收敛，适合表达文本/序列上的并发插入删除；状态基合并需要把全量序列状态放进半格，工程上不可行。两类 CRDT 在表达能力上等价，但工程适配场景不同。
+
+</details>
+
+---
+
+### Q15. 🔴 某数据平台同时评估流处理与共识组件。按权威页口径，下列哪组"场景—组件"匹配成立？
+
+| 选项 | 匹配 |
+|:---|:---|
+| A | 需要跨节点就元数据达成一致 ⟹ 用流处理引擎投票 |
+| B | 需要日志复制的崩溃容错共识 ⟹ raft-rs（Raft）；需要拜占庭容错 ⟹ PBFT/HotStuff 系实现 |
+| C | 需要最终一致的离线协同数据结构 ⟹ 必须上共识算法，CRDT 不收敛 |
+| D | 流式增量 SQL 视图 ⟹ 任何 OLTP 数据库都天然支持 |
+
+<details>
+<summary>💡 点击展开答案与解析</summary>
+
+**答案**：B。
+
+**解析**：B 与 [分布式共识](../06_data_and_distributed/06_distributed_consensus.md) 的算法谱系一致：Raft/Paxos 属 CFT（崩溃容错），PBFT/HotStuff 属 BFT（拜占庭容错），选型按故障模型分界。A 职责错位——共识是独立问题；C 错——CRDT 无需共识即可强最终一致（Q12 的半格性质），共识只在需要全序广播时才引入；D 与 [数据库系统](../06_data_and_distributed/04_database_systems.md) 中 Materialize 的增量视图维护定位矛盾——那是流式 SQL 引擎的专门能力。
+
+</details>
+
+---
+
+> **变更记录**: 2026-07-12 新建（W3-b：L6 数据库/存储 quiz，10 题：单选 3 / 代码阅读 3 / 多选 2 / 判断 2；难度 🟢2 / 🟡5 / 🔴3）；2026-07-13 扩展至 15 题（+5 题「分布式共识与 CRDT」：Raft 设计目标、CvRDT 半格、向量时钟、CmRDT 协作编辑、共识选型；难度 🟢3 / 🟡7 / 🔴5）。

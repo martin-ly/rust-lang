@@ -376,7 +376,7 @@ standalone_quizzes:
   - concept/06_ecosystem/07_security_and_cryptography/02_security_cryptography.md
   - concept/06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md
   - concept/06_ecosystem/09_testing_and_quality/01_testing_strategies.md
-  questions: 10
+  questions: 15
   meta_questions: 0
   question_types:
   - code_reading
@@ -384,11 +384,35 @@ standalone_quizzes:
   - single_choice
   - true_false
   difficulty:
-    basic: 2
-    intermediate: 5
-    expert: 3
+    basic: 3
+    intermediate: 7
+    expert: 5
   quiz_to_concept: true
   concept_to_quiz_backlink: true
+- path: concept/06_ecosystem/13_quizzes/04_quiz_domain_applications.md
+  layer: L6
+  topic: 领域应用生态（区块链/Wasm、游戏 ECS、ML 与数据科学、安全关键 AUTOSAR、量子计算、算法竞赛）
+  concept_pages:
+  - concept/06_ecosystem/11_domain_applications/01_blockchain.md
+  - concept/06_ecosystem/11_domain_applications/03_webassembly.md
+  - concept/06_ecosystem/11_domain_applications/02_game_ecs.md
+  - concept/06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md
+  - concept/06_ecosystem/11_domain_applications/22_autosar_and_rust.md
+  - concept/06_ecosystem/11_domain_applications/16_quantum_computing_rust.md
+  - concept/06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md
+  questions: 15
+  meta_questions: 0
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 3
+    intermediate: 7
+    expert: 5
+  quiz_to_concept: true
+  concept_to_quiz_backlink: false
 embedded_quizzes:
   description: concept/ 页面内嵌入式测验（### 测验 N + <details> 答题块），按页聚合
   pages: 298

@@ -779,6 +779,9 @@ fn elect(state: Arc<Mutex<NodeState>>) {
 - [云原生](../04_web_and_networking/02_cloud_native.md) — Kubernetes、服务网格、可观测性
 - [网络协议](../04_web_and_networking/07_network_protocols.md) — QUIC、gRPC、序列化
 - [并发编程](../../03_advanced/00_concurrency/01_concurrency.md) — 原子操作（Atomic Operations）、内存顺序、锁
+- [因果序与向量时钟](09_causal_ordering_vector_clocks.md) — Lamport 偏序、向量时钟：共识「全序广播」抹平的正是这个偏序
+- [CRDT 谱系](08_crdt_type_zoo.md) — 无共识路线：用合并格代数替代全序达成收敛
+- [L4 线性化与一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) — 线性化的形式定义：Raft 在多机实现的对象级语义
 - [性能优化](../10_performance/01_performance_optimization.md) — 批处理、流水线、零拷贝
 - [安全与密码学](../07_security_and_cryptography/02_security_cryptography.md) — 数字签名、阈值密码学
 

@@ -483,8 +483,6 @@ Rust Wasm 工具链:
 
 ---
 
-
-
 ## 十、边界测试：WebAssembly 的编译错误
 
 本节围绕「边界测试：WebAssembly 的编译错误」展开，依次讨论边界测试：`wasm32` 目标的标准库限制（编译错误）、边界测试：`wasm-bindgen` 的类型映射（编译错误）、边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）、边界测试：`wasm32-unknown-unknown` 的 pan…等5个方面。

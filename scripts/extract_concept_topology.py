@@ -262,7 +262,7 @@ def extract_sections(content: str) -> dict[str, list[str]]:
         "定理推理树": "theorem_tree",
         "推理链": "theorem_tree",
         "定理链": "theorem_tree",
-        "反命题树": "theorem_tree",
+        "反命题": "theorem_tree",
         "证明树": "theorem_tree",
         "逆向推理": "theorem_tree",
         "反向推理": "theorem_tree",
@@ -275,16 +275,35 @@ def extract_sections(content: str) -> dict[str, list[str]]:
         "知识来源关系": "source_relations",
     }
 
+    def match_keywords(title: str, body: str) -> None:
+        for kw, key in keyword_map.items():
+            if kw in title:
+                sections[key].append({"title": title, "body": body.strip()})
+
     # Split by level-2 sections
     section_pattern = re.compile(r"^##\s+(.+)$", re.MULTILINE)
+    deep_heading_re = re.compile(r"^(#{3,4})\s+(.+)$", re.MULTILINE)
     parts = section_pattern.split(content)
     if len(parts) > 1:
         for i in range(1, len(parts), 2):
             title = parts[i].strip()
             body = parts[i + 1] if i + 1 < len(parts) else ""
-            for kw, key in keyword_map.items():
-                if kw in title:
-                    sections[key].append({"title": title, "body": body.strip()})
+            # ## 级标题：保持原有口径（body = 整节正文，供 related_links 等全文抽取）
+            match_keywords(title, body)
+            # ###/#### 级子标题：概念页普遍把「### 4.2 反例」「### 编译错误示例」
+            # 「### N.N 推理链」等真实资产节放在 ## 节之下；仅按 ## 切分会漏掉
+            # 父节标题不含关键词的页面（实测 h3 反例/陷阱标题 158 个，其中 39 页
+            # 父 ## 不含示例类关键词）。子节 body 取到下一个同级或更高级标题为止。
+            heads = list(deep_heading_re.finditer(body))
+            for j, hm in enumerate(heads):
+                sub_title = hm.group(2).strip()
+                start = hm.end()
+                end = len(body)
+                for nm in deep_heading_re.finditer(body, start):
+                    if len(nm.group(1)) <= len(hm.group(1)):
+                        end = nm.start()
+                        break
+                match_keywords(sub_title, body[start:end])
 
     return sections
 

@@ -15,18 +15,18 @@
 
 | 源层 \ 目标层 | L0 元信息层 | L1 基础概念层 | L2 进阶概念层 | L3 高级概念层 | L4 形式化理论层 | L5 对比分析层 | L6 生态工程层 | L7 前沿趋势层 |
 |---|---|---|---|---|---|---|---|---|
-| L0 元信息层 | 67 | 15 | 2 | 7 | 9 | 6 | 10 | 2 |
-| L1 基础概念层 | 39 | 155 | 61 | 36 | 8 | 4 | 18 | 3 |
-| L2 进阶概念层 | 13 | 62 | 67 | 39 | 13 | 4 | 12 | 5 |
-| L3 高级概念层 | 17 | 38 | 63 | 211 | 17 | 3 | 36 | 10 |
-| L4 形式化理论层 | 27 | 42 | 20 | 68 | 163 | 5 | 13 | 19 |
-| L5 对比分析层 | 12 | 24 | 14 | 14 | 7 | 22 | 18 | 3 |
-| L6 生态工程层 | 25 | 59 | 58 | 107 | 26 | 60 | 370 | 30 |
-| L7 前沿趋势层 | 8 | 35 | 40 | 45 | 21 | 3 | 33 | 125 |
+| L0 元信息层 | 70 | 15 | 2 | 7 | 9 | 6 | 10 | 2 |
+| L1 基础概念层 | 39 | 167 | 62 | 36 | 8 | 4 | 18 | 3 |
+| L2 进阶概念层 | 13 | 63 | 73 | 39 | 13 | 4 | 12 | 5 |
+| L3 高级概念层 | 17 | 38 | 65 | 221 | 17 | 3 | 39 | 10 |
+| L4 形式化理论层 | 27 | 43 | 20 | 74 | 176 | 9 | 17 | 19 |
+| L5 对比分析层 | 12 | 24 | 14 | 15 | 9 | 25 | 19 | 3 |
+| L6 生态工程层 | 26 | 60 | 58 | 114 | 29 | 63 | 389 | 30 |
+| L7 前沿趋势层 | 8 | 35 | 40 | 45 | 21 | 3 | 33 | 128 |
 
 ## 二、跨层关键桥接概念
 
-跨层边合计 **1388** 条（前置概念 650 · 后置概念 338 · 相关概念节 400），下表按层序展示前 160 条。
+跨层边合计 **1429** 条（前置概念 667 · 后置概念 347 · 相关概念节 415），下表按层序展示前 160 条。
 
 | 源层 | 概念 | 指向层 | 目标概念 | 依据 |
 |:---|:---|:---|:---|:---|
@@ -130,6 +130,7 @@
 | L1 基础概念层 | [Lifetimes 高级主题](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md) | L3 高级概念层 | [Async/Await](../../03_advanced/01_async/01_async.md) | 相关概念节 |
 | L1 基础概念层 | [Move 语义：C++ 与 Rust 的资源转移模型](../../01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md) | L0 元信息层 | [Rust 知识体系学习指南](../../00_meta/04_navigation/07_learning_guide.md) | 前置概念 |
 | L1 基础概念层 | [Move 语义：C++ 与 Rust 的资源转移模型](../../01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md) | L2 进阶概念层 | [构造与初始化：C++ 的构造函数 vs Rust 的结构体字面量](../../02_intermediate/00_traits/05_construction_and_initialization.md) | 后置概念 |
+| L1 基础概念层 | [Move 语义：C++ 与 Rust 的资源转移模型](../../01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md) | L2 进阶概念层 | [测验：C/C++ → Rust 基础知识对比](../../02_intermediate/09_quizzes/30_quiz_cpp_rust_foundations.md) | 相关概念节 |
 | L1 基础概念层 | [Move 语义：C++ 与 Rust 的资源转移模型](../../01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md) | L5 对比分析层 | [Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | 后置概念 |
 | L1 基础概念层 | [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) | L0 元信息层 | [方法论：思维表征与知识结构规范](../../00_meta/00_framework/methodology.md) | 相关概念节 |
 | L1 基础概念层 | [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) | L0 元信息层 | [跨层知识图谱](../../00_meta/04_navigation/04_inter_layer_map.md) | 相关概念节 |
@@ -189,7 +190,6 @@
 | L1 基础概念层 | [Use Declarations](../../01_foundation/07_modules_and_items/03_use_declarations.md) | L0 元信息层 | [Rust 核心术语英中对照表](../../00_meta/01_terminology/01_terminology_glossary.md) | 前置概念 |
 | L1 基础概念层 | [Use Declarations](../../01_foundation/07_modules_and_items/03_use_declarations.md) | L2 进阶概念层 | [Rust API 命名约定](../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md) | 后置概念 |
 | L1 基础概念层 | [Structs](../../01_foundation/07_modules_and_items/04_structs.md) | L0 元信息层 | [Rust 核心术语英中对照表](../../00_meta/01_terminology/01_terminology_glossary.md) | 前置概念 |
-| L1 基础概念层 | [Structs](../../01_foundation/07_modules_and_items/04_structs.md) | L2 进阶概念层 | [Traits](../../02_intermediate/00_traits/01_traits.md) | 后置概念 |
 
 ## 三、与现有元文件的关系
 

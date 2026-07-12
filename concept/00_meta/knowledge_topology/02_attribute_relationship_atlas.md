@@ -191,6 +191,7 @@
 | [Executor 公平性与调度：Tokio 调度器 internals](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) | L3 高级概念层 | 进阶-专家 | 专家级 | S | L3-L4 | — |
 | [Pin 投射反例集：unsafe 结构投射的 UB 目录与正确模式库](../../03_advanced/01_async/11_pin_projection_counterexamples.md) | L3 高级概念层 | 专家 | 专家级 | S | L3-L4 | — |
 | [Waker 契约深度解析：RawWakerVTable 实现与契约违反反例集](../../03_advanced/01_async/12_waker_contract_deep_dive.md) | L3 高级概念层 | 专家 | 专家级 | S | L3-L4 | — |
+| [Async Trait 对象安全：dyn 兼容解决方案谱系与选型矩阵](../../03_advanced/01_async/13_async_trait_object_safety.md) | L3 高级概念层 | 进阶-专家 | 专家级 | S | L3-L4 | — |
 | [是否需要进入 L4 形式化层？](../../03_advanced/02_unsafe/00_before_formal.md) | L3 高级概念层 | 进阶 | 综述级 | — | — | — |
 | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/01_unsafe.md) | L3 高级概念层 | 专家 | 专家级 | — | L3-L5 | — |
 | [Unsafe 边界全景](../../03_advanced/02_unsafe/02_unsafe_boundary_panorama.md) | L3 高级概念层 | 进阶-专家 | 专家级 | — | L3-L4 | N/A — 边界全景/导航性文档，形式化推导见各权威页 |
@@ -289,9 +290,13 @@
 | [名字参考](../../04_formal/05_rustc_internals/16_names_reference.md) | L4 形式化理论层 | 研究者 | 研究级 | S | L2-L4 | Source File → Module Tree → Namespace → Scope → Name Resolution |
 | [Rust Reference 附录](../../04_formal/05_rustc_internals/17_reference_appendices.md) | L4 形式化理论层 | 研究者 | 研究级 | S | L2-L4 | Grammar → Lexicon → Syntax Index → Test Summary |
 | [符号约定](../../04_formal/06_notation/01_notation.md) | L4 形式化理论层 | 研究者 | 研究级 | S | L1-L2 | Syntax → Production Rule → Rust Grammar |
+| [进程代数与 Rust 并发原语：CSP · CCS · π 演算](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md) | L4 形式化理论层 | 进阶 / 研究者 | 专家级 | — | L4-L5 | — |
+| [线性化与一致性谱系：从 Herlihy-Wing 到 Rust 无锁结构](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) | L4 形式化理论层 | 进阶 / 研究者 | 专家级 | — | L4-L5 | — |
+| [Actor 模型形式语义：从 Hewitt 公理到 Rust 生态](../../04_formal/07_concurrency_semantics/03_actor_semantics.md) | L4 形式化理论层 | 进阶 / 研究者 | 专家级 | — | L4-L5 | — |
 | [Paradigm Matrix: Multi-Language Formal Comparison](../../05_comparative/00_paradigms/01_paradigm_matrix.md) | L5 对比分析层 | 进阶 | 综述级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行](../../05_comparative/00_paradigms/02_execution_model_isomorphism.md) | L5 对比分析层 | 进阶 | 专家级 | — | L4-L6 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [C++ vs Rust：构造、运算符、RTTI、友元](../../05_comparative/00_paradigms/03_cpp_rust_surface_features.md) | L5 对比分析层 | 进阶 | 研究级 | — | L3-L5 | — |
+| [五模型定义矩阵：同步 · 并发 · 并行 · 异步 · 分布式](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) | L5 对比分析层 | 初学者 / 进阶 | 导航级 | S | L2-L5 | — |
 | [Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | L5 对比分析层 | 进阶 | 专家级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Rust vs C++：ABI、对象模型与内存布局](../../05_comparative/01_systems_languages/02_cpp_abi_object_model.md) | L5 对比分析层 | 进阶 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Rust vs Go：线性所有权 vs CSP 过程逻辑](../../05_comparative/01_systems_languages/03_rust_vs_go.md) | L5 对比分析层 | 进阶 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
@@ -374,6 +379,7 @@
 | [网络协议：QUIC/HTTP-3 与 Rust 实现](../../06_ecosystem/04_web_and_networking/07_network_protocols.md) | L6 生态工程层 | 进阶 | 综述级 | P | L3-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [高性能网络服务架构 (High-Performance Network Service Architecture)](../../06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md) | L6 生态工程层 | 进阶 | 专家级 | S | L4-L5 | — |
 | [Reactive Programming & FRP](../../06_ecosystem/04_web_and_networking/09_reactive_programming.md) | L6 生态工程层 | 进阶 | 综述级 | — | L2-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Tokio 运行时内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) | L6 生态工程层 | 进阶-专家 | 专家级 | S | L3-L4 | — |
 | [WASI & WebAssembly Component Model](../../06_ecosystem/05_systems_and_embedded/01_wasi.md) | L6 生态工程层 | 进阶 | 综述级 | — | L3-L6 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/02_cross_compilation.md) | L6 生态工程层 | 进阶 | 综述级 | A | L2-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Rust 嵌入式系统开发](../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md) | L6 生态工程层 | 进阶 | 综述级 | — | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
@@ -391,6 +397,8 @@
 | [Data Engineering](../../06_ecosystem/06_data_and_distributed/05_data_engineering.md) | L6 生态工程层 | 进阶 | 综述级 | — | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Distributed Consensus](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) | L6 生态工程层 | 进阶 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Rust 数据科学与科学计算](../../06_ecosystem/06_data_and_distributed/07_rust_for_data_science.md) | L6 生态工程层 | 研究者 | 综述级 | — | L4-L5 | — |
+| [CRDT 谱系：状态基、操作基与合并格形式化](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md) | L6 生态工程层 | 进阶 / 工程 / 研究者 | 专家级 | — | L4-L6 | — |
+| [因果序与向量时钟：Lamport 偏序的算法化](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md) | L6 生态工程层 | 进阶 / 工程 / 研究者 | 专家级 | — | L4-L6 | — |
 | [安全 实践：Rust 代码的防御性编程](../../06_ecosystem/07_security_and_cryptography/01_security_practices.md) | L6 生态工程层 | 进阶 | 专家级 | — | L3-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Security & Cryptography](../../06_ecosystem/07_security_and_cryptography/02_security_cryptography.md) | L6 生态工程层 | 进阶 | 综述级 | — | L3-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [cargo vet 与供应链审计](../../06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md) | L6 生态工程层 | 进阶 / 工程 | 专家级 | A | L3-L4 | — |
@@ -430,6 +438,8 @@
 | [C10 Networks - Tier 2: 网络基础实践](../../06_ecosystem/12_networking/05_networking_basics.md) | L6 生态工程层 | 初学者 | 综述级 | — | L2-L3 | Socket ⟹ Protocol ⟹ Application |
 | [形式化网络协议理论](../../06_ecosystem/12_networking/06_formal_network_protocol_theory.md) | L6 生态工程层 | 研究者 / 专家 | 专家级 | — | L4-L6 | — |
 | [测验：网络与异步生态](../../06_ecosystem/13_quizzes/01_quiz_networking_async_ecosystem.md) | L6 生态工程层 | 进阶 | — | — | L2-L4 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
+| [测验：数据库与存储生态](../../06_ecosystem/13_quizzes/02_quiz_database_storage.md) | L6 生态工程层 | 进阶 | — | — | L2-L4 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
+| [测验：安全与测试生态](../../06_ecosystem/13_quizzes/03_quiz_security_testing.md) | L6 生态工程层 | 进阶 | — | — | L2-L4 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
 | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Rust Editions](../../07_future/00_version_tracking/02_editions.md) | L7 前沿趋势层 | 进阶 | 参考级 | S | L2-L3 | Compiler Version → Edition → Syntax/Behavior → Migration |
 | [Rust 发布流程](../../07_future/00_version_tracking/03_rust_release_process.md) | L7 前沿趋势层 | 进阶 | 参考级 | P | L2-L4 | Nightly → Beta → Stable → Release Channel |
@@ -505,8 +515,8 @@
 
 | A/S/P | 数量 |
 |:---|:---:|
-| 未标注 | 302 |
-| S | 120 |
+| 未标注 | 309 |
+| S | 123 |
 | A | 34 |
 | P | 17 |
 | F | 10 |
@@ -516,10 +526,10 @@
 | 内容分级 | 数量 |
 |:---|:---:|
 | 综述级 | 184 |
-| 专家级 | 137 |
+| 专家级 | 144 |
 | 参考级 | 40 |
 | 实验级 | 36 |
-| 未标注 | 26 |
+| 未标注 | 28 |
 | 研究级 | 23 |
 | 元层 | 12 |
 | 基础级 | 10 |
@@ -530,6 +540,7 @@
 | 入门实践级 | 1 |
 | 进阶级 | 1 |
 | 中级 | 1 |
+| 导航级 | 1 |
 | 实践级 | 1 |
 | 形式化级 | 1 |
 
@@ -537,17 +548,17 @@
 
 | Bloom | 数量 |
 |:---|:---:|
-| L4-L5 | 116 |
+| L4-L5 | 119 |
 | L2-L3 | 79 |
-| L2-L4 | 59 |
-| L3-L4 | 49 |
+| L2-L4 | 61 |
+| L3-L4 | 51 |
 | 未标注 | 42 |
 | L3-L5 | 24 |
-| L4-L6 | 17 |
+| L4-L6 | 19 |
 | L1-L3 | 16 |
 | Meta | 11 |
 | L1-L2 | 11 |
-| L2-L5 | 8 |
+| L2-L5 | 9 |
 | L3-L6 | 8 |
 | L3 | 7 |
 | L5-L6 | 7 |

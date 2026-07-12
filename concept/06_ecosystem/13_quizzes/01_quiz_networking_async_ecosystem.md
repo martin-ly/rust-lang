@@ -223,4 +223,103 @@ enum RuntimeBinding {
 
 ---
 
-> **变更记录**: 2026-07-12 新建（W3-b：L6 网络/异步生态 quiz，10 题：单选 3 / 代码阅读 3 / 多选 2 / 判断 2；难度 🟢2 / 🟡5 / 🔴3）。
+## 四、网络安全与协议实现（W3-b 扩展）
+
+### Q11. 🟢【单选】在 Rust 异步服务中配置 TLS，按 [网络安全](../12_networking/02_network_security.md) 的实践，推荐的组件组合是？
+
+- A. `openssl` 直接 FFI 调用，自行管理证书生命周期
+- B. `rustls` + `tokio-rustls`（纯 Rust TLS 实现，装配 `TlsAcceptor`）
+- C. 关闭 TLS 改用应用层自研加密
+- D. `native-tls` 是唯一可用于生产的选择
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：B**
+
+**解析**：[网络安全](../12_networking/02_network_security.md) 的示例使用 `tokio_rustls::{TlsAcceptor, rustls}` 装配 `ServerConfig`：rustls 是纯 Rust 的 TLS 1.3（RFC 8446）实现，避免 OpenSSL C 依赖的内存安全风险。A 引入 C FFI 的 UB 面；C 违反"不要自研密码学"原则；D 错——native-tls 只是平台 TLS 的绑定选项之一，不是唯一生产选择。
+
+</details>
+
+---
+
+### Q12. 🟡 以下 TCP 服务器骨架中，`listener.accept().await` 的语义哪项正确？
+
+```rust,ignore
+let listener = TcpListener::bind("127.0.0.1:8080").await?;
+loop {
+    let (socket, addr) = listener.accept().await?;
+    tokio::spawn(async move { handle(socket).await });
+}
+```
+
+| 选项 | 判断 |
+|:---|:---|
+| A | `accept()` 是阻塞调用，会冻结整个运行时 |
+| B | `accept().await` 异步等待新连接，返回 `(TcpStream, SocketAddr)`；每连接 `tokio::spawn` 一个任务实现并发 |
+| C | `TcpListener` 一次只能持有一个连接 |
+| D | `spawn` 的任务必须运行在独立 OS 线程上 |
+
+<details>
+<summary>💡 点击展开答案与解析</summary>
+
+**答案**：B。
+
+**解析**：按 [网络编程基础](../12_networking/05_networking_basics.md)，`TcpListener::accept().await` 是异步等待——当前任务挂起但不阻塞 executor 线程；返回 `(TcpStream, SocketAddr)` 元组。`tokio::spawn` 把每连接处理交给调度器，任务默认在 work-stealing 线程池的多路复用任务中运行（D 错：不要求独立 OS 线程）。A/C 与异步 accept 语义矛盾。
+
+</details>
+
+---
+
+### Q13. 🟡【判断】WebSocket 协议在握手阶段复用 HTTP 的 Upgrade 机制，握手成功后连接切换为全双工帧协议，不再是 HTTP 语义。（对 / 错）
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：对**
+
+**解析**：按 [WebSocket 实时通信](../04_web_and_networking/06_websocket_realtime_communication.md)：WebSocket 以 HTTP `Upgrade: websocket` 握手（含 `Sec-WebSocket-Key` 挑战/响应），101 Switching Protocols 之后连接升级为独立的双向帧协议（文本/二进制/控制帧），后续消息不再经过 HTTP 请求-响应模型。Rust 生态对应 `tokio-tungstenite` 等实现。
+
+</details>
+
+---
+
+### Q14. 🔴【多选】实现自定义二进制协议时，按 [自定义协议实现](../12_networking/03_custom_protocol_implementation.md) 与网络编程实践，下列设计决策合理的有？（选出所有正确项）
+
+- A. 用长度前缀帧（length-prefix framing）界定消息边界，避免 TCP 粘包/拆包问题
+- B. 直接在 `TcpStream` 上按固定大小 `read`，假设一次读必得一条完整消息
+- C. 用 `bytes::BytesMut` 管理读写缓冲，配合 `tokio-util` 的 `Framed` + 自定义 `Decoder`/`Encoder`
+- D. 协议版本号与魔数（magic）放在帧头，便于识别错连与协议演进
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：A、C、D**
+
+**解析**：TCP 是字节流协议，不保留消息边界：长度前缀帧（A）与 `Framed` + `Decoder`/`Encoder`（C）是 Rust 生态的标准做法（`tokio-util::codec`）；帧头放版本号与魔数（D）是协议可演进与错连检测的常规工程实践。B 错：`read` 返回的字节数由内核缓冲与网络状况决定，一次读可能得到半条或多条消息——这是新手实现自定义协议最常见的正确性缺陷。
+
+</details>
+
+---
+
+### Q15. 🔴 某公网服务遭遇慢速连接攻击（Slowloris 类）。按 [网络安全](../12_networking/02_network_security.md) 的防护谱系，下列哪组措施与攻击机理对症？
+
+| 选项 | 措施组合 |
+|:---|:---|
+| A | 只加大 TLS 密钥长度 |
+| B | 连接级超时（握手/读写 deadline）+ 速率限制（rate limiting）+ 并发连接数上限 |
+| C | 改用 UDP 即可根治 |
+| D | 增大内核 backlog 到无限 |
+
+<details>
+<summary>💡 点击展开答案与解析</summary>
+
+**答案**：B。
+
+**解析**：Slowloris 类攻击的机理是以极慢速度占用连接资源，耗尽服务器的并发连接配额。对症措施是资源维度的防护：连接各阶段超时、`tower`/`governor` 类速率限制、每 IP/全局并发连接上限——这些正是网络安全页认证、速率限制与常见攻击缓解节覆盖的手段。A 与资源耗尽机理无关；C 把问题换成另一套攻击面；D 无限 backlog 反而放大资源占用。
+
+</details>
+
+---
+
+> **变更记录**: 2026-07-12 新建（W3-b：L6 网络/异步生态 quiz，10 题：单选 3 / 代码阅读 3 / 多选 2 / 判断 2；难度 🟢2 / 🟡5 / 🔴3）；2026-07-13 扩展至 15 题（+5 题「网络安全与协议实现」：rustls/TLS、异步 accept、WebSocket 握手、自定义帧协议、Slowloris 防护；难度 🟢3 / 🟡7 / 🔴5）。

@@ -90,6 +90,10 @@ mindmap
   - [反命题](#反命题)
   - [反向推理](#反向推理)
   - [过渡段](#过渡段)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：类型级 Peano 数（🟢 基础）](#测验-1类型级-peano-数-基础)
+    - [测验 2：类型级布尔与条件选择（🟡 进阶）](#测验-2类型级布尔与条件选择-进阶)
+    - [测验 3：类型级编程的边界（🔴 专家，联动「反命题」节）](#测验-3类型级编程的边界-专家联动反命题节)
 
 本章探讨 Rust 中最前沿的编程技术 - 类型级编程，将类型系统（Type System）作为一种编程语言来使用。
 
@@ -717,3 +721,76 @@ impl<T, const N: usize> Array<T, N> {
 >
 > **过渡**: 从编译期计算过渡到 typestate，可以将状态机安全性从运行时前移到编译期。
 >
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-13）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致；测验 3 与本页「反命题」节直接联动。
+
+### 测验 1：类型级 Peano 数（🟢 基础）
+
+以下类型级自然数加法实现中，`Add` 的递归结构如何工作？
+
+```rust,ignore
+trait Add<N> { type Output; }
+impl<N> Add<N> for Zero { type Output = N; }
+impl<M, N> Add<N> for Succ<M> where M: Add<N> {
+    type Output = Succ<<M as Add<N>>::Output>;
+}
+```
+
+- A. 运行时在堆上构造数轴并计算
+- B. 编译期通过 trait 递归求解关联类型：`Zero + N = N`，`Succ<M> + N = Succ<M + N>`
+- C. 需要 nightly 的 `generic_const_exprs` 才能编译
+- D. `Succ` 是标准库类型
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「类型级自然数 (Peano Numbers)」：用零类型 `Zero` 与后继 `Succ<N>`（配 `PhantomData`）把自然数编码进类型系统，加法经 `Add` trait 的关联类型 `Output` 在**编译期**递归求值——基例 `Zero` 与递归例 `Succ<M>` 对应 Peano 公理。A 错（纯编译期，无运行时数据）；C 错（min const generics 之前的经典技术，stable 可用）；D 错（用户自定义标记类型）。
+
+</details>
+
+---
+
+### 测验 2：类型级布尔与条件选择（🟡 进阶）
+
+本页「类型级布尔逻辑」中 `Not`/`And` 的实现机制是？
+
+```rust,ignore
+struct True; struct False;
+trait Not { type Output; }
+impl Not for True  { type Output = False; }
+impl Not for False { type Output = True; }
+```
+
+- A. 利用关联类型 `Output` 为每个布尔标记类型给出唯一实现，编译期完成真值表查表
+- B. 运行时 `if` 分支选择
+- C. 依赖 `const fn` 求值
+- D. 必须使用 `Box<dyn Not>` 动态分发
+
+<details>
+<summary>✅ 答案</summary>
+
+**A 正确**。按本页 §2：布尔值编码为单元结构体 `True`/`False`，逻辑运算编码为带关联类型的 trait，每个输入类型的 `impl` 给出唯一 `Output`——编译器在单态化时完成"真值表查表"，结果是一个**类型**而非值。B/C/D 均把编译期类型级计算误置为运行时机制。
+
+</details>
+
+---
+
+### 测验 3：类型级编程的边界（🔴 专家，联动「反命题」节）
+
+按本页「反命题」节，下列说法正确的有？（选出所有正确项）
+
+- A. "类型级编程总是比普通代码好"不成立：过度复杂化降低可读性并拖慢编译时间
+- B. Rust 拥有完整的高阶类型（HKT）
+- C. "复杂类型不会影响编译时间"不成立：类型级递归和大量约束可能显著增加编译耗时
+- D. Rust 只能通过关联类型与 trait 模拟部分 HKT 能力
+
+<details>
+<summary>✅ 答案</summary>
+
+**A、C、D 正确**。按本页「反命题」节：反命题 1（类型级编程非银弹，可读性与编译时间是代价）、反命题 2（Rust **没有**完整 HKT，只能经关联类型与 trait 模拟部分能力——B 错）、反命题 3（类型级递归显著增加编译耗时）。工程结论与本页「认知路径」第 4 步一致：类型级技术应用于状态机（typestate）等收益明确的场景，而非默认选择。
+
+</details>

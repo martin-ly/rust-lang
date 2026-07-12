@@ -190,6 +190,8 @@
 | [Pin 投射反例集：unsafe 结构投射的 UB 目录与正确模式库](../../03_advanced/01_async/11_pin_projection_counterexamples.md) | ⊑ | [Async 取消安全](../../03_advanced/01_async/05_async_cancellation_safety.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Waker 契约深度解析：RawWakerVTable 实现与契约违反反例集](../../03_advanced/01_async/12_waker_contract_deep_dive.md) | ⊑ | [Executor 公平性与调度：Tokio 调度器 internals](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Waker 契约深度解析：RawWakerVTable 实现与契约违反反例集](../../03_advanced/01_async/12_waker_contract_deep_dive.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/01_unsafe.md) | 后置概念引用（蕴含/导向） |
+| [Async Trait 对象安全：dyn 兼容解决方案谱系与选型矩阵](../../03_advanced/01_async/13_async_trait_object_safety.md) | ⟹ | [Async Closures](../../03_advanced/01_async/07_async_closures.md) | 后置概念引用（蕴含/导向） |
+| [Async Trait 对象安全：dyn 兼容解决方案谱系与选型矩阵](../../03_advanced/01_async/13_async_trait_object_safety.md) | ⟹ | [Waker 契约深度解析：RawWakerVTable 实现与契约违反反例集](../../03_advanced/01_async/12_waker_contract_deep_dive.md) | 后置概念引用（蕴含/导向） |
 
 ## L4 形式化理论层
 
@@ -204,15 +206,19 @@
 | [Linear Logic & Affine Logic](../../04_formal/01_ownership_logic/01_linear_logic.md) | ⟹ | [Ownership Formalization](../../04_formal/01_ownership_logic/02_ownership_formal.md) | 后置概念引用（蕴含/导向） |
 | [Linear Logic & Affine Logic](../../04_formal/01_ownership_logic/01_linear_logic.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 后置概念引用（蕴含/导向） |
 | [符号约定](../../04_formal/06_notation/01_notation.md) | ⟸ | [词法结构](../../04_formal/05_rustc_internals/10_lexical_structure.md) | 源在目标的前置元数据中（目标依赖源） |
+| [进程代数与 Rust 并发原语：CSP · CCS · π 演算](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md) | ↔ | [线性化与一致性谱系：从 Herlihy-Wing 到 Rust 无锁结构](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) | 互为后置概念（互参） |
+| [进程代数与 Rust 并发原语：CSP · CCS · π 演算](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md) | ⟸ | [Actor 模型形式语义：从 Hewitt 公理到 Rust 生态](../../04_formal/07_concurrency_semantics/03_actor_semantics.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Type Theory](../../04_formal/00_type_theory/01_type_theory.md) | ⟹ | [Ownership Formalization](../../04_formal/01_ownership_logic/02_ownership_formal.md) | 后置概念引用（蕴含/导向） |
 | [Type Theory](../../04_formal/00_type_theory/01_type_theory.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 后置概念引用（蕴含/导向） |
 | [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](../../04_formal/03_operational_semantics/02_hoare_logic.md) | ⟹ | [分离逻辑：Rust 所有权的形式化根基](../../04_formal/02_separation_logic/02_separation_logic.md) | 后置概念引用（蕴含/导向） |
 | [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](../../04_formal/03_operational_semantics/02_hoare_logic.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 后置概念引用（蕴含/导向） |
+| [线性化与一致性谱系：从 Herlihy-Wing 到 Rust 无锁结构](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) | ↔ | [进程代数与 Rust 并发原语：CSP · CCS · π 演算](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md) | 互为后置概念（互参） |
 | [Ownership Formalization](../../04_formal/01_ownership_logic/02_ownership_formal.md) | ⟸ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 源在目标的前置元数据中（目标依赖源） |
 | [分离逻辑：Rust 所有权的形式化根基](../../04_formal/02_separation_logic/02_separation_logic.md) | ⟹ | [Verification Toolchain Selection Guide](../../04_formal/04_model_checking/01_verification_toolchain.md) | 后置概念引用（蕴含/导向） |
 | [分离逻辑：Rust 所有权的形式化根基](../../04_formal/02_separation_logic/02_separation_logic.md) | ⟹ | [Type Theory](../../04_formal/00_type_theory/01_type_theory.md) | 后置概念引用（蕴含/导向） |
 | [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/00_type_theory/02_subtype_variance.md) | ⟹ | [Type Theory](../../04_formal/00_type_theory/01_type_theory.md) | 后置概念引用（蕴含/导向） |
 | [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/00_type_theory/02_subtype_variance.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 后置概念引用（蕴含/导向） |
+| [Actor 模型形式语义：从 Hewitt 公理到 Rust 生态](../../04_formal/07_concurrency_semantics/03_actor_semantics.md) | ⟹ | [线性化与一致性谱系：从 Herlihy-Wing 到 Rust 无锁结构](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) | 后置概念引用（蕴含/导向） |
 | [线性逻辑在 Rust 中的工程应用](../../04_formal/01_ownership_logic/03_linear_logic_applications.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 后置概念引用（蕴含/导向） |
 | [操作语义：程序行为的形式化定义](../../04_formal/03_operational_semantics/03_operational_semantics.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 后置概念引用（蕴含/导向） |
 | [操作语义：程序行为的形式化定义](../../04_formal/03_operational_semantics/03_operational_semantics.md) | ⟹ | [分离逻辑：Rust 所有权的形式化根基](../../04_formal/02_separation_logic/02_separation_logic.md) | 后置概念引用（蕴含/导向） |
@@ -283,6 +289,7 @@
 | [Rust vs Python：系统编程与动态脚本的对照分析](../../05_comparative/02_managed_languages/02_rust_vs_python.md) | ⇔ | [Rust vs Java：系统编程与托管运行时的范式对比](../../05_comparative/02_managed_languages/01_rust_vs_java.md) | 对比型页面（名称含 vs/对比） |
 | [C++ vs Rust：构造、运算符、RTTI、友元](../../05_comparative/00_paradigms/03_cpp_rust_surface_features.md) | ⇔ | [Rust vs C++：ABI、对象模型与内存布局](../../05_comparative/01_systems_languages/02_cpp_abi_object_model.md) | 对比型页面（名称含 vs/对比） |
 | [Rust vs Go：线性所有权 vs CSP 过程逻辑](../../05_comparative/01_systems_languages/03_rust_vs_go.md) | ⇔ | [Paradigm Matrix: Multi-Language Formal Comparison](../../05_comparative/00_paradigms/01_paradigm_matrix.md) | 对比型页面（名称含 vs/对比） |
+| [五模型定义矩阵：同步 · 并发 · 并行 · 异步 · 分布式](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) | ⟹ | [Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行](../../05_comparative/00_paradigms/02_execution_model_isomorphism.md) | 后置概念引用（蕴含/导向） |
 | [Rust vs Scala：类型系统的两种哲学](../../05_comparative/02_managed_languages/05_rust_vs_scala.md) | ⇔ | [Paradigm Matrix: Multi-Language Formal Comparison](../../05_comparative/00_paradigms/01_paradigm_matrix.md) | 对比型页面（名称含 vs/对比） |
 | [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](../../05_comparative/02_managed_languages/08_rust_vs_typescript.md) | ⇔ | [Rust vs JavaScript：系统编程与脚本执行的范式差异](../../05_comparative/02_managed_languages/03_rust_vs_javascript.md) | 对比型页面（名称含 vs/对比） |
 
@@ -393,11 +400,17 @@
 | [C-to-Rust Translation Ecosystem](../../06_ecosystem/05_systems_and_embedded/08_c_to_rust_translation.md) | ⟹ | [Rust 编译器内部原理](../../06_ecosystem/00_toolchain/04_compiler_internals.md) | 后置概念引用（蕴含/导向） |
 | [Cargo Registry 与包发布](../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md) | ⟹ | [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/01_cargo/13_cargo_security_cves.md) | 后置概念引用（蕴含/导向） |
 | [Cargo Registry 与包发布](../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md) | ⟹ | [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) | 后置概念引用（蕴含/导向） |
+| [CRDT 谱系：状态基、操作基与合并格形式化](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md) | ↔ | [因果序与向量时钟：Lamport 偏序的算法化](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md) | 互为后置概念（互参） |
+| [CRDT 谱系：状态基、操作基与合并格形式化](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md) | ⟹ | [Distributed Consensus](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) | 后置概念引用（蕴含/导向） |
+| [CRDT 谱系：状态基、操作基与合并格形式化](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md) | ⟹ | [Data Engineering](../../06_ecosystem/06_data_and_distributed/05_data_engineering.md) | 后置概念引用（蕴含/导向） |
 | [高性能网络服务架构 (High-Performance Network Service Architecture)](../../06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/01_performance_optimization.md) | 后置概念引用（蕴含/导向） |
 | [将 Rust 集成到现有平台](../../06_ecosystem/00_toolchain/08_platform_rust_integration.md) | ⟹ | [Rust 工业应用案例研究](../../06_ecosystem/11_domain_applications/14_industrial_case_studies.md) | 后置概念引用（蕴含/导向） |
 | [将 Rust 集成到现有平台](../../06_ecosystem/00_toolchain/08_platform_rust_integration.md) | ⟹ | [Rust 操作系统内核开发](../../06_ecosystem/05_systems_and_embedded/05_os_kernel.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 认证与构建缓存](../../06_ecosystem/01_cargo/09_cargo_authentication_and_cache.md) | ⟹ | [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/01_cargo/13_cargo_security_cves.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 认证与构建缓存](../../06_ecosystem/01_cargo/09_cargo_authentication_and_cache.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) | 后置概念引用（蕴含/导向） |
+| [因果序与向量时钟：Lamport 偏序的算法化](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md) | ↔ | [CRDT 谱系：状态基、操作基与合并格形式化](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md) | 互为后置概念（互参） |
+| [因果序与向量时钟：Lamport 偏序的算法化](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md) | ⟹ | [Distributed Consensus](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) | 后置概念引用（蕴含/导向） |
+| [因果序与向量时钟：Lamport 偏序的算法化](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md) | ⟹ | [流处理生态：Rust 实现与工业系统全景](../../06_ecosystem/06_data_and_distributed/03_stream_processing_ecosystem.md) | 后置概念引用（蕴含/导向） |
 | [](../../06_ecosystem/11_domain_applications/09_data_structures_in_rust.md) | ⟹ | [算法工程实践 (Algorithm Engineering Practice)](../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md) | 后置概念引用（蕴含/导向） |
 | [](../../06_ecosystem/11_domain_applications/09_data_structures_in_rust.md) | ⟹ | [算法与竞赛编程 (Algorithms & Competitive Programming)](../../06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md) | 后置概念引用（蕴含/导向） |
 | [Embedded-HAL 1.0 迁移与 Embassy 生产状态](../../06_ecosystem/05_systems_and_embedded/09_embedded_hal_1_0_migration.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/02_cross_compilation.md) | 后置概念引用（蕴含/导向） |
@@ -417,6 +430,8 @@
 | [rustc Driver、Interface 与 Stable MIR](../../06_ecosystem/00_toolchain/10_rustc_driver_and_stable_mir.md) | ⟹ | [rustc 编译器诊断与 UI Tests](../../06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md) | 后置概念引用（蕴含/导向） |
 | [Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) | ↔ | [rustc / Cargo `-Z` 不稳定选项参考清单](../../06_ecosystem/00_toolchain/15_z_flags_reference.md) | 互为后置概念（互参） |
 | [Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) | ⟹ | [WASI & WebAssembly Component Model](../../06_ecosystem/05_systems_and_embedded/01_wasi.md) | 后置概念引用（蕴含/导向） |
+| [Tokio 运行时内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) | ⊑ | [高性能网络服务架构 (High-Performance Network Service Architecture)](../../06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
+| [Tokio 运行时内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) | ⊑ | [Glommio 与 Thread-per-Core 异步运行时](../../06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) | ⟹ | [Cargo 认证与构建缓存](../../06_ecosystem/01_cargo/09_cargo_authentication_and_cache.md) | 后置概念引用（蕴含/导向） |
 | [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) | 后置概念引用（蕴含/导向） |
 | [rustc 编译器诊断与 UI Tests](../../06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md) | ⟹ | [rustc 自举](../../06_ecosystem/00_toolchain/12_rustc_bootstrap.md) | 后置概念引用（蕴含/导向） |

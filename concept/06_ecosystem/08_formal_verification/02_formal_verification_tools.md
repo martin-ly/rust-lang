@@ -939,4 +939,3 @@ fn caller() {
 | Formal Verification Tools（形式化验证工具生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Formal Verification Tools（形式化验证工具生态） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Formal Verification Tools（形式化验证工具生态） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-

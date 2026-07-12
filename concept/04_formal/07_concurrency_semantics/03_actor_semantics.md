@@ -141,6 +141,26 @@ graph TD
 2. **重启即恢复**：重启把 actor 状态重置为 `init` 的返回值 ⟹ 恢复语义是「回到已知良好状态」，而非「从崩溃点继续」；
 3. **升级（escalation）**：监督者自身因重启频率超限而崩溃时，失败向上一级监督者传播 ⟹ 失败处理形成与树结构同构的层次。
 
+**监督树的形式化表述**（教学形式化，把监督看作配置语义之上的第二层转换系统）：
+
+```text
+监督树 T ::= leaf(actor a) | node(s, [T₁..Tₙ], strategy, (maxR, window))
+
+[child-crash]  actor a（位于 node(s, children, σ, (maxR, window)) 的某叶子）崩溃：
+  ① 按策略 σ 计算需重启集合 R：
+     one_for_one     ⟹ R = {a}
+     one_for_all     ⟹ R = children 全部
+     rest_for_one    ⟹ R = {a} ∪ 启动顺序在 a 之后的兄弟
+  ② 若当前 window 内累计重启次数 < maxR：
+     对每个 c ∈ R：c.state := init(c.args)  ⟹ 子树回到已知良好状态
+     否则 [escalate]：supervisor s 自身崩溃 ⟹ 本规则向其父节点递归应用
+
+推论：崩溃传播被树结构**有界化**——失败只能沿树边向上、
+     按策略横向扩散，不会无差别污染无关子树。
+```
+
+这解释了 OTP 设计的第一原则：**监督树的形状就是系统的失败传播图**——树设计即容错设计。
+
 ---
 
 ## 五、Rust 映射：actix / ractor / kameo
@@ -170,6 +190,41 @@ addr.do_send(Increment);        // ✅ 编译期检查 Counter: Handler<Incremen
 ```
 
 > **过渡**: Rust 的三个框架复现了 Actor 的「形状」，但 Rust 同时提供了 channel 模型——两者的边界正是选型时最容易误判的地方。
+
+一个 ractor 风格的教学骨架（概念示意，API 细节以 [docs.rs/ractor](https://docs.rs/ractor/latest/ractor/) 为准）：
+
+```rust,ignore
+use ractor::{Actor, ActorProcessingErr, ActorRef};
+
+struct Counter;                        // actor 本体：状态在 State 中
+enum CounterMsg {                      // 单消息枚举 ⟹ 穷尽匹配（Erlang 无此保证）
+    Increment,
+    Get(ActorRef<i64>),                // 把回复地址装进消息 ≈ π 演算的通道传递
+}
+
+#[ractor::async_trait]
+impl Actor for Counter {
+    type Msg = CounterMsg;
+    type State = i64;
+    type Arguments = ();
+
+    // init：监督重启时状态重置为此处返回值（let it crash 的恢复点）
+    async fn pre_start(&self, _: ActorRef<Self::Msg>, _: ())
+        -> Result<Self::State, ActorProcessingErr> { Ok(0) }
+
+    // 行为函数 b(s, m)：一次处理一条消息 ⟹ 邮箱串行化由运行时保证
+    async fn handle(&self, _: ActorRef<Self::Msg>, msg: Self::Msg, state: &mut Self::State)
+        -> Result<(), ActorProcessingErr> {
+        match msg {
+            CounterMsg::Increment => *state += 1,          // become：状态迁移即行为替换
+            CounterMsg::Get(reply) => { reply.send_message(*state)?; } // send 公理
+        }
+        Ok(())
+    }
+}
+```
+
+三个公理在 Rust 类型中的落点：`pre_start` 对应 `init`（create 由 `Actor::spawn` 完成）、`handle` 对应行为函数 `b`、`send_message` 对应 send 公理——监督则由 `Actor::spawn_linked` 与运行时重启策略提供。
 
 ---
 

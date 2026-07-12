@@ -1046,3 +1046,70 @@ pub fn derive_type_name(input: TokenStream) -> TokenStream {
 
 - **P2 生态/社区**: [docs.rs/async-trait — 生态权威 API 文档](https://docs.rs/async-trait) · [docs.rs/syn — 生态权威 API 文档](https://docs.rs/syn)
 - **P1 学术/形式化**: [Kohlbecker et al.: Hygienic Macro Expansion (LFP 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/319838.319859)
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-13）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致；测验 3 与本页「反命题」节直接联动。
+
+### 测验 1：`quote!` 与 `quote_spanned!` 的分工（🟢 基础）
+
+生成 `compile_error!` 并希望错误信息指向用户输入的某个字段位置，应使用？
+
+- A. `quote!`——它自动追踪所有输入 span
+- B. `quote_spanned! {field_span=> compile_error!("...")}`——显式指定生成 token 的 span，错误定位到原始字段
+- C. `format!` 拼接字符串再 parse
+- D. `panic!`——过程宏的错误只能用 panic 报告
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §7：`quote_spanned!` 用 `field.span()`（经 `syn::spanned::Spanned`）为生成的 token 指定 span，使 `compile_error!` 的错误指向用户的原始字段位置；`quote!` 生成的 token 默认 span 不绑定到具体输入节点，错误位置会落在宏调用处或生成代码内部。D 错：panic 会导致宏崩溃而非结构化诊断（见 §7.2 的模式）。
+
+</details>
+
+---
+
+### 测验 2：`ToTokens` trait 的角色（🟡 进阶）
+
+以下代码中 `impl ToTokens for MyType` 的收益是？
+
+```rust,ignore
+use quote::{ToTokens, quote};
+struct MyType { /* ... */ }
+impl ToTokens for MyType {
+    fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) { /* ... */ }
+}
+// 之后可在 quote! 中直接插值：quote! { #my_value }
+```
+
+- A. 让 `MyType` 可在 `quote!` 的 `#var` 插值中直接展开为 token，无需手动拼接
+- B. 让 `MyType` 可被 serde 序列化
+- C. 让 `MyType` 成为合法的过程宏入口类型
+- D. 没有任何作用，`quote!` 不需要该 trait
+
+<details>
+<summary>✅ 答案</summary>
+
+**A 正确**。按本页 §8：`ToTokens` 是 quote 的扩展点——为自定义 AST/中间类型实现 `to_tokens` 后，即可在 `quote! { #var }` 插值中直接展开（syn 的 `DeriveInput`、`Field` 等都实现了它）。B/C 与该 trait 无关；D 与插值机制矛盾。
+
+</details>
+
+---
+
+### 测验 3：syn/quote 的边界与卫生性（🔴 专家，联动「反命题」节）
+
+按本页「反命题」节，下列说法正确的有？（选出所有正确项）
+
+- A. "syn 和 quote 是过程宏必须的"不成立：简单宏可直接操作 `proc_macro::TokenStream`
+- B. "解析越宽松越好"不成立：过度宽松的解析会隐藏用户错误，导致难以诊断的生成代码
+- C. "`quote!` 中的变量会自动 hygiene"不成立：仍需关注 span 来源与标识符捕获
+- D. 只要用了 syn 解析，生成代码的报错位置就自动正确
+
+<details>
+<summary>✅ 答案</summary>
+
+**A、B、C 正确**。按本页「反命题」节三条。D 错——报错位置取决于 span 传递：需用 `quote_spanned!` 或正确传播输入 span（本页「反向推理 2」：生成代码报错位置混乱 ⟸ 说明 `quote!` 中未正确传递 span）。卫生性（hygiene）在 quote 插值中不是自动的，标识符捕获与 span 来源必须显式管理。
+
+</details>

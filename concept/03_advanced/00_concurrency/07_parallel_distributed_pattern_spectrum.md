@@ -460,6 +460,8 @@ CRDT 必须满足:
 
 ### 6.2 一致性谱系
 
+> **分工声明（Canonical）**: 本页为一致性谱系的**导航式概览**（强度排序图 + Rust 生态映射）；线性化与各一致性模型的**形式定义、证明方法与 CAP 关系**以 [L4 线性化与一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) 为权威页（AGENTS.md §2）。
+
 ```text
 一致性强度谱系（从强到弱）:
 

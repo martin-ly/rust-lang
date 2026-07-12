@@ -193,6 +193,9 @@ graph TB
 | [20_axiomatic_semantics.md](03_operational_semantics/05_axiomatic_semantics.md) | 公理语义 [教学类比] | Hoare 逻辑、wp/sp 计算、Rust 所有权（Ownership）公理化 | ✅ v1.0 | L4 形式化理论, L3 Unsafe | Prusti, Creusot, Kani |
 | [21_type_semantics.md](00_type_theory/06_type_semantics.md) | 类型语义 [教学类比] | 进步/保持定理、Rust 特有类型语义、子类型与变型 | ✅ v1.0 | L2 Type System, L4 形式化理论 | Pierce TAPL, RustBelt |
 | [18_evaluation_strategies.md](03_operational_semantics/04_evaluation_strategies.md) | 求值策略 [教学类比] | CBV/CBN/CBR、归约策略、Rust 的 CBV+Move 定位 | ✅ v1.0 | L1 Type System, L2 Generics | Lambda Calculus |
+| [01_process_calculi_for_rust.md](07_concurrency_semantics/01_process_calculi_for_rust.md) | 进程代数与 Rust | CSP/CCS/π 演算骨架、会合/外部选择/移动性、四条不同构边界 | ✅ v1.0 | L3 Concurrency, L4 Linear Logic | L5 Isomorphism Matrix |
+| [02_linearizability_and_consistency.md](07_concurrency_semantics/02_linearizability_and_consistency.md) | 线性化与一致性谱系 | Herlihy-Wing 历史/线性化点、一致性谱系、CAP、Treiber 栈实例 | ✅ v1.0 | L3 Atomics, L4 Hoare Logic | L6 CRDT, L6 Consensus |
+| [03_actor_semantics.md](07_concurrency_semantics/03_actor_semantics.md) | Actor 模型形式语义 | Hewitt 三公理、Agha 配置语义、OTP 监督树、actix/ractor/kameo | ✅ v1.0 | L3 Concurrency, L4 Process Calculi | L6 Consensus, L5 Isomorphism Matrix |
 
 ---
 

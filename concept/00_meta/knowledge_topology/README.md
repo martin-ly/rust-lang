@@ -16,27 +16,27 @@
 
 | 文件 | 主题 | 覆盖范围 |
 |:---|:---|:---|
-| [01_concept_definition_atlas.md](01_concept_definition_atlas.md) | 概念定义图谱 | 全部 483 个核心概念的中英名称、层级、定义、同义/反义 |
+| [01_concept_definition_atlas.md](01_concept_definition_atlas.md) | 概念定义图谱 | 全部 493 个核心概念的中英名称、层级、定义、同义/反义 |
 | [02_attribute_relationship_atlas.md](02_attribute_relationship_atlas.md) | 属性关系图谱 | 概念属性矩阵与属性间约束 |
-| [03_scenario_decision_tree_atlas.md](03_scenario_decision_tree_atlas.md) | 场景决策树图谱 | 开发场景 → 决策 → Rust 概念/工具（策展决策树 + 数据驱动索引覆盖 244 个概念） |
-| [04_example_counterexample_atlas.md](04_example_counterexample_atlas.md) | 示例与反例图谱 | 按概念组织的示例、反例、边界示例（数据驱动索引覆盖 295 个概念） |
+| [03_scenario_decision_tree_atlas.md](03_scenario_decision_tree_atlas.md) | 场景决策树图谱 | 开发场景 → 决策 → Rust 概念/工具（策展决策树 + 数据驱动索引覆盖 284 个概念） |
+| [04_example_counterexample_atlas.md](04_example_counterexample_atlas.md) | 示例与反例图谱 | 按概念组织的示例、反例、边界示例（数据驱动索引覆盖 330 个概念） |
 | [05_logical_reasoning_atlas.md](05_logical_reasoning_atlas.md) | 逻辑推理图谱 | 定理链、推理规则、形式化对应 |
-| [06_inter_layer_mapping_atlas.md](06_inter_layer_mapping_atlas.md) | 层间映射图谱 | L0–L7 依赖、蕴含、反馈关系（前置/后置元数据 + 相关概念节引用，288 个概念有相关链接） |
+| [06_inter_layer_mapping_atlas.md](06_inter_layer_mapping_atlas.md) | 层间映射图谱 | L0–L7 依赖、蕴含、反馈关系（前置/后置元数据 + 相关概念节引用，307 个概念有相关链接） |
 | [07_intra_layer_mapping_atlas.md](07_intra_layer_mapping_atlas.md) | 层内映射图谱 | 每层内部模型/概念间关系 |
 | [08_concept_source_alignment_atlas.md](08_concept_source_alignment_atlas.md) | 概念-权威来源对齐图谱 | 每个核心概念 ↔ 国际化权威来源 |
-| [09_reasoning_judgment_tree_atlas.md](09_reasoning_judgment_tree_atlas.md) | 推理判定树图谱 | 编译错误/运行时问题 → 根因 → 修复策略（数据驱动索引覆盖 326 个概念） |
+| [09_reasoning_judgment_tree_atlas.md](09_reasoning_judgment_tree_atlas.md) | 推理判定树图谱 | 编译错误/运行时问题 → 根因 → 修复策略（数据驱动索引覆盖 387 个概念） |
 | [10_gap_and_action_plan.md](10_gap_and_action_plan.md) | 缺口与行动计划 | 当前缺口、优先级、修复任务 |
 
 ## 深度表征覆盖统计（自动生成）
 
 > 口径：`extract_concept_topology.py` 从 `concept/**/*.md` 抽取的表征信号（章节标题 + compile_fail 块 + mermaid 判定节点 + 定理链元数据）。
 
-| 表征类型 | 覆盖概念数 | 占全部 483 概念 |
+| 表征类型 | 覆盖概念数 | 占全部 493 概念 |
 |:---|:---:|:---:|
-| 示例/反例（04 atlas 索引） | 295 | 61.1% |
-| 场景/决策（03 atlas 索引） | 244 | 50.5% |
-| 推理/判定（09 atlas 索引） | 326 | 67.5% |
-| 相关概念节引用（06 atlas 扩展边源） | 288 | 59.6% |
+| 示例/反例（04 atlas 索引） | 330 | 66.9% |
+| 场景/决策（03 atlas 索引） | 284 | 57.6% |
+| 推理/判定（09 atlas 索引） | 387 | 78.5% |
+| 相关概念节引用（06 atlas 扩展边源） | 307 | 62.3% |
 
 ## 使用建议
 

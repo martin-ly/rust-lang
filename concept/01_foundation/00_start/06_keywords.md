@@ -152,3 +152,66 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/regex — 生态权威 API 文档](https://docs.rs/regex) · [docs.rs/serde_json — 生态权威 API 文档](https://docs.rs/serde_json)
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-13）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致；测验 3 与本页「实践建议」反例（raw identifier 误用）联动。
+
+### 测验 1：保留关键字（🟢 基础）
+
+下列哪个关键字属于"保留给未来使用"（当前无功能）？
+
+- A. `match`
+- B. `gen`
+- C. `async`
+- D. `use`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「保留给未来使用的关键字」表，`gen` 被保留、潜在用于生成器语法（Edition 2024 起 `gen` 成为保留关键字）；`abstract`、`become`、`box`、`do`、`final`、`macro`、`try`、`yield` 等同属保留表。A/C/D 均为现行有效关键字。
+
+</details>
+
+---
+
+### 测验 2：Raw Identifier 与跨 Edition 调用（🟡 进阶）
+
+以下代码的编译判断，哪项正确？
+
+```rust,ignore
+// 当前 crate 为 Edition 2021，调用某 2015 Edition 旧库中的函数 `try`
+let ok = r#try(input);
+```
+
+- A. 编译错误：`try` 不是合法标识符，任何写法都不能调用
+- B. 可编译：`try` 在 2015 Edition 不是关键字、在 2018/2021/2024 中是保留关键字，跨 Edition 调用时需用 raw identifier `r#try`
+- C. 可编译，但 `r#` 会改变编译后的函数名
+- D. 应改用 `unsafe { try(input) }`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「Raw Identifiers」：`r#` 前缀允许把关键字当普通标识符使用，典型场景即跨 Edition 调用——`try` 在 2015 Edition 不是关键字，在 2018+ 是保留关键字，调用 2015 旧库的 `try` 函数时必须写 `r#try`。C 错：raw identifier **只影响词法层面**，类型/函数名编译后不再带有 `r#`。
+
+</details>
+
+---
+
+### 测验 3：Raw Identifier 的使用边界（🔴 专家，联动「实践建议」）
+
+按本页「实践建议」，下列关于 raw identifier 的判断哪项正确？
+
+- A. 既然 `r#` 允许，项目内应优先用关键字命名标识符以节省词汇
+- B. 宏（Macro）接收用户输入并需生成以关键字命名的字段/变量时，可能需要 raw identifier；但常规代码应避免用关键字作标识符
+- C. raw identifier 可以在运行时动态生成
+- D. 跨 edition 依赖无需关心保留关键字变化
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「实践建议」三条：①**避免**用关键字作标识符（即使 raw identifier 允许）——A 正是要规避的反例；②跨 edition 依赖时留意保留关键字变化（2015→2018 的 `try`/`async`/`await`）——D 错；③宏生成代码中可能需要 raw identifier（用户输入生成关键字命名字段/变量）。C 错：`r#` 是词法前缀，不是运行时机制。
+
+</details>

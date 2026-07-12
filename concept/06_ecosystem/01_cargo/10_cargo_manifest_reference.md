@@ -251,7 +251,7 @@ serde = { path = "../serde-fix" }
 
 ## 嵌入式测验
 
-本节将「嵌入式测验」分解为若干主题：测验 1：发布到 crates.io 时，`license` 和 `l…、测验 2：`[dev-dependencies]` 在什么场景下使用？、测验 3：`[patch]` 与 `[source]` 的主要区别是什…与测验 4：`workspace.lints` 会自动被成员包继承吗？。
+本节将「嵌入式测验」分解为若干主题：测验 1：发布到 crates.io 时，`license` 和 `l…、测验 2：`[dev-dependencies]`在什么场景下使用？、测验 3：`[patch]` 与 `[source]`的主要区别是什…与测验 4：`workspace.lints` 会自动被成员包继承吗？。
 
 ### 测验 1：发布到 crates.io 时，`license` 和 `license-file` 至少需要一个吗？
 

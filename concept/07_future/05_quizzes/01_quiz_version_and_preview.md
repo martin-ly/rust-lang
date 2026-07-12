@@ -226,4 +226,98 @@ fn double_size<const N: usize>() -> [u8; N * 2] {
 
 ---
 
-> **变更记录**: 2026-07-12 新建（W3-b：L7 独立 quiz 补缺，10 题：单选 3 / 代码阅读 3 / 多选 2 / 判断 2；难度 🟢2 / 🟡5 / 🔴3）。
+## 四、认证工具链与版本下沉
+
+### Q11. 🟢【单选】按本知识库 2026-07-12 更正后的定位，Ferrocene 是？
+
+- A. Rust 的 nightly 实验特性，待上游稳定
+- B. Ferrous Systems 交付、TÜV SÜD 鉴定的下游认证工具链发行版（ISO 26262 ASIL D / IEC 61508 SIL 3 / IEC 62304 Class C）
+- C. rustc 的一个 codegen 后端
+- D. Rust Foundation 的官方稳定版别名
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：B**
+
+**解析**：[Ferrocene 权威页](../03_preview_features/12_ferrocene_preview.md) 的定位声明明确：Ferrocene 不是待稳定语言特性，而是对上游 rustc 特定版本执行完整鉴定（qualification）流程后发布的**下游认证工具链发行版**，附监管机构可审查的证据包；页面保留在 `03_preview_features/` 仅为路径稳定。认证工具链生态对比见 [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md)。
+
+</details>
+
+---
+
+### Q12. 🟡【判断】Ferrocene 26.02.0 跟踪上游 rustc 1.92 而非最新 stable，这种"认证延迟"是工具链缺陷。（对 / 错）
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：错**
+
+**解析**：按 Ferrocene 权威页 §2.3，认证延迟是**设计使然**：鉴定流程（qualification）需要针对特定上游版本产出完整证据包，认证版必然滞后上游 stable；Ferrocene 采用季度发行节奏（26.02.0 于 2026-02 发布，含上游 1.91–1.92 变更）。安全关键项目选型时应把"认证版本滞后"作为既定约束纳入规划，而非视为缺陷。
+
+</details>
+
+---
+
+### Q13. 🟡【多选】下列哪些变更属于 Rust 1.91–1.92 版本线？（选出所有正确项）
+
+- A. 借用检查器优化：改进算法与缓存机制，编译时间减少 10–20%（1.91）
+- B. `MaybeUninit` 内部内存布局与有效性约束文档化（1.92）
+- C. `generic_const_exprs` 完整稳定（1.92）
+- D. 增强的 const 上下文及其对生命周期的影响（1.91）
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：A、B、D**
+
+**解析**：[Rust 1.91 稳定特性](../00_version_tracking/rust_1_91_stabilized.md) 记录借用检查器优化（编译时间 -10–20%、借用冲突检测加速）与增强的 const 上下文；[Rust 1.92 稳定特性](../00_version_tracking/rust_1_92_stabilized.md) 记录 `MaybeUninit` 布局/有效性约束文档化与联合体原始引用。C 错：`generic_const_exprs` 截至 1.97 仍为 nightly 特性（参见 Q7）。
+
+</details>
+
+---
+
+### Q14. 🔴 某汽车软件团队评估工具链，提出如下论证。按权威页口径，哪条成立？
+
+```text
+方案：直接在上游最新 stable（1.97）上开发 ASIL D 控制器软件，
+      理由是"版本越新缺陷越少"。
+```
+
+| 选项 | 评审意见 |
+|:---|:---|
+| A | 正确，最新 stable 总是安全关键项目的首选 |
+| B | 不成立：ASIL D 要求工具鉴定（tool qualification），应选 Ferrocene 等经 TÜV SÜD 鉴定的工具链，并接受其认证版本滞后上游的既定约束 |
+| C | 不成立，应改用 nightly 以获取最全的安全特性 |
+| D | 成立，只要开启所有 clippy lint 即等价于工具鉴定 |
+
+<details>
+<summary>💡 点击展开答案与解析</summary>
+
+**答案**：B。
+
+**解析**：ISO 26262 ASIL D 对开发工具要求工具鉴定；上游 stable rustc 本身未经鉴定，而 Ferrocene 编译器经 TÜV SÜD 鉴定至 ASIL D / SIL 3 / Class C（[Ferrocene 权威页](../03_preview_features/12_ferrocene_preview.md) §1.1）。C 错：nightly 特性不能用于认证构建；D 错：lint 是开发期辅助，与监管认可的工具鉴定证据包完全不等价。汽车软件标准化路径另见 [AUTOSAR 与 Rust](../../06_ecosystem/11_domain_applications/22_autosar_and_rust.md)。
+
+</details>
+
+---
+
+### Q15. 🔴【多选】关于版本跟踪体系（`00_version_tracking/`）的治理口径，下列说法正确的有？（选出所有正确项）
+
+- A. 每版稳定特性有独立 `rust_1_XX_stabilized.md` 页，预览特性有 `rust_1_XX_preview.md` 页
+- B. 版本页是中心化管理对象：Rust 新版本发布时由专人/流程统一更新
+- C. 稳定页与预览页可互相复制正文，只要标题不同
+- D. 版本勘误（如 RPITIT 实际稳定于 1.75 而非更晚版本）应记录在版本页中
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：A、B、D**
+
+**解析**：版本跟踪目录按"稳定页 + 预览页"成对组织（A），AGENTS.md §7 将"版本页中心化管理"列为长期治理机制、随 Rust 新版本发布触发（B）；D 正确——[rust_1_90_stabilized](../00_version_tracking/rust_1_90_stabilized.md) 的版本勘误表专门澄清 RPITIT 稳定于 1.75。C 错：违反 canonical 规则——稳定/预览页各有定位，禁止互相复制正文，交叉内容应以链接表达。
+
+</details>
+
+---
+
+> **变更记录**: 2026-07-12 新建（W3-b：L7 独立 quiz 补缺，10 题：单选 3 / 代码阅读 3 / 多选 2 / 判断 2；难度 🟢2 / 🟡5 / 🔴3）；2026-07-13 扩展至 15 题（+5 题「认证工具链与版本下沉」：Ferrocene 定位/认证延迟/1.91–1.92 谱系/ASIL D 选型/版本跟踪治理；难度 🟢3 / 🟡7 / 🔴5）。
