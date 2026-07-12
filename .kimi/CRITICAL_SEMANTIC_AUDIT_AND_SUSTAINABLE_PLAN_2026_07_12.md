@@ -153,7 +153,10 @@
 | P0-5 | **处置 v2 去重 54 对可处理项**(crates 模板克隆合并/删除、docs/03_practice 骨架去重) | CONTENT_OVERLAP_V2 可处理项 54 → 0 |
 | P0-6 | **观察门对账**:修正 `COMPREHENSIVE_SEMANTIC_AUDIT` 等"全部通过"表述,在 AGENTS.md 明确"完成 = 观察门报告达标" | 报告与门状态一致 |
 
-### 阶段 P1 — 交叉语义与关系语义建设(2–3 周)
+### 阶段 P1 — 交叉语义与关系语义建设(2–3 周) — **✅ 2026-07-12 已完成**
+
+> **P1 实际成果**:4 个交叉概念权威页新建(Send/Sync 475 行、const generics 463 行、GAT、async 取消安全,代码示例全部 rustc 实测);2 个边界全景页(async 448 行、unsafe 416 行);taxonomy.yaml + KG layer/domain 474/474 覆盖;dependsOn 环修复(owl exit=0);decision_trees.yaml 机器可读 + check_decision_trees.py;atlas T2 ⟹ 99.2%→83.3%、T4 23.8%→93.3%、T5/T6 归零;KG 核心边类型化(mutexWith/refines/counterExample 各 ≥5);语义健康 69.1 → **76.8**。
+> **遗留**:equivalentTo/instanceOf/appliesTo 仍零实例(无可辩护实例,未强行标注);311 实体 zh 标签用 en 占位(译名待补)。
 
 | # | 任务 | 验收标准 |
 |---|---|---|

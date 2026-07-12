@@ -3,8 +3,8 @@
 > **内容分级**: [专家级]
 > **定理链**: N/A — 边界全景/导航性文档，形式化推导见各权威页
 
-**EN**: Async Boundary Panorama
-**Summary**: A panorama of the semantic boundaries of Rust async programming: await-point state boundaries, cancellation safety, Pin/self-reference, Send-across-await, executor/runtime contracts, and async trait object-safety — each with boundary statements, counterexamples, and quantitative decision conditions.
+> **EN**: Async Boundary Panorama
+> **Summary**: A panorama of the semantic boundaries of Rust async programming: await-point state boundaries, cancellation safety, Pin/self-reference, Send-across-await, executor/runtime contracts, and async trait object-safety — each with boundary statements, counterexamples, and quantitative decision conditions.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024) · Tokio 1.x
 > **受众**: [进阶-专家]
@@ -187,7 +187,7 @@ async fn also_bad(map: &HashMap<i32, i32>) {
 | Q-A2 | 被引用数据的生存期结束行是否 < 引用最后使用行？ | < ⟹ `does not live long enough` | 编译期阻止 |
 | Q-A3 | 跨 await 持有的 guard 类型数（MutexGuard/Ref/RefMut）是否 ≥1 个？ | ≥1 ⟹ 叠加 Send 与取消安全判定 | 见 §七/§五 |
 
-> **修复策略**: 缩短借用使其不跨 await；将 owned 数据移入 Future（`move` 闭包/`Arc`）；或用作用域块 `{ ... }` 显式截断借用区间。
+> **修复策略**: 缩短借用使其不跨 await；将 owned 数据移入 Future（`move` 闭包（Closures）/`Arc`）；或用作用域块 `{ ... }` 显式截断借用区间。
 
 ---
 
@@ -354,10 +354,10 @@ fn outside_runtime() {
 
 trait 中的 `async fn`（1.75 起稳定，RPITIT） desugar 为返回 `impl Future` 的方法。边界：
 
-- **边界一侧（静态分发）**: `T: Trait` 泛型调用 ⟹ 每个 impl 有独立 Future 类型，单态化，零成本。
+- **边界一侧（静态分发）**: `T: Trait` 泛型调用 ⟹ 每个 impl 有独立 Future 类型，单态化（Monomorphization），零成本。
 - **边界另一侧（dyn Trait）**: `impl Future` 使关联返回类型**不可命名** ⟹ trait 非对象安全，`Box<dyn Trait>` 直接不可用。
 - **兼容方案**: `#[async_trait]`（宏改写为 `Pin<Box<dyn Future + Send>>`，每次调用一次堆分配）或手写 `fn f(&self) -> Pin<Box<dyn Future<Output = T> + Send + '_>>`；`dynosaur` 的 erased-type 路线。
-- **Send 边界叠加**: `async fn` in trait 默认捕获 `&self` 生命周期；生成的 Future 是否 Send 取决于实现——`async_trait` 默认 `+ Send`，可用 `?Send` 关闭。
+- **Send 边界叠加**: `async fn` in trait 默认捕获 `&self` 生命周期（Lifetimes）；生成的 Future 是否 Send 取决于实现——`async_trait` 默认 `+ Send`，可用 `?Send` 关闭。
 
 ### 9.2 反例
 

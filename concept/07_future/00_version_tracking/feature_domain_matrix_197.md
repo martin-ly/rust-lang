@@ -152,7 +152,7 @@ flowchart LR
 | 5 | `04_formal/05_rustc_internals/38_application_binary_interface.md` | #1 #3 | 1 处显性（Link-ABI 列，标"仅横幅"） |
 | 6 | `07_future/00_version_tracking/32_editions.md` + `07_future/01_edition_roadmap/44_edition_guide.md` | #3 #11 #27 | 3 处（Compat-Lint 列，lint-level 矩阵） |
 | 7 | `02_intermediate/03_error_handling/04_error_handling.md` | #24 | 1 处（Compat-Lint 列） |
-| 8 | 迁移判定树页（P2-5，待落地） | #22 #23 #21 | §5 引用，标记"待落地" |
+| 8 | 迁移判定树页（P2-5，待落地） | #22 #23 #21 | §5 引用（Reference），标记"待落地" |
 
 > 8 个补缺位置**全部命中**；`⚠缺口→应补于` 总计 **16 处**单元格标注。第 5 项 `38_application_binary_interface.md` 在审计中为"仅横幅"，本矩阵在 Link-ABI 列对其显式标注"仅横幅"并把实质缺口指向 `27_linkage.md`（最严重，0 命中）。
 

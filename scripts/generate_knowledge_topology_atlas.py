@@ -65,11 +65,41 @@ def is_hollow_definition(summary: str) -> bool:
     s = (summary or "").strip()
     if len(s) < 15:
         return True
+    # 以冒号/破折号等未完标点收尾的定义句不完整（常见于“它提供：”+列表结构），视同空洞
+    if s[-1] in ":：—–-·,，":
+        return True
     return any(p.search(s) for p in HOLLOW_DEF_PATTERNS)
 
 
+_FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
+_DETAILS_RE = re.compile(r"<details\b.*?</details>", re.DOTALL | re.IGNORECASE)
+# 句末标点（用于把截断/抽取文本回退到完整句）
+_SENT_END = "。！？.!?"
+
+
+def clean_summary(summary: str) -> str:
+    """清理 Summary 文本：剥离混入的代码围栏与 <details> 块，折叠空白。"""
+    s = _FENCE_RE.sub(" ", summary or "")
+    s = _DETAILS_RE.sub(" ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _complete_sentences(text: str, min_len: int = 15) -> str:
+    """若文本未以句末标点收尾（如以“：”结尾），回退到最后一个完整句；不足 min_len 返回空串。"""
+    text = text.strip()
+    if not text:
+        return ""
+    if text[-1] in _SENT_END:
+        return text
+    cut = max(text.rfind(ch) for ch in _SENT_END)
+    if cut >= min_len:
+        return text[: cut + 1]
+    return ""
+
+
 def extract_first_paragraph(rel_path: str, max_len: int = 120) -> str:
-    """从概念文件中抽取首个实质段落作为定义回退;失败返回空串。"""
+    """从概念文件中抽取首个实质段落作为定义回退;失败返回空串。
+    返回的文本保证落在完整句边界上（不会以“：”“，”等未完标点收尾）。"""
     f = ROOT / "concept" / rel_path
     if not f.is_file():
         return ""
@@ -106,16 +136,19 @@ def extract_first_paragraph(rel_path: str, max_len: int = 120) -> str:
         text = text.rstrip(" ·，,；;：:")
         if hard_cut:
             text += "…"
-    return text
+        return text
+    # 未超长但段落本身以未完标点收尾（如“它提供：”+列表），回退到完整句
+    return _complete_sentences(text)
 
 
 def current_file_summary(rel_path: str) -> str:
-    """读取概念文件当前的 **Summary** 元数据(raw json 可能过时)。"""
+    """读取概念文件当前的 **Summary** 元数据(raw json 可能过时)。
+    `>` 前缀可选，兼容少数未写成 blockquote 的头部。"""
     f = ROOT / "concept" / rel_path
     if not f.is_file():
         return ""
-    m = re.search(r">\s*\*\*Summary\*\*[:：]\s*(.+)", f.read_text(encoding="utf-8", errors="replace"))
-    return m.group(1).strip() if m else ""
+    m = re.search(r"(?:^|>)\s*\*\*Summary\*\*[:：]\s*(.+)", f.read_text(encoding="utf-8", errors="replace"), re.M)
+    return clean_summary(m.group(1).strip()) if m else ""
 
 
 def definition_or_fallback(summary: str, rel_path: str) -> str:
@@ -123,6 +156,7 @@ def definition_or_fallback(summary: str, rel_path: str) -> str:
     文件当前 Summary(应对过时 raw json) → 文件首段 → MISSING_DEF(诚实标注,不编造)。"""
     # 交叉引用尾注是面向原文件目录的相对链接,嵌入 atlas 后会变成死链,剥离
     summary = re.split(r"\s*\*\*📎 交叉引用", summary or "", maxsplit=1)[0].strip()
+    summary = clean_summary(summary)
     if not is_hollow_definition(summary):
         return summary
     current = current_file_summary(rel_path)
@@ -139,6 +173,7 @@ def header(title: str, en: str, summary: str) -> list[str]:
         "",
         f"> **EN**: {en}",
         f"> **Summary**: {summary}",
+        "> **Rust 版本**: 1.97.0+ (Edition 2024)",
         "> **受众**: [研究者]",
         "> **内容分级**: [元层]",
         "> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)",
@@ -158,6 +193,7 @@ def write_readme(data: dict[str, Any]) -> None:
 
 > **EN**: Knowledge Topology Atlas
 > **Summary**: Rust 知识体系的全局拓扑视图：概念定义、属性关系、场景决策树、示例反例、逻辑推理、层间/层内映射、权威来源对齐。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [研究者]
 > **内容分级**: [元层]
@@ -198,7 +234,6 @@ def write_readme(data: dict[str, Any]) -> None:
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
-> **内容分级**: [元层]
 """
     (OUT_DIR / "README.md").write_text(content, encoding="utf-8")
 

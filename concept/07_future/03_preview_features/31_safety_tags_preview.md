@@ -1,7 +1,7 @@
 # Safety Tags（安全标签）预览
 
-**EN**: Safety Tags for Unsafe Code
-**Summary**: RFC #3842 proposal for structured attributes marking the safety contracts of `unsafe` functions, checkable by tooling and formal reasoning.
+> **EN**: Safety Tags Preview — Redirect Stub
+> **Summary**: Redirect stub: the RFC #3842 `safety` attributes preview — structured annotations of `unsafe` function safety contracts checkable by tooling and formal reasoning, incl. the fact that 21 base tags cover ~96% of std's public unsafe API — is canonically covered in `08_safety_tags_preview.md` in the same directory; this page keeps only the pointer.
 
 > **权威来源**: 本主题已合并至 [`08_safety_tags_preview.md`](08_safety_tags_preview.md)，本文件保留为重定向（Redirect stub）。
 >

@@ -1,7 +1,7 @@
 # 网络编程（Networking）
 
-**EN**: Networking
-**Summary**: Rust network programming: socket basics, protocol quick start, advanced protocols, network security, custom protocol implementation, and formal protocol theory.
+> **EN**: Networking Topic Index
+> **Summary**: Directory index for the `12_networking` topic cluster — socket programming basics, protocol quick start, advanced protocols (gRPC/MQTT/QUIC/AMQP/GraphQL/SSE), network security, custom protocol implementation, and formal protocol theory — forming the protocol/mechanism layer that complements `04_web_and_networking`'s application-architecture layer.
 
 > **权威来源**: 本目录为 `concept/06_ecosystem/` 网络编程专题目录。
 > **重编号说明**: 本目录原编号 `09_networking`，因与 `09_testing_and_quality` 编号冲突，于 2026-07-12 重编号为 `12_networking`。

@@ -6,9 +6,9 @@
     "T1_def_low_rate": 0.011,
     "T1_def_low": [
       5,
-      451
+      456
     ],
-    "T2_top_rate": 0.833,
+    "T2_top_rate": 0.83,
     "T2_top_symbol": "⟹",
     "T3_jump": [
       31,
@@ -23,9 +23,9 @@
   "results": [
     {
       "rel": "concept/00_meta/knowledge_topology/01_concept_definition_atlas.md",
-      "lines": 555,
+      "lines": 559,
       "T1": {
-        "total_rows": 451,
+        "total_rows": 456,
         "low": 5,
         "rate": 0.011,
         "samples": [
@@ -34,20 +34,20 @@
             "数量"
           ],
           [
-            "15",
-            "15"
+            "32",
+            "32"
           ],
           [
             "10",
             "10"
           ],
           [
-            "38",
-            "38"
+            "17",
+            "17"
           ],
           [
-            "107",
-            "107"
+            "111",
+            "111"
           ]
         ]
       },
@@ -55,7 +55,7 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/02_attribute_relationship_atlas.md",
-      "lines": 544,
+      "lines": 552,
       "issues": {}
     },
     {
@@ -86,30 +86,30 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/06_inter_layer_mapping_atlas.md",
-      "lines": 97,
+      "lines": 99,
       "issues": {}
     },
     {
       "rel": "concept/00_meta/knowledge_topology/07_intra_layer_mapping_atlas.md",
-      "lines": 541,
+      "lines": 547,
       "T2": {
-        "total": 426,
+        "total": 430,
         "counts": {
           "→": 9,
-          "⟹": 355,
+          "⟹": 357,
           "⊥": 5,
           "⇔": 20,
-          "↔": 37
+          "↔": 39
         },
         "top_symbol": "⟹",
-        "top_rate": 0.833,
+        "top_rate": 0.83,
         "collapsed": false
       },
       "issues": {}
     },
     {
       "rel": "concept/00_meta/knowledge_topology/08_concept_source_alignment_atlas.md",
-      "lines": 51,
+      "lines": 53,
       "issues": {}
     },
     {
@@ -132,12 +132,12 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/10_gap_and_action_plan.md",
-      "lines": 83,
+      "lines": 85,
       "issues": {}
     },
     {
       "rel": "concept/00_meta/knowledge_topology/README.md",
-      "lines": 45,
+      "lines": 46,
       "issues": {}
     },
     {

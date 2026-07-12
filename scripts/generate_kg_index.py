@@ -31,6 +31,32 @@ OUTPUT = CONCEPT_DIR / "00_meta" / "kg_index.json"
 EN_RE = re.compile(r"^\s*>\s*\*\*EN\*\*:\s*(.+)$", re.MULTILINE)
 SUMMARY_RE = re.compile(r"^\s*>\s*\*\*Summary\*\*:\s*(.+)$", re.MULTILINE)
 BLOOM_RE = re.compile(r"^\s*>\s*\*\*Bloom 层级\*\*:\s*(.+)$", re.MULTILINE)
+# 回退 1：部分文件用「层次定位」声明层级（如 "L4 形式化理论 / ..."），取首个 Lx。
+LAYER_LOC_RE = re.compile(r"^\s*>\s*\*\*层次定位\*\*:\s*(L\d)", re.MULTILINE)
+
+# 回退 2：文件无任何层级声明时按目录推断（见 AGENTS.md 分层约定）。
+DIR_BLOOM_FALLBACK = {
+    "00_meta": "Meta",
+    "01_foundation": "L1-L2",
+    "02_intermediate": "L2-L4",
+    "03_advanced": "L3-L5",
+    "04_formal": "L4-L7",
+    "05_comparative": "L5",
+    "06_ecosystem": "L6",
+    "07_future": "L7",
+}
+
+
+def infer_bloom(text: str, rel_path: str) -> str | None:
+    """提取 Bloom 层级：显式声明 > 层次定位 > 目录回退。"""
+    bloom = extract_first(BLOOM_RE, text)
+    if bloom:
+        return bloom
+    loc = extract_first(LAYER_LOC_RE, text)
+    if loc:
+        return loc
+    top = rel_path.split("/", 1)[0]
+    return DIR_BLOOM_FALLBACK.get(top)
 VERSION_RE = re.compile(r"^\s*>\s*\*\*(?:Rust 版本|对应 Rust 版本)\*\*:\s*(.+)$", re.MULTILINE)
 PRECONCEPT_RE = re.compile(r"^\s*>\s*\*\*前置概念\*\*:\s*(.+)$", re.MULTILINE)
 POSTCONCEPT_RE = re.compile(r"^\s*>\s*\*\*后置概念\*\*:\s*(.+)$", re.MULTILINE)
@@ -89,7 +115,7 @@ def main() -> int:
             continue  # Only index files with EN metadata
 
         summary = extract_first(SUMMARY_RE, text)
-        bloom = extract_first(BLOOM_RE, text)
+        bloom = infer_bloom(text, rel)
         version = extract_first(VERSION_RE, text)
 
         pre_line = extract_first(PRECONCEPT_RE, text)

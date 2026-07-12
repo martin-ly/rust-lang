@@ -2,7 +2,7 @@
 
 >
 > **EN**: Concept Audit Guide
-> **Summary**: Concept Audit Guide. Core Rust concept.
+> **Summary**: The operating manual for auditing `concept/` files: a five-step workflow (metadata → links → cross-layer references → content duplication → archive status), the audit dimensions each file is scored on, and the pass/fix criteria that keep the knowledge base canonically consistent.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]
 > **Bloom 层级**: L3-L5

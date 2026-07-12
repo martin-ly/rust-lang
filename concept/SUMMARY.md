@@ -1,15 +1,10 @@
-> **Summary**:
->
-> mdBook-style summary for the concept collection.
->
-
-# 目录
-
->
 > **EN**: Table of Contents
+> **Summary**: mdBook navigation manifest for the `concept/` collection — the machine-read table of contents that drives the book's sidebar, reading order, and cross-page prev/next links.
 > **前置概念**: N/A
 > **后置概念**: N/A
-> > **权威来源**: 本文件为 `concept/` 权威页。
+> **权威来源**: 本文件为 `concept/` 权威页。
+
+# 目录
 
 - [Rust 概念知识体系 —— 全面分析论证与权威对齐](README.md)
 - [L0 元信息](00_meta/README.md)

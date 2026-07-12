@@ -1,7 +1,7 @@
 # Rust 1.97 兼容性迁移判定树
 
-**EN**: Rust 1.97 Compatibility Migration Decision Trees
-**Summary**: 把 Rust 1.97.0 的兼容性变化从版本页表格提升为可执行的「是否受影响 → 根因 → 具体迁移动作」判定树，覆盖空 `export_name`、`f32: From<{float}>` future-compat、`pin!` 阻止 deref coercion（含 async/自引用影响）、Windows `WSAESHUTDOWN→BrokenPipe`、模块路径段泛型参数拒绝五类场景；每棵树的叶子均为可落地的迁移步骤而非跳出链接。
+> **EN**: Rust 1.97 Compatibility Migration Decision Trees
+> **Summary**: Executable decision trees that turn Rust 1.97.0's compatibility changes into "am I affected → root cause → concrete migration step" flows, covering five scenarios: empty `export_name`, the `f32: From<{float}>` future-compat lint, `pin!` blocking deref coercion (incl. async/self-referential impact), Windows `WSAESHUTDOWN`→`BrokenPipe`, and rejected generic arguments in module path segments — every leaf is an actionable fix rather than a jump link.
 
 > **受众**: [进阶] / [专家]
 > **内容分级**: [参考级] / [操作级]
@@ -230,7 +230,7 @@ cargo clippy --all-targets -- -D warnings
 ### 5.1 症状与报错信息
 
 - **现象**：升级后原先能编译的代码出现**类型不匹配（type mismatch）硬错误**：期望 `Pin<&mut T>`，实际得到 `Pin<&mut &mut T>`（多一层 `&mut`）。
-- **根因（事实）**：`std::pin::pin!` 宏（1.68 起稳定的安全栈 Pin）在 1.97 起**阻止 deref coercion**；`pin!(&mut x)` 现在**严格**得到 `Pin<&mut &mut T>`，不再被隐式 coerce 为 `Pin<&mut T>`（来源：版本页 §7「`pin!` 阻止 deref coercions」与 §7.1 示例；coercion 现状页确认 deref coercion 触发位置包含函数参数与 `let` 右侧）。
+- **根因（事实）**：`std::pin::pin!` 宏（Macro）（1.68 起稳定的安全栈 Pin）在 1.97 起**阻止 deref coercion**；`pin!(&mut x)` 现在**严格**得到 `Pin<&mut &mut T>`，不再被隐式 coerce 为 `Pin<&mut T>`（来源：版本页 §7「`pin!` 阻止 deref coercions」与 §7.1 示例；coercion 现状页确认 deref coercion 触发位置包含函数参数与 `let` 右侧）。
 - **触发条件**：调用点写的是 `pin!(&mut x)`（把「引用」作为值传给宏），却又按 `Pin<&mut T>` 使用。
 
 ### 5.2 判定树（pin 类型签名）

@@ -3,8 +3,8 @@
 > **内容分级**: [专家级]
 > **定理链**: N/A — 边界全景/导航性文档，形式化推导见各权威页
 
-**EN**: Unsafe Boundary Panorama
-**Summary**: A panorama of the semantic boundaries of unsafe Rust: the UB taxonomy boundary, the Stacked/Tree Borrows aliasing-model boundary, the Miri detectable-vs-undetectable boundary, the safety-vs-validity invariant contract boundary, and the FFI layout contract boundary — each with boundary statements, counterexamples, and quantitative decision conditions.
+> **EN**: Unsafe Boundary Panorama
+> **Summary**: A panorama of the semantic boundaries of unsafe Rust: the UB taxonomy boundary, the Stacked/Tree Borrows aliasing-model boundary, the Miri detectable-vs-undetectable boundary, the safety-vs-validity invariant contract boundary, and the FFI layout contract boundary — each with boundary statements, counterexamples, and quantitative decision conditions.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶-专家]
@@ -25,7 +25,7 @@
 
 > **前置概念**: [Unsafe Rust](03_unsafe.md) · [Rust 内存模型](29_memory_model.md) · [NLL 与 Polonius](08_nll_and_polonius.md)
 > **后置概念**: [Miri](../../04_formal/04_model_checking/31_miri.md) · [Kani](../../04_formal/04_model_checking/32_kani.md) · [Async 边界全景](../01_async/38_async_boundary_panorama.md)
-> **下层概念（L2）**: [内部可变性](../../02_intermediate/02_memory_management/08_interior_mutability.md) · [智能指针](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [内存管理](../../02_intermediate/02_memory_management/03_memory_management.md)
+> **下层概念（L2）**: [内部可变性](../../02_intermediate/02_memory_management/08_interior_mutability.md) · [智能指针（Smart Pointer）](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [内存管理](../../02_intermediate/02_memory_management/03_memory_management.md)
 
 ## 📑 目录
 
@@ -232,7 +232,7 @@ Miri 是 MIR 解释器，能精确建模内存、tag、provenance——但它是
 - **可检测（覆盖路径内）**: 别名违规（SB/TB）、无效值、UAF、越界、未初始化读取、数据竞争（部分）、对齐错误、内存泄漏报告。
 - **不可检测（边界外）**:
   - **未执行路径**: 测试未覆盖的分支中的 UB（这是测试覆盖问题，不是模型问题）；
-  - **不支持的操作**: 大部分 SIMD intrinsics、内联汇编、真实 FFI 调用（只能 shim 部分 libc）、多线程弱内存序的完整探索；
+  - **不支持的操作**: 大部分 SIMD intrinsics、内联汇编（Inline Assembly）、真实 FFI 调用（只能 shim 部分 libc）、多线程弱内存序的完整探索；
   - **非确定性空间**: Miri 对调度/地址做采样，单次运行未触发 ≠ 不存在；
   - **规范未定区域**: 模型尚未规定的操作（如某些 int2ptr 模式）Miri 只能近似。
 - **边界推论**: "Miri 通过" 是**必要不充分**条件；性质级保证（所有输入）需 [Kani](../../04_formal/04_model_checking/32_kani.md) 等有界模型检测补位。
@@ -323,7 +323,7 @@ FFI 边界没有共享类型系统，契约靠**两侧人工对齐**：
 
 - **布局契约**: `#[repr(C)]` 提供 C 兼容布局（字段顺序、对齐、padding）；`repr(Rust)` 跨 FFI 无任何保证；`repr(transparent)` 保证单字段新类型与内层同布局。
 - **类型契约**: 平台相关类型（`c_long`、枚举判别值、`_Bool`）随目标三元组变化；Rust 枚举（即使 `#[repr(C)]`）与 C enum 的**无效判别值**行为不同——C 侧传越界值 ⟹ Rust 侧 UB。
-- **所有权/生命周期契约**: 谁分配谁释放（allocator 配对）、句柄的线程亲和性、回调的重入性，全部靠文档约定。
+- **所有权（Ownership）/生命周期契约**: 谁分配谁释放（allocator 配对）、句柄的线程亲和性、回调的重入性，全部靠文档约定。
 - **控制流契约**: panic 穿越 `extern "C"` 边界 = UB（用 `extern "C-unwind"` 或 `catch_unwind` 兜底）。
 - **边界本质**: FFI 契约的违反**编译器零提示**，Miri 对真实 C 代码也力不从心——这是五条边界中机器辅助最弱的一条。
 

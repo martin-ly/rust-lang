@@ -308,7 +308,8 @@
       ],
       "ex:path": "00_meta/00_framework/bloom_taxonomy.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:BoundaryExtensionTree",
@@ -911,7 +912,8 @@
       ],
       "ex:path": "00_meta/01_terminology/bilingual_template.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:BilingualConceptTemplateV2",
@@ -960,7 +962,8 @@
       "ex:path": "00_meta/01_terminology/terminology_glossary.md",
       "ex:rustVersion": "1.97.0+ (Edition 2024)",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:AuthoritySourceMap",
@@ -1081,7 +1084,8 @@
       ],
       "ex:path": "00_meta/02_sources/topic_authority_alignment_map.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:ConceptAuditGuide",
@@ -1179,7 +1183,8 @@
       ],
       "ex:path": "00_meta/03_audit/concept_consistency_audit_checklist.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:GradingSystem",
@@ -1250,7 +1255,8 @@
       ],
       "ex:path": "00_meta/03_audit/template_deduplication_guide.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:CrossReferenceMatrix",
@@ -1273,7 +1279,8 @@
       ],
       "ex:path": "00_meta/04_navigation/cross_reference_matrix.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:CareerLandscape",
@@ -1394,7 +1401,8 @@
       ],
       "ex:path": "00_meta/04_navigation/inter_layer_topology.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:IntraLayerModelMap",
@@ -1492,7 +1500,8 @@
       ],
       "ex:path": "00_meta/04_navigation/learning_mvp_path_en.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:Navigation",
@@ -1615,7 +1624,8 @@
       ],
       "ex:path": "00_meta/knowledge_topology/01_concept_definition_atlas.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:AttributeRelationshipAtlas",
@@ -1638,7 +1648,8 @@
       ],
       "ex:path": "00_meta/knowledge_topology/02_attribute_relationship_atlas.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:ScenarioDecisionTreeAtlas",
@@ -1661,7 +1672,8 @@
       ],
       "ex:path": "00_meta/knowledge_topology/03_scenario_decision_tree_atlas.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:ExampleAndCounterexampleAtlas",
@@ -1684,7 +1696,8 @@
       ],
       "ex:path": "00_meta/knowledge_topology/04_example_counterexample_atlas.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:LogicalReasoningAtlas",
@@ -1707,7 +1720,8 @@
       ],
       "ex:path": "00_meta/knowledge_topology/05_logical_reasoning_atlas.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:InterLayerMappingAtlas",
@@ -1730,7 +1744,8 @@
       ],
       "ex:path": "00_meta/knowledge_topology/06_inter_layer_mapping_atlas.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:IntraLayerMappingAtlas",
@@ -1753,7 +1768,8 @@
       ],
       "ex:path": "00_meta/knowledge_topology/07_intra_layer_mapping_atlas.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:ConceptSourceAlignmentAtlas",
@@ -1776,7 +1792,8 @@
       ],
       "ex:path": "00_meta/knowledge_topology/08_concept_source_alignment_atlas.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:ReasoningJudgmentTreeAtlas",
@@ -1799,7 +1816,8 @@
       ],
       "ex:path": "00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:GapAndActionPlan",
@@ -1822,7 +1840,8 @@
       ],
       "ex:path": "00_meta/knowledge_topology/10_gap_and_action_plan.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:KnowledgeGraphOntologyV20",
@@ -1870,7 +1889,8 @@
       ],
       "ex:path": "00_meta/knowledge_topology/kg_tlo_alignment.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:KnowledgeTopologyAtlas",
@@ -1893,7 +1913,8 @@
       ],
       "ex:path": "00_meta/knowledge_topology/README.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:Placeholder",
@@ -1916,7 +1937,8 @@
       ],
       "ex:path": "00_meta/placeholders/placeholder_generic.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:ConceptMetaLayer",
@@ -1939,7 +1961,8 @@
       ],
       "ex:path": "00_meta/README.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:TRPL3rdEdChapterMapping",
@@ -1962,7 +1985,8 @@
       ],
       "ex:path": "00_meta/trpl_3rd_ed_mapping.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:GettingStartedWithRust",
@@ -5050,7 +5074,8 @@
       "ex:path": "03_advanced/02_unsafe/00_before_formal.md",
       "ex:rustVersion": "1.97.0+ (Edition 2024)",
       "ex:layer": "L3",
-      "ex:domain": "unsafe_lowlevel"
+      "ex:domain": "unsafe_lowlevel",
+      "ex:bloomLevel": "L3-L5"
     },
     {
       "@id": "ex:SafeAndEffectiveUnsafeRust",
@@ -5124,7 +5149,8 @@
       "ex:path": "03_advanced/02_unsafe/12_unsafe_rust_patterns.md",
       "ex:rustVersion": "1.97.0+ (Edition 2024)",
       "ex:layer": "L3",
-      "ex:domain": "unsafe_lowlevel"
+      "ex:domain": "unsafe_lowlevel",
+      "ex:bloomLevel": "L3-L5"
     },
     {
       "@id": "ex:UnsafeRust_02unsafe",
@@ -6069,7 +6095,8 @@
         "T-139"
       ],
       "ex:layer": "L4",
-      "ex:domain": "formal_methods"
+      "ex:domain": "formal_methods",
+      "ex:bloomLevel": "L4"
     },
     {
       "@id": "ex:TypeCheckingAndInferenceInRustc",
@@ -6193,7 +6220,8 @@
         "T-102"
       ],
       "ex:layer": "L4",
-      "ex:domain": "formal_methods"
+      "ex:domain": "formal_methods",
+      "ex:bloomLevel": "L4"
     },
     {
       "@id": "ex:LinearLogic_01ownershipl",
@@ -6521,7 +6549,8 @@
         "T-129"
       ],
       "ex:layer": "L4",
-      "ex:domain": "formal_methods"
+      "ex:domain": "formal_methods",
+      "ex:bloomLevel": "L4"
     },
     {
       "@id": "ex:AeneasSymbolicSemantics",
@@ -6680,7 +6709,8 @@
         "c15_verification_tools"
       ],
       "ex:layer": "L4",
-      "ex:domain": "formal_methods"
+      "ex:domain": "formal_methods",
+      "ex:bloomLevel": "L4-L7"
     },
     {
       "@id": "ex:ProgrammingLanguageFoundations",
@@ -9097,7 +9127,8 @@
       ],
       "ex:path": "06_ecosystem/03_design_patterns/82_engineering_and_production_patterns.md",
       "ex:layer": "L6",
-      "ex:domain": "ecosystem_design"
+      "ex:domain": "ecosystem_design",
+      "ex:bloomLevel": "L6"
     },
     {
       "@id": "ex:DesignPatternsGlossary",
@@ -9314,7 +9345,8 @@
       ],
       "ex:path": "06_ecosystem/04_web_and_networking/41_http_client_development.md",
       "ex:layer": "L6",
-      "ex:domain": "ecosystem_web"
+      "ex:domain": "ecosystem_web",
+      "ex:bloomLevel": "L6"
     },
     {
       "@id": "ex:GlommioAndThreadPerCoreAsyncRuntimes",
@@ -9484,7 +9516,8 @@
       "ex:path": "06_ecosystem/05_systems_and_embedded/39_os_kernel.md",
       "ex:rustVersion": "1.97.0+ (Edition 2024)",
       "ex:layer": "L6",
-      "ex:domain": "ecosystem_embedded"
+      "ex:domain": "ecosystem_embedded",
+      "ex:bloomLevel": "L6"
     },
     {
       "@id": "ex:Robotics",
@@ -9531,7 +9564,8 @@
       ],
       "ex:path": "06_ecosystem/05_systems_and_embedded/53_embedded_graphics.md",
       "ex:layer": "L6",
-      "ex:domain": "ecosystem_embedded"
+      "ex:domain": "ecosystem_embedded",
+      "ex:bloomLevel": "L6"
     },
     {
       "@id": "ex:CToRustTranslation",
@@ -9897,7 +9931,8 @@
       ],
       "ex:path": "06_ecosystem/12_networking/02_network_security.md",
       "ex:layer": "L6",
-      "ex:domain": "ecosystem_web"
+      "ex:domain": "ecosystem_web",
+      "ex:bloomLevel": "L6"
     },
     {
       "@id": "ex:CustomNetworkProtocolImplementationInRust",
@@ -9920,7 +9955,8 @@
       ],
       "ex:path": "06_ecosystem/12_networking/03_custom_protocol_implementation.md",
       "ex:layer": "L6",
-      "ex:domain": "ecosystem_web"
+      "ex:domain": "ecosystem_web",
+      "ex:bloomLevel": "L6"
     },
     {
       "@id": "ex:RustNetworkProgrammingQuickStart",
@@ -10476,7 +10512,8 @@
       ],
       "ex:path": "06_ecosystem/11_domain_applications/75_industrial_case_studies.md",
       "ex:layer": "L6",
-      "ex:domain": "ecosystem_domains"
+      "ex:domain": "ecosystem_domains",
+      "ex:bloomLevel": "L6"
     },
     {
       "@id": "ex:AlgorithmEngineeringPractice",
@@ -10523,7 +10560,8 @@
       ],
       "ex:path": "06_ecosystem/11_domain_applications/77_data_structures_in_rust.md",
       "ex:layer": "L6",
-      "ex:domain": "ecosystem_domains"
+      "ex:domain": "ecosystem_domains",
+      "ex:bloomLevel": "L6"
     },
     {
       "@id": "ex:AlgorithmComplexityAnalysisInRust",
@@ -10546,7 +10584,8 @@
       ],
       "ex:path": "06_ecosystem/11_domain_applications/78_algorithm_complexity_analysis.md",
       "ex:layer": "L6",
-      "ex:domain": "ecosystem_domains"
+      "ex:domain": "ecosystem_domains",
+      "ex:bloomLevel": "L6"
     },
     {
       "@id": "ex:CuttingEdgeAlgorithmTechnologies",
@@ -10569,7 +10608,8 @@
       ],
       "ex:path": "06_ecosystem/11_domain_applications/79_cutting_edge_algorithms.md",
       "ex:layer": "L6",
-      "ex:domain": "ecosystem_domains"
+      "ex:domain": "ecosystem_domains",
+      "ex:bloomLevel": "L6"
     },
     {
       "@id": "ex:FormalAlgorithmTheory",
@@ -10592,7 +10632,8 @@
       ],
       "ex:path": "06_ecosystem/11_domain_applications/80_formal_algorithm_theory.md",
       "ex:layer": "L6",
-      "ex:domain": "ecosystem_domains"
+      "ex:domain": "ecosystem_domains",
+      "ex:bloomLevel": "L6"
     },
     {
       "@id": "ex:Readme_06ecosystem",
@@ -10813,7 +10854,8 @@
       "ex:path": "07_future/00_version_tracking/rust_1_95_stabilized.md",
       "ex:rustVersion": "**1.95.0 stable**",
       "ex:layer": "L7",
-      "ex:domain": "version_evolution"
+      "ex:domain": "version_evolution",
+      "ex:bloomLevel": "L2-L3"
     },
     {
       "@id": "ex:Rust196StabilizedFeaturesCurrentPatch1961",
@@ -10837,7 +10879,8 @@
       "ex:path": "07_future/00_version_tracking/rust_1_96_stabilized.md",
       "ex:rustVersion": "**1.96.1 stable**",
       "ex:layer": "L7",
-      "ex:domain": "version_evolution"
+      "ex:domain": "version_evolution",
+      "ex:bloomLevel": "L2-L3"
     },
     {
       "@id": "ex:Rust1970PreviewArchive",
@@ -10860,7 +10903,8 @@
       ],
       "ex:path": "07_future/00_version_tracking/rust_1_97_preview.md",
       "ex:layer": "L7",
-      "ex:domain": "version_evolution"
+      "ex:domain": "version_evolution",
+      "ex:bloomLevel": "L2-L3"
     },
     {
       "@id": "ex:Rust1970StabilizedFeatures",
@@ -10884,7 +10928,8 @@
       "ex:path": "07_future/00_version_tracking/rust_1_97_stabilized.md",
       "ex:rustVersion": "**1.97.0 stable**（项目 `rust-toolchain.toml` 保持 `stable` 通道，由 rustup 自动解析为当前 latest stable 1.97.0）",
       "ex:layer": "L7",
-      "ex:domain": "version_evolution"
+      "ex:domain": "version_evolution",
+      "ex:bloomLevel": "L2-L3"
     },
     {
       "@id": "ex:Rust198Preview",
@@ -10907,7 +10952,8 @@
       ],
       "ex:path": "07_future/00_version_tracking/rust_1_98_preview.md",
       "ex:layer": "L7",
-      "ex:domain": "version_evolution"
+      "ex:domain": "version_evolution",
+      "ex:bloomLevel": "L2-L3"
     },
     {
       "@id": "ex:Rust2024EditionPreviewAndMigrationNotes",
@@ -10930,7 +10976,8 @@
       ],
       "ex:path": "07_future/01_edition_roadmap/19_rust_edition_preview.md",
       "ex:layer": "L7",
-      "ex:domain": "version_evolution"
+      "ex:domain": "version_evolution",
+      "ex:bloomLevel": "L2-L3"
     },
     {
       "@id": "ex:RustEditionMechanismAndMigrationGuide",
@@ -10953,7 +11000,8 @@
       ],
       "ex:path": "07_future/01_edition_roadmap/23_rust_edition_guide.md",
       "ex:layer": "L7",
-      "ex:domain": "version_evolution"
+      "ex:domain": "version_evolution",
+      "ex:bloomLevel": "L2-L3"
     },
     {
       "@id": "ex:EditionGuide",
@@ -11679,7 +11727,8 @@
       ],
       "ex:path": "07_future/03_preview_features/40_ergonomic_ref_counting_preview.md",
       "ex:layer": "L7",
-      "ex:domain": "version_evolution"
+      "ex:domain": "version_evolution",
+      "ex:bloomLevel": "L4-L5"
     },
     {
       "@id": "ex:RustSpecificationPreview",
@@ -11995,7 +12044,8 @@
       ],
       "ex:path": "07_future/04_research_and_experimental/29_ebpf_rust.md",
       "ex:layer": "L7",
-      "ex:domain": "version_evolution"
+      "ex:domain": "version_evolution",
+      "ex:bloomLevel": "L5-L7"
     },
     {
       "@id": "ex:OperatingSystems",
@@ -12090,7 +12140,8 @@
       ],
       "ex:path": "README.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:AuthoritySourceIndex",
@@ -12113,7 +12164,8 @@
       ],
       "ex:path": "sources/INDEX.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:RfcIndex",
@@ -12136,7 +12188,8 @@
       ],
       "ex:path": "sources/rfc_index.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:TheoremTierSpec",
@@ -12164,7 +12217,8 @@
         "T-003"
       ],
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     },
     {
       "@id": "ex:TableOfContents",
@@ -12187,7 +12241,8 @@
       ],
       "ex:path": "SUMMARY.md",
       "ex:layer": "L0",
-      "ex:domain": "meta_framework"
+      "ex:domain": "meta_framework",
+      "ex:bloomLevel": "Meta"
     }
   ],
   "relations": [

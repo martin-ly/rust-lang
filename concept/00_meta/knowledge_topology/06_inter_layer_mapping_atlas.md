@@ -14,13 +14,13 @@
 | 源层 \ 目标层 | L0 元信息层 | L1 基础概念层 | L2 进阶概念层 | L3 高级概念层 | L4 形式化理论层 | L5 对比分析层 | L6 生态工程层 | L7 前沿趋势层 |
 |---|---|---|---|---|---|---|---|---|
 | L0 元信息层 | 8 | 0 | 0 | 1 | 0 | 1 | 4 | 0 |
-| L1 基础概念层 | 0 | 30 | 47 | 29 | 4 | 2 | 14 | 1 |
-| L2 进阶概念层 | 0 | 3 | 17 | 26 | 8 | 4 | 13 | 8 |
-| L3 高级概念层 | 0 | 1 | 5 | 68 | 11 | 2 | 26 | 9 |
-| L4 形式化理论层 | 0 | 2 | 5 | 17 | 71 | 1 | 7 | 12 |
+| L1 基础概念层 | 0 | 30 | 45 | 29 | 4 | 2 | 14 | 1 |
+| L2 进阶概念层 | 0 | 3 | 17 | 26 | 9 | 4 | 12 | 4 |
+| L3 高级概念层 | 0 | 1 | 5 | 69 | 12 | 2 | 26 | 10 |
+| L4 形式化理论层 | 0 | 2 | 6 | 14 | 71 | 1 | 7 | 12 |
 | L5 对比分析层 | 0 | 0 | 2 | 3 | 0 | 6 | 16 | 1 |
-| L6 生态工程层 | 0 | 1 | 1 | 5 | 3 | 3 | 187 | 18 |
-| L7 前沿趋势层 | 0 | 2 | 0 | 4 | 3 | 0 | 7 | 74 |
+| L6 生态工程层 | 0 | 1 | 1 | 5 | 3 | 3 | 185 | 18 |
+| L7 前沿趋势层 | 0 | 2 | 0 | 5 | 3 | 0 | 8 | 79 |
 
 ## 二、跨层关键桥接概念
 
@@ -56,8 +56,6 @@
 | L1 基础概念层 | [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | L3 高级概念层 | Pin |
 | L1 基础概念层 | [Move 语义：C++ 与 Rust 的资源转移模型](../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) | L5 对比分析层 | Rust vs C++ |
 | L1 基础概念层 | [Move 语义：C++ 与 Rust 的资源转移模型](../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) | L2 进阶概念层 | Construction |
-| L1 基础概念层 | [Lifetimes 高级主题](../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md) | L2 进阶概念层 | Traits |
-| L1 基础概念层 | [Lifetimes 高级主题](../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md) | L2 进阶概念层 | Generics |
 | L1 基础概念层 | [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) | L2 进阶概念层 | Traits |
 | L1 基础概念层 | [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) | L2 进阶概念层 | Generics |
 | L1 基础概念层 | [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) | L2 进阶概念层 | Algebraic Data Types |
@@ -86,6 +84,8 @@
 | L1 基础概念层 | [字符串与编码：Rust 的文本处理类型系统](../../01_foundation/06_strings_and_text/18_strings_and_encoding.md) | L3 高级概念层 | FFI |
 | L1 基础概念层 | [格式化与显示](../../01_foundation/06_strings_and_text/46_formatting_and_display.md) | L2 进阶概念层 | Error Handling |
 | L1 基础概念层 | [格式化与显示](../../01_foundation/06_strings_and_text/46_formatting_and_display.md) | L6 生态工程层 | Logging and Tracing |
+| L1 基础概念层 | [模块系统与路径：Rust 的代码组织哲学](../../01_foundation/07_modules_and_items/11_modules_and_paths.md) | L6 生态工程层 | Crate Ecosystem |
+| L1 基础概念层 | [模块系统与路径：Rust 的代码组织哲学](../../01_foundation/07_modules_and_items/11_modules_and_paths.md) | L6 生态工程层 | Workspace |
 
 ## 三、与现有元文件的关系
 
@@ -93,4 +93,7 @@
 - 层内模型映射见 [../04_navigation/intra_layer_model_map.md](../04_navigation/intra_layer_model_map.md)
 - 形式化本体规范见 [kg_ontology_v2.md](kg_ontology_v2.md)
 
+
 ---
+
+> **内容分级**: [元层]

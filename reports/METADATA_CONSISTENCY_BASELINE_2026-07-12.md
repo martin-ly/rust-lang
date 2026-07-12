@@ -9,14 +9,13 @@
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 17 | 3.5% | >0 | FAIL |
-| D6 Summary 低信息量模板套话 | 13 | 2.7% | >=3% | pass |
+| D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 30 / 483
+**受影响文件总数**: 18 / 483
 
 ## 各类 Top 样例
 
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
-
 
 ### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（1）
 
@@ -24,9 +23,7 @@
 
 ### D3 关键字段同文件重声明（0）
 
-
 ### D4 文首块 Rust 版本号自矛盾（0）
-
 
 ### D5 稳定层正文残留 nightly/preview/unstable（17）
 
@@ -43,20 +40,7 @@
 - `concept/06_ecosystem/01_cargo/10_public_private_deps.md` — 稳定层 nightly/preview 关键词 6 处
 - `concept/06_ecosystem/01_cargo/11_resolver_v3_public_feature_unification.md` — 稳定层 nightly/preview 关键词 4 处
 
-### D6 Summary 低信息量模板套话（13）
-
-- `concept/SUMMARY.md` — Summary 为空
-- `concept/00_meta/02_sources/authority_source_map.md` — 套话: Authority Source Map. Core Rust concept.
-- `concept/00_meta/03_audit/concept_audit_guide.md` — 套话: Concept Audit Guide. Core Rust concept.
-- `concept/02_intermediate/00_traits/18_lifetimes_advanced.md` — Summary 为空
-- `concept/03_advanced/01_async/38_async_boundary_panorama.md` — Summary 为空
-- `concept/03_advanced/02_unsafe/32_unsafe_boundary_panorama.md` — Summary 为空
-- `concept/04_formal/02_separation_logic/33_safety_tags_in_formal.md` — Summary 为空
-- `concept/06_ecosystem/01_cargo/59_cargo_build_scripts.md` — 套话: A comprehensive guide to `build.rs`: when it runs, how to pa
-- `concept/06_ecosystem/01_cargo/87_build_std.md` — 套话: A comprehensive guide to Cargo's unstable `build-std` featur
-- `concept/06_ecosystem/09_testing_and_quality/17_benchmarking.md` — 套话: Core Rust concept covering statistical benchmarking with Cri
-- `concept/06_ecosystem/12_networking/README.md` — Summary 为空
-- `concept/07_future/00_version_tracking/migration_197_decision_tree.md` — Summary 为空
+### D6 Summary 低信息量模板套话（0）
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 

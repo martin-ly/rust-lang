@@ -6,7 +6,7 @@
     "decision_trees": 3,
     "fault_trees": 2,
     "K1_missing_required": 0,
-    "K1b_missing_bloomLevel": 55,
+    "K1b_missing_bloomLevel": 0,
     "K2_bad_path": 0,
     "K3_not_bilingual": 0,
     "K4_duplicate_id": 0,
@@ -27,18 +27,7 @@
     "dcterms:created": "2026-07-11"
   },
   "K1_missing": [],
-  "K1b_bloom_missing_sample": [
-    "ex:BloomTaxonomy",
-    "ex:BilingualConceptTemplate",
-    "ex:TerminologyGlossary",
-    "ex:TopicAuthorityAlignmentMap",
-    "ex:ConceptConsistencyAuditChecklist",
-    "ex:TemplateDeduplicationGuide",
-    "ex:CrossReferenceMatrix",
-    "ex:CrossLayerDependencyAndImplicationTopology",
-    "ex:RustMinimumViableLearningPath",
-    "ex:ConceptDefinitionAtlas"
-  ],
+  "K1b_bloom_missing_sample": [],
   "K2_bad_path": [],
   "K3_not_bilingual": [],
   "K4_dup": [],

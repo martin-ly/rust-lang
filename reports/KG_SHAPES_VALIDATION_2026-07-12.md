@@ -5,7 +5,7 @@
 | 规则 | 命中 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|
 | K1 缺必填字段 | 0 | 0 | pass |
-| K1b 缺 ex:bloomLevel | 55 | 记录 | 记录 |
+| K1b 缺 ex:bloomLevel | 0 | 记录 | 记录 |
 | K2 path 文件不存在 | 0 | 0 | pass |
 | K3 prefLabel 非双语 | 0 | 0 | pass |
 | K4 @id 重复 | 0 | 0 | pass |

@@ -1,5 +1,5 @@
 > **EN**: Benchmarking with Criterion in Rust
-> **Summary**: Core Rust concept covering statistical benchmarking with Criterion, regression detection, CI integration, and measurement best practices.
+> **Summary**: Statistical benchmarking in Rust with Criterion.rs: multi-sample measurement with confidence intervals, parameterized and throughput benches, baseline storage for automated regression detection, CI integration, and the measurement hygiene (warm-up, noise isolation, allocator effects) needed before optimizing.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: [Criterion.rs Book](https://bheisler.github.io/criterion.rs/book/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 > **受众**: [进阶]

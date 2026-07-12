@@ -1,7 +1,7 @@
 # 生命周期高级主题：从 HRTB 到自引用类型
 
-**EN**: Lifetimes Advanced
-**Summary**: Advanced lifetimes: higher-ranked trait bounds (HRTB), elision rules, variance, self-referential structs, and Pin.
+> **EN**: Advanced Lifetimes — Redirect Stub
+> **Summary**: Redirect stub: advanced lifetime topics — higher-ranked trait bounds (HRTB), elision rules, variance, closure-capture lifetimes, self-referential structs, and `Pin` — are canonically covered in `concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md`; this page keeps only the pointer.
 
 > **权威来源**: 本主题已合并至 [`../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md`](../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md)，本文件保留为重定向（Redirect stub）。
 >

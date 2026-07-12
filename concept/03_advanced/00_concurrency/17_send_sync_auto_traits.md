@@ -322,7 +322,7 @@ fn assert_send_dyn() {
 | `MutexGuard<'_, T>` | ❌（std 实现） | `T: Sync` 时 ✅ | guard 绑定加锁线程（pthread 等平台的锁所有者约束） |
 | `JoinHandle<T>` | ✅ | ❌ | handle 本身可转移，但 `&JoinHandle` 并发 `join` 无意义 |
 | `fn` 项 / 函数指针 | ✅ | ✅ | 无捕获环境 |
-| 闭包 | 捕获环境的合取 | 捕获环境的合取 | 规则 2：闭包是匿名 struct，捕获即字段 |
+| 闭包（Closures） | 捕获环境的合取 | 捕获环境的合取 | 规则 2：闭包是匿名 struct，捕获即字段 |
 
 > 判定心法：先问"**共享引用能造成什么并发访问**"（决定 Sync），再问"**转移后析构/独占使用是否依赖线程**"（决定 Send）。
 

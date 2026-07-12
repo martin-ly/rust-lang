@@ -8,7 +8,7 @@
       "D3": 0,
       "D4": 0,
       "D5": 17,
-      "D6": 13
+      "D6": 0
     },
     "pct": {
       "D1": 0.0,
@@ -16,10 +16,10 @@
       "D3": 0.0,
       "D4": 0.0,
       "D5": 3.5,
-      "D6": 2.7
+      "D6": 0.0
     },
     "D2_base_files_with_asp_and_bloom": 297,
-    "flagged_files": 30
+    "flagged_files": 18
   },
   "examples": {
     "D1": [],
@@ -81,76 +81,12 @@
         "稳定层 nightly/preview 关键词 4 处"
       ]
     ],
-    "D6": [
-      [
-        "concept/SUMMARY.md",
-        "Summary 为空"
-      ],
-      [
-        "concept/00_meta/02_sources/authority_source_map.md",
-        "套话: Authority Source Map. Core Rust concept."
-      ],
-      [
-        "concept/00_meta/03_audit/concept_audit_guide.md",
-        "套话: Concept Audit Guide. Core Rust concept."
-      ],
-      [
-        "concept/02_intermediate/00_traits/18_lifetimes_advanced.md",
-        "Summary 为空"
-      ],
-      [
-        "concept/03_advanced/01_async/38_async_boundary_panorama.md",
-        "Summary 为空"
-      ],
-      [
-        "concept/03_advanced/02_unsafe/32_unsafe_boundary_panorama.md",
-        "Summary 为空"
-      ],
-      [
-        "concept/04_formal/02_separation_logic/33_safety_tags_in_formal.md",
-        "Summary 为空"
-      ],
-      [
-        "concept/06_ecosystem/01_cargo/59_cargo_build_scripts.md",
-        "套话: A comprehensive guide to `build.rs`: when it runs, how to pa"
-      ],
-      [
-        "concept/06_ecosystem/01_cargo/87_build_std.md",
-        "套话: A comprehensive guide to Cargo's unstable `build-std` featur"
-      ],
-      [
-        "concept/06_ecosystem/09_testing_and_quality/17_benchmarking.md",
-        "套话: Core Rust concept covering statistical benchmarking with Cri"
-      ],
-      [
-        "concept/06_ecosystem/12_networking/README.md",
-        "Summary 为空"
-      ],
-      [
-        "concept/07_future/00_version_tracking/migration_197_decision_tree.md",
-        "Summary 为空"
-      ]
-    ]
+    "D6": []
   },
   "per_file": {
-    "concept/SUMMARY.md": {
-      "D6": [
-        "Summary 为空"
-      ]
-    },
     "concept/00_meta/01_terminology/terminology_glossary.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 18 处"
-      ]
-    },
-    "concept/00_meta/02_sources/authority_source_map.md": {
-      "D6": [
-        "套话: Authority Source Map. Core Rust concept."
-      ]
-    },
-    "concept/00_meta/03_audit/concept_audit_guide.md": {
-      "D6": [
-        "套话: Concept Audit Guide. Core Rust concept."
       ]
     },
     "concept/00_meta/04_navigation/foundations_gap_closure_index.md": {
@@ -163,11 +99,6 @@
         "稳定层 nightly/preview 关键词 40 处"
       ]
     },
-    "concept/02_intermediate/00_traits/18_lifetimes_advanced.md": {
-      "D6": [
-        "Summary 为空"
-      ]
-    },
     "concept/02_intermediate/00_traits/19_advanced_traits.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 14 处"
@@ -176,21 +107,6 @@
     "concept/02_intermediate/01_generics/02_generics.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 25 处"
-      ]
-    },
-    "concept/03_advanced/01_async/38_async_boundary_panorama.md": {
-      "D6": [
-        "Summary 为空"
-      ]
-    },
-    "concept/03_advanced/02_unsafe/32_unsafe_boundary_panorama.md": {
-      "D6": [
-        "Summary 为空"
-      ]
-    },
-    "concept/04_formal/02_separation_logic/33_safety_tags_in_formal.md": {
-      "D6": [
-        "Summary 为空"
       ]
     },
     "concept/04_formal/04_model_checking/31_miri.md": {
@@ -233,27 +149,14 @@
         "稳定层 nightly/preview 关键词 4 处"
       ]
     },
-    "concept/06_ecosystem/01_cargo/59_cargo_build_scripts.md": {
-      "D6": [
-        "套话: A comprehensive guide to `build.rs`: when it runs, how to pa"
-      ]
-    },
     "concept/06_ecosystem/01_cargo/87_build_std.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 11 处"
-      ],
-      "D6": [
-        "套话: A comprehensive guide to Cargo's unstable `build-std` featur"
       ]
     },
     "concept/06_ecosystem/05_systems_and_embedded/08_wasi.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 7 处"
-      ]
-    },
-    "concept/06_ecosystem/09_testing_and_quality/17_benchmarking.md": {
-      "D6": [
-        "套话: Core Rust concept covering statistical benchmarking with Cri"
       ]
     },
     "concept/06_ecosystem/11_domain_applications/11_webassembly.md": {
@@ -264,21 +167,6 @@
     "concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md": {
       "D5": [
         "稳定层 nightly/preview 关键词 28 处"
-      ]
-    },
-    "concept/06_ecosystem/12_networking/README.md": {
-      "D6": [
-        "Summary 为空"
-      ]
-    },
-    "concept/07_future/00_version_tracking/migration_197_decision_tree.md": {
-      "D6": [
-        "Summary 为空"
-      ]
-    },
-    "concept/07_future/03_preview_features/31_safety_tags_preview.md": {
-      "D6": [
-        "Summary 为空"
       ]
     },
     "concept/sources/INDEX.md": {

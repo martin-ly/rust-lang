@@ -207,7 +207,7 @@ trait RefMap {
 fn for_each_line<F>(f: F) where F: for<'a> FnMut(&'a str) { /* ... */ }
 ```
 
-**场景 C：闭包 + HRTB 的推断死角** —— `for<'a> Fn(&'a T) -> &'a U` 这类签名中，闭包体推断经常失败（late-bound vs early-bound 生命周期问题）；若该 trait 是你自己定义的，改用 GAT 可绕开闭包推断问题，代价是失去自动的闭包实现，需要写具名结构体。
+**场景 C：闭包（Closures） + HRTB 的推断死角** —— `for<'a> Fn(&'a T) -> &'a U` 这类签名中，闭包体推断经常失败（late-bound vs early-bound 生命周期问题）；若该 trait 是你自己定义的，改用 GAT 可绕开闭包推断问题，代价是失去自动的闭包实现，需要写具名结构体。
 
 > **经验法则**：**"借用出不去"用 HRTB，"借用要回家"用 GAT**。即：借用只在调用内部存在 → HRTB；借用要作为返回值交还给调用者 → GAT。
 
@@ -507,7 +507,7 @@ trait Stream {
 // ❌ let s: Box<dyn Stream> = ...;  —— 带 GAT 的 trait 不可 object
 ```
 
-绕过路径：(1) 返回 `Box<[u8]>` 等所有权类型使 `Chunk` 不再带参数；(2) 用 `enum` 做手工分发；(3) 仿照 `async_trait` 宏，把借用返回值装箱并擦除生命周期（引入堆分配，打破零成本）。
+绕过路径：(1) 返回 `Box<[u8]>` 等所有权类型使 `Chunk` 不再带参数；(2) 用 `enum` 做手工分发；(3) 仿照 `async_trait` 宏（Macro），把借用返回值装箱并擦除生命周期（引入堆分配，打破零成本）。
 
 ### 8.4 不应对 GAT 做的事
 

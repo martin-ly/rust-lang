@@ -74,6 +74,10 @@ def normalize_blockquote_header(content: str, max_lines: int = 150) -> str:
             continue
         if _FIELD_START_RE.match(body):
             fields.append(body)
+        elif body.startswith(("```", "<")):
+            # 代码围栏/HTML 片段是“概念卡片”正文而非元数据续行，独立成段，
+            # 避免被并入 Summary/EN 等字段（atlas 定义列出现 ``` 泄漏的根因）。
+            fields.append(body)
         elif fields:
             fields[-1] += " " + body
     return "\n".join(fields)

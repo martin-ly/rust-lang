@@ -1,7 +1,7 @@
 # Safety Tags（安全标签）
 
-**EN**: Safety Tags for Unsafe Code
-**Summary**: RFC #3842 proposal for structured attributes marking the safety contracts of `unsafe` functions, checkable by tooling and formal reasoning.
+> **EN**: Safety Tags in Formal Verification — Redirect Stub
+> **Summary**: Redirect stub: the RFC #3842 `safety` attributes proposal — structured, tool-checkable annotations of `unsafe` function safety contracts, plus their predicate-logic formalization and mapping to Kani/Prusti/Verus — is canonically covered in `concept/07_future/03_preview_features/08_safety_tags_preview.md`; this page keeps only the pointer.
 
 > **权威来源**: 本主题已合并至 [`../../07_future/03_preview_features/08_safety_tags_preview.md`](../../07_future/03_preview_features/08_safety_tags_preview.md)，本文件保留为重定向（Redirect stub）。
 >

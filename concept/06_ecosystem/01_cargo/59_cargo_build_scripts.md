@@ -5,7 +5,7 @@
 # Cargo Build Scripts（`build.rs`）
 
 > **EN**: Cargo Build Scripts (`build.rs`)
-> **Summary**: A comprehensive guide to `build.rs`: when it runs, how to pass `cfg`/env vars to the main crate, how to link native libraries, and common pitfalls.
+> **Summary**: `build.rs` is Cargo's pre-compilation build script: it runs before the main crate, prints `cargo:` directives to inject `cfg` flags and environment variables, links native libraries through `links`/`OUT_DIR`, and controls rebuild caching via `rerun-if-changed` — this page covers its execution model, output protocol, native-dependency linking, and common pitfalls.
 > **受众**: [进阶 / 工程]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。

@@ -1,7 +1,7 @@
 # 权威来源映射表（Authority Source Map）
 >
 > **EN**: Authority Source Map
-> **Summary**: Authority Source Map. Core Rust concept.
+> **Summary**: A concept-by-concept map from core Rust topics (Ownership, Borrowing, Traits, Lifetimes, Concurrency, …) to their authoritative sources in four tiers — official docs (TRPL / Rust Reference), academic formalizations (RustBelt et al.), and community authorities — each row adding C++/Haskell/Go counterpart references for cross-language alignment.
 >
 > | 概念 | 官方来源 | 学术来源 | 社区权威 | C++ 对标 | Haskell 对标 | Go 对标 | 备注 |
 > | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
