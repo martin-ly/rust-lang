@@ -836,7 +836,7 @@ fn better_system(a_query: Query<&Position, With<A>>) { }
 fn better_system_b(b_query: Query<&Position, With<B>>) { }
 ```
 
-> [来源: Bevy Performance Guidelines](https://bevyengine.org/learn/advanced-concepts/performance/)
+> [来源: Bevy Performance Guidelines](https://bevy.org/learn/)
 
 ---
 

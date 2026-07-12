@@ -53,7 +53,7 @@
   - [📚 Cargo Book 与 rustc dev guide 权威章节 {#cargo-book-与-rustc-dev-guide-权威章节}](#-cargo-book-与-rustc-dev-guide-权威章节-cargo-book-与-rustc-dev-guide-权威章节)
     - [Cargo Book 重点章节 {#cargo-book-重点章节}](#cargo-book-重点章节-cargo-book-重点章节)
     - [rustc dev guide 重点章节 {#rustc-dev-guide-重点章节}](#rustc-dev-guide-重点章节-rustc-dev-guide-重点章节)
-  - [🆕 权威国际化内容升级 (Rust 1.97.0+) {#权威国际化内容升级-rust-1960}](#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960)
+  - [🆕 权威国际化内容升级 (Rust 1.97.0+) {#权威国际化内容升级-rust-1960}](#-权威国际化内容升级-rust-1970-权威国际化内容升级-rust-1960)
     - [本次升级要点 {#本次升级要点}](#本次升级要点-本次升级要点)
   - [相关概念 {#相关概念}](#相关概念-相关概念)
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
@@ -130,7 +130,7 @@ cargo prusti --file src/lib.rs
 
 - 最新版本：跟随 [Prusti GitHub Releases](https://github.com/viperproject/prusti-dev/releases) 发布；VS Code 用户推荐通过 [Prusti Assistant](https://marketplace.visualstudio.com/items?itemName=viper-admin.prusti-assistant) 获取最新版。
 - [Prusti 用户指南](https://viperproject.github.io/prusti-dev/user-guide/)
-- [Prusti 教程 - Getting Started](https://viperproject.github.io/prusti-dev/user-guide/getting-started.html)
+- [Prusti 教程 - Getting Started](https://viperproject.github.io/prusti-dev/user-guide/)
 - [Prusti GitHub](https://github.com/viperproject/prusti-dev)
 - [Prusti 论文：The Prusti Project](https://pm.inf.ethz.ch/publications/AstrauskasBilyFialaGrannanMathejaMuellerPoliSummers22.pdf)
 
@@ -234,7 +234,7 @@ fn increment(x: i32) -> i32 {
 
 ### Aeneas {#aeneas}
 
-> **来源**: [Aeneas](https://aeneas-verif.github.io/aeneas/)
+> **来源**: [Aeneas](https://aeneasverif.github.io/aeneas/)
 >
 > **来源**: [Charon](https://github.com/AeneasVerif/charon)
 
@@ -252,7 +252,7 @@ charon cargo --preset=aeneas
 **版本与官方资源**:
 
 - 推荐版本：以 [Aeneas GitHub](https://github.com/AeneasVerif/aeneas) 最新 commit 为准；与 Charon 版本需匹配。
-- [Aeneas 文档](https://aeneas-verif.github.io/aeneas/)
+- [Aeneas 文档](https://aeneasverif.github.io/aeneas/)
 - [Aeneas GitHub](https://github.com/AeneasVerif/aeneas)
 - [Charon GitHub](https://github.com/AeneasVerif/charon)
 - [Aeneas 论文 (ICFP 2022)](https://zenodo.org/records/6672939)

@@ -211,7 +211,7 @@
 - **特性门控** (Feature Gate) [L5+] — 通过 #![feature(...)] 启用编译器不稳定 nightly 特性的机制 — [Unstable Book](https://doc.rust-lang.org/unstable-book/index.html)
 - **交叉编译** (Cross-compilation) [L5+] — 在一种架构/OS 上编译生成另一种架构/OS 可执行文件的过程 — [Cargo Book](https://doc.rust-lang.org/cargo/reference/config.html#target)
 - **构建脚本** (Build Script) [L5+] — Cargo 在编译主 crate 前执行的 build.rs，用于代码生成或 C 库链接 — [Cargo Book](https://doc.rust-lang.org/cargo/reference/build-scripts.html)
-- **零成本抽象** (Zero-Cost Abstraction) [L5+] — 高级语言特性编译后不产生运行时开销的设计原则 — [C++ Origins [已失效]]<!-- 原链接: https://www.stroustrup.com/FSM/0cost.pdf --> · [Rust Blog](https://blog.rust-lang.org/2015/05/11/traits.html)
+- **零成本抽象** (Zero-Cost Abstraction) [L5+] — 高级语言特性编译后不产生运行时开销的设计原则 — [Stroustrup — Abstraction and the C++ Machine Model](https://www.stroustrup.com/abstraction-and-machine.pdf) · [Rust Blog](https://blog.rust-lang.org/2015/05/11/traits.html)
 - **Clap** (Clap) [L5+] — Rust 生态最流行的命令行参数解析库，支持派生宏和构建器模式 — [docs.rs](https://docs.rs/clap/latest/clap/)
 - **`cargo-script`** (cargo-script) [L5+] — 直接运行单个 Rust 文件而无需 Cargo.toml，FCP 已结束但被 edition policy 阻塞 — [RFC 3503](https://rust-lang.github.io/rfcs//3503-frontmatter.html)
 - **Cranelift** (Cranelift) [L5+] — Wasmtime 项目开发的替代后端编译器，Rust 编译器的实验性后端，因资金不足进展停滞（2026-05） — [GitHub](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift)

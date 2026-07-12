@@ -51,7 +51,8 @@ SUMMARY_LOW_PATTERNS = [
 ASP_MAP = {"A": {1, 2}, "S": {2, 3, 4}, "P": {4, 5, 6, 7}}
 KEY_FIELDS = ["Bloom 层级", "Rust 版本", "对应 Rust 版本", "层次定位", "层级", "A/S/P 标记", "内容分级"]
 # 这些文件以讨论 nightly/preview 为内容，D5 豁免
-D5_WHITELIST_SUBSTR = ("07_future", "nightly_rust", "version_tracking", "preview_features")
+# （knowledge_topology 为跨层生成的元层索引，nightly/preview 仅作为概念名引用出现，非稳定层正文残留）
+D5_WHITELIST_SUBSTR = ("07_future", "nightly_rust", "version_tracking", "preview_features", "knowledge_topology")
 
 
 def expand_bloom(text: str):

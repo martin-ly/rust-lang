@@ -25,7 +25,7 @@
 > [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) |
 > [RustBelt](https://plv.mpi-sws.org/rustbelt/) |
 > [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) |
-> [RustSEM](https://rustsem.github.io/)
+> RustSEM（站点已下线）
 
 ---
 

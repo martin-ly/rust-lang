@@ -15,7 +15,7 @@
 ---
 > **来源**: [Jung, R. et al. — *RustBelt: Securing the Foundations of the Rust Programming Language*. POPL 2018]
 >
-> **来源**: [Iris 教程 — https://iris-project.org/tutorial.html]
+> **来源**: [Iris 教程 — https://iris-project.org/]
 > **来源**: [O'Hearn, P.W. — *Separation Logic*. Communications of the ACM, 2019]
 > **来源**: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/introduction.html)
 

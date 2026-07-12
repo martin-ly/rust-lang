@@ -680,7 +680,7 @@ Python 对比:
 ```
 
 > **来源**: [Polars Performance](https://pola.rs/benchmarks.html) ·
-> [Why Rust for Data [已失效]]<!-- 原链接: https://pola.rs/posts/rust-for-data/ --> ·
+> [Polars Blog Posts](https://pola.rs/posts/) ·
 > [Arrow Rust](https://arrow.apache.org/rust/)
 
 ---
@@ -722,7 +722,7 @@ Python 对比:
 └── 根结论: ❌ Parquet 是分析工作负载的最优解，但不是通用解。选型应考虑访问模式。
 ```
 
-> **来源**: [Parquet Best Practices [已失效]]<!-- 原链接: https://parquet.apache.org/docs/file-format/config/ --> ·
+> **来源**: [Parquet Configuration](https://parquet.apache.org/docs/file-format/configurations/) ·
 > [When Not to Use Parquet](https://www.onehouse.ai/blog/onehouse-analytics-engine-guide)
 
 ### 8.2 边界极限
@@ -766,7 +766,7 @@ fn write_with_schema_evolution() {
 > 2. **删除列**: 旧列数据保留在文件中，reader 忽略
 > 3. **类型转换**: 不支持（需重写文件）
 > 4. 使用 Delta Lake 管理 schema 演化（事务日志记录每次变更）
-> **来源**: [Parquet Schema Evolution [已失效]]<!-- 原链接: https://parquet.apache.org/docs/file-format/schema-evolution/ --> ·
+> **来源**: [Parquet Format Specification](https://parquet.apache.org/docs/file-format/) ·
 > [Delta Lake Schema Enforcement](https://docs.delta.io/latest/delta-batch.html#schema-enforcement)
 
 ### 9.2 边界测试：对象存储流式下载内存溢出（运行时错误）
@@ -874,7 +874,7 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节从测验 1：`polars` 在 Rust 数据工程中与 `pandas…、测验 2：`arrow-rs` 在数据生态中扮演什么角色？（理解层）、测验 3：为什么列式存储（Columnar Storage）比行式存储…、测验 4：`datafusion` 在 Rust 中提供什么功能？（理…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
+本节从测验 1：`polars` 在 Rust 数据工程中与 `pandas…、测验 2：`arrow-rs`在数据生态中扮演什么角色？（理解层）、测验 3：为什么列式存储（Columnar Storage）比行式存储…、测验 4：`datafusion` 在 Rust 中提供什么功能？（理…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
 
 ### 测验 1：`polars` 在 Rust 数据工程中与 `pandas` 有什么对应关系？（理解层）
 

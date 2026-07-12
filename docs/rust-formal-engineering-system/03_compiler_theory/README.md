@@ -20,7 +20,7 @@
 
 ## 知识结构思维导图 {#知识结构思维导图}
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)** · **来源: [Wikipedia - Formal Grammar](https://en.wikipedia.org/wiki/Formal_Grammar)** · **[ACM - Compiler Design Principles](https://dl.acm.org/)** · **[IEEE - Language Implementation Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)** · **来源: [Wikipedia - Formal Grammar](https://en.wikipedia.org/wiki/Formal_Grammar)** · **[ACM - Compiler Design Principles](https://dl.acm.org/)** · **[IEEE - Language Implementation Standards](https://ieeexplore.ieee.org/)**
 
 ```mermaid
 mindmap

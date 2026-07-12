@@ -386,5 +386,5 @@ content/safety_critical/ (原 docs/RUST_SAFETY_CRITICAL_ECOSYSTEM/ 已合并，�
 
 | 来源 | 说明 |
 |:---|:---|
-| [Safety-Critical Rust Community](https://rust-safety-critical.org/) | 安全关键 Rust 社区 |
+| [Safety-Critical Rust Consortium](https://github.com/rustfoundation/safety-critical-rust-consortium) | 安全关键 Rust 社区 |
 | [Rust Foundation](https://foundation.rust-lang.org/) | 基金会动态 |

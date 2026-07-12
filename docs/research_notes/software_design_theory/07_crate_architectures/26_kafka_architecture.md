@@ -362,7 +362,7 @@ match producer.send(record, timeout).await {
 > - [来源: [Apache Kafka 官方文档](https://kafka.apache.org/documentation/)]
 > **P1（学术论文/演讲）**:
 >
-> - [来源: [Kafka: a Distributed Messaging System for Log Processing](https://www.microsoft.com/en-us/research/publication/kafka-a-distributed-messaging-system-for-log-processing/)] — Kafka 原始设计论文
+> - [来源: [Kafka: a Distributed Messaging System for Log Processing](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/09/Kafka.pdf)] — Kafka 原始设计论文
 > - [来源: [Discretized Streams: Fault-Tolerant Streaming Computation at Scale (Spark Streaming)](https://people.csail.mit.edu/matei/papers/2013/sosp_spark_streaming.pdf)] — 流处理语义参考
 > **P2（仓库/社区文章）**:
 >

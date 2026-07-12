@@ -1635,7 +1635,7 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 
 ## 十二、演进方向
 
-本节围绕「待补充与演进方向（TODOs）」展开，依次讨论自定义 Allocator（`#[global_allocator]`）、`ManuallyDrop<T>` 与 `mem::forget` 的…、`Vec<T>` / `String` / `HashMap` 的内存…、`std::alloc::System` vs `jemalloc`…等7个方面。
+本节围绕「演进方向」展开，依次讨论自定义 Allocator（`#[global_allocator]`）、`ManuallyDrop<T>` 与 `mem::forget` 的…、`Vec<T>` / `String` / `HashMap` 的内存…、`std::alloc::System` vs `jemalloc`…等7个方面。
 
 ### 12.1 自定义 Allocator（`#[global_allocator]`）
 

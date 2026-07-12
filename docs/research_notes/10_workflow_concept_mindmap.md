@@ -571,7 +571,7 @@ impl EventDrivenWorkflow {
 > **来源: [Wikipedia - Mind Map](https://en.wikipedia.org/wiki/Mind_Map)**
 > **来源: [Wikipedia - Concept Map](https://en.wikipedia.org/wiki/Concept_Map)**
 > **[ACM - Knowledge Visualization](https://dl.acm.org/)**
-> **[Tony Buzan - Mind Mapping](https://www.tonybuzan.com/) <!-- link: known-broken -->**
+> **[Tony Buzan - Mind Mapping](https://www.tonybuzan.com/)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

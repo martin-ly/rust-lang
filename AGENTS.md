@@ -160,6 +160,9 @@ python scripts/detect_content_overlap.py
 # 术语表对齐检查（以 concept/00_meta/01_terminology/terminology_glossary.md 为权威表）
 python scripts/check_glossary_alignment.py --strict
 
+# 内容完整性审计（TODO/待补充/占位标记 + 空章节量化，复核 reports/CONTENT_COMPLETENESS_CLEANUP_2026_07_12.md）
+python scripts/audit_content_completeness.py --json tmp/completeness.json
+
 # MSRV 单一事实源检查（根 Cargo.toml rust-version = 1.97.0 为唯一事实源）
 python scripts/check_msrv_consistency.py --strict
 

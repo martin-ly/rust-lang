@@ -1264,7 +1264,7 @@ fn safe_raw_pointer() {
 
 ## 十一、演进方向
 
-本节围绕「待补充与演进方向（TODOs）」展开，依次讨论补充章节：FFI 与 repr 属性完整规范、补充章节：Miri 的使用方法与限制、补充章节：`std::ptr::read/write` vs `*pt…、补充章节：`NonNull<T>` / `Unique<T>` / `…等5个方面。
+本节围绕「演进方向」展开，依次讨论补充章节：FFI 与 repr 属性完整规范、补充章节：Miri 的使用方法与限制、补充章节：`std::ptr::read/write` vs `*pt…、补充章节：`NonNull<T>` / `Unique<T>` / `…等5个方面。
 
 ### 补充章节：FFI 与 repr 属性完整规范
 
@@ -1640,7 +1640,7 @@ unsafe { std::ptr::read(p.as_ptr()); }
 
 #### 典型使用场景
 
-「典型使用场景」部分包含 `ptr::read`： `Vec::pop` 内部实现与 `Manu… 与  `ptr::write`：未初始化内存填充与 `MaybeUninit… 两条主线，本节依次说明。
+「典型使用场景」部分包含 `ptr::read`： `Vec::pop` 内部实现与 `Manu… 与`ptr::write`：未初始化内存填充与`MaybeUninit… 两条主线，本节依次说明。
 
 ##### `ptr::read`： `Vec::pop` 内部实现与 `ManuallyDrop` 配合
 
@@ -3023,7 +3023,7 @@ fn inspect(ring: &IoUring) {
 
 > **关键洞察**: Unsafe Fields 是 Rust "显式化 Unsafe 边界"趋势的延续（Rust 2024 Edition 的 `unsafe_op_in_unsafe_fn` 是同一方向的先前步骤）。
 > 它将 Rust 的**效果系统**（effect system）从函数级扩展到字段级，为未来更细粒度的 effects（如 `const`、`async`、`unsafe` 的组合）铺平道路。
-> [来源: [Rust Internals — Unsafe Fields Discussion](https://internals.rust-lang.org/t/unsafe-fields/)] ·
+> [来源: [Rust Internals — Unsafe Fields Discussion](https://internals.rust-lang.org/t/semi-rfc-unsafe-fields/2550)] ·
 > [来源: [Rust Project Goals 2026 — Unsafe Fields](https://rust-lang.github.io/rust-project-goals/2026/unsafe-fields.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) ·

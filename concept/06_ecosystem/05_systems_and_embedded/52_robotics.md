@@ -139,7 +139,7 @@
 反馈环: 执行 → 传感器 → 感知（闭环控制）
 ```
 
-> **来源**: [ROS2 Design](https://design.ros2.org/) · [Robotics Software Engineering — Springer [已失效]]<!-- 原链接: https://link.springer.com/book/10.1007/978-3-030-66474-7 -->
+> **来源**: [ROS2 Design](https://design.ros2.org/) · Robotics Software Engineering（Springer，原链接已失效）
 
 ### 1.2 实时约束与确定性
 
@@ -413,7 +413,7 @@ fn configure_realtime_executor() -> Executor {
 }
 ```
 
-> **来源**: [ROS2 Real-Time Working Group [已失效]]<!-- 原链接: https://ros-real-time.github.io/ --> · [Static Executor — Bosch](https://github.com/ros2/examples/tree/master/rclcpp/executors)
+> **来源**: [ROS2 Real-Time Working Group](https://github.com/ros-realtime) · [Static Executor — Bosch](https://github.com/ros2/examples/tree/master/rclcpp/executors)
 
 ### 4.2 优先级继承与 PREEMPT_RT
 
@@ -793,7 +793,7 @@ impl<const N: usize, const M: usize> KalmanFilter<N, M> {
 | **SLAM 建图规模** | 10k-100k landmarks | 内存限制 | 稀疏矩阵优化、回环检测降频 |
 | **MPC 求解频率** | 10-50Hz（osqp） | 1kHz（显式 MPC）| 在线 QP 求解是瓶颈 |
 
-> **来源**: [ROS2 Real-Time Benchmarks [已失效]]<!-- 原链接: https://ros-real-time.github.io/ --> · [nalgebra Benchmarks](https://www.nalgebra.org/benchmarks/) · [OSQP Performance](https://osqp.org/citing/)
+> **来源**: [ROS2 Real-Time Benchmarks](https://github.com/ros-realtime) · [nalgebra Benchmarks](https://www.nalgebra.org/benchmarks/) · [OSQP Performance](https://osqp.org/citing/)
 
 ---
 
@@ -824,7 +824,7 @@ unsafe fn deserialize_without_schema(bytes: &[u8]) -> PointCloud2 {
 // 4. safe_drive 编译期类型绑定彻底消除此类错误
 ```
 
-> **来源**: [ROS2 XTypes [已失效]]<!-- 原链接: https://design.ros2.org/articles/rosidl.html --> · [DDS Security](https://www.omg.org/spec/DDS-SECURITY/) · [Rustonomicon — Transmute](https://doc.rust-lang.org/nomicon/transmutes.html)
+> **来源**: [ROS2 IDL Interface Definition](https://design.ros2.org/articles/idl_interface_definition.html) · [DDS Security](https://www.omg.org/spec/DDS-SECURITY/) · [Rustonomicon — Transmute](https://doc.rust-lang.org/nomicon/transmutes.html)
 
 ### 8.2 边界测试：ROS2 回调阻塞执行器（实时性违反）
 
@@ -859,7 +859,7 @@ impl RealtimeNode {
 // 4. 控制回调禁用分配（pre-allocated buffers）
 ```
 
-> **来源**: [ROS2 Real-Time WG Best Practices [已失效]]<!-- 原链接: https://ros-real-time.github.io/ --> · [Linux Real-Time Scheduling](https://man7.org/linux/man-pages/man7/sched.7.html) · [Lock-Free Programming](https://doc.rust-lang.org/nomicon/atomics.html)
+> **来源**: [ROS2 Real-Time WG](https://github.com/ros-realtime) · [Linux Real-Time Scheduling](https://man7.org/linux/man-pages/man7/sched.7.html) · [Lock-Free Programming](https://doc.rust-lang.org/nomicon/atomics.html)
 
 ### 8.3 边界测试：多线程 ROS2 节点共享可变状态（数据竞争）
 
@@ -908,7 +908,7 @@ impl GoodNode {
 > [来源: [Tock OS](https://www.tockos.org/)]
 > [来源: [Hubris](https://hubris.oxide.computer/)]
 > [来源: [PREEMPT_RT](https://wiki.linuxfoundation.org/realtime/start)]
-> [ROS2 Real-Time WG [已失效]]<!-- 原链接: https://ros-real-time.github.io/ -->](<https://ros-real-time.github.io/>)
+> [ROS2 Real-Time WG](https://github.com/ros-realtime)
 > [来源: [OSQP](https://osqp.org/)]
 > [来源: [argmin](https://argmin-rs.org/)]
 > [来源: [pathfinding](https://docs.rs/pathfinding/)]

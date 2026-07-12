@@ -16,7 +16,7 @@
 > **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot](https://creusot.rs/) · [Miri Book](https://github.com/rust-lang/miri) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [a-mir-formality] · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **[SOSP 2024 Verus](https://verus-lang.github.io/verus/)** · **[PLDI 2024 RefinedRust](https://arxiv.org/abs/2404.03613)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ✅
+> **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **[SOSP 2024 Verus](https://verus-lang.github.io/verus/guide/)** · **[PLDI 2024 RefinedRust](https://arxiv.org/abs/2404.03613)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ✅
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
@@ -443,7 +443,7 @@ ROI: ★★★★★ 极高 — AWS s2n-quic 已验证
 标注成本:       中（spec + proof ≈ 80% 实现量）
 运行成本:       本地秒级，CI 分钟级
 ─────────────────────────────────────────
-ROI: ★★★★☆ 高 — Microsoft IronRDP 已验证 [SOSP 2024 Verus](https://verus-lang.github.io/verus/) ✅
+ROI: ★★★★☆ 高 — Microsoft IronRDP 已验证 [SOSP 2024 Verus](https://verus-lang.github.io/verus/guide/) ✅
 ```
 
 #### 场景 C: 日常 Web 服务业务逻辑

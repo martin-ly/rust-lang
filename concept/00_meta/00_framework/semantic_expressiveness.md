@@ -1051,7 +1051,7 @@ mindmap
 > [💡 原创分析](methodology.md)
 > **思维表征说明**: 此 `mindmap` 是七维光谱的**放射式紧凑视图**——与正文中逐项展开的矩阵和雷达图形成互补。
 > mindmap 适合「快速回顾」场景：读者可在 10 秒内扫视全部七个维度及其核心边界特征，建立整体认知锚点，然后根据需要深入对应章节。
-> [Tony Buzan, *The Mind Map Book*; 双编码理论 — Paivio 1986](https://www.tonybuzan.com/) <!-- link: known-broken -->
+> [Tony Buzan, *The Mind Map Book*; 双编码理论 — Paivio 1986](https://www.tonybuzan.com/)
 
 ---
 

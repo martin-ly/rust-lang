@@ -23,11 +23,11 @@
 > **来源**: [Martin Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) ·
 > [Martin Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html) ·
 > [Young — Implementing Domain-Driven Design](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577) ·
-> [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) ·
+> [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) ·
 > [EventStoreDB Documentation](https://developers.eventstore.com/server/v24.10/) ·
 > [Axon Framework Reference](https://docs.axoniq.io/reference-guide/)
 > [来源: [Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)] ·
-> [来源: [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))]
+> [来源: [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))]
 > [来源: [Young — CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)] ·
 > [来源: [Axon Framework](https://docs.axoniq.io/reference-guide/)]
 > **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/24_roadmap.md)
@@ -81,7 +81,7 @@
     - [反命题与边界](#反命题与边界)
 
 **变更日志**:
-> **来源**: [EventStoreDB](https://developers.eventstore.com/server/v24.10/) · [Microsoft CQRS](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
+> **来源**: [EventStoreDB](https://developers.eventstore.com/server/v24.10/) · [Microsoft CQRS](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 
 - v1.0 (2026-05-25): 初始创建——CQRS+ES 合并专题，覆盖命令端/查询端分离、事件溯源、Saga 编排、Outbox 模式、Rust 实现骨架
 
@@ -253,7 +253,7 @@ graph TB
     style C4 fill:#fce4ec
 ```
 
-> **来源**: [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) · [Vernon — Implementing DDD](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577)
+> **来源**: [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) · [Vernon — Implementing DDD](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577)
 > [来源: [Axon Framework Reference](https://docs.axoniq.io/reference-guide/)] · [来源: [Young — CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)]
 
 ---
@@ -290,7 +290,7 @@ graph TB
 >                    └── 否 → 传统 CRUD + 审计表 ⚠️
 > ```
 >
-> **来源**: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
+> **来源**: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) · [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 
 ---
 
@@ -439,7 +439,7 @@ impl OrderProjection {
 > - 读模型可以使用与事件存储完全不同的数据库技术（如 Elasticsearch 全文搜索、Redis 缓存、ClickHouse 分析查询）
 > - 读模型的**最终一致性**延迟取决于投影处理器的消费速度
 >
-> **来源**: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
+> **来源**: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) · [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 
 ### 3.3 读写分离的物理实现
 >
@@ -467,7 +467,7 @@ impl OrderProjection {
 // 两者通过事件总线（Kafka）通信
 ```
 
-> **来源**: [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) · [AWS — CQRS Pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html)
+> **来源**: [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) · [AWS — CQRS Pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html)
 
 ---
 
@@ -585,7 +585,7 @@ async fn load_aggregate(
 | **大小触发** | 聚合状态超过阈值 | 针对大数据聚合优化 | 需要监控状态大小 |
 | **自定义触发** | 业务事件（如订单完成）| 语义明确 | 实现复杂 |
 
-> **来源**: [EventStoreDB — Snapshots](https://developers.eventstore.com/server/v24.10/streams.html#snapshots) · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
+> **来源**: [EventStoreDB — Snapshots](https://docs.kurrent.io/server/v24.10/features/streams.html) · [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 
 ### 4.3 事件升级（Event Upcasting）
 >
@@ -1239,7 +1239,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 | **模式演化** | Upcasting / 版本化枚举（Enum） | 事件格式不可破坏式变更 | 需要严格的事件契约治理 |
 | **跨边界上下文** | 事件驱动的上下文映射 | 不存在全局一致的事件总线 | 需要显式的上下文契约（Anti-Corruption Layer）|
 
-> **来源**: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) · [Vernon — Implementing DDD](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577)
+> **来源**: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) · [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) · [Vernon — Implementing DDD](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577)
 
 ---
 
@@ -1270,7 +1270,7 @@ fn benchmark_rebuild_without_snapshot() {
 }
 ```
 
-> **修正**: 快照是生产环境的事件溯源必需品。推荐的快照策略是**计数触发 + 时间触发**的混合：每 1000 个事件或每 1 小时（以先到者为准）创建一次快照。快照存储应使用与事件存储不同的物理存储（如 S3/MinIO 对象存储），以降低成本。[来源: [EventStoreDB — Snapshots](https://developers.eventstore.com/server/v24.10/streams.html#snapshots)] · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
+> **修正**: 快照是生产环境的事件溯源必需品。推荐的快照策略是**计数触发 + 时间触发**的混合：每 1000 个事件或每 1 小时（以先到者为准）创建一次快照。快照存储应使用与事件存储不同的物理存储（如 S3/MinIO 对象存储），以降低成本。[来源: [EventStoreDB — Snapshots](https://docs.kurrent.io/server/v24.10/features/streams.html)] · [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 
 ### 10.2 边界测试：双写不一致导致数据丢失（逻辑错误）
 
@@ -1361,7 +1361,7 @@ fn good_deserialization() {
 ---
 
 > [来源: [EventStoreDB Documentation](https://developers.eventstore.com/server/v24.10/)]
-> [来源: [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))]
+> [来源: [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))]
 > [来源: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html)]
 > [来源: [Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)]
 > [来源: [Vernon — Implementing DDD](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577)]

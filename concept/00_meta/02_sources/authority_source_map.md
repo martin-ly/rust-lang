@@ -128,7 +128,7 @@ Niko Matsakis:         https://smallcultfollowing.com/babysteps/
 Without Boats:         https://without.boats/
 Jon Gjengset:          https://thesquareplanet.com/blog/ · YouTube: @JonGjengset
 Ralf Jung (blog):      https://www.ralfj.de/blog/
-dtolnay:               https://dtolnay.github.io/
+dtolnay:               https://github.com/dtolnay
 ```
 
 ---

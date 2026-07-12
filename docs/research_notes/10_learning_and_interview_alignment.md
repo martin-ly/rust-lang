@@ -108,10 +108,10 @@
 
 | course.rs 章节 | 学习主题 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |----------------|----------|-----------------|----------|--------------|
-| 基础入门 | 变量、类型、控制流 | L1-L2 | [10_learning_path_comprehensive.md](10_learning_path_comprehensive.md) §路径一 | [course.rs 基础](https://course.rs/basic/) |
-| 所有权与借用 | 所有权、借用、生命周期 | L2-L4 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md)、[formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | [course.rs 所有权](https://course.rs/basic/ownership.html) |
-| 泛型（Generics）与特征 | 泛型、Trait、生命周期 | L3-L5 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | [course.rs 泛型](https://course.rs/basic/trait.html) |
-| 深入类型 | 智能指针、并发、异步（Async） | L4-L6 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md)、[formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | [course.rs 深入类型](https://course.rs/advance/) |
+| 基础入门 | 变量、类型、控制流 | L1-L2 | [10_learning_path_comprehensive.md](10_learning_path_comprehensive.md) §路径一 | [Rust 程序设计语言（中文版）](https://kaisery.github.io/trpl-zh-cn/) |
+| 所有权与借用 | 所有权、借用、生命周期 | L2-L4 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md)、[formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | [TRPL 中文版 — 所有权](https://kaisery.github.io/trpl-zh-cn/ch04-00-understanding-ownership.html) |
+| 泛型（Generics）与特征 | 泛型、Trait、生命周期 | L3-L5 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | [TRPL 中文版 — Trait](https://kaisery.github.io/trpl-zh-cn/ch10-02-traits.html) |
+| 深入类型 | 智能指针、并发、异步（Async） | L4-L6 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md)、[formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | [course.rs 深入类型](https://kaisery.github.io/trpl-zh-cn/) |
 
 ### Rust 中文社区 {#rust-中文社区}
 

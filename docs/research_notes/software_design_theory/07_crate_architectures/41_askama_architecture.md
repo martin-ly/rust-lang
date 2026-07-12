@@ -107,7 +107,7 @@ Askama 支持 Jinja 风格的过滤器、循环、条件、继承和包含：
 {% endblock %}
 ```
 
-> [来源: [askama 模板语法](https://djc.github.io/askama/template_syntax.html)]
+> [来源: [askama 模板语法](https://askama.readthedocs.io/en/stable/template_syntax.html)]
 
 ### 2.3 渲染流程 {#23-渲染流程}
 
@@ -183,7 +183,7 @@ async fn page() -> impl IntoResponse {
 | 忽略 HTML 转义导致 XSS | 安全漏洞 | 默认使用 `|escape`，仅对可信内容使用`|safe` |
 | 模板热重载困难 | 开发体验差 | 使用 `askama` 的 `reload` feature 或在 dev 环境使用动态引擎 |
 
-> [来源: [askama 模板语法 - 过滤器](https://djc.github.io/askama/template_syntax.html#filters)]
+> [来源: [askama 模板语法 - 过滤器](https://askama.readthedocs.io/en/stable/template_syntax.html#filters)]
 
 ---
 

@@ -259,7 +259,7 @@ graph TD
 > **认知功能**: 将技术选型问题转化为可操作的决策路径，降低选型焦虑。建议按顺序回答每个节点问题，不要跳过前置条件。关键洞察：P99 延迟和 GC 容忍度是最先决策的分水岭，团队经验往往比纯技术因素更重要。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 > **决策节点解释**:
 >
-> - P99 延迟 < 1ms：Go 的 GC 虽通常 <1ms，但在高压力下可能累积，无法满足硬实时要求 [Go GC Guide / 工业实践](https://tip.golang.org/doc/gc-guide)
+> - P99 延迟 < 1ms：Go 的 GC 虽通常 <1ms，但在高压力下可能累积，无法满足硬实时要求 [Go GC Guide / 工业实践](https://go.dev/doc/gc-guide)
 > - 编译期数据竞争保证：只有 Rust 的 Send/Sync 能在编译期消除数据竞争；Go 依赖 `go test -race` 等运行时检测 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / Go Memory Model
 > - 静态单二进制：Go 更适合快速构建单个可执行文件；Rust 也可以，但编译时间更长
 
@@ -310,7 +310,7 @@ graph TD
 | 长时间运行服务 | GC 随堆增长而调整，内存占用可能膨胀 | 精确控制内存生命周期（Lifetimes） | Rust 更可控 |
 | 小工具/CLI | GC 开销微不足道，开发效率优先 | 编译时间长，收益有限 | Go 更合适 |
 
-> **关键数据**: Go 1.20+ 的并发 GC 典型停顿时间约 10-100μs，但在大堆（>100GB）或高分配率场景下，mark 阶段可能消耗显著 CPU，导致吞吐下降。Rust 完全消除了这类不可预测性。 [Go GC Guide / Go 1.20 Release Notes](https://tip.golang.org/doc/gc-guide)
+> **关键数据**: Go 1.20+ 的并发 GC 典型停顿时间约 10-100μs，但在大堆（>100GB）或高分配率场景下，mark 阶段可能消耗显著 CPU，导致吞吐下降。Rust 完全消除了这类不可预测性。 [Go GC Guide / Go 1.20 Release Notes](https://go.dev/doc/gc-guide)
 
 ### 6.3 反例: Go 的接口运行时开销 vs Rust 的零成本抽象
 
@@ -920,7 +920,7 @@ fn main() {
 }
 ```
 
-> **修正**: Go 的**接口 nil 陷阱**：接口值由（类型，值）对组成，nil 指针赋值给接口后，接口值不为 nil（类型信息存在）。这导致 `if r != nil` 为 true，但底层指针为 nil，解引用（Reference） panic。Rust 的 `Option<&T>` 是**显式空值**：`None` 和 `Some(&T)` 是不同的变体，编译器强制处理所有情况（`match`、`if let`、`unwrap`）。Rust 无 "nil 指针但非 None" 的概念——空值是显式的、类型安全的。这与 Haskell 的 `Maybe a`（`Nothing` / `Just a`）或 Swift 的 `Optional<T>`（`nil` / `T`）相同——Rust 的 `Option` 是代数数据类型，空值状态在类型系统（Type System）中显式编码。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Go Interface Nil](https://golang.org/doc/faq#nil_error)]
+> **修正**: Go 的**接口 nil 陷阱**：接口值由（类型，值）对组成，nil 指针赋值给接口后，接口值不为 nil（类型信息存在）。这导致 `if r != nil` 为 true，但底层指针为 nil，解引用（Reference） panic。Rust 的 `Option<&T>` 是**显式空值**：`None` 和 `Some(&T)` 是不同的变体，编译器强制处理所有情况（`match`、`if let`、`unwrap`）。Rust 无 "nil 指针但非 None" 的概念——空值是显式的、类型安全的。这与 Haskell 的 `Maybe a`（`Nothing` / `Just a`）或 Swift 的 `Optional<T>`（`nil` / `T`）相同——Rust 的 `Option` 是代数数据类型，空值状态在类型系统（Type System）中显式编码。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Go Interface Nil](https://go.dev/doc/faq#nil_error)]
 
 ## 嵌入式测验（Embedded Quiz）
 

@@ -418,7 +418,7 @@ DOI: 10.1145/3704904
 
 [^16]: Google Security Research. "Memory Safety in Android." 2024-12. <https://security.googleblog.com/2024/12/memory-safety-in-android.html> (Rust安全数据)
 
-[^17]: Microsoft. "Rust in the Windows Kernel." BlueHat IL 2025. <https://www.microsoft.com/en-us/security/blog/2025/01/28/rust-in-the-windows-kernel/> (Win32k Rust移植)
+[^17]: Microsoft. "Rust in the Windows Kernel." BlueHat IL 2025. <https://msrc.microsoft.com/blog/2025/01/rust-in-the-windows-kernel/> (Win32k Rust移植)
 
 [^18]: Linux Kernel Documentation. "Rust." kernel.org. <https://docs.kernel.org/rust/> (内核Rust支持官方文档)
 

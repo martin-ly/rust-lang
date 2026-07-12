@@ -322,7 +322,7 @@ fn manual_sum(values: &[i32]) -> i32 {
 cargo rustc --release -- --emit=asm
 
 # 使用godbolt对比
-# https://godbolt.org/z/rust
+# https://godbolt.org/
 ```
 
 ---

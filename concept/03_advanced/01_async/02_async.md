@@ -78,10 +78,10 @@
 |---|---|---|---|
 | [17.0](https://doc.rust-lang.org/book/ch17-00-async-await.html) | Async/Await 概览 | §〇 认知路径、§一 权威定义 | 建立 Future / async / await 的整体图景 |
 | [17.1](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html) | Futures and Syntax | §3.1 async fn 作为状态机、§8.1 正确示例 | `async fn` 返回 `Future`，`.await` 是挂起点 |
-| [17.2](https://doc.rust-lang.org/book/title-page.html) <!-- link: known-broken --> | Async Functions and Messages | §3.5 调度模型对比、§8.7 取消安全 | 协作式调度与消息传递模式 |
+| [17.2](https://doc.rust-lang.org/book/title-page.html) | Async Functions and Messages | §3.5 调度模型对比、§8.7 取消安全 | 协作式调度与消息传递模式 |
 | [17.3](https://doc.rust-lang.org/book/ch17-03-more-futures.html) | More Futures | §2.2 Future 组合子矩阵、§8.10 Stream/Sink | `join!`、`select!`、Stream 等扩展 |
-| [17.4](https://doc.rust-lang.org/book/title-page.html) <!-- link: known-broken --> | Pinning | §3.2 Pin 的形式化语义、§7.2 Pin 使用边界 | 自引用（Reference）与内存位置稳定性 |
-| [17.5](https://doc.rust-lang.org/book/title-page.html) <!-- link: known-broken --> | Concurrency with Async | §2.3 运行时（Runtime）对比矩阵、§6.1 反命题 | async 与线程/并发的选择 |
+| [17.4](https://doc.rust-lang.org/book/title-page.html) | Pinning | §3.2 Pin 的形式化语义、§7.2 Pin 使用边界 | 自引用（Reference）与内存位置稳定性 |
+| [17.5](https://doc.rust-lang.org/book/title-page.html) | Concurrency with Async | §2.3 运行时（Runtime）对比矩阵、§6.1 反命题 | async 与线程/并发的选择 |
 
 > **阅读建议**：若初次接触 async Rust，可先阅读 TRPL Ch17 原文，再回本文查看形式化推导、跨语言对比与工程反例。
 

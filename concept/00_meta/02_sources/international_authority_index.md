@@ -80,7 +80,7 @@
 | Aeneas | <https://github.com/AeneasVerif/aeneas> | Rust 符号语义与验证 |
 | Prusti | <https://www.pm.inf.ethz.ch/research/prusti.html> | 演绎验证（ETH Zürich） |
 | Kani | <https://model-checking.github.io/kani/> | Rust 模型检查器（AWS） |
-| Verus | <https://verus-lang.github.io/verus/> | 低级系统验证 Rust |
+| Verus | <https://verus-lang.github.io/verus/guide/> | 低级系统验证 Rust |
 | Miri | <https://github.com/rust-lang/miri> | UB 检测解释器 |
 | Ferrocene | <https://ferrocene.dev/> | 安全关键领域 Rust |
 | Safety Tags RFC | 待正式 RFC 编号 | 类型安全标签（预览） |
@@ -224,7 +224,7 @@
 | Without Boats | <https://without.boats/> |
 | Jon Gjengset | <https://thesquareplanet.com/blog/> · <https://www.youtube.com/@JonGjengset> |
 | Ralf Jung | <https://www.ralfj.de/blog/> |
-| dtolnay | <https://dtolnay.github.io/> |
+| dtolnay | <https://github.com/dtolnay> |
 
 ---
 

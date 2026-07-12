@@ -263,7 +263,7 @@ quadrantChart
 
 ## 演进方向
 
-本节围绕「待补充与演进方向（TODOs）」展开，依次讨论核心 Crate MSRV 与 Edition 兼容性矩阵、Kani + GitHub Actions：形式化验证 CI 集成、Wasmtime 形式化语义与 Rust 实现一致性与形式化视角 vs 传统功能分类映射。
+本节围绕「演进方向」展开，依次讨论核心 Crate MSRV 与 Edition 兼容性矩阵、Kani + GitHub Actions：形式化验证 CI 集成、Wasmtime 形式化语义与 Rust 实现一致性与形式化视角 vs 传统功能分类映射。
 
 ### 8.1 核心 Crate MSRV 与 Edition 兼容性矩阵
 >

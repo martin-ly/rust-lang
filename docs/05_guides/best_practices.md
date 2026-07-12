@@ -378,7 +378,7 @@ println!("运行时长: {:?}", stopped.duration());
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 - [Rust Programming Specialization](https://www.coursera.org/specializations/rust-programming) (Duke University) - Rust基础、数据结构、并发编程
-- [Programming in Rust [已失效]]<!-- 原链接: https://www.coursera.org/browse/computer-science/programming-languages --> (University of Colorado Boulder) - Rust编程基础
+- [Programming in Rust — Coursera 搜索](https://www.coursera.org/search?query=rust) (University of Colorado Boulder) - Rust编程基础
 - Practical System Programming in Rust (Coursera Project) - 系统编程实践
 
 > **提示**: 这些 Coursera 课程提供了结构化的学习路径，可作为本文档最佳实践的补充学习资源。

@@ -89,7 +89,7 @@
 ### Google / Microsoft / AWS 官方更新 {#google-microsoft-aws-官方更新}
 
 - [ ] 检查 [Google Rust 博客/指南](https://opensource.googleblog.com/search/label/Rust) 新内容
-- [ ] 检查 [Microsoft Rust 团队博客 [已失效]]<!-- 原链接: https://devblogs.microsoft.com/rust/ --> 新文章
+- [ ] 检查 [Azure SDK Blog](https://devblogs.microsoft.com/azure-sdk/) Rust 相关新文章（原 devblogs Rust 频道已停更）
 - [ ] 检查 [AWS Rust SDK 更新](https://github.com/awslabs/aws-sdk-rust/releases)
 - [ ] 检查 [Rust Foundation](https://foundation.rust-lang.org/news/) 新闻
 

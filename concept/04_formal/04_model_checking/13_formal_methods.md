@@ -2,7 +2,6 @@
 
 > **EN**: Formal Methods (Merged Redirect)
 > **Summary**: Merged Redirect stub — this former L4 page has been merged into the canonical Formal Methods page at `concept/07_future/04_research_and_experimental/02_formal_methods.md`.
-
 > **权威来源**: 本主题已合并至唯一权威页：
 > [`concept/07_future/04_research_and_experimental/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)
 >

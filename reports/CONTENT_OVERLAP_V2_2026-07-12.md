@@ -1,7 +1,7 @@
 # 内容重叠检测 v2（语义质量门 P0-3）
 
 **日期**: 2026-07-12  **扫描**: 1913 文件（concept/knowledge/docs/content/crates，排除 archive/book/target）
-**纳入索引**: 1417（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 536300
+**纳入索引**: 1417（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 537353
 **阈值**: 0.5  **命中对**: 592（同目录 580 / 跨目录 12）
 
 > 本版修正旧版『0 重复』假象：全文关键词（非前50）、纳入 crates、不豁免假 stub、同目录也检、去掉标题 x1.5 主导。
@@ -15,7 +15,7 @@
 | 0.949 | 0.949 | 0.0 | 12 | Y | `docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/README.md`(140) | `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/README.md`(145) |
 | 0.949 | 0.949 | 0.0 | 12 | Y | `docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/README.md`(140) | `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/README.md`(153) |
 | 0.949 | 0.949 | 0.0 | 12 | Y | `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/README.md`(145) | `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/README.md`(153) |
-| 0.902 | 0.902 | 0.5 | 35 | Y | `concept/07_future/03_preview_features/33_autoverus_preview.md`(174) | `concept/04_formal/04_model_checking/24_autoverus.md`(184) |
+| 0.902 | 0.902 | 0.5 | 35 | Y | `concept/07_future/03_preview_features/33_autoverus_preview.md`(178) | `concept/04_formal/04_model_checking/24_autoverus.md`(188) |
 | 0.889 | 0.889 | 0.5 | 5 | Y | `crates/c09_design_pattern/docs/c09_comprehensive_enhancement_report_2025_10_19.md`(15) | `crates/c09_design_pattern/docs/rust_190_comprehensive_enhancement_report.md`(15) |
 | 0.833 | 0.833 | 0.5 | 7 | Y | `crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md`(15) | `crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md`(15) |
 | 0.821 | 0.821 | 0.333 | 9 | Y | `docs/03_practice/03_project_05_text_statistics.md`(108) | `docs/03_practice/03_project_13_database_engine.md`(108) |
@@ -32,7 +32,6 @@
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/multidimensional_matrix.md`(15) | `crates/c01_ownership_borrow_scope/docs/visualization_index.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/multidimensional_matrix.md`(15) | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/visualization_index.md`(15) | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md`(15) |
-| 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md`(15) | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md`(15) |
 | 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c04_generic/docs/00_master_index.md`(15) | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md`(15) |
 | 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c04_generic/docs/00_master_index.md`(15) | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md`(15) |
 | 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c04_generic/docs/00_master_index.md`(15) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(15) |
@@ -40,6 +39,7 @@
 | 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md`(15) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(15) |
 | 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md`(15) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(15) |
 | 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md`(15) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(15) |
+| 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md`(15) | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c03_control_fn/docs/concept_relationship_network.md`(15) | `crates/c03_control_fn/docs/mind_map.md`(15) |
 | 0.8 | 0.8 | 0.333 | 5 | Y | `crates/c07_process/docs/view03.md`(15) | `crates/c07_process/docs/view05.md`(15) |
 | 0.8 | 0.8 | 0.333 | 5 | Y | `crates/c02_type_system/docs/tier_03_references/05_performance_optimization_reference.md`(15) | `crates/c07_process/docs/tier_03_references/05_performance_optimization_reference.md`(15) |

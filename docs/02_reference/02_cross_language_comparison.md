@@ -517,7 +517,7 @@ $ python -m pytest
 
 - [GHC User Guide: LinearTypes](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/linear_types.html) —— GHC 9.0+ 线性类型扩展
 - [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) —— Type Classes 与 Rust Trait 的理论同源
-- [Wadler, "Theorems for Free!", FPCA 1989 [已失效]]<!-- 原链接: https://homepages.inf.ed.ac.uk/wadler/papers/free/theorems_for_free.pdf --> —— 参数多态的形式化性质
+- [Wadler, "Theorems for Free!"（parametricity 专题页）](https://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html) —— 参数多态的形式化性质
 
 #### Python（三级来源） {#python三级来源}
 

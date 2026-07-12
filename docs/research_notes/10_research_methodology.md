@@ -63,7 +63,7 @@
     - [已完成 ✅ {#已完成}](#已完成--已完成)
     - [进行中 🔄（已完成） {#进行中-已完成}](#进行中-已完成-进行中-已完成)
     - [计划中 📋（已完成） {#计划中-已完成}](#计划中-已完成-计划中-已完成)
-  - [🆕 权威国际化内容升级 (Rust 1.97.0+) {#权威国际化内容升级-rust-1960}](#-权威国际化内容升级-rust-1961-权威国际化内容升级-rust-1960)
+  - [🆕 权威国际化内容升级 (Rust 1.97.0+) {#权威国际化内容升级-rust-1960}](#-权威国际化内容升级-rust-1970-权威国际化内容升级-rust-1960)
     - [本次升级要点 {#本次升级要点}](#本次升级要点-本次升级要点)
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
@@ -254,7 +254,7 @@ Qed.
 在形式化研究 Rust 时，以下国际论文与项目构成了当前的主流方法：
 
 - **RustBelt** (Jung et al., POPL 2018): 使用 Iris 高阶并发分离逻辑，对 Rust 的核心类型系统和 `unsafe` 库给出了第一个机器检查的安全证明。官方论文 PDF: <https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf>。
-- **Aeneas** (Ho & Protzenko, ICFP 2022): 通过 LLBC（Low-Level Borrow Calculus）将安全 Rust 函数式翻译到 F\*/Coq/Lean，消除了显式内存推理。项目主页: <https://aeneas-verif.github.io/aeneas/>，源码: <https://github.com/AeneasVerif/aeneas>。
+- **Aeneas** (Ho & Protzenko, ICFP 2022): 通过 LLBC（Low-Level Borrow Calculus）将安全 Rust 函数式翻译到 F\*/Coq/Lean，消除了显式内存推理。项目主页: <https://aeneasverif.github.io/aeneas/>，源码: <https://github.com/AeneasVerif/aeneas>。
 - **RustHorn** (Matsushita et al., ESOP 2020 / TOPLAS 2021): 基于约束 Horn 子句（CHC）的 Rust 程序验证，利用所有权（Ownership）信息消除指针与堆。论文 PDF: <https://www.kb.is.s.u-tokyo.ac.jp/old-users/yskm24t/web/papers/esop2020-rust-horn.pdf>。
 - **RustHornBelt** (Matsushita, Denis, Jourdan, Dreyer, PLDI 2022): 扩展 RustBelt，为带 `unsafe` 代码的 Rust 程序功能正确性提供语义基础。论文 PDF: <https://people.mpi-sws.org/~dreyer/papers/rusthornbelt/paper.pdf>。
 - **Iris** (Jung et al., POPL 2015 / JFP 2018): 高阶并发分离逻辑框架，RustBelt 的证明基础。主页: <https://iris-project.org/>，Coq 实现: <https://gitlab.mpi-sws.org/iris/iris>。
@@ -284,7 +284,7 @@ Qed.
 
 ### Lean 4 / Aeneas 后端示例 {#lean-4-aeneas-后端示例}
 >
-> **来源**: [Aeneas](https://aeneas-verif.github.io/aeneas/)
+> **来源**: [Aeneas](https://aeneasverif.github.io/aeneas/)
 
 Aeneas 将 Rust 的安全子集提取为 Lean 4（或 F\*/Coq/HOL4）中的纯函数，利用 Rust 借用（Borrowing）检查保证消除内存推理：
 
@@ -294,7 +294,7 @@ def take_max (a b : U32) : Result U32 :=
   if a ≥ b then ok a else ok b
 ```
 
-> 说明：Aeneas 的 Lean 后端要求使用 Charon 生成 `.llbc` 文件，再在 Aeneas 中选择 `-backend lean`。详见 [Aeneas 文档](https://aeneas-verif.github.io/aeneas/) 与 [Charon](https://github.com/AeneasVerif/charon)。
+> 说明：Aeneas 的 Lean 后端要求使用 Charon 生成 `.llbc` 文件，再在 Aeneas 中选择 `-backend lean`。详见 [Aeneas 文档](https://aeneasverif.github.io/aeneas/) 与 [Charon](https://github.com/AeneasVerif/charon)。
 
 ### 相关概念 {#相关概念}
 
@@ -558,7 +558,7 @@ def take_max (a b : U32) : Result U32 :=
 - [Prusti User Guide](https://viperproject.github.io/prusti-dev/user-guide/) — 基于 Viper 的演绎验证器
 - [Miri](https://github.com/rust-lang/miri) — Rust MIR 解释器与 UB 检测
 - [Creusot](https://creusot-rs.github.io/) — 基于 Why3/SMT 的 Rust 演绎验证
-- [Aeneas](https://aeneas-verif.github.io/aeneas/) — 函数式翻译验证工具链
+- [Aeneas](https://aeneasverif.github.io/aeneas/) — 函数式翻译验证工具链
 - [Verus](https://github.com/verus-lang/verus/) — 面向系统代码的 SMT 验证器
 - [Criterion.rs](https://bheisler.github.io/criterion.rs/book/) — 统计驱动基准测试
 
@@ -630,7 +630,7 @@ def take_max (a b : U32) : Result U32 :=
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf), [Iris Project](https://iris-project.org/), [Aeneas](https://aeneas-verif.github.io/aeneas/), [RustHorn](https://www.kb.is.s.u-tokyo.ac.jp/old-users/yskm24t/web/papers/esop2020-rust-horn.pdf)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf), [Iris Project](https://iris-project.org/), [Aeneas](https://aeneasverif.github.io/aeneas/), [RustHorn](https://www.kb.is.s.u-tokyo.ac.jp/old-users/yskm24t/web/papers/esop2020-rust-horn.pdf)
 >
 > **权威来源对齐变更日志**: 2026-06-29 新增 RustBelt、Aeneas、RustHorn、Iris 等国际形式化方法来源 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
 

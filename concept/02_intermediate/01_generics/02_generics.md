@@ -1703,7 +1703,7 @@ impl Parse for String {
 
 **关键约束**: `min_specialization` 要求特化 impl 的约束是默认 impl 约束的**逻辑子集**（always applicable）。若默认 impl 要求 `T: Into<U>`，则特化 impl 不能引入 `T: Display` 等新约束。
 
-> **来源**: [RFC 1210 — Default impls](https://rust-lang.github.io/rfcs//1210-impl-specialization.html#default-impls) · [Rust Internals: min_specialization soundness](https://internals.rust-lang.org/t/soundness-of-min-specialization/)
+> **来源**: [RFC 1210 — Default impls](https://rust-lang.github.io/rfcs/1210-impl-specialization.html#default-impls) · [Rust Internals: min_specialization soundness](https://internals.rust-lang.org/t/obviously-sound-min-specialization-extension/16886)
 
 #### 实际用例：为 `&str` 和 `String` 提供不同优化实现
 
@@ -2287,7 +2287,7 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 
 ## 十一、演进方向
 
-「待补充与演进方向（TODOs）」部分按 `min_specialization` 的当前状态与使用、泛型代码的编译时间优化策略、Type-level Programming、`impl Trait` 在返回位置 vs 参数位置等6个方面的顺序逐层展开。
+「演进方向」部分按 `min_specialization` 的当前状态与使用、泛型代码的编译时间优化策略、Type-level Programming、`impl Trait` 在返回位置 vs 参数位置等6个方面的顺序逐层展开。
 
 ### 11.1 `min_specialization` 的当前状态与使用
 

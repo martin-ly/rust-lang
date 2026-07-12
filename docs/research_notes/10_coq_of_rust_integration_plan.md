@@ -119,5 +119,5 @@
 
 ## 学术/社区来源参考 {#学术社区来源参考}
 
-> **来源**: [Aeneas](https://aeneas-verification.github.io/)
+> **来源**: [Aeneas](https://aeneasverif.github.io/aeneas/)
 > **来源**: [coq-of-rust](https://github.com/formal-land/coq-of-rust)

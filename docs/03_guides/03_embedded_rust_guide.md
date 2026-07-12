@@ -95,13 +95,13 @@
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Embassy Book](https://embassy.dev/book/)
-- [RTIC Book](https://rtic-rs.github.io/book/)
+- [RTIC Book](https://rtic.rs/dev/book/en/)
 - [Rust Embedded Working Group](https://github.com/rust-embedded/wg)
 - [Awesome Embedded Rust](https://github.com/rust-embedded/awesome-embedded-rust)
 
 ---
 
-> **权威来源**: [Embassy Book](https://embassy.dev/book/), [RTIC Book](https://rtic-rs.github.io/book/), [Rust Embedded WG](https://github.com/rust-embedded/wg)
+> **权威来源**: [Embassy Book](https://embassy.dev/book/), [RTIC Book](https://rtic.rs/dev/book/en/), [Rust Embedded WG](https://github.com/rust-embedded/wg)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)

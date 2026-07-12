@@ -49,7 +49,7 @@
 | [Rust Reference 中文翻译](https://rustwiki.org/zh-CN/reference/) | 社区翻译 | [10_rust_reference_alignment.md](10_rust_reference_alignment.md) | 语言规范 | 🔄 部分 |
 | [Rust By Example 中文](https://rustwiki.org/zh-CN/rust-by-example/) | 社区翻译 | [10_rust_by_example_alignment.md](10_rust_by_example_alignment.md) | 交互式示例 | 🔄 部分 |
 | [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ --> | 社区论坛 | [10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) | 讨论、博客、招聘 | ✅ 持续 |
-| [Rust 语言圣经](https://course.rs/) | 中文教程 | [10_learning_path_comprehensive.md](10_learning_path_comprehensive.md) | 中文学习路径 | ✅ 已索引 |
+| [Rust 程序设计语言（trpl-zh-cn）](https://kaisery.github.io/trpl-zh-cn/) | 中文教程（替代已下线的 course.rs） | [10_learning_path_comprehensive.md](10_learning_path_comprehensive.md) | 中文学习路径 | ✅ 已索引 |
 
 ---
 

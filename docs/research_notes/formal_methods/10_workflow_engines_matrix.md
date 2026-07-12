@@ -56,7 +56,7 @@
 ## 概述 {#概述}
 
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Workflow Engine](https://en.wikipedia.org/wiki/Workflow_Engine)** · **来源: [Wikipedia - Business Process Management](https://en.wikipedia.org/wiki/Business_Process_Management)** · **[ACM - Workflow System Design](https://dl.acm.org/)** · **[IEEE - Process Automation Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Workflow Engine](https://en.wikipedia.org/wiki/Workflow_Engine)** · **来源: [Wikipedia - Business Process Management](https://en.wikipedia.org/wiki/Business_Process_Management)** · **[ACM - Workflow System Design](https://dl.acm.org/)** · **[IEEE - Process Automation Standards](https://ieeexplore.ieee.org/)**
 
 工作流引擎能力矩阵对比主流工作流引擎的功能特性、适用场景和Rust集成能力，为技术选型提供参考。
 

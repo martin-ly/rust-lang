@@ -103,7 +103,7 @@ while let Some(container) = pager.try_next().await? {
 
 这种设计让调用方无需关心分页协议细节，与 AWS SDK 的 `.into_paginator()` 形成对照。
 
-> [来源: [Azure SDK design guidelines - Pagination](https://azure.github.io/azure-sdk/general_design_patterns.html#pagination)]
+> [来源: [Azure SDK design guidelines - Pagination](https://azure.github.io/azure-sdk/)]
 
 ### 2.4 长运行操作：`Poller<T>` {#24-长运行操作pollert}
 
@@ -178,7 +178,7 @@ let response = poller.await?;
 
 - [TypeSpec / typespec-client-core](https://github.com/microsoft/typespec)
 - [Azure REST API docs](https://learn.microsoft.com/rest/api/azure/)
-- [Azure SDK general design patterns](https://azure.github.io/azure-sdk/general_design_patterns.html)
+- [Azure SDK design guidelines](https://azure.github.io/azure-sdk/)
 
 ### P2（案例 / 最佳实践） {#p2案例-最佳实践}
 

@@ -154,7 +154,7 @@ mindmap
 | 运行时行为 | ... | ... | C: ... | Operational Semantics |
 ```
 
-### 2.2 思维导图（Mind Map） [Buzan, T. — *The Mind Map Book*. BBC Books, 1993; 思维导图作为放射性思维的可视化工具; 认知科学中的图式理论 (Schema Theory)](https://www.tonybuzan.com/) <!-- link: known-broken -->
+### 2.2 思维导图（Mind Map） [Buzan, T. — *The Mind Map Book*. BBC Books, 1993; 思维导图作为放射性思维的可视化工具; 认知科学中的图式理论 (Schema Theory)](https://www.tonybuzan.com/)
 
 使用 Mermaid `graph TD` 或 `graph LR`，规范：
 

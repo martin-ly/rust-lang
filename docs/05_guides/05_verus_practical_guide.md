@@ -101,7 +101,7 @@ components = ["rustc-dev", "llvm-tools-preview", "rust-src"]
 verus = { git = "https://github.com/verus-lang/verus" }
 ```
 
-> [来源: [Verus Installation Guide](https://verus-lang.github.io/verus/guide/install.html)]
+> [来源: [Verus Installation Guide](https://verus-lang.github.io/verus/guide/getting_started.html)]
 
 ---
 
@@ -189,8 +189,8 @@ fn factorial(n: u64) -> (result: u64)
 } // verus!
 ```
 
-> [来源: [Verus Guide — Specifications](https://verus-lang.github.io/verus/guide/spec.html)]
-> [来源: [Verus Guide — Loops and Invariants](https://verus-lang.github.io/verus/guide/loops.html)]
+> [来源: [Verus Guide — Specifications](https://verus-lang.github.io/verus/guide/overview.html)]
+> [来源: [Verus Guide — Loops and Invariants](https://verus-lang.github.io/verus/guide/overview.html)]
 
 ### 3.4 `decreases` — 终止性证明 {#34-decreases-终止性证明}
 >
@@ -265,7 +265,7 @@ fn push_with_ghost<T>(vec: &mut Vec<T>, value: T, ghost_old_len: Ghost<usize>)
 | `Ghost<T>` | ❌ | ✅ | 仅规格 |
 | `Tracked<T>` | ✅ | ✅ | 线性 ghost（所有权（Ownership）跟踪） |
 
-> [来源: [Verus Guide — Ghost Entities](https://verus-lang.github.io/verus/guide/ghost.html)]
+> [来源: [Verus Guide — Ghost Entities](https://verus-lang.github.io/verus/guide/overview.html)]
 > [来源: [OOPSLA 2023 — Verus: Verifying Rust Programs using Linear Ghost Types](https://dl.acm.org/doi/10.1145/3586037)]
 
 ### 4.2 `Proof` 类型与归纳证明 {#42-proof-类型与归纳证明}
@@ -375,7 +375,7 @@ fn get_first_mut(arr: &mut [i32]) -> (result: &mut i32)
 } // verus!
 ```
 
-> [来源: [Verus Guide — Mutable References](https://verus-lang.github.io/verus/guide/mut-ref.html)]
+> [来源: [Verus Guide — Mutable References](https://verus-lang.github.io/verus/guide/overview.html)]
 
 ---
 
@@ -787,7 +787,7 @@ verus! {
 | **性能** | 大型项目验证耗时 | 增量验证，仅修改文件重验 |
 | **nightly 锁定** | 依赖特定 Rust 版本 | 使用 `rust-toolchain.toml` 管理 |
 
-> [来源: [Verus Guide — Limitations](https://verus-lang.github.io/verus/guide/limitations.html)]
+> [来源: [Verus Guide — Limitations](https://verus-lang.github.io/verus/guide/overview.html)]
 
 ### 9.2 调试 SMT 超时 {#92-调试-smt-超时}
 >

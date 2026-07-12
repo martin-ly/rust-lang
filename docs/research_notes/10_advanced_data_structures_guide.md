@@ -12,7 +12,7 @@
 >
 > [CLRS – Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/) |
 > [William Pugh, Skip Lists: A Probabilistic Alternative to Balanced Trees](https://dl.acm.org/doi/10.1145/78973.78977) |
-> [Seidel & Aragon, Randomized Search Trees (Algorithmica 1996)](https://link.springer.com/article/10.1007/s004539900061) |
+> [Seidel & Aragon, Randomized Search Trees (Algorithmica 1996)](https://doi.org/10.1007/BF01940876) |
 > [Rust Standard Library](https://doc.rust-lang.org/std/)
 
 ---
@@ -161,7 +161,7 @@ Treap = **Tree（BST 按 key）+ Heap（按随机 priority）**。
 
 - **P0（原始论文/官方实现）**:
   - [William Pugh, 1989 – Skip Lists: A Probabilistic Alternative to Balanced Trees](https://dl.acm.org/doi/10.1145/78973.78977)
-  - [Seidel & Aragon, 1996 – Randomized Search Trees](https://link.springer.com/article/10.1007/s004539900061)
+  - [Seidel & Aragon, 1996 – Randomized Search Trees](https://doi.org/10.1007/BF01940876)
   - [CLRS – Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
 - **P1（经典教材/百科/权威博客）**:
   - [Wikipedia – Treap](https://en.wikipedia.org/wiki/Treap)

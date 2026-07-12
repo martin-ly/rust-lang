@@ -302,7 +302,7 @@ where
 
 ## 4. 与 RTIC 的对比与互操作 {#4-与-rtic-的对比与互操作}
 
-> [来源: [RTIC Book](https://rtic-rs.github.io/book/)] · [Embassy Book](https://embassy.dev/book/)]
+> [来源: [RTIC Book](https://rtic.rs/dev/book/en/)] · [Embassy Book](https://embassy.dev/book/)]
 
 ### 4.1 实时性光谱 {#41-实时性光谱}
 >
@@ -328,7 +328,7 @@ graph LR
 | **适用场景** | 网络协议、传感器融合、USB/BLE | 电机控制、航空电子、医疗设备 |
 | **最坏执行时间** | 难以静态分析 | 可计算 WCET |
 
-> [来源: [RTIC Book - Scheduling](https://rtic-rs.github.io/book/)]
+> [来源: [RTIC Book - Scheduling](https://rtic.rs/dev/book/en/)]
 
 ### 4.2 互操作模式 {#42-互操作模式}
 >
@@ -804,7 +804,7 @@ async fn main(spawner: Spawner) {
 ## 8. 权威来源索引 {#8-权威来源索引}
 
 > [来源: [Embassy Book](https://embassy.dev/book/)]
-> [来源: [RTIC Book](https://rtic-rs.github.io/book/)]
+> [来源: [RTIC Book](https://rtic.rs/dev/book/en/)]
 > [来源: [embedded-hal 文档](https://docs.rs/embedded-hal/latest/embedded_hal/)]
 > [来源: [svd2rust 文档](https://docs.rs/svd2rust/latest/svd2rust/)]
 > [来源: [defmt 文档](https://defmt.ferrous-systems.com/)]
@@ -815,7 +815,7 @@ async fn main(spawner: Spawner) {
 
 ---
 
-> **权威来源**: [Embassy Book](https://embassy.dev/book/), [RTIC Book](https://rtic-rs.github.io/book/), [embedded-hal 文档](https://docs.rs/embedded-hal/), [svd2rust 文档](https://docs.rs/svd2rust/), [defmt 文档](https://defmt.ferrous-systems.com/), [Rust Embedded Book](https://docs.rust-embedded.org/book/)
+> **权威来源**: [Embassy Book](https://embassy.dev/book/), [RTIC Book](https://rtic.rs/dev/book/en/), [embedded-hal 文档](https://docs.rs/embedded-hal/), [svd2rust 文档](https://docs.rs/svd2rust/), [defmt 文档](https://defmt.ferrous-systems.com/), [Rust Embedded Book](https://docs.rust-embedded.org/book/)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)

@@ -14,7 +14,7 @@
 > **前置概念**: [Verification Toolchain](05_verification_toolchain.md) · [Hoare 逻辑](../03_operational_semantics/15_hoare_logic.md) · [RustBelt](../02_separation_logic/04_rustbelt.md)
 > **主要来源**: [AutoVerus arXiv 2025] · [Kani 0.65 Release] · [ESBMC Rust] · [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [TrustInSoft] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
-> **来源**: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Verus](https://verus-lang.github.io/verus/) · [Kani](https://model-checking.github.io/kani/) · [Miri](https://github.com/rust-lang/miri)
+> **来源**: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Verus](https://verus-lang.github.io/verus/guide/) · [Kani](https://model-checking.github.io/kani/) · [Miri](https://github.com/rust-lang/miri)
 ---
 
 > **后置概念**: [Comparative Studies](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)

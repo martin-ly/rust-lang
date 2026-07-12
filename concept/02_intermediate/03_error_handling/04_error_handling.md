@@ -2076,7 +2076,7 @@ fn compute() -> Maybe<i32> {
 
 ## 十一、演进方向
 
-理解「待补充与演进方向（TODOs）」需要把握 `std::backtrace::Backtrace` 与错误追踪、`Termination` trait 与 main 返回 Result、`eyre` / `color-eyre` / `miette` /…、`#[track_caller]` 与错误定位优化等7个方面，本节依次展开。
+理解「演进方向」需要把握 `std::backtrace::Backtrace` 与错误追踪、`Termination` trait 与 main 返回 Result、`eyre` / `color-eyre` / `miette` /…、`#[track_caller]` 与错误定位优化等7个方面，本节依次展开。
 
 ### 11.1 `std::backtrace::Backtrace` 与错误追踪
 

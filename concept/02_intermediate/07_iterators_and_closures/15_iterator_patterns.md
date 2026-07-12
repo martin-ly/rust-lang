@@ -812,7 +812,7 @@ graph TD
 
 > **陷阱总结**: 迭代器的陷阱主要与**多次消费**、**外部状态**、**不必要 collect**、**Option 处理**、**collect 遗忘**、**修改集合**、**所有权（Ownership）选择**、**链长度**和**内存优化**相关。
 > (Source: [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html))
-> [来源: [Common Rust Iterator Mistakes](https://users.rust-lang.org/t/iterator-mistakes/)]
+> [来源: [TRPL — Processing a Series of Items with Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
 
 ---
 

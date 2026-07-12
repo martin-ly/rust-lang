@@ -11,6 +11,8 @@
 
 ## 一、按层级索引
 
+「按层级索引」部分按 L0 元信息层、L1 基础概念层、L2 进阶概念层、L3 高级概念层等8个方面的顺序逐层展开。
+
 ### L0 元信息层
 
 | 编号 | 中文名 | EN | 定义 | 来源数 |
@@ -552,7 +554,6 @@
 | [Core Crates](../../06_ecosystem/02_core_crates/03_core_crates.md) | 8 |
 | [Rust 2027 Edition 及未来路线图](../../07_future/01_edition_roadmap/24_roadmap.md) | 8 |
 | [Effects System: Concept Pre-study](../../07_future/03_preview_features/04_effects_system.md) | 7 |
-
 
 ---
 

@@ -123,7 +123,7 @@ opam install coq.8.18.0
 
 # 安装Iris {#安装iris}
 
-opam repo add coq-released https://coq.inria.fr/opam/released
+opam repo add rocq-released https://rocq-prover.org/opam/released
 
 opam update
 

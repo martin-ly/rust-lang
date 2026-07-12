@@ -269,7 +269,7 @@
 
 > **来源: [Criterion.rs Book – Analysis](https://bheisler.github.io/criterion.rs/book/analysis.html)**
 >
-> **来源: [Criterion.rs Book – User Guide](https://bheisler.github.io/criterion.rs/book/user_guide/introduction.html)**
+> **来源: [Criterion.rs Book – User Guide](https://bheisler.github.io/criterion.rs/book/index.html)**
 
 Criterion.rs 通过以下统计手段保证基准测试结果可靠：
 

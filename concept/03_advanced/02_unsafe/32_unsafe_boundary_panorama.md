@@ -15,7 +15,7 @@
 > **方法论对齐**: 反事实推理 · 边界测试 (Torchiano et al. 2018) · 判定树机器可读化（见 [decision_trees.yaml](../../00_meta/knowledge_topology/decision_trees.yaml) `DF-UNSAFE-08`/`J-UNSAFE-05`）
 > **全局对应**: 本页是 [安全边界全景](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md) 在 unsafe 域的纵深展开；async 域的对应页为 [Async 边界全景](../01_async/38_async_boundary_panorama.md)。
 >
-> **来源**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust Reference — Undefined behavior](https://doc.rust-lang.org/reference/introduction.html) · [Tree Borrows (Neven et al., 2023)](https://plv.mpi-sws.org/treebor/) · [Miri](https://github.com/rust-lang/miri)
+> **来源**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust Reference — Undefined behavior](https://doc.rust-lang.org/reference/introduction.html) · [Tree Borrows (Neven et al., 2023)](https://perso.crans.org/vanille/treebor/) · [Miri](https://github.com/rust-lang/miri)
 
 **变更日志**:
 
@@ -427,6 +427,7 @@ flowchart TD
 ---
 
 ## 十二、演进方向
+
 - **MiniRust / 形式化规范进展**: Rust 官方规范（Ferrocene Language Specification）对 UB 清单的逐项确认，可能移动 §四"依赖层"中若干条目的归属。
 - **Tree Borrows 稳定化**: TB 若在 Miri 中完全取代 SB，§五 Q-B3 的"模型边界依赖"条目需更新为单一模型判定。
 - **int2ptr 规范（strict/exposed provenance）**: provenance API 稳定后补入 §五判定条件。
@@ -438,5 +439,5 @@ flowchart TD
 ## 权威来源索引
 
 - **P0 官方**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust Reference — Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html) · [Ferrocene Language Specification](https://spec.ferrocene.dev/)
-- **P1 学术**: [Tree Borrows (Neven et al., POPL 2024)](https://plv.mpi-sws.org/treebor/) · [Stacked Borrows (Jung et al., POPL 2020)](https://plv.mpi-sws.org/stacked-borrows/) · [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
+- **P1 学术**: [Tree Borrows (Neven et al., POPL 2024)](https://perso.crans.org/vanille/treebor/) · [Stacked Borrows (Jung et al., POPL 2020)](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) · [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
 - **P2 生态**: [Miri](https://github.com/rust-lang/miri) · [Kani](https://model-checking.github.io/kani/) · [cbindgen](https://github.com/mozilla/cbindgen) · [bindgen](https://rust-lang.github.io/rust-bindgen/)

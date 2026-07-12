@@ -2205,7 +2205,7 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
    - 与本目录: CHAN-T1、MUTEX-T1、并发语义对应
 4. **Tree Borrows** (PLDI 2025 — Distinguished Paper Award)
    - 作者: Neven Villani, Johannes Hostert, Derek Dreyer, Ralf Jung
-   - 链接: [ETH 项目页](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[ACM PDF](https://dl.acm.org/doi/pdf/10.1145/3735592)、[Iris PDF](https://iris-project.org/pdfs/2025-pldi-tree-borrows.pdf)、[Ralf 博客](https://www.ralfj.de/blog/2025/07/07/tree-borrows-paper.html)
+   - 链接: [ETH 项目页](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[ACM PDF](https://dl.acm.org/doi/pdf/10.1145/3735592)、[arXiv 2410.12379](https://arxiv.org/abs/2410.12379)、[Ralf 博客](https://www.ralfj.de/blog/2025/07/07/tree-borrows-paper.html)
    - 摘要: Stacked Borrows 演进；树结构；30k crates 54% 更少拒绝；Rocq 形式化证明
    - 与本目录: 借用规则、RAW1 演进；Miri 未来可能采用
 5. **Polonius** — 形式化 borrow 分析

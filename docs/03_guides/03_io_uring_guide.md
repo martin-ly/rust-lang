@@ -250,7 +250,7 @@ fn setup_registered_buffers(ring: &mut IoUring, buf_pool: &mut [u8]) -> std::io:
 | io_uring (默认) | 12μs | 150K | 真正异步 |
 | io_uring (IOPOLL) | 3μs | 500K | 忙轮询，CPU 换延迟 |
 
-> **[Linux Kernel io_uring 性能基准测试](https://docs.kernel.org/io_uring.html)**
+> **[Linux Kernel io_uring 性能基准测试](https://man.archlinux.org/man/io_uring.7)**
 
 ---
 

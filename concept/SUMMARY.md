@@ -247,7 +247,7 @@
   - [范畴论与 Rust：从函子到单子](04_formal/00_type_theory/10_category_theory.md)
   - [分离逻辑：Rust 所有权（Ownership）的形式化根基](04_formal/02_separation_logic/11_separation_logic.md)
   - [指称语义与领域理论](04_formal/03_operational_semantics/12_denotational_semantics.md)
-  - [形式化方法（Formal Methods，权威页）](07_future/04_research_and_experimental/02_formal_methods.md)
+  - [形式化方法（Formal Methods，L4 入口 → L7 权威页）](04_formal/04_model_checking/13_formal_methods.md)
   - [Lambda 演算与 Rust 计算模型](04_formal/00_type_theory/14_lambda_calculus.md)
   - [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](04_formal/03_operational_semantics/15_hoare_logic.md)
   - [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](04_formal/04_model_checking/16_aerospace_certification_formal_methods.md)

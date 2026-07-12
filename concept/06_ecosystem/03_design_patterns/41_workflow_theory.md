@@ -411,7 +411,7 @@ enum Action {
 }
 ```
 
-> **来源**: [Workflow Patterns — State Patterns](http://www.workflowpatterns.com/patterns/state/) · [van der Aalst — Workflow Management [已失效]]<!-- 原链接: https://www.springer.com/gp/book/9783540761942 -->
+> **来源**: [Workflow Patterns — State Patterns](http://www.workflowpatterns.com/patterns/state/) · van der Aalst — Workflow Management（Springer，原链接已失效）
 
 ### 3.3 执行语义
 >

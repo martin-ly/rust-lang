@@ -18,7 +18,7 @@
 ---
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **来源**: [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) · [Rust Reference — Associated Items](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types) · [Rust 1.65 Release Notes](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html) · [Niko Matsakis — GATs stabilization push](https://smallcultfollowing.com/babysteps/blog/2022/06/27/many-modes-a-gats-report/) · [RFC 2289 — Associated Type Bounds](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)
+> **来源**: [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) · [Rust Reference — Associated Items](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types) · [Rust 1.65 Release Notes](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html) · [Niko Matsakis — GATs stabilization push](https://smallcultfollowing.com/babysteps/blog/2022/06/27/many-modes-a-gats-pattern/) · [RFC 2289 — Associated Type Bounds](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)
 > **对应 Crate**: [`c04_generic`](../../crates/c04_generic)
 > **对应练习**: [`exercises/src/generics/`](../../exercises/src/generics)
 
@@ -530,7 +530,7 @@ trait Stream {
 - [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)（GAT 的设计文档，含类型族与 HKT 取舍论证）
 - [Rust Reference — Associated Items: Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types)
 - [Rust 1.65.0 Release — Stabilized GATs](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html)
-- [Niko Matsakis — "Many modes: a GATs report"](https://smallcultfollowing.com/babysteps/blog/2022/06/27/many-modes-a-gats-report/) 与 [GATs 系列博文](https://smallcultfollowing.com/babysteps/)（required where clause 与 implied bounds 的设计权衡）
+- [Niko Matsakis — "Many modes: a GATs report"](https://smallcultfollowing.com/babysteps/blog/2022/06/27/many-modes-a-gats-pattern/) 与 [GATs 系列博文](https://smallcultfollowing.com/babysteps/)（required where clause 与 implied bounds 的设计权衡）
 - [RFC 2289 — Associated Type Bounds](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)（`Trait<Assoc: Bound>` 语法，1.79 稳定；可与 GAT 组合）
 - [rust-lang/rust #87479 — GAT implied bounds 跟踪](https://github.com/rust-lang/rust/issues/87479)
 - [Weiss, Patterson, Matsakis & Ahmed: Oxide — The Essence of Rust（arXiv:1903.00982）](https://arxiv.org/abs/1903.00982)（P1 学术：Rust trait/类型系统的学术形式化基线，2026-07-12 验证 HTTP 200）

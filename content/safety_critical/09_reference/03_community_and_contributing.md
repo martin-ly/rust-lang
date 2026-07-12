@@ -22,7 +22,7 @@
 ```
 Rust基金会:
 ├── 安全关键Rust工作组
-│   └── https://www.rust-lang.org/governance/wg-safety-critical
+│   └── https://github.com/rustfoundation/safety-critical-rust-consortium
 │
 ├── 安全工作组
 │   └── https://github.com/rust-secure-code/wg

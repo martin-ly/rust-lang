@@ -88,15 +88,15 @@
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
-| [release-plz 文档](https://release-plz.ienalich.com/) | — | ⏳ | 自动化 changelog / PR / 发布 |
-| [release-plz GitHub Action](https://release-plz.ienalich.com/docs/github/) | — | ⏳ | 与 workspace 版本管理结合 |
+| [release-plz 文档](https://release-plz.dev/) | — | ⏳ | 自动化 changelog / PR / 发布 |
+| [release-plz GitHub Action](https://release-plz.dev/docs/github) | — | ⏳ | 与 workspace 版本管理结合 |
 
 ### 2.5 cargo-dist {#25-cargo-dist}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
-| [cargo-dist Book](https://opensource.axo.dev/cargo-dist/) | — | ⏳ | 跨平台二进制分发、installer |
-| [cargo-dist 与 GitHub Releases 集成](https://opensource.axo.dev/cargo-dist/book/ci/github.html) | — | ⏳ | 发布产物与签名流程 |
+| [cargo-dist Book](https://axodotdev.github.io/cargo-dist/) | — | ⏳ | 跨平台二进制分发、installer |
+| [cargo-dist 与 GitHub Releases 集成](https://axodotdev.github.io/cargo-dist/book/ci/github.html) | — | ⏳ | 发布产物与签名流程 |
 
 ---
 
@@ -121,7 +121,7 @@
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [nextest Book](https://nexte.st/) | [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) | 🔄 | 当前使用 `cargo test`；nextest 替换可提升速度与重试能力 |
-| [nextest profile / retries [已失效]]<!-- 原链接: https://nexte.st/book/ --> | — | ⏳ | flakiness 重试与分区运行 |
+| [nextest Book](https://nexte.st/) | — | ⏳ | flakiness 重试与分区运行 |
 
 ### 3.4 cargo-llvm-cov {#34-cargo-llvm-cov}
 

@@ -2032,7 +2032,7 @@ const fn double_i64(x: i64) -> i64 { x + x }
 | 手动展开 | ❌ 无 | 高 | 极低 | ✅ 稳定 |
 | 具体类型 const fn | ❌ 无 | 高 | 极低 | ✅ 稳定 |
 
-> **来源**: [Rust Reference: const_eval](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 3762](https://github.com/rust-lang/rfcs/pull/3762) · [Rust Internals: const trait stabilization](https://internals.rust-lang.org/t/const-trait-stabilization/) · [原创分析]
+> **来源**: [Rust Reference: const_eval](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 3762](https://github.com/rust-lang/rfcs/pull/3762) · [Rust Internals: const trait stabilization](https://internals.rust-lang.org/t/pre-rfc-revamped-const-trait-impl-aka-rfc-2632/15192) · [原创分析]
 > **来源**: [Tracking Issue #143874](https://github.com/rust-lang/rust/issues/143874) · [RFC 3762](https://github.com/rust-lang/rfcs/pull/3762) · [Rust Reference: const_eval](https://doc.rust-lang.org/reference/const_eval.html)
 
 ---
@@ -2328,7 +2328,7 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 
 ## 十一、演进方向
 
-理解「待补充与演进方向（TODOs）」需要把握 `impl Trait` 在 Trait 定义中的使用（RPITIT…、`Const Trait` 与 `~const` 实验特性、`#[fundamental]` Attribute 与 Orphan…、Specialization（`min_specialization`…等6个方面，本节依次展开。
+理解「演进方向」需要把握 `impl Trait` 在 Trait 定义中的使用（RPITIT…、`Const Trait` 与 `~const` 实验特性、`#[fundamental]` Attribute 与 Orphan…、Specialization（`min_specialization`…等6个方面，本节依次展开。
 
 ### 11.1 `impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）
 

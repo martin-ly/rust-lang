@@ -1141,7 +1141,7 @@ enum SafeValue {
 
 ## 十七、演进方向
 
-本节从 Lifetime Elision：省略即约定、`impl Trait` 与生命周期推断与`union` 的类型安全边界切入，剖析「待补充与演进方向（TODOs）」的核心内容。
+本节从 Lifetime Elision：省略即约定、`impl Trait` 与生命周期推断与`union` 的类型安全边界切入，剖析「演进方向」的核心内容。
 
 ### 17.1 Lifetime Elision：省略即约定
 

@@ -1030,7 +1030,7 @@ unsafe {
 
 ## 十一、演进方向
 
-本节从补充：`Drop` 与 `std::mem::forget` 边界、补充：`ManuallyDrop` 与 `MaybeUninit` 所…、补充：Rust 所有权 vs C++ `unique_ptr`、补充：`Pin<T>` 与所有权的交互等6个方面切入，剖析「待补充与演进方向（TODOs）」的核心内容。
+本节从补充：`Drop` 与 `std::mem::forget` 边界、补充：`ManuallyDrop` 与 `MaybeUninit` 所…、补充：Rust 所有权 vs C++ `unique_ptr`、补充：`Pin<T>` 与所有权的交互等6个方面切入，剖析「演进方向」的核心内容。
 
 ### 补充：`Drop` 与 `std::mem::forget` 边界
 
@@ -1703,7 +1703,7 @@ fn greet_str(s: &str) { }
 > **Brown University Interactive Book — Understanding Ownership**
 > [https://rust-book.cs.brown.edu/ch04-00-understanding-ownership.html](https://rust-book.cs.brown.edu/ch04-00-understanding-ownership.html)
 >
-> Brown 大学交互式 Rust 教材的第 4 章（含 [4.1 What is Ownership?](https://rust-book.cs.brown.edu/ch04-01-what-is-ownership.html)、[4.2 References and Borrowing](https://rust-book.cs.brown.edu/ch04-02-references-and-borrowing.html)、[4.3 The Slice Type](https://rust-book.cs.brown.edu/ch04-03-slices.html) 与 [Fixing Ownership Errors](https://rust-book.cs.brown.edu/ch04-03-fixing-ownership-errors.html)）通过 **Aquascope** 可视化工具展示所有权转移、借用生命周期与常见编译错误的修复过程。该教学设计基于 Will Crichton、Manish Goregaokar、Daniel Patterson 等人发表于 OOPSLA 2023 的研究 *A Grounded Conceptual Model for Ownership Types in Rust*（DOI: [10.1145/3586030](https://doi.org/10.1145/3586030)），该研究从 Stack Overflow 上的真实问题中提炼出 Rust 所有权类型系统（Type System）的概念模型。
+> Brown 大学交互式 Rust 教材的第 4 章（含 [4.1 What is Ownership?](https://rust-book.cs.brown.edu/ch04-01-what-is-ownership.html)、[4.2 References and Borrowing](https://rust-book.cs.brown.edu/ch04-02-references-and-borrowing.html)、[4.3 The Slice Type](https://rust-book.cs.brown.edu/ch04-04-slices.html) 与 [Fixing Ownership Errors](https://rust-book.cs.brown.edu/ch04-03-fixing-ownership-errors.html)）通过 **Aquascope** 可视化工具展示所有权转移、借用生命周期与常见编译错误的修复过程。该教学设计基于 Will Crichton、Manish Goregaokar、Daniel Patterson 等人发表于 OOPSLA 2023 的研究 *A Grounded Conceptual Model for Ownership Types in Rust*（DOI: [10.1145/3586030](https://doi.org/10.1145/3586030)），该研究从 Stack Overflow 上的真实问题中提炼出 Rust 所有权类型系统（Type System）的概念模型。
 >
 > **与本页权威解释的关系**：
 >

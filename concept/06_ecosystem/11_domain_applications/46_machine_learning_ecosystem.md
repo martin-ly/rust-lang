@@ -726,7 +726,7 @@ Rust ML 的解决:
            探索性数据分析（EDA）和小数据场景中仍然便利。
 ```
 
-> **来源**: [Polars vs Pandas [已失效]]<!-- 原链接: https://pola.rs/posts/polars-pandas-xlsxwriter/ --> · [Why Not Always Rust [已失效]]<!-- 原链接: https://matklad.github.io/2023/03/26/rust-myths-and-vegetables.html -->
+> **来源**: [Polars Blog Posts](https://pola.rs/posts/) · [matklad Blog](https://matklad.github.io/)
 
 ### 8.2 边界极限
 
@@ -879,7 +879,7 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」部分按测验 1：Rust 在机器学习领域目前的主要定位是什么？（理解层）、测验 2：`candle`（Hugging Face）与 `PyTor…、测验 3：为什么 ML 推理引擎常用 Rust 重写（如 `llama…、测验 4：`ndarray` 在 Rust ML 生态中扮演什么角色？…等5个方面的顺序逐层展开。
+「嵌入式测验（Embedded Quiz）」部分按测验 1：Rust 在机器学习领域目前的主要定位是什么？（理解层）、测验 2：`candle`（Hugging Face）与 `PyTor…、测验 3：为什么 ML 推理引擎常用 Rust 重写（如`llama…、测验 4：`ndarray` 在 Rust ML 生态中扮演什么角色？…等5个方面的顺序逐层展开。
 
 ### 测验 1：Rust 在机器学习领域目前的主要定位是什么？（理解层）
 

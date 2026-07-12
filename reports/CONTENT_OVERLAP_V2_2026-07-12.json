@@ -4,7 +4,7 @@
   "indexed": 1417,
   "threshold": 0.5,
   "min_shared": 5,
-  "candidates": 536300,
+  "candidates": 537353,
   "hits": 592,
   "overlaps": [
     {
@@ -82,8 +82,8 @@
       "f2": "concept/04_formal/04_model_checking/24_autoverus.md",
       "t1": "AutoVerus / Verus 预览",
       "t2": "AutoVerus / Verus 自动证明生态",
-      "lines1": 174,
-      "lines2": 184
+      "lines1": 178,
+      "lines2": 188
     },
     {
       "sim": 0.889,
@@ -299,19 +299,6 @@
       "title_sim": 0.5,
       "shared": 5,
       "same_dir": true,
-      "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
-      "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
-      "t1": "C05 Threads 主索引导航",
-      "t2": "C05 Threads 术语表",
-      "lines1": 15,
-      "lines2": 15
-    },
-    {
-      "sim": 0.8,
-      "kw_sim": 0.8,
-      "title_sim": 0.5,
-      "shared": 5,
-      "same_dir": true,
       "f1": "crates/c04_generic/docs/00_master_index.md",
       "f2": "crates/c04_generic/docs/tier_01_foundations/01_project_overview.md",
       "t1": "C04 泛型编程 - 主索引",
@@ -394,6 +381,19 @@
       "f2": "crates/c04_generic/docs/tier_01_foundations/04_faq.md",
       "t1": "C04 泛型编程 - 术语表",
       "t2": "C04 泛型编程 - 常见问题",
+      "lines1": 15,
+      "lines2": 15
+    },
+    {
+      "sim": 0.8,
+      "kw_sim": 0.8,
+      "title_sim": 0.5,
+      "shared": 5,
+      "same_dir": true,
+      "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
+      "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
+      "t1": "C05 Threads 主索引导航",
+      "t2": "C05 Threads 术语表",
       "lines1": 15,
       "lines2": 15
     },
@@ -1902,7 +1902,7 @@
       "f2": "crates/c08_algorithms/rust_192_c08_update_summary.md",
       "t1": "C12 WASM - Rust 1.92.0 更新总结（历史记录）",
       "t2": "C08 Algorithms - Rust 1.92.0 更新总结",
-      "lines1": 114,
+      "lines1": 115,
       "lines2": 108
     },
     {
@@ -1916,7 +1916,7 @@
       "t1": "C08 Algorithms - Rust 1.92.0 更新总结",
       "t2": "C12 WASM - Rust 1.92.0 更新总结（历史记录）",
       "lines1": 108,
-      "lines2": 114
+      "lines2": 115
     },
     {
       "sim": 0.667,
@@ -6706,6 +6706,32 @@
       "sim": 0.521,
       "kw_sim": 0.521,
       "title_sim": 0.0,
+      "shared": 33,
+      "same_dir": false,
+      "f1": "concept/07_future/00_version_tracking/rust_1_95_stabilized.md",
+      "f2": "docs/02_reference/quick_reference/02_rust_195_features_cheatsheet.md",
+      "t1": "Rust 1.95.0 稳定特性",
+      "t2": "Rust 1.95.0 特性与 API 速查表 (Rust 195 Featur",
+      "lines1": 327,
+      "lines2": 386
+    },
+    {
+      "sim": 0.521,
+      "kw_sim": 0.521,
+      "title_sim": 0.0,
+      "shared": 29,
+      "same_dir": false,
+      "f1": "docs/02_reference/quick_reference/02_rust_195_features_cheatsheet.md",
+      "f2": "concept/07_future/00_version_tracking/rust_1_95_stabilized.md",
+      "t1": "Rust 1.95.0 特性与 API 速查表 (Rust 195 Featur",
+      "t2": "Rust 1.95.0 稳定特性",
+      "lines1": 386,
+      "lines2": 327
+    },
+    {
+      "sim": 0.521,
+      "kw_sim": 0.521,
+      "title_sim": 0.0,
       "shared": 21,
       "same_dir": true,
       "f1": "docs/research_notes/software_design_theory/05_distributed/02_cqrs_pattern.md",
@@ -6818,32 +6844,6 @@
       "t2": "Iterator 形式化分析 {#iterator-形式化分析}",
       "lines1": 933,
       "lines2": 784
-    },
-    {
-      "sim": 0.517,
-      "kw_sim": 0.517,
-      "title_sim": 0.0,
-      "shared": 33,
-      "same_dir": false,
-      "f1": "concept/07_future/00_version_tracking/rust_1_95_stabilized.md",
-      "f2": "docs/02_reference/quick_reference/02_rust_195_features_cheatsheet.md",
-      "t1": "Rust 1.95.0 稳定特性",
-      "t2": "Rust 1.95.0 特性与 API 速查表 (Rust 195 Featur",
-      "lines1": 321,
-      "lines2": 386
-    },
-    {
-      "sim": 0.517,
-      "kw_sim": 0.517,
-      "title_sim": 0.0,
-      "shared": 31,
-      "same_dir": false,
-      "f1": "docs/02_reference/quick_reference/02_rust_195_features_cheatsheet.md",
-      "f2": "concept/07_future/00_version_tracking/rust_1_95_stabilized.md",
-      "t1": "Rust 1.95.0 特性与 API 速查表 (Rust 195 Featur",
-      "t2": "Rust 1.95.0 稳定特性",
-      "lines1": 386,
-      "lines2": 321
     },
     {
       "sim": 0.516,
@@ -7258,7 +7258,7 @@
       "f2": "crates/c06_async/rust_192_c06_update_summary.md",
       "t1": "C12 WASM - Rust 1.92.0 更新总结（历史记录）",
       "t2": "C06 Async - Rust 1.92.0 更新总结",
-      "lines1": 114,
+      "lines1": 115,
       "lines2": 137
     },
     {
@@ -7272,7 +7272,7 @@
       "t1": "C06 Async - Rust 1.92.0 更新总结",
       "t2": "C12 WASM - Rust 1.92.0 更新总结（历史记录）",
       "lines1": 137,
-      "lines2": 114
+      "lines2": 115
     },
     {
       "sim": 0.507,
@@ -7367,7 +7367,7 @@
     },
     {
       "sim": 0.5,
-      "kw_sim": 0.338,
+      "kw_sim": 0.337,
       "title_sim": 0.5,
       "shared": 276,
       "same_dir": true,
@@ -7375,8 +7375,8 @@
       "f2": "concept/03_advanced/01_async/25_async_advanced.md",
       "t1": "Async/Await（异步编程）",
       "t2": "Async/Await 高级主题",
-      "lines1": 3442,
-      "lines2": 1704
+      "lines1": 3465,
+      "lines2": 1708
     },
     {
       "sim": 0.5,
@@ -7388,8 +7388,8 @@
       "f2": "crates/c12_wasm/rust_192_update_summary.md",
       "t1": "C12 WASM - Rust 1.92.0 全面更新报告",
       "t2": "C12 WASM - Rust 1.92.0 更新总结",
-      "lines1": 344,
-      "lines2": 265
+      "lines1": 345,
+      "lines2": 266
     },
     {
       "sim": 0.5,
@@ -7453,8 +7453,8 @@
       "f2": "concept/06_ecosystem/12_networking/06_networking_basics.md",
       "t1": "C10 Networks - Tier 2: WebSocket 实时通信",
       "t2": "C10 Networks - Tier 2: 网络基础实践",
-      "lines1": 732,
-      "lines2": 869
+      "lines1": 748,
+      "lines2": 887
     },
     {
       "sim": 0.5,
@@ -7479,8 +7479,8 @@
       "f2": "concept/06_ecosystem/04_web_and_networking/43_websocket_realtime_communication.md",
       "t1": "C10 Networks - Tier 2: 网络基础实践",
       "t2": "C10 Networks - Tier 2: WebSocket 实时通信",
-      "lines1": 869,
-      "lines2": 732
+      "lines1": 887,
+      "lines2": 748
     },
     {
       "sim": 0.5,
@@ -7492,8 +7492,8 @@
       "f2": "concept/00_meta/knowledge_topology/02_attribute_relationship_atlas.md",
       "t1": "目录",
       "t2": "属性关系图谱（Attribute Relationship Atlas）",
-      "lines1": 501,
-      "lines2": 544
+      "lines1": 495,
+      "lines2": 555
     },
     {
       "sim": 0.5,

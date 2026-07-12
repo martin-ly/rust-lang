@@ -133,7 +133,7 @@ mindmap
 > [💡 原创分析](methodology.md)
 > **思维表征说明**: `mindmap` 是 Mermaid 的**思维导图**语法，与 `graph TD` 流程图完全不同——它以**中心放射状**组织信息，强调「从整体到局部」的认知顺序。
 > 此图是知识体系的「鸟瞰图」：中心是 Rust 知识体系根节点，第一层放射是 L0-L7 八层架构，第二层放射是每层核心主题。
-> 学习者可以「由外向内」快速定位自己当前的学习位置。 [Tony Buzan, *The Mind Map Book*; 认知心理学 — 组块化理论](https://www.tonybuzan.com/) <!-- link: known-broken -->
+> 学习者可以「由外向内」快速定位自己当前的学习位置。 [Tony Buzan, *The Mind Map Book*; 认知心理学 — 组块化理论](https://www.tonybuzan.com/)
 
 ---
 

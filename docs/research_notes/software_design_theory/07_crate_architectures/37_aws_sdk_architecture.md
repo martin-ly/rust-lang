@@ -168,7 +168,7 @@ while let Some(obj) = paginator.next().await {
 | 异步安全 | `send()` 返回 `Future` | `Send + 'static` 保证可跨任务 await |
 | 分页类型 | `Paginator<Item = T>` | 区分单页响应与完整项目流 |
 
-> [来源: [aws-sdk-rust API Guidelines](https://awslabs.github.io/smithy-rs/design/index.html)]
+> [来源: [aws-sdk-rust API Guidelines](https://github.com/awslabs/smithy-rs)]
 
 ---
 
