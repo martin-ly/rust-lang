@@ -10,6 +10,11 @@
 > **分析日期**: 2026-05-06
 > **状态**: Rust 已正式成为 Linux 内核永久组成部分
 > **权威来源**: [LKML](https://lore.kernel.org/lkml/), [Rust for Linux](https://rust-for-linux.com/), [Linux Kernel Docs](https://docs.kernel.org/rust/)
+>
+> **概念权威页**: 通用概念解释（核心概念、形式化交叉、反命题与边界分析）以
+> [`concept/07_future/04_research_and_experimental/43_rust_for_linux.md`](../../concept/07_future/04_research_and_experimental/43_rust_for_linux.md) 为准。
+> 本文为 `docs/` 研究报告，保留 2026 工程实践、生产案例、互操作与路线图，不重复概念推导（AGENTS.md §2 Canonical 规则）。
+> 同目录旧路径 [`04_rust_for_linux.md`](04_rust_for_linux.md) 已为重定向 stub（2026-07-12 去重确认）。
 
 ---
 

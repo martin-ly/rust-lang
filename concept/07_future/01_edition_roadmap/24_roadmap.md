@@ -775,7 +775,7 @@ fn main() {
 ## 相关概念
 
 - [Edition Guide](23_rust_edition_guide.md) — Edition 机制与迁移策略
-- [BorrowSanitizer Preview](../03_preview_features/20_borrowsanitizer_preview.md) — 运行时（Runtime）借用（Borrowing）检查工业化路径
+- [BorrowSanitizer：动态别名规则验证工具](../03_preview_features/borrow_sanitizer.md) — 运行时（Runtime）借用（Borrowing）检查工业化路径
 - [Specialization Preview](../03_preview_features/26_specialization_preview.md) — Trait 特化机制深度分析
 - [Open Enums Preview](../03_preview_features/25_open_enums_preview.md) — 可扩展枚举（Enum）的设计空间
 - [Version Tracking](../00_version_tracking/05_rust_version_tracking.md) — 版本特性演进跟踪

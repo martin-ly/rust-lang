@@ -1,8 +1,8 @@
 # 内容重叠检测 v2（语义质量门 P0-3）
 
-**日期**: 2026-07-12  **扫描**: 1913 文件（concept/knowledge/docs/content/crates，排除 archive/book/target）
-**纳入索引**: 1417（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 537353
-**阈值**: 0.5  **命中对**: 592（同目录 580 / 跨目录 12）
+**日期**: 2026-07-12  **扫描**: 1910 文件（concept/knowledge/docs/content/crates，排除 archive/book/target）
+**纳入索引**: 1414（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 536871
+**阈值**: 0.5  **命中对**: 575（同目录 563 / 跨目录 12）
 
 > 本版修正旧版『0 重复』假象：全文关键词（非前50）、纳入 crates、不豁免假 stub、同目录也检、去掉标题 x1.5 主导。
 
@@ -10,39 +10,38 @@
 
 | sim | kw | title | 共享词 | 同目录 | 文件1（行） | 文件2（行） |
 |:---:|:---:|:---:|:---:|:---:|:---|:---|
-| 1.0 | 0.376 | 1.0 | 81 | Y | `crates/c02_type_system/readme_rust_189.md`(489) | `crates/c02_type_system/readme_rust_190.md`(1582) |
+| 1.0 | 0.376 | 1.0 | 80 | Y | `crates/c02_type_system/readme_rust_189.md`(489) | `crates/c02_type_system/readme_rust_190.md`(1582) |
 | 1.0 | 0.357 | 1.0 | 7 | Y | `crates/c10_networks/docs/rust_190_examples_collection.md`(857) | `crates/c10_networks/docs/rust_190_examples_part2.md`(857) |
+| 0.949 | 0.949 | 0.0 | 16 | Y | `docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/README.md`(140) | `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/README.md`(153) |
+| 0.949 | 0.949 | 0.0 | 16 | Y | `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/README.md`(145) | `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/README.md`(153) |
 | 0.949 | 0.949 | 0.0 | 12 | Y | `docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/README.md`(140) | `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/README.md`(145) |
-| 0.949 | 0.949 | 0.0 | 12 | Y | `docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/README.md`(140) | `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/README.md`(153) |
-| 0.949 | 0.949 | 0.0 | 12 | Y | `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/README.md`(145) | `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/README.md`(153) |
-| 0.902 | 0.902 | 0.5 | 35 | Y | `concept/07_future/03_preview_features/33_autoverus_preview.md`(178) | `concept/04_formal/04_model_checking/24_autoverus.md`(188) |
-| 0.889 | 0.889 | 0.5 | 5 | Y | `crates/c09_design_pattern/docs/c09_comprehensive_enhancement_report_2025_10_19.md`(15) | `crates/c09_design_pattern/docs/rust_190_comprehensive_enhancement_report.md`(15) |
+| 0.902 | 0.902 | 0.5 | 30 | Y | `concept/04_formal/04_model_checking/24_autoverus.md`(188) | `concept/07_future/03_preview_features/33_autoverus_preview.md`(178) |
+| 0.902 | 0.902 | 0.5 | 8 | Y | `concept/07_future/03_preview_features/33_autoverus_preview.md`(178) | `concept/04_formal/04_model_checking/24_autoverus.md`(188) |
+| 0.846 | 0.846 | 0.667 | 6 | Y | `crates/c01_ownership_borrow_scope/docs/tier_03_references/03_lifetimes_reference.md`(24) | `crates/c01_ownership_borrow_scope/docs/tier_04_advanced/01_advanced_lifetime_patterns.md`(24) |
 | 0.833 | 0.833 | 0.5 | 7 | Y | `crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md`(15) | `crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md`(15) |
 | 0.821 | 0.821 | 0.333 | 9 | Y | `docs/03_practice/03_project_05_text_statistics.md`(108) | `docs/03_practice/03_project_13_database_engine.md`(108) |
-| 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c07_process/docs/view01.md`(15) | `crates/c07_process/docs/view02.md`(15) |
-| 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c07_process/docs/view01.md`(15) | `crates/c07_process/docs/view04.md`(15) |
-| 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c07_process/docs/view02.md`(15) | `crates/c07_process/docs/view04.md`(15) |
+| 0.818 | 0.818 | 0.5 | 5 | Y | `crates/c07_process/docs/view01.md`(15) | `crates/c07_process/docs/view04.md`(15) |
+| 0.818 | 0.818 | 0.5 | 5 | Y | `crates/c07_process/docs/view01.md`(15) | `crates/c07_process/docs/view02.md`(15) |
+| 0.818 | 0.818 | 0.5 | 5 | Y | `crates/c07_process/docs/view02.md`(15) | `crates/c07_process/docs/view04.md`(15) |
 | 0.806 | 0.806 | 0.2 | 11 | Y | `docs/03_practice/03_project_07_chat_server.md`(115) | `docs/03_practice/03_project_11_web_server.md`(113) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/concept_relationship_network.md`(15) | `crates/c01_ownership_borrow_scope/docs/mind_map.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/concept_relationship_network.md`(15) | `crates/c01_ownership_borrow_scope/docs/multidimensional_matrix.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/concept_relationship_network.md`(15) | `crates/c01_ownership_borrow_scope/docs/visualization_index.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/concept_relationship_network.md`(15) | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md`(15) |
+| 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/mind_map.md`(15) | `crates/c01_ownership_borrow_scope/docs/multidimensional_matrix.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/mind_map.md`(15) | `crates/c01_ownership_borrow_scope/docs/visualization_index.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/mind_map.md`(15) | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/multidimensional_matrix.md`(15) | `crates/c01_ownership_borrow_scope/docs/visualization_index.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/multidimensional_matrix.md`(15) | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/visualization_index.md`(15) | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md`(15) |
 | 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c04_generic/docs/00_master_index.md`(15) | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md`(15) |
-| 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c04_generic/docs/00_master_index.md`(15) | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md`(15) |
 | 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c04_generic/docs/00_master_index.md`(15) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(15) |
-| 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md`(15) | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md`(15) |
-| 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md`(15) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(15) |
 | 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md`(15) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(15) |
 | 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md`(15) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(15) |
 | 0.8 | 0.8 | 0.5 | 5 | Y | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md`(15) | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md`(15) |
+| 0.8 | 0.8 | 0.333 | 5 | Y | `crates/c09_design_pattern/docs/c09_comprehensive_enhancement_report_2025_10_19.md`(15) | `crates/c09_design_pattern/docs/enhancement_summary_2025_10_19.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c03_control_fn/docs/concept_relationship_network.md`(15) | `crates/c03_control_fn/docs/mind_map.md`(15) |
 | 0.8 | 0.8 | 0.333 | 5 | Y | `crates/c07_process/docs/view03.md`(15) | `crates/c07_process/docs/view05.md`(15) |
-| 0.8 | 0.8 | 0.333 | 5 | Y | `crates/c02_type_system/docs/tier_03_references/05_performance_optimization_reference.md`(15) | `crates/c07_process/docs/tier_03_references/05_performance_optimization_reference.md`(15) |
 | 0.794 | 0.794 | 0.0 | 12 | Y | `knowledge/04_expert/README.md`(114) | `knowledge/06_ecosystem/README.md`(140) |
 | 0.793 | 0.793 | 0.25 | 9 | Y | `docs/03_practice/03_project_05_text_statistics.md`(108) | `docs/03_practice/03_project_12_wasm_app.md`(113) |
 | 0.778 | 0.778 | 0.667 | 5 | Y | `crates/c11_macro_system_proc/c11_macro_system_proc_macros/docs/mind_map.md`(19) | `crates/c11_macro_system_proc/c11_macro_system_proc_macros/docs/README.md`(19) |
@@ -70,6 +69,7 @@
 | 0.727 | 0.727 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/concept_relationship_network.md`(15) | `crates/c01_ownership_borrow_scope/docs/role_based_navigation.md`(15) |
 | 0.727 | 0.727 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/mind_map.md`(15) | `crates/c01_ownership_borrow_scope/docs/role_based_navigation.md`(15) |
 | 0.727 | 0.727 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/multidimensional_matrix.md`(15) | `crates/c01_ownership_borrow_scope/docs/role_based_navigation.md`(15) |
+| 0.727 | 0.727 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/role_based_navigation.md`(15) | `crates/c01_ownership_borrow_scope/docs/visualization_index.md`(15) |
 
 ## 机器可读
 

@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析类型参数 × Trait 解析 × 生命周期三维交叉的约束系统
 > **定位**: 深入分析 Rust 1.65 稳定化的 **泛型关联类型（GATs）**——从 `LendingIterator` 动机、语法规则、与 HRTB 的表达力边界，到稳定化历程与 1.97 的已知限制，给出可操作的选型判定表。
-> **前置概念**: [Traits](01_traits.md) · [Generics](../01_generics/02_generics.md) · [Lifetimes](18_lifetimes_advanced.md)
+> **前置概念**: [Traits](01_traits.md) · [Generics](../01_generics/02_generics.md) · [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md)
 > **后置概念**: [Async Cancellation Safety](../../03_advanced/01_async/37_async_cancellation_safety.md) · [Type Inference](../../04_formal/00_type_theory/08_type_inference.md)
 
 ---
@@ -534,4 +534,4 @@ trait Stream {
 - [RFC 2289 — Associated Type Bounds](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)（`Trait<Assoc: Bound>` 语法，1.79 稳定；可与 GAT 组合）
 - [rust-lang/rust #87479 — GAT implied bounds 跟踪](https://github.com/rust-lang/rust/issues/87479)
 - [Weiss, Patterson, Matsakis & Ahmed: Oxide — The Essence of Rust（arXiv:1903.00982）](https://arxiv.org/abs/1903.00982)（P1 学术：Rust trait/类型系统的学术形式化基线，2026-07-12 验证 HTTP 200）
-- 站内交叉引用：[高级 Trait 主题 §1.2](19_advanced_traits.md) · [Traits §5.6](01_traits.md) · [Generics §9.5](../01_generics/02_generics.md) · [Lifetimes 进阶](18_lifetimes_advanced.md)
+- 站内交叉引用：[高级 Trait 主题 §1.2](19_advanced_traits.md) · [Traits §5.6](01_traits.md) · [Generics §9.5](../01_generics/02_generics.md) · [Lifetimes 进阶](../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md)

@@ -150,7 +150,7 @@ graph TB
 | [03_evolution.md](04_research_and_experimental/03_evolution.md) | 语言演进 | Edition、RFC、Const 泛型、GATs、Effects、特化 | ✅ v1.0 | L2 Trait/Generics, L5 范式定位 | L2 特性扩展 |
 | [05_rust_version_tracking.md](00_version_tracking/05_rust_version_tracking.md) | 版本特性演进 | 1.79–1.95+ 形式模型维度跟踪、五个趋势、前沿矩阵 | ✅ v1.0 | L1-L4 全部概念 | L1-L4 概念更新驱动 |
 | [25_open_enums_preview.md](03_preview_features/25_open_enums_preview.md) | 开放枚举（Enum）预研 | `#[non_exhaustive]` 形式化语义、跨语言对比、API 设计模式 | ✅ v1.0 | L1 Type System, L2 Traits | L1 穷尽性检查语义演进 |
-| [20_borrowsanitizer_preview.md](03_preview_features/20_borrowsanitizer_preview.md) | BorrowSanitizer 预研 | Shadow Stack、运行时（Runtime）借用（Borrowing）检查、与 Miri 对比 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 检测工具化 |
+| [borrow_sanitizer.md](03_preview_features/borrow_sanitizer.md) | BorrowSanitizer：动态别名规则验证工具 | Shadow Stack、运行时（Runtime）借用（Borrowing）检查、与 Miri 对比 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 检测工具化 |
 | [07_mcdc_coverage_preview.md](03_preview_features/07_mcdc_coverage_preview.md) | MC/DC Coverage 预研 | 安全关键覆盖率验证、DO-178C/ISO 26262 合规 | ✅ v1.0 | L3 Unsafe, L1 Type System | L6 安全关键应用 |
 | [08_safety_tags_preview.md](03_preview_features/08_safety_tags_preview.md) | Safety Tags 预研 | Unsafe 契约机器可读标注、AI 生成安全边界 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 契约工具化 |
 | [09_parallel_frontend_preview.md](03_preview_features/09_parallel_frontend_preview.md) | 并行前端编译预研 | 查询系统并行化、类型检查并行化、编译时间优化 | ✅ v1.0 | L6 Toolchain, L3 Concurrency | L6 编译工具链性能演进 |

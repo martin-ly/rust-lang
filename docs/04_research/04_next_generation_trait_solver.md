@@ -1,7 +1,7 @@
 # Next-generation Trait Solver 深度研究 {#next-generation-trait-solver-深度研究}
 
 > **EN**: Next Generation Trait Solver
-> **Summary**: Next-generation Trait Solver 深度研究 Next Generation Trait Solver. (stub/archive redirect)
+> **Summary**: Next-generation Trait Solver 深度研究 Next Generation Trait Solver.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]
@@ -46,6 +46,16 @@
     - [官方资源 {#官方资源}](#官方资源-官方资源)
     - [RFC 与设计文档 {#rfc-与设计文档}](#rfc-与设计文档-rfc-与设计文档)
     - [学术论文 {#学术论文}](#学术论文-学术论文)
+  - [9. 补充：局限示例、架构细节与特性影响（合并自跟踪报告） {#9-补充局限示例架构细节与特性影响合并自跟踪报告}](#9-补充局限示例架构细节与特性影响合并自跟踪报告-9-补充局限示例架构细节与特性影响合并自跟踪报告)
+    - [9.1 当前 Solver 局限的代码示例 {#91-当前-solver-局限的代码示例}](#91-当前-solver-局限的代码示例-91-当前-solver-局限的代码示例)
+      - [A. 高阶类型推理 (Higher-Ranked Type Inference) {#91a-高阶类型推理}](#a-高阶类型推理-higher-ranked-type-inference-91a-高阶类型推理)
+      - [B. 关联类型归一化 (Associated Type Normalization) {#91b-关联类型归一化}](#b-关联类型归一化-associated-type-normalization-91b-关联类型归一化)
+      - [C. 隐式自动 trait 推导 {#91c-隐式自动-trait-推导}](#c-隐式自动-trait-推导-91c-隐式自动-trait-推导)
+    - [9.2 现代 Rust 特性受制约情况 {#92-现代-rust-特性受制约情况}](#92-现代-rust-特性受制约情况-92-现代-rust-特性受制约情况)
+    - [9.3 新旧架构对比与 Goal 语言 {#93-新旧架构对比与-goal-语言}](#93-新旧架构对比与-goal-语言-93-新旧架构对比与-goal-语言)
+    - [9.4 Chalk 架构细节与多维对比 {#94-chalk-架构细节与多维对比}](#94-chalk-架构细节与多维对比-94-chalk-架构细节与多维对比)
+    - [9.5 对现代 Rust 特性的影响（代码示例） {#95-对现代-rust-特性的影响代码示例}](#95-对现代-rust-特性的影响代码示例-95-对现代-rust-特性的影响代码示例)
+    - [9.6 时间线跟踪（2017–2026） {#96-时间线跟踪20172026}](#96-时间线跟踪20172026-96-时间线跟踪20172026)
   - [相关概念 {#相关概念}](#相关概念-相关概念)
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
@@ -390,12 +400,257 @@ flowchart TD
 
 ---
 
+## 9. 补充：局限示例、架构细节与特性影响（合并自跟踪报告） {#9-补充局限示例架构细节与特性影响合并自跟踪报告}
+
+> **合并说明**: 本节合并自已 stub 化的 [`04_ng_trait_solver.md`](04_ng_trait_solver.md)（Next-gen Trait Solver 跟踪报告，2026-07-12 去重，AGENTS.md §3.3）。两文重叠叙述以本章 §1–§8 为准，此处保留其独特段落。
+
+### 9.1 当前 Solver 局限的代码示例 {#91-当前-solver-局限的代码示例}
+
+#### A. 高阶类型推理 (Higher-Ranked Type Inference) {#91a-高阶类型推理}
+
+当前 solver 在处理高阶 trait bounds (HRTB) 时经常出现不一致：
+
+```rust
+// 当前编译器有时无法正确处理此类约束
+fn foo<T>()
+where
+    for<'a> T: Fn(&'a str) -> &'a str,
+{}
+```
+
+#### B. 关联类型归一化 (Associated Type Normalization) {#91b-关联类型归一化}
+
+复杂的关联类型投影在某些场景下会导致编译器死循环或错误拒绝：
+
+```rust
+trait Iterable {
+    type Item;
+    type Iter: Iterator<Item = Self::Item>;
+}
+
+// 深层嵌套的关联类型投影可能失败
+type DeepItem<T: Iterable> = <<T as Iterable>::Iter as Iterator>::Item;
+```
+
+#### C. 隐式自动 trait 推导 {#91c-隐式自动-trait-推导}
+
+当前 `AutoTrait` 分析（如 `Send`/`Sync` 推导）与主 solver 分离，导致：
+
+1. 不一致的推导结果
+2. 难以扩展新的 auto trait
+3. 与 GATs (Generic Associated Types) 的交互问题
+
+### 9.2 现代 Rust 特性受制约情况 {#92-现代-rust-特性受制约情况}
+
+| 特性 | 当前 Solver 状态 | 影响 |
+|------|---------------|------|
+| GATs | 已稳定 (1.65)，但受限 | 复杂约束推导不准确 |
+| RPITIT | 已稳定 (1.75) | 在复杂 trait 层次中推断不稳定 |
+| AFIT (async fn in traits) | 已稳定 (1.75.0) | 隐式 `Send`  bounds 推导问题 |
+| TAIT (type alias impl trait) | 部分稳定 | 嵌套 TAIT 场景受限 |
+| Specialization | 未稳定 | 重叠 impl 检查过于保守 |
+
+### 9.3 新旧架构对比与 Goal 语言 {#93-新旧架构对比与-goal-语言}
+
+```text
+新旧架构对比:
+
+当前 Solver:                    Next-gen Solver:
+┌─────────────────┐            ┌─────────────────┐
+│  Trait Obligation│            │  Goal: Prove<T: Display>  │
+│  (立即求解)      │            │  (统一目标表示)            │
+└────────┬────────┘            └────────┬────────┘
+         │                             │
+┌────────▼────────┐            ┌────────▼────────┐
+│  SLG Resolution │            │  Canonicalizer  │
+│  (穷尽搜索)      │            │  (变量规范化)    │
+└────────┬────────┘            └────────┬────────┘
+         │                             │
+┌────────▼────────┐            ┌────────▼────────┐
+│  关联类型立即归一化│            │  Eval Tree      │
+│                 │            │  (可回溯评估树)  │
+└─────────────────┘            └────────┬────────┘
+                                        │
+                               ┌────────▼────────┐
+                               │  Response Cache │
+                               │  (响应缓存复用)  │
+                               └─────────────────┘
+```
+
+所有类型系统查询统一为 `Goal`（rustc 内部简化表示）：
+
+```rust,ignore
+// rustc 内部表示 (简化)
+enum Goal<'tcx> {
+    // 证明类型实现 trait
+    Trait(TraitPredicate<'tcx>),
+    // 证明区域约束
+    RegionOutlives(RegionOutlivesPredicate<'tcx>),
+    // 证明类型相等
+    Eq(Type<'tcx>, Type<'tcx>),
+    // 逻辑与
+    And(Box<Goal<'tcx>>, Box<Goal<'tcx>>),
+    // 逻辑或
+    Or(Box<Goal<'tcx>>, Box<Goal<'tcx>>),
+    // 高阶量化
+    ForAll(Box<Goal<'tcx>>),
+}
+```
+
+延迟归一化（Lazy Normalization）示例：
+
+```rust
+trait Foo {
+    type Bar;
+}
+
+// 当前: <T as Foo>::Bar 立即尝试归一化
+// 新 solver: 保留投影，仅在需要时归一化
+
+fn use_foo<T: Foo>(x: T::Bar) {
+    // 新 solver 可以更灵活地处理未完全确定的具体类型
+}
+```
+
+### 9.4 Chalk 架构细节与多维对比 {#94-chalk-架构细节与多维对比}
+
+```text
+Chalk 架构:
+┌─────────────────────────────────────┐
+│           Rust Source Code          │
+└─────────────┬───────────────────────┘
+              │ lowering
+┌─────────────▼───────────────────────┐
+│     Chalk IR (中间表示)              │
+│  - Trait bounds → Horn clauses      │
+│  - Type goals → Logic programs      │
+└─────────────┬───────────────────────┘
+              │
+┌─────────────▼───────────────────────┐
+│     SLG Solver (Rust 实现)          │
+│  - 基于 Tarjan 的高效搜索           │
+└─────────────────────────────────────┘
+```
+
+尽管 Chalk 在理论上很优雅，但实际集成 rustc 时遇到：
+
+1. **性能瓶颈**: 纯逻辑求解在处理 rustc 的大规模类型约束时速度不足
+2. **与 rustc 耦合困难**: Chalk 假设了过于理想化的类型系统模型
+3. **生命周期（Lifetimes）交互**: Chalk 最初未考虑 Rust 独特的生命周期系统
+
+| 维度 | Chalk (2017-2020) | Next-gen Solver (2021-now) |
+|------|------------------|---------------------------|
+| **设计目标** | 外部可复用库 | 深度集成 rustc |
+| **求解策略** | 纯 SLG resolution | 混合策略 + 可回溯缓存 |
+| **关联类型** | 预先归一化 | 延迟归一化 |
+| **生命周期** | 后期添加 | 原生集成 |
+| **GATs 支持** | 理论支持 | 生产级支持 |
+| **Specialization** | 实验性 | 核心设计考虑 |
+| **性能** | 较慢 (独立库) | 与旧 solver 相当或更优 |
+| **状态** | 已归档 | nightly 默认，目标稳定化 |
+
+```text
+Rust 1.0  Solver ──→ NLL Era ──→ Chalk 实验 ──→ Next-gen Solver
+   (2015)    (2018)      (2019)        (2021-now)
+     │           │            │              │
+     │           │            │              └── nightly 默认 (2024)
+     │           │            │              └── 目标: 2025-2026 稳定
+     │           │            └── 提供了理论基础和 Datalog 经验
+     │           │
+     │           └── NLL borrowck 分离，trait solver 未变
+     │
+     └── 原始基于 obligation 的 solver
+```
+
+### 9.5 对现代 Rust 特性的影响（代码示例） {#95-对现代-rust-特性的影响代码示例}
+
+**GATs (Generic Associated Types)** — 已稳定 (Rust 1.65+)：
+
+```rust,ignore
+trait LendingIterator {
+    type Item<'a>;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+
+// 新 solver 下更可能成功编译的场景:
+trait Container {
+    type Iter<'a>: Iterator<Item = &'a Self::Item>;
+    type Item;
+    fn iter(&self) -> Self::Iter<'_>;
+}
+```
+
+Next-gen solver 的改进：更精确的 GAT 投影归一化、减少 "ambiguous projection" 错误、支持更复杂的 GAT trait bounds。
+
+**RPITIT (Return Position Impl Trait In Traits)** — 已稳定 (Rust 1.75+)：
+
+```rust
+trait Factory {
+    fn create(&self) -> impl Iterator<Item = i32>;
+}
+```
+
+改进：更稳定的隐式关联类型推断（Type Inference）、支持更复杂的返回类型组合、减少 `impl Trait` 在 trait 中的边界情况错误。
+
+**AFIT (Async Fn In Traits)** — 已稳定 (Rust 1.75+)，当前稳定版使用 desugaring to RPITIT 实现。关键问题是 `Send` bounds 的隐式推导：
+
+```rust
+// 当前: 返回的 Future 不一定自动是 Send，导致跨线程使用时问题
+trait AsyncService {
+    async fn call(&self) -> i32;  // Future 可能不是 Send
+}
+
+// workaround: 显式标注 (verbose)
+trait AsyncServiceSend: Send + Sync {
+    fn call(&self) -> impl Future<Output = i32> + Send;
+}
+
+// 新 solver 目标: 更智能的 Send/Sync 推导，减少显式标注需求
+```
+
+**Specialization (特化)** — 未稳定，需要 `feature(specialization)`：
+
+```rust,ignore
+trait Convert<T> {
+    fn convert(&self) -> T;
+}
+
+// 通用实现
+impl<T, U> Convert<U> for T where U: From<T> {
+    fn convert(&self) -> U { U::from(self) }
+}
+
+// 特化实现 (更具体)
+impl<T: Clone> Convert<T> for &T {
+    fn convert(&self) -> T { (*self).clone() }
+}
+```
+
+Specialization 的稳定化严重依赖新 solver 的重叠 impl 检查能力；新 solver 的可回溯约束求解是安全 specialization 的理论基础。
+
+### 9.6 时间线跟踪（2017–2026） {#96-时间线跟踪20172026}
+
+| 时间 | 事件 |
+|------|------|
+| 2017 | Chalk 项目启动 |
+| 2019 | Chalk 作为独立 crate 发布 |
+| 2021 | Next-gen solver 开发启动，吸取 Chalk 经验 |
+| 2022 | 新 solver 核心逻辑完成，开始 rustc 集成 |
+| 2023 | 解决 GATs + 新 solver 的关键 bug |
+| 2024-Q3 | Nightly 默认切换至 next-gen solver |
+| 2025-H1 | 性能调优，修复兼容性回归 |
+| **2025-H2** | **目标: 稳定版 RFC 提交** |
+| **2026** | **预计稳定化 (乐观估计)** |
+
+---
+
 > 📌 **复查记录**
 >
 > | 日期 | 复查人 | 版本 | 状态 |
 > |------|-------|------|------|
 > | 2026-05-08 | Kimi | Nightly 1.97.0 | ✅ 初版创建 |
 > | 2026-07-08 | — | — | 🕐 待复查：跟踪 RFC 提交进展 |
+> | 2026-07-12 | — | — | 🔀 合并 `04_ng_trait_solver.md` 独特内容（§9），后者改为重定向 stub |
 >
 ---
 
@@ -403,10 +658,10 @@ flowchart TD
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
 
-**文档版本**: 1.2
+**文档版本**: 1.3
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
-**最后更新**: 2026-05-22
-**状态**: ✅ 权威来源对齐完成 (Batch 9)
+**最后更新**: 2026-07-12
+**状态**: ✅ 权威来源对齐完成 (Batch 9)；2026-07-12 合并 `04_ng_trait_solver.md` 去重
 
 ---
 

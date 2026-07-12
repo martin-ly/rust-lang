@@ -108,7 +108,7 @@
 
 - `concept/02_intermediate/00_traits/01_traits.md` — Traits（Trait 系统）
 - `concept/02_intermediate/00_traits/09_serde_patterns.md` — Serde 序列化模式：Rust 的类型驱动数据转换
-- `concept/02_intermediate/00_traits/18_lifetimes_advanced.md` — 生命周期高级主题：从 HRTB 到自引用类型（⚠️ 2026-07-12 已合并至 `concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md`，本路径为重定向 stub）
+- `concept/02_intermediate/00_traits/18_lifetimes_advanced.md` — 生命周期高级主题：从 HRTB 到自引用类型（⚠️ 2026-07-12 已合并至 `concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md`；重定向 stub 已于 2026-07-12 N0 止血阶段删除，链接统一指向 30）
 - `concept/02_intermediate/00_traits/19_advanced_traits.md` — 高级 Trait 主题：从关联类型到特化
 - `concept/02_intermediate/00_traits/28_construction_and_initialization.md` — 构造与初始化：C++ 的构造函数 vs Rust 的结构体字面量
 - `concept/02_intermediate/00_traits/31_derive_traits.md` — 可派生 Trait（Derive Traits）
@@ -288,7 +288,7 @@
 - `concept/07_future/03_preview_features/16_type_alias_impl_trait_preview.md` — TAIT 预研
 - `concept/07_future/03_preview_features/17_const_trait_preview.md` — Const Trait 实现预览
 - `concept/07_future/03_preview_features/18_async_drop_preview.md` — Async Drop：异步资源的优雅销毁
-- `concept/07_future/03_preview_features/20_borrowsanitizer_preview.md` — BorrowSanitizer 概念预研：运行时借用检查工业化
+- `concept/07_future/03_preview_features/20_borrowsanitizer_preview.md` — BorrowSanitizer 概念预研：运行时借用检查工业化（⚠️ 旧页：内容已迁移至 `concept/07_future/03_preview_features/borrow_sanitizer.md`，2026-07-12 N0 止血阶段删除）
 - `concept/07_future/03_preview_features/22_gen_blocks_preview.md` — Generator Blocks（gen）预览
 - `concept/07_future/03_preview_features/25_open_enums_preview.md` — Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举
 - `concept/07_future/03_preview_features/26_specialization_preview.md` — Specialization：Trait 实现的精确化与重叠解析

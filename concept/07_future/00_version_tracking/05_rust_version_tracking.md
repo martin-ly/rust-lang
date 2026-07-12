@@ -954,7 +954,7 @@ Rust 1.96.0 已按计划进入 stable 通道；1.96.1 为 1.96 系列推荐 patc
 |:---|:---:|:---:|:---:|:---|
 | **Open Enums** | nightly 实验 (GitHub #156628) | 2027+ | ✅ 已创建 | [`concept/07_future/open_enums_preview.md`](../03_preview_features/25_open_enums_preview.md) |
 | **Field Projections** | 🟢 `field_of!` 宏（Macro） + FRTs 已合并（PR #152730）；2026 三步计划推进中（a-mir-formality → Implementation → Experimentation） | 2028+ | ✅ 已更新 | [`concept/07_future/42_field_projections_preview.md`](../03_preview_features/42_field_projections_preview.md) |
-| **BorrowSanitizer** | 原型阶段（~80% Miri 测试通过） | 2027+ | ✅ 已创建 | [`concept/07_future/borrowsanitizer_preview.md`](../03_preview_features/20_borrowsanitizer_preview.md) |
+| **BorrowSanitizer** | 原型阶段（~80% Miri 测试通过） | 2027+ | ✅ 已创建 | [`concept/07_future/03_preview_features/borrow_sanitizer.md`](../03_preview_features/borrow_sanitizer.md) |
 | **MC/DC Coverage** | rustc 跟踪中 (rust#124656) | 2026–2027 | ✅ 已创建 | [`concept/07_future/07_mcdc_coverage_preview.md`](../03_preview_features/07_mcdc_coverage_preview.md) |
 | **cargo-semver-checks** | 继续解决合并到 cargo 的 blockers | 2026–2027 | 🟡 跟踪中 | — |
 | **Cargo plumbing commands** | 原型 | 2027+ | 🔴 缺失 | 待加入工具链跟踪 |

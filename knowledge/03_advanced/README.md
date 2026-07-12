@@ -30,8 +30,7 @@
 | 文档 | 主题 | 难度 |
 |------|------|------|
 | [async/async_await.md](async/01_async_await.md) | async/await 基础 | ⭐⭐⭐⭐ |
-| [async/async_closure.md](async/02_async_closure.md) | Async Closures | ⭐⭐⭐⭐ |
-| [async/async_closures_2024.md](async/01_async_closures_2024.md) | Async Closures 2024 | ⭐⭐⭐⭐ |
+| [async/async_closures_2024.md](async/01_async_closures_2024.md) | Async Closures | ⭐⭐⭐⭐ |
 
 ### 并发编程
 >

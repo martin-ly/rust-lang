@@ -34,7 +34,7 @@
 >
 > **后置概念**:
 > [Formal Methods](../04_research_and_experimental/02_formal_methods.md) ·
-> [Safety Tags Preview](31_safety_tags_preview.md) ·
+> [Safety Tags Preview](08_safety_tags_preview.md) ·
 > [AutoVerus / Verus Preview](33_autoverus_preview.md)
 >
 > **定理链**: N/A — 描述性/综述性/工具链文档
@@ -253,7 +253,7 @@ Safety Tags (RFC #3842)        BorrowSanitizer
 
 | 工具/提案 | 定位 | 与 BorrowSanitizer 的关系 | 相关链接 |
 |:---|:---|:---|:---|
-| [Safety Tags](31_safety_tags_preview.md) | `unsafe` 契约的机器可读标注 | Safety Tags 声明契约，BorrowSanitizer 在运行时（Runtime）验证契约执行 | [深度形式化](../../04_formal/02_separation_logic/33_safety_tags_in_formal.md) |
+| [Safety Tags](08_safety_tags_preview.md) | `unsafe` 契约的机器可读标注 | Safety Tags 声明契约，BorrowSanitizer 在运行时（Runtime）验证契约执行 | [深度形式化](../../04_formal/02_separation_logic/33_safety_tags_in_formal.md) |
 | **BorrowSanitizer** | 运行时（Runtime）别名规则验证 | 以 Tree Borrows 为底层模型，将 Miri 的理论检查推向工程化 | [MCP #958](https://github.com/rust-lang/compiler-team/issues/958) |
 | [AutoVerus / Verus](33_autoverus_preview.md) | 基于 SMT 的功能正确性证明 | 形式化证明与动态检测互补：Verus 证明不变量，BSan 捕获实现级别名违规 | [深度](../../04_formal/04_model_checking/24_autoverus.md) |
 | [Tree Borrows](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md) | Rust 别名模型 | BSan 的检测语义直接源于 Tree Borrows；Miri 默认使用该模型 | [Miri](../../04_formal/04_model_checking/31_miri.md) · [Stacked Borrows 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) |

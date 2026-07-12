@@ -133,7 +133,7 @@
 | [测验：所有权、借用与生命周期](../../01_foundation/11_quizzes/33_quiz_ownership_borrowing.md) | L1 基础概念层 | 初学者 | 综述级 | — | L2-L3 | N/A — 测验性/互动性文档，不涉及形式化定理链 |
 | [Traits](../../02_intermediate/00_traits/01_traits.md) | L2 进阶概念层 | 进阶 | 综述级 | S | L2-L5 | — |
 | [Serde 序列化模式：Rust 的类型驱动数据转换](../../02_intermediate/00_traits/09_serde_patterns.md) | L2 进阶概念层 | 进阶 | 综述级 | — | L2-L4 | — |
-| [生命周期高级主题：从 HRTB 到自引用类型](../../02_intermediate/00_traits/18_lifetimes_advanced.md) | L2 进阶概念层 | — | — | — | — | — |
+| [生命周期高级主题：从 HRTB 到自引用类型](../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md) | L2 进阶概念层 | — | — | — | — | — |
 | [高级 Trait 主题：从关联类型到特化](../../02_intermediate/00_traits/19_advanced_traits.md) | L2 进阶概念层 | 进阶 | 综述级 | S | L4-L5 | — |
 | [构造与初始化：C++ 的构造函数 vs Rust 的结构体字面量](../../02_intermediate/00_traits/28_construction_and_initialization.md) | L2 进阶概念层 | 进阶 | 参考级 | — | L2-L4 | — |
 | [可派生 Trait](../../02_intermediate/00_traits/31_derive_traits.md) | L2 进阶概念层 | 初学者 | 参考级 | S | L2-L3 | N/A — 参考级文档 |
@@ -450,13 +450,13 @@
 | [TAIT Preview](../../07_future/03_preview_features/16_type_alias_impl_trait_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Const Trait 实现预览](../../07_future/03_preview_features/17_const_trait_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/18_async_drop_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/03_preview_features/20_borrowsanitizer_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/03_preview_features/borrow_sanitizer.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Gen Blocks 预研：超越异步的泛化生成器](../../07_future/03_preview_features/22_gen_blocks_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/03_preview_features/25_open_enums_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Specialization：Trait 实现的精确化与重叠解析](../../07_future/03_preview_features/26_specialization_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [编译期执行与常量求值](../../07_future/03_preview_features/27_compile_time_execution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Stable ABI Preview](../../07_future/03_preview_features/30_stable_abi_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L2-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Safety Tags（安全标签）预览](../../07_future/03_preview_features/31_safety_tags_preview.md) | L7 前沿趋势层 | — | — | — | — | — |
+| [Safety Tags（安全标签）预览](../../07_future/03_preview_features/08_safety_tags_preview.md) | L7 前沿趋势层 | — | — | — | — | — |
 | [Inline Const Pattern 预览](../../07_future/03_preview_features/32_inline_const_pattern_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | A | L2-L3 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [AutoVerus / Verus 预览](../../07_future/03_preview_features/33_autoverus_preview.md) | L7 前沿趋势层 | 进阶 | 专家级 | — | L4-L5 | N/A — 形式化验证工具/AI 辅助证明研究跟踪 |
 | [`must_not_suspend` Lint Preview](../../07_future/03_preview_features/34_must_not_suspend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | P | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |

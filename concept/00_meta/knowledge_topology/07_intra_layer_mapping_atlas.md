@@ -498,7 +498,7 @@
 | [Rust 2024 Edition (1.85.0+ stable)](../../07_future/01_edition_roadmap/19_rust_edition_preview.md) | ⟹ | [Edition 2024 完全指南：新特性与迁移策略](../../07_future/01_edition_roadmap/44_edition_guide.md) | 后置概念引用（蕴含/导向） |
 | [Rust 2024 Edition (1.85.0+ stable)](../../07_future/01_edition_roadmap/19_rust_edition_preview.md) | ⊑ | [Rust Edition 机制与迁移指南](../../07_future/01_edition_roadmap/23_rust_edition_guide.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Rust 2024 Edition (1.85.0+ stable)](../../07_future/01_edition_roadmap/19_rust_edition_preview.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | 后置概念引用（蕴含/导向） |
-| [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/03_preview_features/20_borrowsanitizer_preview.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |
+| [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/03_preview_features/borrow_sanitizer.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |
 | [Rust 在 AI 与机器学习中的新兴角色](../../07_future/04_research_and_experimental/21_rust_in_ai.md) | ⟹ | [AI × Rust：生成-验证闭环与确定性容器](../../07_future/04_research_and_experimental/01_ai_integration.md) | 后置概念引用（蕴含/导向） |
 | [Rust 在 AI 与机器学习中的新兴角色](../../07_future/04_research_and_experimental/21_rust_in_ai.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | 后置概念引用（蕴含/导向） |
 | [Gen Blocks 预研：超越异步的泛化生成器](../../07_future/03_preview_features/22_gen_blocks_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |
@@ -515,7 +515,7 @@
 | [Rust Editions](../../07_future/00_version_tracking/32_editions.md) | ⟹ | [Edition 2024 完全指南：新特性与迁移策略](../../07_future/01_edition_roadmap/44_edition_guide.md) | 后置概念引用（蕴含/导向） |
 | [Inline Const Pattern 预览](../../07_future/03_preview_features/32_inline_const_pattern_preview.md) | ↔ | [Const Trait 实现预览](../../07_future/03_preview_features/17_const_trait_preview.md) | 互为后置概念（互参） |
 | [AutoVerus / Verus 预览](../../07_future/03_preview_features/33_autoverus_preview.md) | ⟹ | [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/08_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |
-| [AutoVerus / Verus 预览](../../07_future/03_preview_features/33_autoverus_preview.md) | ⟹ | [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/03_preview_features/20_borrowsanitizer_preview.md) | 后置概念引用（蕴含/导向） |
+| [AutoVerus / Verus 预览](../../07_future/03_preview_features/33_autoverus_preview.md) | ⟹ | [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/03_preview_features/borrow_sanitizer.md) | 后置概念引用（蕴含/导向） |
 | [AutoVerus / Verus 预览](../../07_future/03_preview_features/33_autoverus_preview.md) | ↔ | [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/borrow_sanitizer.md) | 互为后置概念（互参） |
 | [Rust 发布流程](../../07_future/00_version_tracking/33_rust_release_process.md) | ⟹ | [Rust 的发布流程与 Nightly Rust](../../07_future/00_version_tracking/50_nightly_rust.md) | 后置概念引用（蕴含/导向） |
 | [Rust 发布流程](../../07_future/00_version_tracking/33_rust_release_process.md) | ⟹ | [Rust 1.96 稳定特性](../../07_future/00_version_tracking/rust_1_96_stabilized.md) | 后置概念引用（蕴含/导向） |
@@ -538,7 +538,7 @@
 | [Rust 的发布流程与 Nightly Rust](../../07_future/00_version_tracking/50_nightly_rust.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |
 | [Rust 的发布流程与 Nightly Rust](../../07_future/00_version_tracking/50_nightly_rust.md) | ⟹ | [Rust 1.97.0 前沿特性预览](../../07_future/00_version_tracking/rust_1_97_preview.md) | 后置概念引用（蕴含/导向） |
 | [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/borrow_sanitizer.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |
-| [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/borrow_sanitizer.md) | ⟹ | [Safety Tags（安全标签）预览](../../07_future/03_preview_features/31_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |
+| [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/borrow_sanitizer.md) | ⟹ | [Safety Tags（安全标签）预览](../../07_future/03_preview_features/08_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |
 | [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/borrow_sanitizer.md) | ↔ | [AutoVerus / Verus 预览](../../07_future/03_preview_features/33_autoverus_preview.md) | 互为后置概念（互参） |
 | [Rust 1.97.0 特性 × 领域反查矩阵](../../07_future/00_version_tracking/feature_domain_matrix_197.md) | ⟹ | [Rust 1.97.0 前沿特性预览](../../07_future/00_version_tracking/rust_1_97_preview.md) | 后置概念引用（蕴含/导向） |
 | [Rust 1.97.0 特性 × 领域反查矩阵](../../07_future/00_version_tracking/feature_domain_matrix_197.md) | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/00_version_tracking/rust_1_98_preview.md) | 后置概念引用（蕴含/导向） |

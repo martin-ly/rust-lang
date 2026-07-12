@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 468,
-    "generated_at": "2026-07-12T02:11:43.620847+00:00"
+    "total_files": 465,
+    "generated_at": "2026-07-12T03:23:06.657025+00:00"
   },
   "files": [
     {
@@ -3068,7 +3068,7 @@
       "layer": "L0",
       "title": "概念定义图谱（Concept Definition Atlas）",
       "positioning": "",
-      "line_count": 562,
+      "line_count": 561,
       "theorem_chains": [
         {
           "text": "| `05_logical_reasoning_atlas` | [逻辑推理图谱](../../00_meta/knowledge_topology/05_logical_reasoning_atlas.md) | Logical Reasoning Atlas | A navigational index of theorem chains, inference rules, proof/verification paths, and formal correspondences across the Rust concept hierarchy. 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。 | 2 |",
@@ -3199,7 +3199,6 @@
         "../../01_foundation/11_quizzes/33_quiz_ownership_borrowing.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/00_traits/09_serde_patterns.md",
-        "../../02_intermediate/00_traits/18_lifetimes_advanced.md",
         "../../02_intermediate/00_traits/19_advanced_traits.md",
         "../../02_intermediate/00_traits/28_construction_and_initialization.md",
         "../../02_intermediate/00_traits/31_derive_traits.md",
@@ -3515,12 +3514,10 @@
         "../../07_future/03_preview_features/16_type_alias_impl_trait_preview.md",
         "../../07_future/03_preview_features/17_const_trait_preview.md",
         "../../07_future/03_preview_features/18_async_drop_preview.md",
-        "../../07_future/03_preview_features/20_borrowsanitizer_preview.md",
         "../../07_future/03_preview_features/22_gen_blocks_preview.md",
         "../../07_future/03_preview_features/26_specialization_preview.md",
         "../../07_future/03_preview_features/27_compile_time_execution.md",
         "../../07_future/03_preview_features/30_stable_abi_preview.md",
-        "../../07_future/03_preview_features/31_safety_tags_preview.md",
         "../../07_future/03_preview_features/32_inline_const_pattern_preview.md",
         "../../07_future/03_preview_features/33_autoverus_preview.md",
         "../../07_future/03_preview_features/34_must_not_suspend_preview.md",
@@ -3561,7 +3558,7 @@
       "layer": "L0",
       "title": "属性关系图谱（Attribute Relationship Atlas）",
       "positioning": "",
-      "line_count": 555,
+      "line_count": 554,
       "theorem_chains": [
         {
           "text": "| [术语表 - C11 Macro System](../../03_advanced/03_proc_macros/32_macro_glossary.md) | L3 高级概念层 | 研究者 | 参考级 | S | L4-L5 | Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency |",
@@ -3796,7 +3793,6 @@
         "../../01_foundation/11_quizzes/33_quiz_ownership_borrowing.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/00_traits/09_serde_patterns.md",
-        "../../02_intermediate/00_traits/18_lifetimes_advanced.md",
         "../../02_intermediate/00_traits/19_advanced_traits.md",
         "../../02_intermediate/00_traits/28_construction_and_initialization.md",
         "../../02_intermediate/00_traits/31_derive_traits.md",
@@ -4112,12 +4108,10 @@
         "../../07_future/03_preview_features/16_type_alias_impl_trait_preview.md",
         "../../07_future/03_preview_features/17_const_trait_preview.md",
         "../../07_future/03_preview_features/18_async_drop_preview.md",
-        "../../07_future/03_preview_features/20_borrowsanitizer_preview.md",
         "../../07_future/03_preview_features/22_gen_blocks_preview.md",
         "../../07_future/03_preview_features/26_specialization_preview.md",
         "../../07_future/03_preview_features/27_compile_time_execution.md",
         "../../07_future/03_preview_features/30_stable_abi_preview.md",
-        "../../07_future/03_preview_features/31_safety_tags_preview.md",
         "../../07_future/03_preview_features/32_inline_const_pattern_preview.md",
         "../../07_future/03_preview_features/33_autoverus_preview.md",
         "../../07_future/03_preview_features/34_must_not_suspend_preview.md",
@@ -4469,7 +4463,7 @@
       "layer": "L0",
       "title": "层内映射图谱（Intra-Layer Mapping Atlas）",
       "positioning": "",
-      "line_count": 564,
+      "line_count": 563,
       "theorem_chains": [
         {
           "text": "- `⟹` entails：源蕴含/导向目标（后置概念引用，默认）",
@@ -5708,7 +5702,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/03_preview_features/20_borrowsanitizer_preview.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/03_preview_features/borrow_sanitizer.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -5768,7 +5762,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [AutoVerus / Verus 预览](../../07_future/03_preview_features/33_autoverus_preview.md) | ⟹ | [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/03_preview_features/20_borrowsanitizer_preview.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [AutoVerus / Verus 预览](../../07_future/03_preview_features/33_autoverus_preview.md) | ⟹ | [BorrowSanitizer 概念预研：运行时借用检查工业化](../../07_future/03_preview_features/borrow_sanitizer.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -5848,7 +5842,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/borrow_sanitizer.md) | ⟹ | [Safety Tags（安全标签）预览](../../07_future/03_preview_features/31_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/borrow_sanitizer.md) | ⟹ | [Safety Tags（安全标签）预览](../../07_future/03_preview_features/08_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -6210,11 +6204,9 @@
         "../../07_future/03_preview_features/16_type_alias_impl_trait_preview.md",
         "../../07_future/03_preview_features/17_const_trait_preview.md",
         "../../07_future/03_preview_features/18_async_drop_preview.md",
-        "../../07_future/03_preview_features/20_borrowsanitizer_preview.md",
         "../../07_future/03_preview_features/22_gen_blocks_preview.md",
         "../../07_future/03_preview_features/26_specialization_preview.md",
         "../../07_future/03_preview_features/30_stable_abi_preview.md",
-        "../../07_future/03_preview_features/31_safety_tags_preview.md",
         "../../07_future/03_preview_features/32_inline_const_pattern_preview.md",
         "../../07_future/03_preview_features/33_autoverus_preview.md",
         "../../07_future/03_preview_features/34_must_not_suspend_preview.md",
@@ -6257,8 +6249,8 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../02_intermediate/00_traits/18_lifetimes_advanced.md",
-        "../../07_future/03_preview_features/31_safety_tags_preview.md"
+        "../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md",
+        "../../07_future/03_preview_features/08_safety_tags_preview.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -6316,7 +6308,7 @@
       "layer": "L0",
       "title": "缺口与行动计划（Gap and Action Plan）",
       "positioning": "",
-      "line_count": 88,
+      "line_count": 87,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -6330,6 +6322,7 @@
         "../../01_foundation/01_ownership_borrow_lifetime/00_ownership_borrow_lifetime_knowledge_map.md",
         "../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md",
         "../../01_foundation/01_ownership_borrow_lifetime/28_ownership_inventories_brown_book.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md",
         "../../01_foundation/02_type_system/10_numerics.md",
         "../../01_foundation/02_type_system/14_coercion_and_casting.md",
         "../../01_foundation/02_type_system/31_never_type.md",
@@ -6352,8 +6345,7 @@
         "../../01_foundation/08_error_handling/32_error_handling_basics.md",
         "../../01_foundation/08_error_handling/33_error_handling_control_flow.md",
         "../../01_foundation/09_macros_basics/12_attributes_and_macros.md",
-        "../../02_intermediate/00_traits/18_lifetimes_advanced.md",
-        "../../07_future/03_preview_features/31_safety_tags_preview.md"
+        "../../07_future/03_preview_features/08_safety_tags_preview.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -9892,7 +9884,7 @@
       "transitions": 16,
       "has_cognitive_path": true,
       "mermaid_blocks": 12,
-      "matrix_rows": 229,
+      "matrix_rows": 230,
       "pre_post": {
         "pre": [
           "[Ownership](../01_ownership_borrow_lifetime/01_ownership.md)"
@@ -16137,30 +16129,6 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\00_traits\\18_lifetimes_advanced.md",
-      "layer": "L2",
-      "title": "生命周期高级主题：从 HRTB 到自引用类型",
-      "positioning": "",
-      "line_count": 10,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 0,
-      "pre_post": {
-        "pre": [],
-        "post": []
-      },
-      "backward_chains": 0,
-      "templated_chains": 0
-    },
-    {
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\00_traits\\19_advanced_traits.md",
       "layer": "L2",
       "title": "高级 Trait 主题：从关联类型到特化",
@@ -16946,11 +16914,11 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/terminology_glossary.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md",
         "../../03_advanced/01_async/37_async_cancellation_safety.md",
         "../../04_formal/00_type_theory/08_type_inference.md",
         "../01_generics/02_generics.md",
         "01_traits.md",
-        "18_lifetimes_advanced.md",
         "19_advanced_traits.md"
       ],
       "transitions": 0,
@@ -16959,7 +16927,7 @@
       "matrix_rows": 31,
       "pre_post": {
         "pre": [
-          "[Traits](01_traits.md) · [Generics](../01_generics/02_generics.md) · [Lifetimes](18_lifetimes_advanced.md)"
+          "[Traits](01_traits.md) · [Generics](../01_generics/02_generics.md) · [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md)"
         ],
         "post": [
           "[Async Cancellation Safety](../../03_advanced/01_async/37_async_cancellation_safety.md) · [Type Inference](../../04_formal/00_type_theory/08_type_inference.md)"
@@ -27494,7 +27462,7 @@
       "layer": "L3",
       "title": "Unsafe 边界全景（Unsafe Boundary Panorama）",
       "positioning": "从 [Unsafe Rust](03_unsafe.md) 中抽离**边界视角**：不做 unsafe 概念推导，只回答五类边界问题——什么算 UB、别名模型管到哪、Miri 能查到什么、安全抽象的契约划在哪、FFI 布局契约何时成立。每一节给出**边界陈述 → 反例 → 判定条件**三段式。",
-      "line_count": 443,
+      "line_count": 444,
       "theorem_chains": [
         {
           "text": "| Q-U1 | 构造无效值（bool>1/枚举越界/! 实例）的位置数是否 ≥1 个？ | ≥1 ⟹ UB（无需使用即成立） | 🔴 UB |",
@@ -36785,7 +36753,7 @@
       "layer": "L4",
       "title": "形式化方法在 Rust 中的应用（已合并）",
       "positioning": "",
-      "line_count": 23,
+      "line_count": 22,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -36813,7 +36781,7 @@
       "layer": "L4",
       "title": "航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)",
       "positioning": "系统讲解 **DO-178C 航空软件标准** 与 **DO-333 形式化方法补充** 的 Rust 映射——从软件等级 A~E 到定理证明、模型检查、抽象解释三类形式化方法在 Rust 生态中的工具链映射，分析 Rust 所有权（Ownership）系统在航空航天安全关键软件中的独特形式化优势。",
-      "line_count": 1094,
+      "line_count": 1100,
       "theorem_chains": [
         {
           "text": "| 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -54656,13 +54624,13 @@
         "../03_preview_features/11_const_trait_impl_preview.md",
         "../03_preview_features/12_return_type_notation_preview.md",
         "../03_preview_features/13_unsafe_fields_preview.md",
-        "../03_preview_features/20_borrowsanitizer_preview.md",
         "../03_preview_features/22_gen_blocks_preview.md",
         "../03_preview_features/25_open_enums_preview.md",
         "../03_preview_features/35_ferrocene_preview.md",
         "../03_preview_features/38_cranelift_backend_preview.md",
         "../03_preview_features/40_ergonomic_ref_counting_preview.md",
         "../03_preview_features/42_field_projections_preview.md",
+        "../03_preview_features/borrow_sanitizer.md",
         "../04_research_and_experimental/02_formal_methods.md",
         "../04_research_and_experimental/03_evolution.md",
         "https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md",
@@ -57235,9 +57203,9 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../00_version_tracking/05_rust_version_tracking.md",
-        "../03_preview_features/20_borrowsanitizer_preview.md",
         "../03_preview_features/25_open_enums_preview.md",
         "../03_preview_features/26_specialization_preview.md",
+        "../03_preview_features/borrow_sanitizer.md",
         "../04_research_and_experimental/02_formal_methods.md",
         "../04_research_and_experimental/03_evolution.md",
         "../04_research_and_experimental/21_rust_in_ai.md",
@@ -57811,7 +57779,7 @@
       "layer": "L7",
       "title": "Safety Tags 概念预研：Unsafe 契约的机器可读标注",
       "positioning": "探讨 Safety Tags 作为 Rust **unsafe 代码契约**的机器可读标注机制，从人工文档注释演进为编译器可理解、工具可验证的安全契约格式。",
-      "line_count": 668,
+      "line_count": 667,
       "theorem_chains": [
         {
           "text": "- **定理**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 定义 ⟹ 类型安全保证",
@@ -57901,7 +57869,6 @@
         "../03_preview_features/borrow_sanitizer.md",
         "../04_research_and_experimental/01_ai_integration.md",
         "../04_research_and_experimental/02_formal_methods.md",
-        "20_borrowsanitizer_preview.md",
         "33_autoverus_preview.md"
       ],
       "transitions": 8,
@@ -59036,128 +59003,6 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\07_future\\03_preview_features\\20_borrowsanitizer_preview.md",
-      "layer": "L7",
-      "title": "BorrowSanitizer 概念预研：运行时借用检查工业化",
-      "positioning": "探讨 BorrowSanitizer 作为 Rust **运行时（Runtime）借用（Borrowing）检查**工具的工业化路径，从 Miri 的纯解释执行扩展到编译后二进制检测的设计空间。",
-      "line_count": 675,
-      "theorem_chains": [
-        {
-          "text": "- **定理**: BorrowSanitizer 概念预研：运行时借用检查工业化 定义 ⟹ 类型安全保证",
-          "type": "paragraph"
-        },
-        {
-          "text": "| BorrowSanitizer 概念预研：运行时借用检查工业化 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| BorrowSanitizer 概念预研：运行时借用检查工业化 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| BorrowSanitizer 概念预研：运行时借用检查工业化 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |",
-          "type": "table_row"
-        }
-      ],
-      "anti_propositions": [
-        {
-          "title": "## 四、反命题"
-        },
-        {
-          "title": "### 4.1 反命题"
-        },
-        {
-          "title": "### 反命题"
-        }
-      ],
-      "code_blocks": [
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "fn main() {     let feature = \"preview\";     println!(\"{}\", feature); } ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 12,
-          "should_fail": false,
-          "code_preview": "fn main() {     let mut x = [0i32; 4];     let ptr = x.as_mut_ptr();     unsafe ..."
-        },
-        {
-          "flags": [],
-          "lines": 12,
-          "should_fail": false,
-          "code_preview": "fn main() {     let mut x = 0;     let r = &mut x;     unsafe {         let ptr ..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 15,
-          "should_fail": true,
-          "code_preview": "extern \"C\" {     fn c_modify(ptr: *mut i32); }  fn main() {     let mut x = 42; ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 14,
-          "should_fail": false,
-          "code_preview": "fn main() {     let mut x = [0i32; 4];     let ptr = x.as_mut_ptr();     unsafe ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 16,
-          "should_fail": false,
-          "code_preview": "// ❌ 检测盲区: BorrowSanitizer（运行时）与 Miri（解释器）可能检测到不同 UB  fn alias_violation() {    ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 15,
-          "should_fail": false,
-          "code_preview": "fn alias_violation() {     let mut x = 5;     let r1 = &mut x as *mut i32;     l..."
-        }
-      ],
-      "sources": [],
-      "cross_references": [
-        "../../00_meta/00_framework/methodology.md",
-        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
-        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
-        "../../03_advanced/02_unsafe/03_unsafe.md",
-        "../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md",
-        "../../04_formal/02_separation_logic/04_rustbelt.md",
-        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
-        "../../06_ecosystem/00_toolchain/01_toolchain.md",
-        "../00_version_tracking/05_rust_version_tracking.md",
-        "../04_research_and_experimental/02_formal_methods.md",
-        "08_safety_tags_preview.md",
-        "33_autoverus_preview.md",
-        "borrow_sanitizer.md"
-      ],
-      "transitions": 8,
-      "has_cognitive_path": true,
-      "mermaid_blocks": 3,
-      "matrix_rows": 32,
-      "pre_post": {
-        "pre": [
-          "[Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Version Tracking](../00_version_tracking/05_rust_version_tracking.md)",
-          "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)",
-          "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)"
-        ],
-        "post": [
-          "[Formal Methods](../04_research_and_experimental/02_formal_methods.md) · [RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md)"
-        ]
-      },
-      "backward_chains": 0,
-      "templated_chains": 0
-    },
-    {
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\03_preview_features\\22_gen_blocks_preview.md",
       "layer": "L7",
       "title": "Gen Blocks 预研：超越异步的泛化生成器",
@@ -59753,30 +59598,6 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\07_future\\03_preview_features\\31_safety_tags_preview.md",
-      "layer": "L7",
-      "title": "Safety Tags（安全标签）预览",
-      "positioning": "",
-      "line_count": 10,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "08_safety_tags_preview.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 0,
-      "pre_post": {
-        "pre": [],
-        "post": []
-      },
-      "backward_chains": 0,
-      "templated_chains": 0
-    },
-    {
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\03_preview_features\\32_inline_const_pattern_preview.md",
       "layer": "L7",
       "title": "Inline Const Pattern 预览（Rust 1.98+ Nightly）",
@@ -59909,9 +59730,8 @@
         "../../04_formal/04_model_checking/24_autoverus.md",
         "../../04_formal/04_model_checking/31_miri.md",
         "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
-        "../03_preview_features/borrow_sanitizer.md",
         "08_safety_tags_preview.md",
-        "20_borrowsanitizer_preview.md"
+        "borrow_sanitizer.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -61170,7 +60990,7 @@
         "../../04_formal/04_model_checking/32_kani.md",
         "../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md",
         "../04_research_and_experimental/02_formal_methods.md",
-        "31_safety_tags_preview.md",
+        "08_safety_tags_preview.md",
         "33_autoverus_preview.md"
       ],
       "transitions": 0,

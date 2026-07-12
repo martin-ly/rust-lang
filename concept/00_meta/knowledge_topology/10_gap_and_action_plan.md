@@ -27,8 +27,8 @@
 
 | 概念 | 层级 | 当前来源数 | 建议行动 |
 |:---|:---:|:---:|:---|
-| [生命周期高级主题：从 HRTB 到自引用类型](../../02_intermediate/00_traits/18_lifetimes_advanced.md) | L2 进阶概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
-| [Safety Tags（安全标签）预览](../../07_future/03_preview_features/31_safety_tags_preview.md) | L7 前沿趋势层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
+| [生命周期高级主题：从 HRTB 到自引用类型](../../01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md) | L2 进阶概念层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
+| [Safety Tags（安全标签）预览](../../07_future/03_preview_features/08_safety_tags_preview.md) | L7 前沿趋势层 | 1 | 补充 Rust Reference / TRPL / 学术来源 |
 
 ### P1：增强知识表征
 
