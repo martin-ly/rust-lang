@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 495,
-    "generated_at": "2026-07-12T21:13:08.155903+00:00"
+    "generated_at": "2026-07-12T21:17:50.885977+00:00"
   },
   "files": [
     {
@@ -49919,7 +49919,7 @@
       "layer": "L6",
       "title": "Tokio 运行时内部机制（Tokio Runtime Internals）",
       "positioning": "Tokio 是 Rust async 生态的事实标准运行时。本页把分散在 tutorial、blog 与 API docs 中的机制细节归一为单一权威页：每个机制给出「结构 → 语义 → 反例/边界 → 观测手段」。",
-      "line_count": 305,
+      "line_count": 311,
       "theorem_chains": [
         {
           "text": "阅读顺序：**架构（§2）⟹ 驱动（§3-4）⟹ 任务生命周期（§5-6）⟹ 宏语义（§7）⟹ 观测（§8）**。",
@@ -49942,7 +49942,11 @@
           "type": "paragraph"
         },
         {
-          "text": "> **诊断映射**（与本文各节的反例对应）：任务永久 Pending ⟹ console 看该任务最后 poll 位置 + [Waker 契约深度解析](../../03_advanced/01_async/12_waker_contract_deep_dive.md) §六判定树；blocking 池饱和 ⟹ `blocking_queue_depth` 持续 >0；调度饥饿 ⟹ `RuntimeMetrics` 的 worker 间 steal 计数失衡 + [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) §六的测量方法。",
+          "text": "> **诊断映射**（与本文各节的反例对应）：任务永久 Pending ⟹ console 看该任务最后 poll 位置 + [Waker 契约深度解析](../../03_advanced/01_async/12_waker_contract_deep_dive.md) §六判定树；",
+          "type": "paragraph"
+        },
+        {
+          "text": "> blocking 池饱和 ⟹ `blocking_queue_depth` 持续 >0；调度饥饿 ⟹ `RuntimeMetrics` 的 worker 间 steal 计数失衡 + [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) §六的测量方法。",
           "type": "paragraph"
         },
         {

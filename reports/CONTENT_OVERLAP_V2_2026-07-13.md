@@ -20,7 +20,6 @@
 | 0.846 | 0.846 | 0.5 | 8 | Y | `crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md`(22) | `crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md`(22) |
 | 0.846 | 0.846 | 0.667 | 6 | Y | `crates/c01_ownership_borrow_scope/docs/tier_03_references/03_lifetimes_reference.md`(24) | `crates/c01_ownership_borrow_scope/docs/tier_04_advanced/01_advanced_lifetime_patterns.md`(24) |
 | 0.821 | 0.821 | 0.333 | 9 | Y | `docs/05_practice/06_project_05_text_statistics.md`(108) | `docs/05_practice/14_project_13_database_engine.md`(108) |
-| 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md`(22) | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/00_master_index.md`(22) | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/00_master_index.md`(22) | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/00_master_index.md`(22) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(22) |
@@ -29,6 +28,7 @@
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md`(22) | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md`(22) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md`(22) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(22) |
+| 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md`(22) | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md`(22) |
 | 0.818 | 0.818 | 0.5 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/rust_194_updates/README.md`(22) | `crates/c06_async/docs/rust_194_updates/README.md`(22) |
 | 0.818 | 0.818 | 0.5 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/rust_194_updates/README.md`(22) | `crates/c10_networks/docs/rust_194_updates/README.md`(21) |
 | 0.818 | 0.818 | 0.5 | 5 | Y | `crates/c03_control_fn/docs/rust_194_updates/README.md`(21) | `crates/c04_generic/docs/rust_194_updates/README.md`(22) |

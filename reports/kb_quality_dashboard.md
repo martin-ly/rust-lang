@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-12T21:04:28.361797+00:00
+> 生成时间: 2026-07-12T21:17:50.884976+00:00
 > 扫描文件数: 495
 
 ## 全局指标
@@ -8,7 +8,7 @@
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
 | 总文件数 | 495 | 27 | ✅ |
-| 总定理链 (⟹) | 2003 | ≥270 | ✅ |
+| 总定理链 (⟹) | 2004 | ≥270 | ✅ |
 | 总反命题 | 575 | ≥40 | ✅ |
 | 总 Mermaid 图 | 682 | ≥50 | ✅ |
 | 编译验证代码块 | 4754 | ≥150 | ✅ |
@@ -714,7 +714,7 @@
 | E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\07_network_protocols.md | L6 | 524 | 3 | 0 | 0 | 0 | 0 | 7 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\08_high_performance_network_service_architecture.md | L6 | 2113 | 3 | 0 | 0 | 0 | 0 | 21 | 6 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\09_reactive_programming.md | L6 | 1077 | 3 | 0 | 0 | 2 | 0 | 14 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\10_tokio_runtime_internals.md | L6 | 305 | 7 | 0 | 0 | 0 | 1 | 6 | 0 | ✅ | ✅ | ✅ | 进阶-专家 | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\10_tokio_runtime_internals.md | L6 | 311 | 8 | 0 | 0 | 0 | 1 | 6 | 0 | ✅ | ✅ | ✅ | 进阶-专家 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\01_wasi.md | L6 | 660 | 4 | 0 | 0 | 4 | 2 | 11 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\02_cross_compilation.md | L6 | 670 | 3 | 0 | 0 | 2 | 1 | 5 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\03_embedded_systems.md | L6 | 963 | 3 | 0 | 0 | 2 | 1 | 10 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |

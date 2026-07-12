@@ -119,3 +119,19 @@
 - 代码示例：rustc 1.97 --edition 2024 实测；外链：curl 实测 200；
 - 禁止模板套话（check_template_cliches）；每阶段后 kb_auditor 死链 0/跨层 0 + canonical 0 ERROR；
 - 预估规模：新页 ~25 个、改造页 ~80 个、quiz 新增/改造 ~30 个、atlas 扩展 ~150 概念覆盖。
+
+---
+
+## 执行完成记录（2026-07-13）
+
+**状态：W0–W5 全量完成，全 20 门 exit 0，semantic health 99.6（meta 100 / topo 98.4 / dedup 100 / kg 100），与公式上限同值。**
+
+- **W0**：1.94 三段重复去重（467→188 行）；safety_critical canonical 勘误 + 新建 concept 索引入口页；并行前端/Cranelift 双权威按深度裁定（preview 页为权威）；quizzes 索引重建（21 quiz/309 题）。
+- **W1**：①语言/编译器 7 项（target features/import self/WSAESHUTDOWN/must_use×!/-Z flags 系统页/target tier 页/std 注记）；②工具/认证 8 项（cargo_197 特性页/rustdoc 1.97/miri 对齐/rustfmt-clippy 注记/**Ferrocene 页重写为已交付认证工具链**/认证工具链清单页/AUTOSAR 页/cargo vet 供应链页）。新增 5 权威页。
+- **W2**：①42 页真 mindmap（内容层 14→49 页）+ 20 页反例补齐（06 层反例率 13%→46.7%）；②atlas 深度扩展：示例反例 40→330、场景决策树 39→284、推理判定树 15→387、层间映射全层 1429 边（深层 h3/h4 抽取 + 反命题关键词）；新检查器 check_mindmap_coverage.py。
+- **W3**：quiz 注册表（yaml 898 行 + 人类索引）+ 21 个独立 quiz/309 题（144→309，四级题型混合、难度标注 100%）+ 双向回链 21/21 + 嵌入测验 301 页/1302 块；新检查器 check_quiz_system.py（--strict 通过）+ add_quiz_backlinks.py/refresh_quiz_registry.py（幂等）。
+- **W4**：async 5 新页（Stream 代数/Executor 公平性/Pin 投射反例/Waker 契约/async trait 对象安全 canonical 升格）+ Tokio 运行时深度页 + 权威源索引补 3 项；8 页回链补齐；2 处实测勘误写入（trait_variant 非 dyn 安全、test-util 不在 full）。
+- **W5**：04_formal/07_concurrency_semantics/ 新子层 5 页（进程代数/线性化/Actor）+ 06 层 CRDT/向量时钟 2 页 + 五模型定义矩阵导航页；canonical 分工声明 4 处（无双权威）；KG 520 实体/6431 关系，K1–K7+K1b 全 0。
+- **收尾**：元数据 D1–D6 全 0（D5 白名单 29 项附理由、NIGHTLY_RE 误报修复）；权威覆盖 any=100%/none=0/核心缺口=0（含 crates --include-crates）；glossary 检查器路径 bug 修复；cargo vet 修复（uuid 1.23.5→1.23.4 lock 回退）。
+
+**遗留（非阻断）**：atlas 索引含少量 quiz 页条目（可按需加排除规则）；kg_tlo_alignment.md CRLF 行尾待统一；usingcsp.com 外链本网络不可达（已标注备查）；W1-b 所述 8 页 KG 实体经核实已由后续工作流补录。
