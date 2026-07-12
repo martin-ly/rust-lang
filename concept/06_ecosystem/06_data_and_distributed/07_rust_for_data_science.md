@@ -38,6 +38,7 @@
     - [8.1 边界测试：Polars Lazy API 中过早 collect 导致内存溢出](#81-边界测试polars-lazy-api-中过早-collect-导致内存溢出)
     - [8.2 边界测试：PyO3 GIL 死锁](#82-边界测试pyo3-gil-死锁)
     - [8.3 边界测试：未处理 CSV 解析中的畸形数据](#83-边界测试未处理-csv-解析中的畸形数据)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [相关概念](#相关概念)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 在数据科学领域的定位与 Python 有什么不同？（理解层）](#测验-1rust-在数据科学领域的定位与-python-有什么不同理解层)
@@ -517,6 +518,32 @@ fn robust_csv_read() -> Result<DataFrame, PolarsError> {
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**陷阱：`f64` 直接做 `HashMap` 键**。浮点没有 `Eq`（`NaN != NaN`）也没有 `Hash`，直方图/分组统计无法直接编译：
+
+```rust,compile_fail
+use std::collections::HashMap;
+
+fn histogram(values: &[f64]) -> HashMap<f64, usize> {
+    let mut m = HashMap::new();
+    for v in values { *m.entry(*v).or_insert(0) += 1; }
+    m
+}
+```
+
+rustc 1.97.0 实测：`error[E0277]: the trait bound f64: Eq is not satisfied`、`f64: Hash is not satisfied`。
+
+**修正**：按位模式键化（`to_bits`），或用 `ordered_float::NotNan<f64>` 显式声明「无 NaN」契约：
+
+```rust
+fn histogram(values: &[f64]) -> HashMap<u64, usize> {
+    let mut m = HashMap::new();
+    for v in values { *m.entry(v.to_bits()).or_insert(0) += 1; }
+    m
+}
+```
+
 ## 相关概念
 
 - [数据工程](05_data_engineering.md) — ETL/ELT、Delta Lake、CDC
@@ -605,4 +632,3 @@ Arrow 的列式内存格式是语言无关的。Rust `arrow-rs` 和 Python `pyar
 | Rust for Data Science（Rust 数据科学） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Rust for Data Science（Rust 数据科学） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust for Data Science（Rust 数据科学） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-

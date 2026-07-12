@@ -57,6 +57,7 @@
     - [blocker](#blocker)
   - [四、演进路线](#四演进路线)
   - [五、与 Rust for Linux 的关系](#五与-rust-for-linux-的关系)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [六、相关概念](#六相关概念)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1："人机工程学的引用计数"指什么？（理解层）](#测验-1人机工程学的引用计数指什么理解层)
@@ -205,6 +206,36 @@ let device = Arc::clone(&self.device);
 ```
 
 Ergonomic ref-counting 可显著降低内核绑定的样板代码量，提升可维护性。
+
+## ⚠️ 反例与陷阱
+
+**陷阱：`Rc` 双向引用成环导致永久泄漏**。引用计数无法回收环——这正是 ergonomic ref-counting 预研试图用类型级手段缓解的经典人机工程学缺陷：
+
+```rust
+use std::cell::RefCell;
+use std::rc::{Rc, Weak};
+
+struct Node { next: RefCell<Option<Rc<Node>>> }
+
+fn leak_cycle() -> Weak<Node> {
+    let a = Rc::new(Node { next: RefCell::new(None) });
+    let b = Rc::new(Node { next: RefCell::new(None) });
+    *a.next.borrow_mut() = Some(Rc::clone(&b));
+    *b.next.borrow_mut() = Some(Rc::clone(&a)); // 环
+    let weak = Rc::downgrade(&a);
+    drop(a); drop(b);
+    weak
+}
+```
+
+rustc 1.97.0 实测：`leak_cycle().upgrade().is_some()` 为 `true`——外部句柄全部 drop 后节点仍存活，内存泄漏复现。
+
+**修正**：环中至少一条边用 `Weak`（反向引用、父指针等），`upgrade()` 返回 `None` 即证明可回收：
+
+```rust
+struct Node { next: RefCell<Option<Weak<Node>>> }
+// 赋值改为 Rc::downgrade(&b) / Rc::downgrade(&a)
+```
 
 ## 六、相关概念
 

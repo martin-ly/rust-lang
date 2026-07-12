@@ -722,6 +722,7 @@ flowchart TD
 
 ## 十、相关概念链接
 
+- [对应测验](06_quiz_formal_methods.md) — 形式化方法（分离逻辑、RustBelt、类型安全、验证工具链）
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | RustBelt 理论基础 | [`./04_rustbelt.md`](../02_separation_logic/01_rustbelt.md) | 验证工具的数学根基 |
@@ -1530,4 +1531,3 @@ Kani 的"所有路径"是**有界**的（循环展开深度、数据结构大小
 | Verification Toolchain Selection Guide（验证工具链选择指南） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | Verification Toolchain Selection Guide（验证工具链选择指南） 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Verification Toolchain Selection Guide（验证工具链选择指南） 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
-

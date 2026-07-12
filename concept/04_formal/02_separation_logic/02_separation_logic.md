@@ -482,6 +482,7 @@ fn main() {
 
 ## 相关概念
 
+- [对应测验](../04_model_checking/06_quiz_formal_methods.md) — 形式化方法（分离逻辑、RustBelt、类型安全、验证工具链）
 - [Linear Logic](../01_ownership_logic/01_linear_logic.md) — 线性逻辑
 - [Ownership Formalization](../01_ownership_logic/02_ownership_formal.md) — 所有权形式化
 - [RustBelt](01_rustbelt.md) — RustBelt 验证
@@ -832,4 +833,3 @@ let s: &'static str = Box::leak(String::from("hello").into_boxed_str());
 | 分离逻辑：Rust 所有权的形式化根基 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | 分离逻辑：Rust 所有权的形式化根基 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | 分离逻辑：Rust 所有权的形式化根基 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
-

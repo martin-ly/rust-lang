@@ -32,9 +32,35 @@
 > [Rust By Example — Testing](https://doc.rust-lang.org/rust-by-example/testing.html) ·
 > [Wikipedia — Unit Testing](https://en.wikipedia.org/wiki/Unit_testing)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((测试基础))
+    测试类型
+      单元测试
+      集成测试
+      文档测试
+    标注
+      test属性
+      should_panic
+      ignore
+    断言
+      assert
+      assert_eq
+      assert_ne
+    组织
+      tests模块
+      tests目录
+    运行
+      cargo test
+      过滤并行
+```
+
 ## 📑 目录
 
 - [测试基础：从单元测试到集成测试](#测试基础从单元测试到集成测试)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Rust 测试文化](#11-rust-测试文化)
@@ -556,6 +582,7 @@ graph TD
 
 ## 相关概念
 
+- [对应测验](../11_quizzes/26_quiz_modules_testing.md) — 模块系统与测试（mod/use/pub、可见性、单元/集成测试）
 - [Modules](../07_modules_and_items/01_modules_and_paths.md) — 模块（Module）系统
 - [Error Handling](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md) — 错误处理（Error Handling）
 - [Testing Strategies](../../06_ecosystem/09_testing_and_quality/03_testing.md) — 测试策略

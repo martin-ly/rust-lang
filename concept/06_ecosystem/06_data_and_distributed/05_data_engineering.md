@@ -62,6 +62,7 @@
     - [9.1 边界测试：Parquet 写入时 schema 演化导致读取失败（兼容性错误）](#91-边界测试parquet-写入时-schema-演化导致读取失败兼容性错误)
     - [9.2 边界测试：对象存储流式下载内存溢出（运行时错误）](#92-边界测试对象存储流式下载内存溢出运行时错误)
     - [9.3 边界测试：ETL 管道中类型推断失败导致运行时 panic（类型错误）](#93-边界测试etl-管道中类型推断失败导致运行时-panic类型错误)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [相关概念](#相关概念)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`polars` 在 Rust 数据工程中与 `pandas` 有什么对应关系？（理解层）](#测验-1polars-在-rust-数据工程中与-pandas-有什么对应关系理解层)
@@ -846,6 +847,27 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 > [来源: [Apache Parquet](https://parquet.apache.org/)]
 > [来源: [Kafka Documentation](https://kafka.apache.org/documentation/)]
 
+## ⚠️ 反例与陷阱
+
+**陷阱：ETL 行解析 `unwrap` 遇脏数据**。数据摄取层的输入不可信，一条脏记录就让整批任务 panic 中断：
+
+```rust
+fn sum_column_bad(rows: &[&str]) -> u32 {
+    rows.iter().map(|r| r.parse::<u32>().unwrap()).sum() // 脏行 panic
+}
+
+// 修正：坏行计数跳过（或 collect::<Result<_,_>>() 快速失败）
+fn sum_column_good(rows: &[&str]) -> (u32, usize) {
+    let mut bad = 0;
+    let sum = rows.iter()
+        .filter_map(|r| r.parse::<u32>().map_err(|_| bad += 1).ok())
+        .sum();
+    (sum, bad)
+}
+```
+
+rustc 1.97.0 实测（`catch_unwind` 复现）：`sum_column_bad(["10", "xx", "20"])` panic；`sum_column_good` 返回 `(30, 1)`。管道设计中坏行比例本身应作为数据质量指标上报，而非静默丢弃。
+
 ## 相关概念
 
 - [Machine Learning Ecosystem](../11_domain_applications/13_machine_learning_ecosystem.md) — polars、arrow、DataFusion、candle
@@ -934,4 +956,3 @@ Apache Arrow 的 Rust 实现，提供列式内存格式标准。`polars`、`data
 | Data Engineering（数据工程） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Data Engineering（数据工程） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Data Engineering（数据工程） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-

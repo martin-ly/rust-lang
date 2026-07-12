@@ -22,9 +22,35 @@
 > [Rust Reference — Derive](https://doc.rust-lang.org/reference/procedural-macros.html#derive-macros) ·
 > [RFC 1681 — Macros 1.1](https://github.com/rust-lang/rfcs/pull/1681)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((Serde模式))
+    核心Trait
+      Serialize
+      Deserialize
+    数据模型
+      自描述
+      非自描述
+    派生
+      derive宏
+      字段属性
+    格式
+      JSON
+      二进制
+    定制
+      手写实现
+      访问者模式
+    陷阱
+      类型不匹配
+      反序列化失败
+```
+
 ## 📑 目录
 
 - [Serde 序列化模式：Rust 的类型驱动数据转换](#serde-序列化模式rust-的类型驱动数据转换)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Serde 的设计哲学](#11-serde-的设计哲学)

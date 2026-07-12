@@ -28,11 +28,35 @@
 >
 > - v1.0 (2026-07-04): 初始创建
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((常量与const函数))
+    常量项
+      const声明
+      编译期求值
+      内联展开
+    静态对比
+      static
+      固定地址
+    const函数
+      编译期可调用
+      受限运算
+    const上下文
+      数组长度
+      泛型参数
+    边界
+      受限操作
+      未稳定特性
+```
+
 ## 📑 目录
 
 ---
 
 - [常量项与常量函数（Const Items and Const Functions）](#常量项与常量函数const-items-and-const-functions)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 形式化定义](#11-形式化定义)

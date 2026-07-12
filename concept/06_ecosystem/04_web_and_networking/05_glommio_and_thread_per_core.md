@@ -32,6 +32,8 @@
 
 ## 二、Thread-per-Core vs Work-Stealing
 
+> **深度链接**: Tokio work-stealing 运行时的内部机制（驱动层/blocking 池/任务句柄/select! 语义）权威页见 [Tokio 运行时内部机制](10_tokio_runtime_internals.md)；调度公平性定量分析见 [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md)。
+
 | 特性 | Thread-per-core (Glommio) | Work-stealing (Tokio) |
 |:---|:---|:---|
 | 线程切换 | 无 | 有 |
@@ -201,6 +203,33 @@ fn main() {
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**陷阱：thread-per-core 模型中跨线程共享 `Rc<RefCell<_>>`**。Glommio 的核心约束是「状态不离开所属线程」；一旦把非 `Send` 类型 move 进 `thread::spawn`，借用检查器直接拒绝——这正是该架构用编译期约束替代运行时数据竞争的体现。
+
+```rust,compile_fail
+use std::rc::Rc;
+use std::cell::RefCell;
+
+fn spawn_worker(state: Rc<RefCell<u64>>) {
+    std::thread::spawn(move || {
+        *state.borrow_mut() += 1;
+    });
+}
+```
+
+rustc 1.97.0 实测：`error[E0277]: Rc<RefCell<u64>> cannot be sent between threads safely`。
+
+**修正**：跨线程边界只传 owned/`Send` 数据；必须共享可变状态时用 `Arc<Mutex<_>>`（但在 glommio 中应优先走 channel 回传所属 core）。
+
+```rust
+use std::sync::{Arc, Mutex};
+
+fn spawn_worker(state: Arc<Mutex<u64>>) {
+    std::thread::spawn(move || { *state.lock().unwrap() += 1; });
+}
+```
+
 ## 权威来源索引
 
 - [Glommio GitHub](https://github.com/DataDog/glommio)
@@ -232,3 +261,9 @@ fn main() {
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585) · [RustBelt: Securing the Foundations of the Rust Programming Language (POPL 2018)](https://dl.acm.org/doi/10.1145/3158154)
 - **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)
+
+---
+
+## 相关概念
+
+- [对应测验](../13_quizzes/01_quiz_networking_async_ecosystem.md) — 网络与异步生态（Web 框架、Tokio/Glommio 运行时、QUIC/HTTP-3、eBPF）

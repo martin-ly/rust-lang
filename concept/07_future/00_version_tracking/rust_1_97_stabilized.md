@@ -69,7 +69,7 @@ fn main() {}
 
 ### 2.3 新稳定 target features
 
-以下 target feature 在 1.97.0 稳定：
+以下 target feature 在 1.97.0 稳定（均为 **LoongArch** 目标特性，详见权威页 [`05_atomics_and_memory_ordering.md`](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) §5）：
 
 - `div32`
 - `lam-bh`
@@ -78,9 +78,10 @@ fn main() {}
 - `scq`
 
 ```rust,ignore
-#[cfg(any(target_arch = "aarch64", target_arch = "x86_64"))]
-#[target_feature(enable = "div32")]
-unsafe fn accelerated_div() {}
+#[cfg(all(target_arch = "loongarch64", target_feature = "lamcas"))]
+fn native_sub_word_cas() {
+    // lamcas 可用：AtomicU8/AtomicU16 的 CAS 走单条原子指令
+}
 ```
 
 ### 2.4 `cfg(target_has_atomic_primitive_alignment)`
@@ -328,11 +329,17 @@ Cargo 内部 `crates-io` crate 不再依赖 `curl`，减少构建依赖与平台
 
 ### 6.1 `--emit` 标志
 
-`rustdoc --emit=html` 等输出格式控制正式稳定。
+`rustdoc --emit` 输出格式控制正式稳定。stable 取值为 `html-static-files`、`html-non-static-files`、`dep-info`（注意没有 `html` 值，`--emit=html` 会报 `unrecognized emission type`）：
 
 ```bash
-rustdoc --emit=html src/lib.rs
+# 仅生成文档页面（不含静态资源）
+rustdoc --emit=html-non-static-files src/lib.rs
+
+# 生成 Makefile 风格依赖文件，供外部增量构建
+rustdoc --emit=dep-info src/lib.rs -o target/doc-dep
 ```
+
+详细取值与实测行为见 [Rustdoc 1.96–1.97 变更](../../06_ecosystem/00_toolchain/07_rustdoc_196_changes.md)。
 
 ### 6.2 `--remap-path-prefix`
 
@@ -432,3 +439,9 @@ cargo build
 
 - **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: A Semantic Foundation for Functional Verification of Rust Programs (PLDI 2022)](https://dl.acm.org/doi/10.1145/3519939.3523704)
 - **P2 生态/社区**: [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio) · [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures)
+
+---
+
+## 相关概念
+
+- [对应测验](../05_quizzes/01_quiz_version_and_preview.md) — 版本演进、Edition 机制与前沿特性（发布火车、1.90–1.97 稳定特性、preview 状态）

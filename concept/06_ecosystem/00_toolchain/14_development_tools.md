@@ -7,6 +7,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者] / [中级]
+> **内容分级**: [研究级]
 > **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
@@ -180,6 +181,28 @@ cargo test
 ```
 
 > 推荐在提交前运行以上步骤，或在 CI 中强制执行。
+
+---
+
+## 五·附、rustfmt / Clippy 1.97 行为注记
+
+**结论：Rust 1.97.0 中 rustfmt 与 Clippy 无用户可见的行为变更。**
+
+依据：
+
+1. [Rust 1.97.0 稳定特性汇总](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（本库按官方 release notes 整理的权威页）的 Cargo / Rustdoc / 兼容性各节**未列出任何 rustfmt 或 Clippy 条目**——1.97 的工具链变更集中在 Cargo（`build.warnings`、`resolver.lockfile-path`、`-m` 简写、`cargo clean` 校验，见 [Cargo 1.97 新特性](../01_cargo/23_cargo_197_features.md)）与 rustdoc（`--emit`、`--remap-path-prefix`，见 [Rustdoc 1.96–1.97 变更](07_rustdoc_196_changes.md)）。
+2. 官方发布渠道：[Rust 1.97.0 Release Notes](https://github.com/rust-lang/rust/releases) 与 [Clippy CHANGELOG](https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md) 均无对应稳定化条目。
+
+本地版本实测（2026-07-12，随 `rustc 1.97.0 (2d8144b78 2026-07-07)` 分发）：
+
+```text
+$ rustfmt --version
+rustfmt 1.9.0-stable (2d8144b788 2026-07-07)
+$ cargo clippy --version
+clippy 0.1.97 (2d8144b788 2026-07-07)
+```
+
+含义：从 1.96 升级到 1.97 不需要调整 `rustfmt.toml`、`clippy.toml` 或 lint 配置；既有 CI 中的 `cargo fmt -- --check` 与 `cargo clippy -- -D warnings` 行为保持一致。
 
 ---
 

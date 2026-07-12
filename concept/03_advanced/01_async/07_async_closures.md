@@ -548,6 +548,7 @@ let process = async |items: Vec<i32>| -> i32 {
 - [Pin 与 Unpin](08_pin_unpin.md)
 - [L2 闭包类型](../../02_intermediate/04_types_and_conversions/02_closure_types.md)
 - [Rust 2024 Edition](../../../knowledge/06_ecosystem/02_edition_2024.md)
+- [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) — spawn 生命周期与调度
 
 ---
 

@@ -56,10 +56,34 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((实现块))
+    固有实现
+      impl块
+      多块合并
+    方法
+      self接收者
+      可变接收者
+      消耗接收者
+    关联函数
+      无self
+      构造约定
+    Trait实现
+      impl for
+      一致性规则
+    边界
+      孤儿规则
+      重复定义
+```
+
 ## 📑 目录
 
 - [Implementations（实现块）](#implementations实现块)
   - [认知路径](#认知路径)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心命题](#一核心命题)
   - [二、固有实现](#二固有实现)
@@ -72,6 +96,10 @@
     - [6.3 Orphan Rule 违规](#63-orphan-rule-违规)
   - [七、权威来源索引](#七权威来源索引)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：方法 Receiver 的所有权语义（🟢 基础）](#测验-1方法-receiver-的所有权语义-基础)
+    - [测验 2：关联函数与方法的分界（🟡 进阶）](#测验-2关联函数与方法的分界-进阶)
+    - [测验 3：Orphan Rule 违规与修复（🔴 专家）](#测验-3orphan-rule-违规与修复-专家)
 
 ---
 
@@ -251,3 +279,66 @@ impl MyTrait for String {} // ❌ 当前 crate 既未定义 MyTrait 也未定义
 
 - **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
 - **P2 生态/社区**: [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver) · [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml)
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-12）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致。
+
+### 测验 1：方法 Receiver 的所有权语义（🟢 基础）
+
+`impl String` 中 `fn into_bytes(self)` 的 receiver 是 `self`，其调用语义是？
+
+- A. 不可变借用，调用后原值仍可用
+- B. 可变借用，调用后原值仍可用
+- C. 获取所有权，调用后原值被移动、不可再使用
+- D. 复制原值，`self` 要求 `Copy`
+
+<details>
+<summary>✅ 答案</summary>
+
+**C 正确**。按本页「三、方法 Receiver」表格：`self` ⟹ 获取所有权；`&self` ⟹ 不可变借用；`&mut self` ⟹ 可变借用。§6.2 反例正是 `s.into_bytes()` 后再用 `s` 报 "borrow of moved value"。
+
+</details>
+
+---
+
+### 测验 2：关联函数与方法的分界（🟡 进阶）
+
+`impl Rectangle { fn square(size: u32) -> Rectangle { ... } }` 中 `square` 的性质是？
+
+- A. 方法：第一个参数是隐式 `self`
+- B. 关联函数：没有 `self` 参数，通过 `Rectangle::square(5)` 调用，通常用作构造函数
+- C. 自由函数：与 `Rectangle` 无命名空间关联
+- D. Trait 方法：必须先声明 trait
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页定理 2 与「四、关联函数」：关联函数**无 `self` 参数**，不是方法，通常用作构造函数或工具函数，通过 `Type::function()` 调用，不依赖实例。
+
+</details>
+
+---
+
+### 测验 3：Orphan Rule 违规与修复（🔴 专家）
+
+以下代码为何编译失败？正确修复方式是？
+
+```rust,ignore
+trait MyTrait {}
+impl MyTrait for String {}
+```
+
+- A. 语法错误；把 `{}` 改为 `{ fn f() {} }`
+- B. 违反 Orphan Rule：当前 crate 既未定义 `MyTrait` 也未定义 `String`；修复：用 newtype 包装 `struct MyString(String); impl MyTrait for MyString {}`
+- C. `String` 不能实现任何 trait；无修复方式
+- D. 缺少 `#[derive]`；给 trait 加 derive 即可
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §6.3 与定理 3：`impl Trait for Type` 受 **Orphan Rule** 约束——Trait 或类型**至少有一个由当前 crate 定义**，防止不相关 crate 间的冲突实现。本例二者皆外部定义，故拒绝；标准修复是 **newtype 包装**使类型成为本地类型。
+
+</details>

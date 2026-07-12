@@ -733,6 +733,7 @@ func ParseJSON(input string) string {
 
 ## 十二、相关概念链接
 
+- [对应测验](../03_domain_comparisons/02_quiz_rust_vs_systems.md) — Rust vs 系统编程语言（C/C++/Go 内存安全、并发、错误处理对比）
 | 概念 | 文件 | 关系 |
 | :--- | :--- | :--- |
 | 并发 | [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md) | Rust 并发模型 |

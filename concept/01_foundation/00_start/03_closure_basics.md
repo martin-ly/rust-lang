@@ -26,9 +26,35 @@
 > [RFC 1558 — Closures](https://rust-lang.github.io/rfcs//1558-closure-to-fn-coercion.html) ·
 > [Wikipedia — Closure (computer programming)](https://en.wikipedia.org/wiki/Closure_(computer_programming))
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((闭包基础))
+    本质
+      匿名函数
+      环境捕获
+    捕获方式
+      不可变借用
+      可变借用
+      move夺取
+    Trait谱系
+      Fn
+      FnMut
+      FnOnce
+    类型特性
+      匿名类型
+      零成本
+      自动推导
+    典型场景
+      迭代器适配器
+      回调函数
+```
+
 ## 📑 目录
 
 - [闭包基础：捕获环境与匿名函数](#闭包基础捕获环境与匿名函数)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 闭包的语法与捕获](#11-闭包的语法与捕获)
@@ -510,6 +536,7 @@ graph TD
 
 ## 相关概念
 
+- [对应测验](../11_quizzes/27_quiz_closures_iterators.md) — 闭包与迭代器（捕获、Fn traits、惰性求值、适配器）
 - [Traits](../../02_intermediate/00_traits/01_traits.md) — Trait 系统
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）
 - [Iterator](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) — 迭代器（Iterator）

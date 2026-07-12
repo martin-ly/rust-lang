@@ -25,7 +25,13 @@
 > **后置概念**: [Collections](../05_collections/01_collections.md) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md)
 
 > **Rust 1.97.0 变更提示**：
-> Rust 1.97.0 将 `char::is_control` 稳定为 `const fn`，详见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
+> Rust 1.97.0 将 `char::is_control` 稳定为 `const fn`（[release notes — Stabilized APIs](https://releases.rs/docs/1.97.0/)，curl 200 实测），控制字符判定可用于常量上下文，详见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
+>
+> ```rust
+> // edition = "2024", rust = "1.97" —— rustc 1.97.0 实测
+> const HAS_CTRL: bool = char::is_control('\u{7}'); // const 上下文可用
+> assert!(HAS_CTRL);
+> ```
 
 ---
 
@@ -35,6 +41,31 @@
 > [Unicode Standard](https://www.unicode.org/standard/standard.html) ·
 > [Rust Formatting](https://doc.rust-lang.org/std/fmt/index.html) ·
 > [RFC 504 — CString](https://github.com/rust-lang/rfcs/pull/504)
+
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((字符串与文本))
+    核心类型
+      String
+      字符串切片
+      Cow
+    编码
+      UTF8强制
+      字节视图
+      字符迭代
+    操作
+      拼接
+      切片
+      格式化
+    所有权
+      拥有型
+      借用型
+    边界
+      字节索引
+      无效UTF8
+```
 
 ## 📑 目录
 
@@ -316,6 +347,15 @@ unsafe {
 
 > **C 字符串洞察**: `CString`/`CStr` 是 Rust **FFI 安全**的关键——它们保证 NUL 终止且不包含内部 NUL，避免了 C 字符串的常见陷阱。
 > [来源: [std::ffi::CString](https://doc.rust-lang.org/std/ffi/struct.CString.html)]
+>
+> **Rust 1.97.0 注记**：`std::ffi::FromBytesUntilNulError`（`CStr::from_bytes_until_nul` 的错误类型）实现了 `Copy`（[release notes — Stabilized APIs](https://releases.rs/docs/1.97.0/)，curl 200 实测），错误值可按值复制而无需 `clone`：
+>
+> ```rust
+> // edition = "2024", rust = "1.97" —— rustc 1.97.0 实测
+> fn takes_copy<T: Copy>(t: T) -> T { t }
+> let err = std::ffi::CStr::from_bytes_until_nul(b"no nul here").unwrap_err();
+> let _err2 = takes_copy(err); // 1.97：FromBytesUntilNulError: Copy
+> ```
 
 ---
 

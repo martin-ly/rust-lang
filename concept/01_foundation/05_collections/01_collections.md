@@ -31,9 +31,34 @@
 > [Wikipedia — Hash Table](https://en.wikipedia.org/wiki/Hash_table) ·
 > [Wikipedia — B-tree](https://en.wikipedia.org/wiki/B-tree)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((集合类型))
+    序列
+      Vec
+      VecDeque
+      LinkedList
+    映射
+      HashMap
+      BTreeMap
+    集合
+      HashSet
+      BTreeSet
+    共性
+      堆分配
+      迭代器
+      所有权语义
+    选型
+      访问模式
+      有序需求
+```
+
 ## 📑 目录
 
 - [集合类型：Rust 标准库的数据结构谱系](#集合类型rust-标准库的数据结构谱系)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 集合类型谱系](#11-集合类型谱系)

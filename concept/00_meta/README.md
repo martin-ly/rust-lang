@@ -146,3 +146,9 @@ graph LR
 | 2026-05 | 建立 `knowledge_topology/` 10 个 atlas 文件 |
 
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+
+---
+
+## 相关概念
+
+- [对应测验](05_quizzes/01_quiz_meta_framework.md) — 元层框架与知识体系架构（L0–L7 分层、Bloom 映射、A/S/P 标记、canonical 规则）

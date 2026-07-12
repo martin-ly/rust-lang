@@ -1,14 +1,12 @@
-> **内容分级**: [综述级]
->
 > **本节关键术语**: Miri · 未定义行为（UB） · Stacked Borrows · Tree Borrows · 别名规则（Aliasing Rules） · MIR 解释器 — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
-
 # Miri：Rust 未定义行为动态检测器
 
 > **EN**: Miri: Rust Undefined Behavior Detector
 > **Summary**: Miri is Rust's official MIR interpreter for detecting undefined behavior in unsafe and safe Rust code. Covers installation, common UB classes, Stacked Borrows vs Tree Borrows, and integration with existing crate tests.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶 / 工程 / 形式化]
+> **内容分级**: [综述级]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
@@ -38,6 +36,7 @@
     - [运行测试](#运行测试)
     - [运行单个示例或二进制](#运行单个示例或二进制)
     - [常用 Miri 环境变量](#常用-miri-环境变量)
+    - [版本对齐与工具链 pinning](#版本对齐与工具链-pinning)
   - [四、Stacked Borrows vs Tree Borrows](#四stacked-borrows-vs-tree-borrows)
     - [Stacked Borrows（SB）](#stacked-borrowssb)
     - [Tree Borrows（TB）](#tree-borrowstb)
@@ -135,6 +134,28 @@ cargo miri test --manifest-path crates/c02_type_system/Cargo.toml miri_tests
 | `MIRIFLAGS="-Zmiri-stacked-borrows"` | 使用 Stacked Borrows 别名模型 |
 | `MIRIFLAGS="-Zmiri-disable-isolation"` | 允许文件系统 / 网络访问 |
 | `MIRIFLAGS="-Zmiri-disable-stacked-borrows"` | 关闭借用（Borrowing）检查（仅检测基本 UB） |
+
+### 版本对齐与工具链 pinning
+
+Miri **没有独立的语义化版本号**——它与 rustc nightly 同构建、同发布，版本身份就是 nightly 的日期。这一点决定了所有安装与 CI 实践：
+
+| 事实（源：Miri 官方 README，2026-07-12 curl 实测） | 推论 |
+|:---|:---|
+| Miri 通过 rustup 作为 nightly 的组件分发：`rustup +nightly component add miri` | 不存在“Miri 独立升级”；升级 Miri = 升级 nightly |
+| 每个 nightly 的 rustc 与 miri 成对构建 | 混用不同日期的 rustc 与 miri 不被支持 |
+| `cargo miri setup` 会为 Miri 构建**定制的 sysroot（libstd）**，绑定到当前 rustc 版本 | 换 nightly 后必须重建：报 `found crate \`std\` compiled by an incompatible version of rustc` 时执行 `cargo miri clean` |
+| Miri 反映“当前编译器所理解的语义”，README 明确“makes no promises about future versions of the compiler” | Miri 报告的有效期与 nightly 绑定；CI 应 pin 具体 nightly 日期 |
+
+**CI 推荐模式**（README 官方片段）：
+
+```bash
+rustup toolchain install nightly --component miri
+rustup override set nightly
+cargo miri setup   # 显式 setup，保持测试步骤输出干净
+cargo miri test
+```
+
+生产仓库建议把 `nightly` 换成 `nightly-YYYY-MM-DD` 钉死日期，并在升级钉版时随 PR 一起执行 `cargo miri clean` 重建 sysroot，避免“本周 Miri 报 UB、上周不报”的漂移无法归因。
 
 ---
 

@@ -267,6 +267,8 @@ flowchart TD
 
 > 中间层桥接：上述 5 条修复策略对应的权威概念页见 §四「按修复策略索引」（[Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Error Handling Deep Dive](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md) · [FFI Advanced](../../03_advanced/04_ffi/02_ffi_advanced.md) · [Unsafe Rust Patterns](../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md) · [Miri](../../04_formal/04_model_checking/08_miri.md) · [Kani](../../04_formal/04_model_checking/09_kani.md)），叶子不再跳出本页。
 
+<!-- GENERATED-INDEX: 以下「数据驱动索引」节由 scripts/generate_knowledge_topology_atlas.py 在标记处自动生成；人工策展内容写在标记之前。 -->
+
 ---
 
 ---

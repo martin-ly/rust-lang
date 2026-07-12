@@ -40,9 +40,33 @@
 > [std::option](https://doc.rust-lang.org/std/option/index.html) ·
 > [Wikipedia — Exception Handling](https://en.wikipedia.org/wiki/Exception_handling)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((错误处理基础))
+    可恢复错误
+      Result
+      Option
+      问号传播
+    不可恢复
+      panic
+      abort
+    错误转换
+      From Into
+      map_err
+    组合
+      and_then
+      or_else
+    策略
+      快速失败
+      错误聚合
+```
+
 ## 📑 目录
 
 - [Rust 错误处理基础](#rust-错误处理基础)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Result 类型](#11-result-类型)
@@ -617,6 +641,7 @@ graph TD
 
 ## 相关概念
 
+- [对应测验](../11_quizzes/25_quiz_error_handling.md) — 错误处理（Result/Option、?、panic、自定义错误）
 - **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/01_type_system.md) · [Control Flow](../04_control_flow/01_control_flow.md)
 - **下层概念**: [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
 

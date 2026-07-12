@@ -31,15 +31,11 @@
 
 | 谓词 | 前 | 后 | Δ |
 |:---|---:|---:|---:|
-| ex:relatedTo | 4405 | 4405 | +0 |
-| ex:dependsOn | 700 | 700 | +0 |
-| ex:entails | 671 | 671 | +0 |
-| ex:instanceOf | 18 | 29 | +11 |
-| ex:appliesTo | 14 | 17 | +3 |
-| ex:refines | 12 | 12 | +0 |
-| ex:equivalentTo | 9 | 9 | +0 |
-| ex:mutexWith | 5 | 5 | +0 |
-| ex:counterExample | 5 | 5 | +0 |
+| ex:relatedTo | 4913 | 4913 | +0 |
+| ex:dependsOn | 729 | 729 | +0 |
+| ex:entails | 695 | 695 | +0 |
+| ex:instanceOf | 0 | 11 | +11 |
+| ex:appliesTo | 0 | 3 | +3 |
 
 ## 逐边明细与依据
 

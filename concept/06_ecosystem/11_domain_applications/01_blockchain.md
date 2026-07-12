@@ -674,6 +674,23 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**陷阱：合约算术直接相加**。转账/铸币逻辑的整数溢出在 debug 构建下 panic，而 release 构建（链上部署形态）默认静默回绕——攻击者可借此伪造余额：
+
+```rust
+fn transfer_bad(balance: u64, amount: u64) -> u64 {
+    balance + amount // release 下 u64::MAX + 1 回绕为 0
+}
+
+// 修正：溢出即拒绝交易
+fn transfer_good(balance: u64, amount: u64) -> Result<u64, &'static str> {
+    balance.checked_add(amount).ok_or("balance overflow")
+}
+```
+
+rustc 1.97.0 实测（debug 构建 + `catch_unwind` 复现）：`transfer_bad(u64::MAX, 1)` panic（attempt to add with overflow）；`transfer_good(u64::MAX, 1)` 返回 `Err("balance overflow")`。Substrate pallet 应统一使用 `checked_*`/`saturating_*`，并在 `Cargo.toml` 的 `[profile.release]` 显式设 `overflow-checks = true` 作为纵深防御。
+
 ## 相关概念链接
 
 | 概念 | 文件 | 关系 |

@@ -32,10 +32,35 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((分发机制))
+    静态分发
+      单态化
+      零成本
+      代码膨胀
+    动态分发
+      dyn Trait
+      虚表
+      运行时开销
+    对象安全
+      规则约束
+      无泛型方法
+    选型
+      性能优先
+      灵活性优先
+    优化
+      去虚拟化
+      内联
+```
+
 ## 📋 目录
 
 - [分发机制 (Dispatch Mechanisms)](#分发机制-dispatch-mechanisms)
 - [3.3 Rust 类型系统 - 分派机制参考](#33-rust-类型系统---分派机制参考)
+  - [🧠 知识结构图](#-知识结构图)
   - [📋 目录](#-目录)
   - [📐 知识结构](#-知识结构)
     - [概念定义](#概念定义)
@@ -101,6 +126,10 @@
   - [反向推理](#反向推理)
   - [过渡段](#过渡段)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：两种分派的时机（🟢 基础）](#测验-1两种分派的时机-基础)
+    - [测验 2：单态化的双面性（🟡 进阶）](#测验-2单态化的双面性-进阶)
+    - [测验 3：对象安全规则（🔴 专家）](#测验-3对象安全规则-专家)
 
 ---
 
@@ -2133,3 +2162,61 @@ fn plugin_system_example() {
 
 - **P1 学术/形式化**: [Wadler & Blott: How to Make Ad-hoc Polymorphism Less Ad Hoc (POPL 1989)](https://dl.acm.org/doi/10.1145/75277.75283) · [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
 - **P2 生态/社区**: [docs.rs/enum_dispatch — 生态权威 API 文档](https://docs.rs/enum_dispatch) · [docs.rs/serde — 生态权威 API 文档](https://docs.rs/serde)
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-12）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致。
+
+### 测验 1：两种分派的时机（🟢 基础）
+
+`fn static_dispatch<T: Animal>(animal: &T)` 与 `fn dynamic_dispatch(animal: &dyn Animal)` 的方法调用分别在何时确定？
+
+- A. 都在运行时通过 vtable 确定
+- B. 前者编译时确定（单态化生成专门化代码），后者运行时通过 vtable 查找
+- C. 都在编译时确定
+- D. 前者运行时，后者编译时
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §1.1 示例注释：静态分发在**编译时**为每个具体类型生成专门化实现（如 `process_i32` / `process_f64`）；动态分发在**运行时**通过虚函数表（vtable）查找。分派的定义：选择调用哪个方法实现的过程。
+
+</details>
+
+---
+
+### 测验 2：单态化的双面性（🟡 进阶）
+
+关于静态分发的单态化（Monomorphization），下列说法正确的是？
+
+- A. 只带来性能优势，无任何代价
+- B. 编译器为每个用到的具体类型生成专门化代码，带来性能优势，但可能导致代码膨胀
+- C. 与动态分发一样依赖 vtable
+- D. 要求 trait 必须对象安全
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §2：单态化是编译器为 `process(42)`、`process(3.14)` 等每个调用生成 `process_i32`、`process_f64` 等专门化代码（§2.1），其性能优势（§2.2）的代价是**代码膨胀**（§2.3）。C/D 把静态分发与动态分发/对象安全混淆。
+
+</details>
+
+---
+
+### 测验 3：对象安全规则（🔴 专家）
+
+下列哪些 trait **不**满足对象安全（不能做成 `dyn Trait`）？（选出所有正确项）
+
+- A. `trait A { fn method(&self); }`
+- B. `trait B { fn clone(&self) -> Self; }`
+- C. `trait C { fn generic<T>(&self, value: T); }`
+- D. `trait D { fn new() -> Self; }`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B、C、D 不满足**。按本页 §4.1 对象安全规则（Source: RFC 255）：方法**不返回 `Self`**（B 违反）、方法**没有泛型类型参数**（C 违反）、方法**有 `self` 接收者**（D 是关联函数，违反）。A 仅含 `&self` 方法，是对象安全的标准示例。
+
+</details>

@@ -175,6 +175,26 @@ fn encode_frame_zero_copy(frame: &Frame) -> Bytes {
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**陷阱：截断帧直接索引解析**。自定义协议解析若假设帧必然完整，`frame[4..8]` 在恶意或异常的短帧上直接 panic，把解析器变成 DoS 入口：
+
+```rust
+const HEADER_LEN: usize = 8;
+
+fn parse_frame_bad(frame: &[u8]) -> u32 {
+    u32::from_be_bytes(frame[4..8].try_into().unwrap()) // 截断帧 panic
+}
+
+// 修正：长度校验前置，错误可恢复
+fn parse_frame_good(frame: &[u8]) -> Result<u32, &'static str> {
+    if frame.len() < HEADER_LEN { return Err("truncated frame"); }
+    Ok(u32::from_be_bytes(frame[4..8].try_into().unwrap()))
+}
+```
+
+rustc 1.97.0 实测（`catch_unwind` 复现）：`parse_frame_bad(&[0x01, 0x02])` panic；`parse_frame_good` 返回 `Err("truncated frame")`。生产协议栈应将长度校验、最大帧长上限（防内存放大攻击）放在状态机入口，与「6. 错误处理与重试」节配合。
+
 ## 相关概念
 
 - [Rust 网络编程](../../03_advanced/06_low_level_patterns/04_network_programming.md)

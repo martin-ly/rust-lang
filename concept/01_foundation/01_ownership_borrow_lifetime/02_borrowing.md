@@ -49,6 +49,29 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((借用))
+    引用类型
+      共享引用
+      可变引用
+    核心规则
+      别名互斥
+      借用必有效
+      NLL非词法
+    再借用
+      隐式重借用
+      多级引用
+    约束者
+      借用检查器
+      生命周期
+    常见错误
+      同时读写
+      悬垂借用
+```
+
 ## 📑 目录
 
 - [Borrowing（借用）](#borrowing借用)
@@ -973,6 +996,7 @@ fn main() {
 
 ## 十一、相关概念链接
 
+- [对应测验](../11_quizzes/33_quiz_ownership_borrowing.md) — 所有权、借用与生命周期
 - **上层概念**: [L1 所有权（Ownership）](01_ownership.md)
 - **下层概念**: [L2 Trait](../../02_intermediate/00_traits/01_traits.md) · [L4 分离逻辑](../../04_formal/01_ownership_logic/01_linear_logic.md) · [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md)
 

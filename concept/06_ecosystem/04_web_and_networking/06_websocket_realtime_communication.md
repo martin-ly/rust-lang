@@ -49,6 +49,7 @@
   - [6. 实战案例](#6-实战案例)
     - [6.1 聊天室](#61-聊天室)
     - [6.2 实时数据推送](#62-实时数据推送)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [7. 总结](#7-总结)
     - [核心要点](#核心要点)
     - [最佳实践](#最佳实践)
@@ -676,6 +677,33 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ---
+
+## ⚠️ 反例与陷阱
+
+**陷阱：广播遍历中修改客户端表**。WebSocket 服务常见的「遍历连接表发消息、顺手剔除失效连接」写法，在 Rust 中是不可变借用与可变借用冲突：
+
+```rust,compile_fail
+use std::collections::HashMap;
+
+fn broadcast(clients: &mut HashMap<u64, String>, msg: &str) {
+    for (id, name) in clients.iter() {
+        if name.is_empty() {
+            clients.remove(id); // 遍历期间可变修改
+        }
+        let _ = msg;
+    }
+}
+```
+
+rustc 1.97.0 实测：`error[E0502]: cannot borrow *clients as mutable because it is also borrowed as immutable`。
+
+**修正**：两阶段处理——先收集待剔除 id 再修改；发送阶段同理先取快照（`values().cloned().collect()`）再逐个 await 发送。
+
+```rust
+let stale: Vec<u64> = clients.iter()
+    .filter(|(_, n)| n.is_empty()).map(|(id, _)| *id).collect();
+for id in stale { clients.remove(&id); }
+```
 
 ## 7. 总结
 

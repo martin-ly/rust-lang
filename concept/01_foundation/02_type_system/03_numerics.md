@@ -30,9 +30,33 @@
 > [RFC 0560 — Integer Overflow](https://github.com/rust-lang/rfcs/blob/master/text/0560-integer-overflow.md) ·
 > [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((数值类型))
+    整数
+      有符号系列
+      无符号系列
+      指针尺寸
+    浮点
+      f32与f64
+      IEEE754
+    字面量
+      后缀标注
+      进制前缀
+    运算
+      溢出检查
+      饱和与回绕
+    转换
+      as强转
+      TryFrom
+```
+
 ## 📑 目录
 
 - [数值类型与运算：从整数到浮点的完整图景](#数值类型与运算从整数到浮点的完整图景)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 整数类型全景](#11-整数类型全景)
@@ -335,6 +359,24 @@ let size = NonZeroU32::new(1024).unwrap();
 
 > **NonZero 洞察**: `NonZero` 类型是 Rust **类型系统（Type System）与优化**结合的经典案例——编译器利用**niche value**（零）压缩 `Option<T>` 的表示。
 > [来源: [std::num::NonZeroU32](https://doc.rust-lang.org/std/num/type.NonZeroU32.html)]
+
+> **Rust 1.97.0 注记**：整数与 `NonZero` 新增一批**位查询方法**（[release notes — Stabilized APIs](https://releases.rs/docs/1.97.0/)，curl 200 实测）：`isolate_highest_one()`/`isolate_lowest_one()` 返回仅保留最高/最低置位的值；`highest_one()`/`lowest_one()` 返回最高/最低置位的**位序号**（`Option<u32>`，`0` 时为 `None`）；`bit_width()` 返回表示该值所需的最少位数。`NonZero` 版本去掉了 `Option`（值非零保证不失败）：
+>
+> ```rust
+> // edition = "2024", rust = "1.97" —— rustc 1.97.0 实测
+> let x: u32 = 0b0010_1000;
+> assert_eq!(x.isolate_highest_one(), 0b0010_0000); // 仅保留最高置位
+> assert_eq!(x.highest_one(), Some(5));             // 最高置位的 0 基序号
+> assert_eq!(x.lowest_one(), Some(3));
+> assert_eq!(x.bit_width(), 6);
+> assert_eq!(0u32.highest_one(), None);             // 0 无置位
+>
+> let nz = std::num::NonZeroU32::new(x).unwrap();
+> assert_eq!(nz.highest_one(), 5);                  // NonZero：不返回 Option
+> assert_eq!(nz.bit_width().get(), 6);              // bit_width 返回 NonZeroU32
+> ```
+>
+> 这些方法把原本手写的 `x & x.wrapping_neg()`（取最低位）/`31 - x.leading_zeros()`（最高位序号）等惯用法收进标准库，可读且不易写错符号扩展边界。
 
 ---
 

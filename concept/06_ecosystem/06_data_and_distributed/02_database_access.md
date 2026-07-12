@@ -599,6 +599,7 @@ fn main() {
 
 ## 相关概念
 
+- [对应测验](../13_quizzes/02_quiz_database_storage.md) — 数据库与存储生态（SQLx/Diesel/SeaORM/Toasty、TiKV/Materialize/Meilisearch/SurrealDB）
 - [Async](../../03_advanced/01_async/01_async.md) — 异步编程
 - [Type System](../../01_foundation/02_type_system/01_type_system.md) — 类型系统（Type System）
 - [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) — 错误处理（Error Handling）

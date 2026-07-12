@@ -25,9 +25,35 @@
 > [Bjarne Stroustrup — Foundations of C++](https://www.stroustrup.com/ETAPS-corrected-draft.pdf) ·
 > [Rust Performance Book](https://nnethercote.github.io/perf-book/)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((零成本抽象))
+    核心原则
+      不用不付费
+      抽象零开销
+    实现机制
+      单态化
+      静态分发
+      内联优化
+    抽象层次
+      零成本
+      低成本
+      有成本
+    边界代价
+      动态分发
+      代码膨胀
+      编译时间
+    验证手段
+      基准测试
+      汇编检查
+```
+
 ## 📑 目录
 
 - [零成本抽象：Rust 的性能哲学](#零成本抽象rust-的性能哲学)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 零成本抽象的定义](#11-零成本抽象的定义)

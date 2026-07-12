@@ -1084,4 +1084,3 @@ MISRA C 是一组编码规范和静态检查规则，依赖开发者遵守和工
 | 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
-

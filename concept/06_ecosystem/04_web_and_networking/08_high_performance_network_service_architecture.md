@@ -73,6 +73,7 @@
     - [8.1 架构选择决策树](#81-架构选择决策树)
     - [8.2 性能优化检查清单](#82-性能优化检查清单)
     - [8.3 系统调优参数](#83-系统调优参数)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [总结](#总结)
     - [关键技术对比](#关键技术对比)
     - [推荐组合](#推荐组合)
@@ -2007,6 +2008,30 @@ echo "✅ 系统调优完成！"
 ```
 
 ---
+
+## ⚠️ 反例与陷阱
+
+**陷阱：零拷贝缓冲区复用时旧视图未释放**。高性能网络服务复用 read buffer 是常态，但只要还持有指向 buffer 的切片，就不能清空/重填它——借用检查器把「悬垂视图」问题从运行时崩溃前移到编译期：
+
+```rust,compile_fail
+fn process(buf: &mut Vec<u8>) -> usize {
+    let header = &buf[..4];   // 不可变借用
+    buf.clear();              // 复用缓冲区：可变借用冲突
+    header[0] as usize        // header 已悬垂
+}
+```
+
+rustc 1.97.0 实测：`error[E0502]: cannot borrow *buf as mutable because it is also borrowed as immutable`。
+
+**修正**：消费完视图再复用；或 `split_at_mut` 拆分借用；header 很小就直接拷贝出栈值：
+
+```rust
+fn process(buf: &mut Vec<u8>) -> usize {
+    let first = buf[..4].to_vec();
+    buf.clear();
+    first[0] as usize
+}
+```
 
 ## 总结
 

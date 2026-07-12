@@ -12,7 +12,7 @@
 Compiler Internals. Core Rust concept covering mechanism analysis, parallel programming, compiler internals.
 > **受众**: [专家]
 > **Bloom 层级**: L4-L5
-> **定位**: 系统梳理 Rust 编译器（rustc）的核心基础设施——并行前端、Cranelift 后端、build-std、Sanitizer——分析其对编译速度、目标平台和开发体验的影响。
+> **定位**: 系统梳理 Rust 编译器（rustc）的核心基础设施——并行前端、Cranelift 后端（两主题深度正文分别以 [04_parallel_frontend_preview](../../07_future/03_preview_features/04_parallel_frontend_preview.md)、[16_cranelift_backend_preview](../../07_future/03_preview_features/16_cranelift_backend_preview.md) 为权威页，本页仅保留摘要）、build-std、Sanitizer——分析其对编译速度、目标平台和开发体验的影响。
 > **前置概念**: [Toolchain](01_toolchain.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 > **后置延伸**: [Rust 1.97.0 前沿特性预览（Beta）](../../07_future/00_version_tracking/rust_1_97_preview.md) · [Performance Optimization](../10_performance/01_performance_optimization.md)
 
@@ -52,99 +52,23 @@ Rust 编译器（rustc）流水线:
 
 ---
 
-## 二、并行前端（Parallel Frontend）
+## 二、并行前端（Parallel Frontend）——摘要
 
-「并行前端（Parallel Frontend）」部分按核心机制、性能数据与启用方式的顺序逐层展开。
+rustc 前端（解析 → HIR → 类型检查 → 借用检查）传统上为单线程执行，大型 crate 中前端阶段约占编译时间的 40–60%。并行前端通过 Salsa 风格查询系统的并行化（`-Z threads=N`）与增量编译协同缩短构建时间：大型 crate 约 1.3–1.5x，小型 crate 可能因同步开销无收益甚至负优化。
 
-### 2.1 核心机制
-
-rustc 传统上是**单线程**的，编译大型 crate 时瓶颈明显。并行前端通过以下技术提速：
-
-1. **查询系统并行化（Parallel Query System）**
-   - rustc 内部使用 **Salsa** 风格的查询系统（`TyCtxt`）
-   - 每个查询（如"解析模块（Module） A"、"类型检查函数 B"）可独立执行
-   - 通过 `rayon` 工作窃取线程池并行调度无依赖查询
-2. **增量编译（Incremental Compilation）**
-   - 缓存 HIR/MIR 层的编译结果到 `target/incremental/`
-   - 仅重新编译变更的函数/模块（Module）
-   - 与并行前端协同：未变更的查询直接命中缓存，变更的查询并行重算
-
-### 2.2 性能数据
-
-| 场景 | 单线程 | 并行前端 (8核) | 提升 |
-|:---|:---|:---|:---|
-| 干净构建（clean build）| 100% | 70-75% | **~30%** |
-| 增量编译（修改 1 函数）| 100% | 30-40% | **~65%** |
-| 类型检查密集 crate | 100% | 60-65% | **~35-40%** |
-
-> **来源**: [Rust Compiler Team — Parallel rustc](https://rust-lang.github.io/compiler-team/)
-
-### 2.3 启用方式
-
-```bash
-# 当前状态: nightly 实验性，稳定版 1.96 未默认启用
-# 需要 nightly 工具链并通过 -Z threads 手动开启:
-cargo +nightly build -Z threads=8
-
-# 查看是否使用了并行前端:
-CARGO_BUILD_RUSTC_WRAPPER="" RUSTFLAGS="-Z threads=8" cargo build --verbose
-```
+> **权威页裁定**（AGENTS.md §3.3 深度优先）：本主题的深度正文（nightly 状态、里程碑路线、反命题树、边界测试集）以
+> [并行前端预研（`concept/07_future/03_preview_features/04_parallel_frontend_preview.md`）](../../07_future/03_preview_features/04_parallel_frontend_preview.md)
+> 为权威页；本节仅保留概述与指针，不重复其正文。
 
 ---
 
-## 三、Cranelift 后端
+## 三、Cranelift 后端——摘要
 
-理解「Cranelift 后端」需要把握设计目标、为什么开发构建需要 Cranelift、使用方式与与 LLVM 的互补关系，本节依次展开。
+Cranelift 是 [Bytecode Alliance](https://bytecodealliance.org/) 开发的替代代码生成后端，设计哲学是"足够快，而非足够优"：debug 构建编译速度约为 LLVM 的 2–5x（运行时性能约为 LLVM debug 的 80%），与 LLVM 形成互补——开发迭代用 Cranelift（`rustup component add rustc-codegen-cranelift` + `-Z codegen-backend=cranelift`），CI/发布用 LLVM。注意 2026-05 Rust Project Goals 已因资金不足将该项目标记为停滞（Not completed）。
 
-### 3.1 设计目标
-
-| 后端 | 优化目标 | 编译速度 | 生成代码质量 | 适用场景 |
-|:---|:---|:---|:---|:---|
-| **LLVM** | 极致优化 | 慢（秒级）| 极高 | 发布构建（release）|
-| **Cranelift** | 快速编译 | 快（毫秒级）| 中等（-O1 水平）| 开发构建（debug）|
-
-Cranelift 是 [Bytecode Alliance](https://bytecodealliance.org/) 开发的代码生成器，原用于 Wasmtime WASM 运行时（Runtime），现作为 rustc 的替代后端。
-
-### 3.2 为什么开发构建需要 Cranelift
-
-开发迭代的核心痛点：**编译速度**。
-
-```bash
-# 典型中型项目 (50k LOC):
-cargo build          # LLVM debug: 24s
-cargo build          # Cranelift debug: 8s  ← 3x 提速
-```
-
-Cranelift 的提速来源：
-
-1. **简化 IR**: 基于 SSA 的轻量 IR，无需 LLVM 复杂的 Pass 管道
-2. **即时编译设计**: 原为 JIT 设计，优化了编译延迟
-3. **减少优化 Pass**: debug 构建不需要 `-O3` 级别的优化
-
-### 3.3 使用方式
-
-```bash
-# 安装 Cranelift 支持的 rustc (via rustup)
-rustup component add rustc-codegen-cranelift --toolchain nightly
-
-# 使用 Cranelift 构建
-cargo +nightly build -Z codegen-backend=cranelift
-
-# 或在 .cargo/config.toml 中默认启用:
-[unstable]
-codegen-backend = true
-
-[profile.dev]
-codegen-backend = "cranelift"
-```
-
-### 3.4 与 LLVM 的互补关系
-
-```text
-开发迭代: Cranelift → 快速反馈循环
-            ↓
-CI/发布: LLVM → 极致优化
-```
+> **权威页裁定**（AGENTS.md §3.3 深度优先）：本主题的深度正文（架构对比、平台/LTO 限制、边界测试集、演进路线）以
+> [Cranelift 后端预研（`concept/07_future/03_preview_features/16_cranelift_backend_preview.md`）](../../07_future/03_preview_features/16_cranelift_backend_preview.md)
+> 为权威页；本节仅保留概述与指针，不重复其正文。
 
 ---
 
@@ -231,7 +155,7 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 构建场景?
     ├─> 开发迭代 (cargo build)
     │   ├─> 追求极致编译速度? → Cranelift (nightly) 或 sccache
-    │   └─> 默认方案 → LLVM debug (已足够快，并行前端默认启用)
+    │   └─> 默认方案 → LLVM debug (稳定工具链默认；并行前端需 nightly `-Z threads=N`)
     ├─> CI 测试
     │   ├─> 内存安全测试 → LLVM + AddressSanitizer
     │   └─> 常规测试 → LLVM release (与生产一致)

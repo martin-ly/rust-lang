@@ -172,6 +172,30 @@ fn main() {
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
 
+## ⚠️ 反例与陷阱
+
+**陷阱：在稳定 Rust 的 pattern 位置写内联 const 表达式**。这正是 `inline_const_pat` 要解决的问题——稳定编译器直接拒绝：
+
+```rust,compile_fail
+fn classify(n: u8) -> &'static str {
+    match n {
+        const { 1 + 1 } => "two",
+        _ => "other",
+    }
+}
+```
+
+rustc 1.97.0（stable）实测：`error: const blocks cannot be used as patterns`。
+
+**修正（稳定方案）**：提取命名常量，语义完全等价，也是本特性稳定前的推荐迁移写法：
+
+```rust
+const TWO: u8 = 1 + 1;
+fn classify(n: u8) -> &'static str {
+    match n { TWO => "two", _ => "other" }
+}
+```
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **Inline Const Pattern Preview** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

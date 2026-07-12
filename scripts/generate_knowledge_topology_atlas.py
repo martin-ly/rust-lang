@@ -15,8 +15,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 RAW_PATH = ROOT / "tmp" / "concept_topology_raw.json"
 OUT_DIR = ROOT / "concept" / "00_meta" / "knowledge_topology"
-# 人工策展页的单一事实源：03/04/05/09 为纯人工策展图谱（决策树/示例/推理链/判定树），
-# 无法从 raw 数据合成，故整页固化为此目录下的模板，生成器原样拷贝（LF 行尾）。
+# 人工策展页的单一事实源：05 为纯人工策展图谱（定理链），生成器原样拷贝；
+# 03/04/09 为混合生成页（人工策展头 + GENERATED-INDEX 标记处的数据驱动索引节）。
 # 修改这些页 = 修改模板，禁止直接手改 concept/00_meta/knowledge_topology/ 下的生成结果。
 MANUAL_PAGES_DIR = Path(__file__).resolve().parent / "templates" / "atlas_pages"
 
@@ -203,6 +203,14 @@ def footer() -> list[str]:
 
 def write_readme(data: dict[str, Any]) -> None:
     total = data["metadata"]["total_files"]
+    concepts = data["concepts"]
+
+    # 深度表征覆盖统计（由 extract_concept_topology.py 的 signals 字段驱动）
+    n_example = sum(1 for c in concepts if _sig(c).get("example_sections") or _sig(c).get("compile_fail_count", 0) > 0)
+    n_decision = sum(1 for c in concepts if _sig(c).get("decision_sections") or _sig(c).get("mermaid_decision_count", 0) > 0)
+    n_reasoning = sum(1 for c in concepts if _sig(c).get("reasoning_sections") or c.get("theorem_chain"))
+    n_related = sum(1 for c in concepts if _sig(c).get("related_links"))
+
     content = f"""# 知识体系拓扑图谱集（Knowledge Topology Atlas）
 
 > **EN**: Knowledge Topology Atlas
@@ -223,14 +231,25 @@ def write_readme(data: dict[str, Any]) -> None:
 |:---|:---|:---|
 | [01_concept_definition_atlas.md](01_concept_definition_atlas.md) | 概念定义图谱 | 全部 {total} 个核心概念的中英名称、层级、定义、同义/反义 |
 | [02_attribute_relationship_atlas.md](02_attribute_relationship_atlas.md) | 属性关系图谱 | 概念属性矩阵与属性间约束 |
-| [03_scenario_decision_tree_atlas.md](03_scenario_decision_tree_atlas.md) | 场景决策树图谱 | 开发场景 → 决策 → Rust 概念/工具 |
-| [04_example_counterexample_atlas.md](04_example_counterexample_atlas.md) | 示例与反例图谱 | 按概念组织的示例、反例、边界示例 |
+| [03_scenario_decision_tree_atlas.md](03_scenario_decision_tree_atlas.md) | 场景决策树图谱 | 开发场景 → 决策 → Rust 概念/工具（策展决策树 + 数据驱动索引覆盖 {n_decision} 个概念） |
+| [04_example_counterexample_atlas.md](04_example_counterexample_atlas.md) | 示例与反例图谱 | 按概念组织的示例、反例、边界示例（数据驱动索引覆盖 {n_example} 个概念） |
 | [05_logical_reasoning_atlas.md](05_logical_reasoning_atlas.md) | 逻辑推理图谱 | 定理链、推理规则、形式化对应 |
-| [06_inter_layer_mapping_atlas.md](06_inter_layer_mapping_atlas.md) | 层间映射图谱 | L0–L7 依赖、蕴含、反馈关系 |
+| [06_inter_layer_mapping_atlas.md](06_inter_layer_mapping_atlas.md) | 层间映射图谱 | L0–L7 依赖、蕴含、反馈关系（前置/后置元数据 + 相关概念节引用，{n_related} 个概念有相关链接） |
 | [07_intra_layer_mapping_atlas.md](07_intra_layer_mapping_atlas.md) | 层内映射图谱 | 每层内部模型/概念间关系 |
 | [08_concept_source_alignment_atlas.md](08_concept_source_alignment_atlas.md) | 概念-权威来源对齐图谱 | 每个核心概念 ↔ 国际化权威来源 |
-| [09_reasoning_judgment_tree_atlas.md](09_reasoning_judgment_tree_atlas.md) | 推理判定树图谱 | 编译错误/运行时问题 → 根因 → 修复策略 |
+| [09_reasoning_judgment_tree_atlas.md](09_reasoning_judgment_tree_atlas.md) | 推理判定树图谱 | 编译错误/运行时问题 → 根因 → 修复策略（数据驱动索引覆盖 {n_reasoning} 个概念） |
 | [10_gap_and_action_plan.md](10_gap_and_action_plan.md) | 缺口与行动计划 | 当前缺口、优先级、修复任务 |
+
+## 深度表征覆盖统计（自动生成）
+
+> 口径：`extract_concept_topology.py` 从 `concept/**/*.md` 抽取的表征信号（章节标题 + compile_fail 块 + mermaid 判定节点 + 定理链元数据）。
+
+| 表征类型 | 覆盖概念数 | 占全部 {total} 概念 |
+|:---|:---:|:---:|
+| 示例/反例（04 atlas 索引） | {n_example} | {n_example / total * 100:.1f}% |
+| 场景/决策（03 atlas 索引） | {n_decision} | {n_decision / total * 100:.1f}% |
+| 推理/判定（09 atlas 索引） | {n_reasoning} | {n_reasoning / total * 100:.1f}% |
+| 相关概念节引用（06 atlas 扩展边源） | {n_related} | {n_related / total * 100:.1f}% |
 
 ## 使用建议
 
@@ -243,7 +262,8 @@ def write_readme(data: dict[str, Any]) -> None:
 
 - 本目录文件由 `scripts/generate_knowledge_topology_atlas.py` 从 `concept/**/*.md` 生成，**只重生成、不手改**。
 - 数据驱动页（01/02/06/07/08/10/README）的人工策展内容已固化进生成器模板与规则。
-- 纯人工策展页（03/04/05/09）的单一事实源是 `scripts/templates/atlas_pages/`，生成器原样拷贝；修改请改模板后重跑。
+- 混合生成页（03/04/09）：人工策展头 + `<!-- GENERATED-INDEX -->` 标记处的数据驱动索引节；人工部分的单一事实源是 `scripts/templates/atlas_pages/`，索引节由 `extract_concept_topology.py` 的表征信号驱动。
+- 纯人工策展页（05）的单一事实源是 `scripts/templates/atlas_pages/`，生成器原样拷贝；修改请改模板后重跑。
 - 当 `concept/` 文件更新后，应先运行 `scripts/extract_concept_topology.py` 刷新 `tmp/concept_topology_raw.json`，再运行本生成脚本并审阅变更。
 
 ---
@@ -393,28 +413,62 @@ def write_attribute_relationship_atlas(concepts: list[dict[str, Any]]) -> None:
     write_out(OUT_DIR / "02_attribute_relationship_atlas.md", "\n".join(lines))
 
 
+def _sig(c: dict[str, Any]) -> dict[str, Any]:
+    """raw json 中的 signals 字段（由 extract_concept_topology.py 生成）；缺省返回空。"""
+    return c.get("signals") or {}
+
+
+_MD_LINK_RE = re.compile(r"\[([^\]]+)\]\([^)]*\)")
+
+
+def clean_title(text: str, max_len: int = 40) -> str:
+    """章节标题展示用清理：剥离 markdown 链接（保留显示文本）、折叠空白、截断。"""
+    t = _MD_LINK_RE.sub(r"\1", text or "")
+    t = re.sub(r"\s+", " ", t).strip()
+    if len(t) > max_len:
+        t = t[: max_len - 1].rstrip(" ·，,；;：:") + "…"
+    return t
+
+
 def write_inter_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
     lines = header(
         "层间映射图谱（Inter-Layer Mapping Atlas）",
         "Inter-Layer Mapping Atlas",
-        "L0–L7 各层之间的依赖、蕴含、反馈关系，基于前置/后置概念引用统计。",
+        "L0–L7 各层之间的依赖、蕴含、反馈关系，基于前置/后置概念元数据与「相关概念」章节引用的全层统计。",
     )
 
     layers = [f"L{i}" for i in range(8)]
     matrix = {src: {dst: 0 for dst in layers} for src in layers}
 
-    id_to_layer = {c["id"]: c["layer"] for c in concepts}
+    id_to_concept = {c["id"]: c for c in concepts}
+
+    def resolve(href: str) -> dict[str, Any] | None:
+        href = (href or "").split("#")[0]
+        if not href.endswith(".md"):
+            return None
+        return id_to_concept.get(Path(href).stem)
+
+    # 边来源优先级：后置概念（蕴含/导向）> 前置概念（依赖）> 相关概念节（互参）
+    edges: dict[tuple[str, str], str] = {}
     for c in concepts:
-        src_layer = c["layer"]
-        for p in c["postreqs"]:
-            href = p.get("href", "")
-            if href.endswith(".md"):
-                tid = Path(href).stem
-                dst_layer = id_to_layer.get(tid)
-                if dst_layer:
-                    matrix[src_layer][dst_layer] += 1
+        for field, kind in (("postreqs", "后置概念"), ("prereqs", "前置概念")):
+            for p in c.get(field, []):
+                t = resolve(p.get("href", ""))
+                if t and (c["id"], t["id"]) not in edges:
+                    edges[(c["id"], t["id"])] = kind
+        for lnk in _sig(c).get("related_links", []):
+            t = resolve(lnk.get("href", ""))
+            if t and (c["id"], t["id"]) not in edges:
+                edges[(c["id"], t["id"])] = "相关概念节"
+
+    for src_id, dst_id in edges:
+        src, dst = id_to_concept[src_id], id_to_concept[dst_id]
+        matrix[src["layer"]][dst["layer"]] += 1
 
     lines.append("## 一、层间引用矩阵（行 = 源层，列 = 目标层）")
+    lines.append("")
+    lines.append("> 统计口径：前置概念元数据 + 后置概念元数据 + 「相关概念/延伸阅读」章节内链接，"
+                 "同一（源，目标）对按 后置 > 前置 > 相关概念节 优先级去重计 1 次。")
     lines.append("")
     header_row = "| 源层 \\ 目标层 | " + " | ".join(layer_label(l) for l in layers) + " |"
     lines.append(header_row)
@@ -426,24 +480,31 @@ def write_inter_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
         lines.append(row)
     lines.append("")
 
+    # 层间桥接（跨层边）
+    bridges = [
+        (id_to_concept[s], id_to_concept[d], kind)
+        for (s, d), kind in edges.items()
+        if id_to_concept[s]["layer"] != id_to_concept[d]["layer"]
+    ]
+    kind_counts = defaultdict(int)
+    for _, _, kind in bridges:
+        kind_counts[kind] += 1
     lines.append("## 二、跨层关键桥接概念")
     lines.append("")
-    lines.append("| 源层 | 概念 | 指向层 | 后置概念 |")
-    lines.append("|:---|:---|:---|:---|")
-    bridges = []
-    for c in concepts:
-        for p in c["postreqs"]:
-            href = p.get("href", "")
-            if href.endswith(".md"):
-                tid = Path(href).stem
-                dst = id_to_layer.get(tid)
-                if dst and dst != c["layer"]:
-                    src_label = layer_label(c["layer"])
-                    dst_label = layer_label(dst)
-                    bridges.append((c["layer"], c, dst_label, p["title"]))
-    # Show a sample of important bridges (limit to avoid huge file)
-    for _, c, dst_label, title in sorted(bridges, key=lambda x: x[0])[:60]:
-        lines.append(f"| {layer_label(c['layer'])} | [{escape_cell(c['zh_name'])}](../../{c['path']}) | {dst_label} | {escape_cell(title)} |")
+    lines.append(
+        f"跨层边合计 **{len(bridges)}** 条（"
+        + " · ".join(f"{k} {v}" for k, v in sorted(kind_counts.items()))
+        + f"），下表按层序展示前 {min(160, len(bridges))} 条。"
+    )
+    lines.append("")
+    lines.append("| 源层 | 概念 | 指向层 | 目标概念 | 依据 |")
+    lines.append("|:---|:---|:---|:---|:---|")
+    bridges.sort(key=lambda x: (x[0]["layer"], x[0]["path"], x[1]["path"]))
+    for src, dst, kind in bridges[:160]:
+        lines.append(
+            f"| {layer_label(src['layer'])} | [{escape_cell(src['zh_name'])}](../../{src['path']}) "
+            f"| {layer_label(dst['layer'])} | [{escape_cell(dst['zh_name'])}](../../{dst['path']}) | {kind} |"
+        )
     lines.append("")
 
     lines.append("## 三、与现有元文件的关系")
@@ -767,26 +828,180 @@ def write_gap_and_action_plan(concepts: list[dict[str, Any]]) -> None:
     write_out(OUT_DIR / "10_gap_and_action_plan.md", "\n".join(lines))
 
 
-# 纯人工策展页（场景决策树/示例反例/逻辑推理/推理判定树）：内容无法从 raw 合成，
-# 整页固化为 scripts/templates/atlas_pages/ 下的模板，生成器原样拷贝。
-# 修改这些页请改模板后重跑生成器，禁止直接手改生成结果（纪律：只重生成、不手改）。
-MANUAL_PAGES = (
-    "03_scenario_decision_tree_atlas.md",
-    "04_example_counterexample_atlas.md",
-    "05_logical_reasoning_atlas.md",
-    "09_reasoning_judgment_tree_atlas.md",
-)
+# 混合生成页（场景决策树/示例反例/推理判定树）：
+# 模板 = 人工策展头（使用说明/策展示例/国际权威参考），
+# 模板中的 <!-- GENERATED-INDEX --> 标记处由生成器插入「数据驱动索引」节
+# （按 extract_concept_topology.py 抽取的表征信号全量枚举覆盖概念）。
+# 修改人工部分请改 scripts/templates/atlas_pages/ 模板后重跑；禁止手改生成结果。
+GENERATED_INDEX_MARKER = "<!-- GENERATED-INDEX"
 
 
-def write_manual_curated_pages() -> None:
-    for filename in MANUAL_PAGES:
+def _layered_index_lines(
+    concepts: list[dict[str, Any]],
+    qualify,
+    signal_cell,
+    topic_cell,
+    note: str,
+) -> list[str]:
+    """按层分组的索引表生成器：qualify(c)->bool 筛选，signal/topic 生成单元格。"""
+    rows_by_layer: dict[str, list[str]] = defaultdict(list)
+    total = 0
+    for c in sorted(concepts, key=lambda x: (x["layer"], x["path"])):
+        if not qualify(c):
+            continue
+        total += 1
+        name = f"[{escape_cell(c['zh_name'])}](../../{c['path']})"
+        rows_by_layer[c["layer"]].append(
+            f"| {name} | {escape_cell(signal_cell(c))} | {escape_cell(topic_cell(c))} |"
+        )
+    lines = [note.format(total=total), ""]
+    for layer in sorted(rows_by_layer):
+        lines.append(f"### {layer_label(layer)}（{len(rows_by_layer[layer])} 个概念）")
+        lines.append("")
+        lines.append("| 概念页 | 表征信号 | 主题提示 |")
+        lines.append("|:---|:---|:---|")
+        lines.extend(rows_by_layer[layer])
+        lines.append("")
+    return lines
+
+
+def build_example_counterexample_index(concepts: list[dict[str, Any]]) -> str:
+    """04 atlas 数据驱动索引：命中「示例/反例/陷阱/边界测试」节或含 compile_fail 块的概念。"""
+
+    def qualify(c):
+        s = _sig(c)
+        return bool(s.get("example_sections")) or s.get("compile_fail_count", 0) > 0
+
+    def signal_cell(c):
+        s = _sig(c)
+        parts = []
+        if s.get("example_sections"):
+            parts.append(f"示例/反例节 ×{len(s['example_sections'])}")
+        if s.get("compile_fail_count", 0) > 0:
+            parts.append(f"compile_fail ×{s['compile_fail_count']}")
+        return " · ".join(parts)
+
+    def topic_cell(c):
+        secs = _sig(c).get("example_sections", [])
+        return " · ".join(clean_title(t) for t in secs[:2]) or "compile_fail 代码块"
+
+    lines = [
+        "## 七、数据驱动索引：示例/反例覆盖全量概念（自动生成）",
+        "",
+        "> 以下来自 `extract_concept_topology.py` 的表征信号抽取：概念页含「示例/反例/陷阱/边界测试/误用/易错」类章节，"
+        "或含 `compile_fail` 编译反例代码块，即收录。每行仅给出入口与信号，正文以权威页为准。",
+        "",
+    ]
+    lines.extend(_layered_index_lines(
+        concepts, qualify, signal_cell, topic_cell,
+        "覆盖 **{total}** 个概念（信号：示例/反例类章节或 compile_fail 代码块）。",
+    ))
+    return "\n".join(lines)
+
+
+def build_scenario_decision_index(concepts: list[dict[str, Any]]) -> str:
+    """03 atlas 数据驱动索引：命中「决策树/判定树/选型/判断推理/何时用/场景」节或含 mermaid 判定节点的概念。"""
+
+    def qualify(c):
+        s = _sig(c)
+        return bool(s.get("decision_sections")) or s.get("mermaid_decision_count", 0) > 0
+
+    def signal_cell(c):
+        s = _sig(c)
+        parts = []
+        if s.get("decision_sections"):
+            parts.append(f"决策/场景节 ×{len(s['decision_sections'])}")
+        if s.get("mermaid_decision_count", 0) > 0:
+            parts.append(f"mermaid 判定图 ×{s['mermaid_decision_count']}")
+        return " · ".join(parts)
+
+    def topic_cell(c):
+        secs = _sig(c).get("decision_sections", [])
+        return " · ".join(clean_title(t) for t in secs[:2]) or "mermaid 判定节点图"
+
+    lines = [
+        "## 数据驱动索引：场景/决策表征覆盖全量概念（自动生成）",
+        "",
+        "> 以下来自 `extract_concept_topology.py` 的表征信号抽取：概念页含「决策树/判定树/选型/判断推理/何时用/场景」类章节，"
+        "或含带菱形判定节点的 mermaid 图，即收录。每行仅给出入口与信号，决策正文以权威页为准。",
+        "",
+    ]
+    lines.extend(_layered_index_lines(
+        concepts, qualify, signal_cell, topic_cell,
+        "覆盖 **{total}** 个概念（信号：决策/场景类章节或 mermaid 判定图）。",
+    ))
+    return "\n".join(lines)
+
+
+def build_reasoning_judgment_index(concepts: list[dict[str, Any]]) -> str:
+    """09 atlas 数据驱动索引：命中「推理链/定理链/反命题树/证明树/逆向推理」节或有定理链元数据的概念。"""
+
+    def qualify(c):
+        return bool(_sig(c).get("reasoning_sections")) or bool(c.get("theorem_chain"))
+
+    def signal_cell(c):
+        s = _sig(c)
+        parts = []
+        if s.get("reasoning_sections"):
+            parts.append(f"推理/定理节 ×{len(s['reasoning_sections'])}")
+        if c.get("theorem_chain"):
+            parts.append("定理链元数据 ✓")
+        return " · ".join(parts)
+
+    def topic_cell(c):
+        secs = _sig(c).get("reasoning_sections", [])
+        return " · ".join(clean_title(t) for t in secs[:2]) or "定理链元数据"
+
+    lines = [
+        "## 数据驱动索引：推理/判定表征覆盖全量概念（自动生成）",
+        "",
+        "> 以下来自 `extract_concept_topology.py` 的表征信号抽取：概念页含「核心推理链/定理链/反命题树/证明树/逆向推理」类章节，"
+        "或头部有定理链元数据，即收录。每行仅给出入口与信号，推理正文以权威页为准。",
+        "",
+    ]
+    lines.extend(_layered_index_lines(
+        concepts, qualify, signal_cell, topic_cell,
+        "覆盖 **{total}** 个概念（信号：推理/定理类章节或定理链元数据）。",
+    ))
+    return "\n".join(lines)
+
+
+# 混合生成页：文件名 → 索引节构造函数
+HYBRID_PAGES = {
+    "03_scenario_decision_tree_atlas.md": build_scenario_decision_index,
+    "04_example_counterexample_atlas.md": build_example_counterexample_index,
+    "09_reasoning_judgment_tree_atlas.md": build_reasoning_judgment_index,
+}
+# 纯人工策展页（逻辑推理图谱）：整页为人工定理链策展，原样拷贝。
+VERBATIM_PAGES = ("05_logical_reasoning_atlas.md",)
+
+
+def write_manual_curated_pages(concepts: list[dict[str, Any]]) -> None:
+    for filename, builder in HYBRID_PAGES.items():
         template = MANUAL_PAGES_DIR / filename
         if not template.is_file():
             raise FileNotFoundError(
-                f"人工策展页模板缺失：{template}（03/04/05/09 的单一事实源，请勿删除）"
+                f"人工策展页模板缺失：{template}（03/04/09 的单一事实源，请勿删除）"
             )
         text = template.read_text(encoding="utf-8")
-        write_out(OUT_DIR / filename, text)
+        head, sep, tail = text.partition(GENERATED_INDEX_MARKER)
+        if not sep:
+            raise ValueError(
+                f"模板缺少 {GENERATED_INDEX_MARKER} 标记：{template}（混合生成页必须保留标记）"
+            )
+        # 模板标记行形如 `<!-- GENERATED-INDEX: 说明 -->`：partition 后 tail 以标记行剩余部分
+        # （`: 说明 -->\n`）开头，需剥到标记行之后的正文，由生成器重建完整标记注释。
+        tail = tail.split("\n", 1)[1] if "\n" in tail else ""
+        marker_line = GENERATED_INDEX_MARKER + ": 以下「数据驱动索引」节由 scripts/generate_knowledge_topology_atlas.py 自动生成；人工策展内容写在标记之前。 -->"
+        out = head.rstrip() + "\n\n" + marker_line + "\n\n" + builder(concepts).rstrip() + "\n\n" + tail.lstrip("\n")
+        write_out(OUT_DIR / filename, out)
+    for filename in VERBATIM_PAGES:
+        template = MANUAL_PAGES_DIR / filename
+        if not template.is_file():
+            raise FileNotFoundError(
+                f"人工策展页模板缺失：{template}（05 的单一事实源，请勿删除）"
+            )
+        write_out(OUT_DIR / filename, template.read_text(encoding="utf-8"))
 
 
 def main() -> None:
@@ -801,7 +1016,7 @@ def main() -> None:
     write_intra_layer_mapping_atlas(concepts)
     write_concept_source_alignment_atlas(concepts)
     write_gap_and_action_plan(concepts)
-    write_manual_curated_pages()
+    write_manual_curated_pages(concepts)
 
     print(f"Generated atlas files in {OUT_DIR}")
 

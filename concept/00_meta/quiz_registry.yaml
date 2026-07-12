@@ -1,0 +1,1029 @@
+schema_version: 1
+generated: '2026-07-12'
+purpose: 全库测验资产机器可读注册表（W3-a）。人类可读索引见 concept/00_meta/04_navigation/15_quiz_registry.md；一致性由 scripts/check_quiz_system.py 校验。
+standalone_quizzes:
+- path: concept/01_foundation/11_quizzes/24_quiz_type_system.md
+  layer: L1
+  topic: 类型系统（标量/复合类型、enum、模式匹配、类型转换）
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 6
+    intermediate: 9
+    expert: 0
+  quiz_to_concept: true
+  concept_pages:
+  - concept/01_foundation/02_type_system/01_type_system.md
+  concept_to_quiz_backlink: true
+- path: concept/01_foundation/11_quizzes/25_quiz_error_handling.md
+  layer: L1
+  topic: 错误处理（Result/Option、?、panic、自定义错误）
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 3
+    intermediate: 11
+    expert: 1
+  quiz_to_concept: true
+  concept_pages:
+  - concept/01_foundation/08_error_handling/01_error_handling_basics.md
+  concept_to_quiz_backlink: true
+- path: concept/01_foundation/11_quizzes/26_quiz_modules_testing.md
+  layer: L1
+  topic: 模块系统与测试（mod/use/pub、可见性、单元/集成测试）
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 4
+    intermediate: 10
+    expert: 1
+  quiz_to_concept: true
+  concept_pages:
+  - concept/01_foundation/07_modules_and_items/01_modules_and_paths.md
+  - concept/01_foundation/10_testing_basics/01_testing_basics.md
+  concept_to_quiz_backlink: true
+- path: concept/01_foundation/11_quizzes/27_quiz_closures_iterators.md
+  layer: L1
+  topic: 闭包与迭代器（捕获、Fn traits、惰性求值、适配器）
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 3
+    intermediate: 11
+    expert: 1
+  quiz_to_concept: true
+  concept_pages:
+  - concept/01_foundation/00_start/03_closure_basics.md
+  - concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md
+  concept_to_quiz_backlink: true
+- path: concept/01_foundation/11_quizzes/29_quiz_pl_foundations.md
+  layer: L1
+  topic: 通用 PL 基座（变量模型、求值策略、效果、控制流、数据抽象）
+  questions: 11
+  meta_questions: 0
+  question_types:
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 2
+    intermediate: 6
+    expert: 3
+  quiz_to_concept: true
+  concept_pages:
+  - concept/01_foundation/03_values_and_references/03_variable_model.md
+  - concept/04_formal/03_operational_semantics/04_evaluation_strategies.md
+  - concept/01_foundation/00_start/04_effects_and_purity.md
+  - concept/01_foundation/04_control_flow/01_control_flow.md
+  - concept/01_foundation/02_type_system/05_data_abstraction_spectrum.md
+  concept_to_quiz_backlink: true
+- path: concept/01_foundation/11_quizzes/33_quiz_ownership_borrowing.md
+  layer: L1
+  topic: 所有权、借用与生命周期
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 4
+    intermediate: 9
+    expert: 2
+  quiz_to_concept: true
+  concept_pages:
+  - concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md
+  - concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md
+  - concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md
+  concept_to_quiz_backlink: true
+- path: concept/02_intermediate/01_generics/04_quiz_traits_and_generics.md
+  layer: L2
+  topic: Trait 与泛型（bound、关联类型、trait 对象、单态化）
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 5
+    intermediate: 7
+    expert: 3
+  quiz_to_concept: true
+  concept_pages:
+  - concept/02_intermediate/00_traits/01_traits.md
+  - concept/02_intermediate/01_generics/01_generics.md
+  concept_to_quiz_backlink: true
+- path: concept/02_intermediate/02_memory_management/05_quiz_memory_management.md
+  layer: L2
+  topic: 内存管理与智能指针（Box/Rc/Arc/RefCell/Mutex/Drop）
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 3
+    intermediate: 9
+    expert: 3
+  quiz_to_concept: true
+  concept_pages:
+  - concept/02_intermediate/02_memory_management/01_memory_management.md
+  concept_to_quiz_backlink: true
+- path: concept/02_intermediate/09_quizzes/30_quiz_cpp_rust_foundations.md
+  layer: L2
+  topic: C/C++ → Rust 工程层基础对比（RTTI、宏、异常安全、构造、move 语义）
+  questions: 13
+  meta_questions: 0
+  question_types:
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 3
+    intermediate: 7
+    expert: 3
+  quiz_to_concept: true
+  concept_pages:
+  - concept/02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md
+  - concept/02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md
+  - concept/02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md
+  - concept/01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md
+  concept_to_quiz_backlink: true
+- path: concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md
+  layer: L3
+  topic: 并发与异步（Send/Sync、Mutex/Arc、channel、Future/Pin/await）
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 2
+    intermediate: 8
+    expert: 5
+  quiz_to_concept: true
+  concept_pages:
+  - concept/03_advanced/00_concurrency/01_concurrency.md
+  - concept/03_advanced/01_async/01_async.md
+  concept_to_quiz_backlink: true
+- path: concept/03_advanced/02_unsafe/05_quiz_unsafe.md
+  layer: L3
+  topic: Unsafe Rust（裸指针、unsafe 块/函数/trait、FFI、Miri）
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 3
+    intermediate: 4
+    expert: 8
+  quiz_to_concept: true
+  concept_pages:
+  - concept/03_advanced/02_unsafe/01_unsafe.md
+  concept_to_quiz_backlink: true
+- path: concept/03_advanced/03_proc_macros/10_quiz_macros.md
+  layer: L3
+  topic: 宏系统（macro_rules!、卫生性、过程宏）
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 4
+    intermediate: 7
+    expert: 4
+  quiz_to_concept: true
+  concept_pages:
+  - concept/03_advanced/03_proc_macros/01_macros.md
+  - concept/03_advanced/03_proc_macros/02_proc_macro.md
+  concept_to_quiz_backlink: true
+- path: concept/04_formal/04_model_checking/06_quiz_formal_methods.md
+  layer: L4
+  topic: 形式化方法（分离逻辑、RustBelt、类型安全、验证工具链）
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 1
+    intermediate: 5
+    expert: 9
+  quiz_to_concept: true
+  concept_pages:
+  - concept/04_formal/02_separation_logic/02_separation_logic.md
+  - concept/04_formal/02_separation_logic/01_rustbelt.md
+  - concept/04_formal/04_model_checking/01_verification_toolchain.md
+  - concept/04_formal/01_ownership_logic/01_linear_logic.md
+  concept_to_quiz_backlink: true
+- path: concept/05_comparative/03_domain_comparisons/02_quiz_rust_vs_systems.md
+  layer: L5
+  topic: Rust vs 系统编程语言（C/C++/Go 内存安全、并发、错误处理对比）
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 2
+    intermediate: 9
+    expert: 4
+  quiz_to_concept: true
+  concept_pages:
+  - concept/05_comparative/01_systems_languages/01_rust_vs_cpp.md
+  - concept/05_comparative/01_systems_languages/03_rust_vs_go.md
+  concept_to_quiz_backlink: true
+- path: concept/06_ecosystem/00_toolchain/06_quiz_toolchain.md
+  layer: L6
+  topic: Rust 工具链（Cargo、Clippy、Miri、rustfmt、发布流程）
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 5
+    intermediate: 10
+    expert: 0
+  quiz_to_concept: true
+  concept_pages:
+  - concept/06_ecosystem/00_toolchain/01_toolchain.md
+  concept_to_quiz_backlink: true
+- path: concept/00_meta/05_quizzes/01_quiz_meta_framework.md
+  layer: L0
+  topic: 元层框架与知识体系架构（L0–L7 分层、Bloom 映射、A/S/P 标记、canonical 规则）
+  concept_pages:
+  - concept/00_meta/README.md
+  - concept/00_meta/00_framework/bloom_taxonomy.md
+  - concept/00_meta/03_audit/02_asp_marking_guide.md
+  - concept/00_meta/00_framework/methodology.md
+  questions: 10
+  meta_questions: 0
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 2
+    intermediate: 5
+    expert: 3
+  quiz_to_concept: true
+  concept_to_quiz_backlink: true
+- path: concept/07_future/05_quizzes/01_quiz_version_and_preview.md
+  layer: L7
+  topic: 版本演进、Edition 机制与前沿特性（发布火车、1.90–1.97 稳定特性、preview 状态）
+  concept_pages:
+  - concept/07_future/00_version_tracking/02_editions.md
+  - concept/07_future/00_version_tracking/03_rust_release_process.md
+  - concept/07_future/00_version_tracking/rust_1_97_stabilized.md
+  questions: 10
+  meta_questions: 0
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 2
+    intermediate: 5
+    expert: 3
+  quiz_to_concept: true
+  concept_to_quiz_backlink: true
+- path: concept/06_ecosystem/13_quizzes/01_quiz_networking_async_ecosystem.md
+  layer: L6
+  topic: 网络与异步生态（Web 框架、Tokio/Glommio 运行时、QUIC/HTTP-3、eBPF）
+  concept_pages:
+  - concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md
+  - concept/06_ecosystem/04_web_and_networking/07_network_protocols.md
+  - concept/06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md
+  questions: 10
+  meta_questions: 0
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 2
+    intermediate: 5
+    expert: 3
+  quiz_to_concept: true
+  concept_to_quiz_backlink: true
+- path: concept/06_ecosystem/13_quizzes/02_quiz_database_storage.md
+  layer: L6
+  topic: 数据库与存储生态（SQLx/Diesel/SeaORM/Toasty、TiKV/Materialize/Meilisearch/SurrealDB）
+  concept_pages:
+  - concept/06_ecosystem/06_data_and_distributed/02_database_access.md
+  - concept/06_ecosystem/06_data_and_distributed/04_database_systems.md
+  questions: 10
+  meta_questions: 0
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 2
+    intermediate: 5
+    expert: 3
+  quiz_to_concept: true
+  concept_to_quiz_backlink: true
+- path: concept/06_ecosystem/13_quizzes/03_quiz_security_testing.md
+  layer: L6
+  topic: 安全与测试生态（Kerckhoffs 原则、crypto 原语、cargo vet/audit、分层测试）
+  concept_pages:
+  - concept/06_ecosystem/07_security_and_cryptography/01_security_practices.md
+  - concept/06_ecosystem/07_security_and_cryptography/02_security_cryptography.md
+  - concept/06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md
+  - concept/06_ecosystem/09_testing_and_quality/01_testing_strategies.md
+  questions: 10
+  meta_questions: 0
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 2
+    intermediate: 5
+    expert: 3
+  quiz_to_concept: true
+  concept_to_quiz_backlink: true
+embedded_quizzes:
+  description: concept/ 页面内嵌入式测验（### 测验 N + <details> 答题块），按页聚合
+  pages: 298
+  total_blocks: 1293
+  items:
+  - path: concept/00_meta/00_framework/bloom_taxonomy.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/boundary_extension_tree.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/cognitive_dimension_matrix.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/competency_graph.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/comprehensive_rust_mapping.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/concept_definition_decision_forest.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/decidability_spectrum.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/expressiveness_multiview.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/fault_tree_analysis_collection.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/knowledge_mindmap.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/methodology.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/paradigm_transition_matrix.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/semantic_bridge_algorithms_patterns.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/semantic_expressiveness.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/semantic_space.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/theorem_inference_forest.md
+    blocks: 3
+  - path: concept/00_meta/00_framework/todos.md
+    blocks: 3
+  - path: concept/00_meta/01_terminology/01_terminology_glossary.md
+    blocks: 3
+  - path: concept/00_meta/01_terminology/02_bilingual_template_v2.md
+    blocks: 1
+  - path: concept/00_meta/02_sources/01_authority_source_map.md
+    blocks: 3
+  - path: concept/00_meta/02_sources/02_rustbelt_predicate_map.md
+    blocks: 3
+  - path: concept/00_meta/02_sources/03_sources.md
+    blocks: 3
+  - path: concept/00_meta/03_audit/01_concept_audit_guide.md
+    blocks: 3
+  - path: concept/00_meta/03_audit/02_asp_marking_guide.md
+    blocks: 3
+  - path: concept/00_meta/03_audit/03_audit_checklist.md
+    blocks: 3
+  - path: concept/00_meta/03_audit/06_grading_system.md
+    blocks: 3
+  - path: concept/00_meta/03_audit/07_quality_dashboard_v2.md
+    blocks: 3
+  - path: concept/00_meta/04_navigation/02_career_landscape.md
+    blocks: 3
+  - path: concept/00_meta/04_navigation/03_concept_index.md
+    blocks: 3
+  - path: concept/00_meta/04_navigation/04_inter_layer_map.md
+    blocks: 3
+  - path: concept/00_meta/04_navigation/06_intra_layer_model_map.md
+    blocks: 3
+  - path: concept/00_meta/04_navigation/07_learning_guide.md
+    blocks: 3
+  - path: concept/00_meta/04_navigation/08_learning_mvp_path.md
+    blocks: 3
+  - path: concept/00_meta/04_navigation/09_navigation.md
+    blocks: 3
+  - path: concept/00_meta/04_navigation/10_problem_graph.md
+    blocks: 3
+  - path: concept/00_meta/04_navigation/11_quick_reference.md
+    blocks: 3
+  - path: concept/00_meta/04_navigation/12_self_assessment.md
+    blocks: 3
+  - path: concept/00_meta/README.md
+    blocks: 3
+  - path: concept/01_foundation/00_start/00_start.md
+    blocks: 3
+  - path: concept/01_foundation/00_start/01_pl_prerequisites.md
+    blocks: 5
+  - path: concept/01_foundation/00_start/02_zero_cost_abstractions.md
+    blocks: 5
+  - path: concept/01_foundation/00_start/03_closure_basics.md
+    blocks: 4
+  - path: concept/01_foundation/00_start/04_effects_and_purity.md
+    blocks: 5
+  - path: concept/01_foundation/00_start/05_std_io_and_process.md
+    blocks: 2
+  - path: concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md
+    blocks: 5
+  - path: concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md
+    blocks: 5
+  - path: concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md
+    blocks: 5
+  - path: concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md
+    blocks: 6
+  - path: concept/01_foundation/02_type_system/01_type_system.md
+    blocks: 5
+  - path: concept/01_foundation/02_type_system/02_never_type.md
+    blocks: 5
+  - path: concept/01_foundation/02_type_system/03_numerics.md
+    blocks: 5
+  - path: concept/01_foundation/02_type_system/04_coercion_and_casting.md
+    blocks: 5
+  - path: concept/01_foundation/02_type_system/05_data_abstraction_spectrum.md
+    blocks: 5
+  - path: concept/01_foundation/03_values_and_references/01_reference_semantics.md
+    blocks: 5
+  - path: concept/01_foundation/03_values_and_references/03_variable_model.md
+    blocks: 5
+  - path: concept/01_foundation/04_control_flow/01_control_flow.md
+    blocks: 5
+  - path: concept/01_foundation/04_control_flow/02_patterns.md
+    blocks: 3
+  - path: concept/01_foundation/04_control_flow/03_statements_and_expressions.md
+    blocks: 3
+  - path: concept/01_foundation/05_collections/01_collections.md
+    blocks: 5
+  - path: concept/01_foundation/05_collections/02_collections_advanced.md
+    blocks: 5
+  - path: concept/01_foundation/06_strings_and_text/01_strings_and_text.md
+    blocks: 5
+  - path: concept/01_foundation/06_strings_and_text/02_strings_and_encoding.md
+    blocks: 5
+  - path: concept/01_foundation/06_strings_and_text/03_formatting_and_display.md
+    blocks: 2
+  - path: concept/01_foundation/07_modules_and_items/01_modules_and_paths.md
+    blocks: 4
+  - path: concept/01_foundation/07_modules_and_items/02_functions.md
+    blocks: 3
+  - path: concept/01_foundation/07_modules_and_items/04_structs.md
+    blocks: 3
+  - path: concept/01_foundation/07_modules_and_items/05_enumerations.md
+    blocks: 3
+  - path: concept/01_foundation/07_modules_and_items/06_implementations.md
+    blocks: 3
+  - path: concept/01_foundation/07_modules_and_items/07_type_aliases.md
+    blocks: 1
+  - path: concept/01_foundation/07_modules_and_items/08_static_items.md
+    blocks: 2
+  - path: concept/01_foundation/07_modules_and_items/09_const_items_and_const_fn.md
+    blocks: 2
+  - path: concept/01_foundation/08_error_handling/01_error_handling_basics.md
+    blocks: 5
+  - path: concept/01_foundation/08_error_handling/03_panic_and_abort.md
+    blocks: 5
+  - path: concept/01_foundation/09_macros_basics/01_attributes_and_macros.md
+    blocks: 4
+  - path: concept/01_foundation/10_testing_basics/01_testing_basics.md
+    blocks: 5
+  - path: concept/01_foundation/README.md
+    blocks: 3
+  - path: concept/02_intermediate/00_traits/01_traits.md
+    blocks: 5
+  - path: concept/02_intermediate/00_traits/02_dispatch_mechanisms.md
+    blocks: 3
+  - path: concept/02_intermediate/00_traits/03_serde_patterns.md
+    blocks: 5
+  - path: concept/02_intermediate/00_traits/04_advanced_traits.md
+    blocks: 5
+  - path: concept/02_intermediate/00_traits/06_derive_traits.md
+    blocks: 3
+  - path: concept/02_intermediate/00_traits/07_generic_associated_types.md
+    blocks: 3
+  - path: concept/02_intermediate/01_generics/01_generics.md
+    blocks: 5
+  - path: concept/02_intermediate/01_generics/02_const_generics.md
+    blocks: 3
+  - path: concept/02_intermediate/02_memory_management/01_memory_management.md
+    blocks: 5
+  - path: concept/02_intermediate/02_memory_management/02_interior_mutability.md
+    blocks: 5
+  - path: concept/02_intermediate/02_memory_management/03_cow_and_borrowed.md
+    blocks: 5
+  - path: concept/02_intermediate/02_memory_management/04_smart_pointers.md
+    blocks: 5
+  - path: concept/02_intermediate/03_error_handling/01_error_handling.md
+    blocks: 5
+  - path: concept/02_intermediate/03_error_handling/02_error_handling_deep_dive.md
+    blocks: 5
+  - path: concept/02_intermediate/03_error_handling/03_panic.md
+    blocks: 3
+  - path: concept/02_intermediate/04_types_and_conversions/01_range_types.md
+    blocks: 5
+  - path: concept/02_intermediate/04_types_and_conversions/02_closure_types.md
+    blocks: 5
+  - path: concept/02_intermediate/04_types_and_conversions/03_newtype_and_wrapper.md
+    blocks: 5
+  - path: concept/02_intermediate/04_types_and_conversions/04_type_system_advanced.md
+    blocks: 5
+  - path: concept/02_intermediate/04_types_and_conversions/06_unions.md
+    blocks: 2
+  - path: concept/02_intermediate/04_types_and_conversions/07_type_conversions.md
+    blocks: 2
+  - path: concept/02_intermediate/05_modules_and_visibility/01_module_system.md
+    blocks: 5
+  - path: concept/02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md
+    blocks: 5
+  - path: concept/02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md
+    blocks: 5
+  - path: concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md
+    blocks: 5
+  - path: concept/02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md
+    blocks: 5
+  - path: concept/02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md
+    blocks: 2
+  - path: concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md
+    blocks: 10
+  - path: concept/02_intermediate/README.md
+    blocks: 3
+  - path: concept/03_advanced/00_concurrency/01_concurrency.md
+    blocks: 4
+  - path: concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md
+    blocks: 3
+  - path: concept/03_advanced/00_concurrency/03_concurrency_patterns.md
+    blocks: 4
+  - path: concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md
+    blocks: 4
+  - path: concept/03_advanced/00_concurrency/06_lock_free.md
+    blocks: 4
+  - path: concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md
+    blocks: 5
+  - path: concept/03_advanced/01_async/01_async.md
+    blocks: 4
+  - path: concept/03_advanced/01_async/02_async_advanced.md
+    blocks: 4
+  - path: concept/03_advanced/01_async/03_async_patterns.md
+    blocks: 4
+  - path: concept/03_advanced/01_async/04_future_and_executor_mechanisms.md
+    blocks: 3
+  - path: concept/03_advanced/01_async/05_async_cancellation_safety.md
+    blocks: 3
+  - path: concept/03_advanced/01_async/08_pin_unpin.md
+    blocks: 4
+  - path: concept/03_advanced/02_unsafe/00_before_formal.md
+    blocks: 3
+  - path: concept/03_advanced/02_unsafe/01_unsafe.md
+    blocks: 4
+  - path: concept/03_advanced/02_unsafe/03_nll_and_polonius.md
+    blocks: 5
+  - path: concept/03_advanced/02_unsafe/06_memory_model.md
+    blocks: 3
+  - path: concept/03_advanced/03_proc_macros/01_macros.md
+    blocks: 4
+  - path: concept/03_advanced/03_proc_macros/02_proc_macro.md
+    blocks: 5
+  - path: concept/03_advanced/04_ffi/01_rust_ffi.md
+    blocks: 4
+  - path: concept/03_advanced/04_ffi/02_ffi_advanced.md
+    blocks: 5
+  - path: concept/03_advanced/05_inline_assembly/01_inline_assembly.md
+    blocks: 4
+  - path: concept/03_advanced/06_low_level_patterns/01_custom_allocators.md
+    blocks: 5
+  - path: concept/03_advanced/06_low_level_patterns/02_zero_copy_parsing.md
+    blocks: 5
+  - path: concept/03_advanced/06_low_level_patterns/03_type_erasure.md
+    blocks: 5
+  - path: concept/03_advanced/06_low_level_patterns/04_network_programming.md
+    blocks: 5
+  - path: concept/03_advanced/06_low_level_patterns/05_stream_processing_semantics.md
+    blocks: 5
+  - path: concept/03_advanced/07_unsafe_internals/01_unsafe_collections_internals.md
+    blocks: 2
+  - path: concept/03_advanced/README.md
+    blocks: 3
+  - path: concept/04_formal/00_type_theory/01_type_theory.md
+    blocks: 4
+  - path: concept/04_formal/00_type_theory/02_subtype_variance.md
+    blocks: 5
+  - path: concept/04_formal/00_type_theory/03_type_inference.md
+    blocks: 5
+  - path: concept/04_formal/00_type_theory/04_category_theory.md
+    blocks: 5
+  - path: concept/04_formal/00_type_theory/05_lambda_calculus.md
+    blocks: 5
+  - path: concept/04_formal/00_type_theory/06_type_semantics.md
+    blocks: 5
+  - path: concept/04_formal/00_type_theory/07_type_checking_and_inference.md
+    blocks: 4
+  - path: concept/04_formal/00_type_theory/08_type_inference_complexity.md
+    blocks: 3
+  - path: concept/04_formal/01_ownership_logic/01_linear_logic.md
+    blocks: 5
+  - path: concept/04_formal/01_ownership_logic/02_ownership_formal.md
+    blocks: 4
+  - path: concept/04_formal/01_ownership_logic/03_linear_logic_applications.md
+    blocks: 5
+  - path: concept/04_formal/02_separation_logic/01_rustbelt.md
+    blocks: 5
+  - path: concept/04_formal/02_separation_logic/02_separation_logic.md
+    blocks: 5
+  - path: concept/04_formal/03_operational_semantics/01_denotational_semantics.md
+    blocks: 5
+  - path: concept/04_formal/03_operational_semantics/02_hoare_logic.md
+    blocks: 5
+  - path: concept/04_formal/03_operational_semantics/03_operational_semantics.md
+    blocks: 5
+  - path: concept/04_formal/03_operational_semantics/04_evaluation_strategies.md
+    blocks: 5
+  - path: concept/04_formal/03_operational_semantics/05_axiomatic_semantics.md
+    blocks: 5
+  - path: concept/04_formal/04_model_checking/01_verification_toolchain.md
+    blocks: 5
+  - path: concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md
+    blocks: 5
+  - path: concept/04_formal/04_model_checking/04_modern_verification_tools.md
+    blocks: 3
+  - path: concept/04_formal/04_model_checking/05_programming_language_foundations.md
+    blocks: 5
+  - path: concept/04_formal/05_rustc_internals/01_rustc_query_system.md
+    blocks: 4
+  - path: concept/04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md
+    blocks: 4
+  - path: concept/04_formal/05_rustc_internals/03_trait_solver_in_rustc.md
+    blocks: 4
+  - path: concept/04_formal/05_rustc_internals/04_name_resolution_and_hir.md
+    blocks: 4
+  - path: concept/04_formal/README.md
+    blocks: 3
+  - path: concept/05_comparative/00_paradigms/01_paradigm_matrix.md
+    blocks: 5
+  - path: concept/05_comparative/00_paradigms/02_execution_model_isomorphism.md
+    blocks: 5
+  - path: concept/05_comparative/01_systems_languages/01_rust_vs_cpp.md
+    blocks: 5
+  - path: concept/05_comparative/01_systems_languages/02_cpp_abi_object_model.md
+    blocks: 5
+  - path: concept/05_comparative/01_systems_languages/03_rust_vs_go.md
+    blocks: 5
+  - path: concept/05_comparative/01_systems_languages/04_rust_vs_ruby.md
+    blocks: 5
+  - path: concept/05_comparative/01_systems_languages/05_rust_vs_swift.md
+    blocks: 5
+  - path: concept/05_comparative/01_systems_languages/06_rust_vs_zig.md
+    blocks: 5
+  - path: concept/05_comparative/02_managed_languages/01_rust_vs_java.md
+    blocks: 5
+  - path: concept/05_comparative/02_managed_languages/02_rust_vs_python.md
+    blocks: 5
+  - path: concept/05_comparative/02_managed_languages/03_rust_vs_javascript.md
+    blocks: 5
+  - path: concept/05_comparative/02_managed_languages/04_rust_vs_kotlin.md
+    blocks: 5
+  - path: concept/05_comparative/02_managed_languages/05_rust_vs_scala.md
+    blocks: 5
+  - path: concept/05_comparative/02_managed_languages/06_rust_vs_csharp.md
+    blocks: 5
+  - path: concept/05_comparative/02_managed_languages/07_rust_vs_elixir.md
+    blocks: 5
+  - path: concept/05_comparative/02_managed_languages/08_rust_vs_typescript.md
+    blocks: 5
+  - path: concept/05_comparative/03_domain_comparisons/01_safety_boundaries.md
+    blocks: 5
+  - path: concept/05_comparative/README.md
+    blocks: 3
+  - path: concept/06_ecosystem/00_toolchain/01_toolchain.md
+    blocks: 5
+  - path: concept/06_ecosystem/00_toolchain/02_logging_observability.md
+    blocks: 5
+  - path: concept/06_ecosystem/00_toolchain/03_devops_and_ci_cd.md
+    blocks: 5
+  - path: concept/06_ecosystem/00_toolchain/04_compiler_internals.md
+    blocks: 5
+  - path: concept/06_ecosystem/00_toolchain/05_compiler_infrastructure.md
+    blocks: 5
+  - path: concept/06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md
+    blocks: 4
+  - path: concept/06_ecosystem/00_toolchain/10_rustc_driver_and_stable_mir.md
+    blocks: 4
+  - path: concept/06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md
+    blocks: 4
+  - path: concept/06_ecosystem/00_toolchain/12_rustc_bootstrap.md
+    blocks: 4
+  - path: concept/06_ecosystem/00_toolchain/13_compiler_testing.md
+    blocks: 4
+  - path: concept/06_ecosystem/01_cargo/01_cargo_script.md
+    blocks: 5
+  - path: concept/06_ecosystem/01_cargo/05_cargo_build_scripts.md
+    blocks: 4
+  - path: concept/06_ecosystem/01_cargo/06_cargo_dependency_resolution.md
+    blocks: 4
+  - path: concept/06_ecosystem/01_cargo/07_cargo_source_replacement.md
+    blocks: 4
+  - path: concept/06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md
+    blocks: 4
+  - path: concept/06_ecosystem/01_cargo/09_cargo_authentication_and_cache.md
+    blocks: 4
+  - path: concept/06_ecosystem/01_cargo/10_cargo_manifest_reference.md
+    blocks: 4
+  - path: concept/06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md
+    blocks: 4
+  - path: concept/06_ecosystem/01_cargo/12_cargo_subcommands_and_plugins.md
+    blocks: 4
+  - path: concept/06_ecosystem/01_cargo/13_cargo_security_cves.md
+    blocks: 5
+  - path: concept/06_ecosystem/02_core_crates/01_core_crates.md
+    blocks: 5
+  - path: concept/06_ecosystem/03_design_patterns/01_patterns.md
+    blocks: 5
+  - path: concept/06_ecosystem/03_design_patterns/02_idioms_spectrum.md
+    blocks: 5
+  - path: concept/06_ecosystem/03_design_patterns/03_system_design_principles.md
+    blocks: 5
+  - path: concept/06_ecosystem/03_design_patterns/04_system_composability.md
+    blocks: 5
+  - path: concept/06_ecosystem/03_design_patterns/05_microservice_patterns.md
+    blocks: 5
+  - path: concept/06_ecosystem/03_design_patterns/06_event_driven_architecture.md
+    blocks: 5
+  - path: concept/06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md
+    blocks: 5
+  - path: concept/06_ecosystem/03_design_patterns/08_architecture_patterns.md
+    blocks: 5
+  - path: concept/06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md
+    blocks: 5
+  - path: concept/06_ecosystem/03_design_patterns/17_workflow_theory.md
+    blocks: 5
+  - path: concept/06_ecosystem/03_design_patterns/18_api_design_patterns.md
+    blocks: 5
+  - path: concept/06_ecosystem/04_web_and_networking/01_distributed_systems.md
+    blocks: 5
+  - path: concept/06_ecosystem/04_web_and_networking/02_cloud_native.md
+    blocks: 5
+  - path: concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md
+    blocks: 5
+  - path: concept/06_ecosystem/04_web_and_networking/07_network_protocols.md
+    blocks: 5
+  - path: concept/06_ecosystem/04_web_and_networking/09_reactive_programming.md
+    blocks: 5
+  - path: concept/06_ecosystem/05_systems_and_embedded/01_wasi.md
+    blocks: 5
+  - path: concept/06_ecosystem/05_systems_and_embedded/02_cross_compilation.md
+    blocks: 5
+  - path: concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md
+    blocks: 5
+  - path: concept/06_ecosystem/05_systems_and_embedded/04_cli_development.md
+    blocks: 5
+  - path: concept/06_ecosystem/05_systems_and_embedded/05_os_kernel.md
+    blocks: 5
+  - path: concept/06_ecosystem/05_systems_and_embedded/06_robotics.md
+    blocks: 5
+  - path: concept/06_ecosystem/05_systems_and_embedded/07_embedded_graphics.md
+    blocks: 5
+  - path: concept/06_ecosystem/05_systems_and_embedded/08_c_to_rust_translation.md
+    blocks: 5
+  - path: concept/06_ecosystem/06_data_and_distributed/01_application_domains.md
+    blocks: 5
+  - path: concept/06_ecosystem/06_data_and_distributed/02_database_access.md
+    blocks: 5
+  - path: concept/06_ecosystem/06_data_and_distributed/03_stream_processing_ecosystem.md
+    blocks: 5
+  - path: concept/06_ecosystem/06_data_and_distributed/04_database_systems.md
+    blocks: 5
+  - path: concept/06_ecosystem/06_data_and_distributed/05_data_engineering.md
+    blocks: 5
+  - path: concept/06_ecosystem/06_data_and_distributed/06_distributed_consensus.md
+    blocks: 5
+  - path: concept/06_ecosystem/06_data_and_distributed/07_rust_for_data_science.md
+    blocks: 5
+  - path: concept/06_ecosystem/07_security_and_cryptography/01_security_practices.md
+    blocks: 5
+  - path: concept/06_ecosystem/07_security_and_cryptography/02_security_cryptography.md
+    blocks: 5
+  - path: concept/06_ecosystem/08_formal_verification/01_formal_ecosystem_tower.md
+    blocks: 5
+  - path: concept/06_ecosystem/08_formal_verification/02_formal_verification_tools.md
+    blocks: 5
+  - path: concept/06_ecosystem/09_testing_and_quality/01_testing_strategies.md
+    blocks: 5
+  - path: concept/06_ecosystem/09_testing_and_quality/02_documentation.md
+    blocks: 5
+  - path: concept/06_ecosystem/09_testing_and_quality/03_testing.md
+    blocks: 5
+  - path: concept/06_ecosystem/10_performance/01_performance_optimization.md
+    blocks: 5
+  - path: concept/06_ecosystem/11_domain_applications/01_blockchain.md
+    blocks: 5
+  - path: concept/06_ecosystem/11_domain_applications/02_game_ecs.md
+    blocks: 5
+  - path: concept/06_ecosystem/11_domain_applications/03_webassembly.md
+    blocks: 5
+  - path: concept/06_ecosystem/11_domain_applications/04_licensing_and_compliance.md
+    blocks: 5
+  - path: concept/06_ecosystem/11_domain_applications/05_game_development.md
+    blocks: 5
+  - path: concept/06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md
+    blocks: 5
+  - path: concept/06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md
+    blocks: 5
+  - path: concept/06_ecosystem/11_domain_applications/14_industrial_case_studies.md
+    blocks: 5
+  - path: concept/06_ecosystem/11_domain_applications/15_game_engine_internals.md
+    blocks: 5
+  - path: concept/06_ecosystem/11_domain_applications/16_quantum_computing_rust.md
+    blocks: 5
+  - path: concept/06_ecosystem/11_domain_applications/17_webassembly_advanced.md
+    blocks: 5
+  - path: concept/06_ecosystem/README.md
+    blocks: 3
+  - path: concept/07_future/00_version_tracking/01_rust_version_tracking.md
+    blocks: 5
+  - path: concept/07_future/01_edition_roadmap/02_edition_guide.md
+    blocks: 5
+  - path: concept/07_future/01_edition_roadmap/04_roadmap.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/01_effects_system.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/02_mcdc_coverage_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/03_safety_tags_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/04_parallel_frontend_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/05_derive_coerce_pointee_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/06_const_trait_impl_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/07_stable_abi_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/08_inline_const_pattern_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/09_return_type_notation_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/10_must_not_suspend_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/11_unsafe_fields_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/13_lifetime_capture_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/14_pin_ergonomics_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/15_rpitit_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/16_cranelift_backend_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/17_type_alias_impl_trait_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/18_arbitrary_self_types_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/19_const_trait_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/20_ergonomic_ref_counting_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/21_rust_specification_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/22_async_drop_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/23_field_projections_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/24_borrow_sanitizer.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/25_gen_blocks_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/26_std_autodiff_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/27_cargo_semver_checks_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/28_wasm_target_evolution.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/29_aarch64_sve_sme_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/30_rust_in_space.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/31_specialization_preview.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/32_compile_time_execution.md
+    blocks: 5
+  - path: concept/07_future/03_preview_features/34_open_enums_preview.md
+    blocks: 5
+  - path: concept/07_future/04_research_and_experimental/01_ai_integration.md
+    blocks: 5
+  - path: concept/07_future/04_research_and_experimental/02_formal_methods.md
+    blocks: 5
+  - path: concept/07_future/04_research_and_experimental/03_evolution.md
+    blocks: 5
+  - path: concept/07_future/04_research_and_experimental/04_rust_for_linux.md
+    blocks: 5
+  - path: concept/07_future/04_research_and_experimental/05_rust_in_ai.md
+    blocks: 5
+  - path: concept/07_future/04_research_and_experimental/06_rust_for_webassembly.md
+    blocks: 5
+  - path: concept/07_future/04_research_and_experimental/07_ebpf_rust.md
+    blocks: 5
+  - path: concept/07_future/archive/01_ai_integration_original.md
+    blocks: 3
+  - path: concept/07_future/README.md
+    blocks: 3
+  - path: concept/README.md
+    blocks: 3
+  - path: concept/sources/INDEX.md
+    blocks: 3
+  - path: concept/sources/rfc_index.md
+    blocks: 3
+  - path: concept/sources/theorem_tier_spec.md
+    blocks: 3
+exercises_tests:
+  description: exercises/ 分层测试套件（#[test] 计数）
+  test_files: 12
+  total_test_fns: 139
+  items:
+  - path: exercises/tests/l1_foundation.rs
+    tests: 22
+  - path: exercises/tests/l2_intermediate.rs
+    tests: 16
+  - path: exercises/tests/l3_advanced_systems.rs
+    tests: 8
+  - path: exercises/tests/l3_async_concurrency.rs
+    tests: 3
+  - path: exercises/tests/l3_core.rs
+    tests: 8
+  - path: exercises/tests/l3_ecosystem_alignment.rs
+    tests: 10
+  - path: exercises/tests/l3_rust_196_alignment.rs
+    tests: 10
+  - path: exercises/tests/l3_rust_197_alignment.rs
+    tests: 13
+  - path: exercises/tests/l3_rust_198_alignment.rs
+    tests: 12
+  - path: exercises/tests/l3_unsafe_rust.rs
+    tests: 17
+  - path: exercises/tests/quizzes/l3_advanced.rs
+    tests: 8
+  - path: exercises/tests/quizzes/l3_core.rs
+    tests: 12
+brown_inventories:
+  description: Brown 大学所有权 inventories 配套练习（exercises/src/ownership_borrowing/brown_inventories/）
+  path: exercises/src/ownership_borrowing/brown_inventories/
+  inventory_files: 8
+rustlings_mapping:
+  description: rustlings 习题与项目 C01-C17 模块映射
+  path: exercises/rustlings_mapping.md
+  modules_mapped: 17

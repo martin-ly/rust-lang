@@ -1120,6 +1120,7 @@ c.borrow_mut().push_str("hello");     // 运行时检查的可变借用
 
 ## 十、相关概念链接
 
+- [对应测验](05_quiz_memory_management.md) — 内存管理与智能指针（Box/Rc/Arc/RefCell/Mutex/Drop）
 - **上层概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 - **下层概念**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 

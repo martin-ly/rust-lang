@@ -46,9 +46,33 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((生命周期))
+    本质
+      引用有效期
+      编译期标注
+    标注语法
+      生命周期参数
+      函数签名
+      结构体字段
+    省略规则
+      输入省略
+      输出推导
+    进阶机制
+      NLL
+      HRTB
+      变型
+    目标
+      拒绝悬垂引用
+```
+
 ## 📑 目录
 
 - [Lifetimes（生命周期）](#lifetimes生命周期)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 TRPL 官方定义](#11-trpl-官方定义)
@@ -1310,6 +1334,7 @@ fn main() {
 
 ## 相关概念
 
+- [对应测验](../11_quizzes/33_quiz_ownership_borrowing.md) — 所有权、借用与生命周期
 - **上层概念**: [Ownership](01_ownership.md) · [Borrowing](02_borrowing.md)
 
 ## 参考来源

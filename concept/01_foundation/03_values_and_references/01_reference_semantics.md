@@ -25,6 +25,28 @@
 > [TRPL Ch15 — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·
 > [Rustonomicon — Coercions](https://doc.rust-lang.org/nomicon/coercions.html)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((引用语义))
+    自动解引用
+      方法调用
+      字段访问
+    Deref强制
+      智能指针
+      字符串切片
+    多级引用
+      部分重借用
+      引用链
+    类型转换
+      引用到指针
+      引用到切片
+    边界
+      悬垂引用
+      别名互斥
+```
+
 ## 📑 目录
 
 - 引用（Reference）语义：自动解引用、Deref 强制与类型转换

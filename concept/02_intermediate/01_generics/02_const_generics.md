@@ -24,9 +24,32 @@
 > [Tracking Issue #74878 — min_const_generics](https://github.com/rust-lang/rust/issues/74878) ·
 > [Tracking Issue #76560 — generic_const_exprs](https://github.com/rust-lang/rust/issues/76560)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((常量泛型))
+    动机
+      数组长度抽象
+      值进类型
+    语法
+      const参数
+      标量类型边界
+    稳定边界
+      min版稳定
+      完整版未稳定
+    关联常量
+      依赖常量
+      默认参数
+    求值
+      编译期
+      单态化
+```
+
 ## 📑 目录
 
 - [Const Generics（常量泛型）：值作为类型参数](#const-generics常量泛型值作为类型参数)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、动机：`[T; N]` 的抽象困境](#一动机t-n-的抽象困境)
   - [二、语法与允许的标量类型边界](#二语法与允许的标量类型边界)
@@ -44,6 +67,10 @@
   - [九、与既有内容的关系声明](#九与既有内容的关系声明)
   - [相关概念](#相关概念)
   - [十、来源与延伸阅读](#十来源与延伸阅读)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：const 参数的声明语法（🟢 基础）](#测验-1const-参数的声明语法-基础)
+    - [测验 2：允许的标量类型边界（🟡 进阶）](#测验-2允许的标量类型边界-进阶)
+    - [测验 3：stable 边界的编译期拒绝（🔴 专家）](#测验-3stable-边界的编译期拒绝-专家)
 
 ---
 
@@ -489,3 +516,67 @@ fn scaled_demo() {
 
 **文档版本**: 1.0
 **最后更新**: 2026-07-12
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-12）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致。
+
+### 测验 1：const 参数的声明语法（🟢 基础）
+
+下列哪个是合法的 const 泛型参数声明？
+
+- A. `fn fill<T: Copy, const N: usize>(v: T) -> [T; N]`
+- B. `fn fill<T, const N>(v: T) -> [T; N]`（省略参数类型）
+- C. `fn fill<const N: f64>(v: f64) -> [f64; N]`
+- D. `fn fill<T, N: usize>(v: T) -> [T; N]`（省略 `const` 关键字）
+
+<details>
+<summary>✅ 答案</summary>
+
+**A 正确**。按本页 §二：const 参数以 `const NAME: TYPE` 形式出现在泛型参数列表中，与类型参数、生命周期参数并列——`const` 关键字与参数类型都不可省略（B/D 错）。C 错：`f64` 不在允许的标量类型边界内。
+
+</details>
+
+---
+
+### 测验 2：允许的标量类型边界（🟡 进阶）
+
+下列哪些类型**可以**作为 stable Rust（1.97）的 const 参数类型？（选出所有正确项）
+
+- A. `usize` / `i32` 等整数类型
+- B. `bool`
+- C. `char`
+- D. `f64` 与 `&str`
+
+<details>
+<summary>✅ 答案</summary>
+
+**A、B、C 正确**。按本页 §二（RFC 2000 划定的硬边界）：允许 `u8..u128`/`usize`、`i8..i128`/`isize` 共 14 种整数 + `bool` + `char`。D 错：浮点（无结构相等性，`0.0 == -0.0` 等问题）、`&str`、引用及任何 ADT 在 stable 被禁止；ADT 需 nightly 的 `adt_const_params`。
+
+</details>
+
+---
+
+### 测验 3：stable 边界的编译期拒绝（🔴 专家）
+
+以下代码在 stable 1.97 上为何被拒绝？
+
+```rust,ignore
+fn double_size<const N: usize>() -> [u8; N * 2] {
+    [0; N * 2]
+}
+```
+
+- A. `u8` 不是合法的 const 参数类型
+- B. const 参数参与运算（`N * 2`）属于 `generic_const_exprs`，stable 仅支持 min_const_generics 的独立参数形态
+- C. 数组长度不能是 const 参数
+- D. 函数返回数组必须 `Box` 包装
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §三与 §七反例 1：stable 边界是 min_const_generics——const 参数只能以**独立**形态出现（如 `[T; N]`）；`N * 2` 这类 const 参数参与的运算式属于 `generic_const_exprs`（特性门，截至 1.97.0 仍未稳定）。§一同时指出 const 参数在单态化时被替换为字面常量，生成代码与手写定长版本逐指令相同——零成本。
+
+</details>

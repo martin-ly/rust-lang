@@ -153,3 +153,61 @@ Panic 可以是可恢复的，也可以是不可恢复的，具体取决于 pani
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/memmap2 — 生态权威 API 文档](https://docs.rs/memmap2) · [docs.rs/embedded-hal — 生态权威 API 文档](https://docs.rs/embedded-hal)
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-12）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致。
+
+### 测验 1：Panic 的定义（🟢 基础）
+
+按 Rust Reference，panic 是？
+
+- A. 一种可恢复错误的返回类型
+- B. Rust 提供的机制，用于阻止函数正常返回，以响应通常不可恢复的错误条件
+- C. 编译器警告的别称
+- D. 仅在 `unsafe` 代码中才会发生的事件
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「一、什么是 Panic」(Source: Rust Reference — Panic)：Panic 用于阻止函数正常返回，响应通常不可恢复的错误条件；某些语言结构（如数组越界索引）会自动 panic，`panic!` 宏提供显式能力，行为由 **panic handler** 控制。
+
+</details>
+
+---
+
+### 测验 2：两种 panic 策略（🟡 进阶）
+
+关于 `unwind` 与 `abort` 两种 panic 策略，下列说法正确的是？
+
+- A. `unwind` 直接 abort 进程；`abort` 展开栈
+- B. `unwind` 展开栈并调用沿途 `Drop`（潜在可恢复）；`abort` 直接终止进程（不可恢复）
+- C. 所有目标平台都支持 `unwind`
+- D. `abort` 策略的 crate 可以使用 `unwind` panic handler
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「三、标准行为」表格：`unwind` 展开栈、调用沿途 `Drop`、潜在可恢复（可由 `catch_unwind` 恢复）；`abort` 直接终止进程、不可恢复。C 错：并非所有目标都支持 `unwind`。D 错：链接限制恰好相反——`unwind` 策略的 crate 可以使用 `abort` handler，`abort` 策略的 crate **不能**使用 `unwind` handler。
+
+</details>
+
+---
+
+### 测验 3：跨 FFI 边界的 unwind（🔴 专家）
+
+下列哪种跨 FFI 的 unwind 构成未定义行为（UB）？
+
+- A. 在 Rust 内部用 `catch_unwind` 捕获同运行时的 panic
+- B. 从通过非 unwinding ABI（如 `"C"`、`"system"`）声明的外国函数引发 unwind 进入 Rust 代码
+- C. 子线程 panic 后被 `JoinHandle::join` 捕获
+- D. 使用 `extern "C-unwind"` 声明的函数在支持 unwind 的两侧之间传播
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「六、跨 FFI Boundary 的 Unwinding」UB 清单：①从非 unwinding ABI（`"C"`、`"system"`）声明的外国函数引发 unwind 进入 Rust 代码；②从不支持 unwind 的代码调用 `extern "C-unwind"` 等允许 unwind 的 ABI 声明的 Rust 函数。A/C 是合法的同运行时恢复机制（§五）；D 是 `C-unwind` ABI 的设计用途。
+
+</details>

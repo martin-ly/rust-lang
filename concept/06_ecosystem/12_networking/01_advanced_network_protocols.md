@@ -247,6 +247,26 @@ flowchart TD
    - SSE 实时通信
    - 微服务架构
 
+## ⚠️ 反例与陷阱
+
+**陷阱：帧解析时把切片直接传给 `from_be_bytes`**。gRPC/QUIC/AMQP 等二进制协议都要从字节流解码定宽整数，但 `u32::from_be_bytes` 要求 `[u8; 4]` 数组，切片类型不匹配：
+
+```rust,compile_fail
+fn parse_len(frame: &[u8]) -> u32 {
+    u32::from_be_bytes(frame[0..4]) // [u8] ≠ [u8; 4]
+}
+```
+
+rustc 1.97.0 实测：`error[E0308]: mismatched types`。且即使类型对齐，未校验长度的 `frame[0..4]` 会在截断帧上 panic。
+
+**修正**：`get` + `try_into` 一步完成边界校验与定宽转换：
+
+```rust
+fn parse_len(frame: &[u8]) -> Option<u32> {
+    Some(u32::from_be_bytes(frame.get(0..4)?.try_into().ok()?))
+}
+```
+
 ## 12. 相关概念
 
 - [并发模型](../../03_advanced/00_concurrency/01_concurrency.md)

@@ -1,49 +1,65 @@
 {
   "date": "2026-07-12",
-  "scanned": 464,
+  "scanned": 475,
   "coverage": {
     "P0": [
-      464,
-      100.0
+      468,
+      98.5
     ],
     "P1": [
-      436,
-      94.0
+      435,
+      91.6
     ],
     "P2": [
-      395,
-      85.1
+      400,
+      84.2
     ],
     "any": [
-      464,
-      100.0
+      472,
+      99.4
     ],
-    "none": 0
+    "none": 3
   },
   "content_scope": {
-    "scanned": 386,
+    "scanned": 396,
     "P0": [
-      386,
-      100.0
+      390,
+      98.5
     ],
     "P1": [
-      383,
-      99.2
+      382,
+      96.5
     ],
     "P2": [
-      383,
-      99.2
+      388,
+      98.0
     ],
     "any": [
-      386,
-      100.0
+      394,
+      99.5
     ],
     "gaps_p1": [
+      "concept/03_advanced/01_async/09_stream_algebra_and_backpressure.md",
+      "concept/03_advanced/01_async/10_executor_fairness_and_scheduling.md",
+      "concept/03_advanced/01_async/11_pin_projection_counterexamples.md",
+      "concept/04_formal/04_model_checking/10_certified_toolchains_and_packages.md",
+      "concept/06_ecosystem/00_toolchain/15_z_flags_reference.md",
+      "concept/06_ecosystem/01_cargo/23_cargo_197_features.md",
+      "concept/06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md",
+      "concept/06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md",
+      "concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md",
+      "concept/06_ecosystem/11_domain_applications/22_autosar_and_rust.md",
+      "concept/07_future/03_preview_features/12_ferrocene_preview.md",
       "concept/07_future/03_preview_features/36_unsafe_pinned_preview.md",
       "concept/07_future/03_preview_features/37_default_field_values_preview.md",
       "concept/07_future/03_preview_features/38_complex_numbers_preview.md"
     ],
     "gaps_p2": [
+      "concept/06_ecosystem/00_toolchain/15_z_flags_reference.md",
+      "concept/06_ecosystem/01_cargo/23_cargo_197_features.md",
+      "concept/06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md",
+      "concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md",
+      "concept/06_ecosystem/11_domain_applications/22_autosar_and_rust.md",
       "concept/07_future/03_preview_features/35_f16_f128_preview.md",
       "concept/07_future/03_preview_features/36_unsafe_pinned_preview.md",
       "concept/07_future/03_preview_features/37_default_field_values_preview.md"
@@ -51,7 +67,7 @@
   },
   "by_layer": {
     "L0": {
-      "n": 60,
+      "n": 61,
       "P0": 60,
       "any": 60
     },
@@ -66,14 +82,14 @@
       "any": 38
     },
     "L3": {
-      "n": 60,
-      "P0": 60,
-      "any": 60
+      "n": 63,
+      "P0": 61,
+      "any": 63
     },
     "L4": {
-      "n": 51,
+      "n": 52,
       "P0": 51,
-      "any": 51
+      "any": 52
     },
     "L5": {
       "n": 19,
@@ -81,9 +97,9 @@
       "any": 19
     },
     "L6": {
-      "n": 114,
-      "P0": 114,
-      "any": 114
+      "n": 120,
+      "P0": 117,
+      "any": 118
     },
     "L7": {
       "n": 64,
@@ -96,6 +112,14 @@
       "any": 3
     }
   },
-  "core_gaps_l1_l4_no_p0": [],
-  "none_any": []
+  "core_gaps_l1_l4_no_p0": [
+    "concept/03_advanced/01_async/09_stream_algebra_and_backpressure.md",
+    "concept/03_advanced/01_async/10_executor_fairness_and_scheduling.md",
+    "concept/04_formal/04_model_checking/10_certified_toolchains_and_packages.md"
+  ],
+  "none_any": [
+    "concept/00_meta/04_navigation/15_quiz_registry.md",
+    "concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md",
+    "concept/06_ecosystem/11_domain_applications/22_autosar_and_rust.md"
+  ]
 }

@@ -90,6 +90,7 @@
     - [2. 与 `Ordering` 正交：对齐 vs 可见性](#2-与-ordering-正交对齐-vs-可见性)
     - [3. 与类型布局 / std 原子类型对齐保证的关系](#3-与类型布局--std-原子类型对齐保证的关系)
     - [4. 跨平台边界与旧名废弃说明](#4-跨平台边界与旧名废弃说明)
+    - [5. Rust 1.97.0 新增 LoongArch 原子 target features（`scq` / `lamcas` / `lam-bh` / `ld-seq-sa` / `div32`）](#5-rust-1970-新增-loongarch-原子-target-featuresscq--lamcas--lam-bh--ld-seq-sa--div32)
 
 ---
 
@@ -1433,5 +1434,41 @@ fn release_store(a: &AtomicU64) {
 - ⚠ **需专家复核**：具体“哪些目标上 primitive 对齐 ≠ 指针宽度对齐”的目标清单，release notes 与版本页**未给出**；本小节不枚举目标名。
 - **旧名 `target_has_atomic_equal_alignment` 的废弃**：审计背景（§2.4/P2-2）指出该 cfg 曾用名 `target_has_atomic_equal_alignment`，1.97 起稳定为现名，旧名废弃。⚠ **需专家复核**：release notes 与版本页**未提及**旧名及废弃时间表；旧名/废弃说法当前仅来自审计背景，使用前请核对 Rust Reference 与稳定化 PR。
 
-> **来源**: [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/) · [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html) · [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§2.4）
+### 5. Rust 1.97.0 新增 LoongArch 原子 target features（`scq` / `lamcas` / `lam-bh` / `ld-seq-sa` / `div32`）
+
+Rust 1.97.0 稳定了五个 target feature（release notes *Language* 类：`"Stabilize the div32, lam-bh, lamcas, ld-seq-sa and scq target features"`）。按 Rust Reference — Codegen attributes — `#[target_feature]` 的 loongarch 表，**这五个特性全部属于 LoongArch 目标**（`loongarch32` / `loongarch64`），不属于 aarch64 或 riscv。其中四个直接决定 LoongArch 上 std 原子类型的**指令发射能力**——这正是它们与本页内存序主题的交叉点：
+
+| feature | 指令语义（Reference 原文释义） | 与 std 原子操作的关系 |
+|:---|:---|:---|
+| `scq` | SCQ — Store-Conditional Quadword（四字/128 位存储条件指令） | 为 128 位 load-locked/store-conditional 提供 ISA 基础，是 LoongArch 上宽 CAS 类原子序列的指令底座 |
+| `lamcas` | LAMCAS — 字节/半字/字/双字的原子比较交换（CAS）指令 | 使 `AtomicU8`/`AtomicU16`/`AtomicU32`/`AtomicU64` 的 `compare_exchange(_weak)` 可发射单条原子指令而非 LL/SC 循环 |
+| `lam-bh` | LAM-BH — 字节/半字的原子交换与加法指令 | 使 `AtomicU8`/`AtomicU16` 的 `fetch_add`/`fetch_swap` 等 RMW 操作可原生发射 |
+| `ld-seq-sa` | LD-SEQ-SA — 对**同一地址**的 load 按顺序执行 | 保证同址 load 的顺序性，是 LoongArch 上 `Ordering::Acquire`/`SeqCst` load 路径的硬件语义补充；不改变 `Ordering` 的程序级语义（与 §2 同理：ISA 能力轴与内存序轴正交） |
+| `div32` | DIV32 — 接受非符号扩展 32 位操作数的除法指令 | **非原子**，整数除法指令扩展；与原子无关，因同属一批稳定化在此列出以完整 |
+
+```rust
+// edition = "2024", rust = "1.97" —— 编译期按 LoongArch target feature 选择实现路径
+// （在本机 x86_64 上编译通过：cfg 求值为 false；rustc 1.97.0 实测）
+#[cfg(all(target_arch = "loongarch64", target_feature = "lamcas"))]
+pub fn sub_word_cas_native() {
+    // lamcas 可用：AtomicU8/AtomicU16 的 compare_exchange 走单条原子指令
+}
+
+#[cfg(all(target_arch = "loongarch64", target_feature = "ld-seq-sa"))]
+pub fn same_addr_loads_sequential() {
+    // ld-seq-sa：对同一地址的 load 硬件保证顺序执行
+}
+
+fn main() {
+    // 非 loongarch 目标上两个 cfg 均为 false，不生成上述代码路径
+}
+```
+
+> **使用要点**：这些 feature 以 `cfg(target_feature = "...")` 查询或在编译命令行以 `-C target-feature=+lamcas` 启用（与 §1 的 `cfg(target_has_atomic_primitive_alignment)` 同属“编译期平台能力查询”家族）。`#[target_feature(enable = "lamcas")]` 属性函数在 LoongArch 目标上同样受 Reference「`#[target_feature]` 函数限制」约束（仅 `unsafe fn` 可启用非默认 feature）。
+>
+> **边界**：稳定化的是 **feature 名称的可查询/可启用性**，不是“所有 LoongArch 芯片都具备这些指令”——低端 LoongArch 实现可能不含 LAMCAS/SCQ，仍按 `-C target-cpu`/`-C target-feature` 选择。
+
+> **来源**: [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/) · [Rust Reference — Codegen attributes — `#[target_feature]` loongarch](https://doc.rust-lang.org/reference/attributes/codegen.html)（SCQ/LAMCAS/LAM-BH/LD-SEQ-SA/DIV32 五行，curl 200 实测 2026-07-12）
+
+> **来源**: [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/) · [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html) · [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§2.3、§2.4）
 > **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`42_type_layout.md`](../../04_formal/05_rustc_internals/08_type_layout.md) · [`29_memory_model.md`](../02_unsafe/06_memory_model.md)

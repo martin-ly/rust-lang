@@ -565,6 +565,7 @@ fn main() {
 - [Unsafe](../02_unsafe/01_unsafe.md) — unsafe Rust
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）模型
 - [Gen Blocks](../../07_future/03_preview_features/25_gen_blocks_preview.md) — 生成器（也是 !Unpin）
+- [Pin 投射反例集](11_pin_projection_counterexamples.md) — 契约推导 ↔ UB 目录（分工页）
 
 ---
 

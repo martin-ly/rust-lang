@@ -246,6 +246,33 @@ graph TD
 >
 > **来源**: [Rust Project Goals 2026 — Pin Ergonomics](https://rust-lang.github.io/rust-project-goals/2026/pin-ergonomics.html) · [withoutboats — "Pin and Suffering"](https://without.boats/blog/pin/) · [RFC #3709](https://github.com/rust-lang/rfcs/issues/3709)
 
+## ⚠️ 反例与陷阱
+
+**陷阱：对 `!Unpin` 类型的 `Pin<&mut T>` 直接写字段**。`Pin` 刻意不实现 `DerefMut`（除非 `T: Unpin`），「Pin 人机工程学危机」最日常的体现就是连改一个普通字段都被拦下：
+
+```rust,compile_fail
+use std::marker::PhantomPinned;
+use std::pin::Pin;
+
+struct SelfRef { data: u32, _pin: PhantomPinned }
+
+fn mutate(p: Pin<&mut SelfRef>) {
+    p.data += 1; // Pin<&mut SelfRef> 不可 DerefMut
+}
+```
+
+rustc 1.97.0 实测：`error[E0594]: cannot assign to data in dereference of Pin<&mut SelfRef>`。
+
+**修正（当前可用）**：对非结构钉扎字段用显式 unsafe 投影并注明 SAFETY；生产代码用 `pin-project` 宏生成等价安全投影：
+
+```rust
+fn mutate(p: Pin<&mut SelfRef>) {
+    // SAFETY: 仅修改非结构钉扎字段 data，不移动被钉扎数据
+    let this = unsafe { p.get_unchecked_mut() };
+    this.data += 1;
+}
+```
+
 ## 嵌入式测验（Embedded Quiz）
 
 「嵌入式测验（Embedded Quiz）」部分按测验 1：`Pin` 的人机工程学危机指什么？（理解层）、测验 2：`Pin::as_mut()` 和普通的 `&mut` 重新…、测验 3：`pin!` 宏在 Rust 1.96+ 中提供了什么便利？…、测验 4：Reborrow Traits 提案试图解决什么问题？（理解…等5个方面的顺序逐层展开。

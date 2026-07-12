@@ -29,9 +29,34 @@
 > [Rust Reference — Loop Expressions](https://doc.rust-lang.org/reference/expressions/loop-expr.html) ·
 > [RFC 160 — `if let`](https://github.com/rust-lang/rfcs/pull/160)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((控制流))
+    表达式导向
+      一切皆表达式
+      分号定语句
+    分支
+      if表达式
+      match穷尽
+      if let
+    循环
+      loop
+      while
+      for迭代
+    跳转
+      break带值
+      continue
+      return
+    发散
+      Never类型
+```
+
 ## 📑 目录
 
 - [控制流：表达式导向的流程控制](#控制流表达式导向的流程控制)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 表达式 vs 语句](#11-表达式-vs-语句)
@@ -581,6 +606,7 @@ graph TD
 
 ## 相关概念
 
+- [对应测验](../11_quizzes/29_quiz_pl_foundations.md) — 通用 PL 基座（变量模型、求值策略、效果、控制流、数据抽象）
 - **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/01_type_system.md)
 - **下层概念**: [Generics](../../02_intermediate/01_generics/01_generics.md) · [Async](../../03_advanced/01_async/01_async.md)
 

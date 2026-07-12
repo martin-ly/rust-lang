@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-07-12  **扫描**: 480 concept 活跃文件（排除 archive）  **模式**: warning（不阻断）
+**日期**: 2026-07-12  **扫描**: 502 concept 活跃文件（排除 archive）  **模式**: warning（不阻断）
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=296) | 0.0% | >=5% | pass |
-| D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
-| D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
-| D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
-| D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 1 (基=309) | 0.2% | >=5% | pass |
+| D3 关键字段同文件重声明 | 1 | 0.2% | >0 | FAIL |
+| D4 文首块 Rust 版本号自矛盾 | 2 | 0.4% | >0 | FAIL |
+| D5 稳定层正文残留 nightly/preview/unstable | 14 | 2.8% | >0 | FAIL |
+| D6 Summary 低信息量模板套话 | 4 | 0.8% | >=3% | pass |
 
-**受影响文件总数**: 0 / 480
+**受影响文件总数**: 18 / 502
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -44,19 +44,46 @@
 
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
-### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（0）
+### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（1）
 
-### D3 关键字段同文件重声明（0）
+- `concept/06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md` — A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集
 
-### D4 文首块 Rust 版本号自矛盾（0）
+### D3 关键字段同文件重声明（1）
 
-### D5 稳定层正文残留 nightly/preview/unstable（0）
+- `concept/06_ecosystem/00_toolchain/14_development_tools.md` — 内容分级 声明 2 次: ['[研究级]', '[研究级]']
 
-### D6 Summary 低信息量模板套话（0）
+### D4 文首块 Rust 版本号自矛盾（2）
+
+- `concept/03_advanced/01_async/13_async_trait_object_safety.md` — 版本字段 distinct minor [89, 97]: 1.97.0+ (Edition 2024) · async-trait 0.1.89 · RTN 需 nightly（`#![feature(return_t
+- `concept/06_ecosystem/00_toolchain/15_z_flags_reference.md` — 版本字段 distinct minor [97, 99]: 1.97.0+ (Edition 2024)（`-Z` 选项实测环境：rustc 1.99.0-nightly 375b1431b 2026-07-10 / c
+
+### D5 稳定层正文残留 nightly/preview/unstable（14）
+
+- `concept/00_meta/05_quizzes/01_quiz_meta_framework.md` — 稳定层 nightly/preview 关键词 3 处
+- `concept/01_foundation/02_type_system/02_never_type.md` — 稳定层 nightly/preview 关键词 4 处
+- `concept/02_intermediate/00_traits/02_dispatch_mechanisms.md` — 稳定层 nightly/preview 关键词 1 处
+- `concept/02_intermediate/01_generics/03_type_level_programming.md` — 稳定层 nightly/preview 关键词 1 处
+- `concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md` — 稳定层 nightly/preview 关键词 1 处
+- `concept/03_advanced/01_async/13_async_trait_object_safety.md` — 稳定层 nightly/preview 关键词 10 处
+- `concept/03_advanced/03_proc_macros/09_macro_hygiene.md` — 稳定层 nightly/preview 关键词 1 处
+- `concept/04_formal/05_rustc_internals/12_attributes.md` — 稳定层 nightly/preview 关键词 2 处
+- `concept/06_ecosystem/00_toolchain/06_quiz_toolchain.md` — 稳定层 nightly/preview 关键词 1 处
+- `concept/06_ecosystem/00_toolchain/07_rustdoc_196_changes.md` — 稳定层 nightly/preview 关键词 1 处
+- `concept/06_ecosystem/00_toolchain/15_z_flags_reference.md` — 稳定层 nightly/preview 关键词 100 处
+- `concept/06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md` — 稳定层 nightly/preview 关键词 4 处
+
+### D6 Summary 低信息量模板套话（4）
+
+- `concept/00_meta/04_navigation/15_quiz_registry.md` — Summary 为空
+- `concept/06_ecosystem/00_toolchain/15_z_flags_reference.md` — Summary 为空
+- `concept/06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md` — Summary 为空
+- `concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md` — Summary 为空
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
-- 无（全部通过）
+- D3 字段重声明 1 (>0)
+- D4 版本自矛盾 2 (>0)
+- D5 稳定层nightly残留 14 (>0)
 
 ## 机器可读
 

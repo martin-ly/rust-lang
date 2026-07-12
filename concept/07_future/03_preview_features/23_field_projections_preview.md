@@ -48,6 +48,7 @@
     - [5.1 2026 年官方三步计划（Rust Project Goals 2026 — Beyond the `&`）](#51-2026-年官方三步计划rust-project-goals-2026--beyond-the-)
     - [5.2 长期时间轴](#52-长期时间轴)
     - [相关已稳定特性](#相关已稳定特性)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [参考](#参考)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Pinned field projections 解决的是什么问题？（理解层）](#测验-1pinned-field-projections-解决的是什么问题理解层)
@@ -295,6 +296,33 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 - `addr_of!` / `addr_of_mut!`（1.51+）: 安全获取字段裸指针
 
 ---
+
+## ⚠️ 反例与陷阱
+
+**陷阱：从 `Pin<&mut Struct>` 手工投影字段**。字段级投影需求（`Pin<&mut Fut>` → `&mut Fut.buf`）在稳定 Rust 无安全语法，直接写字段即被拒绝——这是 field projections 提案的核心动机：
+
+```rust,compile_fail
+use std::marker::PhantomPinned;
+use std::pin::Pin;
+
+struct Fut { buf: [u8; 16], _pin: PhantomPinned }
+
+fn fill(p: Pin<&mut Fut>, b: u8) {
+    p.buf[0] = b; // 无 DerefMut，投影不成立
+}
+```
+
+rustc 1.97.0 实测：`error[E0594]: cannot assign to data in dereference of Pin<&mut Fut>`。
+
+**修正（当前可用）**：`pin-project` 的 `project()` 生成经过审定的 unsafe 投影；手写时必须标注结构钉扎字段并保证不移动数据：
+
+```rust
+fn fill(p: Pin<&mut Fut>, b: u8) {
+    // SAFETY: 仅投影到非结构钉扎字段 buf，不移动被钉扎数据
+    let this = unsafe { p.get_unchecked_mut() };
+    this.buf[0] = b;
+}
+```
 
 ## 参考
 

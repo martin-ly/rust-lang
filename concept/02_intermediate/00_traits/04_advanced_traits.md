@@ -31,9 +31,33 @@
 > [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) ·
 > [Wikipedia — Type Class](https://en.wikipedia.org/wiki/Type_class)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((高级Trait))
+    关联类型
+      占位类型
+      输出类型
+    泛型参数
+      类型参数化
+      默认参数
+    高阶约束
+      HRTB
+      生命周期绑定
+    标记Trait
+      Send Sync
+      Sized
+    超级Trait
+      约束继承
+    特化
+      未稳定
+```
+
 ## 📑 目录
 
 - [高级 Trait 主题：从关联类型到特化](#高级-trait-主题从关联类型到特化)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 关联类型（Associated Types）](#11-关联类型associated-types)

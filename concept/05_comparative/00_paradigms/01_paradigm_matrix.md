@@ -1241,4 +1241,3 @@ fn read_config(path: &str) -> Result<String, std::io::Error> {
 ```go
 // Go: 错误处理依赖编码惯例，忽略 err 也能编译
 // data, _ := os.ReadFile("config.toml") // 合法但危险
-

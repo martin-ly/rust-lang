@@ -799,6 +799,7 @@ graph TD
 
 ## 相关概念
 
+- [对应测验](../13_quizzes/01_quiz_networking_async_ecosystem.md) — 网络与异步生态（Web 框架、Tokio/Glommio 运行时、QUIC/HTTP-3、eBPF）
 - [Async/Await](../../03_advanced/01_async/01_async.md) — 异步编程基础
 - [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) — 并发模型
 - [Traits](../../02_intermediate/00_traits/01_traits.md) — Trait 系统与泛型（Generics）约束

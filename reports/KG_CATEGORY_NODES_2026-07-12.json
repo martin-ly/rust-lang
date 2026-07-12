@@ -29,26 +29,16 @@
     "ex:UnsafeAbstractionSoundness"
   ],
   "before": {
-    "ex:dependsOn": 700,
-    "ex:entails": 671,
-    "ex:relatedTo": 4405,
-    "ex:equivalentTo": 9,
-    "ex:refines": 12,
-    "ex:counterExample": 5,
-    "ex:instanceOf": 18,
-    "ex:appliesTo": 14,
-    "ex:mutexWith": 5
+    "ex:dependsOn": 729,
+    "ex:entails": 695,
+    "ex:relatedTo": 4913
   },
   "after": {
-    "ex:dependsOn": 700,
-    "ex:entails": 671,
-    "ex:relatedTo": 4405,
-    "ex:equivalentTo": 9,
-    "ex:refines": 12,
-    "ex:counterExample": 5,
-    "ex:instanceOf": 29,
-    "ex:appliesTo": 17,
-    "ex:mutexWith": 5
+    "ex:dependsOn": 729,
+    "ex:entails": 695,
+    "ex:relatedTo": 4913,
+    "ex:instanceOf": 11,
+    "ex:appliesTo": 3
   },
   "changes_detail": [
     {

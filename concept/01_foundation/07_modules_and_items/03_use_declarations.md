@@ -60,6 +60,7 @@
   - [三、路径形式](#三路径形式)
   - [四、`pub use` 重导出](#四pub-use-重导出)
   - [五、嵌套导入与 Glob](#五嵌套导入与-glob)
+    - [5.1 Rust 1.97：尾随 `self` 的放宽](#51-rust-197尾随-self-的放宽)
   - [六、反例与边界测试](#六反例与边界测试)
     - [6.1 导入私有项](#61-导入私有项)
     - [6.2 名称冲突](#62-名称冲突)
@@ -172,6 +173,46 @@ use std::fmt::*;
 > - 优先使用具名导入，明确依赖。
 > - glob 导入适合 prelude 模式或测试模块中的 `super::*`。
 > - 避免在库代码顶部使用 `use crate::*`，这会隐藏依赖关系。
+
+---
+
+### 5.1 Rust 1.97：尾随 `self` 的放宽
+
+> (Source: [Rust Reference — Use Declarations — `self`](https://doc.rust-lang.org/reference/items/use-declarations.html)，curl 200 实测 2026-07-12；[Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/)："Allow trailing `self` in imports in more cases")
+
+`use` 路径的**最后一个段**可以是 `self`，形如 `P::self`。Rust 1.97.0 起，尾随 `self` 的前缀路径 `P` 不再限于模块——**枚举（Enum）、Trait 等类型命名空间实体**也可作为 `self` 的父路径，与花括号内 `self` 的父路径规则对齐：
+
+| 写法 | 等价于 | 1.96 及更早 | 1.97.0+ |
+|:---|:---|:---:|:---:|
+| `use m::self as _;` | `use m::{self as _};` | ✅（父为模块） | ✅ |
+| `use m::E::self;` | `use m::E::{self};` | ❌ 仅花括号形式可用 | ✅ |
+| `use m::E::self as E2;` | `use m::E::{self as E2};` | ❌ | ✅ |
+| `use S::self;`（`S` 为结构体） | — | ❌ E0432 | ❌ 结构体仍不能作为 `self` 父路径 |
+
+```rust
+// edition = "2024", rust = "1.97" —— 尾随 self 用于枚举父路径（rustc 1.97.0 实测通过）
+mod m {
+    pub enum E { V1, V2 }
+}
+
+use m::E::self;   // 1.97：尾随 self 可直接作用于枚举，等价于 use m::E::{self};
+use m::E::V1;     // 变体仍需单独导入
+
+fn main() {
+    let _ = E::V2;  // E 已由尾随 self 引入
+    let _ = V1;
+}
+```
+
+反例（1.97 后仍然错误）：
+
+```rust,compile_fail
+struct S;
+use S::self; // ❌ E0432：`S` is a struct, not a module —— 结构体不是 self 的合法父路径
+fn main() {}
+```
+
+> **关键洞察**: 该放宽是**语法糖对齐**而非语义变化——`P::self` 与 `P::{self}` 的等价关系（Reference `items.use.self.trailing`）从模块父路径推广到枚举/Trait 父路径；`self` 只从父实体的**类型命名空间**建立绑定这一规则不变。
 
 ---
 

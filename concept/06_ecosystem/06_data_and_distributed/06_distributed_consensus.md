@@ -63,6 +63,7 @@
     - [9.1 边界测试：网络分区导致脑裂（安全性违反）](#91-边界测试网络分区导致脑裂安全性违反)
     - [9.2 边界测试：Leader 崩溃后未提交的日志丢失（活性违反）](#92-边界测试leader-崩溃后未提交的日志丢失活性违反)
     - [9.3 边界测试：拜占庭节点发送矛盾消息（安全性违反）](#93-边界测试拜占庭节点发送矛盾消息安全性违反)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [相关概念](#相关概念)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Raft 共识算法的核心状态有哪三种？（理解层）](#测验-1raft-共识算法的核心状态有哪三种理解层)
@@ -737,6 +738,37 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 > **来源**: [PBFT Safety Proof](https://pmg.csail.mit.edu/papers/osdi99.pdf) §4 · [Byzantine Fault Tolerance](https://en.wikipedia.org/wiki/Byzantine_fault)
 
 ---
+
+## ⚠️ 反例与陷阱
+
+**陷阱：Raft 状态跨线程裸引用共享**。共识节点的 `term`/`voted_for` 更新必须串行化；试图让两个线程同时持 `&mut` 修改同一字段，编译期即被拒绝：
+
+```rust,compile_fail
+struct NodeState { term: u64, voted_for: Option<u64> }
+
+fn elect(state: &mut NodeState) {
+    std::thread::scope(|s| {
+        s.spawn(|| { state.term += 1; });
+        s.spawn(|| { state.term += 1; }); // 第二个 &mut
+    });
+}
+```
+
+rustc 1.97.0 实测：`error[E0499]: cannot borrow *state.term as mutable more than once at a time`。
+
+**修正**：`Arc<Mutex<NodeState>>` 共享所有权 + 互斥；注意持有锁期间不得做网络 I/O，否则选举超时会被锁竞争放大：
+
+```rust
+use std::sync::{Arc, Mutex};
+fn elect(state: Arc<Mutex<NodeState>>) {
+    std::thread::scope(|s| {
+        for _ in 0..2 {
+            let st = Arc::clone(&state);
+            s.spawn(move || { st.lock().unwrap().term += 1; });
+        }
+    });
+}
+```
 
 ## 相关概念
 

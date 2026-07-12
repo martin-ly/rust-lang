@@ -333,6 +333,8 @@ graph TD
 
 **关键洞察**：tokio 的 `Runtime` 是 Rust **所有权（Ownership） + Send/Sync + Pin** 三大概念的工程化容器。任务（`Task`）必须满足 `Send` 才能跨线程调度，`Pin` 保证自引用（Reference）状态机内存安全（Memory Safety）。
 
+> **深度见**: [Tokio 运行时内部机制](../04_web_and_networking/10_tokio_runtime_internals.md)（架构/驱动/blocking 池/任务句柄/select!/可观测性的机制权威页）。
+
 > **来源**: [tokio.rs](https://tokio.rs) · [Tokio Internals] · 可信度: ✅
 
 ### 4.3 Web 框架

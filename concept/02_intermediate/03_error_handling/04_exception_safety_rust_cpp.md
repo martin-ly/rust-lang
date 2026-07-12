@@ -244,3 +244,9 @@ f: S -> Result<S', E>
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/thiserror — 生态权威 API 文档](https://docs.rs/thiserror) · [docs.rs/anyhow — 生态权威 API 文档](https://docs.rs/anyhow)
+
+---
+
+## 相关概念
+
+- [对应测验](../09_quizzes/30_quiz_cpp_rust_foundations.md) — C/C++ → Rust 工程层基础对比（RTTI、宏、异常安全、构造、move 语义）

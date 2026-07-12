@@ -43,6 +43,7 @@
     - [4.1 安全边界](#41-安全边界)
     - [4.2 设计决策](#42-设计决策)
   - [五、演进路线](#五演进路线)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [参考](#参考)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Arbitrary Self Types 允许什么目前不允许的操作？（理解层）](#测验-1arbitrary-self-types-允许什么目前不允许的操作理解层)
@@ -299,6 +300,32 @@ impl<T> TaggedPtr<T> {
 | 稳定化 | 未开始 | 2027+ |
 
 ---
+
+## ⚠️ 反例与陷阱
+
+**陷阱：稳定 Rust 使用非白名单接收器类型**。`self` 参数在稳定版只接受 `Self`/`&Self`/`&mut Self` 及 `Box`/`Rc`/`Arc`/`Pin` 包装；自定义智能指针（如 `NonNull<Self>`）做接收器正是 `arbitrary_self_types` 尚未稳定的领域：
+
+```rust,compile_fail
+use std::ptr::NonNull;
+
+struct Node { value: i32 }
+
+impl Node {
+    fn get(self: NonNull<Self>) -> i32 { // 稳定版非法接收器
+        unsafe { self.as_ref().value }
+    }
+}
+```
+
+rustc 1.97.0（stable）实测：`error[E0307]: invalid self parameter type: NonNull<Node>`。
+
+**修正（稳定方案）**：退化为显式关联函数，或改用已稳定的 `Rc<Self>`/`Arc<Self>` 接收器：
+
+```rust
+impl Node {
+    fn get(this: NonNull<Self>) -> i32 { unsafe { this.as_ref().value } }
+}
+```
 
 ## 参考
 

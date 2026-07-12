@@ -302,6 +302,27 @@ async fn read_with_timeout(mut stream: TcpStream) -> std::io::Result<Vec<u8>> {
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**陷阱：用 `==` 比较认证 token/MAC**。`slice == slice` 逐字节比较、遇到首个差异立即返回，响应时间的差异形成时序侧信道，攻击者可逐字节爆破 HMAC 或会话 token。
+
+```rust
+fn verify_bad(provided: &[u8], expected: &[u8]) -> bool {
+    provided == expected // 提前退出 → 时序泄露
+}
+
+// 修正：XOR 折叠，比较路径长度恒定（生产用 subtle::ConstantTimeEq）
+fn verify_good(provided: &[u8], expected: &[u8]) -> bool {
+    let mut diff = (provided.len() ^ expected.len()) as u8;
+    for (a, b) in provided.iter().zip(expected.iter()) {
+        diff |= a ^ b;
+    }
+    diff == 0
+}
+```
+
+rustc 1.97.0 实测：两者逻辑结果一致（`assert_eq!` 通过），但反例版本的比较耗时随匹配前缀长度线性增长——时序差异无法在单元测试中直接断言，需用基准测试或侧信道分析工具（如 `dudect`）观测。生产代码应使用 `subtle` crate 的 `ct_eq`，它额外保证编译器不会把 XOR 折叠优化回提前退出。
+
 ## 相关概念
 
 - [Security & Cryptography](../07_security_and_cryptography/02_security_cryptography.md)

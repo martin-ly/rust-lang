@@ -20,6 +20,7 @@
 **变更日志**:
 
 - v1.0 (2026-07-12): 初始版本 — 六类 async 语义边界全景（await 点/取消/Pin/Send/executor/async trait），三段式（边界陈述·反例·判定条件）+ 判定总图 + 失效模式总表
+- v1.1 (2026-07-12): §9 边界陈述中的解决方案谱系升格至 [Async Trait 对象安全](13_async_trait_object_safety.md)（canonical 迁移：本节保留边界三段式，谱系/选型矩阵改为链接）；§12 交叉引用表补 12/13 两页
 
 ---
 
@@ -366,8 +367,9 @@ trait 中的 `async fn`（1.75 起稳定，RPITIT） desugar 为返回 `impl Fut
 
 - **边界一侧（静态分发）**: `T: Trait` 泛型调用 ⟹ 每个 impl 有独立 Future 类型，单态化（Monomorphization），零成本。
 - **边界另一侧（dyn Trait）**: `impl Future` 使关联返回类型**不可命名** ⟹ trait 非对象安全，`Box<dyn Trait>` 直接不可用。
-- **兼容方案**: `#[async_trait]`（宏改写为 `Pin<Box<dyn Future + Send>>`，每次调用一次堆分配）或手写 `fn f(&self) -> Pin<Box<dyn Future<Output = T> + Send + '_>>`；`dynosaur` 的 erased-type 路线。
-- **Send 边界叠加**: `async fn` in trait 默认捕获 `&self` 生命周期（Lifetimes）；生成的 Future 是否 Send 取决于实现——`async_trait` 默认 `+ Send`，可用 `?Send` 关闭。
+- **Send 边界叠加**: `async fn` in trait 默认捕获 `&self` 生命周期（Lifetimes）；生成的 Future 是否 Send 取决于实现——装箱方案默认 `+ Send`。
+
+> **解决方案谱系（canonical 链接）**: dyn 兼容的完整方案谱系（`async_trait` / 手写 boxed / enum 分派 / RTN / dynosaur / 原生 dyn async 探索）、开销分析与选型矩阵（场景×方案×开销×MSRV）统一维护在 [Async Trait 对象安全](13_async_trait_object_safety.md)；本节只保留边界判定，不重复谱系（AGENTS.md §2 Canonical 规则）。
 
 ### 9.2 反例
 
@@ -451,6 +453,11 @@ flowchart TD
 | [01_async.md](01_async.md) | async/await 概念推导、语法糖展开、Future trait | 概念定义的来源，本页不重复 |
 | [05_async_cancellation_safety.md](05_async_cancellation_safety.md) | 取消安全的形式化、Tokio API 安全性判定目录 | §五 的全部深入内容指向该页 |
 | [08_pin_unpin.md](08_pin_unpin.md) | Pin/Unpin 机制推导、投影规则 | §六 的机制细节指向该页 |
+| [Stream 代数与背压](09_stream_algebra_and_backpressure.md) | Stream/Iterator 对偶与背压形式模型 | 本页 §2 背压边界的代数纵深 |
+| [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) | 调度器公平性与饥饿分析 | 本页 §5 运行时边界的调度纵深 |
+| [Pin 投射反例集](11_pin_projection_counterexamples.md) | unsafe 投射 UB 目录 | 本页 §3 Pin 边界的反例全集 |
+| [Waker 契约深度解析](12_waker_contract_deep_dive.md) | RawWakerVTable 实现与契约违反目录 | 本页 §八 executor 边界的实现层纵深 |
+| [Async Trait 对象安全](13_async_trait_object_safety.md) | dyn 兼容方案谱系与选型矩阵 | 本页 §九 的解决方案谱系权威页（v1.1 升格） |
 | [04_future_and_executor_mechanisms.md](04_future_and_executor_mechanisms.md) | executor/waker 机制 | §八 的机制细节指向该页 |
 | [02_closure_types.md](../../02_intermediate/04_types_and_conversions/02_closure_types.md) | 闭包类型与捕获规则 | async 闭包边界的类型基础 |
 | [01_traits.md](../../02_intermediate/00_traits/01_traits.md) | trait 与对象安全 | dyn 兼容边界（§九）的 trait 基础 |

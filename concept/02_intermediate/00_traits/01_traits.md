@@ -57,9 +57,34 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((Trait系统))
+    本质
+      共享行为
+      接口抽象
+    构成
+      方法签名
+      关联类型
+      默认实现
+    约束
+      trait bound
+      where子句
+    多态
+      静态分发
+      动态分发
+    实现规则
+      孤儿规则
+      一致性
+      重叠禁止
+```
+
 ## 📑 目录
 
 - [Traits（Trait 系统）](#traitstrait-系统)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 对齐定义](#11-wikipedia-对齐定义)
@@ -1694,6 +1719,7 @@ fn notify<T: Summary>(item: &T) { ... }
 
 ## 十、相关概念链接
 
+- [对应测验](../01_generics/04_quiz_traits_and_generics.md) — Trait 与泛型（bound、关联类型、trait 对象、单态化）
 - **上层概念**: [Type System Basics](../../01_foundation/02_type_system/01_type_system.md)
 - **下层概念**: [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md) · [Generics](../01_generics/01_generics.md)
 

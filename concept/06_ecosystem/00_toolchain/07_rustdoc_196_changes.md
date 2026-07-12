@@ -1,11 +1,10 @@
-> **内容分级**: [专家级]
+# Rustdoc 1.96–1.97 变更
 
-# Rustdoc 1.96 变更
-
-> **EN**: Rustdoc 1.96 Changes
-> **Summary**: Rustdoc changes stabilized in Rust 1.96, including `target.'cfg(..)'.rustdocflags` configuration, deprecation rendering improvements, sidebar navigation enhancements, and `missing_doc_code_examples` lint updates.
+> **EN**: Rustdoc 1.96–1.97 Changes
+> **Summary**: Rustdoc changes stabilized in Rust 1.96 (`target.'cfg(..)'.rustdocflags`, deprecation rendering, sidebar navigation, `missing_doc_code_examples` lint) and Rust 1.97 (`--emit` output control, `--remap-path-prefix` / `--remap-path-scope` path remapping). 1.97 items verified against local rustdoc 1.97.0.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [进阶 / 工程]
+> **内容分级**: [专家级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
@@ -13,7 +12,7 @@
 > **前置概念**: · [Rust vs Python](../../05_comparative/02_managed_languages/02_rust_vs_python.md) [Toolchain](01_toolchain.md) · [Documentation](../09_testing_and_quality/02_documentation.md) · [Macro Patterns](../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md)
 > **后置概念**: [Rust Version Tracking](../../07_future/00_version_tracking/01_rust_version_tracking.md) · [Rust 1.96 Stabilized](../../07_future/00_version_tracking/rust_1_96_stabilized.md)
 > **深度参考**: [`docs/09_toolchain/09_rustdoc_196_improvements.md`](../../../docs/09_toolchain/09_rustdoc_196_improvements.md) — rustdoc 渲染细节与弃用注释示例
-> **版本状态**: 当前稳定 patch 为 **1.97.0**；特性集与 Rust 1.96.0 一致。
+> **版本状态**: 当前稳定 patch 为 **1.97.0**。第二至六节为 Rust 1.96.0 特性集；**第七节为 Rust 1.97.0 新增的 rustdoc 稳定项**（`--emit`、`--remap-path-prefix`），已用本地 `rustdoc 1.97.0 (2d8144b78 2026-07-07)` 实测。
 
 ---
 
@@ -26,7 +25,7 @@
 
 ## 📑 目录
 
-- [Rustdoc 1.96 变更](#rustdoc-196-变更)
+- [Rustdoc 1.96–1.97 变更](#rustdoc-196197-变更)
   - [📑 目录](#-目录)
   - [一、特性总览](#一特性总览)
   - [二、`target.'cfg(..)'.rustdocflags`](#二targetcfgrustdocflags)
@@ -46,6 +45,10 @@
     - [5.3 启用方式](#53-启用方式)
     - [5.4 与 `cargo test --doc` 的关系](#54-与-cargo-test---doc-的关系)
   - [六、迁移建议](#六迁移建议)
+  - [七、Rust 1.97 rustdoc 稳定项：`--emit` 与路径重映射](#七rust-197-rustdoc-稳定项--emit-与路径重映射)
+    - [7.1 `--emit` 输出格式控制](#71---emit-输出格式控制)
+    - [7.2 `--remap-path-prefix` 与 `--remap-path-scope`](#72---remap-path-prefix-与---remap-path-scope)
+    - [7.3 典型应用场景](#73-典型应用场景)
 
 ---
 
@@ -225,6 +228,60 @@ pub fn max(a: i32, b: i32) -> i32 {
 4. **关注 docs.rs 行为**
    - docs.rs 默认会读取 `.cargo/config.toml` 中的 `rustdocflags`。
    - 确保新配置在本地和 docs.rs 上一致。
+
+---
+
+## 七、Rust 1.97 rustdoc 稳定项：`--emit` 与路径重映射
+
+Rust 1.97 将两个长期停留在 nightly 的 rustdoc 标志稳定化。以下行为均以本地 `rustdoc 1.97.0 (2d8144b78 2026-07-07)` 实测。
+
+### 7.1 `--emit` 输出格式控制
+
+`--emit` 允许显式选择 rustdoc 的产物类型。1.97 stable 接受三个取值（注意：**没有 `html` 这个值**）：
+
+| 取值 | 产物 | 实测结果 |
+|:---|:---|:---|
+| `html-static-files` | 仅静态资源（CSS/JS/字体，输出为 `static.files/`） | ✅ `rustdoc --emit=html-static-files src/lib.rs -o out` 生成 `static.files` |
+| `html-non-static-files` | 仅 HTML 页面（不含静态资源） | ✅ 生成 `crates.js`、`help.html`、模块目录 |
+| `dep-info` | Makefile 风格的依赖文件（`lib.d`） | ✅ 生成 `lib.d`，内容形如 `lib.d: src/lib.rs` |
+
+```bash
+# 分离产物：文档页面与静态资源可分别缓存/部署
+rustdoc --emit=html-non-static-files src/lib.rs --edition 2024 -o target/doc-pages
+rustdoc --emit=html-static-files     src/lib.rs --edition 2024 -o target/doc-assets
+
+# 依赖信息：接入外部构建系统（make/ninja 增量重建文档）
+mkdir -p target/doc-dep
+rustdoc --emit=dep-info src/lib.rs --edition 2024 -o target/doc-dep
+```
+
+实测注意点：
+
+- `--emit=dep-info` 要求 `-o` 指定的目录**已存在**，否则报 `error writing dependencies`（os error 3）。
+- 不传 `--emit` 时行为不变（默认生成完整 HTML 文档）。
+- `rustdoc --emit=html` 会报 `unrecognized emission type: html`——1.97 没有 `html` 这个 emit 值，组合产物需同时列出所需类型（逗号分隔）。
+
+### 7.2 `--remap-path-prefix` 与 `--remap-path-scope`
+
+与 `rustc` 同名标志对齐：在生成文档中把源码路径前缀替换为占位值，服务于可重现构建与路径隐私。配套稳定的 `--remap-path-scope` 控制重映射作用域。
+
+```bash
+rustdoc src/lib.rs --edition 2024 \
+    --remap-path-prefix=/home/ci/work=/src \
+    --remap-path-scope=all \
+    -o target/doc
+```
+
+`--remap-path-scope` 取值：`macro`、`diagnostics`、`debuginfo`、`coverage`、`object`、`all`（rustdoc 1.97 `--help` 实测）。
+
+### 7.3 典型应用场景
+
+| 场景 | 组合方式 |
+|:---|:---|
+| **可重现文档构建** | `--remap-path-prefix` 消除构建机路径差异，产物字节级一致，便于 CI 缓存校验 |
+| **文档产物分层部署** | `--emit=html-non-static-files` 页面进 CDN 频繁更新层，`html-static-files` 静态资源长缓存 |
+| **外部增量构建** | `--emit=dep-info` 输出 `.d` 文件，make/ninja 据此决定文档是否需要重建 |
+| **隐私发布** | 重映射去掉开发者本机路径，避免泄露目录结构 |
 
 ---
 

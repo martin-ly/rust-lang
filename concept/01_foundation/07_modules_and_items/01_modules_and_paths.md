@@ -29,6 +29,31 @@
 > [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines//naming.html) ·
 > [RFC 2126 — Uniform Paths](https://rust-lang.github.io/rfcs//2126-path-clarity.html)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((模块与路径))
+    代码组织
+      mod声明
+      文件映射
+      crate根
+    路径
+      绝对路径
+      相对路径
+      self与super
+    可见性
+      pub修饰
+      pub(crate)
+      私有默认
+    引入
+      use声明
+      重导出
+    工作区
+      workspace
+      多crate
+```
+
 ## 📑 目录
 
 - [模块系统与路径：Rust 的代码组织哲学](#模块系统与路径rust-的代码组织哲学)
@@ -510,6 +535,7 @@ graph TD
 
 ## 相关概念
 
+- [对应测验](../11_quizzes/26_quiz_modules_testing.md) — 模块系统与测试（mod/use/pub、可见性、单元/集成测试）
 - **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/01_type_system.md)
 - **下层概念**: [Crate Ecosystem](../../06_ecosystem/02_core_crates/01_core_crates.md) · [Workspace](../../06_ecosystem/00_toolchain/01_toolchain.md)
 

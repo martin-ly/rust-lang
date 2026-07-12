@@ -473,6 +473,9 @@ graph TD
 ---
 
 ## 相关概念
+
+- [对应测验](../05_quizzes/01_quiz_meta_framework.md) — 元层框架与知识体系架构（L0–L7 分层、Bloom 映射、A/S/P 标记、canonical 规则）
+
 >
 >
 

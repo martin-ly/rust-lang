@@ -24,9 +24,34 @@
 > [RFC 2361 — catch_panic](https://rust-lang.github.io/rfcs//2361-dbg-macro.html) ·
 > [Wikipedia — Crash-only Software](https://en.wikipedia.org/wiki/Crash-only_software)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((Panic与Abort))
+    Panic机制
+      栈展开
+      线程隔离
+      panic钩子
+    Abort
+      直接终止
+      无清理
+    配置
+      panic策略
+      捕获展开
+    触发源
+      显式panic
+      unwrap
+      索引越界
+    设计取舍
+      库返回Result
+      应用可panic
+```
+
 ## 📑 目录
 
 - [Panic 与 Abort：不可恢复错误的处理机制](#panic-与-abort不可恢复错误的处理机制)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Panic 的语义](#11-panic-的语义)

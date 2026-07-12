@@ -45,6 +45,7 @@
     - [编译错误示例](#编译错误示例)
     - [3.4 边界测试：C 结构体布局不匹配（编译错误 / 运行时 UB）](#34-边界测试c-结构体布局不匹配编译错误--运行时-ub)
     - [3.5 边界测试：裸指针生命周期与 FFI 边界（编译错误）](#35-边界测试裸指针生命周期与-ffi-边界编译错误)
+    - [5.1 Rust 1.97 注记：`ffi::FromBytesUntilNulError` 实现 `Copy`](#51-rust-197-注记ffifrombytesuntilnulerror-实现-copy)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念](#相关概念)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -525,6 +526,24 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 > **修正**: C 函数返回的裸指针没有生命周期（Lifetimes）信息。将其转换为 Rust 引用（Reference）时，必须显式标注生命周期（通常是 `'a` 由调用者提供）。若 C 函数返回的指针指向局部变量或已释放内存，Rust 引用将悬垂——这是 unsafe 边界，编译器无法检测。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ---
+
+### 5.1 Rust 1.97 注记：`ffi::FromBytesUntilNulError` 实现 `Copy`
+
+> **Rust 1.97.0 注记**：`std::ffi::FromBytesUntilNulError`（`CStr::from_bytes_until_nul` 的错误类型）实现了 `Copy`（[release notes — Stabilized APIs](https://releases.rs/docs/1.97.0/)，curl 200 实测 2026-07-12）。该错误类型是无字段单元结构，补上 `Copy` 使其与 FFI 边界其他零大小错误类型的行为一致——错误值可按值自由复制/传递，无需 `clone()` 或引用包装：
+
+```rust
+use std::ffi::FromBytesUntilNulError;
+
+fn takes_copy<T: Copy>(_: T) {}
+
+fn demo(e: Option<FromBytesUntilNulError>) {
+    if let Some(err) = e {
+        takes_copy(err); // 1.97：满足 Copy 约束
+    }
+}
+```
+
+（rustc 1.97.0 `--edition 2024` 实测编译通过。）工程影响面小但消除了一个不一致：`from_bytes_until_nul` 是解析 C 字符串的推荐入口（比 `from_bytes_with_nul` 容忍缺失的 NUL 结尾），其错误类型现在可无损进入要求 `Copy` 的泛型错误累加器。
 
 ## 六、来源与延伸阅读
 

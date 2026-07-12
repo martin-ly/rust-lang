@@ -694,3 +694,9 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/effing-mad — 生态权威 API 文档（Rust 效果处理 effect handlers 实验 crate）](https://docs.rs/effing-mad)（2026-07-12 验证 HTTP 200）
+
+---
+
+## 相关概念
+
+- [对应测验](../11_quizzes/29_quiz_pl_foundations.md) — 通用 PL 基座（变量模型、求值策略、效果、控制流、数据抽象）

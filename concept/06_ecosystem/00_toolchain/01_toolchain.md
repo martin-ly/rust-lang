@@ -1452,6 +1452,7 @@ graph TD
 
 ## 十三、相关概念链接
 
+- [对应测验](06_quiz_toolchain.md) — Rust 工具链（Cargo、Clippy、Miri、rustfmt、发布流程）
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | 所有权（Ownership） | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 编译器检查根基 |

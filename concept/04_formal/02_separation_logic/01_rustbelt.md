@@ -1089,6 +1089,7 @@ graph TD
 
 ## 十二、相关概念链接
 
+- [对应测验](../04_model_checking/06_quiz_formal_methods.md) — 形式化方法（分离逻辑、RustBelt、类型安全、验证工具链）
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | 并发 | [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md) | 验证对象 · CSL 形式化基础 · L3 并发映射 |

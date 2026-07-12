@@ -838,6 +838,7 @@ fn weak_hash_password(password: &str) -> String {
 
 ## 相关概念
 
+- [对应测验](../13_quizzes/03_quiz_security_testing.md) — 安全与测试生态（Kerckhoffs 原则、crypto 原语、cargo vet/audit、分层测试）
 - [安全实践](01_security_practices.md) — 防御性编程、安全模式
 - [网络协议](../04_web_and_networking/07_network_protocols.md) — QUIC/HTTP-3、TLS 底层
 - [区块链与智能合约安全](../11_domain_applications/01_blockchain.md) — 链上密码学应用
@@ -923,4 +924,3 @@ SHA-256 设计为快速计算，易被 GPU/ASIC 暴力破解。Argon2 等是"密
 | Security & Cryptography（安全与密码学） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Security & Cryptography（安全与密码学） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Security & Cryptography（安全与密码学） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-

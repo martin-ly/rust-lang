@@ -42,6 +42,7 @@
   - [四、ABI 与稳定化阻塞项](#四abi-与稳定化阻塞项)
   - [五、反命题与边界分析](#五反命题与边界分析)
   - [六、与既有概念的关系](#六与既有概念的关系)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [权威来源索引](#权威来源索引)
 
 ## 一、动机与定位
@@ -128,6 +129,26 @@ RFC 3453 明确以下未决项是稳定化的主要阻塞（§Unresolved questio
 | 并列概念 | [Complex Numbers 预研](38_complex_numbers_preview.md)（数值生态扩展） |
 | 约束来源 | [Application Binary Interface](../../04_formal/05_rustc_internals/05_application_binary_interface.md) · [Constant Evaluation](../../04_formal/03_operational_semantics/07_constant_evaluation.md) |
 | 演进跟踪 | [Version Tracking](../00_version_tracking/01_rust_version_tracking.md) |
+
+## ⚠️ 反例与陷阱
+
+**陷阱：在稳定工具链使用 `f16`/`f128`**。两个类型仍是 nightly 独占（ABI 与 codegen 未就绪），稳定编译器按「未稳定特性」拒绝：
+
+```rust,compile_fail
+fn quantize(x: f16) -> f16 {
+    x * 0.5
+}
+```
+
+rustc 1.97.0（stable）实测：`error[E0658]: the type f16 is unstable`。
+
+**修正（稳定方案）**：存储/传输用 `half::f16` crate（位布局兼容 IEEE 754 binary16），计算路径提升到 `f32`；需要 `f128` 精度的科学计算用 `f64` 或任意精度库，待稳定后再迁移：
+
+```rust
+fn quantize(x: f32) -> f32 { // half::f16::to_f32() 转换后计算
+    x * 0.5
+}
+```
 
 ## 权威来源索引
 

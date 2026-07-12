@@ -237,16 +237,41 @@ def extract_sections(content: str) -> dict[str, list[str]]:
         "source_relations": [],
     }
 
+    # 关键词 → 表征类型。按子串匹配章节标题（`kw in title`），覆盖各层历史遗留的
+    # 多种标题写法（如「⚠️ 反例与陷阱」「四、反命题与边界分析」「三、选型决策矩阵」）。
+    # 注意「示例」会匹配「对应代码示例/实际应用示例」，「场景」匹配「实际应用场景」，
+    # 均为 03/04 atlas 期望的宽口径信号。
     keyword_map = {
         "思维导图": "mindmap",
         "决策树": "decision_tree",
+        "决策矩阵": "decision_tree",
+        "判定树": "decision_tree",
+        "判断推理": "decision_tree",
+        "选型": "decision_tree",
+        "何时用": "decision_tree",
+        "场景": "decision_tree",
         "边界判定树": "boundary_tree",
         "属性矩阵": "attribute_matrix",
         "概念定义矩阵": "definition_matrix",
-        "示例与反例": "examples_counterexamples",
+        "示例": "examples_counterexamples",
+        "反例": "examples_counterexamples",
+        "陷阱": "examples_counterexamples",
+        "边界测试": "examples_counterexamples",
+        "误用": "examples_counterexamples",
+        "易错": "examples_counterexamples",
         "定理推理树": "theorem_tree",
+        "推理链": "theorem_tree",
+        "定理链": "theorem_tree",
+        "反命题树": "theorem_tree",
+        "证明树": "theorem_tree",
+        "逆向推理": "theorem_tree",
+        "反向推理": "theorem_tree",
         "多维矩阵": "multidim_matrix",
         "相关概念关联": "related_concepts",
+        "相关概念": "related_concepts",
+        "相关主题": "related_concepts",
+        "相关资源": "related_concepts",
+        "延伸阅读": "related_concepts",
         "知识来源关系": "source_relations",
     }
 
@@ -296,6 +321,42 @@ def extract_tables(content: str) -> list[list[list[str]]]:
         if rows:
             tables.append(rows)
     return tables
+
+
+def extract_representation_signals(content: str, sections: dict[str, list[str]],
+                                   diagrams: list[str]) -> dict[str, Any]:
+    """抽取 03/04/06/09 atlas 生成所需的结构化表征信号。
+
+    - compile_fail_count: ```rust compile_fail 代码块数（反例的强信号）
+    - mermaid_decision_count: 含菱形判定节点 `{...}` 的 mermaid 图数（决策树信号）
+    - implies_count: 定理链符号 ⟹ 出现次数（推理链信号）
+    - example/decision/reasoning_sections: 命中章节标题清单（去重保序）
+    - related_links: 「相关概念/延伸阅读」等章节正文中的 markdown 链接
+      （层间映射 06 的跨层引用扩展来源）
+    """
+
+    def titles(key: str) -> list[str]:
+        seen: list[str] = []
+        for sec in sections.get(key, []):
+            t = re.sub(r"^[一二三四五六七八九十零]+[、.．]\s*", "", sec["title"]).strip()
+            t = re.sub(r"^\d+(?:\.\d+)*\s+", "", t).strip()
+            if t and t not in seen:
+                seen.append(t)
+        return seen
+
+    related_links: list[dict[str, str]] = []
+    for sec in sections.get("related_concepts", []):
+        related_links.extend(extract_links(sec["body"]))
+
+    return {
+        "compile_fail_count": len(re.findall(r"```rust[^\n`]*compile_fail", content)),
+        "mermaid_decision_count": sum(1 for d in diagrams if re.search(r"\w+\s*\{[^}]*\}", d)),
+        "implies_count": content.count("\u27f9"),  # ⟹
+        "example_sections": titles("examples_counterexamples"),
+        "decision_sections": titles("decision_tree") + titles("boundary_tree"),
+        "reasoning_sections": titles("theorem_tree"),
+        "related_links": related_links,
+    }
 
 
 def classify_source_tier(source: dict[str, str]) -> str:
@@ -351,6 +412,7 @@ def process_file(path: Path) -> dict[str, Any] | None:
     diagrams = extract_mermaid_diagrams(content)
     code_blocks = extract_code_blocks(content)
     tables = extract_tables(content)
+    signals = extract_representation_signals(content, sections, diagrams)
 
     # Classify sources
     source_tiers: dict[str, int] = {}
@@ -377,6 +439,7 @@ def process_file(path: Path) -> dict[str, Any] | None:
         "sources": meta["sources"],
         "source_tiers": source_tiers,
         "sections": sections,
+        "signals": signals,
         "mermaid_diagrams": diagrams,
         "code_blocks_count": len(code_blocks),
         "code_blocks_sample": code_blocks[:3],
@@ -426,6 +489,17 @@ def main() -> None:
     print("\nSection representation counts:")
     for sec, cnt in sorted(section_counts.items(), key=lambda x: -x[1]):
         print(f"  {sec}: {cnt}")
+
+    # 表征信号统计（03/04/06/09 atlas 生成依据）
+    sig_stats = {
+        "example_signal(节或compile_fail)": sum(1 for c in concepts if c["signals"]["example_sections"] or c["signals"]["compile_fail_count"]),
+        "decision_signal(节或mermaid判定)": sum(1 for c in concepts if c["signals"]["decision_sections"] or c["signals"]["mermaid_decision_count"]),
+        "reasoning_signal(节或定理链)": sum(1 for c in concepts if c["signals"]["reasoning_sections"] or c["theorem_chain"]),
+        "related_links(相关概念节)": sum(1 for c in concepts if c["signals"]["related_links"]),
+    }
+    print("\nRepresentation signal counts:")
+    for k, v in sig_stats.items():
+        print(f"  {k}: {v}")
 
 
 if __name__ == "__main__":

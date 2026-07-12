@@ -56,10 +56,35 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((结构体))
+    三种形式
+      命名字段
+      元组结构体
+      单元结构体
+    构造
+      字面量
+      更新语法
+      字段简写
+    可见性
+      字段私有
+      pub字段
+    模式
+      newtype
+      构建者
+    边界
+      部分移动
+      递归装箱
+```
+
 ## 📑 目录
 
 - [Structs（结构体）](#structs结构体)
   - [认知路径](#认知路径)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心命题](#一核心命题)
   - [二、三种结构体](#二三种结构体)
@@ -73,6 +98,10 @@
     - [6.4 判定表：结构体形式与更新语法处置](#64-判定表结构体形式与更新语法处置)
   - [七、权威来源索引](#七权威来源索引)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：结构体的三种形式（🟢 基础）](#测验-1结构体的三种形式-基础)
+    - [测验 2：更新语法的所有权陷阱（🟡 进阶）](#测验-2更新语法的所有权陷阱-进阶)
+    - [测验 3：字段可见性的双层规则（🔴 专家）](#测验-3字段可见性的双层规则-专家)
 
 ---
 
@@ -268,3 +297,71 @@ fn main() {
 
 - **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
 - **P2 生态/社区**: [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver) · [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml)
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-12）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致。
+
+### 测验 1：结构体的三种形式（🟢 基础）
+
+Rust 的结构体形式包括？（选出所有正确项）
+
+- A. 命名字段型
+- B. 元组型
+- C. 单元型
+- D. 继承型
+
+<details>
+<summary>✅ 答案</summary>
+
+**A、B、C 正确**。按本页命题 2 与「二、三种结构体」：Rust 有三种结构体——**命名字段型**（语义明确的复合数据，按字段名访问）、**元组型**（轻量包装、newtype，按 `.0` 访问）、**单元型**（零大小类型，常用于类型状态机或标记）。D 错：Rust 没有继承。
+
+</details>
+
+---
+
+### 测验 2：更新语法的所有权陷阱（🟡 进阶）
+
+以下代码能否编译？
+
+```rust,ignore
+struct Data { s: String, n: i32 }
+
+fn main() {
+    let d1 = Data { s: String::from("x"), n: 1 };
+    let d2 = Data { n: 2, ..d1 };
+    println!("{}", d1.s);
+}
+```
+
+- A. 能编译，输出 `x`
+- B. 不能编译：`..d1` 移动了未显式指定的字段 `s`（`String` 未实现 `Copy`），`d1.s` 已被移动
+- C. 不能编译：`n` 字段重复指定
+- D. 能编译，`d1` 完整可用
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页定理 3 与 §6.1：结构体更新语法 `..old` 会**移动**未显式指定字段的所有权；若字段未实现 `Copy`，原实例将部分失效。修正：对 `s` 显式 clone——`..d1.clone()`。
+
+</details>
+
+---
+
+### 测验 3：字段可见性的双层规则（🔴 专家）
+
+模块外构造 `pub struct User { pub username: String, email: String }` 时指定了 `email` 字段，编译器拒绝。根因是？
+
+- A. `pub struct` 使所有字段自动公开，`email` 的标注冲突
+- B. 结构体本身标记 `pub` 只是让类型名可见；每个字段仍需单独标记 `pub`，`email` 默认私有
+- C. 模块外的代码永远不能用字面量构造任何结构体
+- D. `String` 字段不能标记 `pub`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「四、字段可见性」与定理 2：结构体字段**默认私有**；结构体本身标 `pub` 只是让类型名可见，**每个字段仍需单独标记 `pub`**，否则模块外部不可见，构造时报 `field ... is private`。这与"跨模块访问字段需显式 `pub`"的判定表条目一致。
+
+</details>

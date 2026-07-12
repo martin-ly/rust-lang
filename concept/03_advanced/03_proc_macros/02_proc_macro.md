@@ -561,6 +561,7 @@ pub fn my_macro(input: String) -> String {
 
 ## 相关概念
 
+- [对应测验](10_quiz_macros.md) — 宏系统（macro_rules!、卫生性、过程宏）
 - [Macros](01_macros.md) — macro_rules! 声明式宏
 - [Trait](../../02_intermediate/00_traits/01_traits.md) — Trait 系统（Derive 的目标）
 - [Serde Patterns](../../02_intermediate/00_traits/03_serde_patterns.md) — Serde 的 derive 实现

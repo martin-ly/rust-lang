@@ -39,6 +39,7 @@
   - [四、实测示例（nightly 1.99.0）](#四实测示例nightly-1990)
   - [五、稳定化阻塞项](#五稳定化阻塞项)
   - [六、反命题与边界分析](#六反命题与边界分析)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [权威来源索引](#权威来源索引)
 
 ## 一、动机：Unpin 不能承担别名豁免
@@ -110,6 +111,29 @@ fn main() {
 - **反命题 1：「UnsafePinned 是新的 UnsafeCell」**——不准确。它豁免的是 `&mut` 独占性而非 `&` 不可变性；是否兼具后者正是 issue #137750 的未决问题。
 - **反命题 2：「安全代码需要关心 UnsafePinned」**——错误。它是不安全抽象作者的标注工具；安全代码经 `Pin<&mut T>` API 间接受益，无需直接命名该类型。
 - **边界**：`UnsafePinned` 不改变 [未定义行为清单](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) 的内容，它改变的是**编译器被允许假设什么**——即把既有的未文档化行为转化为显式、可审计的语言机制。
+
+## ⚠️ 反例与陷阱
+
+**陷阱：对 `static mut` 取引用制造别名**。`UnsafePinned` 预研的出发点正是「别名影响类型」需要精确标注；2024 edition 已把 `static_mut_refs` 提升为 deny，最常见的别名来源之一在编译期即被拦截：
+
+```rust,compile_fail
+static mut COUNTER: u32 = 0;
+
+fn bump() {
+    let r: &mut u32 = unsafe { &mut COUNTER }; // 全局可变状态的引用别名
+    *r += 1;
+}
+```
+
+rustc 1.97.0（edition 2024）实测：`error: creating a mutable reference to mutable static`（`static_mut_refs` deny）。
+
+**修正**：进程级可变状态用 `AtomicU32`（无别名问题）或 `SyncUnsafeCell`/`UnsafePinned`（nightly）显式标注内部可变性：
+
+```rust
+use std::sync::atomic::{AtomicU32, Ordering};
+static COUNTER: AtomicU32 = AtomicU32::new(0);
+fn bump() { COUNTER.fetch_add(1, Ordering::Relaxed); }
+```
 
 ## 权威来源索引
 

@@ -179,6 +179,30 @@ fn main() {}
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
 
+## ⚠️ 反例与陷阱
+
+**陷阱：RPITIT 使 trait 失去 dyn 兼容性**。`impl Trait` 返回类型让每个 impl 有不透明且互不相同的存在类型，vtable 无法统一布局，需要 trait 对象的场景直接编译失败：
+
+```rust,compile_fail
+trait Items {
+    fn items(&self) -> impl Iterator<Item = u8>;
+}
+
+fn consume_all(t: &dyn Items) -> usize { // dyn + RPITIT 不兼容
+    t.items().count()
+}
+```
+
+rustc 1.97.0 实测：`error[E0038]: the trait Items is not dyn compatible`。
+
+**修正**：需要类型擦除的接口用 `Box<dyn Iterator>` 显式装箱，保留对象安全；静态分发场景才用 RPITIT：
+
+```rust
+trait Items {
+    fn items(&self) -> Box<dyn Iterator<Item = u8> + '_>;
+}
+```
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **RPITIT Preview** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

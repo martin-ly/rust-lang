@@ -337,3 +337,61 @@ fn align_check() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/embedded-hal — 生态权威 API 文档](https://docs.rs/embedded-hal) · [docs.rs/libc — 生态权威 API 文档](https://docs.rs/libc)
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-12）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致。
+
+### 测验 1：抽象字节（🟢 基础）
+
+Rust 内存模型中的"抽象字节"可以区分哪些状态？
+
+- A. 仅有 0–255 的硬件字节值
+- B. 已初始化字节（包含 `u8` 值及可选的 provenance）与未初始化字节（不包含确定值）
+- C. 堆字节与栈字节
+- D. 只读字节与可写字节
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「二、字节（Bytes）」：与硬件字节不同，Rust 使用**抽象字节**，可区分已初始化字节（包含一个 `u8` 值，以及可选的 provenance）与未初始化字节（不包含确定值）。注意该列表尚未保证穷尽，未来内存模型可能引入更多字节状态。
+
+</details>
+
+---
+
+### 测验 2：未初始化内存与 MaybeUninit（🟡 进阶）
+
+关于未初始化内存，下列说法正确的是？
+
+- A. 读取未初始化内存总是安全的
+- B. 读取未初始化内存是 UB（除 `union` 字段和结构体 padding 外）；`MaybeUninit<T>` 是处理未初始化内存的核心类型
+- C. `MaybeUninit::assume_init()` 是安全函数
+- D. 未初始化字节的值固定为 0
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「二、字节」与「四、初始化与 MaybeUninit」：读取未初始化内存是 UB（除允许场景外）；`MaybeUninit::uninit()` 与 `write()` 是 Safe 操作，而 `assume_init()` / `assume_init_ref()` 是 **Unsafe**——断言已初始化，证明责任在程序员（C 错）。D 错：未初始化字节不包含确定值。
+
+</details>
+
+---
+
+### 测验 3：Provenance 与别名模型（🔴 专家）
+
+关于指针 provenance 与别名模型演进，下列说法正确的是？
+
+- A. 指针转整数再转回总能完整保留 provenance
+- B. provenance 是指针值携带的"来源"信息（指向哪个分配）；Rust 正从 Stacked Borrows 向 Tree Borrows 演进，后者对更多合法 unsafe 模式更宽容
+- C. Rust 内存模型已完全确定，不会再变化
+- D. 别名规则只影响安全 Rust，与 `unsafe` 无关
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「三、Provenance」：provenance 说明指针指向哪个分配，将带 provenance 的指针转译为整数再转回**可能丢失** provenance（A 错）。「六、别名模型」：Rust 正从 Stacked Borrows（基于栈的借用权限追踪，严格但限制较多）向 Tree Borrows（基于树的权限模型，对更多合法 unsafe 模式更宽容）演进。C 错：本页明确警告"Rust 的内存模型目前尚不完整，部分细节尚未最终确定"。
+
+</details>

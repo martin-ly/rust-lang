@@ -21,9 +21,35 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((错误控制流))
+    问号运算符
+      早退
+      自动转换
+    Try机制
+      FromResidual
+      跨类型传播
+    try块
+      作用域化
+      未稳定
+    错误转换
+      From
+      map_err
+    自定义错误
+      Error trait
+      thiserror
+    反模式
+      吞掉错误
+      过度unwrap
+```
+
 ## 📊 目录
 
 - [错误处理控制流（Error Handling Control Flow）](#错误处理控制流error-handling-control-flow)
+  - [🧠 知识结构图](#-知识结构图)
   - [📊 目录](#-目录)
   - [`?` 运算符与早退](#-运算符与早退)
   - [`Try`/`FromResidual` 与跨类型传播](#tryfromresidual-与跨类型传播)

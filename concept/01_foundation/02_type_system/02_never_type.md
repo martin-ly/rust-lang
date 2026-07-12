@@ -31,9 +31,33 @@
 > `!` 已在大量上下文中可用（如发散函数、`Result<T, !>`、`Option<!>`），但**完整类型地位（full never type stabilization）仍在进行中**。
 > Rust 1.92 将 `never_type_fallback_flowing_into_unsafe` 与 `dependency_on_unit_never_type_fallback` 两个 future-compatibility lint 提升为 deny-by-default；Rust 1.96 进一步统一了 `!` 在 tuple 表达式中的 coercion 行为。
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((Never类型))
+    本质
+      底类型
+      无值类型
+      发散返回
+    控制流
+      panic
+      死循环
+      进程退出
+    穷尽性
+      match分支
+      空枚举
+    强制转换
+      强转任意类型
+      统一分支类型
+    稳定化
+      进展与边界
+```
+
 ## 目录
 
 - [Never Type (`!`)：底类型与穷尽性](#never-type-底类型与穷尽性)
+  - [🧠 知识结构图](#-知识结构图)
   - [目录](#目录)
   - [一、核心概念](#一核心概念)
     - [1.1 什么是 `!`](#11-什么是-)
@@ -50,6 +74,7 @@
     - [4.1 完整稳定化仍在进行中](#41-完整稳定化仍在进行中)
     - [4.2 Rust 1.92：deny-by-default 的 future-compatibility lint](#42-rust-192deny-by-default-的-future-compatibility-lint)
     - [4.3 Rust 1.96：Tuple Coercion](#43-rust-196tuple-coercion)
+    - [4.4 Rust 1.97：`must_use` 将 `Result<T, !>` / `ControlFlow<!, T>` 视为 `T`](#44-rust-197must_use-将-resultt---controlflow-t-视为-t)
   - [五、常见模式](#五常见模式)
     - [模式 1：编译期常量求值](#模式-1编译期常量求值)
     - [模式 2：流处理中的不可能错误](#模式-2流处理中的不可能错误)
@@ -374,6 +399,35 @@ impl Config {
 >     (panic!("never"), s)
 > }
 > ```
+
+### 4.4 Rust 1.97：`must_use` 将 `Result<T, !>` / `ControlFlow<!, T>` 视为 `T`
+
+> **[来源: [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/)]**（"Consider `Result<T, Uninhabited>` and `ControlFlow<Uninhabited, T>` to be equivalent to `T` for must use lint"，curl 200 实测 2026-07-12）
+
+`#[must_use]` 作用于 `Result` / `ControlFlow` 时，lint 的触发条件是“**丢弃该值可能丢失一个有意义的失败/中断**”。当错误类型 `E`（或 `Break` 类型 `B`）是**不可构造类型**（uninhabited，如 `!`）时，`Err`/`Break` 变体在运行时**不可能存在**，值必然为 `Ok(t)`/`Continue(t)`——此时丢弃它与丢弃一个普通的 `T` 无异。Rust 1.97.0 起，`unused_must_use` lint 据此将 `Result<T, !>` 等价于 `T`、`ControlFlow<!, T>` 等价于 `T`：
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— 需 nightly + never_type（稳定版尚不能在签名中书写 `!`）
+#![feature(never_type)]
+use std::ops::ControlFlow;
+
+fn fallible() -> Result<u32, !> { Ok(1) }
+fn flow() -> ControlFlow<!, u32> { ControlFlow::Continue(2) }
+
+fn main() {
+    fallible(); // 1.97：与丢弃 u32 等价，不触发 unused_must_use
+    flow();     // 同上（rustc +nightly 2026-07-12 实测无告警）
+}
+```
+
+| 返回类型 | 1.96 及更早 | 1.97.0+ | 理由 |
+|:---|:---:|:---:|:---|
+| `Result<T, E>`（`E` 可构造） | `must_use` 告警 | `must_use` 告警 | `Err` 可能携带真实错误 |
+| `Result<T, !>` | `must_use` 告警（误报） | **不告警** | `Err(!)` 不可构造，值必为 `Ok(t)` |
+| `ControlFlow<B, T>`（`B` 可构造） | `must_use` 告警 | `must_use` 告警 | `Break` 可能携带真实中断值 |
+| `ControlFlow<!, T>` | `must_use` 告警（误报） | **不告警** | `Break(!)` 不可构造，值必为 `Continue(t)` |
+
+> **边界与现状**：该变化是 **lint 诊断层面**的等价，不改变类型系统规则；在稳定版 1.97 上 `!` 仍不能在签名中直接书写（E0658，`never_type` 仍未稳定，见 §4.1），直接受益者是 nightly 的 `never_type` 用户与 `!` 稳定化的未来路径。它与 §2.2 `Result<T, !>` 模式、模式 3 `ControlFlow` 结合互为印证：**不可构造的错误/中断类型使“必须处理”失去意义**。
 
 ---
 

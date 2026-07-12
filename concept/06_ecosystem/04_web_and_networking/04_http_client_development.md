@@ -178,6 +178,33 @@ fn client_with_proxy() -> Result<reqwest::Client, reqwest::Error> {
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**陷阱：把响应体直接读进 `String`**。底层传输是字节流，`Read::read` 只接受 `&mut [u8]`；跳过 UTF-8 校验既无法编译，也掩盖了非法编码响应。
+
+```rust,compile_fail
+use std::net::TcpStream;
+use std::io::Read;
+
+fn read_response(mut stream: TcpStream) -> String {
+    let mut body = String::new();
+    stream.read(&mut body).unwrap(); // 期望 &mut [u8]
+    body
+}
+```
+
+rustc 1.97.0 实测：`error[E0308]: mismatched types`（expected `&mut [u8]`, found `&mut String`）。
+
+**修正**：先读字节再校验编码；reqwest 的 `.text()` / `.bytes()` 内部即此模式。
+
+```rust
+fn read_response(mut stream: TcpStream) -> std::io::Result<String> {
+    let mut buf = Vec::new();
+    stream.read_to_end(&mut buf)?;
+    Ok(String::from_utf8_lossy(&buf).into_owned())
+}
+```
+
 ## 相关概念
 
 - [Rust 网络编程](../../03_advanced/06_low_level_patterns/04_network_programming.md)

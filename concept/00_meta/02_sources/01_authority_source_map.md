@@ -104,7 +104,7 @@
 ```
 TRPL:        https://doc.rust-lang.org/book/
 TRPL Ch17:   https://doc.rust-lang.org/book/ch17-00-async-await.html
-Async Book:  https://rust-lang.github.io/async-book/  (⚠️ rewrite 中，状态 WIP)
+Async Book:  https://rust-lang.github.io/async-book/  (⚠️ rewrite 中，状态 WIP —— 2026-07-12 实测首页仍标注 "work in progress, much is missing"；ch2 机制描述与 std 文档交叉核对一致，可作 P1 引用但需注记 WIP)
 Reference:   https://doc.rust-lang.org/reference/
 Nomicon:     https://doc.rust-lang.org/nomicon/
 RFCs:        https://rust-lang.github.io/rfcs/

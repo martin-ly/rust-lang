@@ -52,6 +52,10 @@
     - [7.1 反模式速查](#71-反模式速查)
   - [八、相关概念](#八相关概念)
   - [九、来源](#九来源)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：取消的本质（🟢 基础）](#测验-1取消的本质-基础)
+    - [测验 2：取消是协作式的（🟡 进阶）](#测验-2取消是协作式的-进阶)
+    - [测验 3：取消点的可枚举性（🔴 专家）](#测验-3取消点的可枚举性-专家)
 
 ---
 
@@ -426,6 +430,8 @@ Future 被 drop 时，其状态机内活跃局部变量按**声明逆序**析构
 
 - [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) — RAII 与 Drop 语义是取消路径上资源清理的基础
 - [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) — 取消与回滚本质上是错误传播路径的设计
+- [Stream 代数与背压](09_stream_algebra_and_backpressure.md) — 取消与背压的交互
+- [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) — 取消在调度器中的传播
 
 ---
 
@@ -437,3 +443,61 @@ Future 被 drop 时，其状态机内活跃局部变量按**声明逆序**析构
 - [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)（Future 惰性状态机与 drop 语义基础）
 - [Lagaillardie, Neykova & Yoshida: Stay Safe Under Panic — Affine Rust Programming with Multiparty Session Types（ECOOP 2022 全文, arXiv:2204.13464）](https://arxiv.org/abs/2204.13464)（P1 学术：Rust 取消/恐慌安全的会话类型形式化，2026-07-12 验证 HTTP 200）
 - 站内交叉引用：[Async/Await §8.7](01_async.md) · [Async 高级主题](02_async_advanced.md) · [Async 模式 §2.2/§10.2](03_async_patterns.md) · [Async Drop（预览）](../../07_future/03_preview_features/22_async_drop_preview.md) · [Pin 与 Unpin](08_pin_unpin.md)
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-12）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致。
+
+### 测验 1：取消的本质（🟢 基础）
+
+在 Rust 异步中，"取消一个任务"的本质是？
+
+- A. 运行时抢占式 kill 任务线程
+- B. drop 这个 Future 值——它永远不会再被 `poll`
+- C. 调用 Future 的 `cancel()` 方法
+- D. 向任务发送中断信号
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §1.1：Rust 没有专门的取消原语——**取消就是 drop 这个 Future 值**。被 drop 的 Future 永远不会再被 `poll`，其局部变量按声明逆序析构，持有资源的 `Drop` 正常触发。
+
+</details>
+
+---
+
+### 测验 2：取消是协作式的（🟡 进阶）
+
+关于取消的协作性，下列说法正确的是？
+
+- A. `JoinHandle::abort()` 可以抢占式中断正在执行的同步代码段
+- B. 取消是协作式（cooperative）的：一个永不 `.await` 的 Future 永远不可被取消
+- C. 取消点可以出现在任意两条语句之间
+- D. 阻塞调用（blocking call）不影响任务的可取消性
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §1.2：Rust 异步没有抢占式 kill——即使 `abort()` 也是运行时在下一次调度点 drop 任务 Future。关键推论：一个永不 `.await` 的 Future 永远不可被取消；这也解释了为什么阻塞调用在 async 中是双重错误——既阻塞线程，又使任务免疫于取消。C 错：`.await` 之间的同步代码段**不是**取消点。
+
+</details>
+
+---
+
+### 测验 3：取消点的可枚举性（🔴 专家）
+
+为什么取消安全分析是"有限枚举"问题？
+
+- A. 因为任务数量有限
+- B. 编译器把 `async fn` 变换为枚举状态机，每个 `.await` 对应一个 `Pending` 状态；取消只可能发生在这些挂起点，逐一检查"在状态 Sᵢ 处析构时不变量是否成立"即可
+- C. 因为 Future 只能被 drop 一次
+- D. 因为 `select!` 最多支持 8 个分支
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §1.3/§1.4：编译器把 `async fn` 变换为枚举状态机，每个 `.await` 对应一个 `Pending` 状态；Future 一旦开始一次 `poll`，要么跑到下一个 `Pending` 要么跑完——因此取消点可枚举，取消安全分析即对每个挂起状态提问"若在此处析构，操作的不变量是否仍成立"。这同时给出测试策略：对每个挂起状态构造一次取消注入，断言外部不变量。
+
+</details>

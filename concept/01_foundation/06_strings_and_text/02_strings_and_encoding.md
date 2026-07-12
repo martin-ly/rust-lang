@@ -25,9 +25,36 @@
 > [Wikipedia — Unicode](https://en.wikipedia.org/wiki/Unicode) ·
 > [Rust Std — OsString](https://doc.rust-lang.org/std/ffi/struct.OsString.html)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((字符串与编码))
+    类型系统
+      String
+      OsString
+      CString
+      Path
+    编码边界
+      UTF8内部
+      平台编码
+      C字符串
+    转换
+      有损转换
+      UTF8校验
+    视图
+      字节
+      字符
+      字素簇
+    陷阱
+      索引panic
+      编码损失
+```
+
 ## 📑 目录
 
 - [字符串与编码：Rust 的文本处理类型系统](#字符串与编码rust-的文本处理类型系统)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 String vs \&str：所有权谱系](#11-string-vs-str所有权谱系)

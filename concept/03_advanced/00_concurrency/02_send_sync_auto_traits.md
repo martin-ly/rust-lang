@@ -48,6 +48,10 @@
   - [七、决策树：类型需要跨线程时怎么办](#七决策树类型需要跨线程时怎么办)
   - [八、与既有内容的关系声明](#八与既有内容的关系声明)
   - [九、来源与延伸阅读](#九来源与延伸阅读)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Send 与 Sync 的契约（🟢 基础）](#测验-1send-与-sync-的契约-基础)
+    - [测验 2：`Rc` 跨线程的编译期拒绝（🟡 进阶）](#测验-2rc-跨线程的编译期拒绝-进阶)
+    - [测验 3：auto trait 的手动实现边界（🔴 专家）](#测验-3auto-trait-的手动实现边界-专家)
 
 ---
 
@@ -484,3 +488,61 @@ flowchart TD
 
 **文档版本**: 1.0
 **最后更新**: 2026-07-12
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-12）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致。
+
+### 测验 1：Send 与 Sync 的契约（🟢 基础）
+
+下列哪组契约表述正确？
+
+- A. `T: Send` ⟹ 共享引用 `&T` 可跨线程并发访问；`T: Sync` ⟹ 所有权可转移
+- B. `T: Send` ⟹ 将 `T` 的所有权转移到另一个线程是安全的；`T: Sync` ⟺ `&T: Send`（共享引用可并发访问）
+- C. Send 与 Sync 都提供运行时同步原语
+- D. `T: Send` 蕴含 `T: Sync`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §2.1/§2.2：Send 契约是"所有权转移安全"，Sync 契约的精确等价式是 `T: Sync ⟺ &T: Send`。C 错：二者是无方法的 marker trait，只参与类型检查。D 错：Send **不**蕴含 Sync——反例 `Cell<u32>: Send` 但 `!Sync`（共享引用会数据竞争）。
+
+</details>
+
+---
+
+### 测验 2：`Rc` 跨线程的编译期拒绝（🟡 进阶）
+
+`thread::spawn(move || { println!("{:?}", rc); })` 捕获 `Rc<T>` 时被 E0277 拒绝，根因是？
+
+- A. `Rc` 没有实现 `Debug`
+- B. `Rc` 是 `!Send`：其引用计数非原子，转移所有权到另一线程（含在新线程执行 `drop` 减计数）会破坏计数完整性
+- C. `thread::spawn` 禁止捕获任何智能指针
+- D. `Rc` 只能用于 `async` 上下文
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §2.1 与反例 1：`T: Send` 要求 `drop` 不依赖线程局部状态——`Rc` 的 `drop` 要减**非原子**引用计数，换线程执行会破坏计数完整性，这是 `Rc<T>` 为 `!Send` 的深层原因。编译器通过 auto trait 推导在编译期拒绝，无需任何运行时检查。
+
+</details>
+
+---
+
+### 测验 3：auto trait 的手动实现边界（🔴 专家）
+
+关于手动 `unsafe impl Send for MyType {}`，下列说法正确的是？
+
+- A. 与手动实现 `Clone` 一样安全，编译器会验证正确性
+- B. 必须用 `unsafe impl`：编译器无法验证"该类型跨线程真的安全"这一语义不变量，证明责任转移给程序员
+- C. stable Rust 允许用负实现 `impl !Send for T {}` 任意 opt-out
+- D. 手动 impl 优先于编译器的自动推导，可同时存在
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §一与反例 3：Send/Sync 是 **unsafe auto trait**——手动实现必须用 `unsafe impl`，因为编译器无法验证跨线程安全性这一语义不变量（invariant），证明责任转移给程序员。C 错：显式 `!Send`/`!Sync` 负实现在 stable 不可用，stable 上的 opt-out 惯用法是 `PhantomData<*const T>` 之类（§3.2/§3.3）。
+
+</details>

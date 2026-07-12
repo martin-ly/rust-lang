@@ -871,6 +871,7 @@ cargo audit
 
 ## 相关概念
 
+- [对应测验](../13_quizzes/03_quiz_security_testing.md) — 安全与测试生态（Kerckhoffs 原则、crypto 原语、cargo vet/audit、分层测试）
 - [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) — 不安全代码
 - [Type System](../../01_foundation/02_type_system/01_type_system.md) — 类型系统
 - [Blockchain](../11_domain_applications/01_blockchain.md) — 区块链安全
@@ -1077,4 +1078,3 @@ fn main() {
 | 安全 实践：Rust 代码的防御性编程 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | 安全 实践：Rust 代码的防御性编程 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | 安全 实践：Rust 代码的防御性编程 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-

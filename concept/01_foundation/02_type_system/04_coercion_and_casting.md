@@ -24,9 +24,31 @@
 > [RFC 0401 — Coercions](https://rust-lang.github.io/rfcs//0401-coercions.html) ·
 > [Wikipedia — Type Conversion](https://en.wikipedia.org/wiki/Type_conversion)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((强制与转换))
+    隐式强制
+      Deref强制
+      Unsize转换
+      子类型化
+    显式转换
+      as运算符
+      数值截断
+      指针转换
+    Trait转换
+      From Into
+      TryFrom TryInto
+    边界
+      信息丢失
+      未定义行为
+```
+
 ## 📑 目录
 
 - [类型强制与转换：显式与隐式的边界](#类型强制与转换显式与隐式的边界)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 强制（Coercion）与转换（Cast）的区别](#11-强制coercion与转换cast的区别)

@@ -515,3 +515,9 @@ Rust 生态：纯 Rust QUIC 实现 `quinn`、HTTP/3 实现 `h3`、AWS `s2n-quic`
 - **速查卡**: [network_programming_cheatsheet](../../../docs/03_reference/quick_reference/13_network_programming_cheatsheet.md)
 - **RBE 练习**: [TCP](https://doc.rust-lang.org/rust-by-example/std_misc.html)
 - **Rustlings**: 无网络专题；参考 C10 模块（Module）与 Tokio 教程
+
+---
+
+## 相关概念
+
+- [对应测验](../13_quizzes/01_quiz_networking_async_ecosystem.md) — 网络与异步生态（Web 框架、Tokio/Glommio 运行时、QUIC/HTTP-3、eBPF）

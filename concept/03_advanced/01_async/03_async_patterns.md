@@ -696,6 +696,8 @@ graph TD
 - [Closure Types](../../02_intermediate/04_types_and_conversions/02_closure_types.md) — async 模式的状态捕获建立在闭包类型之上
 - [Iterator Patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) — 迭代器组合子与 Stream 模式的对应关系
 - [Distributed Systems](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) — 分布式系统
+- [Stream 代数与背压](09_stream_algebra_and_backpressure.md) — 背压（§2.3）的形式化纵深
+- [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) — 并发执行的调度语义
 
 ---
 

@@ -644,6 +644,7 @@ fn session_demo() {
 >
 ## 十、相关概念链接
 
+- [对应测验](../04_model_checking/06_quiz_formal_methods.md) — 形式化方法（分离逻辑、RustBelt、类型安全、验证工具链）
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | 所有权 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 线性逻辑的应用（L1 精确对应标注于全文） |

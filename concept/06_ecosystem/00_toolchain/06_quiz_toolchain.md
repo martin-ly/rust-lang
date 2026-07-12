@@ -24,6 +24,8 @@
 ---
 
 > **Bloom 层级**: L3-L4
+> **难度图例**: 🟢 基础（概念直接考察）｜ 🟡 进阶（需理解深层原理）｜ 🔴 专家（多概念综合 / 边界情况）
+> **题型构成**: 代码阅读题（能否编译 / 输出分析，本测验特色）+ 规范题型【单选】【多选】【判断】（按 mdbook-quiz 指南四级题型规范（`docs/02_learning/07_mdbook_quiz_guide.md`） 的 .md 落地形态组织，不引入 TOML 插件）
 > **定位**: L6 嵌入式互动测验——验证 Rust 工具链核心概念（Cargo 依赖管理、Clippy lint、Miri UB 检测、rustfmt、文档生成）的掌握程度。
 > **使用方式**: 先独立思考答案，再点击展开核对解析。
 
@@ -33,7 +35,7 @@
 
 本节将「Cargo 依赖管理」分解为若干主题： Q1. 以下 `Cargo.toml` 片段中，`^`、`~`、`=`…、Q2. 以下命令的作用是什么？与Q3. 以下 `Cargo.toml` 配置的作用是什么？。
 
-### Q1. 以下 `Cargo.toml` 片段中，`^`、`~`、`=` 版本约束的含义是什么？
+### Q1. 🟢 以下 `Cargo.toml` 片段中，`^`、`~`、`=` 版本约束的含义是什么？
 
 ```toml
 [dependencies]
@@ -67,7 +69,7 @@ regex = "=1.10.2"
 
 ---
 
-### Q2. 以下命令的作用是什么？
+### Q2. 🟢 以下命令的作用是什么？
 
 ```bash
 cargo build --release
@@ -103,7 +105,7 @@ cargo test --all-targets
 
 ---
 
-### Q3. 以下 `Cargo.toml` 配置的作用是什么？
+### Q3. 🟡 以下 `Cargo.toml` 配置的作用是什么？
 
 ```toml
 [workspace]
@@ -153,7 +155,7 @@ tokio = { workspace = true, features = ["rt-multi-thread"] }
 
 「Clippy 与代码质量」部分包含 Q4. 以下代码中，Clippy 会发出什么警告？如何修复？ 与  Q5. 以下代码在 Miri 下运行会发生什么？ 两条主线，本节依次说明。
 
-### Q4. 以下代码中，Clippy 会发出什么警告？如何修复？
+### Q4. 🟡 以下代码中，Clippy 会发出什么警告？如何修复？
 
 ```rust
 fn main() {
@@ -207,7 +209,7 @@ fn main() {
 
 ---
 
-### Q5. 以下代码在 Miri 下运行会发生什么？
+### Q5. 🟡 以下代码在 Miri 下运行会发生什么？
 
 ```rust
 fn main() {
@@ -274,7 +276,7 @@ fn main() {
 
 「编译配置与目标平台」部分的核心主题是 Q6. 以下 `.cargo/config.toml` 配置的作用是什…，本节展开说明。
 
-### Q6. 以下 `.cargo/config.toml` 配置的作用是什么？
+### Q6. 🟡 以下 `.cargo/config.toml` 配置的作用是什么？
 
 ```toml
 [build]
@@ -320,7 +322,7 @@ strip = true        # 移除 debug 符号
 
 本节从 Q7. 以下 `cargo doc` 命令的作用是什么？ 与  Q8. 以下命令序列的作用是什么？发布 crate 到 crates.… 两个层面剖析「文档与发布」。
 
-### Q7. 以下 `cargo doc` 命令的作用是什么？
+### Q7. 🟢 以下 `cargo doc` 命令的作用是什么？
 
 ```bash
 cargo doc --open
@@ -373,7 +375,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 ---
 
-### Q8. 以下命令序列的作用是什么？发布 crate 到 crates.io 的正确流程是什么？
+### Q8. 🟡 以下命令序列的作用是什么？发布 crate 到 crates.io 的正确流程是什么？
 
 ```bash
 cargo login
@@ -417,7 +419,7 @@ cargo publish
 
 本节从 Q9. 以下 `Cargo.toml` 中的 `[profile]`… 与  Q10. 以下命令如何帮助诊断编译问题？ 两个层面剖析「综合应用」。
 
-### Q9. 以下 `Cargo.toml` 中的 `[profile]` 配置如何影响编译产物？
+### Q9. 🟡 以下 `Cargo.toml` 中的 `[profile]` 配置如何影响编译产物？
 
 ```toml
 [profile.dev]
@@ -462,7 +464,7 @@ panic = "abort"
 
 ---
 
-### Q10. 以下命令如何帮助诊断编译问题？
+### Q10. 🟡 以下命令如何帮助诊断编译问题？
 
 ```bash
 RUST_BACKTRACE=1 cargo run
@@ -500,7 +502,92 @@ RUST_BACKTRACE=1 cargo run
 
 ---
 
-## 六、评分参考
+## 六、规范题型补充：单选 · 多选 · 判断
+
+> 本节按四级题型规范补充单选、多选与判断题，知识点与 [Toolchain](01_toolchain.md) 权威页一致；
+> 干扰项针对常见误解设计。
+
+### Q11. 🟢【单选】`cargo build --release` 与默认 `cargo build` 的区别是？
+
+- A. 仅输出目录不同（`target/release` vs `target/debug`）
+- B. release 启用优化，默认关闭 `debug_assertions` 与整数溢出检查
+- C. release 编译速度更快
+- D. debug 产物体积更小
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：B**
+
+**解析**：release profile 默认 `opt-level=3`、`debug-assertions=off`、`overflow-checks=off`，产物快但编译慢、调试信息少。A 只是表象（目录确实不同，但不是本质）；C 恰好相反（优化显著拉长编译时间）；D 也相反（debug 产物带调试符号通常更大）。溢出行为差异尤其重要：debug 下溢出 panic，release 下环绕——两类构建行为不同是经典 bug 来源。
+
+</details>
+
+---
+
+### Q12. 🟡【单选】`rustup` 的核心职责是？
+
+- A. Rust 的包管理器，负责下载依赖 crate
+- B. 管理 Rust 工具链本身：stable/beta/nightly 版本、组件（clippy/rustfmt）与交叉编译 target 的安装与切换
+- C. 代码格式化工具
+- D. 把 crate 发布到 crates.io
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：B**
+
+**解析**：分工要记清：**rustup 管工具链，cargo 管项目**。A、D 是 cargo 的职责；C 是 rustfmt（可作为 rustup 组件安装）。`rustup toolchain install nightly`、`rustup target add wasm32-unknown-unknown`、`rustup component add clippy` 都是日常命令；`rust-toolchain.toml` 则把工具链选择钉死在项目级。
+
+</details>
+
+---
+
+### Q13. 🟡【多选】关于 Cargo 依赖解析与锁定，下列说法正确的有？（选出所有正确项）
+
+- A. `serde = "1.0"` 默认等价于 `^1.0`，允许 1.x 内的兼容更新
+- B. `Cargo.lock` 锁定确切版本；二进制（应用）项目应将其提交到版本控制
+- C. 依赖图中同一 crate 的多个不兼容版本（如 1.x 与 2.x）可以共存
+- D. `cargo update` 会无视 `Cargo.toml` 的版本约束随意升级
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：A、B、C**
+
+**解析**：默认 `^` 约束允许"不破坏兼容"的升级（A）；lock 文件保证团队与 CI 构建可复现，应用提交、库传统上不提交（B）；Cargo 允许同一 crate 的多个 semver 不兼容版本并存并分别编译（C，`cargo tree -d` 可查重复）。D 错：`cargo update` 严格在 `Cargo.toml` 约束**之内**选择最新兼容版本，越界升级需先改清单。
+
+</details>
+
+---
+
+### Q14. 🟢【判断】Clippy 是 Rust 的官方 lint 工具，在编译器默认警告之外提供代码风格、性能与正确性方面的数百条检查建议。（对 / 错）
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：对**
+
+**解析**：Clippy 作为 rustup 组件分发（`rustup component add clippy`），lint 分为 correctness（默认 deny）、suspicious、style、complexity、perf、pedantic、nursery 等类别。工程实践：`cargo clippy -- -D warnings` 把所有警告升级为错误纳入 CI——本仓库的质量门 3 正是这一实践。
+
+</details>
+
+---
+
+### Q15. 🟡【判断】`cargo vet` 用于供应链审计：记录并共享对第三方依赖的安全审查结论；本仓库质量门中的 `cargo vet --locked` 即属此类实践。（对 / 错）
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：对**
+
+**解析**：`cargo vet`（Mozilla 发起）的思路是"依赖审查可共享"：项目维护 `supply-chain/` 下的审计记录（本仓库即有 `supply-chain/audits.toml`），声明每个依赖"被谁、按什么标准审过"，可导入 Mozilla/Firefox 等公开审计，避免全社区重复审查同一 crate。它与 `cargo audit`（查已知漏洞数据库）互补：一个管"有没有已知 CVE"，一个管"代码是否被可信方审过"。
+
+</details>
+
+---
+
+## 七、评分参考
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
@@ -521,7 +608,7 @@ RUST_BACKTRACE=1 cargo run
 
 理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：本文件是 测验：Rust 工具链（L6 试点扩展） 的专项测…、测验 2：在 测验：Rust 工具链（L6 试点扩展） 的测验中，若遇…与测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层），本节依次展开。
 
-### 测验 1：本文件是 测验：Rust 工具链（L6 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
+### 测验 1：🟢 本文件是 测验：Rust 工具链（L6 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 
 **题目**: 本文件是 测验：Rust 工具链（L6 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？
 
@@ -533,7 +620,7 @@ RUST_BACKTRACE=1 cargo run
 
 ---
 
-### 测验 2：在 测验：Rust 工具链（L6 试点扩展） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？（理解层）
+### 测验 2：🟢 在 测验：Rust 工具链（L6 试点扩展） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？（理解层）
 
 **题目**: 在 测验：Rust 工具链（L6 试点扩展） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？
 
@@ -545,7 +632,7 @@ RUST_BACKTRACE=1 cargo run
 
 ---
 
-### 测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层）
+### 测验 3：🟢 专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层）
 
 **题目**: 专项测验与概念文件末尾的嵌入式测验有什么区别？
 

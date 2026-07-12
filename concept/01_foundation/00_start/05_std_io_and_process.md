@@ -29,11 +29,34 @@
 >
 > - v1.0 (2026-07-04): 初始创建
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((标准IO与进程))
+    标准流
+      stdin
+      stdout
+      stderr
+    文件IO
+      File
+      BufReader
+      BufWriter
+    进程管理
+      Command
+      子进程通信
+      退出状态
+    错误模型
+      io Result
+      ErrorKind
+```
+
 ## 📑 目录
 
 ---
 
 - [标准 I/O 与进程（std I/O and Process）](#标准-io-与进程std-io-and-process)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 形式化定义](#11-形式化定义)

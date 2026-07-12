@@ -98,6 +98,9 @@
 | 来源 | URL |
 |:---|:---|
 | Tokio | <https://tokio.rs/> |
+| Tokio Scheduler Internals（Carl Lerche, 2019） | <https://tokio.rs/blog/2019-10-scheduler> |
+| futures-rs 官方文档 | <https://docs.rs/futures/latest/futures/> |
+| Async WG 路线图（async-fundamentals-initiative） | <https://rust-lang.github.io/async-fundamentals-initiative/roadmap.html> |
 | async-std | <https://async.rs/> |
 | Axum | <https://docs.rs/axum/latest/axum/> |
 | Actix-web | <https://actix.rs/> |
@@ -221,6 +224,7 @@
 | 作者 / 频道 | URL |
 |:---|:---|
 | Niko Matsakis | <https://smallcultfollowing.com/babysteps/> |
+| Carl Lerche（Tokio 作者） | <https://tokio.rs/blog/> |
 | Without Boats | <https://without.boats/> |
 | Jon Gjengset | <https://thesquareplanet.com/blog/> · <https://www.youtube.com/@JonGjengset> |
 | Ralf Jung | <https://www.ralfj.de/blog/> |

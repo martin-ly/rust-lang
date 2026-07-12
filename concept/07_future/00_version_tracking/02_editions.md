@@ -176,6 +176,7 @@ flowchart TD
 
 ## 七、相关概念
 
+- [对应测验](../05_quizzes/01_quiz_version_and_preview.md) — 版本演进、Edition 机制与前沿特性（发布火车、1.90–1.97 稳定特性、preview 状态）
 | 概念 | 关系 |
 |:---|:---|
 | [Module System](../../02_intermediate/05_modules_and_visibility/01_module_system.md) | 2018 Edition 重大改进了模块路径 |

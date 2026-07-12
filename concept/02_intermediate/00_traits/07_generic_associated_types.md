@@ -22,9 +22,32 @@
 > **对应 Crate**: [`c04_generic`](../../crates/c04_generic)
 > **对应练习**: [`exercises/src/generics/`](../../exercises/src/generics)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((GATs))
+    动机
+      借用迭代器
+      返回借用项
+    语法
+      生命周期参数
+      良构规则
+    关系
+      关联类型
+      HRTB
+    稳定现状
+      已稳定
+      1.97边界
+    局限
+      错误模式
+      推导限制
+```
+
 ## 📑 目录
 
 - [泛型关联类型（Generic Associated Types, GATs）](#泛型关联类型generic-associated-types-gats)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、动机：`LendingIterator` 问题](#一动机lendingiterator-问题)
   - [二、语法与良构规则](#二语法与良构规则)
@@ -50,6 +73,10 @@
     - [8.3 非对象安全与 async trait 的联动后果](#83-非对象安全与-async-trait-的联动后果)
     - [8.4 不应对 GAT 做的事](#84-不应对-gat-做的事)
   - [九、来源](#九来源)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：GAT 的本质（🟢 基础）](#测验-1gat-的本质-基础)
+    - [测验 2：`where Self: 'a` 的必要性（🟡 进阶）](#测验-2where-self-a-的必要性-进阶)
+    - [测验 3：LendingIterator 动机（🔴 专家）](#测验-3lendingiterator-动机-专家)
 
 ---
 
@@ -544,3 +571,61 @@ trait Stream {
 - [rust-lang/rust #87479 — GAT implied bounds 跟踪](https://github.com/rust-lang/rust/issues/87479)
 - [Weiss, Patterson, Matsakis & Ahmed: Oxide — The Essence of Rust（arXiv:1903.00982）](https://arxiv.org/abs/1903.00982)（P1 学术：Rust trait/类型系统的学术形式化基线，2026-07-12 验证 HTTP 200）
 - 站内交叉引用：[高级 Trait 主题 §1.2](04_advanced_traits.md) · [Traits §5.6](01_traits.md) · [Generics §9.5](../01_generics/01_generics.md) · [Lifetimes 进阶](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md)
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-12）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致。
+
+### 测验 1：GAT 的本质（🟢 基础）
+
+普通关联类型 `type Item;` 与 GAT `type Item<'a> where Self: 'a;` 的关键区别是？
+
+- A. GAT 只是语法糖，语义完全相同
+- B. 普通关联类型是"每个实现者对应一个类型"；GAT 是"每个实现者对应一个类型构造器"——关联类型自己携带生命周期参数
+- C. GAT 只能用于 `Iterator`
+- D. GAT 要求类型实现 `Copy`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「关键直觉」：普通关联类型是"每个实现者对应一个类型"；GAT 是"每个实现者对应一个**类型构造器（type constructor）**"——`Item` 不再是类型，而是"给定生命周期后产出类型"的函数。
+
+</details>
+
+---
+
+### 测验 2：`where Self: 'a` 的必要性（🟡 进阶）
+
+GAT 声明 `type Item<'a> where Self: 'a;` 中的 where 子句是？
+
+- A. 可选的风格标注
+- B. **必需**的（required where clause），缺失会导致编译错误
+- C. 只在 `impl` 侧需要，trait 声明侧可省略
+- D. 用于约束 `'a` 必须等于 `'static`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §2.2：`where Self: 'a` 是**必需**的（required where clause）。`Self::Item<'a>` 读作"在 `Self` 至少活到 `'a` 的前提下，由实现者给出的、参数为 `'a` 的类型"——良构性规则要求显式声明这一前提。
+
+</details>
+
+---
+
+### 测验 3：LendingIterator 动机（🔴 专家）
+
+为什么"滑动窗口迭代器"无法用标准库 `Iterator` 表达？
+
+- A. `Iterator` 不允许返回切片
+- B. `fn next(&mut self)` 中 `self` 的借用生命周期只存在于方法体内，而 `type Item` 在签名层面没有位置"提及"这个生命周期——`next` 返回的值不能借用自 `self`
+- C. `Iterator` 要求 `Item: 'static`
+- D. 可变切片不能迭代
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §一：标准库 `Iterator` 的关联类型 `Item` 是不带参数的类型，隐含铁律——`next` 返回的值**不能借用自 `self`**。若返回原始切片生命周期 `'t` 的 `&'t mut [T]`，两次调用会同时存活两个重叠的可变借用，违反别名规则。GAT 的答案是让返回值生命周期与**本次调用**的借用 `'a` 绑定，由借用检查自动强制"下一次 `next` 前上一个 `Item<'a>` 必须已丢弃"。
+
+</details>

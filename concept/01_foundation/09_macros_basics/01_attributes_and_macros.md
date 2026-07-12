@@ -27,6 +27,31 @@
 > [RFC 1584 — Macros 2.0](https://rust-lang.github.io/rfcs//1584-macros.html) ·
 > [Wikipedia — Hygienic Macro](https://en.wikipedia.org/wiki/Hygienic_macro)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((属性与宏))
+    属性
+      内置属性
+      derive
+      cfg条件
+    声明宏
+      macro_rules
+      模式匹配
+      重复展开
+    卫生性
+      部分卫生
+      标识符隔离
+    用途
+      代码生成
+      DSL
+      减少样板
+    边界
+      调试困难
+      错误信息
+```
+
 ## 📑 目录
 
 - [属性与声明宏（Declarative Macro）：编译期元编程基础](01_attributes_and_macros.md)

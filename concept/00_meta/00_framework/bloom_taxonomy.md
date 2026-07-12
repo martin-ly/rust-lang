@@ -135,6 +135,7 @@ ACF 引入的第七层级（在传统 L6-L7 之上），指定管理双模式切
 
 ## 相关概念
 
+- [对应测验](../05_quizzes/01_quiz_meta_framework.md) — 元层框架与知识体系架构（L0–L7 分层、Bloom 映射、A/S/P 标记、canonical 规则）
 - [概念索引](../../README.md) — 知识体系总览与导航
 - [学习指南](../04_navigation/07_learning_guide.md) — 分层学习路径建议
 - [语义空间坐标系](semantic_space.md) — 概念三维定位方法论

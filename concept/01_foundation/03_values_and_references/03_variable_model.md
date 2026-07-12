@@ -37,6 +37,29 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((变量模型))
+    经典模型
+      容器模型
+      引用模型
+    值类别
+      左值
+      右值
+      将亡值
+    形式化
+      环境
+      存储
+    Rust诠释
+      绑定即所有权
+      移动语义
+    跨语言
+      Cpp值类别
+      表达式分类
+```
+
 ## 一、核心命题
 
 > **变量不是内存地址的别名，而是环境（Environment）中名字与存储（Store）中资源之间的映射关系。
@@ -611,3 +634,9 @@ Rust 编译器要求所有变量在使用前必须初始化。读取未初始化
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)
+
+---
+
+## 相关概念
+
+- [对应测验](../11_quizzes/29_quiz_pl_foundations.md) — 通用 PL 基座（变量模型、求值策略、效果、控制流、数据抽象）

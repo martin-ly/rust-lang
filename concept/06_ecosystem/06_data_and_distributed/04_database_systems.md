@@ -529,3 +529,8 @@ Rust 的显式哲学和数据所有权（Ownership）使延迟加载（lazy load
 | 数据库系统：Rust 在存储引擎中的语义 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | 数据库系统：Rust 在存储引擎中的语义 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
+---
+
+## 相关概念
+
+- [对应测验](../13_quizzes/02_quiz_database_storage.md) — 数据库与存储生态（SQLx/Diesel/SeaORM/Toasty、TiKV/Materialize/Meilisearch/SurrealDB）

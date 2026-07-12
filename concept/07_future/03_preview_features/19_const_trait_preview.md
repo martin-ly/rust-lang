@@ -157,6 +157,27 @@ fn main() {
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
 
+## ⚠️ 反例与陷阱
+
+**陷阱：`const fn` 中调用普通 trait 方法**。编译期求值只允许调用 `const fn`，而稳定 Rust 的 trait 方法无法声明为 const——`const_trait_impl` 正是为此而来：
+
+```rust,compile_fail
+trait Total { fn total(&self) -> u32; }
+
+const fn checkout<T: Total>(cart: &T) -> u32 {
+    cart.total() // trait 方法非 const
+}
+```
+
+rustc 1.97.0（stable）实测：`error[E0015]: cannot call non-const method <T as Total>::total in constant functions`。
+
+**修正（稳定方案）**：编译期路径走具体类型 + 字段/关联 const，运行期路径保留 trait 抽象，二者用泛型单态化统一调用点：
+
+```rust
+struct Cart { items: u32 }
+const fn checkout(cart: &Cart) -> u32 { cart.items }
+```
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **Const Trait Preview** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

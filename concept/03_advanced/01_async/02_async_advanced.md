@@ -51,6 +51,7 @@
     - [优化维度速查](#优化维度速查)
     - [关键指标](#关键指标)
     - [测量工具](#测量工具)
+  - [相关概念](#相关概念)
 
 ### 8.8 Waker 契约与活性
 
@@ -64,6 +65,8 @@
 - **活性（Liveness）三反例**：遗忘 wake → 永久 Pending（活锁）；虚假 wake → 无害空转；Waker 过早释放 → 永久 Pending。
 - **活性调试路径**：Future 陷入永久 Pending 时，按「Waker 注册 → Reactor 唤醒 → poll 返回值合法性」三层决策树定位根因（完整 Mermaid 决策树见权威节）。
 - Waker 与具体执行器解耦：任何实现 `Wake` trait 的类型均可作为 Waker，同一 Future 可跨运行时复用。
+
+> **实现纵深**: RawWakerVTable 手工实现的正确模式全集与契约违反反例集（丢失 wake 死锁 / 记账错误 double-free）见 [Waker 契约深度解析](12_waker_contract_deep_dive.md)。
 
 ### 8.9 Waker/Context 的底层机制
 
@@ -618,3 +621,10 @@ async fn traverse_dir(path: &Path) -> Vec<String> {
 - `tokio-console`：实时任务、资源与运行时诊断。
 - `criterion` + `tokio::test`：异步基准测试。
 - 火焰图：`perf` 或 `cargo-flamegraph` 定位热点。
+
+## 相关概念
+
+- [Stream 代数与背压](09_stream_algebra_and_backpressure.md) — 承接 §8.10 Stream/Sink 的代数纵深
+- [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) — Waker 契约之上的调度公平性
+- [Waker 契约深度解析](12_waker_contract_deep_dive.md) — Waker 契约两节的实现层纵深（RawWakerVTable 模式全集 + 违反反例集）
+- [Async Trait 对象安全](13_async_trait_object_safety.md) — dyn 兼容 async trait 的方案谱系与选型矩阵

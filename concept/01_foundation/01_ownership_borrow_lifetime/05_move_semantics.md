@@ -40,6 +40,30 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((Move语义))
+    Rust模型
+      默认移动
+      移动后失效
+      Drop析构
+    Cpp模型
+      移动构造
+      移动赋值
+      拷贝回退
+    核心对比
+      编译期强制
+      移动后可用性
+    优化
+      RVO
+      复制省略
+    法则对照
+      三五零法则
+      Copy Clone Drop
+```
+
 ## 一、核心命题
 
 > **Move 语义解决同一个问题：如何在不复制大量数据的情况下转移资源所有权（Ownership）。
@@ -266,6 +290,7 @@ move: T@src → T@dst
 
 ## 相关概念
 
+- [对应测验](../../02_intermediate/09_quizzes/30_quiz_cpp_rust_foundations.md) — C/C++ → Rust 工程层基础对比（RTTI、宏、异常安全、构造、move 语义）
 - **上层概念**: [Ownership](01_ownership.md) · [Variable Model](../03_values_and_references/03_variable_model.md) · [Borrowing](02_borrowing.md) · [学习指南](../../00_meta/04_navigation/07_learning_guide.md)
 - **下层概念**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Construction](../../02_intermediate/00_traits/05_construction_and_initialization.md)
 

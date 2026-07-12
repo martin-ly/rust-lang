@@ -30,9 +30,33 @@
 > [Traits](../../02_intermediate/00_traits/01_traits.md) ·
 > [Generics](../../02_intermediate/01_generics/01_generics.md)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((高级生命周期))
+    HRTB
+      高阶约束
+      闭包签名
+    变型
+      协变
+      逆变
+      不变
+    GATs交互
+      借用迭代器
+      关联类型
+    下一代
+      Polonius
+      流敏感分析
+    无界生命周期
+      unsafe边界
+      子类型化
+```
+
 ## 📑 目录
 
 - [Lifetimes 高级主题](#lifetimes-高级主题)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
     - [Step 1: 直觉困惑（Intuitive Confusion）](#step-1-直觉困惑intuitive-confusion)
     - [Step 2: 具体场景（Concrete Scenario）](#step-2-具体场景concrete-scenario)

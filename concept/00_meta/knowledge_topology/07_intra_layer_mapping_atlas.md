@@ -175,13 +175,21 @@
 | [Rust 进程测试与基准](../../03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md) | ↔ | [Rust 进程监控与诊断](../../03_advanced/08_process_ipc/06_process_monitoring_and_diagnostics.md) | 互为后置概念（互参） |
 | [Rust 进程测试与基准](../../03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md) | ↔ | [Rust 进程性能工程](../../03_advanced/08_process_ipc/08_process_performance_engineering.md) | 互为后置概念（互参） |
 | [Rust 进程测试与基准](../../03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md) | ↔ | [Rust 现代进程管理库](../../03_advanced/08_process_ipc/10_modern_process_libraries.md) | 互为后置概念（互参） |
+| [Stream 代数与背压：拉取式序列的形式刻画](../../03_advanced/01_async/09_stream_algebra_and_backpressure.md) | ↔ | [Executor 公平性与调度：Tokio 调度器 internals](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) | 互为后置概念（互参） |
+| [Stream 代数与背压：拉取式序列的形式刻画](../../03_advanced/01_async/09_stream_algebra_and_backpressure.md) | ⟹ | [Async 取消安全](../../03_advanced/01_async/05_async_cancellation_safety.md) | 后置概念引用（蕴含/导向） |
 | [变量](../../03_advanced/06_low_level_patterns/09_variables.md) | ⟸ | [内存分配与生命周期](../../03_advanced/06_low_level_patterns/08_memory_allocation_and_lifetime.md) | 源在目标的前置元数据中（目标依赖源） |
 | [变量](../../03_advanced/06_low_level_patterns/09_variables.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/01_unsafe.md) | 后置概念引用（蕴含/导向） |
+| [Executor 公平性与调度：Tokio 调度器 internals](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) | ↔ | [Stream 代数与背压：拉取式序列的形式刻画](../../03_advanced/01_async/09_stream_algebra_and_backpressure.md) | 互为后置概念（互参） |
+| [Executor 公平性与调度：Tokio 调度器 internals](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) | ⊑ | [Async 取消安全](../../03_advanced/01_async/05_async_cancellation_safety.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Rust 现代进程管理库](../../03_advanced/08_process_ipc/10_modern_process_libraries.md) | ↔ | [Rust 进程性能工程](../../03_advanced/08_process_ipc/08_process_performance_engineering.md) | 互为后置概念（互参） |
 | [Rust 现代进程管理库](../../03_advanced/08_process_ipc/10_modern_process_libraries.md) | ↔ | [Rust 进程安全与沙箱](../../03_advanced/08_process_ipc/07_process_security_and_sandboxing.md) | 互为后置概念（互参） |
 | [Rust 现代进程管理库](../../03_advanced/08_process_ipc/10_modern_process_libraries.md) | ↔ | [Rust 进程测试与基准](../../03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md) | 互为后置概念（互参） |
 | [条件编译](../../03_advanced/03_proc_macros/11_conditional_compilation.md) | ⟹ | [FFI 高级主题：跨语言边界的安全与性能](../../03_advanced/04_ffi/02_ffi_advanced.md) | 后置概念引用（蕴含/导向） |
 | [条件编译](../../03_advanced/03_proc_macros/11_conditional_compilation.md) | ⟹ | [Linkage](../../03_advanced/04_ffi/03_linkage.md) | 后置概念引用（蕴含/导向） |
+| [Pin 投射反例集：unsafe 结构投射的 UB 目录与正确模式库](../../03_advanced/01_async/11_pin_projection_counterexamples.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/01_unsafe.md) | 后置概念引用（蕴含/导向） |
+| [Pin 投射反例集：unsafe 结构投射的 UB 目录与正确模式库](../../03_advanced/01_async/11_pin_projection_counterexamples.md) | ⊑ | [Async 取消安全](../../03_advanced/01_async/05_async_cancellation_safety.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
+| [Waker 契约深度解析：RawWakerVTable 实现与契约违反反例集](../../03_advanced/01_async/12_waker_contract_deep_dive.md) | ⊑ | [Executor 公平性与调度：Tokio 调度器 internals](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
+| [Waker 契约深度解析：RawWakerVTable 实现与契约违反反例集](../../03_advanced/01_async/12_waker_contract_deep_dive.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/01_unsafe.md) | 后置概念引用（蕴含/导向） |
 
 ## L4 形式化理论层
 
@@ -317,6 +325,7 @@
 | [Cargo `public = true` 与 Resolver v3](../../06_ecosystem/01_cargo/02_public_private_deps.md) | → | [Cargo Workspaces](../../06_ecosystem/01_cargo/14_cargo_workspaces.md) | 目标在源的前置元数据中（源依赖目标） |
 | [Security & Cryptography](../../06_ecosystem/07_security_and_cryptography/02_security_cryptography.md) | ⟹ | [网络协议：QUIC/HTTP-3 与 Rust 实现](../../06_ecosystem/04_web_and_networking/07_network_protocols.md) | 后置概念引用（蕴含/导向） |
 | [Security & Cryptography](../../06_ecosystem/07_security_and_cryptography/02_security_cryptography.md) | ⟹ | [Blockchain & Smart Contract Security](../../06_ecosystem/11_domain_applications/01_blockchain.md) | 后置概念引用（蕴含/导向） |
+| [cargo vet 与供应链审计](../../06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) | 后置概念引用（蕴含/导向） |
 | [自定义协议实现](../../06_ecosystem/12_networking/03_custom_protocol_implementation.md) | ⊑ | [Rust 高级网络协议概览](../../06_ecosystem/12_networking/01_advanced_network_protocols.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [自定义协议实现](../../06_ecosystem/12_networking/03_custom_protocol_implementation.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | 后置概念引用（蕴含/导向） |
 | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) | ⟹ | [Rust 云原生生态](../../06_ecosystem/04_web_and_networking/02_cloud_native.md) | 后置概念引用（蕴含/导向） |
@@ -406,6 +415,8 @@
 | [模式选择最佳实践 (Pattern Selection Best Practices)](../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md) | ⊑ | [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [rustc Driver、Interface 与 Stable MIR](../../06_ecosystem/00_toolchain/10_rustc_driver_and_stable_mir.md) | ⟹ | [Rust 编译器基础设施深度解析](../../06_ecosystem/00_toolchain/05_compiler_infrastructure.md) | 后置概念引用（蕴含/导向） |
 | [rustc Driver、Interface 与 Stable MIR](../../06_ecosystem/00_toolchain/10_rustc_driver_and_stable_mir.md) | ⟹ | [rustc 编译器诊断与 UI Tests](../../06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md) | 后置概念引用（蕴含/导向） |
+| [Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) | ↔ | [rustc / Cargo `-Z` 不稳定选项参考清单](../../06_ecosystem/00_toolchain/15_z_flags_reference.md) | 互为后置概念（互参） |
+| [Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) | ⟹ | [WASI & WebAssembly Component Model](../../06_ecosystem/05_systems_and_embedded/01_wasi.md) | 后置概念引用（蕴含/导向） |
 | [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) | ⟹ | [Cargo 认证与构建缓存](../../06_ecosystem/01_cargo/09_cargo_authentication_and_cache.md) | 后置概念引用（蕴含/导向） |
 | [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) | 后置概念引用（蕴含/导向） |
 | [rustc 编译器诊断与 UI Tests](../../06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md) | ⟹ | [rustc 自举](../../06_ecosystem/00_toolchain/12_rustc_bootstrap.md) | 后置概念引用（蕴含/导向） |
@@ -439,6 +450,8 @@
 | [C09 设计模式 - 常见问题](../../06_ecosystem/03_design_patterns/15_design_patterns_faq.md) | ⊑ | [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Game Engine Internals](../../06_ecosystem/11_domain_applications/15_game_engine_internals.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/01_performance_optimization.md) | 后置概念引用（蕴含/导向） |
 | [Game Engine Internals](../../06_ecosystem/11_domain_applications/15_game_engine_internals.md) | ⟹ | [Rust 嵌入式系统开发](../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md) | 后置概念引用（蕴含/导向） |
+| [rustc / Cargo `-Z` 不稳定选项参考清单](../../06_ecosystem/00_toolchain/15_z_flags_reference.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/02_cross_compilation.md) | 后置概念引用（蕴含/导向） |
+| [rustc / Cargo `-Z` 不稳定选项参考清单](../../06_ecosystem/00_toolchain/15_z_flags_reference.md) | ↔ | [Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) | 互为后置概念（互参） |
 | [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | ⟸ | [Cargo 指南实践](../../06_ecosystem/01_cargo/17_cargo_guide_practices.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | ⟹ | [Cargo Workspaces](../../06_ecosystem/01_cargo/14_cargo_workspaces.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | ⟹ | [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) | 后置概念引用（蕴含/导向） |
@@ -468,6 +481,8 @@
 | [C12 WASM - JavaScript 互操作](../../06_ecosystem/11_domain_applications/20_wasm_javascript_interop.md) | ⇔ | [Rust Web 框架对比与选型](../../06_ecosystem/04_web_and_networking/03_web_frameworks.md) | 对比型页面（名称含 vs/对比） |
 | [Cargo Registry 内部机制](../../06_ecosystem/01_cargo/21_cargo_registry_internals.md) | ↔ | [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) | 互为后置概念（互参） |
 | [Cargo Registry 内部机制](../../06_ecosystem/01_cargo/21_cargo_registry_internals.md) | ⟹ | [安全 实践：Rust 代码的防御性编程](../../06_ecosystem/07_security_and_cryptography/01_security_practices.md) | 后置概念引用（蕴含/导向） |
+| [AUTOSAR 与 Rust](../../06_ecosystem/11_domain_applications/22_autosar_and_rust.md) | ⟹ | [Rust 工业应用案例研究](../../06_ecosystem/11_domain_applications/14_industrial_case_studies.md) | 后置概念引用（蕴含/导向） |
+| [AUTOSAR 与 Rust](../../06_ecosystem/11_domain_applications/22_autosar_and_rust.md) | ⟹ | [cargo vet 与供应链审计](../../06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md) | 后置概念引用（蕴含/导向） |
 | [Cargo build-std](../../06_ecosystem/01_cargo/22_build_std.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/02_cross_compilation.md) | 后置概念引用（蕴含/导向） |
 
 ## L7 前沿趋势层
@@ -508,7 +523,7 @@
 | [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/03_preview_features/09_return_type_notation_preview.md) | ⟹ | [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/22_async_drop_preview.md) | 后置概念引用（蕴含/导向） |
 | [`must_not_suspend` Lint Preview](../../07_future/03_preview_features/10_must_not_suspend_preview.md) | ⟹ | [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/22_async_drop_preview.md) | 后置概念引用（蕴含/导向） |
 | [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/03_preview_features/11_unsafe_fields_preview.md) | ⟹ | [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/03_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |
-| [Ferrocene 预研：Rust 的安全关键认证之路](../../07_future/03_preview_features/12_ferrocene_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |
+| [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/03_preview_features/12_ferrocene_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |
 | [Lifetime Capture in `impl Trait` Preview](../../07_future/03_preview_features/13_lifetime_capture_preview.md) | ↔ | [特质中返回位置 impl Trait（RPITIT）预览](../../07_future/03_preview_features/15_rpitit_preview.md) | 互为后置概念（互参） |
 | [Lifetime Capture in `impl Trait` Preview](../../07_future/03_preview_features/13_lifetime_capture_preview.md) | ⟹ | [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/03_preview_features/09_return_type_notation_preview.md) | 后置概念引用（蕴含/导向） |
 | [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/03_preview_features/14_pin_ergonomics_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |
@@ -532,13 +547,19 @@
 | [WASM Target Evolution Preview](../../07_future/03_preview_features/28_wasm_target_evolution.md) | ⟹ | [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](../../07_future/04_research_and_experimental/06_rust_for_webassembly.md) | 后置概念引用（蕴含/导向） |
 | [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/03_preview_features/29_aarch64_sve_sme_preview.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/04_rust_for_linux.md) | 后置概念引用（蕴含/导向） |
 | [Rust in Space Preview](../../07_future/03_preview_features/30_rust_in_space.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/04_rust_for_linux.md) | 后置概念引用（蕴含/导向） |
-| [Rust in Space Preview](../../07_future/03_preview_features/30_rust_in_space.md) | ⟹ | [Ferrocene 预研：Rust 的安全关键认证之路](../../07_future/03_preview_features/12_ferrocene_preview.md) | 后置概念引用（蕴含/导向） |
+| [Rust in Space Preview](../../07_future/03_preview_features/30_rust_in_space.md) | ⟹ | [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/03_preview_features/12_ferrocene_preview.md) | 后置概念引用（蕴含/导向） |
 | [Specialization：Trait 实现的精确化与重叠解析](../../07_future/03_preview_features/31_specialization_preview.md) | ⟹ | [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/03_preview_features/06_const_trait_impl_preview.md) | 后置概念引用（蕴含/导向） |
 | [Specialization：Trait 实现的精确化与重叠解析](../../07_future/03_preview_features/31_specialization_preview.md) | ⟹ | [Effects System: Concept Pre-study](../../07_future/03_preview_features/01_effects_system.md) | 后置概念引用（蕴含/导向） |
 | [AutoVerus / Verus 预览跟踪](../../07_future/03_preview_features/33_autoverus_preview.md) | ⟹ | [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/03_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |
 | [AutoVerus / Verus 预览跟踪](../../07_future/03_preview_features/33_autoverus_preview.md) | ↔ | [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/24_borrow_sanitizer.md) | 互为后置概念（互参） |
 | [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/03_preview_features/34_open_enums_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |
 | [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/03_preview_features/34_open_enums_preview.md) | ⟹ | [Effects System: Concept Pre-study](../../07_future/03_preview_features/01_effects_system.md) | 后置概念引用（蕴含/导向） |
+| [f16 / f128 预研：半精度与四精度浮点类型](../../07_future/03_preview_features/35_f16_f128_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |
+| [f16 / f128 预研：半精度与四精度浮点类型](../../07_future/03_preview_features/35_f16_f128_preview.md) | ↔ | [Complex Numbers 预研：标准库复数类型](../../07_future/03_preview_features/38_complex_numbers_preview.md) | 互为后置概念（互参） |
+| [UnsafePinned 预研：可变引用别名语义的精确标注](../../07_future/03_preview_features/36_unsafe_pinned_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |
+| [Default Field Values 预研：结构体字段默认值](../../07_future/03_preview_features/37_default_field_values_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |
+| [Complex Numbers 预研：标准库复数类型](../../07_future/03_preview_features/38_complex_numbers_preview.md) | ↔ | [f16 / f128 预研：半精度与四精度浮点类型](../../07_future/03_preview_features/35_f16_f128_preview.md) | 互为后置概念（互参） |
+| [Complex Numbers 预研：标准库复数类型](../../07_future/03_preview_features/38_complex_numbers_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |
 | [Rust 1.97.0 特性 × 领域反查矩阵](../../07_future/00_version_tracking/feature_domain_matrix_197.md) | ⟹ | [Rust 1.97.0 前沿特性预览](../../07_future/00_version_tracking/rust_1_97_preview.md) | 后置概念引用（蕴含/导向） |
 | [Rust 1.97.0 特性 × 领域反查矩阵](../../07_future/00_version_tracking/feature_domain_matrix_197.md) | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/00_version_tracking/rust_1_98_preview.md) | 后置概念引用（蕴含/导向） |
 | [Rust 1.97 兼容性迁移判定树](../../07_future/00_version_tracking/migration_197_decision_tree.md) | ⟹ | [Rust 1.97.0 前沿特性预览](../../07_future/00_version_tracking/rust_1_97_preview.md) | 后置概念引用（蕴含/导向） |

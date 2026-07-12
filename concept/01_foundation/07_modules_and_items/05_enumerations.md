@@ -56,10 +56,34 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((枚举))
+    变体形式
+      无数据
+      元组变体
+      结构体变体
+    标准枚举
+      Option
+      Result
+    模式匹配
+      穷尽性
+      if let
+    内存布局
+      判别值
+      niche优化
+    演进
+      非穷尽标注
+      向后兼容
+```
+
 ## 📑 目录
 
 - [Enumerations（枚举）](#enumerations枚举)
   - [认知路径](#认知路径)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、核心命题](#一核心命题)
   - [二、枚举变体](#二枚举变体)
@@ -73,6 +97,10 @@
     - [6.4 判定表：枚举建模与匹配处置](#64-判定表枚举建模与匹配处置)
   - [七、权威来源索引](#七权威来源索引)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：枚举的本质（🟢 基础）](#测验-1枚举的本质-基础)
+    - [测验 2：穷尽性检查（🟡 进阶）](#测验-2穷尽性检查-进阶)
+    - [测验 3：`#[non_exhaustive]` 的语义边界（🔴 专家）](#测验-3non_exhaustive-的语义边界-专家)
 
 ---
 
@@ -266,3 +294,71 @@ fn main() {
 
 - **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
 - **P2 生态/社区**: [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata) · [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver)
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-12）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致。
+
+### 测验 1：枚举的本质（🟢 基础）
+
+按本页命题 1，Rust 枚举的类型论本质是？
+
+- A. 命名乘积类型
+- B. 带标签的联合类型（Tagged Union / Sum Type），每个变体可携带不同类型和数量的数据
+- C. 整数常量的别名集合
+- D. 动态类型容器
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。枚举是**带标签的联合类型**（定理 1：其值恰好属于一个变体，编译器可在 `match` 中强制穷尽所有可能）。A 是结构体的本质（命名乘积类型）；C 是 C 语言 enum 的模型，不是 Rust 的。
+
+</details>
+
+---
+
+### 测验 2：穷尽性检查（🟡 进阶）
+
+以下代码能否编译？
+
+```rust,ignore
+enum Message { Quit, Write(String) }
+
+fn handle(msg: Message) {
+    match msg {
+        Message::Quit => println!("quit"),
+    }
+}
+```
+
+- A. 能编译，未匹配的变体被静默忽略
+- B. 不能编译：`match` 必须覆盖枚举所有变体，缺少 `Write` 分支
+- C. 能编译，运行时遇到 `Write` 时 panic
+- D. 不能编译：`String` 不能作为变体负载
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「四、模式匹配与穷尽性」与命题 4：编译器对 `match` 执行**穷尽性检查**，要求覆盖所有变体，否则编译错误（`non-exhaustive patterns`）。这是 Rust "无遗漏"安全保证的一部分。A/C 描述的"静默忽略/运行时 panic"正是 Rust 刻意排除的行为。
+
+</details>
+
+---
+
+### 测验 3：`#[non_exhaustive]` 的语义边界（🔴 专家）
+
+关于 `#[non_exhaustive]` 标注的枚举，下列说法正确的是？
+
+- A. 对外部 crate 的消费者，`match` 必须包含 `_ =>` 分支；允许库作者未来添加变体而不破坏下游编译
+- B. 定义该枚举的 crate 内部的穷尽性检查也被放宽
+- C. 标注后该枚举不能再添加新变体
+- D. 该标注会改变枚举的内存布局
+
+<details>
+<summary>✅ 答案</summary>
+
+**A 正确**。按本页「五、`#[non_exhaustive]`」：对外部 crate 的消费者，`match` 必须包含 `_ =>` 分支；允许库作者在未来版本添加新变体而不破坏下游编译；**不影响定义该枚举的 crate 内部穷尽性检查**（B 错）。C/D 与语义无关。
+
+</details>

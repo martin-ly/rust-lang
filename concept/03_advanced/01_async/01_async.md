@@ -1286,6 +1286,8 @@ graph TD
 > [来源: [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/index.html)]
 > **[Async Book: Waker](https://rust-lang.github.io/async-book/)** Waker 是 Future 与 Reactor 之间的桥梁——poll 时将 Waker 传递给底层 I/O 源，I/O 就绪时源通过 Waker 通知执行器重新调度该 Future。✅ 已验证
 > **[without.boats blog]** Waker 的设计刻意与具体执行器解耦：任何实现了 `Wake` trait 的类型均可作为 Waker，这使得同一个 Future 可在不同运行时之间复用。✅ 已验证
+>
+> **实现纵深**: RawWakerVTable 手工实现的正确模式全集（std-only 可编译版）与契约违反反例集（丢失 wake 死锁 / clone-drop 记账错误 double-free）统一维护在 [Waker 契约深度解析](12_waker_contract_deep_dive.md)；本节保留契约概述与活性决策树（canonical 分工）。
 
 ---
 
@@ -2654,6 +2656,9 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 - **上层概念**: [L2 泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md)
 - **下层概念**: [L4 异步（Async）语义形式化](../../04_formal/01_ownership_logic/02_ownership_formal.md) · [L6 Tokio](../../06_ecosystem/02_core_crates/01_core_crates.md) · [L7 效果系统](../../07_future/03_preview_features/01_effects_system.md)
+- [Stream 代数与背压](09_stream_algebra_and_backpressure.md) — Stream/Iterator 对偶、组合子代数与背压形式模型
+- [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) — work-stealing、LIFO slot 与饥饿分析
+- [Pin 投射反例集](11_pin_projection_counterexamples.md) — unsafe 手写投射 UB 目录与 pin-project 正确模式
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|

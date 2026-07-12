@@ -129,6 +129,8 @@ flowchart TD
 - 需要形式化推理链 → [逻辑推理图谱](05_logical_reasoning_atlas.md)
 - 需要查看概念定义 → [概念定义图谱](01_concept_definition_atlas.md)
 
+<!-- GENERATED-INDEX: 以下「数据驱动索引」节由 scripts/generate_knowledge_topology_atlas.py 在标记处自动生成；人工策展内容写在标记之前。 -->
+
 ---
 
 ---

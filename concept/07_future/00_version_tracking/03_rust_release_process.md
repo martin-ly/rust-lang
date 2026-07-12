@@ -159,3 +159,9 @@ channel = "stable"
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
 - **P2 生态/社区**: [docs.rs/sysinfo — 生态权威 API 文档](https://docs.rs/sysinfo) · [docs.rs/num_cpus — 生态权威 API 文档](https://docs.rs/num_cpus)
+
+---
+
+## 相关概念
+
+- [对应测验](../05_quizzes/01_quiz_version_and_preview.md) — 版本演进、Edition 机制与前沿特性（发布火车、1.90–1.97 稳定特性、preview 状态）

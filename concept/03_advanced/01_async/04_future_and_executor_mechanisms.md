@@ -76,6 +76,11 @@
   - [反向推理](#反向推理)
   - [过渡段](#过渡段)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [相关概念](#相关概念)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`poll` 的返回（🟢 基础）](#测验-1poll-的返回-基础)
+    - [测验 2：Waker 的角色（🟡 进阶）](#测验-2waker-的角色-进阶)
+    - [测验 3：Future 的惰性（🔴 专家）](#测验-3future-的惰性-专家)
 
 ---
 
@@ -1072,3 +1077,67 @@ impl Future for MyFuture {
 
 - **P2 生态/社区**: [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper) · [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio)
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+
+## 相关概念
+
+- [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) — Executor 实现（§3）之上的公平性与饥饿分析
+- [Waker 契约深度解析](12_waker_contract_deep_dive.md) — Waker/VTable 机制（§2、§8.9）的实现层纵深：正确模式全集与契约违反反例集
+- [Tokio 运行时内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) — 工业级 executor（驱动/池/任务句柄）的机制权威页
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-12）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致。
+
+### 测验 1：`poll` 的返回（🟢 基础）
+
+`Future::poll` 的返回值 `Poll<T>` 的两个变体含义是？
+
+- A. `Ready(T)` 表示 Future 已完成并产出结果；`Pending` 表示未完成，需稍后重试
+- B. `Ready(T)` 表示 Future 已就绪等待开始；`Pending` 表示永久失败
+- C. 两个变体都可多次返回，语义相同
+- D. `Pending` 要求 executor 立即 busy-loop 重试
+
+<details>
+<summary>✅ 答案</summary>
+
+**A 正确**。按本页 §1.2：`Poll::Ready(value)` — Future 完成，返回 value；`Poll::Pending` — Future 未完成，注册 Waker，等待唤醒后再次 poll。D 错：Pending 的正确响应是注册 Waker 挂起等待，而非忙等。
+
+</details>
+
+---
+
+### 测验 2：Waker 的角色（🟡 进阶）
+
+Waker 在 Future 执行模型中的作用是？
+
+- A. 直接执行 Future 的内部代码
+- B. 通知机制：告诉 Executor "这个 Future 现在可以再次 poll 了"；当事件发生（如 I/O 就绪）时调用 `waker.wake()` 唤醒任务
+- C. 负责分配 Future 的栈内存
+- D. 决定 Future 的优先级并抢占其他任务
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页 §1.3：Waker 是**通知机制**——告诉 Executor 该 Future 可以再次 poll；异步唤醒在事件发生（如 I/O 就绪）时通过 `waker.wake()` 完成。`Context` 持有 `&Waker` 并传入 `poll`。
+
+</details>
+
+---
+
+### 测验 3：Future 的惰性（🔴 专家）
+
+调用 `let fut = fetch_data();`（`async fn`）后，下列说法正确的是？
+
+- A. `fetch_data` 的函数体立即开始执行到第一个 `.await`
+- B. `async fn` 被调用时不执行任何代码，只有被 `poll` 才推进——Future 是惰性状态机
+- C. 返回的 Future 自动在后台线程执行
+- D. 不 `await` 则编译器报 unused 错误并拒绝编译
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。Rust 的 Future 是**惰性状态机**：调用 `async fn` 只构造状态机值，不执行任何代码；执行由 executor 反复 `poll` 驱动，编译器把 `async fn` 变换为枚举状态机，每个 `.await` 对应一个 `Pending` 状态（本页 §5.1）。C 错：没有 executor 就没有任何执行；A/D 与惰性语义矛盾。
+
+</details>

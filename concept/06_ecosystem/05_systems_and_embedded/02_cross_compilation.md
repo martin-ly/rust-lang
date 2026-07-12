@@ -95,6 +95,8 @@ Target Triple 格式: <arch><sub>-<vendor>-<sys>-<abi>
   └── *-uefi-*: UEFI 固件
 ```
 
+> **Rust 1.97.0 注记**：在 UEFI 目标（如 `x86_64-unknown-uefi`）上，`std::fs::File` 实现了 `Send`（[release notes — Stabilized APIs](https://releases.rs/docs/1.97.0/)，curl 200 实测），文件句柄可跨线程传递，与 UEFI 单线程固件环境的实际执行模型相协调。
+
 > **认知功能**: Target Triple 是 Rust **跨平台抽象的基石**——它精确标识了编译目标的架构、操作系统和 ABI，使编译器能生成正确的代码。
 > [来源: [The rustc Book — Targets](https://doc.rust-lang.org/rustc/targets/index.html)]
 

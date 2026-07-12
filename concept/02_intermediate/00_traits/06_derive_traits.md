@@ -21,6 +21,30 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((可派生Trait))
+    比较族
+      PartialEq Eq
+      PartialOrd Ord
+    复制族
+      Clone Copy
+    工具族
+      Debug
+      Hash
+      Default
+    组合
+      常见搭配
+      传递要求
+    不可派生
+      Display
+      Drop
+    机制
+      宏代码生成
+```
+
 ## 一、`#[derive]` 的作用
 
 `#[derive(TraitName)]` 可以自动为 struct 或 enum 生成 trait 实现。编译器使用默认实现，其行为通常基于字段的逐字段/逐变体推导。(Source: [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html))
@@ -243,3 +267,61 @@ struct User {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/enum_dispatch — 生态权威 API 文档](https://docs.rs/enum_dispatch) · [docs.rs/serde — 生态权威 API 文档](https://docs.rs/serde)
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> W3-b 补充（2026-07-12）：本页原无嵌入式测验，按四级题型规范补 3 题（🟢🟡🔴 各 1 题，`<details>` 折叠答案），内容与本页正文严格一致。
+
+### 测验 1：`#[derive]` 的生成机制（🟢 基础）
+
+`#[derive(Debug, Clone, PartialEq)]` 作用于 struct 时，编译器如何生成实现？
+
+- A. 调用运行时反射生成
+- B. 使用默认实现，行为基于字段的逐字段/逐变体推导
+- C. 复制标准库中同名类型的实现
+- D. 生成空实现，待运行时填充
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「一、`#[derive]` 的作用」(Source: Rust Reference — Derive)：`#[derive(TraitName)]` 自动为 struct 或 enum 生成 trait 实现，编译器使用默认实现，其行为通常基于**字段的逐字段/逐变体推导**。如 `PartialEq` 派生：struct 的所有字段都相等时实例相等，enum 的同一变体相等。
+
+</details>
+
+---
+
+### 测验 2：`Eq` 与浮点的边界（🟡 进阶）
+
+为什么 `f32`/`f64` 实现 `PartialEq` 但不实现 `Eq`？
+
+- A. 浮点比较太慢，标准库刻意省略
+- B. `Eq` 要求自反性（任意值都等于自身），而 `NaN != NaN` 违反自反性
+- C. 浮点类型不允许派生任何 trait
+- D. `Eq` 已被弃用
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「`PartialEq` / `Eq` — 相等性比较」：`Eq` 无方法，仅作为类型契约标记——**任意值都等于自身（自反性）**，且要求类型已实现 `PartialEq`。反例：`f32`/`f64` 实现 `PartialEq` 但不实现 `Eq`，因为 `NaN != NaN`。用途：`HashMap<K, V>` 的键要求 `K: Eq`。
+
+</details>
+
+---
+
+### 测验 3：不可派生的 Trait（🔴 专家）
+
+为什么 `Display` 不能通过 `#[derive]` 自动实现？
+
+- A. `Display` 是 unsafe trait
+- B. `Display` 没有合理的默认用户可见格式，默认行为不满足需求时需手动实现
+- C. `Display` 已被 `Debug` 取代
+- D. 编译器尚不支持派生带格式参数的 trait
+
+<details>
+<summary>✅ 答案</summary>
+
+**B 正确**。按本页「一、`#[derive]` 的作用」注意项与知识结构图「不可派生：Display、Drop」：如果默认行为不满足需求，需要手动实现——例如 `Display` **没有合理的默认用户可见格式**，因此不能 derive。对比：`Debug` 有面向开发者的合理默认（按字段顺序输出调试表示），故可派生。
+
+</details>

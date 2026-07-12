@@ -60,6 +60,30 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((泛型系统))
+    参数化
+      类型参数
+      生命周期参数
+      常量参数
+    约束
+      trait bound
+      where子句
+    单态化
+      编译期展开
+      零成本
+      代码膨胀
+    推断
+      类型推导
+      泛型实例化
+    进阶
+      GATs
+      类型级编程
+```
+
 ## 📑 目录
 
 - [Generics（泛型系统）](#generics泛型系统)
@@ -2268,6 +2292,7 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 
 ## 十一、相关概念链接
 
+- [对应测验](04_quiz_traits_and_generics.md) — Trait 与泛型（bound、关联类型、trait 对象、单态化）
 - **上层概念**: [L2 Trait](../00_traits/01_traits.md) · [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) · [Traits](../00_traits/01_traits.md)
 - **下层概念**: [L3 Async](../../03_advanced/01_async/01_async.md) · [L4 类型论](../../04_formal/00_type_theory/01_type_theory.md) · [L7 效果系统](../../07_future/03_preview_features/01_effects_system.md) · [Advanced Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [GATs](../../03_advanced/01_async/01_async.md) · [Const Generics [来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)
 

@@ -57,9 +57,36 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((类型系统))
+    类型分类
+      标量类型
+      复合类型
+      ADT
+    多态机制
+      参数多态
+      特设多态
+      受限子类型
+    静态保证
+      编译期检查
+      类型推断
+      内存安全
+    抽象接口
+      impl Trait
+      dyn Trait
+    类型层级
+      具体类型
+      泛型
+      底类型
+```
+
 ## 📑 目录
 
 - [Type System Basics（类型系统基础）](#type-system-basics类型系统基础)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 定义](#11-wikipedia-定义)
@@ -980,6 +1007,7 @@ fn main() {
 
 ## 十一、相关概念链接
 
+- [对应测验](../11_quizzes/24_quiz_type_system.md) — 类型系统（标量/复合类型、enum、模式匹配、类型转换）
 - **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)
 
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 类型系统与所有权规则共同构成 Safe Rust 的内存安全（Memory Safety）基础

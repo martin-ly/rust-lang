@@ -41,6 +41,7 @@
     - [2.3 zip 与并行迭代](#23-zip-与并行迭代)
     - [2.4 IntoIterator 与 for 循环](#24-intoiterator-与-for-循环)
     - [2.5 迭代器模式矩阵](#25-迭代器模式矩阵)
+    - [2.6 Rust 1.97：`RepeatN` 实现 `Default`](#26-rust-197repeatn-实现-default)
   - [三、自定义迭代器](#三自定义迭代器)
   - [四、性能权衡](#四性能权衡)
   - [五、反命题与边界分析](#五反命题与边界分析)
@@ -502,6 +503,20 @@ for x in &mut v { /* x 是 &mut i32 */ }
 > (Source: [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html))
 > [来源: [itertools crate](https://docs.rs/itertools/latest/itertools/)]
 
+### 2.6 Rust 1.97：`RepeatN` 实现 `Default`
+
+Rust 1.97.0 为 `std::iter::RepeatN<T>`（即 `std::iter::repeat_n(value, n)` 的返回类型）实现了 `Default`，默认值是**空迭代器**（`count() == 0`）（[release notes — Stabilized APIs](https://releases.rs/docs/1.97.0/)，curl 200 实测）：
+
+```rust
+// edition = "2024", rust = "1.97" —— rustc 1.97.0 实测
+use std::iter::RepeatN;
+
+let r: RepeatN<u8> = RepeatN::default();
+assert_eq!(r.count(), 0); // 默认即空迭代器
+```
+
+这使 `RepeatN` 可放进要求 `Default` 的泛型上下文（如 `#[derive(Default)]` 的结构体字段、`std::mem::take`），与 `std::iter::Empty`、`Repeat` 等已有 `Default` 的迭代器类型行为对齐。
+
 ---
 
 ## 三、自定义迭代器
@@ -863,6 +878,7 @@ fn main() {
 
 ## 相关概念
 
+- [对应测验](../../01_foundation/11_quizzes/27_quiz_closures_iterators.md) — 闭包与迭代器（捕获、Fn traits、惰性求值、适配器）
 - **上层概念**: [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Generics](../01_generics/01_generics.md) · [Closures](../../01_foundation/00_start/03_closure_basics.md)
 - **下层概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Performance](../../06_ecosystem/10_performance/01_performance_optimization.md)
 
