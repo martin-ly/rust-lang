@@ -771,7 +771,7 @@ let f = || {
 
 ```rust
 let add = |a: i32, b: i32| -> i32 { a + b };
-let inc = |x| x + 1;           // 类型推断
+let inc = |x: i32| x + 1;   // 类型推断（此处显式标注以便独立编译）
 let print = || println!("hi"); // 无参数
 ```
 

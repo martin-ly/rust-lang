@@ -1680,8 +1680,8 @@ for msg in &msgs {
 
 **`DiscriminantKind` trait**（未稳定，需每日构建版工具链）提供了在泛型上下文中获取类型的 "discriminant 类型" 的能力：
 
-```rust
-// 需启用实验特性门 discriminant_kind（每日构建版工具链）
+```rust,ignore
+// 需启用实验特性门 discriminant_kind（每日构建版工具链，stable 不可编译）
 use std::marker::DiscriminantKind;
 
 // <T as DiscriminantKind>::Discriminant 表示 T 的 discriminant 底层整数类型
@@ -2408,7 +2408,8 @@ fn g(items: &mut [Box<dyn Iterator<Item = i32>>]) {
 
 > **原理与合理性**：`!` 与空类型不同——空类型没有值，`!` 表示“无返回”。在控制流图中，`panic!()`、`loop {}`、`return` 等发散表达式产生 `!`，并可通过子类型关系自然融入后续类型检查（如 `let x: i32 = return;`）。它与 `Result<T, !>`、`Option<!>` 等组合，精确刻画“不可能失败/不可能有值”的语义。
 
-```rust
+```rust,ignore
+// `Result<T, !>` 中的 `!` 作为类型参数仍未稳定（stable 不可编译）
 fn diverge() -> ! { panic!("never returns") }
 
 fn maybe_ok() -> Result<i32, !> {
@@ -2442,7 +2443,7 @@ impl<T: Copy + Default, const N: usize> Matrix<T, N> {
 
 > **原理与合理性**：HM 通过统一（unification）算法求解类型变量；Rust 在此基础上引入**约束生成 + 约束求解**两阶段模型，处理 `+` 等重载运算符、`.method()` 方法解析以及 `impl Trait` 的匿名泛型。如果约束无解，则产生 E0282/E0283 等错误。
 
-```rust
+```rust,compile_fail
 fn identity(x: T) -> T { x } // 需要显式泛型参数；Rust 不支持完全 HM 多态
 
 let v = Vec::new();

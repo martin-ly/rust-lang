@@ -155,7 +155,8 @@ crate root (main.rs / lib.rs)
 - 不能有 `where` 子句。
 - 返回类型必须实现 `Termination` trait。
 
-```rust
+```rust,ignore
+// 三种合法的 main 签名形式（示意，同一 crate 只能存在其中一个）
 fn main() {
     println!("Hello, world!");
 }

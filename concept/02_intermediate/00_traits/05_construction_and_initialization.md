@@ -101,6 +101,11 @@ Rust 没有构造函数语言特性。创建对象使用结构体（Struct）字
 ### 3.2 `new` 约定与关联函数
 
 ```rust
+struct Point {
+    x: f64,
+    y: f64,
+}
+
 impl Point {
     fn new(x: f64, y: f64) -> Self {
         Point { x, y }

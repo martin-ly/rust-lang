@@ -194,7 +194,7 @@ trait Add<Rhs = Self> {
 ## 五、外部块与 ABI
 
 ```rust
-extern "C" {
+unsafe extern "C" {
     fn c_function(x: i32) -> i32;
     static errno: i32;
 }

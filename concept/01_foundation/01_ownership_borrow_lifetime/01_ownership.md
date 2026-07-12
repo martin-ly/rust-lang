@@ -678,7 +678,7 @@ fn main() {
 
 > **原则**: 优先使用**借用（Borrowing）**和**缩小作用域**；仅在必要時使用 `clone()`、`Rc<T>` 或 `RefCell<T>`。每次引入运行时开销（引用计数、运行时借用检查）都应留下注释说明理由。
 
-```rust
+```rust,compile_fail
 // ❌ 错误：move 后继续使用
 fn main() {
     let s = String::from("hello");

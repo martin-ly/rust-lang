@@ -1460,7 +1460,8 @@ fn vtable_analysis() {
 
 ### VTable 生成示例
 
-```rust
+```rust,ignore
+// vtable 结构示意（伪代码，编译器内部表示不对外暴露）
 // 编译器为每个 impl 生成一个 vtable
 
 // Dog 的 vtable (伪代码)
@@ -1509,6 +1510,17 @@ static CAT_ANIMAL_VTABLE: VTable = VTable {
 **解决方案**：使用泛型实现静态分派。
 
 ```rust
+# trait Animal {
+#     fn speak(&self);
+# }
+# struct Dog {
+#     name: String,
+# }
+# impl Animal for Dog {
+#     fn speak(&self) {
+#         println!("{}: Woof!", self.name);
+#     }
+# }
 // ❌ 无法内联（动态分派）
 fn process_dynamic(animal: &dyn Animal) {
     animal.speak(); // 通过vtable调用
@@ -1545,6 +1557,17 @@ fn performance_comparison() {
 **技术**：在某些情况下，编译器可以将动态分派转换为静态分派。
 
 ```rust
+# trait Animal {
+#     fn speak(&self);
+# }
+# struct Dog {
+#     name: String,
+# }
+# impl Animal for Dog {
+#     fn speak(&self) {
+#         println!("{}: Woof!", self.name);
+#     }
+# }
 fn devirtualization_example() {
     let dog = Dog {
         name: "Buddy".to_string(),
@@ -1573,6 +1596,21 @@ fn process_animals(animals: Vec<Box<dyn Animal>>) {
 **解决方案**：使用SoA (Struct of Arrays) 代替 AoS (Array of Structs)。
 
 ```rust
+# trait EventHandler {
+#     fn handle(&mut self, event: &str);
+# }
+# struct ClickHandler;
+# struct KeyHandler;
+# impl EventHandler for ClickHandler {
+#     fn handle(&mut self, event: &str) {
+#         println!("click: {event}");
+#     }
+# }
+# impl EventHandler for KeyHandler {
+#     fn handle(&mut self, event: &str) {
+#         println!("key: {event}");
+#     }
+# }
 // ❌ 差的缓存局部性
 struct DynamicProcessor {
     handlers: Vec<Box<dyn EventHandler>>,
@@ -1746,6 +1784,10 @@ fn run_all_benchmarks() {
 ### 静态分派的汇编
 
 ```rust
+# struct Dog;
+# impl Dog {
+#     fn speak(&self) {}
+# }
 // Rust代码
 fn static_call(dog: &Dog) {
     dog.speak();
@@ -1761,6 +1803,9 @@ fn static_call(dog: &Dog) {
 ### 动态分派的汇编
 
 ```rust
+# trait Animal {
+#     fn speak(&self);
+# }
 // Rust代码
 fn dynamic_call(animal: &dyn Animal) {
     animal.speak();
@@ -1787,6 +1832,17 @@ fn dynamic_call(animal: &dyn Animal) {
 ### 1. 分支预测友好的设计
 
 ```rust
+# trait Processor {
+#     fn process(&self);
+# }
+# struct FastProcessor;
+# struct SlowProcessor;
+# impl Processor for FastProcessor {
+#     fn process(&self) {}
+# }
+# impl Processor for SlowProcessor {
+#     fn process(&self) {}
+# }
 // ❌ 分支预测困难
 fn process_mixed(items: &[Box<dyn Processor>]) {
     for item in items {
@@ -1841,7 +1897,8 @@ impl<T> SmallBox<T> {
 
 ### 3. 专门化（Specialization）
 
-```rust
+```rust,ignore
+// specialization 仍为 nightly 特性（stable 1.97 不可编译）
 // 使用每日构建版特性
 // 需启用实验特性门 specialization（每日构建版工具链）
 

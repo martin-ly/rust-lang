@@ -138,7 +138,7 @@ Rust 1.93 的新 API 对 `no_std` 和 WebAssembly 目标尤其重要：
 
 ```rust
 // WebAssembly 边界示例：将 String 移交给宿主
-#[no_mangle]
+#[unsafe(no_mangle)] // Edition 2024：unsafe 属性需显式标注
 pub extern "C" fn allocate_string() -> *mut u8 {
     let s = String::from("hello wasm");
     let (ptr, _len, _cap) = s.into_raw_parts();

@@ -122,6 +122,12 @@ struct Electron;
 > (Source: [TRPL — Structs](https://doc.rust-lang.org/book/ch05-00-structs.html))
 
 ```rust
+struct User {
+    username: String,
+    email: String,
+    active: bool,
+}
+
 let u1 = User {
     username: String::from("alice"),
     email: String::from("a@example.com"),
@@ -142,7 +148,7 @@ let u2 = User {
 
 ## 四、字段可见性
 
-```rust
+```rust,compile_fail
 mod user {
     pub struct User {
         pub username: String, // 外部可见
@@ -207,6 +213,12 @@ fn main() {
 ### 6.2 字段名与变量名相同
 
 ```rust
+struct User {
+    username: String,
+    email: String,
+    active: bool,
+}
+
 let username = String::from("bob");
 let email = String::from("bob@example.com");
 

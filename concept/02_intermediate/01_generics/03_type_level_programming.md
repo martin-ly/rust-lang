@@ -128,6 +128,14 @@ fn type_level_numbers() {
 ### 类型级加法
 
 ```rust
+# use std::marker::PhantomData;
+# struct Zero;
+# struct Succ<N>(PhantomData<N>);
+# type One = Succ<Zero>;
+# type Two = Succ<One>;
+# type Three = Succ<Two>;
+# type Four = Succ<Three>;
+# type Five = Succ<Four>;
 // 加法 trait
 trait Add<N> {
     type Output;
@@ -158,6 +166,15 @@ fn verify_addition() {
 ### 类型级乘法
 
 ```rust
+# use std::marker::PhantomData;
+# struct Zero;
+# struct Succ<N>(PhantomData<N>);
+# type One = Succ<Zero>;
+# type Two = Succ<One>;
+# type Three = Succ<Two>;
+# trait Add<N> { type Output; }
+# impl<N> Add<N> for Zero { type Output = N; }
+# impl<M, N> Add<N> for Succ<M> where M: Add<N> { type Output = Succ<<M as Add<N>>::Output>; }
 // 乘法 trait
 trait Mul<N> {
     type Output;
@@ -263,6 +280,9 @@ type Result3 = <False as Not>::Output;        // True
 ### HList (Heterogeneous List)
 
 ```rust
+# use std::marker::PhantomData;
+# struct Zero;
+# struct Succ<N>(PhantomData<N>);
 // 空列表
 struct HNil;
 
@@ -338,8 +358,8 @@ fn hlist_operations() {
     };
 
     // 编译时类型安全的索引
-    let first: &i32 = list.at();     // Index 0
-    let second: &str = list.tail.at();  // Index 1
+    let first: &i32 = list.at::<Zero>();     // Index 0
+    let second: &str = list.tail.at::<Zero>();  // Index 1
 
     println!("{} {}", first, second);
 }
@@ -379,13 +399,13 @@ impl HKT for VecHKT {
 trait Functor: HKT {
     fn map<A, B, F>(fa: Self::Applied<A>, f: F) -> Self::Applied<B>
     where
-        F: FnOnce(A) -> B;
+        F: FnMut(A) -> B;
 }
 
 impl Functor for OptionHKT {
     fn map<A, B, F>(fa: Option<A>, f: F) -> Option<B>
     where
-        F: FnOnce(A) -> B,
+        F: FnMut(A) -> B,
     {
         fa.map(f)
     }
@@ -394,7 +414,7 @@ impl Functor for OptionHKT {
 impl Functor for VecHKT {
     fn map<A, B, F>(fa: Vec<A>, f: F) -> Vec<B>
     where
-        F: FnOnce(A) -> B,
+        F: FnMut(A) -> B,
     {
         fa.into_iter().map(f).collect()
     }
@@ -514,7 +534,8 @@ fn protocol_example() {
 
 ### 编译时验证不变量
 
-```rust
+```rust,ignore
+// `[(); (I < N) as usize]:` 需 generic_const_exprs（nightly），stable 1.97 不可编译
 use std::marker::PhantomData;
 
 // 非零自然数证明

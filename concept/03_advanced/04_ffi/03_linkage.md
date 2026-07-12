@@ -197,7 +197,7 @@ rustc --crate-type=bin src/main.rs -L native=/path/to/libs -l myclib
 
 ```rust
 #[link(name = "myclib", kind = "static")]
-extern "C" {}
+unsafe extern "C" {}
 ```
 
 ### 方式 2：使用外部链接器

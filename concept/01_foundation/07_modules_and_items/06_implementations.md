@@ -126,7 +126,8 @@ fn main() {
 | `&self` | `obj.method()` | 不可变借用（Immutable Borrow） |
 | `&mut self` | `obj.method()` | 可变借用（Mutable Borrow） |
 
-```rust
+```rust,ignore
+// 示意 std 内部实现结构（不能为外部类型定义固有 impl，仅作概念说明）
 impl String {
     // 不可变借用
     fn len(&self) -> usize { self.as_bytes().len() }
@@ -144,6 +145,11 @@ impl String {
 ## 四、关联函数
 
 ```rust
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
 impl Rectangle {
     fn square(size: u32) -> Rectangle {
         Rectangle { width: size, height: size }
@@ -162,6 +168,11 @@ fn main() {
 ## 五、Trait 实现
 
 ```rust
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
 trait Drawable {
     fn draw(&self);
 }

@@ -131,6 +131,10 @@ fn bool_and_char<const FLAG: bool, const CH: char>() {}
 **排序规则**：const 参数可以在类型参数之后声明；调用时按位置或推断提供：
 
 ```rust
+fn fill<T: Copy, const N: usize>(x: T) -> [T; N] {
+    [x; N]
+}
+
 fn ordering_demo() {
     let a = fill::<i32, 4>(7);   // 显式 turbofish：类型参数在前，const 参数在后
     let b: [i32; 3] = fill(9);   // 全部由上下文推断

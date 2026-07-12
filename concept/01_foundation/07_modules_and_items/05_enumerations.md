@@ -141,6 +141,13 @@ fn divide(a: f64, b: f64) -> Result<f64, &'static str> {
 > (Source: [TRPL — Enums](https://doc.rust-lang.org/book/ch06-00-enums.html))
 
 ```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(u8, u8, u8),
+}
+
 fn handle(msg: Message) {
     match msg {
         Message::Quit => println!("quit"),

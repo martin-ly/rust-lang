@@ -341,7 +341,8 @@ cargo doc --document-private-items
 
 **文档测试（Doc Tests）**：
 
-```rust
+```rust,ignore
+// doctest 语法示意（`my_crate::add` 需实际 crate 上下文）
 /// 返回两数之和
 ///
 /// # Examples

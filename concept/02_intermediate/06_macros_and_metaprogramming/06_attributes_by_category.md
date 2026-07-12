@@ -123,7 +123,7 @@ struct Point {
     y: f64,
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)] // Edition 2024：unsafe 属性需显式标注
 pub extern "C" fn c_api() {}
 
 fn main() {
@@ -213,7 +213,8 @@ fn main() {
 
 ### 3.5 测试与文档属性
 
-```rust
+```rust,ignore
+// doctest 语法示意（`my_crate::add` 需实际 crate 上下文）
 /// Returns the sum of two integers.
 ///
 /// # Examples

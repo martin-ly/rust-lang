@@ -129,7 +129,8 @@ trait Streaming {
 
 稳定版 GAT 有一条反直觉的硬规则：**只要 GAT 的生命周期参数可能出现在隐含约束不成立的位置，就必须显式写出 where 子句**。对生命周期参数，规则表现为"几乎所有借用自 `self` 的 GAT 都需要 `where Self: 'a`"。
 
-```rust
+```rust,compile_fail
+// Bad：缺少 `where Self: 'a` 约束，编译报错（missing required bound on `Item`）
 trait Bad {
     type Item<'a>;            // ❌ E0309 风格错误：missing required bound on `Item`
     fn get(&self) -> Self::Item<'_>;
@@ -151,6 +152,13 @@ trait Good {
 实现 GAT 时，`where` 子句**不需要重复**（从 trait 继承），但实现给出的类型必须对所有满足约束的 `'a` 成立：
 
 ```rust
+trait LendingIterator {
+    type Item<'a>
+    where
+        Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+
 struct ByteWindows<'t> {
     buf: &'t [u8],
     size: usize,
@@ -217,7 +225,8 @@ fn for_each_line<F>(f: F) where F: for<'a> FnMut(&'a str) { /* ... */ }
 
 `async fn` in trait（Rust 1.75 稳定）在脱糖（desugaring）后正是 GAT：
 
-```rust
+```rust,ignore
+// async fn in trait 与其 GAT 脱糖形式的等价示意（两个 Service 不能共存）
 trait Service {
     async fn handle(&self, req: Request) -> Response;
 }

@@ -2413,10 +2413,10 @@ impl<'t, T> LendingIterator for Windows<'t, T> {
 struct Matrix<T, const R: usize, const C: usize> { data: [[T; C]; R] }
 
 impl<T: Copy + Default + std::ops::Add<Output = T> + std::ops::Mul<Output = T>,
-     const R: usize, const C: usize, const K: usize>
+     const R: usize, const C: usize>
     Matrix<T, R, C>
 {
-    fn mul(&self, other: &Matrix<T, C, K>) -> Matrix<T, R, K> {
+    fn mul<const K: usize>(&self, other: &Matrix<T, C, K>) -> Matrix<T, R, K> {
         let mut res = [[T::default(); K]; R];
         for i in 0..R { for j in 0..K { for k in 0..C {
             res[i][j] = res[i][j] + self.data[i][k] * other.data[k][j];

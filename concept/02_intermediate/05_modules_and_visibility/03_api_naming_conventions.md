@@ -49,6 +49,7 @@
   - [八、快速对照表](#八快速对照表)
   - [九、练习题](#九练习题)
     - [练习 1：为 `Config` 设计 API](#练习-1为-config-设计-api)
+  - [相关概念](#相关概念)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---

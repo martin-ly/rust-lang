@@ -100,6 +100,10 @@ fn main() {
 **绑定到不同名字**:
 
 ```rust
+mod kitchen {
+    pub fn cook() {}
+}
+
 use kitchen::cook as prepare;
 ```
 

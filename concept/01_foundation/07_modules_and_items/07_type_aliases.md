@@ -144,7 +144,7 @@ fn main() {
 
 ### 3.3 与 Trait Bound 结合
 
-```rust
+```rust,compile_fail
 use std::fmt::Debug;
 
 type Debuggable<T> = T where T: Debug;
@@ -166,20 +166,21 @@ fn main() {
 ```rust
 type Point = (f64, f64);
 
-impl Point {
-    // 错误：不能为类型别名实现固有方法
-    // fn origin() -> Self { (0.0, 0.0) }
-}
+// 错误：不能为类型别名实现固有方法（无法编译）
+// impl Point {
+//     fn origin() -> Self { (0.0, 0.0) }
+// }
 
-// 正确：为别名指向的实际类型实现 trait
-impl std::fmt::Debug for Point {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Point({}, {})", self.0, self.1)
-    }
-}
+// 错误：由于孤儿规则（orphan rule, E0117），也不能为别名指向的外部类型
+// （此处是元组 `(f64, f64)`）实现外部 trait `Debug`：
+// impl std::fmt::Debug for Point { ... }  // 无法编译
+
+// 正确：使用 newtype 包装，获得独立的本地类型
+#[derive(Debug)]
+struct Point2(f64, f64);
 ```
 
-> **关键洞察**: 不能为类型别名本身实现固有方法（inherent methods），只能为别名指向的实际类型实现 trait。
+> **关键洞察**: 不能为类型别名本身实现固有方法（inherent methods）；且由于孤儿规则，也不能为别名指向的外部类型实现外部 trait——需要独立类型时应使用 newtype 模式。
 > [来源: [The Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html)]
 
 ---

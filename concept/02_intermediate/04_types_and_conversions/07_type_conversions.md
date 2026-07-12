@@ -153,18 +153,18 @@ fn main() {
 ### 3.3 `From` / `Into`
 
 ```rust
-// String::from(&str)
-let s: String = String::from("hello");
-
-// Into 自动由 From 推导
-let s2: String = "world".into();
-
 fn take_string<S: Into<String>>(s: S) {
     let s = s.into();
     println!("{}", s);
 }
 
 fn main() {
+    // String::from(&str)
+    let s: String = String::from("hello");
+    // Into 自动由 From 推导
+    let s2: String = "world".into();
+    let _ = (s, s2);
+
     take_string("hello");
 }
 ```

@@ -358,9 +358,23 @@ def classify(block: dict) -> tuple[str, str]:
     return "candidate", ""
 
 
+def unhide_lines(code: str) -> str:
+    """rustdoc/mdbook 约定：以 `# ` 开头的行是隐藏上下文行，编译时去掉 `# ` 前缀。"""
+    out = []
+    for ln in code.splitlines():
+        s = ln.lstrip()
+        if s.startswith("# ") and not s.startswith("#!") and not s.startswith("#["):
+            indent = ln[: len(ln) - len(s)]
+            out.append(indent + s[2:])
+        else:
+            out.append(ln)
+    return "\n".join(out)
+
+
 def wrap_code(code: str) -> str:
     """无 fn main 时自动包装：整体包入 fn main（Rust 允许 fn 体内定义 items），
     inner attribute (#![...]) 提到文件顶部。"""
+    code = unhide_lines(code)
     if re.search(r"fn\s+main\s*\(", code):
         return code
     lines = code.splitlines()
@@ -372,18 +386,29 @@ def wrap_code(code: str) -> str:
 
 
 def compile_one(block: dict, tmpdir: Path) -> dict:
-    """rustc 直接编译无依赖块。"""
+    """rustc 直接编译无依赖块。包装为 bin 失败时，回退按 lib（不包装）再试一次：
+    部分纯 item 块（含 super::/mod 语义）包入 fn main 会改变模块语义。"""
     src = wrap_code(block["code"])
     h = hashlib.sha1(src.encode()).hexdigest()[:12]
     f = tmpdir / f"b_{h}.rs"
     f.write_text(src, encoding="utf-8")
     out = tmpdir / f"b_{h}.out"
-    try:
-        r = subprocess.run(
-            ["rustc", "--edition", "2024", "--emit=metadata",
-             "-o", str(out), str(f)],
+
+    def _run(source: str, crate_type: str, suffix: str) -> subprocess.CompletedProcess:
+        ff = tmpdir / f"b_{h}{suffix}.rs"
+        ff.write_text(source, encoding="utf-8")
+        return subprocess.run(
+            ["rustc", "--edition", "2024", "--emit=metadata", "--crate-type", crate_type,
+             "-o", str(tmpdir / f"b_{h}{suffix}.out"), str(ff)],
             capture_output=True, text=True, timeout=60,
         )
+
+    try:
+        r = _run(src, "bin", "")
+        if r.returncode != 0 and not re.search(r"fn\s+main\s*\(", block["code"]):
+            r2 = _run(unhide_lines(block["code"]), "lib", "_lib")
+            if r2.returncode == 0:
+                return {**block, "status": "pass", "stderr": "", "mode": "lib"}
     except subprocess.TimeoutExpired:
         return {**block, "status": "timeout", "stderr": "rustc timeout 60s"}
     ok = r.returncode == 0

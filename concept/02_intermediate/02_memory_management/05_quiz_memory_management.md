@@ -5,7 +5,10 @@
 > **EN**: Memory Management
 > **Summary**: Memory Management — An interactive quiz checking L2 smart pointers: Box, Rc/Arc, RefCell/Mutex, and interior mutability.
 >
-> ```rust fn main() { let b = Box::new(5); println!("{}", b); }```
+> ```rust
+> fn main() { let b = Box::new(5); println!("{}", b); }
+> ```
+>
 > <details> <summary>💡 点击展开答案与解析</summary>
 > **答案**：✅ 能编译，输出 `5`。
 > **解析**：
@@ -263,7 +266,7 @@ let b2 = ref_cell.borrow_mut(); // ❌ 运行时 panic！
 
 ## 三、内部可变性模式
 
-本节围绕「内部可变性模式」展开，覆盖 Q5. 以下代码能否编译？`Cell<T>` 与 `RefCell<T… 与  Q6. 以下代码存在什么问题？这是 `Mutex` 使用的经典陷阱 两个方面。
+本节围绕「内部可变性模式」展开，覆盖 Q5. 以下代码能否编译？`Cell<T>` 与 `RefCell<T… 与  Q6. 以下代码存在什么问题？这是`Mutex` 使用的经典陷阱 两个方面。
 
 ### Q5. 以下代码能否编译？`Cell<T>` 与 `RefCell<T>` 的区别是什么？
 

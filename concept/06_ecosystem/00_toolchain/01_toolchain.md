@@ -994,7 +994,7 @@ build-std = ["core", "alloc"]  # cargo build -Z build-std
 
 **[The Rustdoc Book]** rustdoc is the documentation tool for Rust. It processes Rust source code and Markdown comments to produce HTML documentation.
 
-- **文档测试**: `/// ```rust` 代码块自动作为测试运行
+- **文档测试**: `///` 文档注释中的 rust 围栏代码块自动作为测试运行
 - **内部链接**: ``[`crate::module::Item`]`` 自动解析
 - **自定义主题**: `#![doc(html_logo_url = "...")]`
 - **doctest 选项**: `cargo test --doc`
@@ -1578,7 +1578,6 @@ export SCCACHE_REGION=us-east-1        # AWS 区域
 
 ---
 
-
 ## 十五、定理一致性矩阵（工具链保证层）
 
 > **[来源类型: 原创分析; Cargo Book; Clippy Docs; Miri Book]** 以下矩阵梳理 Rust 工具链各组件提供的保证及其边界。
@@ -1629,8 +1628,6 @@ export SCCACHE_REGION=us-east-1        # AWS 区域
 >
 
 ---
-
-
 
 > **补充来源**
 > **相关文件**: [能力图谱](../../00_meta/00_framework/competency_graph.md#六工程实践) · [质量仪表板](../../00_meta/03_audit/07_quality_dashboard_v2.md) · [版本跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md)

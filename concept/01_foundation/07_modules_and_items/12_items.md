@@ -51,7 +51,8 @@
 - 执行期间通常保持不变。
 - 可能驻留在只读内存中。
 
-```rust
+```rust,ignore
+// 示意各类 item（`mod math;` 需要对应文件，仅作语法列举）
 // 这些都是 item
 mod math;          // 模块声明
 use std::fmt;      // use 声明
@@ -204,6 +205,11 @@ trait Area {
     fn area(&self) -> Self::Output;
 }
 
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
 impl Area for Rectangle {
     type Output = u32;
     const PI: f64 = 3.14;
@@ -219,8 +225,9 @@ impl Area for Rectangle {
 - 用于声明来自其他语言（通常是 C）的函数和变量。
 
 ```rust
+// Edition 2024：extern 块需显式 unsafe
 #[link(name = "c")]
-extern "C" {
+unsafe extern "C" {
     fn malloc(size: usize) -> *mut u8;
     fn free(ptr: *mut u8);
 }

@@ -1748,10 +1748,10 @@ struct SelfRef {
 
 impl SelfRef {
     fn new(s: String) -> Pin<Box<Self>> {
-        let mut b = Box::new(Self { data: s, ptr: std::ptr::null(), _pin: PhantomPinned });
+        let mut b = Box::pin(Self { data: s, ptr: std::ptr::null(), _pin: PhantomPinned });
         let ptr: *const String = &b.data;
         unsafe { b.as_mut().get_unchecked_mut().ptr = ptr; }
-        Pin::from(b)
+        b
     }
 }
 ```

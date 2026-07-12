@@ -103,7 +103,8 @@ fn option_to_result(o: Option<i32>) -> Result<i32, &'static str> {
 
 将一段内部使用 `?` 的表达式整体化，便于在表达式位置编写错误传播逻辑。
 
-```rust
+```rust,ignore
+// try 块仍未稳定（stable 不可编译，示意概念）
 fn sum3(a: Result<i32, &'static str>, b: Result<i32, &'static str>) -> Result<i32, &'static str> {
     let s: Result<i32, _> = try { a? + b? };
     s
@@ -112,7 +113,8 @@ fn sum3(a: Result<i32, &'static str>, b: Result<i32, &'static str>) -> Result<i3
 
 `try` 块允许把错误传播限制在一个表达式内，而不是整个函数：
 
-```rust
+```rust,ignore
+// try 块仍未稳定（stable 不可编译，示意概念）
 fn demo() -> Result<i32, &'static str> {
     let x: i32 = try {
         let a = "10".parse::<i32>()?;
@@ -146,7 +148,8 @@ fn parse_positive(s: &str) -> Result<u32, String> {
 
 `?` 在 Rust 1.56+ 通过 `Try` trait 与 `FromResidual` trait 实现。残差（residual）指 `Err`、`None`、`Break` 等"跳出"值，`?` 将其转换为外层可返回的形式。
 
-```rust
+```rust,ignore
+// `?` 的概念展开（`expr` 为占位符，仅示意）
 // 等价展开（概念上）
 let x = expr?;
 // ≈ match Try::branch(expr) {

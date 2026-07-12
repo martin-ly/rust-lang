@@ -110,6 +110,14 @@ Rust 将可恢复错误编码进返回类型（TRPL: [Error Handling](https://do
 ### 3.2 传播运算符 `?`
 
 ```rust
+struct Config;
+
+impl Config {
+    fn parse(_content: &str) -> Result<Config, std::io::Error> {
+        Ok(Config)
+    }
+}
+
 fn read_config(path: &str) -> Result<Config, std::io::Error> {
     let content = std::fs::read_to_string(path)?; //  early return Err
     Ok(Config::parse(&content)?)

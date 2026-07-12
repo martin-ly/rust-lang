@@ -1344,6 +1344,7 @@ pub trait Iterator {
 ### IntoIterator 与 for 循环
 
 ```rust
+# let collection = vec![1, 2, 3];
 for item in collection {
     // 等价于：先调用 collection.into_iter()
 }

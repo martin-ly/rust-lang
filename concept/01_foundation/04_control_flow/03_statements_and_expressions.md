@@ -126,6 +126,9 @@ Rust 规定了大多数子表达式的求值顺序：
 因为 Rust 是表达式语言，许多控制结构本身也是表达式，可以直接返回值：
 
 ```rust
+let condition = true;
+let option = Some(21);
+
 let value = if condition {
     42
 } else {

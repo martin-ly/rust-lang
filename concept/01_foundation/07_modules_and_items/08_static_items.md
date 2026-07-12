@@ -129,7 +129,8 @@ static mut COUNTER: i32 = 0;
 
 fn increment() {
     unsafe {
-        COUNTER += 1;
+        // Edition 2024：禁止对 static mut 创建引用，改用裸指针
+        *std::ptr::addr_of_mut!(COUNTER) += 1;
     }
 }
 
@@ -137,7 +138,7 @@ fn main() {
     increment();
     increment();
     unsafe {
-        println!("counter: {}", COUNTER);
+        println!("counter: {}", *std::ptr::addr_of!(COUNTER));
     }
 }
 ```

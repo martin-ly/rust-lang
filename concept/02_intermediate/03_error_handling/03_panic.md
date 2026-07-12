@@ -37,7 +37,8 @@
 
 ### 签名要求
 
-```rust
+```rust,ignore
+// panic hook 的签名类型（类型片段，非完整语句）
 fn(&PanicInfo) -> !
 ```
 

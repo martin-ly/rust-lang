@@ -2158,7 +2158,8 @@ fn expect_some<T>(opt: Option<T>) -> T {
 
 **动机**：在类型系统（Type System）里显式表达“此操作不可能失败”，避免冗余的 `unwrap` 或虚构错误变体。
 
-```rust
+```rust,ignore
+// `Result<T, !>` 中的 `!` 作为类型参数仍未稳定（stable 不可编译）
 fn infallible() -> Result<i32, !> {
     Ok(42)
 }
@@ -2747,7 +2748,8 @@ Rust 的设计选择：
 
 ### `?` 运算符传播规则
 
-```rust
+```rust,ignore
+// `?` 的语义示意（T/E 为占位类型参数）
 fn may_fail() -> Result<T, E> {
     let v = another_may_fail()?; // 自动调用 From 转换并提前返回 Err
     Ok(v)

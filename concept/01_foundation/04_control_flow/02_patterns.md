@@ -51,6 +51,7 @@ enum Message {
     ChangeColor(u8, u8, u8),
 }
 
+let message = Message::WriteString(String::from("hi"));
 match message {
     Message::Quit => println!("Quit"),
     Message::WriteString(write) => println!("{}", &write),
@@ -94,6 +95,7 @@ if let (a, 3) = (1, 2) { }     // 可反驳
 匹配与字面量完全相同的值。总是可反驳。
 
 ```rust
+let i = 3;
 match i {
     -1 => println!("minus one"),
     1 => println!("one"),
@@ -111,12 +113,14 @@ let a = Some(10);
 match a {
     Some(value) => (),      // move/copy
     Some(ref value) => (),  // 共享引用绑定
+    None => (),
 }
 ```
 
 `x @ subpattern` 将匹配值绑定到 `x`，同时继续匹配子模式：
 
 ```rust
+let x = 3;
 match x {
     e @ 1..=5 => println!("range element {}", e),
     _ => (),
@@ -143,6 +147,7 @@ if let Some(y) = x {
 匹配零个或多个剩余元素，用于元组、元组结构体（Struct）、切片（Slice）模式。不可反驳。
 
 ```rust
+let slice: &[i32] = &[1, 2, 3];
 match slice {
     [] => (),
     [one] => (),
@@ -168,10 +173,10 @@ match slice {
 
 ```rust
 let int_reference = &3;
-match int_reference {
+let label = match int_reference {
     &0 => "zero",
     _ => "some",
-}
+};
 ```
 
 ### Struct / tuple struct / tuple patterns
@@ -199,6 +204,7 @@ match arr {
 匹配多个子模式之一：
 
 ```rust
+let x = 2;
 match x {
     1 | 2 | 3 => (),
     _ => (),

@@ -162,7 +162,7 @@ fn extract_string(value: Box<dyn Any>) -> Option<String> {
 use std::any::Any;
 use std::error::Error;
 
-fn cause_as<T: Error + 'static>(err: &(dyn Error + 'static)) -> Option<&T> {
+fn cause_as<'a, T: Error + 'static>(err: &'a (dyn Error + 'static)) -> Option<&'a T> {
     err.downcast_ref::<T>()
 }
 ```
@@ -170,7 +170,7 @@ fn cause_as<T: Error + 'static>(err: &(dyn Error + 'static)) -> Option<&T> {
 ### 5.2 插件系统的类型分发
 
 ```rust
-use std::any::Any;
+use std::any::{Any, TypeId};
 use std::collections::HashMap;
 
 struct PluginRegistry {

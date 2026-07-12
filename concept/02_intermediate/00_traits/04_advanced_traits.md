@@ -902,6 +902,8 @@ fn main() {
 ### where 子句优势
 
 ```rust
+use std::fmt::{Debug, Display};
+
 // 约束可读性
 fn complicated<T, U>(x: T, y: U) -> i32
 where
@@ -909,7 +911,8 @@ where
     U: Clone + Debug,
     T: PartialEq<U>,
 {
-    // ...
+    let _ = (x, y);
+    0
 }
 ```
 
@@ -949,6 +952,9 @@ trait LendingIterator {
 trait Config {
     const MAX_SIZE: usize;
 }
+
+struct MyConfig;
+
 impl Config for MyConfig {
     const MAX_SIZE: usize = 1024;
 }

@@ -1213,7 +1213,7 @@ fn main() {}
 
 **基础示例**:
 
-```rust
+```rust,compile_fail
 use std::marker::PhantomData;
 
 // 不使用 PhantomData - 编译错误

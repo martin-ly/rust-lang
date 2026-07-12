@@ -4,7 +4,13 @@
 >
 > **EN**: Macros
 > **Summary**: Macros — An interactive quiz checking the macro system: macro_rules!, repetition, hygiene, and procedural macros.
-> **答案**： ```rust // vec![1, 2, 3] 展开为： { let mut temp_vec = Vec::new(); temp_vec.push(1); temp_vec.push(2); temp_vec.push(3); temp_vec }```
+> **答案**：
+>
+> ```rust
+> // vec![1, 2, 3] 展开为：
+> { let mut temp_vec = Vec::new(); temp_vec.push(1); temp_vec.push(2); temp_vec.push(3); temp_vec }
+> ```
+>
 > **解析**：`vec!` 是 Rust 标准库中的**声明宏**（declarative macro），使用 `macro_rules!` 定义。
 > **声明宏（Declarative Macro）的核心特征**： | 特性 | 说明 | |:---|:---| | 调用语法
 > **受众**: [专家]
@@ -443,7 +449,7 @@ recursion limit reached while expanding macro
 
 ## 四、综合应用
 
-本节将「综合应用」分解为若干主题： Q8. 以下代码的输出是什么？`concat!` 和 `stringi…、Q9. 以下代码能否编译？宏中的 `$(...)*` 与 `$(...…与Q10. 以下代码存在什么问题？这是宏与模块交互的经典陷阱。
+本节将「综合应用」分解为若干主题： Q8. 以下代码的输出是什么？`concat!` 和 `stringi…、Q9. 以下代码能否编译？宏中的`$(...)*` 与 `$(...…与Q10. 以下代码存在什么问题？这是宏与模块交互的经典陷阱。
 
 ### Q8. 以下代码的输出是什么？`concat!` 和 `stringify!` 的区别
 

@@ -463,6 +463,7 @@ flowchart TD
 ---
 
 ## 十三、演进方向
+
 - **Async Drop（预览）**: drop 语义与 await 的交汇将新增"析构边界"，跟踪 [18_async_drop_preview.md](../../07_future/03_preview_features/22_async_drop_preview.md)。
 - **RTN（Return Type Notation）**: 若稳定，§九 dyn 兼容边界的判定条件 Q-T1 需要修订。
 - **取消安全 lint**: 社区对 `clippy` 取消安全类 lint 的提案（跟踪 `missing_drop_in_select` 类讨论）成熟后补入 §五检测手段。

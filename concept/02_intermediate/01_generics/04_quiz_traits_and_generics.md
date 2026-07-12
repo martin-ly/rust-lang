@@ -4,7 +4,11 @@
 >
 > **EN**: Generics
 > **Summary**: Generics — An interactive quiz checking L2 traits and generics: definitions, bounds, associated types, and trait objects.
-> ```rust trait Summary { fn summarize(&self) -> String; } struct Article { headline: String, } fn main() { let article = Article { headline: String::from("News") }; println!("{}", article.summarize()); }```
+>
+> ```rust,compile_fail
+> trait Summary { fn summarize(&self) -> String; } struct Article { headline: String, } fn main() { let article = Article { headline: String::from("News") }; println!("{}", article.summarize()); }
+> ```
+>
 > <details> <summary>💡 点击展开答案与解析</summary>
 > **答案**：❌ 不能编译。
 > **错误信息**：`no method named summarize f
@@ -305,7 +309,7 @@ fn main() {
 
 ## 三、Trait 对象与动态分发
 
-「Trait 对象与动态分发」部分包含 Q6. 以下代码能否编译？`&dyn Drawable` 和 `imp… 与  Q7. 以下代码能否编译？解释 `Sized` 和 `?Sized`… 两条主线，本节依次说明。
+「Trait 对象与动态分发」部分包含 Q6. 以下代码能否编译？`&dyn Drawable` 和 `imp… 与  Q7. 以下代码能否编译？解释`Sized` 和 `?Sized`… 两条主线，本节依次说明。
 
 ### Q6. 以下代码能否编译？`&dyn Drawable` 和 `impl Drawable` 的区别是什么？
 

@@ -263,7 +263,7 @@ fn main() {
 
 ### 4.3 反例：使用字符串拼接路径
 
-```rust
+```rust,compile_fail
 fn main() {
     let path = "/tmp/" + "file.txt"; // 错误：String 不能用 + 与 &str 这样拼接
     println!("{}", path);
