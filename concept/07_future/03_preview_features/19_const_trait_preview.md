@@ -1,6 +1,6 @@
 # Const Trait 实现预览
 
-> **代码状态**: [综述级 — 含可编译示例]
+> **代码状态**: [伪代码（示意）] — const trait（const_trait_impl）在 rustc 1.97 stable 仍未稳定，示例需 nightly 编译，未作 stable 独立验证
 >
 > **EN**: Const Trait Implementation Preview
 > **Summary**: Preview of const traits (`~const Trait`, `const impl`) that allow generic trait bounds inside `const fn` and other const contexts; still nightly/experimental.

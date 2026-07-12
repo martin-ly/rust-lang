@@ -55,8 +55,15 @@ Rust 的数组（array）类型 `[T; N]` 把**长度编码在类型里**：`[u8;
 // 历史困境（1.51 之前）：只能手写 impl，或退化为 slice
 trait Reverse { fn reverse(&mut self); }
 
-impl Reverse for [u8; 4] { fn reverse(&mut self) { self.reverse(); } } // 同名方法冲突…
-impl Reverse for [u8; 8] { fn reverse(&mut self) { todo!() } }
+impl Reverse for [u8; 4] {
+    fn reverse(&mut self) { self.swap(0, 3); self.swap(1, 2); } // 每个长度一份手写实现
+}
+impl Reverse for [u8; 8] {
+    fn reverse(&mut self) {
+        let n = self.len();
+        for i in 0..n / 2 { self.swap(i, n - 1 - i); }
+    }
+}
 // …想覆盖到 32？宏展开或 32 份手写 impl —— 抽象泄漏
 ```
 
@@ -152,6 +159,8 @@ fn ok_identity<T, const N: usize>(a: [T; N]) -> [T; N] { a }
 fn ok_literal() -> [u8; 2 + 3] { [0; 5] } // 2+3 不含泛型参数，普通 const eval
 
 // ❌ stable 拒绝：const 参数参与运算（generic_const_exprs 领域）
+// 以下两例整体注释掉——它们在 stable 上根本无法通过类型检查，
+// 函数体写法无关紧要（此处用 todo!() 仅示意“无从实现”，非未完成示例）：
 // fn grow<T, const N: usize>(a: [T; N]) -> [T; N + 1] { todo!() }
 //   error: generic parameters may not be used in const operations
 // fn pair<T, const N: usize, const M: usize>() -> [T; N * M] { todo!() }

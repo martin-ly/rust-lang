@@ -4,6 +4,8 @@
 **equivalentTo**: 9 条  **instanceOf**: 18 条  **appliesTo**: 14 条  
 **改动总数**: 41（跳过实体缺失 0）
 
+> **重建说明**: 本报告原文件于 2026-07-12 第二轮工具 dry-run 时被误覆盖（`type_kg_semantic_edges.py` dry-run 也会重写报告文件）；现依据脚本策展表（CURATED_*）与 KG 边注解（ex:evidence/ex:rule/ex:source）完整重建，逐边明细与原报告一致。
+
 ## 谓词分布前后对比
 
 | 谓词 | 前 | 后 | Δ |
@@ -15,8 +17,8 @@
 | ex:appliesTo | 0 | 14 | +14 |
 | ex:refines | 12 | 12 | +0 |
 | ex:equivalentTo | 0 | 9 | +9 |
-| ex:mutexWith | 5 | 5 | +0 |
 | ex:counterExample | 5 | 5 | +0 |
+| ex:mutexWith | 5 | 5 | +0 |
 
 ## 逐边明细与依据
 
@@ -65,6 +67,8 @@
 | A1-page-application | added parallel edge | ex:DispatchMechanisms | ex:appliesTo | ex:Traits | 02_intermediate/00_traits/02_dispatch_mechanisms.md:8 Summary“Static and dynamic dispatch in Rust: monomorphization, trait objects, vtables, object safety”（位于 00_traits 章节）——分发机制应用于 trait 使用 |
 
 ## 范畴节点缺口清单（按约束未新建实体）
+
+> **2026-07-12 第二轮更新**：以下 9 项缺口已全部解决——新建 17 个范畴/领域/实例节点 + 14 条 instanceOf/appliesTo 边，详见 `reports/KG_CATEGORY_NODES_2026-07-12.md`（工具 `scripts/add_kg_category_nodes.py`）。
 
 | 缺失节点 | 原计划边 | 说明/替代 |
 |:---|:---|:---|

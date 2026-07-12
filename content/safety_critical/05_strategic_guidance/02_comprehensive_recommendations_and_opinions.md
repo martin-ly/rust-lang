@@ -422,7 +422,7 @@ quality_gates:
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust安全工作组](https://rust-lang.org/governance)
-- [Ferrous Systems](https://ferrous-systems.com)
+- [Ferrous Systems](https://www.ferrous-systems.com)
 - [AdaCore](https://adacore.com)
 - [Secure Code Alliance](https://securecode.org)
 

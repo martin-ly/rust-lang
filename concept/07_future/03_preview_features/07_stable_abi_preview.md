@@ -1,6 +1,6 @@
 # Stable ABI Preview
 
-> **代码状态**: [综述级 — 含可编译示例]
+> **代码状态**: [已验证（rustc 1.97）] — 代码块经 rustc 1.97.0 `--edition 2024` 单文件编译验证（2026-07-12）
 >
 > **EN**: Stable Application Binary Interface (ABI) Preview
 > **Summary**: Preview of Rust's long-term effort to define a stable ABI (`crabi`) for cross-version dynamic linking and FFI, currently experimental and under discussion.
@@ -53,7 +53,7 @@ pub struct Point {
     pub y: f64,
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn distance(p: Point) -> f64 {
     (p.x * p.x + p.y * p.y).sqrt()
 }
@@ -123,7 +123,7 @@ pub fn unstable_abi_function(x: String) -> String {
 
 ```rust,compile_fail
 // Rust 的默认 ABI 不稳定（随编译器版本变化）
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn rust_function(x: i32) -> i32 {
     x * 2
 }

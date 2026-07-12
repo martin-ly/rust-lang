@@ -20,6 +20,12 @@
 - [Axum 深度解析](deep_dives/01_axum_deep_dive.md) — Web 框架路由、Extractor、中间件、状态与错误处理
 - [Tokio 深度解析](deep_dives/02_tokio_deep_dive.md) — 异步运行时、任务调度、I/O 驱动与同步原语
 
+## 国际权威来源参考
+
+- [Tokio 官方文档](https://tokio.rs/) — 异步运行时权威文档
+- [Axum API 文档](https://docs.rs/axum/latest/axum/) — docs.rs 官方 API
+- [Rust Async Book](https://rust-lang.github.io/async-book/) — rust-lang 官方异步教程
+
 ## 版本信息
 
 - **文档版本**: 1.0

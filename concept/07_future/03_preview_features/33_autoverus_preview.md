@@ -2,14 +2,15 @@
 > **代码状态**: 📋 预览/研究 — AutoVerus 为 OOPSLA 2025 论文，Verus 活跃开发中
 > **定理链**: N/A — 形式化验证工具/AI 辅助证明研究跟踪
 >
-# AutoVerus / Verus 预览
+# AutoVerus / Verus 预览跟踪
 >
-> **EN**: AutoVerus / Verus
-> **Summary**: Verus 是用 Rust 本身编写规格与证明的 SMT 验证器；AutoVerus 是基于 LLM 的自动化证明生成系统，已在 Verus-Bench 上达到 >90% 成功率。
+> **EN**: AutoVerus / Verus Preview Tracking
+> **Summary**: L7 预览跟踪页：跟踪 Verus 与 AutoVerus 工具链的版本演进、生态集成与研究动向；概念机制与形式化解读以 L4 权威页为准。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶] 形式化方法、系统软件验证研究者
-> **Bloom 层级**: L4-L5
-> **权威来源**: 本文件为 `concept/` 权威页。
+> **Bloom 层级**: L7（版本与生态跟踪）
+> **权威来源**: 本文件为 L7 预览跟踪页（版本/生态动向），非概念权威页；Verus / AutoVerus 的概念机制、三段式程序结构、评估数据与反命题的权威解释见
+> [concept/04_formal/04_model_checking/07_autoverus.md](../../04_formal/04_model_checking/07_autoverus.md)。
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Eva
 > **前置依赖**: [形式化验证](../../04_formal/04_model_checking/01_verification_toolchain.md) · [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
@@ -20,106 +21,29 @@
 > **后置概念**: N/A
 ---
 
-## 一、权威定义
+## 一、本页定位与权威页分工
 
-> Verus is a tool for verifying the correctness of Rust code using proofs and specifications also written in Rust.
-> —— AutoVerus 论文
+| 页面 | 层级 | 职责 |
+|:---|:---|:---|
+| [AutoVerus / Verus 自动证明生态](../../04_formal/04_model_checking/07_autoverus.md) | L4-L5 概念权威页 | 权威定义、三段式程序结构、证明自动化原理、工具对比、反命题与边界、测验 |
+| 本页 | L7 预览跟踪页 | 版本里程碑时间线、生态集成动向、采用风险观察、跟踪源索引 |
 
-**Verus** 允许开发者用 Rust 语法编写程序、规格（specifications）和证明（proofs），然后调用 SMT 求解器（Z3）自动验证。它充分利用 Rust 类型系统（Type System）已经保证的内存安全（Memory Safety）与线程安全， thus the verifier only needs to reason about functional correctness.
-
-**AutoVerus** 则进一步利用大语言模型（LLM）自动为 Verus 程序生成证明，降低形式化验证的专家门槛。
-
----
-
-## 二、Verus 核心机制
-
-本节从三段式程序结构 与 与 Rust 借用检查器的关系 两个层面剖析「Verus 核心机制」。
-
-### 2.1 三段式程序结构
-
-```rust,ignore
-// 规格函数（spec function），编译时擦除
-pub closed spec fn sorted(seq: Seq<i32>) -> bool {
-    forall|i: int, j: int| 0 <= i < j < seq.len() ==> seq[i] <= seq[j]
-}
-
-// 可执行函数 + 规格注释
-fn binary_search(v: &Vec<i32>, x: i32) -> (r: usize)
-    requires
-        sorted(v@),           // 前置条件：输入有序
-        exists|i: int| 0 <= i < v.len() && v[i] == x,  // x 存在
-    ensures
-        r < v.len(),
-        v[r as int] == x,     // 后置条件：返回正确索引
-{
-    // 实现 + loop invariants + proof hints
-    // ...
-}
-```
-
-关键元素：
-
-- `spec fn`：纯函数规格，用于表达数学性质。
-- `requires`：前置条件。
-- `ensures`：后置条件。
-- `v@`：将执行期 `Vec` 提升为规格期 `Seq`。
-- `forall` / `exists`：一阶逻辑量词。
-
-### 2.2 与 Rust 借用检查器的关系
-
-Verus 的证明语言是 Rust 的超集，但验证时：
-
-1. Rust 借用（Borrowing）检查器保证内存安全（Memory Safety）、线程安全；
-2. Verus 验证器在此基础上证明功能正确性。
-
-这种分层显著减少了验证器需要处理的复杂度。
+两页刻意分工：概念机制只在 L4 页维护，本页不复制其正文，仅保留随时间变化的跟踪信息。
 
 ---
 
-## 三、AutoVerus：LLM 驱动的自动化证明
+## 二、跟踪状态快照（2026-07）
 
-「AutoVerus：LLM 驱动的自动化证明」部分按设计原则、三阶段工作流与评估结果的顺序逐层展开。
-
-### 3.1 设计原则
-
-AutoVerus 论文提出五个核心原则：
-
-1. **不依赖大量训练数据**：直接使用通用 LLM（如 GPT-4o），无需针对 Verus 微调。
-2. **用专家知识弥补数据不足**：将 Verus 专家常见证明策略编码为 prompt。
-3. **释放 LLM 创造力**：高温采样生成多样化证明候选。
-4. **用形式化方法约束创造力**：通过静态分析和 Verus 反馈快速过滤无效候选、拼接证明片段。
-5. **三阶段工作流**：生成 → 精炼 → 调试。
-
-### 3.2 三阶段工作流
-
-```text
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│ 1. Generation   │ -> │ 2. Refinement   │ -> │ 3. Debugging    │
-│ 生成 loop inv   │    │ 常见错误修复     │    │ 针对 Verus 错误 │
-│ 多候选输出      │    │ 常量传播、数组长度│   │ 迭代修复        │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
-### 3.3 评估结果
-
-- 在 **Verus-Bench**（150 个非平凡证明任务）上，AutoVerus 成功率 **>90%**。
-- 超过一半任务在 **30 秒或 3 次 LLM 调用内**完成。
+| 组件 | 状态 | 跟踪源 |
+|:---|:---|:---|
+| Verus 语言与 Z3 验证流水线 | 🟢 活跃开发，vstd 标准库规格持续扩充 | [verus-lang/verus](https://github.com/verus-lang/verus) |
+| AutoVerus（LLM 自动证明） | 🟡 论文成果（OOPSLA 2025），尚未进入主流工具链 | [DOI 10.1145/3763174](https://doi.org/10.1145/3763174) |
+| Verus-Bench 基准 | 🟢 已发布（150 个非平凡证明任务） | [arXiv 2409.13082](https://arxiv.org/abs/2409.13082) |
+| 与 Rust 主线集成 | ⚪ 无 RFC / MCP，属外部工具链 | — |
 
 ---
 
-## 四、Verus / AutoVerus 在 Rust 生态中的位置
-
-| 工具 | 方法 | 自动化程度 | 适用场景 |
-|:---|:---|:---|:---|
-| Kani | 模型检查 | 高（无需求规格） | 有界状态空间、单测 |
-| Prusti | 分离逻辑 + Viper | 中（需写规格） | 复杂数据结构和不变量 |
-| Creusot | Why3/WhyML | 中（需写规格） | 函数式风格证明 |
-| **Verus** | SMT + Rust 语法 | 中（需写规格） | 系统级代码功能正确性 |
-| **AutoVerus** | LLM + Verus | 高（自动生成证明） | 降低 Verus 入门门槛 |
-
----
-
-## 五、当前状态与时间表
+## 三、里程碑时间线
 
 | 时间 | 里程碑 |
 |:---|:---|
@@ -130,48 +54,27 @@ AutoVerus 论文提出五个核心原则：
 
 ---
 
-## 六、反命题与边界
+## 四、生态集成动向
 
-- **规格仍由人写**：AutoVerus 自动生成的是**证明**，不是规格。规格是否表达真实意图仍需人工判断。
-- **LLM 不可解释性**：当 AutoVerus 失败时，调试成本可能高于手写证明。
-- **仅限 Verus 子集**：复杂所有权（Ownership）、unsafe 代码、异步（Async）代码的自动证明仍具挑战。
-- **工具链演进**：Verus 语言和标准库规格仍在快速迭代，AutoVerus 需要持续适配。
+- **Safety Tags**：安全标签若成为 unsafe 契约的机器可读格式，可为 Verus 规格提供自动生成来源，参见 [Safety Tags 预览](03_safety_tags_preview.md)。
+- **Kani / BorrowSanitizer**：模型检查与动态别名验证覆盖 Verus 不擅长的有界状态与运行时别名场景，三者互补而非竞争，参见 [BorrowSanitizer](24_borrow_sanitizer.md) 与 [Miri](../../04_formal/04_model_checking/08_miri.md)。
+- **Rust Project Goals**：截至 2026-07 未见将 SMT 验证纳入官方目标，跟踪 [rust-project-goals](https://rust-lang.github.io/rust-project-goals/) 后续周期。
 
 ---
 
-## 七、嵌入式测验
+## 五、采用风险观察
 
-**测验 1**: Verus 使用哪种后端求解器验证 Rust 程序？
-
-- A. Coq
-- B. Z3（SMT）
-- C. Isabelle/HOL
-- D. LLVM
-
-<details>
-<summary>答案</summary>
-B
-</details>
-
-**测验 2**: AutoVerus 自动生成的是程序的哪个部分？
-
-- A. 规格（specifications）
-- B. 证明（proofs）
-- C. 可执行代码
-- D. 测试用例
-
-<details>
-<summary>答案</summary>
-B
-</details>
+- **基准饱和风险**：Verus-Bench 成功率已 >90%，后续研究需更难基准才能区分方法优劣。
+- **工具链漂移**：Verus 语言快速迭代，基于其上的自动化研究（含 AutoVerus 类系统）需持续适配，论文结果的可复现性随时间衰减。
+- **规格瓶颈未解**：自动化目前只覆盖证明生成，规格撰写仍是人工瓶颈——这是采用成本的主要观察点。
 
 ---
 
 ## 相关概念
 
+- [AutoVerus / Verus 自动证明生态（L4 权威页）](../../04_formal/04_model_checking/07_autoverus.md)
 - [形式化验证](../../04_formal/04_model_checking/01_verification_toolchain.md)
 - [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
-- [AutoVerus/Verus 深度](../../04_formal/04_model_checking/07_autoverus.md)
-- [Safety Tags 预览](03_safety_tags_preview.md) · [深度](03_safety_tags_preview.md)
+- [Safety Tags 预览](03_safety_tags_preview.md)
 - [BorrowSanitizer](24_borrow_sanitizer.md) · [深度形式化](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md)
 - [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) · [Miri](../../04_formal/04_model_checking/08_miri.md)

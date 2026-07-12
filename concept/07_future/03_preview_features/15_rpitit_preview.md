@@ -1,6 +1,6 @@
 # 特质中返回位置 impl Trait（RPITIT）预览
 
-> **代码状态**: [综述级 — 含可编译示例]
+> **代码状态**: [已验证（rustc 1.97）] — 代码块经 rustc 1.97.0 `--edition 2024` 单文件编译验证（2026-07-12）
 >
 > **EN**: Return Position Impl Trait In Traits (RPITIT) Preview
 > **Summary**: Preview of RPITIT, which allows `impl Trait` as return types in trait methods; stabilized in Rust 1.75.0 and extended with precise lifetime capture in Rust 1.82+.
@@ -62,13 +62,13 @@ trait Factory {
 #![allow(unused)]
 
 trait Parser {
-    fn parse(&self, input: &str) -> impl Iterator<Item = &str>;
+    fn parse<'a>(&'a self, input: &'a str) -> impl Iterator<Item = &'a str> + 'a;
 }
 
 struct CommaParser;
 
 impl Parser for CommaParser {
-    fn parse(&self, input: &str) -> impl Iterator<Item = &str> {
+    fn parse<'a>(&'a self, input: &'a str) -> impl Iterator<Item = &'a str> + 'a {
         input.split(',')
     }
 }

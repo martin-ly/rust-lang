@@ -361,7 +361,8 @@ fn float_fallback() {
 
 fn never_fallback(flag: bool) -> i32 {
     // never type 回退：todo!() 类型为 !，需与 i32 统一；
-    // 历史行为允许 ! → () 类回退参与统一，Edition 2024 收窄该回退
+    // 历史行为允许 ! → () 类回退参与统一，Edition 2024 收窄该回退。
+    // （todo!() 在此为 never type 回退讲解的正例，非未完成示例）
     if flag {
         42
     } else {

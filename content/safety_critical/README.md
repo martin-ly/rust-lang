@@ -2,8 +2,8 @@
 >
 > [Rust Reference](https://doc.rust-lang.org/reference/),
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/),
-> [Ferrocene](https://ferrous-systems.com/ferrocene/),
-> [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+> [Ferrocene](https://www.ferrous-systems.com/ferrocene/),
+> [Rust Safety Critical WG](https://github.com/rustfoundation/safety-critical-rust-consortium)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 >

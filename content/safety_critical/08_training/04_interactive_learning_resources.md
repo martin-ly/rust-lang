@@ -38,7 +38,7 @@ Rust官方:
 │   └── https://github.com/rust-secure-code/wg
 │
 ├── Ferrous Systems Academy
-│   └── https://ferrous-systems.com/training/
+│   └── https://www.ferrous-systems.com/training/
 │
 └── High Assurance Rust
     └── https://highassurance.rs/

@@ -238,6 +238,19 @@ impl AsyncDrop for AsyncFile {
 - `for await` 语法仍在讨论
 - 预计不会在 1.98 稳定，但可能在 nightly 中有更多实验
 
+### 1.7 新近合并的 RFC（2026-06 ~ 2026-07，跟踪至 1.98+ 周期）
+
+以下 RFC 已于近 6 周内合并进入 Active RFC 列表，实现与稳定化将落在 1.98+ 周期；链接均为已渲染 RFC Book 页面（2026-07-12 curl 实测 200）：
+
+| RFC | 标题 | 合并日期 | 要点 |
+|:---|:---|:---|:---|
+| [#3955](https://rust-lang.github.io/rfcs/3955-named-fn-trait-parameters.html) | Named `Fn` trait parameters | 2026-07-08 | `Fn`/`FnMut`/`FnOnce` 支持命名参数，改善高阶回调 API 可读性 |
+| [#3928](https://rust-lang.github.io/rfcs/3928-todo-overreach.html) | Avoid linting `unreachable_code` on `todo!()` | 2026-06-25 | `todo!()` 后的代码不再触发 `unreachable_code` lint |
+| [#3808](https://rust-lang.github.io/rfcs/3808-register-tool.html) | `#![register_{attribute,lint}_tool]` | 2026-06-10 | 自定义 attribute/lint 工具注册，Rust for Linux 稳定化的关键依赖 |
+| [#3946](https://rust-lang.github.io/rfcs/3946-crates-io-username-identity.html) | crates.io username identity | 2026-05-26 | crates.io 用户名身份模型，生态治理向 |
+
+> 仍处 FCP/讨论中、尚未合并的高关注提案：Safety Tags（[#3842](https://github.com/rust-lang/rfcs/pull/3842)）、Scalable Vectors（[#3838](https://github.com/rust-lang/rfcs/pull/3838)）、`extern "custom"`（disposition-merge）。
+
 ---
 
 ## 二、标准库 API 预览

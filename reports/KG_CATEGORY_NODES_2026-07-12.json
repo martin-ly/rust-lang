@@ -1,0 +1,205 @@
+{
+  "date": "2026-07-12",
+  "dry_run": false,
+  "counts": {
+    "entities_added": 17,
+    "entities_skipped": 0,
+    "instanceOf": 11,
+    "appliesTo": 3,
+    "total_edges": 14,
+    "skipped_missing_entity": 0
+  },
+  "entities_added": [
+    "ex:Vec",
+    "ex:HashMap",
+    "ex:AsyncRuntime",
+    "ex:Tokio",
+    "ex:AutoTrait",
+    "ex:Send",
+    "ex:Sync",
+    "ex:Box",
+    "ex:Rc",
+    "ex:Arc",
+    "ex:AlgebraicDataType",
+    "ex:Result",
+    "ex:Option",
+    "ex:Serialization",
+    "ex:ModelChecking",
+    "ex:FormalVerificationFramework",
+    "ex:UnsafeAbstractionSoundness"
+  ],
+  "before": {
+    "ex:dependsOn": 700,
+    "ex:entails": 671,
+    "ex:relatedTo": 4405,
+    "ex:equivalentTo": 9,
+    "ex:refines": 12,
+    "ex:counterExample": 5,
+    "ex:instanceOf": 18,
+    "ex:appliesTo": 14,
+    "ex:mutexWith": 5
+  },
+  "after": {
+    "ex:dependsOn": 700,
+    "ex:entails": 671,
+    "ex:relatedTo": 4405,
+    "ex:equivalentTo": 9,
+    "ex:refines": 12,
+    "ex:counterExample": 5,
+    "ex:instanceOf": 29,
+    "ex:appliesTo": 17,
+    "ex:mutexWith": 5
+  },
+  "changes_detail": [
+    {
+      "rule": "I1-category-listed",
+      "subject": "ex:Vec",
+      "object": "ex:Collections",
+      "predicate": "ex:instanceOf",
+      "action": "added new edge",
+      "evidence": "01_foundation/05_collections/01_collections.md:5 关键术语“集合 (Collection) · 向量 (Vec)”；:10 Summary“The standard collections (Vec, VecDeque, HashMap, BTreeMap, sets)”——Vec 被集合权威页列为标准集合"
+    },
+    {
+      "rule": "I1-category-listed",
+      "subject": "ex:HashMap",
+      "object": "ex:Collections",
+      "predicate": "ex:instanceOf",
+      "action": "added new edge",
+      "evidence": "01_foundation/05_collections/01_collections.md:5 关键术语“集合 (Collection) · … · 哈希映射 (HashMap)”；:10 Summary 将 HashMap 列为标准集合；:41 设“1.3 HashMap vs BTreeMap”章节"
+    },
+    {
+      "rule": "I3-self-evident-kind",
+      "subject": "ex:Tokio",
+      "object": "ex:AsyncRuntime",
+      "predicate": "ex:instanceOf",
+      "action": "added new edge",
+      "evidence": "03_advanced/01_async/06_async_boundary_panorama.md:283“work-stealing 运行时（Tokio 多线程、async-std）”——Tokio 被明确归类为异步运行时；:9“Rust 版本: 1.97.0+ (Edition 2024) · Tokio 1.x”"
+    },
+    {
+      "rule": "I3-self-evident-kind",
+      "subject": "ex:Send",
+      "object": "ex:AutoTrait",
+      "predicate": "ex:instanceOf",
+      "action": "added new edge",
+      "evidence": "03_advanced/00_concurrency/02_send_sync_auto_traits.md:3 标题“Send 与 Sync：Auto Trait 的并发安全契约”；:5 Summary“Send and Sync are auto traits that encode Rust's concurrency safety contract: `T: Send` …”"
+    },
+    {
+      "rule": "I3-self-evident-kind",
+      "subject": "ex:Sync",
+      "object": "ex:AutoTrait",
+      "predicate": "ex:instanceOf",
+      "action": "added new edge",
+      "evidence": "03_advanced/00_concurrency/02_send_sync_auto_traits.md:3 标题“Send 与 Sync：Auto Trait 的并发安全契约”；:5 Summary“…and `T: Sync` is equivalent to `&T: Send`”——Sync 自述为 auto trait"
+    },
+    {
+      "rule": "I1-category-listed",
+      "subject": "ex:Box",
+      "object": "ex:SmartPointers",
+      "predicate": "ex:instanceOf",
+      "action": "added new edge",
+      "evidence": "02_intermediate/02_memory_management/04_smart_pointers.md:7 Summary“Smart Pointers — Box, Rc/Arc, RefCell/Cell”；:37 设“1.2 Box：独占堆分配”章节——Box 被智能指针权威页列为成员"
+    },
+    {
+      "rule": "I1-category-listed",
+      "subject": "ex:Rc",
+      "object": "ex:SmartPointers",
+      "predicate": "ex:instanceOf",
+      "action": "added new edge",
+      "evidence": "02_intermediate/02_memory_management/04_smart_pointers.md:7 Summary“Smart Pointers — Box, Rc/Arc, RefCell/Cell”；:38 设“1.3 Rc 与 Arc：引用计数共享”章节"
+    },
+    {
+      "rule": "I1-category-listed",
+      "subject": "ex:Arc",
+      "object": "ex:SmartPointers",
+      "predicate": "ex:instanceOf",
+      "action": "added new edge",
+      "evidence": "02_intermediate/02_memory_management/04_smart_pointers.md:7 Summary“Smart Pointers — Box, Rc/Arc, RefCell/Cell”；:38 设“1.3 Rc 与 Arc：引用计数共享”章节"
+    },
+    {
+      "rule": "I1-category-listed",
+      "subject": "ex:Result",
+      "object": "ex:AlgebraicDataType",
+      "predicate": "ex:instanceOf",
+      "action": "added new edge",
+      "evidence": "04_formal/00_type_theory/01_type_theory.md:504“| `Option<T>` / `Result<T, E>` | C1: 递归类型 + ADT |”；:121“代数数据类型（ADT）的积与余积语义是类型论的标准结论”（Pierce TAPL Ch.11）——Result 被类型论权威页归类为 ADT"
+    },
+    {
+      "rule": "I1-category-listed",
+      "subject": "ex:Option",
+      "object": "ex:AlgebraicDataType",
+      "predicate": "ex:instanceOf",
+      "action": "added new edge",
+      "evidence": "04_formal/00_type_theory/01_type_theory.md:504“| `Option<T>` / `Result<T, E>` | C1: 递归类型 + ADT |”；01_foundation/07_modules_and_items/05_enumerations.md:15 后置概念“Algebraic Data Types”——Option 被归类为 ADT"
+    },
+    {
+      "rule": "I2-category-section",
+      "subject": "ex:VerificationToolchain",
+      "object": "ex:FormalVerificationFramework",
+      "predicate": "ex:instanceOf",
+      "action": "added new edge",
+      "evidence": "06_ecosystem/08_formal_verification/01_formal_ecosystem_tower.md:89“L4 验证扩展层 — 功能正确性证明 — Kani · Verus · Creusot”；:101 分层塔将验证工具链成员（Kani/Verus/Creusot）纳入形式化生态框架——验证工具链是形式化验证框架的组成部分"
+    },
+    {
+      "rule": "A1-page-application",
+      "subject": "ex:SerdePatterns",
+      "object": "ex:Serialization",
+      "predicate": "ex:appliesTo",
+      "action": "added new edge",
+      "evidence": "02_intermediate/00_traits/03_serde_patterns.md:2 关键术语“序列化 (Serialization) · 反序列化 (Deserialization) · serde”；:4 标题“Serde 序列化模式：Rust 的类型驱动数据转换”——serde 模式应用于序列化领域"
+    },
+    {
+      "rule": "A1-page-application",
+      "subject": "ex:KaniRustBoundedModelChecker",
+      "object": "ex:ModelChecking",
+      "predicate": "ex:appliesTo",
+      "action": "added new edge",
+      "evidence": "04_formal/04_model_checking/09_kani.md:9 Summary“Kani is an AWS-developed bounded model checker for Rust”；:60“Kani 是 AWS 开发并开源的 Rust 有界模型检查器（Bounded Model Checker）”——Kani 应用于模型检查领域"
+    },
+    {
+      "rule": "A1-page-application",
+      "subject": "ex:RustBelt_02separation",
+      "object": "ex:UnsafeAbstractionSoundness",
+      "predicate": "ex:appliesTo",
+      "action": "added new edge",
+      "evidence": "04_formal/02_separation_logic/01_rustbelt.md:118“[RustBelt: POPL 2018] … It provides a proof technique for verifying that unsafe code respects safe Rust's abstraction boundaries”——RustBelt 应用于 unsafe 抽象可靠性（soundness）证明"
+    }
+  ],
+  "gap_resolution": [
+    {
+      "gap": "① ex:Vec / ex:HashMap → ex:Collections",
+      "resolution": "新建 2 实例节点 + 2 条 instanceOf"
+    },
+    {
+      "gap": "② ex:Tokio → ex:AsyncRuntime",
+      "resolution": "新建范畴 ex:AsyncRuntime + 实例 ex:Tokio + 1 条 instanceOf"
+    },
+    {
+      "gap": "③ ex:Send / ex:Sync → ex:AutoTrait",
+      "resolution": "新建范畴 ex:AutoTrait + 2 实例节点 + 2 条 instanceOf"
+    },
+    {
+      "gap": "④ ex:Box / ex:Rc / ex:Arc → ex:SmartPointers",
+      "resolution": "新建 3 实例节点 + 3 条 instanceOf"
+    },
+    {
+      "gap": "⑤ ex:Result / ex:Option → ex:AlgebraicDataType",
+      "resolution": "新建范畴 ex:AlgebraicDataType + 2 实例节点 + 2 条 instanceOf"
+    },
+    {
+      "gap": "⑥ ex:Serialization（serde appliesTo 目标）",
+      "resolution": "新建领域节点 + ex:SerdePatterns appliesTo ex:Serialization"
+    },
+    {
+      "gap": "⑦ ex:ModelChecking（kani appliesTo 目标）",
+      "resolution": "新建领域节点 + ex:KaniRustBoundedModelChecker appliesTo ex:ModelChecking"
+    },
+    {
+      "gap": "⑧ ex:FormalVerificationFramework",
+      "resolution": "新建范畴节点 + ex:VerificationToolchain instanceOf ex:FormalVerificationFramework"
+    },
+    {
+      "gap": "⑨ ex:UnsafeAbstractionSoundness（rustbelt appliesTo 目标）",
+      "resolution": "新建领域节点 + ex:RustBelt_02separation appliesTo ex:UnsafeAbstractionSoundness"
+    }
+  ]
+}

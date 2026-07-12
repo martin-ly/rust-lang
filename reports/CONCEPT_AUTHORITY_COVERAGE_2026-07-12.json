@@ -11,8 +11,8 @@
       94.6
     ],
     "P2": [
-      393,
-      85.4
+      394,
+      85.7
     ],
     "any": [
       460,
@@ -31,17 +31,15 @@
       100.0
     ],
     "P2": [
-      381,
-      99.7
+      382,
+      100.0
     ],
     "any": [
       382,
       100.0
     ],
     "gaps_p1": [],
-    "gaps_p2": [
-      "concept/03_advanced/02_unsafe/02_unsafe_boundary_panorama.md"
-    ]
+    "gaps_p2": []
   },
   "by_layer": {
     "L0": {

@@ -302,7 +302,7 @@ impl CfsApp {
 
 - [CubeSat生态系统](https://github.com/CubeSat)
 - [Rust嵌入式工作组](https://github.com/rust-embedded)
-- [Space Applications of Rust](https://github.com/rust-spac)
+- [NASA core Flight System (cFS) 开源仓库](https://github.com/nasa/cFS)
 
 ---
 

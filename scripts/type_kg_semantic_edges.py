@@ -190,28 +190,11 @@ CURATED_APPLIES: list[tuple[str, str, str, str]] = [
 ]
 
 # ---------------------------------------------------------------------------
-# 范畴节点缺口（实体不存在，按约束不擅自新建，仅报告）
+# 范畴节点缺口：第一轮（2026-07-12）登记 9 项，第二轮已全部解决——
+# 见 scripts/add_kg_category_nodes.py 与 reports/KG_CATEGORY_NODES_2026-07-12.md
+#（新建 17 节点 + 14 条 instanceOf/appliesTo 边）。本列表保留为空。
 # ---------------------------------------------------------------------------
-CATEGORY_GAPS: list[tuple[str, str, str]] = [
-    ("ex:Vec / ex:HashMap", "instanceOf → ex:Collections（范畴存在）",
-     "无 Vec/HashMap 实体节点，无法建“Vec instanceOf Collections”边"),
-    ("ex:Tokio", "instanceOf → AsyncRuntime",
-     "无 tokio 实体；且无 AsyncRuntime 范畴节点（ex:TheRustRuntime 指 Rust 语言运行时，非异步运行时）"),
-    ("ex:Send / ex:Sync", "instanceOf → AutoTrait",
-     "无 Send/Sync 实体；且无 AutoTrait 范畴节点"),
-    ("ex:Box / ex:Rc / ex:Arc", "instanceOf → ex:SmartPointers（范畴存在）",
-     "无 Box/Rc/Arc 独立实体节点（仅以 Cow/Pin 等组合节点存在）"),
-    ("ex:Result / ex:Option", "instanceOf → ex:Enumerations 或 AlgebraicDataType",
-     "无 Result/Option 实体；且无 AlgebraicDataType 范畴节点"),
-    ("ex:FormalVerificationFramework", "RustBelt instanceOf 的目标范畴",
-     "无该范畴节点；已用 ex:VerificationToolchain 替代建边"),
-    ("ex:Serialization", "serde appliesTo 的目标领域",
-     "无序列化领域节点；已用 ex:SerdePatterns appliesTo ex:Traits 替代"),
-    ("ex:UnsafeAbstractionSoundness", "rustbelt appliesTo 的目标领域",
-     "无该领域节点；已用 ex:RustBelt_02separation appliesTo ex:SafeAndEffectiveUnsafeRust 替代"),
-    ("ex:ModelChecking", "kani appliesTo 的目标领域（独立节点）",
-     "无独立模型检查节点；已用 ex:FormalMethods_04modelcheck（04_model_checking/02_formal_methods.md）替代"),
-]
+CATEGORY_GAPS: list[tuple[str, str, str]] = []
 
 
 def main() -> int:
@@ -288,8 +271,10 @@ def main() -> int:
     after = Counter(r["ex:predicate"] for r in relations)
 
     # ---- 报告 ----
-    out_md = ROOT / "reports" / f"KG_SEMANTIC_EDGE_TYPING_{args.date}.md"
-    out_json = ROOT / "reports" / f"KG_SEMANTIC_EDGE_TYPING_{args.date}.json"
+    # dry-run 不写正式报告文件，避免覆盖历史报告（2026-07-12 曾因此覆盖第一轮报告）
+    suffix = "_DRYRUN" if args.dry_run else ""
+    out_md = ROOT / "reports" / f"KG_SEMANTIC_EDGE_TYPING_{args.date}{suffix}.md"
+    out_json = ROOT / "reports" / f"KG_SEMANTIC_EDGE_TYPING_{args.date}{suffix}.json"
 
     def dist_table(b: Counter, a: Counter) -> list[str]:
         keys = sorted(set(b) | set(a), key=lambda k: -a.get(k, 0))
@@ -334,7 +319,7 @@ def main() -> int:
               "- Unsafe（L3 01_unsafe）与 L4 tree_borrows / behavior_considered_undefined **不**建 equivalentTo："
               "后两者是别名模型/UB 清单等独立概念，已改用 appliesTo 指向 ex:SafeAndEffectiveUnsafeRust。",
               "", "## 机器可读", "",
-              f"- JSON: `reports/KG_SEMANTIC_EDGE_TYPING_{args.date}.json`", ""]
+              f"- JSON: `reports/KG_SEMANTIC_EDGE_TYPING_{args.date}{suffix}.json`", ""]
 
     out_json.write_text(json.dumps({
         "date": args.date, "dry_run": args.dry_run,

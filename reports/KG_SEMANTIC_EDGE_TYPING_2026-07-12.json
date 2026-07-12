@@ -9,23 +9,26 @@
     "skipped_missing_entity": 0
   },
   "before": {
+    "ex:relatedTo": 4414,
     "ex:dependsOn": 700,
     "ex:entails": 671,
-    "ex:relatedTo": 4414,
+    "ex:instanceOf": 0,
+    "ex:appliesTo": 0,
     "ex:refines": 12,
-    "ex:counterExample": 5,
-    "ex:mutexWith": 5
+    "ex:equivalentTo": 0,
+    "ex:mutexWith": 5,
+    "ex:counterExample": 5
   },
   "after": {
+    "ex:relatedTo": 4405,
     "ex:dependsOn": 700,
     "ex:entails": 671,
-    "ex:relatedTo": 4405,
-    "ex:equivalentTo": 9,
-    "ex:refines": 12,
-    "ex:counterExample": 5,
     "ex:instanceOf": 18,
     "ex:appliesTo": 14,
-    "ex:mutexWith": 5
+    "ex:refines": 12,
+    "ex:equivalentTo": 9,
+    "ex:mutexWith": 5,
+    "ex:counterExample": 5
   },
   "changes_detail": [
     {
@@ -403,5 +406,6 @@
       "planned_edge": "kani appliesTo 的目标领域（独立节点）",
       "note": "无独立模型检查节点；已用 ex:FormalMethods_04modelcheck（04_model_checking/02_formal_methods.md）替代"
     }
-  ]
+  ],
+  "reconstructed": "2026-07-12: 原报告被第二轮 dry-run 误覆盖后依据脚本策展表与 KG 边注解重建"
 }

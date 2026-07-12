@@ -1319,12 +1319,11 @@ fn main() {
 
 ## 权威来源索引
 
->
->
->
->
->
->
+- [Miri: Practical Undefined Behavior Detection for Rust (POPL 2026)](https://plv.mpi-sws.org/rustbelt/) — Miri 论文（Jung et al., POPL 2026），UB 动态检测的学术基线
+- [Kani: A Model Checker for Rust (arXiv:2607.01504, 2026)](https://arxiv.org/abs/2607.01504) — Kani 模型检查器工具论文，覆盖 CBMC 后端与 verify-std 实践
+- [Verifying the Rust Standard Library (arXiv:2606.17374, 2026)](https://arxiv.org/abs/2606.17374) — verify-rust-std 社区验证计划综述：Kani/Verus/Prusti/RefinedRust 在 std unsafe 代码上的适用边界
+- [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) — 语言行为参考
+- [Ferrocene Language Specification](https://spec.ferrocene.dev/) — 捐赠给 Rust Project 的规范基线
 
 ---
 

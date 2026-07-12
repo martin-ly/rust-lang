@@ -253,6 +253,18 @@ flowchart TD
 - 新增 mermaid：**1 个**（闭环总图）；新增定量判定节点：**3 个**（K1/K3/K8）。
 - 跨文件回边：**7 条**（→ 05：`TH-BORROW-02`/`TH-LIFE-03`/`TH-PIN-07`/`TH-TYPE-04`/`TH-SEND-06`；→ 03：`T-ABS-01`/`T-CONC-01`）。
 
+### Q. 跳出叶子收敛（`[[见…]]` → 具体修复）
+
+| 判定树 | 原跳出叶子 | 收敛后的具体修复策略 |
+|:---:|:---|:---|
+| §3.1 借用冲突 | `F4[[见 Borrowing / Smart Pointers]]` | 拆分借用（split borrows）按字段分别借用；或用 `&mut *x` reborrow 缩短可变借用区间 |
+| §3.2 生命周期 | `F4[[见 Lifetimes Advanced / HRTB]]` | 补 `for<'a>` HRTB 约束；回调/闭包参数加 `'static` bound；或改返回 owned 数据 |
+| §3.3 类型不匹配 | `F4[[见 Return Type Notation 预研 / Async Advanced]]` | `impl Trait` 改具名关联类型或 `Box<dyn Trait>` 擦除；RPITIT 不可用时回退命名 trait 对象 |
+| §3.4 运行时 panic | `F4[[见 FFI Advanced / Unsafe Rust]]` | FFI 边界用 `catch_unwind` 拦截 panic；统一错误码返回值约定；`#[repr(C)]` 显式布局 |
+| §3.5 unsafe | `F4[[见 Unsafe Rust Patterns / Safety Tags 预研]]` | unsafe 块收缩到单表达式；每个 `unsafe fn` 补 Safety 契约注释（Safety Tags 风格） |
+
+> 中间层桥接：上述 5 条修复策略对应的权威概念页见 §四「按修复策略索引」（[Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Error Handling Deep Dive](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md) · [FFI Advanced](../../03_advanced/04_ffi/02_ffi_advanced.md) · [Unsafe Rust Patterns](../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md) · [Miri](../../04_formal/04_model_checking/08_miri.md) · [Kani](../../04_formal/04_model_checking/09_kani.md)），叶子不再跳出本页。
+
 ---
 
 ---

@@ -12,7 +12,7 @@
 |:---|---:|---:|
 | P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 460 | 100.0% |
 | P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 435 | 94.6% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 393 | 85.4% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 394 | 85.7% |
 | **任一权威（P0∪P1∪P2）** | **460** | **100.0%** |
 | 无任何国际权威引用（缺口） | 0 | 0.0% |
 
@@ -24,10 +24,8 @@
 |:---|---:|---:|
 | P0 官方 | 382 | 100.0% |
 | P1 学术/形式化 | 382 | 100.0% |
-| P2 社区/生态 | 381 | 99.7% |
+| P2 社区/生态 | 382 | 100.0% |
 | **任一权威** | **382** | **100.0%** |
-
-内容页 P2 缺口（1）: `concept/03_advanced/02_unsafe/02_unsafe_boundary_panorama.md`
 
 ## 按层级覆盖率
 

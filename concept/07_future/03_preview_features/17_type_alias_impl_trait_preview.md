@@ -1,6 +1,6 @@
 # TAIT Preview
 
-> **代码状态**: [综述级 — 含可编译示例]
+> **代码状态**: [伪代码（示意）] — TAIT（type_alias_impl_trait）在 rustc 1.97 stable 仍未稳定，示例需 nightly 编译，未作 stable 独立验证
 >
 > **EN**: Type Alias Impl Trait (TAIT) Preview
 > **Summary**: Preview of Type Alias Impl Trait (TAIT), which allows `impl Trait` inside type aliases to hide concrete types while preserving zero-cost abstraction; stabilized in Rust 1.75.0.

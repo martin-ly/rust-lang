@@ -472,5 +472,22 @@
   "ex:AuthoritySourceIndex": "concept/sources/INDEX.md",
   "ex:RfcIndex": "concept/sources/rfc_index.md",
   "ex:TheoremTierSpec": "concept/sources/theorem_tier_spec.md",
-  "ex:TableOfContents": "concept/SUMMARY.md"
+  "ex:TableOfContents": "concept/SUMMARY.md",
+  "ex:Vec": "concept/01_foundation/05_collections/01_collections.md",
+  "ex:HashMap": "concept/01_foundation/05_collections/01_collections.md",
+  "ex:AsyncRuntime": "concept/03_advanced/01_async/04_future_and_executor_mechanisms.md",
+  "ex:Tokio": "concept/03_advanced/01_async/06_async_boundary_panorama.md",
+  "ex:AutoTrait": "concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md",
+  "ex:Send": "concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md",
+  "ex:Sync": "concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md",
+  "ex:Box": "concept/02_intermediate/02_memory_management/04_smart_pointers.md",
+  "ex:Rc": "concept/02_intermediate/02_memory_management/04_smart_pointers.md",
+  "ex:Arc": "concept/02_intermediate/02_memory_management/04_smart_pointers.md",
+  "ex:AlgebraicDataType": "concept/04_formal/00_type_theory/01_type_theory.md",
+  "ex:Result": "concept/01_foundation/08_error_handling/01_error_handling_basics.md",
+  "ex:Option": "concept/01_foundation/07_modules_and_items/05_enumerations.md",
+  "ex:Serialization": "concept/02_intermediate/00_traits/03_serde_patterns.md",
+  "ex:ModelChecking": "concept/04_formal/04_model_checking/09_kani.md",
+  "ex:FormalVerificationFramework": "concept/06_ecosystem/08_formal_verification/01_formal_ecosystem_tower.md",
+  "ex:UnsafeAbstractionSoundness": "concept/04_formal/02_separation_logic/01_rustbelt.md"
 }

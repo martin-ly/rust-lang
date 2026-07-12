@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 465,
-    "generated_at": "2026-07-12T05:32:17.289311+00:00"
+    "generated_at": "2026-07-12T06:23:10.591057+00:00"
   },
   "files": [
     {
@@ -4176,7 +4176,7 @@
       "layer": "L0",
       "title": "场景决策树图谱（Scenario Decision Tree Atlas）",
       "positioning": "",
-      "line_count": 293,
+      "line_count": 294,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -6292,7 +6292,7 @@
       "layer": "L0",
       "title": "推理判定树图谱（Reasoning Judgment Tree Atlas）",
       "positioning": "",
-      "line_count": 265,
+      "line_count": 277,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -6306,6 +6306,8 @@
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/00_concurrency/03_concurrency_patterns.md",
         "../../03_advanced/01_async/08_pin_unpin.md",
+        "../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md",
+        "../../03_advanced/04_ffi/02_ffi_advanced.md",
         "../../04_formal/02_separation_logic/01_rustbelt.md",
         "../../04_formal/04_model_checking/08_miri.md",
         "../../04_formal/04_model_checking/09_kani.md",
@@ -6319,7 +6321,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 6,
-      "matrix_rows": 29,
+      "matrix_rows": 35,
       "pre_post": {
         "pre": [],
         "post": []
@@ -17630,7 +17632,7 @@
       "layer": "L2",
       "title": "Const Generics（常量泛型）：值作为类型参数",
       "positioning": "",
-      "line_count": 479,
+      "line_count": 488,
       "theorem_chains": [
         {
           "text": "维度进入类型 ⟹ 形状错误在编译期暴露，乘法只写一次覆盖所有形状：",
@@ -17658,7 +17660,7 @@
       "code_blocks": [
         {
           "flags": [],
-          "lines": 7,
+          "lines": 14,
           "should_fail": false,
           "code_preview": "// 历史困境（1.51 之前）：只能手写 impl，或退化为 slice trait Reverse { fn reverse(&mut self); }  ..."
         },
@@ -17688,7 +17690,7 @@
         },
         {
           "flags": [],
-          "lines": 12,
+          "lines": 14,
           "should_fail": false,
           "code_preview": "// ✅ stable：const 参数\"原样\"使用 fn ok_identity<T, const N: usize>(a: [T; N]) -> [T; N..."
         },
@@ -34394,7 +34396,7 @@
       "layer": "L4",
       "title": "rustc 类型检查与类型推断",
       "positioning": "把“编译器如何知道 `Vec<&str>` 并对未标注类型做推断”还原为约束生成、统一与区域求解的完整算法。",
-      "line_count": 412,
+      "line_count": 413,
       "theorem_chains": [
         {
           "text": "- **回退作为 tie-breaker**：当多个候选在语法上都可匹配、`{float}` 未被其它等值约束固定时，回退默认值决定 solver 把 `{float}` 实例化为 `f32` 还是 `f64`，从而决定**哪一个 `From` 候选被选中**。默认值变化 ⟹ 候选选择可能变化 ⟹ future-compat 警告。",
@@ -34475,7 +34477,7 @@
           "flags": [
             "ignore"
           ],
-          "lines": 16,
+          "lines": 17,
           "should_fail": false,
           "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 两类 fallback 的对照示例 fn float_fallback() {   ..."
         },
@@ -36599,7 +36601,7 @@
       "layer": "L4",
       "title": "Verification Toolchain Selection Guide（验证工具链选择指南）",
       "positioning": "",
-      "line_count": 1548,
+      "line_count": 1547,
       "theorem_chains": [
         {
           "text": "| Verification Toolchain Selection Guide（验证工具链选择指南） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -37236,7 +37238,7 @@
       "layer": "L4",
       "title": "AutoVerus / Verus 自动证明生态",
       "positioning": "",
-      "line_count": 188,
+      "line_count": 189,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -37260,6 +37262,7 @@
         "../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md",
         "../../07_future/00_version_tracking/rust_1_98_preview.md",
         "../../07_future/03_preview_features/03_safety_tags_preview.md",
+        "../../07_future/03_preview_features/33_autoverus_preview.md",
         "../02_separation_logic/04_borrow_sanitizer_in_formal.md",
         "01_verification_toolchain.md"
       ],
@@ -50605,7 +50608,7 @@
       "layer": "L6",
       "title": "Formal Verification Tools（形式化验证工具生态）",
       "positioning": "",
-      "line_count": 960,
+      "line_count": 961,
       "theorem_chains": [
         {
           "text": "- **定理**: Formal Verification Tools（形式化验证工具生态） 定义 ⟹ 类型安全保证",
@@ -56890,7 +56893,7 @@
       "layer": "L7",
       "title": "Rust 1.98+ 前沿特性预览",
       "positioning": "",
-      "line_count": 594,
+      "line_count": 607,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -56966,7 +56969,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 26,
+      "matrix_rows": 31,
       "pre_post": {
         "pre": [
           "N/A",
@@ -57810,7 +57813,7 @@
       "layer": "L7",
       "title": "Safety Tags 概念预研：Unsafe 契约的机器可读标注",
       "positioning": "探讨 Safety Tags 作为 Rust **unsafe 代码契约**的机器可读标注机制，从人工文档注释演进为编译器可理解、工具可验证的安全契约格式。",
-      "line_count": 667,
+      "line_count": 668,
       "theorem_chains": [
         {
           "text": "- **定理**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 定义 ⟹ 类型安全保证",
@@ -57905,7 +57908,7 @@
       "transitions": 8,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
-      "matrix_rows": 39,
+      "matrix_rows": 40,
       "pre_post": {
         "pre": [
           "[Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [BorrowSanitizer](24_borrow_sanitizer.md)",
@@ -60839,25 +60842,12 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\03_preview_features\\33_autoverus_preview.md",
       "layer": "L7",
-      "title": "AutoVerus / Verus 预览",
+      "title": "AutoVerus / Verus 预览跟踪",
       "positioning": "",
-      "line_count": 178,
+      "line_count": 81,
       "theorem_chains": [],
-      "anti_propositions": [
-        {
-          "title": "## 六、反命题"
-        }
-      ],
-      "code_blocks": [
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 18,
-          "should_fail": false,
-          "code_preview": "// 规格函数（spec function），编译时擦除 pub closed spec fn sorted(seq: Seq<i32>) -> bool { ..."
-        }
-      ],
+      "anti_propositions": [],
+      "code_blocks": [],
       "sources": [],
       "cross_references": [
         "../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md",
@@ -60872,7 +60862,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 11,
+      "matrix_rows": 13,
       "pre_post": {
         "pre": [
           "[形式化验证](../../04_formal/04_model_checking/01_verification_toolchain.md) · [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)",

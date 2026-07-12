@@ -27,6 +27,12 @@
 - Rust 概念权威解释：[`concept/`](../concept)
 - 历史专题文件：[`archive/content/`](../archive/content)（归档只读）
 
+## 国际权威来源参考
+
+- [Rust 官方文档](https://doc.rust-lang.org/) — 语言与标准库权威文档
+- [Ferrocene Language Specification](https://spec.ferrocene.dev/) — 安全关键认证版 Rust 语言规范
+- [Rust Foundation Safety-Critical Rust Consortium](https://github.com/rustfoundation/safety-critical-rust-consortium) — 安全关键领域官方协作组
+
 ---
 
 *本文件作为 Content 目录的入口保留。*

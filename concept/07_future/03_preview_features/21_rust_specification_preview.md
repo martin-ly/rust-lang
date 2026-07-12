@@ -454,7 +454,7 @@ fn main() {
 > Rust 规范将最终裁定这些边缘情况。对开发者的影响：避免任何可能触发 UB 的代码，即使 Miri（基于 Stacked Borrows）不报错。
 > 这与 C 的 ISO C 标准（明确的 UB 列表）类似，但 Rust 的内存模型更复杂（所有权（Ownership）、借用（Borrowing）、内部可变性、Pin）。
 > 规范的编写是 Rust 成熟度的重要标志——从"实现定义语言"走向"规范定义语言"。
-> [来源: [Rust Specification Draft](https://spec.rust-lang.org/)] ·
+> [来源: [RFC 3355 — The Rust Specification](https://rust-lang.github.io/rfcs/3355-rust-spec.html)] ·
 > [来源: [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)]
 
 ### 10.2 边界测试：规范与编译器实现的差异（编译错误）

@@ -2,7 +2,7 @@
   "summary": {
     "date": "2026-07-12",
     "files": 13,
-    "flagged": 1,
+    "flagged": 0,
     "T1_def_low_rate": 0.011,
     "T1_def_low": [
       5,
@@ -11,10 +11,10 @@
     "T2_top_rate": 0.83,
     "T2_top_symbol": "⟹",
     "T3_jump": [
-      31,
-      188
+      21,
+      189
     ],
-    "T3_jump_rate": 0.165,
+    "T3_jump_rate": 0.111,
     "T3_dead_ends": 0,
     "T4_quant_rate": 0.933,
     "T5_leaks": 0,
@@ -60,12 +60,12 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/03_scenario_decision_tree_atlas.md",
-      "lines": 293,
+      "lines": 294,
       "T3T4": {
         "blocks": 9,
         "nodes": 102,
-        "jump_nodes": 11,
-        "jump_rate": 0.108,
+        "jump_nodes": 6,
+        "jump_rate": 0.059,
         "dead_ends": [],
         "dead_end_count": 0,
         "diamonds": 24,
@@ -114,21 +114,19 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
-      "lines": 265,
+      "lines": 277,
       "T3T4": {
         "blocks": 6,
-        "nodes": 86,
-        "jump_nodes": 20,
-        "jump_rate": 0.233,
+        "nodes": 87,
+        "jump_nodes": 15,
+        "jump_rate": 0.172,
         "dead_ends": [],
         "dead_end_count": 0,
         "diamonds": 21,
         "quant_diamonds": 21,
         "quant_rate": 1.0
       },
-      "issues": {
-        "T3": "跳出叶子率 23.3% (20/86)"
-      }
+      "issues": {}
     },
     {
       "rel": "concept/00_meta/knowledge_topology/10_gap_and_action_plan.md",

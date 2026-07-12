@@ -1,6 +1,6 @@
 # Lifetime Capture in `impl Trait` Preview
 
-> **代码状态**: [综述级 — 含可编译示例]
+> **代码状态**: [已验证（rustc 1.97）] — 代码块经 rustc 1.97.0 `--edition 2024` 单文件编译验证（2026-07-12）
 >
 > **EN**: Precise Lifetime Capture in `impl Trait` Preview
 > **Summary**: Preview of precise lifetime capture rules (`use<'lt>` syntax) for `impl Trait` return types, stabilized in Rust 1.82 and enabled by default in Rust 2024 Edition.

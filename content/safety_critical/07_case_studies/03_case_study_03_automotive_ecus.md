@@ -519,8 +519,8 @@ fn critical_calculation(x: u32) -> u32 {
 - [AUTOSAR](https://www.autosar.org)
 - [ISO 26262](https://www.iso.org/standard/68383.html)
 - [MISRA](https://misra.org.uk)
-- [Ferrous Systems](https://ferrous-systems.com)
-- [AUTOSAR Rust讨论组](https://github.com/autosar-rs)
+- [Ferrous Systems](https://www.ferrous-systems.com)
+- [AUTOSAR 官方网站](https://www.autosar.org/)
 
 ---
 

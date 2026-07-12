@@ -1,6 +1,6 @@
 # `must_not_suspend` Lint Preview
 
-> **代码状态**: [综述级 — 含可编译示例]
+> **代码状态**: [已验证（rustc 1.97）] — std 示例经 rustc 1.97.0 `--edition 2024` 编译验证（2026-07-12）；`rust,compile_fail` 块为设计意图的反例
 >
 > **EN**: `must_not_suspend` Lint Preview
 > **Summary**: Preview of the `must_not_suspend` lint that warns when types like `MutexGuard` or `RefCell` borrows are held across `.await` points in async code; nightly experimental.

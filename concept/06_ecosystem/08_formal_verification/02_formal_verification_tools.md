@@ -864,6 +864,7 @@ fn caller() {
 - [版本跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) — Rust 语言演进对验证工具的影响
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+> **国际权威参考（2026 新刊，已验证 200）**: [Kani: A Model Checker for Rust (arXiv:2607.01504, 2026)](https://arxiv.org/abs/2607.01504) · [Verifying the Rust Standard Library (arXiv:2606.17374, 2026)](https://arxiv.org/abs/2606.17374)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **过渡**: Formal Verification Tools（形式化验证工具生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Formal Verification Tools（形式化验证工具生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

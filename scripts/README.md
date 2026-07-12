@@ -68,8 +68,8 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `check_crates_docs_alignment.py` | crates 文档对齐检查 |
 | `check_rust_feature_versioning.py` | Rust 特性版本标注检查 |
 | `detect_content_overlap.py` | 三轨内容相似度去重检测（质量门 8，阻断） |
-| `detect_content_overlap_v2.py` | 段落级重叠检测 v2（质量门 16，观察） |
-| `triage_overlap.py` | 重叠报告分诊（MERGE/DOCS_INTERNAL/SERIES/REVIEW；SERIES 白名单 = 正则 + 显式 `SERIES_PAIRS` 人工复核登记） |
+| `detect_content_overlap_v2.py` | 段落级重叠检测 v2（质量门 15，2026-07-12 转阻断：triage 可处理项 MERGE+DOCS_INTERNAL 基线 0） |
+| `triage_overlap.py` | 重叠报告分诊（MERGE/DOCS_INTERNAL/SERIES/REVIEW；SERIES 白名单 = 正则 + `SERIES_PATH_RE` 路径族 + 显式 `SERIES_PAIRS` 人工复核登记） |
 | `check_canonical_uniqueness.py` | `concept/` 权威页唯一性检查（质量门 13，阻断） |
 | `check_template_cliches.py` | `concept/` 模板套话黑名单扫描；`--strict` 发现命中即 exit 1 |
 | `check_decision_trees.py` | 决策树机器可读层校验（`decision_trees.yaml` 结构/死端/概念覆盖）；结构错误 exit 1 |

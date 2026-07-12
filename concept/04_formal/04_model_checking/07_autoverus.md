@@ -171,6 +171,7 @@ B
 
 ## 相关概念
 
+- [AutoVerus / Verus 预览跟踪（L7 版本/生态动向）](../../07_future/03_preview_features/33_autoverus_preview.md)
 - [形式化验证](01_verification_toolchain.md)
 - [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
 - [Safety Tags](../../07_future/03_preview_features/03_safety_tags_preview.md)

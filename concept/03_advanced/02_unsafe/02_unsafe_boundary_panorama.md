@@ -56,7 +56,7 @@
     - [8.3 判定条件](#83-判定条件)
   - [九、失效模式总表](#九失效模式总表)
   - [十、边界判定总图](#十边界判定总图)
-  - [十一、与 03\_unsafe.md 的分工与交叉引用](#十一与-03_unsafemd-的分工与交叉引用)
+  - [十一、与 01\_unsafe.md 的分工与交叉引用](#十一与-01_unsafemd-的分工与交叉引用)
   - [十二、演进方向](#十二演进方向)
   - [权威来源索引](#权威来源索引)
 
@@ -440,4 +440,4 @@ flowchart TD
 
 - **P0 官方**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust Reference — Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html) · [Ferrocene Language Specification](https://spec.ferrocene.dev/)
 - **P1 学术**: [Tree Borrows (Neven et al., POPL 2024)](https://perso.crans.org/vanille/treebor/) · [Stacked Borrows (Jung et al., POPL 2020)](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) · [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
-- **P2 生态**: [Miri](https://github.com/rust-lang/miri) · [Kani](https://model-checking.github.io/kani/) · [cbindgen](https://github.com/mozilla/cbindgen) · [bindgen](https://rust-lang.github.io/rust-bindgen/)
+- **P2 生态**: [Miri](https://github.com/rust-lang/miri) · [Kani](https://github.com/model-checking/kani) · [cbindgen](https://github.com/mozilla/cbindgen) · [bindgen](https://rust-lang.github.io/rust-bindgen/)

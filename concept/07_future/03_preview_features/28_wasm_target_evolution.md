@@ -11,7 +11,7 @@
 
 # WASM Target Evolution Preview
 
-> **代码状态**: [综述级 — 含可编译示例]
+> **代码状态**: [伪代码（示意）] — 示例面向 wasm target 与组件模型工具链，未在 rustc 1.97 host target 单文件场景独立编译验证
 >
 > **EN**: WebAssembly Target Evolution Preview
 > **Summary**: Preview of Rust WebAssembly target evolution, including WASI p1/p2, component model, SIMD, threads, GC, and exception handling proposals.

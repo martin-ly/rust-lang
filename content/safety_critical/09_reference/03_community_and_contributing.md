@@ -61,7 +61,7 @@ Rust基金会:
 │   └── https://users.rust-lang.org/
 │
 ├── Rust嵌入式论坛
-│   └── https://users.rust-embedded.org/
+│   └── https://github.com/rust-embedded
 │
 ├── Zulip Chat
 │   ├── Rust主频道
@@ -439,7 +439,7 @@ git push origin feature/my-contribution
 │   └── https://ferrocene.dev/
 │
 ├── Rust Safety Critical Wiki
-│   └── https://github.com/rust-safety-critical/wg/wiki
+│   └── https://github.com/rustfoundation/safety-critical-rust-consortium
 │
 └── Embedded Rust Book
     └── https://docs.rust-embedded.org/book/

@@ -1,6 +1,6 @@
 # Rust in Space Preview
 
-> **代码状态**: [综述级 — 含可编译示例]
+> **代码状态**: [伪代码（示意）] — 示例为 no_std 嵌入式/航天场景（含 panic handler 等 target 相关代码），未在 rustc 1.97 host target 单文件场景独立编译验证
 >
 > **EN**: Rust in Space Preview
 > **Summary**: Preview of Rust's adoption in aerospace and safety-critical systems, covering Ferrocene certification, no_std embedded deployment, and comparison with Ada/SPARK.

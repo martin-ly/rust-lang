@@ -9,7 +9,12 @@
   D3 关键字段同文件重声明（Bloom/Rust版本/层次定位/A-S-P/内容分级）
   D4 文首块内 Rust 版本号自矛盾（distinct minor >= 2）
   D5 稳定层(非07_future)正文残留 nightly/preview/unstable/feature(
+     （排除：WASI Preview N 专名、URL 路径中的 nightly、D5_WHITELIST_FILES 显式登记项）
   D6 Summary 低信息量模板套话（P0-2 的一部分，顺手输出）
+
+白名单机制（2026-07-12 建立，消除“例外未登记”状态）：
+  D2_WHITELIST_FILES / D5_WHITELIST_FILES：逐文件人工复核后显式登记，附理由注释；
+  登记项不计入 counts/flagged，但在报告“已登记白名单”小节中公示，保持透明。
 
 退出码：
   默认（warning 模式）：始终 0，但 stdout 标注 WOULD-FAIL 项，便于观察不阻断。
@@ -53,6 +58,59 @@ KEY_FIELDS = ["Bloom 层级", "Rust 版本", "对应 Rust 版本", "层次定位
 # 这些文件以讨论 nightly/preview 为内容，D5 豁免
 # （knowledge_topology 为跨层生成的元层索引，nightly/preview 仅作为概念名引用出现，非稳定层正文残留）
 D5_WHITELIST_SUBSTR = ("07_future", "nightly_rust", "version_tracking", "preview_features", "knowledge_topology")
+
+# D2 显式登记白名单（2026-07-12 复核登记，消除“例外未登记”状态）：
+# A/S/P 内容分级（A->L1-2, S->L2-4, P->L4-7）只适用于概念内容页；
+# 以下页面经人工复核确认为合法特例，A/S/P 与 Bloom 不交集属页面性质使然，非元数据错误。
+D2_WHITELIST_FILES = {
+    # L0 纯导航索引页：内容为跨层文件清单，无概念正文；A/S/P=S 仅表示其索引的结构化属性，
+    # Bloom L0（元信息层）天然不在 S 的 L2-4 区间内。
+    "concept/00_meta/04_navigation/13_foundations_gap_closure_index.md":
+        "L0 导航索引页，无概念正文，A/S/P 内容分级不适用",
+    # L7 版本/生态跟踪页：文件头已声明“非概念权威页”，A/S/P=S+A 描述其跟踪对象（L4 权威页）
+    # 的内容属性而非自身层级；跟踪页不按概念页分级。
+    "concept/07_future/03_preview_features/33_autoverus_preview.md":
+        "L7 预览跟踪页（非概念权威页），A/S/P 描述被跟踪对象属性",
+}
+
+# D5 显式登记白名单（2026-07-12 逐文件复核）：以下稳定层页面的 nightly/preview/unstable
+# 提及均为页面主题本身或工具链事实（如 Miri 仅 nightly 可用），非“稳定层残留不稳定依赖”。
+# 登记前已逐项核对：所涉特性（min_specialization / negative_impls / const_trait_impl /
+# generic_const_exprs / -Zbuild-std / -Zscript / -Zpublic-dependency / panic_handler /
+# RUSTC_BOOTSTRAP / rustc -Z flags / Miri nightly toolchain）截至 Rust 1.97.0 stable 仍属
+# nightly-only，声明准确，保留白名单。
+D5_WHITELIST_FILES = {
+    "concept/00_meta/01_terminology/01_terminology_glossary.md":
+        "术语表：『特性门控(Feature Gate)』词条本身描述 nightly 机制；另含 1.97 新特性 nightly 状态跟踪小节",
+    "concept/02_intermediate/00_traits/01_traits.md":
+        "文首已显式声明不稳定特性警告；negative_impls/min_specialization/const_trait_impl 仍为 nightly-only",
+    "concept/02_intermediate/00_traits/04_advanced_traits.md":
+        "文首已显式声明不稳定特性警告；specialization/negative_impls/trait alias 仍为 nightly-only",
+    "concept/02_intermediate/01_generics/01_generics.md":
+        "文首已显式声明不稳定特性警告；generic_const_exprs/min_specialization/-Zshare-generics 仍为 nightly-only",
+    "concept/04_formal/04_model_checking/08_miri.md":
+        "Miri 解释器上游仅发布 nightly 组件，工具链事实",
+    "concept/04_formal/05_rustc_internals/01_rustc_query_system.md":
+        "rustc 内部 API/-Z 调试标志仅 nightly 可用，页面主题为 rustc 内部机制",
+    "concept/04_formal/05_rustc_internals/03_trait_solver_in_rustc.md":
+        "新 trait solver -Znext-solver 仅 nightly 可用，页面主题为 rustc 内部机制",
+    "concept/06_ecosystem/00_toolchain/05_compiler_infrastructure.md":
+        "并行前端/Cranelift 后端/build-std 均为 nightly-only 工具链能力",
+    "concept/06_ecosystem/00_toolchain/12_rustc_bootstrap.md":
+        "RUSTC_BOOTSTRAP 主题本身就是“在非 nightly 编译器上启用 unstable feature”",
+    "concept/06_ecosystem/01_cargo/01_cargo_script.md":
+        "cargo script (-Zscript) 截至 1.97 仍为 nightly 特性，页面主题即该特性",
+    "concept/06_ecosystem/01_cargo/02_public_private_deps.md":
+        "public 依赖完整语义 (-Zpublic-dependency) 截至 1.97 仍为 nightly 特性，页面主题即该特性",
+    "concept/06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md":
+        "public-dependency 实验特性完整检查需 nightly，页面主题即该特性",
+    "concept/06_ecosystem/01_cargo/22_build_std.md":
+        "-Zbuild-std 截至 1.97 仍为 nightly 特性，页面主题即该特性",
+    "concept/06_ecosystem/11_domain_applications/03_webassembly.md":
+        "#![feature(panic_handler)] 自定义 panic handler 截至 1.97 仍为 nightly-only（wasm32-unknown-unknown 场景）",
+    "concept/sources/INDEX.md":
+        "来源索引：Unstable Book(UNB) 作为权威来源条目及其 nightly 状态标注即索引内容本身",
+}
 
 
 def expand_bloom(text: str):
@@ -157,7 +215,9 @@ def check(rec):
         if not (b & lvl):
             issues["D1"].append(f"Bloom {sorted(b)} 与 层次定位/层级 {sorted(lvl)} 无交集")
 
-    # D2 A/S/P 与 Bloom 脱节
+    # D2 A/S/P 与 Bloom 脱节（显式登记白名单豁免，见 D2_WHITELIST_FILES 理由注释）
+    if rec["rel"] in D2_WHITELIST_FILES:
+        asp = None
     if asp and b:
         allowed = ASP_MAP.get(asp, set())
         if allowed and not (b & allowed):
@@ -174,15 +234,29 @@ def check(rec):
     if len(minors) >= 2:
         issues["D4"].append(f"版本字段 distinct minor {sorted(minors)}: {ver_text[:80]}")
 
-    # D5 稳定层 nightly/preview 残留
-    if not any(w in rec["rel"] for w in D5_WHITELIST_SUBSTR):
+    # D5 稳定层 nightly/preview 残留（路径子串豁免 + 显式登记白名单豁免）
+    if (not any(w in rec["rel"] for w in D5_WHITELIST_SUBSTR)
+            and rec["rel"] not in D5_WHITELIST_FILES):
         # 仅统计正文（去掉头部元数据块，粗略取第一个 '---' 之后）
         body = rec["text"]
         sep = body.find("\n---")
         if sep != -1:
             body = body[sep:]
-        hits = NIGHTLY_RE.findall(body)
-        cnt = len(hits)
+        cnt = 0
+        for m in NIGHTLY_RE.finditer(body):
+            w = m.group(0).lower()
+            # 排除 1：WASI Preview 1/2/3 为 WebAssembly 系统接口规范的版本专名，
+            # 与 Rust nightly/preview 无关（“preview”后接数字，或上下文含 WASI）
+            if w == "preview":
+                ctx = body[max(0, m.start() - 25): m.end() + 8]
+                if re.search(r"wasi", ctx, re.IGNORECASE) or re.match(r"\s*\d", body[m.end(): m.end() + 4]):
+                    continue
+            # 排除 2：URL 路径中的 nightly（如 doc.rust-lang.org/nightly/... 官方文档
+            # 固定托管路径，platform-support/unstable-book 仅在 nightly 路径下发布），
+            # 属权威来源引用而非正文残留
+            if w == "nightly" and m.start() > 0 and body[m.start() - 1] == "/":
+                continue
+            cnt += 1
         if cnt > 0:
             issues["D5"].append(f"稳定层 nightly/preview 关键词 {cnt} 处")
 
@@ -276,6 +350,15 @@ def main():
             extra = f" (基={d2_base})" if k == "D2" else ""
             f.write(f"| {k} {names[k]} | {counts[k]}{extra} | {pct(k)}% | {thr[k]} | {verdict} |\n")
         f.write(f"\n**受影响文件总数**: {len(per_file)} / {n}\n\n")
+        f.write("## 已登记白名单（人工复核确认的合法特例，不计入命中）\n\n")
+        f.write("### D2 A/S/P ↔ Bloom 脱节豁免\n\n")
+        for rel, reason in D2_WHITELIST_FILES.items():
+            f.write(f"- `{rel}` — {reason}\n")
+        f.write("\n### D5 稳定层 nightly/preview 豁免\n\n")
+        for rel, reason in D5_WHITELIST_FILES.items():
+            f.write(f"- `{rel}` — {reason}\n")
+        f.write("\n另有两类规则级排除：WASI Preview 1/2/3（WASM 规范版本专名）与 "
+                "URL 路径中的 nightly（官方文档固定托管路径）。\n\n")
         f.write("## 各类 Top 样例\n\n")
         for k in ["D1", "D2", "D3", "D4", "D5", "D6"]:
             f.write(f"### {k} {names[k]}（{counts[k]}）\n\n")

@@ -279,7 +279,7 @@ jobs:
         continue-on-error: true
 
   content-overlap-v2:
-    name: Content Overlap v2 (observe)
+    name: Content Overlap v2 (strict)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -288,9 +288,17 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run content overlap v2 (observe, append --strict to enforce)
-        run: python scripts/detect_content_overlap_v2.py --budget 999999
-        continue-on-error: true
+      - name: Run content overlap v2 + triage (blocking, promoted 2026-07-12 per AGENTS.md §5.2)
+        run: |
+          python scripts/detect_content_overlap_v2.py --budget 999999
+          python scripts/triage_overlap.py
+          ACTIONABLE=$(python -c "import glob,json; s=json.load(open(sorted(glob.glob('reports/OVERLAP_TRIAGE_*.json'))[-1],encoding='utf-8'))['summary']; print(s.get('MERGE',0)+s.get('DOCS_INTERNAL',0))")
+          echo "[overlap-v2] actionable (MERGE+DOCS_INTERNAL) = $ACTIONABLE (baseline 0)"
+          if [ "$ACTIONABLE" -gt 0 ]; then
+            echo "❌ overlap-v2 可处理重复对 > 0 — 阻断。MERGE 合并/stub、DOCS_INTERNAL 合并/互链/登记 SERIES 白名单（附证据）。"
+            exit 1
+          fi
+        continue-on-error: false
 
   topology-quality:
     name: Topology Quality (strict)
@@ -431,7 +439,7 @@ jobs:
               'Bilingual Terminology Check': '${{ needs.i18n-terms.result }}',
               'Mermaid Syntax Check': '${{ needs.mermaid-syntax.result }}',
               'Metadata Consistency (observe)': '${{ needs.metadata-consistency.result }}',
-              'Content Overlap v2 (observe)': '${{ needs.content-overlap-v2.result }}',
+              'Content Overlap v2 (strict)': '${{ needs.content-overlap-v2.result }}',
               'Topology Quality (strict)': '${{ needs.topology-quality.result }}',
               'KG SHACL Validation (strict)': '${{ needs.kg-shacl-validation.result }}',
               'Semantic Health (observe)': '${{ needs.semantic-health.result }}',

@@ -372,7 +372,7 @@
 |------|------|------|--------|
 | [Rustlings](https://github.com/rust-lang/rustlings) | 自学 | 免费 | ⭐⭐⭐⭐⭐ |
 | [Rust by Example](https://doc.rust-lang.org/rust-by-example/) | 文档 | 免费 | ⭐⭐⭐⭐⭐ |
-| [Ferrous Systems Training](https://ferrous-systems.com/training/) | 专业 | €€€ | ⭐⭐⭐⭐⭐ |
+| [Ferrous Systems Training](https://www.ferrous-systems.com/training/) | 专业 | €€€ | ⭐⭐⭐⭐⭐ |
 | [High Assurance Rust](https://highassurance.rs) | 自学 | 免费 | ⭐⭐⭐⭐ |
 
 ### 实验环境
@@ -493,7 +493,7 @@ cargo install kani-verifier verus
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- **培训机构**: [Ferrous Systems](https://ferrous-systems.com/training/)
+- **培训机构**: [Ferrous Systems](https://www.ferrous-systems.com/training/)
 - **在线课程**: [Rust Learning](https://www.rust-lang.org/learn)
 - **社区支持**: [Rust Embedded Matrix](https://matrix.to/#/#rust-embedded:matrix.org)
 

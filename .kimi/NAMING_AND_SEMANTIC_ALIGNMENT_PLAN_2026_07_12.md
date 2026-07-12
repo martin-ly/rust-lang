@@ -122,3 +122,14 @@
 - 报告：`reports/NAMING_RENUMBER_COMPLETION_2026_07_12.md`。
 
 **遗留（N3/后续）**：v2 可处置项 54（MERGE 5 + DOCS_INTERNAL 49，归零后可转 --strict）；无序号系列目录 WARN 85（命名 lint 观察）；`04_guides`/`08_guides` 命名歧义；crates 非 tier 子目录（c01_ownership/ 等）待改 tier_05_*；knowledge INDEX 旧统计数字（代码行数）未重算。
+
+## 第二轮深化完成记录（2026-07-12 午后）
+
+**状态：四线并行全部完成，全 20 门 exit 0，semantic health 93.5→97.2（meta 96.0 / topo 93.3 / dedup 100.0 / kg 100.0）。**
+
+- 线 A 命名收尾：docs/08_guides→08_usage_guides（33 文件/328 处链接）；crates 5 个非 tier 目录改 tier_05_*；10 个 rust_194_updates 补 README 索引；snippets 豁免登记；knowledge INDEX 统计重算（stub 化后实测口径）；命名 lint WARN 85→78（剩余均为已裁定豁免）。
+- 线 B 国际权威复核：覆盖门 any=100%/none=0 未退化；concept 内 1133 条权威外链复测，真实失效 2 条已修（spec.rust-lang.org→RFC Book、secure-code-guidelines→ANSSI）；1.97 release notes 逐条比对 0 缺口；1.98 周期新合并 RFC 补 4 条（#3955/#3928/#3808/#3946）；学术新刊补 3 篇（Kani/verify-rust-std/Safety Tags 审计）。报告 reports/INTERNATIONAL_AUTHORITY_REVERIFY_2026_07_12.md。
+- 线 C KG 关系实例化：equivalentTo 9 / instanceOf 18 / appliesTo 14（零→41 条类型化边，全附 evidence）；T3 jump 31/188→21/189；kg_links.json 重新生成并修 5 条陈旧路径。新脚本 scripts/type_kg_semantic_edges.py（可复跑）。范畴节点缺口 9 项登记待补。
+- 线 D v2 去重清零：54 可处置项→0（autoverus 真近克隆对差异化改写为预览跟踪页；52 对系列结构相似登记 SERIES_PATH_RE 白名单附证据）；**v2 门转阻断**（15 阻断+5 观察=20 门），CI/nightly/AGENTS 同步。报告 reports/DEDUP_V2_ZERO_2026_07_12.md。
+
+**遗留（非阻断）**：命名 lint WARN 78（已裁定豁免项）；KG 范畴节点缺口 9 项（Vec/Tokio/Send/Sync 等实体未建）；REVIEW 级相似对 437（观察，非可处置）。

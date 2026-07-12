@@ -44,6 +44,25 @@ SERIES_PAIRS = {
     }),
 }
 
+# 显式 SERIES 路径族白名单（人工复核登记的系列目录；两文件路径均命中同一正则时判 SERIES）。
+# 登记格式：compiled regex，作用于仓库相对路径（正斜杠）。每条必须附复核证据注释。
+SERIES_PATH_RE = [
+    # 复核 2026-07-12：docs/05_practice 实践项目指南系列（04_project_03 … 16_project_15，共 48 对命中，
+    # kw jaccard 0.71–0.82）。逐文件通读（每文件 86–135 行，全部读完 13 个命中文件的正文）：
+    # 共享内容 = 统一模板骨架（目录/项目目标/功能需求/学习要点/参考实现/权威来源索引节 + Batch 8
+    # 权威来源对齐页脚）；独特内容 = 各项目主题、功能需求清单与学习要点代码（递归下降解析 / 随机密码 /
+    # 迭代器词频 / 多线程+异步下载 / TCP 聊天 / RwLock 缓存 / 流式日志 / 管道模式 / HTTP 解析 /
+    # wasm-bindgen / B-Tree / 自定义 Future poll / Raft 状态机），无正文互抄。属同系列模板化结构，登记 SERIES。
+    re.compile(r"docs/05_practice/\d\d_project_"),
+    # 复核 2026-07-12：docs/12_research_notes/08_software_design_theory 子目录索引 README 系列
+    # （01_design_patterns_formal 下 creational/structural/behavioral 三份 + 02_workflow + 07_distributed，
+    # 共 4 对命中，kw jaccard 0.75–0.949）。逐文件通读（119–152 行/份）：共享 ~85% 为模板样板
+    # （元数据头、Rust 1.94 深度整合节、权威来源索引、Batch 8 页脚）；独特内容为各目录模式清单与
+    # 对齐状态表行（创建型 5 模式 / 结构型 7 模式 / 行为型 11 模式 / 工作流 3 模式 / 分布式 9 模式，
+    # 清单互不重叠）。均为子目录导航索引，合并或 stub 化会破坏目录导航，登记 SERIES。
+    re.compile(r"docs/12_research_notes/08_software_design_theory/(\d\d_[^/]+/)+README\.md"),
+]
+
 
 def _norm(p: str) -> str:
     return p.replace("\\", "/")
@@ -62,8 +81,15 @@ def _in_series_pairs(f1: str, f2: str) -> bool:
     return False
 
 
+def _in_series_path_family(f1: str, f2: str) -> bool:
+    f1, f2 = _norm(f1), _norm(f2)
+    return any(rx.search(f1) and rx.search(f2) for rx in SERIES_PATH_RE)
+
+
 def is_series(o):
     if _in_series_pairs(o["f1"], o["f2"]):
+        return True
+    if _in_series_path_family(o["f1"], o["f2"]):
         return True
     if SERIES_RE.search(o["f1"]) or SERIES_RE.search(o["f2"]):
         return True

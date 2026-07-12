@@ -1,6 +1,6 @@
 # Inline Const Pattern 预览（Rust 1.98+ Nightly）
 
-> **代码状态**: [综述级 — 含可编译示例]
+> **代码状态**: [已验证（rustc 1.97）] — 代码块经 rustc 1.97.0 `--edition 2024` 单文件编译验证（2026-07-12）
 >
 > **EN**: Inline Const Pattern Preview
 > **Summary**: Preview of inline const patterns (`const { expr }` in match arms), extending stable inline const expressions into pattern matching contexts; nightly experimental.

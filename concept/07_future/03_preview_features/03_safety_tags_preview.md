@@ -361,6 +361,7 @@ graph TD
 | [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) | ✅ 一级 | 官方项目目标 |
 | [Rust for Linux](https://rust-for-linux.com/) | ✅ 一级 | 内核 Rust 项目 |
 | [Prusti Paper](https://pm.inf.ethz.ch/publications/AstrauskasMuellerPoliSummers19.pdf) | ✅ 一级 | Rust 契约验证学术论文 |
+| [Annotating and Auditing the Safety Properties of Unsafe Rust (arXiv:2504.21312v2, 2026)](https://arxiv.org/abs/2504.21312) | ✅ 一级 | Safety Tags 标注与审计学术研究（2026-04 修订版） |
 | [Rust Internals Forum](https://internals.rust-lang.org/) | ⚠️ 二级 | 设计讨论 |
 | [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic) | 🔍 三级 | 形式化基础 |
 
@@ -653,7 +654,7 @@ Miri 可以根据安全标签选择不同的检查策略。例如，标记为 `e
 
 | 方面 | 状态 |
 |:---|:---:|
-| RFC 草案 | 🔴 尚未提交 |
+| RFC 草案 | 🟡 已提交：[RFC #3842](https://github.com/rust-lang/rfcs/pull/3842)（open，未合并） |
 | 社区讨论 | 🟡 Rust Internals / Zulip 活跃讨论 |
 | 原型实现 | 🔴 无 |
 | Rust-for-Linux 兴趣 | 🟢 已表达强烈兴趣 |

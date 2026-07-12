@@ -10,7 +10,7 @@
 > [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
-> **代码状态**: [综述级 — 待补充可编译示例]
+> **代码状态**: [伪代码（示意）] — 示例依赖 cxx 等外部 crate 与构建环境，未在 rustc 1.97 单文件场景独立编译验证
 >
 > **EN**: Integrating Rust into Existing Platforms and Codebases
 > **Summary**: Integrating Rust into large platforms: Android, Chromium, Linux, and bare-metal firmware.
@@ -166,8 +166,8 @@ rust_static_library("my_rust_parser") {
 
 `cxx` crate 是 Chromium Rust↔C++ 互操作的核心：
 
-```rust
-// Rust 侧桥接模块
+```rust,ignore
+// Rust 侧桥接模块（依赖 cxx crate，无法在单文件 rustc 场景独立编译）
 #[cxx::bridge]
 mod ffi {
     unsafe extern "C++" {
