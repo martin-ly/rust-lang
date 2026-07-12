@@ -44,6 +44,9 @@
   - [九、时间控制与运行时关闭语义](#九时间控制与运行时关闭语义)
   - [十、相关概念](#十相关概念)
   - [十一、来源](#十一来源)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：在 runtime 内再启动 runtime（rustc 1.97.0 实测）](#反例在-runtime-内再启动-runtimerustc-1970-实测)
+    - [✅ 修正：复用当前 runtime 的 Handle](#-修正复用当前-runtime-的-handle)
 
 ## 一、认知路径
 
@@ -311,6 +314,8 @@ fn main() {
 
 ## ⚠️ 反例与陷阱
 
+本节以 runtime 内嵌套启动 runtime 为反例，展示执行器上下文检查的运行时防线与 Handle 修正。
+
 ### 反例：在 runtime 内再启动 runtime（rustc 1.97.0 实测）
 
 tokio 的经典运行时陷阱——在异步任务里调用 `Runtime::new().block_on(...)`：
@@ -337,4 +342,3 @@ fn main() {
 // handle.spawn(inner());          // 在当前 runtime 上派生，而非新建 runtime
 // 或将阻塞工作移交 handle.spawn_blocking(...)
 ```
-

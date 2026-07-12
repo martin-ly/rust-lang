@@ -32,6 +32,8 @@
 
 ## 一、区块链与 WebAssembly
 
+本节考查区块链与 Wasm 领域：Q1 对照区块链权威页，Q2 匹配 Wasm target 三元组与部署场景。
+
 ### Q1. 🟢【单选】按 [区块链](../11_domain_applications/01_blockchain.md) §1.1，Rust 智能合约相对 Solidity/EVM 的本质安全增益是？
 
 - A. 运行时插入更多安全检查（类似 Solidity 0.8 checked math）
@@ -108,6 +110,8 @@ wasm32-wasip1 / wasip2  —— sys: wasi（WebAssembly System Interface）
 
 ## 二、游戏 ECS 架构
 
+本节考查游戏 ECS：Q5 对照 ECS 权威页，Q6 用访问冲突规则判断两个 System 能否并行。
+
 ### Q5. 🟢【单选】按 [游戏 ECS](../11_domain_applications/02_game_ecs.md) §1.1 的形式化对应，ECS 三要素的 Rust 表达是？
 
 - A. Entity=trait 对象、Component=枚举、System=宏
@@ -165,6 +169,8 @@ fn render_system(q: Query<&Transform>) { /* ... */ }
 ---
 
 ## 三、机器学习与数据科学
+
+本节考查 ML 与数据科学：Q8 生态定位，Q9 三层划分对应，Q10 评估「Rust 重写推理服务」的论据有效性。
 
 ### Q8. 🟡【单选】按 [机器学习生态](../11_domain_applications/13_machine_learning_ecosystem.md) 的属性矩阵，四个深度学习 crate 的定位对应正确的是？
 
@@ -224,6 +230,8 @@ fn render_system(q: Query<&Transform>) { /* ... */ }
 
 ## 四、安全关键与 AUTOSAR
 
+本节考查安全关键领域：Q11–Q13 围绕 AUTOSAR 的 Rust 进程、R23-11 文档与 Rust 的安全论证价值。
+
 ### Q11. 🟡【单选】按 [AUTOSAR 与 Rust](../11_domain_applications/22_autosar_and_rust.md)，Classic Platform（CP）与 Adaptive Platform（AP）的分工是？
 
 - A. CP=高性能 SoC + POSIX + 服务导向通信；AP=MCU + 信号导向通信
@@ -274,6 +282,8 @@ fn render_system(q: Query<&Transform>) { /* ... */ }
 ---
 
 ## 五、量子计算与算法竞赛
+
+本节考查前沿领域：Q14 roqoqo 量子电路库的架构定位，Q15 Rust 在算法竞赛中的定位。
 
 ### Q14. 🔴 以下 roqoqo 电路代码体现了该库的什么架构定位？
 

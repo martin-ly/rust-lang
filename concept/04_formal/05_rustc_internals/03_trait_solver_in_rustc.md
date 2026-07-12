@@ -49,6 +49,9 @@
     - [测验 4：新一代 trait solver 与旧 solver 相比，主要优势是什么？](#测验-4新一代-trait-solver-与旧-solver-相比主要优势是什么)
   - [权威来源索引](#权威来源索引)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：重叠的 blanket impl 使求解无唯一解（rustc 1.97.0 实测）](#反例重叠的-blanket-impl-使求解无唯一解rustc-1970-实测)
+    - [✅ 修正：用 newtype 消除重叠](#-修正用-newtype-消除重叠)
 
 ---
 
@@ -426,6 +429,8 @@ Obligation 是需要被证明的 trait reference，例如 `i32: Clone` 或 `T: D
 
 ## ⚠️ 反例与陷阱
 
+本节以重叠 blanket impl 为反例，展示 trait 求解器的相干性（coherence）约束。
+
 ### 反例：重叠的 blanket impl 使求解无唯一解（rustc 1.97.0 实测）
 
 trait solver 要求 impl 集合相干（coherence），重叠即拒绝：
@@ -450,4 +455,3 @@ struct Ai32(i32);
 impl<T> Marker for A<T> {}
 impl Marker for Ai32 {} // 不同类型，无重叠
 ```
-

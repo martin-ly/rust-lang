@@ -29,6 +29,8 @@
 
 ## 一、数据库访问层选型
 
+本节考查访问层选型：Q1 区分 SQLx 与传统 ORM，Q2 按 API 风格选择 ORM，Q3 考查生产环境连接管理实践。
+
 ### Q1. 🟢【单选】SQLx 区别于传统 ORM 的核心特性是？
 
 - A. 类似 ActiveRecord 的运行时对象映射
@@ -106,6 +108,8 @@
 ---
 
 ## 二、Rust 原生数据库系统
+
+本节覆盖 Rust 原生数据库：Q5 考 TiKV 事务层，Q6 辨析 Materialize 的一致性级别，Q7 对比 Meilisearch 与 Elasticsearch 的架构。
 
 ### Q5. 🟡【多选】关于 TiKV 的事务层，下列说法正确的有？（选出所有正确项）
 
@@ -208,6 +212,8 @@
 ---
 
 ## 三、分布式共识与 CRDT（W3-b 扩展）
+
+本节（W3-b 扩展）考查分布式基础：Q11 共识算法判定，Q12 考 CvRDT 合并函数必须满足的代数性质。
 
 ### Q11. 🟢【单选】按 [分布式共识](../06_data_and_distributed/06_distributed_consensus.md)，Raft 相对 Paxos 的核心设计目标是？
 

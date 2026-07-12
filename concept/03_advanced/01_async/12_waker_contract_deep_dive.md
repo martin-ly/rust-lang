@@ -79,6 +79,8 @@ flowchart TD
 
 ## 三、RawWakerVTable 正确模式全集
 
+本节穷举 RawWakerVTable 的正确实现模式：3.1 给出唯一推荐的手写形态——基于 Arc 引用计数的四函数实现，后续变体均由此派生。
+
 ### 3.1 模式 P1：Arc 计数四函数（唯一推荐的手写形态）
 
 以下示例为**完整可编译可运行**的 std-only 程序：正确实现 P1，并附带一个最小 `block_on` 执行器演示「wake ⟹ 重新 poll」闭环。rustc 1.97.0 `--edition 2024` 实测运行输出 `ok`。

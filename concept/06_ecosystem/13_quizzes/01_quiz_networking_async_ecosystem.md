@@ -30,6 +30,8 @@
 
 ## 一、Web 框架格局
 
+本节考查 Web 框架格局：Q1 定位 Axum 的生态位，Q2 检验运行时绑定策略与权威页兼容性分析的一致性。
+
 ### Q1. 🟢【单选】Axum 在 Rust Web 框架生态中的定位是？
 
 - A. 基于 Actor 模型的工业级框架
@@ -78,6 +80,8 @@ enum RuntimeBinding {
 
 ## 二、异步运行时：Work-Stealing vs Thread-per-Core
 
+本节对比两类异步运行时模型：Q3 辨析 thread-per-core 与 work-stealing 的调度差异，Q4 按低延迟场景做运行时选型。
+
 ### Q3. 🟡【单选】Glommio 的 thread-per-core 模型与 Tokio 的 work-stealing 模型相比，下列哪项描述正确？
 
 - A. Glommio 自动负载均衡，编程复杂度更低
@@ -117,6 +121,8 @@ enum RuntimeBinding {
 ---
 
 ## 三、QUIC、HTTP/3 与 eBPF
+
+本节覆盖新协议栈：Q5 归纳 QUIC 相对 TCP+TLS 解决的根本问题，Q6 辨析 HTTP/3 的传输层，Q7 考查 aya-rs 的 eBPF 优势。
 
 ### Q5. 🟡【多选】QUIC 相对 TCP+TLS 解决的根本问题包括？（选出所有正确项）
 
@@ -224,6 +230,8 @@ enum RuntimeBinding {
 ---
 
 ## 四、网络安全与协议实现（W3-b 扩展）
+
+本节（W3-b 扩展）考查安全与协议实现：Q11 的 TLS 配置与 Q12 的 `accept` 语义均对照权威页判定。
 
 ### Q11. 🟢【单选】在 Rust 异步服务中配置 TLS，按 [网络安全](../12_networking/02_network_security.md) 的实践，推荐的组件组合是？
 

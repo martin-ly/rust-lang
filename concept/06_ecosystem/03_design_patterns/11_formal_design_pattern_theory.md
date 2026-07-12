@@ -1024,6 +1024,8 @@ impl<S: Strategy, O: Observer> StrategyObserver<S, O> {
 
 ## ⚠️ 反例与陷阱
 
+本节以 typestate 令牌重复消费为反例，展示类型状态模式如何把状态合法性编码进所有权。
+
 ### 反例：typestate 令牌被消费两次（rustc 1.97.0 实测）
 
 类型状态模式靠 move 消耗旧状态，重复使用即编译失败：
@@ -1064,4 +1066,3 @@ fn main() {
     let _ = d1.state;
 }
 ```
-

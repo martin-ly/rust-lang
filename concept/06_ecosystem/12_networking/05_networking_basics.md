@@ -63,6 +63,9 @@
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：经 `Arc` 共享后直接写 `TcpStream`（rustc 1.97.0 实测）](#反例经-arc-共享后直接写-tcpstreamrustc-1970-实测)
+    - [✅ 修正：`try_clone` 复制套接字句柄](#-修正try_clone-复制套接字句柄)
 
 ## 📐 知识结构
 
@@ -928,6 +931,8 @@ fn main() {
 
 ## ⚠️ 反例与陷阱
 
+本节以 `Arc<TcpStream>` 直接写入为反例，展示共享所有权下的可变性约束与 `try_clone` 修正。
+
 ### 反例：经 `Arc` 共享后直接写 `TcpStream`（rustc 1.97.0 实测）
 
 ```rust,compile_fail,E0596
@@ -961,4 +966,3 @@ fn main() {
 ").unwrap();
 }
 ```
-

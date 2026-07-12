@@ -85,6 +85,8 @@ Ferrocene 是当前唯一公开**符号级认证清单**的 Rust 库认证案例
 
 ## 三、认证工具链生态
 
+本节盘点三条认证工具链路线：3.1–3.3 分别介绍 Ferrocene、HighTec 与 AdaCore，3.4 给出三者在认证范围与目标平台上的对比。
+
 ### 3.1 Ferrocene（Ferrous Systems）
 
 - TÜV SÜD 鉴定编译器：ISO 26262 ASIL D、IEC 61508 SIL 3、IEC 62304 Class C；certified core 子集 ASIL B / SIL 2。
@@ -121,6 +123,8 @@ Ferrocene 是当前唯一公开**符号级认证清单**的 Rust 库认证案例
 ---
 
 ## 四、认证 crate 现状
+
+本节考察认证 crate 侧的现状：4.1 说明 crates.io 尚无认证包，4.2 定位 seL4 绑定的位置，4.3 给出实践中的替代策略。
 
 ### 4.1 crates.io：无认证包
 

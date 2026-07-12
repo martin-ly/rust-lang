@@ -3088,6 +3088,8 @@ fn main() {
 
 ## ⚠️ 反例与陷阱
 
+本节针对单例模式最经典的误用——`static mut` 全局实例——给出 Edition 2024 下的编译失败复现与 `OnceLock` 修正。
+
 ### 反例：`static mut` 单例（rustc 1.97.0 实测）
 
 用 `static mut` 模拟 GoF Singleton，在 Edition 2024 下直接编译失败：
@@ -3116,4 +3118,3 @@ fn instance() -> &'static String {
     INSTANCE.get_or_init(|| "one".to_string())
 }
 ```
-

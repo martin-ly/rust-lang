@@ -144,7 +144,14 @@ GlobalAlloc:
 
 ## 二、实践模式
 
-本节将「实践模式」分解为若干主题： bumpalo — Bump 分配器、jemalloc / mimalloc与arena 分配器。
+自定义分配器的四种实践模式，按「分配策略 × 回收粒度」定位：
+
+- **bumpalo — Bump 分配器**：维护「当前指针 + 区块链」，分配 = 指针前移（约 2ns），回收 = 整区一次性释放（`reset` 或 drop arena）。对象无独立 drop 顺序（`Bump` 默认不逐个调用析构——`T: Drop` 类型需 `bumpalo::boxed` 或手动处理）。适用：编译器/解析器的「阶段内存」（一阶段内分配、阶段末全弃），生命周期同构于 arena 的对象图。
+- **jemalloc / mimalloc**：通用分配器替换——`#[global_allocator] static ALLOC: Jemalloc = Jemalloc;`（经 `tikv-jemallocator`）或 `mimalloc` crate。jemalloc 优势在多线程可扩展性（per-thread arena 减少锁竞争）与内存碎片控制；mimalloc 优势在小对象延迟与低常驻内存。替换全局分配器是「零代码改动」的性能实验——生产服务（如 TiKV、部分游戏服务器）的标配调优。
+- **arena 分配器（typed-arena / generational-arena）**：`typed-arena` 存同类型对象并借出 `&'arena T`——「arena 活着则引用有效」由借用检查保证，适合自引用/图结构（AST、DOM）的安全替代（绕开 `Rc<RefCell>` 的运行时检查）；`generational-arena` 返回「索引 + 代」句柄，删除后句柄失效（防 ABA），适合 ECS/句柄表。
+- **自研 `GlobalAlloc`**：实现 `GlobalAlloc`（`alloc`/`dealloc` + `Layout` 契约）注册全局分配器——安全边界：`alloc` 返回的指针必须满足 `Layout` 的对齐与大小承诺（违反即后续一切 UB 的源头），`dealloc` 收到的 `Layout` 必须与 `alloc` 时一致（调用方契约）。
+
+选型判定：阶段批量 → bumpalo；全局吞吐 → jemalloc/mimalloc；图/AST 自引用 → typed-arena；句柄表 → generational-arena；嵌入/计数/统计 → 自研 `GlobalAlloc`。
 
 ### 2.1 bumpalo — Bump 分配器
 >
@@ -247,7 +254,12 @@ Arena 分配器模式:
 
 ## 三、内存布局与对齐
 
-本节从 Layout 与 对齐约束 两个层面剖析「内存布局与对齐」。
+内存布局（layout）是分配器契约的数学核心，两个要素：
+
+- **`Layout`**：`Layout::new::<T>()` 返回 `(size, align)` 二元组——`size` 为类型的字节大小（含尾部填充），`align` 为对齐要求（2 的幂，≤ 平台最大对齐）。`Layout::from_size_align(size, align)` 手工构造（`align` 非 2 的幂即 `Err`）。复合布局经 `Layout::extend`/`array`/`pad_to_align` 组合——「结构体布局 = 各字段 layout 按对齐约束排列 + 整体 pad 到最大对齐」，自定义分配器实现 `realloc`/批量分配时必须用这些组合子而非手算。
+- **对齐约束**：指针地址必须是 `align` 的倍数——`alloc` 返回未对齐指针是 UB（即使后续「碰巧能用」，LLVM 可假设对齐并生成向量化/原子指令而崩溃）。平台特例：`u128`/`f64` 在 32 位平台 align 可能为 8 或 4（ABI 差异）；`#[repr(align(N))]` 可提升类型的 align（SIMD 类型常见，如 16/32 字节）；`#[repr(packed)]` 降 align 至 1 但使字段引用非法（未对齐引用是 UB，需 `addr_of!` + `read_unaligned`）。
+
+分配器实现的对齐纪律：① `alloc` 内对返回地址做 `assert_eq!(ptr as usize % align, 0)`（debug 构建）；② 跟踪分配用 `Layout` 原样传递（不重组）；③ 测试矩阵覆盖 `align ∈ {1,2,4,8,16,32}` × 边界 size（0、1、align−1、align、align+1）——`Layout` 大小为 0 的分配合法且返回悬空对齐指针（`NonNull::dangling` 语义），是常见的边界 bug 源。
 
 ### 3.1 Layout
 >
@@ -527,7 +539,14 @@ fn main() {
 
 ## 十、边界测试：自定义分配器的编译错误
 
-本节从边界测试：分配器布局不匹配（运行时 UB）、边界测试：`Vec` 自定义分配器的泛型参数（编译错误）、边界测试：全局分配器的 `#[global_allocator]` 重…、边界测试：自定义分配器的 `Layout` 对齐要求（运行时 UB）等8个方面切入，剖析「边界测试：自定义分配器的编译错误」的核心内容。
+自定义分配器边界测试按「契约违约的检测时机」分类：
+
+- **分配器布局不匹配**（运行时 UB）：`dealloc(ptr, layout)` 传入的 `layout` 与 `alloc` 时不一致（size 或 align 任一）——`GlobalAlloc` 契约明确此为 UB，jemalloc/mimalloc 类分配器内部按 size 分桶，错 size 导致桶内指针错位（堆腐化）。`Vec<T>` 改为 `Vec<U>` 的 `transmute` 是经典触发路径。
+- **`Vec` 自定义分配器的泛型参数**（编译错误）：`Vec<T, A: Allocator>` 的第二参数（`allocator_api` 仍属 nightly `allocator_api` feature）——stable 上只有全局 `#[global_allocator]` 通道，尝试 `Vec::with_capacity_in` 报「unstable feature」。版本规划必须以此为前提：per-container 分配器需 nightly 或第三方容器（`bumpalo::collections`）。
+- **`#[global_allocator]` 重复定义**（编译错误 E0compositional）：全程序（含依赖图）至多一个 `#[global_allocator]`——库 crate 绝不应定义全局分配器（剥夺应用选择权），只应提供「可选 allocator 类型」由应用注册。
+- **`Layout` 对齐要求违反**（运行时 UB）：自研分配器返回 `ptr % align != 0`——后续任何访问 UB；debug_assert 与 Miri 可早期捕获。
+
+判定分配器 bug 的归因：编译期 → feature/泛型/注册冲突；启动期 abort → 分配器初始化顺序（静态分配器不可用堆）；运行期腐化 → layout 契约。Miri + 自定义「追踪分配器」wrapper（记录每次 alloc/dealloc 的 layout）是定位布局不匹配的标准工具。
 
 ### 10.1 边界测试：分配器布局不匹配（运行时 UB）
 

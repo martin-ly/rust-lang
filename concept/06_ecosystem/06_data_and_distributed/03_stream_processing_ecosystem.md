@@ -563,6 +563,8 @@ fn windowed_sum(events: Stream<Event>) -> Stream<WindowResult> {
 
 ## ⚠️ 反例与陷阱
 
+本节以 `fold` 累加器类型不一致为反例，展示流式聚合中初始值类型决定整条链的推断规则。
+
 ### 反例：`fold` 累加器与元素运算类型不一致（rustc 1.97.0 实测）
 
 ```rust,compile_fail,E0277
@@ -584,4 +586,3 @@ fn main() {
     println!("{}", total);
 }
 ```
-

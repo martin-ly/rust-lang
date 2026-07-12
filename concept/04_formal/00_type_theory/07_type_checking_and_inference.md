@@ -413,6 +413,8 @@ fn main() {
 
 ## ⚠️ 反例与陷阱
 
+本节以 `collect()` 缺标注为反例，展示 `FromIterator` 多实现导致的推断歧义与标注修正。
+
 ### 反例：`collect()` 缺少类型标注导致推断失败（rustc 1.97.0 实测）
 
 ```rust,compile_fail,E0283
@@ -434,4 +436,3 @@ fn main() {
     println!("{:?}", lens);
 }
 ```
-

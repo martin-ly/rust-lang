@@ -201,6 +201,8 @@ fn main() {
 
 ## 四、编译期防线：两个 compile_fail 反例
 
+本节展示编译器如何挡住非法 pin 投射：4.1 是从 `Pin<&mut Self>` 解构移动字段，4.2 是把投射结果当值使用，两个反例均为 rustc 实测的 compile_fail。
+
 ### 4.1 反例 CE-1：从 `Pin<&mut Self>` 解构移动字段
 
 ```rust,compile_fail
@@ -320,6 +322,8 @@ async fn main() {
 ```
 
 ## 六、正确模式：pin-project-lite 与手写 unsafe
+
+本节给出两条正确投射路径：6.1 用 pin-project-lite 声明式宏，随后演示等价的手写 unsafe 实现及其 SAFETY 论证。
 
 ### 6.1 pin-project-lite：声明式宏等价物
 

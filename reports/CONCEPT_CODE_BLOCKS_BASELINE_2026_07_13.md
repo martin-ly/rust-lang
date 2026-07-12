@@ -1,29 +1,87 @@
-# concept/ 代码块编译实测报告
+# concept/ 代码块编译实测基线报告（P2，2026-07-13）
+
+> **工具**: `scripts/check_concept_code_blocks.py --sample 0 --with-deps --jobs 16`（rustc 1.97.0 --edition 2024，deps 来自 `cargo build --workspace` 后的 `target/debug/deps` rmeta `--extern`）
+> **范围**: concept/ 509 个 md 文件、4811 个 ```rust 代码块（运行期间并行 P1 代理在回填内容，块数较 2026-07-12 的 4750 有增长，基线以本报告运行时刻为准）
+> **原始数据**: `tmp/concept_code_blocks_2026_07_13.json`（逐块状态）
+> **门禁**: 独立观察门（run_quality_gates.sh “Concept Code Blocks (observe)”；quality_gates.yml `concept-code-blocks` job；AGENTS.md §5.1 门 20）。默认观察 exit 0；`--strict` 时“应过但失败/标注腐烂”>0 → exit 1。
+
+## 修复明细（2026-07-13，30 块，复测全部通过）
+
+### A. compile_fail 误标/标注腐烂（17 块）
+
+| 文件:行 | 裁定 | 处置 |
+|---|---|---|
+| 00_meta/01_terminology/02_bilingual_template_v2.md:108 | 模板反例实际可编译 | 改为真错误（E0308 类型不匹配），保留 compile_fail |
+| 00_meta/01_terminology/02_bilingual_template_v2.md:134 | 空占位块 | 补真错误示例（u8 字面量越界），保留 compile_fail |
+| 01_foundation/00_start/05_std_io_and_process.md:273 | 未处理 Result 仅为 unused_must_use 警告 | `rust,compile_fail` → `rust` |
+| 01_foundation/02_type_system/03_numerics.md:835 | 超大数组为运行期栈溢出 | → `rust,no_run` |
+| 01_foundation/07_modules_and_items/03_use_declarations.md:253 | glob 歧义为假设性注释 | → `rust` |
+| 01_foundation/07_modules_and_items/05_enumerations.md:226 | unwrap 为运行期 panic | → `rust,no_run` |
+| 01_foundation/07_modules_and_items/06_implementations.md:258 | 孤儿规则示例事实错误（MyTrait 系本地定义） | 改写为真孤儿违反 `impl Display for Vec<u8>`（E0117），保留 compile_fail |
+| 01_foundation/07_modules_and_items/07_type_aliases.md:237 | 类型别名透明性演示（本就应编译） | → `rust` |
+| 01_foundation/07_modules_and_items/08_static_items.md:212 | “不推荐”但合法 | → `rust` |
+| 03_advanced/07_unsafe_internals/01_unsafe_collections_internals.md:265 | 读未初始化内存为运行期 UB | → `rust,no_run` |
+| 03_advanced/07_unsafe_internals/01_unsafe_collections_internals.md:285 | 逻辑错误但可编译 | → `rust` |
+| 06_ecosystem/03_design_patterns/01_patterns.md:1562 | 错误为条件性（non-Copy 才失败），块内含修正版 | → `rust` |
+| 06_ecosystem/11_domain_applications/03_webassembly.md:494 | wasm32 目标条件性错误 | → `rust,ignore`（注明需 --target 验证） |
+| 06_ecosystem/11_domain_applications/17_webassembly_advanced.md:738 | 同上 | → `rust,ignore` |
+| 07_future/03_preview_features/07_stable_abi_preview.md:124 | 链接错误为假设性 | → `rust` |
+| 07_future/03_preview_features/16_cranelift_backend_preview.md:554 | 溢出为运行期 panic | → `rust,no_run` |
+| 07_future/03_preview_features/13_lifetime_capture_preview.md:57 | rustc ≥1.82 后 edition2021 也不再过度捕获 | 改写为 E0700 真失败示例（工具新增 editionNNNN fence 支持，按 2021 实测通过验证） |
+
+### B. 缺上下文/真实腐烂（13 块）
+
+| 文件:行 | 裁定 | 处置 |
+|---|---|---|
+| 00_meta/04_navigation/12_self_assessment.md:1048 | 故意错误（quiz Q41 move 后借用） | 补 `compile_fail` 标注 |
+| 03_advanced/02_unsafe/07_unsafe_reference.md:77 | E0584 空 trait 内文档注释 | `///` → `//` |
+| 03_advanced/06_low_level_patterns/06_ownership_performance_optimization.md:44 | E0428 正反例同名函数 | 反例改名 `process_bad` |
+| 03_advanced/06_low_level_patterns/08_memory_allocation_and_lifetime.md:135 | E0277 ZST 无 Clone | 补 `#[derive(Clone)]` |
+| 03_advanced/08_process_ipc/01_process_model_and_lifecycle.md:221/234 | `?` 顶层无法传播 | 补隐藏行 `# fn main() -> Result<...>` 包装（mdbook 约定） |
+| 04_formal/00_type_theory/09_type_system_reference.md:78 | E0261 未声明 `'a` | 补 `<'a, ...>` |
+| 04_formal/05_rustc_internals/14_patterns_reference.md:101 | E0596 `ref mut` 需可变绑定 | `let x` → `let mut x` |
+| 04_formal/05_rustc_internals/15_generics_compiler_behavior.md:71 | E0404 Debug 未导入 | 补隐藏行 `# use std::fmt::Debug;` |
+| 06_ecosystem/00_toolchain/04_compiler_internals.md:721 | 同上（blockquote 块） | 补隐藏行 `> # use std::fmt::Debug;` |
+| 06_ecosystem/11_domain_applications/09_data_structures_in_rust.md:27 | E0282 未使用的 `Vec::with_capacity` 无法推断 | 补类型标注 `Vec<i32>` |
+| 07_future/00_version_tracking/rust_1_93_stabilized.md:51 | 真腐烂：`MaybeUninit::write_copy_of_slice` 关联函数不存在 | 改为切片方法 `buf.write_copy_of_slice` + `buf[..5].assume_init_ref()`（rustc 1.97 验证） |
+| 07_future/00_version_tracking/rust_1_95_stabilized.md:118 | 真腐烂：`core::range::RangeInclusive::new` 不存在 | 改为 `RangeInclusive::from(1..=5)`（rustc 1.97 验证） |
+| 07_future/00_version_tracking/rust_1_91_stabilized.md:1740 | E0004 守卫臂非穷尽 | 补 `Some(_) => unreachable!(...)` 臂 |
+
+## 登记清单（待后续轮次，2026-07-13 基线）
+
+1. **缺上下文类 ~250 块**（E0425/E0432/E0433/E0405 等：片段引用正文中的类型/函数/宏）：建议批量裁定——能补最小上下文（隐藏行/导入）的补上下文，纯示意片段改 `rust,ignore` 注明。集中在：03_advanced/01_async（boundary panorama/cancellation）、03_advanced/03_proc_macros（glossary/faq/syn_quote 中未导入的过程宏示例）、06_ecosystem/03_design_patterns、07_future/00_version_tracking。
+2. **依赖块 fail 167 / 无 rmeta 39**：dep 块中缺上下文同样占主；另 `#[tokio::main]` 等多 feature 产物已通过轮换重试解决（pass 79→116），剩余 feature 缺口归 dep_untested 不计腐烂。
+3. **暂缓修复 9 块**（超出本轮 ≤30 预算）：rust_1_93:112（`fmt::from_fn` 闭包 arity）、rust_1_97:102（E0252 self 重复 import）、rust_1_91:626（E0614 const 解引用）、rust_1_92:1615/1625（HRTB/MaybeUninit 片段，宜改 `rust,ignore`）、03_advanced/01_async/07_async_closures.md:186/275（await 顶层/Send 约束，需较深裁定）、03_advanced/03_proc_macros/07_macro_faq.md:231（`$a:expr +` 片段跟随限制，示例需重写）、06_ecosystem/03_design_patterns/01_patterns.md:1638（compile_fail 误标，访问者模式批评示例）。
+4. **nightly/unstable 类 12 块**（E0658 auto traits、`trace_macros`、`macro` 声明宏等 stable 不可验证）：建议改 `rust,ignore` 或标注 nightly。
+
+---
+
+## 自动统计（工具输出）
 
 ## 分类统计
 
 | 分类 | 数量 |
 |---|---:|
-| 标注跳过(ignore/no_run) | 1675 |
-| compile_fail（验证确实失败） | 707 |
+| 标注跳过(ignore/no_run) | 1679 |
+| compile_fail（验证确实失败） | 734 |
 | 伪代码/占位跳过 | 8 |
 | nightly-only(#![feature]) | 17 |
 | no_std/no_main | 9 |
 | 依赖环境不可用(嵌入式/wasm/验证工具) | 19 |
 | 需依赖未测(未知 crate) | 89 |
 | 依赖块(workspace 依赖,可测) | 322 |
-| 无依赖编译候选 | 1905 |
-| **合计** | **4751** |
+| 无依赖编译候选 | 1934 |
+| **合计** | **4811** |
 
 ## 实测统计
 
-- 实测块: 2934
-- candidate: pass=1703 fail=202
-- compile_fail: ok=705 unexpected_pass=2 wrong_code=0
+- 实测块: 2990
+- candidate: pass=1732 fail=202
+- compile_fail: ok=733 unexpected_pass=1 wrong_code=0
 - should_panic: pass=0 fail=0
 - dep: pass=116 fail=167 untested(无 rmeta)=39
 - timeout: 0
-- **应过但失败/标注腐烂合计: 371**
+- **应过但失败/标注腐烂合计: 370**
 
 ## 失败/腐烂清单
 
@@ -35,14 +93,14 @@
 | `concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md` | 64 | candidate | fail | error[E0658]: auto traits are experimental and possibly buggy<br>error[E0658]: auto traits are experimental and possibly buggy<br>error: aborting due to 2 previous errors |
 | `concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md` | 224 | candidate | fail | error[E0425]: cannot find function `assert_send` in this scope<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md` | 285 | candidate | fail | error[E0425]: cannot find function `assert_send` in this scope<br>error[E0425]: cannot find function `assert_sync` in this scope<br>error[E0425]: cannot find function `assert_send` in this scope<br>error: aborting due to 3 previous errors |
-| `concept/03_advanced/01_async/01_async.md` | 3430 | candidate | fail | error[E0428]: the name `user_code` is defined multiple times<br>error[E0425]: cannot find type `SomeFuture` in this scope<br>error[E0425]: cannot find type `Pin` in this scope<br>error[E0425]: cannot find type `Context` in this scope<br>error[E0425]: cannot find type `Poll` in this scope<br>error[E0433]: cannot fi |
-| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 225 | candidate | fail | error[E0425]: cannot find type `Waker` in this scope<br>error[E0425]: cannot find type `Waker` in this scope<br>error: aborting due to 2 previous errors |
-| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 426 | candidate | fail | error[E0433]: cannot find type `SimpleExecutor` in this scope<br>error: aborting due to 1 previous error |
-| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 639 | candidate | fail | error[E0425]: cannot find function `async_op1` in this scope<br>error[E0425]: cannot find function `async_op2` in this scope<br>error[E0425]: cannot find function `async_op3` in this scope<br>error: aborting due to 3 previous errors |
-| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 650 | candidate | fail | error[E0425]: cannot find type `Op1Future` in this scope<br>error[E0425]: cannot find type `Op2Future` in this scope<br>error[E0425]: cannot find type `Op3Future` in this scope<br>error[E0425]: cannot find type `Pin` in this scope<br>error[E0425]: cannot find type `Context` in this scope<br>error[E0425]: cannot fi |
-| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 746 | candidate | fail | error[E0425]: cannot find type `ComputeAFuture` in this scope<br>error[E0425]: cannot find type `ComputeBFuture` in this scope<br>error[E0425]: cannot find type `ManualVersion` in this scope<br>error[E0425]: cannot find type `Pin` in this scope<br>error[E0425]: cannot find type `Context` in this scope<br>error[E04 |
-| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 958 | candidate | fail | error[E0425]: cannot find type `Pin` in this scope<br>error: aborting due to 1 previous error |
-| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 972 | candidate | fail | error[E0425]: cannot find type `MyFuture` in this scope<br>error[E0425]: cannot find type `Pin` in this scope<br>error[E0425]: cannot find type `Context` in this scope<br>error[E0425]: cannot find type `Poll` in this scope<br>error: aborting due to 4 previous errors |
+| `concept/03_advanced/01_async/01_async.md` | 3443 | candidate | fail | error[E0428]: the name `user_code` is defined multiple times<br>error[E0425]: cannot find type `SomeFuture` in this scope<br>error[E0425]: cannot find type `Pin` in this scope<br>error[E0425]: cannot find type `Context` in this scope<br>error[E0425]: cannot find type `Poll` in this scope<br>error[E0433]: cannot fi |
+| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 231 | candidate | fail | error[E0425]: cannot find type `Waker` in this scope<br>error[E0425]: cannot find type `Waker` in this scope<br>error: aborting due to 2 previous errors |
+| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 438 | candidate | fail | error[E0433]: cannot find type `SimpleExecutor` in this scope<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 657 | candidate | fail | error[E0425]: cannot find function `async_op1` in this scope<br>error[E0425]: cannot find function `async_op2` in this scope<br>error[E0425]: cannot find function `async_op3` in this scope<br>error: aborting due to 3 previous errors |
+| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 668 | candidate | fail | error[E0425]: cannot find type `Op1Future` in this scope<br>error[E0425]: cannot find type `Op2Future` in this scope<br>error[E0425]: cannot find type `Op3Future` in this scope<br>error[E0425]: cannot find type `Pin` in this scope<br>error[E0425]: cannot find type `Context` in this scope<br>error[E0425]: cannot fi |
+| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 764 | candidate | fail | error[E0425]: cannot find type `ComputeAFuture` in this scope<br>error[E0425]: cannot find type `ComputeBFuture` in this scope<br>error[E0425]: cannot find type `ManualVersion` in this scope<br>error[E0425]: cannot find type `Pin` in this scope<br>error[E0425]: cannot find type `Context` in this scope<br>error[E04 |
+| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 976 | candidate | fail | error[E0425]: cannot find type `Pin` in this scope<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 990 | candidate | fail | error[E0425]: cannot find type `MyFuture` in this scope<br>error[E0425]: cannot find type `Pin` in this scope<br>error[E0425]: cannot find type `Context` in this scope<br>error[E0425]: cannot find type `Poll` in this scope<br>error: aborting due to 4 previous errors |
 | `concept/03_advanced/01_async/05_async_cancellation_safety.md` | 74 | candidate | fail | error[E0425]: cannot find function `open_conn` in this scope<br>error[E0425]: cannot find function `save` in this scope<br>error: aborting due to 2 previous errors |
 | `concept/03_advanced/01_async/05_async_cancellation_safety.md` | 102 | candidate | fail | error[E0425]: cannot find type `Conn` in this scope<br>error[E0425]: cannot find type `Conn` in this scope<br>error[E0425]: cannot find type `Data` in this scope<br>error: aborting due to 3 previous errors |
 | `concept/03_advanced/01_async/05_async_cancellation_safety.md` | 238 | candidate | fail | error[E0425]: cannot find type `Mutex` in this scope<br>error[E0425]: cannot find type `Account` in this scope<br>error[E0425]: cannot find type `Mutex` in this scope<br>error[E0425]: cannot find type `Account` in this scope<br>error[E0425]: cannot find function `notify_audit` in this scope<br>error: aborting due  |
@@ -55,28 +113,28 @@
 | `concept/03_advanced/01_async/06_async_boundary_panorama.md` | 300 | candidate | fail | error[E0425]: cannot find type `Rc` in this scope<br>error[E0425]: cannot find function `some_io` in this scope<br>error: aborting due to 2 previous errors |
 | `concept/03_advanced/01_async/07_async_closures.md` | 186 | candidate | fail | error[E0728]: `await` is only allowed inside `async` functions and blocks<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/01_async/07_async_closures.md` | 275 | candidate | fail | error: future cannot be sent between threads safely<br>error: aborting due to 1 previous error |
-| `concept/03_advanced/02_unsafe/01_unsafe.md` | 2489 | candidate | fail | error[E0425]: cannot find type `c_char` in this scope<br>error[E0425]: cannot find type `c_void` in this scope<br>error: aborting due to 2 previous errors |
-| `concept/03_advanced/02_unsafe/02_unsafe_boundary_panorama.md` | 303 | candidate | fail | error[E0425]: cannot find type `BadVec` in this scope<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/02_unsafe/01_unsafe.md` | 2501 | candidate | fail | error[E0425]: cannot find type `c_char` in this scope<br>error[E0425]: cannot find type `c_void` in this scope<br>error: aborting due to 2 previous errors |
+| `concept/03_advanced/02_unsafe/02_unsafe_boundary_panorama.md` | 319 | candidate | fail | error[E0425]: cannot find type `BadVec` in this scope<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/02_unsafe/06_memory_model.md` | 76 | candidate | fail | error[E0425]: cannot find function `alloc` in this scope<br>error[E0425]: cannot find value `layout` in this scope<br>error: aborting due to 2 previous errors |
-| `concept/03_advanced/03_proc_macros/01_macros.md` | 934 | candidate | fail | error[E0658]: use of unstable library feature `trace_macros`: `trace_macros` is not stable enough for use and is subject to change<br>error[E0658]: use of unstable library feature `trace_macros`: `trace_macros` is not stable enough for use and is subject to change<br>error: aborting due to 2 previous erro |
-| `concept/03_advanced/03_proc_macros/01_macros.md` | 2015 | candidate | fail | error[E0658]: `macro` is experimental<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/03_proc_macros/01_macros.md` | 952 | candidate | fail | error[E0658]: use of unstable library feature `trace_macros`: `trace_macros` is not stable enough for use and is subject to change<br>error[E0658]: use of unstable library feature `trace_macros`: `trace_macros` is not stable enough for use and is subject to change<br>error: aborting due to 2 previous erro |
+| `concept/03_advanced/03_proc_macros/01_macros.md` | 2033 | candidate | fail | error[E0658]: `macro` is experimental<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md` | 203 | candidate | fail | error: the `#[proc_macro]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find function `expand` in this scope<br>error: aborting due to 4 prev |
 | `concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md` | 70 | candidate | fail | error: cannot find macro `quote` in this scope<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md` | 222 | candidate | fail | error[E0425]: cannot find function `new_api` in this scope<br>error: aborting due to 1 previous error |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 121 | candidate | fail | error: the `#[proc_macro_derive]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error: aborting due to 3 previous errors |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 246 | candidate | fail | error: cannot find derive macro `MyTrait` in this scope<br>error: aborting due to 1 previous error |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 255 | candidate | fail | error: the `#[proc_macro_derive]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error: aborting due to 3 previous errors |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 268 | candidate | fail | error: cannot find attribute `route` in this scope<br>error: aborting due to 1 previous error |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 277 | candidate | fail | error: the `#[proc_macro_attribute]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error: aborting du |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 292 | candidate | fail | error: cannot find macro `sql` in this scope<br>error: aborting due to 1 previous error |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 298 | candidate | fail | error: the `#[proc_macro]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error: aborting due to 3 previous errors |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 407 | candidate | fail | error: cannot find macro `my_macro` in this scope<br>error: aborting due to 1 previous error |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 424 | candidate | fail | error: macros must contain at least one rule<br>error: aborting due to 1 previous error; 1 warning emitted |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 526 | candidate | fail | error[E0422]: cannot find struct, variant or union type `LetStmt` in this scope<br>error[E0422]: cannot find struct, variant or union type `BinaryOp` in this scope<br>error[E0425]: cannot find value `Add` in this scope<br>error[E0425]: cannot find function, tuple struct or tuple variant `Ident` in this scope |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 555 | candidate | fail | error: cannot find macro `html` in this scope<br>error: aborting due to 1 previous error |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 575 | candidate | fail | error: cannot find derive macro `Builder` in this scope<br>error[E0599]: no associated function or constant named `builder` found for struct `User` in the current scope<br>error: aborting due to 2 previous errors |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 595 | candidate | fail | error: cannot find macro `for_each` in this scope<br>error[E0423]: expected value, found macro `vec`<br>error: aborting due to 2 previous errors |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 617 | candidate | fail | error: cannot find macro `compute_size` in this scope<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 127 | candidate | fail | error: the `#[proc_macro_derive]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error: aborting due to 3 previous errors |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 252 | candidate | fail | error: cannot find derive macro `MyTrait` in this scope<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 261 | candidate | fail | error: the `#[proc_macro_derive]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error: aborting due to 3 previous errors |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 274 | candidate | fail | error: cannot find attribute `route` in this scope<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 283 | candidate | fail | error: the `#[proc_macro_attribute]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error: aborting du |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 298 | candidate | fail | error: cannot find macro `sql` in this scope<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 304 | candidate | fail | error: the `#[proc_macro]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error: aborting due to 3 previous errors |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 420 | candidate | fail | error: cannot find macro `my_macro` in this scope<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 437 | candidate | fail | error: macros must contain at least one rule<br>error: aborting due to 1 previous error; 1 warning emitted |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 545 | candidate | fail | error[E0422]: cannot find struct, variant or union type `LetStmt` in this scope<br>error[E0422]: cannot find struct, variant or union type `BinaryOp` in this scope<br>error[E0425]: cannot find value `Add` in this scope<br>error[E0425]: cannot find function, tuple struct or tuple variant `Ident` in this scope |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 574 | candidate | fail | error: cannot find macro `html` in this scope<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 594 | candidate | fail | error: cannot find derive macro `Builder` in this scope<br>error[E0599]: no associated function or constant named `builder` found for struct `User` in the current scope<br>error: aborting due to 2 previous errors |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 614 | candidate | fail | error: cannot find macro `for_each` in this scope<br>error[E0423]: expected value, found macro `vec`<br>error: aborting due to 2 previous errors |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 636 | candidate | fail | error: cannot find macro `compute_size` in this scope<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/03_proc_macros/07_macro_faq.md` | 88 | candidate | fail | error: cannot find derive macro `MyTrait` in this scope<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/03_proc_macros/07_macro_faq.md` | 182 | candidate | fail | error: cannot find macro `my_macro` in this scope<br>error: cannot find macro `my_macro` in this scope<br>error: cannot find macro `my_macro` in this scope<br>error: aborting due to 3 previous errors |
 | `concept/03_advanced/03_proc_macros/07_macro_faq.md` | 231 | candidate | fail | error: `$a:expr` is followed by `+`, which is not allowed for `expr` fragments<br>error: `$a:expr` is followed by `*`, which is not allowed for `expr` fragments<br>error: aborting due to 2 previous errors |
@@ -102,7 +160,7 @@
 | `concept/03_advanced/03_proc_macros/09_macro_hygiene.md` | 459 | candidate | fail | error[E0433]: cannot find type `Context` in this scope<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/03_proc_macros/09_macro_hygiene.md` | 654 | candidate | fail | error[E0658]: `macro` is experimental<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/03_proc_macros/10_quiz_macros.md` | 9 | candidate | fail | error[E0308]: mismatched types<br>error: aborting due to 1 previous error |
-| `concept/03_advanced/03_proc_macros/11_conditional_compilation.md` | 164 | candidate | fail | error: couldn't read `C:\Users\luyan\AppData\Local\Temp\concept_cb_5dfezs1g\windows.rs`: 系统找不到指定的文件。 (os error 2)<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/03_proc_macros/11_conditional_compilation.md` | 164 | candidate | fail | error: couldn't read `C:\Users\luyan\AppData\Local\Temp\concept_cb_fkc7j7zf\windows.rs`: 系统找不到指定的文件。 (os error 2)<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/06_low_level_patterns/06_ownership_performance_optimization.md` | 142 | candidate | fail | error: unexpected token: `...`<br>error[E0586]: inclusive range with no end<br>error[E0425]: cannot find value `n` in this scope<br>error[E0425]: cannot find value `n` in this scope<br>error: aborting due to 4 previous errors |
 | `concept/03_advanced/07_unsafe_internals/01_unsafe_collections_internals.md` | 246 | candidate | fail | error[E0425]: cannot find type `MyVec` in this scope<br>error[E0433]: cannot find module or crate `ptr` in this scope<br>error: aborting due to 2 previous errors |
 | `concept/03_advanced/08_process_ipc/05_ipc_mechanisms.md` | 72 | candidate | fail | error[E0433]: cannot find `unix` in `os`<br>error: aborting due to 1 previous error |
@@ -232,7 +290,6 @@
 | `concept/07_future/03_preview_features/20_ergonomic_ref_counting_preview.md` | 235 | candidate | fail | error[E0425]: cannot find type `RefCell` in this scope<br>error[E0425]: cannot find type `Weak` in this scope<br>error: aborting due to 2 previous errors |
 | `concept/07_future/03_preview_features/23_field_projections_preview.md` | 319 | candidate | fail | error[E0425]: cannot find type `Pin` in this scope<br>error[E0425]: cannot find type `Fut` in this scope<br>error: aborting due to 2 previous errors |
 | `concept/06_ecosystem/03_design_patterns/01_patterns.md` | 1638 | compile_fail | cf_unexpected_pass | compile_fail 块编译通过（标注腐烂或编译器已修复该诊断） |
-| `concept/07_future/03_preview_features/13_lifetime_capture_preview.md` | 57 | compile_fail | cf_unexpected_pass | compile_fail 块编译通过（标注腐烂或编译器已修复该诊断） |
 | `concept/01_foundation/00_start/01_pl_prerequisites.md` | 286 | dep | fail | error[E0599]: no method named `text` found for enum `Result<T, E>` in the current scope<br>error: aborting due to 1 previous error |
 | `concept/01_foundation/00_start/01_pl_prerequisites.md` | 295 | dep | fail | error[E0425]: cannot find type `ResponseFuture` in this scope<br>error[E0425]: cannot find type `TextFuture` in this scope<br>error[E0425]: cannot find type `Context` in this scope<br>error[E0425]: cannot find type `Poll` in this scope<br>error[E0433]: cannot find type `Poll` in this scope<br>error[E0433]: cannot  |
 | `concept/01_foundation/08_error_handling/02_error_handling_control_flow.md` | 200 | dep | fail | error[E0425]: cannot find type `Config` in this scope<br>error[E0425]: cannot find type `Config` in this scope<br>error: aborting due to 2 previous errors |
@@ -240,23 +297,23 @@
 | `concept/03_advanced/00_concurrency/03_concurrency_patterns.md` | 1046 | dep | fail | error[E0425]: cannot find function `partition` in this scope<br>error: aborting due to 1 previous error; 1 warning emitted |
 | `concept/03_advanced/00_concurrency/03_concurrency_patterns.md` | 1102 | dep | fail | error[E0425]: cannot find function `partition` in this scope<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/00_concurrency/03_concurrency_patterns.md` | 1193 | dep | fail | error[E0425]: cannot find function `check` in `parking_lot::deadlock`<br>error[E0603]: module `deadlock` is private<br>error: aborting due to 2 previous errors |
-| `concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md` | 328 | dep | fail | error[E0728]: `await` is only allowed inside `async` functions and blocks<br>error[E0728]: `await` is only allowed inside `async` functions and blocks<br>error[E0425]: cannot find function `process` in this scope<br>error: aborting due to 3 previous errors |
+| `concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md` | 340 | dep | fail | error[E0728]: `await` is only allowed inside `async` functions and blocks<br>error[E0728]: `await` is only allowed inside `async` functions and blocks<br>error[E0425]: cannot find function `process` in this scope<br>error: aborting due to 3 previous errors |
 | `concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md` | 341 | dep | fail | error[E0382]: borrow of moved value: `v`<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md` | 441 | dep | fail | error[E0425]: cannot find function `task1` in this scope<br>error[E0425]: cannot find function `task2` in this scope<br>error: aborting due to 2 previous errors |
-| `concept/03_advanced/01_async/01_async.md` | 3118 | dep | fail | error[E0599]: no method named `write_all` found for struct `tokio::fs::File` in the current scope<br>error[E0599]: no method named `flush` found for struct `tokio::fs::File` in the current scope<br>error: aborting due to 2 previous errors |
-| `concept/03_advanced/01_async/01_async.md` | 3159 | dep | fail | error[E0425]: cannot find function `sleep` in this scope<br>error[E0433]: cannot find type `Duration` in this scope<br>error: aborting due to 2 previous errors |
-| `concept/03_advanced/01_async/01_async.md` | 3277 | dep | fail | error[E0428]: the name `main` is defined multiple times<br>error[E0425]: cannot find function `heavy_computation` in this scope<br>error[E0425]: cannot find function `fetch_data_from_network` in this scope<br>error: aborting due to 3 previous errors |
-| `concept/03_advanced/01_async/01_async.md` | 3318 | dep | fail | error[E0308]: mismatched types<br>error[E0308]: mismatched types<br>error: aborting due to 2 previous errors; 1 warning emitted |
-| `concept/03_advanced/01_async/01_async.md` | 3333 | dep | fail | error[E0428]: the name `main` is defined multiple times<br>error: aborting due to 1 previous error |
-| `concept/03_advanced/01_async/01_async.md` | 3348 | dep | fail | error[E0425]: cannot find function `blocking_c_function` in this scope<br>error[E0425]: cannot find function `blocking_c_function` in this scope<br>error: aborting due to 2 previous errors |
-| `concept/03_advanced/01_async/01_async.md` | 3403 | dep | fail | error[E0425]: cannot find function `expensive_operation` in this scope<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/01_async/01_async.md` | 3131 | dep | fail | error[E0599]: no method named `write_all` found for struct `tokio::fs::File` in the current scope<br>error[E0599]: no method named `flush` found for struct `tokio::fs::File` in the current scope<br>error: aborting due to 2 previous errors |
+| `concept/03_advanced/01_async/01_async.md` | 3172 | dep | fail | error[E0425]: cannot find function `sleep` in this scope<br>error[E0433]: cannot find type `Duration` in this scope<br>error: aborting due to 2 previous errors |
+| `concept/03_advanced/01_async/01_async.md` | 3290 | dep | fail | error[E0428]: the name `main` is defined multiple times<br>error[E0425]: cannot find function `heavy_computation` in this scope<br>error[E0425]: cannot find function `fetch_data_from_network` in this scope<br>error: aborting due to 3 previous errors |
+| `concept/03_advanced/01_async/01_async.md` | 3331 | dep | fail | error[E0308]: mismatched types<br>error[E0308]: mismatched types<br>error: aborting due to 2 previous errors; 1 warning emitted |
+| `concept/03_advanced/01_async/01_async.md` | 3346 | dep | fail | error[E0428]: the name `main` is defined multiple times<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/01_async/01_async.md` | 3361 | dep | fail | error[E0425]: cannot find function `blocking_c_function` in this scope<br>error[E0425]: cannot find function `blocking_c_function` in this scope<br>error: aborting due to 2 previous errors |
+| `concept/03_advanced/01_async/01_async.md` | 3416 | dep | fail | error[E0425]: cannot find function `expensive_operation` in this scope<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/01_async/02_async_advanced.md` | 399 | dep | fail | error[E0596]: cannot borrow `this.inner` as mutable, as `this` is not declared as mutable<br>error: aborting due to 1 previous error; 2 warnings emitted |
 | `concept/03_advanced/01_async/02_async_advanced.md` | 510 | dep | fail | error[E0733]: recursion in an async fn requires boxing<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/01_async/03_async_patterns.md` | 534 | dep | fail | error[E0425]: cannot find function `heavy_compression` in this scope<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/01_async/03_async_patterns.md` | 1068 | dep | fail | error[E0433]: cannot find module or crate `mpsc` in this scope<br>error[E0422]: cannot find struct, variant or union type `Actor` in this scope<br>error[E0433]: cannot find type `Command` in this scope<br>error[E0433]: cannot find type `Command` in this scope<br>error[E0728]: `await` is only allowed inside `asy |
 | `concept/03_advanced/01_async/03_async_patterns.md` | 1146 | dep | fail | error[E0425]: cannot find type `File` in this scope<br>error[E0433]: cannot find type `Duration` in this scope<br>error: aborting due to 2 previous errors |
-| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 844 | dep | fail | error[E0277]: `{async block@C:\Users\luyan\AppData\Local\Temp\concept_cb_5dfezs1g\d_dd25bc6279ae_r3.rs:42:51: 42:56}` cannot be unpinned<br>error: aborting due to 1 previous error |
-| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 929 | dep | fail | error[E0425]: cannot find type `Pin` in this scope<br>error[E0425]: cannot find type `Context` in this scope<br>error[E0425]: cannot find type `Poll` in this scope<br>error: aborting due to 3 previous errors |
+| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 862 | dep | fail | error[E0277]: `{async block@C:\Users\luyan\AppData\Local\Temp\concept_cb_fkc7j7zf\d_35c36881aa3d_r3.rs:42:51: 42:56}` cannot be unpinned<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | 947 | dep | fail | error[E0425]: cannot find type `Pin` in this scope<br>error[E0425]: cannot find type `Context` in this scope<br>error[E0425]: cannot find type `Poll` in this scope<br>error: aborting due to 3 previous errors |
 | `concept/03_advanced/01_async/05_async_cancellation_safety.md` | 147 | dep | fail | error[E0425]: cannot find value `rx` in this scope<br>error[E0728]: `await` is only allowed inside `async` functions and blocks<br>error: aborting due to 2 previous errors |
 | `concept/03_advanced/01_async/05_async_cancellation_safety.md` | 199 | dep | fail | error[E0433]: cannot find type `BufReader` in this scope<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/01_async/05_async_cancellation_safety.md` | 221 | dep | fail | error[E0425]: cannot find function `notify_audit` in this scope<br>error: aborting due to 1 previous error |
@@ -269,16 +326,16 @@
 | `concept/03_advanced/01_async/07_async_closures.md` | 66 | dep | fail | error[E0728]: `await` is only allowed inside `async` functions and blocks<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/01_async/07_async_closures.md` | 242 | dep | fail | error[E0038]: the trait `AsyncFnMut` is not dyn compatible<br>error: aborting due to 1 previous error; 1 warning emitted |
 | `concept/03_advanced/01_async/13_async_trait_object_safety.md` | 222 | dep | fail | error[E0433]: cannot find module or crate `trait_variant` in this scope<br>error[E0405]: cannot find trait `IntFactory` in this scope<br>error[E0405]: cannot find trait `IntFactory` in this scope<br>error: aborting due to 3 previous errors |
-| `concept/03_advanced/03_proc_macros/02_proc_macro.md` | 970 | dep | fail | error: the `#[proc_macro]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0277]: the trait bound `SqlQuery: ToTokens` is not satisfied<br>error[E0277]: the t |
-| `concept/03_advanced/03_proc_macros/02_proc_macro.md` | 1025 | dep | fail | error: the `#[proc_macro_derive]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error: aborting due to 3 previous errors |
+| `concept/03_advanced/03_proc_macros/02_proc_macro.md` | 982 | dep | fail | error: the `#[proc_macro]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0277]: the trait bound `SqlQuery: ToTokens` is not satisfied<br>error[E0277]: the t |
+| `concept/03_advanced/03_proc_macros/02_proc_macro.md` | 1037 | dep | fail | error: the `#[proc_macro_derive]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error: aborting due to 3 previous errors |
 | `concept/03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md` | 91 | dep | fail | error[E0599]: no method named `span` found for reference `&syn::Field` in the current scope<br>error[E0277]: the trait bound `syn::Ident: ToTokens` is not satisfied<br>error[E0277]: the trait bound `syn::Type: ToTokens` is not satisfied<br>error[E0277]: the trait bound `syn::Ident: ToTokens` is not satisfied |
 | `concept/03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md` | 143 | dep | fail | error[E0425]: cannot find type `DeriveInput` in this scope<br>error[E0425]: cannot find type `Error` in this scope<br>error[E0425]: cannot find value `input` in this scope<br>error[E0425]: cannot find function `generate_code` in this scope<br>error[E0425]: cannot find function `validate_generics` in this scope<br> |
 | `concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md` | 94 | dep | fail | error[E0599]: no method named `span` found for reference `&syn::Field` in the current scope<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md` | 110 | dep | fail | error[E0599]: no method named `span` found for reference `&syn::Field` in the current scope<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md` | 131 | dep | fail | error[E0425]: cannot find value `input` in this scope<br>error[E0425]: cannot find function `validate_all` in this scope<br>error[E0425]: cannot find function `generate_code` in this scope<br>error: aborting due to 3 previous errors |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 311 | dep | fail | error: the `#[proc_macro_derive]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error: aborting due to 3 previous errors |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 334 | dep | fail | error[E0425]: cannot find value `input` in this scope<br>error: aborting due to 1 previous error |
-| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 471 | dep | fail | error[E0308]: mismatched types<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 317 | dep | fail | error: the `#[proc_macro_derive]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error: aborting due to 3 previous errors |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 340 | dep | fail | error[E0425]: cannot find value `input` in this scope<br>error: aborting due to 1 previous error |
+| `concept/03_advanced/03_proc_macros/06_macro_glossary.md` | 490 | dep | fail | error[E0308]: mismatched types<br>error: aborting due to 1 previous error |
 | `concept/03_advanced/03_proc_macros/07_macro_faq.md` | 453 | dep | fail | error[E0425]: cannot find value `field` in this scope<br>error[E0277]: the trait bound `(): From<proc_macro2::TokenStream>` is not satisfied<br>error: aborting due to 2 previous errors |
 | `concept/03_advanced/03_proc_macros/07_macro_faq.md` | 464 | dep | fail | error[E0425]: cannot find value `span` in this scope<br>error[E0277]: the trait bound `(): From<proc_macro2::TokenStream>` is not satisfied<br>error: aborting due to 2 previous errors |
 | `concept/03_advanced/03_proc_macros/08_syn_quote_reference.md` | 189 | dep | fail | error: the `#[proc_macro_derive]` attribute is only usable with crates of the `proc-macro` crate type<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0425]: cannot find type `TokenStream` in this scope<br>error[E0277]: the trait bound `syn::Ident: ToTokens` is not satisfied<br>error[E027 |

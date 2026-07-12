@@ -104,6 +104,8 @@ fn main() {
 
 ## 三、方案谱系
 
+本节梳理让 async trait 对象安全的方案谱系：从 3.1 的 `async_trait` 宏（事实标准）到原生 async fn 与手工装箱 Future 的权衡。
+
 ### 3.1 方案 A：`async_trait` 宏（事实标准）
 
 ```rust

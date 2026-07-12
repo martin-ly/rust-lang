@@ -486,6 +486,8 @@ fn open_resource_fixed(url: &str) -> Result<Resource, Error> {
 
 ## ⚠️ 反例与陷阱
 
+本节以内核全局 `static mut` 计数器为反例，展示 Edition 2024 对该历史写法的硬拒绝与原子修正。
+
 ### 反例：内核全局计数器用 `static mut`（rustc 1.97.0 实测）
 
 ```rust,compile_fail
@@ -512,4 +514,3 @@ fn tick() {
     TICKS.fetch_add(1, Ordering::Relaxed);
 }
 ```
-

@@ -20,7 +20,13 @@
 
 ## 1. 进程定义与模型
 
-本节将「进程定义与模型」分解为若干主题：进程理论基础、Rust 进程抽象与内存安全与所有权。
+进程是操作系统资源分配与隔离的基本单位，本节从三个层面建立模型：
+
+- **进程理论基础**：进程 = 「地址空间（代码/堆/栈/mmap 区）+ 内核对象表（文件描述符、信号、凭据）+ 至少一个线程」的三元组。与线程的分界是「地址空间共享与否」——进程间默认零共享，一切协作经 IPC（管道/套接字/共享内存/信号）。创建模型分两类：Unix `fork`（写时复制父进程全部状态）+ `exec`（替换映像），Windows `CreateProcess`（一步到位）——Rust `std::process::Command` 抽象了两者的公共子集。
+- **Rust 进程抽象**：`Command` 构建器 + `Child` 句柄是核心 API——`Command::new(prog).arg(..).spawn()` 返回 `Child`（拥有型句柄），`child.wait()` 阻塞收尸、`child.kill()` 发终止信号（SIGKILL/TerminateProcess）、`child.stdout.take()` 取管道句柄。`Output`（`output()` 方法）= 「等待 + 收集 stdout/stderr」的便捷组合。类型设计要点：`Child` 是拥有型——`drop(Child)` **不**杀进程也不 wait（僵尸进程风险），生命周期管理是显式契约。
+- **内存安全与所有权**：Rust 把进程资源纳入 RAII 的边界是「句柄」而非「进程本身」——管道 fd 随 `ChildStdout` drop 关闭（写端关闭使子进程读 EOF，是「优雅通知子进程退出」的标准手法），但进程实体的回收（`wait`）必须显式。所有权视角：父进程「拥有」子进程句柄，`wait` 是「消费句柄换取退出状态」——`wait` 后 `Child` 不可用（Unix 上 PID 可能被复用，wait 后的 PID 操作是经典竞态）。
+
+判定一个进程管理设计的完备性：spawn 后必有 wait 路径（含错误分支）、管道端点有明确关闭策略、kill 与 wait 的顺序文档化（kill 后仍需 wait 收尸）。
 
 ### 1.1 进程理论基础
 
@@ -48,7 +54,13 @@ Rust 采用 1:1 进程模型映射到操作系统进程，核心类型包括：
 
 ## 2. 生命周期管理
 
-本节将「生命周期管理」分解为若干主题：进程状态机、异步生命周期管理与资源自动释放。
+进程生命周期的三个管理维度，覆盖「状态、异步、资源」：
+
+- **进程状态机**：`创建(fork/spawn) → 运行 → [僵尸(已退出未收尸)] → 回收(wait)`——僵尸状态是 Unix 特有：子进程退出后内核保留其退出码直到父进程 `wait`，期间占 PID 表项。「孤儿进程」（父先死）被 init/PID1 收养并回收；「僵尸进程」的唯一解药是父进程 `wait`——Rust 中 `Child::wait`/`wait_with_output`，或对「刻意不管」的子进程用双 fork（daemon 化）或 SIGCHLD 处理。
+- **异步生命周期管理**：`tokio::process::Command` 把 `wait` 变为 `.await` 点（`child.wait().await`），内部经 SIGCHLD 信号驱动（全局信号处理器——与「多运行时实例」「其他 SIGCHLD 用户」的共存是部署注意点）。异步模式的核心收益：等待子进程不占线程（万级并发子进程场景，如 CI runner）；`Child::kill().await` 与「kill-on-drop」（tokio 的 `kill_on_drop(true)` 选项）把「任务取消 → 子进程清理」自动化。
+- **资源自动释放**：RAII 覆盖的范围与边界——管道/文件句柄自动（`ChildStdout`/`ChildStdin` 的 Drop），进程实体不自动（设计决策：drop 时杀进程可能误杀「已 detach 的长期服务」）。正确模式：`scopeguard`/自定义 guard 封装「确保 wait/kill」的清理逻辑，或 tokio `kill_on_drop`。泄漏审计：`ps` 查僵尸（`Z` 状态）与孤儿，归因到「缺 wait」或「缺 kill-on-drop」。
+
+判定生命周期管理的完备性：状态机的每个迁移都有代码路径（特别是错误分支的 wait）、异步取消有 kill 传播、句柄 drop 顺序文档化（先关 stdin 通知退出 → 超时 → kill → wait）。
 
 ### 2.1 进程状态机
 
@@ -152,7 +164,13 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 
 ## 6. 最佳实践
 
-本节围绕「最佳实践」展开，依次讨论资源管理、错误处理与避免僵尸进程。
+进程管理的三个最佳实践，直接对应生产事故的三个高频根因：
+
+- **资源管理**：管道是有限内核资源——`Stdio::piped()` 的子进程若写满 stdout 缓冲（Linux 默认 64KB）而父进程不读，子进程**阻塞在 write**（经典死锁：父等 wait、子等管道）——正确模式是「并发读写 stdout/stderr + 最后 wait」（`wait_with_output` 内部即如此实现；手动管理用 `tokio::io::copy` 或独立线程）。大量子进程场景监控 fd 用量（`ulimit -n`）。
+- **错误处理**：`spawn` 的失败（ENOENT 程序不存在、EACCES 无执行权）与「子进程退出码非零」是两层错误——前者 `Result<Child>`，后者 `ExitStatus::success()`。常见 bug：只检查 spawn 成功就假设「命令执行成功」。`ExitStatus` 在 Unix 区分「正常退出码」与「被信号杀死」（`status.signal()`），Windows 是统一 code——跨平台日志应同时记录两者。
+- **避免僵尸进程**：三条规则——① spawn 必有 wait（含所有错误/超时分支）；② 长期驻留的子进程用 `kill_on_drop`（tokio）或显式 guard；③ 「fire-and-forget」子进程（如拉起系统通知）用双 fork/setsid 完全 detach，或在 Unix 上忽略 SIGCHLD（`SIG_IGN` 使内核自动回收——`nix::sys::signal` 设置，注意此设置全局影响其他 wait 调用）。
+
+三条实践的验证：压力测试「千次子进程创建-退出」后 `ps aux | grep -c defunct` 应为 0；管道死锁用「子进程输出 > 64KB」的用例专门测试。
 
 ### 6.1 资源管理
 

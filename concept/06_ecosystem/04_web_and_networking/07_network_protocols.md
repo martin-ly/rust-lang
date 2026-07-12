@@ -524,6 +524,8 @@ Rust 生态：纯 Rust QUIC 实现 `quinn`、HTTP/3 实现 `h3`、AWS `s2n-quic`
 
 ## ⚠️ 反例与陷阱
 
+本节以 listener 被 move 进两个闭包为反例，展示所有权规则对多任务分发的约束与 `try_clone` 修正。
+
 ### 反例：把 listener move 进两个闭包（rustc 1.97.0 实测）
 
 多路复用/多任务分发时常见的所有权错误：
@@ -556,4 +558,3 @@ fn main() {
     b();
 }
 ```
-

@@ -225,7 +225,13 @@ impl Drop for CallbackHandle {
 
 ## 二、技术细节
 
-「技术细节」涉及复杂类型映射、线程安全边界与错误处理与 Panic 安全，本节逐一说明其要点。
+高级 FFI 的三个技术细节，处理「复杂类型、线程、错误」的跨边界契约：
+
+- **复杂类型映射**：字符串（`CString`/`CStr`——Rust 拥有缓冲区，C 侧只借 `as_ptr`，注意 NUL 结尾与内 NUL 校验）、数组与切片（传「指针 + 长度」对，Rust 侧 `[T]` 的胖指针不能直接传 C）、回调表/虚表（C 的 `struct` 函数字段 ↔ Rust `#[repr(C)] struct { f: Option<extern "C" fn(...)> }`，函数字段用 `Option` 表达可空）、位域（`#[repr(C)]` 不直接支持——用整数字段 + 位运算封装，或 `bindgen` 生成访问器）。通则：FFI 边界只过「布局平凡」（plain old data）类型，语义丰富的 Rust 类型（`String`、`Vec`、`Result`）一律在边界拆成「指针 + 长度 + 错误码」三件套。
+- **线程安全边界**：C 库的线程模型声明（thread-safe / 需外部同步 / 单线程）必须映射为 Rust 侧类型的 `Send`/`Sync`——线程安全的 C 句柄类型可 `unsafe impl Send + Sync`（附文档论证）；非线程安全的用 `PhantomData<*mut ()>` 显式 `!Sync`，把同步责任留在类型层。混线的典型事故：把单线程 C 库的句柄 `unsafe impl Sync` 塞进 `Arc` 全局共享。
+- **错误处理与 Panic 安全**：C 的错误约定（返回值、errno、错误回调）在 Rust 侧统一映射为 `Result`——封装层每次 FFI 调用后立即 `if ret != 0 { return Err(...) }`，`errno` 用 `std::io::Error::last_os_error()` 捕获（注意「先检查再调用其他可能改 errno 的函数」）。Rust 回调进 C 的路径必须 `catch_unwind` 并转换为 C 可理解的错误码——「panic 不出 Rust 边界」是高级 FFI 的硬性验收项。
+
+判定一个高级 FFI 封装的完备性：复杂类型全走 POD 三件套、`Send`/`Sync` 标注与 C 线程文档一一对应、每个 FFI 调用点有错误映射、每个回调有 `catch_unwind`——四项清单即本节后续示例的评审基线。
 
 ### 2.1 复杂类型映射
 >
@@ -599,7 +605,14 @@ graph TD
 
 ## 十、边界测试：高级 FFI 的编译错误
 
-「边界测试：高级 FFI 的编译错误」涉及边界测试：可变静态变量在 FFI 中的线程安全（编译错误）、边界测试：`Box::into_raw` 后重复释放（运行时 UB）、边界测试：C 变长参数的类型安全（编译错误/运行时 UB）、边界测试：回调函数的生命周期与 `Box::into_raw` 泄漏（…等8个方面，本节逐一说明其要点。
+高级 FFI 边界测试按「静态可检 / 动态 UB / 泄漏」三档组织：
+
+- **可变静态变量的线程安全**（编译错误）：FFI 全局状态常映射为 `static mut`——2024 edition 起创建其引用为 deny（`static_mut_refs`），安全替代是 `static X: Mutex<T>` 或 `Atomic*`。此错误标志「C 式全局可变状态」未适配 Rust 别名规则。
+- **`Box::into_raw` 后重复释放**（运行时 UB）：`into_raw` 移交所有权后原 `Box` 仍 drop、或两次 `from_raw`——双重释放。配对纪律：`into_raw` 与 `from_raw` 必须 1:1 且所有权流向文档化（谁负责最终 `from_raw` + drop）。
+- **C 变长参数的类型安全**：`extern "C" { fn printf(fmt: *const c_char, ...); }` 的 `...` 无类型检查——参数类型/个数错误是运行时 UB（栈布局错读），C 侧 `%s` 传整数同此。缓解：变长 FFI 一律封装为「固定签名 + 格式串白名单」的安全 API。
+- **回调生命周期与 `Box::into_raw` 泄漏**：注册到 C 的回调（`into_raw` 移交）若无对应「注销时 `from_raw`」路径则永久泄漏——泄漏不是 UB 但违反 RAII 承诺。审计方法：grep 所有 `into_raw`，逐一标注回收点；无回收点的必须改为借用 + 文档化「C 不保留指针」的前提。
+
+判定框架沿用 unsafe 五步清单（指针有效/初始化/别名/生命周期/panic 安全），FFI 特化项是「跨边界的所有权流向图」——每个指针的分配方、持有期、释放方三方信息必须可文档化，缺一项即设计缺口。
 
 ### 10.1 边界测试：可变静态变量在 FFI 中的线程安全（编译错误）
 

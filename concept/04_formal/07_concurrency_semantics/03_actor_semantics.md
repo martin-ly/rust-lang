@@ -98,6 +98,8 @@ Agha, *Actors: A Model of Concurrent Computation in Distributed Systems*（MIT P
 
 ## 三、监督与位置透明性
 
+本节刻画 actor 模型的两个架构支柱：3.1 监督树与错误恢复语义，3.2 位置透明性及其对分布式部署的意义。
+
 ### 3.1 监督（Supervision）
 
 Hewitt 模型中 actor 失败没有特殊地位；**监督**是 Erlang（Armstrong 等）对 Actor 模型的工程化扩展：每个 actor 有一个**监督者**，子 actor 崩溃时监督者收到信号并按**重启策略**处置——
@@ -247,6 +249,8 @@ impl Actor for Counter {
 ---
 
 ## 七、反例与边界
+
+本节给出 actor 语义的两个反例（actor 间共享可变状态、单邮箱顺序假设）与监督能力的边界（不能修复损坏的不变量）。
 
 ### 反例：在 actor 间共享可变状态
 

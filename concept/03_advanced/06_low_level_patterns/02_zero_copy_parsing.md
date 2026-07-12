@@ -153,7 +153,13 @@
 
 ## 二、关键技术
 
-理解「关键技术」需要把握 bytes crate、zerocopy crate与memmap2，本节依次展开。
+零拷贝解析（zero-copy parsing）的核心思想：**解析产出直接引用输入缓冲区，不复制数据**——三个支柱库各管一层：
+
+- **bytes crate**：`Bytes` 是引用计数的字节缓冲区（`Arc` 化的 `Vec<u8>`），`slice(range)` 返回共享底层存储的视图（O(1)，无拷贝），`split_to`/`advance` 推进读指针。协议解析的标准底座：网络帧「头 + 体」切分、多任务间传递缓冲而无需克隆。`BytesMut` 是其可变构建端（就地 append，必要时扩容）。
+- **zerocopy crate**：把「字节切片重解释为类型」的机制化——`FromBytes`/`AsBytes`/`FromZeroes` trait + derive 宏标记「布局平凡」（POD）类型，`Ref::<&[u8], T>::from_prefix` 做带校验（长度 + 对齐）的零拷贝转换。它把 `transmute` 的三条人工契约（对齐、大小、有效性）变成编译期/运行时检查的组合——是 `bytemuck` 的同族方案（zerocopy 偏解析、bytemuck 偏数值数组）。
+- **memmap2**：`mmap` 的安全封装——`Mmap::map(&file)` 把文件页映射进地址空间，读取 = 缺页中断驱动（OS 按需加载），大文件解析免去「读进内存」的拷贝与驻留。安全边界：文件被外部进程截断时访问映射页会 SIGBUS——`memmap2` 文档明示此风险，健壮方案是 `Mmap` + 信号处理或改用 `fs::read`。
+
+三者的组合范式：网络/文件输入 → `Bytes`/`Mmap` 持有缓冲 → `zerocopy` 重解释头部结构 → `&str`/`&[T]` 视图传给业务层。判定解析是否零拷贝：产出类型中是否含「`&'input` 生命周期参数」——有则视图共享输入，无则必有复制发生。
 
 ### 2.1 bytes crate
 >
@@ -264,7 +270,12 @@ zerocopy:
 
 ## 三、序列化优化
 
-「序列化优化」部分包含 rkyv 与  flatbuffers / capnp 两条主线，本节依次说明。
+序列化层的零拷贝把「解析」推广到「序列化-传输-反序列化」全链，两条技术路线：
+
+- **rkyv**：「存档即使用」（archive-and-use）——`#[derive(Archive)]` 生成「序列化形态与内存形态一致」的类型，反序列化 = `check_archived_root::<T>(bytes)` 校验后把字节直接当 `Archived<T>` 用（零拷贝的极致：没有「反序列化步骤」，只有「校验 + 重解释」）。校验器检查指针偏移边界与对齐（rkyv 的相对指针设计使数据可 mmap 共享）。适用：读多写少的只读数据集（游戏资源、搜索索引快照），写路径的「archive」成本摊销到读取的零成本。校验可降级为 `access_unchecked`（信任来源时连校验也省）。
+- **flatbuffers / capnp**：schema 驱动的「导线格式即内存格式」——数据布局按 schema 生成代码预定义（vtable 偏移/段指针），「反序列化」= 根指针定位，字段访问 = 偏移计算 + 惰性读取。FlatBuffers 优势在「随机访问任意字段无需全量解析」（游戏/移动端，Google）；Cap'n Proto 优势在「极致紧凑 + RPC 集成」（Sandstorm）。两者都经 schema 演进规则（字段编号、废弃而非删除）保证前后兼容。
+
+路线判定：Rust-to-Rust 且追求零依赖 schema → rkyv；跨语言 + 随机访问 → FlatBuffers；跨语言 + RPC/压缩率 → Cap'n Proto。三者与 serde 的关系：serde 是「拷贝式通用框架」（灵活但有解析成本），三者是「零拷贝专用格式」（schema/来源受约束）——选型先定「来源是否可信 + 是否需要跨语言」。
 
 ### 3.1 rkyv
 >

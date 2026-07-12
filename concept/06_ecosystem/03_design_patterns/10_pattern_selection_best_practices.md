@@ -774,6 +774,8 @@ pub enum PatternError {
 
 ## ⚠️ 反例与陷阱
 
+本节以工厂按值返回 `dyn Trait` 为反例，展示 trait object 必须装箱的尺寸约束。
+
 ### 反例：工厂按值返回 `dyn Trait`（rustc 1.97.0 实测）
 
 ```rust,compile_fail,E0746
@@ -799,4 +801,3 @@ fn make() -> Box<dyn Animal> {
     Box::new(Dog)
 }
 ```
-

@@ -52,6 +52,8 @@ Rust 进入 AUTOSAR 的两条路线因此不同：AP 是 POSIX + 现代语言生
 
 ## 二、AUTOSAR 的 Rust 进程：从 WG-SAF 到 R23-11
 
+本节按时间线梳理 AUTOSAR 的 Rust 进程：2.1 WG-SAF 小组成立，2.2 R23-11 解释性文档发布，2.3 Classic Platform 的探索现状。
+
 ### 2.1 2022：WG-SAF Rust 小组成立
 
 2022-03-14 AUTOSAR 宣布在**功能安全工作组（WG-SAF）**内成立 Rust 小组，2022 年 4 月正式启动，计划产出两份文档：

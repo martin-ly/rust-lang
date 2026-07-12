@@ -42,6 +42,9 @@
   - [七、定理链与相关概念](#七定理链与相关概念)
   - [八、认知路径](#八认知路径)
   - [权威来源索引](#权威来源索引)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：CRDT 状态比较缺少 `PartialEq`（rustc 1.97.0 实测）](#反例crdt-状态比较缺少-partialeqrustc-1970-实测)
+    - [✅ 修正：derive 相等性](#-修正derive-相等性)
 
 ---
 
@@ -143,6 +146,8 @@ CmRDT 收敛的充分条件（Shapiro 2011, §4）：
 
 ## 五、Rust 实现生态
 
+本节按抽象层级盘点 Rust CRDT 生态：5.1 教科书式的 rust-crdt，5.2 协作编辑引擎 yrs，5.3 工业级文档库 automerge-rs。
+
 ### 5.1 rust-crdt：教科书式 CvRDT 库
 
 [rust-crdt](https://github.com/rust-crdt/rust-crdt) 提供 `GCounter`、`PNCounter`、`Orswot`（OR-Set）、`MVReg` 等，类型参数化的「actor 标识」保证每个节点只动自己的槽：
@@ -209,6 +214,8 @@ tx.commit();
 ---
 
 ## 六、反例：非交换合并导致发散
+
+本节汇集四个破坏 CRDT 收敛保证的反例：本地墙钟 LWW、非单调更新、丢消息通道上的 CmRDT、tombstone 无界增长。
 
 ### 反例 1：「最后写胜出」用本地墙钟
 
@@ -303,6 +310,8 @@ RGA/OR-Set 的「删除」不是移除状态，而是**追加墓碑**（tombston
 
 ## ⚠️ 反例与陷阱
 
+本节以 CRDT 状态比较缺 `PartialEq` 为反例，展示代数结构比较运算的 trait 前提。
+
 ### 反例：CRDT 状态比较缺少 `PartialEq`（rustc 1.97.0 实测）
 
 ```rust,compile_fail,E0369
@@ -343,4 +352,3 @@ impl GCounter {
     }
 }
 ```
-

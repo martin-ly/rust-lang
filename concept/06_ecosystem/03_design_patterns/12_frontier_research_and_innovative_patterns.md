@@ -998,6 +998,8 @@ pub fn quantum_pattern_example() {
 
 ## ⚠️ 反例与陷阱
 
+本节以原生 async trait 对象为反例，展示对象安全规则对前沿 async 抽象的约束及装箱修正。
+
 ### 反例：原生 `async fn` trait 不能做成 trait object（rustc 1.97.0 实测）
 
 ```rust,compile_fail,E0038
@@ -1026,4 +1028,3 @@ fn run(f: &dyn Fetcher) {
     let _ = f.fetch(); // 现在 dyn compatible
 }
 ```
-
