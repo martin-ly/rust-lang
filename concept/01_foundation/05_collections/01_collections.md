@@ -95,6 +95,8 @@ mindmap
     - [测验 4：BTreeMap vs HashMap（评价层）](#测验-4btreemap-vs-hashmap评价层)
     - [测验 5： draining 与内存（应用层）](#测验-5-draining-与内存应用层)
   - [十二、延伸阅读与自测](#十二延伸阅读与自测)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 

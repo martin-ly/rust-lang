@@ -92,6 +92,8 @@ mindmap
     - [测验 3：文件系统映射（应用层）](#测验-3文件系统映射应用层)
     - [测验 4：`pub use` 重导出（分析层）](#测验-4pub-use-重导出分析层)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 

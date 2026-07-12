@@ -21,12 +21,24 @@
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: P×App — 实施测试策略和验证方法
 > **定位**: 系统讲解 Rust **测试机制**——从单元测试、集成测试到文档测试和基准测试，揭示 Rust 如何内置测试文化并支持多种测试层级。
-> **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Modules](../07_modules_and_items/01_modules_and_paths.md) · [Error Handling](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md)
-> **后置概念**: [Testing Strategies](../../06_ecosystem/09_testing_and_quality/03_testing.md) · [Security Practices](../../06_ecosystem/07_security_and_cryptography/01_security_practices.md)
+> **前置概念**:
+> [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Modules](../07_modules_and_items/01_modules_and_paths.md) ·
+> [Error Handling](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md)
+> **后置概念**:
+> [Testing Strategies](../../06_ecosystem/09_testing_and_quality/03_testing.md) ·
+> [Security Practices](../../06_ecosystem/07_security_and_cryptography/01_security_practices.md)
 
 ---
 
-> **来源**: [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) · · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [MIT 6.824 — Distributed Systems](https://pdos.csail.mit.edu/6.824/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**:
+> [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) ·
+> · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) ·
+> [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [MIT 6.824 — Distributed Systems](https://pdos.csail.mit.edu/6.824/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes/testing.html) ·
 > [cargo test](https://doc.rust-lang.org/cargo/commands/cargo-test.html) ·
 > [Rust By Example — Testing](https://doc.rust-lang.org/rust-by-example/testing.html) ·

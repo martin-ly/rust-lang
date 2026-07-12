@@ -5,7 +5,13 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
-> **来源**: [WASI](https://wasi.dev/) · [Rust and WebAssembly Book](https://rustwasm.github.io/docs/book/index.html) · [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [WASI](https://wasi.dev/) ·
+> [Rust and WebAssembly Book](https://rustwasm.github.io/docs/book/index.html) ·
+> [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 ---
 
@@ -21,9 +27,18 @@
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×App — 应用 WASI 能力安全模型
-> **前置概念**: · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [FFI](../../03_advanced/02_unsafe/01_unsafe.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)
-> **后置概念**: [Application Domains](../06_data_and_distributed/01_application_domains.md) · [Formal Ecosystem Tower](../08_formal_verification/01_formal_ecosystem_tower.md)
-> **主要来源**: [WASI Preview 2 Docs] · [WebAssembly Component Model Spec] · [wit-bindgen Docs] · [WASMtime Docs] · [Rust WASM Working Group] · [Wikipedia: WebAssembly](https://en.wikipedia.org/wiki/WebAssembly)
+> **前置概念**:
+> · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) ·
+> [FFI](../../03_advanced/02_unsafe/01_unsafe.md) ·
+> [Traits](../../02_intermediate/00_traits/01_traits.md) ·
+> [Generics](../../02_intermediate/01_generics/01_generics.md)
+> **后置概念**:
+> [Application Domains](../06_data_and_distributed/01_application_domains.md) ·
+> [Formal Ecosystem Tower](../08_formal_verification/01_formal_ecosystem_tower.md)
+> **主要来源**:
+> [WASI Preview 2 Docs] · [WebAssembly Component Model Spec] · [wit-bindgen Docs] ·
+> [WASMtime Docs] · [Rust WASM Working Group] · [Wikipedia: WebAssembly](https://en.wikipedia.org/wiki/WebAssembly)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

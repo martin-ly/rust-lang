@@ -16,7 +16,12 @@
 
 ---
 
-> **来源**: [Herlihy & Wing, *Linearizability: A Correctness Condition for Concurrent Objects*, ACM TOPLAS 12(3), 1990（DOI）](https://doi.org/10.1145/78969.78972) · [Herlihy 作者主页（Brown）](https://www.cs.brown.edu/~mph/) · [Herlihy & Shavit, *The Art of Multiprocessor Programming*, Morgan Kaufmann（出版社页）](https://store.elsevier.com/the-art-of-multiprocessor-programming-revised-reprint/herlihy/978-0-12-415950-1.html) · [Lamport, *How to Make a Multiprocessor Computer...*, IEEE TC 1979（DOI）](https://doi.org/10.1109/TC.1979.1675439) · [Brewer, *CAP Twelve Years Later*, IEEE Computer 2012（DOI）](https://doi.org/10.1109/MC.2012.37)
+> **来源**:
+> [Herlihy & Wing, *Linearizability: A Correctness Condition for Concurrent Objects*, ACM TOPLAS 12(3), 1990（DOI）](https://doi.org/10.1145/78969.78972) ·
+> [Herlihy 作者主页（Brown）](https://www.cs.brown.edu/~mph/) ·
+> [Herlihy & Shavit, *The Art of Multiprocessor Programming*, Morgan Kaufmann（出版社页）](https://store.elsevier.com/the-art-of-multiprocessor-programming-revised-reprint/herlihy/978-0-12-415950-1.html) ·
+> [Lamport, *How to Make a Multiprocessor Computer...*, IEEE TC 1979（DOI）](https://doi.org/10.1109/TC.1979.1675439) ·
+> [Brewer, *CAP Twelve Years Later*, IEEE Computer 2012（DOI）](https://doi.org/10.1109/MC.2012.37)
 
 ---
 

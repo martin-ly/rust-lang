@@ -14,7 +14,12 @@
 > **前置概念**: [过程宏（Procedural Macro）](02_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) · [泛型（Generics）](../../02_intermediate/01_generics/01_generics.md)
 > **后置概念**: [生产级宏（Macro）开发](05_production_grade_macro_development.md) · [宏调试与诊断](04_macro_debugging_and_diagnostics.md)
 >
-> **主要来源**: [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [syn crate](https://docs.rs/syn/) · [quote crate](https://docs.rs/quote/) · [proc-macro2 crate](https://docs.rs/proc-macro2/)
+> **主要来源**:
+> [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html) ·
+> [The Rust Performance Book](https://nnethercote.github.io/perf-book/) ·
+> [syn crate](https://docs.rs/syn/) ·
+> [quote crate](https://docs.rs/quote/) ·
+> [proc-macro2 crate](https://docs.rs/proc-macro2/)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。

@@ -14,7 +14,6 @@
 > **后置概念**: [API Naming Conventions](../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md) · [Cargo SemVer Checks](../../07_future/03_preview_features/27_cargo_semver_checks_preview.md) · [Safety Boundaries](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)
 > **定理链**: Module Hierarchy → Visibility Rule → Public API Surface
 > **主要来源**: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) · [TRPL — Modules](https://doc.rust-lang.org/book/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-
 >
 > **来源**: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
 

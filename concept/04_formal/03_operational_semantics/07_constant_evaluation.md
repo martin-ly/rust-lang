@@ -14,7 +14,6 @@
 > **后置概念**: [Generics](../../02_intermediate/01_generics/01_generics.md) · [Const Generics](../../02_intermediate/01_generics/01_generics.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 > **定理链**: Const Context → Constant Expression → Compile-time Evaluation
 > **主要来源**: [Rust Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · Tarditi — Design and Implementation of Code Optimization（MSR 技术报告，公开链接已失效） · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-
 >
 > **来源**: [Rust Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 

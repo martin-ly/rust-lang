@@ -17,7 +17,13 @@
 
 ---
 
-> **来源**: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) ·
+> [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) ·
+> [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [The Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) ·
 > [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html) ·
 > [Rust Edition Guide 2024 — unsafe extern blocks](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-extern.html) ·
@@ -626,7 +632,19 @@ fn main() {
 }
 ```
 
-> **修正**: FFI 边界是 Rust 安全保证的**信任边界**：Rust 编译器无法验证 C 代码的行为。传递空指针、悬垂指针或未初始化内存到 C 函数是 UB。防御策略：1) 在 Rust 侧验证指针非空（`if ptr.is_null() { return Err(...) }`）；2) 使用 `NonNull<T>` 类型（编译期保证非空）；3) 用 `cbindgen`/`cxx` 生成安全的 C++ 绑定；4) 对 C API 包装为 safe Rust 函数（`unsafe fn raw_c_call` → `pub fn safe_call`）。Rust 的 `unsafe` 块是 FFI 的必要之恶——最小化 unsafe 范围，在边界处建立安全抽象层。这与 Go 的 cgo（自动处理指针，但性能开销大）或 Java 的 JNI（JVM 管理对象生命周期（Lifetimes））不同——Rust 的 FFI 提供零成本抽象（Zero-Cost Abstraction），但安全责任完全在开发者。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/ffi.html)] · [来源: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html)]
+> **修正**:
+> FFI 边界是 Rust 安全保证的**信任边界**：
+> Rust 编译器无法验证 C 代码的行为。传递空指针、悬垂指针或未初始化内存到 C 函数是 UB。
+> 防御策略：
+>
+> 1) 在 Rust 侧验证指针非空（`if ptr.is_null() { return Err(...) }`）；
+> 2) 使用 `NonNull<T>` 类型（编译期保证非空）；
+> 3) 用 `cbindgen`/`cxx` 生成安全的 C++ 绑定；
+> 4) 对 C API 包装为 safe Rust 函数（`unsafe fn raw_c_call` → `pub fn safe_call`）。
+> Rust 的 `unsafe` 块是 FFI 的必要之恶——最小化 unsafe 范围，在边界处建立安全抽象层。
+> 这与 Go 的 cgo（自动处理指针，但性能开销大）或 Java 的 JNI（JVM 管理对象生命周期（Lifetimes））不同——Rust 的 FFI 提供零成本抽象（Zero-Cost Abstraction），但安全责任完全在开发者。
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/ffi.html)] ·
+> [来源: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html)]
 
 ### 10.5 边界测试：所有权移动后的再次使用
 
@@ -639,9 +657,16 @@ fn main() {
 }
 ```
 
-> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+> **修正**:
+> **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 
 ## 认知路径
 

@@ -16,7 +16,14 @@
 
 ---
 
-> **来源**: [Hewitt, Bishop & Steiger, *A Universal Modular ACTOR Formalism for Artificial Intelligence*, IJCAI 1973](https://www.ijcai.org/Proceedings/73/Papers/027B.pdf) · [Hewitt, *Actor Model of Computation*, arXiv:1008.1459](https://arxiv.org/abs/1008.1459) · Agha, G. *Actors: A Model of Concurrent Computation in Distributed Systems*, MIT Press 1986 · [Erlang/OTP Design Principles — Supervision Trees](https://www.erlang.org/doc/system/design_principles.html#supervision-trees) · [actix Actor 文档](https://actix.rs/docs/actix/actor) · [ractor 文档](https://docs.rs/ractor/latest/ractor/) · [kameo 文档](https://docs.rs/kameo/latest/kameo/)
+> **来源**:
+> [Hewitt, Bishop & Steiger, *A Universal Modular ACTOR Formalism for Artificial Intelligence*, IJCAI 1973](https://www.ijcai.org/Proceedings/73/Papers/027B.pdf) ·
+> [Hewitt, *Actor Model of Computation*, arXiv:1008.1459](https://arxiv.org/abs/1008.1459) ·
+> Agha, G. *Actors: A Model of Concurrent Computation in Distributed Systems*, MIT Press 1986 ·
+> [Erlang/OTP Design Principles — Supervision Trees](https://www.erlang.org/doc/system/design_principles.html#supervision-trees) ·
+> [actix Actor 文档](https://actix.rs/docs/actix/actor) ·
+> [ractor 文档](https://docs.rs/ractor/latest/ractor/) ·
+> [kameo 文档](https://docs.rs/kameo/latest/kameo/)
 
 ---
 

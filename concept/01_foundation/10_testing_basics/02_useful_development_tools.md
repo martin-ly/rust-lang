@@ -11,11 +11,20 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: E×Tool — 工具链与生态系统
 > **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Cargo Getting Started](../../06_ecosystem/01_cargo/15_cargo_getting_started.md)
-> **后置概念**: [Testing Basics](01_testing_basics.md) · [Documentation](../../06_ecosystem/09_testing_and_quality/02_documentation.md) · [DevOps and CI/CD](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) · [Cargo Subcommands](../../06_ecosystem/01_cargo/12_cargo_subcommands_and_plugins.md)
-> **L0 基础入口**: [Hello World / 00_start](../00_start/00_start.md) · [Cargo Getting Started](../../06_ecosystem/01_cargo/15_cargo_getting_started.md)
+> **后置概念**:
+> [Testing Basics](01_testing_basics.md) ·
+> [Documentation](../../06_ecosystem/09_testing_and_quality/02_documentation.md) ·
+> [DevOps and CI/CD](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) ·
+> [Cargo Subcommands](../../06_ecosystem/01_cargo/12_cargo_subcommands_and_plugins.md)
+> **L0 基础入口**:
+> [Hello World / 00_start](../00_start/00_start.md) ·
+> [Cargo Getting Started](../../06_ecosystem/01_cargo/15_cargo_getting_started.md)
 > **定理链**: Source Code → Formatter → Linter → Tester → Documenter → Distributor
 >
-> **来源**: [The Rust Programming Language — Appendix D: Useful Development Tools](https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Rust Analyzer Manual](https://rust-analyzer.github.io/manual.html)
+> **来源**:
+> [The Rust Programming Language — Appendix D: Useful Development Tools](https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html) ·
+> [Cargo Book](https://doc.rust-lang.org/cargo/index.html) ·
+> [Rust Analyzer Manual](https://rust-analyzer.github.io/manual.html)
 
 ---
 

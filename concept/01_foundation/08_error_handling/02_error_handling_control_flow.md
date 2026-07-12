@@ -12,12 +12,20 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **状态**: 从 `crates/c03_control_fn/docs/04_error_handling_control_flow_1_90.md` 迁移整理
 >
-> **主要来源**: [The Rust Reference — The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator) · [The Rust Programming Language — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust By Example — Error handling](https://doc.rust-lang.org/rust-by-example/error.html)
+> **主要来源**:
+> [The Rust Reference — The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator) ·
+> [The Rust Programming Language — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
+> [Rust By Example — Error handling](https://doc.rust-lang.org/rust-by-example/error.html)
 >
 > **L0 关联**: 本页属于 L1 基础概念层；全局知识拓扑参见 [Rust 知识体系全局思维导图](../../00_meta/00_framework/knowledge_mindmap.md)。
 >
-> **前置概念**: [Error Handling 基础](01_error_handling_basics.md) · [Control Flow](../04_control_flow/01_control_flow.md) · [Functions](../07_modules_and_items/02_functions.md)
-> **后置概念**: [Error Handling 深入](../../02_intermediate/03_error_handling/01_error_handling.md) · [Iterator Patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
+> **前置概念**:
+> [Error Handling 基础](01_error_handling_basics.md) ·
+> [Control Flow](../04_control_flow/01_control_flow.md) ·
+> [Functions](../07_modules_and_items/02_functions.md)
+> **后置概念**:
+> [Error Handling 深入](../../02_intermediate/03_error_handling/01_error_handling.md) ·
+> [Iterator Patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
 
 ---
 
@@ -261,7 +269,10 @@ flowchart TD
 ```
 
 ---
-> **权威来源**: [Rust Reference — The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator) · [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust By Example — Error handling](https://doc.rust-lang.org/rust-by-example/error.html)
+> **权威来源**:
+> [Rust Reference — The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator) ·
+> [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
+> [Rust By Example — Error handling](https://doc.rust-lang.org/rust-by-example/error.html)
 >
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL、Rust By Example）
 
@@ -308,8 +319,12 @@ flowchart TD
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
-- **P1 学术/形式化**: [Liu et al.: Towards Fixing Panic Bugs for Real-world Rust Programs（Panic4R 数据集, arXiv:2408.03262）](https://arxiv.org/abs/2408.03262) · [Lagaillardie, Neykova & Yoshida: Stay Safe Under Panic — Affine Rust Programming with Multiparty Session Types（ECOOP 2022 全文, arXiv:2204.13464）](https://arxiv.org/abs/2204.13464)（2026-07-12 验证 HTTP 200）
-- **P2 生态/社区**: [docs.rs/thiserror — 生态权威 API 文档](https://docs.rs/thiserror) · [docs.rs/anyhow — 生态权威 API 文档](https://docs.rs/anyhow)
+- **P1 学术/形式化**:
+- [Liu et al.: Towards Fixing Panic Bugs for Real-world Rust Programs（Panic4R 数据集, arXiv:2408.03262）](https://arxiv.org/abs/2408.03262) ·
+- [Lagaillardie, Neykova & Yoshida: Stay Safe Under Panic — Affine Rust Programming with Multiparty Session Types（ECOOP 2022 全文, arXiv:2204.13464）](https://arxiv.org/abs/2204.13464)（2026-07-12 验证 HTTP 200）
+- **P2 生态/社区**:
+- [docs.rs/thiserror — 生态权威 API 文档](https://docs.rs/thiserror) ·
+- [docs.rs/anyhow — 生态权威 API 文档](https://docs.rs/anyhow)
 
 ## 📋 关键属性
 

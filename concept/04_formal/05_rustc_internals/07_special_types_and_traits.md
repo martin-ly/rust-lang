@@ -15,7 +15,6 @@
 > **后置概念**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Pin and Unpin](../../03_advanced/01_async/08_pin_unpin.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)
 > **定理链**: Special Type → Compiler Support → Safety Guarantee
 > **主要来源**: [Rust Reference — Special Types and Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-
 >
 > **来源**: [Rust Reference — Special Types and Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html)
 

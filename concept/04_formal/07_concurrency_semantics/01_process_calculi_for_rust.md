@@ -16,7 +16,14 @@
 
 ---
 
-> **来源**: [Hoare, *Communicating Sequential Processes*, CACM 21(8), 1978（DOI；ACM 有反爬，浏览器可访问）](https://doi.org/10.1145/359576.359585) · Hoare, *Communicating Sequential Processes* (Prentice Hall 1985，作者授权电子版 usingcsp.com/cspbook.pdf；2026-07-12 本网络 DNS 未解析，保留备查） · [Milner, *Communicating and Mobile Systems: the π-Calculus*, Cambridge UP 1999（Edinburgh 研究门户）](https://www.research.ed.ac.uk/en/publications/communicating-and-mobile-systems-the-%CF%80-calculus/) · [Milner, *The Polyadic π-Calculus: a Tutorial*, LFCS 1992（Edinburgh LFCS 报告 ECS-LFCS-91-180）](https://www.lfcs.inf.ed.ac.uk/reports/91/ECS-LFCS-91-180/) · [std::sync::mpsc 官方文档](https://doc.rust-lang.org/std/sync/mpsc/) · [crossbeam-channel 文档](https://docs.rs/crossbeam-channel/latest/crossbeam_channel/) · [tokio::select! 教程](https://tokio.rs/tokio/tutorial/select)
+> **来源**:
+> [Hoare, *Communicating Sequential Processes*, CACM 21(8), 1978（DOI；ACM 有反爬，浏览器可访问）](https://doi.org/10.1145/359576.359585) ·
+> Hoare, *Communicating Sequential Processes* (Prentice Hall 1985，作者授权电子版 usingcsp.com/cspbook.pdf；2026-07-12 本网络 DNS 未解析，保留备查） ·
+> [Milner, *Communicating and Mobile Systems: the π-Calculus*, Cambridge UP 1999（Edinburgh 研究门户）](https://www.research.ed.ac.uk/en/publications/communicating-and-mobile-systems-the-%CF%80-calculus/) ·
+> [Milner, *The Polyadic π-Calculus: a Tutorial*, LFCS 1992（Edinburgh LFCS 报告 ECS-LFCS-91-180）](https://www.lfcs.inf.ed.ac.uk/reports/91/ECS-LFCS-91-180/) ·
+> [std::sync::mpsc 官方文档](https://doc.rust-lang.org/std/sync/mpsc/) ·
+> [crossbeam-channel 文档](https://docs.rs/crossbeam-channel/latest/crossbeam_channel/) ·
+> [tokio::select! 教程](https://tokio.rs/tokio/tutorial/select)
 >
 > ⚠️ **声明**: 本页呈现的是**形式语义骨架与教学级对应**，非经机器验证的同构证明。Rust 标准库从未以任何进程代数为形式语义基础；「对应」一词在本页始终指**结构化类比**，而非双模拟等价。
 

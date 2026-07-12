@@ -11,11 +11,21 @@
 > **目录归属说明**: 本文件虽非 unsafe 语法主题，但内存模型（抽象字节、provenance、未初始化内存）是 unsafe 代码未定义行为（UB）判定的语义基础，与 `02_unsafe/` 的 unsafe 语义强相关，故保留在本目录；其并发内存序维度见 [Atomics and Memory Ordering](../00_concurrency/05_atomics_and_memory_ordering.md)。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
-> **前置依赖**: [Unsafe Rust](01_unsafe.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Behavior Considered Undefined](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md)
-> **后置概念**: [Atomics and Memory Ordering](../00_concurrency/05_atomics_and_memory_ordering.md) · [Inline Assembly](../05_inline_assembly/01_inline_assembly.md) · [Tree Borrows](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md)
+> **前置依赖**:
+> [Unsafe Rust](01_unsafe.md) ·
+> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Behavior Considered Undefined](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md)
+> **后置概念**:
+> [Atomics and Memory Ordering](../00_concurrency/05_atomics_and_memory_ordering.md) ·
+> [Inline Assembly](../05_inline_assembly/01_inline_assembly.md) ·
+> [Tree Borrows](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md)
 > **定理链**: Byte Model → Provenance → UB Boundary
-> **主要来源**: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
-
+> **主要来源**:
+> [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) ·
+> [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
 >
 > **来源**: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
 

@@ -14,7 +14,6 @@
 > **后置概念**: [Embedded Systems](../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md) · [Unsafe Rust](../02_unsafe/01_unsafe.md) · [Panic](../../02_intermediate/03_error_handling/03_panic.md)
 > **定理链**: Runtime Attribute → Allocation / Subsystem → Binary Behavior
 > **主要来源**: [Rust Reference — The Rust Runtime](https://doc.rust-lang.org/reference/runtime.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
-
 >
 > **来源**: [Rust Reference — The Rust Runtime](https://doc.rust-lang.org/reference/runtime.html) · [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html)
 

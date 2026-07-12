@@ -11,10 +11,23 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Language semantics
 > **双维定位**: S×Sys — 语言与平台交互
-> **前置依赖**: [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
-> **后置概念**: [FFI Advanced](../04_ffi/02_ffi_advanced.md) · [Linkage](../04_ffi/03_linkage.md) · [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md)
+> **前置依赖**:
+> [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) ·
+> [Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md) ·
+> [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
+> **后置概念**:
+> [FFI Advanced](../04_ffi/02_ffi_advanced.md) ·
+> [Linkage](../04_ffi/03_linkage.md) ·
+> [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md)
 > **定理链**: N/A — 语言规范/平台相关文档
-> **主要来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**:
+> [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) ·
+> [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) ·
+> [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 >
 > **来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)

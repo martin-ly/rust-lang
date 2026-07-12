@@ -14,7 +14,13 @@
 > **后置概念**: [Inline Assembly](../05_inline_assembly/01_inline_assembly.md) · [FFI Advanced](../04_ffi/02_ffi_advanced.md) · [Custom Allocators](../06_low_level_patterns/01_custom_allocators.md)
 > **定理链**: Unsafe Keyword → Unsafe Block → Unsafe Operation → UB Contract
 >
-> **来源**: [Rust Reference — Unsafety](https://doc.rust-lang.org/reference/unsafe-keyword.html) · [Rust Reference — Behavior Not Considered Unsafe](https://doc.rust-lang.org/reference/behavior-not-considered-unsafe.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)
+> **来源**:
+> [Rust Reference — Unsafety](https://doc.rust-lang.org/reference/unsafe-keyword.html) ·
+> [Rust Reference — Behavior Not Considered Unsafe](https://doc.rust-lang.org/reference/behavior-not-considered-unsafe.html) ·
+> [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)
 
 ---
 
@@ -209,7 +215,11 @@ unsafe 代码必须遵守 Rust 内存模型：(Source: [Rust Reference — Memor
 
 ---
 
-> **权威来源**: [Rust Reference — Unsafe Keyword](https://doc.rust-lang.org/reference/unsafe-keyword.html) · [Rust Reference — Behavior Not Considered Unsafe](https://doc.rust-lang.org/reference/behavior-not-considered-unsafe.html) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#unsafe-blocks) · [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)
+> **权威来源**:
+> [Rust Reference — Unsafe Keyword](https://doc.rust-lang.org/reference/unsafe-keyword.html) ·
+> [Rust Reference — Behavior Not Considered Unsafe](https://doc.rust-lang.org/reference/behavior-not-considered-unsafe.html) ·
+> [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#unsafe-blocks) ·
+> [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)
 
 ## 过渡段
 

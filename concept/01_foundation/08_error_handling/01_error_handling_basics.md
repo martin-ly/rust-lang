@@ -14,12 +14,19 @@
 > **受众**: [初学者]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页（L1 基础层）。
-> **层级定位**: 本页为错误处理的 **L1 基础权威页**，覆盖 `Result`/`Option`/`?` 的入门语义；进阶传播模式见 L2 主权威页 [`04_error_handling.md`](../../02_intermediate/03_error_handling/01_error_handling.md)，组合子/错误转换/框架生态深入见 [`16_error_handling_deep_dive.md`](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md)。三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
+> **层级定位**:
+> 本页为错误处理的 **L1 基础权威页**，覆盖 `Result`/`Option`/`?` 的入门语义；
+> 进阶传播模式见 L2 主权威页 [`04_error_handling.md`](../../02_intermediate/03_error_handling/01_error_handling.md)，组合子/错误转换/框架生态深入见 [`16_error_handling_deep_dive.md`](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md)。
+> 三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Result/Option 错误传播模式
 > **定位**: 系统讲解 Rust 的错误处理（Error Handling）机制——从 `Result` 和 `Option` 到 `?` 运算符，分析 Rust 如何将错误处理融入类型系统（Type System），实现编译期安全。
-> **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/01_type_system.md) · [Control Flow](../04_control_flow/01_control_flow.md)
-> **后置概念**: [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) ·
+> **前置概念**:
+> [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Type System](../02_type_system/01_type_system.md) ·
+> [Control Flow](../04_control_flow/01_control_flow.md)
+> **后置概念**:
+> [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) ·
 > [Panic](../../03_advanced/02_unsafe/01_unsafe.md) ·
 > [Logging](../../06_ecosystem/00_toolchain/02_logging_observability.md)
 

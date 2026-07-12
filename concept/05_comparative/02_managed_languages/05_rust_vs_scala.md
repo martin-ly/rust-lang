@@ -761,4 +761,3 @@ Rust 要求函数签名通常显式标注类型（生命周期（Lifetimes）和
 | Rust vs Scala：类型系统（Type System）的两种哲学 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | Rust vs Scala：类型系统（Type System）的两种哲学 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | Rust vs Scala：类型系统（Type System）的两种哲学 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
-
