@@ -97,7 +97,7 @@ fn demo() {
 
 - [Rust 1.97.0 稳定特性摘要](rust_1_97_stabilized.md)
 - [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)
-- [Rust 形式模型演进跟踪](05_rust_version_tracking.md)
+- [Rust 形式模型演进跟踪](01_rust_version_tracking.md)
 
 ---
 

@@ -58,7 +58,7 @@
 本指南为官方 **Embedded Rust Book** 的入口与项目内导航，帮助在开发嵌入式 Rust 应用时快速定位到本项目的相关模块和官方资源。
 
 **形式化引用（Reference）**：T-OW3 (内存安全（Memory Safety）)、
-T-BR1、[UNSAFE_RUST_GUIDE](../../concept/03_advanced/02_unsafe/03_unsafe.md)（no_std、裸机 unsafe 契约）。
+T-BR1、[UNSAFE_RUST_GUIDE](../../concept/03_advanced/02_unsafe/01_unsafe.md)（no_std、裸机 unsafe 契约）。
 
 ---
 
@@ -617,7 +617,7 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

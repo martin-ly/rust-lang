@@ -198,7 +198,7 @@ RustBelt (POPL 2018) ── 证明 Rust 所有权系统内存安全
 | **Rustlantis** | OOPSLA 2024 | 随机程序生成器用于发现 Verus/Miri 的 soundness 漏洞，提升验证工具可靠性 |
 
 > **⟹ 洞察**: VerusBelt 提供了 Verus 扩展的语义基础，而 KVerus/AutoVerus 正在将这一基础转化为**半自动化的工业实践**——从手写 proof 到 AI 辅助证明生成。
-> [来源: [concept/04_formal/05_verification_toolchain.md](../../concept/04_formal/04_model_checking/05_verification_toolchain.md) §7]
+> [来源: [concept/04_formal/05_verification_toolchain.md](../../concept/04_formal/04_model_checking/01_verification_toolchain.md) §7]
 
 ---
 
@@ -287,7 +287,7 @@ Design and Implementation (PLDI 2026).
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
@@ -305,9 +305,9 @@ Design and Implementation (PLDI 2026).
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)
-- [形式化验证工具链 (concept)](../../concept/04_formal/04_model_checking/05_verification_toolchain.md) — 概念层 2026 工具链全景与状态矩阵
-- [安全关键认证 (concept)](../../concept/04_formal/04_model_checking/16_aerospace_certification_formal_methods.md) — Ferrocene 认证与形式化方法工业映射
-- [RustBelt (concept)](../../concept/04_formal/02_separation_logic/04_rustbelt.md) — Rust 所有权系统的 Iris 分离逻辑证明
+- [形式化验证工具链 (concept)](../../concept/04_formal/04_model_checking/01_verification_toolchain.md) — 概念层 2026 工具链全景与状态矩阵
+- [安全关键认证 (concept)](../../concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md) — Ferrocene 认证与形式化方法工业映射
+- [RustBelt (concept)](../../concept/04_formal/02_separation_logic/01_rustbelt.md) — Rust 所有权系统的 Iris 分离逻辑证明
 
 ---
 

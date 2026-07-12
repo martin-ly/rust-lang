@@ -4,7 +4,7 @@
 # Rust 2025 无锁编程 (c05_threads_04)
 
 > **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
-> [`concept/03_advanced/00_concurrency/16_lock_free.md`](../../../concept/03_advanced/00_concurrency/16_lock_free.md)。
+> [`concept/03_advanced/00_concurrency/06_lock_free.md`](../../../concept/03_advanced/00_concurrency/06_lock_free.md)。
 
 本文件原为对应 crate 的通用概念教程。根据 AGENTS.md §6.4 治理规则，
 通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
@@ -14,4 +14,4 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| 相关概念 | [concept/03_advanced/00_concurrency/16_lock_free.md](../../../concept/03_advanced/00_concurrency/16_lock_free.md) |
+| 相关概念 | [concept/03_advanced/00_concurrency/06_lock_free.md](../../../concept/03_advanced/00_concurrency/06_lock_free.md) |

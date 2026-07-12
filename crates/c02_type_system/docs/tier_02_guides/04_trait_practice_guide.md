@@ -15,9 +15,9 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | Trait 定义与实现 | [concept/02_intermediate/00_traits/01_traits.md](../../../../concept/02_intermediate/00_traits/01_traits.md) |
-| 关联类型与泛型参数 | [concept/02_intermediate/00_traits/19_advanced_traits.md](../../../../concept/02_intermediate/00_traits/19_advanced_traits.md) |
+| 关联类型与泛型参数 | [concept/02_intermediate/00_traits/04_advanced_traits.md](../../../../concept/02_intermediate/00_traits/04_advanced_traits.md) |
 | Trait Bound 与 impl Trait | [concept/02_intermediate/00_traits/01_traits.md](../../../../concept/02_intermediate/00_traits/01_traits.md) |
-| Trait 对象与动态分发 | [concept/02_intermediate/00_traits/39_dispatch_mechanisms.md](../../../../concept/02_intermediate/00_traits/39_dispatch_mechanisms.md) |
-| 标准库 Trait（Clone/Copy/Debug/Display/Eq） | [concept/02_intermediate/00_traits/31_derive_traits.md](../../../../concept/02_intermediate/00_traits/31_derive_traits.md) |
-| Super Trait 与 Trait 组合 | [concept/02_intermediate/00_traits/19_advanced_traits.md](../../../../concept/02_intermediate/00_traits/19_advanced_traits.md) |
+| Trait 对象与动态分发 | [concept/02_intermediate/00_traits/02_dispatch_mechanisms.md](../../../../concept/02_intermediate/00_traits/02_dispatch_mechanisms.md) |
+| 标准库 Trait（Clone/Copy/Debug/Display/Eq） | [concept/02_intermediate/00_traits/06_derive_traits.md](../../../../concept/02_intermediate/00_traits/06_derive_traits.md) |
+| Super Trait 与 Trait 组合 | [concept/02_intermediate/00_traits/04_advanced_traits.md](../../../../concept/02_intermediate/00_traits/04_advanced_traits.md) |
 | 对象安全与孤儿规则 | [concept/02_intermediate/00_traits/01_traits.md](../../../../concept/02_intermediate/00_traits/01_traits.md) |

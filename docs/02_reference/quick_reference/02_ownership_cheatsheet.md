@@ -118,7 +118,7 @@ mindmap
 > 通用概念（所有权唯一性、借用规则、生命周期有效性、智能指针 RAII、分离逻辑模型）以
 > [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > 为权威来源；形式化推导见
-> [`concept/04_formal/01_ownership_logic/03_ownership_formal.md`](../../../concept/04_formal/01_ownership_logic/03_ownership_formal.md)。
+> [`concept/04_formal/01_ownership_logic/02_ownership_formal.md`](../../../concept/04_formal/01_ownership_logic/02_ownership_formal.md)。
 > 本速查卡不再复述通用定义，仅保留下方决策树、模式、错误与反例等独特速查内容。
 
 ---
@@ -963,7 +963,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

@@ -1,7 +1,7 @@
 > **EN**: Rust Async Runtime Deep Comparison 2025: Glommio vs Tokio vs Smol
 > **Summary**: Comparative analysis of Rust async runtimes in 2025: Glommio (thread-per-core, io_uring), Tokio (work-stealing), Smol (lightweight), and async-std (archived). Covers architecture, performance benchmarks, I/O behavior, ecosystem, use-case decision tree, and migration guidance.
 >
-> **权威来源**: [concept/06_ecosystem/04_web_and_networking/42_glommio_and_thread_per_core.md](../../../../concept/06_ecosystem/04_web_and_networking/42_glommio_and_thread_per_core.md)
+> **权威来源**: [concept/06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md](../../../../concept/06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md)
 
 # Rust 异步运行时深度对比 2025: Glommio vs Tokio vs Smol
 
@@ -36,4 +36,4 @@
 
 > ⚠️ **生态状态提示**：`async-std` 已于 2025 年 3 月停止维护，新项目建议优先评估 Tokio 或 smol。
 >
-> **权威来源**: [concept/06_ecosystem/04_web_and_networking/42_glommio_and_thread_per_core.md](../../../../concept/06_ecosystem/04_web_and_networking/42_glommio_and_thread_per_core.md)
+> **权威来源**: [concept/06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md](../../../../concept/06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md)

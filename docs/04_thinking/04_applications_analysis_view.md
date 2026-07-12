@@ -109,7 +109,7 @@
 
 **公理 / 定理 → 论证**：系统编程选型遵循「最小依赖」公理——底层系统库应尽量少依赖。定理：`std::process` 提供可移植的进程抽象；`nix` 提供 Unix 特定 API。unsafe 使用需遵守 Rustonomicon 约束：安全抽象边界、不变式文档化。
 
-**决策树**：标准 API 够用？→ std；需 Unix 特定？→ nix；需 Windows 特定？→ windows-sys；FFI？→ 最小化 unsafe 范围。参考 [UNSAFE_RUST_GUIDE](../../concept/03_advanced/02_unsafe/03_unsafe.md)。
+**决策树**：标准 API 够用？→ std；需 Unix 特定？→ nix；需 Windows 特定？→ windows-sys；FFI？→ 最小化 unsafe 范围。参考 [UNSAFE_RUST_GUIDE](../../concept/03_advanced/02_unsafe/01_unsafe.md)。
 
 ---
 
@@ -394,7 +394,7 @@ Rust 新特性可扩展思维表征方式：
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

@@ -1,0 +1,999 @@
+> **内容分级**: [综述级]
+> [综述级]
+>
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **本节关键术语**: 错误处理 (Error Handling) · Result · Option · 传播运算符 (? ) · 模式匹配（Pattern Matching）错误 (Match on Result) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
+>
+# Rust 错误处理基础
+>
+> **EN**: Error Handling
+> **Summary**: Error Handling — Error-handling basics: Result, Option, and the `?` operator, embedding errors into the type system.
+> **📎 交叉引用（Reference）**
+>
+> 本主题在 knowledge 中有系统化的知识索引：错误处理（Error Handling）基础
+> **受众**: [初学者]
+> **Bloom 层级**: L2-L3
+> **权威来源**: 本文件为 `concept/` 权威页（L1 基础层）。
+> **层级定位**: 本页为错误处理的 **L1 基础权威页**，覆盖 `Result`/`Option`/`?` 的入门语义；进阶传播模式见 L2 主权威页 [`04_error_handling.md`](../../02_intermediate/03_error_handling/01_error_handling.md)，组合子/错误转换/框架生态深入见 [`16_error_handling_deep_dive.md`](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md)。三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: C×App — 应用 Result/Option 错误传播模式
+> **定位**: 系统讲解 Rust 的错误处理（Error Handling）机制——从 `Result` 和 `Option` 到 `?` 运算符，分析 Rust 如何将错误处理融入类型系统（Type System），实现编译期安全。
+> **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/01_type_system.md) · [Control Flow](../04_control_flow/01_control_flow.md)
+> **后置概念**: [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) ·
+> [Panic](../../03_advanced/02_unsafe/01_unsafe.md) ·
+> [Logging](../../06_ecosystem/00_toolchain/02_logging_observability.md)
+
+---
+
+> **来源**:
+>
+> [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
+> [std::result::Result](https://doc.rust-lang.org/std/result/enum.Result.html) ·
+> [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [System F](https://en.wikipedia.org/wiki/System_F) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> [Rust By Example](https://doc.rust-lang.org/rust-by-example/error.html) ·
+> [std::result](https://doc.rust-lang.org/std/result/index.html) ·
+> [std::option](https://doc.rust-lang.org/std/option/index.html) ·
+> [Wikipedia — Exception Handling](https://en.wikipedia.org/wiki/Exception_handling)
+
+## 📑 目录
+
+- [Rust 错误处理基础](#rust-错误处理基础)
+  - [📑 目录](#-目录)
+  - [一、核心概念](#一核心概念)
+    - [1.1 Result 类型](#11-result-类型)
+    - [1.2 Option 类型](#12-option-类型)
+    - [1.3 ? 运算符](#13--运算符)
+  - [二、错误转换与组合](#二错误转换与组合)
+    - [2.1 From trait](#21-from-trait)
+    - [2.2 map 与 and\_then](#22-map-与-and_then)
+    - [2.3 组合模式](#23-组合模式)
+  - [三、Panic 与不可恢复错误](#三panic-与不可恢复错误)
+    - [3.1 panic! 宏 (panic! Macro)](#31-panic-宏-panic-macro)
+    - [3.2 unwrap 与 expect](#32-unwrap-与-expect)
+  - [四、反命题与边界分析](#四反命题与边界分析)
+    - [4.1 反命题树](#41-反命题树)
+    - [4.2 边界极限](#42-边界极限)
+  - [五、常见陷阱](#五常见陷阱)
+  - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [十二、边界测试：错误处理的编译错误](#十二边界测试错误处理的编译错误)
+    - [12.1 边界测试：`unwrap()` 在 `Result::Err` 上 panic（运行时错误）](#121-边界测试unwrap-在-resulterr-上-panic运行时错误)
+    - [12.2 边界测试：`?` 在返回 `()` 的函数中使用（编译错误）](#122-边界测试-在返回--的函数中使用编译错误)
+    - [10.3 边界测试：`Result` 与 `Option` 的混用（编译错误）](#103-边界测试result-与-option-的混用编译错误)
+    - [10.4 边界测试：`catch_unwind` 与 `UnwindSafe`（编译错误）](#104-边界测试catch_unwind-与-unwindsafe编译错误)
+    - [10.5 边界测试：`Result` 的 `unwrap_unchecked` 与 release 模式（运行时 UB）](#105-边界测试result-的-unwrap_unchecked-与-release-模式运行时-ub)
+    - [10.5 边界测试：生命周期参数的不匹配返回](#105-边界测试生命周期参数的不匹配返回)
+  - [实践](#实践)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Result 与 ? 运算符（理解层）](#测验-1result-与--运算符理解层)
+    - [测验 2：Option 与 Result 的转换（应用层）](#测验-2option-与-result-的转换应用层)
+    - [测验 3：unwrap vs expect（分析层）](#测验-3unwrap-vs-expect分析层)
+    - [测验 4：错误传播链（应用层）](#测验-4错误传播链应用层)
+    - [测验 5：panic! 的适用场景（评价层）](#测验-5panic-的适用场景评价层)
+
+---
+
+## 一、核心概念
+
+理解「核心概念」需要把握 Result 类型、Option 类型与运算符，本节依次展开。
+
+### 1.1 Result 类型
+
+```text
+Result<T, E>:
+
+  定义: 表示可能失败的操作结果
+  enum Result<T, E> {
+      Ok(T),   // 成功，包含值
+      Err(E),  // 失败，包含错误
+  }
+
+  对比异常处理:
+  ┌─────────────────┬─────────────────┬─────────────────┐
+  │ 方面            │ 异常（Java/C++） │ Result（Rust）  │
+  ├─────────────────┼─────────────────┼─────────────────┤
+  │ 错误类型        │ 运行时           │ 编译期          │
+  │ 是否处理        │ 可选             │ 强制            │
+  │ 性能            │ 有开销           │ 零成本          │
+  │ 控制流          │ 非局部跳转       │ 显式传播        │
+  │ 文档化          │ 差               │ 类型即文档      │
+  └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
+
+  代码示例:
+
+  fn read_file(path: &str) -> Result<String, io::Error> {
+      let mut file = File::open(path)?;
+      let mut content = String::new();
+      file.read_to_string(&mut content)?;
+      Ok(content)
+  }
+
+  使用模式:
+  ├── match 完整处理
+  ├── if let 简化处理
+  ├── ? 传播错误
+  └── unwrap 快速原型
+```
+
+```rust
+fn divide(a: f64, b: f64) -> Result<f64, String> {
+    if b == 0.0 {
+        Err(String::from("division by zero"))
+    } else {
+        Ok(a / b)
+    }
+}
+
+fn main() {
+    match divide(10.0, 2.0) {
+        Ok(result) => println!("result: {}", result),
+        Err(e) => println!("error: {}", e),
+    }
+}
+```
+
+> **认知功能**: **Result 将错误从"隐藏的副作用"转变为"显式的类型"**——编译器强制处理所有错误路径。
+> [来源: [TRPL Ch. 9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
+
+---
+
+### 1.2 Option 类型
+>
+
+```text
+Option<T>:
+
+  定义: 表示可能不存在的值
+  enum Option<T> {
+      Some(T),  // 值存在
+      None,     // 值不存在
+  }
+
+  对比 null:
+  ┌─────────────────┬─────────────────┬─────────────────┐
+  │ 方面            │ null            │ Option          │
+  ├─────────────────┼─────────────────┼─────────────────┤
+  │ 安全性          │ 空指针异常      │ 编译期检查      │
+  │ 显式性          │ 隐式            │ 显式            │
+  │ 组合能力        │ 弱              │ 强              │
+  │ 文档化          │ 差              │ 类型即文档      │
+  └─────────────────┴─────────────────┴─────────────────┘
+
+  代码示例:
+
+  fn find_user(users: &[User], id: u32) -> Option<&User> {
+      users.iter().find(|u| u.id == id)
+  }
+
+  // 使用
+  if let Some(user) = find_user(&users, 1) {
+      println!("{}", user.name);
+  }
+
+  Option → Result:
+  opt.ok_or("not found")        // None → Err
+  opt.ok_or_else(|| make_err()) // 惰性版本
+```
+
+```rust
+fn maybe_sqrt(x: f64) -> Option<f64> {
+    if x >= 0.0 {
+        Some(x.sqrt())
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let value = maybe_sqrt(4.0)
+        .map(|v| v * 2.0)
+        .unwrap_or(0.0);
+    println!("{}", value);
+}
+```
+
+> **Option 洞察**: **Option 消除了 null 指针问题**——编译器确保你处理"值不存在"的情况。
+> [来源: [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html)]
+
+---
+
+### 1.3 ? 运算符
+>
+
+```text
+? 运算符:
+
+  作用: 简化错误传播
+  ├── Ok(v) → 解包为 v
+  ├── Err(e) → 提前返回 Err(e.into())
+  └── 只能在返回 Result/Option 的函数中使用
+
+  代码对比:
+
+  不使用 ?:
+  fn read_username(path: &str) -> Result<String, io::Error> {
+      let file_result = File::open(path);
+      let mut file = match file_result {
+          Ok(f) => f,
+          Err(e) => return Err(e),
+      };
+      let mut username = String::new();
+      match file.read_to_string(&mut username) {
+          Ok(_) => Ok(username),
+          Err(e) => Err(e),
+      }
+  }
+
+  使用 ?:
+  fn read_username(path: &str) -> Result<String, io::Error> {
+      let mut file = File::open(path)?;
+      let mut username = String::new();
+      file.read_to_string(&mut username)?;
+      Ok(username)
+  }
+
+  转换能力:
+  ? 自动调用 From::from 转换错误类型
+  └── 需要实现 From<E> for 目标错误类型
+```
+
+```rust
+fn parse_add_one(s: &str) -> Result<i32, std::num::ParseIntError> {
+    let n: i32 = s.parse()?;
+    Ok(n + 1)
+}
+
+fn main() {
+    match parse_add_one("42") {
+        Ok(n) => println!("{}", n),
+        Err(e) => println!("parse error: {}", e),
+    }
+}
+```
+
+> **? 洞察**: **? 运算符是 Rust 错误处理（Error Handling）的"语法糖"**——保持显式性的同时减少样板代码。
+> [来源: [Rust Reference — Question Mark](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)]
+
+---
+
+## 二、错误转换与组合
+
+本节将「错误转换与组合」分解为若干主题： From trait、map 与 and_then与组合模式。
+
+### 2.1 From trait
+>
+
+```text
+From trait:
+
+  定义: 类型之间的转换
+  trait From<T> {
+      fn from(value: T) -> Self;
+  }
+
+  错误转换:
+  ├── ? 运算符依赖 From
+  ├── 自动将具体错误转为通用错误
+  └── 实现一次，处处可用
+
+  代码示例:
+
+  #[derive(Debug)]
+  enum AppError {
+      Io(io::Error),
+      Parse(ParseIntError),
+      Custom(String),
+  }
+
+  impl From<io::Error> for AppError {
+      fn from(err: io::Error) -> Self {
+          AppError::Io(err)
+      }
+  }
+
+  impl From<ParseIntError> for AppError {
+      fn from(err: ParseIntError) -> Self {
+          AppError::Parse(err)
+      }
+  }
+
+  fn do_something() -> Result<(), AppError> {
+      let file = File::open("data.txt")?;  // io::Error → AppError
+      let num: i32 = "abc".parse()?;       // ParseIntError → AppError
+      Ok(())
+  }
+```
+
+> **From 洞察**: **From trait 实现了错误的"自动上转"**——具体错误隐式转为通用错误类型。
+> [来源: [std::convert::From](https://doc.rust-lang.org/std/convert/trait.From.html)]
+
+---
+
+### 2.2 map 与 and_then
+>
+
+```text
+Result/Option 组合:
+
+  map: 转换成功值
+  ├── Result<T, E>::map(F) -> Result<U, E>
+  └── Option<T>::map(F) -> Option<U>
+
+  and_then (flat_map): 链式操作
+  ├── Result<T, E>::and_then(F) -> Result<U, E>
+  └── Option<T>::and_then(F) -> Option<U>
+
+  代码示例:
+
+  let result = Some(5)
+      .map(|x| x + 1)           // Some(6)
+      .and_then(|x| {
+          if x > 5 { Some(x * 2) } else { None }
+      })                         // Some(12)
+      .map(|x| x.to_string());   // Some("12")
+
+  // 对比 match
+  let result = match Some(5) {
+      Some(x) => {
+          let x = x + 1;
+          if x > 5 {
+              Some((x * 2).to_string())
+          } else {
+              None
+          }
+      }
+      None => None,
+  };
+
+  其他组合器:
+  ├── unwrap_or(default): 提取或默认值
+  ├── unwrap_or_else(f): 惰性默认值
+  ├── or_else(f): 错误恢复
+  └── map_err(f): 转换错误
+```
+
+> **组合洞察**: **map 和 and_then 是函数式错误处理的核心**——声明式组合避免嵌套 match。
+> [来源: [Rust By Example — Result](https://doc.rust-lang.org/rust-by-example/error/result.html)]
+
+---
+
+### 2.3 组合模式
+>
+
+```text
+常见组合模式:
+
+  提前返回链:
+  let val = step1()?
+      .and_then(step2)?
+      .and_then(step3)?;
+
+  默认值回退:
+  let config = read_config()
+      .or_else(|_| read_default_config())
+      .unwrap_or_else(|| Config::default());
+
+  错误收集:
+  let results: Vec<Result<i32, _>> = vec!["1", "2", "abc"]
+      .into_iter()
+      .map(|s| s.parse())
+      .collect();
+
+  let (oks, errs): (Vec<_>, Vec<_>) = results
+      .into_iter()
+      .partition(Result::is_ok);
+
+  传播收集:
+  let nums: Vec<i32> = vec!["1", "2", "3"]
+      .into_iter()
+      .map(|s| s.parse())
+      .collect::<Result<_, _>>()?; // 任一错误即返回
+```
+
+> **模式洞察**: **组合模式让错误处理成为数据流的一部分**——而非控制流的例外。
+> [来源: [Rust API Guidelines — Error Handling](https://rust-lang.github.io/api-guidelines//dependability.html)]
+
+---
+
+## 三、Panic 与不可恢复错误
+
+本节从 panic! 宏 (panic! Macro) 与  unwrap 与 expect 两个层面剖析「Panic 与不可恢复错误」。
+
+### 3.1 panic! 宏 (panic! Macro)
+>
+
+```text
+panic!:
+
+  定义: 不可恢复错误的即时终止
+  ├── 展开调用栈（默认）
+  ├── 或立即中止（panic = 'abort'）
+  ├── 打印错误信息
+  └── 可设置 panic hook
+
+  使用场景:
+  ├── 不变量被破坏
+  ├── 内存损坏
+  ├── 逻辑不可能的情况
+  └── 开发阶段的快速失败
+
+  代码示例:
+  fn divide(a: f64, b: f64) -> f64 {
+      if b == 0.0 {
+          panic!("division by zero");
+      }
+      a / b
+  }
+
+  对比 Result:
+  ┌─────────────────┬─────────────────┬─────────────────┐
+  │ 方面            │ Result          │ panic           │
+  ├─────────────────┼─────────────────┼─────────────────┤
+  │ 可恢复          │ 是              │ 否              │
+  │ 调用者处理      │ 强制            │ 无法处理        │
+  │ 性能            │ 零成本          │ 有开销          │
+  │ 使用场景        │ 预期错误        │ 程序 bug        │
+  └─────────────────┴─────────────────┴─────────────────┘
+```
+
+> **panic 洞察**: **panic 是"程序有 bug"的信号**——不应被用于预期错误场景。
+> [来源: [TRPL — Panic](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)]
+
+---
+
+### 3.2 unwrap 与 expect
+>
+
+```text
+unwrap / expect:
+
+  unwrap: 直接提取值，失败时 panic
+  ├── 快速原型
+  ├── 已知安全的场景
+  └── 测试代码
+
+  expect: unwrap + 自定义消息
+  ├── 比 unwrap 更有信息量
+  ├── 说明为何不会失败
+  └── 生产代码中优先使用
+
+  代码示例:
+  // 快速原型
+  let file = File::open("config.txt").unwrap();
+
+  // 说明原因
+  let file = File::open("config.txt")
+      .expect("config.txt should exist in production");
+
+  // 已知安全（已验证）
+  let num = "42".parse::<i32>().unwrap(); // 字面量保证成功
+
+  注意:
+  ├── unwrap 在库代码中应避免
+  ├── 使用 Result 返回错误给调用者
+  └── unwrap_or / unwrap_or_default 更安全
+```
+
+> **unwrap 洞察**: **unwrap 是"我知道这不会失败"的断言**——如果错了，程序 panic 告诉你。
+> [来源: [Rust API Guidelines — unwrap](https://rust-lang.github.io/api-guidelines//documentation.html#function-docs-include-error-panic-and-safety-considerations-c-failure)]
+
+---
+
+## 四、反命题与边界分析
+
+「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+
+### 4.1 反命题树
+
+```mermaid
+graph TD
+    ROOT["命题: 应始终使用 Result 而非 panic"]
+    ROOT --> Q1{"错误是否可恢复?"}
+    Q1 -->|是| RESULT["✅ Result 适合"]
+    Q1 -->|否| Q2{"是否是程序 bug?"}
+    Q2 -->|是| PANIC["✅ panic 适合"]
+    Q2 -->|否| Q3{"调用者能否处理?"}
+    Q3 -->|是| RESULT
+    Q3 -->|否| PANIC
+
+    style RESULT fill:#c8e6c9
+    style PANIC fill:#c8e6c9
+```
+
+> **认知功能**: **可恢复错误用 Result，程序 bug 用 panic**——区分是关键设计决策。
+
+---
+
+### 4.2 边界极限
+
+```text
+边界 1: 错误类型设计
+├── 错误类型过多导致组合困难
+├── 错误类型过少丢失信息
+└── 缓解: 使用 thiserror / anyhow
+
+边界 2: ? 的限制
+├── 只能在返回 Result/Option 的函数中使用
+├── 闭包和迭代器中使用受限
+└── 缓解: try_blocks（不稳定）
+
+边界 3: 性能
+├── Result 在热路径有分支开销
+├── panic = abort 减少二进制大小
+└── 缓解: 使用 unwrap_unchecked（unsafe）
+
+边界 4: 跨线程错误
+├── panic 在子线程中可能终止进程
+├── Result 可以跨线程传递
+└── 缓解: catch_unwind, JoinHandle
+
+边界 5: FFI 错误
+├── C 错误码需手动转换
+├── panic 跨越 FFI 边界是 UB
+└── 缓解: 使用 Result 包装 FFI 调用
+```
+
+> **边界要点**: 错误处理的边界与**类型设计**、**? 限制**、**性能**、**并发**和**FFI**相关。
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+
+---
+
+## 五、常见陷阱
+>
+
+```text
+陷阱 1: 过度使用 unwrap
+  ❌ 在生产代码中大量使用 unwrap
+     let val = some_option.unwrap(); // 可能 panic！
+
+  ✅ 使用 ? 或 match 处理
+     let val = some_option.ok_or("missing value")?;
+
+陷阱 2: 忽略错误
+  ❌ 使用 let _ = 丢弃 Result
+     let _ = file.write_all(data); // 错误被忽略！
+
+  ✅ 显式处理或使用 ?
+     file.write_all(data)?;
+
+陷阱 3: 错误类型不匹配
+  ❌ 函数返回 Result<T, io::Error> 但使用 ? 返回其他错误
+     fn foo() -> Result<(), io::Error> {
+         "abc".parse::<i32>()?; // 编译错误！
+     }
+
+  ✅ 实现 From 或使用自定义错误类型
+     fn foo() -> Result<(), AppError> {
+         "abc".parse::<i32>()?; // 需要 From<ParseIntError>
+     }
+
+陷阱 4: 在闭包中误用 ?
+  ❌ 在返回 () 的闭包中使用 ?
+     items.iter().for_each(|x| {
+         process(x)?; // 编译错误！
+     });
+
+  ✅ 使用 try_for_each 或返回 Result
+     items.iter().try_for_each(|x| {
+         process(x)?;
+         Ok(())
+     })?;
+
+陷阱 5: 过度嵌套 Result
+  ❌ Result<Result<T, E>, E> 嵌套
+     let x = function_returning_result()?;
+     let y = x.another_result()?;
+
+  ✅ 使用 flatten 或提前处理
+     let x = function_returning_result().flatten()?;
+```
+
+> **陷阱总结**: 错误处理的陷阱主要与**unwrap**、**忽略错误**、**类型匹配**、**闭包（Closures）**和**嵌套**相关。
+> [来源: [Rust By Example — Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)]
+
+---
+
+## 六、来源与延伸阅读
+
+| 来源 | 可信度 | 说明 |
+|:---|:---:|:---|
+| [TRPL Ch. 9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | ✅ 一级 | 错误处理（Error Handling） |
+| [std::result](https://doc.rust-lang.org/std/result/index.html) | ✅ 一级 | Result API |
+| [std::option](https://doc.rust-lang.org/std/option/index.html) | ✅ 一级 | Option API |
+| [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//dependability.html) | ✅ 一级 | 错误指南 |
+| [thiserror](https://docs.rs/thiserror/latest/thiserror/) | ✅ 二级 | 错误派生 |
+| [anyhow](https://docs.rs/anyhow/latest/anyhow/) | ✅ 二级 | 便捷错误 |
+
+---
+
+## 相关概念
+
+- **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/01_type_system.md) · [Control Flow](../04_control_flow/01_control_flow.md)
+- **下层概念**: [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
+
+- [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) — 进阶错误处理
+- [Type System](../02_type_system/01_type_system.md) — 类型系统（Type System）
+- [Trait](../../02_intermediate/00_traits/01_traits.md) — Trait
+- [Logging](../../06_ecosystem/00_toolchain/02_logging_observability.md) — 日志
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+>
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/05_international_authority_index.md)
+
+**文档版本**: 1.0
+**最后更新**: 2026-05-22
+**状态**: ✅ 概念文件创建完成
+
+---
+
+## 权威来源索引
+
+>
+>
+>
+>
+
+---
+
+---
+
+---
+
+> **补充来源**
+
+## 十二、边界测试：错误处理的编译错误
+
+本节围绕「边界测试：错误处理的编译错误」展开，依次讨论边界测试：`unwrap()` 在 `Result::Err` 上 p…、边界测试：`?` 在返回 `()` 的函数中使用（编译错误）、边界测试：`Result` 与 `Option` 的混用（编译错误）、边界测试：`catch_unwind` 与 `UnwindSafe`（…等6个方面。
+
+### 12.1 边界测试：`unwrap()` 在 `Result::Err` 上 panic（运行时错误）
+
+```rust
+fn main() {
+    let result: Result<i32, &str> = Err("something went wrong");
+    // ⚠️ 运行时 panic: called `Result::unwrap()` on an `Err` value
+    // let val = result.unwrap(); // panic!
+    // 正确: 使用 match 或 if let 处理两种状态
+    match result {
+        Ok(v) => println!("{}", v),
+        Err(e) => println!("Error: {}", e), // ✅ 安全处理错误
+    }
+}
+```
+
+> **修正**: `unwrap()` 是"快速失败"策略，仅在确定值为 `Ok` 时使用。生产代码应使用 `match`、`if let` 或 `?` 运算符传播错误。`unwrap()` 在测试代码和原型开发中常见，但不应出现在健壮的生产代码中。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
+
+### 12.2 边界测试：`?` 在返回 `()` 的函数中使用（编译错误）
+
+```rust,compile_fail
+fn may_fail() -> Result<i32, String> {
+    Ok(42)
+}
+
+fn main() {
+    // ❌ 编译错误: `?` couldn't convert the error to `()`
+    // main 返回 ()，但 `?` 需要函数返回 Result 或 Option
+    let val = may_fail()?;
+    println!("{}", val);
+}
+
+// 正确: main 返回 Result
+fn main_fixed() -> Result<(), String> {
+    let val = may_fail()?; // ✅ main 返回 Result，? 可传播错误
+    println!("{}", val);
+    Ok(())
+}
+```
+
+> **修正**:
+> `?` 运算符只能在返回 `Result`、`Option` 或实现 `Try` trait 的类型的函数中使用。
+> 它会将错误值自动转换为函数返回类型（通过 `From` trait）。
+> 在 `main` 中如需使用 `?`，将 `main` 的返回类型改为 `Result<(), E>`。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
+
+### 10.3 边界测试：`Result` 与 `Option` 的混用（编译错误）
+
+```rust,compile_fail
+fn may_fail() -> Result<i32, String> {
+    Ok(42)
+}
+
+fn main() {
+    // ❌ 编译错误: `?` 运算符要求 `Result` 或 `Option`，不能混用
+    let val: Option<i32> = Some(may_fail()?);
+    // Result 的 `?` 返回 Err，但外层是 Option，类型不匹配
+}
+```
+
+> **修正**:
+> `?` 运算符在 `Result` 上下文中传播 `Err`，在 `Option` 上下文中传播 `None`，二者不能自动转换。
+> `Result<T, E>` → `Option<T>` 丢失错误信息，`Option<T>` → `Result<T, E>` 需要构造错误值。
+> 解决方案：
+>
+> 1) `may_fail().ok()?`（`Result` → `Option`）；
+> 2) `Some(may_fail()?).transpose()?`（复杂转换）；
+> 3) 统一错误类型（`Result<T, E>` 或 `Option<T>`）。
+> 这与 Go 的 `if err != nil`（总是显式处理）或 Swift 的 `try?`（自动转换抛出的错误为 `Optional`）不同——Rust 要求显式选择转换策略。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/result/)]
+
+### 10.4 边界测试：`catch_unwind` 与 `UnwindSafe`（编译错误）
+
+```rust,compile_fail
+use std::panic::catch_unwind;
+
+fn main() {
+    let mut data = vec![1, 2, 3];
+    // ❌ 编译错误: `&mut Vec<i32>` 不是 `UnwindSafe`
+    let result = catch_unwind(|| {
+        data.push(4);
+        panic!("boom");
+    });
+}
+```
+
+> **修正**:
+>
+> `catch_unwind` 捕获 panic 并恢复执行，但要求闭包（Closures）实现 `UnwindSafe`——保证 panic 不会破坏共享状态。
+> `&mut T` 不是 `UnwindSafe`，因为 panic 可能在 `push` 中途发生（`Vec` 内部指针已更新但长度未更新），导致 `Vec` 处于不一致状态。
+> 解决方案：
+>
+> 1) 使用 `AssertUnwindSafe` 包装（承诺手动保证安全）；
+> 2) 在闭包（Closures）内 `clone` 数据；
+> 3) 使用 `std::panic::resume_unwind`。`UnwindSafe` 不是内存安全（Memory Safety）边界（unsafe 代码仍需保证 panic safety），而是防止逻辑不一致的标记 trait。
+> 这与 C++ 的异常安全（basic guarantee、strong guarantee、no-throw guarantee）理念相同，但 Rust 通过类型系统（Type System）部分自动化。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/panic/trait.UnwindSafe.html)]
+
+### 10.5 边界测试：`Result` 的 `unwrap_unchecked` 与 release 模式（运行时 UB）
+
+```rust,ignore
+fn main() {
+    let res: Result<i32, &str> = Err("error");
+    // ❌ 运行时 UB: unwrap_unchecked 在 Err 上调用是未定义行为
+    let val = unsafe { res.unwrap_unchecked() };
+    println!("{}", val);
+}
+```
+
+> **修正**:
+>
+> `Result::unwrap_unchecked` 和 `Option::unwrap_unchecked` 是 `unsafe` 方法：调用者必须保证值是 `Ok`/`Some`，否则是 UB。
+> 与 `unwrap`（Err 时 panic）不同，`unwrap_unchecked` 无检查、无分支，是零成本的"信任但验证"操作。
+> 使用场景：
+>
+> 1) 热路径上已通过前置检查确保成功；
+> 2) 编译器无法推断但开发者确知的状态；
+> 3) 与 C 代码交互（C 函数返回错误码，但 Rust 侧已处理）。
+> 风险：错误使用导致任意行为（可能读取无效内存、可能崩溃、可能静默错误）。
+> 这与 C 的 `*(int*)NULL`（同样 UB，但编译器可能不警告）或 Swift 的 `try!`（运行时（Runtime） panic，非 UB）不同——Rust 的 `unwrap_unchecked` 是真正的"无安全网"操作。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/result/enum.Result.html)] ·
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+
+### 10.5 边界测试：生命周期参数的不匹配返回
+
+```rust,compile_fail
+fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
+    // ❌ 编译错误: 不能返回 y，因为 y 的生命周期 'b 可能短于 'a
+    y
+}
+
+fn main() {}
+```
+
+> **修正**:
+> **生命周期（Lifetimes）标注**：
+>
+> 1) `&'a str` 表示引用（Reference）至少存活 `'a`；
+> 2) 返回 `'a` 要求数据存活至少 `'a`；
+> 3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用（Reference）。
+>
+> **权威来源**:
+>
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html) ·
+> [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+
+## 实践
+
+> **相关资源**:
+>
+> - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../exercises) — 动手编程挑战
+> - [MVP 学习路径](../../00_meta/04_navigation/08_learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust 错误处理基础** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+| :--- | :--- | :--- | :--- |
+| Rust 错误处理基础 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| Rust 错误处理基础 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
+| Rust 错误处理基础 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> 错误传播安全 ⟸ ? 运算符自动转换 ⟸ Try trait
+> 错误类型精确 ⟸ thiserror/anyhow 分层 ⟸ 错误架构
+> **过渡**: 掌握 Rust 错误处理基础 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
+> **过渡**: 在实践中应用 Rust 错误处理基础 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+> **过渡**: Rust 错误处理基础 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "Rust 错误处理基础 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：Result 与 ? 运算符（理解层）、测验 2：Option 与 Result 的转换（应用层）、测验 3：unwrap vs expect（分析层）、测验 4：错误传播链（应用层）等5个方面。
+
+### 测验 1：Result 与 ? 运算符（理解层）
+
+以下函数能否通过 `?` 传播错误？
+
+```rust
+fn read_file(path: &str) -> Result<String, std::io::Error> {
+    let content = std::fs::read_to_string(path)?;
+    Ok(content)
+}
+```
+
+- A. 能，`?` 自动将 `std::io::Error` 转换为返回类型中的错误
+- B. 不能，`?` 只能用于返回 `Option` 的函数
+- C. 不能，`read_to_string` 返回的是 `Result`，但类型不匹配
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. 能**。
+
+`?` 运算符在 `Result<T, E>` 上工作时，若值为 `Err(e)`，则自动从当前函数返回 `Err(e)`（类型需匹配或可通过 `From` trait 转换）。
+
+此处 `read_to_string` 返回 `Result<String, std::io::Error>`，与函数返回类型中的错误类型一致，因此 `?` 可直接使用。
+</details>
+
+---
+
+### 测验 2：Option 与 Result 的转换（应用层）
+
+以下代码的输出是什么？
+
+```rust
+fn main() {
+    let s = "42";
+    let result: Result<i32, _> = s.parse();
+    match result {
+        Ok(n) => println!("number: {}", n),
+        Err(e) => println!("error: {}", e),
+    }
+}
+```
+
+- A. `number: 42`
+- B. `error: ...`
+- C. 编译错误
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. `number: 42`**。
+
+`"42".parse::<i32>()` 成功将字符串解析为整数 `42`，返回 `Ok(42)`。
+
+若输入为 `"abc"`，则返回 `Err(ParseIntError { ... })`，匹配 `Err` 分支。
+</details>
+
+---
+
+### 测验 3：unwrap vs expect（分析层）
+
+生产代码中，以下哪种写法更推荐？
+
+```rust,ignore
+// 选项 A
+let port = config.get("PORT").unwrap();
+
+// 选项 B
+let port = config.get("PORT").expect("PORT must be set in config");
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**选项 B 更推荐**。
+
+`unwrap()` 在失败时只输出通用 panic 信息，调试困难。`expect("msg")` 在失败时输出自定义消息 `"msg"`，更利于定位问题。
+
+**最佳实践**: 仅在以下情况使用 `unwrap`/`expect`：
+
+- 测试代码
+- 编译期可证明不会失败的场景（如 `"hello".parse::<String>()` 实际上不会失败，但 `"42".parse::<i32>()` 会）
+- 程序启动时的必需配置读取（失败后直接退出）
+
+其他场景优先使用 `match`、`if let` 或 `?`。
+</details>
+
+---
+
+### 测验 4：错误传播链（应用层）
+
+以下代码能否编译？
+
+```rust,compile_fail
+fn may_fail() -> Result<i32, String> {
+    let x: Result<i32, std::num::ParseIntError> = "abc".parse();
+    let y = x?;
+    Ok(y)
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误**。
+
+`?` 运算符要求错误类型可通过 `From` 自动转换。此处 `ParseIntError` 不能自动转换为 `String`，因此编译失败。
+
+修复方案 1（显式映射错误）：
+
+```rust,ignore
+let y = x.map_err(|e| e.to_string())?;
+```
+
+修复方案 2（使用统一的错误类型，如 `anyhow::Error`）：
+
+```rust
+fn may_fail() -> Result<i32, anyhow::Error> {
+    let y: i32 = "abc".parse()?;
+    Ok(y)
+}
+```
+
+</details>
+
+---
+
+### 测验 5：panic! 的适用场景（评价层）
+
+以下哪种场景**适合**使用 `panic!`？
+
+1. 用户输入了无效的文件路径
+2. 数组索引越界（已确认不可能发生）
+3. 网络请求超时
+4. 内部状态出现逻辑矛盾（不变量被破坏）
+
+<details>
+<summary>✅ 答案</summary>
+
+**适合使用 `panic!` 的场景：2 和 4**。
+
+| 场景 | 处理方式 | 原因 |
+|:---|:---|:---|
+| 1. 无效文件路径 | `Result` / `Option` | 用户输入错误是预期内事件 |
+| 2. 数组索引越界（不可能发生） | `panic!` / 直接使用索引 `[i]` | 若已通过逻辑证明不可能越界，`panic!` 作为最后的保险 |
+| 3. 网络超时 | `Result` | 外部依赖失败是预期内事件 |
+| 4. 内部状态矛盾 | `panic!` | 不变量被破坏意味着程序存在 bug，继续运行可能导致更严重的数据损坏 |
+
+> **原则**: `panic!` 用于**程序 bug**（不可恢复的内部错误），`Result` 用于**预期内的失败**（可恢复的外部错误）。
+</details>

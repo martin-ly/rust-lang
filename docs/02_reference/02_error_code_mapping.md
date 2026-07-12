@@ -7,7 +7,7 @@
 >
 > **层次定位**: L1-L3 基础-高级 / 编译器诊断参考
 > **前置依赖**: [docs 核心概念](../01_core/README.md) · [concept L1 所有权（Ownership）](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
-> **后置延伸**: [docs 性能调优](../05_guides/05_performance_tuning_guide.md) · [concept L3 Unsafe](../../concept/03_advanced/02_unsafe/03_unsafe.md)
+> **后置延伸**: [docs 性能调优](../05_guides/05_performance_tuning_guide.md) · [concept L3 Unsafe](../../concept/03_advanced/02_unsafe/01_unsafe.md)
 > **跨层映射**: docs→concept 诊断映射 | L1-L3 错误→概念
 > **定理链编号**: E0502 ↔ T-010 | E0597 ↔ T-011
 > **创建日期**: 2026-02-13
@@ -668,7 +668,7 @@ Rust 1.94 对错误诊断进行了多项改进：
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
@@ -692,7 +692,7 @@ Rust 1.94 对错误诊断进行了多项改进：
 > **[Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 > **[rustc --explain Documentation](https://doc.rust-lang.org/rustc/)**
 > **[来源: LLVM - Error Handling]**
-> **[ISO/IEC 14882 - C++ Standard Diagnostics](../../concept/00_meta/02_sources/international_authority_index.md)**
+> **[ISO/IEC 14882 - C++ Standard Diagnostics](../../concept/00_meta/02_sources/05_international_authority_index.md)**
 
 ---
 

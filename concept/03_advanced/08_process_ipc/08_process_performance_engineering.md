@@ -14,9 +14,9 @@
 # Rust 进程性能工程
 
 > **权威页地位**：本页为 Rust 进程级性能工程概念的 canonical 解释来源。
-> **L2 向下引用（Reference）**: 性能工程建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
+> **L2 向下引用（Reference）**: 性能工程建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/01_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
 >
-> 通用性能优化方法论请参见 [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/15_performance_optimization.md)。
+> 通用性能优化方法论请参见 [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/01_performance_optimization.md)。
 
 ## 1. 概念定义
 
@@ -168,7 +168,7 @@ flowchart TD
 - [异步（Async）进程管理](03_async_process_management.md)
 - [IPC 机制](05_ipc_mechanisms.md)
 - [进程监控与诊断](06_process_monitoring_and_diagnostics.md)
-- [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/15_performance_optimization.md)
+- [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/01_performance_optimization.md)
 
 ---
 
@@ -219,7 +219,7 @@ flowchart TD
 
 - **P0 官方**: [Rust `std::process` / `std::thread`](https://doc.rust-lang.org/std/process/) · [The Rustonomicon — 并发与 FFI](https://doc.rust-lang.org/nomicon/)
 - **P2 生态**: [The Rust Performance Book (nnethercote)](https://nnethercote.github.io/perf-book/) · [docs.rs](https://docs.rs/) · [crates.io](https://crates.io/)
-- **映射维护**: [`concept/00_meta/02_sources/authority_source_map.md`](../../00_meta/02_sources/authority_source_map.md)
+- **映射维护**: [`concept/00_meta/02_sources/01_authority_source_map.md`](../../00_meta/02_sources/01_authority_source_map.md)
 
 ---
 

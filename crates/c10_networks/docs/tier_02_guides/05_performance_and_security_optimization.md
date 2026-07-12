@@ -1,7 +1,7 @@
 > **EN**: Network Performance and Security Optimization
 > **Summary**: Practical techniques for optimizing Rust network services: buffering, batching, connection limits, zero-copy I/O, input validation, IP filtering, rate limiting, TLS, and basic DDoS/slow-attack mitigations.
 >
-> **权威来源**: [concept/06_ecosystem/04_web_and_networking/39_high_performance_network_service_architecture.md](../../../../concept/06_ecosystem/04_web_and_networking/39_high_performance_network_service_architecture.md) · [concept/06_ecosystem/12_networking/02_network_security.md](../../../../concept/06_ecosystem/12_networking/02_network_security.md)
+> **权威来源**: [concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md](../../../../concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md) · [concept/06_ecosystem/12_networking/02_network_security.md](../../../../concept/06_ecosystem/12_networking/02_network_security.md)
 
 # C10 Networks - Tier 2: 性能与安全优化
 
@@ -34,4 +34,4 @@
 
 ---
 
-> **权威来源**: [concept/06_ecosystem/04_web_and_networking/39_high_performance_network_service_architecture.md](../../../../concept/06_ecosystem/04_web_and_networking/39_high_performance_network_service_architecture.md) · [concept/06_ecosystem/12_networking/02_network_security.md](../../../../concept/06_ecosystem/12_networking/02_network_security.md)
+> **权威来源**: [concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md](../../../../concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md) · [concept/06_ecosystem/12_networking/02_network_security.md](../../../../concept/06_ecosystem/12_networking/02_network_security.md)

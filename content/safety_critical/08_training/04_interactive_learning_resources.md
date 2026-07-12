@@ -3,7 +3,7 @@
 **EN**: Interactive Learning Resources
 **Summary**: 交互式学习资源 Interactive Learning Resources.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/11_domain_applications/46_machine_learning_ecosystem.md](../../../concept/06_ecosystem/11_domain_applications/46_machine_learning_ecosystem.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md](../../../concept/06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

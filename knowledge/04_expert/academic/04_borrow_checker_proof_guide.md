@@ -2,7 +2,7 @@
 
 > **EN**: Borrow Checker Proof Guide
 > **Summary**: 借用检查器证明导读 Borrow Checker Proof Guide. (stub/archive redirect)
-> **权威来源**: 本主题深度解释见 [concept/04_formal/28_borrow_checking_decidability.md](../../../concept/04_formal/01_ownership_logic/28_borrow_checking_decidability.md)。
+> **权威来源**: 本主题深度解释见 [concept/04_formal/28_borrow_checking_decidability.md](../../../concept/04_formal/01_ownership_logic/04_borrow_checking_decidability.md)。
 > **历史版本存档**: [archive/knowledge/04_expert/academic/04_borrow_checker_proof_guide.md](../../../archive/knowledge/04_expert/academic/04_borrow_checker_proof_guide.md)
 >
 > **定位**: 本文件为精简知识卡片，保留核心规则/概念与常见陷阱。详细解释、形式化语义与代码示例请查看权威来源。
@@ -32,4 +32,4 @@
 
 ---
 
-**详细内容已迁移**：请点击上方 [concept/04_formal/28_borrow_checking_decidability.md](../../../concept/04_formal/01_ownership_logic/28_borrow_checking_decidability.md) 查看最新权威解释。
+**详细内容已迁移**：请点击上方 [concept/04_formal/28_borrow_checking_decidability.md](../../../concept/04_formal/01_ownership_logic/04_borrow_checking_decidability.md) 查看最新权威解释。

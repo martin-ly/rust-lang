@@ -1,7 +1,7 @@
 > **EN**: Pin and Unsafe in Async Reference
 > **Summary**: Reference-style crate document on Pin, Unpin and unsafe patterns used in async Rust. Authoritative coverage is in the Pin/Unpin concept authority page.
 >
-> **权威来源**: [concept/03_advanced/01_async/06_pin_unpin.md](../../../../concept/03_advanced/01_async/06_pin_unpin.md)
+> **权威来源**: [concept/03_advanced/01_async/08_pin_unpin.md](../../../../concept/03_advanced/01_async/08_pin_unpin.md)
 
 # Tier 3: Pin 与 Unsafe 参考
 
@@ -11,7 +11,7 @@
 
 | 主题 | 权威来源 |
 |------|----------|
-| Pin / Unpin 语义 | [concept/03_advanced/01_async/06_pin_unpin.md](../../../../concept/03_advanced/01_async/06_pin_unpin.md) |
-| 自引用类型与 Future | [concept/03_advanced/01_async/02_async.md](../../../../concept/03_advanced/01_async/02_async.md) |
-| Unsafe Rust 模式 | [concept/03_advanced/02_unsafe/03_unsafe.md](../../../../concept/03_advanced/02_unsafe/03_unsafe.md) |
-| Future / Executor 机制 | [concept/03_advanced/01_async/39_future_and_executor_mechanisms.md](../../../../concept/03_advanced/01_async/39_future_and_executor_mechanisms.md) |
+| Pin / Unpin 语义 | [concept/03_advanced/01_async/08_pin_unpin.md](../../../../concept/03_advanced/01_async/08_pin_unpin.md) |
+| 自引用类型与 Future | [concept/03_advanced/01_async/01_async.md](../../../../concept/03_advanced/01_async/01_async.md) |
+| Unsafe Rust 模式 | [concept/03_advanced/02_unsafe/01_unsafe.md](../../../../concept/03_advanced/02_unsafe/01_unsafe.md) |
+| Future / Executor 机制 | [concept/03_advanced/01_async/04_future_and_executor_mechanisms.md](../../../../concept/03_advanced/01_async/04_future_and_executor_mechanisms.md) |

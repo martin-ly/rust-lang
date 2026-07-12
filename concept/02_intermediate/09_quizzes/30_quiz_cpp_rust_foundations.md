@@ -13,13 +13,13 @@
 > **双维定位**: C×Eva
 > **前置概念**:
 >
-> [RTTI](../04_types_and_conversions/25_rtti_and_dynamic_typing.md) ·
-> [Preprocessor vs Macros](../06_macros_and_metaprogramming/26_c_preprocessor_vs_rust_macros.md) ·
-> [Exception Safety](../03_error_handling/27_exception_safety_rust_cpp.md) ·
-> [Construction](../00_traits/28_construction_and_initialization.md) ·
-> [Friend vs Privacy](../05_modules_and_visibility/29_friend_vs_module_privacy.md) ·
-> [Move Semantics](../../01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) ·
-> [Value vs Reference Semantics](../../01_foundation/03_values_and_references/19_value_vs_reference_semantics.md)
+> [RTTI](../04_types_and_conversions/05_rtti_and_dynamic_typing.md) ·
+> [Preprocessor vs Macros](../06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md) ·
+> [Exception Safety](../03_error_handling/04_exception_safety_rust_cpp.md) ·
+> [Construction](../00_traits/05_construction_and_initialization.md) ·
+> [Friend vs Privacy](../05_modules_and_visibility/02_friend_vs_module_privacy.md) ·
+> [Move Semantics](../../01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md) ·
+> [Value vs Reference Semantics](../../01_foundation/03_values_and_references/02_value_vs_reference_semantics.md)
 >
 > **后置概念**: N/A
 > **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)

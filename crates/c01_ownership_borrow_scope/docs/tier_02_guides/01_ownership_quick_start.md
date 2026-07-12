@@ -15,7 +15,7 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | 所有权三大规则 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
-| Move 语义 | [concept/01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/23_move_semantics.md) |
+| Move 语义 | [concept/01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md) |
 | Copy / Clone 语义 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [concept/02_intermediate/00_traits/01_traits.md](../../../../concept/02_intermediate/00_traits/01_traits.md) |
 | 函数与所有权 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
 | 借用与引用 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |

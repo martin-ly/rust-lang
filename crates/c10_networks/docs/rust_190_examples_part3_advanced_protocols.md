@@ -21,7 +21,7 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | 高级网络协议概览与选型 | [`concept/06_ecosystem/12_networking/01_advanced_network_protocols.md`](../../../concept/06_ecosystem/12_networking/01_advanced_network_protocols.md) |
-| 异步编程 | [`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md) |
+| 异步编程 | [`concept/03_advanced/01_async/01_async.md`](../../../concept/03_advanced/01_async/01_async.md) |
 | 并发模型 | [`concept/03_advanced/00_concurrency/01_concurrency.md`](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
 
 ## 备注

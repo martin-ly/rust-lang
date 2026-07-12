@@ -3,7 +3,7 @@
 
 # Lifetimes 高级主题 — Crate Docs Stub
 
-> **权威来源**: [Lifetimes 高级主题](../../../../concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md)
+> **权威来源**: [Lifetimes 高级主题](../../../../concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md)
 
 本文件原为对应 crate 的通用概念教程/参考。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
 通用 Rust 概念解释已在 `concept/` 中维护为单一权威来源；此处仅保留索引与 canonical 链接。

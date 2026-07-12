@@ -17,6 +17,6 @@
 | 引用规则（`&T` / `&mut T`） | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
 | 借用检查器 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
 | 生命周期 | [concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
-| 引用与泛型 | [concept/02_intermediate/01_generics/02_generics.md](../../../../concept/02_intermediate/01_generics/02_generics.md) |
-| 智能指针与引用 | [concept/02_intermediate/02_memory_management/12_smart_pointers.md](../../../../concept/02_intermediate/02_memory_management/12_smart_pointers.md) |
-| 引用模式匹配 | [concept/01_foundation/04_control_flow/40_patterns.md](../../../../concept/01_foundation/04_control_flow/40_patterns.md) |
+| 引用与泛型 | [concept/02_intermediate/01_generics/01_generics.md](../../../../concept/02_intermediate/01_generics/01_generics.md) |
+| 智能指针与引用 | [concept/02_intermediate/02_memory_management/04_smart_pointers.md](../../../../concept/02_intermediate/02_memory_management/04_smart_pointers.md) |
+| 引用模式匹配 | [concept/01_foundation/04_control_flow/02_patterns.md](../../../../concept/01_foundation/04_control_flow/02_patterns.md) |

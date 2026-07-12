@@ -23,8 +23,8 @@
 | 借用与引用 | [`concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
 | 所有权 | [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
 | 生命周期 | [`concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
-| 内部可变性 | [`concept/02_intermediate/02_memory_management/03_memory_management.md`](../../concept/02_intermediate/02_memory_management/03_memory_management.md) |
-| 形式化视角 | [`concept/04_formal/01_ownership_logic/03_ownership_formal.md`](../../concept/04_formal/01_ownership_logic/03_ownership_formal.md) |
+| 内部可变性 | [`concept/02_intermediate/02_memory_management/01_memory_management.md`](../../concept/02_intermediate/02_memory_management/01_memory_management.md) |
+| 形式化视角 | [`concept/04_formal/01_ownership_logic/02_ownership_formal.md`](../../concept/04_formal/01_ownership_logic/02_ownership_formal.md) |
 
 ---
 

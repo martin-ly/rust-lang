@@ -1,7 +1,7 @@
 > **EN**: Tier 2 Async Guides Index
 > **Summary**: Tier 2 index for async practice guides in the c06_async crate. General concept explanations are maintained in the canonical concept authority page.
 >
-> **权威来源**: [concept/03_advanced/01_async/02_async.md](../../../../concept/03_advanced/01_async/02_async.md)
+> **权威来源**: [concept/03_advanced/01_async/01_async.md](../../../../concept/03_advanced/01_async/01_async.md)
 
 ## 主题速览
 

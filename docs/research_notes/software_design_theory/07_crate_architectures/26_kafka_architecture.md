@@ -2,7 +2,7 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [流处理生态](../../../../concept/06_ecosystem/06_data_and_distributed/36_stream_processing_ecosystem.md)
+> - [流处理生态](../../../../concept/06_ecosystem/06_data_and_distributed/03_stream_processing_ecosystem.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **⚠️ 历史文档提示**：
@@ -329,8 +329,8 @@ match producer.send(record, timeout).await {
 
 - [Tokio 异步运行时架构](06_tokio_architecture.md)
 - [Tracing 可观测性架构](18_tracing_architecture.md)
-- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
-- [分布式模式](../../../../concept/03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md)
+- [异步编程模型](../../../../concept/03_advanced/01_async/01_async.md)
+- [分布式模式](../../../../concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
 - [Redis / redis-rs 架构](22_redis_architecture.md) — 缓存与消息队列对比
 
 ---

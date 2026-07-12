@@ -13,8 +13,8 @@
 >
 > **主要来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Control Flow](../../01_foundation/04_control_flow/07_control_flow.md)
-> **后置概念**: [Rust 1.92 稳定特性](rust_1_92_stabilized.md) · [Rust 版本跟踪](05_rust_version_tracking.md)
+> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Control Flow](../../01_foundation/04_control_flow/01_control_flow.md)
+> **后置概念**: [Rust 1.92 稳定特性](rust_1_92_stabilized.md) · [Rust 版本跟踪](01_rust_version_tracking.md)
 
 ---
 
@@ -2109,8 +2109,8 @@ Rust 1.91 在控制流和函数系统方面带来了显著的改进：
 Rust 1.91/1.92 引入的语言特性需要工具链与生态库协同：
 
 - **Toolchain**: 升级 `rustc`/`cargo` 到对应版本以启用新 lint 与诊断；详见 [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)。
-- **Testing**: 新增行为可通过 `cargo test` 与 [Testing](../../06_ecosystem/09_testing_and_quality/16_testing.md) 验证。
-- **Cargo**: 版本特性常与 [Cargo 工作流](../../06_ecosystem/01_cargo/80_cargo_getting_started.md) 联动（例如 edition、lint 配置）。
+- **Testing**: 新增行为可通过 `cargo test` 与 [Testing](../../06_ecosystem/09_testing_and_quality/03_testing.md) 验证。
+- **Cargo**: 版本特性常与 [Cargo 工作流](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) 联动（例如 edition、lint 配置）。
 
 ---
 

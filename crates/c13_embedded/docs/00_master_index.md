@@ -4,7 +4,7 @@
 # c13 嵌入式系统 - 主索引
 
 > **权威来源**: `no_std`、裸机编程、内存映射寄存器、硬件抽象层（PAC/HAL/BSP）、实时系统、Embassy 等完整解释见
-> [`concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md`](../../../concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md)。
+> [`concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md`](../../../concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md)。
 
 本文件原为 `c13_embedded` crate 的通用嵌入式系统主索引。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
 通用 Rust 概念解释已迁移至 `concept/06_ecosystem/05_systems_and_embedded/`，此处仅保留索引与

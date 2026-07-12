@@ -7,7 +7,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: S×Eva — 评价跨平台进程管理可移植性
-> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Conditional Compilation](../03_proc_macros/28_conditional_compilation.md) · [Module System](../../02_intermediate/05_modules_and_visibility/10_module_system.md)
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Conditional Compilation](../03_proc_macros/11_conditional_compilation.md) · [Module System](../../02_intermediate/05_modules_and_visibility/01_module_system.md)
 > **后置概念**: [IPC Mechanisms](05_ipc_mechanisms.md) · [Process Security](07_process_security_and_sandboxing.md) · [Modern Process Libraries](10_modern_process_libraries.md)
 > **定理链**: Platform Differences ⟹ cfg Abstraction ⟹ Portable API
 
@@ -198,7 +198,7 @@ fn config_path() -> PathBuf {
 - [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [高级进程管理](02_advanced_process_management.md)
 - [异步（Async）进程管理](03_async_process_management.md)
-- [条件编译](../03_proc_macros/28_conditional_compilation.md)
+- [条件编译](../03_proc_macros/11_conditional_compilation.md)
 
 ---
 

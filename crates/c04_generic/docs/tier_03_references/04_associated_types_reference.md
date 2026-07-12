@@ -3,7 +3,7 @@
 > **EN**: Associated Types Reference (Redirect)
 > **Summary**: Redirect to the canonical Advanced Traits concept page.
 >
-> **权威来源**: [concept/02_intermediate/00_traits/19_advanced_traits.md](concept/02_intermediate/00_traits/19_advanced_traits.md)
+> **权威来源**: [concept/02_intermediate/00_traits/04_advanced_traits.md](concept/02_intermediate/00_traits/04_advanced_traits.md)
 
 ## 主题速览
 

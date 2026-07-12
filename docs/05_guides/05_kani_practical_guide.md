@@ -1,7 +1,7 @@
 # Kani 实战指南 —— Rust 的 bounded model checker {#kani-实战指南-rust-的-bounded-model-checker}
 
 > **权威来源**: 本文件为指南/参考，核心概念解释请见：
-> [`concept/04_formal/04_model_checking/32_kani.md`](./concept/04_formal/04_model_checking/32_kani.md)
+> [`concept/04_formal/04_model_checking/09_kani.md`](./concept/04_formal/04_model_checking/32_kani.md)
 > **EN**: Kani Practical Guide
 > **Summary**: Kani 实战指南 —— Rust 的 bounded model checker Kani Practical Guide. (stub/archive redirect)
 >
@@ -819,8 +819,8 @@ jobs:
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Verus 实战指南 —— 互补的演绎验证器](05_verus_practical_guide.md)
-- [形式化操作语义与 Rust 的形式化模型](../../concept/04_formal/03_operational_semantics/17_operational_semantics.md)
-- [所有权（Ownership）的形式化定义](../../concept/04_formal/01_ownership_logic/03_ownership_formal.md)
+- [形式化操作语义与 Rust 的形式化模型](../../concept/04_formal/03_operational_semantics/03_operational_semantics.md)
+- [所有权（Ownership）的形式化定义](../../concept/04_formal/01_ownership_logic/02_ownership_formal.md)
 
 ## 10. 来源与延伸阅读 {#10-来源与延伸阅读}
 >

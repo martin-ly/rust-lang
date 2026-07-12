@@ -49,7 +49,7 @@ Tokio 是 Rust 生态中最广泛使用的异步运行时，为 `std::future::Fu
 
 Tokio 遵循“运行时与库解耦”的设计：业务代码写 `async fn`，库代码写 `Future`，最终由 Tokio runtime 驱动执行。
 
-> **权威来源**: Future / async / await / Pin / Waker 语义详见 [`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md)。
+> **权威来源**: Future / async / await / Pin / Waker 语义详见 [`concept/03_advanced/01_async/01_async.md`](../../../concept/03_advanced/01_async/01_async.md)。
 
 ---
 
@@ -346,6 +346,6 @@ Axum 直接依赖 Tokio runtime。在 Axum 应用中，通常使用 `#[tokio::ma
 - [Tokio 官方文档](https://tokio.rs/)
 - [Tokio 教程](https://tokio.rs/tokio/tutorial)
 - [Async/await 心智模型](https://rust-lang.github.io/async-book/)
-- 异步基础：[`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md)
+- 异步基础：[`concept/03_advanced/01_async/01_async.md`](../../../concept/03_advanced/01_async/01_async.md)
 - 并发原语：[`concept/03_advanced/00_concurrency/01_concurrency.md`](../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 - Axum 深度解析：[`01_axum_deep_dive.md`](./01_axum_deep_dive.md)

@@ -59,16 +59,16 @@ CURATED_MUTEX: list[tuple[str, str, str]] = [
      "01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md:942 "
      "“Rust 的所有权（Ownership）转移（move）与借用是互斥的。若变量已被借用…在借用释放前不能转移其所有权。”"),
     ("ex:PinAndUnpin", "ex:MoveSemantics",
-     "03_advanced/01_async/06_pin_unpin.md:735 “Pin 通过禁止移动（对 !Unpin 类型）来解决这个问题”；"
+     "03_advanced/01_async/08_pin_unpin.md:735 “Pin 通过禁止移动（对 !Unpin 类型）来解决这个问题”；"
      ":648 “T: !Unpin — Pin 禁止 get_mut()（数据不可移动）”"),
     ("ex:Unions", "ex:MemoryManagement",
-     "02_intermediate/04_types_and_conversions/35_unions.md:105 “Drop: 默认不 drop 字段”；"
+     "02_intermediate/04_types_and_conversions/06_unions.md:105 “Drop: 默认不 drop 字段”；"
      ":250 “联合体默认不会自动 drop 字段”——与 RAII 自动析构纪律互斥"),
     ("ex:PanicAndAbort", "ex:ErrorHandling",
-     "01_foundation/08_error_handling/13_panic_and_abort.md:5 “不可恢复错误的处理机制”；"
+     "01_foundation/08_error_handling/03_panic_and_abort.md:5 “不可恢复错误的处理机制”；"
      ":91 “异常: 可恢复的错误条件”——同一错误现场不可恢复(panic/abort)与可恢复(Result 传播)策略二选一"),
     ("ex:TypeLevelProgramming", "ex:RTTIAndDynamicTypeIdentification",
-     "02_intermediate/04_types_and_conversions/25_rtti_and_dynamic_typing.md:203 "
+     "02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md:203 "
      "“RTTI 是静态类型系统（Type System）向运行时的有限‘泄漏’”——编译期类型计算与运行期类型识别在同一类型问题上互斥"),
 ]
 
@@ -79,45 +79,45 @@ CURATED_CEX: list[tuple[str, str, str]] = [
      "“&mut vs &: 为什么不能同时有？… AXM: 读写互斥 … UnsafeCell 突破”；:461 “别名与可变互斥公理”"
      "——内部可变性（Cell/RefCell/UnsafeCell）是借用规则的受控反例"),
     ("ex:SafeAndEffectiveUnsafeRust", "ex:Lifetimes",
-     "03_advanced/02_unsafe/03_unsafe.md:1125 “8.3 反例：悬垂裸指针（UB）”"
+     "03_advanced/02_unsafe/01_unsafe.md:1125 “8.3 反例：悬垂裸指针（UB）”"
      "——裸指针悬垂是对“引用有效性总由生命周期保证”的反例"),
     ("ex:SafeAndEffectiveUnsafeRust", "ex:TypeConversions",
-     "03_advanced/02_unsafe/03_unsafe.md:1140 “8.4 反例：transmute 滥用（UB）”"
+     "03_advanced/02_unsafe/01_unsafe.md:1140 “8.4 反例：transmute 滥用（UB）”"
      "——transmute 滥用是对安全类型转换纪律的反例"),
     ("ex:SafeAndEffectiveUnsafeRust", "ex:MemoryManagement",
-     "03_advanced/02_unsafe/03_unsafe.md:1422 “❌ 反例: Use-after-free（Miri 会报错）”"
+     "03_advanced/02_unsafe/01_unsafe.md:1422 “❌ 反例: Use-after-free（Miri 会报错）”"
      "——UAF 是对自动内存管理保证的反例"),
     ("ex:LockingPrimitives", "ex:Concurrency",
-     "03_advanced/00_concurrency/16_lock_free.md:409 “命题: 无锁总是优于锁” → "
+     "03_advanced/00_concurrency/06_lock_free.md:409 “命题: 无锁总是优于锁” → "
      ":422 “无锁只在高竞争场景显著优于锁”——对朴素并发性能信念的反例"),
 ]
 
 # R3 精化：A 是 B 的进阶/深入/模式/机制展开（refines 传递）
 CURATED_REFINES: list[tuple[str, str, str]] = [
     ("ex:LifetimesAdvanced", "ex:Lifetimes",
-     "01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md 为 03_lifetimes.md 的进阶展开（标题“生命周期进阶”）"),
+     "01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md 为 03_lifetimes.md 的进阶展开（标题“生命周期进阶”）"),
     ("ex:Traits_00traits", "ex:Traits",
-     "02_intermediate/00_traits/19_advanced_traits.md 为 01_traits.md 的高级主题精化（标题“高级 Trait 主题”）"),
+     "02_intermediate/00_traits/04_advanced_traits.md 为 01_traits.md 的高级主题精化（标题“高级 Trait 主题”）"),
     ("ex:AsyncAdvanced", "ex:AsyncProgramming",
-     "03_advanced/01_async/25_async_advanced.md 为 02_async.md 的进阶展开（标题“Async 进阶”）"),
+     "03_advanced/01_async/02_async_advanced.md 为 02_async.md 的进阶展开（标题“Async 进阶”）"),
     ("ex:ErrorHandling_03errorhandl_1", "ex:ErrorHandling_03errorhandl",
-     "02_intermediate/03_error_handling/16_error_handling_deep_dive.md 为 04_error_handling.md 的深入精化（标题“错误处理深入”）"),
+     "02_intermediate/03_error_handling/02_error_handling_deep_dive.md 为 04_error_handling.md 的深入精化（标题“错误处理深入”）"),
     ("ex:UnsafeRust", "ex:SafeAndEffectiveUnsafeRust",
-     "03_advanced/02_unsafe/12_unsafe_rust_patterns.md 将 03_unsafe.md 精化为可复用 unsafe 模式"),
+     "03_advanced/02_unsafe/04_unsafe_rust_patterns.md 将 03_unsafe.md 精化为可复用 unsafe 模式"),
     ("ex:Concurrency_00concurrenc", "ex:Concurrency",
-     "03_advanced/00_concurrency/10_concurrency_patterns.md 将 01_concurrency.md 精化为并发模式谱系"),
+     "03_advanced/00_concurrency/03_concurrency_patterns.md 将 01_concurrency.md 精化为并发模式谱系"),
     ("ex:CowAndBorrowed", "ex:Borrowing",
-     "02_intermediate/02_memory_management/11_cow_and_borrowed.md: Cow 将借用语义精化为写时克隆（Clone-on-Write）"),
+     "02_intermediate/02_memory_management/03_cow_and_borrowed.md: Cow 将借用语义精化为写时克隆（Clone-on-Write）"),
     ("ex:Borrowing_02unsafe", "ex:Borrowing",
-     "03_advanced/02_unsafe/08_nll_and_polonius.md: NLL/Polonius 将借用检查从词法作用域精化到使用点/流敏感"),
+     "03_advanced/02_unsafe/03_nll_and_polonius.md: NLL/Polonius 将借用检查从词法作用域精化到使用点/流敏感"),
     ("ex:FutureAndExecutorMechanisms", "ex:AsyncProgramming",
-     "03_advanced/01_async/39_future_and_executor_mechanisms.md 精化 async 的 Future/执行器机制"),
+     "03_advanced/01_async/04_future_and_executor_mechanisms.md 精化 async 的 Future/执行器机制"),
     ("ex:SerdePatterns", "ex:Traits",
-     "02_intermediate/00_traits/09_serde_patterns.md 将 trait 精化为 serde 序列化模式应用"),
+     "02_intermediate/00_traits/03_serde_patterns.md 将 trait 精化为 serde 序列化模式应用"),
     ("ex:MemoryModel", "ex:SafeAndEffectiveUnsafeRust",
-     "03_advanced/02_unsafe/29_memory_model.md 精化 unsafe 语义的内存模型基础"),
+     "03_advanced/02_unsafe/06_memory_model.md 精化 unsafe 语义的内存模型基础"),
     ("ex:AsyncClosures", "ex:AsyncProgramming",
-     "03_advanced/01_async/24_async_closures.md 将 async 精化到闭包捕获场景"),
+     "03_advanced/01_async/07_async_closures.md 将 async 精化到闭包捕获场景"),
 ]
 
 PRED_MUTEX = "ex:mutexWith"

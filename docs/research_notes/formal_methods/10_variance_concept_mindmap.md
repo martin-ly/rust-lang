@@ -7,7 +7,7 @@
 # 型变概念族谱 {#型变概念族谱}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为型变概念思维导图（mindmap，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L4 子类型与型变`](../../../concept/04_formal/00_type_theory/06_subtype_variance.md)
+> **权威来源（Canonical）**: 本文件为型变概念思维导图（mindmap，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L4 子类型与型变`](../../../concept/04_formal/00_type_theory/02_subtype_variance.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（型变概念思维导图（mindmap 表征，非概念正文）），不重复 concept/ 中的概念定义、规则与定理推导。
 
@@ -566,7 +566,7 @@ let local = String::from("local");
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

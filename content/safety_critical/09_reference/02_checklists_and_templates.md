@@ -3,7 +3,7 @@
 **EN**: Checklists And Templates
 **Summary**: Rust安全关键系统 - 检查清单与模板 Checklists And Templates.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/00_meta/02_sources/sources.md](../../../concept/00_meta/02_sources/sources.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/00_meta/02_sources/03_sources.md](../../../concept/00_meta/02_sources/03_sources.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

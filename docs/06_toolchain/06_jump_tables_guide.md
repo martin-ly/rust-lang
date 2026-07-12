@@ -1,7 +1,7 @@
 # `-C jump-tables=bool` 编译器优化指南 {#c-jump-tablesbool-编译器优化指南}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为 `-C jump-tables=bool` 编译器代码生成选项的专题指南（`concept/` 无本专题独立权威页，保留为 docs 专题页）；LLVM/代码生成相关背景见 [`concept/06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md`](../../concept/06_ecosystem/00_toolchain/67_llvm_backend_and_codegen.md)。
+> **权威来源（Canonical）**: 本文件为 `-C jump-tables=bool` 编译器代码生成选项的专题指南（`concept/` 无本专题独立权威页，保留为 docs 专题页）；LLVM/代码生成相关背景见 [`concept/06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md`](../../concept/06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md)。
 >
 > 根据 AGENTS.md §2/§3.4：本专题在 `concept/` 无对应权威页，故保留全文（工作原理、Spectre 缓解、基准测试、配置模式等独特内容），仅补充一条相关 concept 链接，不删除正文。
 
@@ -237,5 +237,5 @@ const _: () = {
 ### 相关文档 {#相关文档}
 
 - [Rust 1.93 特性速查表](../02_reference/quick_reference/02_rust_190_to_193_features_cheatsheet.md)
-- [Rust 版本跟踪](../../concept/07_future/00_version_tracking/05_rust_version_tracking.md)
+- [Rust 版本跟踪](../../concept/07_future/00_version_tracking/01_rust_version_tracking.md)
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)

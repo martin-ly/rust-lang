@@ -11,8 +11,8 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **S+P** — Structure + Procedure
-> **前置概念**: [Rust 网络编程](../../03_advanced/06_low_level_patterns/18_network_programming.md) · [Async/Await](../../03_advanced/01_async/02_async.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
-> **后置概念**: [高级网络协议](01_advanced_network_protocols.md) · [分布式系统](../04_web_and_networking/18_distributed_systems.md)
+> **前置概念**: [Rust 网络编程](../../03_advanced/06_low_level_patterns/04_network_programming.md) · [Async/Await](../../03_advanced/01_async/01_async.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
+> **后置概念**: [高级网络协议](01_advanced_network_protocols.md) · [分布式系统](../04_web_and_networking/01_distributed_systems.md)
 >
 > **来源**: [Tokio](https://tokio.rs/) · [bytes crate](https://docs.rs/bytes/) · [byteorder crate](https://docs.rs/byteorder/)
 
@@ -171,13 +171,13 @@ fn encode_frame_zero_copy(frame: &Frame) -> Bytes {
 - 使用连接 keep-alive 和心跳检测死连接。
 - 记录协议级指标（消息数、延迟、错误率）。
 
-> **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Go](../../05_comparative/01_systems_languages/02_rust_vs_go.md)
+> **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md)
 
 ---
 
 ## 相关概念
 
-- [Rust 网络编程](../../03_advanced/06_low_level_patterns/18_network_programming.md)
+- [Rust 网络编程](../../03_advanced/06_low_level_patterns/04_network_programming.md)
 - [网络安全](02_network_security.md)
 - [高级网络协议](01_advanced_network_protocols.md)
 

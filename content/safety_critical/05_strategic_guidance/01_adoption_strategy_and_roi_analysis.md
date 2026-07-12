@@ -3,7 +3,7 @@
 **EN**: Adoption Strategy And Roi Analysis
 **Summary**: Rust安全关键系统采用策略与ROI分析 Adoption Strategy And Roi Analysis.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/05_comparative/02_managed_languages/07_rust_vs_python.md](../../../concept/05_comparative/02_managed_languages/07_rust_vs_python.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/05_comparative/02_managed_languages/02_rust_vs_python.md](../../../concept/05_comparative/02_managed_languages/02_rust_vs_python.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

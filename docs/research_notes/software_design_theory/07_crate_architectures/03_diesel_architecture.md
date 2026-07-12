@@ -2,8 +2,8 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [数据库访问](../../../../concept/06_ecosystem/06_data_and_distributed/23_database_access.md)
-> - [数据库系统](../../../../concept/06_ecosystem/06_data_and_distributed/37_database_systems.md)
+> - [数据库访问](../../../../concept/06_ecosystem/06_data_and_distributed/02_database_access.md)
+> - [数据库系统](../../../../concept/06_ecosystem/06_data_and_distributed/04_database_systems.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 
@@ -1051,7 +1051,7 @@ let row: (i64, String) = sqlx::query_as("SELECT id, name FROM users WHERE id = $
 >
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 ---
 

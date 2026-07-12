@@ -11,7 +11,7 @@
 > [Rustonomicon — Data Layout](https://doc.rust-lang.org/nomicon/data.html),
 > [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference 类型布局来源标注、Rustonomicon 数据布局引用 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference 类型布局来源标注、Rustonomicon 数据布局引用 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
@@ -33,13 +33,13 @@
 ---
 
 ## 二、内存对齐（核心） {#二内存对齐核心}
-> **权威来源**: [Rust 类型系统与内存布局](../../concept/01_foundation/02_type_system/04_type_system.md)
+> **权威来源**: [Rust 类型系统与内存布局](../../concept/01_foundation/02_type_system/01_type_system.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## 三、格式化对齐 {#三格式化对齐}
-> **权威来源**: [Rust 格式化与 Display](../../concept/01_foundation/06_strings_and_text/46_formatting_and_display.md)
+> **权威来源**: [Rust 格式化与 Display](../../concept/01_foundation/06_strings_and_text/03_formatting_and_display.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## 四、unsafe 与对齐 {#四unsafe-与对齐}
-> **权威来源**: [Rust Unsafe 与原始指针](../../concept/03_advanced/02_unsafe/03_unsafe.md)
+> **权威来源**: [Rust Unsafe 与原始指针](../../concept/03_advanced/02_unsafe/01_unsafe.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## 五、缓存行对齐与并发 {#五缓存行对齐与并发}
 > **权威来源**: [Rust 并发与性能](../../concept/03_advanced/00_concurrency/01_concurrency.md)

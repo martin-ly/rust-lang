@@ -1,7 +1,7 @@
 > **EN**: Async Ecosystem Reference Stub
 > **Summary**: Stub for the async ecosystem reference previously maintained in this crate. Ecosystem authority content is in the core crates concept page.
 >
-> **权威来源**: [concept/06_ecosystem/02_core_crates/03_core_crates.md](../../../../concept/06_ecosystem/02_core_crates/03_core_crates.md)
+> **权威来源**: [concept/06_ecosystem/02_core_crates/01_core_crates.md](../../../../concept/06_ecosystem/02_core_crates/01_core_crates.md)
 
 ## 主题速览
 

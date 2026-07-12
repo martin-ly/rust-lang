@@ -3,7 +3,7 @@
 > **EN**: Engineering Practice and Production-Grade Patterns
 > **Summary**: Observability, resilience, performance optimization, security, and configuration management patterns.
 
-> **权威来源**: [concept/06_ecosystem/03_design_patterns/82_engineering_and_production_patterns.md](../06_ecosystem/03_design_patterns/82_engineering_and_production_patterns.md)
+> **权威来源**: [concept/06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md](../06_ecosystem/03_design_patterns/82_engineering_and_production_patterns.md)
 
 本文件为 crate 文档重定向 stub。原内容中的通用 Rust 概念已迁移至上述权威来源页面；以下仅保留主题索引。
 

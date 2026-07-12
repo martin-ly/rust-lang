@@ -3,7 +3,7 @@
 **EN**: Performance Optimization Guide
 **Summary**: 性能优化指南 Performance Optimization Guide.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/10_performance/15_performance_optimization.md](../../../concept/06_ecosystem/10_performance/15_performance_optimization.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/10_performance/01_performance_optimization.md](../../../concept/06_ecosystem/10_performance/01_performance_optimization.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

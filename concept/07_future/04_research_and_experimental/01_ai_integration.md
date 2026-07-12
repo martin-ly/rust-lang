@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **P** — Procedure（策略决策）
 > **双维定位**: P×Cre — 设计 AI × Rust 集成策略
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
-> [Type System](../../01_foundation/02_type_system/04_type_system.md) ·
+> [Type System](../../01_foundation/02_type_system/01_type_system.md) ·
 > [Traits](../../02_intermediate/00_traits/01_traits.md) ·
 > [Formal Methods](02_formal_methods.md)
 > **主要来源**: [AI Coding Trends 2025-2026] · [Rust AI Ecosystem] · [Verus](https://verus-lang.github.io/verus/guide/) / Creusot + LLM · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -28,7 +28,7 @@
 - v1.1 (2026-05-12): Wave 3 扩展——补充定义、工具链、RL研究、确定性容器、生态图、学术论文
 - v1.2 (2026-05-14): 深度扩展 §6 RL on Compiler Errors——补充 Getafix/Graph2Diff/DeepDelta/Break-It-Fix-It/DeepFix/Prophet 代表性研究、状态空间与奖励函数形式化定义、RL vs LLM 对比矩阵、Rust 编译器结构化诊断优势分析
 - v1.3 (2026-05-14): 补充 Kiro 深度分析（定位、Rust 类型系统（Type System）结合、与 Copilot 对比）、新增 Cursor / Zed AI 独立章节、新增 §5.7 工具选择矩阵（Copilot / Codeium / Kiro / Cursor / Zed AI）
-- v1.4 (2026-05-22): 网络权威内容对齐 Batch 9：补充与 Rust 在 AI 中角色 (21_rust_in_ai.md) 的交叉引用（Reference）、添加 LLM C→Rust 迁移研究笔记链接
+- v1.4 (2026-05-22): 网络权威内容对齐 Batch 9：补充与 Rust 在 AI 中角色 (05_rust_in_ai.md) 的交叉引用（Reference）、添加 LLM C→Rust 迁移研究笔记链接
 
 ---
 
@@ -612,9 +612,9 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 
 | AI 需求 | 驱动的下层变化 | 关联文件 | 约束类型 |
 |:---|:---|:---|:---|
-| AI 生成代码安全 | L3 Unsafe 契约需机器可读 | `03_advanced/02_unsafe/03_unsafe.md` | 反向约束 |
-| AI 类型推断（Type Inference）辅助 | L1 类型系统（Type System）需更易推断 | `01_foundation/02_type_system/04_type_system.md` | 反向约束 |
-| AI 错误修复 | L2 错误处理（Error Handling）模式需标准化 | `02_intermediate/03_error_handling/04_error_handling.md` | 反向约束 |
+| AI 生成代码安全 | L3 Unsafe 契约需机器可读 | `03_advanced/02_unsafe/01_unsafe.md` | 反向约束 |
+| AI 类型推断（Type Inference）辅助 | L1 类型系统（Type System）需更易推断 | `01_foundation/02_type_system/01_type_system.md` | 反向约束 |
+| AI 错误修复 | L2 错误处理（Error Handling）模式需标准化 | `02_intermediate/03_error_handling/01_error_handling.md` | 反向约束 |
 | 确定性容器 | L1 所有权（Ownership）需扩展确定性语义 | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | 潜在扩展 |
 
 ---

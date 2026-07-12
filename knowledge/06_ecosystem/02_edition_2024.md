@@ -3,7 +3,7 @@
 > **EN**: Edition 2024
 > **Summary**: Rust Edition 2024 完整指南 Edition 2024.
 > **注意**: 本主题内容已整合到 `concept/07_future/19_rust_edition_preview.md`。
-> 请以 [concept/07_future/19_rust_edition_preview.md](../../concept/07_future/01_edition_roadmap/19_rust_edition_preview.md) 为权威来源。
+> 请以 [concept/07_future/19_rust_edition_preview.md](../../concept/07_future/01_edition_roadmap/01_rust_edition_preview.md) 为权威来源。
 
 ---
 

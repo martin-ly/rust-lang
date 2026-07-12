@@ -576,7 +576,7 @@ fn bubble_sort(arr: &mut [i32]) {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.3
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
@@ -604,8 +604,8 @@ fn bubble_sort(arr: &mut [i32]) {
 
 ## 相关概念 {#相关概念}
 
-- [NLL 与 Polonius (concept)](../../concept/03_advanced/02_unsafe/08_nll_and_polonius.md) — 概念层 NLL → Polonius 演进分析，含三代借用检查器对比表
-- [Rust 版本跟踪 (concept)](../../concept/07_future/00_version_tracking/05_rust_version_tracking.md) — Project Goals 2026 全局状态与 nightly 特性跟踪
+- [NLL 与 Polonius (concept)](../../concept/03_advanced/02_unsafe/03_nll_and_polonius.md) — 概念层 NLL → Polonius 演进分析，含三代借用检查器对比表
+- [Rust 版本跟踪 (concept)](../../concept/07_future/00_version_tracking/01_rust_version_tracking.md) — Project Goals 2026 全局状态与 nightly 特性跟踪
 
 ---
 

@@ -21,7 +21,7 @@
 
 | 编号 | 任务 | 模块 | 负责人 | 目标产出 | 建议月份 |
 |---|---|---|---|---|---|
-| P2-11 | `concept/03_advanced/01_async/02_async.md` 顶部标注对应 TRPL Ch17 | 教材对齐 | TBD | 单文件更新 | 7 月下旬 |
+| P2-11 | `concept/03_advanced/01_async/01_async.md` 顶部标注对应 TRPL Ch17 | 教材对齐 | TBD | 单文件更新 | 7 月下旬 |
 | P2-9 | TRPL 3rd Ed 逐章对照表落地到 `learning_mvp_path.md` | 教材对齐 | TBD | 完整映射表 | 7 月下旬 ~ 8 月上旬 |
 | P2-1 | 完善 `concept/04_formal/19_rustc_query_system.md` 实践章节 | 编译器 | TBD | 新增实践章节 | 7 月下旬 |
 | P2-5 | Kani 函数/循环合约示例扩展到 `c03_control_fn`、`c04_generic` | 形式化工具 | TBD | Kani 示例代码 | 7 月下旬 ~ 8 月上旬 |
@@ -192,7 +192,7 @@
   - 引用格式统一（建议使用 APA/MLA 或项目既定格式）。
   - 无版权问题，仅引用公开链接或 bibtex。
 
-#### P2-11: `concept/03_advanced/01_async/02_async.md` 顶部标注对应 TRPL Ch17
+#### P2-11: `concept/03_advanced/01_async/01_async.md` 顶部标注对应 TRPL Ch17
 
 - **目标**: 明确 async 概念页与 TRPL 教材的对应关系。
 - **关键动作**:
@@ -284,17 +284,17 @@ cargo audit --no-fetch
 
 | 编号 | 完成状态 | 关键产出 |
 |---|---|---|
-| P2-11 | ✅ | `concept/03_advanced/01_async/02_async.md` 顶部 TRPL Ch17 提示框 + 节次映射 |
+| P2-11 | ✅ | `concept/03_advanced/01_async/01_async.md` 顶部 TRPL Ch17 提示框 + 节次映射 |
 | P2-9 | ✅ | `docs/01_learning/learning_mvp_path.md` TRPL 3rd Ed 22 章全映射表 |
-| P2-1 | ✅ | `concept/04_formal/05_rustc_internals/19_rustc_query_system.md` 新增动手实验章节 |
+| P2-1 | ✅ | `concept/04_formal/05_rustc_internals/01_rustc_query_system.md` 新增动手实验章节 |
 | P2-5 | ✅ | `crates/c03_control_fn/src/kani_examples.rs` + `crates/c04_generic/src/kani_examples.rs` 函数/循环合约示例 |
 | P2-10 | ✅ | `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md` Brown Book 学术引用段落 |
-| P2-2 | ✅ | `concept/04_formal/05_rustc_internals/26_trait_solver_in_rustc.md` old/new solver 对比实验 |
+| P2-2 | ✅ | `concept/04_formal/05_rustc_internals/03_trait_solver_in_rustc.md` old/new solver 对比实验 |
 | P2-6 | ✅ | `concept/04_formal/04_model_checking/` 多页新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉索引表 |
-| P2-3 | ✅ | `crates/c17_resolver_v3_public_demo/` 可运行 workspace + `concept/06_ecosystem/01_cargo/11_resolver_v3_public_feature_unification.md` |
+| P2-3 | ✅ | `crates/c17_resolver_v3_public_demo/` 可运行 workspace + `concept/06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md` |
 | P2-7 | ✅ | `reports/SEA_ORM_2_0_MIGRATION_ASSESSMENT_2026_07_09.md`（结论：No-Go，维持 rc.42） |
 | P2-8 | ✅ | `reports/ECOSYSTEM_TARGET_RECONFIRMATION_2026_07_09.md`（AFIDT nightly；dynosaur 0.3.1 stable；wasm32-wasip2 Tier 2） |
-| P2-4 | ✅ | `concept/04_formal/05_rustc_internals/20_mir_codegen_llvm_primer.md` 已提前在 crates/docs 整治中创建 |
+| P2-4 | ✅ | `concept/04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md` 已提前在 crates/docs 整治中创建 |
 
 **验证结果**: `cargo check/test/clippy --workspace` ✅、`python scripts/kb_auditor.py --link-check` ✅（0 死链/0 跨层）、`python scripts/detect_content_overlap.py` ✅（0 重复）、`cargo vet --locked` ✅、`cargo audit --no-fetch` ✅、`mdbook build` ✅。
 

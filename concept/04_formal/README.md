@@ -27,11 +27,11 @@
 |:---|:---|:---|
 | 所有权（Ownership）直觉 | 能向新手解释"为什么 `&mut` 不能别名" | [L1 所有权](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
 | 借用（Borrowing）规则 | 能独立标注含 3+ 引用（Reference）的函数签名 | L2 生命周期（Lifetimes） |
-| 类型系统（Type System） | 理解 `enum`/`struct`/`trait` 的语义区别 | [L1 类型系统](../01_foundation/02_type_system/04_type_system.md) |
+| 类型系统（Type System） | 理解 `enum`/`struct`/`trait` 的语义区别 | [L1 类型系统](../01_foundation/02_type_system/01_type_system.md) |
 | 并发原语 | 能解释 `Send`/`Sync` 为什么需要 `unsafe impl` | [L3 并发](../03_advanced/00_concurrency/01_concurrency.md) |
-| 逻辑基础 | 了解命题逻辑（与/或/蕴含）的基本概念 | [L4 Hoare 逻辑](03_operational_semantics/15_hoare_logic.md)（可先读） |
+| 逻辑基础 | 了解命题逻辑（与/或/蕴含）的基本概念 | [L4 Hoare 逻辑](03_operational_semantics/02_hoare_logic.md)（可先读） |
 
-> ⚠️ **警告**：如果你尚未掌握 L1-L3 的工程概念，直接学习 L4 会陷入"符号能读但直觉缺失"的困境。建议先完成 [MVP 学习路径](../00_meta/04_navigation/learning_mvp_path.md)，再返回 L4。
+> ⚠️ **警告**：如果你尚未掌握 L1-L3 的工程概念，直接学习 L4 会陷入"符号能读但直觉缺失"的困境。建议先完成 [MVP 学习路径](../00_meta/04_navigation/08_learning_mvp_path.md)，再返回 L4。
 
 **如果你确认已达标** → 继续阅读下方的认知入口
 
@@ -179,37 +179,37 @@ graph TB
 | 文件 | 概念 | 核心内容 | 状态 | 映射的上层概念 | 工具化输出 |
 |:---|:---|:---|:---|:---|:---|
 | [01_linear_logic.md](01_ownership_logic/01_linear_logic.md) | 线性/仿射逻辑 [教学类比] | 资源敏感逻辑、⊗/⅋/⊸、Girard 1987、 weakening | ✅ v1.0 | L1 Ownership (唯一性), L1 Move/Copy | — |
-| [02_type_theory.md](00_type_theory/02_type_theory.md) | 类型论基础 [教学类比] | ADT、HM 推断、子类型、Variance、System F | ✅ v1.0 | L1 Type System, L2 Generics | L6 编译器类型检查 |
-| [03_ownership_formal.md](01_ownership_logic/03_ownership_formal.md) | 所有权形式化 | COR、区域类型、分数权限、操作语义 | ✅ v1.0 | L1 Ownership + Borrowing + Lifetimes | — |
-| [04_rustbelt.md](02_separation_logic/04_rustbelt.md) | RustBelt 与验证 | Iris 分离逻辑、验证工具链、工业应用 | ✅ v1.0 | L3 Concurrency + Unsafe | L7 Creusot/Verus/Kani |
-| [05_verification_toolchain.md](04_model_checking/05_verification_toolchain.md) | 验证工具链选型 | ROI 分析、决策树、a-mir-formality、分层验证策略 | ✅ v1.2 | L3-L6 验证实践 | L7 a-mir-formality |
-| [06_subtype_variance.md](00_type_theory/06_subtype_variance.md) | 子类型与变型 | 协变/逆变/不变、生命周期子类型、类型安全边界 | ✅ v1.0 | L2 Generics, L1 Lifetimes | 编译器类型检查 |
-| [11_separation_logic.md](02_separation_logic/11_separation_logic.md) | 分离逻辑 | * 算子、帧规则、CSL、Iris、RustBelt 应用映射 | ✅ v1.0 | L3 Concurrency, L1 Ownership | 形式化验证工具 |
-| [08_type_inference.md](00_type_theory/08_type_inference.md) | 类型推断（Type Inference） | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ v1.0 | L2 Generics, L2 Trait | 编译器类型检查 |
-| [28_borrow_checking_decidability.md](01_ownership_logic/28_borrow_checking_decidability.md) | 借用检查可判定性 [ROD 迁移] | NLL/Polonius、区域约束、P-完全、与 rustc borrowck 映射 | ✅ 已迁移 | L1 Borrowing, L3 Unsafe | rustc_borrowck |
-| [29_type_inference_complexity.md](00_type_theory/29_type_inference_complexity.md) | 类型推断（Type Inference）复杂度 [ROD 迁移] | HM 扩展、约束生成、PSPACE-完全、与 rustc typeck 映射 | ✅ 已迁移 | L2 Trait, L2 Generics | rustc_typeck |
-| [30_aeneas_symbolic_semantics.md](03_operational_semantics/30_aeneas_symbolic_semantics.md) | Aeneas 符号化语义 [ROD 迁移] | LLBC、HLPL、符号执行、模拟关系、Aeneas 工具链 | ✅ 已迁移 | L3 Unsafe, L7 Formal Methods | Aeneas, Miri |
-| [17_operational_semantics.md](03_operational_semantics/17_operational_semantics.md) | 操作语义 [教学类比] | 小步/大步语义、求值上下文、Rust 形式化 | ✅ v1.0 | L1 Ownership, L3 Unsafe | RustBelt, Miri |
-| [20_axiomatic_semantics.md](03_operational_semantics/20_axiomatic_semantics.md) | 公理语义 [教学类比] | Hoare 逻辑、wp/sp 计算、Rust 所有权（Ownership）公理化 | ✅ v1.0 | L4 形式化理论, L3 Unsafe | Prusti, Creusot, Kani |
-| [21_type_semantics.md](00_type_theory/21_type_semantics.md) | 类型语义 [教学类比] | 进步/保持定理、Rust 特有类型语义、子类型与变型 | ✅ v1.0 | L2 Type System, L4 形式化理论 | Pierce TAPL, RustBelt |
-| [18_evaluation_strategies.md](03_operational_semantics/18_evaluation_strategies.md) | 求值策略 [教学类比] | CBV/CBN/CBR、归约策略、Rust 的 CBV+Move 定位 | ✅ v1.0 | L1 Type System, L2 Generics | Lambda Calculus |
+| [02_type_theory.md](00_type_theory/01_type_theory.md) | 类型论基础 [教学类比] | ADT、HM 推断、子类型、Variance、System F | ✅ v1.0 | L1 Type System, L2 Generics | L6 编译器类型检查 |
+| [03_ownership_formal.md](01_ownership_logic/02_ownership_formal.md) | 所有权形式化 | COR、区域类型、分数权限、操作语义 | ✅ v1.0 | L1 Ownership + Borrowing + Lifetimes | — |
+| [04_rustbelt.md](02_separation_logic/01_rustbelt.md) | RustBelt 与验证 | Iris 分离逻辑、验证工具链、工业应用 | ✅ v1.0 | L3 Concurrency + Unsafe | L7 Creusot/Verus/Kani |
+| [05_verification_toolchain.md](04_model_checking/01_verification_toolchain.md) | 验证工具链选型 | ROI 分析、决策树、a-mir-formality、分层验证策略 | ✅ v1.2 | L3-L6 验证实践 | L7 a-mir-formality |
+| [06_subtype_variance.md](00_type_theory/02_subtype_variance.md) | 子类型与变型 | 协变/逆变/不变、生命周期子类型、类型安全边界 | ✅ v1.0 | L2 Generics, L1 Lifetimes | 编译器类型检查 |
+| [11_separation_logic.md](02_separation_logic/02_separation_logic.md) | 分离逻辑 | * 算子、帧规则、CSL、Iris、RustBelt 应用映射 | ✅ v1.0 | L3 Concurrency, L1 Ownership | 形式化验证工具 |
+| [08_type_inference.md](00_type_theory/03_type_inference.md) | 类型推断（Type Inference） | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ v1.0 | L2 Generics, L2 Trait | 编译器类型检查 |
+| [28_borrow_checking_decidability.md](01_ownership_logic/04_borrow_checking_decidability.md) | 借用检查可判定性 [ROD 迁移] | NLL/Polonius、区域约束、P-完全、与 rustc borrowck 映射 | ✅ 已迁移 | L1 Borrowing, L3 Unsafe | rustc_borrowck |
+| [29_type_inference_complexity.md](00_type_theory/08_type_inference_complexity.md) | 类型推断（Type Inference）复杂度 [ROD 迁移] | HM 扩展、约束生成、PSPACE-完全、与 rustc typeck 映射 | ✅ 已迁移 | L2 Trait, L2 Generics | rustc_typeck |
+| [30_aeneas_symbolic_semantics.md](03_operational_semantics/06_aeneas_symbolic_semantics.md) | Aeneas 符号化语义 [ROD 迁移] | LLBC、HLPL、符号执行、模拟关系、Aeneas 工具链 | ✅ 已迁移 | L3 Unsafe, L7 Formal Methods | Aeneas, Miri |
+| [17_operational_semantics.md](03_operational_semantics/03_operational_semantics.md) | 操作语义 [教学类比] | 小步/大步语义、求值上下文、Rust 形式化 | ✅ v1.0 | L1 Ownership, L3 Unsafe | RustBelt, Miri |
+| [20_axiomatic_semantics.md](03_operational_semantics/05_axiomatic_semantics.md) | 公理语义 [教学类比] | Hoare 逻辑、wp/sp 计算、Rust 所有权（Ownership）公理化 | ✅ v1.0 | L4 形式化理论, L3 Unsafe | Prusti, Creusot, Kani |
+| [21_type_semantics.md](00_type_theory/06_type_semantics.md) | 类型语义 [教学类比] | 进步/保持定理、Rust 特有类型语义、子类型与变型 | ✅ v1.0 | L2 Type System, L4 形式化理论 | Pierce TAPL, RustBelt |
+| [18_evaluation_strategies.md](03_operational_semantics/04_evaluation_strategies.md) | 求值策略 [教学类比] | CBV/CBN/CBR、归约策略、Rust 的 CBV+Move 定位 | ✅ v1.0 | L1 Type System, L2 Generics | Lambda Calculus |
 
 ---
 
 ### 补充文件索引
 
-- [线性逻辑在 Rust 中的工程应用](01_ownership_logic/09_linear_logic_applications.md)
-- [范畴论与 Rust：从函子到单子](00_type_theory/10_category_theory.md)
-- [指称语义与领域理论](03_operational_semantics/12_denotational_semantics.md)
-- [形式化方法（Formal Methods）](04_model_checking/13_formal_methods.md) — 已合并至 L7 权威页 [`07_future/04_research_and_experimental/02_formal_methods.md`](../07_future/04_research_and_experimental/02_formal_methods.md)
-- [Lambda 演算与 Rust 计算模型](00_type_theory/14_lambda_calculus.md)
-- [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](04_model_checking/16_aerospace_certification_formal_methods.md)
-- [现代 Rust 验证工具生态（2025-2026）](04_model_checking/22_modern_verification_tools.md)
-- [借用（Borrowing）检查可判定性](01_ownership_logic/28_borrow_checking_decidability.md)
+- [线性逻辑在 Rust 中的工程应用](01_ownership_logic/03_linear_logic_applications.md)
+- [范畴论与 Rust：从函子到单子](00_type_theory/04_category_theory.md)
+- [指称语义与领域理论](03_operational_semantics/01_denotational_semantics.md)
+- [形式化方法（Formal Methods）](04_model_checking/02_formal_methods.md) — 已合并至 L7 权威页 [`07_future/04_research_and_experimental/02_formal_methods.md`](../07_future/04_research_and_experimental/02_formal_methods.md)
+- [Lambda 演算与 Rust 计算模型](00_type_theory/05_lambda_calculus.md)
+- [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](04_model_checking/03_aerospace_certification_formal_methods.md)
+- [现代 Rust 验证工具生态（2025-2026）](04_model_checking/04_modern_verification_tools.md)
+- [借用（Borrowing）检查可判定性](01_ownership_logic/04_borrow_checking_decidability.md)
 - 类型推断（Type Inference）复杂度
-- [Aeneas 符号化语义](03_operational_semantics/30_aeneas_symbolic_semantics.md)
-- [通用程序语言理论基础：Rust 的 PL 基座](04_model_checking/23_programming_language_foundations.md)
-- [测验：形式化方法概念（嵌入式互动试点）](04_model_checking/25_quiz_formal_methods.md)
+- [Aeneas 符号化语义](03_operational_semantics/06_aeneas_symbolic_semantics.md)
+- [通用程序语言理论基础：Rust 的 PL 基座](04_model_checking/05_programming_language_foundations.md)
+- [测验：形式化方法概念（嵌入式互动试点）](04_model_checking/06_quiz_formal_methods.md)
 
 ## 三、与上层概念的严格映射
 
@@ -261,13 +261,13 @@ L4 → L1 映射中的信息损失:
 
 | 类型 | 文件 | 定位 |
 |:---|:---|:---|
-| ① 编译器原理 / 形式化基础设施 | [19_rustc_query_system.md](05_rustc_internals/19_rustc_query_system.md)、[20_mir_codegen_llvm_primer.md](05_rustc_internals/20_mir_codegen_llvm_primer.md)、[26_trait_solver_in_rustc.md](05_rustc_internals/26_trait_solver_in_rustc.md)、[35_name_resolution_and_hir.md](05_rustc_internals/35_name_resolution_and_hir.md)、[53_generics_compiler_behavior.md](05_rustc_internals/53_generics_compiler_behavior.md) | 类型检查/推断、HIR/MIR、查询系统、单态化等**原理性**内容，保留 L4 |
+| ① 编译器原理 / 形式化基础设施 | [19_rustc_query_system.md](05_rustc_internals/01_rustc_query_system.md)、[20_mir_codegen_llvm_primer.md](05_rustc_internals/02_mir_codegen_llvm_primer.md)、[26_trait_solver_in_rustc.md](05_rustc_internals/03_trait_solver_in_rustc.md)、[35_name_resolution_and_hir.md](05_rustc_internals/04_name_resolution_and_hir.md)、[53_generics_compiler_behavior.md](05_rustc_internals/15_generics_compiler_behavior.md) | 类型检查/推断、HIR/MIR、查询系统、单态化等**原理性**内容，保留 L4 |
 | ② Rust Reference 规范摘译与注解 | 38、40、41、42、43、45、46、47、48、49、51、52（共 12 页） | 规范条文摘译 + 示例 + 交叉引用，**非形式化推导**；各页头部均有「定位声明」标明摘译身份并指向同层形式化内容 |
 
 ② 类页面保留于 L4 而非迁移至 `01_foundation/` 的裁定理由：
 
 1. **引用成本**:12 页被 `concept/`、`knowledge/`、`docs/` 外部引用 3–13 处/页，且同目录互引密集（前置/后置概念链），迁移需改动数十处链接,风险高于收益;
-2. **规范依据**:依据 [A/S/P 标记规范](../00_meta/03_audit/asp_marking_guide.md) §3.4,L4 层以 S/P 标记为主,S(Specification)规范分析类内容属于 L4 合法组成;
+2. **规范依据**:依据 [A/S/P 标记规范](../00_meta/03_audit/02_asp_marking_guide.md) §3.4,L4 层以 S/P 标记为主,S(Specification)规范分析类内容属于 L4 合法组成;
 3. **D1 规则**:`scripts/check_metadata_consistency.py` 的 D1 仅约束**文件内** Bloom 与「层次定位/层级」一致,不要求 Bloom 与目录层级一致,故②类页面维持 L2-L4 的内容相符标注不违规。
 
 阅读②类页面时，请以各页「定位声明」为准：需要形式化推导时跳转至①类页面或 `00_type_theory/`、`01_ownership_logic/`、`03_operational_semantics/` 子目录。
@@ -318,7 +318,7 @@ L4 的形式化成果输出到：
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../00_meta/02_sources/05_international_authority_index.md)
 > **内容分级**: [研究者级]
 
 **文档版本**: 1.1

@@ -17,5 +17,5 @@
 | 借用规则 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
 | 不可变借用与可变借用 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
 | 借用检查器 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
-| NLL (Non-Lexical Lifetimes) | [concept/03_advanced/02_unsafe/08_nll_and_polonius.md](../../../../concept/03_advanced/02_unsafe/08_nll_and_polonius.md) |
+| NLL (Non-Lexical Lifetimes) | [concept/03_advanced/02_unsafe/03_nll_and_polonius.md](../../../../concept/03_advanced/02_unsafe/03_nll_and_polonius.md) |
 | 悬垂引用 | [concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |

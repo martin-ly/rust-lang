@@ -9,8 +9,8 @@
 > **内容分级**: [专家级]
 > **分级**: [A]
 > **层次定位**: L3-L6 高级-生态 / 嵌入式异步系统
-> **前置依赖**: [concept L3 Async](../../concept/03_advanced/01_async/02_async.md) · [concept L3 Unsafe](../../concept/03_advanced/02_unsafe/03_unsafe.md) · [EMBEDDED_RUST_GUIDE](03_embedded_rust_guide.md)
-> **后置延伸**: [concept L6 嵌入式](../../concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md)
+> **前置依赖**: [concept L3 Async](../../concept/03_advanced/01_async/01_async.md) · [concept L3 Unsafe](../../concept/03_advanced/02_unsafe/01_unsafe.md) · [EMBEDDED_RUST_GUIDE](03_embedded_rust_guide.md)
+> **后置延伸**: [concept L6 嵌入式](../../concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md)
 > **跨层映射**: L3 async → L6 嵌入式工程映射
 
 ## 📑 目录 {#目录}
@@ -838,6 +838,6 @@ async fn main(spawner: Spawner) {
 >
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 ---

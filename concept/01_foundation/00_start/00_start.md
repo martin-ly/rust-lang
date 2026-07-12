@@ -12,9 +12,9 @@
 > **预计阅读时间**: 25 分钟
 > **对应练习**: [exercises/src/ownership_borrowing/ex01_hello_move.rs](../../exercises/src/ownership_borrowing)
 >
-> **来源**: [TRPL — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html) · [Rust Installation](https://www.rust-lang.org/tools/install) · [学习指南](../../00_meta/04_navigation/learning_guide.md) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/)
+> **来源**: [TRPL — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html) · [Rust Installation](https://www.rust-lang.org/tools/install) · [学习指南](../../00_meta/04_navigation/07_learning_guide.md) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/)
 > **前置概念**: N/A
-> **后置概念**: [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) · [借用（Borrowing）](../01_ownership_borrow_lifetime/02_borrowing.md) · [类型系统（Type System）](../02_type_system/04_type_system.md) · [模块（Module）与路径](../07_modules_and_items/11_modules_and_paths.md) · [错误处理（Error Handling）基础](../08_error_handling/32_error_handling_basics.md) · [测试基础](../10_testing_basics/16_testing_basics.md)
+> **后置概念**: [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) · [借用（Borrowing）](../01_ownership_borrow_lifetime/02_borrowing.md) · [类型系统（Type System）](../02_type_system/01_type_system.md) · [模块（Module）与路径](../07_modules_and_items/01_modules_and_paths.md) · [错误处理（Error Handling）基础](../08_error_handling/01_error_handling_basics.md) · [测试基础](../10_testing_basics/01_testing_basics.md)
 ---
 
 ## 认知路径
@@ -23,7 +23,7 @@
 2. **概念建立**: 掌握 `rustup`、`cargo`、`rustc` 的角色，理解 crate、模块（Module）、依赖与版本控制的基本关系。
 3. **机制推理**: 通过 ⟹ 定理链将安装、构建、测试、文档生成串联为可重复的开发工作流。
 4. **边界辨析**: 借助反命题/反例理解 `stable`/每日构建 通道、单 crate 与 workspace 等常见选择误区。
-5. **迁移应用**: 将起步知识与 [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md)、[类型系统（Type System）](../02_type_system/04_type_system.md)、[错误处理（Error Handling）](../08_error_handling/32_error_handling_basics.md) 等后置概念链接。
+5. **迁移应用**: 将起步知识与 [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md)、[类型系统（Type System）](../02_type_system/01_type_system.md)、[错误处理（Error Handling）](../08_error_handling/01_error_handling_basics.md) 等后置概念链接。
 
 ---
 
@@ -198,9 +198,9 @@ flowchart TD
 
 1. [所有权与移动语义](../01_ownership_borrow_lifetime/01_ownership.md)
 2. [借用（Borrowing）与引用（Reference）](../01_ownership_borrow_lifetime/02_borrowing.md)
-3. [类型系统](../02_type_system/04_type_system.md)
+3. [类型系统](../02_type_system/01_type_system.md)
 
-随后再学习 [模块系统](../07_modules_and_items/11_modules_and_paths.md)、[错误处理](../08_error_handling/32_error_handling_basics.md) 与 [测试](../10_testing_basics/16_testing_basics.md)。
+随后再学习 [模块系统](../07_modules_and_items/01_modules_and_paths.md)、[错误处理](../08_error_handling/01_error_handling_basics.md) 与 [测试](../10_testing_basics/01_testing_basics.md)。
 
 ---
 > **权威来源**: [TRPL — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html) · [Rust Installation](https://www.rust-lang.org/tools/install) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [rustup.rs](https://rustup.rs/)
@@ -212,11 +212,11 @@ flowchart TD
 | 概念 | 关系 |
 |:---|:---|
 | [所有权](../01_ownership_borrow_lifetime/01_ownership.md) | Rust 最核心的内存管理规则 |
-| [类型系统](../02_type_system/04_type_system.md) | 编译期保证程序行为的基础 |
-| [Cargo 入门](../../06_ecosystem/01_cargo/80_cargo_getting_started.md) | 更完整的包管理与发布指南 |
-| [模块与路径](../07_modules_and_items/11_modules_and_paths.md) | 组织 crate 内部代码的方式 |
-| [错误处理基础](../08_error_handling/32_error_handling_basics.md) | 学习 `Result` 与 `?` 的起点 |
-| [测试基础](../10_testing_basics/16_testing_basics.md) | `cargo test` 的详细用法 |
+| [类型系统](../02_type_system/01_type_system.md) | 编译期保证程序行为的基础 |
+| [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) | 更完整的包管理与发布指南 |
+| [模块与路径](../07_modules_and_items/01_modules_and_paths.md) | 组织 crate 内部代码的方式 |
+| [错误处理基础](../08_error_handling/01_error_handling_basics.md) | 学习 `Result` 与 `?` 的起点 |
+| [测试基础](../10_testing_basics/01_testing_basics.md) | `cargo test` 的详细用法 |
 
 ---
 

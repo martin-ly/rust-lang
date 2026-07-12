@@ -3,7 +3,7 @@
 
 # WASI 0.2 组件模型深度指南
 
-> **权威来源**: [concept/06_ecosystem/05_systems_and_embedded/08_wasi.md](../../../../concept/06_ecosystem/05_systems_and_embedded/08_wasi.md)
+> **权威来源**: [concept/06_ecosystem/05_systems_and_embedded/01_wasi.md](../../../../concept/06_ecosystem/05_systems_and_embedded/01_wasi.md)
 
 本文件为 crate 文档重定向 stub。原内容中的通用 Rust 概念已迁移至上述权威来源页面；以下仅保留主题索引。
 

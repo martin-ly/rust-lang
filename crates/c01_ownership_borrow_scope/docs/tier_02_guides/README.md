@@ -17,4 +17,4 @@
 | Ownership | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
 | Borrowing | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
 | Lifetimes | [concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
-| Smart Pointers | [concept/02_intermediate/02_memory_management/12_smart_pointers.md](../../../../concept/02_intermediate/02_memory_management/12_smart_pointers.md) |
+| Smart Pointers | [concept/02_intermediate/02_memory_management/04_smart_pointers.md](../../../../concept/02_intermediate/02_memory_management/04_smart_pointers.md) |

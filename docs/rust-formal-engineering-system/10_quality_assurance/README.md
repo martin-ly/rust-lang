@@ -12,9 +12,9 @@
 
 > **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
 >
-> - [`concept/01_foundation/10_testing_basics/16_testing_basics.md`](../../../concept/01_foundation/10_testing_basics/16_testing_basics.md)
-> - [`concept/06_ecosystem/09_testing_and_quality/12_testing_strategies.md`](../../../concept/06_ecosystem/09_testing_and_quality/12_testing_strategies.md)
-> - [`concept/04_formal/04_model_checking/31_miri.md`](../../../concept/04_formal/04_model_checking/31_miri.md)
+> - [`concept/01_foundation/10_testing_basics/01_testing_basics.md`](../../../concept/01_foundation/10_testing_basics/01_testing_basics.md)
+> - [`concept/06_ecosystem/09_testing_and_quality/01_testing_strategies.md`](../../../concept/06_ecosystem/09_testing_and_quality/01_testing_strategies.md)
+> - [`concept/04_formal/04_model_checking/08_miri.md`](../../../concept/04_formal/04_model_checking/08_miri.md)
 >
 > 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
 
@@ -373,7 +373,7 @@ mindmap
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

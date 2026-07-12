@@ -3,7 +3,7 @@
 > **EN**: Closures Reference (Redirect)
 > **Summary**: Redirect to the canonical Closure Types concept page.
 >
-> **权威来源**: [concept/02_intermediate/04_types_and_conversions/07_closure_types.md](concept/02_intermediate/04_types_and_conversions/07_closure_types.md)
+> **权威来源**: [concept/02_intermediate/04_types_and_conversions/02_closure_types.md](concept/02_intermediate/04_types_and_conversions/02_closure_types.md)
 
 ## 主题速览
 

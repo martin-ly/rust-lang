@@ -7,7 +7,7 @@
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/),
 > [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、Rustonomicon 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、Rustonomicon 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 # Rust 边界条件与特例示例 (Edge Cases And Special Cases) {#rust-边界条件与特例示例}
 
@@ -25,31 +25,31 @@
 ---
 
 ## 集合边界 {#集合边界}
-> **权威来源**: [Rust 集合类型](../../concept/01_foundation/05_collections/08_collections.md)
+> **权威来源**: [Rust 集合类型](../../concept/01_foundation/05_collections/01_collections.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## 算法特例 {#算法特例}
-> **权威来源**: [Rust 集合与算法](../../concept/01_foundation/05_collections/08_collections.md)
+> **权威来源**: [Rust 集合与算法](../../concept/01_foundation/05_collections/01_collections.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## 并发特例 {#并发特例}
 > **权威来源**: [Rust 并发编程](../../concept/03_advanced/00_concurrency/01_concurrency.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## 数值溢出 {#数值溢出}
-> **权威来源**: [Rust 数值类型](../../concept/01_foundation/02_type_system/10_numerics.md)
+> **权威来源**: [Rust 数值类型](../../concept/01_foundation/02_type_system/03_numerics.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## 字符串与切片 {#字符串与切片}
-> **权威来源**: [Rust 字符串与文本](../../concept/01_foundation/06_strings_and_text/09_strings_and_text.md)
+> **权威来源**: [Rust 字符串与文本](../../concept/01_foundation/06_strings_and_text/01_strings_and_text.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## unsafe 与 FFI {#unsafe-与-ffi}
-> **权威来源**: [Rust Unsafe 与 FFI](../../concept/03_advanced/02_unsafe/03_unsafe.md)
+> **权威来源**: [Rust Unsafe 与 FFI](../../concept/03_advanced/02_unsafe/01_unsafe.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## WASM 特例 {#wasm-特例}
-> **权威来源**: [WebAssembly 与 Rust](../../concept/06_ecosystem/11_domain_applications/59_wasm_glossary.md)
+> **权威来源**: [WebAssembly 与 Rust](../../concept/06_ecosystem/11_domain_applications/18_wasm_glossary.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## panic 边界 {#panic-边界}
-> **权威来源**: [Rust panic 与错误处理](../../concept/01_foundation/08_error_handling/13_panic_and_abort.md)
+> **权威来源**: [Rust panic 与错误处理](../../concept/01_foundation/08_error_handling/03_panic_and_abort.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## 空 Future 与异步 {#空-future-与异步}
-> **权威来源**: [Rust 异步编程](../../concept/03_advanced/01_async/02_async.md)
+> **权威来源**: [Rust 异步编程](../../concept/03_advanced/01_async/01_async.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## Rust 1.93 行为变更特例 {#rust-193-行为变更特例}
 >

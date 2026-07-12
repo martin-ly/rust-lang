@@ -3,7 +3,7 @@
 **EN**: Formal Verification Practical Guide
 **Summary**: 形式化验证实战指南 Formal Verification Practical Guide.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md](../../../concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/08_formal_verification/02_formal_verification_tools.md](../../../concept/06_ecosystem/08_formal_verification/02_formal_verification_tools.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

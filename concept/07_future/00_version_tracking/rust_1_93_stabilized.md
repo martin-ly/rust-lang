@@ -13,8 +13,8 @@
 >
 > **主要来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/03_unsafe.md)
-> **后置概念**: [Rust 1.92 稳定特性](rust_1_92_stabilized.md) · [Rust 版本跟踪](05_rust_version_tracking.md) · [WebAssembly 生态](../../06_ecosystem/11_domain_applications/11_webassembly.md)
+> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
+> **后置概念**: [Rust 1.92 稳定特性](rust_1_92_stabilized.md) · [Rust 版本跟踪](01_rust_version_tracking.md) · [WebAssembly 生态](../../06_ecosystem/11_domain_applications/03_webassembly.md)
 
 ---
 
@@ -165,7 +165,7 @@ pub extern "C" fn allocate_string() -> *mut u8 {
 ---
 
 > **来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **相关版本页**: [Rust 1.92 稳定特性](rust_1_92_stabilized.md) · [Rust 1.94 稳定特性](rust_1_94_stabilized.md) · [Rust 版本跟踪](05_rust_version_tracking.md)
+> **相关版本页**: [Rust 1.92 稳定特性](rust_1_92_stabilized.md) · [Rust 1.94 稳定特性](rust_1_94_stabilized.md) · [Rust 版本跟踪](01_rust_version_tracking.md)
 
 ## 过渡段
 

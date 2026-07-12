@@ -3,7 +3,7 @@
 > **EN**: Macro Metaprogramming
 > **Summary**: Type-level programming, compile-time computation, zero-cost abstraction, and advanced macro patterns in Rust.
 
-> **权威来源**: [concept/02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md](../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)
+> **权威来源**: [concept/02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md](../02_intermediate/06_macros_and_metaprogramming/21_metaprogramming.md)
 
 本文件为 crate 文档重定向 stub。原内容中的通用 Rust 概念已迁移至上述权威来源页面；以下仅保留主题索引。
 

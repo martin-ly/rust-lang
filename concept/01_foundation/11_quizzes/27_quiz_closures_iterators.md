@@ -11,14 +11,14 @@
 > **后置概念**: N/A
 ---
 
-> **来源**: · [自测题库](../../00_meta/04_navigation/self_assessment.md) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: · [自测题库](../../00_meta/04_navigation/12_self_assessment.md) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [The Rust Programming Language — Ch13 Closures](https://doc.rust-lang.org/book/ch13-01-closures.html) ·
 > [The Rust Programming Language — Ch13 Iterators](https://doc.rust-lang.org/book/ch13-01-closures.html) ·
 > [Rust Reference — Closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html)
 >
 > **前置概念**:
-> [Closure Basics](../00_start/15_closure_basics.md) ·
-> [Collections](../05_collections/08_collections.md) ·
+> [Closure Basics](../00_start/03_closure_basics.md) ·
+> [Collections](../05_collections/01_collections.md) ·
 > [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)
 
 ---
@@ -84,7 +84,7 @@ struct Closure { /* 捕获的环境 */ }
 impl Fn(i32) -> i32 for Closure { ... }
 ```
 
-**知识点**：闭包（Closures）不是函数指针，而是实现了 `Fn`/`FnMut`/`FnOnce` trait 的匿名类型。每个闭包都有唯一的、不可命名的类型。[→ 闭包详解](../00_start/15_closure_basics.md)
+**知识点**：闭包（Closures）不是函数指针，而是实现了 `Fn`/`FnMut`/`FnOnce` trait 的匿名类型。每个闭包都有唯一的、不可命名的类型。[→ 闭包详解](../00_start/03_closure_basics.md)
 
 </details>
 
@@ -138,7 +138,7 @@ fn main() {
 
 **层次关系**：`Fn` <: `FnMut` <: `FnOnce`（所有实现 `Fn` 的闭包（Closures）也自动实现 `FnMut` 和 `FnOnce`）
 
-**知识点**：Rust 编译器自动推断闭包（Closures）的最小捕获方式。理解三种 `Fn` trait 是使用高阶函数（如 `map`、`filter`）的基础。[→ 闭包详解](../00_start/15_closure_basics.md)
+**知识点**：Rust 编译器自动推断闭包（Closures）的最小捕获方式。理解三种 `Fn` trait 是使用高阶函数（如 `map`、`filter`）的基础。[→ 闭包详解](../00_start/03_closure_basics.md)
 
 </details>
 
@@ -254,7 +254,7 @@ iter.for_each(|x| ...); // 驱动整个链
 let sum: i32 = v.iter().map(|x| x * 2).filter(|x| x > 4).sum();
 ```
 
-**知识点**：迭代器（Iterator）的惰性求值是 Rust 零成本抽象（Zero-Cost Abstraction）的核心。整个适配器链在编译期被内联为单一循环。[→ 迭代器详解](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
+**知识点**：迭代器（Iterator）的惰性求值是 Rust 零成本抽象（Zero-Cost Abstraction）的核心。整个适配器链在编译期被内联为单一循环。[→ 迭代器详解](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
 
 </details>
 
@@ -344,7 +344,7 @@ for val in counter { println!("{}", val); }
 for val in counter { println!("{}", val); } // ❌ 编译错误：counter 已被移动
 ```
 
-**知识点**：`Iterator` 是 Rust 中最强大的 trait 之一。只需实现 `next()` 方法，自动获得 `map`、`filter`、`collect` 等数十种适配器和消费者。[→ 迭代器（Iterator）详解](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
+**知识点**：`Iterator` 是 Rust 中最强大的 trait 之一。只需实现 `next()` 方法，自动获得 `map`、`filter`、`collect` 等数十种适配器和消费者。[→ 迭代器（Iterator）详解](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
 
 </details>
 
@@ -404,7 +404,7 @@ fn main() {
 | `flatten()` | 展平嵌套迭代器 | `[[1,2],[3]].flatten()` → `[1,2,3]` |
 | `chain(other)` | 连接两个迭代器 | `.chain(v2)` |
 
-**知识点**：迭代器适配器的组合是 Rust 函数式编程风格的核心。与 Python 生成器表达式类似，但编译期优化为零成本循环。[→ 迭代器详解](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
+**知识点**：迭代器适配器的组合是 Rust 函数式编程风格的核心。与 Python 生成器表达式类似，但编译期优化为零成本循环。[→ 迭代器详解](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
 
 </details>
 
@@ -462,7 +462,7 @@ v.iter().any(|x| x > 3);   // 是否有元素满足条件
 v.iter().all(|x| x > 0);   // 是否所有元素满足条件
 ```
 
-**知识点**：`fold` 是最通用的归约操作，其他归约方法（`sum`、`product`、`count`）都是其特化版本。[→ 迭代器详解](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
+**知识点**：`fold` 是最通用的归约操作，其他归约方法（`sum`、`product`、`count`）都是其特化版本。[→ 迭代器详解](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
 
 </details>
 
@@ -519,7 +519,7 @@ v.iter().rposition(|&x| x > 3);    // Some(4)，从右查找
 v.iter().find_map(|&x| if x > 3 { Some(x * 2) } else { None }); // Some(8)
 ```
 
-**知识点**：`find` 和 `position` 都是短路操作——找到第一个匹配元素后立即返回，不遍历剩余元素。[→ 迭代器详解](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
+**知识点**：`find` 和 `position` 都是短路操作——找到第一个匹配元素后立即返回，不遍历剩余元素。[→ 迭代器详解](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
 
 </details>
 
@@ -574,7 +574,7 @@ nums.iter()                          // &i32
 | `iter_mut()` | `&mut T` | ❌ |
 | `into_iter()` | `T` | ✅ |
 
-**知识点**：`into_iter()` 与 `iter()` 的选择直接影响闭包参数的类型。理解三者的区别是避免编译错误的关键。[→ 迭代器详解](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)
+**知识点**：`into_iter()` 与 `iter()` 的选择直接影响闭包参数的类型。理解三者的区别是避免编译错误的关键。[→ 迭代器详解](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
 
 </details>
 
@@ -630,7 +630,7 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
 }
 ```
 
-**知识点**：返回闭包时几乎总是需要 `move`，否则闭包捕获的局部变量引用（Reference）会在函数返回后悬垂。[→ 闭包详解](../00_start/15_closure_basics.md)
+**知识点**：返回闭包时几乎总是需要 `move`，否则闭包捕获的局部变量引用（Reference）会在函数返回后悬垂。[→ 闭包详解](../00_start/03_closure_basics.md)
 
 </details>
 
@@ -642,8 +642,8 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
 |:---:|:---|:---|
 | 10/10 | 🏆 闭包与迭代器已内化 | 实现自定义迭代器（如斐波那契数列生成器） |
 | 7–9/10 | ✅ 核心概念掌握 | 用迭代器链重写显式 for 循环，对比性能 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Closure Basics](../00_start/15_closure_basics.md)，练习 `fold`/`filter`/`map` 组合 |
-| 0–3/10 | 📚 建议重新开始 | 从 [Collections](../05_collections/08_collections.md) 开始，理解 `iter`/`iter_mut`/`into_iter` |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Closure Basics](../00_start/03_closure_basics.md)，练习 `fold`/`filter`/`map` 组合 |
+| 0–3/10 | 📚 建议重新开始 | 从 [Collections](../05_collections/01_collections.md) 开始，理解 `iter`/`iter_mut`/`into_iter` |
 
 ---
 

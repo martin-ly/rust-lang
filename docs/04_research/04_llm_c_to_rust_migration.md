@@ -516,7 +516,7 @@ c2rust transpile compile_commands.json
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
@@ -535,8 +535,8 @@ c2rust transpile compile_commands.json
 
 - [上级目录](../README.md)
 - [AI 集成 (concept)](../../concept/07_future/04_research_and_experimental/01_ai_integration.md) — Rust × AI 生成-验证闭环与确定性容器
-- [Rust 在 AI 中的角色 (concept)](../../concept/07_future/04_research_and_experimental/21_rust_in_ai.md) — Rust ML/推理基础设施生态分析
-- [形式化验证工具链 (concept)](../../concept/04_formal/04_model_checking/05_verification_toolchain.md) — 迁移后代码的验证工具链选型
+- [Rust 在 AI 中的角色 (concept)](../../concept/07_future/04_research_and_experimental/05_rust_in_ai.md) — Rust ML/推理基础设施生态分析
+- [形式化验证工具链 (concept)](../../concept/04_formal/04_model_checking/01_verification_toolchain.md) — 迁移后代码的验证工具链选型
 
 ---
 

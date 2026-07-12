@@ -858,7 +858,7 @@ git commit -m "添加所有权模型形式化研究笔记
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/), [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html), [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
-> **权威来源对齐变更日志**: 2026-06-29 新增 Rust API Guidelines、Clippy、Nomicon、Rust Book 章节对齐 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-06-29 新增 Rust API Guidelines、Clippy、Nomicon、Rust Book 章节对齐 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

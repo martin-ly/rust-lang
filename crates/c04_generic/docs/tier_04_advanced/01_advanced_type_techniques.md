@@ -5,7 +5,7 @@
 
 本文档的完整通用概念解释已按 [AGENTS.md](../../../../AGENTS.md) §6.4 迁移至 `concept/` 权威页。
 
-> **权威来源**: [concept/02_intermediate/04_types_and_conversions/20_type_system_advanced.md](../../../../concept/02_intermediate/04_types_and_conversions/20_type_system_advanced.md)
+> **权威来源**: [concept/02_intermediate/04_types_and_conversions/04_type_system_advanced.md](../../../../concept/02_intermediate/04_types_and_conversions/04_type_system_advanced.md)
 
 此 stub 仅保留原学习材料的目录概览与学习路径指引；
 如需完整代码示例、练习与 crate 特定实践，请前往上述权威页或相关 `crates/` 源码。

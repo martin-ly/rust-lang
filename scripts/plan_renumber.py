@@ -410,7 +410,8 @@ def main() -> int:
 
     report_path = REPO_ROOT / args.report if not Path(args.report).is_absolute() else Path(args.report)
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    with report_path.open("w", encoding="utf-8", newline="") as fh:
+        fh.write("\n".join(lines) + "\n")
 
     print(f"[plan] scanned={len(all_rows)} changed={n_changed} unchanged={len(all_rows)-n_changed}")
     print(f"[plan] csv    -> {args.out}")

@@ -7,7 +7,7 @@
 > **分级**: [A]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Book、cargo test、cargo-tarpaulin 官方文档来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Book、cargo test、cargo-tarpaulin 官方文档来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 # 代码覆盖率测试指南 {#代码覆盖率测试指南}
 
@@ -308,6 +308,6 @@ A: 这是已知问题。尝试：
 > **[IEEE - Software Quality Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
 > **[来源: Rust Book - Testing]**
 > **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
-> **[Martin Fowler - Test Coverage](../../concept/00_meta/02_sources/international_authority_index.md)**
+> **[Martin Fowler - Test Coverage](../../concept/00_meta/02_sources/05_international_authority_index.md)**
 
 ---

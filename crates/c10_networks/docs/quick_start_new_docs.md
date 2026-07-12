@@ -19,6 +19,6 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | 网络编程快速入门 | [`concept/06_ecosystem/12_networking/04_network_programming_quick_start.md`](../../../concept/06_ecosystem/12_networking/04_network_programming_quick_start.md) |
-| 网络协议 | [`concept/06_ecosystem/04_web_and_networking/38_network_protocols.md`](../../../concept/06_ecosystem/04_web_and_networking/38_network_protocols.md) |
-| HTTP 客户端开发 | [`concept/06_ecosystem/04_web_and_networking/41_http_client_development.md`](../../../concept/06_ecosystem/04_web_and_networking/41_http_client_development.md) |
-| 异步编程 | [`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md) |
+| 网络协议 | [`concept/06_ecosystem/04_web_and_networking/07_network_protocols.md`](../../../concept/06_ecosystem/04_web_and_networking/07_network_protocols.md) |
+| HTTP 客户端开发 | [`concept/06_ecosystem/04_web_and_networking/04_http_client_development.md`](../../../concept/06_ecosystem/04_web_and_networking/04_http_client_development.md) |
+| 异步编程 | [`concept/03_advanced/01_async/01_async.md`](../../../concept/03_advanced/01_async/01_async.md) |

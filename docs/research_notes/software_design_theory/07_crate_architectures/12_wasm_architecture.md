@@ -2,9 +2,9 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [WebAssembly 基础](../../../../concept/06_ecosystem/11_domain_applications/11_webassembly.md)
-> - [高级 WebAssembly](../../../../concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md)
-> - [Rust for WebAssembly](../../../../concept/07_future/04_research_and_experimental/28_rust_for_webassembly.md)
+> - [WebAssembly 基础](../../../../concept/06_ecosystem/11_domain_applications/03_webassembly.md)
+> - [高级 WebAssembly](../../../../concept/06_ecosystem/11_domain_applications/17_webassembly_advanced.md)
+> - [Rust for WebAssembly](../../../../concept/07_future/04_research_and_experimental/06_rust_for_webassembly.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 

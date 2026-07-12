@@ -221,14 +221,14 @@ mindmap
 >
 >
 
-- [跨层依赖拓扑](../04_navigation/inter_layer_topology.md) —— L0-L7 纵向导航
-- [层内模型映射](../04_navigation/intra_layer_model_map.md) —— 同层模型横向选择
+- [跨层依赖拓扑](../04_navigation/05_inter_layer_topology.md) —— L0-L7 纵向导航
+- [层内模型映射](../04_navigation/06_intra_layer_model_map.md) —— 同层模型横向选择
 - [定理推理森林](theorem_inference_forest.md) —— 公理→定理深度验证
 - [边界扩展树](boundary_extension_tree.md) —— 安全边界风险评估
 - [可判定性谱系](decidability_spectrum.md) —— 编译期判定边界
 - [表达力多视角](expressiveness_multiview.md) —— 七视角表达力分析
 - [L1 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) —— 所有权唯一性
-- [L3 异步](../../03_advanced/01_async/02_async.md) —— async/await 状态机
+- [L3 异步](../../03_advanced/01_async/01_async.md) —— async/await 状态机
 - [表达力多视角](expressiveness_multiview.md) —— 七视角表达力分析
 
 ---

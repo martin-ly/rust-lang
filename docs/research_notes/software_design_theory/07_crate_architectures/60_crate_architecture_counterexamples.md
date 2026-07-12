@@ -2,8 +2,8 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [设计模式](../../../../concept/06_ecosystem/03_design_patterns/02_patterns.md)
-> - [架构模式](../../../../concept/06_ecosystem/03_design_patterns/35_architecture_patterns.md)
+> - [设计模式](../../../../concept/06_ecosystem/03_design_patterns/01_patterns.md)
+> - [架构模式](../../../../concept/06_ecosystem/03_design_patterns/08_architecture_patterns.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 

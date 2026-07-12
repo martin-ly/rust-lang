@@ -1,7 +1,7 @@
 > **EN**: Integration Tests
 > **Summary**: Stub README for integration test docs; points to the canonical testing concept.
 >
-> **权威来源**: [concept/06_ecosystem/09_testing_and_quality/16_testing.md](../../../concept/06_ecosystem/09_testing_and_quality/16_testing.md)
+> **权威来源**: [concept/06_ecosystem/09_testing_and_quality/03_testing.md](../../../concept/06_ecosystem/09_testing_and_quality/03_testing.md)
 
 # Integration Tests
 

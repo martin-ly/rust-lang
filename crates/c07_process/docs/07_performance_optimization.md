@@ -4,7 +4,7 @@
 # C07-07. 进程管理性能优化（c07 示例索引）
 
 > **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
-> [`concept/06_ecosystem/10_performance/15_performance_optimization.md`](../../../concept/06_ecosystem/10_performance/15_performance_optimization.md)。
+> [`concept/06_ecosystem/10_performance/01_performance_optimization.md`](../../../concept/06_ecosystem/10_performance/01_performance_optimization.md)。
 
 本文件原为对应 crate 的通用概念教程。根据 AGENTS.md §6.4 治理规则，
 通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
@@ -14,6 +14,6 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| 性能优化 | [../../../concept/06_ecosystem/10_performance/15_performance_optimization.md](../../../concept/06_ecosystem/10_performance/15_performance_optimization.md) |
+| 性能优化 | [../../../concept/06_ecosystem/10_performance/01_performance_optimization.md](../../../concept/06_ecosystem/10_performance/01_performance_optimization.md) |
 | 并发模式 | [../../../concept/03_advanced/00_concurrency/01_concurrency.md](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
-| 异步编程 | [../../../concept/03_advanced/01_async/02_async.md](../../../concept/03_advanced/01_async/02_async.md) |
+| 异步编程 | [../../../concept/03_advanced/01_async/01_async.md](../../../concept/03_advanced/01_async/01_async.md) |

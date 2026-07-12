@@ -5,7 +5,7 @@
 >
 > **分级**: [A]
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Standard Library 官方文档来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Standard Library 官方文档来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 # Rust 标准库全面分析与论证文档 (Standard Library Comprehensive Analysis 2025 12 25) {#rust-标准库全面分析与论证文档}
 

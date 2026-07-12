@@ -4,7 +4,7 @@
 # 3.1 高级所有权模式（c01 示例索引）
 
 > **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
-> [`concept/02_intermediate/02_memory_management/12_smart_pointers.md`](../../../concept/02_intermediate/02_memory_management/12_smart_pointers.md)。
+> [`concept/02_intermediate/02_memory_management/04_smart_pointers.md`](../../../concept/02_intermediate/02_memory_management/12_smart_pointers.md)。
 
 本文件原为对应 crate 的通用概念教程。根据 AGENTS.md §6.4 治理规则，
 通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。

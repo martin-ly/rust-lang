@@ -13,7 +13,7 @@
 # 异步运行时选型决策树 {#异步运行时选型决策树}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为异步运行时选型决策树（决策树，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 async`](../../../concept/03_advanced/01_async/02_async.md)
+> **权威来源（Canonical）**: 本文件为异步运行时选型决策树（决策树，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 async`](../../../concept/03_advanced/01_async/01_async.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（运行时选型决策树、Tokio 配置决策与代码示例），不重复 concept/ 中的概念定义、规则与定理推导。
 
@@ -332,7 +332,7 @@ async fn main() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

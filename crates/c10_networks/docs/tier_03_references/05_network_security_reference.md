@@ -20,5 +20,5 @@ canonical 链接。
 | 主题 | 权威来源 |
 | :--- | :--- |
 | 网络安全 | [`concept/06_ecosystem/12_networking/02_network_security.md`](../../../../concept/06_ecosystem/12_networking/02_network_security.md) |
-| Security & Cryptography | [`concept/06_ecosystem/07_security_and_cryptography/43_security_cryptography.md`](../../../../concept/06_ecosystem/07_security_and_cryptography/43_security_cryptography.md) |
+| Security & Cryptography | [`concept/06_ecosystem/07_security_and_cryptography/02_security_cryptography.md`](../../../../concept/06_ecosystem/07_security_and_cryptography/02_security_cryptography.md) |
 | 高级网络协议 | [`concept/06_ecosystem/12_networking/01_advanced_network_protocols.md`](../../../../concept/06_ecosystem/12_networking/01_advanced_network_protocols.md) |

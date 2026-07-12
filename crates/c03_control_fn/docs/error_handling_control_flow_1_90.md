@@ -3,7 +3,7 @@
 > **EN**: Error Handling Control Flow
 > **Summary**: Error-handling control-flow patterns in Rust: `?` operator, `FromResidual`, `try` blocks, and boundary design.
 >
-> **权威来源**: [concept/01_foundation/08_error_handling/33_error_handling_control_flow.md](../../../concept/01_foundation/08_error_handling/33_error_handling_control_flow.md)
+> **权威来源**: [concept/01_foundation/08_error_handling/02_error_handling_control_flow.md](../../../concept/01_foundation/08_error_handling/02_error_handling_control_flow.md)
 
 ## 主题速览
 

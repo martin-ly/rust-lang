@@ -3,7 +3,7 @@
 > **EN**: Concurrent Algorithm Patterns
 > **Summary**: Concurrent computing models, lock-free data structures, parallelism patterns, and concurrency analysis.
 
-> **权威来源**: [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../03_advanced/00_concurrency/10_concurrency_patterns.md)
+> **权威来源**: [concept/03_advanced/00_concurrency/03_concurrency_patterns.md](../03_advanced/00_concurrency/10_concurrency_patterns.md)
 
 本文件为 crate 文档重定向 stub。原内容中的通用 Rust 概念已迁移至上述权威来源页面；以下仅保留主题索引。
 

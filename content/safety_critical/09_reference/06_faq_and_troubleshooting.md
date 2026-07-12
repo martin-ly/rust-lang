@@ -3,7 +3,7 @@
 **EN**: Faq And Troubleshooting
 **Summary**: Rust安全关键系统 - 常见问题与故障排除 Faq And Troubleshooting.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/00_meta/04_navigation/problem_graph.md](../../../concept/00_meta/04_navigation/problem_graph.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/00_meta/04_navigation/10_problem_graph.md](../../../concept/00_meta/04_navigation/10_problem_graph.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

@@ -3,7 +3,7 @@
 **EN**: Completion Report 100 Percent
 **Summary**: Rust安全关键生态系统文档集 - 完成报告 ✅ Completion Report 100 Percent.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/09_testing_and_quality/14_documentation.md](../../concept/06_ecosystem/09_testing_and_quality/14_documentation.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/09_testing_and_quality/02_documentation.md](../../concept/06_ecosystem/09_testing_and_quality/02_documentation.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

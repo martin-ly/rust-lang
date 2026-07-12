@@ -844,9 +844,9 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Kani 实战指南 —— 互补的有界模型检查器](05_kani_practical_guide.md)
-- [形式化操作语义与 Rust 的形式化模型](../../concept/04_formal/03_operational_semantics/17_operational_semantics.md)
-- [所有权的形式化定义](../../concept/04_formal/01_ownership_logic/03_ownership_formal.md)
-- [引用（Reference）语义与多级借用（Borrowing）](../../concept/01_foundation/03_values_and_references/05_reference_semantics.md)
+- [形式化操作语义与 Rust 的形式化模型](../../concept/04_formal/03_operational_semantics/03_operational_semantics.md)
+- [所有权的形式化定义](../../concept/04_formal/01_ownership_logic/02_ownership_formal.md)
+- [引用（Reference）语义与多级借用（Borrowing）](../../concept/01_foundation/03_values_and_references/01_reference_semantics.md)
 
 ## 11. 来源与延伸阅读 {#11-来源与延伸阅读}
 >
@@ -905,6 +905,6 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 ---

@@ -4,7 +4,7 @@
 **Summary**: Learning entry stub for advanced Rust type-system and programming topics; full explanations live in `concept/` authority pages.
 
 > **权威来源**: 本文件为学习入口 stub，完整概念解释请见：
-> [`concept/01_foundation/02_type_system/04_type_system.md`](../../concept/01_foundation/02_type_system/04_type_system.md)
+> [`concept/01_foundation/02_type_system/01_type_system.md`](../../concept/01_foundation/02_type_system/01_type_system.md)
 >
 > 根据 [AGENTS.md](../../AGENTS.md) §2 Canonical 规则与 §6.4 `crates/` 治理规则，
 > 通用 Rust 概念解释统一维护在 `concept/` 中；`crates/` 目录仅保留与本 crate 直接相关的可运行代码与独特实现说明。
@@ -21,15 +21,15 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| 类型系统基础 | [`concept/01_foundation/02_type_system/04_type_system.md`](../../concept/01_foundation/02_type_system/04_type_system.md) |
-| 高级类型系统 | [`concept/02_intermediate/04_types_and_conversions/20_type_system_advanced.md`](../../concept/02_intermediate/04_types_and_conversions/20_type_system_advanced.md) |
-| 泛型 | [`concept/02_intermediate/01_generics/02_generics.md`](../../concept/02_intermediate/01_generics/02_generics.md) |
+| 类型系统基础 | [`concept/01_foundation/02_type_system/01_type_system.md`](../../concept/01_foundation/02_type_system/01_type_system.md) |
+| 高级类型系统 | [`concept/02_intermediate/04_types_and_conversions/04_type_system_advanced.md`](../../concept/02_intermediate/04_types_and_conversions/04_type_system_advanced.md) |
+| 泛型 | [`concept/02_intermediate/01_generics/01_generics.md`](../../concept/02_intermediate/01_generics/01_generics.md) |
 | Trait | [`concept/02_intermediate/00_traits/01_traits.md`](../../concept/02_intermediate/00_traits/01_traits.md) |
 | 生命周期 | [`concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
-| 模式匹配 | [`concept/01_foundation/04_control_flow/40_patterns.md`](../../concept/01_foundation/04_control_flow/40_patterns.md) |
+| 模式匹配 | [`concept/01_foundation/04_control_flow/02_patterns.md`](../../concept/01_foundation/04_control_flow/02_patterns.md) |
 | 错误处理 | [`concept/02_intermediate/03_error_handling/01_error_handling.md`](../../concept/02_intermediate/03_error_handling/01_error_handling.md) |
 | 并发模型 | [`concept/03_advanced/00_concurrency/01_concurrency.md`](../../concept/03_advanced/00_concurrency/01_concurrency.md) |
-| 异步编程 | [`concept/03_advanced/01_async/02_async.md`](../../concept/03_advanced/01_async/02_async.md) |
+| 异步编程 | [`concept/03_advanced/01_async/01_async.md`](../../concept/03_advanced/01_async/01_async.md) |
 | 性能优化 | [`concept/06_ecosystem/10_performance/01_performance.md`](../../concept/06_ecosystem/10_performance/01_performance.md) |
 
 ## 实践入口

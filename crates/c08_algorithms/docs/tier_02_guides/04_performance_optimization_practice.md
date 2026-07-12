@@ -3,10 +3,10 @@
 
 # 04 性能优化实践
 
-> **权威来源**: [concept/06_ecosystem/10_performance/15_performance_optimization.md](../../../../concept/06_ecosystem/10_performance/15_performance_optimization.md)
+> **权威来源**: [concept/06_ecosystem/10_performance/01_performance_optimization.md](../../../../concept/06_ecosystem/10_performance/01_performance_optimization.md)
 
 本文件原为 `c08_algorithms` crate 的通用概念文档。根据 AGENTS.md §6.4 治理规则，
-通用 Rust 概念解释已迁移至 `concept/06_ecosystem/10_performance/15_performance_optimization.md`，此处仅保留索引与 canonical 链接。
+通用 Rust 概念解释已迁移至 `concept/06_ecosystem/10_performance/01_performance_optimization.md`，此处仅保留索引与 canonical 链接。
 
 ## 主题列表
 

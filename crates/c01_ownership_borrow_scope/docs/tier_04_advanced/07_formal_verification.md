@@ -4,7 +4,7 @@
 # 4.2 形式化验证
 
 > **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
-> [`concept/04_formal/01_ownership_logic/03_ownership_formal.md`](../../../../concept/04_formal/01_ownership_logic/03_ownership_formal.md)。
+> [`concept/04_formal/01_ownership_logic/02_ownership_formal.md`](../../../../concept/04_formal/01_ownership_logic/02_ownership_formal.md)。
 
 本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
 通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
@@ -14,5 +14,5 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| Ownership Formalization | [concept/04_formal/01_ownership_logic/03_ownership_formal.md](../../../../concept/04_formal/01_ownership_logic/03_ownership_formal.md) |
-| Formal Verification Tools | [concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md](../../../../concept/06_ecosystem/08_formal_verification/74_formal_verification_tools.md) |
+| Ownership Formalization | [concept/04_formal/01_ownership_logic/02_ownership_formal.md](../../../../concept/04_formal/01_ownership_logic/02_ownership_formal.md) |
+| Formal Verification Tools | [concept/06_ecosystem/08_formal_verification/02_formal_verification_tools.md](../../../../concept/06_ecosystem/08_formal_verification/02_formal_verification_tools.md) |

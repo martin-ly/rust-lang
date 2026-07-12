@@ -19,5 +19,5 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | Rust 1.93 稳定特性 | [`concept/07_future/00_version_tracking/rust_1_93_stabilized.md`](../../../concept/07_future/00_version_tracking/rust_1_93_stabilized.md) |
-| WebAssembly 生态 | [`concept/06_ecosystem/11_domain_applications/11_webassembly.md`](../../../concept/06_ecosystem/11_domain_applications/11_webassembly.md) |
-| WASI 与组件模型 | [`concept/06_ecosystem/05_systems_and_embedded/08_wasi.md`](../../../concept/06_ecosystem/05_systems_and_embedded/08_wasi.md) |
+| WebAssembly 生态 | [`concept/06_ecosystem/11_domain_applications/03_webassembly.md`](../../../concept/06_ecosystem/11_domain_applications/03_webassembly.md) |
+| WASI 与组件模型 | [`concept/06_ecosystem/05_systems_and_embedded/01_wasi.md`](../../../concept/06_ecosystem/05_systems_and_embedded/01_wasi.md) |

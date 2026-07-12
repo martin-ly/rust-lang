@@ -1,4 +1,4 @@
-> **权威来源**: [concept/02_intermediate/01_generics/39_type_level_programming.md](../../../../concept/02_intermediate/01_generics/39_type_level_programming.md)
+> **权威来源**: [concept/02_intermediate/01_generics/03_type_level_programming.md](../../../../concept/02_intermediate/01_generics/03_type_level_programming.md)
 
 # 类型级编程 (Type-Level Programming)
 

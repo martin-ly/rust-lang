@@ -321,27 +321,27 @@ ROADMAP_TOPICS = [
 # 用于修正标题差异导致的假缺口；命中时直接视为完全对齐。
 AUTHORITY_TOPIC_ALIASES = {
     # 形式化/验证生态
-    "Iris: Higher-Order Concurrent Separation Logic Framework": "concept/04_formal/02_separation_logic/11_separation_logic.md",
-    "Borrow Sanitizer": "concept/07_future/03_preview_features/borrow_sanitizer.md",
-    "Miri: Rust Interpreter for Undefined Behavior": "concept/04_formal/04_model_checking/31_miri.md",
-    "Ferrocene: Rust for Safety-Critical Systems": "concept/07_future/03_preview_features/35_ferrocene_preview.md",
-    "Verus: Verified Rust for Low-Level Systems": "concept/04_formal/04_model_checking/22_modern_verification_tools.md",
+    "Iris: Higher-Order Concurrent Separation Logic Framework": "concept/04_formal/02_separation_logic/02_separation_logic.md",
+    "Borrow Sanitizer": "concept/07_future/03_preview_features/24_borrow_sanitizer.md",
+    "Miri: Rust Interpreter for Undefined Behavior": "concept/04_formal/04_model_checking/08_miri.md",
+    "Ferrocene: Rust for Safety-Critical Systems": "concept/07_future/03_preview_features/12_ferrocene_preview.md",
+    "Verus: Verified Rust for Low-Level Systems": "concept/04_formal/04_model_checking/04_modern_verification_tools.md",
     # 工业/应用生态
-    "bindgen / cbindgen": "concept/03_advanced/04_ffi/05_rust_ffi.md",
-    "reqwest": "concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md",
-    "sqlx": "concept/06_ecosystem/06_data_and_distributed/23_database_access.md",
-    "Tauri": "concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md",
-    "Dioxus": "concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md",
-    "Leptos": "concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md",
-    "egui": "concept/06_ecosystem/11_domain_applications/07_game_ecs.md",
-    "PyO3": "concept/06_ecosystem/11_domain_applications/75_industrial_case_studies.md",
-    "rayon": "concept/03_advanced/00_concurrency/10_concurrency_patterns.md",
+    "bindgen / cbindgen": "concept/03_advanced/04_ffi/01_rust_ffi.md",
+    "reqwest": "concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md",
+    "sqlx": "concept/06_ecosystem/06_data_and_distributed/02_database_access.md",
+    "Tauri": "concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md",
+    "Dioxus": "concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md",
+    "Leptos": "concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md",
+    "egui": "concept/06_ecosystem/11_domain_applications/02_game_ecs.md",
+    "PyO3": "concept/06_ecosystem/11_domain_applications/14_industrial_case_studies.md",
+    "rayon": "concept/03_advanced/00_concurrency/03_concurrency_patterns.md",
     # 项目路线图
-    "Cranelift Backend": "concept/07_future/03_preview_features/38_cranelift_backend_preview.md",
-    "MCDC Coverage": "concept/07_future/03_preview_features/07_mcdc_coverage_preview.md",
-    "Rustdoc Search / Scraped Examples": "concept/06_ecosystem/09_testing_and_quality/14_documentation.md",
-    "cortex-m / riscv-rt": "concept/06_ecosystem/05_systems_and_embedded/22_embedded_systems.md",
-    "ring / rustls": "concept/06_ecosystem/07_security_and_cryptography/43_security_cryptography.md",
+    "Cranelift Backend": "concept/07_future/03_preview_features/16_cranelift_backend_preview.md",
+    "MCDC Coverage": "concept/07_future/03_preview_features/02_mcdc_coverage_preview.md",
+    "Rustdoc Search / Scraped Examples": "concept/06_ecosystem/09_testing_and_quality/02_documentation.md",
+    "cortex-m / riscv-rt": "concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
+    "ring / rustls": "concept/06_ecosystem/07_security_and_cryptography/02_security_cryptography.md",
 }
 
 
@@ -752,7 +752,7 @@ def phase5():
         lines.append("未检测到明显标题重复。\n\n")
 
     lines.append("## 4. 后续维护机制\n\n")
-    lines.append("1. **月度更新**：运行 `python scripts/topic_authority_aligner.py --phase all`，刷新 `concept/00_meta/02_sources/topic_authority_alignment_map.md` 与本报告。\n")
+    lines.append("1. **月度更新**：运行 `python scripts/topic_authority_aligner.py --phase all`，刷新 `concept/00_meta/02_sources/04_topic_authority_alignment_map.md` 与本报告。\n")
     lines.append("2. **季度评审**：由内容负责人审核 P0/P1 缺口，决定是否纳入下一个 sprint。\n")
     lines.append("3. **新增文档规范**：每个新 `concept/` 文件需在 frontmatter 中标注 `authority_source` 与 `coverage_level`，便于自动对齐。\n")
     lines.append("4. **验证门禁**：合并前必须运行 `kb_auditor.py`、`detect_content_overlap.py`、`cargo check --workspace`。\n\n")
@@ -773,7 +773,7 @@ def phase5():
     lines.append("\n")
 
     lines.append("## 附录 B：项目索引资产\n\n")
-    lines.append("- `concept/00_meta/02_sources/topic_authority_alignment_map.md`：当前项目主题树与权威来源对齐图谱。\n")
+    lines.append("- `concept/00_meta/02_sources/04_topic_authority_alignment_map.md`：当前项目主题树与权威来源对齐图谱。\n")
     lines.append("- `tmp/topic_inventory_current.json`：当前项目主题结构化数据。\n")
     lines.append("- `tmp/topic_inventory_authoritative.json`：权威来源主题结构化数据。\n")
     lines.append("- `tmp/topic_symmetric_diff.json`：完整对称差数据。\n")

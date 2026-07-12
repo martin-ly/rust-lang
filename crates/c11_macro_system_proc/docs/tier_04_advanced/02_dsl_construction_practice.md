@@ -3,7 +3,7 @@
 > **EN**: DSL Construction Practice
 > **Summary**: DSL design principles, parser construction techniques, error recovery, and performance optimization.
 
-> **权威来源**: [concept/02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md](../02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md)
+> **权威来源**: [concept/02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md](../02_intermediate/06_macros_and_metaprogramming/13_dsl_and_embedding.md)
 
 本文件为 crate 文档重定向 stub。原内容中的通用 Rust 概念已迁移至上述权威来源页面；以下仅保留主题索引。
 

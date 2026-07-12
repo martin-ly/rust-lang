@@ -7,7 +7,7 @@
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
-> **关联文件**: [学习指南 `learning_guide.md`](../04_navigation/learning_guide.md) · [能力图谱 `competency_graph.md`](competency_graph.md)
+> **关联文件**: [学习指南 `learning_guide.md`](../04_navigation/07_learning_guide.md) · [能力图谱 `competency_graph.md`](competency_graph.md)
 ---
 
 # Rust 知识体系双维认知矩阵（Krathwohl × Bloom）
@@ -336,11 +336,11 @@ graph LR
 
 **变更日志**:
 
-- v1.0 (2026-05-23): 初始版本 — Krathwohl × Bloom 双维矩阵 + L1-L7 全层映射 + A/S/P 整合 + 认知路径规划 [权威来源对齐 Wave 1](../02_sources/international_authority_index.md)
+- v1.0 (2026-05-23): 初始版本 — Krathwohl × Bloom 双维矩阵 + L1-L7 全层映射 + A/S/P 整合 + 认知路径规划 [权威来源对齐 Wave 1](../02_sources/05_international_authority_index.md)
 
 ---
 
-> **相关文件**: [A/S/P 标记规范](../03_audit/asp_marking_guide.md) · [能力图谱](competency_graph.md) · [方法论](methodology.md) · [概念索引](../04_navigation/concept_index.md)
+> **相关文件**: [A/S/P 标记规范](../03_audit/02_asp_marking_guide.md) · [能力图谱](competency_graph.md) · [方法论](methodology.md) · [概念索引](../04_navigation/03_concept_index.md)
 
 ## 认知路径
 

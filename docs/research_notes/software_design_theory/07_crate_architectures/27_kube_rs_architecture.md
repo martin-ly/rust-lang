@@ -2,8 +2,8 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [云原生](../../../../concept/06_ecosystem/04_web_and_networking/24_cloud_native.md)
-> - [微服务模式](../../../../concept/06_ecosystem/03_design_patterns/31_microservice_patterns.md)
+> - [云原生](../../../../concept/06_ecosystem/04_web_and_networking/02_cloud_native.md)
+> - [微服务模式](../../../../concept/06_ecosystem/03_design_patterns/05_microservice_patterns.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **⚠️ 历史文档提示**：
@@ -221,8 +221,8 @@ struct MyAppSpec {
 
 - [Tokio 异步运行时架构](06_tokio_architecture.md)
 - [Tracing 可观测性架构](18_tracing_architecture.md)
-- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
-- [分布式模式](../../../../concept/03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md)
+- [异步编程模型](../../../../concept/03_advanced/01_async/01_async.md)
+- [分布式模式](../../../../concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
 - [Kafka / rdkafka 架构](26_kafka_architecture.md) — 消息队列与事件驱动对比
 
 ---

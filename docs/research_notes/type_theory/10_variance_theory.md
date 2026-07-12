@@ -7,7 +7,7 @@
 # 型变理论 {#型变理论}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为型变理论形式化研究笔记；通用 Rust 概念解释请以 concept 权威页为准：[`concept L4 子类型与型变`](../../../concept/04_formal/00_type_theory/06_subtype_variance.md)
+> **权威来源（Canonical）**: 本文件为型变理论形式化研究笔记；通用 Rust 概念解释请以 concept 权威页为准：[`concept L4 子类型与型变`](../../../concept/04_formal/00_type_theory/02_subtype_variance.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（协变/逆变/不变形式化、型变规则、RustBelt/Oxide 证据、7 代码示例与反例），不重复 concept/ 中的概念定义、规则与定理推导。
 
@@ -910,7 +910,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

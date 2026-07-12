@@ -3,7 +3,7 @@
 **EN**: Comprehensive Language Comparison Matrix
 **Summary**: 综合语言对比矩阵 Comprehensive Language Comparison Matrix.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/05_comparative/00_paradigms/03_paradigm_matrix.md](../../../concept/05_comparative/00_paradigms/03_paradigm_matrix.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/05_comparative/00_paradigms/01_paradigm_matrix.md](../../../concept/05_comparative/00_paradigms/01_paradigm_matrix.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

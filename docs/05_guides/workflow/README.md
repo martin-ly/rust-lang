@@ -7,7 +7,7 @@
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]
-> **权威来源**: 工作流理论与形式化模型深度解释见 [concept/06_ecosystem/03_design_patterns/41_workflow_theory.md](../../../concept/06_ecosystem/03_design_patterns/41_workflow_theory.md)。
+> **权威来源**: 工作流理论与形式化模型深度解释见 [concept/06_ecosystem/03_design_patterns/17_workflow_theory.md](../../../concept/06_ecosystem/03_design_patterns/17_workflow_theory.md)。
 
 本目录收录工作流理论、形式化模型及其在 Rust 中的映射与应用。
 

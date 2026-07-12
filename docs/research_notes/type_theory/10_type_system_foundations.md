@@ -1,7 +1,7 @@
 # 类型系统基础 {#类型系统基础}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为类型系统基础形式化研究笔记；通用 Rust 概念解释请以 concept 权威页为准：[`concept L4 类型论`](../../../concept/04_formal/00_type_theory/02_type_theory.md) · [`concept L2 类型系统`](../../../concept/01_foundation/02_type_system/04_type_system.md)
+> **权威来源（Canonical）**: 本文件为类型系统基础形式化研究笔记；通用 Rust 概念解释请以 concept 权威页为准：[`concept L4 类型论`](../../../concept/04_formal/00_type_theory/01_type_theory.md) · [`concept L2 类型系统`](../../../concept/01_foundation/02_type_system/01_type_system.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（类型安全证明、替换引理、System F、Hindley-Milner Algorithm W、Curry-Howard、8 反例），不重复 concept/ 中的概念定义、规则与定理推导。
 
@@ -16,8 +16,8 @@
 > **Bloom 层级**: L5-L6
 >
 > **层次定位**: L4 形式化 / 类型论基础研究
-> **前置依赖**: [concept L4 类型论](../../../concept/04_formal/00_type_theory/02_type_theory.md) · [concept L2 泛型（Generics）](../../../concept/02_intermediate/01_generics/02_generics.md)
-> **后置延伸**: [ROD 形式语义](../../../archive/rust-ownership-decidability/formal-foundations/README.md)（归档只读） · [concept L7 效果系统](../../../concept/07_future/03_preview_features/04_effects_system.md)
+> **前置依赖**: [concept L4 类型论](../../../concept/04_formal/00_type_theory/01_type_theory.md) · [concept L2 泛型（Generics）](../../../concept/02_intermediate/01_generics/01_generics.md)
+> **后置延伸**: [ROD 形式语义](../../../archive/rust-ownership-decidability/formal-foundations/README.md)（归档只读） · [concept L7 效果系统](../../../concept/07_future/03_preview_features/01_effects_system.md)
 > **跨层映射**: L4 System F ↔ Rust 泛型（Generics） | 研究笔记扩展
 > **定理链编号**: T-130 类型一致性（Coherence） → T-131 子类型 soundness
 > **创建日期**: 2025-01-27
@@ -3479,7 +3479,7 @@ $
 
 $。
 
-**定理 NEWTYPE-T1**：`repr(transparent)` 保证单字段包装零成本；类型检查与 `transmute` 安全见 [UNSAFE_RUST_GUIDE](../../../concept/03_advanced/02_unsafe/03_unsafe.md)。
+**定理 NEWTYPE-T1**：`repr(transparent)` 保证单字段包装零成本；类型检查与 `transmute` 安全见 [UNSAFE_RUST_GUIDE](../../../concept/03_advanced/02_unsafe/01_unsafe.md)。
 
 **Def DEREF-NULL1（deref_nullptr deny）**：1.93 中 `deref_nullptr` lint 默认 deny；对 `*const T`/`*mut T` 解引用需非空保证；与类型系统衔接：裸指针解引用 $*p$ 在 $p$ 可能为 null 时产生 lint 错误。
 
@@ -3904,7 +3904,7 @@ fn truncate_front(&mut self, len: usize)
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

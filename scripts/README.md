@@ -226,6 +226,41 @@ python scripts/bulk_rename.py $(awk '{print $1, $2}' target/tmp/rename_plan.txt)
 4. 仅扫描以下扩展名的文本文件：`.md`、`.json`、`.toml`、`.yaml`、`.yml`、`.py`、`.rs`、`.sh`、`.js`、`.hbs`。
 5. 运行前建议先通过 `python scripts/lint_filenames.py --all` 生成清单并核对重命名计划。
 
+### `plan_renumber.py` / `apply_renumber.py`（重编号框架，2026-07-12 新增）
+
+目录内两位连续序号（`NN_`）重编号工程的两阶段工具链：
+
+- `plan_renumber.py`：**只读**，生成 dry-run 映射表与计划报告，不移动任何文件。
+  顺序优先级：`SUMMARY.md` 教学顺序 → 未收录文件字母序；README 最前；
+  `rust_1_9x_*` / `00_meta/00_framework/` / `07_future/00_version_tracking/`
+  无序号专题系列保持无序号；排除 `sources/`、`quiz*`、`knowledge_topology/` 等目录。
+- `apply_renumber.py`：默认 **dry-run**；显式 `--apply` 才用 `os.rename`
+  （两阶段临时名，处理链式/环状重命名）移动文件，并全库重写
+  `.md/.py/.json/.yaml/.toml` 中的相对/绝对/仓库相对路径引用
+  （按引用方文件移动前后位置双向重算），结构化同步 `concept_kb.json` 与
+  `kg_data*.json`/`kg_index.json`，重生成 `SUMMARY.new.md`（写 `tmp/` 供 diff）。
+  跳过 `book/ reports/ archive/ tmp/ vendor/ target/ .git/`。**不使用任何 git 命令**。
+
+```bash
+# 阶段 1：生成映射表与报告（只读）
+python scripts/plan_renumber.py --root concept \
+  --out tmp/renumber/mapping_concept.csv --report tmp/renumber/plan_report.md
+
+# 阶段 2：dry-run 验证链接重写（默认）
+python scripts/apply_renumber.py --mapping tmp/renumber/mapping_concept.csv --scope concept
+
+# 阶段 2：实际执行（需人工 review 映射表与 SUMMARY.new.md 后）
+python scripts/apply_renumber.py --mapping tmp/renumber/mapping_concept.csv --scope concept --apply
+```
+
+**注意事项**：
+
+1. `--root`/`--scope` 参数化，`docs/`、`knowledge/`、`crates/` 可复用同一框架。
+2. 所有读写使用 `newline=''`，保证 LF/CRLF 文件行尾不被翻转。
+3. 执行前必须人工 review `tmp/renumber/plan_report.md` 的疑点清单与
+   `tmp/renumber/apply_log.md` 的未解析引用清单。
+4. 输出产物（`tmp/renumber/`）不应提交版本控制。
+
 ---
 
 ## 子目录说明

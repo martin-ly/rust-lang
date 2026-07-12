@@ -1,7 +1,7 @@
 > **EN**: Systems Programming Optimization
 > **Summary**: Systems-level performance optimization for Rust, including CPU affinity, NUMA awareness, thread priority, real-time scheduling, cache optimization, and memory allocation. This crate document now redirects to the canonical concept page.
 
-> **权威来源**: [concept/06_ecosystem/10_performance/15_performance_optimization.md](../../../../concept/06_ecosystem/10_performance/15_performance_optimization.md)
+> **权威来源**: [concept/06_ecosystem/10_performance/01_performance_optimization.md](../../../../concept/06_ecosystem/10_performance/01_performance_optimization.md)
 
 ## 主题速览
 

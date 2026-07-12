@@ -2,8 +2,8 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [游戏开发](../../../../concept/06_ecosystem/11_domain_applications/21_game_development.md)
-> - [响应式编程](../../../../concept/06_ecosystem/04_web_and_networking/40_reactive_programming.md)
+> - [游戏开发](../../../../concept/06_ecosystem/11_domain_applications/05_game_development.md)
+> - [响应式编程](../../../../concept/06_ecosystem/04_web_and_networking/09_reactive_programming.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
@@ -349,8 +349,8 @@ let window = web_sys::window().unwrap();
 - [20_ratatui_architecture.md](20_ratatui_architecture.md) — 终端 UI 框架对比
 - [11_wgpu_architecture.md](11_wgpu_architecture.md) — 底层 GPU 渲染抽象
 - [12_wasm_architecture.md](12_wasm_architecture.md) — WebAssembly 互操作基础
-- [concept: 响应式编程](../../../../concept/06_ecosystem/04_web_and_networking/40_reactive_programming.md)
-- [concept: WebAssembly](../../../../concept/06_ecosystem/11_domain_applications/11_webassembly.md)
+- [concept: 响应式编程](../../../../concept/06_ecosystem/04_web_and_networking/09_reactive_programming.md)
+- [concept: WebAssembly](../../../../concept/06_ecosystem/11_domain_applications/03_webassembly.md)
 
 ---
 

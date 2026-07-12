@@ -39,7 +39,7 @@
   - `crates/c08_algorithms/Cargo.toml`: `tract-onnx` `0.23.1` → `0.23.4`；`eframe` `0.34.3` → `0.35.0`（与 workspace `egui = "0.35.0"` 对齐）。
   - 修复 `crates/c08_algorithms/examples/gui_calculator_demo.rs` 中 `eframe` 0.35 API 变更：`CentralPanel::show_inside` → `show`。
 - **AGENTS.md 合规修复**：
-  - 为 `concept/00_meta/02_sources/topic_authority_alignment_map.md` 补充 `**EN**` / `**Summary**`。
+  - 为 `concept/00_meta/02_sources/04_topic_authority_alignment_map.md` 补充 `**EN**` / `**Summary**`。
   - 为 `content/README.md` 补充 `**EN**` / `**Summary**`。
   - 合并 `docs/research_notes/10_distributed_patterns_matrix.md` → `10_distributed_pattern_matrix.md`（后者改为重定向 stub）。
   - 合并 `docs/research_notes/10_workflow_engine_matrix.md` → `formal_methods/10_workflow_engines_matrix.md`（前者改为重定向 stub）。
@@ -55,23 +55,23 @@
 
 全部 11 项滚动深化任务已完成：
 
-- **P2-11 TRPL Ch17 对照索引**：在 `concept/03_advanced/01_async/02_async.md` 顶部新增 TRPL 3rd Ed Ch17 提示框与权威教材对照表。
+- **P2-11 TRPL Ch17 对照索引**：在 `concept/03_advanced/01_async/01_async.md` 顶部新增 TRPL 3rd Ed Ch17 提示框与权威教材对照表。
 - **P2-9 TRPL 全章映射表**：新建 `docs/01_learning/learning_mvp_path.md`，覆盖 TRPL 3rd Ed 全部 22 章与 `concept/` 权威页的映射。
-- **P2-1 rustc 查询系统动手实验**：在 `concept/04_formal/05_rustc_internals/19_rustc_query_system.md` 新增调用 `type_of`/`predicates_of` 查询的 Mermaid 调用链图与 `rustc_driver` 伪代码示例。
+- **P2-1 rustc 查询系统动手实验**：在 `concept/04_formal/05_rustc_internals/01_rustc_query_system.md` 新增调用 `type_of`/`predicates_of` 查询的 Mermaid 调用链图与 `rustc_driver` 伪代码示例。
 - **P2-5 Kani 合约示例扩展**：在 `crates/c03_control_fn/src/kani_examples.rs` 和 `crates/c04_generic/src/kani_examples.rs` 新增函数合约（`requires`/`ensures`）与循环不变量示例。
 - **P2-10 Brown Book 所有权引用**：在 `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md` 新增 Brown University Interactive Book 学术背景引用小节。
-- **P2-2 Trait Solver 对比实验**：在 `concept/04_formal/05_rustc_internals/26_trait_solver_in_rustc.md` 新增 old solver vs `-Znext-solver=globally` 的可复现对比示例与表格。
+- **P2-2 Trait Solver 对比实验**：在 `concept/04_formal/05_rustc_internals/03_trait_solver_in_rustc.md` 新增 old solver vs `-Znext-solver=globally` 的可复现对比示例与表格。
 - **P2-6 形式化工具交叉索引**：在 `concept/04_formal/04_model_checking/` 的 `13_formal_methods.md`、`22_modern_verification_tools.md`、`31_miri.md`、`32_kani.md` 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用表。
-- **P2-3 Cargo resolver v3 / `public = true` 示例**：新建 `crates/c17_resolver_v3_public_demo/` 可运行 workspace 与 `concept/06_ecosystem/01_cargo/11_resolver_v3_public_feature_unification.md` 配套概念页。
+- **P2-3 Cargo resolver v3 / `public = true` 示例**：新建 `crates/c17_resolver_v3_public_demo/` 可运行 workspace 与 `concept/06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md` 配套概念页。
 - **P2-7 Sea-ORM 2.0 迁移评估**：输出 `reports/SEA_ORM_2_0_MIGRATION_ASSESSMENT_2026_07_09.md`，结论为 2.0 stable 尚未发布，保持 `2.0.0-rc.42`。
 - **P2-8 生态目标再确认**：输出 `reports/ECOSYSTEM_TARGET_RECONFIRMATION_2026_07_09.md`，确认 AFIDT 仍为 nightly、dynosaur 0.3.1 stable、wasm32-wasip2 Tier 2。
-- **P2-4 MIR / Codegen / LLVM 入门**：`concept/04_formal/05_rustc_internals/20_mir_codegen_llvm_primer.md` 已在 crates/docs 整治阶段创建并补入 SUMMARY。
+- **P2-4 MIR / Codegen / LLVM 入门**：`concept/04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md` 已在 crates/docs 整治阶段创建并补入 SUMMARY。
 
 ### 知识库质量风险清零（2026-07-09）
 
 - **修复 14 个质量风险文件**：
   - 为 `concept/01_foundation/07_modules_and_items/` 下的 `12_functions.md`、`13_use_declarations.md`、`14_structs.md`、`15_enumerations.md`、`16_implementations.md` 补充认知路径、过渡段落、定理链与反向推理。
-  - 为 `concept/01_foundation/00_start/47_std_io_and_process.md`、`concept/01_foundation/06_strings_and_text/46_formatting_and_display.md`、`concept/01_foundation/07_modules_and_items/43_type_aliases.md`、`44_static_items.md`、`45_const_items_and_const_fn.md`、`concept/02_intermediate/04_types_and_conversions/35_unions.md`、`37_type_conversions.md`、`concept/02_intermediate/06_macros_and_metaprogramming/36_attributes_by_category.md`、`concept/03_advanced/07_unsafe_internals/37_unsafe_collections_internals.md` 补充过渡段落。
+  - 为 `concept/01_foundation/00_start/05_std_io_and_process.md`、`concept/01_foundation/06_strings_and_text/03_formatting_and_display.md`、`concept/01_foundation/07_modules_and_items/07_type_aliases.md`、`44_static_items.md`、`45_const_items_and_const_fn.md`、`concept/02_intermediate/04_types_and_conversions/06_unions.md`、`37_type_conversions.md`、`concept/02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md`、`concept/03_advanced/07_unsafe_internals/01_unsafe_collections_internals.md` 补充过渡段落。
 - **验证**：
   - `python scripts/kb_auditor.py` 风险文件数从 14 降至 **0**，所有文件通过质量门。
   - 定理链 (⟹) 从 1887 增至 1907，反向推理 (⟸) 从 257 增至 267。
@@ -96,10 +96,10 @@
 
 - **`concept/SUMMARY.md` 补全**：
   - 新增 7 个非归档 concept 页面的索引条目：
-    - `00_meta/01_terminology/bilingual_template.md`
-    - `00_meta/03_audit/audit_checklist.md`
-    - `00_meta/03_audit/template_deduplication_guide.md`
-    - `00_meta/placeholders/placeholder_generic.md`
+    - `00_meta/01_terminology/03_bilingual_template.md`
+    - `00_meta/03_audit/03_audit_checklist.md`
+    - `00_meta/03_audit/05_template_deduplication_guide.md`
+    - `00_meta/placeholders/01_placeholder_generic.md`
     - `sources/INDEX.md`
     - `sources/rfc_index.md`
     - `sources/theorem_tier_spec.md`
@@ -112,33 +112,33 @@
 ### P2-Q3 深化计划持续推进（2026-07-09）
 
 - **P2-2 Trait Solver 对比**：
-  - 更新 `concept/04_formal/05_rustc_internals/26_trait_solver_in_rustc.md`，新增旧/新 trait solver 9 行对比表、行为差异示例、定理链与反向推理。
+  - 更新 `concept/04_formal/05_rustc_internals/03_trait_solver_in_rustc.md`，新增旧/新 trait solver 9 行对比表、行为差异示例、定理链与反向推理。
 - **P2-4 MIR / Codegen / LLVM 入门**：
-  - 新建 `concept/04_formal/05_rustc_internals/20_mir_codegen_llvm_primer.md`，覆盖 MIR CFG、MIR→codegen→LLVM IR 管线、`--emit=mir` / `--emit=llvm-ir` 用法、带注释示例。
+  - 新建 `concept/04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md`，覆盖 MIR CFG、MIR→codegen→LLVM IR 管线、`--emit=mir` / `--emit=llvm-ir` 用法、带注释示例。
 
 ### crates/*/docs/ 合规整改 P0 完成（2026-07-09）
 
 - 按 `.kimi/RECTIFICATION_PLAN_2026_07_09.md` 第五章 P0 队列，完成 5 个高重复风险文件的整改：
   - `crates/c05_threads/docs/01_basic_threading.md` → 摘要 + 链接到 `concept/03_advanced/00_concurrency/01_concurrency.md`
-  - `crates/c05_threads/docs/06_parallel_algorithms.md` → 摘要 + 链接到 `concept/03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md`
+  - `crates/c05_threads/docs/06_parallel_algorithms.md` → 摘要 + 链接到 `concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md`
   - `crates/c07_process/docs/01_process_model_and_lifecycle.md` → 摘要 + 链接到新建 `concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`
-  - `crates/c09_design_pattern/docs/rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md` → 摘要 + 链接到 `concept/06_ecosystem/03_design_patterns/02_patterns.md`
+  - `crates/c09_design_pattern/docs/rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md` → 摘要 + 链接到 `concept/06_ecosystem/03_design_patterns/01_patterns.md`
   - `crates/c10_networks/docs/rust_190_examples_part3_advanced_protocols.md` → 摘要 + 链接到新建 `concept/06_ecosystem/09_networking/01_advanced_network_protocols.md`
 
 ### P2-Q3 深化计划剩余任务完成（2026-07-09）
 
 - **P2-3 Cargo Resolver v3 / public = true**：
-  - 重写 `concept/06_ecosystem/01_cargo/10_public_private_deps.md` 为权威页。
+  - 重写 `concept/06_ecosystem/01_cargo/02_public_private_deps.md` 为权威页。
   - 完善 `examples/resolver_v3_practice/` 工作区与 README。
 - **P2-5 Kani 扩展**：
   - 新增 `crates/c03_control_fn/src/kani_examples.rs`（函数合约 + 循环不变量）。
   - 新增 `crates/c04_generic/src/kani_examples.rs`（泛型合约 + 泛型循环不变量）。
-  - 更新 `concept/04_formal/04_model_checking/32_kani.md` 示例导航表。
+  - 更新 `concept/04_formal/04_model_checking/09_kani.md` 示例导航表。
 - **P2-6 形式化工具交叉链接**：
   - 在 `borrow_sanitizer.md`、`safety_tags_preview.md`、`autoverus_preview.md`、`tree_borrows_deep_dive.md`、`08_safety_tags_preview.md`、`20_borrowsanitizer_preview.md` 之间新增交叉引用。
   - 整理 `concept/SUMMARY.md`。
 - **P2-9 TRPL 3rd Ed 章节映射**：
-  - 新建 `concept/00_meta/trpl_3rd_ed_mapping.md`（Ch1–Ch21 + 附录 A–G）。
+  - 新建 `concept/00_meta/01_trpl_3rd_ed_mapping.md`（Ch1–Ch21 + 附录 A–G）。
   - 更新 `concept/SUMMARY.md`。
 - **P2-10 Brown Book 研究引用**：
   - 在 `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`、`02_borrowing.md`、`03_lifetimes.md` 新增研究引用小节。
@@ -146,11 +146,11 @@
 ### crates/*/docs/ 合规整改 P1 完成（2026-07-09）
 
 - 完成 P1 队列 5 个文件：
-  - `crates/c02_type_system/docs/tier_03_references/03_dispatch_mechanisms_reference.md` → `concept/02_intermediate/00_traits/39_dispatch_mechanisms.md`
-  - `crates/c04_generic/docs/tier_04_advanced/04_type_level_programming.md` → `concept/02_intermediate/01_generics/39_type_level_programming.md`
-  - `crates/c06_async/docs/tier_02_guides/02_future_and_executor_mechanisms.md` → `concept/03_advanced/01_async/39_future_and_executor_mechanisms.md`
-  - `crates/c08_algorithms/docs/tier_04_advanced/04_algorithm_engineering_practice.md` → `concept/06_ecosystem/11_domain_applications/76_algorithm_engineering_practice.md`
-  - `crates/c10_networks/docs/tier_04_advanced/01_high_performance_network_service_architecture.md` → `concept/06_ecosystem/04_web_and_networking/39_high_performance_network_service_architecture.md`
+  - `crates/c02_type_system/docs/tier_03_references/03_dispatch_mechanisms_reference.md` → `concept/02_intermediate/00_traits/02_dispatch_mechanisms.md`
+  - `crates/c04_generic/docs/tier_04_advanced/04_type_level_programming.md` → `concept/02_intermediate/01_generics/03_type_level_programming.md`
+  - `crates/c06_async/docs/tier_02_guides/02_future_and_executor_mechanisms.md` → `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md`
+  - `crates/c08_algorithms/docs/tier_04_advanced/04_algorithm_engineering_practice.md` → `concept/06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md`
+  - `crates/c10_networks/docs/tier_04_advanced/01_high_performance_network_service_architecture.md` → `concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md`
 
 ### Q4 2026 准备文档（2026-07-09）
 
@@ -167,7 +167,7 @@
 - **P2-8 AFIDT / dynosaur 状态更新**:
   - AFIDT 跟踪 issue 为 [#133119](https://github.com/rust-lang/rust/issues/133119)，仍处于 nightly 实验性；`dynosaur` 最新版 `0.3.1`（2026-07-03）。
   - 代码侧继续保留 `async_trait`；创建 `.kimi/P2_8_AFIDT_DYNOSAUR_STATUS_2026_07_09.md`。
-  - 更新 `concept/03_advanced/01_async/02_async.md`、`knowledge/INDEX.md`、`crates/c06_async/src/afit_dyn_tracking.rs`、`crates/c06_async/src/lib.rs` 的状态说明。
+  - 更新 `concept/03_advanced/01_async/01_async.md`、`knowledge/INDEX.md`、`crates/c06_async/src/afit_dyn_tracking.rs`、`crates/c06_async/src/lib.rs` 的状态说明。
 
 ### P1 权威事实修正与 Rust 1.96 覆盖缺口回填（2026-06-26）
 
@@ -1291,10 +1291,10 @@
 
 ### 🔗 L3 概念 ↔ 测验闭环
 
-- **`concept/03_advanced/01_concurrency.md`**: 末尾添加指向 [L3 并发与异步测验](concept/03_advanced/00_concurrency/21_quiz_concurrency_async.md) 的链接
-- **`concept/03_advanced/02_async.md`**: 末尾添加指向 [L3 并发与异步测验](concept/03_advanced/00_concurrency/21_quiz_concurrency_async.md) 的链接
-- **`concept/03_advanced/03_unsafe.md`**: 末尾添加指向 [L3 Unsafe Rust 测验](concept/03_advanced/02_unsafe/22_quiz_unsafe.md) 的链接
-- **`concept/03_advanced/04_macros.md`**: 末尾添加指向 [L3 宏系统测验](concept/03_advanced/03_proc_macros/23_quiz_macros.md) 的链接
+- **`concept/03_advanced/01_concurrency.md`**: 末尾添加指向 [L3 并发与异步测验](concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md) 的链接
+- **`concept/03_advanced/02_async.md`**: 末尾添加指向 [L3 并发与异步测验](concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md) 的链接
+- **`concept/03_advanced/03_unsafe.md`**: 末尾添加指向 [L3 Unsafe Rust 测验](concept/03_advanced/02_unsafe/05_quiz_unsafe.md) 的链接
+- **`concept/03_advanced/04_macros.md`**: 末尾添加指向 [L3 宏系统测验](concept/03_advanced/03_proc_macros/10_quiz_macros.md) 的链接
 - **`concept/03_advanced/06_pin_unpin.md`**: 新增 4 道嵌入式测验（Pin 设计动机/Unpin 自动实现/`Pin::new` 限制/async 状态机自引用）
 - **`concept/03_advanced/03_unsafe.md`**: 新增 4 道嵌入式测验（`unsafe` 块 5 种能力/`unsafe fn` 调用契约/裸指针安全解引用/`unsafe impl Send` 契约）
 - **`concept/03_advanced/01_concurrency.md`**: 新增 4 道嵌入式测验（Send/Sync 定义/Rc vs Arc/`Arc<Mutex<T>>` 共享状态/死锁分析）

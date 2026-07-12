@@ -11,8 +11,8 @@
 >
 > 相关概念参考：
 >
-> - [数据库访问](../../../../concept/06_ecosystem/06_data_and_distributed/23_database_access.md)
-> - [数据库系统](../../../../concept/06_ecosystem/06_data_and_distributed/37_database_systems.md)
+> - [数据库访问](../../../../concept/06_ecosystem/06_data_and_distributed/02_database_access.md)
+> - [数据库系统](../../../../concept/06_ecosystem/06_data_and_distributed/04_database_systems.md)
 
 ---
 

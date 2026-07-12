@@ -3,7 +3,7 @@
 **EN**: Case Study 03 Automotive Ecus
 **Summary**: 案例研究3 Case Study 03 Automotive Ecus.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/11_domain_applications/75_industrial_case_studies.md](../../../concept/06_ecosystem/11_domain_applications/75_industrial_case_studies.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/11_domain_applications/14_industrial_case_studies.md](../../../concept/06_ecosystem/11_domain_applications/14_industrial_case_studies.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

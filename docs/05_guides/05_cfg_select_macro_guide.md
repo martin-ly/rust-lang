@@ -1,7 +1,7 @@
 # `cfg_select!` 宏完全指南 {#cfg_select-宏完全指南}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为 `cfg_select!` 宏的工程使用指南（场景/陷阱/决策，独特内容）；`cfg_select!` 与条件编译的通用概念解释请以 concept 权威页为准：[`concept/03_advanced/03_proc_macros/28_conditional_compilation.md`](../../concept/03_advanced/03_proc_macros/28_conditional_compilation.md)
+> **权威来源（Canonical）**: 本文件为 `cfg_select!` 宏的工程使用指南（场景/陷阱/决策，独特内容）；`cfg_select!` 与条件编译的通用概念解释请以 concept 权威页为准：[`concept/03_advanced/03_proc_macros/11_conditional_compilation.md`](../../concept/03_advanced/03_proc_macros/11_conditional_compilation.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（基本语法速查、4 类使用场景、与 `#[cfg]`/`cfg!` 对比、嵌套与常量上下文等高级模式、4 类常见陷阱与反例），不重复 concept/ 中的条件编译概念定义、规则与定理推导。
 
@@ -340,5 +340,5 @@ const VALUE: u32 = cfg_select! { ... };
 ### 相关文档 {#相关文档}
 
 - [Rust 1.95 特性速查表](../02_reference/quick_reference/02_rust_195_features_cheatsheet.md)
-- [Rust 版本跟踪](../../concept/07_future/00_version_tracking/05_rust_version_tracking.md)
+- [Rust 版本跟踪](../../concept/07_future/00_version_tracking/01_rust_version_tracking.md)
 - [2024 Edition 迁移指南](../../knowledge/06_ecosystem/02_edition_2024.md)

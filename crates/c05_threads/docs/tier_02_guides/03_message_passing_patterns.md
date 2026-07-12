@@ -8,7 +8,7 @@
 
 ---
 
-> **权威来源**: [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md)
+> **权威来源**: [concept/03_advanced/00_concurrency/03_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md)
 
 ---
 

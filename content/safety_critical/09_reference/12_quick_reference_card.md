@@ -3,7 +3,7 @@
 **EN**: Quick Reference Card
 **Summary**: Rust安全关键系统快速参考卡片 Quick Reference Card.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/00_meta/04_navigation/quick_reference.md](../../../concept/00_meta/04_navigation/quick_reference.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/00_meta/04_navigation/11_quick_reference.md](../../../concept/00_meta/04_navigation/11_quick_reference.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

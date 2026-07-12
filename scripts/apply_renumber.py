@@ -66,24 +66,71 @@ def strip_numbers(path: str) -> str:
     return STRIP_NUM_RE.sub(r"\1", path)
 
 
-def load_mapping(mapping_path: Path, scope: str) -> tuple[dict[str, str], list[dict]]:
-    """加载映射，按 scope 过滤，返回 (moves{old:new(仅改名)}, 全部行)。"""
-    moves: dict[str, str] = {}
-    rows: list[dict] = []
+def load_mapping(mapping_path: Path, scope: str, repo_root: Path
+                 ) -> tuple[dict[str, str], dict[str, str], list[dict]]:
+    """加载映射，按 scope 过滤。
+
+    返回 (moves{old:new 文件级}, dir_moves{old_dir:new_dir}, 全部行)。
+
+    映射行分两类：
+    - 文件级行：old_path 指向文件（或不存在但以 .md 等扩展名结尾）；
+    - 目录级行：old_path 是磁盘上存在的目录。目录行会被**展开为文件级条目**
+      （其下所有文件按相对结构平移到新目录），但**显式文件级行优先**——
+      已被显式映射的文件不再由目录展开覆盖（用于目录改名 + 内部文件重编号
+      同时进行的场景）。目录对本身保留在 dir_moves 中，用于重写指向目录的
+      链接与文本引用。
+    """
     scope = scope.strip("/")
+    raw_rows: list[tuple[str, str, dict]] = []
     with mapping_path.open(encoding="utf-8", newline="") as fh:
         for row in csv.DictReader(fh):
-            old = to_posix(row["old_path"].strip())
-            new = to_posix(row["new_path"].strip())
-            if scope and not old.startswith(scope + "/"):
+            old = to_posix(row["old_path"].strip().rstrip("/"))
+            new = to_posix(row["new_path"].strip().rstrip("/"))
+            if not old:
                 continue
-            rows.append(row)
-            if old != new:
-                if new in moves.values():
-                    print(f"ERROR: 映射目标重复: {new}", file=sys.stderr)
-                    raise SystemExit(2)
-                moves[old] = new
-    return moves, rows
+            if scope and not (old == scope or old.startswith(scope + "/")):
+                continue
+            raw_rows.append((old, new, row))
+
+    explicit: dict[str, str] = {}
+    dir_moves: dict[str, str] = {}
+    rows: list[dict] = []
+    for old, new, row in raw_rows:
+        rows.append(row)
+        if old == new:
+            continue
+        if (repo_root / old).is_dir():
+            if new in dir_moves.values():
+                print(f"ERROR: 目录映射目标重复: {new}", file=sys.stderr)
+                raise SystemExit(2)
+            dir_moves[old] = new
+        else:
+            explicit[old] = new
+
+    # 目录行展开为文件级条目（显式行优先）
+    moves: dict[str, str] = {}
+    for old_dir, new_dir in sorted(dir_moves.items(), key=lambda kv: -len(kv[0])):
+        for fp in sorted((repo_root / old_dir).rglob("*")):
+            if not fp.is_file():
+                continue
+            old_f = to_posix(str(fp.relative_to(repo_root)))
+            if old_f in explicit or old_f in moves:
+                continue
+            rel = to_posix(str(fp.relative_to(repo_root / old_dir)))
+            moves[old_f] = posixpath.join(new_dir, rel)
+    for old, new in explicit.items():
+        if new in moves.values() and moves.get(old) != new:
+            print(f"ERROR: 映射目标重复: {new}", file=sys.stderr)
+            raise SystemExit(2)
+        moves[old] = new
+    # 全局目标唯一性校验
+    seen: dict[str, str] = {}
+    for old, new in moves.items():
+        if new in seen and seen[new] != old:
+            print(f"ERROR: 映射目标重复: {new}（{seen[new]} 与 {old}）", file=sys.stderr)
+            raise SystemExit(2)
+        seen[new] = old
+    return moves, dir_moves, rows
 
 
 def scan_files(repo_root: Path) -> list[str]:
@@ -99,9 +146,11 @@ def scan_files(repo_root: Path) -> list[str]:
 
 
 class Rewriter:
-    def __init__(self, repo_root: Path, moves: dict[str, str], dry_run: bool):
+    def __init__(self, repo_root: Path, moves: dict[str, str], dry_run: bool,
+                 dir_moves: dict[str, str] | None = None):
         self.repo_root = repo_root
         self.moves = moves
+        self.dir_moves = dir_moves or {}
         self.dry_run = dry_run
         # 引用方文件的新位置（不在映射中的文件位置不变）
         self.file_new_loc: dict[str, str] = {}
@@ -192,6 +241,15 @@ class Rewriter:
                 inner = f"<{new_target}>" if wrap else new_target
                 self.file_changes[fo] += 1
                 return f"{prefix}{inner}{title}{suffix}"
+            if resolved in self.dir_moves:  # 指向被改名目录本身的链接
+                new_target = posixpath.relpath(self.dir_moves[resolved], dir_n)
+                if path.endswith("/"):
+                    new_target += "/"
+                if anchor:
+                    new_target += "#" + anchor
+                inner = f"<{new_target}>" if wrap else new_target
+                self.file_changes[fo] += 1
+                return f"{prefix}{inner}{title}{suffix}"
             if path.endswith(".md") and resolved not in self.all_md_old \
                     and not any(resolved.startswith(s + "/") for s in SKIP_DIR_NAMES) \
                     and len(self.unresolved) < 20000:
@@ -227,7 +285,10 @@ def regenerate_summary(repo_root: Path, scope: str, moves: dict[str, str], out_p
         return 0
     count = 0
     lines_out: list[str] = []
-    for line in summary.read_text(encoding="utf-8").splitlines():
+    with summary.open(encoding="utf-8", newline="") as fh:
+        summary_text = fh.read()
+    # 按 \n 切分以保留原始行尾（部分文件为 CRLF），避免整文件换行符噪声
+    for line in summary_text.split("\n"):
         m = SUMMARY_LINK_RE.match(line)
         if m:
             target = m.group(4).strip()
@@ -240,7 +301,9 @@ def regenerate_summary(repo_root: Path, scope: str, moves: dict[str, str], out_p
                     count += 1
         lines_out.append(line)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text("\n".join(lines_out) + "\n", encoding="utf-8")
+    # split("\n")/join("\n") 完全还原原始行尾（含 CRLF 与末尾换行），不额外补 \n
+    with out_path.open("w", encoding="utf-8", newline="") as fh:
+        fh.write("\n".join(lines_out))
     return count
 
 
@@ -260,9 +323,10 @@ def main() -> int:
     mapping_path = Path(args.mapping)
     if not mapping_path.is_absolute():
         mapping_path = repo_root / mapping_path
-    moves, rows = load_mapping(mapping_path, args.scope)
+    moves, dir_moves, rows = load_mapping(mapping_path, args.scope, repo_root)
     mode = "DRY-RUN" if args.dry_run else "APPLY"
-    print(f"[apply] mode={mode} scope={args.scope!r} moves={len(moves)} rows={len(rows)}")
+    print(f"[apply] mode={mode} scope={args.scope!r} moves={len(moves)} "
+          f"dir_moves={len(dir_moves)} rows={len(rows)}")
 
     # ---- 校验：目标是否与“不参与移动且已存在”的文件冲突 ----
     problems = []
@@ -278,7 +342,7 @@ def main() -> int:
         print(f"共 {len(problems)} 个映射问题，终止。", file=sys.stderr)
         return 2
 
-    rw = Rewriter(repo_root, moves, args.dry_run)
+    rw = Rewriter(repo_root, moves, args.dry_run, dir_moves)
     scanned = scan_files(repo_root)
     rw.all_md_old = {f for f in scanned if f.endswith(".md")}
     for f in scanned:
@@ -294,9 +358,21 @@ def main() -> int:
             (repo_root / old).rename(repo_root / tmp)
             staged.append((old, tmp, new))
         for old, tmp, new in staged:
+            (repo_root / new).parent.mkdir(parents=True, exist_ok=True)
             (repo_root / tmp).rename(repo_root / new)
             moved += 1
         print(f"[apply] moved {moved} files (two-phase os.rename)")
+        # 清理因移动而腾空的目录（含目录改名源目录、上移后的空父目录）
+        pruned: list[str] = []
+        candidates = {posixpath.dirname(o) for o in moves} | set(dir_moves)
+        for d in sorted(candidates, key=len, reverse=True):
+            dp = repo_root / d
+            while dp.is_dir() and dp != repo_root and not any(dp.iterdir()):
+                dp.rmdir()
+                pruned.append(to_posix(str(dp.relative_to(repo_root))))
+                dp = dp.parent
+        if pruned:
+            print(f"[apply] pruned {len(pruned)} emptied dirs")
 
     # ---- 阶段 2：SUMMARY 重新生成（只写 tmp，供人工 diff） ----
     # 必须在通用链接重写之前读取原始 SUMMARY.md，否则 --apply 时磁盘上的
@@ -305,8 +381,7 @@ def main() -> int:
     summary_out = Path(args.summary_out)
     if not summary_out.is_absolute():
         summary_out = repo_root / summary_out
-    if args.scope:
-        summary_repl = regenerate_summary(repo_root, args.scope.strip("/"), moves, summary_out)
+    summary_repl = regenerate_summary(repo_root, args.scope.strip("/"), moves, summary_out)
 
     # ---- 阶段 3：链接重写 ----
     rewritten_files = 0
@@ -318,7 +393,8 @@ def main() -> int:
         if not disk_path.exists():
             continue
         try:
-            text = disk_path.read_text(encoding="utf-8")
+            with disk_path.open(encoding="utf-8", newline="") as fh:
+                text = fh.read()
         except (UnicodeDecodeError, OSError):
             continue
         orig = text
@@ -337,6 +413,16 @@ def main() -> int:
                     text, n = rw._sub_bounded(text, s, r)
                     if n:
                         rw.file_changes[fo] += n
+        # 目录对文本兜底：文件级替换完成后，处理目录路径引用
+        # （指向目录本身的引用、未被显式映射的路径前缀）
+        for old_d, new_d in sorted(dir_moves.items(), key=lambda kv: -len(kv[0])):
+            if old_d not in text:
+                continue
+            for s, r in ((old_d + "/", new_d + "/"), (old_d, new_d)):
+                if s in text:
+                    text, n = rw._sub_bounded(text, s, r)
+                    if n:
+                        rw.file_changes[fo] += n
         # 结构化 JSON 兜底（陈旧序号归一化等）
         if posixpath.basename(fo) in json_files:
             try:
@@ -351,7 +437,8 @@ def main() -> int:
             rewritten_files += 1
             total_repl += rw.file_changes.get(fo, 0) - before
             if not args.dry_run:
-                disk_path.write_text(text, encoding="utf-8")
+                with disk_path.open("w", encoding="utf-8", newline="") as fh:
+                    fh.write(text)
 
     # ---- 阶段 4：日志 ----
     unresolved = list(dict.fromkeys(rw.unresolved))
@@ -381,7 +468,8 @@ def main() -> int:
     if not log_path.is_absolute():
         log_path = repo_root / log_path
     log_path.parent.mkdir(parents=True, exist_ok=True)
-    log_path.write_text("\n".join(log_lines) + "\n", encoding="utf-8")
+    with log_path.open("w", encoding="utf-8", newline="") as fh:
+        fh.write("\n".join(log_lines) + "\n")
 
     print(f"[apply] rewritten_files={rewritten_files} replacements~={total_repl} "
           f"summary_repl={summary_repl} unresolved={len(unresolved)}")

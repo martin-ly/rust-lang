@@ -5,4 +5,4 @@
 
 **内容已迁移**：本文件不再保留教程正文。
 
-> **权威来源**: [concept/02_intermediate/00_traits/28_construction_and_initialization.md](../../concept/02_intermediate/00_traits/28_construction_and_initialization.md)
+> **权威来源**: [concept/02_intermediate/00_traits/05_construction_and_initialization.md](../../concept/02_intermediate/00_traits/05_construction_and_initialization.md)

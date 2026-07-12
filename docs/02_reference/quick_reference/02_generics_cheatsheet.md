@@ -1,7 +1,7 @@
 # 🔷 Rust 泛型编程速查卡 {#rust-泛型编程速查卡}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为泛型编程速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L2 泛型`](../../../concept/02_intermediate/01_generics/02_generics.md)
+> **权威来源（Canonical）**: 本文件为泛型编程速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L2 泛型`](../../../concept/02_intermediate/01_generics/01_generics.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（Trait 约束/高级特性/常见模式/性能/反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
 
@@ -114,7 +114,7 @@ mindmap
 ## 📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证}
 
 > 本节原为「概念定义—属性关系—解释论证」通用复述（类型参数/Trait Bound/关联类型/单态化/HRTB，公理与定理 G1–G5）。
-> 通用概念以 [`concept/02_intermediate/01_generics/02_generics.md`](../../../concept/02_intermediate/01_generics/02_generics.md)
+> 通用概念以 [`concept/02_intermediate/01_generics/01_generics.md`](../../../concept/02_intermediate/01_generics/01_generics.md)
 > 为权威来源；本速查卡不重复通用定义，仅保留下方证明树图示、Trait 约束、高级特性、模式与反例等独特速查内容。
 
 ---
@@ -926,7 +926,7 @@ static TYPE_CACHE: LazyLock<HashMap<TypeId, String>> = LazyLock::new(|| {
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

@@ -14,9 +14,9 @@
 
 | 主题 | 测验文件 | 难度 |
 | :--- | :--- | :--- |
-| 并发与异步（Async） | [concept/03_advanced/00_concurrency/21_quiz_concurrency_async.md](../../../concept/03_advanced/00_concurrency/21_quiz_concurrency_async.md) | L3 |
-| Unsafe Rust | [concept/03_advanced/02_unsafe/22_quiz_unsafe.md](../../../concept/03_advanced/02_unsafe/22_quiz_unsafe.md) | L3 |
-| 宏（Macro）系统 | [concept/03_advanced/03_proc_macros/23_quiz_macros.md](../../../concept/03_advanced/03_proc_macros/23_quiz_macros.md) | L3 |
+| 并发与异步（Async） | [concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md](../../../concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md) | L3 |
+| Unsafe Rust | [concept/03_advanced/02_unsafe/05_quiz_unsafe.md](../../../concept/03_advanced/02_unsafe/05_quiz_unsafe.md) | L3 |
+| 宏（Macro）系统 | [concept/03_advanced/03_proc_macros/10_quiz_macros.md](../../../concept/03_advanced/03_proc_macros/10_quiz_macros.md) | L3 |
 
 ## 使用方式 {#使用方式}
 

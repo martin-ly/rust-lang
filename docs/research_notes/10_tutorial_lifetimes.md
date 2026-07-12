@@ -22,10 +22,10 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | 生命周期基础 | [`concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
-| 高级生命周期 | [`concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md) |
+| 高级生命周期 | [`concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md) |
 | 借用 | [`concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
 | 所有权 | [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
-| 形式化视角 | [`concept/04_formal/01_ownership_logic/03_ownership_formal.md`](../../concept/04_formal/01_ownership_logic/03_ownership_formal.md) |
+| 形式化视角 | [`concept/04_formal/01_ownership_logic/02_ownership_formal.md`](../../concept/04_formal/01_ownership_logic/02_ownership_formal.md) |
 
 ---
 

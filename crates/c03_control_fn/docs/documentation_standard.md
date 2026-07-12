@@ -4,7 +4,7 @@
 > **Summary**: Crate-level documentation writing standard; for project-wide concept documentation standards see the concept audit and bilingual template pages.
 >
 > **权威来源**: [concept/00_meta/03_audit/08_concept_audit_guide.md](../../../concept/00_meta/03_audit/08_concept_audit_guide.md)
-> **权威来源**: [concept/00_meta/01_terminology/bilingual_template_v2.md](../../../concept/00_meta/01_terminology/bilingual_template_v2.md)
+> **权威来源**: [concept/00_meta/01_terminology/02_bilingual_template_v2.md](../../../concept/00_meta/01_terminology/02_bilingual_template_v2.md)
 
 ## 主题速览
 

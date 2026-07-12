@@ -3,7 +3,7 @@
 > **EN**: Pattern Implementation Comparison
 > **Summary**: Stub redirecting to the canonical page comparing design-pattern implementation strategies in Rust.
 
-> **权威来源**: [concept/06_ecosystem/03_design_patterns/36_pattern_implementation_comparison.md](../../../../concept/06_ecosystem/03_design_patterns/36_pattern_implementation_comparison.md)
+> **权威来源**: [concept/06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md](../../../../concept/06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md)
 
 本文件为 crate 文档重定向 stub。原内容中的通用 Rust 概念已迁移至上述权威来源页面；以下仅保留主题索引。
 

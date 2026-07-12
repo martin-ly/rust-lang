@@ -1,7 +1,7 @@
 # 并发与异步反例边界 {#并发与异步反例边界}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为并发/异步反例集（反例，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 并发`](../../../concept/03_advanced/00_concurrency/01_concurrency.md) · [`concept L3 async`](../../../concept/03_advanced/01_async/02_async.md)
+> **权威来源（Canonical）**: 本文件为并发/异步反例集（反例，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 并发`](../../../concept/03_advanced/00_concurrency/01_concurrency.md) · [`concept L3 async`](../../../concept/03_advanced/01_async/01_async.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（并发/异步反例与边界（反例集，非概念正文）），不重复 concept/ 中的概念定义、规则与定理推导。
 

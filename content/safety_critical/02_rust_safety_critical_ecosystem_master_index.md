@@ -3,7 +3,7 @@
 **EN**: Rust Safety Critical Ecosystem Master Index
 **Summary**: Rust安全关键生态系统文档集 - 主索引 Rust Safety Critical Ecosystem Master Index.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/06_data_and_distributed/36_stream_processing_ecosystem.md](../../concept/06_ecosystem/06_data_and_distributed/36_stream_processing_ecosystem.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/06_data_and_distributed/03_stream_processing_ecosystem.md](../../concept/06_ecosystem/06_data_and_distributed/03_stream_processing_ecosystem.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

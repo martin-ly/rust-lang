@@ -415,8 +415,8 @@ graph TD
 
 ## 十、相关概念链接
 
-- [跨层依赖拓扑](../04_navigation/inter_layer_topology.md) —— L0-L7 纵向关系
-- [层次内模型映射](../04_navigation/intra_layer_model_map.md) —— 同层模型横向关系
+- [跨层依赖拓扑](../04_navigation/05_inter_layer_topology.md) —— L0-L7 纵向关系
+- [层次内模型映射](../04_navigation/06_intra_layer_model_map.md) —— 同层模型横向关系
 - [边界扩展树](boundary_extension_tree.md) —— 安全边界推演
 - [可判定性谱系](decidability_spectrum.md) —— 定理的判定性边界
 - [表达力多视角](expressiveness_multiview.md) —— 表达力与定理的关系

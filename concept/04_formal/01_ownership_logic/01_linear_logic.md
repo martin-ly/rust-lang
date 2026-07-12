@@ -13,8 +13,8 @@
 > **层级**: L4 形式化理论
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析线性逻辑到 Rust 的映射
-> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md) [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
-> **后置概念**: [Ownership Formalization](03_ownership_formal.md) · [RustBelt](../02_separation_logic/04_rustbelt.md)
+> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
+> **后置概念**: [Ownership Formalization](02_ownership_formal.md) · [RustBelt](../02_separation_logic/01_rustbelt.md)
 > **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic) ·
 > [Wikipedia: Affine logic](https://en.wikipedia.org/wiki/Affine_logic) ·
@@ -354,7 +354,7 @@ T1(切消定理) ⟹ L1(线性命题) ⟹ C1(Rust所有权) ⟹ C2(仿射move语
 | **T6** | & With / ⅋ Par ⟹ 外部选择与并发交替 | T6 ⟹ T2 | 提供选择（&）或交替使用（⅋）资源 | 接口选择 / 并发分离 | With/Par 对偶公理 | 会话类型分支、`trait` 多态、并发验证 | 未实现 `trait` 全部方法；死锁时 Par 交替假设失效 | L2/02_type_system.md §6 "Trait 系统" |
 
 > **一致性（Coherence）检查**: T1(切消) ⟹ L1(线性性) ⟹ T4(⊗组合) ⟹ C1(所有权) ⟹ C2(仿射move) ⟹ T3(⊸函数)，形成**从元定理到存在到组合到使用到传递**的闭合链。L2(!A) 是线性逻辑的"经典出口"，T2/T6 是向并发领域的"横向扩展"。
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/inter_layer_map.md) §3.1 "L1-L4 形式化映射" [来源: [RustBelt Project](https://plv.mpi-sws.org/rustbelt/)]
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/04_inter_layer_map.md) §3.1 "L1-L4 形式化映射" [来源: [RustBelt Project](https://plv.mpi-sws.org/rustbelt/)]
 
 ---
 
@@ -648,11 +648,11 @@ fn session_demo() {
 |:---|:---|:---|
 | 所有权 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 线性逻辑的应用（L1 精确对应标注于全文） |
 | 借用（Borrowing） | [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | 分离逻辑的应用（L1 §5） |
-| 类型论 | [`./02_type_theory.md`](../00_type_theory/02_type_theory.md) | 形式化同层；TAPL 引用（Reference）交叉 |
-| 所有权形式化 | [`./03_ownership_formal.md`](03_ownership_formal.md) | 线性逻辑的扩展；RustBelt 细节 |
-| RustBelt | [`./04_rustbelt.md`](../02_separation_logic/04_rustbelt.md) | 验证实现；Iris 分离逻辑 |
+| 类型论 | [`./02_type_theory.md`](../00_type_theory/01_type_theory.md) | 形式化同层；TAPL 引用（Reference）交叉 |
+| 所有权形式化 | [`./02_ownership_formal.md`](02_ownership_formal.md) | 线性逻辑的扩展；RustBelt 细节 |
+| RustBelt | [`./04_rustbelt.md`](../02_separation_logic/01_rustbelt.md) | 验证实现；Iris 分离逻辑 |
 | Rust vs C++ | [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | 对比映射；所有权语义差异 |
-| 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../../05_comparative/03_domain_comparisons/04_safety_boundaries.md) | 边界分析；unsafe 逃逸口 |
+| 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) | 边界分析；unsafe 逃逸口 |
 
 > **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
@@ -908,10 +908,10 @@ Rust 所有权系统（仿射变体）:
 
 > **过渡: L4 → L3**
 > 线性逻辑的 `⊗`（tensor）和 `⊸`（lollipop）不是纯理论游戏——它们直接对应 Rust 的元组构造和所有权转移。当你写 `let y = x;` 时，你正在执行一个 lollipop 消除规则；当你写 `let pair = (x, y);` 时，你正在构造一个 tensor 积。
-> 工程对应见 [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/03_unsafe.md)（unsafe 作为线性规则的逃逸门）与 [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md)（并发作为线性资源的交互）。
+> 工程对应见 [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/01_unsafe.md)（unsafe 作为线性规则的逃逸门）与 [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md)（并发作为线性资源的交互）。
 > **过渡: L4 → L5**
 > 线性逻辑在不同语言中有不同实现：Rust 用所有权、Haskell 用 LinearTypes 扩展、ATS 用依赖类型 + 线性类型。比较这些实现能揭示 "线性逻辑是必要不充分条件"——线性类型保证内存安全（Memory Safety），但内存安全不需要完整的线性类型系统。
-> 对比视角见 [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/03_paradigm_matrix.md)（类型系统谱系）。
+> 对比视角见 [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/01_paradigm_matrix.md)（类型系统谱系）。
 
 ---
 (Source: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4))
@@ -934,7 +934,7 @@ Rust 所有权系统（仿射变体）:
 ---
 
 > **权威来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic) · [Wikipedia — Affine Logic](https://en.wikipedia.org/wiki/Affine_logic)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **最后更新: 2026-05-21
@@ -950,7 +950,7 @@ Rust 所有权系统（仿射变体）:
 
 ---
 
-> **相关谓词映射**: [own(τ) 谓词](../../00_meta/02_sources/rustbelt_predicate_map.md#二所有权谓词-ownτ-映射) · [shr(κ, ℓ) 谓词](../../00_meta/02_sources/rustbelt_predicate_map.md#三共享谓词-shrκ-ℓ-映射)
+> **相关谓词映射**: [own(τ) 谓词](../../00_meta/02_sources/02_rustbelt_predicate_map.md#二所有权谓词-ownτ-映射) · [shr(κ, ℓ) 谓词](../../00_meta/02_sources/02_rustbelt_predicate_map.md#三共享谓词-shrκ-ℓ-映射)
 
 ## 十、边界测试：线性逻辑的编译错误
 

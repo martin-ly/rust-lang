@@ -3,7 +3,7 @@
 > **EN**: WasmEdge Container Technology Integration
 > **Summary**: Deep integration of WasmEdge with Docker, Kubernetes, and containerd.
 
-> **权威来源**: [concept/06_ecosystem/04_web_and_networking/24_cloud_native.md](../06_ecosystem/04_web_and_networking/24_cloud_native.md)
+> **权威来源**: [concept/06_ecosystem/04_web_and_networking/02_cloud_native.md](../06_ecosystem/04_web_and_networking/24_cloud_native.md)
 
 本文件为 crate 文档重定向 stub。原内容中的通用 Rust 概念已迁移至上述权威来源页面；以下仅保留主题索引。
 

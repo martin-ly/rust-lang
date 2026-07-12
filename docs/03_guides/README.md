@@ -27,4 +27,4 @@
 
 ## 使用建议 {#使用建议}
 
-这些指南假设读者已掌握 Rust 基础（所有权（Ownership）、类型系统（Type System）、错误处理（Error Handling））。建议先完成 [MVP 学习路径](../../concept/00_meta/04_navigation/learning_mvp_path.md) 后再深入阅读。
+这些指南假设读者已掌握 Rust 基础（所有权（Ownership）、类型系统（Type System）、错误处理（Error Handling））。建议先完成 [MVP 学习路径](../../concept/00_meta/04_navigation/08_learning_mvp_path.md) 后再深入阅读。

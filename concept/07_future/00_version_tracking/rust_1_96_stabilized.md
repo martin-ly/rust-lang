@@ -21,16 +21,16 @@
 
 > **前置概念**:
 >
-> [Rust 版本跟踪](05_rust_version_tracking.md) ·
-> [Ranges](../../02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) ·
-> [Panic 与 unwind](../../02_intermediate/03_error_handling/04_error_handling.md)
+> [Rust 版本跟踪](01_rust_version_tracking.md) ·
+> [Ranges](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) ·
+> [Panic 与 unwind](../../02_intermediate/03_error_handling/01_error_handling.md)
 >
 > **后置概念**:
 >
 > [Rust 1.97.0 前沿特性预览](rust_1_97_preview.md) ·
 > [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md) ·
 > [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) ·
-> [Testing](../../06_ecosystem/09_testing_and_quality/16_testing.md)
+> [Testing](../../06_ecosystem/09_testing_and_quality/03_testing.md)
 >
 
 ---
@@ -283,13 +283,13 @@ rustc +nightly -Z unstable-options --print target-spec-json-schema
 
 | 1.96 特性 | 概念文档 | Crate 代码示例 | 测试 |
 |:---|:---|:---:|:---:|
-| `assert_matches!` | `concept/02_intermediate/06_macros_and_metaprogramming/05_assert_matches.md` | `c02_type_system` | ✅ 183 passed |
-| `core::range::*` | `concept/02_intermediate/04_types_and_conversions/06_range_types.md` | `c02_type_system` | ✅ |
-| `NonZero` 范围迭代 | `concept/02_intermediate/04_types_and_conversions/06_range_types.md` | `c02_type_system` | ✅ |
-| `From<T>` for cell types | `concept/02_intermediate/02_memory_management/08_interior_mutability.md` | `c02_type_system` | ✅ |
-| `ManuallyDrop` 常量模式 | `concept/02_intermediate/02_memory_management/03_memory_management.md` | `c02_type_system` | ✅ |
-| `expr` metavariable to `cfg` | `concept/03_advanced/03_proc_macros/04_macros.md` | `c11_macro_system_proc` | ✅ 97 passed |
-| Never 类型 tuple coercion | `concept/02_intermediate/01_generics/02_generics.md` | `c02_type_system` | ✅ |
+| `assert_matches!` | `concept/02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md` | `c02_type_system` | ✅ 183 passed |
+| `core::range::*` | `concept/02_intermediate/04_types_and_conversions/01_range_types.md` | `c02_type_system` | ✅ |
+| `NonZero` 范围迭代 | `concept/02_intermediate/04_types_and_conversions/01_range_types.md` | `c02_type_system` | ✅ |
+| `From<T>` for cell types | `concept/02_intermediate/02_memory_management/02_interior_mutability.md` | `c02_type_system` | ✅ |
+| `ManuallyDrop` 常量模式 | `concept/02_intermediate/02_memory_management/01_memory_management.md` | `c02_type_system` | ✅ |
+| `expr` metavariable to `cfg` | `concept/03_advanced/03_proc_macros/01_macros.md` | `c11_macro_system_proc` | ✅ 97 passed |
+| Never 类型 tuple coercion | `concept/02_intermediate/01_generics/01_generics.md` | `c02_type_system` | ✅ |
 
 ---
 

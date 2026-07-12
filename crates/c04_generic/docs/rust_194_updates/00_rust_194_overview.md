@@ -15,4 +15,4 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | Rust 1.95 Stabilized Features | [concept/07_future/00_version_tracking/rust_1_95_stabilized.md](../../../../concept/07_future/00_version_tracking/rust_1_95_stabilized.md) |
-| Rust 2024 Edition Guide | [concept/07_future/01_edition_roadmap/44_edition_guide.md](../../../../concept/07_future/01_edition_roadmap/44_edition_guide.md) |
+| Rust 2024 Edition Guide | [concept/07_future/01_edition_roadmap/02_edition_guide.md](../../../../concept/07_future/01_edition_roadmap/02_edition_guide.md) |

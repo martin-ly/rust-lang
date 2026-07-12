@@ -8,7 +8,7 @@
 > **跨层映射**: docs→concept 工程映射 | L1-L2 概念索引
 > **定理链编号**: T-001 → T-010 → T-020 → T-030
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、Rustonomicon 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、Rustonomicon 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 # Rust 核心概念 (Core Concepts) {#rust-核心概念-core-concepts}
 

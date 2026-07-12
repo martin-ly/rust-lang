@@ -15,5 +15,5 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | 进程模型与生命周期 | [../../../concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md](../../../concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) |
-| 异步编程 | [../../../concept/03_advanced/01_async/02_async.md](../../../concept/03_advanced/01_async/02_async.md) |
-| 错误处理 | [../../../concept/02_intermediate/03_error_handling/04_error_handling.md](../../../concept/02_intermediate/03_error_handling/04_error_handling.md) |
+| 异步编程 | [../../../concept/03_advanced/01_async/01_async.md](../../../concept/03_advanced/01_async/01_async.md) |
+| 错误处理 | [../../../concept/02_intermediate/03_error_handling/01_error_handling.md](../../../concept/02_intermediate/03_error_handling/01_error_handling.md) |

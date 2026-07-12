@@ -3,7 +3,7 @@
 **EN**: API Design Guidelines
 **Summary**: API设计指南 API Design Guidelines.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/03_design_patterns/02_patterns.md](../../../concept/06_ecosystem/03_design_patterns/02_patterns.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/03_design_patterns/01_patterns.md](../../../concept/06_ecosystem/03_design_patterns/01_patterns.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

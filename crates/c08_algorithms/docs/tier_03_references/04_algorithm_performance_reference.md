@@ -3,10 +3,10 @@
 
 # 算法性能参考手册
 
-> **权威来源**: [concept/06_ecosystem/11_domain_applications/78_algorithm_complexity_analysis.md](../../../../concept/06_ecosystem/11_domain_applications/78_algorithm_complexity_analysis.md)
+> **权威来源**: [concept/06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md](../../../../concept/06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md)
 
 本文件原为 `c08_algorithms` crate 的通用概念文档。根据 AGENTS.md §6.4 治理规则，
-通用 Rust 概念解释已迁移至 `concept/06_ecosystem/11_domain_applications/78_algorithm_complexity_analysis.md`，此处仅保留索引与 canonical 链接。
+通用 Rust 概念解释已迁移至 `concept/06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md`，此处仅保留索引与 canonical 链接。
 
 ## 主题列表
 

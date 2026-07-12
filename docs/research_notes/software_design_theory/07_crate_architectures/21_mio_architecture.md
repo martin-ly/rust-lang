@@ -2,8 +2,8 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [异步（Async）编程](../../../../concept/03_advanced/01_async/02_async.md)
-> - [网络编程](../../../../concept/03_advanced/06_low_level_patterns/18_network_programming.md)
+> - [异步（Async）编程](../../../../concept/03_advanced/01_async/01_async.md)
+> - [网络编程](../../../../concept/03_advanced/06_low_level_patterns/04_network_programming.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **⚠️ 历史文档提示**：
@@ -529,9 +529,9 @@ graph BT
 - [Tokio 异步运行时架构](06_tokio_architecture.md)
 - [Crossbeam 无锁并发架构](19_crossbeam_architecture.md)
 - [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
-- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
-- [网络编程](../../../../concept/03_advanced/06_low_level_patterns/18_network_programming.md)
-- [系统可组合性设计模式](../../../../concept/06_ecosystem/03_design_patterns/30_system_composability.md)
+- [异步编程模型](../../../../concept/03_advanced/01_async/01_async.md)
+- [网络编程](../../../../concept/03_advanced/06_low_level_patterns/04_network_programming.md)
+- [系统可组合性设计模式](../../../../concept/06_ecosystem/03_design_patterns/04_system_composability.md)
 
 ---
 
@@ -549,7 +549,7 @@ graph BT
 >
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 ---
 

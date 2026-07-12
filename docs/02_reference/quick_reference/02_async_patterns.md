@@ -11,7 +11,7 @@
 # ⚡ Rust 异步编程速查卡 {#rust-异步编程速查卡}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为Rust 异步编程速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 async`](../../../concept/03_advanced/01_async/02_async.md) · [`concept async patterns`](../../../concept/03_advanced/01_async/26_async_patterns.md)
+> **权威来源（Canonical）**: 本文件为Rust 异步编程速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 async`](../../../concept/03_advanced/01_async/01_async.md) · [`concept async patterns`](../../../concept/03_advanced/01_async/03_async_patterns.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（异步模式/运行时对比/共享状态/网络模式/性能/陷阱/反例/决策树速查），不重复 concept/ 中的概念定义、规则与定理推导。
 
@@ -144,8 +144,8 @@ mindmap
 ## 📊 概念定义-属性关系-解释论证（已压缩，详见 canonical） {#概念定义-属性关系-解释论证}
 
 > 本节原为「概念定义—属性关系—解释论证」通用复述（Future/状态机/Pin/Executor/Waker，公理与定理 A1–A5）。
-> 通用概念以 [`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md) 与
-> [`concept/03_advanced/01_async/39_future_and_executor_mechanisms.md`](../../../concept/03_advanced/01_async/39_future_and_executor_mechanisms.md)
+> 通用概念以 [`concept/03_advanced/01_async/01_async.md`](../../../concept/03_advanced/01_async/01_async.md) 与
+> [`concept/03_advanced/01_async/04_future_and_executor_mechanisms.md`](../../../concept/03_advanced/01_async/04_future_and_executor_mechanisms.md)
 > 为权威来源；本速查卡不重复通用定义，仅保留下方证明树/决策树图示、模式与反例等独特速查内容。
 
 ---
@@ -1273,7 +1273,7 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

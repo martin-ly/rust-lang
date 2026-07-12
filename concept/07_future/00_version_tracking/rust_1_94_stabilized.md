@@ -6,8 +6,8 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: A×Ref — 版本特性参考
-> **前置依赖**: [Rust Version Tracking](05_rust_version_tracking.md) · [Networking Basics](../../06_ecosystem/12_networking/06_networking_basics.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
-> **后置概念**: [Rust 1.95 Stabilized](rust_1_95_stabilized.md) · [Network Protocols](../../06_ecosystem/04_web_and_networking/38_network_protocols.md)
+> **前置依赖**: [Rust Version Tracking](01_rust_version_tracking.md) · [Networking Basics](../../06_ecosystem/12_networking/05_networking_basics.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
+> **后置概念**: [Rust 1.95 Stabilized](rust_1_95_stabilized.md) · [Network Protocols](../../06_ecosystem/04_web_and_networking/07_network_protocols.md)
 > **定理链**: Version Context ⟹ Feature Set ⟹ Migration Impact
 >
 > **权威来源**: 本页为 `Rust 1.94 Stabilized Features` 的权威概念页；crate 文档仅保留导航 stub。

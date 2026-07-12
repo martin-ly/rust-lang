@@ -141,59 +141,59 @@ graph TB
 
 ## 二、文件索引与关系
 
-> **标记说明**: 本层 `*_preview.md` 文件均为前沿预研内容，带有 `#[experimental]` `#[nightly_only]` 标记。这些特性尚未稳定，可能在未来版本中变更或移除。稳定特性请参见 [Rust 版本跟踪](00_version_tracking/05_rust_version_tracking.md)。
+> **标记说明**: 本层 `*_preview.md` 文件均为前沿预研内容，带有 `#[experimental]` `#[nightly_only]` 标记。这些特性尚未稳定，可能在未来版本中变更或移除。稳定特性请参见 [Rust 版本跟踪](00_version_tracking/01_rust_version_tracking.md)。
 
 | 文件 | 概念 | 核心内容 | 状态 | 依赖的 L1-L6 | 反向驱动 |
 |:---|:---|:---|:---|:---|:---|
 | [01_ai_integration.md](04_research_and_experimental/01_ai_integration.md) | AI × Rust | 生成-验证闭环、AI 语义安全网、确定性容器 | ✅ v1.0 | L3 Unsafe, L4 RustBelt, L6 工具链 | L3 Unsafe 契约精确化 |
 | [02_formal_methods.md](04_research_and_experimental/02_formal_methods.md) | 形式化方法工业化 | Code-Level + System-Level 验证、PObserve、CI 集成 | ✅ v1.0 | L4 RustBelt, L6 工具链, L3 Unsafe | L4 验证范围扩展 |
 | [03_evolution.md](04_research_and_experimental/03_evolution.md) | 语言演进 | Edition、RFC、Const 泛型、GATs、Effects、特化 | ✅ v1.0 | L2 Trait/Generics, L5 范式定位 | L2 特性扩展 |
-| [05_rust_version_tracking.md](00_version_tracking/05_rust_version_tracking.md) | 版本特性演进 | 1.79–1.95+ 形式模型维度跟踪、五个趋势、前沿矩阵 | ✅ v1.0 | L1-L4 全部概念 | L1-L4 概念更新驱动 |
-| [25_open_enums_preview.md](03_preview_features/25_open_enums_preview.md) | 开放枚举（Enum）预研 | `#[non_exhaustive]` 形式化语义、跨语言对比、API 设计模式 | ✅ v1.0 | L1 Type System, L2 Traits | L1 穷尽性检查语义演进 |
-| [borrow_sanitizer.md](03_preview_features/borrow_sanitizer.md) | BorrowSanitizer：动态别名规则验证工具 | Shadow Stack、运行时（Runtime）借用（Borrowing）检查、与 Miri 对比 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 检测工具化 |
-| [07_mcdc_coverage_preview.md](03_preview_features/07_mcdc_coverage_preview.md) | MC/DC Coverage 预研 | 安全关键覆盖率验证、DO-178C/ISO 26262 合规 | ✅ v1.0 | L3 Unsafe, L1 Type System | L6 安全关键应用 |
-| [08_safety_tags_preview.md](03_preview_features/08_safety_tags_preview.md) | Safety Tags 预研 | Unsafe 契约机器可读标注、AI 生成安全边界 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 契约工具化 |
-| [09_parallel_frontend_preview.md](03_preview_features/09_parallel_frontend_preview.md) | 并行前端编译预研 | 查询系统并行化、类型检查并行化、编译时间优化 | ✅ v1.0 | L6 Toolchain, L3 Concurrency | L6 编译工具链性能演进 |
-| [10_derive_coerce_pointee_preview.md](03_preview_features/10_derive_coerce_pointee_preview.md) | 派生 CoercePointee 预研 | 智能指针（Smart Pointer）自动类型强制、零 unsafe 代码 | ✅ v1.0 | L2 Generics, L3 Unsafe | L3 Unsafe 代码消除 |
-| [11_const_trait_impl_preview.md](03_preview_features/11_const_trait_impl_preview.md) | Const Trait Impl 预研 | 常量上下文 Trait 泛化、~const 效果限定 | ✅ v1.0 | L2 Trait, L1 Type System | L2 Trait 编译期扩展 |
-| [12_return_type_notation_preview.md](03_preview_features/12_return_type_notation_preview.md) | Return Type Notation 预研 | use<..> 精确捕获、生命周期（Lifetimes）显式控制 | ✅ v1.0 | L2 Trait, L3 Async | L3 Async API 稳定性 |
-| [13_unsafe_fields_preview.md](03_preview_features/13_unsafe_fields_preview.md) | Unsafe Fields 预研 | 字段级 unsafe 标记、安全边界细化 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 粒度细化 |
-| [14_ferrocene_preview.md](03_preview_features/35_ferrocene_preview.md) | Ferrocene 预研 | Rust 安全关键认证工具链、ISO 26262 / DO-178C | ✅ v1.0 | L6 Toolchain, L7 Future | L6 安全关键工具链 |
-| [15_gen_blocks_preview.md](03_preview_features/22_gen_blocks_preview.md) | Gen Blocks 预研 | 泛化生成器、惰性迭代、异步流 | ✅ v1.0 | L3 Async, L2 Trait | L3 控制流泛化 |
-| [16_cranelift_backend_preview.md](03_preview_features/38_cranelift_backend_preview.md) | Cranelift 后端预研 | 快速调试编译、LLVM 替代后端 | ✅ v1.0 | L6 Toolchain | L6 编译工具链扩展 |
-| [17_rust_specification_preview.md](03_preview_features/41_rust_specification_preview.md) | Rust 语言规范预研 | 形式化规范演进、Ferrocene 先行探索 | ✅ v1.0 | L4 Formal, L7 Future | L4-L7 规范桥梁 |
-| [18_async_drop_preview.md](03_preview_features/18_async_drop_preview.md) | Async Drop 预研 | 异步资源销毁、[Async Drop Initiative](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/async_drop.html)、Pin 交互、workaround 模式 | ⚠️ nightly | L3 Async, L3 Pin | 异步生态完善 |
-| [26_specialization_preview.md](03_preview_features/26_specialization_preview.md) | Specialization 预研 | Trait 实现特化、重叠 impl、min_specialization | ⚠️ nightly | L2 Trait, L2 Generics | 泛型表达能力扩展 |
-| [04_effects_system.md](03_preview_features/04_effects_system.md) | 效果系统预研 | Effect 类型论、Rust 现有 effect 映射、跨语言对比、演进路线 | ✅ v1.0 | L2 Trait, L3 Async, L4 Type Theory | L2-L3 效果统一化 |
+| [05_rust_version_tracking.md](00_version_tracking/01_rust_version_tracking.md) | 版本特性演进 | 1.79–1.95+ 形式模型维度跟踪、五个趋势、前沿矩阵 | ✅ v1.0 | L1-L4 全部概念 | L1-L4 概念更新驱动 |
+| [25_open_enums_preview.md](03_preview_features/34_open_enums_preview.md) | 开放枚举（Enum）预研 | `#[non_exhaustive]` 形式化语义、跨语言对比、API 设计模式 | ✅ v1.0 | L1 Type System, L2 Traits | L1 穷尽性检查语义演进 |
+| [borrow_sanitizer.md](03_preview_features/24_borrow_sanitizer.md) | BorrowSanitizer：动态别名规则验证工具 | Shadow Stack、运行时（Runtime）借用（Borrowing）检查、与 Miri 对比 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 检测工具化 |
+| [07_mcdc_coverage_preview.md](03_preview_features/02_mcdc_coverage_preview.md) | MC/DC Coverage 预研 | 安全关键覆盖率验证、DO-178C/ISO 26262 合规 | ✅ v1.0 | L3 Unsafe, L1 Type System | L6 安全关键应用 |
+| [08_safety_tags_preview.md](03_preview_features/03_safety_tags_preview.md) | Safety Tags 预研 | Unsafe 契约机器可读标注、AI 生成安全边界 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 契约工具化 |
+| [09_parallel_frontend_preview.md](03_preview_features/04_parallel_frontend_preview.md) | 并行前端编译预研 | 查询系统并行化、类型检查并行化、编译时间优化 | ✅ v1.0 | L6 Toolchain, L3 Concurrency | L6 编译工具链性能演进 |
+| [10_derive_coerce_pointee_preview.md](03_preview_features/05_derive_coerce_pointee_preview.md) | 派生 CoercePointee 预研 | 智能指针（Smart Pointer）自动类型强制、零 unsafe 代码 | ✅ v1.0 | L2 Generics, L3 Unsafe | L3 Unsafe 代码消除 |
+| [11_const_trait_impl_preview.md](03_preview_features/06_const_trait_impl_preview.md) | Const Trait Impl 预研 | 常量上下文 Trait 泛化、~const 效果限定 | ✅ v1.0 | L2 Trait, L1 Type System | L2 Trait 编译期扩展 |
+| [12_return_type_notation_preview.md](03_preview_features/09_return_type_notation_preview.md) | Return Type Notation 预研 | use<..> 精确捕获、生命周期（Lifetimes）显式控制 | ✅ v1.0 | L2 Trait, L3 Async | L3 Async API 稳定性 |
+| [13_unsafe_fields_preview.md](03_preview_features/11_unsafe_fields_preview.md) | Unsafe Fields 预研 | 字段级 unsafe 标记、安全边界细化 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 粒度细化 |
+| [14_ferrocene_preview.md](03_preview_features/12_ferrocene_preview.md) | Ferrocene 预研 | Rust 安全关键认证工具链、ISO 26262 / DO-178C | ✅ v1.0 | L6 Toolchain, L7 Future | L6 安全关键工具链 |
+| [15_gen_blocks_preview.md](03_preview_features/25_gen_blocks_preview.md) | Gen Blocks 预研 | 泛化生成器、惰性迭代、异步流 | ✅ v1.0 | L3 Async, L2 Trait | L3 控制流泛化 |
+| [16_cranelift_backend_preview.md](03_preview_features/16_cranelift_backend_preview.md) | Cranelift 后端预研 | 快速调试编译、LLVM 替代后端 | ✅ v1.0 | L6 Toolchain | L6 编译工具链扩展 |
+| [17_rust_specification_preview.md](03_preview_features/21_rust_specification_preview.md) | Rust 语言规范预研 | 形式化规范演进、Ferrocene 先行探索 | ✅ v1.0 | L4 Formal, L7 Future | L4-L7 规范桥梁 |
+| [18_async_drop_preview.md](03_preview_features/22_async_drop_preview.md) | Async Drop 预研 | 异步资源销毁、[Async Drop Initiative](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/async_drop.html)、Pin 交互、workaround 模式 | ⚠️ nightly | L3 Async, L3 Pin | 异步生态完善 |
+| [26_specialization_preview.md](03_preview_features/31_specialization_preview.md) | Specialization 预研 | Trait 实现特化、重叠 impl、min_specialization | ⚠️ nightly | L2 Trait, L2 Generics | 泛型表达能力扩展 |
+| [04_effects_system.md](03_preview_features/01_effects_system.md) | 效果系统预研 | Effect 类型论、Rust 现有 effect 映射、跨语言对比、演进路线 | ✅ v1.0 | L2 Trait, L3 Async, L4 Type Theory | L2-L3 效果统一化 |
 
 ---
 
 ### 补充文件索引
 
-- [Stable ABI Preview](03_preview_features/30_stable_abi_preview.md)
-- [Inline Const Pattern Preview](03_preview_features/32_inline_const_pattern_preview.md)
-- [`must_not_suspend` Lint Preview](03_preview_features/34_must_not_suspend_preview.md)
-- [Lifetime Capture in `impl Trait` Preview](03_preview_features/14_lifetime_capture_preview.md)
-- [RPITIT Preview](03_preview_features/37_rpitit_preview.md)
-- [TAIT Preview](03_preview_features/16_type_alias_impl_trait_preview.md)
-- [Arbitrary Self Types 预览：自定义方法接收器](03_preview_features/39_arbitrary_self_types_preview.md)
-- [Const Trait Preview](03_preview_features/17_const_trait_preview.md)
-- [Field Projections 预览：安全的字段级投影](03_preview_features/42_field_projections_preview.md)
+- [Stable ABI Preview](03_preview_features/07_stable_abi_preview.md)
+- [Inline Const Pattern Preview](03_preview_features/08_inline_const_pattern_preview.md)
+- [`must_not_suspend` Lint Preview](03_preview_features/10_must_not_suspend_preview.md)
+- [Lifetime Capture in `impl Trait` Preview](03_preview_features/13_lifetime_capture_preview.md)
+- [RPITIT Preview](03_preview_features/15_rpitit_preview.md)
+- [TAIT Preview](03_preview_features/17_type_alias_impl_trait_preview.md)
+- [Arbitrary Self Types 预览：自定义方法接收器](03_preview_features/18_arbitrary_self_types_preview.md)
+- [Const Trait Preview](03_preview_features/19_const_trait_preview.md)
+- [Field Projections 预览：安全的字段级投影](03_preview_features/23_field_projections_preview.md)
 - [Rust 2024 Edition (1.85.0+ stable)](../../knowledge/06_ecosystem/02_edition_2024.md)
-- [Rust for Linux ：操作系统内核中的内存安全（Memory Safety）](04_research_and_experimental/43_rust_for_linux.md)
-- [Rust 在 AI 与机器学习中的新兴角色](04_research_and_experimental/21_rust_in_ai.md)
-- [Edition 2024 完全指南：新特性与迁移策略](01_edition_roadmap/44_edition_guide.md)
-- [Gen Blocks Preview](03_preview_features/22_gen_blocks_preview.md)
-- [`std::autodiff`：Rust 官方自动微分前沿追踪](03_preview_features/45_std_autodiff_preview.md)
-- [Rust Edition 机制与迁移指南](01_edition_roadmap/23_rust_edition_guide.md)
-- [Rust 2027 Edition 及未来路线图](01_edition_roadmap/24_roadmap.md)
-- [WASM Target Evolution Preview](03_preview_features/47_wasm_target_evolution.md)
-- [cargo-semver-checks 预览：从社区工具到 Cargo 官方集成](03_preview_features/46_cargo_semver_checks_preview.md)
-- [AArch64 SVE / SME 预览：可伸缩向量扩展](03_preview_features/48_aarch64_sve_sme_preview.md)
-- [Rust in Space Preview](03_preview_features/49_rust_in_space.md)
-- [编译期执行与常量求值](03_preview_features/27_compile_time_execution.md)
-- [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](04_research_and_experimental/28_rust_for_webassembly.md)
-- [eBPF / Aya / Rex 的 Rust 映射](04_research_and_experimental/29_ebpf_rust.md)
+- [Rust for Linux ：操作系统内核中的内存安全（Memory Safety）](04_research_and_experimental/04_rust_for_linux.md)
+- [Rust 在 AI 与机器学习中的新兴角色](04_research_and_experimental/05_rust_in_ai.md)
+- [Edition 2024 完全指南：新特性与迁移策略](01_edition_roadmap/02_edition_guide.md)
+- [Gen Blocks Preview](03_preview_features/25_gen_blocks_preview.md)
+- [`std::autodiff`：Rust 官方自动微分前沿追踪](03_preview_features/26_std_autodiff_preview.md)
+- [Rust Edition 机制与迁移指南](01_edition_roadmap/03_rust_edition_guide.md)
+- [Rust 2027 Edition 及未来路线图](01_edition_roadmap/04_roadmap.md)
+- [WASM Target Evolution Preview](03_preview_features/28_wasm_target_evolution.md)
+- [cargo-semver-checks 预览：从社区工具到 Cargo 官方集成](03_preview_features/27_cargo_semver_checks_preview.md)
+- [AArch64 SVE / SME 预览：可伸缩向量扩展](03_preview_features/29_aarch64_sve_sme_preview.md)
+- [Rust in Space Preview](03_preview_features/30_rust_in_space.md)
+- [编译期执行与常量求值](03_preview_features/32_compile_time_execution.md)
+- [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](04_research_and_experimental/06_rust_for_webassembly.md)
+- [eBPF / Aya / Rex 的 Rust 映射](04_research_and_experimental/07_ebpf_rust.md)
 - [Rust 1.96 稳定特性](00_version_tracking/rust_1_96_stabilized.md)
 - [Rust 1.97 前沿特性预览](00_version_tracking/rust_1_97_preview.md)
 
@@ -244,7 +244,7 @@ L7 的预测和反向约束影响：
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **最后更新: 2026-05-21

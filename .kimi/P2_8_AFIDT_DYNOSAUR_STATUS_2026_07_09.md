@@ -135,7 +135,7 @@ fn use_dyn(obj: &DynMyTrait<'_>) -> impl std::future::Future<Output = i32> + '_ 
 ## 5. 已更新的项目文件
 
 - `CHANGELOG.md`: 追加 AFIDT / dynosaur 状态摘要。
-- `concept/03_advanced/01_async/02_async.md`:
+- `concept/03_advanced/01_async/01_async.md`:
   - 在 AFIT 限制小节补充 AFIDT 仍处 nightly 实验（#133119）与 `dynosaur` 稳定替代方案说明。
   - 在边界测试 10.4 修正/补充段落中更新动态分发现状。
 - `knowledge/INDEX.md`: 修正 AFIDT 跟踪 issue 为 `#133119`。

@@ -7,7 +7,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P+A** — Procedure + Application
 > **双维定位**: A×Eva — 评价高级进程管理策略
-> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Concurrency](../00_concurrency/01_concurrency.md)
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) · [Concurrency](../00_concurrency/01_concurrency.md)
 > **后置概念**: [Async Process Management](03_async_process_management.md) · [Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Process Performance Engineering](08_process_performance_engineering.md)
 > **定理链**: Process Pool ⟹ Health Check ⟹ Fault Recovery
 
@@ -159,7 +159,7 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 
 ---
 
-> **L2 向下引用（Reference）**: 进程池模式建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[并发模型](../00_concurrency/01_concurrency.md) 与 [异步（Async）编程](../01_async/02_async.md) 之上。
+> **L2 向下引用（Reference）**: 进程池模式建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[并发模型](../00_concurrency/01_concurrency.md) 与 [异步（Async）编程](../01_async/01_async.md) 之上。
 
 ## 相关概念
 

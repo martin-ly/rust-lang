@@ -1,7 +1,7 @@
 # `assert_matches!` / `debug_assert_matches!` 速查指南 {#assert_matches-debug_assert_matches-速查指南}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为assert_matches! 速查指南（速查/指南，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept assert_matches`](../../../concept/02_intermediate/06_macros_and_metaprogramming/05_assert_matches.md)
+> **权威来源（Canonical）**: 本文件为assert_matches! 速查指南（速查/指南，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept assert_matches`](../../../concept/02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（assert_matches!/debug_assert_matches! 语法、对比、用例与迁移指南），不重复 concept/ 中的概念定义、规则与定理推导。
 

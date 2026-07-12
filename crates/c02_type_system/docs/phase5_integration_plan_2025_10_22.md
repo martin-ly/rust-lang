@@ -4,7 +4,7 @@
 # Phase 5 内容整合计划 - 2025-10-22
 
 > **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
-> [`concept/01_foundation/02_type_system/04_type_system.md`](../../../concept/01_foundation/02_type_system/04_type_system.md)。
+> [`concept/01_foundation/02_type_system/01_type_system.md`](../../../concept/01_foundation/02_type_system/01_type_system.md)。
 
 本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../AGENTS.md) §6.4 治理规则，
 通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
@@ -14,4 +14,4 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| Type System | [concept/01_foundation/02_type_system/04_type_system.md](../../../concept/01_foundation/02_type_system/04_type_system.md) |
+| Type System | [concept/01_foundation/02_type_system/01_type_system.md](../../../concept/01_foundation/02_type_system/01_type_system.md) |

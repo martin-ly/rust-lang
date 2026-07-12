@@ -658,15 +658,15 @@ graph TD
 - [L1 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) —— 所有权唯一性的编译期判定
 - [L1 借用](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) —— AXM 规则与借用检查
 - [L1 生命周期](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) —— 偏序约束可满足性
-- [L1 类型系统](../../01_foundation/02_type_system/04_type_system.md) —— 类型推断与一致性
-- [L2 泛型](../../02_intermediate/01_generics/02_generics.md) —— Trait 求解与 Const Generics
+- [L1 类型系统](../../01_foundation/02_type_system/01_type_system.md) —— 类型推断与一致性
+- [L2 泛型](../../02_intermediate/01_generics/01_generics.md) —— Trait 求解与 Const Generics
 - [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md) —— Send/Sync 推导与数据竞争排除
-- [L3 异步](../../03_advanced/01_async/02_async.md) —— Future 状态机与执行模型
-- [L4 所有权形式化](../../04_formal/01_ownership_logic/03_ownership_formal.md) —— COR / Polonius Datalog
-- [L4 RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) —— Iris 逻辑与 Soundness 证明
-- [L5 Rust vs Go](../../05_comparative/01_systems_languages/02_rust_vs_go.md) —— 并发模型同构性
+- [L3 异步](../../03_advanced/01_async/01_async.md) —— Future 状态机与执行模型
+- [L4 所有权形式化](../../04_formal/01_ownership_logic/02_ownership_formal.md) —— COR / Polonius Datalog
+- [L4 RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md) —— Iris 逻辑与 Soundness 证明
+- [L5 Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) —— 并发模型同构性
 - [L0 语义表达力](semantic_expressiveness.md) —— 可判定性-表达力权衡的横向光谱
-- [L7 版本跟踪](../../07_future/00_version_tracking/05_rust_version_tracking.md) —— 1.95/1.96 新特性的判定性映射
+- [L7 版本跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) —— 1.95/1.96 新特性的判定性映射
 
 ## 十、可判定性论文精确引用与前沿映射
 

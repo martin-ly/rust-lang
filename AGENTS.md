@@ -157,7 +157,7 @@ python scripts/kb_auditor.py
 # 内容重叠检测（关键！新增/修改前运行）
 python scripts/detect_content_overlap.py
 
-# 术语表对齐检查（以 concept/00_meta/01_terminology/terminology_glossary.md 为权威表）
+# 术语表对齐检查（以 concept/00_meta/01_terminology/01_terminology_glossary.md 为权威表）
 python scripts/check_glossary_alignment.py --strict
 
 # 内容完整性审计（TODO/待补充/占位标记 + 空章节量化，复核 reports/CONTENT_COMPLETENESS_CLEANUP_2026_07_12.md）

@@ -12,8 +12,8 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Eva
-> **前置依赖**: [形式化验证](../../04_formal/04_model_checking/05_verification_toolchain.md) · [形式化验证工具生态](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md)
-> **后置延伸**: [Safety Tags](08_safety_tags_preview.md) · [BorrowSanitizer](borrow_sanitizer.md) · [Tree Borrows](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md)
+> **前置依赖**: [形式化验证](../../04_formal/04_model_checking/01_verification_toolchain.md) · [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
+> **后置延伸**: [Safety Tags](03_safety_tags_preview.md) · [BorrowSanitizer](24_borrow_sanitizer.md) · [Tree Borrows](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md)
 >
 > **来源**: [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://verus-lang.github.io/verus/guide/) · [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
@@ -169,9 +169,9 @@ B
 
 ## 相关概念
 
-- [形式化验证](../../04_formal/04_model_checking/05_verification_toolchain.md)
-- [形式化验证工具生态](../../06_ecosystem/08_formal_verification/74_formal_verification_tools.md)
-- [AutoVerus/Verus 深度](../../04_formal/04_model_checking/24_autoverus.md)
-- [Safety Tags 预览](08_safety_tags_preview.md) · [深度](08_safety_tags_preview.md)
-- [BorrowSanitizer](borrow_sanitizer.md) · [深度形式化](../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md)
-- [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md) · [Miri](../../04_formal/04_model_checking/31_miri.md)
+- [形式化验证](../../04_formal/04_model_checking/01_verification_toolchain.md)
+- [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
+- [AutoVerus/Verus 深度](../../04_formal/04_model_checking/07_autoverus.md)
+- [Safety Tags 预览](03_safety_tags_preview.md) · [深度](03_safety_tags_preview.md)
+- [BorrowSanitizer](24_borrow_sanitizer.md) · [深度形式化](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md)
+- [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) · [Miri](../../04_formal/04_model_checking/08_miri.md)

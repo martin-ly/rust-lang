@@ -1,7 +1,7 @@
 > **EN**: Async Multi-Dimensional Comparison Matrix
 > **Summary**: Comparison matrices for async runtimes, concurrency patterns, and performance characteristics. Authoritative concept explanations are in the canonical concept page.
 >
-> **权威来源**: [concept/03_advanced/01_async/02_async.md](../../../../concept/03_advanced/01_async/02_async.md)
+> **权威来源**: [concept/03_advanced/01_async/01_async.md](../../../../concept/03_advanced/01_async/01_async.md)
 
 ## 主题速览
 

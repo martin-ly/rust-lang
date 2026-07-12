@@ -9,8 +9,8 @@
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
-> **前置概念**: [异步（Async）编程](../../03_advanced/01_async/02_async.md) · [并发模式](../../03_advanced/00_concurrency/10_concurrency_patterns.md) · [网络协议](../04_web_and_networking/38_network_protocols.md)
-> **后置概念**: [高性能网络服务架构](../04_web_and_networking/39_high_performance_network_service_architecture.md) · [网络安全](02_network_security.md)
+> **前置概念**: [异步（Async）编程](../../03_advanced/01_async/01_async.md) · [并发模式](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [网络协议](../04_web_and_networking/07_network_protocols.md)
+> **后置概念**: [高性能网络服务架构](../04_web_and_networking/08_high_performance_network_service_architecture.md) · [网络安全](02_network_security.md)
 
 ---
 
@@ -250,17 +250,17 @@ flowchart TD
 ## 12. 相关概念
 
 - [并发模型](../../03_advanced/00_concurrency/01_concurrency.md)
-- [异步编程](../../03_advanced/01_async/02_async.md)
-- [并发模式](../../03_advanced/00_concurrency/10_concurrency_patterns.md)
-- [网络协议](../04_web_and_networking/38_network_protocols.md)
-- [设计模式](../03_design_patterns/02_patterns.md)
-- [执行模型同构性：同步 · 异步 · 并发 · 并行](../../05_comparative/00_paradigms/05_execution_model_isomorphism.md)
-- [高性能网络服务架构](../04_web_and_networking/39_high_performance_network_service_architecture.md)
+- [异步编程](../../03_advanced/01_async/01_async.md)
+- [并发模式](../../03_advanced/00_concurrency/03_concurrency_patterns.md)
+- [网络协议](../04_web_and_networking/07_network_protocols.md)
+- [设计模式](../03_design_patterns/01_patterns.md)
+- [执行模型同构性：同步 · 异步 · 并发 · 并行](../../05_comparative/00_paradigms/02_execution_model_isomorphism.md)
+- [高性能网络服务架构](../04_web_and_networking/08_high_performance_network_service_architecture.md)
 - [网络安全](02_network_security.md)
 
 ---
 
-> **L5 向下引用（Reference）**: 协议选型可结合 [Rust vs Go：线性所有权（Ownership） vs CSP 过程逻辑](../../05_comparative/01_systems_languages/02_rust_vs_go.md) 中的并发与通信模型对比进行理解。
+> **L5 向下引用（Reference）**: 协议选型可结合 [Rust vs Go：线性所有权（Ownership） vs CSP 过程逻辑](../../05_comparative/01_systems_languages/03_rust_vs_go.md) 中的并发与通信模型对比进行理解。
 
 ---
 

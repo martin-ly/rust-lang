@@ -10,11 +10,11 @@
 > **文档状态**: ✅ 完整
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **适用范围**: x86/x86_64, ARM/AArch64, RISC-V
-> **权威来源**: [concept/03_advanced/05_inline_assembly/13_inline_assembly.md](../../concept/03_advanced/05_inline_assembly/13_inline_assembly.md)
+> **权威来源**: [concept/03_advanced/05_inline_assembly/01_inline_assembly.md](../../concept/03_advanced/05_inline_assembly/01_inline_assembly.md)
 
 ---
 
-> **权威来源**: [concept/03_advanced/05_inline_assembly/13_inline_assembly.md](../../concept/03_advanced/05_inline_assembly/13_inline_assembly.md)
+> **权威来源**: [concept/03_advanced/05_inline_assembly/01_inline_assembly.md](../../concept/03_advanced/05_inline_assembly/01_inline_assembly.md)
 > 本指南保留平台实践与示例，完整概念解释请参阅 `concept/` 权威页。
 
 ---
@@ -43,13 +43,13 @@ fn main() {
 ---
 
 ## 基础语法 {#基础语法}
-> **权威来源**: [Rust 内联汇编](../../concept/03_advanced/05_inline_assembly/13_inline_assembly.md)
+> **权威来源**: [Rust 内联汇编](../../concept/03_advanced/05_inline_assembly/01_inline_assembly.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## 操作数详解 {#操作数详解}
-> **权威来源**: [Rust 内联汇编操作数](../../concept/03_advanced/05_inline_assembly/13_inline_assembly.md)
+> **权威来源**: [Rust 内联汇编操作数](../../concept/03_advanced/05_inline_assembly/01_inline_assembly.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## 汇编选项 {#汇编选项}
-> **权威来源**: [Rust 内联汇编选项](../../concept/03_advanced/05_inline_assembly/13_inline_assembly.md)
+> **权威来源**: [Rust 内联汇编选项](../../concept/03_advanced/05_inline_assembly/01_inline_assembly.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## 平台特定指南 {#平台特定指南}
 >
@@ -588,7 +588,7 @@ pub fn aligned_buffer_size(min_size: usize) -> usize {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

@@ -16,7 +16,7 @@
 | 所有权三大规则 | [01_ownership.md](01_ownership.md) |
 | 借用规则 | [02_borrowing.md](02_borrowing.md) |
 | 生命周期 | [03_lifetimes.md](03_lifetimes.md) |
-| 智能指针 | [12_smart_pointers.md](../../../../concept/02_intermediate/02_memory_management/12_smart_pointers.md) |
+| 智能指针 | [12_smart_pointers.md](../../../../concept/02_intermediate/02_memory_management/04_smart_pointers.md) |
 
 ## 本地资源
 

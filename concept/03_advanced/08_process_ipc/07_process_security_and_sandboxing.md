@@ -7,14 +7,14 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: A×Eva — 评价进程安全与沙箱设计
-> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [IPC Mechanisms](05_ipc_mechanisms.md) · [Unsafe Rust](../02_unsafe/03_unsafe.md)
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [IPC Mechanisms](05_ipc_mechanisms.md) · [Unsafe Rust](../02_unsafe/01_unsafe.md)
 > **后置概念**: [Process Performance Engineering](08_process_performance_engineering.md) · [Process Testing](09_process_testing_and_benchmarking.md) · [Modern Process Libraries](10_modern_process_libraries.md)
 > **定理链**: Least Privilege ⟹ Isolation Boundary ⟹ Attack Surface Reduction
 
 # Rust 进程安全与沙箱
 
 > **权威页地位**：本页为 Rust 进程安全与沙箱概念的 canonical 解释来源。
-> **L2 向下引用（Reference）**: 沙箱机制实现建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
+> **L2 向下引用（Reference）**: 沙箱机制实现建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/01_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
 
 ## 1. 概念定义
 
@@ -197,7 +197,7 @@ flowchart TD
 - [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [跨平台进程管理](04_cross_platform_process_management.md)
 - [IPC 机制](05_ipc_mechanisms.md)
-- [Rust 安全实践](../../06_ecosystem/07_security_and_cryptography/19_security_practices.md)
+- [Rust 安全实践](../../06_ecosystem/07_security_and_cryptography/01_security_practices.md)
 - [进程性能工程](08_process_performance_engineering.md)
 
 ---

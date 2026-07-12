@@ -114,7 +114,7 @@ fn classify(msg: Option<String>) -> String {
 }
 ```
 
-[The Rust Programming Language (2024 Edition)](../../concept/00_meta/02_sources/international_authority_index.md)
+[The Rust Programming Language (2024 Edition)](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 ---
 

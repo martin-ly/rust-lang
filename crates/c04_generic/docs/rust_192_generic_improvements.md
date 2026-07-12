@@ -15,4 +15,4 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | Rust 1.92 Stabilized Features | [concept/07_future/00_version_tracking/rust_1_92_stabilized.md](../../../concept/07_future/00_version_tracking/rust_1_92_stabilized.md) |
-| Generics | [concept/02_intermediate/01_generics/02_generics.md](../../../concept/02_intermediate/01_generics/02_generics.md) |
+| Generics | [concept/02_intermediate/01_generics/01_generics.md](../../../concept/02_intermediate/01_generics/01_generics.md) |

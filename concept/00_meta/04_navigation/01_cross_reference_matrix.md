@@ -1,0 +1,14 @@
+# Cross Reference Matrix（交叉引用矩阵）
+
+> **Summary**: Redirect stub for the cross-reference matrix; the authoritative index is concept_index.md.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **EN**: Cross Reference Matrix
+> **状态**: 已合并
+> **说明**: 本文件为交叉引用矩阵占位页，内容与 [`03_concept_index.md`](03_concept_index.md) 的交叉引用索引高度重叠。为统一权威来源，本文件作为重定向 stub 保留。
+> **来源**: [03_concept_index.md](03_concept_index.md)
+>
+> **前往权威文件**: [全局概念索引 — 03_concept_index.md](03_concept_index.md)
+> **权威来源**: 本文件为 `concept/` 权威页。
+---
+
+> **相关文件**: [概念索引](03_concept_index.md) · [Bloom 分类法](../00_framework/bloom_taxonomy.md) · [学习指南](07_learning_guide.md) · [概念审计指南](../03_audit/01_concept_audit_guide.md) · [语义空间坐标系](../00_framework/semantic_space.md)

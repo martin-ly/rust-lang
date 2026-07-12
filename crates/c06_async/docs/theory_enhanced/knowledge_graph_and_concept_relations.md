@@ -1,7 +1,7 @@
 > **EN**: Async Knowledge Graph and Concept Relations
 > **Summary**: Visual knowledge graph and concept-relation overview for Rust async programming. Concept definitions and explanations are maintained in the canonical concept authority page.
 >
-> **权威来源**: [concept/03_advanced/01_async/02_async.md](../../../../concept/03_advanced/01_async/02_async.md)
+> **权威来源**: [concept/03_advanced/01_async/01_async.md](../../../../concept/03_advanced/01_async/01_async.md)
 
 ## 主题速览
 

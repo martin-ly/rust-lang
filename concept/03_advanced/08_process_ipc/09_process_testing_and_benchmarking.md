@@ -7,16 +7,16 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P+A** — Procedure + Application
 > **双维定位**: A×Eva — 评价进程测试与基准策略
-> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Testing Basics](../../01_foundation/10_testing_basics/16_testing_basics.md)
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) · [Testing Basics](../../01_foundation/10_testing_basics/01_testing_basics.md)
 > **后置概念**: [Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Process Performance Engineering](08_process_performance_engineering.md) · [Modern Process Libraries](10_modern_process_libraries.md)
 > **定理链**: Unit Test ⟹ Integration Pipeline ⟹ CI Gate
 
 # Rust 进程测试与基准
 
 > **权威页地位**：本页为 Rust 进程测试与基准概念的 canonical 解释来源。
-> **L2 向下引用（Reference）**: 进程测试技术建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
+> **L2 向下引用（Reference）**: 进程测试技术建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/01_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
 >
-> 通用 Rust 测试策略请参见 [Rust 测试策略](../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md)。
+> 通用 Rust 测试策略请参见 [Rust 测试策略](../../06_ecosystem/09_testing_and_quality/01_testing_strategies.md)。
 
 ## 1. 概念定义
 
@@ -196,8 +196,8 @@ flowchart LR
 - [高级进程管理](02_advanced_process_management.md)
 - [异步进程管理](03_async_process_management.md)
 - [进程性能工程](08_process_performance_engineering.md)
-- [Rust 测试策略](../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md)
-- [基准测试](../../06_ecosystem/09_testing_and_quality/17_benchmarking.md)
+- [Rust 测试策略](../../06_ecosystem/09_testing_and_quality/01_testing_strategies.md)
+- [基准测试](../../06_ecosystem/09_testing_and_quality/04_benchmarking.md)
 
 ---
 

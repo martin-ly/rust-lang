@@ -1,4 +1,4 @@
-> **权威来源**: [concept/02_intermediate/00_traits/39_dispatch_mechanisms.md](../../../../concept/02_intermediate/00_traits/39_dispatch_mechanisms.md)
+> **权威来源**: [concept/02_intermediate/00_traits/02_dispatch_mechanisms.md](../../../../concept/02_intermediate/00_traits/02_dispatch_mechanisms.md)
 
 # 分发机制 (Dispatch Mechanisms)
 

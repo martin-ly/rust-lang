@@ -1,7 +1,7 @@
 # Rust 1.90–1.93 特性速查表 {#rust-190193-特性速查表}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为Rust 1.90–1.93 特性速查表（版本速查）；通用 Rust 概念解释请以 concept 权威页为准：[`concept 版本跟踪`](../../../concept/07_future/00_version_tracking/05_rust_version_tracking.md)
+> **权威来源（Canonical）**: 本文件为Rust 1.90–1.93 特性速查表（版本速查）；通用 Rust 概念解释请以 concept 权威页为准：[`concept 版本跟踪`](../../../concept/07_future/00_version_tracking/01_rust_version_tracking.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（1.90–1.93 特性快速参考与迁移检查清单（速查，非概念正文）），不重复 concept/ 中的概念定义、规则与定理推导。
 
@@ -205,7 +205,7 @@ pub unsafe fn cpuid() {
 - [Rust 1.93.0 Release [已失效]]<!-- 原链接: https://releases.rs/docs/1.93.0/ -->
 - [Rust 1.94 特性速查表](02_rust_194_features_cheatsheet.md)
 - [Rust 1.95 特性速查表](02_rust_195_features_cheatsheet.md)
-- [Rust 版本跟踪](../../../concept/07_future/00_version_tracking/05_rust_version_tracking.md)
+- [Rust 版本跟踪](../../../concept/07_future/00_version_tracking/01_rust_version_tracking.md)
 
 ---
 

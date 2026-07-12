@@ -256,7 +256,7 @@
 
 - **定义**: 类型可安全跨线程转移所有权
 - **示例**: `i32`、`String`、`Box<T>`（若 `T: Send`）
-- **反例**: `Rc` 非 Send（引用计数非原子，跨线程共享会导致数据竞争；详见 [Send/Sync 自动 trait](../../concept/03_advanced/00_concurrency/17_send_sync_auto_traits.md)）
+- **反例**: `Rc` 非 Send（引用计数非原子，跨线程共享会导致数据竞争；详见 [Send/Sync 自动 trait](../../concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md)）
 - **相关**: [异步状态机形式化](formal_methods/10_async_state_machine.md)
 
 **Sync**:
@@ -655,7 +655,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

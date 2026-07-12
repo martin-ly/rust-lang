@@ -3,8 +3,8 @@
 > 若只需要使用指南与生态定位，请优先参考：
 >
 > - [并发编程](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
-> - [并发模式](../../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md)
-> - [性能优化](../../../../concept/06_ecosystem/10_performance/15_performance_optimization.md)
+> - [并发模式](../../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md)
+> - [性能优化](../../../../concept/06_ecosystem/10_performance/01_performance_optimization.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 
@@ -576,7 +576,7 @@ pool.install(|| {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 ---
 

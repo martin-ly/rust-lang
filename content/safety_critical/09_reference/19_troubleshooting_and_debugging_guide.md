@@ -3,7 +3,7 @@
 **EN**: Troubleshooting And Debugging Guide
 **Summary**: 故障排除与调试指南 Troubleshooting And Debugging Guide.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/00_meta/04_navigation/learning_guide.md](../../../concept/00_meta/04_navigation/learning_guide.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/00_meta/04_navigation/07_learning_guide.md](../../../concept/00_meta/04_navigation/07_learning_guide.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

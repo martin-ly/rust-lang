@@ -19,5 +19,5 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | Rust 1.92 稳定特性 | [`concept/07_future/00_version_tracking/rust_1_92_stabilized.md`](../../concept/07_future/00_version_tracking/rust_1_92_stabilized.md) |
-| 设计模式 | [`concept/06_ecosystem/03_design_patterns/02_patterns.md`](../../concept/06_ecosystem/03_design_patterns/02_patterns.md) |
-| 过程宏 | [`concept/03_advanced/03_proc_macros/07_proc_macro.md`](../../concept/03_advanced/03_proc_macros/07_proc_macro.md) |
+| 设计模式 | [`concept/06_ecosystem/03_design_patterns/01_patterns.md`](../../concept/06_ecosystem/03_design_patterns/02_patterns.md) |
+| 过程宏 | [`concept/03_advanced/03_proc_macros/02_proc_macro.md`](../../concept/03_advanced/03_proc_macros/07_proc_macro.md) |

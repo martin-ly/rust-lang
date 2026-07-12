@@ -6,7 +6,7 @@
 > **分级**: [A]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Edition Guide、RFC 2289 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Edition Guide、RFC 2289 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 # Rust 2024 Edition RPIT Lifetime Capture 迁移指南 (Rust 2024 Edition Rpit Migration) {#rust-2024-edition-rpit-lifetime-capture-迁移指南}
 

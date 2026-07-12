@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 > [综述级]
-> **本节关键术语**: 特征 (Trait) · 实现 (Implement) · 孤儿规则 (Orphan Rule) · 一致性 (Coherence) · 对象安全 (Object Safety) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
+> **本节关键术语**: 特征 (Trait) · 实现 (Implement) · 孤儿规则 (Orphan Rule) · 一致性 (Coherence) · 对象安全 (Object Safety) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 
 # Traits（Trait 系统）
@@ -19,16 +19,16 @@
 > **前置依赖**: L1 类型系统（Type System） ·
 > [L1 所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **后置延伸**: [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md) ·
-> [L4 类型论](../../04_formal/00_type_theory/02_type_theory.md) ·
-> [L6 设计模式](../../06_ecosystem/03_design_patterns/02_patterns.md)
+> [L4 类型论](../../04_formal/00_type_theory/01_type_theory.md) ·
+> [L6 设计模式](../../06_ecosystem/03_design_patterns/01_patterns.md)
 > **跨层映射**: L2→L4 Trait ↔ 类型类 (Type Class) | L2→L3 Send/Sync Trait
 > **定理链编号**: T-200 特质一致性（Coherence） → T-201 孤儿规则（Orphan Rule）完备性 → T-202 关联类型规范化
 > **层级**: L2 进阶概念
-> **前置概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) ·
+> **前置概念**: [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) ·
 > [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
-> **后置概念**: [Generics](../01_generics/02_generics.md) ·
+> **后置概念**: [Generics](../01_generics/01_generics.md) ·
 > [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
-> [Async](../../03_advanced/01_async/02_async.md)
+> [Async](../../03_advanced/01_async/01_async.md)
 > **主要来源**: [TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html) ·
 > [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class) ·
@@ -567,7 +567,7 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 
 > **一致性检查**: Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl（链 A），且 Trait 对象安全 ⟹ dyn Trait 可行性（链 B），形成**从定义约束到使用能力**的两条正交推理链。
 > Auto Trait 推导是编译器对结构性质的自动证明，Blanket impl 提供全称量词的默认行为，`impl Trait` 引入存在量化——三者与对象安全共同构成 Trait 系统的"静动两面"。
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/04_inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
 > **过渡到示例与反例**:
 > 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？
 > 下一节通过正例展示定理的适用场景，通过反例揭示定理失效的精确条件——特别是 E0117、E0119、E0038 等编译错误的触发机制，将抽象定理映射到具体代码行为。
@@ -699,7 +699,7 @@ fn returns_iter() -> impl Iterator<Item = u32> {
 ### 5.6 正确示例：Generic Associated Types (GATs)
 
 > **权威来源**: GAT 的完整论述（语法规则、与 HRTB 边界、稳定化历程、选型判定表）集中于
-> [40_generic_associated_types.md](40_generic_associated_types.md)；本节保留入门示例。
+> [07_generic_associated_types.md](07_generic_associated_types.md)；本节保留入门示例。
 
 > **[RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)** ·
 > **[Rust Reference: Generic Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types)**
@@ -1221,7 +1221,7 @@ fn main() {
 | **对象/动态分发** | Concept 本身不支持动态多态 | `dyn Trait` | Rust Trait Object 提供运行时（Runtime）多态 |
 
 > **关键洞察**：C++20 Concepts 让"类型必须能做什么"变得可读，但"怎么做"仍然散落在模板体与特化中；Rust Trait 把"能做什么"与"怎么做"绑定在同一个语言构造中，并通过 Orphan Rule 保证全局一致性。这种统一是 Rust 在泛型系统上做出的一致性（Coherence）与工程可读性权衡的核心结果。
-> **关联章节**: [Generics](../01_generics/02_generics.md) · [Type System Basics](../../01_foundation/02_type_system/04_type_system.md) · [Specialization](19_advanced_traits.md) · [Const Trait 补充章节](#补充章节const-trait-与-const-实验特性)
+> **关联章节**: [Generics](../01_generics/01_generics.md) · [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) · [Specialization](04_advanced_traits.md) · [Const Trait 补充章节](#补充章节const-trait-与-const-实验特性)
 
 ---
 
@@ -1670,18 +1670,18 @@ fn notify<T: Summary>(item: &T) { ... }
 
 ## 十、相关概念链接
 
-- **上层概念**: [Type System Basics](../../01_foundation/02_type_system/04_type_system.md)
-- **下层概念**: [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md) · [Generics](../01_generics/02_generics.md)
+- **上层概念**: [Type System Basics](../../01_foundation/02_type_system/01_type_system.md)
+- **下层概念**: [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md) · [Generics](../01_generics/01_generics.md)
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 泛型与单态化（Monomorphization） | [02_generics.md](../01_generics/02_generics.md) | Trait Bounds 的载体 |
+| 泛型与单态化（Monomorphization） | [02_generics.md](../01_generics/01_generics.md) | Trait Bounds 的载体 |
 | 所有权（Ownership）与生命周期（Lifetimes） | [01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Trait 方法签名的基础约束 |
-| 类型系统基础 | [01_foundation/02_type_system/04_type_system.md](../../01_foundation/02_type_system/04_type_system.md) | Trait 的理论前提 |
+| 类型系统基础 | [01_foundation/02_type_system/01_type_system.md](../../01_foundation/02_type_system/01_type_system.md) | Trait 的理论前提 |
 | 并发与 Send/Sync | [03_advanced/00_concurrency/01_concurrency.md](../../03_advanced/00_concurrency/01_concurrency.md) | Auto Trait 的核心应用 |
-| Send/Sync Auto Trait 契约 | [17_send_sync_auto_traits.md](../../03_advanced/00_concurrency/17_send_sync_auto_traits.md) | auto 推导与判定矩阵的权威页 |
-| 异步（Async）与 Future | 03_advanced/01_async/02_async.md | 关联类型 Trait 的典型场景 |
-| 形式化验证 | [04_formal/04_rustbelt.md](../../04_formal/02_separation_logic/04_rustbelt.md) | Trait 系统的逻辑基础 |
+| Send/Sync Auto Trait 契约 | [17_send_sync_auto_traits.md](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) | auto 推导与判定矩阵的权威页 |
+| 异步（Async）与 Future | 03_advanced/01_async/01_async.md | 关联类型 Trait 的典型场景 |
+| 形式化验证 | [04_formal/04_rustbelt.md](../../04_formal/02_separation_logic/01_rustbelt.md) | Trait 系统的逻辑基础 |
 
 > **过渡到演进方向**: 相关概念链接描绘了 Trait 在知识体系中的坐标，但任何文档都有演进空间。最后一节记录已识别的演进方向与优先级，为后续迭代提供明确的路线图。
 
@@ -2447,7 +2447,7 @@ trait LendingIterator {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **最后更新**: 2026-05-19

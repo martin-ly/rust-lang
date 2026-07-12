@@ -3,7 +3,7 @@
 > **EN**: Error Handling Reference (Redirect)
 > **Summary**: Redirect to the canonical Error Handling concept page.
 >
-> **权威来源**: [concept/02_intermediate/03_error_handling/04_error_handling.md](concept/02_intermediate/03_error_handling/04_error_handling.md)
+> **权威来源**: [concept/02_intermediate/03_error_handling/01_error_handling.md](concept/02_intermediate/03_error_handling/01_error_handling.md)
 
 ## 主题速览
 

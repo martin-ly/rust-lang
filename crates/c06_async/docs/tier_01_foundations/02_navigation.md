@@ -1,7 +1,7 @@
 > **EN**: C06 Async Navigation Hub
 > **Summary**: Tier 1 navigation hub for the c06_async crate documentation. General async concept explanations are maintained in the canonical concept authority page.
 >
-> **权威来源**: [concept/03_advanced/01_async/02_async.md](../../../../concept/03_advanced/01_async/02_async.md)
+> **权威来源**: [concept/03_advanced/01_async/01_async.md](../../../../concept/03_advanced/01_async/01_async.md)
 
 ## 主题速览
 

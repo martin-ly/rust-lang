@@ -15,4 +15,4 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | Traits | [concept/02_intermediate/00_traits/01_traits.md](../../../../concept/02_intermediate/00_traits/01_traits.md) |
-| Advanced Traits | [concept/02_intermediate/00_traits/19_advanced_traits.md](../../../../concept/02_intermediate/00_traits/19_advanced_traits.md) |
+| Advanced Traits | [concept/02_intermediate/00_traits/04_advanced_traits.md](../../../../concept/02_intermediate/00_traits/04_advanced_traits.md) |

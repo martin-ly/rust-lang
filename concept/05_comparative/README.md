@@ -135,29 +135,29 @@ L1-L4 知识                L5 综合                L6-L7 决策
 | 文件 | 概念 | 核心内容 | 状态 | 依赖的 L1-L4 | 应用场景 |
 |:---|:---|:---|:---|:---|:---|
 | [01_rust_vs_cpp.md](01_systems_languages/01_rust_vs_cpp.md) | Rust vs C++ | 形式系统模型 vs 机制工程模型、多维矩阵、决策树、AI时代分析 | ✅ v1.0（原 01.md） | L1 Ownership, L3 Unsafe, L4 Linear Logic | 系统编程选型、C++ 迁移 |
-| [02_rust_vs_go.md](01_systems_languages/02_rust_vs_go.md) | Rust vs Go | CSP vs 所有权并发、服务编排语义、确定性对比 | ✅ v1.0 | L3 Concurrency, L1 Ownership | 微服务选型、云原生架构 |
+| [02_rust_vs_go.md](01_systems_languages/03_rust_vs_go.md) | Rust vs Go | CSP vs 所有权并发、服务编排语义、确定性对比 | ✅ v1.0 | L3 Concurrency, L1 Ownership | 微服务选型、云原生架构 |
 | 03_paradigm_matrix.md | 范式矩阵 | 多语言形式化对比、类型系统（Type System）谱系、设计哲学 | ✅ v1.0 | L1-L4 所有概念 | 语言教学、研究定位 |
-| [06_rust_vs_java.md](02_managed_languages/06_rust_vs_java.md) | Rust vs Java | 所有权 vs GC、并发模型、运行时（Runtime）架构、场景矩阵 | ✅ v1.0 | L1 Ownership, L3 Concurrency | JVM 迁移、企业系统选型 |
-| [07_rust_vs_python.md](02_managed_languages/07_rust_vs_python.md) | Rust vs Python | 静态 vs 动态类型、所有权 vs GC、 fearless vs GIL、元编程 | ✅ v1.0 | L1 Ownership, L1 Type System | 性能瓶颈、混合架构选型 |
-| [08_rust_vs_javascript.md](02_managed_languages/08_rust_vs_javascript.md) | Rust vs JavaScript | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ v1.0 | L1 Ownership, L3 Async | Web 性能、WASM 集成 |
-| [02_cpp_abi_object_model.md](01_systems_languages/18_cpp_abi_object_model.md) | C++ ABI 与对象模型 | ABI 稳定性、对象布局、vtable、repr(C)、Move ABI、RTTI | ✅ v1.0 | L1 Ownership, L3 Unsafe, L3 FFI | C++ 迁移、FFI |
+| [06_rust_vs_java.md](02_managed_languages/01_rust_vs_java.md) | Rust vs Java | 所有权 vs GC、并发模型、运行时（Runtime）架构、场景矩阵 | ✅ v1.0 | L1 Ownership, L3 Concurrency | JVM 迁移、企业系统选型 |
+| [07_rust_vs_python.md](02_managed_languages/02_rust_vs_python.md) | Rust vs Python | 静态 vs 动态类型、所有权 vs GC、 fearless vs GIL、元编程 | ✅ v1.0 | L1 Ownership, L1 Type System | 性能瓶颈、混合架构选型 |
+| [08_rust_vs_javascript.md](02_managed_languages/03_rust_vs_javascript.md) | Rust vs JavaScript | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ v1.0 | L1 Ownership, L3 Async | Web 性能、WASM 集成 |
+| [02_cpp_abi_object_model.md](01_systems_languages/02_cpp_abi_object_model.md) | C++ ABI 与对象模型 | ABI 稳定性、对象布局、vtable、repr(C)、Move ABI、RTTI | ✅ v1.0 | L1 Ownership, L3 Unsafe, L3 FFI | C++ 迁移、FFI |
 
 ---
 
 ### 补充文件索引
 
-- [Rust 安全保证的边界条件全景（Safety Boundary Panorama）](03_domain_comparisons/04_safety_boundaries.md)
+- [Rust 安全保证的边界条件全景（Safety Boundary Panorama）](03_domain_comparisons/01_safety_boundaries.md)
 - Rust 执行模型同构性矩阵：同步 · 异步（Async） · 并发 · 并行
-- [C++ vs Rust：构造、运算符、RTTI、友元](00_paradigms/16_cpp_rust_surface_features.md)
-- [Rust vs Ruby：性能与表达力的两极](01_systems_languages/19_rust_vs_ruby.md)
-- [Rust vs Swift：现代系统语言的两种路径](01_systems_languages/09_rust_vs_swift.md)
-- [Rust vs Zig：现代系统语言的两种哲学](01_systems_languages/10_rust_vs_zig.md)
-- [Rust vs Kotlin：静态安全的两种路径](02_managed_languages/11_rust_vs_kotlin.md)
-- [Rust vs Scala：类型系统（Type System）的两种哲学](02_managed_languages/12_rust_vs_scala.md)
-- [Rust vs C#：托管与原生之路](02_managed_languages/13_rust_vs_csharp.md)
-- [Rust vs Elixir](02_managed_languages/14_rust_vs_elixir.md)
-- [Rust vs TypeScript：静态类型系统（Type System）的两种哲学 —— 编译期证明与渐进式工程](02_managed_languages/15_rust_vs_typescript.md)
-- [测验：Rust vs 系统编程语言（嵌入式互动试点）](03_domain_comparisons/17_quiz_rust_vs_systems.md)
+- [C++ vs Rust：构造、运算符、RTTI、友元](00_paradigms/03_cpp_rust_surface_features.md)
+- [Rust vs Ruby：性能与表达力的两极](01_systems_languages/04_rust_vs_ruby.md)
+- [Rust vs Swift：现代系统语言的两种路径](01_systems_languages/05_rust_vs_swift.md)
+- [Rust vs Zig：现代系统语言的两种哲学](01_systems_languages/06_rust_vs_zig.md)
+- [Rust vs Kotlin：静态安全的两种路径](02_managed_languages/04_rust_vs_kotlin.md)
+- [Rust vs Scala：类型系统（Type System）的两种哲学](02_managed_languages/05_rust_vs_scala.md)
+- [Rust vs C#：托管与原生之路](02_managed_languages/06_rust_vs_csharp.md)
+- [Rust vs Elixir](02_managed_languages/07_rust_vs_elixir.md)
+- [Rust vs TypeScript：静态类型系统（Type System）的两种哲学 —— 编译期证明与渐进式工程](02_managed_languages/08_rust_vs_typescript.md)
+- [测验：Rust vs 系统编程语言（嵌入式互动试点）](03_domain_comparisons/02_quiz_rust_vs_systems.md)
 
 ## 三、原 `01.md` 的结构化索引
 
@@ -219,6 +219,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 
 L5 的综合分析输出到：
 
+- **L4 形式化**: 对比结论依赖的理论基础 → [类型论](../04_formal/00_type_theory/01_type_theory.md) · [所有权形式化](../04_formal/01_ownership_logic/02_ownership_formal.md)
 - **L6 生态**: 工程模式选择（Typestate vs OOP）、工具链决策
 - **L7 前沿**: 语言演进方向（Rust 是否需要 GC？async 模型优化？）
 - **实践**: 技术栈选型、团队培训路径设计、迁移策略
@@ -231,17 +232,17 @@ L5 的综合分析输出到：
 
 | L2 文件 | 对比主题 | 对应 L5 入口 |
 |---|---|---|
-| [RTTI 与动态类型识别](../02_intermediate/04_types_and_conversions/25_rtti_and_dynamic_typing.md) | C++ `typeid`/`dynamic_cast` vs Rust `Any`/`TypeId` | [Rust vs C++](01_systems_languages/01_rust_vs_cpp.md) |
-| [C 预处理器 vs Rust 宏](../02_intermediate/06_macros_and_metaprogramming/26_c_preprocessor_vs_rust_macros.md) | 文本替换宏 vs 卫生宏/过程宏（Procedural Macro） | [Rust vs C++](01_systems_languages/01_rust_vs_cpp.md) |
-| [异常安全：C++ 与 Rust 的错误处理哲学](../02_intermediate/03_error_handling/27_exception_safety_rust_cpp.md) | 异常安全保证 vs `Result`/panic 边界 | [Safety Boundaries](03_domain_comparisons/04_safety_boundaries.md) |
-| [构造与初始化：C++ 构造函数 vs Rust 结构体字面量](../02_intermediate/00_traits/28_construction_and_initialization.md) | 构造函数/RAII vs 字面量/Builder | [Rust vs C++](01_systems_languages/01_rust_vs_cpp.md) |
-| [友元 vs 模块可见性](../02_intermediate/05_modules_and_visibility/29_friend_vs_module_privacy.md) | C++ `friend` vs Rust `pub(crate)` 隐私边界 | [Safety Boundaries](03_domain_comparisons/04_safety_boundaries.md) |
+| [RTTI 与动态类型识别](../02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md) | C++ `typeid`/`dynamic_cast` vs Rust `Any`/`TypeId` | [Rust vs C++](01_systems_languages/01_rust_vs_cpp.md) |
+| [C 预处理器 vs Rust 宏](../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md) | 文本替换宏 vs 卫生宏/过程宏（Procedural Macro） | [Rust vs C++](01_systems_languages/01_rust_vs_cpp.md) |
+| [异常安全：C++ 与 Rust 的错误处理哲学](../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md) | 异常安全保证 vs `Result`/panic 边界 | [Safety Boundaries](03_domain_comparisons/01_safety_boundaries.md) |
+| [构造与初始化：C++ 构造函数 vs Rust 结构体字面量](../02_intermediate/00_traits/05_construction_and_initialization.md) | 构造函数/RAII vs 字面量/Builder | [Rust vs C++](01_systems_languages/01_rust_vs_cpp.md) |
+| [友元 vs 模块可见性](../02_intermediate/05_modules_and_visibility/02_friend_vs_module_privacy.md) | C++ `friend` vs Rust `pub(crate)` 隐私边界 | [Safety Boundaries](03_domain_comparisons/01_safety_boundaries.md) |
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../00_meta/02_sources/05_international_authority_index.md)
 > **内容分级**: [综述级]
 
 **文档版本**: 1.1

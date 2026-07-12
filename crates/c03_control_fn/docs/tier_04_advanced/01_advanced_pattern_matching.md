@@ -8,7 +8,7 @@
 
 ---
 
-> **权威来源**: [concept/01_foundation/04_control_flow/40_patterns.md](../../../../concept/01_foundation/04_control_flow/40_patterns.md)
+> **权威来源**: [concept/01_foundation/04_control_flow/02_patterns.md](../../../../concept/01_foundation/04_control_flow/02_patterns.md)
 
 ---
 

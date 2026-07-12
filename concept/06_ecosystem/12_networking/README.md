@@ -21,5 +21,5 @@
 - [网络安全 (Network Security)](02_network_security.md)
 - [自定义协议实现 (Custom Protocol Implementation)](03_custom_protocol_implementation.md)
 - [Rust 网络编程快速入门](04_network_programming_quick_start.md)
-- [形式化网络协议理论](05_formal_network_protocol_theory.md)
-- [网络编程基础 (Networking Basics)](06_networking_basics.md)
+- [形式化网络协议理论](06_formal_network_protocol_theory.md)
+- [网络编程基础 (Networking Basics)](05_networking_basics.md)

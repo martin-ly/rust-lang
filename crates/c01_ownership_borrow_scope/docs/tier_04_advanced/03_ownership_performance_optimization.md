@@ -3,7 +3,7 @@
 > **EN**: Ownership Performance Optimization (Redirect)
 > **Summary**: Redirect to the canonical Ownership Performance Optimization concept page.
 >
-> **权威来源**: [concept/03_advanced/06_low_level_patterns/36_ownership_performance_optimization.md](concept/03_advanced/06_low_level_patterns/36_ownership_performance_optimization.md)
+> **权威来源**: [concept/03_advanced/06_low_level_patterns/06_ownership_performance_optimization.md](concept/03_advanced/06_low_level_patterns/06_ownership_performance_optimization.md)
 
 ## 主题速览
 

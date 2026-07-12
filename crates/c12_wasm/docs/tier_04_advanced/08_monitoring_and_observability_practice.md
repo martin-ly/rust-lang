@@ -3,7 +3,7 @@
 
 # 监控与可观测性实践指南
 
-> **权威来源**: [concept/06_ecosystem/00_toolchain/13_logging_observability.md](../../../../concept/06_ecosystem/00_toolchain/13_logging_observability.md)
+> **权威来源**: [concept/06_ecosystem/00_toolchain/02_logging_observability.md](../../../../concept/06_ecosystem/00_toolchain/02_logging_observability.md)
 
 本文件为 crate 文档重定向 stub。原内容中的通用 Rust 概念已迁移至上述权威来源页面；以下仅保留主题索引。
 

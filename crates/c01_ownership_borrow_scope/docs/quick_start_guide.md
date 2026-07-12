@@ -5,7 +5,7 @@
 >
 > **权威来源**: [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **权威来源**: [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
-> **权威来源**: [concept/00_meta/04_navigation/learning_guide.md](../../../concept/00_meta/04_navigation/learning_guide.md)
+> **权威来源**: [concept/00_meta/04_navigation/07_learning_guide.md](../../../concept/00_meta/04_navigation/07_learning_guide.md)
 
 ## 主题速览
 

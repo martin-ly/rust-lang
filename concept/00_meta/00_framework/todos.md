@@ -241,9 +241,9 @@
 
 ### Wave 2: L3 权威来源补充（进行中）
 
-- [x] `03_advanced/01_async/02_async.md` —— 补充 Wikipedia、CMU 17-350、PLDI 论文 ✅ 2026-05-13
-- [x] `03_advanced/02_unsafe/03_unsafe.md` —— 补充 Wikipedia、Rustonomicon、Miri 论文 ✅ 2026-05-13
-- [x] `03_advanced/03_proc_macros/04_macros.md` —— 补充 Wikipedia、CMU 17-363、Hygienic Macros ✅ 2026-05-13
+- [x] `03_advanced/01_async/01_async.md` —— 补充 Wikipedia、CMU 17-350、PLDI 论文 ✅ 2026-05-13
+- [x] `03_advanced/02_unsafe/01_unsafe.md` —— 补充 Wikipedia、Rustonomicon、Miri 论文 ✅ 2026-05-13
+- [x] `03_advanced/03_proc_macros/01_macros.md` —— 补充 Wikipedia、CMU 17-363、Hygienic Macros ✅ 2026-05-13
 - [x] `03_advanced/00_concurrency/01_concurrency.md` —— 补充 Stanford CS340R、RustBelt CSL ✅ 2026-05-13
 
 ### Wave 3: L5-L7 深度扩展（待开始）
@@ -259,7 +259,7 @@
 ### Wave 4: L2-L4 精细化增强（待开始）
 
 - [x] `02_intermediate/00_traits/01_traits.md` —— CMU 17-363 traits、Type Class 论文 ✅ 2026-05-13
-- [x] `02_intermediate/01_generics/02_generics.md` —— System F 论文、Const Generics RFC ✅ 2026-05-13
+- [x] `02_intermediate/01_generics/01_generics.md` —— System F 论文、Const Generics RFC ✅ 2026-05-13
 - [x] `04_formal/01_linear_logic.md` —— 786 行 ✅（目标 450+）
 - [x] `04_formal/02_type_theory.md` —— 765 行 ✅（目标 400+）
 - [x] `04_formal/03_ownership_formal.md` —— 782 行 ✅（目标 350+）
@@ -274,17 +274,17 @@
 
 ---
 
-## 相关概念文件 [concept/00_meta/learning_guide.md — 学习路径设计](../02_sources/international_authority_index.md); [concept/00_meta/methodology.md — 内容结构规范](../02_sources/international_authority_index.md)
+## 相关概念文件 [concept/00_meta/learning_guide.md — 学习路径设计](../02_sources/05_international_authority_index.md); [concept/00_meta/methodology.md — 内容结构规范](../02_sources/05_international_authority_index.md)
 
-- [概念一致性检查清单](../03_audit/audit_checklist.md) — 审计标准与完成定义
-- [跨层知识图谱](../04_navigation/inter_layer_map.md) — TODO 优先级与层间依赖映射
+- [概念一致性检查清单](../03_audit/03_audit_checklist.md) — 审计标准与完成定义
+- [跨层知识图谱](../04_navigation/04_inter_layer_map.md) — TODO 优先级与层间依赖映射
 - [语义表达力全景梳理](semantic_expressiveness.md) — 待填补语义维度
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **最后更新**: 2026-05-19

@@ -1,4 +1,4 @@
-> **权威来源**: [concept/06_ecosystem/04_web_and_networking/39_high_performance_network_service_architecture.md](../../../../concept/06_ecosystem/04_web_and_networking/39_high_performance_network_service_architecture.md)
+> **权威来源**: [concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md](../../../../concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md)
 
 # 高性能网络服务架构 (High-Performance Network Service Architecture)
 

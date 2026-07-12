@@ -6,14 +6,14 @@
 > **Bloom 层级**: L3-L4
 >
 > **层次定位**: L3-L6 高级-生态 / 异步（Async）工程实践
-> **前置依赖**: [concept L3 Async](../../concept/03_advanced/01_async/02_async.md) · [docs 设计模式](05_design_patterns_usage_guide.md)
+> **前置依赖**: [concept L3 Async](../../concept/03_advanced/01_async/01_async.md) · [docs 设计模式](05_design_patterns_usage_guide.md)
 > **后置延伸**: [docs 嵌入式](05_embedded_rust_guide.md) · [knowledge Async](../../knowledge/03_advanced/async/README.md)
 > **跨层映射**: L3→L6 运行时（Runtime）映射 | 语义→实现
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性（Coherence） → Tokio 调度正确性
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]
-> **权威来源**: [concept/03_advanced/01_async/02_async.md](../../concept/03_advanced/01_async/02_async.md)
+> **权威来源**: [concept/03_advanced/01_async/01_async.md](../../concept/03_advanced/01_async/01_async.md)
 
 ## 📑 目录 {#目录}
 >
@@ -1842,7 +1842,7 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

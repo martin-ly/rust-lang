@@ -1,7 +1,7 @@
 > **EN**: Async Concurrency Patterns
 > **Summary**: Advanced concurrency patterns for Rust async programming, including Actor, Reactor, Pipeline, CSP, object pools, work stealing, and reactive programming. This crate document now redirects to the canonical concept page.
 
-> **权威来源**: [concept/03_advanced/01_async/26_async_patterns.md](../../../../concept/03_advanced/01_async/26_async_patterns.md)
+> **权威来源**: [concept/03_advanced/01_async/03_async_patterns.md](../../../../concept/03_advanced/01_async/03_async_patterns.md)
 
 ## 主题速览
 

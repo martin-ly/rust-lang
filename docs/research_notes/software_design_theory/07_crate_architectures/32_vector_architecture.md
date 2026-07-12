@@ -2,8 +2,8 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [机器学习生态](../../../../concept/06_ecosystem/11_domain_applications/46_machine_learning_ecosystem.md)
-> - [Rust 数据科学](../../../../concept/06_ecosystem/06_data_and_distributed/55_rust_for_data_science.md)
+> - [机器学习生态](../../../../concept/06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md)
+> - [Rust 数据科学](../../../../concept/06_ecosystem/06_data_and_distributed/07_rust_for_data_science.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
@@ -184,7 +184,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 
 - [nalgebra / ndarray 科学计算架构](14_nalgebra_architecture.md) — 向量/矩阵运算基础
 - [Tokio 异步运行时架构](06_tokio_architecture.md) — 将 vector 集成到异步服务
-- [机器学习生态](../../../../concept/06_ecosystem/11_domain_applications/46_machine_learning_ecosystem.md)
+- [机器学习生态](../../../../concept/06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md)
 - [数据库与存储生态权威来源对齐](../../10_database_storage_cloud_alignment.md)
 
 ---

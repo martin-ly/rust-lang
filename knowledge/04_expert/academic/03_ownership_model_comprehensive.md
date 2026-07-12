@@ -2,7 +2,7 @@
 
 > **EN**: Ownership Model Comprehensive Guide
 > **Summary**: 所有权模型综合指南 Ownership Model Comprehensive Guide. (stub/archive redirect)
-> **权威来源**: 本主题深度解释见 [concept/04_formal/03_ownership_formal.md](../../../concept/04_formal/01_ownership_logic/03_ownership_formal.md)。
+> **权威来源**: 本主题深度解释见 [concept/04_formal/03_ownership_formal.md](../../../concept/04_formal/01_ownership_logic/02_ownership_formal.md)。
 > **历史版本存档**: [archive/knowledge/04_expert/academic/03_ownership_model_comprehensive.md](../../../archive/knowledge/04_expert/academic/03_ownership_model_comprehensive.md)
 >
 > **定位**: 本文件为精简知识卡片，保留核心规则/概念与常见陷阱。详细解释、形式化语义与代码示例请查看权威来源。
@@ -33,4 +33,4 @@
 
 ---
 
-**详细内容已迁移**：请点击上方 [concept/04_formal/03_ownership_formal.md](../../../concept/04_formal/01_ownership_logic/03_ownership_formal.md) 查看最新权威解释。
+**详细内容已迁移**：请点击上方 [concept/04_formal/03_ownership_formal.md](../../../concept/04_formal/01_ownership_logic/02_ownership_formal.md) 查看最新权威解释。

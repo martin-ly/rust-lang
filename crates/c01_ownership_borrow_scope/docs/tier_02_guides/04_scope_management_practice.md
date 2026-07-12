@@ -17,5 +17,5 @@
 | 作用域与所有权 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
 | RAII 模式 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
 | Drop trait | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
-| 变量模型 | [concept/01_foundation/03_values_and_references/20_variable_model.md](../../../../concept/01_foundation/03_values_and_references/20_variable_model.md) |
+| 变量模型 | [concept/01_foundation/03_values_and_references/03_variable_model.md](../../../../concept/01_foundation/03_values_and_references/03_variable_model.md) |
 | 内存安全 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |

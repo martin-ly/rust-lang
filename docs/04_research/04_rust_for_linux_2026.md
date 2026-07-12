@@ -12,7 +12,7 @@
 > **权威来源**: [LKML](https://lore.kernel.org/lkml/), [Rust for Linux](https://rust-for-linux.com/), [Linux Kernel Docs](https://docs.kernel.org/rust/)
 >
 > **概念权威页**: 通用概念解释（核心概念、形式化交叉、反命题与边界分析）以
-> [`concept/07_future/04_research_and_experimental/43_rust_for_linux.md`](../../concept/07_future/04_research_and_experimental/43_rust_for_linux.md) 为准。
+> [`concept/07_future/04_research_and_experimental/04_rust_for_linux.md`](../../concept/07_future/04_research_and_experimental/04_rust_for_linux.md) 为准。
 > 本文为 `docs/` 研究报告，保留 2026 工程实践、生产案例、互操作与路线图，不重复概念推导（AGENTS.md §2 Canonical 规则）。
 > 同目录旧路径 [`04_rust_for_linux.md`](04_rust_for_linux.md) 已为重定向 stub（2026-07-12 去重确认）。
 
@@ -446,7 +446,7 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

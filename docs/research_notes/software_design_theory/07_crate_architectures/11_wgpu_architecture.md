@@ -2,9 +2,9 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [游戏开发](../../../../concept/06_ecosystem/11_domain_applications/21_game_development.md)
-> - [游戏引擎内部](../../../../concept/06_ecosystem/11_domain_applications/49_game_engine_internals.md)
-> - [嵌入式图形](../../../../concept/06_ecosystem/05_systems_and_embedded/53_embedded_graphics.md)
+> - [游戏开发](../../../../concept/06_ecosystem/11_domain_applications/05_game_development.md)
+> - [游戏引擎内部](../../../../concept/06_ecosystem/11_domain_applications/15_game_engine_internals.md)
+> - [嵌入式图形](../../../../concept/06_ecosystem/05_systems_and_embedded/07_embedded_graphics.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 
@@ -858,7 +858,7 @@ compute_pass.dispatch_workgroups(256, 1, 1);
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Bevy 游戏引擎架构](05_bevy_architecture.md)
-- [Unsafe Rust 与 FFI](../../../../concept/03_advanced/02_unsafe/03_unsafe.md)
+- [Unsafe Rust 与 FFI](../../../../concept/03_advanced/02_unsafe/01_unsafe.md)
 
 ---
 
@@ -871,7 +871,7 @@ compute_pass.dispatch_workgroups(256, 1, 1);
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 ---
 

@@ -15,4 +15,4 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | Rust 1.92 Version Tracking | [concept/07_future/00_version_tracking/rust_1_92_stabilized.md](../../../concept/07_future/00_version_tracking/rust_1_92_stabilized.md) |
-| Performance Optimization | [concept/06_ecosystem/10_performance/15_performance_optimization.md](../../../concept/06_ecosystem/10_performance/15_performance_optimization.md) |
+| Performance Optimization | [concept/06_ecosystem/10_performance/01_performance_optimization.md](../../../concept/06_ecosystem/10_performance/01_performance_optimization.md) |

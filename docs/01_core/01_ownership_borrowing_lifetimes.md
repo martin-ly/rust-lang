@@ -7,7 +7,7 @@
 > [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html),
 > [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、RustBelt 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、RustBelt 来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 > **权威来源**: [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 
 # 所有权、借用与生命周期：学习路径与易错点索引 {#所有权借用与生命周期三位一体的内存安全}
@@ -36,7 +36,7 @@
 | 1 | 所有权 | [`01_ownership.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 唯一所有者、Move、Copy、Drop |
 | 2 | 借用 | [`02_borrowing.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | &T / &mut T、别名-可变性规则、悬垂引用 |
 | 3 | 生命周期 | [`03_lifetimes.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 生命周期标注、子类型、NLL |
-| 4 | 进阶 | [`30_lifetimes_advanced.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md) | Polonius、Elision、自引用结构 |
+| 4 | 进阶 | [`30_lifetimes_advanced.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md) | Polonius、Elision、自引用结构 |
 
 ## 常见易错点 {#常见易错点}
 

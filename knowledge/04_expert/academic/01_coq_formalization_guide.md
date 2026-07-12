@@ -5,4 +5,4 @@
 
 **内容已迁移**：本文件不再保留教程正文。
 
-> **权威来源**: [concept/04_formal/04_model_checking/13_formal_methods.md](../../../concept/04_formal/04_model_checking/13_formal_methods.md)
+> **权威来源**: [concept/04_formal/04_model_checking/02_formal_methods.md](../../../concept/04_formal/04_model_checking/02_formal_methods.md)

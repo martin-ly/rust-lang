@@ -4,7 +4,7 @@
 # CSP 语义模型与 Rust 异步机制对比分析（c09_design_pattern 示例索引）
 
 > **权威来源**: CSP 进程代数、Go goroutine/channel、Rust Future/Poll、调度模型与内存模型对比等完整解释见
-> [`concept/05_comparative/01_systems_languages/02_rust_vs_go.md`](../../../concept/05_comparative/01_systems_languages/02_rust_vs_go.md)
+> [`concept/05_comparative/01_systems_languages/03_rust_vs_go.md`](../../../concept/05_comparative/01_systems_languages/03_rust_vs_go.md)
 > 与 [`concept/03_advanced/00_concurrency/01_concurrency.md`](../../../concept/03_advanced/00_concurrency/01_concurrency.md)。
 
 本文件原为 `c09_design_pattern` crate 的通用并发范式对比概念教程。根据 AGENTS.md §6.4 治理规则，
@@ -19,6 +19,6 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| Rust vs Go（CSP 对比） | [`concept/05_comparative/01_systems_languages/02_rust_vs_go.md`](../../../concept/05_comparative/01_systems_languages/02_rust_vs_go.md) |
+| Rust vs Go（CSP 对比） | [`concept/05_comparative/01_systems_languages/03_rust_vs_go.md`](../../../concept/05_comparative/01_systems_languages/03_rust_vs_go.md) |
 | 并发模型 | [`concept/03_advanced/00_concurrency/01_concurrency.md`](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
-| 异步编程 | [`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md) |
+| 异步编程 | [`concept/03_advanced/01_async/01_async.md`](../../../concept/03_advanced/01_async/01_async.md) |

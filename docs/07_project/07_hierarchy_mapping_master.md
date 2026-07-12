@@ -120,9 +120,9 @@ graph TB
 | 1 | `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | L1 基础 / 所有权（Ownership） | 无 | L2 泛型（Generics） · L4 形式化 · L3 Unsafe | L1→L4 形式化嵌入 | T-001 → T-002 → T-003 |
 | 2 | `concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | L1 基础 / 借用（Borrowing） | L1 所有权（Ownership） | L2 Trait · L4 分离逻辑 · L3 并发 | L1→L4 !A ↔ 可变借用（Mutable Borrow） | T-010 → T-011 → T-012 |
 | 3 | `concept/02_intermediate/00_traits/01_traits.md` | L2 进阶 / Trait | L1 类型系统（Type System） · L1 所有权 | L3 并发 · L4 类型论 · L6 模式 | L2→L4 Trait ↔ Type Class | T-020 → T-021 → T-022 |
-| 4 | `concept/02_intermediate/01_generics/02_generics.md` | L2 进阶 / 泛型（Generics） | L1 类型系统（Type System） · L2 Trait | L3 Async · L4 类型论 · L7 效果 | L2→L4 参数多态 ↔ System F | T-030 → T-031 → T-032 |
+| 4 | `concept/02_intermediate/01_generics/01_generics.md` | L2 进阶 / 泛型（Generics） | L1 类型系统（Type System） · L2 Trait | L3 Async · L4 类型论 · L7 效果 | L2→L4 参数多态 ↔ System F | T-030 → T-031 → T-032 |
 | 5 | `concept/03_advanced/00_concurrency/01_concurrency.md` | L3 高级 / 并发 | L1 所有权 · L1 借用（Borrowing） · L2 Trait | L4 RustBelt · L6 Tokio · L7 AI | L3→L4 Send/Sync ↔ 分离逻辑 | T-040 → T-041 → T-042 |
-| 6 | `concept/03_advanced/01_async/02_async.md` | L3 高级 / 异步（Async） | L2 泛型 · L2 Trait · L1 生命周期（Lifetimes） | L4 异步语义 · L6 Tokio · L7 效果 | L3→L4 Future ↔ continuation monad | T-050 → T-051 → T-052 |
+| 6 | `concept/03_advanced/01_async/01_async.md` | L3 高级 / 异步（Async） | L2 泛型 · L2 Trait · L1 生命周期（Lifetimes） | L4 异步语义 · L6 Tokio · L7 效果 | L3→L4 Future ↔ continuation monad | T-050 → T-051 → T-052 |
 | 7 | `concept/04_formal/03_ownership_formal.md` | L4 形式化 / 所有权 | L1 所有权 · L1 借用 · L4 线性逻辑 | L4 RustBelt · L7 形式化 · L3 Unsafe | L4↔L1 形式化 ↔ 直觉 双射 | T-100 → T-101 → T-102 |
 | 8 | `concept/04_formal/04_rustbelt.md` | L4 形式化 / RustBelt | L4 所有权形式化 · L4 类型论 · L4 线性逻辑 | L7 形式化 · L6 工具链 | L4→L7 机械证明 → 自动化 | T-110 → T-111 → T-112 |
 | 9 | `knowledge/01_fundamentals/ownership.md` | L1 基础 / 所有权 | 无 | knowledge 借用 · concept L1 | knowledge→concept 直觉映射 | T-001 |
@@ -227,7 +227,7 @@ graph LR
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [concept/ 跨层知识图谱](../../concept/00_meta/04_navigation/inter_layer_map.md)
+- [concept/ 跨层知识图谱](../../concept/00_meta/04_navigation/04_inter_layer_map.md)
 - [concept/ 方法论规范](../../concept/00_meta/00_framework/methodology.md)
 - [docs/ 核心概念](../01_core/README.md)
 - [docs/ 编译器特性](../06_toolchain/01_compiler_features.md)

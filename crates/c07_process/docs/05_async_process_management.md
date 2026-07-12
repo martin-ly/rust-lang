@@ -21,4 +21,4 @@ canonical 链接。
 | :--- | :--- |
 | 异步进程管理 | [`concept/03_advanced/08_process_ipc/03_async_process_management.md`](../../../concept/03_advanced/08_process_ipc/03_async_process_management.md) |
 | 进程模型与生命周期 | [`concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md`](../../../concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) |
-| Async/Await | [`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md) |
+| Async/Await | [`concept/03_advanced/01_async/01_async.md`](../../../concept/03_advanced/01_async/01_async.md) |

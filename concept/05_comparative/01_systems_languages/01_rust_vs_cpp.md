@@ -18,13 +18,13 @@
 > **前置概念**:
 >
 > [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
-> [Type System](../../01_foundation/02_type_system/04_type_system.md) ·
+> [Type System](../../01_foundation/02_type_system/01_type_system.md) ·
 > [Linear Logic](../../04_formal/01_ownership_logic/01_linear_logic.md)
 >
 > **后置概念**:
 >
-> [Paradigm Matrix](../00_paradigms/03_paradigm_matrix.md) ·
-> [Safety Boundaries](../03_domain_comparisons/04_safety_boundaries.md)
+> [Paradigm Matrix](../00_paradigms/01_paradigm_matrix.md) ·
+> [Safety Boundaries](../03_domain_comparisons/01_safety_boundaries.md)
 >
 > **主要来源**:
 >
@@ -1879,7 +1879,7 @@ fn main() {
 >
 >
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../00_meta/02_sources/05_international_authority_index.md)
 
 ---
 
@@ -1927,7 +1927,7 @@ fn main() {
 ```
 
 > **C++ 对比**: C++ 允许返回局部变量的引用，运行时产生未定义行为。Rust 在编译期通过生命周期（Lifetimes）系统阻止此类错误。
-> **相关文件**: [范式转换矩阵](../../00_meta/00_framework/paradigm_transition_matrix.md) · [Rust vs Go](02_rust_vs_go.md) · [执行模型同构](../00_paradigms/05_execution_model_isomorphism.md)
+> **相关文件**: [范式转换矩阵](../../00_meta/00_framework/paradigm_transition_matrix.md) · [Rust vs Go](03_rust_vs_go.md) · [执行模型同构](../00_paradigms/02_execution_model_isomorphism.md)
 
 ### 9.3 边界测试：C++ 隐式复制 vs Rust 显式 Clone（编译错误）
 

@@ -4,7 +4,7 @@
 # Tier 2: 异步设计模式实践
 
 > **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
-> [`concept/03_advanced/01_async/26_async_patterns.md`](../../../../concept/03_advanced/01_async/26_async_patterns.md)。
+> [`concept/03_advanced/01_async/03_async_patterns.md`](../../../../concept/03_advanced/01_async/03_async_patterns.md)。
 
 本文件原为对应 crate 的通用概念教程。根据 AGENTS.md §6.4 治理规则，
 通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
@@ -14,4 +14,4 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| 相关概念 | [concept/03_advanced/01_async/26_async_patterns.md](../../../../concept/03_advanced/01_async/26_async_patterns.md) |
+| 相关概念 | [concept/03_advanced/01_async/03_async_patterns.md](../../../../concept/03_advanced/01_async/03_async_patterns.md) |

@@ -10,7 +10,7 @@
 > **Bloom 层级**: L3-L4（应用/分析：将版本变更映射到具体代码修复）
 > **A/S/P 标记**: **P** — Process（迁移流程与判定）
 > **双维定位**: P×App — 把版本兼容性变更应用到存量代码
-> **前置概念**: [Rust 1.97 稳定特性](rust_1_97_stabilized.md) · [Rust 版本跟踪](05_rust_version_tracking.md) · [Pin 与 Unpin](../../03_advanced/01_async/06_pin_unpin.md) · [类型强制与转换](../../01_foundation/02_type_system/14_coercion_and_casting.md) · [ABI](../../04_formal/05_rustc_internals/38_application_binary_interface.md) · [Linkage](../../03_advanced/04_ffi/27_linkage.md)
+> **前置概念**: [Rust 1.97 稳定特性](rust_1_97_stabilized.md) · [Rust 版本跟踪](01_rust_version_tracking.md) · [Pin 与 Unpin](../../03_advanced/01_async/08_pin_unpin.md) · [类型强制与转换](../../01_foundation/02_type_system/04_coercion_and_casting.md) · [ABI](../../04_formal/05_rustc_internals/05_application_binary_interface.md) · [Linkage](../../03_advanced/04_ffi/03_linkage.md)
 > **后置概念**: [Rust 1.97 前沿预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿预览](rust_1_98_preview.md)
 > **最后更新**: 2026-07-11
 > **状态**: ✅ 已对齐 Rust 1.97.0 stable
@@ -19,8 +19,8 @@
 > · 版本页兼容性表与 §2.6/§2.7/§2.8：[`rust_1_97_stabilized.md`](rust_1_97_stabilized.md)
 > · 31 项特性清单（Compatibility 类）：[`reports/RUST_197_CONTENT_GAP_ANALYSIS_2026_07_11.md`](../../../reports/RUST_197_CONTENT_GAP_ANALYSIS_2026_07_11.md)
 > · 审计缺口（§2.4、§4 P2-5）：[`reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md`](../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md)
-> · `pin!`/coercion 现状：[`06_pin_unpin.md`](../../03_advanced/01_async/06_pin_unpin.md)、[`14_coercion_and_casting.md`](../../01_foundation/02_type_system/14_coercion_and_casting.md)
-> · `export_name`/linkage 现状：[`38_application_binary_interface.md`](../../04_formal/05_rustc_internals/38_application_binary_interface.md)、[`27_linkage.md`](../../03_advanced/04_ffi/27_linkage.md)
+> · `pin!`/coercion 现状：[`06_pin_unpin.md`](../../03_advanced/01_async/08_pin_unpin.md)、[`14_coercion_and_casting.md`](../../01_foundation/02_type_system/04_coercion_and_casting.md)
+> · `export_name`/linkage 现状：[`38_application_binary_interface.md`](../../04_formal/05_rustc_internals/05_application_binary_interface.md)、[`27_linkage.md`](../../03_advanced/04_ffi/03_linkage.md)
 
 ---
 
@@ -708,11 +708,11 @@ flowchart TD
 | 概念/来源 | 用途 |
 |:---|:---|
 | [Rust 1.97 稳定特性](rust_1_97_stabilized.md) | 31 项特性与 §7 兼容性表、§2.6/§2.7/§2.8 事实出处 |
-| [Pin 与 Unpin](../../03_advanced/01_async/06_pin_unpin.md) | `pin!`（1.68+）、`Future::poll(Pin<&mut Self>)`、自引用与 `PhantomPinned` 概念出处 |
-| [类型强制与转换](../../01_foundation/02_type_system/14_coercion_and_casting.md) | deref coercion 触发位置、`From`/`Into` 与 `as` 的边界 |
-| [ABI](../../04_formal/05_rustc_internals/38_application_binary_interface.md) | `#[unsafe(export_name = "...")]` 与「空字符串被拒绝」出处 |
-| [Linkage](../../03_advanced/04_ffi/27_linkage.md) | crate 类型、C 运行时链接（v0 mangling/linker_messages 的关联背景） |
-| [Cargo lint 配置（生态落地，L7→L6 向下承接）](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) | 迁移树 §7 lint-level 矩阵（`linker_messages` / `unsafe_op_in_unsafe_fn` / `varargs_without_pattern` / `dead_code_pub_in_binary`）在生态层 `cargo` `[lints]` 表与 profile 的配置入口；把「版本兼容性判定」落到「CI/Cargo 可执行的 lint 处置」 |
+| [Pin 与 Unpin](../../03_advanced/01_async/08_pin_unpin.md) | `pin!`（1.68+）、`Future::poll(Pin<&mut Self>)`、自引用与 `PhantomPinned` 概念出处 |
+| [类型强制与转换](../../01_foundation/02_type_system/04_coercion_and_casting.md) | deref coercion 触发位置、`From`/`Into` 与 `as` 的边界 |
+| [ABI](../../04_formal/05_rustc_internals/05_application_binary_interface.md) | `#[unsafe(export_name = "...")]` 与「空字符串被拒绝」出处 |
+| [Linkage](../../03_advanced/04_ffi/03_linkage.md) | crate 类型、C 运行时链接（v0 mangling/linker_messages 的关联背景） |
+| [Cargo lint 配置（生态落地，L7→L6 向下承接）](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) | 迁移树 §7 lint-level 矩阵（`linker_messages` / `unsafe_op_in_unsafe_fn` / `varargs_without_pattern` / `dead_code_pub_in_binary`）在生态层 `cargo` `[lints]` 表与 profile 的配置入口；把「版本兼容性判定」落到「CI/Cargo 可执行的 lint 处置」 |
 | [`reports/RUST_197_CONTENT_GAP_ANALYSIS_2026_07_11.md`](../../../reports/RUST_197_CONTENT_GAP_ANALYSIS_2026_07_11.md) | 31 项特性清单（Compatibility 类 #21–#31） |
 | [`reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md`](../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md) | §2.4、§4 P2-5：本页需求的审计来源 |
 
@@ -733,7 +733,7 @@ flowchart TD
 - **P0 官方 Reference**: [§ ABI / `export_name`](https://doc.rust-lang.org/reference/abi.html) · [§ `std::io::ErrorKind`](https://doc.rust-lang.org/std/io/enum.ErrorKind.html) · [§ Pin / `std::pin`](https://doc.rust-lang.org/std/pin/index.html) · [Error Index](https://doc.rust-lang.org/error_codes/error-index.html)
 - **P0 官方 RFCs / lints**: [Rust RFCs（含 future-incompatible lint 组）](https://rust-lang.github.io/rfcs/)
 - **P0 版本事实**: [`rust_1_97_stabilized.md`](rust_1_97_stabilized.md)（31 项特性与 §2.6/§2.7/§2.8 / §7）
-- **映射维护**: [`feature_domain_matrix_197.md`](feature_domain_matrix_197.md) · [`authority_source_map.md`](../../00_meta/02_sources/authority_source_map.md)
+- **映射维护**: [`feature_domain_matrix_197.md`](feature_domain_matrix_197.md) · [`authority_source_map.md`](../../00_meta/02_sources/01_authority_source_map.md)
 
 ---
 

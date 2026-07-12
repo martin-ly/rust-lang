@@ -1,7 +1,7 @@
 > **EN**: C11 Macro System Proc — One-Page Summary
 > **Summary**: Stub one-page summary for the c11_macro_system_proc procedural-macro subcrate; points to the canonical procedural macro concept.
 >
-> **权威来源**: [concept/03_advanced/03_proc_macros/07_proc_macro.md](../../../../concept/03_advanced/03_proc_macros/07_proc_macro.md)
+> **权威来源**: [concept/03_advanced/03_proc_macros/02_proc_macro.md](../../../../concept/03_advanced/03_proc_macros/02_proc_macro.md)
 
 # C11 Macro System Proc — One-Page Summary
 

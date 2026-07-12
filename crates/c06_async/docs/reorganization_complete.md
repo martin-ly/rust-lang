@@ -1,7 +1,7 @@
 > **EN**: C06 Docs Reorganization Completion Report
 > **Summary**: Historical report documenting the c06_async docs reorganization. Contains no general concept explanations; see the canonical async concept page for authoritative content.
 >
-> **权威来源**: [concept/03_advanced/01_async/02_async.md](../../../concept/03_advanced/01_async/02_async.md)
+> **权威来源**: [concept/03_advanced/01_async/01_async.md](../../../concept/03_advanced/01_async/01_async.md)
 
 ## 主题速览
 

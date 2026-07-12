@@ -3,7 +3,7 @@
 **EN**: Attributes and Declarative Macros
 **Summary**: Stub redirecting to the canonical concept page for `Attributes and Declarative Macros`. Crate-specific API notes remain here; general explanations live in `concept/`.
 
-> **权威来源**: [01_foundation/09_macros_basics/12_attributes_and_macros.md](../../../../concept/01_foundation/09_macros_basics/12_attributes_and_macros.md)
+> **权威来源**: [01_foundation/09_macros_basics/01_attributes_and_macros.md](../../../../concept/01_foundation/09_macros_basics/01_attributes_and_macros.md)
 
 本文件为 crate 文档占位页。通用 Rust 概念解释已迁移/整合至上方的 `concept/` 权威页；如需深入了解，请访问权威来源。
 

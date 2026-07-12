@@ -3,8 +3,8 @@
 > 若只需要使用指南与生态定位，请优先参考：
 >
 > - [Tower 形式化生态](../../../../concept/06_ecosystem/05_formal_ecosystem_tower.md)
-> - [系统可组合性](../../../../concept/06_ecosystem/03_design_patterns/30_system_composability.md)
-> - [Web 框架生态](../../../../concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md)
+> - [系统可组合性](../../../../concept/06_ecosystem/03_design_patterns/04_system_composability.md)
+> - [Web 框架生态](../../../../concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 
@@ -747,7 +747,7 @@ Tower 处于"抽象 sweet spot"——足够底层以支持任意请求-响应协
 
 - [Tokio 异步运行时（Runtime）架构](06_tokio_architecture.md)
 - [Axum Web 框架架构](07_axum_architecture.md)
-- [系统可组合性设计模式](../../../../concept/06_ecosystem/03_design_patterns/30_system_composability.md)
+- [系统可组合性设计模式](../../../../concept/06_ecosystem/03_design_patterns/04_system_composability.md)
 
 ---
 
@@ -765,7 +765,7 @@ Tower 处于"抽象 sweet spot"——足够底层以支持任意请求-响应协
 >
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 ---
 

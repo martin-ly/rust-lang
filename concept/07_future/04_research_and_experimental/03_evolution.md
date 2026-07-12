@@ -40,7 +40,7 @@
 - v1.0 (2026-05-12): 初始版本$entry
 - v1.1 (2026-05-12): Wave 3 扩展——补充定义、关键趋势、Edition 机制、RFC 流程、演进路线图、官方来源
 - v1.2 (2026-05-14): 补充完整 Edition 变更清单（2015→2018→2021→2024）、Edition 与 rustc 版本解耦、`cargo fix --edition` 自动迁移机制、跨 Edition 代码示例、未来 Edition 方向（2027+）
-- v1.4 (2026-05-26): 补充 Rust 2026 Project Goals 四大旗舰目标详解（Beyond the &、灵活编译、高阶 Rust、释放沉睡 Trait）及子目标矩阵 [Web Authority AlignmentSprint](../../00_meta/02_sources/international_authority_index.md)
+- v1.4 (2026-05-26): 补充 Rust 2026 Project Goals 四大旗舰目标详解（Beyond the &、灵活编译、高阶 Rust、释放沉睡 Trait）及子目标矩阵 [Web Authority AlignmentSprint](../../00_meta/02_sources/05_international_authority_index.md)
 - v1.3 (2026-05-22): 网络权威内容对齐 Batch 9：补充 Project Goals 2026 年度旗舰目标（Polonius Alpha、Safety-Critical Rust、cargo-script）、Effects 系统 `gen<yield>` 跟踪、Ferrocene ASIL B/SIL 2 认证动态
 - v1.5 (2026-05-26): 权威内容对齐 R16：补充 2025H2 Project Goals 最终状态报告（Rust Blog 2026-05-18）；更新 build-std [RFC 3873](https://rust-lang.github.io/rfcs//3873-build-std-context.html)/3874 已合并状态、Cranelift 资金不足未完成确认 来源: [Rust Blog](https://blog.rust-lang.org/)
 - v1.6 (2026-05-26): 权威内容对齐 R18：补充 Project-wide LLM Policy [RFC 3936](https://github.com/rust-lang/rfcs/pull/3936)（Rust 首个项目级 AI 使用政策） [TWiR 650](https://this-week-in-rust.org/)
@@ -57,10 +57,10 @@
 - v1.17 (2026-06-08): 内部维护（信息平坦期）：① `04_formal/` L4 纯数学 `[教学类比]` 标注扫查完成（22/22 活跃文件已标注，2 归档文件无需标注）；② L3 概念-代码-练习循环链接补全——16 个活跃高级概念文件新增指向 `crates/` 和 `exercises/src/` 的交叉引用（Reference）（并发/异步（Async）/Unsafe/宏（Macro）/Pin/类型擦除/零拷贝解析/锁自由等主题）；③ `cargo check --workspace` 验证通过
 - v1.18 (2026-06-08): 内部维护（信息平坦期）：补齐缺失追踪文档——① 新建 `24_cargo_semver_checks_preview.md`（cargo-semver-checks 从社区工具到 Cargo 官方集成跟踪，覆盖 ~245 lint、type-checking lints GSoC 2026、public 依赖标记集成）；② 新建 `25_aarch64_sve_sme_preview.md`（AArch64 SVE/SME 可伸缩向量扩展跟踪，RFC #3838 未接受、Tracking Issue #145052、`sve_zeroinitializer` #157110）
 - v1.19 (2026-06-08): 内部维护（信息平坦期）：嵌入式互动测验试点——新建 `concept/01_foundation/11_quizzes/33_quiz_ownership_borrowing.md`，10 道所有权（Ownership）/借用（Borrowing）/生命周期（Lifetimes）互动题，采用 `<details>` 标签实现"自测-展开-核对"闭环，每题链接至对应概念文件、crate 示例和 exercises 练习；已加入 L1 README 索引
-- v1.20 (2026-06-08): 内部维护（信息平坦期）：嵌入式测验扩展——① 新建 `concept/01_foundation/11_quizzes/24_quiz_type_system.md`（类型系统（Type System） 10 题，标量/复合类型、enum、模式匹配（Pattern Matching）、类型转换）；② 新建 `concept/02_intermediate/01_generics/23_quiz_traits_and_generics.md`（Trait/泛型（Generics） 10 题，trait bound、关联类型、trait 对象、`impl Trait`）；③ 新建 `concept/01_foundation/11_quizzes/25_quiz_error_handling.md`（错误处理（Error Handling） 10 题，Result/Option、`?` 运算符、panic、自定义错误）；已全部加入对应层级 README 索引
-- v1.21 (2026-06-08): 内部维护（信息平坦期）：L3 嵌入式测验扩展——① 新建 `concept/03_advanced/00_concurrency/21_quiz_concurrency_async.md`（并发/异步（Async） 10 题，Send/Sync、Mutex/Arc、channel、Future/Pin、`join!`）；② 新建 `concept/03_advanced/02_unsafe/22_quiz_unsafe.md`（Unsafe 10 题，原始指针（Raw Pointer）、MaybeUninit、FFI、`unsafe_op_in_unsafe_fn`、Miri 验证）；③ 新建 `concept/03_advanced/03_proc_macros/23_quiz_macros.md`（宏系统 10 题，`macro_rules!` 重复模式、卫生性、derive/属性/函数式过程宏（Procedural Macro））；已全部加入 L3 README 索引
+- v1.20 (2026-06-08): 内部维护（信息平坦期）：嵌入式测验扩展——① 新建 `concept/01_foundation/11_quizzes/24_quiz_type_system.md`（类型系统（Type System） 10 题，标量/复合类型、enum、模式匹配（Pattern Matching）、类型转换）；② 新建 `concept/02_intermediate/01_generics/04_quiz_traits_and_generics.md`（Trait/泛型（Generics） 10 题，trait bound、关联类型、trait 对象、`impl Trait`）；③ 新建 `concept/01_foundation/11_quizzes/25_quiz_error_handling.md`（错误处理（Error Handling） 10 题，Result/Option、`?` 运算符、panic、自定义错误）；已全部加入对应层级 README 索引
+- v1.21 (2026-06-08): 内部维护（信息平坦期）：L3 嵌入式测验扩展——① 新建 `concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md`（并发/异步（Async） 10 题，Send/Sync、Mutex/Arc、channel、Future/Pin、`join!`）；② 新建 `concept/03_advanced/02_unsafe/05_quiz_unsafe.md`（Unsafe 10 题，原始指针（Raw Pointer）、MaybeUninit、FFI、`unsafe_op_in_unsafe_fn`、Miri 验证）；③ 新建 `concept/03_advanced/03_proc_macros/10_quiz_macros.md`（宏系统 10 题，`macro_rules!` 重复模式、卫生性、derive/属性/函数式过程宏（Procedural Macro））；已全部加入 L3 README 索引
 - v1.22 (2026-06-08): 内部维护（信息平坦期）：跨层级测验扩展——① 新建 `concept/06_ecosystem/57_quiz_toolchain.md`（工具链 10 题，Cargo 依赖解析、Clippy lint、Miri UB 检测、发布流程）；② 新建 `concept/01_foundation/11_quizzes/26_quiz_modules_testing.md`（模块（Module）/测试 10 题，可见性、集成测试、`should_panic`）；③ 新建 `concept/04_formal/24_quiz_formal_methods.md`（形式化方法 10 题，分离逻辑、RustBelt、验证工具链对比、Tree Borrows）；已全部加入对应层级 README 索引
-- v1.23 (2026-06-08): 内部维护（信息平坦期）：核心概念补全测验——① 新建 `concept/02_intermediate/02_memory_management/24_quiz_memory_management.md`（内存管理 10 题，Box/Rc/Arc/RefCell/Cell、Weak、Deref、Drop、内部可变性）；② 新建 `concept/05_comparative/17_quiz_rust_vs_systems.md`（跨语言对比 10 题，Rust vs C/C++/Go 在内存安全（Memory Safety）、并发、错误处理（Error Handling）、零成本抽象（Zero-Cost Abstraction）、嵌入式场景的对比）；③ 新建 `concept/01_foundation/11_quizzes/27_quiz_closures_iterators.md`（闭包（Closures）/迭代器（Iterator） 10 题，Fn/FnMut/FnOnce、move 闭包、惰性求值、适配器/消费者、fold/find/filter/map 组合）；已全部加入对应层级 README 索引
+- v1.23 (2026-06-08): 内部维护（信息平坦期）：核心概念补全测验——① 新建 `concept/02_intermediate/02_memory_management/05_quiz_memory_management.md`（内存管理 10 题，Box/Rc/Arc/RefCell/Cell、Weak、Deref、Drop、内部可变性）；② 新建 `concept/05_comparative/17_quiz_rust_vs_systems.md`（跨语言对比 10 题，Rust vs C/C++/Go 在内存安全（Memory Safety）、并发、错误处理（Error Handling）、零成本抽象（Zero-Cost Abstraction）、嵌入式场景的对比）；③ 新建 `concept/01_foundation/11_quizzes/27_quiz_closures_iterators.md`（闭包（Closures）/迭代器（Iterator） 10 题，Fn/FnMut/FnOnce、move 闭包、惰性求值、适配器/消费者、fold/find/filter/map 组合）；已全部加入对应层级 README 索引
 - v1.24 (2026-06-08): Phase 3 内容瘦身启动：① 从 L1-L6 各层级 README 索引中移除 13 个已归档文件链接（`01_foundation/19_numerics.md`、`02_intermediate/22_iterator_patterns.md`、L3 的 6 个归档文件、`04_formal/07_separation_logic.md` 和 `09_operational_semantics.md`、`05_comparative/16_rust_vs_ruby.md`、L6 的 2 个归档文件）；② 清理 `07_future/README.md` 中指向 `archive/01_ai_integration_original.md` 的历史链接；③ 更新 `04_formal/README.md` 核心功能描述（"可机械验证"→"形式化直觉与教学类比"），为 6 个高形式化密度文件在索引表格中追加 `[教学类比]` 标注
 - v1.25 (2026-06-08): Phase 3 深度瘦身完成：① 迁移 12 个活跃层级中的"已归档-in-place"重复文件至 `concept/archive/`（L3 新增 5 个：02_async_programming、03_unsafe_rust、05_macros、08_zero_cost_abstractions、13_async_patterns；此前 L1/L2/L4/L5/L6 共 7 个）；② 归档/删除 8 个根目录级旧版索引（`00.md`/`03-07.md` 归档，`01.md` 已归档、`02.md` 0 字节占位符已删除）；③ 归档 3 个历史规划文件（`PLAN.md`、`PLAN_Semantic_Space_Wave.md`、`SUMMARY.md`）；④ 新建 `archive/ARCHIVE_INDEX.md` 统一索引；⑤ 修复 7 处指向已归档文件的活跃链接（`README.md` / `inter_layer_topology.md` / `LEARNING_MVP_PATH.md` / `53_embedded_graphics.md` / `17_quiz_rust_vs_systems.md` / `25_aarch64_sve_sme_preview.md` / `35_pattern_composition_algebra.md`），清理 `05_formal_ecosystem_tower.md` 变更日志 stray `$entry` 字符
 - v1.26 (2026-06-19): 权威内容对齐 Batch 22：① 新增 §6.9 维护者成长案例（Tiffany Pek Yuan）与 §6.10 跨仓库工程工具 Josh；② 新增 §6.11 Rust Foundation 3 月董事会治理动态。详见 `05_rust_version_tracking.md` §12.14–§12.16 [Inside Rust 2026-05/06](https://blog.rust-lang.org/inside-rust/)
@@ -861,13 +861,13 @@ components = ["rust-src", "rustc-dev", "llvm-tools"]
 
 | 演进方向 | 影响的概念层 | 关联文件 | 演进风险 |
 |:---|:---|:---|:---|
-| GATs 完整化 | L2 泛型 + Trait | `02_intermediate/01_generics/02_generics.md`, `01_traits.md` | 类型系统（Type System）复杂度 |
-| Effects 系统 | L2 Trait + L3 Async | `02_intermediate/00_traits/01_traits.md`, `03_advanced/01_async/02_async.md` | 学习曲线 |
+| GATs 完整化 | L2 泛型 + Trait | `02_intermediate/01_generics/01_generics.md`, `01_traits.md` | 类型系统（Type System）复杂度 |
+| Effects 系统 | L2 Trait + L3 Async | `02_intermediate/00_traits/01_traits.md`, `03_advanced/01_async/01_async.md` | 学习曲线 |
 | 特化 (Specialization) | L2 Trait | `02_intermediate/00_traits/01_traits.md` | Coherence 破坏 |
-| Const 泛型扩展 | L2 泛型 | `02_intermediate/01_generics/02_generics.md` | 编译时间 |
-| `gen` blocks / 协程 | L3 Async + L2 泛型 | `03_advanced/01_async/02_async.md` | 异步生成器仍在 RFC 中 |
-| 异步生态统一 | L3 Async | `03_advanced/01_async/02_async.md` | 生态系统分裂 |
-| SIMD 标准库 | L3 Unsafe/FFI | `03_advanced/02_unsafe/03_unsafe.md` | 平台差异 |
+| Const 泛型扩展 | L2 泛型 | `02_intermediate/01_generics/01_generics.md` | 编译时间 |
+| `gen` blocks / 协程 | L3 Async + L2 泛型 | `03_advanced/01_async/01_async.md` | 异步生成器仍在 RFC 中 |
+| 异步生态统一 | L3 Async | `03_advanced/01_async/01_async.md` | 生态系统分裂 |
+| SIMD 标准库 | L3 Unsafe/FFI | `03_advanced/02_unsafe/01_unsafe.md` | 平台差异 |
 | 内核 Rust | L1-L3 全部 | 多个文件 | API 不稳定 |
 
 ---
@@ -927,12 +927,12 @@ fn main() {
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| GATs | [`../02_intermediate/01_generics/02_generics.md`](../../02_intermediate/01_generics/02_generics.md) | 演进影响 |
-| AFIT/RPITIT | [`../03_advanced/01_async/02_async.md`](../../03_advanced/01_async/02_async.md) | 演进影响 |
+| GATs | [`../02_intermediate/01_generics/02_generics.md`](../../02_intermediate/01_generics/01_generics.md) | 演进影响 |
+| AFIT/RPITIT | [`../03_advanced/01_async/02_async.md`](../../03_advanced/01_async/01_async.md) | 演进影响 |
 | Trait 系统 | [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) | 演进影响 |
 | Effects 系统 | [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) | 未来方向 |
 | 形式化方法 | [`../07_future/02_formal_methods.md`](02_formal_methods.md) | 协同演进 |
-| 语言对比 | [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/03_paradigm_matrix.md) | 定位参考 |
+| 语言对比 | [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/01_paradigm_matrix.md) | 定位参考 |
 
 ## 断言一致性矩阵（Assertion Consistency Matrix）
 
@@ -1045,7 +1045,7 @@ graph TD
 > 设计根基见 [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)。
 > **过渡: L7 → L4**
 > Rust 的未来方向（Effects System、Generic Const Items、TAIT）都有形式化理论基础。Effects System 对应代数效应的类型论、TAIT 对应存在类型的隐式封装、Const Generics 对应依赖类型的受限形式。这些不是工程师的随意发明，而是类型论研究的工程转化。
-> 理论基础见 [`../04_formal/02_type_theory.md`](../../04_formal/00_type_theory/02_type_theory.md)。
+> 理论基础见 [`../04_formal/02_type_theory.md`](../../04_formal/00_type_theory/01_type_theory.md)。
 
 ---
 
@@ -1067,7 +1067,7 @@ graph TD
 
 > **过渡: L7 → L5**
 > Rust 的演进速度比 C++ 快（无历史包袱），比 Go 慢（需要社区共识）。Edition 系统每 2-3 年发布一次，每个 Edition 都是语言设计的阶段性总结。比较 Rust 与其他语言的演进机制，能揭示 "如何在不破坏生态的前提下推进语言进化"。
-> 演进对比见 [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) 与 [`../05_comparative/02_rust_vs_go.md`](../../05_comparative/01_systems_languages/02_rust_vs_go.md)。
+> 演进对比见 [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) 与 [`../05_comparative/02_rust_vs_go.md`](../../05_comparative/01_systems_languages/03_rust_vs_go.md)。
 > **[来源: Rust Edition Guide; [RFC 2052](https://rust-lang.github.io/rfcs//2052-epochs.html); [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html); [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html); RFC 1210]** 语言演进分析基于官方 RFC 和 Edition 指南。✅
 > **[Rust Lang Team Blog; Rust Internals Forum; Rust Project Goals（官方路线图）](https://rust-lang.github.io/rust-project-goals/)** 未来方向基于语言团队的公开讨论和路线图文档。✅
 > **[Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/)(<https://rust-lang.github.io/rust-project-goals/2026/>)** Rust 项目目标定义了语言团队每年的旗舰级工作方向，包括下一代 trait solver、const traits、Effects 系统等。✅
@@ -1097,7 +1097,7 @@ graph TD
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.3
 **最后更新**: 2026-06-06
@@ -1108,7 +1108,7 @@ graph TD
 ## 权威来源索引
 
 > **补充来源**
-> **相关文件**: [版本跟踪](../00_version_tracking/05_rust_version_tracking.md) · [Effects 系统](../03_preview_features/04_effects_system.md) · [能力图谱](../../00_meta/00_framework/competency_graph.md)
+> **相关文件**: [版本跟踪](../00_version_tracking/01_rust_version_tracking.md) · [Effects 系统](../03_preview_features/01_effects_system.md) · [能力图谱](../../00_meta/00_framework/competency_graph.md)
 
 ## 十、边界测试：语言演进的编译错误
 

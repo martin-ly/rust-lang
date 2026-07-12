@@ -1,7 +1,7 @@
 > **EN**: Async Closures Guide
 > **Summary**: Deep guide to Rust async closures (`async || {}`), the `AsyncFn`/`AsyncFnMut`/`AsyncFnOnce` trait family, migration from the old `|x| async move {}` pattern, and current limitations. This crate document now redirects to the canonical concept page.
 
-> **权威来源**: [concept/03_advanced/01_async/24_async_closures.md](../../../concept/03_advanced/01_async/24_async_closures.md)
+> **权威来源**: [concept/03_advanced/01_async/07_async_closures.md](../../../concept/03_advanced/01_async/07_async_closures.md)
 
 ## 主题速览
 

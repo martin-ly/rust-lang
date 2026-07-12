@@ -282,12 +282,12 @@ graph TD
 
 ## 五、相关概念链接
 
-- [跨层依赖拓扑](../04_navigation/inter_layer_topology.md)
-- [层次内模型映射](../04_navigation/intra_layer_model_map.md)
+- [跨层依赖拓扑](../04_navigation/05_inter_layer_topology.md)
+- [层次内模型映射](../04_navigation/06_intra_layer_model_map.md)
 - [定理推理森林](theorem_inference_forest.md)
-- [L3 Unsafe](../../03_advanced/02_unsafe/03_unsafe.md)
-- [L4 RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md)
-- [L6 WASI](../../06_ecosystem/05_systems_and_embedded/08_wasi.md)
+- [L3 Unsafe](../../03_advanced/02_unsafe/01_unsafe.md)
+- [L4 RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md)
+- [L6 WASI](../../06_ecosystem/05_systems_and_embedded/01_wasi.md)
 
 ---
 

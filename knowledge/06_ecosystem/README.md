@@ -91,7 +91,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
@@ -110,7 +110,7 @@
 
 - [Rust for Linux (concept)](../../concept/07_future/19_rust_for_linux.md) — 操作系统内核中的内存安全
 - [Cranelift 后端 (concept)](../../concept/07_future/16_cranelift_backend_preview.md) — 快速调试编译
-- [并行前端 (concept)](../../concept/07_future/03_preview_features/09_parallel_frontend_preview.md) — SALSA 3.0 与多核编译加速
+- [并行前端 (concept)](../../concept/07_future/03_preview_features/04_parallel_frontend_preview.md) — SALSA 3.0 与多核编译加速
 
 ## 📚 模块 8: 国际化对齐
 

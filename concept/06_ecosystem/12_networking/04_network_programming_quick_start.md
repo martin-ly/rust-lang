@@ -8,8 +8,8 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **定位**: 为 Rust 网络编程提供分阶段学习路径与场景化导航，链接到权威概念页获取深度解释。
-> **前置概念**: [Async](../../03_advanced/01_async/02_async.md) · [Network Protocols](../04_web_and_networking/38_network_protocols.md)
-> **后置概念**: [High-Performance Network Service Architecture](../04_web_and_networking/39_high_performance_network_service_architecture.md) · [Distributed Systems](../04_web_and_networking/18_distributed_systems.md)
+> **前置概念**: [Async](../../03_advanced/01_async/01_async.md) · [Network Protocols](../04_web_and_networking/07_network_protocols.md)
+> **后置概念**: [High-Performance Network Service Architecture](../04_web_and_networking/08_high_performance_network_service_architecture.md) · [Distributed Systems](../04_web_and_networking/01_distributed_systems.md)
 
 ---
 
@@ -21,10 +21,10 @@
 
 | 目标 | 推荐主题 | 预计时间 |
 | :--- | :--- | :--- |
-| 了解全局 | [网络协议](../04_web_and_networking/38_network_protocols.md) | 15 分钟 |
+| 了解全局 | [网络协议](../04_web_and_networking/07_network_protocols.md) | 15 分钟 |
 | 动手实践 | TCP/UDP 示例与 HTTP/WebSocket 示例 | 1 小时 |
 | 技术选型 | [高级网络协议概览](01_advanced_network_protocols.md) | 30 分钟 |
-| 系统学习 | [异步（Async）编程](../../03_advanced/01_async/02_async.md) + [并发模式](../../03_advanced/00_concurrency/10_concurrency_patterns.md) | 1 周 |
+| 系统学习 | [异步（Async）编程](../../03_advanced/01_async/01_async.md) + [并发模式](../../03_advanced/00_concurrency/03_concurrency_patterns.md) | 1 周 |
 
 ## 二、学习路径总览
 
@@ -44,7 +44,7 @@ graph LR
 
 ### 路径 1：快速实战（2 小时）
 
-1. 阅读 [网络协议](../04_web_and_networking/38_network_protocols.md) 了解协议层次。
+1. 阅读 [网络协议](../04_web_and_networking/07_network_protocols.md) 了解协议层次。
 2. 编写 TCP 服务器/客户端。
 3. 编写 UDP 发送/接收程序。
 4. 使用 HTTP 客户端发送请求。
@@ -62,16 +62,16 @@ graph LR
 - Week 1：协议实现与对比分析。
 - Week 2：性能优化与连接池设计。
 - Week 3：[自定义协议实现](03_custom_protocol_implementation.md)。
-- Week 4：[高性能网络服务架构](../04_web_and_networking/39_high_performance_network_service_architecture.md)。
+- Week 4：[高性能网络服务架构](../04_web_and_networking/08_high_performance_network_service_architecture.md)。
 
 ## 四、按场景选择起点
 
 | 场景 | 起点 | 关键概念 |
 | :--- | :--- | :--- |
-| 我是初学者 | [网络协议](../04_web_and_networking/38_network_protocols.md) → TCP/UDP 示例 | socket、async/await |
+| 我是初学者 | [网络协议](../04_web_and_networking/07_network_protocols.md) → TCP/UDP 示例 | socket、async/await |
 | 我要做技术选型 | [高级网络协议概览](01_advanced_network_protocols.md) → 协议对比矩阵 | gRPC、MQTT、QUIC、AMQP |
-| 我要解决具体问题 | [HTTP 客户端开发](../04_web_and_networking/41_http_client_development.md) | 超时、重试、连接池 |
-| 我要理解架构设计 | [高性能网络服务架构](../04_web_and_networking/39_high_performance_network_service_architecture.md) | Tower、背压、负载均衡 |
+| 我要解决具体问题 | [HTTP 客户端开发](../04_web_and_networking/04_http_client_development.md) | 超时、重试、连接池 |
+| 我要理解架构设计 | [高性能网络服务架构](../04_web_and_networking/08_high_performance_network_service_architecture.md) | Tower、背压、负载均衡 |
 
 ## 五、基础代码示例
 
@@ -243,14 +243,14 @@ flowchart TD
 
 ## 十、相关权威页
 
-- [网络协议：QUIC/HTTP-3 与 Rust 实现](../04_web_and_networking/38_network_protocols.md)
-- [HTTP 客户端开发](../04_web_and_networking/41_http_client_development.md)
+- [网络协议：QUIC/HTTP-3 与 Rust 实现](../04_web_and_networking/07_network_protocols.md)
+- [HTTP 客户端开发](../04_web_and_networking/04_http_client_development.md)
 - [高级网络协议概览](01_advanced_network_protocols.md)
 - [自定义协议实现](03_custom_protocol_implementation.md)
 - [网络安全](02_network_security.md)
-- [异步编程](../../03_advanced/01_async/02_async.md)
-- [并发模式](../../03_advanced/00_concurrency/10_concurrency_patterns.md)
-- [Rust vs Go（网络并发场景对比）](../../05_comparative/01_systems_languages/02_rust_vs_go.md)
+- [异步编程](../../03_advanced/01_async/01_async.md)
+- [并发模式](../../03_advanced/00_concurrency/03_concurrency_patterns.md)
+- [Rust vs Go（网络并发场景对比）](../../05_comparative/01_systems_languages/03_rust_vs_go.md)
 
 ## 过渡段
 

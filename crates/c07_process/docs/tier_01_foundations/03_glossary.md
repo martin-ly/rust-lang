@@ -3,10 +3,10 @@
 
 # Tier 1: C07 进程管理 - 术语表
 
-> **权威来源**: [concept/00_meta/01_terminology/terminology_glossary.md](../../../../concept/00_meta/01_terminology/terminology_glossary.md)
+> **权威来源**: [concept/00_meta/01_terminology/01_terminology_glossary.md](../../../../concept/00_meta/01_terminology/01_terminology_glossary.md)
 
 本文件原为 `c07_process` crate 的通用概念文档。根据 AGENTS.md §6.4 治理规则，
-通用 Rust 概念解释已迁移至 `concept/00_meta/01_terminology/terminology_glossary.md`，此处仅保留索引与 canonical 链接。
+通用 Rust 概念解释已迁移至 `concept/00_meta/01_terminology/01_terminology_glossary.md`，此处仅保留索引与 canonical 链接。
 
 ## 主题列表
 

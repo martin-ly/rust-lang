@@ -1189,7 +1189,7 @@ impl<T> Drop for SafeVec<T> {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [The Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust RFCs](https://github.com/rust-lang/rfcs), [TechEmpower](https://www.techempower.com/benchmarks/)
 >
-> **权威来源对齐变更日志**: 2026-06-29 新增项目官方文档、源码、性能基准与 Rust 机制对照 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-06-29 新增项目官方文档、源码、性能基准与 Rust 机制对照 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

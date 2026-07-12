@@ -1,7 +1,7 @@
 > **EN**: Common — Master Index
 > **Summary**: Stub index for the common crate docs; points to the canonical concept navigation.
 >
-> **权威来源**: [concept/00_meta/04_navigation/concept_index.md](../../../concept/00_meta/04_navigation/concept_index.md)
+> **权威来源**: [concept/00_meta/04_navigation/03_concept_index.md](../../../concept/00_meta/04_navigation/03_concept_index.md)
 
 # Common — Master Index
 

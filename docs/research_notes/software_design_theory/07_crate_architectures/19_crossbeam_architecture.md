@@ -3,8 +3,8 @@
 > 若只需要使用指南与生态定位，请优先参考：
 >
 > - [并发编程](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
-> - [并发模式](../../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md)
-> - [无锁编程](../../../../concept/03_advanced/00_concurrency/16_lock_free.md)
+> - [并发模式](../../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md)
+> - [无锁编程](../../../../concept/03_advanced/00_concurrency/06_lock_free.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 
@@ -496,9 +496,9 @@ graph BT
 - [Tokio 异步运行时（Runtime）架构](06_tokio_architecture.md)
 - [Rayon 数据并行架构](13_rayon_architecture.md)
 - [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
-- [原子操作（Atomic Operations）与内存排序](../../../../concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md)
-- [无锁数据结构](../../../../concept/03_advanced/00_concurrency/16_lock_free.md)
-- [形式化操作语义](../../../../concept/04_formal/03_operational_semantics/17_operational_semantics.md)
+- [原子操作（Atomic Operations）与内存排序](../../../../concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md)
+- [无锁数据结构](../../../../concept/03_advanced/00_concurrency/06_lock_free.md)
+- [形式化操作语义](../../../../concept/04_formal/03_operational_semantics/03_operational_semantics.md)
 
 ---
 
@@ -516,7 +516,7 @@ graph BT
 >
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 ---
 

@@ -361,7 +361,7 @@ cargo +nightly build
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
@@ -380,7 +380,7 @@ cargo +nightly build
 
 - [上级目录](../README.md)
 - [Cranelift 后端预研 (concept)](../../concept/07_future/16_cranelift_backend_preview.md) — 概念层 Cranelift 演进路线与使用场景分析
-- [Rust 版本跟踪 (concept)](../../concept/07_future/00_version_tracking/05_rust_version_tracking.md) — 编译器后端全局状态跟踪
+- [Rust 版本跟踪 (concept)](../../concept/07_future/00_version_tracking/01_rust_version_tracking.md) — 编译器后端全局状态跟踪
 
 ---
 

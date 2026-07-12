@@ -3,7 +3,7 @@
 **EN**: Iso 26262 Rust Implementation Guide
 **Summary**: ISO 26262 Rust实施指南 Iso 26262 Rust Implementation Guide.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/07_future/01_edition_roadmap/23_rust_edition_guide.md](../../../concept/07_future/01_edition_roadmap/23_rust_edition_guide.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/07_future/01_edition_roadmap/03_rust_edition_guide.md](../../../concept/07_future/01_edition_roadmap/03_rust_edition_guide.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

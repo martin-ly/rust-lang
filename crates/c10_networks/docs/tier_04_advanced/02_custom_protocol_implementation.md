@@ -20,5 +20,5 @@ canonical 链接。
 | 主题 | 权威来源 |
 | :--- | :--- |
 | 自定义协议实现 | [`concept/06_ecosystem/12_networking/03_custom_protocol_implementation.md`](../../../../concept/06_ecosystem/12_networking/03_custom_protocol_implementation.md) |
-| Rust 网络编程 | [`concept/03_advanced/06_low_level_patterns/18_network_programming.md`](../../../../concept/03_advanced/06_low_level_patterns/18_network_programming.md) |
+| Rust 网络编程 | [`concept/03_advanced/06_low_level_patterns/04_network_programming.md`](../../../../concept/03_advanced/06_low_level_patterns/04_network_programming.md) |
 | 网络安全 | [`concept/06_ecosystem/12_networking/02_network_security.md`](../../../../concept/06_ecosystem/12_networking/02_network_security.md) |

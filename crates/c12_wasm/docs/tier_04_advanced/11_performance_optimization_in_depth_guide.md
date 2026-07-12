@@ -3,7 +3,7 @@
 
 # WebAssembly 性能优化深度指南
 
-> **权威来源**: [concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md](../../../../concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md)
+> **权威来源**: [concept/06_ecosystem/11_domain_applications/17_webassembly_advanced.md](../../../../concept/06_ecosystem/11_domain_applications/17_webassembly_advanced.md)
 
 本文件为 crate 文档重定向 stub。原内容中的通用 Rust 概念已迁移至上述权威来源页面；以下仅保留主题索引。
 

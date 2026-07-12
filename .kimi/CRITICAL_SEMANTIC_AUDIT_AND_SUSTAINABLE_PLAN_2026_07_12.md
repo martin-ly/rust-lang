@@ -50,7 +50,7 @@
   - `concept/.../keywords.md`:"Rust 关键字(Keywords)在所有场景下都适用 ⟹ 不成立。存在特定的边界条件(如 unsafe、FFI、递归类型)会使常规推理失效。"——关键字与 unsafe/FFI 边界毫无关系;
   - 同一模板被套用在"运算符与符号""测验"等主题上;
 - **67 个文件**含通用"定理"套话("X 的核心约束 ⟹ 编译器可以在编译期排除一整类运行时错误");
-- **1 处模板替换断裂 bug**:`04_formal/01_ownership_logic/28_borrow_checking_decidability.md` 占位符被截断为 "Borrow Checking Decidability(借 "(中文括注丢失),出现在过渡段/定理/反命题三处;
+- **1 处模板替换断裂 bug**:`04_formal/01_ownership_logic/04_borrow_checking_decidability.md` 占位符被截断为 "Borrow Checking Decidability(借 "(中文括注丢失),出现在过渡段/定理/反命题三处;
 - atlas `01_concept_definition_atlas.md` 392 条定义中 **100 条(25.5%)** 是 "Audit Checklist. Core Rust concept." 式自动生成空洞定义或 "—"。
 
 **批判**: 这些内容不是"错",而是**稀释**——它们让每页都看起来结构完整,但读者得到的增量信息为零,且语义错误的模板句会误导。这是用户对"没有实质内容"直觉的主要来源。
@@ -172,7 +172,7 @@
 |---|---|---|
 | P2-1 | **复活并接入 `concept_consistency_auditor.py`**:扩展定义抽取(Send/Sync/所有权/生命周期/内部可变性/Pin),接入 run_quality_gates.sh 第 17 门(observe 起步) | CI 中出现该门;首批矛盾清单产出 |
 | P2-2 | **D1–D5 清零战役**:65 D1 + 103 D2 + 71 D3 + 113 D5 按目录分批修复;D4 检查扩展到 crates/ | METADATA flagged 242 → <24(5%) |
-| P2-3 | **glossary 对齐**:以 `concept/00_meta/01_terminology/terminology_glossary.md` 为权威,14 份 glossary 建立对齐校验脚本(定义差异即报告) | 新检查脚本 + 首批差异清零 |
+| P2-3 | **glossary 对齐**:以 `concept/00_meta/01_terminology/01_terminology_glossary.md` 为权威,14 份 glossary 建立对齐校验脚本(定义差异即报告) | 新检查脚本 + 首批差异清零 |
 | P2-4 | **MSRV 单一事实源**:根 Cargo.toml 为唯一源,脚本校验 crates/ 内 MSRV 声明一致性;版本残留(1.85/1.90 头脚矛盾)清零 | 新检查脚本通过 |
 | P2-5 | **v2 去重升级**:稳定后替换 v1 成为阻断门;nightly workflow 补齐至 16 门 | CI 配置变更 |
 | P2-6 | **归档治理**:473 处 archive 引用分类处置(迁回活跃/加"归档只读"声明并改链接);`concept/archive/` 35 文件迁往顶层 archive/ | 活跃→archive 引用归零或全部显式声明 |

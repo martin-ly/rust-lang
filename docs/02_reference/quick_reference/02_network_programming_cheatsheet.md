@@ -1,7 +1,7 @@
 # 网络编程快速参考卡片 {#网络编程快速参考卡片}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为网络编程速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept 网络基础`](../../../concept/06_ecosystem/12_networking/06_networking_basics.md) · [`concept L3 网络编程`](../../../concept/03_advanced/06_low_level_patterns/18_network_programming.md)
+> **权威来源（Canonical）**: 本文件为网络编程速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept 网络基础`](../../../concept/06_ecosystem/12_networking/05_networking_basics.md) · [`concept L3 网络编程`](../../../concept/03_advanced/06_low_level_patterns/04_network_programming.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（常用 API/配置/异步模式/错误处理/安全/性能/反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
 
@@ -731,7 +731,7 @@ pub fn get_connection() -> Option<Connection> {
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

@@ -9,8 +9,8 @@
 > **层级**: L2-L6 跨层导航
 > **A/S/P 标记**: S+A — Structure + Application
 > **双维定位**: C×Ana / C×Eva
-> **前置概念**: [Patterns](../../06_ecosystem/03_design_patterns/02_patterns.md) · [Type System](../../01_foundation/02_type_system/04_type_system.md)
-> **后置概念**: [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md) · [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)
+> **前置概念**: [Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)
+> **后置概念**: [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) · [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)
 > **主要来源**: [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) · [POSA](https://en.wikipedia.org/wiki/Pattern-Oriented_Software_Architecture) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 ---
 
@@ -61,36 +61,36 @@ graph TD
 
 | 问题域 | 代表文件 | 核心模式族 |
 |:---|:---|:---|
-| **通用基础** | [Patterns](../../06_ecosystem/03_design_patterns/02_patterns.md) | GoF  creational / structural / behavioral 模式全集 |
+| **通用基础** | [Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) | GoF  creational / structural / behavioral 模式全集 |
 | **算法-模式桥接** | [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md) | 算法策略 ↔ 设计模式的映射关系 |
-| **并发与并行** | [Concurrency Patterns](../../03_advanced/00_concurrency/10_concurrency_patterns.md) | Actor、CSP、Fork-Join、Pipeline、Work Stealing |
-| **分布式系统** | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md) | Circuit Breaker、Bulkhead、Retry、Saga、Leader Election |
-| **架构风格** | [Architecture Patterns](../../06_ecosystem/03_design_patterns/35_architecture_patterns.md) | Layered、Hexagonal、Microkernel、Event-Driven |
-| **微服务** | [Microservice Patterns](../../06_ecosystem/03_design_patterns/31_microservice_patterns.md) | API Gateway、Service Discovery、CQRS、Event Sourcing |
-| **事件驱动** | [Event Driven Architecture](../../06_ecosystem/03_design_patterns/32_event_driven_architecture.md) | Pub/Sub、Event Bus、Stream Processing |
-| **数据与状态** | [CQRS and Event Sourcing](../../06_ecosystem/03_design_patterns/33_cqrs_event_sourcing.md) | Command-Query Separation、Event Store、Projection |
-| **响应式系统** | [Reactive Programming](../../06_ecosystem/04_web_and_networking/40_reactive_programming.md) | Observer、Backpressure、Fan-out/Fan-in |
-| **工作流** | [Workflow Theory](../../06_ecosystem/03_design_patterns/41_workflow_theory.md) | State Machine、Saga、Activity、Compensation |
-| **API 设计** | [API Design Patterns](../../06_ecosystem/03_design_patterns/42_api_design_patterns.md) | Builder、Typestate、Extension Trait、Error API |
-| **系统可组合性** | [System Composability](../../06_ecosystem/03_design_patterns/30_system_composability.md) | Composability、Isolation、Monoid、Plugin |
+| **并发与并行** | [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) | Actor、CSP、Fork-Join、Pipeline、Work Stealing |
+| **分布式系统** | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) | Circuit Breaker、Bulkhead、Retry、Saga、Leader Election |
+| **架构风格** | [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) | Layered、Hexagonal、Microkernel、Event-Driven |
+| **微服务** | [Microservice Patterns](../../06_ecosystem/03_design_patterns/05_microservice_patterns.md) | API Gateway、Service Discovery、CQRS、Event Sourcing |
+| **事件驱动** | [Event Driven Architecture](../../06_ecosystem/03_design_patterns/06_event_driven_architecture.md) | Pub/Sub、Event Bus、Stream Processing |
+| **数据与状态** | [CQRS and Event Sourcing](../../06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md) | Command-Query Separation、Event Store、Projection |
+| **响应式系统** | [Reactive Programming](../../06_ecosystem/04_web_and_networking/09_reactive_programming.md) | Observer、Backpressure、Fan-out/Fan-in |
+| **工作流** | [Workflow Theory](../../06_ecosystem/03_design_patterns/17_workflow_theory.md) | State Machine、Saga、Activity、Compensation |
+| **API 设计** | [API Design Patterns](../../06_ecosystem/03_design_patterns/18_api_design_patterns.md) | Builder、Typestate、Extension Trait、Error API |
+| **系统可组合性** | [System Composability](../../06_ecosystem/03_design_patterns/04_system_composability.md) | Composability、Isolation、Monoid、Plugin |
 
 ### 2.2 纵向：抽象层级维度
 
 | 层级 | 文件 | 关注点 |
 |:---|:---|:---|
-| **L1-L2 基础** | [Patterns](../../06_ecosystem/03_design_patterns/02_patterns.md) | 单个模式的动机、结构、Rust 实现 |
-| **L3 进阶** | [Concurrency Patterns](../../03_advanced/00_concurrency/10_concurrency_patterns.md) · [Type Erasure](../../03_advanced/06_low_level_patterns/17_type_erasure.md) | 模式与所有权、生命周期、类型系统的交互 |
-| **L4-L5 架构** | [Architecture Patterns](../../06_ecosystem/03_design_patterns/35_architecture_patterns.md) · [Microservice Patterns](../../06_ecosystem/03_design_patterns/31_microservice_patterns.md) | 模式在系统架构中的组合与权衡 |
-| **L6 生态系统** | [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md) | 模式之间的代数关系、冲突检测、组合选择 |
+| **L1-L2 基础** | [Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) | 单个模式的动机、结构、Rust 实现 |
+| **L3 进阶** | [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Type Erasure](../../03_advanced/06_low_level_patterns/03_type_erasure.md) | 模式与所有权、生命周期、类型系统的交互 |
+| **L4-L5 架构** | [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) · [Microservice Patterns](../../06_ecosystem/03_design_patterns/05_microservice_patterns.md) | 模式在系统架构中的组合与权衡 |
+| **L6 生态系统** | [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | 模式之间的代数关系、冲突检测、组合选择 |
 
 ### 2.3 认知目标维度
 
 | 目标 | 文件 | 任务示例 |
 |:---|:---|:---|
-| **理解（Understand）** | [Patterns](../../06_ecosystem/03_design_patterns/02_patterns.md) | 解释 Strategy 与 Template Method 的区别 |
+| **理解（Understand）** | [Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) | 解释 Strategy 与 Template Method 的区别 |
 | **分析（Analyze）** | [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md) | 分析为什么某个算法适合用 Strategy 表达 |
-| **评价（Evaluate）** | [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md) | 判断 Observer + Factory + Typestate 是否适合当前问题 |
-| **创造（Create）** | [System Composability](../../06_ecosystem/03_design_patterns/30_system_composability.md) | 设计一个新的模式组合以解决领域问题 |
+| **评价（Evaluate）** | [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | 判断 Observer + Factory + Typestate 是否适合当前问题 |
+| **创造（Create）** | [System Composability](../../06_ecosystem/03_design_patterns/04_system_composability.md) | 设计一个新的模式组合以解决领域问题 |
 
 ## 三、GoF 模式到 Rust 的映射
 
@@ -126,10 +126,10 @@ Pattern Composition Algebra (L6)
 
 | 你面临的问题 | 起点 | 延伸阅读 |
 |:---|:---|:---|
-| 如何选择正确的并发模型 | [Concurrency Patterns](../../03_advanced/00_concurrency/10_concurrency_patterns.md) | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md) |
-| 如何设计可扩展的 API | [API Design Patterns](../../06_ecosystem/03_design_patterns/42_api_design_patterns.md) | [System Composability](../../06_ecosystem/03_design_patterns/30_system_composability.md) |
-| 如何构建事件驱动系统 | [Event Driven Architecture](../../06_ecosystem/03_design_patterns/32_event_driven_architecture.md) | [Reactive Programming](../../06_ecosystem/04_web_and_networking/40_reactive_programming.md) |
-| 如何处理分布式失败 | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/19_parallel_distributed_pattern_spectrum.md) | [CQRS and Event Sourcing](../../06_ecosystem/03_design_patterns/33_cqrs_event_sourcing.md) |
+| 如何选择正确的并发模型 | [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) |
+| 如何设计可扩展的 API | [API Design Patterns](../../06_ecosystem/03_design_patterns/18_api_design_patterns.md) | [System Composability](../../06_ecosystem/03_design_patterns/04_system_composability.md) |
+| 如何构建事件驱动系统 | [Event Driven Architecture](../../06_ecosystem/03_design_patterns/06_event_driven_architecture.md) | [Reactive Programming](../../06_ecosystem/04_web_and_networking/09_reactive_programming.md) |
+| 如何处理分布式失败 | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) | [CQRS and Event Sourcing](../../06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md) |
 
 ## 五、模式选择决策树
 
@@ -148,7 +148,7 @@ flowchart TD
 
 ## 六、组合代数主文件说明
 
-[Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md) 是模式语义空间的核心枢纽文件，它定义了：
+[Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) 是模式语义空间的核心枢纽文件，它定义了：
 
 - **四种组合原语**：`⊗`（并行）、`∘`（串行）、`⊕`（选择）、`→`（精炼）
 - **模式冲突矩阵**：哪些模式在结构上互斥或需要小心组合
@@ -178,9 +178,9 @@ flowchart TD
 - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
 - [GoF — Design Patterns: Elements of Reusable Object-Oriented Software]
 - [POSA — Pattern-Oriented Software Architecture]
-- [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/73_pattern_composition_algebra.md)
+- [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md)
 - [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)
-- [Type System](../../01_foundation/02_type_system/04_type_system.md)
+- [Type System](../../01_foundation/02_type_system/01_type_system.md)
 
 ---
 

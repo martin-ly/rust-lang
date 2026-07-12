@@ -199,9 +199,9 @@ cargo bench -p c04_generic
 
 相关概念页：
 
-- [Kani：Rust 有界模型检查器](../../concept/04_formal/04_model_checking/32_kani.md)
-- [现代 Rust 验证工具生态（2025-2026）](../../concept/04_formal/04_model_checking/22_modern_verification_tools.md)
-- [Generics（泛型系统）](../../concept/02_intermediate/01_generics/02_generics.md)
+- [Kani：Rust 有界模型检查器](../../concept/04_formal/04_model_checking/09_kani.md)
+- [现代 Rust 验证工具生态（2025-2026）](../../concept/04_formal/04_model_checking/04_modern_verification_tools.md)
+- [Generics（泛型系统）](../../concept/02_intermediate/01_generics/01_generics.md)
 
 ## 相关文档
 

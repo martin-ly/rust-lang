@@ -14,7 +14,7 @@
 
 ---
 
-> **权威来源**: [concept/02_intermediate/03_error_handling/04_error_handling.md](../../../concept/02_intermediate/03_error_handling/04_error_handling.md)
+> **权威来源**: [concept/02_intermediate/03_error_handling/01_error_handling.md](../../../concept/02_intermediate/03_error_handling/01_error_handling.md)
 > 本文档保留错误处理决策树与研究笔记，完整概念解释请参阅 `concept/` 权威页。
 
 ## 目录 {#目录}
@@ -3826,7 +3826,7 @@ mod examples {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

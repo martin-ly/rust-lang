@@ -165,9 +165,9 @@ cargo run -p c03_control_fn --example control_flow_example
 
 相关概念页：
 
-- [Kani：Rust 有界模型检查器](../../concept/04_formal/04_model_checking/32_kani.md)
-- [现代 Rust 验证工具生态（2025-2026）](../../concept/04_formal/04_model_checking/22_modern_verification_tools.md)
-- [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](../../concept/04_formal/03_operational_semantics/15_hoare_logic.md)
+- [Kani：Rust 有界模型检查器](../../concept/04_formal/04_model_checking/09_kani.md)
+- [现代 Rust 验证工具生态（2025-2026）](../../concept/04_formal/04_model_checking/04_modern_verification_tools.md)
+- [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](../../concept/04_formal/03_operational_semantics/02_hoare_logic.md)
 
 ## 相关文档
 

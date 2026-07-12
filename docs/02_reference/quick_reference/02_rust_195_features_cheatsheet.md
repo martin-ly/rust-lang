@@ -360,7 +360,7 @@ const fn check_control(cf: ControlFlow<i32, ()>) -> bool {
 ---
 
 ## 五、与 Rust 2024 Edition 的关联 {#五与-rust-2024-edition-的关联}
-> **权威来源**: [Rust Edition 指南](../../../concept/07_future/01_edition_roadmap/44_edition_guide.md)
+> **权威来源**: [Rust Edition 指南](../../../concept/07_future/01_edition_roadmap/02_edition_guide.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## 相关概念 {#相关概念}
 >

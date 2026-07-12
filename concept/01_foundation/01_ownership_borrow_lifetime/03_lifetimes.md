@@ -2,7 +2,7 @@
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
-> **本节关键术语**: 生命周期 (Lifetime) · 生命周期注解 (Lifetime Annotation) · 静态生命周期 ('static) · 省略规则 (Elision) — [完整对照表](../../00_meta/01_terminology/terminology_glossary.md)
+> **本节关键术语**: 生命周期 (Lifetime) · 生命周期注解 (Lifetime Annotation) · 静态生命周期 ('static) · 省略规则 (Elision) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
 # Lifetimes（生命周期）
 >
@@ -21,9 +21,9 @@
 > **前置概念**: [Ownership](01_ownership.md) · [Borrowing](02_borrowing.md)
 > **后置概念**:
 >
-> [Advanced Generics](../../02_intermediate/01_generics/02_generics.md) ·
-> [Async/Await](../../03_advanced/01_async/02_async.md) ·
-> [Pin](../../03_advanced/01_async/02_async.md)
+> [Advanced Generics](../../02_intermediate/01_generics/01_generics.md) ·
+> [Async/Await](../../03_advanced/01_async/01_async.md) ·
+> [Pin](../../03_advanced/01_async/01_async.md)
 >
 > **主要来源**: · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
@@ -494,7 +494,7 @@ graph BT
 
 > **一致性（Coherence）检查**: L1 ⟹ L2 ⟹ T1/T2/T3 ⟹ C1/C2/C3，形成**从基础约束到高阶抽象**的递进链。T2 在宽松方向扩展合法程序，T3 在严格方向保证替换安全。
 >
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/04_inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
 
 ---
 
@@ -1324,7 +1324,7 @@ fn main() {
 
 > Brown University Interactive Rust Book 的 [Ch10.3 — Validating References with Lifetimes](https://rust-book.cs.brown.edu/ch10-03-lifetime-syntax.html) 以交互方式展示生命周期标注如何阻止悬垂引用；本文件关于生命周期省略规则、结构体生命周期与 `'static` 的讨论与其对齐。Brown Book 的所有权可视化与测验设计同样基于 Will Crichton 等人 OOPSLA 2023 的 *A Grounded Conceptual Model for Ownership Types in Rust*。
 >
-> 生命周期的形式化根基可追溯至 Mads Tofte 与 Jean-Pierre Talpin 1994 年的区域类型（region types）理论，Rust 在其基础上做了命令式、可变借用（Mutable Borrow）与 NLL 的关键适配；Ralf Jung 等人 *RustBelt: Securing the Foundations of the Rust Programming Language*（POPL 2018）进一步将生命周期约束纳入 Iris 分离逻辑框架，证明了引用有效性定理。完整权威来源索引见 [International Authority Index](../../00_meta/02_sources/international_authority_index.md)。
+> 生命周期的形式化根基可追溯至 Mads Tofte 与 Jean-Pierre Talpin 1994 年的区域类型（region types）理论，Rust 在其基础上做了命令式、可变借用（Mutable Borrow）与 NLL 的关键适配；Ralf Jung 等人 *RustBelt: Securing the Foundations of the Rust Programming Language*（POPL 2018）进一步将生命周期约束纳入 Iris 分离逻辑框架，证明了引用有效性定理。完整权威来源索引见 [International Authority Index](../../00_meta/02_sources/05_international_authority_index.md)。
 
 ---
 
@@ -1477,7 +1477,7 @@ Rust 1.31 引入的 **Non-Lexical Lifetimes (NLL)** 使借用的有效期基于*
 
 > 学完生命周期后，建议通过 **Ownership Inventory #3** 检验对「引用有效期、函数签名生命周期、结构体生命周期」的理解：
 >
-> - 本地映射与样题：[所有权清单自测：Brown University Ownership Inventory](28_ownership_inventories_brown_book.md)
+> - 本地映射与样题：[所有权清单自测：Brown University Ownership Inventory](06_ownership_inventories_brown_book.md)
 > - Brown Book 交互式题目：[Ownership Inventory #3](https://rust-book.cs.brown.edu/ch10-04-inventory.html)
 
 ---

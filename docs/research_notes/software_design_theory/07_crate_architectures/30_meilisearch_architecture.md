@@ -2,7 +2,7 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [数据库系统](../../../../concept/06_ecosystem/06_data_and_distributed/37_database_systems.md)
+> - [数据库系统](../../../../concept/06_ecosystem/06_data_and_distributed/04_database_systems.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
@@ -228,7 +228,7 @@ let task = index.set_settings(&settings).await?;
 - [Reqwest HTTP 客户端架构](10_reqwest_architecture.md)
 - [Serde 序列化架构](01_serde_architecture.md)
 - [Redis 缓存/消息架构](22_redis_architecture.md) — 与搜索缓存组合
-- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
+- [异步编程模型](../../../../concept/03_advanced/01_async/01_async.md)
 - [数据库与存储生态权威来源对齐](../../10_database_storage_cloud_alignment.md)
 
 ---

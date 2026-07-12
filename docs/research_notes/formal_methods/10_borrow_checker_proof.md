@@ -4,7 +4,7 @@
 # 借用检查器证明 {#借用检查器证明}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为借用检查器证明研究笔记；通用 Rust 概念解释请以 concept 权威页为准：[`concept L4 借用检查可判定性`](../../../concept/04_formal/01_ownership_logic/28_borrow_checking_decidability.md) · [`concept L1 borrowing`](../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
+> **权威来源（Canonical）**: 本文件为借用检查器证明研究笔记；通用 Rust 概念解释请以 concept 权威页为准：[`concept L4 借用检查可判定性`](../../../concept/04_formal/01_ownership_logic/04_borrow_checking_decidability.md) · [`concept L1 borrowing`](../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（Tree Borrows/RustSEM/RustBelt/Oxide 对比、定理证明、Aeneas 对比、反例与代码），不重复 concept/ 中的概念定义、规则与定理推导。
 
@@ -2335,7 +2335,7 @@ Polonius；[FLS Ch. 15.4 Borrowing](https://spec.ferrocene.dev/ownership-and-dec
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

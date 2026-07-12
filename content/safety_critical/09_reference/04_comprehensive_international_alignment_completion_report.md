@@ -3,7 +3,7 @@
 **EN**: Comprehensive International Alignment Completion Report
 **Summary**: Rust生态系统全面国际化对齐 - 完成报告 Comprehensive International Alignment Completion Report.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/03_design_patterns/05_system_design_principles.md](../../../concept/06_ecosystem/03_design_patterns/05_system_design_principles.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/03_design_patterns/03_system_design_principles.md](../../../concept/06_ecosystem/03_design_patterns/03_system_design_principles.md)；本文聚焦安全关键系统工程实践。
 
 > **Bloom 层级**: L4-L6
 >

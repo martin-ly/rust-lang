@@ -450,7 +450,7 @@ mindmap
 |------|----------|----------|
 | 系统编程 | [TUTORIAL_OWNERSHIP](10_tutorial_ownership_safety.md) | [THREADS_CONCURRENCY](../05_guides/05_threads_concurrency_usage_guide.md) |
 | 网络服务 | [ASYNC_PROGRAMMING](../05_guides/05_async_programming_usage_guide.md) | [DESIGN_PATTERNS](../05_guides/05_design_patterns_usage_guide.md) |
-| 数据系统 | TYPE_SYSTEM | [UNSAFE_RUST](../../concept/03_advanced/02_unsafe/03_unsafe.md) |
+| 数据系统 | TYPE_SYSTEM | [UNSAFE_RUST](../../concept/03_advanced/02_unsafe/01_unsafe.md) |
 
 ### 6.2 领域特定资源 {#62-领域特定资源}
 >
@@ -569,7 +569,7 @@ Rust 应用领域总览
 
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/), [RustBelt](https://plv.mpi-sws.org/rustbelt/), [Aeneas](https://aeneasverif.github.io/), [Ferrocene FLS](https://spec.ferrocene.dev/)
 >
-> **权威来源对齐变更日志**: 2026-06-29 完成 Batch 9：将泛化 Rust Official Docs 替换为具体章节/API/模块链接，并补充 P1 形式化来源对照 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-06-29 完成 Batch 9：将泛化 Rust Official Docs 替换为具体章节/API/模块链接，并补充 P1 形式化来源对照 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

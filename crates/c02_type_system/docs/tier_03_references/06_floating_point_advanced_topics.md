@@ -8,7 +8,7 @@
 
 ---
 
-> **权威来源**: [concept/01_foundation/02_type_system/10_numerics.md](../../../../concept/01_foundation/02_type_system/10_numerics.md)
+> **权威来源**: [concept/01_foundation/02_type_system/03_numerics.md](../../../../concept/01_foundation/02_type_system/03_numerics.md)
 
 ---
 

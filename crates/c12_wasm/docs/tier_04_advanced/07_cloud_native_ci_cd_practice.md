@@ -3,7 +3,7 @@
 
 # 云原生 CI/CD 实践指南
 
-> **权威来源**: [concept/06_ecosystem/00_toolchain/28_devops_and_ci_cd.md](../../../../concept/06_ecosystem/00_toolchain/28_devops_and_ci_cd.md)
+> **权威来源**: [concept/06_ecosystem/00_toolchain/03_devops_and_ci_cd.md](../../../../concept/06_ecosystem/00_toolchain/03_devops_and_ci_cd.md)
 
 本文件为 crate 文档重定向 stub。原内容中的通用 Rust 概念已迁移至上述权威来源页面；以下仅保留主题索引。
 

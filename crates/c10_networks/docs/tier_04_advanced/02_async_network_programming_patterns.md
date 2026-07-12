@@ -19,5 +19,5 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | 异步网络编程模式 | [`concept/06_ecosystem/12_networking/04_network_programming_quick_start.md`](../../../../concept/06_ecosystem/12_networking/04_network_programming_quick_start.md) |
-| 异步编程 | [`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md) |
-| 并发模式 | [`concept/03_advanced/00_concurrency/10_concurrency_patterns.md`](../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md) |
+| 异步编程 | [`concept/03_advanced/01_async/01_async.md`](../../../concept/03_advanced/01_async/02_async.md) |
+| 并发模式 | [`concept/03_advanced/00_concurrency/03_concurrency_patterns.md`](../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md) |

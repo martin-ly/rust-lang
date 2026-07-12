@@ -1,7 +1,7 @@
 # ⚠️ Rust 错误处理速查卡 {#rust-错误处理速查卡}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为错误处理速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L2 错误处理`](../../../concept/02_intermediate/03_error_handling/04_error_handling.md)
+> **权威来源（Canonical）**: 本文件为错误处理速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L2 错误处理`](../../../concept/02_intermediate/03_error_handling/01_error_handling.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（Result/Option/panic 模式、常用方法、错误处理库、反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
 
@@ -996,7 +996,7 @@ fn main() {
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

@@ -7,7 +7,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P+A** — Procedure + Application
 > **双维定位**: A×App — 应用异步（Async）进程管理
-> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Async](../01_async/02_async.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Async](../01_async/01_async.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
 > **后置概念**: [IPC Mechanisms](05_ipc_mechanisms.md) · [Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Modern Process Libraries](10_modern_process_libraries.md)
 > **定理链**: Async Runtime ⟹ tokio::process ⟹ Cancellation Safety
 
@@ -278,8 +278,8 @@ impl PartialOrd for Task {
 取消持有 `Child` 的任务时，`Child` 的 `Drop` 默认会 kill 但不等待。如需确保子进程完全退出，应显式调用 `kill().await` 和 `wait().await`。
 
 - [高级进程管理](02_advanced_process_management.md)
-- [Async/Await](../01_async/02_async.md)
-- [Future 与 Executor 机制](../01_async/39_future_and_executor_mechanisms.md)
+- [Async/Await](../01_async/01_async.md)
+- [Future 与 Executor 机制](../01_async/04_future_and_executor_mechanisms.md)
 
 ---
 
@@ -320,7 +320,7 @@ flowchart TD
 
 相关权威页：
 
-- [Async/Await](../01_async/02_async.md)
+- [Async/Await](../01_async/01_async.md)
 - [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 
 ---

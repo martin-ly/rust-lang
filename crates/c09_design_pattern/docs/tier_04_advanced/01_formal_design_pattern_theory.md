@@ -3,7 +3,7 @@
 > **EN**: Formal Design Pattern Theory
 > **Summary**: Stub redirecting to the canonical page on formal design-pattern theory in Rust.
 
-> **权威来源**: [concept/06_ecosystem/03_design_patterns/38_formal_design_pattern_theory.md](../../../../concept/06_ecosystem/03_design_patterns/38_formal_design_pattern_theory.md)
+> **权威来源**: [concept/06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md](../../../../concept/06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md)
 
 本文件为 crate 文档重定向 stub。原内容中的通用 Rust 概念已迁移至上述权威来源页面；以下仅保留主题索引。
 

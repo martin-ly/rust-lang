@@ -168,7 +168,7 @@ def main():
     md.append("\n## 方法学与诚信\n")
     md.append("- 域分级来自现有 `maintenance/authority_coverage_dashboard.py`（单一来源），未新造口径。")
     md.append("- 『命中』= 正文含对应域的 URL 子串（`re.search`）；不区分链接/正文引用，偏宽松（覆盖率可能略高估，缺口清单偏保守可信）。")
-    md.append("- 本审计只读，不修改任何文件；补缺口应基于 `concept/00_meta/02_sources/authority_source_map.md` 已核验映射 + 官方 URL，仅追加 References，不改正文事实。")
+    md.append("- 本审计只读，不修改任何文件；补缺口应基于 `concept/00_meta/02_sources/01_authority_source_map.md` 已核验映射 + 官方 URL，仅追加 References，不改正文事实。")
     md.append("\n---\n*由 `scripts/check_concept_authority_coverage.py` 生成*")
 
     os.makedirs(os.path.join(ROOT, "reports"), exist_ok=True)

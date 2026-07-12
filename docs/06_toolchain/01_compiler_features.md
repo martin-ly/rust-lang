@@ -6,7 +6,7 @@
 > **Bloom 层级**: L3
 >
 > **层次定位**: L6-L7 生态-前沿 / 编译器特性
-> **前置依赖**: [concept L2 泛型（Generics）](../../concept/02_intermediate/01_generics/02_generics.md) · [docs 核心概念](../01_core/README.md)
+> **前置依赖**: [concept L2 泛型（Generics）](../../concept/02_intermediate/01_generics/01_generics.md) · [docs 核心概念](../01_core/README.md)
 > **后置延伸**: [docs 并行前端](06_parallel_frontend.md) · [concept L7 语言演进](../../concept/07_future/04_research_and_experimental/03_evolution.md)
 > **跨层映射**: L6→L7 工具驱动映射 | 编译器→语言
 > **定理链编号**: T-030 单态化（Monomorphization）正确性 → 优化保持性
@@ -1258,7 +1258,7 @@ fn pgo_workflow() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

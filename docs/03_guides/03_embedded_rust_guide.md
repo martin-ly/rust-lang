@@ -7,7 +7,7 @@
 > **分级**: [A]
 >
 > **层次定位**: L3-L6 高级-生态 / 嵌入式应用域
-> **前置依赖**: [concept L3 Async](../../concept/03_advanced/01_async/02_async.md) · [concept L3 Unsafe](../../concept/03_advanced/02_unsafe/03_unsafe.md) · [docs 核心概念](../01_core/README.md)
+> **前置依赖**: [concept L3 Async](../../concept/03_advanced/01_async/01_async.md) · [concept L3 Unsafe](../../concept/03_advanced/02_unsafe/01_unsafe.md) · [docs 核心概念](../01_core/README.md)
 > **后置延伸**: [docs Rust for Linux](../04_research/04_rust_for_linux.md) · [knowledge Unsafe](../../knowledge/03_advanced/unsafe/README.md)
 > **跨层映射**: L3→L6 工程映射 | 理论→实践
 > **定理链编号**: T-050 Pin 安全性 → T-060 unsafe 抽象
@@ -44,7 +44,7 @@
 ---
 
 ## Embassy：异步嵌入式 {#embassy异步嵌入式}
-> **权威来源**: [Rust 异步编程](../../concept/03_advanced/01_async/02_async.md)
+> **权威来源**: [Rust 异步编程](../../concept/03_advanced/01_async/01_async.md)
 > 通用概念解释已在 `concept/` 权威页中覆盖，本节不再重复，请直接参考权威页。
 ## RTIC：实时中断驱动并发 {#rtic实时中断驱动并发}
 > **权威来源**: [Rust 并发编程](../../concept/03_advanced/00_concurrency/01_concurrency.md)

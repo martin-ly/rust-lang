@@ -3,7 +3,7 @@
 > **EN**: Generics Syntax Reference (Redirect)
 > **Summary**: Redirect to the canonical Generics concept page.
 >
-> **权威来源**: [concept/02_intermediate/01_generics/02_generics.md](concept/02_intermediate/01_generics/02_generics.md)
+> **权威来源**: [concept/02_intermediate/01_generics/01_generics.md](concept/02_intermediate/01_generics/01_generics.md)
 
 ## 主题速览
 

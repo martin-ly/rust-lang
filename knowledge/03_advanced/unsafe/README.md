@@ -2,7 +2,7 @@
 
 > **EN**: Unsafe Rust reference redirect
 > **Summary**: 本页是 `knowledge/` 目录下的导航占位符。内容已迁移至 `concept/` 权威页，此处不再维护完整技术解释。
-> **权威来源**: [Unsafe Rust 参考入口](../../../concept/03_advanced/02_unsafe/35_unsafe_reference.md)
+> **权威来源**: [Unsafe Rust 参考入口](../../../concept/03_advanced/02_unsafe/07_unsafe_reference.md)
 
 ---
 

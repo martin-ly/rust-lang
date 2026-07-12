@@ -15,5 +15,5 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | Rust 1.95 Stabilized Features | [concept/07_future/00_version_tracking/rust_1_95_stabilized.md](../../../../concept/07_future/00_version_tracking/rust_1_95_stabilized.md) |
-| Generics | [concept/02_intermediate/01_generics/02_generics.md](../../../../concept/02_intermediate/01_generics/02_generics.md) |
+| Generics | [concept/02_intermediate/01_generics/01_generics.md](../../../../concept/02_intermediate/01_generics/01_generics.md) |
 | Traits | [concept/02_intermediate/00_traits/01_traits.md](../../../../concept/02_intermediate/00_traits/01_traits.md) |

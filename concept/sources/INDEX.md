@@ -30,7 +30,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 ---
 
-## 一级[官方规范与设计文档](../00_meta/02_sources/international_authority_index.md)
+## 一级[官方规范与设计文档](../00_meta/02_sources/05_international_authority_index.md)
 
 | 标识符 | 全称 | 根 URL | 更新频率 | 建议引用（Reference）格式 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -91,7 +91,7 @@
 
 ---
 
-## 二级[学术论文与形式化验证](../00_meta/02_sources/international_authority_index.md)
+## 二级[学术论文与形式化验证](../00_meta/02_sources/05_international_authority_index.md)
 
 | 标识符 | 全称 | 类型 | 建议引用（Reference）格式 |
 | :--- | :--- | :--- | :--- |
@@ -109,7 +109,7 @@
 
 ---
 
-## 三级[社区与工业资源](../00_meta/02_sources/international_authority_index.md)
+## 三级[社区与工业资源](../00_meta/02_sources/05_international_authority_index.md)
 
 | 标识符 | 全称 | 类型 | 建议引用（Reference）格式 |
 | :--- | :--- | :--- | :--- |

@@ -1,7 +1,7 @@
 > **EN**: Production-Grade Macro Development
 > **Summary**: Engineering practices for shipping Rust macro crates: MSRV and edition compatibility, span-aware diagnostics, documentation and doc tests, semantic versioning, changelog management, CI/CD, security auditing, and long-term maintenance.
 >
-> **权威来源**: [concept/03_advanced/03_proc_macros/31_production_grade_macro_development.md](../../../../concept/03_advanced/03_proc_macros/31_production_grade_macro_development.md)
+> **权威来源**: [concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md](../../../../concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md)
 
 # 05 生产级宏开发
 
@@ -42,4 +42,4 @@
 
 ---
 
-> **权威来源**: [concept/03_advanced/03_proc_macros/31_production_grade_macro_development.md](../../../../concept/03_advanced/03_proc_macros/31_production_grade_macro_development.md)
+> **权威来源**: [concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md](../../../../concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md)

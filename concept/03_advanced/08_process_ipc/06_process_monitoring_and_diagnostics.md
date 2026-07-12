@@ -7,14 +7,14 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P+A** — Procedure + Application
 > **双维定位**: A×Eva — 评价进程监控与诊断方法
-> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [IPC Mechanisms](05_ipc_mechanisms.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [IPC Mechanisms](05_ipc_mechanisms.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
 > **后置概念**: [Process Security](07_process_security_and_sandboxing.md) · [Process Performance Engineering](08_process_performance_engineering.md) · [Process Testing](09_process_testing_and_benchmarking.md)
 > **定理链**: Observable Metrics ⟹ Diagnostic Loop ⟹ Recovery
 
 # Rust 进程监控与诊断
 
 > **权威页地位**：本页为 Rust 进程监控与诊断概念的 canonical 解释来源。
-> **L2 向下引用（Reference）**: 进程监控实现建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
+> **L2 向下引用（Reference）**: 进程监控实现建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/01_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
 
 ## 1. 概念定义
 

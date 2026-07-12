@@ -11,13 +11,13 @@
 > **层级**: L1 基础概念
 > **A/S/P 标记**: S — Structure
 > **双维定位**: C×Eva
-> **前置概念**: · [自测题库](../../00_meta/04_navigation/self_assessment.md)
+> **前置概念**: · [自测题库](../../00_meta/04_navigation/12_self_assessment.md)
 >
-> [Variable Model](../03_values_and_references/20_variable_model.md) ·
-> [Evaluation Strategies](../../04_formal/03_operational_semantics/18_evaluation_strategies.md) ·
-> [Effects and Purity](../00_start/21_effects_and_purity.md) ·
-> [Control Flow](../04_control_flow/07_control_flow.md) ·
-> [Data Abstraction Spectrum](../02_type_system/22_data_abstraction_spectrum.md)
+> [Variable Model](../03_values_and_references/03_variable_model.md) ·
+> [Evaluation Strategies](../../04_formal/03_operational_semantics/04_evaluation_strategies.md) ·
+> [Effects and Purity](../00_start/04_effects_and_purity.md) ·
+> [Control Flow](../04_control_flow/01_control_flow.md) ·
+> [Data Abstraction Spectrum](../02_type_system/05_data_abstraction_spectrum.md)
 > **后置概念**: N/A
 > **主要来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 ---

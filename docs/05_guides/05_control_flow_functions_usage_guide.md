@@ -7,7 +7,7 @@
 >
 > **受众**: [进阶]
 > **内容分级**: [专家级]
-> **权威来源**: [concept/01_foundation/04_control_flow/07_control_flow.md](../../concept/01_foundation/04_control_flow/07_control_flow.md)
+> **权威来源**: [concept/01_foundation/04_control_flow/01_control_flow.md](../../concept/01_foundation/04_control_flow/01_control_flow.md)
 
 **模块（Module）**: C03 Control Flow & Functions
 **创建日期**: 2026-05-12
@@ -306,7 +306,7 @@ fn robust_control_flow() -> ControlFlowResult<()> {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

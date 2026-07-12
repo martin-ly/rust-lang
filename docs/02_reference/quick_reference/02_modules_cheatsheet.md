@@ -1,7 +1,7 @@
 # 📦 Rust 模块系统速查卡 {#rust-模块系统速查卡}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为模块系统速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L1 模块与路径`](../../../concept/01_foundation/07_modules_and_items/11_modules_and_paths.md) · [`concept L2 模块系统`](../../../concept/02_intermediate/05_modules_and_visibility/10_module_system.md)
+> **权威来源（Canonical）**: 本文件为模块系统速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L1 模块与路径`](../../../concept/01_foundation/07_modules_and_items/01_modules_and_paths.md) · [`concept L2 模块系统`](../../../concept/02_intermediate/05_modules_and_visibility/01_module_system.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（模块声明/可见性/use/路径/文件组织/Crate 速查），不重复 concept/ 中的概念定义、规则与定理推导。
 
@@ -1197,7 +1197,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

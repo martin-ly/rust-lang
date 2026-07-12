@@ -1071,7 +1071,7 @@ graph TD
 
 **变更日志**:
 
-- v1.0 (2026-05-23): 初始版本 — 八棵核心判定树（所有权/借用/生命周期/Trait/泛型/并发/异步/Unsafe）+ Mermaid 可视化 + 失效条件矩阵 + 交叉一致性图 + 与定理森林对照 [权威来源对齐 Wave 2](../02_sources/international_authority_index.md)
+- v1.0 (2026-05-23): 初始版本 — 八棵核心判定树（所有权/借用/生命周期/Trait/泛型/并发/异步/Unsafe）+ Mermaid 可视化 + 失效条件矩阵 + 交叉一致性图 + 与定理森林对照 [权威来源对齐 Wave 2](../02_sources/05_international_authority_index.md)
 
 ---
 

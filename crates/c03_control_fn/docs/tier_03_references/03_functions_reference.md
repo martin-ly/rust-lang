@@ -3,7 +3,7 @@
 > **EN**: Functions Reference (Redirect)
 > **Summary**: Redirect to the canonical Functions concept page.
 >
-> **权威来源**: [concept/01_foundation/07_modules_and_items/12_functions.md](concept/01_foundation/07_modules_and_items/12_functions.md)
+> **权威来源**: [concept/01_foundation/07_modules_and_items/02_functions.md](concept/01_foundation/07_modules_and_items/02_functions.md)
 
 ## 主题速览
 

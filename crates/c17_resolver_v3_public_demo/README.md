@@ -74,5 +74,5 @@ c17_resolver_v3_public_demo v0.1.0 (...)
 
 详细概念解释见：
 
-- [`concept/06_ecosystem/01_cargo/11_resolver_v3_public_feature_unification.md`](../../concept/06_ecosystem/01_cargo/11_resolver_v3_public_feature_unification.md)
-- [`concept/06_ecosystem/01_cargo/10_public_private_deps.md`](../../concept/06_ecosystem/01_cargo/10_public_private_deps.md)
+- [`concept/06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md`](../../concept/06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md)
+- [`concept/06_ecosystem/01_cargo/02_public_private_deps.md`](../../concept/06_ecosystem/01_cargo/02_public_private_deps.md)

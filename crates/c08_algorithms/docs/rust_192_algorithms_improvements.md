@@ -19,5 +19,5 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | Rust 1.92 稳定特性 | [`concept/07_future/00_version_tracking/rust_1_92_stabilized.md`](../../../concept/07_future/00_version_tracking/rust_1_92_stabilized.md) |
-| 算法与数据结构 | [`concept/06_ecosystem/11_domain_applications/77_data_structures_in_rust.md`](../../../concept/06_ecosystem/11_domain_applications/77_data_structures_in_rust.md) |
-| 算法工程实践 | [`concept/06_ecosystem/11_domain_applications/76_algorithm_engineering_practice.md`](../../../concept/06_ecosystem/11_domain_applications/76_algorithm_engineering_practice.md) |
+| 算法与数据结构 | [`concept/06_ecosystem/11_domain_applications/09_data_structures_in_rust.md`](../../../concept/06_ecosystem/11_domain_applications/09_data_structures_in_rust.md) |
+| 算法工程实践 | [`concept/06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md`](../../../concept/06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md) |

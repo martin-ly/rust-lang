@@ -7,7 +7,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: S×Eva — 评价进程抽象与生命周期（Lifetimes）
-> **前置依赖**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md) · [Concurrency](../00_concurrency/01_concurrency.md)
+> **前置依赖**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) · [Concurrency](../00_concurrency/01_concurrency.md)
 > **后置概念**: [Advanced Process Management](02_advanced_process_management.md) · [Async Process Management](03_async_process_management.md) · [IPC Mechanisms](05_ipc_mechanisms.md)
 > **定理链**: OS Process ⟹ std::process::Command ⟹ Resource Control
 
@@ -107,7 +107,7 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 
 ## 4. Rust 的进程安全抽象
 
-> **L2 向下引用（Reference）**: 进程安全抽象建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md) 与 [L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 之上。
+> **L2 向下引用（Reference）**: 进程安全抽象建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md) 与 [L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/01_error_handling.md) 之上。
 
 ### 4.1 类型安全保证
 
@@ -186,9 +186,9 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 ## 8. 相关概念
 
 - [并发模型](../00_concurrency/01_concurrency.md)
-- [异步编程](../01_async/02_async.md)
-- [错误处理基础](../../01_foundation/08_error_handling/32_error_handling_basics.md)
-- [L2 错误处理](../../02_intermediate/03_error_handling/04_error_handling.md)
+- [异步编程](../01_async/01_async.md)
+- [错误处理基础](../../01_foundation/08_error_handling/01_error_handling_basics.md)
+- [L2 错误处理](../../02_intermediate/03_error_handling/01_error_handling.md)
 
 ---
 

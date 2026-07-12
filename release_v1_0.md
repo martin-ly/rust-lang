@@ -31,9 +31,9 @@ L7 未来 ──→ AI 集成、形式化方法、语言演进
 
 | 文件 | 用途 | 规模 |
 | :--- | :--- | :--- |
-| [`learning_guide.md`](concept/00_meta/04_navigation/learning_guide.md) | 4条学习路径（系统/面试/学术/问题驱动） | ~300行 |
-| [`quick_reference.md`](concept/00_meta/04_navigation/quick_reference.md) | A-Z概念速查 + 17个错误码 + 跨语言对照 | ~630行 |
-| [`self_assessment.md`](concept/00_meta/04_navigation/self_assessment.md) | 80道自测题（L1-L6覆盖，含折叠答案） | ~850行 |
+| [`learning_guide.md`](concept/00_meta/04_navigation/07_learning_guide.md) | 4条学习路径（系统/面试/学术/问题驱动） | ~300行 |
+| [`quick_reference.md`](concept/00_meta/04_navigation/11_quick_reference.md) | A-Z概念速查 + 17个错误码 + 跨语言对照 | ~630行 |
+| [`self_assessment.md`](concept/00_meta/04_navigation/12_self_assessment.md) | 80道自测题（L1-L6覆盖，含折叠答案） | ~850行 |
 | [`kb_quality_dashboard.md`](reports/kb_quality_dashboard.md) | 自动化质量审计仪表盘 | 实时生成 |
 
 ### 🔍 可搜索索引

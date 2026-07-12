@@ -1,7 +1,7 @@
 > **EN**: Rust 1.90 Async Comprehensive Mindmap
 > **Summary**: A panoramic mindmap of the Rust async ecosystem, covering Future/async/await, runtimes, async I/O primitives, learning paths, and decision trees. This crate document now redirects to the canonical concept page.
 
-> **权威来源**: [concept/03_advanced/01_async/02_async.md](../../../concept/03_advanced/01_async/02_async.md)
+> **权威来源**: [concept/03_advanced/01_async/01_async.md](../../../concept/03_advanced/01_async/01_async.md)
 
 ## 主题速览
 

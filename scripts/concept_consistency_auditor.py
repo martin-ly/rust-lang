@@ -11,14 +11,14 @@
 6. 生成审计报告到 reports/CONCEPT_CONSISTENCY_AUDIT_<YYYY_MM_DD>.md
 
 权威页基线(按 AGENTS.md §2 Canonical 规则):
-  - Send/Sync     : concept/03_advanced/00_concurrency/17_send_sync_auto_traits.md
+  - Send/Sync     : concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md
   - 所有权        : concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md
   - 借用          : concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md
   - 生命周期      : concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md
-  - 内部可变性    : concept/02_intermediate/02_memory_management/08_interior_mutability.md
-  - Pin/Unpin     : concept/03_advanced/01_async/06_pin_unpin.md
-  - 变型(协变逆变): concept/04_formal/00_type_theory/06_subtype_variance.md
-  - unsafe        : concept/03_advanced/02_unsafe/03_unsafe.md
+  - 内部可变性    : concept/02_intermediate/02_memory_management/02_interior_mutability.md
+  - Pin/Unpin     : concept/03_advanced/01_async/08_pin_unpin.md
+  - 变型(协变逆变): concept/04_formal/00_type_theory/02_subtype_variance.md
+  - unsafe        : concept/03_advanced/02_unsafe/01_unsafe.md
 
 用法:
     python scripts/concept_consistency_auditor.py            # 观察模式, 报告 + exit 0
@@ -55,14 +55,14 @@ EXCLUDE_PREFIXES = ("sandbox",)
 
 # 概念 -> 权威页(相对 concept/ 的路径基线)
 CANONICAL_PAGES: dict[str, str] = {
-    "Send/Sync": "03_advanced/00_concurrency/17_send_sync_auto_traits.md",
+    "Send/Sync": "03_advanced/00_concurrency/02_send_sync_auto_traits.md",
     "所有权": "01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
     "借用": "01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
     "生命周期": "01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
-    "内部可变性": "02_intermediate/02_memory_management/08_interior_mutability.md",
-    "Pin/Unpin": "03_advanced/01_async/06_pin_unpin.md",
-    "变型": "04_formal/00_type_theory/06_subtype_variance.md",
-    "unsafe": "03_advanced/02_unsafe/03_unsafe.md",
+    "内部可变性": "02_intermediate/02_memory_management/02_interior_mutability.md",
+    "Pin/Unpin": "03_advanced/01_async/08_pin_unpin.md",
+    "变型": "04_formal/00_type_theory/02_subtype_variance.md",
+    "unsafe": "03_advanced/02_unsafe/01_unsafe.md",
 }
 
 
@@ -428,7 +428,7 @@ HYPOTHESIS_MARKERS = re.compile(
 def check_variance_consistency(defs: list[ConceptDef]) -> list[dict]:
     """检测类型构造器对类型参数 T 的变型(协变/逆变/不变)跨文件矛盾
 
-    真值基线(见 concept/04_formal/00_type_theory/06_subtype_variance.md):
+    真值基线(见 concept/04_formal/00_type_theory/02_subtype_variance.md):
       &T 协变 / &mut T 对 T 不变 / Box<T> 协变 / Cell<T> 不变 / fn 参数逆变、返回值协变
 
     为避免误报,仅接受显式断言形式:

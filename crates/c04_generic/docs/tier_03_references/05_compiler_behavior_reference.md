@@ -3,7 +3,7 @@
 > **EN**: Generics Compiler Behavior (Redirect)
 > **Summary**: Redirect to the canonical Generics Compiler Behavior concept page.
 >
-> **权威来源**: [concept/04_formal/05_rustc_internals/53_generics_compiler_behavior.md](concept/04_formal/05_rustc_internals/53_generics_compiler_behavior.md)
+> **权威来源**: [concept/04_formal/05_rustc_internals/15_generics_compiler_behavior.md](concept/04_formal/05_rustc_internals/15_generics_compiler_behavior.md)
 
 ## 主题速览
 

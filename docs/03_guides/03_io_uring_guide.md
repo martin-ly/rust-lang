@@ -9,7 +9,7 @@
 > **内容分级**: [专家级]
 > **分级**: [A]
 > **层级**: L6 生态工具
-> **前置概念**: [Async](../../concept/03_advanced/01_async/02_async.md) · [Concurrency](../../concept/03_advanced/00_concurrency/01_concurrency.md)
+> **前置概念**: [Async](../../concept/03_advanced/01_async/01_async.md) · [Concurrency](../../concept/03_advanced/00_concurrency/01_concurrency.md)
 > **Bloom 层级**: L3-L4
 > **[Linux Kernel Documentation](https://docs.kernel.org/)** · **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **[tokio-uring](https://docs.rs/tokio-uring/latest/tokio_uring/)** ✅
 
@@ -298,7 +298,7 @@ cargo bench -p c10_networks --bench async_ecosystem_benchmarks
 
 > **权威来源**: [Lord of the io_uring](https://unixism.net/loti/), [Linux Kernel io_uring 文档](https://kernel.dk/io_uring.pdf), [tokio-uring](https://github.com/tokio-rs/tokio-uring), [Rust io-uring crate](https://docs.rs/io-uring/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Linux 内核 io_uring 官方文档来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md); 2026-05-21 补充决策树、性能对比、registered buffers 示例 [来源: io_uring Deep Dive]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Linux 内核 io_uring 官方文档来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md); 2026-05-21 补充决策树、性能对比、registered buffers 示例 [来源: io_uring Deep Dive]
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

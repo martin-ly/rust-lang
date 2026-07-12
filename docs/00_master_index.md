@@ -11,7 +11,7 @@
 
 | 入口 | 路径 | 说明 |
 |:---|:---|:---|
-| **初学者起步** | [LEARNING_MVP_PATH.md](../concept/00_meta/04_navigation/learning_mvp_path.md) | 35-45 小时最小可行学习路径 |
+| **初学者起步** | [LEARNING_MVP_PATH.md](../concept/00_meta/04_navigation/08_learning_mvp_path.md) | 35-45 小时最小可行学习路径 |
 | **概念文件** | [concept/](..) | L1-L7 分层概念文档 |
 | **知识索引** | [knowledge/](../knowledge) | 系统化知识卡片 |
 | **速查表** | [docs/02_reference/quick_reference/](02_reference/quick_reference/README.md) | API 速查与参考 |
@@ -39,4 +39,4 @@ rust-lang/
 
 ## 术语表 {#术语表}
 
-完整术语对照表: [concept/00_meta/terminology_glossary.md](../concept/00_meta/01_terminology/terminology_glossary.md)
+完整术语对照表: [concept/00_meta/terminology_glossary.md](../concept/00_meta/01_terminology/01_terminology_glossary.md)

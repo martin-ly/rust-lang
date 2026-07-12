@@ -8,7 +8,7 @@
 
 ---
 
-> **权威来源**: [concept/04_formal/01_ownership_logic/03_ownership_formal.md](../../../../concept/04_formal/01_ownership_logic/03_ownership_formal.md)
+> **权威来源**: [concept/04_formal/01_ownership_logic/02_ownership_formal.md](../../../../concept/04_formal/01_ownership_logic/02_ownership_formal.md)
 
 ---
 

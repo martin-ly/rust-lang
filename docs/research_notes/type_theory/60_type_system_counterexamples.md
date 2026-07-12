@@ -1,7 +1,7 @@
 # 类型系统反例边界 {#类型系统反例边界}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为类型系统反例边界集（反例，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L2 类型系统`](../../../concept/01_foundation/02_type_system/04_type_system.md)
+> **权威来源（Canonical）**: 本文件为类型系统反例边界集（反例，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L2 类型系统`](../../../concept/01_foundation/02_type_system/01_type_system.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（类型系统反例与边界（反例集，非概念正文）），不重复 concept/ 中的概念定义、规则与定理推导。
 

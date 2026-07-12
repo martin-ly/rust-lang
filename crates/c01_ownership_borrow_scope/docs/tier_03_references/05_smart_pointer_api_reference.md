@@ -3,7 +3,7 @@
 
 # 智能指针：堆内存管理与共享语义 — Crate Docs Stub
 
-> **权威来源**: [智能指针：堆内存管理与共享语义](../../../../concept/02_intermediate/02_memory_management/12_smart_pointers.md)
+> **权威来源**: [智能指针：堆内存管理与共享语义](../../../../concept/02_intermediate/02_memory_management/04_smart_pointers.md)
 
 本文件原为对应 crate 的通用概念教程/参考。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
 通用 Rust 概念解释已在 `concept/` 中维护为单一权威来源；此处仅保留索引与 canonical 链接。

@@ -8,7 +8,7 @@
 
 ---
 
-> **权威来源**: [concept/06_ecosystem/04_web_and_networking/42_glommio_and_thread_per_core.md](../../../../concept/06_ecosystem/04_web_and_networking/42_glommio_and_thread_per_core.md)
+> **权威来源**: [concept/06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md](../../../../concept/06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md)
 
 ---
 

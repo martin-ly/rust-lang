@@ -1,7 +1,7 @@
 > **EN**: Async System Architecture
 > **Summary**: Architectural patterns for building async Rust systems, including microservices, API gateways, message queues, distributed tracing, circuit breakers, event sourcing, CQRS, and Saga. This crate document now redirects to the canonical concept page.
 
-> **权威来源**: [concept/03_advanced/01_async/26_async_patterns.md](../../../../concept/03_advanced/01_async/26_async_patterns.md)
+> **权威来源**: [concept/03_advanced/01_async/03_async_patterns.md](../../../../concept/03_advanced/01_async/03_async_patterns.md)
 
 ## 主题速览
 

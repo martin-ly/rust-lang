@@ -3,7 +3,7 @@
 > **EN**: Frontier Research and Innovative Patterns
 > **Summary**: Stub redirecting to the canonical page on frontier research and innovative patterns in Rust.
 
-> **权威来源**: [concept/06_ecosystem/03_design_patterns/39_frontier_research_and_innovative_patterns.md](../../../../concept/06_ecosystem/03_design_patterns/39_frontier_research_and_innovative_patterns.md)
+> **权威来源**: [concept/06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md](../../../../concept/06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md)
 
 本文件为 crate 文档重定向 stub。原内容中的通用 Rust 概念已迁移至上述权威来源页面；以下仅保留主题索引。
 

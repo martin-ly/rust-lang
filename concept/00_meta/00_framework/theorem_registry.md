@@ -68,7 +68,7 @@
 > **历史修正**：
 >
 > - `concept/02_intermediate/00_traits/01_traits.md` 原使用 `T-020`–`T-022`，已修正为 `T-200`–`T-202`。
-> - `concept/02_intermediate/01_generics/02_generics.md` 原使用 `T-030`–`T-032`，已修正为 `T-230`–`T-232`。
+> - `concept/02_intermediate/01_generics/01_generics.md` 原使用 `T-030`–`T-032`，已修正为 `T-230`–`T-232`。
 
 ---
 
@@ -99,8 +99,8 @@
 | T-020 | 生命周期偏序约束可满足性 | `concept/00_meta/00_framework/theorem_inference_forest.md` | ✅ 已注册 |
 | T-021 | NLL 流敏感安全 | `concept/00_meta/00_framework/theorem_inference_forest.md` | ✅ 已注册 |
 | T-022 | 悬垂引用不可达（推论） | `concept/00_meta/00_framework/theorem_inference_forest.md` | ✅ 已注册 |
-| T-025 | Polonius 流敏感安全 | `concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md` | ✅ 已注册 |
-| T-026 | Elision 完备性 | `concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md` | ✅ 已注册 |
+| T-025 | Polonius 流敏感安全 | `concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md` | ✅ 已注册 |
+| T-026 | Elision 完备性 | `concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md` | ✅ 已注册 |
 
 ### 3.4 类型系统域（T-030 – T-039）
 
@@ -121,9 +121,9 @@
 
 | 编号 | 命题 | 所在文件 | 状态 |
 |---|---|---|---|
-| T-050 | Pin 安全性 | `concept/03_advanced/01_async/02_async.md` | ✅ 已注册 |
-| T-051 | 轮询一致性（Poll Coherence） | `concept/03_advanced/01_async/02_async.md` | ✅ 已注册 |
-| T-052 | async/await 转换正确性 | `concept/03_advanced/01_async/02_async.md` | ✅ 已注册 |
+| T-050 | Pin 安全性 | `concept/03_advanced/01_async/01_async.md` | ✅ 已注册 |
+| T-051 | 轮询一致性（Poll Coherence） | `concept/03_advanced/01_async/01_async.md` | ✅ 已注册 |
+| T-052 | async/await 转换正确性 | `concept/03_advanced/01_async/01_async.md` | ✅ 已注册 |
 
 ### 3.7 Trait 工程扩展域（T-200 – T-229）
 
@@ -137,18 +137,18 @@
 
 | 编号 | 命题 | 所在文件 | 状态 |
 |---|---|---|---|
-| T-230 | 参数多态保持 | `concept/02_intermediate/01_generics/02_generics.md` | ✅ 已注册 |
-| T-231 | 单态化（Monomorphization）正确性 | `concept/02_intermediate/01_generics/02_generics.md` | ✅ 已注册 |
-| T-232 | 约束满足可判定 | `concept/02_intermediate/01_generics/02_generics.md` | ✅ 已注册 |
+| T-230 | 参数多态保持 | `concept/02_intermediate/01_generics/01_generics.md` | ✅ 已注册 |
+| T-231 | 单态化（Monomorphization）正确性 | `concept/02_intermediate/01_generics/01_generics.md` | ✅ 已注册 |
+| T-232 | 约束满足可判定 | `concept/02_intermediate/01_generics/01_generics.md` | ✅ 已注册 |
 
 ### 3.9 形式化域（T-100 – T-159）
 
 | 编号 | 命题 | 所在文件 | 状态 |
 |---|---|---|---|
-| T-100 – T-102 | 类型语义相关命题 | `concept/04_formal/00_type_theory/21_type_semantics.md` | ✅ 已注册 |
-| T-110 – T-112 | 操作语义相关命题 | `concept/04_formal/03_operational_semantics/20_axiomatic_semantics.md` | ✅ 已注册 |
-| T-120 – T-129 | 公理语义相关命题 | `concept/04_formal/03_operational_semantics/20_axiomatic_semantics.md` | ✅ 已注册 |
-| T-130 – T-132 | 形式化扩展命题 | `concept/04_formal/00_type_theory/21_type_semantics.md` | ✅ 已注册 |
+| T-100 – T-102 | 类型语义相关命题 | `concept/04_formal/00_type_theory/06_type_semantics.md` | ✅ 已注册 |
+| T-110 – T-112 | 操作语义相关命题 | `concept/04_formal/03_operational_semantics/05_axiomatic_semantics.md` | ✅ 已注册 |
+| T-120 – T-129 | 公理语义相关命题 | `concept/04_formal/03_operational_semantics/05_axiomatic_semantics.md` | ✅ 已注册 |
+| T-130 – T-132 | 形式化扩展命题 | `concept/04_formal/00_type_theory/06_type_semantics.md` | ✅ 已注册 |
 
 ---
 
@@ -195,7 +195,7 @@
 
 - **P0 官方**: [Rust Reference — Type System / Traits / Lifetimes](https://doc.rust-lang.org/reference/) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
 - **P1 学术/形式化**: Ralf Jung et al. _RustBelt: Securing the Foundations of the Rust Programming Language_ (POPL 2018) · _Stacked Borrows: An Aliasing Model for Rust_ (POPL 2019) · Villani / Hostert / Dreyer / Jung _Tree Borrows: A New Aliasing Model for Rust_ (PLDI 2025, Distinguished Paper)
-- **映射维护**: 见 [`concept/00_meta/02_sources/authority_source_map.md`](../02_sources/authority_source_map.md)
+- **映射维护**: 见 [`concept/00_meta/02_sources/01_authority_source_map.md`](../02_sources/01_authority_source_map.md)
 
 ---
 

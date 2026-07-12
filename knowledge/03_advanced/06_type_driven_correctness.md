@@ -5,4 +5,4 @@
 
 **内容已迁移**：本文件不再保留教程正文。
 
-> **权威来源**: [concept/04_formal/00_type_theory/50_type_system_reference.md](../../concept/04_formal/00_type_theory/50_type_system_reference.md)
+> **权威来源**: [concept/04_formal/00_type_theory/09_type_system_reference.md](../../concept/04_formal/00_type_theory/09_type_system_reference.md)

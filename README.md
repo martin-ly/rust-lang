@@ -36,8 +36,8 @@ L7 未来 ──→ AI 集成、形式化方法、语言演进
 本知识库以**中文深度内容**为主体，同时为国际化可读性提供：
 
 - 每个 `concept/` 概念文件均含 `**EN**` 英文标题与 `**Summary**` 英文摘要
-- [`terminology_glossary.md`](concept/00_meta/01_terminology/terminology_glossary.md) 提供 180+ 中英术语对照
-- [`LEARNING_MVP_PATH.md`](concept/00_meta/04_navigation/learning_mvp_path.md) 对接国际官方/经典教程：
+- [`terminology_glossary.md`](concept/00_meta/01_terminology/01_terminology_glossary.md) 提供 180+ 中英术语对照
+- [`LEARNING_MVP_PATH.md`](concept/00_meta/04_navigation/08_learning_mvp_path.md) 对接国际官方/经典教程：
   - [The Rust Programming Language (3rd Ed)](https://doc.rust-lang.org/book/)
   - [Brown University Interactive Book](https://rust-book.cs.brown.edu/)
   - [Google Comprehensive Rust](https://google.github.io/comprehensive-rust/)
@@ -71,11 +71,11 @@ L7 未来 ──→ AI 集成、形式化方法、语言演进
 
 | 目标 | 起点 | 预计时长 |
 |:---|:---|:---|
-| 🎯 **系统掌握** | [`learning_guide.md`](concept/00_meta/04_navigation/learning_guide.md) → L1 → L2 → L3 | 40-60h |
-| 💼 **面试准备** | [`quick_reference.md`](concept/00_meta/04_navigation/quick_reference.md) + [`self_assessment.md`](concept/00_meta/04_navigation/self_assessment.md) | 8-12h |
+| 🎯 **系统掌握** | [`learning_guide.md`](concept/00_meta/04_navigation/07_learning_guide.md) → L1 → L2 → L3 | 40-60h |
+| 💼 **面试准备** | [`quick_reference.md`](concept/00_meta/04_navigation/11_quick_reference.md) + [`self_assessment.md`](concept/00_meta/04_navigation/12_self_assessment.md) | 8-12h |
 | 🎓 **学术深入** | L4 形式化层 + [`semantic_space.md`](concept/00_meta/00_framework/semantic_space.md) | 20-30h |
-| 🔧 **问题驱动** | [`self_assessment.md`](concept/00_meta/04_navigation/self_assessment.md) 错题 → 对应章节 | 按需 |
-| 🌍 **国际学习者** | [`LEARNING_MVP_PATH.md`](concept/00_meta/04_navigation/learning_mvp_path.md) → 官方文档对照 | 按需 |
+| 🔧 **问题驱动** | [`self_assessment.md`](concept/00_meta/04_navigation/12_self_assessment.md) 错题 → 对应章节 | 按需 |
+| 🌍 **国际学习者** | [`LEARNING_MVP_PATH.md`](concept/00_meta/04_navigation/08_learning_mvp_path.md) → 官方文档对照 | 按需 |
 
 ### 质量审计
 
@@ -114,11 +114,11 @@ cargo test --workspace
 
 | 文件 | 用途 | 规模 |
 |:---|:---|:---|
-| [`learning_guide.md`](concept/00_meta/04_navigation/learning_guide.md) | 4条学习路径 + 每级关键概念 + 前置依赖 | ~657行 |
-| [`quick_reference.md`](concept/00_meta/04_navigation/quick_reference.md) | A-Z概念速查 + ~27个错误码 + 模式决策树 | ~817行 |
-| [`self_assessment.md`](concept/00_meta/04_navigation/self_assessment.md) | **80道自测题**（L1-L6，含折叠答案） | ~2,210行 |
+| [`learning_guide.md`](concept/00_meta/04_navigation/07_learning_guide.md) | 4条学习路径 + 每级关键概念 + 前置依赖 | ~657行 |
+| [`quick_reference.md`](concept/00_meta/04_navigation/11_quick_reference.md) | A-Z概念速查 + ~27个错误码 + 模式决策树 | ~817行 |
+| [`self_assessment.md`](concept/00_meta/04_navigation/12_self_assessment.md) | **80道自测题**（L1-L6，含折叠答案） | ~2,210行 |
 | [`semantic_space.md`](concept/00_meta/00_framework/semantic_space.md) | 表征空间理论 + 等价表达 + 机制组合代数 | ~1,319行 |
-| [`terminology_glossary.md`](concept/00_meta/01_terminology/terminology_glossary.md) | 100个核心术语中英对照 + 定义 | ~584行 |
+| [`terminology_glossary.md`](concept/00_meta/01_terminology/01_terminology_glossary.md) | 100个核心术语中英对照 + 定义 | ~584行 |
 
 ### L1-L3：核心概念
 
@@ -127,39 +127,39 @@ cargo test --workspace
 | L1 | [`01_ownership.md`](concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Move/Copy/Drop、RAII、所有权转移规则 |
 | L1 | [`02_borrowing.md`](concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | 借用规则、分离逻辑、分数权限 |
 | L1 | [`03_lifetimes.md`](concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 生命周期、NLL、Polonius、Elision形式化 |
-| L1 | [`04_type_system.md`](concept/01_foundation/02_type_system/04_type_system.md) | enum/impl Trait/dyn Trait、类型论差异 |
+| L1 | [`04_type_system.md`](concept/01_foundation/02_type_system/01_type_system.md) | enum/impl Trait/dyn Trait、类型论差异 |
 | L2 | [`01_traits.md`](concept/02_intermediate/00_traits/01_traits.md) | Auto trait、GATs、RPITIT、对象安全 |
-| L2 | [`02_generics.md`](concept/02_intermediate/01_generics/02_generics.md) | Const Generics、单态化、HRTB |
-| L2 | [`03_memory_management.md`](concept/02_intermediate/02_memory_management/03_memory_management.md) | Box/Rc/Arc、内部可变性、MaybeUninit |
-| L2 | [`04_error_handling.md`](concept/02_intermediate/03_error_handling/04_error_handling.md) | Result/Option、?运算符、错误传播 |
-| L2 | [`05_assert_matches.md`](concept/02_intermediate/06_macros_and_metaprogramming/05_assert_matches.md) | 模式匹配断言（1.96 stable） |
+| L2 | [`02_generics.md`](concept/02_intermediate/01_generics/01_generics.md) | Const Generics、单态化、HRTB |
+| L2 | [`03_memory_management.md`](concept/02_intermediate/02_memory_management/01_memory_management.md) | Box/Rc/Arc、内部可变性、MaybeUninit |
+| L2 | [`04_error_handling.md`](concept/02_intermediate/03_error_handling/01_error_handling.md) | Result/Option、?运算符、错误传播 |
+| L2 | [`05_assert_matches.md`](concept/02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md) | 模式匹配断言（1.96 stable） |
 | L3 | [`01_concurrency.md`](concept/03_advanced/00_concurrency/01_concurrency.md) | Send/Sync、Atomic内存序、死锁分析 |
-| L3 | [`02_async.md`](concept/03_advanced/01_async/02_async.md) | Future/Pin/Waker、async/await状态机 |
-| L3 | [`03_unsafe.md`](concept/03_advanced/02_unsafe/03_unsafe.md) | FFI、repr属性、Miri、原始指针 |
-| L3 | [`04_macros.md`](concept/03_advanced/03_proc_macros/04_macros.md) | macro_rules!/过程宏、卫生性 |
+| L3 | [`02_async.md`](concept/03_advanced/01_async/01_async.md) | Future/Pin/Waker、async/await状态机 |
+| L3 | [`03_unsafe.md`](concept/03_advanced/02_unsafe/01_unsafe.md) | FFI、repr属性、Miri、原始指针 |
+| L3 | [`04_macros.md`](concept/03_advanced/03_proc_macros/01_macros.md) | macro_rules!/过程宏、卫生性 |
 
 ### L4：形式化
 
 | 文件 | 核心内容 |
 |:---|:---|
 | [`01_linear_logic.md`](concept/04_formal/01_ownership_logic/01_linear_logic.md) | ⊗/⊸/! 对应 Rust 所有权/Copy/借用 |
-| [`02_type_theory.md`](concept/04_formal/00_type_theory/02_type_theory.md) | System F、HM算法、参数性定理 |
-| [`03_ownership_formal.md`](concept/04_formal/01_ownership_logic/03_ownership_formal.md) | Oxide、Tree Borrows、Polonius |
-| [`04_rustbelt.md`](concept/04_formal/02_separation_logic/04_rustbelt.md) | Iris分离逻辑、CSL、验证工具链 |
-| [`22_modern_verification_tools.md`](concept/04_formal/04_model_checking/22_modern_verification_tools.md) | AutoVerus、Kani、ESBMC、Safety Tags |
+| [`02_type_theory.md`](concept/04_formal/00_type_theory/01_type_theory.md) | System F、HM算法、参数性定理 |
+| [`03_ownership_formal.md`](concept/04_formal/01_ownership_logic/02_ownership_formal.md) | Oxide、Tree Borrows、Polonius |
+| [`04_rustbelt.md`](concept/04_formal/02_separation_logic/01_rustbelt.md) | Iris分离逻辑、CSL、验证工具链 |
+| [`22_modern_verification_tools.md`](concept/04_formal/04_model_checking/04_modern_verification_tools.md) | AutoVerus、Kani、ESBMC、Safety Tags |
 
 ### L5-L7：对比、生态、未来
 
 | 层级 | 文件 | 核心内容 |
 |:---|:---|:---|
 | L5 | [`01_rust_vs_cpp.md`](concept/05_comparative/01_systems_languages/01_rust_vs_cpp.md) | RAII语义差异、性能对比 |
-| L5 | [`02_rust_vs_go.md`](concept/05_comparative/01_systems_languages/02_rust_vs_go.md) | 并发模型、错误处理、GC对比 |
-| L5 | [`03_paradigm_matrix.md`](concept/05_comparative/00_paradigms/03_paradigm_matrix.md) | 多语言范式谱系 |
-| L5 | [`04_safety_boundaries.md`](concept/05_comparative/03_domain_comparisons/04_safety_boundaries.md) | unsafe边界、供应链安全 |
+| L5 | [`02_rust_vs_go.md`](concept/05_comparative/01_systems_languages/03_rust_vs_go.md) | 并发模型、错误处理、GC对比 |
+| L5 | [`03_paradigm_matrix.md`](concept/05_comparative/00_paradigms/01_paradigm_matrix.md) | 多语言范式谱系 |
+| L5 | [`04_safety_boundaries.md`](concept/05_comparative/03_domain_comparisons/01_safety_boundaries.md) | unsafe边界、供应链安全 |
 | L6 | [`01_toolchain.md`](concept/06_ecosystem/00_toolchain/01_toolchain.md) | Cargo、Workspace、Features |
-| L6 | [`02_patterns.md`](concept/06_ecosystem/03_design_patterns/02_patterns.md) | 类型状态、Builder、Newtype |
-| L6 | [`03_core_crates.md`](concept/06_ecosystem/02_core_crates/03_core_crates.md) | serde/tokio/rayon等核心crate |
-| L6 | [`04_application_domains.md`](concept/06_ecosystem/06_data_and_distributed/04_application_domains.md) | WASM/嵌入式/CLI/游戏 |
+| L6 | [`02_patterns.md`](concept/06_ecosystem/03_design_patterns/01_patterns.md) | 类型状态、Builder、Newtype |
+| L6 | [`03_core_crates.md`](concept/06_ecosystem/02_core_crates/01_core_crates.md) | serde/tokio/rayon等核心crate |
+| L6 | [`04_application_domains.md`](concept/06_ecosystem/06_data_and_distributed/01_application_domains.md) | WASM/嵌入式/CLI/游戏 |
 | L7 | [`01_ai_integration.md`](concept/07_future/04_research_and_experimental/01_ai_integration.md) | AI辅助编程、RL on编译错误 |
 | L7 | [`02_formal_methods.md`](concept/07_future/04_research_and_experimental/02_formal_methods.md) | Kani/Miri/CI集成 |
 | L7 | [`03_evolution.md`](concept/07_future/04_research_and_experimental/03_evolution.md) | Edition系统、Effects System |

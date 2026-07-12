@@ -17,5 +17,5 @@
 | 生命周期基础 | [concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
 | 生命周期标注 | [concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
 | 生命周期省略规则 | [concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
-| 高级生命周期模式 | [concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md) |
-| HRTB 与自引用 | [concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/30_lifetimes_advanced.md) |
+| 高级生命周期模式 | [concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md) |
+| HRTB 与自引用 | [concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md) |

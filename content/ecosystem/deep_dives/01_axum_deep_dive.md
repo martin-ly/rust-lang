@@ -5,7 +5,7 @@
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5
-> **权威来源**: 通用 Rust 概念（async/await、Trait、并发、生命周期）请见 [`concept/`](../../../concept/)；Rust Web 框架选型与对比请见 [`concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md`](../../../concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md)。
+> **权威来源**: 通用 Rust 概念（async/await、Trait、并发、生命周期）请见 [`concept/`](../../../concept/)；Rust Web 框架选型与对比请见 [`concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md`](../../../concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md)。
 
 ---
 
@@ -46,7 +46,7 @@ Axum 是 Tokio 生态的原生 Web 框架，其设计目标不是重新发明运
 - **Handler 即 async fn**：一个 handler 可以是任何满足签名约束的 async 函数，参数通过 `FromRequest` extractor 自动解析，返回值通过 `IntoResponse` 自动序列化。
 - **零成本抽象与类型安全**：路由、extractor、中间件组合在编译期确定，运行时无动态反射。
 
-> **权威来源**: Tokio / Axum 设计哲学与运行时模型详见 [`02_tokio_deep_dive.md`](./02_tokio_deep_dive.md) 与 [`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md)。
+> **权威来源**: Tokio / Axum 设计哲学与运行时模型详见 [`02_tokio_deep_dive.md`](./02_tokio_deep_dive.md) 与 [`concept/03_advanced/01_async/01_async.md`](../../../concept/03_advanced/01_async/01_async.md)。
 
 ---
 
@@ -369,5 +369,5 @@ let app = Router::new()
 - [Axum 官方文档](https://docs.rs/axum/latest/axum/)
 - [Tower 官方文档](https://docs.rs/tower/latest/tower/)
 - [tokio-rs/axum examples](https://github.com/tokio-rs/axum/tree/main/examples)
-- 框架对比与选型：[`concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md`](../../../concept/06_ecosystem/04_web_and_networking/27_web_frameworks.md)
-- Async/await 与 Future：[`concept/03_advanced/01_async/02_async.md`](../../../concept/03_advanced/01_async/02_async.md)
+- 框架对比与选型：[`concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md`](../../../concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md)
+- Async/await 与 Future：[`concept/03_advanced/01_async/01_async.md`](../../../concept/03_advanced/01_async/01_async.md)

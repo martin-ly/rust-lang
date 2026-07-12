@@ -9,7 +9,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Lifetimes](./03_lifetimes.md)
-> **后置概念**: [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)
+> **后置概念**: [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)
 > **权威来源**: 本页为 `Ownership-Borrowing-Lifetimes` 知识拓扑的权威概念页；crate 文档仅保留导航 stub。
 
 # Rust 所有权-借用-生命周期知识图谱
@@ -126,7 +126,7 @@ graph TB
 | **Copy** | 按位复制 | 零成本 | 简单类型 | 实现 `Copy` |
 | **Borrow** | 临时访问 | 零成本 | 共享/修改 | 所有类型 |
 
-权威页面：[Ownership](./01_ownership.md) · [Move Semantics](./23_move_semantics.md)
+权威页面：[Ownership](./01_ownership.md) · [Move Semantics](05_move_semantics.md)
 
 ### 2.2 借用系统
 
@@ -185,7 +185,7 @@ graph TB
 | `Mutex<T>` | 运行时 | 锁开销 | 高 | 线程安全 |
 | `RwLock<T>` | 运行时 | 锁开销 | 最高 | 线程安全 |
 
-权威页面：[Borrowing](./02_borrowing.md) · [Interior Mutability](../../02_intermediate/02_memory_management/08_interior_mutability.md)
+权威页面：[Borrowing](./02_borrowing.md) · [Interior Mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md)
 
 ### 2.3 生命周期系统
 
@@ -237,7 +237,7 @@ graph TB
 | 规则2 | 只有一个输入生命周期（Lifetimes） | 输出继承该生命周期 | `fn f(x: &i32) -> &i32` |
 | 规则3 | 方法的 `self` 引用 | 输出继承 `self` 生命周期 | `fn f(&self) -> &i32` |
 
-权威页面：[Lifetimes](./03_lifetimes.md) · [Advanced Lifetimes](./30_lifetimes_advanced.md)
+权威页面：[Lifetimes](./03_lifetimes.md) · [Advanced Lifetimes](04_lifetimes_advanced.md)
 
 ---
 
@@ -290,7 +290,7 @@ graph TB
 | `Mutex<T>` | 独占 | ✅ | 锁开销 | 线程间互斥 |
 | `RwLock<T>` | 共享/独占 | ✅ | 锁开销 | 读多写少 |
 
-权威页面：[Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md)
+权威页面：[Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md)
 
 ---
 
@@ -344,10 +344,10 @@ graph TB
 | :--- | :--- |
 | Ownership | [01_ownership.md](./01_ownership.md) |
 | Borrowing | [02_borrowing.md](./02_borrowing.md) |
-| Lifetimes | [03_lifetimes.md](./03_lifetimes.md) · [30_lifetimes_advanced.md](./30_lifetimes_advanced.md) |
-| Move Semantics | [23_move_semantics.md](./23_move_semantics.md) |
-| Smart Pointers | [12_smart_pointers.md](../../02_intermediate/02_memory_management/12_smart_pointers.md) |
-| Interior Mutability | [08_interior_mutability.md](../../02_intermediate/02_memory_management/08_interior_mutability.md) |
+| Lifetimes | [03_lifetimes.md](./03_lifetimes.md) · [04_lifetimes_advanced.md](04_lifetimes_advanced.md) |
+| Move Semantics | [05_move_semantics.md](05_move_semantics.md) |
+| Smart Pointers | [12_smart_pointers.md](../../02_intermediate/02_memory_management/04_smart_pointers.md) |
+| Interior Mutability | [08_interior_mutability.md](../../02_intermediate/02_memory_management/02_interior_mutability.md) |
 | Concurrency | [01_concurrency.md](../../03_advanced/00_concurrency/01_concurrency.md) |
 
 ---
@@ -383,7 +383,7 @@ graph TB
 - ❌ “生命周期标注越多越安全” → 生命周期标注只是显式约束；错误标注仍会导致编译失败或逻辑错误。
 - ❌ “拥有 `Rc<RefCell<T>>` 就等同于 GC” → 循环引用仍会造成内存泄漏，需要 `Weak` 或显式解除。
 
-> **过渡提示**：掌握上述结构后，可进入 [Ownership 权威页](./01_ownership.md) 开始逐项深入学习，或在 [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) 中查看所有权系统的工程扩展。
+> **过渡提示**：掌握上述结构后，可进入 [Ownership 权威页](./01_ownership.md) 开始逐项深入学习，或在 [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md) 中查看所有权系统的工程扩展。
 
 ## 过渡段
 

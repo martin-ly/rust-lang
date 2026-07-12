@@ -2,7 +2,7 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [日志与可观测性](../../../../concept/06_ecosystem/00_toolchain/13_logging_observability.md)
+> - [日志与可观测性](../../../../concept/06_ecosystem/00_toolchain/02_logging_observability.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
@@ -211,7 +211,7 @@ tx.finish();
 - [Tracing 可观测性架构](18_tracing_architecture.md) — 与 sentry-tracing 集成
 - [Tower 中间件抽象架构](02_tower_architecture.md) — sentry-tower 集成
 - [错误处理（Error Handling）深入](../../../../concept/02_intermediate/15_error_handling_deep_dive.md)
-- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
+- [异步编程模型](../../../../concept/03_advanced/01_async/01_async.md)
 
 ---
 

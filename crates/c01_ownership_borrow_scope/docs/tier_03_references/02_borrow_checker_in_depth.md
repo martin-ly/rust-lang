@@ -16,6 +16,6 @@
 | :--- | :--- |
 | 借用检查器概述 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
 | 借用规则 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
-| NLL (Non-Lexical Lifetimes) | [concept/03_advanced/02_unsafe/08_nll_and_polonius.md](../../../../concept/03_advanced/02_unsafe/08_nll_and_polonius.md) |
-| 借用检查算法 | [concept/03_advanced/02_unsafe/08_nll_and_polonius.md](../../../../concept/03_advanced/02_unsafe/08_nll_and_polonius.md) |
+| NLL (Non-Lexical Lifetimes) | [concept/03_advanced/02_unsafe/03_nll_and_polonius.md](../../../../concept/03_advanced/02_unsafe/03_nll_and_polonius.md) |
+| 借用检查算法 | [concept/03_advanced/02_unsafe/03_nll_and_polonius.md](../../../../concept/03_advanced/02_unsafe/03_nll_and_polonius.md) |
 | 常见借用错误 | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |

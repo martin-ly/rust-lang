@@ -1,7 +1,7 @@
 > **EN**: Future and Executor Mechanisms Guide
 > **Summary**: Stub pointing to the canonical Future and executor authority page. Practical examples remain in the c06_async crate.
 >
-> **权威来源**: [concept/03_advanced/01_async/39_future_and_executor_mechanisms.md](../../../../concept/03_advanced/01_async/39_future_and_executor_mechanisms.md)
+> **权威来源**: [concept/03_advanced/01_async/04_future_and_executor_mechanisms.md](../../../../concept/03_advanced/01_async/04_future_and_executor_mechanisms.md)
 
 ## 主题速览
 

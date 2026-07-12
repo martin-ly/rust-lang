@@ -708,15 +708,15 @@ graph TD
 
 - [L0 语义表达力光谱](semantic_expressiveness.md) —— 横向七维光谱（D1-D7）
 - [L0 可判定性谱系](decidability_spectrum.md) —— 可判定性-表达力权衡
-- [L1 类型系统](../../01_foundation/02_type_system/04_type_system.md) —— 类型推断与一致性
+- [L1 类型系统](../../01_foundation/02_type_system/01_type_system.md) —— 类型推断与一致性
 - [L2 Trait 系统](../../02_intermediate/00_traits/01_traits.md) —— GATs 与抽象机制
-- [L3 异步编程](../../03_advanced/01_async/02_async.md) —— Future 状态机与执行模型
+- [L3 异步编程](../../03_advanced/01_async/01_async.md) —— Future 状态机与执行模型
 - [L4 线性逻辑](../../04_formal/01_ownership_logic/01_linear_logic.md) —— 所有权的形式化根基
-- [L4 类型论](../../04_formal/00_type_theory/02_type_theory.md) —— System F / HM / 子类型
-- [L5 Rust vs Go](../../05_comparative/01_systems_languages/02_rust_vs_go.md) —— 并发模型对比
-- [L5 范式矩阵](../../05_comparative/00_paradigms/03_paradigm_matrix.md) —— 多语言表达力矩阵
-- [L6 设计模式](../../06_ecosystem/03_design_patterns/02_patterns.md) —— 惯用法与架构模式
-- [L7 Effects 系统](../../07_future/03_preview_features/04_effects_system.md) —— 表达力前沿方向
+- [L4 类型论](../../04_formal/00_type_theory/01_type_theory.md) —— System F / HM / 子类型
+- [L5 Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) —— 并发模型对比
+- [L5 范式矩阵](../../05_comparative/00_paradigms/01_paradigm_matrix.md) —— 多语言表达力矩阵
+- [L6 设计模式](../../06_ecosystem/03_design_patterns/01_patterns.md) —— 惯用法与架构模式
+- [L7 Effects 系统](../../07_future/03_preview_features/01_effects_system.md) —— 表达力前沿方向
 
 ---
 

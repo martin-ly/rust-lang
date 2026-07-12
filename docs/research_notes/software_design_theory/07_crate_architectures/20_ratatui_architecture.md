@@ -2,7 +2,7 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [CLI 开发](../../../../concept/06_ecosystem/05_systems_and_embedded/25_cli_development.md)
+> - [CLI 开发](../../../../concept/06_ecosystem/05_systems_and_embedded/04_cli_development.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 
@@ -527,8 +527,8 @@ loop {
 - [Tokio 异步运行时架构](06_tokio_architecture.md)
 - [Clap CLI 解析架构](04_clap_architecture.md)
 - [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
-- [异步编程模型](../../../../concept/03_advanced/01_async/02_async.md)
-- [事件驱动与系统可组合性](../../../../concept/06_ecosystem/03_design_patterns/30_system_composability.md)
+- [异步编程模型](../../../../concept/03_advanced/01_async/01_async.md)
+- [事件驱动与系统可组合性](../../../../concept/06_ecosystem/03_design_patterns/04_system_composability.md)
 
 ---
 
@@ -546,7 +546,7 @@ loop {
 >
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 ---
 

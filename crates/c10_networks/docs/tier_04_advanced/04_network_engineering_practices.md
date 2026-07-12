@@ -19,5 +19,5 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | 网络工程实践 | [`concept/06_ecosystem/12_networking/04_network_programming_quick_start.md`](../../../../concept/06_ecosystem/12_networking/04_network_programming_quick_start.md) |
-| 分布式系统 | [`concept/06_ecosystem/04_web_and_networking/18_distributed_systems.md`](../../../../concept/06_ecosystem/04_web_and_networking/18_distributed_systems.md) |
-| 高性能网络服务架构 | [`concept/06_ecosystem/04_web_and_networking/39_high_performance_network_service_architecture.md`](../../../../concept/06_ecosystem/04_web_and_networking/39_high_performance_network_service_architecture.md) |
+| 分布式系统 | [`concept/06_ecosystem/04_web_and_networking/01_distributed_systems.md`](../../../../concept/06_ecosystem/04_web_and_networking/01_distributed_systems.md) |
+| 高性能网络服务架构 | [`concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md`](../../../../concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md) |

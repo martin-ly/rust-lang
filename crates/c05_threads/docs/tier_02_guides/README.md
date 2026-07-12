@@ -14,7 +14,7 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | 并发模型 | [concept/03_advanced/00_concurrency/01_concurrency.md](../../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
-| 并发模式 | [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md) |
+| 并发模式 | [concept/03_advanced/00_concurrency/03_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md) |
 | 线程基础与生命周期 | [concept/03_advanced/00_concurrency/01_concurrency.md](../../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
-| 消息传递模式 | [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md) |
-| 同步原语 | [concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md](../../../../concept/03_advanced/00_concurrency/11_atomics_and_memory_ordering.md) |
+| 消息传递模式 | [concept/03_advanced/00_concurrency/03_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md) |
+| 同步原语 | [concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md](../../../../concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) |

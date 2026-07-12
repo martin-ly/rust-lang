@@ -11,7 +11,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
-> **关联文件**: [学习指南 `learning_guide.md`](../04_navigation/learning_guide.md) · [双维认知矩阵 `cognitive_dimension_matrix.md`](cognitive_dimension_matrix.md)
+> **关联文件**: [学习指南 `learning_guide.md`](../04_navigation/07_learning_guide.md) · [双维认知矩阵 `cognitive_dimension_matrix.md`](cognitive_dimension_matrix.md)
 ---
 
 > **来源**: [ACM — *Competency Graph for Programming Education*]
@@ -277,7 +277,7 @@ graph LR
 | **C1 语法** | 频繁查文档；写不出泛型约束 | `rustlings` 全通关 + 标准库源码阅读 | 独立完成 100 行无编译错误的程序 |
 | **C2 概念** | 面对编译错误无从下手；不理解为什么 | 反例分析（`concept_definition_decision_forest.md`）+ 向他人解释 | 能预测给定代码是否通过编译 |
 | **C3 设计** | API 设计混乱；过度/不足抽象 | 设计模式实践（`06_ecosystem/02_patterns.md`）+ 代码评审 | 设计的 API 被他人无文档使用 |
-| **C4 调试** | 修复一个 bug 需要多次尝试 | Miri 专题练习 + `concept/03_advanced/02_unsafe/03_unsafe.md` 反例 | 能用 Miri 定位一个隐藏 UB |
+| **C4 调试** | 修复一个 bug 需要多次尝试 | Miri 专题练习 + `concept/03_advanced/02_unsafe/01_unsafe.md` 反例 | 能用 Miri 定位一个隐藏 UB |
 | **C5 形式化** | 对 unsafe 安全性只有直觉 | RustBelt 论文精读 + Kani 验证实验 | 为一个 unsafe 函数写出 SAFETY 规约 |
 | **C6 工程** | 无测试 / 无 CI / 随意依赖 | 开源项目贡献 + `cargo audit` / `cargo geiger` | 项目通过 `cargo audit` 无高危警告 |
 
@@ -352,11 +352,11 @@ graph LR
 
 **变更日志**:
 
-- v1.0 (2026-05-23): 初始版本 — 六维能力模型 + Dreyfus 映射 + 自评量表 + 薄弱点训练路径 + 背景定制路径 [权威来源对齐 Wave 5](../02_sources/international_authority_index.md)
+- v1.0 (2026-05-23): 初始版本 — 六维能力模型 + Dreyfus 映射 + 自评量表 + 薄弱点训练路径 + 背景定制路径 [权威来源对齐 Wave 5](../02_sources/05_international_authority_index.md)
 
 ---
 
-> **相关文件**: [A/S/P 标记规范](../03_audit/asp_marking_guide.md) · [双维认知矩阵](cognitive_dimension_matrix.md) · [问题图谱](../04_navigation/problem_graph.md) · [学习指南](../04_navigation/learning_guide.md)
+> **相关文件**: [A/S/P 标记规范](../03_audit/02_asp_marking_guide.md) · [双维认知矩阵](cognitive_dimension_matrix.md) · [问题图谱](../04_navigation/10_problem_graph.md) · [学习指南](../04_navigation/07_learning_guide.md)
 
 ## 认知路径
 

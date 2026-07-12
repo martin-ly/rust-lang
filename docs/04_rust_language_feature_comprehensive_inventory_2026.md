@@ -1488,7 +1488,7 @@ async fn migrated() {
 | Future / async/await | Rust Book Ch.17, RFC 2394 | ✅ 已引用 |
 | Tokio | tokio.rs docs | ✅ 已引用 |
 | AFIT | RFC 3185, 1.75 | ⚠️ 部分覆盖 |
-| Async Closures | RFC 3668, **1.85.0 stable** | ✅ 已覆盖 (c06_async / concept/03_advanced/01_async/24_async_closures.md) |
+| Async Closures | RFC 3668, **1.85.0 stable** | ✅ 已覆盖 (c06_async / concept/03_advanced/01_async/07_async_closures.md) |
 | AsyncFn traits | **1.85.0 stable**, 2024 prelude | ✅ 已覆盖 (c06_async) |
 | AFIDT | rust-lang/rust#133882 | 🔴 **未覆盖** |
 | RTN | RFC 3654 | 🔴 **未覆盖** |
@@ -2622,7 +2622,7 @@ graph TD
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

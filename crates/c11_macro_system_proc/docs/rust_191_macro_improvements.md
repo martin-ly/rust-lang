@@ -19,5 +19,5 @@
 | 主题 | 权威来源 |
 | :--- | :--- |
 | Rust 1.91 稳定特性 | [`concept/07_future/00_version_tracking/rust_1_91_stabilized.md`](../../../concept/07_future/00_version_tracking/rust_1_91_stabilized.md) |
-| 过程宏 | [`concept/03_advanced/03_proc_macros/07_proc_macro.md`](../../../concept/03_advanced/03_proc_macros/07_proc_macro.md) |
-| 宏模式 | [`concept/02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md`](../../../concept/02_intermediate/06_macros_and_metaprogramming/17_macro_patterns.md) |
+| 过程宏 | [`concept/03_advanced/03_proc_macros/02_proc_macro.md`](../../../concept/03_advanced/03_proc_macros/02_proc_macro.md) |
+| 宏模式 | [`concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md`](../../../concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md) |

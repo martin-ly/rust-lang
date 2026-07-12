@@ -3,7 +3,7 @@
 > **EN**: Cutting-Edge Algorithm Technologies
 > **Summary**: Advanced algorithm technologies in Rust: machine learning, quantum computing, streaming, and privacy-preserving algorithms.
 
-> **权威来源**: [concept/06_ecosystem/11_domain_applications/79_cutting_edge_algorithms.md](../06_ecosystem/11_domain_applications/79_cutting_edge_algorithms.md)
+> **权威来源**: [concept/06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md](../06_ecosystem/11_domain_applications/79_cutting_edge_algorithms.md)
 
 本文件为 crate 文档重定向 stub。原内容中的通用 Rust 概念已迁移至上述权威来源页面；以下仅保留主题索引。
 

@@ -4,10 +4,10 @@
 # Rust 1.92.0 WASM 迁移指南（c12_wasm 示例索引）
 
 > **权威来源**: Rust WebAssembly 工具链升级、依赖迁移、性能验证等完整解释见
-> [`concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md`](../../../concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md)。
+> [`concept/06_ecosystem/11_domain_applications/17_webassembly_advanced.md`](../../../concept/06_ecosystem/11_domain_applications/17_webassembly_advanced.md)。
 
 本文件原为 `c12_wasm` crate 的通用 WASM 迁移指南。根据 AGENTS.md §6.4 治理规则，
-通用 Rust 概念解释已迁移至 `concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md`，
+通用 Rust 概念解释已迁移至 `concept/06_ecosystem/11_domain_applications/17_webassembly_advanced.md`，
 此处仅保留索引与 canonical 链接。
 
 ## 本 crate 相关示例
@@ -19,7 +19,7 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| WASM 工具链与依赖迁移 | [`concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md`](../../../concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md) |
+| WASM 工具链与依赖迁移 | [`concept/06_ecosystem/11_domain_applications/17_webassembly_advanced.md`](../../../concept/06_ecosystem/11_domain_applications/17_webassembly_advanced.md) |
 | Rust 版本特性跟踪 | [`concept/07_future/00_version_tracking/rust_1_92_stabilized.md`](../../../concept/07_future/00_version_tracking/rust_1_92_stabilized.md) |
-| WebAssembly 核心概念 | [`concept/06_ecosystem/11_domain_applications/11_webassembly.md`](../../../concept/06_ecosystem/11_domain_applications/11_webassembly.md) |
+| WebAssembly 核心概念 | [`concept/06_ecosystem/11_domain_applications/03_webassembly.md`](../../../concept/06_ecosystem/11_domain_applications/03_webassembly.md) |
 | 速查练习 | [`concept/SUMMARY.md`](../../../concept/SUMMARY.md) |

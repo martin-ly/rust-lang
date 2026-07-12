@@ -84,7 +84,7 @@ fn process(node: &pin mut ListNode) {
 }
 ```
 
-**深度文档**: [15_pin_ergonomics_preview.md](../03_preview_features/15_pin_ergonomics_preview.md)
+**深度文档**: [15_pin_ergonomics_preview.md](../03_preview_features/14_pin_ergonomics_preview.md)
 
 **教学提示**: 这是 async/self-referential 类型的基础；稳定后将大幅简化 futures 和 pin-project 类 crate 的教学。
 
@@ -189,7 +189,7 @@ where
 }
 ```
 
-**深度文档**: [12_return_type_notation_preview.md](../03_preview_features/12_return_type_notation_preview.md)
+**深度文档**: [12_return_type_notation_preview.md](../03_preview_features/09_return_type_notation_preview.md)
 
 **1.98+ 展望**: RTN 可能在 1.98 或 1.99 进入 FCP，是 async-fn-in-traits 完全替代 `#[async_trait]` 的关键拼图。
 
@@ -222,7 +222,7 @@ impl AsyncDrop for AsyncFile {
 }
 ```
 
-**深度文档**: [18_async_drop_preview.md](../03_preview_features/18_async_drop_preview.md)
+**深度文档**: [18_async_drop_preview.md](../03_preview_features/22_async_drop_preview.md)
 
 ---
 
@@ -500,7 +500,7 @@ serde = { version = "1.0", public = true }
 - `#[safety::checked(...)]` 标注调用处已检查的条件
 - Clippy / rust-analyzer 未来可提供 IDE 支持
 
-**深度文档**: [08_safety_tags_preview.md](../03_preview_features/08_safety_tags_preview.md)（原 `33_safety_tags_in_formal.md` 已合并重定向）
+**深度文档**: [08_safety_tags_preview.md](../03_preview_features/03_safety_tags_preview.md)（原 `33_safety_tags_in_formal.md` 已合并重定向）
 
 ---
 
@@ -515,7 +515,7 @@ serde = { version = "1.0", public = true }
 - 基于 LLVM 的 sanitizer，在运行时（Runtime）检测 Tree Borrows 违规
 - 支持 C/C++/Rust 混合代码
 
-**深度文档**: [34_borrow_sanitizer_in_formal.md](../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md)
+**深度文档**: [34_borrow_sanitizer_in_formal.md](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md)
 
 ---
 
@@ -574,13 +574,13 @@ serde = { version = "1.0", public = true }
 ### 7.3 关联文档
 
 - [Rust 1.97 前沿特性预览](rust_1_97_preview.md)
-- [Pin Ergonomics 预览](../03_preview_features/15_pin_ergonomics_preview.md)
-- [Return Type Notation 预览](../03_preview_features/12_return_type_notation_preview.md)
-- [Async Drop 预览](../03_preview_features/18_async_drop_preview.md)
-- [Safety Tags](../03_preview_features/08_safety_tags_preview.md)
-- [BorrowSanitizer](../../04_formal/02_separation_logic/34_borrow_sanitizer_in_formal.md)
-- [AutoVerus / Verus](../../04_formal/04_model_checking/24_autoverus.md)
-- [Tree Borrows 深度](../../04_formal/01_ownership_logic/36_tree_borrows_deep_dive.md)
+- [Pin Ergonomics 预览](../03_preview_features/14_pin_ergonomics_preview.md)
+- [Return Type Notation 预览](../03_preview_features/09_return_type_notation_preview.md)
+- [Async Drop 预览](../03_preview_features/22_async_drop_preview.md)
+- [Safety Tags](../03_preview_features/03_safety_tags_preview.md)
+- [BorrowSanitizer](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md)
+- [AutoVerus / Verus](../../04_formal/04_model_checking/07_autoverus.md)
+- [Tree Borrows 深度](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md)
 - [1.97/1.98 API 等效实现与测试](../../../crates/c08_algorithms/src/rust_197_features.rs)
 
 ---
@@ -590,4 +590,4 @@ serde = { version = "1.0", public = true }
 - [x] 为本文件中的每个特性补充最小 nightly 示例（使用 `rust,ignore`，待 API 稳定后转为可编译示例）
 - [x] 在 `crates/c08_algorithms/src/rust_197_features.rs` 中维护 1.97/1.98 API 的等效实现与单元测试
 - [x] 补充 1.98 已确认标准库 API 预览（`float_algebraic`、`int_format_into`、`core::range`、`NonZero::from_str_radix`、`Box::as_ptr`、`hex_literal_case`）
-- **演进方向（待办）**: 待 1.98 特性稳定后，将本文件关键术语同步到术语表（`concept/00_meta/01_terminology/terminology_glossary.md`）
+- **演进方向（待办）**: 待 1.98 特性稳定后，将本文件关键术语同步到术语表（`concept/00_meta/01_terminology/01_terminology_glossary.md`）

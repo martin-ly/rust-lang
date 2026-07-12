@@ -69,6 +69,6 @@ warning: trait `Flags` from private dependency 'bitflags' in public interface
 
 ## 延伸阅读
 
-- 权威概念页: [`concept/06_ecosystem/01_cargo/10_public_private_deps.md`](../../concept/06_ecosystem/01_cargo/10_public_private_deps.md)
+- 权威概念页: [`concept/06_ecosystem/01_cargo/02_public_private_deps.md`](../../concept/06_ecosystem/01_cargo/02_public_private_deps.md)
 - Cargo Book — [Dependency Resolution](https://doc.rust-lang.org/cargo/reference/resolver.html)
 - RFC 3516 — [Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516)

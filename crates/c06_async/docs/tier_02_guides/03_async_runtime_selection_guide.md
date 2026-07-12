@@ -1,7 +1,7 @@
 > **EN**: Async Runtime Selection Guide
 > **Summary**: Guide to selecting Rust async runtimes, comparing Tokio, async-std (archived), and smol, with decision trees and best practices. This crate document now redirects to the canonical concept page.
 
-> **权威来源**: [concept/03_advanced/01_async/02_async.md](../../../../concept/03_advanced/01_async/02_async.md)
+> **权威来源**: [concept/03_advanced/01_async/01_async.md](../../../../concept/03_advanced/01_async/01_async.md)
 
 ## 主题速览
 

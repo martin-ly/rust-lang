@@ -1,7 +1,7 @@
 > **EN**: Tier 4 Advanced Async Topics Index
 > **Summary**: Tier 4 index for advanced async topics in the c06_async crate. General concept explanations are maintained in the canonical async advanced concept page.
 >
-> **权威来源**: [concept/03_advanced/01_async/25_async_advanced.md](../../../../concept/03_advanced/01_async/25_async_advanced.md)
+> **权威来源**: [concept/03_advanced/01_async/02_async_advanced.md](../../../../concept/03_advanced/01_async/02_async_advanced.md)
 
 ## 主题速览
 

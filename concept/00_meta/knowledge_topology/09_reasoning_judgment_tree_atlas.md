@@ -161,11 +161,11 @@ flowchart TD
 | 修复策略 | 适用症状 | 权威概念页 |
 |:---|:---|:---|
 | 缩小借用范围 | 借用冲突、生命周期 | [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md), [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
-| 使用内部可变性 | 需要可变但只能拿到共享引用 | [Interior Mutability](../../02_intermediate/02_memory_management/08_interior_mutability.md) |
-| 使用智能指针 | 共享所有权、堆分配、自引用 | [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md), [Pin and Unpin](../../03_advanced/01_async/06_pin_unpin.md) |
-| 统一错误类型 | Result 链报错 | [Error Handling Deep Dive](../../02_intermediate/03_error_handling/16_error_handling_deep_dive.md) |
-| 使用并发原语 | 跨线程数据竞争/死锁 | [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md), [Concurrency Patterns](../../03_advanced/00_concurrency/10_concurrency_patterns.md) |
-| 形式化验证 | unsafe soundness 怀疑 | [Miri](../../04_formal/04_model_checking/31_miri.md), [Kani](../../04_formal/04_model_checking/32_kani.md), [RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) |
+| 使用内部可变性 | 需要可变但只能拿到共享引用 | [Interior Mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) |
+| 使用智能指针 | 共享所有权、堆分配、自引用 | [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md), [Pin and Unpin](../../03_advanced/01_async/08_pin_unpin.md) |
+| 统一错误类型 | Result 链报错 | [Error Handling Deep Dive](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md) |
+| 使用并发原语 | 跨线程数据竞争/死锁 | [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md), [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) |
+| 形式化验证 | unsafe soundness 怀疑 | [Miri](../../04_formal/04_model_checking/08_miri.md), [Kani](../../04_formal/04_model_checking/09_kani.md), [RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md) |
 
 ---
 
@@ -174,7 +174,7 @@ flowchart TD
 1. 从报错信息或现象定位症状类别。
 2. 按顺序回答每个判定问题，避免同时修改多处代码。
 3. 到达叶子节点后，先阅读推荐的权威概念页，再实施修复。
-4. 若问题仍未解决，使用 [Miri](../../04_formal/04_model_checking/31_miri.md) 或 [Kani](../../04_formal/04_model_checking/32_kani.md) 进一步验证。
+4. 若问题仍未解决，使用 [Miri](../../04_formal/04_model_checking/08_miri.md) 或 [Kani](../../04_formal/04_model_checking/09_kani.md) 进一步验证。
 
 ## 六、与相关元页的关系
 
@@ -205,11 +205,11 @@ flowchart TD
 
 | 验证节点 | 对应判定树 | 精确命令 | 验证概念页 |
 |:---:|:---|:---|:---|
-| `V1` | §3.1 借用冲突（`J-BORROW-01`） | `cargo check` → `cargo clippy --all-targets -- -D warnings` | [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) |
-| `V2` | §3.2 生命周期（`J-LIFE-02`） | `cargo check` → `cargo clippy --all-targets -- -D warnings` | [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) |
-| `V3` | §3.3 类型不匹配（`J-TYPE-03`） | `cargo check` → `cargo clippy --all-targets -- -D warnings` | [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/65_cargo_profiles_and_lints.md) |
-| `V4` | §3.4 运行时 panic（`J-PANIC-04`） | `cargo test --all-targets` → `cargo clippy --all-targets -- -W clippy::unwrap_used -W clippy::indexing_slicing -W clippy::await_holding_lock`；可疑 UB 走 `cargo miri test --all-targets`（需每日构建版工具链） | [Testing Strategies](../../06_ecosystem/09_testing_and_quality/12_testing_strategies.md) · [Miri](../../04_formal/04_model_checking/31_miri.md) |
-| `V5` | §3.5 unsafe（`J-UNSAFE-05`） | `cargo miri test --all-targets`（需每日构建版工具链） → `cargo kani` | [Miri](../../04_formal/04_model_checking/31_miri.md) · [Kani](../../04_formal/04_model_checking/32_kani.md) |
+| `V1` | §3.1 借用冲突（`J-BORROW-01`） | `cargo check` → `cargo clippy --all-targets -- -D warnings` | [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) |
+| `V2` | §3.2 生命周期（`J-LIFE-02`） | `cargo check` → `cargo clippy --all-targets -- -D warnings` | [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) |
+| `V3` | §3.3 类型不匹配（`J-TYPE-03`） | `cargo check` → `cargo clippy --all-targets -- -D warnings` | [Cargo Profiles and Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) |
+| `V4` | §3.4 运行时 panic（`J-PANIC-04`） | `cargo test --all-targets` → `cargo clippy --all-targets -- -W clippy::unwrap_used -W clippy::indexing_slicing -W clippy::await_holding_lock`；可疑 UB 走 `cargo miri test --all-targets`（需每日构建版工具链） | [Testing Strategies](../../06_ecosystem/09_testing_and_quality/01_testing_strategies.md) · [Miri](../../04_formal/04_model_checking/08_miri.md) |
+| `V5` | §3.5 unsafe（`J-UNSAFE-05`） | `cargo miri test --all-targets`（需每日构建版工具链） → `cargo kani` | [Miri](../../04_formal/04_model_checking/08_miri.md) · [Kani](../../04_formal/04_model_checking/09_kani.md) |
 
 > 说明：上表 clippy lint（`unwrap_used`/`indexing_slicing`/`await_holding_lock`）为真实 lint 名，但可用性随 toolchain 版本可能调整（⚠需复核）；不确定时退回通用 `cargo clippy --all-targets -- -D warnings`。
 

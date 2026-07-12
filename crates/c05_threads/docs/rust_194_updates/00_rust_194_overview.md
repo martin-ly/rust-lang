@@ -15,4 +15,4 @@
 | :--- | :--- |
 | Rust 1.94 稳定化特性 | [concept/07_future/00_version_tracking/rust_1_94_stabilized.md](../../../../concept/07_future/00_version_tracking/rust_1_94_stabilized.md) |
 | 并发模型 | [concept/03_advanced/00_concurrency/01_concurrency.md](../../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
-| 并发模式 | [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md) |
+| 并发模式 | [concept/03_advanced/00_concurrency/03_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md) |

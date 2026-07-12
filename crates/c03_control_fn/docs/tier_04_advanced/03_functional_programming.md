@@ -4,7 +4,7 @@
 # 4.3 函数式编程
 
 > **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
-> [`concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md`](../../../../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md)。
+> [`concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md`](../../../../concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)。
 
 本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../../AGENTS.md) §6.4 治理规则，
 通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
@@ -14,5 +14,5 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| Iterator Patterns | [concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md](../../../../concept/02_intermediate/07_iterators_and_closures/15_iterator_patterns.md) |
-| Category Theory | [concept/04_formal/00_type_theory/10_category_theory.md](../../../../concept/04_formal/00_type_theory/10_category_theory.md) |
+| Iterator Patterns | [concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md](../../../../concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |
+| Category Theory | [concept/04_formal/00_type_theory/04_category_theory.md](../../../../concept/04_formal/00_type_theory/04_category_theory.md) |

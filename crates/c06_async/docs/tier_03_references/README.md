@@ -1,7 +1,7 @@
 > **EN**: Tier 3 Async References Index
 > **Summary**: Tier 3 index for async reference materials in the c06_async crate. General concept explanations are maintained in the canonical concept authority page.
 >
-> **权威来源**: [concept/03_advanced/01_async/02_async.md](../../../../concept/03_advanced/01_async/02_async.md)
+> **权威来源**: [concept/03_advanced/01_async/01_async.md](../../../../concept/03_advanced/01_async/01_async.md)
 
 ## 主题速览
 

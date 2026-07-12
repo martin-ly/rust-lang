@@ -3,7 +3,7 @@
 > **EN**: Rust Type System Interoperability Reference (Redirect)
 > **Summary**: Redirect to the canonical Rust FFI concept page.
 >
-> **权威来源**: [concept/03_advanced/04_ffi/05_rust_ffi.md](concept/03_advanced/04_ffi/05_rust_ffi.md)
+> **权威来源**: [concept/03_advanced/04_ffi/01_rust_ffi.md](concept/03_advanced/04_ffi/01_rust_ffi.md)
 
 ## 主题速览
 

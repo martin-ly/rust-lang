@@ -1,7 +1,7 @@
 > **EN**: Async Performance Benchmarks Reference Stub
 > **Summary**: Stub for async performance benchmarks previously maintained in this crate. Performance authority content is in the performance optimization concept page.
 >
-> **权威来源**: [concept/06_ecosystem/10_performance/15_performance_optimization.md](../../../../concept/06_ecosystem/10_performance/15_performance_optimization.md)
+> **权威来源**: [concept/06_ecosystem/10_performance/01_performance_optimization.md](../../../../concept/06_ecosystem/10_performance/01_performance_optimization.md)
 
 ## 主题速览
 

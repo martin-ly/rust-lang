@@ -1,7 +1,7 @@
 > **EN**: Integration Tests — Glossary
 > **Summary**: Stub glossary for integration test docs; points to the canonical terminology glossary.
 >
-> **权威来源**: [concept/00_meta/01_terminology/terminology_glossary.md](../../../concept/00_meta/01_terminology/terminology_glossary.md)
+> **权威来源**: [concept/00_meta/01_terminology/01_terminology_glossary.md](../../../concept/00_meta/01_terminology/01_terminology_glossary.md)
 
 # Integration Tests — Glossary
 

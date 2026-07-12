@@ -7,7 +7,7 @@
 >
 > **受众**: [进阶]
 > **内容分级**: [专家级]
-> **权威来源**: [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md)
+> **权威来源**: [concept/03_advanced/00_concurrency/03_concurrency_patterns.md](../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md)
 
 **模块（Module）**: C05 Threads
 **创建日期**: 2025-12-11
@@ -17,7 +17,7 @@
 
 ---
 
-> **权威来源**: [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md)
+> **权威来源**: [concept/03_advanced/00_concurrency/03_concurrency_patterns.md](../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md)
 > 本指南保留并发使用示例与模式决策，完整概念解释请参阅 `concept/` 权威页。
 
 ## 📑 目录 {#目录}
@@ -1618,7 +1618,7 @@ fn parallel_dynamic_windows(data: &[f64], size: usize) -> Vec<f64> {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

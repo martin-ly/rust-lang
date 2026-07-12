@@ -476,14 +476,14 @@ graph TD
 >
 >
 
-- [概念一致性检查清单](../03_audit/audit_checklist.md) — 质量门禁与审计标准
+- [概念一致性检查清单](../03_audit/03_audit_checklist.md) — 质量门禁与审计标准
 - [语义表达力全景梳理](semantic_expressiveness.md) — 横向语义维度框架
-- [跨层知识图谱](../04_navigation/inter_layer_map.md) — 层级依赖与反馈机制
+- [跨层知识图谱](../04_navigation/04_inter_layer_map.md) — 层级依赖与反馈机制
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **最后更新: 2026-05-21

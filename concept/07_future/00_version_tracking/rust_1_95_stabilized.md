@@ -20,17 +20,17 @@
 
 > **前置概念**:
 >
-> [Rust 版本跟踪](05_rust_version_tracking.md) ·
-> [Control Flow](../../01_foundation/04_control_flow/07_control_flow.md) ·
-> [Atomic](../../03_advanced/00_concurrency/11_atomics_and_memory_ordering.md) ·
-> [Unsafe](../../03_advanced/02_unsafe/03_unsafe.md)
+> [Rust 版本跟踪](01_rust_version_tracking.md) ·
+> [Control Flow](../../01_foundation/04_control_flow/01_control_flow.md) ·
+> [Atomic](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) ·
+> [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md)
 >
 > **后置概念**:
 >
 > [Rust 1.96 稳定特性](rust_1_96_stabilized.md) ·
 > [Rust 1.97.0 前沿特性预览（Beta）](rust_1_97_preview.md) ·
 > [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) ·
-> [Security Practices](../../06_ecosystem/07_security_and_cryptography/19_security_practices.md)
+> [Security Practices](../../06_ecosystem/07_security_and_cryptography/01_security_practices.md)
 >
 
 ---

@@ -16,7 +16,7 @@
 | :--- | :--- |
 | 所有权三大规则 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
 | 结构体与枚举中的所有权 | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
-| 泛型与所有权 | [concept/02_intermediate/01_generics/02_generics.md](../../../../concept/02_intermediate/01_generics/02_generics.md) |
-| 智能指针与所有权 | [concept/02_intermediate/02_memory_management/12_smart_pointers.md](../../../../concept/02_intermediate/02_memory_management/12_smart_pointers.md) |
-| 集合类型的所有权 | [concept/01_foundation/05_collections/08_collections.md](../../../../concept/01_foundation/05_collections/08_collections.md) |
-| 函数签名与所有权 | [concept/01_foundation/07_modules_and_items/12_functions.md](../../../../concept/01_foundation/07_modules_and_items/12_functions.md) |
+| 泛型与所有权 | [concept/02_intermediate/01_generics/01_generics.md](../../../../concept/02_intermediate/01_generics/01_generics.md) |
+| 智能指针与所有权 | [concept/02_intermediate/02_memory_management/04_smart_pointers.md](../../../../concept/02_intermediate/02_memory_management/04_smart_pointers.md) |
+| 集合类型的所有权 | [concept/01_foundation/05_collections/01_collections.md](../../../../concept/01_foundation/05_collections/01_collections.md) |
+| 函数签名与所有权 | [concept/01_foundation/07_modules_and_items/02_functions.md](../../../../concept/01_foundation/07_modules_and_items/02_functions.md) |

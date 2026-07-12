@@ -1,4 +1,4 @@
-> **权威来源**: [concept/06_ecosystem/11_domain_applications/76_algorithm_engineering_practice.md](../../../../concept/06_ecosystem/11_domain_applications/76_algorithm_engineering_practice.md)
+> **权威来源**: [concept/06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md](../../../../concept/06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md)
 
 # 算法工程实践 (Algorithm Engineering Practice)
 

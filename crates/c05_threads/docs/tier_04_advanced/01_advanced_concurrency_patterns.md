@@ -1,7 +1,7 @@
 > **EN**: Advanced Concurrency Patterns
 > **Summary**: Advanced concurrency patterns in Rust, including work stealing, Actor model, fork-join, Map-Reduce, pipeline parallelism, and reactive programming. This crate document now redirects to the canonical concept page.
 
-> **权威来源**: [concept/03_advanced/00_concurrency/10_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/10_concurrency_patterns.md)
+> **权威来源**: [concept/03_advanced/00_concurrency/03_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md)
 
 ## 主题速览
 

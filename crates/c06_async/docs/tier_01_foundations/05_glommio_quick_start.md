@@ -1,7 +1,7 @@
 > **EN**: Glommio Quick Start
 > **Summary**: Crate-level quick-start guide for the Glommio thread-per-core async runtime. Authoritative ecosystem coverage is in the Glommio concept authority page.
 >
-> **权威来源**: [concept/06_ecosystem/04_web_and_networking/42_glommio_and_thread_per_core.md](../../../../concept/06_ecosystem/04_web_and_networking/42_glommio_and_thread_per_core.md)
+> **权威来源**: [concept/06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md](../../../../concept/06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md)
 
 # Tier 1: Glommio 快速开始
 
@@ -11,7 +11,7 @@
 
 | 主题 | 权威来源 |
 |------|----------|
-| Glommio 与 Thread-per-Core | [concept/06_ecosystem/04_web_and_networking/42_glommio_and_thread_per_core.md](../../../../concept/06_ecosystem/04_web_and_networking/42_glommio_and_thread_per_core.md) |
-| Async/Await 基础 | [concept/03_advanced/01_async/02_async.md](../../../../concept/03_advanced/01_async/02_async.md) |
-| Future / Executor 机制 | [concept/03_advanced/01_async/39_future_and_executor_mechanisms.md](../../../../concept/03_advanced/01_async/39_future_and_executor_mechanisms.md) |
-| 异步模式 | [concept/03_advanced/01_async/26_async_patterns.md](../../../../concept/03_advanced/01_async/26_async_patterns.md) |
+| Glommio 与 Thread-per-Core | [concept/06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md](../../../../concept/06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md) |
+| Async/Await 基础 | [concept/03_advanced/01_async/01_async.md](../../../../concept/03_advanced/01_async/01_async.md) |
+| Future / Executor 机制 | [concept/03_advanced/01_async/04_future_and_executor_mechanisms.md](../../../../concept/03_advanced/01_async/04_future_and_executor_mechanisms.md) |
+| 异步模式 | [concept/03_advanced/01_async/03_async_patterns.md](../../../../concept/03_advanced/01_async/03_async_patterns.md) |

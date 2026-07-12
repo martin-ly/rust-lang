@@ -2,8 +2,8 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [字符串与文本](../../../../concept/01_foundation/06_strings_and_text/09_strings_and_text.md)
-> - [数据库系统](../../../../concept/06_ecosystem/06_data_and_distributed/37_database_systems.md)
+> - [字符串与文本](../../../../concept/01_foundation/06_strings_and_text/01_strings_and_text.md)
+> - [数据库系统](../../../../concept/06_ecosystem/06_data_and_distributed/04_database_systems.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 > **Rust 版本**: 1.97.0+ (Edition 2024)

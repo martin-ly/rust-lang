@@ -21,4 +21,4 @@ canonical 链接。
 | :--- | :--- |
 | 跨平台进程管理 | [`concept/03_advanced/08_process_ipc/04_cross_platform_process_management.md`](../../../concept/03_advanced/08_process_ipc/04_cross_platform_process_management.md) |
 | 进程模型与生命周期 | [`concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md`](../../../concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) |
-| 条件编译 | [`concept/03_advanced/03_proc_macros/28_conditional_compilation.md`](../../../concept/03_advanced/03_proc_macros/28_conditional_compilation.md) |
+| 条件编译 | [`concept/03_advanced/03_proc_macros/11_conditional_compilation.md`](../../../concept/03_advanced/03_proc_macros/11_conditional_compilation.md) |

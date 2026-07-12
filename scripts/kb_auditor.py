@@ -343,12 +343,19 @@ def check_inter_layer_consistency(audits: list[FileAudit]) -> list[dict]:
         expected_lower = f"L{current_layer_num - 1}"
         has_lower_ref = False
         for ref in a.cross_references:
-            # 从路径推断引用目标的层级
+            # 优先解析到真实文件并用目录结构判定层级（对文件重编号鲁棒）
             ref_layer = None
-            for part in Path(ref).parts:
-                if part.startswith("0") and len(part) >= 2 and part[1].isdigit():
-                    ref_layer = f"L{part[1]}"
-                    break
+            try:
+                resolved = (a.path.parent / ref.split("#")[0]).resolve()
+                ref_layer = concept_config.detect_layer(resolved)
+            except OSError:
+                pass
+            if ref_layer is None:
+                # 回退：从路径片段推断（目录名如 02_intermediate）
+                for part in Path(ref).parts:
+                    if part in concept_config.LAYER_DIRS:
+                        ref_layer = concept_config.LAYER_DIRS[part]
+                        break
             if ref_layer == expected_lower:
                 has_lower_ref = True
                 break

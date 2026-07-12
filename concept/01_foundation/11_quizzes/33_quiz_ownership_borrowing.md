@@ -17,7 +17,7 @@
 
 > **来源**:
 >
-> · [自测题库](../../00_meta/04_navigation/self_assessment.md)
+> · [自测题库](../../00_meta/04_navigation/12_self_assessment.md)
 > · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 > · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003)
 > · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/)
@@ -226,7 +226,7 @@ fn main() {
 }
 ```
 
-**知识点**：Rust 使用**非词法生命周期（NLL）**分析引用（Reference）的实际使用位置，而非仅依赖词法作用域。[→ NLL 与 Polonius](../../03_advanced/02_unsafe/08_nll_and_polonius.md)
+**知识点**：Rust 使用**非词法生命周期（NLL）**分析引用（Reference）的实际使用位置，而非仅依赖词法作用域。[→ NLL 与 Polonius](../../03_advanced/02_unsafe/03_nll_and_polonius.md)
 
 </details>
 
@@ -381,7 +381,7 @@ fn main() {
 }
 ```
 
-**知识点**：`Vec::push` 可能触发重新分配，因此 Rust 禁止在存在元素引用（Reference）时修改 `Vec`。[→ 集合类型详解](../05_collections/08_collections.md)
+**知识点**：`Vec::push` 可能触发重新分配，因此 Rust 禁止在存在元素引用（Reference）时修改 `Vec`。[→ 集合类型详解](../05_collections/01_collections.md)
 
 </details>
 
@@ -430,7 +430,7 @@ shared shared
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
-| 10/10 | 🏆 所有权（Ownership）系统已内化 | 直接进阶至 [L2 智能指针（Smart Pointer）](../../02_intermediate/02_memory_management/03_memory_management.md) |
+| 10/10 | 🏆 所有权（Ownership）系统已内化 | 直接进阶至 [L2 智能指针（Smart Pointer）](../../02_intermediate/02_memory_management/01_memory_management.md) |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [L1 练习](../../exercises/src/ownership_borrowing)，关注错题对应的概念文件 |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Lifetimes](../01_ownership_borrow_lifetime/03_lifetimes.md)，完成 rustlings 对应章节 |
 | 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) 逐节阅读，配合 [crates/c01_ownership_borrow_scope](../../crates/c01_ownership_borrow_scope) 可编译示例 |

@@ -1,0 +1,22 @@
+# 占位符页面
+>
+> **EN**: Placeholder
+> **Summary**: This page is a generic placeholder for links in concept files that point to content not yet created.
+>
+> **主要来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RFCs](https://github.com/rust-lang/rfcs)
+>
+> **状态**: 🚧 待创建
+> **权威来源**: 本文件为 `concept/` 权威页。
+---
+
+> 本页面为通用占位符。原链接指向的内容尚未创建。
+>
+> 你可以通过以下索引寻找相关替代内容：
+>
+> - [全局概念索引](../04_navigation/03_concept_index.md)
+> - [Navigation Hub](../04_navigation/09_navigation.md)
+> - [C/C++ → Rust 工程层对比路线图](../00_framework/cpp_rust_engineering_roadmap.md)
+> - [通用 PL 基座路线图](../00_framework/pl_foundations_roadmap.md)
+> - [模式语义空间索引](../00_framework/pattern_semantic_space_index.md)
+>
+> 欢迎参考 [Concept Audit Guide](../03_audit/01_concept_audit_guide.md) 创建本主题。

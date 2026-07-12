@@ -7,7 +7,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: S×App — 应用 IPC 机制选型
-> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Smart Pointers](../../02_intermediate/02_memory_management/12_smart_pointers.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
 > **后置概念**: [Process Monitoring](06_process_monitoring_and_diagnostics.md) · [Process Security](07_process_security_and_sandboxing.md) · [Process Performance Engineering](08_process_performance_engineering.md)
 > **定理链**: IPC Mechanism ⟹ Latency/Throughput Trade-off ⟹ Safety
 
@@ -156,7 +156,7 @@ fn handle_signals() -> Result<(), Box<dyn std::error::Error>> {
 - 异步事件通知：信号。
 - 同一主机进程/线程间消息传递：`crossbeam-channel`。
 
-> **L2 向下引用（Reference）**: IPC 安全抽象建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md) 与 [错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 之上。
+> **L2 向下引用（Reference）**: IPC 安全抽象建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md) 与 [错误处理（Error Handling）](../../02_intermediate/03_error_handling/01_error_handling.md) 之上。
 
 ## 补充视角：IPC 机制工程选型速查
 
@@ -186,8 +186,8 @@ fn handle_signals() -> Result<(), Box<dyn std::error::Error>> {
 
 - [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [并发模型](../00_concurrency/01_concurrency.md)
-- [原子操作（Atomic Operations）与内存序](../00_concurrency/11_atomics_and_memory_ordering.md)
-- [Rust 网络编程](../06_low_level_patterns/18_network_programming.md)
+- [原子操作（Atomic Operations）与内存序](../00_concurrency/05_atomics_and_memory_ordering.md)
+- [Rust 网络编程](../06_low_level_patterns/04_network_programming.md)
 
 ---
 

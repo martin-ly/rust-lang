@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """check_glossary_alignment.py — 术语表对齐检查（语义观察类质量工具）。
 
-以 `concept/00_meta/01_terminology/terminology_glossary.md` 为权威术语表，
+以 `concept/00_meta/01_terminology/01_terminology_glossary.md` 为权威术语表，
 扫描仓库内其他术语表（文件名含 glossary/术语表），抽取同名术语的定义并比较：
 
 - 关键语义缺失：权威定义的关键 token 在另一术语表定义中的覆盖率 < 阈值；

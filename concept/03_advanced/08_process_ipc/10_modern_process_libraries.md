@@ -7,14 +7,14 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: A×Eva — 评价现代进程管理库选型
-> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Async Process Management](03_async_process_management.md) · [Error Handling](../../02_intermediate/03_error_handling/04_error_handling.md)
+> **前置依赖**: [Process Model and Lifecycle](01_process_model_and_lifecycle.md) · [Async Process Management](03_async_process_management.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
 > **后置概念**: [Process Performance Engineering](08_process_performance_engineering.md) · [Process Security](07_process_security_and_sandboxing.md) · [Process Testing](09_process_testing_and_benchmarking.md)
 > **定理链**: Requirement ⟹ Library Selection ⟹ Ecosystem Integration
 
 # Rust 现代进程管理库
 
 > **权威页地位**：本页为 Rust 现代进程管理库生态的 canonical 解释来源。
-> **L2 向下引用（Reference）**: 进程库的选型与封装建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/04_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
+> **L2 向下引用（Reference）**: 进程库的选型与封装建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md)、[L2 错误处理（Error Handling）](../../02_intermediate/03_error_handling/01_error_handling.md) 与 [并发模型](../00_concurrency/01_concurrency.md) 之上。
 
 ## 1. 核心库对比
 
@@ -183,7 +183,7 @@ flowchart TD
 - [异步进程管理](03_async_process_management.md)
 - [跨平台进程管理](04_cross_platform_process_management.md)
 - [进程安全与沙箱](07_process_security_and_sandboxing.md)
-- [核心开源库谱系](../../06_ecosystem/02_core_crates/03_core_crates.md)
+- [核心开源库谱系](../../06_ecosystem/02_core_crates/01_core_crates.md)
 
 ---
 
@@ -234,7 +234,7 @@ flowchart TD
 
 - **P0 官方**: [Rust `std::process`](https://doc.rust-lang.org/std/process/) · [The Rustonomicon — FFI / 平台互操作](https://doc.rust-lang.org/nomicon/)
 - **P2 生态**: [tokio::process (docs.rs)](https://docs.rs/tokio/latest/tokio/process/) · [duct (docs.rs)](https://docs.rs/duct/) · [nix (docs.rs)](https://docs.rs/nix/) · [crates.io](https://crates.io/)
-- **映射维护**: [`concept/00_meta/02_sources/authority_source_map.md`](../../00_meta/02_sources/authority_source_map.md)
+- **映射维护**: [`concept/00_meta/02_sources/01_authority_source_map.md`](../../00_meta/02_sources/01_authority_source_map.md)
 
 ---
 

@@ -10,13 +10,13 @@
 > 本主题在 knowledge 中有系统化的知识索引：[并发](../../../knowledge/03_advanced/concurrency)
 > **受众**: [专家]
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **Send/Sync 契约权威页**: Send/Sync 的形式化契约、auto 推导规则与判定矩阵已收敛至 [Send 与 Sync：Auto Trait 的并发安全契约](17_send_sync_auto_traits.md)，本页保留并发模型全景与场景章节。
+> **Send/Sync 契约权威页**: Send/Sync 的形式化契约、auto 推导规则与判定矩阵已收敛至 [Send 与 Sync：Auto Trait 的并发安全契约](02_send_sync_auto_traits.md)，本页保留并发模型全景与场景章节。
 >
 > **层次定位**: L3 高级概念 / 并发子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价并发设计的安全性
 > **前置依赖**: [L1 所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [L1 借用（Borrowing）](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md)
-> **后置延伸**: [L4 RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) · [L6 Tokio 生态](../../06_ecosystem/02_core_crates/03_core_crates.md) · [L7 AI 并发](../../07_future/04_research_and_experimental/01_ai_integration.md)
+> **后置延伸**: [L4 RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md) · [L6 Tokio 生态](../../06_ecosystem/02_core_crates/01_core_crates.md) · [L7 AI 并发](../../07_future/04_research_and_experimental/01_ai_integration.md)
 > **跨层映射**: L3→L4 Send/Sync ↔ 分离逻辑资源分片 | L3→L6 并发模式 → 工程实现
 > **定理链编号**: T-040 Send 类型安全 → T-041 Sync 数据竞争自由 → T-042 死锁不可判定但可检测
 > **层级**: L3 高级概念
@@ -24,13 +24,13 @@
 > [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
 > [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
 > [Traits](../../02_intermediate/00_traits/01_traits.md) ·
-> [Smart Pointers](../../02_intermediate/02_memory_management/03_memory_management.md)
+> [Smart Pointers](../../02_intermediate/02_memory_management/01_memory_management.md)
 > **所有权（Ownership）语义对齐**: 并发编程中的所有权遵循 Rust 核心原则——每个值有**唯一所有者**（单一所有权，资源唯一性），
 > owner 离开**作用域**时自动**drop/释放**（RAII），
 > 值通过**move/转移**传递所有权（Ownership）（赋值、传参后原变量变为 uninitialized）
 > (Source: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/introduction.html), [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/))
-> **后置概念**: [Async/Await](../01_async/02_async.md) ·
-> [Unsafe Rust](../02_unsafe/03_unsafe.md)
+> **后置概念**: [Async/Await](../01_async/01_async.md) ·
+> [Unsafe Rust](../02_unsafe/01_unsafe.md)
 > **unsafe 语义对齐**: 当本文件提及 `unsafe impl Send/Sync` 时，遵循核心语义——`unsafe` 不是关闭检查器，而是将全局线程安全假设的证明责任转移给程序员。
 > (Source: [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html), [std::thread](https://doc.rust-lang.org/std/thread/index.html))
 > **主要来源**: [TRPL: Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch16-00-concurrency.html) · · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -846,7 +846,7 @@ graph TD
 > **对应标注**：T1 中"编译期排除数据竞争"为 [`01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) §3.1 "借用（Borrowing）检查器的安全性定理" 的并发延伸。
 > **[RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 一致性（Coherence）检查: `Send/Sync` 类型安全 ⟹ `Mutex`/`Channel` 运行时安全 ⟹ `Atomic` 无锁安全，形成**从编译期到运行时的**递进链。注意：死锁不在 Rust 安全保证范围内（属于活性性质，非安全性）。✅ 已验证
 > **[Rust Reference: Deadlocks](https://doc.rust-lang.org/reference/introduction.html)** Rust 不保证防止死锁；死锁是活性（liveness）性质，而非安全性（safety）性质，超出当前类型系统的保证范围。✅ 已验证
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/inter_layer_map.md) §4.1 "内存安全（Memory Safety）完备性" · §4.3 "async 正确性"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/04_inter_layer_map.md) §4.1 "内存安全（Memory Safety）完备性" · §4.3 "async 正确性"
 > **下一章**：定理链说明了"为什么正确"，§7 将展示"什么会出错"以及出错时的具体形态。
 
 ---
@@ -1185,7 +1185,7 @@ fn arc_refcell_race() {
 >
 >
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-00-concurrency.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html), [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html), [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
-> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 更新权威来源块 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 更新权威来源块 [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
 
 ---
 
@@ -1240,7 +1240,7 @@ let (tx, mut rx) = mpsc::unbounded_channel::<i32>();
 > 这是 Rust 并发模型与流处理语义的自然交汇点。[💡 原创分析](../../00_meta/00_framework/methodology.md) · [Tokio Documentation](https://tokio.rs/) ✅
 > **相关判定树**: [并发判定树](../../00_meta/00_framework/concept_definition_decision_forest.md#七并发判定树)
 > **相关 FTA**: [并发安全（Concurrency Safety）失效树](../../00_meta/00_framework/fault_tree_analysis_collection.md#三并发安全失效树)
-> **相关概念**: [流处理语义](../06_low_level_patterns/20_stream_processing_semantics.md) · [Async/Await](../01_async/02_async.md)
+> **相关概念**: [流处理语义](../06_low_level_patterns/05_stream_processing_semantics.md) · [Async/Await](../01_async/01_async.md)
 
 ## 十三、边界测试：并发规则的编译错误
 
@@ -1398,7 +1398,7 @@ fn main() {
 ## 相关概念
 
 - **上层概念**: [L1 所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [L1 借用（Borrowing）](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md)
-- **下层概念**: [L4 RustBelt](../../04_formal/02_separation_logic/04_rustbelt.md) · [L6 Tokio 生态](../../06_ecosystem/02_core_crates/03_core_crates.md) · [L7 AI 并发](../../07_future/04_research_and_experimental/01_ai_integration.md) · [Async/Await](../01_async/02_async.md)
+- **下层概念**: [L4 RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md) · [L6 Tokio 生态](../../06_ecosystem/02_core_crates/01_core_crates.md) · [L7 AI 并发](../../07_future/04_research_and_experimental/01_ai_integration.md) · [Async/Await](../01_async/01_async.md)
 
 ## 参考来源
 
@@ -1429,7 +1429,7 @@ fn main() {
 1. 阅读 `crates/c05_threads/` 中与"多线程与并发编程"相关的源码和示例
 2. 运行 `cargo test -p c05_threads` 验证理解
 3. 完成 `exercises/src/concurrency/` 中的练习任务
-4. 完成 [L3 并发与异步（Async）测验](21_quiz_concurrency_async.md) 验证理解程度
+4. 完成 [L3 并发与异步（Async）测验](08_quiz_concurrency_async.md) 验证理解程度
 
 ---
 
@@ -1439,7 +1439,7 @@ fn main() {
 
 | 选择 | 条件 | 目标 |
 |:---|:---|:---|
-| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate) 或 [MVP 学习路径](../../00_meta/04_navigation/learning_mvp_path.md) |
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate) 或 [MVP 学习路径](../../00_meta/04_navigation/08_learning_mvp_path.md) |
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](../README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../../06_ecosystem/README.md) |
