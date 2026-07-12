@@ -20,7 +20,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **生态版本**: Tokio 1.52.3（workspace 锁定，`features = ["full"]`）
 > **来源**: [Tokio Tutorial](https://tokio.rs/tokio/tutorial) · [Carl Lerche — Making the Tokio scheduler 10x faster](https://tokio.rs/blog/2019-10-scheduler) · [mio docs](https://docs.rs/mio/latest/mio/) · [tokio docs — runtime](https://docs.rs/tokio/latest/tokio/runtime/index.html) · [tokio-console](https://github.com/tokio-rs/console)（以上 2026-07-12 curl 实测 HTTP 200）
-> **国际权威来源（2026-07-13 补录）**: **P1** [Herlihy & Shavit — The Art of Multiprocessor Programming（Morgan Kaufmann）](https://dl.acm.org/doi/book/10.5555/2385452)（运行时调度、无锁队列与线程池的理论基础；curl 实测 2026-07-13，ACM 反爬注记同前页）
+> **国际权威来源（2026-07-13 补录）**: **P0** [std::task 官方文档](https://doc.rust-lang.org/std/task/)（Waker/Context 契约是 Tokio 任务模型的直接基础，curl 200 实测 2026-07-13） · **P1** [Herlihy & Shavit — The Art of Multiprocessor Programming（Morgan Kaufmann）](https://dl.acm.org/doi/book/10.5555/2385452)（运行时调度、无锁队列与线程池的理论基础；curl 实测 2026-07-13，ACM 反爬注记同前页）
 > **对应 Crate**: [`c06_async`](../../../crates/c06_async)
 > **对应练习**: [`exercises/src/async_programming/`](../../../exercises/src/async_programming)
 
@@ -164,7 +164,6 @@ async fn main() {
 | `AbortHandle` | 可克隆的远程取消句柄 | 可在 `JoinHandle` 被 move 后仍持有取消能力 |
 
 > **反例（detach 误解）**：`tokio::spawn(fut);` 丢弃返回值，误以为作用域结束任务即取消——实为 detach，任务泄漏式运行至完成。需要「作用域取消」语义时用 `JoinSet` 或显式 `abort()`；需要结构化并发（structured concurrency）保证时，`JoinSet` drop-abort 语义是 tokio 目前最接近的原语。
-
 > **is_finished 轮询反模式**：`JoinHandle::is_finished()` 只反映「是否已完成」，**不 wake 等待者**；轮询它实现等待是忙等，应直接 `.await` 句柄或用 `JoinSet::join_next`。
 
 ## 六、LocalSet 与 !Send 任务
@@ -229,7 +228,6 @@ async fn main() {
 | 运行时特征 | select! 全部分支在**当前任务**内并发（intra-task），不跨线程、不加锁；宏展开为单个组合 Future |
 
 > **反例（biased 饥饿）**：`biased` + 首分支是恒就绪的高频 channel ⟹ 第二分支（如关闭信号 `ctrl_c`）永不被 poll ⟹ 服务无法优雅退出。修复：去掉 biased（恢复随机公平），或把关闭信号提为**无 biased** 的首分支并评估每次循环成本。
-
 > **反例（select! 循环丢状态）**：`loop { select! { x = recv => ..., } }` 中未完成的第二分支每轮被 drop 重建——若它内部已消费部分输入（如 `read` 了半帧），状态丢失。这是取消安全问题而非 select! bug，完整判定目录见 [Async 取消安全](../../03_advanced/01_async/05_async_cancellation_safety.md)。
 
 ## 八、可观测性：RuntimeMetrics 与 tokio-console
@@ -240,7 +238,8 @@ async fn main() {
 | `tokio-console` | 任务级实时视图：每个任务的 poll 次数/总时长/状态机位置、资源（mutex/channel）竞争热力 | `console_subscriber` feature + 任务以 `tokio::task::Builder::name` 命名后接入 console CLI |
 | `tracing` | 结构化日志/span，与 console 共享 `tracing` 基础设施 | 常规依赖 |
 
-> **诊断映射**（与本文各节的反例对应）：任务永久 Pending ⟹ console 看该任务最后 poll 位置 + [Waker 契约深度解析](../../03_advanced/01_async/12_waker_contract_deep_dive.md) §六判定树；blocking 池饱和 ⟹ `blocking_queue_depth` 持续 >0；调度饥饿 ⟹ `RuntimeMetrics` 的 worker 间 steal 计数失衡 + [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) §六的测量方法。
+> **诊断映射**（与本文各节的反例对应）：任务永久 Pending ⟹ console 看该任务最后 poll 位置 + [Waker 契约深度解析](../../03_advanced/01_async/12_waker_contract_deep_dive.md) §六判定树；
+> blocking 池饱和 ⟹ `blocking_queue_depth` 持续 >0；调度饥饿 ⟹ `RuntimeMetrics` 的 worker 间 steal 计数失衡 + [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) §六的测量方法。
 
 ## 九、时间控制与运行时关闭语义
 
@@ -299,6 +298,13 @@ fn main() {
 - [Carl Lerche — *Making the Tokio scheduler 10x faster*（tokio.rs blog, 2019-10）](https://tokio.rs/blog/2019-10-scheduler)（multi_thread 调度器架构的设计动机，2026-07-12 实测 200）
 - [mio docs](https://docs.rs/mio/latest/mio/)（跨平台事件通知抽象：epoll/kqueue/IOCP，2026-07-12 实测 200）
 - [tokio docs — `runtime::Builder`](https://docs.rs/tokio/latest/tokio/runtime/struct.Builder.html)（`max_blocking_threads` 默认 512 等构建参数，2026-07-12 实测 200）
-- [tokio docs — `task::JoinSet`](https://docs.rs/tokio/latest/tokio/task/struct.JoinSet.html) · [`task::LocalSet`](https://docs.rs/tokio/latest/tokio/task/struct.LocalSet.html) · [`spawn_blocking`](https://docs.rs/tokio/latest/tokio/task/fn.spawn_blocking.html) · [`select!`](https://docs.rs/tokio/latest/tokio/macro.select.html)（任务句柄/LocalSet/阻塞池/select 语义，2026-07-12 实测 200）
+- [tokio docs — `task::JoinSet`](https://docs.rs/tokio/latest/tokio/task/struct.JoinSet.html) ·
+- [`task::LocalSet`](https://docs.rs/tokio/latest/tokio/task/struct.LocalSet.html) ·
+- [`spawn_blocking`](https://docs.rs/tokio/latest/tokio/task/fn.spawn_blocking.html) ·
+- [`select!`](https://docs.rs/tokio/latest/tokio/macro.select.html)（任务句柄/LocalSet/阻塞池/select 语义，2026-07-12 实测 200）
 - [tokio-console（GitHub）](https://github.com/tokio-rs/console)（任务级可观测性工具，2026-07-12 实测 200）
-- 站内交叉引用：[Future 与 Executor 机制](../../03_advanced/01_async/04_future_and_executor_mechanisms.md) · [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) · [Async 取消安全](../../03_advanced/01_async/05_async_cancellation_safety.md) · [Glommio 与 Thread-per-Core](05_glommio_and_thread_per_core.md)
+- 站内交叉引用：
+- [Future 与 Executor 机制](../../03_advanced/01_async/04_future_and_executor_mechanisms.md) ·
+- [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) ·
+- [Async 取消安全](../../03_advanced/01_async/05_async_cancellation_safety.md) ·
+- [Glommio 与 Thread-per-Core](05_glommio_and_thread_per_core.md)

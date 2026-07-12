@@ -17,6 +17,7 @@
 ---
 
 > **来源**: [Shapiro, Preguiça, Baquero, Zawirski, *A Comprehensive Study of Convergent and Commutative Replicated Data Types*, INRIA RR-7506 / SSS 2011（HAL 全文）](https://hal.inria.fr/inria-00555588/) · Shapiro et al., *Conflict-free Replicated Data Types*, SSS 2011 会议版（DOI：[10.1007/978-3-642-24550-3_29](https://doi.org/10.1007/978-3-642-24550-3_29)） · [rust-crdt 仓库](https://github.com/rust-crdt/rust-crdt) · [yrs / y-crdt 仓库](https://github.com/y-crdt/y-crdt) · [docs.rs/yrs](https://docs.rs/yrs/latest/yrs/) · [Wikipedia: Conflict-free replicated data type](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type)
+> **国际权威来源（2026-07-13 补录）**: **P0** [std::collections 官方文档](https://doc.rust-lang.org/std/collections/)（各 CRDT 实现所依托的标准库集合类型语义，curl 200 实测 2026-07-13）
 
 ---
 

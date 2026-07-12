@@ -221,7 +221,7 @@ bash scripts/git_hooks/install.sh
 15. `python scripts/detect_content_overlap_v2.py --budget 999999` + `python scripts/triage_overlap.py`（段落级重叠 v2；可处理项 MERGE+DOCS_INTERNAL 基线 0，超 0 即阻断；2026-07-12 转正，清零证据见 `reports/DEDUP_V2_ZERO_2026_07_12.md` 与 §5.2）
 
 **语义观察门（5，非阻断）**：
-16. `python scripts/check_metadata_consistency.py`（元数据 D1–D6；2026-07-12 D1–D6 全 0 且 --strict exit 0：D2 豁免 2 项 / D5 豁免 15 项均已显式登记于检查器白名单并附理由）
+16. `python scripts/check_metadata_consistency.py`（元数据 D1–D6；2026-07-13 D1–D6 全 0 且 --strict exit 0：D2 豁免 2 项 / D5 豁免 29 项（15 项 2026-07-12 + 14 项 2026-07-13 W0–W5 新建页逐文件复核）均已显式登记于检查器白名单并附理由；2026-07-13 另修复 NIGHTLY_RE 词边界误报（`target_feature(` 误匹配 `feature\s*\(`））
 17. `python scripts/semantic_health.py`（综合语义健康分；grade=FAIL 时 --strict 才阻断）
 18. `python scripts/check_concept_authority_coverage.py`（concept 权威层国际化权威来源覆盖率；--strict 已支持且当前 exit=0，见 §5.2；`--include-crates` 附加 crates/*/docs 覆盖小节：crates 非 stub 内容页 64/64=100%，默认观察 exit 0，--strict 时 crates 缺口>0 亦阻断；2026-07-12 扩展）
 19. `python scripts/check_examples_compile.py`（根 examples/ 游离示例编译保护；9 stdlib rustc 直编 + 3 依赖示例经 `examples/examples_check/` crate + 2 Cargo Script 豁免；2026-07-12 新增，P3-5）
@@ -241,10 +241,10 @@ bash scripts/git_hooks/install.sh
 | KG SHACL | K1–K6 全 0（K1b 缺 bloomLevel=55，仅扣分不阻断） | exit 0 | ✅ **已转阻断** |
 | canonical uniqueness | 0 处双权威页/同主题重复 | exit 0 | ✅ **已转阻断** |
 | concept consistency | 0 错误级发现（decision trees 等跨文件引用全有效） | exit 0 | ✅ **已转阻断** |
-| metadata consistency | D1–D6 全 0（flagged 0/480）；D2 白名单 2 项（L0 导航页/L7 跟踪页）与 D5 白名单 15 项（确属 nightly-only 主题页，2026-07-12 逐文件复核）均显式登记于检查器并公示于报告 | exit 0 | ⏳ 维持观察（2026-07-12 起 D1–D6 归零且 --strict exit 0，连续达标后可评估转正） |
+| metadata consistency | D1–D6 全 0（flagged 0/511）；D2 白名单 2 项（L0 导航页/L7 跟踪页）与 D5 白名单 29 项（15 项 2026-07-12 + 14 项 2026-07-13 W0–W5 新建页：确属 nightly-only 主题页/quiz 考点/RFC 索引状态列，逐文件复核）均显式登记于检查器并公示于报告；2026-07-13 修复 NIGHTLY_RE `feature\s*\(` 词边界误报 | exit 0 | ⏳ 维持观察（2026-07-12 起 D1–D6 归零且 --strict exit 0，连续达标后可评估转正） |
 | overlap v2 | 命中 559；可处理 MERGE=0 + DOCS_INTERNAL=0 = **0**（SERIES 115 白名单 / REVIEWED 444 已批量复核白名单 / REVIEW 0；54 对清零明细见 `reports/DEDUP_V2_ZERO_2026_07_12.md`，437 REVIEW 复核加固见 `reports/OVERLAP_REVIEW_SWEEP_2026_07_12.md`） | exit 0 | ✅ **已转阻断**（2026-07-12，可处理项基线 0） |
 | naming convention | N1–N6：ERROR=0 / WARN=78（无序号系列文件 35 + 无序号目录 39 + N4 stub 3 + N5 docs 跳号 1；扫描 1790 文件/254 目录；2026-07-12 命名收尾：docs/08_guides→08_usage_guides，crates 5 目录改 tier_05_*，10 个 rust_194_updates + c03 snippets 补 README 豁免索引） | exit 0 | ⏳ 新增观察门（2026-07-12，§4.0 重编号配套；连续达标后可评估转正） |
-| semantic health | 总分 99.6 grade OK（元数据 100.0 / 拓扑 98.4 / 去重 100.0 / KG 100.0） | exit 0 | ⏳ 维持观察（聚合门） |
+| semantic health | 总分 99.6 grade OK（元数据 100.0 / 拓扑 98.4 / 去重 100.0 / KG 100.0；2026-07-13 W0–W5 收尾复核同值） | exit 0 | ⏳ 维持观察（聚合门） |
 | authority coverage | 内容页 P0/P1/P2/any 全 100% / none=0 / 核心 L1–L4 无 P0 缺口=0（2026-07-12 补齐唯一 P2 缺口页）；`--include-crates` 扩展：crates docs 576 文件（含嵌套子 crate）中非 stub 内容页 64/64=100%（stub 509 / 纯索引 README 2 / 代码清单豁免 1 登记） | exit 0 | ⏳ 维持观察（--strict 已实现且 exit 0，连续达标后可评估转正） |
 | examples compile | 14 游离示例：9 stdlib ✅ + 3 deps ✅（经 `examples/examples_check/` crate）+ 2 Cargo Script 豁免 | exit 0 | ⏳ 新增观察门（2026-07-12，P3-5；连续达标后可评估转正） |
 

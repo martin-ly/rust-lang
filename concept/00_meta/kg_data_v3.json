@@ -12898,6 +12898,7 @@
         }
       ],
       "ex:path": "README.md",
+      "ex:bloomLevel": "Meta",
       "ex:rustVersion": "1.97.0+ (Edition 2024)",
       "ex:layer": "L0",
       "ex:domain": "meta_framework"
@@ -12922,6 +12923,7 @@
         }
       ],
       "ex:path": "sources/INDEX.md",
+      "ex:bloomLevel": "Meta",
       "ex:layer": "L0",
       "ex:domain": "meta_framework"
     },
@@ -12945,6 +12947,7 @@
         }
       ],
       "ex:path": "sources/rfc_index.md",
+      "ex:bloomLevel": "Meta",
       "ex:layer": "L0",
       "ex:domain": "meta_framework"
     },
@@ -12968,6 +12971,7 @@
         }
       ],
       "ex:path": "sources/theorem_tier_spec.md",
+      "ex:bloomLevel": "Meta",
       "ex:rustVersion": "1.97.0+ (Edition 2024)",
       "ex:theoremIds": [
         "T-001",
@@ -12996,6 +13000,7 @@
         }
       ],
       "ex:path": "SUMMARY.md",
+      "ex:bloomLevel": "Meta",
       "ex:layer": "L0",
       "ex:domain": "meta_framework"
     },

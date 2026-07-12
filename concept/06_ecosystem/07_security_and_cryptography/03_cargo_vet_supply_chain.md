@@ -13,7 +13,7 @@
 > **后置概念**: [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) · [DevOps and CI/CD](../00_toolchain/03_devops_and_ci_cd.md)
 >
 > **来源**: [cargo-vet 官方文档（mozilla.github.io/cargo-vet）](https://mozilla.github.io/cargo-vet/)（2026-07-12 curl 实测） · [cargo-vet — How it Works](https://mozilla.github.io/cargo-vet/how-it-works.html) · [RustSec Advisory DB](https://rustsec.org/)（实测 200） · [cargo-audit](https://github.com/rustsec/rustsec/tree/main/cargo-audit)
-> **国际权威来源（2026-07-13 补录）**: **P1** [Bae et al. — RUDRA（SOSP 2021）](https://dl.acm.org/doi/10.1145/3477132.3483570)（crates.io 生态级安全审计的学术参照；curl 实测 2026-07-13，ACM 反爬注记同前页）
+> **国际权威来源（2026-07-13 补录）**: **P0** [The Cargo Book](https://doc.rust-lang.org/cargo/)（cargo vet 直接消费 cargo metadata 输出，curl 200 实测 2026-07-13） · **P1** [Bae et al. — RUDRA（SOSP 2021）](https://dl.acm.org/doi/10.1145/3477132.3483570)（crates.io 生态级安全审计的学术参照；curl 实测 2026-07-13，ACM 反爬注记同前页）
 
 ---
 

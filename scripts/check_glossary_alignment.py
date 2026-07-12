@@ -28,7 +28,11 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-AUTHORITY = ROOT / "concept" / "00_meta" / "01_terminology" / "terminology_glossary.md"
+# 2026-07-13 修复：重编号后权威术语表文件名为 `01_terminology_glossary.md`（NN_ 序号前缀）。
+# 不再硬编码无序号文件名，改为在术语目录内 glob 解析实际路径。
+_TERM_DIR = ROOT / "concept" / "00_meta" / "01_terminology"
+_candidates = sorted(_TERM_DIR.glob("*terminology_glossary.md")) if _TERM_DIR.is_dir() else []
+AUTHORITY = _candidates[0] if _candidates else _TERM_DIR / "terminology_glossary.md"
 
 EXCLUDE_DIRS = {".git", "archive", ".kimi", "book", "tmp", "target", "vendor", "node_modules"}
 STUB_MARKERS = ("占位 stub", "Quick links", "待补充", "Placeholder", "crate 级文档占位")

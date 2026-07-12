@@ -17,6 +17,7 @@
 ---
 
 > **来源**: [Lamport, *Time, Clocks, and the Ordering of Events in a Distributed System*, CACM 21(7), 1978（作者主页 PDF）](https://lamport.azurewebsites.net/pubs/time-clocks.pdf) · [Mattern, *Virtual Time and Global States of Distributed Systems*, 1989（ETH 副本，含 Fidge 向量时钟算法）](https://www.vs.inf.ethz.ch/publ/papers/VirtTimeGlobStates.pdf) · Fidge, C. *Timestamps in Message-Passing Systems That Preserve the Partial Ordering*, Proc. 11th Australian Computer Science Conference, 1988 · [Wikipedia: Vector clock](https://en.wikipedia.org/wiki/Vector_clock) · [Wikipedia: Lamport timestamp](https://en.wikipedia.org/wiki/Lamport_timestamp)
+> **国际权威来源（2026-07-13 补录）**: **P0** [std::sync::atomic 官方文档](https://doc.rust-lang.org/std/sync/atomic/)（Rust 内存模型中 happens-before 与因果序的对应，curl 200 实测 2026-07-13）
 
 ---
 

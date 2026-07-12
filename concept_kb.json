@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 495,
-    "generated_at": "2026-07-12T20:43:35.027602+00:00"
+    "generated_at": "2026-07-12T21:13:08.155903+00:00"
   },
   "files": [
     {
@@ -3090,7 +3090,7 @@
       "layer": "L0",
       "title": "测验体系注册表（Quiz Registry）",
       "positioning": "",
-      "line_count": 145,
+      "line_count": 146,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -27461,7 +27461,7 @@
       "layer": "L3",
       "title": "Stream 代数与背压：拉取式序列的形式刻画",
       "positioning": "把 `Stream` 从「异步版的 Iterator」这一直觉，上升为可推理的代数对象：对偶签名、组合子定律、以及背压作为「速率约束的反向传播」的形式模型，全部落到可编译验证的示例-反例对上。",
-      "line_count": 446,
+      "line_count": 447,
       "theorem_chains": [
         {
           "text": "理解顺序：**对偶（§2）⟹ 组合（§3）⟹ 速率（§4-5）**。对偶回答「Stream 是什么」；组合子代数回答「能对它做什么变换、哪些变换保语义」；背压模型回答「变换链两端的速率不匹配时谁付出代价」。跳过对偶直接学组合子，会在 `.next().await` 报 `cannot be unpinned` 时手足无措（§3.4）。",
@@ -27568,7 +27568,7 @@
       "layer": "L3",
       "title": "Executor 公平性与调度：Tokio 调度器 internals",
       "positioning": "把「tokio 会公平地调度任务」这一模糊信念拆解为可验证的机制事实：任务在哪个队列、谁决定下一个 poll 谁、什么模式让公平性失效、失效如何测量与修复。",
-      "line_count": 354,
+      "line_count": 355,
       "theorem_chains": [
         {
           "text": "阅读顺序：**结构（§2）⟹ 两个公平性机制（§3-4）⟹ 失效模式（§5）⟹ 测量（§6）⟹ 替代设计（§7）**。核心问题只有一个：协作式调度没有抢占，公平性完全由「队列纪律 + 预算」两条机制提供——本页就是这两条机制的成立条件与失效边界的清单。",
@@ -27688,7 +27688,7 @@
       "layer": "L3",
       "title": "Pin 投射反例集：unsafe 结构投射的 UB 目录与正确模式库",
       "positioning": "`Pin<&mut Self>` 保证了「整体不动」，但业务需要的是「字段级访问」——结构投射（structural projection）就是跨越这道缝的技术。本页系统枚举手写投射的全部 UB 模式与全部正确模式，让 unsafe 决策变成查表。",
-      "line_count": 437,
+      "line_count": 438,
       "theorem_chains": [
         {
           "text": "阅读顺序：**问题（§2）⟹ 反例（§3-4，先建立恐惧的精确形状）⟹ 正例（§5-6）⟹ 查表决策（§7）**。每条反例给出「miri 思路」——即在 stacked borrows / tree borrows 模型下违反的是哪条公理，而不只是「这样做不对」。",
@@ -27815,7 +27815,7 @@
       "layer": "L3",
       "title": "Waker 契约深度解析：RawWakerVTable 实现与契约违反反例集",
       "positioning": "`Waker` 是 async Rust 唯一的唤醒原语，也是唯一要求程序员手写 unsafe 才能自造的核心抽象。本页把「正确实现」变成查表，把「错误实现」变成可识别的反例指纹。",
-      "line_count": 358,
+      "line_count": 359,
       "theorem_chains": [
         {
           "text": "> **分工声明**: Waker 的**契约概述**（poll⟹Pending⟹已注册、活性三反例、活性调试决策树）与 **VTable 概念性代码**统一维护在 [Async/Await §8.8/§8.9](01_async.md#88-waker-契约与活性)，[Async 高级主题 §8.8/8.9](02_async_advanced.md) 为其高级摘要。本页只做两件事：① `RawWakerVTable` 手工实现的**正确模式全集**（全部 rustc 1.97 实测可编译）；② 契约违反的**反例目录**（时序图 / loom 思路 / miri 思路）。凡涉及「Waker 契约是什么」的问题以 01 为准，本页不重复推导（AGENTS.md §2 Canonical 规则）。",
@@ -27932,7 +27932,7 @@
       "layer": "L3",
       "title": "Async Trait 对象安全：dyn 兼容解决方案谱系与选型矩阵",
       "positioning": "`async fn` in trait（1.75 stable）解决了静态分发，却留下 Rust async 最著名的缺口：`Box<dyn Trait>` 不可用。本页把社区四年积累的五条路线（宏装箱 / 手写装箱 / erased 类型 / RTN / 原生 dyn async）整理为可查表的选型矩阵。",
-      "line_count": 312,
+      "line_count": 314,
       "theorem_chains": [
         {
           "text": "阅读顺序：**根源（§2，两分钟理解为什么不行）⟹ 谱系（§3，五条路线各一节）⟹ 查表（§4-5）⟹ 前瞻（§6）**。",
@@ -39068,7 +39068,7 @@
       "layer": "L4",
       "title": "认证工具链与认证包清单",
       "positioning": "",
-      "line_count": 208,
+      "line_count": 209,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -44231,7 +44231,7 @@
       "layer": "L6",
       "title": "Rust 常用开发工具",
       "positioning": "",
-      "line_count": 225,
+      "line_count": 223,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -44298,7 +44298,7 @@
       "layer": "L6",
       "title": "rustc / Cargo `-Z` 不稳定选项参考清单",
       "positioning": "",
-      "line_count": 161,
+      "line_count": 164,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -45397,7 +45397,7 @@
       "layer": "L6",
       "title": "Cargo 1.97 新特性与工具链变更",
       "positioning": "",
-      "line_count": 232,
+      "line_count": 233,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -49919,7 +49919,7 @@
       "layer": "L6",
       "title": "Tokio 运行时内部机制（Tokio Runtime Internals）",
       "positioning": "Tokio 是 Rust async 生态的事实标准运行时。本页把分散在 tutorial、blog 与 API docs 中的机制细节归一为单一权威页：每个机制给出「结构 → 语义 → 反例/边界 → 观测手段」。",
-      "line_count": 303,
+      "line_count": 305,
       "theorem_chains": [
         {
           "text": "阅读顺序：**架构（§2）⟹ 驱动（§3-4）⟹ 任务生命周期（§5-6）⟹ 宏语义（§7）⟹ 观测（§8）**。",
@@ -51079,7 +51079,7 @@
       "layer": "L6",
       "title": "Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁",
       "positioning": "",
-      "line_count": 92,
+      "line_count": 94,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -52073,7 +52073,7 @@
       "layer": "L6",
       "title": "CRDT 谱系：状态基、操作基与合并格形式化",
       "positioning": "",
-      "line_count": 299,
+      "line_count": 303,
       "theorem_chains": [
         {
           "text": "**为什么这就够了**：半格的任意有限子集有**唯一**最小上界。各副本独立演化、以任意顺序、任意次数两两合并（幂等性吸收重复传递，交换/结合律吸收顺序差异）⟹ 全部收敛到更新集的唯一 join ⟹ SEC 得证。",
@@ -52106,6 +52106,10 @@
         {
           "text": "- **收敛保证**：change 的应用幂等、交换、结合 ⟹ 满足 §二 合并格条件的操作基对偶，离线编辑后按任意顺序合并必收敛——这是「本地优先软件」（local-first）的存储底座。",
           "type": "paragraph"
+        },
+        {
+          "text": "共同判据：先看**通道假设**（可丢/乱序 ⟹ CvRDT；可靠因果交付 ⟹ CmRDT 可选），再看**状态/操作大小比**，最后看**生态互通**需求。",
+          "type": "inline"
         },
         {
           "text": "CmRDT 要求恰好一次、因果序交付；直接跑在 UDP/Gossip 上，一条 `remove` 操作丢失 ⟹ 某副本永远保留已删元素 ⟹ 发散且**不可自愈**（CvRDT 则靠下一次全量状态合并自愈）。选型错误比实现错误更致命。",
@@ -52204,7 +52208,7 @@
       "transitions": 4,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 26,
+      "matrix_rows": 27,
       "pre_post": {
         "pre": [
           "[L4 线性化与一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) · [L3 谱系页 §5.3](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)"
@@ -52221,7 +52225,7 @@
       "layer": "L6",
       "title": "因果序与向量时钟：Lamport 偏序的算法化",
       "positioning": "",
-      "line_count": 302,
+      "line_count": 303,
       "theorem_chains": [
         {
           "text": "- **空间 O(N)**：节点数大时向量膨胀 ⟹ 剪枝（定期淘汰不活跃槽）、区间版本向量（RIVV）；",
@@ -52620,7 +52624,7 @@
       "layer": "L6",
       "title": "cargo vet 与供应链审计",
       "positioning": "",
-      "line_count": 212,
+      "line_count": 213,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -55913,7 +55917,7 @@
       "layer": "L6",
       "title": "安全关键 Rust 专题索引",
       "positioning": "本文件为 `concept/` 侧的**摘要+链接型导航页**（AGENTS.md §2.1 第 3 条：content/ 专题权威页需在 concept/ 建索引入口）。专题深度内容以 [`content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md`](../../../content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md) 为权威入口；通用概念解释以 `concept/` 相关权威页为准。本页不复制任何正文。",
-      "line_count": 41,
+      "line_count": 43,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -55950,7 +55954,7 @@
       "layer": "L6",
       "title": "AUTOSAR 与 Rust",
       "positioning": "",
-      "line_count": 164,
+      "line_count": 165,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -60989,7 +60993,7 @@
       "layer": "L7",
       "title": "Ferrocene：已交付的 Rust 安全关键认证工具链",
       "positioning": "",
-      "line_count": 298,
+      "line_count": 299,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -63081,7 +63085,7 @@
       "layer": "L7",
       "title": "f16 / f128 预研：半精度与四精度浮点类型",
       "positioning": "跟踪 [RFC 3453](https://rust-lang.github.io/rfcs/3453-f16-and-f128.html) 引入的两个新原始浮点类型（Primitive Float Types），说明其语法、IEEE 754 语义、ABI 边界条件与对数值生态的影响。",
-      "line_count": 163,
+      "line_count": 164,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -63142,7 +63146,7 @@
       "layer": "L7",
       "title": "UnsafePinned 预研：可变引用别名语义的精确标注",
       "positioning": "跟踪 [RFC 3467](https://rust-lang.github.io/rfcs/3467-unsafe-pinned.html) 引入的 `UnsafePinned<T>`，说明其与 `UnsafeCell`/`PhantomPinned`/`Unpin` 的语义分工，以及对自引用 Future 降级的安全性影响。",
-      "line_count": 148,
+      "line_count": 149,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -63204,7 +63208,7 @@
       "layer": "L7",
       "title": "Default Field Values 预研：结构体字段默认值",
       "positioning": "跟踪 [RFC 3681](https://rust-lang.github.io/rfcs/3681-default-field-values.html) 引入的结构体字段默认值语法，说明其与函数式记录更新（Functional Record Update, FRU）、`Default` trait 及私有字段的交互。",
-      "line_count": 115,
+      "line_count": 116,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -63259,7 +63263,7 @@
       "layer": "L7",
       "title": "Complex Numbers 预研：标准库复数类型",
       "positioning": "跟踪 [RFC 3892](https://rust-lang.github.io/rfcs/3892-complex-numbers.html) 提议的标准库复数类型（Complex Number），说明其设计动机、API 形态与对数值生态（`num-complex` 等）的影响。",
-      "line_count": 112,
+      "line_count": 113,
       "theorem_chains": [],
       "anti_propositions": [
         {
