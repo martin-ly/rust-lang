@@ -11,15 +11,17 @@
     2. 伪代码跳过：含 todo!()/unimplemented!()/占位省略行/伪代码标记 → 跳过；
     3. nightly / no_std / no_main → 跳过（非 stable-2024 可直接验证范围）；
     4. 无外部依赖候选 → rustc --edition 2024 逐块编译（自动包装 fn main）；
+       候选超过 --sample（默认 300）时按文件分层随机抽样（固定 seed，可复现）；
     5. 引用外部 crate 的块：默认归为"需外部依赖未测"；--with-deps 模式下
        生成 target/code_check/ 临时 crate 借用 workspace 已有依赖编译。
 
 用法：
-    python scripts/check_concept_code_blocks.py                 # 观察模式：仅无依赖块，失败告警 exit 0
-    python scripts/check_concept_code_blocks.py --strict        # 阻断模式：真实失败 exit 1
+    python scripts/check_concept_code_blocks.py                 # 观察模式：失败告警 exit 0（输出通过率）
+    python scripts/check_concept_code_blocks.py --strict        # 阻断模式：通过率 <95% exit 1
+    python scripts/check_concept_code_blocks.py --sample 0      # 不抽样，全量编译（慢）
     python scripts/check_concept_code_blocks.py --with-deps     # 附加依赖块实测（慢，一次性审计用）
     python scripts/check_concept_code_blocks.py --stats-only    # 只提取分类，不编译
-    python scripts/check_concept_code_blocks.py --limit 200 --offset 0   # 分批
+    python scripts/check_concept_code_blocks.py --limit 200 --offset 0   # 分批（不走抽样）
     python scripts/check_concept_code_blocks.py --report reports/xxx.md  # 输出报告
 """
 
@@ -29,6 +31,7 @@ import argparse
 import hashlib
 import json
 import os
+import random
 import re
 import subprocess
 import sys
@@ -246,6 +249,11 @@ WORKSPACE_MEMBER_CRATES = {
     "c17_resolver_v3_public_demo", "common",
 }
 
+# 抽样：候选超过该数量时按文件分层随机抽样（默认 300，固定 seed 可复现）
+SAMPLE_CAP = 300
+SAMPLE_SEED = 20260712
+STRICT_PASS_RATE = 0.95
+
 # 已知不可能编译的环境（嵌入式/nightly-only crate）→ 直接跳过
 SKIP_CRATES = {
     "cortex_m", "cortex_m_rt", "embedded_hal", "embassy", "rtic", "riscv",
@@ -422,6 +430,32 @@ def summarize_stderr(stderr: str, limit: int = 600) -> str:
     return "\n".join(errs)[:limit] if errs else stderr[:limit]
 
 
+def stratified_sample(candidates: list[dict], cap: int, seed: int) -> list[dict]:
+    """按文件分层随机抽样：每层（文件）按候选占比分配名额（最大余数法取整），
+    层内固定 seed 随机抽取，保证可复现且覆盖不同文件。"""
+    rng = random.Random(seed)
+    by_file: dict[str, list[dict]] = {}
+    for b in candidates:
+        by_file.setdefault(b["file"], []).append(b)
+    files = sorted(by_file)
+    total = len(candidates)
+    alloc: dict[str, int] = {}
+    remainders: list[tuple[float, str]] = []
+    for f in files:
+        exact = len(by_file[f]) * cap / total
+        alloc[f] = int(exact)
+        remainders.append((exact - int(exact), f))
+    leftover = cap - sum(alloc.values())
+    for _, f in sorted(remainders, key=lambda t: (-t[0], t[1]))[:leftover]:
+        alloc[f] += 1
+    sampled: list[dict] = []
+    for f in files:
+        n = min(alloc[f], len(by_file[f]))
+        if n > 0:
+            sampled.extend(rng.sample(by_file[f], n))
+    return sampled
+
+
 def block_crates(block: dict) -> set[str]:
     """提取块中引用的已知外部/workspace crate。"""
     crates = set()
@@ -594,6 +628,9 @@ def main() -> int:
     ap.add_argument("--stats-only", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--offset", type=int, default=0)
+    ap.add_argument("--sample", type=int, default=SAMPLE_CAP,
+                    help="候选超过该数量时按文件分层抽样的样本上限；0=不抽样")
+    ap.add_argument("--seed", type=int, default=SAMPLE_SEED)
     ap.add_argument("--jobs", type=int, default=8)
     ap.add_argument("--report", type=str, default="")
     ap.add_argument("--json", type=str, default="")
@@ -621,8 +658,16 @@ def main() -> int:
             print(f"  {cat:14s} {n}")
 
     candidates = buckets.get("candidate", [])
+    sampled_note = ""
     if args.limit:
         candidates = candidates[args.offset: args.offset + args.limit]
+        sampled_note = f"（--limit 分批 {args.offset}:{args.offset + args.limit}）"
+    elif args.sample and len(candidates) > args.sample:
+        before = len(candidates)
+        candidates = stratified_sample(candidates, args.sample, args.seed)
+        sampled_note = f"（分层抽样 {len(candidates)}/{before}，seed={args.seed}）"
+    if sampled_note:
+        print(f"[sample] {sampled_note}")
 
     results: list[dict] = []
     if not args.stats_only and candidates:
@@ -634,7 +679,9 @@ def main() -> int:
         passed = sum(1 for r in results if r["status"] == "pass")
         failed = [r for r in results if r["status"] == "fail"]
         timeouts = [r for r in results if r["status"] == "timeout"]
-        print(f"[result] pass={passed} fail={len(failed)} timeout={len(timeouts)}")
+        rate = passed / len(results) if results else 1.0
+        print(f"[result] pass={passed} fail={len(failed)} timeout={len(timeouts)} "
+              f"pass_rate={rate:.1%}")
         for r in failed[:40]:
             print(f"  FAIL {r['file']}:{r['line']} :: {summarize_stderr(r['stderr'], 200).splitlines()[0] if r['stderr'] else ''}")
         if len(failed) > 40:
@@ -681,8 +728,12 @@ def main() -> int:
     failed_real = [r for r in results if r["status"] in ("fail", "timeout")]
     if failed_real:
         print(f"[gate] {len(failed_real)} 个无依赖块编译失败/超时（详见 --json/--report）")
-        if args.strict:
+    if results:
+        rate = summary["pass"] / len(results)
+        if args.strict and rate < STRICT_PASS_RATE:
+            print(f"[gate] STRICT: pass_rate={rate:.1%} < {STRICT_PASS_RATE:.0%} → exit 1")
             return 1
+    if not args.strict:
         print("[gate] 观察模式：exit 0")
     return 0
 

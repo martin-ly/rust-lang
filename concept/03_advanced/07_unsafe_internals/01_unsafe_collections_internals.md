@@ -209,7 +209,7 @@ impl<T> Drop for MyArc<T> {
 
 ```rust
 use std::cell::UnsafeCell;
-use std::sync::{Mutex, LockResult, Guard};
+use std::sync::{LockResult, Mutex, MutexGuard};
 
 // 简化概念：Mutex<T> 内部使用 UnsafeCell<T> 包裹数据
 // 实际标准库使用 OS 原语保证互斥

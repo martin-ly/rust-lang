@@ -56,6 +56,7 @@
   - [8. 高级主题](#8-高级主题)
     - [8.1 宏 2.0 (未稳定)](#81-宏-20-未稳定)
     - [8.2 与其他语言对比](#82-与其他语言对比)
+  - [9. 实测示例：声明宏的变量卫生（2026-07-12 回填）](#9-实测示例声明宏的变量卫生2026-07-12-回填)
   - [迁移补充：来自 `crates/c11_macro_system_proc/docs/tier_04_advanced/05_macro_hygiene_in_depth.md`](#迁移补充来自-cratesc11_macro_system_procdocstier_04_advanced05_macro_hygiene_in_depthmd)
 - [宏卫生性深度解析](#宏卫生性深度解析)
   - [📋 目录](#-目录-1)
@@ -695,6 +696,41 @@ pub macro my_macro($e:expr) {
 
 ---
 
+## 9. 实测示例：声明宏的变量卫生（2026-07-12 回填）
+
+> **来源**: [Rust Reference — Macros By Example: Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)
+
+`macro_rules!` 对**局部变量**实行 def-site 卫生：宏内部绑定的变量不会与调用处同名变量混淆，反之亦然。rustc 1.97.0 `--edition 2024` 实测：
+
+```rust
+macro_rules! make_fn {
+    ($name:ident) => {
+        fn $name() -> u32 {
+            let value = 42; // def-site 变量：与调用处 value 不同源
+            value
+        }
+    };
+}
+
+make_fn!(answer);
+
+fn main() {
+    let value = 1;
+    assert_eq!(answer(), 42); // 宏内 value 不受调用处遮蔽
+    assert_eq!(value, 1);     // 调用处 value 不被宏污染
+}
+```
+
+对照要点（呼应 §1–§3）：
+
+- **类型/函数/宏** 等条目名在 `macro_rules!` 中是 call-site 解析（非卫生）——上例 `$name` 按调用处可见性生成 `fn answer`；
+- **局部变量、生命周期、标签** 是 def-site 卫生——这是上例成立的依据；
+- 需要刻意跨边界时，用 `$crate` 引用定义处条目（见 §3 过程宏 Span 的对照）；过程宏则通过 `Span::call_site()` / `Span::def_site()`（nightly）显式控制。
+
+> **权威来源**: [Rust Reference — Macros By Example: Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene) · [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)（链接 2026-07-12 curl 实测 200；代码 rustc 1.97.0 实测）
+
+---
+
 ## 迁移补充：来自 `crates/c11_macro_system_proc/docs/tier_04_advanced/05_macro_hygiene_in_depth.md`
 
 以下内容为宏卫生性（Macro Hygiene）的高级专题，从声明宏的局部变量与标签卫生性，到过程宏的 Span 控制与跨调用点标识符解析，系统展开卫生性规则的边界与调试方法。
@@ -741,6 +777,7 @@ pub macro my_macro($e:expr) {
   - [8. 高级主题](#8-高级主题)
     - [8.1 宏 2.0 (未稳定)](#81-宏-20-未稳定)
     - [8.2 与其他语言对比](#82-与其他语言对比)
+  - [9. 实测示例：声明宏的变量卫生（2026-07-12 回填）](#9-实测示例声明宏的变量卫生2026-07-12-回填)
   - [迁移补充：来自 `crates/c11_macro_system_proc/docs/tier_04_advanced/05_macro_hygiene_in_depth.md`](#迁移补充来自-cratesc11_macro_system_procdocstier_04_advanced05_macro_hygiene_in_depthmd)
 - [宏卫生性深度解析](#宏卫生性深度解析)
   - [📋 目录](#-目录-1)

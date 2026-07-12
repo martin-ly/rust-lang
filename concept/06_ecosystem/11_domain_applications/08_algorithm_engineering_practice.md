@@ -85,6 +85,7 @@
     - [教材](#教材)
     - [性能优化](#性能优化)
     - [生产实践](#生产实践)
+  - [8. 实测示例：AoS → SoA 的缓存友好重构（2026-07-12 回填）](#8-实测示例aos--soa-的缓存友好重构2026-07-12-回填)
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
@@ -1958,6 +1959,53 @@ pub async fn rate_limited_api(limiter: &TokenBucket, request: String) -> Result<
 **文档版本**: 1.1
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+## 8. 实测示例：AoS → SoA 的缓存友好重构（2026-07-12 回填）
+
+> **来源**: [Algorithms for Modern Hardware — HPC 算法工程](https://en.algorithmica.org/hpc/)
+
+§2 性能调优实战强调数据导向设计：把结构体数组（AoS）改为数组结构体（SoA）使顺序扫描只触碰需要的字段流，提升缓存行利用率与向量化机会。以下示例两种布局执行同一积分步并断言结果一致——语义不变、访存模式改变。rustc 1.97.0 `--edition 2024` 实测：
+
+```rust
+// AoS：每个粒子的 4 个字段连续存放；只更新 x/y 时，vx/vy 白占缓存行
+struct ParticleAoS { x: f32, y: f32, vx: f32, vy: f32 }
+
+// SoA：同名字段自成连续数组；顺序扫描 x/y/vx/vy 四条密集流
+#[derive(Default)]
+struct ParticlesSoA { x: Vec<f32>, y: Vec<f32>, vx: Vec<f32>, vy: Vec<f32> }
+
+fn step_aos(p: &mut [ParticleAoS], dt: f32) {
+    for q in p { q.x += q.vx * dt; q.y += q.vy * dt; }
+}
+
+fn step_soa(p: &mut ParticlesSoA, dt: f32) {
+    for i in 0..p.x.len() {
+        p.x[i] += p.vx[i] * dt;
+        p.y[i] += p.vy[i] * dt;
+    }
+}
+
+fn main() {
+    let mut aos = [ParticleAoS { x: 0.0, y: 0.0, vx: 1.0, vy: 2.0 }];
+    let mut soa = ParticlesSoA {
+        x: vec![0.0], y: vec![0.0], vx: vec![1.0], vy: vec![2.0],
+    };
+    step_aos(&mut aos, 0.5);
+    step_soa(&mut soa, 0.5);
+    assert_eq!(aos[0].x, soa.x[0]);
+    assert_eq!(aos[0].y, soa.y[0]); // 语义等价，布局不同
+}
+```
+
+工程要点（呼应 §2 与 §6 实战案例）：
+
+- SoA 的收益随粒子数与只读字段比例放大；小规模或随机访问为主的场景 AoS 未必更差——先 profile（见 §2 性能调优方法论）；
+- Rust 中 SoA 的边界检查可用 `get_unchecked`（unsafe）或迭代器 `zip` 消除，`chunks_exact` + SIMD 是进一步向量化路径；
+- 生产替代方案：`soa-derive` 等 crate 自动生成 SoA 视图，避免手写双份结构。
+
+> **权威来源**: [Algorithms for Modern Hardware](https://en.algorithmica.org/hpc/) · [std docs — `std::mem`](https://doc.rust-lang.org/std/mem/)（链接 2026-07-12 curl 实测 200；代码 rustc 1.97.0 实测）
+
+---
 
 ## 过渡段
 

@@ -55,7 +55,7 @@ fn f(mut x: Box<i32>, y: Box<i32>) {
     // x 可变，y 不可变
 }
 
-let closure = |mut a, b| { /* a 可变，b 不可变 */ };
+let closure = |mut a: i32, b: i32| { let _ = (a, b); /* a 可变，b 不可变 */ };
 ```
 
 ---

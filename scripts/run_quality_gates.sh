@@ -52,6 +52,11 @@ run_gate "Metadata Consistency (observe)" python scripts/check_metadata_consiste
 run_gate "Concept Authority Coverage (observe)" python scripts/check_concept_authority_coverage.py --include-crates
 run_gate "Semantic Health (observe)" python scripts/semantic_health.py
 run_gate "Examples Compile Check (observe)" python scripts/check_examples_compile.py
+# 同段附加小节（不计入门数）：concept/ 代码块分层抽样编译实测（观察，2026-07-12 建立）。
+# 提取 concept/ ```rust 块并分类（跳过 ignore/compile_fail/no_run、todo!()/unimplemented!()、
+# 外部 crate 依赖块），std-only 候选 >300 时按文件分层抽样 300 块 rustc --edition 2024 编译，
+# 输出通过率；--strict 时通过率 <95% exit 1（观察期不加 --strict）。
+run_gate "Concept Code Blocks Sample Compile (observe, 附加小节)" python scripts/check_concept_code_blocks.py
 run_gate "Naming Convention (observe)" python scripts/check_naming_convention.py
 
 # --- Content Overlap v2 (blocking, promoted 2026-07-12 per AGENTS.md §5.2) ---

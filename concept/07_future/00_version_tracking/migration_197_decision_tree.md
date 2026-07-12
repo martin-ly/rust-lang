@@ -108,7 +108,7 @@ flowchart TD
 
 **迁移前（Rust 1.96，Edition 2024，编译失败于 1.97）**：
 
-```rust
+```rust,compile_fail
 // edition = "2024", rust = "1.96" —— 1.97 起硬错误
 #[unsafe(export_name = "")]
 pub fn exported_hook() {}

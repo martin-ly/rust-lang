@@ -49,6 +49,7 @@
     - [完整HTTP客户端（Rust 1.90特性集成）](#完整http客户端rust-190特性集成)
     - [WebSocket服务器（完整特性）](#websocket服务器完整特性)
   - [**下一步**: 04\_网络性能基准参考.md](#下一步-04_网络性能基准参考md)
+  - [11. 版本事实对齐与权威来源（2026-07-12 回填）](#11-版本事实对齐与权威来源2026-07-12-回填)
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
@@ -756,6 +757,43 @@ pub async fn modern_websocket_server() -> std::io::Result<()> {
 ---
 
 > **向下引用（Reference）**: 参见 [01_toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
+
+## 11. 版本事实对齐与权威来源（2026-07-12 回填）
+
+> **背景**：本页迁移自 crate 文档，章节标题中的“1.90 新特性”多为**既有稳定特性在网络场景的应用**，并非 1.90 首次稳定。下表按官方发布说明逐项对齐真实稳定版本，避免读者误读版本边界。
+
+| 本页章节 | 特性 | 真实稳定版本 | 权威来源 |
+|:---|:---|:---:|:---|
+| 1.1 异步 Trait 稳定化（RPITIT） | `impl Trait` in trait return position | 1.75.0（2023-12-28） | [Rust 1.75.0 Release Blog](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0/) |
+| 1.2 异步闭包 | `async \|\| {}` 闭包 | 1.85.0（2025-02-20，Edition 2024 同期） | [Rust 1.85.0 Release Blog](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0/) |
+| 2. GATs | 泛型关联类型 | 1.65.0（2022-11-03） | [Rust 1.65.0 Release Blog](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0/) |
+| 3. let-else | `let ... else` 发散绑定 | 1.65.0 | 同上 |
+| 5. 常量泛型 | `min_const_generics` | 1.51.0（2021-03-25） | [Rust 1.51.0 Release Blog](https://blog.rust-lang.org/2021/03/25/Rust-1.51.0/) |
+
+**实测示例（RPITIT，rustc 1.97.0 `--edition 2024` 编译运行通过）**：
+
+```rust
+use std::future::Future;
+
+trait Service {
+    // RPITIT：trait 方法直接返回 impl Future（1.75 稳定）
+    fn fetch(&self, n: u32) -> impl Future<Output = u32> + Send;
+}
+
+struct S;
+impl Service for S {
+    async fn fetch(&self, n: u32) -> u32 { n + 1 }
+}
+
+fn main() {
+    let _f = S.fetch(41); // 返回的 Future 类型由实现者隐藏
+}
+```
+
+> **权威来源**: [Rust 1.75.0 Release Blog](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0/) · [Rust 1.85.0 Release Blog](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0/) · [Rust 1.65.0 Release Blog](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0/) · [Rust 1.51.0 Release Blog](https://blog.rust-lang.org/2021/03/25/Rust-1.51.0/) · [Rust Release Notes](https://doc.rust-lang.org/releases.html)（链接 2026-07-12 curl 实测 200；代码 rustc 1.97.0 实测）
+> 深度概念页：[RPITIT 预研](../03_preview_features/15_rpitit_preview.md) · [Async Closures](../../03_advanced/01_async/07_async_closures.md) · [GATs](../../02_intermediate/00_traits/07_generic_associated_types.md)
+
+---
 
 ## 过渡段
 

@@ -69,6 +69,7 @@
   - [定理链](#定理链)
   - [反命题](#反命题)
   - [反向推理](#反向推理)
+  - [9. 实测示例：derive 宏的最小可用骨架（2026-07-12 回填）](#9-实测示例derive-宏的最小可用骨架2026-07-12-回填)
   - [过渡段](#过渡段)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
@@ -987,6 +988,47 @@ mod tests {
 >
 > **反向推理 2**: 生成代码报错位置混乱 ⟸ 说明 quote! 中未正确传递 span。
 >
+## 9. 实测示例：derive 宏的最小可用骨架（2026-07-12 回填）
+
+> **来源**: [docs.rs — syn](https://docs.rs/syn/latest/syn/) · [docs.rs — quote](https://docs.rs/quote/latest/quote/) · [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)
+
+下列骨架演示 syn/quote 的核心工作流：**`parse_macro_input!` 解析 → 提取 AST 节点 → `quote!` 插值生成**。已在临时 proc-macro crate（`syn = "2"` + `quote = "1"`，`edition = "2024"`）经 `cargo build --offline` 实测编译通过：
+
+```rust,ignore
+// proc-macro crate: Cargo.toml 需 [lib] proc-macro = true
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, DeriveInput};
+
+/// 为结构体生成 `fn type_name() -> &'static str`，返回类型名字符串。
+#[proc_macro_derive(TypeName)]
+pub fn derive_type_name(input: TokenStream) -> TokenStream {
+    // ① 解析：TokenStream → DeriveInput AST（含 ident / generics / data）
+    let ast = parse_macro_input!(input as DeriveInput);
+    // ② 提取：取类型标识符（宏卫生：def-site 生成 impl 块）
+    let name = &ast.ident;
+    let name_str = name.to_string();
+    // ③ 生成：quote! 插值 #name / #name_str → 输出 TokenStream
+    quote! {
+        impl #name {
+            pub fn type_name() -> &'static str { #name_str }
+        }
+    }
+    .into()
+}
+```
+
+工程要点（与 §1–§6 API 参照）：
+
+- `parse_macro_input!` 在解析失败时自动生成 `compile_error!` 输出，是过程宏错误处理的标准入口；
+- `quote!` 的 `#ident` 插值自动处理 `ToTokens`；重复插值用 `#(...)*` 配合分隔符；
+- 生产级 derive 应处理 `ast.generics`（用 `split_for_impl()` 拆出 `impl_generics/ty_generics/where_clause`），本骨架为最小形式；
+- 错误诊断建议配合 `syn::Error::new_spanned` 定位到具体 token（参见 [生产级宏开发](05_production_grade_macro_development.md) 与 [宏调试与诊断](04_macro_debugging_and_diagnostics.md)）。
+
+> **权威来源**: [docs.rs — syn](https://docs.rs/syn/latest/syn/) · [docs.rs — quote](https://docs.rs/quote/latest/quote/) · [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)（链接 2026-07-12 curl 实测 200；代码 `cargo build --offline` 实测，syn 2.x + quote 1.x）
+
+---
+
 ## 过渡段
 
 > **过渡**: 从解析 API 过渡到 AST 数据结构，可以理解 syn 将无结构 token 转为可操作模型的价值。

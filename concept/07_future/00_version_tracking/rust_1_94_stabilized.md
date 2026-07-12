@@ -417,6 +417,29 @@ pub fn advanced_example<T>(value: T) -> T {
 
 > **向下引用（Reference）**: 参见 [01_toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
 
+## 版本事实对齐与权威来源（2026-07-12 回填）
+
+> **背景**：本页迁移自 crate 文档，上文“新增特性”表为占位级描述（“异步网络/生成器/性能优化”并非可核实的 1.94 特性条目）。版本特性的单一事实源是官方发布说明；本页作为跟踪页，应引用而非复述。Edition 2024（1.85.0 稳定）语义是 `rust-version = "1.94"` 项目的真实基线，以下给出可核实的 Edition 2024 语义示例。
+
+**实测示例（`use<>` 精确生命周期捕获，1.82 稳定 / Edition 2024 默认规则；rustc 1.97.0 `--edition 2024` 编译运行通过）**：
+
+```rust
+// Edition 2024 基线语义：impl Trait 返回类型的精确捕获
+fn capture<'a>(s: &'a str) -> impl Iterator<Item = char> + use<'a> {
+    s.chars()
+}
+
+fn main() {
+    let v: String = capture("hi").collect();
+    assert_eq!(v, "hi");
+}
+```
+
+> **权威来源**: [Rust 1.85.0 Release Blog（Edition 2024）](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0/) · [RFC 3617 — Precise capturing](https://rust-lang.github.io/rfcs/3617-precise-capturing.html) · [Rust Release Notes](https://doc.rust-lang.org/releases.html)（链接 2026-07-12 curl 实测 200；代码 rustc 1.97.0 实测）
+> 深度概念页：[Lifetime Capture 预研](../03_preview_features/13_lifetime_capture_preview.md) · [Edition 2024 完全指南](../01_edition_roadmap/02_edition_guide.md)
+
+---
+
 ## 过渡段
 
 > **过渡**: 从版本上下文过渡到 1.94 网络相关改进，可以理解该版本对网络编程生态的重点支持。

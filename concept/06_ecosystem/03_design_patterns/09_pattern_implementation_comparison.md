@@ -789,6 +789,47 @@ pub fn clone_example() {
 
 ---
 
+## 9. 实测示例：静态 vs 动态分派的语义等价与成本边界（2026-07-12 回填）
+
+> **来源**: [TRPL — Using Trait Objects That Allow for Values of Different Types](https://doc.rust-lang.org/book/ch17-02-trait-objects.html) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)
+
+§2–§4 对比了 trait 泛型与 trait 对象的实现形态。以下实测证明二者**语义等价、成本不同**：同一 `area()` 逻辑经静态分派（单态化）与动态分派（vtable）调用结果一致，但前者零运行时间接、后者一次指针跳转。rustc 1.97.0 `--edition 2024` 实测：
+
+```rust
+trait Shape { fn area(&self) -> f64; }
+struct Circle { r: f64 }
+impl Shape for Circle {
+    fn area(&self) -> f64 { std::f64::consts::PI * self.r * self.r }
+}
+
+// 静态分派：编译期为每个 T 单态化一份，无 vtable
+fn total_static<T: Shape>(shapes: &[T]) -> f64 {
+    shapes.iter().map(|s| s.area()).sum()
+}
+// 动态分派：经 &dyn Shape 的 vtable 间接调用
+fn total_dynamic(shapes: &[&dyn Shape]) -> f64 {
+    shapes.iter().map(|s| s.area()).sum()
+}
+
+fn main() {
+    let c1 = Circle { r: 2.0 };
+    let c2 = Circle { r: 2.0 };
+    let a = total_static(&[c1]);
+    let b = total_dynamic(&[&c2]);
+    assert!((a - b).abs() < 1e-9); // 语义等价
+}
+```
+
+选型决策（与 §8 性能开销对比呼应）：
+
+- 同构集合 + 性能敏感 → 静态分派（单态化，可内联）；
+- 异构集合 / 插件边界 / 二进制体积敏感 → 动态分派（vtable，一次间接）；
+- 动态分派的真正成本不只是间接跳转，还包括**阻止内联**后的优化视野丢失（参见 [Dispatch Mechanisms](../../02_intermediate/00_traits/02_dispatch_mechanisms.md)）。
+
+> **权威来源**: [TRPL — Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html) · [Rust Reference — Trait Object Types](https://doc.rust-lang.org/reference/types/trait-object.html)（链接 2026-07-12 curl 实测 200；代码 rustc 1.97.0 实测）
+
+---
+
 ## 📚 相关资源
 
 ---

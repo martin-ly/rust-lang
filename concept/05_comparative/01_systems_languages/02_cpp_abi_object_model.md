@@ -770,6 +770,38 @@ fn main() {
 
 ---
 
+## 十一、实测示例：`#[repr(C)]` 布局的 C++ 对齐验证（2026-07-12 回填）
+
+> **来源**: [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)
+
+§三断言 `#[repr(C)]` 使 Rust 结构体获得与 C/C++ 相同的布局规则（字段顺序、自然对齐、尾部填充）。以下用 `size_of`/`align_of`/`offset_of!` 把该断言转化为可执行验证——若 Rust 的 `repr(C)` 布局与 Itanium ABI 的 POD 规则不一致，断言即失败。rustc 1.97.0 `--edition 2024` 实测：
+
+```rust
+#[repr(C)]
+struct Point { x: f64, y: f64 }
+
+#[repr(C)]
+struct Line { a: Point, b: Point }
+
+fn main() {
+    // 与 C++ `struct { double x, y; };` 的 Itanium ABI 布局逐项一致
+    assert_eq!(std::mem::size_of::<Point>(), 16);
+    assert_eq!(std::mem::align_of::<Point>(), 8);
+    assert_eq!(std::mem::size_of::<Line>(), 32);
+    assert_eq!(std::mem::offset_of!(Line, b), 16);
+}
+```
+
+边界提示（呼应 §五 枚举布局）：
+
+- 上述保证仅对 `#[repr(C)]`（及 `#[repr(transparent)]`）成立；默认 `repr(Rust)` 允许编译器重排字段，跨语言边界禁用；
+- `offset_of!`（1.77 稳定）取代了不安全的 `mem::transmute` 手写偏移计算，是 ABI 验证的首选工具；
+- 含 `bool`/引用的结构体在 C++ 侧对应类型需逐一核对（C++ `bool` 与 Rust `bool` 均为 1 字节但有效值域约定不同，见 §十 边界测试）。
+
+> **权威来源**: [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)（链接 2026-07-12 curl 实测 200；代码 rustc 1.97.0 实测）
+
+---
+
 ## 参考来源
 
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]

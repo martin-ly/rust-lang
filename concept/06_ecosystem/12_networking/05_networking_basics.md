@@ -57,6 +57,7 @@
   - [8. 总结](#8-总结)
     - [核心要点](#核心要点)
     - [最佳实践](#最佳实践)
+  - [9. 实测示例：TCP 回环回声（2026-07-12 回填）](#9-实测示例tcp-回环回声2026-07-12-回填)
   - [📚 参考资源](#-参考资源)
   - [**下一步**: 学习 HTTP 客户端开发，深入 HTTP 协议实践](#下一步-学习-http-客户端开发深入-http-协议实践)
   - [过渡段](#过渡段)
@@ -833,6 +834,46 @@ fn main() {
 3. **资源释放**: 利用 RAII 自动释放连接
 4. **异步优先**: 高并发场景使用异步
 5. **连接池**: 复用连接减少开销
+
+---
+
+## 9. 实测示例：TCP 回环回声（2026-07-12 回填）
+
+> **来源**: [std docs — `std::net`](https://doc.rust-lang.org/std/net/)
+
+§2–§5 讲解了 TCP/UDP/DNS/超时的 API 面。以下最小示例把监听、接受、读写串成可验证闭环：绑定回环地址的临时端口（`:0`），客户端发送 4 字节并断言回声。rustc 1.97.0 `--edition 2024` 实测运行通过：
+
+```rust
+use std::io::{Read, Write};
+use std::net::{TcpListener, TcpStream};
+
+fn main() {
+    // :0 由 OS 分配空闲端口——测试/示例的标准做法
+    let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+    let addr = listener.local_addr().unwrap();
+
+    std::thread::spawn(move || {
+        let (mut s, _) = listener.accept().unwrap();
+        let mut buf = [0u8; 4];
+        s.read_exact(&mut buf).unwrap(); // 阻塞读满 4 字节
+        s.write_all(&buf).unwrap();      // 回声
+    });
+
+    let mut c = TcpStream::connect(addr).unwrap();
+    c.write_all(b"ping").unwrap();
+    let mut buf = [0u8; 4];
+    c.read_exact(&mut buf).unwrap();
+    assert_eq!(&buf, b"ping");
+}
+```
+
+工程要点（呼应 §5 错误处理与超时）：
+
+- `read` 可能短读，固定长度协议必须用 `read_exact`；生产代码应将 `unwrap` 换为 `?` + 错误类型（见 [错误处理](../../02_intermediate/03_error_handling/01_error_handling.md)）；
+- 阻塞 socket 默认无超时，生产环境须 `set_read_timeout` / `set_write_timeout`；
+- 该模式是理解异步 `tokio::net::TcpListener` 的同步基线（见 [异步模式](../../03_advanced/01_async/03_async_patterns.md)）。
+
+> **权威来源**: [std docs — `std::net`](https://doc.rust-lang.org/std/net/) · [TRPL — Building a Multithreaded Web Server](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html)（链接 2026-07-12 curl 实测 200；代码 rustc 1.97.0 实测）
 
 ---
 

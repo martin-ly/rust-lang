@@ -72,6 +72,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `triage_overlap.py` | 重叠报告分诊（MERGE/DOCS_INTERNAL/SERIES/REVIEW；SERIES 白名单 = 正则 + `SERIES_PATH_RE` 路径族 + 显式 `SERIES_PAIRS` 人工复核登记） |
 | `check_canonical_uniqueness.py` | `concept/` 权威页唯一性检查（质量门 13，阻断） |
 | `check_template_cliches.py` | `concept/` 模板套话黑名单扫描；`--strict` 发现命中即 exit 1 |
+| `audit_content_completeness.py` | `concept/` 内容完整性审计：TODO 类标记 / 空章节 / PLACEHOLDER_SECTION（占位引导语，观察指标默认 exit 0；`--strict` 存在即 exit 1） |
 | `check_decision_trees.py` | 决策树机器可读层校验（`decision_trees.yaml` 结构/死端/概念覆盖）；结构错误 exit 1 |
 | `check_glossary_alignment.py` | 术语表对齐检查（以 `terminology_glossary.md` 为权威）；`--strict` 有差异 exit 1 |
 | `check_msrv_consistency.py` | MSRV 单一事实源检查（根 `Cargo.toml` rust-version=1.97.0）；`--strict` 不一致 exit 1 |
@@ -162,6 +163,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `code_block_compiler.py` | 代码块编译验证 |
 | `verify_compile_fail_v3.py` | `compile_fail` 代码块验证 |
 | `check_examples_compile.py` | 根 `examples/` 游离示例编译保护（质量门 19，观察）：9 个 stdlib 示例 rustc 直编 + 3 个依赖示例经 `examples/examples_check/` crate + 2 个 Cargo Script 豁免；未登记的新游离文件视为失败；`--strict` 失败 exit 1 |
+| `check_concept_code_blocks.py` | concept/ 代码块批量编译实测（run_quality_gates.sh 中 Examples Compile Check 段附加小节，观察）：提取全部 ```rust 块并分类（flag_skip/pseudo/nightly/nostd/dep*/candidate），std-only 候选 >300 时按文件分层抽样（默认 300，seed 固定）`rustc --edition 2024` 编译；`--strict` 通过率 <95% exit 1；`--with-deps` 附加 workspace 依赖块实测 |
 
 ### 📋 日常工具
 
