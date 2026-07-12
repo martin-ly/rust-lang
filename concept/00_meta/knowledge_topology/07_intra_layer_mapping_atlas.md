@@ -12,6 +12,7 @@
 **关系符号约定**（与 KG v3 属性对齐；推断规则见 `scripts/generate_knowledge_topology_atlas.py` `infer_relation`）：
 
 - `→` dependsOn：源依赖目标（目标在源的前置元数据中）
+- `⟸` rev-dependsOn：目标依赖源（源在目标的前置元数据中）
 - `⟹` entails：源蕴含/导向目标（后置概念引用，默认）
 - `⊑` refines：精化关系，名称含“进阶/机制/模式”的一侧精化另一侧（同主题目录）
 - `⊥` mutexWith：两概念互斥（策展标注，依据见各行）
@@ -55,8 +56,8 @@
 | [Functions](../../01_foundation/07_modules_and_items/02_functions.md) | ⟹ | [闭包基础：捕获环境与匿名函数](../../01_foundation/00_start/03_closure_basics.md) | 后置概念引用（蕴含/导向） |
 | [Functions](../../01_foundation/07_modules_and_items/02_functions.md) | ⟹ | [模块系统与路径：Rust 的代码组织哲学](../../01_foundation/07_modules_and_items/01_modules_and_paths.md) | 后置概念引用（蕴含/导向） |
 | [Use Declarations](../../01_foundation/07_modules_and_items/03_use_declarations.md) | ⟹ | [Preludes](../../01_foundation/07_modules_and_items/10_preludes.md) | 后置概念引用（蕴含/导向） |
-| [Structs](../../01_foundation/07_modules_and_items/04_structs.md) | ⟹ | [Enumerations](../../01_foundation/07_modules_and_items/05_enumerations.md) | 后置概念引用（蕴含/导向） |
-| [Structs](../../01_foundation/07_modules_and_items/04_structs.md) | ⟹ | [Implementations](../../01_foundation/07_modules_and_items/06_implementations.md) | 后置概念引用（蕴含/导向） |
+| [Structs](../../01_foundation/07_modules_and_items/04_structs.md) | ⟸ | [Enumerations](../../01_foundation/07_modules_and_items/05_enumerations.md) | 源在目标的前置元数据中（目标依赖源） |
+| [Structs](../../01_foundation/07_modules_and_items/04_structs.md) | ⟸ | [Implementations](../../01_foundation/07_modules_and_items/06_implementations.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Enumerations](../../01_foundation/07_modules_and_items/05_enumerations.md) | ⟹ | [Rust 错误处理基础](../../01_foundation/08_error_handling/01_error_handling_basics.md) | 后置概念引用（蕴含/导向） |
 | [字符串与编码：Rust 的文本处理类型系统](../../01_foundation/06_strings_and_text/02_strings_and_encoding.md) | ⟹ | [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/05_collections/01_collections.md) | 后置概念引用（蕴含/导向） |
 | [值语义 vs 引用语义：从 C++、Java、Python 到 Rust](../../01_foundation/03_values_and_references/02_value_vs_reference_semantics.md) | ⇔ | [Move 语义：C++ 与 Rust 的资源转移模型](../../01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md) | 对比型页面（名称含 vs/对比） |
@@ -68,8 +69,8 @@
 | [Rust 关键字](../../01_foundation/00_start/06_keywords.md) | ⟹ | [属性与声明宏：编译期元编程基础](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) | 后置概念引用（蕴含/导向） |
 | [Rust 关键字](../../01_foundation/00_start/06_keywords.md) | ⟹ | [模块系统与路径：Rust 的代码组织哲学](../../01_foundation/07_modules_and_items/01_modules_and_paths.md) | 后置概念引用（蕴含/导向） |
 | [Rust 运算符与符号](../../01_foundation/00_start/07_operators_and_symbols.md) | → | [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) | 目标在源的前置元数据中（源依赖目标） |
-| [Crate 与源文件](../../01_foundation/07_modules_and_items/11_crates_and_source_files.md) | ⟹ | [项](../../01_foundation/07_modules_and_items/12_items.md) | 后置概念引用（蕴含/导向） |
-| [模式匹配](../../01_foundation/04_control_flow/02_patterns.md) | ⟹ | [语句与表达式](../../01_foundation/04_control_flow/03_statements_and_expressions.md) | 后置概念引用（蕴含/导向） |
+| [Crate 与源文件](../../01_foundation/07_modules_and_items/11_crates_and_source_files.md) | ⟸ | [项](../../01_foundation/07_modules_and_items/12_items.md) | 源在目标的前置元数据中（目标依赖源） |
+| [模式匹配](../../01_foundation/04_control_flow/02_patterns.md) | ⟸ | [语句与表达式](../../01_foundation/04_control_flow/03_statements_and_expressions.md) | 源在目标的前置元数据中（目标依赖源） |
 | [语句与表达式](../../01_foundation/04_control_flow/03_statements_and_expressions.md) | ⟹ | [闭包基础：捕获环境与匿名函数](../../01_foundation/00_start/03_closure_basics.md) | 后置概念引用（蕴含/导向） |
 | [常用开发工具](../../01_foundation/10_testing_basics/02_useful_development_tools.md) | ⟹ | [测试基础：从单元测试到集成测试](../../01_foundation/10_testing_basics/01_testing_basics.md) | 后置概念引用（蕴含/导向） |
 | [标准 I/O 与进程](../../01_foundation/00_start/05_std_io_and_process.md) | ⟹ | [测试基础：从单元测试到集成测试](../../01_foundation/10_testing_basics/01_testing_basics.md) | 后置概念引用（蕴含/导向） |
@@ -112,21 +113,21 @@
 
 | 源概念 | 关系 | 目标概念 | 依据 |
 |:---|:---:|:---|:---|
-| [Rust 进程模型与生命周期](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) | ⊑ | [Rust 高级进程管理](../../03_advanced/08_process_ipc/02_advanced_process_management.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
-| [Rust 进程模型与生命周期](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) | ⟹ | [Rust 异步进程管理](../../03_advanced/08_process_ipc/03_async_process_management.md) | 后置概念引用（蕴含/导向） |
-| [Rust 进程模型与生命周期](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) | ⊑ | [Rust 进程间通信机制](../../03_advanced/08_process_ipc/05_ipc_mechanisms.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
+| [Rust 进程模型与生命周期](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) | ⟸ | [Rust 高级进程管理](../../03_advanced/08_process_ipc/02_advanced_process_management.md) | 源在目标的前置元数据中（目标依赖源） |
+| [Rust 进程模型与生命周期](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) | ⟸ | [Rust 异步进程管理](../../03_advanced/08_process_ipc/03_async_process_management.md) | 源在目标的前置元数据中（目标依赖源） |
+| [Rust 进程模型与生命周期](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) | ⟸ | [Rust 进程间通信机制](../../03_advanced/08_process_ipc/05_ipc_mechanisms.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Rust 高级进程管理](../../03_advanced/08_process_ipc/02_advanced_process_management.md) | ⊑ | [Rust 异步进程管理](../../03_advanced/08_process_ipc/03_async_process_management.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Rust 高级进程管理](../../03_advanced/08_process_ipc/02_advanced_process_management.md) | ⊑ | [Rust 进程监控与诊断](../../03_advanced/08_process_ipc/06_process_monitoring_and_diagnostics.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Rust 高级进程管理](../../03_advanced/08_process_ipc/02_advanced_process_management.md) | ⊑ | [Rust 进程性能工程](../../03_advanced/08_process_ipc/08_process_performance_engineering.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Rust 异步进程管理](../../03_advanced/08_process_ipc/03_async_process_management.md) | ⊑ | [Rust 进程间通信机制](../../03_advanced/08_process_ipc/05_ipc_mechanisms.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Rust 异步进程管理](../../03_advanced/08_process_ipc/03_async_process_management.md) | ⟹ | [Rust 进程监控与诊断](../../03_advanced/08_process_ipc/06_process_monitoring_and_diagnostics.md) | 后置概念引用（蕴含/导向） |
-| [Rust 异步进程管理](../../03_advanced/08_process_ipc/03_async_process_management.md) | ⟹ | [Rust 现代进程管理库](../../03_advanced/08_process_ipc/10_modern_process_libraries.md) | 后置概念引用（蕴含/导向） |
+| [Rust 异步进程管理](../../03_advanced/08_process_ipc/03_async_process_management.md) | ⟸ | [Rust 现代进程管理库](../../03_advanced/08_process_ipc/10_modern_process_libraries.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Rust 跨平台进程管理](../../03_advanced/08_process_ipc/04_cross_platform_process_management.md) | ⊑ | [Rust 进程间通信机制](../../03_advanced/08_process_ipc/05_ipc_mechanisms.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Rust 跨平台进程管理](../../03_advanced/08_process_ipc/04_cross_platform_process_management.md) | ⟹ | [Rust 进程安全与沙箱](../../03_advanced/08_process_ipc/07_process_security_and_sandboxing.md) | 后置概念引用（蕴含/导向） |
 | [Rust 跨平台进程管理](../../03_advanced/08_process_ipc/04_cross_platform_process_management.md) | ⟹ | [Rust 现代进程管理库](../../03_advanced/08_process_ipc/10_modern_process_libraries.md) | 后置概念引用（蕴含/导向） |
-| [Rust 进程间通信机制](../../03_advanced/08_process_ipc/05_ipc_mechanisms.md) | ⊑ | [Rust 进程监控与诊断](../../03_advanced/08_process_ipc/06_process_monitoring_and_diagnostics.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
-| [Rust 进程间通信机制](../../03_advanced/08_process_ipc/05_ipc_mechanisms.md) | ⊑ | [Rust 进程安全与沙箱](../../03_advanced/08_process_ipc/07_process_security_and_sandboxing.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
-| [Rust 进程间通信机制](../../03_advanced/08_process_ipc/05_ipc_mechanisms.md) | ⊑ | [Rust 进程性能工程](../../03_advanced/08_process_ipc/08_process_performance_engineering.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
+| [Rust 进程间通信机制](../../03_advanced/08_process_ipc/05_ipc_mechanisms.md) | ⟸ | [Rust 进程监控与诊断](../../03_advanced/08_process_ipc/06_process_monitoring_and_diagnostics.md) | 源在目标的前置元数据中（目标依赖源） |
+| [Rust 进程间通信机制](../../03_advanced/08_process_ipc/05_ipc_mechanisms.md) | ⟸ | [Rust 进程安全与沙箱](../../03_advanced/08_process_ipc/07_process_security_and_sandboxing.md) | 源在目标的前置元数据中（目标依赖源） |
+| [Rust 进程间通信机制](../../03_advanced/08_process_ipc/05_ipc_mechanisms.md) | ⟸ | [Rust 进程性能工程](../../03_advanced/08_process_ipc/08_process_performance_engineering.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Pin 与 Unpin：自引用类型的不动性保证](../../03_advanced/01_async/08_pin_unpin.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/01_unsafe.md) | 后置概念引用（蕴含/导向） |
 | [Rust 进程监控与诊断](../../03_advanced/08_process_ipc/06_process_monitoring_and_diagnostics.md) | ⟹ | [Rust 进程安全与沙箱](../../03_advanced/08_process_ipc/07_process_security_and_sandboxing.md) | 后置概念引用（蕴含/导向） |
 | [Rust 进程监控与诊断](../../03_advanced/08_process_ipc/06_process_monitoring_and_diagnostics.md) | ↔ | [Rust 进程性能工程](../../03_advanced/08_process_ipc/08_process_performance_engineering.md) | 互为后置概念（互参） |
@@ -159,19 +160,19 @@
 | [Rust 内存模型](../../03_advanced/02_unsafe/06_memory_model.md) | ⟹ | [内联汇编 (Inline Assembly)](../../03_advanced/05_inline_assembly/01_inline_assembly.md) | 后置概念引用（蕴含/导向） |
 | [过程宏代码生成优化](../../03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md) | ⟹ | [生产级宏开发](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md) | 后置概念引用（蕴含/导向） |
 | [过程宏代码生成优化](../../03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md) | ⟹ | [宏调试与诊断](../../03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md) | 后置概念引用（蕴含/导向） |
-| [宏调试与诊断](../../03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md) | ⟹ | [生产级宏开发](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md) | 后置概念引用（蕴含/导向） |
+| [宏调试与诊断](../../03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md) | ⟸ | [生产级宏开发](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Rust 运行时](../../03_advanced/06_low_level_patterns/07_rust_runtime.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/01_unsafe.md) | 后置概念引用（蕴含/导向） |
 | [术语表 - C11 Macro System](../../03_advanced/03_proc_macros/06_macro_glossary.md) | ⟹ | [宏卫生性完整参考](../../03_advanced/03_proc_macros/09_macro_hygiene.md) | 后置概念引用（蕴含/导向） |
-| [术语表 - C11 Macro System](../../03_advanced/03_proc_macros/06_macro_glossary.md) | ⟹ | [syn & quote 完整参考](../../03_advanced/03_proc_macros/08_syn_quote_reference.md) | 后置概念引用（蕴含/导向） |
+| [术语表 - C11 Macro System](../../03_advanced/03_proc_macros/06_macro_glossary.md) | ⟸ | [syn & quote 完整参考](../../03_advanced/03_proc_macros/08_syn_quote_reference.md) | 源在目标的前置元数据中（目标依赖源） |
 | [内存分配与生命周期](../../03_advanced/06_low_level_patterns/08_memory_allocation_and_lifetime.md) | ⟹ | [自定义分配器与内存布局优化](../../03_advanced/06_low_level_patterns/01_custom_allocators.md) | 后置概念引用（蕴含/导向） |
 | [内存分配与生命周期](../../03_advanced/06_low_level_patterns/08_memory_allocation_and_lifetime.md) | ⟹ | [Rust 运行时](../../03_advanced/06_low_level_patterns/07_rust_runtime.md) | 后置概念引用（蕴含/导向） |
 | [Unsafe 边界全景](../../03_advanced/02_unsafe/02_unsafe_boundary_panorama.md) | ↔ | [Async 边界全景](../../03_advanced/01_async/06_async_boundary_panorama.md) | 互为后置概念（互参） |
 | [常见问题 (FAQ) - C11 Macro System](../../03_advanced/03_proc_macros/07_macro_faq.md) | ⟹ | [宏卫生性完整参考](../../03_advanced/03_proc_macros/09_macro_hygiene.md) | 后置概念引用（蕴含/导向） |
 | [常见问题 (FAQ) - C11 Macro System](../../03_advanced/03_proc_macros/07_macro_faq.md) | ⟹ | [生产级宏开发](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md) | 后置概念引用（蕴含/导向） |
-| [变量](../../03_advanced/06_low_level_patterns/09_variables.md) | ⟹ | [内存分配与生命周期](../../03_advanced/06_low_level_patterns/08_memory_allocation_and_lifetime.md) | 后置概念引用（蕴含/导向） |
+| [变量](../../03_advanced/06_low_level_patterns/09_variables.md) | ⟸ | [内存分配与生命周期](../../03_advanced/06_low_level_patterns/08_memory_allocation_and_lifetime.md) | 源在目标的前置元数据中（目标依赖源） |
 | [变量](../../03_advanced/06_low_level_patterns/09_variables.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/01_unsafe.md) | 后置概念引用（蕴含/导向） |
 | [syn & quote 完整参考](../../03_advanced/03_proc_macros/08_syn_quote_reference.md) | ⟹ | [生产级宏开发](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md) | 后置概念引用（蕴含/导向） |
-| [syn & quote 完整参考](../../03_advanced/03_proc_macros/08_syn_quote_reference.md) | ⟹ | [宏卫生性完整参考](../../03_advanced/03_proc_macros/09_macro_hygiene.md) | 后置概念引用（蕴含/导向） |
+| [syn & quote 完整参考](../../03_advanced/03_proc_macros/08_syn_quote_reference.md) | ⟸ | [宏卫生性完整参考](../../03_advanced/03_proc_macros/09_macro_hygiene.md) | 源在目标的前置元数据中（目标依赖源） |
 | [宏卫生性完整参考](../../03_advanced/03_proc_macros/09_macro_hygiene.md) | ⟹ | [生产级宏开发](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md) | 后置概念引用（蕴含/导向） |
 | [宏卫生性完整参考](../../03_advanced/03_proc_macros/09_macro_hygiene.md) | ⟹ | [宏调试与诊断](../../03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md) | 后置概念引用（蕴含/导向） |
 | [Unsafe 参考](../../03_advanced/02_unsafe/07_unsafe_reference.md) | ⟹ | [内联汇编 (Inline Assembly)](../../03_advanced/05_inline_assembly/01_inline_assembly.md) | 后置概念引用（蕴含/导向） |
@@ -194,7 +195,7 @@
 | [Linear Logic & Affine Logic](../../04_formal/01_ownership_logic/01_linear_logic.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 后置概念引用（蕴含/导向） |
 | [Type Theory](../../04_formal/00_type_theory/01_type_theory.md) | ⟹ | [Ownership Formalization](../../04_formal/01_ownership_logic/02_ownership_formal.md) | 后置概念引用（蕴含/导向） |
 | [Type Theory](../../04_formal/00_type_theory/01_type_theory.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 后置概念引用（蕴含/导向） |
-| [Ownership Formalization](../../04_formal/01_ownership_logic/02_ownership_formal.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 后置概念引用（蕴含/导向） |
+| [Ownership Formalization](../../04_formal/01_ownership_logic/02_ownership_formal.md) | ⟸ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 源在目标的前置元数据中（目标依赖源） |
 | [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/00_type_theory/02_subtype_variance.md) | ⟹ | [Type Theory](../../04_formal/00_type_theory/01_type_theory.md) | 后置概念引用（蕴含/导向） |
 | [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/00_type_theory/02_subtype_variance.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 后置概念引用（蕴含/导向） |
 | [类型推断：Hindley-Milner 算法与 Rust 的工业实现](../../04_formal/00_type_theory/03_type_inference.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 后置概念引用（蕴含/导向） |
@@ -227,26 +228,26 @@
 | [Type Inference Complexity](../../04_formal/00_type_theory/08_type_inference_complexity.md) | ⟹ | [rustc 类型检查与类型推断](../../04_formal/00_type_theory/07_type_checking_and_inference.md) | 后置概念引用（蕴含/导向） |
 | [Type Inference Complexity](../../04_formal/00_type_theory/08_type_inference_complexity.md) | ⟹ | [子类型与变型：Rust 类型系统中的协变、逆变与不变](../../04_formal/00_type_theory/02_subtype_variance.md) | 后置概念引用（蕴含/导向） |
 | [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/08_miri.md) | ↔ | [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) | 互为后置概念（互参） |
-| [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/08_miri.md) | ⟹ | [BorrowSanitizer 运行时别名模型检测](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md) | 后置概念引用（蕴含/导向） |
+| [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/08_miri.md) | ⟸ | [BorrowSanitizer 运行时别名模型检测](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/08_miri.md) | ⟹ | [现代 Rust 验证工具生态](../../04_formal/04_model_checking/04_modern_verification_tools.md) | 后置概念引用（蕴含/导向） |
 | [Kani：Rust 有界模型检查器](../../04_formal/04_model_checking/09_kani.md) | ⟹ | [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/08_miri.md) | 后置概念引用（蕴含/导向） |
 | [Kani：Rust 有界模型检查器](../../04_formal/04_model_checking/09_kani.md) | ⟹ | [BorrowSanitizer 运行时别名模型检测](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md) | 后置概念引用（蕴含/导向） |
 | [BorrowSanitizer 运行时别名模型检测](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md) | ↔ | [AutoVerus / Verus 自动证明生态](../../04_formal/04_model_checking/07_autoverus.md) | 互为后置概念（互参） |
 | [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md) | ⟹ | [Rustc 查询系统与增量编译](../../04_formal/05_rustc_internals/01_rustc_query_system.md) | 后置概念引用（蕴含/导向） |
 | [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md) | ⟹ | [类型推断：Hindley-Milner 算法与 Rust 的工业实现](../../04_formal/00_type_theory/03_type_inference.md) | 后置概念引用（蕴含/导向） |
-| [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md) | ⟹ | [rustc 中的 Trait Solver](../../04_formal/05_rustc_internals/03_trait_solver_in_rustc.md) | 后置概念引用（蕴含/导向） |
+| [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md) | ⟸ | [rustc 中的 Trait Solver](../../04_formal/05_rustc_internals/03_trait_solver_in_rustc.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) | ⟹ | [BorrowSanitizer 运行时别名模型检测](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md) | 后置概念引用（蕴含/导向） |
 | [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) | ↔ | [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/08_miri.md) | 互为后置概念（互参） |
 | [未定义行为清单](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | ⟹ | [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/08_miri.md) | 后置概念引用（蕴含/导向） |
 | [未定义行为清单](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | ⟹ | [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) | 后置概念引用（蕴含/导向） |
 | [名称、作用域与解析](../../04_formal/05_rustc_internals/06_names_and_resolution.md) | ⟹ | [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md) | 后置概念引用（蕴含/导向） |
-| [名称、作用域与解析](../../04_formal/05_rustc_internals/06_names_and_resolution.md) | ⟹ | [名字参考](../../04_formal/05_rustc_internals/16_names_reference.md) | 后置概念引用（蕴含/导向） |
+| [名称、作用域与解析](../../04_formal/05_rustc_internals/06_names_and_resolution.md) | ⟸ | [名字参考](../../04_formal/05_rustc_internals/16_names_reference.md) | 源在目标的前置元数据中（目标依赖源） |
 | [类型布局](../../04_formal/05_rustc_internals/08_type_layout.md) | ⟹ | [未定义行为清单](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | 后置概念引用（蕴含/导向） |
 | [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/09_destructors.md) | ⟹ | [未定义行为清单](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | 后置概念引用（蕴含/导向） |
-| [符号约定](../../04_formal/06_notation/01_notation.md) | ⟹ | [词法结构](../../04_formal/05_rustc_internals/10_lexical_structure.md) | 后置概念引用（蕴含/导向） |
+| [符号约定](../../04_formal/06_notation/01_notation.md) | ⟸ | [词法结构](../../04_formal/05_rustc_internals/10_lexical_structure.md) | 源在目标的前置元数据中（目标依赖源） |
 | [词法结构](../../04_formal/05_rustc_internals/10_lexical_structure.md) | ⟹ | [名称、作用域与解析](../../04_formal/05_rustc_internals/06_names_and_resolution.md) | 后置概念引用（蕴含/导向） |
 | [词法结构](../../04_formal/05_rustc_internals/10_lexical_structure.md) | ⟹ | [条目参考](../../04_formal/05_rustc_internals/11_items_reference.md) | 后置概念引用（蕴含/导向） |
-| [条目参考](../../04_formal/05_rustc_internals/11_items_reference.md) | ⟹ | [属性](../../04_formal/05_rustc_internals/12_attributes.md) | 后置概念引用（蕴含/导向） |
+| [条目参考](../../04_formal/05_rustc_internals/11_items_reference.md) | ⟸ | [属性](../../04_formal/05_rustc_internals/12_attributes.md) | 源在目标的前置元数据中（目标依赖源） |
 | [语句与表达式参考](../../04_formal/05_rustc_internals/13_statements_and_expressions_reference.md) | ↔ | [模式参考](../../04_formal/05_rustc_internals/14_patterns_reference.md) | 互为后置概念（互参） |
 | [语句与表达式参考](../../04_formal/05_rustc_internals/13_statements_and_expressions_reference.md) | ⟹ | [常量求值](../../04_formal/03_operational_semantics/07_constant_evaluation.md) | 后置概念引用（蕴含/导向） |
 | [语句与表达式参考](../../04_formal/05_rustc_internals/13_statements_and_expressions_reference.md) | ⟹ | [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/09_destructors.md) | 后置概念引用（蕴含/导向） |
@@ -289,7 +290,7 @@
 | [Rust 高级网络协议概览](../../06_ecosystem/12_networking/01_advanced_network_protocols.md) | ↔ | [网络安全](../../06_ecosystem/12_networking/02_network_security.md) | 互为后置概念（互参） |
 | [网络安全](../../06_ecosystem/12_networking/02_network_security.md) | ↔ | [Rust 高级网络协议概览](../../06_ecosystem/12_networking/01_advanced_network_protocols.md) | 互为后置概念（互参） |
 | [网络安全](../../06_ecosystem/12_networking/02_network_security.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | 后置概念引用（蕴含/导向） |
-| [Core Crates](../../06_ecosystem/02_core_crates/01_core_crates.md) | ⟹ | [Application Domains](../../06_ecosystem/06_data_and_distributed/01_application_domains.md) | 后置概念引用（蕴含/导向） |
+| [Core Crates](../../06_ecosystem/02_core_crates/01_core_crates.md) | ⟸ | [Application Domains](../../06_ecosystem/06_data_and_distributed/01_application_domains.md) | 源在目标的前置元数据中（目标依赖源） |
 | [自定义协议实现](../../06_ecosystem/12_networking/03_custom_protocol_implementation.md) | ⊑ | [Rust 高级网络协议概览](../../06_ecosystem/12_networking/01_advanced_network_protocols.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [自定义协议实现](../../06_ecosystem/12_networking/03_custom_protocol_implementation.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | 后置概念引用（蕴含/导向） |
 | [Rust 网络编程快速入门](../../06_ecosystem/12_networking/04_network_programming_quick_start.md) | ⟹ | [高性能网络服务架构 (High-Performance Network Service Architecture)](../../06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md) | 后置概念引用（蕴含/导向） |
@@ -351,7 +352,7 @@
 | [数据库系统：Rust 在存储引擎中的语义](../../06_ecosystem/06_data_and_distributed/04_database_systems.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | 后置概念引用（蕴含/导向） |
 | [模式选择最佳实践 (Pattern Selection Best Practices)](../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md) | ⊑ | [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [模式选择最佳实践 (Pattern Selection Best Practices)](../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md) | ⊑ | [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
-| [形式化设计模式理论 (Formal Design Pattern Theory)](../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md) | ⊑ | [前沿研究与创新模式 (Frontier Research and Innovative Patterns)](../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
+| [形式化设计模式理论 (Formal Design Pattern Theory)](../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md) | ⟸ | [前沿研究与创新模式 (Frontier Research and Innovative Patterns)](../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md) | 源在目标的前置元数据中（目标依赖源） |
 | [形式化设计模式理论 (Formal Design Pattern Theory)](../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md) | ⊑ | [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [网络协议：QUIC/HTTP-3 与 Rust 实现](../../06_ecosystem/04_web_and_networking/07_network_protocols.md) | ⟹ | [流处理生态：Rust 实现与工业系统全景](../../06_ecosystem/06_data_and_distributed/03_stream_processing_ecosystem.md) | 后置概念引用（蕴含/导向） |
 | [网络协议：QUIC/HTTP-3 与 Rust 实现](../../06_ecosystem/04_web_and_networking/07_network_protocols.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | 后置概念引用（蕴含/导向） |
@@ -397,11 +398,11 @@
 | [将 Rust 集成到现有平台](../../06_ecosystem/00_toolchain/08_platform_rust_integration.md) | ⟹ | [Rust 操作系统内核开发](../../06_ecosystem/05_systems_and_embedded/05_os_kernel.md) | 后置概念引用（蕴含/导向） |
 | [Cargo Build Scripts](../../06_ecosystem/01_cargo/05_cargo_build_scripts.md) | ⟹ | [Cargo Registry 与包发布](../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md) | 后置概念引用（蕴含/导向） |
 | [Cargo Build Scripts](../../06_ecosystem/01_cargo/05_cargo_build_scripts.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) | 后置概念引用（蕴含/导向） |
-| [C12 WASM - 术语表](../../06_ecosystem/11_domain_applications/18_wasm_glossary.md) | ⟹ | [C12 WASM - 常见问题](../../06_ecosystem/11_domain_applications/19_wasm_faq.md) | 后置概念引用（蕴含/导向） |
+| [C12 WASM - 术语表](../../06_ecosystem/11_domain_applications/18_wasm_glossary.md) | ⟸ | [C12 WASM - 常见问题](../../06_ecosystem/11_domain_applications/19_wasm_faq.md) | 源在目标的前置元数据中（目标依赖源） |
 | [C12 WASM - 术语表](../../06_ecosystem/11_domain_applications/18_wasm_glossary.md) | ⟹ | [C12 WASM - JavaScript 互操作](../../06_ecosystem/11_domain_applications/20_wasm_javascript_interop.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) | ⟹ | [Cargo Build Scripts](../../06_ecosystem/01_cargo/05_cargo_build_scripts.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) | ⟹ | [Cargo Registry 与包发布](../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md) | 后置概念引用（蕴含/导向） |
-| [C12 WASM - 常见问题](../../06_ecosystem/11_domain_applications/19_wasm_faq.md) | ⟹ | [C12 WASM - JavaScript 互操作](../../06_ecosystem/11_domain_applications/20_wasm_javascript_interop.md) | 后置概念引用（蕴含/导向） |
+| [C12 WASM - 常见问题](../../06_ecosystem/11_domain_applications/19_wasm_faq.md) | ⟸ | [C12 WASM - JavaScript 互操作](../../06_ecosystem/11_domain_applications/20_wasm_javascript_interop.md) | 源在目标的前置元数据中（目标依赖源） |
 | [C12 WASM - 常见问题](../../06_ecosystem/11_domain_applications/19_wasm_faq.md) | ⊑ | [Rust WebAssembly 高级开发](../../06_ecosystem/11_domain_applications/17_webassembly_advanced.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Cargo Source Replacement 与 Vendoring](../../06_ecosystem/01_cargo/07_cargo_source_replacement.md) | ⟹ | [Cargo 认证与构建缓存](../../06_ecosystem/01_cargo/09_cargo_authentication_and_cache.md) | 后置概念引用（蕴含/导向） |
 | [Cargo Source Replacement 与 Vendoring](../../06_ecosystem/01_cargo/07_cargo_source_replacement.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) | 后置概念引用（蕴含/导向） |
@@ -442,11 +443,11 @@
 | [前沿算法技术](../../06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md) | ⟹ | [Rust 量子计算生态](../../06_ecosystem/11_domain_applications/16_quantum_computing_rust.md) | 后置概念引用（蕴含/导向） |
 | [前沿算法技术](../../06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md) | ⟹ | [Machine Learning Ecosystem](../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md) | 后置概念引用（蕴含/导向） |
 | [Rust 常用开发工具](../../06_ecosystem/00_toolchain/14_development_tools.md) | ⟹ | [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) | 后置概念引用（蕴含/导向） |
-| [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) | ⟹ | [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | 后置概念引用（蕴含/导向） |
+| [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) | ⟸ | [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) | ⟹ | [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) | ⟹ | [Cargo Manifest 参考速查](../../06_ecosystem/01_cargo/10_cargo_manifest_reference.md) | 后置概念引用（蕴含/导向） |
 | [形式化算法理论](../../06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md) | ⟹ | [算法工程实践 (Algorithm Engineering Practice)](../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md) | 后置概念引用（蕴含/导向） |
-| [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | ⟹ | [Cargo 指南实践](../../06_ecosystem/01_cargo/17_cargo_guide_practices.md) | 后置概念引用（蕴含/导向） |
+| [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | ⟸ | [Cargo 指南实践](../../06_ecosystem/01_cargo/17_cargo_guide_practices.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | ⟹ | [Cargo Workspaces](../../06_ecosystem/01_cargo/14_cargo_workspaces.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | ⟹ | [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 指南实践](../../06_ecosystem/01_cargo/17_cargo_guide_practices.md) | ⟹ | [Cargo 配置与环境变量](../../06_ecosystem/01_cargo/18_cargo_configuration.md) | 后置概念引用（蕴含/导向） |
@@ -454,7 +455,7 @@
 | [Cargo 指南实践](../../06_ecosystem/01_cargo/17_cargo_guide_practices.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/01_performance_optimization.md) | 后置概念引用（蕴含/导向） |
 | [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md) | ⊑ | [微服务架构模式 (Microservice Architecture Patterns)](../../06_ecosystem/03_design_patterns/05_microservice_patterns.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md) | ⊑ | [事件驱动架构 (Event-Driven Architecture)](../../06_ecosystem/03_design_patterns/06_event_driven_architecture.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
-| [Cargo 配置与环境变量](../../06_ecosystem/01_cargo/18_cargo_configuration.md) | ⟹ | [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) | 后置概念引用（蕴含/导向） |
+| [Cargo 配置与环境变量](../../06_ecosystem/01_cargo/18_cargo_configuration.md) | ⟸ | [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Cargo 配置与环境变量](../../06_ecosystem/01_cargo/18_cargo_configuration.md) | ⟹ | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/02_cross_compilation.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) | ↔ | [Cargo Manifest 目标与元数据](../../06_ecosystem/01_cargo/20_cargo_manifest_targets.md) | 互为后置概念（互参） |
 | [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) | ↔ | [Cargo Registry 内部机制](../../06_ecosystem/01_cargo/21_cargo_registry_internals.md) | 互为后置概念（互参） |
@@ -511,7 +512,7 @@
 | [Specialization：Trait 实现的精确化与重叠解析](../../07_future/03_preview_features/31_specialization_preview.md) | ⟹ | [Effects System: Concept Pre-study](../../07_future/03_preview_features/01_effects_system.md) | 后置概念引用（蕴含/导向） |
 | [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](../../07_future/04_research_and_experimental/06_rust_for_webassembly.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |
 | [Stable ABI Preview](../../07_future/03_preview_features/07_stable_abi_preview.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/04_rust_for_linux.md) | 后置概念引用（蕴含/导向） |
-| [Rust Editions](../../07_future/00_version_tracking/02_editions.md) | ⟹ | [Rust 发布流程](../../07_future/00_version_tracking/03_rust_release_process.md) | 后置概念引用（蕴含/导向） |
+| [Rust Editions](../../07_future/00_version_tracking/02_editions.md) | ⟸ | [Rust 发布流程](../../07_future/00_version_tracking/03_rust_release_process.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Rust Editions](../../07_future/00_version_tracking/02_editions.md) | ⟹ | [Edition 2024 完全指南：新特性与迁移策略](../../07_future/01_edition_roadmap/02_edition_guide.md) | 后置概念引用（蕴含/导向） |
 | [Inline Const Pattern 预览](../../07_future/03_preview_features/08_inline_const_pattern_preview.md) | ↔ | [Const Trait 实现预览](../../07_future/03_preview_features/19_const_trait_preview.md) | 互为后置概念（互参） |
 | [AutoVerus / Verus 预览](../../07_future/03_preview_features/33_autoverus_preview.md) | ⟹ | [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/03_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |
@@ -538,7 +539,7 @@
 | [Rust 的发布流程与 Nightly Rust](../../07_future/00_version_tracking/04_nightly_rust.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |
 | [Rust 的发布流程与 Nightly Rust](../../07_future/00_version_tracking/04_nightly_rust.md) | ⟹ | [Rust 1.97.0 前沿特性预览](../../07_future/00_version_tracking/rust_1_97_preview.md) | 后置概念引用（蕴含/导向） |
 | [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/24_borrow_sanitizer.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |
-| [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/24_borrow_sanitizer.md) | ⟹ | [Safety Tags（安全标签）预览](../../07_future/03_preview_features/03_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |
+| [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/24_borrow_sanitizer.md) | ⟸ | [Safety Tags（安全标签）预览](../../07_future/03_preview_features/03_safety_tags_preview.md) | 源在目标的前置元数据中（目标依赖源） |
 | [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/24_borrow_sanitizer.md) | ↔ | [AutoVerus / Verus 预览](../../07_future/03_preview_features/33_autoverus_preview.md) | 互为后置概念（互参） |
 | [Rust 1.97.0 特性 × 领域反查矩阵](../../07_future/00_version_tracking/feature_domain_matrix_197.md) | ⟹ | [Rust 1.97.0 前沿特性预览](../../07_future/00_version_tracking/rust_1_97_preview.md) | 后置概念引用（蕴含/导向） |
 | [Rust 1.97.0 特性 × 领域反查矩阵](../../07_future/00_version_tracking/feature_domain_matrix_197.md) | ⟹ | [Rust 1.98+ 前沿特性预览](../../07_future/00_version_tracking/rust_1_98_preview.md) | 后置概念引用（蕴含/导向） |

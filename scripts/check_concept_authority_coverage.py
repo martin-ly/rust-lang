@@ -55,6 +55,95 @@ P0_RE = re.compile("|".join(P0_DOMAINS))
 P1_RE = re.compile("|".join(P1_DOMAINS))
 P2_RE = re.compile("|".join(P2_DOMAINS))
 
+# crates/*/docs 扩展域（--include-crates）：P0/P1/P2 超集 + 生态权威
+# （tokio.rs / rustwasm / rust-embedded / webassembly.org / w3.org / egui /
+#  kani / aeneas 等，与 tmp/crates_docs_authority_full.py 的 AUTH 口径一致）
+CRATES_AUTH_RE = re.compile(
+    r"doc\.rust-lang\.org|rust-lang\.github\.io|rustc-dev-guide|docs\.rs|crates\.io|"
+    r"arxiv\.org|acm\.org|ieee\.org|springer\.com|usenix\.org|"
+    r"github\.com/rust-lang|rust-lang\.org/rfcs|spec\.ferrocene\.dev|ferrocene\.dev|"
+    r"tokio\.rs|rustwasm\.github\.io|rust-embedded|w3\.org|webassembly\.org|"
+    r"github\.com/verus-lang|github\.com/AeneasVerif|aeneasverif\.github\.io|"
+    r"model-checking\.github\.io|blog\.rust-lang\.org|foundation\.rust-lang\.org|"
+    r"egui\.rs|areweguiyet\.com|lukaswirth\.dev",
+    re.I)
+
+CRATES_STUB_MARKERS = [
+    "Stub redirecting to the canonical", "Stub pointing to the canonical",
+    "本文件为 crate 文档占位页", "本文件原为对应 crate", "本 stub 按",
+    "占位 stub", "This file previously contained", "通用 Rust 概念解释已迁移",
+    "此处仅保留索引与 canonical", "合规整改迁移", "本页仅保留主题索引与入口链接",
+    "导航 stub", "重定向 stub", "迁移至 `concept/` 权威页", "已迁移/整合至上方",
+    "请参见上方权威页",
+]
+CRATES_STUB_MARKERS_CI = [
+    "(redirect)", "orientation stub", "redirect to the canonical",
+    "has been migrated to the concept authority page",
+]
+
+
+def crates_classify(path, text):
+    """crates docs 文件分类：stub / quiz / index_readme / code_listing / content。
+    口径与 tmp/crates_docs_authority_full.py 一致（2026-07-12 全量基线）。"""
+    lines = text.strip().splitlines()
+    low = text.lower()
+    if (any(m in text for m in CRATES_STUB_MARKERS)
+            or any(m in low for m in CRATES_STUB_MARKERS_CI)
+            or (len(lines) <= 15 and "> **权威来源**" in text)):
+        return "stub"
+    rel = path.replace("\\", "/").lower()
+    if "quiz" in rel:
+        return "quiz"
+    if "/snippets/readme.md" in rel:
+        return "code_listing"  # 纯代码片段目录豁免页（AGENTS.md §4.0）
+    if os.path.basename(path) == "README.md":
+        stripped = re.sub(r"\n*## 国际权威来源\n.*\Z", "", text, flags=re.S)
+        body = [l for l in stripped.splitlines()
+                if l.strip() and not l.startswith(("#", ">", "**"))]
+        if not body:
+            return "index_readme"
+        linkish = sum(1 for l in body if l.lstrip().startswith(("- [", "* [", "|", "[")))
+        if len(body) <= 30 and linkish / len(body) > 0.6:
+            return "index_readme"
+    return "content"
+
+
+def scan_crates_docs():
+    """扫描 crates/*/docs（含嵌套子 crate），返回统计 dict。"""
+    pats = [os.path.join(ROOT, "crates", "*", "docs", "**", "*.md"),
+            os.path.join(ROOT, "crates", "*", "*", "docs", "**", "*.md")]
+    files = sorted({p for pat in pats for p in glob.glob(pat, recursive=True)})
+    rows = []
+    for p in files:
+        try:
+            text = open(p, encoding="utf-8", errors="ignore").read()
+        except Exception:
+            continue
+        rel = os.path.relpath(p, ROOT).replace("\\", "/")
+        crate = rel.split("/")[1]
+        kind = crates_classify(rel, text)
+        rows.append({"path": rel, "crate": crate, "kind": kind,
+                     "authority": bool(CRATES_AUTH_RE.search(text))})
+    content = [r for r in rows if r["kind"] == "content"]
+    covered = [r for r in content if r["authority"]]
+    per = {}
+    for r in content:
+        d = per.setdefault(r["crate"], [0, 0])
+        d[0] += 1
+        d[1] += 1 if r["authority"] else 0
+    kinds = {}
+    for r in rows:
+        kinds[r["kind"]] = kinds.get(r["kind"], 0) + 1
+    return {
+        "total": len(rows), "kinds": kinds,
+        "content": len(content), "covered": len(covered),
+        "pct": round(100 * len(covered) / len(content), 1) if content else 0.0,
+        "gaps": [r["path"] for r in content if not r["authority"]],
+        "per_crate": {c: {"content": v[0], "covered": v[1]} for c, v in sorted(per.items())},
+        "skipped": {k: [r["path"] for r in rows if r["kind"] == k]
+                    for k in ("index_readme", "code_listing", "quiz")},
+    }
+
 SKIP_NAMES = {"SUMMARY.md", "README.md"}
 
 
@@ -82,6 +171,8 @@ def main():
     ap = argparse.ArgumentParser(description="concept/ 权威层国际化权威来源覆盖率审计")
     ap.add_argument("--strict", action="store_true",
                     help="阻断模式：内容页 any<100%% / none>0 / 核心 L1-L4 无 P0 缺口>0 时 exit 1")
+    ap.add_argument("--include-crates", action="store_true",
+                    help="附加 crates/*/docs 权威覆盖小节（默认观察 exit 0；--strict 时内容页覆盖<100%% 亦阻断）")
     args = ap.parse_args()
 
     files = active_md()
@@ -171,6 +262,36 @@ def main():
     md.append("- 本审计只读，不修改任何文件；补缺口应基于 `concept/00_meta/02_sources/01_authority_source_map.md` 已核验映射 + 官方 URL，仅追加 References，不改正文事实。")
     md.append("\n---\n*由 `scripts/check_concept_authority_coverage.py` 生成*")
 
+    crates = None
+    if args.include_crates:
+        crates = scan_crates_docs()
+        md.append("\n## 附：crates/*/docs 权威覆盖（--include-crates 扩展）\n")
+        md.append(f"> 扫描 crates docs md **{crates['total']}**（含嵌套子 crate）；"
+                  f"stub/重定向 {crates['kinds'].get('stub', 0)}，"
+                  f"纯索引 README {crates['kinds'].get('index_readme', 0)}，"
+                  f"代码清单页 {crates['kinds'].get('code_listing', 0)}，quiz {crates['kinds'].get('quiz', 0)}。\n")
+        md.append(f"- 非 stub 内容页 **{crates['content']}** 个，有国际权威来源引用 "
+                  f"**{crates['covered']}** 个（**{crates['pct']}%**）。")
+        md.append("- 权威域口径为 crates 扩展集（P0/P1/P2 超集 + tokio.rs/rustwasm/rust-embedded/"
+                  "webassembly.org/w3.org/egui/kani/aeneas 等生态权威），见脚本 `CRATES_AUTH_RE`。")
+        md.append("- 分类口径（stub 标记/纯索引 README/代码清单豁免）与 `tmp/crates_docs_authority_full.py` 一致。\n")
+        md.append("| crate | 内容页 | 已覆盖 |")
+        md.append("|:---|---:|---:|")
+        for c, v in crates["per_crate"].items():
+            md.append(f"| {c} | {v['content']} | {v['covered']} |")
+        md.append("")
+        if crates["gaps"]:
+            md.append("crates 内容页缺口: " + " · ".join(f"`{g}`" for g in crates["gaps"][:40]) + "\n")
+        skips = crates["skipped"]
+        reg = []
+        for k in ("index_readme", "code_listing", "quiz"):
+            for p in skips.get(k, []):
+                reg.append(f"`{p}`（{k}）")
+        if reg:
+            md.append("登记跳过（非 stub 但不计入内容页分母）: " + " · ".join(reg) + "\n")
+        print(f"[crates-authority] total={crates['total']} content={crates['content']} "
+              f"covered={crates['covered']} ({crates['pct']}%) gaps={len(crates['gaps'])}")
+
     os.makedirs(os.path.join(ROOT, "reports"), exist_ok=True)
     md_path = os.path.join(ROOT, "reports", f"CONCEPT_AUTHORITY_COVERAGE_{TODAY}.md")
     json_path = os.path.join(ROOT, "reports", f"CONCEPT_AUTHORITY_COVERAGE_{TODAY}.json")
@@ -183,6 +304,8 @@ def main():
                                  "gaps_p1": c_gaps_p1, "gaps_p2": c_gaps_p2},
                "by_layer": layers, "core_gaps_l1_l4_no_p0": [r["path"] for r in core_gaps],
                "none_any": [r["path"] for r in none]}
+    if crates is not None:
+        payload["crates_docs"] = crates
     open(json_path, "w", encoding="utf-8").write(json.dumps(payload, ensure_ascii=False, indent=2))
     print(f"[concept-authority] scanned={n}  P0={p0p}%  P1={p1p}%  P2={p2p}%  any={anyp}%  none={len(none)}")
     print(f"[concept-authority] content-scope n={cn}  P0={cp0p}%  P1={cp1p}%  P2={cp2p}%  any={canyp}%")
@@ -196,6 +319,9 @@ def main():
             fails.append(f"无任何权威引用页 {len(none)} > 0")
         if len(core_gaps) > 0:
             fails.append(f"核心 L1-L4 无 P0 缺口 {len(core_gaps)} > 0")
+        if crates is not None and crates["gaps"]:
+            fails.append(f"crates docs 内容页权威缺口 {len(crates['gaps'])} > 0 "
+                         f"（覆盖率 {crates['pct']}%）")
         if fails:
             print("[concept-authority] FAIL (--strict): " + "; ".join(fails))
             return 1

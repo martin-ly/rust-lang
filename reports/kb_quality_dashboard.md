@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-12T06:44:01.973340+00:00
+> 生成时间: 2026-07-12T07:03:25.067147+00:00
 > 扫描文件数: 465
 
 ## 全局指标
@@ -8,13 +8,13 @@
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
 | 总文件数 | 465 | 27 | ✅ |
-| 总定理链 (⟹) | 2085 | ≥270 | ✅ |
+| 总定理链 (⟹) | 2061 | ≥270 | ✅ |
 | 总反命题 | 694 | ≥40 | ✅ |
 | 总 Mermaid 图 | 624 | ≥50 | ✅ |
 | 编译验证代码块 | 4628 | ≥150 | ✅ |
 | 定理矩阵总行 | 20575 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
-| 反向推理 (⟸) | 273 | ≥50 | ✅ |
+| 反向推理 (⟸) | 304 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
 | 前置概念覆盖率 | 398/401 | 100% | ⚠️ |
 | 后置概念覆盖率 | 398/401 | 100% | ⚠️ |
@@ -25,7 +25,7 @@
 
 | 层级 | 文件数 | 平均 ⟹/文件 | 平均过渡段/文件 | 认知路径 | ⟸/文件 | 模板化 | 前置覆盖 | 后置覆盖 | 双标签 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| L0 | 64 | 7.5 | 3.1 | 35/64 (54%) | 0.1 | 0 | 14/64 | 13/64 | 46/64 |
+| L0 | 64 | 7.2 | 3.1 | 35/64 (54%) | 0.6 | 0 | 14/64 | 13/64 | 46/64 |
 | L1 | 55 | 3.9 | 4.2 | 40/55 (72%) | 1.5 | 0 | 55/55 | 55/55 | 55/55 |
 | L2 | 38 | 4.9 | 3.7 | 25/38 (65%) | 1.9 | 0 | 38/38 | 38/38 | 38/38 |
 | L3 | 60 | 6.1 | 4.1 | 48/60 (80%) | 1.8 | 0 | 60/60 | 60/60 | 60/60 |
@@ -217,13 +217,13 @@
 | E:\_src\rust-lang\concept\00_meta\04_navigation\14_learning_mvp_path_en.md | L0 | 278 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\01_concept_definition_atlas.md | L0 | 561 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\02_attribute_relationship_atlas.md | L0 | 554 | 27 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
-| E:\_src\rust-lang\concept\00_meta\knowledge_topology\03_scenario_decision_tree_atlas.md | L0 | 294 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
+| E:\_src\rust-lang\concept\00_meta\knowledge_topology\03_scenario_decision_tree_atlas.md | L0 | 295 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\04_example_counterexample_atlas.md | L0 | 141 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\05_logical_reasoning_atlas.md | L0 | 191 | 17 | 2 | 0 | 0 | 4 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\06_inter_layer_mapping_atlas.md | L0 | 99 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
-| E:\_src\rust-lang\concept\00_meta\knowledge_topology\07_intra_layer_mapping_atlas.md | L0 | 563 | 357 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
+| E:\_src\rust-lang\concept\00_meta\knowledge_topology\07_intra_layer_mapping_atlas.md | L0 | 564 | 333 | 31 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\08_concept_source_alignment_atlas.md | L0 | 53 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
-| E:\_src\rust-lang\concept\00_meta\knowledge_topology\09_reasoning_judgment_tree_atlas.md | L0 | 277 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
+| E:\_src\rust-lang\concept\00_meta\knowledge_topology\09_reasoning_judgment_tree_atlas.md | L0 | 279 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\10_gap_and_action_plan.md | L0 | 87 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\kg_ontology_v2.md | L0 | 329 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | None |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\kg_tlo_alignment.md | L0 | 254 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |

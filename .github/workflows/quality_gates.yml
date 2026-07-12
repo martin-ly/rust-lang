@@ -352,8 +352,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run concept international authority coverage (observe, offline)
-        run: python scripts/check_concept_authority_coverage.py
+      - name: Run concept international authority coverage (observe, offline; +crates docs section)
+        run: python scripts/check_concept_authority_coverage.py --include-crates
         continue-on-error: true
 
   canonical-uniqueness:

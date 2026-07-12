@@ -79,7 +79,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `check_metadata_consistency.py` | 元数据 D1–D6 一致性检查（质量门 15，观察） |
 | `check_topology_quality.py` | atlas 拓扑质量 T1–T6（质量门 11，阻断） |
 | `check_kg_shapes.py` | KG SHACL/形态校验（质量门 12，阻断） |
-| `check_concept_authority_coverage.py` | concept 权威层国际化权威来源覆盖率（质量门 18，观察） |
+| `check_concept_authority_coverage.py` | concept 权威层国际化权威来源覆盖率（质量门 18，观察）；`--include-crates` 附加 crates/*/docs 覆盖小节（非 stub 内容页口径，默认观察 exit 0，`--strict` 时 crates 缺口>0 亦阻断） |
 | `semantic_health.py` | 综合语义健康分（质量门 17，观察） |
 | `check_mermaid_syntax.py` | Mermaid 语法检查（质量门 10，阻断） |
 | `auto_dedup_redirect.py` | 对高相似度非 `concept/` 文件生成指向 `concept/` 权威来源的重定向页 |

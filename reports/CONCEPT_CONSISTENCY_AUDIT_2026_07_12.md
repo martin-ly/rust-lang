@@ -1,6 +1,6 @@
 # 概念一致性审计报告 (Concept Consistency Audit)
 
-> 生成时间: 2026-07-12T14:44:52.381424
+> 生成时间: 2026-07-12T15:03:44.353086
 > 生成脚本: `scripts/concept_consistency_auditor.py`(质量门 17,语义观察门)
 > 扫描文件数: 466
 > 提取概念定义数: 1690

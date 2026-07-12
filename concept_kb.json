@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 465,
-    "generated_at": "2026-07-12T06:44:01.974339+00:00"
+    "generated_at": "2026-07-12T07:03:25.068149+00:00"
   },
   "files": [
     {
@@ -4176,7 +4176,7 @@
       "layer": "L0",
       "title": "场景决策树图谱（Scenario Decision Tree Atlas）",
       "positioning": "",
-      "line_count": 294,
+      "line_count": 295,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -4487,7 +4487,7 @@
       "layer": "L0",
       "title": "层内映射图谱（Intra-Layer Mapping Atlas）",
       "positioning": "",
-      "line_count": 563,
+      "line_count": 564,
       "theorem_chains": [
         {
           "text": "- `⟹` entails：源蕴含/导向目标（后置概念引用，默认）",
@@ -4558,14 +4558,6 @@
           "type": "table_row"
         },
         {
-          "text": "| [Structs](../../01_foundation/07_modules_and_items/04_structs.md) | ⟹ | [Enumerations](../../01_foundation/07_modules_and_items/05_enumerations.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| [Structs](../../01_foundation/07_modules_and_items/04_structs.md) | ⟹ | [Implementations](../../01_foundation/07_modules_and_items/06_implementations.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
           "text": "| [Enumerations](../../01_foundation/07_modules_and_items/05_enumerations.md) | ⟹ | [Rust 错误处理基础](../../01_foundation/08_error_handling/01_error_handling_basics.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
@@ -4595,14 +4587,6 @@
         },
         {
           "text": "| [Rust 关键字](../../01_foundation/00_start/06_keywords.md) | ⟹ | [模块系统与路径：Rust 的代码组织哲学](../../01_foundation/07_modules_and_items/01_modules_and_paths.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| [Crate 与源文件](../../01_foundation/07_modules_and_items/11_crates_and_source_files.md) | ⟹ | [项](../../01_foundation/07_modules_and_items/12_items.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| [模式匹配](../../01_foundation/04_control_flow/02_patterns.md) | ⟹ | [语句与表达式](../../01_foundation/04_control_flow/03_statements_and_expressions.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -4662,15 +4646,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [Rust 进程模型与生命周期](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) | ⟹ | [Rust 异步进程管理](../../03_advanced/08_process_ipc/03_async_process_management.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
           "text": "| [Rust 异步进程管理](../../03_advanced/08_process_ipc/03_async_process_management.md) | ⟹ | [Rust 进程监控与诊断](../../03_advanced/08_process_ipc/06_process_monitoring_and_diagnostics.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| [Rust 异步进程管理](../../03_advanced/08_process_ipc/03_async_process_management.md) | ⟹ | [Rust 现代进程管理库](../../03_advanced/08_process_ipc/10_modern_process_libraries.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -4750,19 +4726,11 @@
           "type": "table_row"
         },
         {
-          "text": "| [宏调试与诊断](../../03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md) | ⟹ | [生产级宏开发](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
           "text": "| [Rust 运行时](../../03_advanced/06_low_level_patterns/07_rust_runtime.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/01_unsafe.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
           "text": "| [术语表 - C11 Macro System](../../03_advanced/03_proc_macros/06_macro_glossary.md) | ⟹ | [宏卫生性完整参考](../../03_advanced/03_proc_macros/09_macro_hygiene.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| [术语表 - C11 Macro System](../../03_advanced/03_proc_macros/06_macro_glossary.md) | ⟹ | [syn & quote 完整参考](../../03_advanced/03_proc_macros/08_syn_quote_reference.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -4782,19 +4750,11 @@
           "type": "table_row"
         },
         {
-          "text": "| [变量](../../03_advanced/06_low_level_patterns/09_variables.md) | ⟹ | [内存分配与生命周期](../../03_advanced/06_low_level_patterns/08_memory_allocation_and_lifetime.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
           "text": "| [变量](../../03_advanced/06_low_level_patterns/09_variables.md) | ⟹ | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/01_unsafe.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
           "text": "| [syn & quote 完整参考](../../03_advanced/03_proc_macros/08_syn_quote_reference.md) | ⟹ | [生产级宏开发](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| [syn & quote 完整参考](../../03_advanced/03_proc_macros/08_syn_quote_reference.md) | ⟹ | [宏卫生性完整参考](../../03_advanced/03_proc_macros/09_macro_hygiene.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -4843,10 +4803,6 @@
         },
         {
           "text": "| [Type Theory](../../04_formal/00_type_theory/01_type_theory.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| [Ownership Formalization](../../04_formal/01_ownership_logic/02_ownership_formal.md) | ⟹ | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -4970,10 +4926,6 @@
           "type": "table_row"
         },
         {
-          "text": "| [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/08_miri.md) | ⟹ | [BorrowSanitizer 运行时别名模型检测](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
           "text": "| [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/08_miri.md) | ⟹ | [现代 Rust 验证工具生态](../../04_formal/04_model_checking/04_modern_verification_tools.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
@@ -4994,10 +4946,6 @@
           "type": "table_row"
         },
         {
-          "text": "| [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md) | ⟹ | [rustc 中的 Trait Solver](../../04_formal/05_rustc_internals/03_trait_solver_in_rustc.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
           "text": "| [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) | ⟹ | [BorrowSanitizer 运行时别名模型检测](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
@@ -5014,10 +4962,6 @@
           "type": "table_row"
         },
         {
-          "text": "| [名称、作用域与解析](../../04_formal/05_rustc_internals/06_names_and_resolution.md) | ⟹ | [名字参考](../../04_formal/05_rustc_internals/16_names_reference.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
           "text": "| [类型布局](../../04_formal/05_rustc_internals/08_type_layout.md) | ⟹ | [未定义行为清单](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
@@ -5026,19 +4970,11 @@
           "type": "table_row"
         },
         {
-          "text": "| [符号约定](../../04_formal/06_notation/01_notation.md) | ⟹ | [词法结构](../../04_formal/05_rustc_internals/10_lexical_structure.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
           "text": "| [词法结构](../../04_formal/05_rustc_internals/10_lexical_structure.md) | ⟹ | [名称、作用域与解析](../../04_formal/05_rustc_internals/06_names_and_resolution.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
           "text": "| [词法结构](../../04_formal/05_rustc_internals/10_lexical_structure.md) | ⟹ | [条目参考](../../04_formal/05_rustc_internals/11_items_reference.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| [条目参考](../../04_formal/05_rustc_internals/11_items_reference.md) | ⟹ | [属性](../../04_formal/05_rustc_internals/12_attributes.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -5083,10 +5019,6 @@
         },
         {
           "text": "| [网络安全](../../06_ecosystem/12_networking/02_network_security.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| [Core Crates](../../06_ecosystem/02_core_crates/01_core_crates.md) | ⟹ | [Application Domains](../../06_ecosystem/06_data_and_distributed/01_application_domains.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -5430,10 +5362,6 @@
           "type": "table_row"
         },
         {
-          "text": "| [C12 WASM - 术语表](../../06_ecosystem/11_domain_applications/18_wasm_glossary.md) | ⟹ | [C12 WASM - 常见问题](../../06_ecosystem/11_domain_applications/19_wasm_faq.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
           "text": "| [C12 WASM - 术语表](../../06_ecosystem/11_domain_applications/18_wasm_glossary.md) | ⟹ | [C12 WASM - JavaScript 互操作](../../06_ecosystem/11_domain_applications/20_wasm_javascript_interop.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
@@ -5443,10 +5371,6 @@
         },
         {
           "text": "| [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) | ⟹ | [Cargo Registry 与包发布](../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| [C12 WASM - 常见问题](../../06_ecosystem/11_domain_applications/19_wasm_faq.md) | ⟹ | [C12 WASM - JavaScript 互操作](../../06_ecosystem/11_domain_applications/20_wasm_javascript_interop.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -5594,10 +5518,6 @@
           "type": "table_row"
         },
         {
-          "text": "| [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) | ⟹ | [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
           "text": "| [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) | ⟹ | [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
@@ -5607,10 +5527,6 @@
         },
         {
           "text": "| [形式化算法理论](../../06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md) | ⟹ | [算法工程实践 (Algorithm Engineering Practice)](../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | ⟹ | [Cargo 指南实践](../../06_ecosystem/01_cargo/17_cargo_guide_practices.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -5631,10 +5547,6 @@
         },
         {
           "text": "| [Cargo 指南实践](../../06_ecosystem/01_cargo/17_cargo_guide_practices.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/01_performance_optimization.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| [Cargo 配置与环境变量](../../06_ecosystem/01_cargo/18_cargo_configuration.md) | ⟹ | [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -5774,10 +5686,6 @@
           "type": "table_row"
         },
         {
-          "text": "| [Rust Editions](../../07_future/00_version_tracking/02_editions.md) | ⟹ | [Rust 发布流程](../../07_future/00_version_tracking/03_rust_release_process.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
           "text": "| [Rust Editions](../../07_future/00_version_tracking/02_editions.md) | ⟹ | [Edition 2024 完全指南：新特性与迁移策略](../../07_future/01_edition_roadmap/02_edition_guide.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
@@ -5863,10 +5771,6 @@
         },
         {
           "text": "| [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/24_borrow_sanitizer.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/24_borrow_sanitizer.md) | ⟹ | [Safety Tags（安全标签）预览](../../07_future/03_preview_features/03_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -6259,7 +6163,7 @@
         "pre": [],
         "post": []
       },
-      "backward_chains": 0,
+      "backward_chains": 31,
       "templated_chains": 0
     },
     {
@@ -6292,7 +6196,7 @@
       "layer": "L0",
       "title": "推理判定树图谱（Reasoning Judgment Tree Atlas）",
       "positioning": "",
-      "line_count": 277,
+      "line_count": 279,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],

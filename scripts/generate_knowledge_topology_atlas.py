@@ -15,6 +15,18 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 RAW_PATH = ROOT / "tmp" / "concept_topology_raw.json"
 OUT_DIR = ROOT / "concept" / "00_meta" / "knowledge_topology"
+# 人工策展页的单一事实源：03/04/05/09 为纯人工策展图谱（决策树/示例/推理链/判定树），
+# 无法从 raw 数据合成，故整页固化为此目录下的模板，生成器原样拷贝（LF 行尾）。
+# 修改这些页 = 修改模板，禁止直接手改 concept/00_meta/knowledge_topology/ 下的生成结果。
+MANUAL_PAGES_DIR = Path(__file__).resolve().parent / "templates" / "atlas_pages"
+
+
+def write_out(path: Path, text: str) -> None:
+    """统一落盘：LF 行尾 + 末尾换行（与 .gitattributes `*.md text eol=lf` 对齐）。"""
+    if not text.endswith("\n"):
+        text += "\n"
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(text)
 
 
 def load_raw() -> dict[str, Any]:
@@ -237,7 +249,7 @@ def write_readme(data: dict[str, Any]) -> None:
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 """
-    (OUT_DIR / "README.md").write_text(content, encoding="utf-8")
+    write_out(OUT_DIR / "README.md", content)
 
 
 def write_concept_definition_atlas(concepts: list[dict[str, Any]]) -> None:
@@ -254,7 +266,13 @@ def write_concept_definition_atlas(concepts: list[dict[str, Any]]) -> None:
     for c in concepts:
         by_layer[c["layer"]].append(c)
 
-    for layer in sorted(by_layer.keys()):
+    # 导语行（人工策展固化）：概览本节覆盖的层级数与前 4 层标签
+    sorted_layers = sorted(by_layer.keys())
+    lead4 = "、".join(layer_label(l) for l in sorted_layers[:4])
+    lines.append(f"「按层级索引」部分按 {lead4}等{len(sorted_layers)}个方面的顺序逐层展开。")
+    lines.append("")
+
+    for layer in sorted_layers:
         label = layer_label(layer)
         lines.append(f"### {label}")
         lines.append("")
@@ -333,6 +351,9 @@ def write_attribute_relationship_atlas(concepts: list[dict[str, Any]]) -> None:
 
     lines.append("")
     lines.append("## 二、属性分布统计")
+    lines.append("")
+    # 导语行（人工策展固化）
+    lines.append("本节围绕「属性分布统计」展开，依次讨论 A/S/P 分布、内容分级分布与Bloom 层级分布。")
     lines.append("")
 
     asp_counts = defaultdict(int)
@@ -426,8 +447,8 @@ def write_inter_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
 
     lines.append("## 三、与现有元文件的关系")
     lines.append("")
-    lines.append("- 更详细的层间依赖图见 [../04_navigation/inter_layer_map.md](../04_navigation/inter_layer_map.md)")
-    lines.append("- 层内模型映射见 [../04_navigation/intra_layer_model_map.md](../04_navigation/intra_layer_model_map.md)")
+    lines.append("- 更详细的层间依赖图见 [../04_navigation/04_inter_layer_map.md](../04_navigation/04_inter_layer_map.md)")
+    lines.append("- 层内模型映射见 [../04_navigation/06_intra_layer_model_map.md](../04_navigation/06_intra_layer_model_map.md)")
     lines.append("- 形式化本体规范见 [kg_ontology_v2.md](kg_ontology_v2.md)")
     lines.append("")
 
@@ -445,6 +466,7 @@ def write_intra_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
     # ---- 关系语义推断规则（T2 反塌缩）--------------------------------------
     # 符号与 KG 属性对齐（scripts/type_kg_core_edges.py 使用同一策展依据）：
     #   → dependsOn   源依赖目标（目标出现在源的前置元数据中）
+    #   ⟸ rev-dependsOn 目标依赖源（源出现在目标的前置元数据中；R4 的反向边）
     #   ⟹ entails     源蕴含/导向目标（后置概念引用，默认）
     #   ⊑ refines     精化关系：名称含“进阶/机制/模式”的一侧精化另一侧（同主题目录）
     #   ⊥ mutexWith   两概念互斥、不能同时成立（策展标注，依据见“依据”列）
@@ -479,11 +501,13 @@ def write_intra_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
         if _VS_HINT.search(src["zh_name"]) or _VS_HINT.search(dst["zh_name"]):
             return "⇔", "对比型页面（名称含 vs/对比）"
         src_pre, src_post = link_ids(src["prereqs"]), link_ids(src["postreqs"])
-        dst_post = link_ids(dst["postreqs"])
+        dst_pre, dst_post = link_ids(dst["prereqs"]), link_ids(dst["postreqs"])
         if dst["id"] in src_post and src["id"] in dst_post:
             return "↔", "互为后置概念（互参）"
         if dst["id"] in src_pre:
             return "→", "目标在源的前置元数据中（源依赖目标）"
+        if src["id"] in dst_pre:
+            return "⟸", "源在目标的前置元数据中（目标依赖源）"
         same_dir = Path(src["path"]).parent == Path(dst["path"]).parent
         refine_side = (
             (_REFINE_HINT.search(dst["zh_name"]) and dst["zh_name"] not in _REFINE_EXCLUDE)
@@ -501,6 +525,7 @@ def write_intra_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
     lines.append("**关系符号约定**（与 KG v3 属性对齐；推断规则见 `scripts/generate_knowledge_topology_atlas.py` `infer_relation`）：")
     lines.append("")
     lines.append("- `→` dependsOn：源依赖目标（目标在源的前置元数据中）")
+    lines.append("- `⟸` rev-dependsOn：目标依赖源（源在目标的前置元数据中）")
     lines.append("- `⟹` entails：源蕴含/导向目标（后置概念引用，默认）")
     lines.append("- `⊑` refines：精化关系，名称含“进阶/机制/模式”的一侧精化另一侧（同主题目录）")
     lines.append("- `⊥` mutexWith：两概念互斥（策展标注，依据见各行）")
@@ -538,6 +563,20 @@ def write_intra_layer_mapping_atlas(concepts: list[dict[str, Any]]) -> None:
             lines.append("> 本层内部引用较少，主要作为独立主题存在。")
             lines.append("")
             continue
+
+        # 导语行（人工策展固化）：每层一句引入，模板按层固定
+        _LAYER_LEAD = {
+            "L0": "本节专门讨论「{label}」下的层内引用关系。",
+            "L1": "本节专门讨论「{label}」下的层内引用关系。",
+            "L2": "本节专门讨论「{label}」下的层内引用关系。",
+            "L3": "「{label}」部分的核心主题是层内引用关系，本节展开说明。",
+            "L4": "本节聚焦「{label}」，核心内容为层内引用关系。",
+            "L5": "本节聚焦「{label}」，核心内容为层内引用关系。",
+            "L6": "本节专门讨论「{label}」下的层内引用关系。",
+            "L7": "「{label}」部分的核心主题是层内引用关系，本节展开说明。",
+        }
+        lines.append(_LAYER_LEAD.get(layer, "本节专门讨论「{label}」下的层内引用关系。").format(label=label))
+        lines.append("")
 
         lines.append("### 层内引用关系")
         lines.append("")
@@ -677,6 +716,9 @@ def write_gap_and_action_plan(concepts: list[dict[str, Any]]) -> None:
     lines.append("")
 
     lines.append("## 二、优先修复任务")
+    lines.append("")
+    # 导语行（人工策展固化）
+    lines.append("本节围绕「优先修复任务」展开，依次讨论 P0：补全权威来源（L1–L4 核心概念）、P1：增强知识表征与P2：对齐国际标准。")
     lines.append("")
     lines.append("### P0：补全权威来源（L1–L4 核心概念）")
     lines.append("")

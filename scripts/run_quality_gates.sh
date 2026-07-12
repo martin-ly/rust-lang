@@ -6,9 +6,9 @@
 # 观察门转正机制（见 AGENTS.md §5.2）：连续 4 周或连续 10 次 CI 运行达标后可评估转阻断。
 # 2026-07-12 已转正（本地 --strict 实跑 exit=0）：topology / kg_shapes / canonical_uniqueness /
 # concept_consistency_auditor / overlap v2（可处理项清零，见 reports/DEDUP_V2_ZERO_2026_07_12.md）。
-# 仍观察：metadata_consistency（D2=1/D5=17）、semantic_health、concept_authority_coverage
-# （--strict 当前 exit=1：any=99.5%/none=2/core_gap=1）、naming_convention（2026-07-12 新增，
-# ERROR=0/WARN=85）。
+# 仍观察：metadata_consistency（D2/D5 豁免登记）、semantic_health、concept_authority_coverage
+# （--strict exit=0：any=100%/none=0/core_gap=0；--include-crates 附加 crates docs 小节，
+# crates 非 stub 内容页 64/64=100%）、naming_convention（2026-07-12 新增，ERROR=0/WARN=85）。
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -49,7 +49,7 @@ run_gate "Concept Consistency Audit (strict)" python scripts/concept_consistency
 
 # --- Semantic quality gates (observe / warning, non-blocking) ---
 run_gate "Metadata Consistency (observe)" python scripts/check_metadata_consistency.py
-run_gate "Concept Authority Coverage (observe)" python scripts/check_concept_authority_coverage.py
+run_gate "Concept Authority Coverage (observe)" python scripts/check_concept_authority_coverage.py --include-crates
 run_gate "Semantic Health (observe)" python scripts/semantic_health.py
 run_gate "Examples Compile Check (observe)" python scripts/check_examples_compile.py
 run_gate "Naming Convention (observe)" python scripts/check_naming_convention.py
