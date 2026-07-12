@@ -11,3 +11,10 @@
 ## 文件索引 {#文件索引}
 
 - [c12_wasm - Rust 1.94 更新概览](00_rust_194_overview.md)
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Rust and WebAssembly 官方 Book（rustwasm 工作组）](https://rustwasm.github.io/docs/book/)
+- [WebAssembly 官方网站](https://webassembly.org/)

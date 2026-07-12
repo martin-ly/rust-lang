@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 465,
-    "generated_at": "2026-07-12T06:23:10.591057+00:00"
+    "generated_at": "2026-07-12T06:44:01.974339+00:00"
   },
   "files": [
     {
@@ -24861,10 +24861,14 @@
       "layer": "L3",
       "title": "Async/Await 高级主题",
       "positioning": "",
-      "line_count": 1708,
+      "line_count": 631,
       "theorem_chains": [
         {
           "text": "> **定理链编号**: T-053 Waker 活性 ⟹ T-054 Stream 安全性",
+          "type": "paragraph"
+        },
+        {
+          "text": "- **Waker 契约**：`poll` 返回 `Poll::Pending` ⟹ Waker 已注册到 Reactor；资源就绪时 Reactor 必须调用 `wake()`。",
           "type": "paragraph"
         },
         {
@@ -24886,198 +24890,6 @@
         }
       ],
       "code_blocks": [
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 40,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: 自定义 Waker 的 VTable 实现（概念性代码） use std::sync::Arc; use std::task::{RawWak..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 24,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: 在 poll 中使用 Context 注册 Waker use std::future::Future; use std::pin::Pin;..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 30,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: 基于 mio 的自定义 Reactor（概念性代码） use mio::{Events, Poll, Token, Interest}; us..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 13,
-          "should_fail": false,
-          "code_preview": "// ❌ 反例: Waker 在 poll 返回后被释放，Reactor 持有悬垂引用 struct BadFuture;  impl Future for B..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 15,
-          "should_fail": false,
-          "code_preview": "// ❌ 反例: 返回 Pending 但未注册 Waker → 永久饥饿 struct ForgetWakeFuture;  impl Future for ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 24,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: 使用 std::task::Wake trait 实现自定义 Waker use std::sync::Arc; use std::task:..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 33,
-          "should_fail": false,
-          "code_preview": "// ✅ 概念性: io_uring 的 Waker 注册与唤醒（基于 tokio-uring 设计） use io_uring::{opcode, types..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 29,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: 自定义 Stream（基于 futures-rs 的 Stream trait） use std::pin::Pin; use std::ta..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 29,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: Sink trait 的使用模式（概念性代码） use std::pin::Pin; use std::task::{Context, Pol..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 16,
-          "should_fail": false,
-          "code_preview": "// ❌ 反例: Stream 返回 Pending 但未注册 Waker struct BadStream;  impl Stream for BadStre..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "// 边界: 未 fuse 的 Stream 可能被重复 poll let mut s = some_stream(); if let Some(x) = s...."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 16,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: 严格遵循 Sink 状态机协议 use futures::SinkExt;  async fn send_sequence<S, T>(mut..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 16,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: StreamExt 组合子构建异步管道 use futures::StreamExt;  async fn pipeline() {     ..."
-        },
-        {
-          "flags": [],
-          "lines": 15,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: 栈 pinning（Rust 1.68+） use std::pin::pin;  async fn stack_pinning() {   ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 14,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: 堆 pinning（需跨越作用域或 trait 对象时） use std::pin::Pin; use std::future::Future..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 11,
-          "should_fail": true,
-          "code_preview": "// ❌ 反例: 递归 async fn 编译失败（类型无限递归） async fn recursive(n: u32) -> u32 {     if n =..."
-        },
-        {
-          "flags": [],
-          "lines": 14,
-          "should_fail": false,
-          "code_preview": "// ✅ 修正: 使用 Box::pin 打破递归类型 use std::future::Future; use std::pin::Pin;  fn recu..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 21,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: 使用 loom 测试自定义并发数据结构 use loom::sync::atomic::AtomicUsize; use loom::sync..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 26,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: 使用 loom::sync::Mutex 测试临界区 use loom::sync::{Arc, Mutex}; use loom::thre..."
-        },
-        {
-          "flags": [],
-          "lines": 20,
-          "should_fail": false,
-          "code_preview": "// ❌ 反例: 过多的线程或原子操作导致 loom 无法穷举 #[test] fn bad_loom_test() {     loom::model(|| ..."
-        },
-        {
-          "flags": [],
-          "lines": 30,
-          "should_fail": false,
-          "code_preview": "// ✅ 修正: 控制并发度以适配 loom use std::env;  #[test] fn controlled_loom_test() {     //..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 26,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: 使用 loom::future 测试异步并发原语 use loom::sync::atomic::{AtomicBool, Ordering}..."
-        },
-        {
-          "flags": [],
-          "lines": 81,
-          "should_fail": false,
-          "code_preview": "// ✅ 正确: 自定义自旋锁及其 loom 验证 use std::sync::atomic::{AtomicBool, Ordering}; use std..."
-        },
-        {
-          "flags": [],
-          "lines": 10,
-          "should_fail": false,
-          "code_preview": "// ❌ UB: 使用已释放的指针 fn main() {     let x = Box::new(42);     let r = Box::into_ra..."
-        },
-        {
-          "flags": [],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "// ❌ UB: 构造无效布尔值 fn main() {     let x: u8 = 2;     let b: bool = unsafe { std::..."
-        },
-        {
-          "flags": [],
-          "lines": 14,
-          "should_fail": false,
-          "code_preview": "// ❌ UB: async 状态机使用未初始化值 async fn bad_state_machine() {     let x: bool = unsaf..."
-        },
         {
           "flags": [
             "compile_fail"
@@ -25179,22 +24991,20 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/04_navigation/08_learning_mvp_path.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/01_generics.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
         "../../04_formal/README.md",
         "../../06_ecosystem/README.md",
-        "../02_unsafe/01_unsafe.md",
         "../README.md",
         "01_async.md",
         "05_async_cancellation_safety.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
-      "matrix_rows": 107,
+      "mermaid_blocks": 0,
+      "matrix_rows": 21,
       "pre_post": {
         "pre": [
           "[Async/Await 基础](01_async.md)",
@@ -41930,10 +41740,12 @@
           "code_preview": "// AIDL 接口生成的 Rust 绑定 use binder::Interface;  pub trait IMyService: Interface { ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 11,
           "should_fail": false,
-          "code_preview": "// Rust 侧桥接模块 #[cxx::bridge] mod ffi {     unsafe extern \"C++\" {         include..."
+          "code_preview": "// Rust 侧桥接模块（依赖 cxx crate，无法在单文件 rustc 场景独立编译） #[cxx::bridge] mod ffi {     uns..."
         },
         {
           "flags": [
@@ -58326,7 +58138,7 @@
           ],
           "lines": 16,
           "should_fail": false,
-          "code_preview": "#[repr(C)] pub struct Point {     pub x: f64,     pub y: f64, }  #[no_mangle] pu..."
+          "code_preview": "#[repr(C)] pub struct Point {     pub x: f64,     pub y: f64, }  #[unsafe(no_man..."
         },
         {
           "flags": [
@@ -58342,7 +58154,7 @@
           ],
           "lines": 13,
           "should_fail": true,
-          "code_preview": "// Rust 的默认 ABI 不稳定（随编译器版本变化） #[no_mangle] pub extern \"C\" fn rust_function(x: i3..."
+          "code_preview": "// Rust 的默认 ABI 不稳定（随编译器版本变化） #[unsafe(no_mangle)] pub extern \"C\" fn rust_functi..."
         }
       ],
       "sources": [],
@@ -59157,7 +58969,7 @@
           ],
           "lines": 20,
           "should_fail": false,
-          "code_preview": "#![allow(unused)]  trait Parser {     fn parse(&self, input: &str) -> impl Itera..."
+          "code_preview": "#![allow(unused)]  trait Parser {     fn parse<'a>(&'a self, input: &'a str) -> ..."
         },
         {
           "flags": [

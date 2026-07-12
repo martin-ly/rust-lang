@@ -12,3 +12,10 @@ This file previously contained a local navigation aid (index, mind map, matrix, 
 - [Ownership, Borrowing & Lifetimes 权威概念页](../../concept/01_foundation/01_ownership_borrow_lifetime)
 - [concept/SUMMARY.md](../../concept/SUMMARY.md) — full knowledge-base index
 - [Workspace README](../../README.md)
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Rust Book — Understanding Ownership（官方）](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+- [Rust Reference（官方语言参考）](https://doc.rust-lang.org/reference/)

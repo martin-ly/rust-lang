@@ -18,3 +18,10 @@
 | 原子操作与内存序 | [concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md](../../../concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) |
 | 无锁编程 | [concept/03_advanced/00_concurrency/06_lock_free.md](../../../concept/03_advanced/00_concurrency/06_lock_free.md) |
 | 跨平台并发 | [concept/03_advanced/00_concurrency/04_cross_platform_concurrency.md](../../../concept/03_advanced/00_concurrency/04_cross_platform_concurrency.md) |
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Rust Book — Fearless Concurrency（官方）](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
+- [std::thread 官方文档](https://doc.rust-lang.org/std/thread/)

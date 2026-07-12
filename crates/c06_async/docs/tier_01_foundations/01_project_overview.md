@@ -17,3 +17,10 @@
 | 异步模式 | [concept/03_advanced/01_async/03_async_patterns.md](../../../../concept/03_advanced/01_async/03_async_patterns.md) |
 | 异步闭包 | [concept/03_advanced/01_async/07_async_closures.md](../../../../concept/03_advanced/01_async/07_async_closures.md) |
 | 异步高级主题 | [concept/03_advanced/01_async/02_async_advanced.md](../../../../concept/03_advanced/01_async/02_async_advanced.md) |
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Asynchronous Programming in Rust（rust-lang 官方 async book）](https://rust-lang.github.io/async-book/)
+- [Tokio 官方文档](https://tokio.rs/)

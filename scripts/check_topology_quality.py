@@ -53,7 +53,7 @@ def read(p):
 
 
 def t1_definition_atlas(text):
-    """01 atlas：找'定义'列，统计套话率。"""
+    """01 atlas：找'定义'列（精确匹配表头单元格），统计套话率。"""
     lines = text.splitlines()
     total = 0
     low = 0
@@ -63,9 +63,12 @@ def t1_definition_atlas(text):
         if not ln.strip().startswith("|"):
             continue
         cells = [c.strip() for c in ln.strip().strip("|").split("|")]
-        if any("定义" in c for c in cells):
+        # 表头识别必须精确匹配“定义”列：子串匹配会把中文名列含“定义”二字的数据行
+        # （如 [Rust 知识体系概念定义判定森林](...)）误判为表头，导致 def_col 错位、
+        # 后续所有行按错误列统计（T1 曾因此把 A/S/P 统计表的“数量”列当定义列）。
+        if any(c == "定义" for c in cells):
             for i, c in enumerate(cells):
-                if "定义" in c:
+                if c == "定义":
                     def_col = i
                     break
             continue

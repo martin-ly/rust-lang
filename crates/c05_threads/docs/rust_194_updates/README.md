@@ -12,3 +12,10 @@
 
 - [c05_threads - Rust 1.94 更新概览](00_rust_194_overview.md)
 - [Rust 1.94: 并发编程模式更新](01_concurrency_patterns_rust_194.md)
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Rust Book — Fearless Concurrency（官方）](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
+- [std::thread 官方文档](https://doc.rust-lang.org/std/thread/)

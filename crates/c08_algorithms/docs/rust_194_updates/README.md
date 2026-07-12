@@ -11,3 +11,10 @@
 ## 文件索引 {#文件索引}
 
 - [c08_algorithms - Rust 1.94 更新概览](00_rust_194_overview.md)
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [std::collections 官方文档](https://doc.rust-lang.org/std/collections/)
+- [Rust Book — Common Collections（官方）](https://doc.rust-lang.org/book/ch08-00-common-collections.html)

@@ -35,3 +35,10 @@ canonical 链接。具体可运行示例请参见本 crate 的 `examples/` 与 `
 - FFI 与 C 代码 / 链接脚本互操作
 - RTIC 实时中断驱动框架
 - Embassy 异步嵌入式框架
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [The Embedded Rust Book（rust-embedded 官方）](https://rust-embedded.github.io/book/)
+- [Rust Reference（官方语言参考）](https://doc.rust-lang.org/reference/)

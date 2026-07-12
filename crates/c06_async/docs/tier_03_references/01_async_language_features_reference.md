@@ -16,3 +16,10 @@
 | Pin / Unpin | [concept/03_advanced/01_async/08_pin_unpin.md](../../../../concept/03_advanced/01_async/08_pin_unpin.md) |
 | Stream trait | [concept/03_advanced/01_async/02_async_advanced.md](../../../../concept/03_advanced/01_async/02_async_advanced.md) |
 | async fn in traits / async closures | [concept/03_advanced/01_async/07_async_closures.md](../../../../concept/03_advanced/01_async/07_async_closures.md) |
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Asynchronous Programming in Rust（rust-lang 官方 async book）](https://rust-lang.github.io/async-book/)
+- [Tokio 官方文档](https://tokio.rs/)

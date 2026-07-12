@@ -100,6 +100,9 @@
 - `Pin<Box<dyn Future>>`：运行时类型擦除 + 一次堆分配与间接调用——用于 trait 对象、递归 async fn、运行时类型选择。
 - 执行器统一存储不同任务的 Future 时需 `Pin<Box<dyn Future + Send>>`；其余场景避免无谓装箱。
 
+> **交叉链接（向下引用 L2）**：单态化机制见 [L2 泛型（Generics）](../../02_intermediate/01_generics/01_generics.md)（单态化与代码膨胀）；
+> trait 对象的内存布局（vtable）见 [L2 Trait](../../02_intermediate/00_traits/01_traits.md)。
+
 ### 8.12 `loom` 并发模型检测工具
 
 > **权威来源**：本节完整论述（loom 排列测试原理、与 async 结合的完整示例）统一维护于

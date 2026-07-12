@@ -12,3 +12,10 @@
 
 - [c04_generic - Rust 1.94 更新概览](00_rust_194_overview.md)
 - [C04 泛型编程：RPITIT 与 use<> 模式](01_rpitit_generic_patterns.md)
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Rust Book — Generic Types, Traits, and Lifetimes（官方）](https://doc.rust-lang.org/book/ch10-00-generics.html)
+- [Rust Reference — Generics（官方）](https://doc.rust-lang.org/reference/items/generics.html)

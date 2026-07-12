@@ -12,3 +12,10 @@ This reference document previously contained local summaries and API notes for `
 - [Network Protocols 权威页](../../../../concept/06_ecosystem/12_networking/02_network_security.md)
 - [concept/SUMMARY.md](../../concept/SUMMARY.md)
 - [Workspace README](../../README.md)
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [std::net 官方文档](https://doc.rust-lang.org/std/net/)
+- [Tokio 官方文档](https://tokio.rs/)

@@ -17,3 +17,10 @@
 ```bash
 cargo tree -e features
 ```
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [The Cargo Book — Resolver（官方）](https://doc.rust-lang.org/cargo/reference/resolver.html)
+- [docs.rs（Rust crate 文档托管）](https://docs.rs/)

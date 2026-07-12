@@ -12,3 +12,10 @@ This file previously contained crate-level 项目概览, overviews, or project r
 - [Type System 权威页](../../concept/01_foundation/02_type_system)
 - [concept/SUMMARY.md](../../concept/SUMMARY.md)
 - [Workspace README](../../README.md)
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Rust Reference — Types（官方）](https://doc.rust-lang.org/reference/types.html)
+- [The Rustonomicon（官方 unsafe/类型底层指南）](https://doc.rust-lang.org/nomicon/)

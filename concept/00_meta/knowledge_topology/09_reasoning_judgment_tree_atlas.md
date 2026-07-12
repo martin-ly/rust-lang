@@ -48,9 +48,9 @@ flowchart TD
     Q2 -->|否| Q3{"迭代期间对集合的增删操作次数是否 ≥1 次？"}
     Q3 -->|是| R3[根因：集合迭代期间可变借用]
     Q3 -->|否| R4[根因：reborrow 或 split borrow 误用]
-    R1 --> F1[[缩小可变借用范围 / 使用 Cell/RefCell/Mutex]]
-    R2 --> F2[[引入新作用域 / clone 数据]]
-    R3 --> F3[[先 collect 再处理 / 使用索引]]
+    R1 --> F1[缩小可变借用范围 / 使用 Cell/RefCell/Mutex]
+    R2 --> F2[引入新作用域 / clone 数据]
+    R3 --> F3[先 collect 再处理 / 使用索引]
     R4 --> F4[修复：拆分借用（split borrows）按字段分别借用；或用 &mut *x reborrow 缩短可变借用区间]
     F1 --> V1[验证回边：cargo check；再 cargo clippy 升 -D warnings]
     F2 --> V1
@@ -71,9 +71,9 @@ flowchart TD
     Q3 -->|否| Q4{"签名中 for<'a> HRTB 或 dyn Trait 出现次数是否 ≥1 次？"}
     Q4 -->|是| R4[根因：高阶生命周期约束不足]
     Q4 -->|否| R5[根因：生命周期省略规则不适用]
-    R1 --> F1[[返回 owned 数据 / 使用 Arc/Box]]
-    R2 --> F2[[显式标注 'a / 使用生命周期省略规则]]
-    R3 --> F3[[改用 owned 数据 / Pin]]
+    R1 --> F1[返回 owned 数据 / 使用 Arc/Box]
+    R2 --> F2[显式标注 'a / 使用生命周期省略规则]
+    R3 --> F3[改用 owned 数据 / Pin]
     R4 --> F4[修复：补 for<'a> HRTB 约束；回调/闭包参数加 'static bound；或改返回 owned 数据]
     R5 --> F5[修复：补显式生命周期 'a；或改返回 owned/Box/Arc/'static 拥有数据]
     F1 --> V2[验证回边：cargo check；闭包/迭代器再 cargo clippy 升 -D warnings]
@@ -96,9 +96,9 @@ flowchart TD
     Q3 -->|否| Q4{"async fn / RPITIT 返回位置涉及的 impl Trait 数是否 ≥1 个？"}
     Q4 -->|是| R4[根因：impl Trait / RPITIT 边界]
     Q4 -->|否| R5[根因：类型推断失败或自定义类型未实现 trait]
-    R1 --> F1[[添加 where T: Trait]]
-    R2 --> F2[[解引用 / 借用 / 使用 Deref]]
-    R3 --> F3[[使用 ? / map_err / 定义统一错误类型]]
+    R1 --> F1[添加 where T: Trait]
+    R2 --> F2[解引用 / 借用 / 使用 Deref]
+    R3 --> F3[使用 ? / map_err / 定义统一错误类型]
     R4 --> F4[修复：impl Trait 改具名关联类型或 Box dyn Trait 擦除；RPITIT 不可用时回退命名 trait 对象]
     R5 --> F5[修复：加显式类型标注或 turbofish；为自定义类型 derive 或手写所需 trait]
     F1 --> V3[验证回边：cargo check；trait bound/类型推断再 cargo clippy 升 -D warnings]
@@ -121,9 +121,9 @@ flowchart TD
     Q3 -->|否| Q4{"跨 FFI 边界调用次数 ≥1 次且 panic 穿越 extern 边界？"}
     Q4 -->|是| R4[根因：ABI/生命周期/指针约定错误]
     Q4 -->|否| R5[根因：unsafe 导致 UB 或逻辑错误]
-    R1 --> F1[[改用 ? / match / unwrap_or]]
-    R2 --> F2[[使用 get / checked 方法]]
-    R3 --> F3[[统一锁顺序 / 使用 try_lock / 避免跨 await 锁]]
+    R1 --> F1[改用 ? / match / unwrap_or]
+    R2 --> F2[使用 get / checked 方法]
+    R3 --> F3[统一锁顺序 / 使用 try_lock / 避免跨 await 锁]
     R4 --> F4[修复：FFI 边界用 catch_unwind 拦截 panic；统一错误码返回值约定；#[repr(C)] 显式布局]
     R5 --> F5[修复：定位 unsafe 边界；用 get/checked 替换索引；持锁不跨 await；可疑 UB 走 miri]
     F1 --> V4[验证回边：cargo test；再 cargo clippy 升 -W unwrap_used/indexing_slicing/await_holding_lock]
@@ -144,9 +144,9 @@ flowchart TD
     Q1 -->|否| Q3{"safe 公开 API 依赖的 unsafe 不变式数是否 ≥1 个？"}
     Q3 -->|是| R3[根因：safe 抽象违反 soundness]
     Q3 -->|否| R4[根因：unsafe 块范围过大或契约不清]
-    R1 --> F1[[遵守 Stacked/Tree Borrows / 使用 NonNull]]
-    R2 --> F2[[使用 MaybeUninit / 严格初始化]]
-    R3 --> F3[[封装 invariant / Safety Tags]]
+    R1 --> F1[遵守 Stacked/Tree Borrows / 使用 NonNull]
+    R2 --> F2[使用 MaybeUninit / 严格初始化]
+    R3 --> F3[封装 invariant / Safety Tags]
     R4 --> F4[修复：unsafe 块收缩到单表达式；每个 unsafe fn 补 Safety 契约注释（Safety Tags 风格）]
     F1 --> V5[验证回边：cargo miri test 检测 Stacked/Tree Borrows；性质用 cargo kani]
     F2 --> V5
@@ -262,6 +262,8 @@ flowchart TD
 | §3.3 类型不匹配 | `F4[[见 Return Type Notation 预研 / Async Advanced]]` | `impl Trait` 改具名关联类型或 `Box<dyn Trait>` 擦除；RPITIT 不可用时回退命名 trait 对象 |
 | §3.4 运行时 panic | `F4[[见 FFI Advanced / Unsafe Rust]]` | FFI 边界用 `catch_unwind` 拦截 panic；统一错误码返回值约定；`#[repr(C)]` 显式布局 |
 | §3.5 unsafe | `F4[[见 Unsafe Rust Patterns / Safety Tags 预研]]` | unsafe 块收缩到单表达式；每个 `unsafe fn` 补 Safety 契约注释（Safety Tags 风格） |
+
+> 形状语义修正（2026-07-12）：§3.1–§3.5 的 `F1–F3` 修复策略叶子原为子程序形 `[[…]]`，但它们是具体修复动作（如「缩小可变借用范围 / 使用 Cell/RefCell/Mutex」）而非跨页跳转引用，按「叶子即机制」标准统一改为矩形 `[…]`；本页 mermaid 内 `[[` 跳出叶子归零。
 
 > 中间层桥接：上述 5 条修复策略对应的权威概念页见 §四「按修复策略索引」（[Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Error Handling Deep Dive](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md) · [FFI Advanced](../../03_advanced/04_ffi/02_ffi_advanced.md) · [Unsafe Rust Patterns](../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md) · [Miri](../../04_formal/04_model_checking/08_miri.md) · [Kani](../../04_formal/04_model_checking/09_kani.md)），叶子不再跳出本页。
 

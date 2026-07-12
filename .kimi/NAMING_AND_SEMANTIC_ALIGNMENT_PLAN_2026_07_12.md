@@ -133,3 +133,14 @@
 - 线 D v2 去重清零：54 可处置项→0（autoverus 真近克隆对差异化改写为预览跟踪页；52 对系列结构相似登记 SERIES_PATH_RE 白名单附证据）；**v2 门转阻断**（15 阻断+5 观察=20 门），CI/nightly/AGENTS 同步。报告 reports/DEDUP_V2_ZERO_2026_07_12.md。
 
 **遗留（非阻断）**：命名 lint WARN 78（已裁定豁免项）；KG 范畴节点缺口 9 项（Vec/Tokio/Send/Sync 等实体未建）；REVIEW 级相似对 437（观察，非可处置）。
+
+## 第三轮深化完成记录（2026-07-12 午后）
+
+**状态：四线并行完成，全 20 门 exit 0，semantic health 97.2→98.3（meta 100 / topo 93.3 / dedup 100 / kg 100）。**
+
+- 线 E KG 范畴节点：新建 17 节点（7 范畴+10 实例，491 实体）+ 14 条类型化边（5853 关系），上轮 9 项缺口全闭环；K1b 归零。新脚本 add_kg_category_nodes.py（幂等）；修复 type_kg_semantic_edges.py dry-run 覆盖正式报告的 bug。
+- 线 F meta→100：D2=2/D5=17 全处置（检查器规则误报修正：WASI Preview 专名、nightly 路径权威 URL；15+2 文件显式白名单登记附理由）；P2 覆盖 99.7→100（unsafe_boundary_panorama Kani 链接修正）。
+- 线 G REVIEW 437→0：发现 1 对真重复（01_async↔02_async_advanced，~1150 行 86-100% 逐行重复）已按 canonical 摘要化处置；其余 436 对分层复核后登记 REVIEWED 白名单（4 路径族+3 显式对，全附证据）。阻断门未破。
+- 线 H 权威覆盖扩展：content/ 61/61=100%（修 7 处失效外链）；crates docs 抽样非 stub 覆盖 2%→100%（50 文件补权威来源节，全量 12.2→20.8%，缺口 470 文件登记）；todo!() 8 处处置（1 补全可编译+7 正当用法豁免）；「综述级」徽标 10 页处置（5 页 rustc 1.97 实测验证、5 页改伪代码标注）。
+
+**遗留（下轮目标）**：topo 93.3（T2 83% / T1 1.1% / T3 21 jump / T4 93.3%）；crates docs 权威全量覆盖 20.8%→（470 文件缺口）；命名 lint WARN 78（已裁定豁免，可转 strict 评估）。

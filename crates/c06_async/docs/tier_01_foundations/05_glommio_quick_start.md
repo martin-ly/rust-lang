@@ -15,3 +15,10 @@
 | Async/Await 基础 | [concept/03_advanced/01_async/01_async.md](../../../../concept/03_advanced/01_async/01_async.md) |
 | Future / Executor 机制 | [concept/03_advanced/01_async/04_future_and_executor_mechanisms.md](../../../../concept/03_advanced/01_async/04_future_and_executor_mechanisms.md) |
 | 异步模式 | [concept/03_advanced/01_async/03_async_patterns.md](../../../../concept/03_advanced/01_async/03_async_patterns.md) |
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Asynchronous Programming in Rust（rust-lang 官方 async book）](https://rust-lang.github.io/async-book/)
+- [Tokio 官方文档](https://tokio.rs/)

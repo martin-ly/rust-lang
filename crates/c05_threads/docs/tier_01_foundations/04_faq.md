@@ -12,3 +12,10 @@ This file previously contained crate-level 常见问题解答, overviews, or pro
 - [Concurrency 权威页](../../concept/03_advanced/00_concurrency)
 - [concept/SUMMARY.md](../../concept/SUMMARY.md)
 - [Workspace README](../../README.md)
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Rust Book — Fearless Concurrency（官方）](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
+- [std::thread 官方文档](https://doc.rust-lang.org/std/thread/)

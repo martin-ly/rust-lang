@@ -12,3 +12,10 @@
 
 - [Rust 1.94 + Edition 2024: 所有权系统深度解析](01_edition_2024_ownership.md)
 - [Rust 1.94 所有权模式实战](02_ownership_patterns_rust_194.md)
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Rust Book — Understanding Ownership（官方）](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+- [Rust Reference（官方语言参考）](https://doc.rust-lang.org/reference/)

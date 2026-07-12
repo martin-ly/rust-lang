@@ -11,3 +11,10 @@
 ## 文件索引 {#文件索引}
 
 - [Rust 1.94: ControlFlow API 与生成器深度解析](01_controlflow_api_rust_194.md)
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Rust Reference — Expressions（官方）](https://doc.rust-lang.org/reference/expressions.html)
+- [Rust Book — Common Programming Concepts（官方）](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)

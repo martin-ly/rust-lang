@@ -12,3 +12,10 @@ This reference document previously contained local summaries and API notes for `
 - [Design Patterns 权威页](../../concept/06_ecosystem/03_design_patterns/02_patterns.md)
 - [concept/SUMMARY.md](../../concept/SUMMARY.md)
 - [Workspace README](../../README.md)
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Rust API Guidelines（rust-lang 官方 API 设计准则）](https://rust-lang.github.io/api-guidelines/)
+- [Rust Reference（官方语言参考）](https://doc.rust-lang.org/reference/)

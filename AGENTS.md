@@ -242,7 +242,7 @@ bash scripts/git_hooks/install.sh
 | canonical uniqueness | 0 处双权威页/同主题重复 | exit 0 | ✅ **已转阻断** |
 | concept consistency | 0 错误级发现（decision trees 等跨文件引用全有效） | exit 0 | ✅ **已转阻断** |
 | metadata consistency | D1–D6 全 0（flagged 0/480）；D2 白名单 2 项（L0 导航页/L7 跟踪页）与 D5 白名单 15 项（确属 nightly-only 主题页，2026-07-12 逐文件复核）均显式登记于检查器并公示于报告 | exit 0 | ⏳ 维持观察（2026-07-12 起 D1–D6 归零且 --strict exit 0，连续达标后可评估转正） |
-| overlap v2 | 命中 552；可处理 MERGE=0 + DOCS_INTERNAL=0 = **0**（SERIES 115 白名单 / REVIEW 437；54 对清零明细见 `reports/DEDUP_V2_ZERO_2026_07_12.md`） | exit 0 | ✅ **已转阻断**（2026-07-12，可处理项基线 0） |
+| overlap v2 | 命中 559；可处理 MERGE=0 + DOCS_INTERNAL=0 = **0**（SERIES 115 白名单 / REVIEWED 444 已批量复核白名单 / REVIEW 0；54 对清零明细见 `reports/DEDUP_V2_ZERO_2026_07_12.md`，437 REVIEW 复核加固见 `reports/OVERLAP_REVIEW_SWEEP_2026_07_12.md`） | exit 0 | ✅ **已转阻断**（2026-07-12，可处理项基线 0） |
 | naming convention | N1–N6：ERROR=0 / WARN=78（无序号系列文件 35 + 无序号目录 39 + N4 stub 3 + N5 docs 跳号 1；扫描 1790 文件/254 目录；2026-07-12 命名收尾：docs/08_guides→08_usage_guides，crates 5 目录改 tier_05_*，10 个 rust_194_updates + c03 snippets 补 README 豁免索引） | exit 0 | ⏳ 新增观察门（2026-07-12，§4.0 重编号配套；连续达标后可评估转正） |
 | semantic health | 总分 98.3 grade OK（元数据 100.0 / 拓扑 93.3 / 去重 100.0 / KG 100.0） | exit 0 | ⏳ 维持观察（聚合门） |
 | authority coverage | 内容页 P0/P1/P2/any 全 100% / none=0 / 核心 L1–L4 无 P0 缺口=0（2026-07-12 补齐唯一 P2 缺口页） | exit 0 | ⏳ 维持观察（--strict 已实现且 exit 0，连续达标后可评估转正） |

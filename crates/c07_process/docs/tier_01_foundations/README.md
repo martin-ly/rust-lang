@@ -12,3 +12,10 @@
 
 - 📚 文档列表
 - 🎯 学习目标
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [std::process 官方文档](https://doc.rust-lang.org/std/process/)
+- [std::io 官方文档](https://doc.rust-lang.org/std/io/)

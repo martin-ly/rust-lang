@@ -63,6 +63,104 @@ SERIES_PATH_RE = [
     re.compile(r"docs/12_research_notes/08_software_design_theory/(\d\d_[^/]+/)+README\.md"),
 ]
 
+# ---------------------------------------------------------------------------
+# REVIEWED 白名单（2026-07-12 批量复核加固，见 reports/OVERLAP_REVIEW_SWEEP_2026_07_12.md）。
+# 语义：经人工分层复核确认非重复（stub/模板系列相似或同领域术语共现），登记后不再计入 REVIEW。
+# 判定顺序在 MERGE / DOCS_INTERNAL 之后：docs/ 内 sim>=0.7 仍会进入 DOCS_INTERNAL（阻断），
+# sim>=0.85 仍进入 MERGE（阻断），故本白名单不会掩盖高相似真重复。
+# REVIEWED_PATH_RE： (rx1, rx2) 二元组，两文件路径分别命中 rx1/rx2（顺序无关）即判 REVIEWED。
+# REVIEWED_PAIRS： 显式对（完整路径或 basename 对，容忍 NN_ 重编号）。每条必须附复核证据注释。
+# ---------------------------------------------------------------------------
+REVIEWED_PATH_RE = [
+    # 复核 2026-07-12（族 A）：crates/*/docs/ 治理 stub 家族。0.5–0.9 三桶命中对全部落在 crate docs 内。
+    # 逐文件核验：命中文件 48/50 为 ≤45 行 canonical 重定向 stub 或统一生成器 orientation stub
+    # （"权威来源"+主题导航表，指向各自不同的 concept/ 权威页，如 03_lifetimes vs 04_lifetimes_advanced
+    # vs 01_concurrency vs 01_control_flow vs 01_generics；或 "This file previously contained ... Per
+    # AGENTS.md §6.4" 仅保留 Quick links；2026-07-12 权威覆盖扩展任务追加的「国际权威来源」节不改变
+    # stub 性质）；唯一非 stub 对 c05/c06 tier_02_guides/07_hands_on_projects.md（sim 0.65）为项目模板相似：
+    # 共享知识结构骨架（概念定义/属性特征/关系连接/思维导图节 + 项目说明/核心代码模板），
+    # 正文独特内容 67%/61%（线程池/并发队列/生产者-消费者 vs 异步文件批处理/HTTP 客户端/任务调度器）。
+    # 共享部分均为 stub/模板骨架，无概念正文互抄。登记 REVIEWED。
+    (re.compile(r"crates/[^/]+(?:/[^/]+)?/docs/.+\.md$"),
+     re.compile(r"crates/[^/]+(?:/[^/]+)?/docs/.+\.md$")),
+    # 复核 2026-07-12（族 B）：knowledge/ 模块索引 README 模板家族（含与 content/ecosystem/deep_dives/
+    # README.md 的交叉对），0.5–0.8 桶共 46 对。逐文件通读 9 个命中 README（72–139 行）：
+    # 共享 = 模块索引模板（EN/Summary/Bloom/受众/内容分级头 + 📚内容表 + 🎯学习目标/前置要求 +
+    # 🚀下一步 + Batch 8 权威来源对齐页脚 + 模块 8 国际化对齐节）；独特 = 各模块文档清单表、
+    # 学习目标、检查清单（专家主题/生态工具/学术/Miri/部署/前沿特性/参考/入门 主题互不重叠）。
+    # 无正文互抄，属学习入口索引模板相似。登记 REVIEWED。
+    (re.compile(r"knowledge/.+\.md$"), re.compile(r"knowledge/.+\.md$")),
+    (re.compile(r"knowledge/.+\.md$"),
+     re.compile(r"content/ecosystem/deep_dives/README\.md$")),
+    # 复核 2026-07-12（族 C+D）：docs/12_research_notes/ 研究笔记模板家族，0.5–0.7 桶共 271 对
+    # （含 01_design_patterns_formal 三子目录 248 对、07_distributed 12 对、08_crate_architectures 4 对、
+    # 03_formal_proofs/07_distributed_and_workflow/04_formal_module_system/02_formal_methods 交叉 19 对、
+    # 10_tutorials_and_guides / 01_alignment_matrices 各 1 对）。抽样验证 14 对（每族 ≥2 对）：
+    # - 设计模式形式化文档（800+ 行/份，State/Visitor/Mediator/Observer/AbstractFactory/Adapter/
+    #   Builder/Bridge 等）：共享 ~60% 为形式化文档骨架（目录/权威来源对照/形式化定义/所有权约束分析/
+    #   不变式规约/决策树节标题）+ Batch 8 来源页脚 + 代码围栏等排版行；去除排版行后正文独特内容
+    #   38–58%，为各模式专属公理/定理/证明/代码（ST-T1 枚举穷尽 vs VI-T1 单分发完备，互不重叠）。
+    # - 分布式模式（saga/cqrs/circuit_breaker/timeout/retry/outbox）：正文独特 39–50%，模式互不重叠。
+    # - crate 架构分析（askama/maud/ort/tract）：正文独特 49–58%。
+    # - 证明树（borrow/ownership/type_safety）：正文独特 41–52%，证明对象不同。
+    # - 思维导图/决策树交叉对：共享为「Rust 1.94 深度整合更新」模板节 + 权威来源页脚 + TOC 锚点，
+    #   主题各异（Coq 集成计划/形式化生态/分布式架构/异步运行时/工作流）。
+    # - 10_tutorials 对为 AGENTS.md §4.3 学习入口 stub（借用检查器 vs 所有权安全，速查要点不同）。
+    # 均为同系列模板化结构或同领域术语共现，无正文互抄。登记 REVIEWED。
+    # 注意：本族登记在 DOCS_INTERNAL 之后，docs/ 内 sim>=0.7 仍阻断，不受此豁免。
+    (re.compile(r"docs/12_research_notes/.+\.md$"),
+     re.compile(r"docs/12_research_notes/.+\.md$")),
+]
+
+REVIEWED_PAIRS = {
+    # 复核 2026-07-12（族 E）：concept 网络域同领域术语共现（sim 0.500）。逐文件比对（747 vs 886 行）：
+    # 06_websocket 主题为 WebSocket 应用协议（握手/tokio-tungstenite/聊天室实战），
+    # 05_networking_basics 主题为 TCP/IP 网络基础；正文独特内容 64%/67%，
+    # 共享为 concept 权威页元数据头模板 + 网络领域通用术语。非重复，登记 REVIEWED。
+    frozenset({
+        "concept/06_ecosystem/04_web_and_networking/06_websocket_realtime_communication.md",
+        "concept/06_ecosystem/12_networking/05_networking_basics.md",
+    }),
+    # 复核 2026-07-12（族 F）：content/safety_critical 同套件跨主题（sim 0.522）。
+    # 08_glossary_and_definitions（术语表，119 行）vs 02_rust_ecosystem_mind_map（思维导图，99 行）：
+    # 正文独特 69%/56%，共享为安全关键套件通用术语（ISO 26262/内存安全等）与元数据头。非重复。
+    frozenset({
+        "content/safety_critical/09_reference/08_glossary_and_definitions.md",
+        "content/safety_critical/01_mind_maps/02_rust_ecosystem_mind_map.md",
+    }),
+    # 复核 2026-07-12（族 G）：docs/15_rust_formal_engineering_system 子主题索引（sim 0.510）。
+    # 01_type_system/README（257 行）vs 03_ownership_borrowing/README（331 行）：
+    # 共享为形式化工程系统统一章节模板；正文独特 66%/70%（类型系统 vs 所有权借用 主题清单互不重叠）。
+    frozenset({
+        "docs/15_rust_formal_engineering_system/01_theoretical_foundations/01_type_system/README.md",
+        "docs/15_rust_formal_engineering_system/01_theoretical_foundations/03_ownership_borrowing/README.md",
+    }),
+}
+
+
+def _in_reviewed_pairs(f1: str, f2: str) -> bool:
+    f1, f2 = _norm(f1), _norm(f2)
+    if frozenset({f1, f2}) in REVIEWED_PAIRS:
+        return True
+    b1, b2 = f1.rsplit("/", 1)[-1], f2.rsplit("/", 1)[-1]
+    for pair in REVIEWED_PAIRS:
+        bases = {p.rsplit("/", 1)[-1] for p in pair}
+        if frozenset({b1, b2}) == bases:
+            return True
+    return False
+
+
+def _in_reviewed_path_family(f1: str, f2: str) -> bool:
+    f1, f2 = _norm(f1), _norm(f2)
+    for rx1, rx2 in REVIEWED_PATH_RE:
+        if (rx1.search(f1) and rx2.search(f2)) or (rx1.search(f2) and rx2.search(f1)):
+            return True
+    return False
+
+
+def is_reviewed(o):
+    return _in_reviewed_pairs(o["f1"], o["f2"]) or _in_reviewed_path_family(o["f1"], o["f2"])
+
 
 def _norm(p: str) -> str:
     return p.replace("\\", "/")
@@ -113,6 +211,8 @@ def triage(o):
         return "MERGE"
     if top1 == "docs" and top2 == "docs" and o["sim"] >= 0.7:
         return "DOCS_INTERNAL"
+    if is_reviewed(o):
+        return "REVIEWED"
     return "REVIEW"
 
 
@@ -132,7 +232,7 @@ def main():
     data = json.load(open(src, encoding="utf-8"))
     overlaps = data.get("overlaps", [])
 
-    buckets = {"SERIES": [], "MERGE": [], "DOCS_INTERNAL": [], "REVIEW": []}
+    buckets = {"SERIES": [], "MERGE": [], "DOCS_INTERNAL": [], "REVIEWED": [], "REVIEW": []}
     for o in overlaps:
         buckets[triage(o)].append(o)
 
@@ -150,10 +250,11 @@ def main():
         f.write(f"**来源**: `{summary['source']}`  **总对数**: {summary['total']}\n\n")
         f.write("| 分类 | 数量 | 处置 |\n|---|:---:|:---|\n")
         disp = {"SERIES": "保留但标注为版本系列/分章（白名单）", "MERGE": "应合并近克隆（留一删余或 stub 化）",
-                "DOCS_INTERNAL": "docs/ 内同主题互抄（合并或互链）", "REVIEW": "人工复核"}
-        for k in ["MERGE", "DOCS_INTERNAL", "SERIES", "REVIEW"]:
+                "DOCS_INTERNAL": "docs/ 内同主题互抄（合并或互链）",
+                "REVIEWED": "已批量复核确认非重复（stub/模板系列/同领域术语共现，白名单）", "REVIEW": "人工复核"}
+        for k in ["MERGE", "DOCS_INTERNAL", "SERIES", "REVIEWED", "REVIEW"]:
             f.write(f"| {k} | {summary[k]} | {disp[k]} |\n")
-        for k in ["MERGE", "DOCS_INTERNAL", "SERIES", "REVIEW"]:
+        for k in ["MERGE", "DOCS_INTERNAL", "SERIES", "REVIEWED", "REVIEW"]:
             f.write(f"\n## {k}（{summary[k]}）Top 25\n\n")
             f.write("| sim | 文件1 | 文件2 |\n|:---:|:---|:---|\n")
             for o in buckets[k][:25]:
@@ -161,7 +262,7 @@ def main():
         f.write(f"\n## 机器可读\n\n- JSON: `reports/OVERLAP_TRIAGE_{args.date}.json`\n")
 
     print(f"[P1-triage] total={summary['total']} MERGE={summary['MERGE']} DOCS_INTERNAL={summary['DOCS_INTERNAL']} "
-          f"SERIES={summary['SERIES']} REVIEW={summary['REVIEW']}")
+          f"SERIES={summary['SERIES']} REVIEWED={summary['REVIEWED']} REVIEW={summary['REVIEW']}")
     print(f"[P1-triage] report: {os.path.relpath(out_md, ROOT).replace(chr(92),'/')}")
     return 0
 

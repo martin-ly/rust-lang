@@ -18,3 +18,10 @@
 - Windows 术语
 - Rust 特定术语
 - 性能术语
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [std::process 官方文档](https://doc.rust-lang.org/std/process/)
+- [std::io 官方文档](https://doc.rust-lang.org/std/io/)

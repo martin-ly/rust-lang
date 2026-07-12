@@ -12,3 +12,10 @@
 
 - [00_rust_194_overview.md](00_rust_194_overview.md)
 - [Rust 1.94: 生成器与异步编程深度整合](01_gen_and_async_await.md)
+
+## 国际权威来源
+
+> 以下外链均于 2026-07-12 经 curl 实测可达（HTTP 200）。
+
+- [Asynchronous Programming in Rust（rust-lang 官方 async book）](https://rust-lang.github.io/async-book/)
+- [Tokio 官方文档](https://tokio.rs/)
