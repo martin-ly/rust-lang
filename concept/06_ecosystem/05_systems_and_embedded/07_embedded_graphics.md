@@ -55,6 +55,9 @@
     - [测验 5：`probe-run` 和 `defmt` 如何配合调试嵌入式图形应用？（理解层）](#测验-5probe-run-和-defmt-如何配合调试嵌入式图形应用理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：const fn 中构造 `String`（rustc 1.97.0 实测）](#反例const-fn-中构造-stringrustc-1970-实测)
+    - [✅ 修正：静态数据用 `&'static str`](#-修正静态数据用-static-str)
 
 > **前置概念**: N/A
 > **后置概念**: N/A
@@ -1149,3 +1152,33 @@ unsafe extern "C" fn touch_isr() {
 | Rust 嵌入式图形系统开发 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Rust 嵌入式图形系统开发 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust 嵌入式图形系统开发 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+## ⚠️ 反例与陷阱
+
+本节以 const fn 中调用分配 API 为反例，展示嵌入式 no-alloc 约束的编译期来源。
+
+### 反例：const fn 中构造 `String`（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0015
+const fn banner_len() -> usize {
+    let s = String::from("splash"); // ❌ const 上下文不允许堆分配
+    s.len()
+}
+fn main() {
+    println!("{}", banner_len());
+}
+```
+
+**错误**：`E0015 cannot call non-const fn String::from in constant functions`——嵌入式静态初始化必须遵守同一约束。
+
+### ✅ 修正：静态数据用 `&'static str`
+
+```rust
+const BANNER: &str = "splash";
+const fn banner_len() -> usize {
+    BANNER.len() // str::len 是 const fn
+}
+fn main() {
+    println!("{}", banner_len());
+}
+```

@@ -70,6 +70,9 @@
     - [10.5 边界测试：Kani 的路径爆炸与有界验证](#105-边界测试kani-的路径爆炸与有界验证)
     - [10.6 边界测试：Creusot 的 Ghost 代码与零成本抽象](#106-边界测试creusot-的-ghost-代码与零成本抽象)
   - [相关概念](#相关概念)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：const 上下文中的算术溢出（rustc 1.97.0 实测）](#反例const-上下文中的算术溢出rustc-1970-实测)
+    - [✅ 修正：扩大类型或显式环绕](#-修正扩大类型或显式环绕)
 
 ## 一、权威定义（Definition）
 
@@ -968,3 +971,28 @@ fn factorial(n: Int) -> Int {
 **文档版本**: 1.0
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
+
+## ⚠️ 反例与陷阱
+
+本节以 const 算术溢出为反例，展示编译期求值对 Hoare 式「无溢出」前置条件的静态强制执行。
+
+### 反例：const 上下文中的算术溢出（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0080
+const OVER: u8 = 255 + 1; // ❌ 编译期求值溢出
+fn main() {
+    println!("{}", OVER);
+}
+```
+
+**错误**：`E0080 attempt to compute 255_u8 + 1_u8, which would overflow`——const 求值拒绝违反算术不变量的程序。
+
+### ✅ 修正：扩大类型或显式环绕
+
+```rust
+const OK: u16 = 255 + 1;        // 类型容纳结果
+const WRAP: u8 = 255u8.wrapping_add(1); // 显式声明环绕语义
+fn main() {
+    println!("{} {}", OK, WRAP);
+}
+```

@@ -46,7 +46,12 @@
 
 ## 一、权威定义（Definition）
 
-「权威定义（Definition）」部分包含 Wikipedia 定义 与  Pierce *TAPL* 与 Cardelli 定义 两条主线，本节依次说明。
+类型论（Type Theory）是研究「程序中值如何分类、分类如何保证行为良构」的数学分支，本页以两个权威定义锚定：
+
+- **Wikipedia 定义**：类型论是「把项（term）分类为类型（type）的形式系统」，起源于 Russell 为解决集合论悖论（1908）的分层思想，现代形态以 Martin-Löf 直觉类型论（ITT）与 λ 立方（Barendregt）为代表。它与集合论的根本差异：集合是「先有元素后谈归属」，类型是「项生来带类型，类型是构造的语法类别」。
+- **Pierce *TAPL* 与 Cardelli 定义**：Pierce 在 *Types and Programming Languages* 中给出的操作性定义——「类型系统是一种可处理的语法方法，通过程序短语分类来证明某类行为不会发生」（a tractable syntactic method for proving the absence of certain program behaviors）。Cardelli 进一步区分「类型论作为语言设计的基础」与「类型论作为逻辑（Curry-Howard 同构：类型 = 命题，程序 = 证明）」。
+
+两个定义在 Rust 语境的落点：Rust 类型系统是 Pierce 定义的工业实例（编译期证明「无数据竞争、无内存错误」两类行为不发生），而 GAT/生命周期等机制可从 Curry-Howard 视角读作「受限的依赖类型与区域逻辑」。
 
 ### 1.1 Wikipedia 定义
 
@@ -74,7 +79,13 @@ Rust 扩展:
 
 ## 二、概念属性矩阵（Attribute Matrix）
 
-本节将「概念属性矩阵（Attribute Matrix）」分解为若干主题：类型论层次矩阵、Variance 矩阵与Rust 类型的 Variance。
+类型论的属性矩阵沿「系统层次 × 变异（variance）× Rust 实例」三个维度组织：
+
+1. **类型论层次矩阵**（λ 立方维度）：简单类型 λ 演算（`λ→`，无多态）→ System F（`λ2`，类型抽象 `Λα`——Rust 泛型的祖先）→ System Fω（类型构造子，`λω`——GAT/HKT 的位置）→ 依赖类型（`λΠ`，值出现在类型中——const generics 是其受限片段）。Rust 整体位于 Fω 的子集 + 仿射扩展：比 HM（ML 系）强在显式有界量化，弱在「无全 HKT、无完整依赖类型」。
+2. **Variance 矩阵**：类型构造子 `F` 对子类型的保持方向——协变（`A ≤ B ⟹ F<A> ≤ F<B>`，如 `&'a T` 对 `'a`）、逆变（方向翻转，如 `fn(T)` 对参数 `T`）、不变（两边都不成立，如 `&mut T` 对 `T`、`Cell<T>`）。不变性是「可变 + 共享」的类型论代价：`&mut T` 对 `T` 不变保证了「写入 shorter-lived 值」的漏洞被类型拒绝。
+3. **Rust 类型的 Variance 实例**：编译器对每个泛型类型自动推导 variance（结构体字段的合成规则：不可变字段协变、`UnsafeCell` 字段逆变/不变、函数参数逆变返回值协变）。推导错误的手动修正工具是 `PhantomData<fn(T) -> T>`（协变声明）或 `PhantomData<Cell<T>>`（不变声明）。
+
+矩阵用法：遇到「生命周期看似满足却不编译」的问题，先查涉及类型的 variance——90% 的此类困惑是「把 `&mut T` 当协变用」或「`Cell` 使容器不变」导致。
 
 ### 2.1 类型论层次矩阵
 >
@@ -995,7 +1006,14 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 
 ## 十、边界测试：类型论的编译错误
 
-「边界测试：类型论的编译错误」涉及边界测试：单位类型与空类型的混淆（编译错误）、边界测试：代数数据类型的穷尽匹配（编译错误）、边界测试：GAT 与高阶类型（编译错误）、边界测试：依赖类型与数组长度（编译错误）等6个方面，本节逐一说明其要点。
+类型论边界的编译错误对应「类型系统拒绝面的四个代表点」：
+
+- **单位类型与空类型的混淆**：`()`（unit，恰有一个值——「无信息」）vs `!`（never/empty，无值——「不可能」）vs `enum Void {}`（稳定的空类型模拟）。混淆表现：把「返回 `()` 的发散函数」与「返回 `!`」等价化（`if c { return } else { panic!() }` 的类型是 `()` 而非 `!`——`return` 的表达式类型是 `!` 但函数签名说了算）。判定：问「该类型的 inhabitant 数量」——1 是 unit，0 是 never。
+- **代数数据类型的穷尽匹配**（E0004）：ADT 的「和」性质使编译器能枚举全部变体——`match` 漏变体即拒绝。这是「类型即值集合」观点的直接计算化；`#[non_exhaustive]` 是「保留演进空间」的显式弃权（外部 crate 必须写 `_` 臂）。
+- **GAT 与高阶类型**：`trait StreamingIterator { type Item<'a>; fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>; }`——关联类型带生命周期参数使「借用自身产出的迭代器」可表达；错误形态：试图在 stable 模拟 HKT（`type Item<T>` 不受支持——GAT 只允许生命周期/类型参数按 trait 声明的形态出现）。
+- **依赖类型与数组长度**：`[T; N]` 的 `N` 是「类型位置的值」——依赖类型的入门实例；边界错误：`fn f<const N: usize>(a: [i32; N + 1])` 在 stable 被拒（`generic_const_exprs` 未稳定），`N` 只能以「裸参数」形态出现在类型中。
+
+统一视角：四个边界分别对应「值集合基数」「和类型完备性」「类型构造子参数化」「值-类型依赖」——即 λ 立方 + 仿射扩展在 Rust 中的四个前沿。
 
 ### 10.1 边界测试：单位类型与空类型的混淆（编译错误）
 

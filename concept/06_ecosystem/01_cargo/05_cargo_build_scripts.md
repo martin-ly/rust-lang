@@ -68,6 +68,9 @@
     - [测验 3：`links = "mylib"` 的作用是什么？](#测验-3links--mylib-的作用是什么)
     - [测验 4：生成的代码应该放在哪个目录？](#测验-4生成的代码应该放在哪个目录)
   - [权威来源索引](#权威来源索引)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：`env!` 引用不存在的构建变量（rustc 1.97.0 实测）](#反例env-引用不存在的构建变量rustc-1970-实测)
+    - [✅ 修正：`option_env!` 提供回退](#-修正option_env-提供回退)
 
 ---
 
@@ -512,3 +515,27 @@ println!("cargo:rerun-if-changed=src/config.json");
 **文档版本**: 1.0
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Cargo 官方文档
+
+## ⚠️ 反例与陷阱
+
+本节以 `env!` 读取未导出变量为反例，展示 build.rs 与编译期环境注入的协作契约。
+
+### 反例：`env!` 引用不存在的构建变量（rustc 1.97.0 实测）
+
+```rust,compile_fail
+fn main() {
+    let v = env!("MY_BUILD_VALUE"); // ❌ build.rs 未导出、环境亦未设置
+    println!("{}", v);
+}
+```
+
+**错误**：`error: environment variable MY_BUILD_VALUE not defined at compile time`——`env!` 是编译期求值，失败即构建失败。
+
+### ✅ 修正：`option_env!` 提供回退
+
+```rust
+fn main() {
+    let v = option_env!("MY_BUILD_VALUE").unwrap_or("dev-default");
+    println!("{}", v);
+}
+```

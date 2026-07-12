@@ -454,3 +454,32 @@ fn main() -> std::io::Result<()> {
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
 - **P2 生态/社区**: [docs.rs/ipc-channel — 生态权威 API 文档](https://docs.rs/ipc-channel) · [docs.rs/sysinfo — 生态权威 API 文档](https://docs.rs/sysinfo)
+
+## ⚠️ 反例与陷阱
+
+本节以 `Command` 链式借用与 `spawn` 冲突为反例，展示构建器链的可变借用生命周期。
+
+### 反例：持有 `arg` 的可变借用再 `spawn`（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0499
+use std::process::Command;
+fn main() {
+    let mut c = Command::new("ls");
+    let a = c.arg("-l"); // arg 返回 &mut Command
+    c.spawn().unwrap();  // ❌ a 仍持有可变借用
+    let _ = a;
+}
+```
+
+**错误**：`E0499 cannot borrow c as mutable more than once at a time`。
+
+### ✅ 修正：链式调用语句化，借用随语句结束
+
+```rust
+use std::process::Command;
+fn main() {
+    let mut c = Command::new("ls");
+    c.arg("-l");          // 临时借用在本语句结束
+    c.spawn().unwrap();
+}
+```

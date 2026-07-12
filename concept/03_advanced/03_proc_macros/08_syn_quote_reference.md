@@ -72,6 +72,13 @@
   - [9. 实测示例：derive 宏的最小可用骨架（2026-07-12 回填）](#9-实测示例derive-宏的最小可用骨架2026-07-12-回填)
   - [过渡段](#过渡段)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`quote!` 与 `quote_spanned!` 的分工（🟢 基础）](#测验-1quote-与-quote_spanned-的分工-基础)
+    - [测验 2：`ToTokens` trait 的角色（🟡 进阶）](#测验-2totokens-trait-的角色-进阶)
+    - [测验 3：syn/quote 的边界与卫生性（🔴 专家，联动「反命题」节）](#测验-3synquote-的边界与卫生性-专家联动反命题节)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：声明宏中拼接标识符（rustc 1.97.0 实测）](#反例声明宏中拼接标识符rustc-1970-实测)
+    - [✅ 修正：显式传完整名称，或用 `paste`  crate / 过程宏](#-修正显式传完整名称或用-paste--crate--过程宏)
 
 ---
 
@@ -79,7 +86,7 @@
 
 `syn` 是「把 `TokenStream` 解析为类型化 Rust AST」的事实标准库，三个使用要点：
 
-- **核心功能**：syn 为 Rust 语法定义了完整的 AST 类型树（`DeriveInput`、`ItemFn`、`Expr`、`Type`、`Pat` 等百余种节点），并提供「`TokenStream → AST 节点」的 `Parse` trait 实现。它的定位是「解析器即库」——过程宏作者无需手写 token 级解析，直接获得「字段列表是什么、属性写了什么」的结构化答案。
+- **核心功能**：syn 为 Rust 语法定义了完整的 AST 类型树（`DeriveInput`、`ItemFn`、`Expr`、`Type`、`Pat` 等百余种节点），并提供「`TokenStream → AST 节点」的`Parse` trait 实现。它的定位是「解析器即库」——过程宏作者无需手写 token 级解析，直接获得「字段列表是什么、属性写了什么」的结构化答案。
 - **features 配置**：syn 体积大、编译慢（完整构建常占宏 crate 编译时间的 70%+），按需开启 feature 是工程惯例——`default-features = false` 后只开 `derive`（derive 宏）、`parsing`/`printing`（解析与输出）、`full`（解析完整 Rust 文件，属性宏/函数宏需要）、`extra-traits`（AST 节点的 `Debug`/`Eq`，测试需要）。裁剪后编译时间可降一半以上。
 - **基本使用**：入口模式固定为两步——`let input = parse_macro_input!(tokens as DeriveInput);`（失败自动生成编译错误并提前返回）→ 读 `input.ident`/`input.generics`/`input.data` 驱动代码生成。`parse_macro_input!` 的「错误即编译错误」语义是 syn  ergonomics 的核心：宏内的 `Result` 一律可用 `?` 传播，最终经 `to_compile_error()` 落到用户代码的 span 上。
 
@@ -1136,3 +1143,32 @@ impl ToTokens for MyType {
 **A、B、C 正确**。按本页「反命题」节三条。D 错——报错位置取决于 span 传递：需用 `quote_spanned!` 或正确传播输入 span（本页「反向推理 2」：生成代码报错位置混乱 ⟸ 说明 `quote!` 中未正确传递 span）。卫生性（hygiene）在 quote 插值中不是自动的，标识符捕获与 span 来源必须显式管理。
 
 </details>
+
+## ⚠️ 反例与陷阱
+
+本节以 `macro_rules!` 标识符拼接为反例，展示声明宏无法直接 paste 标识符、需 `paste` crate 或过程宏的边界。
+
+### 反例：声明宏中拼接标识符（rustc 1.97.0 实测）
+
+```rust,compile_fail
+macro_rules! make_getter {
+    ($field:ident) => {
+        fn $field_name() {} // ❌ 声明宏不能拼接标识符
+    };
+}
+fn main() { make_getter!(age); }
+```
+
+**错误**：`error: expected identifier`——`macro_rules!` 的片段替换是 token 级粘贴，不做标识符融合。
+
+### ✅ 修正：显式传完整名称，或用 `paste`  crate / 过程宏
+
+```rust
+macro_rules! make_getter {
+    ($name:ident) => {
+        fn $name() -> u32 { 1 }
+    };
+}
+make_getter!(age_name);
+fn main() { println!("{}", age_name()); }
+```

@@ -70,6 +70,9 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：deny 策略下调用废弃 API（rustc 1.97.0 实测）](#反例deny-策略下调用废弃-apirustc-1970-实测)
+    - [✅ 修正：`MaybeUninit` 替代](#-修正maybeuninit-替代)
 
 ---
 
@@ -481,3 +484,30 @@ Cargo 会**拒绝解压任何包含符号链接的 crate tarball**，无论 tarb
 ### 反命题与边界
 
 > **反命题**: “因为 crates.io 用户不受影响，所以整个团队都不需要升级 Rust 1.97.0。” —— 错误。升级仍然能防止未来漏洞、获得新特性，并确保一旦项目引入第三方 registry 时立即具备防护能力。安全实践应把“保持最新稳定版”作为基线。
+
+## ⚠️ 反例与陷阱
+
+本节以 `deny(deprecated)` 策略为反例，展示 CVE 卫生如何把「禁用危险 API」变成编译期门禁。
+
+### 反例：deny 策略下调用废弃 API（rustc 1.97.0 实测）
+
+```rust,compile_fail
+#![deny(deprecated)]
+use std::mem;
+fn main() {
+    let x: i32 = unsafe { mem::uninitialized() }; // ❌ 废弃 API + deny 策略
+    println!("{}", x);
+}
+```
+
+**错误**：`error: use of deprecated function std::mem::uninitialized`——安全工程用 `#![deny(deprecated)]` 防止已标注风险的 API 进入代码库。
+
+### ✅ 修正：`MaybeUninit` 替代
+
+```rust
+use std::mem::MaybeUninit;
+fn main() {
+    let x: i32 = unsafe { MaybeUninit::zeroed().assume_init() };
+    println!("{}", x);
+}
+```

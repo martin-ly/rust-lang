@@ -161,3 +161,23 @@ no_std / 自定义 target 构建 std    → cargo -Z build-std
 > | [Cargo — Unstable Features](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html) | ✅ 一级 | Cargo 侧 `-Z`（build-std/build-analysis/public-dependency 等） |
 > | [rustc-dev-guide — How to build and run](https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html) | ✅ 一级 | 编译器开发场景下 `-Z` 的使用上下文 |
 > | [measureme](https://github.com/rust-lang/measureme) | ✅ 二级 | self-profile 数据分析工具链 |
+
+## ⚠️ 反例与陷阱
+
+本节以 stable 工具链上使用 `-Z` 旗标为反例，展示不稳定选项的通道门禁。
+
+### 反例：stable rustc 拒绝 `-Z` 旗标（rustc 1.97.0 实测）
+
+```console
+$ rustc -Ztime-passes main.rs
+error: the option `-Z` is only accepted on the nightly channel of rustc
+```
+
+`-Z` 系列旗标（编译器内部调试/实验选项）刻意不承诺稳定性，stable 通道在参数解析阶段即拒绝。
+
+### ✅ 修正：nightly 工具链或 stable 等价手段
+
+```console
+cargo +nightly rustc -- -Ztime-passes      # 显式 nightly
+cargo build --timings                      # stable 等价的构建耗时报告
+```

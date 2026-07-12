@@ -38,6 +38,9 @@
   - [五、认证 vs 非认证边界决策树](#五认证-vs-非认证边界决策树)
   - [六、权威来源索引](#六权威来源索引)
   - [相关概念](#相关概念)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：forbid 策略下的 `unsafe` 块（rustc 1.97.0 实测）](#反例forbid-策略下的-unsafe-块rustc-1970-实测)
+    - [✅ 修正：安全 API 或显式缩小策略范围](#-修正安全-api-或显式缩小策略范围)
 
 ---
 
@@ -210,3 +213,31 @@ graph TD
 - [航空航天认证与形式化方法](03_aerospace_certification_formal_methods.md) — DO-178C/DO-333 映射
 - [安全关键 Rust 专题索引](../../06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md) — content/ 工程套件入口
 - [cargo vet 与供应链审计](../../06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md) — 非认证场景的依赖审查机制
+
+## ⚠️ 反例与陷阱
+
+本节以 `#![forbid(unsafe_code)]` 策略为反例，展示认证子集如何用编译器属性强制安全边界。
+
+### 反例：forbid 策略下的 `unsafe` 块（rustc 1.97.0 实测）
+
+```rust,compile_fail
+#![forbid(unsafe_code)]
+fn main() {
+    let x = 1;
+    let p = &x as *const i32;
+    unsafe { println!("{}", *p); } // ❌ crate 级策略禁止 unsafe
+}
+```
+
+**错误**：`error: usage of an unsafe block`——认证工程用 `#![forbid(unsafe_code)]` 把安全子集变成编译期硬约束。
+
+### ✅ 修正：安全 API 或显式缩小策略范围
+
+```rust
+#![forbid(unsafe_code)]
+fn main() {
+    let x = 1;
+    let r = &x; // 安全引用即可
+    println!("{}", r);
+}
+```

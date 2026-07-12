@@ -460,3 +460,26 @@ Workers（边缘计算运行时（Runtime））、QUIC 协议栈（Quiche）、H
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [This Week in Rust — Rust 社区官方周刊（工业落地案例与生产采用动态的持续跟踪入口）](https://this-week-in-rust.org/)（2026-07-12 验证 HTTP 200）
+
+## ⚠️ 反例与陷阱
+
+本节以强行声明 `Rc: Send` 为反例，展示工业代码中 unsafe 边界无法靠 impl 硬闯。
+
+### 反例：为非 `Send` 类型手写 `unsafe impl Send`（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0751
+unsafe impl Send for std::rc::Rc<i32> {} // ❌ 与内置负实现冲突
+fn main() {}
+```
+
+**错误**：`E0751 found both positive and negative implementation of trait Send for type Rc<i32>`——`Rc` 的非原子引用计数被编译器显式标记为 `!Send`，无法推翻。
+
+### ✅ 修正：换用 `Arc`，或为本地 newtype 提供有据的 unsafe impl
+
+```rust
+use std::sync::Arc;
+fn main() {
+    let shared = Arc::new(1); // 原子计数，天然 Send + Sync
+    println!("{}", shared);
+}
+```

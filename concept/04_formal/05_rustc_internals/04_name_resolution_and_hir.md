@@ -50,6 +50,9 @@
     - [测验 4：`DefId` 和 `HirId` 分别适合引用什么粒度的实体？](#测验-4defid-和-hirid-分别适合引用什么粒度的实体)
   - [权威来源索引](#权威来源索引)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：两个 glob 导入引入同名类型（rustc 1.97.0 实测）](#反例两个-glob-导入引入同名类型rustc-1970-实测)
+    - [✅ 修正：显式导入消歧](#-修正显式导入消歧)
 
 ---
 
@@ -318,3 +321,33 @@ HIR 更接近编译器分析的需要：做了部分解糖（如 `for` 循环变
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [model-checking/verify-rust-std](https://github.com/model-checking/verify-rust-std) · [verus-lang/verus — SMT 验证器](https://github.com/verus-lang/verus)
+
+## ⚠️ 反例与陷阱
+
+本节以 glob 导入歧义为反例，展示名称解析阶段对同一名称多候选的拒绝规则。
+
+### 反例：两个 glob 导入引入同名类型（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0659
+mod a { pub struct Thing; }
+mod b { pub struct Thing; }
+use a::*;
+use b::*;
+fn main() {
+    let _ = Thing; // ❌ 名称解析：两个候选同样具体
+}
+```
+
+**错误**：`E0659 Thing is ambiguous`——glob 导入优先级相同，名称解析无法唯一确定候选。
+
+### ✅ 修正：显式导入消歧
+
+```rust
+mod a { pub struct Thing; }
+mod b { pub struct Thing; }
+use a::Thing; // 显式导入优先于 glob
+use b::*;
+fn main() {
+    let _ = Thing;
+}
+```

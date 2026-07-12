@@ -85,6 +85,9 @@
   - [反向推理](#反向推理)
   - [过渡段](#过渡段)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：宏内 `let` 绑定泄漏假设（rustc 1.97.0 实测）](#反例宏内-let-绑定泄漏假设rustc-1970-实测)
+    - [✅ 修正：由调用点传入标识符](#-修正由调用点传入标识符)
 
 ---
 
@@ -806,6 +809,9 @@ fn main() {
   - [反向推理](#反向推理)
   - [过渡段](#过渡段)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：宏内 `let` 绑定泄漏假设（rustc 1.97.0 实测）](#反例宏内-let-绑定泄漏假设rustc-1970-实测)
+    - [✅ 修正：由调用点传入标识符](#-修正由调用点传入标识符)
 
 ## 1. 什么是宏卫生性
 
@@ -1104,3 +1110,33 @@ macro_rules! hygienic_macro {
 
 - **P2 生态/社区**: [docs.rs/async-trait — 生态权威 API 文档](https://docs.rs/async-trait) · [docs.rs/syn — 生态权威 API 文档](https://docs.rs/syn)
 - **P1 学术/形式化**: [Kohlbecker et al.: Hygienic Macro Expansion (LFP 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/319838.319859)
+
+## ⚠️ 反例与陷阱
+
+本节以宏引入的局部绑定对调用点不可见为反例，展示声明宏混合卫生的具体表现。
+
+### 反例：宏内 `let` 绑定泄漏假设（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0425
+macro_rules! define {
+    () => { let secret = 42; };
+}
+fn main() {
+    define!();
+    println!("{}", secret); // ❌ 卫生规则：宏的局部变量不泄漏到调用点
+}
+```
+
+**错误**：`E0425 cannot find value secret in this scope`——局部变量卫生使宏内绑定留在宏的语法上下文中。
+
+### ✅ 修正：由调用点传入标识符
+
+```rust
+macro_rules! define {
+    ($name:ident) => { let $name = 42; };
+}
+fn main() {
+    define!(secret); // 标识符来自调用点，卫生上下文一致
+    println!("{}", secret);
+}
+```

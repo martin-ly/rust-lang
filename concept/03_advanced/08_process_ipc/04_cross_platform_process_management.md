@@ -317,3 +317,30 @@ fn main() {
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
 - **P2 生态/社区**: [docs.rs/interprocess — 生态权威 API 文档](https://docs.rs/interprocess) · [docs.rs/ipc-channel — 生态权威 API 文档](https://docs.rs/ipc-channel)
+
+## ⚠️ 反例与陷阱
+
+本节以未加 `cfg` 门控的平台专属 API 为反例，展示跨平台代码的条件编译纪律。
+
+### 反例：Windows 上引用 unix 扩展 trait（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0433
+use std::os::unix::process::CommandExt; // ❌ 非 unix 平台不存在该模块
+use std::process::Command;
+fn main() {
+    let _ = Command::new("sh");
+}
+```
+
+**错误**：`E0433 failed to resolve: could not find unix in os`（在 `x86_64-pc-windows-msvc` 上实测）。
+
+### ✅ 修正：`cfg` 门控导入与使用
+
+```rust
+#[cfg(unix)]
+use std::os::unix::process::CommandExt;
+use std::process::Command;
+fn main() {
+    let _ = Command::new(if cfg!(windows) { "cmd" } else { "sh" });
+}
+```

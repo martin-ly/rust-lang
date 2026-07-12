@@ -74,6 +74,9 @@
     - [测验 5：在 Rust 中存储密码时，为什么必须使用 Argon2 / bcrypt / scrypt 而非 SHA-256？（理解层）](#测验-5在-rust-中存储密码时为什么必须使用-argon2--bcrypt--scrypt-而非-sha-256理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：`as` 转型静默截断（rustc 1.97.0 实测）](#反例as-转型静默截断rustc-1970-实测)
+    - [✅ 修正：`try_into` 显式校验](#-修正try_into-显式校验)
 
 **变更日志**:
 
@@ -924,3 +927,31 @@ SHA-256 设计为快速计算，易被 GPU/ASIC 暴力破解。Argon2 等是"密
 | Security & Cryptography（安全与密码学） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Security & Cryptography（安全与密码学） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Security & Cryptography（安全与密码学） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+## ⚠️ 反例与陷阱
+
+本节以 `as` 截断密钥材料为反例，展示密码学代码中最隐蔽的静默数据丢失。
+
+### 反例：`as` 转型静默截断（rustc 1.97.0 实测）
+
+```rust,no_run
+fn main() {
+    let key_material: u64 = 0x1_2345;
+    let k = key_material as u8; // 静默保留低 8 位
+    assert_eq!(k as u64, key_material, "key material silently truncated"); // ❌ 运行时 panic
+    println!("{}", k);
+}
+```
+
+**运行时输出**：`key material silently truncated`（assert 失败，exit code 101）——`as` 转型永不报错，密钥强度无声下降。
+
+### ✅ 修正：`try_into` 显式校验
+
+```rust
+use std::convert::TryInto;
+fn main() {
+    let key_material: u64 = 0x1_2345;
+    let k: u8 = key_material.try_into().expect("key exceeds u8"); // 显式失败点
+    println!("{}", k);
+}
+```

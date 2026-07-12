@@ -324,3 +324,40 @@ pub async fn server_loop(
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)
+
+## ⚠️ 反例与陷阱
+
+本节以遗留 `todo!()` 为反例，展示「先留空后补」模式进入生产路径的运行时代价。
+
+### 反例：`todo!()` 进入生产代码路径（rustc 1.97.0 实测）
+
+```rust,no_run
+fn discount(price: f64, vip: bool) -> f64 {
+    if vip {
+        todo!("vip discount rule not implemented yet") // ❌ 运行时 panic
+    }
+    price
+}
+fn main() {
+    println!("{}", discount(100.0, true));
+}
+```
+
+**运行时输出**：`not implemented yet: vip discount rule not implemented yet`（panic，exit code 101）。
+
+### ✅ 修正：把「未实现」建模为可恢复错误
+
+```rust
+fn discount(price: f64, vip: bool) -> Result<f64, &'static str> {
+    if vip {
+        return Err("vip rule pending");
+    }
+    Ok(price)
+}
+fn main() {
+    match discount(100.0, true) {
+        Ok(p) => println!("{}", p),
+        Err(e) => eprintln!("fallback: {}", e),
+    }
+}
+```

@@ -58,6 +58,9 @@
     - [测验 1：`cargo-kani` 与 `cargo-fuzz` 在验证方法上有什么区别？（理解层）](#测验-1cargo-kani-与-cargo-fuzz-在验证方法上有什么区别理解层)
     - [测验 2：Miri 能检测哪些类别的未定义行为（UB）？（理解层）](#测验-2miri-能检测哪些类别的未定义行为ub理解层)
     - [测验 3：为什么即使有了形式化验证，仍然需要传统测试？（理解层）](#测验-3为什么即使有了形式化验证仍然需要传统测试理解层)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：常量表达式的算术下溢（rustc 1.97.0 实测）](#反例常量表达式的算术下溢rustc-1970-实测)
+    - [✅ 修正：`checked_sub` 显式处理](#-修正checked_sub-显式处理)
 
 ---
 
@@ -523,3 +526,29 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 
 形式化验证通常针对特定属性，且受限于规约正确性和验证范围。测试补充验证性能、集成行为和未建模的边界情况。
 </details>
+
+## ⚠️ 反例与陷阱
+
+本节以常量算术下溢为反例，展示编译器对可静态判定溢出直接报错、无需外部验证工具。
+
+### 反例：常量表达式的算术下溢（rustc 1.97.0 实测）
+
+```rust,compile_fail
+fn main() {
+    let a: u8 = 0;
+    let b = a - 1; // ❌ 常量传播后可判定：运算必溢出
+    println!("{}", b);
+}
+```
+
+**错误**：`error: this arithmetic operation will overflow`（常量下溢被 `unconditional_panic` 类检查在编译期拒绝）。
+
+### ✅ 修正：`checked_sub` 显式处理
+
+```rust
+fn main() {
+    let a: u8 = 0;
+    let b = a.checked_sub(1).unwrap_or(0);
+    println!("{}", b);
+}
+```

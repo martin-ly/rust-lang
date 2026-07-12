@@ -96,7 +96,7 @@
 
 ### A
 
-本节从 `async` / `await` 与  `Arc<T>` 两个层面剖析「A」。
+A 组收录异步与原子共享两个高频主题：前者是 Rust 协作式并发的语法入口，后者是跨线程共享所有权的标准工具。
 
 #### `async` / `await`
 
@@ -122,7 +122,7 @@ async fn foo() -> i32 { 42 }
 
 ### B
 
-「B」部分按 `Box<T>`、Borrowing（借用）与Builder Pattern的顺序逐层展开。
+B 组围绕「堆上独占」与「栈上授权」的对偶展开：`Box` 把值搬上堆，借用（borrowing）把访问权留在栈上，Builder 则是构造复杂对象的惯例模式。
 
 #### `Box<T>`
 
@@ -165,7 +165,7 @@ HttpRequestBuilder::new()
 
 ### C
 
-「C」涉及 `const` / `const fn`、`Copy` Trait与`crossbeam` / Channel，本节逐一说明其要点。
+C 组覆盖编译期计算（`const`）、按位复制语义（`Copy`）与并发通道（crossbeam）三个层面——分别对应「求值时机」「move 的例外」「线程间通信」。
 
 #### `const` / `const fn`
 
@@ -202,7 +202,7 @@ let p2 = p1;  // p1 仍可用（Copy）
 
 ### D
 
-「D」部分包含 `Drop` Trait 与  `dyn Trait` 两条主线，本节依次说明。
+D 组是「确定性析构」与「动态分派」两个 D：`Drop` 定义值消亡时的行为，`dyn Trait` 定义方法解析推迟到运行时的机制。
 
 #### `Drop` Trait
 
@@ -231,7 +231,7 @@ impl Drop for MyType {
 
 ### E
 
-「E」部分包含 `enum`（代数数据类型） 与  Error Handling（`Result<T, E>`） 两条主线，本节依次说明。
+E 组是 Rust 类型表达力的代表：枚举（代数数据类型）建模「多选一」的状态空间，错误处理则把「失败」编码为类型的一部分。
 
 #### `enum`（代数数据类型）
 
@@ -266,7 +266,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 
 ### F
 
-本节围绕「F」展开，覆盖 `Future` Trait 与  FFI（Foreign Function Interface） 两个方面。
+F 组是「异步的核心抽象」与「跨语言边界」：Future 定义惰性计算的状态机协议，FFI 定义 Rust 与外部代码的互操作契约。
 
 #### `Future` Trait
 
@@ -300,7 +300,7 @@ extern "C" {
 
 ### G
 
-「G」部分包含 `Generic<T>` 与  `Generic Associated Types (GATs)` 两条主线，本节依次说明。
+G 组是泛型机制的两级：基础泛型参数化类型，GAT（泛型关联类型）允许关联类型自身携带泛型参数——后者是「借用迭代器」等高级抽象的钥匙。
 
 #### `Generic<T>`
 
@@ -333,7 +333,7 @@ trait LendingIterator {
 
 ### H
 
-「H」部分包含 `HashMap<K, V>` 与  `HRTB`（Higher-Ranked Trait Bounds） 两条主线，本节依次说明。
+H 组是「哈希容器」与「高阶约束」：HashMap 是无序键值存储的标准选择，HRTB 表达「对所有生命周期成立」的函数约束。
 
 #### `HashMap<K, V>`
 
@@ -352,7 +352,7 @@ trait LendingIterator {
 
 ### I
 
-「I」部分包含 `impl Trait` 与  Interior Mutability（内部可变性） 两条主线，本节依次说明。
+I 组是类型抽象的两种边界工具：`impl Trait` 隐藏具体类型（静态分派），内部可变性在共享引用下打开受控的修改通道。
 
 #### `impl Trait`
 
@@ -388,7 +388,7 @@ fn make_iter() -> impl Iterator<Item = i32> {
 
 ### L
 
-本节围绕「L」展开，覆盖 Lifetimes（生命周期） 与  `Lock` / `Mutex<T>` 两个方面。
+L 组是「时间维度」与「互斥维度」：生命周期标注引用的有效区间，锁（Mutex）串行化对共享数据的访问。
 
 #### Lifetimes（生命周期）
 
@@ -415,7 +415,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### M
 
-本节围绕「M」展开，覆盖 `macro_rules!` 与  `Move` Semantics 两个方面。
+M 组是「代码生成」与「所有权转移」：`macro_rules!` 在编译期展开模式，move 语义在运行期零成本地转移资源的唯一所有权。
 
 #### `macro_rules!`
 
@@ -452,7 +452,7 @@ let s2 = s1;  // s1 被 move，之后不可用
 
 ### N
 
-本节从 Newtype Pattern 与  `no_std` 两个层面剖析「N」。
+N 组是「零成本新类型」与「无标准库环境」：Newtype 用单字段结构体获得类型区分而不付运行时代价，`no_std` 把 Rust 带入内核/嵌入式语境。
 
 #### Newtype Pattern
 
@@ -478,7 +478,7 @@ struct Kilometers(u32);
 
 ### O
 
-「O」部分包含 `Option<T>` 与  `Ownership` 两条主线，本节依次说明。
+O 组是 Rust 最基础的两个类型机制：`Option` 用类型消除 null，所有权（ownership）用编译期规则消除内存错误——后者是前者的检查引擎。
 
 #### `Option<T>`
 
@@ -506,7 +506,7 @@ let y = x.unwrap_or(0);  // 安全取值
 
 ### P
 
-本节从 `Pin<P<T>>` 与  `PhantomData<T>` 两个层面剖析「P」。
+P 组是「自引用安全的钉扎」与「类型系统的幽灵标记」：`Pin` 禁止移动使自引用结构合法，`PhantomData` 让零大小字段参与类型推导。
 
 #### `Pin<P<T>>`
 
@@ -537,7 +537,7 @@ struct MyPtr<T> { ptr: *mut (), _marker: PhantomData<T> }
 
 ### R
 
-本节围绕「R」展开，覆盖 `Rc<T>` / `Arc<T>` 与  `Result<T, E>` 两个方面。
+R 组是「引用计数共享」与「可恢复错误」：`Rc`/`Arc` 用计数实现共享所有权（单线程/多线程），`Result` 用和类型强制错误处理。
 
 #### `Rc<T>` / `Arc<T>`
 
@@ -564,7 +564,7 @@ let val = may_fail()?;  // ? 传播错误
 
 ### S
 
-本节从 `Send` / `Sync`、`Sized` / `?Sized`与`std::mem`切入，剖析「S」的核心内容。
+S 组三个主题分别是「线程标记 trait」「大小可判定性」「内存操作工具集」——Send/Sync 由编译器自动推导，Sized 默认成立，`std::mem` 提供手动内存控制。
 
 #### `Send` / `Sync`
 
@@ -595,7 +595,7 @@ let val = may_fail()?;  // ? 传播错误
 
 ### T
 
-本节围绕「T」展开，覆盖 `Trait` 与  Typestate Pattern 两个方面。
+T 组是「能力抽象」与「状态编码」：trait 声明类型具备的行为契约，Typestate 模式把协议状态编码为类型参数使非法迁移不可编译。
 
 #### `Trait`
 
@@ -628,7 +628,7 @@ impl Door<Closed> { fn open(self) -> Door<Open> { ... } }
 
 ### U
 
-「U」部分的核心主题是 `Unsafe Rust`，本节展开说明。
+U 组唯一主题：Unsafe Rust——显式签署「编译器无法验证的不变量由程序员保证」的契约边界。
 
 #### `Unsafe Rust`
 
@@ -648,7 +648,7 @@ unsafe {
 
 ### V
 
-本节专门讨论「V」下的 `Vec<T>`。
+V 组唯一主题：`Vec<T>`——连续缓冲区的可增长数组，是 Rust 使用频率最高的集合类型。
 
 #### `Vec<T>`
 
@@ -668,7 +668,7 @@ v.insert(1, 5);      // O(n)
 
 ### W
 
-「W」部分的核心主题是 `Waker`，本节展开说明。
+W 组唯一主题：`Waker`——异步任务「就绪后通知执行器重 poll」的回调句柄，是 Future 与 executor 之间的约定接口。
 
 #### `Waker`
 

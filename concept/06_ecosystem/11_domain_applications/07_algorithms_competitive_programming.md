@@ -1262,3 +1262,31 @@ let even_squares: Vec<_> = nums.iter()
 ## 相关概念
 
 - [对应测验](../13_quizzes/04_quiz_domain_applications.md) — 领域应用生态（区块链/Wasm、游戏 ECS、ML 与数据科学、安全关键 AUTOSAR、量子计算、算法竞赛）
+
+## ⚠️ 反例与陷阱
+
+本节以 `parse().unwrap()` 处理输入为反例，展示竞赛代码在异常输入下的崩溃点。
+
+### 反例：对未校验输入 `parse().unwrap()`（rustc 1.97.0 实测）
+
+```rust,no_run
+fn main() {
+    let line = std::env::args().nth(1).unwrap_or("x".to_string());
+    let n: i32 = line.trim().parse().unwrap(); // ❌ 非数字输入即 panic
+    println!("{}", n + 1);
+}
+```
+
+**运行时输出**：`called Result::unwrap() on an Err value: ParseIntError { kind: InvalidDigit }`（exit code 101，传入 `abc` 实测）。
+
+### ✅ 修正：错误显式处理
+
+```rust
+fn main() {
+    let line = std::env::args().nth(1).unwrap_or("x".to_string());
+    match line.trim().parse::<i32>() {
+        Ok(n) => println!("{}", n + 1),
+        Err(e) => eprintln!("bad input: {}", e),
+    }
+}
+```

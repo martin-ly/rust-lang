@@ -388,3 +388,34 @@ async fn run_with_cancellation() -> std::io::Result<()> {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+
+## ⚠️ 反例与陷阱
+
+本节以 async 递归未装箱为反例，展示异步状态机尺寸必须有限的编译期约束。
+
+### 反例：直接递归的 async fn（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0733
+async fn countdown(n: u32) {
+    if n > 0 {
+        countdown(n - 1).await; // ❌ 无限尺寸的状态机
+    }
+}
+```
+
+**错误**：`E0733 recursion in an async fn requires boxing`——每个 `await` 点都嵌入子状态机，递归使尺寸不可静态确定。
+
+### ✅ 修正：`Box::pin` 打破尺寸递归
+
+```rust
+use std::future::Future;
+use std::pin::Pin;
+
+fn countdown(n: u32) -> Pin<Box<dyn Future<Output = ()>>> {
+    Box::pin(async move {
+        if n > 0 {
+            countdown(n - 1).await;
+        }
+    })
+}
+```

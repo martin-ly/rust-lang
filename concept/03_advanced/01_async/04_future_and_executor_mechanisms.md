@@ -81,6 +81,9 @@
     - [测验 1：`poll` 的返回（🟢 基础）](#测验-1poll-的返回-基础)
     - [测验 2：Waker 的角色（🟡 进阶）](#测验-2waker-的角色-进阶)
     - [测验 3：Future 的惰性（🔴 专家）](#测验-3future-的惰性-专家)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：同步函数中 `.await`（rustc 1.97.0 实测）](#反例同步函数中-awaitrustc-1970-实测)
+    - [✅ 修正：在 async 上下文中求值](#-修正在-async-上下文中求值)
 
 ---
 
@@ -1159,3 +1162,28 @@ Waker 在 Future 执行模型中的作用是？
 **B 正确**。Rust 的 Future 是**惰性状态机**：调用 `async fn` 只构造状态机值，不执行任何代码；执行由 executor 反复 `poll` 驱动，编译器把 `async fn` 变换为枚举状态机，每个 `.await` 对应一个 `Pending` 状态（本页 §5.1）。C 错：没有 executor 就没有任何执行；A/D 与惰性语义矛盾。
 
 </details>
+
+## ⚠️ 反例与陷阱
+
+本节以 `async` 上下文外使用 `.await` 为反例，展示 Future 求值必须在异步上下文中由执行器驱动。
+
+### 反例：同步函数中 `.await`（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0728
+fn main() {
+    let x = async { 1 }.await; // ❌ main 不是 async 函数
+    println!("{}", x);
+}
+```
+
+**错误**：`E0728 await is only allowed inside async functions and blocks`——`.await` 依赖执行器的状态机轮询。
+
+### ✅ 修正：在 async 上下文中求值
+
+```rust,ignore
+async fn run() {
+    let x = async { 1 }.await;
+    println!("{}", x);
+}
+// 由 tokio::main 或 executor.block_on(run()) 驱动
+```

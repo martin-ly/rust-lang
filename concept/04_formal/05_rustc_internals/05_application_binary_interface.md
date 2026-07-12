@@ -238,3 +238,27 @@ pub fn hook() {}
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [verus-lang/verus — SMT 验证器](https://github.com/verus-lang/verus) · [creusot-rs/creusot — Rust 演绎验证](https://github.com/creusot-rs/creusot)
+
+## ⚠️ 反例与陷阱
+
+本节以重复 `#[no_mangle]` 符号为反例，展示 ABI 符号名必须全局唯一的链接期约束。
+
+### 反例：两个 `#[no_mangle]` 导出同名符号（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0428
+#[no_mangle]
+pub extern "C" fn plugin_init() {}
+#[no_mangle]
+pub extern "C" fn plugin_init() -> i32 { 0 } // ❌ 符号重复定义
+```
+
+**错误**：`E0428 the name plugin_init is defined multiple times`——禁用 name mangling 后符号冲突暴露在 ABI 层。
+
+### ✅ 修正：唯一导出名
+
+```rust
+#[no_mangle]
+pub extern "C" fn plugin_init() {}
+#[no_mangle]
+pub extern "C" fn plugin_init_v2() -> i32 { 0 }
+```

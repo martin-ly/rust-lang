@@ -77,6 +77,9 @@
     - [测验 4：为什么 LLVM IR 不适合作为长期稳定的后端接口？](#测验-4为什么-llvm-ir-不适合作为长期稳定的后端接口)
   - [权威来源索引](#权威来源索引)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：`break` 出现在非循环上下文（rustc 1.97.0 实测）](#反例break-出现在非循环上下文rustc-1970-实测)
+    - [✅ 修正：在循环内使用，或改用标记块](#-修正在循环内使用或改用标记块)
 
 ---
 
@@ -368,3 +371,33 @@ MIR 仍保留 Rust 高层语义（如 `move`、`Drop`、借用检查标记、基
 
 - **P1 学术/形式化**: [RustHorn: CHC-based Verification for Rust Programs (ESOP 2020, Springer LNCS)](https://link.springer.com/chapter/10.1007/978-3-030-44914-8_18) · [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982)
 - **P2 生态/社区**: [verus-lang/verus — SMT 验证器](https://github.com/verus-lang/verus) · [creusot-rs/creusot — Rust 演绎验证](https://github.com/creusot-rs/creusot)
+
+## ⚠️ 反例与陷阱
+
+本节以循环外 `break` 为反例，展示控制流在 MIR lowering 阶段就需满足的结构化约束。
+
+### 反例：`break` 出现在非循环上下文（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0268
+fn main() {
+    let x = 5;
+    if x > 0 {
+        break; // ❌ 没有可跳出的循环或标记块
+    }
+}
+```
+
+**错误**：`E0268 break outside of a loop or labeled block`——`break` 的跳转目标在 HIR→MIR lowering 时必须可解析。
+
+### ✅ 修正：在循环内使用，或改用标记块
+
+```rust
+fn main() {
+    let x = 5;
+    let y = 'blk: {
+        if x > 0 { break 'blk 1; }
+        2
+    };
+    println!("{}", y);
+}
+```

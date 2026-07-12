@@ -77,6 +77,9 @@
     - [测验 5：CQRS + Event Sourcing 相比传统架构增加了什么复杂度？什么场景下不值得使用？（理解层）](#测验-5cqrs--event-sourcing-相比传统架构增加了什么复杂度什么场景下不值得使用理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：遍历事件日志时追加事件（rustc 1.97.0 实测）](#反例遍历事件日志时追加事件rustc-1970-实测)
+    - [✅ 修正：收集后批量追加](#-修正收集后批量追加)
 
 **变更日志**:
 > **来源**: [EventStoreDB](https://developers.eventstore.com/server/v24.10/) · [Microsoft CQRS](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
@@ -1455,3 +1458,32 @@ Command 和 Event 可定义为枚举（Enum）/struct，编译期保证处理器
 | CQRS & Event Sourcing（命令查询职责分离与事件溯源） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | CQRS & Event Sourcing（命令查询职责分离与事件溯源） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | CQRS & Event Sourcing（命令查询职责分离与事件溯源） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+## ⚠️ 反例与陷阱
+
+本节以重放期间追加事件为反例，展示事件溯源中「读日志」与「写日志」的借用冲突。
+
+### 反例：遍历事件日志时追加事件（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0502
+fn main() {
+    let mut events = vec!["e1", "e2"];
+    for e in &events {      // 重放持有不可变借用
+        events.push("e3");  // ❌ 同时追加需要可变借用
+        println!("{}", e);
+    }
+}
+```
+
+**错误**：`E0502 cannot borrow events as mutable because it is also borrowed as immutable`——这正是 CQRS 读写分离在借用层面的体现。
+
+### ✅ 修正：收集后批量追加
+
+```rust
+fn main() {
+    let mut events = vec!["e1", "e2"];
+    let new: Vec<&str> = events.iter().map(|_| "e3").collect();
+    events.extend(new);
+    println!("{:?}", events);
+}
+```

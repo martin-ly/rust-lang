@@ -1950,7 +1950,12 @@ Rust 设计模式分类：
 
 ## 1. 创建型模式
 
-本节围绕「创建型模式」展开，覆盖 Builder 模式 与  Factory 模式 两个方面。
+创建型模式回答「对象/值如何被构造」，Rust 的类型系统使两个 GoF 经典模式发生本质变形：
+
+- **Builder 模式**：GoF 的 Builder 解决「构造参数多、组合爆炸」——Rust 版的独特之处是「所有权驱动的链式 API」：`builder.set_x(1).set_y(2).build()` 每个方法取 `self` 返回 `Self`（消耗-返回链），`build()` 消费构建器产出目标值。变体：非消耗版（`&mut self`，可复用构建器）与类型状态版（必填字段经类型参数强制——`Builder<HasName, NoAge>` 迁移到 `Builder<HasName, HasAge>`，`build()` 只在「全部必填就位」的状态上可用）。判定选哪种变体：必填约束静态可知 → 类型状态版（编译期拒绝未填字段）；构建器需跨函数传递/复用 → `&mut` 版。
+- **Factory 模式**：GoF 的 Factory Method 依赖继承——Rust 无实现继承，等价物是三选一：① 关联函数（`impl T { fn from_config(c: &Config) -> Self }`，最直接的「工厂」）；② trait + `Box<dyn Trait>`（开放类型集的工厂，`from_str` 返回 trait object）；③ enum + `match`（闭合类型集的工厂，编译期穷尽）。C++ 的「抽象工厂返回基类指针」在 Rust 中按「类型集是否开放」分流到 ②/③。
+
+两模式的共同变形规律：GoF 模式用「继承 + 虚函数」表达的变化点，Rust 用「泛型（静态）/ trait object（动态）/ enum（闭合）」三件套重新表达——选型标准永远是「变化点集合是否编译期闭合」。
 
 ### Builder 模式
 
@@ -2075,7 +2080,12 @@ fn main() {
 
 ## 2. 结构型模式
 
-「结构型模式」部分包含 Adapter 模式 与  Decorator 模式 两条主线，本节依次说明。
+结构型模式回答「类型如何组合成更大的结构」，两个代表：
+
+- **Adapter 模式**：GoF 的 Adapter 让「接口不兼容的类协作」——Rust 版的惯用形态是 **newtype + trait 实现**：`struct Mm(f64); impl From<Inch> for Mm` 把「单位转换」做成类型适配，或 `struct CStrAdapter(CString); impl AsRef<str> for CStrAdapter` 把外部类型接入本地接口。孤儿规则是 Adapter 的天然边界：「为外部类型实现外部 trait」被拒（E0117），newtype 包装是标准的合法绕行——适配成本是一次字段访问（零运行时开销）。
+- **Decorator 模式**：GoF 的 Decorator 运行时叠加行为（`BufferedReader(GzipReader(FileReader))`）——Rust 等价物按「装饰层是否同质」分流：同质链（每层同 trait）用 `Box<dyn Trait>` 嵌套（io 生态的 `BufReader<ZlibDecoder<File>>` 是标准范例）；异质叠加（每层加不同能力）用泛型嵌套（`Timeout<Sized<Retry<S>>>`，类型即装饰栈的编译期记录）。判定：装饰层需要运行时增删 → `dyn` 嵌套；装饰栈编译期固定 → 泛型嵌套（零成本 + 可内联）。
+
+两模式的 Rust 共性：继承式「is-a 扩展」被「组合 + trait 约束」替代——Adapter/Decorator 的意图在 Rust 中依然存在，但实现重心从「类层级」移到了「trait 边界与类型包装」。
 
 ### Adapter 模式
 
@@ -2234,7 +2244,11 @@ fn global_config() -> &'static Config {
 
 ### 责任链模式 (Chain of Responsibility)
 
-本节围绕「责任链模式 (Chain of Responsibilit…」展开，依次讨论模式定义、Rust 实现与使用场景。
+责任链模式把「请求沿处理者链传递，直到被处理」解耦发送者与处理者，Rust 实现与使用场景：
+
+- **模式定义**：链上每个节点持有「后继」引用，处理逻辑为「能处理则处理，否则转发后继」。经典用途是中间件（middleware）、事件冒泡、审批流。GoF 实现靠继承共享 `successor` 字段——Rust 无继承，等价结构有两种。
+- **Rust 实现**：① **trait object 链**——`trait Handler { fn handle(&self, req: &Request) -> Result<(), Request>; fn set_next(&mut self, next: Box<dyn Handler>); }`，`Box<dyn Handler>` 持有后继，运行时组链（axum/tower 的中间件栈即此思想的成熟化）；② **闭包/函数链**——`Vec<Box<dyn Fn(&Request) -> ControlFlow<()>>>`，处理者退化为函数，「转发」由 `ControlFlow::Continue` 表达，更轻但失去节点状态。tower 的 `Service` trait + `ServiceBuilder` 栈是生产级参考实现：每层是一个 `Service`，`layer` 组合把链压成单一类型（编译期可见的链结构）。
+- **使用场景**：HTTP 中间件（认证 → 限流 → 日志 → 业务）、GUI 事件冒泡（子组件不处理则父组件）、审批工作流。判定适用性：处理者集合是否「运行时异构且需动态组链」——是则 trait object 链；编译期固定的处理流水线用泛型栈（tower 风格），零成本且类型自文档。
 
 #### 模式定义
 

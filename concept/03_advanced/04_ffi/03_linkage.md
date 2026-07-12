@@ -399,3 +399,31 @@ static MY_DATA: [u8; 4] = [0; 4];
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/nix — 生态权威 API 文档](https://docs.rs/nix) · [docs.rs/bytemuck — 生态权威 API 文档](https://docs.rs/bytemuck)
+
+## ⚠️ 反例与陷阱
+
+本节以 Edition 2024 的 `unsafe extern` 要求为反例，展示链接声明必须显式标注可信边界。
+
+### 反例：无 `unsafe` 的 extern 块（rustc 1.97.0，Edition 2024 实测）
+
+```rust,compile_fail
+extern "C" { // ❌ Edition 2024：extern 块必须 unsafe
+    fn abs(x: i32) -> i32;
+}
+fn main() {
+    unsafe { println!("{}", abs(-3)); }
+}
+```
+
+**错误**：`error: extern blocks must be unsafe`——声明外部符号本身就是信任断言，须显式 `unsafe`。
+
+### ✅ 修正：`unsafe extern` 声明
+
+```rust
+unsafe extern "C" {
+    safe fn abs(x: i32) -> i32; // safe 标注免除调用处 unsafe
+}
+fn main() {
+    println!("{}", abs(-3));
+}
+```

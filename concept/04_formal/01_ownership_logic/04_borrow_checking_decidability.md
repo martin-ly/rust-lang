@@ -397,3 +397,32 @@ fn two_phase_borrow() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/memmap2 — 生态权威 API 文档](https://docs.rs/memmap2) · [docs.rs/embedded-hal — 生态权威 API 文档](https://docs.rs/embedded-hal)
+
+## ⚠️ 反例与陷阱
+
+本节以引用比被引用者长寿为反例，展示借用检查可判定性的核心——区域包含关系的静态判定。
+
+### 反例：引用逃逸出被引用者的作用域（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0597
+fn main() {
+    let r;
+    {
+        let x = 5;
+        r = &x; // x 的区域是内层块
+    }
+    println!("{}", r); // ❌ r 的使用点超出 x 的区域
+}
+```
+
+**错误**：`E0597 x does not live long enough`——借用检查即判定「使用点 ⊆ 被引用者区域」，该判定是可终止的。
+
+### ✅ 修正：把被引用者提升到外层区域
+
+```rust
+fn main() {
+    let x = 5;
+    let r = &x;
+    println!("{}", r); // x 的区域覆盖所有使用点
+}
+```

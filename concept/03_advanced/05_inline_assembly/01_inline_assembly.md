@@ -58,6 +58,9 @@
     - [测验 3：用内联汇编实现原子操作（应用层）](#测验-3用内联汇编实现原子操作应用层)
     - [测验 4：clobber 与内存屏障（分析层）](#测验-4clobber-与内存屏障分析层)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：不存在的寄存器约束（rustc 1.97.0 实测）](#反例不存在的寄存器约束rustc-1970-实测)
+    - [✅ 修正：使用合法寄存器或类别约束](#-修正使用合法寄存器或类别约束)
 
 ---
 
@@ -808,3 +811,31 @@ unsafe {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/libc — 生态权威 API 文档](https://docs.rs/libc) · [docs.rs/nix — 生态权威 API 文档](https://docs.rs/nix)
+
+## ⚠️ 反例与陷阱
+
+本节以无效寄存器约束名为反例，展示 `asm!` 在编译期校验目标架构寄存器与约束字符串。
+
+### 反例：不存在的寄存器约束（rustc 1.97.0 实测）
+
+```rust,compile_fail
+use std::arch::asm;
+fn main() {
+    let mut x: u64 = 0;
+    unsafe { asm!("mov {}, 1", out("not_a_register") x); } // ❌ 非法寄存器名
+    println!("{}", x);
+}
+```
+
+**错误**：`error: invalid register not_a_register: unknown register`——寄存器与约束在编译期对照目标架构校验。
+
+### ✅ 修正：使用合法寄存器或类别约束
+
+```rust,ignore
+use std::arch::asm;
+fn main() {
+    let mut x: u64;
+    unsafe { asm!("mov {}, 1", out(reg) x); } // 编译器分配通用寄存器
+    println!("{}", x);
+}
+```

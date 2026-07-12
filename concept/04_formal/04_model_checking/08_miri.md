@@ -49,6 +49,9 @@
     - [7.2 边界极限](#72-边界极限)
   - [八、权威来源索引](#八权威来源索引)
   - [相关工具交叉索引](#相关工具交叉索引)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：不同尺寸类型间 `transmute`（rustc 1.97.0 实测）](#反例不同尺寸类型间-transmuterustc-1970-实测)
+    - [✅ 修正：`to_ne_bytes` 显式字节化](#-修正to_ne_bytes-显式字节化)
 
 ---
 
@@ -311,3 +314,29 @@ graph TD
 **文档版本**: 1.1
 **最后更新**: 2026-07-09
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
+
+## ⚠️ 反例与陷阱
+
+本节以尺寸不匹配的 `transmute` 为反例，展示 Miri 与 rustc 共享的布局检查如何挡住第一类 UB。
+
+### 反例：不同尺寸类型间 `transmute`（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0512
+fn main() {
+    let x: u32 = 0x41424344;
+    let b: [u8; 5] = unsafe { std::mem::transmute(x) }; // ❌ 4 字节 → 5 字节
+    println!("{:?}", b);
+}
+```
+
+**错误**：`E0512 cannot transmute between types of different sizes`——布局尺寸不等在编译期拒绝；尺寸相等但解释非法的 transmute 才留给 Miri 检测。
+
+### ✅ 修正：`to_ne_bytes` 显式字节化
+
+```rust
+fn main() {
+    let x: u32 = 0x41424344;
+    let b: [u8; 4] = x.to_ne_bytes();
+    println!("{:?}", b);
+}
+```
