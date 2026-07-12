@@ -7,12 +7,13 @@
 > **内容分级**: [专家级]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 中 **cargo vet / 供应链依赖审计机制**的权威页；通用供应链安全实践与 CVE 跟踪见 [Security Practices](01_security_practices.md)。
-> **A/S/P 标记**: **A** — Application
+> **A/S/P 标记**: **P** — Practice
 > **双维定位**: P×App — 依赖审计机制在 CI 中的落地
 > **前置概念**: [Cargo Security CVEs](../01_cargo/13_cargo_security_cves.md) · [Security Practices](01_security_practices.md) · [Cargo Registries and Publishing](../01_cargo/08_cargo_registries_and_publishing.md) · [Safety Boundaries 对比](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)
 > **后置概念**: [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) · [DevOps and CI/CD](../00_toolchain/03_devops_and_ci_cd.md)
 >
 > **来源**: [cargo-vet 官方文档（mozilla.github.io/cargo-vet）](https://mozilla.github.io/cargo-vet/)（2026-07-12 curl 实测） · [cargo-vet — How it Works](https://mozilla.github.io/cargo-vet/how-it-works.html) · [RustSec Advisory DB](https://rustsec.org/)（实测 200） · [cargo-audit](https://github.com/rustsec/rustsec/tree/main/cargo-audit)
+> **国际权威来源（2026-07-13 补录）**: **P1** [Bae et al. — RUDRA（SOSP 2021）](https://dl.acm.org/doi/10.1145/3477132.3483570)（crates.io 生态级安全审计的学术参照；curl 实测 2026-07-13，ACM 反爬注记同前页）
 
 ---
 

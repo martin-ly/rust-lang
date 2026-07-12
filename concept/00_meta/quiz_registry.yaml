@@ -1,5 +1,5 @@
 schema_version: 1
-generated: '2026-07-12'
+generated: '2026-07-13'
 purpose: 全库测验资产机器可读注册表（W3-a）。人类可读索引见 concept/00_meta/04_navigation/15_quiz_registry.md；一致性由 scripts/check_quiz_system.py 校验。
 standalone_quizzes:
 - path: concept/01_foundation/11_quizzes/24_quiz_type_system.md
@@ -296,7 +296,7 @@ standalone_quizzes:
   - concept/00_meta/00_framework/bloom_taxonomy.md
   - concept/00_meta/03_audit/02_asp_marking_guide.md
   - concept/00_meta/00_framework/methodology.md
-  questions: 10
+  questions: 15
   meta_questions: 0
   question_types:
   - code_reading
@@ -304,9 +304,9 @@ standalone_quizzes:
   - single_choice
   - true_false
   difficulty:
-    basic: 2
-    intermediate: 5
-    expert: 3
+    basic: 3
+    intermediate: 7
+    expert: 5
   quiz_to_concept: true
   concept_to_quiz_backlink: true
 - path: concept/07_future/05_quizzes/01_quiz_version_and_preview.md
@@ -316,7 +316,7 @@ standalone_quizzes:
   - concept/07_future/00_version_tracking/02_editions.md
   - concept/07_future/00_version_tracking/03_rust_release_process.md
   - concept/07_future/00_version_tracking/rust_1_97_stabilized.md
-  questions: 10
+  questions: 15
   meta_questions: 0
   question_types:
   - code_reading
@@ -324,9 +324,9 @@ standalone_quizzes:
   - single_choice
   - true_false
   difficulty:
-    basic: 2
-    intermediate: 5
-    expert: 3
+    basic: 3
+    intermediate: 7
+    expert: 5
   quiz_to_concept: true
   concept_to_quiz_backlink: true
 - path: concept/06_ecosystem/13_quizzes/01_quiz_networking_async_ecosystem.md
@@ -336,7 +336,7 @@ standalone_quizzes:
   - concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md
   - concept/06_ecosystem/04_web_and_networking/07_network_protocols.md
   - concept/06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md
-  questions: 10
+  questions: 15
   meta_questions: 0
   question_types:
   - code_reading
@@ -344,9 +344,9 @@ standalone_quizzes:
   - single_choice
   - true_false
   difficulty:
-    basic: 2
-    intermediate: 5
-    expert: 3
+    basic: 3
+    intermediate: 7
+    expert: 5
   quiz_to_concept: true
   concept_to_quiz_backlink: true
 - path: concept/06_ecosystem/13_quizzes/02_quiz_database_storage.md
@@ -355,7 +355,7 @@ standalone_quizzes:
   concept_pages:
   - concept/06_ecosystem/06_data_and_distributed/02_database_access.md
   - concept/06_ecosystem/06_data_and_distributed/04_database_systems.md
-  questions: 10
+  questions: 15
   meta_questions: 0
   question_types:
   - code_reading
@@ -363,9 +363,9 @@ standalone_quizzes:
   - single_choice
   - true_false
   difficulty:
-    basic: 2
-    intermediate: 5
-    expert: 3
+    basic: 3
+    intermediate: 7
+    expert: 5
   quiz_to_concept: true
   concept_to_quiz_backlink: true
 - path: concept/06_ecosystem/13_quizzes/03_quiz_security_testing.md
@@ -412,11 +412,11 @@ standalone_quizzes:
     intermediate: 7
     expert: 5
   quiz_to_concept: true
-  concept_to_quiz_backlink: false
+  concept_to_quiz_backlink: true
 embedded_quizzes:
   description: concept/ 页面内嵌入式测验（### 测验 N + <details> 答题块），按页聚合
-  pages: 298
-  total_blocks: 1293
+  pages: 301
+  total_blocks: 1302
   items:
   - path: concept/00_meta/00_framework/bloom_taxonomy.md
     blocks: 3
@@ -506,6 +506,8 @@ embedded_quizzes:
     blocks: 5
   - path: concept/01_foundation/00_start/05_std_io_and_process.md
     blocks: 2
+  - path: concept/01_foundation/00_start/06_keywords.md
+    blocks: 3
   - path: concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md
     blocks: 5
   - path: concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md
@@ -586,6 +588,8 @@ embedded_quizzes:
     blocks: 5
   - path: concept/02_intermediate/01_generics/02_const_generics.md
     blocks: 3
+  - path: concept/02_intermediate/01_generics/03_type_level_programming.md
+    blocks: 3
   - path: concept/02_intermediate/02_memory_management/01_memory_management.md
     blocks: 5
   - path: concept/02_intermediate/02_memory_management/02_interior_mutability.md
@@ -664,6 +668,8 @@ embedded_quizzes:
     blocks: 4
   - path: concept/03_advanced/03_proc_macros/02_proc_macro.md
     blocks: 5
+  - path: concept/03_advanced/03_proc_macros/08_syn_quote_reference.md
+    blocks: 3
   - path: concept/03_advanced/04_ffi/01_rust_ffi.md
     blocks: 4
   - path: concept/03_advanced/04_ffi/02_ffi_advanced.md

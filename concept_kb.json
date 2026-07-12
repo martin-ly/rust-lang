@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 494,
-    "generated_at": "2026-07-12T20:25:35.453600+00:00"
+    "total_files": 495,
+    "generated_at": "2026-07-12T20:43:35.027602+00:00"
   },
   "files": [
     {
@@ -3090,7 +3090,7 @@
       "layer": "L0",
       "title": "测验体系注册表（Quiz Registry）",
       "positioning": "",
-      "line_count": 141,
+      "line_count": 145,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3115,13 +3115,14 @@
         "../../06_ecosystem/13_quizzes/01_quiz_networking_async_ecosystem.md",
         "../../06_ecosystem/13_quizzes/02_quiz_database_storage.md",
         "../../06_ecosystem/13_quizzes/03_quiz_security_testing.md",
+        "../../06_ecosystem/13_quizzes/04_quiz_domain_applications.md",
         "../../07_future/05_quizzes/01_quiz_version_and_preview.md",
         "../05_quizzes/01_quiz_meta_framework.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 48,
+      "matrix_rows": 49,
       "pre_post": {
         "pre": [],
         "post": []
@@ -3181,7 +3182,7 @@
       "layer": "L0",
       "title": "概念定义图谱（Concept Definition Atlas）",
       "positioning": "",
-      "line_count": 588,
+      "line_count": 587,
       "theorem_chains": [
         {
           "text": "| `05_logical_reasoning_atlas` | [逻辑推理图谱](../../00_meta/knowledge_topology/05_logical_reasoning_atlas.md) | Logical Reasoning Atlas | A navigational index of theorem chains, inference rules, proof/verification paths, and formal correspondences across the Rust concept hierarchy. 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。 | 2 |",
@@ -3700,7 +3701,7 @@
       "layer": "L0",
       "title": "属性关系图谱（Attribute Relationship Atlas）",
       "positioning": "",
-      "line_count": 584,
+      "line_count": 583,
       "theorem_chains": [
         {
           "text": "| [术语表 - C11 Macro System](../../03_advanced/03_proc_macros/06_macro_glossary.md) | L3 高级概念层 | 研究者 | 参考级 | S | L4-L5 | Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency |",
@@ -5121,7 +5122,7 @@
       "layer": "L0",
       "title": "层间映射图谱（Inter-Layer Mapping Atlas）",
       "positioning": "",
-      "line_count": 204,
+      "line_count": 203,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -5239,7 +5240,7 @@
       "layer": "L0",
       "title": "层内映射图谱（Intra-Layer Mapping Atlas）",
       "positioning": "",
-      "line_count": 599,
+      "line_count": 598,
       "theorem_chains": [
         {
           "text": "- `⟹` entails：源蕴含/导向目标（后置概念引用，默认）",
@@ -7017,7 +7018,7 @@
       "layer": "L0",
       "title": "概念-权威来源对齐图谱（Concept-Source Alignment Atlas）",
       "positioning": "",
-      "line_count": 53,
+      "line_count": 52,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -7472,7 +7473,7 @@
       "layer": "L0",
       "title": "缺口与行动计划（Gap and Action Plan）",
       "positioning": "",
-      "line_count": 86,
+      "line_count": 85,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -8431,7 +8432,7 @@
       "layer": "L1",
       "title": "Rust 关键字（Keywords）",
       "positioning": "",
-      "line_count": 155,
+      "line_count": 218,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -8440,6 +8441,14 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "fn r#match(needle: &str, haystack: &str) -> bool {     haystack.contains(needle)..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// 当前 crate 为 Edition 2021，调用某 2015 Edition 旧库中的函数 `try` let ok = r#try(input); ..."
         }
       ],
       "sources": [],
@@ -19019,7 +19028,7 @@
       "layer": "L2",
       "title": "类型级编程 (Type-Level Programming)",
       "positioning": "",
-      "line_count": 720,
+      "line_count": 797,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过类型级数据 ⟹ trait 约束 ⟹ 编译期计算的定理链利用类型系统能力。",
@@ -19105,6 +19114,22 @@
           "lines": 53,
           "should_fail": false,
           "code_preview": "// `[(); (I < N) as usize]:` 需 generic_const_exprs（nightly），stable 1.97 不可编译 use..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "trait Add<N> { type Output; } impl<N> Add<N> for Zero { type Output = N; } impl<..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "struct True; struct False; trait Not { type Output; } impl Not for True  { type ..."
         }
       ],
       "sources": [],
@@ -27907,7 +27932,7 @@
       "layer": "L3",
       "title": "Async Trait 对象安全：dyn 兼容解决方案谱系与选型矩阵",
       "positioning": "`async fn` in trait（1.75 stable）解决了静态分发，却留下 Rust async 最著名的缺口：`Box<dyn Trait>` 不可用。本页把社区四年积累的五条路线（宏装箱 / 手写装箱 / erased 类型 / RTN / 原生 dyn async）整理为可查表的选型矩阵。",
-      "line_count": 272,
+      "line_count": 312,
       "theorem_chains": [
         {
           "text": "阅读顺序：**根源（§2，两分钟理解为什么不行）⟹ 谱系（§3，五条路线各一节）⟹ 查表（§4-5）⟹ 前瞻（§6）**。",
@@ -27963,6 +27988,12 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "// ⚠️ nightly-only：#![feature(return_type_notation)]，stable 1.97 不可用 async fn sp..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "//! trait-variant 0.1.2 + tokio 1.52.3：rustc 1.97.0 实测运行通过（输出 ok） #[trait_varian..."
         }
       ],
       "sources": [],
@@ -27977,7 +28008,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 13,
+      "matrix_rows": 19,
       "pre_post": {
         "pre": [
           "[Traits](../../02_intermediate/00_traits/01_traits.md)（L2 向下引用：对象安全规则） · [Async/Await](01_async.md) · [Async 边界全景](06_async_boundary_panorama.md)"
@@ -31013,7 +31044,7 @@
       "layer": "L3",
       "title": "syn & quote 完整参考",
       "positioning": "",
-      "line_count": 1049,
+      "line_count": 1116,
       "theorem_chains": [
         {
           "text": "> **定理链**: Parse Input ⟹ Transform AST ⟹ Emit Tokens",
@@ -31247,6 +31278,14 @@
           "lines": 22,
           "should_fail": false,
           "code_preview": "// proc-macro crate: Cargo.toml 需 [lib] proc-macro = true use proc_macro::TokenS..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use quote::{ToTokens, quote}; struct MyType { /* ... */ } impl ToTokens for MyTy..."
         }
       ],
       "sources": [],
@@ -31273,7 +31312,7 @@
           "[生产级宏（Macro）开发](05_production_grade_macro_development.md) · [宏卫生性](09_macro_hygiene.md)"
         ]
       },
-      "backward_chains": 2,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -40383,7 +40422,7 @@
       "layer": "L4",
       "title": "进程代数与 Rust 并发原语：CSP · CCS · π 演算",
       "positioning": "",
-      "line_count": 336,
+      "line_count": 342,
       "theorem_chains": [
         {
           "text": "| T-PC-01 | `sync_channel(0)` 复现会合语义 | 发送与接收的 API 契约 | 发送完成 ⟹ 接收方已取走该值 |",
@@ -40498,7 +40537,7 @@
       "layer": "L4",
       "title": "线性化与一致性谱系：从 Herlihy-Wing 到 Rust 无锁结构",
       "positioning": "",
-      "line_count": 335,
+      "line_count": 336,
       "theorem_chains": [
         {
           "text": "若 (a)(b)(c) 成立 ⟹ 对象线性化。困难在于有些操作**没有固定线性化点**（线性化点可能位于**其他线程**的代码中，如 `pop` 发现栈空时，其生效点是某次状态的「读取」），此时需要：",
@@ -40602,7 +40641,7 @@
       "layer": "L4",
       "title": "Actor 模型形式语义：从 Hewitt 公理到 Rust 生态",
       "positioning": "",
-      "line_count": 319,
+      "line_count": 320,
       "theorem_chains": [
         {
           "text": "三条公理的推论：**actor 之间没有共享状态**。一切信息交换都必须经消息；actor 的内部状态只能被自己读取和修改 ⟹ 数据竞争在模型层面**不可表达**。",
@@ -41121,7 +41160,7 @@
       "layer": "L5",
       "title": "五模型定义矩阵：同步 · 并发 · 并行 · 异步 · 分布式",
       "positioning": "",
-      "line_count": 127,
+      "line_count": 129,
       "theorem_chains": [
         {
           "text": "| **失效模式** | 无并发错误；性能瓶颈 = 调用链延迟 | 数据竞争（Rust 中 ⟹ 编译期拒绝）、死锁、饥饿 | 任务粒度过细 ⟹ 调度开销反超；负载不均 | `!Send` 跨 `.await`、Waker 丢失 ⟹ 任务永不唤醒、取消语义误用 | 部分失败、网络分区、消息乱序/丢失、时钟漂移、并发写发散 |",
@@ -41186,7 +41225,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 16,
+      "matrix_rows": 17,
       "pre_post": {
         "pre": [
           "[L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L4 进程代数与 Rust](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md)"
@@ -49880,7 +49919,7 @@
       "layer": "L6",
       "title": "Tokio 运行时内部机制（Tokio Runtime Internals）",
       "positioning": "Tokio 是 Rust async 生态的事实标准运行时。本页把分散在 tutorial、blog 与 API docs 中的机制细节归一为单一权威页：每个机制给出「结构 → 语义 → 反例/边界 → 观测手段」。",
-      "line_count": 261,
+      "line_count": 303,
       "theorem_chains": [
         {
           "text": "阅读顺序：**架构（§2）⟹ 驱动（§3-4）⟹ 任务生命周期（§5-6）⟹ 宏语义（§7）⟹ 观测（§8）**。",
@@ -49942,6 +49981,12 @@
           "lines": 15,
           "should_fail": false,
           "code_preview": "//! rustc 1.97.0 实测（经 workspace tokio rmeta typecheck） use tokio::sync::mpsc;  #..."
+        },
+        {
+          "flags": [],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "//! rustc 1.97.0 + tokio 1.52.3（features = [\"full\", \"test-util\"]）实测运行通过 use std:..."
         }
       ],
       "sources": [],
@@ -49959,7 +50004,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 20,
+      "matrix_rows": 26,
       "pre_post": {
         "pre": [
           "[Future 与 Executor 机制](../../03_advanced/01_async/04_future_and_executor_mechanisms.md) · [Async/Await](../../03_advanced/01_async/01_async.md) · [Waker 契约深度解析](../../03_advanced/01_async/12_waker_contract_deep_dive.md)"
@@ -51761,7 +51806,7 @@
       "layer": "L6",
       "title": "Distributed Consensus（分布式共识）",
       "positioning": "",
-      "line_count": 894,
+      "line_count": 897,
       "theorem_chains": [
         {
           "text": "| Distributed Consensus（分布式共识） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -51851,6 +51896,7 @@
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../04_formal/00_type_theory/01_type_theory.md",
+        "../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/01_edition_roadmap/04_roadmap.md",
         "../03_design_patterns/05_microservice_patterns.md",
@@ -51860,7 +51906,9 @@
         "../04_web_and_networking/07_network_protocols.md",
         "../07_security_and_cryptography/02_security_cryptography.md",
         "../10_performance/01_performance_optimization.md",
-        "../11_domain_applications/01_blockchain.md"
+        "../11_domain_applications/01_blockchain.md",
+        "08_crdt_type_zoo.md",
+        "09_causal_ordering_vector_clocks.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
@@ -52025,10 +52073,14 @@
       "layer": "L6",
       "title": "CRDT 谱系：状态基、操作基与合并格形式化",
       "positioning": "",
-      "line_count": 279,
+      "line_count": 299,
       "theorem_chains": [
         {
           "text": "**为什么这就够了**：半格的任意有限子集有**唯一**最小上界。各副本独立演化、以任意顺序、任意次数两两合并（幂等性吸收重复传递，交换/结合律吸收顺序差异）⟹ 全部收敛到更新集的唯一 join ⟹ SEC 得证。",
+          "type": "paragraph"
+        },
+        {
+          "text": "**工程变体：δ-CRDT（增量状态）**。全量状态合并的传输成本随状态增长；δ-CRDT 只传播「自上次同步以来的状态增量」δ（要求增量本身也在同一半格中且与原状态可 join），周期性全量同步作兜底 ⟹ 保留合并格全部代数性质，把平均消息大小从 O（状态） 降到 O（增量）。这是 rust-crdt 与工业 Gossip 协议的标准优化。",
           "type": "paragraph"
         },
         {
@@ -52091,6 +52143,9 @@
       "anti_propositions": [
         {
           "title": "## 六、反例"
+        },
+        {
+          "title": "### 反例"
         },
         {
           "title": "### 反例"
@@ -52166,7 +52221,7 @@
       "layer": "L6",
       "title": "因果序与向量时钟：Lamport 偏序的算法化",
       "positioning": "",
-      "line_count": 301,
+      "line_count": 302,
       "theorem_chains": [
         {
           "text": "- **空间 O(N)**：节点数大时向量膨胀 ⟹ 剪枝（定期淘汰不活跃槽）、区间版本向量（RIVV）；",
@@ -53407,7 +53462,7 @@
       "layer": "L6",
       "title": "Blockchain & Smart Contract Security（区块链与智能合约安全）",
       "positioning": "",
-      "line_count": 946,
+      "line_count": 948,
       "theorem_chains": [
         {
           "text": "本节围绕「Rust 在区块链领域的独特优势」展开，覆盖内存安全 ⟹ 合约无重入/溢出漏洞 与 无 GC 的确定性执行 两个方面。",
@@ -53565,7 +53620,8 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../02_core_crates/01_core_crates.md",
         "../06_data_and_distributed/01_application_domains.md",
-        "../08_formal_verification/01_formal_ecosystem_tower.md"
+        "../08_formal_verification/01_formal_ecosystem_tower.md",
+        "../13_quizzes/04_quiz_domain_applications.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
@@ -53587,7 +53643,7 @@
       "layer": "L6",
       "title": "Game Development & ECS Architecture（游戏开发与 ECS 架构）",
       "positioning": "",
-      "line_count": 1357,
+      "line_count": 1359,
       "theorem_chains": [
         {
           "text": "### 3.1 `&mut Component` ⟹ System 独占访问",
@@ -53794,7 +53850,8 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../02_core_crates/01_core_crates.md",
         "../06_data_and_distributed/01_application_domains.md",
-        "../08_formal_verification/01_formal_ecosystem_tower.md"
+        "../08_formal_verification/01_formal_ecosystem_tower.md",
+        "../13_quizzes/04_quiz_domain_applications.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
@@ -53816,7 +53873,7 @@
       "layer": "L6",
       "title": "WebAssembly 生态：Rust 的浏览器外运行时",
       "positioning": "> 系统分析 Rust 在 **WebAssembly (Wasm)** 生态中的核心地位，",
-      "line_count": 660,
+      "line_count": 662,
       "theorem_chains": [
         {
           "text": "| WebAssembly 生态：Rust 的浏览器外运行时 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -53912,7 +53969,8 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../00_toolchain/01_toolchain.md",
         "../05_systems_and_embedded/01_wasi.md",
-        "../06_data_and_distributed/01_application_domains.md"
+        "../06_data_and_distributed/01_application_domains.md",
+        "../13_quizzes/04_quiz_domain_applications.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
@@ -54155,7 +54213,7 @@
       "layer": "L6",
       "title": "Rust 游戏开发（已合并）",
       "positioning": "",
-      "line_count": 18,
+      "line_count": 17,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -54181,7 +54239,7 @@
       "layer": "L6",
       "title": "算法与竞赛编程 (Algorithms & Competitive Programming)",
       "positioning": "",
-      "line_count": 1261,
+      "line_count": 1265,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -54388,7 +54446,8 @@
         "../../04_formal/04_model_checking/01_verification_toolchain.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../08_formal_verification/01_formal_ecosystem_tower.md",
-        "../10_performance/01_performance_optimization.md"
+        "../10_performance/01_performance_optimization.md",
+        "../13_quizzes/04_quiz_domain_applications.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
@@ -54902,7 +54961,7 @@
       "layer": "L6",
       "title": "Machine Learning Ecosystem（机器学习生态）",
       "positioning": "",
-      "line_count": 943,
+      "line_count": 944,
       "theorem_chains": [
         {
           "text": "| Machine Learning Ecosystem（机器学习生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -55039,6 +55098,7 @@
         "../04_web_and_networking/07_network_protocols.md",
         "../05_systems_and_embedded/03_embedded_systems.md",
         "../10_performance/01_performance_optimization.md",
+        "../13_quizzes/04_quiz_domain_applications.md",
         "03_webassembly.md"
       ],
       "transitions": 0,
@@ -55146,7 +55206,7 @@
       "layer": "L6",
       "title": "Game Engine Internals（游戏引擎内部原理）",
       "positioning": "",
-      "line_count": 1135,
+      "line_count": 1134,
       "theorem_chains": [
         {
           "text": "| Game Engine Internals（游戏引擎内部原理） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -55302,7 +55362,7 @@
       "layer": "L6",
       "title": "Rust 量子计算生态",
       "positioning": "",
-      "line_count": 997,
+      "line_count": 998,
       "theorem_chains": [
         {
           "text": "| Quantum Computing in Rust（量子计算与 Rust） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -55431,6 +55491,7 @@
         "../04_web_and_networking/01_distributed_systems.md",
         "../07_security_and_cryptography/02_security_cryptography.md",
         "../10_performance/01_performance_optimization.md",
+        "../13_quizzes/04_quiz_domain_applications.md",
         "03_webassembly.md",
         "13_machine_learning_ecosystem.md"
       ],
@@ -55889,7 +55950,7 @@
       "layer": "L6",
       "title": "AUTOSAR 与 Rust",
       "positioning": "",
-      "line_count": 162,
+      "line_count": 164,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -55900,6 +55961,7 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/03_preview_features/12_ferrocene_preview.md",
         "../07_security_and_cryptography/03_cargo_vet_supply_chain.md",
+        "../13_quizzes/04_quiz_domain_applications.md",
         "14_industrial_case_studies.md",
         "21_safety_critical_topic_index.md"
       ],
@@ -56694,6 +56756,62 @@
       "pre_post": {
         "pre": [
           "> [安全实践](../07_security_and_cryptography/01_security_practices.md) ·"
+        ],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\13_quizzes\\04_quiz_domain_applications.md",
+      "layer": "L6",
+      "title": "测验：领域应用生态（L6）",
+      "positioning": "验证学习者对 L6 领域应用子领域（区块链、Wasm、游戏、ML、安全关键、量子、算法竞赛）生态格局与选型的掌握。",
+      "line_count": 325,
+      "theorem_chains": [
+        {
+          "text": "**解析**：权威页的漏洞对照表：所有权 + `&mut` 独占访问 ⟹ 重入攻击在编译期不可表达；`u64`/`u128` 默认 overflow panic + `checked_add` 显式处理 ⟹ 整数溢出显式化；`Option<T>` + 编译期初始化检查 ⟹ 不存在未初始化存储指针。核心洞察是\"让整类漏洞在编译期成为不可类型化的程序\"。A 是 Solidity 的运行时路线；D 与区块链确定性执行要求矛盾（无 GC 才保证确定性）。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "fn move_system(mut q: Query<&mut Transform>) { /* ... */ } fn render_system(q: Q..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use roqoqo::{Circuit, operations::*}; let mut circuit = Circuit::new(); circuit ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
+        "../11_domain_applications/01_blockchain.md",
+        "../11_domain_applications/02_game_ecs.md",
+        "../11_domain_applications/03_webassembly.md",
+        "../11_domain_applications/07_algorithms_competitive_programming.md",
+        "../11_domain_applications/13_machine_learning_ecosystem.md",
+        "../11_domain_applications/16_quantum_computing_rust.md",
+        "../11_domain_applications/21_safety_critical_topic_index.md",
+        "../11_domain_applications/22_autosar_and_rust.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 20,
+      "pre_post": {
+        "pre": [
+          "> [区块链](../11_domain_applications/01_blockchain.md) ·"
         ],
         "post": []
       },

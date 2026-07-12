@@ -17,6 +17,7 @@
 ---
 
 > **来源**: [Rust 1.97.0 Release Notes](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（本库权威汇总） · [Cargo CHANGELOG](https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md) · [Cargo Book — Configuration](https://doc.rust-lang.org/cargo/reference/config.html) · [Cargo Book — Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html)
+> **国际权威来源（2026-07-13 补录）**: **P1** [Bae et al. — RUDRA（SOSP 2021）](https://dl.acm.org/doi/10.1145/3477132.3483570)（以 crates.io 全量包为对象的生态级分析） · **P2** [Rust Blog — Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)（curl 200 实测 2026-07-13，ACM 反爬注记同前页）
 
 ---
 

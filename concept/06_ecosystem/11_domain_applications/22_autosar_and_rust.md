@@ -154,6 +154,8 @@ graph TD
 
 ## 相关概念
 
+- [对应测验](../13_quizzes/04_quiz_domain_applications.md) — 领域应用生态（区块链/Wasm、游戏 ECS、ML 与数据科学、安全关键 AUTOSAR、量子计算、算法竞赛）
+
 - [安全关键 Rust 专题索引](21_safety_critical_topic_index.md) — content/ 工程套件入口（ISO 26262/IEC 61508/DO-178C/MISRA）
 - [Ferrocene](../../07_future/03_preview_features/12_ferrocene_preview.md) — 认证编译器路径
 - [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) — Ferrocene/HighTec/AdaCore 与认证 crate 现状

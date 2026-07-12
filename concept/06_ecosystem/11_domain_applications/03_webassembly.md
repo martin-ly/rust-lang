@@ -454,6 +454,8 @@ Rust Wasm 工具链:
 
 ## 相关概念
 
+- [对应测验](../13_quizzes/04_quiz_domain_applications.md) — 领域应用生态（区块链/Wasm、游戏 ECS、ML 与数据科学、安全关键 AUTOSAR、量子计算、算法竞赛）
+
 - [Toolchain](../00_toolchain/01_toolchain.md) — Rust 工具链
 - [WASI](../05_systems_and_embedded/01_wasi.md) — WebAssembly System Interface
 - [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) — FFI 跨语言交互

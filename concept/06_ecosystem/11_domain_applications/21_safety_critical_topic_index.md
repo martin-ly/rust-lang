@@ -1,7 +1,8 @@
 # 安全关键 Rust 专题索引
 
 **EN**: Safety-Critical Rust Topic Index
-**Summary**: Navigation index linking the `content/safety_critical/` in-depth suite (ISO 26262 / IEC 61508 / DO-178C / MISRA guides, case studies, checklists) with the related `concept/` canonical pages (formal methods, Ferrocene toolchain).
+
+> **Summary**: Navigation index linking the `content/safety_critical/` in-depth suite (ISO 26262 / IEC 61508 / DO-178C / MISRA guides, case studies, checklists) with the related `concept/` canonical pages (formal methods, Ferrocene toolchain).
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L6

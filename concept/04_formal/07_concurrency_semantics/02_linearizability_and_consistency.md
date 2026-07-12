@@ -322,12 +322,13 @@ fn pop_wrong(&self) -> Option<T> {
 
 ## 权威来源索引
 
-- Herlihy, M. & Wing, J. *Linearizability: A Correctness Condition for Concurrent Objects*. ACM TOPLAS 12(3), 1990, 463–492. [DOI](https://doi.org/10.1145/78969.78972) · [作者主页](https://www.cs.brown.edu/~mph/)
+- Herlihy, M. & Wing, J. *Linearizability: A Correctness Condition for Concurrent Objects*. ACM TOPLAS 12(3), 1990, 463–492. [DOI](https://doi.org/10.1145/78969.78972)（ACM 反爬，浏览器可访问） · [ACM DL](https://dl.acm.org/doi/10.1145/78969.78972) · [作者主页](https://www.cs.brown.edu/~mph/)
 - Herlihy, M. & Shavit, N. *The Art of Multiprocessor Programming*, Revised Reprint. Morgan Kaufmann, 2012. [出版社页](https://store.elsevier.com/the-art-of-multiprocessor-programming-revised-reprint/herlihy/978-0-12-415950-1.html)
 - Lamport, L. *How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs*. IEEE Transactions on Computers, 1979. [DOI](https://doi.org/10.1109/TC.1979.1675439)
-- Gilbert, S. & Lynch, N. *Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services*. ACM SIGACT News 33(2), 2002. [DOI](https://doi.org/10.1145/564585.564601)
+- Gilbert, S. & Lynch, N. *Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services*. ACM SIGACT News 33(2), 2002. [DOI](https://doi.org/10.1145/564585.564601)（ACM 反爬） · [作者镜像 PDF（NUS）](https://www.comp.nus.edu.sg/~gilbert/pubs/BrewersConjecture-SigAct.pdf)
 - Brewer, E. *CAP Twelve Years Later: How the "Rules" Have Changed*. IEEE Computer 45(2), 2012. [DOI](https://doi.org/10.1109/MC.2012.37)
 - Treiber, R. K. *Systems Programming: Coping with Parallelism*. IBM RJ 5118, 1986.
+- [std::sync::atomic — Rust 标准库文档](https://doc.rust-lang.org/std/sync/atomic/)（Treiber 实例的 `AtomicPtr`/`Ordering` 契约）
 
 > **相关文件**: [同层：进程代数](01_process_calculi_for_rust.md) · [同层：Actor 语义](03_actor_semantics.md) · [L3 谱系概览](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) · [L6 CRDT](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)
 >

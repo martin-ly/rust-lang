@@ -17,14 +17,17 @@
 
 ---
 
-> **Rust 版本**: 1.97.0+ (Edition 2024) · async-trait 0.1.89 · RTN 需 nightly（`#![feature(return_type_notation)]`）
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **生态版本**: async-trait 0.1.89（workspace 锁定）· RTN 需 nightly（`#![feature(return_type_notation)]`）
 > **来源**: [RFC 3654 — Return Type Notation](https://rust-lang.github.io/rfcs/3654-return-type-notation.html) · [RFC 3185 — static async fn in trait](https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html) · [Niko Matsakis — Dyn async traits 系列](https://smallcultfollowing.com/babysteps/blog/2021/09/30/dyn-async-traits-part-1/) · [async-trait crate docs](https://docs.rs/async-trait/latest/async_trait/) · [Rust Blog — Async fn & RPITIT in traits（1.75）](https://blog.rust-lang.org/2023/12/21/async-fn-rpit-in-traits.html)（以上 2026-07-12 curl 实测 HTTP 200）
+> **国际权威来源（2026-07-13 补录）**: **P1** [Jung et al. — RustBelt（POPL 2018）](https://plv.mpi-sws.org/rustbelt/popl18/)（trait 对象/vtable 动态分发与对象安全规则的语义基础；curl 200 实测 2026-07-13）
 > **对应 Crate**: [`c06_async`](../../../crates/c06_async)（workspace `async-trait = "0.1.89"`）
 > **对应练习**: [`exercises/src/async_programming/`](../../../exercises/src/async_programming)
 
 **变更日志**:
 
 - v1.0 (2026-07-12): 初始版本（W4-5）— 自 06_async_boundary_panorama §9 升格：五条解决方案路线（async_trait / 手写 boxed / dynosaur / RTN / 原生 dyn async 探索）+ 选型矩阵（场景×方案×开销×MSRV）；代码示例 rustc 1.97.0 实测（async-trait 经 workspace rmeta，RPITIT/手写 boxed std-only，RTN 标注 nightly）
+- v1.1 (2026-07-13): 补方案 E `trait_variant`（实测勘误：Send 变体生成 ≠ dyn 安全，`Box<dyn 变体>` 复现 E0038；其价值是 RTN 的 stable 等效——spawn/Send bound）+ 选型矩阵行；原 dynosaur 顺延为方案 F；§6 补 AFIT 术语对齐
 
 ## 📑 目录
 
@@ -37,7 +40,8 @@
     - [3.2 方案 B：手写 boxed future（去宏化）](#32-方案-b手写-boxed-future去宏化)
     - [3.3 方案 C：enum 分派（封闭类型集的零成本逃逸）](#33-方案-cenum-分派封闭类型集的零成本逃逸)
     - [3.4 方案 D：RTN（Return Type Notation，nightly）](#34-方案-drtnreturn-type-notationnightly)
-    - [3.5 方案 E：erased 类型路线（dynosaur 等）](#35-方案-eerased-类型路线dynosaur-等)
+    - [3.5 方案 E：`trait_variant`（Send 变体生成，RTN 的 stable 替代）](#35-方案-etrait_variantsend-变体生成rtn-的-stable-替代)
+    - [3.6 方案 F：erased 类型路线（dynosaur 等）](#36-方案-ferased-类型路线dynosaur-等)
   - [四、选型矩阵（场景 × 方案 × 开销 × MSRV）](#四选型矩阵场景--方案--开销--msrv)
   - [五、判定树](#五判定树)
   - [六、演进跟踪：原生 dyn async 的将来](#六演进跟踪原生-dyn-async-的将来)
@@ -211,7 +215,41 @@ where
 
 RTN 是 dyn 兼容的**前置积木**：RFC 3654 原文明确「We expect to make traits with async functions and RPITIT dyn safe in the future」——RTN 提供了在 vtable 中表达返回类型约束的记号，原生 dyn async（§6）需要它。
 
-### 3.5 方案 E：erased 类型路线（dynosaur 等）
+### 3.5 方案 E：`trait_variant`（Send 变体生成，RTN 的 stable 替代）
+
+RTN 的痛点是 nightly-only；`trait-variant` crate 用过程宏在 **stable** 上达到等效效果：从基础 trait 生成一个「返回的 Future 满足额外 bound」的变体 trait——**解决 spawn/Send 约束，不解决 dyn 兼容**：
+
+```rust
+//! trait-variant 0.1.2 + tokio 1.52.3：rustc 1.97.0 实测运行通过（输出 ok）
+#[trait_variant::make(IntFactory: Send)]
+trait LocalIntFactory {
+    async fn make(&self) -> i32;
+}
+
+struct F;
+// 实现端直接实现生成的 Send 变体（签名仍写 async fn）
+impl IntFactory for F {
+    async fn make(&self) -> i32 { 42 }
+}
+
+// 生成的 trait IntFactory: Send ⟹ 返回的 Future 满足 Send，可直接 spawn
+async fn spawnable<R: IntFactory + 'static>(r: R) -> i32 {
+    tokio::spawn(async move { r.make().await }).await.unwrap()
+}
+```
+
+宏展开形态（docs 原文）：`trait IntFactory: Send { fn make(&self) -> impl Future<Output = i32> + Send; }`。
+
+| 属性 | 值 |
+|---|---|
+| 解决什么 | RPITIT 下「给返回 Future 加 `Send` bound 以便 `tokio::spawn`」——RTN（方案 D）的 stable 等效 |
+| **不解决什么** | dyn 兼容：变体 trait 仍含 `impl Future` 返回，实测 `Box<dyn IntFactory>` 同样报 E0038 |
+| 开销 | 0（静态分发，宏只在编译期展开） |
+| MSRV | 低（纯过程宏，不依赖语言新特性） |
+
+> **常见误解（实测勘误）**：`#[trait_variant::make(T: Send)]` 生成的 trait **不是** dyn 安全的——它把 `async fn` 改写为带 bound 的 RPITIT，vtable 依旧不可构造（rustc 1.97.0 实测复现 E0038："method `make` references an `impl Trait` type in its return type"）。需要 `dyn` 时仍须方案 A/B/C/F。
+
+### 3.6 方案 F：erased 类型路线（dynosaur 等）
 
 `dynosaur` crate 用过程宏生成一个 `DynTrait` 包装类型（erased struct 而非 `dyn Trait` 对象），把每个方法擦除为 `Pin<Box<dyn Future>>` 分发，同时**保留原 trait 的对象不安全形态**供静态分发使用——同一份 trait 定义，两种消费方式。定位：需要「静态/动态双模」的库作者；开销与方案 A 同量级（每次调用 1 Box），但生态成熟度低于 `async_trait`。
 
@@ -224,8 +262,9 @@ RTN 是 dyn 兼容的**前置积木**：RFC 3654 原文明确「We expect to mak
 | 同上但 no-proc-macro 环境 | **手写 boxed（方案 B）** | 1 Box + 1 间接 | 低 | 签名噪音换零宏依赖 |
 | 单线程运行时 + `!Send` 状态 | **async_trait(?Send)** | 1 Box + 1 间接 | 低 | 去掉 `Send` bound，可捕获 `Rc`/`RefCell` |
 | 实现集合封闭 + 热路径 | **enum 分派（方案 C）** | 0 | 任意 | 严格最优；不可扩展是硬边界 |
-| 库需静态/动态双模 | **dynosaur（方案 E）** | 1 Box + 1 间接 | 1.75+ | 一份定义两种消费 |
-| 需 `spawn` 但坚持 RPITIT | **RTN（方案 D）** | 0（静态分发） | nightly | 等稳定；当前用 `async_trait` 过渡 |
+| 库需静态/动态双模 | **dynosaur（方案 F）** | 1 Box + 1 间接 | 1.75+ | 一份定义两种消费 |
+| 需 `spawn` 但坚持 RPITIT | **RTN（方案 D）** | 0（静态分发） | nightly | 等稳定；stable 替代见下 |
+| 同上但要求 stable | **trait_variant（方案 E）** | 0（静态分发） | 低 | RTN 的 stable 等效；不解 dyn |
 
 > **反例（选型错误）**：热路径（>10⁵ 调用/s）上的 trait 对象用方案 A ⟹ 每次调用一次分配 + cache-hostile 间接 poll，分配器成为瓶颈——[Async 边界全景 §9.3](06_async_boundary_panorama.md#93-判定条件) 的 Q-T2 定量阈值即为此设。修复方向：静态分发重构或 enum 分派。
 
@@ -243,10 +282,12 @@ flowchart TD
     Q4 -->|否| A5[✅ async_trait 默认]
     Q1 -.静态分发但需 Send bound.-> Q5{接受 nightly?}
     Q5 -->|是| A6[RTN: R: Trait<method(): Send>]
-    Q5 -->|否| A7[过渡: async_trait 或 spawn 前断言]
+    Q5 -->|否| A7[trait_variant: stable 等效]
 ```
 
 ## 六、演进跟踪：原生 dyn async 的将来
+
+术语对齐：**AFIT**（Async Fn In Trait）是 1.75 稳定特性的工作名，与 RPITIT 指同一机制的两侧（async 语法视角 / 类型脱糖视角）；本页方案 E 的 `trait_variant` 即社区「trait variant」思路的 crate 先行实现。
 
 语言层面的终态是 **`async fn` in trait 直接 dyn 兼容**：编译器为 vtable 生成装箱 shim（每个 impl 的 `impl Future` 被自动包成 `dyn Future`），Niko Matsakis 的 *Dyn async traits* 系列（2021-2022，共 8 篇）给出了完整设计空间——关键决策点包括「装箱是否隐式」（Rust 历史上避免隐式分配）、「vtable 中 Future 的表示」（`dyn*` 提案与 `Box` 之争）、以及 RTN 作为表达返回 bound 的记号。当前状态（2026-07）：RFC 3654（RTN）已合并、nightly 实现中；原生 dyn async 尚无独立 RFC 落地，属 async WG 路线图长期项。
 
@@ -267,5 +308,6 @@ flowchart TD
 - [Rust Blog — Async fn & return-position impl Trait in traits（1.75 稳定公告）](https://blog.rust-lang.org/2023/12/21/async-fn-rpit-in-traits.html)（RPITIT 稳定范围与已知限制，2026-07-12 实测 200）
 - [Niko Matsakis — *Dyn async traits, part 1*（及全系列）](https://smallcultfollowing.com/babysteps/blog/2021/09/30/dyn-async-traits-part-1/)（原生 dyn async 的设计空间：装箱 shim、dyn* 提案，2026-07-12 实测 200）
 - [async-trait crate docs](https://docs.rs/async-trait/latest/async_trait/)（宏展开语义、`?Send` 变体、开销说明，2026-07-12 实测 200）
+- [trait-variant crate docs](https://docs.rs/trait-variant/latest/trait_variant/)（`make` 宏生成带 bound 的 RPITIT 变体 trait；实测明确不解 dyn 兼容，2026-07-13 实测 200）
 - [async-fundamentals-initiative 路线图](https://rust-lang.github.io/async-fundamentals-initiative/roadmap.html)（dyn async 在 async WG 路线图中的位置，2026-07-12 实测 200）
 - 站内交叉引用：[Async 边界全景](06_async_boundary_panorama.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Async/Await](01_async.md)

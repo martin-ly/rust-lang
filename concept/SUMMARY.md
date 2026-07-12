@@ -423,6 +423,7 @@
   - [测验：网络与异步生态（L6）](06_ecosystem/13_quizzes/01_quiz_networking_async_ecosystem.md)
   - [测验：数据库与存储生态（L6）](06_ecosystem/13_quizzes/02_quiz_database_storage.md)
   - [测验：安全与测试生态（L6）](06_ecosystem/13_quizzes/03_quiz_security_testing.md)
+  - [测验：领域应用生态（L6）](06_ecosystem/13_quizzes/04_quiz_domain_applications.md)
   - [Cargo 1.96 新特性与工具链变更](06_ecosystem/01_cargo/04_cargo_196_features.md)
   - [Rustdoc 1.96–1.97 变更](06_ecosystem/00_toolchain/07_rustdoc_196_changes.md)
 

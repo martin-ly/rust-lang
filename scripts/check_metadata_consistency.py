@@ -44,7 +44,9 @@ BLOOM_SINGLE_RE = re.compile(r"L\s*(\d+)")
 LEVEL_RE = re.compile(r"L\s*(\d+)")
 ASP_RE = re.compile(r"\b([ASP])\b")
 VER_RE = re.compile(r"\b1\.(\d{2,3})(?:\.\d+)?\b")
-NIGHTLY_RE = re.compile(r"\b(nightly|preview|unstable)\b|feature\s*\(", re.IGNORECASE)
+# 2026-07-13 修复：`feature\s*\(` 增加 \b 词边界，避免把 `target_feature(` / `target-feature` 等
+# 平台能力属性误报为 nightly 特性门控（误报实例：concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md）
+NIGHTLY_RE = re.compile(r"\b(nightly|preview|unstable)\b|\bfeature\s*\(", re.IGNORECASE)
 
 SUMMARY_LOW_PATTERNS = [
     re.compile(r"^\s*(a|an)\s+(guide|overview|introduction)\s+(to|of|on|about|for)\b", re.IGNORECASE),
@@ -110,6 +112,35 @@ D5_WHITELIST_FILES = {
         "#![feature(panic_handler)] 自定义 panic handler 截至 1.97 仍为 nightly-only（wasm32-unknown-unknown 场景）",
     "concept/sources/INDEX.md":
         "来源索引：Unstable Book(UNB) 作为权威来源条目及其 nightly 状态标注即索引内容本身",
+    # ---- 2026-07-13 逐文件复核登记（W0-W5 新建/扩展页 + 既有页补登记）----
+    "concept/00_meta/05_quizzes/01_quiz_meta_framework.md":
+        "L0 测验框架页：quiz 题目/解析以 nightly feature(custom_borrowck)、rustc 插件 unstable 为概念辨析考点，非正文依赖",
+    "concept/01_foundation/02_type_system/02_never_type.md":
+        "never_type feature 截至 1.97 仍未稳定，页面主题即 `!` 类型及其稳定化路径（含 nightly 边界标注）",
+    "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md":
+        "specialization 仍为 nightly 特性的边界标注（代码注释说明 stable 不可编译），非稳定层残留依赖",
+    "concept/02_intermediate/01_generics/02_const_generics.md":
+        "页面主题即 const generics 的 stable(min_const_generics) vs nightly(generic_const_exprs/adt_const_params) 边界",
+    "concept/02_intermediate/01_generics/03_type_level_programming.md":
+        "generic_const_exprs nightly 边界为类型级编程 workaround 的对照内容（反例/边界说明）",
+    "concept/03_advanced/01_async/13_async_trait_object_safety.md":
+        "RTN(return_type_notation) nightly-only 为解决方案谱系的组成路线之一，文首 Rust 版本字段已显式声明",
+    "concept/03_advanced/03_proc_macros/09_macro_hygiene.md":
+        "Span::def_site() nightly 为 hygiene 跨边界手段的事实标注（对照说明）",
+    "concept/04_formal/05_rustc_internals/12_attributes.md":
+        "RFC 3416 #![feature(...)] 结构化元数据为 rustc 内部治理主题，页面属 rustc_internals 系列",
+    "concept/06_ecosystem/00_toolchain/06_quiz_toolchain.md":
+        "quiz 题目考察 rustup stable/beta/nightly 工具链管理知识点，nightly 为考点内容本身",
+    "concept/06_ecosystem/00_toolchain/07_rustdoc_196_changes.md":
+        "页面主题即 Rust 1.97 稳定化两个原 nightly rustdoc 标志，nightly 为历史状态陈述",
+    "concept/06_ecosystem/00_toolchain/15_z_flags_reference.md":
+        "页面主题即 nightly-only `-Z` 选项系统化清单（与既有 -Z 类白名单页同质）",
+    "concept/06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md":
+        "Tier 2/3 no_std 目标须 nightly + -Z build-std 为工具链事实；rustc book 仅 nightly 路径托管（URL 规则已排除）",
+    "concept/06_ecosystem/13_quizzes/03_quiz_security_testing.md":
+        "quiz 题目/解析以 cargo vet 工具链可用性与 #[bench] nightly 状态为考点，nightly 为考点内容本身",
+    "concept/sources/rfc_index.md":
+        "RFC 索引：状态列记录各 RFC nightly/每日构建版状态，即索引内容本身（同 sources/INDEX.md 既有登记）",
 }
 
 

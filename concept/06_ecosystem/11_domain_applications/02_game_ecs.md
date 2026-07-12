@@ -1148,6 +1148,8 @@ struct ChildOf {
 
 ## 相关概念链接
 
+- [对应测验](../13_quizzes/04_quiz_domain_applications.md) — 领域应用生态（区块链/Wasm、游戏 ECS、ML 与数据科学、安全关键 AUTOSAR、量子计算、算法竞赛）
+
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | 所有权 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Component 生命周期（Lifetimes）与资源管理 |

@@ -1,15 +1,18 @@
 # rustc / Cargo `-Z` 不稳定选项参考清单
 
 **EN**: rustc and Cargo `-Z` Unstable Flags Reference
-**Summary**: A categorized, source-verified reference of the most-used unstable `-Z` flags for rustc and Cargo: build, diagnostics/profiling, sanitizers/hardening, dependency visibility, and type-system frontiers, each with status, purpose, and authoritative source.
 
-> **Rust 版本**: 1.97.0+ (Edition 2024)（`-Z` 选项实测环境：rustc 1.99.0-nightly 375b1431b 2026-07-10 / cargo 同版 nightly）
+> **Summary**: A categorized, source-verified reference of the most-used unstable `-Z` flags for rustc and Cargo: build, diagnostics/profiling, sanitizers/hardening, dependency visibility, and type-system frontiers, each with status, purpose, and authoritative source.
+
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **实测环境**: `-Z` 选项实测环境为 rustc 1.99.0-nightly 375b1431b 2026-07-10 / cargo 同版 nightly
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页（`-Z` 选项系统化清单的唯一深度解释）。
 > **前置概念**: [rustc Driver 与 Stable MIR](10_rustc_driver_and_stable_mir.md) · [LLVM 后端与代码生成](09_llvm_backend_and_codegen.md) · [编译器测试体系](13_compiler_testing.md)
 > **后置概念**: [交叉编译与 target 平台支持](../05_systems_and_embedded/02_cross_compilation.md) · [Target Tier 平台支持全景](../05_systems_and_embedded/10_target_tier_platform_support.md) · [Rust vs C++（工具链标志哲学对比：`-Z` 夜间选项 vs `-fsanitize`/`-march`）](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
 > **来源**: `rustc +nightly -Z help` 与 `cargo +nightly -Z help` 实测输出（2026-07-12，234 个 rustc `-Z` 选项）· [The Rust Unstable Book — Compiler flags](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags.html) · [Cargo — Unstable Features](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html) · [rustc-dev-guide — How to build and run](https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html)（以上外链均 curl 200 实测 2026-07-12）
+> **国际权威来源（2026-07-13 补录）**: **P1** [Bae et al. — RUDRA: Finding Memory Safety Bugs in Rust at the Ecosystem Scale（SOSP 2021）](https://dl.acm.org/doi/10.1145/3477132.3483570)（基于 rustc 内部表示的静态分析代表工作） · **P2** [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)（编译器团队官方博客；curl 实测 2026-07-13，ACM 反爬注记同前页）
 
 ---
 

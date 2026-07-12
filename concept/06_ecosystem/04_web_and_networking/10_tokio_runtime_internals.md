@@ -17,14 +17,17 @@
 
 ---
 
-> **Rust 版本**: 1.97.0+ (Edition 2024) · Tokio 1.52.3（workspace 锁定，`features = ["full"]`）
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **生态版本**: Tokio 1.52.3（workspace 锁定，`features = ["full"]`）
 > **来源**: [Tokio Tutorial](https://tokio.rs/tokio/tutorial) · [Carl Lerche — Making the Tokio scheduler 10x faster](https://tokio.rs/blog/2019-10-scheduler) · [mio docs](https://docs.rs/mio/latest/mio/) · [tokio docs — runtime](https://docs.rs/tokio/latest/tokio/runtime/index.html) · [tokio-console](https://github.com/tokio-rs/console)（以上 2026-07-12 curl 实测 HTTP 200）
+> **国际权威来源（2026-07-13 补录）**: **P1** [Herlihy & Shavit — The Art of Multiprocessor Programming（Morgan Kaufmann）](https://dl.acm.org/doi/book/10.5555/2385452)（运行时调度、无锁队列与线程池的理论基础；curl 实测 2026-07-13，ACM 反爬注记同前页）
 > **对应 Crate**: [`c06_async`](../../../crates/c06_async)
 > **对应练习**: [`exercises/src/async_programming/`](../../../exercises/src/async_programming)
 
 **变更日志**:
 
 - v1.0 (2026-07-12): 初始版本（W4-6）— Runtime 架构 / mio I/O driver / time driver / blocking 池（512 上限实测）/ JoinSet·JoinHandle·AbortHandle 生命周期 / LocalSet / select! 语义 / RuntimeMetrics+console 可观测性；代码示例 rustc 1.97.0 经 workspace tokio rmeta 实测 typecheck
+- v1.1 (2026-07-13): 补 §九 时间控制与关闭语义（start_paused/advance/shutdown_timeout，tokio test-util 实测运行通过；实测勘误：test-util 不在 full feature 中，start_paused 签名带 bool 参数）
 
 ## 📑 目录
 
@@ -38,8 +41,9 @@
   - [六、LocalSet 与 !Send 任务](#六localset-与-send-任务)
   - [七、tokio::select! 语义](#七tokioselect-语义)
   - [八、可观测性：RuntimeMetrics 与 tokio-console](#八可观测性runtimemetrics-与-tokio-console)
-  - [九、相关概念](#九相关概念)
-  - [十、来源](#十来源)
+  - [九、时间控制与运行时关闭语义](#九时间控制与运行时关闭语义)
+  - [十、相关概念](#十相关概念)
+  - [十一、来源](#十一来源)
 
 ## 一、认知路径
 
@@ -238,7 +242,47 @@ async fn main() {
 
 > **诊断映射**（与本文各节的反例对应）：任务永久 Pending ⟹ console 看该任务最后 poll 位置 + [Waker 契约深度解析](../../03_advanced/01_async/12_waker_contract_deep_dive.md) §六判定树；blocking 池饱和 ⟹ `blocking_queue_depth` 持续 >0；调度饥饿 ⟹ `RuntimeMetrics` 的 worker 间 steal 计数失衡 + [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) §六的测量方法。
 
-## 九、相关概念
+## 九、时间控制与运行时关闭语义
+
+**确定性测试的时间控制**（`test-util` feature，注意：**不在 `full` 中**，需显式启用——实测勘误：`full` 下 `tokio::time::advance` 不可见，报 "configured out / gated behind the `test-util` feature"）：
+
+```rust
+//! rustc 1.97.0 + tokio 1.52.3（features = ["full", "test-util"]）实测运行通过
+use std::time::Duration;
+use tokio::runtime::Builder;
+
+fn main() {
+    let rt = Builder::new_current_thread()
+        .enable_all()
+        .start_paused(true) // 注意签名带 bool：构建即暂停逻辑时钟
+        .build()
+        .unwrap();
+    rt.block_on(async {
+        let start = tokio::time::Instant::now();
+        let h = tokio::spawn(async {
+            tokio::time::sleep(Duration::from_secs(3600)).await;
+            7
+        });
+        tokio::task::yield_now().await; // 让任务先进入 sleep
+        tokio::time::advance(Duration::from_secs(3600)).await; // 手动拨快逻辑时钟
+        assert_eq!(h.await.unwrap(), 7); // 墙钟近零，逻辑时间流逝 1h
+        assert!(start.elapsed() >= Duration::from_secs(3600));
+    });
+    rt.shutdown_timeout(Duration::from_secs(1));
+}
+```
+
+| API | 语义 |
+|---|---|
+| `Builder::start_paused(bool)` / `tokio::time::pause()` | 暂停逻辑时钟：`Instant::now()` 冻结，`sleep` 不再随墙钟到期 |
+| `tokio::time::advance(d)` | 逻辑时钟前进 `d`，沿途到期定时器按序 wake（与 §四 time driver 共享唤醒路径）；本身是 async 函数（会 yield，让被 wake 的任务先跑完再返回） |
+| `#[tokio::test(start_paused = true)]` | 测试宏糖：等价于 current_thread + start_paused；超时类测试从「秒级墙钟等待」变为「微秒级确定性执行」 |
+| `Runtime::shutdown_timeout(d)` | 停止接收新任务，给在途任务 `d` 的优雅收尾窗口，超时后强制 drop |
+| `Runtime::shutdown_background()` / `drop(rt)` | 不等任务：worker 立即停止，未完成 future 被原地 drop（同 §五 abort 的 drop 语义，**不保证析构完成**） |
+
+> **反例（暂停时钟 + spawn_blocking 混用）**：`start_paused` 只冻结 time driver；`spawn_blocking` 里的真实 `std::thread::sleep` 不受控制——测试中若阻塞任务依赖墙钟，`advance` 不会推进它，确定性被打破。判据：被测代码的「时间来源」必须全部来自 `tokio::time`，一处 `std::time::Instant::now()` 混入即破功。
+
+## 十、相关概念
 
 - [Future 与 Executor 机制](../../03_advanced/01_async/04_future_and_executor_mechanisms.md) — poll/waker 协议与 executor 职责模型（本页的协议层上游）
 - [Waker 契约深度解析](../../03_advanced/01_async/12_waker_contract_deep_dive.md) — Reactor ⟹ wake 链路的契约形式化与反例
@@ -249,7 +293,7 @@ async fn main() {
 - [高性能网络服务架构](08_high_performance_network_service_architecture.md) — 运行时机制之上的架构模式
 - [安全边界全景](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) — 运行时契约在全局安全边界谱系中的位置（L5 向下引用）
 
-## 十、来源
+## 十一、来源
 
 - [Tokio Tutorial — Shared state / Channels / Select](https://tokio.rs/tokio/tutorial)（任务与 select! 的官方教学，2026-07-12 实测 200）
 - [Carl Lerche — *Making the Tokio scheduler 10x faster*（tokio.rs blog, 2019-10）](https://tokio.rs/blog/2019-10-scheduler)（multi_thread 调度器架构的设计动机，2026-07-12 实测 200）

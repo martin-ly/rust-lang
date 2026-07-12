@@ -19,6 +19,7 @@
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **来源**: [std::task::Wake](https://doc.rust-lang.org/std/task/trait.Wake.html) · [std::task::RawWakerVTable](https://doc.rust-lang.org/std/task/struct.RawWakerVTable.html) · [async-book ch2 — Wakers](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html) · [futures task 模块](https://docs.rs/futures/latest/futures/task/)（以上 2026-07-12 curl 实测 HTTP 200）
+> **国际权威来源（2026-07-13 补录）**: **P1** [Jung et al. — RustBelt（POPL 2018）](https://plv.mpi-sws.org/rustbelt/popl18/)（unsafe 契约与手工 vtable 协议的形式化判据；curl 200 实测 2026-07-13）
 > **对应 Crate**: [`c06_async`](../../../crates/c06_async)
 > **对应练习**: [`exercises/src/async_programming/`](../../../exercises/src/async_programming)
 

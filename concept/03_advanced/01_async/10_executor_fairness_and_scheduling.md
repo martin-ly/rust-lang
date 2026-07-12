@@ -19,6 +19,7 @@
 
 > **Rust 版本**: 1.97.0+ (Edition 2024) · Tokio 1.x
 > **来源**: [Carl Lerche — Making the Tokio scheduler 10x faster](https://tokio.rs/blog/2019-10-scheduler) · [Blumofe & Leiserson — Scheduling Multithreaded Computations by Work Stealing (JACM 1999)](https://www.lri.fr/~marche/ens/mpri/2-36-1/reading/blumofe-leiserson99.pdf) · [glommio docs](https://docs.rs/glommio/latest/glommio/)（以上 2026-07-12 curl 实测 HTTP 200）
+> **国际权威来源（2026-07-13 补录）**: **P0** [Async Book — Execution 章](https://rust-lang.github.io/async-book/02_execution/01_chapter.html) · **P1** [Herlihy & Shavit — The Art of Multiprocessor Programming（Morgan Kaufmann）](https://dl.acm.org/doi/book/10.5555/2385452)（work-stealing 调度与无锁队列的理论基础；curl 实测 2026-07-13，ACM 反爬注记同前页）
 > **对应 Crate**: [`c06_async`](../../../crates/c06_async)
 > **对应练习**: [`exercises/src/async_programming/`](../../../exercises/src/async_programming)
 

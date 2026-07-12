@@ -120,7 +120,8 @@ flowchart TD
 - [L4 进程代数与 Rust](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md)（CSP/CCS/π 权威源索引）
 - [L4 线性化与一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md)（Herlihy-Wing、CAP 权威源索引）
 - [L6 因果序与向量时钟](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md)（Lamport/Fidge/Mattern 权威源索引）
-- [The Rust Programming Language §16 Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Rust Async Book](https://rust-lang.github.io/async-book/index.html)
+- Lamport 1978 原文：[ACM DL](https://dl.acm.org/doi/10.1145/359545.359563)（ACM 反爬） · [作者主页 PDF](https://lamport.azurewebsites.net/pubs/time-clocks.pdf)
+- [The Rust Programming Language §16 Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Rust Async Book](https://rust-lang.github.io/async-book/index.html) · [docs.rs/tokio](https://docs.rs/tokio/latest/tokio/)
 
 > **相关文件**: [同层：执行模型同构性矩阵](02_execution_model_isomorphism.md) · [同层：范式矩阵](01_paradigm_matrix.md) · [L3 谱系页](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
 >

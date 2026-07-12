@@ -86,6 +86,8 @@ CvRDT 是一个四元组 (S, s⁰, q, u, m)：
 
 **为什么这就够了**：半格的任意有限子集有**唯一**最小上界。各副本独立演化、以任意顺序、任意次数两两合并（幂等性吸收重复传递，交换/结合律吸收顺序差异）⟹ 全部收敛到更新集的唯一 join ⟹ SEC 得证。
 
+**工程变体：δ-CRDT（增量状态）**。全量状态合并的传输成本随状态增长；δ-CRDT 只传播「自上次同步以来的状态增量」δ（要求增量本身也在同一半格中且与原状态可 join），周期性全量同步作兜底 ⟹ 保留合并格全部代数性质，把平均消息大小从 O（状态） 降到 O（增量）。这是 rust-crdt 与工业 Gossip 协议的标准优化。
+
 > **过渡**: 形式骨架抽象，但整个 CRDT 动物园都是这一定理的实例——每个类型 = 一个具体的半格 + 一组单调更新。
 
 ---
@@ -175,7 +177,7 @@ assert_eq!(text.get_string(&txn), "hello");
 
 ### 5.3 automerge-rs：工业级 CRDT 文档库
 
-[automerge-rs](https://github.com/automerge/automerge-rs)（[docs.rs/automerge](https://docs.rs/automerge/latest/automerge/)）是 Automerge 的 Rust 核心实现（JS 绑定经 WASM 复用同一核心），把 JSON 文档建模为**操作日志 + RGA 风格序列**的 CmRDT：
+[automerge-rs](https://github.com/automerge/automerge)（[docs.rs/automerge](https://docs.rs/automerge/latest/automerge/)）是 Automerge 的 Rust 核心实现（仓库原名 automerge-rs，已更名为 automerge；JS 绑定经 WASM 复用同一核心），把 JSON 文档建模为**操作日志 + RGA 风格序列**的 CmRDT：
 
 - **数据模型**：map / list / text 三类容器 + 标量寄存器（MV 语义，并发写以冲突值集合保留）；
 - **变更日志**：每次事务产生一个带哈希链的 change（可签名、可回溯任意历史版本），合并即重放对方缺失的 change；
@@ -199,6 +201,9 @@ tx.commit();
 | 富文本协作编辑 | yrs（CmRDT/YATA） | 操作序列紧凑、与 Yjs 生态互通 |
 | 寄存器/配置项 | LWW-Register（带时钟漂移警告）或 MV-Register | 按「可容忍丢并发写」与否二选一 |
 | JSON 文档协作 / 本地优先应用 | automerge | 文档模型丰富、change 可签名、JS 生态互通 |
+| 大状态 × 弱网环境的集合/计数同步 | δ-CRDT（增量状态）+ 周期全量兜底 | 平均消息从 O(状态) 降到 O(增量)，代数性质不变 |
+
+共同判据：先看**通道假设**（可丢/乱序 ⟹ CvRDT；可靠因果交付 ⟹ CmRDT 可选），再看**状态/操作大小比**，最后看**生态互通**需求。
 
 ---
 
@@ -285,10 +290,10 @@ RGA/OR-Set 的「删除」不是移除状态，而是**追加墓碑**（tombston
 ## 权威来源索引
 
 - Shapiro, M., Preguiça, N., Baquero, C., Zawirski, M. *A Comprehensive Study of Convergent and Commutative Replicated Data Types*. INRIA Research Report 7506, 2011. [HAL 全文](https://hal.inria.fr/inria-00555588/)
-- Shapiro, M., Preguiça, N., Baquero, C., Zawirski, M. *Conflict-free Replicated Data Types*. SSS 2011, LNCS 6976. [DOI](https://doi.org/10.1007/978-3-642-24550-3_29)
+- Shapiro, M., Preguiça, N., Baquero, C., Zawirski, M. *Conflict-free Replicated Data Types*. SSS 2011, LNCS 6976. [DOI](https://doi.org/10.1007/978-3-642-24550-3_29) · [Springer](https://link.springer.com/chapter/10.1007/978-3-642-24550-3_29)
 - [rust-crdt — 教科书式 CRDT 库](https://github.com/rust-crdt/rust-crdt)
 - [yrs — Yjs 的 Rust 移植（y-crdt 组织）](https://github.com/y-crdt/y-crdt) · [docs.rs/yrs](https://docs.rs/yrs/latest/yrs/)
-- [automerge-rs — Automerge 的 Rust 核心](https://github.com/automerge/automerge-rs) · [docs.rs/automerge](https://docs.rs/automerge/latest/automerge/)
+- [automerge-rs — Automerge 的 Rust 核心（仓库已更名 automerge）](https://github.com/automerge/automerge) · [docs.rs/automerge](https://docs.rs/automerge/latest/automerge/)
 - [Wikipedia: Conflict-free replicated data type](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type)
 
 > **相关文件**: [同层：因果序与向量时钟](09_causal_ordering_vector_clocks.md) · [同层：分布式共识](06_distributed_consensus.md) · [L4 一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md)

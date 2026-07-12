@@ -56,7 +56,6 @@
     - [Q: Rust 1.92.0 性能提升如何？](#q-rust-1920-性能提升如何)
     - [Q: 如何迁移到 Rust 1.92.0？](#q-如何迁移到-rust-1920)
   - [📚 相关资源](#-相关资源)
-  - [**适用版本**: Rust 1.97.0+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1970--edition-2024-wasm-20--wasi-02)
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
@@ -453,6 +452,7 @@ wasm-pack test --headless --firefox
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
 **适用版本**: Rust 1.97.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

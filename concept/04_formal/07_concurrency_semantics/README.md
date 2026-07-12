@@ -1,8 +1,8 @@
 # 并发形式语义子层（Concurrency Semantics）
 
-**EN**: Concurrency Semantics (Formal Models of Concurrent Computation)
-**Summary**: Navigation page for the L4 concurrency-semantics sublayer: process calculi (CSP/CCS/pi-calculus), linearizability and the consistency spectrum, and Actor formal semantics — the formal foundations beneath Rust's concurrency primitives.
-
+> **EN**: Concurrency Semantics (Formal Models of Concurrent Computation)
+> **Summary**: Navigation page for the L4 concurrency-semantics sublayer: process calculi (CSP/CCS/pi-calculus), linearizability and the consistency spectrum, and Actor formal semantics — the formal foundations beneath Rust's concurrency primitives.
+>
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/04_formal/07_concurrency_semantics/` 子层导览页（索引，非概念正文）。

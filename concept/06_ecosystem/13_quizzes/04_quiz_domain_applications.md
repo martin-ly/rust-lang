@@ -17,7 +17,8 @@
 > [游戏 ECS](../11_domain_applications/02_game_ecs.md) ·
 > [机器学习生态](../11_domain_applications/13_machine_learning_ecosystem.md) ·
 > [安全关键专题索引](../11_domain_applications/21_safety_critical_topic_index.md) ·
-> [AUTOSAR 与 Rust](../11_domain_applications/22_autosar_and_rust.md)
+> [AUTOSAR 与 Rust](../11_domain_applications/22_autosar_and_rust.md) ·
+> [Rust vs Go（并发模型对比）](../../05_comparative/01_systems_languages/03_rust_vs_go.md)
 
 ---
 

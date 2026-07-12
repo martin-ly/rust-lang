@@ -312,6 +312,7 @@ OTP 重启把 actor 状态重置为初值；若崩溃前 actor 已把**不一致
 - [Erlang/OTP Design Principles — Supervision Trees](https://www.erlang.org/doc/system/design_principles.html#supervision-trees)
 - [actix Actor 文档](https://actix.rs/docs/actix/actor) · [actix 仓库](https://github.com/actix/actix) · [docs.rs/actix](https://docs.rs/actix/latest/actix/)
 - [ractor（docs.rs）](https://docs.rs/ractor/latest/ractor/) · [ractor 仓库](https://github.com/slawlor/ractor) · [kameo（docs.rs）](https://docs.rs/kameo/latest/kameo/) · [kameo 仓库](https://github.com/tqwewe/kameo)
+- [std::sync::mpsc — Rust 标准库文档](https://doc.rust-lang.org/std/sync/mpsc/)（§六 channel 边界的官方契约）
 
 > **相关文件**: [同层：进程代数](01_process_calculi_for_rust.md) · [同层：线性化](02_linearizability_and_consistency.md) · [L3 工程谱系](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
 >

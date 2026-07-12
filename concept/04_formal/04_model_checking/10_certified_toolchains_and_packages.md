@@ -13,6 +13,7 @@
 > **后置概念**: [安全关键 Rust 专题索引](../../06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md) · [cargo vet 与供应链审计](../../06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md)
 >
 > **来源**: [Ferrocene Core Library Certification](https://public-docs.ferrocene.dev/main/certification/core/index.html)（2026-07-12 curl 实测） · [Ferrocene Qualification Report](https://public-docs.ferrocene.dev/main/qualification/report/index.html) · [HighTec 新闻稿（TÜV NORD ASIL D，2025-07-10）](https://www.presseagentur.com/hightec/detail.php?pr_id=7417&lang=en) · [AdaCore GNAT Pro for Rust](https://www.adacore.com/gnatpro-rust) · [Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/)
+> **国际权威来源（2026-07-13 补录）**: **P0** [Ferrocene Language Specification](https://spec.ferrocene.dev/)（curl 200 实测 2026-07-13） · **P1** [Ho & Protzenko — Aeneas: Rust Verification by Functional Translation（ICFP 2022, arXiv:2206.07185）](https://arxiv.org/abs/2206.07185)（认证/验证工具链的学术基础，curl 200 实测）
 
 ---
 

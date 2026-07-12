@@ -19,6 +19,7 @@
 
 > **Rust 版本**: 1.97.0+ (Edition 2024) · pin-project 1.1 · pin-project-lite 0.2
 > **来源**: [pin-project docs](https://docs.rs/pin-project/latest/pin_project/) · [pin-project-lite docs](https://docs.rs/pin-project-lite/latest/pin_project_lite/) · [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/)（以上 2026-07-12 curl 实测 HTTP 200）
+> **国际权威来源（2026-07-13 补录）**: **P1** [Jung et al. — RustBelt: Securing the Foundations of Rust（POPL 2018）](https://plv.mpi-sws.org/rustbelt/popl18/)（Pin 不变式所依托的 unsafe/别名语义形式化基础；curl 200 实测 2026-07-13）
 > **对应 Crate**: [`c06_async`](../../../crates/c06_async)
 > **对应练习**: [`exercises/src/async_programming/`](../../../exercises/src/async_programming)
 

@@ -1,5 +1,3 @@
-> **内容分级**: [研究级]
->
 # Rust 常用开发工具
 
 > **EN**: Useful Development Tools
