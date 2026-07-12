@@ -26,6 +26,7 @@
 > **来源**: [RFC 3681 — Default Field Values](https://rust-lang.github.io/rfcs/3681-default-field-values.html) ·
 > [Rust Reference — Structs](https://doc.rust-lang.org/reference/items/structs.html) ·
 > [Rust Reference — Struct Expressions](https://doc.rust-lang.org/reference/expressions/struct-expr.html)
+> **国际权威来源（2026-07-13 补录）**: **P1** [Weiss et al. — Oxide: The Essence of Rust（arXiv:1903.00982）](https://arxiv.org/abs/1903.00982)（结构体构造语义的核心演算参照；curl 200 实测 2026-07-13） · **P2** [smart-default docs](https://docs.rs/smart-default)（生态中字段默认值 derive 的现行方案；curl 200 实测）
 
 ## 📑 目录
 

@@ -9,7 +9,7 @@
 
 ---
 
-> **来源**: [Web 框架](../04_web_and_networking/03_web_frameworks.md) · [网络协议](../04_web_and_networking/07_network_protocols.md) · [Glommio 与 Thread-per-Core](../04_web_and_networking/05_glommio_and_thread_per_core.md) · [高性能网络服务架构](../04_web_and_networking/08_high_performance_network_service_architecture.md)
+> **来源**: [Web 框架](../04_web_and_networking/03_web_frameworks.md) · [网络协议](../04_web_and_networking/07_network_protocols.md) · [Glommio 与 Thread-per-Core](../04_web_and_networking/05_glommio_and_thread_per_core.md) · [高性能网络服务架构](../04_web_and_networking/08_high_performance_network_service_architecture.md) · [tokio docs](https://docs.rs/tokio)（P2 生态权威 API 文档，curl 200 实测 2026-07-13）
 >
 > **前置概念**:
 > [Web 框架](../04_web_and_networking/03_web_frameworks.md) ·

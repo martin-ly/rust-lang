@@ -9,7 +9,7 @@
 
 ---
 
-> **来源**: [安全实践](../07_security_and_cryptography/01_security_practices.md) · [安全与密码学](../07_security_and_cryptography/02_security_cryptography.md) · [cargo vet 供应链审计](../07_security_and_cryptography/03_cargo_vet_supply_chain.md) · [测试策略](../09_testing_and_quality/01_testing_strategies.md)
+> **来源**: [安全实践](../07_security_and_cryptography/01_security_practices.md) · [安全与密码学](../07_security_and_cryptography/02_security_cryptography.md) · [cargo vet 供应链审计](../07_security_and_cryptography/03_cargo_vet_supply_chain.md) · [测试策略](../09_testing_and_quality/01_testing_strategies.md) · [proptest docs](https://docs.rs/proptest)（P2 生态权威 API 文档，curl 200 实测 2026-07-13）
 >
 > **前置概念**:
 > [安全实践](../07_security_and_cryptography/01_security_practices.md) ·

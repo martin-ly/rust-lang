@@ -9,7 +9,7 @@
 
 ---
 
-> **来源**: [Rust Editions](../00_version_tracking/02_editions.md) · [Rust 发布流程](../00_version_tracking/03_rust_release_process.md) · [Rust 1.96 稳定特性](../00_version_tracking/rust_1_96_stabilized.md) · [Rust 1.97.0 稳定特性](../00_version_tracking/rust_1_97_stabilized.md) · [Rust 1.98+ 前沿特性预览](../00_version_tracking/rust_1_98_preview.md)
+> **来源**: [Rust Editions](../00_version_tracking/02_editions.md) · [Rust 发布流程](../00_version_tracking/03_rust_release_process.md) · [Rust 1.96 稳定特性](../00_version_tracking/rust_1_96_stabilized.md) · [Rust 1.97.0 稳定特性](../00_version_tracking/rust_1_97_stabilized.md) · [Rust 1.98+ 前沿特性预览](../00_version_tracking/rust_1_98_preview.md) · [Rust Blog — Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)（P2 生态官方发布信息，curl 200 实测 2026-07-13）
 >
 > **前置概念**:
 > [Rust 版本跟踪](../00_version_tracking/01_rust_version_tracking.md) ·

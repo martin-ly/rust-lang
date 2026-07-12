@@ -13,6 +13,7 @@
 > **后置概念**: [Industrial Case Studies](14_industrial_case_studies.md) · [cargo vet 与供应链审计](../07_security_and_cryptography/03_cargo_vet_supply_chain.md)
 >
 > **来源**: [AUTOSAR Adaptive Platform](https://www.autosar.org/standards/adaptive-platform)（2026-07-12 curl 实测） · [AUTOSAR R23-11 — AUTOSAR_AP_EXP_ARARustApplications.pdf](https://www.autosar.org/fileadmin/standards/R23-11/AP/AUTOSAR_AP_EXP_ARARustApplications.pdf)（实测 200） · [AUTOSAR R24-11 同文档更新版](https://www.autosar.org/fileadmin/standards/R24-11/AP/AUTOSAR_AP_EXP_ARARustApplications.pdf)（实测 200） · [SemiEngineering — Rust and virtual ECUs transforming AUTOSAR Classic（2025-07-08）](https://semiengineering.com/driving-the-future-how-rust-and-virtual-ecus-are-transforming-autosar-classic-automotive-software/) · [Synopsys — Validation of AUTOSAR Classic ECUs Running Rust SWCs（2025-01-27）](https://www.synopsys.com/blogs/chip-design/validation-of-autosar-classic-ecus-running-rust-swcs-a-safer-path-to-automotive-software.html)（实测 200）
+> **国际权威来源（2026-07-13 补录）**: **P0** [Ferrocene Language Specification](https://spec.ferrocene.dev/)（ISO 26262 认证 Rust 工具链的语言规范，curl 200 实测 2026-07-13） · **P1** [Jung et al. — RustBelt（POPL 2018）](https://plv.mpi-sws.org/rustbelt/popl18/)（汽车软件所依赖的内存安全形式化基础） · **P2** [Rust Blog — Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)（curl 200 实测）
 
 ---
 

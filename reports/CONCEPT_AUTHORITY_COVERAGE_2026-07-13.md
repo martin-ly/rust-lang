@@ -10,11 +10,11 @@
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 474 | 96.7% |
-| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 441 | 90.0% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 409 | 83.5% |
-| **任一权威（P0∪P1∪P2）** | **481** | **98.2%** |
-| 无任何国际权威引用（缺口） | 9 | 1.8% |
+| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 481 | 98.2% |
+| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 458 | 93.5% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 422 | 86.1% |
+| **任一权威（P0∪P1∪P2）** | **490** | **100.0%** |
+| 无任何国际权威引用（缺口） | 0 | 0.0% |
 
 ## 内容页口径覆盖率（排除 00_meta 工具页 / quiz / placeholders / sources 索引）
 
@@ -22,38 +22,31 @@
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方 | 396 | 97.8% |
-| P1 学术/形式化 | 388 | 95.8% |
-| P2 社区/生态 | 397 | 98.0% |
-| **任一权威** | **403** | **99.5%** |
-
-内容页 P1 缺口（17）: `concept/03_advanced/01_async/09_stream_algebra_and_backpressure.md` · `concept/03_advanced/01_async/10_executor_fairness_and_scheduling.md` · `concept/03_advanced/01_async/11_pin_projection_counterexamples.md` · `concept/03_advanced/01_async/12_waker_contract_deep_dive.md` · `concept/03_advanced/01_async/13_async_trait_object_safety.md` · `concept/04_formal/04_model_checking/10_certified_toolchains_and_packages.md` · `concept/06_ecosystem/00_toolchain/15_z_flags_reference.md` · `concept/06_ecosystem/01_cargo/23_cargo_197_features.md` · `concept/06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md` · `concept/06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md` · `concept/06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md` · `concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md` · `concept/06_ecosystem/11_domain_applications/22_autosar_and_rust.md` · `concept/07_future/03_preview_features/12_ferrocene_preview.md` · `concept/07_future/03_preview_features/36_unsafe_pinned_preview.md` · `concept/07_future/03_preview_features/37_default_field_values_preview.md` · `concept/07_future/03_preview_features/38_complex_numbers_preview.md`
-
-内容页 P2 缺口（8）: `concept/06_ecosystem/00_toolchain/15_z_flags_reference.md` · `concept/06_ecosystem/01_cargo/23_cargo_197_features.md` · `concept/06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md` · `concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md` · `concept/06_ecosystem/11_domain_applications/22_autosar_and_rust.md` · `concept/07_future/03_preview_features/35_f16_f128_preview.md` · `concept/07_future/03_preview_features/36_unsafe_pinned_preview.md` · `concept/07_future/03_preview_features/37_default_field_values_preview.md`
+| P0 官方 | 401 | 99.0% |
+| P1 学术/形式化 | 405 | 100.0% |
+| P2 社区/生态 | 405 | 100.0% |
+| **任一权威** | **405** | **100.0%** |
 
 ## 按层级覆盖率
 
 | 层级 | 页数 | P0 命中 | P0% | 任一权威 | 任一% |
 |:---|---:|---:|---:|---:|---:|
-| L0 | 62 | 60 | 96.8% | 60 | 96.8% |
+| L0 | 62 | 62 | 100.0% | 62 | 100.0% |
 | L1 | 55 | 55 | 100.0% | 55 | 100.0% |
 | L2 | 38 | 38 | 100.0% | 38 | 100.0% |
-| L3 | 65 | 63 | 96.9% | 65 | 100.0% |
-| L4 | 55 | 54 | 98.2% | 55 | 100.0% |
+| L3 | 65 | 65 | 100.0% | 65 | 100.0% |
+| L4 | 55 | 55 | 100.0% | 55 | 100.0% |
 | L5 | 20 | 20 | 100.0% | 20 | 100.0% |
-| L6 | 127 | 117 | 92.1% | 121 | 95.3% |
-| L7 | 65 | 64 | 98.5% | 64 | 98.5% |
+| L6 | 127 | 119 | 93.7% | 127 | 100.0% |
+| L7 | 65 | 64 | 98.5% | 65 | 100.0% |
 | L? | 3 | 3 | 100.0% | 3 | 100.0% |
 
 ## 核心缺口（L1-L4 且 无 P0 官方国际权威）
 
-共 **3** 页。下表为前 60（按层级、页长降序，优先补权威来源小节）。
+共 **0** 页。下表为前 60（按层级、页长降序，优先补权威来源小节）。
 
 | 层级 | 文件 | 行数 |
 |:---|:---|---:|
-| L3 | `concept/03_advanced/01_async/09_stream_algebra_and_backpressure.md` | 446 |
-| L3 | `concept/03_advanced/01_async/10_executor_fairness_and_scheduling.md` | 354 |
-| L4 | `concept/04_formal/04_model_checking/10_certified_toolchains_and_packages.md` | 208 |
 
 ## 方法学与诚信
 

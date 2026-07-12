@@ -9,7 +9,7 @@
 
 ---
 
-> **来源**: [数据库访问](../06_data_and_distributed/02_database_access.md) · [数据库系统](../06_data_and_distributed/04_database_systems.md)
+> **来源**: [数据库访问](../06_data_and_distributed/02_database_access.md) · [数据库系统](../06_data_and_distributed/04_database_systems.md) · [sqlx docs](https://docs.rs/sqlx)（P2 生态权威 API 文档，curl 200 实测 2026-07-13）
 >
 > **前置概念**:
 > [数据库访问](../06_data_and_distributed/02_database_access.md) ·

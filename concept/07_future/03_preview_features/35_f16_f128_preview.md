@@ -28,6 +28,7 @@
 > [std docs — primitive `f16`](https://doc.rust-lang.org/std/primitive.f16.html) ·
 > [std docs — primitive `f128`](https://doc.rust-lang.org/std/primitive.f128.html) ·
 > [Tracking Issue #116909](https://github.com/rust-lang/rust/issues/116909) ·
+> **国际权威来源（2026-07-13 补录）**: **P2** [Rust Blog — Announcing Rust 1.82.0](https://blog.rust-lang.org/2024/10/17/Rust-1.82.0.html)（f16 稳定化的官方发布公告；curl 200 实测 2026-07-13） ·
 > [IEEE 754-2019](https://ieeexplore.ieee.org/document/8766229)
 
 ## 📑 目录

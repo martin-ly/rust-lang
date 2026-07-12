@@ -19,6 +19,7 @@
 > **后置概念**: [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) · [Version Tracking](../00_version_tracking/01_rust_version_tracking.md)
 >
 > **来源**: [Ferrocene 官网](https://ferrocene.dev/)（2026-07-12 curl 实测） · [Ferrocene 26.02.0 Release Notes](https://public-docs.ferrocene.dev/main/release-notes/26.02.0.html) · [Ferrocene Qualification Report](https://public-docs.ferrocene.dev/main/qualification/report/index.html) · [Ferrocene Core Library Certification](https://public-docs.ferrocene.dev/main/certification/core/index.html) · [ISO 26262](https://www.iso.org/standard/68383.html)
+> **国际权威来源（2026-07-13 补录）**: **P1** [Jung et al. — RustBelt（POPL 2018）](https://plv.mpi-sws.org/rustbelt/popl18/)（Ferrocene 规范所形式化的 Rust 语义学术基础；curl 200 实测 2026-07-13）
 
 ---
 

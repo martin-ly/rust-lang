@@ -28,6 +28,7 @@
 > [Tracking Issue #125735](https://github.com/rust-lang/rust/issues/125735) ·
 > [Issue #137750 — UnsafePinned 与安全 Pin::deref 的交互决议](https://github.com/rust-lang/rust/issues/137750) ·
 > [The Rustonomicon — Aliasing](https://doc.rust-lang.org/nomicon/aliasing.html)
+> **国际权威来源（2026-07-13 补录）**: **P1** [Jung et al. — Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)（UnsafePinned 所精确标注的别名模型；curl 200 实测 2026-07-13） · **P2** [pin-project docs](https://docs.rs/pin-project/latest/pin_project/)（curl 200 实测）
 
 ## 📑 目录
 

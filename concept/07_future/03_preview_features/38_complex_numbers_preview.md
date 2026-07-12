@@ -27,6 +27,7 @@
 > [Rust Reference — Numeric Types](https://doc.rust-lang.org/reference/types/numeric.html) ·
 > [num-complex crate](https://docs.rs/num-complex) ·
 > [C11 Annex G — Complex arithmetic](https://en.cppreference.com/w/c/numeric/complex)
+> **国际权威来源（2026-07-13 补录）**: **P1** [Goldberg — What Every Computer Scientist Should Know About Floating-Point Arithmetic（ACM Computing Surveys 23(1), 1991）](https://dl.acm.org/doi/10.1145/103162.103163)（复数运算的浮点误差语义基础；curl 实测 2026-07-13，ACM 反爬注记同前页）
 
 ## 📑 目录
 

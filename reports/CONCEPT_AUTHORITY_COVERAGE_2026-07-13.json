@@ -3,76 +3,49 @@
   "scanned": 490,
   "coverage": {
     "P0": [
-      474,
-      96.7
-    ],
-    "P1": [
-      441,
-      90.0
-    ],
-    "P2": [
-      409,
-      83.5
-    ],
-    "any": [
       481,
       98.2
     ],
-    "none": 9
+    "P1": [
+      458,
+      93.5
+    ],
+    "P2": [
+      422,
+      86.1
+    ],
+    "any": [
+      490,
+      100.0
+    ],
+    "none": 0
   },
   "content_scope": {
     "scanned": 405,
     "P0": [
-      396,
-      97.8
+      401,
+      99.0
     ],
     "P1": [
-      388,
-      95.8
+      405,
+      100.0
     ],
     "P2": [
-      397,
-      98.0
+      405,
+      100.0
     ],
     "any": [
-      403,
-      99.5
+      405,
+      100.0
     ],
-    "gaps_p1": [
-      "concept/03_advanced/01_async/09_stream_algebra_and_backpressure.md",
-      "concept/03_advanced/01_async/10_executor_fairness_and_scheduling.md",
-      "concept/03_advanced/01_async/11_pin_projection_counterexamples.md",
-      "concept/03_advanced/01_async/12_waker_contract_deep_dive.md",
-      "concept/03_advanced/01_async/13_async_trait_object_safety.md",
-      "concept/04_formal/04_model_checking/10_certified_toolchains_and_packages.md",
-      "concept/06_ecosystem/00_toolchain/15_z_flags_reference.md",
-      "concept/06_ecosystem/01_cargo/23_cargo_197_features.md",
-      "concept/06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md",
-      "concept/06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md",
-      "concept/06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md",
-      "concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md",
-      "concept/06_ecosystem/11_domain_applications/22_autosar_and_rust.md",
-      "concept/07_future/03_preview_features/12_ferrocene_preview.md",
-      "concept/07_future/03_preview_features/36_unsafe_pinned_preview.md",
-      "concept/07_future/03_preview_features/37_default_field_values_preview.md",
-      "concept/07_future/03_preview_features/38_complex_numbers_preview.md"
-    ],
-    "gaps_p2": [
-      "concept/06_ecosystem/00_toolchain/15_z_flags_reference.md",
-      "concept/06_ecosystem/01_cargo/23_cargo_197_features.md",
-      "concept/06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md",
-      "concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md",
-      "concept/06_ecosystem/11_domain_applications/22_autosar_and_rust.md",
-      "concept/07_future/03_preview_features/35_f16_f128_preview.md",
-      "concept/07_future/03_preview_features/36_unsafe_pinned_preview.md",
-      "concept/07_future/03_preview_features/37_default_field_values_preview.md"
-    ]
+    "gaps_p1": [],
+    "gaps_p2": []
   },
   "by_layer": {
     "L0": {
       "n": 62,
-      "P0": 60,
-      "any": 60
+      "P0": 62,
+      "any": 62
     },
     "L1": {
       "n": 55,
@@ -86,12 +59,12 @@
     },
     "L3": {
       "n": 65,
-      "P0": 63,
+      "P0": 65,
       "any": 65
     },
     "L4": {
       "n": 55,
-      "P0": 54,
+      "P0": 55,
       "any": 55
     },
     "L5": {
@@ -101,13 +74,13 @@
     },
     "L6": {
       "n": 127,
-      "P0": 117,
-      "any": 121
+      "P0": 119,
+      "any": 127
     },
     "L7": {
       "n": 65,
       "P0": 64,
-      "any": 64
+      "any": 65
     },
     "L?": {
       "n": 3,
@@ -115,22 +88,8 @@
       "any": 3
     }
   },
-  "core_gaps_l1_l4_no_p0": [
-    "concept/03_advanced/01_async/09_stream_algebra_and_backpressure.md",
-    "concept/03_advanced/01_async/10_executor_fairness_and_scheduling.md",
-    "concept/04_formal/04_model_checking/10_certified_toolchains_and_packages.md"
-  ],
-  "none_any": [
-    "concept/00_meta/04_navigation/15_quiz_registry.md",
-    "concept/00_meta/05_quizzes/01_quiz_meta_framework.md",
-    "concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md",
-    "concept/06_ecosystem/11_domain_applications/22_autosar_and_rust.md",
-    "concept/06_ecosystem/13_quizzes/01_quiz_networking_async_ecosystem.md",
-    "concept/06_ecosystem/13_quizzes/02_quiz_database_storage.md",
-    "concept/06_ecosystem/13_quizzes/03_quiz_security_testing.md",
-    "concept/06_ecosystem/13_quizzes/04_quiz_domain_applications.md",
-    "concept/07_future/05_quizzes/01_quiz_version_and_preview.md"
-  ],
+  "core_gaps_l1_l4_no_p0": [],
+  "none_any": [],
   "crates_docs": {
     "total": 576,
     "kinds": {
