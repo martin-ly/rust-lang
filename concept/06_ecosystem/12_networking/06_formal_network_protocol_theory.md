@@ -582,3 +582,40 @@ impl SimpleHttpSemantics {
 
 - **P1 学术/形式化**: [RustHornBelt: A Semantic Foundation for Functional Verification of Rust Programs (PLDI 2022)](https://dl.acm.org/doi/10.1145/3519939.3523704) · [Aeneas: Rust Verification by Functional Translation (arXiv:2206.07185)](https://arxiv.org/abs/2206.07185)
 - **P2 生态/社区**: [model-checking/kani — 模型检查器](https://github.com/model-checking/kani) · [model-checking/verify-rust-std](https://github.com/model-checking/verify-rust-std)
+
+## ⚠️ 反例与陷阱
+
+### 反例：协议新增状态后 `match` 不穷尽（rustc 1.97.0 实测）
+
+协议状态机扩展时，编译器强制处理新变体：
+
+```rust,compile_fail,E0004
+enum State { Init, Syn, Established, Closed }
+
+fn next(s: State) -> State {
+    match s {
+        State::Init => State::Syn,
+        State::Syn => State::Established,
+        State::Established => State::Closed,
+        // ❌ 缺少 State::Closed 分支
+    }
+}
+```
+
+**错误**：`E0004 non-exhaustive patterns: State::Closed not covered`。
+
+### ✅ 修正：补全终态分支
+
+```rust
+enum State { Init, Syn, Established, Closed }
+
+fn next(s: State) -> State {
+    match s {
+        State::Init => State::Syn,
+        State::Syn => State::Established,
+        State::Established => State::Closed,
+        State::Closed => State::Closed, // 终态自循环
+    }
+}
+```
+

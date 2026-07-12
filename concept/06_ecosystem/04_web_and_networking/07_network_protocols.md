@@ -521,3 +521,39 @@ Rust 生态：纯 Rust QUIC 实现 `quinn`、HTTP/3 实现 `h3`、AWS `s2n-quic`
 ## 相关概念
 
 - [对应测验](../13_quizzes/01_quiz_networking_async_ecosystem.md) — 网络与异步生态（Web 框架、Tokio/Glommio 运行时、QUIC/HTTP-3、eBPF）
+
+## ⚠️ 反例与陷阱
+
+### 反例：把 listener move 进两个闭包（rustc 1.97.0 实测）
+
+多路复用/多任务分发时常见的所有权错误：
+
+```rust,compile_fail,E0382
+use std::net::TcpListener;
+
+fn main() {
+    let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+    let a = move || { let _ = listener.local_addr(); };
+    let b = move || { let _ = listener.local_addr(); }; // ❌ listener 已 move 进 a
+    a();
+    b();
+}
+```
+
+**错误**：`E0382 use of moved value: listener`。
+
+### ✅ 修正：`try_clone` 派生句柄
+
+```rust
+use std::net::TcpListener;
+
+fn main() {
+    let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+    let l2 = listener.try_clone().unwrap();
+    let a = move || { let _ = listener.local_addr(); };
+    let b = move || { let _ = l2.local_addr(); };
+    a();
+    b();
+}
+```
+

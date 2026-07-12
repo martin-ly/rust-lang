@@ -560,3 +560,28 @@ fn windowed_sum(events: Stream<Event>) -> Stream<WindowResult> {
 | 流处理生态：Rust 实现与工业系统全景 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | 流处理生态：Rust 实现与工业系统全景 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | 流处理生态：Rust 实现与工业系统全景 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+## ⚠️ 反例与陷阱
+
+### 反例：`fold` 累加器与元素运算类型不一致（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0277
+fn main() {
+    let nums = [1, 2, 3, 4];
+    let total = nums.iter().fold(0, |acc, x| acc + x * 2.0); // ❌ i32 + f64
+    println!("{}", total);
+}
+```
+
+**错误**：`E0277 cannot add f64 to &{integer}`——流式聚合的初始值类型决定整条链的类型。
+
+### ✅ 修正：统一累加器类型
+
+```rust
+fn main() {
+    let nums = [1, 2, 3, 4];
+    let total = nums.iter().fold(0.0, |acc, x| acc + *x as f64 * 2.0);
+    println!("{}", total);
+}
+```
+

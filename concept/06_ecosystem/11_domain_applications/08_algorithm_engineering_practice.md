@@ -2031,3 +2031,32 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Skiena: The Algorithm Design Manual (2nd ed., Springer)](https://link.springer.com/book/10.1007/978-1-84800-070-4)
+
+## ⚠️ 反例与陷阱
+
+### 反例：在 `sort_by` 比较器中借用被排序的集合（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0502
+fn main() {
+    let mut v = vec![3, 1, 2];
+    v.sort_by(|a, b| {
+        let _n = v.len(); // ❌ sort_by 已可变借用 v，闭包再不可变借用
+        a.cmp(b)
+    });
+    println!("{:?}", v);
+}
+```
+
+**错误**：`E0502 cannot borrow v as immutable because it is also borrowed as mutable`。
+
+### ✅ 修正：在排序前提取所需值
+
+```rust
+fn main() {
+    let mut v = vec![3, 1, 2];
+    let n = v.len(); // 提前快照
+    v.sort_by(|a, b| a.cmp(b));
+    println!("{:?} (len={})", v, n);
+}
+```
+

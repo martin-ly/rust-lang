@@ -995,3 +995,35 @@ pub fn quantum_pattern_example() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)
+
+## ⚠️ 反例与陷阱
+
+### 反例：原生 `async fn` trait 不能做成 trait object（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0038
+trait Fetcher {
+    async fn fetch(&self) -> String;
+}
+
+fn run(f: &dyn Fetcher) { // ❌ 含 async fn 的 trait 不是 dyn compatible
+    let _ = f.fetch();
+}
+```
+
+**错误**：`E0038 the trait Fetcher is not dyn compatible`——编译器提示考虑 `#[async_trait]` 或返回命名/装箱的 Future。
+
+### ✅ 修正：返回 `Pin<Box<dyn Future>>`（async_trait 等价物）
+
+```rust
+use std::future::Future;
+use std::pin::Pin;
+
+trait Fetcher {
+    fn fetch(&self) -> Pin<Box<dyn Future<Output = String> + '_>>;
+}
+
+fn run(f: &dyn Fetcher) {
+    let _ = f.fetch(); // 现在 dyn compatible
+}
+```
+

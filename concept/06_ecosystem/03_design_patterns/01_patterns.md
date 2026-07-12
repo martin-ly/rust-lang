@@ -3085,3 +3085,35 @@ fn main() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
+
+## ⚠️ 反例与陷阱
+
+### 反例：`static mut` 单例（rustc 1.97.0 实测）
+
+用 `static mut` 模拟 GoF Singleton，在 Edition 2024 下直接编译失败：
+
+```rust,compile_fail
+static mut INSTANCE: Option<String> = None;
+
+fn instance() -> &'static String {
+    unsafe {
+        let r = INSTANCE.as_ref().unwrap(); // ❌ 对 mutable static 创建共享引用
+        r
+    }
+}
+```
+
+**错误**：`error: creating a shared reference to mutable static is undefined behavior`（`static_mut_refs` 在 Edition 2024 转为硬错误）。
+
+### ✅ 修正：用 `OnceLock` 实现懒初始化单例
+
+```rust
+use std::sync::OnceLock;
+
+static INSTANCE: OnceLock<String> = OnceLock::new();
+
+fn instance() -> &'static String {
+    INSTANCE.get_or_init(|| "one".to_string())
+}
+```
+

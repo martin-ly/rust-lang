@@ -300,3 +300,47 @@ RGA/OR-Set 的「删除」不是移除状态，而是**追加墓碑**（tombston
 > **相关文件**: [同层：因果序与向量时钟](09_causal_ordering_vector_clocks.md) · [同层：分布式共识](06_distributed_consensus.md) · [L4 一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-12 ｜ **状态**: ✅ W5-4 新建（Rust 1.97 对齐）
+
+## ⚠️ 反例与陷阱
+
+### 反例：CRDT 状态比较缺少 `PartialEq`（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0369
+struct GCounter { counts: Vec<(u32, u64)> }
+
+impl GCounter {
+    fn merge(&mut self, other: &GCounter) {
+        for (id, c) in &other.counts {
+            if let Some(slot) = self.counts.iter_mut().find(|(i, _)| i == id) {
+                slot.1 = slot.1.max(*c);
+            }
+        }
+    }
+}
+
+fn main() {
+    let a = GCounter { counts: vec![(1, 5)] };
+    let b = GCounter { counts: vec![(1, 3)] };
+    if a == b { println!("same"); } // ❌ 未实现 PartialEq
+}
+```
+
+**错误**：`E0369 binary operation == cannot be applied to type GCounter`。
+
+### ✅ 修正：derive 相等性
+
+```rust
+#[derive(PartialEq, Eq)]
+struct GCounter { counts: Vec<(u32, u64)> }
+
+impl GCounter {
+    fn merge(&mut self, other: &GCounter) {
+        for (id, c) in &other.counts {
+            if let Some(slot) = self.counts.iter_mut().find(|(i, _)| i == id) {
+                slot.1 = slot.1.max(*c);
+            }
+        }
+    }
+}
+```
+

@@ -441,3 +441,33 @@ pub fn call_c_function() {
 | C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+## ⚠️ 反例与陷阱
+
+### 反例：C 风格裸指针解引用缺少 `unsafe`（rustc 1.97.0 实测）
+
+C 代码直译时最易遗漏的安全边界：
+
+```rust,compile_fail,E0133
+fn main() {
+    let x = 42;
+    let p = &x as *const i32;
+    let v = *p; // ❌ 解引用裸指针必须在 unsafe 块中
+    println!("{}", v);
+}
+```
+
+**错误**：`E0133 dereference of raw pointer is unsafe and requires unsafe block`。
+
+### ✅ 修正：显式 `unsafe` 块并注明不变量
+
+```rust
+fn main() {
+    let x = 42;
+    let p = &x as *const i32;
+    // SAFETY: p 来自有效引用 &x，指向已初始化的 i32，且在 x 存活期内使用。
+    let v = unsafe { *p };
+    println!("{}", v);
+}
+```
+

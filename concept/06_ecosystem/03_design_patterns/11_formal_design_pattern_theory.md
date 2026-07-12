@@ -1021,3 +1021,47 @@ impl<S: Strategy, O: Observer> StrategyObserver<S, O> {
 
 - **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)
 - **P2 生态/社区**: [formal-land/coq-of-rust](https://github.com/formal-land/coq-of-rust) · [AeneasVerif/aeneas](https://github.com/AeneasVerif/aeneas)
+
+## ⚠️ 反例与陷阱
+
+### 反例：typestate 令牌被消费两次（rustc 1.97.0 实测）
+
+类型状态模式靠 move 消耗旧状态，重复使用即编译失败：
+
+```rust,compile_fail,E0382
+struct Open;
+struct Closed;
+
+struct Door<S> { state: S }
+impl Door<Closed> {
+    fn open(self) -> Door<Open> { Door { state: Open } }
+}
+
+fn main() {
+    let d = Door { state: Closed };
+    let d1 = d.open();
+    let d2 = d.open(); // ❌ d 已被 move
+    let _ = (d1.state, d2.state);
+}
+```
+
+**错误**：`E0382 use of moved value: d`——这正是 typestate 的编译期状态合法性保证。
+
+### ✅ 修正：状态线性流转
+
+```rust
+struct Open;
+struct Closed;
+
+struct Door<S> { state: S }
+impl Door<Closed> {
+    fn open(self) -> Door<Open> { Door { state: Open } }
+}
+
+fn main() {
+    let d = Door { state: Closed };
+    let d1 = d.open(); // 每个状态值只消费一次
+    let _ = d1.state;
+}
+```
+

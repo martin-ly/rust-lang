@@ -410,3 +410,28 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [creusot-rs/creusot — Rust 演绎验证](https://github.com/creusot-rs/creusot) · [formal-land/coq-of-rust](https://github.com/formal-land/coq-of-rust)
+
+## ⚠️ 反例与陷阱
+
+### 反例：`collect()` 缺少类型标注导致推断失败（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0283
+fn main() {
+    let words = vec!["a", "b", "c"];
+    let lens = words.iter().map(|w| w.len()).collect(); // ❌ 目标容器类型未知
+    println!("{}", lens);
+}
+```
+
+**错误**：`E0283 type annotations needed`——`FromIterator` 的实现不唯一（`Vec<_>`/`HashSet<_>`/...），推断无唯一解。
+
+### ✅ 修正：标注收集目标类型
+
+```rust
+fn main() {
+    let words = vec!["a", "b", "c"];
+    let lens: Vec<usize> = words.iter().map(|w| w.len()).collect();
+    println!("{:?}", lens);
+}
+```
+

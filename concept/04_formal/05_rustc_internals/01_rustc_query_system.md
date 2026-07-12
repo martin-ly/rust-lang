@@ -568,3 +568,32 @@ Salsa 本身是从 `rustc` 查询系统中提取出来的通用框架，被 `rus
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [AeneasVerif/aeneas](https://github.com/AeneasVerif/aeneas) · [model-checking/kani — 模型检查器](https://github.com/model-checking/kani)
+
+## ⚠️ 反例与陷阱
+
+### 反例：无间接层的递归类型（rustc 1.97.0 实测）
+
+查询/不动点系统里递归定义必须经一层间接，否则大小不可判定：
+
+```rust,compile_fail,E0072
+struct Node {
+    value: i32,
+    next: Node, // ❌ 递归无间接，大小无限
+}
+
+fn main() {}
+```
+
+**错误**：`E0072 recursive type Node has infinite size`。
+
+### ✅ 修正：加 `Box` 间接层
+
+```rust
+struct Node {
+    value: i32,
+    next: Option<Box<Node>>, // 指针大小固定，递归可判定
+}
+
+fn main() {}
+```
+

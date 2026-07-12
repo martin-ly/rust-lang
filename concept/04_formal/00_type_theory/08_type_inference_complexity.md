@@ -397,3 +397,28 @@ PSPACE-完全。Rehman et al. (2023) 给出 Rust 类型推断复杂度的 PSPACE
 **文档版本**: 1.0
 **最后更新**: 2026-06-25
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
+
+## ⚠️ 反例与陷阱
+
+### 反例：`None` 缺元素类型标注（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0282
+fn main() {
+    let maybe = None;
+    let v = maybe.unwrap(); // ❌ Option<T> 的 T 无任何约束来源
+    println!("{:?}", v);
+}
+```
+
+**错误**：`E0282 type annotations needed for Option<T>`——推断变量没有传播到任何使用点。
+
+### ✅ 修正：turbofish 或类型标注
+
+```rust
+fn main() {
+    let maybe: Option<i32> = None;
+    let v = maybe.unwrap_or(0);
+    println!("{}", v);
+}
+```
+

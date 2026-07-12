@@ -423,3 +423,31 @@ Obligation 是需要被证明的 trait reference，例如 `i32: Clone` 或 `T: D
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [formal-land/coq-of-rust](https://github.com/formal-land/coq-of-rust) · [AeneasVerif/aeneas](https://github.com/AeneasVerif/aeneas)
+
+## ⚠️ 反例与陷阱
+
+### 反例：重叠的 blanket impl 使求解无唯一解（rustc 1.97.0 实测）
+
+trait solver 要求 impl 集合相干（coherence），重叠即拒绝：
+
+```rust,compile_fail,E0119
+trait Marker {}
+struct A<T>(T);
+
+impl<T> Marker for A<T> {}  // blanket：覆盖一切 A<T>
+impl Marker for A<i32> {}   // ❌ 与上一 impl 重叠
+```
+
+**错误**：`E0119 conflicting implementations of trait Marker for type A<i32>`。
+
+### ✅ 修正：用 newtype 消除重叠
+
+```rust
+trait Marker {}
+struct A<T>(T);
+struct Ai32(i32);
+
+impl<T> Marker for A<T> {}
+impl Marker for Ai32 {} // 不同类型，无重叠
+```
+

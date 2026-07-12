@@ -1356,3 +1356,38 @@ Entity（实体）：唯一标识符；Component（组件）：纯数据；Syste
 
 系统只读取/写入特定组件类型，ECS 调度器可以自动分析依赖关系，无冲突的系统并行执行。Rust 的借用检查在编译期保证这种并行是安全的。
 </details>
+
+## ⚠️ 反例与陷阱
+
+### 反例：同一组件存储的两个可变别名（rustc 1.97.0 实测）
+
+ECS 中"系统同时写两个组件数组"若别名到同一 Vec，编译期拒绝：
+
+```rust,compile_fail,E0499
+struct Storage { positions: Vec<f32>, velocities: Vec<f32> }
+
+fn main() {
+    let mut s = Storage { positions: vec![0.0], velocities: vec![1.0] };
+    let p = &mut s.positions;
+    let v = &mut s.velocities;
+    let p2 = &mut s.positions; // ❌ positions 已被 p 可变借用
+    p[0] += v[0];
+    p2[0] = 9.0;
+}
+```
+
+**错误**：`E0499 cannot borrow s.positions as mutable more than once at a time`。
+
+### ✅ 修正： disjoint 字段借用合法，重复借用改为单次
+
+```rust
+struct Storage { positions: Vec<f32>, velocities: Vec<f32> }
+
+fn main() {
+    let mut s = Storage { positions: vec![0.0], velocities: vec![1.0] };
+    let p = &mut s.positions;  // 字段级拆分借用是允许的
+    let v = &mut s.velocities;
+    p[0] += v[0];
+}
+```
+

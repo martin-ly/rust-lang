@@ -432,3 +432,28 @@ fn example() {
 **文档版本**: 1.0
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
+
+## ⚠️ 反例与陷阱
+
+### 反例：`if` 表达式两分支类型不一致（rustc 1.97.0 实测）
+
+简单类型论规则：`if` 作为表达式时两个分支必须同类型：
+
+```rust,compile_fail,E0308
+fn classify(x: i32) {
+    let label = if x > 0 { "positive" } else { 0 }; // ❌ &str vs i32
+    println!("{:?}", label);
+}
+```
+
+**错误**：`E0308 mismatched types: expected &str, found integer`。
+
+### ✅ 修正：统一分支类型
+
+```rust
+fn classify(x: i32) {
+    let label = if x > 0 { "positive" } else { "non-positive" };
+    println!("{}", label);
+}
+```
+

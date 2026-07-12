@@ -771,3 +771,32 @@ pub enum PatternError {
 
 - **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)
 - **P2 生态/社区**: [Refactoring.Guru — Design Patterns](https://refactoring.guru/design-patterns) · [The Pragmatic Bookshelf](https://pragprog.com)
+
+## ⚠️ 反例与陷阱
+
+### 反例：工厂按值返回 `dyn Trait`（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0746
+trait Animal { fn name(&self) -> &str; }
+struct Dog;
+impl Animal for Dog { fn name(&self) -> &str { "dog" } }
+
+fn make() -> dyn Animal { // ❌ 返回位置不能是未装箱的 dyn
+    Dog
+}
+```
+
+**错误**：`E0746 return type cannot be bare trait object`。
+
+### ✅ 修正：返回 `Box<dyn Trait>`（或泛型 `impl Trait` 静态分派）
+
+```rust
+trait Animal { fn name(&self) -> &str; }
+struct Dog;
+impl Animal for Dog { fn name(&self) -> &str { "dog" } }
+
+fn make() -> Box<dyn Animal> {
+    Box::new(Dog)
+}
+```
+

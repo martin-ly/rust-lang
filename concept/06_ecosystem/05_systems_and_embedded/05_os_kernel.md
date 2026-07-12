@@ -483,3 +483,33 @@ fn open_resource_fixed(url: &str) -> Result<Resource, Error> {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/memmap2 — 生态权威 API 文档](https://docs.rs/memmap2) · [docs.rs/embedded-hal — 生态权威 API 文档](https://docs.rs/embedded-hal)
+
+## ⚠️ 反例与陷阱
+
+### 反例：内核全局计数器用 `static mut`（rustc 1.97.0 实测）
+
+```rust,compile_fail
+static mut TICKS: u64 = 0;
+
+fn tick() {
+    unsafe {
+        let t = &mut TICKS; // ❌ Edition 2024：对 mutable static 取引用是硬错误
+        *t += 1;
+    }
+}
+```
+
+**错误**：`error: creating a mutable reference to mutable static is undefined behavior`（Edition 2024，`static_mut_refs` 硬错误）。
+
+### ✅ 修正：原子类型
+
+```rust
+use std::sync::atomic::{AtomicU64, Ordering};
+
+static TICKS: AtomicU64 = AtomicU64::new(0);
+
+fn tick() {
+    TICKS.fetch_add(1, Ordering::Relaxed);
+}
+```
+

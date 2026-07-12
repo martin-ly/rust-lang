@@ -864,3 +864,32 @@ fn main() {
 
 - **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)
 - **P2 生态/社区**: [The Pragmatic Bookshelf](https://pragprog.com) · [Microservices.io — 架构模式](https://microservices.io)
+
+## ⚠️ 反例与陷阱
+
+### 反例：捕获闭包不能强转为 `fn` 指针（Strategy 模式）（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0308
+fn apply(f: fn(i32) -> i32, x: i32) -> i32 { f(x) }
+
+fn main() {
+    let factor = 3;
+    let mul = |x| x * factor; // ❌ 捕获环境，不是 fn 指针
+    println!("{}", apply(mul, 4));
+}
+```
+
+**错误**：`E0308 mismatched types: expected fn pointer, found closure`。
+
+### ✅ 修正：参数改为泛型 `Fn` 约束
+
+```rust
+fn apply<F: Fn(i32) -> i32>(f: F, x: i32) -> i32 { f(x) }
+
+fn main() {
+    let factor = 3;
+    let mul = |x| x * factor;
+    println!("{}", apply(mul, 4)); // 捕获闭包与普通函数统一接受
+}
+```
+

@@ -1412,3 +1412,35 @@ fn main() {
 | Rust 惯用法谱系全景（Idioms Spectrum） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Rust 惯用法谱系全景（Idioms Spectrum） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust 惯用法谱系全景（Idioms Spectrum） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+## ⚠️ 反例与陷阱
+
+### 反例：部分 move 后整体使用结构体（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0382
+struct Config { name: String, retries: u32 }
+
+fn consume(c: Config) { println!("{} {}", c.name, c.retries); }
+
+fn main() {
+    let c = Config { name: "svc".to_string(), retries: 3 };
+    let n = c.name; // 部分 move：name 字段已移出
+    println!("{}", n);
+    consume(c); // ❌ 整体使用已部分 move 的值
+}
+```
+
+**错误**：`E0382 use of partially moved value: c`（剩余字段可单独访问，整体不可再用）。
+
+### ✅ 修正：解构或克隆
+
+```rust
+struct Config { name: String, retries: u32 }
+
+fn main() {
+    let c = Config { name: "svc".to_string(), retries: 3 };
+    let Config { name, retries } = c; // 解构后各字段独立可用
+    println!("{} {}", name, retries);
+}
+```
+

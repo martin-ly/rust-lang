@@ -534,3 +534,41 @@ Rust 的显式哲学和数据所有权（Ownership）使延迟加载（lazy load
 ## 相关概念
 
 - [对应测验](../13_quizzes/02_quiz_database_storage.md) — 数据库与存储生态（SQLx/Diesel/SeaORM/Toasty、TiKV/Materialize/Meilisearch/SurrealDB）
+
+## ⚠️ 反例与陷阱
+
+### 反例：同一连接上的两个可变事务句柄（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0499
+struct Conn { tx_open: bool }
+impl Conn {
+    fn exec(&mut self, sql: &str) { println!("{}", sql); }
+}
+
+fn main() {
+    let mut c = Conn { tx_open: false };
+    let t1 = &mut c;
+    let t2 = &mut c; // ❌ 连接已被 t1 可变借用
+    t1.exec("BEGIN");
+    t2.exec("INSERT");
+}
+```
+
+**错误**：`E0499 cannot borrow c as mutable more than once at a time`——数据库驱动（如 sqlx）的事务 API 正是靠此规则强制单事务串行。
+
+### ✅ 修正：事务句柄顺序使用
+
+```rust
+struct Conn { tx_open: bool }
+impl Conn {
+    fn exec(&mut self, sql: &str) { println!("{}", sql); }
+}
+
+fn main() {
+    let mut c = Conn { tx_open: false };
+    c.exec("BEGIN");
+    c.exec("INSERT");
+    c.exec("COMMIT");
+}
+```
+

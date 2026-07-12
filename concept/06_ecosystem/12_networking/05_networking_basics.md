@@ -925,3 +925,40 @@ fn main() {
 
 - **P2 生态/社区**: [docs.rs/quinn — 生态权威 API 文档](https://docs.rs/quinn) · [docs.rs/tokio-tungstenite — 生态权威 API 文档](https://docs.rs/tokio-tungstenite)
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+
+## ⚠️ 反例与陷阱
+
+### 反例：经 `Arc` 共享后直接写 `TcpStream`（rustc 1.97.0 实测）
+
+```rust,compile_fail,E0596
+use std::net::TcpStream;
+use std::sync::Arc;
+use std::io::Write;
+
+fn main() {
+    let stream = TcpStream::connect("127.0.0.1:80").unwrap();
+    let shared = Arc::new(stream);
+    let s2 = Arc::clone(&shared);
+    s2.write_all(b"GET / HTTP/1.0
+
+").unwrap(); // ❌ Arc 只提供共享引用
+}
+```
+
+**错误**：`E0596 cannot borrow data in an Arc as mutable`。
+
+### ✅ 修正：`try_clone` 复制套接字句柄
+
+```rust
+use std::net::TcpStream;
+use std::io::Write;
+
+fn main() {
+    let stream = TcpStream::connect("127.0.0.1:80").unwrap();
+    let mut writer = stream.try_clone().unwrap(); // 内核级句柄克隆，可独立写
+    writer.write_all(b"GET / HTTP/1.0
+
+").unwrap();
+}
+```
+

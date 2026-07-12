@@ -733,3 +733,49 @@ Tokio 的异步（Async）任务切换成本远低于 OS 线程（~100ns vs ~1µ
 | Rust 系统设计原则与国际权威对齐 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Rust 系统设计原则与国际权威对齐 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust 系统设计原则与国际权威对齐 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+## ⚠️ 反例与陷阱
+
+### 反例：全局 `RefCell` 状态的嵌套可变借用（rustc 1.97.0 实测）
+
+```rust,no_run
+use std::cell::RefCell;
+
+thread_local! {
+    static STATE: RefCell<Vec<i32>> = RefCell::new(vec![]);
+}
+
+fn push(v: i32) {
+    STATE.with(|s| s.borrow_mut().push(v));
+}
+
+fn main() {
+    STATE.with(|s| {
+        let mut g = s.borrow_mut();
+        push(1);   // ❌ g 仍持有时再次 borrow_mut
+        g.push(2);
+    });
+}
+```
+
+**运行时输出**：`already borrowed: BorrowMutError`（panic，exit code 101）。
+
+### ✅ 修正：缩短借用作用域
+
+```rust
+use std::cell::RefCell;
+
+thread_local! {
+    static STATE: RefCell<Vec<i32>> = RefCell::new(vec![]);
+}
+
+fn push(v: i32) {
+    STATE.with(|s| s.borrow_mut().push(v));
+}
+
+fn main() {
+    push(1);
+    push(2); // 每次借用独立作用域，无嵌套
+}
+```
+

@@ -1888,3 +1888,28 @@ strip = true        # 去除符号
 | Toolchain（工具链与 Cargo） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Toolchain（工具链与 Cargo） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Toolchain（工具链与 Cargo） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+## ⚠️ 反例与陷阱
+
+### 反例：`gen` 在 Edition 2024 成为保留关键字（rustc 1.97.0 实测）
+
+升级工具链/edition 时常见的标识符冲突：
+
+```rust,compile_fail
+fn main() {
+    let gen = 5; // ❌ Edition 2024：`gen` 为保留关键字（预留给 gen blocks）
+    println!("{}", gen);
+}
+```
+
+**错误**：`error: expected identifier, found keyword gen`（`--edition 2024`；同代码在 2021 下可编译，属 edition 迁移陷阱）。
+
+### ✅ 修正：重命名标识符
+
+```rust
+fn main() {
+    let generator = 5;
+    println!("{}", generator);
+}
+```
+

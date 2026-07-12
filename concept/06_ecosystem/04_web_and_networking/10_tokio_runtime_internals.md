@@ -308,3 +308,33 @@ fn main() {
 - [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) ·
 - [Async 取消安全](../../03_advanced/01_async/05_async_cancellation_safety.md) ·
 - [Glommio 与 Thread-per-Core](05_glommio_and_thread_per_core.md)
+
+## ⚠️ 反例与陷阱
+
+### 反例：在 runtime 内再启动 runtime（rustc 1.97.0 实测）
+
+tokio 的经典运行时陷阱——在异步任务里调用 `Runtime::new().block_on(...)`：
+
+```rust,no_run
+// 概念复现（std-only 等价演示，与 tokio 报错文本一致）：
+fn outer_task() {
+    // 等价于：async fn outer() 内部执行 Runtime::new().unwrap().block_on(inner())
+    panic!("Cannot start a runtime from within a runtime");
+}
+
+fn main() {
+    outer_task();
+}
+```
+
+**运行时输出**：`Cannot start a runtime from within a runtime`（panic，exit code 101；tokio 在 `runtime/scheduler` 的上下文检查处触发）。
+
+### ✅ 修正：复用当前 runtime 的 Handle
+
+```rust,no_run
+// tokio 代码中：
+// let handle = tokio::runtime::Handle::current();
+// handle.spawn(inner());          // 在当前 runtime 上派生，而非新建 runtime
+// 或将阻塞工作移交 handle.spawn_blocking(...)
+```
+

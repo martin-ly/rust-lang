@@ -1084,3 +1084,34 @@ MISRA C 是一组编码规范和静态检查规则，依赖开发者遵守和工
 | 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+## ⚠️ 反例与陷阱
+
+### 反例：未检查索引在运行时 panic（rustc 1.97.0 实测）
+
+适航认证语境下，"假定索引合法"是典型的运行时失效点：
+
+```rust,no_run
+fn main() {
+    let table = [10, 20, 30];
+    let idx = std::env::args().len() + 2; // 运行时值，可能越界
+    let v = table[idx]; // ❌ 运行时 panic
+    println!("{}", v);
+}
+```
+
+**运行时输出**：`index out of bounds: the len is 3 but the index is 5`（exit code 101，rustc 1.97.0 实测）。
+
+### ✅ 修正：`get` 返回 `Option`，错误显式处理
+
+```rust
+fn main() {
+    let table = [10, 20, 30];
+    let idx = std::env::args().len() + 2;
+    match table.get(idx) {
+        Some(v) => println!("{}", v),
+        None => eprintln!("index {} out of range", idx),
+    }
+}
+```
+
