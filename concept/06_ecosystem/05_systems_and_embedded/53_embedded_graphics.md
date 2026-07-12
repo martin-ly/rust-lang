@@ -5,6 +5,7 @@
 
 > **EN**: Embedded Graphics Development with Rust
 > **Summary**: Embedded Graphics: Rust ecosystem tools, crates, and engineering practices.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **内容分级**: [综述级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **代码状态**: [示例级 — 已补充代码]
@@ -96,7 +97,7 @@
 > **架构洞察**: **嵌入式显示系统的核心是 MCU + 显示控制器 + 帧缓冲的三元组**——帧缓冲的大小直接决定可支持的分辨率和色深。
 > [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html)]
 > **关键约束**: MCU 的 SRAM 通常仅有 128KB~1MB，一个 480×320×16bit 的帧缓冲需要约 300KB，已接近许多 MCU 的极限。
-> [来源: [STM32 Reference Manual](https://www.st.com/resource/en/reference_manual/rm0090-stm32f405415-stm32f407417-stm32f427437-and-stm32f429439-advanced-armbased-32bit-mcus-stmicroelectronics.pdf) <!-- link: known-broken -->]
+> [来源: [STM32 Reference Manual](https://www.st.com/resource/en/reference_manual/rm0090-stm32f405415-stm32f407417-stm32f427437-and-stm32f429439-advanced-armbased-32bit-mcus-stmicroelectronics.pdf)]
 > [来源: [ILI9341 Datasheet](https://cdn-shop.adafruit.com/datasheets/ILI9341.pdf)] · [来源: [ST7789 Datasheet](https://www.displayfuture.com/Display/datasheet/controller/ST7789.pdf)]
 
 ---
@@ -638,7 +639,7 @@ DMA (Direct Memory Access) 在图形中的应用:
 ```
 
 > **DMA 洞察**: **DMA 是高分辨率嵌入式图形的必需品**——没有 DMA，CPU 将全部时间花在数据搬运上，无法处理用户输入或业务逻辑。
-> [来源: [STM32 DMA Application Note](https://www.st.com/resource/en/application_note/an4031-using-the-stm32f2-stm32f4-and-stm32f7-series-dma-controllers-stmicroelectronics.pdf) <!-- link: known-broken -->]
+> [来源: [STM32 DMA Application Note](https://www.st.com/resource/en/application_note/an4031-using-the-stm32f2-stm32f4-and-stm32f7-series-dma-controllers-stmicroelectronics.pdf)]
 > [来源: [DMA Cache Coherency](https://developer.arm.com/documentation/dai0298/a/)]
 > **安全洞察**: DMA 缓冲区必须通过 `static mut` 或 `cortex-m::singleton!` 分配，且需要与缓存行对齐（通常 32 字节）以避免缓存一致性（Coherence）问题。这要求 `unsafe` 或专门的 safe 抽象。
 > [来源: [Rust Embedded Book — DMA](https://docs.rust-embedded.org/book/index.html)]
@@ -946,7 +947,7 @@ graph TD
 | [ttf-parser](https://docs.rs/ttf-parser/latest/) | ✅ 二级 | 纯 Rust TrueType 解析器 |
 | [embassy](https://embassy.dev/) | ✅ 二级 | 嵌入式 async 框架 |
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 二级 | 性能优化指南 |
-| [STM32 Reference Manual](https://www.st.com/) <!-- link: known-broken --> | ✅ 二级 | 硬件参考手册 |
+| [STM32 Reference Manual](https://www.st.com/) | ✅ 二级 | 硬件参考手册 |
 | [RTIC](https://rtic.rs/) | ✅ 二级 | 实时中断驱动并发 |
 | [probe-rs](https://probe.rs/) | ✅ 二级 | 嵌入式调试工具 |
 
@@ -958,7 +959,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-26 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-26
 **状态**: ✅ 概念文件创建完成
 

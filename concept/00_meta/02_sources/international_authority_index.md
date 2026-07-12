@@ -188,7 +188,7 @@
 
 - **GHC User Guide**: <https://downloads.haskell.org/ghc/latest/docs/users_guide/>
 - **Typeclassopedia**: <https://wiki.haskell.org/Typeclassopedia>
-- **Haskell Wiki**: <https://wiki.haskell.org/>
+- **Haskell Wiki**: <https://wiki.haskell.org/Haskell>
 
 ### Go
 

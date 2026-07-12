@@ -585,9 +585,9 @@ serde = { version = "1.0", public = true }
 
 ---
 
-## 八、待补充代码任务
+## 八、代码任务与演进方向
 
 - [x] 为本文件中的每个特性补充最小 nightly 示例（使用 `rust,ignore`，待 API 稳定后转为可编译示例）
 - [x] 在 `crates/c08_algorithms/src/rust_197_features.rs` 中维护 1.97/1.98 API 的等效实现与单元测试
 - [x] 补充 1.98 已确认标准库 API 预览（`float_algebraic`、`int_format_into`、`core::range`、`NonZero::from_str_radix`、`Box::as_ptr`、`hex_literal_case`）
-- [ ] 将本文件关键术语同步到 `concept/00_meta/terminology_glossary.md`（待 1.98 特性稳定后执行）
+- **演进方向（待办）**: 待 1.98 特性稳定后，将本文件关键术语同步到术语表（`concept/00_meta/01_terminology/terminology_glossary.md`）

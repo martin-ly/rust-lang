@@ -2,6 +2,7 @@
 
 > **EN**: Attributes
 > **Summary**: Rust 属性系统：内置属性分类（测试、derive、诊断、代码生成、限制、类型系统（Type System）、调试器）及其在 item、表达式、语句上的应用规则。 Rust attribute system: built-in attribute categories and application rules on items, expressions, and statements.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -170,7 +171,6 @@ fn decorated() {}
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

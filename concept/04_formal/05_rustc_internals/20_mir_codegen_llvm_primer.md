@@ -5,6 +5,7 @@
 
 > **EN**: MIR, Codegen, and LLVM IR Primer
 > **Summary**: Introduces Rust's Mid-level IR (MIR), the MIR → codegen → LLVM IR pipeline, and how to inspect MIR and LLVM IR using rustc.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -356,7 +357,6 @@ MIR 仍保留 Rust 高层语义（如 `move`、`Drop`、借用检查标记、基
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-09
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

@@ -2,6 +2,7 @@
 
 > **EN**: Cargo Script: Writing and Running Rust Scripts
 > **Summary**: Cargo Script single-file programs with frontmatter dependencies and `cargo` execution.
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **来源**: [Cargo Book — Scripts](https://doc.rust-lang.org/cargo/reference/unstable.html#script) · [Rust 1.85 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 > > **权威来源**: 本文件为 `concept/` 权威页。
@@ -495,7 +496,6 @@ Cargo Script:  File = Crate (单模块，无子模块)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

@@ -6,6 +6,7 @@
 >
 > **EN**: Range Types
 > **Summary**: Range Types: intermediate Rust mechanisms, patterns, and practical examples.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L2-L4
@@ -363,7 +364,6 @@ let rev = 10..0;
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0 (Edition 2024)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-19
 **状态**: ✅ 已对齐 Rust 1.97.0 稳定版发布内容
 

@@ -1,5 +1,6 @@
 > **EN**: Design Patterns Glossary
 > **Summary**: Canonical glossary for Rust design patterns: GoF classifications, Rust idioms, concurrency/async terms, and cross-links to authoritative concept pages.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **内容分级**: [参考级]
 > **Bloom 层级**: L1-L2
@@ -242,7 +243,6 @@ pub trait SimpleFuture {
 > **权威来源对齐变更日志**: 2026-07-09 将内部链接迁移至 `concept/` 权威页，补全 Rust 代码示例、术语表与决策树
 
 **文档版本**: 2.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **状态**: ✅ 权威页（canonical）
 
 ## 过渡段

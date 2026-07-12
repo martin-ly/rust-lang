@@ -5,6 +5,7 @@
 
 > **EN**: rustc Driver, rustc_interface, and Stable MIR
 > **Summary**: Explains how to drive the Rust compiler programmatically via `rustc_driver` and `rustc_interface`, the `rustc_private` feature, and the goals of Stable MIR (`rustc_public`).
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -189,7 +190,7 @@ rustup component add rustc-dev llvm-tools
 
 ## 嵌入式测验
 
-理解「嵌入式测验」需要把握测验 1：`rustc_driver` 和 `rustc_interf…、测验 2：外部 crate 使用 `rustc_driver` 需要什…、测验 3：Stable MIR（rustc_public）试图解决什么…与测验 4：为什么 rustdoc 更适合用 `rustc_interf…，本节依次展开。
+理解「嵌入式测验」需要把握测验 1：`rustc_driver` 和 `rustc_interf…、测验 2：外部 crate 使用`rustc_driver` 需要什…、测验 3：Stable MIR（rustc_public）试图解决什么…与测验 4：为什么 rustdoc 更适合用 `rustc_interf…，本节依次展开。
 
 ### 测验 1：`rustc_driver` 和 `rustc_interface` 的主要区别是什么？
 
@@ -250,6 +251,5 @@ rustdoc 需要拿到类型检查结果来生成文档，但不需要生成二进
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 / rustc_driver / Stable MIR 项目目标
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Rustc Dev Guide driver/interface 文档

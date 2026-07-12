@@ -4,6 +4,7 @@
 >
 > **EN**: Derive CoercePointee Preview
 > **Summary**: Preview of the `CoercePointee` derive for custom smart-pointer types.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -54,7 +55,6 @@
   - [五、演进路线](#五演进路线)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [十、边界测试：CoercePointee 派生的编译错误](#十边界测试coercepointee-派生的编译错误)
     - [10.1 边界测试：非 `#[repr(transparent)]` 类型的 CoercePointee（编译错误）](#101-边界测试非-reprtransparent-类型的-coercepointee编译错误)
     - [10.2 边界测试：多字段 struct 的 CoercePointee 尝试（编译错误）](#102-边界测试多字段-struct-的-coercepointee-尝试编译错误)
@@ -401,13 +401,10 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 
 ---
-
-## 权威来源索引
 
 ## 十、边界测试：CoercePointee 派生的编译错误
 

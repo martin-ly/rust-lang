@@ -7,7 +7,7 @@
       "D2": 1,
       "D3": 0,
       "D4": 0,
-      "D5": 17,
+      "D5": 20,
       "D6": 0
     },
     "pct": {
@@ -15,11 +15,11 @@
       "D2": 0.2,
       "D3": 0.0,
       "D4": 0.0,
-      "D5": 3.5,
+      "D5": 4.1,
       "D6": 0.0
     },
     "D2_base_files_with_asp_and_bloom": 297,
-    "flagged_files": 18
+    "flagged_files": 21
   },
   "examples": {
     "D1": [],
@@ -35,6 +35,18 @@
       [
         "concept/00_meta/01_terminology/terminology_glossary.md",
         "稳定层 nightly/preview 关键词 18 处"
+      ],
+      [
+        "concept/00_meta/knowledge_topology/01_concept_definition_atlas.md",
+        "稳定层 nightly/preview 关键词 79 处"
+      ],
+      [
+        "concept/00_meta/knowledge_topology/02_attribute_relationship_atlas.md",
+        "稳定层 nightly/preview 关键词 8 处"
+      ],
+      [
+        "concept/00_meta/knowledge_topology/07_intra_layer_mapping_atlas.md",
+        "稳定层 nightly/preview 关键词 14 处"
       ],
       [
         "concept/02_intermediate/00_traits/01_traits.md",
@@ -62,22 +74,10 @@
       ],
       [
         "concept/06_ecosystem/00_toolchain/47_compiler_infrastructure.md",
-        "稳定层 nightly/preview 关键词 14 处"
+        "稳定层 nightly/preview 关键词 13 处"
       ],
       [
         "concept/06_ecosystem/00_toolchain/70_rustc_bootstrap.md",
-        "稳定层 nightly/preview 关键词 4 处"
-      ],
-      [
-        "concept/06_ecosystem/01_cargo/09_cargo_script.md",
-        "稳定层 nightly/preview 关键词 5 处"
-      ],
-      [
-        "concept/06_ecosystem/01_cargo/10_public_private_deps.md",
-        "稳定层 nightly/preview 关键词 6 处"
-      ],
-      [
-        "concept/06_ecosystem/01_cargo/11_resolver_v3_public_feature_unification.md",
         "稳定层 nightly/preview 关键词 4 处"
       ]
     ],
@@ -92,6 +92,21 @@
     "concept/00_meta/04_navigation/foundations_gap_closure_index.md": {
       "D2": [
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集"
+      ]
+    },
+    "concept/00_meta/knowledge_topology/01_concept_definition_atlas.md": {
+      "D5": [
+        "稳定层 nightly/preview 关键词 79 处"
+      ]
+    },
+    "concept/00_meta/knowledge_topology/02_attribute_relationship_atlas.md": {
+      "D5": [
+        "稳定层 nightly/preview 关键词 8 处"
+      ]
+    },
+    "concept/00_meta/knowledge_topology/07_intra_layer_mapping_atlas.md": {
+      "D5": [
+        "稳定层 nightly/preview 关键词 14 处"
       ]
     },
     "concept/02_intermediate/00_traits/01_traits.md": {
@@ -126,7 +141,7 @@
     },
     "concept/06_ecosystem/00_toolchain/47_compiler_infrastructure.md": {
       "D5": [
-        "稳定层 nightly/preview 关键词 14 处"
+        "稳定层 nightly/preview 关键词 13 处"
       ]
     },
     "concept/06_ecosystem/00_toolchain/70_rustc_bootstrap.md": {
@@ -141,7 +156,7 @@
     },
     "concept/06_ecosystem/01_cargo/10_public_private_deps.md": {
       "D5": [
-        "稳定层 nightly/preview 关键词 6 处"
+        "稳定层 nightly/preview 关键词 5 处"
       ]
     },
     "concept/06_ecosystem/01_cargo/11_resolver_v3_public_feature_unification.md": {
@@ -151,7 +166,7 @@
     },
     "concept/06_ecosystem/01_cargo/87_build_std.md": {
       "D5": [
-        "稳定层 nightly/preview 关键词 11 处"
+        "稳定层 nightly/preview 关键词 12 处"
       ]
     },
     "concept/06_ecosystem/05_systems_and_embedded/08_wasi.md": {
@@ -166,7 +181,7 @@
     },
     "concept/06_ecosystem/11_domain_applications/54_webassembly_advanced.md": {
       "D5": [
-        "稳定层 nightly/preview 关键词 28 处"
+        "稳定层 nightly/preview 关键词 30 处"
       ]
     },
     "concept/sources/INDEX.md": {

@@ -4,6 +4,7 @@
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
 > **来源**: [std::net](https://doc.rust-lang.org/std/net/) · [Tokio Docs](https://docs.rs/tokio/) · [Async Book](https://rust-lang.github.io/async-book/index.html) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 ---
 
 > **内容分级**: [专家级]
@@ -762,7 +763,6 @@ graph LR
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 
 ---
@@ -885,7 +885,7 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」涉及测验 1：`tokio::net::TcpListener::bind…、测验 2：在 async 函数中直接调用 `std::thread::…、测验 3：`tokio::spawn` 返回什么？任务返回值如何获取？…、测验 4：`async fn` 与同步函数在返回类型上有什么本质区别？…等5个方面，本节逐一说明其要点。
+「嵌入式测验（Embedded Quiz）」涉及测验 1：`tokio::net::TcpListener::bind…、测验 2：在 async 函数中直接调用`std::thread::…、测验 3：`tokio::spawn` 返回什么？任务返回值如何获取？…、测验 4：`async fn` 与同步函数在返回类型上有什么本质区别？…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：`tokio::net::TcpListener::bind(...).await` 与 `std::net::TcpListener::bind(...)` 在阻塞行为上有什么区别？（理解层）
 

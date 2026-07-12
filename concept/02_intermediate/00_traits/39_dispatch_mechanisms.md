@@ -6,6 +6,7 @@
 >
 > **EN**: Dispatch Mechanisms
 > **Summary**: Static and dynamic dispatch in Rust: monomorphization, trait objects, vtables, object safety, and performance trade-offs.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -16,7 +17,7 @@
 
 ---
 
-> **来源**: 本文档由 `crates/*/docs/` 合规整改迁移而来。原始 crate 文档现为摘要占位符，指向本权威页：
+> **来源**: 本文档由 `crates/*/docs/` 合规整改迁移而来。原始 crate 文档现为摘要页，指向本权威页：
 > **权威来源**: [concept/02_intermediate/00_traits/39_dispatch_mechanisms.md](39_dispatch_mechanisms.md)
 
 ---
@@ -1387,6 +1388,8 @@ trait Process {
 
 ## Rust 分派机制深度扩展
 
+以下章节为分派机制的深度扩展材料，从虚表的内存布局与生成过程，到 trait object 在编译期的约束与运行时开销，逐层展开静态分派与动态分派的实现细节。
+
 ## 🔬 虚表（VTable）详解
 
 「虚表（VTable）详解」部分包含 VTable 内存布局 与  VTable 生成示例 两条主线，本节依次说明。
@@ -2023,7 +2026,6 @@ fn plugin_system_example() {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

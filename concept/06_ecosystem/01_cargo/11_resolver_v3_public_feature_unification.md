@@ -4,6 +4,7 @@
 
 > **EN**: Resolver v3 and `public = true` Feature-Unification Demo
 > **Summary**: A runnable workspace example showing how Cargo resolver v3 and `public = true` interact with feature unification: crate A depends on B and C; B and C publicly depend on D with different features; A also depends on D directly. The resulting `crate-d` is built with the union of all requested features.
+> **Rust 版本**: 1.97.0 (stable)
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -175,7 +176,6 @@ D (serde): Hello from crate-d / serde feature
 ---
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0 (stable)
 **最后更新**: 2026-07-09
 **状态**: ✅ 可运行示例已落地
 

@@ -249,7 +249,7 @@
 
 ### Curry-Howard 对应 (Stanford CS242 Lecture 16-20) {#curry-howard-对应-stanford-cs242-lecture-16-20}
 
-> **[POPL - Type Theory Advances](https://popl.sigplan.org/) <!-- link: known-broken -->**
+> **[POPL - Type Theory Advances](https://www.sigplan.org/Conferences/POPL/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > **课程**: Stanford CS242: Programming Languages
@@ -1014,7 +1014,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 
 ### EPFL (瑞士洛桑联邦理工学院) {#epfl-瑞士洛桑联邦理工学院}
 
-> **[POPL - Type Theory Advances](https://popl.sigplan.org/) <!-- link: known-broken -->**
+> **[POPL - Type Theory Advances](https://www.sigplan.org/Conferences/POPL/)**
 
 **课程**: Concurrent and Parallel Programming
 
@@ -3485,7 +3485,7 @@ $。
 
 ## 🆕 Rust 1.97.0 更新内容 {#rust-1960-更新内容}
 
-> **[POPL - Type Theory Advances](https://popl.sigplan.org/) <!-- link: known-broken -->**
+> **[POPL - Type Theory Advances](https://www.sigplan.org/Conferences/POPL/)**
 > **发布日期**: 2026-03-05
 > **最后更新**: 2026-03-05
 > **状态**: ✅ 已整合

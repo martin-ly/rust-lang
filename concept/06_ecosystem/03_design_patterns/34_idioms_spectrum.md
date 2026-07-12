@@ -901,7 +901,7 @@ let app = ServiceBuilder::new()
 
 ### 9.3
 
-> [Bevy ECS docs](https://bevyengine.org/learn/book/ecs/); [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/) ECS 系统图与 Archetype
+> [Bevy ECS docs](https://bevy.org/learn/quick-start/getting-started/ecs/); [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/) ECS 系统图与 Archetype
 > **惯用**: 用 ECS（Entity-Component-System）将数据（Component）与行为（System）分离，通过 Archetype 实现缓存友好布局。
 
 ```rust,ignore
@@ -1141,7 +1141,7 @@ quadrantChart
 
 > **如何根据经验水平选择正确的惯用法层级？**
 
-```
+```text
 新手期（0-3 个月）
     └─ 重点：L0 词法级 + L1 类型级
     └─ 掌握：? 传播、match 解构、if let、Newtype、Iterator 链

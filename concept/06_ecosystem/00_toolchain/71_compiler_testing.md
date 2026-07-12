@@ -5,6 +5,7 @@
 
 > **EN**: Testing the Rust Compiler
 > **Summary**: Explains the multi-layer testing infrastructure for rustc, including compiletest, package tests, tidy, tool tests, Crater, and performance testing.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -268,6 +269,5 @@ Tidy 检查代码风格规范，如行长度、许可证头、命名约定、禁
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 / rustc 测试体系
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Rustc Dev Guide compiler testing 文档

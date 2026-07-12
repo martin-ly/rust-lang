@@ -414,7 +414,7 @@ fn main() {
 ```markdown
 ### 概念定义 {#概念定义-1}
 
-> **[POPL - Programming Languages Research](https://popl.sigplan.org/) <!-- link: known-broken -->**
+> **[POPL - Programming Languages Research](https://www.sigplan.org/Conferences/POPL/)**
 
 **概念名称**: [概念名称]
 
@@ -439,7 +439,7 @@ fn main() {
 ```markdown
 ### 概念定义 {#概念定义-1}
 
-> **[PLDI - Programming Language Design](https://pldi.sigplan.org/)**
+> **[PLDI - Programming Language Design](https://www.sigplan.org/Conferences/PLDI/)**
 
 **概念名称**: 异步编程 (Async Programming)
 
@@ -622,7 +622,7 @@ fn main() {
 ```markdown
 ### 概念矩阵 {#概念矩阵}
 
-> **[POPL - Programming Languages Research](https://popl.sigplan.org/) <!-- link: known-broken -->**
+> **[POPL - Programming Languages Research](https://www.sigplan.org/Conferences/POPL/)**
 
 | 维度1 | 维度2 | 维度3 | 综合评估 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |

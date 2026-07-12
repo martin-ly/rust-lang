@@ -4,6 +4,7 @@
 >
 > **EN**: WebAssembly
 > **Summary**: WebAssembly — Rust's WebAssembly ecosystem: a portable, safe, efficient bytecode for running beyond the browser.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **Bloom 层级**: L3-L4
@@ -466,7 +467,6 @@ Rust Wasm 工具链:
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 

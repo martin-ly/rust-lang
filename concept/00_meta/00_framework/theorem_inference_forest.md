@@ -178,7 +178,7 @@ graph TD
     ↓
 引理 L1-1: Rust 值可被安全遗忘（mem::forget 不触发 UB）
     ↓
-定理 T-001: 所有权唯一性 [01_ownership.md T-001, RustBelt POPL 2018](https://popl.sigplan.org/)
+定理 T-001: 所有权唯一性 [01_ownership.md T-001, RustBelt POPL 2018](https://www.sigplan.org/Conferences/POPL/)
     「每个值在任意时刻有且只有一个所有者」
     ↓
 定理 T-002: Move 语义完备性 [来源: 01_ownership.md T-002, Oxide arXiv 2019]

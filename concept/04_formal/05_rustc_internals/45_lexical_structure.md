@@ -2,6 +2,7 @@
 
 > **EN**: Lexical Structure
 > **Summary**: Rust 源程序的 lexical 层面：输入格式、shebang、关键字、标识符、注释、空白、token 分类，以及它们如何被解析为语法单元。 Lexical layer of Rust source programs: input format, shebang, keywords, identifiers, comments, whitespace, token classification, and how they form syntactic units.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -253,7 +254,6 @@ DelimitedTree ::= "(" TokenTree* ")"
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

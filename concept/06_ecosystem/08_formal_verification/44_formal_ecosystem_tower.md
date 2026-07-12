@@ -4,6 +4,7 @@
 >
 > **EN**: Formal Methods
 > **Summary**: Formal Methods. Guide to 05 Formal Ecosystem Tower.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -25,7 +26,7 @@
 **变更日志**:
 
 - v1.0 (2026-05-13): 初始版本——从归档文件 `02.md` 结构化重组，纳入 L6 生态层规范体系
-- v1.1 (2026-05-13): 补充层级标记、来源标注、知识来源关系、待补充方向
+- v1.1 (2026-05-13): 补充层级标记、来源标注、知识来源关系、演进方向
 
 ---
 
@@ -260,7 +261,7 @@ quadrantChart
 
 ---
 
-## 待补充与演进方向（TODOs）
+## 演进方向
 
 本节围绕「待补充与演进方向（TODOs）」展开，依次讨论核心 Crate MSRV 与 Edition 兼容性矩阵、Kani + GitHub Actions：形式化验证 CI 集成、Wasmtime 形式化语义与 Rust 实现一致性与形式化视角 vs 传统功能分类映射。
 
@@ -403,7 +404,6 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

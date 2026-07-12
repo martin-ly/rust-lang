@@ -5,6 +5,7 @@
 
 > **EN**: Bootstrapping the Rust Compiler
 > **Summary**: Explains how rustc builds itself in stages using `x.py`/`x`, the role of stage0/stage1/stage2, `cfg(bootstrap)`, and the bootstrap tool modes.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -134,7 +135,7 @@ debug-assertions = true
 
 ## 五、`cfg(bootstrap)` 与 `RUSTC_BOOTSTRAP`
 
-「`cfg(bootstrap)` 与 `RUSTC_BOO…」部分包含 `cfg(bootstrap)` 与  `RUSTC_BOOTSTRAP` 两条主线，本节依次说明。
+「`cfg(bootstrap)` 与 `RUSTC_BOO…」部分包含`cfg(bootstrap)` 与 `RUSTC_BOOTSTRAP` 两条主线，本节依次说明。
 
 ### `cfg(bootstrap)`
 
@@ -235,7 +236,6 @@ Stage 1 是用 stage0（旧 beta）编译当前源码得到的；Stage 2 是用 
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 / rustc bootstrap 文档
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Rustc Dev Guide bootstrapping 文档
 

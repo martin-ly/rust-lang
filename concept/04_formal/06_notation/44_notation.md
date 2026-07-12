@@ -2,6 +2,7 @@
 
 > **EN**: Notation
 > **Summary**: Rust Reference 使用的形式化记法约定：BNF/EBNF 风格产生式、Unicode 属性、规则标识符与测试链接的解读方式。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -124,7 +125,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

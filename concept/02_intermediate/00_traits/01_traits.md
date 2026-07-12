@@ -7,6 +7,7 @@
 >
 > **EN**: Traits
 > **Summary**: Traits define shared behavior in Rust: interfaces with methods, associated types, and default implementations that can be composed through trait bounds. The chapter explores implementing traits, trait objects, object safety, the orphan rule, coherence, and advanced patterns such as associated types and blanket impls.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Trait](../../../knowledge/02_intermediate/06_traits.md)
@@ -45,12 +46,12 @@
 **变更日志**:
 
 - v2.3 (2026-05-14): 深化 Const Trait（impl const Trait vs ~const 区别、macro_rules! 替代方案）、
-- #[fundamental]（`Pin<P>` 修正、透明性原理、与 non_exhaustive 对比）；更新 TODO 列表
+- #[fundamental]（`Pin<P>` 修正、透明性原理、与 non_exhaustive 对比）；更新待办清单
 - v2.2 (2026-05-13): Phase A-2 形式化深化——新增§4.1b Coherence 的形式化逻辑基础（类型论一致性公理、Orphan Rule [来源: [RFC 1023](https://rust-lang.github.io/rfcs//1023-rebalancing-coherence.html)] covering 条件数学定义、
 - System F 约束多态对接、
 - Blanket impl 的 Horn 子句可满足性与重叠检测算法）
 - v2.1 (2026-05-13): 补充 RPITIT 存在类型 vs 全称类型形式化语义与高阶边界、
-- Const Trait / ~const 实验特性、#[fundamental] 与 Orphan Rule 例外、Negative Impls 形式化语义；更新 TODO 列表
+- Const Trait / ~const 实验特性、#[fundamental] 与 Orphan Rule 例外、Negative Impls 形式化语义；更新待办清单
 - v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡
 - v1.0 (2026-05-12): 初始版本
 
@@ -163,7 +164,7 @@
     - [12.2 Next Solver 的核心改进](#122-next-solver-的核心改进)
     - [12.3 对语言特性的解锁效应](#123-对语言特性的解锁效应)
     - [12.4 迁移准备](#124-迁移准备)
-  - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
+  - [十一、演进方向](#十一演进方向)
     - [11.1 `impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）](#111-impl-trait-在-trait-定义中的使用rpitit--afit)
     - [11.2 `Const Trait` 与 `~const` 实验特性](#112-const-trait-与-const-实验特性)
     - [11.3 `#[fundamental]` Attribute 与 Orphan Rule 例外](#113-fundamental-attribute-与-orphan-rule-例外)
@@ -1682,7 +1683,7 @@ fn notify<T: Summary>(item: &T) { ... }
 | 异步（Async）与 Future | 03_advanced/01_async/02_async.md | 关联类型 Trait 的典型场景 |
 | 形式化验证 | [04_formal/04_rustbelt.md](../../04_formal/02_separation_logic/04_rustbelt.md) | Trait 系统的逻辑基础 |
 
-> **过渡到待补充方向**: 相关概念链接描绘了 Trait 在知识体系中的坐标，但任何文档都有演进空间。最后一节记录已识别的待补充项和优先级，为后续迭代提供明确的路线图。
+> **过渡到演进方向**: 相关概念链接描绘了 Trait 在知识体系中的坐标，但任何文档都有演进空间。最后一节记录已识别的演进方向与优先级，为后续迭代提供明确的路线图。
 
 ---
 
@@ -2325,7 +2326,7 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 
 ---
 
-## 十一、待补充与演进方向（TODOs）
+## 十一、演进方向
 
 理解「待补充与演进方向（TODOs）」需要把握 `impl Trait` 在 Trait 定义中的使用（RPITIT…、`Const Trait` 与 `~const` 实验特性、`#[fundamental]` Attribute 与 Orphan…、Specialization（`min_specialization`…等6个方面，本节依次展开。
 
@@ -2449,7 +2450,6 @@ trait LendingIterator {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

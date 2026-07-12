@@ -2,6 +2,7 @@
 >
 > **EN**: Formal Methods
 > **Summary**: Formal methods: type theory, ownership semantics, and verification tools.
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > ⚠️ **声明**: 本层使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
@@ -321,7 +322,6 @@ L4 的形式化成果输出到：
 > **内容分级**: [研究者级]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

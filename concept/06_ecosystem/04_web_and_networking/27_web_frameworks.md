@@ -6,6 +6,7 @@
 >
 > **EN**: Web Frameworks
 > **Summary**: Web Frameworks: Rust ecosystem tools, crates, and engineering practices.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **📎 交叉引用（Reference）**
 >
@@ -447,7 +448,7 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
   ├── 内部封装 Tokio（actix-rt 提供运行时入口）
   ├── 对外暴露 actix_web::rt::spawn（实际调用 tokio::spawn）
   └── 运行时切换不友好（深度绑定 actix-rt）
-  [Actix docs — Runtime](https://actix.rs/actors/)
+  [Actix docs — Runtime](https://docs.rs/actix-rt/latest/actix_rt/)
 
   Rocket:
   ├── Tokio 独占（0.5+ 后从自定义运行时迁移）
@@ -522,7 +523,7 @@ fn main() {
   │  Service::call(req, ctx) -> Future<Response> │
   └─────────────────────────────────────────────┘
   特征: 与 Actor 系统深度集成、自研生态
-  [Actix docs: Middleware](https://actix.rs/actors/)
+  [Actix docs: Middleware](https://actix.rs/docs/middleware)
 
   Rocket Fairings 模型:
   ┌─────────────────────────────────────────────┐
@@ -813,7 +814,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 12](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

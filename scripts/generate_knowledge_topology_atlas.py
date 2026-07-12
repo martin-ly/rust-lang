@@ -184,7 +184,9 @@ def header(title: str, en: str, summary: str) -> list[str]:
 
 
 def footer() -> list[str]:
-    return ["", "---", "", "> **内容分级**: [元层]"]
+    # 注意：不得在此重复声明 **内容分级** 等关键字段，否则触发
+    # check_metadata_consistency.py 的 D3（同文件字段重声明）。
+    return ["", "---", "", "> 本文件由 `scripts/generate_knowledge_topology_atlas.py` 从 `concept/**/*.md` 生成；请勿手工编辑，更新后重新运行生成脚本。"]
 
 
 def write_readme(data: dict[str, Any]) -> None:

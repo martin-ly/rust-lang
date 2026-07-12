@@ -4,6 +4,7 @@
 >
 > **EN**: Procedural Macros
 > **Summary**: Authoritative guide to procedural macros: derive, attribute, and function-like macros.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：过程宏（Procedural Macro）
@@ -572,7 +573,6 @@ pub fn my_macro(input: String) -> String {
 > **权威来源对齐变更日志**: 2026-07-10 Stage F L3 更新权威来源块 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

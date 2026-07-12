@@ -6,6 +6,7 @@
 >
 > **EN**: Newtype and Wrapper Types
 > **Summary**: Using newtype and wrapper patterns for type safety, zero-cost abstraction, and trait orphan rules.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶]
 >
@@ -491,7 +492,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -674,7 +674,7 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Newtype 模式的核心目的是什么？它如何实现"零成本"？…、测验 2：`struct Wrapper(String)` 与 `ty…、测验 3：如何为 Newtype 实现底层类型的 trait（如 `D…、测验 4：PhantomData 在 Newtype/包装器模式中有什…等5个方面。
+本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Newtype 模式的核心目的是什么？它如何实现"零成本"？…、测验 2：`struct Wrapper(String)` 与 `ty…、测验 3：如何为 Newtype 实现底层类型的 trait（如`D…、测验 4：PhantomData 在 Newtype/包装器模式中有什…等5个方面。
 
 ### 测验 1：Newtype 模式的核心目的是什么？它如何实现"零成本"？（理解层）
 

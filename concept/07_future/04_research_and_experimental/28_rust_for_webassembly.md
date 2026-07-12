@@ -5,6 +5,7 @@
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 
@@ -657,7 +658,6 @@ Rust panic in Wasm:
 > **权威来源对齐变更日志**: 2026-05-22 初始创建，覆盖工具链、框架、性能、内存模型与互操作 [Authority Source Sprint Batch 11](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 权威来源对齐完成
 

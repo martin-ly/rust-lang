@@ -4,6 +4,7 @@
 >
 > **EN**: Design Patterns
 > **Summary**: Design Patterns. Guide to 02 Patterns.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -1475,7 +1476,7 @@ fn main() {
 
 ---
 
-## 十一、待补充与演进方向（TODOs） {L6}
+## 十一、演进方向 {L6}
 >
 
 ### 8.1 设计模式 Benchmark 对比
@@ -1532,7 +1533,6 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

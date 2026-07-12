@@ -96,7 +96,7 @@
       - [`mem::forget` 的语义与边界](#memforget-的语义与边界)
       - [`ManuallyDrop<T>`：显式控制析构时机](#manuallydropt显式控制析构时机)
     - [8.3 补充：`ManuallyDrop` 和 `MaybeUninit` 的所有权例外](#83-补充manuallydrop-和-maybeuninit-的所有权例外)
-  - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
+  - [十一、演进方向](#十一演进方向)
     - [补充：`Drop` 与 `std::mem::forget` 边界](#补充drop-与-stdmemforget-边界)
     - [补充：`ManuallyDrop` 与 `MaybeUninit` 所有权例外](#补充manuallydrop-与-maybeuninit-所有权例外)
     - [补充：Rust 所有权 vs C++ `unique_ptr`](#补充rust-所有权-vs-c-unique_ptr)
@@ -1028,13 +1028,13 @@ unsafe {
 
 ---
 
-## 十一、待补充与演进方向（TODOs）
+## 十一、演进方向
 
 本节从补充：`Drop` 与 `std::mem::forget` 边界、补充：`ManuallyDrop` 与 `MaybeUninit` 所…、补充：Rust 所有权 vs C++ `unique_ptr`、补充：`Pin<T>` 与所有权的交互等6个方面切入，剖析「待补充与演进方向（TODOs）」的核心内容。
 
 ### 补充：`Drop` 与 `std::mem::forget` 边界
 
-- [x] **TODO**: 补充 `Drop` 的 `std::mem::forget` 边界分析 —— 优先级: 中 —— 已完成 §8.2
+- **演进方向**: 补充 `Drop` 的 `std::mem::forget` 边界分析 —— 优先级: 中 —— 已完成 §8.2
 
 > **定义**：`std::mem::forget<T>(t)` 取得 `T` 的所有权并**永不释放**，从而抑制 `Drop::drop` 的调用。它不改变所有权的归属，只是把释放义务从编译器自动管理中移除。
 
@@ -1051,7 +1051,7 @@ mem::forget(s); // s 的内存被泄漏，Drop 不会执行
 
 ### 补充：`ManuallyDrop` 与 `MaybeUninit` 所有权例外
 
-- [x] **TODO**: 补充 `ManuallyDrop` 和 `MaybeUninit` 的所有权例外 —— 优先级: 中 —— 已完成 §8.3
+- **演进方向**: 补充 `ManuallyDrop` 和 `MaybeUninit` 的所有权例外 —— 优先级: 中 —— 已完成 §8.3
 
 > **定义**：`ManuallyDrop<T>` 包裹一个 `T`，允许程序员显式控制何时调用 drop；`MaybeUninit<T>` 是一块可能未初始化的 `T` 内存，编译器不假设它已构造，因此不自动 drop。
 
@@ -1072,7 +1072,7 @@ unsafe { let _ = u.assume_init(); } // 取得所有权后才负责 drop
 
 ### 补充：Rust 所有权 vs C++ `unique_ptr`
 
-- [x] **TODO**: 添加与 C++ `unique_ptr` 的深度对比示例 —— 优先级: 低 —— 已完成 §8.1
+- **演进方向**: 添加与 C++ `unique_ptr` 的深度对比示例 —— 优先级: 低 —— 已完成 §8.1
 
 > **定义**：C++ `std::unique_ptr<T>` 通过运行时指针实现独占所有权，转移通过 `std::move`；Rust 的所有权是**语言核心机制**，赋值即 move/copy，无需指针包装。
 
@@ -1095,7 +1095,7 @@ let b = a;
 
 ### 补充：`Pin<T>` 与所有权的交互
 
-- [x] **TODO**: 补充 `Pin<T>` 与所有权的交互 —— 优先级: 高 —— 已完成 v1.1
+- **演进方向**: 补充 `Pin<T>` 与所有权的交互 —— 优先级: 高 —— 已完成 v1.1
 
 `Pin<P<T>>`（其中 P 是指针类型如 `Box<T>`、`&mut T`）是 Rust 中一个**不移动所有权**的封装器。它不改变所有权的归属，但增加了**位置不变性**（location invariance）约束：
 
@@ -1134,7 +1134,7 @@ fn main() {
 
 ### 补充：跨线程所有权转移（Send）的形式化视角
 
-- [x] **TODO**: 补充跨线程所有权转移（`Send` trait）的形式化视角 —— 优先级: 高 —— 已完成 v1.1
+- **演进方向**: 补充跨线程所有权转移（`Send` trait）的形式化视角 —— 优先级: 高 —— 已完成 v1.1
 
 ```text
 Send trait 的形式化语义:
@@ -1170,7 +1170,7 @@ Send trait 的形式化语义:
 
 ### 补充：所有权与 FFI / unsafe 边界的交互
 
-- [x] **TODO**: 补充所有权与 FFI / unsafe 边界的交互 —— 优先级: 高 —— 已完成 v1.1
+- **演进方向**: 补充所有权与 FFI / unsafe 边界的交互 —— 优先级: 高 —— 已完成 v1.1
 
 ```text
 FFI 边界是所有权系统的"公理缺口":

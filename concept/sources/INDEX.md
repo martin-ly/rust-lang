@@ -138,7 +138,7 @@
 1. ✅ **精确到章节**: `[REF — §4.1.9 Borrowing](https://doc.rust-lang.org/reference/introduction.html)` 或 `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)`
 2. ✅ **标注来源状态**: 对 nightly/unstable 特性标注 `[UNB — gen_blocks](https://doc.rust-lang.org/nightly/unstable-book/index.html) (nightly, 1.95+)`
 3. ✅ **区分原创与引用（Reference）**: `[💡 原创分析](../00_meta/00_framework/methodology.md)` 仅用于有实质原创洞见的段落
-4. ✅ **论文引用（Reference）完整**: `[Jung21 — Stacked Borrows, POPL 2021, §3.2](https://popl.sigplan.org/)`
+4. ✅ **论文引用（Reference）完整**: `[Jung21 — Stacked Borrows, POPL 2021, §3.2](https://www.sigplan.org/Conferences/POPL/)`
 
 ---
 

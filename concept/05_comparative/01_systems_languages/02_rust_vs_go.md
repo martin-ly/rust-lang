@@ -6,6 +6,7 @@
 >
 > **EN**: Rust vs Go
 > **Summary**: Comparative analysis of Rust and Go across memory safety, concurrency, runtime, and error handling.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L5 对比分析
@@ -745,11 +746,11 @@ func ParseJSON(input string) string {
 > **推理链**: Rust 的所有权系统 ⟹ 编译期消除数据竞争 ⟹ 零运行时 GC 开销 ⟹ 适合系统编程与高性能服务。
 > **推理链**: Go 的 GC 简化内存管理 ⟹ 降低开发者心智负担 ⟹ 适合快速开发与云原生微服务 ⟹ 但无法保证最坏情况延迟。
 
-## 十三、待补充与演进方向（TODOs）
+## 十三、演进方向
 
-- [x] **TODO**: 补充具体微服务场景的性能对比数据 —— 已完成 §8.1
-- [x] **TODO**: 补充混合使用 Rust+Go 的架构模式 —— 已完成 §8.2
-- [x] **TODO**: 补充 Rust async/await 与 Go goroutine 在 IO 密集型场景的性能基准测试数据 —— 已完成 §8.1
+- **演进方向**: 补充具体微服务场景的性能对比数据 —— 已完成 §8.1
+- **演进方向**: 补充混合使用 Rust+Go 的架构模式 —— 已完成 §8.2
+- **演进方向**: 补充 Rust async/await 与 Go goroutine 在 IO 密集型场景的性能基准测试数据 —— 已完成 §8.1
 
 ---
 
@@ -771,7 +772,6 @@ func ParseJSON(input string) string {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

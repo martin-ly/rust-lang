@@ -5,6 +5,7 @@
 >
 > **EN**: Serde Patterns
 > **Summary**: Serde Patterns: intermediate Rust mechanisms, patterns, and practical examples.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -528,7 +529,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 
@@ -815,7 +815,7 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」涉及测验 1：如何让 Serde 在序列化时将 Rust 字段名 `use…、测验 2：枚举的 `#[serde(tag = "type")]` 属…、测验 3：`#[serde(untagged)]` 的序列化/反序列化…、测验 4：如果希望字段在 JSON 中缺失时使用默认值，应该如何配置？…等5个方面，本节逐一说明其要点。
+「嵌入式测验（Embedded Quiz）」涉及测验 1：如何让 Serde 在序列化时将 Rust 字段名 `use…、测验 2：枚举的`#[serde(tag = "type")]`属…、测验 3：`#[serde(untagged)]` 的序列化/反序列化…、测验 4：如果希望字段在 JSON 中缺失时使用默认值，应该如何配置？…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：如何让 Serde 在序列化时将 Rust 字段名 `user_name` 映射为 JSON 中的 `userName`？（理解层）
 

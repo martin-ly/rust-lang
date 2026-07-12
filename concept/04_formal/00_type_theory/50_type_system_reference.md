@@ -2,6 +2,7 @@
 
 > **EN**: Type System Reference
 > **Summary**: Rust Reference 对类型系统的完整规范：各类型子类、动态大小类型、内部可变性、子类型与变型、trait/lifetime 约束、类型强制转换、发散类型、生命周期（Lifetimes）省略。 Complete Rust Reference specification of the type system: subtypes, variances, trait/lifetime bounds, coercions, diverging types, and lifetime elision.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -404,7 +405,6 @@ Rust 类型系统的形式化基于：
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

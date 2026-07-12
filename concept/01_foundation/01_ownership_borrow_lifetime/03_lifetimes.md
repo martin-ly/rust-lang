@@ -39,7 +39,7 @@
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、生命周期（Lifetimes）规则矩阵、形式化视角、NLL 分析、示例反例
-- v2.2 (2026-05-14): 完成 TODO 双项——§13 Lifetime Elision 完整形式化（三条规则 ∀/⇒ 形式化、正例+反例、Rust Reference 来源）；§14 `impl Trait` 与生命周期（Lifetimes）推断交互（RPIT 捕获、APIT 差异、`+'a` 显式约束、where 对比、来源标注）
+- v2.2 (2026-05-14): 完成待办双项——§13 Lifetime Elision 完整形式化（三条规则 ∀/⇒ 形式化、正例+反例、Rust Reference 来源）；§14 `impl Trait` 与生命周期（Lifetimes）推断交互（RPIT 捕获、APIT 差异、`+'a` 显式约束、where 对比、来源标注）
 - v2.2 (2026-05-19): 补全权威来源标注——新增跨语言生命周期（Lifetimes）对比矩阵（C++ / Haskell / Go），补充 Polonius 与 Tree Borrows 来源，深化 NLL → Polonius 演进论证
 - v2.1 (2026-05-13): Phase BC 形式化深化——新增§1.3b Tofte-Talpin 区域推断算法的 Rust 适配（原始 ML 算法概述、三项关键适配、Rust 约束生成与求解两阶段算法、与 Polonius 演进关系）
 - v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡
@@ -393,7 +393,7 @@ graph BT
     style E fill:#fff,stroke:#333
 ```
 
-> **认知功能**: 此 Hasse 图将抽象的「生命周期偏序关系」转化为**可视化的层次结构**。读者可直观理解三个核心事实：(1) 'static 是「祖宗」，outlives 一切；(2) 生命周期形成从顶到底的偏序链；(3) 并列节点（如 'a 和 'b）不可比较，不能互相替代。此图特别有助于理解协变/逆变：协变 = 沿箭头向下替换安全，逆变 = 沿箭头向上替换安全。建议读者在编写泛型（Generics）约束时，将此图作为「哪个生命周期可以替代哪个」的参考。 [Davey & Priestley, *Introduction to Lattices and Order*](https://www.cambridge.org/core/books/introduction-to-lattices-and-order/); [Tofte & Talpin 1994](https://doi.org/10.1145/176454.176456)
+> **认知功能**: 此 Hasse 图将抽象的「生命周期偏序关系」转化为**可视化的层次结构**。读者可直观理解三个核心事实：(1) 'static 是「祖宗」，outlives 一切；(2) 生命周期形成从顶到底的偏序链；(3) 并列节点（如 'a 和 'b）不可比较，不能互相替代。此图特别有助于理解协变/逆变：协变 = 沿箭头向下替换安全，逆变 = 沿箭头向上替换安全。建议读者在编写泛型（Generics）约束时，将此图作为「哪个生命周期可以替代哪个」的参考。 [Davey & Priestley, *Introduction to Lattices and Order*](https://doi.org/10.1017/CBO9780511809088); [Tofte & Talpin 1994](https://doi.org/10.1145/176454.176456)
 
 ### 4.3 定理：函数签名中的生命周期省略规则 ⟹ Elision 的完备性
 

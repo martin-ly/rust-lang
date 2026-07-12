@@ -7,6 +7,7 @@
 >
 > **EN**: Performance Optimization
 > **Summary**: Performance Optimization — Measuring and tuning Rust code: the measure-first, optimize-second performance workflow.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[性能优化](../../../knowledge/03_advanced/05_performance_optimization.md)
@@ -521,7 +522,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -686,7 +686,7 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：在优化 Rust 代码前，第一步应该做什么？（理解层）、测验 2：`cargo bench` 与 `cargo test` 在…、测验 3：`#[inline]` 和 `#[inline(always…、测验 4：为什么 `Box::pin` 有时比栈上分配更 cache-…等5个方面，本节依次展开。
+理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：在优化 Rust 代码前，第一步应该做什么？（理解层）、测验 2：`cargo bench` 与 `cargo test` 在…、测验 3：`#[inline]` 和 `#[inline(always…、测验 4：为什么`Box::pin` 有时比栈上分配更 cache-…等5个方面，本节依次展开。
 
 ### 测验 1：在优化 Rust 代码前，第一步应该做什么？（理解层）
 

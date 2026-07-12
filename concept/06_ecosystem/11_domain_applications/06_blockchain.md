@@ -4,6 +4,7 @@
 >
 > **EN**: Blockchain Development in Rust
 > **Summary**: Blockchain ecosystem patterns, cryptography primitives, and smart-contract tooling in Rust.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -664,7 +665,7 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 
 ---
 
-## 八、待补充与演进方向（TODOs）
+## 八、演进方向
 
 - [x] **高**: 补充 Move 语言（Sui/Aptos）与 Rust 合约的所有权模型对比 —— 已完成 §四 —— 2026-05-14
 - [x] **高**: 补充形式化验证工具在 Substrate pallet 中的实际案例（如 Interlay 的 Kani 应用） —— 已完成 §五 —— 2026-05-14
@@ -688,7 +689,7 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 | 应用领域 | [`./04_application_domains.md`](../06_data_and_distributed/04_application_domains.md) | 区块链作为 L6 应用域 |
 
 > **[Solana Docs; Polkadot Substrate Docs; Near Protocol Docs; Kani Verification Blog; Rust in Blockchain Report](https://docs.solana.com/)** 区块链分析基于官方协议文档和形式化验证研究。✅
-> **[Smart Contract Security Research](https://consensys.github.io/smart-contract-best-practices/); [Reentrancy Attack Analysis](https://consensys.github.io/smart-contract-best-practices/attacks/reentrancy/); [The DAO Post-Mortem](https://www.coindesk.com/learn/the-dao-attack-that-changed-ethereum/)** 合约安全分析基于已公开的安全事件和研究文献。✅
+> **[Smart Contract Security Research](https://consensys.github.io/smart-contract-best-practices/); [Reentrancy Attack Analysis](https://consensys.github.io/smart-contract-best-practices/attacks/reentrancy/); [The DAO Hard Fork — Ethereum Foundation Blog](https://blog.ethereum.org/2016/07/20/hard-fork-completed)** 合约安全分析基于已公开的安全事件和研究文献。✅
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 形式化映射基于 RustBelt 和分离逻辑的理论框架。✅
 ---
 
@@ -696,7 +697,6 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

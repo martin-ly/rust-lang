@@ -4,6 +4,7 @@
 
 > **EN**: Industrial Rust Adoption Case Studies
 > **Summary**: Industrial Case Studies: Rust ecosystem tools, crates, and engineering practices.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **内容分级**: [专家级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **代码状态**: [示例级 — 已补充代码]
@@ -370,7 +371,6 @@ fn main() {
 ---
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+
 **最后更新**: 2026-06-01
 **状态**: ✅ 概念文档创建完成
 

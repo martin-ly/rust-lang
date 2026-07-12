@@ -4,6 +4,7 @@
 >
 > **EN**: Type Semantics
 > **Summary**: Type Semantics. Guide to 21 Type Semantics.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **权威来源**: 本文件为 `concept/` 权威页。
 >
@@ -912,6 +913,5 @@ fn pinned_self_ref() {
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)

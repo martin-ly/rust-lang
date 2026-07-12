@@ -41,7 +41,7 @@
 > [safe_drive](https://github.com/tier4/safe_drive) ·
 > [openrr](https://github.com/openrr/openrr) ·
 > [CycloneDDS](https://cyclonedds.io/) ·
-> [Fast DDS](https://www.eprosima.com/index.php/products-all/eprosima-fast-dds) <!-- link: known-broken --> ·
+> [Fast DDS](https://www.eprosima.com/index.php/products-all/eprosima-fast-dds) ·
 > [Tock OS](https://www.tockos.org/) ·
 > [Hubris — Oxide Computer](https://hubris.oxide.computer/) ·
 > [nalgebra](https://docs.rs/nalgebra/) ·
@@ -328,7 +328,7 @@ safe_drive 执行器:
 
 ### 3.3 DDS 绑定
 
-> **[CycloneDDS](https://cyclonedds.io/)** 和 **[Fast DDS](https://www.eprosima.com/index.php/products-all/eprosima-fast-dds) <!-- link: known-broken -->** 是 ROS2 的两个主要 DDS 实现。Rust 生态通过 FFI 绑定或直接协议实现与之交互。[来源: [CycloneDDS](https://cyclonedds.io/)]
+> **[CycloneDDS](https://cyclonedds.io/)** 和 **[Fast DDS](https://www.eprosima.com/index.php/products-all/eprosima-fast-dds)** 是 ROS2 的两个主要 DDS 实现。Rust 生态通过 FFI 绑定或直接协议实现与之交互。[来源: [CycloneDDS](https://cyclonedds.io/)]
 
 | **绑定项目** | **DDS 实现** | **状态** | **说明** |
 |:---|:---|:---:|:---|
@@ -901,7 +901,7 @@ impl GoodNode {
 > [来源: [safe_drive](https://github.com/tier4/safe_drive)]
 > [来源: [openrr](https://github.com/openrr/openrr)]
 > [来源: [CycloneDDS](https://cyclonedds.io/)]
-> [来源: [Fast DDS](https://www.eprosima.com/index.php/products-all/eprosima-fast-dds) <!-- link: known-broken -->]
+> [来源: [Fast DDS](https://www.eprosima.com/index.php/products-all/eprosima-fast-dds)]
 > [来源: [nalgebra](https://docs.rs/nalgebra/)]
 > [来源: [nshare](https://github.com/rust-cv/nshare)]
 > [来源: [RTIC](https://rtic.rs/)]

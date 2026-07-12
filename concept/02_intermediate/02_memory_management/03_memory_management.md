@@ -5,6 +5,7 @@
 >
 > **EN**: Memory Management
 > **Summary**: Memory Management. Rust's compile-time memory safety through ownership, borrowing, and lifetimes. Covers stack vs heap, RAII, smart pointers, and zero-cost abstractions.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L2 进阶概念
@@ -115,7 +116,7 @@
     - [11.4 形式化语义：Projection 作为类型构造子](#114-形式化语义projection-作为类型构造子)
     - [11.5 与 In-place Initialization 的协同](#115-与-in-place-initialization-的协同)
     - [11.6 演进路线与跟踪](#116-演进路线与跟踪)
-  - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
+  - [十二、演进方向](#十二演进方向)
     - [12.1 自定义 Allocator（`#[global_allocator]`）](#121-自定义-allocatorglobal_allocator)
     - [12.2 `ManuallyDrop<T>` 与 `mem::forget` 的形式化分析](#122-manuallydropt-与-memforget-的形式化分析)
     - [12.3 `Vec<T>` / `String` / `HashMap` 的内存布局与扩容策略](#123-vect--string--hashmap-的内存布局与扩容策略)
@@ -1308,7 +1309,7 @@ pub unsafe extern "C" fn rust_string_to_c(s: String) -> *mut c_char {
 
 ### 5.9 `Vec<T>` / `String` / `HashMap` 的内存布局与扩容策略
 
-本节将「`Vec<T>` / `String` / `HashMa…」分解为若干主题： `Vec<T>` 的内存布局与扩容、`String` 的 UTF-8 不变性与内存布局与`HashMap<K, V>` 的 SwissTable 算法。
+本节将「`Vec<T>` / `String` / `HashMa…」分解为若干主题：`Vec<T>`的内存布局与扩容、`String`的 UTF-8 不变性与内存布局与`HashMap<K, V>` 的 SwissTable 算法。
 
 #### `Vec<T>` 的内存布局与扩容
 
@@ -1632,7 +1633,7 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 
 ---
 
-## 十二、待补充与演进方向（TODOs）
+## 十二、演进方向
 
 本节围绕「待补充与演进方向（TODOs）」展开，依次讨论自定义 Allocator（`#[global_allocator]`）、`ManuallyDrop<T>` 与 `mem::forget` 的…、`Vec<T>` / `String` / `HashMap` 的内存…、`std::alloc::System` vs `jemalloc`…等7个方面。
 
@@ -1793,7 +1794,6 @@ let mut pinned: Pin<Box<SelfRef>> = SelfRef::new(String::from("x"));
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

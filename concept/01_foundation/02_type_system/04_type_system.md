@@ -6,6 +6,7 @@
 >
 > **EN**: Type System
 > **Summary**: Rust's static type system combines scalar and compound types with algebraic data types, pattern matching, generics, and trait bounds. This chapter covers structs, enums, the match expression, type inference, and the path from everyday types toward formal type theory, giving learners the vocabulary needed for generic and trait-based design.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **📎 交叉引用（Reference）**
 >
@@ -146,7 +147,7 @@
         - [命题 3: "新类型模式（Newtype）具有零运行时成本"](#命题-3-新类型模式newtype具有零运行时成本)
       - [11.7.9 认知路径：何时名义、何时结构](#1179-认知路径何时名义何时结构)
     - [11.7.10 与多级引用语义的交叉：引用的名义与结构行为](#11710-与多级引用语义的交叉引用的名义与结构行为)
-  - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
+  - [十二、演进方向](#十二演进方向)
     - [补充：`impl Trait` 与 `dyn Trait` 的类型论差异](#补充impl-trait-与-dyn-trait-的类型论差异)
     - [补充：`!` (Never type) 的形式化分析与控制流图](#补充-never-type-的形式化分析与控制流图)
     - [补充：Const Generics 的类型系统扩展](#补充const-generics-的类型系统扩展)
@@ -156,7 +157,6 @@
     - [补充：`union` 的类型安全边界](#补充union-的类型安全边界)
     - [补充：Nominal vs Structural Typing](#补充nominal-vs-structural-typing)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
-  - [权威来源索引](#权威来源索引)
   - [十二、边界测试：类型系统的编译错误](#十二边界测试类型系统的编译错误)
     - [12.1 边界测试：类型不匹配（编译错误）](#121-边界测试类型不匹配编译错误)
     - [12.2 边界测试：泛型约束不满足（编译错误）](#122-边界测试泛型约束不满足编译错误)
@@ -2188,7 +2188,7 @@ Rust 名义类型的刚性:
 
 > **[TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)** TypeScript 的接口是纯粹结构的——只要对象满足接口的 shape，就自动兼容，无需显式声明 `implements`。✅ 三级来源
 > **[Go Language Specification](https://go.dev/ref/spec)** Go 的 interface 是结构类型的典型代表：类型自动满足 interface，只要它实现了所有方法。✅ 三级来源
-> **[Haskell 2010 Report](https://www.haskell.org/definition/haskell2010/)** Haskell 的 Type Class 需要显式 `instance` 声明，与 Rust trait 同为名义系统。✅ 一级来源
+> **[Haskell 2010 Report](https://www.haskell.org/onlinereport/haskell2010/)** Haskell 的 Type Class 需要显式 `instance` 声明，与 Rust trait 同为名义系统。✅ 一级来源
 > **[C++20 Concepts](https://en.cppreference.com/w/cpp/concepts)** C++20 Concepts 是结构类型的回归：模板约束由「类型是否满足 expression 要求」自动判定，无需显式「实现」某个 concept。✅ 一级来源
 
 **关键观察**：
@@ -2381,7 +2381,7 @@ let p: &Point = &Point(1, 2);
 
 ---
 
-## 十二、待补充与演进方向（TODOs）
+## 十二、演进方向
 
 理解「待补充与演进方向（TODOs）」需要把握补充：`impl Trait` 与 `dyn Trait` 的类型论差异、补充：`!` (Never type) 的形式化分析与控制流图、补充：Const Generics 的类型系统扩展、补充：Type Inference 的 HM 算法与 Rust 扩展等8个方面，本节依次展开。
 
@@ -2549,13 +2549,10 @@ let m = Meters(3.0);
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
-
-## 权威来源索引
 
 ## 十二、边界测试：类型系统的编译错误
 

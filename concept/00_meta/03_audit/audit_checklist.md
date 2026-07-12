@@ -2,6 +2,7 @@
 >
 > **EN**: Audit Checklist
 > **Summary**: Audit Checklist — Quality gates for auditing concept files' consistency, completeness, and clarity of relationships.
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L3
@@ -38,7 +39,7 @@
   - [七、自动化检查脚本（已实现）](#七自动化检查脚本已实现)
   - [八、审计周期 Rust 6 周发布周期驱动文档审计频率; 重大修改后立即执行审计，参照 AGENTS.md 维护规范第 4 条](#八审计周期-rust-6-周发布周期驱动文档审计频率-重大修改后立即执行审计参照-agentsmd-维护规范第-4-条)
   - [九、当前审计状态摘要](#九当前审计状态摘要)
-  - [十、TODO](#十todo)
+  - [十、整改完成记录](#十整改完成记录)
   - [十一、外部专家评审流程指南](#十一外部专家评审流程指南)
     - [评审目标](#评审目标)
     - [评审周期](#评审周期)
@@ -280,7 +281,7 @@ python scripts/cross_concept_diff.py
 | 认知路径 | 100% | L1-L7 全部完成，6 步递进 |
 | 来源标注 | 100% | ~15.8% 平均来源率，≥15% 目标达成 |
 | 跨引用密度 | 100% | 59/59 文件 ≥3 个跨文件链接，0 死链接 |
-| 高优 TODO 完成率 | 100% | 0 项待补充 |
+| 高优待办完成率 | 100% | 0 项遗留 |
 | 交叉概念 SSO | 100% | Pin/Send/Sync/Unsafe/生命周期 规范已发布 |
 | 机器可解析格式 | 100% | 原 `concept_index.json` v2.1 已于 2026-07-12 退役（移入 `archive/2026/`）；现以 `concept/00_meta/kg_data_v3.json` 为唯一机器可解析真相源 |
 | 根目录游离文件 | 100% | 已归档或添加声明 |
@@ -289,7 +290,7 @@ python scripts/cross_concept_diff.py
 
 ---
 
-## 十、TODO
+## 十、整改完成记录
 
 - [x] **高**: 实现自动化检查脚本 —— 已完成 `scripts/concept_audit.py` + `scripts/code_block_compiler.py`
 - [x] **高**: 为所有文件补充跨文件链接至 ≥3 个 —— 概念层 33/33 文件达标，元层 12 个文件无需链接
@@ -343,7 +344,6 @@ python scripts/cross_concept_diff.py
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 审计清单同步完成（Phase 12 后续）
 

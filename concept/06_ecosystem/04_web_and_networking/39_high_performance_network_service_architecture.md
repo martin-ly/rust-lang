@@ -6,6 +6,7 @@
 >
 > **EN**: High-Performance Network Service Architecture
 > **Summary**: Building high-performance network services in Rust: zero-copy, io_uring, lock-free structures, NUMA awareness, and multi-queue networking.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -17,7 +18,7 @@
 
 ---
 
-> **来源**: 本文档由 `crates/*/docs/` 合规整改迁移而来。原始 crate 文档现为摘要占位符，指向本权威页：
+> **来源**: 本文档由 `crates/*/docs/` 合规整改迁移而来。原始 crate 文档现为摘要页，指向本权威页：
 > **权威来源**: [concept/06_ecosystem/04_web_and_networking/39_high_performance_network_service_architecture.md](39_high_performance_network_service_architecture.md)
 
 ---
@@ -2056,7 +2057,6 @@ echo "✅ 系统调优完成！"
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

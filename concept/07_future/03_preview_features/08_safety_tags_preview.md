@@ -5,6 +5,7 @@
 >
 > **EN**: Safety Tags Preview
 > **Summary**: Preview of safety tags for annotating and propagating unsafe preconditions in Rust.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -52,7 +53,6 @@
   - [五、演进路线与预测](#五演进路线与预测)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [十、边界测试：Safety Tags 预览的编译错误](#十边界测试safety-tags-预览的编译错误)
     - [10.1 边界测试：安全标签的层级不匹配（编译错误）](#101-边界测试安全标签的层级不匹配编译错误)
     - [10.2 边界测试：标签传播与 unsafe 块边界（编译错误）](#102-边界测试标签传播与-unsafe-块边界编译错误)
@@ -386,13 +386,10 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 
 ---
-
-## 权威来源索引
 
 ## 十、边界测试：Safety Tags 预览的编译错误
 

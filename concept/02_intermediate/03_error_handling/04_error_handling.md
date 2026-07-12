@@ -5,6 +5,7 @@
 >
 > **EN**: Error Handling
 > **Summary**: Error Handling. Guide to 04 Error Handling.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[错误处理（Error Handling）](../../01_foundation/08_error_handling/32_error_handling_basics.md)
@@ -114,7 +115,7 @@
     - [9.6 `Try` trait 与自定义 `?` 行为（稳定化中）](#96-try-trait-与自定义--行为稳定化中)
   - [判定表：错误处理策略判定](#判定表错误处理策略判定)
   - [十、相关概念链接](#十相关概念链接)
-  - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
+  - [十一、演进方向](#十一演进方向)
     - [11.1 `std::backtrace::Backtrace` 与错误追踪](#111-stdbacktracebacktrace-与错误追踪)
     - [11.2 `Termination` trait 与 main 返回 Result](#112-termination-trait-与-main-返回-result)
     - [11.3 `eyre` / `color-eyre` / `miette` / `snafu` 生态库对比](#113-eyre--color-eyre--miette--snafu-生态库对比)
@@ -2073,7 +2074,7 @@ fn compute() -> Maybe<i32> {
 
 ---
 
-## 十一、待补充与演进方向（TODOs）
+## 十一、演进方向
 
 理解「待补充与演进方向（TODOs）」需要把握 `std::backtrace::Backtrace` 与错误追踪、`Termination` trait 与 main 返回 Result、`eyre` / `color-eyre` / `miette` /…、`#[track_caller]` 与错误定位优化等7个方面，本节依次展开。
 
@@ -2234,7 +2235,6 @@ impl<T, E> Try for MyResult<T, E> {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

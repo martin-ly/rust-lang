@@ -4,6 +4,7 @@
 >
 > **EN**: Std Autodiff Preview
 > **Summary**: Std Autodiff Preview: emerging Rust language feature or ecosystem trend.
+> **Rust 版本**: nightly 1.98.0+ (experimental)
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -235,7 +236,6 @@ std::autodiff 适合所有 Rust 数值计算?
 ---
 
 **文档版本**: 1.0
-**Rust 版本**: nightly 1.98.0+ (experimental)
 **最后更新**: 2026-06-01
 **状态**: 🧪 前沿追踪
 

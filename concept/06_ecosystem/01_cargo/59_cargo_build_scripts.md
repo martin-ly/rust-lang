@@ -6,6 +6,7 @@
 
 > **EN**: Cargo Build Scripts (`build.rs`)
 > **Summary**: `build.rs` is Cargo's pre-compilation build script: it runs before the main crate, prints `cargo:` directives to inject `cfg` flags and environment variables, links native libraries through `links`/`OUT_DIR`, and controls rebuild caching via `rerun-if-changed` — this page covers its execution model, output protocol, native-dependency linking, and common pitfalls.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶 / 工程]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -509,6 +510,5 @@ println!("cargo:rerun-if-changed=src/config.json");
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Cargo 1.96+ 官方文档
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Cargo 官方文档

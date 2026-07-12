@@ -4,6 +4,7 @@
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI 第 2 版（wasip2）对应目标为 **`wasm32-wasip2`**。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 
@@ -59,7 +60,7 @@
 
 - v4.2 (2026-05-13): Phase B 验证实践——新增§8.13 Miri 动态验证场景（悬垂指针检测、无效 bool 检测、async 状态机未初始化内存检测，含实际 Miri 输出截图）
 - v4.1 (2026-05-13): Phase B 形式化深化——新增§3.1b 状态机操作语义（小步语义、poll 状态转移函数、.await CPS 变换、Pin 约束在操作语义中的体现）；新增§3.2b Pin LTL 形式化（不动性公理 A1-A3、Unpin 豁免、poll 递归调用链验证、与§3.1b 操作语义衔接）
-- v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步（Async）迭代器（Iterator）与生产者）、§8.11 `Pin<Box<dyn Future>>` vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
+- v4.0 (2026-05-13): Phase 4 待办清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步（Async）迭代器（Iterator）与生产者）、§8.11 `Pin<Box<dyn Future>>` vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
 - v3.0 (2026-05-13): 深度重构——新增§3.5调度模型对比（含三维Mermaid图）、§3.1状态机变换精确推导（含Pin（Pin）内存布局约束）、§8.7取消安全系统分析（含3种安全模式与形式化定义）、§8.8 Waker契约与活性（含决策树），建立异步（Async）语义模型完整推理链
 - v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注
 - v1.0 (2026-05-12): 初始版本，完成权威定义、Future 状态机模型、async/await 语法糖解析、Pin 分析、思维导图、示例反例
@@ -143,7 +144,7 @@
       - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
       - [Miri 与 async 状态机的特殊关联](#miri-与-async-状态机的特殊关联)
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
-  - [十、待补充与演进方向（TODOs）](#十待补充与演进方向todos)
+  - [十、演进方向](#十演进方向)
     - [补充章节：AFIT（Async Fn In Traits）与 RPITIT](#补充章节afitasync-fn-in-traits与-rpitit)
       - [问题与解决方案演进](#问题与解决方案演进)
       - [当前最佳实践](#当前最佳实践)
@@ -729,9 +730,9 @@ graph LR
 
 > **来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)** Rust `async/await` 基于 `Future` trait 和编译器状态机转换，承诺零成本抽象（Zero-Cost Abstraction）。 ✅
 > **[C++ Reference: Coroutines](https://en.cppreference.com/w/cpp/language/coroutines)** C++20 Coroutines 通过 `co_await`/`co_yield`/`co_return` 和 promise 类型实现，编译器生成状态机，与 Rust 类似但自定义能力更强。 ✅
-> **[Haskell GHC User Guide: Concurrent Haskell](https://downloads.haskell.org/ghc/latest/docs/users_guide/parallel.html) <!-- link: known-broken -->** Haskell 异步通过 `IO` monad 和 `forkIO` 实现，纯函数隔离保证并发安全（Concurrency Safety），但运行时依赖 GC 和 thunk 求值。 ✅
+> **[Haskell GHC User Guide: Concurrent Haskell](https://downloads.haskell.org/ghc/latest/docs/users_guide/using-concurrent.html)** Haskell 异步通过 `IO` monad 和 `forkIO` 实现，纯函数隔离保证并发安全（Concurrency Safety），但运行时依赖 GC 和 thunk 求值。 ✅
 > **[Go Spec: Goroutines](https://go.dev/ref/spec#Go_statements)** Go goroutine 是轻量级线程，由运行时 M:N 调度，内存占用约 2KB 起，阻塞不影响其他 goroutine。 ✅
-> **[Without Boats, "Pin and Suffering"](https://without.boats/blog/pin-and-suffering/)** Rust `Pin<T>` 的设计是为了安全表达自引用结构，这是 Rust 异步与 C++20 Coroutines 的关键差异之一。 ✅
+> **[fasterthanli.me (Amos Wenger), "Pin and Suffering"](https://fasterthanli.me/articles/pin-and-suffering)** Rust `Pin<T>` 的设计是为了安全表达自引用结构，这是 Rust 异步与 C++20 Coroutines 的关键差异之一。 ✅
 
 ---
 
@@ -1929,8 +1930,8 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
   3. 指针别名: Box<dyn Future> 的堆指针阻止某些 LICM（循环不变量外提）优化
 ```
 
-> **来源**: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [without.boats blog: The cost of dynamic dispatch in Rust]
-> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats blog: "The cost of dynamic dispatch in Rust"](https://without.boats/blog/the-cost-of-dynamic-dispatch/); [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/)
+> **来源**: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [without.boats blog: poll_next（async 迭代中的动态分发成本）]
+> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats: "poll_next"（Future 动态分发与状态机表示）](https://without.boats/blog/poll-next/); [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/)
 
 **何时选择哪种：API 边界 vs 内部实现**
 
@@ -2364,12 +2365,12 @@ Miri 的局限（与 loom 互补）:
 
 ---
 
-## 十、待补充与演进方向（TODOs）
+## 十、演进方向
 
-- [x] **TODO**: 补充 Waker/Context 的底层机制 —— 已完成: 2026-05-14
-- [x] **TODO**: 补充 `Stream` / `Sink` trait 完整分析 —— 已完成: 2026-05-14
-- [x] **TODO**: 补充 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异 —— 已完成: 2026-05-14
-- [x] **TODO**: 补充 `loom` 并发模型检测工具 —— 已完成: 2026-05-14
+- **演进方向**: 补充 Waker/Context 的底层机制 —— 已完成: 2026-05-14
+- **演进方向**: 补充 `Stream` / `Sink` trait 完整分析 —— 已完成: 2026-05-14
+- **演进方向**: 补充 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异 —— 已完成: 2026-05-14
+- **演进方向**: 补充 `loom` 并发模型检测工具 —— 已完成: 2026-05-14
 
 ### 补充章节：AFIT（Async Fn In Traits）与 RPITIT
 
@@ -2694,7 +2695,6 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 > **权威来源对齐变更日志**: 2026-07-10 Stage F L3 更新权威来源块 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

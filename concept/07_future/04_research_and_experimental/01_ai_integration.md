@@ -97,7 +97,7 @@ graph TD
 ```
 
 > **认知功能**: 该图展示人类架构师、AI生成与Rust形式验证之间的分层协作架构。
-> [Rust ML](https://arewelearningyet.com/) <!-- link: known-broken -->
+> [Rust ML — Are We Learning Yet](https://www.arewelearningyet.com/)
 > **功能定位**：将Prompt规约、代码层和系统验证视为相互反馈的三层闭环。
 > **使用建议**：在每一层设置明确的验证边界，利用编译器反馈循环持续优化生成质量。
 > **关键洞察**：确定性编译器不仅是语义过滤器，更是RL环境的理想critic，驱动策略收敛。[💡 原创分析](../../00_meta/00_framework/methodology.md)

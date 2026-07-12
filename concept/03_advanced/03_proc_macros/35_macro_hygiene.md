@@ -1,5 +1,6 @@
 > **EN**: Macro Hygiene
 > **Summary**: Authoritative concept page for `宏卫生性完整参考`. Content migrated from `crates/c11_macro_system_proc/docs/tier_03_references/04_macro_hygiene_reference.md`.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L4-L5
@@ -689,13 +690,14 @@ pub macro my_macro($e:expr) {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
 
 ## 迁移补充：来自 `crates/c11_macro_system_proc/docs/tier_04_advanced/05_macro_hygiene_in_depth.md`
+
+以下内容为宏卫生性（Macro Hygiene）的高级专题，从声明宏的局部变量与标签卫生性，到过程宏的 Span 控制与跨调用点标识符解析，系统展开卫生性规则的边界与调试方法。
 
 # 宏卫生性深度解析
 

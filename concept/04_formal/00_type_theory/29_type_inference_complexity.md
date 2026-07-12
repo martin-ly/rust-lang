@@ -4,6 +4,7 @@
 
 > **EN**: Type Inference Complexity
 > **Summary**: 从 Hindley-Milner 的立方时间可判定性出发，说明 Rust 类型推断（Type Inference）因高阶多态、trait/生命周期（Lifetimes）约束与关联类型而进入 PSPACE，并映射到 rustc 的 `typeck`、`InferCtxt` 与 trait solver 实现。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/定义"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Coq](https://coq.inria.fr/)、[Verus](https://github.com/verus-lang/verus) 等形式化工具。
 >
@@ -394,6 +395,5 @@ PSPACE-完全。Rehman et al. (2023) 给出 Rust 类型推断复杂度的 PSPACE
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-25
 **状态**: ✅ 权威来源对齐完成 (Batch L4)

@@ -7,6 +7,7 @@
 >
 > **EN**: Compiler Internals
 > **Summary**: Compiler Internals: Rust ecosystem tools, crates, and engineering practices.
+> **Rust 版本**: 1.97.0+ (nightly for Cranelift/build-std/sanitizer)
 > **权威来源**: 本文件为 `concept/` 权威页。
 Compiler Internals. Core Rust concept covering mechanism analysis, parallel programming, compiler internals.
 > **受众**: [专家]
@@ -260,7 +261,6 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 ---
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (nightly for Cranelift/build-std/sanitizer)
 **最后更新**: 2026-06-01
 **状态**: ✅ 概念文档创建完成
 

@@ -4,6 +4,7 @@
 >
 > **EN**: Safe and Effective Unsafe Rust
 > **Summary**: Unsafe Rust is a carefully scoped escape hatch for operations the compiler cannot verify, such as raw-pointer dereferencing, calling foreign functions, and implementing low-level data structures. This chapter explains the unsafe contract, the five unsafe superpowers, soundness invariants, and how to keep safe abstractions reliable.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Unsafe Rust](../../../knowledge/03_advanced/unsafe)
@@ -103,7 +104,7 @@
       - [命题: "Miri 可以检测所有 UB"](#命题-miri-可以检测所有-ub)
       - [边界极限测试代码](#边界极限测试代码)
   - [十、知识来源关系（Provenance）](#十知识来源关系provenance)
-  - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
+  - [十一、演进方向](#十一演进方向)
     - [补充章节：FFI 与 repr 属性完整规范](#补充章节ffi-与-repr-属性完整规范)
       - [ABI 与 Calling Convention](#abi-与-calling-convention)
       - [repr 属性语义对比矩阵](#repr-属性语义对比矩阵)
@@ -1261,7 +1262,7 @@ fn safe_raw_pointer() {
 
 <!-- L3::FFI（FFI）补充 -->
 
-## 十一、待补充与演进方向（TODOs）
+## 十一、演进方向
 
 本节围绕「待补充与演进方向（TODOs）」展开，依次讨论补充章节：FFI 与 repr 属性完整规范、补充章节：Miri 的使用方法与限制、补充章节：`std::ptr::read/write` vs `*pt…、补充章节：`NonNull<T>` / `Unique<T>` / `…等5个方面。
 
@@ -1364,8 +1365,8 @@ pub struct TcpHeader {
 
 ---
 
-- [x] **TODO**: 补充 FFI 完整规范（ABI、layout、calling convention） —— 优先级: 高 —— 已完成 v1.1
-- [x] **TODO**: 补充 `#[repr(C)]` / `#[repr(transparent)]` / `#[repr(packed)]` —— 优先级: 高 —— 已完成 v1.1
+- **演进方向**: 补充 FFI 完整规范（ABI、layout、calling convention） —— 优先级: 高 —— 已完成 v1.1
+- **演进方向**: 补充 `#[repr(C)]` / `#[repr(transparent)]` / `#[repr(packed)]` —— 优先级: 高 —— 已完成 v1.1
 
 ### 补充章节：Miri 的使用方法与限制
 
@@ -1524,7 +1525,7 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
           └── 否 → Miri（最精确的 Rust 语义检测）
 ```
 
-> **[LLVM Sanitizers Docs](https://llvm.org/docs/SanitizerCoverage.html)** ASan 使用影子内存（shadow memory）检测堆/栈/全局变量的越界访问，运行时开销约 2x，是 C/C++/Rust FFI 项目的首选工具。 ✅ 已验证
+> **[LLVM SanitizerCoverage Docs](https://clang.llvm.org/docs/SanitizerCoverage.html)** ASan 使用影子内存（shadow memory）检测堆/栈/全局变量的越界访问，运行时开销约 2x，是 C/C++/Rust FFI 项目的首选工具。 ✅ 已验证
 > **[Valgrind Documentation](https://valgrind.org/docs/)** Valgrind 的 memcheck 通过 JIT 重编译检测未初始化读取和内存泄漏，无需重编译目标程序，但运行速度极慢（10x~50x）。 ✅ 已验证
 > **[TSan Documentation](https://clang.llvm.org/docs/ThreadSanitizer.html)** TSan 使用 happens-before 向量时钟检测数据竞争，对 Rust 的 `std::sync` 原子操作（Atomic Operations）和锁结构均有效，但要求所有代码都经过插桩。 ✅ 已验证
 > **跨层映射**: `L3::Miri` ↔ [`L6::工具链`](../../06_ecosystem/00_toolchain/01_toolchain.md) CI 集成 · [`L4::形式化`](../../04_formal/02_separation_logic/04_rustbelt.md) 操作语义动态验证
@@ -2385,10 +2386,10 @@ where
 
 ---
 
-- [x] **TODO**: 补充 Miri 的使用方法与限制（含 Miri 标志详解与 Valgrind/ASan/TSan 对比） —— 优先级: 低 —— 已完成 2026-05-14
-- [x] **TODO**: 补充 `std::ptr::read/write` vs `*ptr` 解引用的区别 —— 优先级: 中 —— 已完成 2026-05-14
-- [x] **TODO**: 补充 `NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进（含 Vec/Box/Rc/Arc 实际使用与协变原理） —— 优先级: 低 —— 已完成 2026-05-14
-- [x] **TODO**: 补充 `MaybeUninit` 数组初始化模式（含 array::from_fn 安全替代与 C malloc 对比） —— 优先级: 低 —— 已完成 2026-05-14
+- **演进方向**: 补充 Miri 的使用方法与限制（含 Miri 标志详解与 Valgrind/ASan/TSan 对比） —— 优先级: 低 —— 已完成 2026-05-14
+- **演进方向**: 补充 `std::ptr::read/write` vs `*ptr` 解引用的区别 —— 优先级: 中 —— 已完成 2026-05-14
+- **演进方向**: 补充 `NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进（含 Vec/Box/Rc/Arc 实际使用与协变原理） —— 优先级: 低 —— 已完成 2026-05-14
+- **演进方向**: 补充 `MaybeUninit` 数组初始化模式（含 array::from_fn 安全替代与 C malloc 对比） —— 优先级: 低 —— 已完成 2026-05-14
 
 > **过渡: L3 → L4**
 > `unsafe` 块的安全性契约由程序员保证，但这种保证能否被形式化验证？
@@ -2646,7 +2647,6 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

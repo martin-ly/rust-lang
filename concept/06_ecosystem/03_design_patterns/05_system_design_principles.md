@@ -154,7 +154,7 @@ Rust 的 `Send`/`Sync` trait 和所有权转移在编译期编码了 Session Typ
 
 ### 2.3 零成本抽象：Stroustrup 原则
 
-> **Stroustrup 原则**: "你所不使用的，你就不应该为之付出代价。你使用的，你甚至不应该比手工编码付出更高代价。" [Stroustrup, *The Design and Evolution of C++*, 1994](https://www.stroustrup.com/de.html)
+> **Stroustrup 原则**: "你所不使用的，你就不应该为之付出代价。你使用的，你甚至不应该比手工编码付出更高代价。" [Stroustrup, *The Design and Evolution of C++*, 1994](https://www.stroustrup.com/dne.html)
 
 Rust 的零成本抽象（Zero-Cost Abstraction）机制：
 

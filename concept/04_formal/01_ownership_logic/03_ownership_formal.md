@@ -4,6 +4,7 @@
 >
 > **EN**: Ownership
 > **Summary**: Ownership. Guide to 03 Ownership Formal.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
@@ -830,12 +831,13 @@ Kani 将上述证明转化为符号执行路径:
 
 ---
 
-## 十、待补充与演进方向（TODOs）
+## 十、演进方向
 
-- [x] **TODO**: 引入 Polonius 新 borrow checker 对 T3（区域约束）定理的影响评估 —— **已完成 §9**
-- [x] **TODO**: 补充 Tree Borrows / Stacked Borrows 内存模型的形式化规则对比 —— **已完成 §11**
-- [x] **TODO**: 补充 Creusot/Verus 的功能正确性验证示例，衔接"形式化边界"分析 —— 已完成（参见 `04_rustbelt.md` §7.1–7.4）
- [x] **TODO**: 补充 Reed 2009 中资源标签操作与 Iris 幽灵状态（ghost state）的对应关系 —— 已完成 §9.3- [x] **TODO**: 补充 `Pin<T>` 的形式化语义——与线性逻辑中 "location stability" 的精确对应 —— 已完成 §9.4
+- **演进方向**: 引入 Polonius 新 borrow checker 对 T3（区域约束）定理的影响评估 —— **已完成 §9**
+- **演进方向**: 补充 Tree Borrows / Stacked Borrows 内存模型的形式化规则对比 —— **已完成 §11**
+- **演进方向**: 补充 Creusot/Verus 的功能正确性验证示例，衔接"形式化边界"分析 —— 已完成（参见 `04_rustbelt.md` §7.1–7.4）
+- **演进方向**: 补充 Reed 2009 中资源标签操作与 Iris 幽灵状态（ghost state）的对应关系 —— 已完成 §9.3
+- **演进方向**: 补充 `Pin<T>` 的形式化语义——与线性逻辑中 "location stability" 的精确对应 —— 已完成 §9.4
 
 ---
 
@@ -940,7 +942,7 @@ Tree Borrows 通过 **Reserved → Active** 的延迟激活，允许裸指针与
 定理（Tree Borrows 工业就绪性）:
   前提: Tree Borrows 通过 Miri 的 Crater 回归测试（>40K crates）
       ↓
-  结论: Tree Borrows 是 Stacked Borrows 的工业级替代方案 [PLDI 2025](https://pldi.sigplan.org/) ✅
+  结论: Tree Borrows 是 Stacked Borrows 的工业级替代方案 [PLDI 2025](https://www.sigplan.org/Conferences/PLDI/) ✅
 ```
 
 ### 11.5b Tree Borrows 操作语义规约
@@ -1184,7 +1186,6 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

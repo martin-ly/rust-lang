@@ -2,6 +2,7 @@
 >
 > **EN**: Readme
 > **Summary**: Foundation concepts: ownership, borrowing, lifetimes, and the type system.
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [初学者]
 > **定位**：Rust 最核心的基础性概念，是所有进阶内容的**必要前提**。本层内容对齐 TRPL 第 3-10 章、Wikipedia 核心词条、Stanford/CMU 基础课程。
 > **Bloom 层级**: L1-L2
@@ -281,7 +282,6 @@ Type System（理解"类型即证明"）
 > **内容分级**: [综述级]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

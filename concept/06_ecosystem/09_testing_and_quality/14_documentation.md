@@ -6,6 +6,7 @@
 >
 > **EN**: Documentation
 > **Summary**: Writing and publishing Rust documentation with rustdoc, doc tests, and crate docs.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -498,7 +499,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 
@@ -602,7 +602,7 @@ fn main() {}
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」涉及测验 1：`rustdoc` 如何运行文档中的代码示例（doctest…、测验 2：`///` 和 `//!` 在 Rust 文档注释中有什么区…、测验 3：为什么建议在公共 API 的文档示例中使用 `assert!…、测验 4：`cargo doc` 生成的文档中，`[dependenc…等5个方面，本节逐一说明其要点。
+「嵌入式测验（Embedded Quiz）」涉及测验 1：`rustdoc` 如何运行文档中的代码示例（doctest…、测验 2：`///` 和 `//!` 在 Rust 文档注释中有什么区…、测验 3：为什么建议在公共 API 的文档示例中使用 `assert!…、测验 4：`cargo doc`生成的文档中，`[dependenc…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：`rustdoc` 如何运行文档中的代码示例（doctests）？（理解层）
 

@@ -6,6 +6,7 @@
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [crates.io](https://crates.io/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 ---
 
 # Application Domains（软件工程应用主题）
@@ -982,7 +983,7 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 
 ---
 
-## 十、待补充与演进方向（TODOs）
+## 十、演进方向
 
 - [x] **高**: 补充 WASM 全栈开发领域深度解析
 - [x] **高**: 补充嵌入式 no_std 工程化深度案例
@@ -1359,7 +1360,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

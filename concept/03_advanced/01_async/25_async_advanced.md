@@ -773,8 +773,8 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
   3. 指针别名: Box<dyn Future> 的堆指针阻止某些 LICM（循环不变量外提）优化
 ```
 
-> **来源**: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [without.boats blog: The cost of dynamic dispatch in Rust]
-> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats blog: "The cost of dynamic dispatch in Rust"](https://without.boats/blog/the-cost-of-dynamic-dispatch/) <!-- link: known-broken -->; [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/)
+> **来源**: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [without.boats blog: poll_next（async 迭代中的动态分发成本）]
+> **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[without.boats: "poll_next"（Future 动态分发与状态机表示）](https://without.boats/blog/poll-next/); [Rust Performance Book: "Dynamic dispatch"](https://nnethercote.github.io/perf-book/)
 
 **何时选择哪种：API 边界 vs 内部实现**
 

@@ -6,6 +6,7 @@
 >
 > **EN**: Comprehensive Rust Mapping
 > **Summary**: Comprehensive Rust Mapping — A bidirectional map between Google's free Comprehensive Rust course and this knowledge base's concept pages.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [初学者 → 进阶]
 > **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -196,7 +197,6 @@ Comprehensive Rust 与本知识体系的互补关系:
 > **权威来源对齐变更日志**: 2026-06-02 创建，映射 Comprehensive Rust 2026 版
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-02
 **状态**: ✅ 概念文件创建完成
 

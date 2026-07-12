@@ -9,6 +9,7 @@
 >
 > **EN**: Security Practices
 > **Summary**: Security Practices — Security practices: input validation, cryptography, auditing, and supply-chain security atop memory safety.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -884,7 +885,6 @@ cargo audit
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-20
 **状态**: ✅ 概念文件创建完成
 

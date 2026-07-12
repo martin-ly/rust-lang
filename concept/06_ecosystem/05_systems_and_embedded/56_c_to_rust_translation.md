@@ -8,6 +8,7 @@
 >
 > **EN**: C To Rust Translation
 > **Summary**: C To Rust Translation: Rust ecosystem tools, crates, and engineering practices.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5
 > **A/S/P 标记**: **P** — Procedure
@@ -365,7 +366,6 @@ pub fn call_c_function() {
 - 2026-05-26 R22: 补充 SmartC2Rust (ICSE 2026) — 迭代反馈驱动的 LLM C→Rust 翻译 [ICSE 2026](https://conf.researchr.org/home/icse-2026)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-26
 **状态**: ✅ 初始创建
 > **过渡**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

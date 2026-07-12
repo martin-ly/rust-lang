@@ -96,4 +96,4 @@
 
 ---
 
-> **内容分级**: [元层]
+> 本文件由 `scripts/generate_knowledge_topology_atlas.py` 从 `concept/**/*.md` 生成；请勿手工编辑，更新后重新运行生成脚本。

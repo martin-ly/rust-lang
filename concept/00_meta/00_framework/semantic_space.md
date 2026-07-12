@@ -68,7 +68,7 @@
     - [7.3 "Rust 的等价表达与其他语言完全等价"](#73-rust-的等价表达与其他语言完全等价)
   - [八、定理一致性矩阵（Assertion Consistency Matrix）](#八定理一致性矩阵assertion-consistency-matrix)
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
-  - [十、待补充与演进方向（TODOs）](#十待补充与演进方向todos)
+  - [十、演进方向](#十演进方向)
     - [10.3 边界测试：术语过载与跨层语义漂移（概念混淆）](#103-边界测试术语过载与跨层语义漂移概念混淆)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -1216,7 +1216,7 @@ graph TD
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust RFCs](https://rust-lang.github.io/rfcs/index.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
 >
-## 十、待补充与演进方向（TODOs）
+## 十、演进方向
 
 - [x] **高**: 补充 effects system / algebraic effects 对表征空间的潜在影响 — v1.1 §3.5.2
 - [x] **高**: 补充 const trait 和 generic const items 的表征能力扩展分析 — v1.1 §3.5.1

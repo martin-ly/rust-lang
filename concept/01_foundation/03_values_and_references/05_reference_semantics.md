@@ -7,6 +7,7 @@
 >
 > **EN**: Reference Semantics
 > **Summary**: Reference Semantics — Auto-deref, deref coercion, type coercion, and how they interact with the borrow checker.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [初学者]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -466,7 +467,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 新增第七节“多级引用语义与部分重借用（Borrowing）”
 

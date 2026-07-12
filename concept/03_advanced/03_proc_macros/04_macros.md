@@ -4,6 +4,7 @@
 >
 > **EN**: Macros
 > **Summary**: Macros. Guide to 04 Macros.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **来源**: · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Unicode UAX #31 — Identifier and Pattern Syntax](https://www.unicode.org/reports/tr31/)
 >
 > [TRPL — Ch19.5 Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
@@ -42,7 +43,7 @@
 **变更日志**:
 
 - v4.1 (2026-05-14): 增强 §5 属性宏修改函数体——新增 `#[trace]` 完整实现（含 `proc_macro_error2` 友好错误）、AST 遍历三策略（quote 包装 / `Fold` trait / 手动 `stmts` 替换）、声明宏（Declarative Macro）能力边界对比、跨层链接
-- v4.0 (2026-05-13): Phase 4 TODO 清理——新增 proc_macro2/syn/quote 最佳实践、macro_rules! 重复模式完整语法、const fn + const generics 替代宏趋势、编译期内置宏完整列表、属性宏修改函数体完整示例（#[measure_time]）、macro 关键字（声明宏（Declarative Macro） 2.0）演进对比
+- v4.0 (2026-05-13): Phase 4 待办清理——新增 proc_macro2/syn/quote 最佳实践、macro_rules! 重复模式完整语法、const fn + const generics 替代宏趋势、编译期内置宏完整列表、属性宏修改函数体完整示例（#[measure_time]）、macro 关键字（声明宏（Declarative Macro） 2.0）演进对比
 - v1.0 (2026-05-12): 初始版本，完成权威定义、宏（Macro）类型对比矩阵、卫生性分析、形式化视角、思维导图、示例反例
 - v2.0 (2026-05-13): 深度重构——增强定理一致性（Coherence）矩阵至11行（带⟹推理链）、新增3个反命题决策树、重写6步递进认知路径、补充章节过渡段落与层次一致性标注
 - v3.0 (2026-05-13): 深度重构——增强§2编译管道精确位置、增强§3.1卫生宏（Macro）形式化（隐式gensym/对比矩阵/边界案例）、新增§5.5宏与类型系统（Type System）交互边界、新增2个反命题决策树、补充章节过渡段落
@@ -2094,16 +2095,16 @@ mod internal {
 
 ---
 
-## 十、待补充与演进方向（TODOs）
+## 十、演进方向
 
 > **[proc_macro2 crate]** `proc_macro2` bridges the compiler's internal `proc_macro` API with a stable, testable interface, enabling `syn` and `quote` to build procedural macros outside the compiler environment. ✅ 已验证
 
-- [x] **TODO**: 补充 `proc_macro2` 与 `syn` / `quote` crate 的最佳实践 —— 已完成: 2026-05-13
-- [x] **TODO**: 补充 `macro_rules!` 的重复模式完整语法 `($(...),+ $(,)?)` —— 已完成: 2026-05-13
-- [x] **TODO**: 补充编译期计算（`const fn` + `const generics`）替代宏的趋势 —— 已完成: 2026-05-13
-- [x] **TODO**: 补充 `const_macro` / `concat!` / `stringify!` 等内置宏 —— 已完成: 2026-05-13
-- [x] **TODO**: 补充属性宏修改函数体的完整示例 —— 已完成: 2026-05-14
-- [x] **TODO**: 补充 `macro_rules!` 与 `macro` 关键字（声明宏 2.0）的演进对比 —— 已完成: 2026-05-13
+- **演进方向**: 补充 `proc_macro2` 与 `syn` / `quote` crate 的最佳实践 —— 已完成: 2026-05-13
+- **演进方向**: 补充 `macro_rules!` 的重复模式完整语法 `($(...),+ $(,)?)` —— 已完成: 2026-05-13
+- **演进方向**: 补充编译期计算（`const fn` + `const generics`）替代宏的趋势 —— 已完成: 2026-05-13
+- **演进方向**: 补充 `const_macro` / `concat!` / `stringify!` 等内置宏 —— 已完成: 2026-05-13
+- **演进方向**: 补充属性宏修改函数体的完整示例 —— 已完成: 2026-05-14
+- **演进方向**: 补充 `macro_rules!` 与 `macro` 关键字（声明宏 2.0）的演进对比 —— 已完成: 2026-05-13
 
 ---
 
@@ -2151,7 +2152,6 @@ mod internal {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

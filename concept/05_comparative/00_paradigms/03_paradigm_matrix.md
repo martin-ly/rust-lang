@@ -5,6 +5,7 @@
 >
 > **EN**: Paradigm Matrix
 > **Summary**: Paradigm Matrix: comparative analysis with Rust across type systems, memory safety, and concurrency.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L5 对比分析
@@ -721,14 +722,14 @@ fn process(data: Vec<String>) -> Vec<String> {
 
 ---
 
-## 十三、待补充与演进方向（TODOs）
+## 十三、演进方向
 
-- [x] **TODO**: 补充具体 benchmark 数据链接
-- [x] **TODO**: 补充语言演进趋势分析（内存安全（Memory Safety）成为系统语言标配、Swift/Kotlin/Odin 扩展矩阵）
-- [x] **TODO**: 补充 Rust 在范式谱系中的精确定位（Mermaid 坐标图）
-- [x] **TODO**: 补充认知路径交互式测验与反命题真实案例 —— 已融入各章节反例
-- [x] **TODO**: 补充更多新兴语言的 benchmark 对比数据（Vale、Hylo、Mojo） —— 已完成 §8.3
-- [x] **TODO**: 补充编程范式在 AI 辅助编程时代的演化趋势 —— 已完成 §8.4
+- **演进方向**: 补充具体 benchmark 数据链接
+- **演进方向**: 补充语言演进趋势分析（内存安全（Memory Safety）成为系统语言标配、Swift/Kotlin/Odin 扩展矩阵）
+- **演进方向**: 补充 Rust 在范式谱系中的精确定位（Mermaid 坐标图）
+- **演进方向**: 补充认知路径交互式测验与反命题真实案例 —— 已融入各章节反例
+- **演进方向**: 补充更多新兴语言的 benchmark 对比数据（Vale、Hylo、Mojo） —— 已完成 §8.3
+- **演进方向**: 补充编程范式在 AI 辅助编程时代的演化趋势 —— 已完成 §8.4
 
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html); [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
@@ -738,7 +739,6 @@ fn process(data: Vec<String>) -> Vec<String> {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
@@ -1228,3 +1228,17 @@ fn main() {
 「Rust vs Go」部分的核心主题是错误处理，本节展开说明。
 
 ### 错误处理
+
+错误处理是 Rust 与 Go 设计哲学差异最直观的体现。Go 采用多返回值约定（`value, err`），由调用方显式检查 `if err != nil`，错误只是普通值，语言层面不强制处理。Rust 则将可恢复错误编码进类型系统：`Result<T, E>` 要求调用方通过 `match`、`?` 运算符或组合子显式处理 `Err` 分支，否则无法取出 `T`，编译期即可排除“忘记检查错误”这一整类缺陷。二者都不依赖异常机制，但 Rust 把 Go 的编码惯例提升为类型规则。
+
+```rust
+// Rust: 编译器强制处理 Err 分支
+fn read_config(path: &str) -> Result<String, std::io::Error> {
+    std::fs::read_to_string(path) // 用 ? 传播错误: std::fs::read_to_string(path)?
+}
+```
+
+```go
+// Go: 错误处理依赖编码惯例，忽略 err 也能编译
+// data, _ := os.ReadFile("config.toml") // 合法但危险
+

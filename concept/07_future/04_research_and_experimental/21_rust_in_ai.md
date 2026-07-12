@@ -4,6 +4,7 @@
 >
 > **EN**: Rust In AI
 > **Summary**: Rust In AI: emerging Rust language feature or ecosystem trend.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
@@ -516,7 +517,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/international_authority_index.md)；2026-05-22 Batch 9 对齐完成
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 权威来源对齐完成 (Batch 9)
 

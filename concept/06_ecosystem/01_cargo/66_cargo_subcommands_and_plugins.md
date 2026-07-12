@@ -5,6 +5,7 @@
 
 > **EN**: Cargo Subcommands and Plugins
 > **Summary**: Explains how Cargo's custom subcommand system works, how tools integrate via `cargo metadata` and JSON messages, and surveys common plugins in the ecosystem.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [中级 → 高级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -238,6 +239,5 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 / Cargo 外部工具文档
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Cargo Book external tools 文档

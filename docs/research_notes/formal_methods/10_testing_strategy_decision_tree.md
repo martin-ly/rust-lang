@@ -1078,7 +1078,7 @@ impl ReferenceStateMachine for MyStateMachine {
 
 ### 2.2 异步测试：tokio-test {#22-异步测试tokio-test}
 
-> **[POPL - Programming Languages Research](https://popl.sigplan.org/) <!-- link: known-broken -->**
+> **[POPL - Programming Languages Research](https://www.sigplan.org/Conferences/POPL/)**
 >
 > **[Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -1164,7 +1164,7 @@ async fn test_timer_behavior() {
 
 ### 2.3 模拟对象：mockall {#23-模拟对象mockall}
 
-> **[PLDI - Programming Language Design](https://pldi.sigplan.org/) <!-- link: known-broken -->**
+> **[PLDI - Programming Language Design](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use mockall::{mock, predicate::*};
@@ -2347,7 +2347,7 @@ mod test_documentation {
 
 ### 6.1 常用命令 {#61-常用命令}
 
-> **[POPL - Programming Languages Research](https://popl.sigplan.org/) <!-- link: known-broken -->**
+> **[POPL - Programming Languages Research](https://www.sigplan.org/Conferences/POPL/)**
 
 ```bash
 # 运行所有测试 {#运行所有测试}
@@ -2389,7 +2389,7 @@ cargo flamegraph
 
 ### 6.2 常用属性 {#62-常用属性}
 
-> **[PLDI - Programming Language Design](https://pldi.sigplan.org/) <!-- link: known-broken -->**
+> **[PLDI - Programming Language Design](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 属性 | 用途 |
 | :--- | :--- |

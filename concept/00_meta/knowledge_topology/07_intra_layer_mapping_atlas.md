@@ -20,8 +20,6 @@
 
 ## L0 元信息层
 
-本节专门讨论「L0 元信息层」下的层内引用关系。
-
 ### 层内引用关系
 
 | 源概念 | 关系 | 目标概念 | 依据 |
@@ -36,8 +34,6 @@
 | [模板去同质化指南](../../00_meta/03_audit/template_deduplication_guide.md) | ⟹ | [Rust 知识体系思维表征覆盖率仪表板](../../00_meta/03_audit/quality_dashboard_v2.md) | 后置概念引用（蕴含/导向） |
 
 ## L1 基础概念层
-
-本节专门讨论「L1 基础概念层」下的层内引用关系。
 
 ### 层内引用关系
 
@@ -78,8 +74,6 @@
 
 ## L2 进阶概念层
 
-本节专门讨论「L2 进阶概念层」下的层内引用关系。
-
 ### 层内引用关系
 
 | 源概念 | 关系 | 目标概念 | 依据 |
@@ -105,8 +99,6 @@
 | [RTTI 与动态类型识别：从 C++ 到 Rust](../../02_intermediate/04_types_and_conversions/25_rtti_and_dynamic_typing.md) | ⊥ | [类型级编程 (Type-Level Programming)](../../02_intermediate/01_generics/39_type_level_programming.md) | 策展互斥：编译期类型计算与运行期类型识别互斥（25_rtti_and_dynamic_typing.md:203 “RTTI 是静态类型系统向运行时的有限泄漏”）（无直接引用边，语义补全） |
 
 ## L3 高级概念层
-
-「L3 高级概念层」部分的核心主题是层内引用关系，本节展开说明。
 
 ### 层内引用关系
 
@@ -183,8 +175,6 @@
 | [Async 边界全景](../../03_advanced/01_async/38_async_boundary_panorama.md) | ↔ | [Unsafe 边界全景](../../03_advanced/02_unsafe/32_unsafe_boundary_panorama.md) | 互为后置概念（互参） |
 
 ## L4 形式化理论层
-
-本节聚焦「L4 形式化理论层」，核心内容为层内引用关系。
 
 ### 层内引用关系
 
@@ -264,8 +254,6 @@
 
 ## L5 对比分析层
 
-本节聚焦「L5 对比分析层」，核心内容为层内引用关系。
-
 ### 层内引用关系
 
 | 源概念 | 关系 | 目标概念 | 依据 |
@@ -278,8 +266,6 @@
 | [C++ vs Rust：构造、运算符、RTTI、友元](../../05_comparative/00_paradigms/16_cpp_rust_surface_features.md) | ⇔ | [Rust vs C++：ABI、对象模型与内存布局](../../05_comparative/01_systems_languages/18_cpp_abi_object_model.md) | 对比型页面（名称含 vs/对比） |
 
 ## L6 生态工程层
-
-本节专门讨论「L6 生态工程层」下的层内引用关系。
 
 ### 层内引用关系
 
@@ -471,8 +457,6 @@
 
 ## L7 前沿趋势层
 
-「L7 前沿趋势层」部分的核心主题是层内引用关系，本节展开说明。
-
 ### 层内引用关系
 
 | 源概念 | 关系 | 目标概念 | 依据 |
@@ -560,4 +544,4 @@
 
 ---
 
-> **内容分级**: [元层]
+> 本文件由 `scripts/generate_knowledge_topology_atlas.py` 从 `concept/**/*.md` 生成；请勿手工编辑，更新后重新运行生成脚本。

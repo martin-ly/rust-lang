@@ -21,7 +21,7 @@
 
 ---
 
-> **来源**: 本文档由 `crates/*/docs/` 合规整改迁移而来。原始 crate 文档现为摘要占位符，指向本权威页：
+> **来源**: 本文档由 `crates/*/docs/` 合规整改迁移而来。原始 crate 文档现为摘要页，指向本权威页：
 > **权威来源**: [concept/03_advanced/03_proc_macros/30_macro_debugging_and_diagnostics.md](30_macro_debugging_and_diagnostics.md)
 
 ---

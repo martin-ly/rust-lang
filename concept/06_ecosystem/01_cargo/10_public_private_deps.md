@@ -2,6 +2,7 @@
 
 > **EN**: Cargo `public = true` Dependency Visibility and Resolver v3
 > **Summary**: Declaring dependency visibility with `public = true/false`, resolver v3's MSRV-aware fallback, and their impact on API stability and feature unification.
+> **Rust 版本**: 1.97.0 (stable) / nightly with `-Zpublic-dependency`
 > **来源**: [Cargo Book — Dependency Resolution](https://doc.rust-lang.org/cargo/reference/resolver.html) · [Cargo Book — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) · [rust-lang/cargo#6129](https://github.com/rust-lang/cargo/issues/6129)
 
 > > **权威来源**: 本文件为 `concept/` 权威页。
@@ -245,7 +246,6 @@ serde = { workspace = true, public = false, features = ["derive"] }
 - **三级**: [cargo-semver-checks 文档](https://docs.rs/cargo-semver-checks) — SemVer 自动化检查工具
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0 (stable) / nightly with `-Zpublic-dependency`
 **最后更新**: 2026-07-09
 
 ---

@@ -4,6 +4,7 @@
 >
 > **EN**: Aeneas Symbolic Semantics
 > **Summary**: POPL 2024 论文提出的符号化语义方法：通过 LLBC 显式建模借用（Borrowing）/贷款，用符号执行自动推理，再经 HLPL 桥接底层指针语义，最终在 Aeneas 工具中生成可证明的函数式规范。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Aeneas](https://github.com/AeneasVerif/aeneas)、[Coq](https://coq.inria.fr/)、[Lean](https://lean-lang.org/)。
 >
@@ -410,7 +411,6 @@ Aeneas 符号化语义五步认知路径
 ---
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-25
 **状态**: ✅ 概念迁移完成
 

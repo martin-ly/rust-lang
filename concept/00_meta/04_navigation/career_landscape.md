@@ -4,6 +4,7 @@
 >
 > **EN**: Career Landscape
 > **Summary**: Career Landscape — A quantitative 2026 Rust job-market analysis: salary ranges, role distribution, skills, and regional differences.
+> **Rust 版本**: N/A（市场数据）
 > **受众**: [入门 → 进阶]
 > **Bloom 层级**: L1-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -192,7 +193,6 @@ Rust 岗位远程工作比例（2025–2026）:
 > **权威来源对齐变更日志**: 2026-06-02 创建，数据覆盖 2025–2026
 
 **文档版本**: 1.0
-**Rust 版本**: N/A（市场数据）
 **最后更新**: 2026-06-02
 **状态**: ✅ 概念文件创建完成
 

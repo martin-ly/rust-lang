@@ -5,6 +5,7 @@
 >
 > **EN**: assert_matches! Macro
 > **Summary**: The `assert_matches!` macro for pattern-based assertions on enums and trait objects.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -469,7 +470,6 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0 (Edition 2024)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-19
 **状态**: ✅ 已对齐 Rust 1.97.0 稳定版发布内容
 

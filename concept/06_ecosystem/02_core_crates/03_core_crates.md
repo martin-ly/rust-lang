@@ -5,6 +5,7 @@
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ---
 
@@ -1014,7 +1015,7 @@ fn main() -> anyhow::Result<()> {
 
 ---
 
-## 十、待补充与演进方向（TODOs）
+## 十、演进方向
 
  [x] **高**: 补充核心并发 crate 深度解析（crossbeam/rayon/parking_lot/dashmap）- [x] **高**: 补充 crate 选择决策树（std vs 第三方）
 
@@ -1173,7 +1174,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

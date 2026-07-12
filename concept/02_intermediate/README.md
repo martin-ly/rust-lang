@@ -2,6 +2,7 @@
 >
 > **EN**: Readme
 > **Summary**: Intermediate concepts: traits, generics, error handling, and collections.
+> **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶]
 > **定位**：在掌握 L1 基础后，理解 Rust 的模块（Module）化、泛型（Generics）、内存管理和错误处理（Error Handling）等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。
@@ -320,7 +321,6 @@ Error Handling
 > **内容分级**: [专家级]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

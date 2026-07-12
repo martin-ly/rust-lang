@@ -43,7 +43,7 @@ graph TD
 | `03_audit/` | 质量审计与治理 | [Concept Audit Guide](03_audit/concept_audit_guide.md) · [分级体系](03_audit/grading_system.md) · [模板去同质化](03_audit/template_deduplication_guide.md) |
 | `04_navigation/` | 索引与交叉引用 | [全局概念索引](04_navigation/concept_index.md) · [交叉引用矩阵](04_navigation/cross_reference_matrix.md) |
 | `knowledge_topology/` | 知识体系拓扑图谱集 | [拓扑图谱集 README](knowledge_topology/README.md) |
-| `placeholders/` | SUMMARY.md 占位符 | 待创建主题的导航占位 |
+| `placeholders/` | SUMMARY.md 导航占位文件 | 待创建主题的导航入口 |
 
 ## 核心索引文件
 

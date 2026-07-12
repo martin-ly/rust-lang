@@ -4,6 +4,7 @@
 >
 > **EN**: Type Theory
 > **Summary**: Type Theory. Guide to 02 Type Theory.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。
@@ -947,12 +948,12 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 
 ---
 
-## 十二、待补充与演进方向（TODOs）
+## 十二、演进方向
 
-- [x] **TODO**: 补充 Dependent type 与 Const Generics 的关系 —— 优先级: 中 —— 已完成 §10.1
-- [x] **TODO**: 补充 Higher-Kinded Types 的缺失与 workaround —— 优先级: 中 —— 已完成 §10.2
-- [x] **TODO**: 补充线性逻辑（Linear Logic）与所有权类型的 Curry-Howard 对应 —— 优先级: 高 —— 已完成 §10.3
-- [x] **TODO**: 补充 Pierce *TAPL* Ch.15 子类型章节的完整规则与 Rust 生命周期（Lifetimes）映射 —— 优先级: 中 —— 已完成 §10.4
+- **演进方向**: 补充 Dependent type 与 Const Generics 的关系 —— 优先级: 中 —— 已完成 §10.1
+- **演进方向**: 补充 Higher-Kinded Types 的缺失与 workaround —— 优先级: 中 —— 已完成 §10.2
+- **演进方向**: 补充线性逻辑（Linear Logic）与所有权类型的 Curry-Howard 对应 —— 优先级: 高 —— 已完成 §10.3
+- **演进方向**: 补充 Pierce *TAPL* Ch.15 子类型章节的完整规则与 Rust 生命周期（Lifetimes）映射 —— 优先级: 中 —— 已完成 §10.4
 
 > **过渡: L4 → L3**
 > 类型论中的全称量词 `∀α.τ` 在 Rust 中就是 `fn foo<T>(x: T)`，存在量词 `∃α.τ` 就是 `impl Trait`。类型论不是抽象数学——它是编译器类型检查算法的理论基础。理解 HM 算法如何推导 `let x = 5` 的类型，就是理解 `rustc` 如何处理 90% 的日常代码。
@@ -967,7 +968,6 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

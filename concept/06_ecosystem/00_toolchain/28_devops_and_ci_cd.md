@@ -7,6 +7,7 @@
 >
 > **EN**: DevOps and CI/CD
 > **Summary**: DevOps and CI/CD — Rust DevOps and CI/CD: GitHub Actions, cargo-release, cross-compilation, Docker, build caching, and security audits.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L5
@@ -670,7 +671,6 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
 

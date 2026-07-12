@@ -124,7 +124,7 @@ pub fn advanced_example<T>(value: T) -> T {
 
 ---
 
-> 💡 **提示**: 本文档为占位符增强版本，详细内容请参考模块（Module）主文档。
+> 💡 **提示**: 本节内容迁移自 crate 文档概览，详细内容请参考模块（Module）主文档。
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -138,6 +138,8 @@ pub fn advanced_example<T>(value: T) -> T {
 ---
 
 ## 迁移补充：来自 `crates/c11_macro_system_proc/docs/rust_194_updates/00_rust_194_overview.md`
+
+以下内容为宏系统 crate 视角的 Rust 1.94 更新概览，汇总该版本对声明宏与过程宏开发的影响。
 
 # c11_macro_system_proc - Rust 1.94 更新概览
 
@@ -261,7 +263,7 @@ pub fn advanced_example<T>(value: T) -> T {
 
 ---
 
-> 💡 **提示**: 本文档为占位符增强版本，详细内容请参考模块（Module）主文档。
+> 💡 **提示**: 本节内容迁移自 crate 文档概览，详细内容请参考模块（Module）主文档。
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -275,6 +277,8 @@ pub fn advanced_example<T>(value: T) -> T {
 ---
 
 ## 迁移补充：来自 `crates/c12_wasm/docs/rust_194_updates/00_rust_194_overview.md`
+
+以下内容为 WebAssembly crate 视角的 Rust 1.94 更新概览，汇总该版本对 wasm 目标与相关工具链的影响。
 
 # c12_wasm - Rust 1.94 更新概览
 
@@ -398,7 +402,7 @@ pub fn advanced_example<T>(value: T) -> T {
 
 ---
 
-> 💡 **提示**: 本文档为占位符增强版本，详细内容请参考模块主文档。
+> 💡 **提示**: 本节内容迁移自 crate 文档概览，详细内容请参考模块主文档。
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

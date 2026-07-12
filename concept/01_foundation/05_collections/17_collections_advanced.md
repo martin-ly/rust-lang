@@ -5,6 +5,7 @@
 >
 > **EN**: Collections Advanced
 > **Summary**: Collections Advanced — Advanced collections: BTreeMap/BTreeSet, custom hashers, VecDeque, and BinaryHeap, with layout and trade-offs.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [初学者]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -683,7 +684,6 @@ fn main() {
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 
 ---

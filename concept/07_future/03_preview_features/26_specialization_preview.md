@@ -4,6 +4,7 @@
 >
 > **EN**: Specialization Preview
 > **Summary**: Preview of trait specialization: allowing overlapping impls with a default/fallback.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
@@ -63,7 +64,6 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [十、边界测试：特化（Specialization）的编译错误](#十边界测试特化specialization的编译错误)
     - [10.1 边界测试：重叠实现与孤儿规则（编译错误）](#101-边界测试重叠实现与孤儿规则编译错误)
     - [10.2 边界测试：`default` 方法与最终实现的冲突（编译错误）](#102-边界测试default-方法与最终实现的冲突编译错误)
@@ -495,13 +495,10 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ⚠️ 前沿特性预览（nightly 开发中）
 
 ---
-
-## 权威来源索引
 
 ## 十、边界测试：特化（Specialization）的编译错误
 

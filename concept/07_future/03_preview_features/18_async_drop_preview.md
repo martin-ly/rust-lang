@@ -4,6 +4,7 @@
 >
 > **EN**: Async Drop Preview
 > **Summary**: Preview of asynchronous destructors (`AsyncDrop`) for async resource cleanup.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
@@ -508,7 +509,6 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ⚠️ 前沿特性预览（nightly 开发中）
 

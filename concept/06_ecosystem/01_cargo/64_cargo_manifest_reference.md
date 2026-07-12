@@ -5,6 +5,7 @@
 
 > **EN**: Cargo Manifest Reference
 > **Summary**: A comprehensive but concise reference of `Cargo.toml` sections and fields, aligned with the Cargo Book Manifest Format.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [中级 → 高级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -310,6 +311,5 @@ serde = { path = "../serde-fix" }
 > **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 / Cargo manifest format
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Cargo Book manifest 参考文档

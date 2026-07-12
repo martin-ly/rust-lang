@@ -2,6 +2,7 @@
 
 > **EN**: Generics Compiler Behavior
 > **Summary**: Rust 泛型（Generics）代码的编译行为：单态化、静态分发与动态分发、类型擦除、胖指针与 VTable，以及性能权衡。 How Rust compiles generic code: monomorphization, static vs dynamic dispatch, type erasure, fat pointers, vtables, and performance trade-offs.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [专家]
 > **内容分级**: [专家级]
@@ -169,7 +170,6 @@ fn make_iter() -> impl Iterator<Item = i32> {
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 

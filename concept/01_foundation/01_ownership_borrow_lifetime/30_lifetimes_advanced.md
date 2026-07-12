@@ -5,6 +5,7 @@
 >
 > **EN**: Lifetimes Advanced
 > **Summary**: Lifetimes Advanced — Polonius, Rust's next-generation borrow checker, using Datalog constraint solving to accept more valid programs.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [初学者]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层次定位**: L1-L3 进阶 / 生命周期（Lifetimes）高级主题
@@ -72,7 +73,7 @@
     - [16.4 union 的 impl 限制](#164-union-的-impl-限制)
     - [16.5 与 C 语言 union 的 FFI 互操作](#165-与-c-语言-union-的-ffi-互操作)
     - [16.6 代码示例：正确使用 + 典型错误](#166-代码示例正确使用--典型错误)
-  - [十七、待补充与演进方向（TODOs）](#十七待补充与演进方向todos)
+  - [十七、演进方向](#十七演进方向)
     - [17.1 Lifetime Elision：省略即约定](#171-lifetime-elision省略即约定)
     - [17.2 `impl Trait` 与生命周期推断](#172-impl-trait-与生命周期推断)
     - [17.3 `union` 的类型安全边界](#173-union-的类型安全边界)
@@ -1138,7 +1139,7 @@ enum SafeValue {
 
 ---
 
-## 十七、待补充与演进方向（TODOs）
+## 十七、演进方向
 
 本节从 Lifetime Elision：省略即约定、`impl Trait` 与生命周期推断与`union` 的类型安全边界切入，剖析「待补充与演进方向（TODOs）」的核心内容。
 
@@ -1231,7 +1232,6 @@ fn read_int(u: &Value) -> i32 {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

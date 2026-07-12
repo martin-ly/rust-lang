@@ -4,6 +4,7 @@
 >
 > **EN**: Linear Logic
 > **Summary**: Linear Logic: formal methods foundations, semantics, and verification techniques relevant to Rust.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
@@ -898,12 +899,12 @@ Rust 所有权系统（仿射变体）:
 
 > **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
-## 十三、待补充与演进方向（TODOs）
+## 十三、演进方向
 
-- [x] **TODO**: 补充线性逻辑的 sequent calculus 完整规则集（multiplicative/additive/exponential 三层）—— 已完成 §7.1–7.3
-- [x] **TODO**: 补充 Phase semantics（相位语义）与 Rust 编译期/运行期阶段的直观联系 —— 已完成 §7.4
-- [x] **TODO**: 补充 Proof nets（证明网）作为并发程序可视化的形式化工具 —— 已完成 §11，2026-05-13
-- [x] **TODO**: 补充 Linear Haskell 与 Rust 的跨语言类型系统对比 —— 已完成 §12，2026-05-13
+- **演进方向**: 补充线性逻辑的 sequent calculus 完整规则集（multiplicative/additive/exponential 三层）—— 已完成 §7.1–7.3
+- **演进方向**: 补充 Phase semantics（相位语义）与 Rust 编译期/运行期阶段的直观联系 —— 已完成 §7.4
+- **演进方向**: 补充 Proof nets（证明网）作为并发程序可视化的形式化工具 —— 已完成 §11，2026-05-13
+- **演进方向**: 补充 Linear Haskell 与 Rust 的跨语言类型系统对比 —— 已完成 §12，2026-05-13
 
 > **过渡: L4 → L3**
 > 线性逻辑的 `⊗`（tensor）和 `⊸`（lollipop）不是纯理论游戏——它们直接对应 Rust 的元组构造和所有权转移。当你写 `let y = x;` 时，你正在执行一个 lollipop 消除规则；当你写 `let pair = (x, y);` 时，你正在构造一个 tensor 积。
@@ -936,7 +937,6 @@ Rust 所有权系统（仿射变体）:
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

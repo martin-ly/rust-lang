@@ -6,6 +6,7 @@
 >
 > **EN**: Generics
 > **Summary**: Generics. Parametric polymorphism in Rust enabling type-safe, reusable code across types. Covers generic functions, structs, trait bounds, and monomorphization trade-offs.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[泛型（Generics）](02_generics.md)
@@ -42,11 +43,11 @@
   深化 min_specialization（default impl 交互、&str/String 优化用例）、
   泛型（Generics）编译时间优化（cargo bloat、thin LTO、单态化（Monomorphization）膨胀成因）、
   Type-level Programming（typenum UInt/UTerm、与 Const Generics 对比、历史背景）；
-  更新 TODO 列表
+  更新待办清单
 - v2.4 (2026-05-14):
-  补充 Const Generics 进阶用法——表达式与 generic_const_exprs、where 约束深度分析、与 GATs 交互、固定大小数组数学运算与类型状态机典型应用、与 C++ 模板非类型参数对比；更新 TODO 列表
+  补充 Const Generics 进阶用法——表达式与 generic_const_exprs、where 约束深度分析、与 GATs 交互、固定大小数组数学运算与类型状态机典型应用、与 C++ 模板非类型参数对比；更新待办清单
 - v2.3 (2026-05-13):
-  补充 min_specialization 状态与限制、泛型编译时间优化策略（Turbofish / dyn Trait / -Zshare-generics）、Type-level Programming（Peano 算术与 typenum）、GATs 完整形式化视角（System F_ω / HKT / Lending Iterator 类型论分析）；更新 TODO 列表
+  补充 min_specialization 状态与限制、泛型编译时间优化策略（Turbofish / dyn Trait / -Zshare-generics）、Type-level Programming（Peano 算术与 typenum）、GATs 完整形式化视角（System F_ω / HKT / Lending Iterator 类型论分析）；更新待办清单
 - v2.2 (2026-05-13):
   深度重构——新增 §5.5 参数性定理（Wadler 1989），含3个示例推导、工程意义、反例边界与 Mermaid 推理树；
   增强 §4.2 单态化（Monomorphization）语义保持定理与证明草图、dyn Trait 反例、跨 crate ABI 边界；
@@ -145,7 +146,7 @@
     - [10.4 与 2024 Edition 的关系](#104-与-2024-edition-的关系)
   - [判定表：泛型使用与边界判定](#判定表泛型使用与边界判定)
   - [十一、相关概念链接](#十一相关概念链接)
-  - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
+  - [十一、演进方向](#十一演进方向)
     - [11.1 `min_specialization` 的当前状态与使用](#111-min_specialization-的当前状态与使用)
     - [11.2 泛型代码的编译时间优化策略](#112-泛型代码的编译时间优化策略)
     - [11.3 Type-level Programming](#113-type-level-programming)
@@ -2181,7 +2182,7 @@ impl<'t, T> LendingIterator for Windows<'t, T> {
 ```
 
 > **L4 映射**: GATs 对应范畴论中的**索引范畴**（indexed category）——关联类型从单对象（single type）到类型族（type family）的扩展，是依赖类型理论中 Π 类型（product type）的 Rust 近似。Lending Iterator 的类型安全正是 borrow checker（区域子类型）与 GATs（类型族）协同的形式化体现。
-> **来源**: [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) · [TRPL: Ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) · [TAPL Ch.29: Type Operators and Kinding] · [Haskell Type Families](https://wiki.haskell.org/Type_families)
+> **来源**: [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) · [TRPL: Ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) · [TAPL Ch.29: Type Operators and Kinding] · [Haskell Type Families — GHC User Guide](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/type_families.html)
 
 ---
 
@@ -2284,7 +2285,7 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 
 ---
 
-## 十一、待补充与演进方向（TODOs）
+## 十一、演进方向
 
 「待补充与演进方向（TODOs）」部分按 `min_specialization` 的当前状态与使用、泛型代码的编译时间优化策略、Type-level Programming、`impl Trait` 在返回位置 vs 参数位置等6个方面的顺序逐层展开。
 
@@ -2435,7 +2436,6 @@ impl<T: Copy + Default + std::ops::Add<Output = T> + std::ops::Mul<Output = T>,
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.1
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

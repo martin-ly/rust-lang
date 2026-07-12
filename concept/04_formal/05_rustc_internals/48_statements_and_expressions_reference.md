@@ -2,6 +2,7 @@
 
 > **EN**: Statements and Expressions Reference
 > **Summary**: Rust Reference 对语句（let、item、expression statement）与全部表达式形式（字面量、路径、块、运算符、数组、元组、结构体（Struct）、调用、方法调用、字段访问、闭包、循环、范围、if、match、return、await 等）的规范定义。 Normative definitions of Rust statements and expressions: literals, paths, blocks, operators, arrays, tuples, structs, calls, method calls, field access, closures, loops, ranges, if, match, return, await, and more.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [研究者]
 > **内容分级**: [研究级]
@@ -155,7 +156,6 @@ let x = unsafe { *raw_ptr };
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/international_authority_index.md)
 
 **文档版本**: 1.0
-**Rust 版本**: 1.97.0+ (Edition 2024)
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 
