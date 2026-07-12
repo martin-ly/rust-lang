@@ -76,12 +76,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: internal-link-check-report
-          path: docs/link_check_report.md
+          path: reports/01_link_check_report.md
           retention-days: 30
 
       - name: Check for broken links
         run: |
-          broken=$(grep "损坏链接:" docs/link_check_report.md | grep -oE '[0-9]+' | head -1)
+          broken=$(grep "损坏链接:" reports/01_link_check_report.md | grep -oE '[0-9]+' | head -1)
           echo "Broken links: $broken"
           if [ "$broken" -gt 10 ]; then
             echo "⚠️ Too many broken internal links: $broken"

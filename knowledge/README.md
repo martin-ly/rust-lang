@@ -46,7 +46,7 @@
 | `Vec::push_mut` / `insert_mut` | [02_intermediate/collections.md](02_intermediate/01_collections.md) | ✅ 已更新 |
 | `core::hint::cold_path` | [03_advanced/performance_optimization.md](03_advanced/05_performance_optimization.md) | ✅ 已更新 |
 | `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/07_type_conversions.md) | ✅ 已更新 |
-| `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/03_maybe_uninit.md) | ✅ 已更新 |
+| `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/02_maybe_uninit.md) | ✅ 已更新 |
 | PowerPC/PowerPC64 内联汇编 | [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/02_inline_asm.md) | ✅ 已更新 |
 | `core::range` | [02_intermediate/collections.md](02_intermediate/01_collections.md) | ✅ 已更新 |
 

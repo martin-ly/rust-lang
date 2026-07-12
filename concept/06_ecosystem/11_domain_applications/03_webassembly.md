@@ -656,7 +656,7 @@ WASM 使用单一的连续字节数组作为内存，通过偏移量访问。Rus
 
 ## 补充视角：WASM 技术方案对比矩阵
 
-> 来源：`crates/c12_wasm/docs/wasm_concept_matrix.md`
+> 来源：`crates/c12_wasm/docs/17_wasm_concept_matrix.md`
 
 ### WASM 编译目标
 

@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 465,
-    "generated_at": "2026-07-12T04:07:13.230611+00:00"
+    "generated_at": "2026-07-12T05:32:17.289311+00:00"
   },
   "files": [
     {
@@ -186,7 +186,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../../docs/01_learning/01_google_rust_mapping.md",
+        "../../../docs/02_learning/03_google_rust_mapping.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
@@ -1283,7 +1283,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../docs/01_learning/learning_mvp_path.md"
+        "../../docs/02_learning/09_learning_mvp_path.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -3058,9 +3058,9 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../../docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md",
-        "../../../docs/02_reference/quick_reference/02_error_handling_cheatsheet.md",
-        "../../../docs/02_reference/quick_reference/02_type_system.md",
+        "../../../docs/03_reference/quick_reference/08_collections_iterators_cheatsheet.md",
+        "../../../docs/03_reference/quick_reference/10_error_handling_cheatsheet.md",
+        "../../../docs/03_reference/quick_reference/27_type_system.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/07_modules_and_items/01_modules_and_paths.md",
         "../../02_intermediate/00_traits/01_traits.md",
@@ -15965,8 +15965,8 @@
       "sources": [],
       "cross_references": [
         "../../../crates/c02_type_system/docs/tier_02_guides/01_basic_types_guide.md",
-        "../../../crates/c02_type_system/docs/tier_02_guides/02_compound_types_guide.md",
-        "../../../crates/c02_type_system/docs/tier_02_guides/03_generics_programming_guide.md",
+        "../../../crates/c02_type_system/docs/tier_02_guides/03_compound_types_guide.md",
+        "../../../crates/c02_type_system/docs/tier_02_guides/05_generics_programming_guide.md",
         "../../../knowledge/02_intermediate/06_traits.md",
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
@@ -17586,8 +17586,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../crates/c02_type_system/docs/tier_02_guides/03_generics_programming_guide.md",
-        "../../../crates/c02_type_system/docs/tier_02_guides/04_trait_system_guide.md",
+        "../../../crates/c02_type_system/docs/tier_02_guides/05_generics_programming_guide.md",
+        "../../../crates/c02_type_system/docs/tier_02_guides/07_trait_system_guide.md",
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
@@ -26936,15 +26936,15 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../docs/02_reference/02_edge_cases_and_special_cases.md",
-        "../../../docs/02_reference/quick_reference/02_ownership_cheatsheet.md",
-        "../../../docs/02_reference/quick_reference/02_smart_pointers_cheatsheet.md",
-        "../../../docs/02_reference/quick_reference/02_threads_concurrency_cheatsheet.md",
-        "../../../docs/02_reference/quick_reference/02_type_system.md",
-        "../../../docs/06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md",
-        "../../../docs/research_notes/formal_methods/10_ownership_model.md",
-        "../../../docs/research_notes/formal_methods/10_variance_concept_mindmap.md",
-        "../../../knowledge/03_advanced/unsafe/04_unsafe_rust.md",
+        "../../../docs/03_reference/02_edge_cases_and_special_cases.md",
+        "../../../docs/03_reference/quick_reference/14_ownership_cheatsheet.md",
+        "../../../docs/03_reference/quick_reference/23_smart_pointers_cheatsheet.md",
+        "../../../docs/03_reference/quick_reference/26_threads_concurrency_cheatsheet.md",
+        "../../../docs/03_reference/quick_reference/27_type_system.md",
+        "../../../docs/09_toolchain/05_rust_1_93_compatibility_deep_dive.md",
+        "../../../docs/12_research_notes/02_formal_methods/09_ownership_model.md",
+        "../../../docs/12_research_notes/02_formal_methods/14_variance_concept_mindmap.md",
+        "../../../knowledge/03_advanced/unsafe/03_unsafe_rust.md",
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/04_navigation/08_learning_mvp_path.md",
@@ -28317,6 +28317,7 @@
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/01_generics.md",
+        "../../02_intermediate/01_generics/02_const_generics.md",
         "../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md",
         "../../04_formal/00_type_theory/01_type_theory.md",
         "../../04_formal/README.md",
@@ -32226,7 +32227,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../docs/02_reference/quick_reference/02_process_management_cheatsheet.md",
+        "../../../docs/03_reference/quick_reference/16_process_management_cheatsheet.md",
         "../../01_foundation/08_error_handling/01_error_handling_basics.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/03_error_handling/01_error_handling.md",
@@ -41885,7 +41886,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../docs/06_toolchain/06_20_rustdoc_196_improvements.md",
+        "../../../docs/09_toolchain/09_rustdoc_196_improvements.md",
         "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
         "../../05_comparative/02_managed_languages/02_rust_vs_python.md",
         "../../07_future/00_version_tracking/01_rust_version_tracking.md",
@@ -42494,7 +42495,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../../docs/06_toolchain/06_toml_v11_cargo_guide.md",
+        "../../../docs/09_toolchain/16_toml_v11_cargo_guide.md",
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
         "02_public_private_deps.md",
         "04_cargo_196_features.md",
@@ -43937,8 +43938,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../crates/c02_type_system/docs/tier_02_guides/03_generics_programming_guide.md",
-        "../../../crates/c02_type_system/docs/tier_02_guides/04_trait_system_guide.md",
+        "../../../crates/c02_type_system/docs/tier_02_guides/05_generics_programming_guide.md",
+        "../../../crates/c02_type_system/docs/tier_02_guides/07_trait_system_guide.md",
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/04_navigation/10_problem_graph.md",
@@ -46202,10 +46203,10 @@
       "sources": [],
       "cross_references": [
         "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
-        "/crates/c09_design_pattern/docs/actor_reactor_patterns.md",
-        "/crates/c09_design_pattern/docs/csp_vs_async_analysis.md",
-        "/crates/c09_design_pattern/docs/rust_190_examples_collection.md",
-        "/crates/c09_design_pattern/docs/rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md",
+        "/crates/c09_design_pattern/docs/01_actor_reactor_patterns.md",
+        "/crates/c09_design_pattern/docs/06_csp_vs_async_analysis.md",
+        "/crates/c09_design_pattern/docs/18_rust_190_examples_collection.md",
+        "/crates/c09_design_pattern/docs/20_rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md",
         "/crates/c09_design_pattern/docs/tier_01_foundations/01_project_overview.md",
         "/crates/c09_design_pattern/docs/tier_01_foundations/02_navigation.md",
         "/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md",
@@ -47621,7 +47622,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../docs/02_reference/quick_reference/02_network_programming_cheatsheet.md",
+        "../../../docs/03_reference/quick_reference/13_network_programming_cheatsheet.md",
         "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../03_advanced/01_async/01_async.md",
@@ -48367,7 +48368,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../crates/c13_embedded/docs/one_page_summary.md",
+        "../../../crates/c13_embedded/docs/04_one_page_summary.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../02_intermediate/02_memory_management/01_memory_management.md",
@@ -52399,8 +52400,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../docs/02_reference/quick_reference/02_algorithms_cheatsheet.md",
-        "../../../docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md",
+        "../../../docs/03_reference/quick_reference/03_algorithms_cheatsheet.md",
+        "../../../docs/03_reference/quick_reference/08_collections_iterators_cheatsheet.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../01_foundation/00_start/02_zero_cost_abstractions.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -53822,9 +53823,9 @@
       "sources": [],
       "cross_references": [
         "../../05_comparative/02_managed_languages/03_rust_vs_javascript.md",
-        "/crates/c12_wasm/docs/rust_192_migration_guide.md",
-        "/crates/c12_wasm/docs/rust_192_performance_benchmarks.md",
-        "/crates/c12_wasm/docs/rust_192_wasm_improvements.md",
+        "/crates/c12_wasm/docs/11_rust_192_migration_guide.md",
+        "/crates/c12_wasm/docs/12_rust_192_performance_benchmarks.md",
+        "/crates/c12_wasm/docs/15_rust_192_wasm_improvements.md",
         "/crates/c12_wasm/docs/tier_01_foundations/01_project_overview.md",
         "/crates/c12_wasm/docs/tier_01_foundations/02_navigation.md",
         "/crates/c12_wasm/docs/tier_01_foundations/03_glossary.md",
@@ -53909,7 +53910,7 @@
       "cross_references": [
         "../../05_comparative/02_managed_languages/03_rust_vs_javascript.md",
         "../04_web_and_networking/03_web_frameworks.md",
-        "/crates/c12_wasm/docs/rust_192_wasm_improvements.md",
+        "/crates/c12_wasm/docs/15_rust_192_wasm_improvements.md",
         "/crates/c12_wasm/docs/tier_02_guides/02_compiling_rust_to_wasm.md",
         "/crates/c12_wasm/docs/tier_02_guides/04_performance_optimization_guide.md",
         "/crates/c12_wasm/docs/tier_03_references/03_best_practices.md",
@@ -54632,8 +54633,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../docs/06_toolchain/06_19_rust_1_96_features.md",
-        "../../../docs/06_toolchain/06_21_rust_1_97_features.md",
+        "../../../docs/09_toolchain/08_rust_1_96_features.md",
+        "../../../docs/09_toolchain/10_rust_1_97_features.md",
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/03_audit/07_quality_dashboard_v2.md",
@@ -56861,7 +56862,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../docs/06_toolchain/06_21_rust_1_97_features.md",
+        "../../../docs/09_toolchain/10_rust_1_97_features.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/01_cargo/15_cargo_getting_started.md",
         "01_rust_version_tracking.md",
@@ -57889,7 +57890,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../docs/05_guides/05_safety_tags_guide.md",
+        "../../../docs/08_usage_guides/20_safety_tags_guide.md",
         "../../00_meta/00_framework/methodology.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md",
@@ -58782,7 +58783,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../docs/05_guides/05_unsafe_fields_preview.md",
+        "../../../docs/08_usage_guides/25_unsafe_fields_preview.md",
         "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/01_type_system.md",
@@ -61650,7 +61651,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../docs/04_research/04_rust_for_linux.md",
+        "../../../docs/06_research/08_rust_for_linux.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../03_advanced/04_ffi/01_rust_ffi.md",

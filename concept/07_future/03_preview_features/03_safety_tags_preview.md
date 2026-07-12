@@ -1,6 +1,6 @@
 # Safety Tags 概念预研：Unsafe 契约的机器可读标注
 
-> **内容重叠提示**: 本文与 [`docs/05_guides/05_safety_tags_guide.md`](../../../docs/05_guides/05_safety_tags_guide.md) 内容高度重叠。`docs/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
+> **内容重叠提示**: 本文与 [`docs/08_usage_guides/20_safety_tags_guide.md`](../../../docs/08_usage_guides/20_safety_tags_guide.md) 内容高度重叠。`docs/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
 > **代码状态**: ✅ 含可编译示例
 >
 > **EN**: Safety Tags Preview
@@ -636,7 +636,7 @@ Miri 可以根据安全标签选择不同的检查策略。例如，标记为 `e
 
 ## 附录：标准 Tag 库设想与当前状态
 
-> 本节内容整合自 `docs/05_guides/05_safety_tags_guide.md`。
+> 本节内容整合自 `docs/08_usage_guides/20_safety_tags_guide.md`。
 
 ### 标准 Tag 库设想
 

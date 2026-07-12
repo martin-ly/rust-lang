@@ -33,19 +33,19 @@ SOURCES: list[TranslationSource] = [
         name="TRPL 中文",
         upstream_owner_repo="rust-lang/book",
         translation_owner_repo="rust-lang-cn/book",
-        project_doc="docs/research_notes/10_rust_book_alignment.md",
+        project_doc="docs/12_research_notes/01_alignment_matrices/32_rust_book_alignment.md",
     ),
     TranslationSource(
         name="TRPL 日本語",
         upstream_owner_repo="rust-lang/book",
         translation_owner_repo="rust-jp/book",
-        project_doc="docs/research_notes/10_rust_book_alignment.md",
+        project_doc="docs/12_research_notes/01_alignment_matrices/32_rust_book_alignment.md",
     ),
     TranslationSource(
         name="Rust Reference 中文",
         upstream_owner_repo="rust-lang/reference",
         translation_owner_repo="rust-lang-cn/reference",
-        project_doc="docs/research_notes/10_rust_reference_alignment.md",
+        project_doc="docs/12_research_notes/01_alignment_matrices/34_rust_reference_alignment.md",
     ),
 ]
 

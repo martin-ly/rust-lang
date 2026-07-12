@@ -61,7 +61,7 @@
 
 ### 主文档
 
-**[Rust 1.90 现代网络技术实战 (2025)](docs/rust_190_modern_network_technologies_2025.md)** - ~2500行代码
+**[Rust 1.90 现代网络技术实战 (2025)](docs/10_rust_190_modern_network_technologies_2025.md)** - ~2500行代码
 
 **核心内容**:
 
@@ -175,13 +175,13 @@
 2. **crates/c10_networks/docs/00_master_index.md**
    - 在"2025-10-19重大更新"章节添加第4项
    - 完整描述 io_uring、零拷贝、HTTP/3、内核旁路技术
-3. **crates/c10_networks/docs/rust_190_practical_examples.md**
+3. **crates/c10_networks/docs/11_rust_190_practical_examples.md**
    - 添加第7节"现代网络技术 (2025)"
    - 更新文档对比矩阵（新增一行）
    - 更新学习路径
      - 专家路径新增第5步"前沿技术"
      - 新增专项技能路径"高性能系统方向"
-4. **新增文件**: `crates/c10_networks/docs/rust_190_modern_network_technologies_2025.md`
+4. **新增文件**: `crates/c10_networks/docs/10_rust_190_modern_network_technologies_2025.md`
    - 2500+ 行代码
    - 7 个主要章节
    - 完整的依赖配置
@@ -421,10 +421,10 @@
 
 ## 🔗 快速链接
 
-- **主文档**: [RUST_190_MODERN_NETWORK_TECHNOLOGIES_2025.md](docs/rust_190_modern_network_technologies_2025.md)
+- **主文档**: [RUST_190_MODERN_NETWORK_TECHNOLOGIES_2025.md](docs/10_rust_190_modern_network_technologies_2025.md)
 - **模块主页**: [README.md](README.md)
-- **文档索引**: [docs/00_master_index.md](docs/00_master_index.md)
-- **学习指南**: [docs/rust_190_practical_examples.md](docs/rust_190_practical_examples.md)
+- **文档索引**: [docs/00_meta/00_master_index.md](docs/00_meta/00_master_index.md)
+- **学习指南**: [docs/11_rust_190_practical_examples.md](docs/11_rust_190_practical_examples.md)
 
 ---
 

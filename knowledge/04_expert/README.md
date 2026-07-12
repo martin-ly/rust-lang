@@ -60,7 +60,7 @@
 
 ## 🚀 下一步
 
-- 深入 [safety_critical/](safety_critical) 安全关键系统生态
+- 深入 [content/safety_critical/](../../content/safety_critical/README.md) 安全关键系统生态（权威侧；[knowledge stub](safety_critical/)）
 - 返回 [05_reference/](../05_reference) 查阅参考资料
 - 探索 [06_ecosystem/](../06_ecosystem) 实际项目开发
 

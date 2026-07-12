@@ -1119,7 +1119,7 @@ let even_squares: Vec<_> = nums.iter()
 
 ## 补充视角：C08 算法与数据结构一页纸总结
 
-> 来源：`crates/c08_algorithms/docs/one_page_summary.md`
+> 来源：`crates/c08_algorithms/docs/06_one_page_summary.md`
 > 按 AGENTS.md §6.4 迁移至此，作为 canonical 算法概念页的速查补充。
 
 ### 核心概念
@@ -1158,7 +1158,7 @@ let even_squares: Vec<_> = nums.iter()
 
 ### 速查与练习
 
-- **速查卡**: [algorithms_cheatsheet](../../../docs/02_reference/quick_reference/02_algorithms_cheatsheet.md) | [collections_iterators_cheatsheet](../../../docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md)
+- **速查卡**: [algorithms_cheatsheet](../../../docs/03_reference/quick_reference/03_algorithms_cheatsheet.md) | [collections_iterators_cheatsheet](../../../docs/03_reference/quick_reference/08_collections_iterators_cheatsheet.md)
 - **RBE 练习**: [Vectors](https://doc.rust-lang.org/rust-by-example/std/vec.html) · [HashMap](https://doc.rust-lang.org/rust-by-example/std/hash.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html)
 - **Rustlings**: [05_vecs](https://github.com/rust-lang/rustlings/tree/main/exercises/05_vecs) · [11_hashmaps](https://github.com/rust-lang/rustlings/tree/main/exercises/11_hashmaps) · [18_iterators](https://github.com/rust-lang/rustlings/tree/main/exercises/18_iterators)
 
@@ -1166,7 +1166,7 @@ let even_squares: Vec<_> = nums.iter()
 
 ## 补充视角：C08 算法与数据结构综合思维导图
 
-> 来源：`crates/c08_algorithms/docs/rust_190_comprehensive_mindmap.md`
+> 来源：`crates/c08_algorithms/docs/07_rust_190_comprehensive_mindmap.md`
 > 按 AGENTS.md §6.4 迁移至此，作为 canonical 算法概念页的知识拓扑补充。
 
 ### 整体架构

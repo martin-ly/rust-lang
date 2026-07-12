@@ -884,7 +884,7 @@ Rust 编译器进行大量优化和类型检查（LLVM 后端、单态化（Mono
 
 ## 补充视角：WebAssembly 项目的 CI/CD 实践
 
-> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/07_cloud_native_ci_cd_practice.md` 与 `crates/c12_wasm/docs/wasm_engineering/cicd_integration.md`，已按 AGENTS.md §6.4 迁移至此。
+> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/06_cloud_native_ci_cd_practice.md` 与 `crates/c12_wasm/docs/tier_05_wasm_engineering/01_cicd_integration.md`，已按 AGENTS.md §6.4 迁移至此。
 
 WASM 项目的 CI/CD 在通用 Rust 流程基础上增加以下环节：
 

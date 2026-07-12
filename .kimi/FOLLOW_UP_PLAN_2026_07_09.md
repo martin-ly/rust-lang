@@ -22,7 +22,7 @@
 | 编号 | 任务 | 操作内容 | 验收标准 | 优先级 |
 |---|---|---|---|---|
 | B1 | 清理 `concept/SUMMARY.md` 中 36 个 archive 链接 | 将 archive 文件改为不链接或移入 `archive/` 索引 | SUMMARY.md 中无 archive 路径 | 高 |
-| B2 | 处理 2 对预存 Rust 1.97 重复 | 方案二选一：① 将 `docs/06_toolchain/06_21_rust_1_97_features.md` 改为纯摘要+链接；② 保留 canonical + quick-reference 组合并文档化 | `detect_content_overlap.py` 不再报告或标记为允许 | 中 |
+| B2 | 处理 2 对预存 Rust 1.97 重复 | 方案二选一：① 将 `docs/09_toolchain/10_rust_1_97_features.md` 改为纯摘要+链接；② 保留 canonical + quick-reference 组合并文档化 | `detect_content_overlap.py` 不再报告或标记为允许 | 中 |
 | B3 | 抽查新建 `concept/` 页 EN/Summary | 对本次 subagent 新建的 ~20 个 concept 页做抽样检查 | 抽查文件均含 **EN** 与 **Summary** | 中 |
 | B4 | 更新 `AGENTS.md` 如有规则变化 | 若本次整治引入新的目录约定或豁免规则，同步更新根目录 `AGENTS.md` | AGENTS.md 与当前实践一致 | 低 |
 

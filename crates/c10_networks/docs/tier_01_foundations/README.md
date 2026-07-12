@@ -8,7 +8,7 @@
 
 | 资源  | 说明     |
 | :--- | :--- |
-| [QUICK_START.md](../tutorials/quick_start.md) | 快速入门 |
+| [QUICK_START.md](../tier_05_tutorials/04_quick_start.md) | 快速入门 |
 | [00_MASTER_INDEX.md](../00_master_index.md)   | 完整索引 |
 
 ---

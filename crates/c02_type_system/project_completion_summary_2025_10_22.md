@@ -212,7 +212,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $ma
    打开 README.md 了解项目概况
 
 2. 浏览主索引
-   查看 docs/00_master_index.md 了解文档结构
+   查看 docs/00_meta/00_master_index.md 了解文档结构
 
 3. 选择学习路径
    根据您的水平选择 初学者/进阶/专家 路径
@@ -224,7 +224,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $ma
 ### 核心文档链接
 
 - 📚 **[主 README](README.md)** - 项目主页
-- 📖 **[主索引](docs/00_master_index.md)** - 完整文档索引
+- 📖 **[主索引](docs/00_meta/00_master_index.md)** - 完整文档索引
 - 📝 **[变更日志](CHANGELOG.md)** - 版本记录
 - 🤝 **[贡献指南](CONTRIBUTING.md)** - 如何贡献
 - 📋 **[交付报告](final_delivery_report_2025_10_22.md)** - 完整报告

@@ -1,0 +1,1712 @@
+# 💻 C01: 所有权与借用 - 代码示例集合
+
+> **权威来源**: [Ownership, Borrowing & Lifetimes](../../concept/01_foundation/01_ownership_borrow_lifetime)
+> **文档类型**: 代码示例与实践项目（crate-specific）
+
+本文件包含与 `Ownership, Borrowing & Lifetimes` 相关的可运行代码示例、练习项目和实战代码。通用概念解释请查阅上方权威来源；此处仅保留 crate 级别的示例实现与学习活动。
+
+---
+
+> **创建日期**: 2025-10-25
+> **难度**: ⭐ 基础 → ⭐⭐⭐ 进阶
+> **目标**: 通过丰富的代码示例深入理解所有权和借用
+
+---
+
+## 目录
+
+- [💻 C01: 所有权与借用 - 代码示例集合](#-c01-所有权与借用---代码示例集合)
+  - [目录](#目录)
+  - [📋 示例导航](#-示例导航)
+  - [🌟 Tier 1: 基础概念示例](#-tier-1-基础概念示例)
+    - [示例1.1: 基础所有权转移](#示例11-基础所有权转移)
+    - [示例1.2: Copy vs. Move 对比](#示例12-copy-vs-move-对比)
+    - [示例1.3: 不可变借用](#示例13-不可变借用)
+    - [示例1.4: 可变借用](#示例14-可变借用)
+    - [示例1.5: 借用规则与常见错误](#示例15-借用规则与常见错误)
+  - [🚀 Tier 2: 实践应用示例](#-tier-2-实践应用示例)
+    - [示例2.1: 函数参数生命周期](#示例21-函数参数生命周期)
+    - [示例2.2: 结构体生命周期](#示例22-结构体生命周期)
+    - [示例2.3: 生命周期省略规则](#示例23-生命周期省略规则)
+    - [示例2.4: 切片操作实践](#示例24-切片操作实践)
+    - [示例2.5: String vs \&str 深入理解](#示例25-string-vs-str-深入理解)
+  - [🎓 Tier 3: 深入理解示例](#-tier-3-深入理解示例)
+    - [示例3.1: 复杂生命周期场景](#示例31-复杂生命周期场景)
+    - [示例3.2: 'static 生命周期详解](#示例32-static-生命周期详解)
+    - [示例3.3: RefCell 内部可变性](#示例33-refcell-内部可变性)
+    - [示例3.4: Cell 简单内部可变性](#示例34-cell-简单内部可变性)
+  - [📝 总结](#-总结)
+    - [学习路径建议](#学习路径建议)
+    - [核心概念](#核心概念)
+    - [下一步](#下一步)
+
+## 📋 示例导航
+
+| 编号                                  | 主题             | 难度   | 重点概念     |
+| :--- | :--- | :--- | :--- |
+| [1.1](#示例11-基础所有权转移)         | 基础所有权转移   | ⭐     | 移动语义     |
+| [1.2](#示例12-copy-vs-move-对比)      | Copy vs. Move    | ⭐     | Copy trait   |
+| [1.3](#示例13-不可变借用)             | 不可变借用       | ⭐     | & 引用       |
+| [1.4](#示例14-可变借用)               | 不可变借用       | ⭐     | &mut 引用    |
+| [1.5](#示例15-借用规则与常见错误)     | 借用规则         | ⭐⭐   | 借用检查器   |
+| [2.1](#示例21-函数参数生命周期)       | 函数生命周期     | ⭐⭐   | 生命周期标注 |
+| [2.2](#示例22-结构体生命周期)         | 结构体生命周期   | ⭐⭐   | 'a 标注      |
+| [2.3](#示例23-生命周期省略规则)       | 生命周期省略     | ⭐⭐   | 省略规则     |
+| [2.4](#示例24-切片操作实践)           | 切片操作         | ⭐⭐   | &[T] 和 &str |
+| [2.5](#示例25-string-vs-str-深入理解) | String vs &str   | ⭐⭐   | 字符串类型   |
+| [3.1](#示例31-复杂生命周期场景)       | 复杂生命周期     | ⭐⭐⭐ | 多个生命周期 |
+| [3.2](#示例32-static-生命周期详解)    | 'static 生命周期 | ⭐⭐⭐ | 静态生命周期 |
+| [3.3](#示例33-refcell-内部可变性)     | RefCell 使用     | ⭐⭐⭐ | 内部可变性   |
+| [3.4](#示例34-cell-简单内部可变性)    | Cell 使用        | ⭐⭐⭐ | 内部可变性   |
+
+---
+
+## 🌟 Tier 1: 基础概念示例
+
+### 示例1.1: 基础所有权转移
+
+**目标**: 理解所有权的移动语义
+
+**难度**: ⭐
+
+**代码**:
+
+```rust
+fn main() {
+    // 创建一个 String (堆分配数据)
+    let s1 = String::from("hello");
+    println!("s1: {}", s1);
+
+    // 所有权转移: s1 的所有权移动到 s2
+    let s2 = s1;
+
+    // ❌ 错误! s1 已经不再有效
+    // println!("s1: {}", s1);
+    // 编译错误: borrow of moved value: `s1`
+
+    // ✅ 正确: s2 现在拥有数据
+    println!("s2: {}", s2);
+
+    // 所有权再次转移给函数
+    take_ownership(s2);
+
+    // ❌ 错误! s2 的所有权已经转移
+    // println!("s2: {}", s2);
+}
+
+fn take_ownership(s: String) {
+    println!("函数拥有: {}", s);
+    // 函数结束时,s 被 drop
+}
+```
+
+**说明**:
+
+- **移动语义**: 当 `let s2 = s1` 时,所有权从 `s1` 转移到 `s2`
+- **失效**: `s1` 在移动后不再有效,访问会导致编译错误
+- **Drop**: 函数结束时,参数 `s` 被自动释放
+
+**输出**:
+
+```text
+s1: hello
+s2: hello
+函数拥有: hello
+```
+
+**关键点**:
+
+- 🎯 Rust 通过移动语义防止双重释放 (double free)
+- 🎯 编译器在编译时就能捕获这类错误
+- 🎯 不需要手动管理内存,安全且高效
+
+---
+
+### 示例1.2: Copy vs. Move 对比
+
+**目标**: 区分 Copy 类型和 Move 类型
+
+**难度**: ⭐
+
+**代码**:
+
+```rust
+fn main() {
+    // ===== Copy 类型 (栈上数据) =====
+
+    // 基本类型实现了 Copy trait
+    let x = 5;
+    let y = x;  // 这是拷贝,不是移动
+
+    println!("x = {}, y = {}", x, y);  // ✅ x 仍然有效!
+
+    // 元组中所有元素都是 Copy,则元组也是 Copy
+    let point1 = (1, 2);
+    let point2 = point1;  // 拷贝
+
+    println!("point1: {:?}, point2: {:?}", point1, point2);  // ✅ 都有效
+
+    // ===== Move 类型 (堆上数据) =====
+
+    // String 没有实现 Copy trait
+    let s1 = String::from("hello");
+    let s2 = s1;  // 这是移动,不是拷贝
+
+    // println!("{}", s1);  // ❌ 错误! s1 已失效
+    println!("s2: {}", s2);  // ✅ 只有 s2 有效
+
+    // Vec 也没有实现 Copy
+    let v1 = vec![1, 2, 3];
+    let v2 = v1;  // 移动
+
+    // println!("{:?}", v1);  // ❌ 错误!
+    println!("v2: {:?}", v2);  // ✅
+
+    // ===== 实现了 Copy 的类型 =====
+    println!("\n实现了 Copy 的类型:");
+
+    let int: i32 = 42;
+    let float: f64 = 3.14;
+    let boolean: bool = true;
+    let character: char = 'R';
+
+    let int2 = int;  // 所有基本类型都是 Copy
+    println!("int: {}, int2: {}", int, int2);  // 都有效
+
+    // ===== 如果需要拷贝 Move 类型 =====
+    let s3 = String::from("world");
+    let s4 = s3.clone();  // 显式克隆
+
+    println!("s3: {}, s4: {}", s3, s4);  // ✅ 都有效
+}
+```
+
+**说明**:
+
+- **Copy 类型**: 栈上数据,拷贝廉价,自动 copy
+- **Move 类型**: 堆上数据,移动所有权,防止双重释放
+- **Clone**: 需要拷贝 Move 类型时,使用 `.clone()`
+
+**输出**:
+
+```text
+x = 5, y = 5
+point1: (1, 2), point2: (1, 2)
+s2: hello
+v2: [1, 2, 3]
+
+实现了 Copy 的类型:
+int: 42, int2: 42
+s3: world, s4: world
+```
+
+**类型对照表**:
+
+| 类型                         | Copy?  | 原因              |
+| :--- | :--- | :--- |
+| `i32`, `f64`, `bool`, `char` | ✅ Yes | 固定大小,栈上     |
+| `(i32, i32)`                 | ✅ Yes | 所有元素都是 Copy |
+| `&T`                         | ✅ Yes | 引用本身可以 Copy |
+| `String`                     | ❌ No  | 堆分配,需要移动   |
+| `Vec<T>`                     | ❌ No  | 堆分配,需要移动   |
+| `Box<T>`                     | ❌ No  | 堆分配,需要移动   |
+
+---
+
+### 示例1.3: 不可变借用
+
+**目标**: 掌握不可变引用的使用
+
+**难度**: ⭐
+
+**代码**:
+
+```rust
+fn main() {
+    let s = String::from("hello world");
+
+    // 创建不可变借用
+    let len = calculate_length(&s);
+
+    println!("'{}' 的长度是 {}", s, len);  // ✅ s 仍然有效
+
+    // 可以同时存在多个不可变借用
+    let r1 = &s;
+    let r2 = &s;
+    let r3 = &s;
+
+    println!("r1: {}, r2: {}, r3: {}", r1, r2, r3);  // ✅ 都可以读取
+
+    // 不可变借用不能修改数据
+    // r1.push_str(" rust");  // ❌ 编译错误!
+
+    // 借用结束后,所有权仍然属于 s
+    println!("原始字符串: {}", s);
+}
+
+fn calculate_length(s: &String) -> usize {
+    // s 是对 String 的引用,不拥有它
+    s.len()
+    // s 在这里离开作用域,但因为它不拥有数据,所以不会释放
+}
+```
+
+**说明**:
+
+- **不可变借用**: 使用 `&` 创建引用,可以读取但不能修改
+- **多个借用**: 可以同时存在任意多个不可变借用
+- **所有权不变**: 借用不会转移所有权
+
+**输出**:
+
+```text
+'hello world' 的长度是 11
+r1: hello world, r2: hello world, r3: hello world
+原始字符串: hello world
+```
+
+**借用规则**:
+
+- ✅ 可以有任意多个不可变借用 `&T`
+- ✅ 借用期间原始值只读
+- ❌ 不能修改借用的数据
+
+---
+
+### 示例1.4: 可变借用
+
+**目标**: 掌握可变引用的使用和限制
+
+**难度**: ⭐
+
+**代码**:
+
+```rust
+fn main() {
+    // 必须使用 mut 声明可变变量
+    let mut s = String::from("hello");
+
+    println!("修改前: {}", s);
+
+    // 创建可变借用
+    change(&mut s);
+
+    println!("修改后: {}", s);
+
+    // ===== 可变借用的限制 =====
+
+    let mut value = 10;
+
+    // 同一时间只能有一个可变借用
+    let r1 = &mut value;
+    *r1 += 1;
+    println!("r1 修改后: {}", r1);
+
+    // ❌ 错误! 不能同时存在两个可变借用
+    // let r2 = &mut value;
+    // println!("{}, {}", r1, r2);
+
+    // ✅ 正确: r1 的作用域结束后,可以创建新的可变借用
+    let r2 = &mut value;
+    *r2 += 1;
+    println!("r2 修改后: {}", r2);
+
+    // ===== 可变借用与不可变借用不能共存 =====
+
+    let mut s2 = String::from("hello");
+
+    let r3 = &s2;  // 不可变借用
+    let r4 = &s2;  // 另一个不可变借用
+
+    println!("{} and {}", r3, r4);  // ✅ 可以
+    // r3 和 r4 的作用域在这里结束
+
+    let r5 = &mut s2;  // ✅ 可以,因为不可变借用已结束
+    r5.push_str(" world");
+    println!("{}", r5);
+}
+
+fn change(s: &mut String) {
+    s.push_str(", world");
+}
+```
+
+**说明**:
+
+- **可变借用**: 使用 `&mut` 创建可以修改的引用
+- **独占访问**: 同一时间只能有一个可变借用
+- **互斥规则**: 可变借用与不可变借用不能共存
+
+**输出**:
+
+```text
+修改前: hello
+修改后: hello, world
+r1 修改后: 11
+r2 修改后: 12
+hello and hello
+hello world
+```
+
+**关键规则**:
+
+- ✅ 可变借用 `&mut T` 可以修改数据
+- ❌ 同一时间只能有**一个**可变借用
+- ❌ 可变借用期间不能有不可变借用
+- 🎯 这些规则防止数据竞争
+
+---
+
+### 示例1.5: 借用规则与常见错误
+
+**目标**: 理解借用检查器的规则并避免常见错误
+
+**难度**: ⭐⭐
+
+**代码**:
+
+```rust
+fn main() {
+    println!("===== 错误1: 同时存在可变和不可变借用 =====");
+
+    let mut s = String::from("hello");
+
+    let r1 = &s;       // 不可变借用
+    let r2 = &s;       // 另一个不可变借用
+    // let r3 = &mut s; // ❌ 错误! 不能在不可变借用存在时创建可变借用
+
+    println!("{} and {}", r1, r2);
+    // r1 和 r2 的作用域结束
+
+    let r3 = &mut s;  // ✅ 现在可以了
+    r3.push_str(" world");
+    println!("{}", r3);
+
+    println!("\n===== 错误2: 多个可变借用 =====");
+
+    let mut value = 10;
+
+    {
+        let r1 = &mut value;
+        *r1 += 1;
+        println!("r1: {}", r1);
+        // r1 的作用域结束
+    }
+
+    // ✅ 正确: 使用作用域分隔不同的可变借用
+    {
+        let r2 = &mut value;
+        *r2 += 1;
+        println!("r2: {}", r2);
+    }
+
+    println!("\n===== 错误3: 悬垂引用 =====");
+
+    // let reference_to_nothing = dangle();  // ❌ 编译错误!
+    let no_dangle = no_dangle();  // ✅ 返回所有权
+    println!("no_dangle: {}", no_dangle);
+
+    println!("\n===== 正确使用: NLL (非词法作用域生命周期) =====");
+
+    let mut s = String::from("hello");
+
+    let r1 = &s;
+    let r2 = &s;
+    println!("{} and {}", r1, r2);
+    // r1 和 r2 不再使用 (NLL: 在最后一次使用后结束)
+
+    let r3 = &mut s;  // ✅ 可以! r1 和 r2 已经不再使用
+    r3.push_str(" world");
+    println!("{}", r3);
+}
+
+// ❌ 错误示例: 返回悬垂引用
+// fn dangle() -> &String {
+//     let s = String::from("hello");
+//     &s  // ❌ 错误! 返回对局部变量的引用
+// }  // s 在这里被 drop,引用指向无效内存
+
+// ✅ 正确: 返回所有权
+fn no_dangle() -> String {
+    let s = String::from("hello");
+    s  // 移动所有权出去
+}
+```
+
+**说明**:
+
+- **NLL**: 非词法作用域生命周期,引用在最后一次使用后即可结束
+- **悬垂引用**: Rust 编译器会阻止返回指向已释放内存的引用
+- **作用域**: 使用 `{}` 创建新作用域来分隔借用
+
+**输出**:
+
+```text
+===== 错误1: 同时存在可变和不可变借用 =====
+hello and hello
+hello world
+
+===== 错误2: 多个可变借用 =====
+r1: 11
+r2: 12
+
+===== 错误3: 悬垂引用 =====
+no_dangle: hello
+
+===== 正确使用: NLL (非词法作用域生命周期) =====
+hello and hello
+hello world
+```
+
+**常见错误总结**:
+
+| 错误类型               | 原因               | 解决方案            |
+| :--- | :--- | :--- |
+| 同时存在 `&` 和 `&mut` | 违反借用规则       | 先使用完不可变借用  |
+| 多个 `&mut`            | 违反独占规则       | 使用作用域分隔      |
+| 悬垂引用               | 返回局部变量的引用 | 返回所有权,不是引用 |
+| 使用已移动的值         | 所有权已转移       | 使用引用或 clone    |
+
+---
+
+## 🚀 Tier 2: 实践应用示例
+
+### 示例2.1: 函数参数生命周期
+
+**目标**: 理解函数中的生命周期标注
+
+**难度**: ⭐⭐
+
+**代码**:
+
+```rust
+fn main() {
+    let string1 = String::from("long string is long");
+    let string2 = String::from("xyz");
+
+    let result = longest(&string1, &string2);
+    println!("最长的字符串是: {}", result);
+
+    // ===== 生命周期确保了引用的有效性 =====
+
+    let string1 = String::from("long string is long");
+    let result;
+    {
+        let string2 = String::from("xyz");
+        result = longest(&string1, &string2);
+        println!("内部作用域: {}", result);  // ✅ 有效
+    }
+    // println!("外部作用域: {}", result);  // ❌ 错误! string2 已失效
+
+    // ===== 生命周期约束 =====
+
+    let s1 = String::from("hello");
+    let s2 = String::from("world");
+    let result = first_word(&s1, &s2);
+    println!("第一个单词: {}", result);
+}
+
+// 生命周期标注: 'a 表示所有参数和返回值有相同的生命周期
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+
+// 返回值的生命周期与第一个参数相同
+fn first_word<'a>(s: &'a str, _other: &str) -> &'a str {
+    // _other 的生命周期与返回值无关,不需要标注
+    s.split_whitespace().next().unwrap_or("")
+}
+```
+
+**说明**:
+
+- **生命周期标注**: `'a` 是生命周期参数,表示引用的有效期
+- **生命周期约束**: 返回的引用不能超过参数的生命周期
+- **省略规则**: 编译器可以推断某些情况下的生命周期
+
+**输出**:
+
+```text
+最长的字符串是: long string is long
+内部作用域: long string is long
+第一个单词: hello
+```
+
+**生命周期规则**:
+
+- 🎯 返回的引用必须与某个输入参数的生命周期相关
+- 🎯 生命周期标注不会改变实际生命周期,只是描述关系
+- 🎯 多个输入参数时,必须明确指定生命周期关系
+
+---
+
+### 示例2.2: 结构体生命周期
+
+**目标**: 在结构体中使用生命周期标注
+
+**难度**: ⭐⭐
+
+**代码**:
+
+```rust
+// 结构体包含引用时,必须标注生命周期
+struct ImportantExcerpt<'a> {
+    part: &'a str,
+}
+
+impl<'a> ImportantExcerpt<'a> {
+    // 方法的生命周期省略规则
+    fn level(&self) -> i32 {
+        3
+    }
+
+    // 返回结构体中的引用
+    fn announce_and_return_part(&self, announcement: &str) -> &str {
+        println!("注意! {}", announcement);
+        self.part
+    }
+}
+
+fn main() {
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    let first_sentence = novel.split('.').next().expect("Could not find a '.'");
+
+    let i = ImportantExcerpt {
+        part: first_sentence,
+    };
+
+    println!("重要摘录: {}", i.part);
+    println!("级别: {}", i.level());
+
+    let result = i.announce_and_return_part("听好了!");
+    println!("返回: {}", result);
+
+    // ===== 生命周期约束示例 =====
+
+    let excerpt;
+    {
+        let novel = String::from("Once upon a time...");
+        let first_line = novel.split('\n').next().unwrap();
+
+        excerpt = ImportantExcerpt {
+            part: first_line,
+        };
+
+        println!("内部: {}", excerpt.part);  // ✅ 有效
+    }
+    // println!("外部: {}", excerpt.part);  // ❌ 错误! novel 已失效
+
+    // ===== 多个生命周期参数 =====
+
+    let s1 = String::from("hello");
+    let s2 = String::from("world");
+    let result = longest_with_announcement(&s1, &s2, "比较中...");
+    println!("结果: {}", result);
+}
+
+// 多个生命周期参数
+fn longest_with_announcement<'a, 'b>(
+    x: &'a str,
+    y: &'a str,
+    ann: &'b str,
+) -> &'a str {
+    println!("公告: {}", ann);
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+```
+
+**说明**:
+
+- **结构体生命周期**: 结构体包含引用时必须标注生命周期
+- **impl 生命周期**: 实现方法时也需要生命周期参数
+- **多生命周期**: 不同引用可以有不同的生命周期
+
+**输出**:
+
+```text
+重要摘录: Call me Ishmael
+级别: 3
+注意! 听好了!
+返回: Call me Ishmael
+内部: Once upon a time...
+公告: 比较中...
+结果: hello
+```
+
+---
+
+### 示例2.3: 生命周期省略规则
+
+**目标**: 理解何时可以省略生命周期标注
+
+**难度**: ⭐⭐
+
+**代码**:
+
+```rust
+fn main() {
+    let s = String::from("hello world");
+    let first = first_word(&s);
+    println!("第一个单词: {}", first);
+
+    let s1 = String::from("hello");
+    let s2 = String::from("world");
+    let result = compare(&s1, &s2);
+    println!("比较结果: {}", result);
+}
+
+// ===== 规则1: 每个引用参数都有自己的生命周期 =====
+
+// 编译器自动推断为:
+// fn first_word<'a>(s: &'a str) -> &'a str
+fn first_word(s: &str) -> &str {
+    s.split_whitespace().next().unwrap_or("")
+}
+
+// ===== 规则2: 只有一个输入生命周期参数时,返回值使用它 =====
+
+// 编译器自动推断为:
+// fn get_first_char<'a>(s: &'a str) -> &'a str
+fn get_first_char(s: &str) -> &str {
+    &s[0..1]
+}
+
+// ===== 规则3: 方法的 &self 生命周期赋予所有返回引用 =====
+
+struct StringHolder {
+    content: String,
+}
+
+impl StringHolder {
+    // 编译器自动推断为:
+    // fn get_content<'a>(&'a self) -> &'a str
+    fn get_content(&self) -> &str {
+        &self.content
+    }
+
+    // 多个参数时,返回值使用 self 的生命周期
+    fn get_or_default(&self, default: &str) -> &str {
+        if self.content.is_empty() {
+            default  // ⚠️ 这可能有问题!
+        } else {
+            &self.content
+        }
+    }
+}
+
+// ===== 需要显式标注的情况 =====
+
+// 多个输入参数,且返回值可能来自任一参数
+// 必须显式标注
+fn compare<'a>(s1: &'a str, s2: &'a str) -> &'a str {
+    if s1.len() > s2.len() {
+        s1
+    } else {
+        s2
+    }
+}
+
+// 不同的生命周期参数
+fn longest_with_context<'a, 'b>(
+    s1: &'a str,
+    s2: &'a str,
+    context: &'b str,  // 不同的生命周期
+) -> &'a str {
+    println!("上下文: {}", context);
+    if s1.len() > s2.len() {
+        s1
+    } else {
+        s2
+    }
+}
+```
+
+**说明**:
+
+- **省略规则1**: 每个输入引用参数都有独立的生命周期
+- **省略规则2**: 只有一个输入时,它的生命周期赋给所有输出
+- **省略规则3**: 方法中,`&self` 的生命周期赋给所有输出
+
+**输出**:
+
+```text
+第一个单词: hello
+比较结果: hello
+```
+
+**何时需要显式标注**:
+
+- ✅ 多个输入引用,且返回值可能来自任一个
+- ✅ 输入和输出的生命周期关系不明显
+- ✅ 结构体包含引用字段
+- ❌ 单个输入引用,返回值来自它
+- ❌ 方法返回 `&self` 的字段
+
+---
+
+### 示例2.4: 切片操作实践
+
+**目标**: 掌握字符串切片和数组切片的使用
+
+**难度**: ⭐⭐
+
+**代码**:
+
+```rust
+fn main() {
+    println!("===== 字符串切片 =====\n");
+
+    let s = String::from("hello world");
+
+    // 创建切片
+    let hello = &s[0..5];   // 或 &s[..5]
+    let world = &s[6..11];  // 或 &s[6..]
+    let whole = &s[..];     // 整个字符串
+
+    println!("hello: {}", hello);
+    println!("world: {}", world);
+    println!("whole: {}", whole);
+
+    // 字符串字面值就是切片
+    let literal: &str = "hello world";
+    println!("literal: {}", literal);
+
+    // 实用函数: 获取第一个单词
+    let s = String::from("hello world rust");
+    let first = first_word(&s);
+    println!("第一个单词: {}", first);
+
+    // 切片防止悬垂引用
+    let mut s = String::from("hello world");
+    let word = first_word(&s);
+
+    // s.clear();  // ❌ 错误! 不能在不可变借用存在时修改
+    println!("单词: {}", word);
+
+    println!("\n===== 数组切片 =====\n");
+
+    let a = [1, 2, 3, 4, 5];
+
+    // 创建数组切片
+    let slice = &a[1..3];  // [2, 3]
+
+    println!("原数组: {:?}", a);
+    println!("切片: {:?}", slice);
+    println!("切片类型: &[i32;{}]", slice.len());
+
+    // 迭代切片
+    for (i, &val) in slice.iter().enumerate() {
+        println!("  slice[{}] = {}", i, val);
+    }
+
+    // 可变切片
+    let mut arr = [1, 2, 3, 4, 5];
+    let slice_mut = &mut arr[..3];
+
+    slice_mut[0] = 10;
+    slice_mut[1] = 20;
+
+    println!("修改后的数组: {:?}", arr);
+
+    println!("\n===== 切片模式匹配 =====\n");
+
+    let numbers = vec![1, 2, 3, 4, 5];
+
+    match &numbers[..] {
+        [] => println!("空"),
+        [x] => println!("只有一个元素: {}", x),
+        [first, .., last] => println!("第一个: {}, 最后一个: {}", first, last),
+    }
+
+    // UTF-8 安全
+    let s = String::from("你好世界");
+    // let slice = &s[0..2];  // ❌ panic! 可能切在字符中间
+    let slice = &s[0..3];  // ✅ "你" 占 3 字节
+    println!("UTF-8 切片: {}", slice);
+}
+
+fn first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
+}
+```
+
+**说明**:
+
+- **字符串切片**: `&str` 是对 String 的一部分的引用
+- **数组切片**: `&[T]` 是对数组的一部分的引用
+- **UTF-8 安全**: 切片索引必须在字符边界
+
+**输出**:
+
+```text
+===== 字符串切片 =====
+
+hello: hello
+world: world
+whole: hello world
+literal: hello world
+第一个单词: hello
+单词: hello
+
+===== 数组切片 =====
+
+原数组: [1, 2, 3, 4, 5]
+切片: [2, 3]
+切片类型: &[i32;2]
+  slice[0] = 2
+  slice[1] = 3
+修改后的数组: [10, 20, 3, 4, 5]
+
+===== 切片模式匹配 =====
+
+第一个: 1, 最后一个: 5
+UTF-8 切片: 你
+```
+
+**切片要点**:
+
+- 🎯 切片是引用,不拥有数据
+- 🎯 索引范围 `[start..end]` 是半开区间
+- 🎯 UTF-8 字符串切片必须在字符边界
+- 🎯 切片可以防止部分悬垂引用问题
+
+---
+
+### 示例2.5: String vs &str 深入理解
+
+**目标**: 理解 String 和 &str 的区别和使用场景
+
+**难度**: ⭐⭐
+
+**代码**:
+
+```rust
+fn main() {
+    println!("===== String: 可增长的堆字符串 =====\n");
+
+    // 创建 String
+    let mut s1 = String::new();  // 空字符串
+    let s2 = String::from("hello");
+    let s3 = "hello".to_string();
+    let s4 = "hello".to_owned();
+
+    // String 可以修改
+    s1.push_str("hello");
+    s1.push(' ');
+    s1.push_str("world");
+
+    println!("s1: {}", s1);
+    println!("s1 容量: {}, 长度: {}", s1.capacity(), s1.len());
+
+    println!("\n===== &str: 字符串切片 =====\n");
+
+    // 字符串字面值是 &str
+    let s5: &str = "hello";
+
+    // String 可以 deref 到 &str
+    let s6: &str = &s2;
+
+    // 切片是 &str
+    let s7: &str = &s2[0..2];
+
+    println!("s5 (字面值): {}", s5);
+    println!("s6 (deref): {}", s6);
+    println!("s7 (切片): {}", s7);
+
+    println!("\n===== 类型转换 =====\n");
+
+    // &str → String
+    let s8: String = "hello".to_string();
+    let s9: String = "hello".to_owned();
+    let s10: String = String::from("hello");
+
+    // String → &str (自动)
+    let s11: &str = &s8;  // deref coercion
+
+    // String → &str (显式)
+    let s12: &str = s8.as_str();
+
+    println!("转换示例: s8={}, s11={}, s12={}", s8, s11, s12);
+
+    println!("\n===== 函数参数最佳实践 =====\n");
+
+    let string = String::from("hello");
+    let literal = "world";
+
+    // ✅ 推荐: 使用 &str 作为参数
+    print_string_slice(&string);  // String 自动转为 &str
+    print_string_slice(literal);  // &str 直接使用
+
+    // ❌ 不推荐: 使用 String 作为参数
+    // print_string_owned(literal);  // 错误! &str 不能直接转为 String
+    print_string_owned(literal.to_string());  // 需要显式转换
+
+    println!("\n===== 性能对比 =====\n");
+
+    // String: 堆分配,有开销
+    let s = String::from("hello");
+    println!("String 大小: {} 字节 (栈上指针+长度+容量)",
+             std::mem::size_of_val(&s));
+
+    // &str: 只是引用,轻量
+    let s_ref: &str = &s;
+    println!("&str 大小: {} 字节 (指针+长度)",
+             std::mem::size_of_val(&s_ref));
+
+    println!("\n===== 使用场景 =====\n");
+
+    demo_string_usage();
+}
+
+// ✅ 推荐: 参数使用 &str
+fn print_string_slice(s: &str) {
+    println!("  &str 参数: {}", s);
+}
+
+// ❌ 不推荐: 参数使用 String (除非需要所有权)
+fn print_string_owned(s: String) {
+    println!("  String 参数: {}", s);
+}
+
+fn demo_string_usage() {
+    // 场景1: 需要修改 → 使用 String
+    let mut greeting = String::from("Hello");
+    greeting.push_str(", world!");
+    println!("场景1 (可修改): {}", greeting);
+
+    // 场景2: 只读 → 使用 &str
+    let message: &str = "Hello, Rust!";
+    println!("场景2 (只读): {}", message);
+
+    // 场景3: 需要所有权 → 使用 String
+    let owned = create_string();
+    println!("场景3 (所有权): {}", owned);
+
+    // 场景4: 字符串拼接 → String
+    let s1 = String::from("Hello");
+    let s2 = String::from("World");
+    let s3 = format!("{} {}", s1, s2);  // format! 返回 String
+    println!("场景4 (拼接): {}", s3);
+}
+
+fn create_string() -> String {
+    String::from("Created string")
+}
+```
+
+**说明**:
+
+- **String**: 可增长的堆分配字符串,拥有数据
+- **&str**: 字符串切片,只是引用,不可变
+- **转换**: String 可以自动 deref 到 &str
+
+**输出**:
+
+```text
+===== String: 可增长的堆字符串 =====
+
+s1: hello world
+s1 容量: 11, 长度: 11
+
+===== &str: 字符串切片 =====
+
+s5 (字面值): hello
+s6 (deref): hello
+s7 (切片): he
+
+===== 类型转换 =====
+
+转换示例: s8=hello, s11=hello, s12=hello
+
+===== 函数参数最佳实践 =====
+
+  &str 参数: hello
+  &str 参数: world
+  String 参数: world
+
+===== 性能对比 =====
+
+String 大小: 24 字节 (栈上指针+长度+容量)
+&str 大小: 16 字节 (指针+长度)
+
+===== 使用场景 =====
+
+场景1 (可修改): Hello, world!
+场景2 (只读): Hello, Rust!
+场景3 (所有权): Created string
+场景4 (拼接): Hello World
+```
+
+**对比总结**:
+
+| 特性     | String          | &str         |
+| :--- | :--- | :--- |
+| 所有权   | 拥有数据        | 借用数据     |
+| 可变性   | 可修改          | 不可修改     |
+| 分配     | 堆分配          | 引用(栈或堆) |
+| 大小     | 动态            | 固定(切片)   |
+| 使用场景 | 需要修改/所有权 | 只读/参数    |
+| 函数参数 | 需要所有权时    | ✅ 推荐      |
+
+---
+
+## 🎓 Tier 3: 深入理解示例
+
+### 示例3.1: 复杂生命周期场景
+
+**目标**: 处理多个生命周期参数和约束
+
+**难度**: ⭐⭐⭐
+
+**代码**:
+
+```rust
+use std::fmt::Display;
+
+fn main() {
+    let string1 = String::from("long string is long");
+    let string2 = String::from("xyz");
+
+    let result = longest_with_announcement(
+        &string1,
+        &string2,
+        "今天我们要比较字符串!",
+    );
+
+    println!("最长的字符串是 '{}'", result);
+
+    // ===== 复杂的生命周期约束 =====
+
+    let s1 = String::from("hello");
+    let s2 = String::from("world");
+    let s3 = String::from("rust");
+
+    let result = complex_lifetime(&s1, &s2, &s3);
+    println!("复杂生命周期结果: {}", result);
+
+    // ===== 生命周期子类型 =====
+
+    let s1 = String::from("outer");
+    {
+        let s2 = String::from("inner");
+        // 's1 的生命周期长于 's2
+        let result = choose_first(&s1, &s2);
+        println!("选择结果: {}", result);
+    }
+    // s1 仍然有效
+    println!("外部: {}", s1);
+}
+
+// 多个生命周期参数 + trait bound
+fn longest_with_announcement<'a, 'b, T>(
+    x: &'a str,
+    y: &'a str,
+    ann: &'b T,
+) -> &'a str
+where
+    T: Display,
+{
+    println!("公告! {}", ann);
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+
+// 复杂的生命周期关系
+fn complex_lifetime<'a, 'b, 'c>(
+    x: &'a str,
+    y: &'b str,
+    z: &'c str,
+) -> &'a str
+where
+    'b: 'a,  // 'b 的生命周期至少和 'a 一样长
+    'c: 'a,  // 'c 的生命周期至少和 'a 一样长
+{
+    println!("x: {}, y: {}, z: {}", x, y, z);
+    x  // 返回值的生命周期是 'a
+}
+
+// 返回值总是第一个参数 (展示生命周期子类型)
+fn choose_first<'a, 'b>(first: &'a str, _second: &'b str) -> &'a str {
+    first
+}
+
+// 结构体中的生命周期
+struct Context<'s> {
+    part: &'s str,
+}
+
+impl<'s> Context<'s> {
+    fn get_part(&self) -> &'s str {
+        self.part
+    }
+}
+
+// 高阶 trait bounds (HRTB)
+fn apply<F>(f: F) -> String
+where
+    F: for<'a> Fn(&'a str) -> &'a str,
+{
+    let s = String::from("hello");
+    f(&s).to_string()
+}
+```
+
+**说明**:
+
+- **多生命周期**: 不同引用可以有不同的生命周期参数
+- **生命周期约束**: `'b: 'a` 表示 'b 至少和 'a 一样长
+- **HRTB**: 高阶 trait bounds,处理所有可能的生命周期
+
+**输出**:
+
+```text
+公告! 今天我们要比较字符串!
+最长的字符串是 'long string is long'
+x: hello, y: world, z: rust
+复杂生命周期结果: hello
+选择结果: outer
+外部: outer
+```
+
+---
+
+### 示例3.2: 'static 生命周期详解
+
+**目标**: 理解静态生命周期的含义和使用
+
+**难度**: ⭐⭐⭐
+
+**代码**:
+
+```rust
+fn main() {
+    println!("===== 'static 字符串字面值 =====\n");
+
+    // 字符串字面值具有 'static 生命周期
+    let s: &'static str = "我是静态字符串";
+    println!("{}", s);
+
+    // 存储在二进制文件中,整个程序运行期间都有效
+    let s1 = "hello";
+    let s2 = "hello";
+    println!("s1 和 s2 的地址相同: {}", std::ptr::eq(s1, s2));
+
+    println!("\n===== 'static 约束 =====\n");
+
+    // 函数要求参数有 'static 生命周期
+    print_static("这是静态的");
+
+    // String 可以转换为 'static (通过 leak)
+    let string = String::from("动态字符串");
+    let static_str: &'static str = Box::leak(string.into_boxed_str());
+    print_static(static_str);
+
+    println!("\n===== 'static 与泛型 =====\n");
+
+    let s = String::from("hello");
+    // generic_function(&s);  // ❌ 错误! &s 不是 'static
+
+    let s: &'static str = "hello";
+    generic_function(s);  // ✅ 可以
+
+    println!("\n===== 'static trait 对象 =====\n");
+
+    let boxed: Box<dyn std::fmt::Display + 'static> = Box::new(42);
+    println!("Trait 对象: {}", boxed);
+
+    println!("\n===== 误解与澄清 =====\n");
+
+    // 误解1: 'static 表示数据永久存在
+    // 正确: 'static 表示引用可以存活整个程序运行期
+
+    let s: &'static str = "literal";  // 数据在二进制中
+    println!("误解1: {}", s);
+
+    // 误解2: 所有 'static 数据都不可变
+    // 正确: static 变量可以是可变的 (但需要 unsafe)
+
+    static COUNTER: std::sync::atomic::AtomicI32 = std::sync::atomic::AtomicI32::new(0);
+    unsafe {
+        COUNTER += 1;
+        println!("误解2: COUNTER = {}", COUNTER);
+    }
+
+    println!("\n===== 实际使用场景 =====\n");
+
+    // 场景1: 全局配置
+    const CONFIG: &str = "配置字符串";
+    println!("场景1: {}", CONFIG);
+
+    // 场景2: 错误消息
+    fn get_error_message() -> &'static str {
+        "发生了一个错误"
+    }
+    println!("场景2: {}", get_error_message());
+
+    // 场景3: 单例模式
+    static INSTANCE: std::sync::Once = std::sync::Once::new();
+    INSTANCE.call_once(|| {
+        println!("场景3: 单例初始化");
+    });
+}
+
+fn print_static(s: &'static str) {
+    println!("  静态字符串: {}", s);
+}
+
+fn generic_function<T: std::fmt::Display + 'static>(t: T) {
+    println!("  泛型参数: {}", t);
+}
+```
+
+**说明**:
+
+- **'static 含义**: 引用在整个程序运行期都有效
+- **字符串字面值**: 存储在二进制中,天然是 'static
+- **'static 约束**: 要求数据能够存活整个程序运行期
+
+**输出**:
+
+```text
+===== 'static 字符串字面值 =====
+
+我是静态字符串
+s1 和 s2 的地址相同: true
+
+===== 'static 约束 =====
+
+  静态字符串: 这是静态的
+  静态字符串: 动态字符串
+
+===== 'static 与泛型 =====
+
+  泛型参数: hello
+
+===== 'static trait 对象 =====
+
+Trait 对象: 42
+
+===== 误解与澄清 =====
+
+误解1: literal
+误解2: COUNTER = 1
+
+===== 实际使用场景 =====
+
+场景1: 配置字符串
+场景2: 发生了一个错误
+场景3: 单例初始化
+```
+
+**关键要点**:
+
+- 🎯 'static != 不可变
+- 🎯 'static != 泄漏内存
+- 🎯 'static 只是生命周期约束
+- 🎯 谨慎使用 Box::leak
+
+---
+
+### 示例3.3: RefCell 内部可变性
+
+**目标**: 使用 RefCell 实现内部可变性
+
+**难度**: ⭐⭐⭐
+
+**代码**:
+
+```rust
+use std::cell::RefCell;
+
+fn main() {
+    println!("===== RefCell 基础使用 =====\n");
+
+    // RefCell 允许在不可变引用下修改数据
+    let data = RefCell::new(5);
+
+    println!("初始值: {:?}", data);
+
+    // 借用可变引用并修改
+    *data.borrow_mut() += 1;
+
+    println!("修改后: {:?}", data);
+
+    // 读取数据
+    println!("读取: {}", *data.borrow());
+
+    println!("\n===== 借用规则在运行时检查 =====\n");
+
+    let value = RefCell::new(String::from("hello"));
+
+    // 可以有多个不可变借用
+    let r1 = value.borrow();
+    let r2 = value.borrow();
+    println!("r1: {}, r2: {}", r1, r2);
+    // r1 和 r2 在这里结束
+
+    // 现在可以可变借用
+    let mut r3 = value.borrow_mut();
+    r3.push_str(" world");
+    println!("r3: {}", r3);
+    // r3 在这里结束
+
+    println!("最终值: {}", value.borrow());
+
+    // ⚠️ 运行时 panic 示例 (取消注释查看)
+    // let r1 = value.borrow();
+    // let r2 = value.borrow_mut();  // Panic! 违反借用规则
+    // println!("{}, {}", r1, r2);
+
+    println!("\n===== 实际应用: 图结构 =====\n");
+
+    let node1 = Node::new(1);
+    let node2 = Node::new(2);
+
+    node1.add_neighbor(&node2);
+    node2.add_neighbor(&node1);
+
+    println!("节点1的邻居数: {}", node1.neighbor_count());
+    println!("节点2的邻居数: {}", node2.neighbor_count());
+
+    println!("\n===== 与 Rc 结合使用 =====\n");
+
+    demo_rc_refcell();
+}
+
+// 图节点 (使用 RefCell 实现内部可变性)
+struct Node {
+    value: i32,
+    neighbors: RefCell<Vec<*const Node>>,
+}
+
+impl Node {
+    fn new(value: i32) -> Self {
+        Node {
+            value,
+            neighbors: RefCell::new(Vec::new()),
+        }
+    }
+
+    fn add_neighbor(&self, node: &Node) {
+        // 在不可变 &self 下修改 neighbors
+        self.neighbors.borrow_mut().push(node as *const Node);
+    }
+
+    fn neighbor_count(&self) -> usize {
+        self.neighbors.borrow().len()
+    }
+}
+
+// Rc + RefCell 的常见模式
+use std::rc::Rc;
+
+fn demo_rc_refcell() {
+    let shared_data = Rc::new(RefCell::new(vec![1, 2, 3]));
+
+    // 克隆 Rc,共享所有权
+    let data1 = Rc::clone(&shared_data);
+    let data2 = Rc::clone(&shared_data);
+
+    // 通过 data1 修改
+    data1.borrow_mut().push(4);
+
+    // 通过 data2 读取
+    println!("data2 读取: {:?}", data2.borrow());
+
+    // 通过 shared_data 修改
+    shared_data.borrow_mut().push(5);
+
+    println!("最终数据: {:?}", shared_data.borrow());
+    println!("引用计数: {}", Rc::strong_count(&shared_data));
+}
+```
+
+**说明**:
+
+- **RefCell**: 提供内部可变性,运行时检查借用规则
+- **borrow()**: 获取不可变引用
+- **borrow_mut()**: 获取可变引用
+- **Panic**: 违反借用规则会在运行时 panic
+
+**输出**:
+
+```text
+===== RefCell 基础使用 =====
+
+初始值: RefCell { value: 5 }
+修改后: RefCell { value: 6 }
+读取: 6
+
+===== 借用规则在运行时检查 =====
+
+r1: hello, r2: hello
+r3: hello world
+最终值: hello world
+
+===== 实际应用: 图结构 =====
+
+节点1的邻居数: 1
+节点2的邻居数: 1
+
+===== 与 Rc 结合使用 =====
+
+data2 读取: [1, 2, 3, 4]
+最终数据: [1, 2, 3, 4, 5]
+引用计数: 3
+```
+
+**使用场景**:
+
+- ✅ 图结构、树结构 (需要循环引用)
+- ✅ 缓存、记忆化
+- ✅ 观察者模式
+- ❌ 不是线程安全 (多线程用 Mutex)
+
+---
+
+### 示例3.4: Cell 简单内部可变性
+
+**目标**: 使用 Cell 提供 Copy 类型的内部可变性
+
+**难度**: ⭐⭐⭐
+
+**代码**:
+
+```rust
+use std::cell::Cell;
+
+fn main() {
+    println!("===== Cell 基础使用 =====\n");
+
+    // Cell 只能用于 Copy 类型
+    let data = Cell::new(5);
+
+    println!("初始值: {:?}", data);
+
+    // 设置新值
+    data.set(10);
+
+    // 获取值 (复制)
+    let value = data.get();
+    println!("获取值: {}", value);
+
+    println!("Cell 内的值: {:?}", data);
+
+    println!("\n===== Cell vs RefCell =====\n");
+
+    // Cell: 用于 Copy 类型,无运行时开销
+    let cell = Cell::new(42);
+    cell.set(43);
+    println!("Cell: {}", cell.get());
+
+    // RefCell: 用于非 Copy 类型,有运行时检查
+    use std::cell::RefCell;
+    let refcell = RefCell::new(String::from("hello"));
+    refcell.borrow_mut().push_str(" world");
+    println!("RefCell: {}", refcell.borrow());
+
+    println!("\n===== 实际应用: 计数器 =====\n");
+
+    let counter = Counter::new();
+
+    counter.increment();
+    counter.increment();
+    counter.increment();
+
+    println!("计数: {}", counter.get());
+
+    println!("\n===== 实际应用: 配置 =====\n");
+
+    let config = Config::new();
+
+    println!("初始配置: {:?}", config);
+
+    config.set_debug(true);
+    config.set_max_connections(100);
+
+    println!("修改后: {:?}", config);
+
+    println!("\n===== Cell 方法 =====\n");
+
+    let cell = Cell::new(10);
+
+    // get: 获取值 (复制)
+    println!("get: {}", cell.get());
+
+    // set: 设置新值
+    cell.set(20);
+    println!("set 后: {}", cell.get());
+
+    // replace: 替换并返回旧值
+    let old = cell.replace(30);
+    println!("replace: 旧值={}, 新值={}", old, cell.get());
+
+    // swap: 交换两个 Cell 的值
+    let cell2 = Cell::new(40);
+    cell.swap(&cell2);
+    println!("swap 后: cell={}, cell2={}", cell.get(), cell2.get());
+
+    // take: 取出值,留下 Default
+    let cell3 = Cell::new(50);
+    let value = cell3.take();
+    println!("take: value={}, cell3={}", value, cell3.get());
+}
+
+// 使用 Cell 实现计数器 (在不可变引用下可以修改)
+struct Counter {
+    count: Cell<u32>,
+}
+
+impl Counter {
+    fn new() -> Self {
+        Counter {
+            count: Cell::new(0),
+        }
+    }
+
+    // 不需要 &mut self!
+    fn increment(&self) {
+        let count = self.count.get();
+        self.count.set(count + 1);
+    }
+
+    fn get(&self) -> u32 {
+        self.count.get()
+    }
+}
+
+// 使用 Cell 实现配置 (允许内部修改)
+#[derive(Debug)]
+struct Config {
+    debug: Cell<bool>,
+    max_connections: Cell<usize>,
+}
+
+impl Config {
+    fn new() -> Self {
+        Config {
+            debug: Cell::new(false),
+            max_connections: Cell::new(10),
+        }
+    }
+
+    fn set_debug(&self, debug: bool) {
+        self.debug.set(debug);
+    }
+
+    fn set_max_connections(&self, max: usize) {
+        self.max_connections.set(max);
+    }
+}
+```
+
+**说明**:
+
+- **Cell**: 为 Copy 类型提供内部可变性,零开销
+- **无借用检查**: Cell 通过 copy 避免借用,无运行时检查
+- **限制**: 只能用于 Copy 类型 (i32, bool, 等)
+
+**输出**:
+
+```text
+===== Cell 基础使用 =====
+
+初始值: Cell { value: 5 }
+获取值: 10
+Cell 内的值: Cell { value: 10 }
+
+===== Cell vs RefCell =====
+
+Cell: 43
+RefCell: hello world
+
+===== 实际应用: 计数器 =====
+
+计数: 3
+
+===== 实际应用: 配置 =====
+
+初始配置: Config { debug: Cell { value: false }, max_connections: Cell { value: 10 } }
+修改后: Config { debug: Cell { value: true }, max_connections: Cell { value: 100 } }
+
+===== Cell 方法 =====
+
+get: 10
+set 后: 20
+replace: 旧值=20, 新值=30
+swap 后: cell=40, cell2=30
+take: value=50, cell3=0
+```
+
+**Cell vs RefCell**:
+
+| 特性       | Cell   | RefCell       |
+| :--- | :--- | :--- |
+| 适用类型   | Copy   | 任何类型      |
+| 运行时开销 | 零     | 有 (借用检查) |
+| 可能 panic | 否     | 是 (违反规则) |
+| 获取引用   | 不可以 | 可以          |
+| 使用场景   | 简单值 | 复杂类型      |
+
+---
+
+## 📝 总结
+
+### 学习路径建议
+
+1. **第一阶段** (Tier 1): 掌握基础
+   - 示例 1.1-1.5: 所有权和借用规则
+2. **第二阶段** (Tier 2): 实践应用
+   - 示例 2.1-2.5: 生命周期和字符串处理
+3. **第三阶段** (Tier 3): 深入理解
+   - 示例 3.1-3.4: 高级模式和内部可变性
+
+### 核心概念
+
+| 概念       | 相关示例         | 重要性     |
+| :--- | :--- | :--- |
+| 所有权转移 | 1.1, 1.2         | ⭐⭐⭐⭐⭐ |
+| 借用规则   | 1.3-1.5          | ⭐⭐⭐⭐⭐ |
+| 生命周期   | 2.1-2.3, 3.1-3.2 | ⭐⭐⭐⭐   |
+| 字符串类型 | 2.4-2.5          | ⭐⭐⭐⭐   |
+| 内部可变性 | 3.3-3.4          | ⭐⭐⭐     |
+
+### 下一步
+
+- 📖 学习更多: [智能指针实践](06_smart_pointers_practice.md)
+- 🚀 实战项目: [C01 实战项目集](08_hands_on_projects.md) (即将创建)
+- 📚 参考文档: [tier_03_references](../tier_03_references/README.md)
+
+---
+
+**文档版本**: v1.0
+**创建日期**: 2025-10-25
+**维护状态**: 活跃维护
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

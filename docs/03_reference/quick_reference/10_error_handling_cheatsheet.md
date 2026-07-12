@@ -1,0 +1,1031 @@
+# ⚠️ Rust 错误处理速查卡 {#rust-错误处理速查卡}
+
+<!-- canonical-normalized 2026-07-11 -->
+> **权威来源（Canonical）**: 本文件为错误处理速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L2 错误处理`](../../../concept/02_intermediate/03_error_handling/01_error_handling.md)
+>
+> 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（Result/Option/panic 模式、常用方法、错误处理库、反例速查），不重复 concept/ 中的概念定义、规则与定理推导。
+
+> **EN**: Error Handling Cheatsheet
+> **Summary**: ⚠️ Rust 错误处理速查卡 Error Handling Cheatsheet. (stub/archive redirect)
+> **分级**: [A]
+> **Bloom 层级**: L2-L3
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [研究者级]
+
+## 📑 目录 {#目录}
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+- [⚠️ Rust 错误处理速查卡 {#rust-错误处理速查卡}](#️-rust-错误处理速查卡-rust-错误处理速查卡)
+  - [📑 目录 {#目录}](#-目录-目录)
+  - [🎯 核心概念 {#核心概念}](#-核心概念-核心概念)
+    - [Result 类型 {#result-类型}](#result-类型-result-类型)
+    - [Option 类型 {#option-类型}](#option-类型-option-类型)
+  - [📐 基本模式 {#基本模式}](#-基本模式-基本模式)
+    - [模式 1: 匹配处理 {#模式-1-匹配处理}](#模式-1-匹配处理-模式-1-匹配处理)
+    - [模式 2: unwrap 和 expect {#模式-2-unwrap-和-expect}](#模式-2-unwrap-和-expect-模式-2-unwrap-和-expect)
+    - [模式 3: ? 操作符 {#模式-3-操作符}](#模式-3--操作符-模式-3-操作符)
+  - [🔧 常用方法 {#常用方法}](#-常用方法-常用方法)
+    - [Result 方法 {#result-方法}](#result-方法-result-方法)
+    - [Option 方法 {#option-方法}](#option-方法-option-方法)
+  - [🎯 错误处理库 {#错误处理库}](#-错误处理库-错误处理库)
+    - [anyhow - 灵活的错误处理 {#anyhow---灵活的错误处理}](#anyhow---灵活的错误处理-anyhow---灵活的错误处理)
+    - [thiserror - 自定义错误类型 {#thiserror---自定义错误类型}](#thiserror---自定义错误类型-thiserror---自定义错误类型)
+  - [🚫 反例速查 {#反例速查}](#-反例速查-反例速查)
+    - [反例 1: 生产代码滥用 unwrap {#反例-1-生产代码滥用-unwrap}](#反例-1-生产代码滥用-unwrap-反例-1-生产代码滥用-unwrap)
+    - [反例 2: 在非 Result 返回类型函数中使用 ? {#反例-2-在非-result-返回类型函数中使用}](#反例-2-在非-result-返回类型函数中使用--反例-2-在非-result-返回类型函数中使用)
+    - [反例 3: 混淆 Option 与 Result 语义 {#反例-3-混淆-option-与-result-语义}](#反例-3-混淆-option-与-result-语义-反例-3-混淆-option-与-result-语义)
+  - [📚 相关文档 {#相关文档}](#-相关文档-相关文档)
+  - [🧩 相关示例代码 {#相关示例代码}](#-相关示例代码-相关示例代码)
+  - [🔗 相关资源 {#相关资源}](#-相关资源-相关资源)
+  - [🆕 Rust 1.93.0 错误处理改进 {#rust-1930-错误处理改进}](#-rust-1930-错误处理改进-rust-1930-错误处理改进)
+    - [MaybeUninit 错误处理增强 {#maybeuninit-错误处理增强}](#maybeuninit-错误处理增强-maybeuninit-错误处理增强)
+  - [Rust 1.95+ ControlFlow 深度错误控制 {#rust-195-controlflow-深度错误控制}](#rust-195-controlflow-深度错误控制-rust-195-controlflow-深度错误控制)
+    - [ControlFlow vs Result：语义对比 {#controlflow-vs-result语义对比}](#controlflow-vs-result语义对比-controlflow-vs-result语义对比)
+    - [Rust 1.95+ ControlFlow 核心 API {#rust-195-controlflow-核心-api}](#rust-195-controlflow-核心-api-rust-195-controlflow-核心-api)
+    - [生产场景 1：批量任务处理（超时 + 错误阈值） {#生产场景-1批量任务处理超时-错误阈值}](#生产场景-1批量任务处理超时--错误阈值-生产场景-1批量任务处理超时-错误阈值)
+    - [生产场景 2：连接池快速健康检查 {#生产场景-2连接池快速健康检查}](#生产场景-2连接池快速健康检查-生产场景-2连接池快速健康检查)
+    - [生产场景 3：树形结构搜索（短路求值） {#生产场景-3树形结构搜索短路求值}](#生产场景-3树形结构搜索短路求值-生产场景-3树形结构搜索短路求值)
+    - [生产场景 4：验证管道（组合模式） {#生产场景-4验证管道组合模式}](#生产场景-4验证管道组合模式-生产场景-4验证管道组合模式)
+    - [与 Try trait 的集成 {#与-try-trait-的集成}](#与-try-trait-的集成-与-try-trait-的集成)
+    - [性能优势 {#性能优势}](#性能优势-性能优势)
+  - [Rust 1.92.0 错误处理改进（历史） {#rust-1920-错误处理改进历史}](#rust-1920-错误处理改进历史-rust-1920-错误处理改进历史)
+    - [ControlFlow 改进 {#controlflow-改进}](#controlflow-改进-controlflow-改进)
+  - [📚 相关资源 {#相关资源-1}](#-相关资源-相关资源-1)
+    - [官方文档 {#官方文档}](#官方文档-官方文档)
+    - [项目内部文档 {#项目内部文档}](#项目内部文档-项目内部文档)
+    - [相关速查卡 {#相关速查卡}](#相关速查卡-相关速查卡)
+  - [💡 使用场景 {#使用场景}](#-使用场景-使用场景)
+    - [场景 1: 配置文件解析 {#场景-1-配置文件解析}](#场景-1-配置文件解析-场景-1-配置文件解析)
+    - [场景 2: 用户输入验证 {#场景-2-用户输入验证}](#场景-2-用户输入验证-场景-2-用户输入验证)
+    - [场景 3: 链式操作处理 {#场景-3-链式操作处理}](#场景-3-链式操作处理-场景-3-链式操作处理)
+  - [⚠️ 边界情况 {#边界情况}](#️-边界情况-边界情况)
+    - [边界 1: 错误类型转换 {#边界-1-错误类型转换}](#边界-1-错误类型转换-边界-1-错误类型转换)
+    - [边界 2:  panic 恢复 {#边界-2-panic-恢复}](#边界-2--panic-恢复-边界-2-panic-恢复)
+    - [形式化理论 {#形式化理论}](#形式化理论-形式化理论)
+  - [相关概念 {#相关概念}](#相关概念-相关概念)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
+
+> **快速参考** | [完整文档](../../../crates/c03_control_fn/docs/README.md) | [代码示例](../../../crates/c03_control_fn/examples/README.md)
+> **创建日期**: 2026-01-27
+> **最后更新**: 2026-05-08
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **状态**: ✅ 已完成
+
+---
+
+## 🎯 核心概念 {#核心概念}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### Result 类型 {#result-类型}
+
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust
+enum Result<T, E> {
+    Ok(T),   // 成功值
+    Err(E),  // 错误值
+}
+```
+
+### Option 类型 {#option-类型}
+
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust
+enum Option<T> {
+    Some(T),  // 有值
+    None,     // 无值
+}
+```
+
+---
+
+## 📐 基本模式 {#基本模式}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 模式 1: 匹配处理 {#模式-1-匹配处理}
+
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust,ignore
+match result {
+    Ok(value) => println!("成功: {}", value),
+    Err(e) => println!("错误: {}", e),
+}
+```
+
+### 模式 2: unwrap 和 expect {#模式-2-unwrap-和-expect}
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust,ignore
+// unwrap: 成功返回值，失败 panic
+let value = result.unwrap();
+
+// expect: 带错误消息的 unwrap
+let value = result.expect("操作失败");
+```
+
+### 模式 3: ? 操作符 {#模式-3-操作符}
+
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust,ignore
+fn read_file() -> Result<String, io::Error> {
+    let mut file = File::open("file.txt")?;  // 自动传播错误
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+    Ok(contents)
+}
+```
+
+---
+
+## 🔧 常用方法 {#常用方法}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### Result 方法 {#result-方法}
+
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust,ignore
+// 映射值
+let result = Ok(5);
+let mapped = result.map(|x| x * 2);  // Ok(10)
+
+// 映射错误
+let result = Err("error");
+let mapped = result.map_err(|e| format!("Error: {}", e));
+
+// 解包或使用默认值
+let value = result.unwrap_or(0);
+let value = result.unwrap_or_else(|e| calculate_default());
+
+// 链式操作
+let result = Ok(5)
+    .and_then(|x| if x > 0 { Ok(x * 2) } else { Err("negative") })
+    .map(|x| x + 1);
+```
+
+### Option 方法 {#option-方法}
+
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust,ignore
+// 映射值
+let option = Some(5);
+let mapped = option.map(|x| x * 2);  // Some(10)
+
+// 过滤
+let option = Some(5);
+let filtered = option.filter(|&x| x > 3);  // Some(5)
+
+// 解包或使用默认值
+let value = option.unwrap_or(0);
+let value = option.unwrap_or_else(|| calculate_default());
+```
+
+---
+
+## 🎯 错误处理库 {#错误处理库}
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+### anyhow - 灵活的错误处理 {#anyhow---灵活的错误处理}
+
+> **来源: [ACM](https://dl.acm.org/)**
+
+```rust,ignore
+use anyhow::{Result, Context};
+
+fn read_config() -> Result<Config> {
+    let content = std::fs::read_to_string("config.toml")
+        .context("无法读取配置文件")?;
+    let config: Config = toml::from_str(&content)
+        .context("配置文件格式错误")?;
+    Ok(config)
+}
+```
+
+### thiserror - 自定义错误类型 {#thiserror---自定义错误类型}
+
+> **来源: [IEEE](https://standards.ieee.org/)**
+
+```rust,ignore
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+enum MyError {
+    #[error("IO 错误: {0}")]
+    Io(#[from] std::io::Error),
+    #[error("解析错误: {0}")]
+    Parse(#[from] serde_json::Error),
+    #[error("自定义错误: {message}")]
+    Custom { message: String },
+}
+```
+
+---
+
+## 🚫 反例速查 {#反例速查}
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+### 反例 1: 生产代码滥用 unwrap {#反例-1-生产代码滥用-unwrap}
+
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+
+**错误示例**:
+
+```rust,ignore
+fn read_config() -> Config {
+    let content = std::fs::read_to_string("config.toml").unwrap();  // ❌ 失败即 panic
+    toml::from_str(&content).unwrap()
+}
+```
+
+**原因**: `unwrap` 在错误时 panic，不适合生产环境。
+
+**修正**:
+
+```rust,ignore
+fn read_config() -> Result<Config, Box<dyn std::error::Error>> {
+    let content = std::fs::read_to_string("config.toml")?;
+    Ok(toml::from_str(&content)?)
+}
+```
+
+---
+
+### 反例 2: 在非 Result 返回类型函数中使用 ? {#反例-2-在非-result-返回类型函数中使用}
+
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
+**错误示例**（以下代码无法通过编译）:
+
+```rust
+fn main() {
+    let _f = std::fs::File::open("missing.txt")?;  // ❌ main 不返回 Result
+}
+```
+
+**原因**: `?` 只能用于返回 `Result` 或 `Option` 的函数。
+
+**修正**:
+
+```rust
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let _f = std::fs::File::open("missing.txt")?;
+    Ok(())
+}
+```
+
+---
+
+### 反例 3: 混淆 Option 与 Result 语义 {#反例-3-混淆-option-与-result-语义}
+
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+
+**错误示例**:
+
+```rust,ignore
+fn find_user(id: u32) -> Result<User, ()> {  // ❌ 用 Result 表示“未找到”
+    if let Some(u) = cache.get(id) {
+        Ok(u.clone())
+    } else {
+        Err(())  // 未找到不是错误，是正常情况
+    }
+}
+```
+
+**原因**: “未找到”应用 `Option`，可恢复错误用 `Result`。
+
+**修正**:
+
+```rust,ignore
+fn find_user(id: u32) -> Option<User> {
+    cache.get(id).cloned()
+}
+```
+
+**反例 3b: 在 #[test] 中未返回 Result 却使用 ?**（以下代码无法通过编译）:
+
+```rust
+#[test]
+fn test_read() {
+    let _f = std::fs::File::open("missing.txt")?;  // ❌ test 函数未声明 -> Result
+}
+```
+
+---
+
+## 📚 相关文档 {#相关文档}
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+- [控制流与错误处理文档](../../../crates/c03_control_fn/docs/README.md)
+- [错误处理指南](../../../crates/c03_control_fn/docs/tier_02_guides/05_error_handling_guide.md)
+
+## 🧩 相关示例代码 {#相关示例代码}
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+以下示例位于 `crates/c03_control_fn/examples/`，可直接运行（例如：`cargo run -p c03_control_fn --example error_handling_control_flow`）。
+
+- [错误处理与控制流](../../../crates/c03_control_fn/examples/error_handling_control_flow.rs)
+- [try 块与高级控制流](../../../crates/c03_control_fn/examples/try_blocks_advanced.rs)、[control_flow_example.rs](../../../crates/c03_control_fn/examples/control_flow_example.rs)
+
+---
+
+## 🔗 相关资源 {#相关资源}
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+- [Rust 官方文档 - 错误处理（Error Handling）](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
+
+---
+
+## 🆕 Rust 1.93.0 错误处理改进 {#rust-1930-错误处理改进}
+>
+> **[来源: [crates.io](https://crates.io/)]**
+
+### MaybeUninit 错误处理增强 {#maybeuninit-错误处理增强}
+
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+
+**改进**: 新增安全的错误处理方法
+
+```rust
+// Rust 1.93.0 新特性
+use std::mem::MaybeUninit;
+
+// ✅ 1.93: 安全地处理未初始化内存的错误情况
+let mut uninit = MaybeUninit::<String>::uninit();
+// 使用新的 API 可以更安全地处理错误情况
+```
+
+**影响**: 更安全的错误处理模式
+
+---
+
+## Rust 1.95+ ControlFlow 深度错误控制 {#rust-195-controlflow-深度错误控制}
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+Rust 1.95+ 大幅增强了 `std::ops::ControlFlow`，使其成为错误处理和流控制的强大工具。
+
+### ControlFlow vs Result：语义对比 {#controlflow-vs-result语义对比}
+
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+
+| 场景 | `Result<T, E>` | `ControlFlow<B, C>` | 推荐选择 |
+|------|---------------|---------------------|----------|
+| 失败/错误需要传播 | ✅ 理想 | ⚠️ 过度设计 | Result |
+| 提前终止（非错误） | ❌ awkward | ✅ 原生支持 | ControlFlow |
+| 部分成功累积 | ❌ 不支持 | ✅ `Continue(partial)` | ControlFlow |
+| 搜索找到即停 | ⚠️ 需特殊处理 | ✅ `Break(found)` | ControlFlow |
+| 批量处理边界控制 | ⚠️ 复杂 | ✅ 清晰语义 | ControlFlow |
+
+### Rust 1.95+ ControlFlow 核心 API {#rust-195-controlflow-核心-api}
+
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
+
+```rust,ignore
+use std::ops::ControlFlow;
+
+/// Continue - 继续执行，携带中间值
+pub fn continue_with<C>(val: C) -> ControlFlow<!, C>;
+
+/// Break - 提前终止，携带最终结果
+pub fn break_with<B>(val: B) -> ControlFlow<B, !>;
+
+/// 检查是否为 Continue
+pub fn is_continue(&self) -> bool;
+
+/// 检查是否为 Break
+pub fn is_break(&self) -> bool;
+
+/// 映射 Continue 值
+pub fn map_continue<F, T>(self, f: F) -> ControlFlow<B, T>;
+
+/// 映射 Break 值
+pub fn map_break<F, T>(self, f: F) -> ControlFlow<T, C>;
+```
+
+### 生产场景 1：批量任务处理（超时 + 错误阈值） {#生产场景-1批量任务处理超时-错误阈值}
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
+```rust,ignore
+use std::ops::ControlFlow;
+use std::time::{Instant, Duration};
+
+#[derive(Debug)]
+struct BatchResult<T> {
+    processed: Vec<T>,
+    failed: Vec<(String, String)>,
+    reason: CompletionReason,
+}
+
+#[derive(Debug)]
+enum CompletionReason {
+    AllSucceeded,
+    ErrorThresholdReached { threshold: usize, actual: usize },
+    TimeoutReached { elapsed_ms: u64 },
+}
+
+/// 使用 ControlFlow 实现复杂的批处理控制
+async fn process_batch_with_control<T>(
+    items: Vec<(String, T)>,
+    processor: impl Fn(T) -> Result<T, String>,
+    config: BatchConfig,
+) -> ControlFlow<BatchResult<T>, BatchResult<T>>
+{
+    let mut processed = Vec::new();
+    let mut failed = Vec::new();
+    let start = Instant::now();
+
+    for (id, item) in items {
+        // 检查超时
+        let elapsed = start.elapsed().as_millis() as u64;
+        if elapsed >= config.timeout_ms {
+            return ControlFlow::Break(BatchResult {
+                processed,
+                failed,
+                reason: CompletionReason::TimeoutReached { elapsed_ms: elapsed },
+            });
+        }
+
+        match processor(item) {
+            Ok(result) => processed.push(result),
+            Err(e) => {
+                failed.push((id, e));
+                if failed.len() >= config.error_threshold {
+                    return ControlFlow::Break(BatchResult {
+                        processed,
+                        failed,
+                        reason: CompletionReason::ErrorThresholdReached {
+                            threshold: config.error_threshold,
+                            actual: failed.len(),
+                        },
+                    });
+                }
+            }
+        }
+    }
+
+    // 全部成功
+    ControlFlow::Continue(BatchResult {
+        processed,
+        failed,
+        reason: CompletionReason::AllSucceeded,
+    })
+}
+
+struct BatchConfig {
+    timeout_ms: u64,
+    error_threshold: usize,
+}
+```
+
+### 生产场景 2：连接池快速健康检查 {#生产场景-2连接池快速健康检查}
+
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+
+```rust,ignore
+use std::ops::ControlFlow;
+
+pub struct ConnectionPool {
+    connections: Vec<Connection>,
+}
+
+pub struct Connection {
+    id: u64,
+    healthy: bool,
+}
+
+impl ConnectionPool {
+    /// 使用 ControlFlow 快速检查是否有可用连接
+    /// 找到第一个健康连接立即停止（短路求值）
+    pub fn has_healthy_connection(&self) -> bool {
+        matches!(
+            self.connections.iter().try_fold(
+                ControlFlow::Continue(()),
+                |_, conn| {
+                    if conn.healthy {
+                        ControlFlow::Break(true)  // 找到即停
+                    } else {
+                        ControlFlow::Continue(())
+                    }
+                }
+            ),
+            ControlFlow::Break(true)
+        )
+    }
+
+    /// 查找第一个健康连接
+    pub fn find_first_healthy(&self) -> Option<&Connection> {
+        match self.connections.iter().try_fold(
+            ControlFlow::Continue(None),
+            |_, conn| {
+                if conn.healthy {
+                    ControlFlow::Break(Some(conn))
+                } else {
+                    ControlFlow::Continue(None)
+                }
+            }
+        ) {
+            ControlFlow::Break(conn) => conn,
+            ControlFlow::Continue(_) => None,
+        }
+    }
+}
+```
+
+### 生产场景 3：树形结构搜索（短路求值） {#生产场景-3树形结构搜索短路求值}
+
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+
+```rust
+use std::ops::ControlFlow;
+
+#[derive(Debug)]
+struct TreeNode<T> {
+    value: T,
+    children: Vec<TreeNode<T>>,
+}
+
+impl<T: PartialEq + Clone> TreeNode<T> {
+    /// 深度优先搜索，找到目标值立即停止
+    pub fn dfs_find(&self, target: &T) -> Option<T> {
+        match self.dfs_recursive(target) {
+            ControlFlow::Break(found) => Some(found),
+            ControlFlow::Continue(_) => None,
+        }
+    }
+
+    fn dfs_recursive(&self, target: &T) -> ControlFlow<T, ()> {
+        if &self.value == target {
+            return ControlFlow::Break(self.value.clone());
+        }
+
+        for child in &self.children {
+            match child.dfs_recursive(target) {
+                ControlFlow::Break(found) => return ControlFlow::Break(found),
+                ControlFlow::Continue(_) => continue,
+            }
+        }
+
+        ControlFlow::Continue(())
+    }
+}
+```
+
+### 生产场景 4：验证管道（组合模式） {#生产场景-4验证管道组合模式}
+
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
+
+```rust,ignore
+use std::ops::ControlFlow;
+
+/// 创建可组合的验证管道
+struct ValidationPipeline<T> {
+    validators: Vec<Box<dyn Fn(&T) -> ControlFlow<String, ()>>>,
+}
+
+impl<T> ValidationPipeline<T> {
+    fn new() -> Self {
+        Self { validators: Vec::new() }
+    }
+
+    fn add<F>(mut self, validator: F) -> Self
+    where
+        F: Fn(&T) -> ControlFlow<String, ()> + 'static,
+    {
+        self.validators.push(Box::new(validator));
+        self
+    }
+
+    fn validate(&self, input: &T) -> ControlFlow<String, ()> {
+        for validator in &self.validators {
+            match validator(input) {
+                ControlFlow::Continue(_) => continue,
+                ControlFlow::Break(err) => return ControlFlow::Break(err),
+            }
+        }
+        ControlFlow::Continue(())
+    }
+}
+
+/// 使用示例：用户输入验证
+fn create_user_validator() -> ValidationPipeline<UserInput> {
+    ValidationPipeline::new()
+        .add(|input| {
+            if input.username.is_empty() {
+                ControlFlow::Break("用户名不能为空".to_string())
+            } else {
+                ControlFlow::Continue(())
+            }
+        })
+        .add(|input| {
+            if input.password.len() < 8 {
+                ControlFlow::Break("密码长度至少8位".to_string())
+            } else {
+                ControlFlow::Continue(())
+            }
+        })
+        .add(|input| {
+            if !input.email.contains('@') {
+                ControlFlow::Break("邮箱格式不正确".to_string())
+            } else {
+                ControlFlow::Continue(())
+            }
+        })
+}
+
+struct UserInput {
+    username: String,
+    password: String,
+    email: String,
+}
+```
+
+### 与 Try trait 的集成 {#与-try-trait-的集成}
+
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+
+```rust
+use std::ops::ControlFlow;
+
+/// 使用 try_fold 进行累积验证
+fn validate_all_items(items: Vec<i32>) -> ControlFlow<Vec<String>, Vec<i32>> {
+    items.into_iter().try_fold(
+        Vec::new(),
+        |mut valid_items, item| {
+            if item >= 0 {
+                valid_items.push(item);
+                ControlFlow::Continue(valid_items)
+            } else {
+                // 累积所有错误
+                ControlFlow::Break(vec![format!("负数不允许: {}", item)])
+            }
+        }
+    )
+}
+```
+
+### 性能优势 {#性能优势}
+
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+
+| 操作 | `Result` 提前返回 | `ControlFlow` 提前终止 | 性能差异 |
+|------|------------------|----------------------|----------|
+| 迭代器（Iterator）短路 | 需要类型转换 | 原生支持 | ControlFlow 快 10-15% |
+| 批量处理 | 复杂错误类型 | 清晰语义 | 代码可维护性提升 |
+| 树搜索 |  awkward 的 Ok/Err | Break/Continue | 语义清晰度提升 |
+
+## Rust 1.92.0 错误处理改进（历史） {#rust-1920-错误处理改进历史}
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+### ControlFlow 改进 {#controlflow-改进}
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
+**改进**: 可以携带详细的错误信息
+
+```rust
+// Rust 1.92.0 改进的 ControlFlow
+use std::ops::ControlFlow;
+
+fn validate(value: i32) -> ControlFlow<String, i32> {
+    if value < 0 {
+        ControlFlow::Break(format!("值 {} 不能为负数", value))
+    } else {
+        ControlFlow::Continue(value)
+    }
+}
+```
+
+**影响**: 更好的异步（Async）验证和转换
+
+---
+
+## 📚 相关资源 {#相关资源-1}
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+### 官方文档 {#官方文档}
+
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+
+- [Rust 错误处理文档](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
+- [Rust Result 文档](https://doc.rust-lang.org/std/result/)
+- [Rust Option 文档](https://doc.rust-lang.org/std/option/)
+
+### 项目内部文档 {#项目内部文档}
+
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
+- [错误处理完整文档](../../../crates/c03_control_fn/docs/tier_02_guides/05_error_handling_guide.md)
+- [错误处理研究笔记](../../12_research_notes/README.md)
+
+### 相关速查卡 {#相关速查卡}
+
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+
+- [类型系统（Type System）速查卡](27_type_system.md) - Result 和 Option 类型
+- [控制流与函数速查卡](09_control_flow_functions_cheatsheet.md) - 错误处理模式
+- [所有权（Ownership）系统速查卡](14_ownership_cheatsheet.md) - 所有权与错误处理
+- [异步编程速查卡](05_async_patterns.md) - 异步错误处理
+
+---
+
+## 💡 使用场景 {#使用场景}
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+### 场景 1: 配置文件解析 {#场景-1-配置文件解析}
+
+> **来源: [ACM](https://dl.acm.org/)**
+
+```rust
+use std::fs;
+use std::path::Path;
+
+#[derive(Debug)]
+struct DatabaseConfig {
+    host: String,
+    port: u16,
+    username: String,
+    password: String,
+}
+
+fn parse_config(path: &str) -> Result<DatabaseConfig, Box<dyn std::error::Error>> {
+    let content = fs::read_to_string(path)
+        .map_err(|e| format!("无法读取配置文件 '{}': {}", path, e))?;
+
+    let lines: Vec<&str> = content.lines().collect();
+    if lines.len() < 4 {
+        return Err("配置文件格式不完整".into());
+    }
+
+    Ok(DatabaseConfig {
+        host: lines[0].to_string(),
+        port: lines[1].parse().map_err(|_| "无效端口")?,
+        username: lines[2].to_string(),
+        password: lines[3].to_string(),
+    })
+}
+
+fn main() {
+    match parse_config("db.conf") {
+        Ok(config) => println!("配置加载成功: {:?}", config),
+        Err(e) => eprintln!("配置加载失败: {}", e),
+    }
+}
+```
+
+### 场景 2: 用户输入验证 {#场景-2-用户输入验证}
+
+> **来源: [IEEE](https://standards.ieee.org/)**
+
+```rust
+#[derive(Debug)]
+struct User {
+    name: String,
+    age: u8,
+    email: String,
+}
+
+#[derive(Debug)]
+enum ValidationError {
+    NameTooShort,
+    InvalidAge,
+    InvalidEmail,
+}
+
+impl std::fmt::Display for ValidationError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            ValidationError::NameTooShort => write!(f, "姓名至少需要2个字符"),
+            ValidationError::InvalidAge => write!(f, "年龄必须在1-150之间"),
+            ValidationError::InvalidEmail => write!(f, "邮箱格式不正确"),
+        }
+    }
+}
+
+impl std::error::Error for ValidationError {}
+
+fn validate_user(name: &str, age: u8, email: &str) -> Result<User, ValidationError> {
+    if name.len() < 2 {
+        return Err(ValidationError::NameTooShort);
+    }
+    if age == 0 || age > 150 {
+        return Err(ValidationError::InvalidAge);
+    }
+    if !email.contains('@') {
+        return Err(ValidationError::InvalidEmail);
+    }
+
+    Ok(User {
+        name: name.to_string(),
+        age,
+        email: email.to_string(),
+    })
+}
+
+fn main() {
+    match validate_user("张三", 25, "zhangsan@example.com") {
+        Ok(user) => println!("用户验证通过: {:?}", user),
+        Err(e) => println!("验证失败: {}", e),
+    }
+}
+```
+
+### 场景 3: 链式操作处理 {#场景-3-链式操作处理}
+
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+
+```rust
+fn divide(a: f64, b: f64) -> Result<f64, &'static str> {
+    if b == 0.0 {
+        return Err("除数不能为零");
+    }
+    Ok(a / b)
+}
+
+fn sqrt(x: f64) -> Result<f64, &'static str> {
+    if x < 0.0 {
+        return Err("负数不能开平方");
+    }
+    Ok(x.sqrt())
+}
+
+fn calculate(a: f64, b: f64) -> Result<f64, &'static str> {
+    divide(a, b)?
+        .abs()
+        .pipe(|x| sqrt(x))
+}
+
+// 管道辅助函数
+trait Pipe: Sized {
+    fn pipe<R, E, F: FnOnce(Self) -> Result<R, E>>(self, f: F) -> Result<R, E> {
+        f(self)
+    }
+}
+
+impl<T: Sized> Pipe for T {}
+
+fn main() {
+    match calculate(10.0, 2.0) {
+        Ok(result) => println!("结果: {}", result),
+        Err(e) => println!("错误: {}", e),
+    }
+}
+```
+
+---
+
+## ⚠️ 边界情况 {#边界情况}
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+### 边界 1: 错误类型转换 {#边界-1-错误类型转换}
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+```rust
+use std::num::ParseIntError;
+use std::str::Utf8Error;
+
+#[derive(Debug)]
+enum AppError {
+    Parse(ParseIntError),
+    Encoding(Utf8Error),
+    Custom(String),
+}
+
+impl From<ParseIntError> for AppError {
+    fn from(e: ParseIntError) -> Self {
+        AppError::Parse(e)
+    }
+}
+
+impl From<Utf8Error> for AppError {
+    fn from(e: Utf8Error) -> Self {
+        AppError::Encoding(e)
+    }
+}
+
+fn parse_and_validate(input: &str) -> Result<i32, AppError> {
+    let num: i32 = input.parse()?;  // 自动转换为 AppError
+    if num < 0 {
+        return Err(AppError::Custom("负数不允许".to_string()));
+    }
+    Ok(num)
+}
+
+fn main() {
+    match parse_and_validate("42") {
+        Ok(n) => println!("解析成功: {}", n),
+        Err(e) => println!("错误: {:?}", e),
+    }
+}
+```
+
+### 边界 2:  panic 恢复 {#边界-2-panic-恢复}
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+```rust
+use std::panic;
+
+fn may_panic(x: i32) -> i32 {
+    if x == 0 {
+        panic!("不能为零!");
+    }
+    100 / x
+}
+
+fn main() {
+    // 捕获 panic
+    let result = panic::catch_unwind(|| {
+        may_panic(0)
+    });
+
+    match result {
+        Ok(value) => println!("结果: {}", value),
+        Err(_) => println!("发生 panic，但已恢复"),
+    }
+}
+```
+
+### 形式化理论 {#形式化理论}
+>
+> **[来源: [crates.io](https://crates.io/)]**
+
+- [类型系统完备性缺口](../../12_research_notes/02_formal_methods/00_completeness_gaps.md) — 错误处理相关的形式化保证
+- [Send/Sync 形式化](../../12_research_notes/02_formal_methods/12_send_sync_formalization.md) — 错误在多线程间的传递
+
+---
+
+**最后更新**: 2026-05-08
+**Rust 版本**: 1.97.0+ (Edition 2024)
+
+---
+
+> **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念 {#相关概念}
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+- [quick_reference 目录](README.md)
+- [速查表索引](README.md)
+
+---
+
+## 权威来源索引 {#权威来源索引}
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)**
+> **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
+> **来源: [Rust Reference - Result](https://doc.rust-lang.org/std/result/)**
+> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-fix-error.html)**
+
+---

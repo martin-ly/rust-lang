@@ -1149,7 +1149,7 @@ impl PerformanceReport {
 
 ## 补充视角：进程管理场景下的性能优化
 
-> 来源：`crates/c07_process/docs/performance_optimization_usage_guide.md`
+> 来源：`crates/c07_process/docs/19_performance_optimization_usage_guide.md`
 
 进程管理模块（Module）的性能优化通常围绕以下维度展开：
 

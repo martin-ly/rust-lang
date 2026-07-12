@@ -150,7 +150,7 @@
 | P0-2 | **双权威页合并**:`30_lifetimes_advanced.md` ↔ `18_lifetimes_advanced.md` 定唯一权威、另一改 stub;`08/31_safety_tags_preview` 双份合并;`33_safety_tags_in_formal` ↔ `31_safety_tags_preview` 去重 | v2 去重 MERGE 5 对归零;新增"权威页唯一性"检查脚本(同主题双声明即 FAIL) |
 | P0-3 | **KG 消费层修复**:kg_rag / kg_reasoning / owl_consistency_check 的 KG_PATH 切到 v3;删除或归档 v2 | kg_rag 对 v3 查询可返回真实结果;死代码清单归零 |
 | P0-4 | **索引重建**:重新生成 `concept_index.json`(476 文件)或将其退役、以 KG v3 为唯一真相源 | 单一真相源;文档说明 |
-| P0-5 | **处置 v2 去重 54 对可处理项**(crates 模板克隆合并/删除、docs/03_practice 骨架去重) | CONTENT_OVERLAP_V2 可处理项 54 → 0 |
+| P0-5 | **处置 v2 去重 54 对可处理项**(crates 模板克隆合并/删除、docs/05_practice 骨架去重) | CONTENT_OVERLAP_V2 可处理项 54 → 0 |
 | P0-6 | **观察门对账**:修正 `COMPREHENSIVE_SEMANTIC_AUDIT` 等"全部通过"表述,在 AGENTS.md 明确"完成 = 观察门报告达标" | 报告与门状态一致 |
 
 ### 阶段 P1 — 交叉语义与关系语义建设(2–3 周) — **✅ 2026-07-12 已完成**

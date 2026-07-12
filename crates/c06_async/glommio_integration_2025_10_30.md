@@ -101,7 +101,7 @@ cargo run --example glommio_comprehensive_2025
 
 ### 4. 最佳实践文档 ✅
 
-**文件**: `docs/tier_02_guides/09_glommio_best_practices_2025.md` (810 行)
+**文件**: `docs/tier_02_guides/08_glommio_best_practices_2025.md` (810 行)
 
 **章节结构**:
 
@@ -401,7 +401,7 @@ cargo bench --bench glommio_benchmarks
 ### 3. 阅读文档
 
 1. [快速入门](docs/tier_01_foundations/05_glommio_quick_start.md) - 5分钟上手
-2. [最佳实践](docs/tier_02_guides/09_glommio_best_practices_2025.md) - 深度指南
+2. [最佳实践](docs/tier_02_guides/08_glommio_best_practices_2025.md) - 深度指南
 3. [运行时对比](docs/tier_03_references/06_runtime_comparison_glommio_2025.md) - 选型指南
 
 ## 💡 使用建议

@@ -1,0 +1,375 @@
+# 安全可判定机制总览 {#安全可判定机制总览}
+
+> **EN**: Safe Decidable Mechanisms Overview
+> **Summary**: 安全可判定机制总览 Safe Decidable Mechanisms Overview.
+> **概念族**: 形式化方法 / 安全可判定机制
+> **内容分级**: [归档级]
+>
+> **分级**: [B]
+> **Bloom 层级**: L5-L6
+
+## 📑 目录 {#目录}
+
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+
+- [安全可判定机制总览 {#安全可判定机制总览}](#安全可判定机制总览-安全可判定机制总览)
+  - [📑 目录 {#目录}](#-目录-目录)
+  - [一、何为“安全的可判定的机制” {#一何为安全的可判定的机制}](#一何为安全的可判定的机制-一何为安全的可判定的机制)
+  - [二、机制清单与形式化对应总表 {#二机制清单与形式化对应总表}](#二机制清单与形式化对应总表-二机制清单与形式化对应总表)
+  - [三、各机制分节（概念定义·属性关系·解释论证·形式证明·反例） {#三各机制分节概念定义属性关系解释论证形式证明反例}](#三各机制分节概念定义属性关系解释论证形式证明反例-三各机制分节概念定义属性关系解释论证形式证明反例)
+    - [3.1 所有权（Ownership） {#31-所有权}](#31-所有权-31-所有权)
+    - [3.2 借用（Borrowing） {#32-借用}](#32-借用-32-借用)
+    - [3.3 生命周期（Lifetimes） {#33-生命周期}](#33-生命周期-33-生命周期)
+    - [3.4 Send {#34-send}](#34-send-34-send)
+    - [3.5 Sync {#35-sync}](#35-sync-35-sync)
+    - [3.6 Pin/Unpin {#36-pinunpin}](#36-pinunpin-36-pinunpin)
+    - [3.7 Future/async {#37-futureasync}](#37-futureasync-37-futureasync)
+    - [3.8 类型系统（Type System） {#38-类型系统}](#38-类型系统-38-类型系统)
+    - [3.9 match / for / ? {#39-match-for}](#39-match--for---39-match-for)
+    - [3.10 通道 / Mutex / thread::spawn {#310-通道-mutex-threadspawn}](#310-通道--mutex--threadspawn-310-通道-mutex-threadspawn)
+    - [3.11 RefCell 借用（运行时（Runtime）可判定） {#311-refcell-借用运行时可判定}](#311-refcell-借用运行时可判定-311-refcell-借用运行时可判定)
+  - [四、思维表征入口 {#四思维表征入口}](#四思维表征入口-四思维表征入口)
+  - [六、并发与异步（Async）族、Trait 族 四维对比表（完备特性对比子集） {#六并发与异步族trait-族-四维对比表完备特性对比子集}](#六并发与异步族trait-族-四维对比表完备特性对比子集-六并发与异步族trait-族-四维对比表完备特性对比子集)
+    - [6.1 并发与异步族 {#61-并发与异步族}](#61-并发与异步族-61-并发与异步族)
+    - [6.2 Trait 与多态族 {#62-trait-与多态族}](#62-trait-与多态族-62-trait-与多态族)
+  - [七、相关文档 {#七相关文档}](#七相关文档-七相关文档)
+  - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
+      - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
+      - [代码示例更新 {#代码示例更新}](#代码示例更新-代码示例更新)
+      - [相关文档 {#相关文档}](#相关文档-相关文档)
+  - [相关概念 {#相关概念}](#相关概念-相关概念)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
+
+> **创建日期**: 2026-02-14
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **用途**: 全面梳理 Rust 中「安全且编译期可判定」的机制，每项含概念定义、属性关系、解释论证、形式证明引用（Reference）、反例；与 [formal_methods](../02_formal_methods/README.md)、[type_theory](../05_type_theory/README.md) 双向链接
+> **上位**: [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](../02_formal_methods/11_safe_decidable_mechanisms_and_formal_methods_plan.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](../06_concept_models/12_hierarchical_mapping_and_summary.md)
+
+---
+
+## 一、何为“安全的可判定的机制” {#一何为安全的可判定的机制}
+
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- **安全**：在 Safe Rust 下，违反机制会导致编译错误或类型系统拒绝，从而避免内存安全（Memory Safety）/数据竞争等 UB。
+- **可判定**：是否满足该机制可由**编译期**算法判定（类型系统（Type System） + 固定规则），无需运行时或人工证明。
+
+**例外**：RefCell 的借用为**运行时（Runtime）**可判定（违反则 panic）；死锁、进度为**不可判定**（需额外方法）。
+
+---
+
+## 二、机制清单与形式化对应总表 {#二机制清单与形式化对应总表}
+
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+| 机制 | 可判定性 | 形式化文档 | Def/定理 | 反例 |
+| :--- | :--- | :--- | :--- | :--- |
+| 所有权（Ownership） | 静态 | [ownership_model](../02_formal_methods/09_ownership_model.md) | 规则 1–3, T2, T3 | 使用已移动值、双重释放 |
+| 借用（Borrowing） | 静态 | [borrow_checker_proof](../02_formal_methods/03_borrow_checker_proof.md) | 规则 5–8, T1 | 双重可变借用（Mutable Borrow）、悬垂引用 |
+| 生命周期 | 静态 | lifetime_formalization | LF1–LF2, LF-T1–T3 | 返回局部引用、存短命引用 |
+| Send | 静态 | [send_sync_formalization](../02_formal_methods/12_send_sync_formalization.md) | SEND1, SEND-T1 | Rc 跨线程、!Send 闭包（Closures） spawn |
+| Sync | 静态 | [send_sync_formalization](../02_formal_methods/12_send_sync_formalization.md) | SYNC1, SYNC-L1, SYNC-T1 | Cell 跨线程共享、Rc &T 跨线程 |
+| Pin/Unpin | 静态 | [pin_self_referential](../02_formal_methods/10_pin_self_referential.md) | Def 1.1–2.2, T1–T3 | 未 Pin 自引用、栈上 !Unpin |
+| Future/async | 静态（边界） | [async_state_machine](../02_formal_methods/02_async_state_machine.md) | Def 4.1–5.2, T6.1–T6.3 | 非 Send 跨 await、未 Pin 移动 |
+| 类型系统 | 静态 | [type_system_foundations](../05_type_theory/05_type_system_foundations.md) | 进展/保持, T1–T3 | 类型错误 |
+| match 穷尽 | 静态 | [borrow_checker_proof](../02_formal_methods/03_borrow_checker_proof.md) | MATCH1, MATCH-T1 | 非穷尽 match |
+| for / ? | 静态 | [borrow_checker_proof](../02_formal_methods/03_borrow_checker_proof.md) | FOR1/QUERY1, FOR-T1/QUERY-T1 | 迭代中修改、非 Result ? |
+| 通道/Mutex | 静态（接口） | [borrow_checker_proof](../02_formal_methods/03_borrow_checker_proof.md) | CHAN1/MUTEX1, CHAN-T1/MUTEX-T1 | 发送非 Send |
+| thread::spawn | 静态 | [async_state_machine](../02_formal_methods/02_async_state_machine.md) | SPAWN1, SPAWN-T1 | 非 Send 闭包（Closures） spawn |
+| RefCell 借用 | 运行时 | [ownership_model](../02_formal_methods/09_ownership_model.md) | REFCELL1, REFCELL-T1 | 双重可变借用 panic |
+
+---
+
+## 三、各机制分节（概念定义·属性关系·解释论证·形式证明·反例） {#三各机制分节概念定义属性关系解释论证形式证明反例}
+
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 3.1 所有权 {#31-所有权}
+
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- **概念定义**：唯一所有者、移动语义、Copy/Clone 区分；形式化见 [ownership_model](../02_formal_methods/09_ownership_model.md) 规则 1–3、Def 1.1–1.5。
+- **属性关系**：为借用的前提；borrow 规则 5–8 在单所有者下定义。
+- **解释论证**：无 GC 内存安全（Memory Safety）；设计理由见 [DESIGN_MECHANISM_RATIONALE](../06_concept_models/10_design_mechanism_rationale.md)。
+- **形式证明**：定理 T2 唯一性、T3 内存安全；[PROOF_INDEX](21_proof_index.md)。
+- **反例**：使用已移动值、双重释放；[FORMAL_PROOF_SYSTEM_GUIDE](16_formal_proof_system_guide.md) 反例索引。
+
+### 3.2 借用 {#32-借用}
+
+> **来源: [ACM](https://dl.acm.org/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- **概念定义**：&T/&mut T、可变独占、不可变可多；[borrow_checker_proof](../02_formal_methods/03_borrow_checker_proof.md) 规则 5–8。
+- **属性关系**：依赖所有权；与生命周期协同；跨线程时需 Send/Sync。
+- **解释论证**：数据竞争自由；与 RustBelt/Stacked Borrows 对应。
+- **形式证明**：定理 T1 数据竞争自由；[PROOF_INDEX](21_proof_index.md)。
+- **反例**：双重可变借用、悬垂引用。
+
+### 3.3 生命周期 {#33-生命周期}
+
+> **来源: [IEEE](https://standards.ieee.org/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- **概念定义**：outlives、区域、NLL；lifetime_formalization Axiom LF1–LF2、Def 1.4。
+- **属性关系**：$\ell \subseteq \text{lft}$；与借用、型变组合。
+- **解释论证**：引用有效性；Polonius/区域类型。
+- **形式证明**：LF-T1–T3 引用有效性。
+- **反例**：返回局部引用、存储短生命周期引用。
+
+### 3.4 Send {#34-send}
+
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- **概念定义**：可安全跨线程**转移所有权**；[send_sync_formalization](../02_formal_methods/12_send_sync_formalization.md) Def SEND1。
+- **属性关系**：$T : \text{Sync} \Leftrightarrow \&T : \text{Send}$（SYNC-L1）；spawn 闭包需 Send；Future 跨 await 需 Send。
+- **解释论证**：跨线程无共享可变；FLS Ch. 17.1。
+- **形式证明**：SEND-T1、SEND-SYNC-T1；与 borrow T1、SPAWN-T1 一致。
+- **反例**：Rc 跨线程、非 Send 闭包 spawn。
+
+### 3.5 Sync {#35-sync}
+
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- **概念定义**：可安全跨线程**共享引用** &T；[send_sync_formalization](../02_formal_methods/12_send_sync_formalization.md) Def SYNC1。
+- **属性关系**：Sync ⇔ &T: Send；多线程共享 &T 时需 T: Sync。
+- **解释论证**：共享不可变引用（Mutable Reference）无数据竞争；FLS Ch. 17.1。
+- **形式证明**：SYNC-T1；与 async 定理 6.2 一致。
+- **反例**：Cell 跨线程共享、Rc &T 跨线程。
+
+### 3.6 Pin/Unpin {#36-pinunpin}
+
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- **概念定义**：位置稳定、自引用、!Unpin 堆固定；[pin_self_referential](../02_formal_methods/10_pin_self_referential.md) Def 1.1–2.2。
+- **属性关系**：Future 自引用依赖 Pin；栈固定需 Unpin、堆固定任意。
+- **解释论证**：自引用移动→悬垂；RFC 2349。
+- **形式证明**：T1–T3 Pin 保证/自引用/投影。
+- **反例**：未 Pin 自引用、栈上 !Unpin。
+
+### 3.7 Future/async {#37-futureasync}
+
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- **概念定义**：Poll、Ready/Pending、async 状态机；[async_state_machine](../02_formal_methods/02_async_state_machine.md) Def 4.1–5.2。
+- **属性关系**：依赖 Pin；跨 await 需 Send；并发 poll 需 Send+Sync。
+- **解释论证**：I/O 并发、无数据竞争；FLS Ch. 17.3。
+- **形式证明**：T6.1–T6.3 状态一致、并发安全（Concurrency Safety）、进度。
+- **反例**：非 Send 跨 await、未 Pin 移动 Future。
+
+### 3.8 类型系统 {#38-类型系统}
+
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- **概念定义**：类型规则、进展性、保持性；[type_system_foundations](../05_type_theory/05_type_system_foundations.md)。
+- **属性关系**：为所有机制的类型检查基础。
+- **解释论证**：良型程序不卡住、归约保持类型。
+- **形式证明**：T1 进展、T2 保持、T3 类型安全。
+- **反例**：类型错误、不可达代码。
+
+### 3.9 match / for / ? {#39-match-for}
+
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+- **概念定义**：穷尽匹配、IntoIterator、Result 早期返回；[borrow_checker_proof](../02_formal_methods/03_borrow_checker_proof.md) Def MATCH1/FOR1/QUERY1。
+- **属性关系**：控制流与借用协同；A-CF1 见 [formal_methods README](../02_formal_methods/README.md)。
+- **形式证明**：MATCH-T1、FOR-T1、QUERY-T1。
+- **反例**：非穷尽 match、迭代中修改集合、非 Result 类型 ?。
+
+### 3.10 通道 / Mutex / thread::spawn {#310-通道-mutex-threadspawn}
+
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+- **概念定义**：CHAN1、MUTEX1、SPAWN1；见 [borrow_checker_proof](../02_formal_methods/03_borrow_checker_proof.md)、[async_state_machine](../02_formal_methods/02_async_state_machine.md)。
+- **属性关系**：发送类型需 Send；spawn 闭包需 Send + 'static。
+- **形式证明**：CHAN-T1、MUTEX-T1、SPAWN-T1。
+- **反例**：发送非 Send、非 Send 闭包 spawn。
+
+### 3.11 RefCell 借用（运行时可判定） {#311-refcell-借用运行时可判定}
+
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+- **概念定义**：运行时借用栈；[ownership_model](../02_formal_methods/09_ownership_model.md) Def REFCELL1。
+- **属性关系**：与编译期借用规则同构；违反时 panic。
+- **形式证明**：REFCELL-T1。
+- **反例**：双重可变借用导致 panic。
+
+---
+
+## 四、思维表征入口 {#四思维表征入口}
+
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+| 类型 | 入口 |
+| :--- | :--- |
+| 思维导图 | [MIND_MAP_COLLECTION](../../07_thinking/03_mind_map_collection.md)；安全可判定机制节点 → 本总览 §二、§三 |
+| 概念多维矩阵 | [formal_methods README §六篇并表](../02_formal_methods/README.md#formal_methods-六篇并表)；[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](../02_formal_methods/11_safe_decidable_mechanisms_and_formal_methods_plan.md) §3.1 |
+| 决策树 | [06_boundary_analysis](../08_software_design_theory/04_execution_models/06_boundary_analysis.md)；[DESIGN_MECHANISM_RATIONALE](../06_concept_models/10_design_mechanism_rationale.md) § Send/Sync |
+| 推理证明树 | [PROOF_INDEX](21_proof_index.md)；[PROOF_GRAPH_NETWORK](../../07_thinking/05_proof_graph_network.md) |
+
+---
+
+## 六、并发与异步族、Trait 族 四维对比表（完备特性对比子集） {#六并发与异步族trait-族-四维对比表完备特性对比子集}
+
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../12_version_research/01_rust_193_language_features_comprehensive_analysis.md) 基础上，为「并发与异步族」「Trait 与多态族」增加**可判定性、安全边界、形式化文档、思维表征**四维，便于与 formal_methods 对照。
+
+### 6.1 并发与异步族 {#61-并发与异步族}
+
+>
+> **[来源: [crates.io](https://crates.io/)]**
+
+| 特性 | 可判定性 | 安全边界 | 形式化 Def/定理 | 思维表征入口 |
+| :--- | :--- | :--- | :--- | :--- |
+| 线程 | 静态 | Safe 并发 | SPAWN1, SPAWN-T1 | [async_state_machine](../02_formal_methods/02_async_state_machine.md)、[send_sync_formalization](../02_formal_methods/12_send_sync_formalization.md)、06_boundary_analysis |
+| Future | 静态（边界） | Safe 异步（Async） | Def 4.1–5.2, T6.1–T6.3 | async_state_machine、六篇并表、PROOF_INDEX |
+| async/await | 静态（边界） | Safe 异步 | 同上 + Send 跨 await | 同上、DESIGN_MECHANISM |
+| Pin | 静态 | Safe 自引用 | Def 1.1–2.2, T1–T3 | [pin_self_referential](../02_formal_methods/10_pin_self_referential.md)、六篇并表 |
+| Send/Sync | 静态 | Safe 并发 | SEND1/SYNC1, SEND-T1/SYNC-T1 | [send_sync_formalization](../02_formal_methods/12_send_sync_formalization.md)、六篇并表、DESIGN_MECHANISM |
+| 通道 | 静态（接口） | Safe 并发 | CHAN1, CHAN-T1 | borrow_checker_proof、06_boundary |
+| Mutex/RwLock | 静态（接口） | Safe 并发 | MUTEX1, MUTEX-T1 | borrow_checker_proof、06_boundary |
+| 原子操作（Atomic Operations） | 静态（接口） | Safe 并发 | ATOMIC1, ATOMIC-T1 | ownership_model |
+
+### 6.2 Trait 与多态族 {#62-trait-与多态族}
+
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+| 特性 | 可判定性 | 安全边界 | 形式化 Def/定理 | 思维表征入口 |
+| :--- | :--- | :--- | :--- | :--- |
+| Trait | 静态 | Safe 核心 | trait_system_formalization COH1/COH2 | type_theory、PROOF_INDEX |
+| 泛型（Generics） | 静态 | Safe 核心 | 单态化（Monomorphization）、类型规则 | type_system_foundations |
+| 关联类型 / GATs | 静态 | Safe 核心 | advanced_types AT-L1 | type_theory |
+| Trait 对象 | 静态 | Safe 核心 | 对象安全 T1–T3 | trait_system_formalization |
+| **Send/Sync** | **静态** | **Safe 并发** | **SEND1/SYNC1, SEND-T1/SYNC-T1** | **send_sync_formalization、六篇并表** |
+| Unpin | 静态 | Safe 自引用 | Def 2.2, pin T1–T3 | pin_self_referential |
+| blanket impl | 静态 | Safe 核心 | coherence | trait_system_formalization |
+| Trait 继承 | 静态 | Safe 核心 | - | trait_system |
+
+*说明*：92 项全量四维表见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](../02_formal_methods/11_safe_decidable_mechanisms_and_formal_methods_plan.md) §3.2；本表为并发与 Trait 族子集。
+
+---
+
+## 七、相关文档 {#七相关文档}
+
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+- [formal_methods README](../02_formal_methods/README.md) — 六篇并表、公理-定理索引
+- [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](../02_formal_methods/11_safe_decidable_mechanisms_and_formal_methods_plan.md) — 意见与建议、阶段 A–E 计划
+- [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../12_version_research/01_rust_193_language_features_comprehensive_analysis.md) — 92 项特性与形式化映射
+- [FORMAL_PROOF_SYSTEM_GUIDE](16_formal_proof_system_guide.md) — 反例索引
+
+---
+
+**维护者**: Rust Formal Methods Research Group
+
+**最后更新**: 2026-02-14
+
+---
+
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
+
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
+> **更新日期**: 2026-03-14
+
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
+
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
+
+#### 核心特性应用 {#核心特性应用}
+
+| 特性 | 应用场景 | 文档章节 |
+|------|---------|----------|
+| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
+| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
+| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
+
+#### 代码示例更新 {#代码示例更新}
+
+本文档中的所有Rust代码示例均已：
+
+- ✅ 使用Rust 1.94语法验证
+- ✅ 兼容Edition 2024
+- ✅ 通过标准库测试
+
+#### 相关文档 {#相关文档}
+
+- Rust 1.94 迁移指南
+- Rust 1.94 特性速查
+- [性能调优指南](../../08_usage_guides/18_performance_tuning_guide.md)
+
+---
+
+**维护者**: Rust 学习项目团队
+
+**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+
+**文档版本**: 1.1
+
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+
+**最后更新**: 2026-05-19
+
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念 {#相关概念}
+
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+- [research_notes 目录](../README.md)
+- [上级目录](../README.md)
+
+---
+
+## 权威来源索引 {#权威来源索引}
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+
+---

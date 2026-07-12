@@ -1,0 +1,304 @@
+# 测试 {#测试}
+>
+> **EN**: Testing Index
+> **Summary**: 测试 Testing Index. (stub/archive redirect)
+> **分级**: [B]
+> **Bloom 层级**: L5-L6
+> **创建日期**: 2026-02-20
+> **最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **概念说明**: 测试是软件质量保障的核心环节，Rust 提供内建的测试框架支持单元测试、集成测试和文档测试。形式化测试通过属性测试（Property-based Testing）和模型检查验证代码正确性。
+> 内容已整合至： [02_testing_cheatsheet.md](../../../03_reference/quick_reference/25_testing_cheatsheet.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/01_foundation/10_testing_basics/01_testing_basics.md`](../../../../concept/01_foundation/10_testing_basics/01_testing_basics.md)
+> - [`concept/06_ecosystem/09_testing_and_quality/01_testing_strategies.md`](../../../../concept/06_ecosystem/09_testing_and_quality/01_testing_strategies.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
+
+[返回主索引](../../00_master_index.md)
+
+---
+
+## Rust 测试生态系统 {#rust-测试生态系统}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 单元测试 {#单元测试}
+
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust
+// 模块内的测试
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // 基本测试
+    #[test]
+    fn test_add() {
+        assert_eq!(add(2, 3), 5);
+    }
+
+    // 自定义错误信息
+    #[test]
+    fn test_add_with_message() {
+        let result = add(2, 3);
+        assert!(result > 0, "Result should be positive, got {}", result);
+    }
+
+    // 应该 panic 的测试
+    #[test]
+    #[should_panic(expected = "division by zero")]
+    fn test_divide_by_zero() {
+        divide(10, 0);
+    }
+
+    // 忽略测试
+    #[test]
+    #[ignore = "slow test"]
+    fn slow_test() {
+        // 长时间运行的测试
+    }
+
+    // 返回 Result 的测试
+    #[test]
+    fn test_with_result() -> Result<(), String> {
+        let result = some_operation()?;
+        assert_eq!(result, 42);
+        Ok(())
+    }
+}
+
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+fn divide(a: i32, b: i32) -> i32 {
+    if b == 0 {
+        panic!("division by zero");
+    }
+    a / b
+}
+
+fn some_operation() -> Result<i32, String> {
+    Ok(42)
+}
+```
+
+### 集成测试 {#集成测试}
+
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust,ignore
+// tests/integration_test.rs
+use my_crate::add;
+
+#[test]
+fn test_add_integration() {
+    assert_eq!(add(2, 3), 5);
+}
+```
+
+### 文档测试 {#文档测试}
+
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
+
+```rust,ignore
+/// 加法函数
+///
+/// # Examples
+///
+/// ```
+/// use my_crate::add;
+/// let result = add(2, 3);
+/// assert_eq!(result, 5);
+/// ```
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+```
+
+### 属性测试 {#属性测试}
+
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+
+```rust
+// 使用 proptest 进行属性测试
+#[cfg(test)]
+mod property_tests {
+    use proptest::prelude::*;
+
+    proptest! {
+        // 测试加法交换律
+        #[test]
+        fn test_add_commutative(a: i32, b: i32) {
+            prop_assert_eq!(add(a, b), add(b, a));
+        }
+
+        // 测试加法结合律
+        #[test]
+        fn test_add_associative(a: i32, b: i32, c: i32) {
+            prop_assert_eq!(
+                add(add(a, b), c),
+                add(a, add(b, c))
+            );
+        }
+    }
+}
+
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+```
+
+### 模拟与 Mock {#模拟与-mock}
+
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+
+```rust
+// 使用 mockall 创建 mock
+#[cfg(test)]
+mod mock_tests {
+    use mockall::automock;
+
+    #[automock]
+    trait Database {
+        fn get_user(&self, id: u64) -> Option<String>;
+        fn save_user(&mut self, id: u64, name: &str) -> Result<(), String>;
+    }
+
+    #[test]
+    fn test_with_mock() {
+        let mut mock = MockDatabase::new();
+        mock.expect_get_user()
+            .with(mockall::predicate::eq(1))
+            .returning(|_| Some("Alice".to_string()));
+
+        assert_eq!(mock.get_user(1), Some("Alice".to_string()));
+    }
+}
+```
+
+### 形式化验证测试 {#形式化验证测试}
+
+```rust
+// 使用 Kani 进行形式化验证
+#[cfg(kani)]
+mod verification_tests {
+    // 验证溢出安全
+    #[kani::proof]
+    fn test_add_no_overflow() {
+        let a: u32 = kani::any();
+        let b: u32 = kani::any();
+        kani::assume(a < 1000 && b < 1000);
+        let result = a + b;
+        assert!(result < 2000);
+    }
+
+    // 验证内存安全
+    #[kani::proof]
+    fn test_vec_access() {
+        let v = vec![1, 2, 3];
+        let idx: usize = kani::any();
+        kani::assume(idx < v.len());
+        assert!(v[idx] > 0);
+    }
+}
+
+// 使用 Prusti 进行契约验证
+#[cfg(prusti)]
+mod contract_tests {
+    #[requires(x > 0)]
+    #[ensures(result > x)]
+    fn double(x: i32) -> i32 {
+        x * 2
+    }
+}
+```
+
+### 并发测试 {#并发测试}
+
+```rust
+#[cfg(test)]
+mod concurrency_tests {
+    use std::sync::Arc;
+    use std::thread;
+
+    #[test]
+    fn test_concurrent_counter() {
+        let counter = Arc::new(std::sync::Mutex::new(0));
+        let mut handles = vec![];
+
+        for _ in 0..10 {
+            let c = Arc::clone(&counter);
+            let handle = thread::spawn(move || {
+                let mut num = c.lock().unwrap();
+                *num += 1;
+            });
+            handles.push(handle);
+        }
+
+        for handle in handles {
+            handle.join().unwrap();
+        }
+
+        assert_eq!(*counter.lock().unwrap(), 10);
+    }
+}
+```
+
+---
+
+## 形式化方法 {#形式化方法}
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 形式化方法概述 | 形式化验证基础理论 | [../../../12_research_notes/02_formal_methods/README.md](../../../12_research_notes/02_formal_methods/README.md) |
+| 类型系统（Type System）形式化 | 类型理论数学定义 | [../../../12_research_notes/05_type_theory/05_type_system_foundations.md](../../../12_research_notes/05_type_theory/05_type_system_foundations.md) |
+| 所有权（Ownership）模型形式化 | 所有权系统数学定义 | [../../../12_research_notes/02_formal_methods/09_ownership_model.md](../../../12_research_notes/02_formal_methods/09_ownership_model.md) |
+| 证明索引 | 形式化证明集合 | [../../../12_research_notes/03_formal_proofs/21_proof_index.md](../../../12_research_notes/03_formal_proofs/21_proof_index.md) |
+
+## 相关文档 {#相关文档}
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 测试速查表 | 完整测试指南 | [../../../03_reference/quick_reference/25_testing_cheatsheet.md](../../../03_reference/quick_reference/25_testing_cheatsheet.md) |
+| 测试覆盖指南 | 测试覆盖率文档 | [../../../08_usage_guides/21_testing_coverage_guide.md](../../../08_usage_guides/21_testing_coverage_guide.md) |
+| 性能测试报告 | 性能测试指南 | [../../../08_usage_guides/17_performance_testing_report.md](../../../08_usage_guides/17_performance_testing_report.md) |
+| 质量保障指南 | 质量保障体系 | [../../../12_research_notes/13_meta_reports/11_quality_checklist.md](../../../12_research_notes/13_meta_reports/11_quality_checklist.md) |
+| 工具指南 | 验证工具使用 | [../../../12_research_notes/10_tutorials_and_guides/16_tools_guide.md](../../../12_research_notes/10_tutorials_and_guides/16_tools_guide.md) |
+| 安全分析 | 安全边界分析 | [../../../12_research_notes/03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md](../../../12_research_notes/03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md) |
+
+---
+
+[返回主索引](../../00_master_index.md)
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/05_international_authority_index.md)
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 权威来源索引 {#权威来源索引}
+
+> **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
+> **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**
+> **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
+> **[ACM - Software Testing Methods](https://dl.acm.org/)**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**

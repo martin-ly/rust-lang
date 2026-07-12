@@ -171,7 +171,7 @@ serde = { version = "1", features = ["derive"] }
 
 ## 六、异步网络编程模式
 
-> 内容来源：`crates/c10_networks/docs/tier_04_advanced/02_async_network_programming_patterns.md`，已按 AGENTS.md §6.4 迁移至此。
+> 内容来源：`crates/c10_networks/docs/tier_04_advanced/03_async_network_programming_patterns.md`，已按 AGENTS.md §6.4 迁移至此。
 
 Rust 异步网络编程中常见的并发架构模式可归纳为下表：
 
@@ -202,7 +202,7 @@ async fn fetch_with_limit(url: &str) -> Result<String, Box<dyn std::error::Error
 
 ## 七、网络工程实践要点
 
-> 内容来源：`crates/c10_networks/docs/tier_04_advanced/04_network_engineering_practices.md`，已按 AGENTS.md §6.4 迁移至此。
+> 内容来源：`crates/c10_networks/docs/tier_04_advanced/08_network_engineering_practices.md`，已按 AGENTS.md §6.4 迁移至此。
 
 生产级 Rust 网络应用需要关注以下工程实践：
 

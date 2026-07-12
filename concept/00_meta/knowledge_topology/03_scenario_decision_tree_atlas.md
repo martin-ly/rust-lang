@@ -108,9 +108,9 @@ flowchart TD
     E -->|是| F[可变引用 &mut T]
     E -->|否，运行时检查| G[RefCell / Mutex]
     E -->|否，跨线程共享| H[Arc<Mutex<T>>]
-    B --> I[[见 Ownership / Smart Pointers]]
-    G --> J[[见 Interior Mutability]]
-    H --> K[[见 Concurrency]]
+    B --> I[机制：Box 独占堆所有权；多所有者共享用 Rc/Arc]
+    G --> J[机制：单线程 RefCell 运行时借用检查；跨线程 Mutex]
+    H --> K[机制：Arc 加 Mutex 跨线程共享可变状态]
 ```
 
 ### 4.2 并发模型决策树
@@ -123,8 +123,8 @@ flowchart TD
     E -->|可变| G{需要锁？}
     G -->|是| H[Mutex / RwLock]
     G -->|否，追求极致性能| I[Atomic + Memory Ordering]
-    D --> J[[见 Concurrency / Async]]
-    I --> K[[见 Atomics and Lock-free]]
+    D --> J[机制：std thread spawn 或 tokio spawn；I/O 密集优先 async]
+    I --> K[机制：AtomicU64 加 Acquire/Release；无锁结构用 crossbeam]
 ```
 
 ---
@@ -279,6 +279,7 @@ flowchart TD
 - 新增决策树：**6 棵**（A–F），覆盖 §3 全部 6 个场景；原 §4 两棵示例树保留不动。
 - 新增定量判定节点：**21 个**（A:3 / B:4 / C:3 / D:4 / E:4 / F:3），均含阈值/边界/数字。
 - 新增 `[[` 跳出叶子：**0**（所有叶子为具体机制）。
+- 原 §4 示例树 `[[见…]]` 跳出叶子收敛：**5 处**（§4.1 的 I/J/K、§4.2 的 J/K）改为具体机制叶子（`Box`/`Rc`/`Arc`/`RefCell`/`Mutex`/`spawn`/`AtomicU64`/`crossbeam`），与 §A–§F「叶子即机制」合规标准对齐；对应权威概念页见 §三各场景表的「关键概念页」列。
 - 跨文件回边：→ 09 `J-BORROW-01`/`J-PANIC-04`/`J-TYPE-03`/`J-UNSAFE-05`；→ 05 `TH-OWN-01`/`TH-SEND-06`/`TH-VAR-08`（共 8 条逻辑回边）。
 
 ---

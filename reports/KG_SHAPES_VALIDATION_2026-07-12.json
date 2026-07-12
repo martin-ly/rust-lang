@@ -2,7 +2,7 @@
   "summary": {
     "date": "2026-07-12",
     "entities": 474,
-    "relations": 5807,
+    "relations": 5839,
     "decision_trees": 3,
     "fault_trees": 2,
     "K1_missing_required": 0,

@@ -84,7 +84,7 @@
 
 **变更日志**:
 
-- v1.0 (2026-05-25): 从 docs/05_guides/workflow/01_workflow_theory.md 迁移重构——保留 WfMC 定义、Petri 网、π 演算、时态逻辑等国际标准内容，移除非标准的 AI 融合章节，适配 concept/ 格式（Bloom + 来源 + 边界测试）
+- v1.0 (2026-05-25): 从 docs/08_usage_guides/workflow/01_workflow_theory.md 迁移重构——保留 WfMC 定义、Petri 网、π 演算、时态逻辑等国际标准内容，移除非标准的 AI 融合章节，适配 concept/ 格式（Bloom + 来源 + 边界测试）
 
 ---
 

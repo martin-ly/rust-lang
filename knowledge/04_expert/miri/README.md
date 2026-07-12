@@ -20,7 +20,7 @@
 >
 > **[Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [03_advanced/unsafe/unsafe_rust.md](../../03_advanced/unsafe/04_unsafe_rust.md) - Unsafe Rust 基础
+- [03_advanced/unsafe/unsafe_rust.md](../../03_advanced/unsafe/03_unsafe_rust.md) - Unsafe Rust 基础
 - [04_expert/unsafe_audit.md](../02_unsafe_audit.md) - Unsafe 代码审计
 
 ## 🚀 相关层

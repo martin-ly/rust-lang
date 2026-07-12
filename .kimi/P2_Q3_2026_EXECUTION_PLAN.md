@@ -274,7 +274,7 @@ cargo audit --no-fetch
 - 发布日清单: `.kimi/archive/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md`
 - Q4 国际化计划: `.kimi/archive/I18N_Q4_2026_PLAN.md`
 - 术语表: `concept/00_meta/terminology_glossary.md`
-- 学习路径: `docs/01_learning/learning_mvp_path.md`
+- 学习路径: `docs/02_learning/09_learning_mvp_path.md`
 
 ---
 
@@ -285,7 +285,7 @@ cargo audit --no-fetch
 | 编号 | 完成状态 | 关键产出 |
 |---|---|---|
 | P2-11 | ✅ | `concept/03_advanced/01_async/01_async.md` 顶部 TRPL Ch17 提示框 + 节次映射 |
-| P2-9 | ✅ | `docs/01_learning/learning_mvp_path.md` TRPL 3rd Ed 22 章全映射表 |
+| P2-9 | ✅ | `docs/02_learning/09_learning_mvp_path.md` TRPL 3rd Ed 22 章全映射表 |
 | P2-1 | ✅ | `concept/04_formal/05_rustc_internals/01_rustc_query_system.md` 新增动手实验章节 |
 | P2-5 | ✅ | `crates/c03_control_fn/src/kani_examples.rs` + `crates/c04_generic/src/kani_examples.rs` 函数/循环合约示例 |
 | P2-10 | ✅ | `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md` Brown Book 学术引用段落 |

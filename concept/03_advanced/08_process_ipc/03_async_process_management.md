@@ -308,7 +308,7 @@ flowchart TD
 
 ## 补充视角：异步标准 IO 管理
 
-> 来源：`crates/c07_process/docs/async_stdio_guide.md`
+> 来源：`crates/c07_process/docs/13_async_stdio_guide.md`
 
 在异步运行时中管理子进程时，标准输入/输出/错误也需要异步化。核心要点：
 

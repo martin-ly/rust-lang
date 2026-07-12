@@ -111,7 +111,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 📖 [WASI 深入](docs/tier_04_advanced/01_wasi_in_depth.md)
 - 📖 [性能分析与优化](docs/tier_04_advanced/02_performance_analysis_and_optimization.md)
 - 📖 [生产级部署](docs/tier_04_advanced/03_production_deployment.md)
-- 📖 [WasmEdge 与新技术](docs/tier_04_advanced/05_wasmedge_and_emerging_tech.md)
+- 📖 [WasmEdge 与新技术](docs/tier_04_advanced/04_wasmedge_and_emerging_tech.md)
 
 ### Technical Details
 

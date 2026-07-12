@@ -385,8 +385,8 @@ impl Actor {
 ### 理论文档
 
 - [综合设计模式指南](../docs/COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md)
-- [异步与同步等价理论](../docs/async_sync_equivalence_theory.md)
-- [Actor 与 Reactor 模式](../docs/actor_reactor_patterns.md)
+- [异步与同步等价理论](../docs/03_async_sync_equivalence_theory.md)
+- [Actor 与 Reactor 模式](../docs/01_actor_reactor_patterns.md)
 - [设计模式概念族谱](../../../docs/research_notes/DESIGN_PATTERN_CONCEPT_MINDMAP.md)
 
 ### 外部资源

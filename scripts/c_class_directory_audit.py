@@ -2,7 +2,7 @@
 """
 C 类大型目录价值评估脚本
 
-评估 docs/research_notes/ 和 docs/rust-ownership-decidability/ 的维护价值
+评估 docs/12_research_notes/ 和 docs/rust-ownership-decidability/ 的维护价值
 """
 
 from pathlib import Path

@@ -693,7 +693,7 @@ fn main() {
 
 ## 补充视角：设计模式中的可观测性
 
-> 来源：`crates/c09_design_pattern/docs/observability.md`
+> 来源：`crates/c09_design_pattern/docs/11_observability.md`
 
 在责任链、装饰器、代理等链式调用模式中，可观测性尤为重要：
 
@@ -707,7 +707,7 @@ fn main() {
 
 ## 补充视角：WebAssembly 可观测性实践
 
-> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/08_monitoring_and_observability_practice.md`，已按 AGENTS.md §6.4 迁移至此。
+> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/07_monitoring_and_observability_practice.md`，已按 AGENTS.md §6.4 迁移至此。
 
 WASM 工作负载的可观测性在传统三支柱基础上具有沙箱化特征：
 

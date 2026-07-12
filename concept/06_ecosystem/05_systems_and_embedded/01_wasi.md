@@ -659,7 +659,7 @@ Rust 无运行时、二进制小、性能高，且所有权系统与 WASM 的沙
 
 ## 补充视角：WASI 0.2 组件模型实战
 
-> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/09_wasi_0_2_component_model_in_depth_guide.md`，已按 AGENTS.md §6.4 迁移至此。
+> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/08_wasi_0_2_component_model_in_depth_guide.md`，已按 AGENTS.md §6.4 迁移至此。
 
 WASI 0.2（Preview 2）的核心变化是从 POSIX 式系统调用迁移到基于组件模型（Component Model）的能力安全接口：
 

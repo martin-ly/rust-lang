@@ -1105,7 +1105,7 @@ pub fn simd_add(a: &[f32], b: &[f32]) -> Vec<f32> {
 
 ## 补充视角：WasmEdge 与新兴运行时扩展
 
-> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/05_wasmedge_and_emerging_tech.md`，已按 AGENTS.md §6.4 迁移至此。
+> 内容来源：`crates/c12_wasm/docs/tier_04_advanced/04_wasmedge_and_emerging_tech.md`，已按 AGENTS.md §6.4 迁移至此。
 
 WasmEdge 是 CNCF 托管的高性能 WebAssembly 运行时，主打云原生与边缘场景。其设计要点包括：
 
@@ -1147,7 +1147,7 @@ Rust → WASM 的性能优化可分为编译期、运行时与跨边界三个层
 
 ## 补充视角：WebAssembly 开发工具链全景
 
-> 内容来源：`crates/c12_wasm/docs/wasm_engineering/development_toolchain.md`，已按 AGENTS.md §6.4 迁移至此。
+> 内容来源：`crates/c12_wasm/docs/tier_05_wasm_engineering/03_development_toolchain.md`，已按 AGENTS.md §6.4 迁移至此。
 
 Rust WASM 工程的工具链覆盖编译、调试、优化、包管理与 IDE 支持：
 

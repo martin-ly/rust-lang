@@ -307,7 +307,7 @@ jobs:
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [SemVer](https://semver.org/) · [Keep a Changelog](https://keepachangelog.com/)
 >
-> **权威来源对齐变更日志**: 2026-07-09 由 `crates/c11_macro_system_proc/docs/tier_04_advanced/05_production_grade_macro_development.md` 按 AGENTS.md §6.4 迁移至此
+> **权威来源对齐变更日志**: 2026-07-09 由 `crates/c11_macro_system_proc/docs/tier_04_advanced/06_production_grade_macro_development.md` 按 AGENTS.md §6.4 迁移至此
 
 **文档版本**: 1.0
 **最后更新**: 2026-07-09

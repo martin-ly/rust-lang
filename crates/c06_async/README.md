@@ -98,8 +98,8 @@
   - 异步流性能基准测试 (`async_stream_benchmarks`)
   - 异步任务管理器 (`async_task_manager`)
   - 异步缓存系统 (`async_cache_system`)
-- 📚 **新增文档**: [Rust 1.93.0 异步改进文档](docs/rust_192_async_improvements.md) ⭐ NEW!
-- 📚 **历史文档**: [Rust 1.91 异步改进文档](docs/rust_191_async_improvements.md) (历史参考，已更新至 1.92.0)
+- 📚 **新增文档**: [Rust 1.93.0 异步改进文档](docs/08_rust_192_async_improvements.md) ⭐ NEW!
+- 📚 **历史文档**: [Rust 1.91 异步改进文档](docs/07_rust_191_async_improvements.md) (历史参考，已更新至 1.92.0)
 - 💻 **新增示例**: [Rust 1.93.0 特性演示示例](examples/rust_192_features_demo.rs) ⭐ NEW!
 - 💻 **历史示例**: [Rust 1.91 特性演示示例](examples/rust_191_features_demo.rs) (历史参考，已更新至 1.92.0)
 - 🧪 **新增测试**: [Rust 1.93.0 综合测试套件](tests/rust_192_comprehensive_tests.rs) ⭐ NEW!
@@ -945,7 +945,7 @@ kubectl get pods -n rust-async-190
   - 详细的性能基准测试数据
   - 生产环境选型决策树
   - 适用场景分析与最佳实践
-- **[Glommio 最佳实践指南 2025](docs/tier_02_guides/09_glommio_best_practices_2025.md)** ⭐⭐⭐ **NEW! 2025-10-30**
+- **[Glommio 最佳实践指南 2025](docs/tier_02_guides/08_glommio_best_practices_2025.md)** ⭐⭐⭐ **NEW! 2025-10-30**
   - CPU 绑定与 NUMA 优化
   - 任务调度与优先级管理
   - 高性能 I/O 技巧
@@ -969,10 +969,10 @@ kubectl get pods -n rust-async-190
 
 深入学习异步编程的形式化理论基础：
 
-- ⚡ **[异步编程范式理论](../../docs/rust-formal-engineering-system/02_programming_paradigms/02_async/README.md)** - 完整的异步编程形式化理论
+- ⚡ **[异步编程范式理论](../../docs/15_rust_formal_engineering_system/02_programming_paradigms/02_async/README.md)** - 完整的异步编程形式化理论
 - 🔄 **[并发模型理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/04_concurrency_models)** - 并发模型的形式化描述
-- 🎭 **[Actor 模型理论](../../docs/rust-formal-engineering-system/02_programming_paradigms/09_actor_model/README.md)** - Actor 模式的形式化定义
-- 🔗 **[CSP 模型理论](../../docs/rust-formal-engineering-system/03_design_patterns/04_concurrent/README.md)** - CSP 模式的形式化分析
+- 🎭 **[Actor 模型理论](../../docs/15_rust_formal_engineering_system/02_programming_paradigms/09_actor_model/README.md)** - Actor 模式的形式化定义
+- 🔗 **[CSP 模型理论](../../docs/15_rust_formal_engineering_system/05_design_patterns/04_concurrent/README.md)** - CSP 模式的形式化分析
 
 ### 使用指南
 
@@ -982,7 +982,7 @@ kubectl get pods -n rust-async-190
 
 ### 项目文档
 
-- **[项目最佳实践指南](../../docs/05_guides/best_practices.md)** - 代码质量、性能优化、测试指南
+- **[项目最佳实践指南](../../docs/08_usage_guides/28_best_practices.md)** - 代码质量、性能优化、测试指南
 - **[性能调优指南](../../docs/PERFORMANCE_TUNING_GUIDE.md)** - 完整的性能调优指南
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解

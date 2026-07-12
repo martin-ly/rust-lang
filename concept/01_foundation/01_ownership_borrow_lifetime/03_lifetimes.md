@@ -1484,7 +1484,7 @@ Rust 1.31 引入的 **Non-Lexical Lifetimes (NLL)** 使借用的有效期基于*
 
 ## 补充视角：crate 实践中的生命周期调试与最佳实践
 
-> 本节选编自 `crates/c02_type_system/docs/tier_02_guides/05_lifetimes_guide.md`，
+> 本节选编自 `crates/c02_type_system/docs/tier_02_guides/08_lifetimes_guide.md`，
 > 作为 canonical 生命周期概念页的工程实践补充。
 
 ### 常见陷阱

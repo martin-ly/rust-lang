@@ -2882,7 +2882,7 @@ fn main() {
 > **文档类型**: Tier 4 - 高级层
 > **文档定位**: 高级泛型编程模式
 > **适用对象**: 高级开发者
-> **前置知识**: [2.3 泛型编程指南](../../../crates/c02_type_system/docs/tier_02_guides/03_generics_programming_guide.md), [2.4 Trait系统指南](../../../crates/c02_type_system/docs/tier_02_guides/04_trait_system_guide.md)
+> **前置知识**: [2.3 泛型编程指南](../../../crates/c02_type_system/docs/tier_02_guides/05_generics_programming_guide.md), [2.4 Trait系统指南](../../../crates/c02_type_system/docs/tier_02_guides/07_trait_system_guide.md)
 > **最后更新**: 2025-12-11
 
 ---
@@ -3208,7 +3208,7 @@ fn main() {
 
 ## 补充视角：crate 实践中的泛型性能与工程权衡
 
-> 本节选编自 `crates/c02_type_system/docs/tier_02_guides/03_generics_programming_guide.md`，
+> 本节选编自 `crates/c02_type_system/docs/tier_02_guides/05_generics_programming_guide.md`，
 > 作为 canonical 泛型概念页的工程实践补充。
 
 ### 单态化与代码膨胀

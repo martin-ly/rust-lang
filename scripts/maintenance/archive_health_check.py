@@ -4,7 +4,7 @@
 
 用于定期检查：
 1. archive/ 子目录 README 是否错误地声明为“活跃/持续维护”。
-2. docs/research_notes/ 是否仍存在应归档的重复低价值文件。
+2. docs/12_research_notes/ 是否仍存在应归档的重复低价值文件。
 3. tmp/ 工作区是否残留临时文件。
 4. docs/ / knowledge/ 中的 redirect stub 是否缺少“历史内容已迁移”状态标记。
 
@@ -134,7 +134,7 @@ def check_research_notes_duplicates(report: Report) -> None:
             report.add(
                 "research_notes_duplicate",
                 path,
-                f"docs/research_notes 文件与 archive 副本重复，建议清理：{rel.as_posix()}",
+                f"docs/12_research_notes 文件与 archive 副本重复，建议清理：{rel.as_posix()}",
             )
 
 

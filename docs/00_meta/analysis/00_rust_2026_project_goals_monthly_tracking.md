@@ -82,11 +82,11 @@
 
 | 类别 | 英文标识 | 目标数量 | 核心关注点 | 本项目对应目录 |
 |------|----------|----------|-----------|---------------|
-| 语言特性 | `LANG` | ~18 | 新语法、类型系统演进、borrow checker、unsafe 边界、Edition 2024+ | `docs/01_core/`、`docs/04_research/` |
-| 工具链 | `TOOL` | ~16 | 编译器后端、Cargo 功能、IDE/LSP、调试、profile、构建加速 | `docs/06_toolchain/`、`crates/` |
-| 生态系统 | `ECO` | ~14 | crates.io、semver、脚本化、互操作、包管理、文档生成 | `docs/03_guides/`、`docs/05_guides/` |
-| 嵌入式/内核 | `EMBED` | ~10 | `no_std`、嵌入式 HAL、Rust for Linux、内核模块、实时系统 | `docs/04_research/`、`content/` |
-| 形式化验证 | `FORMAL` | ~8 | Miri UB 检测、Polonius、模型检查、定理证明、安全规范 | `docs/04_research/`、`docs/05_guides/` |
+| 语言特性 | `LANG` | ~18 | 新语法、类型系统演进、borrow checker、unsafe 边界、Edition 2024+ | `docs/01_core/`、`docs/06_research/` |
+| 工具链 | `TOOL` | ~16 | 编译器后端、Cargo 功能、IDE/LSP、调试、profile、构建加速 | `docs/09_toolchain/`、`crates/` |
+| 生态系统 | `ECO` | ~14 | crates.io、semver、脚本化、互操作、包管理、文档生成 | `docs/04_guides/`、`docs/08_usage_guides/` |
+| 嵌入式/内核 | `EMBED` | ~10 | `no_std`、嵌入式 HAL、Rust for Linux、内核模块、实时系统 | `docs/06_research/`、`content/` |
+| 形式化验证 | `FORMAL` | ~8 | Miri UB 检测、Polonius、模型检查、定理证明、安全规范 | `docs/06_research/`、`docs/08_usage_guides/` |
 
 > **分类说明**：存在交叉属性的目标（如 Polonius）按主要归属分类，避免重复计数。
 
@@ -120,8 +120,8 @@
 
 | # | 2026 目标 | 状态 | 本项目覆盖情况 |
 |---|----------|------|---------------|
-| L01 | Polonius 下一代 Borrow Checker | ✅ | [`docs/04_research/04_polonius_next_gen_borrow_checker.md`](../../04_research/04_polonius_next_gen_borrow_checker.md) — 完整覆盖原理、Datalog 核心引擎、与 NLL 对比、实际使用方式 |
-| L02 | Unsafe Fields (unsafe 粒度细化) | ✅ | [`docs/05_guides/05_unsafe_fields_preview.md`](../../05_guides/05_unsafe_fields_preview.md) — 实验性语法预览，覆盖动机、提议语法、访问规则、与现有 unsafe 块的区别 |
+| L01 | Polonius 下一代 Borrow Checker | ✅ | [`docs/06_research/06_polonius_next_gen_borrow_checker.md`](../../06_research/06_polonius_next_gen_borrow_checker.md) — 完整覆盖原理、Datalog 核心引擎、与 NLL 对比、实际使用方式 |
+| L02 | Unsafe Fields (unsafe 粒度细化) | ✅ | [`docs/08_usage_guides/25_unsafe_fields_preview.md`](../../08_usage_guides/25_unsafe_fields_preview.md) — 实验性语法预览，覆盖动机、提议语法、访问规则、与现有 unsafe 块的区别 |
 | L03 | `gen` 关键字 / 异步生成器 | 🟡 | `crates/c06_async/` 中有部分 async 示例，但缺少 `gen` 块专题文档和 `Coroutine` trait 解析 |
 | L04 | `match` ergonomics (if let guards) | 🟡 | 语言基础部分有涉及，但缺少 1.95.0+ 新 guard 语法的专门说明和迁移示例 |
 | L05 | `cfg_select!` 宏稳定化 | 🔴 | 无覆盖 — 2026-04 stable 新特性，需创建专门的条件编译指南 |
@@ -153,9 +153,9 @@
 
 | # | 2026 目标 | 状态 | 本项目覆盖情况 |
 |---|----------|------|---------------|
-| T01 | Cranelift 后端提速编译 | ✅ | [`docs/06_toolchain/06_cranelift_backend_guide.md`](../../06_toolchain/06_cranelift_backend_guide.md) — 安装、配置、项目级与单次编译、实测数据完整 |
-| T02 | Miri UB 检测普及化 | ✅ | [`docs/05_guides/05_miri_practical_guide.md`](../../05_guides/05_miri_practical_guide.md) — 466 行实战指南，覆盖 UAF、OOB、数据竞争、未初始化内存等常见 UB 模式 |
-| T03 | Cargo TOML v1.1 支持 | ✅ | [`docs/06_toolchain/06_toml_v11_cargo_guide.md`](../../06_toolchain/06_toml_v11_cargo_guide.md) — 多行内联表、尾部逗号、扩展裸键规则等新特性详解 |
+| T01 | Cranelift 后端提速编译 | ✅ | [`docs/09_toolchain/13_cranelift_backend_guide.md`](../../09_toolchain/13_cranelift_backend_guide.md) — 安装、配置、项目级与单次编译、实测数据完整 |
+| T02 | Miri UB 检测普及化 | ✅ | [`docs/08_usage_guides/16_miri_practical_guide.md`](../../08_usage_guides/16_miri_practical_guide.md) — 466 行实战指南，覆盖 UAF、OOB、数据竞争、未初始化内存等常见 UB 模式 |
+| T03 | Cargo TOML v1.1 支持 | ✅ | [`docs/09_toolchain/16_toml_v11_cargo_guide.md`](../../09_toolchain/16_toml_v11_cargo_guide.md) — 多行内联表、尾部逗号、扩展裸键规则等新特性详解 |
 | T04 | cargo-script (`cargo +nightly script`) | ✅ | [`crates/c03_control_fn/examples/cargo_script_demo.rs`](../../../crates/c03_control_fn/examples/cargo_script_demo.rs) — 可直接运行的 shebang 脚本示例 |
 | T05 | cargo-semver-checks 集成 | ✅ | [`crates/c10_networks/src/cargo_semver_checks_guide.rs`](../../../crates/c10_networks/src/cargo_semver_checks_guide.rs) — API 兼容性检查指南，覆盖 major/minor/patch 判定规则 |
 | T06 | rust-analyzer 性能与功能完善 | 🟡 | IDE 配置有提及，缺少性能调优指南、Chalk 求解器原理和宏扩展诊断 |
@@ -184,7 +184,7 @@
 
 | # | 2026 目标 | 状态 | 本项目覆盖情况 |
 |---|----------|------|---------------|
-| E01 | C++ ↔ Rust 互操作 (cxx / bindgen) | ✅ | [`docs/03_guides/03_cxx_interop_guide.md`](../../03_guides/03_cxx_interop_guide.md) — 覆盖 bindgen 和 cxx 两条技术路线、共享类型与不透明类型、ABI 兼容性 |
+| E01 | C++ ↔ Rust 互操作 (cxx / bindgen) | ✅ | [`docs/04_guides/02_cxx_interop_guide.md`](../../04_guides/02_cxx_interop_guide.md) — 覆盖 bindgen 和 cxx 两条技术路线、共享类型与不透明类型、ABI 兼容性 |
 | E02 | crates.io 安全与供应链安全 | 🟡 | 生态系统目录有概述，缺少 crates.io 安全审计、typosquatting 检测和 `cargo-vet` 使用指南 |
 | E03 | SemVer 自动化检查 | ✅ | 见 T05 `cargo-semver-checks`，API 兼容性检查流程完整覆盖 |
 | E04 | 脚本化 Rust (cargo-script / rust-script) | ✅ | 见 T04 `cargo-script`，可直接作为 shebang 脚本运行 |
@@ -213,7 +213,7 @@
 
 | # | 2026 目标 | 状态 | 本项目覆盖情况 |
 |---|----------|------|---------------|
-| K01 | Rust for Linux (RFL) 生产化 | ✅ | [`docs/04_research/04_rust_for_linux.md`](../../04_research/04_rust_for_linux.md) — 完整时间线、里程碑解读、驱动开发指南、从实验到生产的演进分析 |
+| K01 | Rust for Linux (RFL) 生产化 | ✅ | [`docs/06_research/08_rust_for_linux.md`](../../06_research/08_rust_for_linux.md) — 完整时间线、里程碑解读、驱动开发指南、从实验到生产的演进分析 |
 | K02 | `no_std` 生态系统健壮性 | 🟡 | 嵌入式目录有基础内容，但缺少 `no_std` 兼容 crate 的完整清单和兼容性评测 |
 | K03 | 嵌入式 HAL 标准统一 | 🔴 | 无覆盖 — 涉及 `embedded-hal`、`embedded-io` 等 trait 标准的演进 |
 | K04 | 实时操作系统 (RTOS) 绑定 | 🔴 | 无覆盖 — 如 `Tock`、`Hubris` 或 FreeRTOS 绑定的状态 |
@@ -240,7 +240,7 @@
 |---|----------|------|---------------|
 | F01 | Miri 作为 UB 检测基准工具 | ✅ | 见 T02 `05_miri_practical_guide.md`，覆盖栈/堆 UAF、OOB、数据竞争、对齐违规等 10+ UB 模式 |
 | F02 | Polonius 正确性证明与落地 | ✅ | 见 L01 `04_polonius_next_gen_borrow_checker.md`，涵盖 Datalog 事实生成、约束求解和正确性论证 |
-| F03 | Verus / 定理证明集成 | ✅ | [`docs/04_research/04_verusbelt_pldi_2026.md`](../../04_research/04_verusbelt_pldi_2026.md) — PLDI 2026 研究跟踪，覆盖层叠语义、擦除定理、与 Verus 验证框架的关系 |
+| F03 | Verus / 定理证明集成 | ✅ | [`docs/06_research/12_verusbelt_pldi_2026.md`](../../06_research/12_verusbelt_pldi_2026.md) — PLDI 2026 研究跟踪，覆盖层叠语义、擦除定理、与 Verus 验证框架的关系 |
 | F04 | Kani 模型检查器推广 | 🔴 | 无覆盖 — 需创建 Kani 入门指南，覆盖 `kani::proof` 属性、假设-断言模式和 CI 集成 |
 | F05 | Prusti / 合约式验证前置条件 | 🔴 | 无覆盖 — 涉及 `#[requires]` / `#[ensures]` 注解和 Viper 后端 |
 | F06 | RustBelt 内存模型演进 | 🟡 | VerusBelt 文档有理论关联，但缺少 RustBelt 原论文的逐步解析和 Iris 框架介绍 |
@@ -332,14 +332,14 @@
 
 | 目标 | 新增/升级文档 | 类型 | 说明 |
 |------|-------------|------|------|
-| Miri UB 检测 | `docs/05_guides/05_miri_practical_guide.md` | 新增 | 466 行实战指南，覆盖 10+ 常见 UB 模式 |
-| Cranelift 后端 | `docs/06_toolchain/06_cranelift_backend_guide.md` | 新增 | 349 行配置与评测，含实测编译时间对比 |
-| Polonius | `docs/04_research/04_polonius_next_gen_borrow_checker.md` | 新增 | 327 行深度解析，关联官方 2026 goal |
-| Unsafe Fields | `docs/05_guides/05_unsafe_fields_preview.md` | 新增 | 281 行实验性预览，覆盖语法和语义 |
-| TOML v1.1 | `docs/06_toolchain/06_toml_v11_cargo_guide.md` | 新增 | 392 行 Cargo 集成指南 |
-| VerusBelt | `docs/04_research/04_verusbelt_pldi_2026.md` | 新增 | 229 行 PLDI 2026 研究跟踪 |
-| C++ 互操作 | `docs/03_guides/03_cxx_interop_guide.md` | 新增 | 151 行 cxx + bindgen 技术路线对比 |
-| Rust for Linux | `docs/04_research/04_rust_for_linux.md` | 新增 | 272 行 RFL 生产化时间线与驱动开发 |
+| Miri UB 检测 | `docs/08_usage_guides/16_miri_practical_guide.md` | 新增 | 466 行实战指南，覆盖 10+ 常见 UB 模式 |
+| Cranelift 后端 | `docs/09_toolchain/13_cranelift_backend_guide.md` | 新增 | 349 行配置与评测，含实测编译时间对比 |
+| Polonius | `docs/06_research/06_polonius_next_gen_borrow_checker.md` | 新增 | 327 行深度解析，关联官方 2026 goal |
+| Unsafe Fields | `docs/08_usage_guides/25_unsafe_fields_preview.md` | 新增 | 281 行实验性预览，覆盖语法和语义 |
+| TOML v1.1 | `docs/09_toolchain/16_toml_v11_cargo_guide.md` | 新增 | 392 行 Cargo 集成指南 |
+| VerusBelt | `docs/06_research/12_verusbelt_pldi_2026.md` | 新增 | 229 行 PLDI 2026 研究跟踪 |
+| C++ 互操作 | `docs/04_guides/02_cxx_interop_guide.md` | 新增 | 151 行 cxx + bindgen 技术路线对比 |
+| Rust for Linux | `docs/06_research/08_rust_for_linux.md` | 新增 | 272 行 RFL 生产化时间线与驱动开发 |
 | cargo-script | `crates/c03_control_fn/examples/cargo_script_demo.rs` | 新增 | 可运行的 shebang 脚本示例 |
 | cargo-semver-checks | `crates/c10_networks/src/cargo_semver_checks_guide.rs` | 新增 | API 兼容性检查指南 |
 
@@ -398,14 +398,14 @@
 
 | 目标 | 文档路径 | 类型 | 行数 |
 |------|----------|------|------|
-| Miri | [`docs/05_guides/05_miri_practical_guide.md`](../../05_guides/05_miri_practical_guide.md) | Markdown | 466 |
-| Cranelift | [`docs/06_toolchain/06_cranelift_backend_guide.md`](../../06_toolchain/06_cranelift_backend_guide.md) | Markdown | 349 |
-| Polonius | [`docs/04_research/04_polonius_next_gen_borrow_checker.md`](../../04_research/04_polonius_next_gen_borrow_checker.md) | Markdown | 327 |
-| TOML v1.1 | [`docs/06_toolchain/06_toml_v11_cargo_guide.md`](../../06_toolchain/06_toml_v11_cargo_guide.md) | Markdown | 392 |
-| Unsafe Fields | [`docs/05_guides/05_unsafe_fields_preview.md`](../../05_guides/05_unsafe_fields_preview.md) | Markdown | 281 |
-| VerusBelt | [`docs/04_research/04_verusbelt_pldi_2026.md`](../../04_research/04_verusbelt_pldi_2026.md) | Markdown | 229 |
-| C++ 互操作 | [`docs/03_guides/03_cxx_interop_guide.md`](../../03_guides/03_cxx_interop_guide.md) | Markdown | 151 |
-| Rust for Linux | [`docs/04_research/04_rust_for_linux.md`](../../04_research/04_rust_for_linux.md) | Markdown | 272 |
+| Miri | [`docs/08_usage_guides/16_miri_practical_guide.md`](../../08_usage_guides/16_miri_practical_guide.md) | Markdown | 466 |
+| Cranelift | [`docs/09_toolchain/13_cranelift_backend_guide.md`](../../09_toolchain/13_cranelift_backend_guide.md) | Markdown | 349 |
+| Polonius | [`docs/06_research/06_polonius_next_gen_borrow_checker.md`](../../06_research/06_polonius_next_gen_borrow_checker.md) | Markdown | 327 |
+| TOML v1.1 | [`docs/09_toolchain/16_toml_v11_cargo_guide.md`](../../09_toolchain/16_toml_v11_cargo_guide.md) | Markdown | 392 |
+| Unsafe Fields | [`docs/08_usage_guides/25_unsafe_fields_preview.md`](../../08_usage_guides/25_unsafe_fields_preview.md) | Markdown | 281 |
+| VerusBelt | [`docs/06_research/12_verusbelt_pldi_2026.md`](../../06_research/12_verusbelt_pldi_2026.md) | Markdown | 229 |
+| C++ 互操作 | [`docs/04_guides/02_cxx_interop_guide.md`](../../04_guides/02_cxx_interop_guide.md) | Markdown | 151 |
+| Rust for Linux | [`docs/06_research/08_rust_for_linux.md`](../../06_research/08_rust_for_linux.md) | Markdown | 272 |
 | cargo-script | [`crates/c03_control_fn/examples/cargo_script_demo.rs`](../../../crates/c03_control_fn/examples/cargo_script_demo.rs) | Rust 示例 | — |
 | cargo-semver-checks | [`crates/c10_networks/src/cargo_semver_checks_guide.rs`](../../../crates/c10_networks/src/cargo_semver_checks_guide.rs) | Rust 源码 | — |
 

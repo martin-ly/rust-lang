@@ -18,7 +18,7 @@
 | **交互式练习** | [exercises/README.md](../exercises/README.md) | Rustlings、Playground 对接 |
 | **Rustlings 模块映射** | [exercises/rustlings_mapping.md](../exercises/rustlings_mapping.md) | C01–C12 与 Rustlings 习题对应 |
 | **错误码映射** | [docs/02_reference/ERROR_CODE_MAPPING.md](../docs/02_reference/ERROR_CODE_MAPPING.md) | 编译器错误码 → 文档 |
-| **QUICK_START** | [crates/c01_ownership_borrow_scope/docs/quick_start_guide.md](../crates/c01_ownership_borrow_scope/docs/quick_start_guide.md) | 所有权模块快速入门 |
+| **QUICK_START** | [crates/c01_ownership_borrow_scope/docs/06_quick_start_guide.md](../crates/c01_ownership_borrow_scope/docs/06_quick_start_guide.md) | 所有权模块快速入门 |
 | **异步编程快速开始** | [crates/c06_async/quick_start_guide_2025.md](../crates/c06_async/quick_start_guide_2025.md) | C06 异步快速入门 |
 
 ### 使用指南（位于 docs/）
@@ -52,7 +52,7 @@
 
 | 主题 | 项目内入口 | 说明 |
 | :--- | :--- | :--- |
-| **编译器内部机制** | [docs/06_toolchain/](../docs/06_toolchain/README.md) | 编译器特性、Cargo、rustdoc；[rustc Book](https://doc.rust-lang.org/rustc/) |
+| **编译器内部机制** | [docs/09_toolchain/](../docs/09_toolchain/README.md) | 编译器特性、Cargo、rustdoc；[rustc Book](https://doc.rust-lang.org/rustc/) |
 | **认知科学学习** | [LEARNING_CHECKLIST.md](../LEARNING_CHECKLIST.md) | 间隔重复、自测题；[Brown 交互版](https://rust-book.cs.brown.edu/) |
 | **大学课程对标** | [docs/01_learning/OFFICIAL_RESOURCES_MAPPING.md](../docs/01_learning/OFFICIAL_RESOURCES_MAPPING.md) | 官方资源映射、模块对标 |
 | **交互式学习平台** | [exercises/README.md](../exercises/README.md)、[RUSTLINGS_MAPPING.md](../exercises/rustlings_mapping.md) | Rustlings、Playground、习题映射 |

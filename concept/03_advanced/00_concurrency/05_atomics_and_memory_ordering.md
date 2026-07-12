@@ -71,7 +71,7 @@
     - [测验 2：内存序（理解层）](#测验-2内存序理解层)
     - [测验 3：自旋锁实现（应用层）](#测验-3自旋锁实现应用层)
     - [测验 4：SeqCst 的必要性（分析层）](#测验-4seqcst-的必要性分析层)
-  - [迁移内容（来自 `crates/c05_threads/docs/05_advanced_topics_and_summary.md`）](#迁移内容来自-cratesc05_threadsdocs05_advanced_topics_and_summarymd)
+  - [迁移内容（来自 `crates/c05_threads/docs/09_advanced_topics_and_summary.md`）](#迁移内容来自-cratesc05_threadsdocs05_advanced_topics_and_summarymd)
   - [1. Atomics：原子类型](#1-atomics原子类型)
     - [1.1. 硬件层面的并发基石](#11-硬件层面的并发基石)
     - [1.2. 内存排序 (Memory Ordering)](#12-内存排序-memory-ordering)
@@ -1253,11 +1253,11 @@ now_serving  = 当前叫到的号码
 
 ---
 
-## 迁移内容（来自 `crates/c05_threads/docs/05_advanced_topics_and_summary.md`）
+## 迁移内容（来自 `crates/c05_threads/docs/09_advanced_topics_and_summary.md`）
 
-> <!-- migrated from crates/c05_threads/docs/05_advanced_topics_and_summary.md -->
+> <!-- migrated from crates/c05_threads/docs/09_advanced_topics_and_summary.md -->
 >
-> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/05_advanced_topics_and_summary.md` 迁移至本权威页。
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/09_advanced_topics_and_summary.md` 迁移至本权威页。
 
 ## 1. Atomics：原子类型
 

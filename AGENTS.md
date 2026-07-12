@@ -83,6 +83,17 @@
 - 禁止中文文件名、空格、混合大小写（过渡期例外：`archive/` 历史文件、`.kimi/` 日期风格文件、`reports/` 日期风格文件、`.github/ISSUE_TEMPLATE/`）。
 - 每个 `concept/` 文件应包含 `**EN**` 英文标题和 `**Summary**` 英文摘要。
 
+### 4.0 序号与目录命名规则（2026-07-12 全库重编号后生效）
+
+1. **序号语义**：一律为**目录内两位连续序号** `NN_`（01 起）；`00_` 保留给导览页/README。不再使用“层内全书章节号”。
+2. **一级目录**：两位连续不跳号；删除目录后必须重排剩余目录。
+3. **同目录禁同号**。删除文件后：小目录（<15 文件）重排；大目录（≥15）可留空号，但须在该目录 README 记录空号原因。
+4. **专题系列**（如 `rust_1_9x_*` 版本追踪）可无序号，但须集中于同一目录并有 README 索引。
+5. **quiz**：每层设 `NN_quizzes/` 目录收纳测验，不散落。
+6. **crates/*/docs/**：仅允许 `tier_0N_*` 子目录 + `NN_` 文件；禁止 `viewNN`、散名、`*_final`/`*_expanded`/`*_supplement` 变体文件（内容并入主干后 stub 化或删除）。
+7. 禁止双前缀（如 `06_20_`）与异形前缀（如 `1_2_`）；日期后缀仅限豁免目录（`reports/`、`.kimi/`、`archive/`）。
+8. `concept/SUMMARY.md`、`knowledge/INDEX.md` 等导航文件的结构变更须与文件重命名同步；批量重命名统一使用 `scripts/plan_renumber.py`（生成映射 CSV，人工 review）+ `scripts/apply_renumber.py`（默认 dry-run，`--apply` 执行，自动双向重算相对链接并同步 JSON/YAML/KG 路径）。
+
 ### 4.1 `Cargo.toml` 规范
 
 所有 workspace member 必须继承 workspace 元数据，禁止硬编码重复值：
@@ -177,16 +188,19 @@ cargo test --workspace
 # mdbook 构建（输出到 book/，不应提交）
 mdbook build
 
-# 本地一键运行全部 19 个质量门（14 阻断 + 5 语义观察）
+# 本地一键运行全部 20 个质量门（14 阻断 + 6 语义观察）
 bash scripts/run_quality_gates.sh
+
+# 命名规范 lint（AGENTS.md §4.0：N1–N6；默认观察 exit 0，--strict 转阻断）
+python scripts/check_naming_convention.py
 
 # 安装 pre-commit hook（会在每次 commit 前自动跑重叠/i18n/死链检查）
 bash scripts/git_hooks/install.sh
 ```
 
-### 5.1 CI 质量门（19 项：14 阻断 + 5 语义观察）
+### 5.1 CI 质量门（20 项：14 阻断 + 6 语义观察）
 
-所有合并到 `main`/`master` 的变更必须通过以下 **14 个阻断质量门**；另有 **5 个语义观察门**（warning，不阻断，默认 exit 0，加 `--strict` 可转阻断）持续追踪语义健康：
+所有合并到 `main`/`master` 的变更必须通过以下 **14 个阻断质量门**；另有 **6 个语义观察门**（warning，不阻断，默认 exit 0，加 `--strict` 可转阻断）持续追踪语义健康：
 
 **阻断门（14）**：
 
@@ -205,12 +219,13 @@ bash scripts/git_hooks/install.sh
 13. `python scripts/check_canonical_uniqueness.py --strict`（concept 权威页唯一性；2026-07-12 转正）
 14. `python scripts/concept_consistency_auditor.py --strict`（跨文件概念定义一致性；2026-07-12 转正）
 
-**语义观察门（5，非阻断）**：
+**语义观察门（6，非阻断）**：
 15. `python scripts/check_metadata_consistency.py`（元数据 D1–D6；D2=1/D5=17 未达标）
-16. `python scripts/detect_content_overlap_v2.py --budget 999999`（段落级重叠 v2；可处理项 MERGE+DOCS_INTERNAL=53>0，超基线 WARN 升级判定见 `run_quality_gates.sh` 与 §5.2）
+16. `python scripts/detect_content_overlap_v2.py --budget 999999`（段落级重叠 v2；可处理项 MERGE+DOCS_INTERNAL=54>0（MERGE 5 条目中 autoverus 对双向计数，唯一对 4+49=53），超基线 WARN 升级判定见 `run_quality_gates.sh` 与 §5.2）
 17. `python scripts/semantic_health.py`（综合语义健康分；grade=FAIL 时 --strict 才阻断）
 18. `python scripts/check_concept_authority_coverage.py`（concept 权威层国际化权威来源覆盖率；--strict 已支持但当前 exit=1，见 §5.2）
 19. `python scripts/check_examples_compile.py`（根 examples/ 游离示例编译保护；9 stdlib rustc 直编 + 3 依赖示例经 `examples/examples_check/` crate + 2 Cargo Script 豁免；2026-07-12 新增，P3-5）
+20. `python scripts/check_naming_convention.py`（命名规范 lint，AGENTS.md §4.0 N1–N6；扫描 concept/knowledge/docs/content/crates/*/docs；基线 ERROR=0/WARN=78（2026-07-12 命名收尾后）；2026-07-12 新增）
 
 > 说明：语义观察门用于“可机器复核的语义趋势”，不因单项退化阻断 PR；但当任一观察门指标显著恶化时，应在 PR 描述中说明原因与后续治理计划。权威覆盖门（18）目标基线为 concept/ 真内容页 any=100%、none=0、核心 L1–L4 无 P0 缺口=0。
 
@@ -227,12 +242,13 @@ bash scripts/git_hooks/install.sh
 | canonical uniqueness | 0 处双权威页/同主题重复 | exit 0 | ✅ **已转阻断** |
 | concept consistency | 0 错误级发现（decision trees 等跨文件引用全有效） | exit 0 | ✅ **已转阻断** |
 | metadata consistency | D1=0 / D2=1 / D3=0 / D4=0 / D5=17 / D6=13（flagged 30/483） | exit 1 | ⏳ 维持观察（D2/D5 未达标） |
-| overlap v2 | 命中 592；可处理 MERGE=4 + DOCS_INTERNAL=49 = **53**（SERIES 22 白名单 / REVIEW 517） | — | ⏳ 维持观察（可处理项>0；超基线 53 即 WARN 升级，归零后可转阻断 `--strict --budget 0`） |
+| overlap v2 | 命中 552；可处理 MERGE=5 + DOCS_INTERNAL=49 = **54**（MERGE 含 autoverus 双向计数，唯一对 4+49=53；SERIES 24 白名单含 2 对显式登记 / REVIEW 474） | — | ⏳ 维持观察（可处理项>0；超基线 54 即 WARN 升级，归零后可转阻断 `--strict --budget 0`） |
+| naming convention | N1–N6：ERROR=0 / WARN=78（无序号系列文件 35 + 无序号目录 39 + N4 stub 3 + N5 docs 跳号 1；扫描 1790 文件/254 目录；2026-07-12 命名收尾：docs/08_guides→08_usage_guides，crates 5 目录改 tier_05_*，10 个 rust_194_updates + c03 snippets 补 README 豁免索引） | exit 0 | ⏳ 新增观察门（2026-07-12，§4.0 重编号配套；连续达标后可评估转正） |
 | semantic health | 总分 90.3 grade OK（元数据 93.8 / 拓扑 90.7 / 去重 85.0 / KG 90） | exit 0 | ⏳ 维持观察（聚合门，待去重分量归零后再评估） |
 | authority coverage | 内容页 any=99.5% / none=2 / 核心 L1–L4 无 P0 缺口=1（较 07-11 基线 any=100%/none=0/缺口=0 退化） | exit 1 | ⏳ 维持观察（--strict 已实现，达标后可转正） |
 | examples compile | 14 游离示例：9 stdlib ✅ + 3 deps ✅（经 `examples/examples_check/` crate）+ 2 Cargo Script 豁免 | exit 0 | ⏳ 新增观察门（2026-07-12，P3-5；连续达标后可评估转正） |
 
-**去重 v2 转阻断评估（P2-5，2026-07-12）**：v1（阻断门 8）报 1 对而 v2 报 592 对，v1 漏检属实；但 v2 当前可处理项 53>0（前序 P0-5 已处置 54 对后仍有存量），**暂不转阻断**。过渡方案：`run_quality_gates.sh` 中 v2 观察门由“计数报告”升级为“可处理项（MERGE+DOCS_INTERNAL）> 基线 53 即 WARN 升级提示”；可处理项归零后再转为阻断（`--strict --budget 0`）。
+**去重 v2 转阻断评估（P2-5，2026-07-12）**：v1（阻断门 8）报 1 对而 v2 报 552 对，v1 漏检属实；但 v2 当前可处理项 54>0（前序 P0-5 已处置 54 对后仍有存量），**暂不转阻断**。过渡方案：`run_quality_gates.sh` 中 v2 观察门由“计数报告”升级为“可处理项（MERGE+DOCS_INTERNAL）> 基线 54 即 WARN 升级提示”；可处理项归零后再转为阻断（`--strict --budget 0`）。SERIES 白名单：`triage_overlap.py` 正则 + 显式 `SERIES_PAIRS` 登记（2026-07-12 人工复核 2 对：c10 examples_collection/part2 分章、c02 readme_rust_189/190 版本系列）。
 
 ---
 
@@ -243,7 +259,7 @@ bash scripts/git_hooks/install.sh
 3. **不要** 在 `archive/` 中创建新的活跃内容副本。
 4. **不要** 在 `crates/*/docs/` 中复制通用概念解释；应链接到 `concept/`。
 5. **新增重复内容必须被 CI 或人工 review 拦截**。
-6. **禁止未经验证的“完成”声明**：任何“已完成/全部通过/100%”类结论必须引用可机器复核的证据（质量门报告、脚本输出、CI 记录），且必须同时核对 14 阻断门与 5 语义观察门；仅阻断门通过不得宣称“质量门全部通过”。报告与观察门状态矛盾时，以观察门最新报告为准并勘误原报告。
+6. **禁止未经验证的“完成”声明**：任何“已完成/全部通过/100%”类结论必须引用可机器复核的证据（质量门报告、脚本输出、CI 记录），且必须同时核对 14 阻断门与 6 语义观察门；仅阻断门通过不得宣称“质量门全部通过”。报告与观察门状态矛盾时，以观察门最新报告为准并勘误原报告。
 
 ---
 

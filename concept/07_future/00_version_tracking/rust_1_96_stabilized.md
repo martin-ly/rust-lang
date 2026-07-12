@@ -168,7 +168,7 @@ my-crate = { version = "1.2", registry = "internal", git = "https://github.com/m
 ## 5. 练习与验证
 
 - 测验：`exercises/tests/l3_rust_196_alignment.rs`
-- 速查：`docs/06_toolchain/06_22_rust_1_96_features.md`
+- 速查：`docs/09_toolchain/08_rust_1_96_features.md`
 
 ---
 

@@ -729,7 +729,7 @@ fn documented() {}
 
 ## 补充视角：进程管理场景测试要点
 
-> 本节选编自 `crates/c07_process/docs/14_testing_benchmarking_guide.md`，
+> 本节选编自 `crates/c07_process/docs/12_testing_benchmarking_guide.md`，
 > 作为 canonical 测试生态概念页的工程实践补充。
 
 ### 进程测试特殊性

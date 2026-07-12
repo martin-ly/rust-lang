@@ -891,7 +891,7 @@ unsafe { process_string(ptr); }
 
 ## 补充：来自 `crates/c02_type_system` 互操作参考的多语言映射
 
-> 本节由原 `crates/c02_type_system/docs/tier_03_references/06_interoperability_reference.md` 合并而来，保留 Rust 与常见语言互操作类型映射速查。
+> 本节由原 `crates/c02_type_system/docs/tier_03_references/08_interoperability_reference.md` 合并而来，保留 Rust 与常见语言互操作类型映射速查。
 
 ### Rust 与 C 基本类型映射
 

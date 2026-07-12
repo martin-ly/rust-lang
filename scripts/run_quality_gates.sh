@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Run all quality gates locally.
 # 14 blocking gates (10 Cargo/mdbook/KB/i18n/mermaid + 4 promoted semantic gates in --strict mode)
-# + 5 semantic observe gates (warning, non-blocking).
+# + 6 semantic observe gates (warning, non-blocking).
 #
 # 观察门转正机制（见 AGENTS.md §5.2）：连续 4 周或连续 10 次 CI 运行达标后可评估转阻断。
 # 2026-07-12 已转正（本地 --strict 实跑 exit=0）：topology / kg_shapes / canonical_uniqueness /
 # concept_consistency_auditor。仍观察：metadata_consistency（D2=1/D5=17）、semantic_health、
 # concept_authority_coverage（--strict 当前 exit=1：any=99.5%/none=2/core_gap=1）、overlap v2
-# （可处理项 MERGE+DOCS_INTERNAL=53>0）。
+# （可处理项 MERGE+DOCS_INTERNAL>0）、naming_convention（2026-07-12 新增，ERROR=0/WARN=85）。
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -51,13 +51,16 @@ run_gate "Metadata Consistency (observe)" python scripts/check_metadata_consiste
 run_gate "Concept Authority Coverage (observe)" python scripts/check_concept_authority_coverage.py
 run_gate "Semantic Health (observe)" python scripts/semantic_health.py
 run_gate "Examples Compile Check (observe)" python scripts/check_examples_compile.py
+run_gate "Naming Convention (observe)" python scripts/check_naming_convention.py
 
 # --- Content Overlap v2 (observe, actionable-baseline WARN escalation) ---
-# 基线（2026-07-12）：可处理项 = MERGE 4 + DOCS_INTERNAL 49 = 53（总命中 592，SERIES 22 白名单，REVIEW 517）。
+# 基线（2026-07-12 复测）：可处理项 = MERGE 5 + DOCS_INTERNAL 49 = 54（总命中 552，SERIES 24 白名单，REVIEW 474）。
+# 注：MERGE 5 条目中 autoverus 对双向重复计数，去重后唯一对 4 + DOCS_INTERNAL 49 = 53（与 AGENTS.md §5.2 的 53 一致）；
+#     2026-07-12 已在 triage_overlap.py 显式登记两对 SERIES 误报（c10 examples_collection/part2、c02 readme_rust_189/190）。
 # 判定升级：可处理项 > 基线 ⇒ WARN 升级提示（新增重复，需先 triage 处置）；
 #           可处理项 = 0     ⇒ 具备转阻断资格（届时改为 v2 --strict，可处理项>0 即 exit 1）。
 # 当前仍为观察门：无论结果如何不置 FAILED。
-OVERLAP_V2_ACTIONABLE_BASELINE=53
+OVERLAP_V2_ACTIONABLE_BASELINE=54
 echo ""
 echo "=== Content Overlap v2 (observe, actionable baseline=$OVERLAP_V2_ACTIONABLE_BASELINE) ==="
 python scripts/detect_content_overlap_v2.py --budget 999999
@@ -80,7 +83,7 @@ fi
 
 echo ""
 if [ "$FAILED" -eq 0 ]; then
-    echo "✅ All 19 quality gates passed (14 blocking + 5 semantic observe)."
+    echo "✅ All 20 quality gates passed (14 blocking + 6 semantic observe)."
     exit 0
 else
     echo "❌ Some quality gates failed."

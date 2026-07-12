@@ -10,7 +10,7 @@
 
 ### 🆕 最新文档（3篇）
 
-1. **[WASI 0.2 组件模型深度指南](docs/tier_04_advanced/09_wasi_0_2_component_model_in_depth_guide.md)**
+1. **[WASI 0.2 组件模型深度指南](docs/tier_04_advanced/08_wasi_0_2_component_model_in_depth_guide.md)**
    - 📖 18,000 字深度技术文档
    - ✅ 组件模型核心概念
    - ✅ WIT 接口完整语法
@@ -181,10 +181,10 @@ wasmedge target/wasm32-wasip1/release/examples/11_crypto_operations.wasm
 
 - [WASI 深入](docs/tier_04_advanced/01_wasi_in_depth.md)
 - [性能分析与优化](docs/tier_04_advanced/02_performance_analysis_and_optimization.md)
-- [容器技术深度集成](docs/tier_04_advanced/06_container_technology_integration.md)
-- [云原生CI/CD实践](docs/tier_04_advanced/07_cloud_native_ci_cd_practice.md)
-- [监控与可观测性实践](docs/tier_04_advanced/08_monitoring_and_observability_practice.md)
-- 🆕 [WASI 0.2 组件模型深度指南](docs/tier_04_advanced/09_wasi_0_2_component_model_in_depth_guide.md)
+- [容器技术深度集成](docs/tier_04_advanced/05_container_technology_integration.md)
+- [云原生CI/CD实践](docs/tier_04_advanced/06_cloud_native_ci_cd_practice.md)
+- [监控与可观测性实践](docs/tier_04_advanced/07_monitoring_and_observability_practice.md)
+- 🆕 [WASI 0.2 组件模型深度指南](docs/tier_04_advanced/08_wasi_0_2_component_model_in_depth_guide.md)
 - 🆕 [WasmEdge 插件系统开发指南](docs/tier_04_advanced/10_wasmedge_plugin_system_development_guide.md)
 - 🆕 [性能优化深度指南](docs/tier_04_advanced/11_performance_optimization_in_depth_guide.md)
 

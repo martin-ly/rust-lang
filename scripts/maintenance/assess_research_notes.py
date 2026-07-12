@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-评估 docs/research_notes/ 中 C 类文件的价值，输出迁移/归档/保留建议。
+评估 docs/12_research_notes/ 中 C 类文件的价值，输出迁移/归档/保留建议。
 
 评估维度：
 1. 最后更新日期（越旧越倾向归档）
@@ -128,7 +128,7 @@ def assess_file(path: Path, refs: dict[Path, list[Path]]) -> dict:
 
 
 def main() -> int:
-    print("=== docs/research_notes/ C 类价值评估 ===\n")
+    print("=== docs/12_research_notes/ C 类价值评估 ===\n")
 
     refs = collect_references()
     assessments = []
@@ -178,7 +178,7 @@ def main() -> int:
     # 保存完整报告
     report_path = ROOT / "reports" / "RESEARCH_NOTES_C_CLASS_ASSESSMENT_2026_06_25.md"
     with report_path.open("w", encoding="utf-8") as f:
-        f.write("# docs/research_notes/ C 类价值评估报告\n\n")
+        f.write("# docs/12_research_notes/ C 类价值评估报告\n\n")
         f.write(f"- **评估时间**: 2026-06-25\n")
         f.write(f"- **总文件数**: {len(assessments)}\n\n")
         f.write("## 建议分类统计\n\n")

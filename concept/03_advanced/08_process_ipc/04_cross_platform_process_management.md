@@ -171,7 +171,7 @@ fn config_path() -> PathBuf {
 
 ## 补充视角：平台特定 API 与资源控制
 
-> 本节选编自 `crates/c07_process/docs/10_cross_platform_guide.md`，
+> 本节选编自 `crates/c07_process/docs/09_cross_platform_guide.md`，
 > 作为 canonical 跨平台进程管理概念页的工程实践补充。
 
 ### Windows 特定能力

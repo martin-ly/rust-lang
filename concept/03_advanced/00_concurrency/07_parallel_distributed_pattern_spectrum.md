@@ -82,7 +82,7 @@
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
-  - [迁移内容（来自 `crates/c05_threads/docs/04_parallelism_and_beyond.md`）](#迁移内容来自-cratesc05_threadsdocs04_parallelism_and_beyondmd)
+  - [迁移内容（来自 `crates/c05_threads/docs/08_parallelism_and_beyond.md`）](#迁移内容来自-cratesc05_threadsdocs04_parallelism_and_beyondmd)
   - [1. 并发 (Concurrency) vs. 并行 (Parallelism)](#1-并发-concurrency-vs-并行-parallelism)
     - [1.1. 形式化区分](#11-形式化区分)
     - [1.2. Rust 的模型映射](#12-rust-的模型映射)
@@ -929,11 +929,11 @@ API 几乎相同（得益于相同的 `Iterator`/`ParallelIterator` 接口），
 
 ---
 
-## 迁移内容（来自 `crates/c05_threads/docs/04_parallelism_and_beyond.md`）
+## 迁移内容（来自 `crates/c05_threads/docs/08_parallelism_and_beyond.md`）
 
-> <!-- migrated from crates/c05_threads/docs/04_parallelism_and_beyond.md -->
+> <!-- migrated from crates/c05_threads/docs/08_parallelism_and_beyond.md -->
 >
-> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/04_parallelism_and_beyond.md` 迁移至本权威页。
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/08_parallelism_and_beyond.md` 迁移至本权威页。
 
 ## 1. 并发 (Concurrency) vs. 并行 (Parallelism)
 

@@ -310,8 +310,8 @@ Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1
 
 ## 6. 练习与验证
 
-- 速查：`docs/02_reference/quick_reference/02_rust_195_features_cheatsheet.md`
-- 工具链镜头：`docs/06_toolchain/06_14_rust_1_95_nightly_preview.md`
+- 速查：`docs/03_reference/quick_reference/19_rust_195_features_cheatsheet.md`
+- 工具链镜头：`docs/09_toolchain/07_rust_1_95_nightly_preview.md`
 
 ---
 

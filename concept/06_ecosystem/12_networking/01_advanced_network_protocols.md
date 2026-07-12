@@ -3,7 +3,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **权威页地位**：本页为 Rust 生态中高级网络协议概念的 canonical 解释来源。
-> **对应 crate 示例**：`crates/c10_networks/docs/rust_190_examples_part3_advanced_protocols.md` 现为摘要页，指向此处。
+> **对应 crate 示例**：`crates/c10_networks/docs/09_rust_190_examples_part3_advanced_protocols.md` 现为摘要页，指向此处。
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **Bloom 层级**: L2-L4

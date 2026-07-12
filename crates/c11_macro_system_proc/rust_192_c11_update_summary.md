@@ -127,8 +127,8 @@
 
 - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
 - [Rust 宏系统文档](https://doc.rust-lang.org/book/ch19-06-macros.html)
-- [C11 宏系统主索引](docs/00_master_index.md)
-- [Rust 1.92.0 宏改进文档](docs/rust_192_macro_improvements.md)
+- [C11 宏系统主索引](docs/00_meta/00_master_index.md)
+- [Rust 1.92.0 宏改进文档](docs/04_rust_192_macro_improvements.md)
 
 ---
 

@@ -12,7 +12,7 @@
 > **双维定位**: P×App — 应用 Rustdoc 1.96 变更生成高质量 crate 文档
 > **前置概念**: · [Rust vs Python](../../05_comparative/02_managed_languages/02_rust_vs_python.md) [Toolchain](01_toolchain.md) · [Documentation](../09_testing_and_quality/02_documentation.md) · [Macro Patterns](../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md)
 > **后置概念**: [Rust Version Tracking](../../07_future/00_version_tracking/01_rust_version_tracking.md) · [Rust 1.96 Stabilized](../../07_future/00_version_tracking/rust_1_96_stabilized.md)
-> **深度参考**: [`docs/06_toolchain/06_20_rustdoc_196_improvements.md`](../../../docs/06_toolchain/06_20_rustdoc_196_improvements.md) — rustdoc 渲染细节与弃用注释示例
+> **深度参考**: [`docs/09_toolchain/09_rustdoc_196_improvements.md`](../../../docs/09_toolchain/09_rustdoc_196_improvements.md) — rustdoc 渲染细节与弃用注释示例
 > **版本状态**: 当前稳定 patch 为 **1.97.0**；特性集与 Rust 1.96.0 一致。
 
 ---

@@ -2,7 +2,7 @@
 """
 Check code example anchors in docs/research_notes/.
 
-Scans all Markdown files under docs/research_notes/ for relative links that
+Scans all Markdown files under docs/12_research_notes/ for relative links that
 point to local Rust source files (e.g. `../examples/...`, `../../crates/.../*.rs`,
 `../crates/.../*.rs`) and reports links whose targets do not exist.
 
@@ -61,7 +61,7 @@ def resolve_link(source_file: Path, link: str) -> Path | None:
 
 def check_code_example_anchors() -> list[str]:
     """
-    Scan docs/research_notes/*.md for relative links to local .rs files.
+    Scan docs/12_research_notes/*.md for relative links to local .rs files.
 
     Returns a list of broken or missing code example anchors in the form
     "<source.md> -> <link>", sorted.  The result is informational and should

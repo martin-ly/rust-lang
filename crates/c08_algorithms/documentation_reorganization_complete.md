@@ -302,7 +302,7 @@ c08_algorithms/
 ### 主要入口
 
 - [主 README](README.md) - 项目主页
-- [docs/00_master_index.md](docs/00_master_index.md) - 文档主索引
+- [docs/00_meta/00_master_index.md](docs/00_meta/00_master_index.md) - 文档主索引
 - [docs/README.md](docs/README.md) - 文档体系入口
 
 ### 子目录导航

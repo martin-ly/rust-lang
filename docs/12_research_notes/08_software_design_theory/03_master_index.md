@@ -1,0 +1,352 @@
+# 软件设计理论体系：主索引 {#软件设计理论体系主索引}
+
+> **EN**: 00 Master Index
+> **Summary**: 软件设计理论体系 00 Master Index. (stub/archive redirect)
+> **概念族**: 软件设计理论
+> **内容分级**: [归档级]
+>
+> **分级**: [B]
+> **Bloom 层级**: L5-L6
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
+> **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/` 迁回，正在按 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) 等权威来源升级。
+>
+> **权威来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
+
+## 📑 目录 {#目录}
+
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+
+- [软件设计理论体系：主索引 {#软件设计理论体系主索引}](#软件设计理论体系主索引-软件设计理论体系主索引)
+  - [📑 目录 {#目录}](#-目录-目录)
+  - [一、层次化索引 {#一层次化索引}](#一层次化索引-一层次化索引)
+    - [1.1 理论层次 {#11-理论层次}](#11-理论层次-11-理论层次)
+    - [1.2 依赖关系 {#12-依赖关系}](#12-依赖关系-12-依赖关系)
+  - [二、边界化索引 {#二边界化索引}](#二边界化索引-二边界化索引)
+    - [2.1 三维边界 {#21-三维边界}](#21-三维边界-21-三维边界)
+    - [2.2 边界原则 {#22-边界原则}](#22-边界原则-22-边界原则)
+  - [三、扩展化路线 {#三扩展化路线}](#三扩展化路线-三扩展化路线)
+    - [3.1 设计模式扩展 {#31-设计模式扩展}](#31-设计模式扩展-31-设计模式扩展)
+    - [3.2 执行模型扩展 {#32-执行模型扩展}](#32-执行模型扩展-32-执行模型扩展)
+    - [3.3 工作流模型扩展 {#33-工作流模型扩展}](#33-工作流模型扩展-33-工作流模型扩展)
+  - [四、层次推进学习路径 {#四层次推进学习路径}](#四层次推进学习路径-四层次推进学习路径)
+  - [五、层次推进实质内容深化路线 {#五层次推进实质内容深化路线}](#五层次推进实质内容深化路线-五层次推进实质内容深化路线)
+  - [六、内容概览 {#六内容概览}](#六内容概览-六内容概览)
+  - [七、学习与选型 {#七学习与选型}](#七学习与选型-七学习与选型)
+  - [八、文档快速导航 {#八文档快速导航}](#八文档快速导航-八文档快速导航)
+  - [九、扩展阅读 {#九扩展阅读}](#九扩展阅读-九扩展阅读)
+  - [十、推进阶段 {#十推进阶段}](#十推进阶段-十推进阶段)
+  - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
+      - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
+      - [代码示例更新 {#代码示例更新}](#代码示例更新-代码示例更新)
+      - [相关文档 {#相关文档}](#相关文档-相关文档)
+  - [相关概念 {#相关概念}](#相关概念-相关概念)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
+
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.97.0+ / Edition 2024）
+
+---
+
+## 一、层次化索引 {#一层次化索引}
+
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 1.1 理论层次 {#11-理论层次}
+
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```text
+应用与边界层（本体系所在）
+
+├── 01_design_patterns_formal     ← 设计模式形式化（公理/定义/定理）
+
+├── 02_workflow_safe_complete_models ← 23 安全 / 43 完全模型
+
+├── 03_execution_models           ← 同步/异步/并发/并行/分布式
+
+├── 04_compositional_engineering  ← 组合工程有效性
+
+├── 05_boundary_system            ← 三维边界矩阵
+
+├── 06_rust_idioms                ← Rust 惯用模式（RAII、Newtype、类型状态）
+
+└── 07_anti_patterns              ← 反模式与边界
+```
+
+### 1.2 依赖关系 {#12-依赖关系}
+
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+本体系依赖以下已有形式化基础：
+
+| 依赖 | 文档 |
+| :--- | :--- |
+| 所有权（Ownership） | [ownership_model](../02_formal_methods/09_ownership_model.md) |
+| 借用（Borrowing） | [borrow_checker_proof](../02_formal_methods/03_borrow_checker_proof.md) |
+| 生命周期（Lifetimes） | lifetime_formalization |
+| 类型系统（Type System） | [type_system_foundations](../05_type_theory/05_type_system_foundations.md) |
+| 型变 | [variance_theory](../05_type_theory/06_variance_theory.md) |
+| 异步（Async） | [async_state_machine](../02_formal_methods/02_async_state_machine.md) |
+| Pin | [pin_self_referential](../02_formal_methods/10_pin_self_referential.md) |
+| Trait | [trait_system_formalization](../05_type_theory/04_trait_system_formalization.md) |
+
+---
+
+## 二、边界化索引 {#二边界化索引}
+
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+### 2.1 三维边界 {#21-三维边界}
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
+| 维度 | 内容 | 文档 |
+| :--- | :--- | :--- |
+| **安全 vs 非安全** | 纯 Safe / 需 unsafe / 无法表达 | [safe_unsafe_matrix](06_boundary_system/02_safe_unsafe_matrix.md) |
+| **支持 vs 不支持** | 原生支持 / 库支持 / 需 FFI | [supported_unsupported_matrix](06_boundary_system/03_supported_unsupported_matrix.md) |
+| **充分 vs 非充分表达** | 等价表达 / 近似表达 / 不可表达 | [expressive_inexpressive_matrix](06_boundary_system/01_expressive_inexpressive_matrix.md) |
+
+### 2.2 边界原则 {#22-边界原则}
+
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+
+- **安全边界**：每个模式/模型标注「纯 Safe / 需 unsafe / 无法表达」
+- **支持边界**：在 Rust 1.93+ 下的「原生支持 / 库支持 / 需 FFI」
+- **表达边界**：相对 GoF/OOP 的「等价表达 / 近似表达 / 不可表达」
+
+---
+
+## 三、扩展化路线 {#三扩展化路线}
+
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+### 3.1 设计模式扩展 {#31-设计模式扩展}
+
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
+- GoF 23 模式（当前）✅
+- **Rust Idioms** ✅ [06_rust_idioms](01_rust_idioms.md)：RAII、Newtype、类型状态、Error/Option/Cow、Builder 变体；含 Def/Axiom/定理、完整代码示例、典型场景、常见陷阱、与 GoF 衔接
+- **Anti-patterns** ✅ [07_anti_patterns](02_anti_patterns.md)：13 反例索引、反模式分类、5 个场景→反模式→正确写法、与 FORMAL_PROOF_SYSTEM_GUIDE 衔接、三维边界
+- 扩展 20（43 完全）：Repository、DTO、Event Sourcing 等已纳入 02_complete_43_catalog
+
+### 3.2 执行模型扩展 {#32-执行模型扩展}
+
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+
+- 五模型（同步、异步（Async）、并发、并行、分布式）✅
+- 可选扩展：Actor（actix）、CSP（channel）、事件溯源（02_complete_43 Event Sourcing）
+- **层次推进**：三阶段已完成；见 [CONTENT_ENHANCEMENT](../13_meta_reports/08_content_enhancement.md) 层次推进计划
+
+### 3.3 工作流模型扩展 {#33-工作流模型扩展}
+
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+
+- 23 安全：GoF 23 纯安全子集
+- 43 完全：GoF 23 + 扩展 20（Fowler EAA/DDD，已明确）
+
+---
+
+## 四、层次推进学习路径 {#四层次推进学习路径}
+
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+| 阶段 | 阅读顺序 | 内容深度 | 预计时间 |
+| :--- | :--- | :--- | :--- |
+| **入门** | 01_design_patterns_formal（Factory Method、Strategy、Adapter）→ 06_rust_idioms（RAII、Newtype） | Def/定理 + 代码示例 | 2–4h |
+| **进阶** | 02_workflow 01_safe_23、03_semantic_boundary_map → 05_boundary_system 三维矩阵 | 模式选取、边界决策 | 2–3h |
+| **深入** | 03_execution_models、04_compositional_engineering、02_complete_43 → 07_anti_patterns | 组合证明、扩展模式、反模式 | 4–6h |
+
+**层次原则**：先模式形式化 → 再边界与选型 → 最后组合与反模式；每层依赖前层。
+
+---
+
+## 五、层次推进实质内容深化路线 {#五层次推进实质内容深化路线}
+
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+| 层次 | 深化入口 | 新增/充实内容 |
+| :--- | :--- | :--- |
+| **L1 基础** | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](01_rust_idioms.md) | 23 模式均有 Def/定理/典型场景/反例；16+ 模式有完整场景示例（Builder/Adapter/Decorator/Composite/Flyweight/Facade/Chain/Mediator/Observer/Strategy/Command/State/Visitor/Interpreter/Template）；RAII/Newtype/类型状态/Error handling/Cow |
+| **L2 选型** | `03_semantic_boundary_map`、[05_boundary_system](06_boundary_system/README.md) | 5 个场景→模式→代码；**场景化 Safe 决策 3 例**（全局配置、跨线程缓存、FFI）；按需求反向查模式表 |
+| **L3 组合** | [04_compositional_engineering](05_compositional_engineering/README.md)、[03_execution_models](04_execution_models/README.md) | **验证工作流与检查清单**；**组合反例详解**；**三层架构完整示例**；**Builder+Factory+Repository、Decorator+Strategy+Observer 链条**；**执行模型 + 设计模式组合 4 例** |
+| **L4 实践** | [07_anti_patterns](02_anti_patterns.md) | 13 反例；5 个场景→反模式→正确写法；常见陷阱与规避 |
+
+---
+
+## 六、内容概览 {#六内容概览}
+
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+本体系各文档已充实为实质内容：
+
+- **设计模式**：每模式含 Def/Axiom/定理、Rust 代码示例、证明思路、**典型场景**、**相关模式**、**实现变体**、**反例**、与理论衔接（23 模式均有典型场景、相关模式、实现变体；13 反例）
+- **43 完全**：20 种扩展模式**全部**含 Rust 代码示例（Domain Model、Repository、DTO、Event Sourcing、Table Data Gateway、Active Record、Gateway、MVC、Front Controller、Remote Facade、Lazy Load、Plugin、Optimistic Offline Lock 等）
+- **Rust Idioms**：RAII、Newtype、类型状态、**Error handling**、**Option/Result 组合**、**Cow**、**智能指针（Smart Pointer）选型**；层次推进 L1→L2→L3
+- **执行模型**：形式化定义、操作语义、Rust 示例、**典型场景**、与 async/borrow 衔接（五模型）
+- **组合工程**：CE-T1–T3 完整证明思路、**Builder+Factory、Repository+Service+DTO 完整代码示例**、与 ownership/borrow/trait 衔接
+- **边界体系**：安全/支持/表达三维矩阵、**场景化 Safe 决策 3 例**、**模式选取与边界判定完整流程**、反例
+- **Rust Idioms**：RAII、Newtype、类型状态（Def/Axiom/定理、典型场景、常见陷阱、与 GoF 衔接）
+- **反模式**：13 反例索引、反模式分类、**代码示例**（所有权（Ownership）、借用（Borrowing）、过度泛型（Generics）、Clone 满足借用）、**规避策略实质指南**、与 FORMAL_PROOF_SYSTEM_GUIDE 衔接
+
+---
+
+## 七、学习与选型 {#七学习与选型}
+
+>
+> **[来源: [crates.io](https://crates.io/)]**
+
+| 阶段 | 内容 |
+| :--- | :--- |
+| 入门 | Factory Method、Strategy、Adapter |
+| 结构 | Composite、Decorator、Facade |
+| 行为 | Observer、Command、State |
+| 进阶 | Visitor、Chain、Mediator |
+
+选模式时：需求 → `03_semantic_boundary_map` 模式选取示例；判安全 → [safe_unsafe_matrix](06_boundary_system/02_safe_unsafe_matrix.md)。
+
+---
+
+## 八、文档快速导航 {#八文档快速导航}
+
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+| 需求 | 入口文档 |
+| :--- | :--- |
+| 设计模式形式化分析 | [01_design_patterns_formal/README](01_design_patterns_formal/README.md) |
+| 23 安全 / 43 完全模型 | [02_workflow_safe_complete_models/README](03_workflow_safe_complete_models/README.md) |
+| 同步/异步/并发/分布式 | [03_execution_models/README](04_execution_models/README.md) |
+| 组合工程有效性 | [04_compositional_engineering/README](05_compositional_engineering/README.md) |
+| 边界体系总览 | [05_boundary_system/README](06_boundary_system/README.md) |
+| **Rust 惯用模式** | [06_rust_idioms](01_rust_idioms.md) — RAII、Newtype、类型状态、与设计模式衔接 |
+| **反模式与边界** | [07_anti_patterns](02_anti_patterns.md) — 13 反例、反模式分类、规避策略 |
+| **全面论证缺口与推进计划** | [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](04_comprehensive_argumentation_gap_analysis_and_plan.md) — 设计模式、分布式、工作流论证深化 |
+
+---
+
+## 九、扩展阅读 {#九扩展阅读}
+
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+- [Refactoring.Guru](https://refactoring.guru/design-patterns)：各模式结构图
+- [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/))：Rust 惯用模式
+- [Fowler EAA](https://martinfowler.com/eaaCatalog/)：43 完全扩展模式来源
+
+---
+
+## 十、推进阶段 {#十推进阶段}
+
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+| 阶段 | 内容 | 状态 |
+| :--- | :--- | :--- |
+| 第一阶段 | 框架与边界 | 100% 完成 |
+| 第二阶段 | 设计模式形式化 | 100% 完成（23 模式） |
+| 第三阶段 | 工作流与执行模型 | 100% 完成（23/43、五执行模型）；**2026-02 增强**：常见陷阱、形式化衔接、模式选取完整示例 |
+| 第四阶段 | 组合工程与证明 | 100% 完成（CE-T1–T3） |
+| 第五阶段 | Rust Idioms 与反模式 | 100% 完成（06、07）；**2026-02 增强**：完整代码示例、规避示例 |
+| **全面论证推进** | 设计模式、分布式模式、工作流模式 | ✅ 100% 完成 [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](04_comprehensive_argumentation_gap_analysis_and_plan.md) |
+
+---
+
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
+
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
+> **更新日期**: 2026-03-14
+
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
+
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+
+本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
+
+#### 核心特性应用 {#核心特性应用}
+
+| 特性 | 应用场景 | 文档章节 |
+|------|---------|----------|
+| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
+| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
+| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
+
+#### 代码示例更新 {#代码示例更新}
+
+本文档中的所有Rust代码示例均已：
+
+- ✅ 使用Rust 1.94语法验证
+- ✅ 兼容Edition 2024
+- ✅ 通过标准库测试
+
+#### 相关文档 {#相关文档}
+
+- Rust 1.94 迁移指南
+- Rust 1.94 特性速查
+- [性能调优指南](../../08_usage_guides/18_performance_tuning_guide.md)
+
+---
+
+**维护者**: Rust 学习项目团队
+
+**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
+
+**文档版本**: 1.1
+
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+
+**最后更新**: 2026-05-19
+
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念 {#相关概念}
+
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+- [software_design_theory 目录](README.md)
+- [上级目录](../README.md)
+
+---
+
+## 权威来源索引 {#权威来源索引}
+
+> **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
+> **来源: [Wikipedia - Software Architecture](https://en.wikipedia.org/wiki/Software_Architecture)**
+> **[ACM - Design Patterns Survey](https://dl.acm.org/)**
+> **[IEEE - Software Design Standards](https://ieeexplore.ieee.org/) <!-- link: known-broken -->**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **[Martin Fowler - Patterns of Enterprise Application Architecture](https://martinfowler.com/books/eaa.html)**
+
+---
+
+> **来源: [ACM Digital Library](https://dl.acm.org/)**
+> **来源: [IEEE Standards](https://standards.ieee.org/)**

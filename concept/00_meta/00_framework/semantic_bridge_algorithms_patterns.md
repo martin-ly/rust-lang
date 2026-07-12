@@ -72,7 +72,7 @@
 
 > **算法、设计模式和工作流模式在当前的语义空间中是三个孤立的"星系"
 > ——算法在 `crates/c08_algorithms/` 和 `06_ecosystem/29_algorithms_competitive_programming.md` 中，
-> 设计模式在 `06_ecosystem/02_patterns.md` 和 `docs/research_notes/software_design_theory/` 中，
+> 设计模式在 `06_ecosystem/02_patterns.md` 和 `docs/12_research_notes/08_software_design_theory/` 中，
 > 工作流模式在 `docs/rust-ownership-decidability/16-program-semantics/workflow-patterns/` 中。
 > 三者之间缺少统一的语义坐标系。本文件建立"语义桥"，揭示三者之间的深层同构关系。**
 

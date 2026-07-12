@@ -25,7 +25,7 @@
 | 目录序号缺口 | 02_intermediate 缺 08_(文件已删目录悬空)、07_future 缺 02_——删除后未重排 |
 | SUMMARY 乱序 | **54 处序号倒挂**(L7 预览特性段几乎全程乱序)+ **3 处结构损坏**(2 条目错挂顶级、版本跟踪段缩进混乱夹游离 blockquote)+ 1 个真实内容页(33_safety_tags_in_formal)**漏收** |
 | docs/ 顶层 | 4 组编号重复(01_core+01_learning、03_guides+03_practice、04_research+04_thinking、07_future 空壳+07_project);根目录散落 15 个文件(含 1.8MB 的 link_check_report);两个 guides 目录主题重叠 |
-| docs/research_notes | 147 个 `10_` 扁平前缀;`formal_methods` 与 `formal_modules` 疑似同义目录并存;档级号 10/20/30…70 混用 |
+| docs/12_research_notes | 147 个 `10_` 扁平前缀;`formal_methods` 与 `formal_modules` 疑似同义目录并存;档级号 10/20/30…70 混用 |
 | knowledge/ | 01_fundamentals 教学顺序**倒挂**(borrowing 在 ownership 前);async 同号双文件;INDEX.md 过期(仍称 Rust 1.95、73 篇);与 content/ 两个镜像目录(safety_critical 100% 结构镜像、deep_dives 同名不同内容) |
 | crates/*/docs | **五套体系并存**(c07:01–14+跳号+view01–05+tier_01–04+散名文件);c05 两套 01–05 全撞号;c10 tier_04 全撞号;*_supplement/*_final/*_expanded 变体泛滥 |
 | quizzes 体系 | L1 有专目录(文件号 24–33 章节号残留)、L2 目录仅 1 文件、L3–L6 quiz 散落主题目录、L7 无 quiz |
@@ -108,3 +108,17 @@
 
 **生成时间**: 2026-07-12
 **关联文档**: `.kimi/CRITICAL_SEMANTIC_AUDIT_AND_SUSTAINABLE_PLAN_2026_07_12.md`(P0–P3 已完成)、`reports/` 当日 15+ 份整改报告
+
+---
+
+## 执行完成记录（2026-07-12）
+
+**状态：N0→N2 全部完成，全 20 门通过（14 阻断 + 6 观察），semantic health 93.5 OK（meta 96.2 / topo 90.7 / dedup 84.7 / kg 100）。**
+
+- N0 止血：SUMMARY 补收 2 文件 + 结构修复 3 处；删 3 个遗留 stub（31_safety_tags_preview、18_lifetimes_advanced、20_borrowsanitizer_preview）；docs 三对同主题合并（~430 行独特内容迁移）；knowledge 两对合并；borrow_sanitizer 双权威裁定。
+- N1 重编号：concept 384 文件 + docs 517 文件/32 目录 + knowledge 7 文件 + crates 245 项，全量目录内 NN_ 连续序号；链接重写 ≥9531 处（dry-run 统计，concept 阶段 ~1.2 万处日志被覆盖）；终态死链 0、跨层 0。
+- 工具：`scripts/plan_renumber.py` / `apply_renumber.py`（两阶段移动 + 相对链接双向重算 + JSON/KG 同步 + 目录改名支持）/ `plan_renumber_phase2.py`；`scripts/check_naming_convention.py` 接入为第 20 门（观察）。
+- 治理：AGENTS.md §4.0 命名规则生效；kb_auditor 跨层检查改为按真实目录层级判定（重编号鲁棒）；20 文件补真实向下引用；crates 变体 13 stub + 4 删除；v2 SERIES 白名单加固；KG 2 个失效 ex:path 修复。
+- 报告：`reports/NAMING_RENUMBER_COMPLETION_2026_07_12.md`。
+
+**遗留（N3/后续）**：v2 可处置项 54（MERGE 5 + DOCS_INTERNAL 49，归零后可转 --strict）；无序号系列目录 WARN 85（命名 lint 观察）；`04_guides`/`08_guides` 命名歧义；crates 非 tier 子目录（c01_ownership/ 等）待改 tier_05_*；knowledge INDEX 旧统计数字（代码行数）未重算。

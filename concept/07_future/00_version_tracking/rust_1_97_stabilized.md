@@ -414,7 +414,7 @@ cargo build
 >
 > 工具链快速参考请参见：
 >
-> - [`docs/06_toolchain/06_21_rust_1_97_features.md`](../../../docs/06_toolchain/06_21_rust_1_97_features.md)
+> - [`docs/09_toolchain/10_rust_1_97_features.md`](../../../docs/09_toolchain/10_rust_1_97_features.md)
 
 ---
 

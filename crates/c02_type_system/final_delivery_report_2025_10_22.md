@@ -374,7 +374,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' --------- param($match) $ma
 ### 主要入口
 
 - 📚 **[主 README](README.md)** - 项目主页
-- 📖 **[主索引](docs/00_master_index.md)** - 完整文档索引
+- 📖 **[主索引](docs/00_meta/00_master_index.md)** - 完整文档索引
 - 📝 **[变更日志](CHANGELOG.md)** - 版本变更记录
 - 🤝 **[贡献指南](CONTRIBUTING.md)** - 如何贡献
 - 🔧 **[维护指南](MAINTENANCE_GUIDE.md)** - 维护操作
@@ -477,7 +477,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match
    查看 README.md 了解项目概况
 
 3. 浏览主索引
-   查看 docs/00_master_index.md 了解文档结构
+   查看 docs/00_meta/00_master_index.md 了解文档结构
 
 4. 选择学习路径
    根据您的水平选择合适的学习路径
@@ -572,7 +572,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match
 ### 相关链接
 
 - 🏠 **项目主页**: [README.md](README.md)
-- 📖 **主索引**: [00_MASTER_INDEX.md](docs/00_master_index.md)
+- 📖 **主索引**: [00_MASTER_INDEX.md](docs/00_meta/00_master_index.md)
 - 📝 **变更日志**: [CHANGELOG.md](CHANGELOG.md)
 - 🤝 **贡献指南**: [CONTRIBUTING.md](CONTRIBUTING.md)
 - 🔧 **维护指南**: [MAINTENANCE_GUIDE.md](MAINTENANCE_GUIDE.md)

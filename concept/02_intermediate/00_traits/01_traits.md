@@ -2727,7 +2727,7 @@ trait Drawable {
 > **文档类型**: Tier 2 - 指南层
 > **文档定位**: 深入学习 Rust Trait 系统
 > **适用对象**: 中级 → 高级开发者
-> **前置知识**: [2.1 基础类型指南](../../../crates/c02_type_system/docs/tier_02_guides/01_basic_types_guide.md), [2.2 复合类型指南](../../../crates/c02_type_system/docs/tier_02_guides/02_compound_types_guide.md), [2.3 泛型编程指南](../../../crates/c02_type_system/docs/tier_02_guides/03_generics_programming_guide.md)
+> **前置知识**: [2.1 基础类型指南](../../../crates/c02_type_system/docs/tier_02_guides/01_basic_types_guide.md), [2.2 复合类型指南](../../../crates/c02_type_system/docs/tier_02_guides/03_compound_types_guide.md), [2.3 泛型编程指南](../../../crates/c02_type_system/docs/tier_02_guides/05_generics_programming_guide.md)
 > **预计学习时间**: 7-9 小时
 > **最后更新**: 2025-12-11
 

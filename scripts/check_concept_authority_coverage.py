@@ -3,7 +3,7 @@
 """concept/ 权威层「国际化权威来源」覆盖率审计（P0 对齐网络的国际化权威相关内容）。
 
 复用 scripts/maintenance/authority_coverage_dashboard.py 的 P0/P1/P2 权威域分级，
-把扫描域从 docs/research_notes 扩展到 concept/ 权威层（AGENTS.md §2：concept/ 为单一权威来源）。
+把扫描域从 docs/12_research_notes 扩展到 concept/ 权威层（AGENTS.md §2：concept/ 为单一权威来源）。
 只审计、不改正文（无副作用）。输出覆盖率基线 + 缺口页清单（核心 L1-L4 且无 P0 国际权威）。
 
 P0 官方: doc.rust-lang.org / rust-lang.github.io / github.com/rust-lang / rustc-dev-guide / ferrocene

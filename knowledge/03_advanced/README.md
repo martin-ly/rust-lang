@@ -30,7 +30,7 @@
 | 文档 | 主题 | 难度 |
 |------|------|------|
 | [async/async_await.md](async/01_async_await.md) | async/await 基础 | ⭐⭐⭐⭐ |
-| [async/async_closures_2024.md](async/01_async_closures_2024.md) | Async Closures | ⭐⭐⭐⭐ |
+| [async/async_closures_2024.md](async/02_async_closures_2024.md) | Async Closures | ⭐⭐⭐⭐ |
 
 ### 并发编程
 >
@@ -48,9 +48,9 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [unsafe/unsafe_rust.md](unsafe/04_unsafe_rust.md) | Unsafe 基础 | ⭐⭐⭐⭐ |
+| [unsafe/unsafe_rust.md](unsafe/03_unsafe_rust.md) | Unsafe 基础 | ⭐⭐⭐⭐ |
 | [unsafe/ffi.md](unsafe/01_ffi.md) | FFI | ⭐⭐⭐⭐ |
-| [unsafe/maybe_uninit.md](unsafe/03_maybe_uninit.md) | MaybeUninit | ⭐⭐⭐⭐ |
+| [unsafe/maybe_uninit.md](unsafe/02_maybe_uninit.md) | MaybeUninit | ⭐⭐⭐⭐ |
 | [unsafe/inline_asm.md](unsafe/02_inline_asm.md) | 内联汇编 | ⭐⭐⭐⭐⭐ |
 
 ### 类型与元编程

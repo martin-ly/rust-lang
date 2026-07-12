@@ -10,25 +10,27 @@
 
 ---
 
-## 📊 文档完成状态 (100%)
+## 📊 文档统计概览
 >
 > **[Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层级 | 文档数 | 状态 |
 |------|--------|------|
-| **00_start** | 5 | ✅ 完成 |
-| **01_fundamentals** | 5 | ✅ 完成 |
-| **02_intermediate** | 13 | ✅ 完成 |
-| **03_advanced** | 15 | ✅ 完成 |
-| **04_expert** | 6 | ✅ 完成 |
-| **05_reference** | 4 | ✅ 完成 |
-| **06_ecosystem** | 13 | ✅ 完成 |
-| **99_archive** | 3 | ✅ 完成 |
-| **总计** | **73 篇** | ✅ **100%** |
+| **00_start** | 4 | ✅ |
+| **01_fundamentals** | 4 | ✅ |
+| **02_intermediate** | 11 | ✅ |
+| **03_advanced** | 17 | ✅ |
+| **04_expert** | 63 | ✅ |
+| **05_reference** | 4 | ✅ |
+| **06_ecosystem** | 12 | ✅ |
+| **99_archive** | 4 | ✅ |
+| **总计** | **119 篇** | ✅ |
+
+> **统计口径**（2026-07-12 实测，`find knowledge -name '*.md'`）：各层 .md 文件数，不含 `README.md` 与 `INDEX.md`；`04_expert` 为递归统计，含 `academic/`、`miri/`、`safety_critical/` 子目录（其中 `safety_critical/` 为指向 `content/safety_critical/` 的重定向 stub）。
 
 ---
 
-## 🆕 Rust 1.95 新特性索引
+## ✅ Rust 1.95 稳定特性索引
 
 > **[Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -44,7 +46,7 @@
 | `Layout::dangling_ptr` / `repeat` / `extend_packed` | [04_expert/unsafe_audit.md](04_expert/02_unsafe_audit.md) | ✅ |
 | `core::hint::cold_path` | [03_advanced/performance_optimization.md](03_advanced/05_performance_optimization.md) | ✅ |
 | `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/07_type_conversions.md) | ✅ |
-| `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/03_maybe_uninit.md) | ✅ |
+| `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/02_maybe_uninit.md) | ✅ |
 | PowerPC/PowerPC64 内联汇编 | [concept/03_advanced/05_inline_assembly/01_inline_assembly.md](../concept/03_advanced/05_inline_assembly/01_inline_assembly.md) | ✅ |
 | `fmt::from_fn` / `ControlFlow` (const) | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md) | ✅ |
 | `--remap-path-scope` | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md) | ✅ |
@@ -72,17 +74,18 @@
 
 ---
 
-## 🧪 Rust 1.97 预览特性索引
+## 🧪 Rust 1.98+ 预览特性索引（1.97 周期推迟项）
 >
 > **[Rust Internals](https://internals.rust-lang.org/); Nightly**
-> 预计发布: 2026-07-16
+> Rust 1.97.0 已于 2026-07-09 进入 stable；已稳定内容见 [concept/07_future/00_version_tracking/rust_1_97_stabilized.md](../concept/07_future/00_version_tracking/rust_1_97_stabilized.md)。
+> 下表为 1.97 周期讨论但未进入 1.97.0 stable 的候选特性（权威跟踪：[rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md)）。
 
 | 特性 | 文档 | 状态 |
 |------|------|------|
 | AFIDT (`async fn` in `dyn Trait`) | [concept/03_advanced/01_async/01_async.md](../concept/03_advanced/01_async/01_async.md) | 🧪 Nightly（[#133119](https://github.com/rust-lang/rust/issues/133119)）|
-| `VecDeque::truncate_front` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 Nightly |
+| `VecDeque::truncate_front` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 Nightly（推迟至 1.98+，[#151973](https://github.com/rust-lang/rust/pull/151973)）|
 | `RefCell::try_map` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 Nightly |
-| `int_format_into` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 Nightly |
+| `int_format_into` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 Nightly（已合并，预计 1.98）|
 | `cargo script` / frontmatter | [concept/07_future/rust_1_97_preview.md](../concept/07_future/00_version_tracking/rust_1_97_preview.md) | 🧪 完善中 |
 
 ---
@@ -95,14 +98,14 @@
 >
 > **[Rust Official Docs](https://doc.rust-lang.org/)**
 
-- **array_windows** - [01_fundamentals/iterators.md](01_fundamentals/02_iterators.md) - Rust 1.94 引入，1.96+ 可用
+- **array_windows** - [01_fundamentals/iterators.md](01_fundamentals/04_iterators.md) - Rust 1.94 引入，1.96+ 可用
 - **async/await** - [03_advanced/async/async_await.md](03_advanced/async/01_async_await.md)
-- **async closure** - [03_advanced/async/async_closures_2024.md](03_advanced/async/01_async_closures_2024.md) - Rust 1.85+
+- **async closure** - [03_advanced/async/async_closures_2024.md](03_advanced/async/02_async_closures_2024.md) - Rust 1.85+
 - **atomics** - [03_advanced/concurrency/atomics.md](03_advanced/concurrency/01_atomics.md)
 
 ### B
 
-- **borrowing** - [01_fundamentals/borrowing.md](01_fundamentals/01_borrowing.md)
+- **borrowing** - [01_fundamentals/borrowing.md](01_fundamentals/02_borrowing.md)
 - **Box** - [02_intermediate/smart_pointers.md](02_intermediate/04_smart_pointers.md)
 
 ### C
@@ -134,7 +137,7 @@
 
 ### G
 
-- **generators** - Rust 1.95+ (预览)
+- **generators** - [concept/07_future/03_preview_features/25_gen_blocks_preview.md](../concept/07_future/03_preview_features/25_gen_blocks_preview.md) - 🧪 Nightly 实验性（稳定时间待定）
 - **generics** - [02_intermediate/generics.md](02_intermediate/03_generics.md)
 - **Golden Ratio** - [05_reference/math_constants.md](05_reference/02_math_constants.md)
 
@@ -148,7 +151,7 @@
 - **if let guards** - [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/01_if_let_guards.md) - Rust 1.95.0
 - **inline assembly** - [concept/03_advanced/05_inline_assembly/01_inline_assembly.md](../concept/03_advanced/05_inline_assembly/01_inline_assembly.md)
 - **installation** - [00_start/02_installation.md](00_start/02_installation.md)
-- **iterators** - [01_fundamentals/iterators.md](01_fundamentals/02_iterators.md)
+- **iterators** - [01_fundamentals/iterators.md](01_fundamentals/04_iterators.md)
 
 ### K
 
@@ -166,17 +169,17 @@
 
 - **macros** - [03_advanced/macros/](03_advanced/macros)
 - **math constants** - [05_reference/math_constants.md](05_reference/02_math_constants.md)
-- **MaybeUninit** - [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/03_maybe_uninit.md)
+- **MaybeUninit** - [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/02_maybe_uninit.md)
 - **Miri** - [04_expert/miri/tree_borrows.md](04_expert/miri/01_tree_borrows.md)
 - **Mutex** - [03_advanced/concurrency/synchronization.md](03_advanced/concurrency/02_synchronization.md)
 
 ### O
 
-- **ownership** - [01_fundamentals/ownership.md](01_fundamentals/04_ownership.md)
+- **ownership** - [01_fundamentals/ownership.md](01_fundamentals/01_ownership.md)
 
 ### P
 
-- **Peekable::next_if** - [01_fundamentals/iterators.md](01_fundamentals/02_iterators.md) - Rust 1.80.0
+- **Peekable::next_if** - [01_fundamentals/iterators.md](01_fundamentals/04_iterators.md) - Rust 1.80.0
 - **performance optimization** - [03_advanced/performance_optimization.md](03_advanced/05_performance_optimization.md)
 - **procedural macros** - [03_advanced/macros/procedural.md](03_advanced/macros/02_procedural.md)
 
@@ -209,7 +212,7 @@
 ### U
 
 - **unsafe audit** - [04_expert/unsafe_audit.md](04_expert/02_unsafe_audit.md)
-- **unsafe Rust** - [03_advanced/unsafe/unsafe_rust.md](03_advanced/unsafe/04_unsafe_rust.md)
+- **unsafe Rust** - [03_advanced/unsafe/unsafe_rust.md](03_advanced/unsafe/03_unsafe_rust.md)
 
 ### V
 
@@ -223,57 +226,57 @@
 ### 新手路径 ⭐
 
 ```text
-00_start/installation.md → 00_start/hello_world.md →
-00_start/rust_philosophy.md → 00_start/learning_roadmap.md →
-01_fundamentals/ownership.md → 01_fundamentals/borrowing.md →
-01_fundamentals/lifetimes.md → 01_fundamentals/iterators.md
+00_start/02_installation.md → 00_start/01_hello_world.md →
+00_start/04_rust_philosophy.md → 00_start/03_learning_roadmap.md →
+01_fundamentals/01_ownership.md → 01_fundamentals/02_borrowing.md →
+01_fundamentals/03_lifetimes.md → 01_fundamentals/04_iterators.md
 ```
 
 ### 进阶路径 ⭐⭐
 
 ```text
-02_intermediate/generics.md → 02_intermediate/traits.md →
-02_intermediate/error_handling.md → 02_intermediate/collections.md →
-02_intermediate/smart_pointers.md → 02_intermediate/type_conversions.md →
-02_intermediate/strings.md
+02_intermediate/03_generics.md → 02_intermediate/06_traits.md →
+02_intermediate/02_error_handling.md → 02_intermediate/01_collections.md →
+02_intermediate/04_smart_pointers.md → 02_intermediate/07_type_conversions.md →
+02_intermediate/05_strings.md
 ```
 
 ### 高级路径 ⭐⭐⭐
 
 ```text
-03_advanced/lazy_initialization.md →
-03_advanced/async/async_await.md → 03_advanced/async/async_closure.md →
-03_advanced/concurrency/threads.md → 03_advanced/concurrency/atomics.md →
-03_advanced/concurrency/synchronization.md →
-03_advanced/macros/declarative.md → 03_advanced/macros/procedural.md →
-03_advanced/unsafe/unsafe_rust.md → 03_advanced/unsafe/ffi.md
+03_advanced/04_lazy_initialization.md →
+03_advanced/async/01_async_await.md → 03_advanced/async/03_async_closure.md →
+03_advanced/concurrency/03_threads.md → 03_advanced/concurrency/01_atomics.md →
+03_advanced/concurrency/02_synchronization.md →
+03_advanced/macros/01_declarative.md → 03_advanced/macros/02_procedural.md →
+03_advanced/unsafe/03_unsafe_rust.md → 03_advanced/unsafe/01_ffi.md
 ```
 
 ### 专家路径 ⭐⭐⭐⭐
 
 ```text
-04_expert/compiler_internals.md → 04_expert/unsafe_audit.md →
-04_expert/miri/tree_borrows.md
+04_expert/01_compiler_internals.md → 04_expert/02_unsafe_audit.md →
+04_expert/miri/01_tree_borrows.md
 ```
 
-### Rust 1.95+ 特性追踪 🆕
+### Rust 1.95–1.97 特性追踪
 
 ```text
-01_fundamentals/iterators.md (array_windows, next_if) →
-02_intermediate/type_conversions.md (bool::TryFrom, char→usize) →
-02_intermediate/control_flow/let_chains.md →
-02_intermediate/control_flow/if_let_guards.md →
-02_intermediate/macros/cfg_select.md →
-02_intermediate/type_system/core_range.md →
-03_advanced/lazy_initialization.md (LazyCell/LazyLock) →
-03_advanced/concurrency/atomics.md (Atomic*::update) →
-03_advanced/performance_optimization.md (cold_path) →
-03_advanced/unsafe/maybe_uninit.md (数组转换) →
-03_advanced/unsafe/inline_asm.md (PowerPC) →
-05_reference/math_constants.md (SQRT_3, EULER_GAMMA) →
-06_ecosystem/edition_2024.md →
-06_ecosystem/emerging/rust_1_95.md →
-04_expert/miri/tree_borrows.md
+01_fundamentals/04_iterators.md (array_windows, next_if) →
+02_intermediate/07_type_conversions.md (bool::TryFrom, char→usize) →
+02_intermediate/control_flow/02_let_chains.md →
+02_intermediate/control_flow/01_if_let_guards.md →
+02_intermediate/macros/01_cfg_select.md →
+02_intermediate/type_system/01_core_range.md →
+03_advanced/04_lazy_initialization.md (LazyCell/LazyLock) →
+03_advanced/concurrency/01_atomics.md (Atomic*::update) →
+03_advanced/05_performance_optimization.md (cold_path) →
+03_advanced/unsafe/02_maybe_uninit.md (数组转换) →
+03_advanced/03_inline_asm.md (PowerPC) →
+05_reference/02_math_constants.md (SQRT_3, EULER_GAMMA) →
+06_ecosystem/02_edition_2024.md →
+06_ecosystem/emerging/03_rust_1_95.md →
+04_expert/miri/01_tree_borrows.md
 ```
 
 ---
@@ -282,8 +285,8 @@
 
 | 资源 | 位置 | 内容 |
 |------|------|------|
-| **练习题集** | [99_archive/exercises.md](99_archive/04_exercises.md) | 23道分级练习题 |
-| **案例研究** | [99_archive/case_studies.md](99_archive/03_case_studies.md) | 5个生产级案例 |
+| **练习题集** | [99_archive/exercises.md](99_archive/04_exercises.md) | 已 stub 化，练习以 [exercises/](../exercises/) 目录为准 |
+| **案例研究** | [99_archive/case_studies.md](99_archive/03_case_studies.md) | 已 stub 化，案例见 `concept/` 权威页 |
 
 ---
 
@@ -301,17 +304,18 @@
 
 ## 📊 统计数据
 
-- **总文档数**: 74 篇（含索引/入口）
-- **总代码行数**: 34,788 行
-- **总字符数**: 804,847 字符
-- **重构文档**: 28 篇核心文档按 10 模块标准重构
-- **Rust 1.95+ 特性**: 100% 覆盖
+- **总文档数**: 120 篇（119 内容页 + 本索引；不含 19 个分层 README，2026-07-12 实测）
+- **总行数**: 1,484 行（119 内容页 1,127 行 + 本索引 357 行；2026-07-12 实测，口径：`knowledge/**/*.md` 不含分层 README）
+- **总字符数**: 62,338 字符（内容页 46,491 + 本索引 15,847；同口径，2026-07-12 实测）
+- **代码行数**: 0 行（内容页已按 AGENTS.md §2 全面 stub 化，代码示例集中于 `crates/` 与 `concept/`；旧值 34,788 行 / 804,847 字符为 2026-05 stub 化前口径，不再适用）
+- **重构文档**: 28 篇核心文档按 10 模块标准重构（2026-05 历史记录）
+- **Rust 1.95–1.97 特性**: 索引见上文特性表，权威跟踪以 [concept/07_future/00_version_tracking/](../concept/07_future/00_version_tracking/) 为准
 
 ---
 
-**索引生成时间**: 2026-05-31
+**索引生成时间**: 2026-07-12
 **版本**: Rust 1.97.0+ (Edition 2024)
-**状态**: ✅ 核心层 100% 完成，Ecosystem 层持续推进中
+**状态**: ✅ 已对齐 Rust 1.97.0 stable；Ecosystem 层持续更新
 
 ---
 
@@ -321,7 +325,7 @@
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新**: 2026-07-12
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

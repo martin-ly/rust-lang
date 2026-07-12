@@ -34,59 +34,59 @@ LEADING_NUM_RE = re.compile(r"^(\d+)_")
 # ---------------------------------------------------------------------------
 # 顶层：00_meta/01_core 保持不变；其余重排为两位连续不撞号。
 DOCS_TOP_DIR_MAP = [
-    ("docs/01_learning", "docs/02_learning"),
-    ("docs/02_reference", "docs/03_reference"),
-    ("docs/03_guides", "docs/04_guides"),
-    ("docs/03_practice", "docs/05_practice"),
-    ("docs/04_research", "docs/06_research"),
-    ("docs/04_thinking", "docs/07_thinking"),
-    ("docs/05_guides", "docs/08_guides"),
-    ("docs/06_toolchain", "docs/09_toolchain"),
-    ("docs/07_future", "docs/10_future"),
-    ("docs/07_project", "docs/11_project"),
-    ("docs/research_notes", "docs/12_research_notes"),
-    ("docs/templates", "docs/13_templates"),
-    ("docs/content", "docs/14_content"),
-    ("docs/rust-formal-engineering-system", "docs/15_rust_formal_engineering_system"),
+    ("docs/02_learning", "docs/02_learning"),
+    ("docs/03_reference", "docs/03_reference"),
+    ("docs/04_guides", "docs/04_guides"),
+    ("docs/05_practice", "docs/05_practice"),
+    ("docs/06_research", "docs/06_research"),
+    ("docs/07_thinking", "docs/07_thinking"),
+    ("docs/08_usage_guides", "docs/08_usage_guides"),
+    ("docs/09_toolchain", "docs/09_toolchain"),
+    ("docs/10_future", "docs/10_future"),
+    ("docs/11_project", "docs/11_project"),
+    ("docs/12_research_notes", "docs/12_research_notes"),
+    ("docs/13_templates", "docs/13_templates"),
+    ("docs/14_content", "docs/14_content"),
+    ("docs/15_rust_formal_engineering_system", "docs/15_rust_formal_engineering_system"),
 ]
 # research_notes 内部子目录重编号（含 formal_modules 改名消除同义歧义）
 RN_SUB_DIR_MAP = [
-    ("docs/research_notes/formal_methods", "docs/12_research_notes/02_formal_methods"),
-    ("docs/research_notes/formal_modules", "docs/12_research_notes/04_formal_module_system"),
-    ("docs/research_notes/type_theory", "docs/12_research_notes/05_type_theory"),
-    ("docs/research_notes/software_design_theory", "docs/12_research_notes/08_software_design_theory"),
-    ("docs/research_notes/experiments", "docs/12_research_notes/09_experiments"),
+    ("docs/12_research_notes/02_formal_methods", "docs/12_research_notes/02_formal_methods"),
+    ("docs/12_research_notes/04_formal_module_system", "docs/12_research_notes/04_formal_module_system"),
+    ("docs/12_research_notes/05_type_theory", "docs/12_research_notes/05_type_theory"),
+    ("docs/12_research_notes/08_software_design_theory", "docs/12_research_notes/08_software_design_theory"),
+    ("docs/12_research_notes/09_experiments", "docs/12_research_notes/09_experiments"),
 ]
 # software_design_theory 内部同号/跳号子目录重排
 SDT_DIR_MAP = [
-    ("docs/research_notes/software_design_theory/02_workflow_safe_complete_models",
+    ("docs/12_research_notes/08_software_design_theory/03_workflow_safe_complete_models",
      "docs/12_research_notes/08_software_design_theory/03_workflow_safe_complete_models"),
-    ("docs/research_notes/software_design_theory/03_execution_models",
+    ("docs/12_research_notes/08_software_design_theory/04_execution_models",
      "docs/12_research_notes/08_software_design_theory/04_execution_models"),
-    ("docs/research_notes/software_design_theory/04_compositional_engineering",
+    ("docs/12_research_notes/08_software_design_theory/05_compositional_engineering",
      "docs/12_research_notes/08_software_design_theory/05_compositional_engineering"),
-    ("docs/research_notes/software_design_theory/05_boundary_system",
+    ("docs/12_research_notes/08_software_design_theory/06_boundary_system",
      "docs/12_research_notes/08_software_design_theory/06_boundary_system"),
-    ("docs/research_notes/software_design_theory/05_distributed",
+    ("docs/12_research_notes/08_software_design_theory/07_distributed",
      "docs/12_research_notes/08_software_design_theory/07_distributed"),
-    ("docs/research_notes/software_design_theory/07_crate_architectures",
+    ("docs/12_research_notes/08_software_design_theory/08_crate_architectures",
      "docs/12_research_notes/08_software_design_theory/08_crate_architectures"),
 ]
 # rust-formal-engineering-system 内部同号/跳号子目录重排
 RFES_DIR_MAP = [
-    ("docs/rust-formal-engineering-system/02_practical_applications",
+    ("docs/15_rust_formal_engineering_system/03_practical_applications",
      "docs/15_rust_formal_engineering_system/03_practical_applications"),
-    ("docs/rust-formal-engineering-system/03_compiler_theory",
+    ("docs/15_rust_formal_engineering_system/04_compiler_theory",
      "docs/15_rust_formal_engineering_system/04_compiler_theory"),
-    ("docs/rust-formal-engineering-system/03_design_patterns",
+    ("docs/15_rust_formal_engineering_system/05_design_patterns",
      "docs/15_rust_formal_engineering_system/05_design_patterns"),
-    ("docs/rust-formal-engineering-system/05_software_engineering",
+    ("docs/15_rust_formal_engineering_system/06_software_engineering",
      "docs/15_rust_formal_engineering_system/06_software_engineering"),
-    ("docs/rust-formal-engineering-system/06_toolchain_ecosystem",
+    ("docs/15_rust_formal_engineering_system/07_toolchain_ecosystem",
      "docs/15_rust_formal_engineering_system/07_toolchain_ecosystem"),
-    ("docs/rust-formal-engineering-system/09_research_agenda",
+    ("docs/15_rust_formal_engineering_system/08_research_agenda",
      "docs/15_rust_formal_engineering_system/08_research_agenda"),
-    ("docs/rust-formal-engineering-system/10_quality_assurance",
+    ("docs/15_rust_formal_engineering_system/09_quality_assurance",
      "docs/15_rust_formal_engineering_system/09_quality_assurance"),
 ]
 # 全部目录映射（用于把 auto 行的 new_path 目录前缀改写为新位置），长前缀优先
@@ -142,28 +142,28 @@ def next_nn(used: dict[str, set[int]], d: str) -> int:
 # new_slug 为去掉旧序号后的规范名；NN 在目标目录内追加。
 # ---------------------------------------------------------------------------
 ROOT_RELOCATE = [
-    ("docs/00_master_index.md", "docs/00_meta", "master_index.md"),
-    ("docs/01_cargo_build_optimization.md", "docs/09_toolchain", "cargo_build_optimization.md"),
-    ("docs/01_nix_setup.md", "docs/09_toolchain", "nix_setup.md"),
-    ("docs/04_rust_language_feature_comprehensive_inventory_2026.md", "docs/06_research",
+    # 00_master_index 单独处理：作为 docs/00_meta 的 00_ 导览页（见 build_docs）
+    ("docs/09_toolchain/18_cargo_build_optimization.md", "docs/09_toolchain", "cargo_build_optimization.md"),
+    ("docs/09_toolchain/19_nix_setup.md", "docs/09_toolchain", "nix_setup.md"),
+    ("docs/06_research/13_rust_language_feature_comprehensive_inventory_2026.md", "docs/06_research",
      "rust_language_feature_comprehensive_inventory_2026.md"),
-    ("docs/05_miri_integration_summary.md", "docs/09_toolchain", "miri_integration_summary.md"),
-    ("docs/06_docker_guide.md", "docs/08_guides", "docker_guide.md"),
-    ("docs/10_2026_rust_ecosystem_comprehensive_review_with_citations.md", "docs/06_research",
+    ("docs/09_toolchain/20_miri_integration_summary.md", "docs/09_toolchain", "miri_integration_summary.md"),
+    ("docs/08_usage_guides/29_docker_guide.md", "docs/08_usage_guides", "docker_guide.md"),
+    ("docs/06_research/14_rust_ecosystem_comprehensive_review_2026.md", "docs/06_research",
      "rust_ecosystem_comprehensive_review_2026.md"),
-    ("docs/10_api_guide.md", "docs/04_guides", "api_guide.md"),
-    ("docs/10_architecture.md", "docs/11_project", "architecture.md"),
-    ("docs/10_authoritative_sources_and_citations.md", "docs/00_meta",
+    ("docs/04_guides/15_api_guide.md", "docs/04_guides", "api_guide.md"),
+    ("docs/11_project/08_architecture.md", "docs/11_project", "architecture.md"),
+    ("docs/00_meta/16_authoritative_sources_and_citations.md", "docs/00_meta",
      "authoritative_sources_and_citations.md"),
-    ("docs/10_dependency_graph.md", "docs/11_project", "dependency_graph.md"),
-    ("docs/10_deployment.md", "docs/08_guides", "deployment.md"),
-    ("docs/10_migration_guide_2026.md", "docs/04_guides", "migration_guide_2026.md"),
-    ("docs/10_miri_guide.md", "docs/09_toolchain", "miri_guide.md"),
-    ("docs/10_sccache_setup.md", "docs/09_toolchain", "sccache_setup.md"),
-    ("docs/10_terminology_standard.md", "docs/00_meta", "terminology_standard.md"),
+    ("docs/11_project/09_dependency_graph.md", "docs/11_project", "dependency_graph.md"),
+    ("docs/08_usage_guides/30_deployment.md", "docs/08_usage_guides", "deployment.md"),
+    ("docs/04_guides/16_migration_guide_2026.md", "docs/04_guides", "migration_guide_2026.md"),
+    ("docs/09_toolchain/21_miri_guide.md", "docs/09_toolchain", "miri_guide.md"),
+    ("docs/09_toolchain/22_sccache_setup.md", "docs/09_toolchain", "sccache_setup.md"),
+    ("docs/00_meta/17_terminology_standard.md", "docs/00_meta", "terminology_standard.md"),
     # link_check_report.md 为机器生成报告 → reports/（见计划文档备注）
-    ("docs/link_check_report.md", "reports", "link_check_report.md"),
-    ("docs/trpl_3rd_ed_diff.md", "docs/03_reference", "trpl_3rd_ed_diff.md"),
+    ("reports/01_link_check_report.md", "reports", "link_check_report.md"),
+    ("docs/03_reference/07_trpl_3rd_ed_diff.md", "docs/03_reference", "trpl_3rd_ed_diff.md"),
 ]
 
 # ---------------------------------------------------------------------------
@@ -230,11 +230,12 @@ def build_docs() -> tuple[list[dict], dict]:
 
     # research_notes 扁平文件（直接位于 research_notes/ 下的 10_*.md）
     rn_flat = [r for r in auto
-               if posixpath.dirname(r["old_path"]) == "docs/research_notes"
+               if posixpath.dirname(r["old_path"]) == "docs/12_research_notes"
                and posixpath.basename(r["old_path"]).startswith("10_")]
     rn_flat_olds = {r["old_path"] for r in rn_flat}
     drop_olds = {o for o, _, _ in ROOT_RELOCATE} | rn_flat_olds
-    drop_olds.add("docs/research_notes/00_archive_link_audit_report.md")
+    drop_olds.add("docs/00_meta/00_master_index.md")
+    drop_olds.add("docs/12_research_notes/13_meta_reports/01_archive_link_audit_report.md")
 
     kept: list[dict] = []
     for r in auto:
@@ -243,6 +244,23 @@ def build_docs() -> tuple[list[dict], dict]:
         r = dict(r)
         r["new_path"] = apply_dir_map(r["new_path"])
         kept.append(r)
+
+    # docs/00_meta：15 个 00_ 文件同号违反规则③；仅 incoming master_index 保留 00_，
+    # 其余按字母序重排为 01..15
+    meta00 = [r for r in kept
+              if posixpath.dirname(r["old_path"]) == "docs/00_meta"
+              and posixpath.basename(r["old_path"]).startswith("00_")]
+    meta00_olds = {r["old_path"] for r in meta00}
+    kept = [r for r in kept if r["old_path"] not in meta00_olds]
+    for i, r in enumerate(sorted(meta00, key=lambda r: posixpath.basename(r["old_path"])), start=1):
+        slug = LEADING_NUM_RE.sub("", posixpath.basename(r["old_path"]))
+        kept.append(dict(old_path=r["old_path"],
+                         new_path=f"docs/00_meta/{i:02d}_{slug}",
+                         reason="renumber", order_in_dir=str(i)))
+    # 项目总索引作为 docs/00_meta 的 00_ 导览页
+    kept.append(dict(old_path="docs/00_meta/00_master_index.md",
+                     new_path="docs/00_meta/00_master_index.md",
+                     reason="relocate", order_in_dir="0"))
 
     # 目录级行
     for old_d, new_d in DIR_ROWS:
@@ -272,7 +290,7 @@ def build_docs() -> tuple[list[dict], dict]:
             continue
         groups[classify_rn(name)].append((r["old_path"], name))
     # 00_archive_link_audit_report → meta_reports
-    groups["meta"].append(("docs/research_notes/00_archive_link_audit_report.md",
+    groups["meta"].append(("docs/12_research_notes/13_meta_reports/01_archive_link_audit_report.md",
                            "archive_link_audit_report.md"))
     for key, items in groups.items():
         tgt_dir = RN_NEW_DIRS[key]
@@ -299,9 +317,9 @@ def build_knowledge() -> tuple[list[dict], dict]:
     auto = read_rows(OUT_DIR / "mapping_knowledge_auto.csv")
     rows: list[dict] = []
     swap = {
-        "knowledge/01_fundamentals/01_borrowing.md": ("knowledge/01_fundamentals/02_borrowing.md", "2"),
-        "knowledge/01_fundamentals/02_iterators.md": ("knowledge/01_fundamentals/04_iterators.md", "4"),
-        "knowledge/01_fundamentals/04_ownership.md": ("knowledge/01_fundamentals/01_ownership.md", "1"),
+        "knowledge/01_fundamentals/02_borrowing.md": ("knowledge/01_fundamentals/02_borrowing.md", "2"),
+        "knowledge/01_fundamentals/04_iterators.md": ("knowledge/01_fundamentals/04_iterators.md", "4"),
+        "knowledge/01_fundamentals/01_ownership.md": ("knowledge/01_fundamentals/01_ownership.md", "1"),
     }
     for r in auto:
         r = dict(r)
@@ -337,7 +355,7 @@ def build_crates() -> tuple[list[dict], dict]:
     pe_rows = [r for r in auto if r["old_path"].startswith(c07_root + "/11_practical_examples/")]
     drop_olds |= {r["old_path"] for r in pe_rows}
     # c04: 双 tier_02 → tier_02_applications/01_advanced_patterns.md 并入 tier_02_guides
-    c04_merge_old = "crates/c04_generic/docs/tier_02_applications/01_advanced_patterns.md"
+    c04_merge_old = "crates/c04_generic/docs/tier_02_guides/08_advanced_patterns.md"
     drop_olds.add(c04_merge_old)
 
     for r in auto:

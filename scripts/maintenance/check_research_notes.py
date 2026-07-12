@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Check docs/research_notes structural and metadata consistency.
+Check docs/12_research_notes structural and metadata consistency.
 
 Runs the following checks:
-1. No empty directories under docs/research_notes (unless explicitly allowed).
+1. No empty directories under docs/12_research_notes (unless explicitly allowed).
 2. Every .md file contains at least one authority source marker.
 3. Top metadata block uses Rust 1.96.0+ (Edition 2024) where present.
 4. README/INDEX/organization files are up-to-date with actual structure.
@@ -79,7 +79,7 @@ def check_index_consistency() -> list[str]:
     index_content = index_path.read_text(encoding="utf-8")
 
     # Look for relative markdown links inside docs/research_notes.
-    links = re.findall(r"\]\((docs/research_notes/[^)]+\.md)\)", index_content)
+    links = re.findall(r"\]\((docs/12_research_notes/[^)]+\.md)\)", index_content)
     for link in links:
         target = PROJECT_ROOT / link
         if not target.exists():
@@ -92,7 +92,7 @@ def check_archive_links() -> tuple[list[str], list[str], list[str]]:
     """
     Scan all .md files for links pointing to archive/research_notes_2026_06_25/.
     Returns (replaceable, archive_only, missing_both) where:
-    - replaceable: target exists in current docs/research_notes/
+    - replaceable: target exists in current docs/12_research_notes/
     - archive_only: target only exists in archive
     - missing_both: target exists in neither
     """
@@ -134,7 +134,7 @@ def check_archive_links() -> tuple[list[str], list[str], list[str]]:
 
 
 def check_broken_internal_links() -> list[str]:
-    """Check that relative markdown links *inside* docs/research_notes point to existing files."""
+    """Check that relative markdown links *inside* docs/12_research_notes point to existing files."""
     issues: list[str] = []
     current_files = {p.resolve() for p in RESEARCH_NOTES.rglob("*.md")}
 
@@ -156,7 +156,7 @@ def check_broken_internal_links() -> list[str]:
                 continue
             cur_dir = f.parent
             target = (cur_dir / base).resolve()
-            # Only report links whose target is inside docs/research_notes
+            # Only report links whose target is inside docs/12_research_notes
             try:
                 target.relative_to(RESEARCH_NOTES.resolve())
             except ValueError:
@@ -220,7 +220,7 @@ def check_counterexample_coverage() -> list[str]:
 
 def check_rfc_counterexample_mapping() -> list[Path]:
     """
-    Scan counterexample files under docs/research_notes/ for RFC authority URLs.
+    Scan counterexample files under docs/12_research_notes/ for RFC authority URLs.
     Returns a list of files that do not reference any RFC URL (informational).
     """
     rfc_patterns = [
@@ -354,7 +354,7 @@ def check_authority_url_coverage() -> list[Path]:
 
 def check_code_example_anchors() -> list[str]:
     """
-    Scan docs/research_notes/*.md for relative links to local .rs files.
+    Scan docs/12_research_notes/*.md for relative links to local .rs files.
 
     Checks that relative links pointing to Rust source files (e.g.
     ../examples/..., ../../crates/.../*.rs, ../crates/.../*.rs) resolve to
@@ -398,7 +398,7 @@ def main() -> int:
     exit_code = 0
 
     print("=" * 60)
-    print("docs/research_notes consistency check")
+    print("docs/12_research_notes consistency check")
     print("=" * 60)
 
     # 1. Empty directories

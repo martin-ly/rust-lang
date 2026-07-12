@@ -1887,7 +1887,7 @@ Typestate 最适合：
 > **文档类型**: Tier 4 - 高级层
 > **文档定位**: Rust 设计模式完整参考
 > **适用对象**: 中级 → 高级开发者
-> **前置知识**: [2.3 泛型编程指南](../../../crates/c02_type_system/docs/tier_02_guides/03_generics_programming_guide.md), [2.4 Trait系统指南](../../../crates/c02_type_system/docs/tier_02_guides/04_trait_system_guide.md)
+> **前置知识**: [2.3 泛型编程指南](../../../crates/c02_type_system/docs/tier_02_guides/05_generics_programming_guide.md), [2.4 Trait系统指南](../../../crates/c02_type_system/docs/tier_02_guides/07_trait_system_guide.md)
 > **最后更新**: 2025-12-11
 
 ---
@@ -2210,7 +2210,7 @@ fn global_config() -> &'static Config {
 
 ## 补充视角：Rust 设计模式最佳实践与反模式
 
-> 本节选编自 `crates/c09_design_pattern/docs/tier_02_guides/05_best_practices_and_antipatterns.md`，
+> 本节选编自 `crates/c09_design_pattern/docs/tier_02_guides/06_best_practices_and_antipatterns.md`，
 > 作为 canonical 设计模式概念页的工程实践补充。
 
 ### Rust 特有模式

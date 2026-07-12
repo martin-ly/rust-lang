@@ -17,7 +17,7 @@
 
 - **MSRV 提升**: `Cargo.toml`、全部 workspace crate `Cargo.toml`、`.clippy.toml`、`rust-toolchain.toml` 注释、CI workflow 主矩阵统一从 `1.96.0` 更新为 `1.96.1`。
 - **文档基线刷新**: `README.md`、`CONTRIBUTING.md`、`development.md`、各 crate `README.md`/`docs/`/`reports/`、顶层 `docs/`/`knowledge/`/`guides/` 中大量 `1.96.0+` / `MSRV 1.96.0` 基线标注统一更新为 `1.96.1+` / `MSRV 1.96.1`。
-- **1.97/1.98 稳定性表述修正**: 当前（2026-07-04）Rust 1.97.0 尚未 stable、1.98.0 仍为 nightly。所有 `rust_197_features.rs` 模块文档、`exercises/tests/l3_rust_197_alignment.rs`、`concept/07_future/rust_1_97_stabilized.md`、`concept/07_future/rust_1_97_preview.md`、`docs/06_toolchain/06_21_rust_1_97_features.md` 中“已稳定/stable”描述恢复为“beta / nightly 候选/前瞻”。
+- **1.97/1.98 稳定性表述修正**: 当前（2026-07-04）Rust 1.97.0 尚未 stable、1.98.0 仍为 nightly。所有 `rust_197_features.rs` 模块文档、`exercises/tests/l3_rust_197_alignment.rs`、`concept/07_future/rust_1_97_stabilized.md`、`concept/07_future/rust_1_97_preview.md`、`docs/09_toolchain/10_rust_1_97_features.md` 中“已稳定/stable”描述恢复为“beta / nightly 候选/前瞻”。
 - **验证**: `cargo check --workspace`、`cargo test --workspace`、`cargo clippy --workspace`、`cargo vet` 均通过。
 
 ## [3.1.0] - 2026-07-09 — Rust 1.97.0 稳定支持（已发布）
@@ -32,7 +32,7 @@
 - **Rust 1.97.0 稳定文档对齐**：
   - `concept/07_future/rust_1_97_preview.md` 状态更新为“已 stable（2026-07-09 发布）”。
   - 填充 `concept/07_future/rust_1_97_stabilized.md` 为稳定特性摘要页，链接到权威详解。
-  - 更新 `docs/06_toolchain/06_21_rust_1_97_features.md` 为工具链参考入口。
+  - 更新 `docs/09_toolchain/10_rust_1_97_features.md` 为工具链参考入口。
   - `rust-toolchain.toml` 保持 `channel = "stable"`，由 rustup 自动解析 latest stable。
 - **依赖更新**：
   - `Cargo.toml` workspace: `bytes` `1.12.0` → `1.12.1`。
@@ -41,8 +41,8 @@
 - **AGENTS.md 合规修复**：
   - 为 `concept/00_meta/02_sources/04_topic_authority_alignment_map.md` 补充 `**EN**` / `**Summary**`。
   - 为 `content/README.md` 补充 `**EN**` / `**Summary**`。
-  - 合并 `docs/research_notes/10_distributed_patterns_matrix.md` → `10_distributed_pattern_matrix.md`（后者改为重定向 stub）。
-  - 合并 `docs/research_notes/10_workflow_engine_matrix.md` → `formal_methods/10_workflow_engines_matrix.md`（前者改为重定向 stub）。
+  - 合并 `docs/12_research_notes/07_distributed_and_workflow/04_distributed_patterns_matrix.md` → `10_distributed_pattern_matrix.md`（后者改为重定向 stub）。
+  - 合并 `docs/12_research_notes/07_distributed_and_workflow/06_workflow_engine_matrix.md` → `formal_methods/10_workflow_engines_matrix.md`（前者改为重定向 stub）。
   - 重命名 `concept/archive/Rust vs C++：形式系统模型 vs 机制工程模型 —— 核心论点索引.md` 为 snake_case。
 - **验证**：
   - `cargo check -p c06_async -p c10_networks -p c08_algorithms` 通过。
@@ -56,7 +56,7 @@
 全部 11 项滚动深化任务已完成：
 
 - **P2-11 TRPL Ch17 对照索引**：在 `concept/03_advanced/01_async/01_async.md` 顶部新增 TRPL 3rd Ed Ch17 提示框与权威教材对照表。
-- **P2-9 TRPL 全章映射表**：新建 `docs/01_learning/learning_mvp_path.md`，覆盖 TRPL 3rd Ed 全部 22 章与 `concept/` 权威页的映射。
+- **P2-9 TRPL 全章映射表**：新建 `docs/02_learning/09_learning_mvp_path.md`，覆盖 TRPL 3rd Ed 全部 22 章与 `concept/` 权威页的映射。
 - **P2-1 rustc 查询系统动手实验**：在 `concept/04_formal/05_rustc_internals/01_rustc_query_system.md` 新增调用 `type_of`/`predicates_of` 查询的 Mermaid 调用链图与 `rustc_driver` 伪代码示例。
 - **P2-5 Kani 合约示例扩展**：在 `crates/c03_control_fn/src/kani_examples.rs` 和 `crates/c04_generic/src/kani_examples.rs` 新增函数合约（`requires`/`ensures`）与循环不变量示例。
 - **P2-10 Brown Book 所有权引用**：在 `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md` 新增 Brown University Interactive Book 学术背景引用小节。
@@ -120,10 +120,10 @@
 
 - 按 `.kimi/RECTIFICATION_PLAN_2026_07_09.md` 第五章 P0 队列，完成 5 个高重复风险文件的整改：
   - `crates/c05_threads/docs/01_basic_threading.md` → 摘要 + 链接到 `concept/03_advanced/00_concurrency/01_concurrency.md`
-  - `crates/c05_threads/docs/06_parallel_algorithms.md` → 摘要 + 链接到 `concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md`
+  - `crates/c05_threads/docs/11_parallel_algorithms.md` → 摘要 + 链接到 `concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md`
   - `crates/c07_process/docs/01_process_model_and_lifecycle.md` → 摘要 + 链接到新建 `concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`
-  - `crates/c09_design_pattern/docs/rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md` → 摘要 + 链接到 `concept/06_ecosystem/03_design_patterns/01_patterns.md`
-  - `crates/c10_networks/docs/rust_190_examples_part3_advanced_protocols.md` → 摘要 + 链接到新建 `concept/06_ecosystem/09_networking/01_advanced_network_protocols.md`
+  - `crates/c09_design_pattern/docs/20_rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md` → 摘要 + 链接到 `concept/06_ecosystem/03_design_patterns/01_patterns.md`
+  - `crates/c10_networks/docs/09_rust_190_examples_part3_advanced_protocols.md` → 摘要 + 链接到新建 `concept/06_ecosystem/09_networking/01_advanced_network_protocols.md`
 
 ### P2-Q3 深化计划剩余任务完成（2026-07-09）
 
@@ -146,11 +146,11 @@
 ### crates/*/docs/ 合规整改 P1 完成（2026-07-09）
 
 - 完成 P1 队列 5 个文件：
-  - `crates/c02_type_system/docs/tier_03_references/03_dispatch_mechanisms_reference.md` → `concept/02_intermediate/00_traits/02_dispatch_mechanisms.md`
+  - `crates/c02_type_system/docs/tier_03_references/04_dispatch_mechanisms_reference.md` → `concept/02_intermediate/00_traits/02_dispatch_mechanisms.md`
   - `crates/c04_generic/docs/tier_04_advanced/04_type_level_programming.md` → `concept/02_intermediate/01_generics/03_type_level_programming.md`
-  - `crates/c06_async/docs/tier_02_guides/02_future_and_executor_mechanisms.md` → `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md`
+  - `crates/c06_async/docs/tier_02_guides/01_future_and_executor_mechanisms.md` → `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md`
   - `crates/c08_algorithms/docs/tier_04_advanced/04_algorithm_engineering_practice.md` → `concept/06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md`
-  - `crates/c10_networks/docs/tier_04_advanced/01_high_performance_network_service_architecture.md` → `concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md`
+  - `crates/c10_networks/docs/tier_04_advanced/02_high_performance_network_service_architecture.md` → `concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md`
 
 ### Q4 2026 准备文档（2026-07-09）
 
@@ -177,10 +177,10 @@
   - 1.97 发布日策略：若 `VecDeque::truncate_front` / `retain_back` 未进入 1.97.0，保留等效实现并标注“推迟至 1.98”。
 - **权威来源事实修正**：
   - 全局扫描 async closures / Rust 2024 Edition / `&raw const` 术语；`content/emerging/async_closures.md`、`knowledge/06_ecosystem/02_edition_2024.md`、`concept/03_advanced/24_async_closures.md` 等关键文件已正确对齐 1.85.0 stable。
-  - 修正 `docs/04_rust_language_feature_comprehensive_inventory_2026.md` 中 "async closures 缺失" 为 "async closures 已覆盖（1.85.0+ stable）"。
+  - 修正 `docs/06_research/13_rust_language_feature_comprehensive_inventory_2026.md` 中 "async closures 缺失" 为 "async closures 已覆盖（1.85.0+ stable）"。
   - `&raw const` / `&raw mut` 术语已统一，无 `&const` 非官方写法残留。
 - **Rust 1.96.0 覆盖缺口回填**：
-  - 新建 `docs/06_toolchain/06_22_rust_1_96_features.md`（稳定特性综述）。
+  - 新建 `docs/09_toolchain/11_rust_1_96_features.md`（稳定特性综述）。
   - 新建 `concept/07_future/rust_1_96_stabilized.md`（概念页）。
   - 新建 `exercises/tests/l3_rust_196_alignment.rs`（10 个可运行测验，覆盖 `assert_matches!`、`core::range`、NonZero 范围迭代、`AssertUnwindSafe From`、`LazyCell`/`LazyLock From`、s390x inline asm、Cargo CVE、rustdoc lint）。
   - 验证：`cargo test --test l3_rust_196_alignment` 10 passed。
@@ -201,7 +201,7 @@
   - 新建 `exercises/tests/l3_rust_197_alignment.rs`（13 个可运行测验），覆盖已验证可用的 1.97 API；对 `truncate_front` / `retain_back` 使用等效实现以保持当前工具链可编译；发布日根据实际稳定状态切换为真实 API。
   - 清理 `concept/07_future/rust_1_97_preview.md`：修复重复过渡段落、冗余定理链、5.5/5.6 重复编号，同步 int_format_into / float_algebraic 状态为 1.98 已确认。
   - 扩展 `scripts/probe_rust_197_apis.rs` 至 12 项 API，生成 `reports/RUST_197_API_PROBE_2026_06_28.md`：当前 nightly 上 9 项已可用（含 `Box::as_ptr`、`int::format_into`），`VecDeque::truncate_front` / `retain_back` / `Vec::into_non_null` 仍不可用。
-  - 新增 `docs/06_toolchain/06_21_rust_1_97_features.md` 稳定特性文档迁移模板。
+  - 新增 `docs/09_toolchain/10_rust_1_97_features.md` 稳定特性文档迁移模板。
 - **国际化入口补齐**：
   - `README.md` 新增 🌍 国际学习者说明徽章与段落，对接 TRPL 3rd Ed / Brown Book / Google Comprehensive Rust / Rust By Example。
   - `CONTRIBUTING.md` 新增 i18n 规范小节，说明 `concept/` 文件 `**EN**` / `**Summary**` 要求与自查脚本。
@@ -238,8 +238,8 @@
     - Tree Borrows：`knowledge/04_expert/miri/01_tree_borrows.md`、`docs/content/academic/10_tree_borrows_guide.md` → `concept/04_formal/36_tree_borrows_deep_dive.md`
     - Compiler Internals：`knowledge/04_expert/01_compiler_internals.md` → `concept/06_ecosystem/45_compiler_internals.md`
     - Rust Edition 2024：`knowledge/06_ecosystem/02_edition_2024.md` → `concept/07_future/19_rust_edition_preview.md`
-    - Rust 1.96 稳定特性：`knowledge/06_ecosystem/emerging/05_rust_1_96.md`、`docs/06_toolchain/06_22_rust_1_96_features.md` → `concept/07_future/rust_1_96_stabilized.md`
-    - Unsafe Fields：`docs/05_guides/05_unsafe_fields_preview.md` → `concept/07_future/13_unsafe_fields_preview.md`
+    - Rust 1.96 稳定特性：`knowledge/06_ecosystem/emerging/05_rust_1_96.md`、`docs/09_toolchain/11_rust_1_96_features.md` → `concept/07_future/rust_1_96_stabilized.md`
+    - Unsafe Fields：`docs/08_usage_guides/25_unsafe_fields_preview.md` → `concept/07_future/13_unsafe_fields_preview.md`
   - 自动跳过：速查表、不同版本专题（1.97 vs 1.96）、特定映射页等需人工复核的文件。
 - **执行清单**：
   - 新建 `.kimi/PHASE2_CONTENT_DEDUPLICATION_2026_06_29.md`，记录剩余待处理项（Async Closures、Unsafe Rust、Rust for Linux、Rust 1.95 等）。
@@ -250,20 +250,20 @@
 
 - **Async Closures 去重**：
   - 以 `concept/03_advanced/24_async_closures.md` 为权威来源。
-  - `knowledge/03_advanced/async/02_async_closure.md`、`knowledge/06_ecosystem/emerging/01_async_closures.md`、`docs/03_guides/03_async_closures_deep_dive.md` 已改为重定向页，指向 `concept/` 权威页。
+  - `knowledge/03_advanced/async/03_async_closure.md`、`knowledge/06_ecosystem/emerging/01_async_closures.md`、`docs/04_guides/01_async_closures_deep_dive.md` 已改为重定向页，指向 `concept/` 权威页。
 - **Unsafe Rust 去重**：
   - 以 `concept/03_advanced/03_unsafe.md` 为权威来源。
-  - `knowledge/03_advanced/unsafe/04_unsafe_rust.md` 已改为重定向页。
+  - `knowledge/03_advanced/unsafe/03_unsafe_rust.md` 已改为重定向页。
   - `concept/03_advanced/12_unsafe_rust_patterns.md` 同步更新交叉引用与链接。
 - **Rust for Linux 去重**：
   - 以 `concept/07_future/19_rust_for_linux.md` 为权威来源。
-  - `docs/04_research/04_rust_for_linux.md` 已改为重定向页。
+  - `docs/06_research/08_rust_for_linux.md` 已改为重定向页。
 - **Rust 1.95 去重**：
-  - 以 `docs/06_toolchain/06_14_rust_1_95_nightly_preview.md` 为权威来源。
+  - 以 `docs/09_toolchain/07_rust_1_95_nightly_preview.md` 为权威来源。
   - `knowledge/06_ecosystem/emerging/03_rust_1_95.md`、`knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md` 已改为重定向页。
 - **Rust 1.97 速查表关系明确**：
   - `concept/07_future/rust_1_97_preview.md` 为权威页。
-  - `docs/02_reference/quick_reference/02_rust_197_features_cheatsheet.md` 保留速查表格式，添加权威来源链接。
+  - `docs/03_reference/quick_reference/21_rust_197_features_cheatsheet.md` 保留速查表格式，添加权威来源链接。
 - **命名规范清理（snake_case）**：
   - `concept/00_meta/BILINGUAL_TEMPLATE.md` → `bilingual_template.md`。
   - `concept/00_meta/LEARNING_MVP_PATH.md` → `learning_mvp_path.md`；根目录重复文件已删除，统一入口为 `concept/00_meta/learning_mvp_path.md`。
@@ -313,7 +313,7 @@
   - 清理并扩展 `crates/c08_algorithms/src/rust_198_features.rs`，新增 10 个 1.98 API demo。
   - 新增 `.kimi/RUST_198_TRACKING_2026_06_28.md` 跟踪文档。
 - **F 轨道 — 内部链接治理收尾**：
-  - 修复 docs 下 7 个损坏内部链接，`docs/link_check_report.md` 损坏数从 19 降至 0。
+  - 修复 docs 下 7 个损坏内部链接，`reports/01_link_check_report.md` 损坏数从 19 降至 0。
 - **G 轨道 — i18n 双语标注基线**：
   - 增强 `scripts/add_bilingual_annotations.py`，新增 `--report` Markdown 报告输出。
   - 生成 `reports/I18N_BILINGUAL_BASELINE_2026_06_28.md`：扫描 `concept/` 321 文件，39 种未覆盖术语。
@@ -324,9 +324,9 @@
 - **J 轨道 — Rust 1.98.0 代码示例扩展**：
   - 在 `crates/c08_algorithms/src/rust_198_features.rs` 新增 `NonZero::from_str_radix`、`Box::as_ptr/as_mut_ptr`、`int::format_into` 3 个 demo。
 - **K 轨道 — TRPL 第三版对照刷新**：
-  - 更新 `docs/trpl_3rd_ed_diff.md` 日期与 Ch 18 映射。
+  - 更新 `docs/03_reference/07_trpl_3rd_ed_diff.md` 日期与 Ch 18 映射。
 - **L 轨道 — Rust 1.97.0 迁移文档预填充**：
-  - 将 `docs/06_toolchain/06_21_rust_1_97_features.md` 从模板升级为预迁移草稿，含 6 个已确认 1.97.0 API 的代码示例与发布日核对清单。
+  - 将 `docs/09_toolchain/10_rust_1_97_features.md` 从模板升级为预迁移草稿，含 6 个已确认 1.97.0 API 的代码示例与发布日核对清单。
 - **D 轨道增强**：
   - 新增 `scripts/rust_197_upstream_monitor.sh` 上游发布动态监控脚本。
   - 更新 `.kimi/RUST_197_RELEASE_COUNTDOWN_2026_06_28.md` 与 `.kimi/BCD_TRACK_STATUS_2026_06_28.md`。
@@ -372,20 +372,20 @@
   - 生成完整报告 `reports/TRPL_GENERIC_LINK_FIX_2026_06_26.md`。
   - 新增自动化脚本 `scripts/fix_generic_trpl_links.py`，支持后续批量修复。
 - **附加修复**：
-  - 修复 `docs/05_guides/05_async_programming_usage_guide.md` 中 1 处损坏的目录锚点链接。
+  - 修复 `docs/08_usage_guides/04_async_programming_usage_guide.md` 中 1 处损坏的目录锚点链接。
   - 运行 `scripts/check_links.py` 验证全仓库 Markdown 链接：`91816` 总链接，`0` 损坏。
 
 ### docs/ 目录 A/B/C 价值审计收尾（2026-06-25）
 
 - 复审并更新 2 个 B 类过期文档的日期与状态：
-  - `docs/10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-  - `docs/10_terminology_standard.md`
+  - `docs/06_research/14_rust_ecosystem_comprehensive_review_2026.md`
+  - `docs/00_meta/17_terminology_standard.md`
 - 批量修复 `archive/research_notes_2026_06_25/` 移动导致的引用残留：
   - 新增 `scripts/maintenance/fix_archived_research_notes_links.py`
-  - 第一轮回退修复 134 处；第二轮补齐 `docs/research_notes/` 内部 `./xxx.md` 形式残留 270 处，共 404 处
+  - 第一轮回退修复 134 处；第二轮补齐 `docs/12_research_notes/` 内部 `./xxx.md` 形式残留 270 处，共 404 处
 - 清理 `coq_skeleton` 引用残留：
   - 新增 `scripts/maintenance/fix_coq_skeleton_links.py`
-  - 将 `docs/research_notes/` 内 26 处指向旧 `coq_skeleton/` 的链接重定向到 `archive/deprecated/coq_skeleton/`
+  - 将 `docs/12_research_notes/` 内 26 处指向旧 `coq_skeleton/` 的链接重定向到 `archive/deprecated/coq_skeleton/`
   - 删除重复的 `docs/research_notes/coq_skeleton/` 目录（内容已在 `archive/deprecated/coq_skeleton/`）
 - `docs/rust-ownership-decidability/README.md` 添加归档声明，标记为历史参考/不再主动更新。
 - 当前审计结果：`docs/` A 类问题 **0**，B 类问题 **0**，C 类问题 **679**（均为研究综述类最后更新超过 90 天）。
@@ -398,7 +398,7 @@
   - 新建 `concept/04_formal/29_type_inference_complexity.md`（HM 扩展、PSPACE-完全、与 rustc typeck 映射）
   - 新建 `concept/04_formal/30_aeneas_symbolic_semantics.md`（LLBC、HLPL、符号执行、Aeneas 工具链）
   - 补充 `concept/04_formal/03_ownership_formal.md`、`08_type_inference.md`、`README.md`
-- **`docs/research_notes/` 批量归档**：
+- **`docs/12_research_notes/` 批量归档**：
   - 增强 `scripts/maintenance/archive_research_notes_candidates.py`：支持 `--stale-days`、黑名单类别、`--dry-run`/`--yes`
   - 移动 37 个低价值/过时文件到 `archive/research_notes_2026_06_25/`
   - 运行 `scripts/maintenance/fix_archived_research_notes_links.py` 修复 131 处引用残留
@@ -412,7 +412,7 @@
   - 新建 `knowledge/04_expert/academic/03_ownership_model_comprehensive.md`
   - 新建 `knowledge/04_expert/academic/04_borrow_checker_proof_guide.md`
   - 新建 `knowledge/04_expert/academic/05_type_system_foundations_guide.md`
-  - 补充 `knowledge/03_advanced/unsafe/04_unsafe_rust.md`（UB 分类与安全抽象原则）
+  - 补充 `knowledge/03_advanced/unsafe/03_unsafe_rust.md`（UB 分类与安全抽象原则）
   - 更新 `knowledge/04_expert/academic/README.md`
 - **状态更新**：
   - `reports/C_CLASS_GOVERNANCE_PLAN_2026_06_09.md`：阶段 3 完成，阶段 4 维护规则进行中
@@ -461,7 +461,7 @@
 
 - `concept/07_future/rust_1_97_preview.md`: 更新为 "Rust 1.97 稳定特性"，状态标记从 🧪/🔄 改为 ✅
 - `concept/00_meta/terminology_glossary.md`: 1.97 术语状态从候选改为稳定
-- `docs/06_toolchain/06_21_rust_1_97_features.md`: 新增稳定特性综述文档（由预览迁移）
+- `docs/09_toolchain/10_rust_1_97_features.md`: 新增稳定特性综述文档（由预览迁移）
 
 ### 练习
 
@@ -480,8 +480,8 @@
 ### 权威来源事实修正补充（2026-06-24）
 
 - 修正 `knowledge/06_ecosystem/02_edition_2024.md`：mermaid 与底部元数据 `rust-version` / 对应 Rust 版本统一为 **1.85.0+**；模块 8 官方来源指向 Rust 1.85 稳定公告。
-- 修正 `crates/c06_async/docs/async_closures_guide.md`：`AsyncFn` traits 及 `async_call` 等方法自 **1.85.0 stable** 起可用；底部对应 Rust 版本改为 1.85.0+。
-- 修正 `crates/c06_async/docs/tier_04_advanced/async_closures_guide.md`：决策树中 `async || {}` 标注为 **1.85.0+ stable** 而非 nightly。
+- 修正 `crates/c06_async/docs/01_async_closures_guide.md`：`AsyncFn` traits 及 `async_call` 等方法自 **1.85.0 stable** 起可用；底部对应 Rust 版本改为 1.85.0+。
+- 修正 `crates/c06_async/docs/tier_04_advanced/06_async_closures_guide.md`：决策树中 `async || {}` 标注为 **1.85.0+ stable** 而非 nightly。
 - 修正 `knowledge/06_ecosystem/emerging/01_async_closures.md`：`Box<dyn AsyncFn(...)>` 示例改为 `compile_fail` 以准确反映其非 dyn-compatible；AFIDT 说明改为“仍需 async-trait 宏或 nightly AFIDT”。
 
 ### 内容去重推进（2026-06-24）
@@ -493,8 +493,8 @@
 
 ### C 类目录元数据补齐（2026-06-24）
 
-- 新增 `scripts/add_c_class_content_grade.py`，为 `docs/research_notes/` 和 `docs/rust-ownership-decidability/` 中缺失 `内容分级` 的 Markdown 文件补齐头部。
-- 共补齐 25 个文件：`docs/research_notes/` 1 个，`docs/rust-ownership-decidability/` 24 个。
+- 新增 `scripts/add_c_class_content_grade.py`，为 `docs/12_research_notes/` 和 `docs/rust-ownership-decidability/` 中缺失 `内容分级` 的 Markdown 文件补齐头部。
+- 共补齐 25 个文件：`docs/12_research_notes/` 1 个，`docs/rust-ownership-decidability/` 24 个。
 - 两目录 796 个 Markdown 文件已全部含 `> **内容分级**: 归档级` 元数据，覆盖率 **100%**。
 - 更新 `reports/C_CLASS_GOVERNANCE_PLAN_2026_06_09.md`：标记阶段 1 完成，补充阶段进度表。
 
@@ -509,7 +509,7 @@
 ### 去重扫描与 Nightly 机制（2026-06-24）
 
 - 全局精确去重扫描（SHA-256）覆盖 2,537 个 Markdown 文件，未发现完全重复文件；`B4.2` 无需移动。
-- 在 `docs/00_meta/00_quarterly_sync_checklist.md` 新增「6️⃣ Nightly 预览文档更新（每 6 周）」章节，建立 nightly 预览页定期维护机制。
+- 在 `docs/00_meta/10_quarterly_sync_checklist.md` 新增「6️⃣ Nightly 预览文档更新（每 6 周）」章节，建立 nightly 预览页定期维护机制。
 
 ### C 类目录重复检测（2026-06-24）
 
@@ -576,9 +576,9 @@
   - 精简"自 xx 文件合并"的冗长元数据说明
 - 修正 `crates/c06_async/src/async_closures_preview.rs` 时间线：`AsyncFn traits` 与 `async closures` 同在 **1.85.0** stable。
 - 修正 `knowledge/06_ecosystem/emerging/01_async_closures.md`：状态改为 stable 1.85.0，移除所有 `#![feature(async_closure)]`，修正跟踪 issue。
-- 修正 `docs/04_rust_language_feature_comprehensive_inventory_2026.md` 中 async closures / AsyncFn 的 1.96 FCP / 1.94 prelude 错误时间线。
+- 修正 `docs/06_research/13_rust_language_feature_comprehensive_inventory_2026.md` 中 async closures / AsyncFn 的 1.96 FCP / 1.94 prelude 错误时间线。
 - 修正 `content/emerging/README.md` 与 `docs/content/emerging/README.md` 中 Async Closures 的状态矩阵（开发中 1.96+ → 已稳定 1.85.0）。
-- 修正 `docs/02_reference/02_error_code_mapping.md` unstable feature 示例（async_closure → gen_blocks）。
+- 修正 `docs/03_reference/03_error_code_mapping.md` unstable feature 示例（async_closure → gen_blocks）。
 - 修正 `docs/rust-ownership-decidability/01-core-concepts/01-01-ownership-rules-deep.md` 中 async closures 的版本标注与 feature gate。
 - 修正 `concept/07_future/18_async_drop_preview.md` 中错误的 Async Closures 跟踪 issue 链接。
 - 修正 `concept/07_future/05_rust_version_tracking.md` mindmap 中错误的 `AsyncFn* prelude 1.97` 节点。
@@ -730,7 +730,7 @@
 ### docs/book/guides 来源占位符大规模修复
 
 - 运行 `scripts/fix_docs_source_placeholders.py`，扫描并修复 `docs/`、`book/`、`guides/`、`reports/`、`.kimi/`、`exercises/`、`examples/`、`content/`、`concept/00_meta/` 中 `来源: Wikipedia - Topic`、`来源: TRPL Ch. X - Title`、`来源: Rust Reference - Topic`、`来源: Rustonomicon - Topic`、`来源: RFC NNNN - Title`、`来源: POPL 2018 - RustBelt`、`来源: Cargo Book`、`来源: Rust API Guidelines` 等未带 URL 的占位引用
-- 共处理 1000+ 个 Markdown 文件，生成约 20,000+ 个可点击链接；优先覆盖 `docs/rust-ownership-decidability/`、`docs/research_notes/`、`docs/05_guides/` 等重复占位高发区域
+- 共处理 1000+ 个 Markdown 文件，生成约 20,000+ 个可点击链接；优先覆盖 `docs/rust-ownership-decidability/`、`docs/12_research_notes/`、`docs/08_usage_guides/` 等重复占位高发区域
 - 保持已有带 URL 引用、代码片段与 Mermaid 图表不变；`cargo check --workspace` 与 `cargo test --test l3_ecosystem_alignment` 均通过
 - 后续扩展脚本覆盖范围至 `.kimi/`、`exercises/`、`examples/`、`content/`、`concept/00_meta/`，新增 23 + 4 + 138 处修复
 - 新建 `scripts/fix_docs_source_placeholders.py`
@@ -1104,7 +1104,7 @@
 
 ### 🆕 Rust 1.96.0 文档刷新
 
-- **`docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md`**: 新增 `core::range::*` 章节（Range/RangeFrom/RangeToInclusive/RangeIter 等，1.96 stable）
+- **`docs/03_reference/quick_reference/08_collections_iterators_cheatsheet.md`**: 新增 `core::range::*` 章节（Range/RangeFrom/RangeToInclusive/RangeIter 等，1.96 stable）
 - **`concept/02_intermediate/20_type_system_advanced.md`**: 新增 `From<T>` 1.96 实现（AssertUnwindSafe/LazyCell/LazyLock）
 
 ### 🔧 CI 集成
@@ -1163,12 +1163,12 @@
 - **A类问题**: 3 → 1（-67%），剩余 1 个为历史声明（1.85.0 Edition 起始版本），属合理保留
 - **B类问题**: 27 → 23（-15%），修复核心目录中真正损坏的链接
 - **损坏链接修复**:
-  - `docs/02_reference/alignment_guide.md`: `07_rust_release_tracking_checklist.md` → `00_rust_version_alignment_checklist.md`
-  - `docs/00_meta/history/00_2026_reorganization.md`: 移除不存在的 `00_project_reorganization_plan.md` 链接
+  - `docs/03_reference/06_alignment_guide.md`: `07_rust_release_tracking_checklist.md` → `00_rust_version_alignment_checklist.md`
+  - `docs/00_meta/history/00_reorganization.md`: 移除不存在的 `00_project_reorganization_plan.md` 链接
   - `docs/00_meta/`: 三个模板文件中移除不存在的 `00_template_matrix.md` 链接
   - `docs/content/academic/README.md`: `10_tree_borrows_authoritative_guide.md` → `10_tree_borrows_guide.md`
 - **缺失 README 新建**:
-  - `docs/content/README.md` — Content 目录总览
+  - `docs/14_content/README.md` — Content 目录总览
   - `docs/content/representations/README.md` — 知识表示索引
   - `docs/content/scenarios/README.md` — 应用场景索引
 
@@ -1205,7 +1205,7 @@
 
 - **速查表版本声明批量更新**（9 个文件）: `1.93.0/1.93.1+` → `1.96.0+`
   - `02_wasm_cheatsheet.md`, `02_type_system.md`, `02_threads_concurrency_cheatsheet.md`, `02_testing_cheatsheet.md`, `02_strings_formatting_cheatsheet.md`, `02_smart_pointers_cheatsheet.md`, `02_collections_iterators_cheatsheet.md`, `02_control_flow_functions_cheatsheet.md`, `02_modules_cheatsheet.md`
-- **`docs/06_toolchain/06_jump_tables_guide.md`**: 版本声明更新为 `1.93.0+ (MSRV 1.96.0)`
+- **`docs/09_toolchain/14_jump_tables_guide.md`**: 版本声明更新为 `1.93.0+ (MSRV 1.96.0)`
 - **速查表损坏链接批量修复**（24 个文件）: `[上级目录](README.md)` → `[速查表索引](README.md)`
 - **审计脚本**: 新建 `scripts/docs_value_audit.py`，自动扫描 docs/ 中版本声明、最后更新日期和内部链接损坏
 
@@ -1235,7 +1235,7 @@
 
 ### ✅ 已有覆盖确认（无需新增）
 
-- **Rustdoc 1.96 改进** (`docs/06_toolchain/06_20_rustdoc_196_improvements.md`): 228 行完整覆盖 R1-R3（Deprecation notes、missing_doc_code_examples lint、Sidebar 分离）
+- **Rustdoc 1.96 改进** (`docs/09_toolchain/09_rustdoc_196_improvements.md`): 228 行完整覆盖 R1-R3（Deprecation notes、missing_doc_code_examples lint、Sidebar 分离）
 - **NonZero 范围迭代练习** (`exercises/src/rust_196_feature_exercises.rs`): 2 个练习 + 测试通过
 - **AssertUnwindSafe From 练习** (`exercises/src/rust_196_feature_exercises.rs`): 2 个练习 + 测试通过
 - **s390x inline asm** (`knowledge/06_ecosystem/emerging/05_rust_1_96.md`): 含向量寄存器代码示例
@@ -1365,11 +1365,11 @@
   - 原 docs 目录整体迁移至 `archive/deprecated/`
   - 唯一 unique 文件 `10_rust_194_195_features_deep_dive.md` 已复制到 `knowledge/.../01_mind_maps/03_rust_194_195_features_deep_dive.md`
   - 更新 6 处跨目录引用链接
-- **`docs/content/` 重复清理**:
+- **`docs/14_content/` 重复清理**:
   - 删除与 `knowledge/06_ecosystem/` 重复的 8 个文件（Axum/Tokio/SQLx/Sea-ORM/K8s/async-closures/generic-const-exprs/rust-1.95-preview）
   - 保留 unique 内容：academic/（Tree Borrows、Coq）、representations/、scenarios/
-  - 更新 `docs/content/README.md` 目录结构和待办状态
-  - 更新 `docs/00_meta/00_documentation_division_of_labor.md` 中 `docs/content/` 的定位描述
+  - 更新 `docs/14_content/README.md` 目录结构和待办状态
+  - 更新 `docs/00_meta/04_documentation_division_of_labor.md` 中 `docs/14_content/` 的定位描述
 
 ### 📝 L6-L7 代码示例标记
 
@@ -1489,10 +1489,10 @@
 
 ### 🔧 版本事实与文档索引修复
 
-- **`array_windows` 版本修正**: `knowledge/INDEX.md`、`knowledge/01_fundamentals/02_iterators.md` 中错误标记为 Rust 1.96 → 修正为 **1.94**
-- **`LazyLock::get()` 补充**: `docs/06_toolchain/06_19_rust_1_96_features.md` 新增 `LazyLock`/`LazyCell` 访问器 (`get`, `get_mut`, `force_mut`) 章节；`knowledge/INDEX.md` 1.96 表格同步补充
+- **`array_windows` 版本修正**: `knowledge/INDEX.md`、`knowledge/01_fundamentals/04_iterators.md` 中错误标记为 Rust 1.96 → 修正为 **1.94**
+- **`LazyLock::get()` 补充**: `docs/09_toolchain/08_rust_1_96_features.md` 新增 `LazyLock`/`LazyCell` 访问器 (`get`, `get_mut`, `force_mut`) 章节；`knowledge/INDEX.md` 1.96 表格同步补充
 - **`docs/README.md` 计数修正**: 6 个子目录文件数统计更新（`01_learning` 7→10, `02_reference` 31→38, `03_practice` 2→17, `05_guides` 30→36, `06_toolchain` 21→17, `07_project` 14→16）
-- **`docs/03_practice/README.md` 补链接**: 新增 `03_cross_module_practical_projects_2025_10_25.md` 导航
+- **`docs/05_practice/README.md` 补链接**: 新增 `03_cross_module_practical_projects_2025_10_25.md` 导航
 
 ### 🧹 Phase 1 技术债务清理
 
@@ -1506,7 +1506,7 @@
   - `book/` HTML 为生成产物，待重新生成
 - **WASI 目标更新**: `wasm32-wasi` → `wasm32-wasip1` 迁移已确认完成，残余引用均为历史归档文档，无需修改
 - **async-trait 文档修复**: 分析确认所有 `dyn Trait` 源码用法需保留至 AFIDT 稳定 (1.97+)；已修复 8 处静态分发场景的错误 `#[async_trait]` 使用（c10_networks README、axum deep dive、async closures 示例、c08/c04 设计模式文档等）
-- **Rust 1.96 特性补全**: `LazyLock::get()`/`get_mut()`/`force_mut()` 访问器方法补入 `docs/06_toolchain/06_19_rust_1_96_features.md` 和 `knowledge/INDEX.md`
+- **Rust 1.96 特性补全**: `LazyLock::get()`/`get_mut()`/`force_mut()` 访问器方法补入 `docs/09_toolchain/08_rust_1_96_features.md` 和 `knowledge/INDEX.md`
 - **array_windows 版本勘误**: 1.96 → 1.94（INDEX.md、02_iterators.md 共 5 处）
 - **book/ HTML 重新生成**: `mdbook build` 完成，同步了所有源文件修复
 - **历史损坏文本修复**: 修复了 concept/ 中 6 处之前的自动替换损坏（`Tokio（async-std 已于...）` 等）
@@ -1676,7 +1676,7 @@
 
 - **docs/**: 修复 981 个死链接 → 0（6,554 个相对链接全部有效）
   - 归档文件重定向：`RUST_194_MIGRATION_GUIDE.md`、`rust_194_features_cheatsheet.md`、`macros_cheatsheet.md`、`design_patterns_cheatsheet.md` 等迁移至 `docs/archive/`
-  - 路径深度修正：`docs/research_notes/` 深层子目录中的 `PERFORMANCE_TUNING_GUIDE.md` 等链接
+  - 路径深度修正：`docs/12_research_notes/` 深层子目录中的 `PERFORMANCE_TUNING_GUIDE.md` 等链接
   - 已删除文件处理：`DOCS_STRUCTURE_OVERVIEW.md`、`RESEARCH_NOTES_CRITICAL_ANALYSIS...` 等 6 个已删除文件的链接转为纯文本
 - **knowledge/**: 修复 10 个死链接 → 0
   - `AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md` 中的跨目录链接深度修正

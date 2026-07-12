@@ -1202,7 +1202,7 @@ hp[0].store(null_mut(), Ordering::SeqCst);
 
 ## 补充视角：无锁数据结构选择指南
 
-> 本节选编自 `crates/c05_threads/docs/04_lock_free_programming.md`，
+> 本节选编自 `crates/c05_threads/docs/07_lock_free_programming.md`，
 > 作为 canonical 无锁编程概念页的工程实践补充。
 
 ### 数据结构选择矩阵

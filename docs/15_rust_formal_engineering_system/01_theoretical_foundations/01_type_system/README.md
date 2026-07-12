@@ -1,0 +1,257 @@
+# 类型系统理论 {#类型系统理论}
+>
+> **EN**: Type System Index
+> **Summary**: 类型系统理论 Type System Index. (stub/archive redirect)
+> **分级**: [B]
+> **Bloom 层级**: L5-L6
+> **创建日期**: 2026-02-20
+> **最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **状态**: ✅ 已完成
+> 内容已整合至： [type_theory/](../../../12_research_notes/05_type_theory/README.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/01_foundation/02_type_system/01_type_system.md`](../../../../concept/01_foundation/02_type_system/01_type_system.md)
+> - [`concept/04_formal/00_type_theory/01_type_theory.md`](../../../../concept/04_formal/00_type_theory/01_type_theory.md)
+> - [`concept/04_formal/00_type_theory/02_subtype_variance.md`](../../../../concept/04_formal/00_type_theory/02_subtype_variance.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
+
+- [类型系统（Type System）基础](../../../12_research_notes/05_type_theory/05_type_system_foundations.md)
+- [Trait 系统形式化](../../../12_research_notes/05_type_theory/04_trait_system_formalization.md)
+- [型变理论](../../../12_research_notes/05_type_theory/06_variance_theory.md)
+- 生命周期（Lifetimes）形式化
+
+## 知识结构思维导图 {#知识结构思维导图}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```mermaid
+mindmap
+  root((类型系统理论))
+    Curry-Howard对应
+      类型即命题
+      程序即证明
+    泛型多态
+      全称量词
+      约束量词
+    型变理论
+      协变
+      逆变
+      不变
+    类型推导
+      Hindley-Milner
+      自动推断
+    类型安全
+      编译时检查
+      空指针安全
+```
+
+## 与核心文档的关联 {#与核心文档的关联}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+| 本文档 | 核心文档 | 关系 |
+| :--- | :--- | :--- |
+| 本README | research_notes/type_theory/ | 索引/重定向 |
+
+[返回主索引](../../00_master_index.md)
+
+---
+
+## 形式化链接 {#形式化链接}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+| 文档 | 路径 | 内容 |
+| :--- | :--- | :--- |
+| **类型系统基础** | [../../../12_research_notes/05_type_theory/05_type_system_foundations.md](../../../12_research_notes/05_type_theory/05_type_system_foundations.md) | Curry-Howard 对应、类型推导算法 |
+| **Trait 系统形式化** | [../../../12_research_notes/05_type_theory/04_trait_system_formalization.md](../../../12_research_notes/05_type_theory/04_trait_system_formalization.md) | 类型类、关联类型、Orphan 规则 |
+| **型变理论** | [../../../12_research_notes/05_type_theory/06_variance_theory.md](../../../12_research_notes/05_type_theory/06_variance_theory.md) | 型变规则证明、类型构造器 |
+| **生命周期形式化** | ../../../12_research_notes/02_formal_methods/06_lifetime_formalization.md | 生命周期作为区域、子类型关系 |
+| **证明索引** | [../../../12_research_notes/03_formal_proofs/21_proof_index.md](../../../12_research_notes/03_formal_proofs/21_proof_index.md) | 类型安全相关证明 |
+| **工具指南** | [../../../12_research_notes/10_tutorials_and_guides/16_tools_guide.md](../../../12_research_notes/10_tutorials_and_guides/16_tools_guide.md) | 类型验证工具使用 |
+
+---
+
+## 类型系统核心概念 {#类型系统核心概念}
+
+### 类型即命题（Curry-Howard 对应） {#类型即命题curry-howard-对应}
+
+> **来源: [ACM](https://dl.acm.org/)**
+
+在 Rust 类型系统中，类型对应于逻辑命题，程序对应于证明：
+
+```rust
+// 简单类型对应真值
+// () : 单位类型 = 真（True）
+// !  :  never 类型 = 假（False，逻辑矛盾）
+
+// 积类型（Product Type）对应逻辑与
+// (A, B) 对应 A ∧ B
+fn pair_type() -> (i32, String) {
+    (42, String::from("hello"))  // 证明 42 ∧ "hello"
+}
+
+// 和类型（Sum Type）对应逻辑或
+// Result<A, B> 对应 A ∨ B
+fn sum_type() -> Result<i32, String> {
+    Ok(42)  // 证明左支：存在 i32
+    // Err("error".to_string())  // 或右支：存在 String
+}
+
+// 函数类型对应逻辑蕴含
+// A -> B 对应 A → B
+fn implication(x: i32) -> String {
+    x.to_string()  // 给定 i32，可以构造 String
+}
+```
+
+### 泛型与参数多态 {#泛型与参数多态}
+
+> **来源: [IEEE](https://standards.ieee.org/)**
+
+```rust
+// 全称量词（∀）的 Rust 表达
+// id :: ∀a. a -> a
+fn id<T>(x: T) -> T {
+    x
+}
+
+// 约束全称量词
+// show :: ∀a. Show a => a -> String
+fn show<T: ToString>(x: T) -> String {
+    x.to_string()
+}
+
+// 高阶类型（类型构造器）
+// Vec : Type -> Type
+// Vec<i32> : Type
+struct Container<T>(Vec<T>);
+
+// 关联类型（类型族）
+trait ContainerTrait {
+    type Item;  // 关联类型
+    fn get(&self) -> Option<&Self::Item>;
+}
+
+impl<T> ContainerTrait for Container<T> {
+    type Item = T;
+    fn get(&self) -> Option<&T> {
+        self.0.first()
+    }
+}
+```
+
+### 型变（Variance） {#型变variance}
+
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+
+型变描述复合类型如何随其组件类型的子类型关系变化：
+
+```rust
+// 协变（Covariant）：保持子类型方向
+// &'a T 对于 'a 和 T 都是协变的
+fn covariance<'a, 'b: 'a>(x: &'b str) -> &'a str {
+    x  // 'b <: 'a 意味着 &'b str <: &'a str
+}
+
+// 逆变（Contravariant）：反转子类型方向
+// fn(T) -> U 对于 T 是逆变的
+fn contravariance<F>(f: F)
+where
+    F: Fn(&'static str),  // 接受 &'static str
+{
+    let s: &str = "hello";
+    f(s);  // 可以传入生命周期更短的引用
+}
+
+// 不变（Invariant）：无子类型关系
+// &mut T 对于 T 是不变的
+fn invariance(x: &mut &'static str) {
+    // x 只能接受 &'static str，不能接受 &str
+}
+
+// 类型构造器的型变
+// Vec<T> : 对 T 协变
+// Cell<T> : 对 T 不变
+// fn(T) -> U : 对 T 逆变，对 U 协变
+```
+
+### 类型推导 {#类型推导}
+
+```rust,ignore
+// Hindley-Milner 类型推导的 Rust 实现
+// 编译器自动推断最一般的类型
+
+fn type_inference() {
+    let x = 5;           // 推断为 i32（默认整数类型）
+    let y = vec![x];     // 推断为 Vec<i32>
+    let z = &y;          // 推断为 &Vec<i32>
+
+    // 泛型函数的类型推导
+    let id_result = id(x);  // T 被实例化为 i32
+
+    // 闭包类型推导
+    let add = |a, b| a + b;  // 推断为 impl Fn(i32, i32) -> i32
+    let sum = add(1, 2);
+}
+
+// 显式类型标注与推导结合
+fn mixed_inference<T: Default>(items: &[T]) -> Vec<T> {
+    let mut result = Vec::new();  // 推断为 Vec<T>
+    for item in items {
+        result.push(T::default());
+    }
+    result
+}
+```
+
+### 类型安全保证 {#类型安全保证}
+
+```rust
+// 类型系统防止的操作
+// 以下代码无法编译（故意注释掉）
+
+fn type_safety() {
+    let x: i32 = 5;
+    // let y: String = x;  // 错误：类型不匹配
+
+    let v = vec![1, 2, 3];
+    // let s: String = v;  // 错误：类型不匹配
+
+    // 空指针安全
+    let opt: Option<i32> = Some(5);
+    // let val = opt + 1;  // 错误：Option<i32> 不能加 i32
+
+    match opt {
+        Some(val) => println!("{}", val + 1),  // 正确：在匹配分支中解包
+        None => println!("No value"),
+    }
+}
+```
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/05_international_authority_index.md)
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 权威来源索引 {#权威来源索引}
+
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
+> **来源: [ACM - Type Systems](https://dl.acm.org/)**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**

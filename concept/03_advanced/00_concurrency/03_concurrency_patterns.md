@@ -76,7 +76,7 @@
   - [补充视角：并发设计模式实践](#补充视角并发设计模式实践)
     - [模式特征对比](#模式特征对比)
     - [选择建议](#选择建议)
-  - [迁移内容（来自 `crates/c05_threads/docs/02_message_passing.md`）](#迁移内容来自-cratesc05_threadsdocs02_message_passingmd)
+  - [迁移内容（来自 `crates/c05_threads/docs/03_message_passing.md`）](#迁移内容来自-cratesc05_threadsdocs02_message_passingmd)
   - [🎯 消息传递核心知识图谱](#-消息传递核心知识图谱)
     - [消息传递概念关系图](#消息传递概念关系图)
     - [通道数据流图](#通道数据流图)
@@ -88,7 +88,7 @@
   - [📋 快速参考](#-快速参考)
     - [常用通道API](#常用通道api)
     - [错误类型速查](#错误类型速查)
-  - [迁移内容（来自 `crates/c05_threads/docs/05_message_passing.md`）](#迁移内容来自-cratesc05_threadsdocs05_message_passingmd)
+  - [迁移内容（来自 `crates/c05_threads/docs/10_message_passing.md`）](#迁移内容来自-cratesc05_threadsdocs05_message_passingmd)
   - [概述](#概述)
   - [Actor模型实现](#actor模型实现)
     - [1. 基础Actor框架](#1-基础actor框架)
@@ -1223,7 +1223,7 @@ fn transfer(from: &Account, to: &Account, amount: i32) {
 
 ## 补充视角：并发模式选择矩阵
 
-> 本节选编自 `crates/c05_threads/docs/03_concurrency_patterns.md`，
+> 本节选编自 `crates/c05_threads/docs/05_concurrency_patterns.md`，
 > 作为 canonical 并发模式概念页的工程实践补充。
 
 ### 模式适用场景
@@ -1252,7 +1252,7 @@ fn transfer(from: &Account, to: &Account, amount: i32) {
 
 ## 补充视角：并发设计模式实践
 
-> 本节选编自 `crates/c09_design_pattern/docs/tier_02_guides/04_concurrency_patterns_guide.md`，
+> 本节选编自 `crates/c09_design_pattern/docs/tier_02_guides/05_concurrency_patterns_guide.md`，
 > 作为 canonical 并发模式概念页的工程实践补充。
 
 ### 模式特征对比
@@ -1274,11 +1274,11 @@ fn transfer(from: &Account, to: &Account, amount: i32) {
 
 ---
 
-## 迁移内容（来自 `crates/c05_threads/docs/02_message_passing.md`）
+## 迁移内容（来自 `crates/c05_threads/docs/03_message_passing.md`）
 
-> <!-- migrated from crates/c05_threads/docs/02_message_passing.md -->
+> <!-- migrated from crates/c05_threads/docs/03_message_passing.md -->
 >
-> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/02_message_passing.md` 迁移至本权威页。
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/03_message_passing.md` 迁移至本权威页。
 
 ## 🎯 消息传递核心知识图谱
 
@@ -1462,11 +1462,11 @@ mindmap
 
 ---
 
-## 迁移内容（来自 `crates/c05_threads/docs/05_message_passing.md`）
+## 迁移内容（来自 `crates/c05_threads/docs/10_message_passing.md`）
 
-> <!-- migrated from crates/c05_threads/docs/05_message_passing.md -->
+> <!-- migrated from crates/c05_threads/docs/10_message_passing.md -->
 >
-> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/05_message_passing.md` 迁移至本权威页。
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/10_message_passing.md` 迁移至本权威页。
 
 ## 概述
 

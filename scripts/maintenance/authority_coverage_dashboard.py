@@ -2,7 +2,7 @@
 """
 Authority source coverage dashboard for docs/research_notes.
 
-Reads all Markdown files under docs/research_notes/, groups them by concept
+Reads all Markdown files under docs/12_research_notes/, groups them by concept
 family (概念族), and produces a Markdown table with the following metrics:
 
 - Number of files per family.
@@ -224,7 +224,7 @@ def render_markdown(
     family_rows: dict[str, dict[str, object]], overall: dict[str, object]
 ) -> str:
     lines: list[str] = []
-    lines.append("# docs/research_notes 权威来源覆盖率仪表板\n")
+    lines.append("# docs/12_research_notes 权威来源覆盖率仪表板\n")
     lines.append(
         f"- **总 Markdown 文件数**：{overall['total_files']}"
     )
@@ -288,7 +288,7 @@ def render_markdown(
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="权威来源覆盖率仪表板（docs/research_notes）。"
+        description="权威来源覆盖率仪表板（docs/12_research_notes）。"
     )
     parser.add_argument(
         "--output",

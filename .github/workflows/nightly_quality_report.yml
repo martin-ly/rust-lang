@@ -53,7 +53,7 @@ jobs:
       - name: Install mdbook
         run: cargo install mdbook --locked
 
-      # 与 scripts/run_quality_gates.sh 对齐：14 阻断门 + 4 语义观察门。
+      # 与 scripts/run_quality_gates.sh 对齐：14 阻断门 + 6 语义观察门。
       # 阻断门（10 基础 + 4 已转正 strict）失败才创建 issue；观察门仅记录结果（continue-on-error 语义）。
       - name: Run all quality gates
         id: gates
@@ -76,15 +76,16 @@ jobs:
           echo "kg_shapes="$(python scripts/check_kg_shapes.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           echo "canonical_uniqueness="$(python scripts/check_canonical_uniqueness.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           echo "concept_consistency="$(python scripts/concept_consistency_auditor.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
-          # --- 4 语义观察门（continue-on-error，不触发 issue） ---
+          # --- 6 语义观察门（continue-on-error，不触发 issue） ---
           echo "metadata="$(python scripts/check_metadata_consistency.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           python scripts/detect_content_overlap_v2.py --budget 999999 >/dev/null 2>&1
           python scripts/triage_overlap.py >/dev/null 2>&1
           ACTIONABLE=$(python -c "import glob,json; s=json.load(open(sorted(glob.glob('reports/OVERLAP_TRIAGE_*.json'))[-1],encoding='utf-8'))['summary']; print(s.get('MERGE',0)+s.get('DOCS_INTERNAL',0))")
           echo "overlap_v2_actionable=$ACTIONABLE" >> $GITHUB_OUTPUT
-          if [ "$ACTIONABLE" -gt 53 ]; then echo "overlap_v2=warn" >> $GITHUB_OUTPUT; else echo "overlap_v2=passed" >> $GITHUB_OUTPUT; fi
+          if [ "$ACTIONABLE" -gt 54 ]; then echo "overlap_v2=warn" >> $GITHUB_OUTPUT; else echo "overlap_v2=passed" >> $GITHUB_OUTPUT; fi
           echo "semantic_health="$(python scripts/semantic_health.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           echo "authority_coverage="$(python scripts/check_concept_authority_coverage.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          echo "naming="$(python scripts/check_naming_convention.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
 
       - name: Upload reports as artifacts
         uses: actions/upload-artifact@v4
@@ -128,7 +129,8 @@ jobs:
               'Metadata Consistency (observe)': '${{ steps.gates.outputs.metadata }}',
               'Content Overlap v2 (observe, actionable=${{ steps.gates.outputs.overlap_v2_actionable }})': '${{ steps.gates.outputs.overlap_v2 }}',
               'Semantic Health (observe)': '${{ steps.gates.outputs.semantic_health }}',
-              'Authority Coverage (observe)': '${{ steps.gates.outputs.authority_coverage }}'
+              'Authority Coverage (observe)': '${{ steps.gates.outputs.authority_coverage }}',
+              'Naming Convention (observe)': '${{ steps.gates.outputs.naming }}'
             };
             const summary = Object.entries(jobs)
               .map(([name, result]) => `- ${result === 'passed' ? '✅' : result === 'warn' ? '⚠️' : '❌'} ${name}`)

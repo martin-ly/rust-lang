@@ -1069,7 +1069,7 @@ fn test_compile_fail() {
 
 ## 补充视角：C11 宏系统一页纸总结
 
-> 来源：`crates/c11_macro_system_proc/docs/one_page_summary.md`
+> 来源：`crates/c11_macro_system_proc/docs/02_one_page_summary.md`
 > 按 AGENTS.md §6.4 迁移至此，作为 canonical 过程宏概念页的速查补充。
 
 ### 核心概念

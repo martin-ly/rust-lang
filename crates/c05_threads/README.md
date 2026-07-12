@@ -579,10 +579,10 @@ cargo test rust_192_features
 深入学习并发编程的形式化理论基础：
 
 - ⚡ **[并发模型理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/04_concurrency_models)** - 并发系统的形式化定义和证明
-- 🔄 **[所有权与借用理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/03_ownership_borrowing/README.md)** - 并发环境下的所有权语义
-- 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)** - Send/Sync 特质的形式化描述
-- 🔒 **[内存安全语义](../../docs/rust-formal-engineering-system/01_theoretical_foundations/02_memory_safety/README.md)** - 并发环境下的内存安全保证
-- 🎭 **[同步编程范式](../../docs/rust-formal-engineering-system/02_programming_paradigms/01_synchronous/README.md)** - 同步并发编程的形式化理论
+- 🔄 **[所有权与借用理论](../../docs/15_rust_formal_engineering_system/01_theoretical_foundations/03_ownership_borrowing/README.md)** - 并发环境下的所有权语义
+- 🎯 **[类型系统理论](../../docs/15_rust_formal_engineering_system/01_theoretical_foundations/01_type_system/README.md)** - Send/Sync 特质的形式化描述
+- 🔒 **[内存安全语义](../../docs/15_rust_formal_engineering_system/01_theoretical_foundations/04_memory_safety/README.md)** - 并发环境下的内存安全保证
+- 🎭 **[同步编程范式](../../docs/15_rust_formal_engineering_system/02_programming_paradigms/01_synchronous/README.md)** - 同步并发编程的形式化理论
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解
 
@@ -658,7 +658,7 @@ cargo test rust_192_features
 
 ### 项目文档
 
-- **[项目最佳实践指南](../../docs/05_guides/best_practices.md)** - 代码质量、性能优化、测试指南
+- **[项目最佳实践指南](../../docs/08_usage_guides/28_best_practices.md)** - 代码质量、性能优化、测试指南
 - **[性能调优指南](../../docs/PERFORMANCE_TUNING_GUIDE.md)** - 完整的性能调优指南
 - **[故障排查指南](../../docs/05_guides/TROUBLESHOOTING_GUIDE.md)** - 常见问题排查和解决方案
 

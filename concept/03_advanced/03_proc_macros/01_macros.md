@@ -2130,7 +2130,7 @@ mod internal {
 | 类型系统（Type System） | [](../../01_foundation/02_type_system/01_type_system.md) | 宏与类型交互 |
 | 形式化方法 | [](../../07_future/04_research_and_experimental/02_formal_methods.md) | 宏安全验证 |
 | 语言演进 | [](../../07_future/04_research_and_experimental/03_evolution.md) | 宏系统演进 |
-| 编译期计算 | [](03_const_generics.md) | const fn 替代宏的趋势 |
+| 编译期计算 | [const generics](../../02_intermediate/01_generics/02_const_generics.md) | const fn 替代宏的趋势 |
 
 ---
 

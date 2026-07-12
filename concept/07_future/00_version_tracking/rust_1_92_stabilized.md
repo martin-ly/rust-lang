@@ -20,7 +20,7 @@
 
 ## 一、所有权、借用与生命周期
 
-> 来源：`crates/c01_ownership_borrow_scope/docs/rust_192_ownership_borrowing_lifetime_improvements.md`
+> 来源：`crates/c01_ownership_borrow_scope/docs/12_rust_192_ownership_borrowing_lifetime_improvements.md`
 
 ## 📊 目录
 
@@ -201,7 +201,7 @@
   - [五、生态与工具链关联](#五生态与工具链关联)
   - [补充视角：宏系统改进](#补充视角宏系统改进)
   - [补充视角：算法与数据结构改进](#补充视角算法与数据结构改进)
-  - [迁移内容（来自 `crates/c05_threads/docs/rust_192_threads_improvements.md`）](#迁移内容来自-cratesc05_threadsdocsrust_192_threads_improvementsmd)
+  - [迁移内容（来自 `crates/c05_threads/docs/15_rust_192_threads_improvements.md`）](#迁移内容来自-cratesc05_threadsdocsrust_192_threads_improvementsmd)
   - [概述](#概述-4)
   - [MaybeUninit 在并发编程中的应用](#maybeuninit-在并发编程中的应用)
     - [Rust 1.92.0 改进概述](#rust-1920-改进概述-15)
@@ -221,7 +221,7 @@
     - [性能影响](#性能影响)
     - [使用示例](#使用示例-1)
   - [总结](#总结-3)
-  - [迁移内容（来自 `crates/c06_async/docs/rust_192_async_improvements.md`）](#迁移内容来自-cratesc06_asyncdocsrust_192_async_improvementsmd)
+  - [迁移内容（来自 `crates/c06_async/docs/08_rust_192_async_improvements.md`）](#迁移内容来自-cratesc06_asyncdocsrust_192_async_improvementsmd)
   - [概述](#概述-5)
   - [Rust 1.92.0 异步改进](#rust-1920-异步改进)
     - [1. 改进的异步运行时性能](#1-改进的异步运行时性能)
@@ -587,7 +587,7 @@ Rust 1.92.0 在所有权、借用和生命周期系统方面带来了：
 
 ## 二、类型系统改进
 
-> 来源：`crates/c02_type_system/docs/rust_192_type_system_improvements.md`
+> 来源：`crates/c02_type_system/docs/06_rust_192_type_system_improvements.md`
 
 ## 📊 目录
 
@@ -1196,7 +1196,7 @@ Rust 1.92.0 在类型系统方面带来了重要的改进：
 
 ## 三、类型系统特性指南
 
-> 来源：`crates/c02_type_system/docs/rust_192_features_guide.md`
+> 来源：`crates/c02_type_system/docs/05_rust_192_features_guide.md`
 
 ## 📋 目录
 
@@ -1673,7 +1673,7 @@ unsafe { &*self.storage.as_ptr() }
 
 ## 四、控制流与函数
 
-> 来源：`crates/c03_control_fn/docs/rust_192_control_flow_improvements.md`
+> 来源：`crates/c03_control_fn/docs/12_rust_192_control_flow_improvements.md`
 
 ## 📊 目录
 
@@ -2137,7 +2137,7 @@ Rust 1.91/1.92 引入的语言特性需要工具链与生态库协同：
 
 ## 补充视角：宏系统改进
 
-> 来源：`crates/c11_macro_system_proc/docs/rust_192_macro_improvements.md`
+> 来源：`crates/c11_macro_system_proc/docs/04_rust_192_macro_improvements.md`
 
 Rust 1.92.0 在宏（Macro）系统方面的改进方向包括：
 
@@ -2156,7 +2156,7 @@ Rust 1.92.0 在宏（Macro）系统方面的改进方向包括：
 
 ## 补充视角：算法与数据结构改进
 
-> 来源：`crates/c08_algorithms/docs/rust_192_algorithms_improvements.md`
+> 来源：`crates/c08_algorithms/docs/10_rust_192_algorithms_improvements.md`
 
 Rust 1.92.0 在算法实现相关的标准库 API 上带来以下增强：
 
@@ -2175,11 +2175,11 @@ Rust 1.92.0 在算法实现相关的标准库 API 上带来以下增强：
 
 ---
 
-## 迁移内容（来自 `crates/c05_threads/docs/rust_192_threads_improvements.md`）
+## 迁移内容（来自 `crates/c05_threads/docs/15_rust_192_threads_improvements.md`）
 
-> <!-- migrated from crates/c05_threads/docs/rust_192_threads_improvements.md -->
+> <!-- migrated from crates/c05_threads/docs/15_rust_192_threads_improvements.md -->
 >
-> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/rust_192_threads_improvements.md` 迁移至本权威页。
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/15_rust_192_threads_improvements.md` 迁移至本权威页。
 
 ## 概述
 
@@ -2389,11 +2389,11 @@ match result {
 
 ---
 
-## 迁移内容（来自 `crates/c06_async/docs/rust_192_async_improvements.md`）
+## 迁移内容（来自 `crates/c06_async/docs/08_rust_192_async_improvements.md`）
 
-> <!-- migrated from crates/c06_async/docs/rust_192_async_improvements.md -->
+> <!-- migrated from crates/c06_async/docs/08_rust_192_async_improvements.md -->
 >
-> 以下内容根据 AGENTS.md §6.4 从 `crates/c06_async/docs/rust_192_async_improvements.md` 迁移至本权威页。
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c06_async/docs/08_rust_192_async_improvements.md` 迁移至本权威页。
 
 ## 概述
 
@@ -2556,7 +2556,7 @@ async fn main() -> io::Result<()> {
 
 ## 设计模式相关改进
 
-> 内容来源：`crates/c09_design_pattern/docs/rust_192_design_pattern_improvements.md`，已按 AGENTS.md §6.4 迁移至此。
+> 内容来源：`crates/c09_design_pattern/docs/19_rust_192_design_pattern_improvements.md`，已按 AGENTS.md §6.4 迁移至此。
 
 Rust 1.92.0 对常用设计模式的实现带来了以下改进：
 

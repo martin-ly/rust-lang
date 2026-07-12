@@ -125,8 +125,8 @@
 
 ### 快速开始
 
-- [快速开始指南](docs/tutorials/quick_start.md)
-- [主索引](docs/00_master_index.md)
+- [快速开始指南](docs/tier_05_tutorials/04_quick_start.md)
+- [主索引](docs/00_meta/00_master_index.md)
 - [API文档](docs/references/api_documentation.md)
 
 ## 🚀 使用方式

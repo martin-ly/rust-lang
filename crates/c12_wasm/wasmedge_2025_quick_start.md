@@ -20,9 +20,9 @@
 
 | 文档                                                                       | 内容                           | 难度       | 时长     |
 | :--- | :--- | :--- | :--- |
-| [06\_容器技术深度集成](docs/tier_04_advanced/06_container_technology_integration.md)     | Docker/K8s/containerd 完整集成 | ⭐⭐⭐⭐⭐ | 2-3 小时 |
-| [07\_云原生CI_CD实践](docs/tier_04_advanced/07_cloud_native_ci_cd_practice.md)       | GitHub Actions/GitLab CI 流程  | ⭐⭐⭐⭐⭐ | 1-2 小时 |
-| [08\_监控与可观测性实践](docs/tier_04_advanced/08_monitoring_and_observability_practice.md) | Prometheus/Grafana/Loki/Jaeger | ⭐⭐⭐⭐⭐ | 2-3 小时 |
+| [06\_容器技术深度集成](docs/tier_04_advanced/05_container_technology_integration.md)     | Docker/K8s/containerd 完整集成 | ⭐⭐⭐⭐⭐ | 2-3 小时 |
+| [07\_云原生CI_CD实践](docs/tier_04_advanced/06_cloud_native_ci_cd_practice.md)       | GitHub Actions/GitLab CI 流程  | ⭐⭐⭐⭐⭐ | 1-2 小时 |
+| [08\_监控与可观测性实践](docs/tier_04_advanced/07_monitoring_and_observability_practice.md) | Prometheus/Grafana/Loki/Jaeger | ⭐⭐⭐⭐⭐ | 2-3 小时 |
 
 ---
 

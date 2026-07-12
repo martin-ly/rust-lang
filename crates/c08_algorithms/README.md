@@ -87,14 +87,14 @@
 
 ## 🌟 2025-10-20 核心增强更新
 
-- **📊 [知识图谱与概念关系](docs/knowledge_graph.md)** - 算法与数据结构完整体系
-- **📐 [多维矩阵对比分析](docs/multidimensional_matrix_comparison.md)** - 算法/数据结构全面对比
-- **🗺️ [Rust 1.93.0 算法思维导图](docs/mind_map.md)** ⭐
+- **📊 [知识图谱与概念关系](docs/02_knowledge_graph.md)** - 算法与数据结构完整体系
+- **📐 [多维矩阵对比分析](docs/05_multidimensional_matrix_comparison.md)** - 算法/数据结构全面对比
+- **🗺️ [Rust 1.93.0 算法思维导图](docs/04_mind_map.md)** ⭐
   - ASCII艺术图表 | 数据结构/算法分类/并发算法完整体系
   - 算法选择决策树 | 排序/搜索/图算法/并发选择指南
   - 3级学习路径(2-16周) | 问题诊断树
   - 时间空间复杂度对比 | Rayon并行算法实践
-- **💻 [Rust 1.93.0 实战示例集](docs/rust_190_examples_collection.md)** ⭐
+- **💻 [Rust 1.93.0 实战示例集](docs/08_rust_190_examples_collection.md)** ⭐
   - 850+行可运行代码 | LRU缓存/Trie树/图算法完整实现
   - Rust 1.93.0特性 | 泛型/所有权/并发算法最佳实践
   - Rayon并行算法 | 并行排序/Map-Reduce实战
@@ -150,7 +150,7 @@
   - **总计**: 132+ 题目，124 个测试用例，**100% 测试通过率**
   - 更多分类和题目实现中...
 
-详细文档请查看: [docs/leetcode_with_rust191.md](docs/leetcode_with_rust191.md)
+详细文档请查看: [docs/03_leetcode_with_rust191.md](docs/03_leetcode_with_rust191.md)
 
 ---
 
@@ -357,7 +357,7 @@ cargo run -p c08_algorithms --bin bench_report > report.csv
 
 **📚 传统文档索引** (保留):
 
-- [完整文档索引](docs/00_master_index.md) - 旧版主索引
+- [完整文档索引](docs/00_meta/00_master_index.md) - 旧版主索引
 - [文档入口](docs/README.md) - 文档README
 
 本项目拥有完整的文档体系，包含 **49+ 个文档**（含新建导航），按内容类型和难度分为多个主要目录：
@@ -365,12 +365,12 @@ cargo run -p c08_algorithms --bin bench_report > report.csv
 ### 🆕 新增学习资源 (2025-10-19)
 
 | 资源                                                       | 说明                     | 特色          |
-| :--- | :--- | :--- || [知识图谱](docs/knowledge_graph.md)                        | 算法关系、依赖、演化路径 | 📊 图表化展示 |
-| [多维矩阵对比](docs/multidimensional_matrix_comparison.md) | 全方位算法对比分析       | 🎯 决策支持   |
-| [思维导图](docs/mind_map.md)                               | 算法学习路径可视化       | 🧠 结构化学习 |
+| :--- | :--- | :--- || [知识图谱](docs/02_knowledge_graph.md)                        | 算法关系、依赖、演化路径 | 📊 图表化展示 |
+| [多维矩阵对比](docs/05_multidimensional_matrix_comparison.md) | 全方位算法对比分析       | 🎯 决策支持   |
+| [思维导图](docs/04_mind_map.md)                               | 算法学习路径可视化       | 🧠 结构化学习 |
 | [Rust 1.93.0 示例集](docs/RUST_192_RICH_EXAMPLES.md)       | 60+ 丰富的代码示例       | 💻 实战代码   |
-| [交互式学习指南](docs/interactive_learning_guide.md)       | 渐进式学习路径           | 🎓 自我评估   |
-| [可视化示例库](docs/visual_code_examples.md)               | 算法执行过程可视化       | 🎨 动画演示   |
+| [交互式学习指南](docs/01_interactive_learning_guide.md)       | 渐进式学习路径           | 🎓 自我评估   |
+| [可视化示例库](docs/11_visual_code_examples.md)               | 算法执行过程可视化       | 🎨 动画演示   |
 
 ### 📚 文档分类
 
@@ -406,7 +406,7 @@ cargo run -p c08_algorithms --bin bench_report > report.csv
 #### 4. ✨ Rust 特性 (tier_03_references/) - ⭐⭐
 
 - [Rust 1.90 特性参考](docs/tier_03_references/03_rust_190_features_reference.md)
-- [Rust 1.93.0 算法特性](docs/rust_192_algorithms_improvements.md) ⭐ 最新
+- [Rust 1.93.0 算法特性](docs/10_rust_192_algorithms_improvements.md) ⭐ 最新
 
 #### 5. 📚 参考资料 (tier_03_references/) - ⭐~⭐⭐
 
@@ -415,7 +415,7 @@ cargo run -p c08_algorithms --bin bench_report > report.csv
 
 ### 🎓 学习路径
 
-详细的学习路径请查看 [docs/00_master_index.md](docs/00_master_index.md)，包括：
+详细的学习路径请查看 [docs/00_meta/00_master_index.md](docs/00_meta/00_master_index.md)，包括：
 
 - **初学者路径** (2-3 周) - 掌握基础算法和数据结构
 - **进阶路径** (3-4 周) - 异步编程和性能优化
@@ -513,7 +513,7 @@ cargo llvm-cov test --workspace --html
 
 ### 项目文档
 
-- **[项目最佳实践指南](../../docs/05_guides/best_practices.md)** - 代码质量、性能优化、测试指南
+- **[项目最佳实践指南](../../docs/08_usage_guides/28_best_practices.md)** - 代码质量、性能优化、测试指南
 - **[性能调优指南](../../docs/PERFORMANCE_TUNING_GUIDE.md)** - 完整的性能调优指南
 
 ## 📞 联系方式

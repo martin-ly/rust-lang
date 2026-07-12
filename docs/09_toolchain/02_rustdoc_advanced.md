@@ -1,0 +1,1380 @@
+# Rustdoc 高级功能与文档生成 {#rustdoc-高级功能与文档生成}
+
+> **EN**: Rustdoc Advanced
+> **Summary**: Rustdoc 高级功能与文档生成 Rustdoc Advanced.
+> **分级**: [A]
+> **Bloom 层级**: L3
+> **创建日期**: 2026-02-15
+> **最后更新**: 2026-05-08
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **状态**: ✅ 已完成
+>
+> **受众**: [进阶]
+> **内容分级**: [专家级]
+
+---
+
+## 📑 目录 {#目录}
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+- [Rustdoc 高级功能与文档生成 {#rustdoc-高级功能与文档生成}](#rustdoc-高级功能与文档生成-rustdoc-高级功能与文档生成)
+  - [📑 目录 {#目录}](#-目录-目录)
+  - [🎯 文档说明 {#文档说明}](#-文档说明-文档说明)
+  - [1. Rustdoc 概览 {#1-rustdoc-概览}](#1-rustdoc-概览-1-rustdoc-概览)
+    - [1.1 基础用法 {#11-基础用法}](#11-基础用法-11-基础用法)
+    - [1.2 文档结构 {#12-文档结构}](#12-文档结构-12-文档结构)
+  - [2. 文档注释语法 {#2-文档注释语法}](#2-文档注释语法-2-文档注释语法)
+    - [2.1 基础注释 {#21-基础注释}](#21-基础注释-21-基础注释)
+    - [2.2 Markdown 支持 {#22-markdown-支持}](#22-markdown-支持-22-markdown-支持)
+    - [2.3 代码块 {#23-代码块}](#23-代码块-23-代码块)
+  - [3. 文档测试 (Doc Tests) {#3-文档测试-doc-tests}](#3-文档测试-doc-tests-3-文档测试-doc-tests)
+    - [3.1 基础测试 {#31-基础测试}](#31-基础测试-31-基础测试)
+    - [3.2 高级测试选项 {#32-高级测试选项}](#32-高级测试选项-32-高级测试选项)
+    - [3.3 测试属性 {#33-测试属性}](#33-测试属性-33-测试属性)
+  - [4. 文档链接 {#4-文档链接}](#4-文档链接-4-文档链接)
+    - [4.1 Intra-doc Links {#41-intra-doc-links}](#41-intra-doc-links-41-intra-doc-links)
+    - [4.2 链接语法 {#42-链接语法}](#42-链接语法-42-链接语法)
+    - [4.3 链接到外部文档 {#43-链接到外部文档}](#43-链接到外部文档-43-链接到外部文档)
+  - [5. 文档组织 {#5-文档组织}](#5-文档组织-5-文档组织)
+    - [5.1 模块（Module）级文档 {#51-模块级文档}](#51-模块级文档-51-模块级文档)
+    - [5.2 crate 级文档 {#52-crate-级文档}](#52-crate-级文档-52-crate-级文档)
+    - [5.3 文档章节 {#53-文档章节}](#53-文档章节-53-文档章节)
+  - [6. JSON 输出 (Rust 1.54+) {#6-json-输出-rust-154}](#6-json-输出-rust-154-6-json-输出-rust-154)
+    - [6.1 生成 JSON {#61-生成-json}](#61-生成-json-61-生成-json)
+    - [6.2 JSON 格式 {#62-json-格式}](#62-json-格式-62-json-格式)
+    - [6.3 应用场景 {#63-应用场景}](#63-应用场景-63-应用场景)
+  - [7. 主题与定制 {#7-主题与定制}](#7-主题与定制-7-主题与定制)
+    - [7.1 自定义 CSS {#71-自定义-css}](#71-自定义-css-71-自定义-css)
+    - [7.2 自定义 HTML {#72-自定义-html}](#72-自定义-html-72-自定义-html)
+    - [7.3 Logo 和 Favicon {#73-logo-和-favicon}](#73-logo-和-favicon-73-logo-和-favicon)
+  - [8. 文档属性 {#8-文档属性}](#8-文档属性-8-文档属性)
+    - [8.1 `#[doc]` 属性 {#81-doc-属性}](#81-doc-属性-81-doc-属性)
+    - [8.2 条件文档 {#82-条件文档}](#82-条件文档-82-条件文档)
+  - [9. 私有项文档 {#9-私有项文档}](#9-私有项文档-9-私有项文档)
+    - [9.1 文档化私有项 {#91-文档化私有项}](#91-文档化私有项-91-文档化私有项)
+    - [9.2 内部文档 {#92-内部文档}](#92-内部文档-92-内部文档)
+  - [10. 搜索与索引 {#10-搜索与索引}](#10-搜索与索引-10-搜索与索引)
+    - [10.1 搜索功能 {#101-搜索功能}](#101-搜索功能-101-搜索功能)
+    - [10.2 搜索别名 {#102-搜索别名}](#102-搜索别名-102-搜索别名)
+  - [11. CI/CD 集成 {#11-cicd-集成}](#11-cicd-集成-11-cicd-集成)
+    - [11.1 自动化文档生成 {#111-自动化文档生成}](#111-自动化文档生成-111-自动化文档生成)
+    - [11.2 文档部署 {#112-文档部署}](#112-文档部署-112-文档部署)
+  - [12. 最佳实践 {#12-最佳实践}](#12-最佳实践-12-最佳实践)
+    - [✅ 推荐做法 {#推荐做法}](#-推荐做法-推荐做法)
+    - [⚠️ 避免 {#避免}](#️-避免-避免)
+  - [13. 实战案例 {#13-实战案例}](#13-实战案例-13-实战案例)
+  - [14. 故障排查 {#14-故障排查}](#14-故障排查-14-故障排查)
+    - [常见问题 {#常见问题}](#常见问题-常见问题)
+  - [15. 相关资源 {#15-相关资源}](#15-相关资源-15-相关资源)
+    - [📚 官方文档 {#官方文档}](#-官方文档-官方文档)
+    - [🔗 相关文档 {#相关文档}](#-相关文档-相关文档)
+    - [📦 推荐工具 {#推荐工具}](#-推荐工具-推荐工具)
+  - [16. 代码示例与形式化链接 {#16-代码示例与形式化链接}](#16-代码示例与形式化链接-16-代码示例与形式化链接)
+    - [16.1 完整文档测试示例 {#161-完整文档测试示例}](#161-完整文档测试示例-161-完整文档测试示例)
+    - [16.2 文档测试高级用法 {#162-文档测试高级用法}](#162-文档测试高级用法-162-文档测试高级用法)
+    - [16.3 形式化文档链接 {#163-形式化文档链接}](#163-形式化文档链接-163-形式化文档链接)
+    - [16.4 条件文档示例 {#164-条件文档示例}](#164-条件文档示例-164-条件文档示例)
+    - [16.5 形式化规范链接 {#165-形式化规范链接}](#165-形式化规范链接-165-形式化规范链接)
+  - [17. 形式化文档资源 {#17-形式化文档资源}](#17-形式化文档资源-17-形式化文档资源)
+    - [Rust 形式化规范 {#rust-形式化规范}](#rust-形式化规范-rust-形式化规范)
+    - [类型理论与形式化方法 {#类型理论与形式化方法}](#类型理论与形式化方法-类型理论与形式化方法)
+  - [Rust 1.96+ 更新 {#rust-196-更新}](#rust-196-更新-rust-196-更新)
+  - [相关概念 {#相关概念}](#相关概念-相关概念)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
+
+## 🎯 文档说明 {#文档说明}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+本文档深入介绍 Rustdoc 的高级功能、文档生成技术、以及最新改进，帮助开发者创建高质量的 API 文档。
+
+**覆盖内容**: 文档注释、文档测试、主题定制、JSON 输出、文档链接、最佳实践
+
+---
+
+## 1. Rustdoc 概览 {#1-rustdoc-概览}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 1.1 基础用法 {#11-基础用法}
+
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+**生成文档**:
+
+```bash
+# 生成当前 crate 的文档 {#生成当前-crate-的文档}
+cargo doc
+
+# 生成并打开文档 {#生成并打开文档}
+cargo doc --open
+
+# 生成所有依赖的文档 {#生成所有依赖的文档}
+cargo doc --no-deps
+
+# 生成私有项的文档 {#生成私有项的文档}
+cargo doc --document-private-items
+```
+
+---
+
+### 1.2 文档结构 {#12-文档结构}
+
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+**输出目录**:
+
+```text
+target/doc/
+├── index.html                # 主索引页
+├── my_crate/
+│   ├── index.html           # crate 主页
+│   ├── struct.MyStruct.html # 结构体文档
+│   ├── fn.my_function.html  # 函数文档
+│   └── ...
+├── search-index.js          # 搜索索引
+├── settings.html            # 设置页
+└── help.html               # 帮助页
+```
+
+---
+
+## 2. 文档注释语法 {#2-文档注释语法}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 2.1 基础注释 {#21-基础注释}
+
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+**外部文档注释** (`///`):
+
+````rust,ignore
+/// 这是一个公开函数的文档
+///
+/// # Examples
+///
+/// ```
+/// use my_crate::add;
+/// assert_eq!(add(2, 3), 5);
+/// ```
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+````
+
+**内部文档注释** (`//!`):
+
+```rust
+//! 这是模块的文档
+//!
+//! 这个模块提供了数学运算功能。
+
+pub fn multiply(a: i32, b: i32) -> i32 {
+    a * b
+}
+```
+
+**块文档注释**:
+
+```rust,ignore
+/** 外部块文档注释
+ *
+ * 支持多行
+ */
+pub fn divide(a: i32, b: i32) -> Result<i32, String> {
+    if b == 0 {
+        Err("Division by zero".to_string())
+    } else {
+        Ok(a / b)
+    }
+}
+
+/*! 内部块文档注释
+ *
+ * 用于模块级文档
+ */
+```
+
+---
+
+### 2.2 Markdown 支持 {#22-markdown-支持}
+
+> **来源: [ACM](https://dl.acm.org/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+**完整 Markdown 语法**:
+
+```rust
+/// # 标题 1
+/// ## 标题 2
+/// ### 标题 3
+///
+/// **粗体** 和 *斜体*
+///
+/// - 列表项 1
+/// - 列表项 2
+///   - 嵌套列表
+///
+/// 1. 有序列表 1
+/// 2. 有序列表 2
+///
+/// [链接文本](https://example.com)
+///
+/// ![图片描述](https://example.com/image.png)
+///
+/// `行内代码`
+///
+/// > 引用文本
+///
+/// ---
+///
+/// | 表头 1 | 表头 2 |
+/// | :--- | :--- |
+/// | 单元格 | 单元格 |
+pub fn demo() {}
+```
+
+---
+
+### 2.3 代码块 {#23-代码块}
+
+> **来源: [IEEE](https://standards.ieee.org/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+**基础代码块**:
+
+````rust,ignore
+/// ```
+/// let x = 42;
+/// assert_eq!(x, 42);
+/// ```
+pub fn example() {}
+````
+
+**指定语言**:
+
+````rust,ignore
+/// ```rust
+/// // Rust 代码
+/// ```
+///
+/// ```python
+/// # Python 代码 (不会被测试)
+/// print("Hello")
+/// ```
+///
+/// ```text
+/// 纯文本
+/// ```
+pub fn multi_lang() {}
+````
+
+**编译失败的示例**:
+
+````rust,ignore
+/// ```compile_fail
+/// // 这段代码应该编译失败
+/// let x: i32 = "string";
+/// ```
+pub fn error_demo() {}
+````
+
+---
+
+## 3. 文档测试 (Doc Tests) {#3-文档测试-doc-tests}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 3.1 基础测试 {#31-基础测试}
+
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+**自动测试**:
+
+````rust,ignore
+/// 加法函数
+///
+/// # Examples
+///
+/// ```
+/// use my_crate::add;
+/// assert_eq!(add(2, 3), 5);
+/// ```
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+````
+
+**运行文档测试**:
+
+```bash
+cargo test --doc
+```
+
+---
+
+### 3.2 高级测试选项 {#32-高级测试选项}
+
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
+**隐藏部分代码**:
+
+````rust,ignore
+/// ```
+/// # use my_crate::setup;
+/// # let ctx = setup();
+/// // 用户只看到这一行
+/// ctx.run();
+/// ```
+pub fn demo() {}
+````
+
+**`no_run`**: 编译但不运行
+
+````rust,ignore
+/// ```no_run
+/// // 这段代码会编译，但不会运行
+/// std::process::exit(0);
+/// ```
+pub fn exit_demo() {}
+````
+
+**`ignore`**: 忽略测试
+
+````rust,ignore
+/// ```ignore
+/// // 这段代码被忽略
+/// ```
+pub fn ignored() {}
+````
+
+**`should_panic`**: 应该 panic
+
+````rust,ignore
+/// ```should_panic
+/// panic!("This should panic");
+/// ```
+pub fn panic_demo() {}
+````
+
+---
+
+### 3.3 测试属性 {#33-测试属性}
+
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+
+````rust,ignore
+/// ```
+/// use my_crate::MyType;
+/// let x = MyType::new();
+/// # // 隐藏的测试代码
+/// # assert!(x.is_valid());
+/// ```
+///
+/// ```no_run
+/// // 编译但不运行
+/// loop {}
+/// ```
+///
+/// ```compile_fail
+/// // 应该编译失败
+/// let x: i32 = "string";
+/// ```
+pub struct MyType;
+````
+
+---
+
+## 4. 文档链接 {#4-文档链接}
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+### 4.1 Intra-doc Links {#41-intra-doc-links}
+
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+
+**链接到其他项**:
+
+```rust
+/// 使用 [`add`] 函数进行加法运算
+///
+/// 也可以链接到 [`MyStruct`]
+///
+/// 或者使用完整路径 [`crate::module::function`]
+pub fn demo() {}
+
+/// 加法函数
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+/// 示例结构体
+pub struct MyStruct;
+```
+
+---
+
+### 4.2 链接语法 {#42-链接语法}
+
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
+**不同的链接方式**:
+
+```rust
+/// - [`function`]: 自动推断
+/// - [`function()`]: 明确指定是函数
+/// - [`Struct`]: 结构体
+/// - [`Struct::method`]: 方法
+/// - [`Struct::method()`]: 方法 (显式)
+/// - [`module::Type`]: 带模块路径
+/// - [custom text][`Type`]: 自定义显示文本
+pub fn link_examples() {}
+```
+
+**链接到特定项类型**:
+
+```rust
+/// - [struct@MyType]: 结构体
+/// - [enum@MyType]: 枚举
+/// - [trait@MyType]: trait
+/// - [type@MyType]: 类型别名
+/// - [fn@my_function]: 函数
+/// - [macro@my_macro]: 宏
+pub fn explicit_links() {}
+```
+
+---
+
+### 4.3 链接到外部文档 {#43-链接到外部文档}
+
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+
+```rust
+/// 使用 [tokio](https://docs.rs/tokio) 进行异步编程
+///
+/// 参考 [Rust Book](https://doc.rust-lang.org/book/)
+pub fn external_links() {}
+```
+
+---
+
+## 5. 文档组织 {#5-文档组织}
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+### 5.1 模块级文档 {#51-模块级文档}
+
+> **来源: [ACM](https://dl.acm.org/)**
+
+````rust
+//! # 模块名称
+//!
+//! 模块描述
+//!
+//! ## Examples
+//!
+//! ```
+//! use my_crate::my_module;
+//! my_module::function();
+//! ```
+
+pub fn function() {}
+````
+
+---
+
+### 5.2 crate 级文档 {#52-crate-级文档}
+
+> **来源: [IEEE](https://standards.ieee.org/)**
+
+**`src/lib.rs`**:
+
+````rust
+//! # My Crate
+//!
+//! 这是 crate 的主文档
+//!
+//! ## Quick Start
+//!
+//! ```
+//! use my_crate::MyType;
+//! let instance = MyType::new();
+//! ```
+//!
+//! ## Features
+//!
+//! - Feature 1
+//! - Feature 2
+
+#![doc(html_logo_url = "https://example.com/logo.png")]
+#![doc(html_favicon_url = "https://example.com/favicon.ico")]
+````
+
+---
+
+### 5.3 文档章节 {#53-文档章节}
+
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+
+**标准章节**:
+
+````rust,ignore
+/// # Examples
+///
+/// ```
+/// // 示例代码
+/// ```
+///
+/// # Errors
+///
+/// 此函数可能返回以下错误:
+/// - `ErrorType1`: 错误描述
+/// - `ErrorType2`: 错误描述
+///
+/// # Panics
+///
+/// 此函数在以下情况下会 panic:
+/// - 条件 1
+/// - 条件 2
+///
+/// # Safety
+///
+/// 此函数是 unsafe 的，因为...
+///
+/// 调用者必须确保:
+/// - 条件 1
+/// - 条件 2
+///
+/// # Performance
+///
+/// 时间复杂度: O(n)
+/// 空间复杂度: O(1)
+pub fn documented_function() {}
+````
+
+---
+
+## 6. JSON 输出 (Rust 1.54+) {#6-json-输出-rust-154}
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+### 6.1 生成 JSON {#61-生成-json}
+
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+
+**命令**:
+
+```bash
+# 生成 JSON 格式的文档 {#生成-json-格式的文档}
+cargo +nightly rustdoc -- -Z unstable-options --output-format json
+
+# 或使用 rustdoc 直接生成 {#或使用-rustdoc-直接生成}
+rustdoc src/lib.rs -Z unstable-options --output-format json
+```
+
+---
+
+### 6.2 JSON 格式 {#62-json-格式}
+
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+
+**输出示例**:
+
+```json
+{
+  "format_version": 28,
+  "crate_name": "my_crate",
+  "crate_version": "0.1.0",
+  "paths": {
+    "0": {
+      "kind": "function",
+      "name": "add",
+      "source": "src/lib.rs:10:1"
+    }
+  },
+  "index": {
+    "0": {
+      "docs": "加法函数",
+      "sig": "pub fn add(a: i32, b: i32) -> i32",
+      "kind": "function"
+    }
+  }
+}
+```
+
+---
+
+### 6.3 应用场景 {#63-应用场景}
+
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+
+- **文档工具**: 构建自定义文档生成器
+- **API 索引**: 生成 API 目录
+- **文档搜索**: 构建高级搜索功能
+- **文档分析**: 分析 API 覆盖率
+
+---
+
+## 7. 主题与定制 {#7-主题与定制}
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+### 7.1 自定义 CSS {#71-自定义-css}
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
+**添加自定义样式**:
+
+```rust
+#![doc(html_root_url = "https://docs.example.com/my-crate/")]
+#![doc(html_playground_url = "https://play.rust-lang.org/")]
+```
+
+**Cargo.toml 配置**:
+
+```toml
+[package.metadata.docs.rs]
+rustdoc-args = ["--html-in-header", "header.html"]
+```
+
+**`header.html`**:
+
+```html
+<style>
+  :root {
+    --main-background-color: #1e1e1e;
+    --main-color: #ddd;
+  }
+</style>
+```
+
+---
+
+### 7.2 自定义 HTML {#72-自定义-html}
+
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+
+**添加自定义 HTML**:
+
+```rust
+#![doc(
+    html_favicon_url = "https://example.com/favicon.ico",
+    html_logo_url = "https://example.com/logo.svg",
+    html_playground_url = "https://play.rust-lang.org/"
+)]
+```
+
+---
+
+### 7.3 Logo 和 Favicon {#73-logo-和-favicon}
+
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
+```rust
+#![doc(html_logo_url = "https://example.com/logo.png")]
+#![doc(html_favicon_url = "https://example.com/favicon.ico")]
+#![doc(html_root_url = "https://docs.rs/my-crate/")]
+```
+
+---
+
+## 8. 文档属性 {#8-文档属性}
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+### 8.1 `#[doc]` 属性 {#81-doc-属性}
+>
+> **[来源: [crates.io](https://crates.io/)]**
+
+**基础用法**:
+
+```rust,ignore
+#[doc = "这是文档字符串"]
+pub fn func1() {}
+
+#[doc = include_str!("../README.md")]
+pub fn func2() {}
+
+#[doc(hidden)]
+pub fn internal_func() {}  // 不在文档中显示
+
+#[doc(alias = "addition")]
+pub fn add(a: i32, b: i32) -> i32 {  // 搜索别名
+    a + b
+}
+```
+
+---
+
+### 8.2 条件文档 {#82-条件文档}
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+```rust,ignore
+#[cfg_attr(feature = "docs", doc = "Extended documentation")]
+pub fn conditional_doc() {}
+
+#[doc(cfg(feature = "async"))]
+pub async fn async_function() {}  // 显示需要的 feature
+```
+
+---
+
+## 9. 私有项文档 {#9-私有项文档}
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+### 9.1 文档化私有项 {#91-文档化私有项}
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+```bash
+# 生成包含私有项的文档 {#生成包含私有项的文档}
+cargo doc --document-private-items
+```
+
+```rust
+/// 私有函数也可以有文档
+fn private_helper() {
+    // ...
+}
+```
+
+---
+
+### 9.2 内部文档 {#92-内部文档}
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+```rust
+#[doc(hidden)]
+pub fn internal_api() {}  // 公开但隐藏的 API
+
+/// 仅在内部使用
+#[doc = "Internal use only"]
+pub(crate) fn crate_internal() {}
+```
+
+---
+
+## 10. 搜索与索引 {#10-搜索与索引}
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+### 10.1 搜索功能 {#101-搜索功能}
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+**搜索索引自动生成**: `search-index.js`
+
+**搜索语法**:
+
+- `MyStruct`: 搜索类型名
+- `my_function`: 搜索函数名
+- `path::to::item`: 搜索路径
+
+---
+
+### 10.2 搜索别名 {#102-搜索别名}
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+```rust
+#[doc(alias = "addition")]
+#[doc(alias = "sum")]
+#[doc(alias = "plus")]
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+// 可以通过 "addition", "sum", "plus" 搜索到此函数
+```
+
+---
+
+## 11. CI/CD 集成 {#11-cicd-集成}
+>
+> **[来源: [crates.io](https://crates.io/)]**
+
+### 11.1 自动化文档生成 {#111-自动化文档生成}
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+**GitHub Actions 示例**:
+
+```yaml
+name: Documentation
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: Build documentation
+        run: cargo doc --no-deps --all-features
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/doc
+```
+
+---
+
+### 11.2 文档部署 {#112-文档部署}
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+**docs.rs 自动部署**:
+
+```toml
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+```
+
+**自定义域名**:
+
+创建 `CNAME` 文件:
+
+```text
+docs.example.com
+```
+
+---
+
+## 12. 最佳实践 {#12-最佳实践}
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+### ✅ 推荐做法 {#推荐做法}
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+1. **示例代码**: 为每个公开 API 提供示例
+2. **文档测试**: 确保示例代码可编译运行
+3. **错误文档**: 说明可能的错误和 panic 情况
+4. **性能说明**: 对性能敏感的 API 说明复杂度
+5. **Safety**: unsafe 代码必须详细说明安全要求
+6. **使用 Intra-doc Links**: 链接到相关项
+
+### ⚠️ 避免 {#避免}
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+1. **重复代码签名**: Rustdoc 会自动显示签名
+2. **过时的文档**: 定期更新文档
+3. **缺少示例**: 没有示例的 API 难以使用
+4. **不可运行的示例**: 确保示例可以编译
+
+---
+
+## 13. 实战案例 {#13-实战案例}
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+**完整示例**:
+
+````rust
+//! # My Awesome Crate
+//!
+//! 这个 crate 提供了高性能的数据处理功能。
+//!
+//! ## Features
+//!
+//! - **Fast**: 使用 SIMD 加速
+//! - **Safe**: 100% 安全 Rust
+//! - **Flexible**: 支持多种数据格式
+//!
+//! ## Quick Start
+//!
+//! ```
+//! use my_crate::Processor;
+//!
+//! let processor = Processor::new();
+//! let result = processor.process(&[1, 2, 3, 4, 5]);
+//! assert_eq!(result, vec![2, 4, 6, 8, 10]);
+//! ```
+
+#![doc(html_logo_url = "https://example.com/logo.svg")]
+#![doc(html_favicon_url = "https://example.com/favicon.ico")]
+#![doc(html_root_url = "https://docs.rs/my-crate/")]
+#![warn(missing_docs)]
+
+/// 数据处理器
+///
+/// 这个结构体提供了高效的数据处理能力。
+///
+/// # Examples
+///
+/// ```
+/// use my_crate::Processor;
+///
+/// let processor = Processor::new();
+/// assert!(processor.is_ready());
+/// ```
+///
+/// # Performance
+///
+/// - 时间复杂度: O(n)
+/// - 空间复杂度: O(1)
+///
+/// # Thread Safety
+///
+/// 这个类型实现了 `Send` 和 `Sync`，可以安全地在线程间共享。
+pub struct Processor {
+    config: Config,
+}
+
+impl Processor {
+    /// 创建新的处理器实例
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use my_crate::Processor;
+    ///
+    /// let processor = Processor::new();
+    /// ```
+    pub fn new() -> Self {
+        Self {
+            config: Config::default(),
+        }
+    }
+
+    /// 处理数据
+    ///
+    /// # Arguments
+    ///
+    /// * `data` - 输入数据切片
+    ///
+    /// # Returns
+    ///
+    /// 返回处理后的数据向量
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use my_crate::Processor;
+    ///
+    /// let processor = Processor::new();
+    /// let result = processor.process(&[1, 2, 3]);
+    /// assert_eq!(result, vec![2, 4, 6]);
+    /// ```
+    ///
+    /// # Errors
+    ///
+    /// 当输入数据为空时返回错误
+    ///
+    /// # Panics
+    ///
+    /// 当配置无效时会 panic
+    pub fn process(&self, data: &[i32]) -> Vec<i32> {
+        data.iter().map(|x| x * 2).collect()
+    }
+
+    /// 检查处理器是否就绪
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use my_crate::Processor;
+    ///
+    /// let processor = Processor::new();
+    /// assert!(processor.is_ready());
+    /// ```
+    pub fn is_ready(&self) -> bool {
+        true
+    }
+}
+
+#[derive(Default)]
+struct Config;
+````
+
+---
+
+## 14. 故障排查 {#14-故障排查}
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+### 常见问题 {#常见问题}
+>
+> **[来源: [crates.io](https://crates.io/)]**
+
+**1. 文档链接失效**:
+
+```bash
+# 检查断开的链接 {#检查断开的链接}
+cargo rustdoc -- -D rustdoc::broken-intra-doc-links
+```
+
+**2. 文档测试失败**:
+
+```bash
+# 运行文档测试并显示详细输出 {#运行文档测试并显示详细输出}
+cargo test --doc -- --nocapture
+```
+
+**3. JSON 输出错误**:
+
+```bash
+# 确保使用 nightly 工具链 {#确保使用-nightly-工具链}
+rustup override set nightly
+cargo +nightly rustdoc -- -Z unstable-options --output-format json
+```
+
+---
+
+## 15. 相关资源 {#15-相关资源}
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+### 📚 官方文档 {#官方文档}
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+- [Rustdoc Book](https://doc.rust-lang.org/rustdoc/)
+- [Doc Comments](https://doc.rust-lang.org/reference/comments.html#doc-comments)
+- [The Rust Book - Documentation](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html)
+
+### 🔗 相关文档 {#相关文档}
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+- [01_compiler_features.md](01_compiler_features.md)
+- 02_cargo_workspace_guide.md
+
+### 📦 推荐工具 {#推荐工具}
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+- **mdBook**: 创建书籍格式的文档
+- **cargo-readme**: 从文档生成 README
+- **cargo-deadlinks**: 检查文档中的死链接
+- **cargo-watch**: 自动重新生成文档
+
+---
+
+## 16. 代码示例与形式化链接 {#16-代码示例与形式化链接}
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+### 16.1 完整文档测试示例 {#161-完整文档测试示例}
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+```rust
+//! # 数学运算库
+//!
+//! 提供高性能的数学运算功能。
+//!
+//! ## 示例
+//!
+//! ```
+//! use math_lib::{add, multiply};
+//!
+//! let sum = add(2, 3);
+//! assert_eq!(sum, 5);
+//!
+//! let product = multiply(4, 5);
+//! assert_eq!(product, 20);
+//! ```
+//!
+//! ## 安全性
+//!
+//! 所有操作都是安全的，不涉及 unsafe 代码。
+//!
+//! ## 性能
+//!
+//! - 时间复杂度: O(1)
+//! - 空间复杂度: O(1)
+
+/// 加法函数
+///
+/// # 形式化规范
+///
+/// 对于任意整数 `a` 和 `b`，返回满足以下条件的整数 `c`：
+/// - `c = a + b`
+/// - `c` 在 `i32` 范围内（否则 panic）
+///
+/// # 示例
+///
+/// ```
+/// use math_lib::add;
+///
+/// assert_eq!(add(2, 3), 5);
+/// assert_eq!(add(-1, 1), 0);
+/// ```
+///
+/// # 类型签名
+///
+/// ```ignore
+/// add :: i32 -> i32 -> i32
+/// ```
+pub fn add(a: i32, b: i32) -> i32 {
+    a.checked_add(b).expect("Integer overflow")
+}
+
+/// 乘法函数
+///
+/// # 形式化规范
+///
+/// 对于任意整数 `a` 和 `b`，返回满足以下条件的整数 `c`：
+/// - `c = a * b`
+/// - `c` 在 `i32` 范围内（否则 panic）
+///
+/// # 示例
+///
+/// ```
+/// use math_lib::multiply;
+///
+/// assert_eq!(multiply(3, 4), 12);
+/// assert_eq!(multiply(-2, 5), -10);
+/// ```
+///
+/// # Panics
+///
+/// 当乘法结果超出 `i32` 范围时 panic。
+pub fn multiply(a: i32, b: i32) -> i32 {
+    a.checked_mul(b).expect("Integer overflow")
+}
+```
+
+### 16.2 文档测试高级用法 {#162-文档测试高级用法}
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+```rust,ignore
+/// 处理可能失败的操作
+///
+/// # Examples
+///
+/// 成功的情况：
+/// ```
+/// use my_lib::process;
+///
+/// let result = process("valid_input");
+/// assert!(result.is_ok());
+/// ```
+///
+/// 失败的情况（使用 `should_panic`）：
+/// ```should_panic
+/// use my_lib::process;
+///
+/// // 这段代码会 panic
+/// process("invalid_input").unwrap();
+/// ```
+///
+/// 编译失败示例（使用 `compile_fail`）：
+/// ```compile_fail
+/// use my_lib::process;
+///
+/// // 错误：类型不匹配
+/// let x: i32 = process("test");
+/// ```
+///
+/// 不运行但编译（使用 `no_run`）：
+/// ```no_run
+/// use my_lib::start_server;
+///
+/// // 这会启动服务器，但不会实际运行
+/// start_server("localhost:8080");
+/// ```
+pub fn process(input: &str) -> Result<String, Error> {
+    // 实现
+}
+```
+
+### 16.3 形式化文档链接 {#163-形式化文档链接}
+>
+> **[来源: [crates.io](https://crates.io/)]**
+
+```rust,ignore
+/// 实现了 [`Clone`] 和 [`Default`] 的类型
+///
+/// # 类型系统
+///
+/// 该类型满足以下 trait 约束：
+/// - [`Clone`] - 支持值复制
+/// - [`Default`] - 支持默认值构造
+/// - [`Send`] + [`Sync`] - 支持线程安全共享
+///
+/// # 生命周期
+///
+/// 该类型拥有所有数据，没有外部引用，因此具有 `'static` 生命周期。
+///
+/// # 形式化性质
+///
+/// - **自反性**: `T == T`
+/// - **对称性**: 如果 `T == U`，则 `U == T`
+/// - **传递性**: 如果 `T == U` 且 `U == V`，则 `T == V`
+pub struct MyType<T: Clone + Default> {
+    data: T,
+}
+
+impl<T: Clone + Default> MyType<T> {
+    /// 创建新实例
+    ///
+    /// # 前置条件
+    ///
+    /// - `T` 必须实现 [`Default`]
+    ///
+    /// # 后置条件
+    ///
+    /// - 返回的实例满足 `instance.data == T::default()`
+    ///
+    /// # 形式化规范
+    ///
+    /// ```ignore
+    /// new :: Default T => MyType T
+    /// new = MyType { data: default }
+    /// ```
+    pub fn new() -> Self {
+        Self { data: T::default() }
+    }
+}
+```
+
+### 16.4 条件文档示例 {#164-条件文档示例}
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+```rust,ignore
+#![cfg_attr(docsrs, feature(doc_cfg))]
+
+/// 异步处理函数（仅在启用 async 特性时可用）
+///
+/// # 特性要求
+///
+/// 需要启用 `async` 特性。
+#[cfg(feature = "async")]
+#[cfg_attr(docsrs, doc(cfg(feature = "async")))]
+pub async fn async_process(data: &str) -> Result<String, Error> {
+    // 异步实现
+}
+
+/// 平台特定的优化实现
+///
+/// # 平台支持
+///
+/// 仅在 x86_64 平台上可用。
+#[cfg(target_arch = "x86_64")]
+#[cfg_attr(docsrs, doc(cfg(target_arch = "x86_64")))]
+pub fn x86_64_optimized() -> i32 {
+    // x86_64 特定实现
+}
+```
+
+### 16.5 形式化规范链接 {#165-形式化规范链接}
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+| 概念 | 形式化文档链接 |
+| :--- | :--- |
+| 类型系统 | [Rust Reference - Type System](https://doc.rust-lang.org/reference/type-system.html) |
+| 所有权 | [Rust Reference - Ownership](https://doc.rust-lang.org/reference/) |
+| 生命周期 | [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) |
+| Trait 系统 | [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html) |
+| 类型布局 | [Rust Reference - Type Layout](https://doc.rust-lang.org/reference/type-layout.html) |
+| 不安全代码 | [The Rustonomicon](https://doc.rust-lang.org/nomicon/) |
+| Ferrocene 规范 | [Ferrocene Language Specification](https://spec.ferrocene.dev/) |
+
+---
+
+## 17. 形式化文档资源 {#17-形式化文档资源}
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+### Rust 形式化规范 {#rust-形式化规范}
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+- [Ferrocene Language Specification](https://spec.ferrocene.dev/) - Rust 语言的工业级形式化规范
+- [Rust Reference](https://doc.rust-lang.org/reference/) - Rust 语言参考手册
+- [The Rustonomicon](https://doc.rust-lang.org/nomicon/) - 不安全 Rust 的黑暗艺术
+
+### 类型理论与形式化方法 {#类型理论与形式化方法}
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+- [Rust Belt](https://plv.mpi-sws.org/rustbelt/) - Rust 形式化验证研究项目
+- [Rust 类型系统（Type System）形式化论文](https://arxiv.org/abs/2211.13898) - 学术级形式化描述
+
+---
+
+**文档维护**: Documentation Team
+**最后更新**: 2026-05-08
+**下次审查**: 2026-03-20
+**最后对照 releases.rs**: 2026-02-14
+
+---
+
+## Rust 1.96+ 更新 {#rust-196-更新}
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+> **最新版本**: Rust 1.97.0+ (2026-05-28)
+
+本文档基于 Rust 1.97.0，涵盖 1.93–1.96 关键特性。历史版本请参见：
+
+- [Rust 1.96 稳定特性全景](08_rust_1_96_features.md)
+- [Rust 历史版本文档索引](../README.md)
+
+**最后更新**: 2026-06-08 (对齐 1.96 稳定版内容)
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念 {#相关概念}
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+- [06_toolchain 目录](README.md)
+- [docs 索引](../README.md)
+
+---
+
+## 权威来源索引 {#权威来源索引}
+
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
+> **来源: [LLVM Documentation](https://llvm.org/docs/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
+
+---

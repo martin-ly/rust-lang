@@ -652,7 +652,7 @@ graph TD
 
 ## 六、常见嵌入式目标三元组与学习路径
 
-> 本节内容由 [`crates/c13_embedded/docs/one_page_summary.md`](../../../crates/c13_embedded/docs/one_page_summary.md) 迁移而来，作为概念权威页的补充速查。
+> 本节内容由 [`crates/c13_embedded/docs/04_one_page_summary.md`](../../../crates/c13_embedded/docs/04_one_page_summary.md) 迁移而来，作为概念权威页的补充速查。
 
 ### 常见目标三元组
 

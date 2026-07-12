@@ -23,7 +23,7 @@
   "results": [
     {
       "rel": "concept/00_meta/knowledge_topology/01_concept_definition_atlas.md",
-      "lines": 562,
+      "lines": 561,
       "T1": {
         "total_rows": 456,
         "low": 5,
@@ -55,7 +55,7 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/02_attribute_relationship_atlas.md",
-      "lines": 555,
+      "lines": 554,
       "issues": {}
     },
     {
@@ -91,7 +91,7 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/07_intra_layer_mapping_atlas.md",
-      "lines": 564,
+      "lines": 563,
       "T2": {
         "total": 430,
         "counts": {
@@ -132,7 +132,7 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/10_gap_and_action_plan.md",
-      "lines": 88,
+      "lines": 87,
       "issues": {}
     },
     {

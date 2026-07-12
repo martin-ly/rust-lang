@@ -13,10 +13,10 @@ canonical 链接。具体可运行示例请参见本 crate 的 `examples/` 与 `
 ## 文档导航
 
 - [c13 嵌入式系统 - 文档指南](README.md)
-- [一页纸总结](one_page_summary.md)
-- [裸机基础指南](bare_metal_guide.md)
-- [build-std 与自定义目标](build_std_guide.md)
-- [embedded-hal 1.0 迁移指南](embedded_hal_1_0_migration.md)
+- [一页纸总结](04_one_page_summary.md)
+- [裸机基础指南](01_bare_metal_guide.md)
+- [build-std 与自定义目标](02_build_std_guide.md)
+- [embedded-hal 1.0 迁移指南](03_embedded_hal_1_0_migration.md)
 
 ## 主题列表
 

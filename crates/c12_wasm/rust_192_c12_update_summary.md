@@ -26,7 +26,7 @@
 - ✅ `README.md`
   - 版本: 1.91.1+ → 1.93.0+（历史记录：1.92.0+）
   - 添加了 Rust 1.93.0+ 特性说明
-- ✅ `docs/tier_04_advanced/05_wasmedge_and_emerging_tech.md`
+- ✅ `docs/tier_04_advanced/04_wasmedge_and_emerging_tech.md`
   - 版本: 1.90+ → 1.93.0+（历史记录：1.92.0+）
   - 日期: 2025-10-30 → 2026-01-26
 

@@ -188,7 +188,7 @@ mdbook build
 |:---|:---|:---:|:---|
 | L6 代码示例 | `concept/06_ecosystem/` 中 11 个 `[社区贡献欢迎]` 文件 | ⭐⭐⭐ | 量子计算、嵌入式图形、工业案例等领域需要可编译示例 |
 | 形式化工具示例 | `crates/` 新增 / `concept/04_formal/` | ⭐⭐⭐⭐ | Kani 0.65+、AutoVerus、ESBMC 的可运行 Rust 示例 |
-| TRPL 对照更新 | `docs/trpl_3rd_ed_diff.md` | ⭐⭐ | 随 TRPL 在线版更新同步维护对照矩阵 |
+| TRPL 对照更新 | `docs/03_reference/07_trpl_3rd_ed_diff.md` | ⭐⭐ | 随 TRPL 在线版更新同步维护对照矩阵 |
 | 新版本特性跟踪 | `crates/*/src/rust_197_features.rs` | ⭐⭐ | Rust 1.97/1.98 新特性示例和文档
 
 ---

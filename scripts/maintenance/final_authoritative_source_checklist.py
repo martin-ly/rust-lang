@@ -196,7 +196,7 @@ def main(argv: list[str] | None = None) -> int:
     files = [analyze_file(p) for p in iter_md_files()]
     families = build_family_map(files)
 
-    header = f"docs/research_notes 权威来源对齐最终覆盖率检查清单 (target={target})"
+    header = f"docs/12_research_notes 权威来源对齐最终覆盖率检查清单 (target={target})"
     print("=" * 72)
     print(header)
     print("=" * 72)

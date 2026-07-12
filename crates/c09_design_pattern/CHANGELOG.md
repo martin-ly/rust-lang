@@ -13,7 +13,7 @@
 
 - MSRV 提升至 Rust 1.90（Edition 2024），对齐工作区文档与配置。
 - 文档：更新 `README.md`（Rust 1.90 新特性与生态集成）、`09_design_patterns.md`（新增“附录A：生态框架落地”）、`IMPLEMENTATION_ROADMAP.md`（全面对齐 1.90 与生态映射）。
-- 文档：新增 `docs/observability.md`（tracing 可观测指南），`README` 补充 Features/运行命令与 CI 片段。
+- 文档：新增 `docs/11_observability.md`（tracing 可观测指南），`README` 补充 Features/运行命令与 CI 片段。
 - 兼容性：确认在 stable 与 1.90 下构建通过；无行为变更。
 
 ### 待办（1.0.2 之后）

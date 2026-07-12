@@ -237,9 +237,9 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 | Topic | File |
 |:---|:---|
 | Ownership & Borrowing | `docs/02_reference/quick_reference/02_ownership_borrowing_cheatsheet.md` |
-| Type System | [docs/02_reference/quick_reference/02_type_system.md](../../../docs/02_reference/quick_reference/02_type_system.md) |
-| Collections & Iterators | [docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md](../../../docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md) |
-| Error Handling | [docs/02_reference/quick_reference/02_error_handling_cheatsheet.md](../../../docs/02_reference/quick_reference/02_error_handling_cheatsheet.md) |
+| Type System | [docs/03_reference/quick_reference/27_type_system.md](../../../docs/03_reference/quick_reference/27_type_system.md) |
+| Collections & Iterators | [docs/03_reference/quick_reference/08_collections_iterators_cheatsheet.md](../../../docs/03_reference/quick_reference/08_collections_iterators_cheatsheet.md) |
+| Error Handling | [docs/03_reference/quick_reference/10_error_handling_cheatsheet.md](../../../docs/03_reference/quick_reference/10_error_handling_cheatsheet.md) |
 
 ### Exercise Sources
 

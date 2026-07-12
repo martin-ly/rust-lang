@@ -35,4 +35,4 @@
 ## 实践入口
 
 - 本 crate 的 `src/` 与 `examples/` 目录包含与类型系统相关的可编译示例。
-- 系统化的练习与项目请见 [`exercises/`](../../exercises/) 与 [`docs/03_practice/`](../../docs/03_practice/)。
+- 系统化的练习与项目请见 [`exercises/`](../../exercises/) 与 [`docs/05_practice/`](../../docs/05_practice/)。

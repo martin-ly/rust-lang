@@ -1,46 +1,46 @@
 {
   "date": "2026-07-12",
-  "scanned": 461,
+  "scanned": 460,
   "coverage": {
     "P0": [
-      461,
+      460,
       100.0
     ],
     "P1": [
-      436,
+      435,
       94.6
     ],
     "P2": [
       393,
-      85.2
+      85.4
     ],
     "any": [
-      461,
+      460,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 383,
+    "scanned": 382,
     "P0": [
-      383,
+      382,
       100.0
     ],
     "P1": [
-      383,
+      382,
       100.0
     ],
     "P2": [
-      382,
+      381,
       99.7
     ],
     "any": [
-      383,
+      382,
       100.0
     ],
     "gaps_p1": [],
     "gaps_p2": [
-      "concept/03_advanced/02_unsafe/32_unsafe_boundary_panorama.md"
+      "concept/03_advanced/02_unsafe/02_unsafe_boundary_panorama.md"
     ]
   },
   "by_layer": {
@@ -80,9 +80,9 @@
       "any": 114
     },
     "L7": {
-      "n": 61,
-      "P0": 61,
-      "any": 61
+      "n": 60,
+      "P0": 60,
+      "any": 60
     },
     "L?": {
       "n": 3,

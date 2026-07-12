@@ -15,7 +15,7 @@
 > **定位**: 本文件建立 **Comprehensive Rust**（Google 开发的免费 Rust 课程）与本知识体系中 `concept/` 文件的双向映射，帮助学习者将课程章节定位到深层概念文档。
 > **前置概念**: [Learning Guide](../04_navigation/07_learning_guide.md) · [Bloom Taxonomy](bloom_taxonomy.md)
 > **后置概念**: [Application Domains](../../06_ecosystem/06_data_and_distributed/01_application_domains.md)
-> **内容重叠提示**: 本文与 [`docs/01_learning/01_google_rust_mapping.md`](../../../docs/01_learning/01_google_rust_mapping.md) 内容高度重叠。`docs/` 版本提供学习映射；`concept/` 版本为项目权威主轨。
+> **内容重叠提示**: 本文与 [`docs/02_learning/03_google_rust_mapping.md`](../../../docs/02_learning/03_google_rust_mapping.md) 内容高度重叠。`docs/` 版本提供学习映射；`concept/` 版本为项目权威主轨。
 
 ---
 

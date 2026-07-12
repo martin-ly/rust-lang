@@ -1189,7 +1189,7 @@ async fn write_with_timeout(file: &mut File, data: &[u8]) -> std::io::Result<()>
 
 ## 补充视角：异步设计模式实践
 
-> 本节选编自 `crates/c06_async/docs/tier_02_guides/04_async_design_patterns_practice.md`，
+> 本节选编自 `crates/c06_async/docs/tier_02_guides/03_async_design_patterns_practice.md`，
 > 作为 canonical 异步模式概念页的工程实践补充。
 
 ### 核心模式对比

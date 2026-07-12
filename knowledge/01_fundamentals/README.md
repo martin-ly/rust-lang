@@ -25,10 +25,10 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [ownership.md](04_ownership.md) | 所有权系统 | ⭐⭐ |
-| [borrowing.md](01_borrowing.md) | 借用与引用 | ⭐⭐ |
+| [ownership.md](01_ownership.md) | 所有权系统 | ⭐⭐ |
+| [borrowing.md](02_borrowing.md) | 借用与引用 | ⭐⭐ |
 | [lifetimes.md](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 生命周期 | ⭐⭐⭐ |
-| [iterators.md](02_iterators.md) | 迭代器 | ⭐⭐ |
+| [iterators.md](04_iterators.md) | 迭代器 | ⭐⭐ |
 
 ## ⏱️ 预计时间
 >
@@ -82,7 +82,7 @@
 
 ## 相关概念
 
-- [所有权深入](04_ownership.md)
+- [所有权深入](01_ownership.md)
 
 ## 📚 模块 8: 国际化对齐
 

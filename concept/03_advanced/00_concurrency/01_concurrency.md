@@ -130,7 +130,7 @@
     - [测验 2：Rc 与 Arc 的区别（理解层）](#测验-2rc-与-arc-的区别理解层)
     - [测验 3：Mutex 与共享可变状态（应用层）](#测验-3mutex-与共享可变状态应用层)
     - [测验 4：死锁分析（分析层）](#测验-4死锁分析分析层)
-  - [迁移内容（来自 `crates/c05_threads/docs/02_thread_synchronization.md`）](#迁移内容来自-cratesc05_threadsdocs02_thread_synchronizationmd)
+  - [迁移内容（来自 `crates/c05_threads/docs/04_thread_synchronization.md`）](#迁移内容来自-cratesc05_threadsdocs02_thread_synchronizationmd)
   - [🎯 同步原语核心知识图谱](#-同步原语核心知识图谱)
     - [同步原语关系图](#同步原语关系图)
     - [同步原语决策树](#同步原语决策树)
@@ -143,7 +143,7 @@
       - [8.1.1 细粒度锁](#811-细粒度锁)
     - [8.2 避免死锁](#82-避免死锁)
       - [8.2.1 锁顺序策略](#821-锁顺序策略)
-  - [迁移内容（来自 `crates/c05_threads/docs/03_synchronization_primitives.md`）](#迁移内容来自-cratesc05_threadsdocs03_synchronization_primitivesmd)
+  - [迁移内容（来自 `crates/c05_threads/docs/06_synchronization_primitives.md`）](#迁移内容来自-cratesc05_threadsdocs03_synchronization_primitivesmd)
     - [🚀 Rust 1.92.0 Mutex 性能示例](#-rust-1920-mutex-性能示例)
     - [🚀 Rust 1.92.0 RwLock 性能示例](#-rust-1920-rwlock-性能示例)
     - [📊 Mutex vs RwLock 性能对比](#-mutex-vs-rwlock-性能对比)
@@ -1664,11 +1664,11 @@ fn main() {
 
 ---
 
-## 迁移内容（来自 `crates/c05_threads/docs/02_thread_synchronization.md`）
+## 迁移内容（来自 `crates/c05_threads/docs/04_thread_synchronization.md`）
 
-> <!-- migrated from crates/c05_threads/docs/02_thread_synchronization.md -->
+> <!-- migrated from crates/c05_threads/docs/04_thread_synchronization.md -->
 >
-> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/02_thread_synchronization.md` 迁移至本权威页。
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/04_thread_synchronization.md` 迁移至本权威页。
 
 ## 🎯 同步原语核心知识图谱
 
@@ -1892,11 +1892,11 @@ impl BankAccount {
 
 ---
 
-## 迁移内容（来自 `crates/c05_threads/docs/03_synchronization_primitives.md`）
+## 迁移内容（来自 `crates/c05_threads/docs/06_synchronization_primitives.md`）
 
-> <!-- migrated from crates/c05_threads/docs/03_synchronization_primitives.md -->
+> <!-- migrated from crates/c05_threads/docs/06_synchronization_primitives.md -->
 >
-> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/03_synchronization_primitives.md` 迁移至本权威页。
+> 以下内容根据 AGENTS.md §6.4 从 `crates/c05_threads/docs/06_synchronization_primitives.md` 迁移至本权威页。
 
 ### 🚀 Rust 1.92.0 Mutex 性能示例
 

@@ -1678,7 +1678,7 @@ async fn traverse_dir(path: &Path) -> Vec<String> {
 
 ## 补充视角：异步性能优化实践
 
-> 本节选编自 `crates/c06_async/docs/tier_02_guides/05_async_performance_optimization_guide.md`，
+> 本节选编自 `crates/c06_async/docs/tier_02_guides/04_async_performance_optimization_guide.md`，
 > 作为 canonical 异步高级主题概念页的工程实践补充。
 
 ### 优化维度速查

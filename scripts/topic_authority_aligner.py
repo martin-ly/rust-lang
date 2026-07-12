@@ -720,7 +720,7 @@ def phase5():
             if "P0" in priority:
                 target = "concept/01_foundation/ 或 concept/03_advanced/"
             elif "P1" in priority:
-                target = "concept/04_formal/ 或 docs/research_notes/formal_methods/"
+                target = "concept/04_formal/ 或 docs/12_research_notes/02_formal_methods/"
             elif "P2" in priority:
                 target = "concept/06_ecosystem/ 或 crates/cXX_*/docs/"
             else:

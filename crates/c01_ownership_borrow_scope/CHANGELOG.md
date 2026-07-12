@@ -122,9 +122,9 @@
 **Tier 2 核心概念层** (导航文档)
 
 - **2.1 所有权系统** (`docs/tier_02_guides/01_ownership_quick_start.md`)
-- **2.2 借用检查器** (`docs/tier_02_guides/02_borrowing_practice_guide.md`)
-- **2.3 生命周期** (`docs/tier_02_guides/03_lifetimes_practice.md`)
-- **2.4 作用域规则** (`docs/tier_02_guides/04_scope_management_practice.md`)
+- **2.2 借用检查器** (`docs/tier_02_guides/03_borrowing_practice_guide.md`)
+- **2.3 生命周期** (`docs/tier_02_guides/04_lifetimes_practice.md`)
+- **2.4 作用域规则** (`docs/tier_02_guides/05_scope_management_practice.md`)
 
 **Tier 3 高级应用层** (导航框架，Phase 4 中扩展)
 

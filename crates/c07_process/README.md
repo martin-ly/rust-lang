@@ -307,8 +307,8 @@ cargo run --bin group_control_demo
 ### 核心文档
 
 - **[README.md](docs/README.md)** - 文档总览和快速导航
-- **[OVERVIEW.md](docs/overview.md)** - 模块概览和架构说明
-- **[process_management.md](docs/process_management.md)** - 进程管理基础指南
+- **[OVERVIEW.md](docs/17_overview.md)** - 模块概览和架构说明
+- **[process_management.md](docs/20_process_management.md)** - 进程管理基础指南
 
 ### 高级主题
 
@@ -319,7 +319,6 @@ cargo run --bin group_control_demo
 - **[05_async_process_management.md](docs/05_async_process_management.md)** - 异步进程管理
 - **[06_cross_platform_process_management.md](docs/06_cross_platform_process_management.md)** - 跨平台进程管理
 - **[07_performance_optimization.md](docs/07_performance_optimization.md)** - 性能优化技术
-- **[performance_optimization_usage_guide.md](docs/performance_optimization_usage_guide.md)** ⭐ NEW! - 性能优化使用指南
 - **[08_security_and_sandboxing.md](docs/08_security_and_sandboxing.md)** - 安全与沙箱
 
 ### API 文档
@@ -426,7 +425,7 @@ cargo run --features async --bin async_stdio_demo
 ```
 **说明**: 演示异步标准 IO 接口的使用，包括写入标准输入、读取标准输出和标准错误、带超时的等待等。
 
-**详细指南**: 查看 [异步标准 IO 使用指南](docs/async_stdio_guide.md) 获取完整的 API 文档和使用示例。
+**详细指南**: 查看 [异步标准 IO 使用指南](docs/13_async_stdio_guide.md) 获取完整的 API 文档和使用示例。
 
 预留异步标准 IO 与超时 API 的接口，当前调用会返回"未实现"错误，便于后续迭代替换为真实实现。
 
@@ -528,7 +527,7 @@ cargo run --features async --example performance_optimization_demo
 - 性能监控（实时统计和历史数据）
 - 缓存管理（智能缓存策略）
 
-**详细指南**: 查看 [性能优化使用指南](docs/performance_optimization_usage_guide.md) 获取完整的 API 文档和使用示例。
+**详细指南**: 查看 [性能优化技术](docs/07_performance_optimization.md) 获取完整的 API 文档和使用示例。
 
 ## 🤝 贡献
 

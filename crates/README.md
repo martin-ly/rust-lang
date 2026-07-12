@@ -33,7 +33,7 @@
 ## 相关链接
 
 - [项目文档](../docs/README.md)
-- [快速参考](../docs/02_reference/quick_reference/README.md)
+- [快速参考](../docs/03_reference/quick_reference/README.md)
 
 ---
 

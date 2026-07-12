@@ -361,7 +361,7 @@ L2-L4: 逐层深入...
 
 ### 入口2: 主索引 (已更新)
 
-👉 [docs/00_master_index.md](docs/00_master_index.md)
+👉 [docs/00_meta/00_master_index.md](docs/00_meta/00_master_index.md)
 
 ### 入口3: 文档首页 (已更新)
 

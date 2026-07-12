@@ -40,8 +40,8 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [deep_dives/tokio_deep_dive.md](deep_dives/02_tokio_deep_dive.md) | Tokio 运行时深度解析 | ⭐⭐⭐⭐ |
-| [deep_dives/axum_deep_dive.md](deep_dives/01_axum_deep_dive.md) | Axum Web 框架深度解析 | ⭐⭐⭐⭐ |
+| [content/ecosystem/deep_dives/02_tokio_deep_dive.md](../../content/ecosystem/deep_dives/02_tokio_deep_dive.md)（权威侧；[knowledge stub](deep_dives/02_tokio_deep_dive.md)） | Tokio 运行时深度解析 | ⭐⭐⭐⭐ |
+| [content/ecosystem/deep_dives/01_axum_deep_dive.md](../../content/ecosystem/deep_dives/01_axum_deep_dive.md)（权威侧；[knowledge stub](deep_dives/01_axum_deep_dive.md)） | Axum Web 框架深度解析 | ⭐⭐⭐⭐ |
 | [databases/sqlx_deep_dive.md](databases/02_sqlx_deep_dive.md) | SQLx 数据库访问 | ⭐⭐⭐ |
 | [databases/sea_orm_deep_dive.md](databases/01_sea_orm_deep_dive.md) | SeaORM ORM 框架 | ⭐⭐⭐ |
 | [deployment/kubernetes_deployment_guide.md](deployment/01_kubernetes_deployment_guide.md) | Kubernetes 部署指南 | ⭐⭐⭐⭐ |

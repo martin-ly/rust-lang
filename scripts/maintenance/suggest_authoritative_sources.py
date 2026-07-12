@@ -2,7 +2,7 @@
 """
 Suggest authoritative source completions for docs/research_notes.
 
-Reads all Markdown files under docs/research_notes/, groups them by concept
+Reads all Markdown files under docs/12_research_notes/, groups them by concept
 family (概念族), determines which P0/P1/P2 authority tiers are missing in each
 file, and recommends authoritative source links based on concept-family
 keywords.
@@ -361,7 +361,7 @@ def render_markdown(
     family_reports: dict[str, dict[str, object]], overall: dict[str, object]
 ) -> str:
     lines: list[str] = []
-    lines.append("# docs/research_notes 权威来源自动补全建议\n")
+    lines.append("# docs/12_research_notes 权威来源自动补全建议\n")
     lines.append("## 总体摘要\n")
     lines.append(f"- **总 Markdown 文件数**：{overall['total_files']}")
     lines.append(f"- **已分类文件数**：{overall['classified_files']}")
@@ -439,7 +439,7 @@ def render_markdown(
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="docs/research_notes 权威来源自动补全建议工具。"
+        description="docs/12_research_notes 权威来源自动补全建议工具。"
     )
     parser.add_argument(
         "--output",

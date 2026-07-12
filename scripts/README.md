@@ -63,13 +63,13 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `rust_version_tracker.py` | Rust 版本特性跟踪 |
 | `version_fact_check.py` | 版本相关事实核查 |
 | `lint_filenames.py` | 文件名 snake_case 命名检查 |
-| `check_naming_convention.py` | 命名规范检查 |
+| `check_naming_convention.py` | 命名规范 lint（质量门 20，观察；AGENTS.md §4.0 N1–N6：序号格式/同号冲突/双前缀/变体后缀 stub 豁免/一级目录连续性/中文空格大小写；扫描 concept/knowledge/docs/content/crates/*/docs；默认 exit 0，`--strict` 时 ERROR>0 exit 1） |
 | `check_concept_numbering.py` | concept 文件编号检查 |
 | `check_crates_docs_alignment.py` | crates 文档对齐检查 |
 | `check_rust_feature_versioning.py` | Rust 特性版本标注检查 |
 | `detect_content_overlap.py` | 三轨内容相似度去重检测（质量门 8，阻断） |
 | `detect_content_overlap_v2.py` | 段落级重叠检测 v2（质量门 16，观察） |
-| `triage_overlap.py` | 重叠报告分诊（MERGE/DOCS_INTERNAL/SERIES/REVIEW） |
+| `triage_overlap.py` | 重叠报告分诊（MERGE/DOCS_INTERNAL/SERIES/REVIEW；SERIES 白名单 = 正则 + 显式 `SERIES_PAIRS` 人工复核登记） |
 | `check_canonical_uniqueness.py` | `concept/` 权威页唯一性检查（质量门 13，阻断） |
 | `check_template_cliches.py` | `concept/` 模板套话黑名单扫描；`--strict` 发现命中即 exit 1 |
 | `check_decision_trees.py` | 决策树机器可读层校验（`decision_trees.yaml` 结构/死端/概念覆盖）；结构错误 exit 1 |
@@ -207,7 +207,7 @@ python scripts/lint_filenames.py --all --exclude archive/ --exclude reports/
 
 ```bash
 # 单文件
-python scripts/bulk_rename.py docs/LINK_CHECK_REPORT.md docs/link_check_report.md
+python scripts/bulk_rename.py docs/LINK_CHECK_REPORT.md reports/01_link_check_report.md
 
 # 多文件成对传入
 python scripts/bulk_rename.py \
@@ -401,7 +401,7 @@ docs/ crate 文档样板模板。
 | Agent 工作区 | `.kimi/` 及其 `archive/` | Agent 会话与日期风格例外 |
 | 虚拟环境 | `tools/kg_rag/.venv/` | 第三方依赖，不应提交 |
 | 构建产物 | `target/`、`book/` | 生成目录 |
-| 目录名 | `docs/rust-formal-engineering-system/`、`examples/resolver_v3_practice/{edge-bin,legacy-lib,modern-app}/`、`crates/c13_embedded/real-hardware-demos/`、`crates/c13_embedded/real-hardware-demos/{embassy-demo,rtic-demo}/` | 历史目录/示例项目目录，本次仅重命名文件 |
+| 目录名 | `docs/15_rust_formal_engineering_system/`、`examples/resolver_v3_practice/{edge-bin,legacy-lib,modern-app}/`、`crates/c13_embedded/real-hardware-demos/`、`crates/c13_embedded/real-hardware-demos/{embassy-demo,rtic-demo}/` | 历史目录/示例项目目录，本次仅重命名文件 |
 | 容器文件 | `crates/c06_async/deployment/docker/Dockerfile` | Dockerfile 标准命名 |
 
 ---

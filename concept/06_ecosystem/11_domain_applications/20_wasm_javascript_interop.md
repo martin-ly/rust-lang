@@ -432,7 +432,7 @@ let mut_raw_ref = union.get_integer_mut_raw();
 - ✅ 类型安全保证
 - ✅ 更好的 FFI 互操作支持
 
-**相关文档**: [Rust 1.92.0 WASM 改进文档](/crates/c12_wasm/docs/rust_192_wasm_improvements.md)
+**相关文档**: [Rust 1.92.0 WASM 改进文档](/crates/c12_wasm/docs/15_rust_192_wasm_improvements.md)
 
 ---
 
@@ -441,7 +441,7 @@ let mut_raw_ref = union.get_integer_mut_raw();
 - [Rust 编译 WASM](/crates/c12_wasm/docs/tier_02_guides/02_compiling_rust_to_wasm.md) - 学习编译流程
 - [性能优化指南](/crates/c12_wasm/docs/tier_02_guides/04_performance_optimization_guide.md) - 学习优化
 - [最佳实践](/crates/c12_wasm/docs/tier_03_references/03_best_practices.md) - 开发规范
-- [Rust 1.92.0 WASM 改进文档](/crates/c12_wasm/docs/rust_192_wasm_improvements.md) - Rust 1.92.0 特性
+- [Rust 1.92.0 WASM 改进文档](/crates/c12_wasm/docs/15_rust_192_wasm_improvements.md) - Rust 1.92.0 特性
 
 **外部资源**:
 

@@ -171,7 +171,7 @@ D (serde): Hello from crate-d / serde feature
 - [Cargo `public = true` 与 Resolver v3](02_public_private_deps.md)
 - [Cargo Dependency Resolution](06_cargo_dependency_resolution.md)
 - [Rust vs Go：包管理与模块（Module）系统对比](../../05_comparative/01_systems_languages/03_rust_vs_go.md)
-- [TOML v1.1 与 Cargo 清单指南](../../../docs/06_toolchain/06_toml_v11_cargo_guide.md)
+- [TOML v1.1 与 Cargo 清单指南](../../../docs/09_toolchain/16_toml_v11_cargo_guide.md)
 
 ---
 

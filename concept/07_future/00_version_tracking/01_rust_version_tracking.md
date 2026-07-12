@@ -684,7 +684,7 @@ timeline
 
 **1.97 状态速览**：
 
-- Rust 1.97.0 已于 **2026-07-09** 发布 stable。权威稳定内容见 [concept/07_future/rust_1_97_stabilized.md](rust_1_97_stabilized.md) 与 [`docs/06_toolchain/06_21_rust_1_97_features.md`](../../../docs/06_toolchain/06_21_rust_1_97_features.md) 速查入口。
+- Rust 1.97.0 已于 **2026-07-09** 发布 stable。权威稳定内容见 [concept/07_future/rust_1_97_stabilized.md](rust_1_97_stabilized.md) 与 [`docs/09_toolchain/10_rust_1_97_features.md`](../../../docs/09_toolchain/10_rust_1_97_features.md) 速查入口。
 - 截至本更新，**Rust 1.97.0 为当前最新 stable 版本**；1.96.1 为 1.96 系列最新 patch。
 - 已确认进入 1.97.0 stable 的主要变更：
 
@@ -821,8 +821,8 @@ PTX 是 NVIDIA GPU 的中间表示（类似 LLVM IR），Rust 通过 `nvptx64-nv
 | `core::range` 补齐 (`Range`/`RangeFrom`/`RangeToInclusive` + 迭代器（Iterator）) | 标准库 API | `crates/c02_type_system/src/rust_196_features.rs` · [`concept/02_intermediate/04_types_and_conversions/01_range_types.md`](../../02_intermediate/04_types_and_conversions/01_range_types.md) | ✅ 已更新 |
 | `NonZero` 整数范围迭代 | 标准库 API | `crates/c02_type_system/src/rust_196_features.rs` | ✅ 已更新 |
 | `impl From<bool> for {f32, f64}` | 标准库 trait | `crates/c02_type_system/src/rust_196_features.rs` | ✅ 已覆盖 |
-| `unused_features` lint (warn-by-default) | 编译器 lint | `docs/06_toolchain/06_19_rust_1_96_features.md` | ✅ 已覆盖 |
-| Cargo `frame-pointers` profile 选项 | 工具链 | `docs/06_toolchain/06_19_rust_1_96_features.md` | ✅ 已覆盖 |
+| `unused_features` lint (warn-by-default) | 编译器 lint | `docs/09_toolchain/08_rust_1_96_features.md` | ✅ 已覆盖 |
+| Cargo `frame-pointers` profile 选项 | 工具链 | `docs/09_toolchain/08_rust_1_96_features.md` | ✅ 已覆盖 |
 
 **Project Goals 2025H2 收官更新（2026-01-05）**：
 
@@ -870,7 +870,7 @@ PTX 是 NVIDIA GPU 的中间表示（类似 LLVM IR），Rust 通过 `nvptx64-nv
 
 **1.96.0 已发布（2026-05-28），1.96.1 为 1.96 系列最新 patch；当前最新 stable 为 1.97.0**：
 
-Rust 1.96.0 已按计划进入 stable 通道；1.96.1 为 1.96 系列推荐 patch。详见 [`docs/06_toolchain/06_19_rust_1_96_features.md`](../../../docs/06_toolchain/06_19_rust_1_96_features.md) 全景文档及 `reports/RUST_1_96_COMPREHENSIVE_REPORT.md` 综合报告。
+Rust 1.96.0 已按计划进入 stable 通道；1.96.1 为 1.96 系列推荐 patch。详见 [`docs/09_toolchain/08_rust_1_96_features.md`](../../../docs/09_toolchain/08_rust_1_96_features.md) 全景文档及 `reports/RUST_1_96_COMPREHENSIVE_REPORT.md` 综合报告。
 
 > **来源**: [Rust 1.96.0 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.96.0) · 可信度: ✅
 

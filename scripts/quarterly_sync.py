@@ -2,8 +2,8 @@
 """
 归档迁移脚本：季度同步与 Rust 版本对齐检查清单生成器
 
-读取 docs/00_meta/00_quarterly_sync_checklist.md 和
-     docs/00_meta/00_rust_version_alignment_checklist.md 作为模板，
+读取 docs/00_meta/10_quarterly_sync_checklist.md 和
+     docs/00_meta/13_rust_version_alignment_checklist.md 作为模板，
 自动填充可客观获取的数据（日期、版本、编译状态、依赖状态、安全公告等），
 生成填充后的检查清单到 archive/YYYY/QN/ 目录。
 

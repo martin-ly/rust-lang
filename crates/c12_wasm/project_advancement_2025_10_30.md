@@ -38,7 +38,7 @@
 
 #### 1.1 WASI 0.2 组件模型深度指南
 
-**文件**: `docs/tier_04_advanced/09_wasi_0_2_component_model_in_depth_guide.md`
+**文件**: `docs/tier_04_advanced/08_wasi_0_2_component_model_in_depth_guide.md`
 
 **核心内容**:
 
@@ -391,7 +391,7 @@ Tier 4 高级文档:
 
 ```bash
 # 阅读文档
-cat docs/tier_04_advanced/09_wasi_0_2_component_model_in_depth_guide.md
+cat docs/tier_04_advanced/08_wasi_0_2_component_model_in_depth_guide.md
 
 # 运行示例
 rustup target add wasm32-wasip2

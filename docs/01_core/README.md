@@ -4,7 +4,7 @@
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **层次定位**: L1-L2 基础-进阶 / 核心概念总览
 > **前置依赖**: 无（入门入口）
-> **后置延伸**: [docs 指南](../03_guides) · [docs 参考](../02_reference) · [concept L1-L2](../..)
+> **后置延伸**: [docs 指南](../04_guides) · [docs 参考](../03_reference) · [concept L1-L2](../..)
 > **跨层映射**: docs→concept 工程映射 | L1-L2 概念索引
 > **定理链编号**: T-001 → T-010 → T-020 → T-030
 >

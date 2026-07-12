@@ -1,0 +1,359 @@
+# 编译器理论 {#编译器理论}
+>
+> **EN**: Compiler Theory Index
+> **Summary**: 编译器理论 Compiler Theory Index. (stub/archive redirect)
+> **分级**: [B]
+> **Bloom 层级**: L5-L6
+> **创建日期**: 2026-02-20
+> **最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **状态**: ✅ 已完成
+> 内容已整合至： 10_compiler_optimizations.md (研究笔记)、[01_compiler_features.md](../07_toolchain_ecosystem/01_compiler/README.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/04_formal/05_rustc_internals/01_rustc_query_system.md`](../../../concept/04_formal/05_rustc_internals/01_rustc_query_system.md)
+> - [`concept/04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md`](../../../concept/04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md)
+> - [`concept/04_formal/05_rustc_internals/04_name_resolution_and_hir.md`](../../../concept/04_formal/05_rustc_internals/04_name_resolution_and_hir.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
+
+## 知识结构思维导图 {#知识结构思维导图}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)** · **来源: [Wikipedia - Formal Grammar](https://en.wikipedia.org/wiki/Formal_Grammar)** · **[ACM - Compiler Design Principles](https://dl.acm.org/)** · **[IEEE - Language Implementation Standards](https://ieeexplore.ieee.org/)**
+
+```mermaid
+mindmap
+  root((编译器理论))
+    编译流程
+      词法分析
+      语法分析
+      语义分析
+      代码生成
+    MIR表示
+      中级IR
+      借用检查
+    编译优化
+      常量折叠
+      内联优化
+      死代码消除
+    单态化
+      泛型实例化
+      代码生成
+    生命周期擦除
+      编译时检查
+      运行时无开销
+    宏系统
+      属性宏
+      派生宏
+    unsafe边界
+      安全检查
+      程序员责任
+```
+
+## 与核心文档的关联 {#与核心文档的关联}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+| 本文档 | 核心文档 | 关系 |
+| :--- | :--- | :--- |
+| 本README | 10_compiler_optimizations.md (研究笔记) | 索引/重定向 |
+| 本README | [06_toolchain_ecosystem/01_compiler/README.md](../07_toolchain_ecosystem/01_compiler/README.md) | 索引/重定向 |
+
+[返回主索引](../00_master_index.md)
+
+---
+
+## Rust 编译器架构 {#rust-编译器架构}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 编译流程 {#编译流程}
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
+```text
+源代码 (.rs)
+    ↓
+词法分析 → Token 流
+    ↓
+语法分析 → AST (抽象语法树)
+    ↓
+语义分析 → HIR (高级中间表示)
+    ↓
+类型检查 → 带类型注解的 HIR
+    ↓
+借用检查 → MIR (中级中间表示)
+    ↓
+MIR 优化 → 优化后的 MIR
+    ↓
+代码生成 → LLVM IR
+    ↓
+LLVM 优化 → 优化后的 LLVM IR
+    ↓
+目标代码生成 → 机器码
+    ↓
+链接器 → 可执行文件/库
+```
+
+### MIR（中级中间表示） {#mir中级中间表示}
+
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+
+```rust
+// Rust 代码
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+// 对应的 MIR（概念性表示）
+// fn add(_1: i32, _2: i32) -> i32 {
+//     let mut _0: i32;  // 返回值
+//
+//     bb0: {
+//         _0 = Add(_1, _2);
+//         return;
+//     }
+// }
+```
+
+### 借用检查的 MIR 分析 {#借用检查的-mir-分析}
+
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
+```rust
+// 借用检查器在 MIR 上工作
+fn borrow_check_example() {
+    let mut x = 5;
+    let y = &mut x;
+    *y += 1;
+    // 借用在这里结束
+    println!("{}", x);  // 可以再次使用 x
+}
+
+// MIR 表示借用状态
+// bb0: {
+//     _1 = 5;              // x = 5
+//     _2 = &mut _1;        // y = &mut x
+//     *_2 = Add(*_2, 1);   // *y += 1
+//     // _2 的生命周期结束
+//     _3 = _1;             // 使用 x
+// }
+```
+
+### 编译器优化 {#编译器优化}
+
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+
+```rust
+// 常量折叠
+const fn const_fold() -> i32 {
+    2 + 3 * 4  // 编译时计算为 14
+}
+
+// 内联优化
+#[inline]
+fn small_function(x: i32) -> i32 {
+    x * 2
+}
+
+fn caller() -> i32 {
+    small_function(5)  // 可能内联为 5 * 2 = 10
+}
+
+// 死代码消除
+fn dead_code() {
+    let x = 5;  // 未使用，会被消除
+    println!("Hello");
+}
+```
+
+### 泛型单态化 {#泛型单态化}
+
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
+```rust
+// 泛型定义
+fn identity<T>(x: T) -> T {
+    x
+}
+
+// 单态化后为每个类型生成独立代码
+// fn identity_i32(x: i32) -> i32 { x }
+// fn identity_f64(x: f64) -> f64 { x }
+// fn identity_string(x: String) -> String { x }
+
+fn monomorphization_demo() {
+    let _ = identity(42i32);
+    let _ = identity(3.14f64);
+    let _ = identity(String::from("hello"));
+}
+```
+
+### 生命周期擦除 {#生命周期擦除}
+
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+
+```rust
+// 源代码带生命周期注解
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y }
+}
+
+// 编译后生命周期被擦除
+// 实际代码不包含生命周期信息
+// fn longest(x: &str, y: &str) -> &str { ... }
+
+// 生命周期仅在编译时检查，运行时不存在
+fn lifetime_erasure() {
+    let s1 = String::from("hello");
+    let s2 = String::from("world");
+    let result = longest(&s1, &s2);
+    println!("{}", result);
+}
+```
+
+### 属性宏与派生宏 {#属性宏与派生宏}
+
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+
+```rust,ignore
+// 过程宏示例
+use proc_macro::TokenStream;
+
+// 自定义 derive 宏
+#[derive(Debug, Clone, PartialEq)]
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+// 属性宏
+#[inline(always)]
+fn hot_function() {}
+
+#[cold]
+fn cold_path() {}
+
+// 条件编译
+#[cfg(target_os = "linux")]
+fn linux_only() {}
+
+#[cfg(all(feature = "serde", not(feature = "minimal")))]
+fn with_serde() {}
+
+// 编译期断言
+const _: () = assert!(std::mem::size_of::<usize>() == 8, "64-bit only");
+```
+
+### unsafe 代码检查边界 {#unsafe-代码检查边界}
+
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+
+```rust
+// 编译器确保 unsafe 块边界清晰
+fn safe_wrapper(data: &[u8]) -> &[u8] {
+    // 安全检查
+    if data.len() < 4 {
+        return &[];
+    }
+
+    // unsafe 块内部是程序员的责任
+    unsafe {
+        // 原始指针操作
+        let ptr = data.as_ptr().add(2);
+        std::slice::from_raw_parts(ptr, data.len() - 2)
+    }
+}
+
+// unsafe trait 与 unsafe fn
+unsafe trait Zeroable {
+    fn zero() -> Self;
+}
+
+unsafe impl Zeroable for u32 {
+    fn zero() -> Self { 0 }
+}
+
+unsafe fn very_dangerous() {
+    // 调用者必须确保调用条件
+}
+```
+
+---
+
+## 使用场景 {#使用场景}
+
+| 场景 | 编译器特性 | 应用 |
+| :--- | :--- | :--- |
+| 嵌入式开发 | `#[no_std]`, 代码大小优化 | 无运行时（Runtime）依赖 |
+| 高性能计算 | SIMD, 循环展开, 向量化 | 数值计算加速 |
+| WebAssembly | `--target wasm32-unknown-unknown` | 浏览器内运行 |
+| 内核开发 | `#[no_std]`, 自定义 alloc | 操作系统内核 |
+| 实时系统 | `const fn`, 编译期计算 | 确定性行为 |
+| FFI 边界 | `extern "C"`, `repr(C)` | 与其他语言互操作 |
+| 元编程 | 过程宏（Procedural Macro）, 声明宏（Declarative Macro） | 代码生成 |
+| 条件编译 | `cfg` 属性 | 多平台支持 |
+
+---
+
+## 相关研究笔记 {#相关研究笔记}
+
+### 实验分析 {#实验分析}
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 编译器优化实验 | 编译器优化分析 | 10_compiler_optimizations.md (研究笔记) |
+| 内存分析 | 内存使用分析 | 10_memory_analysis.md (研究笔记) |
+| 性能基准 | 性能测试方法论 | 10_performance_benchmarks.md (研究笔记) |
+
+### 形式化方法 {#形式化方法}
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 借用（Borrowing）检查证明 | 借用检查器形式化 | 10_borrow_checker_proof.md (研究笔记) |
+| 所有权（Ownership）模型 | 所有权系统形式化 | 10_ownership_model.md (研究笔记) |
+| 生命周期（Lifetimes）形式化 | 生命周期系统理论 | 10_lifetime_formalization.md (研究笔记) |
+
+### 类型理论 {#类型理论}
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 类型系统（Type System）基础 | 类型系统理论 | 10_type_system_foundations.md (研究笔记) |
+| 高级类型 | 高级类型特性 | 10_advanced_types.md (研究笔记) |
+| 变型理论 | 类型变型 | 10_variance_theory.md (研究笔记) |
+
+### 工具链 {#工具链}
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 编译器特性 | 编译器配置与优化选项 | [../07_toolchain_ecosystem/01_compiler/README.md](../07_toolchain_ecosystem/01_compiler/README.md) |
+
+---
+
+## 相关 crates {#相关-crates}
+
+| crate | 描述 | 路径 |
+| :--- | :--- | :--- |
+| c11_advanced | 高级特性实现 | crates/c11_advanced/ (crate) |
+| c12_macros | 宏（Macro）系统实现 | crates/c12_macros/ (crate) |
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 权威来源索引 {#权威来源索引}
+
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
+> **来源: [LLVM Documentation](https://llvm.org/docs/)**
+> **来源: [ACM](https://dl.acm.org/)**

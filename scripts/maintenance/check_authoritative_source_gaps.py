@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Check docs/research_notes authoritative source coverage gaps.
+Check docs/12_research_notes authoritative source coverage gaps.
 
-Reads all Markdown files under docs/research_notes/, groups them by concept
+Reads all Markdown files under docs/12_research_notes/, groups them by concept
 family (概念族), and reports:
 - Number of files per concept family.
 - Percentage of files in each family that reference P0/P1/P2 authority URLs.
@@ -186,7 +186,7 @@ def analyze() -> dict[str, dict[str, object]]:
 
 def print_report(report: dict[str, dict[str, object]]) -> None:
     print("=" * 70)
-    print("docs/research_notes 权威来源缺口报告")
+    print("docs/12_research_notes 权威来源缺口报告")
     print("=" * 70)
 
     meta = report["_meta"]

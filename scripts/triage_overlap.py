@@ -27,8 +27,44 @@ SERIES_RE = re.compile(
     r"rust_1\d\d|rust_19\d|readme_rust_|_part\d|_v\d+|_19\d\d|20\d\d_\d\d_\d\d|"
     r"comprehensive_enhancement_report|examples_collection|snapshot", re.IGNORECASE)
 
+# 显式 SERIES 白名单（人工复核登记的误报对；路径为仓库相对路径，正斜杠）。
+# 登记格式：frozenset({file1, file2})，匹配时同时按完整路径与 basename 对判定（容忍 NN_ 重编号）。
+SERIES_PAIRS = {
+    # 复核 2026-07-12：rust 1.90 网络示例分章文件（Part1/Part2），实测正文相似度 12.7%，
+    # 内容为不同章节（基础示例 vs 进阶协议），非重复，保留分章结构。
+    frozenset({
+        "crates/c10_networks/docs/07_rust_190_examples_collection.md",
+        "crates/c10_networks/docs/08_rust_190_examples_part2.md",
+    }),
+    # 复核 2026-07-12：c02_type_system 版本系列 README（rust 1.89 / 1.90），
+    # 57% 独特内容（各自版本特性清单），属版本快照系列，保留。
+    frozenset({
+        "crates/c02_type_system/readme_rust_189.md",
+        "crates/c02_type_system/readme_rust_190.md",
+    }),
+}
+
+
+def _norm(p: str) -> str:
+    return p.replace("\\", "/")
+
+
+def _in_series_pairs(f1: str, f2: str) -> bool:
+    f1, f2 = _norm(f1), _norm(f2)
+    if frozenset({f1, f2}) in SERIES_PAIRS:
+        return True
+    # 容忍 NN_ 重编号：按 basename 对匹配
+    b1, b2 = f1.rsplit("/", 1)[-1], f2.rsplit("/", 1)[-1]
+    for pair in SERIES_PAIRS:
+        bases = {p.rsplit("/", 1)[-1] for p in pair}
+        if frozenset({b1, b2}) == bases:
+            return True
+    return False
+
 
 def is_series(o):
+    if _in_series_pairs(o["f1"], o["f2"]):
+        return True
     if SERIES_RE.search(o["f1"]) or SERIES_RE.search(o["f2"]):
         return True
     if SERIES_RE.search(o.get("t1", "")) or SERIES_RE.search(o.get("t2", "")):

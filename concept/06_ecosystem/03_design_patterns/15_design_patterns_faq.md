@@ -448,14 +448,14 @@ trait Observer {
 **核心资源**:
 
 - [完整FAQ](/crates/c09_design_pattern/docs/tier_01_foundations/04_faq.md) - 所有问题详细解答
-- [综合指南](/crates/c09_design_pattern/docs/rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md) - 完整模式指南
-- [实战示例集](/crates/c09_design_pattern/docs/rust_190_examples_collection.md) - 800+行代码示例
+- [综合指南](/crates/c09_design_pattern/docs/20_rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md) - 完整模式指南
+- [实战示例集](/crates/c09_design_pattern/docs/18_rust_190_examples_collection.md) - 800+行代码示例
 
 **深度理论**:
 
 - [形式化理论体系](/crates/c09_design_pattern/docs/tier_04_advanced/README.md) - 高级主题
-- [Actor/Reactor模式](/crates/c09_design_pattern/docs/actor_reactor_patterns.md) - 并发模式深入
-- [CSP vs Async](/crates/c09_design_pattern/docs/csp_vs_async_analysis.md) - 并发模型对比
+- [Actor/Reactor模式](/crates/c09_design_pattern/docs/01_actor_reactor_patterns.md) - 并发模式深入
+- [CSP vs Async](/crates/c09_design_pattern/docs/06_csp_vs_async_analysis.md) - 并发模型对比
 
 ---
 

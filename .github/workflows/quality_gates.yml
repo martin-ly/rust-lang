@@ -376,6 +376,20 @@ jobs:
         run: python scripts/concept_consistency_auditor.py --strict
         continue-on-error: false
 
+  naming-convention:
+    name: Naming Convention (observe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run naming convention lint (observe, append --strict to enforce; AGENTS.md §4.0)
+        run: python scripts/check_naming_convention.py
+        continue-on-error: true
+
   quality-gates-summary:
     name: Quality Gates Summary
     runs-on: ubuntu-latest
@@ -398,6 +412,7 @@ jobs:
       - concept-authority-coverage
       - canonical-uniqueness
       - concept-consistency-audit
+      - naming-convention
     if: always() && github.event_name == 'pull_request'
     steps:
       - name: Generate summary comment
@@ -422,7 +437,8 @@ jobs:
               'Semantic Health (observe)': '${{ needs.semantic-health.result }}',
               'Concept Authority Coverage (observe)': '${{ needs.concept-authority-coverage.result }}',
               'Canonical Uniqueness (strict)': '${{ needs.canonical-uniqueness.result }}',
-              'Concept Consistency Audit (strict)': '${{ needs.concept-consistency-audit.result }}'
+              'Concept Consistency Audit (strict)': '${{ needs.concept-consistency-audit.result }}',
+              'Naming Convention (observe)': '${{ needs.naming-convention.result }}'
             };
 
             let status = '✅';
@@ -447,7 +463,7 @@ jobs:
             ${summary}
 
             ---
-            *All 18 quality gates completed (14 blocking + 4 semantic observe)*`;
+            *All 20 quality gates completed (14 blocking + 6 semantic observe)*`;
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,

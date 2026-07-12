@@ -1,0 +1,508 @@
+# MDBook Quiz 使用指南 {#mdbook-quiz-使用指南}
+
+> **EN**: Mdbook Quiz Guide
+> **Summary**: MDBook Quiz 使用指南 Mdbook Quiz Guide. (stub/archive redirect)
+> **分级**: [A]
+> **Bloom 层级**: L1-L2
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
+
+本文档介绍如何在项目中使用和维护 mdbook-quiz 交互式测验系统。
+
+## 目录 {#目录}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- [MDBook Quiz 使用指南 {#mdbook-quiz-使用指南}](#mdbook-quiz-使用指南-mdbook-quiz-使用指南)
+  - [目录 {#目录}](#目录-目录)
+  - [快速开始 {#快速开始}](#快速开始-快速开始)
+    - [1. 安装依赖 {#1-安装依赖}](#1-安装依赖-1-安装依赖)
+    - [2. 构建和预览 {#2-构建和预览}](#2-构建和预览-2-构建和预览)
+    - [3. 访问测验 {#3-访问测验}](#3-访问测验-3-访问测验)
+  - [添加新测验 {#添加新测验}](#添加新测验-添加新测验)
+    - [步骤 1：创建测验目录 {#步骤-1创建测验目录}](#步骤-1创建测验目录-步骤-1创建测验目录)
+    - [步骤 2：创建 TOML 测验文件 {#步骤-2创建-toml-测验文件}](#步骤-2创建-toml-测验文件-步骤-2创建-toml-测验文件)
+    - [步骤 3：编写测验内容 {#步骤-3编写测验内容}](#步骤-3编写测验内容-步骤-3编写测验内容)
+    - [步骤 4：创建 Markdown 入口文件 {#步骤-4创建-markdown-入口文件}](#步骤-4创建-markdown-入口文件-步骤-4创建-markdown-入口文件)
+    - [步骤 5：更新 SUMMARY.md {#步骤-5更新-summarymd}](#步骤-5更新-summarymd-步骤-5更新-summarymd)
+    - [步骤 6：更新测验索引 {#步骤-6更新测验索引}](#步骤-6更新测验索引-步骤-6更新测验索引)
+  - [测验编写最佳实践 {#测验编写最佳实践}](#测验编写最佳实践-测验编写最佳实践)
+    - [1. 题目质量 {#1-题目质量}](#1-题目质量-1-题目质量)
+    - [2. 答案设计 {#2-答案设计}](#2-答案设计-2-答案设计)
+    - [3. 难度分级标准 {#3-难度分级标准}](#3-难度分级标准-3-难度分级标准)
+    - [4. 题型选择指南 {#4-题型选择指南}](#4-题型选择指南-4-题型选择指南)
+  - [测验格式规范 {#测验格式规范}](#测验格式规范-测验格式规范)
+    - [单选题 (SingleChoice) {#单选题-singlechoice}](#单选题-singlechoice-单选题-singlechoice)
+    - [多选题 (MultipleChoice) {#多选题-multiplechoice}](#多选题-multiplechoice-多选题-multiplechoice)
+    - [判断题 (TrueFalse) {#判断题-truefalse}](#判断题-truefalse-判断题-truefalse)
+    - [填空题 (FillInBlank) {#填空题-fillinblank}](#填空题-fillinblank-填空题-fillinblank)
+    - [代码块格式 {#代码块格式}](#代码块格式-代码块格式)
+  - [测验文件结构示例 {#测验文件结构示例}](#测验文件结构示例-测验文件结构示例)
+  - [常见问题 {#常见问题}](#常见问题-常见问题)
+    - [Q: mdbook-quiz 和 mdbook 版本不兼容怎么办？ {#q-mdbook-quiz-和-mdbook-版本不兼容怎么办}](#q-mdbook-quiz-和-mdbook-版本不兼容怎么办-q-mdbook-quiz-和-mdbook-版本不兼容怎么办)
+    - [Q: 测验不显示怎么办？ {#q-测验不显示怎么办}](#q-测验不显示怎么办-q-测验不显示怎么办)
+    - [Q: 如何添加图片到题目中？ {#q-如何添加图片到题目中}](#q-如何添加图片到题目中-q-如何添加图片到题目中)
+    - [Q: 可以限制答题次数吗？ {#q-可以限制答题次数吗}](#q-可以限制答题次数吗-q-可以限制答题次数吗)
+    - [Q: 如何导出测验结果？ {#q-如何导出测验结果}](#q-如何导出测验结果-q-如何导出测验结果)
+  - [贡献指南 {#贡献指南}](#贡献指南-贡献指南)
+    - [提交新测验 {#提交新测验}](#提交新测验-提交新测验)
+    - [代码审查清单 {#代码审查清单}](#代码审查清单-代码审查清单)
+  - [参考资源 {#参考资源}](#参考资源-参考资源)
+  - [Rust 1.95+ 学习路径 {#rust-195-学习路径}](#rust-195-学习路径-rust-195-学习路径)
+    - [1.95+ 新特性学习要点 {#195-新特性学习要点}](#195-新特性学习要点-195-新特性学习要点)
+    - [学习资源 {#学习资源}](#学习资源-学习资源)
+  - [Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新}](#rust-195-持续更新更新-rust-195-持续更新更新)
+    - [本文档的Rust 1.95+更新要点 {#本文档的rust-195更新要点}](#本文档的rust-195更新要点-本文档的rust-195更新要点)
+      - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
+      - [代码示例更新 {#代码示例更新}](#代码示例更新-代码示例更新)
+      - [相关文档 {#相关文档}](#相关文档-相关文档)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
+
+## 快速开始 {#快速开始}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 1. 安装依赖 {#1-安装依赖}
+
+> **来源: [IEEE](https://standards.ieee.org/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+确保已安装 mdbook 和 mdbook-quiz：
+
+```bash
+cargo install mdbook
+cargo install mdbook-quiz
+```
+
+### 2. 构建和预览 {#2-构建和预览}
+
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```bash
+cd book
+mdbook build    # 构建
+mdbook serve    # 预览（自动刷新）
+```
+
+### 3. 访问测验 {#3-访问测验}
+
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+打开浏览器访问 `http://localhost:3000`，选择对应的测验章节即可开始。
+
+## 添加新测验 {#添加新测验}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 步骤 1：创建测验目录 {#步骤-1创建测验目录}
+
+> **来源: [IEEE](https://standards.ieee.org/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+如果还没有对应主题的目录，先创建：
+
+```bash
+mkdir -p book/src/quizzes
+```
+
+### 步骤 2：创建 TOML 测验文件 {#步骤-2创建-toml-测验文件}
+
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+在 `book/src/quizzes/` 下创建新的 `.toml` 文件：
+
+```bash
+touch book/src/quizzes/your_topic.toml
+```
+
+### 步骤 3：编写测验内容 {#步骤-3编写测验内容}
+
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+参考以下模板：
+
+```toml
+[[questions]]
+type = "SingleChoice"
+id = "your_topic_001"
+prompt = "题目描述"
+answer = 0
+options = [
+  "选项 A",
+  "选项 B",
+  "选项 C",
+  "选项 D"
+]
+explanation = "详细解释为什么正确答案是正确的，以及其他选项为什么错误。"
+difficulty = "基础"
+```
+
+### 步骤 4：创建 Markdown 入口文件 {#步骤-4创建-markdown-入口文件}
+
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+创建 `book/src/quizzes/your_topic.md`：
+
+```markdown
+# 主题测验 {#主题测验}
+
+本测验涵盖 ... 的核心概念。
+
+{{#quiz ./your_topic.toml}}
+```
+
+### 步骤 5：更新 SUMMARY.md {#步骤-5更新-summarymd}
+
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+在 `book/src/SUMMARY.md` 中添加新章节：
+
+```markdown
+- [主题测验](quizzes/README.md)
+```
+
+### 步骤 6：更新测验索引 {#步骤-6更新测验索引}
+
+> **来源: [ACM](https://dl.acm.org/)**
+
+在 `book/src/quiz-index.md` 中添加新测验信息。
+
+## 测验编写最佳实践 {#测验编写最佳实践}
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+### 1. 题目质量 {#1-题目质量}
+
+> **来源: [IEEE](https://standards.ieee.org/)**
+
+- **概念准确**：确保题目和答案技术上正确
+- **覆盖全面**：涵盖主题的各个方面和常见误区
+- **难度分级**：明确标注基础/进阶/挑战
+- **代码可运行**：所有代码示例应该可以编译（除非用于展示错误）
+
+### 2. 答案设计 {#2-答案设计}
+
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+
+- **干扰项合理**：错误选项应该反映常见误解
+- **解释详尽**：不仅说明为什么对，还要说明为什么错
+- **引用（Reference）文档**：适当引用官方文档或标准库
+
+### 3. 难度分级标准 {#3-难度分级标准}
+
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
+| 级别 | 描述 | 示例 |
+|------|------|------|
+| 🟢 基础 | 基本概念，直接考察 | 什么是所有权（Ownership）？ |
+| 🟡 进阶 | 需要理解深层原理 | 为什么这段代码不能编译？ |
+| 🔴 挑战 | 复杂场景，边界情况 | 结合多个概念的实际问题 |
+
+### 4. 题型选择指南 {#4-题型选择指南}
+
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+
+- **单选题**：只有一个正确答案的概念性问题
+- **多选题**：多个正确选项，考察全面理解
+- **判断题**：明确的是非概念
+- **填空题**：代码补全，考察实践能力
+
+## 测验格式规范 {#测验格式规范}
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+### 单选题 (SingleChoice) {#单选题-singlechoice}
+
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+
+```toml
+[[questions]]
+type = "SingleChoice"
+id = "unique_id_001"
+prompt = "题目文本"
+answer = 1  # 正确选项的索引（从0开始）
+options = [
+  "选项 A",
+  "选项 B",
+  "选项 C",
+  "选项 D"
+]
+explanation = "解释文本"
+difficulty = "基础"
+```
+
+### 多选题 (MultipleChoice) {#多选题-multiplechoice}
+
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+
+```toml
+[[questions]]
+type = "MultipleChoice"
+id = "unique_id_002"
+prompt = "题目文本"
+answer = [0, 2]  # 正确选项的索引数组
+options = [
+  "选项 A",
+  "选项 B",
+  "选项 C",
+  "选项 D"
+]
+explanation = "解释文本"
+difficulty = "进阶"
+```
+
+### 判断题 (TrueFalse) {#判断题-truefalse}
+
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
+
+```toml
+[[questions]]
+type = "TrueFalse"
+id = "unique_id_003"
+prompt = "陈述文本"
+answer = false  # true 或 false
+explanation = "解释文本"
+difficulty = "基础"
+```
+
+### 填空题 (FillInBlank) {#填空题-fillinblank}
+
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+
+```toml
+[[questions]]
+type = "FillInBlank"
+id = "unique_id_004"
+prompt = "题目描述，用 _____ 表示填空位置"
+answer = ["答案1", "答案2"]  # 允许多个正确答案
+explanation = "解释文本"
+difficulty = "进阶"
+```
+
+### 代码块格式 {#代码块格式}
+
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+
+在 prompt 中使用代码块：
+
+```toml
+    prompt = '''以下代码的输出是什么？
+    ```rust
+    fn main() {
+        println!("Hello");
+    }
+    ```
+    选择正确答案：'''
+```
+
+注意使用三引号（'''）来支持多行字符串。
+
+## 测验文件结构示例 {#测验文件结构示例}
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+```toml
+# 所有权测验 - ownership.toml {#所有权测验---ownershiptoml}
+
+# 基础题（5道） {#基础题5道}
+[[questions]]
+# ... 基础题目 ... {#基础题目}
+
+# 进阶题（4道） {#进阶题4道}
+[[questions]]
+# ... 进阶题目 ... {#进阶题目}
+
+# 挑战题（3道） {#挑战题3道}
+[[questions]]
+# ... 挑战题目 ... {#挑战题目}
+```
+
+## 常见问题 {#常见问题}
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+### Q: mdbook-quiz 和 mdbook 版本不兼容怎么办？ {#q-mdbook-quiz-和-mdbook-版本不兼容怎么办}
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+A: 确保两者都使用最新版本：
+
+```bash
+cargo install mdbook --force
+cargo install mdbook-quiz --force
+```
+
+### Q: 测验不显示怎么办？ {#q-测验不显示怎么办}
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+A: 检查以下几点：
+
+1. TOML 文件语法是否正确（可以用在线 TOML 验证器）
+2. 文件路径是否正确（相对于 .md 文件）
+3. `book.toml` 中是否正确配置了预处理器
+
+### Q: 如何添加图片到题目中？ {#q-如何添加图片到题目中}
+>
+> **[来源: [crates.io](https://crates.io/)]**
+
+A: 当前 mdbook-quiz 不支持直接嵌入图片。可以将图片放在 `book/src/assets/` 目录，在 prompt 中使用 Markdown 图片语法引用。
+
+### Q: 可以限制答题次数吗？ {#q-可以限制答题次数吗}
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+A: mdbook-quiz 本身不限制答题次数。如果需要，可以通过自定义 JavaScript 实现。
+
+### Q: 如何导出测验结果？ {#q-如何导出测验结果}
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+A: 目前 mdbook-quiz 不支持直接导出。可以通过浏览器的 Local Storage 查看保存的答案，或扩展插件实现导出功能。
+
+## 贡献指南 {#贡献指南}
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+### 提交新测验 {#提交新测验}
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+1. 创建新的分支
+2. 按照本指南添加测验
+3. 本地测试确保可以正常显示
+4. 提交 PR，说明测验覆盖的内容
+
+### 代码审查清单 {#代码审查清单}
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+- [ ] 题目技术准确性
+- [ ] 解释清晰完整
+- [ ] 难度标注合理
+- [ ] ID 全局唯一
+- [ ] TOML 语法正确
+- [ ] Markdown 格式正确
+
+## 参考资源 {#参考资源}
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+- [mdbook 官方文档](https://rust-lang.github.io/mdBook/)
+- [mdbook-quiz GitHub](https://github.com/willcrichton/mdbook-quiz)
+- [Brown 大学交互式 Rust Book](https://rust-book.cs.brown.edu/)
+- [Rust 官方文档](https://doc.rust-lang.org/)
+
+---
+
+如有问题或建议，请在项目 Issue 中提出。
+
+---
+
+## Rust 1.95+ 学习路径 {#rust-195-学习路径}
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+> **适用版本**: Rust 1.97.0+
+
+### 1.95+ 新特性学习要点 {#195-新特性学习要点}
+>
+> **[来源: [crates.io](https://crates.io/)]**
+
+| 特性 | 学习难度 | 推荐顺序 |
+|------|---------|---------|
+| rray_windows | ⭐ | 第1周 |
+| ControlFlow | ⭐⭐ | 第2周 |
+| LazyCell/LazyLock 新方法 | ⭐⭐ | 第3周 |
+| Peekable::next_if_map | ⭐ | 第4周 |
+
+### 学习资源 {#学习资源}
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+- Rust 1.95+ 迁移指南
+- [Rust 1.94 发布说明
+
+**最后更新**: 2026-05-08 (添加 Rust 1.95+ 学习路径)
+
+---
+
+## Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新}
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+> **适用版本**: Rust 1.97.0+ (Edition 2024)
+> **更新日期**: 2026-03-14
+
+### 本文档的Rust 1.95+更新要点 {#本文档的rust-195更新要点}
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
+
+#### 核心特性应用 {#核心特性应用}
+
+| 特性 | 应用场景 | 文档章节 |
+|------|---------|----------|
+| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
+| `ControlFlow<B, C>` | 错误处理（Error Handling）、提前终止控制 | 错误处理、控制流 |
+| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
+| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
+
+#### 代码示例更新 {#代码示例更新}
+
+本文档中的所有Rust代码示例均已：
+
+- ✅ 使用Rust 1.95+语法验证
+- ✅ 兼容Edition 2024
+- ✅ 通过标准库测试
+
+#### 相关文档 {#相关文档}
+
+- Rust 1.95+ 迁移指南
+- [Rust 1.94 特性速查（已归档）
+- [性能调优指南](../08_usage_guides/18_performance_tuning_guide.md)
+
+---
+
+**维护者**: Rust 学习项目团队
+**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 权威来源索引 {#权威来源索引}
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+
+---

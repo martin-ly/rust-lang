@@ -90,7 +90,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------------------- param($
 
 ### 1. 容器技术深度文档 ✨
 
-**新增文档**: `docs/tier_04_advanced/06_container_technology_integration.md`
+**新增文档**: `docs/tier_04_advanced/05_container_technology_integration.md`
 
 **内容涵盖**:
 
@@ -108,7 +108,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------------------- param($
 
 ### 2. 云原生 CI/CD 实践 ✨
 
-**新增文档**: `docs/tier_04_advanced/07_cloud_native_ci_cd_practice.md`
+**新增文档**: `docs/tier_04_advanced/06_cloud_native_ci_cd_practice.md`
 
 **内容涵盖**:
 
@@ -127,7 +127,7 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ------------------- param($
 
 ### 3. 监控与可观测性 ✨
 
-**新增文档**: `docs/tier_04_advanced/08_monitoring_and_observability_practice.md`
+**新增文档**: `docs/tier_04_advanced/07_monitoring_and_observability_practice.md`
 
 **内容涵盖**:
 
@@ -268,9 +268,9 @@ param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $
 
 | 文档 | 路径 | 类型 | 行数 |
 param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- ' ------|
-| 容器技术深度集成 | `docs/tier_04_advanced/06_container_technology_integration.md` | Tier 4 | ~1,100 |
-| 云原生CI/CD实践 | `docs/tier_04_advanced/07_cloud_native_ci_cd_practice.md` | Tier 4 | ~900 |
-| 监控与可观测性实践 | `docs/tier_04_advanced/08_monitoring_and_observability_practice.md` | Tier 4 | ~800 |
+| 容器技术深度集成 | `docs/tier_04_advanced/05_container_technology_integration.md` | Tier 4 | ~1,100 |
+| 云原生CI/CD实践 | `docs/tier_04_advanced/06_cloud_native_ci_cd_practice.md` | Tier 4 | ~900 |
+| 监控与可观测性实践 | `docs/tier_04_advanced/07_monitoring_and_observability_practice.md` | Tier 4 | ~800 |
 
 **总计**: ~2,800 行专业级文档
 

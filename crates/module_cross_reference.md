@@ -164,7 +164,7 @@ tokio::spawn(async {
 
 ## 📖 文档交叉引用
 
-### 思维表示 (docs/04_thinking/)
+### 思维表示 (docs/07_thinking/)
 
 | 文档 | 覆盖模块 | 用途 |
 |------|----------|------|
@@ -172,7 +172,7 @@ tokio::spawn(async {
 | MULTI_DIMENSIONAL_CONCEPT_MATRIX.md | C04-C06 | 技术对比 |
 | DECISION_TREES.md | C05-C10 | 选型决策 |
 
-### 实用指南 (docs/05_guides/)
+### 实用指南 (docs/08_usage_guides/)
 
 | 指南 | 主要模块 | 关联模块 |
 |------|----------|----------|

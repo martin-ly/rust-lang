@@ -250,7 +250,7 @@ c12_wasm/
 
 ### Week 5+: 高级
 
-1. 深入 [WasmEdge](docs/tier_04_advanced/05_wasmedge_and_emerging_tech.md)
+1. 深入 [WasmEdge](docs/tier_04_advanced/04_wasmedge_and_emerging_tech.md)
 2. 创建自己的项目
 3. 性能优化实践
 

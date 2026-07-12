@@ -142,7 +142,7 @@ cargo run -p c01_ownership_borrow_scope --example maybeuninit_cell_array_demo # 
 
 - [Rust Book - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 - [Rustnomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)
-- [docs/01_learning/ownership_guide.md](../../docs/01_learning)
+- [docs/01_learning/ownership_guide.md](../../docs/02_learning)
 
 ---
 

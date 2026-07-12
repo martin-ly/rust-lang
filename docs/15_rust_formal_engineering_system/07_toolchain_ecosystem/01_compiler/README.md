@@ -1,0 +1,247 @@
+# 编译器理论
+>
+> **EN**: Compiler Index
+> **Summary**: 编译器理论 Compiler Index. (stub/archive redirect)
+> **分级**: [B]
+> **创建日期**: 2026-02-20
+> **最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **概念说明**: Rust 编译器（rustc）将源代码转换为机器码，经过词法分析、语法分析、语义分析、类型检查、借用（Borrowing）检查、MIR 优化和 LLVM 代码生成等阶段。理解编译器理论有助于优化代码性能和诊断编译错误。
+> 内容已整合至： [01_compiler_features.md](../../../09_toolchain/01_compiler_features.md)
+
+> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
+>
+> - [`concept/04_formal/05_rustc_internals/01_rustc_query_system.md`](../../../../concept/04_formal/05_rustc_internals/01_rustc_query_system.md)
+> - [`concept/04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md`](../../../../concept/04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md)
+>
+> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
+
+[返回主索引](../../00_master_index.md) | [返回工具链索引](../README.md)
+
+---
+
+## Rust 编译器核心概念 {#rust-编译器核心概念}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 编译流程 {#编译流程}
+
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust
+// 1. 词法分析：源代码 → Token
+// 2. 语法分析：Token → AST
+// 3. 语义分析：AST → HIR
+// 4. 类型检查：HIR → 类型注解 HIR
+// 5. 借用检查：HIR → MIR
+// 6. MIR 优化
+// 7. 代码生成：MIR → LLVM IR
+// 8. LLVM 优化和代码生成
+```
+
+### 编译器属性 {#编译器属性}
+
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust,ignore
+// 条件编译
+#[cfg(target_os = "linux")]
+fn linux_only() {}
+
+#[cfg(all(feature = "serde", not(target_arch = "wasm32")))]
+fn conditional_feature() {}
+
+// 内联控制
+#[inline]           // 建议内联
+fn suggested_inline() {}
+
+#[inline(always)]   // 总是内联
+fn force_inline() {}
+
+#[inline(never)]    // 从不内联
+fn never_inline() {}
+
+// 优化提示
+#[cold]             // 冷路径（很少执行）
+fn error_handler() {}
+
+#[must_use]         // 返回值必须使用
+fn important_result() -> i32 { 42 }
+
+// 链接控制
+#[link(name = "mylib")]
+extern "C" {
+    fn c_function();
+}
+```
+
+### 编译器标志 {#编译器标志}
+
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+
+```bash
+# 优化级别 {#优化级别}
+
+> **Bloom 层级**: L5-L6
+rustc -C opt-level=0    # 无优化（调试）
+rustc -C opt-level=3    # 最大优化
+rustc -C opt-level=s    # 优化大小
+
+# 链接时优化 {#链接时优化}
+rustc -C lto=fat        # 完整 LTO
+rustc -C lto=thin       # 轻量 LTO
+
+# 代码生成单元 {#代码生成单元}
+rustc -C codegen-units=1  # 单代码生成单元（最大优化）
+
+# 目标 CPU {#目标-cpu}
+rustc -C target-cpu=native  # 针对本机 CPU
+rustc -C target-cpu=haswell # 针对特定 CPU
+```
+
+### 条件编译示例 {#条件编译示例}
+
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+
+```rust
+// 平台特定代码
+#[cfg(target_os = "windows")]
+mod platform {
+    pub const LINE_ENDING: &str = "\r\n";
+}
+
+#[cfg(target_os = "linux")]
+mod platform {
+    pub const LINE_ENDING: &str = "\n";
+}
+
+#[cfg(not(any(target_os = "windows", target_os = "linux")))]
+mod platform {
+    pub const LINE_ENDING: &str = "\n";
+}
+
+// 特性门控
+#[cfg(feature = "advanced")]
+pub fn advanced_feature() {
+    // 仅在启用 advanced 特性时可用
+}
+
+// 编译时断言
+const _: () = assert!(std::mem::size_of::<usize>() == 8, "64-bit only");
+```
+
+### 过程宏示例 {#过程宏示例}
+
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+
+```rust,ignore
+// 派生宏
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, DeriveInput};
+
+#[proc_macro_derive(HelloMacro)]
+pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
+    let ast = parse_macro_input!(input as DeriveInput);
+    let name = &ast.ident;
+
+    let gen = quote! {
+        impl HelloMacro for #name {
+            fn hello_macro() {
+                println!("Hello, Macro! My name is {}", stringify!(#name));
+            }
+        }
+    };
+
+    gen.into()
+}
+
+// 属性宏
+#[proc_macro_attribute]
+pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
+    let args = parse_macro_input!(attr as syn::AttributeArgs);
+    // 处理属性参数
+    item
+}
+```
+
+### 编译期计算 {#编译期计算}
+
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
+
+```rust
+// const 函数
+const fn factorial(n: u64) -> u64 {
+    match n {
+        0 | 1 => 1,
+        _ => n * factorial(n - 1),
+    }
+}
+
+// 编译时常量
+const FACTORIAL_5: u64 = factorial(5);  // 在编译时计算
+
+// const 泛型
+struct Array<T, const N: usize>([T; N]);
+
+impl<T, const N: usize> Array<T, N> {
+    const fn size() -> usize {
+        N
+    }
+}
+```
+
+---
+
+## 形式化方法 {#形式化方法}
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 形式化方法概述 | 形式化验证基础理论 | [../../../12_research_notes/02_formal_methods/README.md](../../../12_research_notes/02_formal_methods/README.md) |
+| 类型系统（Type System）形式化 | 类型理论数学定义 | [../../../12_research_notes/05_type_theory/05_type_system_foundations.md](../../../12_research_notes/05_type_theory/05_type_system_foundations.md) |
+| 所有权（Ownership）模型形式化 | 所有权系统数学定义 | [../../../12_research_notes/02_formal_methods/09_ownership_model.md](../../../12_research_notes/02_formal_methods/09_ownership_model.md) |
+| 生命周期（Lifetimes）形式化 | 生命周期理论证明 | ../../../12_research_notes/02_formal_methods/06_lifetime_formalization.md |
+| 借用检查器证明 | 借用检查器形式化 | [../../../12_research_notes/02_formal_methods/03_borrow_checker_proof.md](../../../12_research_notes/02_formal_methods/03_borrow_checker_proof.md) |
+| 证明索引 | 形式化证明集合 | [../../../12_research_notes/03_formal_proofs/21_proof_index.md](../../../12_research_notes/03_formal_proofs/21_proof_index.md) |
+
+## 相关研究笔记 {#相关研究笔记}
+
+| 文档 | 描述 | 路径 |
+| :--- | :--- | :--- |
+| 编译器特性 | 完整编译器指南 | [../../../09_toolchain/01_compiler_features.md](../../../09_toolchain/01_compiler_features.md) |
+| 编译器优化实验 | 优化分析 | [../../../12_research_notes/09_experiments/01_compiler_optimizations.md](../../../12_research_notes/09_experiments/01_compiler_optimizations.md) |
+| 研究方法论 | 研究方法指南 | [../../../12_research_notes/10_tutorials_and_guides/14_research_methodology.md](../../../12_research_notes/10_tutorials_and_guides/14_research_methodology.md) |
+| 工具指南 | 验证工具使用 | [../../../12_research_notes/10_tutorials_and_guides/16_tools_guide.md](../../../12_research_notes/10_tutorials_and_guides/16_tools_guide.md) |
+| 最佳实践 | 工程最佳实践 | [../../../12_research_notes/10_tutorials_and_guides/03_best_practices.md](../../../12_research_notes/10_tutorials_and_guides/03_best_practices.md) |
+
+---
+
+[返回主索引](../../00_master_index.md) | [返回工具链索引](../README.md) | [包管理器理论](../02_package_manager/README.md) | [构建工具理论](../03_build_tools/README.md)
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../../concept/00_meta/02_sources/05_international_authority_index.md)
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 权威来源索引 {#权威来源索引}
+
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
+> **来源: [IEEE - Formal Specification Standards](https://standards.ieee.org/)**
+> **来源: [POPL - Automated Verification](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [IEEE](https://standards.ieee.org/)**

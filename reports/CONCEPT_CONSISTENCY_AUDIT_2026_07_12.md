@@ -1,21 +1,18 @@
 # 概念一致性审计报告 (Concept Consistency Audit)
 
-> 生成时间: 2026-07-12T10:15:27.305600
+> 生成时间: 2026-07-12T13:36:32.920788
 > 生成脚本: `scripts/concept_consistency_auditor.py`(质量门 17,语义观察门)
-> 扫描文件数: 469
-> 提取概念定义数: 1698
+> 扫描文件数: 466
+> 提取概念定义数: 1695
 > 跨文件引用数: 235
 
 ## 目录
 
-- [概念一致性审计报告 (Concept Consistency Audit)](#概念一致性审计报告-concept-consistency-audit)
-  - [目录](#目录)
-  - [一、执行摘要](#一执行摘要)
-  - [二、权威页基线](#二权威页基线)
-  - [三、概念一致性检查](#三概念一致性检查)
-  - [四、跨文件段落引用有效性检查](#四跨文件段落引用有效性检查)
-  - [五、附录:概念定义统计](#五附录概念定义统计)
-    - [5.1 按概念分类统计](#51-按概念分类统计)
+1. [执行摘要](#一执行摘要)
+2. [权威页基线](#二权威页基线)
+3. [概念一致性检查](#三概念一致性检查)
+4. [跨文件段落引用有效性检查](#四跨文件段落引用有效性检查)
+5. [附录:概念定义统计](#五附录概念定义统计)
 
 ---
 
@@ -35,14 +32,14 @@
 
 | 概念 | 权威页 | 状态 |
 |:---|:---|:---|
-| Send/Sync | `03_advanced/00_concurrency/17_send_sync_auto_traits.md` | ✅ `concept/03_advanced/00_concurrency/17_send_sync_auto_traits.md` |
+| Send/Sync | `03_advanced/00_concurrency/02_send_sync_auto_traits.md` | ✅ `concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md` |
 | 所有权 | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | ✅ `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md` |
 | 借用 | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | ✅ `concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` |
 | 生命周期 | `01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` | ✅ `concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` |
-| 内部可变性 | `02_intermediate/02_memory_management/08_interior_mutability.md` | ✅ `concept/02_intermediate/02_memory_management/08_interior_mutability.md` |
-| Pin/Unpin | `03_advanced/01_async/06_pin_unpin.md` | ✅ `concept/03_advanced/01_async/06_pin_unpin.md` |
-| 变型 | `04_formal/00_type_theory/06_subtype_variance.md` | ✅ `concept/04_formal/00_type_theory/06_subtype_variance.md` |
-| unsafe | `03_advanced/02_unsafe/03_unsafe.md` | ✅ `concept/03_advanced/02_unsafe/03_unsafe.md` |
+| 内部可变性 | `02_intermediate/02_memory_management/02_interior_mutability.md` | ✅ `concept/02_intermediate/02_memory_management/02_interior_mutability.md` |
+| Pin/Unpin | `03_advanced/01_async/08_pin_unpin.md` | ✅ `concept/03_advanced/01_async/08_pin_unpin.md` |
+| 变型 | `04_formal/00_type_theory/02_subtype_variance.md` | ✅ `concept/04_formal/00_type_theory/02_subtype_variance.md` |
+| unsafe | `03_advanced/02_unsafe/01_unsafe.md` | ✅ `concept/03_advanced/02_unsafe/01_unsafe.md` |
 
 ## 三、概念一致性检查
 
@@ -58,17 +55,17 @@
 
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
-| unsafe-UB | 388 | 105 |
+| unsafe-UB | 386 | 103 |
 | 所有权-Move语义 | 196 | 81 |
-| Pin-自引用 | 190 | 54 |
+| Pin-自引用 | 189 | 53 |
 | Send+Sync | 99 | 53 |
 | 内部可变性-运行时检查 | 90 | 26 |
 | 变型-定义 | 88 | 18 |
 | 借用-可变独占 | 84 | 28 |
-| 所有权-作用域绑定 | 74 | 41 |
+| 所有权-作用域绑定 | 75 | 42 |
 | 所有权-唯一所有权 | 60 | 30 |
 | 变型-规则 | 60 | 13 |
-| unsafe-契约 | 57 | 29 |
+| unsafe-契约 | 56 | 28 |
 | 内部可变性-定义 | 50 | 25 |
 | unsafe-不变式 | 36 | 6 |
 | Sync | 29 | 13 |

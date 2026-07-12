@@ -31,7 +31,7 @@
 
 ## 文档
 
-- [完整索引](docs/00_master_index.md)
+- [完整索引](docs/00_meta/00_master_index.md)
 - [RTIC 实时框架示例](src/rtic_framework.rs)
 - [HAL 设计模式](src/hal_design_patterns.rs)
 

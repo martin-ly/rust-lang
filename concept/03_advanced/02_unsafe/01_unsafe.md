@@ -27,7 +27,7 @@
 > [Rust Edition Guide 2024 — unsafe extern blocks](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-extern.html) ·
 > [Rust Edition Guide 2024 — unsafe attributes](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-attributes.html)
 >
-> **内容去重提示**: 本文是 Unsafe Rust 的 `concept/` 权威来源。[`knowledge/03_advanced/unsafe/04_unsafe_rust.md`](../../../knowledge/03_advanced/unsafe/04_unsafe_rust.md) 与 [`concept/03_advanced/02_unsafe/04_unsafe_rust_patterns.md`](04_unsafe_rust_patterns.md) 已重定向至本文件，相关内容已在本文件中统一维护。
+> **内容去重提示**: 本文是 Unsafe Rust 的 `concept/` 权威来源。[`knowledge/03_advanced/unsafe/03_unsafe_rust.md`](../../../knowledge/03_advanced/unsafe/03_unsafe_rust.md) 与 [`concept/03_advanced/02_unsafe/04_unsafe_rust_patterns.md`](04_unsafe_rust_patterns.md) 已重定向至本文件，相关内容已在本文件中统一维护。
 
 ---
 
@@ -3443,16 +3443,16 @@ pub struct MyBox<T: ?Sized> {
 | **How Safe and Unsafe Interact** | [safe-unsafe-meaning](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) | § 安全抽象原则 |
 | **What Unsafe Can Do** | [what-unsafe-does](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | § 核心 Unsafe 操作、§ UB 案例 |
 | **Working with Unsafe** | [working-with-unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html) | § 安全抽象原则、§ 推荐学习路径 |
-| **Data Layout** | [data](https://doc.rust-lang.org/nomicon/data.html) | 本项目 [type_system](../../../docs/02_reference/quick_reference/02_type_system.md) |
-| **Ownership** | [ownership](https://doc.rust-lang.org/nomicon/ownership.html) | [ownership_model](../../../docs/research_notes/formal_methods/10_ownership_model.md)、[ownership_cheatsheet](../../../docs/02_reference/quick_reference/02_ownership_cheatsheet.md) |
-| **Subtyping and Variance** | [subtyping](https://doc.rust-lang.org/nomicon/subtyping.html) | [VARIANCE_CONCEPT_MINDMAP](../../../docs/research_notes/formal_methods/10_variance_concept_mindmap.md) |
+| **Data Layout** | [data](https://doc.rust-lang.org/nomicon/data.html) | 本项目 [type_system](../../../docs/03_reference/quick_reference/27_type_system.md) |
+| **Ownership** | [ownership](https://doc.rust-lang.org/nomicon/ownership.html) | [ownership_model](../../../docs/12_research_notes/02_formal_methods/09_ownership_model.md)、[ownership_cheatsheet](../../../docs/03_reference/quick_reference/14_ownership_cheatsheet.md) |
+| **Subtyping and Variance** | [subtyping](https://doc.rust-lang.org/nomicon/subtyping.html) | [VARIANCE_CONCEPT_MINDMAP](../../../docs/12_research_notes/02_formal_methods/14_variance_concept_mindmap.md) |
 | **Type Conversions / Transmutes** | [transmutes](https://doc.rust-lang.org/nomicon/transmutes.html) | § UB 案例 4 类型混淆 |
 | **Uninitialized Memory** | [uninitialized](https://doc.rust-lang.org/nomicon/uninitialized.html) | § UB 案例 6 越界、§ Miri |
 | **Destructors / Drop** | [destructors](https://doc.rust-lang.org/nomicon/destructors.html) | § UB 案例 8 不恰当的 Drop |
-| **Exception Safety** | [exception-safety](https://doc.rust-lang.org/nomicon/exception-safety.html) | [EDGE_CASES_AND_SPECIAL_CASES](../../../docs/02_reference/02_edge_cases_and_special_cases.md) |
-| **Concurrency / Send and Sync** | [send-and-sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | § 示例 3 实现 Send/Sync、[threads_concurrency_cheatsheet](../../../docs/02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) |
+| **Exception Safety** | [exception-safety](https://doc.rust-lang.org/nomicon/exception-safety.html) | [EDGE_CASES_AND_SPECIAL_CASES](../../../docs/03_reference/02_edge_cases_and_special_cases.md) |
+| **Concurrency / Send and Sync** | [send-and-sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | § 示例 3 实现 Send/Sync、[threads_concurrency_cheatsheet](../../../docs/03_reference/quick_reference/26_threads_concurrency_cheatsheet.md) |
 | **Implementing Vec** | vec | § 示例 1 原始指针（Raw Pointer）、§ 示例 6 自定义智能指针（Smart Pointer） |
-| **Implementing Arc** | [arc](https://doc.rust-lang.org/nomicon/arc-mutex/arc.html) | [smart_pointers_cheatsheet](../../../docs/02_reference/quick_reference/02_smart_pointers_cheatsheet.md) |
+| **Implementing Arc** | [arc](https://doc.rust-lang.org/nomicon/arc-mutex/arc.html) | [smart_pointers_cheatsheet](../../../docs/03_reference/quick_reference/23_smart_pointers_cheatsheet.md) |
 | **FFI** | [ffi](https://doc.rust-lang.org/nomicon/ffi.html) | § 示例 2 调用外部函数 |
 
-> **官方入口**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · 与 Rust 1.93 对应见 [09_rust_1.93_compatibility_deep_dive](../../../docs/06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)
+> **官方入口**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · 与 Rust 1.93 对应见 [09_rust_1.93_compatibility_deep_dive](../../../docs/09_toolchain/05_rust_1_93_compatibility_deep_dive.md)

@@ -20,9 +20,9 @@ PROJECT_ROOT = Path(".").resolve()
 # 以下文件即使出现在高相似度报告中，也不自动替换为重定向
 #（例如：速查表、不同版本专题、特定映射页等）
 SKIP_PATHS = {
-    "docs/02_reference/quick_reference/02_rust_197_features_cheatsheet.md",
-    "docs/06_toolchain/06_21_rust_1_97_features.md",
-    "docs/01_learning/01_google_rust_mapping.md",
+    "docs/03_reference/quick_reference/21_rust_197_features_cheatsheet.md",
+    "docs/09_toolchain/10_rust_1_97_features.md",
+    "docs/02_learning/03_google_rust_mapping.md",
 }
 
 DEFAULT_REPORT = sorted(
