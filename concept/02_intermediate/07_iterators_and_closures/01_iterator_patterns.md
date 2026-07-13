@@ -1431,4 +1431,4 @@ impl Iterator for Counter {
 
 ---
 
-> **Rust 1.94 起**：`<[T]>::array_windows` 稳定，提供定长滑动窗口迭代；**1.96 起** `core::range` 的 `Range`/`RangeFrom`/`RangeToInclusive` 及其迭代器实现 `Copy`，且 `NonZero` 整数范围可直接迭代。详见 [1.94 版本页](../../07_future/00_version_tracking/rust_1_94_stabilized.md) 与 [1.96 版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md) §0 矩阵。
+> **Rust 1.94 起**：`<[T]>::array_windows` 稳定，提供定长滑动窗口迭代；**1.96 起** `core::range` 的 `Range`/`RangeFrom`/`RangeToInclusive` 及其迭代器实现 `Copy`，且 `NonZero` 整数范围可直接迭代。详见 [1.94 版本页](../../07_future/00_version_tracking/rust_1_94_stabilized.md) 与 [1.96 版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md)（特性矩阵节）。

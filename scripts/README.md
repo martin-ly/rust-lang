@@ -182,6 +182,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `rust_197_release_day.sh` | Rust 1.97.0 发布日执行脚本 |
 | `rust_197_upstream_monitor.sh` | 上游发布动态监控 |
 | `probe_rust_197_apis.rs` / `probe_rust_198_apis.rs` | 候选 API 可用性探测 |
+| `check_authority_freshness.py` | 权威源新鲜度周期巡检（2026-07-13 P5 新增；**手动巡检工具，非 CI 质量门**——网络依赖门不适合 CI 阻断）：concept/ 权威源域名引用扫描 + 上游 stable 版本比对（releases.json/releases.rs，网络不可达优雅降级 exit 0）+ 1.98 preview beta→stable 迁移到期检查；默认观察 exit 0，`--strict` 可处置 WARN exit 1（网络降级除外），`--offline` 跳过网络检查 |
 
 ---
 

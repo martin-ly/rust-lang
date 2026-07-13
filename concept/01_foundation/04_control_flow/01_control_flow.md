@@ -1733,4 +1733,4 @@ goto 的错误清理模式
 
 ---
 
-> **Rust 1.95 起**：match 守卫支持 `if let`（if-let guards），可在 `match` 分支守卫中做条件绑定；同时路径段关键字重命名导入（如 `use foo::r#async as f;`）稳定。详见 [版本页](../../07_future/00_version_tracking/rust_1_95_stabilized.md) §0 矩阵。
+> **Rust 1.95 起**：match 守卫支持 `if let`（if-let guards），可在 `match` 分支守卫中做条件绑定；同时路径段关键字重命名导入（如 `use foo::r#async as f;`）稳定。详见 [版本页](../../07_future/00_version_tracking/rust_1_95_stabilized.md)（特性矩阵节）。

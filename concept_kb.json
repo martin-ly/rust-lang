@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 495,
-    "generated_at": "2026-07-13T22:54:45.301728+00:00"
+    "generated_at": "2026-07-13T23:10:00.877604+00:00"
   },
   "files": [
     {
@@ -11290,7 +11290,7 @@
       "layer": "L1",
       "title": "数值类型与运算：从整数到浮点的完整图景",
       "positioning": "系统讲解 Rust **数值类型**——从整数、浮点、饱和运算到类型转换和溢出行为，揭示 Rust 如何在安全性与性能之间做出精确的设计选择。",
-      "line_count": 1127,
+      "line_count": 1131,
       "theorem_chains": [
         {
           "text": "| 数值类型与运算：从整数到浮点的完整图景 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11456,6 +11456,7 @@
         "../../00_meta/04_navigation/08_learning_mvp_path.md",
         "../../02_intermediate/03_error_handling/01_error_handling.md",
         "../../06_ecosystem/10_performance/01_performance_optimization.md",
+        "../../07_future/00_version_tracking/rust_1_90_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../00_start/02_zero_cost_abstractions.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
@@ -11828,7 +11829,7 @@
       "layer": "L1",
       "title": "引用语义：自动解引用、Deref 强制与类型转换",
       "positioning": "深入分析 Rust 的**引用语义机制**——自动解引用（Auto-deref）、Deref 强制（Deref Coercion）、类型强制（Type Coercion）以及它们与借用（Borrowing）检查器的交互，澄清开发者常见的隐式转换困惑。",
-      "line_count": 1510,
+      "line_count": 1511,
       "theorem_chains": [
         {
           "text": "2. **可变引用的弱化方向不可逆**：`&mut T` 可重借为 `&T`（可变 ⟹ 共享），但 `&&mut T` 永远无法变成 `&mut &mut T`——共享引用的不可变性是类型级承诺，穿透它即 UB 领域。",
@@ -12325,7 +12326,7 @@
       "layer": "L1",
       "title": "控制流：表达式导向的流程控制",
       "positioning": "分析 Rust **控制流结构**的设计哲学——从表达式导向（expression-oriented）的 `if`/`match`/`loop`，到 `if let`/`while let` 的模式匹配（Pattern Matching）集成，揭示 Rust 如何将控制流转化为**值生成**而非**副作用执行**。",
-      "line_count": 1733,
+      "line_count": 1737,
       "theorem_chains": [
         {
           "text": "| 控制流：表达式导向的流程控制 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12542,6 +12543,7 @@
         "../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md",
         "../../03_advanced/01_async/01_async.md",
         "../../04_formal/00_type_theory/01_type_theory.md",
+        "../../07_future/00_version_tracking/rust_1_95_stabilized.md",
         "../00_start/03_closure_basics.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
         "../01_ownership_borrow_lifetime/02_borrowing.md",
@@ -13398,7 +13400,7 @@
       "layer": "L1",
       "title": "格式化与显示（Display and Debug Formatting）",
       "positioning": "",
-      "line_count": 449,
+      "line_count": 453,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`{}` 和 `{:?}` 相同\" ⟹ 不成立。`{}` 调用 `Display`，`{:?}` 调用 `Debug`。",
@@ -13498,6 +13500,7 @@
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/03_error_handling/01_error_handling.md",
         "../../06_ecosystem/00_toolchain/14_development_tools.md",
+        "../../07_future/00_version_tracking/rust_1_93_stabilized.md",
         "01_strings_and_text.md"
       ],
       "transitions": 0,
@@ -15447,7 +15450,7 @@
       "layer": "L1",
       "title": "属性与声明宏：编译期元编程基础",
       "positioning": "系统讲解 Rust **属性（attributes）**和**声明宏（macro_rules!）**——从编译期元编程的基础语法到模式匹配（Pattern Matching）、递归宏和卫生性，揭示 Rust 如何在编译期生成代码同时保持类型安全。",
-      "line_count": 982,
+      "line_count": 986,
       "theorem_chains": [
         {
           "text": "| 属性与声明宏（Declarative Macro）：编译期元编程基础 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -15579,6 +15582,7 @@
         "../../00_meta/04_navigation/08_learning_mvp_path.md",
         "../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md",
         "../../03_advanced/03_proc_macros/02_proc_macro.md",
+        "../../07_future/00_version_tracking/rust_1_95_stabilized.md",
         "../02_type_system/01_type_system.md",
         "../07_modules_and_items/01_modules_and_paths.md",
         "01_attributes_and_macros.md"
@@ -21387,7 +21391,7 @@
       "layer": "L2",
       "title": "错误处理深入：从 Result 到自定义错误生态",
       "positioning": "深入分析 Rust **错误处理（Error Handling）机制**——从 `Result`/`Option` 的组合子到 `?` 运算符、错误转换、自定义错误类型和错误处理框架，揭示 Rust 如何将错误处理融入类型系统（Type System）实现编译期安全。",
-      "line_count": 817,
+      "line_count": 818,
       "theorem_chains": [
         {
           "text": "| 错误处理深入：从 Result 到自定义错误生态 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -23009,7 +23013,7 @@
       "layer": "L2",
       "title": "`assert_matches!`：模式匹配断言的形式化语义",
       "positioning": "将 Rust 的**模式匹配（Pattern Matching）**能力从\"表达式求值\"扩展到\"测试断言\"的工程机制，实现编译期模式检查与运行时（Runtime）断言的统一。",
-      "line_count": 753,
+      "line_count": 757,
       "theorem_chains": [
         {
           "text": "| `assert_matches!`：模式匹配断言的形式化语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -23172,6 +23176,7 @@
         "../../01_foundation/10_testing_basics/02_useful_development_tools.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
         "../../07_future/00_version_tracking/01_rust_version_tracking.md",
+        "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
         "../03_error_handling/01_error_handling.md"
       ],
       "transitions": 0,
@@ -23784,7 +23789,7 @@
       "layer": "L2",
       "title": "Rust 迭代器模式",
       "positioning": "深入探讨 Rust 迭代器（Iterator）模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。",
-      "line_count": 1431,
+      "line_count": 1435,
       "theorem_chains": [
         {
           "text": "| 逐元素变换 | `map`（惰性适配器） | §1.3 惰性求值 | 没有消费者 ⟹ 不执行任何计算（§10.2） |",
@@ -24021,6 +24026,8 @@
         "../../03_advanced/01_async/09_stream_algebra_and_backpressure.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/10_performance/01_performance_optimization.md",
+        "../../07_future/00_version_tracking/rust_1_94_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
         "../00_traits/01_traits.md",
         "../01_generics/01_generics.md",
         "../04_types_and_conversions/02_closure_types.md"
@@ -24586,7 +24593,7 @@
       "layer": "L3",
       "title": "并发 模式：从消息 传递到锁自由的数据结构",
       "positioning": "深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权（Ownership）系统如何为并发安全（Concurrency Safety）提供编译期保证。",
-      "line_count": 2366,
+      "line_count": 2370,
       "theorem_chains": [
         {
           "text": "| 并发 模式：从消息 传递到锁自由的数据结构 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -24881,6 +24888,7 @@
         "../../04_formal/README.md",
         "../../06_ecosystem/04_web_and_networking/01_distributed_systems.md",
         "../../06_ecosystem/README.md",
+        "../../07_future/00_version_tracking/rust_1_92_stabilized.md",
         "../01_async/01_async.md",
         "../README.md",
         "01_concurrency.md"
@@ -24987,7 +24995,7 @@
       "layer": "L3",
       "title": "原子操作与内存序：无锁并发的精确控制",
       "positioning": "深入分析 Rust **原子类型（Atomic）**和**内存排序（Memory Ordering [来源: [Atomic Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]）**——从基本的 load/store 到 compare-and-swap 和释放-获取语义，揭示无锁编程中硬件内存模型的精确控制。",
-      "line_count": 1521,
+      "line_count": 1525,
       "theorem_chains": [
         {
           "text": "| 独立计数器（统计/性能计数） | `Relaxed` | §2.2 内存序选择决策树 | 与其他数据存在依赖 ⟹ `Relaxed` 不足 |",
@@ -25224,6 +25232,8 @@
         "../../06_ecosystem/README.md",
         "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
         "../../07_future/00_version_tracking/migration_197_decision_tree.md",
+        "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_95_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../02_unsafe/01_unsafe.md",
         "../02_unsafe/06_memory_model.md",
@@ -26607,7 +26617,7 @@
       "layer": "L3",
       "title": "异步模式：从 Future 到生产级并发",
       "positioning": "深入分析 Rust **异步编程的高级模式**——从 Future 状态机、Pin 保证到并发执行和取消传播，揭示 Rust async/await 如何在零运行时（Runtime）开销下实现高效并发。",
-      "line_count": 1307,
+      "line_count": 1308,
       "theorem_chains": [
         {
           "text": "| 异步模式：从 Future 到生产级并发 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -28419,7 +28429,7 @@
       "layer": "L3",
       "title": "Unsafe Rust 安全编程",
       "positioning": "",
-      "line_count": 3502,
+      "line_count": 3506,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 重构增强——定理一致性（Coherence）矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注",
@@ -28984,6 +28994,7 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/README.md",
+        "../../07_future/00_version_tracking/rust_1_92_stabilized.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
         "../00_concurrency/01_concurrency.md",
         "../README.md",
@@ -29598,7 +29609,7 @@
       "layer": "L3",
       "title": "Rust 内存模型（Memory Model）",
       "positioning": "",
-      "line_count": 433,
+      "line_count": 437,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将字节模型、provenance 和 UB 边界串联起来。",
@@ -29703,6 +29714,8 @@
         "../../04_formal/05_rustc_internals/08_type_layout.md",
         "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
         "../../07_future/00_version_tracking/migration_197_decision_tree.md",
+        "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../00_concurrency/05_atomics_and_memory_ordering.md",
         "../05_inline_assembly/01_inline_assembly.md",
@@ -32297,7 +32310,7 @@
       "layer": "L3",
       "title": "Rust FFI：与外部代码的安全边界",
       "positioning": "系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。",
-      "line_count": 983,
+      "line_count": 987,
       "theorem_chains": [
         {
           "text": "| Rust FFI：与外部代码的安全边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -32468,6 +32481,8 @@
         "../../04_formal/README.md",
         "../../06_ecosystem/06_data_and_distributed/01_application_domains.md",
         "../../06_ecosystem/README.md",
+        "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_93_stabilized.md",
         "../02_unsafe/01_unsafe.md",
         "../README.md"
       ],
@@ -46397,7 +46412,7 @@
       "layer": "L6",
       "title": "Cargo 配置与环境变量（Cargo Configuration）",
       "positioning": "把 Cargo 的“配置”与“环境变量”两大参考章节集中为一份可查阅权威页。",
-      "line_count": 191,
+      "line_count": 195,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -46406,6 +46421,7 @@
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
+        "../../07_future/00_version_tracking/rust_1_94_stabilized.md",
         "../05_systems_and_embedded/02_cross_compilation.md",
         "07_cargo_source_replacement.md",
         "08_cargo_registries_and_publishing.md",
@@ -46433,7 +46449,7 @@
       "layer": "L6",
       "title": "Cargo 命令参考（Cargo Commands Reference）",
       "positioning": "覆盖开发者日常最高频的 Cargo 命令，作为官方命令参考的浓缩权威页。",
-      "line_count": 177,
+      "line_count": 181,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -46442,6 +46458,7 @@
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
+        "../../07_future/00_version_tracking/rust_1_90_stabilized.md",
         "../00_toolchain/03_devops_and_ci_cd.md",
         "01_cargo_script.md",
         "04_cargo_196_features.md",
@@ -59311,7 +59328,7 @@
       "layer": "L7",
       "title": "Rust 1.91 稳定特性",
       "positioning": "",
-      "line_count": 2720,
+      "line_count": 2739,
       "theorem_chains": [
         {
           "text": "| 版本上下文 ⟹ 演进脉络 | 对比前后版本特性 | 理解语言发展方向 |",
@@ -59858,18 +59875,24 @@
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../01_foundation/04_control_flow/01_control_flow.md",
+        "../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/02_unsafe/06_memory_model.md",
+        "../../03_advanced/04_ffi/01_rust_ffi.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/01_cargo/15_cargo_getting_started.md",
+        "../../06_ecosystem/01_cargo/18_cargo_configuration.md",
         "../../06_ecosystem/09_testing_and_quality/03_testing.md",
         "../README.md",
         "./rust_1_91_stabilized.md",
         "01_rust_version_tracking.md",
-        "rust_1_92_stabilized.md"
+        "rust_1_92_stabilized.md",
+        "rust_1_97_stabilized.md"
       ],
       "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 27,
+      "matrix_rows": 35,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Control Flow](../../01_foundation/04_control_flow/01_control_flow.md)"
@@ -59886,7 +59909,7 @@
       "layer": "L7",
       "title": "Rust 1.92 稳定特性",
       "positioning": "",
-      "line_count": 2711,
+      "line_count": 2730,
       "theorem_chains": [
         {
           "text": "| 版本上下文 ⟹ 演进脉络 | 对比前后版本特性 | 理解语言发展方向 |",
@@ -60360,17 +60383,21 @@
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../01_foundation/04_control_flow/01_control_flow.md",
+        "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
+        "../../03_advanced/00_concurrency/03_concurrency_patterns.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/01_cargo/15_cargo_getting_started.md",
         "../../06_ecosystem/09_testing_and_quality/03_testing.md",
         "../README.md",
         "01_rust_version_tracking.md",
-        "rust_1_91_stabilized.md"
+        "rust_1_91_stabilized.md",
+        "rust_1_97_stabilized.md"
       ],
       "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 5,
+      "matrix_rows": 13,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Control Flow](../../01_foundation/04_control_flow/01_control_flow.md)"
@@ -60387,7 +60414,7 @@
       "layer": "L7",
       "title": "Rust 1.93 稳定特性",
       "positioning": "",
-      "line_count": 195,
+      "line_count": 215,
       "theorem_chains": [
         {
           "text": "| 版本上下文 ⟹ 特性定位 | 了解 1.93 在 release train 中的位置 | 判断是否需要升级 |",
@@ -60458,15 +60485,18 @@
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/04_ffi/01_rust_ffi.md",
+        "../../06_ecosystem/01_cargo/19_cargo_commands_reference.md",
         "../../06_ecosystem/11_domain_applications/03_webassembly.md",
         "01_rust_version_tracking.md",
         "rust_1_92_stabilized.md",
-        "rust_1_94_stabilized.md"
+        "rust_1_94_stabilized.md",
+        "rust_1_97_stabilized.md"
       ],
       "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 22,
+      "matrix_rows": 31,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
@@ -60483,7 +60513,7 @@
       "layer": "L7",
       "title": "c10_networks - Rust 1.94 更新概览",
       "positioning": "",
-      "line_count": 189,
+      "line_count": 208,
       "theorem_chains": [
         {
           "text": "> **定理链**: Version Context ⟹ Feature Set ⟹ Migration Impact",
@@ -60531,19 +60561,22 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "../../06_ecosystem/01_cargo/18_cargo_configuration.md",
         "../../06_ecosystem/04_web_and_networking/07_network_protocols.md",
         "../../06_ecosystem/12_networking/05_networking_basics.md",
         "../01_edition_roadmap/02_edition_guide.md",
         "../03_preview_features/13_lifetime_capture_preview.md",
         "/crates/c10_networks/docs/00_master_index.md",
         "01_rust_version_tracking.md",
-        "rust_1_95_stabilized.md"
+        "rust_1_95_stabilized.md",
+        "rust_1_97_stabilized.md"
       ],
       "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 11,
+      "matrix_rows": 19,
       "pre_post": {
         "pre": [
           "[Rust Version Tracking](01_rust_version_tracking.md) · [Networking Basics](../../06_ecosystem/12_networking/05_networking_basics.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)"
@@ -60560,7 +60593,7 @@
       "layer": "L7",
       "title": "Rust 1.95.0 稳定特性",
       "positioning": "",
-      "line_count": 327,
+      "line_count": 347,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -60652,18 +60685,20 @@
       "sources": [],
       "cross_references": [
         "../../01_foundation/04_control_flow/01_control_flow.md",
+        "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/07_security_and_cryptography/01_security_practices.md",
         "01_rust_version_tracking.md",
         "rust_1_96_stabilized.md",
-        "rust_1_97_preview.md"
+        "rust_1_97_preview.md",
+        "rust_1_97_stabilized.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 19,
+      "matrix_rows": 28,
       "pre_post": {
         "pre": [
           ">"
@@ -60680,7 +60715,7 @@
       "layer": "L7",
       "title": "Rust 1.96 稳定特性（当前 patch 1.96.1）",
       "positioning": "",
-      "line_count": 320,
+      "line_count": 339,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -60718,17 +60753,21 @@
       "sources": [],
       "cross_references": [
         "../../02_intermediate/03_error_handling/01_error_handling.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
+        "../../03_advanced/02_unsafe/06_memory_model.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md",
         "../../06_ecosystem/09_testing_and_quality/03_testing.md",
         "01_rust_version_tracking.md",
         "rust_1_97_preview.md",
+        "rust_1_97_stabilized.md",
         "rust_1_98_preview.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 47,
+      "matrix_rows": 55,
       "pre_post": {
         "pre": [
           ">"
@@ -60934,7 +60973,7 @@
       "layer": "L7",
       "title": "Rust 1.98+ 前沿特性预览",
       "positioning": "",
-      "line_count": 607,
+      "line_count": 631,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -61010,7 +61049,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 31,
+      "matrix_rows": 44,
       "pre_post": {
         "pre": [
           "N/A",

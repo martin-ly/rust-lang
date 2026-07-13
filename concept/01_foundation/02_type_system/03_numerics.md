@@ -1127,4 +1127,4 @@ fn main() {
 
 ---
 
-> **Rust 1.90 起**：`u{N}::{checked,overflowing,saturating,wrapping}_sub_signed` 稳定，无符号-有符号混合减法获得溢出可控语义；同时 `f32`/`f64` 的 `floor`/`ceil`/`trunc`/`fract`/`round`/`round_ties_even` 进入 const 上下文。详见 [版本页](../../07_future/00_version_tracking/rust_1_90_stabilized.md) §0 矩阵。
+> **Rust 1.90 起**：`u{N}::{checked,overflowing,saturating,wrapping}_sub_signed` 稳定，无符号-有符号混合减法获得溢出可控语义；同时 `f32`/`f64` 的 `floor`/`ceil`/`trunc`/`fract`/`round`/`round_ties_even` 进入 const 上下文。详见 [版本页](../../07_future/00_version_tracking/rust_1_90_stabilized.md)（特性矩阵节）。

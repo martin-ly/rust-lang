@@ -280,9 +280,10 @@ bash scripts/git_hooks/install.sh
 | 死链检查 | 每次大规模合并后 | `scripts/kb_auditor.py` |
 | 归档审计 | 每季度 | 人工 + 脚本 |
 | 版本页中心化管理 | Rust 新版本发布时 | `concept/07_future/rust_1_XX_*.md` |
+| 版本新鲜度巡检 | 每周（手动，不挂 CI 门：网络依赖检查不适合阻断） | `scripts/check_authority_freshness.py` |
 | 夜间质量报告 | 每天 | `.github/workflows/nightly_quality_report.yml` |
 | pre-commit 检查 | 每次本地提交 | `scripts/git_hooks/pre-commit` |
 
 ---
 
-**最后更新**：2026-07-10（已对齐 Rust 1.97.0 stable）
+**最后更新**：2026-07-13（已对齐 Rust 1.97.0 stable；P1–P5 收尾，23 门：15 阻断 + 8 观察）

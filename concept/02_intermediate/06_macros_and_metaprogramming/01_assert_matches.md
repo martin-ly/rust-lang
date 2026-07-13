@@ -753,4 +753,4 @@ fn main() {
 
 ---
 
-> **Rust 1.96 起**：`assert_matches!` 与 `debug_assert_matches!` 稳定为标准库宏，替代手写 `assert!(matches!(...))` 的模式断言。详见 [版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md) §0 矩阵。
+> **Rust 1.96 起**：`assert_matches!` 与 `debug_assert_matches!` 稳定为标准库宏，替代手写 `assert!(matches!(...))` 的模式断言。详见 [版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md)（特性矩阵节）。

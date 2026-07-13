@@ -10,8 +10,8 @@
 > **Bloom 层级**: L2-L3
 > **内容分级**: [实验级]
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **跟踪版本**: nightly 1.99.0 (2026-06-22)
-> **预计稳定时间**: 2026-09-04 及以后（Rust 1.98.0 计划发布日期）
+> **跟踪版本**: nightly 1.99.0 (2026-06-22)；**1.98.0 已于 2026-07-03 分支进入 beta**（[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)，2026-07-14 curl 实测 200）
+> **预计稳定时间**: **1.98.0 = 2026-08-20**（releases.rs 实测）；1.99+ 及以后
 > **当前阶段**: 🧪 Nightly 实验性 / 设计或 MCP 阶段
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **状态**: 特性集高度不确定，稳定时间和具体内容以官方发布为准
@@ -34,6 +34,30 @@
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 > **前置概念**: N/A
+---
+
+## 零、1.98 周期跟踪清单（2026-07-14 更新）
+
+> **状态取值**：`stabilized in 1.98 beta`（已随 1.98.0 beta 分支合入，2026-08-20 转正）/ `RFC merged`（RFC 已合并，实现跟踪中）/ `FCP`（最终评论期）/ `nightly only`（nightly 可用，未排期）。
+> **实测来源**：[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)（curl 200，2026-07-14）· §1.7 RFC 表（2026-07-12 实测）
+
+| 特性 | 状态 | 跟踪链接 |
+|:---|:---|:---|
+| `Panic[Hook]Info` 中 `Location<'_>` 生命周期改为 `'static` | stabilized in 1.98 beta | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
+| mingw-w64 C 工具链更新 | stabilized in 1.98 beta | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
+| 移除 Solaris 上 `File::lock` 实现（语义错误） | stabilized in 1.98 beta | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
+| 移除 `-Zemscripten-wasm-eh` | stabilized in 1.98 beta | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
+| Named `Fn` trait parameters（RFC #3955） | RFC merged（2026-07-08） | [RFC Book](https://rust-lang.github.io/rfcs/3955-named-fn-trait-parameters.html) |
+| `#![register_{attribute,lint}_tool]`（RFC #3808） | RFC merged（2026-06-10） | [RFC Book](https://rust-lang.github.io/rfcs/3808-register-tool.html) |
+| `todo!()` 不再触发 `unreachable_code`（RFC #3928） | RFC merged（2026-06-25） | [RFC Book](https://rust-lang.github.io/rfcs/3928-todo-overreach.html) |
+| Safety Tags（RFC #3842） | FCP / 讨论中 | [rfcs#3842](https://github.com/rust-lang/rfcs/pull/3842) |
+| Pin Ergonomics（`&pin mut` / `&pin const`） | nightly only（Project Goal 2026） | [预览页](../03_preview_features/14_pin_ergonomics_preview.md) |
+| Async Drop | nightly only | [预览页](../03_preview_features/22_async_drop_preview.md) |
+| Return Type Notation（RTN） | nightly only | [预览页](../03_preview_features/09_return_type_notation_preview.md) |
+| Public/Private Dependencies（RFC #3516） | RFC merged，Cargo 实现跟踪中 | [RFC Book](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html) |
+
+> **维护约定**：每两周按 §7.1 频率核对本表；1.98.0 发布（2026-08-20）后将 beta 行迁移至新建的 `rust_1_98_stabilized.md`，本页滚动为 1.99+ 跟踪。
+
 ---
 
 > **后置概念**:

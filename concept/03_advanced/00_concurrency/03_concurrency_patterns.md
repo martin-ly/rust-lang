@@ -2366,4 +2366,4 @@ async fn hybrid_processing() -> Result<Vec<u8>, String> {
 
 ---
 
-> **Rust 1.92 起**：`RwLockWriteGuard::downgrade` 稳定，写锁可原子降级为读锁，消除「释放写锁再抢读锁」窗口期的读-写死锁风险。详见 [版本页](../../07_future/00_version_tracking/rust_1_92_stabilized.md) §0 矩阵。
+> **Rust 1.92 起**：`RwLockWriteGuard::downgrade` 稳定，写锁可原子降级为读锁，消除「释放写锁再抢读锁」窗口期的读-写死锁风险。详见 [版本页](../../07_future/00_version_tracking/rust_1_92_stabilized.md)（特性矩阵节）。

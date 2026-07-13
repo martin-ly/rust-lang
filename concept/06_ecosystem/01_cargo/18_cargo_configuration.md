@@ -191,4 +191,4 @@ incompatible-rust-versions = "fallback"
 
 ---
 
-> **Rust 1.94 起**：Cargo `include` 配置键稳定，顶层配置可拆分到多个文件复用；Cargo 同步开始按 TOML v1.1 解析清单与配置文件。详见 [版本页](../../07_future/00_version_tracking/rust_1_94_stabilized.md) §0 矩阵。
+> **Rust 1.94 起**：Cargo `include` 配置键稳定，顶层配置可拆分到多个文件复用；Cargo 同步开始按 TOML v1.1 解析清单与配置文件。详见 [版本页](../../07_future/00_version_tracking/rust_1_94_stabilized.md)（特性矩阵节）。

@@ -982,4 +982,4 @@ struct Point {
 
 ---
 
-> **Rust 1.95 起**：`cfg_select!` 宏稳定，以多分支选择替代嵌套 `#[cfg]` 属性，简化互斥条件编译。详见 [版本页](../../07_future/00_version_tracking/rust_1_95_stabilized.md) §0 矩阵。
+> **Rust 1.95 起**：`cfg_select!` 宏稳定，以多分支选择替代嵌套 `#[cfg]` 属性，简化互斥条件编译。详见 [版本页](../../07_future/00_version_tracking/rust_1_95_stabilized.md)（特性矩阵节）。
