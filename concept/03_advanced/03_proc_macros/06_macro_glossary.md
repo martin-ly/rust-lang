@@ -135,7 +135,14 @@ pub fn my_trait_derive(input: TokenStream) -> TokenStream {
 
 ## 🔧 声明宏术语
 
-本节将「声明宏术语」分解为若干主题： macro_rules、Pattern Matching (模式匹配)、Repetition (重复)与Metavariable (元变量)。
+本节目录化 `macro_rules!` 体系的核心术语，每个术语给出「定义 + 判别例」：
+
+- **Pattern Matching（模式匹配）**：宏臂左侧的匹配语言——`$name:fragment` 绑定片段，字面 token 精确匹配，臂按序尝试（先到先得）；
+- **Repetition（重复）**：`$( ... ),*` 语法——`$()` 内可含多个变量（同长度迭代），分隔符与 `*`/`+`/`?` 量词的组合规则；
+- **Metavariable（元变量）**：`$name:fragment_specifier`——12 种片段分类符（`expr`/`ty`/`ident`/`tt`/`pat`/`literal` 等）各有限定，选错是「宏匹配不上」的首要原因；
+- **局部歧义（local ambiguity）**：`expr` 后只能跟 `=>`/`,`/`;`——片段边界的解析规则，复杂宏设计的第一约束。
+
+术语表用法：查阅式使用——遇到宏错误先定位术语再读定义，不建议通读。
 
 ### macro_rules
 
@@ -222,7 +229,14 @@ create_var!(x, 42); // let x = 42;
 
 ## ⚙️ 过程宏术语
 
-本节围绕「过程宏术语」展开，依次讨论 TokenStream、Derive Macro (派生宏)、Attribute Macro (属性宏)、Function-like Macro (函数式宏)等7个方面。
+本节目录化过程宏体系的核心术语：
+
+- **TokenStream**：过程宏的输入输出类型——token 序列（标识符/字面量/标点/组），携带 span 信息；`proc_macro::TokenStream`（编译器接口）与 `proc_macro2::TokenStream`（可测试的镜像）的区分是过程宏测试的前提；
+- **三种宏形态**：Derive（`#[proc_macro_derive(Name, attributes(...))]`，附加到类型定义）、Attribute（`#[proc_macro_attribute]`，替换被标注项）、Function-like（`#[proc_macro]`，`name!(...)` 调用）——形态决定输入形态与输出位置；
+- **syn**：`TokenStream` → AST 的解析库——`parse_macro_input!` 宏、`DeriveInput`/`ItemFn` 等语法树类型、`Error` 诊断体系；
+- **quote**：AST → `TokenStream` 的生成库——准引用语法与 `#var` 插值。
+
+配套概念：过程宏在**编译期独立 crate 中执行**——这解释了「为什么宏 crate 不能 `use` 自己」「为什么宏依赖不进入下游运行时依赖」。
 
 ### TokenStream
 

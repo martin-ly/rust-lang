@@ -207,7 +207,13 @@ ABA 问题:
 
 ## 二、关键数据结构
 
-本节将「关键数据结构」分解为若干主题： Treiber Stack、Michael-Scott Queue与Hazard Pointer。
+无锁数据结构的三个经典构件，按复杂度递进：
+
+- **Treiber Stack**：最简无锁结构——push/pop 都是对栈顶指针的单次 CAS 循环，正确性直观；但它暴露了 ABA 问题（pop 看到「相同的栈顶」不意味着「没变过」），直接复用节点即 UB；
+- **Michael-Scott Queue**：无锁 FIFO 队列的标准实现——头尾双指针 + 帮助机制（helping：发现尾指针滞后时先帮忙推进），复杂度显著高于栈；
+- **Hazard Pointer**：无锁内存回收方案之一——每个线程公告「我正在访问的指针」，回收者扫描公告表确认无引用后再 free；与 epoch-based reclamation（crossbeam 的选择，按纪元批量回收）是两大主流路线。
+
+Rust 的实现注意：节点内存回收必须经 `crossbeam-epoch` 的 `guard.pin()`——手写无锁结构的内存安全 90% 取决于回收策略而非 CAS 逻辑本身。
 
 ### 2.1 Treiber Stack
 >
@@ -408,7 +414,12 @@ lockfree crate:
 
 ## 四、反命题与边界分析
 
-本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+本节检验无锁编程的两条致命误判：
+
+- **反命题 1：「无锁一定比有锁快」** —— 有严格边界。无锁的优势在**高竞争**场景（锁的等待队列成本）；低竞争时 `parking_lot::Mutex` 的无竞争路径（一次原子 CAS）与无锁相当且逻辑简单十倍。判定准则：profile 显示锁竞争（`perf` 中 futex 等待）是瓶颈，才值得无锁化；且优先换 `RwLock`/分片锁等中间方案。
+- **反命题 2：「CAS 成功 = 状态正确」** —— 这就是 ABA 陷阱：CAS 只比较值，「A→B→A」的变化序列不可见。无锁栈/队列中节点的复用必须经过内存回收机制（epoch/hazard pointer）保证「无人持有旧引用」，版本号标记（tagged pointer）只能缓解不能根除。
+
+边界极限小节量化：内存序选择（`Release`/`Acquire` 配对与数据依赖）、虚假共享（false sharing）对无锁性能的影响、以及 progress guarantee 三级（blocking/lock-free/wait-free）的精确含义。
 
 ### 4.1 反命题树
 

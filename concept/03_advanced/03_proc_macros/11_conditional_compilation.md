@@ -49,7 +49,14 @@
 
 ## 二、配置谓词
 
-本节聚焦「配置谓词」，核心内容为基本形式。
+`#[cfg(predicate)]` 的谓词语言是「键值对 + 布尔组合」的受限逻辑，本节系统枚举：
+
+- **基本形式**：`#[cfg(feature = "x")]`、`#[cfg(unix)]`、`#[cfg(target_arch = "x86_64")]`——单谓词直接判定；组合用 `all()`/`any()`/`not()`（无裸 `&&`，嵌套是递归的）；
+- **布尔字面量谓词**（RFC 3695，1.88 稳定）：`#[cfg(true)]`/`#[cfg(false)]`——看似无用，实为「程序化生成 cfg」与「临时禁用代码」的规范形式（替代 `#[cfg(any())]` 等 hack）；
+- **目标平台谓词**：`target_arch`/`target_os`/`target_env`/`target_family`/`target_pointer_width`/`target_endian`——平台代码的标准门控维度；
+- **编译状态谓词**：`debug_assertions`（dev profile）、`test`（`cargo test` 构建）、`doc`（rustdoc）、`miri`（Miri 解释器，非官方但稳定约定）。
+
+判定准则：谓词名与值拼写错误**默认静默为 false**——`unexpected_cfgs` lint（1.80+ 默认 warn）应纳入 CI 防止拼写腐烂。
 
 ### 基本形式
 
@@ -99,7 +106,16 @@ fn main() {
 
 ## 三、编译器内置配置选项
 
-「编译器内置配置选项」部分按目标架构、目标操作系统与环境、编译状态与原子操作支持的顺序逐层展开。
+编译器自动设置的 cfg 选项全集（除目标平台外）：
+
+- **`debug_assertions`**：dev 构建时设置——`debug_assert!`/`debug_assert_eq!` 的生效条件，自定义「仅调试检查」代码用 `#[cfg(debug_assertions)]`；
+- **`test`**：`cargo test` 构建测试 harness 时设置——`#[cfg(test)] mod tests` 的底层机制，也可用于「测试专用的 mock 实现」；
+- **`doc`**：rustdoc 构建时设置——文档测试中注入辅助代码（`#[cfg(doc)]` 块只在文档构建存在）；
+- **`doctest`**（1.40+）：文档测试编译时设置——区分「rustdoc 渲染」与「doctest 运行」；
+- **`miri`**：Miri 解释执行时设置——`#[cfg(miri)]` 跳过 Miri 不支持的操作（内联汇编、部分 SIMD）或减慢的测试（迭代次数降级）；
+- **`target_has_atomic`** 系列：按宽度声明原子支持——`no_std`/嵌入式目标的可移植性门控依据。
+
+完整权威列表见 [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)。
 
 ### 目标架构
 

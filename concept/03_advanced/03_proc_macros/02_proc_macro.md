@@ -412,7 +412,12 @@ pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
 
 ## 四、反命题与边界分析
 
-本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
+本节检验过程宏的两条常见误判：
+
+- **反命题 1：「过程宏可以访问类型信息」** —— 错误。过程宏的输入是 **token 流**（语法层面）——宏展开发生在类型检查之前，宏不知道「这个 `ident` 是什么类型」。需要类型信息的代码生成只能靠约定（derive 的语法分析）或属性参数显式提供；
+- **反命题 2：「过程宏错误会显示在宏内部」** —— 相反。默认错误显示在宏**调用点**或展开结果中——只有用 `syn::Error::new_spanned` 主动绑定 span，错误才能精确指向用户输入的具体 token。「proc macro panicked」是诊断的最差形态，生产宏必须杜绝 panic。
+
+边界极限小节量化：Span 的三种来源与卫生性交互、`proc_macro` API 的稳定子集（`Span::source_text` 等仍 nightly）、以及跨 crate 的宏调试路径。
 
 ### 4.1 反命题树
 >
@@ -769,7 +774,15 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」涉及测验 1：过程宏的类型（理解层）、测验 2：过程宏的执行时机（应用层）、测验 3：syn + quote 工作流（应用层）、测验 4：卫生性（Hygiene）（分析层）等5个方面，本节逐一说明其要点。
+本节 5 道测验覆盖过程宏的核心判别点：
+
+- 测验 1（理解层）：三种过程宏类型（derive/attribute/function-like）的输入输出形态差异；
+- 测验 2（应用层）：执行时机——编译期独立 crate 编译执行，解释了「宏依赖不进运行时」「宏不能 `use` 自己」两个推论；
+- 测验 3（应用层）：syn + quote 工作流——parse（TokenStream→AST）→ transform（分析/改写）→ generate（AST→TokenStream）三段式；
+- 测验 4（分析层）：卫生性——`Ident::new` 的 span 选择（call_site/mixed_site）决定生成标识符的解析位置；
+- 测验 5（分析层）：derive 宏的限制——只能追加 impl 不能修改原类型、`attributes(...)` 声明辅助属性的必要性。
+
+作答建议：测验 3 配合 `cargo expand` 实操一个最小 derive，工作流走过一遍即内化。
 
 ### 测验 1：过程宏的类型（理解层）
 

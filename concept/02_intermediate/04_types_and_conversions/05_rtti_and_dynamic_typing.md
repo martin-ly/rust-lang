@@ -84,7 +84,13 @@ if (d) {
 
 ## 三、Rust 的动态类型识别
 
-「Rust 的动态类型识别」部分按 `Any` trait：显式的运行时类型擦除、`TypeId`：编译期稳定的类型指纹与`downcast_ref`：受限的向下转换的顺序逐层展开。
+Rust 的运行时类型识别是**显式 opt-in** 机制，与 C++ RTTI 的「默认开启、全局成本」形成对比。三个构件：
+
+1. **`Any` trait**：所有 `'static` 类型自动实现——`Box<dyn Any>` 是类型擦除的容器，提供 `is::<T>()`/`downcast()` 系列方法。`'static` 约束是关键限制：含非静态引用的类型无法擦除（防止悬垂的类型识别）；
+2. **`TypeId`**：类型的编译期唯一指纹（128-bit，跨 crate 稳定于同一编译）——相等比较即类型相等，**无子类型关系**（Rust 无继承，`TypeId` 不做 `dynamic_cast` 式的层次查询）；
+3. **`downcast_ref`**：受限的向下转换——只在「擦除前类型 == T」时成功，失败返回 `Option`/`Result`。
+
+设计哲学：RTTI 的成本（类型信息表）只由使用 `Any` 的类型承担；类型识别是工具而非范型——滥用 `Any` 模拟动态类型通常是设计信号（应考虑 enum 或 trait 对象）。
 
 ### 3.1 `Any` trait：显式的运行时类型擦除
 
@@ -154,7 +160,12 @@ fn extract_string(value: Box<dyn Any>) -> Option<String> {
 
 ## 五、Rust 中的典型用例
 
-「Rust 中的典型用例」部分包含错误类型的动态擦除 与 插件系统的类型分发 两条主线，本节依次说明。
+`Any` 在 Rust 中有两个公认的合法用例，超出此范围应警惕：
+
+- **错误类型的动态擦除**：`Box<dyn Error + Send + Sync>` 让应用层用统一错误类型，`downcast_ref::<SpecificError>()` 在需要时恢复具体类型（如 `io::Error` 的 `get_ref`/`downcast`）——这是 anyhow/eyre 的底层机制；
+- **插件系统的类型分发**：插件注册表以 `TypeId` 为键存储 `Box<dyn Any>`（如 `typemap`/`http::Extensions`），请求方按类型取回——本质是把「类型集合开放」的约束从编译期移到运行期，代价是错误从编译错误变为运行期 `None`。
+
+反模式警示：用 `Any` 实现「函数重载」（按运行时类型分派逻辑）——这在 Rust 中应优先用 `enum`（封闭集合）或泛型（编译期分派）；`Any` 分派只在类型集合**运行时开放**（插件、FFI 边界）时合理。
 
 ### 5.1 错误类型的动态擦除
 

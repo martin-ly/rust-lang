@@ -177,7 +177,13 @@ let maybe_dangling = addr as *const u64;
 
 ## 九、常见内存模型反模式
 
-本节将「常见内存模型反模式」分解为若干主题：读取未初始化 padding、通过整数重建指针与别名违规。
+本节盘点内存模型层面的三个经典反模式，每个都是 Miri 可检测的 UB：
+
+- **读取未初始化 padding（9.1）**：结构体填充字节无定义值——`transmute` 整个结构体到字节数组读取 padding 是 UB（即使「只是想看看」）；正确做法是逐字段读取或 `#[repr(C, packed)]`（后者引入未对齐字段的新问题）；
+- **通过整数重建指针（9.2）**：`ptr as usize` 再 `usize as *const T`——丢失 provenance（来源），strict provenance 模型下重建的指针解引用是 UB；正确做法是 `with_addr`/`map_addr`（1.84+）或 `expose_provenance`（声明「我接受地址猜测」）；
+- **别名违规（9.3）**：`&mut` 存在期间通过裸指针副本写入同一内存——Stacked/Tree Borrows 模型直接判定 UB；「先转裸指针再安全使用」的直觉是错的：从 `&mut` 派生的裸指针继承其独占义务。
+
+检测纪律：含 `unsafe` 的代码至少跑一次 `cargo miri test`——这三类反模式 Miri 全部可检测，无 Miri 的 unsafe 审查是不完整的。
 
 ### 9.1 读取未初始化 padding
 

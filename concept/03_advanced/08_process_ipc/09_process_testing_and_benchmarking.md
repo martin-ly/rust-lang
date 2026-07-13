@@ -32,7 +32,14 @@
 
 ## 3. 进程测试技巧
 
-本节将「进程测试技巧」分解为若干主题：超时保护、错误注入、僵尸进程防护与信号处理测试。
+子进程测试的四个核心技巧，解决「测试中最难控制的外部实体」：
+
+1. **超时保护（3.1）**：每个 spawn 的测试必须配 `wait_timeout`（`wait-timeout` crate）——无超时的子进程等待是 CI 挂死的第一来源，超时后 `kill` + `wait` 回收避免僵尸；
+2. **错误注入（3.2）**：构造「启动失败（不存在/无权限的命令）、中途崩溃（发信号）、输出异常（关闭管道）」三类故障路径——`assert_cmd` crate 提供断言式接口（`Command::cargo_bin` 定位被测二进制 + `assert().failure()`）；
+3. **僵尸进程防护（3.3）**：测试 panic 路径上子进程可能遗留——用 `scopeguard` 或自定义 `ChildGuard`（Drop 时 kill）保证清理；
+4. **信号处理测试（3.4）**：Unix 上用 `nix::sys::signal::kill` 发 SIGTERM 验证优雅退出——Windows 无信号语义，`ctrlc` crate 的 console event 是近似。
+
+测试原则：子进程测试是集成测试不是单元测试——标记 `#[ignore]` 或独立 `tests/` 文件，CI 中可单独调度。
 
 ### 3.1 超时保护
 

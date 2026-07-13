@@ -353,7 +353,12 @@ let rw = RwLock::new(vec![1, 2, 3]);
 
 ## 四、反命题与边界分析
 
-「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+本节检验内部可变性的两条常见误判：
+
+- **反命题 1：「`RefCell` 是绕过借用检查的万能工具」** —— 危险。`RefCell` 把借用规则从编译期移到**运行期**——`borrow_mut` 冲突时 panic（`BorrowMutError`），单线程逻辑错误从「编译拒绝」变为「线上 panic」。判定准则：能用编译期借用 restructuring 解决就不要 `RefCell`；确需时把 `borrow_mut` 的作用域缩到最小（立即取数据、立即 drop guard）。
+- **反命题 2：「内部可变性破坏 Rust 的安全保证」** —— 不准确。`Cell`/`RefCell` 是**安全的**：`Cell` 只服务 `Copy` 语义（按位替换，无别名问题），`RefCell` 用运行期计数维护独占——它们改变的是「检查时机」不是「有无检查」。真正危险的是 `UnsafeCell`（`unsafe`，无检查）——它是前两者的内部构件，直接使用即承担全部责任。
+
+边界极限小节量化：`OnceCell` 的一次初始化语义、`RwLock` 的升级死锁、以及 `Sync` 边界（`Cell`/`RefCell` 是 `!Sync`，`Mutex`/`Atomic` 才是跨线程方案）。
 
 ### 4.1 反命题树
 >
@@ -705,7 +710,15 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Cell vs RefCell（理解层）、测验 2：RefCell 的运行时借用规则（应用层）、测验 3：内部可变性的适用场景（应用层）、测验 4：`Rc<RefCell<T>>` 模式（分析层）等5个方面。
+本节 5 道测验覆盖内部可变性的核心判别点：
+
+- 测验 1（理解层）：`Cell` vs `RefCell` 的适用类型——`Cell` 服务小 `Copy` 类型（`get`/`set` 按值），`RefCell` 服务任意类型（`borrow`/`borrow_mut` 返回 guard）；
+- 测验 2（应用层）：`RefCell` 运行期借用规则——同时 `borrow_mut` 两次 panic 的时机与 `try_borrow_mut` 的非 panic 替代；
+- 测验 3（应用层）：适用场景——GUI 回调图、观察者模式、延迟初始化等「借用检查器表达不了但逻辑上单线程安全」的结构；
+- 测验 4（分析层）：`Rc<RefCell<T>>` 模式——单线程共享可变状态的标准组合及其循环引用泄漏风险；
+- 测验 5（专家级）：`Send`/`Sync` 边界——为什么 `Rc<RefCell<T>>` 双重 `!Send`/`!Sync`，跨线程替代是什么（`Arc<Mutex<T>>`）。
+
+作答建议：测验 5 先写出完整的 `Send`/`Sync` 推理链再核对——这是并发类型系统的枢纽题。
 
 ### 测验 1：Cell vs RefCell（理解层）
 

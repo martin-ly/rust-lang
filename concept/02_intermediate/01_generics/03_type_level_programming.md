@@ -237,7 +237,13 @@ type Product = <Two as Mul<Three>>::Output;  // Six = Two * Three
 
 ## 2️⃣ 类型级布尔逻辑
 
-「2️⃣ 类型级布尔逻辑」部分的核心主题是布尔类型，本节展开说明。
+类型级编程的第一课是用类型编码布尔值与条件：
+
+- **布尔类型**：`struct True; struct False;` + trait `type Not; type And<B>;`——逻辑运算成为 trait 关联类型的递归计算，编译器是求值器；
+- **条件选择**：`trait If<B> { type Then; type Else; }` 或更惯用的「分派 trait」模式——`impl Select<True> for X { type Out = A; } impl Select<False> for X { type Out = B; }` 由 trait 求解完成分支；
+- **断言工具**：`trait Assert: IsTrue {}` + `fn assert<T: Assert>()`——编译期断言的骨架，`static_assertions` crate 是其工程化形态。
+
+实用价值评估：类型级布尔在现代 Rust 中大多被 const 泛型 + `const fn` 取代（`where [(); N > 0]:` 类约束更直接）——本节的价值是理解类型系统作为计算模型的原理，而非推荐日常使用。
 
 ### 布尔类型
 
@@ -586,7 +592,12 @@ fn protocol_example() {
 
 ## 6️⃣ 类型级证明
 
-本节聚焦「6️⃣ 类型级证明」，核心内容为编译时验证不变量。
+类型级证明是类型级编程的顶峰：用类型 inhabitation（可居住性）编码「命题为真」。两个方向：
+
+- **编译时验证不变量**：`struct Sorted<T>(Vec<T>);` 构造函数排序 + 私有字段——「已排序」成为类型级事实，后续 `binary_search` 无需运行时检查；typestate 模式（`Connection<Authenticated>`）是同一思想的状态机版本；
+- **项目示例**：类型安全 SQL DSL（表名/列名的类型级检查）、编译时状态机框架（非法转换不可构造）——展示「让非法状态不可表示」原则的系统化应用。
+
+成本核算：类型级证明的收益是「检查前移、运行时零成本」，代价是 API 复杂度、错误信息晦涩、编译时间。判定准则：不变量是公共 API 的核心契约（安全攸关）⟹ 值得；内部实现细节 ⟹ 运行期断言（`debug_assert!`）性价比更高。
 
 ### 编译时验证不变量
 

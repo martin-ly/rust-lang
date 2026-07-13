@@ -31,7 +31,13 @@
 
 ## 二、Crate 类型
 
-本节围绕「Crate 类型」展开，依次讨论 `bin` — 可执行文件、`lib` — 编译器推荐的库、`dylib` — 动态 Rust 库、`staticlib` — 静态系统库等7个方面。
+`crate-type` 决定编译产物的链接形态，六种类型按用途分三组：
+
+- **纯 Rust 消费**：`lib`（编译器按上下文选择的最优 Rust 库形态，下游 `use` 的默认）、`rlib`（Rust 静态库，含元数据——Rust 工具链间的标准交换格式）；
+- **系统级静态产物**：`bin`（可执行文件，隐式默认）、`staticlib`（C 静态库 `.a`/`.lib`——嵌入 C/C++ 项目，**包含全部 Rust 依赖与运行时**，体积大但自包含）；
+- **系统级动态产物**：`dylib`（Rust 动态库——Rust 版本/编译器必须严格匹配，几乎只用于 Rust 插件系统）、`cdylib`（C 动态库 `.so`/`.dll`/`.dylib`——FFI 导出标准形态，只暴露 `extern` 符号，Rust 运行时可被裁剪）。
+
+选型判定：Rust 用 Rust ⟹ `lib`；C/C++ 项目静态嵌入 ⟹ `staticlib`；动态加载/多语言共享 ⟹ `cdylib`；`dylib` 仅在「全 Rust 动态插件」场景考虑（且优先评估 `abi_stable` crate 的稳定 ABI 方案）。
 
 ### `bin` — 可执行文件
 

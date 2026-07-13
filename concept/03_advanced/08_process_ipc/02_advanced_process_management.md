@@ -133,7 +133,12 @@ Created → Running → Waiting → Terminated
 
 ## 4. 资源限制与配额管理
 
-「资源限制与配额管理」部分包含进程级资源限制 与 配额管理系统 两条主线，本节依次说明。
+进程级资源治理的两个层面：
+
+- **进程级资源限制（4.1）**：`setrlimit` 体系（`RLIMIT_AS` 地址空间、`RLIMIT_CPU` CPU 秒、`RLIMIT_NOFILE` 文件描述符、`RLIMIT_NPROC` 进程数）——软限制触发信号/错误（可调整），硬限制是天花板（仅 root 可提升）；Rust 经 `libc::setrlimit` 或 `rlimit` crate 设置，典型位置是 `Command::pre_exec`（子进程继承限制）；
+- **配额管理系统（4.2）**：cgroups（Linux）提供进程**组**级配额——cpu 份额/上限、memory.max（超限 OOM-kill 而非报错）、io 权重、pids.max（防 fork 炸弹）；v2 统一层级是当前标准，`dbus` 或直接写 cgroupfs 均可管理。
+
+工程要点：rlimit 是「防失控」的最后防线（超出即失败），cgroups 是「可观测的治理」（超出前可监控预警）；容器环境优先用容器运行时的资源声明（K8s limits/requests 底层即 cgroups），进程内设置应只作为补充。
 
 ### 4.1 进程级资源限制
 

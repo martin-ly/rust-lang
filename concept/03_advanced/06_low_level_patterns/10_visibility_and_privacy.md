@@ -49,7 +49,13 @@ pub enum State {               // 公开枚举，变体默认公开
 
 ## 三、访问规则
 
-「访问规则」部分包含 Public item 与  Private item 两条主线，本节依次说明。
+Rust 可见性规则的形式化核心只有一条：**项对模块 M 可见，当且仅当项的每个「路径环节」对 M 都可达**。规则展开：
+
+- **Public item**：`pub` 项对其祖先模块链上「能看到其父模块」的所有代码可见——注意「项 pub 但模块私有」则项对外不可见（可见性是路径的合取）；
+- **Private item**：默认私有 = 当前模块及其**后代**模块可见（隐私向下继承）——`mod inner` 可以访问外层的私有项，反之不行；
+- **受限可见性**：`pub(crate)`/`pub(super)`/`pub(in path)` 把可见域精确到子树——`pub(in path)` 的 path 必须是当前模块的祖先。
+
+推论与判定：① `use` 引入的名字默认私有（`pub use` 才可再导出）；② trait 方法调用要求 **trait 可见**（不是方法可见）——`pub(crate) trait` 是「crate 内 API」的标准技巧；③ 结构体字段可见性与类型可见性独立（`pub struct` 可含私有字段，构造受控）。
 
 ### 1. Public item
 

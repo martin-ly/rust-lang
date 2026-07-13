@@ -10,7 +10,15 @@
 > **前置依赖**: [Async/Await 基础](01_async.md)
 > **定理链编号**: T-053 Waker 活性 ⟹ T-054 Stream 安全性
 >
-> **来源**: [Async Book](https://rust-lang.github.io/async-book/index.html) · [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Async Book](https://rust-lang.github.io/async-book/index.html) ·
+> [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) ·
+> [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html) ·
+> [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) ·
+> [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 ---
 
@@ -137,7 +145,14 @@
 
 ## 十、边界测试：高级异步模式的编译错误
 
-本节从边界测试：`select!` 宏中分支完成后的变量使用（编译错误）、边界测试：`Stream::next()` 与所有权冲突（编译错误）、边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）与边界测试：类型不匹配的基础错误切入，剖析「边界测试：高级异步模式的编译错误」的核心内容。
+本节的边界用例覆盖高级异步模式的四类编译错误：
+
+- **`select!` 分支完成后的变量使用**：分支 Future 完成后其局部状态不可再用——`select!` 每轮重新求值分支表达式，跨轮状态必须提升到循环外（`pin!` 或普通变量）；
+- **`Stream::next()` 与所有权冲突**：`stream.next().await` 需要 `&mut stream`——与同时持有的借用冲突（E0502），`while let Some(x) = stream.next().await` 是正确模式（借用在每轮结束）；
+- **`Pin`/`Unpin` 自动实现冲突**：含 `PhantomPinned` 或自引用的类型 `!Unpin`——`Box::pin` 前试图 move 触发 E0277；
+- **类型不匹配的基础错误**：`async` 块捕获与 `Send` 要求的组合——`spawn` 边界处的完整约束检查链。
+
+每组用例给出「错误信息 → 根因 → 修复」三段式，异步编译错误的关键技能是读懂「future is not Send」的推导链。
 
 ### 10.1 边界测试：`select!` 宏中分支完成后的变量使用（编译错误）
 
@@ -333,7 +348,14 @@ fn main() {
 
 ## 嵌入式测验
 
-「嵌入式测验」涉及测验 1：async fn in trait（记忆层）、测验 2：Stream trait（理解层）、测验 3：spawn_blocking 的使用场景（应用层）与测验 4：async 递归（分析层），本节逐一说明其要点。
+本节 4 道测验覆盖高级异步的核心判别点：
+
+- 测验 1（记忆层）：async fn in trait（1.75 稳定）的语义——脱糖为返回 `impl Future` 的方法，`dyn` 不兼容的原因；
+- 测验 2（理解层）：`Stream` trait 与 `Future` 的关系——「异步迭代器」模型，`poll_next` 的 `Option` 语义（`None` = 流结束）；
+- 测验 3（应用层）：`spawn_blocking` 的适用场景——阻塞 IO/CPU 密集工作移出执行器线程，防止饿死其他任务；
+- 测验 4（分析层）：async 递归的 `Box::pin` 必要性——递归 async fn 生成无限尺寸的状态机，`Box::pin` 提供间接层切断。
+
+作答建议：测验 4 先尝试直接写递归 async fn 并读编译器建议——错误信息本身就是教材。
 
 ### 测验 1：async fn in trait（记忆层）
 

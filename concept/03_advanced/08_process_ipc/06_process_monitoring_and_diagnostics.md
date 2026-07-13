@@ -29,7 +29,14 @@
 
 ## 2. 状态监控
 
-理解「状态监控」需要把握存活检查、非阻塞轮询、状态机与批量监控，本节依次展开。
+子进程状态监控的四种模式，按实时性需求选择：
+
+- **存活检查（2.1）**：`Child::try_wait()` 返回 `Ok(None)` 表示存活——零成本轮询，适合低频健康检查；
+- **非阻塞轮询（2.2）**：轮询循环 + sleep 退避——简单但有延迟与 CPU 开销的权衡；异步环境应改用 `tokio::process::Child::wait().await`（事件驱动无轮询）；
+- **状态机（2.3）**：`Starting → Running → Exited(code) | Killed(signal) | Zombie` 的显式状态机——`ExitStatus` 的 `code()`/`signal()`（Unix 扩展）区分正常退出与信号终止，监控逻辑的健壮性取决于状态机的完备性（别忘「启动失败」态）；
+- **批量监控（2.4）**：多子进程的等待集合——同步用「每进程一线程 + 通道汇总」，异步用 `FuturesUnordered` 收集 `wait()` future。
+
+跨平台注意：Windows 无信号概念，`ExitStatus` 只有退出码——监控抽象层应把「被终止」统一为枚举而非暴露平台细节。
 
 ### 2.1 存活检查
 
@@ -129,7 +136,13 @@ fn main() -> std::io::Result<()> {
 
 ## 3. 资源监控
 
-「资源监控」涉及使用 `sysinfo`、Linux `/proc` 解析与I/O 监控，本节逐一说明其要点。
+子进程资源监控的三条路径：
+
+- **`sysinfo` crate（3.1）**：跨平台（Linux/Windows/macOS）的进程信息统一 API——CPU%、RSS、虚拟内存、IO 计数，按 PID 刷新（`System::refresh_process`），是监控工具的首选依赖；
+- **Linux `/proc` 解析（3.2）**：`/proc/<pid>/stat`（CPU 时间）、`/proc/<pid>/status`（内存细分）、`/proc/<pid>/io`（IO 计数）——零依赖但需要处理「进程已退出文件消失」的竞态；
+- **I/O 监控（3.3）**：子进程的标准流吞吐监控——管道读取侧计数即可，更细的 socket/文件 IO 需 `/proc` 或 eBPF（`aya` crate）。
+
+监控设计原则：监控本身必须有上限——采样间隔、历史窗口、以及「监控进程被监控的进程拖垮」的隔离（监控失败不应影响主进程）。
 
 ### 3.1 使用 `sysinfo`
 

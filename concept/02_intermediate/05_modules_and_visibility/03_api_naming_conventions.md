@@ -214,7 +214,13 @@ impl Task {
 
 ## 四、可变访问
 
-「可变访问」部分的核心主题是 `mut_`，本节展开说明。
+本节覆盖可变访问器的命名约定。Rust API 命名遵循 [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines/naming.html)（C-GETTER 等），可变访问的核心规则：
+
+- **getter/setter 不加 `get_`/`set_` 前缀**：`x()` / `x_mut()` / `set_x(v)` 三件套——`foo()` 返回 `&T`，`foo_mut()` 返回 `&mut T`，`set_foo(v)` 整体替换；
+- **`mut_` 前缀的罕见用法**：仅当 `foo_mut()` 已被占用或有歧义时使用（标准库几无此例）；
+- **迭代器三连**：`iter()`/`iter_mut()`/`into_iter()` 对应 `&T`/`&mut T`/`T`——这是可变访问命名最一致的应用。
+
+一致性价值：命名即类型签名的人类可读摘要——看到 `_mut` 后缀即知可变借用、看到 `into_` 前缀即知消耗所有权，调用点的所有权流转无需查文档。
 
 ### 4.1 `mut_`
 
@@ -303,7 +309,14 @@ impl From<&str> for Task {
 
 ## 六、动作与回调
 
-本节围绕「动作与回调」展开，覆盖 `by` 与  `with` 闭包形式 两个方面。
+本节覆盖动作方法与回调 API 的命名约定：
+
+- **动作方法用动词**：`push`/`insert`/`remove`/`clear`——副作用方法名直接表达效果；纯计算用名词或形容词（`len`/`is_empty`）；
+- **`by` 后缀表达「以…方式」**：`sort_by(cmp)`/`sort_by_key(f)`——按何种标准执行动作，后缀区分重载变体（Rust 无函数重载，命名承担区分职责）；
+- **`with` 闭包形式**：`with_capacity(n)`/`with_context(f)`——构造器的配置变体与「在闭包内提供资源」模式（如 `thread_local!` 的 `with`）；
+- **回调注册**：`on_event(f)`/`set_handler(h)`——事件订阅用 `on_`，全局替换用 `set_`。
+
+命名审查清单：动词方法应有可观察效果；纯函数不应以动词开头（`compute_x()` 应改 `x()` 或保留以强调昂贵计算）。
 
 ### 6.1 `by`
 

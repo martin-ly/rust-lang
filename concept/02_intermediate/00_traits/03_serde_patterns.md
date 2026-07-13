@@ -193,7 +193,13 @@ Serde 支持的格式生态:
 
 ## 二、技术细节
 
-本节围绕「技术细节」展开，依次讨论 Derive 宏的展开逻辑、自定义序列化行为与Visitor 模式与反序列化。
+serde 的技术架构是「数据模型居中、格式无关」的解耦设计，三个要点：
+
+- **Derive 展开逻辑（2.1）**：`#[derive(Serialize)]` 生成「按字段序调用 `serializer.serialize_struct`」的代码——结构体与格式之间隔着 serde 数据模型（struct/map/seq/enum 等 29 种类型），JSON/YAML/bincode 各实现 `Serializer`/`Deserializer` trait 即接入全部类型；
+- **自定义序列化（2.2）**：`#[serde(with = "module")]` 委托给自定义函数对、`serialize_with`/`deserialize_with` 单字段定制、`#[serde(remote)]` 为外部类型生成代理——覆盖「外部类型 + 自定义格式」的全部组合；
+- **Visitor 模式（2.3）**：反序列化的核心是 `Visitor`——「由格式驱动调用」的回调接口，`Deserialize` 实现描述「我期望什么」，格式实现决定「实际有什么」，类型转换在 Visitor 方法中完成。
+
+性能要点：serde 的零拷贝反序列化（`#[serde(borrow)]` + `&'a str` 字段）使 JSON 解析可直接引用输入缓冲区——这是 `serde_json::from_slice` 高性能的来源。
 
 ### 2.1 Derive 宏的展开逻辑
 >
@@ -417,7 +423,12 @@ Visitor 模式的核心作用:
 
 ## 四、反命题与边界分析
 
-本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
+本节检验 serde 使用的两条常见误判：
+
+- **反命题 1：「`#[serde(default)]` 能处理所有缺失字段」** —— 有边界。`default` 用 `Default::default()` 填充缺失字段——但「字段缺失」与「字段为 null」不同（后者需 `Option` 或 `deserialize_with`）；且 `default` 掩盖 schema 演进的信号——严格模式 `deny_unknown_fields` + 显式版本字段才是 API 契约的正确姿势；
+- **反命题 2：「`#[serde(flatten)]` 是无成本的组合」** —— 有代价。flatten 使 serde 退化为「缓冲到 `Content` 再反序列化」——零拷贝失效（`#[serde(borrow)]` 与 flatten 不兼容）、数字精度可能丢失（经 `f64` 中转）、错误信息变差（位置信息丢失）。判定准则：flatten 用于配置类低频率场景，热路径协议解析避免。
+
+边界极限小节量化：untagged 枚举的歧义解析（按序尝试，顺序敏感）、`skip_serializing_if` 与 `Option` 的交互、以及反序列化失败的恢复策略。
 
 ### 4.1 反命题树
 >

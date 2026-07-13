@@ -168,7 +168,13 @@ Unpin trait 的语义:
 
 ## 二、技术细节
 
-本节从 Pin API 的契约、自引用结构体的安全构建与与 async/await 的关系切入，剖析「技术细节」的核心内容。
+`Pin` 的技术细节围绕「内存位置承诺」展开，三个要点：
+
+- **Pin API 的契约（2.1）**：`Pin<P>` 包装指针类型 `P`（`&mut T`/`Box<T>`/`Arc<T>`），承诺「`P` 指向的值不再被 move」——`Pin::get_mut` 只对 `T: Unpin` 开放（Unpin 类型不在乎移动），`Pin::get_unchecked_mut` 是 `unsafe` 逃生口（承诺由程序员承担）；
+- **自引用结构体的安全构建（2.2）**：「先构造、后 pin、最后初始化引用」三阶段——`MaybeUninit` + `Pin<Box<T>>` + 手动设置自引用字段是底层模式，`pin-project`/`ouroboros`/`self_cell` crate 是安全封装；
+- **与 async/await 的关系（2.3）**：`Future::poll` 取 `Pin<&mut Self>` 因为状态机可能自引用（跨 await 的局部变量互相引用）——`Box::pin(fut)` 是手动 poll/存储 Future 的标准姿势，`pin!` 宏处理栈上 pin。
+
+判定准则：应用代码只接触 `Box::pin`/`pin!`/`.await` 三件套；手写 `Pin` 投影一律用 `pin-project`，不手写 `unsafe`。
 
 ### 2.1 Pin API 的契约
 >
@@ -322,7 +328,12 @@ async/await 与 Pin 的关系:
 
 ## 四、反命题与边界分析
 
-本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+本节检验 `Pin` 的两条常见误判：
+
+- **反命题 1：「`Pin` 保证值不被移动」** —— 需要精确化：`Pin` 只保证**通过安全 API** 不能移动被 pin 的值——`unsafe` 代码、`mem::replace` 配合 `get_unchecked_mut`、以及 `Unpin` 类型的自动豁免都可以移动。`Pin` 是「默认安全 + 显式承诺」机制，不是物理不可移动；
+- **反命题 2：「`Unpin` 类型永远不需要关心 Pin」** —— 不完全。`Unpin` 类型可以安全地 move 出 `Pin`，但**实现 `Drop` 的 Unpin 类型**仍需注意 drop 时机（pin 语义与 drop 顺序独立）；且 `Unpin` 是 auto trait——含自引用字段的结构体自动 `!Unpin`，但 `unsafe impl Unpin` 错误标注会破坏 Future 的健全性（Miri 可检测部分情形）。
+
+边界极限小节量化：栈上 pin 的作用域限制、`Pin<&mut Self>` 在 trait 方法中的投影规则、以及 `PhantomPinned` 标记的用途。
 
 ### 4.1 反命题树
 >

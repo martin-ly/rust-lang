@@ -289,7 +289,12 @@ const 参数不是"类型"，是"**编译期已知的值**"，其语义由三条
 
 ## 六、实质示例
 
-「实质示例」部分包含固定大小环形缓冲区 与 维度泛型矩阵 两条主线，本节依次说明。
+本节给出 const 泛型的两个生产级应用示例，展示「值参数化类型」的实际价值：
+
+- **固定大小环形缓冲区**：`struct RingBuf<T, const N: usize>`——容量编码进类型，缓冲区在栈上内联（无堆分配），`N` 在编译期已知使边界检查可被优化；这是嵌入式场景替代 `Vec` 的标准模式；
+- **维度泛型矩阵**：`struct Matrix<T, const R: usize, const C: usize>`——`Matrix<f64, 3, 4> * Matrix<f64, 4, 2>` 的维度兼容性由类型系统检查（乘法实现为 `impl Mul<Matrix<T, C, K>> for Matrix<T, R, C>`），维度不匹配是编译错误而非运行期断言。
+
+两个示例的共同模式：**把「运行期不变量」提升为「类型级事实」**——代价是每组合成新类型（单态化），收益是检查前移与优化信息。
 
 ### 6.1 固定大小环形缓冲区
 
@@ -407,7 +412,13 @@ fn matrix_demo() {
 
 ## 七、反例：stable 边界上的编译期拒绝
 
-本节将「反例：stable 边界上的编译期拒绝」分解为若干主题：反例 1：const 参数参与运算（generic_const_exp…、反例 2：在泛型上下文中用 const 参数构造依赖类型与反例 3：非法的 const 参数类型。
+本节的三个反例精确标注 stable const 泛型的能力边界（min_const_generics，1.51 稳定的基本集）：
+
+- **反例 1：const 参数参与运算**——`struct S<const N: usize> { arr: [u8; N + 1] }` 被拒绝：`N + 1` 是泛型常量表达式（`generic_const_exprs`，仍 nightly）。stable 边界：const 参数只能**独立**出现在类型位置（`[T; N]`），不能参与任何运算；
+- **反例 2：依赖类型构造**——`fn f<const N: usize>() -> [u8; N * 2]` 同理被拒——泛型上下文中 const 参数不能进入「依赖其值才能判断良构」的位置；
+- **反例 3：非法参数类型**——const 参数只允许整数/`bool`/`char`（`u8`...`usize`、`i*`）——`f64`/`&str`/自定义类型被拒（E0308 类错误），`const fn` 构造的值可作参数实参。
+
+绕过模式：运算需求用 `generic_const_exprs`（nightly）或重构为「两个独立 const 参数 + where 约束」（`typenum` crate 的类型级 Peano 数是重型替代）。
 
 ### 反例 1：const 参数参与运算（generic_const_exprs）
 

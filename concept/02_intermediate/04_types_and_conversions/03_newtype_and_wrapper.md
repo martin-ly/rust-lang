@@ -342,7 +342,12 @@ Rust 中的包装器类型:
 
 ## 四、反命题与边界分析
 
-本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
+本节检验 newtype 模式的两条常见误判：
+
+- **反命题 1：「newtype 自动继承被包装类型的所有能力」** —— 错误。`struct Meters(f64)` 不自动获得 `Add`/`Display`/`Debug`——trait 必须逐一派生或手写（`derive_more` crate 可批量转发）。这正是 newtype 的价值所在：**能力白名单制**——只暴露你想暴露的操作。
+- **反命题 2：「`Deref` 到内部类型是好设计」** —— 多数情况是反模式。`impl Deref for Meters { type Target = f64; }` 让 newtype 退化为「偶尔隐式转换的别名」——类型边界在方法调用处无声穿透，`meters * 2.0` 悄悄回到裸 `f64`。`Deref` 的正确用途是**智能指针**（`Box`/`Rc`/`String` 这类「指向他物」的类型），不是「获得内部类型的全部方法」。
+
+边界极限小节量化：`#[repr(transparent)]` 的 ABI 承诺、`PhantomData` 的型变标记、以及派生宏的过度约束陷阱。
 
 ### 4.1 反命题树
 >
@@ -517,7 +522,15 @@ graph TD
 
 ## 十、边界测试：Newtype 与包装器的编译错误
 
-理解「边界测试：Newtype 与包装器的编译错误」需要把握边界测试：Newtype 不继承原类型的 trait（编译错误）、边界测试：PhantomData 的协变/逆变误用（编译错误 / 运行…、边界测试：newtype 的 derive 限制（编译错误）、边界测试：`Deref` 滥用导致的隐式转换陷阱（编译错误/逻辑错误）等6个方面，本节依次展开。
+本节的边界用例覆盖 newtype 的五个典型失败点：
+
+- **trait 不继承**：`#[derive(Debug)]` 漏写导致打印失败——newtype 的能力清单是显式的，每个需要的 trait 都要声明；
+- **`PhantomData` 型变误用**：`PhantomData<T>` 使容器对 `T` 协变且「表现得像拥有 T」（影响 `Send`/`Sync` 自动实现与 drop check）——标记所有权用 `PhantomData<T>`，只标记生命周期用 `PhantomData<&'a ()>`，选错导致约束过严或 dropck UB；
+- **derive 限制**：含 `PhantomData<T>` 的类型派生 `Clone` 会过度约束 `T: Clone`——手写 impl 解除；
+- **`Deref` 方法名冲突**：内部类型与 newtype 同名方法的解析优先级（固有方法 > Deref 目标方法）——静默调用到错误版本是 `Deref` 滥用的经典后果；
+- **隐式转换陷阱**：`Deref` 链过深时类型推断失败（E0282）——显式标注或 `as_ref` 调用点修复。
+
+每组用例给出判定准则：newtype 的每一处「便利」都对应一处「边界穿透」，审查时成对评估。
 
 ### 10.1 边界测试：Newtype 不继承原类型的 trait（编译错误）
 

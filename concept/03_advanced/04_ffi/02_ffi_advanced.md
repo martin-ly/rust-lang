@@ -432,7 +432,12 @@ Opaque 指针:
 
 ## 四、反命题与边界分析
 
-本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
+本节检验高级 FFI 的两条致命误判：
+
+- **反命题 1：「`Box::into_raw` 的指针可以传给任何 C free」** —— 致命错误。Rust 分配器的内存必须由 **Rust 分配器**释放（`Box::from_raw` 后 drop）——混用 C 的 `free()` 与 Rust 全局分配器是堆损坏（Windows 上不同 CRT 堆、jemalloc/mimalloc 替换分配器时尤其确定崩溃）。跨边界的内存释放规则：**谁分配谁释放**，要么提供 `rust_free` 导出函数让 C 回调，要么用 `libc::malloc` 统一分配方；
+- **反命题 2：「可变 static 在 FFI 中方便且可用」** —— 危险。`static mut` 的每次访问都是 `unsafe`，FFI 回调与 Rust 线程并发访问即数据竞争 UB——正确替代是 `AtomicXxx`（标志/计数）、`OnceLock`/`LazyLock`（一次性初始化）、或 `Mutex`（复合状态）。
+
+边界极限小节量化：C 变长参数（`...`）的类型提升规则、回调函数的生命周期管理（注册/注销配对）、以及 unwind 跨 FFI 边界的 `extern "C-unwind"` 语义。
 
 ### 4.1 反命题树
 >

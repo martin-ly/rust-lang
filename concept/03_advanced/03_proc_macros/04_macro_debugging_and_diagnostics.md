@@ -44,7 +44,13 @@
 
 ## 二、使用 cargo expand
 
-「使用 cargo expand」部分包含安装与基础用法 与 比较宏展开差异 两条主线，本节依次说明。
+`cargo expand` 是宏调试的第一工具——它展示宏展开后的完整代码。三个核心用法：
+
+- **基础用法（2.1）**：`cargo expand`（整个 crate）、`cargo expand path::to::item`（单项）——配合 `--ugly` 跳过格式化看原始生成；安装：`cargo install cargo-expand`（依赖 nightly 内部工具但可用于 stable 项目）；
+- **比较展开差异（2.2）**：`cargo expand > before.rs`，修改宏后再次展开 `diff`——宏版本升级审查的标准流程，「升级后生成代码变了什么」一目了然；
+- **诊断流程**：宏相关编译错误的标准处置是「先展开、再定位」——错误指向展开结果时，在展开代码中搜索报错标识符，反推是哪段生成逻辑产生。
+
+局限：`cargo expand` 展示的是**成功展开**的结果——宏自身 panic 或生成非法语法时无输出，此时需配合 `RUSTC_LOG` 或宏内 stderr 调试（下节）。
 
 ### 2.1 安装与基础用法
 
@@ -113,7 +119,13 @@ macro_rules! debug_macro {
 
 ## 四、精确错误定位
 
-「精确错误定位」部分按使用 syn::Error、组合多个错误与proc-macro-error 友好错误的顺序逐层展开。
+宏错误的定位质量取决于 span 管理，三个层次的工具：
+
+- **`syn::Error`（4.1）**：`Error::new(span, msg)`/`Error::new_spanned(tokens, msg)` 把错误绑定到具体 token——`to_compile_error()` 转为可注入输出流的编译错误代码，错误在 IDE 中精确标红用户输入而非宏调用整体；
+- **组合多个错误（4.2）**：`Error::combine` 累积全部问题一次性报告——「一次修复一个错误」的循环是宏用户体验的最大杀手；
+- **`proc-macro-error2`（4.3）**：属性宏风格的错误流——`abort!(span, msg)` 立即终止并报告、`emit_error!` 累积后继续，省去手动 thread `Result` 的样板（本库 vendor 目录维护其修复版）。
+
+定位基准：宏的每个错误都应能回答「用户改哪一行」——答不出的错误信息需要重写。
 
 ### 4.1 使用 syn::Error
 
@@ -186,7 +198,13 @@ pub fn my_trait(input: TokenStream) -> TokenStream {
 
 ## 五、编译期性能分析
 
-「编译期性能分析」涉及 cargo build --timings、RUSTC_LOG与测量宏展开耗时，本节逐一说明其要点。
+宏拖慢编译的定位工具链：
+
+- **`cargo build --timings`（5.1）**：定位宏 crate 在编译关键路径上的耗时——过程宏 crate 本身（proc-macro2/syn/quote 依赖树）编译时间常占小项目一半；
+- **`RUSTC_LOG`（5.2）**：`RUSTC_LOG=expand` 等日志通道观察展开行为（需 nightly `-Z` 配合），追踪宏展开的触发次数与耗时；
+- **测量宏展开耗时（5.3）**：过程宏内用 `std::time::Instant` + feature 门控的 stderr 输出——找到「哪个输入类型触发最慢展开」，常见元凶是深层 `syn` 递归解析与逐 token 的 `to_string` 拼接。
+
+优化顺序：先减 syn 解析深度（只 parse 需要的节点），再减 token 往返（`TokenStream` 直接操作优于 `to_string` 来回），最后考虑缓存（相同输入的展开结果 memoize，注意 span 失效）。
 
 ### 5.1 cargo build --timings
 

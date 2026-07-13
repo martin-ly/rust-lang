@@ -134,7 +134,13 @@ trait LendingIterator {
 
 ## 二、语法与良构规则
 
-「语法与良构规则」涉及完整语法、`where Self: 'a` 是必需的（required wher…与实现侧规则，本节逐一说明其要点。
+GAT（Generic Associated Types，1.65 稳定）允许关联类型携带泛型参数——`type Item<'a>;` 即「类型族」：每个生命周期/类型参数值对应一个具体类型。三条良构规则：
+
+1. **完整语法（2.1）**：`trait LendingIterator { type Item<'a> where Self: 'a; fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>; }`——参数列表与 where 子句是必需部分；
+2. **`where Self: 'a` 的必需性（2.2）**：编译器要求「关联类型的参数化版本在 Self 存活时才有意义」——这条 required where clause 是 GAT 健全性的核心，省略即编译错误；
+3. **实现侧规则（2.3）**：impl 必须为**所有**参数值提供类型（`type Item<'a> = &'a mut [T];`），不能只对部分生命周期实现——这与 trait 方法的全量化语义一致。
+
+良构规则的直觉：GAT 是「以参数索引的类型函数」，规则保证这个函数在定义域内处处有定义。
 
 ### 2.1 完整语法
 
@@ -511,7 +517,14 @@ fn demo_cursor() {
 
 ## 八、已知局限与编译器错误模式
 
-理解「已知局限与编译器错误模式」需要把握高频错误模式对照、implied bounds 限制（1.97 仍在）、非对象安全与 async trait 的联动后果与不应对 GAT 做的事，本节依次展开。
+GAT 的当前局限（1.97 仍在）与高频错误模式：
+
+- **高频错误对照（8.1）**：缺 `where Self: 'a`（E0582 类）、impl 侧参数名不匹配、借用检查在 GAT 方法体中的过度保守（返回 `Self::Item<'a>` 时的生命周期连通性）；
+- **implied bounds 限制（8.2）**：`type Item<'a>: Trait;` 形式的关联类型边界在使用处不自动隐含（需重复声明 `where T::Item<'a>: Trait`）——trait 求解的已知缺陷，新求解器（next-solver）逐步修复；
+- **非对象安全（8.3）**：GAT 使 trait 不可 `dyn` 化——`Box<dyn LendingIterator>` 非法，需要动态分发时必须手写类型擦除包装（`Box<dyn FnMut() -> ...>` 模式）；
+- **不应对 GAT 做的事（8.4）**：用 GAT 模拟完整 HKT（`type Wrap<T>` 无 where 约束的版本仍受限）、在不需要「借用 self 的返回类型」时用 GAT（普通关联类型更简单）。
+
+判定准则：GAT 只解决一个问题——「返回类型需要借用 self」；其他需求用普通关联类型。
 
 ### 8.1 高频错误模式对照
 

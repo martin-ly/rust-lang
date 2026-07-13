@@ -24,7 +24,12 @@
 
 ## 2. 权限最小化
 
-本节从用户/组降级 与  Linux Capabilities 两个层面剖析「权限最小化」。
+权限最小化（least privilege）是沙箱化的第一原则：子进程应只持有完成任务所需的最小权限集。两层机制：
+
+- **用户/组降级（2.1）**：root 启动的守护进程完成绑定端口等特权操作后 `setuid`/`setgid` 降级——`nix::unistd::{setuid, setgid}` 封装，顺序关键（先 setgid 后 setuid，且 setuid 后无法恢复）；补充组（`setgroups`）常被遗忘导致残留权限；
+- **Linux Capabilities（2.2）**：把 root 的「全能」拆为细粒度能力（`CAP_NET_BIND_SERVICE`/`CAP_SYS_ADMIN` 等）——`caps` crate 管理 ambient/permitted/effective 三集合，原则是「默认全清空，按需逐加」。
+
+Rust 集成要点：降级操作必须在**单线程**阶段执行（setuid 只影响调用线程，多线程进程降级是安全漏洞）——通常在 `Command::pre_exec`（fork 后 exec 前的单线程窗口）中完成。
 
 ### 2.1 用户/组降级
 
@@ -93,7 +98,13 @@ fn move_to_cgroup(pid: u32, cgroup: &str) -> std::io::Result<()> {
 
 ## 4. 隔离机制
 
-理解「隔离机制」需要把握 Linux Namespaces、文件系统隔离与网络隔离，本节依次展开。
+隔离机制回答「即使子进程被攻破，损害如何限制」，三层递进：
+
+- **Linux Namespaces（4.1）**：mount（独立挂载视图）、pid（独立进程树，子进程看不到外部进程）、net（独立网络栈）、user（uid 映射，容器内 root ≠ 宿主 root）——`clone`/`unshare` 系统调用创建，`nix::sched` 封装；
+- **文件系统隔离（4.2）**：`chroot`（弱隔离，root 可逃逸）→ pivot_root + mount namespace（容器标准做法）→ 只读根 + tmpfs 可写层（最强）；
+- **网络隔离（4.3）**：net namespace 的「无网络」配置是最强隔离（连 loopback 都没有）——配合 unix socket pair 保留受控通信通道。
+
+实践路径：手写 namespace 编排复杂易错——生产环境优先用容器运行时（Docker/K8s），Rust 代码通过 `Command` + 容器 API 间接受益；直接隔离场景（沙箱执行不可信代码）参考 `minijail`/`bubblewrap` 的设计。
 
 ### 4.1 Linux Namespaces
 

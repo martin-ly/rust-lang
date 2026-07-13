@@ -53,7 +53,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 3. 异步生命周期管理
 
-本节围绕「异步生命周期管理」展开，覆盖超时控制 与 异步通信 两个方面。
+异步进程生命周期管理的核心是「等待与超时的组合」，两个支柱：
+
+- **超时控制（3.1）**：`tokio::time::timeout(dur, child.wait())`——超时的语义是 **wait future 被取消，子进程仍在运行**！这是最常见的理解错误：timeout 不杀进程，必须显式 `child.kill().await` + `wait().await`（回收防僵尸）。优雅退出协议：先发 SIGTERM/关闭 stdin → 宽限期 → SIGKILL；
+- **异步通信（3.2）**：`tokio::process` 的 stdio 是 `AsyncRead`/`AsyncWrite`——stdout/stderr 必须**并发**消费（`tokio::join!` 或 spawn 独立任务），单向等待会管道写满死锁；大输出用 `BufReader` + `lines()` 流式处理。
+
+生命周期完整检查表：spawn（`kill_on_drop` 是否设置？）→ 通信（双向并发消费？）→ 等待（超时 + kill 回收？）→ 清理（僵尸回收验证？）——四步缺一步都是生产事故候选项。
 
 ### 3.1 超时控制
 
