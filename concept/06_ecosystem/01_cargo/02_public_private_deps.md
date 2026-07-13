@@ -72,6 +72,7 @@ pub fn flags() -> MyFlags { /* ... */ }
     - [7.2 与 `workspace.dependencies` 协同](#72-与-workspacedependencies-协同)
     - [7.3 可运行示例](#73-可运行示例)
   - [八、来源与延伸阅读](#八来源与延伸阅读)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
 
 ---
@@ -247,6 +248,29 @@ serde = { workspace = true, public = false, features = ["derive"] }
 
 **文档版本**: 1.0
 **最后更新**: 2026-07-09
+
+---
+
+## ⚠️ 反例与陷阱
+
+**反例：公共 API 泄漏私有依赖的类型。**
+
+```rust,ignore
+// 依赖 internal_crate 未声明为 public dependency，
+// 但其类型出现在公共签名中：
+pub fn connect() -> internal_crate::Connection { ... }
+// 下游 crate 无法命名 Connection 类型，也无法匹配其方法签名
+```
+
+历史上这是 E0446 硬错误；rustc 1.97 实测该模式在多数形态下转为 lint/可编译，**编译器不再可靠兜底**，隐私泄漏演变为 API 可用性问题而非编译错误。
+
+**修正对照**：
+
+1. 需要暴露依赖类型时，在 Cargo.toml 显式声明 public dependency（cargo 的 `public = true` 支持按本页所述机制）；
+2. 或把依赖类型包进自己的 newtype，公共 API 只暴露自有类型；
+3. 用 `cargo public-api` 等工具在 CI 中审查公共 API 面的类型来源。
+
+**陷阱要点**：「public/private 依赖」边界是 SemVer 契约的一部分——泄漏私有依赖会把其版本升级变成你的破坏性变更。
 
 ---
 

@@ -60,6 +60,8 @@
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -758,3 +760,23 @@ fn main() {}
 
 > 写时复制安全 ⟸ CoW 借用转换 ⟸ 所有权转移
 > 零拷贝优化 ⟸ Borrowed 状态保持 ⟸ 生命周期（Lifetimes）
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 双变体 | `Cow::Borrowed(&'a B)` / `Cow::Owned(<B as ToOwned>::Owned)` | 本文 §1.3 |
+| 延迟克隆 | 仅 `to_mut()` 等写入路径触发克隆，只读路径零拷贝 | 本文 §1.2 |
+| trait 约束 | `B: ToOwned + ?Sized` 且 `B::Owned: Borrow<B>` | 本文 §2.3 |
+| 典型场景 | 字符串规范化、零拷贝解析中「多数不改」的路径 | 本文 §2.2 |
+| 生命周期 | 借用变体受 `Cow<'a, B>` 的 `'a` 约束 | 本文 §十 边界测试 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[内存管理](01_memory_management.md) 中的零拷贝/智能抽象族。
+- **下位（实例）**：`Cow<'a, str>`、`Cow<'a, [T]>`、`Cow<'a, Path>` 等标准库实例。
+- **对偶**：`Cow`（延迟克隆）⇄ 直接拥有 `String`/`Vec`（急切克隆）。
+- **组合**：与 [借用](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)、[字符串与文本](../../01_foundation/06_strings_and_text/01_strings_and_text.md) 组合。
+- **依赖**：依赖 `Borrow`/`ToOwned` trait 体系，见 [Traits](../00_traits/01_traits.md)。
+
+---

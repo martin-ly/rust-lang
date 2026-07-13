@@ -653,6 +653,25 @@ Rust 编译器要求所有变量在使用前必须初始化。读取未初始化
 
 ---
 
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 经典模型 | 环境模型（binding → value）vs 存储模型（binding → location） | 本文 §二 |
+| Rust 定位 | 存储模型的线性扩展：每个存储位置有唯一所有者 | 本文 §2.3 |
+| 表达式分类 | place expression（位置）vs value expression（值） | 本文 §六 |
+| 值语义强度 | 极端值语义：赋值/传参默认 move，仅 `Copy` 类型隐式复制 | 本文 §四 |
+| 初始化强制 | 未初始化变量的使用编译期拒绝 | 本文 §10.4 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：编程语言变量理论的模型分类。
+- **下位（实例）**：环境模型、存储模型、Rust 线性存储模型、place/value 表达式分类。
+- **组合**：与 [所有权](../01_ownership_borrow_lifetime/01_ownership.md)、[Move 语义](../01_ownership_borrow_lifetime/05_move_semantics.md) 直接对应（move = 存储位置的线性转移）。
+- **依赖**：是 [副作用与纯度](../00_start/04_effects_and_purity.md) 推理的语义底座。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

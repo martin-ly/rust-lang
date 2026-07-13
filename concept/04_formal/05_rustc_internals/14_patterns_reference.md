@@ -160,6 +160,31 @@ fn get_rgb(c: Color) -> u32 {
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：在 `let` 中使用可反驳模式** —— `let` 要求不可反驳（irrefutable）模式。
+
+```rust,compile_fail
+// rustc 1.97.0 实测：error[E0005]: refutable pattern in local binding
+fn main() {
+    let Some(x) = Option::<i32>::None;
+    println!("{x}");
+}
+```
+
+**修正对照**：用 `let...else` 或 `if let` 处理反驳分支。
+
+```rust
+fn main() {
+    let Some(x) = Option::<i32>::Some(1) else { return };
+    println!("{x}");
+}
+```
+
+**陷阱要点**：模式按反驳性二分——`let`/函数参数/`for` 只接受不可反驳模式；`match` 臂、`if let`、`let...else` 接受可反驳模式。`E0005` 是这条语法范畴边界的编译期执法。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

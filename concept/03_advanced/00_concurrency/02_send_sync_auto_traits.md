@@ -47,6 +47,8 @@
     - [反例 3：unsafe 手动 impl 的正确/错误对照](#反例-3unsafe-手动-impl-的正确错误对照)
   - [七、决策树：类型需要跨线程时怎么办](#七决策树类型需要跨线程时怎么办)
   - [八、与既有内容的关系声明](#八与既有内容的关系声明)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
   - [九、来源与延伸阅读](#九来源与延伸阅读)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Send 与 Sync 的契约（🟢 基础）](#测验-1send-与-sync-的契约-基础)
@@ -492,6 +494,26 @@ flowchart TD
 | [01_traits.md](../../02_intermediate/00_traits/01_traits.md) | Trait 系统总览、auto trait 在 trait 分类中的位置 | 机制入口，判定细节指向本页 |
 | [19_advanced_traits.md](../../02_intermediate/00_traits/04_advanced_traits.md) | marker trait、negative impl 语法 | 语法入口，语义契约指向本页 |
 | [08_interior_mutability.md](../../02_intermediate/02_memory_management/02_interior_mutability.md) | `UnsafeCell`/`Cell`/`RefCell` 单线程语义 | Sync 判定的前提概念 |
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| Send 契约 | 类型的所有权可安全转移到另一线程 | 本文 §2.1 |
+| Sync 契约 | `T: Sync` ⟺ `&T: Send`，即可跨线程共享引用 | 本文 §2.2 |
+| 自动推导 | auto trait：按字段结构递归推导，遇到裸指针/`UnsafeCell` 停止 | 本文 §3.1 |
+| 负实现 | `unsafe impl !Send` 需 nightly；stable 用 `PhantomData<*const T>` opt-out | 本文 §3.2–3.3 |
+| 手动 impl | `unsafe impl Send/Sync` 允许但须自行证明契约，错误 impl 导致数据竞争 UB | 本文 §六 反例 3 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[并发](01_concurrency.md) 安全性的类型化契约层。
+- **下位（实例）**：`Send`、`Sync`、负实现、`PhantomData` opt-out 惯用法。
+- **对偶**：`Send` 类型（`Arc`）⇄ `!Send` 类型（`Rc`）的线程边界对照（本文 §六）。
+- **组合**：与 [Unsafe](../02_unsafe/01_unsafe.md)（手动 impl 的 unsafe 义务）、[原子操作与内存序](05_atomics_and_memory_ordering.md) 组合。
+- **依赖**：依赖 [所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 的转移语义。
+
+---
 
 ## 九、来源与延伸阅读
 

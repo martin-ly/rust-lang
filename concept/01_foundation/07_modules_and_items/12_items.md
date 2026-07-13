@@ -314,6 +314,25 @@ flowchart TD
 
 ---
 
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 定义 | Item = crate/模块中可独立声明与命名的实体（区别于语句内局部项） | 本文 §一 |
+| 种类 | 函数、结构体、枚举、trait、impl、常量、静态项、类型别名、use、extern、union、宏等 | 本文 §二 |
+| 声明位置 | 模块内任意位置，与顺序无关（可先使用后声明） | 本文 §四、§七 |
+| 可见性 | 默认私有，`pub` / `pub(crate)` / `pub(in path)` 逐级开放 | 本文 §五 |
+| 关联与外部项 | impl/trait 内为关联项；`extern` 块声明外部项 | 本文 §六 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：Rust 模块系统的实体单元。
+- **下位（实例）**：fn / struct / enum / trait / impl / const / static / type alias / use 声明。
+- **组合**：与 [模块与路径](01_modules_and_paths.md)、[可见性与隐私](../../03_advanced/06_low_level_patterns/10_visibility_and_privacy.md) 组合构成模块系统。
+- **依赖**：依赖 [Crates 与源文件](11_crates_and_source_files.md) 的编译单元划分。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

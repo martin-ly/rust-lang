@@ -68,6 +68,8 @@
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -868,3 +870,23 @@ fn main() {
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](../README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../../06_ecosystem/README.md) |
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 表示 | trait object = 数据指针 + vtable 指针（fat pointer） | 本文 §1.1–1.2 |
+| 对象安全 | 方法不得返回 `Self`、不得有泛型参数、`Self: Sized` 约束受限 | 本文 §1.3 |
+| Upcasting | trait object upcasting 于 Rust 1.86 稳定 | 本文 §1.4 |
+| 自定义擦除 | 手写 vtable、enum 分派等替代模式 | 本文 §2.2 |
+| 性能权衡 | 动态分发阻止内联，换取异质集合与更小二进制 | 本文 §三 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Traits](../../02_intermediate/00_traits/01_traits.md) 的动态分发机制。
+- **下位（实例）**：`Box<dyn Trait>`、vtable、自定义类型擦除模式。
+- **对偶**：静态分发（泛型单态化）⇄ 动态分发（类型擦除）。
+- **组合**：与 [RTTI 与动态类型识别](../../02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md)、[Async Trait 对象安全](../01_async/13_async_trait_object_safety.md) 组合。
+- **依赖**：依赖 [类型系统基础](../../01_foundation/02_type_system/01_type_system.md)。
+
+---

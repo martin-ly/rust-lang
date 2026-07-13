@@ -342,6 +342,25 @@ fn align_check() {
 
 ---
 
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 规范化状态 | Rust 内存模型仍在规范化进程中，尚未完全定稿 | 本文 §一 |
+| 抽象字节 | 内存以抽象字节建模，附带初始化状态与 provenance 元数据 | 本文 §二 |
+| Provenance | 指针携带来源信息；整数→指针转换丢失 provenance 属反模式 | 本文 §三、§八 |
+| 未初始化内存 | `MaybeUninit` 是合法处理未初始化内存的唯一途径 | 本文 §四 |
+| 别名模型 | Stacked Borrows → Tree Borrows 演进 | 本文 §六 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Unsafe](01_unsafe.md) 的语义基础层。
+- **下位（实例）**：抽象字节、provenance、`MaybeUninit`、别名模型、对齐与 layout。
+- **组合**：与 [原子操作与内存序](../00_concurrency/05_atomics_and_memory_ordering.md)、[Unsafe 边界全景](02_unsafe_boundary_panorama.md) 组合。
+- **依赖**：依赖 [值与引用语义](../../01_foundation/03_values_and_references/02_value_vs_reference_semantics.md)。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

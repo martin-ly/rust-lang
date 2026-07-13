@@ -293,6 +293,36 @@ impl<T> Register<T> {
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：在 stable 上直接使用 `-Zbuild-std`。**
+
+```text
+$ cargo build -Zbuild-std --target x86_64-unknown-none
+error: the `-Z` flag is only accepted on the nightly compiler
+```
+
+`-Zbuild-std` 三重门槛常被低估：① 仅 nightly；② 必须安装 `rust-src` 组件（`rustup component add rust-src`），缺组件时报「can't find crate for `core`」类误导性错误；③ 每次 rustc 升级后需重新构建 std 缓存。
+
+**修正对照**：
+
+```toml
+# rust-toolchain.toml
+[toolchain]
+channel = "nightly"
+components = ["rust-src"]
+```
+
+```toml
+# .cargo/config.toml —— 固化到项目配置，避免命令行遗漏
+[unstable]
+build-std = ["core", "alloc"]
+```
+
+**陷阱要点**：`build-std` 重编译的是**未经预编译优化的 std 源码**，首次构建时间与产物体积都会显著变化；嵌入式/`no_std` 之外的大多数场景应优先考虑预编译 target 而非 build-std。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

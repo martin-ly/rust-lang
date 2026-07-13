@@ -293,7 +293,15 @@ graph TD
 
 ## 四、定理推理链（Theorem Chain）
 
-理解「定理推理链（Theorem Chain）」需要把握引理：Result<T,E> ⟹ 和类型强制错误处理、定理：? 运算符 ⟹ 错误传播自动化、推论：panic ⟹ 不可恢复错误的显式边界、类型安全错误处理等5个方面，本节依次展开。
+本节把「Rust 错误处理为何可靠」压缩为一条可逐步验证的推理链，每一环都对应一个可观察的语言机制：
+
+1. **可恢复错误用 `Result<T, E>` 表示** ⟹ 错误是类型而非控制流，编译器可静态检查；
+2. **`#[must_use]` 标注 `Result`** ⟹ 忽略错误会触发 `unused_must_use` 警告，静默吞错成为显式选择；
+3. **`?` 运算符仅传播不隐式转换** ⟹ 错误沿调用栈流动路径可在源码中逐跳追踪，无隐藏的控制流；
+4. **`From`/`Into` 转换在 `?` 处显式发生** ⟹ 错误类型收敛点（通常是 crate 根的错误枚举或 `Box<dyn Error>`）由程序员显式设计；
+5. **不可恢复错误用 `panic!` 且默认 unwind 可捕获** ⟹ 故障隔离边界（线程、`catch_unwind`、FFI `extern "C"`）可被显式推理。
+
+反方向阅读（⟸）即为调试指南：线上 panic ⟸ 检查 panic hook 与 unwind 策略 ⟸ 定位违反前置条件的点。
 
 ### 4.1 引理：Result<T,E> ⟹ 和类型强制错误处理
 >
@@ -393,7 +401,17 @@ graph TD
 
 ## 五、示例与反例（Examples & Counter-examples）
 
-本节围绕「示例与反例（Examples & Counter-exam…」展开，依次讨论正确示例：`?` 运算符链式传播、正确示例：自定义错误类型、反例：`?` 在错误返回类型中不匹配、反例：忽略 Result 导致 bug等6个方面。
+本节的示例按「正确模式 → 反例 → 判定准则」三元组组织：每个正例展示一种惯用错误处理模式（`?` 传播、`map_err` 添加上下文、`unwrap_or_else` 惰性兜底、`match` 分变体恢复），紧随的反例展示同一意图的错误写法及编译器/运行时给出的信号。
+
+重点区分三组易混淆概念：
+
+| 易混淆对 | 判定准则 |
+|:---|:---|
+| `unwrap` vs `expect` | 语义相同，`expect` 强制给出「为什么此处不可失败」的理由，可审计性更高 |
+| `panic!` vs `Result::Err` | 可恢复 ⟹ `Result`；程序不变量被违反 ⟹ `panic!`；跨 FFI 边界 ⟹ 禁止 unwind（`extern "C-unwind"` 除外） |
+| `Box<dyn Error>` vs 具体错误枚举 | 库边界用具体枚举（可穷尽匹配）；应用层汇总用 `Box<dyn Error + Send + Sync>` 或 `anyhow` |
+
+每个反例都可直接粘贴到 playground 复现，建议先预测错误信息再运行。
 
 ### 5.1 正确示例：`?` 运算符链式传播
 
@@ -2272,7 +2290,16 @@ impl<T, E> Try for MyResult<T, E> {
 
 ## 十、C++ 异常安全 vs Rust 错误处理
 
-本节从异常安全保证等级、C++ 异常 vs Rust `Result` 的 ABI 差异、C++23 `std::expected` vs Rust `Resu…与析构函数异常：C++ 的致命陷阱切入，剖析「C++ 异常安全 vs Rust 错误处理」的核心内容。
+C++ 用异常（exception）处理可恢复错误，Rust 用 `Result`——这不是语法偏好差异，而是**错误可见性与性能模型的根本分岔**。本节从四个维度对比：
+
+| 维度 | C++ 异常 | Rust `Result` |
+|:---|:---|:---|
+| 错误路径可见性 | 隐式：任何函数都可能抛出，签名不声明 | 显式：返回类型即错误契约，`?` 标出每个传播点 |
+| 零成本模型 | 成功路径零成本（表驱动 unwind），失败路径昂贵且不可预测 | 双向路径同成本：一次分支判断 + 值拷贝 |
+| 安全级别分类 | basic/strong/nothrow 三级保证，靠程序员文档承诺 | 由类型系统承担：`Result` 强制处理，`panic!` 对应「bug 级」失败 |
+| 资源清理 | RAII 析构在栈展开时调用 | Drop 在作用域退出时调用；`panic!` 默认同样 unwind 并触发 Drop |
+
+迁移判定：C++ 中 `throw` 用于「预期内的失败」的代码，到 Rust 应改写为 `Result`；用于「不可能发生」断言的，保留为 `panic!`/`assert!`。详见 [Rustonomicon — Exception Safety](https://doc.rust-lang.org/nomicon/exception-safety.html)。
 
 ### 10.1 异常安全保证等级
 

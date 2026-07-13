@@ -277,6 +277,36 @@ Rust 的所有权（Ownership）模型直接影响数据结构实现：
 
 ---
 
+
+## ⚠️ 反例与陷阱
+
+**反例：自引用结构体** —— 同一值内字段互相借用，move 语义下无法成立。
+
+```rust,compile_fail
+// rustc 1.97.0 实测：error[E0505]: cannot move out of `s.data`
+// because it is borrowed
+struct SelfRef<'a> { data: String, ptr: &'a str }
+fn main() {
+    let s = SelfRef { data: "hello".to_string(), ptr: "" };
+    let s = SelfRef { ptr: &s.data, ..s };
+    println!("{}", s.ptr);
+}
+```
+
+**修正对照**：拆分为「拥有者 + 借用者」两步，或用索引/`Pin`/rental 类方案替代指针自引用。
+
+```rust
+fn main() {
+    let data = "hello".to_string();
+    let ptr: &str = &data; // 借用独立于拥有者，move 问题消失
+    println!("{ptr}");
+}
+```
+
+**陷阱要点**：这是数据结构设计的 Rust 特异性边界——自引用需 `Pin` 保证不动性（见 [`03_advanced/01_async/08_pin_unpin.md`](../../03_advanced/01_async/08_pin_unpin.md)），或用索引/arena（如 `Vec` + `usize`）重构。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

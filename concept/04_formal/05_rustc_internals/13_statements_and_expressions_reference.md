@@ -161,6 +161,32 @@ let x = unsafe { *raw_ptr };
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：尾表达式误加分号** —— 表达式语句化为 `()`，返回类型失配。
+
+```rust,compile_fail
+// rustc 1.97.0 实测：error[E0308]: mismatched types
+// expected `i32`, found `()`
+fn add(a: i32, b: i32) -> i32 {
+    a + b; // 分号把尾表达式变成语句，函数体值变为 ()
+}
+fn main() { println!("{}", add(1, 2)); }
+```
+
+**修正对照**：尾表达式不带分号（或显式 `return`）。
+
+```rust
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+fn main() { println!("{}", add(1, 2)); }
+```
+
+**陷阱要点**：这是「语句 vs 表达式」语法范畴的直接后果：`expr;` 的类型恒为 `()`；诊断中 `expected ..., found ()` 几乎总指向多余分号或缺失的尾表达式。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

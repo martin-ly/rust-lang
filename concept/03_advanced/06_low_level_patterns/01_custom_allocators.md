@@ -333,7 +333,13 @@ Arena 分配器模式:
 
 ## 四、反命题与边界分析
 
-本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
+本节检验自定义分配器的三条常见误判：
+
+- **反命题 1：「换分配器总能提升性能」** —— 过度。`jemalloc`/`mimalloc` 在多线程高分配场景通常优于系统默认，但单线程小工作负载下 glibc malloc 可能更快，且 mimalloc 增加 RSS。判定准则：先 `perf`/`heaptrack` 确认分配是瓶颈，再 A/B 实测。
+- **反命题 2：「`#[global_allocator]` 影响所有分配」** —— 不准确。它只接管**经过 `std::alloc` 的 Rust 分配**；C 库（如 OpenSSL）内部的 `malloc`、以及静态链接时符号抢占的细节（`malloc` 符号导出行为因平台而异）不受控。
+- **反命题 3：「`GlobalAlloc` 实现可以失败时 panic」** —— 危险。`alloc` 返回空指针即触发 `handle_alloc_error`（默认 abort）；分配器内部的 panic 在 OOM 路径上极易二次崩溃，正确做法是返回 null 让上层走 OOM 流程。
+
+边界极限小节量化：`Layout` 对齐承诺、`dealloc` 必须传回**同一个 Layout**（错配即 UB）、以及 no_std 下 `alloc` crate 的接入方式。
 
 ### 4.1 反命题树
 >

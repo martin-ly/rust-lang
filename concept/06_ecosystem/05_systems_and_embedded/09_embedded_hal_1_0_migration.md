@@ -247,6 +247,33 @@ impl SpiDevice<u8> for MySpi {
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：按 0.2 的 impl 习惯实现 1.0 的 trait。**
+
+```rust,ignore
+// embedded-hal 0.2 风格：错误类型是泛型参数
+impl Write<u8> for MyUart {
+    type Error = UartError;   // 0.2：每个 trait 各自声明
+    fn write(&mut self, buf: &[u8]) -> Result<(), Self::Error> { ... }
+}
+// 1.0 编译失败：trait 不再有独立 Error 关联类型，
+// 必须先实现统一的基础设施 trait：
+impl embedded_hal::serial::ErrorType for MyUart {
+    type Error = UartError;   // 1.0：ErrorType 集中声明
+}
+```
+
+**修正对照**：
+
+1. 先实现 `ErrorType`（统一错误类型基础设施），再实现功能 trait；
+2. `SpiBus`（独占总线）与 `SpiDevice`（共享片选）按新分离选择实现目标；
+3. 异步需求迁移到 `embedded-hal-async`，不再等待阻塞 trait 的异步化。
+
+**陷阱要点**：1.0 的破坏性变更集中在「错误类型统一」与「SPI 总线/设备分离」两处；混用 0.2 驱动与 1.0 外设 crate 会出现 trait 边界不匹配的连锁编译错误，迁移必须整树一致。
+
+---
+
 ## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

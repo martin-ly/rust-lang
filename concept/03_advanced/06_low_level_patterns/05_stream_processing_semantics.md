@@ -81,6 +81,8 @@
     - [10.2 边界测试：背压传播中的类型不匹配（编译错误）](#102-边界测试背压传播中的类型不匹配编译错误)
     - [10.3 边界测试：Stream 的 `fuse` 与重复 poll 后的行为（逻辑错误）](#103-边界测试stream-的-fuse-与重复-poll-后的行为逻辑错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
   - [参考来源](#参考来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`Stream` trait 与 `Iterator` trait 的核心区别是什么？（理解层）](#测验-1stream-trait-与-iterator-trait-的核心区别是什么理解层)
@@ -756,6 +758,26 @@ fn main() {
 > 流处理安全 ⟸ 背压 + 状态一致性（Coherence）
 > ```
 >
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 时间域 | 事件时间 / 处理时间 / 摄取时间三种语义，事件时间不可替代 | 本文 §二 |
+| 窗口语义 | 在事件时间上划界：滚动 / 滑动 / 会话窗口 | 本文 §三 |
+| Watermark | 事件时间进度的推断机制，有过早与过晚两种失败模式 | 本文 §四 |
+| 容错语义 | at-most-once / at-least-once / exactly-once 三级，Chandy-Lamport 分布式快照 | 本文 §六 |
+| 增量计算 | Differential Dataflow：Collection = diff 之流的代数 | 本文 §九 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：流处理（stream processing）语义理论的系统化阐述。
+- **下位（实例）**：时间域、窗口、watermark、trigger、exactly-once、差分数据流六大机制。
+- **组合**：与 [Stream 代数与背压](../01_async/09_stream_algebra_and_backpressure.md)（背压语义，本文 §八）组合。
+- **依赖**：概念上依赖 [异步模式](../01_async/03_async_patterns.md) 的流抽象。
+
+---
+
 ## 参考来源
 
 > [来源: [Tokio Streams](https://docs.rs/tokio-stream/)]

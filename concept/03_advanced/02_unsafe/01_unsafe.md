@@ -1264,7 +1264,14 @@ fn safe_raw_pointer() {
 
 ## 十一、演进方向
 
-本节围绕「演进方向」展开，依次讨论补充章节：FFI 与 repr 属性完整规范、补充章节：Miri 的使用方法与限制、补充章节：`std::ptr::read/write` vs `*pt…、补充章节：`NonNull<T>` / `Unique<T>` / `…等5个方面。
+`unsafe` 语义是 Rust 形式化进程中最活跃的前沿，本节的演进跟踪沿四条线展开：
+
+1. **别名校验模型**：Stacked Borrows → Tree Borrows（2023 起成为 Miri 可选模型，`cargo miri test -- -Zmiri-tree-borrows`），对「重借后原引用复用」等模式更宽容；Rust 官方尚未承诺最终模型，但 Tree Borrows 是当前事实候选；
+2. **2024 Edition 的 unsafe 显式化**：`unsafe extern` 块、`#[unsafe(no_mangle)]` 属性语法、以及 `unsafe fn` 体内操作需内层 `unsafe` 块的 lint（`unsafe_op_in_unsafe_fn` 在 2024 edition 默认 deny）；
+3. **Miri 能力扩展**：从别名/UB 检测扩展到并发（data-race 检测）、弱内存序（`-Zmiri-many-seeds`）、以及 SIMD/内联汇编部分指令的解释执行；
+4. **指针来源（provenance）**：Strict Provenance API（`ptr::with_addr`/`map_addr`，1.84 稳定大部分）把「地址 vs 来源」分离，逐步替代 `as usize` 往返转换的未定义行为灰色地带。
+
+跟踪入口：[Rustonomicon](https://doc.rust-lang.org/nomicon/)、[Miri README](https://github.com/rust-lang/miri) 与 [UCG (Unsafe Code Guidelines)](https://github.com/rust-lang/unsafe-code-guidelines) 仓库。
 
 ### 补充章节：FFI 与 repr 属性完整规范
 
@@ -1646,7 +1653,12 @@ unsafe { std::ptr::read(p.as_ptr()); }
 
 #### 典型使用场景
 
-「典型使用场景」部分包含 `ptr::read`： `Vec::pop` 内部实现与 `Manu… 与`ptr::write`：未初始化内存填充与`MaybeUninit… 两条主线，本节依次说明。
+`ptr::read`/`ptr::write` 是「按位移动语义」的原始操作：它们**绕过所有权系统**，把内存管理责任完全转移给程序员。正确使用场景只有两个：
+
+- **`ptr::read`**：从一个将不再作为有效值使用的位置按位拷贝出值——典型如 `Vec::pop` 从尾部 slot 读出 `T` 后仅缩短长度（slot 内存保留但不 drop）。配套规则：读出的位置之后必须被视为未初始化。
+- **`ptr::write`**：向未初始化内存写入值而不触发旧值 drop——`MaybeUninit::write` 出现前的标准模式。配套规则：目标位置必须无有效值，否则旧值泄漏。
+
+三个危险模式分别违反上述配套规则（double-free / 内存泄漏 / 写入未初始化内存的解引用 UB），是本节的核心反例。现代代码中应优先使用 `MaybeUninit` + `assume_init` 组合，它把同样的按位语义封装进类型系统可追踪的形式。
 
 ##### `ptr::read`： `Vec::pop` 内部实现与 `ManuallyDrop` 配合
 
@@ -2674,7 +2686,16 @@ fn main() {
 
 ## 十五、内存模型深度对比：C++ / Java / Rust
 
-「内存模型深度对比：C++ / Java / Rust」部分按内存模型的本质、C++ Memory Model：RC11 与 Promising S…、Java Memory Model：Happens-Before 与…、Rust 内存模型演进等5个方面的顺序逐层展开。
+三种语言的内存模型代表了并发语义的三条设计路线，理解差异是正确移植并发代码的前提：
+
+| 维度 | C++ (RC11) | Java (JMM) | Rust |
+|:---|:---|:---|:---|
+| 数据竞争后果 | UB（整个程序失效） | 有定义（弱但可预测的值） | 安全代码中不可表达；`unsafe` 中同为 UB |
+| 原子序层级 | 6 级（relaxed…seq_cst + consume） | volatile（≈ acq/rel 组合） | 5 级（无 consume），`Ordering` 枚举显式标注 |
+| 形式化程度 | RC11 公理化模型（部分修正后） | happens-before 半形式化 | 复用 C++ 模型 + Miri 可执行校验 |
+| 安全网 | 无（原子也是 unsafe 等价物） | 全程有定义 | 类型系统隔离：`Send`/`Sync` 标记可跨线程共享性 |
+
+Rust 的独特贡献是把「数据竞争自由」从程序员纪律提升为**类型系统定理**：`Sync` 要求 `&T` 可安全跨线程共享，编译器拒绝不满足的共享，剩余的原子序推理只需在 `unsafe`/并发原语实现内部完成。详见 15.5 的对比矩阵与各语言小节。
 
 ### 15.1 内存模型的本质
 

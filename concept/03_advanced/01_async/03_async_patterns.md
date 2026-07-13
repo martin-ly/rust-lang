@@ -1219,3 +1219,22 @@ async fn fetch_all(urls: &[&str]) -> Vec<String> {
 - **优雅关闭**：使用 `tokio::sync::mpsc` 发送关闭信号，等待 `JoinSet` 清空。
 - **任务取消**：`select!` 与 `tokio::time::timeout` 结合，注意取消安全（cancellation safety）。
 - **背压**：通过有界通道限制在途任务数，防止内存无限增长。
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 状态机模型 | `async fn` 编译为惰性状态机，由执行器 poll 驱动 | 本文 §1.1 |
+| 并发组合 | `join!`（全部完成）/ `select!`（先到先用）/ `spawn`（真并行） | 本文 §2.1 |
+| 取消与超时 | `timeout` 包裹 + 取消安全约束 | 本文 §2.2 |
+| 背压控制 | 有界通道 / 速率限制约束生产者速率 | 本文 §2.3 |
+| 混合架构 | `spawn_blocking` 将阻塞代码隔离到专用线程池 | 本文 §2.4 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Async 基础](01_async.md) 的模式与工程实践层。
+- **下位（实例）**：join/select/timeout/spawn_blocking/背压五大模式（本文 §三 模式矩阵）。
+- **组合**：与 [取消安全](05_async_cancellation_safety.md)、[Stream 代数与背压](09_stream_algebra_and_backpressure.md) 组合。
+- **依赖**：依赖 [Pin/Unpin](08_pin_unpin.md) 的不动性保证。
+
+---

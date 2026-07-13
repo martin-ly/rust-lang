@@ -2235,7 +2235,13 @@ Rust 名义类型的刚性:
 
 #### 11.7.8 反命题与边界分析
 
-本节将「反命题与边界分析」分解为若干主题：命题 1: "名义类型阻止了所有非预期的类型等价"、命题 2: "结构类型系统可以解决孤儿规则（Orphan Rule）的…与命题 3: "新类型模式（Newtype）具有零运行时成本"。
+本节逐条检验关于名义类型系统（nominal typing）的三个流行命题，每条给出判定与反例：
+
+- **命题 1「名义类型阻止了所有非预期的类型等价」** —— 部分成立。名义类型确实阻止了「结构相同但语义不同」的隐式等价（如 `Meters(f64)` 与 `Seconds(f64)`），但 `#[repr(transparent)]` 与 `as` 转换仍可绕开，且同一 crate 内字段可见时可直接解构。
+- **命题 2「结构类型系统可以解决孤儿规则的问题」** —— 不成立。孤儿规则（Orphan Rule）的根源是**一致性（coherence）**而非类型等价判定方式：结构类型同样面临「两个 crate 为同一对 (trait, type) 提供重叠 impl」的菱形依赖问题。
+- **命题 3「Newtype 具有零运行时成本」** —— 成立但有边界。单字段 newtype 与被包装类型 ABI 相同（`#[repr(transparent)]` 保证），但跨 crate 的泛型单态化仍会产生独立代码，且 `Debug`/`Clone` 等派生实现是有成本的（编译期）。
+
+判定依据参考 [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) 与 [RFC 3416 — impl Trait 语义](https://rust-lang.github.io/rfcs/3416-async-fn-in-traits.html) 的一致性讨论。
 
 ##### 命题 1: "名义类型阻止了所有非预期的类型等价"
 
@@ -2417,7 +2423,13 @@ let p: &Point = &Point(1, 2);
 
 ## 十二、演进方向
 
-理解「演进方向」需要把握补充：`impl Trait` 与 `dyn Trait` 的类型论差异、补充：`!` (Never type) 的形式化分析与控制流图、补充：Const Generics 的类型系统扩展、补充：Type Inference 的 HM 算法与 Rust 扩展等8个方面，本节依次展开。
+Rust 类型系统的演进沿三条主线推进，本节后续各节分别展开：
+
+1. **表达能力扩展**：const generics（1.51 稳定 min 版，generic_const_exprs 仍在 nightly）、GAT（1.65）、RPITIT（1.75）、async fn in traits（1.75）、精确捕获 `use<>`（1.82）——逐步消除「需要 trait 抽象却写不出」的死角；
+2. **推断能力增强**：从 Hindley–Milner 子集到带 trait 求解（trait solver 重写，`-Znext-solver` 在 nightly 逐步接管）、let-else 与 if-let 链式匹配（1.88）减少显式标注；
+3. **形式化根基补强**：Ferrocene 规范（FLS）与 MiniRust 对类型良构性（well-formedness）给出可操作语义，`!` never type 的稳定化路径（`never_type` feature 仍是 nightly 跟踪项）。
+
+跟踪这些方向的权威入口：[Rust Unstable Book](https://doc.rust-lang.org/nightly/unstable-book/)、[Rust Release Notes](https://releases.rs/) 与本库 `concept/07_future/00_version_tracking/` 版本追踪页。
 
 ### 补充：`impl Trait` 与 `dyn Trait` 的类型论差异
 
@@ -3188,7 +3200,13 @@ error[E0369]: cannot add `Foo` to `Foo`
 
 ## 📐 知识结构
 
-本节将「知识结构」分解为若干主题：概念定义、属性特征、关系连接与思维导图。
+本节把前文分散的类型概念收拢为一张可检索的结构图，回答三个导航问题：
+
+- **这个概念是什么**：每一类类型（标量/复合/引用/函数/ trait 对象）给出一句可判定的定义与最小示例；
+- **它处在类型系统的哪个坐标**：按「值类型 vs 引用类型」「Sized vs DST」「具体 vs 抽象（`impl Trait`/`dyn Trait`/泛型）」三个正交维度定位；
+- **学完后应能做什么**：每个条目附一个可验证的能力陈述（如「能判断何时 `T: Copy` 成立」「能解释 `dyn Trait` 的 vtable 开销」）。
+
+使用建议：先通读「概念定义」小节建立索引，再按需下沉到后续各编号的专题小节；遇到编译错误时反向查阅对应条目。
 
 ### 概念定义
 

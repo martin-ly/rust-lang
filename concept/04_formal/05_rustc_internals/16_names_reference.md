@@ -160,6 +160,29 @@ fn main() {
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：同一命名空间重复定义** —— 名称的唯一性约束在解析阶段执法。
+
+```rust,compile_fail
+// rustc 1.97.0 实测：error[E0428]: the name `dup` is defined multiple times
+fn dup() {}
+fn dup() {}
+fn main() { dup(); }
+```
+
+**修正对照**：重命名，或改用泛型/trait 分发表达「同名多态」。
+
+```rust
+fn dup() {}
+fn dup2() {}
+fn main() { dup(); dup2(); }
+```
+
+**陷阱要点**：值命名空间内函数不可重载——Rust 没有 C++ 式 overload；「同名不同签名」必须用 trait 方法、泛型或不同名表达。宏展开产生的重复定义同样触发 `E0428`。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

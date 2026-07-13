@@ -174,6 +174,30 @@ const fn read_raw(ptr: *const i32) -> i32 {
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：const 求值期的越界访问** —— 编译期解释器（CTFE/Miri 引擎）直接判定失败。
+
+```rust,compile_fail
+// rustc 1.97.0 实测：error[E0080]: index out of bounds:
+// the length is 3 but the index is 5
+const A: [u8; 3] = [1, 2, 3];
+const B: u8 = A[5];
+fn main() { println!("{B}"); }
+```
+
+**修正对照**：索引落在 const 可判定范围内。
+
+```rust
+const A: [u8; 3] = [1, 2, 3];
+const B: u8 = A[2];
+fn main() { println!("{B}"); }
+```
+
+**陷阱要点**：常量求值是操作语义的受限执行——越界、溢出、panic 在 const 上下文一律编译期报错（E0080），而非推迟到运行时；这也说明 const 上下文是「可完全求值」的纯子集。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

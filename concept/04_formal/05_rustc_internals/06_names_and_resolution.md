@@ -214,6 +214,31 @@ pub use inner::helper as public_helper; // 重导出并改名
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：名称解析失败** —— 解析阶段（resolve）在类型检查之前即拒绝。
+
+```rust,compile_fail
+// rustc 1.97.0 实测：error[E0425]: cannot find value
+// `undefined_name` in this scope
+fn main() {
+    println!("{undefined_name}");
+}
+```
+
+**修正对照**：先在作用域内引入绑定（定义或 `use` 导入）。
+
+```rust
+fn main() {
+    let undefined_name = 42; // 名称先进入值命名空间
+    println!("{undefined_name}");
+}
+```
+
+**陷阱要点**：Rust 有值 / 类型 / 宏三个独立命名空间；`E0425`（值空间）与 `E0432`/`E0433`（导入/路径空间）分属不同解析失败，诊断信息会指出查找过的命名空间。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

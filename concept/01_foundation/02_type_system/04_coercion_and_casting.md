@@ -88,6 +88,8 @@ mindmap
     - [1. 这是一处“收窄”，不是 coercion 规则的普遍改动](#1-这是一处收窄不是-coercion-规则的普遍改动)
     - [2. 与 coercion 分类的关系：这是“隐式、安全”那类的收窄](#2-与-coercion-分类的关系这是隐式安全那类的收窄)
     - [3. 为什么“收窄”而不是“换种写法”：健全性](#3-为什么收窄而不是换种写法健全性)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
 
 ---
@@ -1016,6 +1018,26 @@ let _ = p;
 
 > **来源**: [Rust 1.97.0 Release Notes — Compatibility Notes](https://releases.rs/docs/1.97.0/) · [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html) · [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/index.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§7、§7.1）
 > **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`06_pin_unpin.md`](../../03_advanced/01_async/08_pin_unpin.md)
+
+---
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 隐式性 | coercion 隐式且仅安全子集；cast（`as`）显式且可能截断 | 本文 §1.1 |
+| Deref 强制 | `&T → &U` 当 `T: Deref<Target = U>`，自动解引用链 | 本文 §1.2 |
+| `as` 转换语义 | 数值截断/环绕不失败；非法转换编译期拒绝 | 本文 §2.1 |
+| 安全转换族 | `From/Into` 不失败，`TryFrom/TryInto` 返回 `Result` | 本文 §2.2 |
+| trait 对象强制 | `&T → &dyn Trait` 受 `Sized` 约束，非对象安全 trait 拒绝 | 本文 §10.3 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[类型系统基础](01_type_system.md) 的类型兼容子机制。
+- **下位（实例）**：Deref 强制、子类型强制、`as` 转换、`From/TryFrom` 转换族。
+- **对偶**：coercion（隐式、编译器挑选的安全子集）⇄ cast（显式、程序员承担截断责任）。
+- **组合**：与 [引用语义](../03_values_and_references/01_reference_semantics.md)（Deref 强制）、[类型转换](../../02_intermediate/04_types_and_conversions/07_type_conversions.md) 组合。
+- **依赖**：依赖 trait 系统，见 [Traits](../../02_intermediate/00_traits/01_traits.md)。
 
 ---
 

@@ -44,6 +44,7 @@
     - [测验 3：Fat LTO 和 Thin LTO 的主要权衡是什么？](#测验-3fat-lto-和-thin-lto-的主要权衡是什么)
     - [测验 4：Cranelift 后端适合什么场景？](#测验-4cranelift-后端适合什么场景)
   - [权威来源索引](#权威来源索引)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
@@ -289,6 +290,22 @@ Cranelift 编译速度快但优化较弱，适合 debug 构建或需要快速反
 **文档版本**: 1.0
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Rustc Dev Guide 代码生成文档
+
+---
+
+## ⚠️ 反例与陷阱
+
+**反例：跨工具链版本混合链接 LLVM bitcode。**
+
+用 rustc 1.96（LLVM A）编译的 rlib 与 rustc 1.97（LLVM B）编译的 rlib 做全程序 LTO 或 `-C linker-plugin-lto` 时，bitcode 版本不兼容会在链接期报 opaque error；即使侥幸链接成功，内联跨版本边界的行为也无任何保证。
+
+**修正对照**：
+
+1. 同一工作区锁定单一工具链（`rust-toolchain.toml`）；
+2. 需要预编译二进制依赖时用 C ABI 边界（`extern "C"` + 静态/动态库）隔离，而非 Rust 原生 rlib 混链；
+3. `-C linker-plugin-lto` 要求链接器插件与 rustc 内置 LLVM 版本对齐。
+
+**陷阱要点**：Rust 没有稳定的 rlib ABI——「同语言混链」的安全性以「同编译器版本」为前提，这与 C/C++ 的跨编译器链接习惯直接冲突。
 
 ---
 

@@ -53,6 +53,8 @@
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
 
 ## 一、求值策略（Evaluation Strategies）
@@ -502,6 +504,25 @@ unsafe {
 
 > 类型安全 ⟸ 静态类型检查 ⟸ 语法与语义一致性（Coherence）
 > 程序正确性 ⟸ 无副作用推理 ⟸ 纯函数基础
+
+---
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 求值策略 | Rust 采用 call-by-value：参数在调用前完成求值，引用语义靠显式 `&` | 本文 §一 求值策略 |
+| 副作用模型 | 副作用显式化：写效果靠 `&mut`、未定义效果靠 `unsafe`、异常效果靠 `Result` | 本文 §二 |
+| 变量模型 | 存储模型的线性扩展：绑定即资源，move 后原绑定失效 | 本文 §三 |
+| async 本质 | `async/await` 是编译期 CPS 变换，生成惰性状态机 | 本文 §4.3 |
+| 控制流完备性 | 顺序 / 选择 / 循环三结构即可表达全部控制流，Rust 无 `goto` | 本文 §五 结构化程序定理 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：编程语言理论（PLT）核心概念集在 Rust 中的落点。
+- **下位（实例）**：求值策略、副作用模型、变量模型、Continuation/CPS、结构化程序定理五个子课题（本文 §一–§五）。
+- **组合**：与 [副作用与纯度](04_effects_and_purity.md)、[变量模型](../03_values_and_references/03_variable_model.md) 共同构成 Rust 语义的推理底座。
+- **依赖**：是理解 [所有权](../01_ownership_borrow_lifetime/01_ownership.md) 与 [Async](../../03_advanced/01_async/01_async.md) 的前置知识。
 
 ---
 

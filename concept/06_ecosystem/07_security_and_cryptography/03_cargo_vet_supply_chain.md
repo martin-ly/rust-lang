@@ -36,6 +36,7 @@
   - [六、落地步骤](#六落地步骤)
   - [七、权威来源索引](#七权威来源索引)
   - [相关概念](#相关概念)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
 
 ---
 
@@ -212,3 +213,25 @@ cargo audit --no-fetch
 - [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) — 功能安全认证生态
 - [DevOps and CI/CD](../00_toolchain/03_devops_and_ci_cd.md) — CI 门禁体系
 - [Cargo Registries and Publishing](../01_cargo/08_cargo_registries_and_publishing.md) — registry 信任模型
+
+## ⚠️ 反例与陷阱
+
+**反例：依赖升级后沿用旧审计记录。**
+
+```text
+$ cargo update -p serde
+$ cargo vet
+error: serde:1.0.228 has no audit for this version
+```
+
+`cargo vet` 的审核记录按**精确版本**生效：`cargo update` 升级任一依赖后，旧版本的 audit 不自动覆盖新版本，供应链接入突然从绿变红——这是设计如此，但常在发布前夜才暴露。
+
+**修正对照**：
+
+1. 升级即重审：`cargo vet diff serde 1.0.219 1.0.228` 增量审查差异；
+2. 对信任的组织用 `imports` 引入其 audits（如 Mozilla/Firefox 的公开审计库），减少自审量；
+3. CI 中 `cargo vet --locked` 固化依赖图，升级走单独 PR 并附 diff 审查记录。
+
+**陷阱要点**：vet 的安全模型是「每个版本一次人工信任决策」；用 `wildcard` 审计豁免长期依赖等于把信任决策推迟到事故发生之后。
+
+---

@@ -174,6 +174,25 @@ strategy:
 
 ---
 
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 线程模型 | pthreads / Windows threads / wasm 受限线程等平台差异 | 本文 §一 |
+| 同步原语 | `std::sync` 提供跨平台一致 API，底层映射 OS 原语 | 本文 §二 |
+| 条件编译 | `#[cfg(target_os = "...")]` 封装平台特定路径 | 本文 §三 |
+| async 后端 | epoll / IOCP / kqueue 差异由 runtime 屏蔽 | 本文 §四 |
+| 测试矩阵 | CI 需覆盖 linux / windows / macos × 目标架构 | 本文 §七 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[并发](01_concurrency.md) 的平台可移植性维度。
+- **下位（实例）**：平台线程模型、同步原语映射、条件编译、移动端注意事项。
+- **组合**：与 [跨平台进程管理](../08_process_ipc/04_cross_platform_process_management.md)、[原子操作与内存序](05_atomics_and_memory_ordering.md)（§五）组合。
+- **依赖**：依赖 `std::sync` 的跨平台抽象（见 [并发](01_concurrency.md)）。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

@@ -256,6 +256,34 @@ tool = ["npm", "run", "build"]
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：误以为 workspace 依赖继承是自动的。**
+
+```toml
+# workspace 根
+[workspace.dependencies]
+serde = "1.0"
+
+# 成员 crate —— 错！直接写版本号，与根声明脱钩
+[dependencies]
+serde = "1.0"
+```
+
+成员 crate 重新硬编码版本号后，`[workspace.dependencies]` 的集中管理名存实亡：下次升级只改根声明，成员实际版本纹丝不动，依赖树悄悄分叉。
+
+**修正对照**：
+
+```toml
+# 成员 crate —— 显式继承
+[dependencies]
+serde = { workspace = true }
+```
+
+**陷阱要点**：workspace 继承一律 opt-in（`workspace = true`），覆盖 `[workspace.dependencies]`、`[workspace.package]` 与 `[workspace.lints]` 三类；本仓库 AGENTS.md §4.1 即强制该写法，可用 lint（如 cargo-deny）在 CI 中执法。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

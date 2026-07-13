@@ -49,6 +49,7 @@
     - [7.1 `--emit` 输出格式控制](#71---emit-输出格式控制)
     - [7.2 `--remap-path-prefix` 与 `--remap-path-scope`](#72---remap-path-prefix-与---remap-path-scope)
     - [7.3 典型应用场景](#73-典型应用场景)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
 
 ---
 
@@ -286,3 +287,26 @@ rustdoc src/lib.rs --edition 2024 \
 ---
 
 > **对应练习**: [`exercises/src/rustdoc_196/`](../../exercises/src/rustdoc_196)
+
+## ⚠️ 反例与陷阱
+
+**反例：intra-doc 链接失效但 CI 静默通过。**
+
+```rust,ignore
+/// 详见 [`NonExistentType`]。   // rustdoc 发出
+/// warning: unresolved link to `NonExistentType`
+pub fn f() {}
+```
+
+`cargo doc` 默认对失效的 intra-doc 链接只警告不失败，文档 CI 若未配置 lint 升级，断链会长期堆积；rustdoc 1.96–1.97 的渲染改进使这类警告更易被注意到，但不会自动变为错误。
+
+**修正对照**：
+
+```bash
+# CI 中将 rustdoc 警告升级为错误
+RUSTDOCFLAGS="-D warnings" cargo doc --workspace --no-deps
+```
+
+**陷阱要点**：`rustdoc::broken_intra_doc_links` 是 warn-by-default lint；文档质量门的缺失不在 rustdoc 而在 CI 配置，本页 §三 的弃用渲染改进同理需要显式审查而非被动接受默认。
+
+---

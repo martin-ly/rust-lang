@@ -763,6 +763,25 @@ ZST 不占用内存，可用于类型级标记（phantom types）、空迭代器
 
 ---
 
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 谱系层数 | 六层：内存布局 → 行为封装 → 接口分离 → ADT → enum+trait → 所有权约束 | 本文 §二 |
+| Rust 定位 | 第五/六层：代数数据类型 + trait 行为契约 + 所有权约束 | 本文 §2.5–2.6 |
+| 多态机制 | trait 组合替代实现继承；支持「多继承」式 trait 叠加 | 本文 §三 |
+| 空值处理 | `Option<T>` 在类型层消除空指针 | 本文 §4.1 |
+| 扩展规则 | Orphan Rule 限制为外部类型实现外部 trait | 本文 §5.2 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：数据抽象（data abstraction）这一 PL 总概念的谱系化展开。
+- **下位（实例）**：C struct、C++ class、Java interface、Haskell/ML ADT、Rust enum+trait 六层代表。
+- **组合**：[类型系统基础](01_type_system.md) × [Traits](../../02_intermediate/00_traits/01_traits.md) 的交叉应用。
+- **依赖**：第六层依赖 [所有权](../01_ownership_borrow_lifetime/01_ownership.md)。
+
+---
+
 ## 国际权威参考 / International Authority References（P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

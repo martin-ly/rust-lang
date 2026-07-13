@@ -1438,7 +1438,14 @@ graph TD
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
 
-理解「边界极限测试代码（Boundary Limit Tests）」需要把握测试 1: Orphan Rule + Coherence 多层嵌套边界、测试 2: Trait 对象安全 + dyn/impl 分发边界、测试 3: Blanket impl + 关联类型递归 + Auto…与编译错误示例，本节依次展开。
+本节收集 trait 系统的边界用例——每段代码都精确压在某条编译器规则的分界线上：
+
+- **孤儿规则边界**：`impl ForeignTrait for ForeignType` 必然失败（E0117），但只要任一参数是本地类型（包括 `Wrapper<ForeignType>` 形式的覆盖类型，covered type 规则）即可通过；
+- **对象安全边界**：带泛型方法或返回 `Self` 的 trait 不能做成 `dyn Trait`（E0038），用 `where Self: Sized` 把单个方法移出 vtable 可修复；
+- **重叠 impl 边界**：`impl<T> Trait for T` 与 `impl Trait for SpecificType` 冲突（E0119）——一致性检查在 impl 定义处而非使用处报错；
+- **自动 trait 边界**：`Send`/`Sync` 的自动实现可被 `unsafe impl` 手动接管，但错误接管是健全性（soundness）漏洞而非编译错误。
+
+每个用例给出「恰好失败」与「最小修复」两个版本，对照阅读可建立对规则的边界感。
 
 ### 7.1 测试 1: Orphan Rule + Coherence 多层嵌套边界
 
@@ -2392,7 +2399,13 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 
 ## 十一、演进方向
 
-理解「演进方向」需要把握 `impl Trait` 在 Trait 定义中的使用（RPITIT…、`Const Trait` 与 `~const` 实验特性、`#[fundamental]` Attribute 与 Orphan…、Specialization（`min_specialization`…等6个方面，本节依次展开。
+trait 系统是 Rust 演进最活跃的子系统，本节按「已稳定 → 即将稳定 → 探索中」三档梳理：
+
+- **已稳定（1.65–1.97）**：GAT（泛型关联类型，1.65）使 `Iterator` 风格的 lending trait 可表达；RPITIT 与 `async fn in trait`（1.75）消除 `async_trait` 宏需求；精确捕获 `use<>`（1.82）控制 `impl Trait` 捕获的泛型参数；
+- **即将稳定/部分可用**：trait 求解器重写（`-Znext-solver`，nightly 默认化推进中）修复旧求解器的缓存与合取 bug；`impl Trait` in let 绑定位置；
+- **探索中**：`trait alias`（nightly）减少重复约束书写；`dyn*` 更轻量的 trait 对象；specialization 的健全化路径（min_specialization 之外的全功能版本仍无稳定时间表）。
+
+跟踪入口：[Unstable Book — trait 相关 feature](https://doc.rust-lang.org/nightly/unstable-book/)、`types` 团队会议纪要与本库版本追踪页 `concept/07_future/00_version_tracking/`。
 
 ### 11.1 `impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）
 
@@ -2990,7 +3003,13 @@ Trait 系统指南
 
 ## 1. Trait 概述
 
-本节从什么是 Trait 与  Trait 的作用 两个层面剖析「Trait 概述」。
+trait 是 Rust 唯一的接口抽象机制，同时承担三种角色：**接口约束**（泛型边界 `T: Trait`）、**动态分发契约**（`dyn Trait` 的 vtable）、**编译期代码生成触发器**（`#[derive]` 与 blanket impl）。与 OOP 接口的关键差异：
+
+- trait 可以为**外部类型**实现（受孤儿规则约束），接口与类型解耦；
+- trait 实现是**静态解析**的，同名方法由完全限定语法 `<T as Trait>::method` 消歧；
+- trait 无状态（不能声明字段），数据与行为严格分离。
+
+本节后续依次展开：定义语法 → 泛型约束 → trait 对象 → 关联类型 → 自动 trait 与 `Send`/`Sync` → 孤儿规则与一致性。学习路径建议：先掌握 `T: Trait` 约束写法，再理解 `dyn` 的擦除代价，最后攻克一致性规则。
 
 ### 1.1 什么是 Trait
 

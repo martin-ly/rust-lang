@@ -290,6 +290,28 @@ fn main() {
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：在 stable 工具链上使用 `-Z` 编译器内部标志。**
+
+```bash
+# rustc 1.97 stable 实测拒绝：
+# error: the option `Z` is only accepted on the nightly compiler
+rustc -Ztime-passes main.rs
+```
+
+绕过手段 `RUSTC_BOOTSTRAP=1` 虽能解锁，但属于无保证的 hack：`-Z` 选项名、语义、输出格式随时变更，依赖它的构建脚本会在下次工具链升级时无声失效。
+
+**修正对照**：
+
+1. 需要 `-Z` 功能时显式声明 nightly 工具链（`rust-toolchain.toml`）；
+2. CI 中固定 nightly 日期版本，升级时人工复核所用 `-Z` 标志；
+3. 生产构建禁止 `RUSTC_BOOTSTRAP`——它同时绕过 stable 的 feature gate 保护。
+
+**陷阱要点**：`-Z` 是编译器开发接口而非用户接口；「能用」与「受支持」之间的鸿沟由使用者自行承担。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

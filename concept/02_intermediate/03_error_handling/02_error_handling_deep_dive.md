@@ -785,3 +785,22 @@ fn main() {
 
 > 错误传播安全 ⟸ ? 运算符自动转换 ⟸ Try trait
 > 错误类型精确 ⟸ thiserror/anyhow 分层 ⟸ 错误架构
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 组合代数 | `Result`/`Option` 提供 `map`/`and_then`/`or_else` 等组合子 | 本文 §1.1 |
+| 传播机制 | `?` 自动执行 `From` 转换并提前返回 | 本文 §1.2 |
+| Error trait | `Debug + Display` + `source()` 错误链 | 本文 §1.3 |
+| 生态分层 | thiserror（库错误定义）/ anyhow（应用错误聚合）/ eyre | 本文 §2.3 |
+| 转换规则 | `From` 不失败，`#[from]` 自动生成转换实现 | 本文 §2.1 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[错误处理基础](01_error_handling.md) 的深化与生态层。
+- **下位（实例）**：自定义错误枚举、thiserror 派生模式、anyhow 上下文模式（本文 §三 模式矩阵）。
+- **组合**：与 [副作用与纯度](../../01_foundation/00_start/04_effects_and_purity.md)（`Result` 作为异常效果）、[异常安全](04_exception_safety_rust_cpp.md) 组合。
+- **依赖**：依赖 [泛型](../01_generics/01_generics.md) 与 [Traits](../00_traits/01_traits.md)。
+
+---

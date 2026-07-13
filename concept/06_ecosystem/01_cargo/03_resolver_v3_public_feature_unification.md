@@ -181,6 +181,32 @@ D (serde): Hello from crate-d / serde feature
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：feature 统一（unification）意外启用功能。**
+
+```toml
+# 旧 resolver（v1）下：dev-dependencies 的 feature 会污染正常构建
+[dependencies]
+serde = "1.0"
+
+[dev-dependencies]
+serde = { version = "1.0", features = ["rc"] }  # cargo build 也会启用 rc！
+```
+
+resolver v1 下 `cargo build` 与 `cargo test` 的 feature 集合被统一，`#[cfg(feature = "rc")]` 在正常构建中意外开启，造成「本地构建过、CI 交叉编译挂」类幽灵失败。
+
+**修正对照**：
+
+```toml
+# Cargo.toml（workspace root 或包）
+resolver = "3"   # edition 2024 默认；旧 edition 需显式声明
+```
+
+**陷阱要点**：resolver v3 按目标/用途隔离 feature 统一域；升级 resolver 属行为变更，需在 MSRV 与依赖树评估后进行——本页所述 public feature unification 规则是判定兼容性的检查清单。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

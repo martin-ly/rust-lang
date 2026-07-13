@@ -58,6 +58,8 @@
     - [10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时逻辑错误）](#105-边界测试atomicptr-的-compare_exchange-aba-问题运行时逻辑错误)
     - [10.3 边界测试：`Relaxed` 顺序与 happens-before 缺失（逻辑错误/UB）](#103-边界测试relaxed-顺序与-happens-before-缺失逻辑错误ub)
     - [10.9 边界测试：match 分支返回类型不一致](#109-边界测试match-分支返回类型不一致)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
   - [参考来源](#参考来源)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -848,6 +850,25 @@ fn main() {
 ```
 
 > **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 原子类型谱系 | `AtomicBool` / `AtomicI32` / `AtomicU64` / `AtomicPtr` 等 | 本文 §1.1 |
+| 内存序层次 | `Relaxed` < `Acquire`/`Release` < `AcqRel` < `SeqCst`，强度递增、性能递减 | 本文 §1.2 |
+| happens-before | 并发操作正确性的形式判定关系 | 本文 §1.3 |
+| 无锁算法 | CAS 循环为基础，需处理 ABA 问题 | 本文 §2.3 |
+| 混用陷阱 | 原子与非原子访问同一变量构成数据竞争（UB） | 本文 §五 常见陷阱 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[内存模型](../02_unsafe/06_memory_model.md) 在并发同步原语层的实例化。
+- **下位（实例）**：五种 `Ordering`、`fence`、CAS 族操作、无锁数据结构基础。
+- **组合**：与 [Send/Sync](02_send_sync_auto_traits.md)、[并发模式](03_concurrency_patterns.md) 组合。
+- **依赖**：依赖 [并发](01_concurrency.md) 的线程模型与 happens-before 基础。
+
+---
 
 ## 参考来源
 

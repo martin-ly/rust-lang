@@ -59,6 +59,8 @@
   - [十一、与 01\_unsafe.md 的分工与交叉引用](#十一与-01_unsafemd-的分工与交叉引用)
   - [十二、演进方向](#十二演进方向)
   - [权威来源索引](#权威来源索引)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -457,3 +459,22 @@ flowchart TD
 - **P0 官方**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust Reference — Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html) · [Ferrocene Language Specification](https://spec.ferrocene.dev/)
 - **P1 学术**: [Tree Borrows (Neven et al., POPL 2024)](https://perso.crans.org/vanille/treebor/) · [Stacked Borrows (Jung et al., POPL 2020)](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) · [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
 - **P2 生态**: [Miri](https://github.com/rust-lang/miri) · [Kani](https://github.com/model-checking/kani) · [cbindgen](https://github.com/mozilla/cbindgen) · [bindgen](https://rust-lang.github.io/rust-bindgen/)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 边界结构 | UB 分类学 / 别名模型 / Miri 可检测性 / 安全抽象契约 / FFI 布局五条语义边界 | 本文 §三 |
+| 判定式 | 每条边界给出「边界陈述 — 反例 — 判定条件」三件套 | 本文 §四–§八 |
+| safety vs validity | 安全抽象内部须维持 validity 不变量，safety 是对外契约 | 本文 §七 |
+| Miri 边界 | Miri 只能检测动态可观测的 UB 子集，非全部 UB | 本文 §六 |
+| FFI 布局 | `#[repr(C)]` 等布局契约是跨语言边界成立的前提 | 本文 §八 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Unsafe](01_unsafe.md) 的边界系统化视图（分工见本文 §十一）。
+- **下位（实例）**：五条边界各自的陈述、反例与判定条件。
+- **组合**：与 [内存模型](06_memory_model.md)（别名模型边界）、[FFI 高级](../04_ffi/02_ffi_advanced.md)（FFI 布局边界）组合。
+- **依赖**：依赖 [借用](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) 的别名规则。
+
+---

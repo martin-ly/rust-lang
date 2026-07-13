@@ -237,6 +237,25 @@ flowchart TD
 
 ---
 
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 官方工具链 | rustup / cargo / rustc / rustfmt / clippy / rustdoc 六位一体 | 本文 §一 |
+| IDE 支持 | rust-analyzer 提供补全、内联诊断与重构 | 本文 §二 |
+| 可配置性 | `rustfmt.toml` / `.clippy.toml` / Cargo profile 分层定制 | 本文 §四 |
+| CI 集成 | fmt / clippy / test / doc 可全部纳入 CI 质量门 | 本文 §六 |
+| 选型路径 | 按「格式 → lint → 测试 → 文档」流水线决策 | 本文 §七 决策树 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：Rust 开发者工具生态的总览页。
+- **下位（实例）**：rustfmt、clippy、rust-analyzer、rustdoc、cargo 子命令与社区工具。
+- **组合**：与 [Crates 与源文件](../07_modules_and_items/11_crates_and_source_files.md)（cargo 工作区）、[`assert_matches!`](../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md)（测试断言宏）组合。
+- **依赖**：依赖 cargo 的构建与包管理能力。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

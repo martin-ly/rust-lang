@@ -70,6 +70,8 @@
     - [1. 变化事实（来自 release notes，逐字可核）](#1-变化事实来自-release-notes逐字可核)
     - [2. 与 `Unpin` auto trait 的交互：为什么多一层 `&mut` 很关键](#2-与-unpin-auto-trait-的交互为什么多一层-mut-很关键)
     - [3. 与 async 状态机 / 自引用的交互](#3-与-async-状态机--自引用的交互)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -973,3 +975,23 @@ impl SelfRef {
 
 > **来源**: [Rust 1.97.0 Release Notes — Compatibility Notes](https://releases.rs/docs/1.97.0/) · [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/index.html) · [Rustonomicon — Pinning](https://doc.rust-lang.org/std/pin/index.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§7、§7.1）
 > **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`14_coercion_and_casting.md`](../../01_foundation/02_type_system/04_coercion_and_casting.md)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 问题根源 | 自引用类型移动后内部指针悬垂 | 本文 §1.1 |
+| Pin 契约 | `Pin<P>` 承诺 pointee 不再被移动（除非 `T: Unpin`） | 本文 §1.2、§2.1 |
+| Unpin | auto trait，大多数类型默认实现，`!Unpin` 需 `PhantomPinned` | 本文 §1.3 |
+| 固定方式 | 栈上 `pin!` 宏固定 / 堆上 `Box::pin` 固定 | 本文 §三 使用模式 |
+| 与 async | `async fn` 状态机含自引用，故 `!Unpin`，poll 前必须 pin | 本文 §2.3 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[内存管理](../../02_intermediate/02_memory_management/01_memory_management.md) 中的不动性（immovability）保证机制。
+- **下位（实例）**：`Pin<&mut T>`、`Pin<Box<T>>`、`pin!` 宏、`PhantomPinned`。
+- **对偶**：`Unpin`（可自由移动）⇄ `!Unpin`（固定后禁移）。
+- **组合**：与 [Async 基础](01_async.md)、[Pin 投影反例集](11_pin_projection_counterexamples.md) 组合。
+- **依赖**：依赖 [Unsafe](../02_unsafe/01_unsafe.md) 的契约推理（自引用结构的安全构建）。
+
+---

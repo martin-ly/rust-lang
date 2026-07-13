@@ -163,6 +163,38 @@ B
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：别名 × 可变违反** —— Tree Borrows 的形式化对象正是这类别名冲突。
+
+```rust,compile_fail
+// rustc 1.97.0 实测：error[E0502]: cannot borrow `v` as mutable
+// because it is also borrowed as immutable
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let r = &v[0];
+    v.push(4); // 可变借用与存活中的不可变借用冲突
+    println!("{r}");
+}
+```
+
+**修正对照**：收缩不可变借用的存活区间（NLL 下借用随最后使用结束）。
+
+```rust
+fn main() {
+    let mut v = vec![1, 2, 3];
+    {
+        let r = &v[0];
+        println!("{r}");
+    } // 不可变借用在此结束
+    v.push(4);
+}
+```
+
+**陷阱要点**：借用检查拒绝是 Tree/Stacked Borrows 在 safe 层的投影；`unsafe` 中同样的别名模式不会报错但构成 UB，需 Miri 检测。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

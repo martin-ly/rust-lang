@@ -292,7 +292,15 @@ graph TD
 
 ## 四、定理推理链（Theorem Chain）
 
-本节将「定理推理链（Theorem Chain）」分解为若干主题：引理：Box<T> ⟹ 堆分配 + 唯一所有权、定理：Rc/Arc ⟹ 共享所有权安全（引用计数）、推论：RefCell ⟹ 内部可变性运行时检查、RAII + 所有权 ⟹ 确定性释放等5个方面。
+本节把「Rust 无 GC 仍内存安全」分解为可逐环验证的推理链：
+
+1. **栈/堆分配皆由类型决定** ⟹ 分配点与释放点在编译期可定位 ⟹ 无需运行期追踪式 GC；
+2. **所有权唯一** ⟹ 释放责任唯一 ⟹ `free` 恰好调用一次（无泄漏保证除外：`mem::forget`/`Rc` 环可泄漏，但泄漏是安全操作）；
+3. **借用检查保证引用不悬垂** ⟹ 堆上数据被引用时其所有者必然存活 ⟹ 无 use-after-free；
+4. **`Box`/`Vec`/`String` 的 Drop 实现即唯一释放路径** ⟹ 自定义资源（文件、socket、锁）用 RAII 包装后获得同样的确定性释放；
+5. **`unsafe` 块是链条的显式断点** ⟹ 内存安全的责任边界可被审计（`cargo geiger` 等工具统计 `unsafe` 面）。
+
+关键判定：Rust 的内存安全是**编译期定理 + 运行期零检查**（除边界检查与溢出检查这类显式标注的运行时断言）。
 
 ### 4.1 引理：Box<T> ⟹ 堆分配 + 唯一所有权
 >
@@ -387,7 +395,14 @@ graph TD
 
 ## 五、示例与反例（Examples & Counter-examples）
 
-「示例与反例（Examples & Counter-exam…」涉及正确示例：Box 堆分配、正确示例：Rc 共享所有权、正确示例：用 Weak 打破循环引用、反例：Rc 循环引用导致泄漏等7个方面，本节逐一说明其要点。
+本节按「分配方式 → 正确用例 → 反例」组织内存管理的实践知识，覆盖四类典型场景：
+
+- **栈分配优先**：小尺寸、短生命周期数据默认在栈上——反例是把大数组直接声明为局部变量导致栈溢出（应改用 `Vec` 或 `Box<[T]>`）；
+- **堆分配显式化**：`Box`/`Vec`/`Rc`/`Arc` 的分配点都在源码可见——反例是热路径上无意间的 `clone`/`to_string` 触发分配，用 `cargo flamegraph` 或 `dhat` 可定位；
+- **引用计数环泄漏**：`Rc` + `RefCell` 互指造成永不释放——判定准则是「只要所有权图有环就必须有一处 `Weak`」；
+- **arena/pool 分配**：批量同生命周期对象用 arena（如 `bumpalo`）把 N 次分配降为 1 次——反例是把 arena 引用逃逸到 arena 生命周期之外（借用检查会拒绝，正是类型系统在兜底）。
+
+每个反例附可复现代码与修复 diff，建议按「预测 → 运行 → 对照」顺序练习。
 
 ### 5.1 正确示例：Box 堆分配
 
@@ -1648,7 +1663,13 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 
 ## 十二、演进方向
 
-本节围绕「演进方向」展开，依次讨论自定义 Allocator（`#[global_allocator]`）、`ManuallyDrop<T>` 与 `mem::forget` 的…、`Vec<T>` / `String` / `HashMap` 的内存…、`std::alloc::System` vs `jemalloc`…等7个方面。
+内存管理子系统的演进聚焦「让零成本抽象覆盖更多场景」，三条主线：
+
+1. **分配器接口稳定化**：`Allocator` API（`allocator_api` feature，仍 nightly）允许 `Vec<T, A>`/`Box<T, A>` 自定义分配器，embedded 与高性能场景（hugepage、arena、NUMA 绑定）不再需要 fork 标准库；全局分配器 `#[global_allocator]` 已稳定，`std::alloc::System` 之外可用 `jemalloc`/`mimalloc`；
+2. **pin 与自引用结构**：`Pin` 语义稳定后，`pin-project` 模式与 `MaybeUninit` 的逐步完善（`offset_of!` 1.77、`MaybeUninit` 数组工具）让手写 intrusive 数据结构更安全；
+3. **泄漏与销毁的形式化**：`mem::forget` 安全性再确认（泄漏 ≠ UB）、`ManuallyDrop` 与 `Drop` 顺序的 FLS 规范化、Rust for Linux 的 `Arc`/`revocable` 抽象反哺主线。
+
+跟踪入口：[Unstable Book — allocator_api](https://doc.rust-lang.org/nightly/unstable-book/library-features/allocator-api.html)、WG-allocators 的 [forge 页面](https://github.com/rust-lang/wg-allocators)。
 
 ### 12.1 自定义 Allocator（`#[global_allocator]`）
 

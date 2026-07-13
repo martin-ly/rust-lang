@@ -239,6 +239,26 @@ f: S -> Result<S', E>
 
 ---
 
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| C++ 保证体系 | 基本保证 / 强保证 / 不抛（nothrow）保证三级 | 本文 §2.1 |
+| Rust 错误模型 | 可恢复错误 `Result<T, E>` + 不可恢复错误 panic 二分 | 本文 §三 |
+| 栈展开 | 两者的 panic/throw 均触发栈展开并运行析构 | 本文 §2.2、§四 |
+| Drop 不可失败 | 析构/`Drop` 不允许失败路径，保证展开过程安全 | 本文 §五 |
+| C++23 收敛 | `std::expected` 语义对齐 Rust `Result` | 本文 §六 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：跨语言错误处理哲学的对比研究。
+- **下位（实例）**：C++ exception 三级保证、Rust `Result`/panic 双轨模型、`std::expected`。
+- **对偶**：异常（隐式控制流）⇄ 返回值错误（显式控制流）。
+- **组合**：与 [错误处理深入](02_error_handling_deep_dive.md)、[Panic](03_panic.md) 组合。
+- **依赖**：依赖 Drop/析构语义，见 [内存管理](../02_memory_management/01_memory_management.md)。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

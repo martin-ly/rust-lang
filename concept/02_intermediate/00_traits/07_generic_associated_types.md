@@ -72,6 +72,8 @@ mindmap
     - [8.2 implied bounds 限制（1.97 仍在）](#82-implied-bounds-限制197-仍在)
     - [8.3 非对象安全与 async trait 的联动后果](#83-非对象安全与-async-trait-的联动后果)
     - [8.4 不应对 GAT 做的事](#84-不应对-gat-做的事)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
   - [九、来源](#九来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：GAT 的本质（🟢 基础）](#测验-1gat-的本质-基础)
@@ -558,6 +560,26 @@ trait Stream {
 - 不要为"未来可能需要"而预先 GAT 化：GAT 增加 API 复杂度与文档成本，确认借用确实要越过调用边界再引入；
 - 不要在 GAT 上堆叠多层 HRTB 约束来模拟完整 HKT——超出求解器能力的代码会以难解的错误信息失败，而非优雅降级；
 - 库作者注意：给已发布 trait 的关联类型**增加**泛型参数是破坏性变更（breaking change）。
+
+---
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 语法形态 | `type Item<'a> where Self: 'a;` — 关联类型携带泛型参数 | 本文 §2.1 |
+| 必需约束 | 生命周期参数 GAT 必须写 `where Self: 'a`（required bound） | 本文 §2.2 |
+| 稳定状态 | Rust 1.65 稳定；1.97 仍有 implied bounds 限制 | 本文 §四、§8.2 |
+| 表达力 | 超出 HRTB：可按输入生命周期参数化输出类型 | 本文 §三 |
+| 对象安全 | 含 GAT 的 trait 非对象安全，不能构造 `dyn Trait` | 本文 §8.3 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Traits](01_traits.md) 中关联类型的泛型化扩展。
+- **下位（实例）**：`LendingIterator`、流式解析器、数据库游标式自引用借用（本文 §七）。
+- **对偶**：GAT ⇄ HRTB（`for<'a>`）⇄ `impl Trait` 的选型判定（本文 §六）。
+- **组合**：与 [生命周期进阶](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md)、[Async Trait 对象安全](../../03_advanced/01_async/13_async_trait_object_safety.md) 组合。
+- **依赖**：依赖 [泛型](../01_generics/01_generics.md) 与 [生命周期基础](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)。
 
 ---
 

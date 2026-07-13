@@ -51,6 +51,8 @@
   - [六、选型判定树](#六选型判定树)
   - [七、工程检查清单](#七工程检查清单)
   - [八、相关概念](#八相关概念)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
   - [九、来源](#九来源)
 
 ## 一、认知路径
@@ -440,6 +442,26 @@ flowchart TD
 - [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) — 被背压挂起的任务如何被公平唤醒
 - [Iterator 模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) — 同步侧组合子代数的权威页（L2 向下引用）
 - [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) — 队列驻留内存的分配语义基础
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 对偶签名 | `Stream::poll_next` 与 `Iterator::next` 形式对偶 | 本文 §2.1 |
+| 组合子定律 | `map`/`filter` 融合等价成立；`merge` 顺序非确定是失效点 | 本文 §3.1–3.3 |
+| Unpin 约束 | `.next()` 方法要求 `Self: Unpin` | 本文 §3.4 |
+| 背压模型 | 速率约束的反向传播；窗口制与信用制两种实现 | 本文 §4.1–4.2 |
+| 队列论刻画 | bounded channel 近似 M/M/1/K 排队系统 | 本文 §4.3 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[异步模式](03_async_patterns.md) 中流处理的形式化专题。
+- **下位（实例）**：StreamExt 组合子、有界通道、`buffer_unordered` 并发信用。
+- **对偶**：Stream（拉取式异步序列）⇄ Iterator（拉取式同步序列）。
+- **组合**：与 [取消安全](05_async_cancellation_safety.md)、[Pin/Unpin](08_pin_unpin.md)（`.next()` 的 Unpin 约束）组合。
+- **依赖**：依赖 [Async 基础](01_async.md) 的 poll 模型。
+
+---
 
 ## 九、来源
 

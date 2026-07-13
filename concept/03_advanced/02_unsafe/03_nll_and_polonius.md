@@ -67,6 +67,8 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：条件返回中的借用被 NLL 误拒（rustc 1.97.0 实测）](#反例条件返回中的借用被-nll-误拒rustc-1970-实测)
     - [✅ 修正：重排控制流，让借用与修改分阶段](#-修正重排控制流让借用与修改分阶段)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -856,3 +858,22 @@ fn f(v: &mut Vec<i32>, b: bool) -> &i32 {
     &v[0]
 }
 ```
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 三代演进 | 词法生命周期 → NLL（非词法生命周期）→ Polonius（flow-sensitive） | 本文 §一 |
+| NLL 机制 | 借用有效期由控制流图上实际使用点决定，而非词法作用域 | 本文 §2.1 |
+| Polonius 机制 | 以 loan/origin 的约束传播（datalog 风格）取代生命周期区间 | 本文 §2.2 |
+| 接受集 | Polonius 严格接受更多合法程序（如条件分支返回借用） | 本文 §三 影响范围矩阵 |
+| 工程状态 | NLL 自 2018 edition 起稳定；Polonius 仍 nightly | 本文 §2.3 三代对比 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[借用](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) 检查算法的实现演进。
+- **下位（实例）**：NLL 与 Polonius 两代借用检查器。
+- **组合**：与 [生命周期进阶](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md) 的 Polonius 专题（其 §十二）呼应。
+- **依赖**：依赖 [所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 规则。
+
+---

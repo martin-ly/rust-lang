@@ -169,6 +169,36 @@ fn throughput_benchmark(c: &mut Criterion) {
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：stable 工具链上使用内置 `#[bench]`** —— 内置 bench 框架至今未稳定。
+
+```rust,compile_fail
+// rustc 1.97.0 实测：error[E0554]: `#![feature]` may not be used
+// on the stable release channel
+#![feature(test)]
+extern crate test;
+#[bench]
+fn b(b: &mut test::Bencher) { b.iter(|| 1 + 1); }
+fn main() {}
+```
+
+**修正对照**：stable 上用 criterion（统计严谨的第三方基准框架）；`#[bench]` 仅限 nightly。
+
+```rust
+// criterion 用法（Cargo.toml: [dev-dependencies] criterion = "0.5"）
+// benches/my_bench.rs:
+// use criterion::{criterion_group, criterion_main, Criterion};
+// fn bench(c: &mut Criterion) { c.bench_function("add", |b| b.iter(|| 1 + 1)); }
+// criterion_group!(benches, bench);
+// criterion_main!(benches);
+fn main() {}
+```
+
+**陷阱要点**：内置 `test` crate 长期停留在 nightly（`E0554`），且只给均值不给置信区间；生产基准测试的事实标准是 criterion + `cargo bench` 的 bench target 约定。
+
+---
+
 ## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

@@ -63,6 +63,8 @@
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
@@ -361,7 +363,12 @@ flowchart TD
 
 ## 四、反命题与边界分析
 
-「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+本节检验关于 `assert_matches!` 的两条流行说法，并划出其能力边界：
+
+- **反命题 1：「`assert_matches!` 完全替代 `matches!` + `assert!`」** —— 不成立。`assert_matches!`（`assert_matches` feature，仍 nightly）的优势是失败时打印**实际值的 Debug 表示**，但 `matches!` 返回 `bool` 可用于断言之外的控制流；在 stable 上 `assert!(matches!(...))` 仍是唯一选择。
+- **反命题 2：「模式绑定后可在断言外使用」** —— 不成立。`assert_matches!(x, Some(v) if v > 0)` 中的绑定 `v` 只在守卫表达式内有效，断言通过后变量不泄漏到测试体——需要绑定值时应先 `let Some(v) = x else { panic!() };` 再断言。
+
+边界极限小节进一步量化：嵌套模式的深度、自定义失败消息的类型约束（必须实现 `Debug`）、以及与非 `Option`/`Result` 枚举的配合模式。
 
 ### 4.1 反命题树
 
@@ -505,7 +512,15 @@ fn main() {
 
 ## 十、边界测试：assert_matches 的编译错误
 
-「边界测试：assert_matches 的编译错误」部分按边界测试：`assert_matches!` 在非 Option/Re…、边界测试：嵌套模式匹配中的绑定冲突（编译错误）、边界测试：`assert_matches!` 与嵌套模式的绑定（编译错…、边界测试：自定义断言失败消息的类型约束（编译错误）等5个方面的顺序逐层展开。
+本节的五个边界用例围绕「模式匹配的静态规则在断言宏中同样生效」这一主题：
+
+1. **非枚举/非结构化类型上的模式**：对整数直接写 `assert_matches!(x, Some(_))` 触发 E0308——模式类型必须与值类型匹配；
+2. **嵌套模式绑定冲突**：同一模式中两次绑定同名变量（如 `(a, (a, _))`）触发 E0416；
+3. **守卫中的绑定**：守卫 `if` 表达式可读取绑定但不能修改（绑定在守卫中为不可变）；
+4. **自定义消息的类型约束**：附加的失败消息参数走 `format!` 路径，参数必须实现 `Debug`/`Display`；
+5. **所有权移动**：断言按值匹配会 move 被测值，断言后再次使用触发 E0382——需要复用时应匹配引用（`assert_matches!(&x, Some(_))`）。
+
+每个用例附最小修复版本，对照学习可同时复习模式匹配规则本身。
 
 ### 10.1 边界测试：`assert_matches!` 在非 Option/Result 上使用（编译错误）
 
@@ -618,7 +633,13 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节从测验 1：`assert_matches!(value, patter…、测验 2：`assert_matches!` 是否可以在模式中绑定变量…、测验 3：如果 `assert_matches!`在你的 stabl…、测验 4：`assert_matches!(x, Some(_))`…等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
+本节 5 道测验按 Bloom 认知层级递进，全部聚焦「断言宏与模式匹配的交叉点」：
+
+- 测验 1–2（理解层）：`assert_matches!` 与 `matches!` 的能力差异、模式绑定的作用域规则；
+- 测验 3–4（理解→应用层）：stable 替代方案的等价性证明、`assert_matches!(x, Some(_))` 与 `x.is_some()` 的语义差距（前者消费/借用值，后者只读）；
+- 测验 5（理解层）：枚举变体断言在测试驱动开发中的实际收益。
+
+建议作答前先默写每个宏的展开形式，再对照答案中的展开代码——理解宏的展开结果是避免宏相关编译错误的最短路径。
 
 ### 测验 1：`assert_matches!(value, pattern)` 的主要用途是什么？与 `assert!(matches!(value, pattern))` 相比有什么优势？（理解层）
 
@@ -702,6 +723,25 @@ fn main() {
 
 > 测试断言安全 ⟸ assert_matches! 穷尽 ⟸ 模式匹配
 > 编译期检查 ⟸ 常量断言 ⟸ const 求值
+
+---
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 语义等价 | `assert_matches!(expr, pat)` ⇔ `assert!(matches!(expr, pat))` 且失败时打印表达式值 | 本文 §1.1–1.2 |
+| 稳定状态 | `matches!` 早已稳定；`assert_matches!` 于 Rust 1.96 稳定化 | 本文 §一、§十 |
+| debug 变体 | `debug_assert_matches!` 仅在 debug 构建生效 | 本文 §1.3 |
+| 绑定捕获 | 模式中的绑定不泄漏到断言之外的作用域 | 本文 §2.2 |
+| 互补关系 | 与 `if let` 互补：断言场景更声明式、失败信息更丰富 | 本文 §3.3 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[属性与宏](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) 中的标准库断言宏实例。
+- **下位（实例）**：`matches!`、`assert_matches!`、`debug_assert_matches!` 三件套。
+- **组合**：与 [控制流](../../01_foundation/04_control_flow/01_control_flow.md) 的模式匹配、测试工具链（[常用开发工具](../../01_foundation/10_testing_basics/02_useful_development_tools.md)）组合。
+- **依赖**：依赖 [模式](../../01_foundation/04_control_flow/02_patterns.md) 语法。
 
 ---
 

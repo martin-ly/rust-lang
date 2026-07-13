@@ -35,6 +35,8 @@
     - [10.5 边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）](#105-边界测试pin-与-unpin-的自动实现冲突编译错误)
     - [10.3 边界测试：类型不匹配的基础错误](#103-边界测试类型不匹配的基础错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
   - [参考来源](#参考来源)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -252,6 +254,26 @@ fn main() {
 > 高级异步安全 ⟸ Pin + Send 边界
 > ```
 >
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| Waker 契约 | `wake` 必须保证任务被再次 poll；丢失 wake 即死锁 | 本文 §8.8–8.9 |
+| Stream/Sink | 拉取式异步序列与推送式接收端的对偶抽象 | 本文 §8.10 |
+| 装箱选型 | `Pin<Box<dyn Future>>`（动态）vs `impl Future`（静态）的取舍 | 本文 §8.11 |
+| 验证工具 | loom 做并发交错模型检测，Miri 做解释器级 UB 检测 | 本文 §8.12–8.13 |
+| 取消边界 | `select!` 分支完成后变量使用受所有权限制 | 本文 §10.1 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Async 基础](01_async.md) 的高级专题集（机制层 + 验证层）。
+- **下位（实例）**：Waker/Context 机制、Stream/Sink、装箱选型、loom/Miri 验证。
+- **组合**：与 [Pin/Unpin](08_pin_unpin.md)、[Waker 契约深度解析](12_waker_contract_deep_dive.md)、[异步模式](03_async_patterns.md) 组合。
+- **依赖**：依赖 [生命周期进阶](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md) 的 HRTB 知识。
+
+---
+
 ## 参考来源
 
 > [来源: [Rust Reference — Async Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks)]

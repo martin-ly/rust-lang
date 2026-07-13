@@ -413,8 +413,6 @@ graph TD
 
 ---
 
-
-
 ## 十、边界测试：const trait impl 的编译错误
 
 理解「边界测试：const trait impl 的编译错误」需要把握边界测试：const 上下文中调用非 const 方法（编译错误）、边界测试：trait bound 的 const 兼容性（编译错误）、边界测试：`~const` bound 与默认实现的交互（编译错误）、边界测试：const trait 的默认实现与泛型约束（编译错误）等6个方面，本节依次展开。

@@ -92,7 +92,13 @@ Created → Running → (Waiting →)* → Terminated
 
 ## 3. 进程属性与资源控制
 
-本节围绕「进程属性与资源控制」展开，依次讨论基础属性配置、高级资源限制与跨平台资源管理。
+`std::process::Command` 的属性配置分三层，跨平台行为差异是生产事故的高发区：
+
+1. **基础属性**（3.1）：工作目录（`current_dir`）、环境变量（`env`/`envs`/`env_remove`/`env_clear`）、标准流重定向（`stdin`/`stdout`/`stderr` 的 `Stdio::piped/null/inherit` 三态）。关键陷阱：`env_clear` 后子进程可能因缺 `PATH`/`SystemRoot`（Windows）无法启动；
+2. **高级资源限制**（3.2）：Unix 上 `CommandExt::pre_exec`（`unsafe`——fork 后 exec 前只能调 async-signal-safe 函数）、uid/gid 切换、`setpgid`；Windows 上 `CommandExt::creation_flags`（如 `CREATE_NO_WINDOW`）；
+3. **跨平台资源管理**（3.3）：`ulimit` 类限制（内存/CPU/文件数）无跨平台抽象——Unix 用 `pre_exec` + `setrlimit`，Windows 需 Job Object（`windows` crate），容器环境应优先交给 cgroup/容器运行时而非进程内设置。
+
+判定准则：属性只影响**子进程**，父进程状态不变；任何在 `pre_exec` 中的分配或锁操作都是 UB 风险。
 
 ### 3.1 基础属性配置
 
@@ -146,7 +152,13 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 
 ## 5. 现代库集成
 
-理解「现代库集成」需要把握 Tokio 异步进程、Duct 进程组合与Nix 系统调用封装，本节依次展开。
+标准库 `process` 是同步、单进程的；现代应用通常需要异步等待、管道组合与更细的系统调用控制，三个主流库恰好补齐这三块：
+
+- **Tokio `tokio::process`**（5.1）：`Command` 的异步镜像，`child.wait().await` 与 `AsyncRead` 化的 stdout/stderr 接入执行器——关键差异是子进程收割依赖执行器驱动，且 pidfd（Linux）后端避免 PID 复用竞态；
+- **Duct**（5.2）：进程组合 DSL——`cmd!("a").pipe(cmd!("b"))` 表达 shell 管道，错误统一为 `duct::Error`，适合构建脚本与运维工具；
+- **Nix**（5.3）：`fork`/`execve`/`waitpid` 的类型安全封装——当 `Command` 的抽象不够用（如 daemonize、namespace、cgroups）时的下一层，代价是 Unix-only 与更多 `unsafe` 边界。
+
+选型判定：能 `Command` 不 duct，能 duct 不 nix；异步运行时内必须用 `tokio::process`（同步 `wait` 会阻塞执行器线程）。
 
 ### 5.1 Tokio 异步进程
 

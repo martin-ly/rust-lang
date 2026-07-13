@@ -1279,7 +1279,6 @@ async fn good_capture(data: &mut Vec<i32>) {
 > **[Haskell GHC; Java Checked Exceptions; Type Theory Research](https://www.haskell.org/ghc/)** 跨语言对比参考了多种语言的效果处理机制和类型论研究。✅
 ---
 
-
 ## 三、Koka：Row Polymorphic Effects 的完整实现
 
 > **[Leijen — Koka: Programming with Row Polymorphic Effects, ICFP 2014](https://doi.org/10.1145/2692915.2628169) · [Koka Documentation](https://koka-lang.github.io/)** ✅

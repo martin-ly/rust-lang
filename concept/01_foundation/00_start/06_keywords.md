@@ -147,6 +147,24 @@ fn main() {
 
 ---
 
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 关键字分档 | 当前使用关键字 / 保留关键字 / 弱关键字三档 | 本文 §二–§三 |
+| 转义机制 | `r#` raw identifier 允许把关键字用作标识符 | 本文 §四 |
+| Edition 演化 | 新关键字按 edition 引入（如 `gen` 保留），raw id 保证跨 edition 互操作 | 本文 §三–§四 |
+| 语法地位 | 关键字不可作为普通标识符，宏卫生需特殊处理 | Rust Reference 词法章 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：Rust 词法与语法表层（lexical layer）的保留词集合。
+- **下位（实例）**：`fn` / `let` / `match` / `async` / `unsafe` 等现行关键字，`gen` 等保留关键字。
+- **组合**：与 [运算符与符号](07_operators_and_symbols.md) 共同构成 Rust 词法表层全貌。
+- **依赖**：宏展开需区分关键字与标识符，见 [宏卫生](../../03_advanced/03_proc_macros/09_macro_hygiene.md)。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

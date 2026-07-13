@@ -51,6 +51,8 @@
   - [七、工程检查清单](#七工程检查清单)
     - [7.1 反模式速查](#71-反模式速查)
   - [八、相关概念](#八相关概念)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
   - [九、来源](#九来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：取消的本质（🟢 基础）](#测验-1取消的本质-基础)
@@ -432,6 +434,26 @@ Future 被 drop 时，其状态机内活跃局部变量按**声明逆序**析构
 - [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) — 取消与回滚本质上是错误传播路径的设计
 - [Stream 代数与背压](09_stream_algebra_and_backpressure.md) — 取消与背压的交互
 - [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) — 取消在调度器中的传播
+
+---
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 取消语义 | drop future = 不再 poll，而非「停止执行」 | 本文 §1.1 |
+| 取消点 | `.await` 处是可枚举的取消点 | 本文 §1.3 |
+| 形式定义 | 操作级取消安全：任意取消点被打断后状态仍一致 | 本文 §2.1 |
+| 经典陷阱 | `read_line` 缓冲丢失、持锁跨 await、事务半截、oneshot 落选 | 本文 §三 |
+| 判定依据 | Tokio 各 API 取消安全性可查表判定（本文 §五） | 本文 §五、§七 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[异步模式](03_async_patterns.md) 的健壮性子专题。
+- **下位（实例）**：五类经典反例与修正对照（本文 §3.1–3.5）。
+- **对偶**：取消安全 ⇄ 取消不安全（落选分支的中间状态丢失）。
+- **组合**：与 [Waker 契约深度解析](12_waker_contract_deep_dive.md)、[Stream 代数与背压](09_stream_algebra_and_backpressure.md) 组合。
+- **依赖**：依赖 [Async 基础](01_async.md) 的状态机模型。
 
 ---
 

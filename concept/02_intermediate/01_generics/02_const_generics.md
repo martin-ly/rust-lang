@@ -66,6 +66,8 @@ mindmap
   - [八、判定表：const generics vs 宏 vs 类型级自然数](#八判定表const-generics-vs-宏-vs-类型级自然数)
   - [九、与既有内容的关系声明](#九与既有内容的关系声明)
   - [相关概念](#相关概念)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
   - [十、来源与延伸阅读](#十来源与延伸阅读)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：const 参数的声明语法（🟢 基础）](#测验-1const-参数的声明语法-基础)
@@ -503,6 +505,26 @@ fn scaled_demo() {
 
 - **上层概念**: [Generics](01_generics.md) · [Traits](../00_traits/01_traits.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)
 - **下层概念**: [Type-Level Programming](03_type_level_programming.md) · [const Trait Impl（预览）](../../07_future/03_preview_features/06_const_trait_impl_preview.md) · [Const Eval](../../01_foundation/04_control_flow/03_statements_and_expressions.md)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 语法形态 | `struct Ring<T, const N: usize>` — 值作为类型参数 | 本文 §二 |
+| 允许类型 | 整数 / 布尔 / 字符等标量类型（stable 边界） | 本文 §二 |
+| stable 边界 | min_const_generics：const 参数不得参与泛型表达式运算（`generic_const_exprs` 仍 nightly） | 本文 §三、§七 |
+| 单态化 | 每个具体 const 值生成独立实例，编译期求值 | 本文 §五 |
+| 关联常量 | 与 const 参数同属编译期值维度，可相互约束 | 本文 §四 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[泛型](01_generics.md) 的值维度扩展（类型参数之外的 const 参数）。
+- **下位（实例）**：`[T; N]`、固定大小环形缓冲区、维度泛型矩阵（本文 §六）。
+- **对偶**：const generics ⇄ 宏 ⇄ 类型级自然数三种替代方案（本文 §八 判定表）。
+- **组合**：与 [数值类型](../../01_foundation/02_type_system/03_numerics.md)（数组类型）、[Traits](../00_traits/01_traits.md)（关联常量）组合。
+- **依赖**：依赖 [常量项与 const fn](../../01_foundation/07_modules_and_items/09_const_items_and_const_fn.md) 的编译期求值。
+
+---
 
 ## 十、来源与延伸阅读
 

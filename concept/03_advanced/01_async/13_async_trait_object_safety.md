@@ -47,6 +47,8 @@
   - [六、演进跟踪：原生 dyn async 的将来](#六演进跟踪原生-dyn-async-的将来)
   - [七、相关概念](#七相关概念)
   - [八、来源](#八来源)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ## 一、认知路径
 
@@ -313,3 +315,22 @@ flowchart TD
 - [trait-variant crate docs](https://docs.rs/trait-variant/latest/trait_variant/)（`make` 宏生成带 bound 的 RPITIT 变体 trait；实测明确不解 dyn 兼容，2026-07-13 实测 200）
 - [async-fundamentals-initiative 路线图](https://rust-lang.github.io/async-fundamentals-initiative/roadmap.html)（dyn async 在 async WG 路线图中的位置，2026-07-12 实测 200）
 - 站内交叉引用：[Async 边界全景](06_async_boundary_panorama.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Async/Await](01_async.md)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 问题根源 | RPITIT 返回匿名 future 类型，vtable 无法承载 ⟹ 天生 dyn-incompatible | 本文 §二 |
+| 方案谱系 | async_trait 宏 / 手写 boxed / enum 分派 / RTN / trait_variant / erased 六方案 | 本文 §三 |
+| 运行时开销 | enum 分派零成本；boxed 方案每次调用一次堆分配 | 本文 §四 |
+| MSRV 跨度 | async_trait 低 MSRV；原生 RPITIT 需 1.75+ | 本文 §四 选型矩阵 |
+| 演进状态 | 原生 `dyn` async trait 仍处 nightly 跟踪 | 本文 §六 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Traits](../../02_intermediate/00_traits/01_traits.md) 对象安全性的异步专题。
+- **下位（实例）**：方案 A–F 六条 dyn 兼容路线（本文 §三）。
+- **对偶**：静态分派（RPITIT，零成本）⇄ 动态分派（`dyn` + boxed future，一次分配）。
+- **组合**：与 [GAT](../../02_intermediate/00_traits/07_generic_associated_types.md)、[类型擦除](../06_low_level_patterns/03_type_erasure.md)、[Async Closures](07_async_closures.md) 组合。
+
+---

@@ -181,6 +181,36 @@ println!("{}", x);
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：从实现 `Drop` 的类型中移出字段** —— 与析构语义冲突，编译期禁止。
+
+```rust,compile_fail
+// rustc 1.97.0 实测：error[E0509]: cannot move out of type `Guard`,
+// which implements the `Drop` trait
+struct Guard { inner: Vec<u8> }
+impl Drop for Guard { fn drop(&mut self) {} }
+fn main() {
+    let g = Guard { inner: vec![1] };
+    let _v = g.inner; // 若允许，drop 时将二次释放
+}
+```
+
+**修正对照**：按引用访问，或用 `ManuallyDrop`/去掉 `Drop` 实现后解构。
+
+```rust
+struct Guard { inner: Vec<u8> }
+impl Drop for Guard { fn drop(&mut self) {} }
+fn main() {
+    let g = Guard { inner: vec![1] };
+    let _v = &g.inner; // 借用不转移所有权，drop 仍完整运行
+}
+```
+
+**陷阱要点**：`E0509` 保证「每个值恰好 drop 一次」的析构不变量；需要取出字段时标准模式是 `ManuallyDrop` + `unsafe` 或改用 Option 字段 + `take()`。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

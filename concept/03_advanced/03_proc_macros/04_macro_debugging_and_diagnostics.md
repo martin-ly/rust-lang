@@ -310,6 +310,25 @@ impl rustc_driver::Callbacks for MyCallbacks {
 
 ---
 
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 展开查看 | `cargo expand` 查看宏展开结果，支持模块/测试/feature 维度过滤 | 本文 §二 |
+| 诊断输出 | 过程宏可向 stderr 输出诊断；`syn::Error` 提供精确定位 | 本文 §三–§四 |
+| 错误聚合 | `syn::Error::combine` 一次报告多个错误 | 本文 §4.2 |
+| 性能分析 | `cargo build --timings` / `RUSTC_LOG` / 宏展开耗时测量 | 本文 §五 |
+| 排查路径 | 展开 → 定位 → 性能三步检查清单 | 本文 §七 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[过程宏](02_proc_macro.md) 的工程化支撑层（调试 / 诊断 / 性能）。
+- **下位（实例）**：cargo expand、syn::Error、proc-macro-error、`--timings` 四组工具。
+- **组合**：与 [宏卫生](09_macro_hygiene.md)（Span 决定错误定位精度）组合。
+- **依赖**：依赖 [常用开发工具](../../01_foundation/10_testing_basics/02_useful_development_tools.md) 的工具链。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

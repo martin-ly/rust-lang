@@ -563,3 +563,22 @@ let process = async |items: Vec<i32>| -> i32 {
 > **Rust 版本**: 1.85.0+ (Edition 2024 / 2021)
 > **最后更新**: 2026-06-28
 > **状态**: ✅ 权威来源对齐完成（对齐 Rust 1.97.0 stable）
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 语法形态 | `async || { ... }` / `async move || { ... }` | 本文 §2.1 |
+| trait 族 | `AsyncFn` / `AsyncFnMut` / `AsyncFnOnce` 三层级 | 本文 §3.1 |
+| 稳定状态 | Rust 1.85 稳定 async closures | 本文 §六 版本演进 |
+| 对象安全 | 非 dyn-compatible，不能直接做 `dyn AsyncFn` | 本文 §5.1 |
+| 主要限制 | Send 约束、递归受限、与 `tokio::spawn` 的生命周期冲突 | 本文 §5.2–5.4 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[闭包基础](../../01_foundation/00_start/03_closure_basics.md) 的异步扩展。
+- **下位（实例）**：AsyncFn 三 trait、事件处理器、中间件链、Axum 处理函数（本文 §四）。
+- **组合**：与 [异步模式](03_async_patterns.md)、[Async Trait 对象安全](13_async_trait_object_safety.md) 组合。
+- **依赖**：依赖 [Async 基础](01_async.md) 与 [生命周期进阶](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md)（RTN 边界）。
+
+---

@@ -45,6 +45,8 @@
   - [六、判定树与检查清单](#六判定树与检查清单)
   - [七、相关概念](#七相关概念)
   - [八、来源](#八来源)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ## 一、认知路径
 
@@ -358,3 +360,22 @@ flowchart TD
 - [futures-rs — `task` 模块（`AtomicWaker`/`waker` 适配器）](https://docs.rs/futures/latest/futures/task/)（R4「最新 waker」原语与 waker 组合子的生态权威实现，2026-07-12 实测 200）
 - [RFC 2592 — `futures_api`（RawWaker/Waker 设计原文）](https://rust-lang.github.io/rfcs/2592-futures.html)（VTable 类型擦除的设计动机）
 - 站内交叉引用：[Async/Await](01_async.md) · [Future 与 Executor 机制](04_future_and_executor_mechanisms.md) · [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) · [Tokio 运行时内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 类型擦除结构 | `Waker = RawWaker(data 指针 + RawWakerVTable)` | 本文 §二 |
+| 推荐模式 | `std::task::Wake` trait（零 unsafe）为首选 | 本文 §3.2 |
+| vtable 契约 | `clone`/`wake`/`wake_by_ref`/`drop` 四函数的引用记账必须配对 | 本文 §三–§四 |
+| 典型违反 | 丢失 wake（死锁）/ 记账错误（double-free）/ Pending 后未保存 waker | 本文 §五 |
+| 验证手段 | miri 可检测 vtable 记账类 UB | 本文 §5.2 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[Async 基础](01_async.md) 的执行器底层契约专题。
+- **下位（实例）**：P1 Arc 计数四函数、P2 `Wake` trait、P3 无计数变体三种实现模式。
+- **组合**：与 [Pin/Unpin](08_pin_unpin.md)、[执行器公平性与调度](10_executor_fairness_and_scheduling.md) 组合。
+- **依赖**：依赖 [Unsafe](../02_unsafe/01_unsafe.md) 的 vtable 安全义务。
+
+---

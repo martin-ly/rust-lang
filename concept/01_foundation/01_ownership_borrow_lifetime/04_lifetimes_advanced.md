@@ -126,6 +126,8 @@ mindmap
     - [测验 5：悬垂引用的编译器防护（理解层）](#测验-5悬垂引用的编译器防护理解层)
     - [测验 6：生命周期 bound `+ 'a` 的含义（应用层）](#测验-6生命周期-bound--a-的含义应用层)
   - [实践](#实践)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ### Step 1: 直觉困惑（Intuitive Confusion）
@@ -1851,6 +1853,25 @@ where
 > - [MVP 学习路径](../../00_meta/04_navigation/08_learning_mvp_path.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
+
+---
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| Elision 规则 | 三条省略规则：输入引用各得参数、`&self` 优先、唯一输入则输出同生命周期 | 本文 §十三 |
+| 型变（variance） | `&'a T` 对 `'a` 协变，`&'a mut T` 对 `'a` 不变，函数类型对参数逆变 | 本文形式规则节 |
+| HRTB | `for<'a>` 对生命周期做全称量化，表达「对任意生命周期成立」 | 本文 §十四 |
+| RPIT 捕获 | `impl Trait` 返回位置的生命周期捕获规则与 `+'a` 显式约束 | 本文 §14.1–14.2 |
+| Polonius | 下一代 borrow checker：从生命周期标注转向 flow-sensitive 的贷款（loan）分析 | 本文 §十二 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[生命周期基础](03_lifetimes.md) 的高级扩展（elision、variance、HRTB、Polonius）。
+- **下位（实例）**：lifetime elision、HRTB、variance、`impl Trait` 捕获、Polonius 五大专题。
+- **组合**：与 [借用](02_borrowing.md)、[GAT](../../02_intermediate/00_traits/07_generic_associated_types.md)（`where Self: 'a` 必需约束）组合。
+- **依赖**：依赖 [所有权](01_ownership.md) 的 move/借用规则。
 
 ---
 

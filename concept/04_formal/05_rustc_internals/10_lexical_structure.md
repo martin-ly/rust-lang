@@ -259,6 +259,25 @@ DelimitedTree ::= "(" TokenTree* ")"
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：字面量越界** —— 词法合法但字面量语义检查拒绝。
+
+```rust,compile_fail
+// rustc 1.97.0 实测：error: literal out of range for `u8`
+fn main() { let x: u8 = 300; }
+```
+
+**修正对照**：换用可容纳的类型或修正取值。
+
+```rust
+fn main() { let x: u16 = 300; }
+```
+
+**陷阱要点**：整数字面量在词法阶段只识别 digits/后缀，范围检查在后续阶段按目标类型进行；无后缀字面量默认 `i32`，越界诊断以推断/标注的目标类型为准。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

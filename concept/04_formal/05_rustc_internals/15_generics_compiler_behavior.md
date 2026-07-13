@@ -176,6 +176,31 @@ fn make_iter() -> impl Iterator<Item = i32> {
 
 ---
 
+## ⚠️ 反例与陷阱
+
+**反例：泛型实例化信息不足** —— 推断变量无任何约束，编译器拒绝猜测。
+
+```rust,compile_fail
+// rustc 1.97.0 实测：error[E0282]: type annotations needed for `Vec<_>`
+fn main() {
+    let v = Vec::new();
+    println!("{}", v.len()); // len() 不约束元素类型
+}
+```
+
+**修正对照**：显式标注或让使用点约束元素类型。
+
+```rust
+fn main() {
+    let v: Vec<i32> = Vec::new();
+    println!("{}", v.len());
+}
+```
+
+**陷阱要点**：`E0282` 体现 Rust 推断的「无猜测」原则——整数回退（`i32`/`f64`）只适用于数值类型变量，`Vec<_>` 的元素类型没有回退默认； turbofish（`Vec::<i32>::new()`）与标注是两种等价修正。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

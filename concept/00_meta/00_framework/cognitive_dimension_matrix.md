@@ -156,7 +156,7 @@ mindmap
 ### 2.2 L2 进阶概念层映射
 
 | 概念文件 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
-|:---|:---|:---|:---|:---|:---|:---| :--- | :--- |
+|:---|:---|:---|:---|:---|:---|:---| :--- | :--- | :--- |
 | **01_traits** | F×Mem: `trait` / `impl` / `dyn` 语法 F×App: 编写 `#[derive]` 可用 trait | C×Und: Trait = 类型类的 Haskell 对应 C×Ana: 分析 Orphan Rule 对 coherence 的保障 | P×App: 设计可对象安全的 Trait P×Eva: 评估 GATs 的引入代价 | M×Ana: 识别自身 Trait 设计中的过度抽象倾向 |
 | **02_generics** | F×Mem: `<T: Bound>` 语法 F×App: Const Generics 数组长度参数化 | C×Und: 单态化 = 零成本抽象的编译机制 C×Ana: 分析单态化代码膨胀的影响 | P×App: 设计合理的 Trait Bound 层次 P×Eva: 评估 `&dyn` vs `impl` 的性能权衡 | M×Cre: 设计领域特定的类型约束语言 |
 | **03_memory_management** | F×Mem: `Box` / `Rc` / `Arc` / `RefCell` API F×App: `Pin::new_unchecked` 调用 | C×Und: 智能指针 = 所有权策略的封装 C×Ana: 分析 `Pin` 不动性与自引用的关系 | P×App: 实现 `Deref` / `Drop` 自定义 P×Eva: 评估内存布局优化策略 | M×Eva: 评估自身对堆/栈分配敏感度的认知 |
