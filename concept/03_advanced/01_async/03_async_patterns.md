@@ -70,7 +70,13 @@
 
 ## 一、核心概念
 
-本节将「核心概念」分解为若干主题： Future 与状态机、Pin 与自引用与Waker 与执行器。
+异步模式（async patterns）是 `.await` 之上组织并发逻辑的可复用结构，本节建立其概念框架：
+
+- **并发的三种组合**：`join!`（全部完成，结果聚合）、`select!`（先到先得，取消其余）、`FuturesUnordered`（动态增删的任务集）——它们是结构化并发在 Rust 的原始构件；
+- **取消语义**：Rust 的取消 = **drop Future**——`.await` 点是唯一可取消点，任务在下次轮询时静默消失。这要求「取消安全（cancellation safety）」成为模式设计的核心约束；
+- **与同步模式的对应**：`Mutex` → `tokio::sync::Mutex`（可跨 await 持锁）、`channel` → `mpsc`（背压感知）、`thread::spawn` → `task::spawn`（协作式而非抢占式调度）。
+
+判定准则：选模式先问「完成条件是什么」（全部/任一/流式）与「取消时谁负责清理」——两个问题决定 80% 的选型。
 
 ### 1.1 Future 与状态机
 
@@ -557,7 +563,12 @@ async fn process_image(data: Vec<u8>) -> Result<Vec<u8>, task::JoinError> {
 
 ## 四、反命题与边界分析
 
-「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+本节检验异步模式的两条常见误判：
+
+- **反命题 1：「`select!` 分支取消总是安全的」** —— 错误。`select!` 中落选分支的 Future 被 drop——如果该 Future 在 `.await` 点之间已改变外部状态（如发送了一半的消息、扣除了配额），取消会留下不一致。判定准则：放进 `select!` 的每个分支都要审「drop 在任意 await 点是否安全」——不安全时改为先 `select` 出结果再执行副作用。
+- **反命题 2：「`join!` 是并行的」** —— 不准确。`join!` 在同一任务内**轮询驱动**多个 Future：它们是并发（concurrent）而非并行（parallel）——CPU 密集工作放 `join!` 里只会串行化。真并行需 `spawn` 到多线程运行时或 `spawn_blocking`。
+
+边界极限小节量化：`FuturesUnordered` 的内存语义、`select!` 的 `biased` 模式（公平性 vs 优先级）、以及取消安全审计的检查清单。
 
 ### 4.1 反命题树
 >
@@ -904,7 +915,13 @@ fn main() {}
 
 ## 嵌入式测验
 
-本节从测验 1：tokio::select!（记忆层）、测验 2：Backpressure（理解层）、测验 3：Actor 模式（应用层）与测验 4：取消安全（分析层）切入，剖析「嵌入式测验」的核心内容。
+本节测验覆盖异步模式的三个核心判别点：
+
+- **理解层**：`join!`/`select!`/`FuturesUnordered` 的完成语义差异——给定需求（等全部/取最快/动态任务流）选择正确组合子；
+- **应用层**：取消安全判定——给定 `select!` 代码识别哪个分支的 drop 会留下不一致状态，并用「先选择后执行」重构；
+- **分析层**：`Send` 与 spawn 的关系——为什么 `join!` 内的 Future 不需要 `Send`（同任务同线程）而 `spawn` 的 Future 必须 `Send`（可能跨线程迁移）。
+
+作答建议：测验 2 建议用「在每个 `.await` 点画一条取消线」的方法逐点审计，这是生产环境 async 代码审查的标准动作。
 
 ### 测验 1：tokio::select!（记忆层）
 

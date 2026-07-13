@@ -105,7 +105,13 @@ static mut IDENTIFIER: Type = expr;   // 可变静态，需要 unsafe 访问
 
 ## 三、技术细节与示例
 
-本节从不可变静态项、可变静态项、静态项与 `const` 的区别与延迟初始化切入，剖析「技术细节与示例」的核心内容。
+本节展开 `static` 项的三个技术要点：
+
+- **`static` vs `const` 的本质差异**：`static` 有**唯一固定地址**（全局单例，程序运行期只存在一份），`const` 是**编译期内联**（每处使用独立副本）。取地址（`&STATIC`）是二者行为分叉的试金石：多个 `&CONST` 可能指向不同地址；
+- **初始化约束**：`static` 的初始化表达式必须是 const-evaluable——不能调用 `Vec::new()`（1.63 前）或任何非 const fn；需要运行期初始化时用 `LazyLock`（1.80 稳定）或 `OnceLock`；
+- **`static mut` 与 `Sync`**：可变静态是 `unsafe` 操作（数据竞争可能），正确模式是 `static X: Mutex<T>` 或原子类型——`Sync` 约束（`&'static T: Send` 当 `T: Sync`）由编译器强制。
+
+判定准则：配置常量用 `const`；需要唯一地址（FFI、注册表）用 `static`；需要运行期初始化用 `LazyLock`——`static mut` 只应出现在与外部 C 代码的边界。
 
 ### 3.1 不可变静态项
 
@@ -226,7 +232,12 @@ fn main() {
 
 ## 五、反命题与边界分析
 
-「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+本节检验 `static` 项的两条常见误判：
+
+- **反命题 1：「`const` 和 `static` 差不多，随便用」** —— 错误。语义差异有实际后果：① `const` 大数组每处使用都内联展开，代码体积膨胀；② 依赖地址唯一性的代码（如 `ptr::eq(&A, &B)` 判同）对 `const` 可能得到两个地址；③ `const` 泛型参数单态化时每实例一份。判定准则：需要地址语义 → `static`，纯值语义 → `const`。
+- **反命题 2：「`static` 可变状态必须用 `static mut`」** —— 错误且危险：`static mut` 的每次访问都是 `unsafe` 且极易数据竞争。正确替代全覆盖：`AtomicXxx`（简单标志/计数）、`Mutex<T>`/`RwLock<T>`（复合状态）、`LazyLock<T>`（运行期一次性初始化）。`static mut` 在现代 Rust 中只剩与 C 全局变量互操作一个合法场景。
+
+边界极限小节量化：`static` 的析构语义（程序退出不运行 `Drop`——泄漏是设计）、线程局部替代（`thread_local!`）、以及 `extern static` 链接 C 符号的约定。
 
 ### 5.1 反命题树
 
@@ -345,7 +356,13 @@ graph TD
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」部分包含测验 1：`static` vs `const` 与 测验 2：安全可变全局状态 两条主线，本节依次说明。
+本节测验覆盖 `static` 项的三个核心判别点：
+
+- **理解层**：`const`/`static`/`static mut` 三者的内存与初始化语义差异——给定代码判断每处的地址唯一性与初始化时机；
+- **应用层**：`LazyLock`/`OnceLock` 的选择——一次性惰性初始化（如正则、全局配置）的正确实现模式；
+- **分析层**：`Sync` 约束的推导——为什么 `static X: Mutex<T>` 合法而 `static X: RefCell<T>` 编译失败（`RefCell: !Sync`），把「跨线程共享可变状态」的类型检查链补全。
+
+作答建议：测验 3 先写出 `Sync` 的完整推理链（`&T: Send ⟺ T: Sync`），再对照答案——这是理解 Rust 并发类型系统的枢纽题目。
 
 ### 测验 1：`static` vs `const`
 

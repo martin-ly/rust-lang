@@ -96,7 +96,12 @@ mindmap
 
 ## 一、核心概念
 
-「核心概念」部分按强制（Coercion）与转换（Cast）的区别、Deref 强制与子类型强制的顺序逐层展开。
+Rust 的类型转换分两类机制，理解其分工是避免转换错误的前提：
+
+- **强制转换（Coercion）**：编译器**自动**应用的无损转换——`&mut T` → `&T`、`&T` → `*const T`、`&[T; N]` → `&[T]`（unsized coercion）、`fn` 项 → `fn` 指针。特点：发生在特定「强制点」（let 带标注、函数参数、返回值），永不丢失信息，不做数值变化；
+- **显式转换（Casting）**：`as` 运算符或 `From`/`Into` trait——`as` 可做有损转换（截断、饱和、reinterpret 位模式），`From` 承诺无损。
+
+判定准则：编译器自动做的只有 coercion；`as` 出现的每一处都应能回答「这里会丢失什么信息」；库 API 间的转换优先 `From`/`Into`/`TryFrom` trait 而非 `as`。
 
 ### 1.1 强制（Coercion）与转换（Cast）的区别
 
@@ -407,7 +412,12 @@ let ptr = &aligned as *const Aligned as *const u8;
 
 ## 四、反命题与边界分析
 
-本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+本节检验类型转换的两条常见误判：
+
+- **反命题 1：「Rust 没有隐式转换」** —— 不准确：Rust 没有**数值**隐式转换（`i32` 不会自动变 `i64`），但有 **deref coercion**（`&String` → `&str`、`&Vec<T>` → `&[T]`）与 unsized coercion——它们是方法调用 ergonomics 的基石，却也是「为什么 `String` 参数传 `&str` 不行但反过来可以」这类困惑的根源。
+- **反命题 2：「`as` 在指针与整数间转换是安全的」** —— 语义上不安全：指针→整数丢失 provenance（来源），整数→指针是未定义来源的构造，后续解引用即 UB 风险。Strict Provenance API（`with_addr`/`map_addr`/`expose_provenance`）是 1.84+ 的正确替代。
+
+边界极限小节量化：coercion 站点（coercion sites）的完整列表、`as` 转换表（数值/指针/枚举/布尔）、以及 `transmute` 与 `as` 的能力边界。
 
 ### 4.1 反命题树
 >
@@ -779,7 +789,13 @@ fn main() {}
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」部分按测验 1：Deref 强制转换（理解层）、测验 2：`as` 与 `TryFrom`（应用层）、测验 3：From/Into 的孤儿规则（分析层）、测验 4：指针转换的安全性（分析层）等5个方面的顺序逐层展开。
+本节测验覆盖类型转换的三个核心判别点：
+
+- **理解层**：coercion 与 cast 的分工——给定代码判断哪一步是自动 coercion、哪一步是显式 `as`；
+- **应用层**：`From`/`Into` 的正确实现——为什么只应实现 `From`（`Into` 自动派生），以及 `TryFrom` 的错误类型设计；
+- **分析层**：unsized coercion 的类型层级——`&[T; N]` → `&[T]` → `&dyn Trait` 的两步转换与胖指针形成。
+
+作答建议：测验 3 先用 `std::mem::size_of` 打印各指针宽度验证「瘦指针 vs 胖指针」模型，再核对答案。
 
 ### 测验 1：Deref 强制转换（理解层）
 

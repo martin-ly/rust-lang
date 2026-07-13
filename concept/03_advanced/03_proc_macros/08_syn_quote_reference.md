@@ -341,7 +341,15 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 ## 3. syn 数据结构
 
-「syn 数据结构」部分按类型 (Type)、表达式 (Expr)、模式 (Pat)与路径 (Path)的顺序逐层展开。
+`syn` 把 Rust 语法表示为一棵**完整但无损的 AST**：每个语法节点是一个枚举或结构体，完整保留 token 级信息（包括 `Span`），这是它区别于 rustc 内部 AST 的关键——后者为有损降低。
+
+核心类型分三层：
+
+1. **顶层项**：`Item`（枚举：`ItemFn`/`ItemStruct`/`ItemImpl`/…）是过程宏输入的主要形态，`File` 表示整个源文件；
+2. **表达式与类型**：`Expr`（60+ 变体覆盖全部表达式语法）、`Type`、`Pat`（模式）、`Stmt`；
+3. **辅助结构**：`Generics`/`WhereClause`/`Attribute`/`Visibility`——`Attribute` 的解析是 derive 宏配置参数的主要入口。
+
+使用准则：先用 `syn::parse` 到最具体的类型（如 `ItemStruct` 而非泛化的 `Item`），错误信息会精确指向不匹配的语法位置；不确定结构时用 `cargo expand` 或 `syn` 的 `Debug` 打印（`extra-traits` feature）对照。
 
 ### 3.1 类型 (Type)
 
@@ -437,7 +445,13 @@ assert_eq!(last_segment.ident, "Vec");
 
 ## 4. syn 属性处理
 
-本节将「syn 属性处理」分解为若干主题：解析属性、NestedMeta与自定义属性参数。
+属性（`#[...]`）解析是 derive/attribute 宏的核心工作，本节按「读取 → 解析 → 移除」三步展开：
+
+- **读取**：`attrs: Vec<Attribute>` 挂在大多数 AST 节点上；`attr.path().is_ident("serde")` 做名字过滤，注意区分外层属性（`#[...]`）与内层属性（`#![...]`，`style` 字段）；
+- **解析**：syn 2.x 用 `attr.parse_nested_meta(|meta| { ... })` 回调式解析（替代 1.x 的 `Meta` 匹配），支持 `#[attr(key = "val", flag, list(a, b))]` 三类成分的统一处理；复杂配置用 `darling` crate 直接反序列化到结构体；
+- **移除**：derive 宏通常要**剥离**自定义辅助属性（如 `#[my_derive(skip)]`）再输出，否则 rustc 报「未注册属性」——`attrs.retain(...)` 是惯用做法。
+
+判定准则：属性解析错误应用 `meta.error("...")` 返回带 span 的诊断，而非 panic——过程宏的 panic 只显示「proc macro panicked」。
 
 ### 4.1 解析属性
 
@@ -537,7 +551,13 @@ pub fn my_attr(attr: TokenStream, item: TokenStream) -> TokenStream {
 
 ## 5. quote 库概述
 
-本节围绕「quote 库概述」展开，覆盖核心功能 与 基本语法 两个方面。
+`quote!` 是代码生成的标准工具，把「准引用语法」转换为 `TokenStream` 构造代码。核心机制三条：
+
+1. **准引用**：`quote! { fn #name() { #body } }`——`#var` 插值任何实现了 `ToTokens` 的值（syn AST 节点、`Ident`、`Literal`、原始 token 流），其余部分按字面 token 输出；
+2. **重复**：`#(#items),*` 语法处理列表——`#(...)*` 内可含多个变量（要求同长度迭代），分隔符紧跟 `*` 前（`,`/`;` 或无）；
+3. **卫生控制**：`quote!` 生成的标识符默认用 `Span::call_site()`——需要隔离时用 `quote_spanned!` 或 `Ident::new(name, Span::mixed_site())` 预构造再插值。
+
+输出形态：`quote!` 返回 `proc_macro2::TokenStream`，函数式宏出口处 `.into()` 转为 `proc_macro::TokenStream`——`proc_macro2` 层使代码可在编译器进程外（测试、build.rs）生成与检查。
 
 ### 5.1 核心功能
 
@@ -667,7 +687,21 @@ let output = quote! {
 
 ## 7. quote_spanned
 
-本节从 Span 控制 与 错误位置 两个层面剖析「quote_spanned」。
+`quote_spanned!` 是诊断质量的关键工具：它与 `quote!` 语法相同，但第一个参数是 `span`，生成的**所有 token** 都携带该 span。
+
+典型用途：derive 宏生成的 `impl` 代码如果含类型错误，默认 span 会让错误指向用户看不懂的生成代码；用 `quote_spanned! {field.span()=> ...}` 把错误绑回用户源码中的字段：
+
+```rust,ignore
+let checks = fields.iter().map(|f| {
+    let ty = &f.ty;
+    quote_spanned! {f.span()=>
+        fn _check<T: MyTrait>() {}
+        _check::<#ty>(); // 类型错误指向字段声明处
+    }
+});
+```
+
+配套工具：`syn::spanned::Spanned` trait 为任何 AST 节点提供 `.span()`；`syn::Error::new_spanned(tokens, msg)` 直接在特定 token 上构造编译错误。判定准则：生成代码中每个可能触发用户可见错误的构造，都应评估是否需要绑定 span。
 
 ### 7.1 Span 控制
 
@@ -716,7 +750,13 @@ fn generate_impl(input: &syn::DeriveInput) -> proc_macro2::TokenStream {
 
 ## 8. ToTokens trait
 
-本节围绕「ToTokens trait」展开，覆盖实现 ToTokens 与 自定义类型转换 两个方面。
+`ToTokens` 是 `quote!` 插值的底层协议：任何能转为 token 流的类型实现它，`#var` 即调用 `var.to_tokens(&mut tokens)`。理解它是自定义插值类型的前提：
+
+- **已实现类型**：所有 syn AST 节点、`Ident`、`Literal`、`Punct`、`&T`/`Box<T>`（委托）、`Option<T>`（`None` 输出空）；
+- **自定义实现**：包装类型（如「带前缀的标识符生成器」）实现 `ToTokens` 后可直接在 `quote!` 中插值，避免重复样板；
+- **生命周期注意**：`to_tokens` 接收 `&mut TokenStream` 追加 token，`to_token_stream()` 便捷方法分配新流——热路径上应优先前者。
+
+边界：插值是按**值**进行的——`#(#items)*` 要求 `items` 是可迭代引用（`&Vec<T>` 或 `slice`）；插值一个未实现 `ToTokens` 的类型是编译错误（E0277），不是运行时失败。
 
 ### 8.1 实现 ToTokens
 
@@ -778,7 +818,15 @@ impl ToTokens for Config {
 
 ## 9. 常见模式
 
-「常见模式」部分按 Derive 宏模式、属性宏模式与函数宏模式的顺序逐层展开。
+本节归纳 syn + quote 实战中的高频配方，每个模式解决一个具体问题：
+
+1. **生成唯一标识符**：`format_ident!("_{}_{}", name, index)` 避免生成代码的命名冲突；
+2. **泛型参数转发**：`let (impl_g, ty_g, where_c) = generics.split_for_impl();` 生成 `impl #impl_g Trait for #name #ty_g #where_c`——手写泛型拼接几乎必错；
+3. **添加 where 约束**：`generics.make_where_clause().predicates.push(parse_quote!(#ty: Trait));`——为每个字段类型追加约束的标准做法；
+4. **条件生成**：`if let Some(attr) = find_attr(...) { quote!{...} } else { quote!{} }`——`quote!{}` 空流是合法的「不生成」；
+5. **错误累积**：遍历字段时收集 `Vec<syn::Error>`，最后 `combine` 一次性报告——比遇到第一个错误就返回的用户体验好得多。
+
+这些模式覆盖了 80% 的 derive 宏实现需求，完整 derive 案例见 [生产级宏开发](05_production_grade_macro_development.md)。
 
 ### 9.1 Derive 宏模式
 

@@ -151,7 +151,14 @@ graph TD
 
 ## 四、边界一：await 点语义边界
 
-「边界一：await 点语义边界」部分按边界陈述、反例与判定条件的顺序逐层展开。
+`.await` 不是普通运算符，它定义了任务的**让出点（yield point）**——理解其语义边界是预测异步行为的前提：
+
+- **让出 ≠ 切换线程**：`.await` 把控制交还执行器，任务可能立即在同一线程被重新 poll（如果 Future 已 Ready）——「await 一定会挂起」是错误直觉；
+- **await 点是取消点**：Future 只可能在 await 处被安全 drop——两个 await 之间的代码是不可分割的（对取消而言）；
+- **await 点划分状态机阶段**：跨 await 存活的局部变量进入状态机字段，决定 `Future` 的 `Send`/`!Send` 与大小——「缩小跨 await 变量的作用域」是减小 Future、恢复 `Send` 的标准手法；
+- **嵌套 await 的轮询深度**：深层 `.await` 链展开为深层 `poll` 调用栈——`Pending` 时整条链逐层返回，这是 async 栈溢出来源之一（`Box::pin` 切断）。
+
+判定准则：审查 async 函数时先标出所有 await 点——它们是唯一的调度、取消与 `Send` 判定位置。
 
 ### 4.1 边界陈述
 
@@ -233,7 +240,15 @@ loop {
 
 ## 六、边界三：Pin 与自引用边界
 
-「边界三：Pin 与自引用边界」涉及边界陈述、反例与判定条件，本节逐一说明其要点。
+`Pin` 的存在只为解决一个问题：async 状态机可能**自引用**——跨 await 的局部变量被后续阶段的引用指向（如 `let x = 1; let r = &x; foo().await; use(r);` 中 `r` 与 `x` 同住状态机）。移动状态机将使 `r` 悬垂。
+
+边界规则三条：
+
+1. **`Pin<&mut T>` 的契约**：被 Pin 的值不再被 move——`poll` 取 `Pin<&mut Self>` 即此契约的类型编码；
+2. **`Unpin` 逃生舱**：不含自引用的类型自动实现 `Unpin`（绝大多数类型），可自由移动——`Box::pin` 后 `Unpin` 与否无差别；
+3. **投影（projection）难题**：`Pin<&mut Struct>` 不能安全地给出字段的 `&mut`——`pin-project` crate 的 `#[pin]` 标记区分「结构化字段」（需 `Pin<&mut Field>`）与「非结构化字段」（可直接 `&mut`），手写投影是 `unsafe` 且极易出错。
+
+判定准则：应用层代码永远不应手写 `unsafe` pin 投影——`Box::pin` + `pin-project` 覆盖全部合法需求。
 
 ### 6.1 边界陈述
 
@@ -277,7 +292,17 @@ async fn self_referential() {
 
 ## 七、边界四：Send 跨 await 边界
 
-本节围绕「边界四：Send 跨 await 边界」展开，依次讨论边界陈述、反例与判定条件。
+`Send` 跨 await 边界是 async 代码最高频的编译错误来源，其规则可一句话概括：**Future 的 `Send` 性 = 其状态机所有字段的 `Send` 性**。跨 `.await` 存活的局部变量都是字段。
+
+典型违规与修复：
+
+| 违规 | 原因 | 修复 |
+|:---|:---|:---|
+| `Rc` 跨 await | `Rc: !Send` | 换 `Arc` 或把 `Rc` 使用收敛到单个 await 段内 |
+| `std::MutexGuard` 跨 await | `!Send`（pthread 要求同线程解锁） | 换 `tokio::sync::Mutex` 或缩小临界区（块作用域） |
+| `RefCell` 借用跨 await | `RefMut: !Send` | 提前 drop 借用或重构状态位置 |
+
+`tokio::spawn` 要求 `Future: Send + 'static`（多线程调度）；`spawn_local` 不要求 `Send` 但任务固定线程。调试技巧：编译器错误信息中的 `note: future is not Send as ... awaits` 链会指出具体哪个变量跨了哪个 await——顺着链条缩小作用域即可。
 
 ### 7.1 边界陈述
 
@@ -321,7 +346,14 @@ async fn is_send(rc: Rc<i32>) {
 
 ## 八、边界五：Executor 与运行时边界
 
-本节围绕「边界五：Executor 与运行时边界」展开，依次讨论边界陈述、反例与判定条件。
+Rust 的 async 是「无运行时内建」设计——`Future` trait 在 std，执行器在生态 crate。由此产生运行时边界：
+
+- **运行时特定 API 不可移植**：`tokio::spawn`/`tokio::fs`/`tokio::time` 依赖 tokio 上下文（`Handle`），在 async-std/smol 运行时下调用直接 panic「no reactor running」；库的异步代码应只用 `Future`/`Stream` trait，把运行时选择留给二进制；
+- **`block_on` 的边界**：同步→异步的唯一入口，嵌套调用（运行时再 `block_on`）在 tokio 中 panic——`spawn_blocking` + `Handle::block_on` 是跨边界的正确姿势；
+- **运行时特性的隐性依赖**：tokio 的 `full`/`rt-multi-thread` feature 决定可用的调度器——`#[tokio::main]` 默认多线程，测试常用 `current_thread` 获得确定性；
+- **IO 与时间的实现差异**：各运行时的 reactor（epoll/io_uring/kqueue/IOCP）与定时器精度不同——跨运行时库（如 `async-io` 抽象层）以性能换可移植性。
+
+判定准则：写库用 `async-trait`+`Future` 保持运行时中立；写应用尽早选定运行时并拒绝混用。
 
 ### 8.1 边界陈述
 
@@ -359,7 +391,13 @@ fn outside_runtime() {
 
 ## 九、边界六：async trait 与 dyn 兼容边界
 
-「边界六：async trait 与 dyn 兼容边界」部分按边界陈述、反例与判定条件的顺序逐层展开。
+trait 中的 async 方法长期是 Rust 异步的最大缺口，现状分三层：
+
+- **静态分发已稳定（1.75）**：`trait T { async fn f(&self); }` 脱糖为「返回 `impl Future` 的关联方法」——泛型/静态分发场景直接用，无运行时开销；
+- **`dyn` 不兼容**：脱糖产物返回「关联的匿名 Future 类型」，不同 impl 返回不同类型 ⟹ trait 对象不安全。当前方案三选一：① `#[async_trait]` 宏（`Box<dyn Future>` 包装，一次分配/调用）；② nightly `dyn*`/`async Fn` 实验；③ 手动返回 `Pin<Box<dyn Future<Output = T> + Send + '_>>`；
+- **`async_trait` 的成本与陷阱**：每次调用堆分配 + 默认加 `Send` 约束（`?Send` 可关闭）——热路径 trait 方法应考虑静态分发重构。
+
+判定准则：新代码默认写原生 async trait；只在确需 `dyn` 时引入 `async_trait`，并在文档中标注分配成本。
 
 ### 9.1 边界陈述
 

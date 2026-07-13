@@ -63,7 +63,16 @@ struct User {
 
 ## 二、标准库可派生 Trait 一览
 
-本节将「标准库可派生 Trait 一览」分解为若干主题： `Debug` — 调试输出、`PartialEq` / `Eq` — 相等性比较、`PartialOrd` / `Ord` — 顺序比较、`Clone` / `Copy` — 复制值等6个方面。
+标准库提供 11 个可 `#[derive]` 的 trait，分为四组记忆：
+
+| 组 | Trait | 语义要点 |
+|:---|:---|:---|
+| 比较 | `PartialEq`/`Eq`/`PartialOrd`/`Ord` | 派生实现按**字段声明序**字典序比较；`Eq` 是自反性标记（浮点不可派生） |
+| 复制 | `Clone`/`Copy` | `Copy` 要求所有字段 `Copy` 且类型不实现 `Drop`；`Clone` 逐字段克隆 |
+| 哈希 | `Hash` | 派生版按字段序喂入 hasher——`Eq` 与 `Hash` 必须一致（相等 ⟹ 同哈希），自定义一个就必须同步另一个 |
+| 调试与默认 | `Debug`/`Default` | `Debug` 输出结构化表示；`Default` 逐字段取默认值（枚举需 `#[default]` 标注变体，1.62+） |
+
+派生的共同机制：编译器为泛型参数自动加约束（`#[derive(Clone)] struct S<T>` 生成 `impl<T: Clone> Clone for S<T>`）——注意这是**语法级**约束添加，字段实际不需要 `T: Clone` 时（如 `PhantomData<T>`）会过度约束，需手写 impl。
 
 ### `Debug` — 调试输出
 
@@ -83,7 +92,14 @@ println!("{:?}", p); // Point { x: 1, y: 2 }
 
 ### `PartialEq` / `Eq` — 相等性比较
 
-本节围绕「`PartialEq` / `Eq` — 相等性比较」展开，覆盖 `PartialEq` 与  `Eq` 两个方面。
+相等性 trait 对是 Rust 类型系统「用标记 trait 编码数学性质」的范例：
+
+- **`PartialEq`**：定义 `==`/`!=`——只承诺对称性与传递性，**不承诺自反性**（`x == x` 可能为假，`f64` 的 NaN 是标准例子）；
+- **`Eq`**：无方法的标记 trait——`impl Eq` 即声明「我的 `PartialEq` 满足自反性」。它是 `HashMap` 键、`BTreeMap` 语义健全性的前提；
+- **派生规则**：`#[derive(PartialEq)]` 逐字段 `==`；`#[derive(Eq)]` 要求所有字段 `Eq`（含浮点字段则编译失败——编译器替你执行数学纪律）；
+- **常见陷阱**：类型含 `f64` 字段时派生 `Eq` 被拒——正确做法是 newtype 包装（如 `OrderedFloat`）或承认「此类型不能做 Map 键」。
+
+判定准则：需要作为哈希/B树键 ⟹ 必须 `Eq`；含浮点 ⟹ 用 `partial_cmp`/`total_cmp`（1.62+ 的 `f64::total_cmp` 提供 IEEE 全序，可做 `Ord` 实现依据）。
 
 #### `PartialEq`
 
@@ -114,7 +130,14 @@ struct User { id: u64 }
 
 ### `PartialOrd` / `Ord` — 顺序比较
 
-「`PartialOrd` / `Ord` — 顺序比较」部分包含 `PartialOrd` 与  `Ord` 两条主线，本节依次说明。
+顺序 trait 对与相等性对结构同构，但多一个语义维度：
+
+- **`PartialOrd`**：定义 `<`/`<=`/`>`/`>=` 与 `partial_cmp`——返回 `Option<Ordering>`，`None` 表示「不可比」（NaN 与任何值）；
+- **`Ord`**：标记「全序」——要求 `Eq + PartialOrd` 且 `partial_cmp` 永不返回 `None`，提供 `cmp`/`max`/`min`/`clamp`；`BTreeMap` 键、`sort` 的语义前提；
+- **派生的字典序**：字段声明序决定比较顺序——「最重要的字段放最前」，顺序错误是静默的逻辑 bug（编译器无法知道你想要的排序语义）；
+- **手写与派生混用**：自定义排序需求（如忽略某字段、反向比较）必须手写——注意手写 `Ord` 必须与 `PartialOrd` 一致（文档承诺，违反是逻辑 bug 而非编译错误）。
+
+工程模式：需要多种排序时用「新类型 + 手写 Ord」（如 `struct ByDate(User)`）而非修改原类型语义；浮点排序用 `total_cmp` 包装。
 
 #### `PartialOrd`
 
@@ -138,7 +161,12 @@ struct Version { major: u32, minor: u32, patch: u32 }
 
 ### `Clone` / `Copy` — 复制值
 
-「`Clone` / `Copy` — 复制值」部分包含 `Clone` 与  `Copy` 两条主线，本节依次说明。
+复制 trait 对定义了 Rust 的两种复制语义，是所有权模型的「减压阀」：
+
+- **`Clone`**：显式深复制——`x.clone()` 是程序员可见的操作，可能昂贵（堆分配、递归克隆）；`Clone` 的存在不改变 move 语义（默认仍 move）；
+- **`Copy`**：隐式位复制——`Copy` 类型的「move」退化为按位拷贝且源保持有效（`let y = x;` 后 `x` 仍可用）。约束：所有字段 `Copy` + 类型不实现 `Drop`（E0184——位复制 + 析构 = double-free 风险，编译器强制排除）；
+- **派生过度约束陷阱**：`#[derive(Clone)] struct S<T>(PhantomData<T>)` 生成的 `impl<T: Clone>` 要求 `T: Clone`，但 `PhantomData<T>` 总是 `Copy`——泛型参数被不必要地约束，容器库常因此手写 impl；
+- **设计准则**：小型纯数据类型（`Point`、`IpAddr` 风格）派生 `Copy`；含堆资源的类型只 `Clone`；`Copy` 是承诺「复制即全部语义」——加字段时若新字段不可 `Copy`，原有代码的隐式复制点全部变为 move，是 API 破坏性变更。
 
 #### `Clone`
 

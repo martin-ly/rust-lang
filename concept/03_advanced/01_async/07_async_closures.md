@@ -59,7 +59,13 @@ fn make_callback() -> impl AsyncFnOnce() -> i32 {
 
 ## 2. 语法与捕获语义
 
-本节围绕「语法与捕获语义」展开，依次讨论基础语法、捕获模式、与 `|x| async move {}` 的对比与异步可调用体谱系。
+async 闭包（`async || { ... }`，1.85 稳定）把「闭包捕获」与「Future 惰性」两套语义叠加，理解其交互是正确使用的前提：
+
+- **捕获与惰性的叠加**：`async move || { ... }` 在**调用时** move 环境进入 Future——闭包本身捕获的是调用现场的环境，返回的 Future 持有捕获值直到完成；这与 `|| async move { ... }`（闭包捕获、内部 async 块再 move）有微妙但关键的区别；
+- **`AsyncFn` trait 族**：`AsyncFn`/`AsyncFnMut`/`AsyncFnOnce` 对应 `Fn` 三族——每次调用返回一个新 Future，其生命周期可借用闭包环境（这是旧 workaround `Fn() -> impl Future` 做不到的「lending」能力）；
+- **生命周期边界**：返回的 Future 借用 `&self` 时，Future 不能比闭包活得更久——跨 spawn 使用时需要 `move` + 拥有所有权。
+
+判定准则：需要「异步回调」签名（如 `where F: AsyncFn(&Req) -> Resp`）时用 async 闭包；仅需一次性异步逻辑时用 `async { ... }` 块更简单。
 
 ### 2.1 基础语法
 
@@ -235,7 +241,14 @@ pub trait AsyncFnOnce<Args> {
 
 ## 4. 实际应用模式
 
-本节将「实际应用模式」分解为若干主题：事件处理器、中间件链、并行处理：Tokio JoinSet与框架实战：Axum 处理函数。
+async 闭包解锁了四类此前需要 workaround 的模式：
+
+1. **异步高阶函数**：`retry(f: impl AsyncFn() -> Result<T, E>)`——旧代码只能接受 `Fn() -> Fut`，且 `Fut` 类型参数污染签名并阻止借用；
+2. **异步迭代适配**：`stream::iter(v).then(async |x| fetch(x).await)`——`then` 的闭包现在可直接 async，无需 `|x| async move { ... }` 包装与 move 语义手工管理；
+3. **回调式 API 的异步化**：事件处理器注册 `impl AsyncFn(Event)`——`AsyncFnMut` 允许处理器维护可变状态（如计数器）而无需 `RefCell`；
+4. **结构化并发的任务工厂**：`spawn_n(factory: impl AsyncFn(u32))` 为每个 worker 生成独立 Future。
+
+迁移判定：现有 `Fn() -> impl Future` 签名在需要「借用闭包环境的 Future」时迁移到 `AsyncFn`；简单场景保持原样——新特性不是重写理由。
 
 ### 4.1 事件处理器
 
@@ -354,7 +367,14 @@ async fn main() {
 
 ## 5. 限制与边界
 
-本节从不是 dyn-compatible、Send 约束与 RTN、递归调用、与 `tokio::spawn` 的生命周期冲突等5个方面切入，剖析「限制与边界」的核心内容。
+async 闭包的当前边界（1.85–1.97）：
+
+- **`dyn` 不可用**：`AsyncFn` 返回的 Future 是关联类型，`Box<dyn AsyncFn()>` 不是合法类型——动态分发需手写 `Box<dyn Fn() -> Pin<Box<dyn Future>>>` 双层包装，与 `async_trait` 的处境相同；
+- **生命周期推断更复杂**：返回 Future 的借用关系使「闭包比 Future 活得短」类错误（E0597 变体）成为新高频错误——`move` 闭包 + 所有权转移是标准修复；
+- **trait 求解边界**：`AsyncFn` 的精确签名（含生命周期）在复杂泛型约束中可能触发「higher-ranked 生命周期」限制，需要 `for<'a>` 显式标注；
+- **与 `Send` 的组合**：`AsyncFn + Send` 约束同时约束闭包与返回的 Future——`spawn` 场景需双重验证。
+
+判定准则：遇到「async 闭包签名写不出」时先降到 `Fn() -> impl Future + Send` 显式形态验证逻辑，再尝试升级。
 
 ### 5.1 不是 dyn-compatible
 

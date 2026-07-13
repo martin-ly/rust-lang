@@ -263,7 +263,13 @@ impl<'a, T> LendingIterator for MutWindows<'a, T> {
 
 ## 二、技术细节
 
-本节将「技术细节」分解为若干主题：关联类型 vs 泛型参数、负 Trait 实现与Trait 别名。
+本节展开高级 trait 机制的三个技术要点：
+
+- **关联类型 vs 泛型参数**：`trait Iterator { type Item; }` 与 `trait Iterator<T>` 的选择准则是「同一类型对同一 trait 是否应有多重实现」——关联类型强制唯一（一个类型只有一种迭代产出），泛型参数允许多重（`From<u8>`、`From<u16>` 可共存）；
+- **默认类型参数**：`trait Add<Rhs = Self>`——减少常见情况的标注噪音，同时保留扩展点（`impl Add<u64> for u32`）；运算符 trait 大量使用此模式；
+- **完全限定语法**：`<T as Trait>::method()` 在多个 trait 提供同名方法时消歧——`Type::method` 的解析顺序是「固有方法 > trait 方法（按导入可见性）」，歧义时必须完全限定；这也是调用「未导入 trait 的方法」失败（E0599）时的诊断方向。
+
+进阶补充：GAT（`type Item<'a> where Self: 'a;`）使关联类型可带生命周期——lending iterator 等模式由此解锁，是 1.65 后 trait 设计的新自由度。
 
 ### 2.1 关联类型 vs 泛型参数
 >
@@ -412,7 +418,12 @@ pub trait Service = Fn(Request) -> Response + Send + Sync + 'static;
 
 ## 四、反命题与边界分析
 
-本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+本节检验高级 trait 的两条常见误判：
+
+- **反命题 1：「关联类型总是优于泛型参数」** —— 过度。关联类型强制「每类型唯一实现」，这在需要多实现时成为枷锁——`From<T>` 若用关联类型就不可能（`String` 需要 `From<&str>`、`From<char>` 等多实现）。判定准则：实现唯一性是否是**语义要求**（Iterator 的 Item 是）——是则关联类型，否则泛型参数。
+- **反命题 2：「`dyn Trait` 与泛型可以混用无代价」** —— 不准确。trait 对象要求对象安全（无泛型方法、无 `Self` 返回、无关联常量之外的常量），带 GAT 或泛型方法的 trait 无法 `dyn` 化——设计 trait 时要提前决定「静态分发专用」还是「需要 trait 对象」，后者牺牲表达能力。
+
+边界极限小节量化：trait 向上转型（`dyn SubTrait` → `dyn SuperTrait`，1.86 起稳定）、特化（specialization，nightly 的健全性争议）、以及 trait 一致性检查在复杂约束下的拒绝案例。
 
 ### 4.1 反命题树
 >
@@ -733,7 +744,13 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节从测验 1：关联类型 vs 泛型参数（理解层）、测验 2：GAT（泛型关联类型）（应用层）、测验 3：Trait Alias（应用层）、测验 4：Orphan Rule（分析层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
+本节测验覆盖高级 trait 的三个核心判别点：
+
+- **理解层**：关联类型与泛型参数的实现唯一性差异——给定需求（如「为类型添加多种转换」）判断应选哪种声明形式；
+- **应用层**：完全限定语法的消歧——给定多 trait 同名方法冲突的代码，写出 `<T as TraitA>::method(&t)` 形式的修复；
+- **分析层**：对象安全判定——给定 trait 定义逐条检查对象安全规则（方法泛型、`Self` 返回、`Self: Sized` 豁免），判断能否 `dyn` 化并给出重构方案。
+
+作答建议：测验 3 对照 [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety) 的规则表逐条验证，这是 trait 设计中最值得精通的清单。
 
 ### 测验 1：关联类型 vs 泛型参数（理解层）
 

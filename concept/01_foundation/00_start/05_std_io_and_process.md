@@ -140,7 +140,13 @@ mindmap
 
 ## 三、技术细节与示例
 
-本节围绕「技术细节与示例」展开，依次讨论标准输入输出、文件读写、路径处理、子进程等5个方面。
+本节展开标准 IO 与进程控制的三个技术要点：
+
+- **标准流的锁与缓冲**：`println!` 内部对 stdout 加行缓冲锁——高频打印应改用 `io::stdout().lock()` + `BufWriter` 批量输出，避免每行一次锁竞争与 flush；`stdin().lock().lines()` 逐行读取注意 UTF-8 校验失败会以 `Err` 形式出现；
+- **`std::process::Command` 的输出处理**：`output()` 捕获全部输出（内存上限风险）、`spawn()` + `piped` 流式处理（需同时消费 stdout/stderr 否则管道写满死锁）、`status()` 只等退出码；
+- **退出码与信号**：Unix 上子进程被信号杀死时 `ExitStatus::code()` 为 `None`，需 `ExitStatusExt::signal()` 区分——跨平台代码应同时处理两种情况。
+
+每个要点附最小示例，可直接复制到 playground 验证。
 
 ### 3.1 标准输入输出
 
@@ -301,7 +307,12 @@ fn main() {
 
 ## 五、反命题与边界分析
 
-本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
+本节检验 IO/进程处理的两条常见误判：
+
+- **反命题 1：「`println!` 失败可以忽略」** —— 部分成立但要知道代价：`println!` 在写失败时 panic（如管道对端关闭触发 SIGPIPE 的默认处理），服务器程序中应改用 `writeln!(io::stderr(), ...)` 并处理 `Result`，或对 stdout 设置 `panic = "abort"` 之外的策略。
+- **反命题 2：「`Command::output` 总是安全等待子进程」** —— 不准确：输出超过管道缓冲区（通常 64KB）时若不及时读取会死锁——`output()` 内部已并发读取两路输出，但手动 `spawn` + `wait` 而不读管道是经典死锁配方。
+
+边界极限小节量化：`stdin` 读取的阻塞语义、进程组的信号传播、以及 Windows/Unix 的 `Command` 参数转义差异（`arg` 不经过 shell 是安全的，字符串拼接命令才是注入风险）。
 
 ### 5.1 反命题树
 
@@ -419,7 +430,13 @@ graph TD
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节从测验 1：路径拼接 与 测验 2：I/O 错误处理 两个层面剖析「嵌入式测验（Embedded Quiz）」。
+本节测验覆盖 IO 与进程的三个核心判别点：
+
+- **理解层**：`Read`/`BufRead`/`Write` trait 的职责划分——为什么 `BufReader` 把 1 字节 `read` 调用优化成块读取；
+- **应用层**：`Command` 输出处理的死锁场景判定——给定管道使用代码判断是否会挂起；
+- **分析层**：`?` 与 `io::Error` 的传播——`io::ErrorKind` 分类（`NotFound`/`PermissionDenied`/`Interrupted`）在错误恢复中的用法，`Interrupted` 需重试是 Unix 信号语义的直接反映。
+
+作答建议：测验前先写出每个 API 的错误返回类型，IO 代码的健壮性几乎全部体现在错误路径处理上。
 
 ### 测验 1：路径拼接
 

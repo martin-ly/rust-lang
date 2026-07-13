@@ -101,7 +101,13 @@ mindmap
 
 ## 一、核心概念
 
-本节围绕「核心概念」展开，依次讨论 Panic 的语义、Panic vs Result与Panic 传播与栈展开。
+panic 与 abort 是 Rust 处理**不可恢复错误**的两种终止策略，选择它们即是选择故障语义：
+
+- **panic（默认 unwind）**：展开当前线程栈，逐帧运行 `Drop`——资源正常释放，panic 可被 `catch_unwind` 捕获（线程边界天然隔离 panic：子线程 panic 不杀主线程）；
+- **abort（`panic = "abort"`）**：立即终止整个进程，**不运行任何 Drop**——二进制更小、panic 更快，代价是资源泄漏（文件句柄、临时文件）与不可捕获；
+- **`panic = "unwind"` vs `panic = "abort"` 的选型**：嵌入式/内核/FFI 边界库常用 abort；需要故障隔离（每个请求一个线程/任务）的服务器必须 unwind。
+
+核心判定：panic 是「当前线程的失败信号」，abort 是「整个进程的自毁」——库代码永远不应替用户做此选择（库的 `Cargo.toml` 设置 panic 策略无效，只有最终二进制有效）。
 
 ### 1.1 Panic 的语义
 
@@ -405,7 +411,12 @@ fn configure_panic() {
 
 ## 四、反命题与边界分析
 
-本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+本节检验 panic 机制的两条常见误判：
+
+- **反命题 1：「`catch_unwind` 可以当作异常使用」** —— 危险。`catch_unwind` 的设计目的是**故障隔离边界**（FFI、线程池任务），不是控制流：① 要求闭包 `UnwindSafe`（跨 panic 边界的可变引用可能观察到不一致状态）；② `panic = "abort"` 下直接失效；③ panic hook 仍会触发（默认打印）。用它实现正常错误路径会掩盖 bug 且不可移植。
+- **反命题 2：「panic 总是安全的」** —— 需要限定：panic 本身是内存安全的（Drop 正常执行、无 UB），但**逻辑安全**需程序员保证——panic 发生在不变量修复中途（如 `HashMap` 插入中 panic）可能留下逻辑不一致的状态，后续代码依赖该状态时行为未定义（Rust 称之为「逻辑内存安全但语义损坏」）。
+
+边界极限小节量化：`panic!` 的 payload 类型（`&str`/`String`/任意 `Any`）、自定义 panic hook、以及 FFI 边界的 `extern "C-unwind"` 语义。
 
 ### 4.1 反命题树
 >
@@ -831,7 +842,13 @@ fn compute_expensive_string() -> String { String::from("expensive") }
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Panic vs Result（理解层）、测验 2：panic=unwind vs panic=abort（应用…、测验 3：catch_unwind 的边界（应用层）、测验 4：Drop 中 panic 的危险性（分析层）等5个方面。
+本节测验覆盖 panic/abort 的三个核心判别点：
+
+- **理解层**：unwind 与 abort 的行为差异——给定代码判断 Drop 是否运行、进程是否存活；
+- **应用层**：`catch_unwind` 的正确使用场景——FFI 边界保护、测试框架的断言捕获、线程池任务隔离三类合法用法；
+- **分析层**：`UnwindSafe` 约束的推导——为什么 `&mut T` 默认非 `UnwindSafe`（panic 中途可能观察到被破坏的不变量），以及 `AssertUnwindSafe` 的「我负责」语义。
+
+作答建议：测验前先回答「我的二进制 panic 策略是谁决定的」（答案：最终二进制 crate，库的 panic 设置被忽略），这是 panic 机制最常见的认知盲点。
 
 ### 测验 1：Panic vs Result（理解层）
 

@@ -50,7 +50,13 @@
 
 ## 二、版本兼容性
 
-本节从 MSRV 管理、Edition 兼容与核心依赖固定切入，剖析「版本兼容性」的核心内容。
+过程宏 crate 的版本兼容有三条独立轴，生产级开发必须分别管理：
+
+1. **syn 主版本轴**：syn 1.x 与 2.x API 不兼容（`Meta` 匹配 → `parse_nested_meta` 回调）——宏生态的依赖树中 syn 版本分裂会导致编译时间倍增（两份 syn 编译），升级策略是跟随生态主流窗口批量升级；
+2. **rustc 最低版本（MSRV）轴**：过程宏在**编译期运行**，其 MSRV 受 `proc_macro` API 演进约束（如 `Span::source_text` 需要特定版本）——`Cargo.toml` 声明 `rust-version` 并在 CI 测试 MSRV 工具链；
+3. **生成代码的兼容性轴**：宏展开结果在用户 crate 中编译——生成代码用到的语法/feature 不能超过用户 MSRV（如生成 `let else` 要求用户 1.65+），文档必须声明「生成代码 MSRV」。
+
+判定准则：三条轴在 README 与 CHANGELOG 中分别记录——宏 crate 的破坏性变更 = 任一轴的不兼容变更。
 
 ### 2.1 MSRV 管理
 
@@ -98,7 +104,14 @@ proc-macro2 = "1.0"
 
 ## 三、错误诊断最佳实践
 
-理解「错误诊断最佳实践」需要把握保留原始 Span、提供上下文和帮助与多错误聚合，本节依次展开。
+过程宏的用户体验 90% 由错误诊断质量决定，生产级标准四条：
+
+1. **永不 panic**：宏 panic 只显示 `proc macro panicked` 无位置信息——所有错误用 `syn::Error` + `to_compile_error()` 转为编译错误返回；
+2. **错误绑定 span**：`syn::Error::new_spanned(tokens, msg)` 把错误钉在用户的具体 token 上，而非宏调用整体——多 span 错误用 `combine` 累积后一次性报告；
+3. **错误信息可行动**：说明「期望什么、收到什么、如何修复」——如「expected `#[derive(MyTrait)]` on struct, found enum; use `#[my_trait(allow_enum)]` to opt in」；
+4. **对抗性测试**：`trybuild` crate 编译 `tests/ui/*.rs` 失败用例并比对 `.stderr` 快照——错误信息回归测试是宏 crate 的标配 CI 环节。
+
+进阶：`proc_macro_error2` 提供 `proc_macro_error` 属性式错误流（`abort!`/`emit_error!`），本库 vendor 目录维护了其本地修复版。
 
 ### 3.1 保留原始 Span
 
@@ -154,7 +167,14 @@ match validate_all(&input) {
 
 ## 四、文档生成
 
-「文档生成」涉及完整示例、隐藏实现细节与Doc Tests，本节逐一说明其要点。
+宏的文档有其特殊性——用户消费的是「展开后的行为」，不是函数签名：
+
+- **文档注释即用户手册**：`///` 写在宏项上（`#[proc_macro]`/`#[proc_macro_derive]`/`#[proc_macro_attribute]`），docs.rs 会渲染——必须包含：功能一句话、完整调用示例、生成代码的示意（`cargo expand` 输出节选）、属性参数表；
+- **文档测试的限制**：`#[proc_macro]` crate 自身不能 `use` 自己（过程宏只能在其他 crate 使用）——文档测试需放在独立示例 crate 或用 `ignore` 标注 + CI 中单独验证；
+- **展开示例维护**：生成的代码示意与真实 `cargo expand` 输出会漂移——用 CI 步骤（`cargo expand | diff` 或 insta 快照）保证同步；
+- **错误目录**：为每个 `syn::Error` 消息写一节「触发条件 + 修复示例」——serde 的 errors 文档是行业标杆。
+
+判定准则：用户只读文档就能正确使用并诊断全部错误——达不到则文档不完整。
 
 ### 4.1 完整示例
 
@@ -209,7 +229,14 @@ pub fn derive_builder(input: TokenStream) -> TokenStream { /* ... */ }
 
 ## 五、发布策略
 
-「发布策略」部分按语义化版本、预发布版本、Breaking Changes 处理与CI/CD 发布流程的顺序逐层展开。
+过程宏 crate 的发布比库 crate 多两个约束，发布清单如下：
+
+1. **版本同步策略**：主 crate 与宏 crate 分离时（如 `serde`/`serde_derive`），采用「同版本号同步发布」或「宏内嵌主 crate 路径（`$crate` 等价物：`proc_macro_crate` 探测重命名）」——用户 `rename` 依赖（`serde2 = { package = "serde" }`）时宏必须仍能定位主 crate；
+2. **发布前检查**：`cargo publish --dry-run`、MSRV 工具链编译、`cargo semver-checks` 比对 API 兼容性、docs.rs 构建特性组合（`package.metadata.docs.rs` 声明 `all-features`）；
+3. **破坏性变更管理**：宏的破坏性变更包括「生成代码行为变更」——即使 API 签名不变；此类变更需主版本号 + 迁移指南；
+4. **yank 与修复窗口**：发布后 72 小时是问题高发期，准备好 yank 决策树（影响面 × 修复 ETA）。
+
+判定准则：发布清单进 CI/release 文档，人工发布步骤不超过 3 步（`cargo release` 类工具可自动化）。
 
 ### 5.1 语义化版本
 
@@ -263,7 +290,14 @@ jobs:
 
 ## 六、维护策略
 
-本节围绕「维护策略」展开，依次讨论安全审计、依赖更新节奏与长期支持承诺。
+宏 crate 的长期维护聚焦四个可持续性问题：
+
+- **rustc 演进跟踪**：nightly 上跑 CI（`cargo +nightly test`）提前发现 `proc_macro` API 变化与内部不稳定行为——宏依赖的编译器内部行为越少越好（只用 `proc_macro` 稳定 API + syn 解析）；
+- **syn 升级周期**：跟随 syn 主版本升级的节奏是「生态主流迁移后 1–2 个版本内」——过早承担兼容性风险，过晚让用户编译两份 syn；
+- **issue 分诊模板**：宏 bug 报告必须附「输入代码 + 期望展开 + 实际错误」——`cargo expand` 输出与 `RUSTFLAGS="--pretty=expanded"` 是分诊第一要求；
+- **社区与治理**：README 声明维护状态（active/maintenance/looking-for-maintainer），宏 crate 停更但生成代码仍可用是其特殊优势——语义版本纪律比功能更新更重要。
+
+判定准则：维护负担主要来自「rustc 变化 × syn 升级 × 用户多样性」三角——每一项都有对应的 CI 信号，让机器先报警。
 
 ### 6.1 安全审计
 

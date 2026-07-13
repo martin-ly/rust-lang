@@ -90,7 +90,13 @@
 
 ## 一、权威定义与核心概念
 
-本节围绕「权威定义与核心概念」展开，依次讨论异步网络 IO 模型、Tokio Runtime 架构、TCP vs UDP 语义差异与Tower Service 抽象。
+Rust 网络编程建立在三个核心抽象之上，本节目的定义其语义边界：
+
+- **`TcpStream`/`TcpListener`**：阻塞式 TCP 的字节流抽象——`Read`/`Write` trait 实现使其与文件、管道共享同一套 IO 组合子；`set_nodelay`（禁用 Nagle）、`set_ttl`、`shutdown` 是流控制的标准旋钮；
+- **`UdpSocket`**：无连接数据报抽象——`send_to`/`recv_from` 保留消息边界（与 TCP 流的根本差异），单 socket 可 `connect` 绑定默认对端；
+- **`SocketAddr` 与解析**：`ToSocketAddrs` trait 统一「字符串/元组/迭代器」形式的地址输入，DNS 解析是**阻塞系统调用**——异步代码中必须用 `tokio::net::lookup_host` 而非 std 版本。
+
+权威参考：[std::net 文档](https://doc.rust-lang.org/std/net/index.html)、[Beej's Guide to Network Programming](https://beej.us/guide/bgnet/)（socket 概念的语言无关经典）。
 
 ### 1.1 异步网络 IO 模型
 >
@@ -340,7 +346,14 @@ Tower 核心抽象:
 
 ## 二、技术细节
 
-「技术细节」涉及 Tokio TCP 服务端实现、Tokio UDP 编程模型、Socket 选项与调优与Tower 中间件栈，本节逐一说明其要点。
+本节展开网络编程的四个技术要点：
+
+- **IO 错误的分类处理**：`io::ErrorKind::WouldBlock`（非阻塞 socket 无数据）、`ConnectionReset`/`BrokenPipe`（对端关闭）、`TimedOut`（`set_read_timeout` 触发）——健壮的网络代码对每种 kind 有明确策略而非统一 `?`；
+- **读写的部分性**：`read`/`write` 返回的字节数可少于缓冲区——`read_exact`/`write_all` 才保证完整语义；TCP 无消息边界，应用层协议需自带 framing（长度前缀/分隔符）；
+- **地址族与双栈**：`Ipv6Addr` 的 IPv4-mapped 地址（`::ffff:1.2.3.4`）使单 socket 服务双栈成为可能——`TcpListener::bind("[::]:0")` 的行为依平台（Linux `IPV6_V6ONLY` 默认 off）；
+- **缓冲区与背压**：OS 发送/接收缓冲区满时 `write` 阻塞（同步）或 `WouldBlock`（非阻塞）——应用层背压必须在协议设计层考虑，socket 层只提供最后一道闸门。
+
+每个要点附最小可运行示例，建议用 `nc`/`socat` 对端验证。
 
 ### 2.1 Tokio TCP 服务端实现
 >
@@ -615,7 +628,12 @@ graph LR
 
 ## 五、反命题与边界分析
 
-本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+本节检验网络编程的两条常见误判：
+
+- **反命题 1：「TCP 的 `send` 成功 = 对方收到」** —— 错误。`write` 返回成功只表示数据进入**本地**发送缓冲区；对方崩溃、中间网络中断都不可见——需要应用层确认（ACK 消息）或依赖 `TCP_USER_TIMEOUT` 类机制。这是「TCP 是可靠传输」这一说法的经典误读：可靠性是「最终通知失败」，不是「即时确认成功」。
+- **反命题 2：「非阻塞 IO 一定比多线程快」** —— 有边界。连接数少（<1000）且计算密集时，线程池更简单且性能相当；非阻塞的优势在 C10K+ 连接场景（每连接一线程的内存/切换成本崩溃）。判定准则：连接数 × 每连接状态内存 vs 线程栈成本（默认 2MB）——这是可计算的分界线。
+
+边界极限小节量化：TIME_WAIT 与 `SO_REUSEADDR` 的语义差异（Linux/Windows 行为不同）、`listen` backlog 的溢出行为、以及 UDP 的 MTU 分片陷阱。
 
 ### 5.1 反命题树
 

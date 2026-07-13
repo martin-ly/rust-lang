@@ -111,7 +111,13 @@ write!  (destination, "format_string", args...)
 
 ## 三、技术细节与示例
 
-「技术细节与示例」部分按 `Display` 与 `Debug`、`format!` 与参数顺序、格式说明符与自定义格式化 trait的顺序逐层展开。
+本节展开格式化系统的三个技术要点：
+
+- **格式化 trait 的分工**：`Display`（面向用户的输出）、`Debug`（面向开发者，`{:?}`）、`LowerHex`/`Octal`/`Binary`/`Pointer` 等数值格式——`Display` 需手写或借助 `thiserror` 等，不可派生；
+- **格式参数的完整语法**：`{val:>width$.precision$}`——对齐（`<`/`^`/`>`）、填充、宽度、精度、符号（`+`）、进制（`x`/`o`/`b`/`e`）与命名参数（`{name}`，1.58+ 支持 `{var}` 内联捕获）；
+- **`format!` 家族的成本模型**：`format!` 分配 `String`、`write!` 写入 `io::Write` 或 `fmt::Write` 不分配（可复用缓冲）、`format_args!` 构造惰性 `Arguments`——日志宏等高频路径应传 `format_args!` 避免无条件分配。
+
+每个要点附最小示例与输出对照，可直接运行验证。
 
 ### 3.1 `Display` 与 `Debug`
 
@@ -262,7 +268,12 @@ fn main() {
 
 ## 五、反命题与边界分析
 
-本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+本节检验格式化系统的两条常见误判：
+
+- **反命题 1：「`Display` 和 `Debug` 差不多，随便用一个」** —— 错误。`Debug` 承诺「面向程序员的忠实表示」（字符串带引号、结构带字段名），`Display` 承诺「面向用户的友好表示」。用 `{:?}` 输出用户可见文本会泄漏实现细节（字段名、内部结构），是 CLI 工具的常见瑕疵。判定准则：库类型必须实现 `Debug`（可派生），`Display` 只在类型有自然用户表示时实现。
+- **反命题 2：「`to_string()` 总是便宜的」** —— 不准确：`ToString` 为所有 `Display` 类型 blanket 实现，每次调用都分配新 `String`——热路径应改用 `write!(&mut buf, ...)` 复用缓冲，或直接用 `Display` 包装延迟格式化。
+
+边界极限小节量化：`format!` 参数的求值次数（每个参数只求值一次，与 C `printf` 不同）、`fmt::Error` 的语义（只表示底层 writer 失败）、以及 `{:*>8}` 类填充的字符级（非字节级）宽度计算。
 
 ### 5.1 反命题树
 
@@ -365,7 +376,13 @@ graph TD
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节围绕「嵌入式测验（Embedded Quiz）」展开，覆盖测验 1：Display vs Debug 与 测验 2：格式化说明符 两个方面。
+本节测验覆盖格式化系统的三个核心判别点：
+
+- **理解层**：`Display`/`Debug`/`ToString` 的 trait 关系——为什么实现 `Display` 就自动获得 `ToString`（blanket impl）而反过来不行；
+- **应用层**：格式串参数语法——给定目标输出写出对应的格式说明符（对齐、宽度、精度、进制组合）；
+- **分析层**：`format!` 与 `write!` 的分配行为——判断给定代码产生几次堆分配，以及 `fmt::Write` 与 `io::Write` 两套 write! 的目标差异（UTF-8 保证 vs 字节流）。
+
+作答建议：测验 2 在 playground 实际运行格式串验证，宽度/精度参数的交互（如 `{:8.3}` 对字符串的截断行为）实测一次胜过读三遍文档。
 
 ### 测验 1：Display vs Debug
 

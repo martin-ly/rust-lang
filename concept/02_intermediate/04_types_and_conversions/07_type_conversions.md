@@ -115,7 +115,14 @@ Trait 转换:
 
 ## 三、技术细节与示例
 
-本节将「技术细节与示例」分解为若干主题：隐式强制（Coercion）、显式转换（Cast）、`From` / `Into`、`TryFrom` / `TryInto`等5个方面。
+本节系统展开 Rust 类型转换的 trait 家族及其分工：
+
+- **`From`/`Into`**：无损转换，实现 `From` 自动获得 `Into`（blanket impl）——`String::from(&str)`、`u32::from(u8)`。`From` 实现即「类型间存在典范映射」的声明；
+- **`TryFrom`/`TryInto`**：有损但可校验的转换，返回 `Result`——`u8::try_from(i32)`、`usize::try_from(u64)`。1.34 起 std 为所有「可能失败」的整数转换提供实现；
+- **`AsRef`/`AsMut`**：廉价引用转换（`String: AsRef<str>`），用于泛型 API 接受「任何可视为 str 的类型」；
+- **`Deref`/`DerefMut`**：智能指针的解引用协议，支撑 deref coercion——只应为「指针-like」类型实现，滥用作继承模拟是反模式。
+
+判定准则：转换方向无损 → `From`；可能失败 → `TryFrom`；只是「可视为」→ `AsRef`；`as` 仅用于数值与指针的底层转换。
 
 ### 3.1 隐式强制（Coercion）
 
@@ -285,7 +292,12 @@ fn main() {}
 
 ## 五、反命题与边界分析
 
-本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+本节检验类型转换的两条常见误判：
+
+- **反命题 1：「实现了 `From` 就该实现 `Into`」** —— 错误且冗余：`Into` 有 blanket impl 自动派生自 `From`，手写 `Into` 会与 blanket impl 冲突（E0119）。正确做法永远只实现 `From`/`TryFrom`。
+- **反命题 2：「`as` 与 `From` 等价只是更简洁」** —— 危险。`as` 可静默截断（`256u16 as u8 == 0`）、可饱和浮点（`f64::MAX as u64`）、可重解释位模式——而 `From` 被类型系统限制为只存在于**无损**方向。代码审查中每个 `as` 都应能回答「为什么这里截断/饱和是可接受的」。
+
+边界极限小节量化：反射式转换的不存在（Rust 无运行时类型查询，`Any` 只支持相等判定）、`Into` 在泛型约束中的 ergonomics（`impl Into<String>` 接受 `&str` 与 `String`）、以及孤儿规则对跨 crate 转换实现的限制。
 
 ### 5.1 反命题树
 
@@ -400,7 +412,13 @@ graph TD
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节围绕「嵌入式测验（Embedded Quiz）」展开，覆盖测验 1：转换方式选择 与 测验 2：孤儿规则 两个方面。
+本节测验覆盖类型转换的三个核心判别点：
+
+- **理解层**：`From`/`Into`/`TryFrom`/`AsRef` 的分工——给定转换需求选择正确的 trait；
+- **应用层**：`impl Into<T>` 参数的 API 设计——为什么 `fn new(name: impl Into<String>)` 比 `fn new(name: String)` 更符合人体工学，以及它对单态化的影响；
+- **分析层**：`as` 转换的语义表——整数截断、浮点饱和、指针 provenance 三类 `as` 行为的准确记忆。
+
+作答建议：测验 3 的每个 `as` 行为先用小程序实测（如 `(-1i8) as u8`、`1e300 as u8`），实测结果往往与直觉相悖——这正是本测验的价值。
 
 ### 测验 1：转换方式选择
 

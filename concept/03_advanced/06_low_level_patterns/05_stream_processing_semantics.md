@@ -213,7 +213,14 @@ Session  [0,3)     [6,9)          [14,18)
 
 ## 四、Watermark：事件时间进度的推断机制
 
-本节从 Watermark 的形式化定义 与  Watermark 的两种失败模式 两个层面剖析「Watermark：事件时间进度的推断机制」。
+Watermark 是流处理中「事件时间」与「处理时间」之间的桥梁：**对「事件时间已推进到 t」的单调推断**。形式化定义（4.1）：watermark W(t) 是一个承诺——此后到达的事件时间戳都 ≥ t，窗口可以在 t 越过上界时触发计算。
+
+两种失败模式（4.2）揭示了 watermark 的工程本质：
+
+- **过慢（too slow）**：watermark 过于保守，窗口触发延迟，下游延迟升高、状态膨胀；
+- **过快（too fast）**：watermark 过于激进，迟到数据（late data）错过窗口——需要允许迟到（allowed lateness）、侧输出（side output）或修正（retraction）机制补偿。
+
+Watermark 无法同时最优——它是「延迟 vs 正确性」的显式旋钮。Rust 流处理生态（`timely-dataflow`、Arroyo）把 watermark 传播建模为数据流图上的 frontier 推进，见后续 Timely 小节。
 
 ### 4.1 Watermark 的形式化定义
 
@@ -347,7 +354,13 @@ Checkpoint-1 完成（一致性全局快照）
 
 ## 七、状态管理：Operator State vs Keyed State
 
-「状态管理：Operator State vs Keyed…」部分包含状态类型 与 状态后端 两条主线，本节依次说明。
+有状态流处理的正确性取决于状态的两条轴：**作用域**与**容错**。本节按此展开：
+
+- **Operator State（算子状态）**：绑定到算子并行实例，与 key 无关——典型如 Kafka source 的 offset 记录、sink 的缓冲。扩缩容时需重新分片（repartition）或广播；
+- **Keyed State（键控状态）**：绑定到 key，框架按 key 分组保证同一 key 总路由到同一实例——`ValueState`/`ListState`/`MapState` 等原语，扩缩容时按 key-group 迁移；
+- **状态后端（7.2）**：内存（快但受限于 RAM）、RocksDB（溢出到磁盘，支持增量 checkpoint）——选型判定是「状态大小 vs 访问延迟」。
+
+与容错的关系：Chandy-Lamport 快照（见 6.2）对两种状态的捕获成本不同——keyed state 可增量快照，operator state 通常需全量。
 
 ### 7.1 状态类型
 
@@ -420,7 +433,13 @@ tx.send(42).await?;
 
 ## 九、增量计算：Differential Dataflow 的 diff 代数
 
-理解「增量计算：Differential Dataflow 的…」需要把握核心抽象：Collection = Stream of Diffs、增量运算符的语义与Timely Dataflow：时间感知的计算图，本节依次展开。
+Differential Dataflow 的核心思想（9.1）：**集合 = 变化的流**——一个 collection 不是静态数据，而是 `(record, time, diff)` 三元组的流，diff ∈ ℤ 表示插入（+1）或删除（-1）。这把「视图维护」统一为「diff 的传播」：
+
+- **增量运算符（9.2）**：每个数据流算子（map/filter/join/reduce）都有 diff 版本的语义——`join` 的增量形式是「新左 × 旧右 ∪ 旧左 × 新右 ∪ 新左 × 新右」，只需处理变化部分；
+- **Timely Dataflow（9.3）**：底层执行模型，用「逻辑时间戳 + frontier」追踪计算进度，支持迭代（嵌套时间戳）——这是它能表达增量 PageRank 等循环计算的原因；
+- **工程意义**：查询结果随输入增量更新，延迟从「批处理周期」降到「单事件传播」——Materialize 正是此模型的产品化。
+
+与 Rust 的关系：整个 timely/differential 栈用 Rust 实现，所有权模型使 diff 的内存管理（频繁小对象创建/回收）无 GC 停顿。
 
 ### 9.1 核心抽象：Collection = Stream of Diffs
 
@@ -475,7 +494,12 @@ Timely Dataflow（TD）是 DD 的底层执行引擎，核心创新是**时间戳
 
 ## 十、物化视图与 CDC：流式 SQL 的语义
 
-「物化视图与 CDC：流式 SQL 的语义」部分包含从批处理 SQL 到流式 SQL 与  CDC（Change Data Capture） 两条主线，本节依次说明。
+流式 SQL 把批处理语义提升到无界数据上，两个支柱：
+
+- **从批处理 SQL 到流式 SQL（10.1）**：关键推广是「每个关系都是时变关系」——`SELECT` 的结果本身也是流；窗口函数（tumble/hop/session）是唯一需要显式时间语义的构造；物化视图（materialized view）= 持续维护的查询结果，增量计算使其可行；
+- **CDC（Change Data Capture，10.2）**：数据库变更日志（WAL/binlog）作为流源——Debezium 把 MySQL/Postgres 的变更转为 append-only 事件流，使「数据库 = 流的重放」这一等式落地。
+
+语义陷阱：upsert 流 vs append-only 流的区别决定算子语义（retraction 支持）；exactly-once 在 CDC 链路中要求「源快照 + 位点 + sink 幂等」三者闭环。本节的边界测试给出各陷阱的最小复现。
 
 ### 10.1 从批处理 SQL 到流式 SQL
 
@@ -540,7 +564,14 @@ GROUP BY region;
 
 ## 十二、反例与边界测试
 
-本节围绕「反例与边界测试」展开，依次讨论边界测试：无 Watermark 的流处理（伪代码）、边界测试：共享状态管理器的并发访问（编译错误）、边界测试：Exactly-Once 的 Sink 陷阱与边界测试：背压与死锁。
+本节的反例覆盖流处理语义的四类经典故障：
+
+- **无 watermark 的窗口**：事件时间窗口永远不触发（处理时间无限等待乱序）——症状是下游无输出且状态无限增长；
+- **共享状态管理器的并发访问**：多任务直接共享状态句柄绕过框架——Rust 中以编译错误形式暴露（`!Sync`），对应 Java 生态的运行时竞态；
+- **exactly-once 的 sink 陷阱**：sink 不具备幂等或事务能力时，「恰好一次」退化为「至少一次」——判定准则是「重放同一批输出，外部系统是否观察到重复」；
+- **背压与死锁**：环形数据流 + 全有界通道 = 潜在死锁——至少一条边需无界或带丢弃策略。
+
+每个反例附最小复现（伪代码或 Rust 代码）与检测手段，是本节理论与工程实践的衔接点。
 
 ### 12.1 边界测试：无 Watermark 的流处理（伪代码）
 
@@ -658,7 +689,13 @@ async fn main() {
 
 ## 十、边界测试：流处理语义的编译错误
 
-理解「边界测试：流处理语义的编译错误」需要把握边界测试：Tokio Stream 与所有权冲突（编译错误）、边界测试：背压传播中的类型不匹配（编译错误）与边界测试：Stream 的 `fuse` 与重复 poll 后的行为（…，本节依次展开。
+本节用 Rust 特有的编译错误展示「流处理规则如何被类型系统编码」：
+
+- **Tokio Stream 与所有权冲突**：`stream::unfold` 的状态闭包按值捕获，试图共享可变状态触发 E0506/E0524——正确模式是 `Arc<Mutex<_>>` 或把状态内聚到 unfold 的 state 参数；
+- **背压传播中的类型不匹配**：`Stream`/`Sink` 组合时 item 类型链必须贯通——`map` 后的类型与下游 `sink` 的输入类型不符触发 E0271，错误信息中的 trait 求解链即数据流类型检查器；
+- **`fuse` 与重复 poll**：`Stream::next` 返回 `None` 后继续 poll 是未定义语义——`FusedStream` 用类型标记承诺耗尽后幂等，`select!` 宏内部依赖此承诺。
+
+判定方法：先预测每段的编译结果与错误码，再编译验证——流处理类型错误的信息量大，读懂一条胜过背十条规则。
 
 ### 10.1 边界测试：Tokio Stream 与所有权冲突（编译错误）
 

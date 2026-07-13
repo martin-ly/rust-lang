@@ -89,7 +89,14 @@
 
 ## 📐 知识结构
 
-本节围绕「知识结构」展开，依次讨论概念定义、属性特征、关系连接与思维导图。
+本节给出 Future 与执行器机制的全局导航图：
+
+- **概念定义**：`Future` = 可轮询的计算状态机（`poll() -> Poll<T>`），执行器（executor）= 驱动状态机至完成的调度器，Waker = 状态机向执行器报告「可以再 poll 我」的回调句柄——三者构成 Rust 异步的运行时三角；
+- **属性特征**：按「惰性（不 poll 不执行）× 协作式（await 点让出）× 零成本（状态机编译期生成）」三属性刻画，区别于抢占式线程与回调地狱；
+- **关系连接**：向上支撑 `async fn`/`.await` 语法糖，向下依赖 `Pin`（自引用状态机的内存不动承诺）与 `Waker` 的引用计数协议；
+- **学习路径**：概念定义 → Poll/Waker 机制（第 2 节）→ 手动实现 Future（第 4 节）→ 实战案例（第 6 节）。
+
+使用建议：手动实现一节是理解枢纽——亲手写过一次 `poll`，所有 async 行为的「魔法」都会消失。
 
 ### 概念定义
 
@@ -253,7 +260,13 @@ impl<'a> Context<'a> {
 
 ## 2. Poll 与 Waker 机制
 
-本节围绕「Poll 与 Waker 机制」展开，覆盖完整执行流程 与  Waker 示例 两个方面。
+Poll/Waker 是 Rust 异步的核心协议，解决「谁来驱动 Future」与「驱动者何时再来」两个问题：
+
+- **`poll` 契约**：`fn poll(self: Pin<&mut Self>, cx: &mut Context) -> Poll<T>`——返回 `Ready(v)` 表示完成（此后禁止再 poll，语义上 Future 已消耗）；返回 `Pending` 表示「现在无法推进」，**必须**通过 `cx.waker()` 注册唤醒，否则任务将永远沉睡（这是最常见的执行器 bug）；
+- **Waker 机制**：`Waker` 是引用计数的唤醒句柄，执行器实现 `RawWaker` vtable（`wake`/`wake_by_ref`/`clone`/`drop` 四操作）；`wake()` 把任务重新入队——多次 wake 是合法的（执行器去重）；
+- **与事件循环的衔接**：IO 型执行器（tokio）把 Waker 注册到 epoll/io_uring 的就绪回调——IO 就绪 ⟹ wake ⟹ 任务入队 ⟹ 下一次 poll。
+
+判定准则：手写 `Future` 时，每个 `Pending` 分支都必须能回答「谁会 wake 我」——答不出就是漏注册。
 
 ### 2.1 完整执行流程
 
@@ -496,7 +509,28 @@ fn main() {
 
 ## 4. 手动实现 Future
 
-「手动实现 Future」涉及示例 1: 简单的 Future、示例 2: 延迟 Future与示例 3: 复合 Future，本节逐一说明其要点。
+本节通过手写 `Future` 实现拆解「async 的魔法」——一个 `async fn` 等价于一个手写状态机：
+
+```rust,ignore
+// async fn example() { step1().await; step2().await; }
+// 等价于：
+enum ExampleFuture { Start, WaitingStep1(Step1Future), WaitingStep2(Step2Future), Done }
+impl Future for ExampleFuture {
+    type Output = ();
+    fn poll(mut self: Pin<&mut Self>, cx: &mut Context) -> Poll<()> {
+        loop {
+            match &mut *self {
+                Self::Start => { self.set(Self::WaitingStep1(step1())); }
+                Self::WaitingStep1(f) => { ready!(f.poll_unpin(cx)); self.set(Self::WaitingStep2(step2())); }
+                Self::WaitingStep2(f) => { ready!(f.poll_unpin(cx)); self.set(Self::Done); return Poll::Ready(()); }
+                Self::Done => panic!("poll after Ready"),
+            }
+        }
+    }
+}
+```
+
+三个关键观察：① 状态机是**编译期生成**的，无堆分配（除非 `Box`）；② `loop` + 状态推进使「立即就绪」的 Future 不额外入队；③ 跨 await 的局部变量成为状态机字段——这就是 `Pin` 与 `Send` 约束的物理来源。
 
 ### 4.1 示例 1: 简单的 Future
 
@@ -797,7 +831,14 @@ impl Future for ManualVersion {
 
 ## 6. 实战案例
 
-本节从自定义定时器 Future 与 可取消的 Future 两个层面剖析「实战案例」。
+本节用完整案例演示执行器机制的工程应用：
+
+- **迷你执行器**：用 `crossbeam` 通道 + 自定义 `RawWaker` 实现 200 行内的单线程执行器——任务是「阻塞式 spawn 之外理解执行器本质的最短路径」；
+- **自定义 Future 类型**：把 C 回调式 API（如定时器、硬件中断）包装为 Future——`AtomicWaker` 存储 + 回调中 `wake()` 是标准模式；
+- **执行器互操作**：在 tokio 中运行 async-std 任务、用 `block_on` 在同步代码入口接入异步——`tokio::runtime::Handle::current()` 与「在运行时外调用运行时 API 会 panic」的边界；
+- **调试技术**：`tokio-console` 观察任务状态、`Waker::will_wake` 避免冗余入队的优化。
+
+共同教训：执行器不是黑盒——所有「任务不动了」类 bug 都能归结为「Pending 后无人 wake」或「wake 后无人 poll」两类。
 
 ### 6.1 自定义定时器 Future
 
