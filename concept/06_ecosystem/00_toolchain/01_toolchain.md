@@ -1917,3 +1917,30 @@ fn main() {
     println!("{}", generator);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Toolchain 工具链与 Cargo))
+    概念属性矩阵
+      核心工具矩阵
+      Cargo toml vs
+      Clippy Lint 分类矩阵
+    Cargo 深层机制
+      Workspace 高级用法
+      Features 与条件编译
+      Cargo toml 完整字段解析
+    Cross-compilation
+      目标三元组 Target Triple
+      工具链配置
+      musl vs glibc
+    更多工具详解
+      rustdoc
+      cargo-audit
+      cargo-deny
+```
+
+> **认知功能**: 本 mindmap 从本页「Toolchain 工具链与 Cargo」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

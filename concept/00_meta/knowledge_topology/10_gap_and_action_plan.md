@@ -72,7 +72,6 @@
 2. 每月运行 `extract_concept_topology.py` + `generate_knowledge_topology_atlas.py` 生成图谱集。
 3. 对新增文件自动检测是否包含决策树/矩阵/示例反例中的一种表征。
 
-
 ---
 
 > 本文件由 `scripts/generate_knowledge_topology_atlas.py` 从 `concept/**/*.md` 生成；请勿手工编辑，更新后重新运行生成脚本。

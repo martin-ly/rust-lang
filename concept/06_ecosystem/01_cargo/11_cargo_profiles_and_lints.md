@@ -339,3 +339,23 @@ workspace = true
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver) · [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml)
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo Profiles 与 Lints))
+    内置 Profile
+      dev 默认配置
+      release 默认配置
+    Cargo Lints
+      Lint 分组
+      常见 Lint 示例
+    lints 配置与继承
+      包级配置
+      工作区继承
+```
+
+> **认知功能**: 本 mindmap 从本页「Cargo Profiles 与 Lints」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

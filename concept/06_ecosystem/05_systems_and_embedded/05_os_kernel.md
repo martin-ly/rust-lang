@@ -514,3 +514,31 @@ fn tick() {
     TICKS.fetch_add(1, Ordering::Relaxed);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 操作系统内核开发))
+    Rust for Linux 内核中的
+      里程碑
+      内核中的 Rust 约束
+    Theseus Rust
+      Theseus 的核心设计
+      Theseus 的类型安全隔离
+    eBPF 与内核可编程
+      eBPF 的安全模型
+      eBPF 的 Rust 生态
+    代码示例 内核开发核心模式
+      示例 1 最小 no std
+      示例 2 volatile 读取
+      示例 3 自定义内核全局分配器骨架
+    编译错误示例
+      编译错误 1 no std 中使用
+      编译错误 2 panic 在
+      编译错误 3 浮点运算在内核中
+```
+
+> **认知功能**: 本 mindmap 从本页「Rust 操作系统内核开发」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

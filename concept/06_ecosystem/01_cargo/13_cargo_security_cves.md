@@ -511,3 +511,26 @@ fn main() {
     println!("{}", x);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo 安全公告 CVE-2026-5222 与))
+    核心概念
+      影响范围 仅第三方 registry
+      CVE-2026-5222 URL
+      CVE-2026-5223
+    缓解措施与安全实践
+      立即升级工具链
+      验证 crate tarball
+      安全的 Cargo toml 与
+    安全边界与常见错误
+      常见错误 误以为 crates io
+      常见错误 在旧版本 Cargo
+      常见错误 把 git 后缀当作同一
+```
+
+> **认知功能**: 本 mindmap 从本页「Cargo 安全公告 CVE-2026-5222 与」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

@@ -2374,7 +2374,14 @@ fn main() {
 
 ### 模板方法模式 (Template Method)
 
-本节从模式定义、Rust 实现与模板方法与策略模式的区别切入，剖析「模板方法模式 (Template Method)」的核心内容。
+模板方法模式定义算法骨架，子类（Rust 中为 trait 实现者）填充步骤。Rust 实现用 **trait 默认方法**：
+
+- 骨架方法（template method）是 trait 的默认方法，调用若干 `fn step(&self)` 抽象方法；
+- 与策略模式的本质区别：模板方法通过**继承/trait 实现**定制（编译期、单一类型内），策略通过**组合**定制（运行期可换）；模板方法的定制点在类型定义时固定，策略可在运行期切换。
+
+Rust 惯用修正：若定制点超过 2 个，优先策略模式（泛型或 trait object）——模板方法的多定制点会膨胀为深度 trait 继承层次。
+
+判定依据：定制点固定且是「算法骨架中的钩子」→ 模板方法；定制点需运行期替换 → 策略。
 
 #### 模式定义
 
@@ -2641,7 +2648,14 @@ fn main() {
 
 ### 中介者模式 (Mediator)
 
-「中介者模式 (Mediator)」涉及模式定义、Rust 实现与适用场景，本节逐一说明其要点。
+中介者模式用一个中心对象封装多对象间交互，把网状依赖降为星形。Rust 实现的两个形态：
+
+1. **所有权友好形态**：中介者 `struct Mediator` 以所有权持有各同事（colleague）对象，同事不持有中介者引用——交互通过 `mediator.notify(sender_id, event)` 方法路由，借用检查天然保证交互串行化。
+2. **消息传递形态（异步）**：各组件持有 `mpsc::Sender<Event>`，中介者任务集中消费并扇出——这是 actor 模式的退化形式，跨线程场景的首选。
+
+反例：让同事持 `Rc<RefCell<Mediator>>` 回引——形成引用环风险且运行期 `BorrowMutError` panic，违背中介者「简化依赖」的初衷。
+
+判定依据：同事间交互路径 >3 条时引入中介者；<3 条直接调用更简单。
 
 #### 模式定义
 
@@ -2930,7 +2944,14 @@ fn main() {
 
 ### 享元模式 (Flyweight)
 
-本节从模式定义、Rust 实现与内部状态 vs 外部状态切入，剖析「享元模式 (Flyweight)」的核心内容。
+享元模式共享细粒度对象的**内部状态（intrinsic，不变）**，外部状态（extrinsic）由客户端传入。Rust 中的典型实现：
+
+- **字符串驻留（interning）**：`HashMap<&'static str, Symbol>` 风格的符号表，内部状态是字符串内容，享元是 `Symbol`（`Copy` 的 u32）；`string-interner` crate 即此模式。
+- **游戏场景**：树林中百万棵树共享同一 `TreeModel`（网格+纹理，内部状态），每棵树只存 `Transform`（外部状态）；Rust 中用 `Arc<TreeModel>` 共享，避免 C++ 的悬垂指针。
+
+内存收益量化：享元后每实例开销 = 外部状态大小 + `Arc` 指针（8B）；若内部状态 1KB、实例 100 万，节省约 1GB。
+
+判定依据：实例数 >10⁵ 且大部分字段内容重复时考虑；实例少时享元的间接层反而增加复杂度。
 
 #### 模式定义
 
@@ -3132,3 +3153,32 @@ fn instance() -> &'static String {
     INSTANCE.get_or_init(|| "one".to_string())
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Design Patterns 设计模式))
+    模式分类矩阵
+      已有模式扩展
+      新增模式矩阵
+      断言 推理矩阵
+    各模式详解
+      Command 模式
+      Visitor 模式
+      Strategy 模式
+    反模式 Anti-patterns
+      Over-engineering
+      Premature
+      Stringly typed
+    创建型模式
+      Builder 模式
+      Factory 模式
+    结构型模式
+      Adapter 模式
+      Decorator 模式
+```
+
+> **认知功能**: 本 mindmap 从本页「Design Patterns 设计模式」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

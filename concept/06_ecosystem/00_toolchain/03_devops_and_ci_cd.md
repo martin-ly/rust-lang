@@ -879,3 +879,25 @@ Docker Build (multi-platform) → Push → Staging → Smoke Test → Production
 ```
 
 > **关键洞察**：WASM 的二进制可移植性使“一次构建、多处运行”成为可能，但工具链（wasm-pack、Binaryen、运行时（Runtime）版本）的矩阵管理仍是 CI 复杂度的主要来源。
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((DevOps 与 CI CD Rust))
+    核心概念
+      CI CD 管道与 Rust 构建特性
+      CI 配置验证工具 Rust 实现
+      工具链矩阵
+    技术细节
+      GitHub Actions 工作流设计
+      Docker 多阶段构建优化
+      交叉编译 CI 集成
+    DevOps 决策矩阵
+      发布自动化决策
+      安全策略矩阵
+```
+
+> **认知功能**: 本 mindmap 从本页「DevOps 与 CI CD Rust」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

@@ -955,3 +955,28 @@ fn main() {
     println!("{}", k);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Security Cryptography 安全与密码学))
+    对称加密
+      AES-GCM
+      ChaCha20-Poly1305
+    非对称加密与数字签名
+      ECC 与 Ed25519
+      X25519 密钥交换
+    哈希与消息认证
+      哈希函数
+      HMAC
+      密钥派生 KDF
+    Rust 密码学生态
+      ring 安全原语聚合
+      rustls 纯 Rust TLS
+      dalek-cryptography
+```
+
+> **认知功能**: 本 mindmap 从本页「Security Cryptography 安全与密码学」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

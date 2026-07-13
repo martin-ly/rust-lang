@@ -475,3 +475,23 @@ fn main() {
     println!("{}", v);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((C-to-Rust Translation))
+    学术研究前沿
+      Scylla OOPSLA 2026
+      inator PLDI 2026
+      His2Trans 2026
+    四-A 评估基准与近期学术成果
+      CRUST-Bench
+      近期学术进展补充
+    现有工具链
+      C2Rust 与后处理生态
+```
+
+> **认知功能**: 本 mindmap 从本页「C-to-Rust Translation」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

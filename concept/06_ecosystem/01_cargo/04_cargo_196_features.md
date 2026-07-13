@@ -259,3 +259,29 @@ Rust 1.96 修复了两个 Cargo CVE，这些修复与工具链行为直接相关
 ---
 
 > **对应练习**: [`exercises/src/cargo_196/`](../../exercises/src/cargo_196)
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo 1 96 新特性与工具链变更))
+    pubtime crate
+      背景
+      典型应用
+      当前限制
+    CARGO BIN EXE crate
+      变更内容
+      使用示例
+      为什么重要
+    TOML v1 1 支持
+      变更内容
+      主要语法改进
+      Cargo toml 示例
+    嵌套子命令 manpage
+      变更内容
+      收益
+```
+
+> **认知功能**: 本 mindmap 从本页「Cargo 1 96 新特性与工具链变更」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

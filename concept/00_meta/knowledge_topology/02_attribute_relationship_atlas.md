@@ -555,7 +555,6 @@
 | L3-L4（应用/分析：将版本变更映射到具体代码修复） | 1 |
 | L7（版本与生态跟踪） | 1 |
 
-
 ---
 
 > 本文件由 `scripts/generate_knowledge_topology_atlas.py` 从 `concept/**/*.md` 生成；请勿手工编辑，更新后重新运行生成脚本。

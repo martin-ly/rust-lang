@@ -310,3 +310,30 @@ RUSTDOCFLAGS="-D warnings" cargo doc --workspace --no-deps
 **陷阱要点**：`rustdoc::broken_intra_doc_links` 是 warn-by-default lint；文档质量门的缺失不在 rustdoc 而在 CI 配置，本页 §三 的弃用渲染改进同理需要显式审查而非被动接受默认。
 
 ---
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rustdoc 1 96 1 97 变更))
+    target cfg
+      背景
+      Rust 1 96 新增语法
+      典型应用场景
+    弃用 Deprecation 渲染改进
+      变更内容
+      示例
+      建议
+    missing doc code
+      背景
+      Rust 1 96 改进
+      启用方式
+    Rust 1 97 rustdoc
+      --emit 输出格式控制
+      --remap-path-prefix
+      典型应用场景
+```
+
+> **认知功能**: 本 mindmap 从本页「Rustdoc 1 96 1 97 变更」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

@@ -102,7 +102,18 @@
 
 ## 一、权威定义（Definition）
 
-「权威定义（Definition）」部分按机器人软件栈、实时约束与确定性与ROS2 架构的顺序逐层展开。
+机器人软件栈的权威参照是 ROS2 分层架构，其关注点分离为：
+
+| 层 | 职责 | 实时性要求 |
+|---|---|---|
+| 感知层 | 传感器驱动、点云/图像处理 | 软实时（毫秒级抖动可容忍） |
+| 规划层 | SLAM、路径规划 | 软实时 |
+| 控制层 | 电机控制环（PID/MPC） | 硬实时（μs–ms 级截止期，错过即危险） |
+| 中间件 | DDS 发布/订阅 | 取决于 QoS 配置 |
+
+实时性的两个正交概念：**确定性（determinism）**指最坏情况响应时间有界，**低延迟**指平均响应快——通用 Linux 可以做到低延迟但做不到确定性，控制环必须运行在 PREEMPT_RT 内核或独立 MCU 上。
+
+Rust 的切入点：内存安全消除控制软件中最高危的崩溃模式（空指针/越界），所有权模型使实时分析（无隐藏分配）可审计。
 
 ### 1.1 机器人软件栈
 
@@ -228,7 +239,15 @@ ROS2 通信原语:
 
 ## 三、ROS2 Rust 生态
 
-本节围绕「ROS2 Rust 生态」展开，依次讨论 rclrs：官方 Rust 客户端库、ros2_rust 社区与 safe_drive与DDS 绑定。
+ROS2 Rust 生态当前有三条互补路线：
+
+1. **`rclrs`**：官方维护的 Rust 客户端库，绑定 `rcl` C API。设计特色是把 ROS2 的执行器（executor）模型映射为 Rust 的轮询式回调——消息回调拿 `&mut` 状态，借用检查保证单回调内无别名冲突，但多线程执行器下的共享状态仍需 `Arc<Mutex>`。
+2. **`ros2_rust`（社区前身）**：rclrs 的前身，已并入官方仓库，仅历史参考。
+3. **`safe_drive`**：纯 Rust 实现的 ROS2 绑定（直接走 DDS 的 RTPS 协议），不依赖 C 库，交叉编译友好，适合嵌入式节点。
+
+DDS 层：ROS2 默认经 rmw 适配 Cyclone DDS/Fast DDS；Rust 侧也可用 `zenoh`（Rust 原生实现，已成为 ROS2 的 RMW 选项之一）获得更低延迟与跨 WAN 能力。
+
+判定依据：通用节点选 rclrs（生态兼容）；资源受限或拒绝 C 依赖选 safe_drive。
 
 ### 3.1 rclrs：官方 Rust 客户端库
 
@@ -640,7 +659,17 @@ fn plan_path(map: &GridMap, start: (usize, usize), goal: (usize, usize))
 
 ## 六、控制理论
 
-本节围绕「控制理论」展开，覆盖 PID、MPC 与 LQR 与 状态空间与优化 两个方面。
+控制理论与 Rust 的交汇点是**采样周期的确定性**而非算法本身——同样的 PID 在 1kHz 确定性环路与抖动环路上表现天差地别。
+
+三种控制器的工程画像：
+
+| 控制器 | 计算成本 | 适用对象 | Rust 实现要点 |
+|---|---|---|---|
+| PID | 极低 | 单输入单输出 | 纯标量运算，注意积分饱和（anti-windup） |
+| LQR | 低（矩阵乘） | 线性系统全状态反馈 | `nalgebra` 静态维度矩阵，零分配 |
+| MPC | 高（每周期解优化问题） | 带约束的多变量系统 | 需 QP 求解器，实时性差，常降采样运行 |
+
+Rust 实现关键：控制环内**禁止堆分配**（用 `nalgebra` 的 `SMatrix`/`SVector` 栈上矩阵，`heapless` 队列），分配会引发不可预测的延迟尖峰；浮点用 `f64` 避免嵌入式 FPU 兼容坑，定点数仅在无 FPU 的 MCU 上考虑。
 
 ### 6.1 PID、MPC 与 LQR
 
@@ -1006,3 +1035,28 @@ impl GoodNode {
 | Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Robotics ROS2 in Rust 机器人学与))
+    ROS2 Rust 生态
+      rclrs 官方 Rust 客户端库
+      ros2 rust 社区与 safe
+      DDS 绑定
+    实时机器人系统
+      ROS2 执行器模型
+      优先级继承与 PREEMPT RT
+      no std RTOS 集成
+    传感器融合与 SLAM
+      点云处理与线性代数
+      OpenRR 框架
+    控制理论
+      PID MPC 与 LQR
+      状态空间与优化
+```
+
+> **认知功能**: 本 mindmap 从本页「Robotics ROS2 in Rust 机器人学与」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

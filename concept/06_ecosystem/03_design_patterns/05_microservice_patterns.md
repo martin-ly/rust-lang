@@ -995,3 +995,23 @@ fn main() {}
 | 微服务架构模式 (Microservice Architecture Patterns) 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | 微服务架构模式 (Microservice Architecture Patterns) 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | 微服务架构模式 (Microservice Architecture Patterns) 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((微服务架构模式 Microservice))
+    服务发现与注册
+      Consul etcd 客户端集成
+      Tower discover
+    熔断器
+      状态机模型 Closed Open
+      failsafe crate 实现
+    综合示例
+      极简微服务 标准库实现
+      生产级微服务骨架 依赖外部 crate
+```
+
+> **认知功能**: 本 mindmap 从本页「微服务架构模式 Microservice」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

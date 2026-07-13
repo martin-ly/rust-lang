@@ -197,7 +197,6 @@
 - 层内模型映射见 [../04_navigation/06_intra_layer_model_map.md](../04_navigation/06_intra_layer_model_map.md)
 - 形式化本体规范见 [kg_ontology_v2.md](kg_ontology_v2.md)
 
-
 ---
 
 > 本文件由 `scripts/generate_knowledge_topology_atlas.py` 从 `concept/**/*.md` 生成；请勿手工编辑，更新后重新运行生成脚本。

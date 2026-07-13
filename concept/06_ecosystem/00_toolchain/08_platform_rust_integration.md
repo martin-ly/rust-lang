@@ -301,3 +301,26 @@ unsafe fn uart_putc(c: u8) {
 ---
 
 > **过渡**: 掌握平台集成后，可进一步阅读 [Industrial Case Studies](../11_domain_applications/14_industrial_case_studies.md) 中的 Google Pixel 基带 Rust 集成、FSE 2026 AOSP 实证分析等案例，建立从理论到大规模工程实践的桥梁。
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((将 Rust 集成到现有平台))
+    Android AOSP
+      AOSP 为什么选择 Rust
+      构建规则 Android bp
+      AIDL 与 Binder IPC
+    Chromium
+      Chromium 的 Rust 策略
+      GN 构建与 CXX
+      引入第三方 crate
+    Bare Metal
+      no std 与 alloc
+      微控制器 PAC → HAL →
+      应用处理器与 UART 驱动
+```
+
+> **认知功能**: 本 mindmap 从本页「将 Rust 集成到现有平台」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

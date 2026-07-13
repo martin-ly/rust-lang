@@ -84,7 +84,18 @@
 
 ## 一、权威定义（Definition）
 
-本节围绕「权威定义（Definition）」展开，覆盖 Rust ML 生态定位 与 数据科学生态分层 两个方面。
+Rust ML 生态的精确定位：**推理（inference）一线梯队，训练（training）二梯队**。训练侧 GPU 生态（cuDNN 深度集成、分布式并行）仍由 Python + PyTorch/JAX 主导；推理侧 Rust 凭借零拷贝张量、无 GC 尾延迟与可静态链接的优势，在边缘部署与服务化推理中具备独特价值。
+
+数据科学生态分层（自底向上）：
+
+| 层 | 职责 | 代表 crate |
+|---|---|---|
+| 张量/计算内核 | ndarray、BLAS 绑定 | `ndarray`、`candle-core` |
+| 数据帧/查询 | 列式处理、SQL 执行 | `polars`、`datafusion` |
+| 算法库 | 经典 ML 算法 | `linfa`、`smartcore` |
+| 深度学习 | 自动微分、模型推理 | `candle`、`burn`、`tch`、`ort` |
+
+判定依据：任务为「训练大模型」→ 留在 Python；任务为「低延迟推理服务/边缘部署」→ 评估 candle/ort。
 
 ### 1.1 Rust ML 生态定位
 
@@ -154,7 +165,16 @@ Rust ML 生态全景:
 
 ## 三、深度学习框架
 
-本节将「深度学习框架」分解为若干主题： candle：纯 Rust 推理引擎、burn：可移植深度学习框架、tch-rs：PyTorch C++ API 绑定与ort：ONNX Runtime 绑定。
+四大深度学习路线的取舍矩阵：
+
+| 框架 | 后端 | 训练 | 部署形态 | 适用场景 |
+|---|---|---|---|---|
+| candle | 自研（CUDA/Metal/CPU） | 有限 | 纯 Rust 二进制 | 无外部依赖的推理服务、WASM |
+| burn | 可插拔（wgpu/ndarray/tch） | ✅ 完整 | 跨平台含 WASM | 需要可移植训练的框架研究 |
+| tch-rs | LibTorch C++ | ✅ 完整 | 需链接 LibTorch | 复用 PyTorch 模型与研究代码 |
+| ort | ONNX Runtime | ❌ | 需 ORT 运行时 | 任意框架导出 ONNX 后的生产推理 |
+
+工程经验：生产推理服务首选 `ort`（模型来源最自由）或 `candle`（依赖最干净、可编到 WASM）；`tch-rs` 的 LibTorch 动态库分发（数百 MB、CUDA 版本耦合）是部署期最大痛点。
 
 ### 3.1 candle：纯 Rust 推理引擎
 
@@ -651,7 +671,19 @@ Rust 优势:
 
 ## 七、Rust ML 的技术优势与限制
 
-本节围绕「Rust ML 的技术优势与限制」展开，覆盖优势分析 与 限制分析 两个方面。
+Rust ML 的优势与限制必须同时列出，单侧结论都会误导选型：
+
+**优势**：
+1. 内存安全 + 无 GC——推理服务的 P99 延迟无 GC 停顿毛刺，这对实时推荐、高频交易类场景是硬指标；
+2. 部署形态——单静态二进制 + 交叉编译，WASM/嵌入式目标可达；
+3. 类型化张量形状（candle/burn 的 `Tensor<D>` 维度泛型）把部分形状错误前移到编译期。
+
+**限制**：
+1. 训练生态薄弱——分布式训练、混合精度调度等基础设施残缺；
+2. 算子覆盖率——冷门算子常需手写 kernel；
+3. 人才与资料——ML 社区资料 90% 以上是 Python。
+
+判定口诀：「训推分离」架构最稳——Python 训练导出 ONNX/SafeTensors，Rust 负责推理与服务化。
 
 ### 7.1 优势分析
 

@@ -801,3 +801,29 @@ fn make() -> Box<dyn Animal> {
     Box::new(Dog)
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((模式选择最佳实践 Pattern Selection))
+    场景驱动的模式选择
+      Web服务器场景
+      插件系统场景
+      游戏引擎场景
+    模式组合最佳实践
+      常见模式组合
+      组合示例 HTTP客户端
+    Rust 特有考量
+      所有权与生命周期
+      Send Sync
+      错误处理
+    概述
+      选择维度
+    生产环境指南
+      模式选择优先级
+```
+
+> **认知功能**: 本 mindmap 从本页「模式选择最佳实践 Pattern Selection」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

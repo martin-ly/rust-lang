@@ -1352,3 +1352,25 @@ fn main() {
 ```
 
 > **修正**: `tokio` 的**任务调度**：1) `tokio::spawn` — 创建异步任务，由 tokio 的线程池调度（非阻塞）；2) `std::thread::spawn` — 创建 OS 线程，阻塞操作占用线程。混用问题：1) 阻塞操作（sleep、文件 IO、CPU 密集）占用 tokio worker 线程 → 其他 async 任务饥饿；2) 应使用 `tokio::task::spawn_blocking` 运行阻塞代码；3) 或使用 `tokio::fs` 替代 `std::fs`（异步文件 IO）。`tokio` 的线程池：默认 worker 线程数 = CPU 核心数，阻塞任务应 offload 到 blocking pool。这与 Go 的 goroutine（调度器自动处理阻塞，无需区分 async/sync）或 Java 的 `CompletableFuture`（默认使用 `ForkJoinPool`，同样需避免阻塞）不同——Rust 的 async runtime 要求开发者显式管理阻塞操作。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/index.html)]
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Core Crates 核心开源库谱系))
+    概念属性矩阵
+      核心 Crate 功能域总矩阵
+      选型决策快速矩阵
+    核心 Crate 详解 按功能域
+      序列化 Serialization
+      异步运行时 Async Runtime
+      Web 框架
+    扩展内容 选型方法论与趋势
+      crates io 生态健康度指标
+      2025-2026 生态趋势
+      学术论文引用
+```
+
+> **认知功能**: 本 mindmap 从本页「Core Crates 核心开源库谱系」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

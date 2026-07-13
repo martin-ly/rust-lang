@@ -279,3 +279,27 @@ pub fn connect() -> internal_crate::Connection { ... }
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Rudra: Finding Memory Safety Bugs in Rust at the Ecosystem Scale (SOSP 2021)](https://dl.acm.org/doi/10.1145/3477132.3483570)
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo public true 与))
+    public true false
+      默认与显式声明
+      编译器可见性检查
+      SemVer 影响
+    传递依赖可见性与 feature 统一
+      传递可见性
+      feature 统一规则
+    迁移与实践
+      在现有 workspace 中逐步标注
+      与 workspace
+      可运行示例
+    Resolver v3 与 v2 的差异
+      MSRV-aware 解析
+```
+
+> **认知功能**: 本 mindmap 从本页「Cargo public true 与」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

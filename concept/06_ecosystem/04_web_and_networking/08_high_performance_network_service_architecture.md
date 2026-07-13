@@ -246,7 +246,16 @@ async fn send_file(mut stream: TcpStream, path: &str) -> io::Result<()> {
 
 ## 1. 零拷贝技术深度
 
-「零拷贝技术深度」涉及传统拷贝的性能问题、零拷贝原理与实现与Rust零拷贝实践，本节逐一说明其要点。
+零拷贝（Zero-Copy）在网络栈中的精确定义：**数据在内核态与用户态之间、或用户态缓冲区之间不发生 `memcpy`**。传统 `read()`/`write()` 路径每字节至少经过 2 次内核↔用户拷贝加 2 次上下文切换；零拷贝技术将其降为 0 或 1 次。
+
+| 技术 | 拷贝次数 | 适用场景 | Rust 支持 |
+|---|---|---|---|
+| `sendfile`/`splice` | 1（内核内部） | 静态文件服务 | `tokio::fs`/`nix::sys::sendfile` |
+| mmap + write | 1 | 随机访问大文件 | `memmap2` |
+| `io_uring` 注册缓冲区 | 0–1 | 高并发 I/O | `tokio-uring`、`io-uring` |
+| 用户态协议栈（DPDK） | 0 | 专用网络设备 | 绑定库（unsafe） |
+
+判定依据：零拷贝的收益随载荷尺寸增长；<1KB 的小包优化 syscall 批处理（`writev`）比零拷贝更有效。
 
 ### 1.1 传统拷贝的性能问题
 
@@ -529,7 +538,15 @@ async fn create_test_file(path: &str, size: usize) -> io::Result<()> {
 
 ## 2. io_uring异步I/O
 
-本节将「io_uring异步I/O」分解为若干主题： io_uring架构原理、Tokio-uring集成与高性能HTTP服务器。
+`io_uring`（Linux 5.1+）用一对共享内存环形队列（SQ/CQ）替代「一次 I/O 一次 syscall」模型：应用把请求批量放入 SQ 并一次性提交，内核完成 I/O 后把结果写入 CQ，用户态无阻塞收割。
+
+关键架构权衡：
+
+1. **缓冲注册（registered buffers）**：`IORING_REGISTER_BUFFERS` 预注册内存，内核直接 DMA，省掉每次调用的 `copy_to_user` 页表查找——这是 Rust `tokio-uring` 要求 `buf` 参数为 `'static` 所有权的根本原因：缓冲区在内核持有期间不能被 Rust 释放，`tokio-uring` 用「把缓冲区所有权交给 future」的 API 把这一硬件约束编码进类型系统。
+2. **与 epoll 的边界**：io_uring 在 NVMe 等高速设备上碾压 epoll；对千兆以下网络，epoll+非阻塞 I/O 的复杂度收益比仍占优。
+3. **内核版本陷阱**：部分 io_uring 特性（如 `IORING_OP_READ_MULTISHOT`）需要 6.x 内核，生产部署必须做特性探测。
+
+判定依据：只有 IOPS 成为瓶颈且内核 ≥5.10 时才值得引入 io_uring。
 
 ### 2.1 io_uring架构原理
 
@@ -821,7 +838,12 @@ Requests/sec:  156,234.12  # 仅 15万+ QPS
 
 ## 3. 无锁网络架构
 
-「无锁网络架构」部分包含 Lock-Free数据结构 与  Per-Core架构 两条主线，本节依次说明。
+无锁网络架构的两个层次常被混淆：**数据结构级无锁**与**架构级无争用（share-nothing）**，生产系统中后者远比前者重要。
+
+- **Lock-Free 数据结构**：`crossbeam-epoch`/`arc-swap` 适用于配置热更新等低频写场景；但无锁队列在高竞争下因 CAS 重试风暴反而劣于 `parking_lot::Mutex`——无锁≠高吞吐。
+- **Per-Core（share-nothing）架构**：每个核绑定一个 acceptor+worker 线程（`SO_REUSEPORT` 让内核做四元组哈希分发），连接状态完全局部化，跨核通信只通过 SPSC 通道。这是 Cloudflare Pingora、Seastar 的共同选择：把「锁竞争问题」转化为「负载均衡问题」。
+
+判定依据：先用 `perf` 确认锁竞争占 CPU >5% 再考虑无锁改造；否则 per-core 分区通常已足够。
 
 ### 3.1 Lock-Free数据结构
 
@@ -2110,3 +2132,33 @@ fn process(buf: &mut Vec<u8>) -> usize {
 
 - **P2 生态/社区**: [docs.rs/tokio-tungstenite — 生态权威 API 文档](https://docs.rs/tokio-tungstenite) · [docs.rs/axum — 生态权威 API 文档](https://docs.rs/axum)
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((高性能网络服务架构 High-Performance))
+    知识结构
+      概念定义
+      属性特征
+      关系连接
+    补充 基础网络性能优化
+      缓冲 I O
+      批量写入
+      并发连接限制
+    零拷贝技术深度
+      传统拷贝的性能问题
+      零拷贝原理与实现
+      Rust零拷贝实践
+    io uring异步I O
+      io uring架构原理
+      Tokio-uring集成
+      高性能HTTP服务器
+    无锁网络架构
+      Lock-Free数据结构
+      Per-Core架构
+```
+
+> **认知功能**: 本 mindmap 从本页「高性能网络服务架构 High-Performance」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

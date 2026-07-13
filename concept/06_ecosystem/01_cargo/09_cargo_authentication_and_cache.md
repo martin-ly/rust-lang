@@ -286,3 +286,23 @@ rustc-wrapper = "sccache"
 **文档版本**: 1.0
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Cargo Book authentication/cache 文档
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo 认证与构建缓存))
+    Credential Providers
+      内置 Providers
+      推荐全局配置
+    Token 的存储与使用
+      cargo login
+      环境变量
+      自定义 Provider
+    Target Dir 与 Build
+      Build Dir 中间产物
+```
+
+> **认知功能**: 本 mindmap 从本页「Cargo 认证与构建缓存」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

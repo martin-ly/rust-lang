@@ -9,7 +9,14 @@
 
 ---
 
-> **来源**: [Bloom 分类法](../00_framework/bloom_taxonomy.md) · [A/S/P 标记规范](../03_audit/02_asp_marking_guide.md) · [方法论](../00_framework/methodology.md) · [Concept 元层](../README.md) · [概念审计指南](../03_audit/01_concept_audit_guide.md) · [mdBook 官方文档](https://rust-lang.github.io/mdBook/)（P0 官方：测验体系托管框架，curl 200 实测 2026-07-13）
+> **来源**:
+>
+> [Bloom 分类法](../00_framework/bloom_taxonomy.md) ·
+> [A/S/P 标记规范](../03_audit/02_asp_marking_guide.md) ·
+> [方法论](../00_framework/methodology.md) ·
+> [Concept 元层](../README.md) ·
+> [概念审计指南](../03_audit/01_concept_audit_guide.md) ·
+> [mdBook 官方文档](https://rust-lang.github.io/mdBook/)（P0 官方：测验体系托管框架，curl 200 实测 2026-07-13）
 >
 > **前置概念**:
 > [Concept 元层](../README.md) ·

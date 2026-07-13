@@ -245,7 +245,20 @@
 
 ## 三、分层架构
 
-本节围绕「分层架构」展开，覆盖经典四层模型 与 依赖规则 两个方面。
+分层架构（Layered Architecture）的依赖规则只有一条：**上层可依赖下层，下层不得知晓上层**。经典四层为表现层 → 应用层 → 领域层 → 基础设施层。
+
+Rust 实现该约束的独特手段是 **Cargo workspace 的 crate 边界**：编译器天然拒绝循环依赖，分层违规在 `cargo build` 阶段即失败，无需 ArchUnit 之类的外部架构测试工具。推荐布局：
+
+```text
+myapp/
+├── crates/
+│   ├── domain/      # 纯类型与业务规则，零外部依赖
+│   ├── app/         # 用例编排，依赖 domain
+│   ├── infra/       # DB/HTTP 实现，依赖 domain + app
+│   └── presentation # CLI/Web 入口
+```
+
+判定依据：若 `domain` crate 的 `Cargo.toml` 出现任何数据库或 Web 框架依赖，分层已被破坏。
 
 ### 3.1 经典四层模型
 >
@@ -346,7 +359,18 @@ Rust 实现: 通过 Cargo workspace 的依赖约束强制分层
 
 ## 四、六边形架构
 
-「六边形架构」涉及端口（Ports）、适配器（Adapters）与Rust 实现，本节逐一说明其要点。
+六边形架构（Ports & Adapters）把领域核心与外部世界通过两类抽象隔离：**端口（port）是核心定义的接口，适配器（adapter）是接口的外部实现**。
+
+Rust 的映射极为直接：
+
+| 概念 | Rust 构造 |
+|---|---|
+| 驱动端口（Driving Port） | 应用层的 `trait UseCase` 或入口函数 |
+| 从动端口（Driven Port） | 核心定义的 `trait Repository` / `trait EventBus` |
+| 适配器 | `PgRepository`（sqlx 实现）、`KafkaEventBus` 等具体类型 |
+| 依赖注入 | 构造函数注入泛型参数 `fn new<R: Repository>(repo: R)` |
+
+关键判定：端口 trait 必须定义在领域 crate 内，适配器实现放在 infra crate——方向反了（领域 import infra 的 trait）是 Rust 新手最常见的六边形架构违规。
 
 ### 4.1 端口（Ports）
 >
@@ -641,7 +665,17 @@ impl OrderRepository for PostgresOrderRepository {
 
 ## 六、整洁架构
 
-「整洁架构」涉及同心圆模型、依赖规则与与六边形/洋葱的关系，本节逐一说明其要点。
+整洁架构（Clean Architecture）是同心圆依赖规则的总称：所有依赖指向圆心（实体层），外层（框架与驱动）只是可替换的细节。
+
+与六边形/洋葱架构的关系：三者共享同一条核心规则（依赖向内），区别仅在层次命名的粒度——整洁架构 4 环（实体/用例/接口适配器/框架），洋葱架构强调领域模型 + 领域服务 + 应用服务的显式分层，六边形强调端口/适配器的对称性。
+
+Rust 工程中的落地要点：
+
+1. 用 workspace crate 强制环间依赖方向（cargo 拒绝环依赖）；
+2. 实体层只含 `#[derive]` 纯数据与不变量方法，禁止 `async`/IO 类型出现；
+3. 用例层返回 `Result<T, DomainError>`，错误类型不自含 `sqlx::Error` 等外层细节。
+
+判定依据：内层代码的编译时间不应随外层框架升级而受影响；若 `cargo check -p domain` 需要链接数据库驱动，架构已退化。
 
 ### 6.1 同心圆模型
 >
@@ -1276,3 +1310,32 @@ Repository 将数据访问逻辑隔离，便于：1) 切换存储后端（Postgr
 | **Hexagonal** | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | 高可测试性需求   |
 
 ---
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Architecture Patterns 架构设计模式))
+    分层架构
+      经典四层模型
+      依赖规则
+    六边形架构
+      端口 Ports
+      适配器 Adapters
+      Rust 实现
+    洋葱架构
+      层次结构
+      依赖方向
+    整洁架构
+      同心圆模型
+      依赖规则
+      与六边形 洋葱的关系
+    Serverless FaaS
+      架构特征
+      Rust 在 Serverless
+      冷启动与性能优化
+```
+
+> **认知功能**: 本 mindmap 从本页「Architecture Patterns 架构设计模式」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

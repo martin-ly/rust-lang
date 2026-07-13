@@ -803,3 +803,26 @@ pub trait RaftStateMachine {
     fn restore(&mut self, snapshot: &[u8]) -> Result<(), Error>;
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((分布式 系统 Rust 在微服务 与集群中的工程实践))
+    核心概念
+      Rust 在分布式系统中的定位
+      异步运行时作为分布式基础
+      服务发现与负载均衡
+    技术细节
+      gRPC 与 Protocol
+      分布式共识与 Raft
+      Actor 模型与消息传递
+    分布式网络系统技术选型
+      基础理论
+      共识与容错
+      分布式协调
+```
+
+> **认知功能**: 本 mindmap 从本页「分布式 系统 Rust 在微服务 与集群中的工程实践」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

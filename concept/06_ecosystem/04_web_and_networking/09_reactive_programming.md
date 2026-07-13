@@ -89,7 +89,15 @@
 
 ## 一、权威定义（Definition）
 
-理解「权威定义（Definition）」需要把握 Reactive Manifesto：响应式系统的四大特质、Reactive Streams：背压感知的异步数据流与FRP：函数式响应编程，本节依次展开。
+三个权威定义锚点需精确区分，它们常被混为一谈：
+
+1. **Reactive Manifesto**（2013）：定义**响应式系统**的四大特质——响应性（Responsive）、弹性（Resilient）、伸缩性（Elastic）、消息驱动（Message Driven）。这是系统架构宣言，不是编程模型。
+2. **Reactive Streams**（JVM 规范，后影响各语言）：定义**背压感知的异步数据流**四接口——`Publisher`/`Subscriber`/`Subscription`/`Processor`，核心创新是 `Subscription.request(n)` 让下游控制流速。
+3. **FRP（函数式响应编程）**：源于 Elliott & Hudak（1997），用**连续时间语义**建模行为（Behavior）与事件（Event），是声明式编程范式。
+
+对应到 Rust：Reactive Streams ≈ `futures::Stream` + `poll_next` 的拉取模型；FRP 在 Rust 中因所有权与连续语义的冲突只有离散近似（`tokio::sync::watch`、信号库 `futures-signals`）。
+
+判定依据：讨论「响应式」时先声明指哪一层——架构宣言、流规范还是 FRP 范式。
 
 ### 1.1 Reactive Manifesto：响应式系统的四大特质
 
@@ -347,7 +355,18 @@ let results: Vec<_> = pipeline.collect().await;
 
 ## 四、背压机制
 
-本节从背压策略对比 与  Rust 实现 两个层面剖析「背压机制」。
+背压（backpressure）是下游向上游传递「我处理不过来」信号的机制，四种策略的取舍：
+
+| 策略 | 行为 | 数据丢失 | 适用场景 |
+|---|---|---|---|
+| 阻塞/拉取 | 下游不请求上游即停 | 无 | Rust `Stream` 默认模型 |
+| 缓冲 | 有界队列暂存 | 队列满后拒绝/阻塞 | 削峰，需设上限 |
+| 丢弃（drop） | 新数据覆盖旧数据 | 丢旧 | 传感器、实时行情 |
+| 采样（throttle） | 按时间窗取最新 | 丢中间值 | UI 刷新、监控 |
+
+Rust 的天然优势：`futures::Stream` 是**拉取式（poll-based）**模型，背压是默认行为——下游不 `poll_next`，上游的 `async` 生产代码就停在 await 点，无需显式 `request(n)`。反例是用无界通道（`mpsc::unbounded_channel`）桥接推拉模型，这会**把背压悄悄关掉**，是流式服务 OOM 的头号原因。
+
+判定依据：凡跨任务的流传递，优先 `mpsc::channel(bounded)` 并审视 `send().await` 处的停顿语义。
 
 ### 4.1 背压策略对比
 >
@@ -1074,3 +1093,32 @@ fn circular_signal_deadlock() {
 | Reactive Programming & FRP（响应式编程与函数式响应编程） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Reactive Programming & FRP（响应式编程与函数式响应编程） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Reactive Programming & FRP（响应式编程与函数式响应编程） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Reactive Programming FRP))
+    Reactive Streams 核心
+      四元接口模型
+      Rust 中的 Stream trait
+      组合子代数
+    背压机制
+      背压策略对比
+      Rust 实现
+    FRP 模型
+      Signal vs Event
+      连续语义 vs 离散语义
+      Rust 中的 FRP 限制
+    数据流编程
+      推模型 vs 拉模型
+      与 Rust Stream 的对应
+    Rust 实现
+      tokio-stream
+      async-stream
+      完整数据流处理骨架
+```
+
+> **认知功能**: 本 mindmap 从本页「Reactive Programming FRP」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

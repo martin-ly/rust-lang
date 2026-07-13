@@ -329,3 +329,28 @@ build-std = ["core", "alloc"]
 
 - **P2 生态/社区**: [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver) · [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml)
 - **P1 学术/形式化**: [Rudra: Finding Memory Safety Bugs in Rust at the Ecosystem Scale (SOSP 2021)](https://dl.acm.org/doi/10.1145/3477132.3483570)
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo build-std))
+    使用方法
+      安装 nightly 工具链
+      配置 cargo
+      指定目标
+    典型配置示例
+      自定义 target JSON
+      no std 全局分配器
+    HAL 设计模式深化
+      类型状态模式 Type State
+      寄存器访问模式
+    为什么需要 build-std
+      体积优化
+    稳定化进度跟踪
+      当前替代方案
+```
+
+> **认知功能**: 本 mindmap 从本页「Cargo build-std」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

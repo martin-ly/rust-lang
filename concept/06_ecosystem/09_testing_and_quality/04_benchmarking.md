@@ -204,3 +204,24 @@ fn main() {}
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Mytkowicz et al.: Producing Wrong Data Without Doing Anything Obviously Wrong! (ASPLOS 2009)](https://dl.acm.org/doi/10.1145/1508284.1508275)
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((基准测试 Rust 代码性能测量与回归检测))
+    Criterion 基础用法
+      简单基准
+      参数化基准
+    回归检测与 CI 集成
+      基线对比
+      自动化阈值检测
+      CI 最佳实践
+    高级测量
+      自定义测量时间
+      吞吐量测量
+```
+
+> **认知功能**: 本 mindmap 从本页「基准测试 Rust 代码性能测量与回归检测」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

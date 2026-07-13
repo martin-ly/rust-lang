@@ -560,7 +560,6 @@
 | [Rust 2027 Edition 及未来路线图](../../07_future/01_edition_roadmap/04_roadmap.md) | 8 |
 | [Effects System: Concept Pre-study](../../07_future/03_preview_features/01_effects_system.md) | 7 |
 
-
 ---
 
 > 本文件由 `scripts/generate_knowledge_topology_atlas.py` 从 `concept/**/*.md` 生成；请勿手工编辑，更新后重新运行生成脚本。

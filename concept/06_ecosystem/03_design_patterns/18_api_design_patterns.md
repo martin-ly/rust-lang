@@ -97,7 +97,19 @@
 
 ## 一、权威定义（Definition）
 
-本节将「权威定义（Definition）」分解为若干主题： REST：表述性状态转移、GraphQL：查询语言与运行时与gRPC：高性能 RPC 框架。
+三种 API 风格的权威定义与本质差异：
+
+| 风格 | 权威来源 | 核心抽象 | 类型契约时机 |
+|---|---|---|---|
+| REST | Fielding 博士论文（2000） | 资源 + 统一接口 | 运行期（OpenAPI 仅文档） |
+| GraphQL | Meta 规范（2015 开源） | 类型化图查询 | Schema 强类型，编译期可生成客户端 |
+| gRPC | Google，基于 HTTP/2 + Protobuf | 服务方法（RPC） | IDL 编译期生成桩代码 |
+
+REST 的「表述性状态转移」常被误读为「用 JSON 的 HTTP API」——Fielding 定义的六个约束（client-server、无状态、缓存、统一接口、分层系统、按需代码）中，HATEOAS 是多数自称 RESTful 的 API 实际不满足的。
+
+Rust 生态对应：`axum`（REST）、`async-graphql`（GraphQL）、`tonic`（gRPC）。
+
+判定依据：内部微服务高频调用选 gRPC；公开 API 选 REST；前端多客户端异构数据需求选 GraphQL。
 
 ### 1.1 REST：表述性状态转移
 
@@ -220,7 +232,13 @@ gRPC 核心特征:
 
 ## 三、API 设计原则
 
-理解「API 设计原则」需要把握 RESTful 资源建模、API 版本化策略与错误处理与状态码，本节依次展开。
+API 设计的三条核心原则：
+
+1. **资源建模**：URL 是名词不是动词（`/orders/42` 而非 `/getOrder`）；集合用复数；子资源嵌套不超过两层（`/orders/42/items` 可，`/orders/42/items/3/reviews` 应扁平化）。
+2. **版本化策略**：三选一并全公司统一——路径版本（`/v1/`，最直观）、Header 版本（`Accept: application/vnd.api+json;version=1`）、查询参数（最弱，不推荐）。**破坏性变更清单**：删字段、改字段语义、改类型、收紧校验——任一发生必须升版本。
+3. **错误处理**：HTTP 状态码表达错误类别，响应体表达错误详情；Rust 侧用 `thiserror` 定义领域错误后实现 `IntoResponse`（axum）映射到 `(StatusCode, Json<ErrorBody>)`。
+
+判定依据：错误响应中暴露内部 panic 信息或 SQL 语句 = 安全审计不通过项。
 
 ### 3.1 RESTful 资源建模
 >
@@ -571,7 +589,15 @@ fn api_with_docs() -> Router {
 
 ## 五、GraphQL API 设计
 
-理解「GraphQL API 设计」需要把握 Schema 与类型系统、Resolver 与 N+1 问题与订阅与实时数据，本节依次展开。
+GraphQL 在 Rust 中的两个工程要点：
+
+**Schema 与类型系统**：`async-graphql` 用过程宏从 Rust 类型生成 schema——`#[derive(SimpleObject)]` 的结构体即 GraphQL 类型，Rust 的 `Option<T>` 精确映射为 GraphQL 的可空标记，这比多数语言（需要运行时反射）的映射更严格。
+
+**N+1 问题**：resolver 按字段独立解析，列表查询会为每个元素触发一次数据源查询（1 次查列表 + N 次查关联）。标准解法是 **DataLoader** 模式——`async-graphql::dataloader::DataLoader` 把同 tick 内的按 ID 查询自动批处理为一次 `WHERE id IN (...)`，并带请求级缓存。
+
+订阅（subscription）基于 WebSocket，Rust 侧映射为 `futures::Stream` 字段，背压语义与 Tokio 通道一致。
+
+判定依据：resolver 中出现循环内查询数据库的代码 = N+1 反模式，必须引入 DataLoader。
 
 ### 5.1 Schema 与类型系统
 >
@@ -1322,3 +1348,30 @@ impl Name {
     fn to_uppercase(&self) -> String { self.0.to_uppercase() } // 新数据按值返回
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((API Design Patterns API 设计模式))
+    API 设计原则
+      RESTful 资源建模
+      API 版本化策略
+      错误处理与状态码
+    REST API 设计
+      路由与处理器
+      请求验证与序列化
+      OpenAPI 文档生成
+    GraphQL API 设计
+      Schema 与类型系统
+      Resolver 与 N 1 问题
+      订阅与实时数据
+    gRPC API 设计
+      Protocol Buffers 与
+      流式 RPC
+      拦截器与中间件
+```
+
+> **认知功能**: 本 mindmap 从本页「API Design Patterns API 设计模式」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

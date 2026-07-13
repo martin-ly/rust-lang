@@ -270,3 +270,25 @@ pub trait SimpleFuture {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((C09 设计模式 - 术语表))
+    设计模式基础
+      设计模式 Design Pattern
+      GoF Gang of Four
+    Rust 特有概念
+      Trait 对象
+      Typestate 模式
+      零成本抽象 Zero-Cost
+    并发与异步
+      Actor 模式
+      Reactor 模式
+      CSP Communicating
+```
+
+> **认知功能**: 本 mindmap 从本页「C09 设计模式 - 术语表」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

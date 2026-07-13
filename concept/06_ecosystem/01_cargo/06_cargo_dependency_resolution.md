@@ -556,3 +556,28 @@ fn main() {
     parse_json(&p);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo 依赖解析))
+    特性合并 Feature
+      同一个 crate
+      Feature unification
+    rust-version 与 MSRV
+      MSRV-aware resolver
+      控制解析策略
+      工作空间与混合 MSRV
+    Yanked 版本与冲突诊断
+      Yanked 版本
+      诊断工具
+    可运行实践 resolver v3
+      示例结构
+      运行与观察
+      切换解析策略
+```
+
+> **认知功能**: 本 mindmap 从本页「Cargo 依赖解析」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

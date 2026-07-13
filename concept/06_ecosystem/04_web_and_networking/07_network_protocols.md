@@ -558,3 +558,33 @@ fn main() {
     b();
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((网络协议 QUIC HTTP-3 与 Rust 实现))
+    QUIC 基于 UDP 的安全传输协议
+      QUIC 的设计动机
+      QUIC 的包结构与 Rust 表示
+      Rust 实现 quinn
+    HTTP 3 基于 QUIC
+      HTTP 3 与 HTTP 2 的对比
+      QPACK HTTP 3 的头部压缩
+    eBPF 内核可编程与 Rust
+      eBPF 的本质
+      Rust eBPF aya-rs
+      Rust 实现 eBPF 的独特优势
+    编译错误示例
+      编译错误 1 SendStream 跨
+      编译错误 2 eBPF 程序类型约束
+      编译错误 3 async fn 在
+    补充视角 现代高性能网络技术
+      io uring
+      零拷贝技术
+      HTTP 3 与 QUIC
+```
+
+> **认知功能**: 本 mindmap 从本页「网络协议 QUIC HTTP-3 与 Rust 实现」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

@@ -163,7 +163,13 @@
 
 ## 1. 网络编程基础
 
-本节从 OSI 模型与 TCP/IP 与 地址与端口 两个层面剖析「网络编程基础」。
+Rust 网络编程的概念地基是三条主线：
+
+- **OSI/TCP-IP 分层与 Rust 类型的对应**：传输层对应 `std::net::{TcpStream, TcpListener, UdpSocket}`，网络层对应 `IpAddr`/`SocketAddr`；应用层协议（HTTP 等）不在标准库，由生态 crate（`hyper`/`reqwest`）提供。
+- **地址与端口**：`SocketAddr = IpAddr + u16`，IPv4/IPv6 通过 `SocketAddrV4/V6` 变体区分；`ToSocketAddrs` trait 是标准库地址解析的统一入口，接受 `(&str, u16)`、`"host:port"` 等多种形式。
+- **阻塞 vs 非阻塞**：`std::net` 默认阻塞；`.set_nonblocking(true)` 后 `read/write` 返回 `WouldBlock` 错误——这是所有异步运行时（Tokio）对标准库做事件驱动包装的基元。
+
+判定依据：学习路径应沿「阻塞 TCP echo → 超时与错误处理 → 异步化」递进，跳过阻塞模型直接学 Tokio 会导致对 `WouldBlock`/背压等概念无感。
 
 ### 1.1 OSI 模型与 TCP/IP
 
@@ -241,7 +247,13 @@ fn main() {
 
 ## 2. TCP 连接管理
 
-本节围绕「TCP 连接管理」展开，依次讨论 TCP 服务器、TCP 客户端与连接池。
+TCP 连接管理的三个生产要点：
+
+1. **服务器端**：`TcpListener::bind` + 循环 `accept()`；每连接一线程模型简单但受线程栈（默认 8MB）限制，千连接以上应转异步或线程池。`SO_REUSEADDR` 在 Unix 上默认语义与 Windows 不同，测试重启时的 `AddrInUse` 错误多源于此。
+2. **客户端**：`TcpStream::connect` 阻塞且无可配超时——生产代码必须用 `TcpStream::connect_timeout(&addr, Duration)`，否则对端防火墙丢包时默认超时可达分钟级。
+3. **连接池**：HTTP/数据库连接池（`deadpool`、`bb8`）复用连接摊销三次握手 + TLS 握手成本；池大小经验值 = 并发请求峰值 × 平均请求耗时 / 复用间隔，需配合 `keepalive` 防 NAT 超时断连。
+
+判定依据：凡对外发起 TCP 的代码路径，搜索 `connect(` 无 `_timeout` 后缀即为待修复项。
 
 ### 2.1 TCP 服务器
 
@@ -553,7 +565,18 @@ fn main() {
 
 ## 5. 错误处理与超时
 
-本节从超时设置 与 重试策略 两个层面剖析「错误处理与超时」。
+网络错误的处理原则是**区分瞬时错误与永久错误**，并给每类设置独立的超时与重试预算：
+
+| 错误类型 | 典型来源 | 策略 |
+|---|---|---|
+| `TimedOut` / `WouldBlock` | 网络拥塞、对端慢 | 指数退避重试，带抖动 |
+| `ConnectionRefused` | 服务未启动 | 快速失败，不重试 |
+| `ConnectionReset` | 对端崩溃/中间设备 | 重建连接后重试一次 |
+| DNS 解析失败 | 配置错误 | 永久失败，报警 |
+
+超时设置的四层防线：连接超时（`connect_timeout`）、读超时（`set_read_timeout`）、写超时、以及整体请求超时（Tokio 中 `tokio::time::timeout` 包裹整个 future）。**只设读写超时而不设整体超时会漏掉重定向循环等应用层死锁**。
+
+判定依据：重试必须幂等；非幂等操作（如支付）重试需附加去重令牌（idempotency key）。
 
 ### 5.1 超时设置
 

@@ -995,3 +995,30 @@ fn main() {
     println!("{}", check(1));
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Formal Verification Tools))
+    模型检验工具
+      Kani 基于 CBMC 的 Rust
+      MIRI 运行时 UB 检测器
+    演绎验证工具
+      Prusti Viper 分离逻辑验证器
+      Creusot Why3 WhyML
+      Verus SMT-LIB 验证器
+    类型系统扩展
+      Flux 精化类型
+      Aeneas 向函数式语言的转换
+    Rust 形式化验证的前沿
+      RefinedRust Iris
+      RustBelt 验证框架
+      hax 翻译到 F 和 Rocq
+    验证工具对比与选型
+      能力矩阵
+```
+
+> **认知功能**: 本 mindmap 从本页「Formal Verification Tools」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

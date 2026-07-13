@@ -672,3 +672,27 @@ WIT 最佳实践：
 - 批量操作与流式资源减少 host-guest 调用次数。
 
 > **关键洞察**：WASI 0.2 使 Rust 组件能够以类型安全方式被其他语言组件调用，但生态成熟度与运行时支持仍是生产落地前需要评估的边界条件。
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((WASI WebAssembly Component))
+    WASI 架构与能力安全
+      WASI 的三层架构
+      能力安全模型
+    Component Model 核心概念
+      能力传递时序图
+      WIT Wasm Interface
+      wit-bindgen 与 Rust
+    Rust wasm32-wasip1
+      no std wasm32 的约束与模式
+      错误处理跨边界
+    WASI 与 Rust 的形式化同构
+      所有权 ↔ 能力安全 的同构映射
+      形式化验证的空白与挑战
+```
+
+> **认知功能**: 本 mindmap 从本页「WASI WebAssembly Component」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

@@ -1028,3 +1028,32 @@ fn run(f: &dyn Fetcher) {
     let _ = f.fetch(); // 现在 dyn compatible
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((前沿研究与创新模式 Frontier Research))
+    Effect 系统
+      显式 Effect 标记
+      Effect 多态 Effect
+      Effect 约束与推断
+    Algebraic Effects
+      Effect Handlers
+      可恢复效应 Resumable
+    线性类型增强 Linear Types
+      线性类型模拟
+      线性会话类型 Linear
+      Rust 1 97 0 线性类型实践
+    Capability-based 设计
+      能力令牌 Capability
+      能力传递和撤销
+    未来方向
+      研究前沿
+      依赖类型探索 Dependent
+      量子计算模式 Quantum
+```
+
+> **认知功能**: 本 mindmap 从本页「前沿研究与创新模式 Frontier Research」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

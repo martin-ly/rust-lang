@@ -632,3 +632,23 @@ Arrow 的列式内存格式是语言无关的。Rust `arrow-rs` 和 Python `pyar
 | Rust for Data Science（Rust 数据科学） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Rust for Data Science（Rust 数据科学） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust for Data Science（Rust 数据科学） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 数据科学与科学计算))
+    数据处理与 ETL
+      Polars DataFrame 引擎
+      DataFusion 查询执行
+    统计分析与数值计算
+      统计生态
+      线性代数
+    可视化与交互
+      绘图生态
+      Jupyter 内核
+```
+
+> **认知功能**: 本 mindmap 从本页「Rust 数据科学与科学计算」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

@@ -539,3 +539,31 @@ fn main() {
     println!("{}", v);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo Build Scripts build rs))
+    生命周期与执行时机
+      默认执行条件
+      rerun-if-changed
+    向主 crate 传递信息
+      设置 cfg 标志
+      设置环境变量
+      添加链接搜索路径与库
+    链接原生库
+      使用 links 字段
+      一个完整示例
+    常见模式与最佳实践
+      生成代码到 OUT DIR
+      探测目标平台特性
+    实践 版本注入 FFI 最小项目
+      Cargo toml
+      build rs
+      native math c
+```
+
+> **认知功能**: 本 mindmap 从本页「Cargo Build Scripts build rs」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

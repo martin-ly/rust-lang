@@ -1487,3 +1487,32 @@ fn main() {
     println!("{:?}", events);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((CQRS Event Sourcing))
+    CQRS 核心
+      命令端 写模型优化
+      查询端 读模型优化
+      读写分离的物理实现
+    事件溯源核心
+      事件不可变性与追加模型
+      快照策略与版本化
+      事件升级 Event Upcasting
+    CQRS ES 协同模式
+      Saga Process
+      Outbox 模式 保证事件发布
+      读模型的最终一致性
+    Rust 实现
+      事件定义与序列化
+      命令处理器
+      事件存储与投影
+    概念属性矩阵
+      CQRS ES 模式对比矩阵
+```
+
+> **认知功能**: 本 mindmap 从本页「CQRS Event Sourcing」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

@@ -797,3 +797,26 @@ fn main() {}
 
 泛型和 trait bounds 将组合从运行时转移到编译期，无效组合在编译期被拒绝。`Option<T>` 和 `Result<T, E>` 的显式处理避免了隐式 null/exception 的复杂交互。
 </details>
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((系统可组合性 System Composability))
+    四大可组合模式
+      管道-过滤器
+      数据流管道 Dataflow
+      事件驱动组合 Event-Driven
+    组合性定理
+      定理 1 Iterator
+      定理 2 Tower Layer
+      定理 3 有界通道组合保持背压
+    反模式
+      过度组合导致的类型爆炸
+      dyn Trait 在热路径上破坏单态化
+      忽视编译时间成本
+```
+
+> **认知功能**: 本 mindmap 从本页「系统可组合性 System Composability」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

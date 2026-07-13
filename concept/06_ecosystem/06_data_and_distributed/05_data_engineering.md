@@ -956,3 +956,29 @@ Apache Arrow 的 Rust 实现，提供列式内存格式标准。`polars`、`data
 | Data Engineering（数据工程） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Data Engineering（数据工程） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Data Engineering（数据工程） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Data Engineering 数据工程))
+    数据摄取层 Ingestion
+      批处理摄取
+      流处理摄取
+      变更数据捕获 CDC
+    数据转换层 Transformation
+      DataFrame 转换
+      SQL 查询引擎
+      Rust 中的 ETL 管道骨架
+    数据存储层 Storage
+      列式存储 Parquet
+      对象存储抽象
+      数据湖与 Delta Lake
+    数据服务层 Serving
+      查询加速
+      数据 API
+```
+
+> **认知功能**: 本 mindmap 从本页「Data Engineering 数据工程」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

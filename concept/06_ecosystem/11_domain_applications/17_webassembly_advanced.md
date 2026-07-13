@@ -103,7 +103,13 @@
 
 ## 一、权威定义
 
-「权威定义」部分按 WebAssembly 作为通用字节码、组件模型与模块链接与WASI：WebAssembly 系统接口的顺序逐层展开。
+WebAssembly（WASM）的三层权威定义锚点：
+
+- **W3C 规范层面**：WASM 是一种为栈式虚拟机设计的可移植二进制指令格式（W3C Recommendation），具有线性内存模型、显式类型系统与可验证的模块结构；Rust 自 1.30 起将 `wasm32-unknown-unknown` 纳入 tier 2 支持。
+- **组件模型（Component Model）**：W3C WebAssembly CG 的提案，定义跨语言可组合的模块链接层——核心 WASM 模块只暴露 `memory`/`func`，组件模型通过 WIT（WASM Interface Types）描述字符串、记录、变体等高层类型的 ABI。
+- **WASI（WebAssembly System Interface）**：标准组织 bytecodealliance 维护的能力安全系统接口；Preview 1 为 POSIX 风格 fd 模型，Preview 2 转向基于组件模型的句柄/资源（handle/resource）模型。
+
+Rust 与三者均有原生对接点，下文按执行模型 → 工具链 → 组件模型 → WASI 逐层展开。
 
 ### 1.1 WebAssembly 作为通用字节码
 
@@ -156,7 +162,16 @@ WASI 演进:
 
 ## 二、WASM 执行模型全景
 
-理解「WASM 执行模型全景」需要把握浏览器宿主：JS 引擎集成、独立运行时：wasmtime 与 wasmer与边缘计算：Cloudflare Workers 与 Fastly Co…，本节依次展开。
+WASM 模块的执行始终依赖宿主（host），不同宿主决定了可用的系统接口与性能特征：
+
+| 宿主 | 运行时 | 系统接口 | 典型场景 | 边界穿越成本 |
+|---|---|---|---|---|
+| 浏览器 | V8 / SpiderMonkey | JS glue + Web APIs | 前端计算密集型模块 | 高（JS↔WASM 字符串编解码） |
+| 服务端 | wasmtime / wasmer | WASI Preview 1/2 | 插件沙箱、FaaS | 低（直接句柄调用） |
+| 边缘 | Cloudflare Workers / Fastly Compute | WASI 子集 + 平台 API | 毫秒级冷启动服务 | 中（受限于平台预算） |
+| 嵌入式 | wasm3 / wamr | 自定义 host imports | MCU 上的脚本化逻辑 | 取决于宿主实现 |
+
+选型判定：需要完整 WASI 与资源模型 → wasmtime；需要嵌入 Rust 进程内 → wasmer 或 wasmtime embedding API；冷启动预算 <5ms → 边缘平台（牺牲文件系统等能力）。
 
 ### 2.1 浏览器宿主：JS 引擎集成
 
@@ -399,7 +414,15 @@ world app-world {
 
 ## 五、WASI Preview 2 与 Rust
 
-「WASI Preview 2 与 Rust」部分按能力安全模型、虚拟文件系统与网络与Rust 的 wasi crate 与 wasmtime 嵌入的顺序逐层展开。
+WASI Preview 2（wasi:cli/wasi:http 等世界定义）相对 Preview 1 的根本变化是**从 fd 表到句柄资源模型**：文件、socket、流统一为 `resource`，由组件模型在编译期校验生命周期，消除了 Preview 1 中运行时查 fd 表的动态错误。
+
+Rust 侧的关键对接点：
+
+- `cargo build --target wasm32-wasip2`（Rust 1.82+ tier 2 目标）直接产出组件；旧目标 `wasm32-wasi` 已更名为 `wasm32-wasip1`。
+- `wasi` crate（0.14+）提供 Preview 2 API 的原始绑定；高层代码应优先使用 `std`，让标准库映射到 WASI。
+- wasmtime 嵌入时通过 `wasmtime::component::bindgen!` 宏从 WIT 生成类型安全的 host 绑定，与 `wasm_bindgen` 的 JS 绑定形成对称设计。
+
+判定依据：新项目应选择 `wasm32-wasip2`；仅当宿主（如部分边缘平台）尚未支持组件模型时退回 wasip1。
 
 ### 5.1 能力安全模型
 

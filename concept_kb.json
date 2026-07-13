@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 495,
-    "generated_at": "2026-07-13T23:10:00.877604+00:00"
+    "generated_at": "2026-07-13T23:14:21.606070+00:00"
   },
   "files": [
     {
@@ -3240,7 +3240,7 @@
       "layer": "L0",
       "title": "概念定义图谱（Concept Definition Atlas）",
       "positioning": "",
-      "line_count": 567,
+      "line_count": 566,
       "theorem_chains": [
         {
           "text": "| `05_logical_reasoning_atlas` | [逻辑推理图谱](../../00_meta/knowledge_topology/05_logical_reasoning_atlas.md) | Logical Reasoning Atlas | A navigational index of theorem chains, inference rules, proof/verification paths, and formal correspondences across the Rust concept hierarchy. 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。 | 2 |",
@@ -5152,7 +5152,7 @@
       "layer": "L0",
       "title": "层间映射图谱（Inter-Layer Mapping Atlas）",
       "positioning": "",
-      "line_count": 204,
+      "line_count": 203,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -5269,7 +5269,7 @@
       "layer": "L0",
       "title": "层内映射图谱（Intra-Layer Mapping Atlas）",
       "positioning": "",
-      "line_count": 595,
+      "line_count": 594,
       "theorem_chains": [
         {
           "text": "- `⟹` entails：源蕴含/导向目标（后置概念引用，默认）",
@@ -7029,7 +7029,7 @@
       "layer": "L0",
       "title": "概念-权威来源对齐图谱（Concept-Source Alignment Atlas）",
       "positioning": "",
-      "line_count": 53,
+      "line_count": 52,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -7466,7 +7466,7 @@
       "layer": "L0",
       "title": "缺口与行动计划（Gap and Action Plan）",
       "positioning": "",
-      "line_count": 79,
+      "line_count": 78,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],

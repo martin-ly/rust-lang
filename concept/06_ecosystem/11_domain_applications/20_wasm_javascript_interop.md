@@ -148,7 +148,16 @@ JavaScript 互操作
 
 ## 🔗 基础集成
 
-「基础集成」部分的核心主题是加载 WASM 模块，本节展开说明。
+WASM 模块的加载链路分四步，每步都有明确的失败模式：
+
+1. **获取字节码**：`fetch('module.wasm')` 或打包器内联 base64；
+2. **编译/实例化**：`WebAssembly.instantiateStreaming`（流式编译，首选）→ 返回 `{ module, instance }`；
+3. **导入对象（imports）**：宿主向 WASM 注入 JS 函数、内存或全局变量——签名不匹配在此阶段抛 `LinkError`；
+4. **调用导出函数**：`instance.exports.add(1, 2)`。
+
+`wasm-bindgen` 的价值在于把 2–4 步的胶水代码（字符串编解码、结构体序列化）自动生成：`#[wasm_bindgen]` 标注的 Rust 函数会生成同名 JS 包装，`wasm-pack build --target web` 产出可直接 `import` 的 ES 模块。
+
+判定依据：新项目一律用 `instantiateStreaming` + wasm-bindgen 生成胶水；手写 `WebAssembly.Memory` 互操作仅在调试 ABI 问题时必要。
 
 ### 加载 WASM 模块
 
@@ -176,7 +185,18 @@ const result = wasmModule.greet("World")
 
 ## ⚛️ React 集成
 
-本节围绕「React 集成」展开，覆盖基本用法 与 自定义 Hook 两个方面。
+React 集成 WASM 的推荐模式是**把 WASM 模块封装为自定义 Hook**，隔离异步初始化与组件生命周期：
+
+```text
+useWasm() → { ready, api }   // api 在 ready 前为 null
+```
+
+两个工程陷阱：
+
+1. **初始化竞态**：`WebAssembly.instantiate` 是异步的，组件挂载期间多次触发会导致重复实例化——用模块级单例 Promise 去重；
+2. **渲染热路径**：每次 React render 都跨 JS↔WASM 边界传字符串会造成 GC 压力，应把 WASM 调用收敛到 `useMemo`/`useEffect` 中，边界两侧优先传 `Float64Array` 视图而非 JSON。
+
+判定依据：WASM 适合「一次性重计算」（图像滤镜、物理模拟），不适合「高频小调用」（每帧状态读取）——后者边界穿越成本会吞掉计算收益。
 
 ### 基本用法
 
@@ -259,7 +279,13 @@ export default {
 
 ## 🟢 Node.js 集成
 
-「Node.js 集成」部分包含 Node.js 基本用法 与  ES 模块 两条主线，本节依次说明。
+Node.js 集成与浏览器的核心差异是**加载方式与目标三元组**：
+
+- Node 侧用 `fs.readFileSync` + `WebAssembly.instantiate`，或（Node ≥16）直接 `import` WASM 模块（需 `--experimental-wasm-modules`）；
+- `wasm-pack build --target nodejs` 产出 CommonJS 胶水，`--target bundler` 产出给 webpack 的 ESM；选错目标是「`__wbindgen_placeholder__` 未定义」类错误的头号原因；
+- 需要文件系统/网络时，浏览器走 `--target web` + JS shim，Node 可编 `wasm32-wasip1` 目标获得 WASI 系统接口。
+
+判定依据：纯计算模块选 `--target nodejs`；既跑浏览器又跑 Node 的库应发双产物（两个 target 各一份），不要试图用单一产物兼容两侧。
 
 ### Node.js 基本用法
 

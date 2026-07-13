@@ -586,3 +586,30 @@ fn main() {
     println!("{}", total);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((流处理生态 Rust 实现与工业系统全景))
+    timely-dataflow
+      核心设计
+      代码示例
+    differential-dataflo
+      核心抽象
+      DD 的增量运算符
+    tokio-stream 与
+      Stream trait Rust
+      背压的内建支持
+    Materialize 流式 SQL
+      架构三层
+      与 Flink 的对比
+    Rust 在流处理中的独特定位
+      结构性优势
+      结构性挑战
+      Kafka 生态与 Rust 客户端
+```
+
+> **认知功能**: 本 mindmap 从本页「流处理生态 Rust 实现与工业系统全景」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

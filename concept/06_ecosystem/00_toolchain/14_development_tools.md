@@ -220,3 +220,24 @@ clippy 0.1.97 (2d8144b788 2026-07-07)
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/rstest — 生态权威 API 文档](https://docs.rs/rstest) · [docs.rs/mockall — 生态权威 API 文档](https://docs.rs/mockall)
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 常用开发工具))
+    额外 Lint Clippy
+      示例
+      常用 Clippy 配置
+    IDE 支持 rust-analyzer
+      安装
+      推荐 IDE 编辑器
+    代码格式化 rustfmt
+      配置
+    自动修复 cargo fix
+      典型场景
+```
+
+> **认知功能**: 本 mindmap 从本页「Rust 常用开发工具」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

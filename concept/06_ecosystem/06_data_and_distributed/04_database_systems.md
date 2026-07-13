@@ -573,3 +573,31 @@ fn main() {
     c.exec("COMMIT");
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((数据库系统 Rust 在存储引擎中的语义))
+    TiKV 分布式事务与
+      Percolator 事务模型
+      Rust 实现的优势
+      TiKV 中的 Rust 所有权模式
+    Materialize 流式 SQL
+      严格串行化 Strict
+      与 CockroachDB 的对比
+    Meilisearch
+      架构设计
+      Rust 的所有权在搜索引擎中的应用
+    SurrealDB 多模型数据库
+      多模型查询语义
+      Rust 实现的安全保证
+    编译错误示例
+      编译错误 1 Arc RefCell
+      编译错误 2 泛型 Trait
+      编译错误 3 生命周期不匹配导致悬垂引用
+```
+
+> **认知功能**: 本 mindmap 从本页「数据库系统 Rust 在存储引擎中的语义」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

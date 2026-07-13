@@ -141,7 +141,18 @@ WebSocket 实时通信
 
 ## 1. WebSocket 基础
 
-「WebSocket 基础」部分包含 WebSocket vs HTTP 与  WebSocket 握手 两条主线，本节依次说明。
+WebSocket（RFC 6455）与 HTTP 的本质差异是**连接生命周期与消息方向**：
+
+| 维度 | HTTP/1.1 | WebSocket |
+|---|---|---|
+| 连接 | 短连接/keep-alive 复用 | 长连接，一次握手后常驻 |
+| 消息方向 | 客户端发起 | 全双工，服务端可主动推送 |
+| 帧开销 | 每请求数百字节头 | 2–14 字节帧头 |
+| 状态 | 无状态 | 有状态（会话绑定） |
+
+握手过程：客户端发 `Upgrade: websocket` + `Sec-WebSocket-Key`（16 字节随机 base64），服务端以 `Sec-WebSocket-Accept = base64(sha1(key + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"))` 应答——该魔数拼接不是安全机制，只是防止非 WebSocket 中间件误升级。
+
+判定依据：仅「服务端推送」需求可先评估 SSE（更简单、走 HTTP 基础设施）；需要双向高频消息才用 WebSocket。
 
 ### 1.1 WebSocket vs HTTP
 
@@ -373,7 +384,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 4. 服务器开发
 
-本节从广播服务器 与 房间管理 两个层面剖析「服务器开发」。
+服务器开发的两个核心模式：
+
+**广播服务器**：连接注册表的经典实现是 `tokio::sync::broadcast`（多消费者通道，自带慢消费者丢弃语义）或集中式 `HashMap<ConnId, mpsc::Sender>` + 写扇出任务。注意 `broadcast::Sender::send` 在无接收者时返回 `Err`，不算失败。
+
+**房间管理**：双层注册表 `HashMap<RoomId, HashMap<ConnId, Sender>>` 的并发保护选择——单写者任务串行化（actor 模式，无锁）优于 `RwLock` 包裹（锁内做网络发送会放大尾延迟）。**绝不在持锁状态下 `.await` 网络操作**——这会把 I/O 延迟传导为全局停顿。
+
+判定依据：连接数 <10k 用 broadcast；>10k 或需跨节点，引入 Redis pub/sub / NATS 做扇出，单机注册表无法水平扩展。
 
 ### 4.1 广播服务器
 
@@ -495,7 +512,15 @@ fn main() {
 
 ## 5. 消息格式与编解码
 
-本节从 JSON 消息 与 二进制消息 两个层面剖析「消息格式与编解码」。
+消息格式的选择沿「可读性 → 带宽 → 类型安全」光谱分布：
+
+- **JSON**（`serde_json`）：调试友好，浏览器原生；体积与解析成本最高，适合控制面消息。
+- **MessagePack / CBOR**：schema-less 二进制，体积约为 JSON 的 60–70%，适合中频数据面。
+- **Protobuf / FlatBuffers**：schema 驱动、零拷贝读取（FlatBuffers），适合高频行情/游戏帧同步；代价是 `.proto` 构建链与版本治理。
+
+Rust 侧的编解码骨架统一为 `serde::{Serialize, Deserialize}` + `tokio_util::codec` 的 `Encoder/Decoder` 实现帧定界（WebSocket 已自带帧边界，codec 只在裸 TCP 上需要）。
+
+判定依据：先用 JSON 打通链路，profile 确认序列化占 CPU >10% 再换二进制格式——过早引入 schema 治理成本。
 
 ### 5.1 JSON 消息
 
@@ -773,3 +798,30 @@ for id in stale { clients.remove(&id); }
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((C10 Networks - Tier 2))
+    知识结构
+      概念定义
+      属性特征
+      关系连接
+    WebSocket 基础
+      WebSocket vs HTTP
+      WebSocket 握手
+    使用 tokio-tungstenite
+      基础客户端
+      基础服务器
+    客户端开发
+      完整客户端
+      自动重连
+    服务器开发
+      广播服务器
+      房间管理
+```
+
+> **认知功能**: 本 mindmap 从本页「C10 Networks - Tier 2」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

@@ -40,7 +40,17 @@
 
 ## 2. 类型理论基础
 
-「类型理论基础」部分包含简单类型λ演算 与 依赖类型 两条主线，本节依次说明。
+设计模式的类型理论地基从简单类型 λ 演算（STLC）出发：STLC 提供「函数类型 + 积类型」的骨架，对应 Rust 的 `fn(A) -> B` 与元组/结构体；而**依赖类型**（类型可依赖值，如 `Vec<T, N>` 的长度索引）是 Rust 泛型常量（const generics）的理论先驱——`[T; N]` 的长度参与类型检查，使「越界访问」部分可静态排除。
+
+模式与类型构造的对应：
+
+| 模式 | 类型构造 |
+|---|---|
+| Strategy | 函数类型作为一等公民（`Fn` trait） |
+| Visitor | 和类型（`enum`）+ 穷尽匹配 |
+| Builder | 依赖类型的弱化版（typestate 泛型参数） |
+
+判定依据：当某模式在 Rust 中「消失」（如 Visitor 被 `match` 吸收），恰恰说明语言已把该模式的结构内建为类型构造。
 
 ### 2.1 简单类型λ演算
 
@@ -384,7 +394,13 @@ mod monad_laws {
 
 ## 4. Curry-Howard 同构
 
-本节围绕「Curry-Howard 同构」展开，覆盖类型即命题，程序即证明 与 依赖类型的证明 两个方面。
+Curry-Howard 同构断言「类型即命题，程序即证明」： inhabitation（类型有值）等价于命题可证。它在 Rust 工程中的三个推论：
+
+1. **不可表达非法状态**：把「未初始化对象」建模为无居民类型（类似 `!`  Never 类型的推理方向），则其不存在性由类型系统证明，无需测试。
+2. **`Result<T, E>` 即析取**：成功分支与失败分支必须穷尽处理（`match`/`?`），对应直觉主义逻辑的析取消去——编译器拒绝「忽略错误」即拒绝「不完整的证明」。
+3. **依赖类型的证明**：Rust 无完整依赖类型，但 typestate 与 const generics 是其工程化近似：协议状态机的合法转换即定理，类型转换函数即证明项。
+
+判定依据：设计 API 时问「非法用法能否被构造出值」——若不能构造，则该约束已被类型系统证明。
 
 ### 4.1 类型即命题，程序即证明
 
@@ -570,7 +586,21 @@ pub fn affine_example() {
 
 ## 6. 会话类型 (Session Types)
 
-本节专门讨论「会话类型 (Session Types)」下的协议状态机。
+会话类型（Session Types）把**通信协议**编码为类型：每个端点的类型描述「接下来发什么/收什么」的完整时序，类型检查保证协议双方不偏离、不死锁。
+
+Rust 中的工程化形态是协议状态机模式：
+
+```text
+struct Connection<State> { socket: TcpStream, _state: PhantomData<State> }
+struct Handshake; struct Established;
+impl Connection<Handshake> {
+    fn send_hello(self) -> io::Result<Connection<Established>> { ... }
+}
+```
+
+每个方法消费旧状态类型、返回新状态类型——「在握手前发送数据」因无对应方法而成为编译错误。这与完整会话类型理论的差距：Rust 无法表达双向通信的对偶性（duality）自动校验，需手工保证两端状态机镜像。
+
+判定依据：协议文档中的时序图可机械翻译为 typestate 链；发现运行期「协议状态错误」panic 即 typestate 化信号。
 
 ### 6.1 协议状态机
 
@@ -1066,3 +1096,29 @@ fn main() {
     let _ = d1.state;
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((形式化设计模式理论 Formal Design))
+    类型理论基础
+      简单类型λ演算
+      依赖类型
+    范畴论视角
+      Functor 与模式
+      Monad 与模式
+    Curry-Howard 同构
+      类型即命题 程序即证明
+      依赖类型的证明
+    线性类型系统
+      线性类型理论
+      仿射类型 Affine Types
+    代数数据类型与模式
+      和类型与积类型
+      递归类型
+```
+
+> **认知功能**: 本 mindmap 从本页「形式化设计模式理论 Formal Design」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

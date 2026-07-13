@@ -280,3 +280,28 @@ impl embedded_hal::serial::ErrorType for MyUart {
 
 - **P0 官方**: [core — Rust 核心库（no_std 官方 API 文档）](https://doc.rust-lang.org/core/index.html)
 - **P1 学术/形式化**: [Sharma, Sharma, Torres-Arias & Machiry: Rust for Embedded Systems — Current State, Challenges and Open Problems（CCS 2024 扩展报告, arXiv:2311.05063）](https://arxiv.org/abs/2311.05063)（2026-07-12 验证 HTTP 200）
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Embedded-HAL 1 0 迁移与))
+    Embedded-HAL 生态现状
+      版本里程碑
+      为什么 1 0 是重大变革
+    Embedded-HAL 1 0
+      错误类型统一
+      SpiDevice vs SpiBus
+      异步 HAL
+    Embassy v0 5 生产就绪状态
+      Embassy 是什么
+      v0 5 关键特性
+      Embassy vs RTIC 选型
+    从 0 2 迁移到 1 0 的行动指南
+      Cargo toml 更新
+      代码迁移要点
+```
+
+> **认知功能**: 本 mindmap 从本页「Embedded-HAL 1 0 迁移与」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
