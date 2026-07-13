@@ -416,7 +416,12 @@ Unicode Normalization（规范化）:
 
 ## 四、反命题与边界分析
 
-「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+本节检验编码处理的两条常见误判：
+
+- **反命题 1：「UTF-8 是唯一需要关心的编码」** —— 在 Rust 内部成立（`str` 保证 UTF-8），但边界处不然：Windows API 用 UTF-16（`OsStr` 的 WTF-8 内部表示）、文件系统路径可能非 UTF-8（`Path` 用 `OsStr` 而非 `str` 正是此因）、老旧协议用 Latin-1/GBK。判定准则：程序内部一律 UTF-8，边界处用 `String::from_utf8_lossy`（替换字符 U+FFFD）或显式错误；
+- **反命题 2：「`from_utf8_lossy` 是安全的默认选择」** —— 有代价：损失转换静默替换无效字节，数据完整性场景（哈希、加密、协议解析）中静默损坏比报错更糟。判定准则：数据必须完整 ⟹ `from_utf8` 返回 `Result`；仅展示用途 ⟹ lossy 可接受。
+
+边界极限小节量化：`OsStr` 的跨平台表示差异、`CString` 的内嵌 NUL 检查、以及 BOM 处理的责任归属。
 
 ### 4.1 反命题树
 
@@ -785,7 +790,14 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：`String` 与 `&str` 在所有权和可变性上的核心…、测验 2：`String::from("hello")` 和 `"he…、测验 3：`OsStr`/`OsString` 与 `str`/`St…、测验 4：`CString` 与 `String` 在用途上有什么不同…等5个方面。
+本节 5 道测验覆盖字符串与编码的核心判别点：
+
+- 测验 1-2（理解层）：`String` vs `&str` 的所有权分野、`from` 与 `to_string` 的等价性（后者经 `ToString` blanket impl）；
+- 测验 3（理解层）：`OsStr`/`OsString` 的存在理由——平台原生字符串表示（Windows UTF-16、Unix 任意字节）与 `str` 的 UTF-8 保证不可兼得；
+- 测验 4（理解层）：`CString` 的 FFI 角色——NUL 终止约定与内嵌 NUL 的运行期检查；
+- 测验 5（理解层）：字符串索引——`s[0]` 拒绝的 UTF-8 根源与安全替代（`chars().nth()`/`get()`/`as_bytes()`）。
+
+作答建议：测验 3 是本组分水岭——理解 `OsStr` 就理解了「Rust 类型如何编码平台差异」。
 
 ### 测验 1：`String` 与 `&str` 在所有权和可变性上的核心区别是什么？（理解层）
 

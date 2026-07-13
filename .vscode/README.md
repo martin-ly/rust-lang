@@ -84,6 +84,7 @@ Markdownlint 规则配置（项目根目录）：
 <!-- ✅ 允许长行（代码块、链接等） -->
 这是一个很长很长很长的行...
 ```
+
 ### 自动修复的问题
 
 - ❌ 行尾空格 → ✅ 自动删除
@@ -115,6 +116,7 @@ Markdownlint 规则配置（项目根目录）：
   "MD规则编号": false
 }
 ```
+
 ### 某个文件想要跳过检查
 
 在文件开头添加注释：
@@ -124,6 +126,7 @@ Markdownlint 规则配置（项目根目录）：
 文件内容
 <!-- markdownlint-enable -->
 ```
+
 或禁用特定规则：
 
 ```markdown
@@ -131,6 +134,7 @@ Markdownlint 规则配置（项目根目录）：
 <details>内容</details>
 <!-- markdownlint-enable MD033 -->
 ```
+
 ## 📚 参考文档
 
 - [Markdownlint 规则列表](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md)

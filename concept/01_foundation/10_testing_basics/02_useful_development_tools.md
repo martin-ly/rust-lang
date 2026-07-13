@@ -102,7 +102,13 @@ graph LR
 
 ## 四、配置示例
 
-「配置示例」部分按 `rustfmt.toml`、`.clippy.toml`与`Cargo.toml` 开发配置的顺序逐层展开。
+本节给出三份生产可用的配置文件模板与关键项说明：
+
+- **`rustfmt.toml`**：`edition = "2024"`、`max_width = 100`、`group_imports = "StdExternalCrate"`——团队统一的核心是「全量纳入 CI 检查（`cargo fmt --check`）」，配置项越少争议越少；
+- **`.clippy.toml`**：`msrv = "1.97"`（让 clippy 只建议当前 MSRV 可用的写法）、`cognitive-complexity-threshold` 等阈值项——配合 CI 的 `cargo clippy -- -D warnings` 形成强制基线；
+- **`Cargo.toml` 开发配置**：`[profile.dev] opt-level = 1`（调试与编译速度的平衡点）、`[profile.dev.package."*"] opt-level = 3`（只优化依赖，测试/基准不再痛苦）。
+
+配置原则：先默认后定制——每个非默认项都应有注释说明「为什么默认不够好」，否则删除回归默认。
 
 ### `rustfmt.toml`
 
