@@ -21,6 +21,25 @@
 
 ---
 
+## 0. Rust 1.90.0 特性 × 影响面 × 受益场景矩阵（2026-07-14 对齐 1.97 范式）
+
+> **说明**：本节对齐 [`rust_1_97_stabilized.md`](rust_1_97_stabilized.md) 的矩阵结构，列出 **1.90.0 本列车首次稳定**的核心特性（每版 3–8 条）。
+> 下文 §1–§10 为网络编程场景对**既有稳定特性**的应用参考，其真实稳定版本见 §11 版本事实对齐表。
+>
+> **官方发布说明可访问性实测**（2026-07-14，`curl` HTTP 200）：
+> [releases.rs 1.90.0](https://releases.rs/docs/1.90.0/) · [Rust 1.90.0 Release Blog](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+
+| 特性 | 影响面 | 受益场景 | 权威源 |
+|:---|:---|:---|:---|
+| `x86_64-unknown-linux-gnu` 默认使用 lld 链接器 | 编译器 / 链接 | Linux 构建提速、降低链接内存占用 | [Release Blog](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/) · [linkage](../../03_advanced/04_ffi/03_linkage.md) |
+| `u{N}::{checked,overflowing,saturating,wrapping}_sub_signed` | 标准库 / 整数 | 无符号-有符号混合减法的溢出可控语义 | [releases.rs](https://releases.rs/docs/1.90.0/) |
+| `CStr` / `CString` / `Cow<CStr>` 互比 | 标准库 / FFI | C 字符串互操作无需手动转换 | [releases.rs](https://releases.rs/docs/1.90.0/) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) |
+| `f32`/`f64` `floor`/`ceil`/`trunc`/`fract`/`round`/`round_ties_even` 进入 const | const 上下文 / 数值 | const 数值计算与查找表生成 | [releases.rs](https://releases.rs/docs/1.90.0/) |
+| Cargo 多包发布稳定（multi-package publishing） | Cargo | workspace 一键发布多个 crate | [releases.rs](https://releases.rs/docs/1.90.0/) · [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) |
+| `x86_64-apple-darwin` 降为 Tier 2（含 host tools） | 平台 | Intel macOS CI/构建策略调整 | [releases.rs](https://releases.rs/docs/1.90.0/) |
+
+---
+
 ## 目录
 
 - [Rust 1.90 网络特性参考](#rust-190-网络特性参考)

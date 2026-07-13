@@ -135,7 +135,7 @@ flowchart TD
 
 > 以下来自 `extract_concept_topology.py` 的表征信号抽取：概念页含「示例/反例/陷阱/边界测试/误用/易错」类章节（`##`–`####` 级标题，含「⚠️ 反例与陷阱」「### N.N 反例」等深层小节），或含 `compile_fail` 编译反例代码块，即收录。每行仅给出入口与信号，正文以权威页为准。
 
-覆盖 **330** 个概念（信号：示例/反例类章节或 compile_fail 代码块）。
+覆盖 **352** 个概念（信号：示例/反例类章节或 compile_fail 代码块）。
 
 ### L0 元信息层（18 个概念）
 
@@ -154,20 +154,20 @@ flowchart TD
 | [Rust 知识体系 A/S/P 三维认知标记规范](../../00_meta/03_audit/02_asp_marking_guide.md) | 示例/反例节 ×4 | 标记应用示例 · 示例 1：借用检查错误诊断 |
 | [概念一致性检查清单](../../00_meta/03_audit/03_audit_checklist.md) | 示例/反例节 ×4 | 反例与边界完备性检查（Counter-example Completeness… · 每个核心概念的反例覆盖 |
 | [全局概念索引](../../00_meta/04_navigation/03_concept_index.md) | 示例/反例节 ×1 | 反例 → 概念 速查索引 |
-| [Rust 知识体系自测题库](../../00_meta/04_navigation/12_self_assessment.md) | 示例/反例节 ×1 · compile_fail ×1 | 边界测试：Bloom 层级与代码复杂度评估（概念映射） |
+| [Rust 知识体系自测题库](../../00_meta/04_navigation/12_self_assessment.md) | 示例/反例节 ×1 · compile_fail ×2 | 边界测试：Bloom 层级与代码复杂度评估（概念映射） |
 | [场景决策树图谱](../../00_meta/knowledge_topology/03_scenario_decision_tree_atlas.md) | 示例/反例节 ×1 | 典型决策树示例 |
 | [示例与反例图谱](../../00_meta/knowledge_topology/04_example_counterexample_atlas.md) | 示例/反例节 ×3 | 示例分类总览 · 常见反例主题速查 |
 | [Rust 知识体系知识图谱本体规范 v2.0](../../00_meta/knowledge_topology/kg_ontology_v2.md) | 示例/反例节 ×2 | Turtle 示例 · JSON-LD 1.1 示例 |
 | [Rust 知识体系顶层本体（TLO）对齐](../../00_meta/knowledge_topology/kg_tlo_alignment.md) | 示例/反例节 ×1 | 5. `kg_data_v3.json` 关键实体 TLO 映射示例 |
 
-### L1 基础概念层（41 个概念）
+### L1 基础概念层（38 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
 | [零成本抽象：Rust 的性能哲学](../../01_foundation/00_start/02_zero_cost_abstractions.md) | 示例/反例节 ×9 · compile_fail ×4 | 边界测试：零成本抽象的编译错误 · 边界测试：泛型单态化与代码膨胀（逻辑错误 / 编译器限制） |
 | [闭包基础：捕获环境与匿名函数](../../01_foundation/00_start/03_closure_basics.md) | 示例/反例节 ×8 · compile_fail ×5 | 常见陷阱 · 边界测试：闭包的编译错误 |
 | [副作用与纯度：从引用透明到 Rust 的所有权效果](../../01_foundation/00_start/04_effects_and_purity.md) | 示例/反例节 ×10 · compile_fail ×7 | 反例与边界测试 · 反例：隐式副作用的 C/C++ 陷阱 |
-| [标准 I/O 与进程](../../01_foundation/00_start/05_std_io_and_process.md) | 示例/反例节 ×8 · compile_fail ×2 | 技术细节与示例 · 示例与反例 |
+| [标准 I/O 与进程](../../01_foundation/00_start/05_std_io_and_process.md) | 示例/反例节 ×8 · compile_fail ×1 | 技术细节与示例 · 示例与反例 |
 | [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 示例/反例节 ×16 · compile_fail ×15 | 示例与反例（Examples & Counter-examples） · 正确示例：所有权转移 |
 | [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | 示例/反例节 ×15 · compile_fail ×17 | 示例与反例（Examples & Counter-examples） · 正确示例：不可变借用共存 |
 | [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | 示例/反例节 ×18 · compile_fail ×16 | 示例与反例（Examples & Counter-examples） · 正确示例：显式生命周期标注 |
@@ -175,7 +175,7 @@ flowchart TD
 | [所有权清单自测：Brown University Ownership Inventory](../../01_foundation/01_ownership_borrow_lifetime/06_ownership_inventories_brown_book.md) | 示例/反例节 ×1 · compile_fail ×2 | 样题示例 |
 | [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) | 示例/反例节 ×14 · compile_fail ×14 | 示例与反例（Examples & Counter-examples） · 正确示例：ADT + Pattern Matching |
 | [Never Type (`!`)：底类型与穷尽性](../../01_foundation/02_type_system/02_never_type.md) | 示例/反例节 ×4 · compile_fail ×3 | 边界测试 · 边界测试：尝试构造 `!` 的值（编译错误） |
-| [数值类型与运算：从整数到浮点的完整图景](../../01_foundation/02_type_system/03_numerics.md) | 示例/反例节 ×13 · compile_fail ×5 | 常见陷阱 · 边界测试：数值类型的编译错误 |
+| [数值类型与运算：从整数到浮点的完整图景](../../01_foundation/02_type_system/03_numerics.md) | 示例/反例节 ×13 · compile_fail ×4 | 常见陷阱 · 边界测试：数值类型的编译错误 |
 | [类型强制与转换：显式与隐式的边界](../../01_foundation/02_type_system/04_coercion_and_casting.md) | 示例/反例节 ×10 · compile_fail ×6 | 常见陷阱 · 边界测试：类型转换的编译错误 |
 | [数据抽象谱系：从 C struct 到 Rust enum + trait](../../01_foundation/02_type_system/05_data_abstraction_spectrum.md) | 示例/反例节 ×10 · compile_fail ×2 | 反例与边界测试 · 反例：C++ 的 std::variant vs Rust enum |
 | [引用语义：自动解引用、Deref 强制与类型转换](../../01_foundation/03_values_and_references/01_reference_semantics.md) | 示例/反例节 ×8 · compile_fail ×4 | 代码示例集 · 边界测试：引用语义的编译错误 |
@@ -188,12 +188,12 @@ flowchart TD
 | [格式化与显示](../../01_foundation/06_strings_and_text/03_formatting_and_display.md) | 示例/反例节 ×8 · compile_fail ×2 | 技术细节与示例 · 示例与反例 |
 | [模块系统与路径：Rust 的代码组织哲学](../../01_foundation/07_modules_and_items/01_modules_and_paths.md) | 示例/反例节 ×8 · compile_fail ×3 | 常见陷阱 · 边界测试：模块系统的编译错误 |
 | [Functions](../../01_foundation/07_modules_and_items/02_functions.md) | 示例/反例节 ×1 · compile_fail ×4 | 反例与边界测试 |
-| [Use Declarations](../../01_foundation/07_modules_and_items/03_use_declarations.md) | 示例/反例节 ×1 · compile_fail ×4 | 反例与边界测试 |
+| [Use Declarations](../../01_foundation/07_modules_and_items/03_use_declarations.md) | 示例/反例节 ×1 · compile_fail ×3 | 反例与边界测试 |
 | [Structs](../../01_foundation/07_modules_and_items/04_structs.md) | 示例/反例节 ×3 · compile_fail ×3 | 反例与边界测试 · 未实现 `Copy` 时的更新语法陷阱 |
-| [Enumerations](../../01_foundation/07_modules_and_items/05_enumerations.md) | 示例/反例节 ×1 · compile_fail ×3 | 反例与边界测试 |
+| [Enumerations](../../01_foundation/07_modules_and_items/05_enumerations.md) | 示例/反例节 ×1 · compile_fail ×2 | 反例与边界测试 |
 | [Implementations](../../01_foundation/07_modules_and_items/06_implementations.md) | 示例/反例节 ×1 · compile_fail ×3 | 反例与边界测试 |
-| [类型别名](../../01_foundation/07_modules_and_items/07_type_aliases.md) | 示例/反例节 ×8 · compile_fail ×3 | 技术细节与示例 · 示例与反例 |
-| [静态项](../../01_foundation/07_modules_and_items/08_static_items.md) | 示例/反例节 ×8 · compile_fail ×2 | 技术细节与示例 · 示例与反例 |
+| [类型别名](../../01_foundation/07_modules_and_items/07_type_aliases.md) | 示例/反例节 ×8 · compile_fail ×2 | 技术细节与示例 · 示例与反例 |
+| [静态项](../../01_foundation/07_modules_and_items/08_static_items.md) | 示例/反例节 ×8 · compile_fail ×1 | 技术细节与示例 · 示例与反例 |
 | [常量项与常量函数](../../01_foundation/07_modules_and_items/09_const_items_and_const_fn.md) | 示例/反例节 ×8 · compile_fail ×2 | 技术细节与示例 · 示例与反例 |
 | [Crate 与源文件](../../01_foundation/07_modules_and_items/11_crates_and_source_files.md) | 示例/反例节 ×1 | Crate 级属性示例 |
 | [项](../../01_foundation/07_modules_and_items/12_items.md) | 示例/反例节 ×1 | 常见 Item 示例 |
@@ -202,11 +202,8 @@ flowchart TD
 | [属性与声明宏：编译期元编程基础](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) | 示例/反例节 ×7 · compile_fail ×4 | 常见陷阱 · 边界测试：属性与宏的编译错误 |
 | [测试基础：从单元测试到集成测试](../../01_foundation/10_testing_basics/01_testing_basics.md) | 示例/反例节 ×5 · compile_fail ×1 | 常见陷阱 · 边界测试：`should_panic` 的预期消息匹配（运行时测试失败） |
 | [常用开发工具](../../01_foundation/10_testing_basics/02_useful_development_tools.md) | 示例/反例节 ×1 | 配置示例 |
-| [测验：类型系统](../../01_foundation/11_quizzes/24_quiz_type_system.md) | compile_fail ×1 | compile_fail 代码块 |
-| [测验：闭包与迭代器](../../01_foundation/11_quizzes/27_quiz_closures_iterators.md) | 示例/反例节 ×1 · compile_fail ×4 | Q10. 🔴 以下代码能否编译？如何修复？这是 `move` 闭包与迭代器的经… |
-| [测验：所有权、借用与生命周期](../../01_foundation/11_quizzes/33_quiz_ownership_borrowing.md) | compile_fail ×9 | compile_fail 代码块 |
 
-### L2 进阶概念层（31 个概念）
+### L2 进阶概念层（29 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -217,12 +214,10 @@ flowchart TD
 | [泛型关联类型](../../02_intermediate/00_traits/07_generic_associated_types.md) | 示例/反例节 ×4 · compile_fail ×1 | 实质代码示例 · 示例一：Lending Iterator —— 可变滑动窗口 |
 | [Generics](../../02_intermediate/01_generics/01_generics.md) | 示例/反例节 ×15 · compile_fail ×6 | 示例与反例（Examples & Counter-examples） · 正确示例：泛型函数与约束 |
 | [Const Generics（常量泛型）：值作为类型参数](../../02_intermediate/01_generics/02_const_generics.md) | 示例/反例节 ×5 | 实质示例 · 反例：stable 边界上的编译期拒绝 |
-| [测验：Trait 与泛型](../../02_intermediate/01_generics/04_quiz_traits_and_generics.md) | compile_fail ×3 | compile_fail 代码块 |
 | [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) | 示例/反例节 ×18 · compile_fail ×3 | 示例与反例（Examples & Counter-examples） · 正确示例：Box 堆分配 |
 | [内部可变性：编译期规则的运行时逃逸](../../02_intermediate/02_memory_management/02_interior_mutability.md) | 示例/反例节 ×4 · compile_fail ×3 | 常见陷阱 · 编译错误示例 |
 | [Cow：写时克隆与零拷贝抽象](../../02_intermediate/02_memory_management/03_cow_and_borrowed.md) | 示例/反例节 ×8 · compile_fail ×2 | 常见陷阱 · 边界测试：Cow 与借用的编译错误 |
 | [智能指针：堆内存管理与共享语义](../../02_intermediate/02_memory_management/04_smart_pointers.md) | 示例/反例节 ×6 · compile_fail ×3 | 常见陷阱 · 编译错误示例 |
-| [测验：内存管理](../../02_intermediate/02_memory_management/05_quiz_memory_management.md) | 示例/反例节 ×1 · compile_fail ×1 | Q6. 🔴 以下代码存在什么问题？这是 `Mutex` 使用的经典陷阱 |
 | [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) | 示例/反例节 ×17 · compile_fail ×5 | 示例与反例（Examples & Counter-examples） · 正确示例：`?` 运算符链式传播 |
 | [错误处理深入：从 Result 到自定义错误生态](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md) | 示例/反例节 ×7 · compile_fail ×3 | 常见陷阱 · 边界测试：错误处理的编译错误 |
 | [Panic 机制](../../02_intermediate/03_error_handling/03_panic.md) | 示例/反例节 ×1 | `no_std` 示例 |
@@ -242,7 +237,7 @@ flowchart TD
 | [属性分类详解](../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md) | 示例/反例节 ×8 · compile_fail ×1 | 技术细节与示例 · 示例与反例 |
 | [Rust 迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) | 示例/反例节 ×16 · compile_fail ×3 | 常见陷阱 · 边界测试：迭代器模式的编译错误 |
 
-### L3 高级概念层（49 个概念）
+### L3 高级概念层（47 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -253,11 +248,10 @@ flowchart TD
 | [原子操作与内存序：无锁并发的精确控制](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) | 示例/反例节 ×8 · compile_fail ×3 | 常见陷阱 · 编译错误示例 |
 | [无锁编程与内存模型](../../03_advanced/00_concurrency/06_lock_free.md) | 示例/反例节 ×7 · compile_fail ×2 | 常见陷阱 · 编译错误示例 |
 | [并行与分布式模式谱系：从线程池到共识算法](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) | 示例/反例节 ×12 · compile_fail ×7 | 反例与边界测试 · 反例：在 Actor 中使用共享可变状态 |
-| [测验：并发与异步](../../03_advanced/00_concurrency/08_quiz_concurrency_async.md) | 示例/反例节 ×1 · compile_fail ×3 | Q10. 🔴 以下代码存在什么问题？这是 Rust 并发的经典陷阱 |
 | [Async/Await](../../03_advanced/01_async/01_async.md) | 示例/反例节 ×15 · compile_fail ×4 | 示例与反例（Examples & Counter-examples） · 正确示例：async fn + .await |
 | [Async/Await 高级主题](../../03_advanced/01_async/02_async_advanced.md) | 示例/反例节 ×6 · compile_fail ×3 | 边界测试：高级异步模式的编译错误 · 边界测试：`select!` 宏中分支完成后的变量使用（编译错误） |
 | [异步模式：从 Future 到生产级并发](../../03_advanced/01_async/03_async_patterns.md) | 示例/反例节 ×10 · compile_fail ×5 | 边界测试：异步模式的编译错误 · 边界测试：`Stream` 与 `Future` 的所有权混淆（编译错误） |
-| [Future 与 Executor 机制 (Future and Executor Mechanisms)](../../03_advanced/01_async/04_future_and_executor_mechanisms.md) | 示例/反例节 ×4 | Waker 示例 · 示例 1: 简单的 Future |
+| [Future 与 Executor 机制 (Future and Executor Mechanisms)](../../03_advanced/01_async/04_future_and_executor_mechanisms.md) | 示例/反例节 ×6 · compile_fail ×1 | Waker 示例 · 示例 1: 简单的 Future |
 | [Async 取消安全](../../03_advanced/01_async/05_async_cancellation_safety.md) | 示例/反例节 ×6 | 经典陷阱与反例修正对照 · 反例一：`BufReader::read_line` 在 select 循环中… |
 | [Async 边界全景](../../03_advanced/01_async/06_async_boundary_panorama.md) | 示例/反例节 ×1 | 反例 |
 | [Async Closures](../../03_advanced/01_async/07_async_closures.md) | compile_fail ×4 | compile_fail 代码块 |
@@ -269,18 +263,17 @@ flowchart TD
 | [Async Trait 对象安全：dyn 兼容解决方案谱系与选型矩阵](../../03_advanced/01_async/13_async_trait_object_safety.md) | compile_fail ×1 | compile_fail 代码块 |
 | [Unsafe Rust 安全编程](../../03_advanced/02_unsafe/01_unsafe.md) | 示例/反例节 ×22 · compile_fail ×7 | 示例与反例（Examples & Counter-examples） · 正确示例：安全封装裸指针（Vec 简化版） |
 | [Unsafe 边界全景](../../03_advanced/02_unsafe/02_unsafe_boundary_panorama.md) | 示例/反例节 ×1 | 反例 |
-| [NLL 与 Polonius：借用检查器的演进](../../03_advanced/02_unsafe/03_nll_and_polonius.md) | 示例/反例节 ×6 | 常见陷阱 · 编译错误示例 |
-| [测验：Unsafe Rust](../../03_advanced/02_unsafe/05_quiz_unsafe.md) | 示例/反例节 ×1 · compile_fail ×2 | Q6. 🔴 以下代码存在什么问题？这是 FFI 的经典陷阱 |
+| [NLL 与 Polonius：借用检查器的演进](../../03_advanced/02_unsafe/03_nll_and_polonius.md) | 示例/反例节 ×8 · compile_fail ×1 | 常见陷阱 · 编译错误示例 |
 | [Rust 内存模型](../../03_advanced/02_unsafe/06_memory_model.md) | compile_fail ×2 | compile_fail 代码块 |
 | [Macros](../../03_advanced/03_proc_macros/01_macros.md) | 示例/反例节 ×13 · compile_fail ×4 | 示例与反例（Examples & Counter-examples） · 正确示例：`macro_rules!` 声明宏 |
 | [过程宏：编译期代码生成的元编程工具](../../03_advanced/03_proc_macros/02_proc_macro.md) | 示例/反例节 ×7 · compile_fail ×7 | 常见陷阱 · 编译错误示例 |
 | [生产级宏开发](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md) | 示例/反例节 ×1 | 完整示例 |
-| [syn & quote 完整参考](../../03_advanced/03_proc_macros/08_syn_quote_reference.md) | 示例/反例节 ×1 | 9. 实测示例：derive 宏的最小可用骨架（2026-07-12 回填） |
-| [宏卫生性完整参考](../../03_advanced/03_proc_macros/09_macro_hygiene.md) | 示例/反例节 ×1 | 9. 实测示例：声明宏的变量卫生（2026-07-12 回填） |
-| [测验：宏系统](../../03_advanced/03_proc_macros/10_quiz_macros.md) | 示例/反例节 ×1 · compile_fail ×4 | Q10. 🔴 以下代码存在什么问题？这是宏与模块交互的经典陷阱 |
+| [syn & quote 完整参考](../../03_advanced/03_proc_macros/08_syn_quote_reference.md) | 示例/反例节 ×3 · compile_fail ×1 | 9. 实测示例：derive 宏的最小可用骨架（2026-07-12 回填） · ⚠️ 反例与陷阱 |
+| [宏卫生性完整参考](../../03_advanced/03_proc_macros/09_macro_hygiene.md) | 示例/反例节 ×3 · compile_fail ×1 | 9. 实测示例：声明宏的变量卫生（2026-07-12 回填） · ⚠️ 反例与陷阱 |
 | [Rust FFI：与外部代码的安全边界](../../03_advanced/04_ffi/01_rust_ffi.md) | 示例/反例节 ×7 · compile_fail ×4 | 常见陷阱与最佳实践 · 编译错误示例 |
 | [FFI 高级主题：跨语言边界的安全与性能](../../03_advanced/04_ffi/02_ffi_advanced.md) | 示例/反例节 ×11 · compile_fail ×6 | 常见陷阱 · 边界测试：高级 FFI 的编译错误 |
-| [内联汇编 (Inline Assembly)](../../03_advanced/05_inline_assembly/01_inline_assembly.md) | 示例/反例节 ×2 | 代码示例 · 安全边界与常见陷阱 |
+| [Linkage](../../03_advanced/04_ffi/03_linkage.md) | 示例/反例节 ×2 · compile_fail ×1 | ⚠️ 反例与陷阱 · 反例：无 `unsafe` 的 extern 块（rustc 1.97.0，E… |
+| [内联汇编 (Inline Assembly)](../../03_advanced/05_inline_assembly/01_inline_assembly.md) | 示例/反例节 ×4 · compile_fail ×1 | 代码示例 · 安全边界与常见陷阱 |
 | [自定义分配器与内存布局优化](../../03_advanced/06_low_level_patterns/01_custom_allocators.md) | 示例/反例节 ×12 · compile_fail ×4 | 常见陷阱 · 编译验证示例 |
 | [零拷贝解析与序列化优化](../../03_advanced/06_low_level_patterns/02_zero_copy_parsing.md) | 示例/反例节 ×12 · compile_fail ×3 | 常见陷阱 · 编译验证示例 |
 | [类型擦除与动态分发](../../03_advanced/06_low_level_patterns/03_type_erasure.md) | 示例/反例节 ×10 · compile_fail ×5 | 常见陷阱 · 边界测试：类型擦除的编译错误 |
@@ -288,15 +281,15 @@ flowchart TD
 | [流处理语义：从 Dataflow Model 到 Differential Dataflow](../../03_advanced/06_low_level_patterns/05_stream_processing_semantics.md) | 示例/反例节 ×10 · compile_fail ×4 | 反例与边界测试 · 边界测试：无 Watermark 的流处理（伪代码） |
 | [Rust 运行时](../../03_advanced/06_low_level_patterns/07_rust_runtime.md) | 示例/反例节 ×1 | 示例 |
 | [可见性与隐私](../../03_advanced/06_low_level_patterns/10_visibility_and_privacy.md) | 示例/反例节 ×1 | 示例 |
-| [Unsafe 集合内部实现：Vec、Arc、Mutex](../../03_advanced/07_unsafe_internals/01_unsafe_collections_internals.md) | 示例/反例节 ×8 · compile_fail ×2 | 技术细节与示例 · 示例与反例 |
-| [Rust 进程模型与生命周期](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) | 示例/反例节 ×1 | 11. 可运行示例：执行命令并收集输出 |
+| [Unsafe 集合内部实现：Vec、Arc、Mutex](../../03_advanced/07_unsafe_internals/01_unsafe_collections_internals.md) | 示例/反例节 ×8 | 技术细节与示例 · 示例与反例 |
+| [Rust 进程模型与生命周期](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) | 示例/反例节 ×3 · compile_fail ×1 | 11. 可运行示例：执行命令并收集输出 · ⚠️ 反例与陷阱 |
 | [Rust 高级进程管理](../../03_advanced/08_process_ipc/02_advanced_process_management.md) | 示例/反例节 ×1 | 10. 可运行示例：健康检查循环 |
-| [Rust 异步进程管理](../../03_advanced/08_process_ipc/03_async_process_management.md) | 示例/反例节 ×1 | 9. 可运行示例：带取消的异步 select |
-| [Rust 跨平台进程管理](../../03_advanced/08_process_ipc/04_cross_platform_process_management.md) | 示例/反例节 ×1 | 9. 可运行示例：跨平台路径处理 |
+| [Rust 异步进程管理](../../03_advanced/08_process_ipc/03_async_process_management.md) | 示例/反例节 ×3 · compile_fail ×1 | 9. 可运行示例：带取消的异步 select · ⚠️ 反例与陷阱 |
+| [Rust 跨平台进程管理](../../03_advanced/08_process_ipc/04_cross_platform_process_management.md) | 示例/反例节 ×3 · compile_fail ×1 | 9. 可运行示例：跨平台路径处理 · ⚠️ 反例与陷阱 |
 | [Rust 进程间通信机制](../../03_advanced/08_process_ipc/05_ipc_mechanisms.md) | 示例/反例节 ×1 | 11. 可运行示例：父子匿名管道 |
 | [Rust 现代进程管理库](../../03_advanced/08_process_ipc/10_modern_process_libraries.md) | 示例/反例节 ×1 | 2. 标准库示例 |
 
-### L4 形式化理论层（34 个概念）
+### L4 形式化理论层（50 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -306,42 +299,60 @@ flowchart TD
 | [范畴论与 Rust：从函子到单子](../../04_formal/00_type_theory/04_category_theory.md) | 示例/反例节 ×7 · compile_fail ×2 | 边界测试：范畴论视角的编译错误 · 边界测试：`Option` 与 `Result` 的 monad 定律违反（编… |
 | [Lambda 演算与 Rust 计算模型](../../04_formal/00_type_theory/05_lambda_calculus.md) | 示例/反例节 ×8 · compile_fail ×3 | 常见陷阱 · 编译验证示例 |
 | [Type Semantics](../../04_formal/00_type_theory/06_type_semantics.md) | 示例/反例节 ×7 · compile_fail ×5 | 边界测试 · 边界测试：协变数组的 soundness 漏洞（编译错误） |
-| [Type Inference Complexity](../../04_formal/00_type_theory/08_type_inference_complexity.md) | 示例/反例节 ×1 · compile_fail ×1 | 边界示例：何时需要显式标注 |
+| [rustc 类型检查与类型推断](../../04_formal/00_type_theory/07_type_checking_and_inference.md) | 示例/反例节 ×2 · compile_fail ×1 | ⚠️ 反例与陷阱 · 反例：`collect()` 缺少类型标注导致推断失败（rustc 1.97.… |
+| [Type Inference Complexity](../../04_formal/00_type_theory/08_type_inference_complexity.md) | 示例/反例节 ×3 · compile_fail ×2 | 边界示例：何时需要显式标注 · ⚠️ 反例与陷阱 |
+| [类型系统参考](../../04_formal/00_type_theory/09_type_system_reference.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
 | [Linear Logic & Affine Logic](../../04_formal/01_ownership_logic/01_linear_logic.md) | 示例/反例节 ×9 · compile_fail ×4 | 示例与反例 · 边界测试：线性逻辑的编译错误 |
 | [Ownership Formalization](../../04_formal/01_ownership_logic/02_ownership_formal.md) | 示例/反例节 ×8 · compile_fail ×6 | 边界测试：所有权形式化的编译错误 · 边界测试：线性类型与 `Drop` 的冲突（编译错误） |
 | [线性逻辑在 Rust 中的工程应用](../../04_formal/01_ownership_logic/03_linear_logic_applications.md) | 示例/反例节 ×8 · compile_fail ×3 | 常见陷阱 · 边界测试：线性逻辑应用的编译错误 |
-| [Borrow Checking Decidability](../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md) | 示例/反例节 ×1 | 可运行示例 |
+| [Borrow Checking Decidability](../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md) | 示例/反例节 ×3 · compile_fail ×1 | 可运行示例 · ⚠️ 反例与陷阱 |
+| [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
+| [未定义行为清单](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
 | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 示例/反例节 ×11 · compile_fail ×3 | CSL 规范代码示例 · 七之一、验证工具代码示例与 CI/CD 集成 |
 | [分离逻辑：Rust 所有权的形式化根基](../../04_formal/02_separation_logic/02_separation_logic.md) | 示例/反例节 ×8 · compile_fail ×3 | 常见陷阱 · 边界测试：分离逻辑的编译错误 |
-| [BorrowSanitizer 运行时别名模型检测](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md) | 示例/反例节 ×1 | 错误报告示例 |
-| [指称语义与领域理论](../../04_formal/03_operational_semantics/01_denotational_semantics.md) | 示例/反例节 ×7 | 边界测试：指称语义的编译错误 · 边界测试：非终止计算与 `loop {}` 的类型（编译错误） |
+| [BorrowSanitizer 运行时别名模型检测](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md) | 示例/反例节 ×2 | 错误报告示例 · ⚠️ 反例与陷阱 |
+| [指称语义与领域理论](../../04_formal/03_operational_semantics/01_denotational_semantics.md) | 示例/反例节 ×9 · compile_fail ×1 | 边界测试：指称语义的编译错误 · 边界测试：非终止计算与 `loop {}` 的类型（编译错误） |
 | [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](../../04_formal/03_operational_semantics/02_hoare_logic.md) | 示例/反例节 ×8 · compile_fail ×2 | 常见陷阱 · 边界测试：Hoare 逻辑的编译错误 |
 | [操作语义：程序行为的形式化定义](../../04_formal/03_operational_semantics/03_operational_semantics.md) | 示例/反例节 ×12 · compile_fail ×4 | 常见陷阱 · 编译验证示例 |
 | [求值策略：Call-by-Value, Call-by-Name, Call-by-Need](../../04_formal/03_operational_semantics/04_evaluation_strategies.md) | 示例/反例节 ×9 · compile_fail ×4 | 反例与边界测试 · 反例：严格求值的性能陷阱 |
-| [Axiomatic Semantics](../../04_formal/03_operational_semantics/05_axiomatic_semantics.md) | 示例/反例节 ×8 | 边界测试 · 边界测试：wp 计算的无限 descending chain（逻辑错误） |
-| [Aeneas Symbolic Semantics](../../04_formal/03_operational_semantics/06_aeneas_symbolic_semantics.md) | 示例/反例节 ×1 | Rust / Aeneas 风格示例 |
+| [Axiomatic Semantics](../../04_formal/03_operational_semantics/05_axiomatic_semantics.md) | 示例/反例节 ×10 · compile_fail ×1 | 边界测试 · 边界测试：wp 计算的无限 descending chain（逻辑错误） |
+| [Aeneas Symbolic Semantics](../../04_formal/03_operational_semantics/06_aeneas_symbolic_semantics.md) | 示例/反例节 ×2 | Rust / Aeneas 风格示例 · ⚠️ 反例与陷阱 |
+| [常量求值](../../04_formal/03_operational_semantics/07_constant_evaluation.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
 | [Verification Toolchain Selection Guide](../../04_formal/04_model_checking/01_verification_toolchain.md) | 示例/反例节 ×3 · compile_fail ×6 | 验证边界：编译错误示例 · 边界测试：Kani 的循环展开限制与验证失败（验证失败/超时） |
-| [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md) | 示例/反例节 ×6 · compile_fail ×4 | 边界测试：航空航天认证形式化方法的编译错误 · 边界测试：MISRA C 规则的 Rust 类比（编译错误） |
-| [现代 Rust 验证工具生态](../../04_formal/04_model_checking/04_modern_verification_tools.md) | 示例/反例节 ×3 | 概念示例（伪代码） · 验证示例：安全包装器 |
-| [测验：形式化方法概念](../../04_formal/04_model_checking/06_quiz_formal_methods.md) | compile_fail ×1 | compile_fail 代码块 |
-| [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/08_miri.md) | 示例/反例节 ×3 | 运行单个示例或二进制 · 项目内可运行示例 |
-| [Kani：Rust 有界模型检查器](../../04_formal/04_model_checking/09_kani.md) | 示例/反例节 ×5 | 可运行示例 · 示例 1：简单函数安全证明 |
-| [Rustc 查询系统与增量编译](../../04_formal/05_rustc_internals/01_rustc_query_system.md) | 示例/反例节 ×1 | 查询调用链示例 |
-| [MIR、Codegen 与 LLVM IR 入门](../../04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md) | 示例/反例节 ×1 | 最小 annotated 示例 |
-| [rustc 中的 Trait Solver](../../04_formal/05_rustc_internals/03_trait_solver_in_rustc.md) | 示例/反例节 ×1 | 行为差异示例：关联类型与高阶生命周期 |
+| [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md) | 示例/反例节 ×8 · compile_fail ×4 | 边界测试：航空航天认证形式化方法的编译错误 · 边界测试：MISRA C 规则的 Rust 类比（编译错误） |
+| [现代 Rust 验证工具生态](../../04_formal/04_model_checking/04_modern_verification_tools.md) | 示例/反例节 ×5 · compile_fail ×1 | 概念示例（伪代码） · 验证示例：安全包装器 |
+| [通用程序语言理论基础：Rust 的 PL 基座](../../04_formal/04_model_checking/05_programming_language_foundations.md) | 示例/反例节 ×2 · compile_fail ×1 | ⚠️ 反例与陷阱 · 反例：`if` 表达式两分支类型不一致（rustc 1.97.0 实测） |
+| [AutoVerus / Verus 自动证明生态](../../04_formal/04_model_checking/07_autoverus.md) | 示例/反例节 ×1 | ⚠️ 反例与陷阱 |
+| [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/08_miri.md) | 示例/反例节 ×5 · compile_fail ×1 | 运行单个示例或二进制 · 项目内可运行示例 |
+| [Kani：Rust 有界模型检查器](../../04_formal/04_model_checking/09_kani.md) | 示例/反例节 ×7 · compile_fail ×1 | 可运行示例 · 示例 1：简单函数安全证明 |
+| [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) | 示例/反例节 ×2 · compile_fail ×1 | ⚠️ 反例与陷阱 · 反例：forbid 策略下的 `unsafe` 块（rustc 1.97.0… |
+| [Rustc 查询系统与增量编译](../../04_formal/05_rustc_internals/01_rustc_query_system.md) | 示例/反例节 ×3 · compile_fail ×1 | 查询调用链示例 · ⚠️ 反例与陷阱 |
+| [MIR、Codegen 与 LLVM IR 入门](../../04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md) | 示例/反例节 ×3 · compile_fail ×1 | 最小 annotated 示例 · ⚠️ 反例与陷阱 |
+| [rustc 中的 Trait Solver](../../04_formal/05_rustc_internals/03_trait_solver_in_rustc.md) | 示例/反例节 ×3 · compile_fail ×1 | 行为差异示例：关联类型与高阶生命周期 · ⚠️ 反例与陷阱 |
+| [Rustc 名称解析与 HIR](../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md) | 示例/反例节 ×2 · compile_fail ×1 | ⚠️ 反例与陷阱 · 反例：两个 glob 导入引入同名类型（rustc 1.97.0 实测） |
+| [Application Binary Interface](../../04_formal/05_rustc_internals/05_application_binary_interface.md) | 示例/反例节 ×2 · compile_fail ×1 | ⚠️ 反例与陷阱 · 反例：两个 `#[no_mangle]` 导出同名符号（rustc 1.97.… |
+| [名称、作用域与解析](../../04_formal/05_rustc_internals/06_names_and_resolution.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
+| [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/09_destructors.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
+| [词法结构](../../04_formal/05_rustc_internals/10_lexical_structure.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
+| [语句与表达式参考](../../04_formal/05_rustc_internals/13_statements_and_expressions_reference.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
+| [模式参考](../../04_formal/05_rustc_internals/14_patterns_reference.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
+| [泛型编译器行为：单态化、分发与类型擦除](../../04_formal/05_rustc_internals/15_generics_compiler_behavior.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
+| [名字参考](../../04_formal/05_rustc_internals/16_names_reference.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
 | [Rust Reference 附录](../../04_formal/05_rustc_internals/17_reference_appendices.md) | 示例/反例节 ×1 | 示例产生式 |
 | [符号约定](../../04_formal/06_notation/01_notation.md) | 示例/反例节 ×2 | 示例 · Unicode 属性示例 |
 | [进程代数与 Rust 并发原语：CSP · CCS · π 演算](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md) | 示例/反例节 ×4 · compile_fail ×1 | 反例：把 CSP 恒等式当成 Rust 法则 · 反例与边界 |
 | [线性化与一致性谱系：从 Herlihy-Wing 到 Rust 无锁结构](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) | 示例/反例节 ×3 | 反例与边界 · 反例：check-then-act 不是线性化的 |
 | [Actor 模型形式语义：从 Hewitt 公理到 Rust 生态](../../04_formal/07_concurrency_semantics/03_actor_semantics.md) | 示例/反例节 ×3 | 反例与边界 · 反例：在 actor 间共享可变状态 |
 
-### L5 对比分析层（18 个概念）
+### L5 对比分析层（19 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
 | [Paradigm Matrix: Multi-Language Formal Comparison](../../05_comparative/00_paradigms/01_paradigm_matrix.md) | 示例/反例节 ×7 · compile_fail ×1 | 边界测试：范式矩阵中的编译错误 · 边界测试：命令式与函数式的边界（编译错误） |
 | [Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行](../../05_comparative/00_paradigms/02_execution_model_isomorphism.md) | 示例/反例节 ×7 · compile_fail ×1 | 边界测试：执行模型同构的编译错误 · 边界测试：栈展开与 `panic = abort` 的行为差异（运行时行为） |
-| [Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | 示例/反例节 ×9 · compile_fail ×8 | 边界测试：Rust 与 C++ 的编译错误对比 · 边界测试：C++ 隐式转换 vs Rust 显式转换（编译错误） |
+| [C++ vs Rust：构造、运算符、RTTI、友元](../../05_comparative/00_paradigms/03_cpp_rust_surface_features.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
+| [五模型定义矩阵：同步 · 并发 · 并行 · 异步 · 分布式](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) | 示例/反例节 ×1 | ⚠️ 反例与陷阱 |
+| [Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | 示例/反例节 ×11 · compile_fail ×9 | 边界测试：Rust 与 C++ 的编译错误对比 · 边界测试：C++ 隐式转换 vs Rust 显式转换（编译错误） |
 | [Rust vs C++：ABI、对象模型与内存布局](../../05_comparative/01_systems_languages/02_cpp_abi_object_model.md) | 示例/反例节 ×11 · compile_fail ×3 | 反例与边界测试 · 反例：FFI 中因布局差异导致的数据损坏 |
 | [Rust vs Go：线性所有权 vs CSP 过程逻辑](../../05_comparative/01_systems_languages/03_rust_vs_go.md) | 示例/反例节 ×9 · compile_fail ×1 | 反例: Go 的 GC 停顿 vs Rust 的无 GC · 反例: Go 的接口运行时开销 vs Rust 的零成本抽象 |
 | [Rust vs Ruby：性能与表达力的两极](../../05_comparative/01_systems_languages/04_rust_vs_ruby.md) | 示例/反例节 ×7 · compile_fail ×1 | 常见陷阱 · 编译验证示例 |
@@ -353,105 +364,116 @@ flowchart TD
 | [Rust vs Kotlin：静态安全的两种路径](../../05_comparative/02_managed_languages/04_rust_vs_kotlin.md) | 示例/反例节 ×7 · compile_fail ×2 | 常见陷阱 · 边界测试：Rust 与 Kotlin 的编译错误对比 |
 | [Rust vs Scala：类型系统的两种哲学](../../05_comparative/02_managed_languages/05_rust_vs_scala.md) | 示例/反例节 ×7 · compile_fail ×2 | 常见陷阱 · 边界测试：Rust 与 Scala 的编译错误对比 |
 | [Rust vs C#：托管与原生之路](../../05_comparative/02_managed_languages/06_rust_vs_csharp.md) | 示例/反例节 ×7 · compile_fail ×3 | 常见陷阱 · 边界测试：Rust 与 C# 的编译错误对比 |
-| [Rust vs Elixir 对比分析](../../05_comparative/02_managed_languages/07_rust_vs_elixir.md) | 示例/反例节 ×5 | 常见陷阱 · 边界测试：Rust 与 Elixir 的编译错误对比 |
+| [Rust vs Elixir 对比分析](../../05_comparative/02_managed_languages/07_rust_vs_elixir.md) | 示例/反例节 ×7 · compile_fail ×1 | 常见陷阱 · 边界测试：Rust 与 Elixir 的编译错误对比 |
 | [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](../../05_comparative/02_managed_languages/08_rust_vs_typescript.md) | 示例/反例节 ×7 · compile_fail ×2 | 常见陷阱 · 边界测试：Rust 与 TypeScript 的编译错误对比 |
 | [Rust 安全保证的边界条件全景](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) | 示例/反例节 ×7 · compile_fail ×3 | 边界测试：安全边界的编译错误 · 边界测试：Safe 与 Unsafe 的边界穿越（编译错误） |
-| [测验：Rust vs 系统编程语言](../../05_comparative/03_domain_comparisons/02_quiz_rust_vs_systems.md) | compile_fail ×2 | compile_fail 代码块 |
 
-### L6 生态工程层（90 个概念）
+### L6 生态工程层（102 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
-| [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) | 示例/反例节 ×6 · compile_fail ×2 | 边界测试：工具链的编译错误 · 边界测试：`cargo` 特性开关的依赖冲突（编译错误） |
+| [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) | 示例/反例节 ×8 · compile_fail ×3 | 边界测试：工具链的编译错误 · 边界测试：`cargo` 特性开关的依赖冲突（编译错误） |
 | [日志与可观测性：Rust 服务端监控生态](../../06_ecosystem/00_toolchain/02_logging_observability.md) | 示例/反例节 ×8 · compile_fail ×5 | 常见陷阱 · 边界测试：日志与可观测性的编译错误 |
 | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) | 示例/反例节 ×7 · compile_fail ×2 | 常见陷阱 · 边界测试：DevOps 与 CI/CD 的编译错误 |
 | [Rust 编译器内部原理](../../06_ecosystem/00_toolchain/04_compiler_internals.md) | 示例/反例节 ×4 · compile_fail ×1 | 边界测试 · 边界测试：递归宏展开导致栈溢出（编译错误） |
-| [Rust 编译器基础设施深度解析](../../06_ecosystem/00_toolchain/05_compiler_infrastructure.md) | 示例/反例节 ×2 | 实战示例 · 实践示例：条件编译与目标特性检测 |
-| [Rustdoc 1.96–1.97 变更](../../06_ecosystem/00_toolchain/07_rustdoc_196_changes.md) | 示例/反例节 ×1 | 示例 |
+| [Rust 编译器基础设施深度解析](../../06_ecosystem/00_toolchain/05_compiler_infrastructure.md) | 示例/反例节 ×3 | 实战示例 · 实践示例：条件编译与目标特性检测 |
+| [Rustdoc 1.96–1.97 变更](../../06_ecosystem/00_toolchain/07_rustdoc_196_changes.md) | 示例/反例节 ×2 | 示例 · ⚠️ 反例与陷阱 |
 | [将 Rust 集成到现有平台](../../06_ecosystem/00_toolchain/08_platform_rust_integration.md) | 示例/反例节 ×1 | 常见陷阱 |
+| [Rust 编译器的 LLVM 后端与代码生成](../../06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md) | 示例/反例节 ×1 | ⚠️ 反例与陷阱 |
 | [rustc 编译器诊断与 UI Tests](../../06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md) | compile_fail ×1 | compile_fail 代码块 |
+| [rustc 编译器测试体系](../../06_ecosystem/00_toolchain/13_compiler_testing.md) | 示例/反例节 ×1 | ⚠️ 反例与陷阱 |
 | [Rust 常用开发工具](../../06_ecosystem/00_toolchain/14_development_tools.md) | 示例/反例节 ×1 | 示例 |
+| [rustc / Cargo `-Z` 不稳定选项参考清单](../../06_ecosystem/00_toolchain/15_z_flags_reference.md) | 示例/反例节 ×2 | ⚠️ 反例与陷阱 · 反例：stable rustc 拒绝 `-Z` 旗标（rustc 1.97.0… |
 | [Cargo Script 脚本化 Rust](../../06_ecosystem/01_cargo/01_cargo_script.md) | 示例/反例节 ×10 · compile_fail ×5 | 代码示例：Cargo Script 单文件程序 · 示例 1：零依赖脚本 |
-| [Cargo `public = true` 与 Resolver v3](../../06_ecosystem/01_cargo/02_public_private_deps.md) | 示例/反例节 ×2 | 代码示例：声明公共与私有依赖 · 可运行示例 |
-| [Resolver v3 与 `public = true` 的 feature unification 演示](../../06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md) | 示例/反例节 ×1 | 示例结构 |
+| [Cargo `public = true` 与 Resolver v3](../../06_ecosystem/01_cargo/02_public_private_deps.md) | 示例/反例节 ×3 | 代码示例：声明公共与私有依赖 · 可运行示例 |
+| [Resolver v3 与 `public = true` 的 feature unification 演示](../../06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md) | 示例/反例节 ×2 | 示例结构 · ⚠️ 反例与陷阱 |
 | [Cargo 1.96 新特性与工具链变更](../../06_ecosystem/01_cargo/04_cargo_196_features.md) | 示例/反例节 ×4 | 使用示例 · Cargo.toml 示例 |
-| [Cargo Build Scripts](../../06_ecosystem/01_cargo/05_cargo_build_scripts.md) | 示例/反例节 ×2 | 一个完整示例 · 避免常见陷阱 |
-| [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) | 示例/反例节 ×1 | 示例结构 |
-| [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) | 示例/反例节 ×1 | 常见 Lint 示例 |
-| [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/01_cargo/13_cargo_security_cves.md) | 示例/反例节 ×3 | 示例 1：限制依赖来源，避免意外引入第三方 registry · 示例 2：配置私有 registry 并使用 source replaceme… |
+| [Cargo Build Scripts](../../06_ecosystem/01_cargo/05_cargo_build_scripts.md) | 示例/反例节 ×4 · compile_fail ×1 | 一个完整示例 · 避免常见陷阱 |
+| [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) | 示例/反例节 ×3 · compile_fail ×1 | 示例结构 · ⚠️ 反例与陷阱 |
+| [Cargo Source Replacement 与 Vendoring](../../06_ecosystem/01_cargo/07_cargo_source_replacement.md) | 示例/反例节 ×1 | ⚠️ 反例与陷阱 |
+| [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) | 示例/反例节 ×2 | 常见 Lint 示例 · ⚠️ 反例与陷阱 |
+| [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/01_cargo/13_cargo_security_cves.md) | 示例/反例节 ×5 · compile_fail ×1 | 示例 1：限制依赖来源，避免意外引入第三方 registry · 示例 2：配置私有 registry 并使用 source replaceme… |
+| [Cargo Workspaces](../../06_ecosystem/01_cargo/14_cargo_workspaces.md) | 示例/反例节 ×1 | ⚠️ 反例与陷阱 |
 | [Cargo 配置与环境变量](../../06_ecosystem/01_cargo/18_cargo_configuration.md) | 示例/反例节 ×1 | 跨编译配置示例 |
 | [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) | 示例/反例节 ×1 | 常用命令组合示例 |
 | [Cargo Manifest 目标与元数据](../../06_ecosystem/01_cargo/20_cargo_manifest_targets.md) | 示例/反例节 ×1 | `required-features` 示例 |
-| [Cargo build-std](../../06_ecosystem/01_cargo/22_build_std.md) | 示例/反例节 ×2 | 典型配置示例 · 常见陷阱与排查 |
+| [Cargo build-std](../../06_ecosystem/01_cargo/22_build_std.md) | 示例/反例节 ×3 | 典型配置示例 · 常见陷阱与排查 |
 | [Cargo 1.97 新特性与工具链变更](../../06_ecosystem/01_cargo/23_cargo_197_features.md) | 示例/反例节 ×2 | 实测与位置陷阱 · 迁移建议与陷阱 |
 | [Core Crates](../../06_ecosystem/02_core_crates/01_core_crates.md) | 示例/反例节 ×9 · compile_fail ×6 | 核心 Crate 最小可用示例 · 边界测试：核心 crate 的编译错误 |
-| [Design Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) | 示例/反例节 ×6 · compile_fail ×5 | 边界测试：设计模式的编译错误 · 边界测试：Builder 模式未消费 self（编译错误） |
-| [Rust 惯用法谱系全景](../../06_ecosystem/03_design_patterns/02_idioms_spectrum.md) | 示例/反例节 ×8 · compile_fail ×2 | 边界测试：惯用法谱系的编译错误 · 边界测试：`unwrap` 的滥用（运行时 panic） |
-| [Rust 系统设计原则与国际权威对齐](../../06_ecosystem/03_design_patterns/03_system_design_principles.md) | 示例/反例节 ×6 · compile_fail ×1 | 边界测试：系统设计原则的编译错误 · 边界测试：Send/Sync 违反导致跨线程共享状态（编译错误） |
+| [Design Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) | 示例/反例节 ×8 · compile_fail ×5 | 边界测试：设计模式的编译错误 · 边界测试：Builder 模式未消费 self（编译错误） |
+| [Rust 惯用法谱系全景](../../06_ecosystem/03_design_patterns/02_idioms_spectrum.md) | 示例/反例节 ×10 · compile_fail ×3 | 边界测试：惯用法谱系的编译错误 · 边界测试：`unwrap` 的滥用（运行时 panic） |
+| [Rust 系统设计原则与国际权威对齐](../../06_ecosystem/03_design_patterns/03_system_design_principles.md) | 示例/反例节 ×8 · compile_fail ×1 | 边界测试：系统设计原则的编译错误 · 边界测试：Send/Sync 违反导致跨线程共享状态（编译错误） |
 | [系统可组合性 (System Composability)](../../06_ecosystem/03_design_patterns/04_system_composability.md) | 示例/反例节 ×6 · compile_fail ×2 | 边界测试：系统可组合性的编译错误 · 边界测试：trait 对象的组合限制（编译错误） |
 | [微服务架构模式 (Microservice Architecture Patterns)](../../06_ecosystem/03_design_patterns/05_microservice_patterns.md) | 示例/反例节 ×6 · compile_fail ×2 | 综合示例 · 常见陷阱 |
 | [事件驱动架构 (Event-Driven Architecture)](../../06_ecosystem/03_design_patterns/06_event_driven_architecture.md) | 示例/反例节 ×8 · compile_fail ×3 | 综合示例 · 常见陷阱 |
-| [CQRS & Event Sourcing](../../06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md) | 示例/反例节 ×4 | 边界测试 · 边界测试：无快照的查询退化（运行时性能） |
+| [CQRS & Event Sourcing](../../06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md) | 示例/反例节 ×6 · compile_fail ×1 | 边界测试 · 边界测试：无快照的查询退化（运行时性能） |
 | [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) | 示例/反例节 ×4 · compile_fail ×2 | 边界测试 · 边界测试：适配器绕过端口直接依赖核心（编译错误） |
-| [模式实现对比 (Pattern Implementation Comparison)](../../06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md) | 示例/反例节 ×1 | 9. 实测示例：静态 vs 动态分派的语义等价与成本边界（2026-07-12… |
-| [模式选择最佳实践 (Pattern Selection Best Practices)](../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md) | 示例/反例节 ×2 | 4. 反模式与陷阱 · 组合示例：HTTP客户端 |
+| [模式实现对比 (Pattern Implementation Comparison)](../../06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md) | 示例/反例节 ×3 · compile_fail ×1 | 9. 实测示例：静态 vs 动态分派的语义等价与成本边界（2026-07-12… · ⚠️ 反例与陷阱 |
+| [模式选择最佳实践 (Pattern Selection Best Practices)](../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md) | 示例/反例节 ×4 · compile_fail ×1 | 4. 反模式与陷阱 · 组合示例：HTTP客户端 |
+| [形式化设计模式理论 (Formal Design Pattern Theory)](../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md) | 示例/反例节 ×2 · compile_fail ×1 | ⚠️ 反例与陷阱 · 反例：typestate 令牌被消费两次（rustc 1.97.0 实测） |
+| [前沿研究与创新模式 (Frontier Research and Innovative Patterns)](../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md) | 示例/反例节 ×2 · compile_fail ×1 | ⚠️ 反例与陷阱 · 反例：原生 `async fn` trait 不能做成 trait objec… |
+| [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md) | 示例/反例节 ×2 | ⚠️ 反例与陷阱 · 反例：`todo!()` 进入生产代码路径（rustc 1.97.0 实测） |
 | [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | 示例/反例节 ×8 · compile_fail ×1 | 反例与边界测试 · 反例：Singleton + DI 的冲突 |
 | [Workflow Theory & Formalization](../../06_ecosystem/03_design_patterns/17_workflow_theory.md) | 示例/反例节 ×4 · compile_fail ×1 | 边界测试 · 边界测试：状态机转换遗漏导致死代码（编译/逻辑错误） |
-| [API Design Patterns](../../06_ecosystem/03_design_patterns/18_api_design_patterns.md) | 示例/反例节 ×4 | 边界测试 · 边界测试：GraphQL N+1 查询导致数据库过载（运行时性能） |
+| [API Design Patterns](../../06_ecosystem/03_design_patterns/18_api_design_patterns.md) | 示例/反例节 ×6 · compile_fail ×1 | 边界测试 · 边界测试：GraphQL N+1 查询导致数据库过载（运行时性能） |
 | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | 示例/反例节 ×8 · compile_fail ×3 | 常见陷阱 · 边界测试：分布式系统的编译错误 |
 | [Rust 云原生生态](../../06_ecosystem/04_web_and_networking/02_cloud_native.md) | 示例/反例节 ×8 · compile_fail ×4 | 常见陷阱 · 编译验证示例 |
 | [Rust Web 框架对比与选型](../../06_ecosystem/04_web_and_networking/03_web_frameworks.md) | 示例/反例节 ×6 · compile_fail ×5 | 常见陷阱 · 边界测试：Web 框架的编译错误 |
 | [HTTP 客户端开发](../../06_ecosystem/04_web_and_networking/04_http_client_development.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
 | [Glommio 与 Thread-per-Core 异步运行时](../../06_ecosystem/04_web_and_networking/05_glommio_and_thread_per_core.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
 | [C10 Networks - Tier 2: WebSocket 实时通信](../../06_ecosystem/04_web_and_networking/06_websocket_realtime_communication.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
-| [网络协议：QUIC/HTTP-3 与 Rust 实现](../../06_ecosystem/04_web_and_networking/07_network_protocols.md) | 示例/反例节 ×1 · compile_fail ×5 | 编译错误示例 |
+| [网络协议：QUIC/HTTP-3 与 Rust 实现](../../06_ecosystem/04_web_and_networking/07_network_protocols.md) | 示例/反例节 ×3 · compile_fail ×6 | 编译错误示例 · ⚠️ 反例与陷阱 |
 | [高性能网络服务架构 (High-Performance Network Service Architecture)](../../06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
 | [Reactive Programming & FRP](../../06_ecosystem/04_web_and_networking/09_reactive_programming.md) | 示例/反例节 ×4 · compile_fail ×1 | 边界测试 · 边界测试：无背压导致内存溢出（运行时错误） |
+| [Tokio 运行时内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) | 示例/反例节 ×2 | ⚠️ 反例与陷阱 · 反例：在 runtime 内再启动 runtime（rustc 1.97.0… |
 | [WASI & WebAssembly Component Model](../../06_ecosystem/05_systems_and_embedded/01_wasi.md) | 示例/反例节 ×7 · compile_fail ×1 | 反例与边界测试（Examples & Counter-examples） · 正确示例：安全的 wit-bindgen 组件 |
 | [交叉编译：多目标平台支持与条件编译](../../06_ecosystem/05_systems_and_embedded/02_cross_compilation.md) | 示例/反例节 ×6 · compile_fail ×2 | 常见陷阱 · 边界测试：交叉编译的编译错误 |
 | [Rust 嵌入式系统开发](../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md) | 示例/反例节 ×8 · compile_fail ×3 | 常见陷阱 · 编译验证示例 |
 | [Rust CLI 开发生态](../../06_ecosystem/05_systems_and_embedded/04_cli_development.md) | 示例/反例节 ×7 · compile_fail ×3 | 常见陷阱 · 边界测试：CLI 开发的编译错误 |
-| [Rust 操作系统内核开发](../../06_ecosystem/05_systems_and_embedded/05_os_kernel.md) | 示例/反例节 ×5 · compile_fail ×3 | 代码示例：内核开发核心模式 · 示例 1：最小 `no_std` 内核入口与 Panic Handler |
+| [Rust 操作系统内核开发](../../06_ecosystem/05_systems_and_embedded/05_os_kernel.md) | 示例/反例节 ×7 · compile_fail ×4 | 代码示例：内核开发核心模式 · 示例 1：最小 `no_std` 内核入口与 Panic Handler |
 | [Robotics & ROS2 in Rust](../../06_ecosystem/05_systems_and_embedded/06_robotics.md) | 示例/反例节 ×4 · compile_fail ×1 | 边界测试 · 边界测试：DDS 消息序列化无模式校验（类型混淆） |
-| [Rust 嵌入式图形开发](../../06_ecosystem/05_systems_and_embedded/07_embedded_graphics.md) | 示例/反例节 ×9 | 代码示例：嵌入式图形核心模式 · 示例 1：使用 `MockDisplay` 测试像素级绘制 |
-| [C-to-Rust Translation Ecosystem](../../06_ecosystem/05_systems_and_embedded/08_c_to_rust_translation.md) | 示例/反例节 ×1 | 可编译示例：使用 `bindgen` 生成 C FFI 绑定 |
+| [Rust 嵌入式图形开发](../../06_ecosystem/05_systems_and_embedded/07_embedded_graphics.md) | 示例/反例节 ×11 · compile_fail ×1 | 代码示例：嵌入式图形核心模式 · 示例 1：使用 `MockDisplay` 测试像素级绘制 |
+| [C-to-Rust Translation Ecosystem](../../06_ecosystem/05_systems_and_embedded/08_c_to_rust_translation.md) | 示例/反例节 ×3 · compile_fail ×1 | 可编译示例：使用 `bindgen` 生成 C FFI 绑定 · ⚠️ 反例与陷阱 |
+| [Embedded-HAL 1.0 迁移与 Embassy 生产状态](../../06_ecosystem/05_systems_and_embedded/09_embedded_hal_1_0_migration.md) | 示例/反例节 ×1 | ⚠️ 反例与陷阱 |
 | [Application Domains](../../06_ecosystem/06_data_and_distributed/01_application_domains.md) | 示例/反例节 ×6 · compile_fail ×1 | 编译验证：Web 后端最小可运行示例 · 边界测试：应用领域的编译错误 |
 | [Rust 数据库访问生态](../../06_ecosystem/06_data_and_distributed/02_database_access.md) | 示例/反例节 ×8 · compile_fail ×5 | 常见陷阱 · 编译验证示例 |
-| [流处理生态：Rust 实现与工业系统全景](../../06_ecosystem/06_data_and_distributed/03_stream_processing_ecosystem.md) | 示例/反例节 ×7 · compile_fail ×4 | 代码示例 · 边界测试：无界流上的错误递归（编译错误） |
-| [数据库系统：Rust 在存储引擎中的语义](../../06_ecosystem/06_data_and_distributed/04_database_systems.md) | 示例/反例节 ×3 · compile_fail ×5 | 极简键值存储示例 · 编译错误示例 |
+| [流处理生态：Rust 实现与工业系统全景](../../06_ecosystem/06_data_and_distributed/03_stream_processing_ecosystem.md) | 示例/反例节 ×9 · compile_fail ×5 | 代码示例 · 边界测试：无界流上的错误递归（编译错误） |
+| [数据库系统：Rust 在存储引擎中的语义](../../06_ecosystem/06_data_and_distributed/04_database_systems.md) | 示例/反例节 ×5 · compile_fail ×6 | 极简键值存储示例 · 编译错误示例 |
 | [Data Engineering](../../06_ecosystem/06_data_and_distributed/05_data_engineering.md) | 示例/反例节 ×5 | 边界测试 · 边界测试：Parquet 写入时 schema 演化导致读取失败（兼容性错误） |
 | [Distributed Consensus](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) | 示例/反例节 ×5 · compile_fail ×1 | 边界测试 · 边界测试：网络分区导致脑裂（安全性违反） |
 | [Rust 数据科学与科学计算](../../06_ecosystem/06_data_and_distributed/07_rust_for_data_science.md) | 示例/反例节 ×5 · compile_fail ×1 | 边界测试 · 边界测试：Polars Lazy API 中过早 collect 导致内存溢出 |
-| [CRDT 谱系：状态基、操作基与合并格形式化](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md) | 示例/反例节 ×4 | 反例：非交换合并导致发散 · 反例 1：「最后写胜出」用本地墙钟 |
+| [CRDT 谱系：状态基、操作基与合并格形式化](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md) | 示例/反例节 ×7 · compile_fail ×1 | 反例：非交换合并导致发散 · 反例 1：「最后写胜出」用本地墙钟 |
 | [因果序与向量时钟：Lamport 偏序的算法化](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md) | 示例/反例节 ×6 | 并发检测与反例 · 反例：用 Lamport 标量做并发检测 |
 | [安全 实践：Rust 代码的防御性编程](../../06_ecosystem/07_security_and_cryptography/01_security_practices.md) | 示例/反例节 ×8 · compile_fail ×3 | 常见陷阱 · 边界测试：安全实践的编译错误 |
-| [Security & Cryptography](../../06_ecosystem/07_security_and_cryptography/02_security_cryptography.md) | 示例/反例节 ×4 | 边界测试 · 边界测试：非常量时间比较导致定时攻击（运行时信息泄露） |
-| [Formal Ecosystem Tower](../../06_ecosystem/08_formal_verification/01_formal_ecosystem_tower.md) | 示例/反例节 ×6 · compile_fail ×2 | 边界测试：形式化生态塔的编译错误 · 边界测试：Prusti 的前置条件验证（编译错误） |
-| [Formal Verification Tools](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md) | 示例/反例节 ×4 | 边界测试 · 边界测试：Kani 数组越界未被 harness 覆盖（验证盲区） |
+| [Security & Cryptography](../../06_ecosystem/07_security_and_cryptography/02_security_cryptography.md) | 示例/反例节 ×6 | 边界测试 · 边界测试：非常量时间比较导致定时攻击（运行时信息泄露） |
+| [cargo vet 与供应链审计](../../06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md) | 示例/反例节 ×1 | ⚠️ 反例与陷阱 |
+| [Formal Ecosystem Tower](../../06_ecosystem/08_formal_verification/01_formal_ecosystem_tower.md) | 示例/反例节 ×8 · compile_fail ×3 | 边界测试：形式化生态塔的编译错误 · 边界测试：Prusti 的前置条件验证（编译错误） |
+| [Formal Verification Tools](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md) | 示例/反例节 ×6 · compile_fail ×1 | 边界测试 · 边界测试：Kani 数组越界未被 harness 覆盖（验证盲区） |
 | [Rust 测试策略：从单元测试到属性验证](../../06_ecosystem/09_testing_and_quality/01_testing_strategies.md) | 示例/反例节 ×7 · compile_fail ×4 | 边界测试：测试策略的编译错误 · 边界测试：`#[should_panic]` 的误用（测试失败） |
 | [文档生态：rustdoc、文档测试与 API 文档规范](../../06_ecosystem/09_testing_and_quality/02_documentation.md) | 示例/反例节 ×7 · compile_fail ×2 | 常见陷阱 · 边界测试：文档工具的编译错误 |
 | [测试生态：单元测试、集成测试与验证策略](../../06_ecosystem/09_testing_and_quality/03_testing.md) | 示例/反例节 ×6 | 常见陷阱 · 边界测试：测试的编译错误 |
+| [基准测试：Rust 代码性能测量与回归检测](../../06_ecosystem/09_testing_and_quality/04_benchmarking.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
 | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/01_performance_optimization.md) | 示例/反例节 ×9 · compile_fail ×1 | 常见陷阱 · 边界测试：性能优化的编译错误 |
 | [Blockchain & Smart Contract Security](../../06_ecosystem/11_domain_applications/01_blockchain.md) | 示例/反例节 ×8 | ⚠️ 反例与陷阱 · 边界测试：区块链的编译错误 |
-| [Game Development & ECS Architecture](../../06_ecosystem/11_domain_applications/02_game_ecs.md) | 示例/反例节 ×9 · compile_fail ×4 | 极简 ECS 实现示例 · 代码示例：在 `no_std` 环境中使用 `hecs` |
-| [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_domain_applications/03_webassembly.md) | 示例/反例节 ×5 · compile_fail ×2 | 边界测试：WebAssembly 的编译错误 · 边界测试：`wasm32` 目标的标准库限制（编译错误） |
+| [Game Development & ECS Architecture](../../06_ecosystem/11_domain_applications/02_game_ecs.md) | 示例/反例节 ×11 · compile_fail ×5 | 极简 ECS 实现示例 · 代码示例：在 `no_std` 环境中使用 `hecs` |
+| [WebAssembly 生态：Rust 的浏览器外运行时](../../06_ecosystem/11_domain_applications/03_webassembly.md) | 示例/反例节 ×5 · compile_fail ×1 | 边界测试：WebAssembly 的编译错误 · 边界测试：`wasm32` 目标的标准库限制（编译错误） |
 | [许可证与合规：Rust 项目的法律工程](../../06_ecosystem/11_domain_applications/04_licensing_and_compliance.md) | 示例/反例节 ×7 · compile_fail ×1 | 常见陷阱 · 边界测试：许可证与合规的编译错误 |
 | [Rust 游戏开发生态](../../06_ecosystem/11_domain_applications/05_game_development.md) | 示例/反例节 ×7 · compile_fail ×3 | 常见陷阱 · 编译验证示例 |
-| [算法与竞赛编程 (Algorithms & Competitive Programming)](../../06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md) | 示例/反例节 ×9 | 浮点精度陷阱 · 边界测试：算法竞赛的编译错误 |
-| [算法工程实践 (Algorithm Engineering Practice)](../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md) | 示例/反例节 ×1 | 8. 实测示例：AoS → SoA 的缓存友好重构（2026-07-12 回填） |
-| [](../../06_ecosystem/11_domain_applications/09_data_structures_in_rust.md) | 示例/反例节 ×1 | 并查集示例 |
+| [算法与竞赛编程 (Algorithms & Competitive Programming)](../../06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md) | 示例/反例节 ×11 | 浮点精度陷阱 · 边界测试：算法竞赛的编译错误 |
+| [算法工程实践 (Algorithm Engineering Practice)](../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md) | 示例/反例节 ×3 · compile_fail ×1 | 8. 实测示例：AoS → SoA 的缓存友好重构（2026-07-12 回填） · ⚠️ 反例与陷阱 |
+| [](../../06_ecosystem/11_domain_applications/09_data_structures_in_rust.md) | 示例/反例节 ×2 · compile_fail ×1 | 并查集示例 · ⚠️ 反例与陷阱 |
 | [Machine Learning Ecosystem](../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md) | 示例/反例节 ×4 · compile_fail ×1 | 边界测试 · 边界测试：未初始化张量内存导致信息泄露（安全漏洞） |
-| [Rust 工业应用案例研究](../../06_ecosystem/11_domain_applications/14_industrial_case_studies.md) | 示例/反例节 ×5 | 代码示例：简单内核模块 · 代码示例：工业案例中的典型 Rust 模式 |
+| [Rust 工业应用案例研究](../../06_ecosystem/11_domain_applications/14_industrial_case_studies.md) | 示例/反例节 ×7 · compile_fail ×1 | 代码示例：简单内核模块 · 代码示例：工业案例中的典型 Rust 模式 |
 | [Game Engine Internals](../../06_ecosystem/11_domain_applications/15_game_engine_internals.md) | 示例/反例节 ×4 · compile_fail ×1 | 边界测试 · 边界测试：渲染命令队列跨线程发送违反 Send（编译错误） |
 | [Rust 量子计算生态](../../06_ecosystem/11_domain_applications/16_quantum_computing_rust.md) | 示例/反例节 ×8 · compile_fail ×2 | 代码示例：量子计算核心模式 · 示例 1：纯 Rust 实现单量子比特 Hadamard 变换 |
-| [Rust WebAssembly 高级开发](../../06_ecosystem/11_domain_applications/17_webassembly_advanced.md) | 示例/反例节 ×4 · compile_fail ×2 | 边界测试 · 边界测试：wasm-bindgen 跨边界传递含 `String` 的结构体 |
+| [Rust WebAssembly 高级开发](../../06_ecosystem/11_domain_applications/17_webassembly_advanced.md) | 示例/反例节 ×6 · compile_fail ×2 | 边界测试 · 边界测试：wasm-bindgen 跨边界传递含 `String` 的结构体 |
 | [C12 WASM - JavaScript 互操作](../../06_ecosystem/11_domain_applications/20_wasm_javascript_interop.md) | 示例/反例节 ×3 | 🚀 实践示例 · 示例 1: 简单计算 |
 | [Rust 高级网络协议概览](../../06_ecosystem/12_networking/01_advanced_network_protocols.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
 | [网络安全](../../06_ecosystem/12_networking/02_network_security.md) | 示例/反例节 ×1 | ⚠️ 反例与陷阱 |
 | [自定义协议实现](../../06_ecosystem/12_networking/03_custom_protocol_implementation.md) | 示例/反例节 ×1 | ⚠️ 反例与陷阱 |
 | [Rust 网络编程快速入门](../../06_ecosystem/12_networking/04_network_programming_quick_start.md) | 示例/反例节 ×1 | 基础代码示例 |
-| [C10 Networks - Tier 2: 网络基础实践](../../06_ecosystem/12_networking/05_networking_basics.md) | 示例/反例节 ×1 | 9. 实测示例：TCP 回环回声（2026-07-12 回填） |
-| [形式化网络协议理论](../../06_ecosystem/12_networking/06_formal_network_protocol_theory.md) | 示例/反例节 ×2 · compile_fail ×1 | TCP 状态机示例 · HTTP 语义示例 |
+| [C10 Networks - Tier 2: 网络基础实践](../../06_ecosystem/12_networking/05_networking_basics.md) | 示例/反例节 ×3 · compile_fail ×1 | 9. 实测示例：TCP 回环回声（2026-07-12 回填） · ⚠️ 反例与陷阱 |
+| [形式化网络协议理论](../../06_ecosystem/12_networking/06_formal_network_protocol_theory.md) | 示例/反例节 ×4 · compile_fail ×2 | TCP 状态机示例 · HTTP 语义示例 |
 
 ### L7 前沿趋势层（49 个概念）
 
@@ -474,7 +496,7 @@ flowchart TD
 | [并行 前端编译预研：Rust 编译器 的多核扩展](../../07_future/03_preview_features/04_parallel_frontend_preview.md) | 示例/反例节 ×7 · compile_fail ×1 | 边界测试：并行前端预览的编译错误 · 边界测试：并行编译的宏展开顺序（编译错误） |
 | [派生 CoercePointee 预研：智能指针的自动类型强制](../../07_future/03_preview_features/05_derive_coerce_pointee_preview.md) | 示例/反例节 ×6 · compile_fail ×4 | 边界测试：CoercePointee 派生的编译错误 · 边界测试：非 `#[repr(transparent)]` 类型的 Coerc… |
 | [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/03_preview_features/06_const_trait_impl_preview.md) | 示例/反例节 ×6 · compile_fail ×5 | 边界测试：const trait impl 的编译错误 · 边界测试：const 上下文中调用非 const 方法（编译错误） |
-| [Stable ABI Preview](../../07_future/03_preview_features/07_stable_abi_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | 边界测试：稳定 ABI 与 extern "C" 的符号兼容性（链接错误） |
+| [Stable ABI Preview](../../07_future/03_preview_features/07_stable_abi_preview.md) | 示例/反例节 ×1 | 边界测试：稳定 ABI 与 extern "C" 的符号兼容性（链接错误） |
 | [Inline Const Pattern 预览](../../07_future/03_preview_features/08_inline_const_pattern_preview.md) | 示例/反例节 ×2 · compile_fail ×1 | 边界测试：`const {}` 块在 pattern 中的使用（编译错误/未来… · ⚠️ 反例与陷阱 |
 | [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/03_preview_features/09_return_type_notation_preview.md) | 示例/反例节 ×5 · compile_fail ×4 | 边界测试：Return Type Notation 预览的编译错误 · 边界测试：RTN 在类型位置使用（编译错误） |
 | [`must_not_suspend` Lint Preview](../../07_future/03_preview_features/10_must_not_suspend_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | 边界测试：`must_not_suspend` 与跨 await 点的借用（运… |
@@ -482,7 +504,7 @@ flowchart TD
 | [Lifetime Capture in `impl Trait` Preview](../../07_future/03_preview_features/13_lifetime_capture_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | 边界测试：impl trait 的精确 lifetime capture（编译… |
 | [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/03_preview_features/14_pin_ergonomics_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
 | [特质中返回位置 impl Trait（RPITIT）预览](../../07_future/03_preview_features/15_rpitit_preview.md) | 示例/反例节 ×2 · compile_fail ×1 | 边界测试：RPITIT（Return Position Impl Trait… · ⚠️ 反例与陷阱 |
-| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/03_preview_features/16_cranelift_backend_preview.md) | 示例/反例节 ×9 · compile_fail ×2 | 边界测试：Cranelift 后端预览的编译错误 · 边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行时差异） |
+| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/03_preview_features/16_cranelift_backend_preview.md) | 示例/反例节 ×9 · compile_fail ×1 | 边界测试：Cranelift 后端预览的编译错误 · 边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行时差异） |
 | [TAIT Preview](../../07_future/03_preview_features/17_type_alias_impl_trait_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | 边界测试：TAIT（Type Alias Impl Trait）的递归类型限制… |
 | [Arbitrary Self Types 预览：自定义方法接收器](../../07_future/03_preview_features/18_arbitrary_self_types_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
 | [Const Trait 实现预览](../../07_future/03_preview_features/19_const_trait_preview.md) | 示例/反例节 ×2 · compile_fail ×1 | 边界测试：const trait 与泛型 const 求值（编译错误/未来特性） · ⚠️ 反例与陷阱 |

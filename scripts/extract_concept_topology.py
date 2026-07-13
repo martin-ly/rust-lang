@@ -28,6 +28,11 @@ def should_include(path: Path) -> bool:
         return False
     if path.name.startswith("sandbox"):
         return False
+    # Quiz 页（NN_quizzes/ 目录与 *_quiz_* 文件，含 quiz_registry 导航页）由
+    # check_quiz_system.py（观察门）与 concept/00_meta/quiz_registry.yaml 独立管理，
+    # 不计入概念拓扑图谱索引与统计（P4 任务 3，2026-07-13，按 W2-b 遗留建议）。
+    if "quiz" in path.stem.lower() or any("quiz" in p.lower() for p in parts[:-1]):
+        return False
     # Must be under a numeric layer directory like 01_foundation
     if not parts or not re.match(r"^\d{2}_", parts[0]):
         return False

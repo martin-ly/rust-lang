@@ -18,6 +18,25 @@
 
 ---
 
+## 0. 特性 × 影响面 × 受益场景矩阵（2026-07-14 对齐 1.97 范式）
+
+> **说明**：本节对齐 [`rust_1_97_stabilized.md`](rust_1_97_stabilized.md) 的矩阵结构，汇总 1.92.0 本列车首次稳定的核心特性；下文章节为 P1-a 逐主题深化，不再重复改写。
+>
+> **官方发布说明可访问性实测**（2026-07-14，`curl` HTTP 200）：
+> [releases.rs 1.92.0](https://releases.rs/docs/1.92.0/) · [Rust 1.92.0 Release Blog](https://blog.rust-lang.org/2025/12/11/Rust-1.92.0/)
+
+| 特性 | 影响面 | 受益场景 | 权威源 |
+|:---|:---|:---|:---|
+| `MaybeUninit` 表示与有效性正式文档化 | unsafe / 内存模型 | 未初始化内存读写的契约边界明确化 | [Release Blog](https://blog.rust-lang.org/2025/12/11/Rust-1.92.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |
+| 安全代码允许对联合体字段取 `&raw const/mut` | 语言 / unsafe | 联合体字段取地址不再要求 unsafe 块 | [releases.rs](https://releases.rs/docs/1.92.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |
+| 同一关联项允许多个边界（trait 对象除外） | 类型系统 | 关联类型约束的多边界表达 | [releases.rs](https://releases.rs/docs/1.92.0/) · [类型系统](../../01_foundation/02_type_system/01_type_system.md) |
+| `Box/Rc/Arc::new_zeroed(_slice)` | 标准库 / 内存 | 零初始化堆分配（大缓冲、FFI 清零语义） | [releases.rs](https://releases.rs/docs/1.92.0/) |
+| `RwLockWriteGuard::downgrade` | 标准库 / 并发 | 写锁降级为读锁，避免读-写死锁 | [releases.rs](https://releases.rs/docs/1.92.0/) · [并发模式](../../03_advanced/00_concurrency/03_concurrency_patterns.md) |
+| `iter::Repeat::last/count` 改为 panic（兼容性变更） | 标准库 / 兼容 | 消除无限循环陷阱，暴露逻辑错误 | [releases.rs](https://releases.rs/docs/1.92.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |
+| `Location::file_as_c_str` | 标准库 | 零分配获取 panic 位置文件名（嵌入式/FFI 日志） | [releases.rs](https://releases.rs/docs/1.92.0/) |
+
+---
+
 ## 一、所有权、借用与生命周期
 
 > 来源：`crates/c01_ownership_borrow_scope/docs/12_rust_192_ownership_borrowing_lifetime_improvements.md`

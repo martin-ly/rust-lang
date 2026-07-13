@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Run all quality gates locally.
 # 15 blocking gates (10 Cargo/mdbook/KB/i18n/mermaid + 5 promoted semantic gates in --strict mode)
-# + 6 semantic observe gates (warning, non-blocking).
+# + 8 semantic observe gates (warning, non-blocking).
 #
 # 观察门转正机制（见 AGENTS.md §5.2）：连续 4 周或连续 10 次 CI 运行达标后可评估转阻断。
 # 2026-07-12 已转正（本地 --strict 实跑 exit=0）：topology / kg_shapes / canonical_uniqueness /
@@ -10,7 +10,8 @@
 # （--strict exit=0：any=100%/none=0/core_gap=0；--include-crates 附加 crates docs 小节，
 # crates 非 stub 内容页 64/64=100%）、examples_compile（P3-5）、naming_convention（2026-07-12 新增，
 # ERROR=0/WARN=78）、concept_code_blocks（2026-07-13 独立观察门，基线见
-# reports/CONCEPT_CODE_BLOCKS_BASELINE_2026_07_13.md）。
+# reports/CONCEPT_CODE_BLOCKS_BASELINE_2026_07_13.md）、mindmap_coverage 与 quiz_system
+# （2026-07-13 P4 挂入，原独立观察检查器；mindmap --strict 基线 mindmap≥10%/反例≥40%）。
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -61,6 +62,10 @@ run_gate "Examples Compile Check (observe)" python scripts/check_examples_compil
 # 默认观察 exit 0；--strict 时“应过但失败/标注腐烂”>0 exit 1（观察期不加 --strict）。
 run_gate "Concept Code Blocks (observe)" python scripts/check_concept_code_blocks.py
 run_gate "Naming Convention (observe)" python scripts/check_naming_convention.py
+# 2026-07-13 P4 挂入（原独立观察检查器）：思维表征覆盖（mindmap 率/反例率，--strict 基线
+# mindmap>=10%/反例>=40%，观察期不加 --strict）与测验体系一致性（注册表/题型/难度/双向链接）。
+run_gate "Mindmap Coverage (observe)" python scripts/check_mindmap_coverage.py
+run_gate "Quiz System (observe)" python scripts/check_quiz_system.py
 
 # --- Content Overlap v2 (blocking, promoted 2026-07-12 per AGENTS.md §5.2) ---
 # 转正依据：2026-07-12 可处理项清零（原 MERGE 5 + DOCS_INTERNAL 49 = 54 → 0）：
@@ -91,7 +96,7 @@ fi
 
 echo ""
 if [ "$FAILED" -eq 0 ]; then
-    echo "✅ All 21 quality gates passed (15 blocking + 6 semantic observe)."
+    echo "✅ All 23 quality gates passed (15 blocking + 8 semantic observe)."
     exit 0
 else
     echo "❌ Some quality gates failed."

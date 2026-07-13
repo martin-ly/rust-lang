@@ -414,6 +414,34 @@ jobs:
         run: python scripts/check_concept_code_blocks.py
         continue-on-error: true
 
+  mindmap-coverage:
+    name: Mindmap Coverage (observe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run mindmap/counterexample coverage check (observe, append --strict to enforce; baselines mindmap>=10%/counterexample>=40%)
+        run: python scripts/check_mindmap_coverage.py
+        continue-on-error: true
+
+  quiz-system:
+    name: Quiz System (observe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run quiz system consistency check (observe, append --strict to enforce)
+        run: python scripts/check_quiz_system.py
+        continue-on-error: true
+
   quality-gates-summary:
     name: Quality Gates Summary
     runs-on: ubuntu-latest
@@ -438,6 +466,8 @@ jobs:
       - concept-consistency-audit
       - naming-convention
       - concept-code-blocks
+      - mindmap-coverage
+      - quiz-system
     if: always() && github.event_name == 'pull_request'
     steps:
       - name: Generate summary comment
@@ -464,7 +494,9 @@ jobs:
               'Canonical Uniqueness (strict)': '${{ needs.canonical-uniqueness.result }}',
               'Concept Consistency Audit (strict)': '${{ needs.concept-consistency-audit.result }}',
               'Naming Convention (observe)': '${{ needs.naming-convention.result }}',
-              'Concept Code Blocks (observe)': '${{ needs.concept-code-blocks.result }}'
+              'Concept Code Blocks (observe)': '${{ needs.concept-code-blocks.result }}',
+              'Mindmap Coverage (observe)': '${{ needs.mindmap-coverage.result }}',
+              'Quiz System (observe)': '${{ needs.quiz-system.result }}'
             };
 
             let status = '✅';
@@ -489,7 +521,7 @@ jobs:
             ${summary}
 
             ---
-            *All 21 quality gates completed (15 blocking + 6 semantic observe)*`;
+            *All 23 quality gates completed (15 blocking + 8 semantic observe)*`;
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,

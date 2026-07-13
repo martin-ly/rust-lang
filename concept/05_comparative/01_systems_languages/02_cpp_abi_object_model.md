@@ -116,7 +116,13 @@ Rust 特有的类型（`String`, `Vec<T>`, `enum`）不能通过 C ABI 直接传
 
 ### 3.1 C++ 对象模型
 
-本节从简单类（POD）、含虚函数的类与多重继承切入，剖析「C++ 对象模型」的核心内容。
+C++ 对象模型由 Itanium ABI（事实标准，GCC/Clang）与 MSVC ABI 双轨定义，核心机制：
+
+- **虚函数表（vtable）**：多态对象首部含 vptr，虚调用 = 间接跳转——对象大小 = 非静态成员 + vptr + 对齐填充；
+- **多重继承与 this 调整**：多个基类子对象各有 vptr，指针转换需偏移调整——「同一对象不同地址」是 C++ ABI 的著名陷阱；
+- **trivial/standard-layout 分类**：决定类型能否按 C 结构体布局对待（memcpy 安全性、FFI 可传递性）——`std::is_trivially_copyable` 是 ABI 层面的谓词。
+
+理解 C++ 对象模型是理解 Rust ABI 差异的前提：Rust 没有这些机制中的任何一个（无继承、vtable 外置于 trait object 胖指针）——3.2 节给出对照。
 
 #### 3.1.1 简单类（POD）
 
@@ -184,7 +190,13 @@ A a = c; // 切片！只复制 A 部分，vptr 指向 A 的 vtable，B 部分丢
 
 ### 3.2 Rust 对象模型
 
-「Rust 对象模型」部分包含 `dyn Trait` 的内存布局 与 无对象切片 两条主线，本节依次说明。
+Rust 的对象模型刻意极简，与 C++ 逐项对照：
+
+- **无虚继承开销**：无继承 ⟹ 对象即字段的顺序布局——`struct` 大小 = 字段大小 + 对齐（`#[repr(C)]` 时严格 C 兼容；默认 `repr(Rust)` 编译器可重排字段优化）；
+- **多态外置**：`dyn Trait` 是胖指针（数据指针 + vtable 指针 16 字节）——vtable 不属于对象而属于「指向对象的引用」，这消除了 C++「切片」（slicing）问题的根源；
+- **trivial 语义由 trait 表达**：`Copy`（可按位复制）+ `Send`/`Sync`（线程安全）替代 C++ 的 trivial 分类——语义属性从 ABI 细节提升为类型系统的一等谓词。
+
+ABI 稳定性声明：Rust 无稳定 ABI（`repr(Rust)` 布局不跨版本保证）——FFI 边界必须 `#[repr(C)]`，这是「对象模型简化」的代价面。
 
 #### 3.2.1 `dyn Trait` 的内存布局
 
@@ -236,7 +248,12 @@ fn draw_shape(shape: &dyn Drawable) {
 
 ### 3.3 结构体内存布局对比
 
-本节从 Padding 与对齐 与 字段重排 两个层面剖析「结构体内存布局对比」。
+结构体布局是 ABI 兼容的第一战场：同一逻辑结构在 C++ 与 Rust 中的字节排布**默认不同**，这是 FFI 边界上最常见的踩坑点。两个核心机制：
+
+- **Padding 与对齐**：两者都遵循"字段按对齐量对齐、结构体大小为最大对齐量的倍数"，因此 `struct { u8, u64 }` 在两边都是 16 字节。但 C++ 的对齐由 `alignof` 决定且字段顺序固定，Rust 默认 `repr(Rust)` 下对齐语义相同但**不保证字段顺序**。
+- **字段重排**：rustc 在 `repr(Rust)` 下允许重排字段以最小化 padding——`struct { u8, u64, u8 }` 在 C++ 中为 24 字节，在 Rust 中可能被重排为 16 字节。因此跨语言共享内存布局必须使用 `#[repr(C)]` 显式锁定 C 布局，此时两者逐字节一致。
+
+判定依据：需要 FFI 或 mmap 共享结构 → `#[repr(C)]`；仅 Rust 内部使用 → 默认 `repr(Rust)` 允许编译器优化。
 
 #### 3.3.1 Padding 与对齐
 
@@ -292,7 +309,16 @@ struct Packed {
 
 ## 四、名称修饰（Name Mangling）
 
-「名称修饰（Name Mangling）」部分包含 C++ 名称修饰 与  Rust 名称修饰 两条主线，本节依次说明。
+名称修饰（name mangling）把源码符号编码为链接期唯一标识，两门语言选择了截然不同的方案：
+
+| 维度 | C++ (Itanium ABI) | Rust (legacy/v0) |
+|:---|:---|:---|
+| 方案 | Itanium C++ ABI，`_Z` 前缀 | legacy（`_ZN...E`）与 v0（`_R` 前缀） |
+| 编码内容 | 命名空间 + 类型 + 模板参数 | crate 名 + 模块路径 + 泛型参数 + 哈希 |
+| 稳定性 | Itanium ABI 是跨编译器事实标准 | legacy 无稳定保证；v0 定义良好但仍非稳定 ABI |
+| `extern` 控制 | `extern "C"` 关闭修饰 | `#[no_mangle]` / `extern "C"` 关闭修饰 |
+
+实践要点：C++ 侧暴露给 Rust 的函数必须包 `extern "C"`，Rust 侧对应 `#[no_mangle] pub extern "C" fn`，两者在链接期以未修饰的 C 符号对接。任何依赖 C++ 重载（同名不同参）的接口在 C ABI 层必须手动改名区分。
 
 ### 4.1 C++ 名称修饰
 

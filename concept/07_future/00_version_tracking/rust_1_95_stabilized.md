@@ -35,6 +35,26 @@
 
 ---
 
+## 0. 特性 × 影响面 × 受益场景矩阵（2026-07-14 对齐 1.97 范式）
+
+> **说明**：本节对齐 [`rust_1_97_stabilized.md`](rust_1_97_stabilized.md) 的矩阵结构；各特性详解见下文对应章节。
+>
+> **官方发布说明可访问性实测**（2026-07-14，`curl` HTTP 200）：
+> [releases.rs 1.95.0](https://releases.rs/docs/1.95.0/) · [Rust 1.95.0 Release Blog](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)
+
+| 特性 | 影响面 | 受益场景 | 权威源 |
+|:---|:---|:---|:---|
+| `cfg_select!` 宏（§1.1） | 语言 / 条件编译 | 多分支 cfg 选择，替代嵌套 `#[cfg]` | [Release Blog](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) |
+| `if let` guards on match arms（§1.2） | 语言 / 模式匹配 | match 守卫中的条件绑定 | [releases.rs](https://releases.rs/docs/1.95.0/) · [控制流](../../01_foundation/04_control_flow/01_control_flow.md) |
+| 路径段关键字重命名导入（§1.3） | 语言 / 模块 | `use foo::r#async as ...` 等关键字路径段 | [releases.rs](https://releases.rs/docs/1.95.0/) |
+| `core::range` 模块（§2.1） | 标准库 | `no_std` 可用的范围类型与迭代器 | [releases.rs](https://releases.rs/docs/1.95.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |
+| 原子 `update` / `try_update`（§2.2） | 标准库 / 并发 | CAS 循环的闭包化封装 | [releases.rs](https://releases.rs/docs/1.95.0/) · [原子与内存序](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) |
+| `Vec::push_mut` 等可变引用插入（§2.3） | 标准库 | 插入即得 `&mut`，原地构造 | [releases.rs](https://releases.rs/docs/1.95.0/) |
+| `as_ref_unchecked` / `as_mut_unchecked`（§2.4） | unsafe | 裸指针转引用的显式不安全操作 | [releases.rs](https://releases.rs/docs/1.95.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |
+| `--remap-path-scope` 稳定（§3.1） | 编译器 / 可重现构建 | 路径重映射的作用域控制 | [releases.rs](https://releases.rs/docs/1.95.0/) |
+
+---
+
 ## 1. 语言层
 
 「语言层」部分按 `cfg_select!` 宏、`if let` guards on match arms、路径段关键字重命名导入与PowerPC/PowerPC64 内联汇编稳定化的顺序逐层展开。

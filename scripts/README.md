@@ -71,7 +71,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `detect_content_overlap_v2.py` | 段落级重叠检测 v2（质量门 15，2026-07-12 转阻断：triage 可处理项 MERGE+DOCS_INTERNAL 基线 0） |
 | `triage_overlap.py` | 重叠报告分诊（MERGE/DOCS_INTERNAL/SERIES/REVIEW；SERIES 白名单 = 正则 + `SERIES_PATH_RE` 路径族 + 显式 `SERIES_PAIRS` 人工复核登记） |
 | `check_canonical_uniqueness.py` | `concept/` 权威页唯一性检查（质量门 13，阻断） |
-| `check_quiz_system.py` | 测验体系一致性检查（W3-a 观察门）：quiz_registry.yaml 与实际文件一致性（题数/题型/难度分布/嵌入式统计）、独立 quiz 题型多样性 ≥3 种、难度标注率、quiz↔concept 双向链接率；默认 exit 0，`--strict` 检查 1-3 失败即 exit 1（回链缺失仅统计） |
+| `check_quiz_system.py` | 测验体系一致性检查（质量门 23，观察；2026-07-13 P4 挂入，原 W3-a 独立观察检查器）：quiz_registry.yaml 与实际文件一致性（题数/题型/难度分布/嵌入式统计）、独立 quiz 题型多样性 ≥3 种、难度标注率、quiz↔concept 双向链接率；默认 exit 0，`--strict` 检查 1-3 失败即 exit 1（回链缺失仅统计） |
 | `check_template_cliches.py` | `concept/` 模板套话黑名单扫描；`--strict` 发现命中即 exit 1 |
 | `audit_content_completeness.py` | `concept/` 内容完整性审计：TODO 类标记 / 空章节 / PLACEHOLDER_SECTION（占位引导语，观察指标默认 exit 0；`--strict` 存在即 exit 1） |
 | `check_decision_trees.py` | 决策树机器可读层校验（`decision_trees.yaml` 结构/死端/概念覆盖）；结构错误 exit 1 |
@@ -84,7 +84,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `check_concept_authority_coverage.py` | concept 权威层国际化权威来源覆盖率（质量门 18，观察）；`--include-crates` 附加 crates/*/docs 覆盖小节（非 stub 内容页口径，默认观察 exit 0，`--strict` 时 crates 缺口>0 亦阻断） |
 | `semantic_health.py` | 综合语义健康分（质量门 17，观察） |
 | `check_mermaid_syntax.py` | Mermaid 语法检查（质量门 10，阻断） |
-| `check_mindmap_coverage.py` | 内容页真 mindmap 图覆盖率与反例节存在率（W2-a 观察，默认 exit 0；`--strict` 低于基线 mindmap 10%/反例 40% 时 exit 1） |
+| `check_mindmap_coverage.py` | 内容页真 mindmap 图覆盖率与反例节存在率（质量门 22，观察；2026-07-13 P4 挂入，原 W2-a 独立观察检查器；默认 exit 0；`--strict` 低于基线 mindmap 10%/反例 40% 时 exit 1） |
 | `auto_dedup_redirect.py` | 对高相似度非 `concept/` 文件生成指向 `concept/` 权威来源的重定向页 |
 | `unify_association_headings.py` | 关联区块标题统一与核心页上层/下层概念补全（`--enrich-core`；默认 dry-run） |
 
@@ -157,7 +157,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 
 | 脚本 | 功能 |
 |------|------|
-| `run_quality_gates.sh` | 本地一键运行全部 21 个质量门（15 阻断 + 6 观察） |
+| `run_quality_gates.sh` | 本地一键运行全部 23 个质量门（15 阻断 + 8 观察） |
 | `cargo_build_optimized.sh` / `.ps1` | 优化编译 |
 | `cargo_update_check.sh` / `.ps1` | 依赖更新检查 |
 | `run_miri.sh` / `.bat` | Miri 测试 |

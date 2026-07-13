@@ -80,7 +80,13 @@
 
 ## 二、三层语义空间的同构映射
 
-本节从统一抽象框架 与 同构映射表 两个层面剖析「三层语义空间的同构映射」。
+本节建立全文的核心论点：算法（algorithms）、设计模式（design patterns）、工作流模式（workflow patterns）三个语义空间之间存在**结构同构**——同一控制结构在三个抽象层的投影。映射框架：
+
+- **算法层**：关注「计算步骤的最优组织」（时间/空间复杂度）；
+- **设计模式层**：关注「对象/组件的职责分配」（GoF 23 模式的可组合性）；
+- **工作流层**：关注「业务流程的控制路由」（van der Aalst 的 20 种 workflow patterns）。
+
+同构的含义：如「分治」在算法层是 merge sort，在模式层是 Composite 的递归处理，在工作流层是 Parallel Split + Synchronization——识别同构让「一个领域的解决方案」可迁移到另两个领域。后续各节逐一展开五组主要同构。
 
 ### 2.1 统一抽象框架
 
@@ -118,7 +124,11 @@
 
 ## 三、分治算法 ↔ Composite + Parallel Split 的完整同构
 
-理解「分治算法 ↔ Composite + Parallel S…」需要把握算法层：归并排序来源: [CLRS — Introduction to…、设计模式层：Composite + Strategy、工作流层：Parallel Split + Synchronizati…、统一语义来源: [Category Theory for Progra…等5个方面，本节依次展开。
+分治与 Composite + Parallel Split 的同构是算法-模式映射中最完整的一例，三层严格对应：
+
+- **算法层：归并排序**（CLRS 第 2 章）——分解（divide）：数组对半；解决（conquer）：递归排序两半；合并（combine）：归并两个有序序列。正确性由循环不变式保证，复杂度 T(n) = 2T(n/2) + O(n)。
+- **设计模式层：Composite**——树形结构的统一接口（Component/Leaf/Composite）恰好是分治的静态结构表达：Leaf 对应 base case，Composite 对应 divide + combine 的递归节点。
+- **并行层：Parallel Split**——`rayon::join` 把 divide 步骤的左右两半提交给工作窃取调度器，combine 在 join 点后顺序执行。Rust 的所有权使该同构**安全**：split 出的两半是不重叠切片（`split_at_mut`），借用检查静态保证无数据竞争——这是 Java/C++ 版并行分治无法静态给出的保证。：Composite + Strategy、工作流层：Parallel Split + Synchronizati…、统一语义来源: [Category Theory for Progra…等5个方面，本节依次展开。
 
 ### 3.1 算法层：归并排序[来源: [CLRS — Introduction to Algorithms, 4th Ed.](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)]
 
@@ -288,7 +298,11 @@ Composite 的 `eval` 就是一个 catamorphism；工作流 Sequence 则是把该
 
 ## 四、动态规划 ↔ Memoization + Deferred Choice[来源: [Wikipedia — Dynamic Programming](https://en.wikipedia.org/wiki/Dynamic_programming)]
 
-「动态规划 ↔ Memoization + Deferred…」部分按算法层：斐波那契 DP、设计模式层：Memoization + Strategy、工作流层：Deferred Choice + Sequence、统一语义等5个方面的顺序逐层展开。
+动态规划与 Memoization + Deferred Choice 的映射展示了"状态缓存"在三个抽象层的一致性：
+
+- **算法层：斐波那契 DP**——朴素递归 O(2ⁿ) 源于子问题重复求解；记忆化把指数降为线性，本质是 DAG 上的拓扑求值。
+- **设计模式层：Memoization + Strategy**——Memoization 是装饰模式（包装纯函数加缓存），Strategy 是选择延迟：在 Rust 中分别对应"缓存包装的闭包"与"枚举分派"。`HashMap<K, V>` 缓存的键必须是 `Eq + Hash + Clone`——所有权语义要求缓存持有键的副本，这是 GC 语言实现记忆化时不需要考虑的约束。
+- **工作流层**：Deferred Choice（延迟决策）在 Rust 中由 `impl Fn() -> T` 或 `OnceCell` 表达——`OnceCell::get_or_init` 恰好是记忆化的单次特例：惰性求值 + 恰好一次计算 + 线程安全（`OnceLock` 版本）。判定依据：多值缓存用 `HashMap`，单值惰性初始化用 `OnceLock`。：Deferred Choice + Sequence、统一语义等5个方面的顺序逐层展开。
 
 ### 4.1 算法层：斐波那契 DP
 
@@ -608,7 +622,13 @@ Iterator 的惰性本质把图这一余代数结构展开为**最终的 `Option<
 
 ## 六、语义桥的价值与应用[来源: [Workflow Patterns — van der Aalst](https://www.workflowpatterns.com/)]
 
-本节围绕「语义桥的价值与应用来源: [Workflow Patter…」展开，覆盖跨域学习迁移 与 统一设计决策框架 两个方面。
+本节总结语义桥方法的三个应用价值：
+
+1. **知识迁移加速**：掌握一个领域的从业者可沿同构映射快速建立另两个领域的直觉——算法背景的开发者理解「工作流引擎」时，Parallel Split 即 fork-join；
+2. **设计评审的交叉验证**：一个领域的反模式常在另一领域有对应解——「工作流中的无界并发分裂」与「算法中的无界递归」同源，限流策略可跨域借鉴；
+3. **教学组织的依据**：概念页的「跨层链接」应沿同构关系建立——学习路径上「已掌握概念的同构投影」是最高效的新概念入口。
+
+边界声明：同构是结构相似不是语义等同——每层的约束（复杂度 vs 可维护性 vs 业务合规）不同，迁移方案时必须重新评估目标层的约束。
 
 ### 6.1 跨域学习迁移
 

@@ -21,6 +21,25 @@
 
 ---
 
+## 0. 特性 × 影响面 × 受益场景矩阵（2026-07-14 对齐 1.97 范式）
+
+> **说明**：本节对齐 [`rust_1_97_stabilized.md`](rust_1_97_stabilized.md) 的矩阵结构，按官方发布说明补齐 1.94.0 本列车核心稳定特性；下文「关键特性」小节为网络场景应用视角，版本事实见文末对齐节。
+>
+> **官方发布说明可访问性实测**（2026-07-14，`curl` HTTP 200）：
+> [releases.rs 1.94.0](https://releases.rs/docs/1.94.0/) · [Rust 1.94.0 Release Blog](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/)
+
+| 特性 | 影响面 | 受益场景 | 权威源 |
+|:---|:---|:---|:---|
+| 29 个 RISC-V target feature 稳定（含 RVA22U64 / RVA23U64 profile 大部） | 平台 / 编译器 | RISC-V 向量与扩展指令的可移植调用 | [Release Blog](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/) |
+| `<[T]>::array_windows` | 标准库 / 迭代器 | 定长滑动窗口（信号处理、协议解析） | [releases.rs](https://releases.rs/docs/1.94.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |
+| `LazyCell` / `LazyLock::get` / `get_mut` / `force_mut` | 标准库 | 懒初始化值的可控读写与强制求值 | [releases.rs](https://releases.rs/docs/1.94.0/) |
+| `f32` / `f64::mul_add` | 标准库 / 数值 | 融合乘加（FMA），数值精度与性能 | [releases.rs](https://releases.rs/docs/1.94.0/) |
+| `EULER_GAMMA` / `GOLDEN_RATIO` 浮点常量 | 标准库 / 数值 | 数学常量免外部 crate | [releases.rs](https://releases.rs/docs/1.94.0/) |
+| Cargo `include` 配置键稳定 + TOML v1.1 解析 | Cargo | 配置文件拆分复用；清单语法升级 | [releases.rs](https://releases.rs/docs/1.94.0/) · [Cargo 配置](../../06_ecosystem/01_cargo/18_cargo_configuration.md) |
+| std 宏改为经 prelude 导入（兼容性变更） | 兼容 / 宏 | 宏解析路径统一；glob 导入同名宏需调整 | [releases.rs](https://releases.rs/docs/1.94.0/) |
+
+---
+
 ## 目录
 
 - [Rust 1.94 关键特性](#rust-194-关键特性)

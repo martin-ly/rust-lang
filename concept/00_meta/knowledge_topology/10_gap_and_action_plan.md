@@ -15,9 +15,9 @@
 |:---|:---:|:---|
 | 无权威来源标注 | 1 | 概念文件未引用任何外部权威来源 |
 | 来源标注薄弱（≤2） | 0 | 概念文件仅引用 1–2 个来源 |
-| 无定理链 | 219 | 概念文件缺少定理链 |
-| 无 A/S/P 标记 | 249 | 概念文件缺少 A/S/P 维度标记 |
-| 无知识表征章节 | 35 | 概念文件无决策树/矩阵/示例等表征 |
+| 无定理链 | 217 | 概念文件缺少定理链 |
+| 无 A/S/P 标记 | 230 | 概念文件缺少 A/S/P 维度标记 |
+| 无知识表征章节 | 23 | 概念文件无决策树/矩阵/示例等表征 |
 
 ## 二、优先修复任务
 
@@ -33,27 +33,16 @@
 | 概念 | 层级 | 缺失表征 | 建议行动 |
 |:---|:---:|:---|:---|
 | [Preludes](../../01_foundation/07_modules_and_items/10_preludes.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [测验：类型系统](../../01_foundation/11_quizzes/24_quiz_type_system.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [测验：错误处理](../../01_foundation/11_quizzes/25_quiz_error_handling.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [测验：通用 PL 基座](../../01_foundation/11_quizzes/29_quiz_pl_foundations.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [测验：所有权、借用与生命周期](../../01_foundation/11_quizzes/33_quiz_ownership_borrowing.md) | L1 基础概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [测验：Trait 与泛型](../../02_intermediate/01_generics/04_quiz_traits_and_generics.md) | L2 进阶概念层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Safety Tags](../../04_formal/02_separation_logic/03_safety_tags_in_formal.md) | L4 形式化理论层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [形式化方法在 Rust 中的应用](../../04_formal/04_model_checking/02_formal_methods.md) | L4 形式化理论层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [测验：形式化方法概念](../../04_formal/04_model_checking/06_quiz_formal_methods.md) | L4 形式化理论层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [测验：Rust 工具链](../../06_ecosystem/00_toolchain/06_quiz_toolchain.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [rustc 编译器诊断与 UI Tests](../../06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [rustc 自举](../../06_ecosystem/00_toolchain/12_rustc_bootstrap.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [rustc 编译器测试体系](../../06_ecosystem/00_toolchain/13_compiler_testing.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [rustc / Cargo `-Z` 不稳定选项参考清单](../../06_ecosystem/00_toolchain/15_z_flags_reference.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [Cargo Source Replacement 与 Vendoring](../../06_ecosystem/01_cargo/07_cargo_source_replacement.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Cargo Registry 与包发布](../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Cargo 认证与构建缓存](../../06_ecosystem/01_cargo/09_cargo_authentication_and_cache.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Cargo Registry 内部机制](../../06_ecosystem/01_cargo/21_cargo_registry_internals.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [基准测试：Rust 代码性能测量与回归检测](../../06_ecosystem/09_testing_and_quality/04_benchmarking.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Rust 游戏开发](../../06_ecosystem/11_domain_applications/06_game_development.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Rust 算法复杂度分析](../../06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [安全关键 Rust 专题索引](../../06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md) | L6 生态工程层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
@@ -62,6 +51,10 @@
 | [Rust 1.96 稳定特性](../../07_future/00_version_tracking/rust_1_96_stabilized.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Rust 1.97.0 前沿特性预览](../../07_future/00_version_tracking/rust_1_97_preview.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Rust 1.98+ 前沿特性预览](../../07_future/00_version_tracking/rust_1_98_preview.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
+| [Rust 2024 Edition (1.85.0+ stable)](../../07_future/01_edition_roadmap/01_rust_edition_preview.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
+| [Rust Edition 机制与迁移指南](../../07_future/01_edition_roadmap/03_rust_edition_guide.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
+| [cargo-semver-checks：从社区工具到 Cargo 官方集成](../../07_future/03_preview_features/27_cargo_semver_checks_preview.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
+| [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/03_preview_features/29_aarch64_sve_sme_preview.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 
 ### P2：对齐国际标准
 
@@ -78,6 +71,7 @@
 1. 在 `kb_auditor.py` 中增加：概念文件必须引用至少一个 L1 来源。
 2. 每月运行 `extract_concept_topology.py` + `generate_knowledge_topology_atlas.py` 生成图谱集。
 3. 对新增文件自动检测是否包含决策树/矩阵/示例反例中的一种表征。
+
 
 ---
 

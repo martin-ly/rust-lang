@@ -18,6 +18,25 @@
 
 ---
 
+## 0. 特性 × 影响面 × 受益场景矩阵（2026-07-14 对齐 1.97 范式）
+
+> **说明**：本节对齐 [`rust_1_97_stabilized.md`](rust_1_97_stabilized.md) 的矩阵结构，汇总 1.91.0 本列车首次稳定的核心特性；下文章节为 P1-a 逐主题深化，不再重复改写。
+>
+> **官方发布说明可访问性实测**（2026-07-14，`curl` HTTP 200）：
+> [releases.rs 1.91.0](https://releases.rs/docs/1.91.0/) · [Rust 1.91.0 Release Blog](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)
+
+| 特性 | 影响面 | 受益场景 | 权威源 |
+|:---|:---|:---|:---|
+| C 风格可变参数函数稳定（`sysv64`/`win64`/`efiapi`/`aapcs` ABI） | 语言 / FFI | 直接声明 C variadic 接口（如 `printf` 风格绑定） | [Release Blog](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) |
+| `dangling_pointers_from_locals` lint | 语言 / lint | 局部变量悬挂指针编译期预警 | [releases.rs](https://releases.rs/docs/1.91.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |
+| `{integer}::strict_*` 系列方法 | 标准库 / 整数 | 严格溢出语义（溢出即 panic），可移植位精确算法 | [releases.rs](https://releases.rs/docs/1.91.0/) |
+| `AtomicPtr::fetch_ptr_add/sub`、`fetch_or/and/xor` | 标准库 / 并发 | 无锁指针算术与位掩码原子操作 | [releases.rs](https://releases.rs/docs/1.91.0/) · [原子与内存序](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) |
+| `ptr::with_exposed_provenance(_mut)` | 内存模型 / unsafe | 指针来源（provenance）显式暴露，整数↔指针往返 | [releases.rs](https://releases.rs/docs/1.91.0/) · [内存模型](../../03_advanced/02_unsafe/06_memory_model.md) |
+| Cargo `build.build-dir` 稳定 | Cargo | 中间构建产物目录自定义（与 `target-dir` 分离） | [releases.rs](https://releases.rs/docs/1.91.0/) · [Cargo 配置](../../06_ecosystem/01_cargo/18_cargo_configuration.md) |
+| 内部升级 LLVM 21 | 编译器内部 | 新优化通道与目标支持 | [releases.rs](https://releases.rs/docs/1.91.0/) |
+
+---
+
 ## 一、所有权、借用与生命周期
 
 > 来源：`crates/c01_ownership_borrow_scope/docs/11_rust_191_ownership_borrowing_lifetime_improvements.md`

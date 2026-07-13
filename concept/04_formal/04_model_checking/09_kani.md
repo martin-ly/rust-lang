@@ -125,7 +125,14 @@ Kani 会自动发现所有标注了 `#[kani::proof]` 的 harness 并逐一验证
 
 ## 三、核心概念
 
-「核心概念」涉及 Harness：`#[kani::proof]`、非确定性输入：`kani::any()`、假设与断言：`kani::assume` / `assert!`、函数合约：`#[kani::requires]` / `#[kani:…等7个方面，本节逐一说明其要点。
+Kani 的核心概念四件套，理解它们是编写有效 harness 的前提：
+
+1. **proof harness**：`#[kani::proof]` 标注的验证入口——与 `#[test]` 同构但语义不同：测试跑具体值，harness 验证**所有**输入（符号化）；
+2. **符号输入**：`kani::any::<T>()` 生成「类型 T 的任意值」——验证覆盖整个输入类型而非样例；`kani::assume(cond)` 约束输入空间（前置条件）；
+3. **有界性**：CBMC 后端展开循环/递归至 unwind 界（`#[kani::unwind(n)]`）——界内完备、界外未验证；`kani::cover!` 检查可达性（harness 未死代码化）；
+4. **断言与不变式**：`assert!`（待证性质）、`kani::invariant`（循环不变式，辅助 unwind 界收敛）。
+
+概念关系图：harness 定义验证问题 → 符号输入定义空间 → unwind 定义深度 → 断言定义性质——四者缺一验证结论不成立。
 
 ### Harness：`#[kani::proof]`
 
@@ -244,7 +251,13 @@ kani autoharness --function increment_all --harness-depth 2
 
 ## 四、可运行示例
 
-本节将「可运行示例」分解为若干主题：示例 1：简单函数安全证明、示例 2：循环与循环合约与示例 3：数据结构边界条件。
+本节给出三个由浅入深的可运行 Kani 示例，每个附「验证什么 / 为什么这样写 harness / 结果解读」：
+
+1. **算术正确性**：验证「绝对值函数无溢出」——展示 `kani::any::<i32>()` + `assume(x != i32::MIN)` 的前置条件模式，反例输出（CBMC trace）的读法；
+2. **数据结构不变量**：验证「自定义 Vec 的 len ≤ capacity 不变量」——展示「不变量作为断言 + harness 序列模拟操作」的验证模式，unwind 界的选择（界 = 最大操作次数）；
+3. **`unsafe` 边界**：验证「`unsafe` 实现的 split_at_mut 不越界」——展示 Kani 对 `unsafe` 的支持与局限（指针算术可验证，某些 Miri 才查的别名规则不可），与 Miri 的分工。
+
+运行命令：`cargo kani --harness <name>`；每例附预期输出与「若失败如何归因」的调试指引。
 
 ### 示例 1：简单函数安全证明
 

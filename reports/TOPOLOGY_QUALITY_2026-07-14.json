@@ -1,0 +1,132 @@
+{
+  "summary": {
+    "date": "2026-07-14",
+    "files": 13,
+    "flagged": 0,
+    "T1_def_low_rate": 0.0,
+    "T1_def_low": [
+      0,
+      472
+    ],
+    "T2_top_rate": 0.749,
+    "T2_top_symbol": "⟹",
+    "T3_jump": [
+      6,
+      189
+    ],
+    "T3_jump_rate": 0.032,
+    "T3_dead_ends": 0,
+    "T4_quant_rate": 1.0,
+    "T5_leaks": 0,
+    "T6_placeholders": 0
+  },
+  "results": [
+    {
+      "rel": "concept/00_meta/knowledge_topology/01_concept_definition_atlas.md",
+      "lines": 567,
+      "T1": {
+        "total_rows": 472,
+        "low": 0,
+        "rate": 0.0,
+        "samples": []
+      },
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/02_attribute_relationship_atlas.md",
+      "lines": 562,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/03_scenario_decision_tree_atlas.md",
+      "lines": 620,
+      "T3T4": {
+        "blocks": 9,
+        "nodes": 102,
+        "jump_nodes": 6,
+        "jump_rate": 0.059,
+        "dead_ends": [],
+        "dead_end_count": 0,
+        "diamonds": 24,
+        "quant_diamonds": 24,
+        "quant_rate": 1.0
+      },
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/04_example_counterexample_atlas.md",
+      "lines": 541,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/05_logical_reasoning_atlas.md",
+      "lines": 191,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/06_inter_layer_mapping_atlas.md",
+      "lines": 204,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/07_intra_layer_mapping_atlas.md",
+      "lines": 595,
+      "T2": {
+        "total": 463,
+        "counts": {
+          "→": 9,
+          "⟸": 33,
+          "⟹": 347,
+          "⊥": 5,
+          "⇔": 20,
+          "↔": 49
+        },
+        "top_symbol": "⟹",
+        "top_rate": 0.749,
+        "collapsed": false
+      },
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/08_concept_source_alignment_atlas.md",
+      "lines": 53,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+      "lines": 696,
+      "T3T4": {
+        "blocks": 6,
+        "nodes": 87,
+        "jump_nodes": 0,
+        "jump_rate": 0.0,
+        "dead_ends": [],
+        "dead_end_count": 0,
+        "diamonds": 21,
+        "quant_diamonds": 21,
+        "quant_rate": 1.0
+      },
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/10_gap_and_action_plan.md",
+      "lines": 79,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/README.md",
+      "lines": 59,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/kg_ontology_v2.md",
+      "lines": 329,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/kg_tlo_alignment.md",
+      "lines": 263,
+      "issues": {}
+    }
+  ]
+}

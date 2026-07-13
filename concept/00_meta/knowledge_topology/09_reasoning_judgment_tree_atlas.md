@@ -273,9 +273,9 @@ flowchart TD
 
 > 以下来自 `extract_concept_topology.py` 的表征信号抽取：概念页含「核心推理链/定理链/反命题(树)/证明树/逆向推理」类章节（`##`–`####` 级标题，含「反命题与边界分析」「### 核心推理链」等深层小节），或头部有定理链元数据，即收录。每行仅给出入口与信号，推理正文以权威页为准。
 
-覆盖 **387** 个概念（信号：推理/定理类章节或定理链元数据）。
+覆盖 **369** 个概念（信号：推理/定理类章节或定理链元数据）。
 
-### L0 元信息层（40 个概念）
+### L0 元信息层（39 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -316,11 +316,10 @@ flowchart TD
 | [Rust 知识体系问题图谱](../../00_meta/04_navigation/10_problem_graph.md) | 推理/定理节 ×2 · 定理链元数据 ✓ | 核心推理链 · 反命题与边界 |
 | [Rust 概念速查卡片](../../00_meta/04_navigation/11_quick_reference.md) | 推理/定理节 ×2 · 定理链元数据 ✓ | 核心推理链 · 反命题与边界 |
 | [Rust 知识体系自测题库](../../00_meta/04_navigation/12_self_assessment.md) | 推理/定理节 ×2 · 定理链元数据 ✓ | 核心推理链 · 反命题与边界 |
-| [测验：元层框架与知识体系架构](../../00_meta/05_quizzes/01_quiz_meta_framework.md) | 定理链元数据 ✓ | 定理链元数据 |
 | [逻辑推理图谱](../../00_meta/knowledge_topology/05_logical_reasoning_atlas.md) | 推理/定理节 ×5 | 推理链总览 · 核心推理链 |
 | [Rust 知识体系知识图谱本体规范 v2.0](../../00_meta/knowledge_topology/kg_ontology_v2.md) | 定理链元数据 ✓ | 定理链元数据 |
 
-### L1 基础概念层（44 个概念）
+### L1 基础概念层（39 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -363,13 +362,8 @@ flowchart TD
 | [属性与声明宏：编译期元编程基础](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) | 推理/定理节 ×3 | 反命题与边界分析 · 反命题树 |
 | [测试基础：从单元测试到集成测试](../../01_foundation/10_testing_basics/01_testing_basics.md) | 推理/定理节 ×3 | 反命题与边界分析 · 反命题树 |
 | [常用开发工具](../../01_foundation/10_testing_basics/02_useful_development_tools.md) | 推理/定理节 ×2 · 定理链元数据 ✓ | 反命题决策树 · 反向推理 |
-| [测验：类型系统](../../01_foundation/11_quizzes/24_quiz_type_system.md) | 定理链元数据 ✓ | 定理链元数据 |
-| [测验：错误处理](../../01_foundation/11_quizzes/25_quiz_error_handling.md) | 定理链元数据 ✓ | 定理链元数据 |
-| [测验：模块系统与测试](../../01_foundation/11_quizzes/26_quiz_modules_testing.md) | 定理链元数据 ✓ | 定理链元数据 |
-| [测验：闭包与迭代器](../../01_foundation/11_quizzes/27_quiz_closures_iterators.md) | 定理链元数据 ✓ | 定理链元数据 |
-| [测验：所有权、借用与生命周期](../../01_foundation/11_quizzes/33_quiz_ownership_borrowing.md) | 定理链元数据 ✓ | 定理链元数据 |
 
-### L2 进阶概念层（31 个概念）
+### L2 进阶概念层（29 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -380,13 +374,11 @@ flowchart TD
 | [可派生 Trait](../../02_intermediate/00_traits/06_derive_traits.md) | 定理链元数据 ✓ | 定理链元数据 |
 | [Generics](../../02_intermediate/01_generics/01_generics.md) | 推理/定理节 ×7 | 定理推理链（Theorem Chain） · 反命题与边界分析（Counter-proposition & Boundary… |
 | [Const Generics（常量泛型）：值作为类型参数](../../02_intermediate/01_generics/02_const_generics.md) | 推理/定理节 ×1 | 单态化与编译期求值：推理链 |
-| [类型级编程 (Type-Level Programming)](../../02_intermediate/01_generics/03_type_level_programming.md) | 推理/定理节 ×3 | 定理链 · 反命题 |
-| [测验：Trait 与泛型](../../02_intermediate/01_generics/04_quiz_traits_and_generics.md) | 定理链元数据 ✓ | 定理链元数据 |
+| [类型级编程 (Type-Level Programming)](../../02_intermediate/01_generics/03_type_level_programming.md) | 推理/定理节 ×4 | 定理链 · 反命题 |
 | [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) | 推理/定理节 ×7 | 定理推理链（Theorem Chain） · 反命题与边界分析（Counter-proposition & Boundary… |
 | [内部可变性：编译期规则的运行时逃逸](../../02_intermediate/02_memory_management/02_interior_mutability.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
 | [Cow：写时克隆与零拷贝抽象](../../02_intermediate/02_memory_management/03_cow_and_borrowed.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
 | [智能指针：堆内存管理与共享语义](../../02_intermediate/02_memory_management/04_smart_pointers.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
-| [测验：内存管理](../../02_intermediate/02_memory_management/05_quiz_memory_management.md) | 定理链元数据 ✓ | 定理链元数据 |
 | [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) | 推理/定理节 ×7 | 定理推理链（Theorem Chain） · 反命题与边界分析（Counter-proposition & Boundary… |
 | [错误处理深入：从 Result 到自定义错误生态](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
 | [Panic 机制](../../02_intermediate/03_error_handling/03_panic.md) | 定理链元数据 ✓ | 定理链元数据 |
@@ -405,7 +397,7 @@ flowchart TD
 | [属性分类详解](../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md) | 推理/定理节 ×3 | 反命题与边界分析 · 反命题树 |
 | [Rust 迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) | 推理/定理节 ×3 | 反命题与边界分析 · 逆向推理链（Backward Reasoning） |
 
-### L3 高级概念层（56 个概念）
+### L3 高级概念层（53 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -415,7 +407,6 @@ flowchart TD
 | [原子操作与内存序：无锁并发的精确控制](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
 | [无锁编程与内存模型](../../03_advanced/00_concurrency/06_lock_free.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
 | [并行与分布式模式谱系：从线程池到共识算法](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) | 推理/定理节 ×2 | 逆向推理链（Backward Reasoning） · 核心推理链 |
-| [测验：并发与异步](../../03_advanced/00_concurrency/08_quiz_concurrency_async.md) | 定理链元数据 ✓ | 定理链元数据 |
 | [Async/Await](../../03_advanced/01_async/01_async.md) | 推理/定理节 ×7 | 定理矩阵（10 行，含 ⟹ 推理链） · 推理链层级图 |
 | [Async/Await 高级主题](../../03_advanced/01_async/02_async_advanced.md) | 推理/定理节 ×2 | 逆向推理链（Backward Reasoning） · 核心推理链 |
 | [异步模式：从 Future 到生产级并发](../../03_advanced/01_async/03_async_patterns.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
@@ -427,7 +418,6 @@ flowchart TD
 | [Unsafe 边界全景](../../03_advanced/02_unsafe/02_unsafe_boundary_panorama.md) | 定理链元数据 ✓ | 定理链元数据 |
 | [NLL 与 Polonius：借用检查器的演进](../../03_advanced/02_unsafe/03_nll_and_polonius.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
 | [Unsafe Rust 模式：安全抽象的核心技术](../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md) | 推理/定理节 ×1 | 反命题 |
-| [测验：Unsafe Rust](../../03_advanced/02_unsafe/05_quiz_unsafe.md) | 定理链元数据 ✓ | 定理链元数据 |
 | [Rust 内存模型](../../03_advanced/02_unsafe/06_memory_model.md) | 推理/定理节 ×2 · 定理链元数据 ✓ | 反命题决策树 · 反向推理 |
 | [Unsafe 参考](../../03_advanced/02_unsafe/07_unsafe_reference.md) | 推理/定理节 ×2 · 定理链元数据 ✓ | 反命题决策树 · 反向推理 |
 | [Macros](../../03_advanced/03_proc_macros/01_macros.md) | 推理/定理节 ×9 | 反命题决策树一："宏和函数等价" · 反命题决策树二："宏可以执行任意计算" |
@@ -437,9 +427,8 @@ flowchart TD
 | [生产级宏开发](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md) | 推理/定理节 ×3 | 定理链 · 反命题 |
 | [术语表 - C11 Macro System](../../03_advanced/03_proc_macros/06_macro_glossary.md) | 推理/定理节 ×3 · 定理链元数据 ✓ | 定理链 · 反命题 |
 | [常见问题 (FAQ) - C11 Macro System](../../03_advanced/03_proc_macros/07_macro_faq.md) | 推理/定理节 ×3 · 定理链元数据 ✓ | 定理链 · 反命题 |
-| [syn & quote 完整参考](../../03_advanced/03_proc_macros/08_syn_quote_reference.md) | 推理/定理节 ×3 · 定理链元数据 ✓ | 定理链 · 反命题 |
+| [syn & quote 完整参考](../../03_advanced/03_proc_macros/08_syn_quote_reference.md) | 推理/定理节 ×4 · 定理链元数据 ✓ | 定理链 · 反命题 |
 | [宏卫生性完整参考](../../03_advanced/03_proc_macros/09_macro_hygiene.md) | 推理/定理节 ×3 · 定理链元数据 ✓ | 定理链 · 反命题 |
-| [测验：宏系统](../../03_advanced/03_proc_macros/10_quiz_macros.md) | 定理链元数据 ✓ | 定理链元数据 |
 | [条件编译](../../03_advanced/03_proc_macros/11_conditional_compilation.md) | 定理链元数据 ✓ | 定理链元数据 |
 | [Rust FFI：与外部代码的安全边界](../../03_advanced/04_ffi/01_rust_ffi.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
 | [FFI 高级主题：跨语言边界的安全与性能](../../03_advanced/04_ffi/02_ffi_advanced.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
@@ -466,7 +455,7 @@ flowchart TD
 | [Rust 进程测试与基准](../../03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md) | 推理/定理节 ×3 · 定理链元数据 ✓ | 定理链 · 反命题 |
 | [Rust 现代进程管理库](../../03_advanced/08_process_ipc/10_modern_process_libraries.md) | 推理/定理节 ×3 · 定理链元数据 ✓ | 定理链 · 反命题 |
 
-### L4 形式化理论层（49 个概念）
+### L4 形式化理论层（48 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -496,7 +485,6 @@ flowchart TD
 | [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md) | 推理/定理节 ×1 | 核心推理链 |
 | [现代 Rust 验证工具生态](../../04_formal/04_model_checking/04_modern_verification_tools.md) | 推理/定理节 ×1 | 核心推理链 |
 | [通用程序语言理论基础：Rust 的 PL 基座](../../04_formal/04_model_checking/05_programming_language_foundations.md) | 推理/定理节 ×1 | 核心推理链 |
-| [测验：形式化方法概念](../../04_formal/04_model_checking/06_quiz_formal_methods.md) | 定理链元数据 ✓ | 定理链元数据 |
 | [AutoVerus / Verus 自动证明生态](../../04_formal/04_model_checking/07_autoverus.md) | 推理/定理节 ×1 · 定理链元数据 ✓ | 反命题与边界 |
 | [Miri：Rust 未定义行为动态检测器](../../04_formal/04_model_checking/08_miri.md) | 推理/定理节 ×2 | 反命题与边界 · 反命题树 |
 | [MIR、Codegen 与 LLVM IR 入门](../../04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md) | 推理/定理节 ×2 | 反命题决策树 · 逆向推理链（Backward Reasoning） |
@@ -520,7 +508,7 @@ flowchart TD
 | [线性化与一致性谱系：从 Herlihy-Wing 到 Rust 无锁结构](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) | 推理/定理节 ×1 | 定理链与相关概念 |
 | [Actor 模型形式语义：从 Hewitt 公理到 Rust 生态](../../04_formal/07_concurrency_semantics/03_actor_semantics.md) | 推理/定理节 ×1 | 定理链与相关概念 |
 
-### L5 对比分析层（18 个概念）
+### L5 对比分析层（17 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -541,9 +529,8 @@ flowchart TD
 | [Rust vs Elixir 对比分析](../../05_comparative/02_managed_languages/07_rust_vs_elixir.md) | 推理/定理节 ×3 · 定理链元数据 ✓ | 反命题与适用场景 · 反命题树 |
 | [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](../../05_comparative/02_managed_languages/08_rust_vs_typescript.md) | 推理/定理节 ×3 · 定理链元数据 ✓ | 反命题与边界分析 · 反命题树 |
 | [Rust 安全保证的边界条件全景](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) | 推理/定理节 ×2 · 定理链元数据 ✓ | FFI 边界反命题 · 反命题分析（Anti-Propositions） |
-| [测验：Rust vs 系统编程语言](../../05_comparative/03_domain_comparisons/02_quiz_rust_vs_systems.md) | 定理链元数据 ✓ | 定理链元数据 |
 
-### L6 生态工程层（92 个概念）
+### L6 生态工程层（88 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -552,7 +539,6 @@ flowchart TD
 | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) | 推理/定理节 ×3 · 定理链元数据 ✓ | 反命题与边界分析 · 反命题树 |
 | [Rust 编译器内部原理](../../06_ecosystem/00_toolchain/04_compiler_internals.md) | 推理/定理节 ×3 | 反命题与边界 · 反命题树 |
 | [Rust 编译器基础设施深度解析](../../06_ecosystem/00_toolchain/05_compiler_infrastructure.md) | 推理/定理节 ×2 · 定理链元数据 ✓ | 反命题与选型建议 · 核心推理链 |
-| [测验：Rust 工具链](../../06_ecosystem/00_toolchain/06_quiz_toolchain.md) | 定理链元数据 ✓ | 定理链元数据 |
 | [将 Rust 集成到现有平台](../../06_ecosystem/00_toolchain/08_platform_rust_integration.md) | 定理链元数据 ✓ | 定理链元数据 |
 | [Rust 常用开发工具](../../06_ecosystem/00_toolchain/14_development_tools.md) | 定理链元数据 ✓ | 定理链元数据 |
 | [Cargo Script 脚本化 Rust](../../06_ecosystem/01_cargo/01_cargo_script.md) | 推理/定理节 ×2 · 定理链元数据 ✓ | 核心推理链 · 反命题与边界 |
@@ -636,11 +622,8 @@ flowchart TD
 | [Rust 网络编程快速入门](../../06_ecosystem/12_networking/04_network_programming_quick_start.md) | 推理/定理节 ×1 | 定理链 |
 | [C10 Networks - Tier 2: 网络基础实践](../../06_ecosystem/12_networking/05_networking_basics.md) | 推理/定理节 ×1 · 定理链元数据 ✓ | 定理链 |
 | [形式化网络协议理论](../../06_ecosystem/12_networking/06_formal_network_protocol_theory.md) | 推理/定理节 ×1 | 定理链 |
-| [测验：网络与异步生态](../../06_ecosystem/13_quizzes/01_quiz_networking_async_ecosystem.md) | 定理链元数据 ✓ | 定理链元数据 |
-| [测验：数据库与存储生态](../../06_ecosystem/13_quizzes/02_quiz_database_storage.md) | 定理链元数据 ✓ | 定理链元数据 |
-| [测验：安全与测试生态](../../06_ecosystem/13_quizzes/03_quiz_security_testing.md) | 定理链元数据 ✓ | 定理链元数据 |
 
-### L7 前沿趋势层（57 个概念）
+### L7 前沿趋势层（56 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -700,7 +683,6 @@ flowchart TD
 | [Rust 在 AI 与机器学习中的新兴角色](../../07_future/04_research_and_experimental/05_rust_in_ai.md) | 推理/定理节 ×3 · 定理链元数据 ✓ | 反命题与边界分析 · 反命题树 |
 | [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](../../07_future/04_research_and_experimental/06_rust_for_webassembly.md) | 推理/定理节 ×4 · 定理链元数据 ✓ | 反命题与边界分析 · 反命题决策树 |
 | [eBPF / Aya / Rex 的 Rust 映射](../../07_future/04_research_and_experimental/07_ebpf_rust.md) | 推理/定理节 ×1 · 定理链元数据 ✓ | 核心推理链 |
-| [测验：版本演进、Edition 机制与前沿特性](../../07_future/05_quizzes/01_quiz_version_and_preview.md) | 定理链元数据 ✓ | 定理链元数据 |
 
 ---
 

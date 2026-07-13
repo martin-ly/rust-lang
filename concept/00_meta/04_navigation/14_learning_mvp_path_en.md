@@ -41,7 +41,13 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 ## Week 1: Rust Fundamentals & Ownership (12h)
 
-本节将「Week 1: Rust Fundamentals & O…」分解为若干主题： Day 1: Hello World + Toolchain (2h)、Day 2: Ownership & Move Semantics (…、Day 3: Borrowing & References (2h)、Day 4: Basic Types & Collections (2…等5个方面。
+第一周聚焦「能编译、懂所有权」的最小可用能力，12 小时分配：
+
+- **Day 1-2（4h）环境 + 基础语法**：rustup/cargo 工作流、`let`/`fn`/控制流、模式匹配入门——验收：能独立创建项目、读懂编译错误的第一行；
+- **Day 3-4（4h）所有权核心**：move 语义、借用规则（`&`/`&mut` 排他性）、`String` vs `&str`——验收：能解释 E0382/E0502 各一个实例并修复；
+- **Day 5-6（4h）结构体 + 错误处理入门**：`struct`/`impl`/`Option`/`Result`/`?`——验收：完成「读文件 + 解析 + 错误传播」小工具。
+
+学习纪律：本周**不碰**生命周期标注、泛型、trait——所有代码用 owned 类型 + clone 过关，「丑但正确」是第一周的审美标准。
 
 ### Day 1: Hello World + Toolchain (2h)
 
@@ -101,7 +107,13 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 ## Week 2: Type System & Error Handling (12h)
 
-本节从 Day 7: Structs, Enums & Pattern Mat…、Day 8: Traits & Generics Intro (2h)、Day 9: Error Handling (2h)、Day 10: Modules & Cargo (2h)等5个方面切入，剖析「Week 2: Type System & Error H…」的核心内容。
+第二周聚焦「类型系统驱动设计」，12 小时分配：
+
+- **Day 1-2（4h）trait 与泛型**：trait 定义/实现/约束、泛型函数与单态化直觉、`impl Trait` 两种位置——验收：为自定义类型实现 `Display`/`FromIterator`；
+- **Day 3-4（4h）生命周期**：省略规则三条件、显式标注的两种必要场景（多引用参数、结构体持有引用）——验收：能解释 `'a` 标注是「关系声明」而非「延长时间」；
+- **Day 5-6（4h）错误处理工程化**：`thiserror` 库错误、`anyhow` 应用错误、错误转换与上下文——验收：CLI 项目接入分层错误类型。
+
+验收整合：本周产出「泛型化 + 错误分层」的 v2 版小工具，与第一周的 owned-only 版本对照——类型系统的表达收益应可量化（代码行数/错误路径覆盖）。
 
 ### Day 7: Structs, Enums & Pattern Matching (2h)
 

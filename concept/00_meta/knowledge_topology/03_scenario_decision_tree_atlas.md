@@ -289,9 +289,9 @@ flowchart TD
 
 > 以下来自 `extract_concept_topology.py` 的表征信号抽取：概念页含「决策树/判定树/选型/判断推理/何时用/场景」类章节（`##`–`####` 级标题，含判定表/选型矩阵等深层小节），或含带菱形判定节点的 mermaid 图，即收录。每行仅给出入口与信号，决策正文以权威页为准。
 
-覆盖 **284** 个概念（信号：决策/场景类章节或 mermaid 判定图）。
+覆盖 **277** 个概念（信号：决策/场景类章节或 mermaid 判定图）。
 
-### L0 元信息层（21 个概念）
+### L0 元信息层（20 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -312,12 +312,11 @@ flowchart TD
 | [全局概念索引](../../00_meta/04_navigation/03_concept_index.md) | 决策/场景节 ×1 | 判定树与失效分析树索引 |
 | [Rust 知识体系层次内模型间映射图](../../00_meta/04_navigation/06_intra_layer_model_map.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
 | [Rust 概念速查卡片](../../00_meta/04_navigation/11_quick_reference.md) | 决策/场景节 ×1 | 模式选择决策树（速查版） |
-| [测验：元层框架与知识体系架构](../../00_meta/05_quizzes/01_quiz_meta_framework.md) | 决策/场景节 ×1 | Q3. 🟡【单选】按本体系的 Bloom 层级映射表，"unsafe 安全性审… |
 | [场景决策树图谱](../../00_meta/knowledge_topology/03_scenario_decision_tree_atlas.md) | 决策/场景节 ×18 · mermaid 判定图 ×8 | 场景总览 · 按场景索引 |
 | [逻辑推理图谱](../../00_meta/knowledge_topology/05_logical_reasoning_atlas.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
 | [推理判定树图谱](../../00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md) | 决策/场景节 ×7 · mermaid 判定图 ×6 | 主要判定树 · 借用冲突判定树 |
 
-### L1 基础概念层（32 个概念）
+### L1 基础概念层（31 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -352,9 +351,8 @@ flowchart TD
 | [属性与声明宏：编译期元编程基础](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
 | [测试基础：从单元测试到集成测试](../../01_foundation/10_testing_basics/01_testing_basics.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
 | [常用开发工具](../../01_foundation/10_testing_basics/02_useful_development_tools.md) | 决策/场景节 ×2 · mermaid 判定图 ×1 | 反命题决策树 · 工具选择决策树 |
-| [测验：模块系统与测试](../../01_foundation/11_quizzes/26_quiz_modules_testing.md) | 决策/场景节 ×1 | Q10. 🟡 以下代码能否编译？解释 `#[ignore]` 和 `#[sho… |
 
-### L2 进阶概念层（27 个概念）
+### L2 进阶概念层（26 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -384,7 +382,6 @@ flowchart TD
 | [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) | 决策/场景节 ×2 · mermaid 判定图 ×2 | 元编程技术选型矩阵 · 选型决策树 |
 | [属性分类详解](../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md) | 决策/场景节 ×1 | 判断推理与决策树 |
 | [Rust 迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 测验 6：`Iterator::fuse()` 的作用是什么？在什么场景下需要… |
-| [测验：C/C++ → Rust 基础知识对比](../../02_intermediate/09_quizzes/30_quiz_cpp_rust_foundations.md) | 决策/场景节 ×1 | 问题 5：🟡 Rust 中哪个可见性修饰符最接近 C++ `friend` 的… |
 
 ### L3 高级概念层（42 个概念）
 
@@ -473,7 +470,7 @@ flowchart TD
 | [名字参考](../../04_formal/05_rustc_internals/16_names_reference.md) | 决策/场景节 ×1 | 反命题决策树 |
 | [Rust Reference 附录](../../04_formal/05_rustc_internals/17_reference_appendices.md) | 决策/场景节 ×1 | 反命题决策树 |
 
-### L5 对比分析层（18 个概念）
+### L5 对比分析层（17 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -494,9 +491,8 @@ flowchart TD
 | [Rust vs Elixir 对比分析](../../05_comparative/02_managed_languages/07_rust_vs_elixir.md) | 决策/场景节 ×2 · mermaid 判定图 ×1 | 反命题与适用场景 · 适用场景矩阵 |
 | [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](../../05_comparative/02_managed_languages/08_rust_vs_typescript.md) | 决策/场景节 ×2 · mermaid 判定图 ×1 | 选型决策矩阵 · 工程选型决策树 |
 | [Rust 安全保证的边界条件全景](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) | mermaid 判定图 ×5 | mermaid 判定节点图 |
-| [测验：Rust vs 系统编程语言](../../05_comparative/03_domain_comparisons/02_quiz_rust_vs_systems.md) | 决策/场景节 ×2 | Q2. 🟡 以下 Go 代码有什么问题？Rust 如何处理同样的场景？ · Q8. 🟢 以下场景最适合哪种语言？为什么？ |
 
-### L6 生态工程层（73 个概念）
+### L6 生态工程层（70 个概念）
 
 | 概念页 | 表征信号 | 主题提示 |
 |:---|:---|:---|
@@ -570,9 +566,6 @@ flowchart TD
 | [Rust WebAssembly 高级开发](../../06_ecosystem/11_domain_applications/17_webassembly_advanced.md) | 决策/场景节 ×3 | 测验 5：Rust 编译为 WASM 时，`wasm-bindgen` 与 `… · 典型应用场景 |
 | [Rust 高级网络协议概览](../../06_ecosystem/12_networking/01_advanced_network_protocols.md) | 决策/场景节 ×3 · mermaid 判定图 ×1 | 1. 协议分类与适用场景 · 9. 技术选型决策树 |
 | [Rust 网络编程快速入门](../../06_ecosystem/12_networking/04_network_programming_quick_start.md) | 决策/场景节 ×2 · mermaid 判定图 ×1 | 按场景选择起点 · 同步 vs 异步决策树 |
-| [测验：网络与异步生态](../../06_ecosystem/13_quizzes/01_quiz_networking_async_ecosystem.md) | 决策/场景节 ×2 | Q4. 🟡 某低延迟交易系统评估运行时。按权威页的适用场景判定，下列哪条结论成… · Q9. 🔴【多选】设计一个云原生微服务的网络栈选型，按权威页内容，下列决策合理… |
-| [测验：数据库与存储生态](../../06_ecosystem/13_quizzes/02_quiz_database_storage.md) | 决策/场景节 ×4 | 数据库访问层选型 · Q8. 🔴 某实时分析平台要求"流式数据进来后，复杂 SQL 视图随数据增量更… |
-| [测验：安全与测试生态](../../06_ecosystem/13_quizzes/03_quiz_security_testing.md) | 决策/场景节 ×2 | Q2. 🟢 为 TLS 类场景选择对称加密原语。按权威页的原语分类，下列哪组属… · Q4. 🟡 签名与密钥交换场景选型：需要"数字签名"与"密钥交换"各一个原语。… |
 
 ### L7 前沿趋势层（36 个概念）
 
