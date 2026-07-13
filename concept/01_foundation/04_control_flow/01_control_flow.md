@@ -1730,3 +1730,7 @@ goto 的错误清理模式
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/itertools — 生态权威 API 文档（迭代器与 `for` 控制流的生态扩展）](https://docs.rs/itertools)（2026-07-12 验证 HTTP 200）
+
+---
+
+> **Rust 1.95 起**：match 守卫支持 `if let`（if-let guards），可在 `match` 分支守卫中做条件绑定；同时路径段关键字重命名导入（如 `use foo::r#async as f;`）稳定。详见 [版本页](../../07_future/00_version_tracking/rust_1_95_stabilized.md) §0 矩阵。

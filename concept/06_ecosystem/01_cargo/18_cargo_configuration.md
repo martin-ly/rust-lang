@@ -188,3 +188,7 @@ incompatible-rust-versions = "fallback"
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Rudra: Finding Memory Safety Bugs in Rust at the Ecosystem Scale (SOSP 2021)](https://dl.acm.org/doi/10.1145/3477132.3483570)
+
+---
+
+> **Rust 1.94 起**：Cargo `include` 配置键稳定，顶层配置可拆分到多个文件复用；Cargo 同步开始按 TOML v1.1 解析清单与配置文件。详见 [版本页](../../07_future/00_version_tracking/rust_1_94_stabilized.md) §0 矩阵。

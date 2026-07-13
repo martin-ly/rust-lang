@@ -174,3 +174,7 @@ cargo tree -p c17_resolver_v3_public_demo -e features
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Rudra: Finding Memory Safety Bugs in Rust at the Ecosystem Scale (SOSP 2021)](https://dl.acm.org/doi/10.1145/3477132.3483570)
+
+---
+
+> **Rust 1.90 起**：多包发布（multi-package publishing）稳定，`cargo publish` 可一次性发布 workspace 内多个 crate；1.93 起 `cargo clean --workspace` 支持工作区级清理。详见 [版本页](../../07_future/00_version_tracking/rust_1_90_stabilized.md) §0 矩阵。

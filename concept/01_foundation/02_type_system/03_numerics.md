@@ -1124,3 +1124,7 @@ fn main() {
 - **对偶**：与变长堆数据相对（定长栈值 vs 堆缓冲），见 [Collections](../05_collections/01_collections.md)。
 - **组合**：溢出检查与 [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) 组合（`checked_add` 返回 `Option`）。
 - **依赖**：无开销数值抽象依赖 [Zero Cost Abstractions](../00_start/02_zero_cost_abstractions.md)。
+
+---
+
+> **Rust 1.90 起**：`u{N}::{checked,overflowing,saturating,wrapping}_sub_signed` 稳定，无符号-有符号混合减法获得溢出可控语义；同时 `f32`/`f64` 的 `floor`/`ceil`/`trunc`/`fract`/`round`/`round_ties_even` 进入 const 上下文。详见 [版本页](../../07_future/00_version_tracking/rust_1_90_stabilized.md) §0 矩阵。

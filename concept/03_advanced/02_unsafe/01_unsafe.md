@@ -3499,3 +3499,7 @@ pub struct MyBox<T: ?Sized> {
 | **FFI** | [ffi](https://doc.rust-lang.org/nomicon/ffi.html) | § 示例 2 调用外部函数 |
 
 > **官方入口**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · 与 Rust 1.93 对应见 [09_rust_1.93_compatibility_deep_dive](../../../docs/09_toolchain/05_rust_1_93_compatibility_deep_dive.md)
+
+---
+
+> **Rust 1.92 起**：`MaybeUninit` 的表示与有效性（representation and validity）规则正式文档化；安全代码可直接对联合体字段取 `&raw const/mut`；`Box`/`Rc`/`Arc::new_zeroed(_slice)` 稳定，提供零初始化堆分配。详见 [版本页](../../07_future/00_version_tracking/rust_1_92_stabilized.md) §0 矩阵。

@@ -980,3 +980,7 @@ pub extern "C" fn rust_add(a: i32, b: i32) -> i32 {
 - 在边界处显式管理所有权与生命周期，防止内存泄漏或 UAF。
 
 > 完整 FFI 安全边界、不透明类型与回调模式参见本节正文。
+
+---
+
+> **Rust 1.91 起**：C 风格可变参数函数声明在 `sysv64`/`win64`/`efiapi`/`aapcs` ABI 稳定；**1.93 起** `system` ABI 同步稳定，并新增 `String::into_raw_parts` / `Vec::into_raw_parts` 用于堆缓冲区跨边界零拷贝移交。详见 [1.91 版本页](../../07_future/00_version_tracking/rust_1_91_stabilized.md) 与 [1.93 版本页](../../07_future/00_version_tracking/rust_1_93_stabilized.md) §0 矩阵。

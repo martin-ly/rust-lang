@@ -1518,3 +1518,7 @@ fn main() {
 
 > **来源**: [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/) · [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html) · [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§2.3、§2.4）
 > **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`42_type_layout.md`](../../04_formal/05_rustc_internals/08_type_layout.md) · [`29_memory_model.md`](../02_unsafe/06_memory_model.md)
+
+---
+
+> **Rust 1.91 起**：`AtomicPtr::fetch_ptr_add` / `fetch_ptr_sub` 与各原子类型的 `fetch_or` / `fetch_and` / `fetch_xor` 稳定，支持无锁指针算术与位掩码操作；**1.95 起** `update` / `try_update` 稳定，将 CAS 循环闭包化。详见 [1.91 版本页](../../07_future/00_version_tracking/rust_1_91_stabilized.md) 与 [1.95 版本页](../../07_future/00_version_tracking/rust_1_95_stabilized.md) §0 矩阵。

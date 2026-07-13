@@ -430,3 +430,7 @@ Rust 内存模型中的"抽象字节"可以区分哪些状态？
 **B 正确**。按本页「三、Provenance」：provenance 说明指针指向哪个分配，将带 provenance 的指针转译为整数再转回**可能丢失** provenance（A 错）。「六、别名模型」：Rust 正从 Stacked Borrows（基于栈的借用权限追踪，严格但限制较多）向 Tree Borrows（基于树的权限模型，对更多合法 unsafe 模式更宽容）演进。C 错：本页明确警告"Rust 的内存模型目前尚不完整，部分细节尚未最终确定"。
 
 </details>
+
+---
+
+> **Rust 1.91 起**：`ptr::with_exposed_provenance(_mut)` 稳定，为整数↔指针往返提供显式 provenance 暴露路径；**1.96 起**「valid for read/write」定义重构（排除 null，由各方法单独声明例外），统一指针有效性契约。详见 [1.91 版本页](../../07_future/00_version_tracking/rust_1_91_stabilized.md) 与 [1.96 版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md) §0 矩阵。

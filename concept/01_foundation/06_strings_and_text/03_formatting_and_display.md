@@ -446,3 +446,7 @@ D. `{:<8}`
 
 - **P1 学术/形式化**: [Weiss, Patterson, Matsakis & Ahmed: Oxide — The Essence of Rust（Rust 类型系统（Type System）/trait 的学术形式化, arXiv:1903.00982）](https://arxiv.org/abs/1903.00982)（2026-07-12 验证 HTTP 200）
 - **P2 生态/社区**: [docs.rs/regex — 生态权威 API 文档](https://docs.rs/regex) · [docs.rs/serde_json — 生态权威 API 文档](https://docs.rs/serde_json)
+
+---
+
+> **Rust 1.93 起**：`std::fmt::from_fn` 与 `std::fmt::FromFn` 稳定，可用闭包直接构造实现 `Display` 等格式化 trait 的值，无需定义新类型。详见 [版本页](../../07_future/00_version_tracking/rust_1_93_stabilized.md) §0 矩阵。

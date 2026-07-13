@@ -1428,3 +1428,7 @@ impl Iterator for Counter {
 - **对偶**：与 C++ 外部迭代器相对（内部 vs 外部迭代），见 [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)。
 - **组合**：与 [Closure Types](../04_types_and_conversions/02_closure_types.md) 组合传递适配逻辑。
 - **依赖**：适配器契约依赖 [Traits](../00_traits/01_traits.md)。
+
+---
+
+> **Rust 1.94 起**：`<[T]>::array_windows` 稳定，提供定长滑动窗口迭代；**1.96 起** `core::range` 的 `Range`/`RangeFrom`/`RangeToInclusive` 及其迭代器实现 `Copy`，且 `NonZero` 整数范围可直接迭代。详见 [1.94 版本页](../../07_future/00_version_tracking/rust_1_94_stabilized.md) 与 [1.96 版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md) §0 矩阵。

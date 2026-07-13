@@ -979,3 +979,7 @@ struct Point {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/syn — 生态权威 API 文档](https://docs.rs/syn) · [docs.rs/quote — 生态权威 API 文档](https://docs.rs/quote)
+
+---
+
+> **Rust 1.95 起**：`cfg_select!` 宏稳定，以多分支选择替代嵌套 `#[cfg]` 属性，简化互斥条件编译。详见 [版本页](../../07_future/00_version_tracking/rust_1_95_stabilized.md) §0 矩阵。
