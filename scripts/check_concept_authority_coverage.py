@@ -81,6 +81,43 @@ CRATES_STUB_MARKERS_CI = [
     "has been migrated to the concept authority page",
 ]
 
+# Markdown 链接提取：用于检查 crates docs stub 中的 canonical 链接健康度
+MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+
+
+def resolve_markdown_link(src_file, url):
+    """将 markdown 链接 url（相对源文件 src_file）解析为绝对路径；返回 (target_abs, is_local)。
+    外部 http/https 链接返回 (url, False)。"""
+    url = url.strip()
+    if url.startswith(("http://", "https://")):
+        return url, False
+    # 去掉锚点与查询串
+    bare = url.split("#")[0].split("?")[0]
+    if not bare:
+        return "", False
+    base = os.path.dirname(src_file)
+    return os.path.normpath(os.path.join(base, bare)), True
+
+
+def canonical_links_in_stub(src_file, text):
+    """扫描 stub 文件中的 markdown 链接，返回 local_canonical 与 external_canonical。
+    local_canonical: 指向 concept/ 的相对链接（未来可扩展为其他本地权威目录）。
+    external_canonical: 命中 CRATES_AUTH_RE 的外部权威域链接。
+    """
+    local = []
+    external = []
+    for _, url in MD_LINK_RE.findall(text):
+        resolved, is_local = resolve_markdown_link(src_file, url)
+        if not is_local:
+            if CRATES_AUTH_RE.search(url):
+                external.append((url, url))
+        else:
+            # 本地 canonical：目标落在 concept/ 目录下（按仓库相对路径判断）
+            rel = os.path.relpath(resolved, ROOT).replace("\\", "/")
+            if rel.startswith("concept/"):
+                local.append((url, resolved, rel))
+    return local, external
+
 
 def crates_classify(path, text):
     """crates docs 文件分类：stub / quiz / index_readme / code_listing / content。
@@ -114,6 +151,7 @@ def scan_crates_docs():
             os.path.join(ROOT, "crates", "*", "*", "docs", "**", "*.md")]
     files = sorted({p for pat in pats for p in glob.glob(pat, recursive=True)})
     rows = []
+    dead_canonical = []  # (file, url, resolved_rel) 本地 concept/ 链接不存在
     for p in files:
         try:
             text = open(p, encoding="utf-8", errors="ignore").read()
@@ -124,6 +162,11 @@ def scan_crates_docs():
         kind = crates_classify(rel, text)
         rows.append({"path": rel, "crate": crate, "kind": kind,
                      "authority": bool(CRATES_AUTH_RE.search(text))})
+        if kind == "stub":
+            local, _ = canonical_links_in_stub(p, text)
+            for url, resolved, res_rel in local:
+                if not os.path.exists(resolved):
+                    dead_canonical.append((rel, url, res_rel))
     content = [r for r in rows if r["kind"] == "content"]
     covered = [r for r in content if r["authority"]]
     per = {}
@@ -142,6 +185,7 @@ def scan_crates_docs():
         "per_crate": {c: {"content": v[0], "covered": v[1]} for c, v in sorted(per.items())},
         "skipped": {k: [r["path"] for r in rows if r["kind"] == k]
                     for k in ("index_readme", "code_listing", "quiz")},
+        "dead_canonical": dead_canonical,
     }
 
 SKIP_NAMES = {"SUMMARY.md", "README.md"}
@@ -172,7 +216,7 @@ def main():
     ap.add_argument("--strict", action="store_true",
                     help="阻断模式：内容页 any<100%% / none>0 / 核心 L1-L4 无 P0 缺口>0 时 exit 1")
     ap.add_argument("--include-crates", action="store_true",
-                    help="附加 crates/*/docs 权威覆盖小节（默认观察 exit 0；--strict 时内容页覆盖<100%% 亦阻断）")
+                    help="附加 crates/*/docs 权威覆盖小节（默认观察 exit 0；--strict 时内容页覆盖<100%% 或 stub canonical 死链>0 亦阻断）")
     args = ap.parse_args()
 
     files = active_md()
@@ -282,6 +326,19 @@ def main():
         md.append("")
         if crates["gaps"]:
             md.append("crates 内容页缺口: " + " · ".join(f"`{g}`" for g in crates["gaps"][:40]) + "\n")
+        md.append("\n### crates stub canonical 链接健康度\n")
+        dc = crates.get("dead_canonical", [])
+        if not dc:
+            md.append("- **dead_canonical = 0** ✅ 所有 stub 中的 `concept/` canonical 链接均解析到真实文件。\n")
+        else:
+            md.append(f"- **dead_canonical = {len(dc)}** ❌ 以下 stub canonical 链接指向不存在的文件（前 30）：\n")
+            md.append("| 源文件 | 链接 URL | 解析路径 |")
+            md.append("|:---|:---|:---|")
+            for rel, url, res_rel in dc[:30]:
+                md.append(f"| `{rel}` | `{url}` | `{res_rel}` |")
+            if len(dc) > 30:
+                md.append(f"\n> … 另有 {len(dc)-30} 处，见 JSON `crates_docs.dead_canonical`。")
+            md.append("")
         skips = crates["skipped"]
         reg = []
         for k in ("index_readme", "code_listing", "quiz"):
@@ -290,7 +347,8 @@ def main():
         if reg:
             md.append("登记跳过（非 stub 但不计入内容页分母）: " + " · ".join(reg) + "\n")
         print(f"[crates-authority] total={crates['total']} content={crates['content']} "
-              f"covered={crates['covered']} ({crates['pct']}%) gaps={len(crates['gaps'])}")
+              f"covered={crates['covered']} ({crates['pct']}%) gaps={len(crates['gaps'])} "
+              f"dead_canonical={len(crates.get('dead_canonical', []))}")
 
     os.makedirs(os.path.join(ROOT, "reports"), exist_ok=True)
     md_path = os.path.join(ROOT, "reports", f"CONCEPT_AUTHORITY_COVERAGE_{TODAY}.md")
@@ -322,6 +380,8 @@ def main():
         if crates is not None and crates["gaps"]:
             fails.append(f"crates docs 内容页权威缺口 {len(crates['gaps'])} > 0 "
                          f"（覆盖率 {crates['pct']}%）")
+        if crates is not None and crates.get("dead_canonical"):
+            fails.append(f"crates docs stub canonical 死链 {len(crates['dead_canonical'])} > 0")
         if fails:
             print("[concept-authority] FAIL (--strict): " + "; ".join(fails))
             return 1

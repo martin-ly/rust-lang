@@ -1,28 +1,15 @@
 {
   "summary": {
-    "SERIES": 130,
+    "SERIES": 132,
     "MERGE": 0,
     "DOCS_INTERNAL": 0,
     "REVIEWED": 438,
     "REVIEW": 0,
-    "total": 568,
+    "total": 570,
     "source": "reports/CONTENT_OVERLAP_V2_2026-07-14.json"
   },
   "buckets": {
     "SERIES": [
-      {
-        "sim": 1.0,
-        "kw_sim": 0.376,
-        "title_sim": 1.0,
-        "shared": 79,
-        "same_dir": true,
-        "f1": "crates/c02_type_system/readme_rust_189.md",
-        "f2": "crates/c02_type_system/readme_rust_190.md",
-        "t1": "Rust 1.89 类型系统完整实现",
-        "t2": "Rust 1.90 类型系统完整实现",
-        "lines1": 489,
-        "lines2": 1582
-      },
       {
         "sim": 1.0,
         "kw_sim": 0.357,
@@ -347,6 +334,19 @@
         "t2": "实践项目 11: HTTP Web服务器 {#实践项目-11-http-web服",
         "lines1": 115,
         "lines2": 113
+      },
+      {
+        "sim": 0.8,
+        "kw_sim": 0.8,
+        "title_sim": 0.333,
+        "shared": 5,
+        "same_dir": true,
+        "f1": "crates/c09_design_pattern/docs/05_c09_comprehensive_enhancement_report_2025_10_19.md",
+        "f2": "crates/c09_design_pattern/docs/07_enhancement_summary_2025_10_19.md",
+        "t1": "C09 设计模式模块综合增强报告",
+        "t2": "🎉 C09 设计模式模块增强完成总结",
+        "lines1": 15,
+        "lines2": 15
       },
       {
         "sim": 0.793,
@@ -1493,6 +1493,32 @@
         "lines2": 15
       },
       {
+        "sim": 0.571,
+        "kw_sim": 0.571,
+        "title_sim": 0.167,
+        "shared": 5,
+        "same_dir": true,
+        "f1": "crates/c09_design_pattern/docs/00_master_index.md",
+        "f2": "crates/c09_design_pattern/docs/05_c09_comprehensive_enhancement_report_2025_10_19.md",
+        "t1": "C09 设计模式: 主索引 (Master Index)",
+        "t2": "C09 设计模式模块综合增强报告",
+        "lines1": 22,
+        "lines2": 15
+      },
+      {
+        "sim": 0.571,
+        "kw_sim": 0.571,
+        "title_sim": 0.167,
+        "shared": 5,
+        "same_dir": true,
+        "f1": "crates/c09_design_pattern/docs/00_master_index.md",
+        "f2": "crates/c09_design_pattern/docs/07_enhancement_summary_2025_10_19.md",
+        "t1": "C09 设计模式: 主索引 (Master Index)",
+        "t2": "🎉 C09 设计模式模块增强完成总结",
+        "lines1": 22,
+        "lines2": 15
+      },
+      {
         "sim": 0.568,
         "kw_sim": 0.568,
         "title_sim": 0.333,
@@ -1639,7 +1665,7 @@
         "sim": 0.5,
         "kw_sim": 0.39,
         "title_sim": 0.5,
-        "shared": 51,
+        "shared": 54,
         "same_dir": true,
         "f1": "crates/c12_wasm/rust_192_comprehensive_update_report.md",
         "f2": "crates/c12_wasm/rust_192_update_summary.md",
@@ -1736,6 +1762,19 @@
         "title_sim": 0.5,
         "shared": 6,
         "same_dir": true,
+        "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
+        "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
+        "t1": "C05 Threads 主索引导航",
+        "t2": "C05 Threads 术语表",
+        "lines1": 22,
+        "lines2": 22
+      },
+      {
+        "sim": 0.818,
+        "kw_sim": 0.818,
+        "title_sim": 0.5,
+        "shared": 6,
+        "same_dir": true,
         "f1": "crates/c04_generic/docs/00_master_index.md",
         "f2": "crates/c04_generic/docs/tier_01_foundations/01_project_overview.md",
         "t1": "C04 泛型编程 - 主索引",
@@ -1792,19 +1831,6 @@
         "f2": "crates/c04_generic/docs/tier_01_foundations/04_faq.md",
         "t1": "C04 泛型编程 - 术语表",
         "t2": "C04 泛型编程 - 常见问题",
-        "lines1": 22,
-        "lines2": 22
-      },
-      {
-        "sim": 0.818,
-        "kw_sim": 0.818,
-        "title_sim": 0.5,
-        "shared": 6,
-        "same_dir": true,
-        "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
-        "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
-        "t1": "C05 Threads 主索引导航",
-        "t2": "C05 Threads 术语表",
         "lines1": 22,
         "lines2": 22
       },
@@ -1932,9 +1958,9 @@
         "shared": 5,
         "same_dir": true,
         "f1": "crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md",
-        "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
+        "f2": "crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md",
         "t1": "Rust 所有权系统概念关系网络",
-        "t2": "Rust 所有权系统可视化文档导航",
+        "t2": "Rust 所有权系统多维矩阵对比分析",
         "lines1": 15,
         "lines2": 15
       },
@@ -1945,21 +1971,8 @@
         "shared": 5,
         "same_dir": true,
         "f1": "crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md",
-        "f2": "crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md",
-        "t1": "Rust 所有权系统概念关系网络",
-        "t2": "Rust 所有权系统多维矩阵对比分析",
-        "lines1": 15,
-        "lines2": 15
-      },
-      {
-        "sim": 0.8,
-        "kw_sim": 0.8,
-        "title_sim": 0.0,
-        "shared": 5,
-        "same_dir": true,
-        "f1": "crates/c01_ownership_borrow_scope/docs/03_mind_map.md",
         "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
-        "t1": "Rust 所有权系统思维导图",
+        "t1": "Rust 所有权系统概念关系网络",
         "t2": "Rust 所有权系统可视化文档导航",
         "lines1": 15,
         "lines2": 15
@@ -1974,6 +1987,19 @@
         "f2": "crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md",
         "t1": "Rust 所有权系统思维导图",
         "t2": "Rust 所有权系统多维矩阵对比分析",
+        "lines1": 15,
+        "lines2": 15
+      },
+      {
+        "sim": 0.8,
+        "kw_sim": 0.8,
+        "title_sim": 0.0,
+        "shared": 5,
+        "same_dir": true,
+        "f1": "crates/c01_ownership_borrow_scope/docs/03_mind_map.md",
+        "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
+        "t1": "Rust 所有权系统思维导图",
+        "t2": "Rust 所有权系统可视化文档导航",
         "lines1": 15,
         "lines2": 15
       },
@@ -2426,9 +2452,9 @@
         "shared": 5,
         "same_dir": true,
         "f1": "crates/c01_ownership_borrow_scope/docs/00_master_index.md",
-        "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
+        "f2": "crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md",
         "t1": "Rust 所有权系统完整指南 - 主索引",
-        "t2": "Rust 所有权系统可视化文档导航",
+        "t2": "Rust 所有权系统多维矩阵对比分析",
         "lines1": 22,
         "lines2": 15
       },
@@ -2439,9 +2465,9 @@
         "shared": 5,
         "same_dir": true,
         "f1": "crates/c01_ownership_borrow_scope/docs/00_master_index.md",
-        "f2": "crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md",
+        "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
         "t1": "Rust 所有权系统完整指南 - 主索引",
-        "t2": "Rust 所有权系统多维矩阵对比分析",
+        "t2": "Rust 所有权系统可视化文档导航",
         "lines1": 22,
         "lines2": 15
       },

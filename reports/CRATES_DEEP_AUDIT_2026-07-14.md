@@ -47,10 +47,10 @@
 | CONTRIBUTING | 6 | 69405 | 贡献指南 |
 | examples/README | 12 | 81811 | examples 目录说明 |
 | README | 25 | 250145 | crate 根 README |
-| reports | 128 | 1581287 | crate 历史报告 |
+| reports | 128 | 1544948 | crate 历史报告 |
 | src/README | 10 | 24386 | src 子目录说明 |
 | tests/README | 10 | 23982 | tests 目录说明 |
-| other | 71 | 785571 | 其他根级文档/指南 |
+| other | 71 | 672774 | 其他根级文档/指南 |
 | INDEX | 1 | 18732 | crate 根索引 |
 
 ## 2. stub 质量检查
@@ -65,6 +65,7 @@
 
 - 抽样数: **30**
 - 疑似残留 ≥3 段/标题重复的 stub: **0**
+
 > ✅ 30 个最长 stub 与 concept/ 权威页无 ≥3 段/标题的精确重复，去重基本到位。
 
 ## 3. docs/ 内容页扩展机会
@@ -80,15 +81,14 @@
 ## 4. 非 docs/ 文件治理建议
 
 - 建议归档/转为 stub 的历史报告类文件: **158**
-- 建议迁移到 `docs/` 或改为 stub 的通用概念指南: **39**
-- 其他待复核文件（Top 20）: **2**
+- 建议迁移到 `docs/` 或改为 stub 的通用概念指南: **36**
+- 其他待复核文件（Top 20）: **5**
 
 ### 4.1 建议归档或 stub 的历史报告
 
 | 文件 | 大小(B) | 字数 | 最近 concept 匹配 | 相似度 |
 |:---|---:|---:|:---|---:|
-| `crates/c10_networks/reports/10_networks.md` | 37299 | 5317 | `` | 0.0 |
-| `crates/c06_async/reports/FINAL_COMPREHENSIVE_SUMMARY_2025_10_06.md` | 25499 | 5278 | `concept/06_ecosystem/03_design_patterns/14_design_patterns_glossary.md` | 0.023 |
+| `crates/c06_async/reports/FINAL_COMPREHENSIVE_SUMMARY_2025_10_06.md` | 25857 | 5349 | `concept/06_ecosystem/03_design_patterns/14_design_patterns_glossary.md` | 0.023 |
 | `crates/c02_type_system/final_delivery_report_2025_10_22.md` | 25149 | 4460 | `` | 0.0 |
 | `crates/c08_algorithms/reports/FINAL_COMPREHENSIVE_SUMMARY.md` | 23724 | 4172 | `concept/06_ecosystem/03_design_patterns/14_design_patterns_glossary.md` | 0.014 |
 | `crates/c06_async/reports/COMPREHENSIVE_ASYNC_SUMMARY_2025_10_04.md` | 22354 | 3947 | `concept/04_formal/01_ownership_logic/03_linear_logic_applications.md` | 0.011 |
@@ -117,14 +117,12 @@
 | `crates/c11_macro_system_proc/c11_macro_module_phase3_progress_report_2025_10_20.md` | 15890 | 3324 | `` | 0.0 |
 | `crates/c10_networks/reports/NETWORK_RUNTIME_COMPARISON_ANALYSIS.md` | 15889 | 3109 | `` | 0.0 |
 | `crates/c06_async/reports/SESSION_PROGRESS_2025_10_06_PART2.md` | 15871 | 3070 | `` | 0.0 |
+| `crates/c12_wasm/project_advancement_2025_10_30.md` | 15590 | 2880 | `` | 0.0 |
 
 ### 4.2 建议迁移到 docs/ 或 stub 化的 crate 根级通用指南
 
 | 文件 | 大小(B) | 字数 | 最近 concept 匹配 | 相似度 |
 |:---|---:|---:|:---|---:|
-| `crates/c09_design_pattern/09_design_patterns.md` | 45573 | 7226 | `concept/06_ecosystem/03_design_patterns/01_patterns.md` | 0.016 |
-| `crates/c02_type_system/readme_rust_190.md` | 38560 | 6690 | `concept/03_advanced/08_process_ipc/08_process_performance_engineering.md` | 0.007 |
-| `crates/c02_type_system/examples_and_use_cases.md` | 30617 | 4273 | `concept/02_intermediate/00_traits/02_dispatch_mechanisms.md` | 0.007 |
 | `crates/c02_type_system/best_practices_guide.md` | 24528 | 3877 | `concept/01_foundation/10_testing_basics/02_useful_development_tools.md` | 0.022 |
 | `crates/c06_async/async_programming_comprehensive_review_readme_2025_10_06.md` | 20578 | 4083 | `concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md` | 0.01 |
 | `crates/c08_algorithms/leetcode_implementation_complete.md` | 19880 | 3671 | `` | 0.0 |
@@ -152,21 +150,27 @@
 | `crates/c12_wasm/quick_start.md` | 7903 | 1281 | `concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md` | 0.011 |
 | `crates/c09_design_pattern/exercises/01_pattern_implementations.md` | 7840 | 1048 | `concept/07_future/00_version_tracking/rust_1_94_stabilized.md` | 0.04 |
 | `crates/c10_networks/exercises/01_tcp_server.md` | 5744 | 813 | `concept/07_future/00_version_tracking/rust_1_94_stabilized.md` | 0.042 |
+| `crates/c12_wasm/fix_completed.md` | 5708 | 1131 | `concept/06_ecosystem/01_cargo/16_cargo_workflow.md` | 0.019 |
+| `crates/c02_type_system/rust_190_feature_inventory_report.md` | 5545 | 1050 | `concept/06_ecosystem/01_cargo/16_cargo_workflow.md` | 0.024 |
+| `crates/c12_wasm/exercises/01_wasm_bindings.md` | 5534 | 685 | `concept/07_future/00_version_tracking/rust_1_94_stabilized.md` | 0.042 |
 
 ### 4.3 其他待复核非 docs/ 文件
 
 | 文件 | 分类 | 大小(B) | 字数 | 最近 concept 匹配 | 相似度 |
 |:---|:---|---:|---:|:---|---:|
+| `crates/c02_type_system/examples_and_use_cases.md` | other | 619 | 109 | `` | 0.0 |
+| `crates/c02_type_system/readme_rust_190.md` | other | 730 | 113 | `` | 0.0 |
 | `crates/c02_type_system/tutorial_guide.md` | other | 2916 | 446 | `` | 0.0 |
+| `crates/c09_design_pattern/09_design_patterns.md` | other | 604 | 100 | `` | 0.0 |
 | `crates/c11_macro_system_proc/module_reports_standard.md` | other | 1090 | 225 | `` | 0.0 |
 
 ## 5. 重点问题清单（Top 20）
 
-1. **crate 根级通用概念指南未纳入 docs/**: `crates/c09_design_pattern/09_design_patterns.md` (7226 字)
-2. **crate 根级通用概念指南未纳入 docs/**: `crates/c02_type_system/readme_rust_190.md` (6690 字)
-3. **crate 根级通用概念指南未纳入 docs/**: `crates/c02_type_system/examples_and_use_cases.md` (4273 字)
-4. **历史报告未归档**: `crates/c10_networks/reports/10_networks.md` (5317 字)
-5. **历史报告未归档**: `crates/c06_async/reports/FINAL_COMPREHENSIVE_SUMMARY_2025_10_06.md` (5278 字)
+1. **crate 根级通用概念指南未纳入 docs/**: `crates/c02_type_system/best_practices_guide.md` (3877 字)
+2. **crate 根级通用概念指南未纳入 docs/**: `crates/c06_async/async_programming_comprehensive_review_readme_2025_10_06.md` (4083 字)
+3. **crate 根级通用概念指南未纳入 docs/**: `crates/c08_algorithms/leetcode_implementation_complete.md` (3671 字)
+4. **历史报告未归档**: `crates/c06_async/reports/FINAL_COMPREHENSIVE_SUMMARY_2025_10_06.md` (5349 字)
+5. **历史报告未归档**: `crates/c02_type_system/final_delivery_report_2025_10_22.md` (4460 字)
 6. **长 stub 存在内容扩展/裁剪空间**: `crates/c05_threads/docs/03_message_passing.md` (507 字)
 
 ## 6. 验证命令

@@ -352,7 +352,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run concept international authority coverage (blocking, promoted 2026-07-14 per AGENTS.md §5.2; +crates docs section)
+      - name: Run concept international authority coverage (blocking, promoted 2026-07-14 per AGENTS.md §5.2; +crates docs section incl. stub canonical link health)
         run: python scripts/check_concept_authority_coverage.py --strict --include-crates
         continue-on-error: false
 

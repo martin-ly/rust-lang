@@ -81,7 +81,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `check_metadata_consistency.py` | 元数据 D1–D6 一致性检查（质量门 20，阻断；2026-07-14 转阻断） |
 | `check_topology_quality.py` | atlas 拓扑质量 T1–T6（质量门 11，阻断） |
 | `check_kg_shapes.py` | KG SHACL/形态校验（质量门 12，阻断） |
-| `check_concept_authority_coverage.py` | concept 权威层国际化权威来源覆盖率（质量门 16，阻断；2026-07-14 R4 评估转正，`--strict --include-crates`）；`--include-crates` 附加 crates/*/docs 覆盖小节（非 stub 内容页口径，默认观察 exit 0，`--strict` 时 crates 缺口>0 亦阻断） |
+| `check_concept_authority_coverage.py` | concept 权威层国际化权威来源覆盖率（质量门 16，阻断；2026-07-14 R4 评估转正，`--strict --include-crates`）；`--include-crates` 附加 crates/*/docs 覆盖小节（非 stub 内容页口径 + **stub canonical 链接健康度**，默认观察 exit 0，`--strict` 时 crates 缺口>0 或 **stub canonical 死链>0** 亦阻断） |
 | `semantic_health.py` | 综合语义健康分（质量门 23，阻断；2026-07-14 转阻断） |
 | `check_mermaid_syntax.py` | Mermaid 语法检查（质量门 10，阻断） |
 | `check_mindmap_coverage.py` | 内容页真 mindmap 图覆盖率与反例节存在率（质量门 22，阻断；2026-07-13 P4 挂入，2026-07-14 转阻断；`--strict` 低于基线 mindmap 10%/反例 40% 时 exit 1） |

@@ -14,7 +14,6 @@
 > **权威来源（Canonical）**: 本文件为Rust 异步编程速查卡（速查，独特内容）；通用 Rust 概念解释请以 concept 权威页为准：[`concept L3 async`](../../../concept/03_advanced/01_async/01_async.md) · [`concept async patterns`](../../../concept/03_advanced/01_async/03_async_patterns.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留本文独特内容（异步模式/运行时对比/共享状态/网络模式/性能/陷阱/反例/决策树速查），不重复 concept/ 中的概念定义、规则与定理推导。
-
 > **EN**: Async Patterns
 > **Summary**: ⚡ Rust 异步编程速查卡 Async Patterns. (stub/archive redirect)
 > **分级**: [A]

@@ -169,6 +169,7 @@
         "crates/c03_control_fn/docs/snippets/README.md"
       ],
       "quiz": []
-    }
+    },
+    "dead_canonical": []
   }
 }

@@ -105,7 +105,7 @@
       },
       "reports": {
         "count": 128,
-        "bytes": 1581287,
+        "bytes": 1544948,
         "note": "crate 历史报告"
       },
       "src/README": {
@@ -120,7 +120,7 @@
       },
       "other": {
         "count": 71,
-        "bytes": 785571,
+        "bytes": 672774,
         "note": "其他根级文档/指南"
       },
       "INDEX": {
@@ -341,11 +341,11 @@
     {
       "path": "crates/c02_type_system/examples_and_use_cases.md",
       "category": "other",
-      "size": 30617,
-      "wc": 4273,
-      "recommendation": "migrate_to_docs_or_stub",
-      "nearest_concept": "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md",
-      "concept_sim": 0.007
+      "size": 619,
+      "wc": 109,
+      "recommendation": "review",
+      "nearest_concept": "",
+      "concept_sim": 0.0
     },
     {
       "path": "crates/c02_type_system/final_delivery_report_2025_10_22.md",
@@ -395,11 +395,11 @@
     {
       "path": "crates/c02_type_system/readme_rust_190.md",
       "category": "other",
-      "size": 38560,
-      "wc": 6690,
-      "recommendation": "migrate_to_docs_or_stub",
-      "nearest_concept": "concept/03_advanced/08_process_ipc/08_process_performance_engineering.md",
-      "concept_sim": 0.007
+      "size": 730,
+      "wc": 113,
+      "recommendation": "review",
+      "nearest_concept": "",
+      "concept_sim": 0.0
     },
     {
       "path": "crates/c02_type_system/reports/C02_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_20.md",
@@ -1106,8 +1106,8 @@
     {
       "path": "crates/c06_async/reports/FINAL_COMPREHENSIVE_SUMMARY_2025_10_06.md",
       "category": "reports",
-      "size": 25499,
-      "wc": 5278,
+      "size": 25857,
+      "wc": 5349,
       "recommendation": "archive_or_stub",
       "nearest_concept": "concept/06_ecosystem/03_design_patterns/14_design_patterns_glossary.md",
       "concept_sim": 0.023
@@ -1817,11 +1817,11 @@
     {
       "path": "crates/c09_design_pattern/09_design_patterns.md",
       "category": "other",
-      "size": 45573,
-      "wc": 7226,
-      "recommendation": "migrate_to_docs_or_stub",
-      "nearest_concept": "concept/06_ecosystem/03_design_patterns/01_patterns.md",
-      "concept_sim": 0.016
+      "size": 604,
+      "wc": 100,
+      "recommendation": "review",
+      "nearest_concept": "",
+      "concept_sim": 0.0
     },
     {
       "path": "crates/c09_design_pattern/CHANGELOG.md",
@@ -2006,8 +2006,8 @@
     {
       "path": "crates/c10_networks/reports/10_networks.md",
       "category": "reports",
-      "size": 37299,
-      "wc": 5317,
+      "size": 602,
+      "wc": 98,
       "recommendation": "archive_or_stub",
       "nearest_concept": "",
       "concept_sim": 0.0

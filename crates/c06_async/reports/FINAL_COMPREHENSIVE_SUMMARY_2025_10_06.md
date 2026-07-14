@@ -1,5 +1,11 @@
 # Rust 异步编程全面梳理 - 最终综合总结 2025-10-06
 
+> **权威来源**: 通用 Rust 异步编程概念解释请见 canonical authority page:
+> [`concept/03_advanced/01_async/01_async.md`](../../../concept/03_advanced/01_async/01_async.md)。
+>
+> 本文件为 `c06_async` crate 的历史生产总结报告（2025-10-06），记录该 crate 的交付成果与代码组织，
+> 非通用 Rust 概念权威页。
+
 ## 📊 目录
 
 - [Rust 异步编程全面梳理 - 最终综合总结 2025-10-06](#rust-异步编程全面梳理---最终综合总结-2025-10-06)

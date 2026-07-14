@@ -85,4 +85,9 @@
 | c12_wasm | 3 | 3 |
 | c17_resolver_v3_public_demo | 1 | 1 |
 
+
+### crates stub canonical 链接健康度
+
+- **dead_canonical = 0** ✅ 所有 stub 中的 `concept/` canonical 链接均解析到真实文件。
+
 登记跳过（非 stub 但不计入内容页分母）: `crates/c15_verification_tools/docs/README.md`（index_readme） · `crates/c16_gui/docs/README.md`（index_readme） · `crates/c03_control_fn/docs/snippets/README.md`（code_listing）
