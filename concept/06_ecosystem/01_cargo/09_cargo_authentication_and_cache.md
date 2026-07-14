@@ -66,7 +66,7 @@
 
 ## 二、Credential Providers
 
-本节从内置 Providers 与 推荐全局配置 两个层面剖析「Credential Providers」。
+Credential provider 机制（1.74+）把 token 存储从“明文 credentials.toml”抽象为可插拔后端：`cargo:token` 保持旧行为（明文文件），`cargo:wincred`/`cargo:macos-keychain`/`cargo:libsecret` 接入各平台系统密钥环，`cargo:1password` 等外部进程 provider 支持企业密钥管理。推荐全局配置按平台选系统密钥环 provider——明文 token 文件是 CI 镜像泄露的常见源头。
 
 ### 2.1 内置 Providers
 
@@ -99,7 +99,7 @@ global-credential-providers = [
 
 ## 三、Token 的存储与使用
 
-理解「Token 的存储与使用」需要把握 `cargo login`、环境变量与自定义 Provider，本节依次展开。
+token 的三种注入途径有明确优先级：环境变量（`CARGO_REGISTRY_TOKEN`）优先级最高，适合 CI 注入且不落盘；`cargo login` 写入当前配置的 credential provider，适合开发者本机；自定义 provider 适合企业统一密钥分发。安全要点：token 是 publish 权限凭证，CI 中应使用最小权限的独立 token 并启用过期轮换，避免复用个人 token。
 
 ### 3.1 `cargo login`
 
@@ -154,7 +154,7 @@ global-credential-providers = ["cargo-credential-1password --account my.1passwor
 
 ## 五、Target Dir 与 Build Dir
 
-理解「Target Dir 与 Build Dir」需要把握 `target/` 目录、目录布局与Build Dir（中间产物），本节依次展开。
+`target/` 目录是 Cargo 增量编译的缓存本体：debug/release profile 分离、依赖与本地 crate 分层存储、指纹文件记录重建条件。工程上两个要点：`CARGO_TARGET_DIR` 可让多 workspace 共享编译缓存（monorepo 提速显著）；build dir（中间产物）与最终产物分离的实验特性允许把大体积中间文件放到快盘、最终产物放到慢盘。CI 缓存 `target/` 时须包含指纹文件，否则缓存形同虚设。
 
 ### 5.1 `target/` 目录
 

@@ -480,7 +480,15 @@ FFI 方向感：C# 调用 Rust 用 `LibraryImport`（源生成 P/Invoke，.NET 7
 
 ## 四、反命题与边界分析
 
-本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+“C# 与 Rust 的 async/await 语法几乎一样，迁移应该很直接”是 .NET 团队评估 Rust 时最常见的误判。语法相似性掩盖了运行时模型的根本不同，本节的反命题树从这类误判出发逐层检验。
+
+三条核心反命题：
+
+1. **“语法相似 ⟹ 语义相同”**：C# 的 `Task` 是 hot（创建即调度），Rust 的 `Future` 是 cold（poll 才推进）；`await` 在两侧的意义因此被运行时模型重新定义；
+2. **“LINQ 与迭代器等价”**：LINQ 的延迟执行与 Rust 迭代器的惰性链确实同构，但 LINQ 的 `IEnumerable` 可多次枚举（可能重复执行副作用），Rust 迭代器消费即转移所有权——这一差异在边界测试中可复现；
+3. **“unsafe 在两侧地位相同”**：C# 的 `unsafe` 是边缘特性，Rust 的 `unsafe` 是安全抽象的构建基石，两者的使用频率与审计要求完全不同。
+
+边界极限部分（4.2）给出每类命题失效的具体代码场景。
 
 ### 4.1 反命题树
 
@@ -640,7 +648,18 @@ fn main() {
 
 ## 十、边界测试：Rust 与 C# 的编译错误对比
 
-理解「边界测试：Rust 与 C# 的编译错误对比」需要把握边界测试：C# 的 async/await 与 Rust 的 Futu…、边界测试：C# 的 LINQ 与 Rust 的迭代器（编译错误）、边界测试：C# 的 async/await 与 Rust 的 `?`…与边界测试：C# 的属性与 Rust 的派生宏的编译期差异（编译错误），本节依次展开。
+C# 与 Rust 的边界测试集中在一组有趣的矛盾上：两者语法表层高度相似（async/await、LINQ 式链式调用、属性语法），但编译器对相似代码的诊断完全不同。本节的测试展示“同形异义”代码在两侧的命运。
+
+四组核心测试：
+
+| 测试 | C# 侧 | Rust 侧 |
+|---|---|---|
+| async/await vs Future | `Task` 创建即运行，fire-and-forget 合法 | `Future` 不 poll 不推进，未 await 的 future 是死代码警告 |
+| LINQ vs 迭代器 | 可多次枚举，延迟求值但每次重新执行 | `Iterator` 消费一次即失效，编译期防止重复使用 |
+| async 中的 `?` | 异常沿 Task 传播，需 try/catch 或 await 时观察 | `?` 在 `async fn` 中要求返回 `Result`，错误类型必须兼容 |
+| 属性 vs 派生宏 | `[Attribute]` 运行期反射读取 | `#[derive]` 编译期生成代码，无运行期反射 |
+
+每组测试给出两侧最小代码与 rustc 1.97（edition 2024）/ Roslyn 的诊断对照，重点观察“C# 中运行期才暴露的问题在 Rust 中何时被编译期拦截”。
 
 ### 10.1 边界测试：C# 的 async/await 与 Rust 的 Future（编译错误）
 
@@ -764,7 +783,15 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：C# 的 async/await 与 Rust 的 asyn…、测验 2：C# 的 LINQ 与 Rust 的迭代器适配器（`Iter…、测验 3：C# 的`unsafe` 块与 Rust 的 `unsaf…、测验 4：C# 的属性和事件（Property/Event）在 Rus…等5个方面。
+本组五道测验面向有 C# 背景的读者，检验其能否把 .NET 概念准确映射到 Rust 的对应机制——尤其要识别“看似对应实则错位”的概念对。全部位于理解层。
+
+题目设计原则：
+
+- 测验 1–2 考察运行时模型差异（Task vs Future 的 hot/cold、LINQ vs Iterator 的消费语义），这是迁移中最容易踩的坑；
+- 测验 3 考察 `unsafe` 在两种语言中的文化地位差异，回答需引用使用频率数据而非印象；
+- 测验 4–5 考察编译期 vs 运行期的能力分布（属性/事件的实现方式、JIT vs AOT 的优化空间）。
+
+作答建议：每题先写 C# 侧机制的一句话定义，再写 Rust 侧的对应（或缺失）机制，最后指出两者的一个关键差异点。三要素齐全的答案才算通过。
 
 ### 测验 1：C# 的 async/await 与 Rust 的 async/await 在运行时模型上有什么根本区别？（理解层）
 

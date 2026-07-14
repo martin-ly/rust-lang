@@ -34,7 +34,7 @@
 
 ## 一、QUIC：基于 UDP 的安全传输协议
 
-本节从 QUIC 的设计动机、QUIC 的包结构与 Rust 表示与Rust 实现：quinn切入，剖析「QUIC：基于 UDP 的安全传输协议」的核心内容。
+QUIC 的设计动机源于 TCP 的三个结构性缺陷：握手叠加（TCP + TLS 1.2 需 3 RTT）、队头阻塞（一个丢包阻塞所有流）、连接绑定四元组（WiFi 切蜂窝即断连）。QUIC 把传输与加密合一（TLS 1.3 内嵌，1 RTT 建连）、基于 UDP 实现用户态传输（可独立演进于内核）、用 Connection ID 解耦连接与网络路径。Rust 侧 quinn 提供 async API，包结构用 `bytes`/自研 codec 零拷贝解析，是 QUIC 服务端的主流选择。
 
 ### 1.1 QUIC 的设计动机
 
@@ -104,7 +104,7 @@ impl Connection {
 
 ## 二、HTTP/3：基于 QUIC 的应用层协议
 
-本节从 HTTP/3 与 HTTP/2 的对比 与  QPACK：HTTP/3 的头部压缩 两个层面剖析「HTTP/3：基于 QUIC 的应用层协议」。
+HTTP/3 不是新协议语义而是 HTTP 语义在新传输上的映射：帧层取代 HTTP/2 的帧层、流直接映射到 QUIC 流（消除了 HTTP/2 在 TCP 上的队头阻塞）、TLS 强制内置。关键差异在头部压缩：HTTP/2 的 HPACK 要求按序处理（与 QUIC 独立流冲突），HTTP/3 改用 QPACK——把动态表更新放到独立的 encoder/decoder 流上，允许乱序到达以牺牲部分压缩率换取无队头阻塞。
 
 ### 2.1 HTTP/3 与 HTTP/2 的对比
 
@@ -139,7 +139,7 @@ QPACK 解决:
 
 ## 三、eBPF：内核可编程与 Rust
 
-本节围绕「eBPF：内核可编程与 Rust」展开，依次讨论 eBPF 的本质、Rust + eBPF：aya-rs与Rust 实现 eBPF 的独特优势。
+eBPF 的本质是在内核事件点（系统调用、网络包、tracepoint）挂载经 verifier 验证的沙箱字节码，实现无内核模块的可观测与可编程网络。aya-rs 让 Rust 覆盖 eBPF 全栈：内核侧用 `aya-ebpf`（no_std + 受限 Rust 子集编译为 BPF 目标），用户侧用 `aya` 加载与管理程序、共享 map。Rust 的独特优势在于类型安全直接映射 BPF 约束（map 类型在编译期检查）、以及相对 libbpf 更少的 unsafe 接缝。
 
 ### 3.1 eBPF 的本质
 

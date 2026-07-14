@@ -4,7 +4,7 @@
   "indexed": 1453,
   "threshold": 0.5,
   "min_shared": 5,
-  "candidates": 582831,
+  "candidates": 584029,
   "hits": 571,
   "overlaps": [
     {
@@ -130,19 +130,6 @@
       "title_sim": 0.5,
       "shared": 6,
       "same_dir": true,
-      "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
-      "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
-      "t1": "C05 Threads 主索引导航",
-      "t2": "C05 Threads 术语表",
-      "lines1": 22,
-      "lines2": 22
-    },
-    {
-      "sim": 0.818,
-      "kw_sim": 0.818,
-      "title_sim": 0.5,
-      "shared": 6,
-      "same_dir": true,
       "f1": "crates/c04_generic/docs/00_master_index.md",
       "f2": "crates/c04_generic/docs/tier_01_foundations/01_project_overview.md",
       "t1": "C04 泛型编程 - 主索引",
@@ -199,6 +186,19 @@
       "f2": "crates/c04_generic/docs/tier_01_foundations/04_faq.md",
       "t1": "C04 泛型编程 - 术语表",
       "t2": "C04 泛型编程 - 常见问题",
+      "lines1": 22,
+      "lines2": 22
+    },
+    {
+      "sim": 0.818,
+      "kw_sim": 0.818,
+      "title_sim": 0.5,
+      "shared": 6,
+      "same_dir": true,
+      "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
+      "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
+      "t1": "C05 Threads 主索引导航",
+      "t2": "C05 Threads 术语表",
       "lines1": 22,
       "lines2": 22
     },
@@ -573,9 +573,9 @@
       "shared": 5,
       "same_dir": true,
       "f1": "crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md",
-      "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
+      "f2": "crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md",
       "t1": "Rust 所有权系统概念关系网络",
-      "t2": "Rust 所有权系统可视化文档导航",
+      "t2": "Rust 所有权系统多维矩阵对比分析",
       "lines1": 15,
       "lines2": 15
     },
@@ -586,21 +586,8 @@
       "shared": 5,
       "same_dir": true,
       "f1": "crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md",
-      "f2": "crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md",
-      "t1": "Rust 所有权系统概念关系网络",
-      "t2": "Rust 所有权系统多维矩阵对比分析",
-      "lines1": 15,
-      "lines2": 15
-    },
-    {
-      "sim": 0.8,
-      "kw_sim": 0.8,
-      "title_sim": 0.0,
-      "shared": 5,
-      "same_dir": true,
-      "f1": "crates/c01_ownership_borrow_scope/docs/03_mind_map.md",
       "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
-      "t1": "Rust 所有权系统思维导图",
+      "t1": "Rust 所有权系统概念关系网络",
       "t2": "Rust 所有权系统可视化文档导航",
       "lines1": 15,
       "lines2": 15
@@ -615,6 +602,19 @@
       "f2": "crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md",
       "t1": "Rust 所有权系统思维导图",
       "t2": "Rust 所有权系统多维矩阵对比分析",
+      "lines1": 15,
+      "lines2": 15
+    },
+    {
+      "sim": 0.8,
+      "kw_sim": 0.8,
+      "title_sim": 0.0,
+      "shared": 5,
+      "same_dir": true,
+      "f1": "crates/c01_ownership_borrow_scope/docs/03_mind_map.md",
+      "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
+      "t1": "Rust 所有权系统思维导图",
+      "t2": "Rust 所有权系统可视化文档导航",
       "lines1": 15,
       "lines2": 15
     },
@@ -2133,9 +2133,9 @@
       "shared": 5,
       "same_dir": true,
       "f1": "crates/c01_ownership_borrow_scope/docs/00_master_index.md",
-      "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
+      "f2": "crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md",
       "t1": "Rust 所有权系统完整指南 - 主索引",
-      "t2": "Rust 所有权系统可视化文档导航",
+      "t2": "Rust 所有权系统多维矩阵对比分析",
       "lines1": 22,
       "lines2": 15
     },
@@ -2146,9 +2146,9 @@
       "shared": 5,
       "same_dir": true,
       "f1": "crates/c01_ownership_borrow_scope/docs/00_master_index.md",
-      "f2": "crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md",
+      "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
       "t1": "Rust 所有权系统完整指南 - 主索引",
-      "t2": "Rust 所有权系统多维矩阵对比分析",
+      "t2": "Rust 所有权系统可视化文档导航",
       "lines1": 22,
       "lines2": 15
     },
@@ -2610,19 +2610,6 @@
     {
       "sim": 0.625,
       "kw_sim": 0.625,
-      "title_sim": 0.25,
-      "shared": 5,
-      "same_dir": true,
-      "f1": "crates/c08_algorithms/docs/01_interactive_learning_guide.md",
-      "f2": "crates/c08_algorithms/docs/04_mind_map.md",
-      "t1": "交互式算法学习指南 (Interactive Algorithm Learnin",
-      "t2": "算法学习思维导图 (Algorithm Learning Mind Map)",
-      "lines1": 15,
-      "lines2": 15
-    },
-    {
-      "sim": 0.625,
-      "kw_sim": 0.625,
       "title_sim": 0.333,
       "shared": 5,
       "same_dir": true,
@@ -2658,6 +2645,19 @@
       "t2": "Generics（泛型系统） — Crate Docs Stub",
       "lines1": 24,
       "lines2": 24
+    },
+    {
+      "sim": 0.625,
+      "kw_sim": 0.625,
+      "title_sim": 0.25,
+      "shared": 5,
+      "same_dir": true,
+      "f1": "crates/c08_algorithms/docs/01_interactive_learning_guide.md",
+      "f2": "crates/c08_algorithms/docs/04_mind_map.md",
+      "t1": "交互式算法学习指南 (Interactive Algorithm Learnin",
+      "t2": "算法学习思维导图 (Algorithm Learning Mind Map)",
+      "lines1": 15,
+      "lines2": 15
     },
     {
       "sim": 0.624,

@@ -274,7 +274,7 @@ fn main() {
 
 ## 三、编译配置与目标平台
 
-「编译配置与目标平台」部分的核心主题是 Q6. 以下 `.cargo/config.toml` 配置的作用是什…，本节展开说明。
+本组测验聚焦 `.cargo/config.toml` 的配置语义：registry 源替换（`[source]` 段的重定向规则）、默认 target 与 linker 覆盖（交叉编译场景的常用配置）、rustflags 注入（`target-cpu=native` 等优化的正确注入位置）。这类配置是工具链测验中错误率最高的部分，因为配置文件位置（项目级 vs 用户级）与优先级规则容易被忽略——作答时务必先确认配置生效范围。
 
 ### Q6. 🟡 以下 `.cargo/config.toml` 配置的作用是什么？
 

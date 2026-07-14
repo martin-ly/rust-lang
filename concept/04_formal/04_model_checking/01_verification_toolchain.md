@@ -1557,3 +1557,28 @@ Kani 的"所有路径"是**有界**的（循环展开深度、数据结构大小
 | Verification Toolchain Selection Guide（验证工具链选择指南） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | Verification Toolchain Selection Guide（验证工具链选择指南） 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Verification Toolchain Selection Guide（验证工具链选择指南） 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Verification Toolchain))
+    工具链全景矩阵 选型版
+      八维选型矩阵
+      覆盖强度光谱
+    a-mir-formality
+      为什么需要类型系统规范
+      技术架构
+    ROI 分析框架
+      ROI 公式
+      场景化 ROI 评估
+    分层验证策略
+      五层防御模型
+      组合策略 AWS s2n-quic 实践
+    常见误区与反模式
+      误区一 验证工具可以互相替代
+```
+
+> **认知功能**: 本 mindmap 从本页「Verification Toolchain」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

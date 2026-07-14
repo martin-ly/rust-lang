@@ -398,3 +398,28 @@ fn main() {
     }
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Kani Rust 有界模型检查器))
+    安装与基本用法
+      安装
+      验证单个 harness
+      验证整个 crate
+    核心概念
+      Harness kani proof
+      非确定性输入 kani any
+      假设与断言 kani assume
+    可运行示例
+      示例 1 简单函数安全证明
+      示例 2 循环与循环合约
+      示例 3 数据结构边界条件
+    Kani 是什么
+      与测试 Miri Verus 的定位差异
+```
+
+> **认知功能**: 本 mindmap 从本页「Kani Rust 有界模型检查器」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

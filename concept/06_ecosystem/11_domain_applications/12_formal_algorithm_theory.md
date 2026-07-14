@@ -278,3 +278,31 @@ mod fifo_tests {
 
 - **P1 学术/形式化**: [Aeneas: Rust Verification by Functional Translation (arXiv:2206.07185)](https://arxiv.org/abs/2206.07185) · [RustHorn: CHC-based Verification for Rust Programs (ESOP 2020, Springer LNCS)](https://link.springer.com/chapter/10.1007/978-3-030-44914-8_18)
 - **P2 生态/社区**: [AeneasVerif/aeneas](https://github.com/AeneasVerif/aeneas) · [model-checking/kani — 模型检查器](https://github.com/model-checking/kani)
+
+---
+
+## ⚠️ 反例与陷阱：二分查找中点计算溢出（运行时陷阱）
+
+**反例**（运行时陷阱，代码可通过编译；实测 运行时 panic：attempt to add with overflow（debug））：
+
+```rust
+fn mid(low: usize, high: usize) -> usize {
+    (low + high) / 2
+}
+fn main() {
+    println!("{}", mid(usize::MAX - 1, usize::MAX));
+}
+```
+
+经典二分缺陷：`(low + high)` 在索引接近 `usize::MAX` 时溢出，debug 下 panic、release 下静默回绕给出错误下标；形式化验证视角下这是前置条件遗漏。
+
+**修正**：
+
+```rust
+fn mid(low: usize, high: usize) -> usize {
+    low + (high - low) / 2
+}
+fn main() {
+    println!("{}", mid(usize::MAX - 1, usize::MAX));
+}
+```

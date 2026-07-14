@@ -1036,3 +1036,26 @@ fn main() {
     println!("{} {}", OK, WRAP);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Axiomatic Semantics 公理语义))
+    技术细节
+      Rust 赋值规则的公理化
+      所有权转移的 wp 计算
+    工具链映射
+      Prusti Viper 后端的契约推导
+      Creusot Why3 逻辑下的
+    概念属性矩阵
+      公理语义方法对比矩阵
+    定理推理链
+      定理一致性矩阵
+    工具链深度对比矩阵
+      Prusti vs Creusot
+```
+
+> **认知功能**: 本 mindmap 从本页「Axiomatic Semantics 公理语义」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

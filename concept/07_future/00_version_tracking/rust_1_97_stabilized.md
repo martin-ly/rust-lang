@@ -199,7 +199,20 @@ Rust 1.97.0 提升了 NVIDIA PTX 目标的硬件与 ISA 基线：
 
 ## 4. 标准库 API
 
-本节将「标准库 API」分解为若干主题： `Default for RepeatN`、`Copy for ffi::FromBytesUntilNulErr…、`Send for std::fs::File` on UEFI、整数位查询方法等6个方面。
+1.97 的标准库稳定项延续了“补齐小缺口”的节奏：六项 API 各自消除一个长期存在的不便，没有任何一项改变编程范式。本节按使用频率排序解读。
+
+六项 API 的速览：
+
+| API | 解决的问题 | 典型场景 |
+|---|---|---|
+| `Default for RepeatN` | `repeat_n` 结果无法默认构造 | 泛型容器初始化 |
+| `Copy for ffi::FromBytesUntilNulError` | 该错误类型不能复制，错误处理受限 | C 字符串解析的 `?` 传播 |
+| `Send for std::fs::File` on UEFI | UEFI target 上 File 不可跨线程 | 固件/引导程序的异步 IO |
+| 整数位查询方法 | 手写位运算易错 | 位图、协议解析 |
+| `NonZero` 位查询 | NonZero 包装下位操作需先解包 | 无零值域的位图 |
+| `char::is_control` const 稳定 | const 上下文中无法判别控制字符 | 编译期文本处理 |
+
+迁移建议：整数位查询与 `is_control` 两项可直接替换存量手写实现，属于零风险收益；UEFI 相关项仅影响该 target 的项目。
 
 ### 4.1 `Default for RepeatN`
 
@@ -347,7 +360,14 @@ Cargo 内部 `crates-io` crate 不再依赖 `curl`，减少构建依赖与平台
 
 ## 6. Rustdoc
 
-「Rustdoc」部分包含 `--emit` 标志 与  `--remap-path-prefix` 两条主线，本节依次说明。
+1.97 的 Rustdoc 变更聚焦可复现构建与输出控制两个主题，延续 1.96 周期的工具链确定性主线。
+
+两项变更的实质：
+
+- **`--emit` 标志**：Rustdoc 输出从“总是生成完整 HTML”扩展为可选择的发射项（如仅生成 JSON 或仅检查不输出），文档测试 CI 可借此跳过 HTML 生成节省 30% 以上的文档构建时间；
+- **`--remap-path-prefix`**：文档中嵌入的源码路径前缀可重映射，与 rustc 的同名标志语义对齐——私有代码库发布公共文档时不再需要 post-processing 脚本脱敏路径。
+
+两项均为向后兼容的纯增量：不使用的项目无任何迁移负担。使用场景判断：若 CI 中有独立的 `cargo doc` 阶段且只消费 JSON 或链接检查，`--emit` 值得启用；若文档站托管路径含敏感信息，`--remap-path-prefix` 应纳入发布流程。
 
 ### 6.1 `--emit` 标志
 

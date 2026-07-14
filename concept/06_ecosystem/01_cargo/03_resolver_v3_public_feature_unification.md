@@ -49,7 +49,7 @@ A ──► B ──public──► D(std)
 
 ## 二、关键清单片段
 
-本节将「关键清单片段」分解为若干主题： Crate B、Crate C与Crate A。
+resolver v3 的行为差异通过三个 crate 的清单片段展示：Crate B 声明依赖的默认 feature、Crate C 以 `default-features = false` 引用同一依赖、Crate A 同时依赖 B 和 C。v2 解析器会把 B 的默认 feature 统一进 C 的构建（feature 泄漏），v3 则按构建目标隔离 feature 集。阅读顺序：先看 B/C 的声明差异，再看 A 的解析结果对比表——feature 统一的语义变化全部体现在这三段 TOML 的组合效果中。
 
 ### Crate B
 

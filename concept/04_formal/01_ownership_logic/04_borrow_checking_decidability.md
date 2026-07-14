@@ -439,3 +439,28 @@ fn main() {
     println!("{}", r); // x 的区域覆盖所有使用点
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Borrow Checking))
+    历史演进 三代借用检查器
+      词法作用域 Lexical Scopes
+      NLL Non-Lexical
+    形式化模型 Teaching
+      区域约束系统 Region
+      路径与借用状态 Paths
+    NLL 数据流分析 约束求解
+      数据流方程
+      区域约束求解
+    Polonius Datalog 视角
+      核心事实与规则
+      与 NLL 的关系
+    可判定性与复杂性
+      终止性 Termination
+```
+
+> **认知功能**: 本 mindmap 从本页「Borrow Checking」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

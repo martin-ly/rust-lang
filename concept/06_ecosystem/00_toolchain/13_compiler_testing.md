@@ -113,7 +113,7 @@ rustc 测试体系
 
 ## 四、Tidy 与 Formatting
 
-本节围绕「Tidy 与 Formatting」展开，覆盖 Tidy 与  rustfmt 两个方面。
+Tidy 是 rust-lang/rust 仓库的定制卫生检查工具：检查许可证头、行宽、 trailing whitespace、链接有效性等仓库规约，是 rustfmt 之外的规则补充层。rustfmt 负责代码格式化（风格统一），Tidy 负责仓库规约（流程统一），两者都在 CI 中强制执行。对下游项目的启示：格式化工具管不了的内容（文件头、目录结构、文档链接）需要自定义 lint 脚本补齐——本仓库的 scripts/ 质量门即同一思路。
 
 ### Tidy
 
@@ -140,7 +140,7 @@ Tidy 是 Rust 仓库的自定义检查工具，负责：
 
 ## 五、工具测试与 Book 文档测试
 
-本节从工具测试、Book 文档测试、Linkchecker与distcheck切入，剖析「工具测试与 Book 文档测试」的核心内容。
+编译器仓库的测试矩阵超出代码本身：工具测试（rustdoc、rustfmt、clippy 各自的测试套件保证子工具行为）；Book 文档测试（`mdbook test` 编译运行官方书内所有代码示例，保证文档与语言同步演进）；linkchecker（验证文档内死链）；distcheck（验证发布工件的完整性）。这套矩阵说明“文档即代码”的工程化：代码示例不编译的文档在 Rust 官方流程中无法合入，这是文档可信度的制度保障。
 
 ### 工具测试
 

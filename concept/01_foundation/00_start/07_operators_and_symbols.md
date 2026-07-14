@@ -240,3 +240,27 @@ Rust 的三种括号各有明确的语法职责，理解其分工可避免「括
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/derive_more — 生态权威 API 文档（运算符 trait 的 derive 宏实践）](https://docs.rs/derive_more)（2026-07-12 验证 HTTP 200）
+
+---
+
+## ⚠️ 反例与陷阱：链式比较 `a == b == c`
+
+**反例**（rustc 1.97 实测编译失败，无错误码：comparison operators cannot be chained）：
+
+```rust,compile_fail
+fn main() {
+    let x = 1 == 2 == 3;
+    println!("{x}");
+}
+```
+
+Rust 不支持 Python 式链式比较，rustc 直接给出 `comparison operators cannot be chained` 错误并建议拆成两个比较。
+
+**修正**：
+
+```rust
+fn main() {
+    let x = 1 == 2 && 2 == 3;
+    println!("{x}");
+}
+```

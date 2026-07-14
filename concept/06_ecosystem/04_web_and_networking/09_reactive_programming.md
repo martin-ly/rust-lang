@@ -211,7 +211,7 @@ FRP 组合子:
 
 ## 二、概念属性矩阵
 
-「概念属性矩阵」部分的核心主题是 Reactive 编程模型对比矩阵，本节展开说明。
+响应式编程在 Rust 中不是一个框架而是一组可对比的模型：push 式事件流（`tokio::sync::broadcast`/回调，低延迟但难背压）、pull 式 Stream（`futures::Stream`，async/await 驱动、天然背压）、FRP（信号与行为的时间连续抽象，Rust 生态薄弱）、响应式流规范（Reactive Streams 的 demand 协议，Java 生态主导）。对比矩阵按“数据流向、背压机制、组合能力、生态成熟度”四维展开，Rust 的主流答案是 pull 式 Stream + 显式背压。
 
 ### 2.1 Reactive 编程模型对比矩阵
 
@@ -885,7 +885,7 @@ async fn send_alert(log: &LogEntry) -> Result<(), AlertError> {
 
 ## 九、边界测试
 
-本节将「边界测试」分解为若干主题：边界测试：无背压导致内存溢出（运行时错误）、边界测试：跨线程 Stream 发送违反 Send（编译错误）与边界测试：FRP 信号循环引用导致死锁（运行时错误）。
+响应式边界测试验证三类失效：无背压时生产速度超过消费速度，事件在 channel 中无界累积直到 OOM（运行时错误，必须用有界 channel 或采样）；跨线程发送含非 `Send` 捕获的 Stream（`Rc` 捕获变量）在编译期被拦截；FRP 信号图中的循环依赖导致运行时死锁或栈溢出。三类用例分别对应流量控制、并发安全与图结构约束，是响应式系统上线前的最低验证集。信号循环引用导致死锁（运行时错误）。
 
 ### 9.1 边界测试：无背压导致内存溢出（运行时错误）
 
@@ -1039,7 +1039,7 @@ fn circular_signal_deadlock() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」部分按测验 1：响应式编程（Reactive Programming）的核心…、测验 2：Rust 的 `futures::Stream` 与响应式编…、测验 3：`tokio::sync::watch` 在响应式状态中有什…、测验 4：为什么 Rust 的响应式 UI 框架（如 `iced`、`…等5个方面的顺序逐层展开。
+以下自测题覆盖响应式编程的三个核心考点：响应式宣言的四个特征（响应性、弹性、消息驱动、容错）与 Rust 机制的对应、`futures::Stream` 与 `Iterator` 的 pull 语义异同、背压在有界 channel 中的具体行为。建议作答后对照解析，Stream 相关错题回查本章模型对比矩阵一节。es::Stream` 与响应式编…、测验 3：`tokio::sync::watch` 在响应式状态中有什…、测验 4：为什么 Rust 的响应式 UI 框架（如 `iced`、`…等5个方面的顺序逐层展开。
 
 ### 测验 1：响应式编程（Reactive Programming）的核心抽象是什么？（理解层）
 

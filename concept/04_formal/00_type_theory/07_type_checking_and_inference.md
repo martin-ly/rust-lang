@@ -449,3 +449,27 @@ fn main() {
     println!("{:?}", lens);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((rustc 类型检查与类型推断))
+    typeck Query 与
+      typeck query
+      InferCtxt
+    相等约束与子类型约束
+      相等约束
+      子类型约束
+    区域约束与求解
+      收集约束
+      求解时机
+    Rust 1 97 0 交叉语义
+      从 integer float 到
+      与 never type
+      对 trait solver 默认值
+```
+
+> **认知功能**: 本 mindmap 从本页「rustc 类型检查与类型推断」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

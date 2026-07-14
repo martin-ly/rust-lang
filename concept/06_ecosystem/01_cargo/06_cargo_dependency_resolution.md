@@ -131,7 +131,7 @@ Cargo 的解析器本质上是一个 SAT-like 约束求解器：
 
 ## 四、特性合并（Feature Unification）
 
-本节从同一个 crate 在一个主版本内只编译一次 与  Feature unification 的副作用 两个层面剖析「特性合并（Feature Unification）」。
+特性合并是 Cargo 解析器的核心规则：依赖图中同一 crate 的同一版本只构建一次，所有路径请求的 feature 取并集启用。这保证了类型一致性（同一类型全图唯一）但有副作用：某分支为测试启用的 feature 可能意外激活另一分支的代码路径（如 `std` feature 泄漏进 no_std 构建）。resolver v2/v3 按构建种类（正常/dev/build）隔离 feature，缓解但未消除该问题——设计 feature 时应遵循“纯加法、无互斥”原则。
 
 ### 4.1 同一个 crate 在一个主版本内只编译一次
 
@@ -268,7 +268,7 @@ CARGO_RESOLVER_INCOMPATIBLE_RUST_VERSIONS=allow cargo update
 
 ## 八、Yanked 版本与冲突诊断
 
-「Yanked 版本与冲突诊断」部分包含 Yanked 版本 与 诊断工具 两条主线，本节依次说明。
+yanked 版本的解析规则：新解析不选 yanked 版本，但 Cargo.lock 已锁定的项目继续可用（可重复构建优先于撤回）。冲突诊断靠三个工具组合：`cargo tree` 看依赖图与重复版本（`-d` 标注重复）、`cargo update --dry-run` 预演升级影响、解析失败时错误信息中的“候选版本”列表定位约束冲突来源。诊断顺序：先 `cargo tree` 确认谁引入了冲突约束，再检查该依赖的 Cargo.toml 版本要求。
 
 ### 8.1 Yanked 版本
 

@@ -121,7 +121,7 @@ flowchart TD
 
 ## 典型配置示例
 
-本节围绕「典型配置示例」展开，覆盖自定义 target JSON 与  no_std + 全局分配器 两个方面。
+build-std 的两个典型配置覆盖其主要用途：自定义 target JSON（描述非标准平台的指针宽度、ABI、链接器选项，配合 `-Z build-std=core,alloc` 为该平台从源码构建核心库，是裸机/新 OS 移植的入口）；no_std + 全局分配器（`#![no_std]` + `#[global_allocator]` 接入自定义分配器如 `buddy_system_allocator`，构建 `alloc` 获得 `Vec`/`String` 而无完整 std）。两个示例是嵌入式与 OS 开发的标准起点模板。
 
 ### 自定义 target JSON
 

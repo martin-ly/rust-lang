@@ -1119,3 +1119,28 @@ fn main() {
     }
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((航空航天认证与形式化方法 Aerospace))
+    引言
+      DO-178C 航空软件标准
+      DO-333 Formal
+    DO-333 形式化方法映射
+      定理证明 Theorem Proving
+      模型检查 Model Checking
+    认证案例研究
+      Rockwell Collins
+      适配 Rust 的形式化验证方案
+    Property
+      源代码到目标代码的性质保持
+      Ferrocene 的合格编译论证
+    工具鉴定 DO-330
+      TQL-1 至 TQL-5 映射
+```
+
+> **认知功能**: 本 mindmap 从本页「航空航天认证与形式化方法 Aerospace」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

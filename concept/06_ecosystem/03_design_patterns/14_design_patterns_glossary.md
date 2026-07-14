@@ -42,7 +42,7 @@
 
 ## 设计模式基础
 
-本节从设计模式 (Design Pattern) 与  GoF (Gang of Four) 两个层面剖析「设计模式基础」。
+术语表的起点是两个基础定义：设计模式指“在特定上下文中反复出现的设计问题的可复用解决方案”，强调上下文-问题-解三元组而非代码模板；GoF 指 1994 年《Design Patterns》四位作者及其 23 个经典模式（创建型/结构型/行为型），它们诞生于 C++/Java 的类继承语境。理解 Rust 模式的前提是识别 GoF 模式中有多少是“弥补语言缺陷”（如 Visitor 之于无模式匹配），有多少是真正的设计思想。
 
 ### 设计模式 (Design Pattern)
 
@@ -90,7 +90,7 @@
 
 ## Rust 特有概念
 
-本节将「Rust 特有概念」分解为若干主题： Trait 对象、Typestate 模式、零成本抽象 (Zero-Cost Abstraction)与OnceLock / LazyLock。
+Rust 特有概念是模式词汇表的增量部分：Trait 对象（`dyn Trait` 动态分派，异构集合的唯一手段）、Typestate（用类型编码状态机，非法转换编译期拒绝）、零成本抽象（高层抽象编译为等价手写代码，Rust 模式设计的第一约束）、`OnceLock`/`LazyLock`（标准库化的懒初始化，取代 lazy_static 宏）。这些概念使许多 GoF 模式在 Rust 中要么消失（被语言特性吸收），要么变形（借类型系统获得更强保证）。ock / LazyLock。
 
 ### Trait 对象
 
@@ -170,7 +170,7 @@ pub fn config() -> &'static Config {
 
 ## 并发与异步
 
-本节围绕「并发与异步」展开，依次讨论 Actor 模式、Reactor 模式、CSP (Communicating Sequential Proce…与Future / async/await。
+并发模式术语在 Rust 语境需要精确定义：Actor（独立状态 + 邮箱消息，如 actix 的 `Actor` trait，故障隔离靠监督树）、Reactor（事件循环 + 回调注册，epoll/kqueue 的直接抽象）、CSP（channel 通信顺序进程，`std::sync::mpsc` 与 crossbeam 的理论基础）、Future（惰性状态机，poll 驱动的异步计算单元）。四者的关系：Rust async 运行时本质是 Reactor 驱动 Future 状态机，Actor 与 CSP 是其上的编程模型。re / async/await。
 
 ### Actor 模式
 

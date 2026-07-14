@@ -87,7 +87,7 @@ protocol = "git"
 
 ## 三、发布流程：cargo publish
 
-本节围绕「发布流程：cargo publish」展开，覆盖准备工作 与  Cargo.toml 必填字段 两个方面。
+crates.io 发布的关键约束是**不可变性**：版本一旦发布即永久存在（只能 yank 不能删除），因此发布前的检查比发布动作本身重要。准备三步：`cargo login` 配置 token、`cargo package --list` 审查打包内容（避免误带大文件/私密文件）、`cargo publish --dry-run` 完整验证。Cargo.toml 必填字段（description、license、repository 等）缺一个就会被拒绝，这些是 crates.io 的元数据质量底线。
 
 ### 3.1 准备工作
 
@@ -127,7 +127,7 @@ rust-version = "1.97.0"
 
 ## 四、Yank 与 Owner 管理
 
-「Yank 与 Owner 管理」部分包含 Yank（撤回） 与  Owner 管理 两条主线，本节依次说明。
+yank 与删除的本质区别：yank 只是让 Cargo 的依赖解析**不再新选**该版本，已锁定该版本的 Cargo.lock 项目仍可构建——这让“撤回有缺陷版本”不会破坏下游可重复构建。Owner 管理则关乎供应链安全：单人 owner 是单点故障（账号丢失即 crate 失控），团队 owner 应通过 GitHub team 同步，且新 owner 接受邀请后才生效。
 
 ### 4.1 Yank（撤回）
 
@@ -176,7 +176,7 @@ Cargo 支持多种 token 存储方式：
 
 ## 六、私有 Registry 与 Source Replacement
 
-「私有 Registry 与 Source Replacem…」部分包含配置私有 Registry 与  Source Replacement（源替换） 两条主线，本节依次说明。
+企业场景的两种依赖治理手段适用不同目的：私有 registry（`[registries.xxx]` + sparse index）用于发布与消费内部 crate，是长期方案；source replacement（`[source.crates-io] replace-with`）用于把 crates.io 流量重定向到内部镜像或 vendor 目录，解决网络隔离/离线构建/审计固化问题。两者可组合：内部 crate 走私有 registry，公开依赖走镜像替换。
 
 ### 6.1 配置私有 Registry
 

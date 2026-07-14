@@ -552,3 +552,28 @@ fn main() {
     println!("{}", b);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((现代 Rust 验证工具生态 2025-2026))
+    AutoVerus LLM
+      核心思想
+      能力边界
+    Kani 0 65 循环契约与
+      新特性 1 循环契约
+      新特性 2 Autoharness
+    ESBMC for Rust 基于
+      核心能力
+      Rust 验证示例
+    Safety Tags
+      语法设计 提案阶段
+      工具链集成愿景
+    TrustInSoft C Rust
+      抽象解释原理
+```
+
+> **认知功能**: 本 mindmap 从本页「现代 Rust 验证工具生态 2025-2026」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

@@ -54,7 +54,15 @@ trait Factory {
 
 ## 二、语法说明
 
-理解「语法说明」需要把握基础 RPITIT、`async fn` in trait（RPITIT 的特例）与精确捕获扩展（Rust 1.82+），本节依次展开。
+RPITIT（Return Position Impl Trait In Traits）自 1.75 稳定后已成为 trait 设计的标准工具，但其语法规则有三个递进的理解层次，混用层次是初学者错误的主要来源。
+
+三个层次的递进关系：
+
+1. **基础 RPITIT**：trait 方法返回 `impl Trait`，每个实现者可以返回不同的具体类型——与关联类型的区别在于调用方无需命名该类型，代价是无法在类型层面约束它（除非用 RTN）；
+2. **`async fn` in trait**：`async fn` 在 trait 中 desugar 为返回 `impl Future` 的方法，是 RPITIT 的特例——这解释了为什么它继承 RPITIT 的全部限制（如 dyn 兼容性缺失）；
+3. **精确捕获扩展（1.82+）**：`use<'a, T>` 语法控制返回的 opaque 类型捕获哪些泛型参数，解决了 2024 edition 默认捕获全部参数导致的过度约束问题。
+
+阅读建议：已熟悉 1.75 语法的读者可直接跳到 2.3，捕获规则是 1.9x 时代 RPITIT 实践中最常踩的坑。
 
 ### 2.1 基础 RPITIT
 
@@ -217,7 +225,17 @@ trait Items {
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：RPITIT（Return Position Impl Tr…、测验 2：RPITIT 与关联类型（Associated Type）有…、测验 3：这个特性对 `async fn` 在 trait 中的支持有…、测验 4：RPITIT 在 Rust 1.75 中已稳定，但在 1.9…等5个方面。
+本组五道测验检验 RPITIT 从“会用”到“理解边界”的完整掌握度，全部位于理解层。题目按机制深度递增排列。
+
+作答指引：
+
+- 测验 1 要求给出 RPITIT 与关联类型的双向转换示例——能在两种写法间互译才算理解二者的表达力差异；
+- 测验 2 的关键是“命名能力”：关联类型可被其他类型参数引用，RPITIT 的返回类型匿名；
+- 测验 3 需解释 desugaring 链条：`async fn` → `impl Future` → RPITIT 限制继承；
+- 测验 4 聚焦 1.9x 的后续改进（精确捕获、RTN 提案），回答需区分已稳定与预览状态；
+- 测验 5 要求从 API 演进角度论证：公开 trait 中使用 RPITIT 后，返回类型的变更是否构成 breaking change。
+
+每题附回查章节；测验 5 无标准答案，评分依据论证是否覆盖 semver 影响与 semver-checks 的检测能力。
 
 ### 测验 1：RPITIT（Return Position Impl Trait In Traits）是什么？（理解层）
 

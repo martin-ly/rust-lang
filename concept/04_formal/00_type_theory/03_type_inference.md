@@ -67,6 +67,7 @@
     - [Turbofish 使用场景](#turbofish-使用场景)
     - [何时需要类型标注](#何时需要类型标注)
     - [常见推断错误速查](#常见推断错误速查)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -764,3 +765,24 @@ let n = "42".parse::<u64>().unwrap();
 - `cannot infer the value of const parameter`：常量泛型需显式传入或从参数推断。
 - 整数默认 `i32`、浮点默认 `f64`；在泛型上下文中可能触发歧义。
 - 方法链过长时，可在中间节点插入显式标注帮助编译器“断点”。
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((类型推断 Hindley-Milner 算法与))
+    核心概念
+      从显式类型到隐式推断
+      Hindley-Milner 算法
+      Rust 的类型推断扩展
+    补充视角 Rust 类型推断的实用技巧
+      Turbofish 使用场景
+      何时需要类型标注
+      常见推断错误速查
+    技术细节
+      统一 Unification
+```
+
+> **认知功能**: 本 mindmap 从本页「类型推断 Hindley-Milner 算法与」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

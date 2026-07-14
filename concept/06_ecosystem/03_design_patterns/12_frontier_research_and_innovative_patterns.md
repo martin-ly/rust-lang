@@ -215,7 +215,7 @@ pub fn effect_constraint_example() {
 
 ## 3. Algebraic Effects
 
-「Algebraic Effects」部分包含 Effect Handlers 与 可恢复效应 (Resumable Effects) 两条主线，本节依次说明。
+代数效应（Algebraic Effects）把副作用抽象为“操作 + 处理器”：代码执行 `perform` 操作挂起，外层 handler 决定如何解释该操作（可恢复效应允许 handler 返回后 continuation 继续执行）。这使依赖注入、异常、异步统一为同一机制——Rust 的 async/await 可视为一种不可恢复的效应（generator 风格）。Rust 尚无原生效应系统，研究集中在 effect trait 与上下文参数的替代方案上，理解它有助于预判语言演进方向。
 
 ### 3.1 Effect Handlers
 
@@ -695,7 +695,7 @@ impl<P> RevocableCapability<P> {
 
 ## 6. 未来方向
 
-「未来方向」部分按研究前沿、依赖类型探索 (Dependent Types)、量子计算模式 (Quantum Computing Patterns)、Rust 语言演进等6个方面的顺序逐层展开。
+前沿方向六个主题按成熟度排序：效应系统（研究最热，工程化最远）；依赖类型（类型依赖值，可编码长度检查的向量等强不变量，Rust 经 const generics 获得有限形式）；线性类型深化（`must_move` 等提案）；量子计算模式（qubit 不可克隆与所有权语义天然契合）；形式化验证普及（Kani/Prusti 进入 CI）；异步演进（async trait、RTN 稳定化）。阅读定位：这是方向地图而非操作手册，每个主题给出入口论文与生态观察点。
 
 ### 6.1 研究前沿
 

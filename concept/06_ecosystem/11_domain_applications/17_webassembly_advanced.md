@@ -611,7 +611,7 @@ pub fn rgba_to_grayscale_simd(rgba: &[u8], gray: &mut [u8]) {
 
 ## 七、安全沙箱模型
 
-本节从线性内存与能力模型 与  wasm32-unknown-unknown 与 `wasm32-wa… 两个层面剖析「安全沙箱模型」。
+Wasm 的安全沙箱由两层机制构成：线性内存隔离保证模块只能访问自己的连续内存区（越界访问 trap 而非破坏宿主），能力模型（WASI）把文件、网络、时钟等系统资源变成显式授予的句柄，默认拒绝一切外部访问。与进程/容器相比，Wasm 沙箱的隔离粒度更细（模块级）、启动更快（毫秒级），这也是其成为插件与边缘计算运行时首选的原因。下文对比两种编译目标在能力集上的差异。
 
 ### 7.1 线性内存与能力模型
 
@@ -710,7 +710,7 @@ pub fn hash_data(input: &[u8]) -> [u8; 32] {
 
 ## 九、边界测试
 
-「边界测试」涉及边界测试：wasm-bindgen 跨边界传递含 `String` 的…、边界测试：JS→WASM→JS 递归调用导致栈溢出与边界测试：在 `wasm32-unknown-unknown` 中使用…，本节逐一说明其要点。
+Wasm 边界测试集中在 JS↔Wasm 的 FFI 接缝处：含 `String` 的自定义结构体不能直接作为 `wasm-bindgen` 参数（需序列化或用 `JsValue`），JS→Wasm→JS 的递归回调会耗尽 Wasm 线性栈，而在 `wasm32-unknown-unknown` 目标上调用 WASI 专属 API 则直接编译失败。三类用例分别验证序列化边界、栈边界与目标平台能力边界，是 Wasm 项目 CI 的最低覆盖要求。asm32-unknown-unknown` 中使用…，本节逐一说明其要点。
 
 ### 9.1 边界测试：wasm-bindgen 跨边界传递含 `String` 的结构体
 
@@ -1075,7 +1075,7 @@ pub fn simd_add(a: &[f32], b: &[f32]) -> Vec<f32> {
 
 ### 14.2 最佳实践清单（来自 `rust_192_best_practices.md`）
 
-本节从性能优化清单 与 安全检查清单 两个层面剖析「最佳实践清单（来自 `rust_192_best_prac…」。
+Wasm 产物的优化分编译期与运行时两侧：编译期用 `opt-level = "z"`/`lto`/`codegen-units = 1` 压缩体积，运行时用预分配与对象池减少线性内存抖动；二进制交付前再过一遍 `wasm-opt` 与 brotli 压缩。安全清单则强调初始化状态跟踪与强类型约束，避免未初始化读取。两组清单均来自 Rust 1.92 实践的迁移整理，按“先体积后性能再安全”的顺序执行。
 
 #### 性能优化清单
 
@@ -1107,7 +1107,7 @@ pub fn simd_add(a: &[f32], b: &[f32]) -> Vec<f32> {
 
 ### 14.5 决策树参考（来自 `wasm_decision_tree.md`）
 
-「决策树参考（来自 `wasm_decision_tree.…」部分包含编译目标选择 与  JavaScript 互操作选择 两条主线，本节依次说明。
+Wasm 选型的两个首要决策是编译目标与 JS 互操作方式。目标选择取决于是否需要系统接口：需要文件/网络等能力走 `wasm32-wasip1`，纯浏览器或插件沙箱走 `wasm32-unknown-unknown`。互操作方式取决于数据复杂度：简单标量用 `wasm-bindgen` 自动绑定，复杂对象或高频调用应设计批量接口减少跨界次数（每次 JS↔Wasm 调用有固定开销）。下面的决策树给出完整分支。
 
 #### 编译目标选择
 

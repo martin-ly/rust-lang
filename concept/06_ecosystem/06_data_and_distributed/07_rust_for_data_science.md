@@ -230,7 +230,7 @@ async fn datafusion_query() -> Result<(), DataFusionError> {
 
 ## 四、统计分析与数值计算
 
-「统计分析与数值计算」部分包含统计生态 与 线性代数 两条主线，本节依次说明。
+Rust 的数值计算生态呈“基础扎实、高层薄弱”格局：线性代数有 `nalgebra`（泛型矩阵，几何/图形见长）与 `ndarray`（N 维数组，NumPy 风格）；统计生态分散在 `statrs`（分布函数与统计检验）、`polars`（DataFrame，Lazy API + 表达式优化是核心竞争力）等 crate。与 Python 的差距在统计建模高层（无 statsmodels 等价物），因此现实路径是 Rust 做数据管道与性能热路径，建模仍借 PyO3 回调 Python。
 
 ### 4.1 统计生态
 
@@ -408,7 +408,7 @@ fn my_data science_lib(_py: Python, m: &PyModule) -> PyResult<()> {
 
 ## 七、反命题与边界
 
-本节围绕「反命题与边界」展开，覆盖反命题树 与 边界极限 两个方面。
+“Rust 将取代 Python 做数据科学”是典型过度推断。反命题树给出反驳：数据科学的价值在探索速度而非运行速度，Jupyter + pandas 的交互反馈循环 Rust 短期无法复制；GPU 生态（CUDA/cuDNN 绑定）与模型生态（PyTorch）的锁定效应远大于语言优势。边界极限诚实标注 Rust 的甜区：ETL 管道（polars 已超越 pandas 性能）、特征工程服务化、Python 扩展模块加速——即“Python 旁边”而非“Python 替代”。
 
 ### 7.1 反命题树
 
@@ -463,7 +463,7 @@ fn my_data science_lib(_py: Python, m: &PyModule) -> PyResult<()> {
 
 ## 八、边界测试
 
-本节将「边界测试」分解为若干主题：边界测试：Polars Lazy API 中过早 collect 导致…、边界测试：PyO3 GIL 死锁与边界测试：未处理 CSV 解析中的畸形数据。
+数据科学边界测试聚焦三类工程陷阱：Polars Lazy API 中过早 `collect()` 物化中间结果，使查询优化器无法下推过滤/投影（性能退化数倍）；PyO3 扩展中在持有 GIL 时调用回调 Python 的 Rust 代码形成 GIL 重入死锁（必须用 `Python::allow_threads` 释放）；浮点聚合未处理 NaN/Inf 传播导致静默错误结果。三类用例分别对应查询优化、FFI 并发与数值正确性。CSV 解析中的畸形数据。
 
 ### 8.1 边界测试：Polars Lazy API 中过早 collect 导致内存溢出
 

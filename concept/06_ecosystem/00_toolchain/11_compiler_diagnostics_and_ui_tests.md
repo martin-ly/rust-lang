@@ -135,7 +135,7 @@ err.span_suggestion(
 
 ## 四、Lint 与 Lint Pass
 
-本节从 Lint 定义 与  Lint Pass 两个层面剖析「Lint 与 Lint Pass」。
+Lint 是编译器对“合法但可疑”代码的诊断机制：按严重级分 allow/warn/deny/forbid 四档，按检查阶段分 early lint（AST 级，语法模式）与 late lint（HIR/类型级，语义模式）。Lint Pass 是 lint 的执行单元，注册在编译管线的特定阶段遍历相应 IR。理解 pass 分层的实践意义：early lint 无法做类型相关判断（如 Clippy 的多数 lint 是 late pass），自定义 lint 工具（dylint）也按此分层选择插入点。
 
 ### Lint 定义
 
@@ -186,7 +186,7 @@ rustc --explain E0308
 
 ## 六、UI Tests 与 `--bless`
 
-「UI Tests 与 `--bless`」部分包含 UI Test 是什么 与  `--bless` 两条主线，本节依次说明。
+UI Test 是编译器诊断的回归测试机制：每个用例是一段代码 + 期望的诊断输出快照（`.stderr` 文件），测试比较实际输出与快照是否一致。这保证了错误信息的措辞、span 标注、help 建议不会在重构中意外退化。`--bless` 是快照更新命令——当有意修改诊断输出时运行它批量刷新快照，审查 diff 确认变更符合预期后提交。该机制已被 trybuild crate 移植到普通 crate 的编译错误测试。
 
 ### UI Test 是什么
 

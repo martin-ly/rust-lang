@@ -212,7 +212,15 @@ AsyncDrop 与 Pin 的复杂关系:
 
 ## 二、技术细节
 
-「技术细节」涉及当前 Workaround 模式、AsyncDrop 的实现挑战与与 Drop 的兼容性，本节逐一说明其要点。
+异步析构的核心矛盾是：`Drop::drop` 是同步函数，而释放异步资源（关闭连接、flush 缓冲区、通知对等方）天然需要 `.await`。本节技术细节按“现状—障碍—兼容”三层展开。
+
+三层的逻辑链：
+
+1. **当前 Workaround 模式**：社区已形成三类实践——显式 `async fn close(self)` 约定、`Drop` 中 spawn 后台任务做异步清理（“fire-and-forget”，放弃完成保证）、以及把资源包进 `Arc` 由专门的 reaper 任务回收。每种模式的失效场景在 2.1 逐一分析；
+2. **AsyncDrop 的实现挑战**：`Drop` 在 panic 栈展开、`*const` 手动析构、`mem::drop` 等位置被同步调用，若允许 async drop，编译器需要为每个 drop 点生成可等待的状态机——这涉及 drop elaboration 的根本改造；
+3. **与 Drop 的兼容性**：提案必须回答“一个类型同时实现 `Drop` 与 `AsyncDrop` 时谁优先”以及“同步上下文中遇到 AsyncDrop 类型怎么办”，2.3 给出当前设计倾向。
+
+阅读 2.2 前建议先复习 `Drop` 的编译期展开（drop glue），这是理解实现难度的前提。
 
 ### 2.1 当前 Workaround 模式
 >
@@ -369,7 +377,12 @@ Panic 中的资源清理:
 
 ## 四、反命题与边界分析
 
-「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+AsyncDrop 的反命题集中在两个方向：“workaround 已经足够，不需要语言特性”与“async drop 一旦引入，所有 async 代码都必须重写”。本节分别检验。
+
+- **反命题树**：把“workaround 足够”分解为可检验子命题——`async fn close` 约定能否被类型系统强制（不能，忘记调用无编译错误）、fire-and-forget 清理能否保证完成（不能，进程退出即丢失）、reaper 模式能否覆盖嵌套资源（部分，但引入额外的 `Arc` 与任务开销）。三个“不能”构成语言特性的存在性论证；
+- **边界极限**：考察 async drop 语义最棘手的三个位置——panic 展开期间、同步 `Drop` 上下文（如 `std::mem::drop` 调用处）、以及 `Pin` 住的自引用 future 内部。这些位置的行为定义直接决定提案是否可行，4.2 给出当前设计文档的取舍。
+
+判定依据：评估 async drop 对某项目的价值时，统计代码库中“`Drop` 实现里包含网络/IO 调用”的数量——这是直接受益面。
 
 ### 4.1 反命题树
 >
@@ -526,7 +539,19 @@ graph TD
 
 ## 十、边界测试：async drop 的编译错误
 
-本节从边界测试：异步析构的 `.await` 位置约束（编译错误）、边界测试：异步析构与 panic 的交互（运行时 UB）、边界测试：async drop 与 `std::mem::forget…、边界测试：async drop 在 panic 时的双重取消（运行时…等6个方面切入，剖析「边界测试：async drop 的编译错误」的核心内容。
+async drop 的边界测试覆盖“异步语义与析构时机交织”的高危区域——这些场景即使在当前 workaround 模式下也频繁出错，是提案必须给出明确语义的位置。
+
+六组测试的风险点：
+
+| 测试 | 风险 | 当前行为 |
+|---|---|---|
+| `.await` 位置约束 | 析构中的 await 跨越了不允许挂起的上下文 | workaround 下编译通过但语义不明 |
+| 与 panic 的交互 | panic 展开中触发 async drop，二次 panic | 运行期 abort 风险 |
+| `mem::forget` | 资源被 forget 后异步清理永不发生 | 泄漏，且比同步场景更隐蔽 |
+| panic 时双重取消 | 外部取消与内部 panic 同时到达 | 清理逻辑可能执行两次 |
+| 其余两组 | Drop/AsyncDrop 双实现的优先级、同步上下文中的 async drop 类型 | 提案语义待定区域 |
+
+每组测试在当前 nightly 上用 workaround 模式复现风险，再对照提案语义说明未来行为。
 
 ### 10.1 边界测试：异步析构的 `.await` 位置约束（编译错误）
 

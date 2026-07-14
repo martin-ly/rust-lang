@@ -155,7 +155,7 @@ rustc --target my-target.json
 
 ## 六、链接与 LTO
 
-「链接与 LTO」部分包含链接 与  LTO（Link Time Optimization） 两条主线，本节依次说明。
+链接是编译管线的最后阶段，也是 LTO 的发挥场所。默认链接器（GNU ld）是大型项目编译时间瓶颈之一，换用 `mold`/`lld` 可提速数倍；LTO 则跨 crate 边界内联与去死代码：`thin` LTO 在编译时间与优化效果间平衡（发布构建推荐），`fat` LTO 效果最佳但编译时间成倍增长，配合 `codegen-units = 1` 是极致优化的标准组合。注意 LTO 与增量编译互斥，开发期应保持关闭。
 
 ### 6.1 链接
 

@@ -160,7 +160,7 @@ graph LR
 
 ## 二、概念属性矩阵
 
-「概念属性矩阵」涉及核心工具矩阵、Cargo.toml vs package.json / go.mod…、Clippy Lint 分类矩阵、编译器优化等级矩阵等7个方面，本节逐一说明其要点。
+工具链知识适合用矩阵组织：工具按“编译 / 构建 / 检查 / 格式化 / 文档”分工，各有固定使用频率与关键特性；清单文件对比（Cargo.toml vs package.json vs go.mod）揭示 Rust 在 SemVer 语义与 feature 条件编译上的独特性；Clippy lint 按 correctness/suspicious/style/complexity/perf 分级，决定 CI 中哪些该 `-D` 拦截；优化等级矩阵则给出 debug/release 各档的编译时间与运行性能权衡。七张矩阵分别回答“用什么、怎么配、拦什么、调到哪档”。
 
 ### 2.1 核心工具矩阵
 >
@@ -1664,7 +1664,7 @@ export SCCACHE_REGION=us-east-1        # AWS 区域
 
 ## 十、边界测试：工具链的编译错误
 
-本节围绕「边界测试：工具链的编译错误」展开，依次讨论边界测试：`cargo` 特性开关的依赖冲突（编译错误）、边界测试：Edition 迁移中的语法变化（编译错误）、边界测试：`cargo` 工作空间的成员路径错误（编译错误）、边界测试：`rustc` 的链接时优化（LTO）与动态链接的冲突（编译…等5个方面。
+工具链边界测试验证的是“构建系统本身的失效模式”：feature 开关组合导致的依赖冲突、Edition 迁移时的语法断点（如 2024 Edition 的 `gen` 关键字与捕获语义变化）、workspace 成员路径配置错误。这些错误大多在解析或编译早期暴露，用例价值在于把“踩过的配置坑”固化为回归测试，避免团队协作中重复触发。错误）、边界测试：`rustc` 的链接时优化（LTO）与动态链接的冲突（编译…等5个方面。
 
 ### 10.1 边界测试：`cargo` 特性开关的依赖冲突（编译错误）
 
@@ -1769,7 +1769,7 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：Cargo.toml vs package.json（理解层）、测验 2：Feature 统一机制（应用层）、测验 3：Clippy lint 级别（应用层）、测验 4：交叉编译目标三元组（分析层）等5个方面，本节依次展开。
+以下自测题覆盖工具链三个高频考点：清单文件的语义差异（理解层）、feature 统一机制的解析行为（应用层）、Clippy lint 级别与 CI 拦截策略（应用层）。每题标注了认知层级，答错时按标注回查本章对应小节——feature 问题回查 feature 解析一节，lint 问题回查 Clippy 分类矩阵。层）、测验 4：交叉编译目标三元组（分析层）等5个方面，本节依次展开。
 
 ### 测验 1：Cargo.toml vs package.json（理解层）
 

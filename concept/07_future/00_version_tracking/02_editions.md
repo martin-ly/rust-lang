@@ -322,3 +322,27 @@ fn demo_fixed() {
 
 - **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [Wadler & Blott: How to Make Ad-hoc Polymorphism Less Ad Hoc (POPL 1989)](https://dl.acm.org/doi/10.1145/75277.75283)
 - **P2 生态/社区**: [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml) · [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata)
+
+---
+
+## ⚠️ 反例与陷阱：2018+ edition 中 `async` 成为关键字
+
+**反例**（rustc 1.97 实测编译失败，无错误码，解析错误）：
+
+```rust,compile_fail
+fn main() {
+    let async = 5;
+    println!("{async}");
+}
+```
+
+Edition 2018 起 `async` 成为保留关键字；edition 机制的意义正在于：2015 edition 项目仍可编译此代码，升级 edition 时才需迁移。
+
+**修正**：
+
+```rust
+fn main() {
+    let r#async = 5;
+    println!("{}", r#async);
+}
+```

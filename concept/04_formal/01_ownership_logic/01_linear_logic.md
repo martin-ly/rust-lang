@@ -1263,3 +1263,28 @@ Rust 中没有任何单一机制完全对应 `!A`，但 `Copy` + `Clone` + `Drop
 </details>
 
 ---
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Linear Logic Affine Logic))
+    概念属性矩阵 Attribute
+      结构规则对比矩阵
+      线性逻辑连接词矩阵
+    sequent calculus
+      乘法片段
+      加法片段 Additives
+    Proof nets 证明网
+      Proof nets 的语法与正确性
+      Proof nets
+    Linear Haskell 与
+      Linear Haskell 的核心语法
+      Rust vs Linear
+    定理推理链 Theorem Chain
+      定理一致性矩阵 10行完整版
+```
+
+> **认知功能**: 本 mindmap 从本页「Linear Logic Affine Logic」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

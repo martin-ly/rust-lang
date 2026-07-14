@@ -214,7 +214,19 @@ my-crate = { version = "1.2", registry = "internal", git = "https://github.com/m
 
 ## 6. 工具链与兼容性细节
 
-「工具链与兼容性细节」涉及 Rustdoc 改进、Cargo 细节、编译器改进、平台支持等6个方面，本节逐一说明其要点。
+1.96 的工具链与兼容性变更以“文档与构建的可复现性”为主线：Rustdoc 与 Cargo 的多项改进都指向同一目标——让构建产物（包括文档）在跨机器、跨时间重建时保持确定性。本节六个方面按“谁需要关心”分组。
+
+读者分组指引：
+
+| 小节 | 主要受众 | 行动要求 |
+|---|---|---|
+| 6.1 Rustdoc 改进 | 库作者、文档站维护者 | 评估新输出格式对文档站托管的影响 |
+| 6.2 Cargo 细节 | 发布/供应链团队 | 核对 Git 源与 alternate registry 共存配置 |
+| 6.3 编译器改进 | 全体 | 了解诊断与编译速度变化即可 |
+| 6.4 平台支持 | 嵌入式/跨平台团队 | 核对 target tier 变化 |
+| 6.5 底层与兼容性 | unsafe 代码作者、工具链开发者 | 必须阅读：指针有效性契约与 target spec 变更有迁移要求 |
+
+6.5 是本节唯一可能要求代码变更的部分，建议 unsafe 密集型项目优先评估。
 
 ### 6.1 Rustdoc 改进
 
@@ -226,7 +238,14 @@ my-crate = { version = "1.2", registry = "internal", git = "https://github.com/m
 
 ### 6.2 Cargo 细节
 
-「Cargo 细节」部分包含 Git + Alternate Registry 共存 与  `target.'cfg(..)'.rustdocflags` 两条主线，本节依次说明。
+Cargo 在 1.96 周期的两项细节变更都服务于多源供应链场景：企业内同时使用 crates.io 镜像、私有 registry 与 Git 依赖的混合配置越来越普遍，此前的行为边界存在未文档化的坑。
+
+两项变更的实质：
+
+- **Git + Alternate Registry 共存**：明确了同一 crate 名同时来自 Git 源与 alternate registry 时的解析优先级与 lockfile 记录方式，消除了此前因解析顺序不确定导致的“本地能构建、CI 拉不到”类问题；
+- **`target.'cfg(..)'.rustdocflags`**：允许按 target 条件传递 rustdoc 参数，解决了交叉编译文档时“某些 cfg 下的文档需要额外 `--cfg` 参数”的配置缺口。
+
+迁移检查清单见各小节末尾：主要是复核 `.cargo/config.toml` 中 source replacement 与 rustdocflags 的既有配置是否与新行为一致。
 
 #### Git + Alternate Registry 共存
 
@@ -266,7 +285,11 @@ rustdocflags = ["--cfg", "docsrs"]
 
 ### 6.5 底层与兼容性
 
-本节从指针 “valid for read/write” 契约重构 与  JSON Target Spec 内部变更 两个层面剖析「底层与兼容性」。
+本节两项变更位于 Rust 内存模型的最底层，直接影响 unsafe 代码的正确性论证与自定义 target 的维护方式。
+
+**指针 “valid for read/write” 契约重构**：此前文档对“指针何时可合法读/写”的表述分散且存在歧义（如对齐但未初始化的指针是否 valid for read）。1.96 周期的重构把契约收敛为明确条款：validity 要求与 provenance、对齐、初始化状态三者分别挂钩，并给出与 Miri 检查项的对应关系。unsafe 代码作者应据此复核手写论证——特别是依赖“分配即 valid”直觉的代码。
+
+**JSON Target Spec 内部变更**：自定义 target 的 JSON 规格文件调整了若干内部字段的序列化方式，使用 `-Zbuild-std` + 自定义 target 的嵌入式项目需在升级后重新生成或核对 spec 文件。变更清单与迁移脚本见对应小节。
 
 #### 指针 “valid for read/write” 契约重构
 

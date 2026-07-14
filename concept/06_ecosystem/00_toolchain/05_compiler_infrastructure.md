@@ -74,7 +74,7 @@ Cranelift 是 [Bytecode Alliance](https://bytecodealliance.org/) 开发的替代
 
 ## 四、build-std（从源码构建标准库）
 
-理解「build-std（从源码构建标准库）」需要把握 RFC 3873 核心内容、使用方式与限制与注意事项，本节依次展开。
+build-std 解决的是“预编译标准库不满足目标平台需求”的问题：嵌入式自定义目标、修改过的 panic 策略、启用 `-Zbuild-std-features` 的实验特性（如 `panic_immediate_abort`）都需要从源码重编 core/alloc/std。它至今是 nightly 专属（`-Z build-std`），代价是每次构建都重编标准库、显著拉长编译时间，且与预编译 rlib 混用受限。RFC 3873 讨论的是其稳定化路径与上下文配置。
 
 ### 4.1 [RFC 3873](https://rust-lang.github.io/rfcs//3873-build-std-context.html) 核心内容
 
@@ -110,7 +110,7 @@ RUSTFLAGS="-Z build-std -Z sanitizer=memory" cargo build --target x86_64-unknown
 
 ## 五、Sanitizer 生态
 
-本节从 Rust 支持的 Sanitizer、与 Miri 的分工与实战示例切入，剖析「Sanitizer 生态」的核心内容。
+Sanitizer 与 Miri 覆盖 Rust 未定义行为检测的两个互补面：Sanitizer（ASan/MSan/TSan）基于 LLVM 插桩，运行在真实硬件上、速度快，但只能检测实际执行到的路径；Miri 是 MIR 解释器，能检测更细的 UB（如 stacked borrows 违反、未初始化读取）且无需复现路径，但慢 10-100 倍且不支持 FFI。工程分工：CI 用 Sanitizer 跑全量测试做回归，用 Miri 跑 unsafe 密集模块做深度验证。
 
 ### 5.1 Rust 支持的 Sanitizer
 
@@ -147,7 +147,7 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 
 ## 六、反命题与选型建议
 
-本节从编译后端选型决策树 与  build-std 适用场景 两个层面剖析「反命题与选型建议」。
+编译基础设施选型的核心权衡是编译速度 vs 运行性能：开发迭代期 Cranelift 后端（nightly）可比 LLVM debug 快 20-30%，发布构建则必须 LLVM + LTO。反命题提醒两点——“换后端就能解决编译慢”忽略了依赖编译才是大头（应配合 sccache 缓存）；“build-std 是银弹”忽略了其 nightly 绑定与重编成本，只有自定义目标或 std 特性裁剪时才值得启用。
 
 ### 6.1 编译后端选型决策树
 

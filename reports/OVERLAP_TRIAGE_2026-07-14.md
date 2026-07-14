@@ -56,12 +56,12 @@
 |:---:|:---|:---|
 | 0.846 | `crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md` | `crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md` |
 | 0.846 | `crates/c01_ownership_borrow_scope/docs/tier_03_references/03_lifetimes_reference.md` | `crates/c01_ownership_borrow_scope/docs/tier_04_advanced/01_advanced_lifetime_patterns.md` |
-| 0.818 | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md` | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md` |
 | 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md` |
 | 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/04_faq.md` |
 | 0.818 | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md` | `crates/c04_generic/docs/tier_01_foundations/04_faq.md` |
 | 0.818 | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` | `crates/c04_generic/docs/tier_01_foundations/04_faq.md` |
 | 0.818 | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md` | `crates/c04_generic/docs/tier_01_foundations/04_faq.md` |
+| 0.818 | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md` | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md` |
 | 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` |
 | 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md` |
 | 0.818 | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md` | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` |
@@ -71,10 +71,10 @@
 | 0.818 | `crates/c02_type_system/docs/tier_01_foundations/01_project_overview.md` | `crates/c02_type_system/docs/tier_01_foundations/04_faq.md` |
 | 0.818 | `crates/c02_type_system/docs/tier_01_foundations/02_navigation.md` | `crates/c02_type_system/docs/tier_01_foundations/04_faq.md` |
 | 0.8 | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md` | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md` |
-| 0.8 | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md` | `crates/c01_ownership_borrow_scope/docs/15_visualization_index.md` |
 | 0.8 | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md` | `crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md` |
-| 0.8 | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md` | `crates/c01_ownership_borrow_scope/docs/15_visualization_index.md` |
+| 0.8 | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md` | `crates/c01_ownership_borrow_scope/docs/15_visualization_index.md` |
 | 0.8 | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md` | `crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md` |
+| 0.8 | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md` | `crates/c01_ownership_borrow_scope/docs/15_visualization_index.md` |
 | 0.8 | `crates/c03_control_fn/docs/01_concept_relationship_network.md` | `crates/c03_control_fn/docs/05_mind_map.md` |
 | 0.8 | `crates/c07_process/docs/tier_03_references/05_performance_optimization_reference.md` | `crates/c02_type_system/docs/tier_03_references/06_performance_optimization_reference.md` |
 | 0.794 | `knowledge/04_expert/README.md` | `knowledge/06_ecosystem/README.md` |

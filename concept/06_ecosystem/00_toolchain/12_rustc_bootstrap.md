@@ -135,7 +135,7 @@ debug-assertions = true
 
 ## 五、`cfg(bootstrap)` 与 `RUSTC_BOOTSTRAP`
 
-「`cfg(bootstrap)` 与 `RUSTC_BOO…」部分包含`cfg(bootstrap)` 与 `RUSTC_BOOTSTRAP` 两条主线，本节依次说明。
+rustc 自举（bootstrap）需要区分“正在构建的编译器”与“用于构建的编译器”：`cfg(bootstrap)` 标记仅在使用上一阶段编译器构建时生效的代码路径，用于处理自举期间的特性缺口（新特性尚不可用于构建自身）。`RUSTC_BOOTSTRAP=1` 环境变量则解锁 stable 工具链上的 nightly 特性——它是生态工具（如某些 proc macro）的灰色地带，使构建依赖不稳定内部行为，rustup 升级即可能破坏，生产项目应避免。
 
 ### `cfg(bootstrap)`
 

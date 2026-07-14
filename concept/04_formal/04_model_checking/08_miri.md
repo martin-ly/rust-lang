@@ -340,3 +340,26 @@ fn main() {
     println!("{:?}", b);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Miri Rust 未定义行为动态检测器))
+    安装与基本用法
+      安装
+      运行测试
+      运行单个示例或二进制
+    Stacked Borrows vs
+      Stacked Borrows SB
+      Tree Borrows TB
+      选择建议
+    Miri 是什么
+      与测试 Clippy 的区别
+    项目内可运行示例
+      最小可运行示例
+```
+
+> **认知功能**: 本 mindmap 从本页「Miri Rust 未定义行为动态检测器」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

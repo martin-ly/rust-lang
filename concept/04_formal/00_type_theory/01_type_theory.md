@@ -1802,3 +1802,28 @@ Theorem (Type Soundness):
 或
 2. e 发散 (无限循环)
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Type Theory 类型论基础))
+    概念属性矩阵 Attribute
+      类型论层次矩阵
+      Variance 矩阵
+    层次一致性标注 Layer
+      L4 → L1 下行映射
+      L4 → L2 下行映射
+    十之一 补充 Dependent
+      Dependent Type 与
+      1b Const Generics
+    知识结构
+      概念定义
+      属性特征
+    定理推理链 Theorem Chain
+      定理一致性矩阵 11行 带⟹推理链
+```
+
+> **认知功能**: 本 mindmap 从本页「Type Theory 类型论基础」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

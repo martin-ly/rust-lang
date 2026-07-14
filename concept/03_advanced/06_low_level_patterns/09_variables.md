@@ -166,3 +166,29 @@ unsafe {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/lazy_static — 生态权威 API 文档（静态变量惰性初始化的生态实践）](https://docs.rs/lazy_static)（2026-07-12 验证 HTTP 200）
+
+---
+
+## ⚠️ 反例与陷阱：给不可变变量赋值
+
+**反例**（rustc 1.97 实测编译失败，E0384）：
+
+```rust,compile_fail
+fn main() {
+    let count = 0;
+    count = 1;
+    println!("{count}");
+}
+```
+
+`let` 默认不可变绑定，重新赋值即 E0384；可变性是变量级别的显式契约（`let mut`），不是类型属性。
+
+**修正**：
+
+```rust
+fn main() {
+    let mut count = 0;
+    count = 1;
+    println!("{count}");
+}
+```

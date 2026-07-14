@@ -481,3 +481,28 @@ fn classify(x: i32) {
     println!("{}", label);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((通用程序语言理论基础 Rust 的 PL 基座))
+    求值策略 Evaluation
+      三种基本策略
+      Rust 的 CBV 与 Move 语义
+    副作用模型 Effect System
+      什么是副作用
+      Rust 的副作用控制
+    Continuation 与 CPS
+      什么是 Continuation
+      async await 是 CPS
+    结构化程序定理与 Rust 控制流
+      结构化程序定理
+      Rust 的类型驱动控制流
+    变量模型 环境 vs 存储
+      两个概念
+```
+
+> **认知功能**: 本 mindmap 从本页「通用程序语言理论基础 Rust 的 PL 基座」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

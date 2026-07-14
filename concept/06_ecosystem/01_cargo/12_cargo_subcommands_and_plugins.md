@@ -61,7 +61,7 @@ Cargo 通过以下机制与第三方工具集成：
 
 ## 二、自定义子命令
 
-本节将「自定义子命令」分解为若干主题：命名约定、安装方式与别名。
+Cargo 子命令插件机制基于命名约定：PATH 中名为 `cargo-<name>` 的可执行文件自动成为 `cargo <name>` 子命令（`cargo-expand`、`cargo-watch` 均由此实现）。安装方式首选 `cargo install`（从 crates.io 编译安装），大型工具也提供预编译二进制（`cargo binstall` 或 GitHub Releases）。`[alias]` 配置可给长命令起短名（如 `alias.ci = "clippy --workspace -- -D warnings"`），是把团队命令规范沉淀进仓库的轻量手段。
 
 ### 命名约定
 
@@ -102,7 +102,7 @@ fmt-check = "fmt -- --check"
 
 ## 三、`cargo metadata` 与 JSON 消息
 
-本节从 `cargo metadata` 与  `--message-format=json` 两个层面剖析「`cargo metadata` 与 JSON 消息」。
+Cargo 的两类机器可读接口支撑了整个工具生态：`cargo metadata` 输出完整依赖图 JSON（包、特性、依赖关系、manifest 路径），是 IDE、audit、deny 等工具解析项目结构的唯一官方接口；`--message-format=json` 让构建过程输出结构化消息（编译器诊断、测试结果的 JSON 流），供编辑器实时渲染。工具开发原则：永远解析这两个接口而非解析 Cargo.toml 或人类可读输出——后者无稳定性承诺。
 
 ### `cargo metadata`
 

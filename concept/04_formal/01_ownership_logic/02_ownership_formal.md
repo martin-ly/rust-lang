@@ -1668,3 +1668,28 @@ SeqCst = "Sequentially Consistent"
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [RustBelt Paper (POPL 2018)](https://plv.mpi-sws.org/rustbelt/) · [Software Foundations (SF)](https://softwarefoundations.cis.upenn.edu/) · [Iris Tutorial](https://iris-project.org/tutorial-pdfs/iris-lecture-notes.pdf)
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Ownership Formalization))
+    概念属性矩阵
+      形式化方法对比矩阵
+      所有权状态的形式化
+    定理推理链
+      定理一致性矩阵 10 行
+      形式化模型与实现的差距
+    Polonius Loan-based
+      从区域到 Loans
+      Polonius 的 Datalog
+    别名模型 Stacked
+      Stacked Borrows 核心规则
+      Tree Borrows 核心规则
+    国际课程与论文对齐
+      Pin 与自引用结构的形式化语义
+```
+
+> **认知功能**: 本 mindmap 从本页「Ownership Formalization」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

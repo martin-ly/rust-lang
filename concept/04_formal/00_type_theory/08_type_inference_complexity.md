@@ -65,6 +65,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：`None` 缺元素类型标注（rustc 1.97.0 实测）](#反例none-缺元素类型标注rustc-1970-实测)
     - [✅ 修正：turbofish 或类型标注](#-修正turbofish-或类型标注)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -426,3 +427,25 @@ fn main() {
     println!("{}", v);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Type Inference Complexity))
+    约束生成与 Robinson 合一
+      约束生成 Constraint
+      Robinson 合一
+    复杂度 为什么是 PSPACE
+      PSPACE 上界
+      PSPACE 下界
+      PSPACE-完全性
+    边界示例 何时需要显式标注
+      collect 目标类型歧义
+      高阶 trait bound
+      关联类型投影需要足够上下文
+```
+
+> **认知功能**: 本 mindmap 从本页「Type Inference Complexity」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

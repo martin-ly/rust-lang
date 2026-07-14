@@ -418,7 +418,16 @@ cargo +nightly miri test --all-targets
 
 ## 7. 变化五：Windows 上 `WSAESHUTDOWN` 映射为 `ErrorKind::BrokenPipe`
 
-本节围绕「变化五：Windows 上 `WSAESHUTDOWN`…」展开，依次讨论症状与报错信息、判定树（WSAESHUTDOWN）、迁移前 / 后代码对比与验证方法。
+该变化影响所有在 Windows 上做 TCP 编程的 Rust 应用：对端正常关闭连接后，`read` 返回的错误种类从泛化的 `ConnectionReset`/`Other` 变为精确的 `BrokenPipe`——与 Unix 行为对齐。这是 1.97 中少有的“错误语义收紧”类变更。
+
+判定是否受影响，按以下顺序排查：
+
+1. **症状与报错信息**：升级后原有错误处理分支不再命中，日志中出现此前未见的 `BrokenPipe`；
+2. **判定树**：代码中是否存在对 `ErrorKind::ConnectionReset` 的精确匹配且依赖它识别“对端关闭”？若是，即受影响；
+3. **迁移前后对比**：7.3 给出 `match` 分支的最小修改 diff——通常是把 `BrokenPipe` 并入既有分支；
+4. **验证方法**：7.4 提供跨平台的集成测试脚本，模拟对端 FIN 关闭并断言错误种类。
+
+兼容性说明：该变更在 RFC 层面被认定为 bug 修复而非破坏性变更，但对依赖旧语义的代码是事实上的行为变化。
 
 ### 7.1 症状与报错信息
 
@@ -532,7 +541,16 @@ fn write_after_shutdown_is_broken_pipe() {
 
 ## 8. 变化六：拒绝向模块路径段传递泛型参数
 
-本节将「变化六：拒绝向模块路径段传递泛型参数」分解为若干主题：症状与报错信息、判定树（模块路径泛型）、迁移前 / 后代码对比与验证方法。
+该变化收紧了路径解析规则：`use foo::bar::<T>` 这类向模块路径段附加泛型参数的写法，此前被解析器接受（随后报错或静默忽略），1.97 起在解析阶段即明确拒绝并给出针对性诊断。影响面集中在宏生成代码与从其他语言习惯迁移的手写代码。
+
+四个小节的排查流程：
+
+- **症状与报错信息**：`E0xxx` 错误信息指出泛型参数不允许出现在模块路径段——与类型路径段（如 `Vec::<T>`）的合法用法区分；
+- **判定树**：报错位置是 `use` 语句还是表达式路径？模块段还是类型段？8.2 的判定树按这两个维度给出分流；
+- **迁移前后对比**：8.3 展示三类典型错误写法及其修正（删除泛型段、改用类型别名、修正宏模板）；
+- **验证方法**：8.4 给出 `cargo check` 全工作区扫描命令与宏展开定位技巧（`cargo expand` 对比）。
+
+存量宏 crate 建议优先排查：`macro_rules!` 中拼接路径的模板是此类错误的高发区。
 
 ### 8.1 症状与报错信息
 
@@ -749,3 +767,28 @@ flowchart TD
 
 - **P1 学术/形式化**: [Jung, Dang, Kang & Dreyer: Stacked Borrows — An Aliasing Model for Rust（POPL 2020, arXiv:1909.03995；借用语义演进的形式化基线）](https://arxiv.org/abs/1909.03995)（2026-07-12 验证 HTTP 200）
 - **P2 生态/社区**: [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio) · [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures)
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 1 97 兼容性迁移判定树))
+    变化一 空 export name
+      症状与报错信息
+      判定树 空 export name
+    变化二 f32 From float
+      症状与报错信息
+      判定树 f32 From float
+    变化三 pin 不再做 deref
+      症状与报错信息
+      判定树 pin 类型签名
+    变化四 pin 阻止 deref
+      症状与报错信息
+      判定树 pin async 影响
+    变化五 Windows 上
+      症状与报错信息
+```
+
+> **认知功能**: 本 mindmap 从本页「Rust 1 97 兼容性迁移判定树」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

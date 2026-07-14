@@ -351,3 +351,23 @@ fn main() {
     let _ = Thing;
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rustc 名称解析与 HIR))
+    两阶段名称解析
+      第一阶段 宏展开期间的早期解析
+      第二阶段 完整解析 rustc
+    命名空间与作用域 Rib
+      命名空间 Namespaces
+      Rib 作用域抽象
+    AST → HIR Lowering
+      典型解糖
+      生命周期省略
+```
+
+> **认知功能**: 本 mindmap 从本页「Rustc 名称解析与 HIR」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

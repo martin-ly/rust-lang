@@ -196,3 +196,29 @@ flowchart TD
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver) · [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml)
+
+---
+
+## ⚠️ 反例与陷阱：重导出私有项
+
+**反例**（rustc 1.97 实测编译失败，E0603）：
+
+```rust,compile_fail
+mod internal {
+    struct Token;
+}
+pub use internal::Token;
+fn main() {}
+```
+
+`pub use` 重导出要求被导出的项本身公开；编译器在重导出点即报 E0603 防止借 `pub use` 绕过模块隐私边界，保证「可见性只降不升」。
+
+**修正**：
+
+```rust
+mod internal {
+    pub struct Token;
+}
+pub use internal::Token;
+fn main() {}
+```

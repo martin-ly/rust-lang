@@ -262,3 +262,21 @@ pub extern "C" fn plugin_init() {}
 #[unsafe(no_mangle)]
 pub extern "C" fn plugin_init_v2() -> i32 { 0 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Application Binary))
+    Rust 1 97 0 交叉语义 链接
+      A v0 × debuginfo
+      B 空 export name
+    used 强制保留 static
+      使用场景
+    unsafe link section
+      典型场景
+```
+
+> **认知功能**: 本 mindmap 从本页「Application Binary」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

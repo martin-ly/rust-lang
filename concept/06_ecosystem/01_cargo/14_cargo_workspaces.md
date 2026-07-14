@@ -37,7 +37,7 @@
 
 ## 二、Root Package vs Virtual Workspace
 
-本节围绕「Root Package vs Virtual Works…」展开，覆盖 Root package 与  Virtual workspace 两个方面。
+workspace 有两种拓扑：root package 模式（根目录既是 workspace 根又是包，常见于“主 binary + 多个 lib”项目）与 virtual workspace（根 `Cargo.toml` 只有 `[workspace]` 段不含 `[package]`，常见于对等 crate 集合）。实践判据：存在明显主 crate 时用 root package（`cargo build` 默认构建它）；crate 地位对等时用 virtual（避免“根包特权”造成的混乱）。virtual 模式下 workspace 依赖与 lints 继承的配置位置更清晰。
 
 ### Root package
 

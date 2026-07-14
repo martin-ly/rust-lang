@@ -318,7 +318,12 @@ graph LR
 
 ## 四、反命题与边界分析
 
-「反命题与边界分析」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+`#[derive(CoercePointee)]` 的反命题核心是“受众面”：该 derive 服务于自定义智能指针作者（如 `Rc` 之外的新指针类型），对绝大多数 Rust 用户完全不可见。批评者质疑为极小受众引入新 derive 宏的性价比，支持者指出 unsized coercion 目前只有标准库指针可用，这正是自定义指针生态薄弱的根因。本节展开这一争论。
+
+- **反命题树**：把“受众太小”分解为可检验子命题——crates.io 上有多少指针类型 crate 受限于无法实现 `CoerceUnsized`？`DispatchFromDyn` 的不可实现是否阻塞了 trait object 自定义指针？每个子命题给出生态数据；
+- **边界极限**：考察 derive 的约束边界——`#[repr(transparent)]` 要求、单字段限制、`PhantomData` 的角色——这些约束决定了哪些指针设计能被 derive 覆盖，哪些仍需等待更通用的机制。
+
+判定依据：评估该特性价值时应统计项目是否维护自定义指针类型；若是库作者且目标用户需要 `?Sized` 类型擦除，该 derive 消除的是当前唯一的手工 unsafe 实现路径。
 
 ### 4.1 反命题树
 >
@@ -419,7 +424,19 @@ graph TD
 
 ## 十、边界测试：CoercePointee 派生的编译错误
 
-本节从边界测试：非 `#[repr(transparent)]` 类型的 C…、边界测试：多字段 struct 的 CoercePointee 尝试（…、边界测试：CoercePointee 与自定义 DST 的元数据（编译…、边界测试：`PhantomData` 与 CoercePointee…等6个方面切入，剖析「边界测试：CoercePointee 派生的编译错误」的核心内容。
+CoercePointee derive 的边界测试集中在约束条件的违例场景——由于 derive 的安全论证依赖严格的结构约束，每组违例都应被编译器明确拒绝并给出可理解的诊断。
+
+六组测试的约束映射：
+
+| 测试 | 违反的约束 | 预期诊断 |
+|---|---|---|
+| 非 `#[repr(transparent)]` 类型 | 布局透明性要求 | 编译错误，指明 repr 要求 |
+| 多字段 struct | 单字段（+PhantomData）限制 | 编译错误，列出多余字段 |
+| 自定义 DST 元数据 | 仅支持 `()` 与 `DynMetadata` 类元数据 | 编译错误或受限警告 |
+| `PhantomData` 交互 | 幽灵字段的 variance 影响转换合法性 | 编译期 variance 检查 |
+| 其余两组 | 泛型参数的 bound 传导、与 `DispatchFromDyn` 的叠加 | 约束兼容性 |
+
+所有测试基于 nightly + `feature(derive_coerce_pointee)` 实测；诊断质量（错误信息是否指明具体违反的约束）是评估该特性成熟度的关键指标，各测试附带诊断原文。
 
 ### 10.1 边界测试：非 `#[repr(transparent)]` 类型的 CoercePointee（编译错误）
 

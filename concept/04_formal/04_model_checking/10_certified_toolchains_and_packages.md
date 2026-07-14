@@ -241,3 +241,25 @@ fn main() {
     println!("{}", r);
 }
 ```
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((认证工具链与认证包清单))
+    certified core 子集的边界
+      认证等级与方法
+      测试与覆盖
+    认证工具链生态
+      Ferrocene Ferrous
+      HighTec Rust
+      AdaCore GNAT Pro
+    认证 crate 现状
+      crates io 无认证包
+      seL4 绑定的位置
+      实践中的替代策略
+```
+
+> **认知功能**: 本 mindmap 从本页「认证工具链与认证包清单」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

@@ -102,6 +102,7 @@
     - [11.5 边界测试：形式化谓词与 `Cell<T>` 的冲突（编译错误）](#115-边界测试形式化谓词与-cellt-的冲突编译错误)
     - [11.6 边界测试：`mem::forget` 与所有权谓词泄漏（编译错误）](#116-边界测试memforget-与所有权谓词泄漏编译错误)
     - [10.3 边界测试：unsafe 代码契约的形式化验证盲区（运行时 UB）](#103-边界测试unsafe-代码契约的形式化验证盲区运行时-ub)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 一、权威定义（Definition）
 
@@ -954,6 +955,7 @@ jobs:
     - [11.5 边界测试：形式化谓词与 `Cell<T>` 的冲突（编译错误）](#115-边界测试形式化谓词与-cellt-的冲突编译错误)
     - [11.6 边界测试：`mem::forget` 与所有权谓词泄漏（编译错误）](#116-边界测试memforget-与所有权谓词泄漏编译错误)
     - [10.3 边界测试：unsafe 代码契约的形式化验证盲区（运行时 UB）](#103-边界测试unsafe-代码契约的形式化验证盲区运行时-ub)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 八、形式化验证工具链映射
 
@@ -1441,3 +1443,28 @@ fn main() {
 ```
 
 > **修正**: RustBelt 的核心贡献：证明 Rust 的**safe 子集**是内存安全的，且 **unsafe 代码若满足契约**则不破坏安全保证。unsafe 契约：1) `&mut T` 必须独占（无其他活跃引用）；2) `&T` 必须有效（指向已初始化且未变性的内存）；3) `*const T`/`*mut T` 的使用必须恢复上述不变量后再创建 safe 引用。RustBelt 使用**Iris 分离逻辑**建模：1) `own(τ, ℓ)` — 位置 ℓ 拥有类型 τ 的值；2) `shr(κ, ℓ)` — 共享权限，允许多个读者；3) `na(τ, ℓ)` — `UnsafeCell` 的非原子权限，允许内部可变。验证工具：Miri（检查 Stacked Borrows/Tree Borrows）、Kani（有界模型检查）、Prusti（Hoare 逻辑）。这与 C 的"信任程序员"（无任何验证）或 Java 的 JVM（运行时检查，无形式化内存模型）不同——Rust 提供从类型系统（Type System）到形式化验证的多层安全网。(Source: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)) · (Source: [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html))
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((RustBelt Verification))
+    定理一致性矩阵 Theorem
+      矩阵总览 11 行
+      ⟹ 推理链
+    Concurrent
+      CSL 分离逻辑 资源不变量
+      关键概念
+    RustBelt 验证的标准库原语
+      已验证 待验证矩阵
+      验证难度分析
+    七之一 验证工具代码示例与 CI CD
+      Prusti requires
+      Kani kani proof
+    形式化验证工具链映射
+      工具链全景矩阵
+```
+
+> **认知功能**: 本 mindmap 从本页「RustBelt Verification」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

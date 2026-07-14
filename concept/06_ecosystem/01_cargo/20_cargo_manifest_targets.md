@@ -177,3 +177,28 @@ required-features = ["serde"]
 
 - **P2 生态/社区**: [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver) · [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml)
 - **P1 学术/形式化**: [Rudra: Finding Memory Safety Bugs in Rust at the Ecosystem Scale (SOSP 2021)](https://dl.acm.org/doi/10.1145/3477132.3483570)
+
+---
+
+## ⚠️ 反例与陷阱：`harness = false` 的测试目标缺少 main
+
+**反例**（rustc 1.97 实测编译失败，E0601）：
+
+```rust,compile_fail
+// Cargo.toml: [[test]] name = "custom" harness = false
+// tests/custom.rs:
+#[test]
+fn works() { assert_eq!(1 + 1, 2); }
+```
+
+`harness = false` 表示不使用 libtest，该文件被当作普通可执行目标编译；没有 `fn main` 即 E0601，`#[test]` 属性也不会生成入口。
+
+**修正**：
+
+```rust
+// tests/custom.rs 需要自带入口：
+fn main() {
+    assert_eq!(1 + 1, 2);
+    println!("custom harness ok");
+}
+```

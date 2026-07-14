@@ -137,7 +137,7 @@ graph TD
 
 ## 三、WASI 架构与能力安全
 
-本节从 WASI 的三层架构 与 能力安全模型 两个层面剖析「WASI 架构与能力安全」。
+WASI 的三层架构自底向上是：Wasm 核心运行时（线性内存与 trap 语义）、WASI ABI（witx/component 类型定义的系统接口）、宿主实现（wasmtime/wasmer 把接口映射到真实 OS）。能力安全模型是其设计核心：模块默认无任何外部能力，文件描述符以“目录句柄 + 相对路径”形式预授权（preopen），无法沙箱逃逸到授权目录之外——这与 POSIX 的全局命名空间（任意绝对路径）形成根本对比。
 
 ### 3.1 WASI 的三层架构
 >
@@ -296,7 +296,7 @@ World = 导入接口集 + 导出接口集
 
 ## 五、Rust `wasm32-wasip1` 或 `wasm32-wasip2` 目标
 
-本节从 `no_std` + `wasm32` 的约束与模式 与 错误处理跨边界 两个层面剖析「Rust `wasm32-wasip1` 或 `wasm3…」。
+`wasm32-wasip1`（及 wasip2 组件模型）目标上的 Rust 开发有两组实践约束：`no_std` 场景下 std 的 IO/线程/时间 API 全部不可用，需用 `core` + WASI 原生接口替代（p1 有 std 支持但受能力模型裁剪）；错误处理跨边界时 Rust 的 `Result` 必须映射到 Wasm 的 trap 或 wit 定义的 error 变体，`panic!` 默认 abort 且无法跨边界捕获。wasip2 的 component model 进一步用 WIT 接口类型使跨语言调用类型安全。
 
 ### 5.1 `no_std` + `wasm32` 的约束与模式
 >
@@ -582,7 +582,7 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：WASI（WebAssembly System Interf…、测验 2：WASI 的"能力安全"（Capability-Based…、测验 3：Rust 的 `wasm32-wasip1` target…、测验 4：Component Model 中的 `wit-bindge…等5个方面。
+以下自测题检验 WASI 的两个核心理解点：WASI 与 POSIX 的本质差异（能力安全 vs 全局命名空间）、wasip1 与 wasip2 目标的选择依据（单模块 CLI vs 组件模型多语言互操作）。作答后对照解析；目标选择类错题可回查本章目标约束一节，能力模型类错题回查架构一节。的"能力安全"（Capability-Based…、测验 3：Rust 的 `wasm32-wasip1` target…、测验 4：Component Model 中的 `wit-bindge…等5个方面。
 
 ### 测验 1：WASI（WebAssembly System Interface）的核心目标是什么？（理解层）
 

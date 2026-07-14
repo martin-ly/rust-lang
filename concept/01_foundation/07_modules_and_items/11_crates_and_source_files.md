@@ -274,3 +274,26 @@ flowchart TD
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
+
+---
+
+## ⚠️ 反例与陷阱：引用不存在的 crate 路径
+
+**反例**（rustc 1.97 实测编译失败，E0432）：
+
+```rust,compile_fail
+use crate::no_such_module::Thing;
+fn main() { let _ = Thing; }
+```
+
+`use` 路径必须在当前 crate 内可解析；文件未通过 `mod` 声明挂入模块树时，其内容对 `crate::` 不可见。
+
+**修正**：
+
+```rust
+mod no_such_module {
+    pub struct Thing;
+}
+use crate::no_such_module::Thing;
+fn main() { let _ = Thing; }
+```

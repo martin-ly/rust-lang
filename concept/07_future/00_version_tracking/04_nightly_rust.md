@@ -240,3 +240,20 @@ components = ["rust-src", "miri", "rustfmt", "clippy"]
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio) · [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures)
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 的发布流程与 Nightly Rust))
+    发布通道 火车模型
+      时间线示例
+    常见 Nightly 使用场景
+      使用 cargo nightly
+    RFC 流程与稳定化提案
+      Tracking Issue
+```
+
+> **认知功能**: 本 mindmap 从本页「Rust 的发布流程与 Nightly Rust」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

@@ -198,7 +198,7 @@ opt-level = 2
 
 ## 七、`[lints]` 与 `[hints]`
 
-「`[lints]` 与 `[hints]`」部分包含 `[lints]` 与  `[hints]` 两条主线，本节依次说明。
+`[lints]` 段把 lint 配置从代码属性上移到清单层：`[lints.rust]`/`[lints.clippy]` 统一声明级别，workspace 继承（`[lints] workspace = true`）让多 crate 项目一处定义全图生效，替代了每个 lib.rs 顶部重复的 `#![warn(...)]` 块。`[hints]` 是较新的提示段（如 `hints.mostly-unused` 提示编译器该 crate 多数时候未被使用，可优化增量编译行为）。两者体现同一趋势：构建行为配置从源码注释迁向声明式清单。
 
 ### `[lints]`
 

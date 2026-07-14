@@ -32,7 +32,7 @@ Cargo 按以下顺序读取配置，后读取的覆盖先读取的：
 
 ## 二、常用配置项
 
-「常用配置项」涉及替换 registry 源、设置默认 target与别名，本节逐一说明其要点。
+三类高频配置解决不同痛点：registry 源替换（`[source.crates-io] replace-with` + 镜像源，解决国内网络或企业合规）；默认 target（`[build] target = "x86_64-unknown-linux-musl"`，交叉编译项目免去每次 `--target`）；别名（`[alias] rr = "run --release"`，固化团队常用命令）。配置文件层级：项目 `.cargo/config.toml`（随仓库提交，团队共享）优先于用户级 `~/.cargo/config.toml`（个人偏好），企业策略放项目级才能保证 CI 与本地一致。
 
 ### 替换 registry 源
 

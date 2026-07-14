@@ -109,7 +109,7 @@ registry = "sparse+https://crates.company.com/index/"
 
 ## 四、本地 Registry 与 Directory Source
 
-本节围绕「本地 Registry 与 Directory Source」展开，覆盖 Local Registry 与  Directory Source 两个方面。
+两种本地源的适用场景不同：local registry（`registry = "local-registry"` 格式，带索引与 .crate 文件）模拟真实 registry 行为，支持版本解析与校验和验证，适合严格离线环境；directory source（`directory = "vendor/"`）直接指向 vendor 展开的源码目录，配置最简单但牺牲了版本解析（锁文件决定版本）。选择判据：需要离线 `cargo update` 能力选 local registry，只需冻结构建选 directory + `cargo vendor`。
 
 ### 4.1 Local Registry
 

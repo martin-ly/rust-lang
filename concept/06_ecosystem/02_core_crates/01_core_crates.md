@@ -66,7 +66,7 @@
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：serde 的核心机制（理解层）、测验 2：tokio 运行时选择（应用层）、测验 3：thiserror vs anyhow（应用层）、测验 4：bytes crate 的设计目标（分析层）等5个方面。
+本组测验覆盖核心 crate 的四个选型考点：serde 的 derive 机制（编译期生成序列化代码 vs 运行时反射）；tokio 运行时 flavor 选择（`current_thread` vs `multi_thread` 的适用场景）；thiserror（库定义错误类型）与 anyhow（应用传播错误）的分工；以及各 crate 的 MSRV 与特性组合。每题标注认知层级，错题按标注回查本章对应 crate 小节。4：bytes crate 的设计目标（分析层）等5个方面。
 
 ### 测验 1：serde 的核心机制（理解层）
 
@@ -1228,7 +1228,7 @@ graph TD
 
 ## 十、边界测试：核心 crate 的编译错误
 
-「边界测试：核心 crate 的编译错误」部分按边界测试：`serde` 的派生宏与字段缺失（编译错误）、边界测试：`tokio` 运行时未启动时调用 `spawn`（运行时…、边界测试：`thiserror` 与 `anyhow` 的混用（编译错…、边界测试：`tokio` 与 `Tokio` 的 channel 不兼…等7个方面的顺序逐层展开。
+核心 crate 边界测试固化三类入门期高频错误：serde 反序列化缺字段且无 `#[serde(default)]` 的运行时错误（与编译期 derive 错误相对照）；tokio 在 runtime 外调用 `tokio::spawn` 的 panic（“no reactor running”——必须处于 runtime 上下文）；thiserror 的 `#[from]` 与 anyhow 混用时的类型转换边界。三类用例分别对应序列化契约、运行时上下文与错误分层，是核心 crate 入门的第一批踩坑点。nyhow` 的混用（编译错…、边界测试：`tokio` 与 `Tokio` 的 channel 不兼…等7个方面的顺序逐层展开。
 
 ### 10.1 边界测试：`serde` 的派生宏与字段缺失（编译错误）
 

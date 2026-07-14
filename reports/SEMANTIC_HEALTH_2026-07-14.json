@@ -1,16 +1,16 @@
 {
   "date": "2026-07-14",
-  "total_score": 99.6,
+  "total_score": 99.5,
   "grade": "OK",
-  "metadata_score": 100.0,
+  "metadata_score": 99.8,
   "topology_score": 98.4,
   "dedup_score": 100.0,
   "kg_score": 100.0,
   "inputs": {
-    "metadata_flagged": "0/512",
+    "metadata_flagged": "1/512",
     "topology_T1_def_low_rate": 0.0,
     "topology_T2_top_rate": 0.749,
-    "overlap_hits": 570,
+    "overlap_hits": 571,
     "overlap_actionable_MERGE_DOCSINTERNAL": 0,
     "kg": {
       "K1_missing_required": 0,

@@ -7,7 +7,7 @@
       "D2": 0,
       "D3": 0,
       "D4": 0,
-      "D5": 0,
+      "D5": 1,
       "D6": 0
     },
     "pct": {
@@ -15,19 +15,30 @@
       "D2": 0.0,
       "D3": 0.0,
       "D4": 0.0,
-      "D5": 0.0,
+      "D5": 0.2,
       "D6": 0.0
     },
     "D2_base_files_with_asp_and_bloom": 316,
-    "flagged_files": 0
+    "flagged_files": 1
   },
   "examples": {
     "D1": [],
     "D2": [],
     "D3": [],
     "D4": [],
-    "D5": [],
+    "D5": [
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/02_cross_compilation.md",
+        "稳定层 nightly/preview 关键词 1 处"
+      ]
+    ],
     "D6": []
   },
-  "per_file": {}
+  "per_file": {
+    "concept/06_ecosystem/05_systems_and_embedded/02_cross_compilation.md": {
+      "D5": [
+        "稳定层 nightly/preview 关键词 1 处"
+      ]
+    }
+  }
 }

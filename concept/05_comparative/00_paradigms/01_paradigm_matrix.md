@@ -1272,3 +1272,28 @@ fn read_config(path: &str) -> Result<String, std::io::Error> {
 ```go
 // Go: 错误处理依赖编码惯例，忽略 err 也能编译
 // data, _ := os.ReadFile("config.toml") // 合法但危险
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Paradigm Matrix))
+    多语言形式化对比矩阵
+      核心维度矩阵 带 ⟹ 推理链
+      设计哲学谱系
+    扩展内容 形式化谱系与更多语言对比
+      编程语言形式化谱系
+      扩展对比矩阵 6 语言
+    新兴语言趋势分析
+      内存安全成为系统语言标配
+      扩展语言矩阵 Swift Kotlin
+    Rust vs C C
+      内存管理
+      空指针
+    Rust vs Haskell
+      纯度
+```
+
+> **认知功能**: 本 mindmap 从本页「Paradigm Matrix」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

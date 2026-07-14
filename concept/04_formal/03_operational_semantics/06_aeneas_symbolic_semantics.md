@@ -462,3 +462,28 @@ Aeneas 的目标子集 LLBC（Low-Level Borrow Calculus）刻意排除了若干 
 **文档版本**: 1.0
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Aeneas Symbolic Semantics))
+    LLBC 显式借用演算
+      设计思想
+      核心构造
+      与 MIR 的关系
+    符号化执行语义
+      符号值与符号状态
+      路径约束
+      Borrow Loan 规则 教学类比
+    模拟关系与声音性
+      模拟关系
+      声音性定理 教学类比
+      组合性
+    Aeneas 工具链与验证流程
+      Aeneas 流程
+```
+
+> **认知功能**: 本 mindmap 从本页「Aeneas Symbolic Semantics」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

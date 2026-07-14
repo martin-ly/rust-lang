@@ -154,7 +154,7 @@ rustup component add rustc-dev llvm-tools
 
 ## 五、Stable MIR / `rustc_public`
 
-本节从问题 与 解决方案 两个层面剖析「Stable MIR / `rustc_public`」。
+Stable MIR（`rustc_public`）要解决的问题：编译器内部 API（rustc_private crates）无任何稳定性承诺，静态分析工具（Miri、Kani、Prusti）每次 rustc 升级都要追逐内部重构，维护成本极高。解决方案是提供受版本控制的 MIR 视图 crate——工具只依赖 Stable MIR 的语义化版本接口，内部重构被隔离在适配层之后。当前状态是实验性（部分镜像类型与查询），目标是让第三方分析工具获得与 rustdoc/Clippy 相近的稳定性。
 
 ### 5.1 问题
 
@@ -191,7 +191,7 @@ rustup component add rustc-dev llvm-tools
 
 ## 嵌入式测验
 
-理解「嵌入式测验」需要把握测验 1：`rustc_driver` 和 `rustc_interf…、测验 2：外部 crate 使用`rustc_driver` 需要什…、测验 3：Stable MIR（rustc_public）试图解决什么…与测验 4：为什么 rustdoc 更适合用 `rustc_interf…，本节依次展开。
+本组测验检验编译器接口层的四个关键点：`rustc_driver` 与 `rustc_interface` 的分工（驱动入口 vs 编译会话管理）、外部 crate 接入 rustc_private 的前置条件（`RUSTC_BOOTSTRAP=1` 与 nightly 工具链）、Stable MIR 的动机（隔离内部 API 不稳定性）、以及 rustdoc 选择 rustc_private 而非 Stable MIR 的原因（需要类型信息与 HIR 而非仅 MIR）。错题建议回查本章对应小节。c_interf…，本节依次展开。
 
 ### 测验 1：`rustc_driver` 和 `rustc_interface` 的主要区别是什么？
 

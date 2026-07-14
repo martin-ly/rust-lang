@@ -47,7 +47,15 @@ const fn double<T: std::ops::Add<Output = T> + Copy>(x: T) -> T {
 
 ## 二、语法说明
 
-本节将「语法说明」分解为若干主题：声明 const trait、`~const Trait` 的含义与与稳定 Rust 的对比。
+const trait 是 const 泛型编程的最后一块拼图：它允许在 const 上下文中调用 trait 方法，使 `const fn` 不再局限于具体类型。本节语法说明按“声明—约束—对比”三步建立完整图景。
+
+三步的理解要点：
+
+1. **声明 const trait**：`const trait Trait` 标注表示该 trait 的所有方法都有 const 版本，实现者用 `impl const Trait` 提供 const 实现——编译器为每个方法生成 const 可调用的 MIR；
+2. **`~const Trait` bound**：泛型约束 `T: ~const Trait` 表示“在 const 上下文中要求 T 的 Trait 实现是 const 的”——`~` 前缀标记这是“效果多态”约束，同一泛型函数在 const 与运行时上下文可解析到不同实现；
+3. **与稳定 Rust 的对比**：稳定 Rust 中 const 上下文只能调用 `const fn` 具体函数，泛型代码因此无法进入 const 求值——const trait 打破这一限制，但当前（nightly）仍有方法数量与关联类型的限制。
+
+阅读 2.2 时重点理解 `~const` 的“双重实例化”语义，这是后续所有边界测试的理论基础。
 
 ### 2.1 声明 const trait
 
@@ -97,7 +105,17 @@ const fn add_if_possible<T: ~const std::ops::Add<Output = T>>(a: T, b: T) -> T {
 
 ## 三、与稳定 Rust 的对比及迁移建议
 
-本节从当前替代方案 与 迁移建议 两个层面剖析「与稳定 Rust 的对比及迁移建议」。
+在 const trait 稳定之前，稳定 Rust 有三类替代方案达成类似效果，各自有明确的适用边界。本节给出选型决策与未来的迁移路径。
+
+当前替代方案对比：
+
+| 方案 | 做法 | 代价 |
+|---|---|---|
+| 宏生成 | `macro_rules!` 为每个类型生成 const 函数副本 | 代码膨胀、无泛型抽象 |
+| 具体类型特化 | 放弃泛型，const 上下文只用具体类型 | 失去复用 |
+| 运行期降级 | 该计算移出 const 上下文 | 失去编译期求值收益 |
+
+迁移建议分两种情况：**新代码**若强依赖 const 泛型求值且可接受 nightly，直接用 const trait；**存量宏方案**不要急于迁移——const trait 的语法在 1.9x 周期仍可能调整（`~const` 的标记方式曾有多次变更），稳定化公告发布前保持宏方案是低风险投资。3.2 给出迁移检查清单与回退策略。
 
 ### 3.1 当前替代方案
 
