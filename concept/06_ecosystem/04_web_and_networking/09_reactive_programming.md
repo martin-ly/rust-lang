@@ -77,6 +77,7 @@
     - [测验 5：响应式编程中的"冷流"（Cold Stream）与"热流"（Hot Stream）有什么区别？（理解层）](#测验-5响应式编程中的冷流cold-stream与热流hot-stream有什么区别理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 **变更日志**:
 
@@ -232,7 +233,13 @@ FRP 组合子:
 
 ## 三、Reactive Streams 核心
 
-「Reactive Streams 核心」涉及四元接口模型、Rust 中的 Stream trait与组合子代数，本节逐一说明其要点。
+Reactive Streams 规范把响应式流抽象为四个接口，解决的核心问题是**背压（backpressure）**——消费者按自身能力向生产者请求数据量，避免快生产者压垮慢消费者：
+
+- **Publisher / Subscriber**: 生产者与消费者，`Subscriber` 通过 `Subscription` 表达需求（demand）。
+- **Subscription**: 背压的载体，`request(n)` 声明还能接收 n 个元素。
+- **Processor**: 兼具两端身份的转换节点。
+
+Rust 的对应物是 `futures::Stream` trait：以 `poll_next` 拉取模型天然实现背压（消费者不 poll 就没有数据），`map`/`filter`/`buffer` 等组合子构成声明式变换链。判定依据：需要与 JVM 响应式生态（Reactor/RxJava）互操作时用规范术语对齐；纯 Rust 项目直接用 `Stream` 组合子即可。
 
 ### 3.1 四元接口模型
 
@@ -465,7 +472,13 @@ impl<T> CreditBasedChannel<T> {
 
 ## 五、FRP 模型
 
-本节围绕「FRP 模型」展开，依次讨论 Signal vs Event、连续语义 vs 离散语义与Rust 中的 FRP 限制。
+FRP（Functional Reactive Programming）把**随时间变化的值**提升为一等公民，与事件流模型的区别在于语义的连续性：
+
+- **Signal vs Event**: Signal 是“任意时刻有值的连续量”（如鼠标位置），Event 是“离散发生的瞬间”（如点击）；FRP 系统通常同时提供两者及相互转换（`sample`、`hold`）。
+- **连续语义 vs 离散语义**: 连续语义允许按任意时间点采样，实现上仍离散化（帧/滴答驱动），但组合语义更清晰。
+- **Rust 中的限制**: FRP 依赖高阶闭包共享与动态依赖图，与所有权模型存在张力——信号图通常需要 `Rc<RefCell<_>>` 或 arena 索引，纯函数式 FRP 在 Rust 中工程成本偏高。
+
+判定依据：UI 状态绑定类需求用 `tokio::sync::watch` 或框架自带响应式原语即可，不必引入完整 FRP。
 
 ### 5.1 Signal vs Event
 >
@@ -813,7 +826,11 @@ async fn send_alert(log: &LogEntry) -> Result<(), AlertError> {
 
 ## 八、反命题与边界
 
-本节从反命题树 与 边界极限 两个层面剖析「反命题与边界」。
+响应式抽象常被过度套用，本节的反命题与边界分析围绕两个高频误判展开：
+
+- **“所有异步代码都应该改成 Stream”** —— 不成立。一次性的请求-响应是 `Future` 的领地，强行 `Stream` 化会引入无意义的背压与取消复杂度；只有“多值、持续到达”的序列才是 Stream 的适用域。
+- **“背压可以事后补”** —— 不成立。背压是协议级属性，接口定型后再加意味着破坏契约（如从无界 channel 切到有界），必须在设计期确定容量与溢出策略（丢弃/阻塞/采样）。
+- **边界极限**: 单流吞吐超过单核处理能力时，响应式抽象本身无能为力，需要分片（partition）到多流并行，此时背压策略需按分片独立定义。
 
 ### 8.1 反命题树
 >

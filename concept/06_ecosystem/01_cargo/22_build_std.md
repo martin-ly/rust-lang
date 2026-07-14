@@ -20,7 +20,14 @@
 
 ## 为什么需要 build-std
 
-本节从嵌入式场景 与 体积优化 两个层面剖析「为什么需要 build-std」。
+`build-std`（`-Zbuild-std`）让 Cargo 从源码编译标准库（core/alloc/std）而非使用 rustup 分发的预编译版本，两类场景使其成为刚需：
+
+- **嵌入式场景**: 预编译 std 只为官方目标提供——自定义 target JSON（新 MCU、特殊 ABI）没有预编译 std，必须 build-std；此外 `no_std` 项目的 `core`/`compiler_builtins` 也需匹配目标特性（如特定 FPU 变体）重新编译。
+- **体积优化**: `panic = "immediate-abort"`、`opt-level = "z"`、`build-std-features = "panic_immediate_abort"` 等选项只有重编 std 才能生效——预编译 std 是固定配置构建的；嵌入式与 WASM 场景的二进制体积优化（常可再减 20–40%）几乎全部来自 std 的重编参数。
+
+附带收益：std 也参与 LTO（跨 crate 边界的内联延伸到标准库内部）、以及 `-Zsanitizer` 等需要全栈插桩的能力。
+
+判定依据：官方目标的普通应用不需要 build-std（增加 2–5 分钟全量构建时间）；自定义 target 与体积敏感构建必须掌握。
 
 ### 嵌入式场景
 
@@ -55,7 +62,14 @@ graph LR
 
 ## 使用方法
 
-理解「使用方法」需要把握安装 nightly 工具链、配置 cargo、指定目标与Cargo.toml 配置，本节依次展开。
+build-std 的使用流程是“装源码组件 → 配置选项 → 指定目标 → 固化到 Cargo.toml”四步：
+
+- **安装 nightly 工具链与源码**: `rustup +nightly component add rust-src`——`rust-src` 组件提供 std 源码，是 build-std 的唯一额外依赖。
+- **配置 cargo**: 命令行 `cargo +nightly build -Zbuild-std=core,alloc,std --target <triple>`；`build-std-features` 逗号分隔追加特性（如 `panic_immediate_abort`）。
+- **指定目标**: 官方 triple 直接可用；自定义目标传 `--target path/to/target.json`，注意 JSON 中的 `llvm-target` 必须与 LLVM 支持的 triple 对齐。
+- **Cargo.toml 固化**: `.cargo/config.toml` 中 `[unstable] build-std = ["core", "alloc", "std"]` + `[build] target = "..."`，让团队成员无需记命令；同时把 `rust-toolchain.toml` 钉住 nightly 版本，避免工具链漂移。
+
+判定依据：CI 中必须缓存 `target/` 与预编译产物——build-std 使全量构建时间显著上升，无缓存的 CI 会放大该成本。
 
 ### 1. 安装 nightly 工具链
 
@@ -177,7 +191,12 @@ fn panic(_info: &PanicInfo) -> ! { loop {} }
 
 ## HAL 设计模式深化
 
-本节从类型状态模式（Type State） 与 寄存器访问模式 两个层面剖析「HAL 设计模式深化」。
+HAL 设计的两个深化模式把硬件约束编码进类型系统，是嵌入式 Rust“编译期正确性”的集中体现：
+
+- **类型状态模式（Type State）**: 外设配置状态（未配置/已配置/运行中）编码为泛型参数——`Uart<Unconfigured>` 只有 `configure()`，`Uart<Configured>` 只有 `write()`；误用（未配置就发送）是编译错误而非运行时的不可预测寄存器写。代价是每个状态生成独立类型（单态化），文档与错误信息复杂度上升。
+- **寄存器访问模式**: `svd2rust` 生成的 PAC 用 `read/modify/write` 三件套 + 闭包（`reg.modify(|r, w| w.field().bit(true))`）保证读-改-写的完整性；字段级 API（`w.baud().variant(...)`）消除位运算错误； volatile 语义由库内部封装，用户代码不含 unsafe。
+
+判定依据：新 HAL 设计默认采用类型状态（配置序列长的外设收益最大）；直接使用 PAC 时坚持三件套模式，绝不手写 `ptr::write_volatile` 组装寄存器值。
 
 ### 类型状态模式（Type State）
 

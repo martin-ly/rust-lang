@@ -247,7 +247,9 @@ function useWasm() {
 
 ## 🎨 Vue 集成
 
-「Vue 集成」部分的核心主题是 Vue 基本用法，本节展开说明。
+WASM 与宿主框架集成的本质是**控制权划分**：框架（Vue/React）持有 DOM 与渲染循环，WASM 模块作为纯计算单元被调用。Vue 集成的基本形态是：在组件 `setup` 中 `await import('...pkg')` 动态加载 wasm-pack 产物，把耗 CPU 的函数（图像处理、解析、加解密）委托给导出的 Rust 函数，结果再绑定到响应式状态。
+
+关键工程点：Vite/webpack 需配置 WASM 资源加载（`vite-plugin-wasm` 或 `?init` 导入）；模块初始化是异步的，组件需处理“加载中”状态；高频调用应复用同一模块实例，避免重复实例化线性内存。判定依据：单点重计算委托 WASM 收益明确；试图把整个组件状态搬进 Rust 通常得不偿失（边界编组成本会抵消收益）。
 
 ### Vue 基本用法
 
@@ -343,7 +345,12 @@ counter.increment()
 
 ## 🌐 Web API 集成
 
-本节从 Fetch API 与  Canvas API 两个层面剖析「Web API 集成」。
+Web API 集成让 WASM 从“纯计算沙箱”变成能操作宿主能力的应用，两条主线分别对应网络与图形：
+
+- **Fetch API**: 经 `web-sys` 的 `window().fetch_with_request()` 发起请求，返回 `Promise`，Rust 侧用 `wasm_bindgen_futures::JsFuture` 桥接为 `Future`；注意 CORS 与 credentials 语义完全继承浏览器规则。
+- **Canvas API**: 经 `web-sys` 获取 `CanvasRenderingContext2d` 直接绘制，每帧由 `requestAnimationFrame` 驱动；高频绘制场景应把路径计算放在 Rust 侧、只把绘制指令发向 Canvas，减少边界穿越次数。
+
+判定依据：每个 API 调用都是一次边界穿越，设计接口时按“一次调用传一批数据”的原则聚合（如整帧的绘制指令数组），而不是逐元素调用。
 
 ### Fetch API
 
@@ -392,7 +399,15 @@ pub fn draw_circle(canvas: &HtmlCanvasElement, x: f64, y: f64, radius: f64) {
 
 ## 🚀 实践示例
 
-「实践示例」部分包含示例 1: 简单计算 与 示例 2: 数组处理 两条主线，本节依次说明。
+两个实践示例构成互操作能力的最小闭环：示例 1 展示**标量进、标量出**的最简调用（导出 `add(a: f64, b: f64) -> f64`，JS 直接调用，无编组开销）；示例 2 展示**数组处理**——这是编组成本真正出现的场景。
+
+数组处理的三种传递方式按成本递增：
+
+1. **直接内存视图**: JS 侧 `new Float64Array(wasm.memory.buffer, ptr, len)` 零拷贝读写 Rust 线性内存——最高效但需理解内存布局。
+2. **wasm-bindgen `Box<[f64]>` 传递**: 自动编组，每次调用一次拷贝——简单但 O(n) 成本。
+3. **serde 结构体**: 仅当数据确实是异构结构时采用。
+
+判定依据：数据量大且调用频繁 → 方式 1；原型与低频调用 → 方式 2。
 
 ### 示例 1: 简单计算
 

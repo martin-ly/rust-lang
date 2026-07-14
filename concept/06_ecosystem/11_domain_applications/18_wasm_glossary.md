@@ -68,7 +68,13 @@
 
 ## 🌐 WASM 基础术语
 
-本节从 WebAssembly (WASM)、线性内存 (Linear Memory)、模块 (Module)、实例 (Instance)等8个方面切入，剖析「WASM 基础术语」的核心内容。
+WASM 基础术语构成理解整个生态的最小词汇表，可按“静态产物 → 运行实例 → 内存模型”三层归组：
+
+- **静态层**: 模块（Module）是编译后的 `.wasm` 二进制，包含函数、表、内存与全局变量的声明；它是无状态的，可被多次实例化。
+- **运行层**: 实例（Instance）是模块 + 导入绑定后的活对象，拥有自己的状态；宿主（Host）通过导入/导出函数与实例交互。
+- **内存层**: 线性内存（Linear Memory）是一块可增长的连续字节数组（按 64KiB 页计），是 WASM 与外部交换复杂数据的唯一通道——所有字符串、结构体最终都编码在这块内存里。
+
+其余术语（表 Table、全局 Global、起动函数 Start）均可挂接到这三层上理解。
 
 ### WebAssembly (WASM)
 
@@ -149,7 +155,13 @@
 
 ## 🦀 Rust 相关术语
 
-本节从 wasm32-unknown-unknown、wasm-bindgen、wasm-pack、类型映射 (Type Mapping)等5个方面切入，剖析「Rust 相关术语」的核心内容。
+Rust 相关术语围绕“目标 → 胶水 → 打包”的工具链与类型边界组织：
+
+- **`wasm32-unknown-unknown`**: 最基础的编译目标，不预设任何宿主系统接口（无 WASI），产出需宿主提供导入才能做 I/O。
+- **wasm-bindgen**: 生成 Rust↔JS 胶水层的工具与宏（`#[wasm_bindgen]`），定义了**类型映射（Type Mapping）**——`String` ↔ JS string（经编码拷贝）、`&[u8]` ↔ `Uint8Array` 视图、结构体 ↔ JS class 包装。
+- **wasm-pack**: 面向 npm 生态的打包发布工具，串联 bindgen、优化与包元数据。
+
+术语间的关键联系：类型映射的成本（拷贝次数）是互操作性能的决定因素，选工具链前先确认目标宿主是否支持组件模型——支持则 WIT 取代手写类型映射。
 
 ### wasm32-unknown-unknown
 
@@ -207,7 +219,13 @@
 
 ## 🔗 JavaScript 相关术语
 
-本节从 WebAssembly API、互操作 (Interop)与绑定 (Binding)切入，剖析「JavaScript 相关术语」的核心内容。
+JavaScript 侧术语描述宿主如何消费 WASM 模块，核心是**实例化 API 的两种形态**：
+
+- **`WebAssembly` API**: 浏览器/Node 内置命名空间，`compile`/`instantiate` 分离编译与实例化，`compileStreaming`/`instantiateStreaming` 直接消费 `fetch` 的 `Response`，边下载边编译——生产环境必须走 streaming 路径。
+- **互操作（Interop）**: 泛指 JS 与 WASM 之间的数据交换，成本由调用开销 + 数据编组共同决定。
+- **绑定（Binding）**: 预生成的胶水代码（如 wasm-bindgen 产物、emscripten 的 JS 库），把互操作细节封装为普通函数调用。
+
+术语辨析：`instantiate(bytes)` 需要完整字节数组（双倍内存占用），`instantiateStreaming(response)` 则流式处理——大模块下两者首屏时间可差数倍。
 
 ### WebAssembly API
 

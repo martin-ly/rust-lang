@@ -58,6 +58,7 @@
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 📐 知识结构
 
@@ -189,7 +190,12 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
 
 ## 2. 使用 tokio-tungstenite
 
-本节围绕「使用 tokio-tungstenite」展开，覆盖基础客户端 与 基础服务器 两个方面。
+tokio-tungstenite 是 Tokio 生态的事实标准 WebSocket 实现，客户端与服务器共享同一套**握手 → 帧流**抽象：
+
+- **基础客户端**: `connect_async(url)` 完成 HTTP Upgrade 握手，返回的 `WebSocketStream` 实现 `Stream + Sink`，用 `while let Some(msg) = ws.next().await` 消费消息——背压由拉取模型自然提供。
+- **基础服务器**: 监听 TCP，对每个连接调用 `accept_async(stream)` 完成服务端握手；生产部署通常在反向代理（Nginx）后终结 TLS，本进程只处理明文 WS。
+
+两侧共同的工程要点：`Message::Ping/Pong` 由库自动响应，但**读循环必须持续驱动**——长时间不 poll 读端会导致写缓冲堆积；关闭应走 `Close` 帧优雅握手而非直接断 TCP。
 
 ### 2.1 基础客户端
 
@@ -256,7 +262,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 3. 客户端开发
 
-本节围绕「客户端开发」展开，覆盖完整客户端 与 自动重连 两个方面。
+生产级客户端与示例代码的差距集中在**连接生命周期管理**，两个小节分别给出完整骨架与最关键的增强：
+
+- **完整客户端**: 连接建立 → 认证消息 → 心跳保活（应用层 ping，30s 间隔可穿透大多数 NAT 超时）→ 消息分发循环 → 优雅关闭；任一环节的错误都要进入统一的重连决策，而不是就地 panic。
+- **自动重连**: 指数退避（1s、2s、4s…上限 30s）+ 抖动（jitter）防止惊群；重连后需重新订阅频道/恢复会话状态——这意味着协议设计期就要区分“连接级状态”与“会话级状态”。
+
+判定依据：重连逻辑不要内联在业务循环里，应封装为 `Connection` 状态机（`Connecting/Connected/Backoff(attempt)`），测试时可注入虚拟网络驱动状态迁移。
 
 ### 3.1 完整客户端
 
@@ -606,7 +617,12 @@ fn main() {
 
 ## 6. 实战案例
 
-「实战案例」部分包含聊天室 与 实时数据推送 两条主线，本节依次说明。
+两个实战案例分别代表 WebSocket 的两类负载形态，架构差异集中在**扇出方式**：
+
+- **聊天室**: 写少读多的广播场景。单进程内用 `tokio::sync::broadcast` 频道 + 每连接一个转发任务即可支撑数千房间；跨实例时需要 Redis Pub/Sub 做消息总线，注意广播的“慢消费者丢消息”语义恰好符合聊天场景（补发由客户端拉历史完成）。
+- **实时数据推送**: 写多读多的订阅场景（行情、监控指标）。关键是订阅管理——用连接级订阅表（`HashMap<Topic, Vec<Sender>>`）避免全量广播；高频数据应在服务端合并刷新（如 100ms 一批），把帧率与数据率解耦。
+
+共同判定依据：单机连接数 > 5 万时先检查文件描述符上限与内存（每连接缓冲约 8–16KB），再考虑水平扩展。
 
 ### 6.1 聊天室
 

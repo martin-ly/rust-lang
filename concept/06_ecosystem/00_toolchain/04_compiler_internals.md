@@ -59,6 +59,7 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 > **Bloom 层级**: L4-L5
 **变更日志**:
@@ -234,7 +235,12 @@ pub enum ExprKind {
 
 ## 四、HIR：高级中间表示
 
-本节围绕「HIR：高级中间表示」展开，覆盖 HIR 的设计目标 与 类型检查 两个方面。
+HIR（High-level IR）是宏展开与名称解析之后的第一个完整语义表示，设计目标与类型检查功能构成其存在的两大理由：
+
+- **设计目标**: 把表面语法（surface syntax）“脱糖”为规范化形式——`for` 循环变为 `loop + match`、`?` 变为 `try` 块、`if let` 链展开为嵌套 `match`；所有后续分析只需处理这个小得多的语言内核，这是 rustc 可维护性的关键决策。
+- **类型检查**: HIR 是类型检查的输入——每个节点标注表达式类型，方法解析、自动引用/解引用（auto-ref/deref）、闭包捕获分析都在此层完成；错误信息中的 span 仍映射回原始源码，脱糖不丢失诊断精度。
+
+判定依据：读 rustc 源码时，涉及“某语法如何被检查”的问题从 HIR 层入手；涉及“某语法如何展开”的问题看 AST→HIR 的 lowering 过程。
 
 ### 4.1 HIR 的设计目标
 >
@@ -291,7 +297,12 @@ use_debug(42);  // 检查 i32: Debug → 是（标准库实现）
 
 ## 五、类型系统实现
 
-本节围绕「类型系统实现」展开，覆盖 Trait 解析与 Chalk 与 类型推断 两个方面。
+Rust 类型系统的实现是编译器中最复杂的部分，两个主题分别对应**约束求解**与**局部推断**：
+
+- **Trait 解析与 Chalk**: trait 求解被建模为逻辑编程问题——`T: Trait` 的目标（goal）经候选 impl/where 子句回溯证明；Chalk 把这个求解器重写为独立库（基于 SLG 求解算法），目标是让 rustc、rust-analyzer 与未来的 a-mir-formal 共享同一语义。当前 rustc 正逐步迁移到 next-gen trait solver。
+- **类型推断**: 局部推断基于 Hindley-Milner 思想的变体——变量声明可省略类型，编译器通过约束传播求解；但函数签名必须完整标注（无全局推断），这是编译速度与错误本地化的工程取舍。
+
+判定依据：遇到 trait 相关编译错误，先看是“无候选 impl”还是“多个候选歧义”；推断失败（`type annotations needed`）通常意味着泛型参数缺少约束锚点。
 
 ### 5.1 Trait 解析与 Chalk
 >
@@ -575,7 +586,12 @@ Tree Borrows 的核心规则:
 
 ## 八、后端：代码生成
 
-「后端：代码生成」部分包含 LLVM IR 生成 与 增量编译 两条主线，本节依次说明。
+后端把 MIR 翻译为机器码，两条主线分别回答“如何生成”与“如何加速”：
+
+- **LLVM IR 生成**: rustc 把单态化后的 MIR  lowering 为 LLVM IR（经 `rustc_codegen_llvm`），优化通道（inlining、vectorization、LTO）全部由 LLVM 接管；这也是 `#[inline]` 只是“提示”的原因——最终决策在 LLVM 的成本模型。替代后端（Cranelift、rustc_codegen_gcc）共享 MIR 接口，交换编译速度/优化深度。
+- **增量编译**: 编译单元按查询（query）系统组织，每个查询结果以哈希缓存；源码变更只失效依赖链上的查询——`cargo check` 快于 `build` 正因为跳过了代码生成查询。调试信息（`debuginfo`）与 LTO 是增量编译最大的两个性能敌人。
+
+判定依据：迭代慢先看 profile（`cargo build --timings`），codegen 占比高 → 开 Cranelift 或减 `codegen-units`；链接慢 → 换 lld/mold。
 
 ### 8.1 LLVM IR 生成
 >

@@ -56,7 +56,13 @@
 
 ## 1. 语言层
 
-「语言层」部分按 `assert_matches!` / `debug_assert_m…、`expr` metavariable 在 `cfg` 中的使用与s390x inline assembly vector regist…的顺序逐层展开。
+语言层的变更直接影响日常代码写法，三个条目按使用频率从高到低排列：
+
+- **`assert_matches!` / `debug_assert_matches!`**: 用模式而非布尔表达式断言值结构，`assert_matches!(resp, Ok(Status::Success { .. }))` 比手写 `match` + `panic!` 更精确地表达意图，失败信息自动打印实际值。
+- **`expr` 元变量在 `cfg` 中的应用**: 宏规则（macro_rules）中 `expr` 片段可与 `#[cfg(...)]` 条件组合，减少为不同平台复制整条规则的需要。
+- **s390x 内联汇编向量寄存器**: 平台特定能力补齐，`asm!` 在 IBM Z 上可使用向量寄存器约束，仅影响该架构的底层库。
+
+判定依据：前两项面向所有开发者，可立即采用；第三项仅在 s390x 目标上相关。
 
 ### 1.1 `assert_matches!` / `debug_assert_matches!`
 
@@ -88,7 +94,14 @@ debug_assert_matches!(result, Ok(n) if n > 0);
 
 ## 2. 标准库层
 
-「标准库层」涉及 `core::range` Copy 类型、`NonZero` 范围迭代、`From<T>` 扩展与`valid for read/write` 定义重构，本节逐一说明其要点。
+标准库层的四个变更都指向同一主题：**让常用类型更“好用”而不破坏既有语义**。
+
+- **`core::range` Copy 类型**: 新范围类型实现 `Copy`，在泛型算法中传递不再触发移动语义问题。
+- **`NonZero` 范围迭代**: `NonZeroU32` 等可直接参与范围迭代，省去手动偏移 + unwrap 的样板。
+- **`From<T>` 扩展**: 常用转换覆盖更多整数/引用组合，减少显式 `as` 强转（强转会静默截断）。
+- **`valid for read/write` 定义重构**: 指针有效性（validity）契约的措辞澄清，影响 unsafe 代码的未定义行为（UB）判定边界——写 unsafe 代码者应重读该节。
+
+判定依据：前三项是便利性提升，升级即受益；第四项是语义澄清，unsafe 代码需对照自查。
 
 ### 2.1 `core::range` Copy 类型
 
@@ -155,7 +168,13 @@ let _: LazyLock<i32, fn() -> i32> = LazyLock::from(2026);
 
 ## 3. Cargo 与工具链
 
-本节将「Cargo 与工具链」分解为若干主题： git + alternate registry 共存、安全修复与rustdoc。
+Cargo 与工具链层的变更聚焦**依赖来源多样化**与**供应链安全**，对多 registry 的企业环境影响最大：
+
+- **git + alternate registry 共存**: 同一依赖图可同时引用 git 源与备用 registry 源，解析规则明确化，私有 registry 与上游补丁（patch）的混用不再需要变通方案。
+- **安全修复**: 修补了依赖解析与凭证处理中的若干问题，升级建议级别为“尽快”。
+- **rustdoc**: 文档生成的搜索与链接行为改进，内部 `rustdocflags` 可按 `cfg` 条件配置。
+
+判定依据：使用 `[patch]` + 私有 registry 的团队应优先验证 3.1 的行为变化；其余项目常规升级即可。
 
 ### 3.1 git + alternate registry 共存
 

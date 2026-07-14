@@ -227,7 +227,12 @@ fn main() { /* ... */ }
 
 ## 二、Frontmatter 语法详解
 
-本节从完整字段支持 与 依赖解析机制 两个层面剖析「Frontmatter 语法详解」。
+Frontmatter 是 cargo-script 的清单载体——单文件顶部 `---` 围栏内的 TOML 片段，语义与 `Cargo.toml` 对齐但做了脚本化裁剪：
+
+- **完整字段支持**: `[dependencies]` 段直接复用 Cargo 语法（`rand = "0.8"`、`serde = { version = "1", features = ["derive"] }`），另支持 `edition`、`rust-version` 等包元数据；不支持 workspace、build script 与多 target——这些超出“单文件脚本”的设计边界。
+- **依赖解析机制**: cargo 为每个脚本文件生成匿名 crate（manifest 即 frontmatter），依赖图独立解析并锁定到脚本专属的 lockfile 缓存；同一脚本的重复运行命中编译缓存，冷启动成本只在首次或依赖变更时支付。
+
+判定依据：frontmatter 不适合表达的内容（feature 组合复杂、需要 build.rs）就是 cargo-script 的适用边界——此时应转为正式 crate。
 
 ### 2.1 完整字段支持
 >
@@ -353,7 +358,13 @@ graph TD
 
 ## 四、工程实践
 
-理解「工程实践」需要把握快速 CLI 原型、CI/CD 辅助脚本与数据处理与临时任务，本节依次展开。
+cargo-script 的工程价值在“编译型语言的脚本化”，三类场景按典型收益排序：
+
+- **快速 CLI 原型**: 验证 API 用法、测试 crate 行为的一次性程序——`cargo script demo.rs` 即写即跑，原型成熟后用 `cargo new` 升级为正式 crate（frontmatter 内容可直接迁入 `Cargo.toml`）。
+- **CI/CD 辅助脚本**: 替代 CI 中的 Python/bash 小工具——类型安全消除“字符串路径拼接错一位”类事故，`anyhow` + `std::process::Command` 覆盖绝大多数自动化需求；CI 镜像已有 Rust 工具链时零额外依赖。
+- **数据处理与临时任务**: 日志分析、格式转换、一次性迁移脚本——`serde_json`/`csv`/`regex` 的组合在类型层面保证解析逻辑，比动态语言脚本多一道编译期校验。
+
+判定依据：脚本寿命超过两周或被多人维护时，升级为正式 crate——cargo-script 是原形态，不是产品形态。
 
 ### 4.1 快速 CLI 原型
 
@@ -424,7 +435,12 @@ fn main() {
 
 ## 五、形式化定位
 
-「形式化定位」部分包含匿名 Crate 语义 与 与模块系统的关系 两条主线，本节依次说明。
+cargo-script 的形式化定位回答“单文件如何嵌入 Cargo 的 crate 模型”，两条主线分别解释语义与边界：
+
+- **匿名 Crate 语义**: 每个 `.rs` 脚本被 cargo 提升为一个匿名 binary crate——frontmatter 是 manifest，文件本体是 `main.rs`，缓存目录充当 `target/`；这一提升是纯粹的“包装变换”，不引入任何新的语言语义——脚本内代码与普通 crate 代码行为完全一致（edition 按 frontmatter 声明，缺省为最新稳定 edition）。
+- **与模块系统的关系**: 单文件脚本不能有相邻的模块文件（没有 crate 根目录），多模块需求必须用内联 `mod foo { ... }`；`use` 外部 crate 经 frontmatter 依赖解析后与普通 crate 无异。
+
+判定依据：匿名 crate 语义意味着所有适用于普通 crate 的工具（clippy、rustfmt、test）同样适用于脚本——`cargo script --test` 可运行脚本内的 `#[test]`。
 
 ### 5.1 匿名 Crate 语义
 

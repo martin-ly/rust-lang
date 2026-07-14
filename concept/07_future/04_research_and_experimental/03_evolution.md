@@ -656,7 +656,13 @@ Rust 进入 Linux 内核是语言演进史上最重大的外部验证事件：
 
 ### 3.7 未来语言设计方向
 
-本节围绕「未来语言设计方向」展开，依次讨论 Effects System（效应系统）、Generic Const Items（泛型 const 项）与Type Alias Impl Trait（TAIT）。
+未来语言设计的三个方向代表不同的复杂度投入，按成熟度排序：
+
+- **Effects System（效应系统）**: 把 `const`/`async`/fallible 等“函数效应”抽象为可泛型的维度，目标是消除“每个效应维度 × 每个 API”的组合爆炸（如 `try_` 前缀家族）；处于早期研究阶段，关键字泛型（keyword generics）是其主要提案形态，距离稳定化最远但潜在收益最大。
+- **Generic Const Items（泛型 const 项）**: 允许 `impl` 块中定义依赖泛型参数的 `const` 项（如 `const SIZE: usize = N * 2`），是 const generics 拼图的自然延伸；2025 起进入 Project Goals，nightly 已有可用实现。
+- **TAIT（Type Alias Impl Trait）**: `type Foo = impl Trait;` 让不透明类型可命名，解决 `impl Trait` 无法存入结构体字段的长期痛点；长期卡在“定义用途（defining uses）”语义上，是三者中最接近稳定的。
+
+判定依据：项目规划可预期 TAIT 先行落地；effects system 应按“多年期”跟踪，不宜写入近期技术选型假设。
 
 #### 3.7.1 Effects System（效应系统）
 
@@ -765,7 +771,13 @@ timeline
 
 ## 五、官方来源与追踪
 
-本节围绕「官方来源与追踪」展开，依次讨论 Rust Lang Team Blog、Inside Rust、RFC 追踪、其他官方渠道等5个方面。
+语言演进的信息源按**决策权重**分层，跟踪时应从权威层向下：
+
+- **Lang Team Blog / Inside Rust**: 团队决策与方向声明的第一发布渠道（如“keyword generics 实验启动”），属于结论层信息。
+- **RFC 追踪（rust-lang/rfcs）**: 特性从动机到设计细节的完整记录，FCP（Final Comment Period）阶段是社区影响决策的最后窗口；重大特性必读其 RFC 原文而非二手解读。
+- **其他渠道**: Zulip（t-lang 流）看设计讨论过程，This Week in Rust 做周报级聚合，各 Project Goal 的 tracking issue 看执行进度。
+
+判定依据：技术选型引用演进信息时，区分“已合并 RFC”（方向确定，时间不定）与“team 提议”（方向都可能变）——只有前者可纳入路线图的低置信度规划。
 
 ### 5.1 Rust Lang Team Blog
 >
@@ -1112,7 +1124,12 @@ graph TD
 
 ## 十、边界测试：语言演进的编译错误
 
-本节从边界测试：Edition 迁移中的关键字冲突（编译错误） 与 边界测试：`const generics` 的泛型参数推断（编译错误） 两个层面剖析「边界测试：语言演进的编译错误」。
+Edition 迁移的编译错误集中于**关键字预留**与**语义收紧**两类：
+
+- **关键字冲突**: 新 edition 预留的关键字（如 `gen`、`try` 的历史案例）会让旧代码中的同名标识符报错；`cargo fix --edition` 自动加 `r#` 原始标识符前缀（`r#gen`）完成迁移，这是 edition 机制“不破坏既有代码”承诺的兑现方式。
+- **const generics 的泛型参数推断**: 泛型 const 参数参与表达式时（如 `[T; N + 1]`），稳定版只接受 `min_const_generics` 允许的受限形式；报错“generic parameters may not be used in const operations”意味着越过了稳定边界，需改写为额外泛型参数（`[T; M]` + 约束）或等待 `generic_const_exprs`。
+
+判定依据：edition 报错先用 `cargo fix` 自动迁移再人工复核；const generics 报错先确认是否需要 `generic_const_exprs`，能用额外参数表达就不要上 nightly。
 
 ### 10.1 边界测试：Edition 迁移中的关键字冲突（编译错误）
 

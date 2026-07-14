@@ -231,7 +231,16 @@ pub fn process_image_data(data: &[u8], width: u32, height: u32) -> Vec<u8> {
 
 ## 三、Rust WASM 工具链深度
 
-「Rust WASM 工具链深度」部分按 wasm-bindgen：JS 互操作的生成艺术、wasm-pack：构建与发布的统一入口、trunk：纯 Rust 前端应用打包器与cargo-component：WASM 组件模型原生支持的顺序逐层展开。
+Rust 到 WebAssembly 的工具链是一条四段流水线：**编译目标（target）→ FFI 胶水 → 构建发布 → 应用打包**。每个环节有事实标准工具，选型取决于目标宿主（浏览器/边缘运行时/组件模型）：
+
+| 环节 | 工具 | 解决的问题 |
+|---|---|---|
+| FFI 胶水 | `wasm-bindgen` | Rust↔JS 的类型编组（marshalling）与内存视图生成 |
+| 构建发布 | `wasm-pack` | 一键产出 npm 包，封装 bindgen 与 `wasm-opt` |
+| 前端打包 | `trunk` | 纯 Rust 前端（Yew/Leptos）的资源管线与 dev server |
+| 组件模型 | `cargo-component` | 生成符合 WASI Preview 2 的 `.wasm` 组件（WIT 接口） |
+
+判定依据：需要与现有 JS 生态深度互操作选 `wasm-bindgen` 路线；目标是可组合的服务端组件则直接走 `cargo-component` + WIT，跳过 JS 胶水层。
 
 ### 3.1 wasm-bindgen：JS 互操作的生成艺术
 
@@ -337,7 +346,13 @@ bindings::export!(Component with_types_in bindings);
 
 ## 四、WASM 组件模型详解
 
-理解「WASM 组件模型详解」需要把握 WIT：WASM 接口类型、Worlds 与 Packages与跨语言可组合性，本节依次展开。
+WASM 组件模型（Component Model）把 `.wasm` 从“内存 + 函数表”提升为**带类型接口的可组合单元**。其三个核心抽象构成一条依赖链：
+
+- **WIT（WASM Interface Types）**: 接口描述语言，定义 `record`/`variant`/`resource` 等高层类型，取代手写 FFI 编组。
+- **World**: 一个组件的“导入/导出契约”——声明它需要宿主提供什么、向宿主暴露什么，是链接（linking）的类型边界。
+- **Package**: WIT 的版本化命名单元（`namespace:package@version`），语义化版本决定接口兼容性。
+
+跨语言可组合性由此成立：Rust 组件导出的 `resource`，可被 Go/Python 组件按同一份 WIT 消费，运行时（如 wasmtime）在两端生成适配代码。判定依据：多语言插件系统、边缘计算的可替换模块应优先组件模型；单语言浏览器应用无需引入。
 
 ### 4.1 WIT：WASM 接口类型
 
@@ -508,7 +523,13 @@ let instance = linker.instantiate(&mut store, &module)?;
 
 ## 六、性能考量
 
-本节从 JS↔WASM 边界穿越成本、SIMD 与批量内存操作与流式编译与代码体积优化切入，剖析「性能考量」的核心内容。
+WASM 性能不是单点问题，而是三类成本的叠加，优化优先级应按测量结果排序：
+
+1. **边界穿越（boundary crossing）成本**: 每次 JS↔WASM 调用有固定开销，传 `String`/`Array` 还要编组；高频小调用比低频大调用更致命——应把循环移到 WASM 侧，粗粒度化接口。
+2. **吞吐类优化**: 128 位 SIMD（`+simd128`）与 `memory.copy`/`memory.fill` 批量指令可让数值内核接近原生的 70–90%。
+3. **加载时延**: `WebAssembly.compileStreaming` 边下载边编译；`wasm-opt -Oz` + 裁剪 `debug` 段可将体积压缩 30–50%，首字节时间（TTFB）敏感的页面必须做。
+
+判定依据：先用浏览器 Performance 面板区分“边界调用多”还是“WASM 内计算慢”，再选对应手段，避免盲目开 SIMD。
 
 ### 6.1 JS↔WASM 边界穿越成本
 

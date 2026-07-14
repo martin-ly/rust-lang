@@ -98,7 +98,13 @@
 
 ## 一、权威定义与核心概念
 
-「权威定义与核心概念」部分按 Rust → Wasm 的编译模型、wasm-bindgen 的互操作语义与wasm-pack 的工程化角色的顺序逐层展开。
+理解 Rust → Wasm 需要把三个概念放在同一条流水线上，它们分别回答“怎么编译”“怎么对话”“怎么交付”：
+
+- **编译模型**: `wasm32-unknown-unknown` 目标把 Rust 编译为无宿主假设的 Wasm 模块，`std` 被裁剪为内存/字符串等可移植子集；I/O 能力必须经宿主导入函数获得。
+- **wasm-bindgen 互操作语义**: 在模块边界生成胶水代码，把 Rust 的 `String`/`Vec`/结构体编组为 JS 对象，核心是线性内存（linear memory）上的指针 + 长度协议。
+- **wasm-pack 工程化角色**: 封装 bindgen 调用、`wasm-opt` 优化与 npm 包元数据生成，是面向 JS 生态的标准交付工具。
+
+判定依据：不面向 JS（如服务端插件）时跳过 bindgen，直接使用组件模型或 WASI 接口。
 
 ### 1.1 Rust → Wasm 的编译模型
 >
@@ -249,7 +255,16 @@ wasm-pack 工作流:
 
 ## 二、前端框架深度对比
 
-理解「前端框架深度对比」需要把握 Yew：React 范式的 Rust 实现、Leptos：细粒度响应式与性能优先与框架选型矩阵，本节依次展开。
+Yew 与 Leptos 代表 Rust 前端的两种范式，差异集中在**响应式粒度**与**虚拟 DOM 的有无**：
+
+| 维度 | Yew | Leptos |
+|---|---|---|
+| 范式 | React 式组件 + 虚拟 DOM | 细粒度信号（signal）+ 无虚拟 DOM |
+| 更新机制 | diff 后打补丁 | 依赖追踪，精确更新受影响节点 |
+| 同构渲染 | 有限 | 一等公民（SSR/hydration） |
+| 学习曲线 | React 用户平滑 | 需理解信号语义 |
+
+选型矩阵的关键因子：团队背景（React 经验 → Yew）、性能与包体积敏感度（→ Leptos）、SSR 需求（→ Leptos）。判定依据：两者都成熟可用，先用各自官方模板搭同一原型页面，以开发体验与构建产物体积定案。
 
 ### 2.1 Yew：React 范式的 Rust 实现
 >
@@ -449,7 +464,13 @@ pub fn deallocate_vec(ptr: *mut u8, size: usize) {
 
 ## 四、工具链与工程实践
 
-本节从目标三元组与编译配置 与 调试与测试策略 两个层面剖析「工具链与工程实践」。
+工具链层面的决策集中在**编译目标**与**可观测性**两端：
+
+- **目标三元组选择**: `wasm32-unknown-unknown`（浏览器/纯计算，无系统接口）vs `wasm32-wasip1`（WASI Preview 1，有文件/时钟等能力）vs `wasm32-wasip2`（组件模型）；选错目标会导致 `std::fs` 等 API 在编译期或运行期不可用。
+- **编译配置**: release 构建默认开 `opt-level = "z"` + `lto = true` + `codegen-units = 1`，配合 `panic = "abort"` 可再减 10–20% 体积（代价是 panic 不可捕获）。
+- **调试与测试**: `wasm-bindgen-test` 在浏览器/Node 中跑 `#[wasm_bindgen_test]`；调试靠 `console_error_panic_hook` 输出 Rust panic 信息，DWARF 调试需浏览器实验性支持。
+
+判定依据：体积敏感场景把 `wee_alloc` 换成默认分配器前先测量——1.70+ 默认分配器的 Wasm 体积已大幅改善。
 
 ### 4.1 目标三元组与编译配置
 

@@ -441,7 +441,13 @@ unsafe extern "C" {
 
 ## 六、维度五：编译期计算能力
 
-「维度五：编译期计算能力」部分按 Inline const blocks（1.79 stable）、Const in inline assembly（1.82/1.87…与`core::hint::cold_path`（1.95 stable）的顺序逐层展开。
+编译期计算能力的扩张是近年版本最稳定的趋势之一，三个里程碑层层递进：
+
+- **Inline const blocks（1.79 stable）**: `const { ... }` 表达式让任意位置嵌入编译期求值块，泛型上下文中写 `const { N * 2 }` 不再需要具名常量项，是 const generics 人体工学的关键补丁。
+- **Const in inline assembly（1.82/1.87 递进）**: `asm!` 模板支持 `const` 操作数，编译期常量可直接嵌入汇编约束——此前只能走 `imm` 变通，对底层库（加密、SIMD 内核）是实质能力解锁。
+- **`core::hint::cold_path`（1.95 stable）**: 把“此分支冷”的提示从 nightly 的 `likely/unlikely` 民间封装提升为标准 API，让分支预测提示可移植、可审计。
+
+趋势判定：const 上下文中可调用的标准库函数每个版本都在增加（const 化浪潮），写库时应优先选择“已有 const 等价物”的 API，为调用方保留编译期求值选项。
 
 ### 6.1 Inline const blocks（1.79 stable）
 
@@ -522,7 +528,13 @@ timeline
 
 ## 八、形式化洞察：三个趋势
 
-理解「形式化洞察：三个趋势」需要把握趋势 1：从隐式推断到显式契约、趋势 2：效果系统（Effect System）的原型化与趋势 3：Unsafe 边界的模块化与内推，本节依次展开。
+跨版本观察，Rust 语言演进呈现三条可辨识的形式化趋势，每条都有连续的版本证据链：
+
+- **趋势 1：从隐式推断到显式契约**: `impl Trait` 的 `use<..>` 精确捕获、`unsafe extern`/`unsafe` 属性的显式标注——编译器推断的“魔法”被可审计的显式声明取代，代价是少量样板，收益是语义稳定。
+- **趋势 2：效果系统（Effect System）的原型化**: `async`（已稳定）、`gen`（预留关键字）、`const`（持续扩张）、`try`（讨论中）被逐步统一为“效应维度”，关键字泛型是其终局形态的原型。
+- **趋势 3：Unsafe 边界的模块化与内推**: `unsafe` 从“函数级开关”细化为“表达式级 + 属性级”，配合 Miri 与 Kani 的普及，unsafe 的审查单元持续缩小。
+
+判定依据：三条趋势都指向同一设计哲学——“让正确性约束尽可能机器可检查”，库设计应顺势而为（显式标注、缩小 unsafe 块）。
 
 ### 趋势 1：从隐式推断到显式契约
 >
@@ -991,7 +1003,14 @@ Rust 1.96.0 已按计划进入 stable 通道；1.96.1 为 1.96 系列推荐 patc
 
 ## 十四、社区与生态动态（2025–2026）
 
-「社区与生态动态（2025–2026）」部分按 2025 State of Rust Survey 关键发现、WebAssembly 目标重大变更（Rust 1.96）、NVIDIA GPU 目标（nvptx64-nvidia-cuda）基…、Rust Foundation 2026–2028 战略发布等59个方面的顺序逐层展开。
+2025–2026 的社区与生态动态可按“谁在投入”分为四类信号源，本节条目均来自公开公告与调查：
+
+- **用户侧**: State of Rust Survey 的关键发现——采用率持续增长、主要顾虑从“学习曲线”转向“编译时间与生态成熟度”，直接影响官方 Project Goals 的优先级排序。
+- **平台侧**: WASM 目标的重大调整（1.96 的目标三元组演进）、NVIDIA GPU 目标（`nvptx64-nvidia-cuda`）的基线建立——Rust 的“系统语言”边界向加速器与浏览器两端扩展。
+- **治理侧**: Rust Foundation 的 2026–2028 战略发布，安全（Security Initiative）与互操作（C++/Python FFI）被列为资助重点。
+- **产业侧**: 主流云厂商与嵌入式厂商的 Rust 岗位与内部迁移公告持续增加。
+
+判定依据：跟踪生态动态优先看 survey 与 Foundation 战略（年度级信号），版本级细节以 release notes 为准。
 
 ### 12.1 2025 State of Rust Survey 关键发现
 

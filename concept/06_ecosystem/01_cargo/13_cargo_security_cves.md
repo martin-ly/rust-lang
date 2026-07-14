@@ -73,6 +73,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：deny 策略下调用废弃 API（rustc 1.97.0 实测）](#反例deny-策略下调用废弃-apirustc-1970-实测)
     - [✅ 修正：`MaybeUninit` 替代](#-修正maybeuninit-替代)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -181,7 +182,14 @@ CVE-2026-5223 (Medium)
 
 ## 二、缓解措施与安全实践
 
-本节围绕「缓解措施与安全实践」展开，依次讨论立即升级工具链、审计 registry 来源、验证 crate tarball与安全的 Cargo.toml 与 registry 配置。
+缓解措施的优先级按“消除暴露面 → 收敛信任域 → 验证剩余输入”排序，四步形成纵深防御：
+
+- **立即升级工具链**: 客户端修复是唯一根治手段——服务端限制无法保护使用旧 Cargo 的开发者，因为恶意 tarball/URL 在客户端解析阶段就已触发漏洞。
+- **审计 registry 来源**: 清点 `[registries]` 与 `[source]` 配置，移除不再使用的第三方 registry；每个额外 registry 都是一个独立的信任域与潜在凭证暴露面。
+- **验证 crate tarball**: 对私有 registry 的包做哈希锁定（`Cargo.lock` 的 checksum 字段），CI 中比对 `.crate` 文件哈希与发布记录。
+- **安全配置基线**: 统一团队的 `config.toml` 模板——显式 registry 列表、`replace-with` 定向到受信镜像、凭证用环境变量而非明文 `credentials.toml`。
+
+判定依据：措施 1 与 2 是零成本必做项；3、4 按供应链敏感度分级实施。
 
 ### 2.1 立即升级工具链
 
@@ -236,7 +244,13 @@ done
 
 ### 2.4 安全的 Cargo.toml 与 registry 配置
 
-本节从示例 1：限制依赖来源，避免意外引入第三方 registry、示例 2：配置私有 registry 并使用 source repla…与示例 3：CI 中集成安全扫描切入，剖析「安全的 Cargo.toml 与 registry 配置」的核心内容。
+三个配置示例覆盖从个人项目到企业环境的递进防护：
+
+- **限制依赖来源**: 项目级 `.cargo/config.toml` 中只声明受信 registry，配合 `cargo tree` 定期审查依赖图，防止 typosquatting 包经拼写相似名混入。
+- **私有 registry + source replacement**: `[source.crates-io] replace-with = "internal-mirror"` 把所有 crates.io 请求定向到内部镜像——镜像同时是缓存（构建加速）与审查点（入库前扫描）。
+- **CI 安全扫描**: `cargo audit`（已知漏洞）+ `cargo vet`（供应链审查共享）+ `cargo deny`（许可证/来源/重复版本策略）三件套纳入合并门禁，任一失败即阻断。
+
+判定依据：source replacement 对企业是刚需（出网管控）；个人项目至少应启用 `cargo audit` 的 CI 检查，成本接近零。
 
 #### 示例 1：限制依赖来源，避免意外引入第三方 registry
 
@@ -363,7 +377,13 @@ graph TD
 
 ## 十、安全边界与常见错误
 
-本节将「安全边界与常见错误」分解为若干主题：常见错误：误以为 crates.io 用户也受影响、常见错误：在旧版本 Cargo 上仅做服务端限制与常见错误：把 `.git` 后缀当作同一 registry。
+围绕这两个 CVE 的三个高频误判直接削弱防护效果：
+
+- **误以为 crates.io 用户也受影响**: 漏洞的触发面在第三方 registry 的 URL 处理与 tarball 提取路径；只使用官方 crates.io 的项目不受这两个 CVE 影响——但“不受影响”不等于“无需升级”，下一个 CVE 的影响面可能不同。
+- **仅在服务端做限制、客户端不升级**: 服务端可以拒绝恶意请求，但凭证泄露发生在客户端发送请求之前（URL 规范化差异导致凭证被发往错误主机），服务端措施无法闭环。
+- **把 `.git` 后缀当作同一 registry**: URL 规范化后 `https://host/reg` 与 `https://host/reg.git` 可能解析为不同 registry 条目，混用会导致同一来源被双重信任或凭证错配。
+
+判定依据：安全公告的“影响范围”段落是行动依据——逐条核对自身配置是否在暴露面内，而非凭印象判断。
 
 ### 10.1 常见错误：误以为 crates.io 用户也受影响
 

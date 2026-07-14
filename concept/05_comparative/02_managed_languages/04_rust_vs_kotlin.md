@@ -222,7 +222,13 @@
 
 ## 二、语言特性差异
 
-理解「语言特性差异」需要把握类型推断与泛型、扩展函数与 Trait与协程与 async/await，本节依次展开。
+Kotlin 与 Rust 同为“现代语言”但设计重心不同（开发者体验 vs 系统控制），三个特性对比最能体现分歧：
+
+- **类型推断与泛型**: 两者都有局部类型推断与泛型；Kotlin 的泛型有型变标注（`in`/`out` 声明处型变）但类型擦除导致运行期无法区分 `List<String>`/`List<Int>`；Rust 泛型单态化——无擦除、无运行期开销，`impl Trait`/GAT 提供 Scala 式的抽象能力但无 HKT。
+- **扩展函数 vs Trait**: Kotlin 扩展函数是静态分派的语法糖（不能覆写、不参与多态），适合给第三方类加便捷方法；Rust trait 是完全的多态机制（泛型约束 + 动态分派两吃），且受孤儿规则约束防止生态冲突——表达力 trait 胜，临时便利性扩展函数胜。
+- **协程 vs async/await**: Kotlin 协程是库实现（kotlinx.coroutines）的挂起函数，`suspend` 染色与调度器分离设计成熟；Rust `async/.await` 编译为状态机、零分配、无运行时预设——更底层但生态（tokio）承担调度角色，两者心智模型高度同构。
+
+判定依据：Kotlin 的设计优化“写得快”，Rust 优化“运行得准”——选型按场景的失败成本定。
 
 ### 2.1 类型推断与泛型
 >
@@ -332,7 +338,13 @@
 
 ## 三、工程实践差异
 
-理解「工程实践差异」需要把握构建系统、互操作性与工具链，本节依次展开。
+工程实践差异的三个维度决定团队的长期效率曲线：
+
+- **构建系统**: Gradle（Kotlin）灵活但配置即代码（Kotlin DSL）的复杂度随项目增长，构建缓存与增量编译需主动调优；Cargo 约定优于配置，90% 项目只需声明依赖——但定制构建逻辑（代码生成、多阶段）时 Gradle 的表达能力更强。
+- **互操作性**: Kotlin 与 Java 双向无缝（同一 JVM、共享类型系统），Android 生态是其主场；Rust 的互操作经 C ABI 与绑定生成器（`uniffi` 可为 Kotlin/Swift/Python 生成绑定）——Kotlin Multiplatform 与 Rust + uniffi 是“跨平台共享逻辑”的两条竞争路线。
+- **工具链**: Kotlin 的 IDE 支持（JetBrains 同源）是行业标杆，调试体验成熟；Rust 的 rust-analyzer 近年快速逼近， Miri（UB 检测）与 Kani（模型检查）等验证工具是 Kotlin 侧没有的能力维度。
+
+判定依据：Android/JVM 后端选 Kotlin；共享逻辑需触达嵌入式/高性能场景选 Rust + uniffi。
 
 ### 3.1 构建系统
 >
@@ -444,7 +456,11 @@
 
 ## 四、反命题与边界分析
 
-本节从反命题树 与 边界极限 两个层面剖析「反命题与边界分析」。
+Rust 与 Kotlin 对比中的两个高频误判：
+
+- **“Kotlin 的 null safety 与 Rust 的 Option 等价”** —— 接近但不等价。Kotlin 的可空类型（`String?`）在 JVM 边界（Java 互操作）处被迫退化为平台类型（`String!`），null 可经 Java 代码渗入；Rust 的 `Option` 没有这种“边界泄漏”——`unsafe`/FFI 之外的空值在类型层面不存在。此外 Kotlin 有 `!!` 逃生舱，纪律性依赖团队自觉。
+- **“协程比 async/await 高级，Rust 应该学 Kotlin”** —— 设计目标不同。Kotlin 协程依赖运行时的挂起机制（Continuation），Rust 的零成本约束要求 async 编译为无运行时的状态机——这使其可运行于嵌入式与内核；两者是同一思想在不同约束下的实现，而非代差关系。
+- **边界极限**: 需要 JVM 生态（Spring、Hibernate）的企业系统是 Kotlin 的锁定场景；需要毫秒级启动、MB 级内存或 `no_std` 的场景 Kotlin Native 的成熟度尚不足以替代 Rust。
 
 ### 4.1 反命题树
 

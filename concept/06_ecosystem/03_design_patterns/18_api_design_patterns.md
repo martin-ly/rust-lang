@@ -86,6 +86,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：`as_*` 方法返回临时对象的引用（rustc 1.97.0 实测）](#反例as_-方法返回临时对象的引用rustc-1970-实测)
     - [✅ 修正：返回拥有值（改名 `to_*`）或借用已有字段](#-修正返回拥有值改名-to_或借用已有字段)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 **变更日志**:
 
@@ -428,7 +429,13 @@ impl From<AppError> for (StatusCode, ProblemDetails) {
 
 ## 四、REST API 设计
 
-本节将「REST API 设计」分解为若干主题：路由与处理器、请求验证与序列化与OpenAPI 文档生成。
+REST API 设计的 Rust 实践围绕三个正交问题组织，分别对应路由层、数据层与契约层：
+
+- **路由与处理器**: `axum` 的提取器（extractor）模式把路径/查询/请求体声明为 handler 参数类型，类型即契约——`Path<u32>` 解析失败自动返回 400，无需手写校验；路由应围绕资源（resource）而非动作组织，动作用 HTTP 方法表达。
+- **请求验证与序列化**: `serde` + `validator` 组合：反序列化管形状（字段存在性与类型），验证器管约束（范围、格式）；错误应映射为结构化 422 响应（字段级错误列表），而非笼统 400。
+- **OpenAPI 文档生成**: `utoipa`/`aide` 从类型与 handler 注解生成 OpenAPI 3 规范，保证文档与实现同步——文档手写即腐烂。
+
+判定依据：handler 签名里出现 `String`/`serde_json::Value` 作为请求体类型，是契约未类型化的信号，应定义具名结构体。
 
 ### 4.1 路由与处理器
 >
@@ -746,7 +753,13 @@ impl SubscriptionRoot {
 
 ## 六、gRPC API 设计
 
-「gRPC API 设计」涉及 Protocol Buffers 与 Service 定义、流式 RPC与拦截器与中间件，本节逐一说明其要点。
+gRPC 在 Rust 中的事实标准是 `tonic`，设计要点按**契约 → 通信模式 → 横切逻辑**展开：
+
+- **Protocol Buffers 与 Service 定义**: `.proto` 是唯一事实源（single source of truth），`tonic-build` 在构建期生成 Rust 类型与 service trait；字段编号一旦发布不可复用，破坏性变更走新消息/新服务版本。
+- **流式 RPC**: 四种模式（一元/客户端流/服务端流/双向流）对应 `Stream` 抽象的不同组合；服务端流适合大结果集分页，双向流适合实时交互——但流式连接是有状态长连接，负载均衡需感知连接级（而非请求级）分发。
+- **拦截器与中间件**: `tonic::service::Interceptor` 处理认证/日志等横切逻辑，与 Tower 生态的 `Service` 中间件分层互补（拦截器看消息元数据，Tower 层看请求整体）。
+
+判定依据：内部服务间强类型契约 + 多语言 → gRPC；面向公网/浏览器 → REST 或 GraphQL。
 
 ### 6.1 Protocol Buffers 与 Service 定义
 >
@@ -1063,7 +1076,11 @@ async fn proxy_to_user_service(req: Request<Body>) -> Result<Response<Body>, Sta
 
 ## 九、反命题与边界
 
-「反命题与边界」部分包含反命题树 与 边界极限 两条主线，本节依次说明。
+API 设计领域的两个高频误判：
+
+- **“REST 已过时，新项目应该全上 gRPC/GraphQL”** —— 不成立。REST 的资源模型对公开 API 仍是兼容性最好的契约（浏览器原生可消费、缓存语义成熟、调试工具链最完善）；gRPC/GraphQL 解决的是特定痛点（强类型内部调用/灵活查询），不是全面替代。
+- **“API 版本化只要在 URL 里加 v1 就够了”** —— 不成立。版本化的难点在语义兼容：字段删除、类型变更、默认值变化都是破坏性行为，URL 版本号只是标记手段；真正的纪律是“只加不改”——新字段可空、旧字段保留、行为变更走新端点。
+- **边界极限**: 当客户端类型 > 3 种且查询模式差异巨大时，REST 的资源爆炸问题超过 GraphQL 的复杂度成本，此时切换才是净收益。
 
 ### 9.1 反命题树
 

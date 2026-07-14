@@ -78,6 +78,7 @@
     - [一致性算法](#一致性算法)
     - [分布式数据结构](#分布式数据结构)
     - [分布式计算模型](#分布式计算模型)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 > **变更日志**:
 >
@@ -182,7 +183,12 @@ FLP 不可能性的直观解释:
 
 ## 三、Paxos 与 Multi-Paxos
 
-本节围绕「Paxos 与 Multi-Paxos」展开，覆盖 Paxos 核心协议 与  Multi-Paxos 与日志复制 两个方面。
+Paxos 是共识算法的理论原点，理解它要区分**单值共识**与**日志复制**两个层次：
+
+- **Paxos 核心协议**: 两阶段（Prepare/Promise → Accept/Accepted）保证即使面对消息丢失与节点重启，集群最多就一个值达成一致；关键不变量是“多数派相交”——任意两个多数派必有公共节点，使提案号单调性得以传递。
+- **Multi-Paxos 与日志复制**: 单值 Paxos 每定一个值都要两轮通信；Multi-Paxos 通过稳定 leader 把 Prepare 阶段摊销为一次，后续日志条目只需 Accept 轮——这正是工程系统（Chubby、早期 ZooKeeper 类实现）采用的形态。
+
+判定依据：Paxos 的正确性论证优美但实现陷阱密集（提案号管理、活锁避免）；新项目应优先 Raft 系实现，Paxos 知识主要用于读懂既有系统与论文。
 
 ### 3.1 Paxos 核心协议
 
@@ -414,7 +420,15 @@ Rust 优势:
 
 ## 五、拜占庭容错共识
 
-本节将「拜占庭容错共识」分解为若干主题： PBFT：实用拜占庭容错、HotStuff：线性通信 BFT与Tendermint：链式 BFT。
+拜占庭容错（BFT）假设节点可能**任意作恶**（而非仅崩溃），代价是节点数要求从 2f+1 提高到 3f+1，通信复杂度从 O(n) 升到 O(n²) 起步。三个协议代表三代演进：
+
+| 协议 | 核心贡献 | 代价 |
+|---|---|---|
+| PBFT | 首个实用的 BFT，三阶段（pre-prepare/prepare/commit）达成共识 | 视图切换复杂、O(n²) 消息 |
+| HotStuff | 门限签名聚合把通信降到线性 O(n)，流水线化提案 | 依赖聚合签名密码学 |
+| Tendermint | 链式 BFT + 锁定机制，工程化程度高（Cosmos 底座） | 单轮延迟受最慢多数派节点影响 |
+
+判定依据：联盟链/许可链场景 BFT 是刚需，HotStuff 系（含其变体）是当前默认选择；信任域内部的系统不需要 BFT，Raft 足够且成本低一个量级。
 
 ### 5.1 PBFT：实用拜占庭容错
 
@@ -582,7 +596,12 @@ Precommit:
 
 ## 七、Rust 共识生态
 
-本节围绕「Rust 共识生态」展开，覆盖 raft-rs 与  hotstuff-rs / tendermint-rs 两个方面。
+Rust 共识生态的分层清晰：**库层**提供共识状态机，**应用层**证明其可支撑生产系统：
+
+- **raft-rs**: 从 TiKV 抽出的 Raft 库，只实现共识核心（选举、日志复制、成员变更），存储与网络由使用者注入——这种“状态机 + 回调”设计正是 Rust trait 抽象的典型应用，`openraft` 是其后起之秀，API 更现代且支持异步。
+- **hotstuff-rs / tendermint-rs**: BFT 侧的实现，tendermint-rs 同时包含轻客户端验证逻辑，服务于 Cosmos 生态的 Rust 链。
+
+生产背书：TiKV（raft-rs）与众多 Cosmos SDK 链（tendermint-rs 的 Go 原型）验证了协议实现可承载 PB 级数据与金融级正确性要求。判定依据：构建存储/数据库选 raft-rs 或 openraft；链场景按目标生态选 BFT 实现。
 
 ### 7.1 raft-rs
 

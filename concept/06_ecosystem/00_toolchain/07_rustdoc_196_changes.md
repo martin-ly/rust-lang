@@ -50,6 +50,7 @@
     - [7.2 `--remap-path-prefix` 与 `--remap-path-scope`](#72---remap-path-prefix-与---remap-path-scope)
     - [7.3 典型应用场景](#73-典型应用场景)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -68,7 +69,13 @@ Rust 1.96 的 Rustdoc 与文档生成工具链主要带来以下改进：
 
 ## 二、`target.'cfg(..)'.rustdocflags`
 
-本节围绕「`target.'cfg(..)'.rustdocflag…」展开，依次讨论背景、Rust 1.96 新增语法与典型应用场景。
+`target.'cfg(..)'.rustdocflags` 把 rustdoc 参数纳入 Cargo 的条件配置体系，解决“文档构建需要按平台差异化”的长期缺口：
+
+- **背景**: 此前 rustdoc 参数只能全局设置（`RUSTDOCFLAGS` 环境变量或 `[build] rustdocflags`），无法按目标平台区分——但文档内容常需平台特化（如为 `wasm32` 目标隐藏 OS API 文档、为嵌入式目标注入特定 `--cfg`）。
+- **新增语法**: `.cargo/config.toml` 中 `[target.'cfg(target_arch = "wasm32")'] rustdocflags = ["--cfg", "docsrs_wasm"]`，与既有 `rustflags` 的条件语法完全对称。
+- **典型应用场景**: docs.rs 风格的多平台文档（`--cfg docsrs` 按平台细分）、为特定目标启用 `--document-private-items`、嵌入式目标的 `--html-in-header` 注入。
+
+判定依据：单平台 crate 无收益；发布多平台库的团队应立即迁移掉 CI 中手写的 `RUSTDOCFLAGS` 分支逻辑。
 
 ### 2.1 背景
 
@@ -116,7 +123,13 @@ pub mod unix_only_api {
 
 ## 三、弃用（Deprecation）渲染改进
 
-本节围绕「弃用（Deprecation）渲染改进」展开，依次讨论变更内容、示例与建议。
+弃用（deprecation）信息的渲染改进针对“用户看不见弃用警告”这一文档可用性问题：
+
+- **变更内容**: `#[deprecated]` 项在 rustdoc 输出中获得更显著的视觉处理——侧边栏与列表页标注弃用状态，详情页把 `since` 版本与 `note` 迁移提示渲染为醒目的提示块，而非此前容易忽略的小字。
+- **示例效果**: 浏览依赖文档时，弃用 API 在索引页即可识别，不必点进详情才发现；配合编辑器内联提示，形成“列表可见 → 详情说明 → 编译警告”的三级提示链。
+- **建议**: crate 作者应补全 `#[deprecated(since = "x.y", note = "use foo instead")]` 的两个字段——`note` 是迁移路径的唯一权威说明，渲染改进使其价值放大；库升级指南文档（CHANGELOG）引用弃用项时应链接到对应文档页。
+
+判定依据：弃用纪律的检查项是“每个 `#[deprecated]` 都有 since + note”，缺字段的标注在新渲染下同样醒目地暴露。
 
 ### 3.1 变更内容
 
@@ -175,7 +188,14 @@ Rust 1.96 对 Rustdoc 生成的 HTML 侧边栏进行了多项可用性改进：
 
 ## 五、`missing_doc_code_examples` lint 改进
 
-理解「`missing_doc_code_examples` l…」需要把握背景、Rust 1.96 改进、启用方式与与 `cargo test --doc` 的关系，本节依次展开。
+`missing_doc_code_examples` lint 针对的是“文档完整性的最后一环”——公共 API 有文字说明但无可执行示例：
+
+- **背景**: rustdoc 已有 `missing_docs`（缺文档）lint，但“有文档无示例”的 API 对使用者的帮助显著更低——示例是类型签名无法表达的使用上下文（初始化顺序、所有权转移、错误处理路径）。
+- **1.96 改进**: lint 覆盖度与诊断信息改进，按项类型（fn/struct/trait）分别报告，配合 `#![warn(missing_doc_code_examples)]` 可在 crate 级启用渐进治理。
+- **启用方式**: 建议 `#![warn(...)]` 起步（不阻断构建），存量 crate 按模块渐进补齐；新 crate 可直接 `#![deny(...)]` 纳入门禁。
+- **与 `cargo test --doc` 的关系**: 该 lint 保证“有示例”，doctest 保证“示例正确”——两者组合构成文档示例的完整质量门；只有 lint 而无 doctest 执行，示例仍可能腐烂。
+
+判定依据：面向外部使用者的库应两者全开；内部工具 crate 至少开 warn 级。
 
 ### 5.1 背景
 

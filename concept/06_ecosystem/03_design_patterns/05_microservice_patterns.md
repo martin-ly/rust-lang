@@ -60,6 +60,7 @@
     - [测验 5：Rust 微服务的健康检查（Health Check）通常如何设计？（理解层）](#测验-5rust-微服务的健康检查health-check通常如何设计理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -107,7 +108,12 @@ graph TD
 
 ## 二、服务发现与注册
 
-「服务发现与注册」部分包含 Consul / etcd 客户端集成 与  Tower::discover 动态服务列表 两条主线，本节依次说明。
+服务发现解决“目标服务的当前地址集”这一动态问题，Rust 生态的两条主线分别对应**控制面集成**与**消费侧抽象**：
+
+- **Consul / etcd 客户端集成**: 服务启动时注册自身（地址 + 健康检查端点）， Consul 以 DNS/HTTP 暴露查询接口、etcd 以 watch 机制推送变更；`consul-rs`/`etcd-client` 提供原生异步客户端——生产实践是用 sidecar（agent）注册、应用只查询本地 agent，降低耦合。
+- **Tower::discover 动态服务列表**: `tower::discover::Change` 流把“地址集变更”抽象为 `Discover` trait，配合 `tower::balance::p2c`（power of two choices）组成客户端负载均衡——服务发现事件源可以是 DNS、Consul 轮询或 etcd watch，消费侧代码完全统一。
+
+判定依据：已有 Consul/etcd 基础设施直接集成；需要统一多种发现源（含静态配置）时以 Tower 抽象为边界，发现源实现 `Discover` 即可插拔。
 
 ### 2.1 Consul / etcd 客户端集成
 
@@ -235,7 +241,13 @@ async fn rate_limit_layer<B>(req: Request<B>, next: Next<B>)
 
 ## 四、熔断器
 
-本节围绕「熔断器」展开，覆盖状态机模型 (Closed/Open/Half-Open) 与  failsafe crate 实现 两个方面。
+熔断器（Circuit Breaker）防止故障服务的调用方被拖垮，状态机与实现细节决定其在生产中的真实行为：
+
+- **状态机模型**: Closed（正常计数失败率）→ Open（快速失败，不发起调用）→ Half-Open（放行探针请求，成功则回 Closed、失败回 Open）。三个关键参数：失败阈值（滑动窗口内的失败率，如 50%/10 次）、Open 持续时间（退避起点，如 5s）、Half-Open 探针数（如 3 次连续成功）。
+- **failsafe crate 实现**: `failsafe::Config::new().failure_rate_threshold(...).build()` 产出熔断器，`breaker.call(future).await` 包装任意异步调用，错误类型 `Error::Rejected` 表示快速失败；与 `tower` 的 `Service` 模型可组合为中间件层。
+- **半开竞态**: Half-Open 状态必须限制并发探针数——否则恢复瞬间的请求风暴会再次压垮刚恢复的服务（雪崩回环）。
+
+判定依据：熔断参数必须按下游的恢复特征调（冷启动慢的下游需要更长 Open 时间），默认值仅供参考。
 
 ### 4.1 状态机模型 (Closed/Open/Half-Open)
 >
@@ -598,7 +610,12 @@ Rust sidecar 优势:
 
 ## 十、综合示例
 
-本节围绕「综合示例」展开，覆盖极简微服务（标准库实现） 与 生产级微服务骨架（依赖外部 crate） 两个方面。
+两个综合示例构成微服务实现的光谱两端，对照阅读可看清“基础设施到底买了什么”：
+
+- **极简微服务（标准库实现）**: `std::net::TcpListener` + 手写 HTTP 解析 + 环境变量配置——展示微服务的本质只是“独立部署的进程 + 网络契约”；适合教学与探针类小工具，但手写 HTTP 解析、并发管理与序列化在生产中全是事故源。
+- **生产级骨架（crate 组合）**: `axum`（HTTP）+ `tonic`（gRPC）+ `sqlx`（存储）+ `tracing`（可观测）+ `tower` 中间件（超时/限流/熔断）+ `serde` 配置——每一层都是可替换的 trait 边界；骨架的核心纪律是**端口与适配器**：业务逻辑 crate 不依赖任何 Web/存储 crate，通过 trait 注入。
+
+判定依据：生产项目从骨架起步而非从极简起步——极简示例的全部价值是教学演示，复制它进生产等于放弃 Rust 生态十年的工程积累。
 
 ### 10.1 极简微服务（标准库实现）
 >

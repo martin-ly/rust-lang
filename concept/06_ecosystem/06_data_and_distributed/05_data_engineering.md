@@ -311,7 +311,13 @@ PostgreSQL WAL（Write-Ahead Log）:
 
 ## 四、数据转换层（Transformation）
 
-本节将「数据转换层（Transformation）」分解为若干主题： DataFrame 转换、SQL 查询引擎与Rust 中的 ETL 管道骨架。
+数据转换层是把原始数据变成可信数据资产的核心环节，Rust 生态提供三种互补的转换范式：
+
+- **DataFrame 转换（polars）**: 表达式 API（`select`/`filter`/`group_by`）声明转换逻辑，惰性引擎优化执行计划（谓词下推、列裁剪）；适合列式数据的清洗与聚合，类型错误（如对字符串列求和）在编译期暴露。
+- **SQL 查询引擎（DataFusion）**: 直接对 Parquet/Arrow 执行 SQL，适合分析师熟悉的声明式转换与即席查询；可嵌入应用作为“进程内 DuckDB”。
+- **ETL 管道骨架**: 生产管道的 Rust 骨架 = `tokio`（并发抽取）+ `object_store`（统一 S3/GCS/本地访问）+ `parquet`（列式落地）+ 结构化日志；每一阶段的输入输出 schema 用 Arrow `Schema` 显式声明，schema 漂移在管道启动时而非运行中途暴露。
+
+判定依据：转换逻辑复杂且需复用 → DataFrame；团队 SQL 为主 → DataFusion；两者都只是管道骨架中的转换算子。
 
 ### 4.1 DataFrame 转换
 
@@ -584,7 +590,12 @@ Rust 生态:
 
 ## 六、数据服务层（Serving）
 
-「数据服务层（Serving）」部分包含查询加速 与 数据 API 两条主线，本节依次说明。
+数据服务层把处理好的数据交付给查询负载，两条主线分别解决“快”与“可达”：
+
+- **查询加速**: 列式格式（Parquet）+ 统计信息（min/max 页眉、Bloom filter）让查询跳过无关行组；DataFusion 的执行引擎自动利用这些统计；进一步的加速手段是按查询模式排序/分区数据（Z-order、按租户分区）——物理布局对查询性能的影响常大于引擎优化。
+- **数据 API**: 把数据产品暴露为服务的三种形态——SQL 端点（DataFusion + `flightsql`/Arrow Flight，高吞吐列式传输）、REST/JSON（`axum` + Arrow→JSON，兼容性最好但序列化开销大）、订阅流（Arrow Flight streaming 或 Kafka，面向持续消费）。
+
+判定依据：分析型负载首选 Arrow Flight（零拷贝列式传输）；面向公网/第三方用 REST；Arrow 内存格式在 API 边界必须序列化，不存在“零序列化”的跨进程方案。
 
 ### 6.1 查询加速
 
@@ -711,7 +722,11 @@ Python 对比:
 
 ## 八、反命题与边界
 
-本节从反命题树 与 边界极限 两个层面剖析「反命题与边界」。
+Rust 数据工程的两个高频误判：
+
+- **“Rust 数据工具已经全面替代 Python/Spark”** —— 不成立。polars/DataFusion 在单机与中等规模上性能领先，但分布式调度（跨百节点的容错执行）、ML 生态集成、人才储备仍是 Spark/Python 的主场；Rust 的真实定位是“高性能数据组件”——嵌入式引擎、管道关键路径、边缘处理，而非平台整体替换。
+- **“列式格式总是更快”** —— 不成立。列式优势在分析型查询（少量列 × 大量行）；点查（按主键取整行）与写密集 OLTP 场景下行式更合适；Parquet 的小批量随机写会产生大量小文件，是数据湖运维的经典反模式。
+- **边界极限**: 单机内存容纳不了的数据量 ≠ 必须上分布式——DuckDB/DataFusion 的 out-of-core 执行可处理 10 倍内存的数据集，分布式的运维复杂度应有明确的规模阈值（如 TB 级日增量）作为触发条件。
 
 ### 8.1 反命题树
 

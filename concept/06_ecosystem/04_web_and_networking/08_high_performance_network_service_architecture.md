@@ -82,12 +82,20 @@
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
 ## 📐 知识结构
 
-本节围绕「知识结构」展开，依次讨论概念定义、属性特征、关系连接与思维导图。
+高性能网络服务的知识结构围绕一个核心矛盾展开：**单机吞吐极限 vs 水平扩展复杂度**。本节按四层递进组织：
+
+- **概念定义**: 界定吞吐（throughput）、尾延迟（tail latency）、连接规模（C10M 问题）等可量化目标。
+- **属性特征**: 拆解零拷贝、内核旁路（kernel bypass）、批处理（batching）等关键技术的收益与代价。
+- **关系连接**: 把 I/O 模型、NUMA 拓扑、网卡多队列等机制映射到具体瓶颈。
+- **思维导图**: 给出从“单机优化 → 多机分布式”的完整决策路径。
+
+阅读顺序建议：先建立度量体系（没有基准就没有优化），再按瓶颈定位选择对应章节。
 
 ### 概念定义
 
@@ -1183,7 +1191,15 @@ Per-Core 架构:
 
 ## 4. NUMA感知优化
 
-理解「NUMA感知优化」需要把握 NUMA架构基础、内存亲和性优化与网络中断绑定，本节依次展开。
+NUMA（Non-Uniform Memory Access）下，CPU 访问本地节点与跨节点内存的延迟可差 1.5–2 倍，带宽差更大。对网络服务而言，NUMA 失配的典型症状是：网卡中断落在 node0，而处理线程与连接内存分配在 node1，每个包都跨节点传输。
+
+三个层次的优化构成闭环：
+
+- **架构认知**: 用 `lscpu`/`numastat` 确认拓扑与跨节点流量占比（>10% 即值得优化）。
+- **内存亲和**: 线程启动时用 `numa_alloc_onnode`，或在分配器层做 per-node arena（jemalloc/mimalloc 的 arena 绑定）。
+- **中断绑定**: 网卡队列的 IRQ 通过 `/proc/irq/*/smp_affinity` 绑到与网卡同节点的核。
+
+判定依据：单机内存带宽未饱和前优先绑定；绑定后仍跨节点，说明连接调度未感知 NUMA，需按节点划分 listener。
 
 ### 4.1 NUMA架构基础
 
@@ -1463,7 +1479,15 @@ async fn run_numa_aware_worker(node: usize) {
 
 ## 5. 多队列网络编程
 
-本节将「多队列网络编程」分解为若干主题：多队列NIC原理、RSS/RPS/RFS配置与XPS优化。
+多队列网卡（multi-queue NIC）把收发包路径并行化到硬件队列，是 10Gbps+ 单机吞吐的前提。三层机制从硬件到内核再到发送侧：
+
+| 机制 | 方向 | 作用 |
+|---|---|---|
+| RSS（Receive Side Scaling） | 收 | 按五元组哈希把流分发到不同硬件队列 → 不同核 |
+| RPS/RFS | 收（软件） | 无多队列硬件时用软件模拟分发；RFS 额外跟踪流上次所在核 |
+| XPS（Transmit Packet Steering） | 发 | 把发送队列与核绑定，减少锁竞争与缓存颠簸 |
+
+Rust 侧的工程落点：`io_uring`/epoll 实例与队列一一对应（`SO_REUSEPORT` 或独占队列），worker 数 = 队列数 = 同 NUMA 节点核数。判定依据：`ethtool -S` 显示单队列丢包而 CPU 未满载时，先调 RSS 哈希与队列数，不要先加机器。
 
 ### 5.1 多队列NIC原理
 
