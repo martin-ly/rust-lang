@@ -93,6 +93,7 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -976,3 +977,23 @@ fn main() {
 
 > **反命题**: "Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 是万能解决方案，适用于所有场景" —— 错误。
 > 任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust for WebAssembly从))
+    一、权威定义与核心概念
+      1.1 Rust Wasm 的编译模型
+      1.2 wasm-bindgen 的互操作语义
+      1.3 wasm-pack 的工程化角色
+    二、前端框架深度对比
+      2.1 YewReact 范式的 Rust 实现
+      2.2 Leptos细粒度响应式与性能优先
+    三、性能特征与 Wasm 内存模型
+      3.1 Rust Wasm vs
+      3.2 线性内存模型与所有权映射
+      3.3 JS Wasm 互操作开销分析
+    五、反命题与边界分析
+      5.2 边界极限测试
+```

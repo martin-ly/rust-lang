@@ -675,3 +675,47 @@ WASM 组件模型（Component Model）是 1.98 周期嵌入式的核心跟踪项
 - [x] 在 `crates/c08_algorithms/src/rust_197_features.rs` 中维护 1.97/1.98 API 的等效实现与单元测试
 - [x] 补充 1.98 已确认标准库 API 预览（`float_algebraic`、`int_format_into`、`core::range`、`NonZero::from_str_radix`、`Box::as_ptr`、`hex_literal_case`）
 - **演进方向（待办）**: 待 1.98 特性稳定后，将本文件关键术语同步到术语表（`concept/00_meta/01_terminology/01_terminology_glossary.md`）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 1.98+ 前沿特性预览))
+    一、语言特性预览
+      1.1 Pin Ergonomics&pin
+      1.2 Reborrow Traits
+      1.3 Field Projections
+    二、标准库 API 预览
+      2.1 已确认进入 1.98 的 API
+      2.2 等待中 / 可能推迟至 1.98+ 的
+      2.3 Nightly 探测结果2026-06-28
+    三、编译器与工具链预览
+      3.1 Cranelift Backend生产级
+      3.2 Parallel Frontend
+      3.3 build-std
+    五、形式化与安全预览
+      5.1 Safety TagsRFC 3842
+      5.2 BorrowSanitizer
+      5.3 MemorySanitizer /
+    六、WebAssembly 与嵌入式预览
+      6.1 Wasm Components
+```
+
+
+## ⚠️ 反例与陷阱：在 stable 上直接调用预览 API
+
+**反例**：看到本页 `float_algebraic` 等 API 预览后，在 stable 项目里直接使用：
+
+```rust,compile_fail
+fn main() {
+    // 1.98 预览 API：f32::algebraic_add（浮点代数运算，允许重排优化）
+    let x = 1.0f32.algebraic_add(2.0);
+    println!("{x}");
+}
+```
+
+实测（rustc 1.97.0 stable, edition 2024）：`error[E0658]: use of unstable library feature `float_algebraic``。
+
+**陷阱本质**：预览页列出的 nightly-only API 在 stable 上没有入口。E0658 与 E0554 的区别在于：前者是「库 API 未稳定」，后者是「编译器拒绝 feature gate」——两者都不能靠配置绕过。
+
+**修正**：等待 1.98 稳定化（跟踪本页「零、1.98 周期跟踪清单」）；实验用 nightly + `#![feature(float_algebraic)]`，等效行为可先用 [`crates/c08_algorithms/src/rust_197_features.rs`](../../../crates/c08_algorithms/src/rust_197_features.rs) 中的演示实现过渡。

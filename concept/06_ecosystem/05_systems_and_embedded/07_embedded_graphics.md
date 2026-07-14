@@ -1188,3 +1188,23 @@ fn main() {
     println!("{}", banner_len());
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 嵌入式图形开发))
+    一、核心概念
+      1.1 嵌入式显示系统架构
+      1.2 色彩深度与帧缓冲
+      1.3 刷新率与触摸输入
+    二、显示技术概念矩阵
+    三、Rust 嵌入式图形栈
+      3.1 embedded-graphics
+      3.2 lvgl-rs
+      3.3 Slint UI
+    四、显示驱动与 HAL 集成
+      4.1 接口协议
+      4.2 DMA 与帧缓冲传输
+    五、字体渲染与文本布局
+```

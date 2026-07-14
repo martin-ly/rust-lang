@@ -71,6 +71,7 @@
     - [典型组合模式](#典型组合模式)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -946,3 +947,21 @@ fn main() {
 - **对偶**：与栈上直接值相对（间接 vs 内联），见 [Value vs Reference Semantics](../../01_foundation/03_values_and_references/02_value_vs_reference_semantics.md)。
 - **组合**：与 [Interior Mutability](02_interior_mutability.md) 组合共享可变状态。
 - **依赖**：析构语义依赖 [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((智能指针堆内存管理与共享语义))
+    一、核心概念
+      1.1 智能指针谱系
+      1.2 Box独占堆分配
+      1.3 Rc 与 Arc引用计数共享
+    二、技术细节
+      2.1 RefCell 与 Cell内部可变性
+      2.2 智能指针的组合模式
+      2.3 性能特征对比
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+```

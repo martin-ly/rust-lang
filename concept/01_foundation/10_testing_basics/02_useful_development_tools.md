@@ -51,6 +51,7 @@
   - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [⚠️ 反例与陷阱：debug 构建下整数溢出 panic（运行时陷阱）](#️-反例与陷阱debug-构建下整数溢出-panic运行时陷阱)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -321,4 +322,19 @@ fn main() {
     let c = a.checked_add(100);  // 显式检查：None
     println!("{b} {c:?}");
 }
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((常用开发工具))
+    一、官方工具链
+    二、IDE 与编辑器支持
+    三、开发工作流中的位置
+    四、配置示例
+      rustfmt.toml
+      .clippy.toml
+      Cargo.toml 开发配置
+    五、社区常用工具
 ```

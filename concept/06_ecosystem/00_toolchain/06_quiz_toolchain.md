@@ -641,3 +641,27 @@ RUST_BACKTRACE=1 cargo run
 
 专项测验题量更大、覆盖更全面，通常按难度分层；嵌入式测验更精简，直接关联刚阅读的概念内容，用于即时检验理解。
 </details>
+
+## ⚠️ 反例与陷阱
+
+工具链测验常以类型推断为考点，最直接的陷阱是标注与实际值不符。
+
+### 反例：类型标注与字面量不匹配（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0308
+fn main() {
+    let x: i32 = "hello"; // ❌ 类型不匹配
+    let _ = x;
+}
+```
+
+**实测错误**：`error[E0308]: mismatched types -- expected`i32`, found`&str``。
+
+### ✅ 修正：让字面量类型与标注一致（或改标注为 `&str`）
+
+```rust
+fn main() {
+    let x: i32 = 42; // ✅ 字面量类型与标注一致
+    let _ = x;
+}
+```

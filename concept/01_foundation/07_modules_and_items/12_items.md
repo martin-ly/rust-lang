@@ -50,6 +50,7 @@
   - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [⚠️ 反例与陷阱：重复定义同名项](#️-反例与陷阱重复定义同名项)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -406,4 +407,19 @@ fn main() { helper(); }
 fn helper() {}
 fn helper_v2() {}
 fn main() { helper(); helper_v2(); }
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((项))
+    一、什么是 Item
+    二、Item 的种类
+    三、常见 Item 示例
+      函数
+      类型别名
+      结构体与枚举
+    四、Item 的声明位置
+    五、可见性
 ```

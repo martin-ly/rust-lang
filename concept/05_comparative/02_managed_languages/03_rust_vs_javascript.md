@@ -68,6 +68,7 @@
     - [核心推理链](#核心推理链)
   - [权威来源（References · 跨语言国际权威对齐）](#权威来源references--跨语言国际权威对齐)
   - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -736,3 +737,21 @@ Rust 模块（Module）系统是编译期静态的，路径和可见性由编译
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/wasm-bindgen — 生态权威 API 文档（Rust 与 JavaScript/WASM 互操作，跨语言对照实践）](https://docs.rs/wasm-bindgen)（2026-07-12 验证 HTTP 200）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust vs JavaScript系统编程与脚本执))
+    一、核心概念
+      1.1 运行时模型编译 vs 解释
+      1.2 类型系统静态 vs 动态
+      1.3 内存模型所有权 vs GC
+    二、技术细节
+      2.1 异步模型对比
+      2.2 错误处理Result vs Throw
+      2.3 WASM两个世界的桥梁
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+```

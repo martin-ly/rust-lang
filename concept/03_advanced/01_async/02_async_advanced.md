@@ -62,6 +62,7 @@
     - [关键指标](#关键指标)
     - [测量工具](#测量工具)
   - [相关概念](#相关概念)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ### 8.8 Waker 契约与活性
 
@@ -672,3 +673,18 @@ async fn traverse_dir(path: &Path) -> Vec<String> {
 - [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) — Waker 契约之上的调度公平性
 - [Waker 契约深度解析](12_waker_contract_deep_dive.md) — Waker 契约两节的实现层纵深（RawWakerVTable 模式全集 + 违反反例集）
 - [Async Trait 对象安全](13_async_trait_object_safety.md) — dyn 兼容 async trait 的方案谱系与选型矩阵
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Async Await 高级主题))
+    Waker 契约与底层机制
+      Waker 契约与活性
+      Waker Context 底层机制
+    Stream 与 Sink trait 分析
+    Pin 与 impl Future 性能差异
+    并发验证工具
+      loom 并发模型检测
+      Miri 动态验证
+```

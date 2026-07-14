@@ -152,3 +152,14 @@ fn main() {
     println!("{}", r#gen);
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 2024 Edition 1.85.0+))
+    一、核心命题
+    二、Edition 机制核心原则
+    三、主要特性预览
+    六、权威来源
+```

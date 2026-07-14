@@ -72,6 +72,7 @@
     - [标准 Tag 库设想](#标准-tag-库设想)
     - [当前状态](#当前状态)
     - [行动建议](#行动建议)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -158,8 +159,10 @@ Rust 社区已存在 `#[safety]` 相关的实验性讨论：
 
 > **演进关系**: `unsafe extern` + `safe` 是 Safety Tags 的**前序步骤**——它已经在 FFI 边界引入了"安全/不安全"的显式标注概念。Safety Tags 将这一概念从 FFI 扩展到所有 unsafe 代码。
 > [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
-
-> **RFC #3842 进展（2026-07-12 自同主题重复页合并）**: Safety Tags 研究原型（[safety-tool slides](https://os-checker.github.io/slides/safety-tags)）已梳理出 **21 个基础标签**，可覆盖 std 中约 **96%** 的公开 `unsafe` API；RFC #3842 提案使用 `#[safety::requires(...)]` 在 unsafe 函数上声明安全前提、`#[safety::checked(...)]` 在调用点显式消除标签，并与 Verus 的 `requires`/`ensures`、Kani 的 harness 假设、Miri/BorrowSanitizer 的动态检查标签集形成映射。(Source: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [Safety Tags 研究仓库](https://github.com/safer-rust/safety-tags))
+> **RFC #3842 进展（2026-07-12 自同主题重复页合并）**:
+> Safety Tags 研究原型（[safety-tool slides](https://os-checker.github.io/slides/safety-tags)）已梳理出 **21 个基础标签**，可覆盖 std 中约 **96%** 的公开 `unsafe` API；
+> RFC #3842 提案使用 `#[safety::requires(...)]` 在 unsafe 函数上声明安全前提、`#[safety::checked(...)]` 在调用点显式消除标签，并与 Verus 的 `requires`/`ensures`、Kani 的 harness 假设、Miri/BorrowSanitizer 的动态检查标签集形成映射。
+> (Source: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [Safety Tags 研究仓库](https://github.com/safer-rust/safety-tags))
 
 ---
 
@@ -167,7 +170,8 @@ Rust 社区已存在 `#[safety]` 相关的实验性讨论：
 
 形式化语义的两个视角：
 
-- **契约的谓词逻辑表示**：`#[safety(requires: P)]` 读作「调用点环境 ⊨ P 是调用者的证明义务」，`ensures: Q` 读作「函数体 ⊨ Q 是实现者的证明义务」——这是霍尔三元组 `{P} f {Q}` 的属性化编码。与 Verus 的 `requires/ensures` 子句语义同构，区别在 Safety Tags 面向编译器内置属性命名空间，不求全量验证只求统一词汇表。
+- **契约的谓词逻辑表示**：`#[safety(requires: P)]` 读作「调用点环境 ⊨ P 是调用者的证明义务」，`ensures: Q` 读作「函数体 ⊨ Q 是实现者的证明义务」——这是霍尔三元组 `{P} f {Q}` 的属性化编码。
+- 与 Verus 的 `requires/ensures` 子句语义同构，区别在 Safety Tags 面向编译器内置属性命名空间，不求全量验证只求统一词汇表。
 - **与 BorrowSanitizer 的互补**：标签是**静态陈述**（零运行期成本、无检测能力），BSan 是**动态检测**（有运行期成本、捕获真实违反）；组合使用 = 标签标注意图 → BSan 在测试中验证意图 → 生产去掉检测保留标签作审计依据。这与「类型注解 + 测试」的关系同构。
 
 判定依据：安全关键 crate 现在即可建立「Safety 注释 → Miri/BSan 测试」的契约-验证对照表，等 RFC 落地后机械迁移为属性。
@@ -691,3 +695,24 @@ Miri 可以根据安全标签选择不同的检查策略。例如，标记为 `e
 1. **跟踪** [Rust Internals 论坛](https://internals.rust-lang.org/) 的 Safety Tags 讨论。
 2. **准备** 在项目中统一 Safety Comment 格式，为迁移做准备。
 3. **实验** 使用现有 `#[doc = "SAFETY: ..."]` 规范化为结构化注释。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Safety Tags 概念预研Unsafe))
+    一、核心概念
+      1.1 问题定义Unsafe 契约的表达缺口
+      1.2 Safety Tags 的设计目标
+      1.3 与 safety 属性的关系
+    二、形式化语义
+      2.1 契约的谓词逻辑表示
+      2.2 与 BorrowSanitizer 的互补
+    三、使用场景
+      3.1 AI 生成代码的安全标注
+      3.2 Rust for Linux 内核契约
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    五、演进路线与预测
+```

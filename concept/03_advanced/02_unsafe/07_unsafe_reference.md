@@ -50,6 +50,7 @@
   - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [⚠️ 反例与陷阱：对 `static mut` 取引用（Edition 2024 硬错误）](#️-反例与陷阱对-static-mut-取引用edition-2024-硬错误)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -315,4 +316,16 @@ static COUNTER: AtomicU32 = AtomicU32::new(0);
 fn main() {
     COUNTER.fetch_add(1, Ordering::SeqCst);
 }
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Unsafe 参考Unsafe Reference))
+    一、unsafe 关键字的四种用法
+    二、Unsafe 块的能力
+    三、外部契约与 unsafe trait
+    四、不被视为 unsafe 的行为
+    五、安全抽象层
 ```

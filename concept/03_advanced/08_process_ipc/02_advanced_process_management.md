@@ -320,3 +320,17 @@ async fn health_check_loop(program: &str) {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 高级进程管理))
+    1. 进程池Process Pool
+    2. 负载均衡策略
+    3. 健康检查与故障恢复
+    4. 资源限制与配额管理
+      4.1 进程级资源限制
+      4.2 配额管理系统
+    6. 调度策略
+```

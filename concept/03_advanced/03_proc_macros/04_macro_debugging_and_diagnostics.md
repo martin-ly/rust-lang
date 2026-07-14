@@ -59,6 +59,7 @@
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -384,3 +385,22 @@ impl rustc_driver::Callbacks for MyCallbacks {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Kohlbecker et al.: Hygienic Macro Expansion (LFP 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/319838.319859)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((宏调试与诊断))
+    一、核心定位
+    二、使用 cargo expand
+      2.2 比较宏展开差异
+    四、精确错误定位
+      4.1 使用 synError
+      4.2 组合多个错误
+      4.3 proc-macro-error 友好错误
+    五、编译期性能分析
+      5.1 cargo build --timings
+      5.2 RUSTC_LOG
+      5.3 测量宏展开耗时
+    六、编译器回调高级
+```

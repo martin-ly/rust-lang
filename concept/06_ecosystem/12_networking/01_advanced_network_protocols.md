@@ -317,3 +317,15 @@ fn parse_len(frame: &[u8]) -> Option<u32> {
 
 - **P2 生态/社区**: [docs.rs/tower — 生态权威 API 文档](https://docs.rs/tower) · [docs.rs/libp2p — 生态权威 API 文档](https://docs.rs/libp2p)
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 高级网络协议概览))
+    2. 协议栈架构图
+    3. gRPC
+    4. MQTT
+    5. QUIC
+    6. AMQP
+```

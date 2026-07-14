@@ -147,6 +147,7 @@
   - [实践](#实践)
   - [参考来源](#参考来源)
   - [`ManuallyDrop` 模式匹配（Rust 1.96）](#manuallydrop-模式匹配rust-196)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 > [来源: [The Rust Programming Language — Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
@@ -2246,3 +2247,25 @@ let ManuallyDrop { value } = md;
 ```
 
 > **语义**: `ManuallyDrop` 的核心语义是**抑制自动析构**。1.96 之前只能通过 `ManuallyDrop::into_inner()` 或 `ManuallyDrop::deref()` 访问内部值；1.96 引入的模式匹配（Pattern Matching）支持使代码更简洁，尤其在 unsafe 代码和 FFI 边界处。来源: [Rust 1.96 Release Notes]
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Memory Management内存管理))
+    一、权威定义Definition
+      1.1 Wikipedia 对齐定义
+      1.2 TRPL 官方定义
+    二、概念属性矩阵Attribute Matrix
+      2.1 Stack vs Heap 对比矩阵
+      2.2 智能指针对比矩阵
+    六、反命题与边界分析Counter-proposit
+      6.1 反命题 1 智能指针总是安全的
+      6.2 反命题 2 Rust 无内存泄漏
+    七、边界极限测试代码Boundary Limit
+      7.1 测试 1 RcRefCellT 循环引用极限
+      7.2 测试 2 RefCell 嵌套借用边界
+    十一、补充章节Field
+      11.1 问题定义智能指针的最后一公里
+      11.2 Pin 投影当前最成熟的 Field
+```

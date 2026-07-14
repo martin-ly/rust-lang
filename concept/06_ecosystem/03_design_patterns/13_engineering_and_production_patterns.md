@@ -361,3 +361,18 @@ fn main() {
     }
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((工程实践与生产级模式))
+    二、弹性模式
+      2.1 断路器Circuit Breaker
+      2.2 重试与指数退避Retry + Backoff
+      2.3 令牌桶限流Token Bucket
+    三、弹性模式对比矩阵
+    五、可观测性模式
+    六、安全模式输入验证与类型化边界
+    七、配置管理热更新与能力令牌
+```

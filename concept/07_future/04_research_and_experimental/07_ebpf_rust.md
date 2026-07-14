@@ -1018,3 +1018,24 @@ eBPF 验证器要求程序无循环（或有限循环）、无未初始化内存
 | eBPF / Aya / Rex 的 Rust 映射 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | eBPF / Aya / Rex 的 Rust 映射 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | eBPF / Aya / Rex 的 Rust 映射 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((eBPF / Aya / Rex 的 Rust 映射))
+    2. eBPF 程序类型矩阵 × Rust 支持状态
+    3. Aya 框架深度分析
+      3.1 架构概览
+      3.2 compile-once-run-anywh
+      3.3 BPF Map 类型与 Rust API
+    4. Rex 革命性方案
+      4.2 Rex 的安全模型替换
+      4.3 Rex 的程序类型支持
+      4.4 Rex 的内存安全保证
+    5. Rust for Linux 中的 eBPF
+      5.1 Rust 内核模块调用 eBPF
+    7. 安全模型对比
+      7.1 三层安全模型详解
+      7.2 关键洞察
+```

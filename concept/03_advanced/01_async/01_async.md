@@ -3488,3 +3488,25 @@ fn user_code() -> impl Future<Output = ()> {
     UserCodeFuture { state: State::Start }
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Async/Await异步编程))
+    一、权威定义Definition
+      1.1 Wikipedia 权威定义
+      1.2 官方文档定义
+      1.3 形式化定义
+    二、概念属性矩阵Attribute Matrix
+      2.1 异步 vs 并发 vs 并行对比矩阵
+      2.2 Future 组合子矩阵
+      2.3 运行时对比矩阵
+    三、形式化理论根基Formal Foundation
+      3.1 async fn 作为状态机精确推导
+      3.1b 状态机操作语义Operational
+      3.2 Pin 的形式化语义
+    五、定理一致性矩阵Theorem
+    七、决策/边界判定树Decision /
+      7.2 Pin 使用边界
+```

@@ -176,3 +176,47 @@ cargo doc --no-deps  # 生成文档
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Rudra: Finding Memory Safety Bugs in Rust at the Ecosystem Scale (SOSP 2021)](https://dl.acm.org/doi/10.1145/3477132.3483570)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo 工作流Cargo Workflow))
+    一、标准 Package 布局
+    二、Cargo.toml vs Cargo.lock
+    三、在现有项目上工作
+    四、常用开发命令
+    五、更新依赖的安全流程
+```
+
+## ⚠️ 反例与陷阱
+
+工作流脚本中拆分修改逻辑时，容易让两个可变借用同时存活。
+
+### 反例：同时持有两个可变借用（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0499
+fn main() {
+    let mut v = vec![1];
+    let a = &mut v;
+    let b = &mut v; // ❌ 同时存在两个可变借用
+    a.push(1);
+    b.push(2);
+}
+```
+
+**实测错误**：`error[E0499]: cannot borrow`v`as mutable more than once at a time`。
+
+### ✅ 修正：用作用域块把可变借用串行化
+
+```rust
+fn main() {
+    let mut v = vec![1];
+    {
+        let a = &mut v;
+        a.push(1);
+    } // a 的作用域结束
+    let b = &mut v; // ✅ 可变借用串行化
+    b.push(2);
+}
+```

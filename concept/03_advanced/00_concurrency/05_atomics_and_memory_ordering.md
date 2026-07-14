@@ -93,6 +93,7 @@
     - [3. 与类型布局 / std 原子类型对齐保证的关系](#3-与类型布局--std-原子类型对齐保证的关系)
     - [4. 跨平台边界与旧名废弃说明](#4-跨平台边界与旧名废弃说明)
     - [5. Rust 1.97.0 新增 LoongArch 原子 target features（`scq` / `lamcas` / `lam-bh` / `ld-seq-sa` / `div32`）](#5-rust-1970-新增-loongarch-原子-target-featuresscq--lamcas--lam-bh--ld-seq-sa--div32)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -1522,3 +1523,24 @@ fn main() {
 ---
 
 > **Rust 1.91 起**：`AtomicPtr::fetch_ptr_add` / `fetch_ptr_sub` 与各原子类型的 `fetch_or` / `fetch_and` / `fetch_xor` 稳定，支持无锁指针算术与位掩码操作；**1.95 起** `update` / `try_update` 稳定，将 CAS 循环闭包化。详见 [1.91 版本页](../../07_future/00_version_tracking/rust_1_91_stabilized.md) 与 [1.95 版本页](../../07_future/00_version_tracking/rust_1_95_stabilized.md)（特性矩阵节）。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((原子操作与内存序无锁并发的精确控制))
+    一、核心概念
+      1.2 内存序的层次
+      1.3 Happens-Before 关系
+    二、技术细节
+      2.1 原子操作详解
+      2.2 内存序选择指南
+      2.3 无锁算法基础
+    三、原子模式矩阵
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    1. Atomics原子类型
+      1.1. 硬件层面的并发基石
+      1.2. 内存排序 Memory Ordering
+```

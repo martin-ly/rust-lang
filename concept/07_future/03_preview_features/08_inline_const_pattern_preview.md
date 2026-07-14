@@ -289,3 +289,18 @@ fn classify(n: u8) -> &'static str {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper) · [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Inline Const Pattern 预览))
+    功能动机
+    语法说明
+      稳定基础 Inline Const 表达式
+      Inline Const in Patterns
+      适用场景
+    与稳定 Rust 对比
+      当前替代写法
+      迁移建议
+```

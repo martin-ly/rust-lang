@@ -226,3 +226,39 @@ fn main() {
 
 - **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: A Semantic Foundation for Functional Verification of Rust Programs (PLDI 2022)](https://dl.acm.org/doi/10.1145/3519939.3523704)
 - **P2 生态/社区**: [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio) · [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((c10_networks - Rust 1.94))
+    0. 特性 × 影响面 ×
+    Rust 1.94 关键特性
+      1.1 新增特性
+      1.2 Edition 2024 支持
+    版本事实对齐与权威来源2026-07-12 回填
+    过渡段
+    定理链
+```
+
+## ⚠️ 反例与陷阱
+
+**陷阱（Edition 2024：`extern` 块必须标 `unsafe`）**：1.94 完整支持 Edition 2024，迁移旧代码时最常见的新硬错误之一——裸 `extern "C"` 块不再被接受：
+
+```rust,compile_fail
+extern "C" { fn puts(s: *const i8); }   // error: extern blocks must be unsafe
+fn main() {}
+```
+
+**修正对照**（显式 `unsafe extern`，调用点仍需 `unsafe`，编译通过）：
+
+```rust
+unsafe extern "C" { fn puts(s: *const i8); }
+
+fn main() {
+    let msg = [b'h' as i8, b'i' as i8, 0];
+    unsafe { puts(msg.as_ptr()); }
+}
+```
+
+> 语义动机：FFI 声明本身就是在承诺签名正确性，把 `unsafe` 从调用点上提到声明处，使责任位置显式化。

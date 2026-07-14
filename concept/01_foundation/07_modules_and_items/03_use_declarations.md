@@ -69,6 +69,7 @@
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -301,3 +302,16 @@ fn read() {} // 如果某个 trait/类型也叫 read，可能产生歧义
 - **对偶**：与 `pub` 定义端可见性相对（定义可见 vs 引入可见），见 [Module System](../../02_intermediate/05_modules_and_visibility/01_module_system.md)。
 - **组合**：与 [Structs](04_structs.md) 等项定义组合构成模块接口。
 - **依赖**：路径解析依赖 [Items](12_items.md) 的作用域规则。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Use Declarations))
+    一、核心命题
+    二、use 基本语法
+    三、路径形式
+    四、pub use 重导出
+    五、嵌套导入与 Glob
+      5.1 Rust 1.97
+```

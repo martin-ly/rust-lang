@@ -2731,3 +2731,45 @@ pub fn log_error(error: &str) {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: A Semantic Foundation for Functional Verification of Rust Programs (PLDI 2022)](https://dl.acm.org/doi/10.1145/3519939.3523704)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 1.92 稳定特性))
+    0. 特性 × 影响面 ×
+    一、所有权、借用与生命周期
+    MaybeUninit 文档化
+      核心改进
+    联合体原始引用
+      核心改进
+    自动特征改进
+      核心改进
+```
+
+## ⚠️ 反例与陷阱
+
+**陷阱（未初始化绑定，E0381）**：1.92 系统化了 `MaybeUninit` 的有效不变量文档，但安全 Rust 中「先声明后使用而未赋值」仍然是硬错误——编译器以 E0381 静态拒绝：
+
+```rust,compile_fail
+fn main() {
+    let x: i32;
+    println!("{x}");      // error[E0381]: used binding `x` isn't initialized
+}
+```
+
+**修正对照**（先初始化；确需延迟初始化时用 `MaybeUninit` 安全封装，编译通过）：
+
+```rust
+use std::mem::MaybeUninit;
+
+fn main() {
+    let x: i32 = 0;                       // 直接初始化
+    let mut slot = MaybeUninit::<i32>::uninit();
+    slot.write(42);                       // 写入后才有有效值
+    let y = unsafe { slot.assume_init() };
+    assert_eq!(x + y, 42);
+}
+```
+
+> 1.92 文档化的核心：`MaybeUninit<T>` 是唯一合法的「未初始化但已分配」表示，绕过它读未初始化内存即未定义行为。

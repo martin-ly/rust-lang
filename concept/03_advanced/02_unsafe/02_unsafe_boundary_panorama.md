@@ -484,3 +484,21 @@ flowchart TD
 - **依赖**：依赖 [借用](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) 的别名规则。
 
 ---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Unsafe 边界全景Unsafe))
+    一、权威定义
+    三、边界总览unsafe 的五条语义边界
+    四、边界一UB 分类学边界
+      4.1 边界陈述
+      4.3 判定条件
+    五、边界二Stacked/Tree Borrows
+      5.1 边界陈述
+      5.3 判定条件
+    六、边界三Miri 可检测 vs 不可检测边界
+      6.1 边界陈述
+      6.3 判定条件
+```

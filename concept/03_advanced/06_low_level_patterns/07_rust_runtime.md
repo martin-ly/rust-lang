@@ -300,3 +300,15 @@ fn main() -> ExitCode {
     ExitCode::SUCCESS
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 运行时The Rust Runtime))
+    一、什么是 Rust 运行时
+    二、Panic 运行时
+    三、启动与终止流程
+    四、线程局部存储
+    五、windows_subsystem
+```

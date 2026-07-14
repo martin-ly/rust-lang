@@ -2542,3 +2542,24 @@ fn main() {
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch19](https://doc.rust-lang.org/book/ch19-06-macros.html) · [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Macros宏系统))
+    一、权威定义Definition
+      1.1 Wikipedia 权威定义
+      1.2 TRPL 官方定义
+      1.3 形式化定义
+    二、概念属性矩阵Attribute Matrix
+      2.1 宏类型对比矩阵
+      2.2 Rust 宏 vs 其他语言元编程对比
+      2.3 宏展开在编译管道中的位置
+    三、形式化理论根基Formal Foundation
+      3.1 Hygienic Macro 的形式化
+      3.2 声明宏的模式匹配语义
+    五、决策/边界判定树Decision /
+      5.5 宏与类型系统的交互边界
+    十、演进方向
+```

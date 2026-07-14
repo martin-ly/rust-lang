@@ -243,3 +243,47 @@ where
 
 - **P2 生态/社区**: [docs.rs/rayon — 生态权威 API 文档](https://docs.rs/rayon) · [docs.rs/petgraph — 生态权威 API 文档](https://docs.rs/petgraph)
 - **P1 学术/形式化**: [Skiena: The Algorithm Design Manual (2nd ed., Springer)](https://link.springer.com/book/10.1007/978-1-84800-070-4)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((前沿算法技术))
+    一、概念定位
+    二、技术谱系对比矩阵
+    三、流式算法Count-Min Sketch
+    四、隐私保护差分隐私 Laplace 机制
+    五、近似优化模拟退火骨架
+```
+
+## ⚠️ 反例与陷阱
+
+**陷阱（Bloom filter 假阳性当权威判断）**：概率型数据结构只保证「无假阴性」，`may_contain == true` 不代表元素一定存在；且标准 Bloom filter 不支持删除。把阳性结果直接当权威判断是典型误用：
+
+```rust
+use std::collections::HashSet;
+
+struct Bloom { bits: Vec<bool>, k: usize }
+impl Bloom {
+    fn new(n: usize, k: usize) -> Self { Self { bits: vec![false; n], k } }
+    fn hashes(&self, x: &str) -> Vec<usize> {
+        let h = x.bytes().fold(0u64, |a, b| a.wrapping_mul(31).wrapping_add(b as u64));
+        (0..self.k).map(|i| ((h.wrapping_add(i as u64 * 0x9E37_79B9)) as usize) % self.bits.len()).collect()
+    }
+    fn insert(&mut self, x: &str) { for i in self.hashes(x) { self.bits[i] = true; } }
+    fn may_contain(&self, x: &str) -> bool { self.hashes(x).iter().all(|&i| self.bits[i]) }
+}
+
+fn main() {
+    let mut bf = Bloom::new(64, 3);
+    bf.insert("alice");
+    if bf.may_contain("bob") {
+        // 修正对照：阳性结果必须回源校验，不能作为权威判断
+        let authoritative: HashSet<&str> = ["alice"].into_iter().collect();
+        assert!(!authoritative.contains("bob"));
+    }
+    assert!(bf.may_contain("alice")); // 已插入元素必为阳性（无假阴性）
+}
+```
+
+> 同理：Count-Min Sketch 只给上界估计、HyperLogLog 只给基数近似——所有概率型结构的结果都要按「估计」而非「事实」消费。

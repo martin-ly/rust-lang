@@ -71,6 +71,7 @@
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -851,3 +852,26 @@ let closure = move || println!("{}", s);
 - **对偶**：与函数指针 `fn()`（无捕获）相对，见 [Functions](../../01_foundation/07_modules_and_items/02_functions.md)。
 - **组合**：与 [Iterator Patterns](../07_iterators_and_closures/01_iterator_patterns.md) 组合成惰性管线。
 - **依赖**：捕获合法性依赖 [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 与 [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((闭包类型系统Fn、FnMut、FnOnce))
+    一、核心概念
+      1.1 闭包的本质匿名结构体
+      1.2 三种闭包 Trait
+      1.3 捕获方式引用 vs 移动
+    二、技术细节
+      2.1 编译器自动推导规则
+      2.2 闭包与函数指针
+      2.3 move 关键字的作用
+    三、使用模式
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    补充来自 crates/c03_control_fn
+      闭包语法形式
+      捕获规则与 Trait 实现
+      move 关键字
+```

@@ -241,3 +241,32 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Rust 常用开发工具」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+## ⚠️ 反例与陷阱
+
+借用检查是开发工具链（clippy/rust-analyzer）每天提示最多的诊断之一。
+
+### 反例：引用比被引用者活得更久（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0597
+fn main() {
+    let r;
+    {
+        let x = 5;
+        r = &x; // ❌ 引用逃逸出 x 的作用域
+    }
+    let _ = *r;
+}
+```
+
+**实测错误**：`error[E0597]:`x`does not live long enough`。
+
+### ✅ 修正：调整作用域顺序，让被引用者覆盖引用的整个生命周期
+
+```rust
+fn main() {
+    let x = 5;
+    let r = &x; // ✅ 被引用者活得比引用更久
+    let _ = *r;
+}
+```

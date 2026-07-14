@@ -91,3 +91,41 @@ Rust 官方支持的平台（target）按保证强度分为三层，以 **target
 > - [releases.rs — Rust Changelogs](https://releases.rs/)（1.90/1.91/1.93/1.94/1.95/1.97 各版 Platform Support 节；1.92/1.96 确认无该节）
 > - [rustc book — nvptx64-nvidia-cuda](https://doc.rust-lang.org/nightly/rustc/platform-support/nvptx64-nvidia-cuda.html)（SM/PTX 最低版本表）
 > - 反链：[交叉编译](02_cross_compilation.md) · [`-Z` 选项参考清单](../00_toolchain/15_z_flags_reference.md) · [将 Rust 集成到现有平台](../00_toolchain/08_platform_rust_integration.md)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Target Tier 平台支持全景分层保证与))
+    一、Tier 分层结构每一层保证什么
+    二、1.90–1.97 Tier
+    三、1.97 nvptx64-nvidia-cuda
+```
+
+## ⚠️ 反例与陷阱
+
+嵌入式目标上常试图让句柄类型既 Copy 又自动释放资源——这在 Rust 中互斥。
+
+### 反例：Copy 与 Drop 互斥（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0184
+#[derive(Copy)]
+struct Handle(u8);
+
+impl Drop for Handle { // ❌ Copy 与 Drop 互斥
+    fn drop(&mut self) {}
+}
+```
+
+**实测错误**：`error[E0184]: the trait `Copy` cannot be implemented for this type; the type has a destructor`。
+
+### ✅ 修正：纯数据类型用 Copy；需释放资源的类型用 Drop + 移动语义。
+
+```rust
+#[derive(Clone, Copy)]
+struct Handle(u8); // ✅ 纯 Copy 数据不写 Drop
+
+fn main() {
+    let _ = Handle(0);
+}
+```

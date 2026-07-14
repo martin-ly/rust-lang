@@ -213,3 +213,14 @@ resolver = "3"   # edition 2024 默认；旧 edition 需显式声明
 
 - **P2 生态/社区**: [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml) · [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata)
 - **P1 学术/形式化**: [Rudra: Finding Memory Safety Bugs in Rust at the Ecosystem Scale (SOSP 2021)](https://dl.acm.org/doi/10.1145/3477132.3483570)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Resolver v3 与 public =))
+    三、cargo tree -e features
+    四、Resolver v3 与 v2 的差异
+    五、稳定版行为说明
+    六、验证命令
+```

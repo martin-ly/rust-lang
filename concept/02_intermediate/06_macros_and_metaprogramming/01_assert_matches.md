@@ -66,6 +66,7 @@
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -754,3 +755,20 @@ fn main() {
 ---
 
 > **Rust 1.96 起**：`assert_matches!` 与 `debug_assert_matches!` 稳定为标准库宏，替代手写 `assert!(matches!(...))` 的模式断言。详见 [版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md)（特性矩阵节）。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((assert_matches!模式匹配断言的形式化语))
+    一、核心概念
+      1.1 matches!模式匹配的布尔化
+      1.2 assert_matches!从判断到断言
+      1.3 debug_assert_matches!编
+    二、形式化语义
+      2.1 与 assert! /
+      2.2 绑定捕获与作用域
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+```

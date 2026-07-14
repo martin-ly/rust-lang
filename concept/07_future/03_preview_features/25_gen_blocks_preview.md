@@ -682,3 +682,22 @@ fn early_return() -> impl Iterator<Item = i32> {
 
 - **P1 学术/形式化**: [Anton & Thiemann: Deriving Type Systems and Implementations for Coroutines（APLAS 2010, LNCS 6461；协程/生成器类型系统的学术推导）](https://link.springer.com/chapter/10.1007/978-3-642-17164-2_5)（2026-07-12 验证 HTTP 200）
 - **P2 生态/社区**: [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper) · [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Gen Blocks 预研超越异步的泛化生成器))
+    一、核心概念
+      1.1 从 async 到 gen 的泛化
+      1.2 Gen Blocks 语法与语义
+    二、技术细节
+      2.1 生成器状态机
+      2.2 与 Stream 的协同
+      2.3 与异步生成器的对比
+    三、使用模式
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    五、演进路线
+```

@@ -85,6 +85,7 @@
   - [1️⃣ PhantomData 深入应用](#1️⃣-phantomdata-深入应用)
     - [1.1 什么是 PhantomData？](#11-什么是-phantomdata)
     - [1.2 型变 (Variance) 控制](#12-型变-variance-控制)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -1280,3 +1281,26 @@ impl<'a, T> Slice<'a, T> {
 - **不变 (Invariant)**: 没有子类型关系
 
 **PhantomData 的型变**:
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((高级类型系统从关联类型到类型级编程))
+    一、核心概念
+      1.1 impl Trait 的演进
+      1.2 Const Generics
+      1.3 类型推断与约束求解
+    二、技术细节
+      2.1 impl Trait 在参数位置
+      2.2 Const Generics 实战
+      2.3 类型别名与类型族
+    三、类型系统模式矩阵
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    七、C++ 运算符重载/类型转换 vs Rust
+      7.1 运算符重载机制对比
+      7.2 关键差异分析
+      7.3 重载决议 vs Trait 解析
+```

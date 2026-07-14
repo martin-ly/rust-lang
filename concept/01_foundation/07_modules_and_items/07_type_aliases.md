@@ -61,6 +61,7 @@
     - [测验 1：类型别名 vs Newtype](#测验-1类型别名-vs-newtype)
   - [认知路径](#认知路径)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -437,3 +438,22 @@ D. 在函数签名中减少泛型参数重复
 
 - **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
 - **P2 生态/社区**: [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata) · [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((类型别名))
+    二、概念属性矩阵
+    三、技术细节与示例
+      3.1 基本用法
+      3.2 泛型类型别名
+      3.3 与 Trait Bound 结合
+    五、反命题与边界分析
+      5.1 反命题树
+      5.2 边界极限
+    六、边界测试
+      6.1 边界测试
+      6.2 边界测试
+    八、逆向推理链
+```

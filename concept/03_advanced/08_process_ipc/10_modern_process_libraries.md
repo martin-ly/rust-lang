@@ -243,3 +243,15 @@ flowchart TD
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 现代进程管理库))
+    1. 核心库对比
+    3. Tokio 异步进程
+    4. Duct 进程组合
+    5. nix 系统调用封装
+    6. 系统监控库
+```

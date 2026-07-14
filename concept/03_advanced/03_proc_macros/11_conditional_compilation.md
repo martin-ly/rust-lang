@@ -324,3 +324,21 @@ fn main() {
     platform_helper();
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((条件编译Conditional))
+    一、什么是条件编译
+    二、配置谓词
+      基本形式
+      布尔字面量谓词RFC 3695，Rust 1.88
+    三、编译器内置配置选项
+      目标架构
+      编译状态
+      原子操作支持
+    四、cfg 属性
+      Crate-level cfg
+    五、cfg_attr 属性
+```

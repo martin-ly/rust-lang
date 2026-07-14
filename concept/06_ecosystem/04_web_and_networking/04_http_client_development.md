@@ -228,3 +228,18 @@ fn read_response(mut stream: TcpStream) -> std::io::Result<String> {
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
 - **P0 官方**: [std::net — Rust 标准库网络模块（官方 API 文档）](https://doc.rust-lang.org/std/net/index.html)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((HTTP 客户端开发))
+    1. HTTP 方法语义
+    2. 使用 reqwest
+      2.1 基础请求
+      2.2 创建可复用客户端
+      2.3 POST JSON
+    3. 响应处理
+    4. 重试策略
+    5. 文件上传
+```

@@ -245,3 +245,16 @@ fn main() {}
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((TAIT 预览))
+    功能动机
+    语法说明与核心规则
+      模块级 TAIT
+      关联类型 TAIT
+      核心限制
+    与稳定 Rust 对比及迁移建议
+```

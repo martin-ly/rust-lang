@@ -67,6 +67,7 @@
   - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -684,3 +685,24 @@ fn main() {
 - **对偶**：与切片索引 `&[a..b]` 的越界检查相对，见 [Collections](../../01_foundation/05_collections/01_collections.md)。
 - **组合**：与 [Iterators](../07_iterators_and_closures/01_iterator_patterns.md) 组合成惰性序列。
 - **依赖**：迭代能力依赖 [Traits](../00_traits/01_traits.md)（`Iterator`）。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 范围类型语义stdopsRange))
+    一、核心概念
+      1.1 范围类型的数学语义
+      1.2 stdopsRange运行时迭代器语义
+      1.3 corerange编译期值语义
+    二、形式化语义
+      2.1 Copy 的语义影响
+      2.2 与 for 循环的交互
+    三、跨语言对比
+      3.1 Pythonrange 函数
+      3.2 C++20stdranges
+      3.3 RustcorerangeRange
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+```

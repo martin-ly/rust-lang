@@ -594,3 +594,43 @@ Rust 的布尔表达式经过 LLVM 优化后可能改变结构（短路求值、
 | MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((MC/DC Coverage 概念预研安全关键))
+    一、核心概念
+      1.1 覆盖率等级的层次结构
+      1.2 MC/DC 的数学定义
+      1.3 Rust 编译器实现路径
+    二、形式化语义
+      2.1 独立影响的形式化
+      2.2 与编译器优化的冲突
+    三、跨语言对比
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    五、演进路线与预测
+```
+
+## ⚠️ 反例与陷阱：稳定通道上使用 `#[coverage(off)]`
+
+**反例**：为把防御性分支排除出 MC/DC 统计，直接在 stable 工具链上标注覆盖率属性：
+
+```rust,compile_fail
+#![feature(coverage_attribute)]
+
+#[coverage(off)]
+fn defensive_unreachable() -> ! {
+    panic!("unreachable by construction")
+}
+
+fn main() {}
+```
+
+实测（rustc 1.97.0 stable, edition 2024）：`error[E0554]:`#![feature]`may not be used on the stable release channel`。
+
+**陷阱本质**：`#[coverage(off)]` / `#[coverage(on)]` 仍属 `coverage_attribute` 不稳定特性，stable 通道在词法层拒绝一切 `#![feature]`；MC/DC 工程化（含 Ferrocene 场景）不能依赖该属性做源码级排除。
+
+**修正**：稳定通道用 `-C instrument-coverage` + `llvm-cov` 在报告侧过滤，或把不可达分支收敛为 `unreachable!()` 断言并在评审记录中写明豁免理由；确需源码级排除时固定 nightly 并显式 `#![feature(coverage_attribute)]`，同时在 CI 锁定 nightly 版本。

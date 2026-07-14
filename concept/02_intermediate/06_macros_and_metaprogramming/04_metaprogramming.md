@@ -74,6 +74,7 @@
     - [核心推理链](#核心推理链)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -899,3 +900,23 @@ fn main() {
 - **对偶**：与运行时反射（Java/Python 式）相对，见 [RTTI and Dynamic Typing](../04_types_and_conversions/05_rtti_and_dynamic_typing.md)。
 - **组合**：与 [Macro Patterns](03_macro_patterns.md) 组合落地。
 - **依赖**：基础见 [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md)。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((元编程Rust 的编译期代码生成与变换))
+    一、核心概念
+      1.1 元编程的抽象层次
+      1.2 声明宏模式匹配驱动
+      1.3 过程宏语法树操作
+    二、技术细节
+      2.1 syn/quote/proc-macro2
+      2.2 Derive 宏的实现机制
+      2.3 宏卫生性的形式化
+    三、元编程技术矩阵
+      3.2 宏与 const eval 的演进趋势
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+```

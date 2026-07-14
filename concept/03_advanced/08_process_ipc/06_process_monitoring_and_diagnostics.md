@@ -295,3 +295,21 @@ flowchart TD
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 进程监控与诊断))
+    1. 概念定义
+    2. 状态监控
+      2.1 存活检查
+      2.2 非阻塞轮询
+      2.3 状态机
+    3. 资源监控
+      3.1 使用 sysinfo
+      3.2 Linux /proc 解析
+      3.3 I/O 监控
+    4. 日志与调试
+    5. 告警与自动恢复
+```

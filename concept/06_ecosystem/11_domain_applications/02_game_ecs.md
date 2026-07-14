@@ -1392,3 +1392,23 @@ fn main() {
     p[0] += v[0];
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Game Development & ECS))
+    权威定义
+    一、ECS 架构与 Rust 的契合度
+      1.1 ECS 三要素的形式化对应
+      1.2 缓存友好性与 SoA 存储
+    三、所有权模型在 ECS 中的表达
+      3.1 &mut Component ⟹
+      3.2 命令队列Command
+    四、数据导向设计 DOD 与 Rust
+      4.1 零成本抽象的 DOD 验证
+      4.2 SIMD 与 Unsafe 边界
+    五、并发渲染Send/Sync
+      5.1 多线程渲染管线
+      5.2 !Send / !Sync
+```

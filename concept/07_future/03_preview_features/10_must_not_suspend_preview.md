@@ -240,3 +240,18 @@ fn main() {}
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((must_not_suspend Lint 预览))
+    功能动机 跨 await 点持有的危险
+    语法说明
+      启用 lint
+      自定义类型标记
+      解决方式
+    与稳定 Rust 对比
+      稳定最佳实践
+      迁移建议
+```

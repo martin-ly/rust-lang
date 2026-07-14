@@ -3503,3 +3503,27 @@ pub struct MyBox<T: ?Sized> {
 ---
 
 > **Rust 1.92 起**：`MaybeUninit` 的表示与有效性（representation and validity）规则正式文档化；安全代码可直接对联合体字段取 `&raw const/mut`；`Box`/`Rc`/`Arc::new_zeroed(_slice)` 稳定，提供零初始化堆分配。详见 [版本页](../../07_future/00_version_tracking/rust_1_92_stabilized.md)（特性矩阵节）。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Unsafe Rust 安全编程))
+    一、权威定义Definition
+      1.1 Wikipedia 权威定义
+      1.2 TRPL 官方定义
+      1.3 Rustonomicon 定义
+    二、概念属性矩阵Attribute Matrix
+      2.1 Unsafe 操作分类矩阵
+      2.2 UB未定义行为分类矩阵
+      2.2b Unsafe Code
+    三、形式化理论根基Formal Foundation
+      3.1 Unsafe 作为公理缺口
+      3.2 Safety Invariant vs
+    六、决策/边界判定树Decision /
+      6.2 UB 边界判定
+    十一、演进方向
+      补充章节FFI 与 repr 属性完整规范
+      补充章节Miri 的使用方法与限制
+      补充章节stdptrread/write vs
+```

@@ -69,6 +69,7 @@
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -928,3 +929,23 @@ let num: u32 = unsafe { std::mem::transmute(bytes) };
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](../README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../../06_ecosystem/README.md) |
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((零拷贝解析与序列化优化))
+    一、核心概念
+      1.1 零拷贝原理
+      1.2 生命周期约束
+    二、关键技术
+      2.1 bytes crate
+      2.2 zerocopy crate
+      2.3 memmap2
+    三、序列化优化
+      3.1 rkyv
+      3.2 flatbuffers / capnp
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+```

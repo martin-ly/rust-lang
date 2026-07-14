@@ -181,3 +181,15 @@ error: the option `-Z` is only accepted on the nightly channel of rustc
 cargo +nightly rustc -- -Ztime-passes      # 显式 nightly
 cargo build --timings                      # stable 等价的构建耗时报告
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((rustc / Cargo -Z 不稳定选项参考清单))
+    一、-Z 是什么定位与纪律
+    二、构建类Build
+    四、Sanitizer
+    五、依赖可见性类Dependency
+    六、类型系统与实验前沿类Frontiers
+```

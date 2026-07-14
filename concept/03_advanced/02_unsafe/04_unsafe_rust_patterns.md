@@ -70,3 +70,16 @@ fn main() {
     unsafe { println!("{}", *p); }
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Unsafe Rust 模式))
+    unsafe 块与信任边界
+    裸指针操作
+      解引用必须 unsafe
+      E0133 反例与修正
+    安全抽象封装模式
+    内部可变性 UnsafeCell
+```

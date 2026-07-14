@@ -46,6 +46,8 @@
 
 ## 1. stabilized-in-beta 特性（4 项，随 1.98.0 beta 分支合入）
 
+以下 4 项已随 1.98.0 beta 分支（2026-07-03 切分）合入，预计 2026-08-20 转 stable；各节当前仅登记状态与来源，稳定后按 §6 checklist 填充实测内容。
+
 ### 1.1 `Panic[Hook]Info` 中 `Location<'_>` 生命周期改为 `'static`
 
 **状态**: stabilized in 1.98 beta（2026-08-20 转正） · **来源**: [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/)
@@ -132,3 +134,30 @@
 - [Rust 发布流程](03_rust_release_process.md)
 - [Rust 工具链（L6）](../../06_ecosystem/00_toolchain/01_toolchain.md)
 - [1.97/1.98 API 等效实现与测试](../../../crates/c08_algorithms/src/rust_197_features.rs)
+
+## ⚠️ 反例与陷阱
+
+即使未来版本引入更多安全抽象，unsafe 操作必须显式标记这一底线不变。
+
+### 反例：unsafe 块外解引用裸指针（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0133
+fn main() {
+    let p: *const i32 = std::ptr::null();
+    let _u = *p; // ❌ 裸指针解引用必须在 unsafe 块内
+}
+```
+
+**实测错误**：`error[E0133]: dereference of raw pointer is unsafe and requires unsafe block`。
+
+### ✅ 修正：把裸指针解引用放进 `unsafe` 块，并自行保证有效性
+
+```rust
+fn main() {
+    let p: *const i32 = std::ptr::null();
+    // ✅ unsafe 块显式承担不变量责任（此处仅示意，勿解引用空指针）
+    if !p.is_null() {
+        let _u = unsafe { *p };
+    }
+}
+```

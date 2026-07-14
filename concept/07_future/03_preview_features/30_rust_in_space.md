@@ -264,3 +264,19 @@ fn panic(_info: &PanicInfo) -> ! { loop {} }
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! { loop {} }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust in Space Preview))
+    一、功能动机为什么航天领域关注 Rust？
+    二、核心应用场景
+      2.1 卫星星载软件
+      2.2 任务关键型数据结构
+      2.3 地面支持与模拟系统
+    三、与 Ada/SPARK 及 C 的对比
+      3.1 Rust 在航天领域的优势
+      3.2 Rust 在航天领域的挑战
+    五、辐射硬化与硬件容错
+```

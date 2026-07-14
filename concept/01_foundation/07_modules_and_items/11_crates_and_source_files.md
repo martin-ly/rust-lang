@@ -297,3 +297,15 @@ mod no_such_module {
 use crate::no_such_module::Thing;
 fn main() { let _ = Thing; }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Crate 与源文件))
+    一、Crate 是 Rust 的编译单元
+    二、源文件
+    三、Crate 输出类型
+    四、典型源文件布局
+    五、Crate 级属性示例
+```

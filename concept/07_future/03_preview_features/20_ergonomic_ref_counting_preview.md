@@ -323,3 +323,22 @@ Rust 的所有权（Ownership）系统更安全，但引用计数只是众多所
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Ergonomic Ref-Counting))
+    一、核心概念
+      1.1 问题引用计数的非人机工学
+      1.2 提案目标
+      1.3 与现有方案的对比
+    二、设计方向与关键技术
+      2.1 可能的语言机制
+      2.2 形式化约束
+    三、Rust Project Goals 2026
+      关键人物
+      blocker
+    四、演进路线
+    五、与 Rust for Linux 的关系
+```

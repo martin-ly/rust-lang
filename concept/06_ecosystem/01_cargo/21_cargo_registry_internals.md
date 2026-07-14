@@ -166,3 +166,37 @@ cargo publish
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Rudra: Finding Memory Safety Bugs in Rust at the Ecosystem Scale (SOSP 2021)](https://dl.acm.org/doi/10.1145/3477132.3483570)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo Registry 内部机制Cargo))
+    一、Registry 组件
+    二、Registry Index
+    三、Sparse vs Git Index
+    四、Registry Web API
+    五、Credential Provider 协议
+```
+
+## ⚠️ 反例与陷阱
+
+registry 解析器等返回引用的函数，若返回引用可能来自多个入参，必须显式标注生命周期。
+
+### 反例：函数签名缺少生命周期标注（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0106
+fn longest(x: &str, y: &str) -> &str { // ❌ 返回引用来源不明确
+    if x.len() > y.len() { x } else { y }
+}
+```
+
+**实测错误**：`error[E0106]: missing lifetime specifier`。
+
+### ✅ 修正：为签名添加显式生命周期参数
+
+```rust
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { // ✅ 显式标注共同生命周期
+    if x.len() > y.len() { x } else { y }
+}
+```

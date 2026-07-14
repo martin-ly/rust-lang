@@ -373,3 +373,27 @@ fn mutate(p: Pin<&mut SelfRef>) {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper) · [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Pin Ergonomics 与 Reborrow))
+    一、核心问题Pin 的人机工程学危机
+      1.1 当前的五大痛点
+      1.2 为什么 Pin 如此重要？
+    二、解决方案 1Reborrow Traits已推进
+      2.1 问题Pin&mut T 不能自动
+      2.2 Reborrow 和
+      2.3 预期效果
+    三、解决方案 2Pinned PlacesRFC
+      3.1 核心想法pin 关键字
+      3.2 Pinned Fields
+      3.3 Pinned Drop
+    四、解决方案 3Field
+      4.1 与 Pinned Places 的关系
+      4.2 设计空间
+    五、反命题与边界分析
+      5.1 反命题树
+      5.2 关键边界
+```

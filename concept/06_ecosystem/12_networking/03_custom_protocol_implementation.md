@@ -213,3 +213,15 @@ rustc 1.97.0 实测（`catch_unwind` 复现）：`parse_frame_bad(&[0x01, 0x02])
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
 - **P0 官方**: [std::net — Rust 标准库网络模块（官方 API 文档）](https://doc.rust-lang.org/std/net/index.html)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((自定义协议实现))
+    1. 协议设计原则
+    2. 二进制协议帧结构
+    3. 协议状态机
+    4. 零拷贝序列化
+    5. 批量处理与流式传输
+```

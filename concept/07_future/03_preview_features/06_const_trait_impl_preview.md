@@ -78,6 +78,7 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -680,3 +681,23 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Const Trait Impl))
+    一、核心概念
+      1.1 问题常量上下文中的 Trait 鸿沟
+      1.2 const impl 方案概览
+      1.3 const 限定与效果系统
+    二、技术细节
+      2.1 常量 Trait 的约束继承
+      2.2 与现有 Const 特性的交互
+      2.3 编译器实现挑战
+    三、使用模式
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    五、演进路线
+```

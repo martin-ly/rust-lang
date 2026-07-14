@@ -418,3 +418,24 @@ impl Node {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Arbitrary Self Types))
+    一、核心概念
+      1.1 当前限制
+      1.2 Arbitrary Self Types
+    二、技术细节
+      2.1 DispatchFromDyn Trait
+      2.2 与 Deref 的关系
+    三、使用场景
+      场景 1内核编程Rust for Linux
+      场景 2嵌入式寄存器映射
+      场景 3自定义智能指针
+    四、反命题与边界分析
+      4.1 安全边界
+      4.2 设计决策
+    五、演进路线
+```

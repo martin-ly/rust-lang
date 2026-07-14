@@ -47,6 +47,7 @@
   - [八、来源](#八来源)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 一、认知路径
 
@@ -379,3 +380,17 @@ flowchart TD
 - **依赖**：依赖 [Unsafe](../02_unsafe/01_unsafe.md) 的 vtable 安全义务。
 
 ---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Waker 契约深度解析RawWakerVTable))
+    二、Waker 的类型擦除结构
+    三、RawWakerVTable 正确模式全集
+      3.1 模式 P1Arc
+      3.2 模式 P2stdtaskWake
+      3.3 模式 P3无计数变体&static /
+    四、wake / wake_by_ref
+    八、来源
+```

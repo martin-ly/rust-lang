@@ -64,6 +64,7 @@
   - [反向推理](#反向推理)
   - [过渡段](#过渡段)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -720,3 +721,25 @@ const SIZE: usize = compute_size!(some_input);
 
 - **P1 学术/形式化**: [Kohlbecker et al.: Hygienic Macro Expansion (LFP 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/319838.319859)
 - **P2 生态/社区**: [docs.rs/syn — 宏开发权威 API 文档](https://docs.rs/syn) · [docs.rs/quote — 宏开发权威 API 文档](https://docs.rs/quote)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((术语表 - C11 Macro System))
+    宏类型术语
+      Macro 宏
+      Declarative Macro 声明宏
+    声明宏术语
+      macro_rules
+      Pattern Matching 模式匹配
+    过程宏术语
+      TokenStream
+      Derive Macro 派生宏
+    卫生性与作用域
+      Hygiene 卫生性
+      Call Site 调用点
+    工具与库
+      cargo-expand
+      proc-macro2
+```

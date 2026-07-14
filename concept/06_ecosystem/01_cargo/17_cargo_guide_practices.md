@@ -175,3 +175,43 @@ flowchart TD
 
 - **P2 生态/社区**: [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata) · [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver)
 - **P1 学术/形式化**: [Rudra: Finding Memory Safety Bugs in Rust at the Ecosystem Scale (SOSP 2021)](https://dl.acm.org/doi/10.1145/3477132.3483570)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo 指南实践Cargo Guide))
+    二、Features 设计
+    三、测试组织
+    四、持续集成
+    五、构建性能优化
+    六、MSRV 与 Resolver v3
+```
+
+## ⚠️ 反例与陷阱
+
+实践指南中遍历/转换集合时，试图从借用的容器里 move 出元素会被拒。
+
+### 反例：从借用的 Vec 中移出元素（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0507
+fn main() {
+    let v = vec![String::from("a")];
+    let r = &v;
+    let s = r[0]; // ❌ 不能从借用的 Vec 中移出元素
+    let _ = s;
+}
+```
+
+**实测错误**：`error[E0507]: cannot move out of index of`Vec<String>``。
+
+### ✅ 修正：借用元素（`&r[0]`）或先 clone
+
+```rust
+fn main() {
+    let v = vec![String::from("a")];
+    let r = &v;
+    let s: &String = &r[0]; // ✅ 借用元素而非移动
+    let _ = s;
+}
+```

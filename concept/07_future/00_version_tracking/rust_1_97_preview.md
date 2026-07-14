@@ -107,3 +107,40 @@ fn demo() {
 
 - **P1 学术/形式化**: [Matsushita, Denis, Jourdan & Dreyer: RustHornBelt — A Semantic Foundation for Functional Verification of Rust Programs with Unsafe Code（POPL 2022, arXiv:2203.00944）](https://arxiv.org/abs/2203.00944)（2026-07-12 验证 HTTP 200）
 - **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 1.97.0 前沿特性预览已归档))
+    一、说明
+    二、从 1.97 推迟到 1.98+ 的标准库
+    三、仍在评审中的 1.98+ 候选
+    五、关联文档
+```
+
+## ⚠️ 反例与陷阱
+
+**陷阱（把预览页条目当 stable API 用，E0658）**：本页列出的推迟 API（如 `VecDeque::truncate_front`）在 1.97.0 stable 上仍以 unstable feature 形式存在，直接调用即被拒：
+
+```rust,compile_fail
+use std::collections::VecDeque;
+fn main() {
+    let mut dq = VecDeque::from([1, 2, 3, 4]);
+    dq.truncate_front(2); // error[E0658]: use of unstable library feature
+                          // `vec_deque_truncate_front`
+}
+```
+
+**修正对照**（stable 等效写法，编译通过）：
+
+```rust
+use std::collections::VecDeque;
+fn main() {
+    let mut dq = VecDeque::from([1, 2, 3, 4]);
+    dq.drain(..2);        // stable 等效：移除前 2 个元素
+    assert_eq!(dq, [3, 4]);
+}
+```
+
+> 使用本页任何条目前先查其跟踪 issue 的稳定化状态；预览页是「尚未落地」清单，不是 API 文档。

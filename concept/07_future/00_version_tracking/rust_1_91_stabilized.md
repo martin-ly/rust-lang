@@ -2741,3 +2741,47 @@ Rust 1.91 在异步编程方面带来了显著的改进：
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: A Semantic Foundation for Functional Verification of Rust Programs (PLDI 2022)](https://dl.acm.org/doi/10.1145/3519939.3523704)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 1.91 稳定特性))
+    0. 特性 × 影响面 ×
+    一、所有权、借用与生命周期
+    改进的类型检查器借用检查器优化
+      核心改进
+      性能对比
+    增强的 const 上下文对生命周期的影响
+      核心改进
+      实际应用场景
+    优化的内存分配器所有权和内存管理改进
+      核心改进
+      所有权管理改进
+```
+
+## ⚠️ 反例与陷阱
+
+**陷阱（借用检查优化 ≠ 放松规则，E0502）**：1.91 的借用检查器改进是性能与诊断层面的，所有权规则本身并未放松——读写重叠借用仍然被拒：
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let first = &v[0];
+    v.push(4);            // error[E0502]: cannot borrow `v` as mutable
+                          // because it is also borrowed as immutable
+    println!("{first}");
+}
+```
+
+**修正对照**（利用 NLL 缩短借用区间，编译通过）：
+
+```rust
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let first = v[0];     // Copy 出值，借用立即结束
+    v.push(4);
+    println!("{first}");
+    assert_eq!(v.len(), 4);
+}
+```

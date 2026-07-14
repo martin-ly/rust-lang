@@ -292,3 +292,31 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「C09 设计模式 - 术语表」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+## ⚠️ 反例与陷阱
+
+设计模式术语表中，move 语义相关陷阱是理解 RAII/Builder 等模式的前置知识。
+
+### 反例：移动后再次使用（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0382
+fn main() {
+    let s = String::from("a");
+    let t = s;        // s 的所有权已移动
+    let _ = s.len(); // ❌ 移动后再次使用
+    let _ = t;
+}
+```
+
+**实测错误**：`error[E0382]: borrow of moved value:`s``。
+
+### ✅ 修正：需要保留原值时显式 `clone()`
+
+```rust
+fn main() {
+    let s = String::from("a");
+    let t = s.clone(); // ✅ 需要两份时显式克隆
+    let _ = s.len();
+    let _ = t;
+}
+```

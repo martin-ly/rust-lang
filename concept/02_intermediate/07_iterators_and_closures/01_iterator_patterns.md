@@ -1432,3 +1432,21 @@ impl Iterator for Counter {
 ---
 
 > **Rust 1.94 起**：`<[T]>::array_windows` 稳定，提供定长滑动窗口迭代；**1.96 起** `core::range` 的 `Range`/`RangeFrom`/`RangeToInclusive` 及其迭代器实现 `Copy`，且 `NonZero` 整数范围可直接迭代。详见 [1.94 版本页](../../07_future/00_version_tracking/rust_1_94_stabilized.md) 与 [1.96 版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md)（特性矩阵节）。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 迭代器模式))
+    一、核心概念
+      1.1 Iterator Trait
+      1.2 适配器链
+      1.3 惰性求值
+    二、常用模式
+      2.1 map-filter-collect
+      2.2 fold 与归约
+      2.3 zip 与并行迭代
+    三、自定义迭代器
+    四、性能权衡
+    五、反命题与边界分析
+```

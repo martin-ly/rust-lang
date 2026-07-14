@@ -44,6 +44,10 @@
     - [测验 3：`[patch]` 与 `[source]` 的主要区别是什么？](#测验-3patch-与-source-的主要区别是什么)
     - [测验 4：`workspace.lints` 会自动被成员包继承吗？](#测验-4workspacelints-会自动被成员包继承吗)
   - [权威来源索引](#权威来源索引)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：导入不存在的模块路径（rustc 1.97.0，--edition 2024 实测）](#反例导入不存在的模块路径rustc-1970--edition-2024-实测)
+    - [✅ 修正：改为导入真实存在的标准库/依赖路径](#-修正改为导入真实存在的标准库依赖路径)
 
 ---
 
@@ -313,3 +317,39 @@ serde = { path = "../serde-fix" }
 **文档版本**: 1.0
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Cargo Book manifest 参考文档
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo Manifest 参考速查))
+    二、Target 表
+    三、依赖表
+    四、features
+    五、workspace
+    六、profile
+```
+
+## ⚠️ 反例与陷阱
+
+manifest 中声明依赖与代码中 `use` 的路径必须真实存在，否则解析期即失败。
+
+### 反例：导入不存在的模块路径（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0432
+use std::nonexistent::Thing; // ❌ 不存在的模块路径
+
+fn main() {}
+```
+
+**实测错误**：`error[E0432]: unresolved import`std::nonexistent``。
+
+### ✅ 修正：改为导入真实存在的标准库/依赖路径
+
+```rust
+use std::collections::HashMap; // ✅ 导入真实存在的类型
+
+fn main() {
+    let _: HashMap<i32, i32> = HashMap::new();
+}
+```

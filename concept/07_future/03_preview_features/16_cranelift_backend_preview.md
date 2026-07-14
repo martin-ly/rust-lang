@@ -784,3 +784,23 @@ fn main() {
 | Cranelift | ~75-80% | ~95-100%（debug） |
 
 > **关键洞察**: Cranelift 在 debug 模式下编译更快，但**不应在 release 模式使用**——LLVM 的优化能力远超 Cranelift。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cranelift 后端预研Rust))
+    一、核心概念
+      1.1 问题LLVM 的编译时间瓶颈
+      1.2 Cranelift 的定位与设计哲学
+      1.3 rustc_codegen_cranelif
+    二、技术细节
+      2.1 架构对比LLVM vs Cranelift
+      2.2 优化级别权衡
+      2.3 与并行前端的协同
+    三、使用场景分析
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    五、演进路线
+```

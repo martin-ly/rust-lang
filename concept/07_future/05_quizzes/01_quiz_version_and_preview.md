@@ -329,3 +329,25 @@ fn double_size<const N: usize>() -> [u8; N * 2] {
 ---
 
 > **变更记录**: 2026-07-12 新建（W3-b：L7 独立 quiz 补缺，10 题：单选 3 / 代码阅读 3 / 多选 2 / 判断 2；难度 🟢2 / 🟡5 / 🔴3）；2026-07-13 扩展至 15 题（+5 题「认证工具链与版本下沉」：Ferrocene 定位/认证延迟/1.91–1.92 谱系/ASIL D 选型/版本跟踪治理；难度 🟢3 / 🟡7 / 🔴5）。
+
+## ⚠️ 反例与陷阱
+
+版本/预览特性测验中，泛型约束题是高频考点。
+
+### 反例：泛型缺少 Display 约束（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0277
+fn show<T>(t: T) {
+    println!("{}", t); // ❌ 泛型参数缺少 Display 约束
+}
+```
+
+**实测错误**：`error[E0277]:`T` doesn't implement `std::fmt::Display``。
+
+### ✅ 修正：为泛型参数补上 `Display` 约束
+
+```rust
+fn show<T: std::fmt::Display>(t: T) {
+    println!("{}", t); // ✅ 约束声明可用能力
+}
+```

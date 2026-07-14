@@ -873,3 +873,21 @@ CLR JIT 可根据运行时 profile 动态优化（如去虚拟化）。Rust LLVM
 - **.NET 官方**: <https://dotnet.microsoft.com/>
 - **Rust Reference（对照）**: <https://doc.rust-lang.org/reference/>
 - **TRPL（对照）**: <https://doc.rust-lang.org/book/title-page.html>
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust vs C托管与原生之路))
+    一、核心对比
+      1.1 内存管理
+      1.2 泛型系统
+      1.3 异步模型
+    二、语言特性差异
+      2.1 模式匹配
+      2.2 错误处理
+      2.3 unsafe 与不安全代码
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+```

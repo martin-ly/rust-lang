@@ -51,6 +51,8 @@
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
 
 ---
 
@@ -81,6 +83,8 @@
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
 
 ---
 
@@ -520,3 +524,40 @@ trait Observer {
 
 - **P1 学术/形式化**: [Design Patterns: Elements of Reusable Object-Oriented Software (GoF, ACM DL)](https://dl.acm.org/doi/book/10.5555/95489)
 - **P2 生态/社区**: [Refactoring.Guru — Design Patterns](https://refactoring.guru/design-patterns)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((C09 设计模式 - 常见问题))
+    核心问题
+      基础概念
+      模式选择
+      Rust 特性
+    过渡段
+    定理链
+```
+
+## ⚠️ 反例与陷阱
+
+**陷阱（`Rc<RefCell<T>>` 引用环泄漏）**：用 `Rc` 实现双向链表/图时，双向强引用形成环，引用计数永远到不了 0，内存永不释放——这是运行期陷阱，编译器不会报错：
+
+```rust
+use std::cell::RefCell;
+use std::rc::{Rc, Weak};
+
+struct Node {
+    next: RefCell<Option<Rc<Node>>>,
+    prev: RefCell<Option<Weak<Node>>>, // 修正：反向边用 Weak 打断环
+}
+
+fn main() {
+    let a = Rc::new(Node { next: RefCell::new(None), prev: RefCell::new(None) });
+    let b = Rc::new(Node { next: RefCell::new(None), prev: RefCell::new(None) });
+    *a.next.borrow_mut() = Some(Rc::clone(&b));
+    *b.prev.borrow_mut() = Some(Rc::downgrade(&a));
+    assert_eq!(Rc::strong_count(&a), 1); // 若 prev 也是 Rc，此处会是 2 且永久泄漏
+}
+```
+
+> 经验法则：所有权图必须是树/ DAG——环中的至少一条边降级为 `Weak`，或用索引（`Vec` + `usize`）替代指针式结构。

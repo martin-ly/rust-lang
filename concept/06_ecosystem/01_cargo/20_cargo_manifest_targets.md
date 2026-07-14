@@ -182,9 +182,9 @@ required-features = ["serde"]
 
 ## ⚠️ 反例与陷阱：`harness = false` 的测试目标缺少 main
 
-**反例**（rustc 1.97 实测编译失败，E0601）：
+**反例**（rustc 1.97 实测：`--crate-type bin` 编译失败 E0601；lib 目标下 `#[test]` 合法不报错，故此处标 `ignore`）：
 
-```rust,compile_fail
+```rust,ignore
 // Cargo.toml: [[test]] name = "custom" harness = false
 // tests/custom.rs:
 #[test]
@@ -201,4 +201,16 @@ fn main() {
     assert_eq!(1 + 1, 2);
     println!("custom harness ok");
 }
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo Manifest))
+    一、Cargo Target 类型
+    二、自动发现 vs 显式声明
+    三、rust-version 字段
+    四、Package ID Specification
+    五、Target 配置项
 ```

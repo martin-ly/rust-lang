@@ -378,3 +378,54 @@ rustc +nightly -Z unstable-options --print target-spec-json-schema
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 1.96 稳定特性当前 patch))
+    0. 特性 × 影响面 ×
+    1. 语言层
+      1.1 assert_matches! /
+      1.2 expr metavariable 在
+      1.3 s390x inline assembly
+    2. 标准库层
+      2.1 corerange Copy 类型
+      2.2 NonZero 范围迭代
+      2.3 FromT 扩展
+    3. Cargo 与工具链
+      3.1 git + alternate
+      3.2 安全修复
+      3.3 rustdoc
+    4. 兼容性注意
+```
+
+## ⚠️ 反例与陷阱
+
+升级到新稳定版不会让借用检查失效：借用存活期间赋值一律被拒。
+
+### 反例：借用存活期间重新赋值（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0506
+fn main() {
+    let mut s = String::from("a");
+    let r = &s;
+    s = String::from("b"); // ❌ 借用存活期间重新赋值
+    let _ = r;
+}
+```
+
+**实测错误**：`error[E0506]: cannot assign to `s` because it is borrowed`。
+
+### ✅ 修正：收窄借用作用域后再赋值。
+
+```rust
+fn main() {
+    let mut s = String::from("a");
+    {
+        let r = &s;
+        let _ = r;
+    } // 借用在此结束
+    s = String::from("b"); // ✅
+}
+```

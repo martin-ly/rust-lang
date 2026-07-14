@@ -405,3 +405,26 @@ jobs:
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Kohlbecker et al.: Hygienic Macro Expansion (LFP 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/319838.319859)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((生产级宏开发))
+    一、核心定位
+    二、版本兼容性
+      2.1 MSRV 管理
+      2.2 Edition 兼容
+      2.3 核心依赖固定
+    四、文档生成
+      4.2 隐藏实现细节
+      4.3 Doc Tests
+    五、发布策略
+      5.1 语义化版本
+      5.2 预发布版本
+      5.3 Breaking Changes 处理
+    六、维护策略
+      6.1 安全审计
+      6.2 依赖更新节奏
+      6.3 长期支持承诺
+```

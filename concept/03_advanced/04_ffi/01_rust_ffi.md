@@ -74,6 +74,7 @@
     - [暴露 Rust 函数给 C](#暴露-rust-函数给-c)
     - [常用互操作工具链](#常用互操作工具链)
     - [FFI 最佳实践速查](#ffi-最佳实践速查)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -984,3 +985,25 @@ pub extern "C" fn rust_add(a: i32, b: i32) -> i32 {
 ---
 
 > **Rust 1.91 起**：C 风格可变参数函数声明在 `sysv64`/`win64`/`efiapi`/`aapcs` ABI 稳定；**1.93 起** `system` ABI 同步稳定，并新增 `String::into_raw_parts` / `Vec::into_raw_parts` 用于堆缓冲区跨边界零拷贝移交。详见 [1.91 版本页](../../07_future/00_version_tracking/rust_1_91_stabilized.md) 与 [1.93 版本页](../../07_future/00_version_tracking/rust_1_93_stabilized.md)（特性矩阵节）。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust FFI与外部代码的安全边界))
+    一、核心概念
+      1.1 FFI 的基本模型
+      1.2 ABI 与调用约定
+      1.3 类型映射与布局兼容
+    二、技术细节
+      2.1 extern 块的完整语法
+      2.2 不透明类型与封装
+      2.3 回调与闭包传递
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    补充来自 crates/c02_type_syste
+      Rust 与 C 基本类型映射
+      暴露 Rust 函数给 C
+      常用互操作工具链
+```

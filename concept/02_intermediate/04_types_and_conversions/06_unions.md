@@ -61,6 +61,7 @@
     - [测验 2：联合体的 Drop 语义](#测验-2联合体的-drop-语义)
   - [认知路径](#认知路径)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -450,3 +451,17 @@ D. 取决于是否实现 Copy
 
 - **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
 - **P2 生态/社区**: [Rust 官方博客 — Rust 1.19 发布公告（`union` 类型首次稳定化）](https://blog.rust-lang.org/2017/07/20/Rust-1.19.html)（2026-07-12 验证 HTTP 200）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((联合体Unions))
+    一、权威定义Definition
+      1.1 形式化定义
+      1.2 直觉解释
+    二、概念属性矩阵
+    五、反命题与边界分析
+      5.1 反命题树
+      5.2 边界极限
+```

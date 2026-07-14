@@ -175,3 +175,40 @@ flowchart TD
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Rudra: Finding Memory Safety Bugs in Rust at the Ecosystem Scale (SOSP 2021)](https://dl.acm.org/doi/10.1145/3477132.3483570)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo 入门Cargo Getting))
+    一、Cargo 是什么
+    三、创建第一个 Package
+    四、二进制 vs 库 vs 其他形态
+    五、核心命令速览
+    六、Cargo.toml 初识
+```
+
+## ⚠️ 反例与陷阱
+
+入门阶段最常见的编译错误：变量尚未声明就被引用。
+
+### 反例：使用未声明的变量（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0425
+fn main() {
+    let y = undefined_var + 1; // ❌ 变量未声明即使用
+    let _ = y;
+}
+```
+
+**实测错误**：`error[E0425]: cannot find value`undefined_var`in this scope`。
+
+### ✅ 修正：先用 `let` 声明并初始化，再使用
+
+```rust
+fn main() {
+    let undefined_var = 1; // ✅ 先声明再使用
+    let y = undefined_var + 1;
+    let _ = y;
+}
+```

@@ -46,6 +46,7 @@
   - [权威来源索引](#权威来源索引)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -314,3 +315,15 @@ Cranelift 编译速度快但优化较弱，适合 debug 构建或需要快速反
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [model-checking/kani — 模型检查器](https://github.com/model-checking/kani) · [model-checking/verify-rust-std](https://github.com/model-checking/verify-rust-std)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 编译器的 LLVM 后端与代码生成))
+    一、代码生成在编译流水线中的位置
+    二、LLVM 是什么
+    三、从 MIR 到 LLVM IR
+    四、Codegen Units
+    五、目标平台与 Target Spec
+```

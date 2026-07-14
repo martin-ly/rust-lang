@@ -1233,3 +1233,29 @@ macro_rules! make_getter {
 make_getter!(age_name);
 fn main() { println!("{}", age_name()); }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((syn & quote 完整参考))
+    2. syn 解析 API
+      2.1 parse_macro_input
+      2.2 DeriveInput
+      2.3 ItemFn
+    3. syn 数据结构
+      3.1 类型 Type
+      3.2 表达式 Expr
+      3.3 模式 Pat
+    4. syn 属性处理
+      4.1 解析属性
+      4.2 NestedMeta
+      4.3 自定义属性参数
+    6. quote! 宏详解
+      6.1 插值 var
+      6.2 重复 ...\
+      6.3 条件生成
+    7. quote_spanned
+      7.1 Span 控制
+      7.2 错误位置
+```

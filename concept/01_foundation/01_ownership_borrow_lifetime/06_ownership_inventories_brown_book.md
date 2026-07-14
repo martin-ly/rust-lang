@@ -206,3 +206,20 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((所有权清单自测))
+    四个 Inventory 节点
+      声明与初始化
+      移动与借用
+      生命周期结束
+    样题示例
+      字符串替换链
+      Vec 与切片
+      返回值生命周期
+    学习建议
+    与本地练习衔接
+```

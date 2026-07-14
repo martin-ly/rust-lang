@@ -281,3 +281,41 @@ flowchart TD
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [This Week in Rust — Rust 社区官方周刊（生态动态与学习资源入口）](https://this-week-in-rust.org/)（2026-07-12 验证 HTTP 200）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 起步指南))
+    安装 Rust
+    配置工具链
+    第一个 Cargo 项目
+    Cargo 基本操作
+    第一个程序
+```
+
+## ⚠️ 反例与陷阱
+
+**陷阱（move 后使用，E0382）**：新手最常见的第一道编译错误——`String` 不是按值复制的类型，赋值即移动：
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hello");
+    let t = s;            // s 的所有权移动给 t
+    println!("{s}");      // error[E0382]: borrow of moved value: `s`
+}
+```
+
+**修正对照**（借用或显式克隆，编译通过）：
+
+```rust
+fn main() {
+    let s = String::from("hello");
+    let t = &s;           // 借用：s 仍有效
+    println!("{s} {t}");
+    let u = s.clone();    // 需要两个独立值时显式 clone
+    println!("{s} {u}");
+}
+```
+
+> 规则速记：默认移动（move）、`Copy` 类型才复制、需要共享就借用（`&`/`&mut`）。

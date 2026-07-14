@@ -370,3 +370,47 @@ Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 1.95.0 稳定特性))
+    0. 特性 × 影响面 ×
+    1. 语言层
+      1.1 cfg_select! 宏
+      1.2 if let guards on
+      1.3 路径段关键字重命名导入
+    2. 标准库层
+      2.1 corerange 模块
+      2.2 原子操作 — update /
+      2.3 集合 — 获取可变引用的插入操作
+    3. 编译器与平台
+      3.1 --remap-path-scope 稳定化
+      3.2 平台支持提升
+      3.3 重要兼容性变更
+    4. Const 上下文新稳定 API
+```
+
+## ⚠️ 反例与陷阱
+
+**陷阱（`Atomic*::update` 闭包副作用重复执行）**：1.95 稳定化的 `update`/`try_update` 内部是 CAS 重试循环——多线程竞争下闭包可能被调用多次，把副作用（计数、日志、I/O）放进闭包会得到重复执行的错误结果：
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+fn main() {
+    let n = AtomicUsize::new(0);
+    let mut calls = 0usize;
+    let _ = n.update(Ordering::SeqCst, Ordering::SeqCst, |x| {
+        calls += 1; // 陷阱：副作用随 CAS 重试重复执行
+        x + 1
+    });
+    assert!(calls >= 1); // 竞争下可能 >1：调用次数不可依赖
+    // 修正对照：闭包保持纯函数，副作用移到原子操作成功之后
+    let prev = n.fetch_add(1, Ordering::SeqCst);
+    assert_eq!(prev + 1, n.load(Ordering::SeqCst));
+}
+```
+
+> 规则：`update` 闭包必须是纯函数（只由旧值计算新值）；需要恰好一次的副作用，用 `fetch_*` 拿返回值后再执行。

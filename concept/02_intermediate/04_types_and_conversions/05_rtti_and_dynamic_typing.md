@@ -56,6 +56,7 @@
   - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
   - [相关概念](#相关概念)
   - [⚠️ 反例与陷阱：`Any` 要求被转型类型为 `'static`](#️-反例与陷阱any-要求被转型类型为-static)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -327,4 +328,24 @@ fn f(x: &dyn Any) -> bool {
     x.downcast_ref::<i32>().is_some()
 }
 fn main() {}
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((RTTI 与动态类型识别从 C++ 到 Rust))
+    一、核心命题
+    二、C++ 的 RTTI 机制
+      2.1 typeid获取类型信息
+      2.2 dynamic_cast安全的向下转换
+      2.3 C++ RTTI 的代价
+    三、Rust 的动态类型识别
+      3.1 Any trait显式的运行时类型擦除
+      3.2 TypeId编译期稳定的类型指纹
+      3.3 downcast_ref受限的向下转换
+    四、C++ vs Rust 对比
+    五、Rust 中的典型用例
+      5.1 错误类型的动态擦除
+      5.2 插件系统的类型分发
 ```

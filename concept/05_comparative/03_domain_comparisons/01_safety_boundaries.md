@@ -1053,3 +1053,21 @@ fn main() {
 - **Go Memory Model（对照）**: <https://go.dev/ref/mem>
 - **GHC User Guide — Safe FFI（对照）**: <https://downloads.haskell.org/ghc/latest/docs/users_guide/>
 - **映射维护**: [`concept/00_meta/02_sources/01_authority_source_map.md`](../../00_meta/02_sources/01_authority_source_map.md)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 安全保证的边界条件全景Safety))
+    一、权威定义
+      1.1 Wikipedia 权威定义
+    二、安全保证层次结构
+    三、边界条件总表
+      2.1 内存安全边界
+      2.2 并发安全边界
+      2.3 类型安全边界
+    四、失效条件分类学
+      3.1 按失效层级分类
+      3.2 按后果严重性分类
+    五、反事实推理如果 Rust 没有某机制
+```

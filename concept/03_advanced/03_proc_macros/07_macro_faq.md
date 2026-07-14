@@ -56,6 +56,7 @@
   - [反向推理](#反向推理)
   - [过渡段](#过渡段)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -804,3 +805,29 @@ let v = temp;
 
 - **P1 学术/形式化**: [Kohlbecker et al.: Hygienic Macro Expansion (LFP 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/319838.319859)
 - **P2 生态/社区**: [docs.rs/syn — 宏开发权威 API 文档](https://docs.rs/syn) · [docs.rs/proc-macro2 — 宏开发权威 API 文档](https://docs.rs/proc-macro2)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((常见问题 FAQ - C11 Macro))
+    宏基础问题
+      Q2 宏与函数的区别是什么？
+      Q3 宏会影响性能吗？
+    声明宏问题
+      Q4 如何调试声明宏？
+      Q5 声明宏的卫生性如何工作？
+      Q6 如何处理宏的多个分支？
+    过程宏问题
+      Q7 如何开始写第一个过程宏？
+      Q8 syn 和 quote 是必须的吗？
+      Q9 如何测试过程宏？
+    故障排查问题
+      Q14 recursion limit
+      Q15 cannot find macro
+      Q16 为什么宏展开后有编译错误？
+    高级话题
+      Q17 如何构建 DSL？
+      Q18 宏可以生成宏吗？
+      Q19 如何实现零成本抽象？
+```

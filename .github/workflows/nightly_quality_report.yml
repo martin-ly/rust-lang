@@ -53,8 +53,8 @@ jobs:
       - name: Install mdbook
         run: cargo install mdbook --locked
 
-      # 与 scripts/run_quality_gates.sh 对齐：15 阻断门 + 5 语义观察门。
-      # 阻断门（10 基础 + 5 已转正 strict/actionable=0）失败才创建 issue；观察门仅记录结果（continue-on-error 语义）。
+      # 与 scripts/run_quality_gates.sh 对齐：23 阻断门 + 0 语义观察门（观察机制保留，当前无观察门）。
+      # 任一阻断门失败才创建 issue。
       - name: Run all quality gates
         id: gates
         continue-on-error: true
@@ -71,22 +71,30 @@ jobs:
           echo "overlap="$(python scripts/detect_content_overlap.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           echo "i18n="$(python scripts/add_bilingual_annotations.py --mode check-only >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           echo "mermaid="$(python scripts/check_mermaid_syntax.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
-          # --- 5 已转正阻断门（--strict / actionable=0，AGENTS.md §5.2） ---
+          # --- 9 已转正阻断门（--strict / actionable=0，AGENTS.md §5.2） ---
           echo "topology="$(python scripts/check_topology_quality.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           echo "kg_shapes="$(python scripts/check_kg_shapes.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           echo "canonical_uniqueness="$(python scripts/check_canonical_uniqueness.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           echo "concept_consistency="$(python scripts/concept_consistency_auditor.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          # --- 2026-07-14 转阻断（S3，AGENTS.md §5.2） ---
+          echo "authority_coverage="$(python scripts/check_concept_authority_coverage.py --strict --include-crates >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          echo "quiz="$(python scripts/check_quiz_system.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          echo "naming="$(python scripts/check_naming_convention.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          cargo fetch --locked --manifest-path examples/examples_check/Cargo.toml >/dev/null 2>&1
+          echo "examples_compile="$(python scripts/check_examples_compile.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
           # --- overlap v2 已转正阻断（2026-07-12，AGENTS.md §5.2）：可处理项基线 0 ---
           python scripts/detect_content_overlap_v2.py --budget 999999 >/dev/null 2>&1
           python scripts/triage_overlap.py >/dev/null 2>&1
           ACTIONABLE=$(python -c "import glob,json; s=json.load(open(sorted(glob.glob('reports/OVERLAP_TRIAGE_*.json'))[-1],encoding='utf-8'))['summary']; print(s.get('MERGE',0)+s.get('DOCS_INTERNAL',0))")
           echo "overlap_v2_actionable=$ACTIONABLE" >> $GITHUB_OUTPUT
           if [ "$ACTIONABLE" -gt 0 ]; then echo "overlap_v2=failed" >> $GITHUB_OUTPUT; else echo "overlap_v2=passed" >> $GITHUB_OUTPUT; fi
-          # --- 5 语义观察门（continue-on-error，不触发 issue） ---
-          echo "metadata="$(python scripts/check_metadata_consistency.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
-          echo "semantic_health="$(python scripts/semantic_health.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
-          echo "authority_coverage="$(python scripts/check_concept_authority_coverage.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
-          echo "naming="$(python scripts/check_naming_convention.py >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          # --- 2026-07-14 转阻断（用户指示全部转阻断，--strict 实跑 exit=0，见 reports/GATE_FULL_BLOCKING_U1_2026_07_14.md） ---
+          echo "metadata="$(python scripts/check_metadata_consistency.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          echo "semantic_health="$(python scripts/semantic_health.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          echo "code_blocks="$(python scripts/check_concept_code_blocks.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          echo "mindmap="$(python scripts/check_mindmap_coverage.py --strict >/dev/null 2>&1 && echo "passed" || echo "failed") >> $GITHUB_OUTPUT
+          # --- 语义观察门（continue-on-error，不触发 issue） ---
+          # 观察门机制保留（AGENTS.md §5.2）：当前 0 个观察门。
 
       - name: Upload reports as artifacts
         uses: actions/upload-artifact@v4
@@ -108,7 +116,7 @@ jobs:
           retention-days: 7
 
       - name: Create issue on failure
-        if: steps.gates.outputs.cargo_check == 'failed' || steps.gates.outputs.cargo_test == 'failed' || steps.gates.outputs.cargo_clippy == 'failed' || steps.gates.outputs.cargo_audit == 'failed' || steps.gates.outputs.cargo_vet == 'failed' || steps.gates.outputs.mdbook_build == 'failed' || steps.gates.outputs.kb_auditor == 'failed' || steps.gates.outputs.overlap == 'failed' || steps.gates.outputs.i18n == 'failed' || steps.gates.outputs.mermaid == 'failed' || steps.gates.outputs.topology == 'failed' || steps.gates.outputs.kg_shapes == 'failed' || steps.gates.outputs.canonical_uniqueness == 'failed' || steps.gates.outputs.concept_consistency == 'failed' || steps.gates.outputs.overlap_v2 == 'failed'
+        if: steps.gates.outputs.cargo_check == 'failed' || steps.gates.outputs.cargo_test == 'failed' || steps.gates.outputs.cargo_clippy == 'failed' || steps.gates.outputs.cargo_audit == 'failed' || steps.gates.outputs.cargo_vet == 'failed' || steps.gates.outputs.mdbook_build == 'failed' || steps.gates.outputs.kb_auditor == 'failed' || steps.gates.outputs.overlap == 'failed' || steps.gates.outputs.i18n == 'failed' || steps.gates.outputs.mermaid == 'failed' || steps.gates.outputs.topology == 'failed' || steps.gates.outputs.kg_shapes == 'failed' || steps.gates.outputs.canonical_uniqueness == 'failed' || steps.gates.outputs.concept_consistency == 'failed' || steps.gates.outputs.overlap_v2 == 'failed' || steps.gates.outputs.authority_coverage == 'failed' || steps.gates.outputs.quiz == 'failed' || steps.gates.outputs.naming == 'failed' || steps.gates.outputs.examples_compile == 'failed' || steps.gates.outputs.metadata == 'failed' || steps.gates.outputs.semantic_health == 'failed' || steps.gates.outputs.code_blocks == 'failed' || steps.gates.outputs.mindmap == 'failed'
         uses: actions/github-script@v7
         with:
           script: |
@@ -127,11 +135,15 @@ jobs:
               'KG SHACL (strict)': '${{ steps.gates.outputs.kg_shapes }}',
               'Canonical Uniqueness (strict)': '${{ steps.gates.outputs.canonical_uniqueness }}',
               'Concept Consistency (strict)': '${{ steps.gates.outputs.concept_consistency }}',
-              'Metadata Consistency (observe)': '${{ steps.gates.outputs.metadata }}',
+              'Metadata Consistency (strict)': '${{ steps.gates.outputs.metadata }}',
               'Content Overlap v2 (strict, actionable=${{ steps.gates.outputs.overlap_v2_actionable }})': '${{ steps.gates.outputs.overlap_v2 }}',
-              'Semantic Health (observe)': '${{ steps.gates.outputs.semantic_health }}',
-              'Authority Coverage (observe)': '${{ steps.gates.outputs.authority_coverage }}',
-              'Naming Convention (observe)': '${{ steps.gates.outputs.naming }}'
+              'Semantic Health (strict)': '${{ steps.gates.outputs.semantic_health }}',
+              'Authority Coverage (strict)': '${{ steps.gates.outputs.authority_coverage }}',
+              'Quiz System (strict)': '${{ steps.gates.outputs.quiz }}',
+              'Naming Convention (strict)': '${{ steps.gates.outputs.naming }}',
+              'Examples Compile (strict)': '${{ steps.gates.outputs.examples_compile }}',
+              'Concept Code Blocks (strict)': '${{ steps.gates.outputs.code_blocks }}',
+              'Mindmap Coverage (strict)': '${{ steps.gates.outputs.mindmap }}'
             };
             const summary = Object.entries(jobs)
               .map(([name, result]) => `- ${result === 'passed' ? '✅' : result === 'warn' ? '⚠️' : '❌'} ${name}`)

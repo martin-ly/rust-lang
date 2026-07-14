@@ -355,3 +355,22 @@ fn main() {}
 fn f(x: f32) -> f32 { x * x }
 fn main() { println!("{}", f(2.0)); }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((stdautodiffRust 官方自动微分前沿追踪))
+    一、核心概念
+      1.1 自动微分AD是什么
+      1.2 Rust 为什么需要语言级 AD
+    二、stdautodiff 设计预览
+      2.1 语法构想基于 Project Goals
+      2.2 前向模式 vs 反向模式
+    三、技术挑战与状态
+      3.1 当前状态2026-06
+      3.2 核心挑战
+    四、边界与反命题
+      4.1 反命题树
+      4.2 边界极限
+```

@@ -515,3 +515,26 @@ fn main() {
     println!("{}", shared);
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 工业应用案例研究))
+    一、案例总览矩阵
+    二、Rust for Linux
+      2.2 架构模式
+      2.3 关键技术挑战
+      2.5 成果与现状
+    三、Ferrocene安全认证 Rust
+      3.1 什么是 Ferrocene
+      3.2 为什么需要认证编译器
+      3.3 Ferrocene 的技术路径
+    四、Android Rust 化
+      4.1 Google 的战略决策
+      4.2 覆盖范围
+      4.3 与 Java 的互操作
+    五、Firecracker微虚拟化
+      5.1 架构特点
+      5.2 为什么用 Rust
+```

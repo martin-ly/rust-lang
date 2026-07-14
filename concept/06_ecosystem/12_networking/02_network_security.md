@@ -386,3 +386,21 @@ rustc 1.97.0 实测：两者逻辑结果一致（`assert_eq!` 通过），但反
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
 - **P0 官方**: [std::net — Rust 标准库网络模块（官方 API 文档）](https://doc.rust-lang.org/std/net/index.html)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((网络安全))
+    1. TLS/SSL 安全配置
+    2. 证书管理
+      2.1 自签名证书仅开发与测试
+      2.2 生产证书
+    3. 认证与授权
+      3.1 JWT
+      3.2 OAuth2 / OpenID
+    4. 输入验证与过滤
+    5. DoS 防护
+      5.1 速率限制
+      5.2 连接限制
+```

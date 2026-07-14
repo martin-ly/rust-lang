@@ -63,6 +63,7 @@
   - [十二、与相关文件的分工与交叉引用](#十二与相关文件的分工与交叉引用)
   - [十三、演进方向](#十三演进方向)
   - [权威来源索引](#权威来源索引)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -522,3 +523,21 @@ flowchart TD
 - **P0 官方**: [Rust Async Book](https://rust-lang.github.io/async-book/) · [Tokio docs — select! Cancellation safety](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety) · [std::pin](https://doc.rust-lang.org/std/pin/index.html) · [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)
 - **P1 学术**: [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)（λ_Rust 对 Pin/UnsafeCell 的建模）
 - **P2 生态**: [withoutboats — Asynchronous Clean-up](https://without.boats/blog/asynchronous-clean-up/) · [async-trait crate](https://docs.rs/async-trait/latest/async_trait/)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Async 边界全景Async Boundary))
+    一、权威定义
+    三、边界总览async 程序的六条语义边界
+    四、边界一await 点语义边界
+      4.1 边界陈述
+      4.3 判定条件
+    五、边界二取消安全边界
+      5.1 边界陈述
+      5.3 判定条件
+    六、边界三Pin 与自引用边界
+      6.1 边界陈述
+      6.3 判定条件
+```

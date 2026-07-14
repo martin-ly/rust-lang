@@ -381,3 +381,27 @@ macro_rules! serialize_good {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Kohlbecker et al.: Hygienic Macro Expansion (LFP 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/319838.319859)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((过程宏代码生成优化))
+    一、核心定位
+    二、生成代码质量
+      2.1 可读性与文档
+      2.2 文档注释
+      2.3 保留 Span 信息
+    三、编译时间优化
+      3.1 避免宏递归爆炸
+      3.2 限制递归深度
+      3.3 减少单态化开销
+    四、代码膨胀控制
+      4.1 静态 vs 动态分发
+      4.2 条件编译隔离
+      4.3 常量折叠
+    五、性能测量
+      5.1 cargo build --timings
+      5.2 cargo-llvm-lines
+      5.3 cargo-bloat
+```

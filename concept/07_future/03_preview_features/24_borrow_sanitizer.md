@@ -381,3 +381,41 @@ Miri 是解释器，检测广泛的 UB（越界、未对齐、数据竞争）。
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((BorrowSanitizer动态别名规则验证工具))
+    二、技术机制Retag Intrinsics +
+      2.1 核心设计哲学
+      2.2 与 Miri 的互补关系
+    三、使用方法 Nightly
+      3.1 基本使用
+      3.3 cargo-bsan 插件 未来
+    四、与 Project Goals 2026 的关联
+    五、反命题与边界
+      5.1 BSan 不能做什么
+      5.2 与 Safety Tags 的协同
+```
+
+
+## ⚠️ 反例与陷阱：安全代码的别名违规在编译期即被拒绝
+
+**反例**：试图在同一作用域制造两个可变别名——这正是 BorrowSanitizer 在 `unsafe` 代码中动态检查的情形，但安全代码中借用检查器直接拒绝：
+
+```rust,compile_fail
+fn main() {
+    let mut x = 0;
+    let r1 = &mut x;
+    let r2 = &mut x; // 第二次可变借用
+    *r1 = 1;
+    *r2 = 2;
+}
+```
+
+实测（rustc 1.97.0, edition 2024）：`error[E0499]: cannot borrow `x` as mutable more than once at a time`。
+
+**陷阱本质**：BSan 面向 `unsafe` + 原始指针场景——那里编译器无法静态证明别名唯一性。若误以为「安全代码也需要 BSan 兜底」，说明误解了分工：安全 Rust 的别名规则由借用检查器静态强制，BSan/Miri 只补 `unsafe` 盲区。
+
+**修正**：安全代码遵守借用规则即可；`unsafe` 块中的原始指针别名交给 Miri（开发期）与 BSan（生产期）动态验证。

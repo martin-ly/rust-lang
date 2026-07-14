@@ -47,6 +47,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：在 runtime 内再启动 runtime（rustc 1.97.0 实测）](#反例在-runtime-内再启动-runtimerustc-1970-实测)
     - [✅ 修正：复用当前 runtime 的 Handle](#-修正复用当前-runtime-的-handle)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 一、认知路径
 
@@ -341,4 +342,16 @@ fn main() {
 // let handle = tokio::runtime::Handle::current();
 // handle.spawn(inner());          // 在当前 runtime 上派生，而非新建 runtime
 // 或将阻塞工作移交 handle.spawn_blocking(...)
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Tokio 运行时内部机制Tokio))
+    二、Runtime 架构两种 flavor
+    三、I/O drivermio Reactor
+    四、time driver 与 blocking
+    五、任务句柄生命周期JoinSet /
+    六、LocalSet 与 !Send 任务
 ```

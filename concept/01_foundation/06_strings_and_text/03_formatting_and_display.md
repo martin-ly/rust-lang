@@ -62,6 +62,7 @@
     - [测验 2：格式化说明符](#测验-2格式化说明符)
   - [认知路径](#认知路径)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -450,3 +451,22 @@ D. `{:<8}`
 ---
 
 > **Rust 1.93 起**：`std::fmt::from_fn` 与 `std::fmt::FromFn` 稳定，可用闭包直接构造实现 `Display` 等格式化 trait 的值，无需定义新类型。详见 [版本页](../../07_future/00_version_tracking/rust_1_93_stabilized.md)（特性矩阵节）。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((格式化与显示))
+    二、概念属性矩阵
+    三、技术细节与示例
+      3.1 Display 与 Debug
+      3.2 format! 与参数顺序
+      3.3 格式说明符
+    五、反命题与边界分析
+      5.1 反命题树
+      5.2 边界极限
+    六、边界测试
+      6.1 边界测试
+      6.2 边界测试
+    八、逆向推理链
+```

@@ -1,6 +1,6 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-07-14  **扫描**: 512 concept 活跃文件（排除 archive）  **模式**: warning（不阻断）
+**日期**: 2026-07-14  **扫描**: 512 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
@@ -8,10 +8,10 @@
 | D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=316) | 0.0% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
-| D5 稳定层正文残留 nightly/preview/unstable | 1 | 0.2% | >0 | FAIL |
+| D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 1 / 512
+**受影响文件总数**: 0 / 512
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -83,6 +83,9 @@
 - `concept/06_ecosystem/00_toolchain/10_rustc_driver_and_stable_mir.md` — rustc_driver  nightly-only / StableMIR 状态对比为页面主题本身
 - `concept/06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
 - `concept/06_ecosystem/09_testing_and_quality/04_benchmarking.md` — #[bench]/criterion nightly 状态为工具链事实陈述（页面主题即基准测试手段）
+- `concept/06_ecosystem/01_cargo/04_cargo_196_features.md` — 迁移建议节：迁移窗口留 nightly CI 观察为工程实践陈述，非稳定层依赖
+- `concept/06_ecosystem/05_systems_and_embedded/02_cross_compilation.md` — 反命题树节：自定义 target 无 std 预编译须 nightly build-std 为工具链事实
+- `concept/06_ecosystem/08_formal_verification/01_formal_ecosystem_tower.md` — 演进方向节：Prusti/Kani 绑定特定 nightly/rustc 版本为生态事实陈述
 
 另有两类规则级排除：WASI Preview 1/2/3（WASM 规范版本专名）与 URL 路径中的 nightly（官方文档固定托管路径）。
 
@@ -90,26 +93,19 @@
 
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
-
 ### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（0）
-
 
 ### D3 关键字段同文件重声明（0）
 
-
 ### D4 文首块 Rust 版本号自矛盾（0）
 
-
-### D5 稳定层正文残留 nightly/preview/unstable（1）
-
-- `concept/06_ecosystem/05_systems_and_embedded/02_cross_compilation.md` — 稳定层 nightly/preview 关键词 1 处
+### D5 稳定层正文残留 nightly/preview/unstable（0）
 
 ### D6 Summary 低信息量模板套话（0）
 
-
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
-- D5 稳定层nightly残留 1 (>0)
+- 无（全部通过）
 
 ## 机器可读
 

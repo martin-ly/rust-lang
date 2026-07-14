@@ -688,3 +688,23 @@ WASM 使用单一的连续字节数组作为内存，通过偏移量访问。Rus
 - 优先选择 `wasm32-wasip1` 或 `wasm32-wasip2` 获取系统能力，同时保持沙箱安全。
 - 通过 `wasm-bindgen` 而非手动 FFI 进行 JS 互操作，以平衡性能与安全。
 - 使用 `MaybeUninit` 与缓冲区复用减少 Wasm 线性内存分配。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((WebAssembly 生态Rust))
+    一、核心概念
+      1.1 WebAssembly 的设计哲学
+      1.2 Rust Wasm 的编译模型
+      1.3 为什么 Rust 是 Wasm 的首选语言
+    二、技术细节
+      2.1 wasm32 目标三元组
+      2.2 wasm-bindgen 与 JS 互操作
+      2.3 Wasm 组件模型
+    三、应用场景分析
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    五、工具链与运行时
+```

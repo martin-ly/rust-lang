@@ -70,6 +70,7 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -665,3 +666,23 @@ fn main() {}
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio) · [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((派生 CoercePointee))
+    一、核心概念
+      1.1 问题自定义智能指针的样板代码
+      1.2 CoerceUnsized 与
+      1.3 deriveCoercePointee 方案
+    二、技术细节
+      2.1 派生宏的展开逻辑
+      2.2 约束条件
+      2.3 与现有 Trait 的交互
+    三、安全分析
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    五、演进路线
+```

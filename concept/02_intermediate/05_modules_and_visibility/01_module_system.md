@@ -62,6 +62,7 @@
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -890,3 +891,21 @@ pub mod evaluator;
 - **对偶**：与 C++ 头文件/链接模型相对，见 [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)。
 - **组合**：与 [API Naming Conventions](03_api_naming_conventions.md) 组合定义公共接口。
 - **依赖**：项解析依赖 [Items](../../01_foundation/07_modules_and_items/12_items.md)。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((模块系统Rust 的代码组织与可见性规则))
+    一、核心概念
+      1.1 Crate、Module、Package
+      1.2 文件系统映射
+      1.3 可见性规则
+    二、技术细节
+      2.1 use 声明与路径解析
+      2.2 Edition 2018 路径规则变更
+      2.3 Workspace 组织
+    三、反命题与边界分析
+      3.1 反命题树
+      3.2 边界极限
+```

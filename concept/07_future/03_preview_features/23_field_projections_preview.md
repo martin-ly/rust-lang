@@ -425,3 +425,26 @@ fn fill(p: Pin<&mut Fut>, b: u8) {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures) · [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Field Projections))
+    一、核心概念
+      1.2 Field Projections 提案
+    二、技术细节
+      2.1 投影类型系统
+      2.2 与 Pin 的协同
+    三、使用场景
+      场景 1MMIO 寄存器访问嵌入式/内核
+      场景 2安全地自引用结构
+      场景 3零拷贝反序列化
+    四、反命题与边界分析
+      4.1 与 offset_of! 的关系
+      4.2 设计挑战
+    五、演进路线
+      5.1 2026 年官方三步计划Rust
+      5.2 长期时间轴
+      相关已稳定特性
+```

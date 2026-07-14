@@ -66,6 +66,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：经 `Arc` 共享后直接写 `TcpStream`（rustc 1.97.0 实测）](#反例经-arc-共享后直接写-tcpstreamrustc-1970-实测)
     - [✅ 修正：`try_clone` 复制套接字句柄](#-修正try_clone-复制套接字句柄)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 📐 知识结构
 
@@ -1012,4 +1013,27 @@ fn main() {
 
 ").unwrap();
 }
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((C10 Networks - Tier 2))
+    1. 网络编程基础
+      1.1 OSI 模型与 TCP/IP
+      1.2 地址与端口
+    2. TCP 连接管理
+      2.1 TCP 服务器
+      2.2 TCP 客户端
+      2.3 连接池
+    3. UDP 数据报通信
+      3.1 UDP 基础
+      3.2 UDP 多播
+    4. DNS 解析
+      4.1 标准库 DNS 解析
+      4.2 使用 trust-dns
+    5. 错误处理与超时
+      5.1 超时设置
+      5.2 重试策略
 ```

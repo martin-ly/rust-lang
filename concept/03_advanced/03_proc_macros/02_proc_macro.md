@@ -90,6 +90,7 @@
     - [宏速选](#宏速选)
     - [学习路径](#学习路径)
     - [速查与练习](#速查与练习)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -1153,3 +1154,26 @@ fn test_compile_fail() {
 - **速查卡**: 见本页核心概念与常见模式表格
 - **RBE 练习**: [Macros](https://doc.rust-lang.org/rust-by-example/macros.html)
 - **Rustlings**: [21_macros](https://github.com/rust-lang/rustlings/tree/main/exercises/21_macros)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((过程宏编译期代码生成的元编程工具))
+    一、核心概念
+      1.1 过程宏 vs macro_rules
+      1.2 三种过程宏类型
+      1.3 编译期执行模型
+    二、技术细节
+      2.1 TokenStream 操作
+      2.2 syn + quote 工作流
+      2.3 卫生性与 Span
+    三、常见模式
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    八、宏调试与测试
+      8.1 调试工具
+      8.2 错误处理
+      8.3 测试策略
+```

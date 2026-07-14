@@ -705,3 +705,34 @@ result
 
 专项测验题量更大、覆盖更全面，通常按难度分层；嵌入式测验更精简，直接关联刚阅读的概念内容，用于即时检验理解。
 </details>
+
+## ⚠️ 反例与陷阱
+
+错误处理测验的核心陷阱：`?` 的传播依赖函数返回类型。
+
+### 反例：在不返回 Result 的函数中使用 ?（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0277
+fn read() -> Result<(), std::io::Error> {
+    Ok(())
+}
+
+fn main() {
+    read()?; // ❌ main 未返回 Result，不能用 ?
+}
+```
+
+**实测错误**：`error[E0277]: the`?` operator can only be used in a function that returns `Result` or `Option``。
+
+### ✅ 修正：让函数返回 `Result`（或 `Option`），`?` 才能传播错误
+
+```rust
+fn read() -> Result<(), std::io::Error> {
+    Ok(())
+}
+
+fn main() -> Result<(), std::io::Error> {
+    read()?; // ✅ 函数返回 Result 后 ? 可用
+    Ok(())
+}
+```

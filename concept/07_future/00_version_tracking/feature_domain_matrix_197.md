@@ -274,3 +274,18 @@ flowchart LR
 
 - **P0 官方**: [Rust RFCs 索引（官方特性提案库）](https://rust-lang.github.io/rfcs/)
 - **P1 学术/形式化**: [Jung, Jourdan, Krebbers & Dreyer: RustBelt — Securing the Foundations of the Rust Programming Language（POPL 2018，类型系统形式化基线）](https://plv.mpi-sws.org/rustbelt/)（2026-07-12 验证 HTTP 200）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 1.97.0 特性 × 领域反查矩阵))
+    0. 阅读说明与图例
+    1. 31 × 9 反查矩阵行=特性，列=领域
+    2. 领域—特性关联总览Mermaid
+    3. 缺口覆盖核对对齐审计 §4 P2-2 八位置
+    4. 按领域聚合每个领域涉及特性 +
+      4.1 Language语言语义
+      4.2 Type类型系统
+      4.3 Memory内存模型
+```

@@ -292,3 +292,22 @@ fn main() {
     println!("{}", c.retries());
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((友元 vs 模块可见性C++ 的 friend 与))
+    一、核心命题
+    二、C++ 的 friend 机制
+      2.1 基本用法
+      2.2 friend 的问题
+    三、Rust 的模块可见性
+      3.1 可见性修饰符
+      3.2 可见性级别
+      3.3 模块系统的优势
+    四、核心对比
+    五、Rust 中模拟 friend 的场景
+      5.1 同一 crate 内的亲密协作
+      5.2 通过 trait 暴露受控接口
+```

@@ -48,6 +48,10 @@
     - [测验 3：发布 crate 到 crates.io 时，`license` 字段是必须的吗？](#测验-3发布-crate-到-cratesio-时license-字段是必须的吗)
     - [测验 4：Source replacement 会改变 crate 名称或版本要求吗？](#测验-4source-replacement-会改变-crate-名称或版本要求吗)
   - [权威来源索引](#权威来源索引)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：trait 实现漏项无法发布（rustc 1.97.0，--edition 2024 实测）](#反例trait-实现漏项无法发布rustc-1970--edition-2024-实测)
+    - [✅ 修正：补齐所有无默认实现的 trait 项](#-修正补齐所有无默认实现的-trait-项)
 
 ---
 
@@ -326,3 +330,43 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Cargo Registry 与包发布」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+## ⚠️ 反例与陷阱
+
+发布到 registry 前 `cargo publish` 会先完整编译；漏实现 trait 必需项会直接失败。
+
+### 反例：trait 实现漏项无法发布（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0046
+trait Job {
+    fn run(&self);
+}
+
+struct Worker;
+
+impl Job for Worker {} // ❌ 漏实现必需方法
+
+fn main() {
+    let _ = Worker;
+}
+```
+
+**实测错误**：`error[E0046]: not all trait items implemented, missing:`run``。
+
+### ✅ 修正：补齐所有无默认实现的 trait 项
+
+```rust
+trait Job {
+    fn run(&self);
+}
+
+struct Worker;
+
+impl Job for Worker {
+    fn run(&self) {} // ✅ 补齐全部必需项
+}
+
+fn main() {
+    let _ = Worker;
+}
+```

@@ -188,24 +188,24 @@ cargo test --workspace
 # mdbook 构建（输出到 book/，不应提交）
 mdbook build
 
-# 本地一键运行全部 23 个质量门（15 阻断 + 8 语义观察）
+# 本地一键运行全部 23 个质量门（23 阻断 + 0 语义观察）
 bash scripts/run_quality_gates.sh
 
-# concept/ 代码块批量编译实测（观察门 20；--with-deps 需先 cargo build --workspace）
+# concept/ 代码块批量编译实测（阻断门 21，--strict 默认抽样；--with-deps 需先 cargo build --workspace）
 python scripts/check_concept_code_blocks.py --sample 0 --with-deps --json tmp/cb.json --report reports/xxx.md
 
-# 命名规范 lint（AGENTS.md §4.0：N1–N6；默认观察 exit 0，--strict 转阻断）
-python scripts/check_naming_convention.py
+# 命名规范 lint（AGENTS.md §4.0：N1–N6；2026-07-14 转阻断门 18，--strict 仅卡 ERROR，WARN 不阻断）
+python scripts/check_naming_convention.py --strict
 
 # 安装 pre-commit hook（会在每次 commit 前自动跑重叠/i18n/死链检查）
 bash scripts/git_hooks/install.sh
 ```
 
-### 5.1 CI 质量门（23 项：15 阻断 + 8 语义观察）
+### 5.1 CI 质量门（23 项：23 阻断 + 0 语义观察）
 
-所有合并到 `main`/`master` 的变更必须通过以下 **15 个阻断质量门**；另有 **8 个语义观察门**（warning，不阻断，默认 exit 0，加 `--strict` 可转阻断）持续追踪语义健康：
+所有合并到 `main`/`master` 的变更必须通过以下 **23 个阻断质量门**。语义观察门机制保留（见 §5.2）但当前 **0 个观察门**（2026-07-14 用户指示全部转阻断，4 门 --strict 实跑均 exit 0，见 `reports/GATE_FULL_BLOCKING_U1_2026_07_14.md`）：
 
-**阻断门（15）**：
+**阻断门（23）**：
 
 1. `cargo check --workspace`
 2. `cargo test --workspace --quiet`
@@ -222,24 +222,26 @@ bash scripts/git_hooks/install.sh
 13. `python scripts/check_canonical_uniqueness.py --strict`（concept 权威页唯一性；2026-07-12 转正）
 14. `python scripts/concept_consistency_auditor.py --strict`（跨文件概念定义一致性；2026-07-12 转正）
 15. `python scripts/detect_content_overlap_v2.py --budget 999999` + `python scripts/triage_overlap.py`（段落级重叠 v2；可处理项 MERGE+DOCS_INTERNAL 基线 0，超 0 即阻断；2026-07-12 转正，清零证据见 `reports/DEDUP_V2_ZERO_2026_07_12.md` 与 §5.2）
+16. `python scripts/check_concept_authority_coverage.py --strict --include-crates`（concept 权威层国际化权威来源覆盖率：内容页 any=100%/none=0/核心 L1–L4 无 P0 缺口=0；`--include-crates` 附加 crates/*/docs 覆盖小节：crates 非 stub 内容页 64/64=100%，crates 缺口>0 亦阻断；2026-07-14 转正，R4 评估见 `reports/OBSERVE_GATE_PROMOTION_REVIEW_R4_2026_07_14.md`）
+17. `python scripts/check_examples_compile.py --strict`（根 examples/ 游离示例编译保护；9 stdlib rustc 直编 + 3 依赖示例经 `examples/examples_check/` crate + 2 Cargo Script 豁免；2026-07-14 转正并**新增 CI job `examples-compile`**，此前仅本地脚本挂载）
+18. `python scripts/check_naming_convention.py --strict`（命名规范 lint，AGENTS.md §4.0 N1–N6；扫描 concept/knowledge/docs/content/crates/*/docs；**--strict 仅卡 ERROR>0，WARN 不阻断**；基线 ERROR=0/WARN=54（2026-07-14 实测）；2026-07-14 转正）
+19. `python scripts/check_quiz_system.py --strict`（测验体系一致性：quiz_registry.yaml 注册表核对、题型多样性≥3、难度标注率 100%、quiz↔concept 双向链接；--strict 时检查 1–3 失败即阻断，回链缺失仅统计；2026-07-14 转正）
+20. `python scripts/check_metadata_consistency.py --strict`（元数据 D1–D6；D2 豁免 2 项 / D5 豁免 29 项（15 项 2026-07-12 + 14 项 2026-07-13 W0–W5 新建页逐文件复核）均已显式登记于检查器白名单并附理由；2026-07-13 另修复 NIGHTLY_RE 词边界误报；2026-07-14 复测 D1–D6 全 0、--strict exit 0，2026-07-14 转阻断）
+21. `python scripts/check_concept_code_blocks.py --strict`（concept/ 代码块批量编译实测；提取 ```rust 块分类 10 桶，compile_fail 验证确实失败+E0xxx/editionNNNN 校验，std-only 候选 >300 分层抽样 rustc 1.97 --edition 2024 直编（自动包 fn main），`--with-deps` 用 target/debug/deps rmeta --extern 实测依赖块；“应过但失败/标注腐烂”>0 即 exit 1；2026-07-13 由附加小节提升为独立门，基线 `reports/CONCEPT_CODE_BLOCKS_BASELINE_2026_07_13.md`；2026-07-14 复测 rot=0、--strict 默认抽样 exit 0，2026-07-14 转阻断）
+22. `python scripts/check_mindmap_coverage.py --strict`（思维表征覆盖：内容页 mindmap 覆盖率与反例节存在率，仅 concept/ 排除 00_meta/stub；--strict 基线 mindmap≥10%/反例≥40%，2026-07-14 实测 90.0%/84.4% exit 0；2026-07-14 转阻断）
+23. `python scripts/semantic_health.py --strict`（综合语义健康分；grade=FAIL 时阻断；2026-07-14 实测 99.6 grade OK exit 0；聚合门，2026-07-14 转阻断）
 
-**语义观察门（8，非阻断）**：
-16. `python scripts/check_metadata_consistency.py`（元数据 D1–D6；2026-07-13 D1–D6 全 0 且 --strict exit 0：D2 豁免 2 项 / D5 豁免 29 项（15 项 2026-07-12 + 14 项 2026-07-13 W0–W5 新建页逐文件复核）均已显式登记于检查器白名单并附理由；2026-07-13 另修复 NIGHTLY_RE 词边界误报（`target_feature(` 误匹配 `feature\s*\(`））
-17. `python scripts/semantic_health.py`（综合语义健康分；grade=FAIL 时 --strict 才阻断）
-18. `python scripts/check_concept_authority_coverage.py`（concept 权威层国际化权威来源覆盖率；--strict 已支持且当前 exit=0，见 §5.2；`--include-crates` 附加 crates/*/docs 覆盖小节：crates 非 stub 内容页 64/64=100%，默认观察 exit 0，--strict 时 crates 缺口>0 亦阻断；2026-07-12 扩展）
-19. `python scripts/check_examples_compile.py`（根 examples/ 游离示例编译保护；9 stdlib rustc 直编 + 3 依赖示例经 `examples/examples_check/` crate + 2 Cargo Script 豁免；2026-07-12 新增，P3-5）
-20. `python scripts/check_concept_code_blocks.py`（concept/ 代码块批量编译实测；提取 ```rust 块分类 10 桶，compile_fail 验证确实失败+E0xxx/editionNNNN 校验，std-only 候选 >300 分层抽样 rustc 1.97 --edition 2024 直编（自动包 fn main），`--with-deps` 用 target/debug/deps rmeta --extern 实测依赖块；默认观察 exit 0，`--strict` 时“应过但失败/标注腐烂”>0 → exit 1；2026-07-13 由附加小节提升为独立观察门，基线 `reports/CONCEPT_CODE_BLOCKS_BASELINE_2026_07_13.md`：4811 块 / 实测 2990 / 修复腐烂 30 块后 rot=370，其中缺上下文类 ~250 已登记清单）
-21. `python scripts/check_naming_convention.py`（命名规范 lint，AGENTS.md §4.0 N1–N6；扫描 concept/knowledge/docs/content/crates/*/docs；基线 ERROR=0/WARN=78（2026-07-12 命名收尾后）；2026-07-12 新增）
-22. `python scripts/check_mindmap_coverage.py`（思维表征观察：内容页 mindmap 覆盖率与反例节存在率，仅 concept/ 排除 00_meta/stub；--strict 基线 mindmap≥10%/反例≥40%，当前 11.4%/71.1%；2026-07-13 P4 由独立检查器挂入）
-23. `python scripts/check_quiz_system.py`（测验体系一致性：quiz_registry.yaml 注册表核对、题型多样性≥3、难度标注率 100%、quiz↔concept 双向链接；2026-07-13 P4 由独立检查器挂入）
+**语义观察门（0，机制保留）**：
 
-> 说明：语义观察门用于“可机器复核的语义趋势”，不因单项退化阻断 PR；但当任一观察门指标显著恶化时，应在 PR 描述中说明原因与后续治理计划。权威覆盖门（18）目标基线为 concept/ 真内容页 any=100%、none=0、核心 L1–L4 无 P0 缺口=0。
+> 说明：观察门机制（默认 exit 0、warning 不阻断、达标后按 §5.2 转阻断）保留；2026-07-14 起当前 0 个观察门。新增观察门时在 `run_quality_gates.sh` 观察段与 `quality_gates.yml` 以 `continue-on-error: true` 挂载，命名后缀 `(observe)`。权威覆盖门（16）目标基线为 concept/ 真内容页 any=100%、none=0、核心 L1–L4 无 P0 缺口=0。
 
-### 5.2 观察门转正机制（P3-7，2026-07-12 建立）
+### 5.2 观察门机制说明（P3-7，2026-07-12 建立；当前 0 个在观察）
+
+**当前状态**：2026-07-14 用户指示全部转阻断后，**23 门全阻断、0 个观察门**。机制保留以备将来新增观察门。
 
 **转正规则**：任一语义观察门**连续 4 周（或连续 10 次 CI 运行）达标**，经评估后转为阻断门（在 `run_quality_gates.sh` 与 `quality_gates.yml` 中改为 `--strict` 且 `continue-on-error: false`）。转正前提：本地实跑 `--strict` 当前 exit=0。转正后若指标退化阻断 PR，按正常阻断门流程处置，不自动降级。
 
-**当前各观察门基线状态（2026-07-13 更新，P4 挂入 mindmap/quiz 两门；其余摘自 `reports/` 最新基线）**：
+**各门基线状态（2026-07-14 更新：R4 评估后 authority coverage / examples compile / naming convention / quiz system 四门转阻断，见 `reports/OBSERVE_GATE_PROMOTION_REVIEW_R4_2026_07_14.md`；metadata consistency / concept code blocks / mindmap coverage / semantic health 四门同日转阻断，见 `reports/GATE_FULL_BLOCKING_U1_2026_07_14.md`；其余摘自 `reports/` 最新基线）**：
 
 | 门 | 基线指标（2026-07-12） | --strict 实跑 | 状态 |
 |---|---|:---:|---|
@@ -247,15 +249,15 @@ bash scripts/git_hooks/install.sh
 | KG SHACL | K1–K6 全 0（K1b 缺 bloomLevel=55，仅扣分不阻断） | exit 0 | ✅ **已转阻断** |
 | canonical uniqueness | 0 处双权威页/同主题重复 | exit 0 | ✅ **已转阻断** |
 | concept consistency | 0 错误级发现（decision trees 等跨文件引用全有效） | exit 0 | ✅ **已转阻断** |
-| metadata consistency | D1–D6 全 0（flagged 0/511）；D2 白名单 2 项（L0 导航页/L7 跟踪页）与 D5 白名单 29 项（15 项 2026-07-12 + 14 项 2026-07-13 W0–W5 新建页：确属 nightly-only 主题页/quiz 考点/RFC 索引状态列，逐文件复核）均显式登记于检查器并公示于报告；2026-07-13 修复 NIGHTLY_RE `feature\s*\(` 词边界误报 | exit 0 | ⏳ 维持观察（2026-07-12 起 D1–D6 归零且 --strict exit 0，连续达标后可评估转正） |
+| metadata consistency | D1–D6 全 0（2026-07-14 复测；D2 白名单 2 项与 D5 白名单 29 项均显式登记于检查器并公示于报告；前序 2026-07-14 早些时候 D5 曾回归 32，并行内容回填所致，已随回填清零） | exit 0（2026-07-14 复测） | ✅ **已转阻断**（2026-07-14，用户指示全部转阻断） |
 | overlap v2 | 命中 559；可处理 MERGE=0 + DOCS_INTERNAL=0 = **0**（SERIES 115 白名单 / REVIEWED 444 已批量复核白名单 / REVIEW 0；54 对清零明细见 `reports/DEDUP_V2_ZERO_2026_07_12.md`，437 REVIEW 复核加固见 `reports/OVERLAP_REVIEW_SWEEP_2026_07_12.md`） | exit 0 | ✅ **已转阻断**（2026-07-12，可处理项基线 0） |
-| naming convention | N1–N6：ERROR=0 / WARN=78（无序号系列文件 35 + 无序号目录 39 + N4 stub 3 + N5 docs 跳号 1；扫描 1790 文件/254 目录；2026-07-12 命名收尾：docs/08_guides→08_usage_guides，crates 5 目录改 tier_05_*，10 个 rust_194_updates + c03 snippets 补 README 豁免索引） | exit 0 | ⏳ 新增观察门（2026-07-12，§4.0 重编号配套；连续达标后可评估转正） |
-| semantic health | 总分 99.6 grade OK（元数据 100.0 / 拓扑 98.4 / 去重 100.0 / KG 100.0；2026-07-13 W0–W5 收尾复核同值） | exit 0 | ⏳ 维持观察（聚合门） |
-| authority coverage | 内容页 P0/P1/P2/any 全 100% / none=0 / 核心 L1–L4 无 P0 缺口=0（2026-07-12 补齐唯一 P2 缺口页）；`--include-crates` 扩展：crates docs 576 文件（含嵌套子 crate）中非 stub 内容页 64/64=100%（stub 509 / 纯索引 README 2 / 代码清单豁免 1 登记） | exit 0 | ⏳ 维持观察（--strict 已实现且 exit 0，连续达标后可评估转正） |
-| examples compile | 14 游离示例：9 stdlib ✅ + 3 deps ✅（经 `examples/examples_check/` crate）+ 2 Cargo Script 豁免 | exit 0 | ⏳ 新增观察门（2026-07-12，P3-5；连续达标后可评估转正） |
-| concept code blocks | 4977 块分 10 桶；全量实测 2851（candidate 1865 pass/0 fail + compile_fail 810 ok + dep 149 pass/1 fail/26 untested）；**2026-07-14 R2b**：dep_fail 148→1（变体去重+笛卡尔积轮换、proc-macro/async 回退、DEP_KNOWN_MISSING 16 条结构化豁免接线；详见 `reports/CODE_BLOCKS_R2B_2026_07_14.md`，候选/compile_fail 零回归）；rot=1（剩余 1 块为双 main 对比块，文档侧处理中）；前序基线 `reports/CONCEPT_CODE_BLOCKS_BASELINE_2026_07_13.md` | exit 0（观察；--strict 当前 rot=1 会 exit 1，未启用） | ⏳ 维持观察（2026-07-14 R2b rot=1；rot=0 稳定 4 周后可评估转正） |
-| mindmap coverage | 内容页 429：mindmap 49（11.4%）/ 反例 305（71.1%）（P1-b 反例补齐后实测，2026-07-13；--strict 基线 mindmap≥10%/反例≥40%） | exit 0（观察） | ⏳ 新增观察门（2026-07-13，P4 由独立检查器挂入；连续达标后可评估转正） |
-| quiz system | 注册表 21 独立 quiz 全一致 / 题型均≥3 种 / 难度标注 309/309=100% / quiz→concept 21/21、concept→quiz 回链 21/21（2026-07-13 实测 exit 0） | exit 0（观察） | ⏳ 新增观察门（2026-07-13，P4 由独立检查器挂入；连续达标后可评估转正） |
+| naming convention | N1–N6：ERROR=0 / WARN=54（2026-07-14 实测，1821 文件/258 目录；WARN 较 07-12 基线 78 减 24；--strict 仅卡 ERROR>0，WARN 不阻断） | exit 0 | ✅ **已转阻断**（2026-07-14，R4 评估） |
+| semantic health | 总分 99.6 grade OK（元数据 100.0 / 拓扑 98.4 / 去重 100.0 / KG 100.0；2026-07-14 复测同值） | exit 0 | ✅ **已转阻断**（2026-07-14，用户指示全部转阻断；聚合门） |
+| authority coverage | 内容页 P0/P1/P2/any 全 100% / none=0 / 核心 L1–L4 无 P0 缺口=0（2026-07-12 补齐唯一 P2 缺口页）；`--include-crates` 扩展：crates docs 非 stub 内容页 64/64=100%；2026-07-14 --strict --include-crates 实跑 exit 0 | exit 0 | ✅ **已转阻断**（2026-07-14，R4 评估，--strict --include-crates） |
+| examples compile | 14 游离示例：9 stdlib ✅ + 3 deps ✅（经 `examples/examples_check/` crate）+ 2 Cargo Script 豁免；失败 0；2026-07-14 --strict 实跑 exit 0 | exit 0 | ✅ **已转阻断**（2026-07-14，R4 评估；同步新增 CI job `examples-compile`） |
+| concept code blocks | 4977 块分 10 桶；**2026-07-14 复测 rot=0**：candidate 抽样 300 pass/0 fail + compile_fail 822 ok/0 标注腐烂（--strict 默认抽样实跑 exit 0）；前序 R2b rot=1（双 main 对比块）已清零，详见 `reports/CODE_BLOCKS_R2B_2026_07_14.md` 与 `reports/CONCEPT_CODE_BLOCKS_BASELINE_2026_07_13.md` | exit 0（2026-07-14 复测） | ✅ **已转阻断**（2026-07-14，用户指示全部转阻断；--strict 默认抽样） |
+| mindmap coverage | 内容页 430：mindmap 387（90.0%）/ 反例 363（84.4%）（2026-07-14 复测；--strict 基线 mindmap≥10%/反例≥40%） | exit 0 | ✅ **已转阻断**（2026-07-14，用户指示全部转阻断） |
+| quiz system | 注册表 21 独立 quiz 全一致 / 题型均≥3 种 / 难度标注 309/309=100% / quiz→concept 21/21、concept→quiz 回链 21/21；2026-07-14 --strict 实跑 exit 0 | exit 0 | ✅ **已转阻断**（2026-07-14，R4 评估，--strict 检查 1–3 失败即阻断） |
 
 **去重 v2 转阻断完成（P2-5 收尾，2026-07-12）**：v1（阻断门 8）报 1 对而 v2 报 552 对，v1 漏检属实；v2 可处理项 54 已于 2026-07-12 清零——autoverus 近克隆对（双向计数 2）按 canonical 裁定差异化改写（L4 `04_formal/04_model_checking/07_autoverus.md` 保留为概念权威页，L7 `07_future/03_preview_features/33_autoverus_preview.md` 改写为预览跟踪页），其余 52 对逐对人工复核后登记 SERIES 白名单（docs/05_practice 项目指南系列 48 对 + design_theory 子目录索引系列 4 对，证据注释见 `scripts/triage_overlap.py` `SERIES_PATH_RE`）。本门已转阻断：`run_quality_gates.sh` 与 `quality_gates.yml` 中可处理项（MERGE+DOCS_INTERNAL）> 0 即 exit 1，nightly 同步纳入 issue 触发条件。SERIES 白名单：`triage_overlap.py` 正则 + `SERIES_PATH_RE` 路径族 + 显式 `SERIES_PAIRS` 登记（2026-07-12 人工复核：c10 examples_collection/part2 分章、c02 readme_rust_189/190 版本系列、docs/05_practice 项目系列、design_theory 索引系列）。
 
@@ -268,7 +270,7 @@ bash scripts/git_hooks/install.sh
 3. **不要** 在 `archive/` 中创建新的活跃内容副本。
 4. **不要** 在 `crates/*/docs/` 中复制通用概念解释；应链接到 `concept/`。
 5. **新增重复内容必须被 CI 或人工 review 拦截**。
-6. **禁止未经验证的“完成”声明**：任何“已完成/全部通过/100%”类结论必须引用可机器复核的证据（质量门报告、脚本输出、CI 记录），且必须同时核对 15 阻断门与 8 语义观察门；仅阻断门通过不得宣称“质量门全部通过”。报告与观察门状态矛盾时，以观察门最新报告为准并勘误原报告。
+6. **禁止未经验证的“完成”声明**：任何“已完成/全部通过/100%”类结论必须引用可机器复核的证据（质量门报告、脚本输出、CI 记录），且必须覆盖全部 23 个阻断质量门（当前 0 个语义观察门；若将来新增观察门，亦须一并核对）；仅部分门通过不得宣称“质量门全部通过”。报告与观察门状态矛盾时，以观察门最新报告为准并勘误原报告。
 
 ---
 
@@ -286,4 +288,4 @@ bash scripts/git_hooks/install.sh
 
 ---
 
-**最后更新**：2026-07-13（已对齐 Rust 1.97.0 stable；P1–P5 收尾，23 门：15 阻断 + 8 观察）
+**最后更新**：2026-07-14（已对齐 Rust 1.97.0 stable；23 门全阻断：23 阻断 + 0 观察）

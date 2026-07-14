@@ -350,3 +350,15 @@ fn main() {
     let _ = Command::new(if cfg!(windows) { "cmd" } else { "sh" });
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 跨平台进程管理))
+    2. 统一抽象层
+    3. 平台特定扩展
+    5. 服务集成
+    8. 跨平台抽象决策流程Mermaid
+    定理链
+```

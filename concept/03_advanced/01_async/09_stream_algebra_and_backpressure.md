@@ -54,6 +54,7 @@
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
   - [九、来源](#九来源)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 一、认知路径
 
@@ -474,3 +475,22 @@ flowchart TD
 - [Tokio docs — `tokio::sync::mpsc`](https://docs.rs/tokio/latest/tokio/sync/mpsc/)（bounded/unbounded channel 语义与 `send` 的背压行为）
 - Little, J. D. C. — *A Proof for the Queuing Formula: L = λW*（Little 定律原始论文，Oper. Res. 9(3), 1961）
 - 站内交叉引用：[Async/Await §8.10/§15](01_async.md) · [Async 高级主题](02_async_advanced.md) · [Async 取消安全](05_async_cancellation_safety.md) · [Async 边界全景](06_async_boundary_panorama.md) · [Pin 与 Unpin](08_pin_unpin.md) · [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) · [Pin 投射反例集](11_pin_projection_counterexamples.md)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Stream 代数与背压拉取式序列的形式刻画))
+    二、Stream 的代数刻画与 Iterator
+      2.1 签名的对偶
+      2.2 对偶的可编译实例
+    三、StreamExt 组合子代数定律与失效点
+      3.1 成立的定律
+      3.2 融合等价实测
+      3.3 失效点一merge 的顺序非确定性
+    四、背压的形式模型
+      4.1 定义速率约束的反向传播
+      4.2 两种实现窗口制与信用制
+      4.3 队列论视角bounded channel
+    九、来源
+```

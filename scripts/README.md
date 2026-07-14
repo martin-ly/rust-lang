@@ -63,7 +63,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `rust_version_tracker.py` | Rust 版本特性跟踪 |
 | `version_fact_check.py` | 版本相关事实核查 |
 | `lint_filenames.py` | 文件名 snake_case 命名检查 |
-| `check_naming_convention.py` | 命名规范 lint（质量门 20，观察；AGENTS.md §4.0 N1–N6：序号格式/同号冲突/双前缀/变体后缀 stub 豁免/一级目录连续性/中文空格大小写；扫描 concept/knowledge/docs/content/crates/*/docs；默认 exit 0，`--strict` 时 ERROR>0 exit 1） |
+| `check_naming_convention.py` | 命名规范 lint（质量门 18，阻断；2026-07-14 R4 评估转正；AGENTS.md §4.0 N1–N6：序号格式/同号冲突/双前缀/变体后缀 stub 豁免/一级目录连续性/中文空格大小写；扫描 concept/knowledge/docs/content/crates/*/docs；默认 exit 0，`--strict` 时 ERROR>0 exit 1，WARN 不阻断） |
 | `check_concept_numbering.py` | concept 文件编号检查 |
 | `check_crates_docs_alignment.py` | crates 文档对齐检查 |
 | `check_rust_feature_versioning.py` | Rust 特性版本标注检查 |
@@ -71,20 +71,20 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `detect_content_overlap_v2.py` | 段落级重叠检测 v2（质量门 15，2026-07-12 转阻断：triage 可处理项 MERGE+DOCS_INTERNAL 基线 0） |
 | `triage_overlap.py` | 重叠报告分诊（MERGE/DOCS_INTERNAL/SERIES/REVIEW；SERIES 白名单 = 正则 + `SERIES_PATH_RE` 路径族 + 显式 `SERIES_PAIRS` 人工复核登记） |
 | `check_canonical_uniqueness.py` | `concept/` 权威页唯一性检查（质量门 13，阻断） |
-| `check_quiz_system.py` | 测验体系一致性检查（质量门 23，观察；2026-07-13 P4 挂入，原 W3-a 独立观察检查器）：quiz_registry.yaml 与实际文件一致性（题数/题型/难度分布/嵌入式统计）、独立 quiz 题型多样性 ≥3 种、难度标注率、quiz↔concept 双向链接率；默认 exit 0，`--strict` 检查 1-3 失败即 exit 1（回链缺失仅统计） |
+| `check_quiz_system.py` | 测验体系一致性检查（质量门 19，阻断；2026-07-14 R4 评估转正）：quiz_registry.yaml 与实际文件一致性（题数/题型/难度分布/嵌入式统计）、独立 quiz 题型多样性 ≥3 种、难度标注率、quiz↔concept 双向链接率；默认 exit 0，`--strict` 检查 1-3 失败即 exit 1（回链缺失仅统计） |
 | `check_template_cliches.py` | `concept/` 模板套话黑名单扫描；`--strict` 发现命中即 exit 1 |
 | `audit_content_completeness.py` | `concept/` 内容完整性审计：TODO 类标记 / 空章节 / PLACEHOLDER_SECTION（占位引导语，观察指标默认 exit 0；`--strict` 存在即 exit 1） |
 | `check_decision_trees.py` | 决策树机器可读层校验（`decision_trees.yaml` 结构/死端/概念覆盖）；结构错误 exit 1 |
 | `check_glossary_alignment.py` | 术语表对齐检查（以 `terminology_glossary.md` 为权威）；`--strict` 有差异 exit 1 |
 | `check_msrv_consistency.py` | MSRV 单一事实源检查（根 `Cargo.toml` rust-version=1.97.0）；`--strict` 不一致 exit 1 |
 | `check_association_blocks.py` | `concept/` 关联区块存在性与命名合规检查 |
-| `check_metadata_consistency.py` | 元数据 D1–D6 一致性检查（质量门 15，观察） |
+| `check_metadata_consistency.py` | 元数据 D1–D6 一致性检查（质量门 20，阻断；2026-07-14 转阻断） |
 | `check_topology_quality.py` | atlas 拓扑质量 T1–T6（质量门 11，阻断） |
 | `check_kg_shapes.py` | KG SHACL/形态校验（质量门 12，阻断） |
-| `check_concept_authority_coverage.py` | concept 权威层国际化权威来源覆盖率（质量门 18，观察）；`--include-crates` 附加 crates/*/docs 覆盖小节（非 stub 内容页口径，默认观察 exit 0，`--strict` 时 crates 缺口>0 亦阻断） |
-| `semantic_health.py` | 综合语义健康分（质量门 17，观察） |
+| `check_concept_authority_coverage.py` | concept 权威层国际化权威来源覆盖率（质量门 16，阻断；2026-07-14 R4 评估转正，`--strict --include-crates`）；`--include-crates` 附加 crates/*/docs 覆盖小节（非 stub 内容页口径，默认观察 exit 0，`--strict` 时 crates 缺口>0 亦阻断） |
+| `semantic_health.py` | 综合语义健康分（质量门 23，阻断；2026-07-14 转阻断） |
 | `check_mermaid_syntax.py` | Mermaid 语法检查（质量门 10，阻断） |
-| `check_mindmap_coverage.py` | 内容页真 mindmap 图覆盖率与反例节存在率（质量门 22，观察；2026-07-13 P4 挂入，原 W2-a 独立观察检查器；默认 exit 0；`--strict` 低于基线 mindmap 10%/反例 40% 时 exit 1） |
+| `check_mindmap_coverage.py` | 内容页真 mindmap 图覆盖率与反例节存在率（质量门 22，阻断；2026-07-13 P4 挂入，2026-07-14 转阻断；`--strict` 低于基线 mindmap 10%/反例 40% 时 exit 1） |
 | `auto_dedup_redirect.py` | 对高相似度非 `concept/` 文件生成指向 `concept/` 权威来源的重定向页 |
 | `unify_association_headings.py` | 关联区块标题统一与核心页上层/下层概念补全（`--enrich-core`；默认 dry-run） |
 
@@ -157,15 +157,15 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 
 | 脚本 | 功能 |
 |------|------|
-| `run_quality_gates.sh` | 本地一键运行全部 23 个质量门（15 阻断 + 8 观察） |
+| `run_quality_gates.sh` | 本地一键运行全部 23 个质量门（23 阻断 + 0 观察） |
 | `cargo_build_optimized.sh` / `.ps1` | 优化编译 |
 | `cargo_update_check.sh` / `.ps1` | 依赖更新检查 |
 | `run_miri.sh` / `.bat` | Miri 测试 |
 | `exercise_check.sh` / `.ps1` | 练习题评测 |
 | `code_block_compiler.py` | 代码块编译验证 |
 | `verify_compile_fail_v3.py` | `compile_fail` 代码块验证 |
-| `check_examples_compile.py` | 根 `examples/` 游离示例编译保护（质量门 19，观察）：9 个 stdlib 示例 rustc 直编 + 3 个依赖示例经 `examples/examples_check/` crate + 2 个 Cargo Script 豁免；未登记的新游离文件视为失败；`--strict` 失败 exit 1 |
-| `check_concept_code_blocks.py` | concept/ 代码块批量编译实测（质量门 20，观察；2026-07-13 重构为独立观察门）：提取全部 ```rust 块并分类（anno_ignore/compile_fail/should_panic/pseudo/nightly/nostd/dep_skip/dep_untested/dep/candidate）；compile_fail 块验证确实失败且与标注 E0xxx 一致（支持 editionNNNN fence）；std-only 候选 >300 时按文件分层抽样（默认 300，seed 固定）`rustc --edition 2024` 自动包 `fn main` 直编；`--with-deps` 用 `target/debug/deps` 的 rmeta 做 `--extern` 实测依赖块（多 feature 产物轮换重试，找不到依赖归“需依赖未测”）；分批 300 块防超时；结果写 `--json`/`--report`；默认观察 exit 0，`--strict` 时“应过但失败/标注腐烂”>0 → exit 1。基线：`reports/CONCEPT_CODE_BLOCKS_BASELINE_2026_07_13.md` |
+| `check_examples_compile.py` | 根 `examples/` 游离示例编译保护（质量门 17，阻断；2026-07-14 R4 评估转正并新增 CI job `examples-compile`）：9 个 stdlib 示例 rustc 直编 + 3 个依赖示例经 `examples/examples_check/` crate + 2 个 Cargo Script 豁免；未登记的新游离文件视为失败；`--strict` 失败 exit 1 |
+| `check_concept_code_blocks.py` | concept/ 代码块批量编译实测（质量门 21，阻断；2026-07-13 重构为独立门，2026-07-14 转阻断）：提取全部 ```rust 块并分类（anno_ignore/compile_fail/should_panic/pseudo/nightly/nostd/dep_skip/dep_untested/dep/candidate）；compile_fail 块验证确实失败且与标注 E0xxx 一致（支持 editionNNNN fence）；std-only 候选 >300 时按文件分层抽样（默认 300，seed 固定）`rustc --edition 2024` 自动包 `fn main` 直编；`--with-deps` 用 `target/debug/deps` 的 rmeta 做 `--extern` 实测依赖块（多 feature 产物轮换重试，找不到依赖归“需依赖未测”）；分批 300 块防超时；结果写 `--json`/`--report`；`--strict` 时“应过但失败/标注腐烂”>0 → exit 1。基线：`reports/CONCEPT_CODE_BLOCKS_BASELINE_2026_07_13.md` |
 
 ### 📋 日常工具
 

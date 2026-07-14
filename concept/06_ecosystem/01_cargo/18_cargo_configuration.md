@@ -192,3 +192,42 @@ incompatible-rust-versions = "fallback"
 ---
 
 > **Rust 1.94 起**：Cargo `include` 配置键稳定，顶层配置可拆分到多个文件复用；Cargo 同步开始按 TOML v1.1 解析清单与配置文件。详见 [版本页](../../07_future/00_version_tracking/rust_1_94_stabilized.md)（特性矩阵节）。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo 配置与环境变量Cargo))
+    一、配置层级
+    二、常用配置项
+      替换 registry 源
+      设置默认 target
+      别名
+    四、Resolver v3 配置
+    五、Registry 认证
+    七、配置层级选择决策表
+```
+
+## ⚠️ 反例与陷阱
+
+读取配置并 collect 成集合时，编译器无法凭空推断目标容器类型。
+
+### 反例：collect 缺少目标类型标注（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0283
+fn main() {
+    let s = "a b".split_whitespace().collect(); // ❌ collect 目标类型无法推断
+    let _ = s;
+}
+```
+
+**实测错误**：`error[E0283]: type annotations needed`。
+
+### ✅ 修正：用类型标注或 turbofish 指定 collect 的目标类型
+
+```rust
+fn main() {
+    let s: Vec<&str> = "a b".split_whitespace().collect(); // ✅ 标注目标类型
+    let _ = s;
+}
+```

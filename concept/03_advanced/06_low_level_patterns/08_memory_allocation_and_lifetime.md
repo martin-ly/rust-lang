@@ -189,3 +189,19 @@ fn main() {
     println!("{first}");
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((内存分配与生命周期Memory))
+    一、Item 的生命周期
+    二、Heap堆
+      堆分配的生命周期
+    三、Stack栈
+    四、Box 与移动
+    五、内存布局优化补充
+      5.1 内存对齐与 repr 属性
+      5.2 reprpacked
+      5.3 repralignN
+```

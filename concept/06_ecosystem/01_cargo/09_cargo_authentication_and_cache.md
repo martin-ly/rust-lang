@@ -49,6 +49,10 @@
     - [测验 3：`CARGO_REGISTRIES_<NAME>_TOKEN` 环境变量什么时候生效？](#测验-3cargo_registries_name_token-环境变量什么时候生效)
     - [测验 4：`sccache` 与普通 Cargo 缓存有什么区别？](#测验-4sccache-与普通-cargo-缓存有什么区别)
   - [权威来源索引](#权威来源索引)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：同名函数重复定义（rustc 1.97.0，--edition 2024 实测）](#反例同名函数重复定义rustc-1970--edition-2024-实测)
+    - [✅ 修正：用模块划分命名空间，消除重复定义](#-修正用模块划分命名空间消除重复定义)
 
 ---
 
@@ -306,3 +310,35 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Cargo 认证与构建缓存」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+## ⚠️ 反例与陷阱
+
+合并多个缓存/认证辅助模块时，同名顶层函数冲突是常见编译错误。
+
+### 反例：同名函数重复定义（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0428
+fn dup() {}
+fn dup() {} // ❌ 同一命名空间重复定义
+
+fn main() {
+    dup();
+}
+```
+
+**实测错误**：`error[E0428]: the name`dup`is defined multiple times`。
+
+### ✅ 修正：用模块划分命名空间，消除重复定义
+
+```rust
+fn dup() {}
+
+mod inner {
+    pub fn dup() {} // ✅ 不同模块各自命名空间
+}
+
+fn main() {
+    dup();
+    inner::dup();
+}
+```

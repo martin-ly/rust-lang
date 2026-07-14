@@ -102,3 +102,13 @@ fn main() {}
 fn add(a: u64, b: u64) -> u64 { a + b }
 fn main() {}
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((AutoVerus / Verus 预览跟踪))
+    一、本页定位与权威页分工
+    二、跟踪状态快照2026-07
+    三、里程碑时间线
+```

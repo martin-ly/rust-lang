@@ -315,3 +315,23 @@ fn main() { unsafe { sve_add(); } }
 unsafe fn sve_add() {}
 fn main() {}
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((AArch64 SVE / SME可伸缩向量扩展预览))
+    一、核心概念
+      1.1 从固定向量到可伸缩向量
+      1.2 SVE 核心机制谓词Predicate
+      1.3 SME从向量到矩阵
+    二、Rust 支持现状截至 2026-06-06
+      2.1 Feature Gate
+      2.2 跟踪 Issue
+      2.3 RFC 状态
+    三、技术挑战
+      3.1 Rust 类型系统适配
+      3.2 ABI 与调用约定
+      3.3 SME 的额外复杂度
+    五、时间线与里程碑
+```

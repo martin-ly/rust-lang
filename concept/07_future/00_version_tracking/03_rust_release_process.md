@@ -165,3 +165,30 @@ channel = "stable"
 ## 相关概念
 
 - [对应测验](../05_quizzes/01_quiz_version_and_preview.md) — 版本演进、Edition 机制与前沿特性（发布火车、1.90–1.97 稳定特性、preview 状态）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 发布流程Rust Release))
+    一、发布频道
+    二、六周发布周期
+    三、版本号规则
+    五、特性门控与稳定化
+    六、Editions 与稳定版的关系
+```
+
+## ⚠️ 反例与陷阱：升级 edition 后标识符变成保留字
+
+**反例**：项目从 edition 2021 升到 2024，`gen` 成为保留关键字，旧代码直接编译失败：
+
+```rust,compile_fail,edition2024
+fn main() {
+    let gen = 1; // edition 2024: gen 是保留关键字
+    println!("{gen}");
+}
+```
+
+实测（rustc 1.97.0, `--edition 2024`）：`error: expected identifier, found reserved keyword`gen``；同一代码在 `--edition 2021` 下正常编译——这正是 edition 机制隔离破坏性变更的意义。
+
+**修正**：先 `cargo fix --edition` 自动迁移（会把 `gen` 改写为 `r#gen`），再人工评估是否重命名；升级 edition 属破坏性迁移，应在独立提交中完成并全量跑 CI。

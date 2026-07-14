@@ -222,3 +222,17 @@ mod internal {
 pub use internal::Token;
 fn main() {}
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((可见性与隐私Visibility and))
+    一、可见性的核心问题
+    二、默认规则
+    三、访问规则
+      1. Public item
+      2. Private item
+    四、可见性修饰符
+    五、重导出与可见性
+```

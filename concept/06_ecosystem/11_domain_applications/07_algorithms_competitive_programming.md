@@ -1323,3 +1323,26 @@ fn main() {
     }
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((算法与竞赛编程 Algorithms &))
+    权威定义
+    一、Rust 在算法竞赛中的定位
+      1.1 安全性 vs 速度 vs 表达力
+      1.2 VeriContest形式验证的竞赛基准
+    二、算法范式分类与 Rust 实现
+      2.1 分治 Divide & Conquer
+      2.2 贪心 Greedy
+      2.3 动态规划 DP
+    三、竞赛编程惯用法
+      3.1 Fast I/O
+      3.2 零分配算法
+      3.3 位运算技巧
+    四、复杂度在类型系统中的编码
+      4.1 Const Generics 编码数组边界
+      4.2 Type-Level 自然数概念性
+      4.3 Iterator size_hint
+```

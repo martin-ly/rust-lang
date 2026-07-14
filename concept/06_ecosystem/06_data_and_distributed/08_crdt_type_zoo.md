@@ -352,3 +352,14 @@ impl GCounter {
     }
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((CRDT 谱系状态基、操作基与合并格形式化))
+    一、问题无协调的复制
+    二、状态基 CRDTCvRDT合并格形式化
+    三、CvRDT 类型动物园
+    四、操作基 CRDTCmRDT交换律
+```

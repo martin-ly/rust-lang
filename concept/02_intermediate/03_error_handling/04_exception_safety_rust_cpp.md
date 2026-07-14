@@ -52,6 +52,7 @@
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [相关概念](#相关概念)
   - [⚠️ 反例与陷阱：Drop 中二次 panic 导致 abort（运行时陷阱）](#️-反例与陷阱drop-中二次-panic-导致-abort运行时陷阱)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -342,4 +343,22 @@ fn main() {
     let _g = Guard;
     panic!("first panic");
 }
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((异常安全C++ 与 Rust 的错误处理哲学))
+    一、核心命题
+    二、C++ 的异常保证体系
+      2.1 三种异常保证
+      2.2 C++ 异常传播与栈展开
+      2.3 析构函数中抛异常的危险
+    三、Rust 的错误处理模型
+      3.1 可恢复错误ResultT, E
+      3.2 传播运算符 ?
+      3.3 不可恢复错误panic
+    四、核心对比
+    五、Drop 的不可失败性
 ```

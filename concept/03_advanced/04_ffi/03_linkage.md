@@ -433,3 +433,22 @@ fn main() {
     println!("{}", abs(-3));
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Linkage链接))
+    二、Crate 类型
+      bin — 可执行文件
+      lib — 编译器推荐的库
+      dylib — 动态 Rust 库
+    三、命令行 vs 属性
+    四、依赖格式选择规则
+    五、C 运行时的静态与动态链接
+      crt-static target feature
+    六、混合 Rust 与外部代码
+      方式 1使用 rustc 链接
+      方式 2使用外部链接器
+      显式 extern ABIRFC 3722
+```

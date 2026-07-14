@@ -237,3 +237,19 @@ fn main() {
     let _ = r;
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Panic 机制))
+    一、什么是 Panic
+    二、panic_handler 属性
+      签名要求
+    三、标准行为
+    四、Panic Strategy
+      链接限制
+    五、Unwinding
+      unwind handler
+      恢复机制
+```

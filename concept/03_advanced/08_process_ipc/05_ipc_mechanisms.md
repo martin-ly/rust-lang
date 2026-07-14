@@ -312,3 +312,15 @@ fn main() {
     }
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 进程间通信机制IPC))
+    1. IPC 机制概览
+    2. 匿名管道
+    3. 命名管道FIFO
+    4. Unix 域套接字
+    5. TCP/UDP 套接字
+```

@@ -264,3 +264,15 @@ fn main() {
     println!("{x}");
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 运算符与符号))
+    一、运算符
+    二、独立符号
+    三、路径相关符号
+    四、泛型相关符号
+    五、Trait Bound 约束
+```

@@ -49,6 +49,7 @@
     - [测验 4：`./x test tidy` 主要检查什么？](#测验-4x-test-tidy-主要检查什么)
   - [权威来源索引](#权威来源索引)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -288,3 +289,20 @@ rustc 的 UI 测试以 `.stderr` 快照为基线；诊断改进后批量 `x test
 **陷阱要点**：快照测试的信任基础是「基线即真理」；bless 是把当前输出加冕为真理的操作，其审查严格度应不低于被测代码本身。
 
 ---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((rustc 编译器测试体系))
+    一、测试金字塔
+    二、Compiletest 与测试套件
+    三、Package Tests
+    四、Tidy 与 Formatting
+      Tidy
+      rustfmt
+    五、工具测试与 Book 文档测试
+      工具测试
+      Book 文档测试
+      Linkchecker
+```

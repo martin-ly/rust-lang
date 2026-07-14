@@ -74,6 +74,17 @@ def scan(base: str):
         for f in sorted(files):
             if not f.endswith(".md") or f == "README.md":
                 continue
+            # 口径说明（2026-07-14 裁定）：quiz 页为评估页，五件套（mindmap/反例）不适用，
+            # 从分母排除（文件名或目录段含 quiz）；与 atlas extractor 的 quiz 排除规则一致。
+            if "quiz" in f.lower() or "quiz" in rel_root.lower():
+                continue
+            # 结构性排除：SUMMARY 为 mdbook 目录；sources/ 为 RFC/索引参考库；
+            # topic_index 为跨层索引入口页；rust_1_98_stabilized 为刻意保留的跟踪骨架
+            # （2026-08-20 稳定后填充，届时移出排除）。
+            if f == "SUMMARY.md" or "sources" in rel_root.split(os.sep):
+                continue
+            if f in ("21_safety_critical_topic_index.md", "rust_1_98_stabilized.md"):
+                continue
             path = os.path.join(root, f)
             try:
                 text = open(path, encoding="utf-8").read()

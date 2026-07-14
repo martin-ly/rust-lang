@@ -35,6 +35,7 @@
   - [反命题](#反命题)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [⚠️ 反例与陷阱：返回局部变量的引用](#️-反例与陷阱返回局部变量的引用)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -214,4 +215,16 @@ fn first_word() -> String {
     s
 }
 fn main() { let _ = first_word(); }
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((所有权性能优化))
+    一、避免不必要的 Clone
+    二、Copy on Write Cow
+    三、内存布局优化
+    四、零拷贝解析
+    五、移动语义优化
 ```

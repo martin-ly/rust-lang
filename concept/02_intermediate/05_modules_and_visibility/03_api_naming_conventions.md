@@ -53,6 +53,7 @@
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -490,3 +491,24 @@ impl From<(&str, u16)> for Config {
 - **对偶**：与自由命名（无约定）相对——约定即文档。
 - **组合**：与 [Traits](../00_traits/01_traits.md) 的 `From`/`Into` 契约组合。
 - **依赖**：转换语义对应 [Error Handling Basics](../../01_foundation/08_error_handling/01_error_handling_basics.md) 的 `TryFrom` 约定。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust API 命名约定))
+    一、为什么命名约定重要
+    二、构造函数
+      2.1 new
+      2.2 with_
+      2.3 from_ / into_
+    三、谓词与查询
+      3.1 is_
+      3.2 as_ / to_
+    四、可变访问
+      4.1 mut_
+    五、转换与构造
+      5.1 to_
+      5.2 as_
+      5.3 into_
+```

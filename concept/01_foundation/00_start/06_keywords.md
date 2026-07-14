@@ -45,6 +45,7 @@
     - [测验 2：Raw Identifier 与跨 Edition 调用（🟡 进阶）](#测验-2raw-identifier-与跨-edition-调用-进阶)
     - [测验 3：Raw Identifier 的使用边界（🔴 专家，联动「实践建议」）](#测验-3raw-identifier-的使用边界-专家联动实践建议)
   - [⚠️ 反例与陷阱：关键字用作标识符](#️-反例与陷阱关键字用作标识符)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -274,4 +275,17 @@ Rust 关键字不能直接用做标识符；需要原义标识符时加 `r#` 前
 ```rust
 fn r#match() {}
 fn main() { r#match(); }
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 关键字))
+    一、关键字概述
+    二、当前使用的关键字
+    三、保留给未来使用的关键字
+    四、Raw Identifiers
+      典型使用场景
+    五、实践建议
 ```

@@ -72,6 +72,7 @@
     - [7.3 `{float}`→f32 fallback：Rust 1.97.0 按工具链叠加的默认类型回退](#73-floatf32-fallbackrust-1970-按工具链叠加的默认类型回退)
     - [7.4 lint-level 矩阵：edition 2024 默认 lint × 1.97 新 lint（edition 视角）](#74-lint-level-矩阵edition-2024-默认-lint--197-新-lintedition-视角)
     - [7.5 来源与反链](#75-来源与反链)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -907,3 +908,25 @@ fn demo_fixed() { takes_f32(1.0_f32); let _: f64 = f64::from(2.0_f64); }
   - [`feature_domain_matrix_197.md`](../00_version_tracking/feature_domain_matrix_197.md)（Compat-Lint 列、§4.9、§5.4）
   - [`migration_197_decision_tree.md`](../00_version_tracking/migration_197_decision_tree.md)（§4 `f32: From<{float}>` 迁移判定树）
 - **交叉**：edition 概览视角见 [`32_editions.md`](../00_version_tracking/02_editions.md) §八；fallback 推断承载页 [`27_type_checking_and_inference.md`](../../04_formal/00_type_theory/07_type_checking_and_inference.md)、[`31_never_type.md`](../../01_foundation/02_type_system/02_never_type.md)。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Edition 2024 完全指南新特性与迁移策略))
+    一、核心概念
+      1.1 Edition 机制回顾
+      1.2 Edition 2024 主要特性
+    二、技术细节
+      2.1 Gen Blocks
+      2.2 Async Closures
+      2.3 Lifetime 捕获
+    三、新特性矩阵
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    七、Edition 2024 × Rust
+      7.1 关键边界edition 变化 ≠ 工具链变化
+      7.2 never type
+      7.3 floatf32 fallbackRust
+```

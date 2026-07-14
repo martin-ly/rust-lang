@@ -75,6 +75,7 @@
     - [核心推理链](#核心推理链)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -1039,3 +1040,23 @@ fn main() {
 - **对偶**：与 `HashMap`（无序、均摊 O(1)）相对——有序遍历 vs 哈希查找。
 - **组合**：与 [Performance](../../06_ecosystem/10_performance/01_performance_optimization.md) 的缓存优化组合。
 - **依赖**：元素约束依赖 [Traits](../../02_intermediate/00_traits/01_traits.md)（`Ord`/`Hash`）。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((高级集合类型))
+    二、内存布局与性能特征
+      2.1 BTreeMap 节点布局
+      2.2 VecDeque 环形缓冲区布局
+      2.3 BinaryHeap 数组表示
+    三、选型决策矩阵
+    五、反命题与边界分析
+      5.1 反命题树
+      5.2 边界极限
+    十二、边界测试
+      12.1 边界测试
+      12.2 边界测试
+      10.3 边界测试
+    实践
+```

@@ -257,3 +257,19 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Rust 的发布流程与 Nightly Rust」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+## ⚠️ 反例与陷阱：在 stable 通道启用 feature gate
+
+**反例**：读到某个 nightly 特性介绍后，直接在 stable 工具链的项目里开启：
+
+```rust,compile_fail
+#![feature(box_patterns)]
+
+fn main() {}
+```
+
+实测（rustc 1.97.0 stable, edition 2024）：`error[E0554]:`#![feature]`may not be used on the stable release channel`。
+
+**陷阱本质**：「Stability without Stagnation」的另一面是——不稳定特性只存在于 nightly；stable/beta 编译器直接拒绝 `#![feature]`，没有正规配置可以绕过（`RUSTC_BOOTSTRAP=1` 属内部逃逸舱，生产禁用）。
+
+**修正**：实验用 `rustup override set nightly` 或 `cargo +nightly`；交付代码只依赖已稳定特性，并跟踪对应预览页等待稳定化。

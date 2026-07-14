@@ -245,3 +245,30 @@ fn main() {}
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio) · [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Stable ABI Preview))
+    一、功能动机为什么 Rust 需要稳定 ABI？
+    二、当前稳定 Rust 的 ABI 选择
+      2.1 extern C 与 reprC
+      2.2 为什么不直接用 extern Rust？
+    三、Stable ABI 提案要点与对比
+      3.1 crabi 关键设计方向
+```
+
+
+## ⚠️ 反例与陷阱：把 `#[repr(Rust)]` 当作跨 dylib 的稳定 ABI
+
+**反例（错误假设）**：插件与宿主都用 Rust 1.97 编译，于是直接跨动态库边界传递默认布局类型：
+
+```rust,ignore
+// plugin.so 与宿主各自编译、各自链接 std
+pub struct Config { pub name: String, pub retries: u32 } // 默认 repr(Rust)
+```
+
+**陷阱本质**：`repr(Rust)` 的字段顺序、对齐、`String`/`Vec` 内部表示**不做任何跨版本、跨编译单元保证**；同一 rustc 版本下编译选项变化也可能改变布局。跨 dylib 传递引发的是未定义行为而非编译错误——这正是 stable ABI 提案要解决的核心问题。
+
+**修正对照**：跨动态库边界只用 `#[repr(C)]` 类型 + `extern "C"` 签名；需要富类型时用 `abi_stable` / `stabby` 等 crate 的稳定 ABI 包装；在提案稳定化之前，不要在生产插件系统中依赖 `repr(Rust)` 布局。

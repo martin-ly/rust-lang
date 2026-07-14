@@ -56,6 +56,8 @@
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
 
 ## 一、求值策略（Evaluation Strategies）
 
@@ -531,3 +533,60 @@ unsafe {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [This Week in Rust — Rust 社区官方周刊（语言理论落地实践的持续跟踪入口）](https://this-week-in-rust.org/)（2026-07-12 验证 HTTP 200）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((编程语言理论基础))
+    一、求值策略
+      1.1 为什么需要了解求值策略？
+      1.2 三种核心求值策略
+      1.3 对比表
+    二、副作用模型
+      2.1 什么是副作用？
+      2.2 副作用与并发的关系
+      2.3 与其他语言的对比
+    三、变量模型
+      3.1 两个层面的变量
+      3.2 Move 的存储层面解释
+      3.3 对比 C++ 和 Java
+    四、Continuation 与 CPS
+      4.1 什么是 Continuation？
+      4.2 CPS
+      4.3 async/await 的本质
+    五、结构化程序定理
+      5.1 程序可以由三种结构组成
+      5.2 Rust 的控制流安全性
+```
+
+## ⚠️ 反例与陷阱
+
+**陷阱（可变别名，E0499）**：从 PL 理论看，Rust 的所有权模型是对「别名控制（aliasing control）」的静态化——同一时刻只允许一个 `&mut` 路径写入同一存储位置：
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let a = &mut v;
+    let b = &mut v;       // error[E0499]: cannot borrow `v` as mutable more than once
+    a.push(4);
+    b.push(5);
+}
+```
+
+**修正对照**（串行化可变借用，编译通过）：
+
+```rust
+fn main() {
+    let mut v = vec![1, 2, 3];
+    {
+        let a = &mut v;
+        a.push(4);
+    }                     // a 的作用域结束，写效果释放
+    let b = &mut v;
+    b.push(5);
+    assert_eq!(v, [1, 2, 3, 4, 5]);
+}
+```
+
+> 理论对照：这正是「副作用模型」一节中写效果（write effect）排他性的编译期体现。

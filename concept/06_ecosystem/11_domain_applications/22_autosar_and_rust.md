@@ -31,6 +31,8 @@
   - [五、落地路径：语言、工具链与标准的三层对齐](#五落地路径语言工具链与标准的三层对齐)
   - [六、权威来源索引](#六权威来源索引)
   - [相关概念](#相关概念)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
 
 ---
 
@@ -164,3 +166,39 @@ graph TD
 - [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) — Ferrocene/HighTec/AdaCore 与认证 crate 现状
 - [Industrial Case Studies](14_industrial_case_studies.md) — 工业应用案例
 - [cargo vet 与供应链审计](../07_security_and_cryptography/03_cargo_vet_supply_chain.md) — 依赖审查机制
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((AUTOSAR 与 Rust))
+    一、AUTOSAR 是什么Classic 与
+    二、AUTOSAR 的 Rust 进程从
+      2.1 2022WG-SAF Rust 小组成立
+      2.2 R23-11ARA
+      2.3 Classic Platform 的
+    三、为什么 Rust 适配 AUTOSAR
+    五、落地路径语言、工具链与标准的三层对齐
+```
+
+## ⚠️ 反例与陷阱
+
+**陷阱（把「可编译」当「可认证」）**：AUTOSAR Adaptive / ASIL 项目中，常见错误是假设任意 crates.io 依赖都能进入认证范围——认证边界只覆盖工具链（如 Ferrocene）与经评审的代码子集，未评审第三方 crate 会直接导致安全案例（safety case）不成立。
+
+**修正对照**（安全关键 crate 入口强制约束，编译通过）：
+
+```rust
+#![deny(unsafe_code)]
+// 安全关键 crate 的入口约束：拒绝 unsafe，
+// 迫使 unsafe 边界集中到少数经评审、有形式化论证的模块
+
+fn add(a: i32, b: i32) -> i32 {
+    a.wrapping_add(b)
+}
+
+fn main() {
+    assert_eq!(add(1, 2), 3);
+}
+```
+
+> 工程做法：依赖白名单 + `cargo vet` 供应链评审 + 认证工具链（Ferrocene）三者缺一不可；详见 WG-SAF 与 R23-11 文档对 ARA 应用的要求。

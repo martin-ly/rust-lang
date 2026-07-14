@@ -70,6 +70,7 @@
     - [典型组合模式](#典型组合模式)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -934,3 +935,22 @@ fn main() {
 - **对偶**：与编译期借用检查相对（运行时 vs 静态），见 [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)。
 - **组合**：与 [Smart Pointers](04_smart_pointers.md) 组合为 `Rc<RefCell<T>>`。
 - **依赖**：安全封装依赖 unsafe 边界纪律，见 [Unsafe Rust Patterns](../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md)。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((内部可变性编译期规则的运行时逃逸))
+    一、核心概念
+      1.1 外部可变性与内部可变性的对比
+      1.2 内部可变性的类型谱系
+      1.3 运行时借用检查
+    二、技术细节
+      2.1 CellT无借用语义的复制
+      2.2 RefCellT动态借用规则
+      2.3 MutexT 与 RwLockT线程安全版本
+    三、使用模式
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+```

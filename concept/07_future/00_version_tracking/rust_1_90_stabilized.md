@@ -916,3 +916,52 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: A Semantic Foundation for Functional Verification of Rust Programs (PLDI 2022)](https://dl.acm.org/doi/10.1145/3519939.3523704)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 1.90 网络特性参考))
+    0. Rust 1.90.0 特性 × 影响面 ×
+    1. 异步特性增强
+      1.1 异步Trait稳定化RPITIT
+      1.2 异步闭包改进
+      1.3 async fn in
+    2. GATs在网络编程中的应用
+      泛型关联类型Generic Associated
+    3. let-else模式匹配
+      网络错误处理
+    4. impl Trait增强
+      返回类型优化
+```
+
+## ⚠️ 反例与陷阱
+
+版本演进不会放宽运算符规则：自定义类型用 `+` 必须实现 `Add`。
+
+### 反例：未实现 Add 却使用 +（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0369
+struct S;
+
+fn main() {
+    let _ = S + S; // ❌ 未实现 Add trait
+}
+```
+
+**实测错误**：`error[E0369]: cannot add `S` to `S``。
+
+### ✅ 修正：实现 `std::ops::Add` 后再使用运算符。
+
+```rust
+struct S;
+
+impl std::ops::Add for S { // ✅ 实现 Add 后 + 可用
+    type Output = S;
+    fn add(self, _rhs: S) -> S { S }
+}
+
+fn main() {
+    let _ = S + S;
+}
+```

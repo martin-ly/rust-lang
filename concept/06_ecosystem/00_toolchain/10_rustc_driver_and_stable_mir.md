@@ -44,6 +44,7 @@
     - [测验 4：为什么 rustdoc 更适合用 `rustc_interface` 而不是 `rustc_driver`？](#测验-4为什么-rustdoc-更适合用-rustc_interface-而不是-rustc_driver)
   - [权威来源索引](#权威来源索引)
   - [⚠️ 反例与陷阱：stable 工具链上 extern crate rustc\_driver](#️-反例与陷阱stable-工具链上-extern-crate-rustc_driver)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -276,4 +277,18 @@ fn main() {}
 // extern crate rustc_driver;
 // 或改用 Stable MIR（rustc_public）的稳定封装。
 fn main() {}
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((rustc Driver、Interface 与))
+    一、为什么要把 rustc 当库用
+    二、rustc_driver高级入口
+    三、rustc_interface低级控制
+    四、rustc_private 与外部 Driver
+    五、Stable MIR /
+      5.1 问题
+      5.2 解决方案
 ```

@@ -63,6 +63,7 @@
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -417,3 +418,25 @@ WASM 工作流的工具链术语按编译—运行—封装三层组织：
 
 - **P1 学术/形式化**: [Haas et al.: Bringing the Web up to Speed with WebAssembly (PLDI 2017)](https://dl.acm.org/doi/10.1145/3062341.3062363)
 - **P2 生态/社区**: [docs.rs/wasm-bindgen — WASM 绑定权威 API 文档](https://docs.rs/wasm-bindgen)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((C12 WASM - 术语表))
+    WASM 基础术语
+      WebAssembly WASM
+      线性内存 Linear Memory
+    Rust 相关术语
+      wasm32-unknown-unknown
+      wasm-bindgen
+    JavaScript 相关术语
+      WebAssembly API
+      互操作 Interop
+    性能优化术语
+      二进制大小优化
+      运行时优化
+    工具链术语
+      Cargo
+      rustc
+```

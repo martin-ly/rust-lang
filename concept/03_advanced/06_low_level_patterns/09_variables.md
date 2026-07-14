@@ -192,3 +192,17 @@ fn main() {
     println!("{count}");
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((变量Variables))
+    一、什么是变量
+    二、局部变量
+      可变性
+      函数参数
+    三、初始化规则
+    四、变量遮蔽Shadowing
+    五、临时值生命周期
+```

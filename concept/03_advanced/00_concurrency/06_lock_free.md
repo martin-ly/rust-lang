@@ -74,6 +74,7 @@
     - [内存回收策略](#内存回收策略)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -1243,3 +1244,21 @@ hp[0].store(null_mut(), Ordering::SeqCst);
 - **对偶**：与锁（阻塞同步）相对，见 [Concurrency Patterns](03_concurrency_patterns.md)。
 - **组合**：与 [Atomics and Memory Ordering](05_atomics_and_memory_ordering.md) 组合实现。
 - **依赖**：跨线程安全性依赖 [Send/Sync](02_send_sync_auto_traits.md) auto trait。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((无锁编程与内存模型))
+    一、核心概念
+      1.1 无锁 vs 无等待
+      1.2 ABA 问题
+      1.3 内存序选择
+    二、关键数据结构
+      2.1 Treiber Stack
+      2.2 Michael-Scott Queue
+      2.3 Hazard Pointer
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+```

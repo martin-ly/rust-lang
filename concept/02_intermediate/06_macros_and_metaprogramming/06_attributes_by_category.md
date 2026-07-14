@@ -63,6 +63,7 @@
     - [测验 2：条件编译](#测验-2条件编译)
   - [认知路径](#认知路径)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -496,3 +497,17 @@ D. `#[serde]`
 
 - **P2 生态/社区**: [docs.rs/proc-macro2 — 生态权威 API 文档](https://docs.rs/proc-macro2) · [docs.rs/pin-project — 生态权威 API 文档](https://docs.rs/pin-project)
 - **P1 学术/形式化**: [Kohlbecker et al.: Hygienic Macro Expansion (LFP 1986, 卫生宏奠基)](https://dl.acm.org/doi/10.1145/319838.319859)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((属性分类详解Attributes by))
+    一、权威定义Definition
+      1.1 形式化定义
+      1.2 直觉解释
+    二、概念属性矩阵
+    五、反命题与边界分析
+      5.1 反命题树
+      5.2 边界极限
+```

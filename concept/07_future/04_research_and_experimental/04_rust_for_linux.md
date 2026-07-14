@@ -885,7 +885,7 @@ fn main() {}
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节从测验 1：Rust for Linux 项目的核心目标是什么？（理解层）、测验 2：为什么 Linus Torvalds 对在内核中引入 Rus…、测验 3：Rust 驱动如何与 Linux 内核的 C API 交互？…、测验 4：目前 Linux 内核中已有哪些 Rust 代码？（理解层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
+本节 5 道测验均为理解层：覆盖 Rust for Linux 的项目目标、Linus 的审慎态度、与 C API 的 FFI 交互路径、内核中已落地的 Rust 代码，以及对 Rust 语言本身的反馈影响。作答时建议结合上文「二、技术细节」与「十、边界测试」，先自行组织答案再对照解析。
 
 ### 测验 1：Rust for Linux 项目的核心目标是什么？（理解层）
 
@@ -1086,3 +1086,23 @@ graph LR
 ```
 
 ---
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust for Linux))
+    核心概念
+      内核内存安全动机
+      RFL 架构
+      unsafe 边界
+    技术细节
+      C 互操作与绑定生成
+      内核抽象层
+      驱动开发模型
+    采用状态
+      状态矩阵
+      实验阶段结论
+```

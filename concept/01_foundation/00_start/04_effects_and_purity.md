@@ -83,6 +83,7 @@
   - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
   - [相关概念](#相关概念)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -824,3 +825,24 @@ fn main() {
 ## 相关概念
 
 - [对应测验](../11_quizzes/29_quiz_pl_foundations.md) — 通用 PL 基座（变量模型、求值策略、效果、控制流、数据抽象）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((副作用与纯度))
+    一、核心命题
+    二、引用透明
+      2.1 定义
+      2.2 引用透明的工程意义
+    三、副作用的分类与模型
+      3.1 副作用的通用分类
+      3.2 副作用的组合爆炸问题
+    四、Rust 的副作用控制机制
+      4.1 &mut T 作为写效果
+      4.2 unsafe 作为未定义效果
+      4.3 Result<T, E> 作为异常效果
+    五、纯函数与不纯函数
+      5.1 纯函数的定义
+      5.2 Rust 中的"准纯函数"
+```

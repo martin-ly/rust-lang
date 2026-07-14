@@ -253,3 +253,39 @@ WASM GC 提供托管对象支持。Rust 目前不使用 WASM GC（线性内存 +
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/wasm-bindgen — 生态权威 API 文档](https://docs.rs/wasm-bindgen) · [docs.rs/wasmtime — 生态权威 API 文档](https://docs.rs/wasmtime)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((WASM Target Evolution))
+    一、功能动机WASM 目标为什么需要演进？
+    二、核心概念target 命名与能力模型
+      2.1 wasm32-unknown-unknown
+      2.2 wasm32-wasip1旧
+      2.3 wasm32-wasip2
+    三、未来提案对 Rust 的影响
+```
+
+
+## ⚠️ 反例与陷阱：沿用已移除的 `wasm32-wasi` target 名
+
+**反例（迁移陷阱）**：CI 脚本仍写旧 target 名：
+
+```bash
+rustup target add wasm32-wasi   # Rust 1.78 起更名，后续版本彻底移除
+cargo build --target wasm32-wasi
+```
+
+新工具链报 `target may not be installed` / `can't find crate for std`，极易误判为 std 损坏而浪费排查时间。
+
+**陷阱本质**：WASI target 按 Preview 版本重命名是 WASM target 演进的第一批落地变更：`wasm32-wasi` → `wasm32-wasip1`（WASI Preview 1），组件模型对应 `wasm32-wasip2`。旧名移除后，构建脚本、文档、IDE 配置三处常不同步。
+
+**修正对照**：
+
+| 旧写法 | 新写法 |
+|---|---|
+| `wasm32-wasi` | `wasm32-wasip1`（兼容旧 WASI 行为） |
+| 需要组件模型 | `wasm32-wasip2`（配合 `cargo component`） |
+
+同步更新 CI、`.cargo/config.toml` 与 rust-toolchain 文件中的 target 字符串。

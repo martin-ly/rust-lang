@@ -492,3 +492,52 @@ wasm-pack test --headless --firefox
 
 - **P1 学术/形式化**: [Haas et al.: Bringing the Web up to Speed with WebAssembly (PLDI 2017)](https://dl.acm.org/doi/10.1145/3062341.3062363)
 - **P2 生态/社区**: [docs.rs/wasmtime — WASM 运行时权威 API 文档](https://docs.rs/wasmtime)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((C12 WASM - 常见问题))
+    WASM 基础问题
+      Q WASM 和 JavaScript 有什么区别？
+      Q WASM 的内存限制是多少？
+    Rust 编译问题
+      Q 如何将 Rust 代码编译为 WASM？
+      Q 编译时出现 cannot find crate
+      Q 如何减小 WASM 二进制大小？
+    JavaScript 集成问题
+      Q 如何在 React 中使用 WASM？
+      Q 如何传递复杂类型如结构体？
+      Q WASM 和 JavaScript
+    性能优化问题
+      Q WASM 模块加载很慢怎么办？
+      Q 运行时性能如何优化？
+    工具链问题
+      Q wasm-bindgen 版本不匹配？
+```
+
+## ⚠️ 反例与陷阱
+
+**陷阱（wasm32-unknown-unknown 上 `Instant::now()` 运行期 panic）**：该 target 没有系统时钟与线程，`std::time::Instant::now()`、`std::thread::spawn` 在浏览器环境直接 panic/不可用——代码在本机测试通过、部署到 wasm 才炸，是典型「主机/目标平台行为差」陷阱。
+
+**修正对照**（按目标平台抽象时钟，编译通过）：
+
+```rust
+fn now_ms() -> f64 {
+    #[cfg(target_arch = "wasm32")]
+    {
+        // wasm 环境由宿主提供时钟（如 js_sys::Date::now()），此处仅占位
+        0.0
+    }
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        std::time::Instant::now().elapsed().as_secs_f64() * 1000.0
+    }
+}
+
+fn main() {
+    let _ = now_ms();
+}
+```
+
+> 经验法则：所有依赖 OS 能力（时钟/线程/文件系统/网络）的代码都要 `cfg` 隔离，并在 CI 增加 `cargo check --target wasm32-unknown-unknown`。

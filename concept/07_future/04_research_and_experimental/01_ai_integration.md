@@ -1011,3 +1011,24 @@ fn main() {
 
 允许同一模型代码编译到不同后端（CPU、CUDA、WGPU、WebGPU），通过泛型（Generics）参数选择。这是 Rust 零成本抽象（Zero-Cost Abstraction）在 ML 领域的体现。
 </details>
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((AI × Rust生成-验证闭环与确定性容器))
+    三、三层闭环模型
+      3.1 第一层Prompt-Level规约层
+      3.2 第二层Code-Level代码层
+      3.3 第三层System-Level系统层
+    四、AI + Rust 的结构性优势
+    五、AI 辅助 Rust 编程的机制剖析
+      5.2 类型系统对 AI 生成的约束形式化
+      6.2 状态空间、动作空间与奖励函数
+      6.4 Rust 编译器错误信息的结构化优势
+    九、形式化视角
+    十、学术论文与研究方向
+      10.1 LLM for Code
+      10.2 Compiler-Guided LLM
+      10.3 研究前沿
+```

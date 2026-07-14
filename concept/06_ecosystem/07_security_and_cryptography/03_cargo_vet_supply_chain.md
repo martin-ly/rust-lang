@@ -37,6 +37,7 @@
   - [七、权威来源索引](#七权威来源索引)
   - [相关概念](#相关概念)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -235,3 +236,20 @@ error: serde:1.0.228 has no audit for this version
 **陷阱要点**：vet 的安全模型是「每个版本一次人工信任决策」；用 `wildcard` 审计豁免长期依赖等于把信任决策推迟到事故发生之后。
 
 ---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((cargo vet 与供应链审计))
+    一、为什么需要 cargo vet
+    二、cargo vet 的工作模型
+      2.1 三个文件
+      2.2 内置审计标准criteria
+      2.3 导入公共审计集
+    三、cargo audit漏洞跟踪的另一条腿
+    四、本项目实例supply-chain/ 与质量门
+      4.2 审计条目的写法
+      4.3 质量门 5 的语义
+    五、cargo vet vs cargo
+```

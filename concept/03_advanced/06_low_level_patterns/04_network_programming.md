@@ -1090,3 +1090,21 @@ impl TokenBucket {
 2. 运行 `cargo test -p c10_networks` 验证理解
 
 ---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 网络编程Tokio TCP/UDP、异步))
+    一、权威定义与核心概念
+      1.1 异步网络 IO 模型
+      1.2 Tokio Runtime 架构
+      1.3 TCP vs UDP 语义差异
+    二、技术细节
+      2.1 Tokio TCP 服务端实现
+      2.2 Tokio UDP 编程模型
+      2.3 Socket 选项与调优
+    五、反命题与边界分析
+      5.1 反命题树
+      5.2 边界极限
+```

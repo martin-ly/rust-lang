@@ -431,3 +431,16 @@ graph TB
 
 - **P1 学术/形式化**: [Jung, Jourdan, Krebbers & Dreyer: RustBelt — Securing the Foundations of the Rust Programming Language（POPL 2018，所有权/借用/生命周期的形式化基线）](https://plv.mpi-sws.org/rustbelt/) · [Jung, Dang, Kang & Dreyer: Stacked Borrows — An Aliasing Model for Rust（POPL 2020, arXiv:1909.03995）](https://arxiv.org/abs/1909.03995)（2026-07-12 验证 HTTP 200）
 - **P2 生态/社区**: [Rust 官方博客 — Niko Matsakis: NLL by default（非词法生命周期全面启用的权威说明）](https://blog.rust-lang.org/2022/08/05/nll-by-default.html)（2026-07-12 验证 HTTP 200）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 所有权-借用-生命周期知识图谱))
+    一、概念层次总览
+    二、核心层知识图谱
+      2.1 所有权系统
+      2.2 借用系统
+      2.3 生命周期系统
+    三、应用层
+```

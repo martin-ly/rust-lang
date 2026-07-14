@@ -1268,3 +1268,24 @@ graph TD
 
 归档文件不再维护更新，反映的是历史状态；活跃概念文件持续迭代，包含最新的语言特性和最佳实践。
 </details>
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((AI 来源 Are We Learning))
+    一、核心命题
+    二、基础定义
+      2.1 人工智能Artificial
+      2.2 大语言模型Large Language
+      2.3 强化学习Reinforcement
+    三、三层闭环模型
+      3.1 第一层Prompt-Level规约层
+      3.2 第二层Code-Level代码层
+      3.3 第三层System-Level系统层
+    四、AI + Rust 的结构性优势
+    五、AI + Rust 工具链详解
+      5.1 GitHub Copilot
+      5.2 Codeium
+      5.3 KiroAmazon
+```

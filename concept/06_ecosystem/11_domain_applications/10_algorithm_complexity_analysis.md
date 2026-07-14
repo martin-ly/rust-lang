@@ -226,3 +226,17 @@ fn main() {
     println!("{}", sum_to(1_000_000));
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 算法复杂度分析))
+    1. 时间复杂度基础
+    2. 渐进符号
+    3. 空间复杂度
+    4. 递归分析
+      4.1 主定理Master Theorem
+      4.2 递归树
+    5. 摊销分析
+```

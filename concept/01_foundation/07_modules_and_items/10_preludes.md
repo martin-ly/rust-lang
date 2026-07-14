@@ -240,3 +240,20 @@ fn f() -> std::io::Result<()> {
 }
 fn main() { let _ = f(); }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Preludes))
+    一、什么是 Prelude
+    二、标准库 Prelude
+      #![no_std] 属性
+    三、外部 Prelude
+      默认行为
+      Edition 差异
+    四、语言 Prelude
+      类型命名空间
+      宏命名空间
+    五、macro_use Prelude
+```

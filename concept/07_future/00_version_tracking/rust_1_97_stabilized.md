@@ -487,3 +487,43 @@ cargo build
 ## 相关概念
 
 - [对应测验](../05_quizzes/01_quiz_version_and_preview.md) — 版本演进、Edition 机制与前沿特性（发布火车、1.90–1.97 稳定特性、preview 状态）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 1.97.0 稳定特性))
+    1. 已稳定特性概览
+    2. 语言与编译器
+      2.1 must_use lint 扩展至
+      2.2 dead_code_pub_in_binar
+      2.3 新稳定 target features
+    3. 目标平台
+      3.1 nvptx64-nvidia-cuda
+    4. 标准库 API
+      4.1 Default for RepeatN
+      4.2 Copy for
+      4.3 Send for stdfsFile on
+    5. Cargo
+      5.1 build.warnings 配置
+      5.2 resolver.lockfile-path
+      5.4 -m 简写
+```
+
+
+## ⚠️ 反例与陷阱：1.97 起空 `export_name` 报错
+
+**反例**：为「清除符号名」把 `export_name` 置空——旧版本部分容忍，1.97 起直接报错：
+
+```rust,compile_fail
+#[unsafe(export_name = "")]
+fn foo() {}
+
+fn main() { foo(); }
+```
+
+实测（rustc 1.97.0, edition 2024）：`error: `export_name` may not be empty`。
+
+**陷阱本质**：这是 1.97 兼容性变更之一（另见 v0 mangling 默认化）：空符号名在链接期无意义，过去被静默接受，导致难以排查的链接行为。此外 edition 2024 要求 `export_name` 包在 `unsafe(...)` 中，两层规则叠加容易只修一层。
+
+**修正**：删除该属性，让编译器按 mangling 规则命名；确需固定符号名时给出非空名字并保留 `unsafe(...)` 包装。

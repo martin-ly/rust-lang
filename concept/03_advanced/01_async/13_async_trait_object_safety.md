@@ -49,6 +49,7 @@
   - [八、来源](#八来源)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 一、认知路径
 
@@ -334,3 +335,18 @@ flowchart TD
 - **组合**：与 [GAT](../../02_intermediate/00_traits/07_generic_associated_types.md)、[类型擦除](../06_low_level_patterns/03_type_erasure.md)、[Async Closures](07_async_closures.md) 组合。
 
 ---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Async Trait 对象安全dyn))
+    二、问题根源为什么 RPITIT 天生
+    三、方案谱系
+      3.1 方案 Aasync_trait 宏事实标准
+      3.2 方案 B手写 boxed future去宏化
+      3.3 方案 Cenum 分派封闭类型集的零成本逃逸
+    五、判定树
+    六、演进跟踪原生 dyn async 的将来
+    八、来源
+```

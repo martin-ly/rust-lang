@@ -1103,3 +1103,29 @@ RFC（Request for Comments）是 Rust 重大变更的标准化提案流程。所
 | Rust 2027 Edition 及未来路线图 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Rust 2027 Edition 及未来路线图 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust 2027 Edition 及未来路线图 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 2027 Edition 及未来路线图))
+    一、核心概念Edition 2027 的设计空间
+      1.1 Edition 演进节奏与政策
+      1.2 候选特性概览
+      1.3 特性依赖与 Edition 2027 关联图
+    二、类型系统前沿
+      2.1 Specialization 稳定化
+      2.2 Type Alias Impl Trait
+      2.3 可移植 SIMD stdsimd
+    三、异步与执行模型
+      3.1 Async Traits 与静态分发
+      3.2 Async Drop 与生命周期
+      3.3 Custom Allocators 稳定化
+    四、语言级语法演进
+      4.1 gen/kw生成器关键字扩展
+      4.2 Open Enums 与可扩展枚举
+      4.3 Effects System 与关键字泛型
+    六、反命题与边界分析
+      6.1 反命题树
+      6.2 边界极限
+```

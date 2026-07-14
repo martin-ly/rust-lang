@@ -1230,3 +1230,25 @@ async fn run() {
 }
 // 由 tokio::main 或 executor.block_on(run()) 驱动
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Future 与 Executor 机制))
+    1. Future Trait 详解
+      1.1 Future 的定义
+      1.2 Poll 枚举 Poll Enum
+      1.3 Context 和 Waker
+    2. Poll 与 Waker 机制
+      2.1 完整执行流程
+    3. Executor 工作原理
+      3.1 Executor 的职责
+      3.2 简化的 Executor 实现
+      3.3 Tokio Executor 架构
+    4. 手动实现 Future
+    5. async/await 状态机
+      5.1 从 async 到状态机
+      5.2 状态机可视化
+      5.3 零成本抽象验证
+```

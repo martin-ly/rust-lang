@@ -1305,3 +1305,22 @@ async fn fetch_all(urls: &[&str]) -> Vec<String> {
 - **依赖**：依赖 [Pin/Unpin](08_pin_unpin.md) 的不动性保证。
 
 ---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((异步模式从 Future 到生产级并发))
+    一、核心概念
+      1.1 Future 与状态机
+      1.2 Pin 与自引用
+      1.3 Waker 与执行器
+    二、技术细节
+      2.1 并发执行模式
+      2.2 取消与超时
+    三、异步模式矩阵
+      2.4 spawn_blocking 与混合架构
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+```

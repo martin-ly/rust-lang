@@ -317,3 +317,17 @@ rustc -Ztime-passes main.rs
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [verus-lang/verus — SMT 验证器](https://github.com/verus-lang/verus) · [creusot-rs/creusot — Rust 演绎验证](https://github.com/creusot-rs/creusot)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 编译器基础设施深度解析))
+    一、编译器架构总览
+    二、并行前端Parallel
+    三、Cranelift 后端——摘要
+    四、build-std从源码构建标准库
+      4.1 RFC 3873 核心内容
+      4.2 使用方式
+      4.3 限制与注意事项
+```

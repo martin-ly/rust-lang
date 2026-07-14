@@ -159,6 +159,7 @@
     - [四、迁移前 / 后代码对比（Edition 2024 / Rust 1.97.0+）](#四迁移前--后代码对比edition-2024--rust-1970)
     - [五、边界说明](#五边界说明)
     - [六、来源与反链](#六来源与反链)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 一、权威定义（Definition）
 
@@ -2897,3 +2898,25 @@ fn classify(err: &std::io::Error) -> &'static str {
   - [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)
   - [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md)（Platform + Compat-Lint 列，#24）
   - [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md)（§7 `WSAESHUTDOWN→BrokenPipe` 判定树与回归测试示例）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Error Handling错误处理))
+    一、权威定义Definition
+      1.1 Wikipedia 对齐定义
+      1.2 TRPL 官方定义
+    二、概念属性矩阵Attribute Matrix
+      2.1 错误处理机制矩阵
+      2.2 Rust vs 其他语言错误处理对比
+    六、反命题与边界分析Counter-proposit
+      6.1 反命题 1 Result 消除了所有错误
+      6.2 反命题 2 ? 运算符总是正确传播
+    七、边界极限测试代码Boundary Limit
+      7.1 测试 1 ? 运算符在闭包中的限制
+      7.2 测试 2 From 转换链的边界
+    十一、演进方向
+      11.1 stdbacktraceBacktrace
+      11.2 Termination trait 与
+```

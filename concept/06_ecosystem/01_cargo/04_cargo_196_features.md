@@ -52,6 +52,9 @@
     - [7.1 推荐迁移路径](#71-推荐迁移路径)
     - [7.2 常见陷阱](#72-常见陷阱)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：借用存活期间修改容器（rustc 1.97.0，--edition 2024 实测）](#反例借用存活期间修改容器rustc-1970--edition-2024-实测)
+    - [✅ 修正：用 Copy 复制或收窄借用作用域](#-修正用-copy-复制或收窄借用作用域)
 
 ---
 
@@ -305,3 +308,31 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Cargo 1 96 新特性与工具链变更」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+## ⚠️ 反例与陷阱
+
+升级 Cargo/Rust 版本不会放宽借用规则；新旧版本下此代码一律被拒。
+
+### 反例：借用存活期间修改容器（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0502
+fn main() {
+    let mut v = vec![1, 2];
+    let r = &v[0];
+    v.push(3);   // ❌ 不可变借用存活期间修改
+    let _ = *r;
+}
+```
+
+**实测错误**：`error[E0502]: cannot borrow`v`as mutable because it is also borrowed as immutable`。
+
+### ✅ 修正：用 Copy 复制或收窄借用作用域
+
+```rust
+fn main() {
+    let mut v = vec![1, 2];
+    let r = v[0]; // ✅ 复制 Copy 元素，缩短借用期
+    v.push(3);
+    let _ = r;
+}
+```

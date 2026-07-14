@@ -278,3 +278,16 @@ const fn checkout(cart: &Cart) -> u32 { cart.items }
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio) · [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Const Trait 实现预览))
+    功能动机
+    语法说明
+      声明 const trait
+      ~const Trait 的含义
+      与稳定 Rust 对比
+    迁移建议
+```

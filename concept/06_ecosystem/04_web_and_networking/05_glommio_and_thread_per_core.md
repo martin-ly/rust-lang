@@ -267,3 +267,18 @@ fn spawn_worker(state: Arc<Mutex<u64>>) {
 ## 相关概念
 
 - [对应测验](../13_quizzes/01_quiz_networking_async_ecosystem.md) — 网络与异步生态（Web 框架、Tokio/Glommio 运行时、QUIC/HTTP-3、eBPF）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Glommio 与 Thread-per-Core))
+    一、核心定位
+    二、Thread-per-Core vs
+    三、CPU 绑定与 NUMA 优化
+    六、Rust 异步运行时对比 2025
+      6.1 运行时特性概览
+      6.2 架构对比
+      6.4 代码对比
+    过渡段
+```

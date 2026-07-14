@@ -67,6 +67,7 @@
     - [测验 2：孤儿规则](#测验-2孤儿规则)
   - [认知路径](#认知路径)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -482,3 +483,17 @@ D. 本地 newtype `struct Bytes(Vec<u8>)`
 
 - **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
 - **P2 生态/社区**: [docs.rs/az — 生态权威 API 文档（checked/wrapping 数值转换 crate）](https://docs.rs/az)（2026-07-12 验证 HTTP 200）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((类型转换Type Conversions))
+    一、权威定义Definition
+      1.1 形式化定义
+      1.2 直觉解释
+    二、概念属性矩阵
+    五、反命题与边界分析
+      5.1 反命题树
+      5.2 边界极限
+```

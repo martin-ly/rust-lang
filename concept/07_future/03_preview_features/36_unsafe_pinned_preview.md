@@ -42,6 +42,7 @@
   - [六、反命题与边界分析](#六反命题与边界分析)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [权威来源索引](#权威来源索引)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 一、动机：Unpin 不能承担别名豁免
 
@@ -146,3 +147,15 @@ fn bump() { COUNTER.fetch_add(1, Ordering::Relaxed); }
 > [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
 >
 > 以上链接于 2026-07-12 经 curl 实测全部返回 HTTP 200；代码示例经 `rustc 1.99.0-nightly --edition 2024` 实测编译通过（stable 1.97.0 按预期报 E0658）。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((UnsafePinned))
+    一、动机Unpin 不能承担别名豁免
+    二、三种别名影响类型的语义分工
+    三、编译器与 Miri 层面的影响
+    五、稳定化阻塞项
+    六、反命题与边界分析
+```

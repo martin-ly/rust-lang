@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 496,
-    "generated_at": "2026-07-14T04:23:09.505871+00:00"
+    "generated_at": "2026-07-14T05:51:27.787913+00:00"
   },
   "files": [
     {
@@ -7587,7 +7587,7 @@
       "layer": "L1",
       "title": "Rust 起步指南",
       "positioning": "Rust 学习路径的起点。本文档假设你没有任何 Rust 背景，只需基本的命令行操作经验。",
-      "line_count": 284,
+      "line_count": 322,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将安装、构建、测试、文档生成串联为可重复的开发工作流。",
@@ -7617,6 +7617,20 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "// src/main.rs fn main() {     println!(\"Hello, Rust!\"); } ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "fn main() {     let s = String::from(\"hello\");     let t = s;            // s 的所..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn main() {     let s = String::from(\"hello\");     let t = &s;           // 借用：s..."
         }
       ],
       "sources": [],
@@ -7632,7 +7646,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 32,
       "pre_post": {
         "pre": [
@@ -7650,7 +7664,7 @@
       "layer": "L1",
       "title": "编程语言理论基础（PL Prerequisites）",
       "positioning": "L1 基础层的**前置知识补充**。理解这些通用 PL 概念后，你将能更深刻地回答\"为什么 Rust 要这样设计\"，而非仅仅记忆规则。",
-      "line_count": 534,
+      "line_count": 591,
       "theorem_chains": [
         {
           "text": "| 编程语言理论基础（PL Prerequisites） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -7744,6 +7758,20 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "unsafe {     // 编译器在此处\"放弃\"所有权检查     // 程序员必须手动保证不变量 } ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     let a = &mut v;     let b = &mut ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     {         let a = &mut v;        ..."
         }
       ],
       "sources": [],
@@ -7759,7 +7787,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 36,
       "pre_post": {
         "pre": [
@@ -8130,7 +8158,7 @@
       "layer": "L1",
       "title": "副作用与纯度：从引用透明到 Rust 的所有权效果",
       "positioning": "",
-      "line_count": 827,
+      "line_count": 848,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -8287,7 +8315,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 69,
       "pre_post": {
         "pre": [
@@ -8433,7 +8461,7 @@
       "layer": "L1",
       "title": "Rust 关键字（Keywords）",
       "positioning": "",
-      "line_count": 278,
+      "line_count": 291,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -8478,7 +8506,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 64,
       "pre_post": {
         "pre": [
@@ -8496,7 +8524,7 @@
       "layer": "L1",
       "title": "Rust 运算符与符号（Operators and Symbols）",
       "positioning": "",
-      "line_count": 267,
+      "line_count": 279,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -8525,7 +8553,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 131,
       "pre_post": {
         "pre": [
@@ -8543,7 +8571,7 @@
       "layer": "L1",
       "title": "Rust 所有权-借用-生命周期知识图谱",
       "positioning": "",
-      "line_count": 434,
+      "line_count": 447,
       "theorem_chains": [
         {
           "text": "图谱读法：所有权 ⟹ 借用规则 ⟹ 生命周期检查构成一条「机制 ⟹ 规则 ⟹ 验证」链；任何借用错误都可沿链定位到具体环节。",
@@ -8586,7 +8614,7 @@
       ],
       "transitions": 5,
       "has_cognitive_path": true,
-      "mermaid_blocks": 5,
+      "mermaid_blocks": 6,
       "matrix_rows": 50,
       "pre_post": {
         "pre": [
@@ -10521,7 +10549,7 @@
       "layer": "L1",
       "title": "所有权清单自测：Brown University Ownership Inventory",
       "positioning": "> 本文档为 **Brown University Interactive Book** 中「Ownership Inventory」概念清单的本地映射。",
-      "line_count": 209,
+      "line_count": 226,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -10558,7 +10586,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
@@ -12760,7 +12788,7 @@
       "layer": "L1",
       "title": "语句与表达式（Statements and Expressions）",
       "positioning": "",
-      "line_count": 277,
+      "line_count": 292,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -12823,7 +12851,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 33,
       "pre_post": {
         "pre": [
@@ -13022,7 +13050,7 @@
       "layer": "L1",
       "title": "高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析",
       "positioning": "深入分析 Rust **标准库高级集合类型**的设计权衡——从 BTreeMap/BTreeSet 的有序关联容器，到 HashMap 自定义 hasher，再到 VecDeque 的双端队列与 BinaryHeap 的优先队列，揭示每种数据结构的所有权（Ownership）语义、性能特征、内存布局与选型策略。",
-      "line_count": 1042,
+      "line_count": 1062,
       "theorem_chains": [
         {
           "text": "- **反命题 1：「`HashMap` 总是比 `BTreeMap` 快」** —— 有边界。小键集（<50 项）时 B 树的缓存友好性常反超哈希计算成本；有序遍历、范围查询、前缀扫描场景 B 树是唯一选择；哈希的另一隐性成本是 DoS 抗性（`HashMap` 默认 SipHash 有防护，换 `FxHash` 提速即放弃防护）。判定准则：需要顺序 ⟹ B 树；纯点查且规模大 ⟹ 哈希。",
@@ -13154,7 +13182,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 26,
       "pre_post": {
         "pre": [
@@ -13489,7 +13517,7 @@
       "layer": "L1",
       "title": "格式化与显示（Display and Debug Formatting）",
       "positioning": "",
-      "line_count": 453,
+      "line_count": 472,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`{}` 和 `{:?}` 相同\" ⟹ 不成立。`{}` 调用 `Display`，`{:?}` 调用 `Debug`。",
@@ -13594,7 +13622,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -13919,7 +13947,7 @@
       "layer": "L1",
       "title": "Use Declarations（使用声明）",
       "positioning": "系统讲解 `use` 声明的语法、作用域规则、重导出与 glob 导入，帮助学习者建立清晰的模块（Module）命名空间心智模型。",
-      "line_count": 304,
+      "line_count": 317,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `use` 声明、作用域与可见性规则串联起来。",
@@ -14024,7 +14052,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 19,
       "pre_post": {
         "pre": [
@@ -14443,7 +14471,7 @@
       "layer": "L1",
       "title": "类型别名（Type Alias）",
       "positioning": "",
-      "line_count": 440,
+      "line_count": 459,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"类型别名会创建新类型\" ⟹ 不成立。别名与原类型完全等价，编译器不会区分。",
@@ -14553,7 +14581,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
@@ -14571,7 +14599,7 @@
       "layer": "L1",
       "title": "静态项（Static Items）",
       "positioning": "",
-      "line_count": 429,
+      "line_count": 448,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`static` 和 `const` 完全相同\" ⟹ 不成立。`static` 有固定地址且可运行期存在；`const` 是编译期内联值。",
@@ -14669,7 +14697,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 23,
       "pre_post": {
         "pre": [
@@ -14808,7 +14836,7 @@
       "layer": "L1",
       "title": "Preludes（预导入模块）",
       "positioning": "",
-      "line_count": 243,
+      "line_count": 260,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -14861,7 +14889,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 8,
       "pre_post": {
         "pre": [
@@ -14879,7 +14907,7 @@
       "layer": "L1",
       "title": "Crate 与源文件（Crates and Source Files）",
       "positioning": "",
-      "line_count": 300,
+      "line_count": 312,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块（Module）路径解析串联起来。",
@@ -14959,7 +14987,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 28,
       "pre_post": {
         "pre": [
@@ -14977,7 +15005,7 @@
       "layer": "L1",
       "title": "项（Items）",
       "positioning": "",
-      "line_count": 410,
+      "line_count": 425,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块（Module）、item、名称解析与可见性串联起来。",
@@ -15114,7 +15142,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 38,
       "pre_post": {
         "pre": [
@@ -15879,7 +15907,7 @@
       "layer": "L1",
       "title": "常用开发工具（Useful Development Tools）",
       "positioning": "",
-      "line_count": 325,
+      "line_count": 340,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将代码编写、格式化、lint、测试、文档、发布串联为可重复工作流。",
@@ -15933,7 +15961,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 28,
       "pre_post": {
         "pre": [
@@ -16082,9 +16110,13 @@
       "layer": "L1",
       "title": "测验：错误处理（试点扩展）",
       "positioning": "嵌入式互动测验扩展——验证 L1 错误处理（Error Handling）核心概念（Result/Option、`?` 运算符、panic、自定义错误）的掌握程度。",
-      "line_count": 708,
+      "line_count": 739,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -16209,6 +16241,21 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "// 同时转换 Ok 和 Err result     .map(|v| v.process())     .map_err(|e| Error::from(e..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "fn read() -> Result<(), std::io::Error> {     Ok(()) }  fn main() {     read()?;..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn read() -> Result<(), std::io::Error> {     Ok(()) }  fn main() -> Result<(), ..."
         }
       ],
       "sources": [],
@@ -19765,7 +19812,7 @@
       "layer": "L2",
       "title": "Memory Management（内存管理）",
       "positioning": "",
-      "line_count": 2249,
+      "line_count": 2271,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -20294,7 +20341,7 @@
       ],
       "transitions": 7,
       "has_cognitive_path": true,
-      "mermaid_blocks": 5,
+      "mermaid_blocks": 6,
       "matrix_rows": 162,
       "pre_post": {
         "pre": [
@@ -20312,7 +20359,7 @@
       "layer": "L2",
       "title": "内部可变性：编译期规则的运行时逃逸",
       "positioning": "深入分析 Rust **内部可变性**（Interior Mutability）模式",
-      "line_count": 937,
+      "line_count": 956,
       "theorem_chains": [
         {
           "text": "| 独占访问即可满足可变性 | 外部可变性（`&mut`），编译期安全零开销 | §4.1 反命题树 TRUE | 共享所有权下 ⟹ 编译拒绝 |",
@@ -20455,7 +20502,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 39,
       "pre_post": {
         "pre": [
@@ -20473,7 +20520,7 @@
       "layer": "L2",
       "title": "Cow：写时克隆与零拷贝抽象",
       "positioning": "深入分析 Rust 中 **Cow（Clone [来源: [std::clone::Clone](https://doc.rust-lang.org/std/clone/trait.Clone.html)] on Write）**类型的设计——如何在**借用（Borrowing）**（零拷贝）和**拥有**（必要时克隆）之间自动切换，以及它在 API 设计中的广泛应用。",
-      "line_count": 795,
+      "line_count": 814,
       "theorem_chains": [
         {
           "text": "- **反命题 1：「`Cow` 总是比直接 `String` 高效」** —— 有边界。`Cow` 的收益只在「多数情况不修改」时兑现——每次 `to_mut` 触发克隆，修改比例高时 `Cow` 比直接 owned 多一次分支判断与潜在克隆。判定准则：修改概率 < 20% 且输入多为借用 ⟹ `Cow` 划算；否则直接 owned。",
@@ -20579,7 +20626,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 23,
       "pre_post": {
         "pre": [
@@ -20597,7 +20644,7 @@
       "layer": "L2",
       "title": "智能指针：堆内存管理与共享语义",
       "positioning": "系统分析 Rust **智能指针（Smart Pointer）**的设计——Box（独占堆分配）、Rc/Arc（引用（Reference）计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权（Ownership）语义和适用场景。",
-      "line_count": 949,
+      "line_count": 967,
       "theorem_chains": [
         {
           "text": "| 独占堆分配 | `Box<T>` | §三 选型决策矩阵 | 需要共享 ⟹ `Box` 不适用 |",
@@ -20751,7 +20798,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 36,
       "pre_post": {
         "pre": [
@@ -20991,7 +21038,7 @@
       "layer": "L2",
       "title": "Error Handling（错误处理）",
       "positioning": "补齐审计 §2.4 / §4 P2-2 缺口#7。本页此前仅有 1.97 横幅回链，无 Windows/Unix `ErrorKind` 映射差异。本节只补**映射差异与迁移判定**，不重复 `Result`/`?` 概念推导。完整判定树见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §7。",
-      "line_count": 2900,
+      "line_count": 2922,
       "theorem_chains": [
         {
           "text": "- [4.1 引理：Result\\<T,E\\> ⟹ 和类型强制错误处理](#41-引理resultte--和类型强制错误处理)",
@@ -21591,7 +21638,7 @@
       ],
       "transitions": 7,
       "has_cognitive_path": true,
-      "mermaid_blocks": 8,
+      "mermaid_blocks": 9,
       "matrix_rows": 229,
       "pre_post": {
         "pre": [
@@ -21609,7 +21656,7 @@
       "layer": "L2",
       "title": "错误处理深入：从 Result 到自定义错误生态",
       "positioning": "深入分析 Rust **错误处理（Error Handling）机制**——从 `Result`/`Option` 的组合子到 `?` 运算符、错误转换、自定义错误类型和错误处理框架，揭示 Rust 如何将错误处理融入类型系统（Type System）实现编译期安全。",
-      "line_count": 820,
+      "line_count": 839,
       "theorem_chains": [
         {
           "text": "| 错误处理深入：从 Result 到自定义错误生态 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -21723,7 +21770,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -21741,7 +21788,7 @@
       "layer": "L2",
       "title": "Panic 机制",
       "positioning": "",
-      "line_count": 240,
+      "line_count": 256,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -21786,7 +21833,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 9,
       "pre_post": {
         "pre": [
@@ -21804,7 +21851,7 @@
       "layer": "L2",
       "title": "异常安全：C++ 与 Rust 的错误处理哲学",
       "positioning": "",
-      "line_count": 346,
+      "line_count": 364,
       "theorem_chains": [
         {
           "text": "- **Strong**: `exec(f, s) = ⊥ ⟹ state = s`",
@@ -21868,7 +21915,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 24,
       "pre_post": {
         "pre": [
@@ -21886,7 +21933,7 @@
       "layer": "L2",
       "title": "Rust 范围类型语义：`std::ops::Range` → `core::range`",
       "positioning": "探讨 Rust 范围类型从**运行时（Runtime）迭代器（Iterator）**到**编译期可复制的值类型**的语义演进，以及 `IntoIterator` vs `Iterator` 的设计权衡。",
-      "line_count": 687,
+      "line_count": 708,
       "theorem_chains": [
         {
           "text": "| Rust 范围类型语义：`std::ops::Range` → `core::range` 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -22010,7 +22057,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
@@ -22028,7 +22075,7 @@
       "layer": "L2",
       "title": "闭包类型系统：Fn、FnMut、FnOnce 的捕获语义",
       "positioning": "深入分析 Rust 闭包（Closures）的**类型系统（Type System）**——`Fn`、`FnMut`、`FnOnce` 三者的捕获规则、自动 trait 推导、以及闭包与函数指针的本质区别。",
-      "line_count": 854,
+      "line_count": 877,
       "theorem_chains": [
         {
           "text": "| 回调只读捕获、可多次调用 | `Fn` 约束 | §4.1 反命题树 TRUE | 闭包修改捕获状态 ⟹ 不满足 `Fn` |",
@@ -22217,7 +22264,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 34,
       "pre_post": {
         "pre": [
@@ -22235,7 +22282,7 @@
       "layer": "L2",
       "title": "Newtype 与包装器模式：类型安全的零成本抽象",
       "positioning": "深入分析 Rust 中 **Newtype 模式**和**包装器类型**的设计——如何通过单字段元组结构体（Struct）创建语义上不同的类型，实现编译期单位检查、API 封装和安全边界，同时保持零运行时（Runtime）开销。",
-      "line_count": 832,
+      "line_count": 851,
       "theorem_chains": [
         {
           "text": "| Newtype 与包装器模式：类型安全的零成本抽象（Zero-Cost Abstraction） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -22369,7 +22416,7 @@
       ],
       "transitions": 2,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 25,
       "pre_post": {
         "pre": [
@@ -22387,7 +22434,7 @@
       "layer": "L2",
       "title": "高级类型系统：从关联类型到类型级编程",
       "positioning": "深入分析 Rust **类型系统（Type System）的高级特性**——从 GATs、impl Trait 到类型级计算和 const generics，揭示 Rust 如何在保持编译期安全的同时提供强大的抽象能力。",
-      "line_count": 1283,
+      "line_count": 1306,
       "theorem_chains": [
         {
           "text": "| 高级类型系统：从关联类型到类型级编程 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -22562,7 +22609,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 34,
       "pre_post": {
         "pre": [
@@ -22580,7 +22627,7 @@
       "layer": "L2",
       "title": "RTTI 与动态类型识别：从 C++ 到 Rust",
       "positioning": "",
-      "line_count": 331,
+      "line_count": 351,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -22641,7 +22688,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 14,
       "pre_post": {
         "pre": [
@@ -22659,7 +22706,7 @@
       "layer": "L2",
       "title": "联合体（Unions）",
       "positioning": "",
-      "line_count": 453,
+      "line_count": 467,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"联合体与枚举相同\" ⟹ 不成立。枚举有标签，联合体没有；枚举模式匹配（Pattern Matching）安全，联合体读取需 unsafe。",
@@ -22750,7 +22797,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 24,
       "pre_post": {
         "pre": [
@@ -22768,7 +22815,7 @@
       "layer": "L2",
       "title": "类型转换（Type Conversions）",
       "positioning": "",
-      "line_count": 485,
+      "line_count": 499,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`as` 转换总是安全的\" ⟹ 不成立。`as` 可能截断、改变符号或产生未定义行为（如指针转换）。",
@@ -22879,7 +22926,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -22897,7 +22944,7 @@
       "layer": "L2",
       "title": "模块系统：Rust 的代码组织与可见性规则",
       "positioning": "深入分析 Rust **模块系统**（module system）的设计——从文件系统映射、可见性规则（pub/use/super/self）、到 crate 边界与 workspace 组织，揭示 Rust 模块系统与 C++/Java/Python 的本质差异。",
-      "line_count": 893,
+      "line_count": 911,
       "theorem_chains": [
         {
           "text": "| 公开 API 项 | `pub` | §3.1 反命题树 TRUE | 过度 `pub` ⟹ API 表面积过大、破坏变更风险上升 |",
@@ -23067,7 +23114,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 27,
       "pre_post": {
         "pre": [
@@ -23085,7 +23132,7 @@
       "layer": "L2",
       "title": "友元 vs 模块可见性：C++ 的 `friend` 与 Rust 的隐私边界",
       "positioning": "",
-      "line_count": 295,
+      "line_count": 314,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -23135,7 +23182,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 21,
       "pre_post": {
         "pre": [
@@ -23153,7 +23200,7 @@
       "layer": "L2",
       "title": "Rust API 命名约定",
       "positioning": "系统整理 Rust 标准库与生态中反复出现的命名模式，帮助学习者写出“看起来就像 Rust”的 API。",
-      "line_count": 493,
+      "line_count": 514,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -23281,7 +23328,7 @@
       ],
       "transitions": 2,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 28,
       "pre_post": {
         "pre": [
@@ -23299,7 +23346,7 @@
       "layer": "L2",
       "title": "`assert_matches!`：模式匹配断言的形式化语义",
       "positioning": "将 Rust 的**模式匹配（Pattern Matching）**能力从\"表达式求值\"扩展到\"测试断言\"的工程机制，实现编译期模式检查与运行时（Runtime）断言的统一。",
-      "line_count": 757,
+      "line_count": 774,
       "theorem_chains": [
         {
           "text": "| `assert_matches!`：模式匹配断言的形式化语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -23467,7 +23514,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 26,
       "pre_post": {
         "pre": [
@@ -23485,7 +23532,7 @@
       "layer": "L2",
       "title": "DSL 与嵌入 式设计：Rust 中的领域特定语言",
       "positioning": "分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏（Macro）驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rustc-dev-guide.rust-lang.org/)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。",
-      "line_count": 868,
+      "line_count": 887,
       "theorem_chains": [
         {
           "text": "- **反命题 1：「类型状态机（typestate）DSL 总是值得」** —— 有边界。typestate 把非法状态转为编译错误的代价是类型数量爆炸与错误信息晦涩——状态数 × 转换数超过 ~20 时，泛型签名的可读性崩溃。判定准则：状态机是 API 的核心契约（如协议握手、构建器必填字段）⟹ typestate 值得；内部实现细节 ⟹ 运行期 `enum` + 断言更简单。",
@@ -23623,7 +23670,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 26,
       "pre_post": {
         "pre": [
@@ -23641,7 +23688,7 @@
       "layer": "L2",
       "title": "宏模式：编译期代码生成的工程实践",
       "positioning": "深入分析 Rust **宏（Macro）的工程模式**——从 DRY 代码生成、API 设计到编译期计算，揭示如何在不牺牲可读性的前提下利用宏提升代码复用和类型安全。",
-      "line_count": 855,
+      "line_count": 874,
       "theorem_chains": [
         {
           "text": "- **反命题 2：「`macro_rules!` 能做到过程宏的一切」** —— 错误。`macro_rules!` 只有模式匹配与 token 替换——无法分析类型信息（不知道 `$x` 是不是结构体）、无法访问外部状态、无法生成标识符拼接（`concat_idents!` 仍 nightly）。需要语义分析 ⟹ 过程宏 + syn。",
@@ -23750,7 +23797,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
@@ -23768,7 +23815,7 @@
       "layer": "L2",
       "title": "元编程：Rust 的编译期代码生成与变换",
       "positioning": "深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配（Pattern Matching）、过程宏（Procedural Macro）的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。",
-      "line_count": 902,
+      "line_count": 922,
       "theorem_chains": [
         {
           "text": "| 元编程：Rust 的编译期代码生成与变换 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -23869,7 +23916,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 44,
       "pre_post": {
         "pre": [
@@ -23887,7 +23934,7 @@
       "layer": "L2",
       "title": "C 预处理器 vs Rust 宏：从文本替换到语法树",
       "positioning": "",
-      "line_count": 280,
+      "line_count": 297,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -23943,7 +23990,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 14,
       "pre_post": {
         "pre": [
@@ -23961,7 +24008,7 @@
       "layer": "L2",
       "title": "属性分类详解（Attributes by Category）",
       "positioning": "",
-      "line_count": 499,
+      "line_count": 513,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"属性只影响运行时（Runtime）行为\" ⟹ 不成立。属性主要影响编译期、代码生成、诊断和链接。",
@@ -24071,7 +24118,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 19,
       "pre_post": {
         "pre": [
@@ -24089,7 +24136,7 @@
       "layer": "L2",
       "title": "Rust 迭代器模式",
       "positioning": "深入探讨 Rust 迭代器（Iterator）模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。",
-      "line_count": 1435,
+      "line_count": 1453,
       "theorem_chains": [
         {
           "text": "| 逐元素变换 | `map`（惰性适配器） | §1.3 惰性求值 | 没有消费者 ⟹ 不执行任何计算（§10.2） |",
@@ -24334,7 +24381,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 34,
       "pre_post": {
         "pre": [
@@ -24723,7 +24770,7 @@
       "layer": "L3",
       "title": "Send 与 Sync：Auto Trait 的并发安全契约",
       "positioning": "",
-      "line_count": 587,
+      "line_count": 605,
       "theorem_chains": [
         {
           "text": "> **Send 契约**：`T: Send` ⟹ 将 `T` 的**所有权（Ownership）转移**到另一个线程是安全的。",
@@ -24881,7 +24928,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 42,
       "pre_post": {
         "pre": [
@@ -25225,7 +25272,7 @@
       "layer": "L3",
       "title": "Cross-Platform Concurrency（跨平台并发）",
       "positioning": "",
-      "line_count": 256,
+      "line_count": 268,
       "theorem_chains": [
         {
           "text": "| 平台线程模型差异 ⟹ 同步原语选择必须显式 | 不同 OS 使用不同内核对象 | 代码中应避免隐式依赖默认排序或固定线程数 |",
@@ -25303,7 +25350,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 21,
       "pre_post": {
         "pre": [
@@ -25321,7 +25368,7 @@
       "layer": "L3",
       "title": "原子操作与内存序：无锁并发的精确控制",
       "positioning": "深入分析 Rust **原子类型（Atomic）**和**内存排序（Memory Ordering [来源: [Atomic Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]）**——从基本的 load/store 到 compare-and-swap 和释放-获取语义，揭示无锁编程中硬件内存模型的精确控制。",
-      "line_count": 1525,
+      "line_count": 1546,
       "theorem_chains": [
         {
           "text": "| 独立计数器（统计/性能计数） | `Relaxed` | §2.2 内存序选择决策树 | 与其他数据存在依赖 ⟹ `Relaxed` 不足 |",
@@ -25570,7 +25617,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 61,
       "pre_post": {
         "pre": [
@@ -25590,7 +25637,7 @@
       "layer": "L3",
       "title": "无锁编程与内存模型",
       "positioning": "深入探讨 Rust 中的**无锁编程**——从原子操作（Atomic Operations）到内存序，分析 lock-free 算法的内存安全（Memory Safety）保证与性能优势。",
-      "line_count": 1246,
+      "line_count": 1264,
       "theorem_chains": [
         {
           "text": "| 无锁编程与内存模型 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -25778,7 +25825,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 47,
       "pre_post": {
         "pre": [
@@ -25798,7 +25845,7 @@
       "layer": "L3",
       "title": "并行与分布式模式谱系：从线程池到共识算法",
       "positioning": "",
-      "line_count": 1121,
+      "line_count": 1144,
       "theorem_chains": [
         {
           "text": "| 并行与分布式模式谱系：从线程池到共识算法 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -25975,7 +26022,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 71,
       "pre_post": {
         "pre": [
@@ -26159,7 +26206,7 @@
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
-      "line_count": 3491,
+      "line_count": 3513,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注",
@@ -26774,7 +26821,7 @@
       ],
       "transitions": 3,
       "has_cognitive_path": true,
-      "mermaid_blocks": 9,
+      "mermaid_blocks": 10,
       "matrix_rows": 214,
       "pre_post": {
         "pre": [
@@ -26793,7 +26840,7 @@
       "layer": "L3",
       "title": "Async/Await 高级主题",
       "positioning": "",
-      "line_count": 675,
+      "line_count": 690,
       "theorem_chains": [
         {
           "text": "> **定理链编号**: T-053 Waker 活性 ⟹ T-054 Stream 安全性",
@@ -26940,7 +26987,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 27,
       "pre_post": {
         "pre": [
@@ -26959,7 +27006,7 @@
       "layer": "L3",
       "title": "异步模式：从 Future 到生产级并发",
       "positioning": "深入分析 Rust **异步编程的高级模式**——从 Future 状态机、Pin 保证到并发执行和取消传播，揭示 Rust async/await 如何在零运行时（Runtime）开销下实现高效并发。",
-      "line_count": 1308,
+      "line_count": 1327,
       "theorem_chains": [
         {
           "text": "| 异步模式：从 Future 到生产级并发 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -27165,7 +27212,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 43,
       "pre_post": {
         "pre": [
@@ -27183,7 +27230,7 @@
       "layer": "L3",
       "title": "Future 与 Executor 机制 (Future and Executor Mechanisms)",
       "positioning": "",
-      "line_count": 1233,
+      "line_count": 1255,
       "theorem_chains": [
         {
           "text": "- **与事件循环的衔接**：IO 型执行器（tokio）把 Waker 注册到 epoll/io_uring 的就绪回调——IO 就绪 ⟹ wake ⟹ 任务入队 ⟹ 下一次 poll。",
@@ -27381,7 +27428,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 8,
       "pre_post": {
         "pre": [
@@ -27399,7 +27446,7 @@
       "layer": "L3",
       "title": "Async 取消安全（Cancellation Safety）",
       "positioning": "系统化分析 Rust 异步（Async）的**取消安全（cancellation safety）**——drop 即取消的语义、形式化定义、Tokio 各 API 的安全性判定、经典陷阱与修正模式。",
-      "line_count": 544,
+      "line_count": 563,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -27524,7 +27571,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 36,
       "pre_post": {
         "pre": [
@@ -27542,7 +27589,7 @@
       "layer": "L3",
       "title": "Async 边界全景（Async Boundary Panorama）",
       "positioning": "汇总 Rust 异步编程全部**语义边界**——await 点两侧什么成立/什么不成立、取消何时安全、自引用何时合法、Future 何时可跨线程、运行时契约何时被打破、async trait 何时可对象化。每一节给出**边界陈述 → 反例 → 判定条件**三段式。",
-      "line_count": 525,
+      "line_count": 543,
       "theorem_chains": [
         {
           "text": "- **推论 1**: 跨 await 持有引用 ⟹ 状态机字段含引用 ⟹ 该引用指向的数据必须比 Future 活得久。",
@@ -27766,7 +27813,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 52,
       "pre_post": {
         "pre": [
@@ -27784,7 +27831,7 @@
       "layer": "L3",
       "title": "Async Closures（异步闭包）",
       "positioning": "",
-      "line_count": 644,
+      "line_count": 668,
       "theorem_chains": [
         {
           "text": "| async closures 提供原生异步闭包 ⟹ 简化高阶异步回调 | 掌握旧写法 `\\|x\\| async move {}` | 能用 `async \\|x\\| {}` 编写更简洁的异步回调 | 高 |",
@@ -27974,7 +28021,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 31,
       "pre_post": {
         "pre": [
@@ -27992,7 +28039,7 @@
       "layer": "L3",
       "title": "Pin 与 Unpin：自引用类型的不动性保证",
       "positioning": "深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。",
-      "line_count": 1009,
+      "line_count": 1031,
       "theorem_chains": [
         {
           "text": "| 必须自引用且固定后不再移动 | `Pin<Box<T>>` 或 `pin_mut!` | §4.1 反命题树 TRUE | 之后仍需移动 ⟹ 违反 Pin 契约 |",
@@ -28215,7 +28262,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 31,
       "pre_post": {
         "pre": [
@@ -28233,7 +28280,7 @@
       "layer": "L3",
       "title": "Stream 代数与背压：拉取式序列的形式刻画",
       "positioning": "把 `Stream` 从「异步版的 Iterator」这一直觉，上升为可推理的代数对象：对偶签名、组合子定律、以及背压作为「速率约束的反向传播」的形式模型，全部落到可编译验证的示例-反例对上。",
-      "line_count": 477,
+      "line_count": 496,
       "theorem_chains": [
         {
           "text": "理解顺序：**对偶（§2）⟹ 组合（§3）⟹ 速率（§4-5）**。对偶回答「Stream 是什么」；组合子代数回答「能对它做什么变换、哪些变换保语义」；背压模型回答「变换链两端的速率不匹配时谁付出代价」。跳过对偶直接学组合子，会在 `.next().await` 报 `cannot be unpinned` 时手足无措（§3.4）。",
@@ -28323,7 +28370,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 21,
       "pre_post": {
         "pre": [
@@ -28341,7 +28388,7 @@
       "layer": "L3",
       "title": "Executor 公平性与调度：Tokio 调度器 internals",
       "positioning": "把「tokio 会公平地调度任务」这一模糊信念拆解为可验证的机制事实：任务在哪个队列、谁决定下一个 poll 谁、什么模式让公平性失效、失效如何测量与修复。",
-      "line_count": 359,
+      "line_count": 376,
       "theorem_chains": [
         {
           "text": "阅读顺序：**结构（§2）⟹ 两个公平性机制（§3-4）⟹ 失效模式（§5）⟹ 测量（§6）⟹ 替代设计（§7）**。核心问题只有一个：协作式调度没有抢占，公平性完全由「队列纪律 + 预算」两条机制提供——本页就是这两条机制的成立条件与失效边界的清单。",
@@ -28443,7 +28490,7 @@
       ],
       "transitions": 2,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 11,
       "pre_post": {
         "pre": [
@@ -28461,7 +28508,7 @@
       "layer": "L3",
       "title": "Pin 投射反例集：unsafe 结构投射的 UB 目录与正确模式库",
       "positioning": "`Pin<&mut Self>` 保证了「整体不动」，但业务需要的是「字段级访问」——结构投射（structural projection）就是跨越这道缝的技术。本页系统枚举手写投射的全部 UB 模式与全部正确模式，让 unsafe 决策变成查表。",
-      "line_count": 442,
+      "line_count": 455,
       "theorem_chains": [
         {
           "text": "阅读顺序：**问题（§2）⟹ 反例（§3-4，先建立恐惧的精确形状）⟹ 正例（§5-6）⟹ 查表决策（§7）**。每条反例给出「miri 思路」——即在 stacked borrows / tree borrows 模型下违反的是哪条公理，而不只是「这样做不对」。",
@@ -28570,7 +28617,7 @@
       ],
       "transitions": 2,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
@@ -28588,7 +28635,7 @@
       "layer": "L3",
       "title": "Waker 契约深度解析：RawWakerVTable 实现与契约违反反例集",
       "positioning": "`Waker` 是 async Rust 唯一的唤醒原语，也是唯一要求程序员手写 unsafe 才能自造的核心抽象。本页把「正确实现」变成查表，把「错误实现」变成可识别的反例指纹。",
-      "line_count": 382,
+      "line_count": 396,
       "theorem_chains": [
         {
           "text": "> **分工声明**: Waker 的**契约概述**（poll⟹Pending⟹已注册、活性三反例、活性调试决策树）与 **VTable 概念性代码**统一维护在 [Async/Await §8.8/§8.9](01_async.md#88-waker-契约与活性)，[Async 高级主题 §8.8/8.9](02_async_advanced.md) 为其高级摘要。本页只做两件事：① `RawWakerVTable` 手工实现的**正确模式全集**（全部 rustc 1.97 实测可编译）；② 契约违反的**反例目录**（时序图 / loom 思路 / miri 思路）。凡涉及「Waker 契约是什么」的问题以 01 为准，本页不重复推导（AGENTS.md §2 Canonical 规则）。",
@@ -28687,7 +28734,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 19,
       "pre_post": {
         "pre": [
@@ -28705,7 +28752,7 @@
       "layer": "L3",
       "title": "Async Trait 对象安全：dyn 兼容解决方案谱系与选型矩阵",
       "positioning": "`async fn` in trait（1.75 stable）解决了静态分发，却留下 Rust async 最著名的缺口：`Box<dyn Trait>` 不可用。本页把社区四年积累的五条路线（宏装箱 / 手写装箱 / erased 类型 / RTN / 原生 dyn async）整理为可查表的选型矩阵。",
-      "line_count": 337,
+      "line_count": 352,
       "theorem_chains": [
         {
           "text": "阅读顺序：**根源（§2，两分钟理解为什么不行）⟹ 谱系（§3，五条路线各一节）⟹ 查表（§4-5）⟹ 前瞻（§6）**。",
@@ -28788,7 +28835,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 25,
       "pre_post": {
         "pre": [
@@ -28806,7 +28853,7 @@
       "layer": "L3",
       "title": "是否需要进入 L4 形式化层？",
       "positioning": "L3（高级）与 L4（形式化）之间的**决策缓冲带**，帮助你判断是否需要阅读形式化内容。",
-      "line_count": 173,
+      "line_count": 187,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -28817,7 +28864,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 6,
       "pre_post": {
         "pre": [
@@ -28835,7 +28882,7 @@
       "layer": "L3",
       "title": "Unsafe Rust 安全编程",
       "positioning": "",
-      "line_count": 3506,
+      "line_count": 3530,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 重构增强——定理一致性（Coherence）矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注",
@@ -29412,7 +29459,7 @@
       ],
       "transitions": 3,
       "has_cognitive_path": true,
-      "mermaid_blocks": 10,
+      "mermaid_blocks": 11,
       "matrix_rows": 321,
       "pre_post": {
         "pre": [
@@ -29430,7 +29477,7 @@
       "layer": "L3",
       "title": "Unsafe 边界全景（Unsafe Boundary Panorama）",
       "positioning": "从 [Unsafe Rust](01_unsafe.md) 中抽离**边界视角**：不做 unsafe 概念推导，只回答五类边界问题——什么算 UB、别名模型管到哪、Miri 能查到什么、安全抽象的契约划在哪、FFI 布局契约何时成立。每一节给出**边界陈述 → 反例 → 判定条件**三段式。",
-      "line_count": 487,
+      "line_count": 505,
       "theorem_chains": [
         {
           "text": "| Q-U1 | 构造无效值（bool>1/枚举越界/! 实例）的位置数是否 ≥1 个？ | ≥1 ⟹ UB（无需使用即成立） | 🔴 UB |",
@@ -29624,7 +29671,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 48,
       "pre_post": {
         "pre": [
@@ -29642,7 +29689,7 @@
       "layer": "L3",
       "title": "NLL 与 Polonius：借用检查器的演进",
       "positioning": "深入分析 Rust **借用（Borrowing）检查器**的两个里程碑——Non-Lexical Lifetimes (NLL) 如何放宽词法作用域限制，以及 Polonius 如何通过数据流分析实现更精确的借用检查，揭示 Rust 类型系统（Type System）的持续演进。",
-      "line_count": 891,
+      "line_count": 910,
       "theorem_chains": [
         {
           "text": "| NLL 与 Polonius：借用检查器的演进 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -29782,7 +29829,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 26,
       "pre_post": {
         "pre": [
@@ -29801,7 +29848,7 @@
       "layer": "L3",
       "title": "Unsafe Rust 模式：安全抽象的核心技术",
       "positioning": "",
-      "line_count": 73,
+      "line_count": 86,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过需求 ⟹ 安全抽象 ⟹ 安全 API 的定理链组织 unsafe 代码。",
@@ -29843,7 +29890,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 0,
       "pre_post": {
         "pre": [
@@ -30034,7 +30081,7 @@
       "layer": "L3",
       "title": "Rust 内存模型（Memory Model）",
       "positioning": "",
-      "line_count": 475,
+      "line_count": 488,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将字节模型、provenance 和 UB 边界串联起来。",
@@ -30151,7 +30198,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 34,
       "pre_post": {
         "pre": [
@@ -30169,7 +30216,7 @@
       "layer": "L3",
       "title": "Unsafe 参考（Unsafe Reference）",
       "positioning": "",
-      "line_count": 319,
+      "line_count": 331,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `unsafe` 关键字、块、操作和 UB 契约串联起来。",
@@ -30247,7 +30294,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 35,
       "pre_post": {
         "pre": [
@@ -30265,7 +30312,7 @@
       "layer": "L3",
       "title": "Macros（宏系统）",
       "positioning": "",
-      "line_count": 2545,
+      "line_count": 2566,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构——增强定理一致性（Coherence）矩阵至11行（带⟹推理链）、新增3个反命题决策树、重写6步递进认知路径、补充章节过渡段落与层次一致性标注",
@@ -30837,7 +30884,7 @@
       ],
       "transitions": 8,
       "has_cognitive_path": true,
-      "mermaid_blocks": 8,
+      "mermaid_blocks": 9,
       "matrix_rows": 167,
       "pre_post": {
         "pre": [
@@ -30855,7 +30902,7 @@
       "layer": "L3",
       "title": "过程宏：编译期代码生成的元编程工具",
       "positioning": "深入分析 Rust **过程宏（Procedural Macros）**的三种类型（derive、attribute、function-like）——它们的编译期执行模型、TokenStream 操作、卫生性（hygiene）保证，以及与 `macro_rules!` 的本质差异。",
-      "line_count": 1156,
+      "line_count": 1179,
       "theorem_chains": [
         {
           "text": "| 过程宏：编译期代码生成的元编程工具 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -31009,7 +31056,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 48,
       "pre_post": {
         "pre": [
@@ -31027,7 +31074,7 @@
       "layer": "L3",
       "title": "过程宏代码生成优化",
       "positioning": "",
-      "line_count": 384,
+      "line_count": 408,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 token 质量 ⟹ 编译期开销 ⟹ 二进制体积的定理链进行优化决策。",
@@ -31146,7 +31193,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 9,
       "pre_post": {
         "pre": [
@@ -31164,7 +31211,7 @@
       "layer": "L3",
       "title": "宏调试与诊断",
       "positioning": "",
-      "line_count": 387,
+      "line_count": 406,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过展开追踪 ⟹ span 保留 ⟹ 精确诊断的定理链提升排错效率。",
@@ -31262,7 +31309,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 10,
       "pre_post": {
         "pre": [
@@ -31280,7 +31327,7 @@
       "layer": "L3",
       "title": "生产级宏开发",
       "positioning": "",
-      "line_count": 408,
+      "line_count": 431,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过兼容性 ⟹ 诊断质量 ⟹ 可持续维护的定理链评估工程成熟度。",
@@ -31386,7 +31433,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 12,
       "pre_post": {
         "pre": [
@@ -31404,7 +31451,7 @@
       "layer": "L3",
       "title": "术语表 - C11 Macro System",
       "positioning": "",
-      "line_count": 723,
+      "line_count": 745,
       "theorem_chains": [
         {
           "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
@@ -31646,7 +31693,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 4,
       "pre_post": {
         "pre": [
@@ -31664,7 +31711,7 @@
       "layer": "L3",
       "title": "常见问题 (FAQ) - C11 Macro System",
       "positioning": "",
-      "line_count": 807,
+      "line_count": 833,
       "theorem_chains": [
         {
           "text": "> **定理链**: Common Question ⟹ Mechanism Explanation ⟹ Best Practice",
@@ -31946,7 +31993,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 11,
       "pre_post": {
         "pre": [
@@ -31964,7 +32011,7 @@
       "layer": "L3",
       "title": "syn & quote 完整参考",
       "positioning": "",
-      "line_count": 1236,
+      "line_count": 1262,
       "theorem_chains": [
         {
           "text": "> **定理链**: Parse Input ⟹ Transform AST ⟹ Emit Tokens",
@@ -32277,7 +32324,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 4,
       "pre_post": {
         "pre": [
@@ -32295,7 +32342,7 @@
       "layer": "L3",
       "title": "宏卫生性完整参考",
       "positioning": "",
-      "line_count": 985,
+      "line_count": 1007,
       "theorem_chains": [
         {
           "text": "> **定理链**: Hygiene ⟹ Span Selection ⟹ Name Collision Prevention",
@@ -32559,7 +32606,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 19,
       "pre_post": {
         "pre": [
@@ -32768,7 +32815,7 @@
       "layer": "L3",
       "title": "条件编译（Conditional Compilation）",
       "positioning": "",
-      "line_count": 327,
+      "line_count": 345,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -32857,7 +32904,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 32,
       "pre_post": {
         "pre": [
@@ -32875,7 +32922,7 @@
       "layer": "L3",
       "title": "Rust FFI：与外部代码的安全边界",
       "positioning": "系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。",
-      "line_count": 987,
+      "line_count": 1009,
       "theorem_chains": [
         {
           "text": "| Rust FFI：与外部代码的安全边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -33053,7 +33100,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 63,
       "pre_post": {
         "pre": [
@@ -33071,7 +33118,7 @@
       "layer": "L3",
       "title": "FFI 高级主题：跨语言边界的安全与性能",
       "positioning": "深入分析 Rust **FFI（外部函数接口）**的高级主题——从复杂类型映射、回调函数、到线程安全和内存布局控制，揭示如何在不安全边界上维持 Rust 的安全保证。",
-      "line_count": 954,
+      "line_count": 973,
       "theorem_chains": [
         {
           "text": "| FFI 高级主题：跨语言边界的安全与性能 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -33210,7 +33257,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 25,
       "pre_post": {
         "pre": [
@@ -33230,7 +33277,7 @@
       "layer": "L3",
       "title": "Linkage（链接）",
       "positioning": "本小节为 Rust 1.97.0 在「编译器符号发射 ⟷ 链接器输入 ⟷ ABI 契约」边界的**交叉语义**补全，对应审计缺口（[`GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md`](../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md) §2.4、§4 P2-2 缺口#1）。原 `mangling / linker / export_name / v0` 在本页 0 命中，现补齐。",
-      "line_count": 436,
+      "line_count": 455,
       "theorem_chains": [
         {
           "text": "选型判定：Rust 用 Rust ⟹ `lib`；C/C++ 项目静态嵌入 ⟹ `staticlib`；动态加载/多语言共享 ⟹ `cdylib`；`dylib` 仅在「全 Rust 动态插件」场景考虑（且优先评估 `abi_stable` crate 的稳定 ABI 方案）。",
@@ -33369,7 +33416,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 11,
       "pre_post": {
         "pre": [
@@ -33387,7 +33434,7 @@
       "layer": "L3",
       "title": "内联汇编 (Inline Assembly)",
       "positioning": "深入分析 Rust `asm!` 宏（Macro）的语法、约束系统、寄存器管理，以及 x86_64、aarch64、RISC-V、s390x 四大平台的差异，重点覆盖 Rust 1.96 为 s390x 引入的向量寄存器支持。",
-      "line_count": 856,
+      "line_count": 874,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -33608,7 +33655,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 70,
       "pre_post": {
         "pre": [
@@ -33627,7 +33674,7 @@
       "layer": "L3",
       "title": "自定义分配器与内存布局优化",
       "positioning": "深入探讨 Rust 的**自定义分配器**机制——从 `GlobalAlloc` Trait 到 `allocator_api` 不稳定特性，分析内存布局对齐、分配策略与性能优化。",
-      "line_count": 889,
+      "line_count": 905,
       "theorem_chains": [
         {
           "text": "| 自定义分配器与内存布局优化 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -33753,7 +33800,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -33771,7 +33818,7 @@
       "layer": "L3",
       "title": "零拷贝解析与序列化优化",
       "positioning": "探讨 Rust 中的**零拷贝**（Zero-Copy）技术——从字节切片（Slice）直接解析结构化数据，无需中间复制，分析内存安全（Memory Safety）与性能权衡。",
-      "line_count": 931,
+      "line_count": 951,
       "theorem_chains": [
         {
           "text": "| 零拷贝解析与序列化优化 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -33907,7 +33954,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -33925,7 +33972,7 @@
       "layer": "L3",
       "title": "类型擦除与动态分发",
       "positioning": "深入探讨 Rust 中的**类型擦除**技术——从 trait object 到 vtable，分析动态分发如何在保持类型安全的同时实现运行时（Runtime）多态。",
-      "line_count": 903,
+      "line_count": 922,
       "theorem_chains": [
         {
           "text": "选型判定：需要方法调用 ⟹ `dyn Trait`；需要类型查询/存储 ⟹ `Any`；需要零依赖/`no_std` ⟹ 手写。擦除的代价统一是「静态信息丢失」——编译器优化（内联、单态化）在擦除边界终止。",
@@ -34051,7 +34098,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 21,
       "pre_post": {
         "pre": [
@@ -34069,7 +34116,7 @@
       "layer": "L3",
       "title": "Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象",
       "positioning": "系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时（Runtime）下的 TCP/UDP 异步（Async） IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从\"怎么写\"到\"为什么这样设计\"的完整认知框架。",
-      "line_count": 1093,
+      "line_count": 1111,
       "theorem_chains": [
         {
           "text": "| Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -34217,7 +34264,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 20,
       "pre_post": {
         "pre": [
@@ -34235,7 +34282,7 @@
       "layer": "L3",
       "title": "流处理语义：从 Dataflow Model 到 Differential Dataflow",
       "positioning": "深入分析流处理的核心语义——时间域、窗口、水印、容错、状态管理、背压，并将 Rust 的 timely/differential dataflow 置于国际流处理理论谱系中定位。",
-      "line_count": 931,
+      "line_count": 951,
       "theorem_chains": [
         {
           "text": "| 流处理语义：从 Dataflow Model 到 Differential Dataflow 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -34336,7 +34383,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 96,
       "pre_post": {
         "pre": [
@@ -34354,7 +34401,7 @@
       "layer": "L3",
       "title": "所有权性能优化",
       "positioning": "从所有权（Ownership）视角出发，系统梳理避免不必要拷贝、使用写时复制、优化内存布局、零拷贝解析与移动语义的最佳实践。",
-      "line_count": 218,
+      "line_count": 230,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过避免拷贝 ⟹ Cow/零拷贝 ⟹ 布局优化的定理链进行性能决策。",
@@ -34456,7 +34503,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 10,
       "pre_post": {
         "pre": [
@@ -34474,7 +34521,7 @@
       "layer": "L3",
       "title": "Rust 运行时（The Rust Runtime）",
       "positioning": "",
-      "line_count": 303,
+      "line_count": 315,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将运行时属性、分配行为和二进制输出串联起来。",
@@ -34560,7 +34607,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 26,
       "pre_post": {
         "pre": [
@@ -34578,7 +34625,7 @@
       "layer": "L3",
       "title": "内存分配与生命周期（Memory Allocation and Lifetime）",
       "positioning": "",
-      "line_count": 192,
+      "line_count": 208,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -34646,7 +34693,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 6,
       "pre_post": {
         "pre": [
@@ -34664,7 +34711,7 @@
       "layer": "L3",
       "title": "变量（Variables）",
       "positioning": "",
-      "line_count": 195,
+      "line_count": 209,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -34732,7 +34779,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -34750,7 +34797,7 @@
       "layer": "L3",
       "title": "可见性与隐私（Visibility and Privacy）",
       "positioning": "",
-      "line_count": 225,
+      "line_count": 239,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -34816,7 +34863,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 11,
       "pre_post": {
         "pre": [
@@ -34834,7 +34881,7 @@
       "layer": "L3",
       "title": "Unsafe 集合内部实现：Vec、Arc、Mutex（Unsafe Collections Internals）",
       "positioning": "",
-      "line_count": 531,
+      "line_count": 545,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"实现 Vec 只需要普通引用\" ⟹ 不成立。未初始化内存无法通过 safe 引用表达，必须使用原始指针（Raw Pointer）。",
@@ -34933,7 +34980,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 15,
       "pre_post": {
         "pre": [
@@ -34951,7 +34998,7 @@
       "layer": "L3",
       "title": "Rust 进程模型与生命周期",
       "positioning": "",
-      "line_count": 498,
+      "line_count": 520,
       "theorem_chains": [
         {
           "text": "> **定理链**: OS Process ⟹ std::process::Command ⟹ Resource Control",
@@ -35045,7 +35092,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 19,
       "pre_post": {
         "pre": [
@@ -35063,7 +35110,7 @@
       "layer": "L3",
       "title": "Rust 高级进程管理",
       "positioning": "",
-      "line_count": 323,
+      "line_count": 337,
       "theorem_chains": [
         {
           "text": "> **定理链**: Process Pool ⟹ Health Check ⟹ Fault Recovery",
@@ -35142,7 +35189,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 15,
       "pre_post": {
         "pre": [
@@ -35160,7 +35207,7 @@
       "layer": "L3",
       "title": "Rust 异步进程管理",
       "positioning": "",
-      "line_count": 427,
+      "line_count": 441,
       "theorem_chains": [
         {
           "text": "> **定理链**: Async Runtime ⟹ tokio::process ⟹ Cancellation Safety",
@@ -35293,7 +35340,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 10,
       "pre_post": {
         "pre": [
@@ -35311,7 +35358,7 @@
       "layer": "L3",
       "title": "Rust 跨平台进程管理",
       "positioning": "",
-      "line_count": 353,
+      "line_count": 365,
       "theorem_chains": [
         {
           "text": "> **定理链**: Platform Differences ⟹ cfg Abstraction ⟹ Portable API",
@@ -35416,7 +35463,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 12,
       "pre_post": {
         "pre": [
@@ -35434,7 +35481,7 @@
       "layer": "L3",
       "title": "Rust 进程间通信机制（IPC）",
       "positioning": "",
-      "line_count": 315,
+      "line_count": 327,
       "theorem_chains": [
         {
           "text": "> **定理链**: IPC Mechanism ⟹ Latency/Throughput Trade-off ⟹ Safety",
@@ -35545,7 +35592,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 19,
       "pre_post": {
         "pre": [
@@ -35563,7 +35610,7 @@
       "layer": "L3",
       "title": "Rust 进程监控与诊断",
       "positioning": "",
-      "line_count": 298,
+      "line_count": 316,
       "theorem_chains": [
         {
           "text": "> **定理链**: Observable Metrics ⟹ Diagnostic Loop ⟹ Recovery",
@@ -35660,7 +35707,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 14,
       "pre_post": {
         "pre": [
@@ -35678,7 +35725,7 @@
       "layer": "L3",
       "title": "Rust 进程安全与沙箱",
       "positioning": "",
-      "line_count": 264,
+      "line_count": 285,
       "theorem_chains": [
         {
           "text": "> **定理链**: Least Privilege ⟹ Isolation Boundary ⟹ Attack Surface Reduction",
@@ -35792,7 +35839,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 14,
       "pre_post": {
         "pre": [
@@ -35810,7 +35857,7 @@
       "layer": "L3",
       "title": "Rust 进程性能工程",
       "positioning": "",
-      "line_count": 237,
+      "line_count": 252,
       "theorem_chains": [
         {
           "text": "> **定理链**: Spawn Latency ⟹ Throughput ⟹ Resource Reclaim",
@@ -35892,7 +35939,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 10,
       "pre_post": {
         "pre": [
@@ -35910,7 +35957,7 @@
       "layer": "L3",
       "title": "Rust 进程测试与基准",
       "positioning": "",
-      "line_count": 284,
+      "line_count": 299,
       "theorem_chains": [
         {
           "text": "> **定理链**: Unit Test ⟹ Integration Pipeline ⟹ CI Gate",
@@ -36021,7 +36068,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 8,
       "pre_post": {
         "pre": [
@@ -36039,7 +36086,7 @@
       "layer": "L3",
       "title": "Rust 现代进程管理库",
       "positioning": "",
-      "line_count": 246,
+      "line_count": 258,
       "theorem_chains": [
         {
           "text": "> **定理链**: Requirement ⟹ Library Selection ⟹ Ecosystem Integration",
@@ -36145,7 +36192,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 21,
       "pre_post": {
         "pre": [
@@ -42916,7 +42963,7 @@
       "layer": "L5",
       "title": "C++ vs Rust：构造、运算符、RTTI、友元",
       "positioning": "",
-      "line_count": 279,
+      "line_count": 296,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -42963,7 +43010,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 28,
       "pre_post": {
         "pre": [
@@ -42981,7 +43028,7 @@
       "layer": "L5",
       "title": "五模型定义矩阵：同步 · 并发 · 并行 · 异步 · 分布式",
       "positioning": "",
-      "line_count": 145,
+      "line_count": 156,
       "theorem_chains": [
         {
           "text": "| **失效模式** | 无并发错误；性能瓶颈 = 调用链延迟 | 数据竞争（Rust 中 ⟹ 编译期拒绝）、死锁、饥饿 | 任务粒度过细 ⟹ 调度开销反超；负载不均 | `!Send` 跨 `.await`、Waker 丢失 ⟹ 任务永不唤醒、取消语义误用 | 部分失败、网络分区、消息乱序/丢失、时钟漂移、并发写发散 |",
@@ -43045,7 +43092,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -43445,7 +43492,7 @@
       "layer": "L5",
       "title": "Rust vs Go：线性所有权 vs CSP 过程逻辑",
       "positioning": "",
-      "line_count": 1016,
+      "line_count": 1038,
       "theorem_chains": [
         {
           "text": "> **一致性（Coherence）检查**: 上述对比与 L1-L4 概念定义一致。Rust 的每个优势点均可追溯到具体的形式化定理（如 Send/Sync ⟹ CSL 安全）。",
@@ -43572,7 +43619,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 6,
+      "mermaid_blocks": 7,
       "matrix_rows": 147,
       "pre_post": {
         "pre": [
@@ -43590,7 +43637,7 @@
       "layer": "L5",
       "title": "Rust vs Ruby：性能与表达力的两极",
       "positioning": "对比分析 **Rust** 与 **Ruby** 的设计哲学——从动态类型的极致表达力到静态类型的编译期安全，揭示两种语言在Web开发、脚本编写和系统编程中的互补定位。",
-      "line_count": 770,
+      "line_count": 785,
       "theorem_chains": [
         {
           "text": "| Rust vs Ruby：性能与表达力的两极 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -43685,7 +43732,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
@@ -43704,7 +43751,7 @@
       "layer": "L5",
       "title": "Rust vs Swift：现代系统语言的两种路径",
       "positioning": "对比分析 **Rust** 与 **Swift** 的设计选择——从内存管理模型、所有权（Ownership）系统到生态定位，揭示两种语言如何在\"安全\"与\"易用\"之间做出不同权衡。",
-      "line_count": 750,
+      "line_count": 765,
       "theorem_chains": [
         {
           "text": "| Rust vs Swift：现代系统语言的两种路径 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -43788,7 +43835,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 24,
       "pre_post": {
         "pre": [
@@ -43807,7 +43854,7 @@
       "layer": "L5",
       "title": "Rust vs Zig：现代系统语言的两种哲学",
       "positioning": "对比分析 **Rust** 与 **Zig** 的设计哲学——从编译期计算、错误处理（Error Handling）到内存管理，揭示两种语言如何在\"显式控制\"与\"抽象安全\"之间做出选择。",
-      "line_count": 784,
+      "line_count": 799,
       "theorem_chains": [
         {
           "text": "| Rust vs Zig：现代系统语言的两种哲学 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -43903,7 +43950,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
@@ -43922,7 +43969,7 @@
       "layer": "L5",
       "title": "Rust vs Java：系统编程与托管运行时的范式对比",
       "positioning": "从**内存模型**、**并发语义**、**类型系统（Type System）**和**运行时（Runtime）架构**四个维度，系统对比 Rust 与 Java 的设计哲学差异，分析两种范式在系统编程、云原生和嵌入式场景的适用边界。",
-      "line_count": 638,
+      "line_count": 657,
       "theorem_chains": [
         {
           "text": "| Rust vs Java：系统编程与托管运行时的范式对比 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -44014,7 +44061,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 36,
       "pre_post": {
         "pre": [
@@ -44033,7 +44080,7 @@
       "layer": "L5",
       "title": "Rust vs Python：系统编程与动态脚本的对照分析",
       "positioning": "对比分析 **Rust**（编译型、强类型、内存安全（Memory Safety））与 **Python**（解释型、动态类型、开发效率优先）在语言设计哲学、类型系统（Type System）、内存模型、并发模型和工程实践五个维度的深层差异。",
-      "line_count": 728,
+      "line_count": 746,
       "theorem_chains": [
         {
           "text": "| Rust vs Python：系统编程与动态脚本的对照分析 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -44117,7 +44164,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 15,
       "pre_post": {
         "pre": [
@@ -44136,7 +44183,7 @@
       "layer": "L5",
       "title": "Rust vs JavaScript：系统编程与脚本执行的范式差异",
       "positioning": "对比分析 **Rust**（编译型、强类型、内存安全（Memory Safety））与 **JavaScript**（解释型、动态类型、事件驱动）在语言语义、运行时（Runtime）模型、异步（Async）处理和生态工具链四个维度的本质差异，特别关注 WASM 作为两者交汇点的作用。",
-      "line_count": 739,
+      "line_count": 757,
       "theorem_chains": [
         {
           "text": "| Rust vs JavaScript：系统编程与脚本执行的范式差异 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -44213,7 +44260,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 21,
       "pre_post": {
         "pre": [
@@ -44232,7 +44279,7 @@
       "layer": "L5",
       "title": "Rust vs Kotlin：静态安全的两种路径",
       "positioning": "对比分析 **Rust** 与 **Kotlin** 的设计哲学——从空安全、并发模型到平台支持，揭示静态类型语言如何在不同生态中实现安全与表达力的平衡。",
-      "line_count": 832,
+      "line_count": 849,
       "theorem_chains": [
         {
           "text": "| Rust vs Kotlin：静态安全的两种路径 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -44316,7 +44363,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -44335,7 +44382,7 @@
       "layer": "L5",
       "title": "Rust vs Scala：类型系统的两种哲学",
       "positioning": "对比分析 **Rust** 与 **Scala** 的设计哲学——从类型推断（Type Inference）、模式匹配（Pattern Matching）到并发模型，揭示两种语言如何在类型表达力和运行时（Runtime）表示之间做出选择。",
-      "line_count": 792,
+      "line_count": 810,
       "theorem_chains": [
         {
           "text": "| Rust vs Scala：类型系统（Type System）的两种哲学 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -44418,7 +44465,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
@@ -44437,7 +44484,7 @@
       "layer": "L5",
       "title": "Rust vs C#：托管与原生之路",
       "positioning": "对比分析 **Rust** 与 **C#** 的设计哲学——从内存管理、泛型（Generics）系统到异步（Async）模型，揭示托管语言与原生语言在工程实践中的权衡。",
-      "line_count": 876,
+      "line_count": 894,
       "theorem_chains": [
         {
           "text": "1. **“语法相似 ⟹ 语义相同”**：C# 的 `Task` 是 hot（创建即调度），Rust 的 `Future` 是 cold（poll 才推进）；`await` 在两侧的意义因此被运行时模型重新定义；",
@@ -44526,7 +44573,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 22,
       "pre_post": {
         "pre": [
@@ -44545,7 +44592,7 @@
       "layer": "L5",
       "title": "Rust vs Elixir 对比分析",
       "positioning": "对比 Rust 和 Elixir（Erlang VM）在并发模型、错误处理（Error Handling）、类型系统（Type System）和运行时（Runtime）的异同。",
-      "line_count": 924,
+      "line_count": 942,
       "theorem_chains": [
         {
           "text": "| Rust vs Elixir 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -44645,7 +44692,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 32,
       "pre_post": {
         "pre": [
@@ -44665,7 +44712,7 @@
       "layer": "L5",
       "title": "Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程",
       "positioning": "对比分析 **Rust**（编译期内存安全（Memory Safety）、零成本抽象（Zero-Cost Abstraction）、所有权（Ownership）系统）与 **TypeScript**（渐进式类型、JavaScript 超集、运行时（Runtime）主导）在类型系统（Type System）、编译模型、异步（Async）生态和 WASM 互操作四个维度的本质差异，建立系统化的选型决策框架。",
-      "line_count": 956,
+      "line_count": 974,
       "theorem_chains": [
         {
           "text": "| Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -44750,7 +44797,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 20,
       "pre_post": {
         "pre": [
@@ -44769,7 +44816,7 @@
       "layer": "L5",
       "title": "Rust 安全保证的边界条件全景（Safety Boundary Panorama）",
       "positioning": "本文件汇总 Rust 所有**编译期安全保证**的边界条件、失效场景和反例，形成完整的\"安全 ⇄ 不安全\"边界地图。",
-      "line_count": 1056,
+      "line_count": 1074,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -44901,7 +44948,7 @@
       ],
       "transitions": 9,
       "has_cognitive_path": true,
-      "mermaid_blocks": 7,
+      "mermaid_blocks": 8,
       "matrix_rows": 168,
       "pre_post": {
         "pre": [
@@ -45267,7 +45314,7 @@
       "layer": "L6",
       "title": "日志与可观测性：Rust 服务端监控生态",
       "positioning": "覆盖 Rust 生态中 **日志（log/tracing [来源: [tokio tracing](https://docs.rs/tracing/latest/tracing/trait.Instrument.html)]）**、**指标（metrics）**、**分布式追踪（distributed tracing）**三大可观测性支柱，分析各 crate 的设计哲学与选型策略。",
-      "line_count": 706,
+      "line_count": 723,
       "theorem_chains": [
         {
           "text": "| 日志与可观测性：Rust 服务端监控生态 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -45373,7 +45420,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 21,
       "pre_post": {
         "pre": [
@@ -45623,7 +45670,7 @@
       "layer": "L6",
       "title": "Rust 编译器基础设施深度解析",
       "positioning": "系统梳理 Rust 编译器（rustc）的核心基础设施——并行前端、Cranelift 后端（两主题深度正文分别以 [04_parallel_frontend_preview](../../07_future/03_preview_features/04_parallel_frontend_preview.md)、[16_cranelift_backend_preview](../../07_future/03_preview_features/16_cranelift_backend_preview.md) 为权威页，本页仅保留摘要）、build-std、Sanitizer——分析其对编译速度、目标平台和开发体验的影响。",
-      "line_count": 320,
+      "line_count": 334,
       "theorem_chains": [
         {
           "text": "| Rust 编译器基础设施深度解析 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -45665,7 +45712,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
@@ -45685,9 +45732,13 @@
       "layer": "L6",
       "title": "测验：Rust 工具链（L6 试点扩展）",
       "positioning": "L6 嵌入式互动测验——验证 Rust 工具链核心概念（Cargo 依赖管理、Clippy lint、Miri UB 检测、rustfmt、文档生成）的掌握程度。",
-      "line_count": 644,
+      "line_count": 668,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -45734,6 +45785,21 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "/// # Panics /// # Errors /// # Safety（unsafe 函数必须） /// # Examples /// [`ModuleN..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0308"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "fn main() {     let x: i32 = \"hello\"; // ❌ 类型不匹配     let _ = x; } ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn main() {     let x: i32 = 42; // ✅ 字面量类型与标注一致     let _ = x; } ..."
         }
       ],
       "sources": [],
@@ -45824,9 +45890,13 @@
       "layer": "L6",
       "title": "将 Rust 集成到现有平台",
       "positioning": "系统对比 Android AOSP、Chromium、Bare Metal 三个典型场景中 Rust 的集成方式、构建系统、互操作模式与常见陷阱。",
-      "line_count": 327,
+      "line_count": 357,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [
@@ -45859,6 +45929,20 @@
           "lines": 11,
           "should_fail": false,
           "code_preview": "use core::ptr::{read_volatile, write_volatile};  const UART_DR: *mut u32 = 0x090..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "extern \"C\" { // ❌ Edition 2024 起 extern 块必须标 unsafe     fn c_helper(); }  fn mai..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "unsafe extern \"C\" { // ✅ Edition 2024 语法     fn c_helper(); }  fn main() {     l..."
         }
       ],
       "sources": [],
@@ -45892,7 +45976,7 @@
       "layer": "L6",
       "title": "Rust 编译器的 LLVM 后端与代码生成",
       "positioning": "把“MIR 之后发生了什么”讲清楚：从 LLVM IR 生成、代码优化到目标文件与链接，覆盖 rustc 代码生成层的核心机制。",
-      "line_count": 317,
+      "line_count": 329,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -45914,7 +45998,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
@@ -45932,7 +46016,7 @@
       "layer": "L6",
       "title": "rustc Driver、Interface 与 Stable MIR",
       "positioning": "把“如何把 rustc 当库用”讲清楚：driver 的回调机制、interface 的低级 API、以及面向外部工具的 Stable MIR（rustc_public）愿景。",
-      "line_count": 280,
+      "line_count": 294,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -45976,7 +46060,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 19,
       "pre_post": {
         "pre": [
@@ -45994,7 +46078,7 @@
       "layer": "L6",
       "title": "rustc 编译器诊断与 UI Tests",
       "positioning": "把“rustc 的错误信息是怎么构造的、如何测试错误输出”讲清楚，为贡献 rustc 或编写自定义 lint 打下基础。",
-      "line_count": 292,
+      "line_count": 307,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -46048,7 +46132,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 34,
       "pre_post": {
         "pre": [
@@ -46066,9 +46150,13 @@
       "layer": "L6",
       "title": "rustc 自举（Bootstrap）",
       "positioning": "把“Rust 编译器如何用 Rust 写、又用 Rust 编译自己”这一自举过程讲清楚，帮助理解 rustc 开发工作流。",
-      "line_count": 249,
+      "line_count": 289,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [
@@ -46077,6 +46165,21 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "#[cfg(bootstrap)] fn old_impl() { ... }  #[cfg(not(bootstrap))] fn new_impl() { ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0433"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "fn main() {     let _ = foo_crate::bar(); // ❌ 未声明的依赖/模块 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "mod foo_crate { // ✅ 声明模块（外部 crate 则需在 Cargo.toml 添加依赖）     pub fn bar() -> i32 ..."
         }
       ],
       "sources": [],
@@ -46087,7 +46190,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 21,
       "pre_post": {
         "pre": [
@@ -46105,7 +46208,7 @@
       "layer": "L6",
       "title": "rustc 编译器测试体系",
       "positioning": "把“rustc 如何保证每次修改不破坏生态”讲清楚，覆盖从单元测试到全生态系统回归的多层测试策略。",
-      "line_count": 291,
+      "line_count": 308,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -46117,7 +46220,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 13,
       "pre_post": {
         "pre": [
@@ -46135,9 +46238,13 @@
       "layer": "L6",
       "title": "Rust 常用开发工具",
       "positioning": "",
-      "line_count": 244,
+      "line_count": 273,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -46168,6 +46275,21 @@
           "lines": 3,
           "should_fail": false,
           "code_preview": "#![warn(clippy::pedantic)]      // 启用更多 lint #![allow(clippy::needless_return)] ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0597"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "fn main() {     let r;     {         let x = 5;         r = &x; // ❌ 引用逃逸出 x 的作用..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn main() {     let x = 5;     let r = &x; // ✅ 被引用者活得比引用更久     let _ = *r; } ..."
         }
       ],
       "sources": [],
@@ -46202,7 +46324,7 @@
       "layer": "L6",
       "title": "rustc / Cargo `-Z` 不稳定选项参考清单",
       "positioning": "",
-      "line_count": 184,
+      "line_count": 196,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -46221,7 +46343,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 48,
       "pre_post": {
         "pre": [
@@ -46460,7 +46582,7 @@
       "layer": "L6",
       "title": "Resolver v3 与 `public = true` 的 feature unification 演示",
       "positioning": "把“resolver v3 + public dependency”从概念落到可运行的 Cargo workspace，观察 `cargo tree -e features` 的实际输出。",
-      "line_count": 216,
+      "line_count": 227,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -46475,7 +46597,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
@@ -46493,15 +46615,34 @@
       "layer": "L6",
       "title": "Cargo 1.96 新特性与工具链变更",
       "positioning": "",
-      "line_count": 308,
+      "line_count": 336,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
           "lines": 16,
           "should_fail": false,
           "code_preview": "// 在 integration test 中调用 workspace 内的 foo binary #[test] fn test_cli_help() {  ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0502"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut v = vec![1, 2];     let r = &v[0];     v.push(3);   // ❌..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut v = vec![1, 2];     let r = v[0]; // ✅ 复制 Copy 元素，缩短借用期 ..."
         }
       ],
       "sources": [],
@@ -46739,7 +46880,7 @@
       "layer": "L6",
       "title": "Cargo Source Replacement 与 Vendoring",
       "positioning": "把“怎么让 Cargo 从镜像/本地目录/离线缓存下载依赖”系统化，区分 source replacement、`[patch]` 与私有 registry 的适用边界。",
-      "line_count": 310,
+      "line_count": 324,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -46752,7 +46893,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 15,
       "pre_post": {
         "pre": [
@@ -46770,10 +46911,30 @@
       "layer": "L6",
       "title": "Cargo Registry 与包发布",
       "positioning": "把“怎么把 crate 发布到 crates.io / 私有 registry、registry 内部如何索引、认证如何工作”系统化。",
-      "line_count": 329,
+      "line_count": 369,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0046"
+          ],
+          "lines": 12,
+          "should_fail": true,
+          "code_preview": "trait Job {     fn run(&self); }  struct Worker;  impl Job for Worker {} // ❌ 漏实..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "trait Job {     fn run(&self); }  struct Worker;  impl Job for Worker {     fn r..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
@@ -46803,10 +46964,30 @@
       "layer": "L6",
       "title": "Cargo 认证与构建缓存",
       "positioning": "把“Cargo 如何安全地存 token、如何组织缓存、如何加速构建”系统化，补齐 registry 之后的工程实践闭环。",
-      "line_count": 309,
+      "line_count": 341,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0428"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn dup() {} fn dup() {} // ❌ 同一命名空间重复定义  fn main() {     dup(); } ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "fn dup() {}  mod inner {     pub fn dup() {} // ✅ 不同模块各自命名空间 }  fn main() {     ..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
@@ -46834,10 +47015,30 @@
       "layer": "L6",
       "title": "Cargo Manifest 参考速查",
       "positioning": "把 `Cargo.toml` 的核心字段按用途整理成可速查的参考表，方便快速查阅而非从头阅读。",
-      "line_count": 316,
+      "line_count": 352,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0432"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "use std::nonexistent::Thing; // ❌ 不存在的模块路径  fn main() {} ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashMap; // ✅ 导入真实存在的类型  fn main() {     let _: HashMap<i3..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
@@ -46847,7 +47048,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 50,
       "pre_post": {
         "pre": [
@@ -46896,9 +47097,13 @@
       "layer": "L6",
       "title": "Cargo 子命令与插件生态",
       "positioning": "把“如何扩展 Cargo”讲清楚：从自定义子命令约定到常用插件选型，覆盖 Cargo 的工具集成接口。",
-      "line_count": 244,
+      "line_count": 283,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [
@@ -46907,6 +47112,21 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "fn main() {     let cargo = std::env::var(\"CARGO\").unwrap_or_else(|_| \"cargo\".to..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0618"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "fn main() {     let g = 42;     g(); // ❌ 整数不是可调用值 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn main() {     let g: fn() = || {}; // ✅ 函数指针/闭包才可调用     g(); } ..."
         }
       ],
       "sources": [],
@@ -46918,7 +47138,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 20,
       "pre_post": {
         "pre": [
@@ -47016,7 +47236,7 @@
       "layer": "L6",
       "title": "Cargo Workspaces（工作区）",
       "positioning": "把“何时该用 workspace、如何组织多 crate 项目、如何统一依赖与 lint 配置”讲清楚。",
-      "line_count": 292,
+      "line_count": 306,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -47032,7 +47252,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 9,
       "pre_post": {
         "pre": [
@@ -47050,10 +47270,30 @@
       "layer": "L6",
       "title": "Cargo 入门（Cargo Getting Started）",
       "positioning": "让初学者在 5 分钟内理解 Cargo 是什么、能做什么、如何创建并运行第一个 Rust package。",
-      "line_count": 178,
+      "line_count": 215,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0425"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "fn main() {     let y = undefined_var + 1; // ❌ 变量未声明即使用     let _ = y; } ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn main() {     let undefined_var = 1; // ✅ 先声明再使用     let y = undefined_var + 1..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
@@ -47069,7 +47309,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 20,
       "pre_post": {
         "pre": [
@@ -47087,10 +47327,30 @@
       "layer": "L6",
       "title": "Cargo 工作流（Cargo Workflow）",
       "positioning": "覆盖从“创建 package”到“在团队中维护依赖锁定”的完整日常流程。",
-      "line_count": 179,
+      "line_count": 223,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0499"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut v = vec![1];     let a = &mut v;     let b = &mut v; // ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut v = vec![1];     {         let a = &mut v;         a.pus..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
@@ -47104,7 +47364,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 24,
       "pre_post": {
         "pre": [
@@ -47122,10 +47382,30 @@
       "layer": "L6",
       "title": "Cargo 指南实践（Cargo Guide Practices）",
       "positioning": "把 Cargo 官方指南中散落在多章的“怎么做”聚合为一份实践速查。",
-      "line_count": 178,
+      "line_count": 218,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0507"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn main() {     let v = vec![String::from(\"a\")];     let r = &v;     let s = r[0..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn main() {     let v = vec![String::from(\"a\")];     let r = &v;     let s: &Str..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
@@ -47144,7 +47424,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
@@ -47162,10 +47442,30 @@
       "layer": "L6",
       "title": "Cargo 配置与环境变量（Cargo Configuration）",
       "positioning": "把 Cargo 的“配置”与“环境变量”两大参考章节集中为一份可查阅权威页。",
-      "line_count": 195,
+      "line_count": 234,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0283"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "fn main() {     let s = \"a b\".split_whitespace().collect(); // ❌ collect 目标类型无法推..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn main() {     let s: Vec<&str> = \"a b\".split_whitespace().collect(); // ✅ 标注目标..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
@@ -47181,7 +47481,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 26,
       "pre_post": {
         "pre": [
@@ -47199,10 +47499,30 @@
       "layer": "L6",
       "title": "Cargo 命令参考（Cargo Commands Reference）",
       "positioning": "覆盖开发者日常最高频的 Cargo 命令，作为官方命令参考的浓缩权威页。",
-      "line_count": 181,
+      "line_count": 215,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0515"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "fn leak<'a>() -> &'a String {     &String::from(\"x\") // ❌ 返回临时值的引用 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn leak() -> String {     String::from(\"x\") // ✅ 返回所有权而非引用 } ..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
@@ -47221,7 +47541,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 51,
       "pre_post": {
         "pre": [
@@ -47239,16 +47559,16 @@
       "layer": "L6",
       "title": "Cargo Manifest 目标与元数据（Cargo Manifest Targets）",
       "positioning": "补充 `10_cargo_manifest_reference.md` 未涉及的 target、rust-version、pkgid 等子主题。",
-      "line_count": 205,
+      "line_count": 217,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
         {
           "flags": [
-            "compile_fail"
+            "ignore"
           ],
           "lines": 5,
-          "should_fail": true,
+          "should_fail": false,
           "code_preview": "// Cargo.toml: [[test]] name = \"custom\" harness = false // tests/custom.rs: #[te..."
         },
         {
@@ -47271,7 +47591,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 30,
       "pre_post": {
         "pre": [
@@ -47289,10 +47609,30 @@
       "layer": "L6",
       "title": "Cargo Registry 内部机制（Cargo Registry Internals）",
       "positioning": "为需要自建 registry、审计依赖来源或集成内部凭证系统的团队提供权威参考。",
-      "line_count": 169,
+      "line_count": 203,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0106"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "fn longest(x: &str, y: &str) -> &str { // ❌ 返回引用来源不明确     if x.len() > y.len() {..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { // ✅ 显式标注共同生命周期     if x.len..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
@@ -47307,7 +47647,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 28,
       "pre_post": {
         "pre": [
@@ -47391,10 +47731,30 @@
       "layer": "L6",
       "title": "Cargo 1.97 新特性与工具链变更",
       "positioning": "",
-      "line_count": 261,
+      "line_count": 287,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0080"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "const X: u8 = 255 + 1; // ❌ 常量求值溢出  fn main() {     let _ = X; } ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "const X: u16 = 255 + 1; // ✅ 拓宽类型容纳结果  fn main() {     let _ = X; } ..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
@@ -50184,7 +50544,7 @@
       "layer": "L6",
       "title": "工程实践与生产级模式",
       "positioning": "",
-      "line_count": 364,
+      "line_count": 379,
       "theorem_chains": [
         {
           "text": "| 熔断器 ⟹ 故障隔离 | 快速失败并限制级联影响 | 提升系统整体可用性 |",
@@ -50284,7 +50644,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 14,
       "pre_post": {
         "pre": [
@@ -50302,7 +50662,7 @@
       "layer": "L6",
       "title": "C09 设计模式 - 术语表",
       "positioning": "",
-      "line_count": 295,
+      "line_count": 323,
       "theorem_chains": [
         {
           "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
@@ -50321,7 +50681,11 @@
           "type": "table_row"
         }
       ],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -50346,6 +50710,21 @@
           "lines": 9,
           "should_fail": false,
           "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll};  pub..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0382"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn main() {     let s = String::from(\"a\");     let t = s;        // s 的所有权已移动   ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn main() {     let s = String::from(\"a\");     let t = s.clone(); // ✅ 需要两份时显式克隆..."
         }
       ],
       "sources": [],
@@ -50384,7 +50763,7 @@
       "layer": "L6",
       "title": "C09 设计模式 - 常见问题",
       "positioning": "",
-      "line_count": 523,
+      "line_count": 560,
       "theorem_chains": [
         {
           "text": "> **定理链**: Common Question ⟹ Pattern Mechanism ⟹ Best Practice",
@@ -50432,6 +50811,12 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "trait Observer {     type View<'a>: 'a where Self: 'a;     fn update(&self, data..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use std::cell::RefCell; use std::rc::{Rc, Weak};  struct Node {     next: RefCel..."
         }
       ],
       "sources": [],
@@ -50453,7 +50838,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 23,
       "pre_post": {
         "pre": [
@@ -51457,7 +51842,7 @@
       "layer": "L6",
       "title": "HTTP 客户端开发",
       "positioning": "",
-      "line_count": 231,
+      "line_count": 246,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -51543,7 +51928,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 7,
       "pre_post": {
         "pre": [
@@ -51561,7 +51946,7 @@
       "layer": "L6",
       "title": "Glommio 与 Thread-per-Core 异步运行时",
       "positioning": "",
-      "line_count": 270,
+      "line_count": 285,
       "theorem_chains": [
         {
           "text": "| 专用核心 ⟹ 缓存亲和性 | 任务固定到特定 CPU | 减少缓存失效与上下文切换 |",
@@ -51635,7 +52020,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 23,
       "pre_post": {
         "pre": [
@@ -52244,7 +52629,7 @@
       "layer": "L6",
       "title": "Tokio 运行时内部机制（Tokio Runtime Internals）",
       "positioning": "Tokio 是 Rust async 生态的事实标准运行时。本页把分散在 tutorial、blog 与 API docs 中的机制细节归一为单一权威页：每个机制给出「结构 → 语义 → 反例/边界 → 观测手段」。",
-      "line_count": 345,
+      "line_count": 357,
       "theorem_chains": [
         {
           "text": "阅读顺序：**架构（§2）⟹ 驱动（§3-4）⟹ 任务生命周期（§5-6）⟹ 宏语义（§7）⟹ 观测（§8）**。",
@@ -52354,7 +52739,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 26,
       "pre_post": {
         "pre": [
@@ -52525,7 +52910,7 @@
       "layer": "L6",
       "title": "交叉编译：多目标平台支持与条件编译",
       "positioning": "分析 Rust **交叉编译**生态——从 target triple 的语义、条件编译（cfg）、到不同架构（x86_64/ARM/RISC-V/WASM）的编译策略，揭示 Rust 如何在不修改源代码的情况下支持从嵌入式到服务器的全谱系平台。",
-      "line_count": 670,
+      "line_count": 689,
       "theorem_chains": [
         {
           "text": "| 交叉编译：多目标平台支持与条件编译 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -52600,7 +52985,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 12,
       "pre_post": {
         "pre": [
@@ -53207,7 +53592,7 @@
       "layer": "L6",
       "title": "Rust 嵌入式图形开发",
       "positioning": "",
-      "line_count": 1191,
+      "line_count": 1211,
       "theorem_chains": [
         {
           "text": "| Rust 嵌入式图形系统开发 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -53311,7 +53696,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 23,
       "pre_post": {
         "pre": [
@@ -53497,10 +53882,30 @@
       "layer": "L6",
       "title": "Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁",
       "positioning": "",
-      "line_count": 94,
+      "line_count": 132,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0184"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "#[derive(Copy)] struct Handle(u8);  impl Drop for Handle { // ❌ Copy 与 Drop 互斥  ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "#[derive(Clone, Copy)] struct Handle(u8); // ✅ 纯 Copy 数据不写 Drop  fn main() {    ..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
@@ -53511,7 +53916,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -54537,7 +54942,7 @@
       "layer": "L6",
       "title": "CRDT 谱系：状态基、操作基与合并格形式化",
       "positioning": "",
-      "line_count": 355,
+      "line_count": 366,
       "theorem_chains": [
         {
           "text": "**为什么这就够了**：半格的任意有限子集有**唯一**最小上界。各副本独立演化、以任意顺序、任意次数两两合并（幂等性吸收重复传递，交换/结合律吸收顺序差异）⟹ 全部收敛到更新集的唯一 join ⟹ SEC 得证。",
@@ -54689,7 +55094,7 @@
       ],
       "transitions": 4,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 27,
       "pre_post": {
         "pre": [
@@ -54707,7 +55112,7 @@
       "layer": "L6",
       "title": "因果序与向量时钟：Lamport 偏序的算法化",
       "positioning": "",
-      "line_count": 307,
+      "line_count": 328,
       "theorem_chains": [
         {
           "text": "- **空间 O(N)**：节点数大时向量膨胀 ⟹ 剪枝（定期淘汰不活跃槽）、区间版本向量（RIVV）；",
@@ -54783,7 +55188,7 @@
       ],
       "transitions": 4,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -55123,7 +55528,7 @@
       "layer": "L6",
       "title": "cargo vet 与供应链审计",
       "positioning": "",
-      "line_count": 238,
+      "line_count": 255,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -55139,7 +55544,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 23,
       "pre_post": {
         "pre": [
@@ -55157,7 +55562,7 @@
       "layer": "L6",
       "title": "Formal Ecosystem Tower（Rust 生态形式化分层塔）",
       "positioning": "",
-      "line_count": 627,
+      "line_count": 639,
       "theorem_chains": [
         {
           "text": "> **⟹ 推理链**: E0-E4 构成**从自动到交互式、从弱保证到强保证**的光谱。工业实践采用\"左端免费 + 右端按需\"策略：所有项目使用 E0-E1，安全关键项目使用 E2-E3，语言核心使用 E4。",
@@ -55250,7 +55655,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 72,
       "pre_post": {
         "pre": [
@@ -55561,7 +55966,7 @@
       "layer": "L6",
       "title": "文档生态：rustdoc、文档测试与 API 文档规范",
       "positioning": "覆盖 Rust **文档生态**的核心工具与实践——从 rustdoc 的渲染机制、文档测试（doctest）、到 API 文档规范（[RFC 1574](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html)）和 mdBook 静态站点生成，分析 Rust 文档文化如何成为语言生态的竞争优势。",
-      "line_count": 694,
+      "line_count": 712,
       "theorem_chains": [
         {
           "text": "| 文档生态：rustdoc、文档测试与 API 文档规范 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -55637,6 +56042,14 @@
           "lines": 1,
           "should_fail": false,
           "code_preview": "/// ..."
+        },
+        {
+          "flags": [
+            "代码块包装为 `main` 编译运行，失败即 `cargo test` 失败；这让文档示例成为“永不过期的测试”，也是本章反复强调示例必须可编译的原因。"
+          ],
+          "lines": 84,
+          "should_fail": false,
+          "code_preview": "- 测验 2：**`///` vs `//!`**——前者注释紧随其后的项，后者注释包含它的模块/crate，位置写错会导致文档挂错对象。 - 测验 3：**示..."
         }
       ],
       "sources": [],
@@ -55651,7 +56064,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 11,
       "pre_post": {
         "pre": [
@@ -55884,7 +56297,7 @@
       "layer": "L6",
       "title": "性能优化：Rust 代码的测量与调优",
       "positioning": "> 覆盖 Rust **性能优化**的核心方法论——从基准测试（criterion）、",
-      "line_count": 1165,
+      "line_count": 1185,
       "theorem_chains": [
         {
           "text": "| 性能优化：Rust 代码的测量与调优 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -56015,7 +56428,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 27,
       "pre_post": {
         "pre": [
@@ -56219,7 +56632,7 @@
       "layer": "L6",
       "title": "Game Development & ECS Architecture（游戏开发与 ECS 架构）",
       "positioning": "",
-      "line_count": 1395,
+      "line_count": 1415,
       "theorem_chains": [
         {
           "text": "### 3.1 `&mut Component` ⟹ System 独占访问",
@@ -56450,7 +56863,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 7,
+      "mermaid_blocks": 8,
       "matrix_rows": 128,
       "pre_post": {
         "pre": [
@@ -56468,7 +56881,7 @@
       "layer": "L6",
       "title": "WebAssembly 生态：Rust 的浏览器外运行时",
       "positioning": "> 系统分析 Rust 在 **WebAssembly (Wasm)** 生态中的核心地位，",
-      "line_count": 691,
+      "line_count": 711,
       "theorem_chains": [
         {
           "text": "| WebAssembly 生态：Rust 的浏览器外运行时 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -56569,7 +56982,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 35,
       "pre_post": {
         "pre": [
@@ -56588,7 +57001,7 @@
       "layer": "L6",
       "title": "许可证与合规：Rust 项目的法律工程",
       "positioning": "系统讲解 Rust **开源许可证选择**、**依赖合规**和**版权管理**",
-      "line_count": 687,
+      "line_count": 700,
       "theorem_chains": [
         {
           "text": "| 许可证与合规：Rust 项目的法律工程 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -56671,7 +57084,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 14,
       "pre_post": {
         "pre": [
@@ -56691,7 +57104,7 @@
       "layer": "L6",
       "title": "Rust 游戏开发生态",
       "positioning": "分析 Rust 在游戏开发领域的生态格局——从 Bevy ECS 到 WGPU 图形渲染，探讨 Rust 的内存安全（Memory Safety）与性能优势如何重塑游戏引擎设计。",
-      "line_count": 689,
+      "line_count": 708,
       "theorem_chains": [
         {
           "text": "| Rust 游戏开发生态 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -56788,7 +57201,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 11,
       "pre_post": {
         "pre": [
@@ -56834,7 +57247,7 @@
       "layer": "L6",
       "title": "算法与竞赛编程 (Algorithms & Competitive Programming)",
       "positioning": "",
-      "line_count": 1326,
+      "line_count": 1349,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -57064,7 +57477,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 84,
       "pre_post": {
         "pre": [
@@ -57082,7 +57495,7 @@
       "layer": "L6",
       "title": "算法工程实践 (Algorithm Engineering Practice)",
       "positioning": "",
-      "line_count": 2158,
+      "line_count": 2180,
       "theorem_chains": [
         {
           "text": "| 复杂度分析 ⟹ 可扩展性预测 | 大 O 与内存占用评估 | 指导算法选型 |",
@@ -57281,7 +57694,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 24,
       "pre_post": {
         "pre": [
@@ -57299,7 +57712,7 @@
       "layer": "L6",
       "title": "Unknown",
       "positioning": "",
-      "line_count": 322,
+      "line_count": 337,
       "theorem_chains": [
         {
           "text": "| 合适结构 ⟹ 算法效率 | 根据访问模式选择 | 时间/空间复杂度最优 |",
@@ -57393,7 +57806,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 28,
       "pre_post": {
         "pre": [
@@ -57411,7 +57824,7 @@
       "layer": "L6",
       "title": "Rust 算法复杂度分析",
       "positioning": "",
-      "line_count": 229,
+      "line_count": 243,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -57465,7 +57878,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 11,
       "pre_post": {
         "pre": [
@@ -57483,7 +57896,7 @@
       "layer": "L6",
       "title": "前沿算法技术",
       "positioning": "",
-      "line_count": 246,
+      "line_count": 290,
       "theorem_chains": [
         {
           "text": "| Rust 内存安全（Memory Safety） ⟹ 更少并发 bug | 所有权与借用检查 | 降低新算法实现风险 |",
@@ -57521,6 +57934,12 @@
           "lines": 30,
           "should_fail": false,
           "code_preview": "// 需 `rand` crate use rand::Rng;  pub fn simulated_annealing<S, E, N, C>(     mu..."
+        },
+        {
+          "flags": [],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashSet;  struct Bloom { bits: Vec<bool>, k: usize } impl ..."
         }
       ],
       "sources": [],
@@ -57540,7 +57959,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
@@ -57558,7 +57977,7 @@
       "layer": "L6",
       "title": "形式化算法理论",
       "positioning": "",
-      "line_count": 320,
+      "line_count": 336,
       "theorem_chains": [
         {
           "text": "| 形式规约 ⟹ 无歧义需求 | 使用谓词与状态转换 | 精确定义期望行为 |",
@@ -57628,7 +58047,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
@@ -57646,7 +58065,7 @@
       "layer": "L6",
       "title": "Machine Learning Ecosystem（机器学习生态）",
       "positioning": "",
-      "line_count": 1011,
+      "line_count": 1030,
       "theorem_chains": [
         {
           "text": "| Machine Learning Ecosystem（机器学习生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -57790,7 +58209,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 71,
       "pre_post": {
         "pre": [
@@ -57811,7 +58230,7 @@
       "layer": "L6",
       "title": "Rust 工业应用案例研究",
       "positioning": "",
-      "line_count": 518,
+      "line_count": 541,
       "theorem_chains": [
         {
           "text": "| Rust 工业级案例研究 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -57892,7 +58311,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 40,
       "pre_post": {
         "pre": [
@@ -57912,7 +58331,7 @@
       "layer": "L6",
       "title": "Game Engine Internals（游戏引擎内部原理）",
       "positioning": "",
-      "line_count": 1177,
+      "line_count": 1199,
       "theorem_chains": [
         {
           "text": "| Game Engine Internals（游戏引擎内部原理） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -58053,7 +58472,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 55,
       "pre_post": {
         "pre": [
@@ -58074,7 +58493,7 @@
       "layer": "L6",
       "title": "Rust 量子计算生态",
       "positioning": "",
-      "line_count": 1052,
+      "line_count": 1074,
       "theorem_chains": [
         {
           "text": "| Quantum Computing in Rust（量子计算与 Rust） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -58209,7 +58628,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 39,
       "pre_post": {
         "pre": [
@@ -58228,7 +58647,7 @@
       "layer": "L6",
       "title": "Rust WebAssembly 高级开发",
       "positioning": "",
-      "line_count": 1228,
+      "line_count": 1250,
       "theorem_chains": [
         {
           "text": "| Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -58398,7 +58817,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 102,
       "pre_post": {
         "pre": [
@@ -58417,7 +58836,7 @@
       "layer": "L6",
       "title": "C12 WASM - 术语表",
       "positioning": "",
-      "line_count": 420,
+      "line_count": 442,
       "theorem_chains": [
         {
           "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
@@ -58451,7 +58870,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 4,
       "pre_post": {
         "pre": [
@@ -58469,7 +58888,7 @@
       "layer": "L6",
       "title": "C12 WASM - 常见问题",
       "positioning": "",
-      "line_count": 495,
+      "line_count": 544,
       "theorem_chains": [
         {
           "text": "> **定理链**: Common Question ⟹ Mechanism Explanation ⟹ Best Practice",
@@ -58533,6 +58952,12 @@
           "lines": 3,
           "should_fail": false,
           "code_preview": "   use c12_wasm::rust_192_features::wasm_rotate_data;    wasm_rotate_data(&mut d..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "fn now_ms() -> f64 {     #[cfg(target_arch = \"wasm32\")]     {         // wasm 环境..."
         }
       ],
       "sources": [],
@@ -58551,7 +58976,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 21,
       "pre_post": {
         "pre": [
@@ -58569,7 +58994,7 @@
       "layer": "L6",
       "title": "C12 WASM - JavaScript 互操作",
       "positioning": "",
-      "line_count": 550,
+      "line_count": 599,
       "theorem_chains": [
         {
           "text": "> **定理链**: wasm-bindgen ⟹ Type Mapping ⟹ Runtime Interaction",
@@ -58588,7 +59013,11 @@
           "type": "table_row"
         }
       ],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -58623,6 +59052,21 @@
           "lines": 18,
           "should_fail": false,
           "code_preview": "use c12_wasm::rust_192_features::WasmFFIUnion;  // 创建 FFI 联合体 let mut union = Wa..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0038"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "trait Sink {     fn write<U>(&self, u: U); // 泛型方法使 trait 非 dyn 兼容 }  fn dispatc..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "trait Sink {     fn write(&self, u: i32); // ✅ 具体化参数后 dyn 兼容 }  fn dispatch(t: &..."
         }
       ],
       "sources": [],
@@ -58639,7 +59083,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 4,
       "pre_post": {
         "pre": [
@@ -58694,10 +59138,17 @@
       "layer": "L6",
       "title": "AUTOSAR 与 Rust",
       "positioning": "",
-      "line_count": 167,
+      "line_count": 203,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "#![deny(unsafe_code)] // 安全关键 crate 的入口约束：拒绝 unsafe， // 迫使 unsafe 边界集中到少数经评审、有形式..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../../content/safety_critical/07_case_studies/03_case_study_03_automotive_ecus.md",
@@ -58711,7 +59162,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 26,
       "pre_post": {
         "pre": [
@@ -58729,7 +59180,7 @@
       "layer": "L6",
       "title": "Rust 高级网络协议概览",
       "positioning": "",
-      "line_count": 320,
+      "line_count": 332,
       "theorem_chains": [
         {
           "text": "| 类型状态 ⟹ 更少运行时（Runtime）错误 | 将协议阶段编码为类型 | 非法状态转移被编译器拦截 |",
@@ -58811,7 +59262,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 18,
       "pre_post": {
         "pre": [
@@ -58829,7 +59280,7 @@
       "layer": "L6",
       "title": "网络安全",
       "positioning": "",
-      "line_count": 389,
+      "line_count": 407,
       "theorem_chains": [
         {
           "text": "| 内存安全（Memory Safety） ⟹ 更少攻击面 | Rust 所有权（Ownership）与借用（Borrowing）检查 | 消除大量传统 C/C++ 漏洞类 |",
@@ -58907,7 +59358,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 13,
       "pre_post": {
         "pre": [
@@ -58925,7 +59376,7 @@
       "layer": "L6",
       "title": "自定义协议实现",
       "positioning": "",
-      "line_count": 216,
+      "line_count": 228,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -58969,7 +59420,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 9,
       "pre_post": {
         "pre": [
@@ -58987,7 +59438,7 @@
       "layer": "L6",
       "title": "Rust 网络编程快速入门",
       "positioning": "为 Rust 网络编程提供分阶段学习路径与场景化导航，链接到权威概念页获取深度解释。",
-      "line_count": 317,
+      "line_count": 329,
       "theorem_chains": [
         {
           "text": "| std 网络 ⟹ 简单性 | 无需额外运行时（Runtime）依赖 | 适合低并发或学习场景 |",
@@ -59062,7 +59513,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 28,
       "pre_post": {
         "pre": [
@@ -59080,7 +59531,7 @@
       "layer": "L6",
       "title": "C10 Networks - Tier 2: 网络基础实践",
       "positioning": "",
-      "line_count": 1016,
+      "line_count": 1039,
       "theorem_chains": [
         {
           "text": "> **定理链**: Socket ⟹ Protocol ⟹ Application",
@@ -59230,7 +59681,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 28,
       "pre_post": {
         "pre": [
@@ -59248,7 +59699,7 @@
       "layer": "L6",
       "title": "形式化网络协议理论",
       "positioning": "",
-      "line_count": 650,
+      "line_count": 671,
       "theorem_chains": [
         {
           "text": "| 形式模型 ⟹ 无歧义规范 | 使用状态机或进程代数 | 精确描述协议行为 |",
@@ -59390,7 +59841,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 10,
       "pre_post": {
         "pre": [
@@ -59768,7 +60219,7 @@
       "layer": "L7",
       "title": "Rust Editions（语言版本）",
       "positioning": "补齐审计 §2.4 / §4 P2-2 缺口#6 指出的\"edition 2024 × 1.97 割裂\"。本节只做**交叉定位**，不重复版本页逐项解释；fallback 的推断推导落在承载页 [`27_type_checking_and_inference.md`](../../04_formal/00_type_theory/07_type_checking_and_inference.md) 与 [`31_never_type.md`](../../01_foundation/02_type_system/02_never_type.md)。",
-      "line_count": 349,
+      "line_count": 361,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将编译器版本、Edition、语法行为、迁移路径串联起来。",
@@ -59873,7 +60324,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 35,
       "pre_post": {
         "pre": [
@@ -59891,7 +60342,7 @@
       "layer": "L7",
       "title": "Rust 发布流程（Rust Release Process）",
       "positioning": "",
-      "line_count": 168,
+      "line_count": 196,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59904,6 +60355,15 @@
           "lines": 2,
           "should_fail": false,
           "code_preview": "#![feature(feature_name)] ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "edition2024"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "fn main() {     let gen = 1; // edition 2024: gen 是保留关键字     println!(\"{gen}\"); ..."
         }
       ],
       "sources": [],
@@ -59918,7 +60378,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 9,
       "pre_post": {
         "pre": [
@@ -59936,7 +60396,7 @@
       "layer": "L7",
       "title": "Rust 的发布流程与 Nightly Rust",
       "positioning": "",
-      "line_count": 260,
+      "line_count": 277,
       "theorem_chains": [
         {
           "text": "| Nightly 通道 ⟹ 实验空间 | 每日构建包含最新特性 | 支持早期验证 |",
@@ -59958,6 +60418,14 @@
           "lines": 2,
           "should_fail": false,
           "code_preview": "#![feature(async_await)] ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "#![feature(box_patterns)]  fn main() {} ..."
         }
       ],
       "sources": [],
@@ -59987,7 +60455,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 特性 × 领域反查矩阵",
       "positioning": "",
-      "line_count": 277,
+      "line_count": 292,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -60020,7 +60488,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 46,
       "pre_post": {
         "pre": [
@@ -60207,7 +60675,7 @@
       "layer": "L7",
       "title": "Rust 1.90 网络特性参考",
       "positioning": "",
-      "line_count": 919,
+      "line_count": 968,
       "theorem_chains": [
         {
           "text": "> **定理链**: Version Context ⟹ Feature Set ⟹ Migration Impact",
@@ -60226,7 +60694,11 @@
           "type": "table_row"
         }
       ],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -60323,6 +60795,21 @@
           "lines": 16,
           "should_fail": false,
           "code_preview": "use std::future::Future;  trait Service {     // RPITIT：trait 方法直接返回 impl Future..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0369"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "struct S;  fn main() {     let _ = S + S; // ❌ 未实现 Add trait } ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "struct S;  impl std::ops::Add for S { // ✅ 实现 Add 后 + 可用     type Output = S;   ..."
         }
       ],
       "sources": [],
@@ -60343,7 +60830,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 21,
       "pre_post": {
         "pre": [
@@ -60361,7 +60848,7 @@
       "layer": "L7",
       "title": "Rust 1.91 稳定特性",
       "positioning": "",
-      "line_count": 2744,
+      "line_count": 2788,
       "theorem_chains": [
         {
           "text": "| 版本上下文 ⟹ 演进脉络 | 对比前后版本特性 | 理解语言发展方向 |",
@@ -60973,6 +61460,20 @@
           "lines": 9,
           "should_fail": false,
           "code_preview": "// 旧代码（Rust 1.90） static MAX_CONNECTIONS: usize = 100; // const CONNECTIONS_REF:..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     let first = &v[0];     v.push(4);..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     let first = v[0];     // Copy 出值，..."
         }
       ],
       "sources": [],
@@ -60996,7 +61497,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 35,
       "pre_post": {
         "pre": [
@@ -61014,7 +61515,7 @@
       "layer": "L7",
       "title": "Rust 1.92 稳定特性",
       "positioning": "",
-      "line_count": 2734,
+      "line_count": 2776,
       "theorem_chains": [
         {
           "text": "| 版本上下文 ⟹ 演进脉络 | 对比前后版本特性 | 理解语言发展方向 |",
@@ -61518,6 +62019,20 @@
           "lines": 7,
           "should_fail": false,
           "code_preview": "use std::panic::Location;  pub fn log_error(error: &str) {     let loc = Locatio..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "fn main() {     let x: i32;     println!(\"{x}\");      // error[E0381]: used bind..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::mem::MaybeUninit;  fn main() {     let x: i32 = 0;                     ..."
         }
       ],
       "sources": [],
@@ -61539,7 +62054,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 13,
       "pre_post": {
         "pre": [
@@ -61557,7 +62072,7 @@
       "layer": "L7",
       "title": "Rust 1.93 稳定特性",
       "positioning": "",
-      "line_count": 221,
+      "line_count": 263,
       "theorem_chains": [
         {
           "text": "| 版本上下文 ⟹ 特性定位 | 了解 1.93 在 release train 中的位置 | 判断是否需要升级 |",
@@ -61572,7 +62087,11 @@
           "type": "table_row"
         }
       ],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -61621,6 +62140,21 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "// WebAssembly 边界示例：将 String 移交给宿主 #[unsafe(no_mangle)] // Edition 2024：unsafe 属..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0381"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "fn main() {     let x: i32;     if false {         x = 1;     }     println!(\"{}..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn main() {     let x: i32 = if false { 1 } else { 0 }; // ✅ 所有路径都有值     println..."
         }
       ],
       "sources": [],
@@ -61638,7 +62172,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 31,
       "pre_post": {
         "pre": [
@@ -61656,7 +62190,7 @@
       "layer": "L7",
       "title": "c10_networks - Rust 1.94 更新概览",
       "positioning": "",
-      "line_count": 229,
+      "line_count": 265,
       "theorem_chains": [
         {
           "text": "> **定理链**: Version Context ⟹ Feature Set ⟹ Migration Impact",
@@ -61702,6 +62236,20 @@
           "lines": 10,
           "should_fail": false,
           "code_preview": "// Edition 2024 基线语义：impl Trait 返回类型的精确捕获 fn capture<'a>(s: &'a str) -> impl Ite..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "extern \"C\" { fn puts(s: *const i8); }   // error: extern blocks must be unsafe f..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "unsafe extern \"C\" { fn puts(s: *const i8); }  fn main() {     let msg = [b'h' as..."
         }
       ],
       "sources": [],
@@ -61720,7 +62268,7 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 19,
       "pre_post": {
         "pre": [
@@ -61738,7 +62286,7 @@
       "layer": "L7",
       "title": "Rust 1.95.0 稳定特性",
       "positioning": "",
-      "line_count": 373,
+      "line_count": 417,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -61829,6 +62377,12 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "# use std::ops::ControlFlow; const fn check_control(cf: ControlFlow<i32, ()>) ->..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use std::sync::atomic::{AtomicUsize, Ordering};  fn main() {     let n = AtomicU..."
         }
       ],
       "sources": [],
@@ -61846,7 +62400,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 32,
       "pre_post": {
         "pre": [
@@ -61864,9 +62418,13 @@
       "layer": "L7",
       "title": "Rust 1.96 稳定特性（当前 patch 1.96.1）",
       "positioning": "",
-      "line_count": 381,
+      "line_count": 432,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -61897,6 +62455,21 @@
           "lines": 10,
           "should_fail": false,
           "code_preview": "use std::ptr;  fn read_or_default<T: Copy>(ptr: *const T, fallback: T) -> T {   ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0506"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut s = String::from(\"a\");     let r = &s;     s = String::f..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut s = String::from(\"a\");     {         let r = &s;        ..."
         }
       ],
       "sources": [],
@@ -61915,7 +62488,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 61,
       "pre_post": {
         "pre": [
@@ -61933,7 +62506,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 前沿特性预览（已归档）",
       "positioning": "",
-      "line_count": 110,
+      "line_count": 147,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -61944,6 +62517,20 @@
           "lines": 15,
           "should_fail": false,
           "code_preview": "// 以下代码在 1.97.0 stable 上尚不可用，预计 1.98+ 稳定 #![feature(vec_deque_truncate_front, ve..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "use std::collections::VecDeque; fn main() {     let mut dq = VecDeque::from([1, ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::collections::VecDeque; fn main() {     let mut dq = VecDeque::from([1, ..."
         }
       ],
       "sources": [],
@@ -61956,7 +62543,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -61974,7 +62561,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
-      "line_count": 490,
+      "line_count": 530,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -62089,6 +62676,14 @@
           "lines": 4,
           "should_fail": false,
           "code_preview": "// ❌ 编译错误 #[export_name = \"\"] pub fn foo() {} ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "#[unsafe(export_name = \"\")] fn foo() {}  fn main() { foo(); } ..."
         }
       ],
       "sources": [],
@@ -62106,7 +62701,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 43,
       "pre_post": {
         "pre": [
@@ -62124,7 +62719,7 @@
       "layer": "L7",
       "title": "Rust 1.98+ 前沿特性预览",
       "positioning": "",
-      "line_count": 678,
+      "line_count": 722,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -62181,6 +62776,14 @@
           "lines": 14,
           "should_fail": false,
           "code_preview": "fn demo_stable_apis() {     // 整数平方根（1.84 稳定）     assert_eq!(10i32.isqrt(), 3); ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "fn main() {     // 1.98 预览 API：f32::algebraic_add（浮点代数运算，允许重排优化）     let x = 1.0..."
         }
       ],
       "sources": [],
@@ -62200,7 +62803,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 50,
       "pre_post": {
         "pre": [
@@ -62219,10 +62822,30 @@
       "layer": "L7",
       "title": "Rust 1.98.0 稳定特性（跟踪骨架）",
       "positioning": "",
-      "line_count": 135,
+      "line_count": 164,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0133"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "fn main() {     let p: *const i32 = std::ptr::null();     let _u = *p; // ❌ 裸指针解..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn main() {     let p: *const i32 = std::ptr::null();     // ✅ unsafe 块显式承担不变量责任..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
@@ -62255,7 +62878,7 @@
       "layer": "L7",
       "title": "Rust 2024 Edition (1.85.0+ stable)",
       "positioning": "",
-      "line_count": 155,
+      "line_count": 166,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -62308,7 +62931,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -62326,7 +62949,7 @@
       "layer": "L7",
       "title": "Edition 2024 完全指南：新特性与迁移策略",
       "positioning": "全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。",
-      "line_count": 910,
+      "line_count": 932,
       "theorem_chains": [
         {
           "text": "| Edition 2024 完全指南：新特性与迁移策略 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -62475,7 +63098,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 29,
       "pre_post": {
         "pre": [
@@ -62523,7 +63146,7 @@
       "layer": "L7",
       "title": "Rust 2027 Edition 及未来路线图",
       "positioning": "分析 Rust **2027 Edition 及更远期**的潜在特性集合——从 gen/kw、特化稳定化、可移植 SIMD、自定义分配器到异步（Async） Trait、TAIT 等前沿议题，评价其技术成熟度与生态影响。",
-      "line_count": 1106,
+      "line_count": 1132,
       "theorem_chains": [
         {
           "text": "| Rust 2027 Edition 及未来路线图 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -62687,7 +63310,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 32,
       "pre_post": {
         "pre": [
@@ -62969,7 +63592,7 @@
       "layer": "L7",
       "title": "MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证",
       "positioning": "探讨 Modified Condition/Decision Coverage（MC/DC）作为**安全关键软件验证**核心指标的形式化语义，以及 Rust 编译器实现 MC/DC 覆盖率的技术路径。",
-      "line_count": 597,
+      "line_count": 638,
       "theorem_chains": [
         {
           "text": "| MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -63030,6 +63653,14 @@
           "lines": 13,
           "should_fail": false,
           "code_preview": "#[inline(always)] fn hot_path(x: i32) -> i32 {     x * 2 }  fn main() {     for ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "#![feature(coverage_attribute)]  #[coverage(off)] fn defensive_unreachable() -> ..."
         }
       ],
       "sources": [],
@@ -63042,7 +63673,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 45,
       "pre_post": {
         "pre": [
@@ -63060,7 +63691,7 @@
       "layer": "L7",
       "title": "Safety Tags 概念预研：Unsafe 契约的机器可读标注",
       "positioning": "探讨 Safety Tags 作为 Rust **unsafe 代码契约**的机器可读标注机制，从人工文档注释演进为编译器可理解、工具可验证的安全契约格式。",
-      "line_count": 694,
+      "line_count": 718,
       "theorem_chains": [
         {
           "text": "| Safety Tags 概念预研：Unsafe 契约的机器可读标注 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -63150,7 +63781,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 46,
       "pre_post": {
         "pre": [
@@ -63170,7 +63801,7 @@
       "layer": "L7",
       "title": "并行 前端编译预研：Rust 编译器 的多核扩展",
       "positioning": "探讨 Rust 编译器前端从**单线程串行**到**多核并行**的架构演进，分析其对编译时间、增量编译和 IDE 响应性的影响。",
-      "line_count": 697,
+      "line_count": 717,
       "theorem_chains": [
         {
           "text": "| 并行 前端编译预研：Rust 编译器 的多核扩展 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -63253,7 +63884,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 41,
       "pre_post": {
         "pre": [
@@ -63271,7 +63902,7 @@
       "layer": "L7",
       "title": "派生 CoercePointee 预研：智能指针的自动类型强制",
       "positioning": "探讨 Rust 1.95+ 中通过派生宏（Macro）自动化 `CoerceUnsized` 和 `DispatchFromDyn` 实现，降低自定义智能指针（Smart Pointer）的**样板代码**和**unsafe 实现风险**。",
-      "line_count": 668,
+      "line_count": 688,
       "theorem_chains": [
         {
           "text": "| 派生 CoercePointee 预研：智能指针的自动类型强制 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -63373,7 +64004,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 28,
       "pre_post": {
         "pre": [
@@ -63393,7 +64024,7 @@
       "layer": "L7",
       "title": "Const Trait Impl 预研：常量上下文中的 Trait 泛化",
       "positioning": "探讨 Rust 在**常量上下文**（`const fn`）中支持 Trait 调用的演进，分析其对泛型（Generics）编程、`const fn` 表达能力以及编译期计算的影响。",
-      "line_count": 683,
+      "line_count": 703,
       "theorem_chains": [
         {
           "text": "| Const Trait Impl 预研：常量上下文中的 Trait 泛化 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -63488,7 +64119,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 30,
       "pre_post": {
         "pre": [
@@ -63508,7 +64139,7 @@
       "layer": "L7",
       "title": "Stable ABI Preview",
       "positioning": "",
-      "line_count": 248,
+      "line_count": 275,
       "theorem_chains": [
         {
           "text": "| Stable ABI Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -63546,6 +64177,14 @@
           "lines": 13,
           "should_fail": false,
           "code_preview": "// Rust 的默认 ABI 不稳定（随编译器版本变化） #[unsafe(no_mangle)] pub extern \"C\" fn rust_functi..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// plugin.so 与宿主各自编译、各自链接 std pub struct Config { pub name: String, pub retries:..."
         }
       ],
       "sources": [],
@@ -63559,7 +64198,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 10,
       "pre_post": {
         "pre": [
@@ -63580,7 +64219,7 @@
       "layer": "L7",
       "title": "Inline Const Pattern 预览（Rust 1.98+ Nightly）",
       "positioning": "",
-      "line_count": 292,
+      "line_count": 307,
       "theorem_chains": [
         {
           "text": "| Inline Const Pattern Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -63678,7 +64317,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 9,
       "pre_post": {
         "pre": [
@@ -63699,7 +64338,7 @@
       "layer": "L7",
       "title": "Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界",
       "positioning": "澄清 **Return Type Notation (RTN)** 与 **`use<..>` 精确捕获**是两个不同的特性；RTN 解决的是「如何为 trait 中 `async fn` / RPITIT 的返回类型添加 `Send` 等边界」的问题。",
-      "line_count": 540,
+      "line_count": 560,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -63797,7 +64436,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -63817,7 +64456,7 @@
       "layer": "L7",
       "title": "`must_not_suspend` Lint Preview",
       "positioning": "",
-      "line_count": 243,
+      "line_count": 258,
       "theorem_chains": [
         {
           "text": "| `must_not_suspend` Lint Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -63878,7 +64517,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 8,
       "pre_post": {
         "pre": [
@@ -63899,7 +64538,7 @@
       "layer": "L7",
       "title": "Unsafe Fields 预研：字段级安全边界的精确标注",
       "positioning": ">",
-      "line_count": 681,
+      "line_count": 701,
       "theorem_chains": [
         {
           "text": "| Unsafe Fields 预研：字段级安全边界的精确标注 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -64000,7 +64639,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 33,
       "pre_post": {
         "pre": [
@@ -64020,7 +64659,7 @@
       "layer": "L7",
       "title": "Ferrocene：已交付的 Rust 安全关键认证工具链",
       "positioning": "",
-      "line_count": 303,
+      "line_count": 331,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -64036,7 +64675,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 40,
       "pre_post": {
         "pre": [
@@ -64054,7 +64693,7 @@
       "layer": "L7",
       "title": "Lifetime Capture in `impl Trait` Preview",
       "positioning": "",
-      "line_count": 255,
+      "line_count": 268,
       "theorem_chains": [
         {
           "text": "| Lifetime Capture in `impl Trait` Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -64118,7 +64757,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 14,
       "pre_post": {
         "pre": [
@@ -64139,7 +64778,7 @@
       "layer": "L7",
       "title": "Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`",
       "positioning": "探讨 Rust 编译器基础设施中最影响异步（Async）编程体验的长期痛点 —— `Pin` 的 ergonomics，以及 Project Goals 2026 Flagship \"Beyond the `&`\" 的解决方案：Reborrow Traits、Pinned Places、Safe Pin Projection。",
-      "line_count": 376,
+      "line_count": 400,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -64240,7 +64879,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 24,
       "pre_post": {
         "pre": [
@@ -64258,7 +64897,7 @@
       "layer": "L7",
       "title": "特质中返回位置 impl Trait（RPITIT）预览",
       "positioning": "",
-      "line_count": 298,
+      "line_count": 311,
       "theorem_chains": [
         {
           "text": "| RPITIT Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -64348,7 +64987,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 10,
       "pre_post": {
         "pre": [
@@ -64369,7 +65008,7 @@
       "layer": "L7",
       "title": "Cranelift 后端预研：Rust 编译器的快速调试编译",
       "positioning": "探讨 **Cranelift** 作为 Rust 编译器（rustc）的替代后端，分析其对**编译时间**、**调试体验**和**开发迭代效率**的影响，以及与 LLVM 后端的互补关系。",
-      "line_count": 787,
+      "line_count": 807,
       "theorem_chains": [
         {
           "text": "| Cranelift 后端预研：Rust 编译器的快速调试编译 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -64470,7 +65109,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 54,
       "pre_post": {
         "pre": [
@@ -64488,7 +65127,7 @@
       "layer": "L7",
       "title": "TAIT Preview",
       "positioning": "",
-      "line_count": 248,
+      "line_count": 261,
       "theorem_chains": [
         {
           "text": "| TAIT Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -64551,7 +65190,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 9,
       "pre_post": {
         "pre": [
@@ -64572,7 +65211,7 @@
       "layer": "L7",
       "title": "Arbitrary Self Types 预览：自定义方法接收器",
       "positioning": "探讨 Rust 中 arbitrary self types 的提案——允许 `self` 参数使用任意类型（不仅是 `Self`、`&Self`、`&mut Self`、`Box<Self>`、`Rc<Self>`、`Arc<Self>`、`Pin<P<Self>>`），分析其对嵌入式驱动、内核编程和自定义指针类型的影响。",
-      "line_count": 421,
+      "line_count": 442,
       "theorem_chains": [
         {
           "text": "| Arbitrary Self Types 预览：自定义方法接收器 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -64689,7 +65328,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 15,
       "pre_post": {
         "pre": [
@@ -64708,7 +65347,7 @@
       "layer": "L7",
       "title": "Const Trait 实现预览",
       "positioning": "",
-      "line_count": 281,
+      "line_count": 294,
       "theorem_chains": [
         {
           "text": "| Const Trait Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -64784,7 +65423,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 13,
       "pre_post": {
         "pre": [
@@ -64805,7 +65444,7 @@
       "layer": "L7",
       "title": "Ergonomic Ref-Counting 预研：人机工学引用计数",
       "positioning": "",
-      "line_count": 326,
+      "line_count": 345,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -64871,7 +65510,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 26,
       "pre_post": {
         "pre": [
@@ -64889,7 +65528,7 @@
       "layer": "L7",
       "title": "Rust 语言规范预研：从参考文档到形式化规范",
       "positioning": "探讨 Rust 语言从**参考文档**（Rust Reference）向**形式化规范**演进的必要性与路径，分析 Ferrocene、编译器开发和形式化验证社区对规范的不同需求。",
-      "line_count": 669,
+      "line_count": 688,
       "theorem_chains": [
         {
           "text": "| Rust 语言规范预研：从参考文档到形式化规范 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -64972,7 +65611,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 31,
       "pre_post": {
         "pre": [
@@ -64992,7 +65631,7 @@
       "layer": "L7",
       "title": "Async Drop：异步资源的优雅销毁",
       "positioning": "分析 Rust 中 **异步（Async）资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（[Async Drop Initiative](https://github.com/rust-lang/rust/issues/126482)）、设计约束与当前 nightly 实现状态。",
-      "line_count": 802,
+      "line_count": 821,
       "theorem_chains": [
         {
           "text": "| Async Drop：异步资源的优雅销毁 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -65084,7 +65723,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
@@ -65103,7 +65742,7 @@
       "layer": "L7",
       "title": "Field Projections 预览：安全的字段级投影",
       "positioning": "探讨 Rust 中 field projections 的提案——允许安全地从复合类型中\"投影\"出对字段的引用（Reference），而不暴露内部结构。分析其对内核编程、自引用结构和内存安全（Memory Safety）保证的影响。",
-      "line_count": 428,
+      "line_count": 451,
       "theorem_chains": [
         {
           "text": "| Field Projections 预览：安全的字段级投影 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -65212,7 +65851,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 27,
       "pre_post": {
         "pre": [
@@ -65231,7 +65870,7 @@
       "layer": "L7",
       "title": "BorrowSanitizer：动态别名规则验证工具",
       "positioning": "",
-      "line_count": 384,
+      "line_count": 422,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -65260,6 +65899,14 @@
           "lines": 7,
           "should_fail": false,
           "code_preview": "// 假设：这段代码在实际硬件上是正确的，但 Miri 的 Tree Borrows 会标记它 unsafe fn swap_via_raw<T>(a: &mu..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut x = 0;     let r1 = &mut x;     let r2 = &mut x; // 第二次可..."
         }
       ],
       "sources": [],
@@ -65278,7 +65925,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 35,
       "pre_post": {
         "pre": [
@@ -65296,7 +65943,7 @@
       "layer": "L7",
       "title": "Gen Blocks 预研：超越异步的泛化生成器",
       "positioning": "探讨 Rust 中 **gen blocks**（生成器块）的提案——将 `async`/`.await` 的模式从**异步（Async）计算**泛化到**惰性迭代**和**协程**，分析其对迭代器（Iterator）生态、流处理（Stream）和异步生成器的影响。",
-      "line_count": 685,
+      "line_count": 704,
       "theorem_chains": [
         {
           "text": "| Gen Blocks 预研：超越异步的泛化生成器 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -65394,7 +66041,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 29,
       "pre_post": {
         "pre": [
@@ -65414,7 +66061,7 @@
       "layer": "L7",
       "title": "`std::autodiff`：Rust 官方自动微分前沿追踪",
       "positioning": "追踪 Rust 语言层面的自动微分（Automatic Differentiation, AD）实验进展，分析其对 AI/ML 生态的潜在影响。",
-      "line_count": 358,
+      "line_count": 377,
       "theorem_chains": [
         {
           "text": "| `std::autodiff`：Rust 官方自动微分前沿追踪 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -65500,7 +66147,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 23,
       "pre_post": {
         "pre": [
@@ -65518,7 +66165,7 @@
       "layer": "L7",
       "title": "cargo-semver-checks：从社区工具到 Cargo 官方集成",
       "positioning": "跟踪 `cargo-semver-checks` 从独立社区工具向 Cargo 官方生态集成的演进过程，分析其对 Rust 供应链稳定性和 API 兼容性验证的结构性影响。",
-      "line_count": 224,
+      "line_count": 270,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -65529,6 +66176,14 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "// 旧版本 pub fn example(x: i64) {}  // 新版本（破坏变更，但当前无法自动检测） pub fn example(x: Strin..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 11,
+          "should_fail": true,
+          "code_preview": "// 库 1.1.0 的新签名 fn parse(s: &str) -> Result<i32, ()> {     Ok(s.len() as i32) } ..."
         }
       ],
       "sources": [],
@@ -65538,7 +66193,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 28,
       "pre_post": {
         "pre": [
@@ -65556,7 +66211,7 @@
       "layer": "L7",
       "title": "WASM Target Evolution Preview",
       "positioning": "",
-      "line_count": 256,
+      "line_count": 292,
       "theorem_chains": [
         {
           "text": "| WASM Target Evolution Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -65592,8 +66247,8 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
-      "matrix_rows": 24,
+      "mermaid_blocks": 1,
+      "matrix_rows": 27,
       "pre_post": {
         "pre": [
           "N/A",
@@ -65611,7 +66266,7 @@
       "layer": "L7",
       "title": "AArch64 SVE / SME：可伸缩向量扩展预览",
       "positioning": "跟踪 Rust 对 ARM AArch64 **SVE（Scalable Vector Extension，可伸缩向量扩展）** 和 **SME（Scalable Matrix Extension，可伸缩矩阵扩展）** 的支持进展。SVE/SME 是 ARMv9-A 的关键特性，代表向量计算从固定长度向硬件自适应长度的范式转变。",
-      "line_count": 318,
+      "line_count": 338,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -65661,7 +66316,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 35,
       "pre_post": {
         "pre": [
@@ -65679,7 +66334,7 @@
       "layer": "L7",
       "title": "Rust in Space Preview",
       "positioning": "",
-      "line_count": 267,
+      "line_count": 283,
       "theorem_chains": [
         {
           "text": "| Rust in Space Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -65737,7 +66392,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 15,
       "pre_post": {
         "pre": [
@@ -65756,7 +66411,7 @@
       "layer": "L7",
       "title": "Specialization：Trait 实现的精确化与重叠解析",
       "positioning": "分析 Rust **特化（Specialization）**机制的设计动机——允许为特定类型提供比泛型（Generics）实现更精确的 Trait 实现，解决当前 Orphan Rule 和 Coherence 规则下的表达能力限制。",
-      "line_count": 784,
+      "line_count": 804,
       "theorem_chains": [
         {
           "text": "| Specialization：Trait 实现的精确化与重叠解析 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -65858,7 +66513,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 15,
       "pre_post": {
         "pre": [
@@ -65878,7 +66533,7 @@
       "layer": "L7",
       "title": "编译期执行与常量求值",
       "positioning": "深入探讨 Rust 的**编译期执行**能力——从 `const fn` 到 `const` 泛型（Generics），分析 Rust 如何在编译期完成计算，实现零成本抽象（Zero-Cost Abstraction）。",
-      "line_count": 768,
+      "line_count": 789,
       "theorem_chains": [
         {
           "text": "| 编译期执行与常量求值 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -65961,7 +66616,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 22,
       "pre_post": {
         "pre": [
@@ -65980,7 +66635,7 @@
       "layer": "L7",
       "title": "AutoVerus / Verus 预览跟踪",
       "positioning": "",
-      "line_count": 105,
+      "line_count": 115,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -66012,7 +66667,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 13,
       "pre_post": {
         "pre": [
@@ -66031,7 +66686,7 @@
       "layer": "L7",
       "title": "Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举",
       "positioning": "探讨 Rust 枚举（Enum）类型在 API 演进与跨 crate 兼容性维度的**开放性语义**，从现有 `#[non_exhaustive]` 机制延伸到语言级开放枚举的设计空间。",
-      "line_count": 834,
+      "line_count": 861,
       "theorem_chains": [
         {
           "text": "| Open Enums 概念预研：从 `` 到可扩展枚举 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -66158,7 +66813,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 39,
       "pre_post": {
         "pre": [
@@ -66178,7 +66833,7 @@
       "layer": "L7",
       "title": "f16 / f128 预研：半精度与四精度浮点类型",
       "positioning": "跟踪 [RFC 3453](https://rust-lang.github.io/rfcs/3453-f16-and-f128.html) 引入的两个新原始浮点类型（Primitive Float Types），说明其语法、IEEE 754 语义、ABI 边界条件与对数值生态的影响。",
-      "line_count": 173,
+      "line_count": 188,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -66221,7 +66876,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 15,
       "pre_post": {
         "pre": [
@@ -66239,7 +66894,7 @@
       "layer": "L7",
       "title": "UnsafePinned 预研：可变引用别名语义的精确标注",
       "positioning": "跟踪 [RFC 3467](https://rust-lang.github.io/rfcs/3467-unsafe-pinned.html) 引入的 `UnsafePinned<T>`，说明其与 `UnsafeCell`/`PhantomPinned`/`Unpin` 的语义分工，以及对自引用 Future 降级的安全性影响。",
-      "line_count": 149,
+      "line_count": 162,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -66283,7 +66938,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 4,
       "pre_post": {
         "pre": [
@@ -66301,7 +66956,7 @@
       "layer": "L7",
       "title": "Default Field Values 预研：结构体字段默认值",
       "positioning": "跟踪 [RFC 3681](https://rust-lang.github.io/rfcs/3681-default-field-values.html) 引入的结构体字段默认值语法，说明其与函数式记录更新（Functional Record Update, FRU）、`Default` trait 及私有字段的交互。",
-      "line_count": 144,
+      "line_count": 156,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -66352,7 +67007,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 6,
       "pre_post": {
         "pre": [
@@ -66370,7 +67025,7 @@
       "layer": "L7",
       "title": "Complex Numbers 预研：标准库复数类型",
       "positioning": "跟踪 [RFC 3892](https://rust-lang.github.io/rfcs/3892-complex-numbers.html) 提议的标准库复数类型（Complex Number），说明其设计动机、API 形态与对数值生态（`num-complex` 等）的影响。",
-      "line_count": 139,
+      "line_count": 152,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -66411,7 +67066,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
@@ -66429,7 +67084,7 @@
       "layer": "L7",
       "title": "AI × Rust：生成-验证闭环与确定性容器",
       "positioning": "Prophet 属于**监督学习**（学习历史补丁特征），而非 RL。但它是\"编译器/测试反馈驱动程序修复\"思想的早期工业级实践，为后续 RL 方法奠定了问题定义基础。[MIT News, 2016](https://news.mit.edu/)",
-      "line_count": 1014,
+      "line_count": 1035,
       "theorem_chains": [
         {
           "text": "> **论证**: RustBelt 证明 Safe Rust 的内存安全（无 UAF/DF），因此编译通过 ⟹ 内存安全（Memory Safety）。但编译通过 ⇏ 逻辑正确（功能 bug 仍可能存在）。",
@@ -66528,7 +67183,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 62,
       "pre_post": {
         "pre": [
@@ -66548,7 +67203,7 @@
       "layer": "L7",
       "title": "Formal Methods Industrialization（形式化方法工业化）",
       "positioning": "",
-      "line_count": 1728,
+      "line_count": 1754,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -66673,7 +67328,7 @@
       ],
       "transitions": 3,
       "has_cognitive_path": true,
-      "mermaid_blocks": 9,
+      "mermaid_blocks": 10,
       "matrix_rows": 162,
       "pre_post": {
         "pre": [
@@ -66914,7 +67569,7 @@
       "layer": "L7",
       "title": "Rust for Linux ：操作系统内核中的内存安全",
       "positioning": "深入分析 **Rust for Linux** 项目——如何将 Rust 引入 Linux 内核开发，从驱动程序编写、C 互操作到内核特定的安全保证，揭示系统编程范式的历史性转变。",
-      "line_count": 1089,
+      "line_count": 1109,
       "theorem_chains": [
         {
           "text": "| Rust for Linux ：操作系统内核中的内存安全（Memory Safety） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -67042,7 +67697,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 59,
       "pre_post": {
         "pre": [
@@ -67060,7 +67715,7 @@
       "layer": "L7",
       "title": "Rust 在 AI 与机器学习中的新兴角色",
       "positioning": "分析 Rust 在**AI/ML 基础设施**中的新兴应用——从张量运算、推理引擎到 ML 管道编排，揭示 Rust 如何在高性能 AI 系统中提供内存安全（Memory Safety）和低延迟优势。",
-      "line_count": 792,
+      "line_count": 811,
       "theorem_chains": [
         {
           "text": "| Rust 在 AI 与机器学习中的新兴角色 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -67150,7 +67805,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 23,
       "pre_post": {
         "pre": [
@@ -67168,7 +67823,7 @@
       "layer": "L7",
       "title": "Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈",
       "positioning": "深度评价 Rust 在 **WebAssembly (Wasm)** 全栈开发中的技术成熟度——从 wasm-bindgen/wasm-pack 工具链到 Yew/Leptos 前端框架，分析 Rust→Wasm 编译模型、JS 互操作内存模型、性能权衡边界与工程选型决策。",
-      "line_count": 979,
+      "line_count": 1000,
       "theorem_chains": [
         {
           "text": "| Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -67288,7 +67943,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 37,
       "pre_post": {
         "pre": [
@@ -67306,7 +67961,7 @@
       "layer": "L7",
       "title": "eBPF / Aya / Rex 的 Rust 映射",
       "positioning": "",
-      "line_count": 1021,
+      "line_count": 1042,
       "theorem_chains": [
         {
           "text": "| eBPF / Aya / Rex 的 Rust 映射 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -67450,7 +68105,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
+      "mermaid_blocks": 4,
       "matrix_rows": 98,
       "pre_post": {
         "pre": [
@@ -67470,9 +68125,13 @@
       "layer": "L7",
       "title": "测验：版本演进、Edition 机制与前沿特性（L7）",
       "positioning": "验证学习者对 Rust 版本治理机制（发布火车、Edition）、1.90–1.97 稳定特性谱系与前沿特性状态语义的掌握。",
-      "line_count": 332,
+      "line_count": 354,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [
@@ -67481,6 +68140,21 @@
           "lines": 4,
           "should_fail": false,
           "code_preview": "fn double_size<const N: usize>() -> [u8; N * 2] {     [0; N * 2] } ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "fn show<T>(t: T) {     println!(\"{}\", t); // ❌ 泛型参数缺少 Display 约束 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn show<T: std::fmt::Display>(t: T) {     println!(\"{}\", t); // ✅ 约束声明可用能力 } ..."
         }
       ],
       "sources": [],

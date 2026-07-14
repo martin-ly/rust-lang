@@ -43,6 +43,10 @@
     - [测验 3：`--message-format=json` 适合哪些工具集成场景？](#测验-3--message-formatjson-适合哪些工具集成场景)
     - [测验 4：为什么官方建议自定义子命令使用 CLI 而不是链接 `cargo` crate？](#测验-4为什么官方建议自定义子命令使用-cli-而不是链接-cargo-crate)
   - [权威来源索引](#权威来源索引)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：把非函数值当函数调用（rustc 1.97.0，--edition 2024 实测）](#反例把非函数值当函数调用rustc-1970--edition-2024-实测)
+    - [✅ 修正：改用函数指针或闭包类型](#-修正改用函数指针或闭包类型)
 
 ---
 
@@ -241,3 +245,42 @@ fn main() {
 **文档版本**: 1.0
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Cargo Book external tools 文档
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo 子命令与插件生态))
+    一、Cargo 的可扩展性设计
+    二、自定义子命令
+      命名约定
+      别名
+    三、cargo metadata 与 JSON 消息
+      cargo metadata
+      message-format=json
+    四、常用插件速览
+```
+
+## ⚠️ 反例与陷阱
+
+编写 cargo 子命令/插件时，配置值与回调混淆会产生这类调用错误。
+
+### 反例：把非函数值当函数调用（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0618
+fn main() {
+    let g = 42;
+    g(); // ❌ 整数不是可调用值
+}
+```
+
+**实测错误**：`error[E0618]: expected function, found`{integer}``。
+
+### ✅ 修正：改用函数指针或闭包类型
+
+```rust
+fn main() {
+    let g: fn() = || {}; // ✅ 函数指针/闭包才可调用
+    g();
+}
+```

@@ -40,6 +40,7 @@
   - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [⚠️ 反例与陷阱：spawn 闭包捕获借用数据](#️-反例与陷阱spawn-闭包捕获借用数据)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -252,4 +253,16 @@ fn main() {
         println!("{}", data.len());
     }).join().unwrap();
 }
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cross-Platform))
+    一、平台线程模型概览
+    二、同步原语的平台实现
+    三、条件编译与平台抽象
+    四、Async Runtime 跨平台差异
+    五、原子操作与内存排序
 ```

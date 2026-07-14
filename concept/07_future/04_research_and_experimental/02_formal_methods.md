@@ -1725,3 +1725,29 @@ fn main() {
 > [来源: [Wikipedia — Theorem Proving](https://en.wikipedia.org/wiki/Automated_theorem_proving)]
 > [来源: [POPL 2024 — Verus](https://github.com/verus-lang/verus)]
 > [来源: [AWS Kani](https://github.com/model-checking/kani)]
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Formal Methods))
+    一、基础定义
+      1.1 形式化验证Formal
+      1.2 模型检测Model Checking
+      1.3 定理证明Theorem Proving
+    二、五层扩展模型
+      2.1 L0Rust 编译器原生层
+      2.2 L1Code-Level代码级验证
+      2.3 L2Interface-Level接口级验证
+    三、从类型系统到定理证明的光谱
+      3.1 阶段一类型检查Type Checking
+      3.2 阶段二契约检查Contract
+      3.3 阶段三模型检测Model Checking
+    四、Rust 的独特优势类型即证明
+      4.1 所有权 = 分离合取 P Q
+      4.2 借用作为权限模型
+      4.3 借用检查器 = 自动分离逻辑证明
+    五、形式化验证工具链
+      5.3 技术细节与定位
+      5.4 RefinedRust自动化分离逻辑推导
+```

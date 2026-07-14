@@ -58,6 +58,7 @@
   - [10. 相关概念](#10-相关概念)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -641,3 +642,27 @@ let process = async |items: Vec<i32>| -> i32 {
 - **依赖**：依赖 [Async 基础](01_async.md) 与 [生命周期进阶](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md)（RTN 边界）。
 
 ---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Async Closures异步闭包))
+    1. 为什么需要 async closures？
+    2. 语法与捕获语义
+      2.1 基础语法
+      2.2 捕获模式
+      2.3 与 x async move 的对比
+    3. AsyncFn trait 家族
+      3.1 trait 层级
+      3.2 使用场景高阶异步函数
+      3.3 形式化 trait 草图
+    4. 实际应用模式
+      4.1 事件处理器
+      4.2 中间件链
+      4.3 并行处理Tokio JoinSet
+    5. 限制与边界
+      5.1 不是 dyn-compatible
+      5.2 Send 约束与 RTN
+      5.3 递归调用
+```

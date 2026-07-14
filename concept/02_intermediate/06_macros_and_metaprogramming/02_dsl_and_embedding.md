@@ -68,6 +68,7 @@
     - [核心推理链](#核心推理链)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -865,3 +866,22 @@ fn main() {
 - **对偶**：与外部 DSL（独立解析器）相对——嵌入式复用宿主语言语法。
 - **组合**：与 [Macro Patterns](03_macro_patterns.md) 的展开技巧组合。
 - **依赖**：展开正确性依赖 [Macro Hygiene](../../03_advanced/03_proc_macros/09_macro_hygiene.md)。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((DSL 与嵌入 式设计Rust 中的领域特定语言))
+    一、核心概念
+      1.1 内嵌 DSL vs 外部 DSL
+      1.2 宏驱动的内嵌 DSL
+      1.3 Builder 模式作为 DSL
+    二、技术细节
+      2.1 Parser Combinators
+      2.2 类型安全的 DSL
+      2.3 编译期验证的 DSL
+    三、设计模式矩阵
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+```

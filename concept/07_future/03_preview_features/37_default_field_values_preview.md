@@ -39,6 +39,7 @@
   - [五、反命题与边界分析](#五反命题与边界分析)
   - [权威来源索引](#权威来源索引)
   - [⚠️ 反例与陷阱：结构体字段默认值语法（未稳定）](#️-反例与陷阱结构体字段默认值语法未稳定)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 一、动机与语法
 
@@ -140,4 +141,15 @@ struct Config {
     timeout: u32,
 }
 fn main() { let _ = Config { retries: 1, ..Default::default() }; }
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Default Field Values))
+    一、动机与语法
+    二、语义规则
+    四、与既有机制的交互
+    五、反命题与边界分析
 ```

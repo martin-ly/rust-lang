@@ -289,3 +289,17 @@ serde = { workspace = true }
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml) · [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo Workspaces工作区))
+    一、什么是 Workspace
+    二、Root Package vs Virtual
+      Root package
+      Virtual workspace
+    三、members 与 exclude
+    四、default-members
+    五、workspace.package 继承
+```

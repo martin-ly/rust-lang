@@ -277,3 +277,20 @@ fn main() {
     define_x!(x);
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((C 预处理器 vs Rust 宏从文本替换到语法树))
+    一、核心命题
+    二、C 预处理器文本替换模型
+      2.1 define简单文本替换
+      2.3 条件编译与头文件保护
+    三、Rust 宏语法树与卫生性
+      3.1 声明宏 macro_rules!
+      3.2 卫生性Hygiene
+      3.3 条件编译cfg 属性
+    四、核心对比
+    六、形式化视角
+```

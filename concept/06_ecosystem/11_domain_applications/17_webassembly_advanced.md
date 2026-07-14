@@ -1225,3 +1225,25 @@ fn main() {
     println!("{}", GLOBAL.lock().unwrap().len());
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust WebAssembly 高级开发))
+    一、权威定义
+      1.1 WebAssembly 作为通用字节码
+      1.2 组件模型与模块链接
+    三、Rust WASM 工具链深度
+      3.1 wasm-bindgenJS
+      3.2 wasm-pack构建与发布的统一入口
+    四、WASM 组件模型详解
+      4.1 WITWASM 接口类型
+      4.2 Worlds 与 Packages
+    五、WASI Preview 2 与 Rust
+      5.1 能力安全模型
+      5.2 虚拟文件系统与网络
+    六、性能考量
+      6.1 JSWASM 边界穿越成本
+      6.2 SIMD 与批量内存操作
+```

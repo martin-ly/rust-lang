@@ -178,3 +178,37 @@ cargo tree -p c17_resolver_v3_public_demo -e features
 ---
 
 > **Rust 1.90 起**：多包发布（multi-package publishing）稳定，`cargo publish` 可一次性发布 workspace 内多个 crate；1.93 起 `cargo clean --workspace` 支持工作区级清理。详见 [版本页](../../07_future/00_version_tracking/rust_1_90_stabilized.md)（特性矩阵节）。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo 命令参考Cargo Commands))
+    一、命令分类
+    二、高频构建命令
+    三、Manifest 命令
+    四、Package 与发布命令
+    六、常用全局选项
+```
+
+## ⚠️ 反例与陷阱
+
+在命令封装函数里返回局部临时值的引用，是悬垂引用陷阱的典型形态。
+
+### 反例：返回临时值的引用（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0515
+fn leak<'a>() -> &'a String {
+    &String::from("x") // ❌ 返回临时值的引用
+}
+```
+
+**实测错误**：`error[E0515]: cannot return reference to temporary value`。
+
+### ✅ 修正：返回拥有所有权的值（`String`）而非引用
+
+```rust
+fn leak() -> String {
+    String::from("x") // ✅ 返回所有权而非引用
+}
+```

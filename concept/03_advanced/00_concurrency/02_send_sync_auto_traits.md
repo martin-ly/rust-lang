@@ -54,6 +54,7 @@
     - [测验 1：Send 与 Sync 的契约（🟢 基础）](#测验-1send-与-sync-的契约-基础)
     - [测验 2：`Rc` 跨线程的编译期拒绝（🟡 进阶）](#测验-2rc-跨线程的编译期拒绝-进阶)
     - [测验 3：auto trait 的手动实现边界（🔴 专家）](#测验-3auto-trait-的手动实现边界-专家)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -584,3 +585,21 @@ flowchart TD
 **B 正确**。按本页 §一与反例 3：Send/Sync 是 **unsafe auto trait**——手动实现必须用 `unsafe impl`，因为编译器无法验证跨线程安全性这一语义不变量（invariant），证明责任转移给程序员。C 错：显式 `!Send`/`!Sync` 负实现在 stable 不可用，stable 上的 opt-out 惯用法是 `PhantomData<*const T>` 之类（§3.2/§3.3）。
 
 </details>
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Send 与 SyncAuto Trait))
+    一、为什么需要 Send/Sync数据竞争Data
+    二、形式化契约Formal Contract
+      2.1 Send 契约
+      2.2 Sync 契约 ⟺ &T Send
+      2.3 契约与线程 API 的连接点
+    三、Auto Trait 机制自动推导与负实现
+      3.1 结构化推导规则
+      3.2 负实现Negative Impl显式
+      3.3 stable 上的 opt-out
+    四、与泛型、组合类型、UnsafeCell 的交互
+    五、Send/Sync 判定矩阵
+```

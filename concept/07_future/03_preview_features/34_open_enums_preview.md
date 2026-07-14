@@ -79,6 +79,7 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -831,3 +832,29 @@ C 枚举经常添加新常量。开放枚举使 Rust 绑定可以安全映射这
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper) · [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Open Enums 概念预研从))
+    一、核心概念封闭 vs 开放枚举
+      1.1 封闭枚举Closed Enums
+      1.2 non_exhaustive兼容性层面的开放
+      1.3 开放枚举Open Enums的设计空间
+    二、non_exhaustive 的形式化语义
+      2.1 编译期影响穷尽性检查的弱化
+      2.2 运行时语义无变化
+      2.3 与模式匹配的交互
+    三、跨语言对比开放枚举的多种形态
+      3.1 ScalaSealed Traits +
+      3.2 HaskellOpen Data Types
+      3.3 OCamlPolymorphic
+    四、API 设计中的开放枚举模式
+      4.1 错误码枚举
+      4.2 事件/消息类型
+      4.3 配置/选项枚举
+    五、反命题与边界分析
+      5.1 反命题树
+      5.2 边界极限
+```

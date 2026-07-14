@@ -318,3 +318,19 @@ fn main() {
 
 - **P2 生态/社区**: [docs.rs/itertools — 生态权威 API 文档](https://docs.rs/itertools) · [docs.rs/rayon — 生态权威 API 文档](https://docs.rs/rayon)
 - **P1 学术/形式化**: [Skiena: The Algorithm Design Manual (2nd ed., Springer)](https://link.springer.com/book/10.1007/978-1-84800-070-4)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((09_data_structures_in_rust))
+    1. 线性数据结构
+      1.1 VecT — 动态数组
+      1.2 VecDequeT — 双端队列
+      1.3 LinkedListT — 双向链表
+    2. 栈与队列
+    3. 树结构
+    4. 哈希表
+    5. 图结构
+      带所有权图使用 Rc/RefCell 或 Arena
+```

@@ -70,6 +70,7 @@
     - [测验 1：抽象字节（🟢 基础）](#测验-1抽象字节-基础)
     - [测验 2：未初始化内存与 MaybeUninit（🟡 进阶）](#测验-2未初始化内存与-maybeuninit-进阶)
     - [测验 3：Provenance 与别名模型（🔴 专家）](#测验-3provenance-与别名模型-专家)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -472,3 +473,16 @@ Rust 内存模型中的"抽象字节"可以区分哪些状态？
 ---
 
 > **Rust 1.91 起**：`ptr::with_exposed_provenance(_mut)` 稳定，为整数↔指针往返提供显式 provenance 暴露路径；**1.96 起**「valid for read/write」定义重构（排除 null，由各方法单独声明例外），统一指针有效性契约。详见 [1.91 版本页](../../07_future/00_version_tracking/rust_1_91_stabilized.md) 与 [1.96 版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md)（特性矩阵节）。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 内存模型Memory Model))
+    一、内存模型状态
+    二、字节Bytes
+      为什么抽象字节重要
+    四、初始化与 MaybeUninit
+    五、与未定义行为的关系
+    六、别名模型Stacked Borrows /
+```

@@ -346,3 +346,15 @@ fn main() {
     println!("{}", r#async);
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust Editions语言版本))
+    一、什么是 Edition
+    二、主要 Edition 对比
+    三、选择 Edition
+    五、Edition 与工具链版本的关系
+    六、何时升级 Edition
+```

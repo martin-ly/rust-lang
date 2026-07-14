@@ -45,6 +45,7 @@
     - [测验 4：Git source replacement 能替换 crates.io 吗？](#测验-4git-source-replacement-能替换-cratesio-吗)
   - [权威来源索引](#权威来源索引)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -307,3 +308,17 @@ vendored 源码附带 `.cargo-checksum.json`，cargo 逐文件校验，任何手
 **陷阱要点**：source replacement 的安全模型建立在「vendor 内容逐字节可信且不可变」上；绕过校验等于放弃 cargo 的供应链校验。
 
 ---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo Source Replacement))
+    一、Source 是什么
+    二、source 配置基础
+    三、Registry Source 镜像
+    四、本地 Registry 与 Directory
+      4.1 Local Registry
+      4.2 Directory Source
+    五、用 cargo vendor 做
+```

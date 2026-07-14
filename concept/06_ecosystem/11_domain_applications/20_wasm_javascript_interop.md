@@ -547,3 +547,52 @@ let mut_raw_ref = union.get_integer_mut_raw();
 
 - **P2 生态/社区**: [docs.rs/wasm-bindgen — 生态权威 API 文档](https://docs.rs/wasm-bindgen) · [docs.rs/wasmtime — 生态权威 API 文档](https://docs.rs/wasmtime)
 - **P1 学术/形式化**: [Haas et al.: Bringing the Web up to Speed with WebAssembly (PLDI 2017)](https://dl.acm.org/doi/10.1145/3062341.3062363)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((C12 WASM - JavaScript 互操作))
+    基础集成
+      加载 WASM 模块
+    React 集成
+      基本用法
+      自定义 Hook
+    Vue 集成
+      Vue 基本用法
+    Node.js 集成
+      Node.js 基本用法
+      ES 模块
+    TypeScript 类型
+      使用类型
+```
+
+## ⚠️ 反例与陷阱
+
+WASM/JS 互操作中常用 trait object 做动态分发边界，但泛型方法会破坏 dyn 兼容性。
+
+### 反例：含泛型方法的 trait 不能作 trait object（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0038
+trait Sink {
+    fn write<U>(&self, u: U); // 泛型方法使 trait 非 dyn 兼容
+}
+
+fn dispatch(t: &dyn Sink) { // ❌ 无法形成 trait object
+    t.write(1);
+}
+```
+
+**实测错误**：`error[E0038]: the trait`Sink` is not dyn compatible (method `write`has generic type parameters)`。
+
+### ✅ 修正：把方法参数具体化，或改用泛型函数静态分发
+
+```rust
+trait Sink {
+    fn write(&self, u: i32); // ✅ 具体化参数后 dyn 兼容
+}
+
+fn dispatch(t: &dyn Sink) {
+    t.write(1);
+}
+```

@@ -45,6 +45,7 @@
   - [六、与既有概念的关系](#六与既有概念的关系)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [权威来源索引](#权威来源索引)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 一、动机与定位
 
@@ -170,3 +171,17 @@ fn quantize(x: f32) -> f32 { // half::f16::to_f32() 转换后计算
 > [RFC 3514 — Float Semantics](https://rust-lang.github.io/rfcs/3514-float-semantics.html)
 >
 > 以上链接于 2026-07-12 经 curl 实测全部返回 HTTP 200；代码示例经 `rustc 1.99.0-nightly --edition 2024` 实测编译通过（stable 1.97.0 按预期报 E0658）。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((f16 / f128 预研半精度与四精度浮点类型))
+    一、动机与定位
+    二、类型语义
+      2.1 存储格式
+      2.2 字面量与转换
+    四、ABI 与稳定化阻塞项
+    五、反命题与边界分析
+    六、与既有概念的关系
+```

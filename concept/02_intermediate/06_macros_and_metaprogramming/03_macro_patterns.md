@@ -65,6 +65,7 @@
     - [核心推理链](#核心推理链)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -852,3 +853,22 @@ derive 宏（Macro）（为 struct/enum 派生 trait）、属性宏（修饰 ite
 - **对偶**：与泛型抽象相对（语法生成 vs 类型参数化），见 [Generics](../01_generics/01_generics.md)。
 - **组合**：与 [DSL and Embedding](02_dsl_and_embedding.md) 组合构建领域语言。
 - **依赖**：基础语法见 [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md)。
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((宏模式编译期代码生成的工程实践))
+    一、核心概念
+      1.1 宏的工程价值
+      1.2 声明宏 vs 过程宏
+      1.3 宏的卫生性工程
+    二、技术细节
+      2.1 DRY 代码生成
+      2.2 条件编译模式
+      2.3 编译期计算
+    三、宏模式矩阵
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+```

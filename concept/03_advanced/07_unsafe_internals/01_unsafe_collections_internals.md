@@ -62,6 +62,7 @@
     - [测验 2：Arc 的内存序](#测验-2arc-的内存序)
   - [认知路径](#认知路径)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -528,3 +529,17 @@ D. `Ordering::SeqCst`
 
 - **P1 学术/形式化**: [RustBelt: Securing the Foundations of the Rust Programming Language (POPL 2018)](https://dl.acm.org/doi/10.1145/3158154) · [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982)
 - **P2 生态/社区**: [docs.rs/libc — 生态权威 API 文档](https://docs.rs/libc) · [docs.rs/nix — 生态权威 API 文档](https://docs.rs/nix)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Unsafe 集合内部实现Vec、Arc、Mutex))
+    一、权威定义Definition
+      1.1 形式化定义
+      1.2 直觉解释
+    二、概念属性矩阵
+    五、反命题与边界分析
+      5.1 反命题树
+      5.2 边界极限
+```

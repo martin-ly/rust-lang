@@ -58,6 +58,10 @@
   - [五、选型决策树](#五选型决策树)
   - [六、常见陷阱](#六常见陷阱)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：Edition 2024：extern 块必须标 unsafe（rustc 1.97.0，--edition 2024 实测）](#反例edition-2024extern-块必须标-unsaferustc-1970--edition-2024-实测)
+    - [✅ 修正：为 extern 块补上 `unsafe` 关键字](#-修正为-extern-块补上-unsafe-关键字)
 
 ---
 
@@ -324,3 +328,33 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「将 Rust 集成到现有平台」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+## ⚠️ 反例与陷阱
+
+与 C/平台库集成时，FFI 声明是最容易在升级 Edition 2024 后突然报错的语法点。
+
+### 反例：Edition 2024：extern 块必须标 unsafe（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail
+extern "C" { // ❌ Edition 2024 起 extern 块必须标 unsafe
+    fn c_helper();
+}
+
+fn main() {
+    unsafe { c_helper(); }
+}
+```
+
+**实测错误**：`error: extern blocks must be unsafe（无错误码，实测输出原文）`。
+
+### ✅ 修正：为 extern 块补上 `unsafe` 关键字
+
+```rust
+unsafe extern "C" { // ✅ Edition 2024 语法
+    fn c_helper();
+}
+
+fn main() {
+    let _f: unsafe extern "C" fn() = c_helper; // 仅取函数指针，避免链接外部符号
+}
+```

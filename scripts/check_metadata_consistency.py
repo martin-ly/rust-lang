@@ -209,6 +209,14 @@ D5_WHITELIST_FILES = {
         "演进方向节：nightly 特性状态为版本演进上下文陈述",
     "concept/06_ecosystem/09_testing_and_quality/04_benchmarking.md":
         "#[bench]/criterion nightly 状态为工具链事实陈述（页面主题即基准测试手段）",
+    # ---- 2026-07-14 复核登记（S 轮 3 项）：S1 回填新增迁移/反命题/演进节，nightly 提及均为
+    # 工具链客观事实（nightly CI 观察窗口、build-std 仅 nightly、Prusti/Kani 绑定特定 nightly），逐项 grep 复核。
+    "concept/06_ecosystem/01_cargo/04_cargo_196_features.md":
+        "迁移建议节：迁移窗口留 nightly CI 观察为工程实践陈述，非稳定层依赖",
+    "concept/06_ecosystem/05_systems_and_embedded/02_cross_compilation.md":
+        "反命题树节：自定义 target 无 std 预编译须 nightly build-std 为工具链事实",
+    "concept/06_ecosystem/08_formal_verification/01_formal_ecosystem_tower.md":
+        "演进方向节：Prusti/Kani 绑定特定 nightly/rustc 版本为生态事实陈述",
 }
 
 

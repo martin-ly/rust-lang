@@ -44,6 +44,10 @@
     - [测验 4：为什么普通项目不应该设置 `RUSTC_BOOTSTRAP=1`？](#测验-4为什么普通项目不应该设置-rustc_bootstrap1)
   - [权威来源索引](#权威来源索引)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：引用未声明的模块/crate（rustc 1.97.0，--edition 2024 实测）](#反例引用未声明的模块craterustc-1970--edition-2024-实测)
+    - [✅ 修正：声明对应模块；外部 crate 需先加入依赖](#-修正声明对应模块外部-crate-需先加入依赖)
 
 ---
 
@@ -246,3 +250,43 @@ Stage 1 是用 stage0（旧 beta）编译当前源码得到的；Stage 2 是用 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [formal-land/coq-of-rust](https://github.com/formal-land/coq-of-rust) · [AeneasVerif/aeneas](https://github.com/AeneasVerif/aeneas)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((rustc 自举Bootstrap))
+    一、为什么要自举
+    二、Stage 模型
+    三、x.py / x 与
+    四、常用命令
+    五、cfgbootstrap 与
+      cfgbootstrap
+      RUSTC_BOOTSTRAP
+```
+
+## ⚠️ 反例与陷阱
+
+自举（bootstrap）构建中，stage 之间最容易出现“引用了尚未构建的 crate”这类解析失败，等价的 rustc 诊断如下。
+
+### 反例：引用未声明的模块/crate（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0433
+fn main() {
+    let _ = foo_crate::bar(); // ❌ 未声明的依赖/模块
+}
+```
+
+**实测错误**：`error[E0433]: cannot find module or crate`foo_crate`in this scope`。
+
+### ✅ 修正：声明对应模块；外部 crate 需先加入依赖
+
+```rust
+mod foo_crate { // ✅ 声明模块（外部 crate 则需在 Cargo.toml 添加依赖）
+    pub fn bar() -> i32 { 1 }
+}
+
+fn main() {
+    let _ = foo_crate::bar();
+}
+```

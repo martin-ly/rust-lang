@@ -218,3 +218,45 @@ pub extern "C" fn allocate_string() -> *mut u8 {
 
 - **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: A Semantic Foundation for Functional Verification of Rust Programs (PLDI 2022)](https://dl.acm.org/doi/10.1145/3519939.3523704)
 - **P2 生态/社区**: [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper) · [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 1.93 稳定特性))
+    零、特性 × 影响面 ×
+    二、版本上下文
+    三、主要稳定特性
+      3.1 MaybeUninit 增强 API
+      3.2 String / Vec 原始部分拆分
+      3.3 VecDeque 条件弹出
+    四、版本间对比
+    五、WebAssembly 与嵌入式影响
+```
+
+## ⚠️ 反例与陷阱
+
+控制流分析在各稳定版中保持一致：条件赋值后读取会被拒。
+
+### 反例：可能未初始化的绑定被使用（rustc 1.97.0，--edition 2024 实测）
+
+```rust,compile_fail,E0381
+fn main() {
+    let x: i32;
+    if false {
+        x = 1;
+    }
+    println!("{}", x); // ❌ 条件赋值后可能未初始化
+}
+```
+
+**实测错误**：`error[E0381]: used binding `x` is possibly-uninitialized`。
+
+### ✅ 修正：用 if 表达式保证所有路径都有值。
+
+```rust
+fn main() {
+    let x: i32 = if false { 1 } else { 0 }; // ✅ 所有路径都有值
+    println!("{}", x);
+}
+```

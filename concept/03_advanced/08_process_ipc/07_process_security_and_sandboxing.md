@@ -261,3 +261,24 @@ flowchart TD
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 进程安全与沙箱))
+    1. 概念定义
+    2. 权限最小化
+      2.1 用户/组降级
+      2.2 Linux Capabilities
+    3. 资源限制
+      3.1 rlimit
+      3.2 cgroups
+    4. 隔离机制
+      4.1 Linux Namespaces
+      4.2 文件系统隔离
+      4.3 网络隔离
+    5. 系统调用过滤
+      5.1 Seccomp
+      5.2 强制访问控制
+```

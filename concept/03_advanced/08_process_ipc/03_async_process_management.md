@@ -424,3 +424,17 @@ fn countdown(n: u32) -> Pin<Box<dyn Future<Output = ()>>> {
     })
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 异步进程管理))
+    1. 为什么需要异步进程管理
+    2. tokioprocess 核心 API
+    3. 异步生命周期管理
+      3.1 超时控制
+      3.2 异步通信
+    4. 结构化并发
+    5. 取消与清理
+```

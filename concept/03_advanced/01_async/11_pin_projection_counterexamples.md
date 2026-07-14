@@ -47,6 +47,7 @@
   - [七、判定树与检查清单](#七判定树与检查清单)
   - [八、相关概念](#八相关概念)
   - [九、来源](#九来源)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 一、认知路径
 
@@ -439,3 +440,16 @@ unsafe 投射的 SAFETY 注释检查清单（每条对应一个 §3 反例）：
 - [The Rustonomicon](https://doc.rust-lang.org/nomicon/)（`mem::replace`/析构顺序/`Pin` 的 unsafe 语义，2026-07-12 实测 200）
 - [std docs — `std::pin`](https://doc.rust-lang.org/std/pin/index.html)（pinning 不变的官方表述）
 - 站内交叉引用：[Async/Await](01_async.md) · [Async 高级主题](02_async_advanced.md) · [Future 与 Executor 机制](04_future_and_executor_mechanisms.md) · [Async 取消安全](05_async_cancellation_safety.md) · [Async 边界全景](06_async_boundary_panorama.md) · [Pin 与 Unpin](08_pin_unpin.md) · [Stream 代数与背压](09_stream_algebra_and_backpressure.md) · [Executor 公平性与调度](10_executor_fairness_and_scheduling.md)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Pin 投射反例集unsafe 结构投射的 UB))
+    二、投射问题整体不动 ≠ 字段可动
+    五、正确模式全集pin-project
+    六、正确模式pin-project-lite
+      6.1 pin-project-lite声明式宏等价
+      6.2 手写 unsafe 何时可靠只投射到
+    九、来源
+```

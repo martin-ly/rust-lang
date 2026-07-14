@@ -276,3 +276,20 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/bindgen — 生态权威 API 文档（C/C++ 接口绑定的 Rust 侧生态工具）](https://docs.rs/bindgen)（2026-07-12 验证 HTTP 200）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((C++ vs Rust构造、运算符、RTTI、友元))
+    一、核心命题
+    二、构造与初始化
+      2.1 C++构造函数与初始化列表
+      2.2 Rust结构体字面量 + new 约定
+    三、运算符重载
+    四、RTTI
+    五、友元 vs 模块可见性
+      5.1 C++ friend
+      5.2 Rust 模块可见性
+      5.3 对比
+```

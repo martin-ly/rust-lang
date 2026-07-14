@@ -263,10 +263,9 @@ quadrantChart
 
 ## 演进方向
 
-形式化生态的演进沿两条线展开：工具兼容性（核心 crate 的 MSRV/Edition 支持矩阵决定验证链能否跟随 stable Rust 演进——Prusti/Kani 都绑定特定 nightly 或 rustc 版本，升级滞后是常态）；工程集成（Kani + GitHub Actions 把证明 harness 变成 CI 检查项，配合 proof cache 控制时长）。趋势判断：验证正在从“研究项目”走向“安全关键模块的 CI 标配”，但全代码库验证仍不经济，按风险选模块是现实策略。、Wasmtime 形式化语义与 Rust 实现一致性与形式化视角 vs 传统功能分类映射。
+形式化生态的演进沿两条线展开：工具兼容性（核心 crate 的 MSRV/Edition 支持矩阵决定验证链能否跟随 stable Rust 演进——Prusti/Kani 都绑定特定 nightly 或 rustc 版本，升级滞后是常态）；工程集成（Kani + GitHub Actions 把证明 harness 变成 CI 检查项，配合 proof cache 控制时长）。趋势判断：验证正在从“研究项目”走向“安全关键模块的 CI 标配”，但全代码库验证仍不经济，按风险选模块是现实策略。
 
 ### 8.1 核心 Crate MSRV 与 Edition 兼容性矩阵
->
 
 | Crate | 最新版本 | MSRV | Edition | 关键依赖 | 形式化根基 |
 |:---|:---:|:---:|:---:|:---|:---|
@@ -623,4 +622,17 @@ fn main() {
     let s: Box<dyn Shape> = Box::new(Circle(1.0));
     println!("{}", s.area());
 }
+```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Formal Ecosystem))
+    权威定义
+      Wikipedia 权威定义
+    一、基础设施层异步运行时与可组合内核
+    二、Web 层生产标准与类型安全路由
+    三、数据层类型安全的数据库与序列化
+    四、服务通信层协议契约的形式化
 ```
