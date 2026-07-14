@@ -459,7 +459,7 @@ impl Stream for MyInterval {
     type Item = Instant;
 
     fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
-        let this = self.project();
+        let mut this = self.project();
         this.inner.poll_tick(cx).map(|_| Some(Instant::now()))
     }
 }

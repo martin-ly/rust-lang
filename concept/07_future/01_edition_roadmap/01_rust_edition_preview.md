@@ -56,10 +56,10 @@
 
 ```rust
 // 2021 Edition：需要显式 async 块
-let f = |x| async move { x + 1 };
+let f = |x: i32| async move { x + 1 };
 
 // 2024 Edition：async 闭包语法
-let f = async |x| x + 1;
+let f = async |x: i32| x + 1;
 ```
 
 ### `if let` 临时作用域

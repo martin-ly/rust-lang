@@ -213,12 +213,15 @@ pub struct Uart<STATE> {
 }
 
 impl Uart<Uninitialized> {
-    pub fn new() -> Self { /* ... */ }
-    pub fn init(self, baud: u32) -> Uart<Initialized> { /* ... */ }
+    pub fn new() -> Self { Self { _state: PhantomData } }
+    pub fn init(self, baud: u32) -> Uart<Initialized> {
+        let _ = baud; // 配置波特率
+        Uart { _state: PhantomData }
+    }
 }
 
 impl Uart<Initialized> {
-    pub fn send(&mut self, data: &[u8]) { /* ... */ }
+    pub fn send(&mut self, data: &[u8]) { let _ = data; /* 发送数据 */ }
 }
 ```
 

@@ -257,7 +257,7 @@ impl Person {
 
 ```rust
 // 重用 Vec 减少分配
-let mut buffer = Vec::with_capacity(1024);
+let mut buffer: Vec<u8> = Vec::with_capacity(1024);
 // ... 使用 buffer
 buffer.clear(); // 重用而不是重新分配
 ```

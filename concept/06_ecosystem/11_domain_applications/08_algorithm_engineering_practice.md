@@ -272,7 +272,7 @@ impl ExternalSort {
         let file = File::create(&chunk_file)?;
         let mut writer = BufWriter::new(file);
 
-        for line in chunk {
+        for line in chunk.iter() {
             writeln!(writer, "{}", line)?;
         }
 
@@ -1238,6 +1238,8 @@ impl CircuitBreaker {
 ### 3.2 降级策略
 
 ```rust
+# use std::sync::Arc;
+# use std::sync::Mutex;
 /// 服务降级管理器
 pub struct DegradationManager {
     levels: Vec<DegradationLevel>,
@@ -1321,6 +1323,9 @@ fn get_static_recommendations() -> Vec<String> {
 ### 3.3 监控与告警
 
 ```rust
+# use std::sync::Arc;
+# use std::sync::Mutex;
+# use std::time::Duration;
 use std::time::Instant;
 
 /// 性能指标收集器
@@ -1622,6 +1627,8 @@ impl AlgorithmConfig {
 ### 5.2 灰度发布
 
 ```rust
+# use std::sync::Arc;
+# use std::sync::Mutex;
 /// 灰度发布管理器
 pub struct GrayReleaseManager {
     gray_ratio: Arc<Mutex<f64>>,  // 灰度比例 [0, 1]
@@ -1865,6 +1872,7 @@ impl CollaborativeFilteringEngine {
 ### 6.2 实时排行榜
 
 ```rust
+# use std::collections::HashMap;
 use std::collections::BinaryHeap;
 use std::cmp::Reverse;
 
@@ -1919,6 +1927,8 @@ impl Leaderboard {
 ### 6.3 分布式限流
 
 ```rust
+# use std::sync::Arc;
+# use std::sync::Mutex;
 use std::time::{Duration, Instant};
 
 /// 令牌桶限流器

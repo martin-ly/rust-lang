@@ -1170,7 +1170,7 @@ async fn risky_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Error>
 > 3. **异步（Async）事件触发**: 使用 DynamoDB Streams 触发 Lambda，而非在函数内直接发消息
 >
 > ```rust
-> / ✅ 正确: 使用 DynamoDB Streams 解耦写入和事件发布
+> // ✅ 正确: 使用 DynamoDB Streams 解耦写入和事件发布
 > // DynamoDB Stream → Lambda（事件处理器）→ SQS
 > // 这样即使初始 Lambda 超时，DynamoDB Streams 仍能保证事件最终传递
 > ```

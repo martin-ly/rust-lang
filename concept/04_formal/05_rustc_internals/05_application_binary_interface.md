@@ -257,8 +257,8 @@ pub extern "C" fn plugin_init() -> i32 { 0 } // ❌ 符号重复定义
 ### ✅ 修正：唯一导出名
 
 ```rust
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn plugin_init() {}
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn plugin_init_v2() -> i32 { 0 }
 ```

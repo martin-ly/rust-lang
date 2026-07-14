@@ -8,7 +8,7 @@
 >
 > ```rust
 > // vec![1, 2, 3] 展开为：
-> { let mut temp_vec = Vec::new(); temp_vec.push(1); temp_vec.push(2); temp_vec.push(3); temp_vec }
+> let v = { let mut temp_vec = Vec::new(); temp_vec.push(1); temp_vec.push(2); temp_vec.push(3); temp_vec };
 > ```
 >
 > **解析**：`vec!` 是 Rust 标准库中的**声明宏**（declarative macro），使用 `macro_rules!` 定义。

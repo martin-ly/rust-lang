@@ -132,7 +132,7 @@ let len = '世'.encode_utf8(&mut buf).len();
 ```rust
 use std::fmt;
 
-let f = fmt::from_fn(|f, _| write!(f, "custom"));
+let f = fmt::from_fn(|f| write!(f, "custom"));
 println!("{}", f);
 ```
 

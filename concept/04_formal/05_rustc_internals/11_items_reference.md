@@ -138,7 +138,8 @@ trait Container<T> {
 ## 七、外部块（Extern Blocks）
 
 ```rust
-extern "C" {
+# use std::os::raw::c_int;
+unsafe extern "C" {
     fn c_function(x: i32) -> i32;
     static C_GLOBAL: c_int;
 }

@@ -3135,6 +3135,7 @@ async fn process() {
 **题目**: 以下代码存在什么潜在问题？
 
 ```rust
+# use tokio::io::AsyncWriteExt;
 use tokio::time::{sleep, Duration};
 
 async fn risky_operation() {

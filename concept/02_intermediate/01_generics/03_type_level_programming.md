@@ -400,8 +400,8 @@ fn hlist_operations() {
     };
 
     // 编译时类型安全的索引
-    let first: &i32 = list.at::<Zero>();     // Index 0
-    let second: &str = list.tail.at::<Zero>();  // Index 1
+    let first: &i32 = list.at();     // Index 0
+    let second: &str = list.tail.at();  // Index 1
 
     println!("{} {}", first, second);
 }

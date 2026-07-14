@@ -157,6 +157,7 @@ fn main() {
 ### 4.1 Stream trait：Rust 的拉取式流
 
 ```rust
+# use futures::StreamExt;
 use futures::Stream;
 
 // Stream = 异步版本的 Iterator

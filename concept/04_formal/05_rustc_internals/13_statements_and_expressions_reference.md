@@ -98,7 +98,7 @@ Rust 表达式按语义可分为：
 
 ```rust
 let add = |a: i32, b: i32| -> i32 { a + b };
-let add2 = |a, b| a + b; // 类型可推断
+let add2 = |a: i32, b: i32| a + b; // 类型可由标注推断
 ```
 
 ### Match 表达式

@@ -506,7 +506,7 @@ Rust 1.91 对内存分配器进行了优化，特别是在处理小对象时：
 ```rust
 // 每次分配都需要系统调用，性能较低
 for i in 0..1000 {
-    let vec = Vec::with_capacity(16); // 每次分配约 16 bytes
+    let vec: Vec<u8> = Vec::with_capacity(16); // 每次分配约 16 bytes
     // 使用后释放
 }
 ```
@@ -695,7 +695,7 @@ const BUFFER_REF: &usize = &BUFFER_SIZE;
 
 fn create_buffers() -> Vec<Vec<u8>> {
     let mut buffers = Vec::new();
-    for _ in 0..*TOTAL_BUFFERS {
+    for _ in 0..TOTAL_BUFFERS {
         buffers.push(vec![0u8; *BUFFER_REF]);
     }
     buffers
@@ -1644,6 +1644,7 @@ use std::ops::ControlFlow;
 // ControlFlow 只能携带简单的类型
 fn process(data: &[i32]) -> ControlFlow<(), i32> {
     // 错误信息较少
+    unimplemented!()
 }
 ```
 
@@ -1670,6 +1671,7 @@ fn validate_pipeline(data: &[i32]) -> ControlFlow<String, i32> {
 #### 2. 早期退出循环
 
 ```rust
+# use std::ops::ControlFlow;
 fn early_exit_loop(data: &[i32], max: i32) -> ControlFlow<String, Vec<i32>> {
     let mut result = Vec::new();
 
@@ -1689,6 +1691,7 @@ fn early_exit_loop(data: &[i32], max: i32) -> ControlFlow<String, Vec<i32>> {
 ### 实际应用
 
 ```rust
+# use std::ops::ControlFlow;
 // 多级验证流程
 fn multi_level_validation(data: &[i32]) -> ControlFlow<String, i32> {
     // 第一级：检查长度

@@ -344,10 +344,11 @@ def block_edition(block: dict) -> str:
 
 
 def rustc_compile(src: str, tmpdir: Path, tag: str, externs: list[tuple[str, Path]],
-                  crate_type: str = "bin", edition: str = "2024") -> subprocess.CompletedProcess:
+                  crate_type: str = "bin", edition: str = "2024",
+                  emit: str = "metadata") -> subprocess.CompletedProcess:
     f = tmpdir / f"{tag}.rs"
     f.write_text(src, encoding="utf-8")
-    cmd = ["rustc", "--edition", edition, "--emit=metadata", "--crate-type", crate_type,
+    cmd = ["rustc", "--edition", edition, f"--emit={emit}", "--crate-type", crate_type,
            "-o", str(tmpdir / f"{tag}.out"), str(f)]
     for name, art in externs:
         cmd += ["--extern", f"{name}={art}"]
@@ -395,7 +396,7 @@ def compile_dep_one(block: dict, tmpdir: Path) -> dict:
     lib_src = unhide_lines(block["code"])
     ed = block_edition(block)
     h = hashlib.sha1((block["file"] + str(block["line"]) + src).encode()).hexdigest()[:12]
-    rounds = min(max(len(v) for v in cands.values()), 4)
+    rounds = min(max(len(v) for v in cands.values()), 8)
     last: subprocess.CompletedProcess | None = None
     try:
         for k in range(rounds):
@@ -429,6 +430,12 @@ def verify_compile_fail(block: dict, tmpdir: Path) -> dict:
             r2 = rustc_compile(unhide_lines(block["code"]), tmpdir, f"c_{h}_lib", [], "lib", ed)
             if r2.returncode != 0:
                 r = r2  # lib 模式下确实失败，以 lib 诊断为准
+        if r.returncode == 0:
+            # --emit=metadata 会跳过常量求值阶段的 deny lint（如 unconditional_panic：
+            # 常量溢出/越界索引在全量编译下确实失败）。追加 lib 全编译回退，消除误报。
+            r3 = rustc_compile(src, tmpdir, f"c_{h}_full", [], "lib", ed, emit="link")
+            if r3.returncode != 0:
+                r = r3
     except subprocess.TimeoutExpired:
         return {**block, "status": "timeout", "stderr": f"rustc timeout {RUSTC_TIMEOUT}s"}
     if r.returncode == 0:

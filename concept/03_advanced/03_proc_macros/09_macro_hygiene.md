@@ -276,6 +276,7 @@ quote! {
 **效果**:
 
 ```rust
+# macro_rules! my_macro { ($($t:tt)*) => {} }
 // 调用
 my_macro!();
 

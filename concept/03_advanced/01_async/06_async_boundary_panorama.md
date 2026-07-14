@@ -216,6 +216,7 @@ Rust 的取消是**被动**的：executor 不再 poll 一个 Future，Future 在
 ### 5.2 反例
 
 ```rust
+# macro_rules! select { ($($t:tt)*) => {} }
 loop {
     select! {
         line = reader.next_line() => {   // ❌ 取消不安全：

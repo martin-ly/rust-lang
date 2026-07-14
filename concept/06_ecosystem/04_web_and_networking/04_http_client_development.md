@@ -117,20 +117,20 @@ fn interpret_status(code: u16) -> &'static str {
 ```rust
 use tokio::time::{sleep, Duration};
 
-async fn fetch_with_retry(url: &str, max_retries: u32) -> Result<String, reqwest::Error> {
+async fn fetch_with_retry(url: &str, max_retries: u32) -> Result<String, Box<dyn std::error::Error>> {
     let client = reqwest::Client::new();
     for attempt in 0..max_retries {
         match client.get(url).send().await {
-            Ok(resp) if resp.status().is_success() => return resp.text().await,
+            Ok(resp) if resp.status().is_success() => return Ok(resp.text().await?),
             Ok(resp) => eprintln!("服务器错误: {}", resp.status()),
             Err(e) => eprintln!("请求失败: {}", e),
         }
         sleep(Duration::from_millis(500 * 2_u64.pow(attempt))).await;
     }
-    Err(reqwest::Error::from(std::io::Error::new(
+    Err(std::io::Error::new(
         std::io::ErrorKind::Other,
         "达到最大重试次数",
-    )))
+    ).into())
 }
 ```
 

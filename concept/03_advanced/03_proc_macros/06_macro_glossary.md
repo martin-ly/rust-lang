@@ -432,6 +432,7 @@ let result = using_a!(a + a); // 26，使用外部 a
 宏被调用的位置。
 
 ```rust
+# macro_rules! my_macro { ($($t:tt)*) => {} }
 // 这里是 call site
 my_macro!(some_input);
 ```
@@ -451,7 +452,7 @@ my_macro!(some_input);
 ```rust
 // 这里是 definition site
 macro_rules! my_macro {
-    // ...
+    () => {};
 }
 ```
 
@@ -506,6 +507,7 @@ use proc_macro2::TokenStream;
 
 fn my_helper(input: TokenStream) -> TokenStream {
     // 可以在单元测试中调用
+    input
 }
 ```
 
@@ -586,6 +588,7 @@ LetStmt {
 **示例**:
 
 ```rust
+# macro_rules! html { ($($t:tt)*) => {} }
 html! {
     <div class="container">
         <h1>"Hello, World!"</h1>

@@ -152,8 +152,11 @@ pub async fn async_closure_example() {
     let urls = vec!["https://example.com", "https://rust-lang.org"];
 
     // ✅ 异步闭包自动捕获
-    let futures = urls.iter().map(|&url| async move {
-        client.get(url).send().await
+    let futures = urls.iter().map(|&url| {
+        let client = client.clone();
+        async move {
+            client.get(url).send().await
+        }
     });
 
     let results = futures::future::join_all(futures).await;
@@ -488,8 +491,11 @@ pub async fn process_http_responses(
     let client = reqwest::Client::new();
 
     let results = futures::stream::iter(urls)
-        .map(|url| async {
-            client.get(&url).send().await
+        .map(|url| {
+            let client = client.clone();
+            async move {
+                client.get(&url).send().await
+            }
         })
         .buffered(10) // 并发10个请求
         .try_filter_map(|resp| async move {

@@ -287,10 +287,10 @@ Rust 的 `async fn` 是编译器自动执行的 CPS 变换：
 
 ```rust
 // 你写的代码
-async fn fetch_data(url: &str) -> String {
-    let response = reqwest::get(url).await;   // 这里"暂停"，但线程不阻塞
-    let text = response.text().await;          // 再次"暂停"
-    text
+async fn fetch_data(url: &str) -> Result<String, reqwest::Error> {
+    let response = reqwest::get(url).await?;   // 这里"暂停"，但线程不阻塞
+    let text = response.text().await?;          // 再次"暂停"
+    Ok(text)
 }
 ```
 

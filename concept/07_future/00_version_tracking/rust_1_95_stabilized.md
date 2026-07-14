@@ -205,10 +205,10 @@ let m: &mut String = unsafe { mut_ptr.as_mut_unchecked() };
 use std::alloc::Layout;
 
 let layout = Layout::new::<i32>();
-let dangling: *mut u8 = layout.dangling_ptr();
+let dangling: *mut u8 = layout.dangling_ptr().as_ptr();
 let repeated = layout.repeat(10).unwrap().0;
 let packed = layout.repeat_packed(10);
-let extended = layout.extend_packed(Layout::new::<u8>()).unwrap().0;
+let extended = layout.extend_packed(Layout::new::<u8>()).unwrap();
 ```
 
 ### 2.6 提示 — `cold_path`
@@ -309,6 +309,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 | `ControlFlow::is_continue` | `core::ops::ControlFlow` |
 
 ```rust
+# use std::ops::ControlFlow;
 const fn check_control(cf: ControlFlow<i32, ()>) -> bool {
     cf.is_break()
 }

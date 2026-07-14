@@ -85,7 +85,7 @@ impl CountMinSketch {
     }
 }
 
-pub fn top_k_frequencies(items: &[&str], k: usize) -> Vec<(&str, u64)> {
+pub fn top_k_frequencies<'a>(items: &'a [&'a str], k: usize) -> Vec<(&'a str, u64)> {
     use std::collections::HashMap;
     let mut exact: HashMap<&str, u64> = HashMap::new();
     for item in items {

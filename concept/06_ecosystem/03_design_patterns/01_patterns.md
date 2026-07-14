@@ -1635,7 +1635,7 @@ impl std::fmt::Display for MyVec {
 
 ### 10.5 边界测试：访问者模式与 Rust 的枚举匹配（设计权衡）
 
-```rust,compile_fail
+```rust
 enum Expr {
     Lit(i32),
     Add(Box<Expr>, Box<Expr>),

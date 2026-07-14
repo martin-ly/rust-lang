@@ -126,6 +126,7 @@ VTable for dyn Trait:
 | 减少编译时间 | 非泛型入口 + 内部泛型包装 | 降低单态化点 |
 
 ```rust
+# trait MyTrait {}
 // 减少膨胀：公共非泛型入口 + 小型泛型包装
 pub fn process_value(value: &dyn MyTrait) {
     // 非泛型主体

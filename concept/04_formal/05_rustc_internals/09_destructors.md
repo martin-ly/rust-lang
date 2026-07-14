@@ -65,6 +65,7 @@ Drop scope 是嵌套的。当同时离开多个 scope（如函数返回）时，
 所有函数参数位于整个函数体的作用域内，因此是最后 drop 的。模式绑定在参数 drop 之前 drop。
 
 ```rust
+# struct PrintOnDrop;
 fn patterns_in_parameters(
     (x, _): (PrintOnDrop, PrintOnDrop),
     (_, y): (PrintOnDrop, PrintOnDrop),

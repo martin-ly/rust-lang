@@ -31,6 +31,7 @@
 ## 📑 目录
 
 - [Unsafe 参考（Unsafe Reference）](#unsafe-参考unsafe-reference)
+  - [📑 目录](#-目录)
   - [认知路径](#认知路径)
   - [反命题决策树](#反命题决策树)
   - [一、`unsafe` 关键字的四种用法](#一unsafe-关键字的四种用法)
@@ -47,8 +48,8 @@
   - [反向推理](#反向推理)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
-  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考-international-authority-referencesp1-学术-p2-生态)
-  - [⚠️ 反例与陷阱：对 `static mut` 取引用（Edition 2024 硬错误）](#-反例与陷阱对-static-mut-取引用edition-2024-硬错误)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [⚠️ 反例与陷阱：对 `static mut` 取引用（Edition 2024 硬错误）](#️-反例与陷阱对-static-mut-取引用edition-2024-硬错误)
 
 ---
 

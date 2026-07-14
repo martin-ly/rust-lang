@@ -33,6 +33,7 @@
 ## 📑 目录
 
 - [宏调试与诊断](#宏调试与诊断)
+  - [📑 目录](#-目录)
   - [一、核心定位](#一核心定位)
   - [二、使用 cargo expand](#二使用-cargo-expand)
     - [2.1 安装与基础用法](#21-安装与基础用法)
@@ -46,7 +47,7 @@
     - [4.3 proc-macro-error 友好错误](#43-proc-macro-error-友好错误)
   - [五、编译期性能分析](#五编译期性能分析)
     - [5.1 cargo build --timings](#51-cargo-build---timings)
-    - [5.2 RUSTC_LOG](#52-rustc_log)
+    - [5.2 RUSTC\_LOG](#52-rustc_log)
     - [5.3 测量宏展开耗时](#53-测量宏展开耗时)
   - [六、编译器回调（高级）](#六编译器回调高级)
   - [七、调试检查清单](#七调试检查清单)
@@ -57,7 +58,7 @@
   - [过渡段](#过渡段)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
-  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考-international-authority-referencesp1-学术-p2-生态)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ---
 

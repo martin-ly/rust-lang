@@ -25,11 +25,12 @@
 ## 📑 目录
 
 - [Async Closures（异步闭包）](#async-closures异步闭包)
+  - [📑 目录](#-目录)
   - [1. 为什么需要 async closures？](#1-为什么需要-async-closures)
   - [2. 语法与捕获语义](#2-语法与捕获语义)
     - [2.1 基础语法](#21-基础语法)
     - [2.2 捕获模式](#22-捕获模式)
-    - [2.3 与 `|x| async move {}` 的对比](#23-与-x-async-move-的对比)
+    - [2.3 与 `|x| async move {}` 的对比](#23-与-x-async-move--的对比)
     - [2.4 异步可调用体谱系](#24-异步可调用体谱系)
   - [3. AsyncFn trait 家族](#3-asyncfn-trait-家族)
     - [3.1 trait 层级](#31-trait-层级)
@@ -45,7 +46,7 @@
     - [5.2 Send 约束与 RTN](#52-send-约束与-rtn)
     - [5.3 递归调用](#53-递归调用)
     - [5.4 与 `tokio::spawn` 的生命周期冲突](#54-与-tokiospawn-的生命周期冲突)
-    - [5.5 `async move ||` 的 FnOnce 语义](#55-async-move-的-fnonce-语义)
+    - [5.5 `async move ||` 的 FnOnce 语义](#55-async-move--的-fnonce-语义)
   - [6. 版本演进与前沿](#6-版本演进与前沿)
   - [7. 与官方资源的映射](#7-与官方资源的映射)
   - [8. 认知路径](#8-认知路径)

@@ -354,6 +354,11 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 ### 3.1 类型 (Type)
 
 ```rust
+# struct TypePath;
+# struct TypeReference;
+# struct TypeTuple;
+# struct TypeArray;
+# struct TypeSlice;
 pub enum Type {
     Path(TypePath),           // std::vec::Vec
     Reference(TypeReference), // &T, &mut T
@@ -391,6 +396,10 @@ fn get_inner_type(ty: &Type) -> Option<&Type> {
 ### 3.2 表达式 (Expr)
 
 ```rust
+# struct ExprBinary;
+# struct ExprCall;
+# struct ExprIf;
+# struct ExprMatch;
 pub enum Expr {
     Binary(ExprBinary),    // a + b
     Call(ExprCall),        // f(x)
@@ -405,6 +414,9 @@ pub enum Expr {
 ### 3.3 模式 (Pat)
 
 ```rust
+# struct PatIdent;
+# struct PatTuple;
+# struct PatStruct;
 pub enum Pat {
     Ident(PatIdent),      // x
     Tuple(PatTuple),      // (x, y)
@@ -650,6 +662,7 @@ let output = quote! {
 **更复杂的重复**:
 
 ```rust
+# use quote::quote;
 let names = vec![quote!(x), quote!(y), quote!(z)];
 let types = vec![quote!(i32), quote!(f64), quote!(String)];
 

@@ -180,6 +180,7 @@ macro_rules! debug_macro {
 **方法 3**: 逐步简化
 
 ```rust
+# macro_rules! my_macro { ($($t:tt)*) => {} }
 // 1. 先用简单输入测试
 my_macro!(x);
 
@@ -565,7 +566,7 @@ macro_rules! count {
 // 库中
 #[macro_export]
 macro_rules! my_macro {
-    // ...
+    () => {};
 }
 ```
 
@@ -616,7 +617,7 @@ my_crate = "1.0"
 
    ```rust
    // 使用完整路径
-   ::std::vec::Vec::new()
+   let _v: Vec<i32> = ::std::vec::Vec::new();
    ```
 
 ---
@@ -630,6 +631,7 @@ my_crate = "1.0"
 **步骤 1**: 设计语法
 
 ```rust
+# macro_rules! html { ($($t:tt)*) => {} }
 // 目标语法
 html! {
     <div class="container">

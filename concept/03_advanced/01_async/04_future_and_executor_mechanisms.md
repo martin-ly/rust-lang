@@ -239,6 +239,7 @@ Executor 调用 future.poll(cx)
 **Context 定义**:
 
 ```rust
+# use std::task::Waker;
 pub struct Context<'a> {
     waker: &'a Waker,
     // ... 其他字段
@@ -945,10 +946,10 @@ where
 // 使用
 #[tokio::main]
 async fn main() {
-    let (future, cancel) = CancellableFuture::new(async {
+    let (future, cancel) = CancellableFuture::new(Box::pin(async {
         tokio::time::sleep(tokio::time::Duration::from_secs(5)).await;
         "Done"
-    });
+    }));
 
     tokio::spawn(async move {
         tokio::time::sleep(tokio::time::Duration::from_secs(2)).await;
@@ -1018,6 +1019,7 @@ impl<F: Future> Future for MyFuture<F> {
 **1. 避免不必要的 `Box`**:
 
 ```rust
+# use std::pin::Pin;
 // ❌ 不必要的堆分配
 fn bad() -> Pin<Box<dyn Future<Output = i32>>> {
     Box::pin(async { 42 })
