@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 495,
-    "generated_at": "2026-07-14T00:09:28.315105+00:00"
+    "generated_at": "2026-07-14T00:39:31.956941+00:00"
   },
   "files": [
     {
@@ -20275,7 +20275,7 @@
       "layer": "L2",
       "title": "内部可变性：编译期规则的运行时逃逸",
       "positioning": "深入分析 Rust **内部可变性**（Interior Mutability）模式",
-      "line_count": 931,
+      "line_count": 937,
       "theorem_chains": [
         {
           "text": "| 独占访问即可满足可变性 | 外部可变性（`&mut`），编译期安全零开销 | §4.1 反命题树 TRUE | 共享所有权下 ⟹ 编译拒绝 |",
@@ -21572,7 +21572,7 @@
       "layer": "L2",
       "title": "错误处理深入：从 Result 到自定义错误生态",
       "positioning": "深入分析 Rust **错误处理（Error Handling）机制**——从 `Result`/`Option` 的组合子到 `?` 运算符、错误转换、自定义错误类型和错误处理框架，揭示 Rust 如何将错误处理融入类型系统（Type System）实现编译期安全。",
-      "line_count": 818,
+      "line_count": 820,
       "theorem_chains": [
         {
           "text": "| 错误处理深入：从 Result 到自定义错误生态 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -43921,7 +43921,7 @@
       "layer": "L5",
       "title": "Rust vs Kotlin：静态安全的两种路径",
       "positioning": "对比分析 **Rust** 与 **Kotlin** 的设计哲学——从空安全、并发模型到平台支持，揭示静态类型语言如何在不同生态中实现安全与表达力的平衡。",
-      "line_count": 803,
+      "line_count": 819,
       "theorem_chains": [
         {
           "text": "| Rust vs Kotlin：静态安全的两种路径 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -44024,7 +44024,7 @@
       "layer": "L5",
       "title": "Rust vs Scala：类型系统的两种哲学",
       "positioning": "对比分析 **Rust** 与 **Scala** 的设计哲学——从类型推断（Type Inference）、模式匹配（Pattern Matching）到并发模型，揭示两种语言如何在类型表达力和运行时（Runtime）表示之间做出选择。",
-      "line_count": 764,
+      "line_count": 779,
       "theorem_chains": [
         {
           "text": "| Rust vs Scala：类型系统（Type System）的两种哲学 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -44454,7 +44454,7 @@
       "layer": "L5",
       "title": "Rust 安全保证的边界条件全景（Safety Boundary Panorama）",
       "positioning": "本文件汇总 Rust 所有**编译期安全保证**的边界条件、失效场景和反例，形成完整的\"安全 ⇄ 不安全\"边界地图。",
-      "line_count": 1030,
+      "line_count": 1047,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -45191,7 +45191,7 @@
       "layer": "L6",
       "title": "Rust 编译器内部原理",
       "positioning": "",
-      "line_count": 902,
+      "line_count": 918,
       "theorem_chains": [
         {
           "text": "| Compiler Internals（Rust 编译器内部原理） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -45448,7 +45448,7 @@
       "layer": "L6",
       "title": "Rustdoc 1.96–1.97 变更",
       "positioning": "",
-      "line_count": 340,
+      "line_count": 360,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -45924,7 +45924,7 @@
       "layer": "L6",
       "title": "Cargo Script 脚本化 Rust",
       "positioning": "将 Rust 从\"项目级语言\"扩展为\"脚本级语言\"的工程机制，使单文件可执行成为一等公民。",
-      "line_count": 760,
+      "line_count": 776,
       "theorem_chains": [
         {
           "text": "| Cargo Script：单文件 Rust 程序 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -46178,7 +46178,7 @@
       "layer": "L6",
       "title": "Cargo 1.96 新特性与工具链变更",
       "positioning": "",
-      "line_count": 288,
+      "line_count": 308,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -46615,7 +46615,7 @@
       "layer": "L6",
       "title": "Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223",
       "positioning": "帮助开发者理解 Rust 1.96.0 中 Cargo 的两个 CVE，建立“升级 + 审计 + 验证”的供应链安全习惯。",
-      "line_count": 537,
+      "line_count": 557,
       "theorem_chains": [
         {
           "text": "| 第三方 registry 允许 symlink ⟹ CVE-2026-5223 风险 | 旧 Cargo 会越界解压 | 必须升级并审计 tarball | 高 |",
@@ -46989,7 +46989,7 @@
       "layer": "L6",
       "title": "Cargo build-std",
       "positioning": "",
-      "line_count": 357,
+      "line_count": 376,
       "theorem_chains": [
         {
           "text": "| 源码构建 std ⟹ 自定义目标支持 | 编译目标平台未预编译的标准库 | 支持新硬件与操作系统 |",
@@ -47306,7 +47306,7 @@
       "layer": "L6",
       "title": "Design Patterns（设计模式）",
       "positioning": "",
-      "line_count": 3185,
+      "line_count": 3200,
       "theorem_chains": [
         {
           "text": "| **RAII** | 资源泄漏 | 确定性资源管理 ⟹ `Drop`自动调用 | 所有权（Ownership）+作用域 | 边界：`mem::forget`、引用（Reference）循环泄漏 |",
@@ -48404,7 +48404,7 @@
       "layer": "L6",
       "title": "微服务架构模式 (Microservice Architecture Patterns)",
       "positioning": "从系统架构视角梳理 Rust 在微服务场景中的核心模式——服务发现、熔断、Saga、CQRS、事件溯源——揭示 Rust 的类型安全与零成本抽象（Zero-Cost Abstraction）如何支撑高可靠分布式系统。",
-      "line_count": 1018,
+      "line_count": 1035,
       "theorem_chains": [
         {
           "text": "| 微服务架构模式 (Microservice Architecture Patterns) 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -48751,7 +48751,7 @@
       "layer": "L6",
       "title": "CQRS & Event Sourcing（命令查询职责分离与事件溯源）",
       "positioning": "",
-      "line_count": 1540,
+      "line_count": 1563,
       "theorem_chains": [
         {
           "text": "| CQRS & Event Sourcing（命令查询职责分离与事件溯源） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -48946,7 +48946,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 36,
+      "matrix_rows": 41,
       "pre_post": {
         "pre": [
           "[Async](../../03_advanced/01_async/01_async.md) · 事件驱动架构 · [泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md)",
@@ -48966,7 +48966,7 @@
       "layer": "L6",
       "title": "Architecture Patterns（架构设计模式）",
       "positioning": "",
-      "line_count": 1342,
+      "line_count": 1364,
       "theorem_chains": [
         {
           "text": "| Architecture Patterns（架构设计模式） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -49100,7 +49100,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 51,
+      "matrix_rows": 55,
       "pre_post": {
         "pre": [
           "[泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [生命周期（Lifetimes）](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · 设计模式",
@@ -49120,7 +49120,7 @@
       "layer": "L6",
       "title": "模式实现对比 (Pattern Implementation Comparison)",
       "positioning": "",
-      "line_count": 982,
+      "line_count": 1011,
       "theorem_chains": [
         {
           "text": "> **定理链**: Scenario ⟹ Implementation Strategy ⟹ Trade-off Evaluation",
@@ -49276,7 +49276,7 @@
       "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 45,
+      "matrix_rows": 56,
       "pre_post": {
         "pre": [
           "[Design Patterns](01_patterns.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)"
@@ -49430,7 +49430,7 @@
       "layer": "L6",
       "title": "形式化设计模式理论 (Formal Design Pattern Theory)",
       "positioning": "",
-      "line_count": 1125,
+      "line_count": 1142,
       "theorem_chains": [
         {
           "text": "> **定理链**: Abstract Pattern ⟹ Formal Model ⟹ Language Mapping",
@@ -50051,7 +50051,7 @@
       "layer": "L6",
       "title": "模式组合代数：设计模式的结构化关联与冲突分析",
       "positioning": "",
-      "line_count": 772,
+      "line_count": 792,
       "theorem_chains": [
         {
           "text": "| 模式组合代数：设计模式的结构化关联与冲突分析 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -50205,7 +50205,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 33,
+      "matrix_rows": 37,
       "pre_post": {
         "pre": [
           "[Patterns](01_patterns.md) · [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Async Patterns](../../03_advanced/01_async/03_async_patterns.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)"
@@ -50222,7 +50222,7 @@
       "layer": "L6",
       "title": "Workflow Theory & Formalization（工作流理论与形式化）",
       "positioning": "",
-      "line_count": 1451,
+      "line_count": 1468,
       "theorem_chains": [
         {
           "text": "| Workflow Theory & Formalization（工作流理论与形式化） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -50411,7 +50411,7 @@
       "layer": "L6",
       "title": "API Design Patterns（API 设计模式）",
       "positioning": "",
-      "line_count": 1378,
+      "line_count": 1395,
       "theorem_chains": [
         {
           "text": "| API Design Patterns（API 设计模式） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -50620,7 +50620,7 @@
       "layer": "L6",
       "title": "分布式 系统：Rust 在微服务 与集群中的工程实践",
       "positioning": "分析 Rust 在**分布式系统**中的独特价值——从 gRPC 服务网格、分布式共识到消息队列和 actor 模型，揭示 Rust 如何在云原生基础设施中提供 C++ 的性能和 Go 的开发效率。",
-      "line_count": 829,
+      "line_count": 846,
       "theorem_chains": [
         {
           "text": "| 分布式 系统：Rust 在微服务 与集群中的工程实践 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -50861,7 +50861,7 @@
       "layer": "L6",
       "title": "Rust Web 框架对比与选型",
       "positioning": "对比分析 Rust 主流 Web 框架——Axum、Actix-web、Rocket、Poem——从架构设计、运行时（Runtime）集成、中间件机制到性能特征，建立系统化的选型决策框架。",
-      "line_count": 1068,
+      "line_count": 1085,
       "theorem_chains": [
         {
           "text": "| 新项目 + Tower 生态兼容（如 Tonic gRPC） | Axum | §6.1 决策树 Q1/Q2 | 团队不熟 Tower/`Service` ⟹ 学习曲线陡（§7.1 F1） |",
@@ -51203,7 +51203,7 @@
       "layer": "L6",
       "title": "C10 Networks - Tier 2: WebSocket 实时通信",
       "positioning": "",
-      "line_count": 828,
+      "line_count": 844,
       "theorem_chains": [
         {
           "text": "> **定理链**: Real-Time Requirement ⟹ Connection State ⟹ Message Delivery",
@@ -51454,7 +51454,7 @@
       "layer": "L6",
       "title": "高性能网络服务架构 (High-Performance Network Service Architecture)",
       "positioning": "",
-      "line_count": 2165,
+      "line_count": 2189,
       "theorem_chains": [
         {
           "text": "| 零拷贝 ⟹ 降低延迟 | 避免用户态与内核态间数据拷贝 | 提升网络 I/O 吞吐 |",
@@ -51613,7 +51613,7 @@
       "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 19,
+      "matrix_rows": 23,
       "pre_post": {
         "pre": [
           "[Type System Basics](../../01_foundation/02_type_system/01_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)"
@@ -51630,7 +51630,7 @@
       "layer": "L6",
       "title": "Reactive Programming & FRP（响应式编程与函数式响应编程）",
       "positioning": "",
-      "line_count": 1125,
+      "line_count": 1142,
       "theorem_chains": [
         {
           "text": "| Reactive Programming & FRP（响应式编程与函数式响应编程） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -52151,7 +52151,7 @@
       "layer": "L6",
       "title": "Rust 嵌入式系统开发",
       "positioning": "探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全（Memory Safety）如何保证关键系统的可靠性。",
-      "line_count": 986,
+      "line_count": 1005,
       "theorem_chains": [
         {
           "text": "| Rust 嵌入式系统开发 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -52555,7 +52555,7 @@
       "layer": "L6",
       "title": "Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态）",
       "positioning": "",
-      "line_count": 1063,
+      "line_count": 1080,
       "theorem_chains": [
         {
           "text": "| Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -52941,7 +52941,7 @@
       "layer": "L6",
       "title": "Embedded-HAL 1.0 迁移与 Embassy 生产状态",
       "positioning": "",
-      "line_count": 308,
+      "line_count": 323,
       "theorem_chains": [
         {
           "text": "| 稳定 HAL API ⟹ 生态可移植性 | 统一硬件抽象接口 | 驱动与板级支持代码复用性提升 |",
@@ -53350,7 +53350,7 @@
       "layer": "L6",
       "title": "流处理生态：Rust 实现与工业系统全景",
       "positioning": "系统梳理 Rust 流处理生态（timely/differential dataflow、tokio-stream、fluvio）与工业级系统（Flink、Materialize、RisingWave）的架构、语义差异与选型策略。",
-      "line_count": 616,
+      "line_count": 629,
       "theorem_chains": [
         {
           "text": "| 流处理生态：Rust 实现与工业系统全景 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -53632,7 +53632,7 @@
       "layer": "L6",
       "title": "Data Engineering（数据工程）",
       "positioning": "",
-      "line_count": 1010,
+      "line_count": 1025,
       "theorem_chains": [
         {
           "text": "| Data Engineering（数据工程） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -53790,7 +53790,7 @@
       "layer": "L6",
       "title": "Distributed Consensus（分布式共识）",
       "positioning": "",
-      "line_count": 955,
+      "line_count": 974,
       "theorem_chains": [
         {
           "text": "| Distributed Consensus（分布式共识） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -53897,7 +53897,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 55,
+      "matrix_rows": 59,
       "pre_post": {
         "pre": [
           "分布式系统 · [并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · 网络协议 · [类型系统（Type System）](../../01_foundation/02_type_system/01_type_system.md)",
@@ -54442,7 +54442,7 @@
       "layer": "L6",
       "title": "Security & Cryptography（安全与密码学）",
       "positioning": "",
-      "line_count": 1012,
+      "line_count": 1028,
       "theorem_chains": [
         {
           "text": "| Security & Cryptography（安全与密码学） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -54790,7 +54790,7 @@
       "layer": "L6",
       "title": "Formal Verification Tools（形式化验证工具生态）",
       "positioning": "",
-      "line_count": 1025,
+      "line_count": 1048,
       "theorem_chains": [
         {
           "text": "| Formal Verification Tools（形式化验证工具生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -54934,7 +54934,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 60,
+      "matrix_rows": 66,
       "pre_post": {
         "pre": [
           "[类型系统（Type System）](../../01_foundation/02_type_system/01_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · 形式化验证 · [生命周期（Lifetimes）](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)",
@@ -55079,7 +55079,7 @@
       "layer": "L6",
       "title": "文档生态：rustdoc、文档测试与 API 文档规范",
       "positioning": "覆盖 Rust **文档生态**的核心工具与实践——从 rustdoc 的渲染机制、文档测试（doctest）、到 API 文档规范（[RFC 1574](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html)）和 mdBook 静态站点生成，分析 Rust 文档文化如何成为语言生态的竞争优势。",
-      "line_count": 671,
+      "line_count": 687,
       "theorem_chains": [
         {
           "text": "| 文档生态：rustdoc、文档测试与 API 文档规范 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -55312,7 +55312,7 @@
       "layer": "L6",
       "title": "基准测试：Rust 代码性能测量与回归检测",
       "positioning": "覆盖 Rust 生态中使用 `criterion` 进行基准测试的完整流程，从简单基准、参数化基准到回归检测与 CI 集成。",
-      "line_count": 228,
+      "line_count": 244,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -55388,7 +55388,7 @@
       "layer": "L6",
       "title": "性能优化：Rust 代码的测量与调优",
       "positioning": "> 覆盖 Rust **性能优化**的核心方法论——从基准测试（criterion）、",
-      "line_count": 1141,
+      "line_count": 1157,
       "theorem_chains": [
         {
           "text": "| 性能优化：Rust 代码的测量与调优 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -55536,11 +55536,11 @@
       "layer": "L6",
       "title": "Blockchain & Smart Contract Security（区块链与智能合约安全）",
       "positioning": "",
-      "line_count": 948,
+      "line_count": 964,
       "theorem_chains": [
         {
-          "text": "本节围绕「Rust 在区块链领域的独特优势」展开，覆盖内存安全 ⟹ 合约无重入/溢出漏洞 与 无 GC 的确定性执行 两个方面。",
-          "type": "inline"
+          "text": "- **内存安全 ⟹ 合约漏洞类别消除**: 重入攻击之外的溢出、越界、use-after-free 是 EVM/Solidity 合约的经典损失来源（整数溢出曾导致多起代币事件）；Rust 的借用检查 + 默认溢出检查（debug panic / release 可配置）把这些类别在编译期或运行早期暴露，而非审计期事后发现。",
+          "type": "paragraph"
         },
         {
           "text": "### 1.1 内存安全 ⟹ 合约无重入/溢出漏洞",
@@ -55553,6 +55553,10 @@
         {
           "text": "| **未初始化存储指针** | 可指向 slot 0（即 `owner` 等敏感状态） | `Option<T>` + 编译期初始化检查 ⟹ 不存在未初始化变量 |",
           "type": "table_row"
+        },
+        {
+          "text": "- **漏洞类别消除矩阵**: 整数溢出/下溢（Rust 默认检查 ⟹ 消除）、越界访问（借用检查 ⟹ 消除）、未初始化状态（类型系统强制初始化 ⟹ 消除）；但**重入攻击**（合约回调中状态未更新）是逻辑层漏洞，Rust 不自动消除——对策是 checks-effects-interactions 模式与账户租约锁，仍需人工纪律。逻辑错误（错误的清算公式、预言机价格操纵）两种语言同样暴露。",
+          "type": "paragraph"
         },
         {
           "text": "| **重入 (Reentrancy)** | 默认 call 传递控制流 + 可重入锁需手动实现 | `&mut self` 独占 ⟹ 编译期保证无并发写；运行时（Runtime）借用（Borrowing）检查覆盖跨程序调用 | 线性逻辑：资源不可复制、不可丢弃 |",
@@ -56580,7 +56584,7 @@
       "layer": "L6",
       "title": "算法工程实践 (Algorithm Engineering Practice)",
       "positioning": "",
-      "line_count": 2111,
+      "line_count": 2127,
       "theorem_chains": [
         {
           "text": "| 复杂度分析 ⟹ 可扩展性预测 | 大 O 与内存占用评估 | 指导算法选型 |",
@@ -56768,7 +56772,7 @@
       "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 16,
+      "matrix_rows": 20,
       "pre_post": {
         "pre": [
           "[Type System Basics](../../01_foundation/02_type_system/01_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)"
@@ -57118,7 +57122,7 @@
       "layer": "L6",
       "title": "Machine Learning Ecosystem（机器学习生态）",
       "positioning": "",
-      "line_count": 976,
+      "line_count": 999,
       "theorem_chains": [
         {
           "text": "| Machine Learning Ecosystem（机器学习生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -57261,7 +57265,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 68,
+      "matrix_rows": 71,
       "pre_post": {
         "pre": [
           "[类型系统（Type System）](../../01_foundation/02_type_system/01_type_system.md) · [泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)",
@@ -57382,7 +57386,7 @@
       "layer": "L6",
       "title": "Game Engine Internals（游戏引擎内部原理）",
       "positioning": "",
-      "line_count": 1161,
+      "line_count": 1177,
       "theorem_chains": [
         {
           "text": "| Game Engine Internals（游戏引擎内部原理） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -57538,7 +57542,7 @@
       "layer": "L6",
       "title": "Rust 量子计算生态",
       "positioning": "",
-      "line_count": 1030,
+      "line_count": 1046,
       "theorem_chains": [
         {
           "text": "| Quantum Computing in Rust（量子计算与 Rust） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -57692,7 +57696,7 @@
       "layer": "L6",
       "title": "Rust WebAssembly 高级开发",
       "positioning": "",
-      "line_count": 1207,
+      "line_count": 1228,
       "theorem_chains": [
         {
           "text": "| Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -57861,7 +57865,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 97,
+      "matrix_rows": 102,
       "pre_post": {
         "pre": [
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)",
@@ -57879,7 +57883,7 @@
       "layer": "L6",
       "title": "C12 WASM - 术语表",
       "positioning": "",
-      "line_count": 389,
+      "line_count": 407,
       "theorem_chains": [
         {
           "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
@@ -58023,7 +58027,7 @@
       "layer": "L6",
       "title": "C12 WASM - JavaScript 互操作",
       "positioning": "",
-      "line_count": 522,
+      "line_count": 537,
       "theorem_chains": [
         {
           "text": "> **定理链**: wasm-bindgen ⟹ Type Mapping ⟹ Runtime Interaction",
@@ -58528,7 +58532,7 @@
       "layer": "L6",
       "title": "C10 Networks - Tier 2: 网络基础实践",
       "positioning": "",
-      "line_count": 992,
+      "line_count": 1016,
       "theorem_chains": [
         {
           "text": "> **定理链**: Socket ⟹ Protocol ⟹ Application",
@@ -58679,7 +58683,7 @@
       "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 20,
+      "matrix_rows": 28,
       "pre_post": {
         "pre": [
           "[Std IO and Process](../../01_foundation/00_start/05_std_io_and_process.md) · [Async](../../03_advanced/01_async/01_async.md)"
@@ -59067,7 +59071,7 @@
       "layer": "L7",
       "title": "Rust 形式模型演进跟踪（1.79–1.97+）",
       "positioning": "本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权（Ownership）模型、类型系统（Type System）、异步（Async）语义、Unsafe 边界**有结构性影响的特性。",
-      "line_count": 2606,
+      "line_count": 2625,
       "theorem_chains": [
         {
           "text": "| Rust 形式模型演进跟踪（1.79–1.97+） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -59464,7 +59468,7 @@
       "layer": "L7",
       "title": "Rust 1.97 兼容性迁移判定树",
       "positioning": "",
-      "line_count": 746,
+      "line_count": 752,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -59633,7 +59637,7 @@
       "layer": "L7",
       "title": "Rust 1.90 网络特性参考",
       "positioning": "",
-      "line_count": 859,
+      "line_count": 881,
       "theorem_chains": [
         {
           "text": "> **定理链**: Version Context ⟹ Feature Set ⟹ Migration Impact",
@@ -59764,7 +59768,7 @@
       "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 17,
+      "matrix_rows": 21,
       "pre_post": {
         "pre": [
           "[Rust Version Tracking](01_rust_version_tracking.md) · [Async](../../03_advanced/01_async/01_async.md) · [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)"
@@ -60966,7 +60970,7 @@
       "layer": "L7",
       "title": "c10_networks - Rust 1.94 更新概览",
       "positioning": "",
-      "line_count": 208,
+      "line_count": 223,
       "theorem_chains": [
         {
           "text": "> **定理链**: Version Context ⟹ Feature Set ⟹ Migration Impact",
@@ -61168,7 +61172,7 @@
       "layer": "L7",
       "title": "Rust 1.96 稳定特性（当前 patch 1.96.1）",
       "positioning": "",
-      "line_count": 339,
+      "line_count": 358,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -61426,7 +61430,7 @@
       "layer": "L7",
       "title": "Rust 1.98+ 前沿特性预览",
       "positioning": "",
-      "line_count": 643,
+      "line_count": 664,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -61587,7 +61591,7 @@
       "layer": "L7",
       "title": "Edition 2024 完全指南：新特性与迁移策略",
       "positioning": "全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。",
-      "line_count": 887,
+      "line_count": 904,
       "theorem_chains": [
         {
           "text": "| Edition 2024 完全指南：新特性与迁移策略 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -61782,7 +61786,7 @@
       "layer": "L7",
       "title": "Rust 2027 Edition 及未来路线图",
       "positioning": "分析 Rust **2027 Edition 及更远期**的潜在特性集合——从 gen/kw、特化稳定化、可移植 SIMD、自定义分配器到异步（Async） Trait、TAIT 等前沿议题，评价其技术成熟度与生态影响。",
-      "line_count": 1081,
+      "line_count": 1097,
       "theorem_chains": [
         {
           "text": "| Rust 2027 Edition 及未来路线图 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -64656,7 +64660,7 @@
       "layer": "L7",
       "title": "`std::autodiff`：Rust 官方自动微分前沿追踪",
       "positioning": "追踪 Rust 语言层面的自动微分（Automatic Differentiation, AD）实验进展，分析其对 AI/ML 生态的潜在影响。",
-      "line_count": 342,
+      "line_count": 358,
       "theorem_chains": [
         {
           "text": "| `std::autodiff`：Rust 官方自动微分前沿追踪 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -65543,7 +65547,7 @@
       "layer": "L7",
       "title": "Default Field Values 预研：结构体字段默认值",
       "positioning": "跟踪 [RFC 3681](https://rust-lang.github.io/rfcs/3681-default-field-values.html) 引入的结构体字段默认值语法，说明其与函数式记录更新（Functional Record Update, FRU）、`Default` trait 及私有字段的交互。",
-      "line_count": 143,
+      "line_count": 144,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -65612,7 +65616,7 @@
       "layer": "L7",
       "title": "Complex Numbers 预研：标准库复数类型",
       "positioning": "跟踪 [RFC 3892](https://rust-lang.github.io/rfcs/3892-complex-numbers.html) 提议的标准库复数类型（Complex Number），说明其设计动机、API 形态与对数值生态（`num-complex` 等）的影响。",
-      "line_count": 138,
+      "line_count": 139,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -65671,7 +65675,7 @@
       "layer": "L7",
       "title": "AI × Rust：生成-验证闭环与确定性容器",
       "positioning": "Prophet 属于**监督学习**（学习历史补丁特征），而非 RL。但它是\"编译器/测试反馈驱动程序修复\"思想的早期工业级实践，为后续 RL 方法奠定了问题定义基础。[MIT News, 2016](https://news.mit.edu/)",
-      "line_count": 986,
+      "line_count": 1005,
       "theorem_chains": [
         {
           "text": "> **论证**: RustBelt 证明 Safe Rust 的内存安全（无 UAF/DF），因此编译通过 ⟹ 内存安全（Memory Safety）。但编译通过 ⇏ 逻辑正确（功能 bug 仍可能存在）。",
@@ -65933,7 +65937,7 @@
       "layer": "L7",
       "title": "Language Evolution（语言演进）",
       "positioning": "",
-      "line_count": 2189,
+      "line_count": 2206,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -66408,7 +66412,7 @@
       "layer": "L7",
       "title": "Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈",
       "positioning": "深度评价 Rust 在 **WebAssembly (Wasm)** 全栈开发中的技术成熟度——从 wasm-bindgen/wasm-pack 工具链到 Yew/Leptos 前端框架，分析 Rust→Wasm 编译模型、JS 互操作内存模型、性能权衡边界与工程选型决策。",
-      "line_count": 949,
+      "line_count": 970,
       "theorem_chains": [
         {
           "text": "| Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -66527,7 +66531,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 27,
+      "matrix_rows": 32,
       "pre_post": {
         "pre": [
           "[Rust 路线图](../01_edition_roadmap/04_roadmap.md) · [WebAssembly 生态](../../06_ecosystem/11_domain_applications/03_webassembly.md) · [Web 框架](../../06_ecosystem/04_web_and_networking/03_web_frameworks.md)"
