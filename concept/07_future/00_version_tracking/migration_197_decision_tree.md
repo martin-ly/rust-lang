@@ -12,6 +12,7 @@
 > **双维定位**: P×App — 把版本兼容性变更应用到存量代码
 > **前置概念**: [Rust 1.97 稳定特性](rust_1_97_stabilized.md) · [Rust 版本跟踪](01_rust_version_tracking.md) · [Pin 与 Unpin](../../03_advanced/01_async/08_pin_unpin.md) · [类型强制与转换](../../01_foundation/02_type_system/04_coercion_and_casting.md) · [ABI](../../04_formal/05_rustc_internals/05_application_binary_interface.md) · [Linkage](../../03_advanced/04_ffi/03_linkage.md)
 > **后置概念**: [Rust 1.97 前沿预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿预览](rust_1_98_preview.md)
+> **companion reference**: 纯特性清单速查见 [`docs/03_reference/quick_reference/21_rust_197_features_cheatsheet.md`](../../../docs/03_reference/quick_reference/21_rust_197_features_cheatsheet.md)
 > **最后更新**: 2026-07-11
 > **状态**: ✅ 已对齐 Rust 1.97.0 stable
 
@@ -27,6 +28,8 @@
 ## 0. 本文定位与非目标
 
 **定位**：审计报告（§2.4、§4 P2-5）指出 Rust 1.97 的兼容性变化**只在版本页表格罗列**，缺少「是否受影响 → 如何迁移」的可执行判定树。本文补齐该缺口：每个兼容性变化一节，给出可判定条件、根因节点，以及**具体迁移动作**作为树叶子。
+
+**与姊妹页的分工**：[`21_rust_197_features_cheatsheet.md`](../../../docs/03_reference/quick_reference/21_rust_197_features_cheatsheet.md) 提供 1.97 全部特性（语言/std/Cargo/Rustdoc/平台）的**一览表**；本文只聚焦**兼容性迁移**，给出“是否受影响 → 根因 → 具体修复动作”的判定树。
 
 **非目标（避免重复，遵守 AGENTS.md §2 Canonical 规则）**：
 

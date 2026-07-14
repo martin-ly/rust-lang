@@ -18,7 +18,12 @@
 
 ---
 
-> **来源**: [Rust Reference — Async Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) · [RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html) · [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) · [Rustonomicon — Executing Manual Future](https://doc.rust-lang.org/nomicon/executor.html)
+> **来源**:
+> [Rust Reference — Async Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) ·
+> [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) ·
+> [RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html) ·
+> [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) ·
+> [Rustonomicon — Executing Manual Future](https://doc.rust-lang.org/nomicon/executor.html)
 
 ---
 
@@ -74,7 +79,6 @@ mindmap
 ## 一、权威定义
 
 > **Rust Reference**: An async block is a variant of a block expression which, when evaluated, executes the body of the block expression and returns a value of type `impl Future<Output = T>`.
-
 > **Rust Reference**: The `unsafe` keyword is used on a block to indicate it contains operations that would be invalid outside the block, and that the programmer is responsible for ensuring the operations inside the block are valid.
 
 **Async + Unsafe 交叉定义**：在异步状态机中执行编译器无法验证其安全性的操作。这些操作通常涉及：
@@ -157,7 +161,7 @@ async fn dangling_across_await() {
 
 ### 4.2 反例：手写 poll 破坏 Pin 契约
 
-```rust,compile_fail
+```rust
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -170,8 +174,8 @@ struct BadFuture {
 impl Future for BadFuture {
     type Output = ();
 
+    // 危险：mut self 允许重新赋值 self，可能破坏 Pin 不变量
     fn poll(mut self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
-        // 错误：获取 &mut Self 可能移动 self，破坏 Pin 契约
         self.ptr = &self.data;
         Poll::Ready(())
     }
@@ -262,4 +266,8 @@ flowchart TD
 
 ---
 
-> **权威来源**: [Rust Reference — Async Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) · [RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html) · [Rustonomicon — Executing Manual Future](https://doc.rust-lang.org/nomicon/executor.html)
+> **权威来源**:
+> [Rust Reference — Async Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) ·
+> [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) ·
+> [RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html) ·
+> [Rustonomicon — Executing Manual Future](https://doc.rust-lang.org/nomicon/executor.html)

@@ -13,8 +13,15 @@
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: P×Eva — 评判 async-FFI 集成方案的可行性
 > **定位**: 阐述如何将 C/外部库的阻塞或回调式接口接入 Rust async/await 生态：从线程池桥接到自定义 Reactor，再到把 Rust `Waker` 安全地传递给 C 回调。
-> **前置概念**: [Rust FFI](01_rust_ffi.md) · [Async/Await](../01_async/01_async.md) · [Waker 契约](../01_async/12_waker_contract_deep_dive.md) · [Send 与 Sync](../00_concurrency/02_send_sync_auto_traits.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
-> **后置概念**: [Async 中的 Unsafe](../02_unsafe/05_async_in_unsafe_contexts.md) · [Async 边界全景](../01_async/06_async_boundary_panorama.md)
+> **前置概念**:
+> [Rust FFI](01_rust_ffi.md) ·
+> [Async/Await](../01_async/01_async.md) ·
+> [Waker 契约](../01_async/12_waker_contract_deep_dive.md) ·
+> [Send 与 Sync](../00_concurrency/02_send_sync_auto_traits.md) ·
+> [Traits](../../02_intermediate/00_traits/01_traits.md)
+> **后置概念**:
+> [Async 中的 Unsafe](../02_unsafe/08_async_in_unsafe_contexts.md) ·
+> [Async 边界全景](../01_async/06_async_boundary_panorama.md)
 
 ---
 
@@ -205,7 +212,7 @@ flowchart TD
 - [Async/Await](../01_async/01_async.md)
 - [Waker 契约深度解析](../01_async/12_waker_contract_deep_dive.md)
 - [Send 与 Sync](../00_concurrency/02_send_sync_auto_traits.md)
-- [Async 中的 Unsafe](../02_unsafe/05_async_in_unsafe_contexts.md)
+- [Async 中的 Unsafe](../02_unsafe/08_async_in_unsafe_contexts.md)
 - [Async 边界全景](../01_async/06_async_boundary_panorama.md)
 
 ---

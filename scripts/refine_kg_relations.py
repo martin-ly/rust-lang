@@ -291,6 +291,7 @@ def main() -> int:
     ap.add_argument("--date", default=_dt.date.today().isoformat())
     ap.add_argument("--confidence-layer", type=float, default=0.75, help="层推断的置信度")
     ap.add_argument("--confidence-dir", type=float, default=0.85, help="目录精化的置信度")
+    ap.add_argument("--add-part-of", action="store_true", help="为 hasPart 添加反向 partOf 边（默认不添加，避免关系数膨胀）")
     args = ap.parse_args()
 
     data = json.loads(KG_PATH.read_text(encoding="utf-8"))
@@ -582,8 +583,8 @@ def main() -> int:
             r["ex:confidence"] = 0.9
             r["ex:reviewed"] = True
             add_change("R5-index-hasPart", "retyped relatedTo", r, r["ex:evidence"])
-        # 同时反向建立 partOf（如不存在）
-            if not has_pred(o, s, PRED_PARTOF):
+            # 可选：同时反向建立 partOf
+            if args.add_part_of and not has_pred(o, s, PRED_PARTOF):
                 max_id += 1
                 relations.append({
                     "@id": f"_:rel{max_id}",

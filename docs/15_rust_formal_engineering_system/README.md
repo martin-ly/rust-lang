@@ -1,186 +1,23 @@
-# Rust 形式化工程系统 {#rust-形式化工程系统}
+# Rust 形式化工程系统
+
+**EN**: Rust Formal Engineering System Index
+**Summary**: Rust 形式化工程系统索引；本目录已整体转为 `concept/` 权威页的重定向 stub。
+
+> **权威来源**: 本文件为工程视角入口 stub；完整概念解释统一维护在对应 `concept/` 权威页。
 >
-> **EN**: Rust Formal Engineering System Index
-> **Summary**: Rust 形式化工程系统 Rust Formal Engineering System Index. (stub/archive redirect)
-> **分级**: [B]
-> **Bloom 层级**: L5-L6
-> **创建日期**: 2026-02-20
-> **最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
-> **Rust 版本**: 1.97.0+ (Edition 2024)
-> **状态**: ✅ 已完成
-> **说明**: 本目录为**单一索引层**，形式化理论内容已整合至 [研究笔记](../12_research_notes/README.md) 及各 crates。子目录 README 仅为占位重定向，请以 [00_master_index.md](00_master_index.md) 为完整导航入口。
-> **docs 全结构**: DOCS_STRUCTURE_OVERVIEW § 2.9
+> 根据 AGENTS.md §2 Canonical 规则，通用 Rust 概念解释统一维护在 `concept/` 中；
+> `docs/15_rust_formal_engineering_system/` 仅保留工程专题索引与链接。
 
-> **权威来源**: 本文件为 Rust 形式化工程体系专题入口；通用 Rust 概念解释请见对应 `concept/` 权威页：
->
-> - [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
-> - [`concept/01_foundation/02_type_system/01_type_system.md`](../../concept/01_foundation/02_type_system/01_type_system.md)
-> - [`concept/04_formal/00_type_theory/01_type_theory.md`](../../concept/04_formal/00_type_theory/01_type_theory.md)
->
-> 根据 AGENTS.md §3.4，`docs/` 仅保留专题工程视角内容；通用概念解释统一维护在 `concept/` 中。
+## 子专题索引
 
----
-
-## 导航说明 {#导航说明}
->
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
-本项目的 Rust 形式化理论与工程文档已整合至 **研究笔记系统**。请使用以下入口访问：
-
-### 核心入口 {#核心入口}
-
-> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
->
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
-| 模块（Module） | 入口路径 | 说明 |
+| 子目录 | 主题 | 权威 `concept/` 入口 |
 | :--- | :--- | :--- |
-| **形式化方法** | [research_notes/formal_methods/](../12_research_notes/02_formal_methods/README.md) | 所有权（Ownership）模型、借用（Borrowing）检查器、生命周期（Lifetimes）、Pin、异步（Async）状态机 |
-| **类型理论** | [research_notes/type_theory/](../12_research_notes/05_type_theory/README.md) | 类型系统（Type System）基础、Trait 形式化、型变理论、生命周期 |
-| **主索引** | [00_master_index.md](00_master_index.md) | 完整模块（Module）映射与导航 |
-
-### 快速跳转 {#快速跳转}
-
-> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
->
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
-- [所有权与借用理论](../12_research_notes/02_formal_methods/09_ownership_model.md)
-- [借用检查器证明](../12_research_notes/02_formal_methods/03_borrow_checker_proof.md)
-- [类型系统基础](../12_research_notes/05_type_theory/05_type_system_foundations.md)
-- [Trait 系统形式化](../12_research_notes/05_type_theory/04_trait_system_formalization.md)
-- 生命周期形式化
-- [型变理论](../12_research_notes/05_type_theory/06_variance_theory.md)
-- [形式化验证工具](../12_research_notes/10_tutorials_and_guides/16_tools_guide.md)
-
----
-
-## 核心概念简介 {#核心概念简介}
-
-### 1. 所有权系统 {#1-所有权系统}
-
-> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
-Rust 的所有权系统是其内存安全（Memory Safety）保证的核心：
-
-```rust
-// 所有权三规则的形式化理解
-// 1. 每个值都有一个所有者
-// 2. 同一时间只能有一个所有者
-// 3. 当所有者离开作用域，值被丢弃
-
-fn ownership_demo() {
-    let s1 = String::from("hello");  // s1 拥有这个 String
-    let s2 = s1;                      // 所有权转移到 s2
-    // println!("{}", s1);            // 错误：s1 不再拥有该值
-
-    let s3 = s2.clone();              // 克隆创建新的所有权
-    println!("s2 = {}, s3 = {}", s2, s3);  // 两者都可用
-}  // s2 和 s3 在这里被丢弃
-```
-
-### 2. 借用检查 {#2-借用检查}
-
-借用检查器在编译时验证引用（Reference）有效性：
-
-```rust
-// 借用规则的形式化表达
-// ∀r: Reference, lifetime(r) ⊆ lifetime(pointee(r))
-// ∀t: Time, has_mut_ref(l, t) → count_imm_refs(l, t) = 0
-
-fn borrowing_demo() {
-    let mut x = 5;
-
-    // 可变借用
-    let r1 = &mut x;
-    *r1 += 1;
-    // r1 在这里结束生命周期
-
-    // 现在可以创建新的借用
-    let r2 = &x;  // 不可变借用
-    println!("{}", r2);
-}
-```
-
-### 3. 类型系统 {#3-类型系统}
-
-Rust 的类型系统基于 Hindley-Milner 类型推导：
-
-```rust
-// 类型系统的形式化基础
-// - 结构类型 vs 名义类型
-// - 参数多态（泛型）
-// - 特设多态（Trait）
-
-trait Drawable {
-    fn draw(&self);
-}
-
-// 参数多态：T 可以是任何类型
-fn identity<T>(x: T) -> T {
-    x
-}
-
-// 约束多态：T 必须实现 Drawable
-fn render<T: Drawable>(item: T) {
-    item.draw();
-}
-```
-
----
-
-## 形式化文档链接 {#形式化文档链接}
-
-### 核心研究笔记 {#核心研究笔记}
-
-| 主题 | 文档路径 | 内容概述 |
-| :--- | :--- | :--- |
-| **所有权模型** | [../12_research_notes/02_formal_methods/09_ownership_model.md](../12_research_notes/02_formal_methods/09_ownership_model.md) | 所有权系统的形式化定义与证明 |
-| **借用检查器** | [../12_research_notes/02_formal_methods/03_borrow_checker_proof.md](../12_research_notes/02_formal_methods/03_borrow_checker_proof.md) | 借用检查的形式化正确性证明 |
-| **生命周期** | ../12_research_notes/02_formal_methods/06_lifetime_formalization.md | 生命周期的形式化模型 |
-| **类型系统（Type System）** | [../12_research_notes/05_type_theory/05_type_system_foundations.md](../12_research_notes/05_type_theory/05_type_system_foundations.md) | 类型理论基础 |
-| **Trait 系统** | [../12_research_notes/05_type_theory/04_trait_system_formalization.md](../12_research_notes/05_type_theory/04_trait_system_formalization.md) | Trait 系统的形式化 |
-| **型变理论** | [../12_research_notes/05_type_theory/06_variance_theory.md](../12_research_notes/05_type_theory/06_variance_theory.md) | 型变规则与证明 |
-| **证明索引** | [../12_research_notes/03_formal_proofs/21_proof_index.md](../12_research_notes/03_formal_proofs/21_proof_index.md) | 87+ 个形式化证明的完整索引 |
-| **工具指南** | [../12_research_notes/10_tutorials_and_guides/16_tools_guide.md](../12_research_notes/10_tutorials_and_guides/16_tools_guide.md) | Prusti/Kani/Creusot 使用指南 |
-
----
-
-## 相关文档 {#相关文档}
-
-- [研究笔记主入口](../12_research_notes/README.md)
-- [思维表征方式](../07_thinking/06_thinking_representation_methods.md)
-- [多维概念矩阵](../07_thinking/04_multi_dimensional_concept_matrix.md)
-
----
-
-## 研究笔记完整链接 {#研究笔记完整链接}
-
-| 研究笔记目录 | 路径 | 内容概述 |
-| :--- | :--- | :--- |
-| **formal_methods/** | [../research_notes/formal_methods/](../12_research_notes/02_formal_methods/README.md) | 所有权模型、借用检查器、生命周期、异步状态机、Pin |
-| **type_theory/** | [../research_notes/type_theory/](../12_research_notes/05_type_theory/README.md) | 类型系统、Trait 系统、型变理论、类型推导 |
-| **experiments/** | [../research_notes/experiments/](../12_research_notes/09_experiments/README.md) | 性能实验、内存分析、编译器优化 |
-| **10_proof_index.md** | [../12_research_notes/03_formal_proofs/21_proof_index.md](../12_research_notes/03_formal_proofs/21_proof_index.md) | 形式化证明索引（87+ 个证明） |
-| **10_tools_guide.md** | [../12_research_notes/10_tutorials_and_guides/16_tools_guide.md](../12_research_notes/10_tutorials_and_guides/16_tools_guide.md) | 形式化验证工具（Prusti、Kani、Creusot） |
-| **10_safe_unsafe_comprehensive_analysis.md** | [../12_research_notes/03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md](../12_research_notes/03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md) | 安全/非安全边界分析 |
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
-**最后更新**: 2026-06-25（已按 Rust 1.97.0 复审）
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
-
----
-
-## 权威来源索引 {#权威来源索引}
-
-> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
-> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
-> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
-> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+| [01_theoretical_foundations/](01_theoretical_foundations/README.md) | 理论基础 | [`concept/01_foundation/`](../../concept/01_foundation/README.md) / [`concept/04_formal/`](../../concept/04_formal/README.md) |
+| [02_programming_paradigms/](02_programming_paradigms/README.md) | 编程范式 | [`concept/03_advanced/00_concurrency/`](../../concept/03_advanced/00_concurrency/README.md) / [`concept/03_advanced/01_async/`](../../concept/03_advanced/01_async/README.md) |
+| [03_practical_applications/](03_practical_applications/README.md) | 实践应用 | [`concept/02_intermediate/02_memory_management/`](../../concept/02_intermediate/02_memory_management/README.md) / [`concept/06_ecosystem/10_performance/`](../../concept/06_ecosystem/10_performance/README.md) |
+| [04_compiler_theory/](04_compiler_theory/README.md) | 编译器理论 | [`concept/04_formal/05_rustc_internals/`](../../concept/04_formal/05_rustc_internals/README.md) |
+| [05_design_patterns/](05_design_patterns/README.md) | 设计模式 | [`concept/06_ecosystem/03_design_patterns/`](../../concept/06_ecosystem/03_design_patterns/README.md) |
+| [06_software_engineering/](06_software_engineering/README.md) | 软件工程 | [`concept/01_foundation/07_modules_and_items/`](../../concept/01_foundation/07_modules_and_items/README.md) / [`concept/02_intermediate/03_error_handling/`](../../concept/02_intermediate/03_error_handling/README.md) |
+| [07_toolchain_ecosystem/](07_toolchain_ecosystem/README.md) | 工具链生态 | [`concept/06_ecosystem/01_cargo/`](../../concept/06_ecosystem/01_cargo/README.md) / [`concept/04_formal/05_rustc_internals/`](../../concept/04_formal/05_rustc_internals/README.md) |
+| [08_research_agenda/04_research_methods/](08_research_agenda/04_research_methods/README.md) | 研究方法与形式化验证 | [`concept/04_formal/04_model_checking/`](../../concept/04_formal/04_model_checking/README.md) |
+| [09_quality_assurance/](09_quality_assurance/README.md) | 质量保障 | [`concept/01_foundation/10_testing_basics/`](../../concept/01_foundation/10_testing_basics/README.md) / [`concept/06_ecosystem/09_testing_and_quality/`](../../concept/06_ecosystem/09_testing_and_quality/README.md) |

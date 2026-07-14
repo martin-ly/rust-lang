@@ -1,47 +1,54 @@
 {
   "date": "2026-07-15",
-  "scanned": 491,
+  "scanned": 495,
   "coverage": {
     "P0": [
-      486,
+      490,
       99.0
     ],
     "P1": [
       458,
-      93.3
+      92.5
     ],
     "P2": [
-      422,
-      85.9
+      423,
+      85.5
     ],
     "any": [
-      491,
+      495,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 406,
+    "scanned": 410,
     "P0": [
-      406,
+      410,
       100.0
     ],
     "P1": [
       405,
-      99.8
+      98.8
     ],
     "P2": [
-      405,
-      99.8
+      406,
+      99.0
     ],
     "any": [
-      406,
+      410,
       100.0
     ],
     "gaps_p1": [
+      "concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
+      "concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
+      "concept/03_advanced/04_ffi/04_async_ffi_boundary.md",
+      "concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
       "concept/07_future/00_version_tracking/rust_1_98_stabilized.md"
     ],
     "gaps_p2": [
+      "concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
+      "concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
+      "concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
       "concept/07_future/00_version_tracking/rust_1_98_stabilized.md"
     ]
   },
@@ -57,14 +64,14 @@
       "any": 55
     },
     "L2": {
-      "n": 38,
-      "P0": 38,
-      "any": 38
+      "n": 39,
+      "P0": 39,
+      "any": 39
     },
     "L3": {
-      "n": 65,
-      "P0": 65,
-      "any": 65
+      "n": 67,
+      "P0": 67,
+      "any": 67
     },
     "L4": {
       "n": 55,
@@ -77,9 +84,9 @@
       "any": 20
     },
     "L6": {
-      "n": 127,
-      "P0": 123,
-      "any": 127
+      "n": 128,
+      "P0": 124,
+      "any": 128
     },
     "L7": {
       "n": 66,

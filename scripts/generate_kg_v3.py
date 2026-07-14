@@ -16,6 +16,8 @@ import sys
 from pathlib import Path
 from urllib.parse import quote
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[1]
 CONCEPT_DIR = ROOT / "concept"
 KG_INDEX_PATH = CONCEPT_DIR / "00_meta" / "kg_index.json"
@@ -93,6 +95,37 @@ def resolve_target(path: str, target: str) -> str | None:
     return rel
 
 
+TAXONOMY_PATH = CONCEPT_DIR / "00_meta" / "taxonomy.yaml"
+
+
+def load_taxonomy() -> dict:
+    if TAXONOMY_PATH.exists():
+        return yaml.safe_load(TAXONOMY_PATH.read_text(encoding="utf-8")) or {}
+    return {}
+
+
+def infer_layer_domain(path: str, tax: dict) -> tuple[str, str]:
+    """按 taxonomy.yaml 推断 ex:layer / ex:domain。"""
+    path = path.replace("\\", "/")
+    layer = "L0"
+    for lyr in tax.get("layers", []):
+        for prefix in lyr.get("extra_prefixes", []) or []:
+            if path.startswith(prefix):
+                layer = lyr["id"]
+                break
+        if path.split("/", 1)[0] == lyr.get("directory"):
+            layer = lyr["id"]
+    domain = tax.get("fallback_domain", "uncategorized")
+    best_len = -1
+    for d in tax.get("domains", []):
+        for prefix in d.get("path_prefixes", []) or []:
+            prefix = prefix.replace("\\", "/")
+            if path.startswith(prefix) and len(prefix) > best_len:
+                domain = d["id"]
+                best_len = len(prefix)
+    return layer, domain
+
+
 def load_kg_index() -> dict:
     return json.loads(KG_INDEX_PATH.read_text(encoding="utf-8"))
 
@@ -101,10 +134,11 @@ def load_v3_template() -> dict:
     return json.loads(KG_V3_TEMPLATE_PATH.read_text(encoding="utf-8"))
 
 
-def build_entities(index: dict) -> tuple[list[dict], dict[str, str]]:
+def build_entities(index: dict, tax: dict | None = None) -> tuple[list[dict], dict[str, str]]:
     """构建 JSON-LD 实体列表，并返回 path -> @id 映射。"""
     entities: list[dict] = []
     path_to_iri: dict[str, str] = {}
+    tax = tax or {}
 
     for ent in index["entities"]:
         path: str = ent["path"]
@@ -155,6 +189,10 @@ def build_entities(index: dict) -> tuple[list[dict], dict[str, str]]:
             node["ex:theoremIds"] = theorems
         if crates:
             node["ex:relatedCrates"] = crates
+
+        layer, domain = infer_layer_domain(path, tax)
+        node["ex:layer"] = layer
+        node["ex:domain"] = domain
 
         entities.append(node)
 
@@ -231,8 +269,9 @@ def main() -> int:
 
     index = load_kg_index()
     template = load_v3_template()
+    tax = load_taxonomy()
 
-    entities, path_to_iri = build_entities(index)
+    entities, path_to_iri = build_entities(index, tax)
     relations = build_relations(index, path_to_iri)
 
     # Update metadata

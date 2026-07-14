@@ -53,7 +53,7 @@ mindmap
     - [3.1 尝试与编译错误](#31-尝试与编译错误)
     - [3.2 判定条件](#32-判定条件)
   - [四、Workaround 与设计模式](#四workaround-与设计模式)
-    - [4.1 用关联常量替代 const generic](#41-用关联常量替代-const-generic)
+    - [4.1 用关联类型/方法替代 const generic](#41-用关联类型方法替代-const-generic)
     - [4.2 用泛型枚举做封闭类型集](#42-用泛型枚举做封闭类型集)
     - [4.3 类型级编码（Type-Level Programming）](#43-类型级编码type-level-programming)
   - [五、判定树](#五判定树)
@@ -87,7 +87,7 @@ mindmap
 
 ### 3.1 尝试与编译错误
 
-```rust,compile_fail
+```rust
 trait Buffer<const N: usize> {
     fn data(&self) -> &[u8; N];
 }
@@ -117,22 +117,22 @@ trait 要成为 object-safe 并支持 const generic，必须满足：
 
 ## 四、Workaround 与设计模式
 
-### 4.1 用关联常量替代 const generic
+### 4.1 用关联类型/方法替代 const generic
 
 ```rust
 trait Buffer {
-    const SIZE: usize;
+    fn size(&self) -> usize;
     fn data(&self) -> &[u8];
 }
 
 struct Buf16([u8; 16]);
 impl Buffer for Buf16 {
-    const SIZE: usize = 16;
+    fn size(&self) -> usize { 16 }
     fn data(&self) -> &[u8] { &self.0 }
 }
 
 fn use_buffer(b: &dyn Buffer) {
-    let _size = <dyn Buffer as Buffer>::SIZE; // 注意：关联常量在 trait object 上仍需具体类型
+    let _size = b.size(); // 通过方法调用获取尺寸，trait object 保持 object-safe
 }
 ```
 

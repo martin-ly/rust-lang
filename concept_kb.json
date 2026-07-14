@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 500,
-    "generated_at": "2026-07-14T22:04:26.127133+00:00"
+    "generated_at": "2026-07-14T22:50:23.021243+00:00"
   },
   "files": [
     {
@@ -19832,18 +19832,16 @@
       ],
       "code_blocks": [
         {
-          "flags": [
-            "compile_fail"
-          ],
+          "flags": [],
           "lines": 8,
-          "should_fail": true,
+          "should_fail": false,
           "code_preview": "trait Buffer<const N: usize> {     fn data(&self) -> &[u8; N]; }  fn use_buffer(..."
         },
         {
           "flags": [],
           "lines": 15,
           "should_fail": false,
-          "code_preview": "trait Buffer {     const SIZE: usize;     fn data(&self) -> &[u8]; }  struct Buf..."
+          "code_preview": "trait Buffer {     fn size(&self) -> usize;     fn data(&self) -> &[u8]; }  stru..."
         },
         {
           "flags": [],
@@ -29996,93 +29994,6 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_unsafe\\05_async_in_unsafe_contexts.md",
-      "layer": "L3",
-      "title": "Async 中的 Unsafe：异步上下文的安全契约",
-      "positioning": "系统分析 async/await 状态机与 unsafe 操作的交叉语义：await 点两侧什么保持有效、Pin 如何约束自引用状态机、Waker 如何跨越 safe/unsafe 边界、手写 poll 时哪些不变量必须由程序员保证。",
-      "line_count": 266,
-      "theorem_chains": [],
-      "anti_propositions": [
-        {
-          "title": "### 3.2 反例"
-        },
-        {
-          "title": "### 4.2 反例"
-        },
-        {
-          "title": "### 5.2 反例"
-        },
-        {
-          "title": "## 七、反例"
-        }
-      ],
-      "code_blocks": [
-        {
-          "flags": [],
-          "lines": 10,
-          "should_fail": false,
-          "code_preview": "async fn unsound_across_await() {     let raw: *const u8 = /* 某个有效指针 */;     uns..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 14,
-          "should_fail": false,
-          "code_preview": "use std::pin::Pin;  async fn dangling_across_await() {     let mut local = Strin..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 19,
-          "should_fail": true,
-          "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll};  str..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {    ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "extern \"C\" fn c_callback(waker: *const Waker) {     unsafe {         // 危险：未验证 w..."
-        }
-      ],
-      "sources": [],
-      "cross_references": [
-        "../../00_meta/01_terminology/01_terminology_glossary.md",
-        "../../02_intermediate/00_traits/01_traits.md",
-        "../01_async/01_async.md",
-        "../01_async/06_async_boundary_panorama.md",
-        "../01_async/08_pin_unpin.md",
-        "../01_async/12_waker_contract_deep_dive.md",
-        "../04_ffi/04_async_ffi_boundary.md",
-        "01_unsafe.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 2,
-      "matrix_rows": 11,
-      "pre_post": {
-        "pre": [
-          "[Async/Await](../01_async/01_async.md) · [Pin 与 Unpin](../01_async/08_pin_unpin.md) · [Unsafe Rust](01_unsafe.md) · [Waker 契约](../01_async/12_waker_contract_deep_dive.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)"
-        ],
-        "post": [
-          "[Async FFI Boundary](../04_ffi/04_async_ffi_boundary.md) · [Async Boundary Panorama](../01_async/06_async_boundary_panorama.md)"
-        ]
-      },
-      "backward_chains": 0,
-      "templated_chains": 0
-    },
-    {
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_unsafe\\05_quiz_unsafe.md",
       "layer": "L3",
       "title": "测验：Unsafe Rust（L3 试点扩展）",
@@ -30484,6 +30395,91 @@
         ]
       },
       "backward_chains": 2,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_unsafe\\08_async_in_unsafe_contexts.md",
+      "layer": "L3",
+      "title": "Async 中的 Unsafe：异步上下文的安全契约",
+      "positioning": "系统分析 async/await 状态机与 unsafe 操作的交叉语义：await 点两侧什么保持有效、Pin 如何约束自引用状态机、Waker 如何跨越 safe/unsafe 边界、手写 poll 时哪些不变量必须由程序员保证。",
+      "line_count": 274,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "### 3.2 反例"
+        },
+        {
+          "title": "### 4.2 反例"
+        },
+        {
+          "title": "### 5.2 反例"
+        },
+        {
+          "title": "## 七、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "async fn unsound_across_await() {     let raw: *const u8 = /* 某个有效指针 */;     uns..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use std::pin::Pin;  async fn dangling_across_await() {     let mut local = Strin..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll};  str..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {    ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "extern \"C\" fn c_callback(waker: *const Waker) {     unsafe {         // 危险：未验证 w..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../01_async/01_async.md",
+        "../01_async/06_async_boundary_panorama.md",
+        "../01_async/08_pin_unpin.md",
+        "../01_async/12_waker_contract_deep_dive.md",
+        "../04_ffi/04_async_ffi_boundary.md",
+        "01_unsafe.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 11,
+      "pre_post": {
+        "pre": [
+          "[Async/Await](../01_async/01_async.md) · [Pin 与 Unpin](../01_async/08_pin_unpin.md) · [Unsafe Rust](01_unsafe.md) · [Waker 契约](../01_async/12_waker_contract_deep_dive.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)"
+        ],
+        "post": [
+          "[Async FFI Boundary](../04_ffi/04_async_ffi_boundary.md) · [Async Boundary Panorama](../01_async/06_async_boundary_panorama.md)"
+        ]
+      },
+      "backward_chains": 0,
       "templated_chains": 0
     },
     {
@@ -33670,7 +33666,7 @@
       "layer": "L3",
       "title": "Async FFI 边界：在异步运行时中调用外部代码",
       "positioning": "阐述如何将 C/外部库的阻塞或回调式接口接入 Rust async/await 生态：从线程池桥接到自定义 Reactor，再到把 Rust `Waker` 安全地传递给 C 回调。",
-      "line_count": 214,
+      "line_count": 221,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -33706,7 +33702,7 @@
         "../01_async/01_async.md",
         "../01_async/06_async_boundary_panorama.md",
         "../01_async/12_waker_contract_deep_dive.md",
-        "../02_unsafe/05_async_in_unsafe_contexts.md",
+        "../02_unsafe/08_async_in_unsafe_contexts.md",
         "01_rust_ffi.md"
       ],
       "transitions": 0,
@@ -33715,10 +33711,10 @@
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
-          "[Rust FFI](01_rust_ffi.md) · [Async/Await](../01_async/01_async.md) · [Waker 契约](../01_async/12_waker_contract_deep_dive.md) · [Send 与 Sync](../00_concurrency/02_send_sync_auto_traits.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)"
+          "> [Rust FFI](01_rust_ffi.md) ·"
         ],
         "post": [
-          "[Async 中的 Unsafe](../02_unsafe/05_async_in_unsafe_contexts.md) · [Async 边界全景](../01_async/06_async_boundary_panorama.md)"
+          "> [Async 中的 Unsafe](../02_unsafe/08_async_in_unsafe_contexts.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -53343,7 +53339,7 @@
       "layer": "L6",
       "title": "交叉编译：多目标平台支持与条件编译",
       "positioning": "分析 Rust **交叉编译**生态——从 target triple 的语义、条件编译（cfg）、到不同架构（x86_64/ARM/RISC-V/WASM）的编译策略，揭示 Rust 如何在不修改源代码的情况下支持从嵌入式到服务器的全谱系平台。",
-      "line_count": 689,
+      "line_count": 690,
       "theorem_chains": [
         {
           "text": "| 交叉编译：多目标平台支持与条件编译 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -54311,73 +54307,6 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\05_systems_and_embedded\\10_async_no_std_embedded.md",
-      "layer": "L6",
-      "title": "裸机与嵌入式中的 Async：no_std 异步运行时",
-      "positioning": "系统讲解在 `no_std`/嵌入式环境中使用 async Rust 的特殊约束：无堆分配、中断安全、自定义 executor、embassy 与 rtic 的架构差异，以及如何避免在裸机中触发 UB。",
-      "line_count": 228,
-      "theorem_chains": [],
-      "anti_propositions": [
-        {
-          "title": "### 4.3 反例"
-        },
-        {
-          "title": "## 七、反例"
-        }
-      ],
-      "code_blocks": [
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 13,
-          "should_fail": false,
-          "code_preview": "#[embassy_executor::main] async fn main(_spawner: Spawner) {     let p = embassy..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 6,
-          "should_fail": false,
-          "code_preview": "#[interrupt] fn USART1() {     // 错误：中断上下文中不能 await     some_async_fn().await; }..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 9,
-          "should_fail": false,
-          "code_preview": "use core::pin::Pin; use embassy_executor::Spawner;  #[embassy_executor::main] as..."
-        }
-      ],
-      "sources": [],
-      "cross_references": [
-        "../../00_meta/01_terminology/01_terminology_glossary.md",
-        "../../03_advanced/01_async/01_async.md",
-        "../../03_advanced/01_async/08_pin_unpin.md",
-        "../../03_advanced/02_unsafe/01_unsafe.md",
-        "../../03_advanced/02_unsafe/05_async_in_unsafe_contexts.md",
-        "../../03_advanced/04_ffi/04_async_ffi_boundary.md",
-        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
-        "02_cross_compilation.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 2,
-      "matrix_rows": 21,
-      "pre_post": {
-        "pre": [
-          "[Async/Await](../../03_advanced/01_async/01_async.md) · [Pin 与 Unpin](../../03_advanced/01_async/08_pin_unpin.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [交叉编译](02_cross_compilation.md) · [Rust vs C](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
-        ],
-        "post": [
-          "[Async FFI Boundary](../../03_advanced/04_ffi/04_async_ffi_boundary.md) · [Async 中的 Unsafe](../../03_advanced/02_unsafe/05_async_in_unsafe_contexts.md)"
-        ]
-      },
-      "backward_chains": 0,
-      "templated_chains": 0
-    },
-    {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\05_systems_and_embedded\\10_target_tier_platform_support.md",
       "layer": "L6",
       "title": "Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁",
@@ -54424,6 +54353,73 @@
         ],
         "post": [
           "[`-Z` 选项参考清单](../00_toolchain/15_z_flags_reference.md)（`build-std` 与 Tier 2/3 目标的关系）· [WASI](01_wasi.md) · [Rust vs Go（交叉编译与平台支持广度对比）](../../05_comparative/01_systems_languages/03_rust_vs_go.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\05_systems_and_embedded\\11_async_no_std_embedded.md",
+      "layer": "L6",
+      "title": "裸机与嵌入式中的 Async：no_std 异步运行时",
+      "positioning": "系统讲解在 `no_std`/嵌入式环境中使用 async Rust 的特殊约束：无堆分配、中断安全、自定义 executor、embassy 与 rtic 的架构差异，以及如何避免在裸机中触发 UB。",
+      "line_count": 228,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "### 4.3 反例"
+        },
+        {
+          "title": "## 七、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "#[embassy_executor::main] async fn main(_spawner: Spawner) {     let p = embassy..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#[interrupt] fn USART1() {     // 错误：中断上下文中不能 await     some_async_fn().await; }..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use core::pin::Pin; use embassy_executor::Spawner;  #[embassy_executor::main] as..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/01_async/08_pin_unpin.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
+        "../../03_advanced/04_ffi/04_async_ffi_boundary.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "02_cross_compilation.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 21,
+      "pre_post": {
+        "pre": [
+          "[Async/Await](../../03_advanced/01_async/01_async.md) · [Pin 与 Unpin](../../03_advanced/01_async/08_pin_unpin.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [交叉编译](02_cross_compilation.md) · [Rust vs C](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
+        ],
+        "post": [
+          "[Async FFI Boundary](../../03_advanced/04_ffi/04_async_ffi_boundary.md) · [Async 中的 Unsafe](../../03_advanced/02_unsafe/08_async_in_unsafe_contexts.md)"
         ]
       },
       "backward_chains": 0,
@@ -61006,7 +61002,7 @@
       "layer": "L7",
       "title": "Rust 1.97 兼容性迁移判定树",
       "positioning": "",
-      "line_count": 795,
+      "line_count": 798,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -61141,6 +61137,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../../docs/03_reference/quick_reference/21_rust_197_features_cheatsheet.md",
         "../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md",
         "../../../reports/RUST_197_CONTENT_GAP_ANALYSIS_2026_07_11.md",
         "../../00_meta/02_sources/01_authority_source_map.md",

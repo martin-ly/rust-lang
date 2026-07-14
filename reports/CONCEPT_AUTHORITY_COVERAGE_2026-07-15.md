@@ -3,33 +3,33 @@
 **EN**: Concept-layer International Authority Coverage
 **Summary**: 复用 maintenance P0/P1/P2 权威域分级，把审计扩展到 concept/ 权威层；量化覆盖率与缺口，为『对齐网络上的国际化权威相关内容』提供机器可复核基线。仅审计，不改正文。
 
-> 生成: 2026-07-15 · 扫描 concept/ 活跃 md: **491**（排除 archive/SUMMARY/README）
+> 生成: 2026-07-15 · 扫描 concept/ 活跃 md: **495**（排除 archive/SUMMARY/README）
 > P0 官方 / P1 学术形式化 / P2 社区生态，域定义复用 `scripts/maintenance/authority_coverage_dashboard.py`
 
 ## 总体覆盖率
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 486 | 99.0% |
-| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 458 | 93.3% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 422 | 85.9% |
-| **任一权威（P0∪P1∪P2）** | **491** | **100.0%** |
+| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 490 | 99.0% |
+| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 458 | 92.5% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 423 | 85.5% |
+| **任一权威（P0∪P1∪P2）** | **495** | **100.0%** |
 | 无任何国际权威引用（缺口） | 0 | 0.0% |
 
 ## 内容页口径覆盖率（排除 00_meta 工具页 / quiz / placeholders / sources 索引）
 
-> 内容页 **406** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
+> 内容页 **410** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方 | 406 | 100.0% |
-| P1 学术/形式化 | 405 | 99.8% |
-| P2 社区/生态 | 405 | 99.8% |
-| **任一权威** | **406** | **100.0%** |
+| P0 官方 | 410 | 100.0% |
+| P1 学术/形式化 | 405 | 98.8% |
+| P2 社区/生态 | 406 | 99.0% |
+| **任一权威** | **410** | **100.0%** |
 
-内容页 P1 缺口（1）: `concept/07_future/00_version_tracking/rust_1_98_stabilized.md`
+内容页 P1 缺口（5）: `concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md` · `concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md` · `concept/03_advanced/04_ffi/04_async_ffi_boundary.md` · `concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md` · `concept/07_future/00_version_tracking/rust_1_98_stabilized.md`
 
-内容页 P2 缺口（1）: `concept/07_future/00_version_tracking/rust_1_98_stabilized.md`
+内容页 P2 缺口（4）: `concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md` · `concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md` · `concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md` · `concept/07_future/00_version_tracking/rust_1_98_stabilized.md`
 
 ## 按层级覆盖率
 
@@ -37,11 +37,11 @@
 |:---|---:|---:|---:|---:|---:|
 | L0 | 62 | 62 | 100.0% | 62 | 100.0% |
 | L1 | 55 | 55 | 100.0% | 55 | 100.0% |
-| L2 | 38 | 38 | 100.0% | 38 | 100.0% |
-| L3 | 65 | 65 | 100.0% | 65 | 100.0% |
+| L2 | 39 | 39 | 100.0% | 39 | 100.0% |
+| L3 | 67 | 67 | 100.0% | 67 | 100.0% |
 | L4 | 55 | 55 | 100.0% | 55 | 100.0% |
 | L5 | 20 | 20 | 100.0% | 20 | 100.0% |
-| L6 | 127 | 123 | 96.9% | 127 | 100.0% |
+| L6 | 128 | 124 | 96.9% | 128 | 100.0% |
 | L7 | 66 | 65 | 98.5% | 66 | 100.0% |
 | L? | 3 | 3 | 100.0% | 3 | 100.0% |
 

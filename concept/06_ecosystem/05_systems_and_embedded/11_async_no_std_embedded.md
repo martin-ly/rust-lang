@@ -14,7 +14,7 @@
 > **双维定位**: P×Eva — 评判 no_std async 方案在资源约束下的适用性
 > **定位**: 系统讲解在 `no_std`/嵌入式环境中使用 async Rust 的特殊约束：无堆分配、中断安全、自定义 executor、embassy 与 rtic 的架构差异，以及如何避免在裸机中触发 UB。
 > **前置概念**: [Async/Await](../../03_advanced/01_async/01_async.md) · [Pin 与 Unpin](../../03_advanced/01_async/08_pin_unpin.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [交叉编译](02_cross_compilation.md) · [Rust vs C](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
-> **后置概念**: [Async FFI Boundary](../../03_advanced/04_ffi/04_async_ffi_boundary.md) · [Async 中的 Unsafe](../../03_advanced/02_unsafe/05_async_in_unsafe_contexts.md)
+> **后置概念**: [Async FFI Boundary](../../03_advanced/04_ffi/04_async_ffi_boundary.md) · [Async 中的 Unsafe](../../03_advanced/02_unsafe/08_async_in_unsafe_contexts.md)
 
 ---
 
@@ -220,7 +220,7 @@ flowchart TD
 - [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 - [交叉编译](02_cross_compilation.md)
 - [Async FFI Boundary](../../03_advanced/04_ffi/04_async_ffi_boundary.md)
-- [Async 中的 Unsafe](../../03_advanced/02_unsafe/05_async_in_unsafe_contexts.md)
+- [Async 中的 Unsafe](../../03_advanced/02_unsafe/08_async_in_unsafe_contexts.md)
 
 ---
 

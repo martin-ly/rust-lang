@@ -1,13 +1,13 @@
 # KG 关系语义精化报告
 
-**日期**: 2026-07-15  **模式**: dry-run（未写回）
-**实体数**: 520  **关系数**: 6431 → 7968
-**改动数**: 5948
+**日期**: 2026-07-15  **模式**: 已写回 kg_data_v3.json
+**实体数**: 512  **关系数**: 7955 → 7132
+**改动数**: 4918
 
 ## 目标
 
-将 `ex:relatedTo` 占比从 76.9% 降到 <50%。
-精化后：`ex:relatedTo` = 1263 / 7968 = **15.9%**
+将 `ex:relatedTo` 占比从 81.0% 降到 <50%。
+精化后：`ex:relatedTo` = 1559 / 7132 = **21.9%**
 
 ## 规则
 
@@ -26,21 +26,20 @@
 
 | 谓词 | 前 | 后 | Δ |
 |:---|---:|---:|---:|
-| ex:partOf | 0 | 2227 | +2227 |
-| ex:hasPart | 0 | 2227 | +2227 |
-| ex:relatedTo | 4945 | 1263 | -3682 |
-| ex:dependsOn | 758 | 1192 | +434 |
-| ex:entails | 714 | 946 | +232 |
-| ex:refines | 0 | 67 | +67 |
-| ex:instanceOf | 11 | 24 | +13 |
+| ex:hasPart | 0 | 3146 | +3146 |
+| ex:relatedTo | 6446 | 1559 | -4887 |
+| ex:dependsOn | 783 | 1299 | +516 |
+| ex:entails | 726 | 1016 | +290 |
+| ex:refines | 0 | 81 | +81 |
+| ex:instanceOf | 0 | 13 | +13 |
 | ex:mutexWith | 0 | 10 | +10 |
-| ex:appliesTo | 3 | 7 | +4 |
 | ex:counterExample | 0 | 5 | +5 |
+| ex:appliesTo | 0 | 3 | +3 |
 
 ## 关键指标
 
-- `ex:relatedTo` 占比：76.9% → 15.9%
-- `ex:relatedTo` 数量：4945 → 1263 (Δ -3682)
+- `ex:relatedTo` 占比：81.0% → 21.9%
+- `ex:relatedTo` 数量：6446 → 1559 (Δ -4887)
 - 新增谓词：`ex:hasPart` / `ex:partOf`（用于索引-内容包含关系）
 
 ## 逐边改动摘要（前 200 条）
@@ -66,6 +65,7 @@
 | R0-dedup | removed redundant relatedTo | ex:FoundationsGapClosureIndex | ex:relatedTo | ex:GeneralPLFoundationsRoadmap | (ex:FoundationsGapClosureIndex,ex:GeneralPLFoundationsRoadmap) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:FoundationsGapClosureIndex | ex:relatedTo | ex:CCToRustEngineeringComparisonRoadmap | (ex:FoundationsGapClosureIndex,ex:CCToRustEngineeringComparisonRoadmap) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:FoundationsGapClosureIndex | ex:relatedTo | ex:PatternSemanticSpaceIndex | (ex:FoundationsGapClosureIndex,ex:PatternSemanticSpaceIndex) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:MetaFrameworkAndKnowledgeArchitectureQuiz | ex:relatedTo | ex:ConceptMetaLayer | (ex:MetaFrameworkAndKnowledgeArchitectureQuiz,ex:ConceptMetaLayer) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:GettingStartedWithRust | ex:relatedTo | ex:Ownership | (ex:GettingStartedWithRust,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:GettingStartedWithRust | ex:relatedTo | ex:Borrowing | (ex:GettingStartedWithRust,ex:Borrowing) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:GettingStartedWithRust | ex:relatedTo | ex:TypeSystem | (ex:GettingStartedWithRust,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
@@ -80,6 +80,7 @@
 | R0-dedup | removed redundant relatedTo | ex:Closures | ex:relatedTo | ex:Ownership | (ex:Closures,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Closures | ex:relatedTo | ex:Iterators | (ex:Closures,ex:Iterators) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Closures | ex:relatedTo | ex:AsyncProgramming | (ex:Closures,ex:AsyncProgramming) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Closures | ex:relatedTo | ex:ClosureTypes | (ex:Closures,ex:ClosureTypes) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:EffectsAndPurity | ex:relatedTo | ex:VariableModel | (ex:EffectsAndPurity,ex:VariableModel) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:EffectsAndPurity | ex:relatedTo | ex:EvaluationStrategies | (ex:EffectsAndPurity,ex:EvaluationStrategies) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:EffectsAndPurity | ex:relatedTo | ex:Ownership | (ex:EffectsAndPurity,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
@@ -108,6 +109,8 @@
 | R0-dedup | removed redundant relatedTo | ex:MoveSemantics | ex:relatedTo | ex:RustVsC | (ex:MoveSemantics,ex:RustVsC) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:MoveSemantics | ex:relatedTo | ex:ConstructionAndInitialization | (ex:MoveSemantics,ex:ConstructionAndInitialization) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:TypeSystem | ex:relatedTo | ex:Ownership | (ex:TypeSystem,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:NeverType | ex:relatedTo | ex:TypeSystem | (ex:NeverType,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:NeverType | ex:relatedTo | ex:ErrorHandling | (ex:NeverType,ex:ErrorHandling) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Numerics | ex:relatedTo | ex:TypeSystem | (ex:Numerics,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Numerics | ex:relatedTo | ex:ZeroCostAbstractions | (ex:Numerics,ex:ZeroCostAbstractions) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Numerics | ex:relatedTo | ex:Collections | (ex:Numerics,ex:Collections) 已存在 dependsOn/entails，删除冗余 relatedTo |
@@ -115,18 +118,23 @@
 | R0-dedup | removed redundant relatedTo | ex:CoercionAndCasting | ex:relatedTo | ex:Traits | (ex:CoercionAndCasting,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:CoercionAndCasting | ex:relatedTo | ex:Generics | (ex:CoercionAndCasting,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:CoercionAndCasting | ex:relatedTo | ex:ForeignFunctionInterfaceFFI | (ex:CoercionAndCasting,ex:ForeignFunctionInterfaceFFI) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:DataAbstractionSpectrum | ex:relatedTo | ex:TypeSystem | (ex:DataAbstractionSpectrum,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:DataAbstractionSpectrum | ex:relatedTo | ex:Traits | (ex:DataAbstractionSpectrum,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:DataAbstractionSpectrum | ex:relatedTo | ex:Ownership | (ex:DataAbstractionSpectrum,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ReferenceSemantics | ex:relatedTo | ex:Ownership | (ex:ReferenceSemantics,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ReferenceSemantics | ex:relatedTo | ex:Borrowing | (ex:ReferenceSemantics,ex:Borrowing) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ReferenceSemantics | ex:relatedTo | ex:TypeSystem | (ex:ReferenceSemantics,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ReferenceSemantics | ex:relatedTo | ex:MemoryManagement | (ex:ReferenceSemantics,ex:MemoryManagement) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ReferenceSemantics | ex:relatedTo | ex:Generics | (ex:ReferenceSemantics,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:ValueSemanticsVsReferenceSemantics | ex:relatedTo | ex:VariableModel | (ex:ValueSemanticsVsReferenceSemantics,ex:VariableModel) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:ValueSemanticsVsReferenceSemantics | ex:relatedTo | ex:MoveSemantics | (ex:ValueSemanticsVsReferenceSemantics,ex:MoveSemantics) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:ValueSemanticsVsReferenceSemantics | ex:relatedTo | ex:Ownership | (ex:ValueSemanticsVsReferenceSemantics,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:VariableModel | ex:relatedTo | ex:Ownership | (ex:VariableModel,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ControlFlow | ex:relatedTo | ex:Ownership | (ex:ControlFlow,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ControlFlow | ex:relatedTo | ex:TypeSystem | (ex:ControlFlow,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ControlFlow | ex:relatedTo | ex:Generics | (ex:ControlFlow,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ControlFlow | ex:relatedTo | ex:AsyncProgramming | (ex:ControlFlow,ex:AsyncProgramming) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Patterns | ex:relatedTo | ex:StatementsAndExpressions | (ex:Patterns,ex:StatementsAndExpressions) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:Patterns | ex:relatedTo | ex:Generics | (ex:Patterns,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:Patterns | ex:relatedTo | ex:TypeSystem_04typesandco | (ex:Patterns,ex:TypeSystem_04typesandco) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:StatementsAndExpressions | ex:relatedTo | ex:Closures | (ex:StatementsAndExpressions,ex:Closures) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:StatementsAndExpressions | ex:relatedTo | ex:ErrorHandling_03errorhandl | (ex:StatementsAndExpressions,ex:ErrorHandling_03errorhandl) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:StatementsAndExpressions | ex:relatedTo | ex:AsyncProgramming | (ex:StatementsAndExpressions,ex:AsyncProgramming) 已存在 dependsOn/entails，删除冗余 relatedTo |
@@ -139,6 +147,7 @@
 | R0-dedup | removed redundant relatedTo | ex:StringsAndText | ex:relatedTo | ex:Borrowing | (ex:StringsAndText,ex:Borrowing) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:StringsAndText | ex:relatedTo | ex:Collections | (ex:StringsAndText,ex:Collections) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:StringsAndText | ex:relatedTo | ex:ForeignFunctionInterfaceFFI | (ex:StringsAndText,ex:ForeignFunctionInterfaceFFI) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:StringsAndText | ex:relatedTo | ex:TypeSystem | (ex:StringsAndText,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:StringsAndEncoding | ex:relatedTo | ex:Ownership | (ex:StringsAndEncoding,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:StringsAndEncoding | ex:relatedTo | ex:TypeSystem | (ex:StringsAndEncoding,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:StringsAndEncoding | ex:relatedTo | ex:Collections | (ex:StringsAndEncoding,ex:Collections) 已存在 dependsOn/entails，删除冗余 relatedTo |
@@ -147,6 +156,21 @@
 | R0-dedup | removed redundant relatedTo | ex:Modules | ex:relatedTo | ex:TypeSystem | (ex:Modules,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Modules | ex:relatedTo | ex:CoreCrates | (ex:Modules,ex:CoreCrates) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Modules | ex:relatedTo | ex:Toolchain | (ex:Modules,ex:Toolchain) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Functions | ex:relatedTo | ex:Closures | (ex:Functions,ex:Closures) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Functions | ex:relatedTo | ex:StatementsAndExpressions | (ex:Functions,ex:StatementsAndExpressions) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Functions | ex:relatedTo | ex:Ownership | (ex:Functions,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:UseDeclarations | ex:relatedTo | ex:Modules | (ex:UseDeclarations,ex:Modules) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:UseDeclarations | ex:relatedTo | ex:Items | (ex:UseDeclarations,ex:Items) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Structs | ex:relatedTo | ex:Enumerations | (ex:Structs,ex:Enumerations) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Structs | ex:relatedTo | ex:Implementations | (ex:Structs,ex:Implementations) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Enumerations | ex:relatedTo | ex:ErrorHandling | (ex:Enumerations,ex:ErrorHandling) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Enumerations | ex:relatedTo | ex:Structs | (ex:Enumerations,ex:Structs) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Enumerations | ex:relatedTo | ex:Patterns | (ex:Enumerations,ex:Patterns) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Enumerations | ex:relatedTo | ex:TypeSystem | (ex:Enumerations,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Implementations | ex:relatedTo | ex:Traits_00traits | (ex:Implementations,ex:Traits_00traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Implementations | ex:relatedTo | ex:Structs | (ex:Implementations,ex:Structs) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Implementations | ex:relatedTo | ex:Enumerations | (ex:Implementations,ex:Enumerations) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:Implementations | ex:relatedTo | ex:Traits | (ex:Implementations,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Preludes | ex:relatedTo | ex:SafeAndEffectiveUnsafeRust | (ex:Preludes,ex:SafeAndEffectiveUnsafeRust) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Preludes | ex:relatedTo | ex:Linkage | (ex:Preludes,ex:Linkage) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:CratesAndSourceFiles | ex:relatedTo | ex:Items | (ex:CratesAndSourceFiles,ex:Items) 已存在 dependsOn/entails，删除冗余 relatedTo |
@@ -160,10 +184,9 @@
 | R0-dedup | removed redundant relatedTo | ex:Items | ex:relatedTo | ex:ForeignFunctionInterfaceFFI | (ex:Items,ex:ForeignFunctionInterfaceFFI) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Items | ex:relatedTo | ex:Linkage | (ex:Items,ex:Linkage) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ErrorHandling | ex:relatedTo | ex:Ownership | (ex:ErrorHandling,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:ErrorHandling | ex:relatedTo | ex:TypeSystem | (ex:ErrorHandling,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:ErrorHandling | ex:relatedTo | ex:ControlFlow | (ex:ErrorHandling,ex:ControlFlow) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ErrorHandling | ex:relatedTo | ex:ErrorHandling_03errorhandl | (ex:ErrorHandling,ex:ErrorHandling_03errorhandl) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ErrorHandlingControlFlow | ex:relatedTo | ex:ErrorHandling_03errorhandl | (ex:ErrorHandlingControlFlow,ex:ErrorHandling_03errorhandl) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:ErrorHandlingControlFlow | ex:relatedTo | ex:ErrorHandling | (ex:ErrorHandlingControlFlow,ex:ErrorHandling) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:PanicAndAbort | ex:relatedTo | ex:ErrorHandling_03errorhandl_1 | (ex:PanicAndAbort,ex:ErrorHandling_03errorhandl_1) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:PanicAndAbort | ex:relatedTo | ex:SafeAndEffectiveUnsafeRust | (ex:PanicAndAbort,ex:SafeAndEffectiveUnsafeRust) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:PanicAndAbort | ex:relatedTo | ex:ForeignFunctionInterfaceFFI | (ex:PanicAndAbort,ex:ForeignFunctionInterfaceFFI) 已存在 dependsOn/entails，删除冗余 relatedTo |
@@ -171,14 +194,8 @@
 | R0-dedup | removed redundant relatedTo | ex:Macros | ex:relatedTo | ex:Modules | (ex:Macros,ex:Modules) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Macros | ex:relatedTo | ex:ProceduralMacros | (ex:Macros,ex:ProceduralMacros) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Macros | ex:relatedTo | ex:DslAndEmbedding | (ex:Macros,ex:DslAndEmbedding) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:Testing | ex:relatedTo | ex:Modules | (ex:Testing,ex:Modules) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:Testing | ex:relatedTo | ex:ErrorHandling_03errorhandl_1 | (ex:Testing,ex:ErrorHandling_03errorhandl_1) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Testing | ex:relatedTo | ex:Testing_09testingand_1 | (ex:Testing,ex:Testing_09testingand_1) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:Testing | ex:relatedTo | ex:SecurityPractices_07securityan | (ex:Testing,ex:SecurityPractices_07securityan) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:UsefulDevelopmentTools | ex:relatedTo | ex:Testing | (ex:UsefulDevelopmentTools,ex:Testing) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:UsefulDevelopmentTools | ex:relatedTo | ex:Documentation | (ex:UsefulDevelopmentTools,ex:Documentation) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:UsefulDevelopmentTools | ex:relatedTo | ex:DevOpsAndCICD | (ex:UsefulDevelopmentTools,ex:DevOpsAndCICD) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:UsefulDevelopmentTools | ex:relatedTo | ex:CargoSubcommandsAndPlugins | (ex:UsefulDevelopmentTools,ex:CargoSubcommandsAndPlugins) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:TypeSystem_11quizzes | ex:relatedTo | ex:TypeSystem | (ex:TypeSystem_11quizzes,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ErrorHandling_11quizzes | ex:relatedTo | ex:ErrorHandling | (ex:ErrorHandling_11quizzes,ex:ErrorHandling) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Modules_11quizzes | ex:relatedTo | ex:Modules | (ex:Modules_11quizzes,ex:Modules) 已存在 dependsOn/entails，删除冗余 relatedTo |
@@ -186,6 +203,7 @@
 | R0-dedup | removed redundant relatedTo | ex:Ownership_11quizzes | ex:relatedTo | ex:Borrowing | (ex:Ownership_11quizzes,ex:Borrowing) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Traits | ex:relatedTo | ex:Generics | (ex:Traits,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Traits | ex:relatedTo | ex:TypeSystem | (ex:Traits,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:DispatchMechanisms | ex:relatedTo | ex:Traits | (ex:DispatchMechanisms,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:SerdePatterns | ex:relatedTo | ex:Traits | (ex:SerdePatterns,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:SerdePatterns | ex:relatedTo | ex:Macros_03procmacros | (ex:SerdePatterns,ex:Macros_03procmacros) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:SerdePatterns | ex:relatedTo | ex:Generics | (ex:SerdePatterns,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
@@ -196,11 +214,12 @@
 | R0-dedup | removed redundant relatedTo | ex:Traits_00traits | ex:relatedTo | ex:TypeSystem | (ex:Traits_00traits,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Traits_00traits | ex:relatedTo | ex:TypeInference | (ex:Traits_00traits,ex:TypeInference) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Traits_00traits | ex:relatedTo | ex:RustBelt_02separation | (ex:Traits_00traits,ex:RustBelt_02separation) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:ConstructionAndInitialization | ex:relatedTo | ex:Ownership | (ex:ConstructionAndInitialization,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:DerivableTraits | ex:relatedTo | ex:Traits_00traits | (ex:DerivableTraits,ex:Traits_00traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:DerivableTraits | ex:relatedTo | ex:ProceduralMacros | (ex:DerivableTraits,ex:ProceduralMacros) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:GenericAssociatedTypesGATs | ex:relatedTo | ex:Traits | (ex:GenericAssociatedTypesGATs,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:GenericAssociatedTypesGATs | ex:relatedTo | ex:Generics | (ex:GenericAssociatedTypesGATs,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:GenericAssociatedTypesGATs | ex:relatedTo | ex:LifetimesAdvanced | (ex:GenericAssociatedTypesGATs,ex:LifetimesAdvanced) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:GenericAssociatedTypesGATs | ex:relatedTo | ex:Generics | (ex:GenericAssociatedTypesGATs,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Generics | ex:relatedTo | ex:AsyncProgramming | (ex:Generics,ex:AsyncProgramming) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Generics | ex:relatedTo | ex:Traits | (ex:Generics,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Generics | ex:relatedTo | ex:TypeSystem | (ex:Generics,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
@@ -211,7 +230,15 @@
 | R0-dedup | removed redundant relatedTo | ex:ConstGenericsValuesAsTypeParameters | ex:relatedTo | ex:Traits | (ex:ConstGenericsValuesAsTypeParameters,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ConstGenericsValuesAsTypeParameters | ex:relatedTo | ex:TypeSystem | (ex:ConstGenericsValuesAsTypeParameters,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:ConstGenericsValuesAsTypeParameters | ex:relatedTo | ex:StatementsAndExpressions | (ex:ConstGenericsValuesAsTypeParameters,ex:StatementsAndExpressions) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:TypeLevelProgramming | ex:relatedTo | ex:Generics | (ex:TypeLevelProgramming,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:TypeLevelProgramming | ex:relatedTo | ex:Traits | (ex:TypeLevelProgramming,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:Generics_01generics | ex:relatedTo | ex:Traits | (ex:Generics_01generics,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:ConstGenericsAndTraitObjects | ex:relatedTo | ex:Generics | (ex:ConstGenericsAndTraitObjects,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:ConstGenericsAndTraitObjects | ex:relatedTo | ex:ConstGenericsValuesAsTypeParameters | (ex:ConstGenericsAndTraitObjects,ex:ConstGenericsValuesAsTypeParameters) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:ConstGenericsAndTraitObjects | ex:relatedTo | ex:Traits | (ex:ConstGenericsAndTraitObjects,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:ConstGenericsAndTraitObjects | ex:relatedTo | ex:DispatchMechanisms | (ex:ConstGenericsAndTraitObjects,ex:DispatchMechanisms) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:ConstGenericsAndTraitObjects | ex:relatedTo | ex:GenericAssociatedTypesGATs | (ex:ConstGenericsAndTraitObjects,ex:GenericAssociatedTypesGATs) 已存在 dependsOn/entails，删除冗余 relatedTo |
+| R0-dedup | removed redundant relatedTo | ex:ConstGenericsAndTraitObjects | ex:relatedTo | ex:TypeLevelProgramming | (ex:ConstGenericsAndTraitObjects,ex:TypeLevelProgramming) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:MemoryManagement | ex:relatedTo | ex:Ownership | (ex:MemoryManagement,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:MemoryManagement | ex:relatedTo | ex:SafeAndEffectiveUnsafeRust | (ex:MemoryManagement,ex:SafeAndEffectiveUnsafeRust) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:InteriorMutability | ex:relatedTo | ex:Ownership | (ex:InteriorMutability,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
@@ -219,35 +246,7 @@
 | R0-dedup | removed redundant relatedTo | ex:CowAndBorrowed | ex:relatedTo | ex:Ownership | (ex:CowAndBorrowed,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:CowAndBorrowed | ex:relatedTo | ex:Borrowing | (ex:CowAndBorrowed,ex:Borrowing) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:CowAndBorrowed | ex:relatedTo | ex:Traits | (ex:CowAndBorrowed,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:CowAndBorrowed | ex:relatedTo | ex:ZeroCostAbstractions | (ex:CowAndBorrowed,ex:ZeroCostAbstractions) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:SmartPointers | ex:relatedTo | ex:Ownership | (ex:SmartPointers,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:SmartPointers | ex:relatedTo | ex:Borrowing | (ex:SmartPointers,ex:Borrowing) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:SmartPointers | ex:relatedTo | ex:MemoryManagement | (ex:SmartPointers,ex:MemoryManagement) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:SmartPointers | ex:relatedTo | ex:PinAndUnpin | (ex:SmartPointers,ex:PinAndUnpin) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:SmartPointers | ex:relatedTo | ex:CowAndBorrowed | (ex:SmartPointers,ex:CowAndBorrowed) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:MemoryManagement_02memorymana | ex:relatedTo | ex:MemoryManagement | (ex:MemoryManagement_02memorymana,ex:MemoryManagement) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:ErrorHandling_03errorhandl | ex:relatedTo | ex:TypeSystem | (ex:ErrorHandling_03errorhandl,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:ErrorHandling_03errorhandl | ex:relatedTo | ex:Concurrency | (ex:ErrorHandling_03errorhandl,ex:Concurrency) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:ErrorHandling_03errorhandl_1 | ex:relatedTo | ex:TypeSystem | (ex:ErrorHandling_03errorhandl_1,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:ErrorHandling_03errorhandl_1 | ex:relatedTo | ex:Traits | (ex:ErrorHandling_03errorhandl_1,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:ErrorHandling_03errorhandl_1 | ex:relatedTo | ex:Generics | (ex:ErrorHandling_03errorhandl_1,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:ErrorHandling_03errorhandl_1 | ex:relatedTo | ex:AsyncProgramming | (ex:ErrorHandling_03errorhandl_1,ex:AsyncProgramming) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:Panic | ex:relatedTo | ex:ErrorHandling_03errorhandl | (ex:Panic,ex:ErrorHandling_03errorhandl) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:Panic | ex:relatedTo | ex:ForeignFunctionInterfaceFFI_04ffi | (ex:Panic,ex:ForeignFunctionInterfaceFFI_04ffi) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:Panic | ex:relatedTo | ex:BehaviorConsideredUndefined | (ex:Panic,ex:BehaviorConsideredUndefined) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:RangeTypes | ex:relatedTo | ex:TypeSystem | (ex:RangeTypes,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:RangeTypes | ex:relatedTo | ex:Generics | (ex:RangeTypes,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:RangeTypes | ex:relatedTo | ex:RustVersionTracking | (ex:RangeTypes,ex:RustVersionTracking) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:ClosureTypes | ex:relatedTo | ex:Traits | (ex:ClosureTypes,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:ClosureTypes | ex:relatedTo | ex:AsyncProgramming | (ex:ClosureTypes,ex:AsyncProgramming) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:NewtypeAndWrapperTypes | ex:relatedTo | ex:TypeSystem | (ex:NewtypeAndWrapperTypes,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:NewtypeAndWrapperTypes | ex:relatedTo | ex:Traits | (ex:NewtypeAndWrapperTypes,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:NewtypeAndWrapperTypes | ex:relatedTo | ex:Generics | (ex:NewtypeAndWrapperTypes,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:NewtypeAndWrapperTypes | ex:relatedTo | ex:DesignPatterns | (ex:NewtypeAndWrapperTypes,ex:DesignPatterns) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:TypeSystem_04typesandco | ex:relatedTo | ex:TypeSystem | (ex:TypeSystem_04typesandco,ex:TypeSystem) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:TypeSystem_04typesandco | ex:relatedTo | ex:Generics | (ex:TypeSystem_04typesandco,ex:Generics) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| R0-dedup | removed redundant relatedTo | ex:TypeSystem_04typesandco | ex:relatedTo | ex:Traits | (ex:TypeSystem_04typesandco,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| ... | ... | ... | ... | ... | 共 5948 条，详见 JSON |
+| ... | ... | ... | ... | ... | 共 4918 条，详见 JSON |
 
 ## 机器可读
 

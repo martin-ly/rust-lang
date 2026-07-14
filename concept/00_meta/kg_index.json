@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 491,
+    "entity_count": 512,
     "schema": "simple KG index"
   },
   "entities": [
@@ -895,6 +895,24 @@
       "related_crates": []
     },
     {
+      "id": "concept:00_meta/05_quizzes/01_quiz_meta_framework.md",
+      "path": "00_meta/05_quizzes/01_quiz_meta_framework.md",
+      "title": "测验：元层框架与知识体系架构（L0）",
+      "en": "Meta Framework and Knowledge Architecture Quiz",
+      "summary": "L0 standalone quiz on the knowledge-base architecture itself: the L0–L7 layered structure, Bloom taxonomy mapping, A/S/P cognitive marking, and the canonical single-source-of-truth rules.",
+      "bloom": "L2-L3",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Concept 元层",
+          "path": "../README.md"
+        }
+      ],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:00_meta/knowledge_topology/01_concept_definition_atlas.md",
       "path": "00_meta/knowledge_topology/01_concept_definition_atlas.md",
       "title": "概念定义图谱（Concept Definition Atlas）",
@@ -964,7 +982,7 @@
       "path": "00_meta/knowledge_topology/06_inter_layer_mapping_atlas.md",
       "title": "层间映射图谱（Inter-Layer Mapping Atlas）",
       "en": "Inter-Layer Mapping Atlas",
-      "summary": "L0–L7 各层之间的依赖、蕴含、反馈关系，基于前置/后置概念引用统计。",
+      "summary": "L0–L7 各层之间的依赖、蕴含、反馈关系，基于前置/后置概念元数据与「相关概念」章节引用的全层统计。",
       "bloom": "Meta",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [],
@@ -1859,14 +1877,6 @@
         {
           "title": "Match Expressions",
           "path": "03_statements_and_expressions.md"
-        },
-        {
-          "title": "Destructuring",
-          "path": "../../02_intermediate/01_generics/01_generics.md"
-        },
-        {
-          "title": "Refutability Analysis",
-          "path": "../../02_intermediate/04_types_and_conversions/04_type_system_advanced.md"
         }
       ],
       "theorems": [],
@@ -2510,14 +2520,6 @@
         {
           "title": "Ownership",
           "path": "../01_ownership_borrow_lifetime/01_ownership.md"
-        },
-        {
-          "title": "Type System",
-          "path": "../02_type_system/01_type_system.md"
-        },
-        {
-          "title": "Control Flow",
-          "path": "../04_control_flow/01_control_flow.md"
         }
       ],
       "postrequisites": [
@@ -2541,24 +2543,12 @@
         {
           "title": "Error Handling 基础",
           "path": "01_error_handling_basics.md"
-        },
-        {
-          "title": "Control Flow",
-          "path": "../04_control_flow/01_control_flow.md"
-        },
-        {
-          "title": "Functions",
-          "path": "../07_modules_and_items/02_functions.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Error Handling 深入",
           "path": "../../02_intermediate/03_error_handling/01_error_handling.md"
-        },
-        {
-          "title": "Iterator Patterns",
-          "path": "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md"
         }
       ],
       "theorems": [],
@@ -2638,24 +2628,12 @@
         {
           "title": "Ownership",
           "path": "../01_ownership_borrow_lifetime/01_ownership.md"
-        },
-        {
-          "title": "Modules",
-          "path": "../07_modules_and_items/01_modules_and_paths.md"
-        },
-        {
-          "title": "Error Handling",
-          "path": "../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Testing Strategies",
           "path": "../../06_ecosystem/09_testing_and_quality/03_testing.md"
-        },
-        {
-          "title": "Security Practices",
-          "path": "../../06_ecosystem/07_security_and_cryptography/01_security_practices.md"
         }
       ],
       "theorems": [],
@@ -2674,18 +2652,6 @@
         {
           "title": "Testing Basics",
           "path": "01_testing_basics.md"
-        },
-        {
-          "title": "Documentation",
-          "path": "../../06_ecosystem/09_testing_and_quality/02_documentation.md"
-        },
-        {
-          "title": "DevOps and CI/CD",
-          "path": "../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md"
-        },
-        {
-          "title": "Cargo Subcommands",
-          "path": "../../06_ecosystem/01_cargo/12_cargo_subcommands_and_plugins.md"
         }
       ],
       "theorems": [],
@@ -3184,6 +3150,51 @@
         {
           "title": "Async/Await",
           "path": "../../03_advanced/01_async/01_async.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": [
+        "c04_generic"
+      ]
+    },
+    {
+      "id": "concept:02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
+      "path": "02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
+      "title": "",
+      "en": "Const Generics and Trait Objects",
+      "summary": "The interaction between const generics and `dyn Trait`: where the compiler can and cannot erase type parameters, and how to design APIs that combine compile-time constants with runtime polymorphism.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Generics",
+          "path": "01_generics.md"
+        },
+        {
+          "title": "Const Generics",
+          "path": "02_const_generics.md"
+        },
+        {
+          "title": "Traits",
+          "path": "../00_traits/01_traits.md"
+        },
+        {
+          "title": "Dispatch Mechanisms",
+          "path": "../00_traits/02_dispatch_mechanisms.md"
+        },
+        {
+          "title": "类型系统基础",
+          "path": "../../01_foundation/02_type_system/01_type_system.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Generic Associated Types",
+          "path": "../00_traits/07_generic_associated_types.md"
+        },
+        {
+          "title": "Type-Level Programming",
+          "path": "03_type_level_programming.md"
         }
       ],
       "theorems": [],
@@ -4658,6 +4669,84 @@
       ]
     },
     {
+      "id": "concept:03_advanced/01_async/12_waker_contract_deep_dive.md",
+      "path": "03_advanced/01_async/12_waker_contract_deep_dive.md",
+      "title": "",
+      "en": "Waker Contract Deep Dive",
+      "summary": "A complete analysis of the Waker contract at the implementation level: the correct pattern repertoire for hand-written `RawWakerVTable`s (Arc-counting, `Wake`-trait, and inline variants), the precise semantics of `wake`/`wake_by_ref` (wake must trigger a re-poll; spurious wakes are legal), and a catalog of contract violations (lost wake deadlock shown with a timing diagram and loom-style reasoning; double-free via incorrect clone/drop accounting shown with miri-level reasoning).",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Async/Await",
+          "path": "01_async.md"
+        },
+        {
+          "title": "Future 与 Executor 机制",
+          "path": "04_future_and_executor_mechanisms.md"
+        },
+        {
+          "title": "Pin 与 Unpin",
+          "path": "08_pin_unpin.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Executor 公平性与调度",
+          "path": "10_executor_fairness_and_scheduling.md"
+        },
+        {
+          "title": "Tokio 运行时内部机制",
+          "path": "../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md"
+        },
+        {
+          "title": "Unsafe",
+          "path": "../02_unsafe/01_unsafe.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": [
+        "c06_async"
+      ]
+    },
+    {
+      "id": "concept:03_advanced/01_async/13_async_trait_object_safety.md",
+      "path": "03_advanced/01_async/13_async_trait_object_safety.md",
+      "title": "",
+      "en": "Async Trait Object Safety",
+      "summary": "The complete solution spectrum for dyn-compatible async traits: the `async_trait` macro (Box allocation per call, single-thread variant), return type notation (RTN, nightly-only), RPITIT (stable since 1.75 but dyn-incompatible), hand-written boxed futures, and the future of native `async fn` in `dyn Trait` — with a scenario × solution × overhead × MSRV selection matrix.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Traits",
+          "path": "../../02_intermediate/00_traits/01_traits.md"
+        },
+        {
+          "title": "Async/Await",
+          "path": "01_async.md"
+        },
+        {
+          "title": "Async 边界全景",
+          "path": "06_async_boundary_panorama.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Async Closures",
+          "path": "07_async_closures.md"
+        },
+        {
+          "title": "Waker 契约深度解析",
+          "path": "12_waker_contract_deep_dive.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": [
+        "c06_async"
+      ]
+    },
+    {
       "id": "concept:03_advanced/02_unsafe/00_before_formal.md",
       "path": "03_advanced/02_unsafe/00_before_formal.md",
       "title": "是否需要进入 L4 形式化层？",
@@ -4828,14 +4917,6 @@
         {
           "title": "Atomics and Memory Ordering",
           "path": "../00_concurrency/05_atomics_and_memory_ordering.md"
-        },
-        {
-          "title": "Inline Assembly",
-          "path": "../05_inline_assembly/01_inline_assembly.md"
-        },
-        {
-          "title": "Tree Borrows",
-          "path": "../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md"
         }
       ],
       "theorems": [],
@@ -4862,6 +4943,49 @@
         {
           "title": "Custom Allocators",
           "path": "../06_low_level_patterns/01_custom_allocators.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
+      "path": "03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
+      "title": "",
+      "en": "Unsafe in Async Contexts",
+      "summary": "Unsafe operations inside async Rust: how the async state machine, Pin contract, and Waker safety interact with raw pointers, FFI, and manual memory management. Covers the soundness boundaries that are not enforced by the borrow checker across await points.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Async/Await",
+          "path": "../01_async/01_async.md"
+        },
+        {
+          "title": "Pin 与 Unpin",
+          "path": "../01_async/08_pin_unpin.md"
+        },
+        {
+          "title": "Unsafe Rust",
+          "path": "01_unsafe.md"
+        },
+        {
+          "title": "Waker 契约",
+          "path": "../01_async/12_waker_contract_deep_dive.md"
+        },
+        {
+          "title": "Traits",
+          "path": "../../02_intermediate/00_traits/01_traits.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Async FFI Boundary",
+          "path": "../04_ffi/04_async_ffi_boundary.md"
+        },
+        {
+          "title": "Async Boundary Panorama",
+          "path": "../01_async/06_async_boundary_panorama.md"
         }
       ],
       "theorems": [],
@@ -5006,28 +5130,12 @@
         {
           "title": "过程宏（Procedural Macro）",
           "path": "02_proc_macro.md"
-        },
-        {
-          "title": "宏调试与诊断",
-          "path": "04_macro_debugging_and_diagnostics.md"
-        },
-        {
-          "title": "元编程",
-          "path": "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md"
-        },
-        {
-          "title": "Cargo 注册表与包发布",
-          "path": "../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Cargo semver-checks",
           "path": "../../07_future/03_preview_features/27_cargo_semver_checks_preview.md"
-        },
-        {
-          "title": "工程实践与生产级模式",
-          "path": "../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md"
         }
       ],
       "theorems": [],
@@ -5164,14 +5272,6 @@
         {
           "title": "FFI Advanced",
           "path": "../04_ffi/02_ffi_advanced.md"
-        },
-        {
-          "title": "Linkage",
-          "path": "../04_ffi/03_linkage.md"
-        },
-        {
-          "title": "Cargo Profiles and Lints",
-          "path": "../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md"
         }
       ],
       "theorems": [],
@@ -5266,6 +5366,49 @@
         {
           "title": "Rust vs C++",
           "path": "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:03_advanced/04_ffi/04_async_ffi_boundary.md",
+      "path": "03_advanced/04_ffi/04_async_ffi_boundary.md",
+      "title": "",
+      "en": "Async FFI Boundary",
+      "summary": "Integrating foreign functions and C-style callbacks with Rust async runtimes: how to bridge blocking/external I/O with Future-based code without violating Send/Sync, Pin, or Waker contracts.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust FFI",
+          "path": "01_rust_ffi.md"
+        },
+        {
+          "title": "Async/Await",
+          "path": "../01_async/01_async.md"
+        },
+        {
+          "title": "Waker 契约",
+          "path": "../01_async/12_waker_contract_deep_dive.md"
+        },
+        {
+          "title": "Send 与 Sync",
+          "path": "../00_concurrency/02_send_sync_auto_traits.md"
+        },
+        {
+          "title": "Traits",
+          "path": "../../02_intermediate/00_traits/01_traits.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Async 中的 Unsafe",
+          "path": "../02_unsafe/08_async_in_unsafe_contexts.md"
+        },
+        {
+          "title": "Async 边界全景",
+          "path": "../01_async/06_async_boundary_panorama.md"
         }
       ],
       "theorems": [],
@@ -7432,6 +7575,136 @@
       "related_crates": []
     },
     {
+      "id": "concept:04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md",
+      "path": "04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md",
+      "title": "",
+      "en": "Process Calculi for Rust: CSP, CCS, and the Pi-Calculus",
+      "summary": "Formal skeletons of Hoare's CSP, Milner's CCS and the pi-calculus, and a precise correspondence map to Rust's mpsc channels, select! and thread::spawn — with explicit boundaries on where the correspondence stops short of isomorphism.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "L3 并发编程",
+          "path": "../../03_advanced/00_concurrency/01_concurrency.md"
+        },
+        {
+          "title": "L4 线性逻辑",
+          "path": "../01_ownership_logic/01_linear_logic.md"
+        },
+        {
+          "title": "L4 Lambda 演算",
+          "path": "../00_type_theory/05_lambda_calculus.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "线性化与一致性谱系",
+          "path": "02_linearizability_and_consistency.md"
+        },
+        {
+          "title": "Actor 形式语义",
+          "path": "03_actor_semantics.md"
+        },
+        {
+          "title": "L5 五模型定义矩阵",
+          "path": "../../05_comparative/00_paradigms/04_five_models_definition_matrix.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md",
+      "path": "04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md",
+      "title": "",
+      "en": "Linearizability and the Consistency Spectrum",
+      "summary": "Herlihy-Wing's formal definition of linearizability (histories, legal sequential reorderings, real-time order preservation), proof techniques (linearization points, invariants), the spectrum from sequential to eventual consistency with its CAP relation, and a linearization-point analysis of a Treiber stack in Rust.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "L3 并发编程",
+          "path": "../../03_advanced/00_concurrency/01_concurrency.md"
+        },
+        {
+          "title": "L3 无锁结构谱系",
+          "path": "../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md"
+        },
+        {
+          "title": "L4 Hoare 逻辑",
+          "path": "../03_operational_semantics/02_hoare_logic.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "进程代数与 Rust",
+          "path": "01_process_calculi_for_rust.md"
+        },
+        {
+          "title": "L6 CRDT 谱系",
+          "path": "../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md"
+        },
+        {
+          "title": "L6 因果序与向量时钟",
+          "path": "../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/07_concurrency_semantics/03_actor_semantics.md",
+      "path": "04_formal/07_concurrency_semantics/03_actor_semantics.md",
+      "title": "",
+      "en": "Actor Semantics: From Hewitt's Axioms to the Rust Ecosystem",
+      "summary": "The formal semantics of the Actor model (Hewitt 1973, Agha 1986): actors as address + mailbox + behavior, the three axioms (send/create/become), supervision and location transparency, Erlang OTP supervision-tree semantics, the mapping to Rust's actix/ractor/kameo, and the boundary against channel models.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "L3 并发编程",
+          "path": "../../03_advanced/00_concurrency/01_concurrency.md"
+        },
+        {
+          "title": "L4 进程代数与 Rust",
+          "path": "01_process_calculi_for_rust.md"
+        },
+        {
+          "title": "L3 谱系页 §4.1",
+          "path": "../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "线性化与一致性谱系",
+          "path": "02_linearizability_and_consistency.md"
+        },
+        {
+          "title": "L6 分布式共识",
+          "path": "../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md"
+        },
+        {
+          "title": "L5 五模型定义矩阵",
+          "path": "../../05_comparative/00_paradigms/04_five_models_definition_matrix.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/07_concurrency_semantics/README.md",
+      "path": "04_formal/07_concurrency_semantics/README.md",
+      "title": "并发形式语义子层（Concurrency Semantics）",
+      "en": "Concurrency Semantics (Formal Models of Concurrent Computation)",
+      "summary": "Navigation page for the L4 concurrency-semantics sublayer: process calculi (CSP/CCS/pi-calculus), linearizability and the consistency spectrum, and Actor formal semantics — the formal foundations beneath Rust's concurrency primitives.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:04_formal/README.md",
       "path": "04_formal/README.md",
       "title": "L4 形式化理论层（Formal Methods）",
@@ -7536,6 +7809,43 @@
         {
           "title": "Traits",
           "path": "../../02_intermediate/00_traits/01_traits.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": [
+        "c14_semantic_web"
+      ]
+    },
+    {
+      "id": "concept:05_comparative/00_paradigms/04_five_models_definition_matrix.md",
+      "path": "05_comparative/00_paradigms/04_five_models_definition_matrix.md",
+      "title": "",
+      "en": "Five Execution Models Definition Matrix",
+      "summary": "A one-page definition matrix of the five execution models (synchronous, concurrent, parallel, asynchronous, distributed) cross-referenced by definition, formal root, Rust vehicle, canonical primitives, failure modes, and links to their authoritative pages — plus a selection decision tree.",
+      "bloom": "L2-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "L3 并发编程",
+          "path": "../../03_advanced/00_concurrency/01_concurrency.md"
+        },
+        {
+          "title": "L4 进程代数与 Rust",
+          "path": "../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "L5 执行模型同构性矩阵",
+          "path": "02_execution_model_isomorphism.md"
+        },
+        {
+          "title": "L4 线性化与一致性谱系",
+          "path": "../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md"
+        },
+        {
+          "title": "L6 CRDT 谱系",
+          "path": "../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md"
         }
       ],
       "theorems": [],
@@ -8434,7 +8744,7 @@
     {
       "id": "concept:06_ecosystem/00_toolchain/14_development_tools.md",
       "path": "06_ecosystem/00_toolchain/14_development_tools.md",
-      "title": "",
+      "title": "Rust 常用开发工具",
       "en": "Useful Development Tools",
       "summary": "Rust 官方/社区推荐的开发工具：rustfmt、rustfix/cargo fix、Clippy、rust-analyzer，以及它们在日常开发中的典型用法。 Official and community recommended Rust development tools: rustfmt, rustfix/cargo fix, Clippy, rust-analyzer, and typical daily workflows.",
       "bloom": "L1-L3",
@@ -9957,6 +10267,45 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md",
+      "path": "06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md",
+      "title": "",
+      "en": "Tokio Runtime Internals",
+      "summary": "The authoritative deep-dive page for Tokio's runtime architecture: multi_thread vs current_thread flavors, the mio-backed I/O driver and time driver, the blocking thread pool (`spawn_blocking` semantics and the 512-thread default cap), JoinSet/JoinHandle/AbortHandle lifecycle semantics, LocalSet and `!Send` tasks, `tokio::select!` semantics (biased mode, drop of cancelled branches), and observability via RuntimeMetrics and tokio-console.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Future 与 Executor 机制",
+          "path": "../../03_advanced/01_async/04_future_and_executor_mechanisms.md"
+        },
+        {
+          "title": "Async/Await",
+          "path": "../../03_advanced/01_async/01_async.md"
+        },
+        {
+          "title": "Waker 契约深度解析",
+          "path": "../../03_advanced/01_async/12_waker_contract_deep_dive.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Executor 公平性与调度",
+          "path": "../../03_advanced/01_async/10_executor_fairness_and_scheduling.md"
+        },
+        {
+          "title": "高性能网络服务架构",
+          "path": "08_high_performance_network_service_architecture.md"
+        },
+        {
+          "title": "Glommio 与 Thread-per-Core",
+          "path": "05_glommio_and_thread_per_core.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/05_systems_and_embedded/01_wasi.md",
       "path": "06_ecosystem/05_systems_and_embedded/01_wasi.md",
       "title": "",
@@ -9972,32 +10321,12 @@
         {
           "title": "Ownership",
           "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
-        },
-        {
-          "title": "Unsafe",
-          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
-        },
-        {
-          "title": "FFI",
-          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
-        },
-        {
-          "title": "Traits",
-          "path": "../../02_intermediate/00_traits/01_traits.md"
-        },
-        {
-          "title": "Generics",
-          "path": "../../02_intermediate/01_generics/01_generics.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Application Domains",
           "path": "../06_data_and_distributed/01_application_domains.md"
-        },
-        {
-          "title": "Formal Ecosystem Tower",
-          "path": "../08_formal_verification/01_formal_ecosystem_tower.md"
         }
       ],
       "theorems": [],
@@ -10181,6 +10510,49 @@
         {
           "title": "交叉编译",
           "path": "02_cross_compilation.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
+      "path": "06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
+      "title": "",
+      "en": "Async in no_std and Embedded Systems",
+      "summary": "Asynchronous Rust without the standard library: executor design, interrupt-driven futures, memory constraints, and the trade-offs between embassy, rtic, and custom executors on bare-metal devices.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Async/Await",
+          "path": "../../03_advanced/01_async/01_async.md"
+        },
+        {
+          "title": "Pin 与 Unpin",
+          "path": "../../03_advanced/01_async/08_pin_unpin.md"
+        },
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
+        },
+        {
+          "title": "交叉编译",
+          "path": "02_cross_compilation.md"
+        },
+        {
+          "title": "Rust vs C",
+          "path": "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Async FFI Boundary",
+          "path": "../../03_advanced/04_ffi/04_async_ffi_boundary.md"
+        },
+        {
+          "title": "Async 中的 Unsafe",
+          "path": "../../03_advanced/02_unsafe/08_async_in_unsafe_contexts.md"
         }
       ],
       "theorems": [],
@@ -10387,6 +10759,84 @@
         {
           "title": "Future Roadmap",
           "path": "../../07_future/01_edition_roadmap/04_roadmap.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md",
+      "path": "06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md",
+      "title": "",
+      "en": "CRDT Type Zoo: State-based, Op-based, and the Merge Lattice",
+      "summary": "The CRDT spectrum — state-based CvRDTs with semilattice merges (G-Counter, PN-Counter, OR-Set, LWW-Register, MV-Register, RGA), op-based CmRDTs with commutative operations, the merge-lattice formalization, Rust implementations (rust-crdt, yrs, automerge-rs), and divergence counterexamples from non-commutative merges.",
+      "bloom": "L4-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "L4 线性化与一致性谱系",
+          "path": "../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md"
+        },
+        {
+          "title": "L5 五模型定义矩阵",
+          "path": "../../05_comparative/00_paradigms/04_five_models_definition_matrix.md"
+        },
+        {
+          "title": "L3 谱系页 §5.3",
+          "path": "../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "L6 因果序与向量时钟",
+          "path": "09_causal_ordering_vector_clocks.md"
+        },
+        {
+          "title": "L6 分布式共识",
+          "path": "06_distributed_consensus.md"
+        },
+        {
+          "title": "L6 数据工程",
+          "path": "05_data_engineering.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md",
+      "path": "06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md",
+      "title": "",
+      "en": "Causal Ordering and Vector Clocks",
+      "summary": "Lamport's 1978 partial order and logical clocks, the Fidge/Mattern vector clock algorithm, concurrency detection and its counterexamples, causal ordering in Rust distributed libraries (tracing, version vectors), and the contrast with shared-memory happens-before.",
+      "bloom": "L4-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "L4 线性化与一致性谱系",
+          "path": "../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md"
+        },
+        {
+          "title": "L5 五模型定义矩阵",
+          "path": "../../05_comparative/00_paradigms/04_five_models_definition_matrix.md"
+        },
+        {
+          "title": "L3 并发编程（共享内存 happens-before）",
+          "path": "../../03_advanced/00_concurrency/01_concurrency.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "L6 CRDT 谱系",
+          "path": "08_crdt_type_zoo.md"
+        },
+        {
+          "title": "L6 分布式共识",
+          "path": "06_distributed_consensus.md"
+        },
+        {
+          "title": "L6 流处理生态",
+          "path": "03_stream_processing_ecosystem.md"
         }
       ],
       "theorems": [],
@@ -11430,6 +11880,78 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/13_quizzes/01_quiz_networking_async_ecosystem.md",
+      "path": "06_ecosystem/13_quizzes/01_quiz_networking_async_ecosystem.md",
+      "title": "测验：网络与异步生态（L6）",
+      "en": "Networking and Async Ecosystem Quiz",
+      "summary": "L6 standalone quiz on the Rust networking and async ecosystem: web frameworks (Axum/Actix-web/Rocket/Poem), async runtimes (Tokio work-stealing vs Glommio thread-per-core), QUIC/HTTP-3 protocols, and eBPF.",
+      "bloom": "L2-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Web 框架",
+          "path": "../04_web_and_networking/03_web_frameworks.md"
+        }
+      ],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/13_quizzes/02_quiz_database_storage.md",
+      "path": "06_ecosystem/13_quizzes/02_quiz_database_storage.md",
+      "title": "测验：数据库与存储生态（L6）",
+      "en": "Database and Storage Ecosystem Quiz",
+      "summary": "L6 standalone quiz on the Rust database ecosystem: access libraries (SQLx/Diesel/SeaORM/Toasty), connection pooling, and Rust-built database systems (TiKV/Materialize/Meilisearch/SurrealDB).",
+      "bloom": "L2-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "数据库访问",
+          "path": "../06_data_and_distributed/02_database_access.md"
+        }
+      ],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/13_quizzes/03_quiz_security_testing.md",
+      "path": "06_ecosystem/13_quizzes/03_quiz_security_testing.md",
+      "title": "测验：安全与测试生态（L6）",
+      "en": "Security and Testing Ecosystem Quiz",
+      "summary": "L6 standalone quiz on the Rust security and testing ecosystem: Kerckhoffs's principle and crypto primitives, cargo vet supply-chain auditing, and the testing pyramid with property testing, fuzzing, and Miri.",
+      "bloom": "L2-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "安全实践",
+          "path": "../07_security_and_cryptography/01_security_practices.md"
+        }
+      ],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/13_quizzes/04_quiz_domain_applications.md",
+      "path": "06_ecosystem/13_quizzes/04_quiz_domain_applications.md",
+      "title": "测验：领域应用生态（L6）",
+      "en": "Domain Applications Ecosystem Quiz",
+      "summary": "L6 standalone quiz on Rust's domain application ecosystems: blockchain contracts and deterministic execution, WebAssembly targets and JS interop, game ECS architecture, the ML/data-science stack, safety-critical AUTOSAR alignment, quantum computing toolkits, and competitive programming with formal verification.",
+      "bloom": "L2-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "区块链",
+          "path": "../11_domain_applications/01_blockchain.md"
+        }
+      ],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/README.md",
       "path": "06_ecosystem/README.md",
       "title": "L6 生态工程层（Ecosystem & Engineering）",
@@ -11853,6 +12375,33 @@
       "rust_version": "1.98.0 (nightly preview)",
       "prerequisites": [],
       "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:07_future/00_version_tracking/rust_1_98_stabilized.md",
+      "path": "07_future/00_version_tracking/rust_1_98_stabilized.md",
+      "title": "Rust 1.98.0 稳定特性（跟踪骨架）",
+      "en": "Rust 1.98.0 Stabilized Features (Tracking Skeleton)",
+      "summary": "Rust 1.98.0 稳定特性的权威汇总页骨架：特性矩阵已迁移自 1.98 周期跟踪清单，正文待 2026-08-20 稳定后按官方发布笔记实测填充。",
+      "bloom": "L2-L3",
+      "rust_version": "1.98.0+ (Edition 2024) —— **预计 2026-08-20 进入 stable 通道，当前为跟踪骨架**",
+      "prerequisites": [
+        {
+          "title": "Rust 版本跟踪",
+          "path": "01_rust_version_tracking.md"
+        },
+        {
+          "title": "Rust 1.97 稳定特性",
+          "path": "rust_1_97_stabilized.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Rust 1.98+ 前沿特性预览",
+          "path": "rust_1_98_preview.md"
+        }
+      ],
       "theorems": [],
       "related_crates": []
     },
@@ -13264,6 +13813,24 @@
           "path": "https://github.com/rust-lang/rust/labels/F-roadmap"
         }
       ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:07_future/05_quizzes/01_quiz_version_and_preview.md",
+      "path": "07_future/05_quizzes/01_quiz_version_and_preview.md",
+      "title": "测验：版本演进、Edition 机制与前沿特性（L7）",
+      "en": "Version Evolution, Editions and Preview Features Quiz",
+      "summary": "L7 standalone quiz on Rust's release train, edition mechanism, stabilized features in 1.90–1.97, and the status semantics of nightly preview features tracked for 1.98+.",
+      "bloom": "L2-L3",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 版本跟踪",
+          "path": "../00_version_tracking/01_rust_version_tracking.md"
+        }
+      ],
+      "postrequisites": [],
       "theorems": [],
       "related_crates": []
     },
