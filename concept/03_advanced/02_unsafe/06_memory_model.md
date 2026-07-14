@@ -121,7 +121,7 @@ Rust 内存的最基本单位是**字节（byte）**。与硬件字节不同，R
 - 将带有 provenance 的指针转译为整数再转回指针，可能丢失 provenance 信息。
 - 在 const 上下文中，指针 provenance 的重组受到严格限制。
 
-```rust
+```rust,ignore
 // 危险：可能丢失 provenance
 let ptr: *mut u8 = alloc(layout);
 let addr = ptr as usize;

@@ -807,7 +807,7 @@ rustc 1.97.0 实测：`error[E0499]: cannot borrow *state.term as mutable more t
 
 **修正**：`Arc<Mutex<NodeState>>` 共享所有权 + 互斥；注意持有锁期间不得做网络 I/O，否则选举超时会被锁竞争放大：
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex};
 fn elect(state: Arc<Mutex<NodeState>>) {
     std::thread::scope(|s| {

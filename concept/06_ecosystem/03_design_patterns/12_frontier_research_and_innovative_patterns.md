@@ -113,7 +113,7 @@ where
 
 **概念**: 允许函数对 Effect 类型进行抽象。
 
-```rust
+```rust,ignore
 /// Effect 多态函数
 pub fn polymorphic_effect<E: Effect<Input = i32, Output = String>>(
     effect: E,
@@ -265,7 +265,7 @@ pub fn algebraic_effect_example() {
 
 ### 3.2 可恢复效应 (Resumable Effects)
 
-```rust
+```rust,ignore
 /// 可恢复效应：异步中断和恢复
 pub enum Resumable<T, E> {
     Done(T),
@@ -668,7 +668,7 @@ pub fn capability_example() {
 
 ### 5.2 能力传递和撤销
 
-```rust
+```rust,ignore
 /// 可撤销的能力
 pub struct RevocableCapability<P> {
     capability: Option<Capability<P>>,
@@ -816,6 +816,12 @@ impl Qubit {
     }
 }
 
+impl Default for Qubit {
+    fn default() -> Self {
+        Self::zero()
+    }
+}
+
 /// 量子电路构建器模式
 pub struct QuantumCircuit {
     qubits: Vec<Qubit>,
@@ -863,7 +869,7 @@ pub fn quantum_pattern_example() {
 
 1. **异步析构 (Async Drop)**
 
-   ```rust
+   ```rust,ignore
    impl AsyncDrop for Connection {
        async fn async_drop(&mut self) {
            self.close().await;
@@ -873,7 +879,7 @@ pub fn quantum_pattern_example() {
 
 2. **生成器 (Generators)**
 
-   ```rust
+   ```rust,ignore
    gen fn fibonacci() -> impl Iterator<Item = u64> {
        let (mut a, mut b) = (0, 1);
        loop {
@@ -885,7 +891,7 @@ pub fn quantum_pattern_example() {
 
 3. **Try Blocks**
 
-   ```rust
+   ```rust,ignore
    let result: Result<i32, _> = try {
        let x = may_fail()?;
        let y = also_may_fail()?;
@@ -895,7 +901,7 @@ pub fn quantum_pattern_example() {
 
 4. **Stable Specialization**
 
-   ```rust
+   ```rust,ignore
    trait Process {
        fn process(&self);
    }

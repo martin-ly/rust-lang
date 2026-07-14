@@ -73,7 +73,7 @@ embedded-hal 1.0 的解决:
 
 **0.2 写法（碎片化）**:
 
-```rust
+```rust,ignore
 // 每个 HAL 实现自己的错误类型
 pub enum MySpiError { Timeout, BusBusy, CsFault }
 impl spi::Write<u8> for MySpi { type Error = MySpiError; }

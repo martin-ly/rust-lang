@@ -391,7 +391,7 @@ impl DynamicCheckout {
 
 ### 6.1 弹性模式组合：CircuitBreaker ∘ Retry ∘ Timeout
 
-```rust
+```rust,ignore
 // tower::Service 的组合中间件
 use tower::{Service, ServiceBuilder, timeout::TimeoutLayer};
 use tower::retry::RetryLayer;

@@ -68,7 +68,7 @@
 
 ### 1.2 Edition 2024 支持
 
-```rust
+```rust,ignore
 // Cargo.toml
 [package]
 name = "c10_networks_example"

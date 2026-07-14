@@ -1018,7 +1018,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 ### 7.2 使用 `syn` 解析
 
-```rust
+```rust,ignore
 use syn::parse::{Parse, ParseStream};
 use syn::{Ident, Token, LitStr};
 
@@ -1073,7 +1073,7 @@ pub fn sql(input: TokenStream) -> TokenStream {
 
 使用 `syn::Error::new_spanned` 产生带精确 span 的编译错误：
 
-```rust
+```rust,ignore
 use syn::{Error, Data};
 
 #[proc_macro_derive(Builder)]

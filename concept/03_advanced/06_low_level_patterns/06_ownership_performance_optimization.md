@@ -140,7 +140,7 @@ enum Good { A(u64, u8) }
 
 ## 八、缓存局部性
 
-```rust
+```rust,ignore
 // ❌ 数组 of pointers：cache miss 高
 let matrix: Vec<Box<[f64; 1024]>> = vec![...; n];
 

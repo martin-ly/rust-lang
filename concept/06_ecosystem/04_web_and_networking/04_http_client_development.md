@@ -50,7 +50,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 2.2 创建可复用客户端
 
-```rust
+```rust,ignore
 use reqwest::Client;
 use std::time::Duration;
 
@@ -155,7 +155,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 6. 代理与 Cookie
 
-```rust
+```rust,ignore
 use reqwest::Proxy;
 
 fn client_with_proxy() -> Result<reqwest::Client, reqwest::Error> {
@@ -197,7 +197,7 @@ rustc 1.97.0 实测：`error[E0308]: mismatched types`（expected `&mut [u8]`, f
 
 **修正**：先读字节再校验编码；reqwest 的 `.text()` / `.bytes()` 内部即此模式。
 
-```rust
+```rust,ignore
 fn read_response(mut stream: TcpStream) -> std::io::Result<String> {
     let mut buf = Vec::new();
     stream.read_to_end(&mut buf)?;

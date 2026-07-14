@@ -783,7 +783,7 @@ impl OrderSaga {
 
 CQRS+ES 的一个关键挑战是**原子性**：如何确保数据库更新和事件发布要么同时成功，要么同时失败？Outbox 模式通过**同一事务写入业务数据和事件**来解决。
 
-```rust
+```rust,ignore
 // Outbox 模式：在同一数据库事务中写入聚合状态和事件
 #[derive(Debug, Serialize, Deserialize)]
 struct OutboxMessage {
@@ -920,7 +920,7 @@ Rust 实现 CQRS+ES 的四个模块按数据流顺序组织，类型系统在每
 ### 6.1 事件定义与序列化
 >
 
-```rust
+```rust,ignore
 use serde::{Serialize, Deserialize};
 use chrono::{DateTime, Utc};
 use uuid::Uuid;
@@ -1079,7 +1079,7 @@ impl<ES: EventStore + Send + Sync> CommandHandler<PlaceOrderCommand> for PlaceOr
 ### 6.3 事件存储与投影
 >
 
-```rust
+```rust,ignore
 use sqlx::{PgPool, Row};
 
 pub struct PostgresEventStore {

@@ -99,7 +99,7 @@ macro_rules! generate_with_docs {
 
 ### 2.3 保留 Span 信息
 
-```rust
+```rust,ignore
 use proc_macro2::Span;
 use quote::quote_spanned;
 
@@ -263,7 +263,7 @@ cargo bloat --release
 
 ### 5.4 Criterion 基准测试
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn bench_generated(c: &mut Criterion) {

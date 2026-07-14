@@ -116,7 +116,7 @@ proc-macro2 = "1.0"
 
 ### 3.1 保留原始 Span
 
-```rust
+```rust,ignore
 use syn::{Error, Field};
 
 fn validate_field(field: &Field) -> Result<(), Error> {
@@ -132,7 +132,7 @@ fn validate_field(field: &Field) -> Result<(), Error> {
 
 ### 3.2 提供上下文和帮助
 
-```rust
+```rust,ignore
 use syn::Error;
 
 fn report_type_mismatch(field: &syn::Field, expected: &str, found: &str) -> Error {
@@ -153,7 +153,7 @@ fn report_type_mismatch(field: &syn::Field, expected: &str, found: &str) -> Erro
 
 一次性报告所有问题，避免用户逐个修复：
 
-```rust
+```rust,ignore
 match validate_all(&input) {
     Ok(_) => generate_code(),
     Err(errors) => errors
@@ -258,7 +258,7 @@ version = "2.0.0-rc.1"
 
 ### 5.3 Breaking Changes 处理
 
-```rust
+```rust,ignore
 // v1.8.0: 先添加弃用警告
 #[deprecated(since = "1.8.0", note = "will be removed in 2.0.0, use `new_api()`")]
 pub fn old_api() { new_api(); }

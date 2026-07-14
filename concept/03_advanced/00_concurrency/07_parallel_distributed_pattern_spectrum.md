@@ -349,7 +349,7 @@ for received in rx { // 接收消息
 
 ### 4.3 数据流与背压（Backpressure）
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 // 有界通道: 背压机制 —— 发送者阻塞/等待当缓冲区满

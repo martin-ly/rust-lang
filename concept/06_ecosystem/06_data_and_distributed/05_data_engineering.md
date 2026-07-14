@@ -410,7 +410,7 @@ async fn sql_etl(ctx: &SessionContext) -> datafusion::error::Result<()> {
 
 ### 4.3 Rust 中的 ETL 管道骨架
 
-```rust
+```rust,ignore
 // 完整的 Rust ETL 管道骨架
 use tokio::sync::mpsc;
 use tokio::task;
@@ -645,7 +645,7 @@ impl QueryEngine {
 
 将数据转换为 REST/gRPC API，供前端和微服务消费：
 
-```rust
+```rust,ignore
 // axum + DataFusion：数据即服务
 use axum::{routing::get, Router, extract::Query, Json};
 use serde::Deserialize;

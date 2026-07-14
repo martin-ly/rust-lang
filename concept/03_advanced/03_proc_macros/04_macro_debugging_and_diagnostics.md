@@ -188,7 +188,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 
 ### 4.2 组合多个错误
 
-```rust
+```rust,ignore
 fn validate_all(input: &DeriveInput) -> Result<(), Vec<Error>> {
     let mut errors = Vec::new();
     if let Err(e) = validate_generics(input) { errors.push(e); }
@@ -254,7 +254,7 @@ RUSTC_LOG=rustc_expand::trace_macros cargo build 2>&1 | tee expand.log
 
 ### 5.3 测量宏展开耗时
 
-```rust
+```rust,ignore
 use std::time::Instant;
 
 #[proc_macro]

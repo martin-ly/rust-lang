@@ -160,6 +160,22 @@ KNOWN_CRATES = {
     "orthrus", "numcodecs",
 }
 
+# --- 已知依赖缺失豁免清单（R2，2026-07-14）---
+# 以下依赖缺口已在文档侧统一标注 rust,ignore，并在此登记原因，供审计追溯。
+# 若未来 workspace 依赖启用相应 feature 或 crate 补齐模块，应回退对应 ignore 标注。
+DEP_KNOWN_MISSING = [
+    # (crate/模块, 原因, 影响文档)
+    ("reqwest[gzip]", "workspace reqwest 未启用 gzip feature（.gzip(true)）", "concept/06_ecosystem/04_web_and_networking/04_http_client_development.md"),
+    ("reqwest[cookies]", "workspace reqwest 未启用 cookies feature（.cookie_store(true)）", "concept/06_ecosystem/04_web_and_networking/04_http_client_development.md"),
+    ("chrono[serde]", "workspace chrono 未启用 serde feature（DateTime<Utc>: Serialize）", "concept/06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md"),
+    ("syn[parsing]", "workspace syn 未启用 parsing feature（Field::span / spanned::Spanned）", "concept/03_advanced/03_proc_macros/{03,05,08}"),
+    ("async_stream", "async-stream crate 不在 workspace 依赖中", "concept/06_ecosystem/04_web_and_networking/09_reactive_programming.md, concept/07_future/00_version_tracking/rust_1_90_stabilized.md"),
+    ("tokio[fs,process,rt-multi-thread]", "部分 rmeta 产物未启用对应 feature（轮换重试全覆盖后仍缺）", "concept/03_advanced/08_process_ipc/02_advanced_process_management.md 等"),
+    ("c0x_*::rust_19x_features", "workspace 示例 crate 未实现 rust_1_90/1_91/1_92 features 模块（文档为演示性 API）", "concept/07_future/00_version_tracking/rust_1_9x_stabilized.md"),
+    ("c12_wasm", "c12_wasm 仅 wasm32 目标构建，host target 无 rmeta", "concept/06_ecosystem/11_domain_applications/19_wasm_faq.md"),
+    ("wgpu/winit", "示例代码与 workspace 锁定的 wgpu/winit 版本 API 漂移", "concept/06_ecosystem/11_domain_applications/15_game_engine_internals.md"),
+]
+
 WORKSPACE_MEMBER_CRATES = {
     "c01_ownership_borrow_scope", "c02_type_system", "c03_control_fn", "c04_generic",
     "c05_threads", "c06_async", "c07_process", "c08_algorithms", "c09_design_pattern",

@@ -118,26 +118,26 @@ where
 某些模式可以用依赖类型更精确地表达：
 
 ```rust
-/// Typestate Builder 的依赖类型表示
-///
-/// 形式化：
-/// Builder(state: BuilderState) → Request
-/// 其中 state ∈ {Incomplete, Complete}
-///
-/// 性质：
-/// ∀ b: Builder(Incomplete), build(b) = ⊥  (类型错误)
-/// ∀ b: Builder(Complete), build(b) : Request
+// Typestate Builder 的依赖类型表示
+//
+// 形式化：
+// Builder(state: BuilderState) → Request
+// 其中 state ∈ {Incomplete, Complete}
+//
+// 性质：
+// ∀ b: Builder(Incomplete), build(b) = ⊥  (类型错误)
+// ∀ b: Builder(Complete), build(b) : Request
 
 use std::marker::PhantomData;
 
-/// 状态类型
+// 状态类型
 pub mod state {
     pub struct Incomplete;
     pub struct Complete;
 }
 
-/// 类型状态 Builder
-/// Π (S : State) . BuilderData → Builder(S)
+// 类型状态 Builder
+// Π (S : State) . BuilderData → Builder(S)
 pub struct TypedBuilder<S> {
     url: Option<String>,
     method: Option<String>,
@@ -153,8 +153,8 @@ impl TypedBuilder<state::Incomplete> {
         }
     }
 
-    /// 状态转换函数
-    /// url : Builder(Incomplete) → String → Builder(Complete)
+    // 状态转换函数
+    // url : Builder(Incomplete) → String → Builder(Complete)
     pub fn url(self, url: String) -> TypedBuilder<state::Complete> {
         TypedBuilder {
             url: Some(url),
@@ -165,8 +165,8 @@ impl TypedBuilder<state::Incomplete> {
 }
 
 impl TypedBuilder<state::Complete> {
-    /// 构建函数（仅在 Complete 状态可调用）
-    /// build : Builder(Complete) → Request
+    // 构建函数（仅在 Complete 状态可调用）
+    // build : Builder(Complete) → Request
     pub fn build(self) -> Request {
         Request {
             url: self.url.unwrap(), // 类型保证一定存在
@@ -180,12 +180,12 @@ pub struct Request {
     method: String,
 }
 
-/// 形式化证明:
-///
-/// 定理: ∀ b: Builder(Incomplete), ¬∃ build(b)
-/// 证明: build 函数的类型签名要求 Builder(Complete)，
-///       而 Incomplete ≠ Complete (不同类型)，
-///       因此类型检查器拒绝调用。 □
+// 形式化证明:
+//
+// 定理: ∀ b: Builder(Incomplete), ¬∃ build(b)
+// 证明: build 函数的类型签名要求 Builder(Complete)，
+//       而 Incomplete ≠ Complete (不同类型)，
+//       因此类型检查器拒绝调用。 □
 ```
 
 ---
@@ -308,7 +308,7 @@ Command、Chain of Responsibility 等模式是 Monad：
 
 **在Rust中的实现**:
 
-```rust
+```rust,ignore
 /// Result<T, E> 是 Monad
 ///
 /// 范畴论解释:
@@ -422,7 +422,7 @@ Curry-Howard 同构断言「类型即命题，程序即证明」： inhabitation
 
 **应用示例**:
 
-```rust
+```rust,ignore
 /// 命题: "如果有 Builder(Complete)，则可以构造 Request"
 /// 逻辑: Builder(Complete) ⇒ Request
 /// 类型: Builder(Complete) → Request
@@ -458,7 +458,7 @@ where
 
 ### 4.2 依赖类型的证明
 
-```rust
+```rust,ignore
 /// 命题: "构建器必须设置URL才能构建"
 /// 依赖类型: Π (b : Builder) . has_url(b) = true → build(b) : Request
 ///
@@ -504,26 +504,26 @@ impl TypedBuilder<state::Complete> {
 **在Rust中的实现**: 所有权（Ownership）系统即为线性类型的实现。
 
 ```rust
-/// RAII 模式是线性类型的应用
-///
-/// 形式化:
-/// - 资源 R 的类型是线性的
-/// - 获取: acquire : () → R  (创建资源)
-/// - 释放: release : R → ()  (消耗资源)
-/// - 性质: ∀ r : R, r 必须被消耗恰好一次
+// RAII 模式是线性类型的应用
+//
+// 形式化:
+// - 资源 R 的类型是线性的
+// - 获取: acquire : () → R  (创建资源)
+// - 释放: release : R → ()  (消耗资源)
+// - 性质: ∀ r : R, r 必须被消耗恰好一次
 
 pub struct FileHandle {
     path: String,
 }
 
 impl FileHandle {
-    /// 获取资源 (线性构造)
+    // 获取资源 (线性构造)
     pub fn open(path: String) -> Self {
         println!("[RAII] Opening file: {}", path);
         Self { path }
     }
 
-    /// 使用资源 (消耗线性类型)
+    // 使用资源 (消耗线性类型)
     pub fn read(self) -> String {
         println!("[RAII] Reading file: {}", self.path);
         "file content".to_string()
@@ -532,34 +532,34 @@ impl FileHandle {
 }
 
 impl Drop for FileHandle {
-    /// 自动释放 (线性析构)
+    // 自动释放 (线性析构)
     fn drop(&mut self) {
         println!("[RAII] Closing file: {}", self.path);
     }
 }
 
-/// 线性类型保证
+// 线性类型保证
 pub fn linear_type_example() {
     let file = FileHandle::open("data.txt".to_string());
     let _content = file.read(); // file 被移动
     // ❌ file.read(); // 编译错误：file 已被消耗
 }
 
-/// 形式化证明:
-///
-/// 定理: ∀ f: FileHandle, f 被使用恰好一次
-/// 证明:
-/// 1. f 被构造 (acquire)
-/// 2. f 被移动到 read 或 drop
-/// 3. 移动后 f 不可访问（线性类型保证）
-/// 因此 f 被使用恰好一次。 □
+// 形式化证明:
+//
+// 定理: ∀ f: FileHandle, f 被使用恰好一次
+// 证明:
+// 1. f 被构造 (acquire)
+// 2. f 被移动到 read 或 drop
+// 3. 移动后 f 不可访问（线性类型保证）
+// 因此 f 被使用恰好一次。 □
 ```
 
 ### 5.2 仿射类型 (Affine Types)
 
 Rust的所有权（Ownership）系统实际上是仿射类型（值可以被使用 ≤ 1 次）：
 
-```rust
+```rust,ignore
 /// Builder 模式的仿射类型表示
 ///
 /// 仿射性质: Builder 可以被使用 0 次或 1 次
@@ -792,13 +792,13 @@ impl Request {
 ### 7.2 递归类型
 
 ```rust
-/// Composite 模式的递归类型表示
-///
-/// 形式化: Tree = Leaf(Value) + Node(Tree, Tree)
-///
-/// 性质:
-/// - Tree 是归纳定义的
-/// - 支持结构递归
+// Composite 模式的递归类型表示
+//
+// 形式化: Tree = Leaf(Value) + Node(Tree, Tree)
+//
+// 性质:
+// - Tree 是归纳定义的
+// - 支持结构递归
 
 pub enum FileSystemNode {
     File { name: String, size: u64 },
@@ -806,10 +806,10 @@ pub enum FileSystemNode {
 }
 
 impl FileSystemNode {
-    /// 结构递归: 计算总大小
-    /// size : Tree → Nat
-    /// size(Leaf(v)) = |v|
-    /// size(Node(l, r)) = size(l) + size(r)
+    // 结构递归: 计算总大小
+    // size : Tree → Nat
+    // size(Leaf(v)) = |v|
+    // size(Node(l, r)) = size(l) + size(r)
     pub fn total_size(&self) -> u64 {
         match self {
             FileSystemNode::File { size, .. } => *size,
@@ -820,13 +820,13 @@ impl FileSystemNode {
     }
 }
 
-/// 形式化证明:
-///
-/// 定理: total_size 终止
-/// 证明: 结构归纳
-/// 基础: File 情况直接返回
-/// 归纳: Directory 情况递归调用子节点（子树更小）
-/// 因此递归终止。 □
+// 形式化证明:
+//
+// 定理: total_size 终止
+// 证明: 结构归纳
+// 基础: File 情况直接返回
+// 归纳: Directory 情况递归调用子节点（子树更小）
+// 因此递归终止。 □
 ```
 
 ---
@@ -970,7 +970,7 @@ mod tests {
 
 **模式组合的代数性质**。
 
-```rust
+```rust,ignore
 /// 定理: 设计模式满足代数结构
 ///
 /// 设 P = {Strategy, Observer, Decorator, ...} 为模式集合

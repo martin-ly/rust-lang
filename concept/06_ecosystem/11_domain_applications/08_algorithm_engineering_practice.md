@@ -583,7 +583,7 @@ impl<K: Clone + Eq + std::hash::Hash, V: Clone> LRUCacheInner<K, V> {
 
 #### 缓存预热与更新策略
 
-```rust
+```rust,ignore
 use tokio::time::{interval, Duration};
 
 /// 缓存管理器
@@ -1051,7 +1051,7 @@ pub fn mmap_large_file_example() -> std::io::Result<()> {
 
 #### 异步批量写入
 
-```rust
+```rust,ignore
 use tokio::fs::File;
 use tokio::io::{AsyncWriteExt, BufWriter};
 use tokio::sync::mpsc;
@@ -1125,7 +1125,7 @@ pub async fn batch_write_example() {
 
 #### 重试机制
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 
 /// 指数退避重试
@@ -1536,7 +1536,7 @@ mod tests {
 
 #### Criterion 基准测试
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
 
 fn benchmark_sorts(c: &mut Criterion) {
@@ -1683,7 +1683,7 @@ fn compute_recommendations_v2(_user_id: u64) -> Vec<String> {
 
 ### 5.3 故障恢复
 
-```rust
+```rust,ignore
 /// 状态快照
 #[derive(Clone, Serialize, Deserialize)]
 pub struct Snapshot<T> {
@@ -1769,7 +1769,7 @@ impl<T: Clone + Serialize + for<'de> Deserialize<'de>> SnapshotManager<T> {
 
 ### 6.1 推荐系统
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 
 /// 协同过滤推荐引擎

@@ -400,8 +400,8 @@ fn hlist_operations() {
     };
 
     // 编译时类型安全的索引
-    let first: &i32 = list.at();     // Index 0
-    let second: &str = list.tail.at();  // Index 1
+    let first: &i32 = At::<Zero>::at(&list);     // Index 0
+    let second: &str = At::<Zero>::at(&list.tail);  // Index 1
 
     println!("{} {}", first, second);
 }
@@ -479,7 +479,7 @@ where
 
 **核心构造**：
 
-```rust
+```rust,ignore
 struct Connection<State> { /* 共享字段 */ _state: PhantomData<State> }
 struct Disconnected; struct Connected; struct Authenticated;
 

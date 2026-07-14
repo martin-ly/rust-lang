@@ -405,7 +405,7 @@ fn process(x: &dyn MyTrait) -> Box<dyn MyTrait> { /* ... */ }
 
 **示例 2：`extern crate` 与路径系统**
 
-```rust
+```rust,ignore
 // Rust 2015
 extern crate serde;
 use serde::Serialize;

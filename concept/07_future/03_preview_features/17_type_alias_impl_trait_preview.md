@@ -31,7 +31,7 @@
 
 **Type Alias Impl Trait（TAIT）** 允许在类型别名中使用 `impl Trait`：
 
-```rust
+```rust,ignore
 type MyIter = impl Iterator<Item = i32>;
 ```
 
@@ -45,7 +45,7 @@ type MyIter = impl Iterator<Item = i32>;
 
 ### 2.1 模块级 TAIT
 
-```rust,editable
+```rust,editable,ignore
 #![allow(unused)]
 
 type HiddenIter = impl Iterator<Item = u32>;

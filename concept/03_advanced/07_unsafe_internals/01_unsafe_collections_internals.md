@@ -255,7 +255,7 @@ impl<T> MyMutex<T> {
 
 ### 4.1 正确示例：手动实现 Vec 的 pop
 
-```rust
+```rust,ignore
 impl<T> MyVec<T> {
     fn pop(&mut self) -> Option<T> {
         if self.len == 0 {

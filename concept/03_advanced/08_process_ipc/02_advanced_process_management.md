@@ -27,7 +27,7 @@
 - 健康检查与故障隔离
 - 运行统计与可观测性
 
-```rust
+```rust,ignore
 use std::process::{Command, Stdio};
 use std::sync::{Arc, Mutex};
 use std::collections::VecDeque;

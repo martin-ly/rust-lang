@@ -71,6 +71,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：`env!` 引用不存在的构建变量（rustc 1.97.0 实测）](#反例env-引用不存在的构建变量rustc-1970-实测)
     - [✅ 修正：`option_env!` 提供回退](#-修正option_env-提供回退)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -151,7 +152,7 @@ fn main() {
 
 主 crate 中：
 
-```rust
+```rust,ignore
 const BUILD_TIMESTAMP: &str = env!("BUILD_TIMESTAMP");
 ```
 
@@ -262,7 +263,7 @@ fn main() {
 
 主 crate 中通过 `include!` 引入：
 
-```rust
+```rust,ignore
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 ```
 
@@ -408,7 +409,7 @@ int mylib_add(int a, int b) {
 
 ### 7.5 `src/lib.rs`
 
-```rust
+```rust,ignore
 // 引入 build.rs 生成的代码
 include!(concat!(env!("OUT_DIR"), "/build_info.rs"));
 

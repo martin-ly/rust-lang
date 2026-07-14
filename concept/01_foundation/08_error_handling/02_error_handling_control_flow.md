@@ -206,7 +206,7 @@ let x = expr?;
 thiserror = "2"
 ```
 
-```rust
+```rust,ignore
 use thiserror::Error;
 
 #[derive(Debug, Error)]

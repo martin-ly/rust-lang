@@ -128,7 +128,7 @@ pub fn trait_object_example() {
 
 #### 方式 2：泛型 (静态分派)
 
-```rust
+```rust,ignore
 /// 上下文 (静态分派)
 pub struct GenericCompressor<S: CompressionStrategy> {
     strategy: S,
@@ -171,7 +171,7 @@ pub fn generic_example() {
 
 **基准测试** (Criterion):
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn trait_object_benchmark(c: &mut Criterion) {
@@ -275,7 +275,7 @@ pub fn sync_observer_example() {
 
 #### 方式 2：异步Observer
 
-```rust
+```rust,ignore
 use tokio::sync::{mpsc, RwLock};
 use std::sync::Arc;
 
@@ -669,7 +669,7 @@ pub fn runtime_example() {
 
 **Criterion基准测试**:
 
-```rust
+```rust,ignore
 fn benchmark_iterators(c: &mut Criterion) {
     let data: Vec<i32> = (0..1_000_000).collect();
 

@@ -452,7 +452,7 @@ static VTABLE: RawWakerVTable = RawWakerVTable::new(
 
 **使用示例**:
 
-```rust
+```rust,ignore
 fn main() {
     let executor = SimpleExecutor::new();
 
@@ -692,7 +692,7 @@ where
 
 **原始代码**:
 
-```rust
+```rust,ignore
 async fn example() -> i32 {
     let a = async_op1().await;
     let b = async_op2(a).await;
@@ -703,7 +703,7 @@ async fn example() -> i32 {
 
 **编译器生成的等价状态机**（简化版）:
 
-```rust
+```rust,ignore
 enum ExampleState {
     Start,
     WaitingOp1(Op1Future),
@@ -799,7 +799,7 @@ impl Future for ExampleFuture {
 
 ### 5.3 零成本抽象验证
 
-```rust
+```rust,ignore
 // async 版本
 async fn async_version() -> i32 {
     let a = compute_a().await;
@@ -989,7 +989,7 @@ async fn main() {
 
 ### 7.2 Pin 使用建议
 
-```rust
+```rust,ignore
 use pin_project::pin_project;
 
 #[pin_project]
@@ -1033,7 +1033,7 @@ fn good() -> impl Future<Output = i32> {
 
 **2. 使用 `#[inline]` 提示**:
 
-```rust
+```rust,ignore
 impl Future for MyFuture {
     type Output = i32;
 

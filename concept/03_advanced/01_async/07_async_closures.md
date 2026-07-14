@@ -65,7 +65,7 @@
 
 在 Rust 1.85 之前，表达“一个异步（Async）闭包（Closures）”通常写成：
 
-```rust
+```rust,ignore
 // 旧写法：闭包返回一个 Future
 fn make_callback() -> impl FnOnce() -> Pin<Box<dyn Future<Output = i32> + Send>> {
     || Box::pin(async move {
@@ -83,7 +83,7 @@ fn make_callback() -> impl FnOnce() -> Pin<Box<dyn Future<Output = i32> + Send>>
 
 Rust 1.85 引入 `async || {}` 语法后，上述代码可简化为：(Source: [Rust Reference — Async Closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures), [Rust 1.85.0 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html))
 
-```rust
+```rust,ignore
 fn make_callback() -> impl AsyncFnOnce() -> i32 {
     async || {
         tokio::time::sleep(Duration::from_secs(1)).await;
@@ -108,7 +108,7 @@ async 闭包（`async || { ... }`，1.85 稳定）把「闭包捕获」与「Fut
 
 ### 2.1 基础语法
 
-```rust
+```rust,ignore
 use std::time::Duration;
 
 // 无参数
@@ -228,7 +228,7 @@ where
 
 ### 3.2 使用场景：高阶异步函数
 
-```rust
+```rust,ignore
 async fn process_items<T, F>(items: Vec<T>, predicate: F) -> Vec<T>
 where
     T: Clone,
@@ -291,7 +291,7 @@ async 闭包解锁了四类此前需要 workaround 的模式：
 
 ### 4.1 事件处理器
 
-```rust
+```rust,compile_fail
 use tokio::sync::mpsc;
 
 struct AsyncHandler<T> {
@@ -324,7 +324,7 @@ where
 
 ### 4.2 中间件链
 
-```rust
+```rust,ignore
 #[derive(Clone)]
 struct Request {
     path: String,

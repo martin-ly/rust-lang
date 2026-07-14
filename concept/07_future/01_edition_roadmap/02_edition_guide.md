@@ -345,7 +345,7 @@ fn get_string() -> String { String::from("hello") }
 >
 > **迁移影响**: 极少数代码会因此无法编译——通常是依赖了临时值意外长寿的代码。`cargo fix --edition` 可以自动将受影响的代码重构为显式绑定：
 >
-> ```rust
+> ```rust,ignore
 > // 自动迁移后的代码:
 > let temp = get_string();
 > if let Some(x) = temp.as_ref() {

@@ -887,7 +887,7 @@ fn caller() {
 
 > **修正**: 写规范时需仔细考虑边界条件。前置条件应恰好描述函数要求的最小条件：
 >
-> ```rust
+> ```rust,ignore
 > #[requires(x >= 0)]  // ✅ 正确的最小前置条件
 > #[ensures(result >= 0)]
 > fn sqrt_approx(x: f64) -> f64 { x.sqrt() }

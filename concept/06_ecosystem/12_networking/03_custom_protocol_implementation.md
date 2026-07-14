@@ -135,7 +135,7 @@ impl ProtocolConnection {
 
 对于极高吞吐场景，可考虑 `bytes::Bytes` 和手动内存布局，避免多次拷贝：
 
-```rust
+```rust,ignore
 use bytes::{Bytes, BytesMut, BufMut};
 
 fn encode_frame_zero_copy(frame: &Frame) -> Bytes {

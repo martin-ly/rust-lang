@@ -124,7 +124,7 @@ macro_rules! vec_of_strings {
 2. **属性宏**: `#[my_attribute]`
 3. **函数式宏**: `my_macro!(input)`
 
-```rust
+```rust,ignore
 #[proc_macro_derive(MyTrait)]
 pub fn my_trait_derive(input: TokenStream) -> TokenStream {
     // 处理 TokenStream
@@ -263,7 +263,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 通过 `#[derive(...)]` 自动为类型生成 trait 实现的过程宏。
 
-```rust
+```rust,ignore
 #[derive(Debug, Clone, MyTrait)]
 struct MyStruct {
     field: i32,
@@ -272,7 +272,7 @@ struct MyStruct {
 
 **定义**:
 
-```rust
+```rust,ignore
 #[proc_macro_derive(MyTrait)]
 pub fn my_trait_derive(input: TokenStream) -> TokenStream {
     // 生成 impl MyTrait for T {}
@@ -285,7 +285,7 @@ pub fn my_trait_derive(input: TokenStream) -> TokenStream {
 
 以 `#[...]` 形式附加到项的过程宏，可为代码添加元数据、重写或包装被标注代码。
 
-```rust
+```rust,ignore
 #[route(GET, "/")]
 fn index() -> String {
     "Hello!".to_string()
@@ -294,7 +294,7 @@ fn index() -> String {
 
 **定义**:
 
-```rust
+```rust,ignore
 #[proc_macro_attribute]
 pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
     // attr: GET, "/"
@@ -309,13 +309,13 @@ pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
 
 看起来像函数调用的宏。
 
-```rust
+```rust,ignore
 let sql = sql!(SELECT * FROM users WHERE id = 1);
 ```
 
 **定义**:
 
-```rust
+```rust,ignore
 #[proc_macro]
 pub fn sql(input: TokenStream) -> TokenStream {
     // 解析 SQL，生成代码
@@ -328,7 +328,7 @@ pub fn sql(input: TokenStream) -> TokenStream {
 
 解析 TokenStream 的库。
 
-```rust
+```rust,ignore
 use syn::{parse_macro_input, DeriveInput};
 
 #[proc_macro_derive(MyTrait)]
@@ -351,7 +351,7 @@ pub fn my_trait_derive(input: TokenStream) -> TokenStream {
 
 生成 TokenStream 的库。
 
-```rust
+```rust,ignore
 use quote::quote;
 
 let name = &input.ident;
@@ -558,7 +558,7 @@ fn ui_tests() {
 
 Abstract Syntax Tree，源代码解析后的树形结构表示，是编译器前端的输出。
 
-```rust
+```rust,ignore
 // 代码
 let x = 1 + 2;
 
@@ -608,7 +608,7 @@ html! {
 
 宏的核心功能，在编译时生成代码。
 
-```rust
+```rust,ignore
 #[derive(Builder)]
 struct User {
     name: String,
@@ -628,7 +628,7 @@ let user = User::builder()
 
 高级语言特性编译后不产生运行时开销的设计原则：宏展开后的代码性能与手写代码相同。
 
-```rust
+```rust,ignore
 // 宏定义的高层抽象
 for_each!(vec, |x| println!("{}", x));
 
@@ -650,7 +650,7 @@ for x in vec {
 
 在编译期完成计算，运行时（Runtime）零开销。
 
-```rust
+```rust,ignore
 const SIZE: usize = compute_size!(some_input);
 ```
 

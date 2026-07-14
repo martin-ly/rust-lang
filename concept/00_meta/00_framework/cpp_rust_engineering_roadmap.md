@@ -137,7 +137,7 @@ try {
 
 **Rust**
 
-```rust
+```rust,ignore
 let result = may_fail();
 match result {
     Ok(v) => process(v),

@@ -261,7 +261,7 @@ HTTP 方法语义:
   DELETE /users/123   → 删除（200 OK / 204 No Content / 404）
 ```
 
-```rust
+```rust,ignore
 // axum 中的 RESTful 路由
 use axum::{
     routing::{get, post, put, patch, delete},
@@ -308,7 +308,7 @@ struct UpdateUserRequest {
 | **Query 参数** | `/users?version=1` | 灵活 | 破坏缓存键 |
 | **内容协商** | `Accept: application/json; version=1` | HTTP 标准 | 客户端支持不一致 |
 
-```rust
+```rust,ignore
 // Header 版本化实现（axum）
 use axum::{extract::HeaderMap, http::StatusCode};
 
@@ -863,7 +863,7 @@ impl UserService for UserServiceImpl {
 ### 6.2 流式 RPC
 >
 
-```rust
+```rust,ignore
 use tonic::{Request, Response, Status, Streaming};
 use tokio_stream::wrappers::ReceiverStream;
 
@@ -992,7 +992,7 @@ API 网关架构:
   · 协议转换: REST ↔ gRPC ↔ GraphQL
 ```
 
-```rust
+```rust,ignore
 // API Gateway 路由实现（axum）
 use axum::{
     Router,
@@ -1187,7 +1187,7 @@ async fn parse_json(body: String) -> Result<Json<Value>, StatusCode> {
 
 > **修正**: 始终设置请求体大小限制和解析深度限制：
 >
-> ```rust
+> ```rust,ignore
 > // axum: 使用 tower_http::limit::RequestBodyLimitLayer
 > Router::new()
 >     .route("/upload", post(upload_handler))
@@ -1230,7 +1230,7 @@ struct UserV2 {
 > 3. **废弃（deprecate）而非删除**：标记字段为 `@deprecated`，保留至少 2 个版本周期
 > 4. **默认值**：新字段提供默认值，旧客户端无需处理
 >
-> ```rust
+> ```rust,ignore
 > #[derive(Serialize)]
 > struct User {
 >     id: Uuid,

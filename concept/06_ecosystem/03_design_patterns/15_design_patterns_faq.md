@@ -248,7 +248,7 @@ fn get_config() -> &'static Config {
 
 **Typestate 实现**:
 
-```rust
+```rust,ignore
 struct RequestBuilder<State = NoUrl> {
     url: Option<String>,
     _state: std::marker::PhantomData<State>,
@@ -307,7 +307,7 @@ let request = RequestBuilder::new()
 
 **方法1: Channel (推荐)**:
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 
 struct Subject {

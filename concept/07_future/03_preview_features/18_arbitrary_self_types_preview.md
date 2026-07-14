@@ -321,7 +321,7 @@ rustc 1.97.0（stable）实测：`error[E0307]: invalid self parameter type: Non
 
 **修正（稳定方案）**：退化为显式关联函数，或改用已稳定的 `Rc<Self>`/`Arc<Self>` 接收器：
 
-```rust
+```rust,ignore
 impl Node {
     fn get(this: NonNull<Self>) -> i32 { unsafe { this.as_ref().value } }
 }

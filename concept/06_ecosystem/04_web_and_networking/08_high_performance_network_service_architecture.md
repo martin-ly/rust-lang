@@ -493,7 +493,7 @@ fn zero_copy_transfer(socket: &std::net::TcpStream, file: &std::fs::File) -> io:
 
 **性能对比测试**:
 
-```rust
+```rust,ignore
 use std::time::Instant;
 
 #[tokio::test]
@@ -1335,7 +1335,7 @@ impl NumaBufferPool {
 
 **性能测试**:
 
-```rust
+```rust,ignore
 #[bench]
 fn bench_numa_aware_vs_default(b: &mut Bencher) {
     const SIZE: usize = 1024 * 1024; // 1MB

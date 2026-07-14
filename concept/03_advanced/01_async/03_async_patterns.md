@@ -545,7 +545,7 @@ CPU 密集型 offload:
 
 异步运行时（Runtime）擅长 I/O 密集型任务，但不应在异步任务中执行阻塞或 CPU 密集型计算，否则会阻塞事件循环。`tokio::task::spawn_blocking` 将任务卸载到独立线程池：
 
-```rust
+```rust,ignore
 use tokio::task;
 
 async fn process_image(data: Vec<u8>) -> Result<Vec<u8>, task::JoinError> {
@@ -1132,7 +1132,7 @@ impl Actor {
 
 这是 **Actor 模式**的核心设计：
 
-```rust
+```rust,ignore
 // Actor 的所有状态修改都通过 channel 消息串行化
 // 无论多少客户端并发发送消息，handle() 始终单线程串行执行
 
@@ -1210,7 +1210,7 @@ async fn write_with_timeout(file: &mut File, data: &[u8]) -> std::io::Result<()>
 
 **修复方案**：
 
-```rust
+```rust,ignore
 use tokio::time::timeout;
 
 async fn write_with_timeout(file: &mut File, data: &[u8]) -> std::io::Result<()> {

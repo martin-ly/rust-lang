@@ -305,7 +305,7 @@ Stream trait 设计决策:
   4. 零成本: Stream 组合子是零成本抽象（编译期内联）
 ```
 
-```rust
+```rust,ignore
 use futures::stream::{self, StreamExt};
 
 // Stream 的基本使用
@@ -324,7 +324,7 @@ while let Some(item) = st.next().await {
 
 Stream 组合子构成一个**单子**（Monad-like）代数结构：
 
-```rust
+```rust,ignore
 use futures::stream::{self, StreamExt, TryStreamExt};
 
 // 核心组合子（与 Iterator 高度一致）
@@ -684,7 +684,7 @@ Rust Stream = Pull-based 的数据流抽象
 ### 7.1 tokio-stream
 >
 
-```rust
+```rust,ignore
 use tokio_stream::{self, StreamExt};
 use tokio::time::{interval, Duration};
 
@@ -757,7 +757,7 @@ let network_stream = stream! {
 ### 7.3 完整数据流处理骨架
 >
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use futures::stream::{self, StreamExt};
 use std::time::Duration;
@@ -916,7 +916,7 @@ async fn unbounded_channel_oom() {
 
 > **修正**: 始终使用**有界 channel**：
 >
-> ```rust
+> ```rust,ignore
 > let (tx, mut rx) = mpsc::channel::<Vec<u8>>(10);  // 最多缓冲 10 条
 > tx.send(data).await.unwrap();  // 满时阻塞 → 背压传递给上游
 > ```

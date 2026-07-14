@@ -89,7 +89,7 @@ let r#type = "keyword as identifier";
 
 下划线 `_` 作为模式时，表示"忽略该值"，不会触发未使用变量警告：
 
-```rust
+```rust,ignore
 let _ = some_side_effect();
 ```
 

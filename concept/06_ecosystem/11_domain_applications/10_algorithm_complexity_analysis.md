@@ -90,7 +90,7 @@ fn merge<T: Ord + Clone>(left: &[T], right: &[T]) -> Vec<T> {
 
 空间复杂度描述算法运行所需的额外内存。
 
-```rust
+```rust,ignore
 // O(1) 额外空间 - 原地排序
 fn bubble_sort<T: Ord>(arr: &mut [T]) {
     let len = arr.len();

@@ -136,7 +136,7 @@
 
 ### 3.1 Web服务器场景
 
-```rust
+```rust,ignore
 /// 场景：构建高性能Web服务器
 ///
 /// 需求：
@@ -348,7 +348,7 @@ impl Plugin for EventBusPlugin {
 
 ### 3.3 游戏引擎场景
 
-```rust
+```rust,ignore
 /// 场景：游戏引擎架构
 ///
 /// 需求：
@@ -470,7 +470,7 @@ impl BulletPool {
 
 ### 4.1 过度工程
 
-```rust
+```rust,ignore
 // ❌ 反模式：过度使用设计模式
 pub trait DataProcessor {
     fn process(&self, data: Vec<u8>) -> Vec<u8>;
@@ -498,7 +498,7 @@ pub fn process_data(data: Vec<u8>) -> Vec<u8> {
 
 ### 4.2 Trait Object 滥用
 
-```rust
+```rust,ignore
 // ❌ 反模式：不必要的动态分派
 pub fn bad_sum(numbers: Vec<Box<dyn Number>>) -> i32 {
     numbers.iter().map(|n| n.value()).sum()
@@ -514,7 +514,7 @@ pub fn good_sum<T: Number>(numbers: &[T]) -> i32 {
 
 ### 4.3 忽略所有权
 
-```rust
+```rust,ignore
 // ❌ 反模式：不必要的克隆
 pub fn bad_observer_notify(observers: &Vec<Observer>, data: String) {
     for observer in observers {
@@ -534,7 +534,7 @@ pub fn good_observer_notify(observers: &Vec<Observer>, data: &str) {
 
 ### 4.4 锁粒度过大
 
-```rust
+```rust,ignore
 // ❌ 反模式：持有锁过久
 pub fn bad_cache_access(cache: &Mutex<HashMap<String, String>>, key: &str) -> Option<String> {
     let cache = cache.lock().unwrap();
@@ -580,7 +580,7 @@ pub fn good_cache_access(cache: &Mutex<HashMap<String, String>>, key: &str) -> O
 
 ### 5.2 组合示例：HTTP客户端
 
-```rust
+```rust,ignore
 /// 组合 Builder + Strategy + Decorator + Proxy
 
 // 1. Builder: 构建HTTP客户端

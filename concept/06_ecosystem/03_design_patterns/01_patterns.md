@@ -1031,7 +1031,7 @@ fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> 
 
 **代码示例：过早抽象 vs 稳定后抽象**
 
-```rust
+```rust,ignore
 // ❌ 过早抽象：仅两个变体即引入 dyn Trait + 模块拆分
 pub trait Transport { fn send(&self, data: &[u8]); }
 
@@ -1096,7 +1096,7 @@ impl Transport {
 - 使用 `std::path::PathBuf` 代替裸字符串路径。
 - 使用 `sqlx` 等编译期检查的查询构造器。
 
-```rust
+```rust,ignore
 // ❌ Stringly typed：运行时拼写错误导致 panic
 fn run_command(name: &str) {
     match name {
@@ -1138,7 +1138,7 @@ fn run_command(cmd: Command) {
 
 **代码示例：上帝对象 vs 领域拆分**
 
-```rust
+```rust,ignore
 // ❌ God Object：所有状态集中，任何修改都影响全局
 struct AppState {
     db_pool: DbPool,
@@ -1195,7 +1195,7 @@ async fn handler(db: &DatabaseLayer, sessions: &SessionLayer) { /* ... */ }
 
 **代码示例：控制流纠缠 vs 结构化设计**
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use std::cell::RefCell;
 
@@ -1659,7 +1659,7 @@ impl ExprVisitor for Evaluator {
 
 > **修正**: 访问者模式（Visitor Pattern）在 OOP 语言中用于解耦操作与数据结构，但 Rust 的**代数数据类型**（枚举（Enum） + 模式匹配（Pattern Matching））使访问者模式往往不必要。`Expr` 的求值直接用 `match` 更简洁：
 
-```rust
+```rust,ignore
 fn eval(e: &Expr) -> i32 {
     match e {
         Expr::Lit(n) => *n,
@@ -1773,7 +1773,7 @@ Rust 中 Builder 模式最常用的消费方式是什么？
 
 Rust Builder 的经典写法：
 
-```rust
+```rust,ignore
 impl Builder {
     fn name(mut self, name: String) -> Self {
         self.name = name;
@@ -2188,7 +2188,7 @@ fn main() {
 
 Rust 1.70+ 推荐使用 `std::sync::OnceLock` 替代 `lazy_static`：
 
-```rust
+```rust,ignore
 use std::sync::OnceLock;
 
 fn global_config() -> &'static Config {

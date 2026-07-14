@@ -63,7 +63,7 @@
 
 Rust 的做法是把"能否安全地跨线程使用"编码为两个 **marker trait（标记 trait）**：
 
-```rust
+```rust,ignore
 // std::marker（标准库定义，均为 unsafe auto trait）
 pub unsafe auto trait Send { /* 无方法，纯标记 */ }
 pub unsafe auto trait Sync { /* 无方法，纯标记 */ }
@@ -223,7 +223,7 @@ fn structural_derivation() {
 
 stable 上要让自有类型 `!Send`/`!Sync`，标准惯用法是嵌入一个"毒化字段"（poison field）——规则 2 的归纳会把字段的 `!Send` 传播给整个类型：
 
-```rust
+```rust,ignore
 use std::marker::PhantomData;
 use std::rc::Rc;
 
@@ -284,7 +284,7 @@ unsafe impl Send for MyHandle {}
 
 **泛型（Generics）**：auto 推导对泛型参数是**按约束惰化**的——`struct Wrapper<T>(T)` 不预先判定，而是在每个具体单态化（Monomorphization）实例上按规则 2 判定。因此泛型容器"继承"元素的 Send/Sync：
 
-```rust
+```rust,ignore
 use std::cell::Cell;
 use std::sync::Mutex;
 

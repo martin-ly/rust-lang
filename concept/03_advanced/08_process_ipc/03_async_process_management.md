@@ -143,7 +143,7 @@ async fn run_many() -> Result<(), Box<dyn std::error::Error>> {
 
 当持有 `Child` 句柄的任务被取消时，`Child` 的 `Drop` 实现默认会尝试 `kill` 子进程，但**不会等待其结束**。对于需要确保资源完全释放的场景，应显式调用 `kill().await` 和 `wait().await`。
 
-```rust
+```rust,ignore
 async fn cancellable_child() -> Result<(), Box<dyn std::error::Error>> {
     let mut child = Command::new("long_running_task").spawn()?;
 
@@ -215,7 +215,7 @@ pub async fn run_limited(
 
 将工作进程池与异步任务结合，通过 `tokio::sync::mpsc` 分派任务并由固定数量的 worker 顺序执行，减少进程创建开销。
 
-```rust
+```rust,ignore
 use tokio::process::Command;
 use tokio::sync::mpsc;
 

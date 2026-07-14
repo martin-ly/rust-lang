@@ -338,7 +338,7 @@ async fn example() {
 
 ### Q6. 🔴 以下代码存在什么问题？如何修复？
 
-```rust
+```rust,compile_fail
 use tokio;
 
 #[tokio::main]

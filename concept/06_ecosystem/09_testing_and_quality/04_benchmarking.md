@@ -62,7 +62,7 @@ criterion_main!(benches);
 
 ### 2.2 参数化基准
 
-```rust
+```rust,ignore
 use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 
 fn benchmark_with_sizes(c: &mut Criterion) {

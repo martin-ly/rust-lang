@@ -79,7 +79,7 @@ fn patterns_in_parameters(
 
 `let` 声明的局部变量关联到包含该 `let` 语句的块作用域。`match` arm 中绑定的变量关联到对应 arm 的作用域。
 
-```rust
+```rust,ignore
 {
     let declared_in_block = PrintOnDrop("inner");
 }

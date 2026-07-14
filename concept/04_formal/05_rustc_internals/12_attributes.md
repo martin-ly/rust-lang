@@ -134,7 +134,7 @@ struct Point;
 
 过程宏（procedural macro）和声明宏（Declarative Macro）（`macro_rules!`）都可生成属性。属性宏在宏展开阶段执行，可读取或替换被装饰的 item。
 
-```rust
+```rust,ignore
 #[my_attribute_macro]
 fn decorated() {}
 ```

@@ -172,7 +172,7 @@ async fn process_stream<S: Stream<Item = i32> + Unpin>(mut stream: S) {
 
 ### 4.2 背压的内建支持
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use tokio_stream::wrappers::ReceiverStream;
 

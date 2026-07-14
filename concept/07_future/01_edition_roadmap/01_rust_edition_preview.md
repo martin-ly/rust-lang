@@ -64,7 +64,7 @@ let f = async |x: i32| x + 1;
 
 ### `if let` 临时作用域
 
-```rust
+```rust,ignore
 // 2021 Edition：临时值生命周期可能延续到 if 块外
 if let Some(x) = get_temp().as_ref() { /* ... */ }
 
@@ -74,7 +74,7 @@ if let Some(x) = get_temp().as_ref() { /* ... */ }
 
 ### Never type fallback
 
-```rust
+```rust,ignore
 let x = match condition {
     true => return,
     false => 42,

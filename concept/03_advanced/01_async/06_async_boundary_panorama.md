@@ -171,7 +171,7 @@ graph TD
 
 ### 4.2 反例
 
-```rust
+```rust,ignore
 async fn bad() {
     let data = vec![1, 2, 3];
     let r = &data[0];
@@ -181,7 +181,7 @@ async fn bad() {
 }
 ```
 
-```rust
+```rust,ignore
 async fn also_bad(map: &HashMap<i32, i32>) {
     let v = &map[&1];        // 借用入参
     some_io().await;         // 状态机字段含 &'a i32
@@ -270,7 +270,7 @@ let _moved = s;              // 移动后 ptr 悬垂
 unsafe { println!("{}", *_moved.ptr as char); }  // ❌ UB（ Miri 可检测）
 ```
 
-```rust
+```rust,ignore
 async fn self_referential() {
     let s = String::from("abc");
     let r = &s;                // 状态机字段 r 指向同状态机内的 s
@@ -315,7 +315,7 @@ work-stealing 运行时（Tokio 多线程、async-std）可能在**任意 await 
 
 ### 7.2 反例
 
-```rust
+```rust,ignore
 async fn not_send(rc: Rc<i32>) {
     let guard = rc.clone();
     some_io().await;           // ❌ Rc 跨 await ⟹ Future: !Send
@@ -323,7 +323,7 @@ async fn not_send(rc: Rc<i32>) {
 }
 ```
 
-```rust
+```rust,ignore
 async fn is_send(rc: Rc<i32>) {
     {
         let guard = rc.clone();
@@ -366,7 +366,7 @@ Future 与 executor 之间存在**隐性双边契约**：
 
 ### 8.2 反例
 
-```rust
+```rust,ignore
 async fn starves_executor() {
     std::thread::sleep(Duration::from_secs(1));  // ❌ 阻塞执行器线程
     do_work().await;

@@ -966,7 +966,7 @@ cargo expand --lib path::to::module::function_name
 
 **技巧 2：使用 `trace_macros!` 调试匹配过程**（每日构建版）
 
-```rust
+```rust,ignore
 // 需启用实验特性门 trace_macros（每日构建版工具链）
 
 macro_rules! test {
@@ -2047,7 +2047,7 @@ macro（声明宏 2.0，不稳定）:
 
 **反例：`macro` 关键词的当前限制**
 
-```rust
+```rust,ignore
 // ❌ 反例: macro 关键字尚未稳定，不能在 stable Rust 使用
 // 以下代码仅在每日构建版编译：
 // 需启用实验特性门 decl_macro（每日构建版工具链）

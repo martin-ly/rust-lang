@@ -69,7 +69,7 @@ fn basic_pipe() -> Result<(), Box<dyn std::error::Error>> {
 
 Unix 域套接字提供本地双向流式通信，性能通常高于 TCP 回环：
 
-```rust
+```rust,ignore
 use std::os::unix::net::{UnixListener, UnixStream};
 use std::io::{Read, Write};
 
@@ -132,7 +132,7 @@ fn shared_memory() -> Result<(), Box<dyn std::error::Error>> {
 
 Unix 信号用于通知进程异步（Async）事件。Rust 中常用 `signal-hook` 或 `tokio::signal`：
 
-```rust
+```rust,ignore
 use signal_hook::iterator::Signals;
 
 fn handle_signals() -> Result<(), Box<dyn std::error::Error>> {

@@ -62,22 +62,24 @@
 
 2015 Edition：
 
-```rust
+```rust,edition2015
 extern crate serde;
-mod foo;
+mod foo {}
 
 fn main() {
-    let trait_obj: &Serialize = &1; // 可省略 dyn
+    let trait_obj: &std::fmt::Debug = &1; // 可省略 dyn
+    let _ = trait_obj;
 }
 ```
 
 2018+ Edition：
 
 ```rust
-use serde::Serialize;
+use std::fmt::Debug;
 
 fn main() {
-    let trait_obj: &dyn Serialize = &1;
+    let trait_obj: &dyn Debug = &1;
+    let _ = trait_obj;
 }
 ```
 

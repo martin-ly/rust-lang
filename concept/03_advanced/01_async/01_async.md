@@ -3176,7 +3176,7 @@ async fn main() {
 
 **修复方案** — 使用 `tokio::select!` + `Drop` 保证清理：
 
-```rust
+```rust,ignore
 use tokio::io::AsyncWriteExt;
 
 async fn safe_operation() -> std::io::Result<()> {
@@ -3339,12 +3339,14 @@ async fn main() {
    // ❌ 不推荐：async 无法提升性能
    async fn calculate_pi() -> f64 {
        // 纯计算，无 I/O
+       unimplemented!()
    }
 
    // ✅ 推荐：直接使用线程或 rayon
    fn calculate_pi_parallel() -> f64 {
        use rayon::prelude::*;
        // 利用多核并行计算
+       unimplemented!()
    }
    ```
 
@@ -3365,7 +3367,7 @@ async fn main() {
 
 3. **与阻塞式 C 库交互**:
 
-   ```rust
+   ```rust,ignore
    // ❌ 不推荐：阻塞整个运行时
    async fn call_c_library() {
        unsafe { blocking_c_function() };
@@ -3420,7 +3422,7 @@ future.await // ✅ 现在才开始请求
 
 - 如果需要后台执行，使用 `tokio::spawn`:
 
-```rust
+```rust,ignore
 // 立即开始后台执行
 let handle = tokio::spawn(expensive_operation());
 ```
@@ -3447,7 +3449,7 @@ let handle = tokio::spawn(expensive_operation());
 
 **示例**:
 
-```rust
+```rust,ignore
 // 用户代码：使用 .await
 async fn user_code() {
     let result = async_operation().await;

@@ -192,7 +192,7 @@ async function App() {
 
 **A**: 使用 `wasm-bindgen` 的序列化：
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 pub struct Person {
     name: String,
@@ -366,21 +366,21 @@ wasm-pack test --headless --firefox
 
 2. **NonZero::div_ceil** - 安全的向上取整计算
 
-   ```rust
+   ```rust,ignore
    use c12_wasm::rust_192_features::calculate_buffer_chunks;
    let chunks = calculate_buffer_chunks(5000, NonZeroUsize::new(1024).unwrap());
    ```
 
 3. **迭代器（Iterator）方法特化** - 性能提升 15-25%
 
-   ```rust
+   ```rust,ignore
    use c12_wasm::rust_192_features::wasm_optimized_array_eq;
    let are_equal = wasm_optimized_array_eq(&vec1, &vec2);
    ```
 
 4. **rotate_right** - 性能提升 30-35%
 
-   ```rust
+   ```rust,ignore
    use c12_wasm::rust_192_features::wasm_rotate_data;
    wasm_rotate_data(&mut data, 3);
    ```

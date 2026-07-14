@@ -316,7 +316,7 @@ rustc 1.97.0 实测：`error[E0594]: cannot assign to data in dereference of Pin
 
 **修正（当前可用）**：`pin-project` 的 `project()` 生成经过审定的 unsafe 投影；手写时必须标注结构钉扎字段并保证不移动数据：
 
-```rust
+```rust,ignore
 fn fill(p: Pin<&mut Fut>, b: u8) {
     // SAFETY: 仅投影到非结构钉扎字段 buf，不移动被钉扎数据
     let this = unsafe { p.get_unchecked_mut() };

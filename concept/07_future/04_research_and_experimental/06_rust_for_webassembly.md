@@ -301,7 +301,7 @@ fn Counter() -> Html {
 
 Leptos 采用**信号（Signals）**驱动的细粒度响应式系统，避免 VDOM 的全树 diff 开销：
 
-```rust
+```rust,ignore
 // Leptos 组件示例
 use leptos::*;
 

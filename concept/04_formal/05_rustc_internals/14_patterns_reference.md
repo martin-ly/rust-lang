@@ -54,7 +54,7 @@ Rust 模式出现在以下上下文：
 
 `let` 与函数参数要求不可反驳模式（除非使用 `@` 等允许可反驳的扩展上下文）。
 
-```rust
+```rust,ignore
 let x = 5;              // 不可反驳
 let Some(y) = opt;      // 错误：let 要求不可反驳模式
 if let Some(y) = opt {  // OK：if let 允许可反驳模式

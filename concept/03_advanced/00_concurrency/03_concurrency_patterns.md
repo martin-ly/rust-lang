@@ -1050,7 +1050,7 @@ assert_eq!(*data.lock().unwrap(), 10);
 
 **题目**: 以下代码使用 Rayon 的 `join` 实现了并行快速排序。`rayon::join` 的核心优势是什么？
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 fn quicksort(arr: &mut [i32]) {
@@ -1106,7 +1106,7 @@ thread::spawn(|| quicksort(right));
 
 **Rayon 的阈值优化**：
 
-```rust
+```rust,ignore
 fn quicksort(arr: &mut [i32]) {
     if arr.len() <= 10_000 {
         // 小数组：顺序排序更快（避免线程切换开销）
@@ -1197,7 +1197,7 @@ fn transfer(from: &Account, to: &Account, amount: i32) {
 
 **或者使用 `parking_lot::deadlock` 检测**（开发环境）：
 
-```rust
+```rust,ignore
 // parking_lot 提供死锁检测功能
 parking_lot::deadlock::check();
 ```

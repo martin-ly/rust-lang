@@ -644,7 +644,7 @@ async fn datafusion_query() -> datafusion::error::Result<()> {
 | INT8 | 8 位整数 | 75% | 1-3% | candle, ort |
 | INT4 | 4 位整数 | 87.5% | 3-5% | candle (GGML) |
 
-```rust
+```rust,ignore
 // candle 量化模型加载（GGML 格式）
 use candle_core::quantized::ggml_file::Content;
 

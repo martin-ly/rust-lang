@@ -78,7 +78,7 @@ fn dynamic_dispatch(x: &dyn Debug) { println!("{:?}", x); }
 
 `dyn Trait` 使用**胖指针（fat pointer）**：数据指针 + VTable 指针。
 
-```rust
+```rust,ignore
 let obj: &dyn Trait = &value;
 // 内存布局: [data_ptr, vtable_ptr]
 ```

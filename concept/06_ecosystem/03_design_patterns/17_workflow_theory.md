@@ -141,7 +141,7 @@ WfMC 工作流参考模型（1995）:
 | **动态工作流** | 运行时（Runtime）修改流程图 | π 演算 | 自适应系统 | `dyn Trait` / 状态模式 |
 | **协作工作流** | 多参与者交互 | 会话类型 | 多方审批、B2B | Actor / Channel |
 
-```rust
+```rust,ignore
 // 工作流模型在 Rust 中的表达谱系
 
 // 顺序: async 顺序 await
@@ -483,7 +483,7 @@ Rust 的 `async/await` 与工作流模型存在**结构同构**（Structural Iso
   补偿事务      ↔   Drop guard / scope guard
 ```
 
-```rust
+```rust,ignore
 // 工作流 = 异步函数的复合
 
 // 顺序复合: W₁ ; W₂
@@ -1212,7 +1212,7 @@ impl WorkflowState {
 
 > **修正**: 使用 exhaustive match 确保所有状态转换都被覆盖：
 >
-> ```rust
+> ```rust,ignore
 > fn can_transition_to(&self, next: &WorkflowState) -> bool {
 >     match (self, next) {
 >         (Ready, Running) => true,
@@ -1303,7 +1303,7 @@ async fn unbounded_backoff() -> Result<Output> {
 > 3. **超时**: `tokio::time::timeout(Duration::from_secs(30), call()).await`
 > 4. **断路器**: 连续失败后进入快速失败模式
 >
-> ```rust
+> ```rust,ignore
 > async fn robust_retry() -> Result<Output> {
 >     const MAX_RETRIES: u32 = 5;
 >     const MAX_DELAY: Duration = Duration::from_secs(60);

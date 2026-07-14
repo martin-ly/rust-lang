@@ -171,7 +171,7 @@ let s = stream::iter(1..=100)
 
 **背压传播：tokio::sync::mpsc**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 // 有界通道：背压从消费者向生产者传播
@@ -232,7 +232,7 @@ graph TB
 
 **`tokio::select!` 的类型安全事件路由**：
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use tokio::time::{interval, Duration};
 
@@ -347,7 +347,7 @@ pub trait Layer<S> {
 
 `Layer` 接收一个 `Service` 并返回一个新的 `Service`，在两者之间注入横切关注点（超时、重试、限流、日志）。关键洞察：层的组合是**类型驱动的**——每层精确声明其输入和输出 Service 的类型约束，编译器验证整个栈的类型一致性（Coherence）。
 
-```rust
+```rust,ignore
 use tower::{ServiceBuilder, ServiceExt};
 use tower::limit::RateLimitLayer;
 use tower::retry::RetryLayer;

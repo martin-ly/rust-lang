@@ -551,7 +551,7 @@ async fn compute_hash(data: &str) -> String {
 
 **题目**: 以下代码试图实现一个异步递归的目录遍历函数，但无法编译。为什么？如何修复？
 
-```rust
+```rust,compile_fail
 async fn traverse_dir(path: &std::path::Path) -> Vec<String> {
     let mut files = vec![];
     let mut entries = tokio::fs::read_dir(path).await.unwrap();

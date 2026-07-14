@@ -416,7 +416,7 @@ Producer (1000 events/s) ──► Consumer (100 events/s)
 
 Rust 的所有权（Ownership）系统使背压实现更加安全：
 
-```rust
+```rust,ignore
 // tokio::sync::mpsc::channel 自动背压
 let (tx, mut rx) = tokio::sync::mpsc::channel::<i32>(100); // 有界缓冲
 

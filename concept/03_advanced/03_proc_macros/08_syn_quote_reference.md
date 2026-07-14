@@ -188,7 +188,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 ### 2.2 DeriveInput
 
-```rust
+```rust,ignore
 pub struct DeriveInput {
     pub attrs: Vec<Attribute>,
     pub vis: Visibility,
@@ -206,7 +206,7 @@ pub enum Data {
 
 **示例**:
 
-```rust
+```rust,ignore
 use syn::{parse_macro_input, DeriveInput, Data, Fields};
 
 #[proc_macro_derive(MyTrait)]
@@ -254,7 +254,7 @@ pub fn my_trait(input: TokenStream) -> TokenStream {
 
 ### 2.3 ItemFn
 
-```rust
+```rust,ignore
 pub struct ItemFn {
     pub attrs: Vec<Attribute>,
     pub vis: Visibility,
@@ -272,7 +272,7 @@ pub struct Signature {
 
 **示例**:
 
-```rust
+```rust,ignore
 use syn::{parse_macro_input, ItemFn};
 
 #[proc_macro_attribute]
@@ -302,7 +302,7 @@ pub fn log_calls(_attr: TokenStream, item: TokenStream) -> TokenStream {
 
 实现 `Parse` trait：
 
-```rust
+```rust,ignore
 use syn::{parse::{Parse, ParseStream}, Result, Ident, Token};
 
 struct MyInput {
@@ -429,7 +429,7 @@ pub enum Pat {
 
 ### 3.4 路径 (Path)
 
-```rust
+```rust,ignore
 pub struct Path {
     pub segments: Punctuated<PathSegment, Token![::]>,
 }
@@ -498,7 +498,7 @@ fn parse_attributes(attrs: &[Attribute]) {
 
 ### 4.2 NestedMeta
 
-```rust
+```rust,ignore
 use syn::{Attribute, Meta, MetaList};
 
 fn parse_derive_helper(attr: &Attribute) -> syn::Result<()> {
@@ -531,7 +531,7 @@ fn parse_derive_helper(attr: &Attribute) -> syn::Result<()> {
 
 ### 4.3 自定义属性参数
 
-```rust
+```rust,ignore
 use syn::{parse::{Parse, ParseStream}, Result, Ident, LitStr, Token};
 
 struct MyAttrArgs {
@@ -718,7 +718,7 @@ let checks = fields.iter().map(|f| {
 
 ### 7.1 Span 控制
 
-```rust
+```rust,ignore
 use quote::{quote, quote_spanned};
 use syn::spanned::Spanned;
 
@@ -737,7 +737,7 @@ let expanded = quote_spanned! {field_span=>
 
 ### 7.2 错误位置
 
-```rust
+```rust,ignore
 use quote::quote_spanned;
 use syn::spanned::Spanned;
 
@@ -773,7 +773,7 @@ fn generate_impl(input: &syn::DeriveInput) -> proc_macro2::TokenStream {
 
 ### 8.1 实现 ToTokens
 
-```rust
+```rust,ignore
 use quote::{ToTokens, TokenStreamExt};
 
 struct MyType {
@@ -803,7 +803,7 @@ let output = quote! {
 
 ### 8.2 自定义类型转换
 
-```rust
+```rust,ignore
 use quote::ToTokens;
 
 #[derive(Clone)]
@@ -939,7 +939,7 @@ pub fn create_struct(input: TokenStream) -> TokenStream {
 
 ### 10.1 错误处理 (Error Handling)
 
-```rust
+```rust,ignore
 use syn::{Error, Result};
 use quote::quote;
 
@@ -970,7 +970,7 @@ pub fn my_trait(input: TokenStream) -> TokenStream {
 
 ### 10.2 性能优化
 
-```rust
+```rust,ignore
 // ✅ 好：复用 TokenStream
 let mut output = TokenStream::new();
 for item in items {
@@ -987,7 +987,7 @@ let output = items.iter()
 
 ### 10.3 可测试性
 
-```rust
+```rust,ignore
 use proc_macro2::TokenStream;
 use quote::quote;
 

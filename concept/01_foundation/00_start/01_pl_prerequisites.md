@@ -294,7 +294,7 @@ async fn fetch_data(url: &str) -> Result<String, reqwest::Error> {
 }
 ```
 
-```rust
+```rust,ignore
 // 编译器生成的状态机（简化版）
 enum FetchDataFuture {
     Start { url: String },

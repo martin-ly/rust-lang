@@ -63,6 +63,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：C 风格裸指针解引用缺少 `unsafe`（rustc 1.97.0 实测）](#反例c-风格裸指针解引用缺少-unsaferustc-1970-实测)
     - [✅ 修正：显式 `unsafe` 块并注明不变量](#-修正显式-unsafe-块并注明不变量)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -346,7 +347,7 @@ fn main() {
 }
 ```
 
-```rust
+```rust,ignore
 // src/lib.rs — 使用生成的绑定
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 

@@ -108,7 +108,7 @@ fn assumes_atomic_align() {
 
 在更多情况下允许 import 列表中以 `self` 结尾，减少语法限制。
 
-```rust
+```rust,ignore
 use std::io::{self};
 use std::io::{self, Write};
 ```

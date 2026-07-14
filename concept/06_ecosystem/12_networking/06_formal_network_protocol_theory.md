@@ -117,7 +117,7 @@ impl FormalProtocol for TcpProtocol {
 
 不变式是在所有合法状态转换中保持为真的性质：
 
-```rust
+```rust,ignore
 pub trait ProtocolInvariant<P: FormalProtocol> {
     fn check(&self, state: &P::State) -> bool;
     fn description(&self) -> &str;
@@ -182,7 +182,7 @@ impl<S: Clone + PartialEq, M: Clone + PartialEq, C> ExtendedFsm<S, M, C> {
 
 ### 3.2 状态空间探索
 
-```rust
+```rust,ignore
 use std::collections::{HashSet, VecDeque};
 
 pub struct StateExplorer<P: FormalProtocol> { protocol: P, visited: HashSet<String> }

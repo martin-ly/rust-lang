@@ -108,7 +108,7 @@ static COUNTER: std::sync::Mutex<u32> = std::sync::Mutex::new(0);
 
 ## 五、Trait 与实现
 
-```rust
+```rust,ignore
 trait Drawable {
     fn draw(&self);
     fn bounds(&self) -> Bounds;

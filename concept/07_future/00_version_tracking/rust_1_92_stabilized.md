@@ -802,7 +802,7 @@ impl TypeConverter for StringConverter {
 
 #### 2. 与泛型结合
 
-```rust
+```rust,ignore
 // Rust 1.92.0: 多边界与泛型结合
 pub trait GenericProcessor<T> {
     type Processed: Clone + Send + Sync + 'static;
@@ -824,7 +824,7 @@ where
 
 ### 实际应用示例
 
-```rust
+```rust,ignore
 use c02_type_system::rust_192_features::{
     TypeConverter,
     StringConverter,
@@ -899,7 +899,7 @@ impl HigherRankedLifetimeProcessor for StringReverser {
 
 ### 实际应用示例
 
-```rust
+```rust,ignore
 use c02_type_system::rust_192_features::{
     convert_with_lifetime,
     process_strings,
@@ -974,7 +974,7 @@ pub trait SizedBoundExample {
 
 ### 实际应用示例
 
-```rust
+```rust,ignore
 use c02_type_system::rust_192_features::{
     AutoTraitExample,
     ImprovedAutoTrait,
@@ -1041,7 +1041,7 @@ impl<T> SafeBuffer<T> {
 
 ### 实际应用示例
 
-```rust
+```rust,ignore
 use c02_type_system::rust_192_features::SafeBuffer;
 
 let mut buffer = SafeBuffer::<[u8; 1024]>::new();
@@ -1146,7 +1146,7 @@ rust-version = "1.92"  # 更新版本要求
 
 **使用关联项多边界**:
 
-```rust
+```rust,ignore
 // 之前: 使用 where 子句
 pub trait OldConverter {
     type Input;
@@ -1201,7 +1201,7 @@ data.rotate_right(2);
 
 ### 示例 1: 类型安全的转换器系统
 
-```rust
+```rust,ignore
 use c02_type_system::rust_192_features::{
     TypeConverter,
     GenericTypeConverter,
@@ -1227,7 +1227,7 @@ fn compare_vectors(vec1: &[i32], vec2: &[i32]) -> bool {
 
 ### 示例 3: 安全的未初始化内存管理
 
-```rust
+```rust,ignore
 use c02_type_system::rust_192_features::SafeBuffer;
 
 let mut buffer = SafeBuffer::<[u8; 1024]>::new();
@@ -1379,7 +1379,7 @@ pub trait TypeConverter {
 
 #### 示例代码
 
-```rust
+```rust,ignore
 use c02_type_system::rust_192_features::*;
 
 let converter = StringConverter;
@@ -1420,7 +1420,7 @@ where
 
 #### 2.3 示例代码
 
-```rust
+```rust,ignore
 use c02_type_system::rust_192_features::*;
 
 let input = "test string";
@@ -1469,7 +1469,7 @@ unsafe impl<T: Sync> Sync for AutoTraitExample<T> {}
 
 #### 示例代码
 
-```rust
+```rust,ignore
 use c02_type_system::rust_192_features::*;
 
 let example = AutoTraitExample::new(42);
@@ -1523,7 +1523,7 @@ impl<T> TypeSafeUninitManager<T> {
 
 #### 示例代码
 
-```rust
+```rust,ignore
 use c02_type_system::rust_192_features::*;
 
 let mut manager = TypeSafeUninitManager::<String>::new();
@@ -1575,7 +1575,7 @@ pub fn calculate_aligned_size<T>(count: usize, alignment: NonZeroUsize) -> usize
 
 #### 示例代码
 
-```rust
+```rust,ignore
 use c02_type_system::rust_192_features::*;
 use std::num::NonZeroUsize;
 
@@ -1613,7 +1613,7 @@ pub fn compare_type_lists<T: PartialEq>(list1: &[T], list2: &[T]) -> bool {
 
 #### 示例代码
 
-```rust
+```rust,ignore
 use c02_type_system::rust_192_features::*;
 
 let list1 = vec![1, 2, 3, 4, 5];
@@ -1686,7 +1686,7 @@ cargo bench --bench rust_192_benchmarks
 
 ### 1. 关联项多边界
 
-```rust
+```rust,ignore
 // ✅ 好的做法：明确指定所有需要的边界
 type Input: Clone + Send + Sync + 'static;
 
@@ -1696,7 +1696,7 @@ type Input: Clone;
 
 ### 2. 高阶生命周期
 
-```rust
+```rust,ignore
 // ✅ 好的做法：使用 HRTB 处理任意生命周期
 F: for<'a> Fn(&'a str) -> &'a str
 
@@ -1706,7 +1706,7 @@ F: Fn(&'static str) -> &'static str
 
 ### 3. MaybeUninit
 
-```rust
+```rust,ignore
 // ✅ 好的做法：明确检查初始化状态
 if self.initialized {
     Some(unsafe { &*self.storage.as_ptr() })
@@ -1845,7 +1845,7 @@ Rust 1.92.0 为 `TrustedLen` 迭代器特化了 `Iterator::eq` 和 `Iterator::eq
 
 #### 1. TrustedLen 迭代器特化
 
-```rust
+```rust,ignore
 // Rust 1.92.0: TrustedLen 迭代器自动特化
 use std::iter::TrustedLen;
 
@@ -1873,7 +1873,7 @@ let are_equal = vec1.iter().eq(vec2.iter());
 
 #### 高性能迭代器比较
 
-```rust
+```rust,ignore
 // Rust 1.92.0: 使用特化迭代器比较
 use std::iter::TrustedLen;
 

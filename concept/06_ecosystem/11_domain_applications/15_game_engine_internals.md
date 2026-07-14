@@ -277,7 +277,7 @@ fn game_loop(event_loop: EventLoop<()>, mut app: App) {
 
 游戏引擎的子系统之间存在复杂的依赖关系。Rust 的所有权（Ownership）系统为子系统初始化提供了编译期保证：
 
-```rust
+```rust,ignore
 // 子系统依赖图（Rust 类型系统保证初始化顺序）
 struct Engine {
     // 底层子系统（无依赖）
@@ -422,7 +422,7 @@ Vulkan 核心概念:
 > 核心设计：**安全的 GPU 资源管理**——利用 Rust 的所有权（Ownership）和生命周期（Lifetimes）系统，在编译期防止常见的 GPU 编程错误（use-after-free、资源泄漏、错误的绑定）。
 > [来源: [wgpu Documentation](https://docs.rs/wgpu/latest/wgpu/)]
 
-```rust
+```rust,ignore
 // wgpu 基础渲染流程
 async fn wgpu_render_init(window: &winit::window::Window) -> (wgpu::Device, wgpu::Queue, wgpu::Surface) {
     let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
@@ -747,7 +747,7 @@ fn spatial_audio_example() {
 
 游戏资源（纹理、模型、音频）通常很大，需要在后台异步（Async）加载以避免卡顿：
 
-```rust
+```rust,ignore
 // 异步资源加载器
 use tokio::sync::mpsc;
 use std::path::Path;

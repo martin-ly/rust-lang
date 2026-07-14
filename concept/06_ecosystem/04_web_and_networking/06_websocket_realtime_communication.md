@@ -740,7 +740,7 @@ rustc 1.97.0 实测：`error[E0502]: cannot borrow *clients as mutable because i
 
 **修正**：两阶段处理——先收集待剔除 id 再修改；发送阶段同理先取快照（`values().cloned().collect()`）再逐个 await 发送。
 
-```rust
+```rust,ignore
 let stale: Vec<u64> = clients.iter()
     .filter(|(_, n)| n.is_empty()).map(|(id, _)| *id).collect();
 for id in stale { clients.remove(&id); }

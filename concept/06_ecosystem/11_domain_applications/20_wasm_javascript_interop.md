@@ -411,7 +411,7 @@ pub fn draw_circle(canvas: &HtmlCanvasElement, x: f64, y: f64, radius: f64) {
 
 ### 示例 1: 简单计算
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 pub fn add(a: i32, b: i32) -> i32 {
     a + b
@@ -425,7 +425,7 @@ const result = add(2, 3) // 5
 
 ### 示例 2: 数组处理
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 pub fn sum_array(arr: &[i32]) -> i32 {
     arr.iter().sum()

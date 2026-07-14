@@ -139,7 +139,7 @@ where
 
 等价的关联类型 bound 写法：
 
-```rust
+```rust,ignore
 fn spawn_check<T: HealthCheck<check(..): Send + 'static>>(mut hc: T) {
     tokio::spawn(async move { hc.check().await });
 }

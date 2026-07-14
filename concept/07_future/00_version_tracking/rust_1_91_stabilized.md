@@ -283,7 +283,7 @@ fn check_borrow() {
 
 **Rust 1.91**:
 
-```rust
+```rust,ignore
 use c01_ownership_borrow_scope::rust_191_features::Rust191BorrowChecker;
 
 let mut checker = Rust191BorrowChecker::new();
@@ -307,7 +307,7 @@ let result2 = checker.create_borrow(
 
 Rust 1.91 改进了借用检查的内部算法，减少不必要的检查：
 
-```rust
+```rust,ignore
 // Rust 1.91: 更智能的借用冲突检测
 impl Rust191BorrowChecker {
     // 内部优化：使用更高效的数据结构
@@ -335,7 +335,7 @@ impl Rust191BorrowChecker {
 
 ### 使用示例
 
-```rust
+```rust,ignore
 use c01_ownership_borrow_scope::{
     Rust191BorrowChecker,
     BorrowType191,
@@ -421,7 +421,7 @@ const D: &i32 = &42; // ✅ 可以直接引用字面量
 
 #### 2. const 上下文中的生命周期
 
-```rust
+```rust,ignore
 use c01_ownership_borrow_scope::ConstContextLifetimeInferencer191;
 
 // 创建 const 上下文中的生命周期推断器
@@ -513,7 +513,7 @@ for i in 0..1000 {
 
 **Rust 1.91**:
 
-```rust
+```rust,ignore
 use c01_ownership_borrow_scope::{
     OptimizedMemoryManager191,
     AllocationType191,
@@ -597,7 +597,7 @@ Rust 1.91 改进了生命周期推断算法，减少编译时间：
 
 #### 1. 生命周期推断缓存
 
-```rust
+```rust,ignore
 use c01_ownership_borrow_scope::OptimizedLifetimeInferencer191;
 
 let mut inferencer = OptimizedLifetimeInferencer191::new();
@@ -619,7 +619,7 @@ println!("Cache hit rate: {:.2}%",
 
 Rust 1.91 改进了生命周期推断的内部算法：
 
-```rust
+```rust,ignore
 // Rust 1.91: 更智能的生命周期推断
 impl OptimizedLifetimeInferencer191 {
     fn infer_lifetime_cached(&mut self, name: String, scope: String) -> LifetimeParam191 {
@@ -653,7 +653,7 @@ where
 
 ### 示例 1: 高性能借用检查
 
-```rust
+```rust,ignore
 use c01_ownership_borrow_scope::{
     Rust191BorrowChecker,
     BorrowType191,
@@ -704,7 +704,7 @@ fn create_buffers() -> Vec<Vec<u8>> {
 
 ### 示例 3: 小对象高频分配
 
-```rust
+```rust,ignore
 use c01_ownership_borrow_scope::{
     OptimizedMemoryManager191,
     AllocationType191,
@@ -769,7 +769,7 @@ rustc --version  # 应该显示 rustc 1.91.0
 
 **使用改进的借用检查器**:
 
-```rust
+```rust,ignore
 // 旧代码（Rust 1.90）
 let mut checker = ImprovedBorrowChecker::new(); // Rust 1.90
 
@@ -780,7 +780,7 @@ let mut checker = Rust191BorrowChecker::new(); // Rust 1.91，带缓存优化
 
 **使用 const 上下文增强**:
 
-```rust
+```rust,ignore
 // 旧代码（Rust 1.90）
 static VALUE: i32 = 42;
 const REF: &i32 = &VALUE; // 只能引用 static
@@ -793,7 +793,7 @@ const LITERAL_REF: &i32 = &100; // 可以直接引用字面量
 
 **使用优化的内存分配器**:
 
-```rust
+```rust,ignore
 // 新代码（Rust 1.91）
 use c01_ownership_borrow_scope::OptimizedMemoryManager191;
 let mut manager = OptimizedMemoryManager191::new();
@@ -943,7 +943,7 @@ fn infer_type(expr: &str) -> &'static str {
 
 **Rust 1.91**:
 
-```rust
+```rust,ignore
 use c02_type_system::rust_191_features::type_checker_optimizations::OptimizedTypeInferencer;
 
 let mut inferencer = OptimizedTypeInferencer::new();
@@ -965,7 +965,7 @@ println!("缓存命中率: {:.2}%",
 
 Rust 1.91 改进了类型检查的内部算法：
 
-```rust
+```rust,ignore
 // Rust 1.91: 更智能的类型推断
 impl OptimizedTypeInferencer {
     fn infer_type_cached(&mut self, expression: &str) -> String {
@@ -988,7 +988,7 @@ impl OptimizedTypeInferencer {
 
 ### 使用示例
 
-```rust
+```rust,ignore
 use c02_type_system::rust_191_features::type_checker_optimizations::{
     OptimizedTypeInferencer,
     demonstrate_type_inference,
@@ -1050,7 +1050,7 @@ const VALUE: i32 = 42;
 
 **Rust 1.91**:
 
-```rust
+```rust,ignore
 use c02_type_system::rust_191_features::const_context_enhancements::ConfigSystem;
 
 // Rust 1.91: 可以在 const 上下文中获取类型信息
@@ -1112,7 +1112,7 @@ impl ConfigSystem {
 
 Rust 1.91 引入了类型推断缓存机制：
 
-```rust
+```rust,ignore
 pub struct OptimizedTypeInferencer {
     /// 类型推断缓存（Rust 1.91 新增）
     inference_cache: HashMap<String, String>,
@@ -1143,7 +1143,7 @@ pub struct OptimizedTypeInferencer {
 
 Rust 1.91 优化了泛型类型推断：
 
-```rust
+```rust,ignore
 use c02_type_system::rust_191_features::type_checker_optimizations::generic_type_inference;
 
 // Rust 1.91: 泛型类型推断更快
@@ -1172,7 +1172,7 @@ fn example() {
 
 ### 类型信息获取
 
-```rust
+```rust,ignore
 // Rust 1.91: const 上下文中的类型信息
 const fn get_type_name<T>() -> &'static str {
     std::any::type_name::<T>()
@@ -1202,7 +1202,7 @@ const fn const_type_inference() -> &'static str {
 
 ### 示例 1: 高性能类型推断
 
-```rust
+```rust,ignore
 use c02_type_system::rust_191_features::type_checker_optimizations::OptimizedTypeInferencer;
 
 fn high_performance_type_inference() {
@@ -1225,7 +1225,7 @@ fn high_performance_type_inference() {
 
 ### 示例 2: const 上下文类型系统
 
-```rust
+```rust,ignore
 // Rust 1.91: 使用 const 上下文中的类型系统
 const fn create_typed_config() -> Config {
     const MAX_SIZE: usize = 1024;
@@ -1260,7 +1260,7 @@ rustc --version  # 应该显示 rustc 1.91.0
 
 **使用优化的类型推断器**:
 
-```rust
+```rust,ignore
 // 旧代码（Rust 1.90）
 // 类型推断每次都重新计算
 
@@ -1272,7 +1272,7 @@ let mut inferencer = OptimizedTypeInferencer::new();
 
 **使用 const 上下文中的类型系统**:
 
-```rust
+```rust,ignore
 // 新代码（Rust 1.91）
 const TYPE_INFO: &str = ConfigSystem::get_type_info();
 // 在 const 上下文中使用类型信息
@@ -1559,7 +1559,7 @@ const fn simple_add(a: u32, b: u32) -> u32 {
 
 **Rust 1.91**:
 
-```rust
+```rust,ignore
 use c03_control_fn::const_control_flow;
 
 // const 函数中可以进行复杂的控制流操作
@@ -1650,7 +1650,7 @@ fn process(data: &[i32]) -> ControlFlow<(), i32> {
 
 **Rust 1.91**:
 
-```rust
+```rust,ignore
 use c03_control_fn::improved_control_flow;
 use std::ops::ControlFlow;
 
@@ -1736,7 +1736,7 @@ Rust 1.91 的 JIT 编译器优化对函数调用和迭代器的性能提升：
 
 #### 1. 优化的迭代器链式调用
 
-```rust
+```rust,ignore
 use c03_control_fn::function_performance;
 
 // Rust 1.91 JIT 优化：迭代器链式操作性能提升 10-25%
@@ -1799,7 +1799,7 @@ Rust 1.91 优化了条件语句和模式匹配（Pattern Matching）：
 
 #### 1. 编译时条件计算
 
-```rust
+```rust,ignore
 use c03_control_fn::optimized_conditionals;
 
 // Rust 1.91: 可以在 const 上下文中进行更复杂的条件计算
@@ -1862,7 +1862,7 @@ Rust 1.91 优化了循环结构：
 
 #### 1. 优化的 for 循环
 
-```rust
+```rust,ignore
 use c03_control_fn::optimized_loops;
 
 // Rust 1.91 JIT 优化：迭代器循环性能提升 10-25%
@@ -1913,7 +1913,7 @@ Rust 1.91 优化了函数调用：
 
 #### 1. 函数调用缓存机制
 
-```rust
+```rust,ignore
 use c03_control_fn::function_call_optimization;
 
 use std::collections::HashMap;
@@ -1979,7 +1979,7 @@ Rust 1.91 优化了闭包：
 
 #### 1. 优化的闭包捕获
 
-```rust
+```rust,ignore
 use c03_control_fn::closure_optimization;
 
 // Rust 1.91: 闭包捕获优化，减少内存使用
@@ -2019,7 +2019,7 @@ where
 
 ### 示例 1: 使用 const 配置系统
 
-```rust
+```rust,ignore
 use c03_control_fn::const_control_flow;
 
 // 编译时配置系统
@@ -2039,7 +2039,7 @@ impl ControlFlowConfig {
 
 ### 示例 2: 使用改进的 ControlFlow
 
-```rust
+```rust,ignore
 use c03_control_fn::improved_control_flow;
 use std::ops::ControlFlow;
 
@@ -2068,7 +2068,7 @@ fn process_pipeline(data: &[i32]) -> ControlFlow<String, HashMap<String, i32>> {
 
 ### 示例 3: 优化的迭代器链
 
-```rust
+```rust,ignore
 use c03_control_fn::function_performance;
 
 fn process_data(data: &[i32]) -> Vec<i32> {
@@ -2103,7 +2103,7 @@ rustc --version  # 应该显示 rustc 1.91.0
 
 **使用 const 上下文增强**:
 
-```rust
+```rust,ignore
 // 旧代码（Rust 1.90）
 static VALUE: u32 = 10;
 const REF: &u32 = &VALUE; // 只能引用 static
@@ -2115,7 +2115,7 @@ const REF: &u32 = &VALUE; // 可以引用 const
 
 **使用改进的 ControlFlow**:
 
-```rust
+```rust,ignore
 // 旧代码（Rust 1.90）
 fn process() -> ControlFlow<(), i32> {
     // 错误信息较少
@@ -2132,7 +2132,7 @@ fn process() -> ControlFlow<String, i32> {
 
 **利用性能优化**:
 
-```rust
+```rust,ignore
 // Rust 1.91: 迭代器和函数调用自动优化
 // 无需代码更改即可享受性能提升
 let result: Vec<i32> = data.iter()

@@ -961,7 +961,7 @@ criterion_main!(benches);
 
 ### 1.3 性能分析工具
 
-```rust
+```rust,ignore
 use std::time::Instant;
 use std::sync::Arc;
 use tokio::sync::Mutex;

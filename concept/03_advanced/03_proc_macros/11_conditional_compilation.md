@@ -189,7 +189,7 @@ pub fn example() {}
 
 `#[cfg_attr(predicate, attr1, attr2, ...)]` 在谓词为真时展开为后续属性。
 
-```rust
+```rust,ignore
 #[cfg_attr(target_os = "linux", path = "linux.rs")]
 #[cfg_attr(windows, path = "windows.rs")]
 mod os;

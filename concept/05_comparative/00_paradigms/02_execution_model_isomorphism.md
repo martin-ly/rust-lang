@@ -329,7 +329,7 @@ sequenceDiagram
 > Rust 的 `rayon` crate 实现了基于工作窃取（work-stealing）的 Fork-Join 调度器。
 > [Blumofe & Leiserson, *Scheduling Multithreaded Computations by Work Stealing*, 1999](https://doi.org/10.1145/324133.324234)
 
-```rust
+```rust,ignore
 // 惯用：rayon 并行迭代
 use rayon::prelude::*;
 

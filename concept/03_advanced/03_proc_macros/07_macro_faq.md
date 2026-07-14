@@ -85,7 +85,7 @@ macro_rules! vec_of_strings {
 - Derive 实现
 - 需要精确控制
 
-```rust
+```rust,ignore
 #[derive(MyTrait)]
 struct MyStruct { }
 ```
@@ -231,13 +231,13 @@ macro_rules! break_hygiene {
 
 ```rust
 macro_rules! calculate {
-    // 加法
-    ($a:expr + $b:expr) => {
+    // 加法（`expr` 片段后只允许 `=>`、`,`、`;`，故用逗号分隔操作符）
+    ($a:expr, +, $b:expr) => {
         $a + $b
     };
 
     // 乘法
-    ($a:expr * $b:expr) => {
+    ($a:expr, *, $b:expr) => {
         $a * $b
     };
 
@@ -247,9 +247,9 @@ macro_rules! calculate {
     };
 }
 
-let x = calculate!(2 + 3);  // 5
-let y = calculate!(2 * 3);  // 6
-let z = calculate!(42);     // 42
+let x = calculate!(2, +, 3);  // 5
+let y = calculate!(2, *, 3);  // 6
+let z = calculate!(42);       // 42
 ```
 
 **注意**: 更具体的模式放在前面。
@@ -312,7 +312,7 @@ pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
 
 **不使用 syn/quote** (困难):
 
-```rust
+```rust,ignore
 #[proc_macro]
 pub fn my_macro(input: TokenStream) -> TokenStream {
     // 手动解析 TokenStream，非常繁琐
@@ -323,7 +323,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 **使用 syn/quote** (简单):
 
-```rust
+```rust,ignore
 #[proc_macro]
 pub fn my_macro(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -379,7 +379,7 @@ fn test_macro_expansion() {
 
 **可以，但需谨慎**:
 
-```rust
+```rust,ignore
 use std::fs;
 
 #[proc_macro]
@@ -451,7 +451,7 @@ macro_rules! only_two_args {
 
 **技巧 2**: 使用 Span
 
-```rust
+```rust,ignore
 use syn::spanned::Spanned;
 
 let span = field.span();
@@ -462,7 +462,7 @@ return syn::Error::new(span, "Field must be public")
 
 **技巧 3**: 提供建议
 
-```rust
+```rust,ignore
 return syn::Error::new(
     span,
     "Missing #[id] attribute. Try: #[derive(MyTrait)] #[id(1)]"
@@ -642,7 +642,7 @@ html! {
 
 **步骤 2**: 定义函数式宏
 
-```rust
+```rust,ignore
 #[proc_macro]
 pub fn html(input: TokenStream) -> TokenStream {
     // 解析自定义语法
@@ -652,7 +652,7 @@ pub fn html(input: TokenStream) -> TokenStream {
 
 **步骤 3**: 自定义解析器
 
-```rust
+```rust,ignore
 struct HtmlParser {
     input: ParseStream,
 }
@@ -708,7 +708,7 @@ cargo rustc --release -- --emit llvm-ir
 
 **验证方法 3**: 基准测试
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn bench_macro(c: &mut Criterion) {

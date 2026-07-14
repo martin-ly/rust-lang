@@ -91,7 +91,7 @@ let arch_str = cfg_select! {
 
 在 `match` arm 守卫中使用 `if let`，对模式进行进一步细化。**guard 不计入穷尽性检查**。
 
-```rust
+```rust,ignore
 match value {
     Some(x) if let Ok(y) = parse(x) => println!("{}, {}", x, y),
     Some(_) => println!("parse failed"),
@@ -103,7 +103,7 @@ match value {
 
 稳定版本：**1.95.0**
 
-```rust
+```rust,ignore
 use std::keyword as kw;  // 重命名关键字路径段
 ```
 

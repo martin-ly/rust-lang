@@ -223,7 +223,7 @@ RTN 是 dyn 兼容的**前置积木**：RFC 3654 原文明确「We expect to mak
 
 RTN 的痛点是 nightly-only；`trait-variant` crate 用过程宏在 **stable** 上达到等效效果：从基础 trait 生成一个「返回的 Future 满足额外 bound」的变体 trait——**解决 spawn/Send 约束，不解决 dyn 兼容**：
 
-```rust
+```rust,ignore
 //! trait-variant 0.1.2 + tokio 1.52.3：rustc 1.97.0 实测运行通过（输出 ok）
 #[trait_variant::make(IntFactory: Send)]
 trait LocalIntFactory {

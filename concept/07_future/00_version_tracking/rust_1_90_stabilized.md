@@ -128,7 +128,7 @@ impl AsyncNetworkClient for TcpClient {
 
 **旧方式 vs 新方式**：
 
-```rust
+```rust,ignore
 // ❌ Rust 1.74及之前（需要async-trait宏）
 #[async_trait::async_trait]
 pub trait OldAsyncTrait {
@@ -356,7 +356,7 @@ pub fn load_config() -> Result<ServerConfig, String> {
 
 ### 返回类型优化
 
-```rust
+```rust,ignore
 use futures::stream::{Stream, StreamExt};
 use std::pin::Pin;
 
@@ -694,7 +694,7 @@ pub fn simd_checksum(data: &[u8]) -> u32 {
 
 ### 完整HTTP客户端（Rust 1.90特性集成）
 
-```rust
+```rust,ignore
 use tokio::sync::Semaphore;
 use std::sync::Arc;
 

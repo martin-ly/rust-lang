@@ -416,7 +416,7 @@ pub trait PaymentGateway {
 
 适配器是端口的**具体实现**，将外部技术框架适配到应用程序的抽象接口。
 
-```rust
+```rust,ignore
 // 驱动适配器：HTTP API（外部 → 应用程序）
 pub struct HttpOrderAdapter<OS: OrderService> {
     order_service: OS,
@@ -718,7 +718,7 @@ Frameworks & Drivers（最外层）
 >
 > **[Martin — Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)** 依赖规则：源代码依赖只能**向内**指向更高层次的抽象。内层不知道外层的任何信息。
 
-```rust
+```rust,ignore
 // ❌ 违反依赖规则: Entity 依赖外部框架
 // src/entities/order.rs
 use sqlx::FromRow;  // ❌ 错误！Entity 不应依赖数据库框架
@@ -905,7 +905,7 @@ Rust 的冷启动优势:
   - AWS Lambda 的 Rust runtime 优化：graviton2 架构上冷启动 < 50ms
 ```
 
-```rust
+```rust,ignore
 // 冷启动优化：预初始化共享客户端
 use std::sync::Arc;
 use once_cell::sync::Lazy;

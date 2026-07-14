@@ -318,7 +318,7 @@ impl BadVec {
 }
 ```
 
-```rust
+```rust,ignore
 impl BadVec {
     // ✅ sound：unsafe fn 把前置条件显式化，责任交接给调用方
     /// # Safety
