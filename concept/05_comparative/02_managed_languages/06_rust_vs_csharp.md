@@ -228,7 +228,13 @@
 
 ## 二、语言特性差异
 
-「语言特性差异」部分按模式匹配、错误处理与unsafe 与不安全代码的顺序逐层展开。
+C# 与 Rust 的语言特性差异围绕三条主线：
+
+1. **模式匹配**：C# 的 `switch` 表达式 + 属性模式逐年逼近 Rust，但无穷尽性检查——新增 `enum`/union 成员后旧 `switch` 静默通过编译（运行期 `SwitchExpressionException`）；Rust 的 `match` 无通配臂时新增变体即编译错误，重构安全性差距在此。
+2. **错误处理**：C# 异常（隐式控制流，签名不可见）vs Rust `Result`（显式类型）；C# 的 `Task<T>` 可携带异常但需 `await` 才观察，吞异常是常见 bug；Rust 的 `?` 使错误路径在代码中可见可审计。
+3. **unsafe**：C# `unsafe` 需 `/unsafe` 编译开关，使用面窄（指针运算）；Rust `unsafe` 是**信任边界的语言机制**——safe 封装 + unsafe 实现 + 文档化契约，Miri 可动态验证。
+
+判定依据：从 C# 迁移时，先映射异常层次到 `thiserror` 枚举，这是设计差异最大的环节。
 
 ### 2.1 模式匹配
 >
@@ -388,7 +394,18 @@ unsafe 对比:
 
 ## 三、工程实践差异
 
-「工程实践差异」部分包含构建系统 与 互操作性 两条主线，本节依次说明。
+工程实践差异集中在构建系统与互操作：
+
+| 维度 | C#（.NET） | Rust |
+|---|---|---|
+| 构建/包管理 | MSBuild + NuGet，中心仓库 | Cargo + crates.io，锁文件默认提交（bin） |
+| 项目布局 | solution/project 两层 | workspace/crate 两层，近似同构 |
+| 跨平台 | 单一运行时（CoreCLR）全覆盖 | 目标三元组 + 交叉编译，musl 静态链接 |
+| 互操作 | P/Invoke 调用 C，COM 互操作成熟 | `extern "C"` + `bindgen`/`cbindgen`，COM 经 `windows` crate |
+
+FFI 方向感：C# 调用 Rust 用 `LibraryImport`（源生成 P/Invoke，.NET 7+）比反向更常见——Rust 常作为 C# 系统的性能扩展而非宿主。
+
+判定依据：.NET 生态依赖深（WPF/Entity Framework）的系统不宜整体迁移，抽热路径为 Rust native lib 性价比最高。
 
 ### 3.1 构建系统
 >

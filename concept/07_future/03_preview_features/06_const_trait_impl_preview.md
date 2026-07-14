@@ -83,7 +83,15 @@
 
 ## 一、核心概念
 
-本节将「核心概念」分解为若干主题：问题：常量上下文中的 Trait 鸿沟、`const impl` 方案概览与`~const` 限定与效果系统。
+const trait impl 针对「常量上下文中的 Trait 鸿沟」：`const fn` 中不能调用任何 trait 方法（即使实现本身是 const-safe），导致编译期代码被迫退化为宏或单态化手写——例如编译期 `Default::default()`、`Add::add()` 均不可用。
+
+方案概览：
+
+1. **`const impl Trait for T`**：声明「该 impl 的所有方法满足 const 约束」，方法体受 `const fn` 同等限制（无堆分配、无运行期行为）；
+2. **`~const` 限定**：`fn f<T: ~const Trait>()` 表达「调用方若在 const 上下文，则 T 的 impl 必须是 const impl」——`~`（约）标记是**效果系统的首个工程形态**：constness 作为可约束的效果进入类型系统；
+3. **与效果系统的关系**：`~const` 被视为 generic effects（async/try/const 统一效果框架）的探路石——其设计决策（效果在 bound 中的位置、默认语义）将影响后续 `~async` 等提案。
+
+判定依据：`feature(const_trait_impl)` nightly 可用；库中需要编译期泛型计算时用它，公共 API 勿暴露 `~const`（未稳定承诺）。
 
 ### 1.1 问题：常量上下文中的 Trait 鸿沟
 
@@ -197,7 +205,13 @@ fn main() {
 
 ## 二、技术细节
 
-本节围绕「技术细节」展开，依次讨论常量 Trait 的约束继承、与现有 Const 特性的交互与编译器实现挑战。
+技术细节的三组约束：
+
+1. **约束继承**：`const impl` 的方法体必须全部 const-safe——调用链上每个 trait 方法也必须是 `~const` 限定的；非 const 方法（如 `Display::fmt` 涉及分配）永不能进 const impl，这划分了「可 const 化的 trait 子集」（算术、`Option` 操作等）。
+2. **与现有 const 特性的交互**：`const fn` + `const impl` + const generics 构成编译期计算三件套；`~const Drop` 是难点——常量析构需要「编译期可执行的 Drop」，多数实现不满足（涉及堆释放），故常量上下文中值通常被「泄漏式」处理。
+3. **编译器实现挑战**：`~const` bound 在 trait 求解器中引入条件化的 impl 选择（同一类型在 const/非 const 上下文可选不同 impl），与 coherence 的交互需要仔细限定，避免推断歧义。
+
+判定依据：写 const impl 时先验证所有被调用的 trait 方法都有 const 版本；标准库的 `~const` 标注覆盖进度（`core` 优先于 `std`）决定可用面。
 
 ### 2.1 常量 Trait 的约束继承
 >
@@ -289,7 +303,13 @@ fn main() {
 
 ## 四、反命题与边界分析
 
-本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+反命题：「const trait 是过度工程，宏和代码生成已够用」——边界分析：
+
+1. **宏的真实成本**：编译期查找表类需求确实可用 `const fn` + 字面量解决，但一旦逻辑泛型化（「对任意 `T: Add` 的编译期归约」），宏方案退化为每个类型一份手写生成为——可维护性灾难；const trait 把这份抽象成本收回类型系统。
+2. **效果系统的不可逆性**：`~const` 是效果泛型的第一步，其语法选择会被 `~async`、`~try` 继承——这是「正确性」争议的真正焦点：批评者担心的不是 const trait 本身，而是效果系统整体给类型系统带来的复杂度阶层。
+3. **稳定化的边界**：标准库内部已大量使用 `~const`（`const_convert` 等特性门），「先内用后公开」的路径降低了设计风险，但公开稳定化仍无时间表。
+
+判定依据：评估采用时机看 `std`/`core` 的 `~const` 标注是否进入 stable 文档——那是稳定化的先行指标。
 
 ### 4.1 反命题树
 >

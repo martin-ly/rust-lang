@@ -191,3 +191,33 @@ criterion_main!(benches);
 
 - **P2 生态/社区**: [docs.rs/rayon — 生态权威 API 文档](https://docs.rs/rayon) · [docs.rs/petgraph — 生态权威 API 文档](https://docs.rs/petgraph)
 - **P1 学术/形式化**: [Skiena: The Algorithm Design Manual (2nd ed., Springer)](https://link.springer.com/book/10.1007/978-1-84800-070-4)
+
+---
+
+## ⚠️ 反例与陷阱：深递归导致栈溢出（运行时陷阱）
+
+**反例**（运行时陷阱，代码可通过编译）：
+
+```rust
+fn sum_to(n: u64) -> u64 {
+    if n == 0 { 0 } else { n + sum_to(n - 1) }
+}
+fn main() {
+    println!("{}", sum_to(1_000_000));
+}
+```
+
+Rust 不保证尾调用优化，O(n) 递归深度意味着 O(n) 栈空间；主线程默认 8 MiB 栈，百万级递归必然溢出——复杂度分析要同时算时间栈两维。
+
+**修正**：
+
+```rust
+fn sum_to(n: u64) -> u64 {
+    let mut acc = 0;
+    for i in 1..=n { acc += i; }
+    acc
+}
+fn main() {
+    println!("{}", sum_to(1_000_000));
+}
+```

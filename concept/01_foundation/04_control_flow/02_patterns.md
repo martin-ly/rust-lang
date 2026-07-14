@@ -358,3 +358,32 @@ if let Some(y) = x {
 - **对偶**：与命令式 `if let` 早退相对；`match` 本身是表达式，见 [Statements and Expressions](03_statements_and_expressions.md)。
 - **组合**：与 [Enumerations](../07_modules_and_items/05_enumerations.md) 组合实现和类型的穷尽解构。
 - **依赖**：空匹配的合法性依赖 [Never Type](../02_type_system/02_never_type.md) 的不可实例化性。
+
+---
+
+## ⚠️ 反例与陷阱：match 非穷尽
+
+**反例**（rustc 1.97 实测编译失败：E0004）：
+
+```rust,compile_fail
+fn main() {
+    let x = Some(1);
+    match x {
+        Some(v) => println!("{v}"),
+    }
+}
+```
+
+`match` 必须穷尽所有可能；漏掉 `None` 分支即编译错误，这是模式匹配相对 if/else 的核心保证。
+
+**修正**：
+
+```rust
+fn main() {
+    let x = Some(1);
+    match x {
+        Some(v) => println!("{v}"),
+        None => {}
+    }
+}
+```

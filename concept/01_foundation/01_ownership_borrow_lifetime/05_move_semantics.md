@@ -334,3 +334,29 @@ move: T@src → T@dst
 - **对偶**：与显式深拷贝 `Clone` / 按位复制 `Copy` 相对，工程抉择见 [构造与初始化](../../02_intermediate/00_traits/05_construction_and_initialization.md)。
 - **组合**：与 [Borrowing](02_borrowing.md) 互斥协作——move 转移所有权，借用只临时出让访问权。
 - **依赖**：语义正确性依赖 [Lifetimes](03_lifetimes.md) 对引用存活期的静态验证。
+
+---
+
+## ⚠️ 反例与陷阱：移动后再次使用（use after move）
+
+**反例**（rustc 1.97 实测编译失败：E0382）：
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hi");
+    let t = s;
+    println!("{s}");
+}
+```
+
+非 `Copy` 类型赋值即移动，`s` 已失效；这与 C++ 移动后「有效但未指定」不同，Rust 直接编译拒绝。
+
+**修正**：
+
+```rust
+fn main() {
+    let s = String::from("hi");
+    let t = s.clone();
+    println!("{s} {t}");
+}
+```

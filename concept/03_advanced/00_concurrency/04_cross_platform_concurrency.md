@@ -18,6 +18,31 @@
 
 ---
 
+## 📑 目录
+
+- [Cross-Platform Concurrency（跨平台并发）](#cross-platform-concurrency跨平台并发)
+  - [📑 目录](#-目录)
+  - [一、平台线程模型概览](#一平台线程模型概览)
+  - [二、同步原语的平台实现](#二同步原语的平台实现)
+  - [三、条件编译与平台抽象](#三条件编译与平台抽象)
+  - [四、Async Runtime 跨平台差异](#四async-runtime-跨平台差异)
+  - [五、原子操作与内存排序](#五原子操作与内存排序)
+  - [六、移动平台注意事项](#六移动平台注意事项)
+  - [七、测试矩阵建议](#七测试矩阵建议)
+  - [八、常见陷阱](#八常见陷阱)
+  - [认知路径](#认知路径)
+  - [定理链](#定理链)
+  - [反命题](#反命题)
+  - [反向推理](#反向推理)
+  - [过渡段](#过渡段)
+  - [权威来源索引](#权威来源索引)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [⚠️ 反例与陷阱：spawn 闭包捕获借用数据](#️-反例与陷阱spawn-闭包捕获借用数据)
+
+---
+
 ## 一、平台线程模型概览
 
 | 平台 | 线程模型 | 关键原生 API |
@@ -198,3 +223,33 @@ strategy:
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585) · [RustBelt: Securing the Foundations of the Rust Programming Language (POPL 2018)](https://dl.acm.org/doi/10.1145/3158154)
+
+---
+
+## ⚠️ 反例与陷阱：spawn 闭包捕获借用数据
+
+**反例**（rustc 1.97 实测编译失败：E0373）：
+
+```rust,compile_fail
+use std::thread;
+fn main() {
+    let data = vec![1, 2, 3];
+    thread::spawn(|| {
+        println!("{}", data.len());
+    }).join().unwrap();
+}
+```
+
+`thread::spawn` 要求闭包 `'static`：线程可能长于栈帧，借用局部数据在所有平台上都被拒绝（与平台无关的统一保证）。
+
+**修正**：
+
+```rust
+use std::thread;
+fn main() {
+    let data = vec![1, 2, 3];
+    thread::spawn(move || {
+        println!("{}", data.len());
+    }).join().unwrap();
+}
+```

@@ -48,6 +48,7 @@
     - [测验 5：Rust 如何通过 Arrow FFI 与 Python 的 `pyarrow` / `pandas` 零拷贝交换数据？（理解层）](#测验-5rust-如何通过-arrow-ffi-与-python-的-pyarrow--pandas-零拷贝交换数据理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 > **Bloom 层级**: L4-L5
 > **变更日志**:
@@ -59,7 +60,15 @@
 
 ## 一、权威定义（Definition）
 
-本节从数据科学的 Rust 定位 与 核心矛盾：Python 生态 vs Rust 性能 两个层面剖析「权威定义（Definition）」。
+Rust 数据科学的定位必须诚实陈述核心矛盾：**Python 拥有交互探索生态（Jupyter/pandas/matplotlib），Rust 拥有性能与部署形态**——二者不是替代关系而是分工关系。
+
+三层典型分工：
+
+1. **探索层（Python 主导）**：假设检验、可视化、模型原型；
+2. **生产数据管道（Rust 主场）**：高吞吐 ETL、流处理、特征服务——Polars 本身就是 Rust 内核 + Python 绑定的范式；
+3. **互操作桥**：PyO3/maturin 让 Rust 扩展以原生速度嵌入 Python 工作流，`polars`/`pydantic-core` 是该模式的成功样本。
+
+判定依据：任务终点是 notebook 报告 → 留 Python；任务终点是常驻服务/批处理集群 → Rust 重写热路径，Python 保留编排。
 
 ### 1.1 数据科学的 Rust 定位
 
@@ -123,7 +132,18 @@ Python 的不可撼动地位：交互探索、可视化、ML 模型生态
 
 ## 三、数据处理与 ETL
 
-「数据处理与 ETL」部分包含 Polars：DataFrame 引擎 与  DataFusion：查询执行 两条主线，本节依次说明。
+数据处理双引擎的分工：
+
+| 维度 | Polars（DataFrame 引擎） | DataFusion（查询执行） |
+|---|---|---|
+| API 形态 | 声明式 DataFrame（lazy/eager） | SQL + DataFrame |
+| 定位 | pandas 替代品，单机列式处理 | 嵌入式查询引擎，可扩展为分布式（Ballista） |
+| 杀手特性 | Lazy 查询优化器（谓词下推、投影裁剪） | Arrow 原生、UDF 可插拔 |
+| 典型场景 | GB 级 CSV/Parquet 交互分析 | 构建数据库/日志分析产品 |
+
+工程要点：Polars 的 `LazyFrame` 过早 `.collect()` 会物化中间结果、放弃优化器机会——这是边界测试中性能退化的根因；应整条链 lazy 到底，末端一次 collect。
+
+判定依据：单机分析选 Polars；要把查询能力嵌入自己的产品选 DataFusion。
 
 ### 3.1 Polars：DataFrame 引擎
 
@@ -261,7 +281,14 @@ fn linear_regression(x: &DMatrix<f64>, y: &DVector<f64>) -> Result<DVector<f64>,
 
 ## 五、可视化与交互
 
-本节从绘图生态 与  Jupyter 内核 两个层面剖析「可视化与交互」。
+可视化与交互生态的现实状态（2026）：
+
+- **绘图**：`plotters`（纯 Rust 位图/SVG 后端，静态图）、`egui_plot`（交互式实时图）、`charming`（ECharts 绑定，Web 仪表板）；成熟度远低于 matplotlib，复杂出版级图表仍建议 Python 出图。
+- **Jupyter 内核**：`evcxr_jupyter` 提供 Rust REPL 内核，支持 `:dep` 声明依赖与变量持久化——可用于教学与 API 探索，但编译延迟（每次执行重编译依赖闭包）使其不适合快速迭代探索。
+
+务实策略：Rust 做数据处理产出 Parquet/Arrow，Python（marimo/Jupyter）消费做可视化——Arrow IPC 零拷贝跨语言传递使该组合几乎无序列化成本。
+
+判定依据：需要交互探索 → evcxr 仅作辅助；需要生产仪表板 → charming/egui_plot 可用。
 
 ### 5.1 绘图生态
 

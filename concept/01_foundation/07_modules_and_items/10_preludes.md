@@ -207,3 +207,36 @@ mod example {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata) · [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver)
+
+---
+
+## ⚠️ 反例与陷阱：trait 方法需要导入 trait 才可见
+
+**反例**（rustc 1.97 实测编译失败：E0599）：
+
+```rust,compile_fail
+use std::fs::File;
+fn f() -> std::io::Result<()> {
+    let mut file = File::open("Cargo.toml")?;
+    let mut s = String::new();
+    file.read_to_string(&mut s)?;
+    Ok(())
+}
+fn main() { let _ = f(); }
+```
+
+`read_to_string` 是 `std::io::Read` trait 的方法，不在 prelude 中；未 `use std::io::Read` 时编译器报「no method named」，这正是 prelude 存在的原因——常用 trait 方法免导入。
+
+**修正**：
+
+```rust
+use std::fs::File;
+use std::io::Read;
+fn f() -> std::io::Result<()> {
+    let mut file = File::open("Cargo.toml")?;
+    let mut s = String::new();
+    file.read_to_string(&mut s)?;
+    Ok(())
+}
+fn main() { let _ = f(); }
+```

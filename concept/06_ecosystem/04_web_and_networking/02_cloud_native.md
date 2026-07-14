@@ -75,12 +75,22 @@
     - [测验 5：Service Mesh（如 Linkerd）为什么选择用 Rust 实现数据平面？（理解层）](#测验-5service-mesh如-linkerd为什么选择用-rust-实现数据平面理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
 ## 一、核心概念
 
-本节从云原生定义 与  Rust 优势 两个层面剖析「核心概念」。
+云原生（Cloud Native）的 CNCF 定义核心：**容器化 + 动态编排 + 微服务 + 声明式 API**，使应用能在弹性基础设施上可预测地部署与伸缩。
+
+Rust 在云原生栈的四项结构性优势：
+
+1. **资源效率**：无 GC + 零运行时 → 容器镜像小（静态二进制 + `FROM scratch`/distroless，常 <20MB）、内存基线低，直接降低 Pod 的 request/limit 与云账单；
+2. **冷启动**：无运行时初始化，毫秒级启动——Serverless/Knative 弹性伸缩的理想负载；
+3. **安全边界**：内存安全消除整类 RCE 漏洞，多租户基础设施（参考 Firecracker 案例）的首选语言；
+4. **运维可观测**：`tokio` 的 task 模型 + `tracing` 的结构化 span 与 OpenTelemetry 原生对接。
+
+判定依据：横向扩容成本高（内存密集型服务）或冷启动敏感的场景，Rust 化 ROI 最高。
 
 ### 1.1 云原生定义
 
@@ -160,7 +170,19 @@ Rust 云原生优势:
 
 ## 二、Web 框架
 
-本节从 Axum 与  Actix-web 两个层面剖析「Web 框架」。
+Axum 与 Actix-web 的选择矩阵（2026 现状）：
+
+| 维度 | Axum | Actix-web |
+|---|---|---|
+| 运行时 | Tokio 原生（tower 生态） | 自有 actor 衍生，已迁 Tokio 兼容 |
+| 抽象层 | `tower::Service` 中间件复用 | 自有 middleware 体系 |
+| 类型驱动 | 提取器（extractor）编译期校验 handler 签名 | 类似但宏魔法更多 |
+| 生态协同 | tower-http（CORS/限流/压缩）、axum-extra | actix-* 自成体系 |
+| 学习曲线 | 「类型即文档」陡峭但可推理 | 上手快，深入需懂 actor 遗产 |
+
+关键差异在**中间件复用性**：Axum 中间件是标准 `tower::Layer`，可在 Hyper/gRPC（tonic）间通用；Actix 中间件锁死在框架内。
+
+判定依据：新项目默认 Axum（Tower 生态复利）；存量 Actix 服务无需迁移——两者性能同一量级，瓶颈在业务代码。
 
 ### 2.1 Axum
 
@@ -257,7 +279,13 @@ Actix-web:
 
 ## 三、基础设施
 
-本节围绕「基础设施」展开，依次讨论服务网格、容器运行时与可观测性。
+基础设施三层的 Rust 触点：
+
+1. **服务网格**：数据面代理（Envoy 的替代者 Linkerd2-proxy 即 Rust 实现——选型理由正是内存安全 + 低延迟，边车代理每秒处理全量流量，GC 停顿不可接受）；控制面多为 Go，Rust 渗透缓慢。
+2. **容器运行时**：`youki`（Rust 实现的 OCI runtime）与 `containerd` 的 Rust shim；K8s 节点的安全敏感组件 Rust 化是明确趋势。
+3. **可观测性**：`tracing`（结构化日志/span，`#[instrument]` 过程宏零样板）→ `tracing-opentelemetry` → OTLP 导出；指标用 `metrics` crate（facade 模式，后端可换 Prometheus/StatsD）。
+
+判定依据：服务网格选型不必因语言偏好——Linkerd（Rust 数据面）vs Istio（Envoy）按功能与运维复杂度选；应用侧可观测性标配 `tracing` + OTLP，与语言无关的后端栈。
 
 ### 3.1 服务网格
 

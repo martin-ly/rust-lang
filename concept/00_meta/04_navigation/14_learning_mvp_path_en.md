@@ -172,7 +172,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 ## Week 3: Concurrency & CLI Project (12h)
 
-理解「Week 3: Concurrency & CLI Pro…」需要把握 Day 13: Threads & Shared State (2h)、Day 14: Channels & Message Passing…、Day 15: Async/Await Intro (2h) [Rec…、Day 16: Building a CLI Tool (2h)等5个方面，本节依次展开。
+本节聚焦「Week 3: Concurrency & CLI Project (12h)」，覆盖Day 13: Threads & Shared State (2h)、Day 14: Channels & Message Passing…、Day 15: Async/Await Intro (2h) [Rec…、Day 16: Building a CLI Tool (2h)等方面。论述顺序由定义到边界：先明确「Week 3: Concurrency & CLI Project (12h)」在「Rust Minimum Viable Learning Path (MVP Path)」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「Week 3: Concurrency & CLI Project (12h)」的判定标准，并指出它在全页论证链中的位置。
 
 ### Day 13: Threads & Shared State (2h)
 
@@ -232,7 +232,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 ## Resource Index
 
-本节从 Required Reading、Cheat Sheets与Exercise Sources切入，剖析「Resource Index」的核心内容。
+本节聚焦「Resource Index」，覆盖Required Reading、Cheat Sheets与Exercise Sources。论述顺序由定义到边界：先明确「Resource Index」在「Rust Minimum Viable Learning Path (MVP Path)」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「Resource Index」的判定标准，并指出它在全页论证链中的位置。
 
 ### Required Reading
 

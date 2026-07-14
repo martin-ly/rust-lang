@@ -371,3 +371,28 @@ struct User {
 - **对偶**：与手写 impl 相对，见 [Implementations](../../01_foundation/07_modules_and_items/06_implementations.md)。
 - **组合**：与 [Structs](../../01_foundation/07_modules_and_items/04_structs.md) / [Enumerations](../../01_foundation/07_modules_and_items/05_enumerations.md) 组合。
 - **依赖**：展开卫生见 [Macro Hygiene](../../03_advanced/03_proc_macros/09_macro_hygiene.md)。
+
+---
+
+## ⚠️ 反例与陷阱：derive 要求所有字段已实现对应 trait
+
+**反例**（rustc 1.97 实测编译失败：E0277）：
+
+```rust,compile_fail
+#[derive(Debug)]
+struct Wrapper { inner: NoDebug }
+struct NoDebug;
+fn main() { println!("{:?}", Wrapper { inner: NoDebug }); }
+```
+
+`#[derive(Debug)]` 生成逐字段 `Debug` 调用，任一字段未实现 `Debug` 即 E0277；derive 不是「无条件可用」的标注。
+
+**修正**：
+
+```rust
+#[derive(Debug)]
+struct Wrapper { inner: NoDebug }
+#[derive(Debug)]
+struct NoDebug;
+fn main() { println!("{:?}", Wrapper { inner: NoDebug }); }
+```

@@ -266,3 +266,26 @@ ARM 服务器（AWS Graviton、Apple Silicon）正在普及。SVE/SME 支持使 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper) · [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio)
+
+---
+
+## ⚠️ 反例与陷阱：x86_64 上启用 SVE target_feature
+
+**反例**（rustc 1.97 实测编译失败，无错误码：target feature 无效））：
+
+```rust,compile_fail
+#[target_feature(enable = "sve")]
+unsafe fn sve_add() {}
+fn main() { unsafe { sve_add(); } }
+```
+
+`sve`/`sme` 是 AArch64 专属可伸缩向量特性；在 x86_64 目标上 `#[target_feature(enable = "sve")]` 被编译器拒绝，跨架构 SIMD 代码必须 `#[cfg(target_arch)]` 隔离。
+
+**修正**：
+
+```rust
+#[cfg(target_arch = "aarch64")]
+#[target_feature(enable = "sve")]
+unsafe fn sve_add() {}
+fn main() {}
+```

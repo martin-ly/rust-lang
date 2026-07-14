@@ -38,6 +38,7 @@
   - [四、与既有机制的交互](#四与既有机制的交互)
   - [五、反命题与边界分析](#五反命题与边界分析)
   - [权威来源索引](#权威来源索引)
+  - [⚠️ 反例与陷阱：结构体字段默认值语法（未稳定）](#️-反例与陷阱结构体字段默认值语法未稳定)
 
 ## 一、动机与语法
 
@@ -113,3 +114,30 @@ fn main() {
 > [TRPL — Using Structs](https://doc.rust-lang.org/book/ch05-01-defining-structs.html)
 >
 > 以上链接于 2026-07-12 经 curl 实测全部返回 HTTP 200；代码示例经 `rustc 1.99.0-nightly --edition 2024` 实测编译通过。
+
+---
+
+## ⚠️ 反例与陷阱：结构体字段默认值语法（未稳定）
+
+**反例**（rustc 1.97 实测编译失败，无错误码，解析错误））：
+
+```rust,compile_fail
+struct Config {
+    retries: u32 = 3,
+    timeout: u32 = 30,
+}
+fn main() { let _ = Config { retries: 1, .. }; }
+```
+
+字段默认值（default field values）仍是 `default_field_values` 未稳定特性；stable 1.97 上 `字段: 类型 = 值` 直接解析失败，`..` 语法亦不可用。
+
+**修正**：
+
+```rust
+#[derive(Default)]
+struct Config {
+    retries: u32,
+    timeout: u32,
+}
+fn main() { let _ = Config { retries: 1, ..Default::default() }; }
+```

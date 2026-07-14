@@ -84,7 +84,7 @@ public:
 
 ## 三、Rust 的模块可见性
 
-理解「Rust 的模块可见性」需要把握可见性修饰符、可见性级别与模块系统的优势，本节依次展开。
+本节聚焦「Rust 的模块可见性」，覆盖可见性修饰符、可见性级别与模块系统的优势。论述顺序由定义到边界：先明确「Rust 的模块可见性」在「友元 vs 模块可见性：C++ 的 `friend` 与 Rust 的隐私边界」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「Rust 的模块可见性」的判定标准，并指出它在全页论证链中的位置。
 
 ### 3.1 可见性修饰符
 
@@ -259,3 +259,36 @@ access(item, module) = visible  iff  item 在 module 的可见范围内
 - **对偶**：C++ `friend` 机制本身即对偶对象（本页主线）。
 - **组合**：与 [Use Declarations](../../01_foundation/07_modules_and_items/03_use_declarations.md) 的引入端规则组合。
 - **依赖**：模块基础见 [Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md)。
+
+---
+
+## ⚠️ 反例与陷阱：跨模块访问私有字段
+
+**反例**（rustc 1.97 实测编译失败：E0616）：
+
+```rust,compile_fail
+mod inner {
+    pub struct Config { retries: u32 }
+    pub fn default_config() -> Config { Config { retries: 3 } }
+}
+fn main() {
+    let c = inner::default_config();
+    println!("{}", c.retries);
+}
+```
+
+Rust 没有 C++ `friend`；`pub struct` 的私有字段对外部模块不可见，可见性边界就是隐私边界。需要受控暴露时用 `pub(crate)` 或访问器。
+
+**修正**：
+
+```rust
+mod inner {
+    pub struct Config { retries: u32 }
+    impl Config { pub fn retries(&self) -> u32 { self.retries } }
+    pub fn default_config() -> Config { Config { retries: 3 } }
+}
+fn main() {
+    let c = inner::default_config();
+    println!("{}", c.retries());
+}
+```

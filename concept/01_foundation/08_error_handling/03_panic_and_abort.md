@@ -239,7 +239,7 @@ Panic 传播机制:
 
 ## 二、技术细节
 
-「技术细节」涉及自定义 Panic 处理、Panic 钩子与日志与Abort 模式，本节逐一说明其要点。
+本节展开「Panic 与 Abort：不可恢复错误的处理机制」的技术细节：自定义 Panic 处理、Panic 钩子与日志与Abort 模式。重点是类型签名、所有权语义与编译期约束如何相互作用，而不是 API 罗列；每个小节给出可编译的最小示例，并标注对应反例的失败规则。读完后应能解释：为什么这种写法能通过编译，而那种写法会被借用检查器或类型系统拒绝。
 
 ### 2.1 自定义 Panic 处理
 
@@ -577,7 +577,7 @@ graph TD
 
 ## 十、边界测试：Panic 与 Abort 的编译错误
 
-本节将「边界测试：Panic 与 Abort 的编译错误」分解为若干主题：边界测试：`catch_unwind` 捕获非 `UnwindSafe…、边界测试：在`Drop`中 panic 导致双重 panic（运行…、边界测试：`panic=abort` 与 `catch_unwind`…、边界测试：双重 panic导致 abort（运行时行为）等9个方面。
+本节把「Panic 与 Abort：不可恢复错误的处理机制」的规则推到编译器与运行时的边界上逐一实测：边界测试：`catch_unwind` 捕获非 `UnwindSafe…、边界测试：在`Drop`中 panic 导致双重 panic（运行…、边界测试：`panic=abort` 与 `catch_unwind`…、边界测试：双重 panic导致 abort（运行时行为）等方面。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
 
 ### 10.1 边界测试：`catch_unwind` 捕获非 `UnwindSafe` 类型（编译错误）
 

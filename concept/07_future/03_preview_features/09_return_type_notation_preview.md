@@ -81,7 +81,13 @@
 
 ## 一、核心概念
 
-本节围绕「核心概念」展开，依次讨论问题：AFIT/RPITIT 的返回类型无法命名、RTN 语法：`T::method(..): Send`与RTN 与 `use<..>` 精确捕获的区别。
+Return Type Notation（RTN）解决的核心问题：**AFIT（trait 中 `async fn`）与 RPITIT（trait 方法返回 `impl Trait`）的返回类型无法命名**。
+
+调用 `T::fetch()` 得到 `impl Future`，但无法在类型位置写「`T::fetch` 的返回类型」去约束它——例如无法要求该 Future 是 `Send`。RTN 提案语法 `T::method(..): Send` 把「方法的返回类型」提升为一阶类型表达式，可加 trait 约束。
+
+与 `use<..>` 精确捕获的区别：`use<>` 管**生命周期捕获集**（哪个泛型参数的生命周期被返回类型借用），RTN 管**返回类型的可命名性与约束**——两者正交，解决不同问题，可能共存于最终设计。
+
+判定依据：当前稳定版的替代方案是手写关联类型 `type Fut: Future` + `fn fetch(&self) -> Self::Fut`，RTN 稳定前这是唯一 portable 写法。
 
 ### 1.1 问题：AFIT/RPITIT 的返回类型无法命名
 
@@ -162,7 +168,13 @@ fn spawn_check<T: HealthCheck<check(..): Send + 'static>>(mut hc: T) {
 
 ## 二、技术细节
 
-「技术细节」涉及语法形式与语义、当前限制与与 async closures 的关联，本节逐一说明其要点。
+技术细节三要点：
+
+1. **语法形式与语义**：`T::method(args..)` 在类型位置表示「以该方法签名实例化后的返回类型」，`: Bound` 追加约束；`..` 表示使用调用点的实参推断，避免重复书写参数类型。
+2. **当前限制**：仅适用于 AFIT/RPITIT 方法；普通方法、const/type 泛型方法暂不支持；作为 bounds 使用，尚不能作为独立类型别名（`type X = T::m(..)` 形式受限）。
+3. **与 async closures 的关联**：`AsyncFn` trait 族的返回类型命名遇到同一问题——RTN 是 async closure 高阶约束（如「该闭包返回的 Future 是 Send」）的前置条件，两者在类型团队路线图中绑定推进。
+
+判定依据：跟踪 RFC 3665（AFIT 稳定）后续的类型团队 proposal；nightly `feature(return_type_notation)` 可试验但不可进生产依赖。
 
 ### 2.1 语法形式与语义
 

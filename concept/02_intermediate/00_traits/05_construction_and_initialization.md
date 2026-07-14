@@ -302,3 +302,30 @@ Point::new(x, y) = Point { x, y }
 - **对偶**：与 C++ 构造/析构体系相对（本页主线对比）。
 - **组合**：与 [Move Semantics](../../01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md) 组合决定资源转移时机。
 - **依赖**：析构顺序依赖 [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 的 drop 规则。
+
+---
+
+## ⚠️ 反例与陷阱：结构体字面量缺字段
+
+**反例**（rustc 1.97 实测编译失败：E0063）：
+
+```rust,compile_fail
+struct Point { x: i32, y: i32 }
+fn main() {
+    let p = Point { x: 1 };
+    println!("{}", p.x);
+}
+```
+
+Rust 没有 C++ 式构造函数重载与默认实参，结构体字面量必须给出全部字段（除非用 `..Default::default()`）。
+
+**修正**：
+
+```rust
+#[derive(Default)]
+struct Point { x: i32, y: i32 }
+fn main() {
+    let p = Point { x: 1, ..Default::default() };
+    println!("{}", p.x);
+}
+```

@@ -240,3 +240,35 @@ Java/Python object ..... 引用语义
 - **对偶**：与引用语义语言（Java/Python）的对象模型相对，见 [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)。
 - **组合**：与 [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) 共同定义对象生命周期边界。
 - **依赖**：跨线程值共享合法性依赖 [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) auto trait。
+
+---
+
+## ⚠️ 反例与陷阱：同时存在两个可变引用
+
+**反例**（rustc 1.97 实测编译失败：E0499）：
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1];
+    let a = &mut v;
+    let b = &mut v;
+    a.push(2);
+    b.push(3);
+}
+```
+
+同一时刻最多一个 `&mut`；第二个可变借用被借用检查器拒绝，这是引用语义与 C++ 引用别名的根本差异。
+
+**修正**：
+
+```rust
+fn main() {
+    let mut v = vec![1];
+    {
+        let a = &mut v;
+        a.push(2);
+    }
+    let b = &mut v;
+    b.push(3);
+}
+```

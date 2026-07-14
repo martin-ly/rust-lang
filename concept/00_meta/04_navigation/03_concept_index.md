@@ -92,7 +92,7 @@
 
 ## 一、索引使用说明 [倒排索引方法论参照信息检索标准 — Manning, Raghavan & Schütze, *Introduction to Information Retrieval* (Cambridge, 2008); 语义链接网络参照 Knowledge Graph 构建方法论](../00_framework/methodology.md)
 
-「索引使用说明 倒排索引方法论参照信息检索标准 — Mann…」部分包含概念类型标记 概念分类参照语义网络理论 — Collins & Qui… 与 语义链接标记 语义链接类型参照知识图谱关系本体 — W3C RDF/O… 两条主线，本节依次说明。
+本节聚焦「索引使用说明」，覆盖概念类型标记 概念分类参照语义网络理论 — Collins & Qui… 与 语义链接标记 语义链接类型参照知识图谱关系本体 — W3C RDF/O…。论述顺序由定义到边界：先明确「索引使用说明」在「全局概念索引（Concept Index）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「索引使用说明」的判定标准，并指出它在全页论证链中的位置。
 
 ### 1.1 概念类型标记 [概念分类参照语义网络理论 — Collins & Quillian (1969) 层次语义网络模型; 概念的层级组织与属性继承](../00_framework/methodology.md)
 
@@ -414,7 +414,7 @@
 
 ## 五、按 Bloom 层级排序 [Bloom, B.S. et al. — *Taxonomy of Educational Objectives: The Classification of Educational Goals*. Handbook I: Cognitive Domain. Longman, 1956 (revised 2001); 认知层级作为知识结构组织的主轴](https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/)
 
-「按 Bloom 层级排序 Bloom, B.S. et a…」涉及记忆（Remember）→ 理解（Understand）、应用（Apply）→ 分析（Analyze）与评价（Evaluate）→ 创造（Create），本节逐一说明其要点。
+本节聚焦「按 Bloom 层级排序」，覆盖记忆（Remember）→ 理解（Understand）、应用（Apply）→ 分析（Analyze）与评价（Evaluate）→ 创造（Create）。论述顺序由定义到边界：先明确「按 Bloom 层级排序」在「全局概念索引（Concept Index）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「按 Bloom 层级排序」的判定标准，并指出它在全页论证链中的位置。
 
 ### 记忆（Remember）→ 理解（Understand）
 

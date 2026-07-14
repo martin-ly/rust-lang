@@ -60,6 +60,7 @@
     - [测验 5：`cargo install` 与系统包管理器（apt/brew）安装 Rust CLI 工具各有什么优劣？（理解层）](#测验-5cargo-install-与系统包管理器aptbrew安装-rust-cli-工具各有什么优劣理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -172,7 +173,13 @@ fn main() {
 
 ## 二、关键 crate
 
-理解「关键 crate」需要把握 clap、交互与输出与配置管理，本节依次展开。
+Rust CLI 开发的三大关键 crate 家族：
+
+1. **clap**：参数解析事实标准。两种 API 风格——derive（`#[derive(Parser)]`，类型即 CLI 契约，推荐）与 builder（运行期构造，适合动态命令）。设计要点：子命令映射为 `enum`，每个变体即一个命令，类型系统保证「未实现的子命令」不存在。
+2. **交互与输出**：`indicatif`（进度条/多任务并发进度）、`console`（终端能力探测、颜色、样式）、`dialoguer`（交互式提示）。颜色输出须遵守 `NO_COLOR` 环境变量约定（`console`/`anstream` 已内建），非 TTY（管道/CI）自动降级无色。
+3. **配置管理**：`figment`/`config-rs` 分层叠加（文件 ← 环境变量 ← 命令行），`serde` 反序列化到强类型结构——配置错误在启动期 fail-fast，而非运行到一半才 panic。
+
+判定依据：新 CLI 一律 derive clap + 强类型配置；交互体验预算允许时加 indicatif 进度反馈。
 
 ### 2.1 clap
 >
@@ -317,7 +324,13 @@ fn default_host() -> String { "localhost".to_string() }
 
 ## 三、打包与分发
 
-本节将「打包与分发」分解为若干主题：单一二进制、安装方式与Shell 补全与文档生成。
+打包与分发围绕「单一静态二进制」这一 Rust CLI 的核心卖点展开：
+
+1. **单一二进制**：`cargo build --release` + musl 目标（`x86_64-unknown-linux-musl`）产出无依赖静态二进制，配 `strip` + `lto = "fat"` + `codegen-units = 1` 可压到 1–3MB（对照 Python 打包动辄 50MB+）。
+2. **安装方式**：`cargo install`（开发者）、GitHub Releases + `cargo-dist`（自动生成各平台预编译包 + 安装脚本，现由 axodotdev 维护）、包管理器（Homebrew formula / AUR / scoop）。
+3. **Shell 补全与文档**：`clap_complete` 从同一 derive 定义生成 bash/zsh/fish 补全脚本——补全与参数定义同源，永不漂移；`clap_mangen` 同理生成 man page。
+
+判定依据：开源 CLI 的标准分发组合 = cargo-dist + clap_complete；闭源内部工具 `cargo install --path` 或内部 artifact 仓库。
 
 ### 3.1 单一二进制
 >
@@ -442,7 +455,13 @@ fn print_man_page(cmd: Command) {
 
 ## 四、反命题与边界分析
 
-本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+反命题：「CLI 就该用 shell/Python 快速糊一个，Rust 太重」——成立与否取决于三条边界：
+
+1. **迭代速度边界**：clap derive 写 CLI 骨架的时间已与 argparse 相当（生成器样板），「Rust 慢」的成见主要来自编译等待——debug 编译一个 CLI crate 约 2–5 秒，可接受。
+2. **正确性收益边界**：一次性的内部脚本（跑完即弃）类型安全收益趋零，Python/bash 合理；需长期维护、多人协作、有副作用（删数据/发请求）的工具，强类型配置 + `Result` 错误传播避免「脚本静默失败」类事故。
+3. **分发现场边界**：目标用户无 Python 环境（运维、安全团队）时，单二进制分发是 Rust 的压倒性优势。
+
+判定口诀：工具寿命 >3 个月 或 使用者 >3 人 → Rust；一次性探索脚本 → Python。
 
 ### 4.1 反命题树
 >

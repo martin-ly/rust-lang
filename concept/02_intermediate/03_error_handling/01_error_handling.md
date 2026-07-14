@@ -841,7 +841,7 @@ graph TD
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
 
-本节从测试 1: ? 运算符在闭包中的限制、测试 2: From 转换链的边界、测试 3: panic 边界与 catch_unwind与测试 4: Result 与 Option 的组合边界切入，剖析「边界极限测试代码（Boundary Limit Tests）」的核心内容。
+本节把「Error Handling（错误处理）」的规则推到编译器与运行时的边界上逐一实测：测试 1: ? 运算符在闭包中的限制、测试 2: From 转换链的边界、测试 3: panic 边界与 catch_unwind与测试 4: Result 与 Option 的组合边界。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
 
 ### 7.1 测试 1: ? 运算符在闭包中的限制
 
@@ -2106,7 +2106,7 @@ fn compute() -> Maybe<i32> {
 
 ## 十一、演进方向
 
-理解「演进方向」需要把握 `std::backtrace::Backtrace` 与错误追踪、`Termination` trait 与 main 返回 Result、`eyre` / `color-eyre` / `miette` /…、`#[track_caller]` 与错误定位优化等7个方面，本节依次展开。
+本节梳理「Error Handling（错误处理）」在 Rust 1.97 之后的演进方向：`std::backtrace::Backtrace` 与错误追踪、`Termination` trait 与 main 返回 Result、`eyre` / `color-eyre` / `miette` /…、`#[track_caller]` 与错误定位优化等方面。判断依据是已合并的 RFC、nightly 特性状态与 Edition 节奏——能落地的给出迁移路径，仍属设想的明确标注不确定性。演进方向不是承诺，而是当前设计张力最可能释放的位置；引用时请核对该特性在最新 stable 中的实际状态。
 
 ### 11.1 `std::backtrace::Backtrace` 与错误追踪
 
@@ -2614,7 +2614,7 @@ fn main() {
 >
 ## 嵌入式测验（Embedded Quiz）
 
-本节从测验 1：`?` 运算符的转换（理解层）、测验 2：自定义错误类型（应用层）、测验 3：忽略 `Result` 的危险（分析层）、测验 4：`Option` 与 `Result` 转换（应用层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
+本组测验围绕测验 1：`?` 运算符的转换（理解层）、测验 2：自定义错误类型（应用层）、测验 3：忽略 `Result` 的危险（分析层）、测验 4：`Option` 与 `Result` 转换（应用层）等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
 
 ### 测验 1：`?` 运算符的转换（理解层）
 

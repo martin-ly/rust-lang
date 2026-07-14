@@ -75,7 +75,14 @@
 
 ## 一、核心概念
 
-理解「核心概念」需要把握问题：自定义智能指针的样板代码、CoerceUnsized 与 DispatchFromDyn与`#[derive(CoercePointee)]` 方案，本节依次展开。
+自定义智能指针（如 `MyBox<T>`）长期需要手写两个 unstable trait 的 impl 才能媲美 `Box`：
+
+- **`CoerceUnsized`**：使 `MyBox<[T; N]>` → `MyBox<[T]>`、`MyBox<T>` → `MyBox<dyn Trait>` 的 unsized 强转合法；
+- **`DispatchFromDyn`**：使 `MyBox<dyn Trait>` 能作为 `self` 接收者参与动态分派。
+
+手写这两个 impl 需要 unsafe 推理（布局兼容、元数据正确），且 trait 本身 unstable——`#[derive(CoercePointee)]` 把「单字段 + `#[repr(transparent)]`」这一主流模式的安全 impl 交给编译器生成：派生宏验证结构体只有一个非零尺寸字段（含 `PhantomData` 等 ZST 字段的边界规则），自动生成两个 trait 的正确实现。
+
+判定依据：自定义指针类型在派生可用后应删除手写 impl——手写版本是 unsafe 审计负担，派生版本零审计面。
 
 ### 1.1 问题：自定义智能指针的样板代码
 
@@ -206,7 +213,13 @@ fn main() {
 
 ## 二、技术细节
 
-本节从派生宏的展开逻辑、约束条件与与现有 Trait 的交互切入，剖析「技术细节」的核心内容。
+技术细节的三个约束面：
+
+1. **派生宏的展开逻辑**：对 `#[repr(transparent)] struct Ptr<T: ?Sized>(Inner<T>)` 形态生成 `impl CoerceUnsized<Ptr<U>> for Ptr<T> where T: Unsize<U>` 与对应 `DispatchFromDyn`——展开结果等价于标准库为 `Box`/`Rc`/`Arc` 手写的 impl。
+2. **约束条件**：必须 `#[repr(transparent)]`（布局即单字段）；允许多个 ZST 字段（`PhantomData`、对齐标记）但恰好一个非 ZST 字段；泛型参数的 variance 由字段位置推断，错误 variance 会在 `Unsize` 约束处报编译错误。
+3. **与现有 trait 的交互**：派生不影响 `Deref`/`Drop`（仍需手定义）；与 `Pin` 组合时需额外 `PinnedDrop`/`Unpin` 推理——派生宏不自动处理固定语义。
+
+判定依据：派生失败的第一检查点是 `repr(transparent)` 缺失，第二是多非 ZST 字段——边界测试覆盖这两类。
 
 ### 2.1 派生宏的展开逻辑
 

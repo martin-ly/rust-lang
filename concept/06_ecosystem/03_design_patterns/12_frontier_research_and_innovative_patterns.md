@@ -40,7 +40,13 @@
 
 ## 2. Effect 系统
 
-「Effect 系统」部分按显式 Effect 标记、Effect 多态 (Effect Polymorphism)与Effect 约束与推断的顺序逐层展开。
+Effect 系统（代数效应）把「副作用」从函数实现中抽离为一等类型公民：
+
+1. **显式 Effect 标记**：函数的签名声明其效果（`fn read() -> String effect IO`），纯函数与效果函数在类型层区分——Haskell 用 `IO` 单子硬编码，代数效应泛化为任意可组合效果（State/Async/Error/...）。
+2. **Effect 多态**：函数可对效果参数化（`fn log<E: Logging>(...)`），同一实现可跑在真实 I/O 与内存 mock 上——测试与生产的统一抽象，Rust 当前用泛型 trait 模拟（依赖注入），缺的是**效果推断**（自动传播，免标注）。
+3. **Effect 约束与推断**：Koka/OCaml 5 的研究线表明效果推断与 Hindley-Milner 类型推断兼容；Rust 的 `~const` 限定是效果标记的最小工程形态（constness 作为效果）。
+
+判定依据：Rust 中今天就用「trait 抽象效果源」（`trait Clock`/`trait Rng`）获得 80% 收益，语言级效果系统仍属研究前沿。
 
 ### 2.1 显式 Effect 标记
 
@@ -309,7 +315,13 @@ pub fn run_resumable<T, E: AlgebraicEffect>(mut computation: Resumable<T, E>) ->
 
 ## 4. Session Types 高级应用
 
-「Session Types 高级应用」部分的核心主题是多方会话类型 (Multiparty Session Types)，本节展开说明。
+多方会话类型（Multiparty Session Types, MPST）把「两人协议」推广到 n 方编排：
+
+- **全局类型 → 端点投影**：协议先写全局规范（如「Client→LB: req; LB→Worker: req; Worker→LB: resp; LB→Client: resp」），再**投影**为每个参与方的局部类型——投影保证若各方按局部类型通信，全局协议无死锁无跑偏；这是 MPST 的核心定理（ Honda, Yoshida, Carbone 2008）。
+- **Rust 实现现状**：`rumpsteak`（研究原型）用类型级编程编码会话类型，`session-types` 类 crate 限于两方；n 方场景的可行工程形态是「中心化编排 + 类型化消息」（编排器持有协议状态机 `enum`，各方消息用 `serde` 枚举）。
+- **与分布式系统验证的关系**：MPST 管「协议形状」，TLA+ 管「协议性质」——前者编译期，后者设计期，互补。
+
+判定依据：微服务编排协议复杂（>4 方交互）时，先写全局协议文档再实现——MPST 的形式化价值在「文档可机器校验」。
 
 ### 4.1 多方会话类型 (Multiparty Session Types)
 
@@ -570,7 +582,13 @@ pub fn must_use_example() {
 
 ## 5. Capability-based 设计
 
-本节从能力令牌 (Capability Tokens) 与 能力传递和撤销 两个层面剖析「Capability-based 设计」。
+Capability-based 设计把「权限」建模为**不可伪造的令牌对象**：持有令牌即有权操作，无全局权限检查。
+
+1. **能力令牌**：`struct FileCap { fd: RawFd }`——构造该类型的唯一途径是经过权限检查的 `open` API；后续 `read(&FileCap)` 无需再查权限表。Rust 的所有权语义天然契合：能力可移动（移交权限）、可借用（临时授权）、不可复制（`!Clone` 即不可扩散权限）。
+2. **能力传递与撤销**：传递 = 移动所有权（移交即失去）；撤销 = 借用到期或 `Drop`（权限随值销毁回收）；「委派的权限可以收回」在 Rust 中是借用规则的直接推论——这比传统 ACL 的「撤销需遍历权限表」精确得多。
+3. **WASI 的能力安全**：WASI 的文件系统访问即此模型（preopened dir 句柄即能力），是 capability 设计在工业标准中的最大规模落地。
+
+判定依据：权限逻辑分散在 `if user.can(x)` 检查中 → 重构为能力类型，让类型系统强制「先取能力再操作」。
 
 ### 5.1 能力令牌 (Capability Tokens)
 

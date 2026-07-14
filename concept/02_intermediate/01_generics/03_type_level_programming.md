@@ -96,6 +96,7 @@ mindmap
     - [测验 3：类型级编程的边界（🔴 专家，联动「反命题」节）](#测验-3类型级编程的边界-专家联动反命题节)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [⚠️ 反例与陷阱：关联类型歧义](#️-反例与陷阱关联类型歧义)
 
 本章探讨 Rust 中最前沿的编程技术 - 类型级编程，将类型系统（Type System）作为一种编程语言来使用。
 
@@ -316,7 +317,7 @@ type Result3 = <False as Not>::Output;        // True
 
 ## 3️⃣ 类型级列表
 
-本节聚焦「3️⃣ 类型级列表」，核心内容为 HList (Heterogeneous List)。
+本节聚焦「3️⃣ 类型级列表」，覆盖HList (Heterogeneous List)。论述顺序由定义到边界：先明确「3️⃣ 类型级列表」在「类型级编程 (Type-Level Programming)」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「3️⃣ 类型级列表」的判定标准，并指出它在全页论证链中的位置。
 
 ### HList (Heterogeneous List)
 
@@ -857,3 +858,27 @@ impl Not for False { type Output = True; }
 - **对偶**：与运行时类型信息相对，见 [RTTI and Dynamic Typing](../04_types_and_conversions/05_rtti_and_dynamic_typing.md)。
 - **组合**：与 [Advanced Traits](../00_traits/04_advanced_traits.md) 的关联类型组合。
 - **依赖**：合法性检查依赖 [Traits](../00_traits/01_traits.md) 的约束求解。
+
+---
+
+## ⚠️ 反例与陷阱：关联类型歧义
+
+**反例**（rustc 1.97 实测编译失败：E0221）：
+
+```rust,compile_fail
+trait A { type T; }
+trait B { type T; }
+fn f<X: A + B>(x: X) -> X::T { todo!() }
+fn main() {}
+```
+
+两个 trait 都声明关联类型 `T` 时，`X::T` 无法确定指哪一个；类型级编程中关联类型名冲突需显式限定。
+
+**修正**：
+
+```rust
+trait A { type T; }
+trait B { type T; }
+fn f<X: A + B>(x: X) -> <X as A>::T { todo!() }
+fn main() {}
+```

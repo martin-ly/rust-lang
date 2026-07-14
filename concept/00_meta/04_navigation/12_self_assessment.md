@@ -1930,7 +1930,7 @@ proof fn maintain_invariant(x: u32, ghost prev: u32)
 >
 ## L5 扩展层：多语言范式对比（4 题） 题目基于 TRPL 跨语言对比 / 2024; [Rust Reference — unsafe, FFI / 2025](https://doc.rust-lang.org/reference/introduction.html); [Wikipedia — Capability-based Security](https://en.wikipedia.org/wiki/Capability-based_Security)(<https://en.wikipedia.org/wiki/Capability-based_security>)]
 
-理解「L5 扩展层：多语言范式对比（4 题） 题目基于 TRPL…」需要把握 Q73: Rust vs Swift、Q74: Rust vs C# Span、Q75: 零成本抽象与Q76: 基于能力的安全，本节依次展开。
+本节聚焦「L5 扩展层：多语言范式对比（4 题）」，覆盖Q73: Rust vs Swift、Q74: Rust vs C# Span、Q75: 零成本抽象与Q76: 基于能力的安全。论述顺序由定义到边界：先明确「L5 扩展层：多语言范式对比（4 题）」在「Rust 知识体系自测题库（Self-Assessment）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「L5 扩展层：多语言范式对比（4 题）」的判定标准，并指出它在全页论证链中的位置。
 
 ### Q73: Rust vs Swift
 
@@ -2030,7 +2030,7 @@ Rust 的所有权即一种**能力**：
 >
 ## L6 扩展层：工程实践与生态（4 题） 题目基于 Cargo Book / 2025; [Rust Reference — Macros, Documentation / 2025](https://doc.rust-lang.org/reference/introduction.html); SemVer 2.0.0(<https://semver.org/>)]
 
-本节将「L6 扩展层：工程实践与生态（4 题） 题目基于 Carg…」分解为若干主题： Q77: Cargo Features 解析、Q78: proc-macro2 与 syn、Q79: SemVer 与 API 演进与Q80: rustdoc Doctest。
+本节聚焦「L6 扩展层：工程实践与生态（4 题）」，覆盖Q77: Cargo Features 解析、Q78: proc-macro2 与 syn、Q79: SemVer 与 API 演进与Q80: rustdoc Doctest。论述顺序由定义到边界：先明确「L6 扩展层：工程实践与生态（4 题）」在「Rust 知识体系自测题库（Self-Assessment）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「L6 扩展层：工程实践与生态（4 题）」的判定标准，并指出它在全页论证链中的位置。
 
 ### Q77: Cargo Features 解析
 

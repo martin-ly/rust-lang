@@ -257,3 +257,27 @@ flowchart LR
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
 - **P2 生态/社区**: [docs.rs/interprocess — 生态权威 API 文档](https://docs.rs/interprocess) · [docs.rs/ipc-channel — 生态权威 API 文档](https://docs.rs/ipc-channel)
+
+---
+
+## ⚠️ 反例与陷阱：浮点精确相等断言（运行时陷阱）
+
+**反例**（运行时陷阱，代码可通过编译）：
+
+```rust
+#[test]
+fn float_sum() {
+    assert_eq!(0.1_f64 + 0.2, 0.3);
+}
+```
+
+二进制浮点无法精确表示 0.1，`0.1 + 0.2 == 0.30000000000000004`，精确相等断言在基准与测试中是经典脆性来源。
+
+**修正**：
+
+```rust
+#[test]
+fn float_sum() {
+    assert!((0.1_f64 + 0.2 - 0.3).abs() < 1e-10);
+}
+```

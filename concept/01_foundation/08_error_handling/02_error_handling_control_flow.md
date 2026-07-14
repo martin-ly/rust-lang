@@ -77,6 +77,7 @@ mindmap
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [⚠️ 反例与陷阱：`?` 用于不返回 Result 的函数](#️-反例与陷阱-用于不返回-result-的函数)
 
 本篇聚焦 `Result`/`Option` 与 `?` 运算符、`Try`/`FromResidual` 残差机制、`try` 块、错误转换与边界设计。
 
@@ -351,3 +352,30 @@ flowchart TD
 - **对偶**：与 panic 不可恢复路径相对，见 [Panic and Abort](03_panic_and_abort.md)。
 - **组合**：与 [Enumerations](../07_modules_and_items/05_enumerations.md) 的 `Result` 变体组合。
 - **依赖**：转换合法性依赖 [Traits](../../02_intermediate/00_traits/01_traits.md) 的 `From`/`Into` 契约。
+
+---
+
+## ⚠️ 反例与陷阱：`?` 用于不返回 Result 的函数
+
+**反例**（rustc 1.97 实测编译失败：E0277）：
+
+```rust,compile_fail
+fn f() {
+    let n: i32 = "x".parse()?;
+    println!("{n}");
+}
+fn main() { f(); }
+```
+
+`?` 要求所在函数返回 `Result`/`Option` 等实现了 `Try` 的类型；返回 `()` 时无法传播错误。
+
+**修正**：
+
+```rust
+fn f() -> Result<(), std::num::ParseIntError> {
+    let n: i32 = "x".parse()?;
+    println!("{n}");
+    Ok(())
+}
+fn main() { let _ = f(); }
+```

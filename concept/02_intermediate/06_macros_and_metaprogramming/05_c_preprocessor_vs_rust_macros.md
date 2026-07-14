@@ -84,7 +84,7 @@ C 宏对求值次数、副作用、作用域一无所知。
 
 ## 三、Rust 宏：语法树与卫生性
 
-「Rust 宏：语法树与卫生性」涉及声明宏 `macro_rules!`、卫生性（Hygiene）与条件编译：`cfg` 属性，本节逐一说明其要点。
+本节聚焦「Rust 宏：语法树与卫生性」，覆盖声明宏 `macro_rules!`、卫生性（Hygiene）与条件编译：`cfg` 属性。论述顺序由定义到边界：先明确「Rust 宏：语法树与卫生性」在「C 预处理器 vs Rust 宏：从文本替换到语法树」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「Rust 宏：语法树与卫生性」的判定标准，并指出它在全页论证链中的位置。
 
 ### 3.1 声明宏 `macro_rules!`
 
@@ -252,3 +252,28 @@ M!(t)  ⟶  E[x := α(t)]
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/proc-macro2 — 生态权威 API 文档](https://docs.rs/proc-macro2) · [docs.rs/pin-project — 生态权威 API 文档](https://docs.rs/pin-project)
+
+---
+
+## ⚠️ 反例与陷阱：宏卫生：宏内 let 不外泄
+
+**反例**（rustc 1.97 实测编译失败：E0425）：
+
+```rust,compile_fail
+macro_rules! define_x { () => { let x = 1; }; }
+fn main() {
+    define_x!();
+    println!("{x}");
+}
+```
+
+C 预处理器是文本替换，宏内 `#define x 1` 直接污染调用处；Rust `macro_rules!` 默认卫生，宏内引入的标识符在调用处不可见。
+
+**修正**：
+
+```rust
+macro_rules! define_x { ($name:ident) => { let $name = 1; println!("{}", $name); }; }
+fn main() {
+    define_x!(x);
+}
+```

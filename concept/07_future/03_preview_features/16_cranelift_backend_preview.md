@@ -74,7 +74,15 @@
 
 ## 一、核心概念
 
-「核心概念」部分按问题：LLVM 的编译时间瓶颈、Cranelift 的定位与设计哲学与rustc_codegen_cranelift的顺序逐层展开。
+Cranelift 后端针对的核心问题：**LLVM 的编译时间瓶颈**。LLVM 是优化优先的编译器框架——其 Pass 管线（数百个优化遍）在 release 构建物有所值，但在 debug 构建（占开发者 90% 编译次数）中，优化时间被全部浪费，因为产物随即被调试器接管。
+
+Cranelift 的设计哲学：
+
+1. **编译速度优先**：单遍（single-pass）设计，IR 简洁，寄存器分配用线性扫描变体而非图着色——目标 debug 构建提速 30–50%；
+2. **可验证性**：Cranelift 自带验证器（Verifier）与正在推进的形式化验证（Crocus/VeriISLE），生成的机器码规则可机器检查——这是 LLVM 不具备的属性；
+3. **`rustc_codegen_cranelift`**：rustc 的替代 codegen 后端（`rustup component add rustc-codegen-cranelift-preview`），复用 rustc 前端全部语义分析，仅替换「MIR → 机器码」段。
+
+判定依据：日常 `cargo check`/debug 构建用 Cranelift；release/基准/PGO 用 LLVM。
 
 ### 1.1 问题：LLVM 的编译时间瓶颈
 
@@ -160,7 +168,13 @@ rustc_codegen_cranelift 项目:
 
 ## 二、技术细节
 
-本节从架构对比：LLVM vs Cranelift、优化级别权衡与与并行前端的协同切入，剖析「技术细节」的核心内容。
+技术细节的三组对比：
+
+1. **架构对比**：LLVM 是多遍 IR 优化管线（SSA → 机器无关优化 → 指令选择 → 寄存器分配），每遍可独立调度；Cranelift 是 CLIF（类 SSA IR）→ 少量优化遍 → 指令选择，管线固定且短。代价：生成代码运行慢 10–30%（debug 场景可接受）。
+2. **优化级别权衡**：Cranelift 的 `opt_level=none/speed` 差距远小于 LLVM 的 `O0/O3`；其 `speed` 档仍不及 LLVM `O2`——**不存在「Cranelift 替代 LLVM release」的路径**。
+3. **与并行前端的协同**：并行前端（parallel front-end）加速「类型检查→MIR」段，Cranelift 加速「MIR→机器码」段，两者正交叠加——2026 Project Goal 的组合目标是 debug 全量构建时间减半以上。
+
+判定依据：大型 workspace 的增量 debug 构建收益最大；小项目感知有限。
 
 ### 2.1 架构对比：LLVM vs Cranelift
 >

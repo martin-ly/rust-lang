@@ -124,6 +124,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：`gen` 在 Edition 2024 成为保留关键字（rustc 1.97.0 实测）](#反例gen-在-edition-2024-成为保留关键字rustc-1970-实测)
     - [✅ 修正：重命名标识符](#-修正重命名标识符)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 一、权威定义
 
@@ -385,7 +386,14 @@ graph LR
 
 ## 三、Cargo 深层机制
 
-「Cargo 深层机制」部分按 Workspace 高级用法、Features 与条件编译、Cargo.toml 完整字段解析与SemVer 兼容性规则详解的顺序逐层展开。
+Cargo 深层机制的四个工程主题：
+
+1. **Workspace 高级用法**：`[workspace.dependencies]` 统一版本（`dep = { workspace = true }` 继承），`default-members` 控制默认构建集；`resolver = "2"`（Edition 2021+ 默认）修复了 features 在 dev-dependencies 与正常依赖间错误统一的问题。
+2. **Features 与条件编译**：feature 是**加性**的（只能开不能关），设计禁忌是「互斥 feature」（应拆 crate）；`cfg(feature = "x")` 的条件代码必须保证无 feature 组合也能编译——`cargo hack --feature-powerset check` 是验证工具。
+3. **SemVer 兼容性**：Cargo 解析器选「兼容范围内的最高版本」；`0.x` 系列每次 minor 升级视为破坏性，这是生态 0.x 依赖地狱的根源。
+4. **Cargo.toml 字段**：`rust-version`（MSRV 声明）应如实填写，解析器会据此拒绝不兼容依赖版本。
+
+判定依据：库 crate 不设 `version = "0.x"` 频繁破坏性升级；应用 crate 必提交 `Cargo.lock`。
 
 ### 3.1 Workspace 高级用法
 
@@ -733,7 +741,13 @@ cargo bloat --no-default-features
 
 ## 四、Cross-compilation（交叉编译）
 
-本节将「Cross-compilation（交叉编译）」分解为若干主题：目标三元组（Target Triple）、工具链配置、musl vs glibc：静态链接的权衡、链接器配置与交叉编译环境等5个方面。
+交叉编译的完整链路：
+
+1. **目标三元组**：`arch-vendor-os-abi`（如 `x86_64-unknown-linux-musl`、`aarch64-apple-darwin`）；`rustup target add` 装标准库预编译包，`rustc --print target-list` 列全部支持目标。
+2. **musl vs glibc**：musl 产出**全静态链接**二进制（无 libc 依赖，容器 `FROM scratch` 可跑），代价是 DNS 解析等行为的细微差异与性能（musl malloc  historically 较弱，可用 mimalloc 替代）；glibc 动态链接在目标机 glibc 版本上漂移风险。
+3. **链接器配置**：跨架构需配 C 工具链（如 `aarch64-linux-gnu-gcc`）或统一用 `cargo-zigbuild`/`cross`（Docker 化环境）；纯 Rust crate 零 C 依赖时配置最简单，引入 `openssl-sys` 等 C 依赖后复杂度陡增（首选 `vendored` feature）。
+
+判定依据：Linux 服务部署优先 `x86_64-unknown-linux-musl` + `cross`，消灭「在我机器上能跑」。
 
 ### 4.1 目标三元组（Target Triple）
 
@@ -1189,7 +1203,19 @@ flowchart LR
 
 ## 七、国际来源：Rust 编译器架构
 
-本节围绕「国际来源：Rust 编译器架构」展开，依次讨论 rustc_driver、LLVM IR、Cranelift 后端（Rust 2026 Project Goal）、gccrs — GCC 前端替代实现等5个方面。
+Rust 编译器架构的多后端格局（2026 视角）：
+
+| 组件 | 角色 | 状态 |
+|---|---|---|
+| `rustc_driver` | 编译器驱动 API，工具（clippy/miri/rustdoc）复用 | 内部 API，随 nightly 变化 |
+| LLVM 后端 | 默认代码生成，优化质量最高 | 生产默认 |
+| Cranelift 后端 | 编译速度优先（debug 提速 30–50%） | 2026 Project Goal 推进中，可 preview 使用 |
+| `rustc_codegen_gcc` | libgccjit 后端，扩展平台覆盖 | 实验 |
+| gccrs | 独立 GCC 前端重写，双实现互验 | 早期，不可用 |
+
+多后端的价值在**规范收敛**：gccrs/cranelift 暴露的行为差异反过来钉死 rustc 的未定义行为边界，是 Rust 语义形式化的实践驱动力。
+
+判定依据：日常开发调试周期 → Cranelift；发布构建 → LLVM（+thin LTO 是性价比拐点）。
 
 ### 7.1 rustc_driver
 

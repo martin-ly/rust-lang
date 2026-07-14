@@ -1256,7 +1256,7 @@ fn main() {
 
 ## 3. Rust vs Go
 
-「Rust vs Go」部分的核心主题是错误处理，本节展开说明。
+本节聚焦「Rust vs Go」，覆盖错误处理。论述顺序由定义到边界：先明确「Rust vs Go」在「Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「Rust vs Go」的判定标准，并指出它在全页论证链中的位置。
 
 ### 错误处理
 

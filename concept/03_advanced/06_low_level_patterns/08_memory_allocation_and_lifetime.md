@@ -161,3 +161,31 @@ let v = vec![ZeroSized; 1000]; // 无内存开销
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/zerocopy — 生态权威 API 文档](https://docs.rs/zerocopy) · [docs.rs/memmap2 — 生态权威 API 文档](https://docs.rs/memmap2)
+
+---
+
+## ⚠️ 反例与陷阱：持有借用时 push 触发重分配
+
+**反例**（rustc 1.97 实测编译失败：E0502）：
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let first = &v[0];
+    v.push(4);
+    println!("{first}");
+}
+```
+
+`push` 可能重新分配堆内存使旧指针失效；借用检查器用 E0502 在编译期挡住这类「迭代器失效」式内存错误，无需运行期代价。
+
+**修正**：
+
+```rust
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let first = v[0];
+    v.push(4);
+    println!("{first}");
+}
+```

@@ -211,3 +211,29 @@ Panic 可以是可恢复的，也可以是不可恢复的，具体取决于 pani
 **B 正确**。按本页「六、跨 FFI Boundary 的 Unwinding」UB 清单：①从非 unwinding ABI（`"C"`、`"system"`）声明的外国函数引发 unwind 进入 Rust 代码；②从不支持 unwind 的代码调用 `extern "C-unwind"` 等允许 unwind 的 ABI 声明的 Rust 函数。A/C 是合法的同运行时恢复机制（§五）；D 是 `C-unwind` ABI 的设计用途。
 
 </details>
+
+---
+
+## ⚠️ 反例与陷阱：catch_unwind 捕获非 UnwindSafe 闭包
+
+**反例**（rustc 1.97 实测编译失败：E0277）：
+
+```rust,compile_fail
+fn main() {
+    let mut data = vec![1];
+    let r = std::panic::catch_unwind(|| data.push(2));
+    let _ = r;
+}
+```
+
+捕获 `&mut` 的闭包不是 `UnwindSafe`：panic 可能留下被观察到的不一致中间状态，编译器默认拒绝跨 unwind 边界共享可变引用。
+
+**修正**：
+
+```rust
+fn main() {
+    let mut data = vec![1];
+    let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| data.push(2)));
+    let _ = r;
+}
+```

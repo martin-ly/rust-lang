@@ -403,7 +403,7 @@ flowchart TD
 
 ## 六、取消与 drop 顺序、`async_drop` 的边界
 
-本节围绕「取消与 drop 顺序、`async_drop` 的边界」展开，覆盖 Drop 顺序在取消路径上的保证 与 同步 Drop 的天花板 两个方面。
+本节聚焦「取消与 drop 顺序、`async_drop` 的边界」，覆盖Drop 顺序在取消路径上的保证 与 同步 Drop 的天花板。论述顺序由定义到边界：先明确「取消与 drop 顺序、`async_drop` 的边界」在「Async 取消安全（Cancellation Safety）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「取消与 drop 顺序、`async_drop` 的边界」的判定标准，并指出它在全页论证链中的位置。
 
 ### 6.1 Drop 顺序在取消路径上的保证
 

@@ -1133,7 +1133,7 @@ Java ⊂ Rust（系统编程能力）
 >
 ## 七、反命题分析（Anti-Propositions）
 
-「反命题分析（Anti-Propositions）」部分按 Rust 可以表达任何程序"、safe Rust 的封闭性限制了表达力"与Rust 的等价表达与其他语言完全等价"的顺序逐层展开。
+本节聚焦「反命题分析（Anti-Propositions）」，覆盖Rust 可以表达任何程序"、safe Rust 的封闭性限制了表达力"与Rust 的等价表达与其他语言完全等价"。论述顺序由定义到边界：先明确「反命题分析（Anti-Propositions）」在「Rust 表征空间（Semantic / Representational Space）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「反命题分析（Anti-Propositions）」的判定标准，并指出它在全页论证链中的位置。
 
 ### 7.1 "Rust 可以表达任何程序"
 

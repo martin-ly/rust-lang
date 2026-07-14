@@ -35,7 +35,16 @@ Rust 1.97.0 的变更集中在以下几类：
 
 ## 2. 语言与编译器
 
-「语言与编译器」部分按 `must_use` lint 扩展至 `Result<T, Unin…、`dead_code_pub_in_binary`lint、新稳定 target features、`cfg(target_has_atomic_primitive_al…等8个方面的顺序逐层展开。
+1.97 语言与编译器层的八个稳定化/变更项，按工程影响排序：
+
+1. **`must_use` lint 扩展**：`Result<T, E>` 中 `E` 为不可居住类型（`!`）等场景的 `must_use` 判定修正，减少无意义警告；同时一批 std API 补 `#[must_use]`。
+2. **`dead_code_pub_in_binary` lint**：二进制 crate 中 `pub` 项不再豁免 dead_code 检查——`pub` 不再是压警告的逃生舱，需真实删除或 `#[allow]`。
+3. **新稳定 target features**：一批 x86_64 指令集特性转入 `#[target_feature]` 稳定使用。
+4. **`cfg(target_has_atomic_primitive_*)`**：按原子宽度做条件编译，`no_std`/嵌入式可移植代码的利器。
+
+其余各项（诊断改进、lint 调整）属增量打磨。
+
+判定依据：升级 1.97 后 CI 新增警告多为 `dead_code_pub_in_binary`——批量处理脚本：先删明显死代码，剩余显式 `#[allow(dead_code)]` 并注释用途。
 
 ### 2.1 `must_use` lint 扩展至 `Result<T, Uninhabited>` 与 `ControlFlow<Uninhabited, T>`
 
@@ -166,7 +175,13 @@ linker_messages = "allow"
 
 ## 3. 目标平台
 
-本节聚焦「目标平台」，核心内容为 `nvptx64-nvidia-cuda` 基线提升。
+`nvptx64-nvidia-cuda` 目标的基线提升标志着 Rust GPU 编程从「外部 crate 实验」向「编译器内建目标」演进：
+
+- **意义**：PTX 是 NVIDIA GPU 的虚拟 ISA，`nvptx64` 后端使 `rustc` 直接产出 PTX，无需经 C++/NVCC——`rust-gpu`（SpiritV 路线）之外的第二条 GPU 路径。
+- **基线提升内容**：目标从 tier 3 提升维护等级，CUDA 版本基线对齐现代驱动栈，`no_std`（GPU 无操作系统）作为唯一模式。
+- **现实边界**：生态仍极早期——无运行时 crate 生态、无 cuBLAS/cuDNN 类库绑定；适合研究型 kernel 开发，生产 GPU 计算仍需 `cudarc`（CUDA 驱动绑定，CPU 侧）或 wgpu/Vulkan 计算路线。
+
+判定依据：需要 Rust 写 GPU kernel 的团队当前首选 wgpu 计算（跨厂商）；nvptx 目标适合追踪，不适合押注。
 
 ### 3.1 `nvptx64-nvidia-cuda` 基线提升
 
@@ -271,7 +286,14 @@ fn main() {
 
 ## 5. Cargo
 
-本节围绕「Cargo」展开，依次讨论 `build.warnings` 配置、`resolver.lockfile-path` 配置、`cargo-clean` 目标目录校验、`-m` 简写等5个方面。
+1.97 Cargo 的五个改进项：
+
+1. **`build.warnings` 配置**：`[build] warnings = "deny"` 把 `RUSTFLAGS=-Dwarnings` 固化进项目配置，CI 与本地行为一致化。
+2. **`resolver.lockfile-path`**：workspace 多锁文件场景（如不同 Edition/平台的独立解析）的正式配置入口。
+3. **`cargo clean` 目标目录校验**：防止误删非 Cargo 目录（`CACHEDIR.TAG` 校验），`--dry-run` 预览删除集。
+4. **`-m` 简写**：`cargo build -m <message>` 等长选项的短形式补全。
+
+判定依据：团队项目应启用 `build.warnings = "deny"` 并配 `[lints]` 表（workspace 继承），把警告纪律从 CI 脚本移入版本控制内的配置。
 
 ### 5.1 `build.warnings` 配置
 

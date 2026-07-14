@@ -95,7 +95,7 @@ graph LR
 
 ## 三、Selection：候选装配与筛选
 
-「Selection：候选装配与筛选」涉及 Candidate Assembly（候选装配）、Winnowing（筛选）与Confirmation（确认），本节逐一说明其要点。
+本节聚焦「Selection：候选装配与筛选」，覆盖Candidate Assembly（候选装配）、Winnowing（筛选）与Confirmation（确认）。论述顺序由定义到边界：先明确「Selection：候选装配与筛选」在「rustc 中的 Trait Solver」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「Selection：候选装配与筛选」的判定标准，并指出它在全页论证链中的位置。
 
 ### 3.1 Candidate Assembly（候选装配）
 

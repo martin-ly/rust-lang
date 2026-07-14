@@ -39,6 +39,7 @@
   - [四、语义边界：IEEE 与 C Annex G](#四语义边界ieee-与-c-annex-g)
   - [五、反命题与边界分析](#五反命题与边界分析)
   - [权威来源索引](#权威来源索引)
+  - [⚠️ 反例与陷阱：虚数字面量后缀不存在](#️-反例与陷阱虚数字面量后缀不存在)
 
 ## 一、动机：为什么复数属于标准库
 
@@ -110,3 +111,28 @@ RFC 明确**不取代** `num-complex` 的高级功能，目标是定义公共词
 > [C11 Annex G — Complex arithmetic](https://en.cppreference.com/w/c/numeric/complex)
 >
 > 以上链接于 2026-07-12 经 curl 实测全部返回 HTTP 200。
+
+---
+
+## ⚠️ 反例与陷阱：虚数字面量后缀不存在
+
+**反例**（rustc 1.97 实测编译失败，无错误码：invalid suffix））：
+
+```rust,compile_fail
+fn main() {
+    let z = 1.0 + 2.0i;
+    println!("{z}");
+}
+```
+
+Rust 没有 Python 式虚数字面量，`2.0i` 被解析为非法后缀；标准库复数类型（`std::complex`）尚在预研，当前需用 `num_complex` crate 或自建类型。
+
+**修正**：
+
+```rust
+struct Complex { re: f64, im: f64 }
+fn main() {
+    let z = Complex { re: 1.0, im: 2.0 };
+    println!("{}+{}i", z.re, z.im);
+}
+```

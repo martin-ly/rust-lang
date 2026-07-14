@@ -28,6 +28,32 @@
 
 ---
 
+## 📑 目录
+
+- [常用开发工具（Useful Development Tools）](#常用开发工具useful-development-tools)
+  - [📑 目录](#-目录)
+  - [认知路径](#认知路径)
+  - [反命题决策树](#反命题决策树)
+  - [一、官方工具链](#一官方工具链)
+  - [二、IDE 与编辑器支持](#二ide-与编辑器支持)
+  - [三、开发工作流中的位置](#三开发工作流中的位置)
+  - [四、配置示例](#四配置示例)
+    - [`rustfmt.toml`](#rustfmttoml)
+    - [`.clippy.toml`](#clippytoml)
+    - [`Cargo.toml` 开发配置](#cargotoml-开发配置)
+  - [五、社区常用工具](#五社区常用工具)
+  - [六、与 CI 的集成](#六与-ci-的集成)
+  - [七、工具选择决策树](#七工具选择决策树)
+  - [八、相关概念](#八相关概念)
+  - [过渡段](#过渡段)
+  - [反向推理](#反向推理)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [⚠️ 反例与陷阱：debug 构建下整数溢出 panic（运行时陷阱）](#️-反例与陷阱debug-构建下整数溢出-panic运行时陷阱)
+
+---
+
 ## 认知路径
 
 1. **问题识别**: 为什么 Rust 开发需要 rustfmt、clippy、rust-analyzer 等专用工具？它们各自解决什么问题？
@@ -268,3 +294,31 @@ flowchart TD
 
 - **P1 学术/形式化**: [Bae et al.: RUDRA — Finding Memory Safety Bugs in Rust at the Ecosystem Scale（SOSP 2021；部分算法已集成进官方 Clippy）](https://dl.acm.org/doi/10.1145/3477132.3483570)（2026-07-12 验证可访问，ACM DOI 页面）
 - **P2 生态/社区**: [docs.rs/criterion — 生态权威 API 文档](https://docs.rs/criterion) · [docs.rs/proptest — 生态权威 API 文档](https://docs.rs/proptest)
+
+---
+
+## ⚠️ 反例与陷阱：debug 构建下整数溢出 panic（运行时陷阱）
+
+**反例**（运行时陷阱，代码可通过编译）：
+
+```rust
+fn main() {
+    let a: u8 = 200;
+    let b = std::hint::black_box(100u8);
+    let c = a + b;
+    println!("{c}");
+}
+```
+
+debug 构建（`cargo test` 默认）开启溢出检查，`u8` 的 `200 + 100` 在运行时 panic；release 构建则静默回绕为 44，行为随 profile 变化是常见测试陷阱。（用 `black_box` 阻止编译期常量折叠，确保溢出发生在运行时。）
+
+**修正**：
+
+```rust
+fn main() {
+    let a: u8 = 200;
+    let b = a.wrapping_add(100); // 显式回绕：44
+    let c = a.checked_add(100);  // 显式检查：None
+    println!("{b} {c:?}");
+}
+```

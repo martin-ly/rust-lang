@@ -21,6 +21,38 @@
 
 ---
 
+## 📑 目录
+
+- [项（Items）](#项items)
+  - [📑 目录](#-目录)
+  - [认知路径](#认知路径)
+  - [反命题决策树](#反命题决策树)
+  - [一、什么是 Item](#一什么是-item)
+  - [二、Item 的种类](#二item-的种类)
+  - [三、常见 Item 示例](#三常见-item-示例)
+    - [函数](#函数)
+    - [类型别名](#类型别名)
+    - [结构体与枚举](#结构体与枚举)
+    - [常量与静态项](#常量与静态项)
+    - [`use` 声明](#use-声明)
+    - [联合体（unsafe）](#联合体unsafe)
+  - [四、Item 的声明位置](#四item-的声明位置)
+  - [五、可见性](#五可见性)
+  - [六、关联项与外部项](#六关联项与外部项)
+    - [关联项（Associated items）](#关联项associated-items)
+    - [外部项（External items）](#外部项external-items)
+  - [七、Item 的顺序](#七item-的顺序)
+  - [八、如何选择 Item](#八如何选择-item)
+  - [九、相关概念](#九相关概念)
+  - [过渡段](#过渡段)
+  - [反向推理](#反向推理)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [⚠️ 反例与陷阱：重复定义同名项](#️-反例与陷阱重复定义同名项)
+
+---
+
 ## 认知路径
 
 1. **问题识别**: 为什么 Rust 将程序拆分为模块（Module）与项？这与 C/C++ 的头文件/源文件模型有何不同？
@@ -353,3 +385,25 @@ flowchart TD
 
 - **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
 - **P2 生态/社区**: [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata) · [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver)
+
+---
+
+## ⚠️ 反例与陷阱：重复定义同名项
+
+**反例**（rustc 1.97 实测编译失败：E0428）：
+
+```rust,compile_fail
+fn helper() {}
+fn helper() {}
+fn main() { helper(); }
+```
+
+同一命名空间内项（函数、结构体、常量等）名字必须唯一；重名即 E0428，与 C 的「链接期冲突」不同，Rust 编译期即拒绝。
+
+**修正**：
+
+```rust
+fn helper() {}
+fn helper_v2() {}
+fn main() { helper(); helper_v2(); }
+```

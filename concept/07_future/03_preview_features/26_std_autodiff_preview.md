@@ -316,3 +316,26 @@ Rust 的所有权（Ownership）系统使反向传播的状态管理复杂（需
 | `std::autodiff`：Rust 官方自动微分前沿追踪 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | `std::autodiff`：Rust 官方自动微分前沿追踪 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | `std::autodiff`：Rust 官方自动微分前沿追踪 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+---
+
+## ⚠️ 反例与陷阱：stable 上不存在的 `#[autodiff]` 属性
+
+**反例**（rustc 1.97 实测编译失败，无错误码：cannot find attribute））：
+
+```rust,compile_fail
+#[autodiff(df, Forward, Dual, Const, Dual)]
+fn f(x: f32) -> f32 { x * x }
+fn main() {}
+```
+
+`std::autodiff` 仍是 nightly 实验特性（需要定制 rustc + Enzyme 后端）；stable 工具链上该属性根本不存在，编译器报「cannot find attribute」。
+
+**修正**：
+
+```rust
+// 现状：用 nightly + -Zautodiff=Enable 实验；
+// 生产替代：num-dual / autodj 等社区自动微分 crate。
+fn f(x: f32) -> f32 { x * x }
+fn main() { println!("{}", f(2.0)); }
+```

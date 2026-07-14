@@ -83,7 +83,13 @@
 
 ## 一、核心概念
 
-本节将「核心概念」分解为若干主题：问题：泛型实现的表达力限制、特化的设计：更精确的实现优先与与 Coherence 的交互。
+特化（Specialization）解决泛型实现的表达力限制：为泛型参数提供「默认实现 + 更精确类型上的覆盖实现」。
+
+经典动机是 `ToString` 与 `Display` 的关系——所有 `T: Display` 应有高效的 `to_string()`（直接格式化），而 blanket impl `impl<T: Display> ToString for T` 只能走通用路径；特化允许 `impl ToString for String`（直接 clone）与通用实现共存，编译器选**最精确**的那个。
+
+与 Coherence（一致性）的交互是核心难点：特化引入「实现之间的偏序关系」，与孤儿规则叠加后，「哪个实现被选中」必须在编译期唯一确定——关联类型的特化（`default type`）触及类型推断根基，是稳定化的主要障碍（`min_specialization` 子集已 nightly 可用多年但未转正）。
+
+判定依据：生产代码不可依赖特化；需要「按类型优化分派」时用新类型包装或显式 trait 分层（如 `StrFastPath` 标记 trait）作为稳定替代。
 
 ### 1.1 问题：泛型实现的表达力限制
 
@@ -199,7 +205,13 @@ graph TD
 
 ## 二、技术细节
 
-理解「技术细节」需要把握特化语法与语义、关联类型特化与当前实现状态与限制，本节依次展开。
+技术细节的三个层面：
+
+1. **特化语法与语义**：`default impl<T> Trait for T { default fn m() {...} }` + `impl Trait for Specific { fn m() {...} }`——`default` 标记可被覆盖的项，覆盖项必须与被覆盖项**语义兼容**（特化改变行为但不可改变契约）。
+2. **关联类型特化**：`default type Item = ...` 允许在特化实现中给出更精确的关联类型——这是 soundness 重灾区：特化选择与类型推断的交互曾发现可构造不安全代码的反例，导致完整特化被冻结。
+3. **当前实现状态**：`feature(specialization)`（完整版，已知 unsound）与 `feature(min_specialization)`（无关联类型特化的受限子集）并存于 nightly；`rustc` 内部大量使用特化（如 `SpecFromElem`），但这些是编译器特权，不对外稳定。
+
+判定依据：`min_specialization` 的设计轨迹表明最终稳定形态将是「无关联类型覆盖」的保守版本；关注 RFC 3532 等后续提案。
 
 ### 2.1 特化语法与语义
 

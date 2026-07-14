@@ -226,3 +226,33 @@ ESA 正在评估 Rust 用于未来任务，关注其内存安全（Memory Safety
 
 辐射可能导致位翻转（bit flip）。需要使用 ECC 内存、三模冗余（TMR）和错误检测代码。Rust 的类型安全不能防止硬件级错误，但减少了软件漏洞。
 </details>
+
+---
+
+## ⚠️ 反例与陷阱：no_std/no_main 缺少 panic_handler
+
+**反例**（rustc 1.97 实测编译失败，无错误码：`#[panic_handler]` function required））：
+
+```rust,compile_fail
+#![no_std]
+#![no_main]
+
+#[unsafe(no_mangle)]
+pub extern "C" fn _start() -> ! { loop {} }
+```
+
+太空/嵌入式 bare-metal 场景没有操作系统提供 panic 运行时；`#![no_std]` crate 必须自行定义 `#[panic_handler]`，否则编译期即报错（需 `-C panic=abort`，unwind 在无 std 下不受支持）。
+
+**修正**：
+
+```rust
+#![no_std]
+#![no_main]
+use core::panic::PanicInfo;
+
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! { loop {} }
+
+#[unsafe(no_mangle)]
+pub extern "C" fn _start() -> ! { loop {} }
+```

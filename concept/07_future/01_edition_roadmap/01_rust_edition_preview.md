@@ -120,3 +120,27 @@ cargo fix --edition
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper) · [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio)
+
+---
+
+## ⚠️ 反例与陷阱：Edition 2024 保留字 `gen`
+
+**反例**（rustc 1.97 实测编译失败，无错误码，解析错误））：
+
+```rust,compile_fail
+fn main() {
+    let gen = 42;
+    println!("{gen}");
+}
+```
+
+Edition 2024 为未来生成器（gen blocks）预留 `gen` 关键字；以 `--edition 2024` 编译时 `let gen` 直接解析失败，升级 edition 前需用 `r#gen` 或改名迁移。
+
+**修正**：
+
+```rust
+fn main() {
+    let r#gen = 42;
+    println!("{}", r#gen);
+}
+```

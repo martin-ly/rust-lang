@@ -369,7 +369,7 @@ pub fn safe_wrapper(data: &[u8]) -> u32 {
 
 ## 快速开始：工具安装与运行
 
-「快速开始：工具安装与运行」涉及 Miri（Rust 官方动态分析器）、Kani（AWS 有界模型检查器）、BorrowSanitizer（运行时借用检查 Sanitizer）与Verus（Microsoft 演绎验证器），本节逐一说明其要点。
+本节聚焦「快速开始：工具安装与运行」，覆盖Miri（Rust 官方动态分析器）、Kani（AWS 有界模型检查器）、BorrowSanitizer（运行时借用检查 Sanitizer）与Verus（Microsoft 演绎验证器）。论述顺序由定义到边界：先明确「快速开始：工具安装与运行」在「现代 Rust 验证工具生态（2025-2026）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「快速开始：工具安装与运行」的判定标准，并指出它在全页论证链中的位置。
 
 ### Miri（Rust 官方动态分析器）
 

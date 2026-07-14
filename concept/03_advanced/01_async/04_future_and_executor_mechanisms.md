@@ -1046,7 +1046,7 @@ impl Future for MyFuture {
 
 ## 📚 延伸阅读
 
-本节围绕「延伸阅读」展开，覆盖相关文档 与 外部资源 两个方面。
+本节列出「Future 与 Executor 机制 (Future and Executor Mechanisms)」的延伸材料：相关文档 与 外部资源。一手文档（Rust Reference / RFC / std 文档）用于核对规则原文，二手材料（博客、论文、讨论串）用于理解设计动机与历史争论。阅读顺序建议先一手后二手，并以本页正文结论为基准校验材料的新旧——Rust 演进较快，旧文结论可能已被新版本推翻。
 
 ### 相关文档
 

@@ -26,6 +26,28 @@
 
 ---
 
+## 📑 目录
+
+- [Rust 关键字（Keywords）](#rust-关键字keywords)
+  - [📑 目录](#-目录)
+  - [一、关键字概述](#一关键字概述)
+  - [二、当前使用的关键字](#二当前使用的关键字)
+  - [三、保留给未来使用的关键字](#三保留给未来使用的关键字)
+  - [四、Raw Identifiers](#四raw-identifiers)
+    - [典型使用场景](#典型使用场景)
+  - [五、实践建议](#五实践建议)
+  - [六、相关概念](#六相关概念)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：保留关键字（🟢 基础）](#测验-1保留关键字-基础)
+    - [测验 2：Raw Identifier 与跨 Edition 调用（🟡 进阶）](#测验-2raw-identifier-与跨-edition-调用-进阶)
+    - [测验 3：Raw Identifier 的使用边界（🔴 专家，联动「实践建议」）](#测验-3raw-identifier-的使用边界-专家联动实践建议)
+  - [⚠️ 反例与陷阱：关键字用作标识符](#️-反例与陷阱关键字用作标识符)
+
+---
+
 ## 一、关键字概述
 
 关键字（keywords）是 Rust 保留给语言本身使用的词，**不能用作标识符**（变量名、函数名、类型名等），除非使用 **raw identifier** 语法 `r#`。
@@ -233,3 +255,23 @@ let ok = r#try(input);
 **B 正确**。按本页「实践建议」三条：①**避免**用关键字作标识符（即使 raw identifier 允许）——A 正是要规避的反例；②跨 edition 依赖时留意保留关键字变化（2015→2018 的 `try`/`async`/`await`）——D 错；③宏生成代码中可能需要 raw identifier（用户输入生成关键字命名字段/变量）。C 错：`r#` 是词法前缀，不是运行时机制。
 
 </details>
+
+---
+
+## ⚠️ 反例与陷阱：关键字用作标识符
+
+**反例**（rustc 1.97 实测编译失败，无错误码，解析错误））：
+
+```rust,compile_fail
+fn match() {}
+fn main() { match(); }
+```
+
+Rust 关键字不能直接用做标识符；需要原义标识符时加 `r#` 前缀。
+
+**修正**：
+
+```rust
+fn r#match() {}
+fn main() { r#match(); }
+```

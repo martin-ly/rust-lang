@@ -77,6 +77,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：`as` 转型静默截断（rustc 1.97.0 实测）](#反例as-转型静默截断rustc-1970-实测)
     - [✅ 修正：`try_into` 显式校验](#-修正try_into-显式校验)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 **变更日志**:
 
@@ -201,7 +202,18 @@ Rust 的安全保证与密码学威胁的对应:
 
 ## 三、对称加密
 
-「对称加密」部分包含 AES-GCM 与  ChaCha20-Poly1305 两条主线，本节依次说明。
+对称加密选型在现代 Rust 工程中基本是二选一：
+
+| 算法 | 密钥/Nonce | 硬件加速 | 适用场景 |
+|---|---|---|---|
+| AES-256-GCM | 32B / 12B | AES-NI/ARMv8 CE | 有硬件加速的服务端 |
+| ChaCha20-Poly1305 | 32B / 12B | 纯软件快 | 移动端、无 AES-NI 环境 |
+
+两者都是 AEAD（认证加密），密文附带完整性标签。**致命陷阱是 Nonce 复用**：同一密钥下 GCM 的 Nonce 复用会泄露认证密钥（ catastrophic failure），ChaCha20 同样灾难——必须保证 `(key, nonce)` 二元组全局唯一，工程做法是计数器 nonce 或随机 nonce + 密钥轮换（XChaCha20 的 24B nonce 使随机方案安全）。
+
+Rust crate：`aes-gcm`、`chacha20poly1305`（RustCrypto），均为纯 Rust + 常量时间实现。
+
+判定依据：能用 AEAD 绝不用裸 CBC/CTR + 手工 MAC；nonce 管理策略必须在设计文档中显式声明。
 
 ### 3.1 AES-GCM
 >
@@ -293,7 +305,13 @@ fn encrypt_chacha20(key: &[u8; 32], plaintext: &[u8]) -> Result<Vec<u8>, chacha2
 
 ## 四、非对称加密与数字签名
 
-本节围绕「非对称加密与数字签名」展开，覆盖 ECC 与 Ed25519 与  X25519 密钥交换 两个方面。
+现代非对称密码的 Rust 选型收敛在曲线 25519 家族：
+
+- **Ed25519（签名）**：`ed25519-dalek`（现 `ed25519-zebra`/`ed25519-consensus` 分支维护）；EdDSA 的确定性 nonce（RFC 8032）消除了 ECDSA 随机数失败导致私钥泄露的经典灾难（参考 2010 PS3 事件）。
+- **X25519（密钥交换）**：`x25519-dalek`；ECDH 输出必须经过 HKDF 派生会话密钥，**原始共享点不能直接当密钥用**（结构不均匀）。
+- **ECC vs RSA**：P-256 的 128-bit 安全级只需 256-bit 密钥，RSA 需 3072-bit；新系统无兼容包袱时不应再选 RSA。
+
+判定依据：签名用 Ed25519，密钥交换用 X25519，两者共享曲线 25519 基础（`curve25519-dalek`），代码与审计面最小。
 
 ### 4.1 ECC 与 Ed25519
 >
@@ -374,7 +392,18 @@ assert_eq!(alice_shared.as_bytes(), bob_shared.as_bytes());
 
 ## 五、哈希与消息认证
 
-本节围绕「哈希与消息认证」展开，依次讨论哈希函数、HMAC与密钥派生（KDF）。
+哈希与 MAC 的选型矩阵：
+
+| 用途 | 算法 | Rust crate | 禁忌 |
+|---|---|---|---|
+| 完整性校验 | SHA-256 / BLAKE3 | `sha2` / `blake3` | MD5/SHA-1（已破） |
+| 消息认证 | HMAC-SHA256 | `hmac` | 手工 `hash(k\|\|m)`（长度扩展攻击） |
+| 密码存储 | Argon2id | `argon2` | 任何快速哈希（含 PBKDF2 低迭代） |
+| 密钥派生 | HKDF | `hkdf` | 直接截断哈希输出 |
+
+BLAKE3 基于 Merkle 树可并行，吞吐常超 SHA-256 数倍，是非交互场景的首选。
+
+判定依据：**密码存储与通用哈希必须分开选型**——Argon2id 的内存硬度（memory-hardness）是抗 GPU 暴力破解的核心，用 SHA-256 存密码等于明文存储。
 
 ### 5.1 哈希函数
 >

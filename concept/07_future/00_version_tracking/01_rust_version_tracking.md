@@ -141,7 +141,14 @@ graph TD
 
 ## 二、维度一：所有权与别名模型
 
-本节将「维度一：所有权与别名模型」分解为若干主题： `&raw const` / `&raw mut`（1.82 stab…、`if let` guards in match arms（1.95…、`let chains`（1.88 stable in 2024 Ed…与集合 API 的借用模型创新（1.85–1.95）。
+所有权与别名模型在 1.82–1.95 的增量演进围绕「让借用更精确」展开：
+
+- **`&raw const` / `&raw mut`（1.82 stable）**：创建原始指针不再要求先创建引用，消除了「为拿指针而制造悬空引用」这一 Miri 高频误报模式，是 unsafe 代码正确性叙述的基础修补。
+- **`let chains`（1.88，2024 Edition）**：`if let Some(a) = x && let Some(b) = y` 合并嵌套匹配，减少右漂移；注意它是 Edition 门控语法。
+- **`if let` guards（1.95）**：`match` 守卫中允许 `if let`，进一步压缩嵌套。
+- **集合 API 借用模型**：`HashMap::get_many_mut` 等 API 用编译期可判定的键互斥替代运行期 `entry` 检查。
+
+判定依据：这些特性的共同方向是**把运行期借用冲突前移到编译期**，升级 MSRV 时优先审计 unsafe 模块以启用 `&raw` 系列。
 
 ### 2.1 `&raw const` / `&raw mut`（1.82 stable，[RFC 2582](https://rust-lang.github.io/rfcs//2582-raw-reference-mir-operator.html)）
 >
@@ -216,7 +223,16 @@ graph TD
 
 ## 三、维度二：类型系统扩展
 
-本节从 `+ use<'lt>` precise capturing（1.82…、Trait object upcasting（1.86 stable）、`_` 推断 const generics 参数（1.89 stabl…与Bounds on associated types in bound…切入，剖析「维度二：类型系统扩展」的核心内容。
+类型系统扩展的主线是「精确表达捕获与约束」：
+
+| 特性 | 版本 | 解决的问题 |
+|---|---|---|
+| `+ use<'lt>` precise capturing | 1.82 | RPIT 不再默认捕获所有生命周期，避免 async fn 返回类型意外延长借用 |
+| Trait object upcasting | 1.86 | `dyn Sub` → `dyn Super` 强转，消除手写转发方法 |
+| `_` 推断 const generics | 1.89 | `[T; _]` 长度由上下文推断，减少泛型噪音 |
+| Bounds on assoc types in bounds | 1.79 | `T: Trait<Assoc: Bound>` 一行写完，替代 where 子句嵌套 |
+
+共同趋势：每个特性都在消除「类型系统表达力不足导致的样板代码」，而非增加新概念——升级后可机械性地删除旧 workaround。
 
 ### 3.1 `+ use<'lt>` precise capturing（1.82 stable，[RFC 3617](https://rust-lang.github.io/rfcs//3617-precise-capturing.html)）
 >
@@ -288,7 +304,13 @@ graph TD
 
 ## 四、维度三：异步与效果系统
 
-本节从 Async closures（1.85 stable，RFC 3668）、Rust 2024 Edition：RPIT lifetime cap…与`gen` blocks（1.95 nightly，tracking）切入，剖析「维度三：异步与效果系统」的核心内容。
+异步与效果系统的三条进展线：
+
+1. **Async closures（1.85，RFC 3668）**：`async || ...` 闭包返回 `impl Future`，捕获语义与普通闭包一致；解决了「闭包内异步只能套 `async move` 块」的语法噪音，且支持 `AsyncFn` trait 约束。
+2. **RPIT lifetime capture（2024 Edition）**：返回位置 `impl Trait` 默认捕获所有泛型参数的生命周期——语义更正确但属破坏性变更，故只在 Edition 2024 生效；`use<'lt>` 是逃逸舱。
+3. **`gen` blocks（1.95 nightly tracking）**：生成器语法糖，`gen { yield x; }` 展开为 `impl Iterator`，手写迭代器状态机的终结者；异步版 `async gen` 对应 `Stream`。
+
+判定依据：新项目直接上 2024 Edition 获得完整捕获语义；库作者维护双 Edition 时用 `use<>` 显式声明捕获集保证两侧一致。
 
 ### 4.1 Async closures（1.85 stable，[RFC 3668](https://rust-lang.github.io/rfcs//3668-async-closures.html)）
 

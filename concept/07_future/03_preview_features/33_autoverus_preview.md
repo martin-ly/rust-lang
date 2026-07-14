@@ -78,3 +78,27 @@
 - [Safety Tags 预览](03_safety_tags_preview.md)
 - [BorrowSanitizer](24_borrow_sanitizer.md) · [深度形式化](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md)
 - [Tree Borrows 深度解析](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) · [Miri](../../04_formal/04_model_checking/08_miri.md)
+
+---
+
+## ⚠️ 反例与陷阱：`verus!` 宏需要 Verus 工具链
+
+**反例**（rustc 1.97 实测编译失败，无错误码：cannot find macro））：
+
+```rust,compile_fail
+verus! {
+    fn add(a: u64, b: u64) -> u64 { a + b }
+}
+fn main() {}
+```
+
+`verus!` 宏与 `requires`/`ensures` 子语言由 Verus 编译器前端提供；普通 rustc 不认识该宏，验证条件注释在标准工具链下无法编译，必须使用 `verus` 命令。
+
+**修正**：
+
+```rust
+// 安装 Verus 后： verus file.rs
+// 普通 Rust 等价注释形式（仅文档作用）：
+fn add(a: u64, b: u64) -> u64 { a + b }
+fn main() {}
+```

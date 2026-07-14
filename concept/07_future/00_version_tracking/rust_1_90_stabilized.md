@@ -77,7 +77,13 @@
 
 ## 1. 异步特性增强
 
-理解「异步特性增强」需要把握异步Trait稳定化（RPITIT）、异步闭包改进与async fn in trait生命周期推断，本节依次展开。
+1.90 周期的异步特性主线是「让 trait 中的 async 真正可用」：
+
+1. **RPITIT（返回位置 impl Trait in Trait）**：trait 方法可声明 `fn get(&self) -> impl Future<Output = T>`，`async fn in trait` 正是其语法糖；静态分派场景不再需要 `async-trait` crate 的 `#[async_trait]`（它会把每个调用装箱为 `Pin<Box<dyn Future>>`，热路径有真实成本）。
+2. **异步闭包（RFC 3668）**：`async || ...` 产生实现 `AsyncFn` trait 的闭包——与普通闭包对齐的三种形态（`AsyncFn`/`AsyncFnMut`/`AsyncFnOnce`），解决了「闭包内 await 只能套 `async move` 块且借用语义错误」的长期痛点。
+3. **生命周期推断**：async fn in trait 的返回 Future 默认捕获 `&self` 生命周期，`+ use<'lt>` 精确捕获语法处理「不借用 self」的优化场景。
+
+判定依据：库作者定义异步 trait 时优先 RPITIT + `Send` bound 注解；仅当需要 trait object（`dyn`）时退回 `async-trait` 宏。
 
 ### 1.1 异步Trait稳定化（RPITIT）
 
@@ -209,7 +215,13 @@ impl StreamProcessor for NetworkProcessor {
 
 ## 2. GATs在网络编程中的应用
 
-「GATs在网络编程中的应用」部分的核心主题是泛型关联类型（Generic Associated Types），本节展开说明。
+GAT（泛型关联类型，1.65 稳定）在网络编程中的杀手场景是**零拷贝流式解析**：
+
+- **借用返回类型**：`trait Parser { type Output<'a> where Self: 'a; fn parse<'a>(&'a self, buf: &'a [u8]) -> Self::Output<'a>; }`——关联类型带生命周期参数，解析结果可直接引用输入缓冲（如 `&'a str` 切片），无需 `String` 拷贝；无 GAT 时代只能返回拥有类型或用 `unsafe` 绕。
+- **LendingIterator 模式**：`type Item<'a>` 让迭代器产出借用自身的元素（如按行解析的流），标准 `Iterator` 无法表达——这是 GAT 设计的原始动机（RFC 1598）。
+- **网络协议栈**：帧解析、HTTP 头部视图（`Header<'a>`）等场景的分配次数可降一个量级。
+
+判定依据：解析热路径（>10⁶ msg/s）先评估 GAT 化能否消除分配；API 复杂度上升明显，非热路径不值得。
 
 ### 泛型关联类型（Generic Associated Types）
 
@@ -503,7 +515,13 @@ pub struct Packet {
 
 ## 7. 错误处理改进
 
-本节专门讨论「错误处理改进」下的网络错误类型。
+1.90 周期的错误处理改进围绕**结构化错误与传播便捷性**：
+
+1. **网络错误类型设计惯例**：`thiserror` 枚举按「错误来源层」组织变体（Io/Dns/Tls/Http/Timeout），`#[from]` 自动转换 + `#[error(transparent)]` 保持错误链——`std::error::Error::source` 链是生产可观测性的基础（`anyhow` 的 `chain()` 打印）。
+2. **`let-else` 与早退**：网络代码大量「取不到就返回」模式（连接拒绝、解析失败），`let-else` 把卫语句压到一行，主路径保持左对齐。
+3. **错误上下文化**：`anyhow::Context`（应用层）vs `thiserror`（库层）的分工不变——1.90 周期的改进主要在诊断侧（错误链打印格式、`Termination` trait 的退出码传播）。
+
+判定依据：库 crate 错误类型必须 `Send + Sync + 'static`（`thiserror` 默认满足），否则无法跨 `.await` 传播。
 
 ### 网络错误类型
 

@@ -480,7 +480,7 @@ DP 的填表顺序则是 DAG 拓扑排序的一种具体实现。
 
 ## 五、图遍历 ↔ Visitor + Arbitrary Cycles[来源: [Wikipedia — Graph Traversal](https://en.wikipedia.org/wiki/Graph_traversal)]
 
-本节从统一语义 与 遍历细化：图遍历 ↔ Visitor ↔ Iterator 两个层面剖析「图遍历 ↔ Visitor + Arbitrary Cyc…」。
+本节聚焦「图遍历 ↔ Visitor + Arbitrary Cycles」，覆盖统一语义 与 遍历细化：图遍历 ↔ Visitor ↔ Iterator。论述顺序由定义到边界：先明确「图遍历 ↔ Visitor + Arbitrary Cycles」在「语义桥：算法、设计模式与工作流模式的统一谱系」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「图遍历 ↔ Visitor + Arbitrary Cycles」的判定标准，并指出它在全页论证链中的位置。
 
 ### 5.1 统一语义
 

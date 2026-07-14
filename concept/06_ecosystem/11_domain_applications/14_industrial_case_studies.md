@@ -30,7 +30,13 @@
 
 ## 二、Rust for Linux
 
-「Rust for Linux」部分按项目背景、架构模式、关键技术挑战、代码示例：简单内核模块等5个方面的顺序逐层展开。
+Rust for Linux 的架构模式与挑战要点：
+
+- **项目背景**：Linux 6.1（2022）起 Rust 作为第二内核语言进入主线，定位是**新驱动与子系统的可选实现语言**，不重写既有 C 代码；2024 年部分维护者分歧后项目重组，核心抽象继续推进。
+- **架构模式**：`kernel` crate 提供 safe 封装层——C API 被包进带所有权的 Rust 类型（如 `ARef<T>` 引用计数包装、`Mutex` 绑定内核锁原语），unsafe 仅存在于封装内部；驱动作者写的代码原则上是 100% safe Rust。
+- **关键技术挑战**：fallible allocation（内核内存分配可失败，与 std 的 panic-on-OOM 模型冲突，催生了 `kernel::alloc` 的 `try_*` API）、panic 策略（`panic=abort` 与 oops 语义的折中）、以及构建系统与 kbuild 的集成。
+
+判定依据：评估内核 Rust 化进度看两点——`kernel` crate safe 抽象覆盖率，与首个主要驱动（如 GPU/NVMe 类）的主线合入状态。
 
 ### 2.1 项目背景
 
@@ -114,7 +120,13 @@ impl Drop for RustMinimal {
 
 ## 三、Ferrocene：安全认证 Rust
 
-理解「Ferrocene：安全认证 Rust」需要把握什么是 Ferrocene、为什么需要认证编译器、Ferrocene 的技术路径与对 Rust 生态的意义，本节依次展开。
+Ferrocene 是**通过安全认证的 Rust 工具链**（ISO 26262 ASIL D、IEC 61508 SIL 4），由 Ferrocene 团队（后与 Rust Foundation 协作）维护。
+
+- **为什么需要认证编译器**：安全关键行业（汽车、医疗、工业）要求工具链本身经过资格认证（qualification）——编译器的 bug 会注入安全功能；上游 rustc 的快速演进节奏（6 周一版）与认证要求的「冻结 + 完整文档 + 变更追溯」不兼容。
+- **技术路径**：以上游 Rust 为基础做 LTS 式稳定分支，核心交付物是 **FLS（Ferrocene Language Specification）**——Rust 迄今最完整的语言规范文档，其价值外溢到整个生态（成为 Rust 官方规范化的重要参照）。
+- **对生态的意义**：Ferrocene 把「Rust 可用于安全关键系统」从工程论证变为合规事实，打开了汽车（AUTOSAR 之外的路径）与航空市场。
+
+判定依据：非安全关键项目用上游 stable 即可；需认证的项目 Ferrocene 是目前唯一现实选项。
 
 ### 3.1 什么是 Ferrocene
 
@@ -206,7 +218,15 @@ impl IMyService for MyService {
 
 ## 五、Firecracker：微虚拟化
 
-本节从架构特点 与 为什么用 Rust 两个层面剖析「Firecracker：微虚拟化」。
+Firecracker 是 AWS 开源的**微虚拟机监视器（microVM VMM）**，支撑 Lambda 与 Fargate 的多租户隔离。
+
+架构特点：
+
+1. **极简设备模型**：仅实现 virtio-net/virtio-block/串口等约 5 种设备（QEMU 是上百种）——攻击面缩小两个数量级，启动时间 <125ms；
+2. **Rust 的安全收益**：VMM 是多租户安全边界，内存安全漏洞 = 租户逃逸；Firecracker 用 Rust 消除整个漏洞类别，剩余风险集中在 KVM 内核接口与 seccomp 过滤器配置；
+3. **jailer 进程模型**：VMM 进程在 seccomp/cgroup/chroot 三重沙箱内运行，Rust 的所有权模型使「哪个组件持有哪个 fd」在代码中显式可查。
+
+判定依据：Firecracker 是「Rust 适合安全边界组件」的标杆案例——评估类似 VMM/沙箱/TLS 终止组件时，它是首选参照系。
 
 ### 5.1 架构特点
 

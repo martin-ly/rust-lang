@@ -280,3 +280,35 @@ fn main() -> std::io::Result<()> {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+
+---
+
+## ⚠️ 反例与陷阱：发送端 drop 后 recv().unwrap() panic（运行时陷阱）
+
+**反例**（运行时陷阱，代码可通过编译）：
+
+```rust
+use std::sync::mpsc;
+fn main() {
+    let (tx, rx) = mpsc::channel::<i32>();
+    drop(tx);
+    let v = rx.recv().unwrap();
+    println!("{v}");
+}
+```
+
+mpsc 通道在所有发送端关闭后 `recv` 返回 `Err(RecvError)`，盲目 `unwrap` 会 panic；IPC 代码必须区分「暂时无数据」与「通道已关闭」。
+
+**修正**：
+
+```rust
+use std::sync::mpsc;
+fn main() {
+    let (tx, rx) = mpsc::channel::<i32>();
+    drop(tx);
+    match rx.recv() {
+        Ok(v) => println!("{v}"),
+        Err(_) => println!("channel closed"),
+    }
+}
+```

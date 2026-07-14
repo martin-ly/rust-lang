@@ -53,7 +53,17 @@ pub fn create_tls_config() -> Result<rustls::ServerConfig, Box<dyn std::error::E
 
 ## 2. 证书管理
 
-「证书管理」部分包含自签名证书（仅开发与测试） 与 生产证书 两条主线，本节依次说明。
+证书管理的工程分层：
+
+| 场景 | 方案 | 关键点 |
+|---|---|---|
+| 本地开发 | 自签名（`rcgen` 生成 / mkcert） | 仅测试，**绝不进生产**；客户端需显式信任 |
+| 生产（公网） | ACME 自动化（Let's Encrypt，rustls-acme） | 90 天轮换，自动化续期是唯一可持续方案 |
+| 生产（内网/mTLS） | 私有 CA（`rcgen` 签中级证书） | 服务网格内 mTLS 双向验证 |
+
+Rust 侧要点：`rustls` 不接受系统证书存储的隐式信任——用 `rustls-native-certs`（读系统根）或 `webpki-roots`（Mozilla 根打包进二进制），容器内无系统证书时后者是唯一可靠选择。
+
+判定依据：证书自动化续期必须配过期监控（剩余 <14 天告警）；自签名证书出现在生产配置 = 安全审计红线。
 
 ### 2.1 自签名证书（仅开发与测试）
 
@@ -80,7 +90,13 @@ pub fn generate_self_signed_cert() -> Result<Certificate, Box<dyn std::error::Er
 
 ## 3. 认证与授权
 
-「认证与授权」部分包含 JWT 与  OAuth2 / OpenID Connect 两条主线，本节依次说明。
+认证（AuthN）与授权（AuthZ）在 Rust Web 栈的标准实践：
+
+**JWT**：`jsonwebtoken` crate 做签发/验证；三条纪律——算法白名单固定（拒绝 `none` 与 RS→HS 降级攻击）、`exp`/`nbf` 强制校验（库默认验 exp，但需确认未 `dangerous` 关闭）、密钥经 KMS/环境变量注入不入库。JWT 是无状态凭证，**无法主动吊销**——短有效期（分钟级）+ refresh token 轮换是标配。
+
+**OAuth2 / OIDC**：资源服务器角色只需验证 JWT（JWKS 公钥拉取 + 缓存，注意 kid 轮换）；客户端角色用 `oauth2` crate 实现授权码流程（PKCE 必开，防授权码截获）。
+
+判定依据：内部微服务间通信用 mTLS 优于 JWT（无密钥分发问题）；面向第三方集成才用 OAuth2。
 
 ### 3.1 JWT
 
@@ -115,7 +131,14 @@ fn generate_jwt(user_id: &str, role: &str, secret: &str) -> Result<String, jsonw
 
 ## 5. DoS 防护
 
-「DoS 防护」部分包含速率限制 与 连接限制 两条主线，本节依次说明。
+DoS 防护在应用层的两个基本控制：
+
+1. **速率限制（rate limiting）**：按客户端标识（IP/令牌/用户）限速。算法选型——令牌桶（允许突发，适合 API）vs 漏桶（平滑输出，适合下游保护）vs 滑动窗口（精确但内存贵）；Rust 侧 `governor` crate 提供 GCRA（通用信元速率算法）实现，`tower::limit::RateLimit` 做服务级粗粒度限制。
+2. **连接限制**：并发连接数上限（`tokio::sync::Semaphore` 包裹 accept 循环）、每连接超时（读/写/总时长三层）、慢速攻击（Slowloris 类）防护靠「请求头接收超时」——在规定时间内未收齐头部即断连。
+
+纵深防御：应用层限速之外，L3/L4 攻击必须靠 CDN/云厂商清洗，应用代码无能为力——架构设计应假设「任意时刻可被打挂，重启自愈」（无状态 + 健康检查）。
+
+判定依据：任何暴露公网的服务上线前做限速压测（`wrk`/`oha`），确认超限返回 429 而非雪崩。
 
 ### 5.1 速率限制
 

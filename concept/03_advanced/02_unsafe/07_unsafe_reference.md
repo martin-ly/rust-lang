@@ -28,6 +28,30 @@
 
 ---
 
+## 📑 目录
+
+- [Unsafe 参考（Unsafe Reference）](#unsafe-参考unsafe-reference)
+  - [认知路径](#认知路径)
+  - [反命题决策树](#反命题决策树)
+  - [一、`unsafe` 关键字的四种用法](#一unsafe-关键字的四种用法)
+  - [二、Unsafe 块的能力](#二unsafe-块的能力)
+  - [三、外部契约与 unsafe trait](#三外部契约与-unsafe-trait)
+  - [四、不被视为 unsafe 的行为](#四不被视为-unsafe-的行为)
+  - [五、安全抽象层](#五安全抽象层)
+  - [四、不被视为 unsafe 的行为](#四不被视为-unsafe-的行为-1)
+  - [五、与 Undefined Behavior 的边界](#五与-undefined-behavior-的边界)
+  - [六、Unsafe 与内存模型](#六unsafe-与内存模型)
+  - [七、Unsafe 与运行时](#七unsafe-与运行时)
+  - [八、相关概念](#八相关概念)
+  - [过渡段](#过渡段)
+  - [反向推理](#反向推理)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考-international-authority-referencesp1-学术-p2-生态)
+  - [⚠️ 反例与陷阱：对 `static mut` 取引用（Edition 2024 硬错误）](#-反例与陷阱对-static-mut-取引用edition-2024-硬错误)
+
+---
+
 ## 认知路径
 
 1. **问题识别**: 为什么 Unsafe 参考值得关注？`unsafe` 是 Rust 与底层系统交互的边界，理解其规范是编写安全抽象层的基础。
@@ -263,3 +287,31 @@ unsafe 代码必须遵守 Rust 内存模型：(Source: [Rust Reference — Memor
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/zerocopy — 生态权威 API 文档](https://docs.rs/zerocopy) · [docs.rs/memmap2 — 生态权威 API 文档](https://docs.rs/memmap2)
+
+---
+
+## ⚠️ 反例与陷阱：对 `static mut` 取引用（Edition 2024 硬错误）
+
+**反例**（rustc 1.97 实测编译失败，无错误码，static_mut_refs 硬错误））：
+
+```rust,compile_fail
+static mut COUNTER: u32 = 0;
+fn main() {
+    unsafe {
+        let r = &mut COUNTER;
+        *r += 1;
+    }
+}
+```
+
+对 `static mut` 创建引用在任何线程模型下都可能违反别名规则；Edition 2024 将 `static_mut_refs` 升为硬错误，这是 Unsafe Reference 章节的核心警示。
+
+**修正**：
+
+```rust
+use std::sync::atomic::{AtomicU32, Ordering};
+static COUNTER: AtomicU32 = AtomicU32::new(0);
+fn main() {
+    COUNTER.fetch_add(1, Ordering::SeqCst);
+}
+```

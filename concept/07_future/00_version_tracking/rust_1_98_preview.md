@@ -523,7 +523,13 @@ serde = { version = "1.0", public = true }
 
 ## 五、形式化与安全预览
 
-本节将「形式化与安全预览」分解为若干主题： Safety Tags（RFC #3842）、BorrowSanitizer与MemorySanitizer / ThreadSanitizer 稳…。
+形式化与安全在 1.98 周期跟踪三条线：
+
+1. **Safety Tags（RFC #3842）**：用 `#[safety(...)]` 属性把 unsafe 契约（前置条件/不变量）从注释提升为机器可检查的结构化标注，使 `clippy`/审核工具可验证 unsafe 块的文档完整性——处于 FCP/讨论中，是 unsafe 文档工业化的关键一步。
+2. **BorrowSanitizer**：动态借用违规检测，目标是以远低于 Miri 的开销捕获别名违规；1.98 窗口内仍以原型为主。
+3. **MemorySanitizer / ThreadSanitizer 稳定化**：`-Zsanitizer` 系列向稳定通道推进，给 unsafe/FFI 代码提供与 C/C++ 同级的动态分析能力。
+
+判定依据：安全关键项目现在即可落地的是 MSan/TSan nightly + Miri CI；Safety Tags 待 RFC 合入后再跟进标注规范。
 
 ### 5.1 Safety Tags（RFC #3842）
 
@@ -571,7 +577,13 @@ serde = { version = "1.0", public = true }
 
 ## 六、WebAssembly 与嵌入式预览
 
-本节专门讨论「WebAssembly 与嵌入式预览」下的 Wasm Components。
+WASM 组件模型（Component Model）是 1.98 周期嵌入式的核心跟踪项：
+
+- **现状**：`wasm32-wasip2` 目标（1.82+ tier 2）直接产出组件；`cargo component` 提供 WIT 绑定生成，`wasm-tools` 负责组件验证与合成。
+- **嵌入式的意义**：组件模型把「驱动」与「应用」解耦为可组合的 WIT 接口——同一传感器驱动组件可服务多个应用组件，宿主导入（host imports）由运行时统一仲裁，天然契合 MCU 上的多租户固件。
+- **风险项**：WIT 版本演化尚无冻结承诺，Preview 2 → Preview 3（async 组件）的迁移成本未明。
+
+判定依据：嵌入式组件化项目应从 `wasm32-wasip2` + 显式 WIT 版本锁定起步，避免追逐 Preview 3 的 nightly 特性。
 
 ### 6.1 Wasm Components
 

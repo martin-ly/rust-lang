@@ -36,7 +36,13 @@
 
 ## 一、权威定义
 
-本节围绕「权威定义」展开，覆盖 Wikipedia 权威定义 与  Cargo / crates.io 官方定义 两个方面。
+权威定义锚点：
+
+- **crate（Wikipedia/官方 Book）**：Rust 的最小编译单元——库（`--crate-type lib`）或二进制；每个 crate 有独立的命名空间、隐私边界与编译产物。与「package」的区别：package 是 Cargo 概念（一个 Cargo.toml，可含 1 库 + 多二进制 crate），crate 是编译器概念。
+- **crates.io**：官方包注册中心，语义化版本 + 不可变发布（已发布版本不可覆盖，只能 yank）；与 Cargo 的分工：crates.io 管「发现与分发」，Cargo 管「解析与构建」。
+- **「核心 crate」的界定**：本页指生态中**事实标准的基础设施层**——serde（序列化）、tokio（异步运行时）、thiserror/anyhow（错误）、bytes（缓冲）、log/tracing（观测），特征是跨领域被传递依赖，选型错误影响全栈。
+
+判定依据：评估「核心」与否看反向依赖数（crates.io 的 dependents 列表），而非下载量绝对值。
 
 ### 1.1 Wikipedia 权威定义
 
@@ -443,7 +449,18 @@ graph TD
 
 ### 4.11 核心并发 Crate 深度解析
 
-本节围绕「核心并发 Crate 深度解析」展开，依次讨论 crossbeam：无锁并发原语、rayon：数据并行迭代器、parking_lot：轻量级同步原语与dashmap：并发 HashMap。
+核心并发四 crate 的分工边界：
+
+| crate | 解决的问题 | 与 std 的关系 |
+|---|---|---|
+| `crossbeam` | 无锁并发原语（epoch 内存回收、MPMC 通道、scoped threads） | std 通道为 MPSC 且有锁；`crossbeam::scope` 是 `std::thread::scope` 的前身 |
+| `rayon` | 数据并行：`par_iter()` 工作窃取线程池 | 迭代器 API 的并行镜像，无 async |
+| `parking_lot` | 更小更快的 `Mutex`/`RwLock`（无中毒、1 字锁） | std 同步原语带中毒（poisoning）语义，需 `unwrap` |
+| `dashmap` | 分片并发 HashMap | `HashMap` + `RwLock` 的高并发替代 |
+
+选型要点：CPU 密集批处理 → rayon；自研并发结构 → crossbeam；锁竞争热点 → parking_lot（注意其 `MutexGuard` 无中毒错误处理，逻辑不同）；高并发读多写少字典 → dashmap。
+
+判定依据：先用 std 实现并 profile，确认同步原语为瓶颈后再引入——parking_lot/dashmap 的收益在高竞争下才显著。
 
 #### crossbeam：无锁并发原语
 
@@ -633,7 +650,19 @@ graph TD
 
 ## 七、扩展内容：选型方法论与趋势
 
-本节围绕「扩展内容：选型方法论与趋势」展开，依次讨论 crates.io 生态健康度指标、2025-2026 生态趋势与学术论文引用。
+crate 选型的可量化方法论：
+
+**生态健康度五指标**：
+
+1. **维护活跃度**：最近 6 个月有 commit/release；`cargo outdated` 看依赖链新鲜度；
+2. **Bus factor**：贡献者 >1 人，避免单维护者失踪风险（`cargo supply-chain` 可审计）；
+3. **下载量趋势**：crates.io 下载曲线平稳/上升，警惕「僵尸流行」（历史下载高但已停更）；
+4. **依赖树体积**：`cargo tree --depth 1` 评估传递依赖，一个 HTTP 客户端引入 200+ 依赖是供应链审计负担；
+5. **MSRV 与 Edition 政策**：与项目 MSRV 对齐，避免被迫升级工具链。
+
+**2025–2026 趋势**：`tokio` 异步单极格局延续；`smol`/`async-std` 边缘化；`serde` + `thiserror`/`anyhow` 基础设施层稳定；嵌入式（`embassy`）、WASM 组件模型是增量热点。
+
+判定依据：引入依赖前跑一遍五指标清单，两项不达标需在 ADR 中记录理由。
 
 ### 7.1 crates.io 生态健康度指标
 

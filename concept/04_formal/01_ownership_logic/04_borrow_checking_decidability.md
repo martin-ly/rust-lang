@@ -114,7 +114,7 @@ fn polonius_friendly(flag: bool, data: &mut [i32]) -> &mut i32 {
 
 ## 三、形式化模型（Teaching Analogies）
 
-「形式化模型（Teaching Analogies）」部分按区域约束系统（Region Constraints）、路径与借用状态（Paths & Borrow States）与借用规则（Borrow Rules）的顺序逐层展开。
+本节聚焦「形式化模型（Teaching Analogies）」，覆盖区域约束系统（Region Constraints）、路径与借用状态（Paths & Borrow States）与借用规则（Borrow Rules）。论述顺序由定义到边界：先明确「形式化模型（Teaching Analogies）」在「Borrow Checking Decidability（借用检查可判定性）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「形式化模型（Teaching Analogies）」的判定标准，并指出它在全页论证链中的位置。
 
 ### 3.1 区域约束系统（Region Constraints）
 
@@ -328,7 +328,7 @@ flowchart TB
 
 ## 八、可运行示例
 
-本节从 NLL：最后一次使用点后重新借用、可变借用的独占性、共享与可变不能共存与两阶段借用切入，剖析「可运行示例」的核心内容。
+本节聚焦「可运行示例」，覆盖NLL：最后一次使用点后重新借用、可变借用的独占性、共享与可变不能共存与两阶段借用。论述顺序由定义到边界：先明确「可运行示例」在「Borrow Checking Decidability（借用检查可判定性）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「可运行示例」的判定标准，并指出它在全页论证链中的位置。
 
 ### 8.1 NLL：最后一次使用点后重新借用
 

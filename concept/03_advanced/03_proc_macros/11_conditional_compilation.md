@@ -297,3 +297,31 @@ Cargo 中通过 `RUSTFLAGS` 或在 `.cargo/config.toml` 中设置。
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/async-trait — 生态权威 API 文档](https://docs.rs/async-trait) · [docs.rs/syn — 生态权威 API 文档](https://docs.rs/syn)
+
+---
+
+## ⚠️ 反例与陷阱：引用被 cfg 排除的项
+
+**反例**（rustc 1.97 实测编译失败：E0425）：
+
+```rust,compile_fail
+#[cfg(any())]
+fn platform_helper() {}
+fn main() {
+    platform_helper();
+}
+```
+
+`#[cfg(...)]` 在名称解析前裁剪代码；条件不满足时该项根本不存在，调用处报「未定义」而非「配置不匹配」。演示用恒假 `any()` 保证各平台一致复现。
+
+**修正**：
+
+```rust
+#[cfg(any())]
+fn platform_helper() {}
+#[cfg(not(any()))]
+fn platform_helper() { println!("fallback"); }
+fn main() {
+    platform_helper();
+}
+```

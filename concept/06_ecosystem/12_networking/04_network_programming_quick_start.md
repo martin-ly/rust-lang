@@ -277,3 +277,40 @@ flowchart TD
 
 - **P2 生态/社区**: [docs.rs/quinn — 生态权威 API 文档](https://docs.rs/quinn) · [docs.rs/tokio-tungstenite — 生态权威 API 文档](https://docs.rs/tokio-tungstenite)
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+
+---
+
+## ⚠️ 反例与陷阱：阻塞 read 无超时（运行时陷阱）
+
+**反例**（运行时陷阱，代码可通过编译）：
+
+```rust
+use std::io::Read;
+use std::net::TcpListener;
+fn main() {
+    let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+    let (mut stream, _) = listener.accept().unwrap();
+    let mut buf = [0u8; 1024];
+    let _n = stream.read(&mut buf).unwrap(); // 对端不发送则永远阻塞
+}
+```
+
+`TcpStream` 默认阻塞且无超时，对端保持连接但不发数据时 `read` 永久挂起；入门示例能跑通，生产环境即成为线程泄漏源。
+
+**修正**：
+
+```rust
+use std::io::Read;
+use std::net::TcpListener;
+use std::time::Duration;
+fn main() {
+    let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+    let (mut stream, _) = listener.accept().unwrap();
+    stream.set_read_timeout(Some(Duration::from_secs(5))).unwrap();
+    let mut buf = [0u8; 1024];
+    match stream.read(&mut buf) {
+        Ok(n) => println!("read {n}"),
+        Err(e) => println!("timeout or error: {e}"),
+    }
+}
+```

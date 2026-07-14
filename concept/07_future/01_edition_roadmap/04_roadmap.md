@@ -92,7 +92,13 @@
 
 ## 一、核心概念：Edition 2027 的设计空间
 
-「核心概念：Edition 2027 的设计空间」涉及 Edition 演进节奏与政策、候选特性概览与特性依赖与 Edition 2027 关联图，本节逐一说明其要点。
+Edition 演进机制的政策框架（截至 2026 的公开信息）：
+
+1. **三年节奏**：2015/2018/2021/2024 四个 Edition 已形成约三年一版的规律；Edition 2027 为自然延续，但 Rust 项目官方政策强调「Edition 仅在积累足够多不兼容改进时才发布」，不承诺固定年份。
+2. **不兼容的边界**：Edition 只改变**语法与语义默认值**（如 2024 的 `gen` 保留字、临时值作用域调整），绝不改变已有代码在旧 Edition 下的行为——这是 `edition` Cargo.toml 键实现逐 crate 迁移的根据。
+3. **候选特性池**：进入 Edition 的特性需先经 nightly 长期验证；tracking issue 标签 `C-tracking-issue` + edition 里程碑是唯一权威进度来源。
+
+判定依据：评估某特性「何时可用」时，区分稳定化版本（`rustc --version` 可查）与 Edition 绑定（需 Cargo.toml `edition = "2027"`），两者独立。
 
 ### 1.1 Edition 演进节奏与政策
 
@@ -352,7 +358,13 @@ std::simd 状态:
 
 ## 三、异步与执行模型
 
-本节围绕「异步与执行模型」展开，依次讨论 Async Traits 与静态分发、Async Drop 与生命周期与Custom Allocators 稳定化。
+异步执行模型的三个前沿问题：
+
+1. **Async Traits 与静态分派**：`async fn in trait` 稳定后返回 `impl Future`，动态分派需 `trait_variant` 或手装箱；`-> impl Trait` 风格返回类型使 Send 边界依赖调用点上下文，这是「async trait 对象安全」残缺的根源。
+2. **Async Drop**：当前 `Drop::drop` 是同步的，异步清理（如 flush 网络缓冲）只能 `block_on` 或显式 `close().await`——Async Drop 的难点是 drop 顺序与取消语义的组合，尚无稳定设计。
+3. **Custom Allocators**：`Allocator` API（nightly `allocator_api`）允许集合类型指定分配器，嵌入式/无全局分配器场景的基石；稳定化的阻塞点是 `Box`/`Vec` 的 API 兼容性。
+
+判定依据：这三项同属「运行期资源管理」主题，任一稳定化都会改变 async 库的设计空间，关注 tracking issue 而非二手预测。
 
 ### 3.1 Async Traits 与静态分发
 >
@@ -554,7 +566,13 @@ Effects System（效果系统）是 Rust 远期最具雄心的类型系统（Typ
 
 ## 五、工具链与生态基础设施
 
-「工具链与生态基础设施」部分按 BorrowSanitizer 工业化、Cranelift 后端与编译速度与Rust 规范文档化的顺序逐层展开。
+工具链与生态基础设施的三条主线：
+
+- **BorrowSanitizer**：类比 AddressSanitizer 的借用违规动态检测，目标是给 `unsafe` 代码提供 Miri 级检查但接近原生速度——Miri 的 50–100 倍减速使其无法跑全量测试，BSan 旨在弥合这一鸿沟。
+- **Cranelift 后端**：`rustc_codegen_cranelift` 以编译速度换优化质量，debug 构建可提速 30–50%；`rustup component add rustc-codegen-cranelift-preview` 已可试用，缺 SIMD 内联等特性使其仅限开发期。
+- **Rust 规范文档化**：Ferrocene 团队推动的 FLS（Ferrocene Language Specification）与官方 Reference 的融合，是 Rust 进入安全关键认证（ISO 26262）的文档前提。
+
+判定依据：开发期编译速度痛点 → Cranelift；unsafe 审计 → Miri 全量 + BSan 趋势跟踪。
 
 ### 5.1 BorrowSanitizer 工业化
 

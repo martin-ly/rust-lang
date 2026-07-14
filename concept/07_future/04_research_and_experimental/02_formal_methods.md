@@ -32,7 +32,13 @@
 
 ## 一、基础定义
 
-本节从形式化验证（Formal Verification）、模型检测（Model Checking）与定理证明（Theorem Proving）切入，剖析「基础定义」的核心内容。
+形式化方法的三个基础概念按自动化程度与表达能力构成光谱：
+
+- **形式化验证（Formal Verification）**：总称——用数学方法证明系统满足规格。与测试的本质区别：测试采样输入空间，验证穷举（通过抽象或演绎）输入空间；Dijkstra 名言「测试只能证明有 bug，不能证明无 bug」即此分野。
+- **模型检测（Model Checking）**：**自动化**穷举有限状态空间（或抽象后的状态空间），验证时序性质（如「不会死锁」）；瓶颈是状态爆炸，Rust 侧代表是 Kani（CBMC 路径，位级精确但限界）。
+- **定理证明（Theorem Proving）**：**人机交互**构造数学证明，可处理无限状态与复杂数学性质；成本最高，Rust 侧代表是 Verus（SMT 辅助的验证感知编程）与 RustBelt（Coq/Iris，证明 Rust 类型系统本身的可靠性）。
+
+判定依据：协议级正确性 → 模型检测（TLA+）；实现级内存安全性质 → Kani；全新算法/并发原语 → Verus/Coq。
 
 ### 1.1 形式化验证（Formal Verification）
 
@@ -558,7 +564,15 @@ fn swap<T>(x: &mut T, y: &mut T) {
 
 ## 六、CI/CD 集成方案
 
-理解「CI/CD 集成方案」需要把握 GitHub Actions 集成、Pre-commit Hooks、分层验证策略、Kani 在 AWS 的流水线实践等8个方面，本节依次展开。
+形式化验证进入 CI/CD 的关键是**分层**：把验证成本摊到与变更频率匹配的阶段。
+
+1. **Pre-commit（秒级）**：`cargo check` + clippy；Kani 的最小冒烟套件（每个 harness 限界 unwind ≤3）。
+2. **PR 级 CI（分钟级）**：Kani 全量 harness（unwind 界按循环深度标定）+ Miri 跑 `unsafe` 密集模块的单测；两者必须 pin 工具链版本（Kani/Miri 与 rustc nightly 日期强绑定，版本漂移是 CI 随机失败的头号原因）。
+3. **Nightly/周级（小时级）**：Verus/Prusti 的完整规格验证、模糊测试（`cargo-fuzz`）长跑。
+
+AWS 的 Kani 流水线实践（s2n-quic 等项目）证明：harness 与代码同仓、`#[kani::proof]` 标注 + 增量缓存可使 PR 级验证维持在 10 分钟内。
+
+判定依据：任何超过 30 分钟的验证阶段都不会被开发者真正等待——分层是验证被采用的唯一路径。
 
 ### 6.1 GitHub Actions 集成
 
@@ -925,7 +939,13 @@ Microsoft Research 的 Verus 项目致力于让系统软件验证更加实用：
 
 ## 八、TLA+ / P 语言 / PObserve 的分布式验证
 
-本节将「TLA+ / P 语言 / PObserve 的分布式验证」分解为若干主题： TLA+（时序逻辑动作）、P 语言（状态机编程语言）、PObserve（运行时对齐）、分布式验证工作流等5个方面。
+分布式系统验证的三层工具链构成「规格 → 实现 → 运行」闭环：
+
+1. **TLA+（时序逻辑动作）**：在**设计层**建模协议为状态机，用 TLC 模型检测器穷举验证不变量（如 Raft 的选举安全性）；Amazon 用 TLA+ 验证 DynamoDB/S3 设计是行业标杆。发现的是「协议逻辑 bug」，早于任何代码。
+2. **P 语言**：状态机编程语言，规格与实现同构——P 程序既可模型检测又能生成可执行代码，缓解「规格与实现漂移」。
+3. **PObserve**：**运行时**对照——把 TLA+/P 规格编译为运行时监控器，校验生产 trace 是否违反规格，覆盖模型未建模的环境假设（如时钟、重试）。
+
+工作流判定：新协议先 TLA+ 建模（改动成本最低）→ Rust 实现 + Kani 验证局部性质 → PObserve 或 trace 校验上线后的行为对齐。三层各自捕获不同类别的错误，不可互相替代。
 
 ### 8.1 TLA+（时序逻辑动作）
 >

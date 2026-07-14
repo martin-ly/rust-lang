@@ -43,6 +43,7 @@
     - [测验 3：Stable MIR（rustc\_public）试图解决什么问题？](#测验-3stable-mirrustc_public试图解决什么问题)
     - [测验 4：为什么 rustdoc 更适合用 `rustc_interface` 而不是 `rustc_driver`？](#测验-4为什么-rustdoc-更适合用-rustc_interface-而不是-rustc_driver)
   - [权威来源索引](#权威来源索引)
+  - [⚠️ 反例与陷阱：stable 工具链上 extern crate rustc\_driver](#️-反例与陷阱stable-工具链上-extern-crate-rustc_driver)
 
 ---
 
@@ -253,3 +254,26 @@ rustdoc 需要拿到类型检查结果来生成文档，但不需要生成二进
 **文档版本**: 1.0
 **最后更新**: 2026-06-21
 **状态**: ✅ 已对齐 Rustc Dev Guide driver/interface 文档
+
+---
+
+## ⚠️ 反例与陷阱：stable 工具链上 extern crate rustc_driver
+
+**反例**（rustc 1.97 实测编译失败：E0463）：
+
+```rust,compile_fail
+extern crate rustc_driver;
+fn main() {}
+```
+
+`rustc_driver` 等编译器内部 crate 不在 stable 预编译库中分发；把 rustc 当库用必须 nightly + `rustc_private` feature 并安装 `rustc-dev` 组件。
+
+**修正**：
+
+```rust
+// nightly 下：
+// #![feature(rustc_private)]
+// extern crate rustc_driver;
+// 或改用 Stable MIR（rustc_public）的稳定封装。
+fn main() {}
+```

@@ -34,6 +34,7 @@
   - [认知路径](#认知路径)
   - [反命题](#反命题)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [⚠️ 反例与陷阱：返回局部变量的引用](#️-反例与陷阱返回局部变量的引用)
 
 ---
 
@@ -188,3 +189,29 @@ let matrix: Vec<f64> = vec![0.0; n * 1024];
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Stacked Borrows: An Aliasing Model for Rust (POPL 2021)](https://dl.acm.org/doi/10.1145/3371109) · [Tree Borrows: A New Aliasing Model for Rust (PLDI 2025, Distinguished Paper)](https://dl.acm.org/doi/10.1145/3735592)
+
+---
+
+## ⚠️ 反例与陷阱：返回局部变量的引用
+
+**反例**（rustc 1.97 实测编译失败：E0515）：
+
+```rust,compile_fail
+fn first_word<'a>() -> &'a String {
+    let s = String::from("hello world");
+    &s
+}
+fn main() { let _ = first_word(); }
+```
+
+局部 `String` 在函数返回时释放，返回其引用必然悬垂；Rust 在编译期拒绝，杜绝了 C/C++ 中经典的 use-after-free 性能优化事故源。
+
+**修正**：
+
+```rust
+fn first_word() -> String {
+    let s = String::from("hello world");
+    s
+}
+fn main() { let _ = first_word(); }
+```

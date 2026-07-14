@@ -130,6 +130,7 @@ mindmap
     - [测验 1：两种分派的时机（🟢 基础）](#测验-1两种分派的时机-基础)
     - [测验 2：单态化的双面性（🟡 进阶）](#测验-2单态化的双面性-进阶)
     - [测验 3：对象安全规则（🔴 专家）](#测验-3对象安全规则-专家)
+  - [⚠️ 反例与陷阱：带泛型方法的 trait 不能做成 dyn 对象](#️-反例与陷阱带泛型方法的-trait-不能做成-dyn-对象)
 
 ---
 
@@ -2308,3 +2309,29 @@ fn plugin_system_example() {
 **B、C、D 不满足**。按本页 §4.1 对象安全规则（Source: RFC 255）：方法**不返回 `Self`**（B 违反）、方法**没有泛型类型参数**（C 违反）、方法**有 `self` 接收者**（D 是关联函数，违反）。A 仅含 `&self` 方法，是对象安全的标准示例。
 
 </details>
+
+---
+
+## ⚠️ 反例与陷阱：带泛型方法的 trait 不能做成 dyn 对象
+
+**反例**（rustc 1.97 实测编译失败：E0038）：
+
+```rust,compile_fail
+trait Parser {
+    fn parse<T>(&self, input: &str) -> T;
+}
+fn make(p: &dyn Parser) { let _ = p; }
+fn main() {}
+```
+
+泛型方法使 vtable 无法确定单态化版本，trait 不再是 dyn-compatible；这是静态分发与动态分发的核心边界。
+
+**修正**：
+
+```rust
+trait Parser {
+    fn parse<T>(&self, input: &str) -> T where Self: Sized;
+}
+fn make(p: &dyn Parser) { let _ = p; }
+fn main() {}
+```

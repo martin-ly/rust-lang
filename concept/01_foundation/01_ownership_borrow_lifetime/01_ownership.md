@@ -1097,7 +1097,7 @@ unsafe {
 
 ## 十一、演进方向
 
-本节从补充：`Drop` 与 `std::mem::forget` 边界、补充：`ManuallyDrop` 与 `MaybeUninit` 所…、补充：Rust 所有权 vs C++ `unique_ptr`、补充：`Pin<T>` 与所有权的交互等6个方面切入，剖析「演进方向」的核心内容。
+本节梳理「Ownership（所有权）」在 Rust 1.97 之后的演进方向：补充：`Drop` 与 `std::mem::forget` 边界、补充：`ManuallyDrop` 与 `MaybeUninit` 所…、补充：Rust 所有权 vs C++ `unique_ptr`、补充：`Pin<T>` 与所有权的交互等方面。判断依据是已合并的 RFC、nightly 特性状态与 Edition 节奏——能落地的给出迁移路径，仍属设想的明确标注不确定性。演进方向不是承诺，而是当前设计张力最可能释放的位置；引用时请核对该特性在最新 stable 中的实际状态。
 
 ### 补充：`Drop` 与 `std::mem::forget` 边界
 

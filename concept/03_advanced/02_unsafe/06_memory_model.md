@@ -35,6 +35,44 @@
 
 ---
 
+## 📑 目录
+
+- [Rust 内存模型（Memory Model）](#rust-内存模型memory-model)
+  - [📑 目录](#-目录)
+  - [认知路径](#认知路径)
+  - [反命题决策树](#反命题决策树)
+  - [一、内存模型状态](#一内存模型状态)
+  - [二、字节（Bytes）](#二字节bytes)
+    - [为什么抽象字节重要](#为什么抽象字节重要)
+  - [三、Provenance](#三provenance)
+  - [四、初始化与 MaybeUninit](#四初始化与-maybeuninit)
+  - [五、与未定义行为的关系](#五与未定义行为的关系)
+  - [六、别名模型：Stacked Borrows / Tree Borrows](#六别名模型stacked-borrows--tree-borrows)
+  - [七、内存对齐与 Layout](#七内存对齐与-layout)
+  - [八、指针与整数转换规则](#八指针与整数转换规则)
+  - [九、常见内存模型反模式](#九常见内存模型反模式)
+    - [9.1 读取未初始化 padding](#91-读取未初始化-padding)
+    - [9.2 通过整数重建指针](#92-通过整数重建指针)
+    - [9.3 别名违规](#93-别名违规)
+  - [十、实践建议](#十实践建议)
+  - [十一、相关概念](#十一相关概念)
+  - [过渡段](#过渡段)
+  - [反向推理](#反向推理)
+  - [Rust 1.97.0 交叉语义](#rust-1970-交叉语义)
+    - [1. `cfg(target_has_atomic_primitive_alignment)` 的语义定位](#1-cfgtarget_has_atomic_primitive_alignment-的语义定位)
+    - [2. 与类型对齐 / `repr(C)` / `repr(align)` 的正交关系](#2-与类型对齐--reprc--repralign-的正交关系)
+    - [3. 与原子指令生成的关系（查询 → codegen 分支）](#3-与原子指令生成的关系查询--codegen-分支)
+    - [4. 跨平台边界与旧名废弃说明](#4-跨平台边界与旧名废弃说明)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：抽象字节（🟢 基础）](#测验-1抽象字节-基础)
+    - [测验 2：未初始化内存与 MaybeUninit（🟡 进阶）](#测验-2未初始化内存与-maybeuninit-进阶)
+    - [测验 3：Provenance 与别名模型（🔴 专家）](#测验-3provenance-与别名模型-专家)
+
+---
+
 ## 认知路径
 
 1. **问题识别**: 为什么 Rust 内存模型值得关注？正确编写 `unsafe` 代码、FFI 和内联汇编（Inline Assembly）都需要理解内存模型边界。

@@ -166,7 +166,14 @@ graph LR
 
 ## 二、技术细节
 
-理解「技术细节」需要把握 wasm32 目标三元组、wasm-bindgen 与 JS 互操作、Wasm 组件模型与Rust 1.96 链接器行为变更：`--allow-undefine…，本节依次展开。
+技术细节的四条主线：
+
+1. **wasm32 目标三元组**：`wasm32-unknown-unknown`（无系统接口，纯计算+JS glue）、`wasm32-wasip1`（WASI Preview 1，POSIX 风格 fd）、`wasm32-wasip2`（组件模型，推荐新项目）——`wasm32-wasi` 旧名已弃用。
+2. **wasm-bindgen 与 JS 互操作**：`#[wasm_bindgen]` 生成 JS 胶水，处理字符串（UTF-8↔UTF-16 编解码）、结构体（线性内存序列化）、闭包（`Closure::wrap` 生命周期需手动管理，常见泄漏点）。
+3. **Wasm 组件模型**：WIT 描述接口，组件间通过句柄/资源传递复杂类型——`cargo component` + `wasm32-wasip2` 是 Rust 侧原生路径。
+4. **Rust 1.96 链接器行为变更**：`--allow-undefined` 类链接选项默认收紧，未声明的 import 在链接期报错而非运行期——旧项目升级需审计 `#[link(wasm_import_module)]` 声明完整性。
+
+判定依据：浏览器场景 `unknown-unknown` + wasm-bindgen；服务端/插件 `wasip2`。
 
 ### 2.1 wasm32 目标三元组
 >
@@ -338,7 +345,14 @@ RUSTFLAGS="-Clink-arg=--allow-undefined" cargo build --target wasm32-unknown-unk
 
 ## 四、反命题与边界分析
 
-本节围绕「反命题与边界分析」展开，覆盖反命题树 与 边界极限 两个方面。
+反命题：「WASM 将取代容器/JS」——边界分析：
+
+1. **冷启动优势真实但场景有限**：毫秒级冷启动（对比容器百毫秒）只在边缘计算/FaaS 高密度调度中构成决策因素；长驻服务中该优势摊薄为零。
+2. **生态鸿沟**：WASI 系统接口覆盖仍不完整（socket 支持各运行时不一、无 fork、信号缺失），系统级程序移植常需重写 I/O 层——「编译过去就能跑」只适用于纯计算模块。
+3. **性能边界**：WASM 无多线程（threads 提案支持参差）、SIMD 覆盖窄于原生、GC 语言（经 WASM GC 提案）生态未熟——计算密集场景较原生慢 10–30% 是常态。
+4. **与 JS 的关系**：WASM 是 JS 的**协处理器**不是替代者——DOM/Web API 仍需 JS 胶水，纯 WASM 前端（Leptos/Dioxus）也经 wasm-bindgen 调 DOM。
+
+判定依据：采用 WASM 的正当理由是「可移植沙箱 + 多语言组合」，不是「性能」或「取代 X」。
 
 ### 4.1 反命题树
 >

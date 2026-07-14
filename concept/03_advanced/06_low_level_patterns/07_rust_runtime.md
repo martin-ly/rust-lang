@@ -277,3 +277,26 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/memmap2 — 生态权威 API 文档](https://docs.rs/memmap2) · [docs.rs/embedded-hal — 生态权威 API 文档](https://docs.rs/embedded-hal)
+
+---
+
+## ⚠️ 反例与陷阱：`main` 返回类型不合法
+
+**反例**（rustc 1.97 实测编译失败：E0277）：
+
+```rust,compile_fail
+fn main() -> i32 {
+    0
+}
+```
+
+Rust 运行时的入口契约：`main` 必须返回 `()` 或实现 `Termination` 的类型（如 `Result<(), E>`、`ExitCode`）；返回裸 `i32` 被拒绝。
+
+**修正**：
+
+```rust
+use std::process::ExitCode;
+fn main() -> ExitCode {
+    ExitCode::SUCCESS
+}
+```

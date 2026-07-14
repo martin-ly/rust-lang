@@ -28,6 +28,33 @@
 
 ---
 
+## 📑 目录
+
+- [异常安全：C++ 与 Rust 的错误处理哲学](#异常安全c-与-rust-的错误处理哲学)
+  - [📑 目录](#-目录)
+  - [一、核心命题](#一核心命题)
+  - [二、C++ 的异常保证体系](#二c-的异常保证体系)
+    - [2.1 三种异常保证](#21-三种异常保证)
+    - [2.2 C++ 异常传播与栈展开](#22-c-异常传播与栈展开)
+    - [2.3 析构函数中抛异常的危险](#23-析构函数中抛异常的危险)
+  - [三、Rust 的错误处理模型](#三rust-的错误处理模型)
+    - [3.1 可恢复错误：`Result<T, E>`](#31-可恢复错误resultt-e)
+    - [3.2 传播运算符 `?`](#32-传播运算符-)
+    - [3.3 不可恢复错误：panic](#33-不可恢复错误panic)
+  - [四、核心对比](#四核心对比)
+  - [五、`Drop` 的不可失败性](#五drop-的不可失败性)
+  - [六、C++23 `std::expected` vs Rust `Result`](#六c23-stdexpected-vs-rust-result)
+  - [七、形式化视角](#七形式化视角)
+  - [八、总结](#八总结)
+  - [九、延伸阅读](#九延伸阅读)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
+  - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [相关概念](#相关概念)
+  - [⚠️ 反例与陷阱：Drop 中二次 panic 导致 abort（运行时陷阱）](#️-反例与陷阱drop-中二次-panic-导致-abort运行时陷阱)
+
+---
+
 ## 一、核心命题
 
 > **C++ 和 Rust 对"程序出错时如何保持状态一致"给出了两套完全不同的答案。
@@ -282,3 +309,37 @@ f: S -> Result<S', E>
 ## 相关概念
 
 - [对应测验](../09_quizzes/30_quiz_cpp_rust_foundations.md) — C/C++ → Rust 工程层基础对比（RTTI、宏、异常安全、构造、move 语义）
+
+---
+
+## ⚠️ 反例与陷阱：Drop 中二次 panic 导致 abort（运行时陷阱）
+
+**反例**（运行时陷阱，代码可通过编译）：
+
+```rust
+struct Guard;
+impl Drop for Guard {
+    fn drop(&mut self) { panic!("drop panic"); }
+}
+fn main() {
+    let _g = Guard;
+    panic!("first panic");
+}
+```
+
+unwind 过程中析构函数再次 panic 会触发二次 panic，进程直接 abort；这对应 C++ 异常安全中「析构函数不得抛异常」的规则。
+
+**修正**：
+
+```rust
+struct Guard;
+impl Drop for Guard {
+    fn drop(&mut self) {
+        if std::thread::panicking() { return; } // unwind 中不再 panic
+    }
+}
+fn main() {
+    let _g = Guard;
+    panic!("first panic");
+}
+```

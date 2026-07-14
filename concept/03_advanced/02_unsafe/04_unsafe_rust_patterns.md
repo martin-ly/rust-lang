@@ -44,3 +44,29 @@
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/zerocopy — 生态权威 API 文档](https://docs.rs/zerocopy) · [docs.rs/memmap2 — 生态权威 API 文档](https://docs.rs/memmap2)
+
+---
+
+## ⚠️ 反例与陷阱：unsafe 操作必须在 unsafe 块内
+
+**反例**（rustc 1.97 实测编译失败：E0133）：
+
+```rust,compile_fail
+fn main() {
+    let x = 1i32;
+    let p = &x as *const i32;
+    println!("{}", *p);
+}
+```
+
+解引用裸指针是 unsafe 操作，E0133 强制用 `unsafe {}` 显式圈出信任边界——这是 unsafe 抽象「边界可见」原则的第一道防线。
+
+**修正**：
+
+```rust
+fn main() {
+    let x = 1i32;
+    let p = &x as *const i32;
+    unsafe { println!("{}", *p); }
+}
+```
