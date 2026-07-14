@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 495,
-    "generated_at": "2026-07-14T00:39:31.956941+00:00"
+    "generated_at": "2026-07-14T01:45:34.163549+00:00"
   },
   "files": [
     {
@@ -279,7 +279,9 @@
       "anti_propositions": [],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 8,
           "should_fail": false,
           "code_preview": "let result = may_fail(); match result {     Ok(v) => process(v),     Err(e) => l..."
@@ -7719,10 +7721,12 @@
           "flags": [],
           "lines": 7,
           "should_fail": false,
-          "code_preview": "// 你写的代码 async fn fetch_data(url: &str) -> String {     let response = reqwest::..."
+          "code_preview": "// 你写的代码 async fn fetch_data(url: &str) -> Result<String, reqwest::Error> {     ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 36,
           "should_fail": false,
           "code_preview": "// 编译器生成的状态机（简化版） enum FetchDataFuture {     Start { url: String },     WaitingR..."
@@ -15345,7 +15349,9 @@
           "code_preview": "// `?` 的概念展开（`expr` 为占位符，仅示意） // 等价展开（概念上） let x = expr?; // ≈ match Try::branch..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 18,
           "should_fail": false,
           "code_preview": "use thiserror::Error;  #[derive(Debug, Error)] enum ConfigError {     #[error(\"i..."
@@ -19471,7 +19477,9 @@
           "code_preview": "// HKT trait trait HKT {     type Applied<T>; }  // Option 实现 struct OptionHKT; ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "struct Connection<State> { /* 共享字段 */ _state: PhantomData<State> } struct Discon..."
@@ -22198,7 +22206,7 @@
       "layer": "L2",
       "title": "Newtype 与包装器模式：类型安全的零成本抽象",
       "positioning": "深入分析 Rust 中 **Newtype 模式**和**包装器类型**的设计——如何通过单字段元组结构体（Struct）创建语义上不同的类型，实现编译期单位检查、API 封装和安全边界，同时保持零运行时（Runtime）开销。",
-      "line_count": 829,
+      "line_count": 832,
       "theorem_chains": [
         {
           "text": "| Newtype 与包装器模式：类型安全的零成本抽象（Zero-Cost Abstraction） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -24745,7 +24753,9 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 4,
           "should_fail": false,
           "code_preview": "// std::marker（标准库定义，均为 unsafe auto trait） pub unsafe auto trait Send { /* 无方法，纯..."
@@ -24775,7 +24785,9 @@
           "code_preview": "// 需启用实验特性门 negative_impls —— 仅每日构建版可编译 // struct MainThreadOnly { _p: () } // i..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 18,
           "should_fail": false,
           "code_preview": "use std::marker::PhantomData; use std::rc::Rc;  /// 绑定创建线程的句柄（stable 惯用法） struct..."
@@ -24787,7 +24799,9 @@
           "code_preview": "use std::marker::PhantomData;  struct MyHandle(*mut u8, PhantomData<*mut u8>); /..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "use std::cell::Cell; use std::sync::Mutex;  fn generic_inherits() {     assert_s..."
@@ -25000,7 +25014,9 @@
           "code_preview": "// N 个线程共享同一数据 let data = Arc::new(Mutex::new(0)); let mut handles = vec![];  fo..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 14,
           "should_fail": false,
           "code_preview": "use rayon::prelude::*;  fn quicksort(arr: &mut [i32]) {     if arr.len() <= 1 { ..."
@@ -25014,7 +25030,9 @@
           "code_preview": "// 错误示范：每次递归都创建新线程，开销巨大 thread::spawn(|| quicksort(left)); thread::spawn(|| quic..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "fn quicksort(arr: &mut [i32]) {     if arr.len() <= 10_000 {         // 小数组：顺序排序..."
@@ -25034,7 +25052,9 @@
           "code_preview": "use std::sync::Mutex;  fn transfer(from: &Account, to: &Account, amount: i32) { ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 3,
           "should_fail": false,
           "code_preview": "// parking_lot 提供死锁检测功能 parking_lot::deadlock::check(); ..."
@@ -25806,7 +25826,9 @@
           "code_preview": "use std::sync::mpsc; use std::thread;  // CSP: 通过通道通信的并发进程 let (tx, rx) = mpsc::..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 17,
           "should_fail": false,
           "code_preview": "use tokio::sync::mpsc;  // 有界通道: 背压机制 —— 发送者阻塞/等待当缓冲区满 let (tx, mut rx) = mpsc::..."
@@ -26007,9 +26029,11 @@
           "code_preview": "async fn example() {     let data = [1, 2, 3];     let ptr = &data[0]; // ptr 指向..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 12,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "use tokio;  #[tokio::main] async fn main() {     let v = vec![1, 2, 3];     let ..."
         },
         {
@@ -26106,7 +26130,7 @@
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
-      "line_count": 3489,
+      "line_count": 3492,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注",
@@ -26624,12 +26648,14 @@
         },
         {
           "flags": [],
-          "lines": 18,
+          "lines": 19,
           "should_fail": false,
-          "code_preview": "use tokio::time::{sleep, Duration};  async fn risky_operation() {     let mut fi..."
+          "code_preview": "# use tokio::io::AsyncWriteExt; use tokio::time::{sleep, Duration};  async fn ri..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 18,
           "should_fail": false,
           "code_preview": "use tokio::io::AsyncWriteExt;  async fn safe_operation() -> std::io::Result<()> ..."
@@ -26642,7 +26668,7 @@
         },
         {
           "flags": [],
-          "lines": 11,
+          "lines": 13,
           "should_fail": false,
           "code_preview": "   // ❌ 不推荐：async 无法提升性能    async fn calculate_pi() -> f64 {        // 纯计算，无 I/O..."
         },
@@ -26653,7 +26679,9 @@
           "code_preview": "   // ❌ 过度工程：引入不必要的复杂性    #[tokio::main]    async fn main() {        println!(\"H..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "   // ❌ 不推荐：阻塞整个运行时    async fn call_c_library() {        unsafe { blocking_c_fu..."
@@ -26665,13 +26693,17 @@
           "code_preview": "async fn expensive_operation() {     println!(\"This will NOT print immediately!\"..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 3,
           "should_fail": false,
           "code_preview": "// 立即开始后台执行 let handle = tokio::spawn(expensive_operation()); ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 39,
           "should_fail": false,
           "code_preview": "// 用户代码：使用 .await async fn user_code() {     let result = async_operation().awai..."
@@ -26828,9 +26860,11 @@
           "code_preview": "use tokio::task;  async fn compute_hash(data: &str) -> String {     let data = d..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 15,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "async fn traverse_dir(path: &std::path::Path) -> Vec<String> {     let mut files..."
         },
         {
@@ -26965,7 +26999,9 @@
           "code_preview": "// 背压: 防止生产者压倒消费者  use tokio::sync::mpsc;  // 1. 有界通道（内置背压） async fn bounded_cha..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "use tokio::task;  async fn process_image(data: Vec<u8>) -> Result<Vec<u8>, task:..."
@@ -27043,7 +27079,9 @@
           "code_preview": "use tokio::sync::mpsc;  struct Actor {     rx: mpsc::Receiver<Command>,     coun..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 15,
           "should_fail": false,
           "code_preview": "// Actor 的所有状态修改都通过 channel 消息串行化 // 无论多少客户端并发发送消息，handle() 始终单线程串行执行  let (tx, ..."
@@ -27061,7 +27099,9 @@
           "code_preview": "// 危险场景： // 1. write_all 开始写入 1024 字节 // 2. 写到 512 字节时，sleep(5s) 先完成 // 3. selec..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "use tokio::time::timeout;  async fn write_with_timeout(file: &mut File, data: &[..."
@@ -27112,7 +27152,7 @@
       "layer": "L3",
       "title": "Future 与 Executor 机制 (Future and Executor Mechanisms)",
       "positioning": "",
-      "line_count": 1231,
+      "line_count": 1233,
       "theorem_chains": [
         {
           "text": "- **与事件循环的衔接**：IO 型执行器（tokio）把 Waker 注册到 epoll/io_uring 的就绪回调——IO 就绪 ⟹ wake ⟹ 任务入队 ⟹ 下一次 poll。",
@@ -27170,9 +27210,9 @@
         },
         {
           "flags": [],
-          "lines": 11,
+          "lines": 12,
           "should_fail": false,
-          "code_preview": "pub struct Context<'a> {     waker: &'a Waker,     // ... 其他字段 }  impl<'a> Conte..."
+          "code_preview": "# use std::task::Waker; pub struct Context<'a> {     waker: &'a Waker,     // ....."
         },
         {
           "flags": [],
@@ -27187,7 +27227,9 @@
           "code_preview": "use std::collections::VecDeque; use std::future::Future; use std::pin::Pin; use ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 14,
           "should_fail": false,
           "code_preview": "fn main() {     let executor = SimpleExecutor::new();      executor.spawn(async ..."
@@ -27219,19 +27261,25 @@
           "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll};  str..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "async fn example() -> i32 {     let a = async_op1().await;     let b = async_op2..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 52,
           "should_fail": false,
           "code_preview": "enum ExampleState {     Start,     WaitingOp1(Op1Future),     WaitingOp2(Op2Futu..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 21,
           "should_fail": false,
           "code_preview": "// async 版本 async fn async_version() -> i32 {     let a = compute_a().await;    ..."
@@ -27249,19 +27297,23 @@
           "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll}; use ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 19,
           "should_fail": false,
           "code_preview": "use pin_project::pin_project;  #[pin_project] struct MyFuture<F> {     #[pin]   ..."
         },
         {
           "flags": [],
-          "lines": 10,
+          "lines": 11,
           "should_fail": false,
-          "code_preview": "// ❌ 不必要的堆分配 fn bad() -> Pin<Box<dyn Future<Output = i32>>> {     Box::pin(async..."
+          "code_preview": "# use std::pin::Pin; // ❌ 不必要的堆分配 fn bad() -> Pin<Box<dyn Future<Output = i32>>>..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "impl Future for MyFuture {     type Output = i32;      #[inline]     fn poll(sel..."
@@ -27337,19 +27389,25 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "async fn fetch() {     let conn = open_conn().await;   // 挂起点 A     let data = c..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 8,
           "should_fail": false,
           "code_preview": "enum FetchFut {     Start,                                  // s0：尚未 poll     Aw..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "tokio::select! {     biased;                    // 按声明顺序轮询（否则随机）     msg = rx.re..."
@@ -27361,43 +27419,57 @@
           "code_preview": "// ❌ 反例：半行数据丢失 use tokio::io::{AsyncBufReadExt, BufReader};  async fn bad_lines(..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 16,
           "should_fail": false,
           "code_preview": "// ✅ 修正一：把 select 移出“逐行”粒度——取消只发生在帧边界 async fn ok_lines(stream: tokio::net::TcpS..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "// ❌ 反例：锁保护的状态只更新了一半 use tokio::sync::Mutex;  struct Account { balance: i64 }  a..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 17,
           "should_fail": false,
           "code_preview": "// ✅ 修正一：缩短临界区——锁内不 await，先做可回滚的本地计算 async fn ok_transfer(a: &Mutex<Account>, b:..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "// ❌ 反例：多步写入在任意 await 点取消都会留下垃圾 async fn bad_import(db: &Pool, rows: Vec<Row>) -..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "// ✅ 修正：两阶段——可取消的暂存 + 不可取消的提交 async fn ok_import(db: &Pool, rows: Vec<Row>) -> R..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "// ❌ 反例：download 内部有断点续传进度，每次落选都从头开始 loop {     tokio::select! {         r = dow..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "// ✅ 修正：把 Future 提升出循环，pin 住后复用 let mut dl = std::pin::pin!(download(&url)); loo..."
@@ -27439,7 +27511,7 @@
       "layer": "L3",
       "title": "Async 边界全景（Async Boundary Panorama）",
       "positioning": "汇总 Rust 异步编程全部**语义边界**——await 点两侧什么成立/什么不成立、取消何时安全、自引用何时合法、Future 何时可跨线程、运行时契约何时被打破、async trait 何时可对象化。每一节给出**边界陈述 → 反例 → 判定条件**三段式。",
-      "line_count": 524,
+      "line_count": 525,
       "theorem_chains": [
         {
           "text": "- **推论 1**: 跨 await 持有引用 ⟹ 状态机字段含引用 ⟹ 该引用指向的数据必须比 Future 活得久。",
@@ -27568,22 +27640,26 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 8,
           "should_fail": false,
           "code_preview": "async fn bad() {     let data = vec![1, 2, 3];     let r = &data[0];     drop(da..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "async fn also_bad(map: &HashMap<i32, i32>) {     let v = &map[&1];        // 借用入..."
         },
         {
           "flags": [],
-          "lines": 9,
+          "lines": 10,
           "should_fail": false,
-          "code_preview": "loop {     select! {         line = reader.next_line() => {   // ❌ 取消不安全：       ..."
+          "code_preview": "# macro_rules! select { ($($t:tt)*) => {} } loop {     select! {         line = ..."
         },
         {
           "flags": [],
@@ -27592,25 +27668,33 @@
           "code_preview": "struct SelfRef { data: String, ptr: *const u8 }  let mut s = SelfRef { data: \"ab..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "async fn self_referential() {     let s = String::from(\"abc\");     let r = &s;  ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "async fn not_send(rc: Rc<i32>) {     let guard = rc.clone();     some_io().await..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 8,
           "should_fail": false,
           "code_preview": "async fn is_send(rc: Rc<i32>) {     {         let guard = rc.clone();         pr..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "async fn starves_executor() {     std::thread::sleep(Duration::from_secs(1));  /..."
@@ -27669,7 +27753,7 @@
       "layer": "L3",
       "title": "Async Closures（异步闭包）",
       "positioning": "",
-      "line_count": 643,
+      "line_count": 644,
       "theorem_chains": [
         {
           "text": "| async closures 提供原生异步闭包 ⟹ 简化高阶异步回调 | 掌握旧写法 `\\|x\\| async move {}` | 能用 `async \\|x\\| {}` 编写更简洁的异步回调 | 高 |",
@@ -27691,19 +27775,25 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 8,
           "should_fail": false,
           "code_preview": "// 旧写法：闭包返回一个 Future fn make_callback() -> impl FnOnce() -> Pin<Box<dyn Future<O..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "fn make_callback() -> impl AsyncFnOnce() -> i32 {     async || {         tokio::..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 17,
           "should_fail": false,
           "code_preview": "use std::time::Duration;  // 无参数 let f = async || {     println!(\"hello\");     4..."
@@ -27721,7 +27811,9 @@
           "code_preview": "// Rust 2024 edition：无需 use fn accept_async_callback<F>(f: F) -> impl Future<Out..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 17,
           "should_fail": false,
           "code_preview": "async fn process_items<T, F>(items: Vec<T>, predicate: F) -> Vec<T> where     T:..."
@@ -27735,13 +27827,17 @@
           "code_preview": "use std::future::Future;  pub trait AsyncFn<Args>: AsyncFnMut<Args> {     type O..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 29,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "use tokio::sync::mpsc;  struct AsyncHandler<T> {     handler: Box<dyn AsyncFn(T)..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 27,
           "should_fail": false,
           "code_preview": "#[derive(Clone)] struct Request {     path: String,     headers: Vec<(String, St..."
@@ -28640,7 +28736,9 @@
           "code_preview": "// ⚠️ nightly-only：#![feature(return_type_notation)]，stable 1.97 不可用 async fn sp..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 17,
           "should_fail": false,
           "code_preview": "//! trait-variant 0.1.2 + tokio 1.52.3：rustc 1.97.0 实测运行通过（输出 ok） #[trait_varian..."
@@ -29061,7 +29159,9 @@
           "code_preview": "// 演示 Rust 2021 及更早语法（Edition 2024 中 extern 块必须 unsafe，不可编译） // Rust 2021 及更早：ex..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 14,
           "should_fail": false,
           "code_preview": "// Rust 2024：extern 块必须 unsafe unsafe extern \"C\" {     // sqrt 签名简单、调用安全：可标记为 sa..."
@@ -29445,7 +29545,9 @@
           "code_preview": "pub struct BadVec { ptr: *mut u8, len: usize }  impl BadVec {     // ❌ 非 sound：s..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "impl BadVec {     // ✅ sound：unsafe fn 把前置条件显式化，责任交接给调用方     /// # Safety     //..."
@@ -29931,7 +30033,9 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "// 危险：可能丢失 provenance let ptr: *mut u8 = alloc(layout); let addr = ptr as usize;..."
@@ -30034,7 +30138,7 @@
       "layer": "L3",
       "title": "Unsafe 参考（Unsafe Reference）",
       "positioning": "",
-      "line_count": 318,
+      "line_count": 319,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `unsafe` 关键字、块、操作和 UB 契约串联起来。",
@@ -30337,7 +30441,9 @@
           "code_preview": "// C 预处理器: 不卫生，名称冲突！ // #define SWAP(a, b) { int temp = a; a = b; b = temp; } //..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "// 需启用实验特性门 trace_macros（每日构建版工具链）  macro_rules! test {     ($x:expr) => { $x + ..."
@@ -30593,7 +30699,9 @@
           "code_preview": "// ✅ macro 关键字语法（不稳定，需启用实验特性门 decl_macro） // 需启用实验特性门 decl_macro（每日构建版工具链）  pub(..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 15,
           "should_fail": false,
           "code_preview": "// ❌ 反例: macro 关键字尚未稳定，不能在 stable Rust 使用 // 以下代码仅在每日构建版编译： // 需启用实验特性门 decl_mac..."
@@ -30827,13 +30935,17 @@
           "code_preview": "use proc_macro::TokenStream;  #[proc_macro] pub fn my_macro(input: TokenStream) ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 29,
           "should_fail": false,
           "code_preview": "use syn::parse::{Parse, ParseStream}; use syn::{Ident, Token, LitStr};  struct S..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 16,
           "should_fail": false,
           "code_preview": "use syn::{Error, Data};  #[proc_macro_derive(Builder)] pub fn derive_builder(inp..."
@@ -30934,7 +31046,9 @@
           "code_preview": "macro_rules! generate_with_docs {     ($name:ident, $doc:expr) => {         #[do..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "use proc_macro2::Span; use quote::quote_spanned;  fn generate_getter(field: &syn..."
@@ -30976,7 +31090,9 @@
           "code_preview": "const fn factorial(n: u32) -> u32 {     match n { 0 | 1 => 1, _ => n * factorial..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 11,
           "should_fail": false,
           "code_preview": "use criterion::{black_box, criterion_group, criterion_main, Criterion};  fn benc..."
@@ -31017,7 +31133,7 @@
       "layer": "L3",
       "title": "宏调试与诊断",
       "positioning": "",
-      "line_count": 386,
+      "line_count": 387,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过展开追踪 ⟹ span 保留 ⟹ 精确诊断的定理链提升排错效率。",
@@ -31073,7 +31189,9 @@
           "code_preview": "use proc_macro::TokenStream; use syn::{parse_macro_input, DeriveInput, Error};  ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 16,
           "should_fail": false,
           "code_preview": "fn validate_all(input: &DeriveInput) -> Result<(), Vec<Error>> {     let mut err..."
@@ -31085,7 +31203,9 @@
           "code_preview": "use proc_macro_error::{abort, proc_macro_error};  #[proc_macro_derive(MyTrait)] ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "use std::time::Instant;  #[proc_macro] pub fn timed_macro(input: TokenStream) ->..."
@@ -31129,7 +31249,7 @@
       "layer": "L3",
       "title": "生产级宏开发",
       "positioning": "",
-      "line_count": 407,
+      "line_count": 408,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过兼容性 ⟹ 诊断质量 ⟹ 可持续维护的定理链评估工程成熟度。",
@@ -31168,24 +31288,30 @@
       "code_blocks": [
         {
           "flags": [],
-          "lines": 3,
+          "lines": 4,
           "should_fail": false,
-          "code_preview": "// 生成代码时使用全限定路径，避免 edition 相关解析差异 quote! { ::std::vec::Vec::new() } ..."
+          "code_preview": "# macro_rules! quote { ($($t:tt)*) => {} } // 生成代码时使用全限定路径，避免 edition 相关解析差异 quo..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "use syn::{Error, Field};  fn validate_field(field: &Field) -> Result<(), Error> ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 15,
           "should_fail": false,
           "code_preview": "use syn::Error;  fn report_type_mismatch(field: &syn::Field, expected: &str, fou..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "match validate_all(&input) {     Ok(_) => generate_code(),     Err(errors) => er..."
@@ -31209,7 +31335,9 @@
           "code_preview": "/// ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "// v1.8.0: 先添加弃用警告 #[deprecated(since = \"1.8.0\", note = \"will be removed in 2.0...."
@@ -31245,7 +31373,7 @@
       "layer": "L3",
       "title": "术语表 - C11 Macro System",
       "positioning": "",
-      "line_count": 720,
+      "line_count": 723,
       "theorem_chains": [
         {
           "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
@@ -31293,7 +31421,9 @@
           "code_preview": "macro_rules! vec_of_strings {     ($($element:expr),*) => {         vec![$(Strin..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "#[proc_macro_derive(MyTrait)] pub fn my_trait_derive(input: TokenStream) -> Toke..."
@@ -31329,49 +31459,65 @@
           "code_preview": "use proc_macro::TokenStream;  #[proc_macro] pub fn my_macro(input: TokenStream) ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "#[derive(Debug, Clone, MyTrait)] struct MyStruct {     field: i32, } ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "#[proc_macro_derive(MyTrait)] pub fn my_trait_derive(input: TokenStream) -> Toke..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "#[route(GET, \"/\")] fn index() -> String {     \"Hello!\".to_string() } ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "#[proc_macro_attribute] pub fn route(attr: TokenStream, item: TokenStream) -> To..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 2,
           "should_fail": false,
           "code_preview": "let sql = sql!(SELECT * FROM users WHERE id = 1); ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "#[proc_macro] pub fn sql(input: TokenStream) -> TokenStream {     // 解析 SQL，生成代码..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "use syn::{parse_macro_input, DeriveInput};  #[proc_macro_derive(MyTrait)] pub fn..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 11,
           "should_fail": false,
           "code_preview": "use quote::quote;  let name = &input.ident; let expanded = quote! {     impl MyT..."
@@ -31390,15 +31536,15 @@
         },
         {
           "flags": [],
-          "lines": 3,
+          "lines": 4,
           "should_fail": false,
-          "code_preview": "// 这里是 call site my_macro!(some_input); ..."
+          "code_preview": "# macro_rules! my_macro { ($($t:tt)*) => {} } // 这里是 call site my_macro!(some_in..."
         },
         {
           "flags": [],
           "lines": 5,
           "should_fail": false,
-          "code_preview": "// 这里是 definition site macro_rules! my_macro {     // ... } ..."
+          "code_preview": "// 这里是 definition site macro_rules! my_macro {     () => {}; } ..."
         },
         {
           "flags": [],
@@ -31408,7 +31554,7 @@
         },
         {
           "flags": [],
-          "lines": 6,
+          "lines": 7,
           "should_fail": false,
           "code_preview": "use proc_macro2::TokenStream;  fn my_helper(input: TokenStream) -> TokenStream {..."
         },
@@ -31419,31 +31565,39 @@
           "code_preview": "#[test] fn ui_tests() {     let t = trybuild::TestCases::new();     t.compile_fa..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "// 代码 let x = 1 + 2;  // AST (简化表示) LetStmt {     pat: Ident(\"x\"),     init: Bin..."
         },
         {
           "flags": [],
-          "lines": 6,
+          "lines": 7,
           "should_fail": false,
-          "code_preview": "html! {     <div class=\"container\">         <h1>\"Hello, World!\"</h1>     </div> ..."
+          "code_preview": "# macro_rules! html { ($($t:tt)*) => {} } html! {     <div class=\"container\">   ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "#[derive(Builder)] struct User {     name: String,     age: u32, }  // 自动生成 User..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 8,
           "should_fail": false,
           "code_preview": "// 宏定义的高层抽象 for_each!(vec, |x| println!(\"{}\", x));  // 展开后等价于 for x in vec {    ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 2,
           "should_fail": false,
           "code_preview": "const SIZE: usize = compute_size!(some_input); ..."
@@ -31479,7 +31633,7 @@
       "layer": "L3",
       "title": "常见问题 (FAQ) - C11 Macro System",
       "positioning": "",
-      "line_count": 805,
+      "line_count": 807,
       "theorem_chains": [
         {
           "text": "> **定理链**: Common Question ⟹ Mechanism Explanation ⟹ Best Practice",
@@ -31527,7 +31681,9 @@
           "code_preview": "macro_rules! vec_of_strings {     ($($element:expr),*) => {         vec![$(Strin..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 3,
           "should_fail": false,
           "code_preview": "#[derive(MyTrait)] struct MyStruct { } ..."
@@ -31552,9 +31708,9 @@
         },
         {
           "flags": [],
-          "lines": 7,
+          "lines": 8,
           "should_fail": false,
-          "code_preview": "// 1. 先用简单输入测试 my_macro!(x);  // 2. 逐步增加复杂度 my_macro!(x, y); my_macro!(x, y, z);..."
+          "code_preview": "# macro_rules! my_macro { ($($t:tt)*) => {} } // 1. 先用简单输入测试 my_macro!(x);  // 2..."
         },
         {
           "flags": [],
@@ -31572,7 +31728,7 @@
           "flags": [],
           "lines": 21,
           "should_fail": false,
-          "code_preview": "macro_rules! calculate {     // 加法     ($a:expr + $b:expr) => {         $a + $b ..."
+          "code_preview": "macro_rules! calculate {     // 加法（`expr` 片段后只允许 `=>`、`,`、`;`，故用逗号分隔操作符）     ($a..."
         },
         {
           "flags": [],
@@ -31581,13 +31737,17 @@
           "code_preview": "use proc_macro::TokenStream; use quote::quote; use syn::{parse_macro_input, Deri..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "#[proc_macro] pub fn my_macro(input: TokenStream) -> TokenStream {     // 手动解析 T..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "#[proc_macro] pub fn my_macro(input: TokenStream) -> TokenStream {     let input..."
@@ -31611,7 +31771,9 @@
           "code_preview": "#[test] fn test_macro_expansion() {     macrotest::expand(\"tests/expand/*.rs\"); ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "use std::fs;  #[proc_macro] pub fn include_config(_item: TokenStream) -> TokenSt..."
@@ -31629,13 +31791,17 @@
           "code_preview": "macro_rules! only_two_args {     ($a:expr, $b:expr) => { /* OK */ };     ($($arg..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "use syn::spanned::Spanned;  let span = field.span(); return syn::Error::new(span..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "return syn::Error::new(     span,     \"Missing #[id] attribute. Try: #[derive(My..."
@@ -31668,7 +31834,7 @@
           "flags": [],
           "lines": 6,
           "should_fail": false,
-          "code_preview": "// 库中 #[macro_export] macro_rules! my_macro {     // ... } ..."
+          "code_preview": "// 库中 #[macro_export] macro_rules! my_macro {     () => {}; } ..."
         },
         {
           "flags": [],
@@ -31692,22 +31858,26 @@
           "flags": [],
           "lines": 3,
           "should_fail": false,
-          "code_preview": "   // 使用完整路径    ::std::vec::Vec::new()    ..."
+          "code_preview": "   // 使用完整路径    let _v: Vec<i32> = ::std::vec::Vec::new();    ..."
         },
         {
           "flags": [],
-          "lines": 7,
+          "lines": 8,
           "should_fail": false,
-          "code_preview": "// 目标语法 html! {     <div class=\"container\">         <h1>\"Hello\"</h1>     </div> ..."
+          "code_preview": "# macro_rules! html { ($($t:tt)*) => {} } // 目标语法 html! {     <div class=\"contai..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "#[proc_macro] pub fn html(input: TokenStream) -> TokenStream {     // 解析自定义语法   ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "struct HtmlParser {     input: ParseStream, }  impl HtmlParser {     fn parse_el..."
@@ -31719,7 +31889,9 @@
           "code_preview": "macro_rules! make_macro {     ($name:ident) => {         macro_rules! $name {   ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "use criterion::{black_box, criterion_group, criterion_main, Criterion};  fn benc..."
@@ -31761,7 +31933,7 @@
       "layer": "L3",
       "title": "syn & quote 完整参考",
       "positioning": "",
-      "line_count": 1223,
+      "line_count": 1236,
       "theorem_chains": [
         {
           "text": "> **定理链**: Parse Input ⟹ Transform AST ⟹ Emit Tokens",
@@ -31818,40 +31990,50 @@
           "code_preview": "use syn::{parse_macro_input, DeriveInput, ItemFn, Expr}; use proc_macro::TokenSt..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 14,
           "should_fail": false,
           "code_preview": "pub struct DeriveInput {     pub attrs: Vec<Attribute>,     pub vis: Visibility,..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 42,
           "should_fail": false,
           "code_preview": "use syn::{parse_macro_input, DeriveInput, Data, Fields};  #[proc_macro_derive(My..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 14,
           "should_fail": false,
           "code_preview": "pub struct ItemFn {     pub attrs: Vec<Attribute>,     pub vis: Visibility,     ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 22,
           "should_fail": false,
           "code_preview": "use syn::{parse_macro_input, ItemFn};  #[proc_macro_attribute] pub fn log_calls(..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 33,
           "should_fail": false,
           "code_preview": "use syn::{parse::{Parse, ParseStream}, Result, Ident, Token};  struct MyInput { ..."
         },
         {
           "flags": [],
-          "lines": 9,
+          "lines": 14,
           "should_fail": false,
-          "code_preview": "pub enum Type {     Path(TypePath),           // std::vec::Vec     Reference(Typ..."
+          "code_preview": "# struct TypePath; # struct TypeReference; # struct TypeTuple; # struct TypeArra..."
         },
         {
           "flags": [],
@@ -31861,18 +32043,20 @@
         },
         {
           "flags": [],
-          "lines": 8,
+          "lines": 12,
           "should_fail": false,
-          "code_preview": "pub enum Expr {     Binary(ExprBinary),    // a + b     Call(ExprCall),        /..."
+          "code_preview": "# struct ExprBinary; # struct ExprCall; # struct ExprIf; # struct ExprMatch; pub..."
         },
         {
           "flags": [],
-          "lines": 7,
+          "lines": 10,
           "should_fail": false,
-          "code_preview": "pub enum Pat {     Ident(PatIdent),      // x     Tuple(PatTuple),      // (x, y..."
+          "code_preview": "# struct PatIdent; # struct PatTuple; # struct PatStruct; pub enum Pat {     Ide..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "pub struct Path {     pub segments: Punctuated<PathSegment, Token![::]>, }  pub ..."
@@ -31890,13 +32074,17 @@
           "code_preview": "use syn::{Attribute, Meta, MetaList, MetaNameValue};  fn parse_attributes(attrs:..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 27,
           "should_fail": false,
           "code_preview": "use syn::{Attribute, Meta, MetaList};  fn parse_derive_helper(attr: &Attribute) ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 26,
           "should_fail": false,
           "code_preview": "use syn::{parse::{Parse, ParseStream}, Result, Ident, LitStr, Token};  struct My..."
@@ -31921,9 +32109,9 @@
         },
         {
           "flags": [],
-          "lines": 9,
+          "lines": 10,
           "should_fail": false,
-          "code_preview": "let names = vec![quote!(x), quote!(y), quote!(z)]; let types = vec![quote!(i32),..."
+          "code_preview": "# use quote::quote; let names = vec![quote!(x), quote!(y), quote!(z)]; let types..."
         },
         {
           "flags": [],
@@ -31940,25 +32128,33 @@
           "code_preview": "let checks = fields.iter().map(|f| {     let ty = &f.ty;     quote_spanned! {f.s..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "use quote::{quote, quote_spanned}; use syn::spanned::Spanned;  let field = /* sy..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 20,
           "should_fail": false,
           "code_preview": "use quote::quote_spanned; use syn::spanned::Spanned;  fn generate_impl(input: &s..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 24,
           "should_fail": false,
           "code_preview": "use quote::{ToTokens, TokenStreamExt};  struct MyType {     name: syn::Ident,   ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 22,
           "should_fail": false,
           "code_preview": "use quote::ToTokens;  #[derive(Clone)] struct Config {     debug: bool,     opti..."
@@ -31982,19 +32178,25 @@
           "code_preview": "use proc_macro::TokenStream; use quote::quote; use syn::{parse_macro_input, Iden..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 25,
           "should_fail": false,
           "code_preview": "use syn::{Error, Result}; use quote::quote;  fn validate_input(input: &syn::Deri..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 11,
           "should_fail": false,
           "code_preview": "// ✅ 好：复用 TokenStream let mut output = TokenStream::new(); for item in items {  ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 38,
           "should_fail": false,
           "code_preview": "use proc_macro2::TokenStream; use quote::quote;  // 核心逻辑使用 proc_macro2 fn my_tra..."
@@ -32062,7 +32264,7 @@
       "layer": "L3",
       "title": "宏卫生性完整参考",
       "positioning": "",
-      "line_count": 984,
+      "line_count": 985,
       "theorem_chains": [
         {
           "text": "> **定理链**: Hygiene ⟹ Span Selection ⟹ Name Collision Prevention",
@@ -32144,9 +32346,9 @@
         },
         {
           "flags": [],
-          "lines": 6,
+          "lines": 7,
           "should_fail": false,
-          "code_preview": "// 调用 my_macro!();  // 展开为（概念上） let result = 42;  // result 在调用点作用域 ..."
+          "code_preview": "# macro_rules! my_macro { ($($t:tt)*) => {} } // 调用 my_macro!();  // 展开为（概念上） le..."
         },
         {
           "flags": [],
@@ -32161,13 +32363,17 @@
           "code_preview": "use proc_macro::Span;  let ident = syn::Ident::new(\"helper\", Span::mixed_site())..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "macro_rules! outer {     () => {         macro_rules! inner {  // 内部宏           ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 17,
           "should_fail": false,
           "code_preview": "use quote::quote;  #[proc_macro] pub fn gen_code(_input: TokenStream) -> TokenSt..."
@@ -32185,13 +32391,17 @@
           "code_preview": "// 测试框架 macro_rules! assert_eq_with_context {     ($left:expr, $right:expr) => {..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 14,
           "should_fail": false,
           "code_preview": "macro_rules! with_context {     ($body:expr) => {         {             let ctx ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 14,
           "should_fail": false,
           "code_preview": "macro_rules! with_context {     ($ctx:ident, $body:expr) => {         {         ..."
@@ -32251,7 +32461,9 @@
           "code_preview": "#[test] fn test_hygiene() {     let local = 10;     my_macro!(local);     assert..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "// 需启用实验特性门 decl_macro（每日构建版工具链）  pub macro my_macro($e:expr) {     $e * 2 } ..."
@@ -32342,7 +32554,7 @@
           "flags": [],
           "lines": 3,
           "should_fail": false,
-          "code_preview": "> // vec![1, 2, 3] 展开为： > { let mut temp_vec = Vec::new(); temp_vec.push(1); tem..."
+          "code_preview": "> // vec![1, 2, 3] 展开为： > let v = { let mut temp_vec = Vec::new(); temp_vec.push..."
         },
         {
           "flags": [
@@ -32525,7 +32737,7 @@
       "layer": "L3",
       "title": "条件编译（Conditional Compilation）",
       "positioning": "",
-      "line_count": 328,
+      "line_count": 327,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -32554,7 +32766,9 @@
           "code_preview": "#![no_std] #![cfg(false)]  // 该函数不会被包含，但 #![no_std] 仍然有效保留 pub fn example() {} ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 4,
           "should_fail": false,
           "code_preview": "#[cfg_attr(target_os = \"linux\", path = \"linux.rs\")] #[cfg_attr(windows, path = \"..."
@@ -34012,7 +34226,9 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "// tokio::sync::mpsc::channel 自动背压 let (tx, mut rx) = tokio::sync::mpsc::channel..."
@@ -34175,7 +34391,9 @@
           "code_preview": "// ❌ 16 字节（padding） enum Bad { A(u8, u64) }  // ✅ 16 字节但利用更紧凑：将大字段对齐在前 enum Good..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "// ❌ 数组 of pointers：cache miss 高 let matrix: Vec<Box<[f64; 1024]>> = vec![...; n..."
@@ -34610,7 +34828,9 @@
           "code_preview": "use std::cell::UnsafeCell; use std::sync::{LockResult, Mutex, MutexGuard};  // 简..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "impl<T> MyVec<T> {     fn pop(&mut self) -> Option<T> {         if self.len == 0..."
@@ -34826,7 +35046,9 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 76,
           "should_fail": false,
           "code_preview": "use std::process::{Command, Stdio}; use std::sync::{Arc, Mutex}; use std::collec..."
@@ -34948,7 +35170,9 @@
           "code_preview": "use tokio::process::Command;  async fn run_many() -> Result<(), Box<dyn std::err..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 15,
           "should_fail": false,
           "code_preview": "async fn cancellable_child() -> Result<(), Box<dyn std::error::Error>> {     let..."
@@ -34960,7 +35184,9 @@
           "code_preview": "use tokio::process::Command; use tokio::sync::Semaphore; use std::sync::Arc;  pu..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 33,
           "should_fail": false,
           "code_preview": "use tokio::process::Command; use tokio::sync::mpsc;  pub struct AsyncProcessPool..."
@@ -35197,7 +35423,9 @@
           "code_preview": "use std::process::{Command, Stdio}; use std::io::Write;  fn basic_pipe() -> Resu..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 15,
           "should_fail": false,
           "code_preview": "use std::os::unix::net::{UnixListener, UnixStream}; use std::io::{Read, Write}; ..."
@@ -35215,7 +35443,9 @@
           "code_preview": "// 示意：使用 memmap2 创建共享内存映射 use memmap2::MmapOptions; use std::fs::OpenOptions;  f..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "use signal_hook::iterator::Signals;  fn handle_signals() -> Result<(), Box<dyn s..."
@@ -40825,7 +41055,7 @@
           "flags": [],
           "lines": 5,
           "should_fail": false,
-          "code_preview": "#[no_mangle] pub extern \"C\" fn plugin_init() {} #[no_mangle] pub extern \"C\" fn p..."
+          "code_preview": "#[unsafe(no_mangle)] pub extern \"C\" fn plugin_init() {} #[unsafe(no_mangle)] pub..."
         }
       ],
       "sources": [],
@@ -41078,18 +41308,20 @@
       "layer": "L4",
       "title": "析构函数与 Drop Scope（Destructors）",
       "positioning": "",
-      "line_count": 219,
+      "line_count": 220,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
         {
           "flags": [],
-          "lines": 6,
+          "lines": 7,
           "should_fail": false,
-          "code_preview": "fn patterns_in_parameters(     (x, _): (PrintOnDrop, PrintOnDrop),     (_, y): (..."
+          "code_preview": "# struct PrintOnDrop; fn patterns_in_parameters(     (x, _): (PrintOnDrop, Print..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "{     let declared_in_block = PrintOnDrop(\"inner\"); } let declared_last = PrintO..."
@@ -41181,7 +41413,9 @@
           "code_preview": "let r#match = 1; let r#type = \"keyword as identifier\"; ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 2,
           "should_fail": false,
           "code_preview": "let _ = some_side_effect(); ..."
@@ -41252,7 +41486,7 @@
       "layer": "L4",
       "title": "条目参考（Items Reference）",
       "positioning": "",
-      "line_count": 258,
+      "line_count": 259,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块（Module）、item 和声明串联起来。",
@@ -41286,7 +41520,9 @@
           "code_preview": "fn max<T: Ord>(a: T, b: T) -> T {     if a > b { a } else { b } }  const THRESHO..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "trait Drawable {     fn draw(&self);     fn bounds(&self) -> Bounds; }  impl Dra..."
@@ -41299,9 +41535,9 @@
         },
         {
           "flags": [],
-          "lines": 5,
+          "lines": 6,
           "should_fail": false,
-          "code_preview": "extern \"C\" {     fn c_function(x: i32) -> i32;     static C_GLOBAL: c_int; } ..."
+          "code_preview": "# use std::os::raw::c_int; unsafe extern \"C\" {     fn c_function(x: i32) -> i32;..."
         },
         {
           "flags": [],
@@ -41410,7 +41646,9 @@
           "code_preview": "#[doc = \" A point in 2D space.\"] struct Point; ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 3,
           "should_fail": false,
           "code_preview": "#[my_attribute_macro] fn decorated() {} ..."
@@ -41481,10 +41719,12 @@
           "flags": [],
           "lines": 3,
           "should_fail": false,
-          "code_preview": "let add = |a: i32, b: i32| -> i32 { a + b }; let add2 = |a, b| a + b; // 类型可推断 ..."
+          "code_preview": "let add = |a: i32, b: i32| -> i32 { a + b }; let add2 = |a: i32, b: i32| a + b; ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "match option {     Some(x) if x > 0 => println!(\"positive\"),     Some(_) => prin..."
@@ -41496,7 +41736,9 @@
           "code_preview": "let s = String::from(\"hello\").as_str(); // 错误：临时值在语句结束时释放 ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 2,
           "should_fail": false,
           "code_preview": "let x = unsafe { *raw_ptr }; ..."
@@ -41572,7 +41814,9 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "let x = 5;              // 不可反驳 let Some(y) = opt;      // 错误：let 要求不可反驳模式 if le..."
@@ -41642,7 +41886,7 @@
       "layer": "L4",
       "title": "泛型编译器行为：单态化、分发与类型擦除",
       "positioning": "",
-      "line_count": 210,
+      "line_count": 211,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将泛型函数、类型参数、实例化和分发方式串联起来。",
@@ -41680,16 +41924,18 @@
           "code_preview": "# use std::fmt::Debug; fn static_dispatch<T: Debug>(x: T) { println!(\"{:?}\", x);..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 3,
           "should_fail": false,
           "code_preview": "let obj: &dyn Trait = &value; // 内存布局: [data_ptr, vtable_ptr] ..."
         },
         {
           "flags": [],
-          "lines": 5,
+          "lines": 6,
           "should_fail": false,
-          "code_preview": "// 减少膨胀：公共非泛型入口 + 小型泛型包装 pub fn process_value(value: &dyn MyTrait) {     // 非泛型主..."
+          "code_preview": "# trait MyTrait {} // 减少膨胀：公共非泛型入口 + 小型泛型包装 pub fn process_value(value: &dyn MyT..."
         },
         {
           "flags": [],
@@ -42489,7 +42735,9 @@
           "code_preview": "// 源代码 async fn example() -> i32 {     let a = step_one().await;     let b = ste..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 22,
           "should_fail": false,
           "code_preview": "// 惯用：rayon 并行迭代 use rayon::prelude::*;  let sum: i32 = data.par_iter()      // ..."
@@ -46220,7 +46468,7 @@
       "layer": "L6",
       "title": "Cargo Build Scripts（`build.rs`）",
       "positioning": "把 `build.rs` 从“神秘的编译前脚本”还原为可预测、可调试、可重用的构建阶段工具。",
-      "line_count": 570,
+      "line_count": 571,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -46259,7 +46507,9 @@
           "code_preview": "fn main() {     println!(\"cargo:rustc-env=BUILD_TIMESTAMP=2026-06-21T10:52:42Z\")..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 2,
           "should_fail": false,
           "code_preview": "const BUILD_TIMESTAMP: &str = env!(\"BUILD_TIMESTAMP\"); ..."
@@ -46295,7 +46545,9 @@
           "code_preview": "use std::env; use std::fs::File; use std::io::Write; use std::path::Path;  fn ma..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 2,
           "should_fail": false,
           "code_preview": "include!(concat!(env!(\"OUT_DIR\"), \"/generated.rs\")); ..."
@@ -46313,7 +46565,9 @@
           "code_preview": "use std::env; use std::fs; use std::path::{Path, PathBuf};  fn main() {     // 监..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "// 引入 build.rs 生成的代码 include!(concat!(env!(\"OUT_DIR\"), \"/build_info.rs\"));  // R..."
@@ -46989,7 +47243,7 @@
       "layer": "L6",
       "title": "Cargo build-std",
       "positioning": "",
-      "line_count": 376,
+      "line_count": 379,
       "theorem_chains": [
         {
           "text": "| 源码构建 std ⟹ 自定义目标支持 | 编译目标平台未预编译的标准库 | 支持新硬件与操作系统 |",
@@ -47014,7 +47268,7 @@
         },
         {
           "flags": [],
-          "lines": 18,
+          "lines": 21,
           "should_fail": false,
           "code_preview": "use core::marker::PhantomData;  pub struct Uninitialized; pub struct Initialized..."
         },
@@ -47521,25 +47775,33 @@
           "code_preview": "// ❌ 过度工程：为单一实现引入泛型 + Trait 边界 trait Processor<T, E> {     fn process(&self, inp..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 27,
           "should_fail": false,
           "code_preview": "// ❌ 过早抽象：仅两个变体即引入 dyn Trait + 模块拆分 pub trait Transport { fn send(&self, data: &..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 22,
           "should_fail": false,
           "code_preview": "// ❌ Stringly typed：运行时拼写错误导致 panic fn run_command(name: &str) {     match name ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 27,
           "should_fail": false,
           "code_preview": "// ❌ God Object：所有状态集中，任何修改都影响全局 struct AppState {     db_pool: DbPool,     cach..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 23,
           "should_fail": false,
           "code_preview": "use std::rc::Rc; use std::cell::RefCell;  // ❌ 面条代码：共享状态 + 嵌套回调 + 隐式控制流 fn proce..."
@@ -47579,15 +47841,15 @@
           "code_preview": "// 错误：违反孤儿规则——为外部类型实现外部 trait impl std::fmt::Display for Vec<i32> {     // ❌ 编译错..."
         },
         {
-          "flags": [
-            "compile_fail"
-          ],
+          "flags": [],
           "lines": 20,
-          "should_fail": true,
+          "should_fail": false,
           "code_preview": "enum Expr {     Lit(i32),     Add(Box<Expr>, Box<Expr>), }  // ❌ 设计问题: 访问者模式在 Ru..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "fn eval(e: &Expr) -> i32 {     match e {         Expr::Lit(n) => *n,         Exp..."
@@ -47607,7 +47869,9 @@
           "code_preview": "struct DoorClosed; struct DoorOpen;  impl DoorClosed { fn open(self) -> DoorOpen..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "impl Builder {     fn name(mut self, name: String) -> Self {         self.name =..."
@@ -47643,7 +47907,9 @@
           "code_preview": "trait Component {     fn operation(&self) -> String; }  struct ConcreteComponent..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "use std::sync::OnceLock;  fn global_config() -> &'static Config {     static CON..."
@@ -48235,7 +48501,9 @@
           "code_preview": "use futures::stream::{self, StreamExt};  let s = stream::iter(1..=100)     .map(..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 20,
           "should_fail": false,
           "code_preview": "use tokio::sync::mpsc;  // 有界通道：背压从消费者向生产者传播 let (tx, mut rx) = mpsc::channel::<..."
@@ -48247,7 +48515,9 @@
           "code_preview": "use async_stream::stream; use futures::StreamExt;  let s = stream! {     for i i..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 25,
           "should_fail": false,
           "code_preview": "use tokio::sync::mpsc; use tokio::time::{interval, Duration};  let (cmd_tx, mut ..."
@@ -48281,7 +48551,9 @@
           "code_preview": "pub trait Layer<S> {     type Service;     fn layer(&self, inner: S) -> Self::Se..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 11,
           "should_fail": false,
           "code_preview": "use tower::{ServiceBuilder, ServiceExt}; use tower::limit::RateLimitLayer; use t..."
@@ -48849,7 +49121,9 @@
           "code_preview": "// Saga：订单处理流程的编排 #[derive(Debug)] struct OrderSaga {     saga_id: Uuid,     ord..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 75,
           "should_fail": false,
           "code_preview": "// Outbox 模式：在同一数据库事务中写入聚合状态和事件 #[derive(Debug, Serialize, Deserialize)] struct ..."
@@ -48863,7 +49137,9 @@
           "code_preview": "// 最终一致性的时间边界分析 #[derive(Debug)] struct ConsistencyMetrics {     event_commit_la..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 75,
           "should_fail": false,
           "code_preview": "use serde::{Serialize, Deserialize}; use chrono::{DateTime, Utc}; use uuid::Uuid..."
@@ -48877,7 +49153,9 @@
           "code_preview": "// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait] pub trait CommandHandler<C: Comman..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 73,
           "should_fail": false,
           "code_preview": "use sqlx::{PgPool, Row};  pub struct PostgresEventStore {     pool: PgPool, }  /..."
@@ -49007,7 +49285,9 @@
           "code_preview": "// 驱动端口（Driving Ports）—— 外部调用应用程序 // 对应: Web API, CLI, 消息消费者  // 注意：Axum 0.8+ 使用..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 64,
           "should_fail": false,
           "code_preview": "// 驱动适配器：HTTP API（外部 → 应用程序） pub struct HttpOrderAdapter<OS: OrderService> {    ..."
@@ -49027,7 +49307,9 @@
           "code_preview": "// Layer 1: Domain Model — 零外部依赖 // src/domain/model.rs #[derive(Debug, Clone)] ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 35,
           "should_fail": false,
           "code_preview": "// ❌ 违反依赖规则: Entity 依赖外部框架 // src/entities/order.rs use sqlx::FromRow;  // ❌ 错误！..."
@@ -49039,7 +49321,9 @@
           "code_preview": "// AWS Lambda with Rust (cargo-lambda) // Cargo.toml: // [dependencies] // lambd..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 18,
           "should_fail": false,
           "code_preview": "// 冷启动优化：预初始化共享客户端 use std::sync::Arc; use once_cell::sync::Lazy;  // 使用全局懒加载初始化..."
@@ -49078,7 +49362,7 @@
           "flags": [],
           "lines": 4,
           "should_fail": false,
-          "code_preview": "> / ✅ 正确: 使用 DynamoDB Streams 解耦写入和事件发布 > // DynamoDB Stream → Lambda（事件处理器）→ SQ..."
+          "code_preview": "> // ✅ 正确: 使用 DynamoDB Streams 解耦写入和事件发布 > // DynamoDB Stream → Lambda（事件处理器）→ S..."
         }
       ],
       "sources": [],
@@ -49152,13 +49436,17 @@
           "code_preview": "/// Strategy接口 pub trait CompressionStrategy {     fn compress(&self, data: &[u8..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 24,
           "should_fail": false,
           "code_preview": "/// 上下文 (静态分派) pub struct GenericCompressor<S: CompressionStrategy> {     strate..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 23,
           "should_fail": false,
           "code_preview": "use criterion::{black_box, criterion_group, criterion_main, Criterion};  fn trai..."
@@ -49170,7 +49458,9 @@
           "code_preview": "use std::sync::{Arc, Mutex};  pub trait Observer: Send + Sync {     fn update(&s..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 53,
           "should_fail": false,
           "code_preview": "use tokio::sync::{mpsc, RwLock}; use std::sync::Arc;  pub trait AsyncObserver: S..."
@@ -49212,7 +49502,9 @@
           "code_preview": "/// 运行时抽象迭代器 pub fn runtime_iterator(data: &[i32]) -> Box<dyn Iterator<Item = i3..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 15,
           "should_fail": false,
           "code_preview": "fn benchmark_iterators(c: &mut Criterion) {     let data: Vec<i32> = (0..1_000_0..."
@@ -49320,7 +49612,9 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 117,
           "should_fail": false,
           "code_preview": "/// 场景：构建高性能Web服务器 /// /// 需求： /// - 支持多种路由策略 /// - 中间件支持 /// - 连接池管理 /// - 请求日志..."
@@ -49332,37 +49626,49 @@
           "code_preview": "/// 场景：构建插件系统 /// /// 需求： /// - 动态加载插件 /// - 插件生命周期管理 /// - 插件间通信  // 1. Abstrac..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 98,
           "should_fail": false,
           "code_preview": "/// 场景：游戏引擎架构 /// /// 需求： /// - 实体组件系统 (ECS) /// - 状态机 (AI, Animation) /// - 资源管..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 22,
           "should_fail": false,
           "code_preview": "// ❌ 反模式：过度使用设计模式 pub trait DataProcessor {     fn process(&self, data: Vec<u8>)..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "// ❌ 反模式：不必要的动态分派 pub fn bad_sum(numbers: Vec<Box<dyn Number>>) -> i32 {     num..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 14,
           "should_fail": false,
           "code_preview": "// ❌ 反模式：不必要的克隆 pub fn bad_observer_notify(observers: &Vec<Observer>, data: Stri..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 25,
           "should_fail": false,
           "code_preview": "// ❌ 反模式：持有锁过久 pub fn bad_cache_access(cache: &Mutex<HashMap<String, String>>, k..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 67,
           "should_fail": false,
           "code_preview": "/// 组合 Builder + Strategy + Decorator + Proxy  // 1. Builder: 构建HTTP客户端 pub stru..."
@@ -49465,7 +49771,7 @@
           "flags": [],
           "lines": 69,
           "should_fail": false,
-          "code_preview": "/// Typestate Builder 的依赖类型表示 /// /// 形式化： /// Builder(state: BuilderState) → Re..."
+          "code_preview": "// Typestate Builder 的依赖类型表示 // // 形式化： // Builder(state: BuilderState) → Reques..."
         },
         {
           "flags": [],
@@ -49474,19 +49780,25 @@
           "code_preview": "/// Decorator 模式是 Functor /// /// 范畴论解释: /// - 对象: 类型 A, B, C, ... /// - 态射: 函数 ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 85,
           "should_fail": false,
           "code_preview": "/// Result<T, E> 是 Monad /// /// 范畴论解释: /// - return : T → Result<T, E> /// - bi..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 32,
           "should_fail": false,
           "code_preview": "/// 命题: \"如果有 Builder(Complete)，则可以构造 Request\" /// 逻辑: Builder(Complete) ⇒ Reques..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 24,
           "should_fail": false,
           "code_preview": "/// 命题: \"构建器必须设置URL才能构建\" /// 依赖类型: Π (b : Builder) . has_url(b) = true → build(b..."
@@ -49495,10 +49807,12 @@
           "flags": [],
           "lines": 50,
           "should_fail": false,
-          "code_preview": "/// RAII 模式是线性类型的应用 /// /// 形式化: /// - 资源 R 的类型是线性的 /// - 获取: acquire : () → R  ..."
+          "code_preview": "// RAII 模式是线性类型的应用 // // 形式化: // - 资源 R 的类型是线性的 // - 获取: acquire : () → R  (创建资源..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 33,
           "should_fail": false,
           "code_preview": "/// Builder 模式的仿射类型表示 /// /// 仿射性质: Builder 可以被使用 0 次或 1 次  pub struct AffineBui..."
@@ -49525,7 +49839,7 @@
           "flags": [],
           "lines": 36,
           "should_fail": false,
-          "code_preview": "/// Composite 模式的递归类型表示 /// /// 形式化: Tree = Leaf(Value) + Node(Tree, Tree) /// /..."
+          "code_preview": "// Composite 模式的递归类型表示 // // 形式化: Tree = Leaf(Value) + Node(Tree, Tree) // // 性质..."
         },
         {
           "flags": [],
@@ -49546,7 +49860,9 @@
           "code_preview": "/// 性质: Factory 生产的产品符合类型约束 /// /// ∀p ∈ Product, ∃c ∈ Creator: c.create() = p /..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 33,
           "should_fail": false,
           "code_preview": "/// 定理: 设计模式满足代数结构 /// /// 设 P = {Strategy, Observer, Decorator, ...} 为模式集合 /// ..."
@@ -49596,7 +49912,7 @@
       "layer": "L6",
       "title": "前沿研究与创新模式 (Frontier Research and Innovative Patterns)",
       "positioning": "",
-      "line_count": 1078,
+      "line_count": 1086,
       "theorem_chains": [
         {
           "text": "> **定理链**: Emerging Problem ⟹ Experimental Pattern ⟹ Production Hardening",
@@ -49628,7 +49944,9 @@
           "code_preview": "/// Effect Trait: 标记副作用 pub trait Effect {     type Input;     type Output;     ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 20,
           "should_fail": false,
           "code_preview": "/// Effect 多态函数 pub fn polymorphic_effect<E: Effect<Input = i32, Output = String..."
@@ -49646,7 +49964,9 @@
           "code_preview": "/// Effect 接口 pub trait AlgebraicEffect {     type Resume;      fn handle(&self)..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 44,
           "should_fail": false,
           "code_preview": "/// 可恢复效应：异步中断和恢复 pub enum Resumable<T, E> {     Done(T),     Suspend(E, Box<dyn..."
@@ -49665,9 +49985,9 @@
         },
         {
           "flags": [],
-          "lines": 52,
+          "lines": 53,
           "should_fail": false,
-          "code_preview": "/// 线性会话：保证协议完整执行 pub struct LinearSession<State> {     _state: PhantomData<Stat..."
+          "code_preview": "# use std::marker::PhantomData; /// 线性会话：保证协议完整执行 pub struct LinearSession<State..."
         },
         {
           "flags": [],
@@ -49677,12 +49997,14 @@
         },
         {
           "flags": [],
-          "lines": 68,
+          "lines": 69,
           "should_fail": false,
-          "code_preview": "/// 能力令牌 pub struct Capability<P> {     _permission: PhantomData<P>, }  impl<P> ..."
+          "code_preview": "# use std::marker::PhantomData; /// 能力令牌 pub struct Capability<P> {     _permiss..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 21,
           "should_fail": false,
           "code_preview": "/// 可撤销的能力 pub struct RevocableCapability<P> {     capability: Option<Capability..."
@@ -49695,30 +50017,38 @@
         },
         {
           "flags": [],
-          "lines": 76,
+          "lines": 82,
           "should_fail": false,
           "code_preview": "/// 量子比特（概念模拟） pub struct Qubit {     amplitude_0: f64,     amplitude_1: f64, } ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "   impl AsyncDrop for Connection {        async fn async_drop(&mut self) {      ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 8,
           "should_fail": false,
           "code_preview": "   gen fn fibonacci() -> impl Iterator<Item = u64> {        let (mut a, mut b) =..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "   let result: Result<i32, _> = try {        let x = may_fail()?;        let y =..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 16,
           "should_fail": false,
           "code_preview": "   trait Process {        fn process(&self);    }     impl<T> Process for T {   ..."
@@ -49996,13 +50326,17 @@
           "code_preview": "use std::sync::OnceLock;  struct Config {     value: String, }  static CONFIG: O..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 37,
           "should_fail": false,
           "code_preview": "struct RequestBuilder<State = NoUrl> {     url: Option<String>,     _state: std:..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 14,
           "should_fail": false,
           "code_preview": "use std::sync::mpsc;  struct Subject {     observers: Vec<mpsc::Sender<Event>>, ..."
@@ -50130,7 +50464,9 @@
           "code_preview": "// 编译期多态（零成本）+ 运行期多态（动态分发）的组合  trait PaymentStrategy {     fn pay(&self, amount:..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "// tower::Service 的组合中间件 use tower::{Service, ServiceBuilder, timeout::TimeoutLa..."
@@ -50247,7 +50583,9 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 41,
           "should_fail": false,
           "code_preview": "// 工作流模型在 Rust 中的表达谱系  // 顺序: async 顺序 await async fn sequential_workflow(input:..."
@@ -50269,7 +50607,9 @@
           "code_preview": "// Rust 中的工作流状态机 #[derive(Debug, Clone, PartialEq)] enum TaskState {     Ready, ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 38,
           "should_fail": false,
           "code_preview": "// 工作流 = 异步函数的复合  // 顺序复合: W₁ ; W₂ async fn sequence<W1, W2, T1, T2>(w1: W1, w2:..."
@@ -50345,7 +50685,9 @@
           "code_preview": "// ❌ 错误：状态机遗漏转换导致 match 不穷尽 #[derive(Debug)] enum WorkflowState {     Ready,    ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "> fn can_transition_to(&self, next: &WorkflowState) -> bool { >     match (self,..."
@@ -50367,7 +50709,9 @@
           "code_preview": "// ❌ 错误：没有终止条件的循环工作流 async fn infinite_retry_without_backoff() -> Result<Output>..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 18,
           "should_fail": false,
           "code_preview": "> async fn robust_retry() -> Result<Output> { >     const MAX_RETRIES: u32 = 5; ..."
@@ -50439,13 +50783,17 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 33,
           "should_fail": false,
           "code_preview": "// axum 中的 RESTful 路由 use axum::{     routing::{get, post, put, patch, delete}, ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 35,
           "should_fail": false,
           "code_preview": "// Header 版本化实现（axum） use axum::{extract::HeaderMap, http::StatusCode};  enum Ap..."
@@ -50503,7 +50851,9 @@
           "code_preview": "// tonic: 从 .proto 编译生成的 Rust 代码 use tonic::{transport::Server, Request, Respons..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 52,
           "should_fail": false,
           "code_preview": "use tonic::{Request, Response, Status, Streaming}; use tokio_stream::wrappers::R..."
@@ -50517,7 +50867,9 @@
           "code_preview": "use tonic::{Request, Response, Status, service::interceptor};  // 认证拦截器 fn auth_..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 40,
           "should_fail": false,
           "code_preview": "// API Gateway 路由实现（axum） use axum::{     Router,     routing::any,     http::Re..."
@@ -50545,7 +50897,9 @@
           "code_preview": "// ❌ 错误：无请求体大小限制 async fn upload_handler(body: Bytes) -> Result<StatusCode, Stat..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "> // axum: 使用 tower_http::limit::RequestBodyLimitLayer > Router::new() >     .ro..."
@@ -50559,7 +50913,9 @@
           "code_preview": "// ❌ 错误：V2 删除 V1 中的字段，导致旧客户端崩溃 #[derive(Serialize)] struct UserV1 {     id: Uuid..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "> #[derive(Serialize)] > struct User { >     id: Uuid, >     name: String, >    ..."
@@ -50707,7 +51063,9 @@
           "code_preview": "// 概念代码: Raft 快照安装时的日志截断 struct RaftNode {     log: Vec<LogEntry>,     snapshot_..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "// Raft 状态机接口示例（伪代码） pub trait RaftStateMachine {     fn apply(&mut self, entry:..."
@@ -51024,7 +51382,9 @@
           "code_preview": "#[tokio::main] async fn main() -> Result<(), Box<dyn std::error::Error>> {     l..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "use reqwest::Client; use std::time::Duration;  fn create_client() -> Client {   ..."
@@ -51060,7 +51420,9 @@
           "code_preview": "#[tokio::main] async fn main() -> Result<(), Box<dyn std::error::Error>> {     l..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "use reqwest::Proxy;  fn client_with_proxy() -> Result<reqwest::Client, reqwest::..."
@@ -51074,7 +51436,9 @@
           "code_preview": "use std::net::TcpStream; use std::io::Read;  fn read_response(mut stream: TcpStr..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "fn read_response(mut stream: TcpStream) -> std::io::Result<String> {     let mut..."
@@ -51293,7 +51657,9 @@
           "code_preview": "use std::collections::HashMap;  fn broadcast(clients: &mut HashMap<u64, String>,..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 4,
           "should_fail": false,
           "code_preview": "let stale: Vec<u64> = clients.iter()     .filter(|(_, n)| n.is_empty()).map(|(id..."
@@ -51514,7 +51880,9 @@
           "code_preview": "use tokio::net::{TcpListener, TcpStream}; use tokio::fs::File; use tokio::io::{s..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 47,
           "should_fail": false,
           "code_preview": "use std::time::Instant;  #[tokio::test] async fn benchmark_zero_copy_vs_traditio..."
@@ -51562,7 +51930,9 @@
           "code_preview": "use libnuma_sys::*; use std::alloc::{GlobalAlloc, Layout}; use std::ptr;  /// NU..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 31,
           "should_fail": false,
           "code_preview": "#[bench] fn bench_numa_aware_vs_default(b: &mut Bencher) {     const SIZE: usize..."
@@ -51667,13 +52037,17 @@
           "code_preview": "// Rust 的标准 Stream trait（futures crate） use std::pin::Pin; use std::task::{Conte..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "use futures::stream::{self, StreamExt};  // Stream 的基本使用 let mut st = stream::it..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 19,
           "should_fail": false,
           "code_preview": "use futures::stream::{self, StreamExt, TryStreamExt};  // 核心组合子（与 Iterator 高度一致）..."
@@ -51697,7 +52071,9 @@
           "code_preview": "// FRP 的核心问题：信号网络中的共享可变状态 // 在 Haskell 中: Signal 是不可变的，更新创建新 Signal // 在 Rust 中:..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 27,
           "should_fail": false,
           "code_preview": "use tokio_stream::{self, StreamExt}; use tokio::time::{interval, Duration};  // ..."
@@ -51709,7 +52085,9 @@
           "code_preview": "use async_stream::stream; use futures_util::pin_mut; use futures_util::stream::S..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 59,
           "should_fail": false,
           "code_preview": "use tokio::sync::mpsc; use futures::stream::{self, StreamExt}; use std::time::Du..."
@@ -51723,7 +52101,9 @@
           "code_preview": "// ❌ 错误：无界 channel 导致内存无限增长 use tokio::sync::mpsc;  async fn unbounded_channel_o..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 3,
           "should_fail": false,
           "code_preview": "> let (tx, mut rx) = mpsc::channel::<Vec<u8>>(10);  // 最多缓冲 10 条 > tx.send(data)..."
@@ -51850,7 +52230,9 @@
           "code_preview": "//! rustc 1.97.0 实测（经 workspace tokio rmeta typecheck） use tokio::sync::mpsc;  #..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 24,
           "should_fail": false,
           "code_preview": "//! rustc 1.97.0 + tokio 1.52.3（features = [\"full\", \"test-util\"]）实测运行通过 use std:..."
@@ -52863,7 +53245,7 @@
       "layer": "L6",
       "title": "C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）",
       "positioning": "",
-      "line_count": 498,
+      "line_count": 499,
       "theorem_chains": [
         {
           "text": "| C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -52891,7 +53273,9 @@
           "code_preview": "// build.rs — 在编译时生成绑定 use std::env; use std::path::PathBuf;  fn main() {     pr..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "// src/lib.rs — 使用生成的绑定 include!(concat!(env!(\"OUT_DIR\"), \"/bindings.rs\"));  pub..."
@@ -52959,7 +53343,9 @@
       "anti_propositions": [],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "// 每个 HAL 实现自己的错误类型 pub enum MySpiError { Timeout, BusBusy, CsFault } impl spi::..."
@@ -53350,7 +53736,7 @@
       "layer": "L6",
       "title": "流处理生态：Rust 实现与工业系统全景",
       "positioning": "系统梳理 Rust 流处理生态（timely/differential dataflow、tokio-stream、fluvio）与工业级系统（Flink、Materialize、RisingWave）的架构、语义差异与选型策略。",
-      "line_count": 629,
+      "line_count": 630,
       "theorem_chains": [
         {
           "text": "| 流处理生态：Rust 实现与工业系统全景 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -53389,12 +53775,14 @@
         },
         {
           "flags": [],
-          "lines": 11,
+          "lines": 12,
           "should_fail": false,
-          "code_preview": "use futures::Stream;  // Stream = 异步版本的 Iterator // 每次 poll 可能产生一个 Item，或 Pendin..."
+          "code_preview": "# use futures::StreamExt; use futures::Stream;  // Stream = 异步版本的 Iterator // 每次..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "use tokio::sync::mpsc; use tokio_stream::wrappers::ReceiverStream;  let (tx, rx)..."
@@ -53687,7 +54075,9 @@
           "code_preview": "// DataFusion SQL ETL use datafusion::prelude::*;  async fn sql_etl(ctx: &Sessio..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 54,
           "should_fail": false,
           "code_preview": "// 完整的 Rust ETL 管道骨架 use tokio::sync::mpsc; use tokio::task;  struct EtlPipeline..."
@@ -53713,7 +54103,9 @@
           "code_preview": "// 查询加速：物化视图 + 缓存 use moka::sync::Cache; use std::sync::Arc;  struct QueryEngine..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 33,
           "should_fail": false,
           "code_preview": "// axum + DataFusion：数据即服务 use axum::{routing::get, Router, extract::Query, Json..."
@@ -53869,7 +54261,9 @@
           "code_preview": "struct NodeState { term: u64, voted_for: Option<u64> }  fn elect(state: &mut Nod..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "use std::sync::{Arc, Mutex}; fn elect(state: Arc<Mutex<NodeState>>) {     std::t..."
@@ -53917,7 +54311,7 @@
       "layer": "L6",
       "title": "Rust 数据科学与科学计算",
       "positioning": "",
-      "line_count": 682,
+      "line_count": 683,
       "theorem_chains": [
         {
           "text": "| Rust for Data Science（Rust 数据科学） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -54015,9 +54409,9 @@
         },
         {
           "flags": [],
-          "lines": 6,
+          "lines": 7,
           "should_fail": false,
-          "code_preview": "fn histogram(values: &[f64]) -> HashMap<u64, usize> {     let mut m = HashMap::n..."
+          "code_preview": "# use std::collections::HashMap; fn histogram(values: &[f64]) -> HashMap<u64, us..."
         }
       ],
       "sources": [],
@@ -54894,7 +55288,9 @@
           "code_preview": "// ❌ 错误：前置条件过强 use prusti_contracts::*;  #[requires(x > 0)]  // 过于严格！x == 0 也是合法..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 4,
           "should_fail": false,
           "code_preview": "> #[requires(x >= 0)]  // ✅ 正确的最小前置条件 > #[ensures(result >= 0)] > fn sqrt_approx..."
@@ -55323,7 +55719,9 @@
           "code_preview": "use criterion::{black_box, criterion_group, criterion_main, Criterion};  fn fibo..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 21,
           "should_fail": false,
           "code_preview": "use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};  fn be..."
@@ -55499,7 +55897,9 @@
           "code_preview": "use std::time::Instant; use criterion::{criterion_group, criterion_main, Criteri..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 144,
           "should_fail": false,
           "code_preview": "use std::time::Instant; use std::sync::Arc; use tokio::sync::Mutex;  // 性能分析器 pu..."
@@ -56584,7 +56984,7 @@
       "layer": "L6",
       "title": "算法工程实践 (Algorithm Engineering Practice)",
       "positioning": "",
-      "line_count": 2127,
+      "line_count": 2137,
       "theorem_chains": [
         {
           "text": "| 复杂度分析 ⟹ 可扩展性预测 | 大 O 与内存占用评估 | 指导算法选型 |",
@@ -56624,7 +57024,9 @@
           "code_preview": "use std::collections::HashMap; use std::sync::{Arc, Mutex};  /// LRU 缓存节点 struct..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 59,
           "should_fail": false,
           "code_preview": "use tokio::time::{interval, Duration};  /// 缓存管理器 pub struct CacheManager<K, V> ..."
@@ -56660,28 +57062,32 @@
           "code_preview": "use memmap2::MmapMut; use std::fs::OpenOptions;  /// 内存映射文件处理 pub struct MmapPro..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 54,
           "should_fail": false,
           "code_preview": "use tokio::fs::File; use tokio::io::{AsyncWriteExt, BufWriter}; use tokio::sync:..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 108,
           "should_fail": false,
           "code_preview": "use tokio::time::{sleep, Duration};  /// 指数退避重试 pub async fn retry_with_backoff<..."
         },
         {
           "flags": [],
-          "lines": 79,
+          "lines": 81,
           "should_fail": false,
-          "code_preview": "/// 服务降级管理器 pub struct DegradationManager {     levels: Vec<DegradationLevel>,  ..."
+          "code_preview": "# use std::sync::Arc; # use std::sync::Mutex; /// 服务降级管理器 pub struct Degradation..."
         },
         {
           "flags": [],
-          "lines": 90,
+          "lines": 93,
           "should_fail": false,
-          "code_preview": "use std::time::Instant;  /// 性能指标收集器 pub struct MetricsCollector {     requests:..."
+          "code_preview": "# use std::sync::Arc; # use std::sync::Mutex; # use std::time::Duration; use std..."
         },
         {
           "flags": [],
@@ -56696,7 +57102,9 @@
           "code_preview": "#[cfg(test)] mod tests {     use super::*;      /// 参数化测试宏     macro_rules! test..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 29,
           "should_fail": false,
           "code_preview": "use criterion::{black_box, criterion_group, criterion_main, Criterion, Benchmark..."
@@ -56709,33 +57117,37 @@
         },
         {
           "flags": [],
-          "lines": 51,
+          "lines": 53,
           "should_fail": false,
-          "code_preview": "/// 灰度发布管理器 pub struct GrayReleaseManager {     gray_ratio: Arc<Mutex<f64>>,  //..."
+          "code_preview": "# use std::sync::Arc; # use std::sync::Mutex; /// 灰度发布管理器 pub struct GrayRelease..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 68,
           "should_fail": false,
           "code_preview": "/// 状态快照 #[derive(Clone, Serialize, Deserialize)] pub struct Snapshot<T> {     d..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 98,
           "should_fail": false,
           "code_preview": "use std::collections::HashMap;  /// 协同过滤推荐引擎 pub struct CollaborativeFilteringEn..."
         },
         {
           "flags": [],
-          "lines": 50,
+          "lines": 51,
           "should_fail": false,
-          "code_preview": "use std::collections::BinaryHeap; use std::cmp::Reverse;  /// 实时排行榜 pub struct L..."
+          "code_preview": "# use std::collections::HashMap; use std::collections::BinaryHeap; use std::cmp:..."
         },
         {
           "flags": [],
-          "lines": 61,
+          "lines": 63,
           "should_fail": false,
-          "code_preview": "use std::time::{Duration, Instant};  /// 令牌桶限流器 pub struct TokenBucket {     cap..."
+          "code_preview": "# use std::sync::Arc; # use std::sync::Mutex; use std::time::{Duration, Instant}..."
         },
         {
           "flags": [],
@@ -56912,7 +57324,9 @@
           "code_preview": "// O(1) - 常数时间 fn constant_time(arr: &[i32]) -> Option<i32> {     arr.first().co..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 18,
           "should_fail": false,
           "code_preview": "// O(1) 额外空间 - 原地排序 fn bubble_sort<T: Ord>(arr: &mut [T]) {     let len = arr.le..."
@@ -57215,7 +57629,9 @@
           "code_preview": "// DataFusion：SQL 查询引擎 use datafusion::prelude::*;  async fn datafusion_query() ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "// candle 量化模型加载（GGML 格式） use candle_core::quantized::ggml_file::Content;  fn lo..."
@@ -57419,7 +57835,9 @@
           "code_preview": "// Rust 中的游戏主循环骨架 use winit::event::{Event, WindowEvent}; use winit::event_loop:..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 33,
           "should_fail": false,
           "code_preview": "// 子系统依赖图（Rust 类型系统保证初始化顺序） struct Engine {     // 底层子系统（无依赖）     window: Window..."
@@ -57431,7 +57849,9 @@
           "code_preview": "// Bevy 风格的 ECS 驱动引擎骨架 use bevy_ecs::prelude::*;  // 组件 #[derive(Component)] str..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 62,
           "should_fail": false,
           "code_preview": "// wgpu 基础渲染流程 async fn wgpu_render_init(window: &winit::window::Window) -> (wgp..."
@@ -57457,7 +57877,9 @@
           "code_preview": "// rodio 音频播放示例 use rodio::{Decoder, OutputStream, Sink}; use std::fs::File; use..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 48,
           "should_fail": false,
           "code_preview": "// 异步资源加载器 use tokio::sync::mpsc; use std::path::Path;  enum LoadRequest {     T..."
@@ -57817,7 +58239,9 @@
           "code_preview": "#![no_main]  use std::fs::File; use std::io::Read;  fn main() {     // ❌ 编译错误: `..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "const MAX_MEMORY: usize = 100 * 1024 * 1024; // 100MB  #[wasm_bindgen] pub fn pr..."
@@ -57957,7 +58381,9 @@
       "anti_propositions": [],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 19,
           "should_fail": false,
           "code_preview": "#[wasm_bindgen] pub struct Person {     name: String,     age: u32, }  #[wasm_bi..."
@@ -57966,7 +58392,7 @@
           "flags": [],
           "lines": 5,
           "should_fail": false,
-          "code_preview": "// 重用 Vec 减少分配 let mut buffer = Vec::with_capacity(1024); // ... 使用 buffer buffe..."
+          "code_preview": "// 重用 Vec 减少分配 let mut buffer: Vec<u8> = Vec::with_capacity(1024); // ... 使用 buf..."
         },
         {
           "flags": [],
@@ -57975,19 +58401,25 @@
           "code_preview": "   use c12_wasm::rust_192_features::WasmBuffer;    let mut buffer = WasmBuffer::..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 3,
           "should_fail": false,
           "code_preview": "   use c12_wasm::rust_192_features::calculate_buffer_chunks;    let chunks = cal..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 3,
           "should_fail": false,
           "code_preview": "   use c12_wasm::rust_192_features::wasm_optimized_array_eq;    let are_equal = ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 3,
           "should_fail": false,
           "code_preview": "   use c12_wasm::rust_192_features::wasm_rotate_data;    wasm_rotate_data(&mut d..."
@@ -58061,13 +58493,17 @@
           "code_preview": "use wasm_bindgen::prelude::*; use web_sys::HtmlCanvasElement;  #[wasm_bindgen] p..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "#[wasm_bindgen] pub fn add(a: i32, b: i32) -> i32 {     a + b } ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "#[wasm_bindgen] pub fn sum_array(arr: &[i32]) -> i32 {     arr.iter().sum() } ..."
@@ -58396,7 +58832,9 @@
           "code_preview": "#[derive(Debug, Clone, Copy, PartialEq)] enum ConnectionState {     Handshake,  ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "use bytes::{Bytes, BytesMut, BufMut};  fn encode_frame_zero_copy(frame: &Frame) ..."
@@ -58734,7 +59172,9 @@
           "code_preview": "#[derive(Debug, Clone, Copy, PartialEq, Eq)] pub enum TcpState {     Closed, Lis..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 20,
           "should_fail": false,
           "code_preview": "pub trait ProtocolInvariant<P: FormalProtocol> {     fn check(&self, state: &P::..."
@@ -58746,7 +59186,9 @@
           "code_preview": "pub struct Transition<S, M, C> {     from: S,     to: S,     message: M,     gua..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 39,
           "should_fail": false,
           "code_preview": "use std::collections::{HashSet, VecDeque};  pub struct StateExplorer<P: FormalPr..."
@@ -59097,7 +59539,9 @@
           "code_preview": "unsafe extern \"C\" {     safe fn printf(fmt: *const c_char, ...);  // 标记为 safe 的 ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 8,
           "should_fail": false,
           "code_preview": "  #!/usr/bin/env cargo   ---cargo   package.edition = \"2024\"   [dependencies]   ..."
@@ -59214,7 +59658,7 @@
       "layer": "L7",
       "title": "Rust Editions（语言版本）",
       "positioning": "补齐审计 §2.4 / §4 P2-2 缺口#6 指出的\"edition 2024 × 1.97 割裂\"。本节只做**交叉定位**，不重复版本页逐项解释；fallback 的推断推导落在承载页 [`27_type_checking_and_inference.md`](../../04_formal/00_type_theory/07_type_checking_and_inference.md) 与 [`31_never_type.md`](../../01_foundation/02_type_system/02_never_type.md)。",
-      "line_count": 323,
+      "line_count": 325,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将编译器版本、Edition、语法行为、迁移路径串联起来。",
@@ -59240,16 +59684,18 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
-          "lines": 7,
+          "flags": [
+            "edition2015"
+          ],
+          "lines": 8,
           "should_fail": false,
-          "code_preview": "extern crate serde; mod foo;  fn main() {     let trait_obj: &Serialize = &1; //..."
+          "code_preview": "extern crate serde; mod foo {}  fn main() {     let trait_obj: &std::fmt::Debug ..."
         },
         {
           "flags": [],
-          "lines": 6,
+          "lines": 7,
           "should_fail": false,
-          "code_preview": "use serde::Serialize;  fn main() {     let trait_obj: &dyn Serialize = &1; } ..."
+          "code_preview": "use std::fmt::Debug;  fn main() {     let trait_obj: &dyn Debug = &1;     let _ ..."
         },
         {
           "flags": [],
@@ -59637,7 +60083,7 @@
       "layer": "L7",
       "title": "Rust 1.90 网络特性参考",
       "positioning": "",
-      "line_count": 881,
+      "line_count": 887,
       "theorem_chains": [
         {
           "text": "> **定理链**: Version Context ⟹ Feature Set ⟹ Migration Impact",
@@ -59665,14 +60111,16 @@
           "code_preview": "/// 异步网络客户端Trait (Rust 1.75+) pub trait AsyncNetworkClient {     /// 异步连接     as..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 11,
           "should_fail": false,
           "code_preview": "// ❌ Rust 1.74及之前（需要async-trait宏） #[async_trait::async_trait] pub trait OldAsync..."
         },
         {
           "flags": [],
-          "lines": 35,
+          "lines": 38,
           "should_fail": false,
           "code_preview": "use tokio::task::JoinSet;  /// 异步闭包捕获优化（Rust 1.90） pub async fn async_closure_ex..."
         },
@@ -59695,7 +60143,9 @@
           "code_preview": "use std::net::SocketAddr;  /// let-else简化错误处理（Rust 1.65+） pub fn parse_socket_ad..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 41,
           "should_fail": false,
           "code_preview": "use futures::stream::{Stream, StreamExt}; use std::pin::Pin;  /// impl Trait in ..."
@@ -59708,7 +60158,7 @@
         },
         {
           "flags": [],
-          "lines": 53,
+          "lines": 56,
           "should_fail": false,
           "code_preview": "use futures::stream::{StreamExt, TryStreamExt};  /// 迭代器链式处理（Rust 1.90优化） pub as..."
         },
@@ -59731,7 +60181,9 @@
           "code_preview": "/// 内联优化（Rust 1.90改进） #[inline(always)] pub async fn inline_tcp_send(stream: &mu..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 62,
           "should_fail": false,
           "code_preview": "use tokio::sync::Semaphore; use std::sync::Arc;  /// 生产级HTTP客户端 pub struct Moder..."
@@ -59785,7 +60237,7 @@
       "layer": "L7",
       "title": "Rust 1.91 稳定特性",
       "positioning": "",
-      "line_count": 2741,
+      "line_count": 2744,
       "theorem_chains": [
         {
           "text": "| 版本上下文 ⟹ 演进脉络 | 对比前后版本特性 | 理解语言发展方向 |",
@@ -59809,19 +60261,25 @@
           "code_preview": "// 每次借用检查都需要完整计算 fn check_borrow() {     // 没有缓存，每次都重新计算 } ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 18,
           "should_fail": false,
           "code_preview": "use c01_ownership_borrow_scope::rust_191_features::Rust191BorrowChecker;  let mu..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 16,
           "should_fail": false,
           "code_preview": "// Rust 1.91: 更智能的借用冲突检测 impl Rust191BorrowChecker {     // 内部优化：使用更高效的数据结构     ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 35,
           "should_fail": false,
           "code_preview": "use c01_ownership_borrow_scope::{     Rust191BorrowChecker,     BorrowType191,  ..."
@@ -59839,7 +60297,9 @@
           "code_preview": "// 可以引用非静态常量 const S: i32 = 25; const C: &i32 = &S;  // ✅ Rust 1.91 支持 const D: ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "use c01_ownership_borrow_scope::ConstContextLifetimeInferencer191;  // 创建 const ..."
@@ -59860,10 +60320,12 @@
           "flags": [],
           "lines": 6,
           "should_fail": false,
-          "code_preview": "// 每次分配都需要系统调用，性能较低 for i in 0..1000 {     let vec = Vec::with_capacity(16); // ..."
+          "code_preview": "// 每次分配都需要系统调用，性能较低 for i in 0..1000 {     let vec: Vec<u8> = Vec::with_capacity..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 27,
           "should_fail": false,
           "code_preview": "use c01_ownership_borrow_scope::{     OptimizedMemoryManager191,     AllocationT..."
@@ -59875,13 +60337,17 @@
           "code_preview": "// Rust 1.91: 更快的所有权检查 fn transfer_ownership(data: Vec<i32>) -> Vec<i32> {     /..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 16,
           "should_fail": false,
           "code_preview": "use c01_ownership_borrow_scope::OptimizedLifetimeInferencer191;  let mut inferen..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 11,
           "should_fail": false,
           "code_preview": "// Rust 1.91: 更智能的生命周期推断 impl OptimizedLifetimeInferencer191 {     fn infer_life..."
@@ -59893,7 +60359,9 @@
           "code_preview": "// 复杂函数的生命周期推断 fn complex_function<'a, 'b>(x: &'a str, y: &'b str) -> &'a str wh..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 27,
           "should_fail": false,
           "code_preview": "use c01_ownership_borrow_scope::{     Rust191BorrowChecker,     BorrowType191, }..."
@@ -59905,25 +60373,33 @@
           "code_preview": "// Rust 1.91: 使用 const 上下文创建配置系统 const MAX_SIZE: usize = 1024; const BUFFER_SIZE..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 28,
           "should_fail": false,
           "code_preview": "use c01_ownership_borrow_scope::{     OptimizedMemoryManager191,     AllocationT..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "// 旧代码（Rust 1.90） let mut checker = ImprovedBorrowChecker::new(); // Rust 1.90  ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "// 旧代码（Rust 1.90） static VALUE: i32 = 42; const REF: &i32 = &VALUE; // 只能引用 stat..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "// 新代码（Rust 1.91） use c01_ownership_borrow_scope::OptimizedMemoryManager191; let..."
@@ -59935,19 +60411,25 @@
           "code_preview": "// 每次类型推断都需要完整计算 fn infer_type(expr: &str) -> &'static str {     // 没有缓存，每次都重新计算..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 16,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_191_features::type_checker_optimizations::OptimizedTyp..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 11,
           "should_fail": false,
           "code_preview": "// Rust 1.91: 更智能的类型推断 impl OptimizedTypeInferencer {     fn infer_type_cached(&..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 30,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_191_features::type_checker_optimizations::{     Optimi..."
@@ -59959,7 +60441,9 @@
           "code_preview": "// const 上下文中的类型推断受限 const VALUE: i32 = 42; // 无法在 const 上下文中进行复杂的类型推断 ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 11,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_191_features::const_context_enhancements::ConfigSystem..."
@@ -59977,19 +60461,25 @@
           "code_preview": "// 配置系统示例（类型系统增强） pub struct ConfigSystem;  impl ConfigSystem {     pub const MA..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "pub struct OptimizedTypeInferencer {     /// 类型推断缓存（Rust 1.91 新增）     inference_..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 11,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_191_features::type_checker_optimizations::generic_type..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "// Rust 1.91: const 上下文中的类型信息 const fn get_type_name<T>() -> &'static str {     ..."
@@ -60001,25 +60491,33 @@
           "code_preview": "// Rust 1.91: const 上下文中的类型推断 const fn const_type_inference() -> &'static str { ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 19,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_191_features::type_checker_optimizations::OptimizedTyp..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "// Rust 1.91: 使用 const 上下文中的类型系统 const fn create_typed_config() -> Config {     ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 8,
           "should_fail": false,
           "code_preview": "// 旧代码（Rust 1.90） // 类型推断每次都重新计算  // 新代码（Rust 1.91） use c02_type_system::rust_19..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 4,
           "should_fail": false,
           "code_preview": "// 新代码（Rust 1.91） const TYPE_INFO: &str = ConfigSystem::get_type_info(); // 在 co..."
@@ -60031,7 +60529,9 @@
           "code_preview": "// const 函数中只能使用简单的表达式 const fn simple_add(a: u32, b: u32) -> u32 {     a + b } ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 15,
           "should_fail": false,
           "code_preview": "use c03_control_fn::const_control_flow;  // const 函数中可以进行复杂的控制流操作 const fn const..."
@@ -60050,30 +60550,34 @@
         },
         {
           "flags": [],
-          "lines": 7,
+          "lines": 8,
           "should_fail": false,
           "code_preview": "use std::ops::ControlFlow;  // ControlFlow 只能携带简单的类型 fn process(data: &[i32]) ->..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 16,
           "should_fail": false,
           "code_preview": "use c03_control_fn::improved_control_flow; use std::ops::ControlFlow;  fn valida..."
         },
         {
           "flags": [],
-          "lines": 15,
+          "lines": 16,
           "should_fail": false,
-          "code_preview": "fn early_exit_loop(data: &[i32], max: i32) -> ControlFlow<String, Vec<i32>> {   ..."
+          "code_preview": "# use std::ops::ControlFlow; fn early_exit_loop(data: &[i32], max: i32) -> Contr..."
         },
         {
           "flags": [],
-          "lines": 23,
+          "lines": 24,
           "should_fail": false,
-          "code_preview": "// 多级验证流程 fn multi_level_validation(data: &[i32]) -> ControlFlow<String, i32> { ..."
+          "code_preview": "# use std::ops::ControlFlow; // 多级验证流程 fn multi_level_validation(data: &[i32]) -..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "use c03_control_fn::function_performance;  // Rust 1.91 JIT 优化：迭代器链式操作性能提升 10-25..."
@@ -60085,7 +60589,9 @@
           "code_preview": "// Rust 1.91 优化：递归函数调用性能提升 fn optimized_recursive_fibonacci(n: u32) -> u32 {    ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "use c03_control_fn::optimized_conditionals;  // Rust 1.91: 可以在 const 上下文中进行更复杂的条..."
@@ -60103,7 +60609,9 @@
           "code_preview": "const fn const_match(value: u32) -> u32 {     match value {         0 | 1 => 1, ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "use c03_control_fn::optimized_loops;  // Rust 1.91 JIT 优化：迭代器循环性能提升 10-25% fn op..."
@@ -60115,7 +60623,9 @@
           "code_preview": "// Rust 1.91: const 函数中可以使用循环 const fn const_loop_sum(n: u32) -> u32 {     let m..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 27,
           "should_fail": false,
           "code_preview": "use c03_control_fn::function_call_optimization;  use std::collections::HashMap; ..."
@@ -60127,7 +60637,9 @@
           "code_preview": "// Rust 1.91: 递归函数调用性能优化 fn optimized_power(base: i32, exp: u32) -> i32 {     ma..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 14,
           "should_fail": false,
           "code_preview": "use c03_control_fn::closure_optimization;  // Rust 1.91: 闭包捕获优化，减少内存使用 fn optimi..."
@@ -60139,37 +60651,49 @@
           "code_preview": "// Rust 1.91: 高阶函数调用性能优化 fn optimized_higher_order_function<T, F>(data: &[T], f:..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 16,
           "should_fail": false,
           "code_preview": "use c03_control_fn::const_control_flow;  // 编译时配置系统 pub struct ControlFlowConfig..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 25,
           "should_fail": false,
           "code_preview": "use c03_control_fn::improved_control_flow; use std::ops::ControlFlow;  fn proces..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 12,
           "should_fail": false,
           "code_preview": "use c03_control_fn::function_performance;  fn process_data(data: &[i32]) -> Vec<..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 8,
           "should_fail": false,
           "code_preview": "// 旧代码（Rust 1.90） static VALUE: u32 = 10; const REF: &u32 = &VALUE; // 只能引用 stat..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "// 旧代码（Rust 1.90） fn process() -> ControlFlow<(), i32> {     // 错误信息较少 }  // 新代码..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "// Rust 1.91: 迭代器和函数调用自动优化 // 无需代码更改即可享受性能提升 let result: Vec<i32> = data.iter() ..."
@@ -60366,7 +60890,7 @@
       "layer": "L7",
       "title": "Rust 1.92 稳定特性",
       "positioning": "",
-      "line_count": 2731,
+      "line_count": 2734,
       "theorem_chains": [
         {
           "text": "| 版本上下文 ⟹ 演进脉络 | 对比前后版本特性 | 理解语言发展方向 |",
@@ -60391,9 +60915,9 @@
         },
         {
           "flags": [],
-          "lines": 25,
+          "lines": 26,
           "should_fail": false,
-          "code_preview": "// Rust 1.92.0: 安全的 MaybeUninit 包装器 pub struct SafeMaybeUninit<T> {     inner: M..."
+          "code_preview": "# use std::mem::MaybeUninit; // Rust 1.92.0: 安全的 MaybeUninit 包装器 pub struct Safe..."
         },
         {
           "flags": [],
@@ -60444,13 +60968,17 @@
           "code_preview": "// Rust 1.92.0: 关联类型可以有多个边界 pub trait TypeConverter {     // 多个边界直接在关联类型上指定     ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 18,
           "should_fail": false,
           "code_preview": "// Rust 1.92.0: 多边界与泛型结合 pub trait GenericProcessor<T> {     type Processed: Clo..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 15,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_192_features::{     TypeConverter,     StringConverter..."
@@ -60468,7 +60996,9 @@
           "code_preview": "// Rust 1.92.0: HRTB 在 Trait 中的应用 pub trait HigherRankedLifetimeProcessor {     ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 15,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_192_features::{     convert_with_lifetime,     process..."
@@ -60486,7 +61016,9 @@
           "code_preview": "// Rust 1.92.0: 改进的 Sized 边界处理 pub trait SizedBoundExample {     type Output: Si..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 11,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_192_features::{     AutoTraitExample,     ImprovedAuto..."
@@ -60498,7 +61030,9 @@
           "code_preview": "use std::mem::MaybeUninit;  // Rust 1.92.0: 文档化的 MaybeUninit 使用 pub struct SafeB..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_192_features::SafeBuffer;  let mut buffer = SafeBuffer..."
@@ -60528,7 +61062,9 @@
           "code_preview": "let vec1 = vec![1, 2, 3, 4, 5]; let vec2 = vec![1, 2, 3, 4, 5];  // Rust 1.92.0:..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 26,
           "should_fail": false,
           "code_preview": "// 之前: 使用 where 子句 pub trait OldConverter {     type Input;     type Output;    ..."
@@ -60540,7 +61076,9 @@
           "code_preview": "// 使用 NonZero::div_ceil use std::num::NonZeroU32; let result = NonZeroU32::new(1..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_192_features::{     TypeConverter,     GenericTypeConv..."
@@ -60552,7 +61090,9 @@
           "code_preview": "// 利用迭代器特化提升性能 fn compare_vectors(vec1: &[i32], vec2: &[i32]) -> bool {     vec1..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_192_features::SafeBuffer;  let mut buffer = SafeBuffer..."
@@ -60564,7 +61104,9 @@
           "code_preview": "pub trait TypeConverter {     // Rust 1.92.0: 关联类型可以有多个边界     type Input: Clone ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_192_features::*;  let converter = StringConverter; let..."
@@ -60576,7 +61118,9 @@
           "code_preview": "pub fn process_strings<'a, F>(input: &'a str, processor: F) -> String where     ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_192_features::*;  let input = \"test string\"; let proce..."
@@ -60588,31 +61132,37 @@
           "code_preview": "pub struct AutoTraitExample<T> {     data: T, }  impl<T> AutoTraitExample<T> whe..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_192_features::*;  let example = AutoTraitExample::new(..."
         },
         {
           "flags": [],
-          "lines": 22,
+          "lines": 23,
           "should_fail": false,
-          "code_preview": "pub struct TypeSafeUninitManager<T> {     storage: MaybeUninit<T>,     initializ..."
+          "code_preview": "# use std::mem::MaybeUninit; pub struct TypeSafeUninitManager<T> {     storage: ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 8,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_192_features::*;  let mut manager = TypeSafeUninitMana..."
         },
         {
           "flags": [],
-          "lines": 17,
+          "lines": 18,
           "should_fail": false,
-          "code_preview": "pub fn calculate_aligned_size<T>(count: usize, alignment: NonZeroUsize) -> usize..."
+          "code_preview": "# use std::num::NonZeroUsize; pub fn calculate_aligned_size<T>(count: usize, ali..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_192_features::*; use std::num::NonZeroUsize;  let calc..."
@@ -60624,31 +61174,41 @@
           "code_preview": "pub fn compare_type_lists<T: PartialEq>(list1: &[T], list2: &[T]) -> bool {     ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "use c02_type_system::rust_192_features::*;  let list1 = vec![1, 2, 3, 4, 5]; let..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "// ✅ 好的做法：明确指定所有需要的边界 type Input: Clone + Send + Sync + 'static;  // ❌ 避免：边界不足 t..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "// ✅ 好的做法：使用 HRTB 处理任意生命周期 F: for<'a> Fn(&'a str) -> &'a str  // ❌ 避免：不必要的生命周期约束..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "// ✅ 好的做法：明确检查初始化状态 if self.initialized {     Some(unsafe { &*self.storage.as_pt..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "// Rust 1.92.0: TrustedLen 迭代器自动特化 use std::iter::TrustedLen;  fn compare_iterat..."
@@ -60660,7 +61220,9 @@
           "code_preview": "// Rust 1.92.0: 特化的迭代器比较 let vec1 = vec![1, 2, 3, 4, 5]; let vec2 = vec![1, 2, 3..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 14,
           "should_fail": false,
           "code_preview": "// Rust 1.92.0: 使用特化迭代器比较 use std::iter::TrustedLen;  fn fast_compare<T: Partial..."
@@ -60928,7 +61490,7 @@
           "flags": [],
           "lines": 5,
           "should_fail": false,
-          "code_preview": "use std::fmt;  let f = fmt::from_fn(|f, _| write!(f, \"custom\")); println!(\"{}\", ..."
+          "code_preview": "use std::fmt;  let f = fmt::from_fn(|f| write!(f, \"custom\")); println!(\"{}\", f);..."
         },
         {
           "flags": [],
@@ -60992,7 +61554,9 @@
       "anti_propositions": [],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "// Cargo.toml [package] name = \"c10_networks_example\" version = \"0.1.0\" edition ..."
@@ -61050,7 +61614,7 @@
       "layer": "L7",
       "title": "Rust 1.95.0 稳定特性",
       "positioning": "",
-      "line_count": 347,
+      "line_count": 348,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -61061,13 +61625,17 @@
           "code_preview": "cfg_select! {     unix => {         fn os_specific() -> &'static str { \"Unix\" } ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "match value {     Some(x) if let Ok(y) = parse(x) => println!(\"{}, {}\", x, y),  ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 2,
           "should_fail": false,
           "code_preview": "use std::keyword as kw;  // 重命名关键字路径段 ..."
@@ -61134,9 +61702,9 @@
         },
         {
           "flags": [],
-          "lines": 4,
+          "lines": 5,
           "should_fail": false,
-          "code_preview": "const fn check_control(cf: ControlFlow<i32, ()>) -> bool {     cf.is_break() } ..."
+          "code_preview": "# use std::ops::ControlFlow; const fn check_control(cf: ControlFlow<i32, ()>) ->..."
         }
       ],
       "sources": [],
@@ -61319,7 +61887,9 @@
           "code_preview": "#[cfg(target_has_atomic_primitive_alignment = \"64\")] fn assumes_atomic_align() {..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 3,
           "should_fail": false,
           "code_preview": "use std::io::{self}; use std::io::{self, Write}; ..."
@@ -61532,16 +62102,20 @@
           "flags": [],
           "lines": 6,
           "should_fail": false,
-          "code_preview": "// 2021 Edition：需要显式 async 块 let f = |x| async move { x + 1 };  // 2024 Edition：..."
+          "code_preview": "// 2021 Edition：需要显式 async 块 let f = |x: i32| async move { x + 1 };  // 2024 Edi..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "// 2021 Edition：临时值生命周期可能延续到 if 块外 if let Some(x) = get_temp().as_ref() { /* ......"
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "let x = match condition {     true => return,     false => 42, }; // 2024 Editio..."
@@ -61648,7 +62222,9 @@
           "code_preview": "// Edition 2021: 临时值的生命周期延伸到整个语句 if let Some(x) = get_string().as_ref() {     //..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "> // 自动迁移后的代码: > let temp = get_string(); > if let Some(x) = temp.as_ref() { >  ..."
@@ -62983,7 +63559,9 @@
           "code_preview": "#![feature(return_type_notation)]  use std::future::Future;  trait HealthCheck {..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 4,
           "should_fail": false,
           "code_preview": "fn spawn_check<T: HealthCheck<check(..): Send + 'static>>(mut hc: T) {     tokio..."
@@ -63476,7 +64054,9 @@
           "code_preview": "use std::marker::PhantomPinned; use std::pin::Pin;  struct SelfRef { data: u32, ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "fn mutate(p: Pin<&mut SelfRef>) {     // SAFETY: 仅修改非结构钉扎字段 data，不移动被钉扎数据     le..."
@@ -63759,14 +64339,17 @@
       "anti_propositions": [],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 2,
           "should_fail": false,
           "code_preview": "type MyIter = impl Iterator<Item = i32>; ..."
         },
         {
           "flags": [
-            "editable"
+            "editable",
+            "ignore"
           ],
           "lines": 17,
           "should_fail": false,
@@ -63922,7 +64505,9 @@
           "code_preview": "use std::ptr::NonNull;  struct Node { value: i32 }  impl Node {     fn get(self:..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 4,
           "should_fail": false,
           "code_preview": "impl Node {     fn get(this: NonNull<Self>) -> i32 { unsafe { this.as_ref().valu..."
@@ -64053,7 +64638,7 @@
       "layer": "L7",
       "title": "Ergonomic Ref-Counting 预研：人机工学引用计数",
       "positioning": "",
-      "line_count": 324,
+      "line_count": 326,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -64103,9 +64688,9 @@
         },
         {
           "flags": [],
-          "lines": 3,
+          "lines": 5,
           "should_fail": false,
-          "code_preview": "struct Node { next: RefCell<Option<Weak<Node>>> } // 赋值改为 Rc::downgrade(&b) / Rc..."
+          "code_preview": "use std::cell::RefCell; use std::rc::Weak; struct Node { next: RefCell<Option<We..."
         }
       ],
       "sources": [],
@@ -64443,7 +65028,9 @@
           "code_preview": "use std::marker::PhantomPinned; use std::pin::Pin;  struct Fut { buf: [u8; 16], ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "fn fill(p: Pin<&mut Fut>, b: u8) {     // SAFETY: 仅投影到非结构钉扎字段 buf，不移动被钉扎数据     l..."
@@ -65987,7 +66574,9 @@
           "code_preview": "// Rust 2015 — dyn 可省略 fn process(x: &MyTrait) -> Box<MyTrait> { /* ... */ }  //..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 15,
           "should_fail": false,
           "code_preview": "// Rust 2015 extern crate serde; use serde::Serialize;  mod foo {     use ::serd..."
@@ -66452,7 +67041,9 @@
           "code_preview": "// Yew 组件示例 use yew::prelude::*;  #[function_component] fn Counter() -> Html {  ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 17,
           "should_fail": false,
           "code_preview": "// Leptos 组件示例 use leptos::*;  #[component] fn Counter() -> impl IntoView {     ..."

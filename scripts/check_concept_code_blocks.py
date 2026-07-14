@@ -158,23 +158,73 @@ KNOWN_CRATES = {
     "threadpool", "scheduled_thread_pool", "cron", "tokio_cron_scheduler",
     "dynosaur", "miniextendr_api", "extendr_api", "r_vector",
     "orthrus", "numcodecs",
+    "prost_types", "async_stream", "trait_variant",
+    "aws_sdk_dynamodb", "aws_sdk_s3", "aws_sdk_ec2", "aws_sdk_lambda",
 }
 
-# --- 已知依赖缺失豁免清单（R2，2026-07-14）---
-# 以下依赖缺口已在文档侧统一标注 rust,ignore，并在此登记原因，供审计追溯。
-# 若未来 workspace 依赖启用相应 feature 或 crate 补齐模块，应回退对应 ignore 标注。
+# --- 已知依赖缺失豁免清单（R2，2026-07-14；R2b 结构化接线）---
+# 以下依赖缺口在此登记原因，供审计追溯；命中的块计入 dep_untested 而非 dep_fail。
+# 若未来 workspace 依赖启用相应 feature 或 crate 补齐模块，应删除对应条目让块回归实测。
+# 规则键（多键为 AND 关系）：
+#   err    : 对编译失败 stderr 的正则匹配（全部变体/模式失败后匹配）
+#   code   : 对块源码的正则匹配
+#   file   : 对块所在文件相对路径的 fnmatch glob
+#   crates : 块引用的 crate 集合须与该列表有交集
 DEP_KNOWN_MISSING = [
-    # (crate/模块, 原因, 影响文档)
-    ("reqwest[gzip]", "workspace reqwest 未启用 gzip feature（.gzip(true)）", "concept/06_ecosystem/04_web_and_networking/04_http_client_development.md"),
-    ("reqwest[cookies]", "workspace reqwest 未启用 cookies feature（.cookie_store(true)）", "concept/06_ecosystem/04_web_and_networking/04_http_client_development.md"),
-    ("chrono[serde]", "workspace chrono 未启用 serde feature（DateTime<Utc>: Serialize）", "concept/06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md"),
-    ("syn[parsing]", "workspace syn 未启用 parsing feature（Field::span / spanned::Spanned）", "concept/03_advanced/03_proc_macros/{03,05,08}"),
-    ("async_stream", "async-stream crate 不在 workspace 依赖中", "concept/06_ecosystem/04_web_and_networking/09_reactive_programming.md, concept/07_future/00_version_tracking/rust_1_90_stabilized.md"),
-    ("tokio[fs,process,rt-multi-thread]", "部分 rmeta 产物未启用对应 feature（轮换重试全覆盖后仍缺）", "concept/03_advanced/08_process_ipc/02_advanced_process_management.md 等"),
-    ("c0x_*::rust_19x_features", "workspace 示例 crate 未实现 rust_1_90/1_91/1_92 features 模块（文档为演示性 API）", "concept/07_future/00_version_tracking/rust_1_9x_stabilized.md"),
-    ("c12_wasm", "c12_wasm 仅 wasm32 目标构建，host target 无 rmeta", "concept/06_ecosystem/11_domain_applications/19_wasm_faq.md"),
-    ("wgpu/winit", "示例代码与 workspace 锁定的 wgpu/winit 版本 API 漂移", "concept/06_ecosystem/11_domain_applications/15_game_engine_internals.md"),
+    {"id": "reqwest-gzip", "err": r"no method named `gzip`",
+     "reason": "workspace reqwest 未启用 gzip feature（.gzip(true)）"},
+    {"id": "reqwest-cookies", "err": r"cookie_store",
+     "reason": "workspace reqwest 未启用 cookies feature（.cookie_store(true)）"},
+    {"id": "chrono-serde", "err": r"DateTime<[^`]+>`: serde::(De)?Serialize|DateTime<Utc>: serde",
+     "reason": "chrono serde feature 变体缺失（全变体重试后仍缺时兜底豁免）"},
+    {"id": "syn-parsing", "err": r"no method named `span` found.*syn::Field",
+     "reason": "syn parsing feature 变体缺失（全变体重试后仍缺时兜底豁免）"},
+    {"id": "async-stream", "code": r"\basync_stream\b",
+     "reason": "async-stream crate 不在 workspace 依赖中"},
+    {"id": "trait-variant", "code": r"\btrait_variant\b",
+     "reason": "trait-variant crate 不在 workspace 依赖中"},
+    {"id": "aws-sdk", "code": r"\baws_sdk_\w+",
+     "reason": "AWS SDK 系列 crate 不在 workspace 依赖中"},
+    {"id": "tokio-test-util", "err": r"tokio::time::advance|start_paused",
+     "reason": "workspace tokio 未启用 test-util feature（advance/start_paused）"},
+    {"id": "tokio-feature-modules", "err": r"cannot find `(fs|process|signal|net|io|time|sync)` in `tokio`|unresolved import `tokio::(fs|process|signal|net|io)`",
+     "reason": "workspace tokio 全部 rmeta 变体均未启用对应 feature 模块（全变体重试后仍缺）"},
+    {"id": "tower-util", "err": r"unresolved import `tower::(retry|timeout|limit|load_shed)",
+     "reason": "workspace tower 未启用 util feature（retry/timeout/limit）"},
+    {"id": "tower-http-auth", "err": r"tower_http::auth",
+     "reason": "workspace tower-http 未启用 auth feature"},
+    {"id": "parking-lot-deadlock", "err": r"parking_lot::deadlock",
+     "reason": "workspace parking_lot 未启用 deadlock_detection feature"},
+    {"id": "signal-hook-iterator", "err": r"signal_hook::iterator",
+     "reason": "workspace signal-hook 传递依赖变体未启用 iterator feature"},
+    {"id": "rust-19x-demo-api",
+     "file": "concept/07_future/00_version_tracking/rust_1_9*_stabilized.md",
+     "crates": ["c01_ownership_borrow_scope", "c02_type_system", "c03_control_fn",
+                "c04_generic", "c05_threads", "c06_async", "c07_process"],
+     "reason": "版本跟踪页演示性 API（c0x::rust_19x_features 等模块未在 workspace 示例 crate 实现）"},
+    {"id": "c12-wasm", "crates": ["c12_wasm"], "err": r"c12_wasm|rust_19\d_features",
+     "reason": "c12_wasm 仅 wasm32 目标构建/演示性 API 未实现（host target 无可解析模块）"},
+    {"id": "wgpu-winit-drift",
+     "file": "concept/06_ecosystem/11_domain_applications/15_game_engine_internals.md",
+     "crates": ["wgpu", "winit"], "err": r"wgpu|winit",
+     "reason": "示例代码与 workspace 锁定的 wgpu/winit 版本 API 漂移"},
 ]
+
+
+def dep_exemption_reason(block: dict, crates: set[str], stderr: str) -> str | None:
+    """匹配 DEP_KNOWN_MISSING 规则；命中返回 'id: reason'，否则 None。"""
+    import fnmatch
+    for rule in DEP_KNOWN_MISSING:
+        if "err" in rule and not re.search(rule["err"], stderr or ""):
+            continue
+        if "code" in rule and not re.search(rule["code"], block["code"]):
+            continue
+        if "file" in rule and not fnmatch.fnmatch(block["file"], rule["file"]):
+            continue
+        if "crates" in rule and not (set(rule["crates"]) & crates):
+            continue
+        return f"{rule['id']}: {rule['reason']}"
+    return None
 
 WORKSPACE_MEMBER_CRATES = {
     "c01_ownership_borrow_scope", "c02_type_system", "c03_control_fn", "c04_generic",
@@ -310,14 +360,24 @@ def classify(block: dict) -> tuple[str, str]:
     return "candidate", ""
 
 
+HIDDEN_NOSPACE_RE = re.compile(
+    r"^#((?:use|extern|fn|let|static|const|struct|enum|impl|trait|mod|pub|match|if|for|while|"
+    r"loop|type|async|unsafe|return|where|crate|self|super)\b.*)"
+)
+
+
 def unhide_lines(code: str) -> str:
-    """rustdoc/mdbook 约定：以 `# ` 开头的行是隐藏上下文行，编译时去掉 `# ` 前缀。"""
+    """rustdoc/mdbook 约定：以 `# ` 开头的行是隐藏上下文行，编译时去掉 `# ` 前缀。
+    `#` 无前缀空格时仅在随后是 Rust 语句关键字（如 #use/#fn/#let）时才视为隐藏行，
+    避免误伤 quote! 插值（#ident / #(#x),* / #vis 等）。"""
     out = []
     for ln in code.splitlines():
         s = ln.lstrip()
+        indent = ln[: len(ln) - len(s)]
         if s.startswith("# ") and not s.startswith("#!") and not s.startswith("#["):
-            indent = ln[: len(ln) - len(s)]
             out.append(indent + s[2:])
+        elif (m := HIDDEN_NOSPACE_RE.match(s)) is not None:
+            out.append(indent + m.group(1))
         else:
             out.append(ln)
     return "\n".join(out)
@@ -337,16 +397,36 @@ def wrap_code(code: str) -> str:
     return f"{head}fn main() {{\n{indented}\n}}\n"
 
 
+def wrap_code_async(code: str) -> str:
+    """顶层含 `.await` 且无 fn main 的块：包入 `async fn __cb_async_main()` 并附空 main，
+    使顶层 await 合法（async fn 体仍会被完整类型检查）。"""
+    code = unhide_lines(code)
+    lines = code.splitlines()
+    inner_attrs = [ln for ln in lines if ln.strip().startswith("#![")]
+    body = [ln for ln in lines if not ln.strip().startswith("#![")]
+    indented = "\n".join("    " + ln for ln in body)
+    head = "\n".join(inner_attrs) + ("\n" if inner_attrs else "")
+    return f"{head}async fn __cb_async_main() {{\n{indented}\n}}\nfn main() {{}}\n"
+
+
 def find_extern_artifacts(deps_dir: Path, crate: str) -> list[Path]:
     """在 target/debug/deps 中定位 crate 的全部候选 rmeta/rlib（proc-macro 为动态库）。
-    同一 crate 可能因 feature 差异存在多个构建产物（如 tokio full vs 子集），
-    返回全部候选，编译失败时轮换重试。"""
-    hits: list[Path] = []
+    同一 crate 可能因 feature 差异存在多个构建产物（如 tokio full vs 子集）。
+    按构建哈希去重（同一哈希的 .rmeta/.rlib 只留一个，优先 rmeta），返回全部
+    不同变体，编译失败时轮换重试。"""
+    by_hash: dict[str, list[Path]] = {}
     for pat in (
         f"lib{crate}-*.rmeta", f"lib{crate}-*.rlib",
         f"{crate}-*.dll", f"lib{crate}-*.so", f"{crate}-*.so", f"lib{crate}-*.dylib",
     ):
-        hits.extend(sorted(deps_dir.glob(pat)))
+        for p in sorted(deps_dir.glob(pat)):
+            key = p.stem  # lib<crate>-<hash>，同哈希不同扩展名归为一组
+            by_hash.setdefault(key, []).append(p)
+    pref = {".rmeta": 0, ".rlib": 1, ".dll": 2, ".so": 3, ".dylib": 4}
+    hits: list[Path] = []
+    for key in sorted(by_hash):
+        group = sorted(by_hash[key], key=lambda p: pref.get(p.suffix, 9))
+        hits.append(group[0])
     return hits
 
 
@@ -375,26 +455,66 @@ def rustc_compile(src: str, tmpdir: Path, tag: str, externs: list[tuple[str, Pat
 
 def compile_one(block: dict, tmpdir: Path) -> dict:
     """rustc 直接编译无依赖块。包装为 bin 失败时，回退按 lib（不包装）再试一次：
-    部分纯 item 块（含 super::/mod 语义）包入 fn main 会改变模块语义。"""
+    部分纯 item 块（含 super::/mod 语义）包入 fn main 会改变模块语义。
+    顶层含 .await 且无 fn main 时，再回退 async fn 包装（消除 E0728 误报）。"""
     src = wrap_code(block["code"])
     h = hashlib.sha1((block["file"] + str(block["line"]) + src).encode()).hexdigest()[:12]
     ed = block_edition(block)
+    has_main = bool(re.search(r"fn\s+main\s*\(", block["code"]))
     try:
         r = rustc_compile(src, tmpdir, f"b_{h}", [], edition=ed)
-        if r.returncode != 0 and not re.search(r"fn\s+main\s*\(", block["code"]):
+        if r.returncode != 0 and not has_main:
             r2 = rustc_compile(unhide_lines(block["code"]), tmpdir, f"b_{h}_lib", [], "lib", ed)
             if r2.returncode == 0:
                 return {**block, "status": "pass", "stderr": "", "mode": "lib"}
+            if ".await" in block["code"]:
+                r3 = rustc_compile(wrap_code_async(block["code"]), tmpdir, f"b_{h}_async", [], "bin", ed)
+                if r3.returncode == 0:
+                    return {**block, "status": "pass", "stderr": "", "mode": "async"}
     except subprocess.TimeoutExpired:
         return {**block, "status": "timeout", "stderr": f"rustc timeout {RUSTC_TIMEOUT}s"}
     ok = r.returncode == 0
     return {**block, "status": "pass" if ok else "fail", "stderr": "" if ok else r.stderr}
 
 
+MAX_EXTERN_COMBOS = 24  # 多 crate 变体笛卡尔积上限（防组合爆炸）
+PROC_MACRO_ATTR_RE = re.compile(r"#\s*\[\s*proc_macro")
+
+
+def build_extern_combos(cands: dict[str, list[Path]]) -> list[list[tuple[str, Path]]]:
+    """多 crate 多变体时生成 --extern 组合：对角优先（v3 的锁步顺序），
+    随后补笛卡尔积其余组合，上限 MAX_EXTERN_COMBOS。"""
+    names = sorted(cands)
+    lists = [cands[n] for n in names]
+    combos: list[tuple] = []
+    seen: set[tuple] = set()
+    # 对角组合
+    for k in range(max(len(v) for v in lists)):
+        combo = tuple(arts[min(k, len(arts) - 1)] for arts in lists)
+        if combo not in seen:
+            seen.add(combo)
+            combos.append(combo)
+    # 笛卡尔积补齐
+    import itertools
+    for combo in itertools.product(*lists):
+        if len(combos) >= MAX_EXTERN_COMBOS:
+            break
+        if combo not in seen:
+            seen.add(combo)
+            combos.append(combo)
+    return [list(zip(names, c)) for c in combos[:MAX_EXTERN_COMBOS]]
+
+
+def n_errors(stderr: str) -> int:
+    return sum(1 for ln in stderr.splitlines() if ln.startswith("error"))
+
+
 def compile_dep_one(block: dict, tmpdir: Path) -> dict:
     """依赖块：rmeta --extern 解析后编译；找不到依赖 → dep_untested。
-    多构建产物（feature 差异）时轮换候选重试，最多 4 轮；全部失败且错误为
-    feature 缺失 → dep_untested（环境限制，不计入腐烂）。"""
+    多构建产物（feature 差异）时按对角+笛卡尔积轮换重试（上限 MAX_EXTERN_COMBOS）；
+    每个组合按 bin(包装) → lib(不包装) → proc-macro → async 包装 模式回退。
+    全部失败后保留错误数最少的诊断；命中 DEP_KNOWN_MISSING 豁免或 feature
+    缺失特征 → dep_untested（环境限制，不计入腐烂）。"""
     crates = referenced_crates(block["code"])
     cands: dict[str, list[Path]] = {}
     missing = []
@@ -405,29 +525,47 @@ def compile_dep_one(block: dict, tmpdir: Path) -> dict:
         else:
             cands[c] = arts
     if missing:
-        return {**block, "status": "dep_untested",
-                "stderr": "deps 目录无 rmeta/rlib: " + ",".join(missing)}
-    src = wrap_code(block["code"])
-    has_main = bool(re.search(r"fn\s+main\s*\(", block["code"]))
-    lib_src = unhide_lines(block["code"])
+        rid = dep_exemption_reason(block, crates, "")
+        note = "deps 目录无 rmeta/rlib: " + ",".join(missing)
+        if rid:
+            note += f"（已知豁免 {rid}）"
+        return {**block, "status": "dep_untested", "stderr": note}
+    code = block["code"]
+    src = wrap_code(code)
+    has_main = bool(re.search(r"fn\s+main\s*\(", code))
+    lib_src = unhide_lines(code)
     ed = block_edition(block)
     h = hashlib.sha1((block["file"] + str(block["line"]) + src).encode()).hexdigest()[:12]
-    rounds = min(max(len(v) for v in cands.values()), 8)
-    last: subprocess.CompletedProcess | None = None
+    # 编译模式回退链（仅附加新模式，不改变既有通过路径）
+    modes: list[tuple[str, str, str]] = [("bin", src, "bin")]
+    if not has_main:
+        modes.append(("lib", lib_src, "lib"))
+    if PROC_MACRO_ATTR_RE.search(code) or "proc_macro::" in code:
+        modes.append(("proc-macro", lib_src, "proc-macro"))
+    if not has_main and ".await" in code:
+        modes.append(("async", wrap_code_async(code), "bin"))
+    combos = build_extern_combos(cands)
+    best: subprocess.CompletedProcess | None = None
+    best_mode = ""
     try:
-        for k in range(rounds):
-            externs = [(c, arts[min(k, len(arts) - 1)]) for c, arts in cands.items()]
-            r = rustc_compile(src, tmpdir, f"d_{h}_r{k}", externs, edition=ed)
-            if r.returncode == 0:
-                return {**block, "status": "pass", "stderr": ""}
-            last = r
-            if not has_main:
-                r2 = rustc_compile(lib_src, tmpdir, f"d_{h}_r{k}_lib", externs, "lib", ed)
-                if r2.returncode == 0:
-                    return {**block, "status": "pass", "stderr": "", "mode": "lib"}
+        for ci, externs in enumerate(combos):
+            for mode, msrc, ctype in modes:
+                r = rustc_compile(msrc, tmpdir, f"d_{h}_c{ci}_{mode}", externs, ctype, ed)
+                if r.returncode == 0:
+                    out = {**block, "status": "pass", "stderr": ""}
+                    if mode != "bin":
+                        out["mode"] = mode
+                    return out
+                if best is None or n_errors(r.stderr) < n_errors(best.stderr):
+                    best, best_mode = r, mode
     except subprocess.TimeoutExpired:
         return {**block, "status": "timeout", "stderr": f"rustc timeout {RUSTC_TIMEOUT}s"}
-    stderr = last.stderr if last else ""
+    stderr = best.stderr if best else ""
+    rid = dep_exemption_reason(block, crates, stderr)
+    if rid:
+        return {**block, "status": "dep_untested",
+                "stderr": f"已知豁免 {rid}（最佳诊断[{best_mode}]: "
+                          + summarize_stderr(stderr, 160) + "）"}
     if "feature is disabled" in stderr or "feature may not be used" in stderr:
         return {**block, "status": "dep_untested",
                 "stderr": "workspace 构建未启用所需 feature: " + summarize_stderr(stderr, 200)}
