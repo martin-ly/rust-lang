@@ -189,3 +189,22 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [AeneasVerif/aeneas](https://github.com/AeneasVerif/aeneas) · [model-checking/kani — 模型检查器](https://github.com/model-checking/kani)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((未定义行为清单 Behavior Considered Undefined))
+    核心原则
+    UB 清单
+      数据竞争 Data races
+      访问悬垂或基于未对齐指针的 place
+      越界 place projection
+    悬垂指针与未对齐指针细节
+      悬垂指针
+      未对齐指针
+    const 上下文中的额外要求
+    与其他语言的 UB 交互
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

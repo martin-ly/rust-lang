@@ -203,3 +203,19 @@ fn main() { println!("{B}"); }
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [verus-lang/verus — SMT 验证器](https://github.com/verus-lang/verus) · [creusot-rs/creusot — Rust 演绎验证](https://github.com/creusot-rs/creusot)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((常量求值 Constant Evaluation))
+    什么是常量求值
+    常量表达式
+      借用限制
+    常量上下文 Const Context
+    Const Functions
+      限制
+    Const 块
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

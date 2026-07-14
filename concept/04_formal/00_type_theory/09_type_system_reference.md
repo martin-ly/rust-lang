@@ -439,3 +439,17 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [verus-lang/verus — SMT 验证器](https://github.com/verus-lang/verus) · [creusot-rs/creusot — Rust 演绎验证](https://github.com/creusot-rs/creusot)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((类型系统参考 Type System Reference))
+    反命题决策树
+    类型分类
+    动态大小类型 DST
+    内部可变性
+    子类型与变型
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

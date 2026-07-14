@@ -2444,7 +2444,12 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节从测验 1：MSRV 的定义（理解层）、测验 2：Stable / Beta / Nightly（应用层）、测验 3：Edition 的含义（应用层）、测验 4：条件编译处理版本差异（分析层）等5个方面切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
+本节测验覆盖版本跟踪的三个核心动作：**识别**（判断一个特性属于 stable/beta/nightly 哪个通道）、**应用**（用 `rust-version` 与条件编译约束 MSRV）、**分析**（从 release notes 推断升级影响面）。作答建议：
+
+- 先尝试不看答案写出完整推理，再核对解析；
+- 涉及具体稳定版本的题目，答案以 [Rust Release Notes](https://releases.rs/) 与官方博客为唯一事实源；
+- 若答案与本机工具链行为不符，先用 `rustc --version` 确认版本再质疑题目；
+- 条件编译类题目（`#[cfg(version(...))]` 方向）注意其仍是 nightly 特性，稳定方案是 build script 探测。
 
 ### 测验 1：MSRV 的定义（理解层）
 

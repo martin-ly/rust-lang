@@ -623,7 +623,15 @@ fn main() {
 
 ## 十、边界测试：CLI 开发的编译错误
 
-本节围绕「边界测试：CLI 开发的编译错误」展开，依次讨论边界测试：`clap` 派生宏的字段类型约束（编译错误）、边界测试：信号处理与异步代码的交互（编译错误）、边界测试：终端颜色检测与 `NO_COLOR` 标准（运行时显示问题）、边界测试：ANSI 颜色代码与 Windows 旧版控制台兼容性问题（…等6个方面。
+CLI 工具的错误处理哲学与库不同：用户输入不可信、运行环境不可控（管道、信号、终端能力）。本章覆盖六个 CLI 特有的边界：
+
+- **clap 派生宏的字段类型约束**：字段类型必须可解析（`FromStr`/`ValueEnum`），`Vec<T>` 等元素类型不满足约束时编译期拒绝——这是 Rust 把参数校验提前到编译期的体现，对照 Python argparse 的运行时异常。
+- **信号处理与异步代码**：信号处理器中只能做 async-signal-safe 操作（设置 `AtomicBool`），在 tokio 中应改用 `tokio::signal` 将信号转为 future。
+- **终端颜色与 `NO_COLOR` 标准**：非 TTY（管道/重定向）时应自动禁用 ANSI 颜色，并尊重 `NO_COLOR` 环境变量。
+- **Windows 旧版控制台**：ANSI 转义需显式启用（`console`/`nu-ansi-term` 已封装）。
+- 另两项覆盖退出码约定与 stdout 被管道关闭（SIGPIPE）时的优雅退出。
+
+每节给出错误示例与跨平台修正方案。
 
 ### 10.1 边界测试：`clap` 派生宏的字段类型约束（编译错误）
 
@@ -721,7 +729,14 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：`clap` crate 在 Rust CLI 开发中提供什…、测验 2：`indicatif` 和 `console` crate…、测验 3：为什么 Rust 的 CLI 二进制文件通常比 Python…、测验 4：`shell completion`（命令自动补全）在 Ru…等5个方面，本节依次展开。
+以下测验检验本章五个 CLI 开发判断点，均为实际项目评审中的高频问题：
+
+- 测验 1：**clap 的定位**——derive 宏从 struct 定义生成参数解析、`--help` 与子命令，是 Rust CLI 的事实标准。
+- 测验 2：**indicatif vs console**——前者管进度条/动画，后者管颜色与终端控制，二者常搭配使用。
+- 测验 3：**启动速度来源**——Rust CLI 无解释器预热与 GC，冷启动毫秒级，这对 shell 补全、git 子命令等高频调用场景至关重要。
+- 测验 4–5：**shell completion 与分发**——clap_complete 生成补全脚本，以及静态链接（musl）对跨机器分发的意义。
+
+先独立作答，再展开 `<details>` 核对。
 
 ### 测验 1：`clap` crate 在 Rust CLI 开发中提供什么功能？（理解层）
 

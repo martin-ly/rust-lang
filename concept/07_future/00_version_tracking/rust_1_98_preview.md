@@ -627,7 +627,17 @@ WASM 组件模型（Component Model）是 1.98 周期嵌入式的核心跟踪项
 
 > **稳定特性汇总**：1.98.0 稳定后的权威汇总页为 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)；本页仅负责周期跟踪，两页 canonical 分工见文首。
 
-「跟踪与更新机制」部分按更新频率、状态标记约定与关联文档的顺序逐层展开。
+本页与下游页面（stabilized 汇总页、各预览特性页）保持以下更新约定：
+
+| 机制 | 约定 |
+|:---|:---|
+| 更新频率 | 每个 6 周发布周期核对一次 beta 分支 release notes；周期内仅在跟踪项状态变化时更新 |
+| 状态标记 | ✅ 已稳定 / 🔄 beta 中 / 🧪 nightly-only / ⏳ 待定 / ❌ 已撤回，五态互斥 |
+| 事实源优先级 | 官方 release notes > rust-lang/rust PR 合并记录 > Project Goals 月度更新 > internals 讨论 |
+| 登记规则 | 仅当 PR 合并进对应分支才登记；"计划中/讨论中"不进入特性表 |
+| 关联文档 | 稳定后内容迁入 `rust_1_98_stabilized.md`，本页只保留跟踪记录，避免双权威页 |
+
+不确定的条目宁可留 ⏳ 空缺，禁止据 roadmap 推断补全。
 
 ### 7.1 更新频率
 

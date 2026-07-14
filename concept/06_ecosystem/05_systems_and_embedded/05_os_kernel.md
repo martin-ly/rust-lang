@@ -13,7 +13,12 @@
 
 ## 一、Rust for Linux：内核中的 Rust 代码
 
-「Rust for Linux：内核中的 Rust 代码」部分包含里程碑 与 内核中的 Rust 约束 两条主线，本节依次说明。
+Rust for Linux 是 Rust 进入操作系统内核的标志性项目，自 2022 年 v6.1 起 Rust 基础设施合入主线。理解它需把握两条主线：
+
+- **里程碑线**：从 2020 年 Miguel Ojeda 的 RFC，到 v5.15 编译器/核心模块基础设施、v6.1 首个 Rust 驱动（Android Binder）、v6.8 扩展到网络与块设备子系统——内核社区采用“新驱动优先 Rust”的渐进策略。
+- **约束线**：内核态 Rust 与用户态有根本差异——仅 `core` + 受限 `alloc`（`kmalloc`）、panic 必须 abort、禁用浮点（内核不保存 FPU 上下文）、错误码回退为 C 风格 `i32`、大量 `unsafe` 与 C 子系统交互。这些约束决定了内核 Rust 代码的风格与审查重点。
+
+以下两节分别给出里程碑时间线与约束对照表。
 
 ### 1.1 里程碑
 

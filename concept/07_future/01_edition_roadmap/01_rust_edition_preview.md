@@ -50,7 +50,15 @@
 
 ## 四、迁移前后代码对比
 
-本节将「迁移前后代码对比」分解为若干主题： Async closures、`if let` 临时作用域与Never type fallback。
+迁移对比采用"最小差异"格式：每对示例只展示 **edition 迁移强制或推荐的改写**，其余代码保持一致，使读者直接看出迁移成本集中在哪几类语法上。三个对比主题对应三类迁移风险：
+
+| 主题 | 迁移风险类型 | 自动化程度 |
+|:---|:---|:---|
+| Async closures | 新语法可用、旧写法仍合法（非强制） | `cargo fix` 不自动改写，建议人工评估 |
+| `if let` 临时作用域 | 临时值 drop 时机变化（语义变更） | `cargo fix` 提供部分修复，需人工复测 |
+| Never type fallback | `!` 降级推断的类型变化 | 编译期 warning 提示，需显式类型注解 |
+
+判定原则：语义变更类（drop 时机、fallback）必须人工复核；纯语法类可依赖 `cargo fix --edition`。
 
 ### Async closures
 

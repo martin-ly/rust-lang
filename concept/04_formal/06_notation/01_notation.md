@@ -135,3 +135,18 @@ graph TD
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [model-checking/verify-rust-std](https://github.com/model-checking/verify-rust-std) · [verus-lang/verus — SMT 验证器](https://github.com/verus-lang/verus)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((符号约定 Notation))
+    产生式规则
+      示例
+    重复与可选
+    终结符与非终结符
+    规则标识符
+    阅读策略
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

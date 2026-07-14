@@ -58,7 +58,15 @@
 
 ## 二、2026 年关键演进方向
 
-理解「2026 年关键演进方向」需要把握 Type-Checking Lints（最大能力缺口）、策略转变：从数量到质量与`public` 依赖标记集成，本节依次展开。
+2026 年的演进围绕一个公认缺口：**cargo-semver-checks 目前主要做 API 表面（类型签名）比对，不做类型检查级的语义比对**。三条方向按成熟度排序：
+
+| 方向 | 解决的问题 | 当前状态判据 |
+|:---|:---|:---|
+| Type-checking lints | `impl Trait` 约束变化、auto trait 泄漏等语义级 breaking | 官方仓库 lint 清单与 issue 登记 |
+| 策略转变：从数量到质量 | 降低 lint 误报率，优先合并高信度 lint | release 中 lint 精度标注 |
+| `public` 依赖标记集成 | 依赖类型泄漏到公共 API 时的版本要求 | cargo public/private 依赖特性进展 |
+
+判定原则：评估"能否在 CI 强制 semver-checks"时，先统计本仓库的误报率；误报未收敛前建议 warn-only。
 
 ### 2.1 Type-Checking Lints（最大能力缺口）
 
@@ -101,7 +109,12 @@ pub fn example(x: String) {}
 
 ## 三、对 Rust 生态的结构性影响
 
-本节围绕「对 Rust 生态的结构性影响」展开，覆盖供应链稳定性 与 与 Rust 标准库的互惠 两个方面。
+结构性影响沿两条链路传导：
+
+1. **供应链稳定性**：semver-checks 进入 CI 后，breaking change 从"下游报错才发现"前移到"发布前阻断"，与 `cargo publish` 的依赖解析叠加，抬高整个生态的升级可信度；
+2. **与标准库的互惠**：标准库自身的稳定性承诺（stable API 永不 breaking）为 semver-checks 提供基准语料；反过来 lint 的误报复测也依赖 std 的真实演化历史。
+
+判定一个生态工具是否产生"结构性"影响的标准：它是否改变了发布者的**默认行为**（而非可选增强）。semver-checks 的临界点是被 crates.io 或主流 workspace 模板默认集成。
 
 ### 3.1 供应链稳定性
 

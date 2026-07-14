@@ -217,3 +217,18 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [verus-lang/verus — SMT 验证器](https://github.com/verus-lang/verus) · [creusot-rs/creusot — Rust 演绎验证](https://github.com/creusot-rs/creusot)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((析构函数与 Drop Scope Destructors))
+    什么是析构函数
+    析构函数构成
+    Drop Scope
+      主要 drop scope
+    函数参数作用域
+    局部变量作用域
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

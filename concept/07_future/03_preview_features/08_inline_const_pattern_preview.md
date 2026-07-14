@@ -47,7 +47,18 @@ match x {
 
 ## 二、语法说明
 
-「语法说明」涉及稳定基础：Inline Const 表达式（Rust 1.79+）、未来语法：Inline Const in Patterns与适用场景，本节逐一说明其要点。
+Inline const 分两个成熟度层次：
+
+**稳定基础（Rust 1.79+）**：`const { ... }` 表达式允许在表达式位置嵌入匿名常量块，块内遵循 const 求值规则（无堆分配、无外部可变状态），典型用途是把复杂字面量计算移出函数体且保证编译期求值：
+
+```rust
+const FACTOR: usize = const { 6 * 7 }; // Rust 1.79+ 稳定
+assert_eq!(FACTOR, 42);
+```
+
+**未来语法（patterns 位置）**：RFC 2920 方向允许 `const { ... }` 直接出现在模式位置，使匹配值来自编译期表达式而非具名常量；尚未稳定，nightly 需 `#![feature(inline_const_pat)]`。
+
+判定原则：表达式位置已可放心使用；模式位置仍属预览，依赖它的库会被绑定到 nightly。
 
 ### 2.1 稳定基础：Inline Const 表达式（Rust 1.79+）
 

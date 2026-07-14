@@ -188,3 +188,17 @@ RFC 3416 为 `#![feature(...)]` 属性引入**结构化元数据**要求：night
 
 - **P1 学术/形式化**: [RustHorn: CHC-based Verification for Rust Programs (ESOP 2020, Springer LNCS)](https://link.springer.com/chapter/10.1007/978-3-030-44914-8_18) · [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982)
 - **P2 生态/社区**: [docs.rs/syn — 生态权威 API 文档](https://docs.rs/syn) · [docs.rs/quote — 生态权威 API 文档](https://docs.rs/quote)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((属性 Attributes))
+    认知路径
+    反命题决策树
+    属性语法
+    属性分类
+    属性应用位置
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

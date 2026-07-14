@@ -189,3 +189,18 @@ fn main() { dup(); dup2(); }
 
 - **P1 学术/形式化**: [RustHorn: CHC-based Verification for Rust Programs (ESOP 2020, Springer LNCS)](https://link.springer.com/chapter/10.1007/978-3-030-44914-8_18) · [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982)
 - **P2 生态/社区**: [verus-lang/verus — SMT 验证器](https://github.com/verus-lang/verus) · [creusot-rs/creusot — Rust 演绎验证](https://github.com/creusot-rs/creusot)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((名字参考 Names Reference))
+    认知路径
+    反命题决策树
+    命名空间
+    作用域
+      作用域嵌套规则
+    Prelude
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

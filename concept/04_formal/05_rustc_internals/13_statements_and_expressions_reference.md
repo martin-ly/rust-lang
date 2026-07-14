@@ -193,3 +193,20 @@ fn main() { println!("{}", add(1, 2)); }
 
 - **P1 学术/形式化**: [Aeneas: Rust Verification by Functional Translation (arXiv:2206.07185)](https://arxiv.org/abs/2206.07185) · [RustHorn: CHC-based Verification for Rust Programs (ESOP 2020, Springer LNCS)](https://link.springer.com/chapter/10.1007/978-3-030-44914-8_18)
 - **P2 生态/社区**: [creusot-rs/creusot — Rust 演绎验证](https://github.com/creusot-rs/creusot) · [formal-land/coq-of-rust](https://github.com/formal-land/coq-of-rust)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((语句与表达式参考 Statements and Expressions Reference))
+    认知路径
+    反命题决策树
+    语句
+      语法概要
+    表达式分类
+    主要表达式形式
+      闭包表达式
+      Match 表达式
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

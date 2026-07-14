@@ -36,7 +36,13 @@
 
 ## 二、语法说明：如何启用与使用
 
-理解「语法说明：如何启用与使用」需要把握启用 lint、自定义类型标记与解决方式，本节依次展开。
+`#[must_not_suspend]` 是一个 **lint 属性**（nightly: `must_not_suspend`），用于标记"不得跨越 `.await` 挂起点持有"的值——最典型的是 `std::sync::MutexGuard`。使用三步：
+
+1. **启用 lint**：nightly 下 `#![feature(must_not_suspend)]`，编译器对已知危险类型与显式标注类型发出 `must_not_suspend` 警告；
+2. **自定义类型标记**：`#[must_not_suspend = "reason"]` 标注自有类型，任何持有它跨越 `.await` 的 future 触发 lint；
+3. **解决方式**：把临界区收缩到 `.await` 之前（缩小 `{ let g = m.lock(); ... }` 作用域）、改用异步互斥（其 guard 语义为跨 await 公平锁）、或将状态移入消息通道。
+
+判定原则：出现该 lint 时优先**缩短 guard 生命周期**；只有确实需要跨 await 持锁时才换异步互斥。
 
 ### 2.1 启用 lint
 

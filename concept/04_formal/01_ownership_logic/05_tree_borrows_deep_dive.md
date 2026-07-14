@@ -200,3 +200,20 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [formal-land/coq-of-rust](https://github.com/formal-land/coq-of-rust) · [AeneasVerif/aeneas](https://github.com/AeneasVerif/aeneas)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Tree Borrows 深度解析))
+    权威定义
+    Stacked Borrows 的核心限制
+    Tree Borrows 核心规则
+      1 树结构
+      2 权限状态
+      3 转换规则
+    Tree Borrows vs Stacked Borrows
+    Miri 中使用 Tree Borrows
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

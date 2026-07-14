@@ -620,7 +620,20 @@ fn main() {
 
 ## 十、边界测试：Rust 与 Kotlin 的编译错误对比
 
-「边界测试：Rust 与 Kotlin 的编译错误对比」部分按边界测试：Kotlin 的可空类型与 Rust 的 Option（编译…、边界测试：Kotlin 的 data class 与 Rust 的 d…、边界测试：Kotlin 的协程与 Rust 的 async 的调度模型…、边界测试：Kotlin 的 null safety 与 Rust 的…等5个方面的顺序逐层展开。
+边界测试（Boundary Testing）的目标是构造**最小可复现反例**：在 Kotlin 中合法、惯用的写法，平移到 Rust 后应被编译器在类型检查或借用检查阶段拒绝。每个用例采用三段式结构：
+
+1. **Kotlin 侧**：给出可编译的惯用代码及其运行时行为；
+2. **Rust 侧**：给出语义等价的尝试及其在 rustc 1.97（Edition 2024）下的精确报错；
+3. **判定依据**：指出差异来自类型系统（可空类型 vs `Option<T>`）、内存模型（GC vs 所有权）还是运行时（协程调度 vs `async`/await）。
+
+| 用例 | Kotlin 依赖的机制 | Rust 的拦截点 |
+|:---|:---|:---|
+| 可空类型 vs `Option` | 平台类型 `T!` 的隐式解包 | 类型不匹配 / 强制 `unwrap` |
+| `data class` vs `derive` | 自动 `copy()`/`componentN()` | 需显式 `#[derive]`，且 `copy` 语义不同 |
+| 协程 vs `async` | 挂起点由 dispatcher 调度 | Future 惰性求值、需 executor |
+| null safety vs 借用检查 | 智能转换（smart cast） | `if let` / `?` 显式收窄 |
+
+判定原则：若 Kotlin 代码依赖 GC 托管或平台类型的隐式保证，则 Rust 等价代码**必须**在编译期失败，否则视为用例设计失败。
 
 ### 10.1 边界测试：Kotlin 的可空类型与 Rust 的 Option（编译错误）
 

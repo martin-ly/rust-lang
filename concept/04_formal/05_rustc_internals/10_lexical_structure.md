@@ -284,3 +284,17 @@ fn main() { let x: u16 = 300; }
 
 - **P1 学术/形式化**: [Oxide: The Essence of Rust (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustHornBelt: A Semantic Foundation for Functional Verification of Rust Programs (PLDI 2022)](https://dl.acm.org/doi/10.1145/3519939.3523704)
 - **P2 生态/社区**: [AeneasVerif/aeneas](https://github.com/AeneasVerif/aeneas) · [model-checking/kani — 模型检查器](https://github.com/model-checking/kani)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((词法结构 Lexical Structure))
+    认知路径
+    反命题决策树
+    输入格式
+    Shebang
+    关键字
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

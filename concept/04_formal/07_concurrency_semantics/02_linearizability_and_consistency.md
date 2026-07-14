@@ -48,6 +48,7 @@
   - [七、定理链与相关概念](#七定理链与相关概念)
   - [八、认知路径](#八认知路径)
   - [权威来源索引](#权威来源索引)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -344,3 +345,24 @@ fn pop_wrong(&self) -> Option<T> {
 > **相关文件**: [同层：进程代数](01_process_calculi_for_rust.md) · [同层：Actor 语义](03_actor_semantics.md) · [L3 谱系概览](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) · [L6 CRDT](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-12 ｜ **状态**: ✅ W5-2 新建（Rust 1.97 对齐）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((线性化与一致性谱系 从 Herlihy-Wing 到 Rust 无锁结构))
+    为什么需要线性化
+    Herlihy-Wing 1990 形式定义
+      1 历史与实时序
+      2 线性化的定义
+      3 两条元性质 Herlihy-Wing 定理
+    证明方法
+      1 线性化点法
+      2 不变量法 不变式证明
+      3 证明方法谱系
+    一致性谱系与 CAP 的关系
+      1 与 CAP 的关系声明
+    实例 Treiber 栈的线性化点分析
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

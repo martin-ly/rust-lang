@@ -176,7 +176,13 @@ Embassy 是 Rust 嵌入式生态的 **async/await 运行时（Runtime）**，允
 
 ## 四、从 0.2 迁移到 1.0 的行动指南
 
-「从 0.2 迁移到 1.0 的行动指南」部分按 Cargo.toml 更新、代码迁移要点与迁移检查清单的顺序逐层展开。
+embedded-hal 1.0（2024 年 1 月发布）是嵌入式 Rust 生态的稳定性里程碑，但从 0.2 迁移涉及三处不兼容变更，需按顺序处理：
+
+1. **Cargo.toml 更新**：依赖改为 `embedded-hal = "1.0"`，异步需求另加 `embedded-hal-async`；若使用 Embassy 生态，executor/time/芯片 HAL 需同步升级到兼容 1.0 的版本线。
+2. **代码迁移**：trait 从 `blocking::spi::{Write, Transfer}` 合并为 `spi::SpiDevice`（事务导向，自动管理 CS 片选），`digital::v2::OutputPin` 简化为 `digital::OutputPin`（错误类型关联化，`ErrorType` 超级 trait）。驱动 crate 若未升级 1.0 会与新 HAL 实现类型不匹配——这是迁移期最常见的编译错误。
+3. **检查清单**：逐外设核对 trait 方法签名、错误类型映射与延时 API（`DelayUs`）。
+
+以下各节给出配置片段与新旧 API 对照代码。
 
 ### 4.1 Cargo.toml 更新
 

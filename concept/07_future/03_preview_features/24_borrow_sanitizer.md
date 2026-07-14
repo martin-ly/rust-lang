@@ -132,7 +132,13 @@ graph LR
 
 ## 三、使用方法 (Nightly)
 
-本节围绕「使用方法 (Nightly)」展开，依次讨论基本使用、可编译示例、cargo-bsan 插件 (未来)与与 Miri 的对比示例。
+BorrowSanitizer 处于**早期实验**阶段，使用前需确认三点环境事实：
+
+1. **工具链**：仅 nightly 支持，且依赖 LLVM 的 BorrowSanitizer 插桩；具体编译标志随 LLVM/rustc 版本演进，以本机 `rustc -Z help` 与 rustc-dev-guide 为准；
+2. **启用方式**：通过 `RUSTFLAGS` 注入实验性 sanitizer 标志重新编译全部依赖，运行期由插桩代码报告借用栈违规（retag 失效、非法的别名读写）；
+3. **产物定位**：目标是含 `unsafe` 代码 crate 的 CI 增强层，而非发布产物——插桩带来显著运行时开销。
+
+与 Miri 的分工：Miri 是**解释器**，覆盖全量内存模型但慢；BorrowSanitizer 是**原生插桩**，快但只覆盖实际执行路径，两者互补。若本机 `-Z help` 未列出对应选项，说明该 nightly 尚未包含支持，应回退 Miri 验证。
 
 ### 3.1 基本使用
 
@@ -304,7 +310,11 @@ Safety Tags (RFC #3842)        BorrowSanitizer
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节将「嵌入式测验（Embedded Quiz）」分解为若干主题：测验 1：BorrowSanitizer 与 Miri 在检测能力上有…、测验 2：BorrowSanitizer 基于什么 LLVM 基础设施…、测验 3：为什么需要 BorrowSanitizer 而不是仅依赖编译…、测验 4：BorrowSanitizer 对 `unsafe` 代码审…等5个方面。
+本节测验按 Bloom 层级递进：先考**工具定位**（与 Miri 的差异），再考**机制理解**（LLVM 插桩基础），最后考**工程判断**（何时必须引入动态检测）。作答时注意：
+
+- BorrowSanitizer 仍在快速演进，涉及具体命令行标志的题目以本机 nightly `rustc -Z help` 输出为最终事实源；
+- 与 Miri 对比的题目，关键区分点是"解释执行 vs 原生插桩"，而非功能列表记忆；
+- 涉及 unsafe 审计流程的题目，答案应给出**顺序**（先 Miri 全量、后插桩覆盖热路径），而非二选一。
 
 ### 测验 1：BorrowSanitizer 与 Miri 在检测能力上有什么区别？（理解层）
 

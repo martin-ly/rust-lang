@@ -1131,7 +1131,13 @@ API 设计领域的两个高频误判：
 
 ## 十、边界测试
 
-本节从边界测试：GraphQL N+1 查询导致数据库过载（运行时性能）、边界测试：缺少请求体大小限制导致 DoS（运行时错误）与边界测试：API 版本化破坏向后兼容（逻辑错误）切入，剖析「边界测试」的核心内容。
+API 设计的失效不只在编译期，更多出现在运行时的资源与契约边界上。本章选取三类最具代表性的边界：
+
+1. **GraphQL N+1 查询**（运行时性能）：resolver 逐条触发数据库查询，查询数随结果集线性膨胀；Rust 侧的标准解法是 DataLoader 批量化，将 N 次查询合并为 1 次 `WHERE id = ANY(...)`。
+2. **请求体无大小限制**（运行时错误/安全）：攻击者上传超大 body 耗尽内存，axum/actix 均需在 extractor 或 middleware 层显式设置 `DefaultBodyLimit`/`PayloadConfig`。
+3. **版本化破坏向后兼容**（逻辑错误）：删除字段、改变语义而未升主版本号；判定依据是“现有客户端反序列化旧响应是否失败或静默误读”。
+
+每节给出错误示例、触发条件与可落地的修正模式。
 
 ### 10.1 边界测试：GraphQL N+1 查询导致数据库过载（运行时性能）
 
@@ -1267,7 +1273,14 @@ struct UserV2 {
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节围绕「嵌入式测验（Embedded Quiz）」展开，依次讨论测验 1：Rust API 设计中，" consuming build…、测验 2：`IntoIterator` trait 在 API 设计中…、测验 3：为什么 Rust 的公共 API 中通常避免返回 `impl…、测验 4：`sealed trait` 模式在 Rust API 设计…等5个方面。
+以下测验检验本章五个 API 设计判断点，均为 Rust 公共 API 评审中的高频议题：
+
+- 测验 1：**consuming vs 非 consuming builder**——`build(self)` 消耗构建器可杜绝“构建后修改”，非 consuming 版本灵活性更高但允许半构建状态被复用。
+- 测验 2：**`IntoIterator` 作为参数类型**——接受任何可迭代类型（`Vec`、`&[T]`、`HashSet`），是零成本泛型化的典型手法。
+- 测验 3：**返回 `impl Trait` 的代价**——隐藏具体类型使签名稳定，但阻止调用方命名类型、存入结构体或手写 trait 实现。
+- 测验 4–5：**sealed trait 与版本演进**——私有标记 trait 阻止下游实现，换来未来添加默认方法不破坏兼容性。
+
+作答后再展开 `<details>` 核对解析。
 
 ### 测验 1：Rust API 设计中，" consuming builder" 与"非 consuming builder"有什么区别？（理解层）
 

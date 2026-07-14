@@ -62,7 +62,13 @@ rustup run 1.93.0 cargo build
 
 ## 三、主要稳定特性
 
-「主要稳定特性」部分按 `MaybeUninit` 增强 API、`String` / `Vec` 原始部分拆分、`VecDeque` 条件弹出、切片安全转固定长度数组等7个方面的顺序逐层展开。
+1.93 的稳定面集中在**标准库的底层安全 API**：把一批原先需要手写 `unsafe` 指针操作的场景，升级为类型系统可校验的安全封装。按影响面可分三组：
+
+- **未初始化内存**：`MaybeUninit` 系列增强，减少裸 `*mut T` 手写；
+- **容器内部表示**：`String`/`Vec`/`VecDeque` 暴露受控的原始部分访问，配合 `unsafe` 块实现零拷贝扩展；
+- **切片↔定长数组转换**：编译期已知长度的安全转换，替代 `transmute`。
+
+阅读顺序建议：先看各节给出的"稳定前/稳定后"对照，再核对官方 1.93 Release Notes 中对应条目。本页只收录已进入 stable 的条目；nightly-only 特性见 `03_preview_features/` 各预览页。
 
 ### 3.1 `MaybeUninit` 增强 API
 

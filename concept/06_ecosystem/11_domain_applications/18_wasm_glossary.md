@@ -262,7 +262,14 @@ JavaScript 侧术语描述宿主如何消费 WASM 模块，核心是**实例化 
 
 ## ⚡ 性能优化术语
 
-本节从二进制大小优化、运行时优化、LTO (Link Time Optimization)与wasm-opt切入，剖析「性能优化术语」的核心内容。
+WASM 性能优化术语围绕“二进制大小”与“运行时速度”两个往往冲突的目标组织：
+
+- **二进制大小优化**：`opt-level = "s"/"z"`、`lto = true`、`strip = true` 与 wasm-opt 后处理，对首屏加载敏感的 Web 应用是首要指标；典型收益 20–30%。
+- **运行时优化**：减少分配、算法优化、SIMD 指令与避免跨边界类型转换——注意 wasm↔JS 边界的字符串/数组拷贝常是真实瓶颈，优于微优化 Rust 内部循环。
+- **LTO**：跨 crate 整体优化，同时改善大小与速度，代价是编译时间显著增加；`thin` 是常见的折中档。
+- **wasm-opt**：Binaryen 工具链的后处理优化器，在 rustc/LLVM 优化之后进一步压缩与加速，发布构建的标准最后一步。
+
+以下小节给出各术语的定义、方法与典型收益。
 
 ### 二进制大小优化
 
@@ -310,7 +317,13 @@ JavaScript 侧术语描述宿主如何消费 WASM 模块，核心是**实例化 
 
 ## 🛠️ 工具链术语
 
-本节将「工具链术语」分解为若干主题： Cargo、rustc、wasmtime与wasmer。
+WASM 工作流的工具链术语按编译—运行—封装三层组织：
+
+- **编译层**：`cargo` 与 `rustc` 负责将 Rust 编译到 `wasm32-unknown-unknown`（浏览器）或 `wasm32-wasip1/p2`（WASI 服务端）目标，链接对应的标准库切片。
+- **运行层**：`wasmtime`（Bytecode Alliance 的独立运行时，服务端/CLI/边缘计算标准选择）与 `wasmer`（支持多后端编译器与嵌入式场景）让 WASM 脱离浏览器运行；WASI 定义了它们共同的系统接口（文件、时钟、随机数）。
+- **封装层**：`wasm-bindgen`/`wasm-pack` 处理 JS 胶水与 npm 发布（浏览器侧），`wizer` 做快照预初始化加速冷启动。
+
+选型提示：服务端无特殊需求默认 wasmtime；需要嵌入式宿主或特定编译后端评估 wasmer。
 
 ### Cargo
 

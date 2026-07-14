@@ -585,7 +585,20 @@ fn main() {
 
 ## 十、边界测试：Rust 与 Scala 的编译错误对比
 
-「边界测试：Rust 与 Scala 的编译错误对比」涉及边界测试：Scala 的隐式转换与 Rust 的显式 trait（编译…、边界测试：Scala 的 null 与 Rust 的 Option（编…、边界测试：Scala 的隐式转换与 Rust 的显式 `From`/`…、边界测试：Scala 的 actor 模型与 Rust 的 async…等5个方面，本节逐一说明其要点。
+边界测试的目标是把 Scala 与 Rust 的**隐式/显式哲学差异**转化为可机器复核的编译结果：Scala 依赖隐式解析（implicits）与 JVM 运行时代偿的写法，在 Rust 中应被 trait 求解器或借用检查器在编译期拒绝。每个用例给出三段式证据：
+
+1. **Scala 侧**：惯用代码 + 隐式解析发生的具体位置；
+2. **Rust 侧**：等价尝试 + rustc 1.97（Edition 2024）的精确报错；
+3. **判定依据**：差异来自 trait 一致性、null 建模还是并发运行时。
+
+| 用例 | Scala 依赖的机制 | Rust 的拦截点 |
+|:---|:---|:---|
+| 隐式转换 vs 显式 trait | 编译器自动插入 `implicit` | 必须显式调用 `From`/`Into` |
+| `null` vs `Option` | JVM 引用可空 | 类型不匹配，`Option` 强制解包 |
+| 隐式 `From`/`Into` 链 | 隐式作用域解析 | orphan rule 与求解顺序显式化 |
+| actor 模型 vs `async` | Akka 托管调度 | Future 惰性 + 显式 executor |
+
+判定原则：凡 Scala 代码的正确性依赖**隐式解析结果**，Rust 等价写法必须显式化该解析，否则视为用例设计失败。
 
 ### 10.1 边界测试：Scala 的隐式转换与 Rust 的显式 trait（编译错误）
 

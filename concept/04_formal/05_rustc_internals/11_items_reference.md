@@ -256,3 +256,18 @@ unsafe extern "C" {
 
 - **P1 学术/形式化**: [Aeneas: Rust Verification by Functional Translation (arXiv:2206.07185)](https://arxiv.org/abs/2206.07185) · [RustHorn: CHC-based Verification for Rust Programs (ESOP 2020, Springer LNCS)](https://link.springer.com/chapter/10.1007/978-3-030-44914-8_18)
 - **P2 生态/社区**: [AeneasVerif/aeneas](https://github.com/AeneasVerif/aeneas) · [model-checking/kani — 模型检查器](https://github.com/model-checking/kani)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((条目参考 Items Reference))
+    认知路径
+    反命题决策树
+    Item 概述
+      语法概要
+    模块与路径
+    函数与常量项
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

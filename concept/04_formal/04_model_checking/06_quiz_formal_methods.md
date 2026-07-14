@@ -681,3 +681,27 @@ let _ref = &mut x;     // Stacked Borrows: ptr 失效
 **文档版本**: 1.0
 **最后更新**: 2026-07-10
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((测验 形式化方法概念 L4 试点扩展))
+    分离逻辑与所有权
+      Q1. 分离逻辑 Separation Logic 中 分离合取 运算符的含义是什么
+      Q2. RustBelt 的核心贡献是什么 它如何证明 Rust 的类型安全
+    类型安全与定理
+      Q3. 以下 定理 教学类比 描述的是什么性质
+      Q4. 线性逻辑 Linear Logic 中 ⊗ 张量积 和 ⅋ par 与 Rust 类型系统的对应关系是什么
+    验证工具链
+      Q5. Kani Miri 和 BorrowSanitizer 的检测能力有何不同
+      Q6. Hoare 三元组 {P} C {Q} 的含义是什么 如何用分离逻辑表达 Rust 的 Box new
+    形式化与工程实践
+      Q7. Soundness Bug 健全性漏洞 在 Rust 编译器中意味着什么 为什么它比普通 bug 更严重
+      Q8. 以下 定理 教学类比 描述的是什么 为什么它对 Rust 的 unsafe 代码至关重要
+    综合应用
+      Q9. Verus Creusot 和 Prusti 在 Rust 验证生态中的定位有何不同
+      Q10. 以下代码在 Miri 下会报告什么 解释 Tree Borrows 与 Stacked Borrows 的区别
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

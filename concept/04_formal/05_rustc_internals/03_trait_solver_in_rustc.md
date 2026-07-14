@@ -52,6 +52,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：重叠的 blanket impl 使求解无唯一解（rustc 1.97.0 实测）](#反例重叠的-blanket-impl-使求解无唯一解rustc-1970-实测)
     - [✅ 修正：用 newtype 消除重叠](#-修正用-newtype-消除重叠)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -455,3 +456,20 @@ struct Ai32(i32);
 impl<T> Marker for A<T> {}
 impl Marker for Ai32 {} // 不同类型，无重叠
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((rustc 中的 Trait Solver))
+    问题定义 Obligation
+    三大核心操作
+    Selection 候选装配与筛选
+      1 Candidate Assembly 候选装配
+      2 Winnowing 筛选
+      3 Confirmation 确认
+    Fulfillment 约束求解工作队列
+    Evaluation 不约束推断变量的判断
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

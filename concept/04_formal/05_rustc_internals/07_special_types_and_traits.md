@@ -222,3 +222,20 @@ fn main() {
     require_send(RawBox { p: std::ptr::null_mut() });
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((特殊类型与 Trait Special Types and Traits))
+    概述
+    特殊类型
+      Box<T>
+      Rc<T> / Arc<T>
+      Pin<P>
+    运算符 Trait
+    Deref 与 DerefMut
+    Drop
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

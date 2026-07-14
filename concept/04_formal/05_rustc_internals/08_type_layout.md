@@ -186,3 +186,20 @@ fn main() {
     println!("{v}");
 }
 ```
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((类型布局 Type Layout))
+    什么是类型布局
+    Size 与 Alignment
+    repr 属性
+      repr C
+      repr transparent
+      repr packed
+    零大小类型 ZST
+    动态大小类型 DST
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

@@ -435,7 +435,16 @@ graph TD
 
 ## 十、边界测试：const trait impl 的编译错误
 
-理解「边界测试：const trait impl 的编译错误」需要把握边界测试：const 上下文中调用非 const 方法（编译错误）、边界测试：trait bound 的 const 兼容性（编译错误）、边界测试：`~const` bound 与默认实现的交互（编译错误）、边界测试：const trait 的默认实现与泛型约束（编译错误）等6个方面，本节依次展开。
+const trait impl 的边界测试围绕一条核心规则：**const 上下文只能调用标记为 const 的操作**。每个用例验证编译器在以下哪个检查点拒绝：
+
+| 用例 | 违反的规则 | 期望报错位置 |
+|:---|:---|:---|
+| 调用非 const 方法 | const 上下文的调用白名单 | 调用点 |
+| trait bound 兼容性 | 运行时 impl 用于 const 上下文 | bound 求解处 |
+| `~const` 交互 | 条件 const 与默认实现的冲突 | 方法解析 |
+| 默认实现约束 | 默认方法体不满足 const 规则 | impl 定义处 |
+
+判定原则：`~const` bound 表示"若被调用方是 const 则本调用合法"，是推断链的起点；理解每个报错前先确认链上哪一环缺少 `~const` 标记。
 
 ### 10.1 边界测试：const 上下文中调用非 const 方法（编译错误）
 

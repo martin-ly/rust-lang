@@ -501,7 +501,15 @@ Rust Wasm 工具链:
 
 ## 十、边界测试：WebAssembly 的编译错误
 
-本节围绕「边界测试：WebAssembly 的编译错误」展开，依次讨论边界测试：`wasm32` 目标的标准库限制（编译错误）、边界测试：`wasm-bindgen` 的类型映射（编译错误）、边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）、边界测试：`wasm32-unknown-unknown` 的 pan…等5个方面。
+WASM 目标把大量桌面环境理所当然的 API 变成编译期不可用，这是 Rust “目标平台能力编码进类型系统”的极端体现。本章覆盖五个代表性边界：
+
+- **`wasm32-unknown-unknown` 的 std 限制**：无 OS 意味着 `std::thread`/`std::fs`/`std::net` 整体不可用；并发只能走 `wasm-bindgen-futures` + JS 事件循环或 Web Workers。
+- **`wasm-bindgen` 类型映射**：`String`/`Vec<u8>` 跨边界需要拷贝与内存管理，`#[wasm_bindgen]` 签名中使用不支持的类型（如泛型、trait 对象）直接编译失败。
+- **线性内存与 Rust 引用**：WASM 单块线性内存中，Rust 指针即内存偏移；把指针暴露给 JS 后 Rust 侧 realloc 会导致 JS 持有的视图悬垂——经典 use-after-free 的跨语言变体。
+- **panic 行为**：`wasm32-unknown-unknown` 默认 `panic=abort`，`catch_unwind` 不可用，错误必须走 `Result`。
+- 第五项覆盖 SIMD 特性检测与 `target_feature` 约束。
+
+每节给出错误代码、目标平台行为与修正方案。
 
 ### 10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）
 
@@ -572,7 +580,14 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-理解「嵌入式测验（Embedded Quiz）」需要把握测验 1：WebAssembly（WASM）相比 JavaScript…、测验 2：Rust 编译为 WASM 时，为什么需要 `wasm-bi…、测验 3：`wasm-pack` 在 Rust/WASM 工作流中扮演…、测验 4：WASM 的线性内存（Linear Memory）模型是什么…等5个方面，本节依次展开。
+以下测验检验本章五个 WASM 理解点：
+
+- 测验 1：**WASM vs JavaScript 的性能来源**——预编译字节码跳过解析/动态类型检查，执行接近原生；但 DOM 交互仍需经 JS 胶水，纯计算场景收益最大。
+- 测验 2：**为什么需要 `wasm-bindgen`**——WASM 的 ABI 只懂 i32/i64/f32/f64，字符串、数组、对象的转换胶水全由 bindgen 生成；它是类型安全跨语言调用的关键。
+- 测验 3：**`wasm-pack` 的角色**——打包、npm 发布、测试运行的完整工作流封装。
+- 测验 4–5：**线性内存模型与 WASI**——WASM 内存是单一可增长 ArrayBuffer，WASI 则把 WASM 带出浏览器进入服务端/边缘。
+
+先独立作答，再展开 `<details>` 核对解析。
 
 ### 测验 1：WebAssembly（WASM）相比 JavaScript 在性能上的主要优势是什么？（理解层）
 

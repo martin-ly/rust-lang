@@ -190,7 +190,15 @@ impl Drop for Foo {
 
 ## 四、解决方案 3：Field Projections（Project Goals #390）
 
-本节从与 Pinned Places 的关系 与 设计空间 两个层面剖析「解决方案 3：Field Projections（Proj…」。
+Field Projections（字段投影，Project Goals #390）解决的核心矛盾：`Pin<&mut T>` 整体保证不动，但**未参与自引用的字段**在结构上仍可安全移动——现有 API 要求手写 `unsafe` 投影。该方案与 Pinned Places 的关系：
+
+| 维度 | Pinned Places | Field Projections |
+|:---|:---|:---|
+| 抽象层级 | 位置（place）级不变式 | 字段级选择性投影 |
+| 用户可见性 | 新类型/语法 | derive 或编译器生成的投影方法 |
+| unsafe 面 | 封装在类型内 | 由编译器验证哪些字段可投影 |
+
+设计空间的关键决策：① 哪些字段默认不可投影（参与自引用的）；② 投影 API 是 derive 生成还是语言内建；③ 与 `Drop` 的交互（投影出的字段 move 后原结构的 drop 语义）。三项未定前该方案保持预览状态。
 
 ### 4.1 与 Pinned Places 的关系
 

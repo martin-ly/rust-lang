@@ -244,3 +244,20 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [creusot-rs/creusot — Rust 演绎验证](https://github.com/creusot-rs/creusot) · [formal-land/coq-of-rust](https://github.com/formal-land/coq-of-rust)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((名称 作用域与解析 Names Scopes and Resolution))
+    认知路径
+    反命题决策树
+    实体与声明
+      显式声明的实体
+      隐式声明的实体
+      形式化表示
+    命名空间 Namespaces
+    作用域 Scopes
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

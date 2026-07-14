@@ -46,6 +46,7 @@
   - [八、定理链与相关概念](#八定理链与相关概念)
   - [九、认知路径](#九认知路径)
   - [权威来源索引](#权威来源索引)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -328,3 +329,19 @@ OTP 重启把 actor 状态重置为初值；若崩溃前 actor 已把**不一致
 > **相关文件**: [同层：进程代数](01_process_calculi_for_rust.md) · [同层：线性化](02_linearizability_and_consistency.md) · [L3 工程谱系](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-12 ｜ **状态**: ✅ W5-3 新建（Rust 1.97 对齐）
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Actor 模型形式语义 从 Hewitt 公理到 Rust 生态))
+    Actor 是什么 三条公理
+    Agha 1986 的形式化
+    监督与位置透明性
+      1 监督 Supervision
+      2 位置透明性 Location Transparency
+    Erlang OTP 监督树语义
+    Rust 映射 actix / ractor / kameo
+```
+
+> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
