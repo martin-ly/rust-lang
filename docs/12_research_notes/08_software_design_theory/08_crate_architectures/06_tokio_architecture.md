@@ -1,6 +1,6 @@
 > **Canonical 说明**: 本文档已整合为重定向 stub。
 >
-> Tokio 的权威深度文位于 [Tokio 深度解析](../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md)；若只需使用指南，亦可参考 [Tokio 运行时（Runtime）生态指南](../../../../archive/content/ecosystem/async_runtimes/tokio_deep_dive.md)。
+> Tokio 的权威深度文位于 [Tokio 深度解析](../../../../content/ecosystem/deep_dives/02_tokio_deep_dive.md)。
 > 本文件不再保留重复内容。
 
 # Tokio Crate 架构解构 {#tokio-crate-架构解构}

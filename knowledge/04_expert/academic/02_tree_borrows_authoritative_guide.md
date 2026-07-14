@@ -3,7 +3,6 @@
 > **EN**: Tree Borrows Authoritative Guide
 > **Summary**: Tree Borrows 权威指南 Tree Borrows Authoritative Guide. (stub/archive redirect)
 > **权威来源**: 本主题深度解释见 [concept/04_formal/36_tree_borrows_deep_dive.md](../../../concept/04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md)。
-> **历史版本存档**: [archive/knowledge/04_expert/academic/02_tree_borrows_authoritative_guide.md](../../../archive/knowledge/04_expert/academic/02_tree_borrows_authoritative_guide.md)
 >
 > **定位**: 本文件为精简知识卡片，保留核心规则/概念与常见陷阱。详细解释、形式化语义与代码示例请查看权威来源。
 
