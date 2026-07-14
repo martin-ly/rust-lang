@@ -49,7 +49,6 @@
 > [TRPL 3rd Ed: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Brown University Interactive Book: Ch17](https://rust-book.cs.brown.edu/ch17-00-async-await.html) ·
 > [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/index.html) ·
 > [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) · [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)
-
 > **Rust 1.97.0 变更提示**：
 > Rust 1.97.0 起 `pin!` 宏会阻止隐式 deref coercion，相关细节与迁移建议见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
 
