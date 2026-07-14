@@ -60,11 +60,11 @@
 
 | 库/框架 | 权威来源 | 项目文档 | 备注 |
 |---------|----------|----------|------|
-| `tokio::net` | [Tokio Docs - tokio::net](https://docs.rs/tokio/latest/tokio/) | [crates/c10_networks/](../../crates/c10_networks/README.md) | TCP/UDP 异步（Async） IO |
-| `hyper` | [hyper.rs](https://hyper.rs/) | [crates/c10_networks/](../../crates/c10_networks/README.md) / [../08_software_design_theory/08_crate_architectures/08_hyper_architecture.md](../08_software_design_theory/08_crate_architectures/08_hyper_architecture.md) | HTTP/1、HTTP/2 客户端/服务端 |
-| `tonic` | [docs.rs - tonic](https://docs.rs/tonic/) | [crates/c10_networks/](../../crates/c10_networks/README.md) / [../08_software_design_theory/08_crate_architectures/10_tonic_architecture.md](../08_software_design_theory/08_crate_architectures/10_tonic_architecture.md) | gRPC over HTTP/2 |
+| `tokio::net` | [Tokio Docs - tokio::net](https://docs.rs/tokio/latest/tokio/) | [crates/c10_networks/](../../../crates/c10_networks/README.md) | TCP/UDP 异步（Async） IO |
+| `hyper` | [hyper.rs](https://hyper.rs/) | [crates/c10_networks/](../../../crates/c10_networks/README.md) / [../08_software_design_theory/08_crate_architectures/08_hyper_architecture.md](../08_software_design_theory/08_crate_architectures/08_hyper_architecture.md) | HTTP/1、HTTP/2 客户端/服务端 |
+| `tonic` | [docs.rs - tonic](https://docs.rs/tonic/) | [crates/c10_networks/](../../../crates/c10_networks/README.md) / [../08_software_design_theory/08_crate_architectures/10_tonic_architecture.md](../08_software_design_theory/08_crate_architectures/10_tonic_architecture.md) | gRPC over HTTP/2 |
 | `mio` | [docs.rs - mio](https://docs.rs/mio/) | [../08_software_design_theory/08_crate_architectures/22_mio_architecture.md](../08_software_design_theory/08_crate_architectures/22_mio_architecture.md) | 跨平台 epoll/kqueue/IOCP |
-| `h3` / `quinn` | [docs.rs - h3](https://docs.rs/h3/) / [docs.rs - quinn](https://docs.rs/quinn/) | [crates/c10_networks/](../../crates/c10_networks/README.md) | HTTP/3 + QUIC 实验/生产实现 |
+| `h3` / `quinn` | [docs.rs - h3](https://docs.rs/h3/) / [docs.rs - quinn](https://docs.rs/quinn/) | [crates/c10_networks/](../../../crates/c10_networks/README.md) | HTTP/3 + QUIC 实验/生产实现 |
 
 ---
 
@@ -74,7 +74,7 @@
 |---------|----------|----------|------|
 | `axum` | [docs.rs - axum](https://docs.rs/axum/) | [../08_software_design_theory/08_crate_architectures/07_axum_architecture.md](../08_software_design_theory/08_crate_architectures/07_axum_architecture.md) | 基于 Tower 的异步 Web 框架 |
 | `actix-web` | [actix.rs](https://actix.rs/) | [../08_software_design_theory/08_crate_architectures/14_actix_web_architecture.md](../08_software_design_theory/08_crate_architectures/14_actix_web_architecture.md) | Actor 模型 Web 框架 |
-| `rocket` | [rocket.rs](https://rocket.rs/) | [crates/c10_networks/](../../crates/c10_networks/README.md) | 类型驱动 Web 框架 |
+| `rocket` | [rocket.rs](https://rocket.rs/) | [crates/c10_networks/](../../../crates/c10_networks/README.md) | 类型驱动 Web 框架 |
 | `tower` | [docs.rs - tower](https://docs.rs/tower/) | [../08_software_design_theory/08_crate_architectures/02_tower_architecture.md](../08_software_design_theory/08_crate_architectures/02_tower_architecture.md) | Service/Layer 中间件抽象 |
 | `tower-http` | [docs.rs - tower-http](https://docs.rs/tower-http/) | [../08_software_design_theory/08_crate_architectures/02_tower_architecture.md](../08_software_design_theory/08_crate_architectures/02_tower_architecture.md) | HTTP 专用中间件集合 |
 
@@ -84,11 +84,11 @@
 
 | 标准/协议 | 权威来源 | 项目文档 | 备注 |
 |-----------|----------|----------|------|
-| HTTP/1.1 | [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) | [crates/c10_networks/](../../crates/c10_networks/README.md) | 报文格式与持久连接 |
-| HTTP/2 | [RFC 9113](https://www.rfc-editor.org/rfc/rfc9113.html) | [crates/c10_networks/](../../crates/c10_networks/README.md) / [../08_software_design_theory/08_crate_architectures/08_hyper_architecture.md](../08_software_design_theory/08_crate_architectures/08_hyper_architecture.md) | 二进制分帧、多路复用 |
-| HTTP/3 | [RFC 9114](https://www.rfc-editor.org/rfc/rfc9114.html) | [crates/c10_networks/](../../crates/c10_networks/README.md) | 基于 QUIC 的无连接 HTTP |
-| WebSocket | [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) | [crates/c10_networks/](../../crates/c10_networks/README.md) | 全双工通信 |
-| OpenAPI | [OpenAPI Specification](https://spec.openapis.org/oas/latest.html) | [crates/c10_networks/](../../crates/c10_networks/README.md) | API 描述与代码生成 |
+| HTTP/1.1 | [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) | [crates/c10_networks/](../../../crates/c10_networks/README.md) | 报文格式与持久连接 |
+| HTTP/2 | [RFC 9113](https://www.rfc-editor.org/rfc/rfc9113.html) | [crates/c10_networks/](../../../crates/c10_networks/README.md) / [../08_software_design_theory/08_crate_architectures/08_hyper_architecture.md](../08_software_design_theory/08_crate_architectures/08_hyper_architecture.md) | 二进制分帧、多路复用 |
+| HTTP/3 | [RFC 9114](https://www.rfc-editor.org/rfc/rfc9114.html) | [crates/c10_networks/](../../../crates/c10_networks/README.md) | 基于 QUIC 的无连接 HTTP |
+| WebSocket | [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) | [crates/c10_networks/](../../../crates/c10_networks/README.md) | 全双工通信 |
+| OpenAPI | [OpenAPI Specification](https://spec.openapis.org/oas/latest.html) | [crates/c10_networks/](../../../crates/c10_networks/README.md) | API 描述与代码生成 |
 
 ---
 
@@ -97,8 +97,8 @@
 | 项目文档 | 生态覆盖 | 权威来源 |
 |----------|----------|----------|
 | [../11_cheatsheets/02_error_handling_cheatsheet.md](../11_cheatsheets/02_error_handling_cheatsheet.md) | Result、Option、`?`、panic、错误转换、thiserror/anyhow/eyre | Rust Book Ch 9、Rust Reference、std |
-| [crates/c06_async/README.md](../../crates/c06_async/README.md) | 异步运行时（Runtime）、tokio 错误处理与任务管理 | Tokio Docs |
-| [crates/c10_networks/README.md](../../crates/c10_networks/README.md) | TCP/UDP、HTTP/1/2/3、WebSocket、gRPC、DNS、P2P | tokio::net、hyper、tonic、RFC 9112/9113/9114/6455 |
+| [crates/c06_async/README.md](../../../crates/c06_async/README.md) | 异步运行时（Runtime）、tokio 错误处理与任务管理 | Tokio Docs |
+| [crates/c10_networks/README.md](../../../crates/c10_networks/README.md) | TCP/UDP、HTTP/1/2/3、WebSocket、gRPC、DNS、P2P | tokio::net、hyper、tonic、RFC 9112/9113/9114/6455 |
 | [03_async_ecosystem_alignment.md](03_async_ecosystem_alignment.md) | tokio、hyper、axum、tonic 异步生态映射 | Tokio、hyper、axum、tonic 官方文档 |
 | [../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md](../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md) | axum、actix-web、hyper、tonic、tower 架构分析 | 官方文档与 crates.io 依赖分析 |
 | [32_rust_book_alignment.md](32_rust_book_alignment.md) | Rust Book Ch 9 错误处理逐章映射 | The Rust Programming Language |

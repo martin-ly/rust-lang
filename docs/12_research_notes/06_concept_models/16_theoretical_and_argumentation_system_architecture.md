@@ -897,7 +897,7 @@ Admitted.
 | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) | 设计机制论证 |
 | [ARGUMENTATION_GAP_INDEX](03_argumentation_gap_index.md) | 论证缺口追踪 |
 | [software_design_theory](../08_software_design_theory/README.md) | **软件设计理论体系**：设计模式形式化、23/43 模型、执行模型、组合工程有效性 |
-| [UNSAFE_RUST_GUIDE](../../concept/03_advanced/02_unsafe/01_unsafe.md) | Unsafe Rust 专题指南 |
+| [UNSAFE_RUST_GUIDE](../../../concept/03_advanced/02_unsafe/01_unsafe.md) | Unsafe Rust 专题指南 |
 
 ---
 
@@ -956,7 +956,7 @@ Admitted.
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

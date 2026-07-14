@@ -141,11 +141,11 @@ ARC 需要维护 B1/B2 幽灵队列，总元数据量可达 `2×capacity`。在�
 
 | 策略 | 实现文件 | 示例/对比 |
 |------|----------|-----------|
-| LRU | [crates/c08_algorithms/src/data_structure/lru_cache.rs](../../crates/c08_algorithms/src/data_structure/lru_cache.rs) | [cache_eviction_policies_demo.rs](../../crates/c08_algorithms/examples/cache_eviction_policies_demo.rs) |
-| LFU | [crates/c08_algorithms/src/data_structure/lfu_cache.rs](../../crates/c08_algorithms/src/data_structure/lfu_cache.rs) | [cache_eviction_policies_demo.rs](../../crates/c08_algorithms/examples/cache_eviction_policies_demo.rs) |
-| ARC | [crates/c08_algorithms/src/data_structure/arc_cache.rs](../../crates/c08_algorithms/src/data_structure/arc_cache.rs) | [cache_eviction_policies_demo.rs](../../crates/c08_algorithms/examples/cache_eviction_policies_demo.rs) |
-| CLOCK | [crates/c08_algorithms/src/data_structure/clock_cache.rs](../../crates/c08_algorithms/src/data_structure/clock_cache.rs) | [cache_eviction_policies_demo.rs](../../crates/c08_algorithms/examples/cache_eviction_policies_demo.rs) |
-| W-TinyLFU | [crates/c08_algorithms/src/data_structure/w_tinylfu_cache.rs](../../crates/c08_algorithms/src/data_structure/w_tinylfu_cache.rs) | [cache_eviction_policies_demo.rs](../../crates/c08_algorithms/examples/cache_eviction_policies_demo.rs) |
+| LRU | [crates/c08_algorithms/src/data_structure/lru_cache.rs](../../../crates/c08_algorithms/src/data_structure/lru_cache.rs) | [cache_eviction_policies_demo.rs](../../../crates/c08_algorithms/examples/cache_eviction_policies_demo.rs) |
+| LFU | [crates/c08_algorithms/src/data_structure/lfu_cache.rs](../../../crates/c08_algorithms/src/data_structure/lfu_cache.rs) | [cache_eviction_policies_demo.rs](../../../crates/c08_algorithms/examples/cache_eviction_policies_demo.rs) |
+| ARC | [crates/c08_algorithms/src/data_structure/arc_cache.rs](../../../crates/c08_algorithms/src/data_structure/arc_cache.rs) | [cache_eviction_policies_demo.rs](../../../crates/c08_algorithms/examples/cache_eviction_policies_demo.rs) |
+| CLOCK | [crates/c08_algorithms/src/data_structure/clock_cache.rs](../../../crates/c08_algorithms/src/data_structure/clock_cache.rs) | [cache_eviction_policies_demo.rs](../../../crates/c08_algorithms/examples/cache_eviction_policies_demo.rs) |
+| W-TinyLFU | [crates/c08_algorithms/src/data_structure/w_tinylfu_cache.rs](../../../crates/c08_algorithms/src/data_structure/w_tinylfu_cache.rs) | [cache_eviction_policies_demo.rs](../../../crates/c08_algorithms/examples/cache_eviction_policies_demo.rs) |
 
 ---
 

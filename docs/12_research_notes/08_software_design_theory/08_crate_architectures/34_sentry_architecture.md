@@ -210,7 +210,7 @@ tx.finish();
 - [Tokio 异步运行时（Runtime）架构](06_tokio_architecture.md)
 - [Tracing 可观测性架构](19_tracing_architecture.md) — 与 sentry-tracing 集成
 - [Tower 中间件抽象架构](02_tower_architecture.md) — sentry-tower 集成
-- [错误处理（Error Handling）深入](../../../../concept/02_intermediate/15_error_handling_deep_dive.md)
+- [错误处理（Error Handling）深入](../../../../concept/02_intermediate/03_error_handling/02_error_handling_deep_dive.md)
 - [异步编程模型](../../../../concept/03_advanced/01_async/01_async.md)
 
 ---

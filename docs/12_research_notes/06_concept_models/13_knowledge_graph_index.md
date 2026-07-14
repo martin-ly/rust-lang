@@ -84,7 +84,7 @@
 | 边界系统 | L2 | [../08_software_design_theory/06_boundary_system/README.md](../08_software_design_theory/06_boundary_system/README.md) | [../08_software_design_theory/06_boundary_system/README.md](../08_software_design_theory/06_boundary_system/README.md) |
 | 分布式模式 | L2 | [../08_software_design_theory/07_distributed/README.md](../08_software_design_theory/07_distributed/README.md) | [../08_software_design_theory/05_workflow_compositional_distributed_counterexamples.md](../08_software_design_theory/05_workflow_compositional_distributed_counterexamples.md) |
 | Crate 架构 | L2 | [../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md](../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md) | [../08_software_design_theory/08_crate_architectures/44_crate_architecture_counterexamples.md](../08_software_design_theory/08_crate_architectures/44_crate_architecture_counterexamples.md) |
-| 算法练习 | L2-L4 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) | [exercises/src/algorithms/](../../exercises/src/algorithms) |
+| 算法练习 | L2-L4 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) | [exercises/src/algorithms/](../../../exercises/src/algorithms) |
 
 ### L3 具体概念 {#l3-具体概念}
 
@@ -169,11 +169,11 @@
 | Hazard Pointer / EBR | 并发安全 / 内存回收 | L4-L6 | [../10_tutorials_and_guides/10_lock_free_data_structures_guide.md](../10_tutorials_and_guides/10_lock_free_data_structures_guide.md) | [../10_tutorials_and_guides/10_lock_free_data_structures_guide.md](../10_tutorials_and_guides/10_lock_free_data_structures_guide.md) §七反例边界 |
 | ABA 问题 | 并发安全 / 无锁数据结构 | L5-L6 | [../10_tutorials_and_guides/10_lock_free_data_structures_guide.md](../10_tutorials_and_guides/10_lock_free_data_structures_guide.md) | [../10_tutorials_and_guides/10_lock_free_data_structures_guide.md](../10_tutorials_and_guides/10_lock_free_data_structures_guide.md) §七反例边界 |
 | 内存序 (Acquire/Release/AcqRel) | 并发安全 / 无锁数据结构 | L4-L5 | [../10_tutorials_and_guides/10_lock_free_data_structures_guide.md](../10_tutorials_and_guides/10_lock_free_data_structures_guide.md) | [../02_formal_methods/16_concurrency_async_counterexamples.md](../02_formal_methods/16_concurrency_async_counterexamples.md) |
-| 排序算法 | 算法练习 | L2-L3 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) | [exercises/src/algorithms/sorting.rs](../../exercises/src/algorithms/sorting.rs) |
-| 搜索算法 | 算法练习 | L2-L3 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) | [exercises/src/algorithms/searching.rs](../../exercises/src/algorithms/searching.rs) |
-| 图论算法 | 算法练习 | L3-L4 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) | [exercises/src/algorithms/graph.rs](../../exercises/src/algorithms/graph.rs) |
-| 动态规划 | 算法练习 | L3-L4 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) | [exercises/src/algorithms/dynamic_programming.rs](../../exercises/src/algorithms/dynamic_programming.rs) |
-| 经典数据结构 | 算法练习 | L2-L4 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) | [exercises/src/algorithms/data_structures.rs](../../exercises/src/algorithms/data_structures.rs) |
+| 排序算法 | 算法练习 | L2-L3 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) | [exercises/src/algorithms/sorting.rs](../../../exercises/src/algorithms/sorting.rs) |
+| 搜索算法 | 算法练习 | L2-L3 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) | [exercises/src/algorithms/searching.rs](../../../exercises/src/algorithms/searching.rs) |
+| 图论算法 | 算法练习 | L3-L4 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) | [exercises/src/algorithms/graph.rs](../../../exercises/src/algorithms/graph.rs) |
+| 动态规划 | 算法练习 | L3-L4 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) | [exercises/src/algorithms/dynamic_programming.rs](../../../exercises/src/algorithms/dynamic_programming.rs) |
+| 经典数据结构 | 算法练习 | L2-L4 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) | [exercises/src/algorithms/data_structures.rs](../../../exercises/src/algorithms/data_structures.rs) |
 | 微基准 | 实验研究 | L5 | [../09_experiments/05_performance_benchmarks.md](../09_experiments/05_performance_benchmarks.md) | [../09_experiments/06_experiments_counterexamples.md](../09_experiments/06_experiments_counterexamples.md) §1-§4 |
 | 并发基准 | 实验研究 | L5 | [../09_experiments/02_concurrency_performance.md](../09_experiments/02_concurrency_performance.md) | [../09_experiments/06_experiments_counterexamples.md](../09_experiments/06_experiments_counterexamples.md) §5 |
 | 内存分析 | 实验研究 | L5 | [../09_experiments/04_memory_analysis.md](../09_experiments/04_memory_analysis.md) | [../09_experiments/06_experiments_counterexamples.md](../09_experiments/06_experiments_counterexamples.md) §6 |
@@ -206,11 +206,11 @@
 | 行号级锚点索引 | 权威来源对齐 / 锚点 | L0-L7 | [../01_alignment_matrices/13_authoritative_source_line_anchors.md](../01_alignment_matrices/13_authoritative_source_line_anchors.md) | 各对齐文档 |
 | RFC 到反例映射 | 权威来源对齐 / RFC / 反例 | L0-L5 | [../01_alignment_matrices/30_rfc_to_counterexample_mapping.md](../01_alignment_matrices/30_rfc_to_counterexample_mapping.md) | 各 `60_*_counterexamples.md` |
 | 性能与测试权威来源对齐 | 权威来源对齐 / 性能 / 测试 | L0-L5 | [../01_alignment_matrices/27_performance_and_testing_alignment.md](../01_alignment_matrices/27_performance_and_testing_alignment.md) | [../09_experiments/06_experiments_counterexamples.md](../09_experiments/06_experiments_counterexamples.md) |
-| 宏/FFI/嵌入式生态权威来源对齐 | 权威来源对齐 / 宏 / FFI / 嵌入式 | L0-L5 | [../01_alignment_matrices/26_macros_ffi_embedded_alignment.md](../01_alignment_matrices/26_macros_ffi_embedded_alignment.md) | [../02_formal_methods/18_unsafe_counterexamples.md](../02_formal_methods/18_unsafe_counterexamples.md) / [crates/c13_embedded/README.md](../../crates/c13_embedded/README.md) |
+| 宏/FFI/嵌入式生态权威来源对齐 | 权威来源对齐 / 宏 / FFI / 嵌入式 | L0-L5 | [../01_alignment_matrices/26_macros_ffi_embedded_alignment.md](../01_alignment_matrices/26_macros_ffi_embedded_alignment.md) | [../02_formal_methods/18_unsafe_counterexamples.md](../02_formal_methods/18_unsafe_counterexamples.md) / [crates/c13_embedded/README.md](../../../crates/c13_embedded/README.md) |
 | 学术资源对齐索引 | 权威来源对齐 / 学术资源 | L0-L6 | [../01_alignment_matrices/01_academic_papers_alignment.md](../01_alignment_matrices/01_academic_papers_alignment.md) | [../03_formal_proofs/18_international_formal_verification_index.md](../03_formal_proofs/18_international_formal_verification_index.md) |
-| 错误处理与网络/Web 生态权威来源对齐 | 权威来源对齐 / 错误处理（Error Handling） / 网络 / Web | L0-L5 | [../01_alignment_matrices/22_error_handling_network_web_alignment.md](../01_alignment_matrices/22_error_handling_network_web_alignment.md) | [../11_cheatsheets/02_error_handling_cheatsheet.md](../11_cheatsheets/02_error_handling_cheatsheet.md) / [crates/c10_networks/README.md](../../crates/c10_networks/README.md) |
-| 数据库、存储与云原生生态权威来源对齐 | 权威来源对齐 / 数据库 / 存储 / 云原生 | L0-L5 | [../01_alignment_matrices/19_database_storage_cloud_alignment.md](../01_alignment_matrices/19_database_storage_cloud_alignment.md) | [crates/c10_networks/README.md](../../crates/c10_networks/README.md) |
-| CI/CD 与供应链安全权威来源对齐 | 权威来源对齐 / CI/CD / 供应链安全 | L0-L4 | [../01_alignment_matrices/16_cicd_supply_chain_alignment.md](../01_alignment_matrices/16_cicd_supply_chain_alignment.md) | [.github/workflows/ci.yml](../../.github/workflows/ci.yml) |
+| 错误处理与网络/Web 生态权威来源对齐 | 权威来源对齐 / 错误处理（Error Handling） / 网络 / Web | L0-L5 | [../01_alignment_matrices/22_error_handling_network_web_alignment.md](../01_alignment_matrices/22_error_handling_network_web_alignment.md) | [../11_cheatsheets/02_error_handling_cheatsheet.md](../11_cheatsheets/02_error_handling_cheatsheet.md) / [crates/c10_networks/README.md](../../../crates/c10_networks/README.md) |
+| 数据库、存储与云原生生态权威来源对齐 | 权威来源对齐 / 数据库 / 存储 / 云原生 | L0-L5 | [../01_alignment_matrices/19_database_storage_cloud_alignment.md](../01_alignment_matrices/19_database_storage_cloud_alignment.md) | [crates/c10_networks/README.md](../../../crates/c10_networks/README.md) |
+| CI/CD 与供应链安全权威来源对齐 | 权威来源对齐 / CI/CD / 供应链安全 | L0-L4 | [../01_alignment_matrices/16_cicd_supply_chain_alignment.md](../01_alignment_matrices/16_cicd_supply_chain_alignment.md) | [.github/workflows/ci.yml](../../../.github/workflows/ci.yml) |
 | 权威来源缺口与反向追溯索引 | 权威来源对齐 / 缺口分析 / 反向追溯 | L0-L7 | [../01_alignment_matrices/12_authoritative_source_gap_and_backref_index.md](../01_alignment_matrices/12_authoritative_source_gap_and_backref_index.md) | [../01_alignment_matrices/05_authoritative_alignment_gap_matrix.md](../01_alignment_matrices/05_authoritative_alignment_gap_matrix.md) / [../01_alignment_matrices/04_authoritative_alignment_gap_analysis.md](../01_alignment_matrices/04_authoritative_alignment_gap_analysis.md) |
 | Crate 架构权威来源对齐 | 权威来源对齐 / Crate 架构 | L0-L5 | [../01_alignment_matrices/18_crate_architecture_authoritative_alignment.md](../01_alignment_matrices/18_crate_architecture_authoritative_alignment.md) | [../08_software_design_theory/08_crate_architectures/44_crate_architecture_counterexamples.md](../08_software_design_theory/08_crate_architectures/44_crate_architecture_counterexamples.md) |
 | 学习路径与面试题权威来源对齐 | 权威来源对齐 / 学习路径 / 面试评估 | L0-L5 | [../01_alignment_matrices/25_learning_and_interview_alignment.md](../01_alignment_matrices/25_learning_and_interview_alignment.md) | [../10_tutorials_and_guides/08_interview_questions_collection.md](../10_tutorials_and_guides/08_interview_questions_collection.md) |
@@ -408,7 +408,7 @@
 | refines | core::range | 范围/迭代器（Iterator） | `core::range` 模块精化了 Rust 的范围与迭代器抽象 | [../12_version_research/02_rust_194_research_update.md](../12_version_research/02_rust_194_research_update.md) / P0: [Rust 1.96 Release Notes – core::range](https://github.com/rust-lang/rust/releases/tag/1.96.0) |
 | version_introduces | Edition 2024 | tail-expr drop order | 2024 Edition 改变尾部表达式临时值作用域/drop 顺序 | [../12_version_research/02_rust_194_research_update.md](../12_version_research/02_rust_194_research_update.md) / P0: [Edition Guide – Tail expression temporary scope](https://doc.rust-lang.org/edition-guide/rust-2024/temporary-tail-expr-scope.html) |
 | version_introduces | 1.95 | if-let guards | Rust 1.95 稳定化 `if let` guards | [../12_version_research/02_rust_194_research_update.md](../12_version_research/02_rust_194_research_update.md) / P0: [Rust 1.95 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.85.0) |
-| version_introduces | 1.96 | core::range / assert_matches! | Rust 1.96 引入 `core::range` 模块并稳定化 `assert_matches!` | [10_rust_194_195_feature_matrix.md](10_rust_194_195_feature_matrix.md) / P0: [Rust 1.96 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.96.0) |
+| version_introduces | 1.96 | core::range / assert_matches! | Rust 1.96 引入 `core::range` 模块并稳定化 `assert_matches!` | [10_rust_194_195_feature_matrix.md](../../../archive/research_notes_2026_06_25/10_rust_194_195_feature_matrix.md) / P0: [Rust 1.96 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.96.0) |
 | refines | 缓存淘汰策略 | 算法 / 缓存策略 | 缓存淘汰是算法在容量受限场景下的精化模型 | [../10_tutorials_and_guides/04_cache_eviction_policies_guide.md](../10_tutorials_and_guides/04_cache_eviction_policies_guide.md) |
 | implements | CLOCK | 近似 LRU | CLOCK 用引用位近似 LRU 的最近使用顺序 | [../10_tutorials_and_guides/04_cache_eviction_policies_guide.md](../10_tutorials_and_guides/04_cache_eviction_policies_guide.md) |
 | refines | ARC | LRU/LFU | ARC 通过 T1/T2/B1/B2 自平衡适应最近/频繁访问 | [../10_tutorials_and_guides/04_cache_eviction_policies_guide.md](../10_tutorials_and_guides/04_cache_eviction_policies_guide.md) |
@@ -420,13 +420,13 @@
 | refines | Degrade | 分布式模式 | 降级是分布式韧性模式的精化形式 | [../08_software_design_theory/07_distributed/08_fallback_pattern.md](../08_software_design_theory/07_distributed/08_fallback_pattern.md) |
 | depends_on | Fallback | 独立回退源 | 回退结果不能依赖主路径的失败域 | [../08_software_design_theory/07_distributed/08_fallback_pattern.md](../08_software_design_theory/07_distributed/08_fallback_pattern.md) |
 | contradicts | Fallback 共享失败域 | 失败隔离 | fallback 仍访问主依赖会导致级联失败 | [../08_software_design_theory/07_distributed/08_fallback_pattern.md](../08_software_design_theory/07_distributed/08_fallback_pattern.md) §反例 1 |
-| depends_on | 排序算法 | 切片（Slice） / 索引 / 递归 | 排序实现依赖 Rust 切片、索引与递归控制 | [exercises/src/algorithms/sorting.rs](../../exercises/src/algorithms/sorting.rs) / P0: [TRPL – Slices](https://doc.rust-lang.org/book/ch04-03-slices.html) |
-| depends_on | 搜索算法 | 切片（Slice） / 队列 / DFS/BFS | 搜索实现依赖切片、标准库队列与图遍历模板 | [exercises/src/algorithms/searching.rs](../../exercises/src/algorithms/searching.rs) / P0: [std::collections::VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) |
-| depends_on | 图论算法 | 优先队列 / 并查集 | Dijkstra 依赖 BinaryHeap；Kruskal/环检测依赖并查集 | [exercises/src/algorithms/graph.rs](../../exercises/src/algorithms/graph.rs) / P0: [std::collections::BinaryHeap](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html) |
-| depends_on | 动态规划 | 迭代 / 滚动数组 | DP 实现依赖 Rust 迭代器与滚动数组空间优化 | [exercises/src/algorithms/dynamic_programming.rs](../../exercises/src/algorithms/dynamic_programming.rs) / P0: [TRPL – Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) |
-| depends_on | 经典数据结构 | 泛型（Generics） / Trait / HashMap | 数据结构实现依赖泛型、Trait 与标准库 HashMap | [exercises/src/algorithms/data_structures.rs](../../exercises/src/algorithms/data_structures.rs) / P0: [TRPL – Generic Types](https://doc.rust-lang.org/book/ch10-00-generics.html) |
-| implements | LRU 缓存 | 经典数据结构 | `LruCache` 是 LRU 淘汰策略的直接实现 | [exercises/src/algorithms/data_structures.rs](../../exercises/src/algorithms/data_structures.rs) |
-| implements | 前缀树 | 经典数据结构 | `Trie` 实现字符串前缀高效存储与检索 | [exercises/src/algorithms/data_structures.rs](../../exercises/src/algorithms/data_structures.rs) |
+| depends_on | 排序算法 | 切片（Slice） / 索引 / 递归 | 排序实现依赖 Rust 切片、索引与递归控制 | [exercises/src/algorithms/sorting.rs](../../../exercises/src/algorithms/sorting.rs) / P0: [TRPL – Slices](https://doc.rust-lang.org/book/ch04-03-slices.html) |
+| depends_on | 搜索算法 | 切片（Slice） / 队列 / DFS/BFS | 搜索实现依赖切片、标准库队列与图遍历模板 | [exercises/src/algorithms/searching.rs](../../../exercises/src/algorithms/searching.rs) / P0: [std::collections::VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) |
+| depends_on | 图论算法 | 优先队列 / 并查集 | Dijkstra 依赖 BinaryHeap；Kruskal/环检测依赖并查集 | [exercises/src/algorithms/graph.rs](../../../exercises/src/algorithms/graph.rs) / P0: [std::collections::BinaryHeap](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html) |
+| depends_on | 动态规划 | 迭代 / 滚动数组 | DP 实现依赖 Rust 迭代器与滚动数组空间优化 | [exercises/src/algorithms/dynamic_programming.rs](../../../exercises/src/algorithms/dynamic_programming.rs) / P0: [TRPL – Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) |
+| depends_on | 经典数据结构 | 泛型（Generics） / Trait / HashMap | 数据结构实现依赖泛型、Trait 与标准库 HashMap | [exercises/src/algorithms/data_structures.rs](../../../exercises/src/algorithms/data_structures.rs) / P0: [TRPL – Generic Types](https://doc.rust-lang.org/book/ch10-00-generics.html) |
+| implements | LRU 缓存 | 经典数据结构 | `LruCache` 是 LRU 淘汰策略的直接实现 | [exercises/src/algorithms/data_structures.rs](../../../exercises/src/algorithms/data_structures.rs) |
+| implements | 前缀树 | 经典数据结构 | `Trie` 实现字符串前缀高效存储与检索 | [exercises/src/algorithms/data_structures.rs](../../../exercises/src/algorithms/data_structures.rs) |
 | aligns_to | 算法练习 | Rust By Example | 算法练习与官方交互式示例风格对齐 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) / P0: [Rust By Example](https://doc.rust-lang.org/rust-by-example/) |
 | aligns_to | 算法练习 | CLRS / LeetCode | 算法题目与经典教材及在线判题来源对齐 | [../10_tutorials_and_guides/02_algorithm_exercises_guide.md](../10_tutorials_and_guides/02_algorithm_exercises_guide.md) / P1: [CLRS](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/) / P2: [LeetCode](https://leetcode.com/) |
 | refines | Treiber Stack | 无锁数据结构 | Treiber Stack 是无锁 LIFO 栈的经典实现 | [../10_tutorials_and_guides/10_lock_free_data_structures_guide.md](../10_tutorials_and_guides/10_lock_free_data_structures_guide.md) / P0: [Rust Atomics and Locks](https://marabos.nl/atomics/) |
@@ -464,40 +464,40 @@
 
 | 主题 | crate / 示例 | 文件 |
 |------|--------------|------|
-| 所有权 | `crates/c01_ownership_borrow_scope` | [crates/c01_ownership_borrow_scope/README.md](../../crates/c01_ownership_borrow_scope/README.md) |
-| 异步 | `crates/c06_async` | [crates/c06_async/README.md](../../crates/c06_async/README.md) |
-| 并发 | `crates/c05_threads` | [crates/c05_threads/README.md](../../crates/c05_threads/README.md) |
-| 设计模式 | `crates/c09_design_pattern` | [crates/c09_design_pattern/README.md](../../crates/c09_design_pattern/README.md) |
-| 模块系统 | 单文件 Cargo script | [examples/module_system_patterns.rs](../../examples/module_system_patterns.rs) |
-| 宏系统 | `crates/c11_macro_system_proc` | [crates/c11_macro_system_proc/examples/](../../crates/c11_macro_system_proc/examples) |
-| FFI / Embedded / WASM | `crates/c12_wasm` / `crates/c13_embedded` | [crates/c12_wasm/examples/](../../crates/c12_wasm/examples) / [crates/c13_embedded/examples/](../../crates/c13_embedded/examples) |
-| 异步/并发示例 | `crates/c06_async` / `crates/c05_threads` | [crates/c06_async/examples/](../../crates/c06_async/examples) / [crates/c05_threads/examples/](../../crates/c05_threads/examples) |
-| Fallback / Degrade 示例 | `crates/c06_async` | [crates/c06_async/examples/fallback_degrade_pattern.rs](../../crates/c06_async/examples/fallback_degrade_pattern.rs) |
-| Redis 示例 | `crates/c06_async` | [crates/c06_async/examples/redis_basic_kv.rs](../../crates/c06_async/examples/redis_basic_kv.rs) / [redis_pub_sub.rs](../../crates/c06_async/examples/redis_pub_sub.rs) / [redis_distributed_lock.rs](../../crates/c06_async/examples/redis_distributed_lock.rs) |
-| Kafka 示例 | `crates/c10_networks` | [crates/c10_networks/examples/kafka_async_producer.rs](../../crates/c10_networks/examples/kafka_async_producer.rs) / [kafka_consumer_group.rs](../../crates/c10_networks/examples/kafka_consumer_group.rs) |
-| lapin 示例 | `crates/c10_networks` | [crates/c10_networks/examples/lapin_publisher.rs](../../crates/c10_networks/examples/lapin_publisher.rs) / [lapin_consumer.rs](../../crates/c10_networks/examples/lapin_consumer.rs) |
-| Meilisearch 示例 | `crates/c10_networks` | [crates/c10_networks/examples/meilisearch_basic_search.rs](../../crates/c10_networks/examples/meilisearch_basic_search.rs) |
-| SurrealDB 示例 | `crates/c10_networks` | [crates/c10_networks/examples/surrealdb_basic_crud.rs](../../crates/c10_networks/examples/surrealdb_basic_crud.rs) |
-| vector 示例 | `crates/c10_networks` | [crates/c10_networks/examples/vector_hnsw_search.rs](../../crates/c10_networks/examples/vector_hnsw_search.rs) |
-| sentry 示例 | `crates/c06_async` | [crates/c06_async/examples/sentry_error_capture.rs](../../crates/c06_async/examples/sentry_error_capture.rs) |
-| metrics 示例 | `crates/c06_async` | [crates/c06_async/examples/metrics_basic_prometheus.rs](../../crates/c06_async/examples/metrics_basic_prometheus.rs) |
-| ort 示例 | `crates/c08_algorithms` | [crates/c08_algorithms/examples/ort_basic_inference.rs](../../crates/c08_algorithms/examples/ort_basic_inference.rs) |
-| tract 示例 | `crates/c08_algorithms` | [crates/c08_algorithms/examples/tract_basic_inference.rs](../../crates/c08_algorithms/examples/tract_basic_inference.rs) |
-| AWS SDK 示例 | `crates/c10_networks` | [crates/c10_networks/examples/aws_sdk_list_buckets.rs](../../crates/c10_networks/examples/aws_sdk_list_buckets.rs) |
-| Azure SDK 示例 | `crates/c10_networks` | [crates/c10_networks/examples/azure_blob_list_containers.rs](../../crates/c10_networks/examples/azure_blob_list_containers.rs) |
-| Salvo 示例 | `crates/c06_async` | [crates/c06_async/examples/salvo_web_routing.rs](../../crates/c06_async/examples/salvo_web_routing.rs) |
-| ntex 示例 | `crates/c06_async` | [crates/c06_async/examples/ntex_web_routing.rs](../../crates/c06_async/examples/ntex_web_routing.rs) |
-| Askama 示例 | `crates/c06_async` | [crates/c06_async/examples/askama_template_rendering.rs](../../crates/c06_async/examples/askama_template_rendering.rs) |
-| Maud 示例 | `crates/c06_async` | [crates/c06_async/examples/maud_template_rendering.rs](../../crates/c06_async/examples/maud_template_rendering.rs) |
-| kube-rs 示例 | `crates/c10_networks` | [crates/c10_networks/examples/kube_list_pods.rs](../../crates/c10_networks/examples/kube_list_pods.rs) / [kube_watch_pods.rs](../../crates/c10_networks/examples/kube_watch_pods.rs) |
-| regex 示例 | `crates/c07_process` | [crates/c07_process/examples/regex_basic_matching.rs](../../crates/c07_process/examples/regex_basic_matching.rs) / [regex_common_validation.rs](../../crates/c07_process/examples/regex_common_validation.rs) |
-| chrono 示例 | `crates/c07_process` | [crates/c07_process/examples/chrono_parse_format.rs](../../crates/c07_process/examples/chrono_parse_format.rs) / [chrono_timezone_duration.rs](../../crates/c07_process/examples/chrono_timezone_duration.rs) |
-| 验证工具示例 | `crates/c15_verification_tools` | [crates/c15_verification_tools/examples/](../../crates/c15_verification_tools/examples) |
-| GUI / 跨平台 UI 示例 | `crates/c16_gui` | [crates/c16_gui/examples/](../../crates/c16_gui/examples) |
-| 顶层 examples 目录 | `examples/` | [examples/](../../examples) |
-| 缓存淘汰策略 | `c08_algorithms` | [crates/c08_algorithms/examples/cache_eviction_policies_demo.rs](../../crates/c08_algorithms/examples/cache_eviction_policies_demo.rs) |
-| 算法专项练习 | `exercises` | [exercises/src/algorithms/](../../exercises/src/algorithms) |
-| 形式化验证工具 | `crates/c15_verification_tools` | [crates/c15_verification_tools/README.md](../../crates/c15_verification_tools/README.md) |
+| 所有权 | `crates/c01_ownership_borrow_scope` | [crates/c01_ownership_borrow_scope/README.md](../../../crates/c01_ownership_borrow_scope/README.md) |
+| 异步 | `crates/c06_async` | [crates/c06_async/README.md](../../../crates/c06_async/README.md) |
+| 并发 | `crates/c05_threads` | [crates/c05_threads/README.md](../../../crates/c05_threads/README.md) |
+| 设计模式 | `crates/c09_design_pattern` | [crates/c09_design_pattern/README.md](../../../crates/c09_design_pattern/README.md) |
+| 模块系统 | 单文件 Cargo script | [examples/module_system_patterns.rs](../../../examples/module_system_patterns.rs) |
+| 宏系统 | `crates/c11_macro_system_proc` | [crates/c11_macro_system_proc/examples/](../../../crates/c11_macro_system_proc/examples) |
+| FFI / Embedded / WASM | `crates/c12_wasm` / `crates/c13_embedded` | [crates/c12_wasm/examples/](../../../crates/c12_wasm/examples) / [crates/c13_embedded/examples/](../../../crates/c13_embedded/examples) |
+| 异步/并发示例 | `crates/c06_async` / `crates/c05_threads` | [crates/c06_async/examples/](../../../crates/c06_async/examples) / [crates/c05_threads/examples/](../../../crates/c05_threads/examples) |
+| Fallback / Degrade 示例 | `crates/c06_async` | [crates/c06_async/examples/fallback_degrade_pattern.rs](../../../crates/c06_async/examples/fallback_degrade_pattern.rs) |
+| Redis 示例 | `crates/c06_async` | [crates/c06_async/examples/redis_basic_kv.rs](../../../crates/c06_async/examples/redis_basic_kv.rs) / [redis_pub_sub.rs](../../../crates/c06_async/examples/redis_pub_sub.rs) / [redis_distributed_lock.rs](../../../crates/c06_async/examples/redis_distributed_lock.rs) |
+| Kafka 示例 | `crates/c10_networks` | [crates/c10_networks/examples/kafka_async_producer.rs](../../../crates/c10_networks/examples/kafka_async_producer.rs) / [kafka_consumer_group.rs](../../../crates/c10_networks/examples/kafka_consumer_group.rs) |
+| lapin 示例 | `crates/c10_networks` | [crates/c10_networks/examples/lapin_publisher.rs](../../../crates/c10_networks/examples/lapin_publisher.rs) / [lapin_consumer.rs](../../../crates/c10_networks/examples/lapin_consumer.rs) |
+| Meilisearch 示例 | `crates/c10_networks` | [crates/c10_networks/examples/meilisearch_basic_search.rs](../../../crates/c10_networks/examples/meilisearch_basic_search.rs) |
+| SurrealDB 示例 | `crates/c10_networks` | [crates/c10_networks/examples/surrealdb_basic_crud.rs](../../../crates/c10_networks/examples/surrealdb_basic_crud.rs) |
+| vector 示例 | `crates/c10_networks` | [crates/c10_networks/examples/vector_hnsw_search.rs](../../../crates/c10_networks/examples/vector_hnsw_search.rs) |
+| sentry 示例 | `crates/c06_async` | [crates/c06_async/examples/sentry_error_capture.rs](../../../crates/c06_async/examples/sentry_error_capture.rs) |
+| metrics 示例 | `crates/c06_async` | [crates/c06_async/examples/metrics_basic_prometheus.rs](../../../crates/c06_async/examples/metrics_basic_prometheus.rs) |
+| ort 示例 | `crates/c08_algorithms` | [crates/c08_algorithms/examples/ort_basic_inference.rs](../../../crates/c08_algorithms/examples/ort_basic_inference.rs) |
+| tract 示例 | `crates/c08_algorithms` | [crates/c08_algorithms/examples/tract_basic_inference.rs](../../../crates/c08_algorithms/examples/tract_basic_inference.rs) |
+| AWS SDK 示例 | `crates/c10_networks` | [crates/c10_networks/examples/aws_sdk_list_buckets.rs](../../../crates/c10_networks/examples/aws_sdk_list_buckets.rs) |
+| Azure SDK 示例 | `crates/c10_networks` | [crates/c10_networks/examples/azure_blob_list_containers.rs](../../../crates/c10_networks/examples/azure_blob_list_containers.rs) |
+| Salvo 示例 | `crates/c06_async` | [crates/c06_async/examples/salvo_web_routing.rs](../../../crates/c06_async/examples/salvo_web_routing.rs) |
+| ntex 示例 | `crates/c06_async` | [crates/c06_async/examples/ntex_web_routing.rs](../../../crates/c06_async/examples/ntex_web_routing.rs) |
+| Askama 示例 | `crates/c06_async` | [crates/c06_async/examples/askama_template_rendering.rs](../../../crates/c06_async/examples/askama_template_rendering.rs) |
+| Maud 示例 | `crates/c06_async` | [crates/c06_async/examples/maud_template_rendering.rs](../../../crates/c06_async/examples/maud_template_rendering.rs) |
+| kube-rs 示例 | `crates/c10_networks` | [crates/c10_networks/examples/kube_list_pods.rs](../../../crates/c10_networks/examples/kube_list_pods.rs) / [kube_watch_pods.rs](../../../crates/c10_networks/examples/kube_watch_pods.rs) |
+| regex 示例 | `crates/c07_process` | [crates/c07_process/examples/regex_basic_matching.rs](../../../crates/c07_process/examples/regex_basic_matching.rs) / [regex_common_validation.rs](../../../crates/c07_process/examples/regex_common_validation.rs) |
+| chrono 示例 | `crates/c07_process` | [crates/c07_process/examples/chrono_parse_format.rs](../../../crates/c07_process/examples/chrono_parse_format.rs) / [chrono_timezone_duration.rs](../../../crates/c07_process/examples/chrono_timezone_duration.rs) |
+| 验证工具示例 | `crates/c15_verification_tools` | [crates/c15_verification_tools/examples/](../../../crates/c15_verification_tools/examples) |
+| GUI / 跨平台 UI 示例 | `crates/c16_gui` | [crates/c16_gui/examples/](../../../crates/c16_gui/examples) |
+| 顶层 examples 目录 | `examples/` | [examples/](../../../examples) |
+| 缓存淘汰策略 | `c08_algorithms` | [crates/c08_algorithms/examples/cache_eviction_policies_demo.rs](../../../crates/c08_algorithms/examples/cache_eviction_policies_demo.rs) |
+| 算法专项练习 | `exercises` | [exercises/src/algorithms/](../../../exercises/src/algorithms) |
+| 形式化验证工具 | `crates/c15_verification_tools` | [crates/c15_verification_tools/README.md](../../../crates/c15_verification_tools/README.md) |
 
 ---
 
@@ -512,7 +512,7 @@
 | 设计模式 | [../08_software_design_theory/01_design_patterns_formal/README.md](../08_software_design_theory/01_design_patterns_formal/README.md) | [../08_software_design_theory/03_master_index.md](../08_software_design_theory/03_master_index.md) | 各模式文件 §反例 |
 | 模块系统 | [../04_formal_module_system/02_module_system_specification.md](../04_formal_module_system/02_module_system_specification.md) | [../04_formal_module_system/README.md](../04_formal_module_system/README.md) | [../04_formal_module_system/07_module_counterexamples.md](../04_formal_module_system/07_module_counterexamples.md) |
 | 实验研究 | [../09_experiments/README.md](../09_experiments/README.md) | [../09_experiments/README.md](../09_experiments/README.md) | [../09_experiments/06_experiments_counterexamples.md](../09_experiments/06_experiments_counterexamples.md) |
-| 版本特性 | [../12_version_research/02_rust_194_research_update.md](../12_version_research/02_rust_194_research_update.md) | [10_rust_194_195_feature_matrix.md](10_rust_194_195_feature_matrix.md) | 待补 |
+| 版本特性 | [../12_version_research/02_rust_194_research_update.md](../12_version_research/02_rust_194_research_update.md) | [10_rust_194_195_feature_matrix.md](../../../archive/research_notes_2026_06_25/10_rust_194_195_feature_matrix.md) | 待补 |
 
 ---
 

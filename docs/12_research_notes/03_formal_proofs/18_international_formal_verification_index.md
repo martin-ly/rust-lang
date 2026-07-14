@@ -58,7 +58,7 @@
 
 | 成果 | 机构/作者 | 年份 | 形式化范围 | 证明助手/工具 | 与本项目对应 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **RustBelt** | MPI-SWS (Jung et al.) | 2018 | 所有权（Ownership）、借用（Borrowing）、MIR 级 | Iris (Coq) | ownership_model, borrow_checker_proof, [coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)（归档只读）（T-OW2/BR1/TY3 骨架） |
+| **RustBelt** | MPI-SWS (Jung et al.) | 2018 | 所有权（Ownership）、借用（Borrowing）、MIR 级 | Iris (Coq) | ownership_model, borrow_checker_proof, [coq_skeleton](../../../archive/deprecated/coq_skeleton/README.md)（归档只读）（T-OW2/BR1/TY3 骨架） |
 | **Tree Borrows** | ETH (PLDI 2025) | 2025 | 借用（Borrowing）模型、树结构、54% 更少拒绝 | Iris (Coq)、Rocq | borrow_checker_proof 演进；Distinguished Paper |
 | **RustBelt Meets Relaxed Memory** | MPI-SWS | 2020 | 松弛内存、Arc、原子操作（Atomic Operations） | Iris (Coq) | formal_methods Phase 4（部分） |
 | **Rust Distilled** | DBLP | - | 高层所有权（Ownership）、无生命周期（Lifetimes） | - | ownership_model（高层部分） |
@@ -88,7 +88,7 @@
 - **论文**: RustBelt: Logical Foundations for the Future of Safe Systems Programming
 - **形式化**: λ Rust 模型、分离逻辑、MIR 级语义
 - **本项目对应**: `../02_formal_methods/09_ownership_model.md`, `../02_formal_methods/03_borrow_checker_proof.md`
-- **差距**: 无 Iris 分离逻辑形式化；无 MIR 级建模；**Coq 骨架已创建**（[coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)（归档只读）），证明 Admitted 待补全
+- **差距**: 无 Iris 分离逻辑形式化；无 MIR 级建模；**Coq 骨架已创建**（[coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)（归档只读）），证明 Admitted 待补全
 
 ### 2.2 RustBelt Meets Relaxed Memory (POPL 2020) {#22-rustbelt-meets-relaxed-memory-popl-2020}
 
@@ -311,7 +311,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

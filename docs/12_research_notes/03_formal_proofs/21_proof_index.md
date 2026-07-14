@@ -108,7 +108,7 @@
 | **L2** | 完整证明 | 归纳基、归纳步、辅助引理编号、形式化陈述 |
 | **L3** | 机器可检查 | Coq/Isabelle/Lean 证明代码 |
 
-**本索引现状**: 多数为 L1；部分（如型变、组合工程、CORE_THEOREMS_FULL_PROOFS）为 L2；L3 骨架已创建（[coq_skeleton](../README.md) T-OW2/T-BR1/T-TY3，证明 Admitted 待补全），见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[FORMAL_LANGUAGE_AND_PROOFS](13_formal_language_and_proofs.md)。
+**本索引现状**: 多数为 L1；部分（如型变、组合工程、CORE_THEOREMS_FULL_PROOFS）为 L2；L3 骨架已创建（[coq_skeleton](../README.md) T-OW2/T-BR1/T-TY3，证明 Admitted 待补全），见 [COQ_ISABELLE_PROOF_SCAFFOLDING](../../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md)、[FORMAL_LANGUAGE_AND_PROOFS](13_formal_language_and_proofs.md)。
 
 ---
 
@@ -661,7 +661,7 @@
 | :--- | :--- |
 | **L1** | 所有权（Ownership） T3、借用（Borrowing） T2、生命周期 LF-T1–T3、类型 T1/T2/T4/T5、异步（Async） T6.1–T6.3、Pin T1–T3、Trait T1–T3、设计模式推论、实验定理 |
 | **L2** | 所有权 T2、借用 T1、类型 T3（见 [CORE_THEOREMS_FULL_PROOFS](07_core_theorems_full_proofs.md)）；型变 T1–T4、组合工程 CE-T1–T3、边界 BMP-T1/T2 |
-| **L3** | Coq 骨架已创建 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)（归档只读）（证明 Admitted）；补全见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[L3_MACHINE_PROOF_GUIDE](19_l3_machine_proof_guide.md) |
+| **L3** | Coq 骨架已创建 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)（归档只读）（证明 Admitted）；补全见 [COQ_ISABELLE_PROOF_SCAFFOLDING](../../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md)、[L3_MACHINE_PROOF_GUIDE](19_l3_machine_proof_guide.md) |
 
 ---
 
@@ -857,8 +857,8 @@
 - [构造性语义与表达能力边界](20_language_semantics_expressiveness.md) - 操作/指称/公理语义、表达能力边界论证
 - [形式化论证系统梳理指南](16_formal_proof_system_guide.md) - 论证缺口分析、概念-公理-定理映射、反例索引
 - [研究笔记主索引](../README.md)
-- [研究进展跟踪](10_progress_tracking.md)
-- [研究任务清单](10_task_checklist.md)
+- [研究进展跟踪](../../../archive/research_notes_2026_06_25/10_progress_tracking.md)
+- [研究任务清单](../../../archive/research_notes_2026_06_25/10_task_checklist.md)
 - [形式化工具验证指南](17_formal_verification_guide.md)（✅ 指南 100% 完成）
 
 ### 形式化方法研究 {#形式化方法研究}

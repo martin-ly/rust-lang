@@ -4,7 +4,7 @@
 > **Summary**: Databases 数据库 Databases Index.
 > **📎 交叉引用**
 >
-> 本主题在 concept 中有深度的概念分析：[数据库](../../../concept/06_ecosystem/23_database_systems.md)
+> 本主题在 concept 中有深度的概念分析：[数据库](../../../concept/06_ecosystem/06_data_and_distributed/04_database_systems.md)
 > **Bloom 层级**: L2
 > **Rust 数据库访问：ORM 与查询构建器**
 >

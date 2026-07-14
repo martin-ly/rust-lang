@@ -272,7 +272,7 @@
 | **矩阵文档**（如 01_design_patterns_formal/README §23 模式矩阵、03_execution_models/README §执行模型矩阵、formal_methods/README §六篇并表） | 每行/每格注明「详见 xx」或列「形式化文档」列链接到具体子文档 |
 | **子文档**（各模式、各执行模型、ownership/borrow/…、send_sync） | 元信息或文末注明「本概念在 矩阵文档 §节名 第 x 行/第 y 列」或「23 模式矩阵」「六篇并表」等 |
 
-**已实施**：23 模式均在元信息中含「23 模式矩阵」行号；执行模型矩阵、formal_methods **六篇并表**均含文档列。新增矩阵时按上表补全双向链接；见 [MAINTENANCE_GUIDE](10_maintenance_guide.md) 更新流程。
+**已实施**：23 模式均在元信息中含「23 模式矩阵」行号；执行模型矩阵、formal_methods **六篇并表**均含文档列。新增矩阵时按上表补全双向链接；见 [MAINTENANCE_GUIDE](../../../archive/research_notes_2026_06_25/10_maintenance_guide.md) 更新流程。
 
 ---
 
@@ -630,13 +630,13 @@ error[E0382]: borrow of moved value: `s1`
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [所有权实现](../../crates/c01_ownership_borrow_scope/README.md)
+- [所有权实现](../../../crates/c01_ownership_borrow_scope/README.md)
 
   - 关键文件: `ownership.rs` - 所有权规则实现
 
   - 关键文件: `borrow_checker.rs` - 借用检查器实现
 
-- [所有权文档](../../crates/c01_ownership_borrow_scope/README.md)
+- [所有权文档](../../../crates/c01_ownership_borrow_scope/README.md)
 
   - 文档: `10_ownership_model.md` - 所有权模型文档
 ```
@@ -711,8 +711,8 @@ error[E0382]: borrow of moved value: `s1`
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [研究笔记主索引](../README.md)
-- [研究笔记写作指南](10_writing_guide.md)
-- [研究笔记模板](10_template.md)
+- [研究笔记写作指南](../../../archive/research_notes_2026_06_25/10_writing_guide.md)
+- [研究笔记模板](../../../archive/research_notes_2026_06_25/10_template.md)
 - [质量检查清单](11_quality_checklist.md)
 
 ### 完善工具 {#完善工具}
@@ -729,7 +729,7 @@ error[E0382]: borrow of moved value: `s1`
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [研究笔记示例](10_example.md)
+- [研究笔记示例](../../../archive/research_notes_2026_06_25/10_example.md)
 - [所有权模型形式化](../02_formal_methods/09_ownership_model.md)
 - [类型系统（Type System）基础](../05_type_theory/05_type_system_foundations.md)
 
@@ -790,7 +790,7 @@ error[E0382]: borrow of moved value: `s1`
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

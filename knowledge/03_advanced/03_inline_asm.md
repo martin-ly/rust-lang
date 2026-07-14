@@ -2,7 +2,7 @@
 
 > **EN**: Inline Assembly knowledge redirect
 > **Summary**: 本页是 `knowledge/` 目录下的导航占位符。内容已迁移至 `concept/` 权威页，此处不再维护完整技术解释。
-> **权威来源**: [Inline Assembly 学习入口](../../../concept/03_advanced/05_inline_assembly/13_inline_assembly.md)
+> **权威来源**: [Inline Assembly 学习入口](../../concept/03_advanced/05_inline_assembly/01_inline_assembly.md)
 
 ---
 

@@ -40,8 +40,8 @@
 
 | 运行时（Runtime）/库 | 官方文档 | 项目文档 | 覆盖内容 |
 |-----------|----------|----------|----------|
-| Tokio | <https://tokio.rs/> | [crates/c06_async/](../../crates/c06_async/README.md) | 任务调度、IO、time、sync |
-| async-std | <https://docs.rs/async-std/> | [crates/c06_async/](../../crates/c06_async/README.md) | 与 std 类似的异步 API |
+| Tokio | <https://tokio.rs/> | [crates/c06_async/](../../../crates/c06_async/README.md) | 任务调度、IO、time、sync |
+| async-std | <https://docs.rs/async-std/> | [crates/c06_async/](../../../crates/c06_async/README.md) | 与 std 类似的异步 API |
 | smol | <https://docs.rs/smol/> | [../08_software_design_theory/04_execution_models/README.md](../08_software_design_theory/04_execution_models/README.md) | 小型异步运行时 |
 | futures-rs | <https://docs.rs/futures/> | [../02_formal_methods/02_async_state_machine.md](../02_formal_methods/02_async_state_machine.md) | Stream、Sink、FutureExt |
 
@@ -62,8 +62,8 @@
 
 | 库/框架 | 来源 | 项目文档 | 备注 |
 |---------|------|----------|------|
-| tokio::net | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [crates/c10_networks/](../../crates/c10_networks/README.md) | TCP/UDP 异步（Async） IO |
-| hyper | [hyper.rs](https://hyper.rs/) | [crates/c10_networks/](../../crates/c10_networks/README.md) | HTTP 客户端/服务端 |
+| tokio::net | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [crates/c10_networks/](../../../crates/c10_networks/README.md) | TCP/UDP 异步（Async） IO |
+| hyper | [hyper.rs](https://hyper.rs/) | [crates/c10_networks/](../../../crates/c10_networks/README.md) | HTTP 客户端/服务端 |
 | axum | [axum docs](https://docs.rs/axum/) | [../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md](../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md) | Web 框架架构 |
 | tonic | [tonic docs](https://docs.rs/tonic/) | [../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md](../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md) | gRPC |
 
@@ -75,7 +75,7 @@
 |---------|------|----------|------|
 | Stream trait | [futures-rs](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html) | [../02_formal_methods/02_async_state_machine.md](../02_formal_methods/02_async_state_machine.md) | 异步迭代 |
 | async_iter (gen blocks) | [RFC 3513 — gen blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html) | [../03_formal_proofs/33_version_evolution_counterexamples.md](../03_formal_proofs/33_version_evolution_counterexamples.md) §3 | 不稳定 |
-| channels (mpsc) | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [crates/c05_threads/](../../crates/c05_threads/README.md) | 消息传递 |
+| channels (mpsc) | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [crates/c05_threads/](../../../crates/c05_threads/README.md) | 消息传递 |
 
 ---
 
@@ -83,7 +83,7 @@
 
 | 工具 | 来源 | 项目文档 | 备注 |
 |------|------|----------|------|
-| tokio::test | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [crates/c06_async/](../../crates/c06_async/README.md) | 异步测试 |
+| tokio::test | [Tokio Docs](https://docs.rs/tokio/latest/tokio/net/index.html) | [crates/c06_async/](../../../crates/c06_async/README.md) | 异步测试 |
 | tokio-console | [Tokio Console](https://github.com/tokio-rs/console) | [../09_experiments/02_concurrency_performance.md](../09_experiments/02_concurrency_performance.md) | 异步任务调试 |
 
 ---
@@ -94,7 +94,7 @@
 |----------|----------|----------|
 | [../02_formal_methods/02_async_state_machine.md](../02_formal_methods/02_async_state_machine.md) | Future、async/await、Pin、状态机 | Async Book、RFC 2394 |
 | [../02_formal_methods/16_concurrency_async_counterexamples.md](../02_formal_methods/16_concurrency_async_counterexamples.md) | 锁跨越 await、poll、Pin 契约 | Tokio Docs、Async Book |
-| [crates/c06_async/README.md](../../crates/c06_async/README.md) | tokio 实战示例 | Tokio Docs |
+| [crates/c06_async/README.md](../../../crates/c06_async/README.md) | tokio 实战示例 | Tokio Docs |
 | [../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md](../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md) | axum/tokio 架构分析 | 官方文档 |
 
 ---

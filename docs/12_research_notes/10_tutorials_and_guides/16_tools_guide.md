@@ -76,7 +76,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**主推路径**：Prusti、Kani（Rust 原生验证，无需学习专业形式化语言）。Coq/Lean 为可选进阶研究，见 [archive/deprecated/](../../archive/deprecated/README.md)（归档只读）。
+**主推路径**：Prusti、Kani（Rust 原生验证，无需学习专业形式化语言）。Coq/Lean 为可选进阶研究，见 [archive/deprecated/](../../../archive/deprecated/README.md)（归档只读）。
 
 ### Prusti {#prusti}
 
@@ -305,7 +305,7 @@ verus! {
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **说明**：Coq、Lean 为专业形式化证明语言，需额外学习成本。
-本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../../archive/deprecated/README.md)。
+本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../../../archive/deprecated/README.md)。
 主路径聚焦 **数学风格形式化论证 + Rust 示例**（见 [CORE_THEOREMS_FULL_PROOFS](../03_formal_proofs/07_core_theorems_full_proofs.md)）。
 若需机器可检查证明，可参考 Prusti/Kani 或国际对标 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../03_formal_proofs/18_international_formal_verification_index.md)。
 
@@ -876,7 +876,7 @@ cargo expand > expanded.rs
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [The Cargo Book](https://doc.rust-lang.org/cargo/), [rustc dev guide](https://rustc-dev-guide.rust-lang.org/)
 >
-> **权威来源对齐变更日志**: 2026-06-29 新增 Cargo Book、rustc dev guide、Kani/Prusti/Miri/Creusot/Aeneas/Verus 官方文档与版本信息 [Authority Source Sprint Batch 9](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-06-29 新增 Cargo Book、rustc dev guide、Kani/Prusti/Miri/Creusot/Aeneas/Verus 官方文档与版本信息 [Authority Source Sprint Batch 9](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

@@ -152,8 +152,8 @@ Treap = **Tree（BST 按 key）+ Heap（按随机 priority）**。
 
 | 数据结构 | 实现文件 | 示例 |
 |----------|----------|------|
-| Treap | [crates/c08_algorithms/src/data_structure/treap.rs](../../crates/c08_algorithms/src/data_structure/treap.rs) | [treap_skip_list_demo.rs](../../crates/c08_algorithms/examples/treap_skip_list_demo.rs) |
-| Skip List | [crates/c08_algorithms/src/data_structure/skip_list.rs](../../crates/c08_algorithms/src/data_structure/skip_list.rs) | [treap_skip_list_demo.rs](../../crates/c08_algorithms/examples/treap_skip_list_demo.rs) |
+| Treap | [crates/c08_algorithms/src/data_structure/treap.rs](../../../crates/c08_algorithms/src/data_structure/treap.rs) | [treap_skip_list_demo.rs](../../../crates/c08_algorithms/examples/treap_skip_list_demo.rs) |
+| Skip List | [crates/c08_algorithms/src/data_structure/skip_list.rs](../../../crates/c08_algorithms/src/data_structure/skip_list.rs) | [treap_skip_list_demo.rs](../../../crates/c08_algorithms/examples/treap_skip_list_demo.rs) |
 
 ---
 

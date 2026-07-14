@@ -1,10 +1,10 @@
 # 设计模式
 
-**EN**: Design Patterns (c09 crate index)
-**Summary**: Stub pointing to the canonical design patterns authority. Runnable examples and crate-specific implementations remain in the c09 crate.
+**EN**: 设计模式
+**Summary**: Redirect stub: crate-level documentation moved to canonical concept source.
 
-> **权威来源**: 通用 Rust 设计模式概念解释已迁移至 canonical authority page:
-> [`concept/06_ecosystem/03_design_patterns/01_patterns.md`](../../concept/06_ecosystem/03_design_patterns/01_patterns.md)。
+> **权威来源**: 本文件为 crate 文档重定向 stub。完整概念解释请见：
+> [../../concept/06_ecosystem/03_design_patterns/](../../concept/06_ecosystem/03_design_patterns/)
 >
-> 本文件为 `c09_design_pattern` crate 的索引入口，非通用 Rust 概念权威页。
-> 具体示例与实现请参见本 crate 的 `examples/` 与 `src/` 目录。
+> 根据 AGENTS.md §2 Canonical 规则，通用 Rust 概念解释统一维护在 `concept/` 中；
+> `crates/` 仅保留与 crate 直接相关的独特内容。本文件原内容已归档或迁移至权威页。

@@ -1,5 +1,7 @@
 # The Rustonomicon 内容对齐 {#the-rustonomicon-内容对齐}
 
+> **权威来源**: 本文件为 `docs/` 对齐映射指南，通用 Rust 概念解释请见 [`concept/`](../../concept/)。根据 AGENTS.md §3.4，`docs/` 不重复 `concept/` 中的通用概念解释。
+>
 > **EN**: Rustnomicon Alignment
 > **Summary**: The Rustonomicon 内容对齐 Rustnomicon Alignment.
 >

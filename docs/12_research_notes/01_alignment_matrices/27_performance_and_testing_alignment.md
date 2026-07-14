@@ -65,7 +65,7 @@
 
 | Cargo 测试主题 | 项目文档 | 状态 | 备注 |
 |----------------|----------|------|------|
-| [Tests](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | 单元/集成测试目标 |
+| [Tests](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests) | [crates/c08_algorithms/README.md](../../../crates/c08_algorithms/README.md) | ✅ | 单元/集成测试目标 |
 | [Configuration](https://doc.rust-lang.org/cargo/reference/config.html) | [../10_tutorials_and_guides/16_tools_guide.md](../10_tutorials_and_guides/16_tools_guide.md) | ✅ | `.cargo/config.toml`、profile.test |
 | [Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) | [15_cargo_book_alignment.md](15_cargo_book_alignment.md) | ✅ | workspace 级测试运行 |
 | [Target features](https://doc.rust-lang.org/cargo/reference/features.html) | [15_cargo_book_alignment.md](15_cargo_book_alignment.md) §4 | ✅ | feature 与条件测试 |
@@ -111,9 +111,9 @@
 
 | 工具/来源 | 类型 | 项目文档 | 状态 | 备注 |
 |-----------|------|----------|------|------|
-| [tokio/console](https://github.com/tokio-rs/console) | 异步（Async）运行时诊断 | [crates/c06_async/README.md](../../crates/c06_async/README.md) | ✅ | task、resource、runtime 可视化 |
-| [tokio-metrics](https://github.com/tokio-rs/tokio-metrics) | 异步指标采集 | [crates/c06_async/README.md](../../crates/c06_async/README.md) | ✅ | runtime/task 指标 |
-| [tracing](https://github.com/tokio-rs/tracing) + [opentelemetry](https://github.com/open-telemetry/opentelemetry-rust) | 分布式追踪 | [crates/c06_async/README.md](../../crates/c06_async/README.md) | ✅ | async 链路追踪 |
+| [tokio/console](https://github.com/tokio-rs/console) | 异步（Async）运行时诊断 | [crates/c06_async/README.md](../../../crates/c06_async/README.md) | ✅ | task、resource、runtime 可视化 |
+| [tokio-metrics](https://github.com/tokio-rs/tokio-metrics) | 异步指标采集 | [crates/c06_async/README.md](../../../crates/c06_async/README.md) | ✅ | runtime/task 指标 |
+| [tracing](https://github.com/tokio-rs/tracing) + [opentelemetry](https://github.com/open-telemetry/opentelemetry-rust) | 分布式追踪 | [crates/c06_async/README.md](../../../crates/c06_async/README.md) | ✅ | async 链路追踪 |
 
 ### 3.3 动态分析与 Sanitizer {#33-动态分析与-sanitizer}
 
@@ -132,8 +132,8 @@
 
 | 策略 | 权威来源 | 项目文档 | 状态 | 备注 |
 |------|----------|----------|------|------|
-| 单元测试 | [Cargo Book – Tests](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | 模块（Module）内 `#[cfg(test)]` |
-| 集成测试 | [Cargo Book – Integration Tests](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#integration-tests) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | `tests/` 目录 |
+| 单元测试 | [Cargo Book – Tests](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests) | [crates/c08_algorithms/README.md](../../../crates/c08_algorithms/README.md) | ✅ | 模块（Module）内 `#[cfg(test)]` |
+| 集成测试 | [Cargo Book – Integration Tests](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#integration-tests) | [crates/c08_algorithms/README.md](../../../crates/c08_algorithms/README.md) | ✅ | `tests/` 目录 |
 | Doctests | [rustdoc – Documentation tests](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html) | [docs/09_toolchain/02_rustdoc_advanced.md](../../09_toolchain/02_rustdoc_advanced.md) | ✅ | 文档示例即测试 |
 | 测试覆盖率 | [tarpaulin](https://github.com/xd009642/tarpaulin) / [cargo-llvm-cov](https://github.com/taiki-e/cargo-llvm-cov) | [../10_tutorials_and_guides/16_tools_guide.md](../10_tutorials_and_guides/16_tools_guide.md) | ✅ | CI 覆盖率报告 |
 
@@ -141,9 +141,9 @@
 
 | 策略 | 工具/来源 | 项目文档 | 状态 | 备注 |
 |------|-----------|----------|------|------|
-| Property-based testing | [proptest](https://github.com/proptest-rs/proptest) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | 随机输入、收缩 |
+| Property-based testing | [proptest](https://github.com/proptest-rs/proptest) | [crates/c08_algorithms/README.md](../../../crates/c08_algorithms/README.md) | ✅ | 随机输入、收缩 |
 | Fuzzing | [cargo-fuzz](https://github.com/rust-fuzz/cargo-fuzz) / [libFuzzer](https://llvm.org/docs/LibFuzzer.html) | [../03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md](../03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md) | 🔄 | unsafe/解析器 fuzz |
-| Snapshot testing | [insta](https://github.com/mitsuhiko/insta) | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | ✅ | 输出快照比对 |
+| Snapshot testing | [insta](https://github.com/mitsuhiko/insta) | [crates/c08_algorithms/README.md](../../../crates/c08_algorithms/README.md) | ✅ | 输出快照比对 |
 | Mutation testing | [cargo-mutants](https://github.com/sourcefrog/cargo-mutants) | [../10_tutorials_and_guides/16_tools_guide.md](../10_tutorials_and_guides/16_tools_guide.md) | 🔄 | 变异存活率评估 |
 
 ---
@@ -152,8 +152,8 @@
 
 | 主题 | 权威来源 | 项目文档 |
 |------|----------|----------|
-| 并发性能 | Rust Performance Book / tokio/console | [../09_experiments/02_concurrency_performance.md](../09_experiments/02_concurrency_performance.md)、[crates/c05_threads/README.md](../../crates/c05_threads/README.md)、[crates/c06_async/README.md](../../crates/c06_async/README.md) |
-| 算法与数据结构测试 | Cargo Book / proptest / insta | [crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) |
+| 并发性能 | Rust Performance Book / tokio/console | [../09_experiments/02_concurrency_performance.md](../09_experiments/02_concurrency_performance.md)、[crates/c05_threads/README.md](../../../crates/c05_threads/README.md)、[crates/c06_async/README.md](../../../crates/c06_async/README.md) |
+| 算法与数据结构测试 | Cargo Book / proptest / insta | [crates/c08_algorithms/README.md](../../../crates/c08_algorithms/README.md) |
 | 编译器优化与性能 | Rust Performance Book / rustc book | [../09_experiments/01_compiler_optimizations.md](../09_experiments/01_compiler_optimizations.md)、[../09_experiments/03_macro_expansion_performance.md](../09_experiments/03_macro_expansion_performance.md) |
 | 工具链与测试 | Clippy / rustdoc / Miri | [../10_tutorials_and_guides/16_tools_guide.md](../10_tutorials_and_guides/16_tools_guide.md)、[docs/09_toolchain/02_rustdoc_advanced.md](../../09_toolchain/02_rustdoc_advanced.md) |
 | 内存与 unsafe 检测 | Miri / ASan / TSan / valgrind | [../03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md](../03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md)、[../09_experiments/04_memory_analysis.md](../09_experiments/04_memory_analysis.md) |

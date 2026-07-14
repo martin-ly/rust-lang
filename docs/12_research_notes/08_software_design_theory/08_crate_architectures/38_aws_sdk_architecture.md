@@ -180,7 +180,7 @@ while let Some(obj) = paginator.next().await {
 |:--|:--|:--|
 | 列出 S3 Bucket | [`crates/c10_networks/examples/aws_sdk_list_buckets.rs`](../../../../crates/c10_networks/examples/aws_sdk_list_buckets.rs) | 使用 `aws_config` 加载配置并调用 `list_buckets` |
 
-> [来源: [c10_networks Crate](../../../../../crates/c10_networks)]
+> [来源: [c10_networks Crate](../../../../crates/c10_networks)]
 
 ---
 

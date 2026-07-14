@@ -7,6 +7,8 @@
 
 # Rust 语言特性全量梳理与对称差分析 2026 {#rust-语言特性全量梳理与对称差分析-2026}
 
+> **权威来源**: 本文件为 `docs/` 研究性特性盘点，通用 Rust 概念解释请见 [`concept/`](../../concept/)。根据 AGENTS.md §3.4，`docs/` 不重复 `concept/` 中的通用概念解释。
+>
 > **EN**: Rust Language Feature Comprehensive Inventory 2026
 > **Summary**: Rust 语言特性全量梳理与对称差分析 2026 Rust Language Feature Comprehensive Inventory 2026. (stub/archive redirect)
 > **分级**: [B]
@@ -2622,7 +2624,7 @@ graph TD
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

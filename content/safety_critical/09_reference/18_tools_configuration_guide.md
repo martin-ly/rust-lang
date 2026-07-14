@@ -3,7 +3,7 @@
 **EN**: Tools Configuration Guide
 **Summary**: Rust安全关键系统 - 工具配置指南 Tools Configuration Guide.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/00_meta/04_navigation/07_learning_guide.md](../../../concept/00_meta/04_navigation/07_learning_guide.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/06_ecosystem/00_toolchain/01_toolchain.md`](../../../concept/06_ecosystem/00_toolchain/01_toolchain.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
 
 > **Bloom 层级**: L4-L6
 >

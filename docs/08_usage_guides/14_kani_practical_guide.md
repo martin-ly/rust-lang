@@ -1,7 +1,7 @@
 # Kani 实战指南 —— Rust 的 bounded model checker {#kani-实战指南-rust-的-bounded-model-checker}
 
 > **权威来源**: 本文件为指南/参考，核心概念解释请见：
-> [`concept/04_formal/04_model_checking/09_kani.md`](./concept/04_formal/04_model_checking/32_kani.md)
+> [`concept/04_formal/04_model_checking/09_kani.md`](../../concept/04_formal/04_model_checking/09_kani.md)
 > **EN**: Kani Practical Guide
 > **Summary**: Kani 实战指南 —— Rust 的 bounded model checker Kani Practical Guide. (stub/archive redirect)
 >

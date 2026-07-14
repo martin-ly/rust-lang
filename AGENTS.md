@@ -177,9 +177,8 @@ python scripts/audit_content_completeness.py --json tmp/completeness.json
 # MSRV 单一事实源检查（根 Cargo.toml rust-version = 1.97.0 为唯一事实源）
 python scripts/check_msrv_consistency.py --strict
 
-# 死链检查
+# 死链检查（concept/ + docs/ + content/ + knowledge/）
 python scripts/kb_auditor.py --link-check
-# 或根据项目实际命令调整
 
 # 构建验证
 cargo build --workspace
@@ -213,7 +212,7 @@ bash scripts/git_hooks/install.sh
 4. `cargo audit --no-fetch`
 5. `cargo vet --locked`
 6. `mdbook build`
-7. `python scripts/kb_auditor.py`（死链/跨层/模板化 ⟹，EXIT 非 0 即阻断）
+7. `python scripts/kb_auditor.py`（死链：concept/ + docs/ + content/ + knowledge/；跨层/模板化 ⟹，EXIT 非 0 即阻断）
 8. `python scripts/detect_content_overlap.py`
 9. `python scripts/add_bilingual_annotations.py --mode check-only`
 10. `mermaid` 语法检查（CI job；本地见 `scripts/run_quality_gates.sh`）
@@ -279,7 +278,7 @@ bash scripts/git_hooks/install.sh
 | 机制 | 频率/触发条件 | 工具/负责人 |
 |---|---|---|
 | 内容重叠检测 | 每次 PR / 每周 | `scripts/detect_content_overlap.py` |
-| 死链检查 | 每次大规模合并后 | `scripts/kb_auditor.py` |
+| 死链检查 | 每次大规模合并后 | `scripts/kb_auditor.py`（覆盖 concept/ + docs/ + content/ + knowledge/） |
 | 归档审计 | 每季度 | 人工 + 脚本 |
 | 版本页中心化管理 | Rust 新版本发布时 | `concept/07_future/rust_1_XX_*.md` |
 | 版本新鲜度巡检 | 每周（手动，不挂 CI 门：网络依赖检查不适合阻断） | `scripts/check_authority_freshness.py` |

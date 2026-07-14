@@ -201,7 +201,7 @@ jobs:
         continue-on-error: false
 
   kb-auditor-link-check:
-    name: KB Auditor Link Check
+    name: KB Auditor Link Check (concept + docs + content + knowledge)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -212,7 +212,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Run KB auditor link check
+      - name: Run KB auditor link check (covers concept/ and docs/content/knowledge local links)
         run: python scripts/kb_auditor.py --link-check
         continue-on-error: false
 

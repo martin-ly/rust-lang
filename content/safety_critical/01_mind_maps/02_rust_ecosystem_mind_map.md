@@ -3,7 +3,7 @@
 **EN**: Rust Ecosystem Mind Map
 **Summary**: Rust生态系统思维导图 Rust Ecosystem Mind Map.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md](../../../concept/06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md`](../../../concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
 > **Bloom 层级**: L4-L6
 >
 > 本文内容迁移自历史归档，已按 `AGENTS.md` 规则保留为安全关键领域专题实践。

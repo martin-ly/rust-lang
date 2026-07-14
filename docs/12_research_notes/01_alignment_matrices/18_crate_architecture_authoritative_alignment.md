@@ -64,7 +64,7 @@
 | [SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) | [../08_software_design_theory/08_crate_architectures/44_crate_architecture_counterexamples.md](../08_software_design_theory/08_crate_architectures/44_crate_architecture_counterexamples.md) §7 | ✅ | 公开 API 变更与版本升级 |
 | [Publishing](https://doc.rust-lang.org/cargo/reference/publishing.html) | [../08_software_design_theory/08_crate_architectures/44_crate_architecture_counterexamples.md](../08_software_design_theory/08_crate_architectures/44_crate_architecture_counterexamples.md) §7 | ✅ | `cargo publish` 与 API 稳定性 |
 | [rust-version field](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field) | [45_version_evolution_alignment.md](45_version_evolution_alignment.md) | ✅ | MSRV 声明机制 |
-| [Config Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) | [Cargo.toml](../../Cargo.toml) | ✅ | dev/release 优化配置 |
+| [Config Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) | [Cargo.toml](../../../Cargo.toml) | ✅ | dev/release 优化配置 |
 
 ### 2.2 Rust Reference – Items and Crates {#22-rust-reference-items-and-crates}
 
@@ -153,7 +153,7 @@
 | 主题 | 权威来源 | 项目文档 | 状态 |
 |------|----------|----------|------|
 | `std::error::Error` | [Rust Standard Library](https://doc.rust-lang.org/std/error/trait.Error.html) | [22_error_handling_network_web_alignment.md](22_error_handling_network_web_alignment.md) | ✅ |
-| thiserror / anyhow | [thiserror docs](https://docs.rs/thiserror) / [anyhow docs](https://docs.rs/anyhow) | [crates/common/README.md](../../crates/common/README.md) | 🔄 |
+| thiserror / anyhow | [thiserror docs](https://docs.rs/thiserror) / [anyhow docs](https://docs.rs/anyhow) | [crates/common/README.md](../../../crates/common/README.md) | 🔄 |
 | 库错误 vs 应用错误 | [Rust API Guidelines – Errors](https://rust-lang.github.io/api-guidelines/interoperability.html#c-fail) | [22_error_handling_network_web_alignment.md](22_error_handling_network_web_alignment.md) | ✅ |
 
 ### 4.5 日志与 Tracing {#45-日志与-tracing}
@@ -168,7 +168,7 @@
 
 | 主题 | 权威来源 | 项目文档 | 状态 |
 |------|----------|----------|------|
-| 环境变量与 `.env` | [Cargo Book – Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html) | [crates/common/README.md](../../crates/common/README.md) | 🔄 |
+| 环境变量与 `.env` | [Cargo Book – Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html) | [crates/common/README.md](../../../crates/common/README.md) | 🔄 |
 | 配置文件序列化 | [Serde docs](https://serde.rs/) | [../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md](../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md) §二 | ✅ |
 | `LazyLock` 全局配置 | [Rust Standard Library](https://doc.rust-lang.org/std/sync/struct.LazyLock.html) | [../12_version_research/02_rust_194_research_update.md](../12_version_research/02_rust_194_research_update.md) | ✅ |
 
@@ -186,7 +186,7 @@
 |------|----------|----------|------|
 | Package layout | [Cargo Book – Project Layout](https://doc.rust-lang.org/cargo/guide/project-layout.html) | [../04_formal_module_system/02_module_system_specification.md](../04_formal_module_system/02_module_system_specification.md) §2 | ✅ |
 | Crate types | [Cargo Book – crate-type](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-crate-type-field) | [../04_formal_module_system/03_linkage_and_symbols.md](../04_formal_module_system/03_linkage_and_symbols.md) §3 | ✅ |
-| 一个 package 多个 bin | [Cargo Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html) | [crates/common/README.md](../../crates/common/README.md) | 🔄 |
+| 一个 package 多个 bin | [Cargo Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html) | [crates/common/README.md](../../../crates/common/README.md) | 🔄 |
 
 ### 4.9 MSRV 策略 {#49-msrv-策略}
 
@@ -194,7 +194,7 @@
 |------|----------|----------|------|
 | `rust-version` 字段 | [Cargo Book – rust-version](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field) | [45_version_evolution_alignment.md](45_version_evolution_alignment.md) | ✅ |
 | Edition 迁移 | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) | [21_edition_guide_alignment.md](21_edition_guide_alignment.md) | ✅ |
-| MSRV 测试矩阵 | [Cargo Book – Resolver](https://doc.rust-lang.org/cargo/reference/resolver.html) | [crates/integration_tests/README.md](../../crates/integration_tests/README.md) | 🔄 |
+| MSRV 测试矩阵 | [Cargo Book – Resolver](https://doc.rust-lang.org/cargo/reference/resolver.html) | [crates/integration_tests/README.md](../../../crates/integration_tests/README.md) | 🔄 |
 
 ---
 
@@ -204,8 +204,8 @@
 |------|------|
 | [Crate 架构主索引](../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md) | 21 个工业级 crate 的架构全景、学习路径、设计模式横切分析 |
 | [Crate 架构反例边界](../08_software_design_theory/08_crate_architectures/44_crate_architecture_counterexamples.md) | 循环依赖、feature 组合爆炸、SemVer 破坏等 7 类边界案例 |
-| [crates/common/README.md](../../crates/common/README.md) | 公共代码、错误类型、配置、日志抽象示例 |
-| [crates/integration_tests/README.md](../../crates/integration_tests/README.md) | 集成测试、MSRV/版本矩阵实践入口 |
+| [crates/common/README.md](../../../crates/common/README.md) | 公共代码、错误类型、配置、日志抽象示例 |
+| [crates/integration_tests/README.md](../../../crates/integration_tests/README.md) | 集成测试、MSRV/版本矩阵实践入口 |
 | [Cargo Book 对齐矩阵](15_cargo_book_alignment.md) | Cargo 官方文档与项目内容的总映射 |
 | [社区最佳实践对齐矩阵](17_community_best_practices_alignment.md) | API Guidelines、Rust Design Patterns、Performance Book 总映射 |
 | [Rust Reference 对齐矩阵](34_rust_reference_alignment.md) | 语言规范 items/modules/visibility 映射 |

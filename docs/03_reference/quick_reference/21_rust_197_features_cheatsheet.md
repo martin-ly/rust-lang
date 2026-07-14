@@ -61,11 +61,9 @@
 
 ## 兼容性注意
 
-- v0 symbol mangling 默认启用。
-- `pin!` 阻止隐式 deref coercion。
-- 空 `#[export_name = ""]` 报错。
-- `std::char` 常量与函数被弃用。
-- Windows `WSAESHUTDOWN` 映射为 `io::ErrorKind::BrokenPipe`。
+> 完整迁移判定树与修复动作请见权威页 [`concept/07_future/00_version_tracking/migration_197_decision_tree.md`](../../../concept/07_future/00_version_tracking/migration_197_decision_tree.md)。本节仅列出关键词，不重复迁移动作。
+
+- v0 symbol mangling、空 `export_name`、`pin!` deref coercion、Windows `WSAESHUTDOWN→BrokenPipe` 等变化均已在迁移判定树中给出可执行修复步骤。
 
 ---
 

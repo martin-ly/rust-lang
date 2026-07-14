@@ -74,11 +74,11 @@
 
 | 文档 | 类型 | 描述 | 状态 |
 | :--- | :--- | :--- | :--- |
-| [OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)（归档只读） | Coq | 所有权（Ownership）唯一性定理 T-OW2 | ✅ L3骨架 |
-| [BORROW_DATARACE_FREE.v](../../archive/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v)（归档只读） | Coq | 数据竞争自由定理 T-BR1 | ✅ L3骨架 |
-| [TYPE_SAFETY.v](../../archive/deprecated/coq_skeleton/TYPE_SAFETY.v)（归档只读） | Coq | 类型安全定理 T-TY3 | ✅ L3骨架 |
-| [DISTRIBUTED_PATTERNS.v](../../archive/deprecated/coq_skeleton/DISTRIBUTED_PATTERNS.v)（归档只读） | Coq | 分布式模式形式化 | 🆕 完整 |
-| [WORKFLOW_FORMALIZATION.v](../../archive/deprecated/coq_skeleton/WORKFLOW_FORMALIZATION.v)（归档只读） | Coq | 工作流形式化 | 🆕 完整 |
+| [OWNERSHIP_UNIQUENESS.v](../../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)（归档只读） | Coq | 所有权（Ownership）唯一性定理 T-OW2 | ✅ L3骨架 |
+| [BORROW_DATARACE_FREE.v](../../../archive/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v)（归档只读） | Coq | 数据竞争自由定理 T-BR1 | ✅ L3骨架 |
+| [TYPE_SAFETY.v](../../../archive/deprecated/coq_skeleton/TYPE_SAFETY.v)（归档只读） | Coq | 类型安全定理 T-TY3 | ✅ L3骨架 |
+| [DISTRIBUTED_PATTERNS.v](../../../archive/deprecated/coq_skeleton/DISTRIBUTED_PATTERNS.v)（归档只读） | Coq | 分布式模式形式化 | 🆕 完整 |
+| [WORKFLOW_FORMALIZATION.v](../../../archive/deprecated/coq_skeleton/WORKFLOW_FORMALIZATION.v)（归档只读） | Coq | 工作流形式化 | 🆕 完整 |
 
 ### 思维表征文档 {#思维表征文档}
 

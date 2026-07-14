@@ -295,7 +295,7 @@ let conn = Connection::connect(&addr, props).await?;
 | 发布消息到队列 | [`crates/c10_networks/examples/lapin_publisher.rs`](../../../../crates/c10_networks/examples/lapin_publisher.rs) | 声明队列并使用 basic_publish 发送消息 |
 | 从队列消费消息 | [`crates/c10_networks/examples/lapin_consumer.rs`](../../../../crates/c10_networks/examples/lapin_consumer.rs) | 使用 Consumer 流拉取并手动 ack 消息 |
 
-> [来源: [c10_networks Crate](../../../../../crates/c10_networks)]
+> [来源: [c10_networks Crate](../../../../crates/c10_networks)]
 
 ---
 

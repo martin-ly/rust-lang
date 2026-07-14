@@ -3,7 +3,7 @@
 **EN**: MISRA C
 **Summary**: 2025 Addendum 6 - Rust应用指南 MISRA C.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/00_meta/03_audit/08_concept_audit_guide.md](../../../concept/00_meta/03_audit/08_concept_audit_guide.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/06_ecosystem/11_domain_applications/04_licensing_and_compliance.md`](../../../concept/06_ecosystem/11_domain_applications/04_licensing_and_compliance.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
 
 > **Bloom 层级**: L4-L6
 >

@@ -83,7 +83,7 @@
 |----------|--------------|----------|------|
 | 基于 Viper 的合约验证 | [../03_formal_proofs/32_verification_tools_matrix.md](../03_formal_proofs/32_verification_tools_matrix.md) | ✅ 高 | 需要写前置/后置条件 |
 | 所有权（Ownership） / 借用（Borrowing） | [../02_formal_methods/03_borrow_checker_proof.md](../02_formal_methods/03_borrow_checker_proof.md) | ✅ 高 | 自动处理借用 |
-| Loop 不变量 | [crates/c08_algorithms/](../../crates/c08_algorithms/README.md) | ✅ 高 | 适合算法验证 |
+| Loop 不变量 | [crates/c08_algorithms/](../../../crates/c08_algorithms/README.md) | ✅ 高 | 适合算法验证 |
 | Trait 合约 | [../05_type_theory/04_trait_system_formalization.md](../05_type_theory/04_trait_system_formalization.md) | 🔄 中 | 需要写抽象谓词 |
 
 > **权威来源**: [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html)
@@ -128,16 +128,16 @@
 
 ## 九、示例 crate {#九示例-crate}
 
-为降低工具上手门槛，项目在 [`crates/c15_verification_tools`](../../crates/c15_verification_tools/README.md) 中提供了可直接编译的示例：
+为降低工具上手门槛，项目在 [`crates/c15_verification_tools`](../../../crates/c15_verification_tools/README.md) 中提供了可直接编译的示例：
 
 | 工具 | 示例文件 | 说明 |
 |------|----------|------|
-| Kani | [`kani_example.rs`](../../crates/c15_verification_tools/examples/kani_example.rs) | `safe_add` 溢出检查、`index_bounds` 数组越界检查 |
-| Aeneas | [`aeneas_example.rs`](../../crates/c15_verification_tools/examples/aeneas_example.rs) | 递归求和与有序链表插入 |
-| Prusti | [`prusti_example.rs`](../../crates/c15_verification_tools/examples/prusti_example.rs) | `abs`、`max`、`sum` 前置/后置条件 |
-| 总览 | [`../README.md`](../../crates/c15_verification_tools/README.md) | 官方文档链接、安装与运行命令 |
+| Kani | [`kani_example.rs`](../../../crates/c15_verification_tools/examples/kani_example.rs) | `safe_add` 溢出检查、`index_bounds` 数组越界检查 |
+| Aeneas | [`aeneas_example.rs`](../../../crates/c15_verification_tools/examples/aeneas_example.rs) | 递归求和与有序链表插入 |
+| Prusti | [`prusti_example.rs`](../../../crates/c15_verification_tools/examples/prusti_example.rs) | `abs`、`max`、`sum` 前置/后置条件 |
+| 总览 | [`../README.md`](../../../crates/c15_verification_tools/README.md) | 官方文档链接、安装与运行命令 |
 
-普通 `cargo check -p c15_verification_tools` 即可通过；各工具验证命令见 [`../README.md`](../../crates/c15_verification_tools/README.md)。
+普通 `cargo check -p c15_verification_tools` 即可通过；各工具验证命令见 [`../README.md`](../../../crates/c15_verification_tools/README.md)。
 
 ## 相关概念 {#相关概念}
 

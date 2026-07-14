@@ -316,5 +316,5 @@ impl<'a, T: ?Sized> Deref for SmartPtr<'a, T> {
 - [Rust 2024 Edition 迁移指南](../../../knowledge/06_ecosystem/02_edition_2024.md)
 - [releases.rs — 稳定化进度跟踪](https://releases.rs/)
 - [Rust 版本跟踪](../../../concept/07_future/00_version_tracking/01_rust_version_tracking.md)
-- [gen blocks 前瞻](../../../concept/07_future/15_gen_blocks_preview.md)
+- [gen blocks 前瞻](../../../concept/07_future/03_preview_features/25_gen_blocks_preview.md)
 - [derive(CoercePointee) 前瞻](../../../concept/07_future/03_preview_features/05_derive_coerce_pointee_preview.md)

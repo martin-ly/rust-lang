@@ -1,3 +1,9 @@
+> **权威来源**: 本文件为 `crates/c15_verification_tools/` 的 crate 入口页。
+> 通用 Rust 概念解释统一维护在 `concept/` 中；详见 [../../concept/06_ecosystem/08_formal_verification/](../../concept/06_ecosystem/08_formal_verification/)。
+>
+> 根据 AGENTS.md §2 Canonical 规则，`crates/` 不重复通用 Rust 概念解释；
+> 如需深入学习，请前往 `concept/` 权威页。
+>
 # 验证工具实战示例
 
 > 本 crate 提供 [Kani](https://github.com/model-checking/kani)、[Aeneas](https://github.com/AeneasVerif/aeneas)、[Prusti](https://github.com/viperproject/prusti-dev) 的入门示例与反例边界。

@@ -50,7 +50,7 @@
 | Reference 章节 | 项目文档 | 状态 | 备注 |
 |----------------|----------|------|------|
 | [Lexical Elements](https://doc.rust-lang.org/reference/tokens.html) | [../05_type_theory/05_type_system_foundations.md](../05_type_theory/05_type_system_foundations.md) | 🔄 | 基础词法在类型基础中提及 |
-| [Macros](https://doc.rust-lang.org/reference/macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | 🔄 | 声明宏（Declarative Macro）/过程宏（Procedural Macro）有 crate 示例 |
+| [Macros](https://doc.rust-lang.org/reference/macros.html) | [crates/c11_macro_system_proc/](../../../crates/c11_macro_system_proc/README.md) | 🔄 | 声明宏（Declarative Macro）/过程宏（Procedural Macro）有 crate 示例 |
 | [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) | [../04_formal_module_system/02_module_system_specification.md](../04_formal_module_system/02_module_system_specification.md) | ✅ | crate、module、source file 规则 |
 
 ---
@@ -73,8 +73,8 @@
 | Reference 章节 | 项目文档 | 状态 | 备注 |
 |----------------|----------|------|------|
 | [Expressions](https://doc.rust-lang.org/reference/expressions.html) | [../02_formal_methods/02_async_state_machine.md](../02_formal_methods/02_async_state_machine.md) | ✅ | async 块表达式 |
-| [Control Flow](https://doc.rust-lang.org/reference/expressions.html#control-flow-expressions) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 🔄 | 基础控制流在 crate 中 |
-| [Match Expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 🔄 | 模式匹配（Pattern Matching）示例 |
+| [Control Flow](https://doc.rust-lang.org/reference/expressions.html#control-flow-expressions) | [crates/c03_control_fn/](../../../crates/c03_control_fn/README.md) | 🔄 | 基础控制流在 crate 中 |
+| [Match Expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html) | [crates/c03_control_fn/](../../../crates/c03_control_fn/README.md) | 🔄 | 模式匹配（Pattern Matching）示例 |
 
 ---
 

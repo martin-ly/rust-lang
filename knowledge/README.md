@@ -5,7 +5,7 @@
 > **Bloom 层级**: L2
 > > **Rust 版本**: 1.97.0 (Edition 2024)
 > **更新策略**: 跟随官方稳定版，每版本更新
-> **文档规模**: 74 篇核心文档，33,921 行，36 篇按 10 模块标准重构
+> **文档规模**: 119 篇内容页，2,977 行，19 个分层 README，8 个学习模块
 >
 > **受众**: [进阶] / [专家]
 > **内容分级**: [专家级]
@@ -47,7 +47,7 @@
 | `core::hint::cold_path` | [03_advanced/performance_optimization.md](03_advanced/05_performance_optimization.md) | ✅ 已更新 |
 | `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/07_type_conversions.md) | ✅ 已更新 |
 | `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/02_maybe_uninit.md) | ✅ 已更新 |
-| PowerPC/PowerPC64 内联汇编 | [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/02_inline_asm.md) | ✅ 已更新 |
+| PowerPC/PowerPC64 内联汇编 | [03_advanced/inline_asm.md](03_advanced/03_inline_asm.md) | ✅ 已更新 |
 | `core::range` | [02_intermediate/collections.md](02_intermediate/01_collections.md) | ✅ 已更新 |
 
 ## 🔮 预览版本跟踪
@@ -75,7 +75,7 @@
 
 ---
 
-**最后更新**: 2026-07-04
+**最后更新**: 2026-07-14
 **维护者**: Rust 学习项目团队
 **重构状态**: Phase 1 核心层完成（28篇 → 16,000+行）| Phase 2 Ecosystem 层进行中
 
@@ -87,7 +87,7 @@
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)
-**最后更新**: 2026-07-04
+**最后更新**: 2026-07-14
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

@@ -468,7 +468,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-1. 使用 [模板](10_template.md) 创建文件
+1. 使用 [模板](../../../archive/research_notes_2026_06_25/10_template.md) 创建文件
 2. 按照检查清单逐项检查
 3. 请他人审查
 
@@ -498,8 +498,8 @@
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [研究笔记规范](../../README.md#研究笔记规范)
-- [研究笔记模板](10_template.md)
-- [贡献指南](10_contributing.md)
+- [研究笔记模板](../../../archive/research_notes_2026_06_25/10_template.md)
+- [贡献指南](../../../archive/research_notes_2026_06_25/10_contributing.md)
 - [快速参考](../10_tutorials_and_guides/13_quick_reference.md)
 
 ---

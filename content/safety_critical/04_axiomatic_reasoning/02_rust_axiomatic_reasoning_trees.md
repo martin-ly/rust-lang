@@ -3,7 +3,7 @@
 **EN**: Rust Axiomatic Reasoning Trees
 **Summary**: Rust安全保证公理定理推理决策树 Rust Axiomatic Reasoning Trees.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/00_meta/00_framework/boundary_extension_tree.md](../../../concept/00_meta/00_framework/boundary_extension_tree.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md`](../../../concept/04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
 
 > **Bloom 层级**: L4-L6
 >

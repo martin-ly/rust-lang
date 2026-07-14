@@ -1,3 +1,9 @@
+> **权威来源**: 本文件为 `crates/c17_resolver_v3_public_demo/` 的 crate 入口页。
+> 通用 Rust 概念解释统一维护在 `concept/` 中；详见 [../../concept/06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md](../../concept/06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md)。
+>
+> 根据 AGENTS.md §2 Canonical 规则，`crates/` 不重复通用 Rust 概念解释；
+> 如需深入学习，请前往 `concept/` 权威页。
+>
 # Cargo resolver v3 / `public = true` 演示
 
 > **EN**: Cargo resolver v3 and `public = true` feature-unification demo workspace.

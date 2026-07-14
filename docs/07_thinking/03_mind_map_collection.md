@@ -1,5 +1,7 @@
 # Rust 思维导图集合 {#rust-思维导图集合}
 
+> **权威来源**: 本文件为 `docs/` 思维导图可视化集合，通用 Rust 概念解释请见 [`concept/`](../../concept/)。根据 AGENTS.md §3.4，`docs/` 不重复 `concept/` 中的通用概念解释。
+>
 > **EN**: Mind Map Collection
 > **Summary**: Rust 思维导图集合 Mind Map Collection. (stub/archive redirect)
 > **分级**: [B]

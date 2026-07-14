@@ -89,11 +89,11 @@
 
 ## 六、术语库数据源 {#六术语库数据源}
 
-完整术语库存放于 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml)，采用 YAML 结构化格式，包含每个术语的英文原文、中文翻译、日文翻译、分类及使用说明。
+完整术语库存放于 data/i18n_terminology.yaml，采用 YAML 结构化格式，包含每个术语的英文原文、中文翻译、日文翻译、分类及使用说明。
 
 引用（Reference）方式：
 
-- 在 Markdown 文档中提及本术语库时，使用相对路径 `data/i18n_terminology.yaml` 或链接 `[术语库](data/i18n_terminology.yaml)`。
+- 在 Markdown 文档中提及本术语库时，使用相对路径 `data/i18n_terminology.yaml` 或链接 `data/i18n_terminology.yaml`。
 - 维护脚本可通过 `PROJECT_ROOT / "data" / "i18n_terminology.yaml"` 读取并解析该文件。
 - 新增术语时应同步更新该文件，并优先保证与上表一致。
 
@@ -110,7 +110,7 @@
 ## 八、未覆盖缺口 {#八未覆盖缺口}
 
 1. 中文 Rust Reference 翻译与项目 Reference 对齐矩阵可进一步细化。
-2. ~~日文/中文术语对照表可扩展至更多专业术语（如 variance、coercion、orphan rules）。~~ 已补充：高级术语已统一纳入 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml)。
+2. ~~日文/中文术语对照表可扩展至更多专业术语（如 variance、coercion、orphan rules）。~~ 已补充：高级术语已统一纳入 data/i18n_terminology.yaml。
 3. 可建立自动化脚本检查各语言翻译版本与英文原版的版本差异。
 
 > **权威来源**: [TRPL 中文](https://kaisery.github.io/trpl-zh-cn/) | [TRPL 日文](https://doc.rust-jp.rs/book-ja/) | [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ --> | [Rust Japan](https://rust-jp.rs/)

@@ -1,5 +1,13 @@
 ﻿# 项目配置文件说明
 
+**EN**: Project Configuration Files (c04_generic)
+**Summary**: Crate-specific configuration documentation; general Rust concepts live in `concept/` authority pages.
+
+> **权威来源注记**: 本文件为 `c04_generic` crate 的项目特定文档，非通用 Rust 概念权威页。
+> 通用 Rust 泛型与 Trait 概念请见
+> [`concept/02_intermediate/01_generics/01_generics.md`](../../concept/02_intermediate/01_generics/01_generics.md) 与
+> [`concept/02_intermediate/00_traits/01_traits.md`](../../concept/02_intermediate/00_traits/01_traits.md)。
+
 ## 📊 目录
 
 - [项目配置文件说明](#项目配置文件说明)

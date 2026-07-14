@@ -637,6 +637,6 @@ Aeneas 工具生态
 
 ## 多语言术语参考 {#多语言术语参考}
 
-> **来源: [国际化术语库](../../data/i18n_terminology.yaml)**
+> **来源: data/i18n_terminology.yaml**
 
-本文档涉及的英/中/日关键术语参见项目统一术语库 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml)。
+本文档涉及的英/中/日关键术语参见项目统一术语库 data/i18n_terminology.yaml。

@@ -179,7 +179,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 |:--|:--|:--|
 | 加载 ONNX 模型并执行推理 | [`crates/c08_algorithms/examples/ort_basic_inference.rs`](../../../../crates/c08_algorithms/examples/ort_basic_inference.rs) | 使用 `Session::builder`、`Tensor::from_array` 与 `try_extract_tensor` |
 
-> [来源: [c08_algorithms Crate](../../../../../crates/c08_algorithms)]
+> [来源: [c08_algorithms Crate](../../../../crates/c08_algorithms)]
 
 ---
 

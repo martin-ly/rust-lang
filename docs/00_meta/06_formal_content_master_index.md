@@ -85,8 +85,8 @@
 | 深度 | 位置 | 说明 |
 |------|------|------|
 | ⭐⭐⭐ Rust 特定 | [`rust-ownership-decidability/11-design-patterns/`](../../archive/rust-ownership-decidability/11-design-patterns)（归档只读） | Rust 设计模式深度分析 |
-| ⭐⭐ 通用形式化 | [`research_notes/software_design_theory/01_design_patterns_formal/`](../research_notes/software_design_theory/01_design_patterns_formal) | 23 种设计模式形式化 |
-| ⭐⭐ 工作流引擎 | [`research_notes/software_design_theory/02_workflow/`](../research_notes/software_design_theory/02_workflow) | 工作流状态机、补偿链、长事务 |
+| ⭐⭐ 通用形式化 | [`research_notes/software_design_theory/01_design_patterns_formal/`](../12_research_notes/08_software_design_theory/01_design_patterns_formal) | 23 种设计模式形式化 |
+| ⭐⭐ 工作流引擎 | [`research_notes/software_design_theory/02_workflow/`](../12_research_notes/08_software_design_theory/02_workflow) | 工作流状态机、补偿链、长事务 |
 
 ### 2.5 验证工具 {#25-验证工具}
 
@@ -145,7 +145,7 @@
 
 ## 5. 相关文档 {#5-相关文档}
 
-- [`00_rust_ownership_decidability_integration_plan.md`](00_rust_ownership_decidability_integration_plan.md) — 整合计划详情
+- [`00_rust_ownership_decidability_integration_plan.md`](../../archive/docs/c_class_audit_2026_06_08/00_meta/00_rust_ownership_decidability_integration_plan.md) — 整合计划详情
 - [`04_documentation_division_of_labor.md`](04_documentation_division_of_labor.md) — 文档体系分工协议
 - [`rust-ownership-decidability/README.md`](../../archive/rust-ownership-decidability/README.md)（归档只读） — 所有权知识库入口
 - [`research_notes/README.md`](../12_research_notes/README.md) — 研究笔记入口

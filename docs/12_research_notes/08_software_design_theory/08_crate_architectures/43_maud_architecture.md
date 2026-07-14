@@ -208,7 +208,7 @@ async fn hello() -> impl axum::response::IntoResponse {
 |:--|:--|:--|
 | Maud 模板渲染 | [`crates/c06_async/examples/maud_template_rendering.rs`](../../../../crates/c06_async/examples/maud_template_rendering.rs) | `html!` 宏、循环、函数组件 |
 
-> [来源: [c06_async Crate](../../../../../crates/c06_async)]
+> [来源: [c06_async Crate](../../../../crates/c06_async)]
 
 ---
 
@@ -220,7 +220,7 @@ async fn hello() -> impl axum::response::IntoResponse {
 - [42_askama_architecture.md](42_askama_architecture.md) — Askama 模板引擎架构
 - [07_axum_architecture.md](07_axum_architecture.md) — Axum Web 框架架构
 - [14_actix_web_architecture.md](14_actix_web_architecture.md) — Actix-web 框架架构
-- [concept L6: Web 框架与中间件](../../../../06_ecosystem)
+- [concept L6: Web 框架与中间件](../../../../concept/06_ecosystem)
 
 ---
 

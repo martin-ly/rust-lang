@@ -1,5 +1,7 @@
 # 实践项目 {#实践项目}
 
+> **权威来源**: 本文件为 `docs/` 实践项目索引，通用 Rust 概念解释请见 [`concept/`](../../concept/)。根据 AGENTS.md §3.4，`docs/` 不重复 `concept/` 中的通用概念解释。
+>
 > **EN**: Practice Index
 > **Summary**: 实践项目 Practice Index.
 > **分级**: [A]

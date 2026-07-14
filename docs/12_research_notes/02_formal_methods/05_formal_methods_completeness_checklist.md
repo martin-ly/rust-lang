@@ -98,7 +98,7 @@
 
 - 新增 formal_methods 文档时：在本表增加一行，六维逐项填写并保持 ✅。
 - 某篇补充定义/定理/反例/思维表征时：更新对应单元格说明，保持 ✅。
-- 季度维护：与 [MAINTENANCE_GUIDE](../10_maintenance_guide.md) 协同，核对本表与 README 六篇并表、00_completeness_gaps 一致。
+- 季度维护：与 [MAINTENANCE_GUIDE](../../../archive/research_notes_2026_06_25/10_maintenance_guide.md) 协同，核对本表与 README 六篇并表、00_completeness_gaps 一致。
 
 ---
 

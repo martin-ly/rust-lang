@@ -117,8 +117,8 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 | :--- | :--- | :--- |
 | ../03_formal_proofs/01_aeneas_integration_plan.md | archive/deprecated/10_aeneas_integration_plan.md | Aeneas 对接计划 |
 | ../03_formal_proofs/04_coq_of_rust_integration_plan.md | archive/deprecated/10_coq_of_rust_integration_plan.md | coq-of-rust 对接计划 |
-| 10_coq_isabelle_proof_scaffolding.md | [archive/deprecated/](../../archive/docs/deprecated/README.md)（归档只读） | Coq/Isabelle 骨架说明 |
-| coq_skeleton/（.v 等） | [archive/deprecated/coq_skeleton/](../../archive/docs/deprecated/coq_skeleton/README.md)（归档只读） | Coq 证明骨架；本目录仅保留 [coq_skeleton/README.md](../../archive/deprecated/coq_skeleton/README.md)（归档只读） 重定向 |
+| 10_coq_isabelle_proof_scaffolding.md | [archive/deprecated/](../../../archive/docs/deprecated/README.md)（归档只读） | Coq/Isabelle 骨架说明 |
+| coq_skeleton/（.v 等） | [archive/deprecated/coq_skeleton/](../../../archive/docs/deprecated/coq_skeleton/README.md)（归档只读） | Coq 证明骨架；本目录仅保留 [coq_skeleton/README.md](../../../archive/deprecated/coq_skeleton/README.md)（归档只读） 重定向 |
 
 **引用（Reference）建议**：新文档中提及 Aeneas、coq-of-rust、Coq 骨架时，链接至上述 `archive/deprecated/` 路径；INDEX/README 中已统一标注「已归档」。
 
@@ -132,7 +132,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 | :--- | :--- | :--- |
 | [00_ORGANIZATION_AND_NAVIGATION](../00_organization_and_navigation.md) | 按目标选路径、三大支柱、层级 | 首次使用、不知道从哪看 |
 | [README](../README.md) | 主入口、研究方向、规范、目录树 | 总览、规范 |
-| [INDEX](../../concept/sources/INDEX.md) | 完整列表、按领域/主题/证明 | 查具体文档、证明索引 |
+| [INDEX](../../../concept/sources/INDEX.md) | 完整列表、按领域/主题/证明 | 查具体文档、证明索引 |
 | [QUICK_FIND](../10_tutorials_and_guides/12_quick_find.md) | 关键词/领域/目标 | 快速定位 |
 | [QUICK_REFERENCE](../10_tutorials_and_guides/13_quick_reference.md) | 按主题快速参考 | 按主题查 |
 | [HIERARCHICAL_MAPPING_AND_SUMMARY](../06_concept_models/12_hierarchical_mapping_and_summary.md) | 文档树、概念↔定理、文档↔思维表征 | 层次化检索、双向追溯 |
@@ -255,7 +255,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.3
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

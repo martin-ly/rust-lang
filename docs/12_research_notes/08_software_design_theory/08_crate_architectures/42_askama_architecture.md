@@ -195,7 +195,7 @@ async fn page() -> impl IntoResponse {
 |:--|:--|:--|
 | Askama 模板渲染 | [`crates/c06_async/examples/askama_template_rendering.rs`](../../../../crates/c06_async/examples/askama_template_rendering.rs) | `#[derive(Template)]`、内联模板、循环渲染 |
 
-> [来源: [c06_async Crate](../../../../../crates/c06_async)]
+> [来源: [c06_async Crate](../../../../crates/c06_async)]
 
 ---
 
@@ -207,7 +207,7 @@ async fn page() -> impl IntoResponse {
 - [43_maud_architecture.md](43_maud_architecture.md) — Maud 模板宏架构
 - [07_axum_architecture.md](07_axum_architecture.md) — Axum Web 框架架构
 - [14_actix_web_architecture.md](14_actix_web_architecture.md) — Actix-web 框架架构
-- [concept L6: Web 框架与中间件](../../../../06_ecosystem)
+- [concept L6: Web 框架与中间件](../../../../concept/06_ecosystem)
 
 ---
 

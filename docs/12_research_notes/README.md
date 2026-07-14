@@ -334,7 +334,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-**第一次使用？** 请先阅读 [快速入门指南](10_getting_started.md)！
+**第一次使用？** 请先阅读 [快速入门指南](../../archive/research_notes_2026_06_25/10_getting_started.md)！
 
 ### 开始新的研究主题 {#开始新的研究主题}
 
@@ -342,7 +342,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 1. 查看 [研究路线图](13_meta_reports/15_research_roadmap.md) 了解研究计划
 2. 选择合适的子目录（formal_methods/、type_theory/、experiments/）
-3. 使用 [研究笔记模板](10_template.md) 创建新文件
+3. 使用 [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md) 创建新文件
 4. 按照下方「研究笔记规范」章节编写内容
 5. 使用 [质量检查清单](13_meta_reports/11_quality_checklist.md) 检查质量
 6. 更新对应目录的 README.md
@@ -354,12 +354,12 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 研究笔记欢迎社区贡献！请查看：
 
-- [贡献指南](10_contributing.md) - 详细的贡献流程和规范
+- [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md) - 详细的贡献流程和规范
 - [质量检查清单](13_meta_reports/11_quality_checklist.md) - 确保质量的标准
-- [研究笔记模板](10_template.md) - 快速创建新笔记
-- [研究进展跟踪](10_progress_tracking.md) - 详细的研究进展跟踪
-- [研究任务清单](10_task_checklist.md) - 具体的研究任务清单
-- [研究笔记写作指南](10_writing_guide.md) - 详细的写作指导
+- [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md) - 快速创建新笔记
+- [研究进展跟踪](../../archive/research_notes_2026_06_25/10_progress_tracking.md) - 详细的研究进展跟踪
+- [研究任务清单](../../archive/research_notes_2026_06_25/10_task_checklist.md) - 具体的研究任务清单
+- [研究笔记写作指南](../../archive/research_notes_2026_06_25/10_writing_guide.md) - 详细的写作指导
 - [研究笔记内容完善指南](13_meta_reports/08_content_enhancement.md) - 内容完善指导
 
 **贡献要求**:
@@ -467,7 +467,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
    - 内存碎片减少机制研究
    - 相关笔记: [内存分析](09_experiments/04_memory_analysis.md)
 
-**详细更新**: 参见 [Rust 1.91.1 研究更新报告](10_rust_191_research_update_2025_11_15.md)、[Rust 1.92.0 研究更新报告](10_rust_192_research_update_2025_12_11.md)
+**详细更新**: 参见 [Rust 1.91.1 研究更新报告](../../archive/research_notes/10_rust_191_research_update_2025_11_15.md)、[Rust 1.92.0 研究更新报告](../../archive/research_notes/10_rust_192_research_update_2025_12_11.md)
 
 ---
 
@@ -517,14 +517,14 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 - [工具使用指南](10_tutorials_and_guides/16_tools_guide.md) - 研究工具安装和使用方法
 - [更新日志](13_meta_reports/02_changelog.md) - 系统变更历史记录
 - [完整索引](../../concept/sources/INDEX.md) - 所有研究笔记的详细索引
-- [快速入门指南](10_getting_started.md) - 新用户入门指南
+- [快速入门指南](../../archive/research_notes_2026_06_25/10_getting_started.md) - 新用户入门指南
 - [常见问题解答](10_tutorials_and_guides/05_faq.md) - 常见问题解答
-- [维护指南](10_maintenance_guide.md) - 系统维护指南
+- [维护指南](../../archive/research_notes_2026_06_25/10_maintenance_guide.md) - 系统维护指南
 - [最佳实践](10_tutorials_and_guides/03_best_practices.md) - 研究笔记最佳实践（含实质内容不足判断与四步修复法）
 - [术语表](10_tutorials_and_guides/07_glossary.md) - 专业术语解释
 - [研究资源汇总](10_tutorials_and_guides/15_resources.md) - 学术和工具资源
 - [系统集成指南](06_concept_models/15_system_integration.md) - 与形式化工程系统的集成
-- [研究笔记示例](10_example.md) - 完整的研究笔记示例
+- [研究笔记示例](../../archive/research_notes_2026_06_25/10_example.md) - 完整的研究笔记示例
 
 ---
 
@@ -549,7 +549,7 @@ find docs/12_research_notes -name "*.md" -exec grep -l "主题" {} \;
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 - 📖 查看 [常见问题解答](10_tutorials_and_guides/05_faq.md) 获取常见问题的答案
-- 📚 阅读 [快速入门指南](10_getting_started.md) 了解如何使用系统
+- 📚 阅读 [快速入门指南](../../archive/research_notes_2026_06_25/10_getting_started.md) 了解如何使用系统
 - 🐛 提交 Issue 报告问题
 - 💬 参与讨论交流
 - 📧 联系维护团队

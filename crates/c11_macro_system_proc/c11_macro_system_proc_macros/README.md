@@ -1,3 +1,9 @@
+> **权威来源**: 本文件为 `crates/c11_macro_system_proc/c11_macro_system_proc_macros/` 的 crate 特定记录页。
+> 通用 Rust 概念解释统一维护在 `concept/` 中；详见 [../../../concept/03_advanced/03_proc_macros/](../../../concept/03_advanced/03_proc_macros/)。
+>
+> 根据 AGENTS.md §2 Canonical 规则，`crates/` 不重复通用 Rust 概念解释；
+> 如需深入学习，请前往 `concept/` 权威页。
+>
 # C11: Rust 宏系统 — 过程宏 (Procedural Macros)
 
 > **配套 crate**: [c11_macro_system_proc](../c11_macro_system_proc) 的过程宏实现

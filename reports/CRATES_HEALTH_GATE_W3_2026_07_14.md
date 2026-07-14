@@ -66,10 +66,46 @@ python scripts/check_concept_authority_coverage.py --strict --include-crates
 ### 3.2 全量质量门
 
 ```bash
-bash scripts/run_quality_gates.sh
+bash scripts/run_quality_gates.sh > tmp/gates_w3_2026_07_14.log 2>&1; echo "EXIT=$?"; tail -40 tmp/gates_w3_2026_07_14.log
 ```
 
-结果：23 门全阻断 EXIT=0（详细输出见 `scripts/run_quality_gates.sh` 运行日志）。
+输出（节选最后 40 行，2026-07-14）：
+
+```text
+EXIT=0
+[result] candidate pass=300 fail=0 | compile_fail ok=866 unexpected_pass=0 wrong_code=0 | should_panic pass=0 fail=0 | dep pass=0 fail=0 untested=0 | timeout=0
+✅ Concept Code Blocks (strict) passed
+
+=== Mindmap Coverage (strict) ===
+== 内容页思维表征覆盖率（W2-a 观察门，默认 exit 0）==
+层                   内容页         mindmap            反例存在
+01_foundation        49      49 (100.0%)      48 ( 98.0%)
+02_intermediate      35      35 (100.0%)      35 (100.0%)
+03_advanced          62      62 (100.0%)      60 ( 96.8%)
+04_formal            54      54 (100.0%)      54 (100.0%)
+05_comparative       19      19 (100.0%)      19 (100.0%)
+06_ecosystem        121     121 (100.0%)     120 ( 99.2%)
+07_future            64      64 (100.0%)      63 ( 98.4%)
+-------------------------------------------------------
+TOTAL               404     404 (100.0%)     399 ( 98.8%)
+基线阈值（--strict）: mindmap >= 10%, 反例 >= 40%
+✅ Mindmap Coverage (strict) passed
+
+=== Semantic Health (strict) ===
+[P4] semantic health total=99.6 grade=OK (meta=100.0 topo=98.4 dedup=100.0 kg=100.0)
+[P4] report: reports/SEMANTIC_HEALTH_2026-07-14.md
+✅ Semantic Health (strict) passed
+
+=== Content Overlap v2 (blocking, actionable baseline=0) ===
+...
+[overlap-v2] actionable (MERGE+DOCS_INTERNAL) = 0 (baseline 0)
+✅ overlap-v2 可处理项=0。
+
+✅ All 23 quality gates passed (23 blocking + 0 semantic observe).
+```
+
+- ✅ EXIT=0
+- ✅ 23 门全阻断通过
 
 ---
 

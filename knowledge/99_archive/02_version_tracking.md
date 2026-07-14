@@ -3,7 +3,7 @@
 > **EN**: Rust version tracking redirect
 > **Summary**: 本页是 `knowledge/` 目录下的导航占位符。内容已迁移至 `concept/` 权威页，此处不再维护完整技术解释。
 
-> **权威来源**: [Rust 版本跟踪入口](../../../concept/07_future/00_version_tracking/05_rust_version_tracking.md)
+> **权威来源**: [Rust 版本跟踪入口](../../concept/07_future/00_version_tracking/01_rust_version_tracking.md)
 
 ---
 

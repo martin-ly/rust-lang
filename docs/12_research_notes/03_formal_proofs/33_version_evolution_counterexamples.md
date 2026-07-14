@@ -221,8 +221,8 @@ fn main() {
 ## 相关概念 {#相关概念}
 
 - [Rust 1.94 研究更新](../12_version_research/02_rust_194_research_update.md)
-- [Rust 1.94/1.95 特性矩阵](10_rust_194_195_feature_matrix.md)
-- [Rust 1.93 反例索引](10_rust_193_counterexamples_index.md)
+- [Rust 1.94/1.95 特性矩阵](../../../archive/research_notes_2026_06_25/10_rust_194_195_feature_matrix.md)
+- [Rust 1.93 反例索引](../../../archive/research_notes/10_rust_193_counterexamples_index.md)
 - [知识图谱索引](../06_concept_models/13_knowledge_graph_index.md)
 
 ---

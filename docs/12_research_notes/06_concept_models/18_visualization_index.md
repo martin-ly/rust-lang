@@ -261,8 +261,8 @@
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - 任务编排与执行计划 - 包含所有可视化内容
-- [任务清单](10_task_checklist.md) - 详细任务列表
-- [进度跟踪](10_progress_tracking.md) - 详细进度跟踪
+- [任务清单](../../../archive/research_notes_2026_06_25/10_task_checklist.md) - 详细任务列表
+- [进度跟踪](../../../archive/research_notes_2026_06_25/10_progress_tracking.md) - 详细进度跟踪
 
 ### 工具资源 {#工具资源}
 
@@ -471,9 +471,9 @@ fn main() {
 
 | 定理 | 可视化表示 | 代码示例位置 |
 | :--- | :--- | :--- |
-| T-OW2 | 所有权状态转换图 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
-| T-BR1 | 借用（Borrowing）生命周期（Lifetimes）图 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
-| T-TY3 | 类型推导树 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
+| T-OW2 | 所有权状态转换图 | [10_coq_isabelle_proof_scaffolding.md](../../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
+| T-BR1 | 借用（Borrowing）生命周期（Lifetimes）图 | [10_coq_isabelle_proof_scaffolding.md](../../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
+| T-TY3 | 类型推导树 | [10_coq_isabelle_proof_scaffolding.md](../../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
 
 ---
 
@@ -532,7 +532,7 @@ fn main() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

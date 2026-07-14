@@ -42,11 +42,11 @@
 
 | Rust By Example 章节 | 项目文档/示例 | 状态 | 备注 |
 |----------------------|---------------|------|------|
-| [Hello World](https://doc.rust-lang.org/rust-by-example/hello.html) | [examples/cargo_script_demo.rs](../../examples/cargo_script_demo.rs) | ✅ | 单文件可运行示例 |
+| [Hello World](https://doc.rust-lang.org/rust-by-example/hello.html) | [examples/cargo_script_demo.rs](../../../examples/cargo_script_demo.rs) | ✅ | 单文件可运行示例 |
 | [Primitives](https://doc.rust-lang.org/rust-by-example/primitives.html) | [../05_type_theory/05_type_system_foundations.md](../05_type_theory/05_type_system_foundations.md) | ✅ | 标量与复合类型 |
 | [Custom Types](https://doc.rust-lang.org/rust-by-example/custom_types.html) | [../05_type_theory/05_type_system_foundations.md](../05_type_theory/05_type_system_foundations.md) | ✅ | struct/enum |
 | [Variable Bindings](https://doc.rust-lang.org/rust-by-example/variable_bindings.html) | [../02_formal_methods/09_ownership_model.md](../02_formal_methods/09_ownership_model.md) | ✅ | 绑定与可变性 |
-| [Expressions](https://doc.rust-lang.org/rust-by-example/expression.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | ✅ | 表达式与语句 |
+| [Expressions](https://doc.rust-lang.org/rust-by-example/expression.html) | [crates/c03_control_fn/](../../../crates/c03_control_fn/README.md) | ✅ | 表达式与语句 |
 
 ---
 
@@ -75,10 +75,10 @@
 
 | Rust By Example 章节 | 项目文档/示例 | 状态 | 备注 |
 |----------------------|---------------|------|------|
-| [Threads](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | [crates/c05_threads/](../../crates/c05_threads/README.md) | ✅ | 线程 |
-| [Channels](https://doc.rust-lang.org/rust-by-example/std_misc/channels.html) | [crates/c05_threads/](../../crates/c05_threads/README.md) | ✅ | mpsc |
+| [Threads](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | [crates/c05_threads/](../../../crates/c05_threads/README.md) | ✅ | 线程 |
+| [Channels](https://doc.rust-lang.org/rust-by-example/std_misc/channels.html) | [crates/c05_threads/](../../../crates/c05_threads/README.md) | ✅ | mpsc |
 | [Arc](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | [../02_formal_methods/16_concurrency_async_counterexamples.md](../02_formal_methods/16_concurrency_async_counterexamples.md) §1 | ✅ | Arc<T> |
-| [Async](https://doc.rust-lang.org/book/ch17-00-async-await.html) | [crates/c06_async/](../../crates/c06_async/README.md) | ✅ | async/await |
+| [Async](https://doc.rust-lang.org/book/ch17-00-async-await.html) | [crates/c06_async/](../../../crates/c06_async/README.md) | ✅ | async/await |
 
 ---
 
@@ -95,8 +95,8 @@
 
 | Rust By Example 章节 | 项目文档/示例 | 状态 | 备注 |
 |----------------------|---------------|------|------|
-| [Macros](https://doc.rust-lang.org/rust-by-example/macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | ✅ | 声明宏（Declarative Macro） |
-| [Procedural Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) | [crates/c11_macro_system_proc/](../../crates/c11_macro_system_proc/README.md) | ✅ | 过程宏（Procedural Macro） |
+| [Macros](https://doc.rust-lang.org/rust-by-example/macros.html) | [crates/c11_macro_system_proc/](../../../crates/c11_macro_system_proc/README.md) | ✅ | 声明宏（Declarative Macro） |
+| [Procedural Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) | [crates/c11_macro_system_proc/](../../../crates/c11_macro_system_proc/README.md) | ✅ | 过程宏（Procedural Macro） |
 
 ---
 

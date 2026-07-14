@@ -1,5 +1,8 @@
 # 官方资源映射 {#官方资源映射}
 
+> **权威来源**: 本文件为 `docs/` 目录索引/指南，通用 Rust 概念解释请见 [`concept/`](../../concept/)。根据 AGENTS.md §3.4，`docs/` 不重复 `concept/` 中的通用概念解释。
+
+
 > **EN**: Official Resources Mapping
 > **Summary**: 官方资源映射 Official Resources Mapping.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
@@ -14,7 +17,7 @@
 
 | 官方资源 | 链接 | 本项目对应 |
 | :--- | :--- | :--- |
-| The Rust Programming Language (TRPL) | [doc.rust-lang.org/book](https://doc.rust-lang.org/book/) | [concept/01_foundation/](../../01_foundation) |
+| The Rust Programming Language (TRPL) | [doc.rust-lang.org/book](https://doc.rust-lang.org/book/) | [concept/01_foundation/](../../concept/01_foundation) |
 | Rust Reference | [doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/) | [concept/](../..) |
 | Rust by Example | [doc.rust-lang.org/rust-by-example](https://doc.rust-lang.org/rust-by-example/) | [examples/](../../examples) |
 | The Cargo Book | [doc.rust-lang.org/cargo](https://doc.rust-lang.org/cargo/) | [docs/09_toolchain/](../09_toolchain) |

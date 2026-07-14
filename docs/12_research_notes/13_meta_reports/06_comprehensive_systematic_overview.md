@@ -638,7 +638,7 @@ Axiom/规则层
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../03_formal_proofs/20_language_semantics_expressiveness.md) | **构造性语义与表达能力边界**：操作/指称/公理语义、表达能力边界论证 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](../03_formal_proofs/16_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
 | [PROOF_INDEX](../03_formal_proofs/21_proof_index.md) | 形式化证明索引、公理编号规范 |
-| [INDEX](../../concept/sources/INDEX.md) | 研究笔记完整索引 |
+| [INDEX](../../../concept/sources/INDEX.md) | 研究笔记完整索引 |
 | [README](../README.md) | 研究笔记主入口 |
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../../11_project/05_knowledge_structure_framework.md) | 知识结构、概念定义、思维表征 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../../07_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念矩阵、形式化理论对比 |
@@ -725,7 +725,7 @@ Axiom/规则层
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

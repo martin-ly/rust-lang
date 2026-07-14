@@ -472,7 +472,7 @@
 
 - [VERIFICATION_TOOLS_MATRIX](32_verification_tools_matrix.md) — 工具详细对比
 - [AENEAS_INTEGRATION_PLAN](01_aeneas_integration_plan.md) — Aeneas集成指南
-- [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md) — 证明脚手架
+- [COQ_ISABELLE_PROOF_SCAFFOLDING](../../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) — 证明脚手架
 
 ### 6.2 快速参考卡 {#62-快速参考卡}
 
@@ -571,7 +571,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

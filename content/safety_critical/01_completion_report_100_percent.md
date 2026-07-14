@@ -3,7 +3,7 @@
 **EN**: Completion Report 100 Percent
 **Summary**: Rust安全关键生态系统文档集 - 完成报告 ✅ Completion Report 100 Percent.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/09_testing_and_quality/02_documentation.md](../../concept/06_ecosystem/09_testing_and_quality/02_documentation.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/06_ecosystem/09_testing_and_quality/02_documentation.md`](../../concept/06_ecosystem/09_testing_and_quality/02_documentation.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
 
 > **Bloom 层级**: L4-L6
 >
@@ -109,7 +109,7 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/ (56文件, 691KB)
 │   └── 10_regulatory_landscape_and_approvals.md
 │
 ├── 00_RUST_SAFETY_CRITICAL_ECOSYSTEM_MASTER_INDEX.md
-├── 10_00_completion_report_100_percent.md
+├── 01_completion_report_100_percent.md
 ├── README.md
 └── 10_readme_rust_safety_critical_ecosystem.md
 ```

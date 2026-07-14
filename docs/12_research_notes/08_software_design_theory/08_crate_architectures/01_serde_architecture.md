@@ -3,7 +3,7 @@
 > 若只需要使用指南与生态定位，请优先参考：
 >
 > - [Serde 使用模式](../../../../concept/02_intermediate/00_traits/03_serde_patterns.md)
-> - [Serde 最佳实践](../../../../content/ecosystem/serialization/serde_best_practices.md)
+> - [Serde 最佳实践](../../../../archive/content/ecosystem/serialization/serde_best_practices.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 

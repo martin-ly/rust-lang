@@ -67,7 +67,7 @@
 | [../09_experiments/06_experiments_counterexamples.md](../09_experiments/06_experiments_counterexamples.md) | L6 | 实验与性能研究反例边界 |
 | [../03_formal_proofs/33_version_evolution_counterexamples.md](../03_formal_proofs/33_version_evolution_counterexamples.md) | L6-L7 | 版本演进边界与迁移反例 |
 | [../06_concept_models/13_knowledge_graph_index.md](../06_concept_models/13_knowledge_graph_index.md) | L0-L7 | 统一知识图谱索引 |
-| [examples/module_system_patterns.rs](../../examples/module_system_patterns.rs) | L5 | 模块系统代码实践可运行示例 |
+| [examples/module_system_patterns.rs](../../../examples/module_system_patterns.rs) | L5 | 模块系统代码实践可运行示例 |
 | [../01_alignment_matrices/10_authoritative_source_alignment_network.md](../01_alignment_matrices/10_authoritative_source_alignment_network.md) | L0-L1 | 权威来源对齐网络总索引 |
 | [../01_alignment_matrices/34_rust_reference_alignment.md](../01_alignment_matrices/34_rust_reference_alignment.md) | L0-L4 | Rust Reference 对齐矩阵 |
 | [../01_alignment_matrices/35_rust_reference_chapters_alignment.md](../01_alignment_matrices/35_rust_reference_chapters_alignment.md) | L0-L4 | Rust Reference 分章节深度对齐 |
@@ -156,7 +156,7 @@
 - [知识图谱索引](../06_concept_models/13_knowledge_graph_index.md)
 - [跨文档映射网络](../06_concept_models/09_cross_reference_index.md)
 - [层次化梳理与映射总结](../06_concept_models/12_hierarchical_mapping_and_summary.md)
-- [研究笔记主索引](../../concept/sources/INDEX.md)
+- [研究笔记主索引](../../../concept/sources/INDEX.md)
 
 ## 社区权威参考 {#社区权威参考}
 

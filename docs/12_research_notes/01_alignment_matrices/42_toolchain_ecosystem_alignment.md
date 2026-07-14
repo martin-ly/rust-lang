@@ -53,10 +53,10 @@
 | 主题 | 官方来源 | 项目文档 | 备注 |
 |------|----------|----------|------|
 | Cargo.toml 配置 | [Cargo Book](https://doc.rust-lang.org/cargo/reference/manifest.html) | [15_cargo_book_alignment.md](15_cargo_book_alignment.md) | package、dependencies、profile |
-| Workspace | [Cargo Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) | [crates/common/README.md](../../crates/common/README.md) | 多 crate 管理 |
-| Features | [Cargo Features](https://doc.rust-lang.org/cargo/reference/features.html) | [10_cargo_194_features.md](10_cargo_194_features.md) | 条件编译、依赖组合 |
-| Resolver v3 | [Resolver](https://doc.rust-lang.org/cargo/reference/resolver.html) | [examples/resolver_v3_practice/](../../examples/resolver_v3_practice/README.md) | 依赖解析 |
-| Cargo script | [Cargo Scripts](https://doc.rust-lang.org/cargo/reference/unstable.html#script) | [examples/cargo_script_demo.rs](../../examples/cargo_script_demo.rs) | 单文件脚本 |
+| Workspace | [Cargo Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) | [crates/common/README.md](../../../crates/common/README.md) | 多 crate 管理 |
+| Features | [Cargo Features](https://doc.rust-lang.org/cargo/reference/features.html) | [10_cargo_194_features.md](../../../archive/research_notes/10_cargo_194_features.md) | 条件编译、依赖组合 |
+| Resolver v3 | [Resolver](https://doc.rust-lang.org/cargo/reference/resolver.html) | [examples/resolver_v3_practice/](../../../examples/resolver_v3_practice/README.md) | 依赖解析 |
+| Cargo script | [Cargo Scripts](https://doc.rust-lang.org/cargo/reference/unstable.html#script) | [examples/cargo_script_demo.rs](../../../examples/cargo_script_demo.rs) | 单文件脚本 |
 
 ---
 
@@ -64,10 +64,10 @@
 
 | 工具 | 官方/社区来源 | 项目文档 | 覆盖主题 |
 |------|---------------|----------|----------|
-| clippy | [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html) | [.clippy.toml](../../.clippy.toml) | lint、性能、风格 |
-| rustfmt | [rustfmt](https://github.com/rust-lang/rustfmt) | [Cargo.toml](../../Cargo.toml) | 代码格式化 |
+| clippy | [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html) | [.clippy.toml](../../../.clippy.toml) | lint、性能、风格 |
+| rustfmt | [rustfmt](https://github.com/rust-lang/rustfmt) | [Cargo.toml](../../../Cargo.toml) | 代码格式化 |
 | rustdoc | [rustdoc book](https://doc.rust-lang.org/rustdoc/) | [docs/09_toolchain/02_rustdoc_advanced.md](../../09_toolchain/02_rustdoc_advanced.md) | 文档、doctests |
-| cargo test | [Cargo Tests](https://doc.rust-lang.org/cargo/commands/cargo-test.html) | [exercises/tests/](../../exercises/tests) | 单元/集成测试 |
+| cargo test | [Cargo Tests](https://doc.rust-lang.org/cargo/commands/cargo-test.html) | [exercises/tests/](../../../exercises/tests) | 单元/集成测试 |
 | cargo bench | [Cargo Benchmarks](https://doc.rust-lang.org/cargo/commands/cargo-bench.html) | [../09_experiments/02_concurrency_performance.md](../09_experiments/02_concurrency_performance.md) | 基准测试 |
 
 ---
@@ -76,8 +76,8 @@
 
 | 工具 | 官方来源 | 项目文档 | 覆盖主题 |
 |------|----------|----------|----------|
-| rust-analyzer | [Manual](https://rust-analyzer.github.io/manual.html) | [.vscode/settings.json](../../.vscode/settings.json) | LSP、跳转、重构 |
-| VS Code Rust 扩展 | [Marketplace](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) | [.vscode/README.md](../../.vscode/README.md) | 编辑器配置 |
+| rust-analyzer | [Manual](https://rust-analyzer.github.io/manual.html) | [.vscode/settings.json](../../../.vscode/settings.json) | LSP、跳转、重构 |
+| VS Code Rust 扩展 | [Marketplace](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) | [.vscode/README.md](../../../.vscode/README.md) | 编辑器配置 |
 
 ---
 
@@ -97,8 +97,8 @@
 | 主题 | 官方来源 | 项目文档 | 备注 |
 |------|----------|----------|------|
 | target triple | [Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) | [docs/09_toolchain/README.md](../../09_toolchain/README.md) | 目标平台 |
-| cross | [cross-rs](https://github.com/cross-rs/cross) | [crates/c13_embedded/README.md](../../crates/c13_embedded/README.md) | 交叉编译 |
-| wasm32 | [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) | [crates/c12_wasm/README.md](../../crates/c12_wasm/README.md) | WebAssembly |
+| cross | [cross-rs](https://github.com/cross-rs/cross) | [crates/c13_embedded/README.md](../../../crates/c13_embedded/README.md) | 交叉编译 |
+| wasm32 | [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) | [crates/c12_wasm/README.md](../../../crates/c12_wasm/README.md) | WebAssembly |
 
 ---
 
@@ -110,7 +110,7 @@
 | [37_rustc_dev_guide_alignment.md](37_rustc_dev_guide_alignment.md) | rustc 内部 | rustc-dev-guide |
 | [docs/09_toolchain/README.md](../../09_toolchain/README.md) | 工具链综合 | rustup、rustc、rustdoc |
 | [../10_tutorials_and_guides/16_tools_guide.md](../10_tutorials_and_guides/16_tools_guide.md) | 常用工具速查 | 官方文档 |
-| [.clippy.toml](../../.clippy.toml) | Clippy 配置 | Clippy Lints |
+| [.clippy.toml](../../../.clippy.toml) | Clippy 配置 | Clippy Lints |
 
 ---
 

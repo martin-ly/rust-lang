@@ -51,7 +51,7 @@
 | [unsafe/unsafe_rust.md](unsafe/03_unsafe_rust.md) | Unsafe 基础 | ⭐⭐⭐⭐ |
 | [unsafe/ffi.md](unsafe/01_ffi.md) | FFI | ⭐⭐⭐⭐ |
 | [unsafe/maybe_uninit.md](unsafe/02_maybe_uninit.md) | MaybeUninit | ⭐⭐⭐⭐ |
-| [unsafe/inline_asm.md](unsafe/02_inline_asm.md) | 内联汇编 | ⭐⭐⭐⭐⭐ |
+| [inline_asm.md](./03_inline_asm.md) | 内联汇编 | ⭐⭐⭐⭐⭐ |
 
 ### 类型与元编程
 

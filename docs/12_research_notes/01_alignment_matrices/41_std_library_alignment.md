@@ -41,7 +41,7 @@
 
 | std 模块（Module）/类型 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
-| [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | ✅ | Option/Result 处理 |
+| [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html) | [crates/c03_control_fn/](../../../crates/c03_control_fn/README.md) | ✅ | Option/Result 处理 |
 | [std::result::Result](https://doc.rust-lang.org/std/result/enum.Result.html) | [../11_cheatsheets/02_error_handling_cheatsheet.md](../11_cheatsheets/02_error_handling_cheatsheet.md) | ✅ | 错误处理（Error Handling） |
 | [std::string::String](https://doc.rust-lang.org/std/string/struct.String.html) | [../02_formal_methods/17_ownership_counterexamples.md](../02_formal_methods/17_ownership_counterexamples.md) §1 | ✅ | 所有权转移示例 |
 | [std::vec::Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html) | [../02_formal_methods/17_ownership_counterexamples.md](../02_formal_methods/17_ownership_counterexamples.md) §2-§3 | ✅ | 借用示例 |
@@ -67,7 +67,7 @@
 |---------------|----------|------|------|
 | [std::sync::Mutex](https://doc.rust-lang.org/std/sync/struct.Mutex.html) | [../02_formal_methods/16_concurrency_async_counterexamples.md](../02_formal_methods/16_concurrency_async_counterexamples.md) §3-§4 | ✅ | 互斥锁 |
 | [std::sync::RwLock](https://doc.rust-lang.org/std/sync/struct.RwLock.html) | [../02_formal_methods/16_concurrency_async_counterexamples.md](../02_formal_methods/16_concurrency_async_counterexamples.md) §7 | ✅ | 读写锁 |
-| [std::thread](https://doc.rust-lang.org/std/thread/index.html) | [crates/c05_threads/](../../crates/c05_threads/README.md) | ✅ | 线程 API |
+| [std::thread](https://doc.rust-lang.org/std/thread/index.html) | [crates/c05_threads/](../../../crates/c05_threads/README.md) | ✅ | 线程 API |
 | [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) | [../02_formal_methods/18_unsafe_counterexamples.md](../02_formal_methods/18_unsafe_counterexamples.md) §3 | ✅ | 原子操作（Atomic Operations） |
 
 ---
@@ -77,7 +77,7 @@
 | std 模块/类型 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html) | [../05_type_theory/04_trait_system_formalization.md](../05_type_theory/04_trait_system_formalization.md) | ✅ | trait 系统 |
-| [std::collections](https://doc.rust-lang.org/std/collections/index.html) | [crates/c08_algorithms/](../../crates/c08_algorithms/README.md) | 🔄 | 数据结构示例 |
+| [std::collections](https://doc.rust-lang.org/std/collections/index.html) | [crates/c08_algorithms/](../../../crates/c08_algorithms/README.md) | 🔄 | 数据结构示例 |
 
 ---
 
@@ -85,7 +85,7 @@
 
 | std 模块/类型 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
-| [std::io](https://doc.rust-lang.org/std/io/index.html) | [crates/c10_networks/](../../crates/c10_networks/README.md) | 🔄 | IO 与网络 |
+| [std::io](https://doc.rust-lang.org/std/io/index.html) | [crates/c10_networks/](../../../crates/c10_networks/README.md) | 🔄 | IO 与网络 |
 | [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html) | [../02_formal_methods/02_async_state_machine.md](../02_formal_methods/02_async_state_machine.md) | ✅ | Future trait |
 | [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) | [../02_formal_methods/10_pin_self_referential.md](../02_formal_methods/10_pin_self_referential.md) | ✅ | Pin 保证 |
 

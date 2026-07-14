@@ -3,7 +3,7 @@
 **EN**: Rust Safety Critical Coding Guidelines
 **Summary**: Rust安全关键编码规范 Rust Safety Critical Coding Guidelines.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/07_future/03_preview_features/12_ferrocene_preview.md](../../../concept/07_future/03_preview_features/12_ferrocene_preview.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/03_advanced/02_unsafe/01_unsafe.md`](../../../concept/03_advanced/02_unsafe/01_unsafe.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
 
 > **Bloom 层级**: L4-L6
 >

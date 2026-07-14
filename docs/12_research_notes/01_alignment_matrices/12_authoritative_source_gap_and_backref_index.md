@@ -121,7 +121,7 @@
 | Reference 章节 | 当前覆盖 | 缺口说明 | 建议项目文档 |
 |----------------|----------|----------|--------------|
 | [const 求值](https://doc.rust-lang.org/reference/const_eval.html) | 少量提及 | 缺少 const 求值规则、 promotability、`const fn` 边界到项目反例的反向索引 | [../03_formal_proofs/03_const_eval_formalization.md](../03_formal_proofs/03_const_eval_formalization.md) |
-| [宏（Macro） hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene) | `10_macro_system.md` | 缺少 hygiene 示例与 `$crate` 到项目宏示例的反向索引 | [crates/c11_macro_system_proc/README.md](../../crates/c11_macro_system_proc/README.md) |
+| [宏（Macro） hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene) | `10_macro_system.md` | 缺少 hygiene 示例与 `$crate` 到项目宏示例的反向索引 | [crates/c11_macro_system_proc/README.md](../../../crates/c11_macro_system_proc/README.md) |
 | [模式匹配（Pattern Matching）细节](https://doc.rust-lang.org/reference/patterns.html) | 分散 | 缺少 refutability、match ergonomics、bindings 到项目文档的反向索引 | [../03_formal_proofs/05_core_features_full_chain.md](../03_formal_proofs/05_core_features_full_chain.md) |
 | [链接与 crate-type](https://doc.rust-lang.org/reference/linkage.html) | [../04_formal_module_system/03_linkage_and_symbols.md](../04_formal_module_system/03_linkage_and_symbols.md) | 缺少 `dylib`/`staticlib`/`cdylib` 安全契约的精确反向索引 | [../04_formal_module_system/03_linkage_and_symbols.md](../04_formal_module_system/03_linkage_and_symbols.md) |
 

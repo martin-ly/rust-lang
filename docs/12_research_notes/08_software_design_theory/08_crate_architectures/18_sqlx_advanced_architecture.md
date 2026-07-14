@@ -1,6 +1,6 @@
 > **Canonical 说明**: 本文档已整合为重定向 stub。
 >
-> SQLx 进阶架构解构 的权威深度文位于 [SQLx 深度解析](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md)；若只需使用指南，亦可参考 [SQLx 数据库指南](../../../../content/ecosystem/database/sqlx_deep_dive.md)。
+> SQLx 进阶架构解构 的权威深度文位于 [SQLx 深度解析](../../../../knowledge/06_ecosystem/databases/02_sqlx_deep_dive.md)；若只需使用指南，亦可参考 [SQLx 数据库指南](../../../../archive/content/ecosystem/database/sqlx_deep_dive.md)。
 > 本文件不再保留重复内容。
 
 # SQLx 进阶架构解构 {#sqlx-进阶架构解构}

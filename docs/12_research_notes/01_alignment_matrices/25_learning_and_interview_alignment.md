@@ -76,18 +76,18 @@
 | Hello / Primitives / Custom Types | 基础语法、类型 | L1-L2 | [33_rust_by_example_alignment.md](33_rust_by_example_alignment.md) §二 | [RBE 基础](https://doc.rust-lang.org/rust-by-example/hello.html) |
 | Scope / Borrowing / Lifetimes | 作用域、借用、生命周期 | L2-L4 | [../02_formal_methods/17_ownership_counterexamples.md](../02_formal_methods/17_ownership_counterexamples.md) §2-§3 | [RBE Scope](https://doc.rust-lang.org/rust-by-example/scope.html) |
 | Generics / Traits | 泛型与 Trait | L3-L4 | [../05_type_theory/04_trait_system_formalization.md](../05_type_theory/04_trait_system_formalization.md) | [RBE Generics](https://doc.rust-lang.org/rust-by-example/generics.html) |
-| Threads / Channels / Async | 并发与异步示例 | L3-L5 | [crates/c05_threads/README.md](../../crates/c05_threads/README.md)、[crates/c06_async/README.md](../../crates/c06_async/README.md) | [RBE Std misc](https://doc.rust-lang.org/rust-by-example/std_misc.html) |
-| Unsafe / FFI / Macros | unsafe、FFI、宏 | L4-L6 | [../02_formal_methods/18_unsafe_counterexamples.md](../02_formal_methods/18_unsafe_counterexamples.md)、[crates/c11_macro_system_proc/README.md](../../crates/c11_macro_system_proc/README.md) | [RBE Unsafe](https://doc.rust-lang.org/rust-by-example/unsafe.html) |
+| Threads / Channels / Async | 并发与异步示例 | L3-L5 | [crates/c05_threads/README.md](../../../crates/c05_threads/README.md)、[crates/c06_async/README.md](../../../crates/c06_async/README.md) | [RBE Std misc](https://doc.rust-lang.org/rust-by-example/std_misc.html) |
+| Unsafe / FFI / Macros | unsafe、FFI、宏 | L4-L6 | [../02_formal_methods/18_unsafe_counterexamples.md](../02_formal_methods/18_unsafe_counterexamples.md)、[crates/c11_macro_system_proc/README.md](../../../crates/c11_macro_system_proc/README.md) | [RBE Unsafe](https://doc.rust-lang.org/rust-by-example/unsafe.html) |
 
 ### Rustlings {#rustlings}
 
 | Rustlings 模块（Module） | 学习主题 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |----------------|----------|-----------------|----------|--------------|
-| intro / variables / functions | 基础语法 | L1-L2 | [exercises/README.md](../../exercises/README.md) | [rustlings](https://github.com/rust-lang/rustlings) |
-| ownership / borrow / lifetimes | 所有权与借用 | L2-L4 | [crates/c01_ownership_borrow_scope/README.md](../../crates/c01_ownership_borrow_scope/README.md) | [rustlings exercises](https://github.com/rust-lang/rustlings) |
-| structs / enums / modules | 类型与模块（Module） | L2-L3 | [crates/c02_type_system/README.md](../../crates/c02_type_system/README.md)、[../04_formal_module_system/02_module_system_specification.md](../04_formal_module_system/02_module_system_specification.md) | [rustlings exercises](https://github.com/rust-lang/rustlings) |
+| intro / variables / functions | 基础语法 | L1-L2 | [exercises/README.md](../../../exercises/README.md) | [rustlings](https://github.com/rust-lang/rustlings) |
+| ownership / borrow / lifetimes | 所有权与借用 | L2-L4 | [crates/c01_ownership_borrow_scope/README.md](../../../crates/c01_ownership_borrow_scope/README.md) | [rustlings exercises](https://github.com/rust-lang/rustlings) |
+| structs / enums / modules | 类型与模块（Module） | L2-L3 | [crates/c02_type_system/README.md](../../../crates/c02_type_system/README.md)、[../04_formal_module_system/02_module_system_specification.md](../04_formal_module_system/02_module_system_specification.md) | [rustlings exercises](https://github.com/rust-lang/rustlings) |
 | errors / generics / traits | 错误处理（Error Handling）、泛型、Trait | L3-L4 | [../11_cheatsheets/02_error_handling_cheatsheet.md](../11_cheatsheets/02_error_handling_cheatsheet.md)、[../05_type_theory/04_trait_system_formalization.md](../05_type_theory/04_trait_system_formalization.md) | [rustlings exercises](https://github.com/rust-lang/rustlings) |
-| tests / iterators / threads | 测试、迭代器（Iterator）、线程 | L3-L4 | [crates/c05_threads/README.md](../../crates/c05_threads/README.md)、[crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | [rustlings exercises](https://github.com/rust-lang/rustlings) |
+| tests / iterators / threads | 测试、迭代器（Iterator）、线程 | L3-L4 | [crates/c05_threads/README.md](../../../crates/c05_threads/README.md)、[crates/c08_algorithms/README.md](../../../crates/c08_algorithms/README.md) | [rustlings exercises](https://github.com/rust-lang/rustlings) |
 | smart_pointers / conversions / clippy | 智能指针（Smart Pointer）、类型转换、Clippy | L3-L5 | [../02_formal_methods/09_ownership_model.md](../02_formal_methods/09_ownership_model.md) §Def 4.1-4.5 | [rustlings exercises](https://github.com/rust-lang/rustlings) |
 
 ### Standard Library 文档 {#standard-library-文档}
@@ -133,9 +133,9 @@
 
 | Exercism 主题 | 学习主题 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |---------------|----------|-----------------|----------|--------------|
-| 基础练习 (Hello World, Reverse String) | 字符串、基础语法 | L1-L2 | [exercises/rustlings_style](../../exercises/rustlings_style) | [Exercism Rust](https://exercism.org/tracks/rust) |
-| 中级练习 (Clock, Gigasecond) | 类型设计、时间处理 | L2-L3 | [crates/c02_type_system/README.md](../../crates/c02_type_system/README.md) | [Exercism Rust](https://exercism.org/tracks/rust) |
-| 高级练习 (Parallel Letter Frequency) | 并发、并行 | L3-L5 | [crates/c05_threads/README.md](../../crates/c05_threads/README.md) | [Exercism Rust](https://exercism.org/tracks/rust) |
+| 基础练习 (Hello World, Reverse String) | 字符串、基础语法 | L1-L2 | [exercises/rustlings_style](../../../exercises/rustlings_style) | [Exercism Rust](https://exercism.org/tracks/rust) |
+| 中级练习 (Clock, Gigasecond) | 类型设计、时间处理 | L2-L3 | [crates/c02_type_system/README.md](../../../crates/c02_type_system/README.md) | [Exercism Rust](https://exercism.org/tracks/rust) |
+| 高级练习 (Parallel Letter Frequency) | 并发、并行 | L3-L5 | [crates/c05_threads/README.md](../../../crates/c05_threads/README.md) | [Exercism Rust](https://exercism.org/tracks/rust) |
 | 概念练习 (Arc, Mutex, Lifetimes) | 所有权、并发、生命周期 | L3-L5 | [../02_formal_methods/17_ownership_counterexamples.md](../02_formal_methods/17_ownership_counterexamples.md)、[../02_formal_methods/16_concurrency_async_counterexamples.md](../02_formal_methods/16_concurrency_async_counterexamples.md) | [Exercism Rust Concepts](https://exercism.org/tracks/rust/concepts) |
 
 ---
@@ -242,7 +242,7 @@
 2. **Exercism Rust track 概念练习与项目反例的逐题映射可细化**：特别是高级并发、unsafe、宏相关练习。
 3. **面试题的 Bloom 层级评分尚未完全标准化**：部分题目可能因面试官追问深度而在 L4-L6 之间浮动，建议建立评分 rubric。
 4. **社区视频/课程资源（如 Rustconf、YouTube 教程）未纳入**：当前仅覆盖文本型权威来源。
-5. **多语言面试题表述差异未系统整理**：可结合 [data/i18n_terminology.yaml](../../data/i18n_terminology.yaml) 扩展术语对照。
+5. **多语言面试题表述差异未系统整理**：可结合 data/i18n_terminology.yaml 扩展术语对照。
 
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | [Rustlings](https://github.com/rust-lang/rustlings) | [Rust Standard Library](https://doc.rust-lang.org/std/) | [course.rs](https://course.rs/) | [Rust 中文社区 [已失效]]<!-- 原链接: https://rustcc.cn/ --> | [Rust Japan](https://rust-jp.rs/) | [Exercism Rust](https://exercism.org/tracks/rust)
 

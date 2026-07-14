@@ -15,7 +15,7 @@
 
 请访问 archive/deprecated/10_coq_of_rust_integration_plan.md 查看完整内容。
 
-**入口**: [RESEARCH_NOTES_ORGANIZATION](../13_meta_reports/13_research_notes_organization.md) § 三、归档约定 | [INDEX](../../concept/sources/INDEX.md) 7g
+**入口**: [RESEARCH_NOTES_ORGANIZATION](../13_meta_reports/13_research_notes_organization.md) § 三、归档约定 | [INDEX](../../../concept/sources/INDEX.md) 7g
 
 ---
 

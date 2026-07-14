@@ -203,7 +203,7 @@ let router = Router::new().hoop(logger).get(hello);
 |:--|:--|:--|
 | Salvo 路由与路径参数 | [`crates/c06_async/examples/salvo_web_routing.rs`](../../../../crates/c06_async/examples/salvo_web_routing.rs) | `Router` 注册、`#[handler]`、路径参数提取 |
 
-> [来源: [c06_async Crate](../../../../../crates/c06_async)]
+> [来源: [c06_async Crate](../../../../crates/c06_async)]
 
 ---
 
@@ -215,7 +215,7 @@ let router = Router::new().hoop(logger).get(hello);
 - [42_askama_architecture.md](42_askama_architecture.md) — Askama 模板引擎架构
 - [43_maud_architecture.md](43_maud_architecture.md) — Maud 模板宏架构
 - [concept L3: 异步编程](../../../../concept/03_advanced/01_async/01_async.md)
-- [concept L6: Web 框架与中间件](../../../../06_ecosystem)
+- [concept L6: Web 框架与中间件](../../../../concept/06_ecosystem)
 
 ---
 

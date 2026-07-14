@@ -299,14 +299,14 @@ A: 建议路径：
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-A: 是的，项目维护团队会跟踪Rust版本更新，确保内容时效性。详见 [10_project_maintenance_guide.md](10_project_maintenance_guide.md)。
+A: 是的，项目维护团队会跟踪Rust版本更新，确保内容时效性。详见 [10_project_maintenance_guide.md](../../../archive/research_notes_2026_06_25/10_project_maintenance_guide.md)。
 
 ### Q: 如何贡献内容？ {#q-如何贡献内容}
 
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-A: 请参考 [10_project_maintenance_guide.md](10_project_maintenance_guide.md) 中的贡献流程。
+A: 请参考 [10_project_maintenance_guide.md](../../../archive/research_notes_2026_06_25/10_project_maintenance_guide.md) 中的贡献流程。
 
 ---
 
@@ -382,7 +382,7 @@ A: 请参考 [10_project_maintenance_guide.md](10_project_maintenance_guide.md) 
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

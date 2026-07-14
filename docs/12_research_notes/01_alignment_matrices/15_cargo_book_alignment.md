@@ -81,7 +81,7 @@
 
 | Cargo Book 章节 | 项目文档 | 状态 | 备注 |
 |-----------------|----------|------|------|
-| [Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html) | [examples/build_script_practice/](../../examples/build_script_practice/README.md) | ✅ | build.rs 示例 |
+| [Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html) | [examples/build_script_practice/](../../../examples/build_script_practice/README.md) | ✅ | build.rs 示例 |
 | [Config](https://doc.rust-lang.org/cargo/reference/config.html) | [06_authoritative_alignment_guide.md](06_authoritative_alignment_guide.md) | 🔄 | .cargo/config.toml |
 
 ---
@@ -99,7 +99,7 @@
 
 | Cargo Book 章节 | 项目文档 | 状态 | 备注 |
 |-----------------|----------|------|------|
-| [Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) | [Cargo.toml](../../Cargo.toml) | ✅ | dev/release 配置示例 |
+| [Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) | [Cargo.toml](../../../Cargo.toml) | ✅ | dev/release 配置示例 |
 | [Lints](https://doc.rust-lang.org/cargo/reference/lints.html) | [../03_formal_proofs/33_version_evolution_counterexamples.md](../03_formal_proofs/33_version_evolution_counterexamples.md) §2 | 🔄 | lint 配置随版本变化 |
 
 ---

@@ -1,3 +1,9 @@
+> **权威来源**: 本文件为 `crates/c16_gui/` 的 crate 入口页。
+> 通用 Rust 概念解释统一维护在 `concept/` 中；详见 [../../concept/06_ecosystem/11_domain_applications/](../../concept/06_ecosystem/11_domain_applications/)。
+>
+> 根据 AGENTS.md §2 Canonical 规则，`crates/` 不重复通用 Rust 概念解释；
+> 如需深入学习，请前往 `concept/` 权威页。
+>
 # c16_gui
 
 GUI / 跨平台 UI 生态实战示例 crate。

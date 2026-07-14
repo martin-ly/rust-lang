@@ -3,7 +3,7 @@
 **EN**: Do 178c Rust Compliance Pathway
 **Summary**: DO-178C Rust合规路径 Do 178c Rust Compliance Pathway.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/06_ecosystem/11_domain_applications/04_licensing_and_compliance.md](../../../concept/06_ecosystem/11_domain_applications/04_licensing_and_compliance.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md`](../../../concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
 
 > **Bloom 层级**: L4-L6
 >

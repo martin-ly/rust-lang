@@ -64,11 +64,11 @@
 
 | 权威来源/主题 | 项目工作流 | 状态 | 备注 |
 |---------------|------------|------|------|
-| [GitHub Actions 官方文档](https://docs.github.com/en/actions) | [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) | ✅ | fmt / clippy / build / test / docs |
-| [Workflow syntax](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions) | [`.github/workflows/ci_optimized.yml`](../../.github/workflows/ci_optimized.yml) | ✅ | 跨平台矩阵、sccache |
-| [Reusable workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows) | [`.github/workflows/pr_checks.yml`](../../.github/workflows/pr_checks.yml) | ✅ | PR 专属检查 |
-| [Scheduled workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) | [`.github/workflows/weekly_dependency_check.yml`](../../.github/workflows/weekly_dependency_check.yml) | ✅ | 依赖更新与安全检查 |
-| [Security hardening](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions) | [`.github/workflows/security_audit.yml`](../../.github/workflows/security_audit.yml) | ✅ | 权限最小化、 artifact 保留策略 |
+| [GitHub Actions 官方文档](https://docs.github.com/en/actions) | [`.github/workflows/ci.yml`](../../../.github/workflows/ci.yml) | ✅ | fmt / clippy / build / test / docs |
+| [Workflow syntax](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions) | [`.github/workflows/ci_optimized.yml`](../../../.github/workflows/ci_optimized.yml) | ✅ | 跨平台矩阵、sccache |
+| [Reusable workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows) | [`.github/workflows/pr_checks.yml`](../../../.github/workflows/pr_checks.yml) | ✅ | PR 专属检查 |
+| [Scheduled workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) | [`.github/workflows/weekly_dependency_check.yml`](../../../.github/workflows/weekly_dependency_check.yml) | ✅ | 依赖更新与安全检查 |
+| [Security hardening](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions) | [`.github/workflows/security_audit.yml`](../../../.github/workflows/security_audit.yml) | ✅ | 权限最小化、 artifact 保留策略 |
 
 ### 2.2 GitLab CI {#22-gitlab-ci}
 
@@ -120,7 +120,7 @@
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
-| [nextest Book](https://nexte.st/) | [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) | 🔄 | 当前使用 `cargo test`；nextest 替换可提升速度与重试能力 |
+| [nextest Book](https://nexte.st/) | [`.github/workflows/ci.yml`](../../../.github/workflows/ci.yml) | 🔄 | 当前使用 `cargo test`；nextest 替换可提升速度与重试能力 |
 | [nextest Book](https://nexte.st/) | — | ⏳ | flakiness 重试与分区运行 |
 
 ### 3.4 cargo-llvm-cov {#34-cargo-llvm-cov}
@@ -138,15 +138,15 @@
 
 | 权威来源/主题 | 项目文档/配置 | 状态 | 备注 |
 |---------------|---------------|------|------|
-| [cargo-audit / RustSec](https://github.com/rustsec/rustsec) | [`.github/workflows/security_audit.yml`](../../.github/workflows/security_audit.yml) | ✅ | rustsec/audit-check + 详细 JSON/Markdown 报告 |
-| [Advisory DB](https://github.com/rustsec/advisory-db) | [`.cargo/audit.toml`](../../.cargo/audit.toml) | ✅ | 忽略项附影响评估与理由 |
-| [cargo audit 配置](https://github.com/rustsec/rustsec/blob/main/cargo-audit/README.md) | [`.cargo/audit.toml`](../../.cargo/audit.toml) | ✅ | `[advisories]` 忽略规则 |
+| [cargo-audit / RustSec](https://github.com/rustsec/rustsec) | [`.github/workflows/security_audit.yml`](../../../.github/workflows/security_audit.yml) | ✅ | rustsec/audit-check + 详细 JSON/Markdown 报告 |
+| [Advisory DB](https://github.com/rustsec/advisory-db) | [`.cargo/audit.toml`](../../../.cargo/audit.toml) | ✅ | 忽略项附影响评估与理由 |
+| [cargo audit 配置](https://github.com/rustsec/rustsec/blob/main/cargo-audit/README.md) | [`.cargo/audit.toml`](../../../.cargo/audit.toml) | ✅ | `[advisories]` 忽略规则 |
 
 ### 4.2 cargo-deny {#42-cargo-deny}
 
 | 权威来源/主题 | 项目文档/配置 | 状态 | 备注 |
 |---------------|---------------|------|------|
-| [cargo-deny Book](https://embarkstudios.github.io/cargo-deny/) | [`.github/workflows/security_audit.yml`](../../.github/workflows/security_audit.yml) | 🔄 | 已运行 advisories/licenses/bans/sources；`deny.toml` 待创建 |
+| [cargo-deny Book](https://embarkstudios.github.io/cargo-deny/) | [`.github/workflows/security_audit.yml`](../../../.github/workflows/security_audit.yml) | 🔄 | 已运行 advisories/licenses/bans/sources；`deny.toml` 待创建 |
 | [Check advisories](https://embarkstudios.github.io/cargo-deny/checks/advisories/index.html) | — | 🔄 | 与 cargo-audit 互补 |
 | [Check licenses](https://embarkstudios.github.io/cargo-deny/checks/licenses/index.html) | — | 🔄 | 许可证合规矩阵待补充 |
 | [Check bans / sources](https://embarkstudios.github.io/cargo-deny/checks/bans/index.html) | — | 🔄 | 禁用 crate / 限制 registry 来源 |
@@ -155,8 +155,8 @@
 
 | 权威来源/主题 | 项目文档/配置 | 状态 | 备注 |
 |---------------|---------------|------|------|
-| [cargo-vet 文档](https://mozilla.github.io/cargo-vet/) | [`supply-chain/config.toml`](../../supply-chain/config.toml) | ✅ | 已初始化并导入 Mozilla audits |
-| [Policy & criteria](https://mozilla.github.io/cargo-vet/config.html) | [`supply-chain/config.toml`](../../supply-chain/config.toml) | ✅ | `safe-to-deploy` / `safe-to-run` / `license` |
+| [cargo-vet 文档](https://mozilla.github.io/cargo-vet/) | [`supply-chain/config.toml`](../../../supply-chain/config.toml) | ✅ | 已初始化并导入 Mozilla audits |
+| [Policy & criteria](https://mozilla.github.io/cargo-vet/config.html) | [`supply-chain/config.toml`](../../../supply-chain/config.toml) | ✅ | `safe-to-deploy` / `safe-to-run` / `license` |
 | [Imports & audits](https://mozilla.github.io/cargo-vet/performing-audits.html) | `supply-chain/audits.toml` / `imports.lock` | ✅ | 本地 crate 免检策略 |
 
 ### 4.4 Sigstore {#44-sigstore}
@@ -222,9 +222,9 @@
 | 性能与测试 | [27_performance_and_testing_alignment.md](27_performance_and_testing_alignment.md) | Criterion、Miri、Sanitizer、测试策略 |
 | 安全/unsafe 权威来源 | [40_safety_and_unsafe_authoritative_alignment.md](40_safety_and_unsafe_authoritative_alignment.md) | unsafe 边界与安全论证 |
 | 版本演进 | [45_version_evolution_alignment.md](45_version_evolution_alignment.md) | rust-version、MSRV、Edition |
-| CI 工作流目录 | [`.github/workflows/`](../../.github/workflows) | 全部工作流 YAML 文件 |
-| cargo-audit 配置 | [`.cargo/audit.toml`](../../.cargo/audit.toml) | 忽略规则与影响评估 |
-| cargo-vet 配置 | [`supply-chain/config.toml`](../../supply-chain/config.toml) | 审计标准与策略 |
+| CI 工作流目录 | [`.github/workflows/`](../../../.github/workflows) | 全部工作流 YAML 文件 |
+| cargo-audit 配置 | [`.cargo/audit.toml`](../../../.cargo/audit.toml) | 忽略规则与影响评估 |
+| cargo-vet 配置 | [`supply-chain/config.toml`](../../../supply-chain/config.toml) | 审计标准与策略 |
 
 ---
 

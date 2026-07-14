@@ -1,5 +1,8 @@
 # 项目总索引 {#项目总索引}
 
+> **权威来源**: 本文件为 `docs/` 目录索引/指南，通用 Rust 概念解释请见 [`concept/`](../../concept/)。根据 AGENTS.md §3.4，`docs/` 不重复 `concept/` 中的通用概念解释。
+
+
 > **EN**: Master Index
 > **Summary**: 项目总索引 Master Index.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
@@ -11,12 +14,12 @@
 
 | 入口 | 路径 | 说明 |
 |:---|:---|:---|
-| **初学者起步** | [LEARNING_MVP_PATH.md](../concept/00_meta/04_navigation/08_learning_mvp_path.md) | 35-45 小时最小可行学习路径 |
+| **初学者起步** | [LEARNING_MVP_PATH.md](../../concept/00_meta/04_navigation/08_learning_mvp_path.md) | 35-45 小时最小可行学习路径 |
 | **概念文件** | [concept/](..) | L1-L7 分层概念文档 |
-| **知识索引** | [knowledge/](../knowledge) | 系统化知识卡片 |
+| **知识索引** | [knowledge/](../../knowledge) | 系统化知识卡片 |
 | **速查表** | [docs/02_reference/quick_reference/](../03_reference/quick_reference/README.md) | API 速查与参考 |
-| **练习** | [exercises/](../exercises) | 编程练习与测试 |
-| **Crate 示例** | [crates/](../crates) | 可编译代码示例 |
+| **练习** | [exercises/](../../exercises) | 编程练习与测试 |
+| **Crate 示例** | [crates/](../../crates) | 可编译代码示例 |
 
 ## 目录结构 {#目录结构}
 
@@ -39,4 +42,4 @@ rust-lang/
 
 ## 术语表 {#术语表}
 
-完整术语对照表: [concept/00_meta/terminology_glossary.md](../concept/00_meta/01_terminology/01_terminology_glossary.md)
+完整术语对照表: [concept/00_meta/terminology_glossary.md](../../concept/00_meta/01_terminology/01_terminology_glossary.md)

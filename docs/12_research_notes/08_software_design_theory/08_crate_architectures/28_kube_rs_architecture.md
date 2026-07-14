@@ -211,7 +211,7 @@ struct MyAppSpec {
 | 查询 Pod 列表 | [`crates/c10_networks/examples/kube_list_pods.rs`](../../../../crates/c10_networks/examples/kube_list_pods.rs) | 使用 `Client::try_default` 与 `Api::list` 查询命名空间 Pod |
 | 监听 Pod 变更事件 | [`crates/c10_networks/examples/kube_watch_pods.rs`](../../../../crates/c10_networks/examples/kube_watch_pods.rs) | 使用 `watcher` 与 `applied_objects` 监听 Pod 事件 |
 
-> [来源: [c10_networks Crate](../../../../../crates/c10_networks)]
+> [来源: [c10_networks Crate](../../../../crates/c10_networks)]
 
 ---
 

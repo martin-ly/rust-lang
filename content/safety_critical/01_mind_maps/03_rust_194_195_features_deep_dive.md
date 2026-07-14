@@ -1,6 +1,6 @@
 # Rust 1.94/1.95 特性深度解析
 
-> **权威来源**: 通用 Rust 概念解释请见 [`concept/`](../../../concept/)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 1.94/1.95 特性解释请见 [`concept/07_future/00_version_tracking/rust_1_94_stabilized.md`](../../../concept/07_future/00_version_tracking/rust_1_94_stabilized.md) 与 [`concept/07_future/00_version_tracking/rust_1_95_stabilized.md`](../../../concept/07_future/00_version_tracking/rust_1_95_stabilized.md)。本文仅保留这些特性在安全关键系统中的应用场景与迁移建议，不重复通用特性推导。
 
 > **Bloom 层级**: L4-L6
 >

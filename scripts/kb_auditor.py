@@ -41,6 +41,9 @@ EXCLUDE_FILES = {
 EXCLUDE_PREFIXES = ("sandbox",)
 EXCLUDE_DIRS = {"archive", "deprecated", "sources"}
 
+# 额外死链扫描目录（Z2 扩展：docs/content/knowledge 中的本地 markdown 链接）
+EXTRA_DIRS = ["docs", "content", "knowledge"]
+
 def find_md_files() -> list[Path]:
     """查找核心 markdown 文件，排除非知识体系文件"""
     files = []
@@ -415,6 +418,87 @@ def check_link_validity(audits: list[FileAudit]) -> list[dict]:
     return dead_links
 
 
+def find_extra_md_files() -> list[Path]:
+    """查找 docs/content/knowledge 下所有 .md 文件（Z2 扩展）"""
+    files: list[Path] = []
+    for dirname in EXTRA_DIRS:
+        root = Path(dirname)
+        if not root.exists():
+            continue
+        for path in root.rglob("*.md"):
+            files.append(path)
+    files.sort()
+    return files
+
+
+def extract_markdown_links(content: str) -> list[tuple[int, str, str]]:
+    """提取 markdown 链接 [text](url)，返回 (行号, 文本, url)。
+    排除代码块与行内代码中的误匹配。"""
+    links: list[tuple[int, str, str]] = []
+    pattern = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+    in_code_block = False
+    for line_no, line in enumerate(content.split("\n"), start=1):
+        stripped = line.strip()
+        # 代码块边界
+        if stripped.startswith("```"):
+            in_code_block = not in_code_block
+            continue
+        if in_code_block:
+            continue
+        # 移除行内代码，避免把代码片段中的 []() 识别为链接
+        line_no_code = re.sub(r"`[^`]*`", "", line)
+        for match in pattern.finditer(line_no_code):
+            links.append((line_no, match.group(1), match.group(2)))
+    return links
+
+
+def check_extra_dirs_dead_links() -> list[dict]:
+    """
+    扫描 docs/content/knowledge 中 .md 文件的本地链接。
+    排除 http/https、mailto、纯锚点 #、跨仓库绝对路径 /。
+    对失效链接统计 file/line/url。
+    """
+    files = find_extra_md_files()
+    dead: list[dict] = []
+
+    for path in files:
+        try:
+            content = path.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        for line_no, text, url in extract_markdown_links(content):
+            # 排除外部/特殊链接
+            if url.startswith(("http://", "https://", "mailto:")):
+                continue
+            if url.startswith("#") or url.startswith("/"):
+                continue
+            # 去掉锚点与查询参数
+            target = url.split("#")[0].split("?")[0]
+            if not target:
+                continue
+
+            src_dir = path.parent
+            candidate = src_dir / target
+
+            found = False
+            # 直接存在（文件或目录）
+            if candidate.exists():
+                found = True
+            # 若未指定扩展名，尝试补 .md
+            elif not candidate.suffix and (candidate.with_suffix(".md")).exists():
+                found = True
+
+            if not found:
+                dead.append({
+                    "from": str(path),
+                    "line": line_no,
+                    "to": url,
+                    "resolved": str(candidate.resolve()) if candidate.exists() else str(candidate),
+                })
+
+    return dead
+
+
 def check_code_blocks(audits: list[FileAudit]) -> list[dict]:
     """编译验证非 compile_fail 的代码块"""
     issues = []
@@ -436,8 +520,9 @@ def check_code_blocks(audits: list[FileAudit]) -> list[dict]:
     return issues
 
 
-def generate_dashboard(audits: list[FileAudit], dead_links: list[dict]) -> str:
+def generate_dashboard(audits: list[FileAudit], dead_links: list[dict], extra_dead_links: list[dict] | None = None) -> str:
     """生成质量仪表盘 Markdown"""
+    extra_dead_links = extra_dead_links or []
     total_files = len(audits)
     total_chains = sum(len(a.theorem_chains) for a in audits)
     total_anti = sum(len(a.anti_propositions) for a in audits)
@@ -549,6 +634,7 @@ def generate_dashboard(audits: list[FileAudit], dead_links: list[dict]) -> str:
         f"| 编译验证代码块 | {total_code} | ≥150 | {'✅' if total_code >= 150 else '⚠️'} |",
         f"| 定理矩阵总行 | {total_matrix} | — | — |",
         f"| 死链数量 | {len(dead_links)} | 0 | {'✅' if len(dead_links) == 0 else '❌'} |",
+        f"| docs/content/knowledge 死链数量 | {len(extra_dead_links)} | 0 | {'✅' if len(extra_dead_links) == 0 else '❌'} |",
         f"| 反向推理 (⟸) | {total_backward} | ≥50 | {'✅' if total_backward >= 50 else '⚠️'} |",
         f"| 模板化 ⟹ | {total_templated} | 0 | {'✅' if total_templated == 0 else '❌'} |",
         f"| 前置概念覆盖率 | {pre_post_stats['has_pre']}/{pre_post_stats['total']} | 100% | {'✅' if pre_post_stats['has_pre'] == pre_post_stats['total'] else '⚠️'} |",
@@ -598,6 +684,24 @@ def generate_dashboard(audits: list[FileAudit], dead_links: list[dict]) -> str:
         ])
         for dl in dead_links:
             lines.append(f"| {dl['from']} | {dl['to']} | {dl['resolved']} |")
+
+    lines.extend([
+        "",
+        "## docs/content/knowledge 死链检查",
+        "",
+        "> 扫描范围：`docs/`、`content/`、`knowledge/` 下所有 `.md` 文件中的本地 markdown 链接。",
+        "> 排除：`http/https`、`mailto:`、纯锚点 `#`、跨仓库绝对路径 `/`。",
+        "",
+    ])
+    if extra_dead_links:
+        lines.extend([
+            "| 来源文件 | 行号 | 引用路径 | 解析后的绝对路径 |",
+            "|:---|---:|:---|:---|",
+        ])
+        for dl in extra_dead_links:
+            lines.append(f"| {dl['from']} | {dl['line']} | {dl['to']} | {dl['resolved']} |")
+    else:
+        lines.append("✅ 无死链。")
 
     lines.extend([
         "",
@@ -688,8 +792,19 @@ def main():
     else:
         print(f"  ✅ 跨层引用一致")
 
+    print(f"\n检查 docs/content/knowledge 本地链接...")
+    extra_dead_links = check_extra_dirs_dead_links()
+    if extra_dead_links:
+        print(f"  ⚠️ 发现 {len(extra_dead_links)} 个 docs/content/knowledge 死链")
+        for dl in extra_dead_links[:10]:
+            print(f"    - {dl['from']}:{dl['line']} -> {dl['to']}")
+        if len(extra_dead_links) > 10:
+            print(f"    ... 还有 {len(extra_dead_links) - 10} 个")
+    else:
+        print(f"  ✅ docs/content/knowledge 本地链接均有效")
+
     print(f"\n生成质量仪表盘...")
-    dashboard = generate_dashboard(audits, dead_links)
+    dashboard = generate_dashboard(audits, dead_links, extra_dead_links)
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
     REPORT_PATH.write_text(dashboard, encoding="utf-8", newline="\n")
     print(f"  ✅ 已保存: {REPORT_PATH}")
@@ -716,11 +831,14 @@ def main():
     print(f"  代码块:       {total_code}")
     print(f"  Mermaid 图:   {total_mermaid}")
     print(f"  死链:         {len(dead_links)}")
+    print(f"  docs/content/knowledge 死链: {len(extra_dead_links)}")
     print(f"  跨层问题:     {len(inter_layer_issues)}")
     print(f"{'=' * 60}")
 
     return_code = 0
     if dead_links:
+        return_code = 1
+    if extra_dead_links:
         return_code = 1
     if inter_layer_issues:
         return_code = 1

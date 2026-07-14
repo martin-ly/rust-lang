@@ -8,7 +8,7 @@
 > **EN**: Ai Ml Cheatsheet
 > **Summary**: 🤖 Rust AI/ML 速查卡 Ai Ml Cheatsheet. (stub/archive redirect)
 > **分级**: [A]
-> **快速参考** | [AI+Rust 生态指南](../../08_usage_guides/02_ai_rust_ecosystem_guide.md) | [AI 辅助编程](../../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
+> **快速参考** | [AI+Rust 生态指南](../../08_usage_guides/02_ai_rust_ecosystem_guide.md) | [AI 辅助编程](../../../archive/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.97.0+ (Edition 2024)
@@ -636,7 +636,7 @@ fn normalize(tensor: &Tensor) -> Option<Tensor> {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [AI+Rust 生态指南](../../08_usage_guides/02_ai_rust_ecosystem_guide.md)
-- [AI 辅助编程](../../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
+- [AI 辅助编程](../../../archive/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
 - [Burn](https://burn.dev/) | [Candle](https://github.com/huggingface/candle) | [llm](https://docs.rs/llm)
 
 ## 相关示例代码 {#相关示例代码}

@@ -205,7 +205,7 @@ HttpServer::new(|| async {
 |:--|:--|:--|
 | ntex 路由与路径参数 | [`crates/c06_async/examples/ntex_web_routing.rs`](../../../../crates/c06_async/examples/ntex_web_routing.rs) | `App` / `HttpServer` / `#[web::get]` / 异步工厂 |
 
-> [来源: [c06_async Crate](../../../../../crates/c06_async)]
+> [来源: [c06_async Crate](../../../../crates/c06_async)]
 
 ---
 
@@ -216,7 +216,7 @@ HttpServer::new(|| async {
 - [14_actix_web_architecture.md](14_actix_web_architecture.md) — Actix-web 框架架构
 - [40_salvo_architecture.md](40_salvo_architecture.md) — Salvo Web 框架架构
 - [concept L3: 异步编程](../../../../concept/03_advanced/01_async/01_async.md)
-- [concept L6: Web 框架与中间件](../../../../06_ecosystem)
+- [concept L6: Web 框架与中间件](../../../../concept/06_ecosystem)
 
 ---
 

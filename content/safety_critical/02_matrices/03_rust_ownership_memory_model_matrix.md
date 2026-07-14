@@ -3,7 +3,7 @@
 **EN**: Rust Ownership Memory Model Matrix
 **Summary**: Rust所有权与内存模型矩阵 Rust Ownership Memory Model Matrix.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/01_foundation/11_quizzes/33_quiz_ownership_borrowing.md](../../../concept/01_foundation/11_quizzes/33_quiz_ownership_borrowing.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 所有权与内存模型解释请见 [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 与 [`concept/03_advanced/02_unsafe/06_memory_model.md`](../../../concept/03_advanced/02_unsafe/06_memory_model.md)。本文仅保留安全关键视角下的对比矩阵，不重复概念推导。
 
 > **Bloom 层级**: L4-L6
 >

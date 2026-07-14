@@ -3,7 +3,7 @@
 **EN**: Community And Contributing
 **Summary**: 社区参与与贡献指南 Community And Contributing.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/07_future/01_edition_roadmap/03_rust_edition_guide.md](../../../concept/07_future/01_edition_roadmap/03_rust_edition_guide.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/07_future/01_edition_roadmap/03_rust_edition_guide.md`](../../../concept/07_future/01_edition_roadmap/03_rust_edition_guide.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
 
 > **Bloom 层级**: L4-L6
 >

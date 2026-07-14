@@ -360,7 +360,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | :--- | :--- |
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../06_concept_models/16_theoretical_and_argumentation_system_architecture.md) | 理论体系、论证体系、安全边界总览 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](20_language_semantics_expressiveness.md) | 公理语义、unsafe 契约 |
-| [UNSAFE_RUST_GUIDE](../../concept/03_advanced/02_unsafe/01_unsafe.md) | Unsafe Rust 专题指南 |
+| [UNSAFE_RUST_GUIDE](../../../concept/03_advanced/02_unsafe/01_unsafe.md) | Unsafe Rust 专题指南 |
 | [ownership_model](../02_formal_methods/09_ownership_model.md) | 内存安全（Memory Safety）定理 |
 | [borrow_checker_proof](../02_formal_methods/03_borrow_checker_proof.md) | 数据竞争自由定理 |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 官方 unsafe 权威 |
@@ -417,7 +417,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.97.0+ (Edition 2024)

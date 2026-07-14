@@ -157,7 +157,7 @@ where
 
 ### 3.3 代码示例 {#33-代码示例}
 
-完整示例见 [`crates/c06_async/examples/fallback_degrade_pattern.rs`](../../../../../crates/c06_async/examples/fallback_degrade_pattern.rs)。
+完整示例见 [`crates/c06_async/examples/fallback_degrade_pattern.rs`](../../../../crates/c06_async/examples/fallback_degrade_pattern.rs)。
 
 示例包含：
 

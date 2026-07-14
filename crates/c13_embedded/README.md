@@ -1,3 +1,9 @@
+> **权威来源**: 本文件为 `crates/c13_embedded/` 的 crate 入口页。
+> 通用 Rust 概念解释统一维护在 `concept/` 中；详见 [../../concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md](../../concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md)。
+>
+> 根据 AGENTS.md §2 Canonical 规则，`crates/` 不重复通用 Rust 概念解释；
+> 如需深入学习，请前往 `concept/` 权威页。
+>
 # C13: Rust 嵌入式系统 (Embedded Systems)
 
 ## 概述

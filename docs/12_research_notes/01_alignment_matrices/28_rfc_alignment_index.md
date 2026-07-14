@@ -42,7 +42,7 @@
 |-----|------|----------|------|
 | [RFC 1859](https://rust-lang.github.io/rfcs/2094-nll.html) — Non-Lexical Lifetimes | 借用（Borrowing）检查器改进 | [../02_formal_methods/03_borrow_checker_proof.md](../02_formal_methods/03_borrow_checker_proof.md) | ✅ |
 | [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) — NLL | 非词法生命周期（Lifetimes） | [../02_formal_methods/03_borrow_checker_proof.md](../02_formal_methods/03_borrow_checker_proof.md) | ✅ |
-| [RFC 0380](https://rust-lang.github.io/rfcs/1184-stabilize-no_std.html) — `no_std` | 无 std 环境 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | ✅ |
+| [RFC 0380](https://rust-lang.github.io/rfcs/1184-stabilize-no_std.html) — `no_std` | 无 std 环境 | [crates/c13_embedded/](../../../crates/c13_embedded/README.md) | ✅ |
 | [RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html) — Specialization | Trait 特化 | [../05_type_theory/04_trait_system_formalization.md](../05_type_theory/04_trait_system_formalization.md) | 🔄 |
 
 ---

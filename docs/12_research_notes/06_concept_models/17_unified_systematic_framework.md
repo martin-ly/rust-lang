@@ -593,7 +593,7 @@ Pin ──→ 自引用安全
 
 | 特性族 | 矩阵 | 决策树 | 完整链 |
 | :--- | :--- | :--- | :--- |
-| **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](10_rust_193_feature_matrix.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../12_version_research/01_rust_193_language_features_comprehensive_analysis.md) |
+| **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](../../../archive/research_notes/10_rust_193_feature_matrix.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../12_version_research/01_rust_193_language_features_comprehensive_analysis.md) |
 | **内存与所有权** | 五维矩阵 § 所有权/借用 | 表达能力边界决策树 § 内存管理 | [CORE_FEATURES_FULL_CHAIN](../03_formal_proofs/05_core_features_full_chain.md) 所有权/借用 |
 | **类型系统** | 五维矩阵 § 类型安全/协变 | 表达能力边界决策树 § 类型多态 | [construction_capability](../05_type_theory/02_construction_capability.md) |
 | **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](../03_formal_proofs/05_core_features_full_chain.md) Trait/泛型（Generics） |
@@ -649,7 +649,7 @@ Pin ──→ 自引用安全
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../03_formal_proofs/20_language_semantics_expressiveness.md) | 构造性语义形式化、表达能力边界 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](../03_formal_proofs/16_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
 | [PROOF_INDEX](../03_formal_proofs/21_proof_index.md) | 形式化证明索引、公理编号规范 |
-| [INDEX](../../concept/sources/INDEX.md) | 研究笔记完整索引 |
+| [INDEX](../../../concept/sources/INDEX.md) | 研究笔记完整索引 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../../07_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念矩阵 |
 | [MIND_MAP_COLLECTION](../../07_thinking/03_mind_map_collection.md) | 思维导图集合 |
 | [DECISION_GRAPH_NETWORK](../../07_thinking/02_decision_graph_network.md) | 决策树 |
@@ -657,7 +657,7 @@ Pin ──→ 自引用安全
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../../11_project/05_knowledge_structure_framework.md) | 知识结构、概念定义、思维表征 |
 | [software_design_theory](../08_software_design_theory/README.md) | **软件设计理论**：设计模式形式化、23/43 模型、执行模型、组合工程 |
 | [CORE_FEATURES_FULL_CHAIN](../03_formal_proofs/05_core_features_full_chain.md) | 13 项核心特性完整链 |
-| [FEATURE_TEMPLATE](10_feature_template.md) | 79 项特性精简模板 |
+| [FEATURE_TEMPLATE](../../../archive/research_notes_2026_06_25/10_feature_template.md) | 79 项特性精简模板 |
 | [INCREMENTAL_UPDATE_FLOW](../13_meta_reports/10_incremental_update_flow.md) | 版本增量更新流程 |
 
 ---
@@ -717,7 +717,7 @@ Pin ──→ 自引用安全
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

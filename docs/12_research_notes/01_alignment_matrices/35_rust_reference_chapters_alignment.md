@@ -78,12 +78,12 @@
 
 | Reference 章节 | 项目文档 | 对齐点 |
 |----------------|----------|--------|
-| [Expressions](https://doc.rust-lang.org/reference/expressions.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 表达式求值 |
+| [Expressions](https://doc.rust-lang.org/reference/expressions.html) | [crates/c03_control_fn/](../../../crates/c03_control_fn/README.md) | 表达式求值 |
 | [Literal Expressions](https://doc.rust-lang.org/reference/expressions/literal-expr.html) | [../05_type_theory/05_type_system_foundations.md](../05_type_theory/05_type_system_foundations.md) | 字面量 |
 | [Block Expressions](https://doc.rust-lang.org/reference/expressions/block-expr.html) | [../02_formal_methods/02_async_state_machine.md](../02_formal_methods/02_async_state_machine.md) | async 块、tail expr drop order |
-| [If / Match](https://doc.rust-lang.org/reference/expressions/if-expr.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 控制流 |
+| [If / Match](https://doc.rust-lang.org/reference/expressions/if-expr.html) | [crates/c03_control_fn/](../../../crates/c03_control_fn/README.md) | 控制流 |
 | [Call Expressions](https://doc.rust-lang.org/reference/expressions/call-expr.html) | [../02_formal_methods/02_async_state_machine.md](../02_formal_methods/02_async_state_machine.md) | async fn 调用 |
-| [Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 闭包（Closures） |
+| [Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html) | [crates/c03_control_fn/](../../../crates/c03_control_fn/README.md) | 闭包（Closures） |
 
 ---
 

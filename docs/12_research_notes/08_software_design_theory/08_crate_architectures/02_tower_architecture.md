@@ -2,7 +2,7 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [Tower 形式化生态](../../../../concept/06_ecosystem/05_formal_ecosystem_tower.md)
+> - [Tower 形式化生态](../../../../concept/06_ecosystem/08_formal_verification/01_formal_ecosystem_tower.md)
 > - [系统可组合性](../../../../concept/06_ecosystem/03_design_patterns/04_system_composability.md)
 > - [Web 框架生态](../../../../concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md)
 >

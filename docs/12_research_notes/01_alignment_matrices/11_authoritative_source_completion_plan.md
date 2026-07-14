@@ -150,7 +150,7 @@ python scripts/maintenance/suggest_authoritative_sources.py --output=suggestions
 - [权威来源对齐缺口分析](04_authoritative_alignment_gap_analysis.md)
 - [权威来源版本跟踪表](14_authoritative_source_version_tracking.md)
 - [知识图谱索引](../06_concept_models/13_knowledge_graph_index.md)
-- [研究笔记完整索引](../../concept/sources/INDEX.md)
+- [研究笔记完整索引](../../../concept/sources/INDEX.md)
 
 ## 社区权威参考 {#社区权威参考}
 

@@ -718,7 +718,7 @@ Rust 语义层次
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 
@@ -756,6 +756,6 @@ Rust 语义层次
 
 ## 多语言术语参考 {#多语言术语参考}
 
-> **来源: [国际化术语库](../../data/i18n_terminology.yaml)**
+> **来源: data/i18n_terminology.yaml**
 
-本文档涉及的英/中/日关键术语参见项目统一术语库 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml)。
+本文档涉及的英/中/日关键术语参见项目统一术语库 data/i18n_terminology.yaml。

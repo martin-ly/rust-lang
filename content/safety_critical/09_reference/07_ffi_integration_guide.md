@@ -3,7 +3,7 @@
 **EN**: FFI Integration Guide
 **Summary**: FFI集成指南 - 安全关键系统 FFI Integration Guide.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/00_meta/04_navigation/07_learning_guide.md](../../../concept/00_meta/04_navigation/07_learning_guide.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust FFI 概念解释请见 [`concept/03_advanced/04_ffi/01_rust_ffi.md`](../../../concept/03_advanced/04_ffi/01_rust_ffi.md) 与 [`concept/03_advanced/04_ffi/02_ffi_advanced.md`](../../../concept/03_advanced/04_ffi/02_ffi_advanced.md)。本文仅保留安全关键系统 FFI 集成场景、风险矩阵与决策树，不重复通用 FFI 概念推导。
 
 > **Bloom 层级**: L4-L6
 >

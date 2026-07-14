@@ -59,7 +59,7 @@
 | **我想看 research_notes 全面梳理（结构、归档、维护）** | [RESEARCH_NOTES_ORGANIZATION](13_meta_reports/13_research_notes_organization.md) | 5min |
 | **我想查 Send/Sync 或安全可判定机制** | [send_sync_formalization](02_formal_methods/12_send_sync_formalization.md) → [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](03_formal_proofs/27_safe_decidable_mechanisms_overview.md) | 5min |
 | **我想查 formal_methods 完备性（六篇×六维）** | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](02_formal_methods/05_formal_methods_completeness_checklist.md) | 2min |
-| **我想贡献/维护** | [CONTRIBUTING](10_contributing.md) → [QUALITY_CHECKLIST](13_meta_reports/11_quality_checklist.md) | 5min |
+| **我想贡献/维护** | [CONTRIBUTING](../../archive/research_notes_2026_06_25/10_contributing.md) → [QUALITY_CHECKLIST](13_meta_reports/11_quality_checklist.md) | 5min |
 
 ---
 

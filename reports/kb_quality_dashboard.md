@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-14T08:56:35.288693+00:00
+> 生成时间: 2026-07-14T10:37:38.890283+00:00
 > 扫描文件数: 496
 
 ## 全局指标
@@ -14,6 +14,7 @@
 | 编译验证代码块 | 5102 | ≥150 | ✅ |
 | 定理矩阵总行 | 23578 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
+| docs/content/knowledge 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 317 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
 | 前置概念覆盖率 | 426/430 | 100% | ⚠️ |
@@ -360,6 +361,13 @@
 | E:\_src\rust-lang\concept\07_future\04_research_and_experimental\06_rust_for_webassembly.md | L7 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\04_research_and_experimental\07_ebpf_rust.md | L7 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\05_quizzes\01_quiz_version_and_preview.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失后置概念; 缺失内容分级标签 |
+
+## docs/content/knowledge 死链检查
+
+> 扫描范围：`docs/`、`content/`、`knowledge/` 下所有 `.md` 文件中的本地 markdown 链接。
+> 排除：`http/https`、`mailto:`、纯锚点 `#`、跨仓库绝对路径 `/`。
+
+✅ 无死链。
 
 ## 文件详细统计
 

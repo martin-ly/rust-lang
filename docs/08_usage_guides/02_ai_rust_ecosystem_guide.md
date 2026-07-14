@@ -73,7 +73,7 @@
 
 | 主题 | 入口 | 说明 |
 | :--- | :--- | :--- |
-| **提示词模板** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) | 概念解释、代码审查、错误修复 |
+| **提示词模板** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../archive/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) | 概念解释、代码审查、错误修复 |
 | **RAG 与项目结合** | 同上 | 速查卡、00_MASTER_INDEX、决策树纳入检索 |
 | **错误码上下文** | [ERROR_CODE_MAPPING](../03_reference/03_error_code_mapping.md) | 编译错误 → 文档映射 |
 | **练习推荐** | [RUSTLINGS_MAPPING](../../exercises/rustlings_mapping.md) | 模块（Module） ↔ 习题对应 |
@@ -134,7 +134,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. 使用 [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) 的提示词模板
+1. 使用 [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../archive/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) 的提示词模板
 2. 结合 [RUSTLINGS_MAPPING](../../exercises/rustlings_mapping.md) 让 AI 推荐习题
 3. 遇到错误时附带 [ERROR_CODE_MAPPING](../03_reference/03_error_code_mapping.md)
 
@@ -493,7 +493,7 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
 | :--- | :--- |
 | **进阶主题** | [18_performance_tuning_guide.md](18_performance_tuning_guide.md) |
 | :--- | :--- |
-| **相关指南** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) |
+| **相关指南** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../archive/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) |
 | :--- | :--- |
 | **参考文档** | [RUSTLINGS_MAPPING](../../exercises/rustlings_mapping.md) |
 | :--- | :--- |
@@ -504,7 +504,7 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [AI 辅助编程指南](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
+- [AI 辅助编程指南](../../archive/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
 - [guides/README](../../guides/README.md)
 - [官方资源映射](../02_learning/08_official_resources_mapping.md)
 - [Burn](https://burn.dev/) | [Candle](https://github.com/huggingface/candle) | [llm](https://docs.rs/llm)

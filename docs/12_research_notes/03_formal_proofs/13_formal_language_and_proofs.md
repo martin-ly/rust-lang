@@ -406,7 +406,7 @@ $$
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [CORE_THEOREMS_FULL_PROOFS](07_core_theorems_full_proofs.md) — 完整证明（L2）
-- [coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)（归档只读） — Coq 骨架（L3）
+- [coq_skeleton](../../../archive/deprecated/coq_skeleton/README.md)（归档只读） — Coq 骨架（L3）
 - [ownership_model](../02_formal_methods/09_ownership_model.md)、[borrow_checker_proof](../02_formal_methods/03_borrow_checker_proof.md)、[type_system_foundations](../05_type_theory/05_type_system_foundations.md)
 
 ---
@@ -476,7 +476,7 @@ $$
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

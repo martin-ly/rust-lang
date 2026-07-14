@@ -259,7 +259,7 @@ C++ ↔ Rust 互操作是 Rust 2026 的核心目标之一。当前社区以 `cxx
 
 **维护者**: Rust 学习项目团队
 **下次审查**: 2026-06-08
-**相关文档**: [Rust for Linux 工具链指南](../../concept/07_future/19_rust_for_linux.md)
+**相关文档**: [Rust for Linux 工具链指南](../../concept/07_future/04_research_and_experimental/04_rust_for_linux.md)
 
 ---
 

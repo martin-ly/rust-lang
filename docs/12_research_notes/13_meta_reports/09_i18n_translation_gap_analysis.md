@@ -92,7 +92,7 @@ diff <(ls en/src) <(ls zh-CN/src)
 python scripts/maintenance/check_i18n_translation_gap.py
 ```
 
-术语一致性检查以 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml) 作为权威数据源，脚本可读取该文件并对照各语言翻译中的关键术语使用情况。该文件涵盖所有权（Ownership）、类型系统（Type System）、并发安全（Concurrency Safety）、异步（Async）、包管理等核心概念，是检测术语偏差与未覆盖缺口的标准来源。
+术语一致性检查以 data/i18n_terminology.yaml 作为权威数据源，脚本可读取该文件并对照各语言翻译中的关键术语使用情况。该文件涵盖所有权（Ownership）、类型系统（Type System）、并发安全（Concurrency Safety）、异步（Async）、包管理等核心概念，是检测术语偏差与未覆盖缺口的标准来源。
 
 > 当前版本仅做版本号/最新 commit 差距检测，缺失章节与术语差异待后续扩展。
 
@@ -110,7 +110,7 @@ python scripts/maintenance/check_i18n_translation_gap.py
 | Edition | 版本 / Edition | Edition | 注意与“版本号”区分 |
 | crate | 包 / crate | クレート | 中文语境常用“crate” |
 
-完整术语库见 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml)。该文件是本项目中所有 i18n 相关文档进行术语一致性检查的统一数据源，包含英文、中文、日文翻译及分类说明。文档在引用或讨论术语时应优先与该库保持一致。
+完整术语库见 data/i18n_terminology.yaml。该文件是本项目中所有 i18n 相关文档进行术语一致性检查的统一数据源，包含英文、中文、日文翻译及分类说明。文档在引用或讨论术语时应优先与该库保持一致。
 
 > 亦见 [../01_alignment_matrices/24_i18n_source_alignment.md](../01_alignment_matrices/24_i18n_source_alignment.md) 中的多语言术语对照简表。
 

@@ -89,7 +89,7 @@
 | 2.2 | [06_toolchain/](../../09_toolchain/README.md) | 新建 `07_rust_X.Y_full_changelog.md`、`05_rust_X.Y_vs_X.Y-1_comparison.md` |
 | 2.3 | [formal_methods](../02_formal_methods/README.md)、[type_theory](../05_type_theory/README.md) | 若有新形式化相关特性，更新 00_completeness_gaps |
 | 2.4 | [CORE_FEATURES_FULL_CHAIN](../03_formal_proofs/05_core_features_full_chain.md) | 若核心特性有变更，更新对应链 |
-| 2.5 | [INDEX](../../concept/sources/INDEX.md)、[README](../README.md) | 更新版本号、链接、统计 |
+| 2.5 | [INDEX](../../../concept/sources/INDEX.md)、[README](../README.md) | 更新版本号、链接、统计 |
 
 ### 3. 对齐权威 {#3-对齐权威}
 
@@ -283,9 +283,9 @@ fn api_stabilization_example() {
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
-| MAINTENANCE_GUIDE | 维护计划、质量检查 | [10_maintenance_guide.md](10_maintenance_guide.md) |
+| MAINTENANCE_GUIDE | 维护计划、质量检查 | [10_maintenance_guide.md](../../../archive/research_notes_2026_06_25/10_maintenance_guide.md) |
 | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | 特性分析主文档 | [../12_version_research/01_rust_193_language_features_comprehensive_analysis.md](../12_version_research/01_rust_193_language_features_comprehensive_analysis.md) |
-| FEATURE_TEMPLATE | 新特性精简模板 | [10_feature_template.md](10_feature_template.md) |
+| FEATURE_TEMPLATE | 新特性精简模板 | [10_feature_template.md](../../../archive/research_notes_2026_06_25/10_feature_template.md) |
 
 ### 形式化方法文档 {#形式化方法文档}
 
@@ -304,8 +304,8 @@ fn api_stabilization_example() {
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
-| RUST_191_RESEARCH_UPDATE | 1.91.1 更新记录 | [10_rust_191_research_update_2025_11_15.md](10_rust_191_research_update_2025_11_15.md) |
-| RUST_192_RESEARCH_UPDATE | 1.92.0 更新记录 | [10_rust_192_research_update_2025_12_11.md](10_rust_192_research_update_2025_12_11.md) |
+| RUST_191_RESEARCH_UPDATE | 1.91.1 更新记录 | [10_rust_191_research_update_2025_11_15.md](../../../archive/research_notes/10_rust_191_research_update_2025_11_15.md) |
+| RUST_192_RESEARCH_UPDATE | 1.92.0 更新记录 | [10_rust_192_research_update_2025_12_11.md](../../../archive/research_notes/10_rust_192_research_update_2025_12_11.md) |
 | CHANGELOG | 更新日志 | [02_changelog.md](02_changelog.md) |
 
 ### 形式化证明文档 {#形式化证明文档}
@@ -316,7 +316,7 @@ fn api_stabilization_example() {
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
 | CORE_THEOREMS_FULL_PROOFS | 核心定理完整证明 | [../03_formal_proofs/07_core_theorems_full_proofs.md](../03_formal_proofs/07_core_theorems_full_proofs.md) |
-| COQ_ISABELLE_PROOF_SCAFFOLDING | Coq 证明骨架 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
+| COQ_ISABELLE_PROOF_SCAFFOLDING | Coq 证明骨架 | [10_coq_isabelle_proof_scaffolding.md](../../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
 | PROOF_INDEX | 证明索引 | [../03_formal_proofs/21_proof_index.md](../03_formal_proofs/21_proof_index.md) |
 | SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS | 安全分析 | [../03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md](../03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md) |
 
@@ -399,7 +399,7 @@ fn api_stabilization_example() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../concept/00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [Authority Source Sprint Batch 8](../../../concept/00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
 

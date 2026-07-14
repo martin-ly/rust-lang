@@ -379,7 +379,7 @@ cargo +nightly build
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
-- [Cranelift 后端预研 (concept)](../../concept/07_future/16_cranelift_backend_preview.md) — 概念层 Cranelift 演进路线与使用场景分析
+- [Cranelift 后端预研 (concept)](../../concept/07_future/03_preview_features/16_cranelift_backend_preview.md) — 概念层 Cranelift 演进路线与使用场景分析
 - [Rust 版本跟踪 (concept)](../../concept/07_future/00_version_tracking/01_rust_version_tracking.md) — 编译器后端全局状态跟踪
 
 ---

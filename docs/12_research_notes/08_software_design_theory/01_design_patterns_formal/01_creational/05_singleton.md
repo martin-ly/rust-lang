@@ -627,7 +627,7 @@ unsafe { COUNTER += 1; } // 多线程数据竞争
 | `LazyLock` 稳定 | 方式二 | 1.80+ 稳定；与 `OnceLock` 同为推荐实现 |
 | `OnceLock` | 方式一 | 1.70+ 稳定，惰性初始化首选 |
 | 无新增影响 | — | 1.93 无影响 Singleton 语义的变更 |
-| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md) 特定项 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../../../archive/research_notes/10_rust_193_counterexamples_index.md) 特定项 |
 
 ---
 

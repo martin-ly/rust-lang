@@ -3,7 +3,7 @@
 **EN**: Academic Research Landscape
 **Summary**: 学术研究全景 Academic Research Landscape.
 
-> **权威来源**: 通用 Rust 概念解释请见 [concept/00_meta/04_navigation/02_career_landscape.md](../../../concept/00_meta/04_navigation/02_career_landscape.md)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 形式化语义与验证工具解释请见 [`concept/04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md`](../../../concept/04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md)、[`concept/04_formal/02_separation_logic/01_rustbelt.md`](../../../concept/04_formal/02_separation_logic/01_rustbelt.md) 与 [`concept/04_formal/04_model_checking/`](../../../concept/04_formal/04_model_checking/)。本文仅聚焦安全关键系统相关的学术研究全景，不重复通用概念推导。
 
 > **Bloom 层级**: L4-L6
 >

@@ -3,7 +3,7 @@
 **EN**: Readme Rust Safety Critical Ecosystem
 **Summary**: Rust安全关键系统生态系统 - 完整文档集 Readme Rust Safety Critical Ecosystem.
 
-> **权威来源**: 通用 Rust 概念解释请见 [`concept/`](../../../concept/)；本文聚焦安全关键系统工程实践。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [``concept/``](../../concept/README.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
 
 > **Bloom 层级**: L4-L6
 >
@@ -13,7 +13,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**新用户**: 从 [10_00_completion_report_100_percent.md](10_00_completion_report_100_percent.md) 开始，了解全貌。
+**新用户**: 从 [01_completion_report_100_percent.md](01_completion_report_100_percent.md) 开始，了解全貌。
 
 **按角色选择**:
 
@@ -39,7 +39,7 @@
 
 | 文档 | 描述 |
 |------|------|
-| [**10_00_completion_report_100_percent.md**](10_00_completion_report_100_percent.md) | 🎉 100%完成报告 - 项目总览和成果展示 |
+| [**01_completion_report_100_percent.md**](01_completion_report_100_percent.md) | 🎉 100%完成报告 - 项目总览和成果展示 |
 
 ---
 
@@ -450,7 +450,7 @@
 
 ---
 
-**开始使用**: 建议从 [10_00_completion_report_100_percent.md](10_00_completion_report_100_percent.md) 开始浏览，建立整体认知框架。
+**开始使用**: 建议从 [01_completion_report_100_percent.md](01_completion_report_100_percent.md) 开始浏览，建立整体认知框架。
 
 **🎉 100% 完成，欢迎使用！**
 ---

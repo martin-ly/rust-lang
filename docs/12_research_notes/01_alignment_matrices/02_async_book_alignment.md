@@ -69,7 +69,7 @@
 
 | Async Book 章节 | 项目文档 | 状态 | 备注 |
 |-----------------|----------|------|------|
-| [Async IO](https://rust-lang.github.io/async-book/) | [crates/c06_async/](../../crates/c06_async/README.md) | ✅ | 异步 IO 示例 |
+| [Async IO](https://rust-lang.github.io/async-book/) | [crates/c06_async/](../../../crates/c06_async/README.md) | ✅ | 异步 IO 示例 |
 | [Shared State](https://rust-lang.github.io/async-book/) | [../02_formal_methods/16_concurrency_async_counterexamples.md](../02_formal_methods/16_concurrency_async_counterexamples.md) §4 | ✅ | 异步中持同步锁 |
 
 ---

@@ -61,8 +61,8 @@
 
 | 库/框架 | 官方来源 | 项目文档 | 覆盖内容 |
 |---------|----------|----------|----------|
-| **redis-rs** | [redis-rs/redis-rs](https://github.com/redis-rs/redis-rs) / [docs.rs/redis](https://docs.rs/redis/) | [crates/c10_networks/README.md](../../crates/c10_networks/README.md) | Redis 客户端、连接池、Pub/Sub |
-| **mini-redis** | [tokio-rs/mini-redis](https://github.com/tokio-rs/mini-redis) / [docs.rs/mini-redis](https://docs.rs/mini-redis/) | [crates/c06_async/README.md](../../crates/c06_async/README.md) | Tokio 官方教学实现、RESP 协议、异步（Async）网络 |
+| **redis-rs** | [redis-rs/redis-rs](https://github.com/redis-rs/redis-rs) / [docs.rs/redis](https://docs.rs/redis/) | [crates/c10_networks/README.md](../../../crates/c10_networks/README.md) | Redis 客户端、连接池、Pub/Sub |
+| **mini-redis** | [tokio-rs/mini-redis](https://github.com/tokio-rs/mini-redis) / [docs.rs/mini-redis](https://docs.rs/mini-redis/) | [crates/c06_async/README.md](../../../crates/c06_async/README.md) | Tokio 官方教学实现、RESP 协议、异步（Async）网络 |
 | **sled** | [spacejam/sled](https://github.com/spacejam/sled) / [docs.rs/sled](https://docs.rs/sled/) | — | 嵌入式 KV 存储、B-tree、MVCC 事务 |
 | **mongodb-rust-driver** | [mongodb/mongo-rust-driver](https://github.com/mongodb/mongo-rust-driver) / [docs.rs/mongodb](https://docs.rs/mongodb/) | — | MongoDB 异步驱动、BSON、聚合管道 |
 
@@ -72,9 +72,9 @@
 
 | 库/框架 | 官方来源 | 项目文档 | 覆盖内容 |
 |---------|----------|----------|----------|
-| **rdkafka** | [fede1024/rust-rdkafka](https://github.com/fede1024/rust-rdkafka) / [docs.rs/rdkafka](https://docs.rs/rdkafka/) | [crates/c10_networks/README.md](../../crates/c10_networks/README.md) | Kafka 生产/消费、流处理、offset 管理 |
-| **lapin** | [amqp-rs/lapin](https://github.com/amqp-rs/lapin) / [docs.rs/lapin](https://docs.rs/lapin/) | [crates/c10_networks/README.md](../../crates/c10_networks/README.md) | RabbitMQ AMQP 客户端、异步通道、QoS |
-| **nats-rs** | [nats-io/nats.rs](https://github.com/nats-io/nats.rs) / [docs.rs/nats](https://docs.rs/nats/) | [crates/c10_networks/README.md](../../crates/c10_networks/README.md) | NATS 同步/异步客户端、Pub/Sub、JetStream |
+| **rdkafka** | [fede1024/rust-rdkafka](https://github.com/fede1024/rust-rdkafka) / [docs.rs/rdkafka](https://docs.rs/rdkafka/) | [crates/c10_networks/README.md](../../../crates/c10_networks/README.md) | Kafka 生产/消费、流处理、offset 管理 |
+| **lapin** | [amqp-rs/lapin](https://github.com/amqp-rs/lapin) / [docs.rs/lapin](https://docs.rs/lapin/) | [crates/c10_networks/README.md](../../../crates/c10_networks/README.md) | RabbitMQ AMQP 客户端、异步通道、QoS |
+| **nats-rs** | [nats-io/nats.rs](https://github.com/nats-io/nats.rs) / [docs.rs/nats](https://docs.rs/nats/) | [crates/c10_networks/README.md](../../../crates/c10_networks/README.md) | NATS 同步/异步客户端、Pub/Sub、JetStream |
 
 ---
 
@@ -82,10 +82,10 @@
 
 | 库/框架 | 官方来源 | 项目文档 | 覆盖内容 |
 |---------|----------|----------|----------|
-| **kube-rs** | [kube.rs](https://kube.rs/) / [docs.rs/kube](https://docs.rs/kube/) | [k8s/deployment.yaml](../../k8s/deployment.yaml) / [k8s/service.yaml](../../k8s/service.yaml) | Kubernetes 类型安全客户端、Controller、CRD |
+| **kube-rs** | [kube.rs](https://kube.rs/) / [docs.rs/kube](https://docs.rs/kube/) | [k8s/deployment.yaml](../../../k8s/deployment.yaml) / [k8s/service.yaml](../../../k8s/service.yaml) | Kubernetes 类型安全客户端、Controller、CRD |
 | **opentelemetry-rust** | [open-telemetry/opentelemetry-rust](https://github.com/open-telemetry/opentelemetry-rust) / [docs.rs/opentelemetry](https://docs.rs/opentelemetry/) | [../08_software_design_theory/08_crate_architectures/19_tracing_architecture.md](../08_software_design_theory/08_crate_architectures/19_tracing_architecture.md) | Trace/Metric/Log、Exporter、Context 传播 |
 | **prometheus (client_rust)** | [prometheus/client_rust](https://github.com/prometheus/client_rust) / [docs.rs/prometheus](https://docs.rs/prometheus/) | [../08_software_design_theory/08_crate_architectures/19_tracing_architecture.md](../08_software_design_theory/08_crate_architectures/19_tracing_architecture.md) | Counter/Gauge/Histogram、注册表、文本导出 |
-| **Envoy / Rust proxy** | [envoyproxy/envoy](https://github.com/envoyproxy/envoy) / [hyper.rs](https://hyper.rs/) | [crates/c10_networks/README.md](../../crates/c10_networks/README.md) | 服务网格/代理层、HTTP 反向代理、中间件 |
+| **Envoy / Rust proxy** | [envoyproxy/envoy](https://github.com/envoyproxy/envoy) / [hyper.rs](https://hyper.rs/) | [crates/c10_networks/README.md](../../../crates/c10_networks/README.md) | 服务网格/代理层、HTTP 反向代理、中间件 |
 
 ---
 
@@ -94,7 +94,7 @@
 | 技术 | 权威来源 | 项目资源 | 说明 |
 |------|----------|----------|------|
 | **Docker** | [Docker Docs](https://docs.docker.com/) | — | 多阶段构建、镜像分层、非 root 容器 |
-| **Kubernetes** | [Kubernetes Docs](https://kubernetes.io/docs/) | [k8s/configmap.yaml](../../k8s/configmap.yaml) / [deployment.yaml](../../k8s/deployment.yaml) / [service.yaml](../../k8s/service.yaml) | Deployment、Service、ConfigMap 模板 |
+| **Kubernetes** | [Kubernetes Docs](https://kubernetes.io/docs/) | [k8s/configmap.yaml](../../../k8s/configmap.yaml) / [deployment.yaml](../../../k8s/deployment.yaml) / [service.yaml](../../../k8s/service.yaml) | Deployment、Service、ConfigMap 模板 |
 | **Helm** | [Helm Docs](https://helm.sh/docs/) | — | Chart 包管理、Values 注入、Release 升级 |
 | **OCI / containerd** | [OCI Spec](https://opencontainers.org/) / [containerd](https://containerd.io/) | — | 镜像规范、运行时（Runtime）接口 |
 
@@ -109,11 +109,11 @@
 | [../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md](../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md) | Diesel、SQLx、SeaORM、rusqlite 架构解构 | 官方文档、docs.rs |
 | [../08_software_design_theory/08_crate_architectures/03_diesel_architecture.md](../08_software_design_theory/08_crate_architectures/03_diesel_architecture.md) | Diesel ORM、Typestate 查询 | Diesel 官方 |
 | [../08_software_design_theory/08_crate_architectures/09_sqlx_architecture.md](../08_software_design_theory/08_crate_architectures/09_sqlx_architecture.md) / [15_sqlx_advanced_architecture.md](../08_software_design_theory/08_crate_architectures/18_sqlx_advanced_architecture.md) | SQLx 编译期验证与连接池 | SQLx 官方 |
-| [crates/c10_networks/README.md](../../crates/c10_networks/README.md) | Redis、Kafka、RabbitMQ、NATS、代理层 | 各客户端官方文档 |
-| [crates/c06_async/README.md](../../crates/c06_async/README.md) | mini-redis、异步网络模型 | Tokio/mini-redis |
+| [crates/c10_networks/README.md](../../../crates/c10_networks/README.md) | Redis、Kafka、RabbitMQ、NATS、代理层 | 各客户端官方文档 |
+| [crates/c06_async/README.md](../../../crates/c06_async/README.md) | mini-redis、异步网络模型 | Tokio/mini-redis |
 | [../08_software_design_theory/08_crate_architectures/19_tracing_architecture.md](../08_software_design_theory/08_crate_architectures/19_tracing_architecture.md) | OpenTelemetry、Prometheus、Tracing | OTel/Prometheus 官方 |
 | [../07_distributed_and_workflow/03_distributed_pattern_matrix.md](../07_distributed_and_workflow/03_distributed_pattern_matrix.md) | 消息队列、CQRS、Event Sourcing、Saga、Outbox | 分布式模式经典参考 |
-| [k8s/deployment.yaml](../../k8s/deployment.yaml) / [service.yaml](../../k8s/service.yaml) | Kubernetes 部署模板 | Kubernetes 官方 |
+| [k8s/deployment.yaml](../../../k8s/deployment.yaml) / [service.yaml](../../../k8s/service.yaml) | Kubernetes 部署模板 | Kubernetes 官方 |
 
 ---
 
@@ -140,7 +140,7 @@
 - [分布式模式特性矩阵](../07_distributed_and_workflow/03_distributed_pattern_matrix.md)
 - [Rust 工业级 Crate 架构解构总索引](../08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md)
 - [知识图谱索引](../06_concept_models/13_knowledge_graph_index.md)
-- [研究笔记完整索引](../../concept/sources/INDEX.md)
+- [研究笔记完整索引](../../../concept/sources/INDEX.md)
 
 ---
 
