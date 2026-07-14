@@ -1,45 +1,49 @@
 {
   "date": "2026-07-14",
-  "scanned": 490,
+  "scanned": 491,
   "coverage": {
     "P0": [
-      485,
+      486,
       99.0
     ],
     "P1": [
       458,
-      93.5
+      93.3
     ],
     "P2": [
       422,
-      86.1
+      85.9
     ],
     "any": [
-      490,
+      491,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 405,
+    "scanned": 406,
     "P0": [
-      405,
+      406,
       100.0
     ],
     "P1": [
       405,
-      100.0
+      99.8
     ],
     "P2": [
       405,
-      100.0
+      99.8
     ],
     "any": [
-      405,
+      406,
       100.0
     ],
-    "gaps_p1": [],
-    "gaps_p2": []
+    "gaps_p1": [
+      "concept/07_future/00_version_tracking/rust_1_98_stabilized.md"
+    ],
+    "gaps_p2": [
+      "concept/07_future/00_version_tracking/rust_1_98_stabilized.md"
+    ]
   },
   "by_layer": {
     "L0": {
@@ -78,9 +82,9 @@
       "any": 127
     },
     "L7": {
-      "n": 65,
-      "P0": 64,
-      "any": 65
+      "n": 66,
+      "P0": 65,
+      "any": 66
     },
     "L?": {
       "n": 3,

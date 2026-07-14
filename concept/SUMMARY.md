@@ -513,6 +513,7 @@
   - [Rust 1.97 特性×领域交叉矩阵](07_future/00_version_tracking/feature_domain_matrix_197.md)
   - [Rust 1.97 兼容性迁移判定树](07_future/00_version_tracking/migration_197_decision_tree.md)
   - [Rust 1.98+ 前沿特性预览](07_future/00_version_tracking/rust_1_98_preview.md)
+  - [Rust 1.98.0 稳定特性（跟踪骨架）](07_future/00_version_tracking/rust_1_98_stabilized.md)
   - [AutoVerus / Verus 预览](07_future/03_preview_features/33_autoverus_preview.md)
   - [Rust 1.90 稳定特性](07_future/00_version_tracking/rust_1_90_stabilized.md)
   - [Rust 1.91 稳定特性](07_future/00_version_tracking/rust_1_91_stabilized.md)

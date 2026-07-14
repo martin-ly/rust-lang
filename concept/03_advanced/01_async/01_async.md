@@ -3352,8 +3352,8 @@ async fn main() {
 
 2. **简单的单任务程序**:
 
-   ```rust
-   // ❌ 过度工程：引入不必要的复杂性
+   ```rust,ignore
+   // ❌ 过度工程：引入不必要的复杂性（示意对比：两个 main 为二选一，非同一文件）
    #[tokio::main]
    async fn main() {
        println!("Hello, world!");

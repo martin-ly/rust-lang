@@ -1,6 +1,6 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-07-14  **扫描**: 511 concept 活跃文件（排除 archive）  **模式**: warning（不阻断）
+**日期**: 2026-07-14  **扫描**: 512 concept 活跃文件（排除 archive）  **模式**: warning（不阻断）
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
@@ -8,10 +8,10 @@
 | D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=316) | 0.0% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
-| D5 稳定层正文残留 nightly/preview/unstable | 26 | 5.1% | >0 | FAIL |
+| D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 26 / 511
+**受影响文件总数**: 0 / 512
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -51,6 +51,38 @@
 - `concept/06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md` — Tier 2/3 no_std 目标须 nightly + -Z build-std 为工具链事实；rustc book 仅 nightly 路径托管（URL 规则已排除）
 - `concept/06_ecosystem/13_quizzes/03_quiz_security_testing.md` — quiz 题目/解析以 cargo vet 工具链可用性与 #[bench] nightly 状态为考点，nightly 为考点内容本身
 - `concept/sources/rfc_index.md` — RFC 索引：状态列记录各 RFC nightly/每日构建版状态，即索引内容本身（同 sources/INDEX.md 既有登记）
+- `concept/00_meta/00_framework/semantic_space.md` — 元框架页：nightly/preview 作为版本演进维度概念名引用（语义空间坐标轴描述）
+- `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述，非稳定层依赖
+- `concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/01_foundation/02_type_system/01_type_system.md` — 类型系统演进节：generic_const_exprs/-Znext-solver/never_type nightly 状态为客观事实陈述，附 Unstable Book 权威链接
+- `concept/01_foundation/04_control_flow/01_control_flow.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/01_foundation/07_modules_and_items/07_type_aliases.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/01_foundation/07_modules_and_items/09_const_items_and_const_fn.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/01_foundation/07_modules_and_items/12_items.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/01_foundation/08_error_handling/02_error_handling_control_flow.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/02_intermediate/02_memory_management/01_memory_management.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/02_intermediate/03_error_handling/01_error_handling.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/02_intermediate/04_types_and_conversions/01_range_types.md` — Step trait 仍 nightly-only 为客观事实陈述（决定范围端点类型）
+- `concept/02_intermediate/04_types_and_conversions/04_type_system_advanced.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md` — assert_matches 历史 nightly 状态陈述（1.96 已稳定，版本演进上下文）
+- `concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md` — auto traits 实验性状态（E0658）为客观事实陈述
+- `concept/03_advanced/01_async/06_async_boundary_panorama.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/03_advanced/02_unsafe/03_nll_and_polonius.md` — Polonius 借用检查器仅 nightly 可用为客观事实陈述（页面主题即其对比）
+- `concept/03_advanced/03_proc_macros/02_proc_macro.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md` — -Zunpretty/trace_macros 等 nightly 调试标志为工具链事实陈述（页面主题即调试手段）
+- `concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/03_advanced/03_proc_macros/06_macro_glossary.md` — 术语条目：Span::def_site()/-Zunpretty nightly-only 为定义内容本身的客观事实
+- `concept/03_advanced/06_low_level_patterns/01_custom_allocators.md` — allocator_api 仍 nightly-only 为客观事实陈述（页面主题即自定义分配器）
+- `concept/04_formal/01_ownership_logic/02_ownership_formal.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/06_ecosystem/00_toolchain/01_toolchain.md` — WASI Preview 专名 + rustc_driver/Cranelift nightly 状态为工具链事实陈述
+- `concept/06_ecosystem/00_toolchain/04_compiler_internals.md` — rustc 内部 API 仅 nightly 可用为工具链事实陈述（页面主题即编译器内部）
+- `concept/06_ecosystem/00_toolchain/10_rustc_driver_and_stable_mir.md` — rustc_driver  nightly-only / StableMIR 状态对比为页面主题本身
+- `concept/06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
+- `concept/06_ecosystem/09_testing_and_quality/04_benchmarking.md` — #[bench]/criterion nightly 状态为工具链事实陈述（页面主题即基准测试手段）
 
 另有两类规则级排除：WASI Preview 1/2/3（WASM 规范版本专名）与 URL 路径中的 nightly（官方文档固定托管路径）。
 
@@ -64,26 +96,13 @@
 
 ### D4 文首块 Rust 版本号自矛盾（0）
 
-### D5 稳定层正文残留 nightly/preview/unstable（26）
-
-- `concept/00_meta/00_framework/semantic_space.md` — 稳定层 nightly/preview 关键词 1 处
-- `concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md` — 稳定层 nightly/preview 关键词 2 处
-- `concept/01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md` — 稳定层 nightly/preview 关键词 1 处
-- `concept/01_foundation/02_type_system/01_type_system.md` — 稳定层 nightly/preview 关键词 5 处
-- `concept/01_foundation/04_control_flow/01_control_flow.md` — 稳定层 nightly/preview 关键词 1 处
-- `concept/01_foundation/07_modules_and_items/07_type_aliases.md` — 稳定层 nightly/preview 关键词 1 处
-- `concept/01_foundation/07_modules_and_items/09_const_items_and_const_fn.md` — 稳定层 nightly/preview 关键词 1 处
-- `concept/01_foundation/07_modules_and_items/12_items.md` — 稳定层 nightly/preview 关键词 1 处
-- `concept/01_foundation/08_error_handling/02_error_handling_control_flow.md` — 稳定层 nightly/preview 关键词 1 处
-- `concept/02_intermediate/02_memory_management/01_memory_management.md` — 稳定层 nightly/preview 关键词 3 处
-- `concept/02_intermediate/04_types_and_conversions/01_range_types.md` — 稳定层 nightly/preview 关键词 1 处
-- `concept/02_intermediate/04_types_and_conversions/04_type_system_advanced.md` — 稳定层 nightly/preview 关键词 1 处
+### D5 稳定层正文残留 nightly/preview/unstable（0）
 
 ### D6 Summary 低信息量模板套话（0）
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
-- D5 稳定层nightly残留 26 (>0)
+- 无（全部通过）
 
 ## 机器可读
 

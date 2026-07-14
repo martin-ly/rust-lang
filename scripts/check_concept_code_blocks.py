@@ -26,6 +26,11 @@
     先 `cargo build --workspace`（或 --ensure-deps 自动执行）确保 target/debug/deps
     存在 rmeta；块中引用的 crate 逐一映射 lib<name>-*.rmeta/.rlib（proc-macro 用
     动态库），全部可解析才编译，找不到的归入 dep_untested。
+    多构建产物（feature 差异）按构建哈希去重后「对角优先+笛卡尔积」轮换重试
+    （上限 MAX_EXTERN_COMBOS=24），修复 v3 锁步轮换漏组合问题；每个组合按
+    bin(包装) → lib(不包装) → proc-macro → async 包装（顶层 .await）模式回退；
+    全部失败保留错误数最少的诊断；命中 DEP_KNOWN_MISSING 豁免规则或 feature
+    缺失特征 → dep_untested（环境限制，不计入腐烂）。
 
 执行：
     分批（每批 --batch 300 块）ThreadPoolExecutor 并行 rustc，防单次运行超时。

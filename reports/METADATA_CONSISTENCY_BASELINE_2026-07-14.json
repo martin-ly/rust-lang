@@ -1,13 +1,13 @@
 {
   "summary": {
     "date": "2026-07-14",
-    "scanned": 511,
+    "scanned": 512,
     "counts": {
       "D1": 0,
       "D2": 0,
       "D3": 0,
       "D4": 0,
-      "D5": 26,
+      "D5": 0,
       "D6": 0
     },
     "pct": {
@@ -15,199 +15,19 @@
       "D2": 0.0,
       "D3": 0.0,
       "D4": 0.0,
-      "D5": 5.1,
+      "D5": 0.0,
       "D6": 0.0
     },
     "D2_base_files_with_asp_and_bloom": 316,
-    "flagged_files": 26
+    "flagged_files": 0
   },
   "examples": {
     "D1": [],
     "D2": [],
     "D3": [],
     "D4": [],
-    "D5": [
-      [
-        "concept/00_meta/00_framework/semantic_space.md",
-        "稳定层 nightly/preview 关键词 1 处"
-      ],
-      [
-        "concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md",
-        "稳定层 nightly/preview 关键词 2 处"
-      ],
-      [
-        "concept/01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md",
-        "稳定层 nightly/preview 关键词 1 处"
-      ],
-      [
-        "concept/01_foundation/02_type_system/01_type_system.md",
-        "稳定层 nightly/preview 关键词 5 处"
-      ],
-      [
-        "concept/01_foundation/04_control_flow/01_control_flow.md",
-        "稳定层 nightly/preview 关键词 1 处"
-      ],
-      [
-        "concept/01_foundation/07_modules_and_items/07_type_aliases.md",
-        "稳定层 nightly/preview 关键词 1 处"
-      ],
-      [
-        "concept/01_foundation/07_modules_and_items/09_const_items_and_const_fn.md",
-        "稳定层 nightly/preview 关键词 1 处"
-      ],
-      [
-        "concept/01_foundation/07_modules_and_items/12_items.md",
-        "稳定层 nightly/preview 关键词 1 处"
-      ],
-      [
-        "concept/01_foundation/08_error_handling/02_error_handling_control_flow.md",
-        "稳定层 nightly/preview 关键词 1 处"
-      ],
-      [
-        "concept/02_intermediate/02_memory_management/01_memory_management.md",
-        "稳定层 nightly/preview 关键词 3 处"
-      ],
-      [
-        "concept/02_intermediate/04_types_and_conversions/01_range_types.md",
-        "稳定层 nightly/preview 关键词 1 处"
-      ],
-      [
-        "concept/02_intermediate/04_types_and_conversions/04_type_system_advanced.md",
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    ],
+    "D5": [],
     "D6": []
   },
-  "per_file": {
-    "concept/00_meta/00_framework/semantic_space.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 2 处"
-      ]
-    },
-    "concept/01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/01_foundation/02_type_system/01_type_system.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 5 处"
-      ]
-    },
-    "concept/01_foundation/04_control_flow/01_control_flow.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/01_foundation/07_modules_and_items/07_type_aliases.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/01_foundation/07_modules_and_items/09_const_items_and_const_fn.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/01_foundation/07_modules_and_items/12_items.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/01_foundation/08_error_handling/02_error_handling_control_flow.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/02_intermediate/02_memory_management/01_memory_management.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 3 处"
-      ]
-    },
-    "concept/02_intermediate/04_types_and_conversions/01_range_types.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/02_intermediate/04_types_and_conversions/04_type_system_advanced.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/03_advanced/01_async/06_async_boundary_panorama.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/03_advanced/02_unsafe/03_nll_and_polonius.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 2 处"
-      ]
-    },
-    "concept/03_advanced/03_proc_macros/02_proc_macro.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 2 处"
-      ]
-    },
-    "concept/03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 2 处"
-      ]
-    },
-    "concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 2 处"
-      ]
-    },
-    "concept/03_advanced/03_proc_macros/06_macro_glossary.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 2 处"
-      ]
-    },
-    "concept/03_advanced/06_low_level_patterns/01_custom_allocators.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 3 处"
-      ]
-    },
-    "concept/04_formal/01_ownership_logic/02_ownership_formal.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    },
-    "concept/06_ecosystem/09_testing_and_quality/04_benchmarking.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 3 处"
-      ]
-    }
-  }
+  "per_file": {}
 }

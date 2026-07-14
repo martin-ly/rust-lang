@@ -9,7 +9,8 @@
 > **受众**: [专家]
 > **Bloom 层级**: L2-L3
 > **内容分级**: [实验级]
-> **权威来源**: 本文件为 `concept/` 权威页。
+> **权威来源**: 本文件为 `concept/` 权威页（1.98+ **周期跟踪** canonical）。
+> **Canonical 分工**: 本页 = 周期跟踪（nightly 特性 / RFC 进展 / API 探测，随两周巡检滚动）；1.98.0 **稳定特性权威汇总** = [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)（2026-08-20 稳定后生效，当前为跟踪骨架）。
 > **跟踪版本**: nightly 1.99.0 (2026-06-22)；**1.98.0 已于 2026-07-03 分支进入 beta**（[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)，2026-07-14 curl 实测 200）
 > **预计稳定时间**: **1.98.0 = 2026-08-20**（releases.rs 实测）；1.99+ 及以后
 > **当前阶段**: 🧪 Nightly 实验性 / 设计或 MCP 阶段
@@ -56,7 +57,7 @@
 | Return Type Notation（RTN） | nightly only | [预览页](../03_preview_features/09_return_type_notation_preview.md) |
 | Public/Private Dependencies（RFC #3516） | RFC merged，Cargo 实现跟踪中 | [RFC Book](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html) |
 
-> **维护约定**：每两周按 §7.1 频率核对本表；1.98.0 发布（2026-08-20）后将 beta 行迁移至新建的 `rust_1_98_stabilized.md`，本页滚动为 1.99+ 跟踪。
+> **维护约定**：每两周按 §7.1 频率核对本表；1.98.0 发布（2026-08-20）后将 beta 行迁移至 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)（骨架已建，2026-07-14），本页滚动为 1.99+ 跟踪。
 
 ---
 
@@ -624,6 +625,8 @@ WASM 组件模型（Component Model）是 1.98 周期嵌入式的核心跟踪项
 
 ## 七、跟踪与更新机制
 
+> **稳定特性汇总**：1.98.0 稳定后的权威汇总页为 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)；本页仅负责周期跟踪，两页 canonical 分工见文首。
+
 「跟踪与更新机制」部分按更新频率、状态标记约定与关联文档的顺序逐层展开。
 
 ### 7.1 更新频率
@@ -643,6 +646,7 @@ WASM 组件模型（Component Model）是 1.98 周期嵌入式的核心跟踪项
 
 ### 7.3 关联文档
 
+- [Rust 1.98.0 稳定特性（跟踪骨架）](rust_1_98_stabilized.md)
 - [Rust 1.97 前沿特性预览](rust_1_97_preview.md)
 - [Pin Ergonomics 预览](../03_preview_features/14_pin_ergonomics_preview.md)
 - [Return Type Notation 预览](../03_preview_features/09_return_type_notation_preview.md)

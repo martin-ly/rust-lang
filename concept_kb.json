@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 495,
-    "generated_at": "2026-07-14T01:45:34.163549+00:00"
+    "total_files": 496,
+    "generated_at": "2026-07-14T02:43:25.972643+00:00"
   },
   "files": [
     {
@@ -26673,10 +26673,12 @@
           "code_preview": "   // ❌ 不推荐：async 无法提升性能    async fn calculate_pi() -> f64 {        // 纯计算，无 I/O..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 11,
           "should_fail": false,
-          "code_preview": "   // ❌ 过度工程：引入不必要的复杂性    #[tokio::main]    async fn main() {        println!(\"H..."
+          "code_preview": "   // ❌ 过度工程：引入不必要的复杂性（示意对比：两个 main 为二选一，非同一文件）    #[tokio::main]    async fn ma..."
         },
         {
           "flags": [
@@ -62000,7 +62002,7 @@
       "layer": "L7",
       "title": "Rust 1.98+ 前沿特性预览",
       "positioning": "",
-      "line_count": 664,
+      "line_count": 668,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -62071,7 +62073,8 @@
         "../03_preview_features/09_return_type_notation_preview.md",
         "../03_preview_features/14_pin_ergonomics_preview.md",
         "../03_preview_features/22_async_drop_preview.md",
-        "rust_1_97_preview.md"
+        "rust_1_97_preview.md",
+        "rust_1_98_stabilized.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -62084,6 +62087,42 @@
         ],
         "post": [
           ">"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\rust_1_98_stabilized.md",
+      "layer": "L7",
+      "title": "Rust 1.98.0 稳定特性（跟踪骨架）",
+      "positioning": "",
+      "line_count": 135,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "../03_preview_features/03_safety_tags_preview.md",
+        "../03_preview_features/09_return_type_notation_preview.md",
+        "../03_preview_features/14_pin_ergonomics_preview.md",
+        "../03_preview_features/22_async_drop_preview.md",
+        "01_rust_version_tracking.md",
+        "03_rust_release_process.md",
+        "rust_1_97_stabilized.md",
+        "rust_1_98_preview.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 24,
+      "pre_post": {
+        "pre": [
+          "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.97 稳定特性](rust_1_97_stabilized.md)"
+        ],
+        "post": [
+          "[Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)"
         ]
       },
       "backward_chains": 0,
