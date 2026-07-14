@@ -1,0 +1,25 @@
+{
+  "date": "2026-07-15",
+  "total_score": 99.6,
+  "grade": "OK",
+  "metadata_score": 100.0,
+  "topology_score": 98.4,
+  "dedup_score": 100.0,
+  "kg_score": 100.0,
+  "inputs": {
+    "metadata_flagged": "0/516",
+    "topology_T1_def_low_rate": 0.0,
+    "topology_T2_top_rate": 0.749,
+    "overlap_hits": 569,
+    "overlap_actionable_MERGE_DOCSINTERNAL": 0,
+    "kg": {
+      "K1_missing_required": 0,
+      "K1b_missing_bloomLevel": 0,
+      "K2_bad_path": 0,
+      "K3_not_bilingual": 0,
+      "K4_duplicate_id": 0,
+      "K5_dangling_relations": 0,
+      "K6_bad_tree_nodes": 0
+    }
+  }
+}

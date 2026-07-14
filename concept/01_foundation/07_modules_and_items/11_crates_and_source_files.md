@@ -234,7 +234,7 @@ flowchart TD
 
 ---
 
-## 九、相关概念
+## 十、相关概念
 
 | 概念 | 关系 |
 |:---|:---|
@@ -298,6 +298,64 @@ use crate::no_such_module::Thing;
 fn main() { let _ = Thing; }
 ```
 
+## 九、Rust 1.97.0 语义变更：`dead_code_pub_in_binary` lint
+
+> **来源**: [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/) · [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html)
+
+### 9.1 边界陈述
+
+在 Rust 1.97.0 之前，**二进制 crate**（`crate-type = "bin"`）中的 `pub` 项会被 `dead_code` lint 隐式豁免——即使这些 `pub` 项从未被使用，编译器也不会发出 `dead_code` 警告。这是因为早期实现假设：二进制 crate 的 `pub` 项可能作为外部符号被链接器/调试器引用。
+
+Rust 1.97.0 起新增 **`dead_code_pub_in_binary`** lint（默认 allow），用于标记二进制 crate 中未被使用的 `pub` 项。该 lint 的语义收紧意味着：**`pub` 不再是二进制 crate 中压警告的逃生舱**。
+
+### 9.2 判定条件
+
+以下条件**同时满足**时，1.97+ 会触发该 lint（若显式启用）：
+
+1. 当前 crate 类型为 **binary**（`main.rs` / `crate-type = "bin"`）。
+2. 存在 `pub` 修饰的 item（函数、静态变量、结构体等）。
+3. 该 item 在当前 crate 内**未被任何代码路径使用**。
+4. 未对该 item 标注 `#[allow(dead_code)]` 或 `#[used]`。
+
+### 9.3 反例：1.96 静默、1.97 告警
+
+```rust,ignore
+// edition = "2024", rust = "1.97" —— 二进制 crate 中未使用的 pub 项
+#![warn(dead_code_pub_in_binary)]
+
+pub fn unused_in_binary() {} // ⚠️ 1.97+ 触发 dead_code_pub_in_binary
+
+fn main() {}
+```
+
+**1.96 行为**：即使启用 `#![warn(dead_code)]`，上述代码也不会告警。
+**1.97 行为**：启用 `#![warn(dead_code_pub_in_binary)]` 后，会明确提示 `unused_in_binary` 未被使用。
+
+### 9.4 迁移决策树
+
+```mermaid
+flowchart TD
+    Q0[二进制 crate 出现 dead_code 相关警告] --> Q1{警告是否来自 dead_code_pub_in_binary}
+    Q1 -->|否| A0[按常规 dead_code 处理]
+    Q1 -->|是| Q2{该 pub 项是否真的需要保留}
+    Q2 -->|否, 死代码| A1[动作: 删除该 pub 项]
+    Q2 -->|是, 被外部链接器/调试器使用| A2[动作: 添加 #\[used\] 或 #\[no_mangle\]]
+    Q2 -->|是, 但暂时未使用| A3[动作: 添加 #\[allow(dead_code)\] 并注释用途]
+    A2 --> V[动作: cargo check 验证警告消失]
+    A3 --> V
+```
+
+### 9.5 与库 crate 的区别
+
+| 场景 | `pub` 项是否触发 dead_code | 原因 |
+|---|---|---|
+| 库 crate（`lib`） | 否 | `pub` 项是 crate 的公开 API，可能被外部使用者调用 |
+| 二进制 crate（`bin`） | 是（1.97+） | `pub` 项对外部不可见， unused 即死代码 |
+
+> **关键洞察**：二进制 crate 没有“公开 API”的概念——`pub` 仅影响同一 crate 内的可见性。Rust 1.97.0 通过 `dead_code_pub_in_binary` 把这一事实显式反馈给开发者。
+
+---
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid
@@ -308,4 +366,5 @@ mindmap
     三、Crate 输出类型
     四、典型源文件布局
     五、Crate 级属性示例
+    九、Rust 1.97 dead_code_pub_in_binary
 ```
