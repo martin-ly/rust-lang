@@ -14,6 +14,9 @@ copy-fonts = true
 additional-js = ["theme/mermaid-init.js"]
 
 [output.html.search]
+# 全站搜索：500+ 概念页导致 searchindex.js ~55 MB，mdbook 会发出体积警告。
+# 该警告仅提示索引较大；mdbook >= 0.4.52 已改为点击搜索框时才懒加载索引，
+# 不影响首屏性能。当前策略：保持搜索开启，接受该警告，不在配置层面禁用搜索。
 enable = true
 limit-results = 30
 teaser-word-count = 30

@@ -2,7 +2,6 @@
 
 > **权威来源**: 本文件为 `docs/` 目录索引/指南，通用 Rust 概念解释请见 [`concept/`](../../concept/)。根据 AGENTS.md §3.4，`docs/` 不重复 `concept/` 中的通用概念解释。
 
-
 > **EN**: Research Index
 > **Summary**: Research 目录 Research Index. (stub/archive redirect)
 > **定位**: 已归档的**研究笔记与探索性内容**入口。本目录原用于存放早期研究材料，目前大部分内容已迁移至 `concept/`、`knowledge/` 或 `archive/`。

@@ -9,136 +9,28 @@
 >
 > 本文内容迁移自历史归档，已按 `AGENTS.md` 规则保留为安全关键领域专题实践。
 
-## Level 1: Rust基础 (2周)
+## Level 1: Rust基础 (2周) — 前置学习
+
+> **权威来源**: Level 1 为通用 Rust 基础，已由 `concept/` 权威页覆盖。本培训计划不再重复推导，学员请按以下路径完成前置学习：
 >
-> **[来源: Rust Official Docs]**
-
-### 第1周: 语法与语义
-
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> - [学习指南](../../concept/00_meta/04_navigation/07_learning_guide.md) — 官方推荐学习路径
+> - [所有权系统](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> - [借用与生命周期](../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
+> - [生命周期深入](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
+> - [错误处理基础](../../concept/01_foundation/08_error_handling/01_error_handling_basics.md)
+> - [泛型](../../concept/02_intermediate/01_generics/01_generics.md)
+> - [Trait](../../concept/02_intermediate/00_traits/01_traits.md)
 >
-> **[来源: Rust Official Docs]**
+> 完成上述内容并通过 [`concept/00_meta/04_navigation/12_self_assessment.md`](../../concept/00_meta/04_navigation/12_self_assessment.md) 自评后，方可进入 Level 2。
 
-#### 模块1: 所有权系统 (2天)
+### Level 1 学习目标
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
->
-> **[来源: Rust Official Docs]**
-
-- **理论** (4h)
-  - 所有权三原则
-  - 移动语义
-  - 复制trait
-  - Drop trait
-
-- **实践** (4h)
-
-  ```rust
-  // 练习1: 所有权转移
-  fn main() {
-      let s1 = String::from("hello");
-      let s2 = s1; // 所有权转移
-      // println!("{}", s1); // 错误! s1已失效
-      println!("{}", s2);
-  }
-
-  // 练习2: 借用规则
-  fn calculate(data: &Vec<i32>) -> i32 {
-      data.iter().sum()
-  }
-  ```
-
-#### 模块2: 借用与生命周期 (2天)
-
-> **[来源: TRPL - The Rust Programming Language]**
->
-> **[来源: Rust Official Docs]**
-
-- **理论** (4h)
-  - 不可变借用
-  - 可变借用
-  - 生命周期标注
-  - 生命周期省略
-
-- **实践** (4h)
-
-  ```rust
-  // 练习: 解析器实现
-  struct Parser<'a> {
-      input: &'a str,
-      position: usize,
-  }
-
-  impl<'a> Parser<'a> {
-      fn new(input: &'a str) -> Self {
-          Parser { input, position: 0 }
-      }
-
-      fn peek(&self) -> Option<char> {
-          self.input.chars().nth(self.position)
-      }
-  }
-  ```
-
-#### 模块3: 类型系统 (1天)
-
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
->
-> **[来源: Rust Official Docs]**
-
-- **理论** (2h)
-  - 代数数据类型
-  - Option和Result
-  - trait系统
-  - 泛型
-
-- **实践** (2h)
-  - 状态机实现
-  - 错误处理模式
-
-### 第2周: 基础应用
-
-> **[来源: TRPL - The Rust Programming Language]**
->
-> **[来源: Rust Official Docs]**
-
-#### 模块4: 错误处理 (2天)
-
-> **[来源: ACM - Systems Programming Languages]**
->
-> **[来源: Rust Official Docs]**
-
-- panic vs Result
-- ?操作符
-- 自定义错误类型
-- 错误传播策略
-
-#### 模块5: 集合与迭代器 (2天)
-
-> **[来源: IEEE - Programming Language Standards]**
->
-> **[来源: Rust Official Docs]**
-
-- Vec, HashMap, HashSet
-- 迭代器模式
-- 性能考量
-
-#### 模块6: 测试基础 (1天)
-
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
->
-> **[来源: Rust Official Docs]**
-
-- 单元测试
-- 集成测试
-- 文档测试
-- 代码覆盖率
+- 掌握 Rust 所有权、借用、生命周期核心机制
+- 熟练使用 `Option`/`Result`、泛型与 trait
+- 能编写带单元测试的 Rust 命令行工具
+- 为后续安全关键/嵌入式开发打下坚实基础
 
 ### Level 1 评估
-
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
->
-> **[来源: Rust Official Docs]**
 
 - **理论考试**: 50道选择题 (80%通过)
 - **编程作业**: 实现命令行工具

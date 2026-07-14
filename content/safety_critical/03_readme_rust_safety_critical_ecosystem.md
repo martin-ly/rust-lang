@@ -37,7 +37,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [10_rust_ecosystem_mind_map.md](01_mind_maps/02_rust_ecosystem_mind_map.md) (16 KB)
+**文档**: [02_rust_ecosystem_mind_map.md](01_mind_maps/02_rust_ecosystem_mind_map.md) (16 KB)
 
 **内容**: Rust生态系统8大领域全景思维导图
 
@@ -58,7 +58,12 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [10_rust_multi_dimensional_matrix.md](02_matrices/02_rust_multi_dimensional_matrix.md) (10 KB)
+**文档**: [02_rust_multi_dimensional_matrix.md](02_matrices/02_rust_multi_dimensional_matrix.md) (10 KB)
+
+> 同目录还有：
+> - [`01_comprehensive_language_comparison_matrix.md`](02_matrices/01_comprehensive_language_comparison_matrix.md) — 综合语言对比
+> - [`03_rust_ownership_memory_model_matrix.md`](02_matrices/03_rust_ownership_memory_model_matrix.md) — 所有权与内存模型
+> - [`04_toolchain_evaluation_matrix.md`](02_matrices/04_toolchain_evaluation_matrix.md) — 工具链评估
 
 **内容**: 8个多维概念对比矩阵
 
@@ -81,7 +86,10 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [10_rust_decision_trees.md](03_decision_trees/01_rust_decision_trees.md) (26 KB)
+**文档**: [01_rust_decision_trees.md](03_decision_trees/01_rust_decision_trees.md) (26 KB)
+
+> 同目录还有：
+> - [`02_safety_integrity_level_selection_guide.md`](03_decision_trees/02_safety_integrity_level_selection_guide.md) — ASIL/SIL 选择指南
 
 **内容**: 4个结构化决策框架
 
@@ -100,7 +108,10 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [10_rust_axiomatic_reasoning_trees.md](04_axiomatic_reasoning/02_rust_axiomatic_reasoning_trees.md) (32 KB)
+**文档**: [02_rust_axiomatic_reasoning_trees.md](04_axiomatic_reasoning/02_rust_axiomatic_reasoning_trees.md) (32 KB)
+
+> 同目录还有：
+> - [`01_formal_verification_practical_guide.md`](04_axiomatic_reasoning/01_formal_verification_practical_guide.md) — Miri/Kani/Verus 实战
 
 **内容**: 形式化公理定理证明系统
 
@@ -122,7 +133,10 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [10_comprehensive_recommendations_and_opinions.md](05_strategic_guidance/02_comprehensive_recommendations_and_opinions.md) (14 KB)
+**文档**: [02_comprehensive_recommendations_and_opinions.md](05_strategic_guidance/02_comprehensive_recommendations_and_opinions.md) (14 KB)
+
+> 同目录还有：
+> - [`01_adoption_strategy_and_roi_analysis.md`](05_strategic_guidance/01_adoption_strategy_and_roi_analysis.md) — 采用策略与 ROI 分析
 
 **内容**: 全方位意见建议
 
@@ -142,7 +156,12 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [10_sustainable_roadmap_and_plans.md](06_roadmaps/03_sustainable_roadmap_and_plans.md) (15 KB)
+**文档**: [03_sustainable_roadmap_and_plans.md](06_roadmaps/03_sustainable_roadmap_and_plans.md) (15 KB)
+
+> 同目录还有：
+> - [`01_education_and_training_roadmap.md`](06_roadmaps/01_education_and_training_roadmap.md) — 教育培训路线图
+> - [`02_rust_2026_2030_roadmap_forecast.md`](06_roadmaps/02_rust_2026_2030_roadmap_forecast.md) — 2026-2030 技术预测
+> - [`04_technology_watch_and_emerging_trends.md`](06_roadmaps/04_technology_watch_and_emerging_trends.md) — 技术观察与新兴趋势
 
 **内容**: 可持续推进计划
 
@@ -166,7 +185,7 @@
 
 > **[来源: Wikipedia - Concurrency]**
 
-**文档**: [10_case_study_01_ferrocene_certification.md](07_case_studies/01_case_study_01_ferrocene_certification.md)
+**文档**: [01_case_study_01_ferrocene_certification.md](07_case_studies/01_case_study_01_ferrocene_certification.md)
 
 - TÜV SÜD认证工具链
 - ISO 26262 ASIL D / IEC 61508 SIL 4
@@ -177,7 +196,7 @@
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-**文档**: [10_case_study_02_nasa_cfs_rust.md](07_case_studies/02_case_study_02_nasa_cfs_rust.md)
+**文档**: [02_case_study_02_nasa_cfs_rust.md](07_case_studies/02_case_study_02_nasa_cfs_rust.md)
 
 - NASA核心飞行系统
 - Rust与C集成模式
@@ -188,7 +207,12 @@
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-**文档**: [10_case_study_03_automotive_ecus.md](07_case_studies/03_case_study_03_automotive_ecus.md)
+**文档**: [03_case_study_03_automotive_ecus.md](07_case_studies/03_case_study_03_automotive_ecus.md)
+
+> 同目录还有：
+> - [`04_case_study_04_medical_devices.md`](07_case_studies/04_case_study_04_medical_devices.md) — 医疗设备 (IEC 62304)
+> - [`05_case_study_05_railway_signaling.md`](07_case_studies/05_case_study_05_railway_signaling.md) — 铁路信号 (EN 50128/50129)
+> - [`06_case_study_06_autonomous_driving.md`](07_case_studies/06_case_study_06_autonomous_driving.md) — 自动驾驶感知
 
 - 汽车电子控制单元
 - AUTOSAR集成方案
@@ -203,7 +227,15 @@
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-**文档**: [10_rust_safety_critical_training_program.md](08_training/05_rust_safety_critical_training_program.md) (10 KB)
+**文档**: [05_rust_safety_critical_training_program.md](08_training/05_rust_safety_critical_training_program.md) (10 KB)
+
+> **AGENTS.md 规范**: Level 1 (Rust 基础) 已链接至 `concept/` 权威页，本文件不再重复通用概念推导。
+
+> 同目录还有：
+> - [`01_assessment_and_certification.md`](08_training/01_assessment_and_certification.md) — 评估与认证体系
+> - [`02_certification_prep_guide.md`](08_training/02_certification_prep_guide.md) — 认证备考指南
+> - [`03_hands_on_lab_exercises.md`](08_training/03_hands_on_lab_exercises.md) — 动手实验
+> - [`04_interactive_learning_resources.md`](08_training/04_interactive_learning_resources.md) — 交互式学习资源
 
 **内容**: 8周全级别培训计划
 
@@ -226,7 +258,7 @@
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-**文档**: [10_quick_reference_card.md](09_reference/12_quick_reference_card.md)
+**文档**: [12_quick_reference_card.md](09_reference/12_quick_reference_card.md)
 
 一页纸速查卡，包含：
 
@@ -241,13 +273,13 @@
 
 #### 对齐完成报告 (17 KB)
 
-**文档**: [10_comprehensive_international_alignment_completion_report.md](09_reference/04_comprehensive_international_alignment_completion_report.md)
+**文档**: [04_comprehensive_international_alignment_completion_report.md](09_reference/04_comprehensive_international_alignment_completion_report.md)
 
 国际化对齐工作总结
 
 #### FAQ与故障排除 (11 KB)
 
-**文档**: [10_faq_and_troubleshooting.md](09_reference/06_faq_and_troubleshooting.md)
+**文档**: [06_faq_and_troubleshooting.md](09_reference/06_faq_and_troubleshooting.md)
 
 常见问题解答和故障排除指南
 
@@ -259,7 +291,7 @@
 
 #### 术语表与定义 (9 KB)
 
-**文档**: [10_glossary_and_definitions.md](09_reference/08_glossary_and_definitions.md)
+**文档**: [08_glossary_and_definitions.md](09_reference/08_glossary_and_definitions.md)
 
 完整术语表和中英文对照
 
@@ -269,7 +301,7 @@
 
 #### 检查清单与模板 (11 KB)
 
-**文档**: [10_checklists_and_templates.md](09_reference/02_checklists_and_templates.md)
+**文档**: [02_checklists_and_templates.md](09_reference/02_checklists_and_templates.md)
 
 实用检查清单和文档模板
 
@@ -281,7 +313,21 @@
 
 #### 工具配置指南 (17 KB)
 
-**文档**: [10_tools_configuration_guide.md](09_reference/18_tools_configuration_guide.md)
+**文档**: [18_tools_configuration_guide.md](09_reference/18_tools_configuration_guide.md)
+
+> 同目录还有：
+> - [`01_api_design_guidelines.md`](09_reference/01_api_design_guidelines.md) — API 设计指南
+> - [`05_deployment_and_maintenance_guide.md`](09_reference/05_deployment_and_maintenance_guide.md) — 部署与维护
+> - [`07_ffi_integration_guide.md`](09_reference/07_ffi_integration_guide.md) — FFI 集成
+> - [`09_metrics_and_measurement_guide.md`](09_reference/09_metrics_and_measurement_guide.md) — 度量与测量
+> - [`10_performance_optimization_guide.md`](09_reference/10_performance_optimization_guide.md) — 性能优化 `[stub]`
+> - [`11_project_templates.md`](09_reference/11_project_templates.md) — 项目模板
+> - [`13_rust_safety_critical_coding_guidelines.md`](09_reference/13_rust_safety_critical_coding_guidelines.md) — 编码规范
+> - [`14_safety_critical_checklists.md`](09_reference/14_safety_critical_checklists.md) — 开发检查表
+> - [`15_security_audit_guide.md`](09_reference/15_security_audit_guide.md) — 安全审计
+> - [`16_supply_chain_security_guide.md`](09_reference/16_supply_chain_security_guide.md) — 供应链安全
+> - [`17_toolchain_setup_guide.md`](09_reference/17_toolchain_setup_guide.md) — 工具链配置
+> - [`19_troubleshooting_and_debugging_guide.md`](09_reference/19_troubleshooting_and_debugging_guide.md) — 故障排除 `[stub]`（通用排错见 `concept/`）
 
 完整工具链配置指南
 
@@ -299,7 +345,13 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-**文档**: [10_misra_c_2025_addendum_6_guide.md](10_standards/04_misra_c_2025_addendum_6_guide.md) (11 KB)
+**文档**: [04_misra_c_2025_addendum_6_guide.md](10_standards/04_misra_c_2025_addendum_6_guide.md) (11 KB)
+
+> 同目录还有：
+> - [`01_do_178c_rust_compliance_pathway.md`](10_standards/01_do_178c_rust_compliance_pathway.md) — DO-178C 合规路径
+> - [`02_iec_61508_rust_implementation_guide.md`](10_standards/02_iec_61508_rust_implementation_guide.md) — IEC 61508 实施指南
+> - [`03_iso_26262_rust_implementation_guide.md`](10_standards/03_iso_26262_rust_implementation_guide.md) — ISO 26262 实施指南
+> - [`05_regulatory_landscape_and_approvals.md`](10_standards/05_regulatory_landscape_and_approvals.md) — 监管环境与认证审批
 
 **内容**: MISRA C:2025 Addendum 6详解
 
@@ -375,14 +427,15 @@
 
 ```
 总计:
-├── 文档数量: 19份核心文档
-├── 总大小: 275KB
+├── 文档数量: 45份文档
+├── 总大小: ~700KB
 ├── 目录数: 10个分类目录
-├── 引用来源: 26处国际权威引用
+├── 引用来源: 50+ 处国际权威引用
 ├── 思维表征: 4种创新方式
-├── 案例研究: 3个详细案例
-├── 培训模块: 20个完整模块
-└── 完成时间: 2026-03-18
+├── 案例研究: 6个详细案例
+├── 培训模块: 20个完整模块（Level 1 链接至 concept/）
+├── 已规范化为 stub: 2 份（性能优化、故障排除）
+└── 最后更新: 2026-07-15
 ```
 
 ---
@@ -424,6 +477,7 @@
 | 版本 | 日期 | 更新内容 |
 |------|------|----------|
 | 1.0 | 2026-03-18 | 初始发布，100%完成，275KB内容 |
+| 1.1 | 2026-07-15 | 按 AGENTS.md §2 完成 canonical 清理：故障排除与调试指南转为 stub，培训计划 Level 1 链接至 concept/，更新目录与链接 |
 
 ---
 
@@ -432,9 +486,9 @@
 > **[来源: [crates.io](https://crates.io/)]**
 
 **维护团队**: Rust安全关键系统工作组
-**最后更新**: 2026-03-18
-**下次审查**: 2026-04-18
-**完成状态**: ✅ 100%
+**最后更新**: 2026-07-15
+**下次审查**: 2026-08-15
+**完成状态**: ✅ 100%（已通过 AGENTS.md canonical 清理）
 
 ---
 

@@ -155,7 +155,7 @@ s.as_bytes().windows(4).any(|w| ...)
 
 **Tree Borrows论文** (PLDI 2025 Distinguished Paper Award) [^20]：
 
-```
+```text
 Neven Villani, Johannes Hostert, Derek Dreyer, and Ralf Jung.
 "Tree Borrows."
 Proc. ACM Program. Lang. 9, PLDI, Article 188 (June 2025), 24 pages.

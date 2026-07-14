@@ -2,7 +2,6 @@
 
 > **权威来源**: 本文件为 `docs/` 目录索引/指南，通用 Rust 概念解释请见 [`concept/`](../../concept/)。根据 AGENTS.md §3.4，`docs/` 不重复 `concept/` 中的通用概念解释。
 
-
 > **EN**: Guides Index
 > **Summary**: 深度指南 Guides Index.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
