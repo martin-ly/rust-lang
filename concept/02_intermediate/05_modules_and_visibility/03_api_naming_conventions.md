@@ -54,6 +54,7 @@
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
 
 ---
 
@@ -511,4 +512,42 @@ mindmap
       5.1 to_
       5.2 as_
       5.3 into_
+```
+
+---
+
+## ⚠️ 反例与陷阱
+
+> 陷阱：为同一对类型同时实现 `From` 和 `Into`，会与标准库的全局 blanket impl 冲突。
+> 命名约定建议优先实现 `From`/`TryFrom`，让 `Into` 自动获得。
+> 下面代码在 rustc 1.97 --edition 2024 下触发 `E0119`。
+
+```rust,compile_fail,E0119
+struct Wrapper(String);
+struct Raw(&'static str);
+
+impl From<Raw> for Wrapper {
+    fn from(r: Raw) -> Self { Wrapper(r.0.into()) }
+}
+
+impl Into<Wrapper> for Raw {
+    fn into(self) -> Wrapper { Wrapper(self.0.into()) }
+}
+
+fn main() {}
+```
+
+**修正对照**（只保留 `From`）：
+
+```rust
+struct Wrapper(String);
+struct Raw(&'static str);
+
+impl From<Raw> for Wrapper {
+    fn from(r: Raw) -> Self { Wrapper(r.0.into()) }
+}
+
+fn main() {
+    let _: Wrapper = Raw("hi").into();
+}
 ```

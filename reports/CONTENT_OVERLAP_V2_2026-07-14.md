@@ -1,7 +1,7 @@
 # 内容重叠检测 v2（语义质量门 P0-3）
 
 **日期**: 2026-07-14  **扫描**: 1948 文件（concept/knowledge/docs/content/crates，排除 archive/book/target）
-**纳入索引**: 1453（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 582465
+**纳入索引**: 1453（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 579679
 **阈值**: 0.5  **命中对**: 568（同目录 558 / 跨目录 10）
 
 > 本版修正旧版『0 重复』假象：全文关键词（非前50）、纳入 crates、不豁免假 stub、同目录也检、去掉标题 x1.5 主导。
@@ -19,12 +19,12 @@
 | 0.846 | 0.846 | 0.5 | 8 | Y | `crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md`(22) | `crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md`(22) |
 | 0.846 | 0.846 | 0.667 | 6 | Y | `crates/c01_ownership_borrow_scope/docs/tier_03_references/03_lifetimes_reference.md`(24) | `crates/c01_ownership_borrow_scope/docs/tier_04_advanced/01_advanced_lifetime_patterns.md`(24) |
 | 0.821 | 0.821 | 0.333 | 9 | Y | `docs/05_practice/06_project_05_text_statistics.md`(108) | `docs/05_practice/14_project_13_database_engine.md`(108) |
-| 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md`(22) | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/00_master_index.md`(22) | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/00_master_index.md`(22) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md`(22) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md`(22) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md`(22) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(22) |
+| 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md`(22) | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md`(22) |
 | 0.818 | 0.818 | 0.5 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/rust_194_updates/README.md`(22) | `crates/c06_async/docs/rust_194_updates/README.md`(22) |
 | 0.818 | 0.818 | 0.5 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/rust_194_updates/README.md`(22) | `crates/c10_networks/docs/rust_194_updates/README.md`(21) |
 | 0.818 | 0.818 | 0.5 | 5 | Y | `crates/c03_control_fn/docs/rust_194_updates/README.md`(21) | `crates/c04_generic/docs/rust_194_updates/README.md`(22) |
@@ -53,10 +53,10 @@
 | 0.818 | 0.818 | 0.333 | 5 | Y | `crates/c02_type_system/docs/tier_01_foundations/02_navigation.md`(22) | `crates/c02_type_system/docs/tier_01_foundations/04_faq.md`(22) |
 | 0.806 | 0.806 | 0.2 | 11 | Y | `docs/05_practice/08_project_07_chat_server.md`(115) | `docs/05_practice/12_project_11_web_server.md`(113) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md`(15) | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md`(15) |
-| 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md`(15) | `crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md`(15) | `crates/c01_ownership_borrow_scope/docs/15_visualization_index.md`(15) |
-| 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md`(15) | `crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md`(15) |
+| 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md`(15) | `crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md`(15) | `crates/c01_ownership_borrow_scope/docs/15_visualization_index.md`(15) |
+| 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md`(15) | `crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c03_control_fn/docs/01_concept_relationship_network.md`(15) | `crates/c03_control_fn/docs/05_mind_map.md`(15) |
 | 0.8 | 0.8 | 0.333 | 5 | Y | `crates/c07_process/docs/tier_03_references/05_performance_optimization_reference.md`(15) | `crates/c02_type_system/docs/tier_03_references/06_performance_optimization_reference.md`(15) |
 | 0.794 | 0.794 | 0.0 | 12 | Y | `knowledge/04_expert/README.md`(114) | `knowledge/06_ecosystem/README.md`(140) |

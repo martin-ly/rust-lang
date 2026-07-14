@@ -18,7 +18,7 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| 声明宏 `macro_rules!` | [`concept/02_intermediate/06_macros_and_metaprogramming/04_macros.md`](../../../concept/02_intermediate/06_macros_and_metaprogramming/04_macros.md) |
+| 声明宏 `macro_rules!` | [`concept/02_intermediate/06_macros_and_metaprogramming/04_macros.md`](../../../concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md) |
 | 过程宏（derive / attribute / function-like） | [`concept/03_advanced/03_proc_macros/02_proc_macro.md`](../../../concept/03_advanced/03_proc_macros/02_proc_macro.md) |
 | 宏卫生性与 TokenStream | 同上 |
 | 速查练习 | [`concept/SUMMARY.md`](../../../concept/SUMMARY.md) |

@@ -183,3 +183,25 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+---
+
+## ⚠️ 反例与陷阱
+
+> 陷阱：Rust 的 `const` 与 `static` item 必须显式写出类型，不能指望用 `_` 占位符推断。
+> 下面代码在 rustc 1.97 --edition 2024 下触发 `E0121`。
+
+```rust,compile_fail,E0121
+const VALUE: _ = 42;
+
+fn main() {}
+```
+
+**修正对照**：
+
+```rust
+const VALUE: i32 = 42;
+
+fn main() {
+    assert_eq!(VALUE, 42);
+}
+```

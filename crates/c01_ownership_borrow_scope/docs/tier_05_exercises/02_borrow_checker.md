@@ -4,7 +4,7 @@
 # C01 所有权练习 - 借用检查器
 
 > **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
-> [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)。
+> [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)。
 
 本文件原为对应 crate 的通用概念指南。根据 [AGENTS.md](../../../../../AGENTS.md) §6.4 治理规则，
 通用 Rust 概念解释已迁移至 `concept/`，此处仅保留索引与 canonical 链接。
@@ -14,6 +14,6 @@
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| Ownership | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
-| Borrowing | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
-| Lifetimes | [concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md](../../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
+| Ownership | [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
+| Borrowing | [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) |
+| Lifetimes | [concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md](../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |

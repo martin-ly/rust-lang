@@ -202,3 +202,28 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+---
+
+## ⚠️ 反例与陷阱
+
+> 陷阱：`#[derive]` 只能用于 struct、enum、union，贴到函数等不支持 derive 的 item 上会产生错误。
+> 下面代码在 rustc 1.97 --edition 2024 下触发 `E0774`。
+
+```rust,compile_fail,E0774
+#[derive(Debug)]
+fn foo() {}
+
+fn main() {}
+```
+
+**修正对照**：
+
+```rust
+#[derive(Debug)]
+struct Point(i32, i32);
+
+fn main() {
+    let p = Point(1, 2);
+    println!("{:?}", p);
+}
+```

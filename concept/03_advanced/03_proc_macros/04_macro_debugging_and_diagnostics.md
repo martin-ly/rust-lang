@@ -60,6 +60,7 @@
   - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
 
 ---
 
@@ -403,4 +404,35 @@ mindmap
       5.2 RUSTC_LOG
       5.3 测量宏展开耗时
     六、编译器回调高级
+```
+
+---
+
+## ⚠️ 反例与陷阱
+
+> 陷阱：声明宏内部直接引用调用点变量，会因卫生性导致“找不到变量”的错误。
+> 下面代码在 rustc 1.97 --edition 2024 下触发 `E0425`。
+
+```rust,compile_fail,E0425
+macro_rules! use_x {
+    () => { x + 1 };
+}
+
+fn main() {
+    let x = 1;
+    let _ = use_x!();
+}
+```
+
+**修正对照**（把值作为参数传入）：
+
+```rust
+macro_rules! use_x {
+    ($e:expr) => { $e + 1 };
+}
+
+fn main() {
+    let x = 1;
+    let _ = use_x!(x);
+}
 ```

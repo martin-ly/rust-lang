@@ -1,0 +1,2601 @@
+{
+  "date": "2026-07-14",
+  "stats": {
+    "total_md": 845,
+    "docs_total": 576,
+    "docs_kinds": {
+      "stub": 509,
+      "content": 64,
+      "code_listing": 1,
+      "index_readme": 2
+    },
+    "docs_per_crate": {
+      "c01_ownership_borrow_scope": {
+        "stub": 52,
+        "content": 5
+      },
+      "c02_type_system": {
+        "stub": 35,
+        "content": 4
+      },
+      "c03_control_fn": {
+        "stub": 39,
+        "content": 4,
+        "code_listing": 1
+      },
+      "c04_generic": {
+        "stub": 34,
+        "content": 2
+      },
+      "c05_threads": {
+        "stub": 37,
+        "content": 4
+      },
+      "c06_async": {
+        "stub": 40,
+        "content": 4
+      },
+      "c07_process": {
+        "stub": 50,
+        "content": 13
+      },
+      "c08_algorithms": {
+        "stub": 33,
+        "content": 9
+      },
+      "c09_design_pattern": {
+        "stub": 43,
+        "content": 4
+      },
+      "c10_networks": {
+        "stub": 36,
+        "content": 10
+      },
+      "c11_macro_system_proc": {
+        "stub": 33,
+        "content": 1
+      },
+      "c12_wasm": {
+        "stub": 56,
+        "content": 3
+      },
+      "c13_embedded": {
+        "stub": 6
+      },
+      "c14_semantic_web": {
+        "stub": 1
+      },
+      "c15_verification_tools": {
+        "index_readme": 1
+      },
+      "c16_gui": {
+        "index_readme": 1
+      },
+      "c17_resolver_v3_public_demo": {
+        "content": 1
+      },
+      "common": {
+        "stub": 7
+      },
+      "integration_tests": {
+        "stub": 7
+      }
+    },
+    "nondocs_total": 269,
+    "nondocs_cats": {
+      "CHANGELOG": {
+        "count": 6,
+        "bytes": 47389,
+        "note": "版本变更日志"
+      },
+      "CONTRIBUTING": {
+        "count": 6,
+        "bytes": 69405,
+        "note": "贡献指南"
+      },
+      "examples/README": {
+        "count": 12,
+        "bytes": 81811,
+        "note": "examples 目录说明"
+      },
+      "README": {
+        "count": 25,
+        "bytes": 250145,
+        "note": "crate 根 README"
+      },
+      "reports": {
+        "count": 128,
+        "bytes": 1581287,
+        "note": "crate 历史报告"
+      },
+      "src/README": {
+        "count": 10,
+        "bytes": 24386,
+        "note": "src 子目录说明"
+      },
+      "tests/README": {
+        "count": 10,
+        "bytes": 23982,
+        "note": "tests 目录说明"
+      },
+      "other": {
+        "count": 71,
+        "bytes": 785571,
+        "note": "其他根级文档/指南"
+      },
+      "INDEX": {
+        "count": 1,
+        "bytes": 18732,
+        "note": "crate 根索引"
+      }
+    }
+  },
+  "stub_quality": {
+    "stubs": 509,
+    "no_canonical": [],
+    "dead_canonical": []
+  },
+  "stub_overlap_sample": [
+    "crates/c02_type_system/docs/tier_02_guides/01_basic_types_guide.md",
+    "crates/c13_embedded/docs/README.md",
+    "crates/c02_type_system/docs/tier_03_references/01_type_conversions_reference.md",
+    "crates/c05_threads/docs/03_message_passing.md",
+    "crates/c05_threads/docs/06_synchronization_primitives.md",
+    "crates/c02_type_system/docs/tier_03_references/02_type_system_specification.md",
+    "crates/c01_ownership_borrow_scope/docs/tier_02_guides/01_ownership_quick_start.md",
+    "crates/c13_embedded/docs/04_one_page_summary.md",
+    "crates/c03_control_fn/docs/tier_02_guides/03_functions_guide.md",
+    "crates/c10_networks/docs/09_rust_190_examples_part3_advanced_protocols.md",
+    "crates/c02_type_system/docs/tier_02_guides/06_trait_practice_guide.md",
+    "crates/c01_ownership_borrow_scope/docs/tier_02_guides/02_ownership_quick_start_comprehensive.md",
+    "crates/c01_ownership_borrow_scope/docs/tier_02_guides/06_smart_pointers_practice.md",
+    "crates/c01_ownership_borrow_scope/docs/02_knowledge_graph.md",
+    "crates/c08_algorithms/docs/06_one_page_summary.md",
+    "crates/c01_ownership_borrow_scope/docs/tier_03_references/01_ownership_rules_reference.md",
+    "crates/c02_type_system/docs/tier_02_guides/04_references_and_borrowing_practice.md",
+    "crates/c02_type_system/docs/tier_02_guides/02_ownership_practice_guide.md",
+    "crates/c05_threads/docs/00_master_index.md",
+    "crates/c10_networks/docs/tier_02_guides/05_performance_and_security_optimization.md",
+    "crates/c09_design_pattern/docs/20_rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md",
+    "crates/c08_algorithms/docs/07_rust_190_comprehensive_mindmap.md",
+    "crates/c05_threads/docs/11_parallel_algorithms.md",
+    "crates/c04_generic/docs/tier_02_guides/01_generics_basics.md",
+    "crates/c08_algorithms/docs/tier_02_guides/03_algorithm_complexity_analysis.md",
+    "crates/c04_generic/docs/tier_02_guides/05_practical_patterns.md",
+    "crates/c03_control_fn/docs/tier_02_guides/04_pattern_matching_guide.md",
+    "crates/c07_process/docs/21_rust_190_comprehensive_mindmap.md",
+    "crates/c08_algorithms/docs/tier_02_guides/01_algorithms_quick_start.md",
+    "crates/c01_ownership_borrow_scope/docs/tier_02_guides/04_lifetimes_practice.md"
+  ],
+  "stub_overlap_suspected": [],
+  "expansion_candidates": [
+    {
+      "path": "crates/c05_threads/docs/03_message_passing.md",
+      "wc": 507,
+      "kind": "stub"
+    }
+  ],
+  "nondocs_recommendations": [
+    {
+      "path": "crates/c01_ownership_borrow_scope/CHANGELOG.md",
+      "category": "CHANGELOG",
+      "size": 11741,
+      "wc": 2526,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.022
+    },
+    {
+      "path": "crates/c01_ownership_borrow_scope/CONTRIBUTING.md",
+      "category": "CONTRIBUTING",
+      "size": 15830,
+      "wc": 3350,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c01_ownership_borrow_scope/examples/README.md",
+      "category": "examples/README",
+      "size": 8618,
+      "wc": 1612,
+      "recommendation": "keep",
+      "nearest_concept": "concept/03_advanced/01_async/04_future_and_executor_mechanisms.md",
+      "concept_sim": 0.024
+    },
+    {
+      "path": "crates/c01_ownership_borrow_scope/README.md",
+      "category": "README",
+      "size": 4307,
+      "wc": 789,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.026
+    },
+    {
+      "path": "crates/c01_ownership_borrow_scope/reports/RUST_189_FEATURES_ANALYSIS.md",
+      "category": "reports",
+      "size": 14912,
+      "wc": 2975,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_90_stabilized.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c01_ownership_borrow_scope/reports/RUST_190_COMPREHENSIVE_PROGRESS_REPORT.md",
+      "category": "reports",
+      "size": 16345,
+      "wc": 3122,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c01_ownership_borrow_scope/reports/RUST_190_ENHANCEMENT_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 11867,
+      "wc": 2584,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c01_ownership_borrow_scope/reports/RUST_190_LATEST_FEATURES_ENHANCEMENT_REPORT.md",
+      "category": "reports",
+      "size": 16947,
+      "wc": 3319,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_91_stabilized.md",
+      "concept_sim": 0.007
+    },
+    {
+      "path": "crates/c01_ownership_borrow_scope/reports/VISUALIZATION_ENHANCEMENT_SUMMARY.md",
+      "category": "reports",
+      "size": 13576,
+      "wc": 3034,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
+      "concept_sim": 0.012
+    },
+    {
+      "path": "crates/c01_ownership_borrow_scope/src/archive/README.md",
+      "category": "src/README",
+      "size": 1048,
+      "wc": 228,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c01_ownership_borrow_scope/tests/README.md",
+      "category": "tests/README",
+      "size": 669,
+      "wc": 126,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c02_type_system/api_documentation.md",
+      "category": "other",
+      "size": 19529,
+      "wc": 2884,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.018
+    },
+    {
+      "path": "crates/c02_type_system/best_practices_guide.md",
+      "category": "other",
+      "size": 24528,
+      "wc": 3877,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/01_foundation/10_testing_basics/02_useful_development_tools.md",
+      "concept_sim": 0.022
+    },
+    {
+      "path": "crates/c02_type_system/cargo_package_management_guide.md",
+      "category": "other",
+      "size": 13636,
+      "wc": 2445,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c02_type_system/CHANGELOG.md",
+      "category": "CHANGELOG",
+      "size": 13126,
+      "wc": 2636,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c02_type_system/CONTRIBUTING.md",
+      "category": "CONTRIBUTING",
+      "size": 19920,
+      "wc": 4205,
+      "recommendation": "keep",
+      "nearest_concept": "concept/01_foundation/00_start/00_start.md",
+      "concept_sim": 0.01
+    },
+    {
+      "path": "crates/c02_type_system/dispatch_mechanisms_supplement_2025_10_19.md",
+      "category": "other",
+      "size": 13418,
+      "wc": 2855,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/03_advanced/02_unsafe/00_before_formal.md",
+      "concept_sim": 0.017
+    },
+    {
+      "path": "crates/c02_type_system/examples/README.md",
+      "category": "examples/README",
+      "size": 5711,
+      "wc": 750,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.031
+    },
+    {
+      "path": "crates/c02_type_system/examples_and_use_cases.md",
+      "category": "other",
+      "size": 30617,
+      "wc": 4273,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md",
+      "concept_sim": 0.007
+    },
+    {
+      "path": "crates/c02_type_system/final_delivery_report_2025_10_22.md",
+      "category": "other",
+      "size": 25149,
+      "wc": 4460,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c02_type_system/project_completion_summary_2025_10_22.md",
+      "category": "other",
+      "size": 15143,
+      "wc": 2432,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c02_type_system/project_status_2025_10_22.md",
+      "category": "other",
+      "size": 4755,
+      "wc": 853,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c02_type_system/README.md",
+      "category": "README",
+      "size": 4671,
+      "wc": 764,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.026
+    },
+    {
+      "path": "crates/c02_type_system/readme_rust_189.md",
+      "category": "other",
+      "size": 13052,
+      "wc": 2619,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/03_advanced/08_process_ipc/08_process_performance_engineering.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c02_type_system/readme_rust_190.md",
+      "category": "other",
+      "size": 38560,
+      "wc": 6690,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/03_advanced/08_process_ipc/08_process_performance_engineering.md",
+      "concept_sim": 0.007
+    },
+    {
+      "path": "crates/c02_type_system/reports/C02_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_20.md",
+      "category": "reports",
+      "size": 14506,
+      "wc": 3295,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.039
+    },
+    {
+      "path": "crates/c02_type_system/reports/C02_EXTENSION_ENHANCEMENT_REPORT_2025_10_20.md",
+      "category": "reports",
+      "size": 11502,
+      "wc": 2491,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/00_meta/01_terminology/01_terminology_glossary.md",
+      "concept_sim": 0.021
+    },
+    {
+      "path": "crates/c02_type_system/reports/CARGO_DOCUMENTATION_SYSTEM_REPORT.md",
+      "category": "reports",
+      "size": 13948,
+      "wc": 2947,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.016
+    },
+    {
+      "path": "crates/c02_type_system/reports/CARGO_SUPPLEMENT_REPORT.md",
+      "category": "reports",
+      "size": 8112,
+      "wc": 1644,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c02_type_system/reports/ENHANCEMENT_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 11247,
+      "wc": 2636,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.016
+    },
+    {
+      "path": "crates/c02_type_system/reports/FINAL_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 6537,
+      "wc": 1543,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/03_advanced/03_proc_macros/11_conditional_compilation.md",
+      "concept_sim": 0.022
+    },
+    {
+      "path": "crates/c02_type_system/reports/MULTI_TASK_PROGRESSION_REPORT.md",
+      "category": "reports",
+      "size": 14736,
+      "wc": 3392,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c02_type_system/reports/PROJECT_COMPLETION_SUMMARY.md",
+      "category": "reports",
+      "size": 8959,
+      "wc": 2119,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.017
+    },
+    {
+      "path": "crates/c02_type_system/reports/REPAIR_SUMMARY.md",
+      "category": "reports",
+      "size": 5611,
+      "wc": 1342,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c02_type_system/reports/RUST_190_ENHANCEMENT_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 12493,
+      "wc": 2536,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/00_meta/01_terminology/01_terminology_glossary.md",
+      "concept_sim": 0.017
+    },
+    {
+      "path": "crates/c02_type_system/reports/RUST_FEATURES_DOCUMENTATION_ORGANIZATION_REPORT.md",
+      "category": "reports",
+      "size": 4488,
+      "wc": 871,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c02_type_system/rust_190_feature_inventory_report.md",
+      "category": "other",
+      "size": 5545,
+      "wc": 1050,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.024
+    },
+    {
+      "path": "crates/c02_type_system/rust_192_completion_report.md",
+      "category": "other",
+      "size": 6452,
+      "wc": 1310,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.036
+    },
+    {
+      "path": "crates/c02_type_system/src/archive/README.md",
+      "category": "src/README",
+      "size": 1242,
+      "wc": 256,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c02_type_system/src/README.md",
+      "category": "src/README",
+      "size": 1117,
+      "wc": 212,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c02_type_system/tests/README.md",
+      "category": "tests/README",
+      "size": 647,
+      "wc": 126,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c02_type_system/tutorial_guide.md",
+      "category": "other",
+      "size": 2916,
+      "wc": 446,
+      "recommendation": "review",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c03_control_fn/examples/README.md",
+      "category": "examples/README",
+      "size": 2031,
+      "wc": 354,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.036
+    },
+    {
+      "path": "crates/c03_control_fn/README.md",
+      "category": "README",
+      "size": 5069,
+      "wc": 857,
+      "recommendation": "keep",
+      "nearest_concept": "concept/04_formal/05_rustc_internals/13_statements_and_expressions_reference.md",
+      "concept_sim": 0.03
+    },
+    {
+      "path": "crates/c03_control_fn/reports/BASIC_SYNTAX_ENHANCEMENT_SUMMARY.md",
+      "category": "reports",
+      "size": 9293,
+      "wc": 2226,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.016
+    },
+    {
+      "path": "crates/c03_control_fn/reports/C03_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_20.md",
+      "category": "reports",
+      "size": 9104,
+      "wc": 1998,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.047
+    },
+    {
+      "path": "crates/c03_control_fn/reports/FINAL_PROJECT_COMPLETION_SUMMARY.md",
+      "category": "reports",
+      "size": 19218,
+      "wc": 4290,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c03_control_fn/reports/PROJECT_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 13637,
+      "wc": 3071,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c03_control_fn/reports/RUST_190_COMPLETE_FEATURES_REPORT.md",
+      "category": "reports",
+      "size": 13824,
+      "wc": 2667,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.017
+    },
+    {
+      "path": "crates/c03_control_fn/reports/RUST_190_COMPREHENSIVE_ADVANCEMENT_REPORT.md",
+      "category": "reports",
+      "size": 10498,
+      "wc": 2334,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.017
+    },
+    {
+      "path": "crates/c03_control_fn/reports/RUST_190_ENHANCEMENT_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 17836,
+      "wc": 3902,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_91_stabilized.md",
+      "concept_sim": 0.006
+    },
+    {
+      "path": "crates/c03_control_fn/reports/RUST_190_FINAL_PROJECT_COMPLETION_SUMMARY.md",
+      "category": "reports",
+      "size": 8488,
+      "wc": 1906,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c03_control_fn/rust_192_completion_summary.md",
+      "category": "other",
+      "size": 9327,
+      "wc": 1563,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/03_advanced/03_proc_macros/11_conditional_compilation.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c03_control_fn/src/archive/README.md",
+      "category": "src/README",
+      "size": 1601,
+      "wc": 302,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c03_control_fn/tests/README.md",
+      "category": "tests/README",
+      "size": 644,
+      "wc": 126,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c04_generic/badges.md",
+      "category": "other",
+      "size": 4393,
+      "wc": 846,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c04_generic/CHANGELOG.md",
+      "category": "CHANGELOG",
+      "size": 3033,
+      "wc": 698,
+      "recommendation": "keep",
+      "nearest_concept": "concept/sources/INDEX.md",
+      "concept_sim": 0.036
+    },
+    {
+      "path": "crates/c04_generic/config.md",
+      "category": "other",
+      "size": 3143,
+      "wc": 672,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.029
+    },
+    {
+      "path": "crates/c04_generic/CONTRIBUTING.md",
+      "category": "CONTRIBUTING",
+      "size": 3810,
+      "wc": 841,
+      "recommendation": "keep",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.021
+    },
+    {
+      "path": "crates/c04_generic/demo_script.md",
+      "category": "other",
+      "size": 10201,
+      "wc": 2224,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/06_ecosystem/00_toolchain/14_development_tools.md",
+      "concept_sim": 0.009
+    },
+    {
+      "path": "crates/c04_generic/examples/README.md",
+      "category": "examples/README",
+      "size": 9967,
+      "wc": 1677,
+      "recommendation": "keep",
+      "nearest_concept": "concept/03_advanced/01_async/04_future_and_executor_mechanisms.md",
+      "concept_sim": 0.023
+    },
+    {
+      "path": "crates/c04_generic/README.md",
+      "category": "README",
+      "size": 5561,
+      "wc": 958,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.025
+    },
+    {
+      "path": "crates/c04_generic/reports/C04_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_20.md",
+      "category": "reports",
+      "size": 8734,
+      "wc": 1911,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.047
+    },
+    {
+      "path": "crates/c04_generic/reports/DOCUMENTATION_ORGANIZATION_REPORT.md",
+      "category": "reports",
+      "size": 12199,
+      "wc": 2369,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c04_generic/reports/FINAL_ENHANCEMENT_SUMMARY.md",
+      "category": "reports",
+      "size": 9573,
+      "wc": 2305,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c04_generic/reports/FINAL_PROJECT_REPORT.md",
+      "category": "reports",
+      "size": 9587,
+      "wc": 2063,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/11_domain_applications/18_wasm_glossary.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c04_generic/reports/KNOWLEDGE_SYSTEM_COMPLETION_REPORT_2025_10_19.md",
+      "category": "reports",
+      "size": 19509,
+      "wc": 4421,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/00_meta/01_terminology/01_terminology_glossary.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c04_generic/reports/PROJECT_ACHIEVEMENT_SUMMARY.md",
+      "category": "reports",
+      "size": 12423,
+      "wc": 2567,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/11_domain_applications/18_wasm_glossary.md",
+      "concept_sim": 0.013
+    },
+    {
+      "path": "crates/c04_generic/reports/PROJECT_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 9545,
+      "wc": 2146,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c04_generic/reports/PROJECT_SUMMARY.md",
+      "category": "reports",
+      "size": 8279,
+      "wc": 1888,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/03_advanced/03_proc_macros/11_conditional_compilation.md",
+      "concept_sim": 0.019
+    },
+    {
+      "path": "crates/c04_generic/src/archive/README.md",
+      "category": "src/README",
+      "size": 1176,
+      "wc": 246,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c04_generic/tests/README.md",
+      "category": "tests/README",
+      "size": 636,
+      "wc": 127,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c05_threads/examples/README.md",
+      "category": "examples/README",
+      "size": 10338,
+      "wc": 1781,
+      "recommendation": "keep",
+      "nearest_concept": "concept/03_advanced/01_async/04_future_and_executor_mechanisms.md",
+      "concept_sim": 0.02
+    },
+    {
+      "path": "crates/c05_threads/exercises/01_thread_communication.md",
+      "category": "other",
+      "size": 4646,
+      "wc": 702,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.042
+    },
+    {
+      "path": "crates/c05_threads/README.md",
+      "category": "README",
+      "size": 27183,
+      "wc": 5570,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.016
+    },
+    {
+      "path": "crates/c05_threads/reports/C05_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_20.md",
+      "category": "reports",
+      "size": 12642,
+      "wc": 2423,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
+      "concept_sim": 0.013
+    },
+    {
+      "path": "crates/c05_threads/reports/RUST_190_FEATURES_SUMMARY.md",
+      "category": "reports",
+      "size": 8098,
+      "wc": 1623,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_91_stabilized.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c05_threads/src/archive/README.md",
+      "category": "src/README",
+      "size": 1000,
+      "wc": 219,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c05_threads/tests/README.md",
+      "category": "tests/README",
+      "size": 639,
+      "wc": 126,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/async_programming_comprehensive_review_readme_2025_10_06.md",
+      "category": "other",
+      "size": 20578,
+      "wc": 4083,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
+      "concept_sim": 0.01
+    },
+    {
+      "path": "crates/c06_async/async_theory_comprehensive_guide.md",
+      "category": "other",
+      "size": 14481,
+      "wc": 2355,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/02_intermediate/04_types_and_conversions/04_type_system_advanced.md",
+      "concept_sim": 0.011
+    },
+    {
+      "path": "crates/c06_async/community_contribution_guide.md",
+      "category": "other",
+      "size": 10165,
+      "wc": 2012,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/completion.md",
+      "category": "other",
+      "size": 3822,
+      "wc": 682,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/14_design_patterns_glossary.md",
+      "concept_sim": 0.061
+    },
+    {
+      "path": "crates/c06_async/examples/README.md",
+      "category": "examples/README",
+      "size": 1992,
+      "wc": 336,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.036
+    },
+    {
+      "path": "crates/c06_async/exercises/01_async_primitives.md",
+      "category": "other",
+      "size": 4421,
+      "wc": 647,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.042
+    },
+    {
+      "path": "crates/c06_async/final_project_status_2025.md",
+      "category": "other",
+      "size": 12514,
+      "wc": 2531,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/glommio_integration_2025_10_30.md",
+      "category": "other",
+      "size": 13446,
+      "wc": 2568,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.017
+    },
+    {
+      "path": "crates/c06_async/INDEX.md",
+      "category": "INDEX",
+      "size": 18732,
+      "wc": 2895,
+      "recommendation": "keep",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/14_design_patterns_glossary.md",
+      "concept_sim": 0.029
+    },
+    {
+      "path": "crates/c06_async/knowledge_base_update_notes_2025_10_19.md",
+      "category": "other",
+      "size": 10305,
+      "wc": 2096,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/03_advanced/06_low_level_patterns/07_rust_runtime.md",
+      "concept_sim": 0.02
+    },
+    {
+      "path": "crates/c06_async/quick_start_guide_2025.md",
+      "category": "other",
+      "size": 12361,
+      "wc": 2533,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
+      "concept_sim": 0.01
+    },
+    {
+      "path": "crates/c06_async/README.md",
+      "category": "README",
+      "size": 36263,
+      "wc": 7135,
+      "recommendation": "keep",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.011
+    },
+    {
+      "path": "crates/c06_async/readme_async_ecosystem.md",
+      "category": "other",
+      "size": 8616,
+      "wc": 1935,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.02
+    },
+    {
+      "path": "crates/c06_async/reports/ASYNC_COMPREHENSIVE_ENHANCEMENT_REPORT_2025.md",
+      "category": "reports",
+      "size": 20939,
+      "wc": 3673,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md",
+      "concept_sim": 0.008
+    },
+    {
+      "path": "crates/c06_async/reports/ASYNC_ECOSYSTEM_COMPLETION_SUMMARY.md",
+      "category": "reports",
+      "size": 9409,
+      "wc": 2257,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/ASYNC_ECOSYSTEM_COMPREHENSIVE_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 11183,
+      "wc": 2511,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/22_build_std.md",
+      "concept_sim": 0.016
+    },
+    {
+      "path": "crates/c06_async/reports/ASYNC_PROJECT_ADVANCEMENT_REPORT_2025.md",
+      "category": "reports",
+      "size": 7900,
+      "wc": 1949,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md",
+      "concept_sim": 0.008
+    },
+    {
+      "path": "crates/c06_async/reports/C06_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_20.md",
+      "category": "reports",
+      "size": 3109,
+      "wc": 673,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/COMPLETION_SUMMARY_2025_10_04.md",
+      "category": "reports",
+      "size": 18217,
+      "wc": 3400,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.005
+    },
+    {
+      "path": "crates/c06_async/reports/COMPREHENSIVE_ASYNC_SUMMARY_2025_10_04.md",
+      "category": "reports",
+      "size": 22354,
+      "wc": 3947,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/04_formal/01_ownership_logic/03_linear_logic_applications.md",
+      "concept_sim": 0.011
+    },
+    {
+      "path": "crates/c06_async/reports/COMPREHENSIVE_PROJECT_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 17359,
+      "wc": 2916,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/COMPREHENSIVE_PROJECT_SUMMARY.md",
+      "category": "reports",
+      "size": 11127,
+      "wc": 2383,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.016
+    },
+    {
+      "path": "crates/c06_async/reports/DEPENDENCY_UPDATE_REPORT_2025_10_06.md",
+      "category": "reports",
+      "size": 11971,
+      "wc": 2351,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/FINAL_COMPLETION_REPORT_2025_10_04.md",
+      "category": "reports",
+      "size": 17020,
+      "wc": 3546,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/04_web_and_networking/07_network_protocols.md",
+      "concept_sim": 0.02
+    },
+    {
+      "path": "crates/c06_async/reports/FINAL_COMPREHENSIVE_SUMMARY_2025_10_06.md",
+      "category": "reports",
+      "size": 25499,
+      "wc": 5278,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/14_design_patterns_glossary.md",
+      "concept_sim": 0.023
+    },
+    {
+      "path": "crates/c06_async/reports/FINAL_IMPLEMENTATION_SUMMARY.md",
+      "category": "reports",
+      "size": 9452,
+      "wc": 1915,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_91_stabilized.md",
+      "concept_sim": 0.008
+    },
+    {
+      "path": "crates/c06_async/reports/FINAL_MULTI_TASK_COMPLETION_REPORT_2025.md",
+      "category": "reports",
+      "size": 9553,
+      "wc": 2451,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/FINAL_PROJECT_ADVANCEMENT_SUMMARY_2025.md",
+      "category": "reports",
+      "size": 13260,
+      "wc": 2884,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md",
+      "concept_sim": 0.009
+    },
+    {
+      "path": "crates/c06_async/reports/FINAL_PROJECT_ADVANCEMENT_SUMMARY_2025_09_28.md",
+      "category": "reports",
+      "size": 13045,
+      "wc": 3267,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/FINAL_PROJECT_ENHANCEMENT_SUMMARY.md",
+      "category": "reports",
+      "size": 8754,
+      "wc": 1953,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/FINAL_SEMANTIC_ALIGNMENT_REPORT_2025.md",
+      "category": "reports",
+      "size": 11745,
+      "wc": 2736,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c06_async/reports/FINAL_SESSION_SUMMARY_2025_10_06.md",
+      "category": "reports",
+      "size": 15157,
+      "wc": 3251,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/00_meta/01_terminology/01_terminology_glossary.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c06_async/reports/FIXES_SUMMARY_REPORT.md",
+      "category": "reports",
+      "size": 8120,
+      "wc": 1623,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.007
+    },
+    {
+      "path": "crates/c06_async/reports/KNOWLEDGE_SYSTEM_COMPLETION_REPORT_2025_10_19.md",
+      "category": "reports",
+      "size": 18365,
+      "wc": 3886,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/MULTI_TASK_COMPLETION_SUMMARY_2025.md",
+      "category": "reports",
+      "size": 10275,
+      "wc": 2617,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/PROGRESS_UPDATE_2025_10_06.md",
+      "category": "reports",
+      "size": 11977,
+      "wc": 2486,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/PROJECT_ADVANCEMENT_SUMMARY_2025.md",
+      "category": "reports",
+      "size": 8855,
+      "wc": 2114,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/PROJECT_COMPLETION_CERTIFICATE_2025.md",
+      "category": "reports",
+      "size": 10559,
+      "wc": 2422,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/PROJECT_COMPLETION_SUMMARY.md",
+      "category": "reports",
+      "size": 10853,
+      "wc": 2592,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.017
+    },
+    {
+      "path": "crates/c06_async/reports/PROJECT_COMPREHENSIVE_REVIEW_SUMMARY.md",
+      "category": "reports",
+      "size": 11205,
+      "wc": 2772,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/00_meta/01_terminology/01_terminology_glossary.md",
+      "concept_sim": 0.017
+    },
+    {
+      "path": "crates/c06_async/reports/PROJECT_FINAL_COMPLETION_REPORT_2025_10_06.md",
+      "category": "reports",
+      "size": 19186,
+      "wc": 3913,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/00_meta/01_terminology/01_terminology_glossary.md",
+      "concept_sim": 0.013
+    },
+    {
+      "path": "crates/c06_async/reports/RUST_190_ASYNC_ECOSYSTEM_COMPREHENSIVE_ANALYSIS_2025.md",
+      "category": "reports",
+      "size": 17534,
+      "wc": 3508,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/RUST_190_ASYNC_FEATURES_COMPREHENSIVE_REPORT_2025.md",
+      "category": "reports",
+      "size": 15187,
+      "wc": 3150,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.01
+    },
+    {
+      "path": "crates/c06_async/reports/RUST_190_ASYNC_FINAL_COMPREHENSIVE_REPORT_2025.md",
+      "category": "reports",
+      "size": 18878,
+      "wc": 3611,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/RUST_190_ASYNC_PROJECT_FINAL_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 14256,
+      "wc": 3331,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/03_advanced/08_process_ipc/03_async_process_management.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c06_async/reports/RUST_190_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 12574,
+      "wc": 2940,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md",
+      "concept_sim": 0.007
+    },
+    {
+      "path": "crates/c06_async/reports/RUST_190_INTEGRATION_COMPLETION_SUMMARY_2025.md",
+      "category": "reports",
+      "size": 14266,
+      "wc": 3675,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/RUST_190_REAL_FEATURES_FINAL_REPORT.md",
+      "category": "reports",
+      "size": 9680,
+      "wc": 2204,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.012
+    },
+    {
+      "path": "crates/c06_async/reports/RUST_190_ULTIMATE_ADVANCEMENT_REPORT.md",
+      "category": "reports",
+      "size": 14553,
+      "wc": 3348,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/RUST_ASYNC_ECOSYSTEM_COMPREHENSIVE_SUMMARY_2025.md",
+      "category": "reports",
+      "size": 19721,
+      "wc": 3434,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/01_foundation/04_control_flow/01_control_flow.md",
+      "concept_sim": 0.009
+    },
+    {
+      "path": "crates/c06_async/reports/RUST_ASYNC_ECOSYSTEM_FINAL_ANALYSIS_2025.md",
+      "category": "reports",
+      "size": 13612,
+      "wc": 3418,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/14_design_patterns_glossary.md",
+      "concept_sim": 0.028
+    },
+    {
+      "path": "crates/c06_async/reports/SEMANTIC_ALIGNMENT_ANALYSIS_REPORT_2025.md",
+      "category": "reports",
+      "size": 15314,
+      "wc": 3128,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md",
+      "concept_sim": 0.013
+    },
+    {
+      "path": "crates/c06_async/reports/SESSION_PROGRESS_2025_10_06_PART2.md",
+      "category": "reports",
+      "size": 15871,
+      "wc": 3070,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/SESSION_PROGRESS_2025_10_06_PART3.md",
+      "category": "reports",
+      "size": 21358,
+      "wc": 4499,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/reports/ULTIMATE_PROJECT_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 15223,
+      "wc": 3282,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c06_async/reports/ULTIMATE_PROJECT_COMPLETION_REPORT_2025.md",
+      "category": "reports",
+      "size": 12745,
+      "wc": 3297,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/rust_192_c06_update_summary.md",
+      "category": "other",
+      "size": 3449,
+      "wc": 738,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.034
+    },
+    {
+      "path": "crates/c06_async/session_completion_report_2025_10_06.md",
+      "category": "other",
+      "size": 11423,
+      "wc": 2261,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/src/actix/README.md",
+      "category": "src/README",
+      "size": 960,
+      "wc": 189,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/src/archive/README.md",
+      "category": "src/README",
+      "size": 1225,
+      "wc": 248,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c06_async/tests/README.md",
+      "category": "tests/README",
+      "size": 633,
+      "wc": 127,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c07_process/completion_status.md",
+      "category": "other",
+      "size": 5026,
+      "wc": 823,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.022
+    },
+    {
+      "path": "crates/c07_process/examples/README.md",
+      "category": "examples/README",
+      "size": 1420,
+      "wc": 262,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.038
+    },
+    {
+      "path": "crates/c07_process/project_advancement_plan_2025.md",
+      "category": "other",
+      "size": 9527,
+      "wc": 2169,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/03_preview_features/03_safety_tags_preview.md",
+      "concept_sim": 0.012
+    },
+    {
+      "path": "crates/c07_process/README.md",
+      "category": "README",
+      "size": 18687,
+      "wc": 3610,
+      "recommendation": "keep",
+      "nearest_concept": "concept/04_formal/05_rustc_internals/01_rustc_query_system.md",
+      "concept_sim": 0.024
+    },
+    {
+      "path": "crates/c07_process/reports/C07_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_20.md",
+      "category": "reports",
+      "size": 1851,
+      "wc": 415,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c07_process/reports/ERROR_HANDLING_ENHANCEMENT_REPORT_2025.md",
+      "category": "reports",
+      "size": 12699,
+      "wc": 3026,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c07_process/reports/FINAL_PROJECT_COMPLETION_SUMMARY.md",
+      "category": "reports",
+      "size": 15154,
+      "wc": 2933,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/12_cargo_subcommands_and_plugins.md",
+      "concept_sim": 0.016
+    },
+    {
+      "path": "crates/c07_process/reports/FINAL_RUST_190_IMPLEMENTATION_SUMMARY.md",
+      "category": "reports",
+      "size": 10517,
+      "wc": 2333,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c07_process/reports/PROJECT_COMPLETION_REPORT_2025.md",
+      "category": "reports",
+      "size": 15379,
+      "wc": 3090,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/12_cargo_subcommands_and_plugins.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c07_process/reports/PROJECT_PROGRESS_REPORT_2025.md",
+      "category": "reports",
+      "size": 10566,
+      "wc": 2484,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c07_process/reports/RUST_190_FEATURES_ANALYSIS_REPORT.md",
+      "category": "reports",
+      "size": 9223,
+      "wc": 1940,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c07_process/reports/SYNC_PRIMITIVES_ENHANCEMENT_REPORT_2025.md",
+      "category": "reports",
+      "size": 11949,
+      "wc": 2835,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/CHANGELOG.md",
+      "category": "CHANGELOG",
+      "size": 5719,
+      "wc": 1375,
+      "recommendation": "keep",
+      "nearest_concept": "concept/02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c08_algorithms/completion_report_2025_12_25.md",
+      "category": "other",
+      "size": 5749,
+      "wc": 1269,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/03_preview_features/03_safety_tags_preview.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c08_algorithms/CONTRIBUTING.md",
+      "category": "CONTRIBUTING",
+      "size": 11458,
+      "wc": 2420,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/documentation_reorganization_complete.md",
+      "category": "other",
+      "size": 11019,
+      "wc": 2078,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/examples/README.md",
+      "category": "examples/README",
+      "size": 8632,
+      "wc": 1569,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.02
+    },
+    {
+      "path": "crates/c08_algorithms/exercises/01_sorting_practice.md",
+      "category": "other",
+      "size": 2868,
+      "wc": 545,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/leetcode_implementation_complete.md",
+      "category": "other",
+      "size": 19880,
+      "wc": 3671,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/README.md",
+      "category": "README",
+      "size": 23926,
+      "wc": 4292,
+      "recommendation": "keep",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c08_algorithms/reorganization_plan.md",
+      "category": "other",
+      "size": 8192,
+      "wc": 932,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/reports/ASYNC_RECURSION_AND_CONCURRENCY_PATTERNS_SUMMARY.md",
+      "category": "reports",
+      "size": 10228,
+      "wc": 1975,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md",
+      "concept_sim": 0.008
+    },
+    {
+      "path": "crates/c08_algorithms/reports/C08_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_20.md",
+      "category": "reports",
+      "size": 1816,
+      "wc": 410,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/reports/COMPREHENSIVE_ENHANCEMENT_COMPLETE_REPORT.md",
+      "category": "reports",
+      "size": 19306,
+      "wc": 3986,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
+      "concept_sim": 0.013
+    },
+    {
+      "path": "crates/c08_algorithms/reports/COMPREHENSIVE_ENHANCEMENT_REPORT.md",
+      "category": "reports",
+      "size": 19127,
+      "wc": 4236,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/reports/CONTINUOUS_DEVELOPMENT_PLAN.md",
+      "category": "reports",
+      "size": 10089,
+      "wc": 2432,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/reports/FINAL_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 10470,
+      "wc": 2276,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/00_meta/00_framework/cpp_rust_engineering_roadmap.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c08_algorithms/reports/FINAL_COMPLETION_SUMMARY.md",
+      "category": "reports",
+      "size": 14347,
+      "wc": 2962,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c08_algorithms/reports/FINAL_COMPREHENSIVE_SUMMARY.md",
+      "category": "reports",
+      "size": 23724,
+      "wc": 4172,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/14_design_patterns_glossary.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c08_algorithms/reports/FINAL_PROJECT_COMPLETION_SUMMARY.md",
+      "category": "reports",
+      "size": 10491,
+      "wc": 2269,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_91_stabilized.md",
+      "concept_sim": 0.007
+    },
+    {
+      "path": "crates/c08_algorithms/reports/FINAL_PROJECT_STATUS.md",
+      "category": "reports",
+      "size": 18038,
+      "wc": 4359,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_90_stabilized.md",
+      "concept_sim": 0.011
+    },
+    {
+      "path": "crates/c08_algorithms/reports/PROJECT_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 16395,
+      "wc": 3662,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_90_stabilized.md",
+      "concept_sim": 0.011
+    },
+    {
+      "path": "crates/c08_algorithms/reports/PROJECT_COMPLETION_STATUS.md",
+      "category": "reports",
+      "size": 15222,
+      "wc": 3163,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/01_patterns.md",
+      "concept_sim": 0.007
+    },
+    {
+      "path": "crates/c08_algorithms/reports/PROJECT_COMPLETION_SUMMARY_2025.md",
+      "category": "reports",
+      "size": 11952,
+      "wc": 2720,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/reports/README.md",
+      "category": "reports",
+      "size": 2327,
+      "wc": 442,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/reports/REORGANIZATION_PLAN.md",
+      "category": "reports",
+      "size": 8031,
+      "wc": 942,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/reports/RUST_190_ALIGNMENT_COMPLETION_FINAL.md",
+      "category": "reports",
+      "size": 10660,
+      "wc": 2157,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/reports/RUST_190_ALIGNMENT_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 11288,
+      "wc": 2466,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_91_stabilized.md",
+      "concept_sim": 0.007
+    },
+    {
+      "path": "crates/c08_algorithms/reports/RUST_190_COMPREHENSIVE_UPGRADE_REPORT.md",
+      "category": "reports",
+      "size": 14877,
+      "wc": 2981,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_91_stabilized.md",
+      "concept_sim": 0.006
+    },
+    {
+      "path": "crates/c08_algorithms/reports/TASK_PROGRESS_REPORT.md",
+      "category": "reports",
+      "size": 10858,
+      "wc": 2489,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c08_algorithms/rust_192_c08_update_summary.md",
+      "category": "other",
+      "size": 2588,
+      "wc": 551,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.03
+    },
+    {
+      "path": "crates/c08_algorithms/src/README.md",
+      "category": "src/README",
+      "size": 14393,
+      "wc": 2106,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.024
+    },
+    {
+      "path": "crates/c09_design_pattern/09_design_patterns.md",
+      "category": "other",
+      "size": 45573,
+      "wc": 7226,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/01_patterns.md",
+      "concept_sim": 0.016
+    },
+    {
+      "path": "crates/c09_design_pattern/CHANGELOG.md",
+      "category": "CHANGELOG",
+      "size": 6969,
+      "wc": 1682,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c09_design_pattern/completion_status.md",
+      "category": "other",
+      "size": 4952,
+      "wc": 961,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.024
+    },
+    {
+      "path": "crates/c09_design_pattern/examples/README.md",
+      "category": "examples/README",
+      "size": 11767,
+      "wc": 1906,
+      "recommendation": "keep",
+      "nearest_concept": "concept/03_advanced/01_async/04_future_and_executor_mechanisms.md",
+      "concept_sim": 0.021
+    },
+    {
+      "path": "crates/c09_design_pattern/exercises/01_pattern_implementations.md",
+      "category": "other",
+      "size": 7840,
+      "wc": 1048,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.04
+    },
+    {
+      "path": "crates/c09_design_pattern/implementation_roadmap.md",
+      "category": "other",
+      "size": 12556,
+      "wc": 2835,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c09_design_pattern/README.md",
+      "category": "README",
+      "size": 27112,
+      "wc": 5676,
+      "recommendation": "keep",
+      "nearest_concept": "concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
+      "concept_sim": 0.008
+    },
+    {
+      "path": "crates/c09_design_pattern/reports/C09_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_20.md",
+      "category": "reports",
+      "size": 1872,
+      "wc": 426,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c09_design_pattern/reports/FINAL_COMPREHENSIVE_SUMMARY.md",
+      "category": "reports",
+      "size": 13968,
+      "wc": 2876,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.016
+    },
+    {
+      "path": "crates/c09_design_pattern/reports/PROJECT_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 13507,
+      "wc": 3096,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md",
+      "concept_sim": 0.007
+    },
+    {
+      "path": "crates/c09_design_pattern/tests/README.md",
+      "category": "tests/README",
+      "size": 652,
+      "wc": 126,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c10_networks/benches/README.md",
+      "category": "README",
+      "size": 4703,
+      "wc": 1127,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.02
+    },
+    {
+      "path": "crates/c10_networks/completion_status.md",
+      "category": "other",
+      "size": 6892,
+      "wc": 1142,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.007
+    },
+    {
+      "path": "crates/c10_networks/CONTRIBUTING.md",
+      "category": "CONTRIBUTING",
+      "size": 7768,
+      "wc": 1872,
+      "recommendation": "keep",
+      "nearest_concept": "concept/03_advanced/06_low_level_patterns/07_rust_runtime.md",
+      "concept_sim": 0.012
+    },
+    {
+      "path": "crates/c10_networks/deployment_guide.md",
+      "category": "other",
+      "size": 9731,
+      "wc": 1898,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/04_formal/05_rustc_internals/01_rustc_query_system.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c10_networks/documentation_reorganization_complete.md",
+      "category": "other",
+      "size": 16027,
+      "wc": 2860,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c10_networks/examples/README.md",
+      "category": "examples/README",
+      "size": 1744,
+      "wc": 306,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.036
+    },
+    {
+      "path": "crates/c10_networks/exercises/01_tcp_server.md",
+      "category": "other",
+      "size": 5744,
+      "wc": 813,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.042
+    },
+    {
+      "path": "crates/c10_networks/final_completion_report.md",
+      "category": "other",
+      "size": 5677,
+      "wc": 1241,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.019
+    },
+    {
+      "path": "crates/c10_networks/modern_network_tech_update_2025_10_20.md",
+      "category": "other",
+      "size": 12901,
+      "wc": 2593,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/01_patterns.md",
+      "concept_sim": 0.007
+    },
+    {
+      "path": "crates/c10_networks/README.md",
+      "category": "README",
+      "size": 23217,
+      "wc": 3857,
+      "recommendation": "keep",
+      "nearest_concept": "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md",
+      "concept_sim": 0.008
+    },
+    {
+      "path": "crates/c10_networks/reports/10_networks.md",
+      "category": "reports",
+      "size": 37299,
+      "wc": 5317,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c10_networks/reports/C10_COMPREHENSIVE_ENHANCEMENT_REPORT_2025_10_19.md",
+      "category": "reports",
+      "size": 21231,
+      "wc": 4152,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/00_meta/01_terminology/01_terminology_glossary.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c10_networks/reports/COMPREHENSIVE_BUG_FIX_REPORT.md",
+      "category": "reports",
+      "size": 6631,
+      "wc": 1497,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/03_advanced/03_proc_macros/11_conditional_compilation.md",
+      "concept_sim": 0.024
+    },
+    {
+      "path": "crates/c10_networks/reports/example_validation_report.md",
+      "category": "reports",
+      "size": 3048,
+      "wc": 684,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c10_networks/reports/FINAL_BUG_FIX_REPORT.md",
+      "category": "reports",
+      "size": 5645,
+      "wc": 1304,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/03_advanced/03_proc_macros/11_conditional_compilation.md",
+      "concept_sim": 0.027
+    },
+    {
+      "path": "crates/c10_networks/reports/FINAL_PROJECT_STATUS.md",
+      "category": "reports",
+      "size": 9542,
+      "wc": 1944,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.006
+    },
+    {
+      "path": "crates/c10_networks/reports/FINAL_PUSH_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 10076,
+      "wc": 2330,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c10_networks/reports/FINAL_SUMMARY.md",
+      "category": "reports",
+      "size": 5317,
+      "wc": 1305,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c10_networks/reports/NETWORK_RUNTIME_COMPARISON_ANALYSIS.md",
+      "category": "reports",
+      "size": 15889,
+      "wc": 3109,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c10_networks/reports/NEW_FILES_SUMMARY_2025_10_19.md",
+      "category": "reports",
+      "size": 7167,
+      "wc": 1387,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/00_meta/01_terminology/01_terminology_glossary.md",
+      "concept_sim": 0.024
+    },
+    {
+      "path": "crates/c10_networks/reports/PROJECT_COMPLETION_CELEBRATION.md",
+      "category": "reports",
+      "size": 9733,
+      "wc": 2184,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c10_networks/reports/PROJECT_COMPLETION_REPORT_2025.md",
+      "category": "reports",
+      "size": 10503,
+      "wc": 2427,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/00_meta/00_framework/cpp_rust_engineering_roadmap.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c10_networks/reports/PROJECT_FINAL_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 10604,
+      "wc": 2157,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.006
+    },
+    {
+      "path": "crates/c10_networks/reports/PROJECT_STATUS.md",
+      "category": "reports",
+      "size": 8486,
+      "wc": 1851,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md",
+      "concept_sim": 0.013
+    },
+    {
+      "path": "crates/c10_networks/reports/PROJECT_SUMMARY_2025.md",
+      "category": "reports",
+      "size": 11085,
+      "wc": 2645,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/00_meta/00_framework/cpp_rust_engineering_roadmap.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c10_networks/reports/README.md",
+      "category": "reports",
+      "size": 4393,
+      "wc": 695,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.029
+    },
+    {
+      "path": "crates/c10_networks/reports/RELEASE_AND_COMMUNITY_PLAN.md",
+      "category": "reports",
+      "size": 10208,
+      "wc": 2395,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c10_networks/reports/ROADMAP.md",
+      "category": "reports",
+      "size": 10097,
+      "wc": 2274,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c10_networks/reports/RUST_190_ALIGNMENT_COMPLETION_SUMMARY.md",
+      "category": "reports",
+      "size": 11542,
+      "wc": 2740,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c10_networks/reports/RUST_190_ASYNC_FEATURES_ALIGNMENT_REPORT.md",
+      "category": "reports",
+      "size": 12607,
+      "wc": 2926,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c10_networks/reports/SEMANTIC_MODEL_ANALYSIS_COMPLETION_REPORT.md",
+      "category": "reports",
+      "size": 8760,
+      "wc": 2005,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c10_networks/SECURITY.md",
+      "category": "other",
+      "size": 9100,
+      "wc": 2115,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/06_ecosystem/12_networking/02_network_security.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c10_networks/tests/README.md",
+      "category": "tests/README",
+      "size": 10789,
+      "wc": 2154,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c11_macro_system_proc/c11_macro_module_phase1_completion_report_2025_10_20.md",
+      "category": "other",
+      "size": 16207,
+      "wc": 3338,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.013
+    },
+    {
+      "path": "crates/c11_macro_system_proc/c11_macro_module_phase2_completion_report_2025_10_20.md",
+      "category": "other",
+      "size": 15284,
+      "wc": 3039,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c11_macro_system_proc/c11_macro_module_phase3_progress_report_2025_10_20.md",
+      "category": "other",
+      "size": 15890,
+      "wc": 3324,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c11_macro_system_proc/c11_macro_module_phase4_completion_report_2025_10_20.md",
+      "category": "other",
+      "size": 14634,
+      "wc": 2896,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c11_macro_system_proc/c11_macro_system_proc_macros/README.md",
+      "category": "README",
+      "size": 892,
+      "wc": 143,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c11_macro_system_proc/examples/README.md",
+      "category": "examples/README",
+      "size": 11400,
+      "wc": 1841,
+      "recommendation": "keep",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.032
+    },
+    {
+      "path": "crates/c11_macro_system_proc/module_reports_standard.md",
+      "category": "other",
+      "size": 1090,
+      "wc": 225,
+      "recommendation": "review",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c11_macro_system_proc/README.md",
+      "category": "README",
+      "size": 12819,
+      "wc": 2334,
+      "recommendation": "keep",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.016
+    },
+    {
+      "path": "crates/c11_macro_system_proc/rust_192_c11_update_summary.md",
+      "category": "other",
+      "size": 3821,
+      "wc": 763,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.024
+    },
+    {
+      "path": "crates/c11_macro_system_proc/src/proc/README.md",
+      "category": "src/README",
+      "size": 624,
+      "wc": 127,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c11_macro_system_proc/tests/README.md",
+      "category": "tests/README",
+      "size": 659,
+      "wc": 126,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c12_wasm/benches/README.md",
+      "category": "README",
+      "size": 7843,
+      "wc": 1462,
+      "recommendation": "keep",
+      "nearest_concept": "concept/06_ecosystem/04_web_and_networking/06_websocket_realtime_communication.md",
+      "concept_sim": 0.027
+    },
+    {
+      "path": "crates/c12_wasm/CHANGELOG.md",
+      "category": "CHANGELOG",
+      "size": 6801,
+      "wc": 1142,
+      "recommendation": "keep",
+      "nearest_concept": "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md",
+      "concept_sim": 0.008
+    },
+    {
+      "path": "crates/c12_wasm/CONTRIBUTING.md",
+      "category": "CONTRIBUTING",
+      "size": 10619,
+      "wc": 1989,
+      "recommendation": "keep",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c12_wasm/demo/README.md",
+      "category": "README",
+      "size": 6886,
+      "wc": 1400,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c12_wasm/examples/README.md",
+      "category": "examples/README",
+      "size": 8191,
+      "wc": 1499,
+      "recommendation": "keep",
+      "nearest_concept": "concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
+      "concept_sim": 0.011
+    },
+    {
+      "path": "crates/c12_wasm/exercises/01_wasm_bindings.md",
+      "category": "other",
+      "size": 5534,
+      "wc": 685,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.042
+    },
+    {
+      "path": "crates/c12_wasm/fix_completed.md",
+      "category": "other",
+      "size": 5708,
+      "wc": 1131,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.019
+    },
+    {
+      "path": "crates/c12_wasm/fix_summary.md",
+      "category": "other",
+      "size": 5890,
+      "wc": 1077,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/01_foundation/11_quizzes/26_quiz_modules_testing.md",
+      "concept_sim": 0.022
+    },
+    {
+      "path": "crates/c12_wasm/project_advancement_2025_10_30.md",
+      "category": "other",
+      "size": 15590,
+      "wc": 2880,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c12_wasm/project_advancement_summary.md",
+      "category": "other",
+      "size": 11602,
+      "wc": 1996,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/00_meta/01_terminology/01_terminology_glossary.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c12_wasm/project_status.md",
+      "category": "other",
+      "size": 10254,
+      "wc": 1972,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c12_wasm/quick_start.md",
+      "category": "other",
+      "size": 7903,
+      "wc": 1281,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
+      "concept_sim": 0.011
+    },
+    {
+      "path": "crates/c12_wasm/quick_start_2025_latest.md",
+      "category": "other",
+      "size": 8814,
+      "wc": 1513,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c12_wasm/README.md",
+      "category": "README",
+      "size": 21530,
+      "wc": 4033,
+      "recommendation": "keep",
+      "nearest_concept": "concept/06_ecosystem/11_domain_applications/19_wasm_faq.md",
+      "concept_sim": 0.02
+    },
+    {
+      "path": "crates/c12_wasm/rust_192_c12_update_summary.md",
+      "category": "other",
+      "size": 3179,
+      "wc": 688,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+      "concept_sim": 0.03
+    },
+    {
+      "path": "crates/c12_wasm/rust_192_comprehensive_update_report.md",
+      "category": "other",
+      "size": 10587,
+      "wc": 1902,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.006
+    },
+    {
+      "path": "crates/c12_wasm/rust_192_update_summary.md",
+      "category": "other",
+      "size": 8260,
+      "wc": 1717,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.021
+    },
+    {
+      "path": "crates/c12_wasm/summary_2025_10_30.md",
+      "category": "other",
+      "size": 11820,
+      "wc": 2248,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
+      "concept_sim": 0.011
+    },
+    {
+      "path": "crates/c12_wasm/tests/README.md",
+      "category": "tests/README",
+      "size": 8014,
+      "wc": 1349,
+      "recommendation": "keep",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.014
+    },
+    {
+      "path": "crates/c12_wasm/wasmedge_2025_advancement_report.md",
+      "category": "other",
+      "size": 18334,
+      "wc": 3058,
+      "recommendation": "archive_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c12_wasm/wasmedge_2025_quick_start.md",
+      "category": "other",
+      "size": 9396,
+      "wc": 1582,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_92_stabilized.md",
+      "concept_sim": 0.015
+    },
+    {
+      "path": "crates/c13_embedded/README.md",
+      "category": "README",
+      "size": 1194,
+      "wc": 247,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c13_embedded/real-hardware-demos/README.md",
+      "category": "README",
+      "size": 4131,
+      "wc": 761,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c14_semantic_web/README.md",
+      "category": "README",
+      "size": 1094,
+      "wc": 187,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c15_verification_tools/README.md",
+      "category": "README",
+      "size": 3419,
+      "wc": 657,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c16_gui/README.md",
+      "category": "README",
+      "size": 639,
+      "wc": 124,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/c17_resolver_v3_public_demo/README.md",
+      "category": "README",
+      "size": 3225,
+      "wc": 524,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/common/README.md",
+      "category": "README",
+      "size": 3104,
+      "wc": 525,
+      "recommendation": "keep",
+      "nearest_concept": "concept/00_meta/00_framework/cpp_rust_engineering_roadmap.md",
+      "concept_sim": 0.033
+    },
+    {
+      "path": "crates/integration_tests/README.md",
+      "category": "README",
+      "size": 546,
+      "wc": 133,
+      "recommendation": "keep",
+      "nearest_concept": "concept/06_ecosystem/01_cargo/16_cargo_workflow.md",
+      "concept_sim": 0.038
+    },
+    {
+      "path": "crates/module_cross_reference.md",
+      "category": "other",
+      "size": 8615,
+      "wc": 864,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/README.md",
+      "category": "README",
+      "size": 2124,
+      "wc": 341,
+      "recommendation": "keep",
+      "nearest_concept": "",
+      "concept_sim": 0.0
+    },
+    {
+      "path": "crates/version_index.md",
+      "category": "other",
+      "size": 4726,
+      "wc": 667,
+      "recommendation": "migrate_to_docs_or_stub",
+      "nearest_concept": "concept/07_future/00_version_tracking/rust_1_94_stabilized.md",
+      "concept_sim": 0.033
+    }
+  ]
+}

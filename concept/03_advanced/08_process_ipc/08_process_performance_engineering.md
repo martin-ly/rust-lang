@@ -249,3 +249,35 @@ mindmap
       4.3 零拷贝 IPC
     5. 进程池性能
 ```
+
+---
+
+## ⚠️ 反例与陷阱
+
+> 陷阱：试图克隆 `std::process::Command` 以复用配置，但 `Command` 未实现 `Clone`。
+> 下面代码在 rustc 1.97 --edition 2024 下触发 `E0599`。
+
+```rust,compile_fail,E0599
+use std::process::Command;
+
+fn main() {
+    let base = Command::new("echo").arg("hi");
+    let mut c1 = base.clone();
+    let mut c2 = base.clone();
+}
+```
+
+**修正对照**（保存参数并重新构造，或用进程池持有配置模板）：
+
+```rust
+use std::process::Command;
+
+fn main() {
+    let args = ["echo", "hi"];
+    let mut c1 = Command::new(args[0]);
+    c1.arg(args[1]);
+    let mut c2 = Command::new(args[0]);
+    c2.arg(args[1]);
+    let _ = (&mut c1, &mut c2);
+}
+```

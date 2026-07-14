@@ -405,3 +405,42 @@ mindmap
       5.2 cargo-llvm-lines
       5.3 cargo-bloat
 ```
+
+---
+
+## ⚠️ 反例与陷阱
+
+> 陷阱：过程宏生成的代码若使用裸 trait 名，用户作用域未导入该 trait 时会导致名称解析失败。
+> 下面代码在 rustc 1.97 --edition 2024 下触发 `E0405`。
+
+```rust,compile_fail,E0405
+macro_rules! gen_display {
+    ($t:ty) => {
+        impl Display for $t {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(f, "{}", self.0)
+            }
+        }
+    };
+}
+
+struct Meters(u32);
+gen_display!(Meters);
+```
+
+**修正对照**（生成代码中使用全限定路径）：
+
+```rust
+macro_rules! gen_display {
+    ($t:ty) => {
+        impl std::fmt::Display for $t {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(f, "{}", self.0)
+            }
+        }
+    };
+}
+
+struct Meters(u32);
+gen_display!(Meters);
+```

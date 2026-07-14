@@ -10,5 +10,5 @@ This file previously contained a local navigation aid (index, mind map, matrix, 
 ## Quick links
 
 - [Networking 权威概念页](../../../concept/06_ecosystem/04_web_and_networking)
-- [concept/SUMMARY.md](../../concept/SUMMARY.md) — full knowledge-base index
+- [concept/SUMMARY.md](../../../concept/06_ecosystem/12_networking/05_networking_basics.md) — full knowledge-base index
 - [Workspace README](../../README.md)

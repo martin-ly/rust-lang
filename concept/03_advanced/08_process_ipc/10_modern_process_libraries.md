@@ -255,3 +255,26 @@ mindmap
     5. nix 系统调用封装
     6. 系统监控库
 ```
+
+---
+
+## ⚠️ 反例与陷阱
+
+> 陷阱：现代进程库（如 `tokio::process`、`duct`）不是标准库，直接 `use` 或调用但未在 `Cargo.toml` 声明依赖会编译失败。
+> 下面代码在 rustc 1.97 --edition 2024 下触发 `E0433`。
+
+```rust,compile_fail,E0433
+fn main() {
+    let _ = tokio::process::Command::new("echo").arg("hi");
+}
+```
+
+**修正对照**（标准库跨平台方案）：
+
+```rust
+use std::process::Command;
+
+fn main() {
+    let _ = Command::new("echo").arg("hi");
+}
+```

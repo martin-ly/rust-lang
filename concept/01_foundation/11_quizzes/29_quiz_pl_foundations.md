@@ -19,7 +19,13 @@
 > [Control Flow](../04_control_flow/01_control_flow.md) ·
 > [Data Abstraction Spectrum](../02_type_system/05_data_abstraction_spectrum.md)
 > **后置概念**: N/A
-> **主要来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **主要来源**:
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 ---
 
 > **Bloom 层级**: L1-L3
@@ -35,7 +41,8 @@
 
 ## 一、变量模型
 
-本组题目考察「环境-存储」模型下 Rust 变量语义的定位：所有权约束的是存储层（位置的值与有效性），借用检查是环境到存储访问权限的静态分析。理解这一分层是回答后续「为什么 move 后源失效是编译期事实」「`&mut` 可建模为哪种效果」等题目的理论底座——建议先回顾 [变量模型](../03_values_and_references/03_variable_model.md) 的环境/存储分离再作答。
+本组题目考察「环境-存储」模型下 Rust 变量语义的定位：所有权约束的是存储层（位置的值与有效性），借用检查是环境到存储访问权限的静态分析。
+理解这一分层是回答后续「为什么 move 后源失效是编译期事实」「`&mut` 可建模为哪种效果」等题目的理论底座——建议先回顾 [变量模型](../03_values_and_references/03_variable_model.md) 的环境/存储分离再作答。
 
 ### 问题 1：🟡 在通用 PL 的"环境-存储"模型中，Rust 的所有权系统主要约束的是哪一层？
 
@@ -49,7 +56,8 @@
 
 **答案：B**
 
-环境层将变量名映射到资源标识符；存储层管理资源本身及其所有权（Ownership）状态。Rust 的所有权约束主要作用于存储层，确保每个资源在任意时刻只有一个所有者。
+环境层将变量名映射到资源标识符；存储层管理资源本身及其所有权（Ownership）状态。
+Rust 的所有权约束主要作用于存储层，确保每个资源在任意时刻只有一个所有者。
 
 </details>
 
@@ -71,7 +79,8 @@
 
 **答案：C**
 
-Rust 是严格求值语言，默认参数传递是 Call-by-Value（对于 `Copy` 类型是复制值，对于非 `Copy` 类型是转移所有权（Ownership））。`&T` 和 `&mut T` 提供受限的 Call-by-Reference 能力，允许函数访问或修改调用者的数据而不转移所有权。
+Rust 是严格求值语言，默认参数传递是 Call-by-Value（对于 `Copy` 类型是复制值，对于非 `Copy` 类型是转移所有权（Ownership））。
+`&T` 和 `&mut T` 提供受限的 Call-by-Reference 能力，允许函数访问或修改调用者的数据而不转移所有权。
 
 </details>
 
@@ -93,7 +102,8 @@ Rust 是严格求值语言，默认参数传递是 Call-by-Value（对于 `Copy`
 
 **答案：B**
 
-`&mut T` 允许修改被引用（Reference）的数据，因此可以被建模为 write effect。Rust 通过借用（Borrowing）检查器限制 write effect 的别名，从而防止数据竞争和不一致状态。
+`&mut T` 允许修改被引用（Reference）的数据，因此可以被建模为 write effect。
+Rust 通过借用（Borrowing）检查器限制 write effect 的别名，从而防止数据竞争和不一致状态。
 
 </details>
 
@@ -101,7 +111,8 @@ Rust 是严格求值语言，默认参数传递是 Call-by-Value（对于 `Copy`
 
 ## 四、控制流
 
-本组题目考察控制流的理论基础：Böhm–Jacopini 定理（顺序/选择/循环的表达充分性）、结构化控制与 `goto` 的关系、以及 Rust 控制流的「表达式化」特征（`if`/`match`/`loop` 皆产生值）。作答时注意区分「表达力等价」（图灵完备层面）与「工程适用性」（可维护性、编译器可分析性）——定理只承诺前者。
+本组题目考察控制流的理论基础：Böhm–Jacopini 定理（顺序/选择/循环的表达充分性）、结构化控制与 `goto` 的关系、以及 Rust 控制流的「表达式化」特征（`if`/`match`/`loop` 皆产生值）。
+作答时注意区分「表达力等价」（图灵完备层面）与「工程适用性」（可维护性、编译器可分析性）——定理只承诺前者。
 
 ### 问题 4：🟢 结构化程序定理（Böhm–Jacopini 定理）指出，任何可计算函数都可以用哪些控制结构表达？
 

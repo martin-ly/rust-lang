@@ -57,6 +57,7 @@
   - [过渡段](#过渡段)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
 
 ---
 
@@ -830,4 +831,40 @@ mindmap
       Q17 如何构建 DSL？
       Q18 宏可以生成宏吗？
       Q19 如何实现零成本抽象？
+```
+
+---
+
+## ⚠️ 反例与陷阱
+
+> 陷阱：宏参数在展开体中出现多次会被求值多次；若参数含副作用，结果会与函数调用不同。
+> 下面程序运行时 `c` 最终为 2（副作用发生了两次）。
+
+```rust
+macro_rules! double_arg {
+    ($e:expr) => { $e + $e };
+}
+
+fn main() {
+    let mut c = 0;
+    let _ = double_arg!({ c += 1; c });
+    assert_eq!(c, 2);
+}
+```
+
+**修正对照**（先绑定到局部变量，避免重复求值）：
+
+```rust
+macro_rules! double_arg {
+    ($e:expr) => { {
+        let v = $e;
+        v + v
+    } };
+}
+
+fn main() {
+    let mut c = 0;
+    let _ = double_arg!({ c += 1; c });
+    assert_eq!(c, 1);
+}
 ```

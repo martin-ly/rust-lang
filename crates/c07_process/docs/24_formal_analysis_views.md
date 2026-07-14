@@ -12,5 +12,5 @@ Per AGENTS.md §6.4, general Rust concept explanations are maintained in `concep
 ## Quick links
 
 - [Processes & IPC 权威页](../../../concept/03_advanced/08_process_ipc)
-- [concept/SUMMARY.md](../../concept/SUMMARY.md)
+- [concept/SUMMARY.md](../../../concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md)
 - [Workspace README](../../README.md)

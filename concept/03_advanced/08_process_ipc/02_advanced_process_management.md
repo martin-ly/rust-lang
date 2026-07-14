@@ -334,3 +334,32 @@ mindmap
       4.2 配额管理系统
     6. 调度策略
 ```
+
+---
+
+## ⚠️ 反例与陷阱
+
+> 陷阱：在异步代码中把 `std::process::Command` 生成的 `Child` 当成 Future 来 `.await`。
+> 标准库进程 API 是同步阻塞的，进程池/异步场景应使用 `tokio::process` 或阻塞任务。
+> 下面代码在 rustc 1.97 --edition 2024 下触发 `E0277`。
+
+```rust,compile_fail,E0277
+use std::process::Command;
+
+fn main() {
+    let _fut = async {
+        let _ = Command::new("echo").arg("hi").spawn().unwrap().await;
+    };
+}
+```
+
+**修正对照**（使用 tokio 的异步进程 API）：
+
+```rust,ignore
+use tokio::process::Command;
+
+async fn run() -> std::io::Result<()> {
+    let _ = Command::new("echo").arg("hi").output().await?;
+    Ok(())
+}
+```

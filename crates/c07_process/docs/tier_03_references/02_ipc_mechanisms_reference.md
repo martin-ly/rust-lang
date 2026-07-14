@@ -10,5 +10,5 @@ This reference document previously contained local summaries and API notes for `
 ## Quick links
 
 - [IPC Mechanisms 权威页](../../../../concept/03_advanced/08_process_ipc/05_ipc_mechanisms.md)
-- [concept/SUMMARY.md](../../concept/SUMMARY.md)
+- [concept/SUMMARY.md](../../../../concept/03_advanced/08_process_ipc/05_ipc_mechanisms.md)
 - [Workspace README](../../README.md)

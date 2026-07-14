@@ -10,7 +10,7 @@ This file previously contained a local navigation aid (index, mind map, matrix, 
 ## Quick links
 
 - [Processes & IPC 权威概念页](../../../../concept/03_advanced/08_process_ipc)
-- [concept/SUMMARY.md](../../concept/SUMMARY.md) — full knowledge-base index
+- [concept/SUMMARY.md](../../../../concept/03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) — full knowledge-base index
 - [Workspace README](../../README.md)
 
 ## 国际权威来源

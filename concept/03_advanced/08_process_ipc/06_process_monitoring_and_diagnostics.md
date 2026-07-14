@@ -313,3 +313,36 @@ mindmap
     4. 日志与调试
     5. 告警与自动恢复
 ```
+
+---
+
+## ⚠️ 反例与陷阱
+
+> 陷阱：把 `Child::try_wait` 的返回值 `Result<Option<ExitStatus>>` 当成 `bool` 使用。
+> 下面代码在 rustc 1.97 --edition 2024 下触发 `E0308`。
+
+```rust,compile_fail,E0308
+use std::process::Command;
+
+fn main() {
+    let mut child = Command::new("echo").arg("hi").spawn().unwrap();
+    if child.try_wait() {
+        println!("done");
+    }
+}
+```
+
+**修正对照**（显式匹配三种状态）：
+
+```rust
+use std::process::Command;
+
+fn main() {
+    let mut child = Command::new("echo").arg("hi").spawn().unwrap();
+    match child.try_wait() {
+        Ok(Some(status)) => println!("exited: {status}"),
+        Ok(None) => println!("running"),
+        Err(e) => eprintln!("{e}"),
+    }
+}
+```

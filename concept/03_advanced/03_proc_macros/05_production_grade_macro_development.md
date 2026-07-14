@@ -428,3 +428,31 @@ mindmap
       6.2 依赖更新节奏
       6.3 长期支持承诺
 ```
+
+---
+
+## ⚠️ 反例与陷阱
+
+> 陷阱：未加 `#[macro_export]` 的 `macro_rules!` 无法按路径引用，发布后被下游 crate 找不到。
+> 下面代码在 rustc 1.97 --edition 2024 下触发 `E0433`。
+
+```rust,compile_fail,E0433
+mod inner {
+    macro_rules! hello { () => { "hello" }; }
+}
+
+fn main() {
+    let _ = inner::hello!();
+}
+```
+
+**修正对照**：
+
+```rust
+#[macro_export]
+macro_rules! hello { () => { "hello" }; }
+
+fn main() {
+    let _ = hello!();
+}
+```

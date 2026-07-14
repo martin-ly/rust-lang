@@ -282,3 +282,28 @@ mindmap
       5.1 Seccomp
       5.2 强制访问控制
 ```
+
+---
+
+## ⚠️ 反例与陷阱
+
+> 陷阱：安全沙箱代码中常涉及 `unsafe` 边界（如调用 `libc`、`seccomp` 等），忘记 `unsafe` 块会导致编译失败。
+> 下面代码在 rustc 1.97 --edition 2024 下触发 `E0133`。
+
+```rust,compile_fail,E0133
+unsafe fn drop_privileges() {}
+
+fn main() {
+    drop_privileges();
+}
+```
+
+**修正对照**：
+
+```rust
+unsafe fn drop_privileges() {}
+
+fn main() {
+    unsafe { drop_privileges() };
+}
+```

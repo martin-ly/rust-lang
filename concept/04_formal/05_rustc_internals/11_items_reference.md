@@ -271,3 +271,31 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+---
+
+## ⚠️ 反例与陷阱
+
+> 陷阱：模块内的 item 默认私有，跨模块引用会失败。
+> 下面代码在 rustc 1.97 --edition 2024 下触发 `E0603`。
+
+```rust,compile_fail,E0603
+mod inner {
+    fn secret() -> i32 { 42 }
+}
+
+fn main() {
+    let _ = inner::secret();
+}
+```
+
+**修正对照**：
+
+```rust
+mod inner {
+    pub fn secret() -> i32 { 42 }
+}
+
+fn main() {
+    let _ = inner::secret();
+}
+```
