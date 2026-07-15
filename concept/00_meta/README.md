@@ -42,8 +42,18 @@ graph TD
 | `02_sources/` | 权威来源映射 | [权威来源映射表](02_sources/01_authority_source_map.md) |
 | `03_audit/` | 质量审计与治理 | [Concept Audit Guide](03_audit/01_concept_audit_guide.md) · [分级体系](03_audit/06_grading_system.md) · [模板去同质化](03_audit/05_template_deduplication_guide.md) |
 | `04_navigation/` | 索引与交叉引用 | [全局概念索引](04_navigation/03_concept_index.md) · [交叉引用矩阵](04_navigation/01_cross_reference_matrix.md) |
-| `knowledge_topology/` | 知识体系拓扑图谱集 | [拓扑图谱集 README](knowledge_topology/README.md) |
-| `placeholders/` | SUMMARY.md 导航占位文件 | 待创建主题的导航入口 |
+| `knowledge_topology/` | 知识体系拓扑图谱集（无序号专题系列，见下） | [拓扑图谱集 README](knowledge_topology/README.md) |
+| `07_placeholders/` | SUMMARY.md 导航占位文件 | 待创建主题的导航入口 |
+
+## 编号说明
+
+`concept/00_meta/` 采用以下编号策略（AGENTS.md §4.0）：
+
+- `00_`–`05_` 为常规编号子目录。
+- `06_trpl_3rd_ed_mapping.md` 原与 `01_terminology/` 同号，已迁移到空号 `06_`，避免重复。
+- `07_placeholders/` 由未编号目录重命名而来，保持目录内连续序号。
+- `knowledge_topology/` 是**大型无序号专题系列目录**，内部已按 `01_`–`10_` 编号，并附 [README 索引](knowledge_topology/README.md)；按 AGENTS.md §4.0-4 保留为无序号系列目录，不再额外赋予顶层序号。
+- `00_framework/` 同样为注册的无序号专题系列目录，其文件保持无序号以兼容系列约定。
 
 ## 核心索引文件
 

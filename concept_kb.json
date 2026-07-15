@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 504,
-    "generated_at": "2026-07-15T09:19:08.193505+00:00"
+    "generated_at": "2026-07-15T09:27:20.577347+00:00"
   },
   "files": [
     {
@@ -472,7 +472,7 @@
         "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
         "../../06_ecosystem/03_design_patterns/01_patterns.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
         "decidability_spectrum.md",
         "methodology.md",
         "semantic_expressiveness.md"
@@ -1329,30 +1329,6 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\06_trpl_3rd_ed_mapping.md",
-      "layer": "L0",
-      "title": "TRPL 3rd Ed 章节映射",
-      "positioning": "",
-      "line_count": 11,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "../../docs/02_learning/09_learning_mvp_path.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 0,
-      "pre_post": {
-        "pre": [],
-        "post": []
-      },
-      "backward_chains": 0,
-      "templated_chains": 0
-    },
-    {
       "path": "E:\\_src\\rust-lang\\concept\\00_meta\\02_sources\\01_authority_source_map.md",
       "layer": "L0",
       "title": "权威来源映射表（Authority Source Map）",
@@ -1940,11 +1916,11 @@
         "../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md",
         "../../06_ecosystem/11_domain_applications/03_webassembly.md",
         "../../06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
-        "../../07_future/03_preview_features/35_f16_f128_preview.md",
-        "../../07_future/03_preview_features/36_unsafe_pinned_preview.md",
-        "../../07_future/03_preview_features/37_default_field_values_preview.md",
-        "../../07_future/03_preview_features/38_complex_numbers_preview.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/35_f16_f128_preview.md",
+        "../../07_future/02_preview_features/36_unsafe_pinned_preview.md",
+        "../../07_future/02_preview_features/37_default_field_values_preview.md",
+        "../../07_future/02_preview_features/38_complex_numbers_preview.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
         "../../07_future/04_research_and_experimental/03_evolution.md",
         "../../07_future/04_research_and_experimental/07_ebpf_rust.md",
@@ -2313,7 +2289,7 @@
         "../../06_ecosystem/11_domain_applications/01_blockchain.md",
         "../../06_ecosystem/11_domain_applications/02_game_ecs.md",
         "../../07_future/00_version_tracking/01_rust_version_tracking.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
         "../../07_future/04_research_and_experimental/01_ai_integration.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
         "../../07_future/04_research_and_experimental/03_evolution.md",
@@ -3160,15 +3136,15 @@
       "sources": [],
       "cross_references": [
         "../../01_foundation/01_ownership_borrow_lifetime/06_ownership_inventories_brown_book.md",
-        "../../01_foundation/11_quizzes/24_quiz_type_system.md",
-        "../../01_foundation/11_quizzes/25_quiz_error_handling.md",
-        "../../01_foundation/11_quizzes/26_quiz_modules_testing.md",
-        "../../01_foundation/11_quizzes/27_quiz_closures_iterators.md",
-        "../../01_foundation/11_quizzes/29_quiz_pl_foundations.md",
-        "../../01_foundation/11_quizzes/33_quiz_ownership_borrowing.md",
+        "../../01_foundation/11_quizzes/01_quiz_type_system.md",
+        "../../01_foundation/11_quizzes/02_quiz_error_handling.md",
+        "../../01_foundation/11_quizzes/03_quiz_modules_testing.md",
+        "../../01_foundation/11_quizzes/04_quiz_closures_iterators.md",
+        "../../01_foundation/11_quizzes/05_quiz_pl_foundations.md",
+        "../../01_foundation/11_quizzes/06_quiz_ownership_borrowing.md",
         "../../02_intermediate/01_generics/04_quiz_traits_and_generics.md",
         "../../02_intermediate/02_memory_management/05_quiz_memory_management.md",
-        "../../02_intermediate/09_quizzes/30_quiz_cpp_rust_foundations.md",
+        "../../02_intermediate/08_quizzes/30_quiz_cpp_rust_foundations.md",
         "../../03_advanced/00_concurrency/09_quiz_concurrency_async.md",
         "../../03_advanced/02_unsafe/05_quiz_unsafe.md",
         "../../03_advanced/03_proc_macros/10_quiz_macros.md",
@@ -3241,6 +3217,59 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\06_trpl_3rd_ed_mapping.md",
+      "layer": "L0",
+      "title": "TRPL 3rd Ed 章节映射",
+      "positioning": "",
+      "line_count": 11,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../docs/02_learning/09_learning_mvp_path.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 0,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\07_placeholders\\01_placeholder_generic.md",
+      "layer": "L0",
+      "title": "占位符页面",
+      "positioning": "",
+      "line_count": 23,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../00_framework/cpp_rust_engineering_roadmap.md",
+        "../00_framework/pattern_semantic_space_index.md",
+        "../00_framework/pl_foundations_roadmap.md",
+        "../03_audit/01_concept_audit_guide.md",
+        "../04_navigation/03_concept_index.md",
+        "../04_navigation/09_navigation.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 0,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\00_meta\\knowledge_topology\\01_concept_definition_atlas.md",
       "layer": "L0",
       "title": "概念定义图谱（Concept Definition Atlas）",
@@ -3280,7 +3309,6 @@
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../00_meta/01_terminology/02_bilingual_template_v2.md",
         "../../00_meta/01_terminology/03_bilingual_template.md",
-        "../../00_meta/01_trpl_3rd_ed_mapping.md",
         "../../00_meta/02_sources/01_authority_source_map.md",
         "../../00_meta/02_sources/02_rustbelt_predicate_map.md",
         "../../00_meta/02_sources/03_sources.md",
@@ -3682,50 +3710,51 @@
         "../../07_future/01_edition_roadmap/02_edition_guide.md",
         "../../07_future/01_edition_roadmap/03_rust_edition_guide.md",
         "../../07_future/01_edition_roadmap/04_roadmap.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
-        "../../07_future/03_preview_features/02_mcdc_coverage_preview.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
-        "../../07_future/03_preview_features/04_parallel_frontend_preview.md",
-        "../../07_future/03_preview_features/05_derive_coerce_pointee_preview.md",
-        "../../07_future/03_preview_features/06_const_trait_impl_preview.md",
-        "../../07_future/03_preview_features/07_stable_abi_preview.md",
-        "../../07_future/03_preview_features/08_inline_const_pattern_preview.md",
-        "../../07_future/03_preview_features/09_return_type_notation_preview.md",
-        "../../07_future/03_preview_features/10_must_not_suspend_preview.md",
-        "../../07_future/03_preview_features/11_unsafe_fields_preview.md",
-        "../../07_future/03_preview_features/12_ferrocene_preview.md",
-        "../../07_future/03_preview_features/13_lifetime_capture_preview.md",
-        "../../07_future/03_preview_features/14_pin_ergonomics_preview.md",
-        "../../07_future/03_preview_features/15_rpitit_preview.md",
-        "../../07_future/03_preview_features/16_cranelift_backend_preview.md",
-        "../../07_future/03_preview_features/17_type_alias_impl_trait_preview.md",
-        "../../07_future/03_preview_features/18_arbitrary_self_types_preview.md",
-        "../../07_future/03_preview_features/19_const_trait_preview.md",
-        "../../07_future/03_preview_features/20_ergonomic_ref_counting_preview.md",
-        "../../07_future/03_preview_features/21_rust_specification_preview.md",
-        "../../07_future/03_preview_features/22_async_drop_preview.md",
-        "../../07_future/03_preview_features/23_field_projections_preview.md",
-        "../../07_future/03_preview_features/24_borrow_sanitizer.md",
-        "../../07_future/03_preview_features/25_gen_blocks_preview.md",
-        "../../07_future/03_preview_features/26_std_autodiff_preview.md",
-        "../../07_future/03_preview_features/27_cargo_semver_checks_preview.md",
-        "../../07_future/03_preview_features/28_wasm_target_evolution.md",
-        "../../07_future/03_preview_features/29_aarch64_sve_sme_preview.md",
-        "../../07_future/03_preview_features/30_rust_in_space.md",
-        "../../07_future/03_preview_features/31_specialization_preview.md",
-        "../../07_future/03_preview_features/32_compile_time_execution.md",
-        "../../07_future/03_preview_features/33_autoverus_preview.md",
-        "../../07_future/03_preview_features/35_f16_f128_preview.md",
-        "../../07_future/03_preview_features/36_unsafe_pinned_preview.md",
-        "../../07_future/03_preview_features/37_default_field_values_preview.md",
-        "../../07_future/03_preview_features/38_complex_numbers_preview.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/02_mcdc_coverage_preview.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/04_parallel_frontend_preview.md",
+        "../../07_future/02_preview_features/05_derive_coerce_pointee_preview.md",
+        "../../07_future/02_preview_features/06_const_trait_impl_preview.md",
+        "../../07_future/02_preview_features/07_stable_abi_preview.md",
+        "../../07_future/02_preview_features/08_inline_const_pattern_preview.md",
+        "../../07_future/02_preview_features/09_return_type_notation_preview.md",
+        "../../07_future/02_preview_features/10_must_not_suspend_preview.md",
+        "../../07_future/02_preview_features/11_unsafe_fields_preview.md",
+        "../../07_future/02_preview_features/12_ferrocene_preview.md",
+        "../../07_future/02_preview_features/13_lifetime_capture_preview.md",
+        "../../07_future/02_preview_features/14_pin_ergonomics_preview.md",
+        "../../07_future/02_preview_features/15_rpitit_preview.md",
+        "../../07_future/02_preview_features/16_cranelift_backend_preview.md",
+        "../../07_future/02_preview_features/17_type_alias_impl_trait_preview.md",
+        "../../07_future/02_preview_features/18_arbitrary_self_types_preview.md",
+        "../../07_future/02_preview_features/19_const_trait_preview.md",
+        "../../07_future/02_preview_features/20_ergonomic_ref_counting_preview.md",
+        "../../07_future/02_preview_features/21_rust_specification_preview.md",
+        "../../07_future/02_preview_features/22_async_drop_preview.md",
+        "../../07_future/02_preview_features/23_field_projections_preview.md",
+        "../../07_future/02_preview_features/24_borrow_sanitizer.md",
+        "../../07_future/02_preview_features/25_gen_blocks_preview.md",
+        "../../07_future/02_preview_features/26_std_autodiff_preview.md",
+        "../../07_future/02_preview_features/27_cargo_semver_checks_preview.md",
+        "../../07_future/02_preview_features/28_wasm_target_evolution.md",
+        "../../07_future/02_preview_features/29_aarch64_sve_sme_preview.md",
+        "../../07_future/02_preview_features/30_rust_in_space.md",
+        "../../07_future/02_preview_features/31_specialization_preview.md",
+        "../../07_future/02_preview_features/32_compile_time_execution.md",
+        "../../07_future/02_preview_features/33_autoverus_preview.md",
+        "../../07_future/02_preview_features/35_f16_f128_preview.md",
+        "../../07_future/02_preview_features/36_unsafe_pinned_preview.md",
+        "../../07_future/02_preview_features/37_default_field_values_preview.md",
+        "../../07_future/02_preview_features/38_complex_numbers_preview.md",
         "../../07_future/04_research_and_experimental/01_ai_integration.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
         "../../07_future/04_research_and_experimental/03_evolution.md",
         "../../07_future/04_research_and_experimental/04_rust_for_linux.md",
         "../../07_future/04_research_and_experimental/05_rust_in_ai.md",
         "../../07_future/04_research_and_experimental/06_rust_for_webassembly.md",
-        "../../07_future/04_research_and_experimental/07_ebpf_rust.md"
+        "../../07_future/04_research_and_experimental/07_ebpf_rust.md",
+        "../06_trpl_3rd_ed_mapping.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -3882,7 +3911,6 @@
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../00_meta/01_terminology/02_bilingual_template_v2.md",
         "../../00_meta/01_terminology/03_bilingual_template.md",
-        "../../00_meta/01_trpl_3rd_ed_mapping.md",
         "../../00_meta/02_sources/01_authority_source_map.md",
         "../../00_meta/02_sources/02_rustbelt_predicate_map.md",
         "../../00_meta/02_sources/03_sources.md",
@@ -4284,50 +4312,51 @@
         "../../07_future/01_edition_roadmap/02_edition_guide.md",
         "../../07_future/01_edition_roadmap/03_rust_edition_guide.md",
         "../../07_future/01_edition_roadmap/04_roadmap.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
-        "../../07_future/03_preview_features/02_mcdc_coverage_preview.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
-        "../../07_future/03_preview_features/04_parallel_frontend_preview.md",
-        "../../07_future/03_preview_features/05_derive_coerce_pointee_preview.md",
-        "../../07_future/03_preview_features/06_const_trait_impl_preview.md",
-        "../../07_future/03_preview_features/07_stable_abi_preview.md",
-        "../../07_future/03_preview_features/08_inline_const_pattern_preview.md",
-        "../../07_future/03_preview_features/09_return_type_notation_preview.md",
-        "../../07_future/03_preview_features/10_must_not_suspend_preview.md",
-        "../../07_future/03_preview_features/11_unsafe_fields_preview.md",
-        "../../07_future/03_preview_features/12_ferrocene_preview.md",
-        "../../07_future/03_preview_features/13_lifetime_capture_preview.md",
-        "../../07_future/03_preview_features/14_pin_ergonomics_preview.md",
-        "../../07_future/03_preview_features/15_rpitit_preview.md",
-        "../../07_future/03_preview_features/16_cranelift_backend_preview.md",
-        "../../07_future/03_preview_features/17_type_alias_impl_trait_preview.md",
-        "../../07_future/03_preview_features/18_arbitrary_self_types_preview.md",
-        "../../07_future/03_preview_features/19_const_trait_preview.md",
-        "../../07_future/03_preview_features/20_ergonomic_ref_counting_preview.md",
-        "../../07_future/03_preview_features/21_rust_specification_preview.md",
-        "../../07_future/03_preview_features/22_async_drop_preview.md",
-        "../../07_future/03_preview_features/23_field_projections_preview.md",
-        "../../07_future/03_preview_features/24_borrow_sanitizer.md",
-        "../../07_future/03_preview_features/25_gen_blocks_preview.md",
-        "../../07_future/03_preview_features/26_std_autodiff_preview.md",
-        "../../07_future/03_preview_features/27_cargo_semver_checks_preview.md",
-        "../../07_future/03_preview_features/28_wasm_target_evolution.md",
-        "../../07_future/03_preview_features/29_aarch64_sve_sme_preview.md",
-        "../../07_future/03_preview_features/30_rust_in_space.md",
-        "../../07_future/03_preview_features/31_specialization_preview.md",
-        "../../07_future/03_preview_features/32_compile_time_execution.md",
-        "../../07_future/03_preview_features/33_autoverus_preview.md",
-        "../../07_future/03_preview_features/35_f16_f128_preview.md",
-        "../../07_future/03_preview_features/36_unsafe_pinned_preview.md",
-        "../../07_future/03_preview_features/37_default_field_values_preview.md",
-        "../../07_future/03_preview_features/38_complex_numbers_preview.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/02_mcdc_coverage_preview.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/04_parallel_frontend_preview.md",
+        "../../07_future/02_preview_features/05_derive_coerce_pointee_preview.md",
+        "../../07_future/02_preview_features/06_const_trait_impl_preview.md",
+        "../../07_future/02_preview_features/07_stable_abi_preview.md",
+        "../../07_future/02_preview_features/08_inline_const_pattern_preview.md",
+        "../../07_future/02_preview_features/09_return_type_notation_preview.md",
+        "../../07_future/02_preview_features/10_must_not_suspend_preview.md",
+        "../../07_future/02_preview_features/11_unsafe_fields_preview.md",
+        "../../07_future/02_preview_features/12_ferrocene_preview.md",
+        "../../07_future/02_preview_features/13_lifetime_capture_preview.md",
+        "../../07_future/02_preview_features/14_pin_ergonomics_preview.md",
+        "../../07_future/02_preview_features/15_rpitit_preview.md",
+        "../../07_future/02_preview_features/16_cranelift_backend_preview.md",
+        "../../07_future/02_preview_features/17_type_alias_impl_trait_preview.md",
+        "../../07_future/02_preview_features/18_arbitrary_self_types_preview.md",
+        "../../07_future/02_preview_features/19_const_trait_preview.md",
+        "../../07_future/02_preview_features/20_ergonomic_ref_counting_preview.md",
+        "../../07_future/02_preview_features/21_rust_specification_preview.md",
+        "../../07_future/02_preview_features/22_async_drop_preview.md",
+        "../../07_future/02_preview_features/23_field_projections_preview.md",
+        "../../07_future/02_preview_features/24_borrow_sanitizer.md",
+        "../../07_future/02_preview_features/25_gen_blocks_preview.md",
+        "../../07_future/02_preview_features/26_std_autodiff_preview.md",
+        "../../07_future/02_preview_features/27_cargo_semver_checks_preview.md",
+        "../../07_future/02_preview_features/28_wasm_target_evolution.md",
+        "../../07_future/02_preview_features/29_aarch64_sve_sme_preview.md",
+        "../../07_future/02_preview_features/30_rust_in_space.md",
+        "../../07_future/02_preview_features/31_specialization_preview.md",
+        "../../07_future/02_preview_features/32_compile_time_execution.md",
+        "../../07_future/02_preview_features/33_autoverus_preview.md",
+        "../../07_future/02_preview_features/35_f16_f128_preview.md",
+        "../../07_future/02_preview_features/36_unsafe_pinned_preview.md",
+        "../../07_future/02_preview_features/37_default_field_values_preview.md",
+        "../../07_future/02_preview_features/38_complex_numbers_preview.md",
         "../../07_future/04_research_and_experimental/01_ai_integration.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
         "../../07_future/04_research_and_experimental/03_evolution.md",
         "../../07_future/04_research_and_experimental/04_rust_for_linux.md",
         "../../07_future/04_research_and_experimental/05_rust_in_ai.md",
         "../../07_future/04_research_and_experimental/06_rust_for_webassembly.md",
-        "../../07_future/04_research_and_experimental/07_ebpf_rust.md"
+        "../../07_future/04_research_and_experimental/07_ebpf_rust.md",
+        "../06_trpl_3rd_ed_mapping.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -4603,28 +4632,28 @@
         "../../07_future/00_version_tracking/rust_1_92_stabilized.md",
         "../../07_future/01_edition_roadmap/02_edition_guide.md",
         "../../07_future/01_edition_roadmap/04_roadmap.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
-        "../../07_future/03_preview_features/02_mcdc_coverage_preview.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
-        "../../07_future/03_preview_features/04_parallel_frontend_preview.md",
-        "../../07_future/03_preview_features/05_derive_coerce_pointee_preview.md",
-        "../../07_future/03_preview_features/06_const_trait_impl_preview.md",
-        "../../07_future/03_preview_features/07_stable_abi_preview.md",
-        "../../07_future/03_preview_features/08_inline_const_pattern_preview.md",
-        "../../07_future/03_preview_features/11_unsafe_fields_preview.md",
-        "../../07_future/03_preview_features/12_ferrocene_preview.md",
-        "../../07_future/03_preview_features/14_pin_ergonomics_preview.md",
-        "../../07_future/03_preview_features/16_cranelift_backend_preview.md",
-        "../../07_future/03_preview_features/18_arbitrary_self_types_preview.md",
-        "../../07_future/03_preview_features/21_rust_specification_preview.md",
-        "../../07_future/03_preview_features/22_async_drop_preview.md",
-        "../../07_future/03_preview_features/23_field_projections_preview.md",
-        "../../07_future/03_preview_features/24_borrow_sanitizer.md",
-        "../../07_future/03_preview_features/25_gen_blocks_preview.md",
-        "../../07_future/03_preview_features/27_cargo_semver_checks_preview.md",
-        "../../07_future/03_preview_features/30_rust_in_space.md",
-        "../../07_future/03_preview_features/31_specialization_preview.md",
-        "../../07_future/03_preview_features/32_compile_time_execution.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/02_mcdc_coverage_preview.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/04_parallel_frontend_preview.md",
+        "../../07_future/02_preview_features/05_derive_coerce_pointee_preview.md",
+        "../../07_future/02_preview_features/06_const_trait_impl_preview.md",
+        "../../07_future/02_preview_features/07_stable_abi_preview.md",
+        "../../07_future/02_preview_features/08_inline_const_pattern_preview.md",
+        "../../07_future/02_preview_features/11_unsafe_fields_preview.md",
+        "../../07_future/02_preview_features/12_ferrocene_preview.md",
+        "../../07_future/02_preview_features/14_pin_ergonomics_preview.md",
+        "../../07_future/02_preview_features/16_cranelift_backend_preview.md",
+        "../../07_future/02_preview_features/18_arbitrary_self_types_preview.md",
+        "../../07_future/02_preview_features/21_rust_specification_preview.md",
+        "../../07_future/02_preview_features/22_async_drop_preview.md",
+        "../../07_future/02_preview_features/23_field_projections_preview.md",
+        "../../07_future/02_preview_features/24_borrow_sanitizer.md",
+        "../../07_future/02_preview_features/25_gen_blocks_preview.md",
+        "../../07_future/02_preview_features/27_cargo_semver_checks_preview.md",
+        "../../07_future/02_preview_features/30_rust_in_space.md",
+        "../../07_future/02_preview_features/31_specialization_preview.md",
+        "../../07_future/02_preview_features/32_compile_time_execution.md",
         "../../07_future/04_research_and_experimental/01_ai_integration.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
         "../../07_future/04_research_and_experimental/03_evolution.md",
@@ -4979,36 +5008,36 @@
         "../../07_future/01_edition_roadmap/01_rust_edition_preview.md",
         "../../07_future/01_edition_roadmap/02_edition_guide.md",
         "../../07_future/01_edition_roadmap/04_roadmap.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
-        "../../07_future/03_preview_features/02_mcdc_coverage_preview.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
-        "../../07_future/03_preview_features/04_parallel_frontend_preview.md",
-        "../../07_future/03_preview_features/05_derive_coerce_pointee_preview.md",
-        "../../07_future/03_preview_features/06_const_trait_impl_preview.md",
-        "../../07_future/03_preview_features/07_stable_abi_preview.md",
-        "../../07_future/03_preview_features/08_inline_const_pattern_preview.md",
-        "../../07_future/03_preview_features/09_return_type_notation_preview.md",
-        "../../07_future/03_preview_features/10_must_not_suspend_preview.md",
-        "../../07_future/03_preview_features/11_unsafe_fields_preview.md",
-        "../../07_future/03_preview_features/13_lifetime_capture_preview.md",
-        "../../07_future/03_preview_features/14_pin_ergonomics_preview.md",
-        "../../07_future/03_preview_features/15_rpitit_preview.md",
-        "../../07_future/03_preview_features/16_cranelift_backend_preview.md",
-        "../../07_future/03_preview_features/17_type_alias_impl_trait_preview.md",
-        "../../07_future/03_preview_features/18_arbitrary_self_types_preview.md",
-        "../../07_future/03_preview_features/19_const_trait_preview.md",
-        "../../07_future/03_preview_features/20_ergonomic_ref_counting_preview.md",
-        "../../07_future/03_preview_features/21_rust_specification_preview.md",
-        "../../07_future/03_preview_features/22_async_drop_preview.md",
-        "../../07_future/03_preview_features/23_field_projections_preview.md",
-        "../../07_future/03_preview_features/24_borrow_sanitizer.md",
-        "../../07_future/03_preview_features/25_gen_blocks_preview.md",
-        "../../07_future/03_preview_features/28_wasm_target_evolution.md",
-        "../../07_future/03_preview_features/31_specialization_preview.md",
-        "../../07_future/03_preview_features/32_compile_time_execution.md",
-        "../../07_future/03_preview_features/35_f16_f128_preview.md",
-        "../../07_future/03_preview_features/36_unsafe_pinned_preview.md",
-        "../../07_future/03_preview_features/37_default_field_values_preview.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/02_mcdc_coverage_preview.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/04_parallel_frontend_preview.md",
+        "../../07_future/02_preview_features/05_derive_coerce_pointee_preview.md",
+        "../../07_future/02_preview_features/06_const_trait_impl_preview.md",
+        "../../07_future/02_preview_features/07_stable_abi_preview.md",
+        "../../07_future/02_preview_features/08_inline_const_pattern_preview.md",
+        "../../07_future/02_preview_features/09_return_type_notation_preview.md",
+        "../../07_future/02_preview_features/10_must_not_suspend_preview.md",
+        "../../07_future/02_preview_features/11_unsafe_fields_preview.md",
+        "../../07_future/02_preview_features/13_lifetime_capture_preview.md",
+        "../../07_future/02_preview_features/14_pin_ergonomics_preview.md",
+        "../../07_future/02_preview_features/15_rpitit_preview.md",
+        "../../07_future/02_preview_features/16_cranelift_backend_preview.md",
+        "../../07_future/02_preview_features/17_type_alias_impl_trait_preview.md",
+        "../../07_future/02_preview_features/18_arbitrary_self_types_preview.md",
+        "../../07_future/02_preview_features/19_const_trait_preview.md",
+        "../../07_future/02_preview_features/20_ergonomic_ref_counting_preview.md",
+        "../../07_future/02_preview_features/21_rust_specification_preview.md",
+        "../../07_future/02_preview_features/22_async_drop_preview.md",
+        "../../07_future/02_preview_features/23_field_projections_preview.md",
+        "../../07_future/02_preview_features/24_borrow_sanitizer.md",
+        "../../07_future/02_preview_features/25_gen_blocks_preview.md",
+        "../../07_future/02_preview_features/28_wasm_target_evolution.md",
+        "../../07_future/02_preview_features/31_specialization_preview.md",
+        "../../07_future/02_preview_features/32_compile_time_execution.md",
+        "../../07_future/02_preview_features/35_f16_f128_preview.md",
+        "../../07_future/02_preview_features/36_unsafe_pinned_preview.md",
+        "../../07_future/02_preview_features/37_default_field_values_preview.md",
         "../../07_future/04_research_and_experimental/01_ai_integration.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
         "../../07_future/04_research_and_experimental/03_evolution.md",
@@ -5135,7 +5164,7 @@
         "../../04_formal/03_operational_semantics/01_denotational_semantics.md",
         "../../04_formal/03_operational_semantics/02_hoare_logic.md",
         "../../04_formal/03_operational_semantics/03_operational_semantics.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
         "01_concept_definition_atlas.md",
         "03_scenario_decision_tree_atlas.md",
         "06_inter_layer_mapping_atlas.md",
@@ -5252,8 +5281,8 @@
         "../../06_ecosystem/10_performance/01_performance_optimization.md",
         "../../06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md",
         "../../07_future/00_version_tracking/01_rust_version_tracking.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
-        "../../07_future/03_preview_features/16_cranelift_backend_preview.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/16_cranelift_backend_preview.md",
         "../04_navigation/04_inter_layer_map.md",
         "../04_navigation/06_intra_layer_model_map.md",
         "kg_ontology_v2.md"
@@ -6421,7 +6450,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](../../07_future/03_preview_features/02_mcdc_coverage_preview.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](../../07_future/02_preview_features/02_mcdc_coverage_preview.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -6437,11 +6466,11 @@
           "type": "table_row"
         },
         {
-          "text": "| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/03_safety_tags_preview.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/02_preview_features/03_safety_tags_preview.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/03_safety_tags_preview.md) | ⟹ | [AI × Rust：生成-验证闭环与确定性容器](../../07_future/04_research_and_experimental/01_ai_integration.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/02_preview_features/03_safety_tags_preview.md) | ⟹ | [AI × Rust：生成-验证闭环与确定性容器](../../07_future/04_research_and_experimental/01_ai_integration.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -6453,7 +6482,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [并行 前端编译预研：Rust 编译器 的多核扩展](../../07_future/03_preview_features/04_parallel_frontend_preview.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [并行 前端编译预研：Rust 编译器 的多核扩展](../../07_future/02_preview_features/04_parallel_frontend_preview.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -6469,7 +6498,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [派生 CoercePointee 预研：智能指针的自动类型强制](../../07_future/03_preview_features/05_derive_coerce_pointee_preview.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [派生 CoercePointee 预研：智能指针的自动类型强制](../../07_future/02_preview_features/05_derive_coerce_pointee_preview.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -6481,7 +6510,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/03_preview_features/06_const_trait_impl_preview.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/02_preview_features/06_const_trait_impl_preview.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -6489,131 +6518,131 @@
           "type": "table_row"
         },
         {
-          "text": "| [Stable ABI Preview](../../07_future/03_preview_features/07_stable_abi_preview.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/04_rust_for_linux.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Stable ABI Preview](../../07_future/02_preview_features/07_stable_abi_preview.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/04_rust_for_linux.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/03_preview_features/09_return_type_notation_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/02_preview_features/09_return_type_notation_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/03_preview_features/09_return_type_notation_preview.md) | ⟹ | [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/22_async_drop_preview.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/02_preview_features/09_return_type_notation_preview.md) | ⟹ | [Async Drop：异步资源的优雅销毁](../../07_future/02_preview_features/22_async_drop_preview.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [`must_not_suspend` Lint Preview](../../07_future/03_preview_features/10_must_not_suspend_preview.md) | ⟹ | [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/22_async_drop_preview.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [`must_not_suspend` Lint Preview](../../07_future/02_preview_features/10_must_not_suspend_preview.md) | ⟹ | [Async Drop：异步资源的优雅销毁](../../07_future/02_preview_features/22_async_drop_preview.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/03_preview_features/11_unsafe_fields_preview.md) | ⟹ | [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/03_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/02_preview_features/11_unsafe_fields_preview.md) | ⟹ | [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/02_preview_features/03_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/03_preview_features/12_ferrocene_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/02_preview_features/12_ferrocene_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Lifetime Capture in `impl Trait` Preview](../../07_future/03_preview_features/13_lifetime_capture_preview.md) | ⟹ | [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/03_preview_features/09_return_type_notation_preview.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Lifetime Capture in `impl Trait` Preview](../../07_future/02_preview_features/13_lifetime_capture_preview.md) | ⟹ | [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/02_preview_features/09_return_type_notation_preview.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/03_preview_features/14_pin_ergonomics_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/02_preview_features/14_pin_ergonomics_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/03_preview_features/14_pin_ergonomics_preview.md) | ⟹ | [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/22_async_drop_preview.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/02_preview_features/14_pin_ergonomics_preview.md) | ⟹ | [Async Drop：异步资源的优雅销毁](../../07_future/02_preview_features/22_async_drop_preview.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/03_preview_features/16_cranelift_backend_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/02_preview_features/16_cranelift_backend_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [TAIT Preview](../../07_future/03_preview_features/17_type_alias_impl_trait_preview.md) | ⟹ | [Const Trait 实现预览](../../07_future/03_preview_features/19_const_trait_preview.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [TAIT Preview](../../07_future/02_preview_features/17_type_alias_impl_trait_preview.md) | ⟹ | [Const Trait 实现预览](../../07_future/02_preview_features/19_const_trait_preview.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Const Trait 实现预览](../../07_future/03_preview_features/19_const_trait_preview.md) | ⟹ | [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/03_preview_features/06_const_trait_impl_preview.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Const Trait 实现预览](../../07_future/02_preview_features/19_const_trait_preview.md) | ⟹ | [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/02_preview_features/06_const_trait_impl_preview.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Ergonomic Ref-Counting 预研：人机工学引用计数](../../07_future/03_preview_features/20_ergonomic_ref_counting_preview.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/04_rust_for_linux.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Ergonomic Ref-Counting 预研：人机工学引用计数](../../07_future/02_preview_features/20_ergonomic_ref_counting_preview.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/04_rust_for_linux.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Rust 语言规范预研：从参考文档到形式化规范](../../07_future/03_preview_features/21_rust_specification_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Rust 语言规范预研：从参考文档到形式化规范](../../07_future/02_preview_features/21_rust_specification_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/22_async_drop_preview.md) | ⟹ | [Gen Blocks 预研：超越异步的泛化生成器](../../07_future/03_preview_features/25_gen_blocks_preview.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Async Drop：异步资源的优雅销毁](../../07_future/02_preview_features/22_async_drop_preview.md) | ⟹ | [Gen Blocks 预研：超越异步的泛化生成器](../../07_future/02_preview_features/25_gen_blocks_preview.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/24_borrow_sanitizer.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [BorrowSanitizer：动态别名规则验证工具](../../07_future/02_preview_features/24_borrow_sanitizer.md) | ⟹ | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Gen Blocks 预研：超越异步的泛化生成器](../../07_future/03_preview_features/25_gen_blocks_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Gen Blocks 预研：超越异步的泛化生成器](../../07_future/02_preview_features/25_gen_blocks_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [`std::autodiff`：Rust 官方自动微分前沿追踪](../../07_future/03_preview_features/26_std_autodiff_preview.md) | ⟹ | [Rust 在 AI 与机器学习中的新兴角色](../../07_future/04_research_and_experimental/05_rust_in_ai.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [`std::autodiff`：Rust 官方自动微分前沿追踪](../../07_future/02_preview_features/26_std_autodiff_preview.md) | ⟹ | [Rust 在 AI 与机器学习中的新兴角色](../../07_future/04_research_and_experimental/05_rust_in_ai.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [`std::autodiff`：Rust 官方自动微分前沿追踪](../../07_future/03_preview_features/26_std_autodiff_preview.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [`std::autodiff`：Rust 官方自动微分前沿追踪](../../07_future/02_preview_features/26_std_autodiff_preview.md) | ⟹ | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [WASM Target Evolution Preview](../../07_future/03_preview_features/28_wasm_target_evolution.md) | ⟹ | [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](../../07_future/04_research_and_experimental/06_rust_for_webassembly.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [WASM Target Evolution Preview](../../07_future/02_preview_features/28_wasm_target_evolution.md) | ⟹ | [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](../../07_future/04_research_and_experimental/06_rust_for_webassembly.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/03_preview_features/29_aarch64_sve_sme_preview.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/04_rust_for_linux.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/02_preview_features/29_aarch64_sve_sme_preview.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/04_rust_for_linux.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Rust in Space Preview](../../07_future/03_preview_features/30_rust_in_space.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/04_rust_for_linux.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Rust in Space Preview](../../07_future/02_preview_features/30_rust_in_space.md) | ⟹ | [Rust for Linux ：操作系统内核中的内存安全](../../07_future/04_research_and_experimental/04_rust_for_linux.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Rust in Space Preview](../../07_future/03_preview_features/30_rust_in_space.md) | ⟹ | [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/03_preview_features/12_ferrocene_preview.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Rust in Space Preview](../../07_future/02_preview_features/30_rust_in_space.md) | ⟹ | [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/02_preview_features/12_ferrocene_preview.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Specialization：Trait 实现的精确化与重叠解析](../../07_future/03_preview_features/31_specialization_preview.md) | ⟹ | [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/03_preview_features/06_const_trait_impl_preview.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Specialization：Trait 实现的精确化与重叠解析](../../07_future/02_preview_features/31_specialization_preview.md) | ⟹ | [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/02_preview_features/06_const_trait_impl_preview.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Specialization：Trait 实现的精确化与重叠解析](../../07_future/03_preview_features/31_specialization_preview.md) | ⟹ | [Effects System: Concept Pre-study](../../07_future/03_preview_features/01_effects_system.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Specialization：Trait 实现的精确化与重叠解析](../../07_future/02_preview_features/31_specialization_preview.md) | ⟹ | [Effects System: Concept Pre-study](../../07_future/02_preview_features/01_effects_system.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [AutoVerus / Verus 预览跟踪](../../07_future/03_preview_features/33_autoverus_preview.md) | ⟹ | [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/03_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [AutoVerus / Verus 预览跟踪](../../07_future/02_preview_features/33_autoverus_preview.md) | ⟹ | [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/02_preview_features/03_safety_tags_preview.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/03_preview_features/34_open_enums_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/02_preview_features/34_open_enums_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/03_preview_features/34_open_enums_preview.md) | ⟹ | [Effects System: Concept Pre-study](../../07_future/03_preview_features/01_effects_system.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/02_preview_features/34_open_enums_preview.md) | ⟹ | [Effects System: Concept Pre-study](../../07_future/02_preview_features/01_effects_system.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [f16 / f128 预研：半精度与四精度浮点类型](../../07_future/03_preview_features/35_f16_f128_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [f16 / f128 预研：半精度与四精度浮点类型](../../07_future/02_preview_features/35_f16_f128_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [UnsafePinned 预研：可变引用别名语义的精确标注](../../07_future/03_preview_features/36_unsafe_pinned_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [UnsafePinned 预研：可变引用别名语义的精确标注](../../07_future/02_preview_features/36_unsafe_pinned_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Default Field Values 预研：结构体字段默认值](../../07_future/03_preview_features/37_default_field_values_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Default Field Values 预研：结构体字段默认值](../../07_future/02_preview_features/37_default_field_values_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
-          "text": "| [Complex Numbers 预研：标准库复数类型](../../07_future/03_preview_features/38_complex_numbers_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [Complex Numbers 预研：标准库复数类型](../../07_future/02_preview_features/38_complex_numbers_preview.md) | ⟹ | [Rust 形式模型演进跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -6978,39 +7007,39 @@
         "../../07_future/01_edition_roadmap/02_edition_guide.md",
         "../../07_future/01_edition_roadmap/03_rust_edition_guide.md",
         "../../07_future/01_edition_roadmap/04_roadmap.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
-        "../../07_future/03_preview_features/02_mcdc_coverage_preview.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
-        "../../07_future/03_preview_features/04_parallel_frontend_preview.md",
-        "../../07_future/03_preview_features/05_derive_coerce_pointee_preview.md",
-        "../../07_future/03_preview_features/06_const_trait_impl_preview.md",
-        "../../07_future/03_preview_features/07_stable_abi_preview.md",
-        "../../07_future/03_preview_features/08_inline_const_pattern_preview.md",
-        "../../07_future/03_preview_features/09_return_type_notation_preview.md",
-        "../../07_future/03_preview_features/10_must_not_suspend_preview.md",
-        "../../07_future/03_preview_features/11_unsafe_fields_preview.md",
-        "../../07_future/03_preview_features/12_ferrocene_preview.md",
-        "../../07_future/03_preview_features/13_lifetime_capture_preview.md",
-        "../../07_future/03_preview_features/14_pin_ergonomics_preview.md",
-        "../../07_future/03_preview_features/15_rpitit_preview.md",
-        "../../07_future/03_preview_features/16_cranelift_backend_preview.md",
-        "../../07_future/03_preview_features/17_type_alias_impl_trait_preview.md",
-        "../../07_future/03_preview_features/19_const_trait_preview.md",
-        "../../07_future/03_preview_features/20_ergonomic_ref_counting_preview.md",
-        "../../07_future/03_preview_features/21_rust_specification_preview.md",
-        "../../07_future/03_preview_features/22_async_drop_preview.md",
-        "../../07_future/03_preview_features/24_borrow_sanitizer.md",
-        "../../07_future/03_preview_features/25_gen_blocks_preview.md",
-        "../../07_future/03_preview_features/26_std_autodiff_preview.md",
-        "../../07_future/03_preview_features/28_wasm_target_evolution.md",
-        "../../07_future/03_preview_features/29_aarch64_sve_sme_preview.md",
-        "../../07_future/03_preview_features/30_rust_in_space.md",
-        "../../07_future/03_preview_features/31_specialization_preview.md",
-        "../../07_future/03_preview_features/33_autoverus_preview.md",
-        "../../07_future/03_preview_features/35_f16_f128_preview.md",
-        "../../07_future/03_preview_features/36_unsafe_pinned_preview.md",
-        "../../07_future/03_preview_features/37_default_field_values_preview.md",
-        "../../07_future/03_preview_features/38_complex_numbers_preview.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/02_mcdc_coverage_preview.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/04_parallel_frontend_preview.md",
+        "../../07_future/02_preview_features/05_derive_coerce_pointee_preview.md",
+        "../../07_future/02_preview_features/06_const_trait_impl_preview.md",
+        "../../07_future/02_preview_features/07_stable_abi_preview.md",
+        "../../07_future/02_preview_features/08_inline_const_pattern_preview.md",
+        "../../07_future/02_preview_features/09_return_type_notation_preview.md",
+        "../../07_future/02_preview_features/10_must_not_suspend_preview.md",
+        "../../07_future/02_preview_features/11_unsafe_fields_preview.md",
+        "../../07_future/02_preview_features/12_ferrocene_preview.md",
+        "../../07_future/02_preview_features/13_lifetime_capture_preview.md",
+        "../../07_future/02_preview_features/14_pin_ergonomics_preview.md",
+        "../../07_future/02_preview_features/15_rpitit_preview.md",
+        "../../07_future/02_preview_features/16_cranelift_backend_preview.md",
+        "../../07_future/02_preview_features/17_type_alias_impl_trait_preview.md",
+        "../../07_future/02_preview_features/19_const_trait_preview.md",
+        "../../07_future/02_preview_features/20_ergonomic_ref_counting_preview.md",
+        "../../07_future/02_preview_features/21_rust_specification_preview.md",
+        "../../07_future/02_preview_features/22_async_drop_preview.md",
+        "../../07_future/02_preview_features/24_borrow_sanitizer.md",
+        "../../07_future/02_preview_features/25_gen_blocks_preview.md",
+        "../../07_future/02_preview_features/26_std_autodiff_preview.md",
+        "../../07_future/02_preview_features/28_wasm_target_evolution.md",
+        "../../07_future/02_preview_features/29_aarch64_sve_sme_preview.md",
+        "../../07_future/02_preview_features/30_rust_in_space.md",
+        "../../07_future/02_preview_features/31_specialization_preview.md",
+        "../../07_future/02_preview_features/33_autoverus_preview.md",
+        "../../07_future/02_preview_features/35_f16_f128_preview.md",
+        "../../07_future/02_preview_features/36_unsafe_pinned_preview.md",
+        "../../07_future/02_preview_features/37_default_field_values_preview.md",
+        "../../07_future/02_preview_features/38_complex_numbers_preview.md",
         "../../07_future/04_research_and_experimental/01_ai_integration.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
         "../../07_future/04_research_and_experimental/03_evolution.md",
@@ -7407,42 +7436,42 @@
         "../../07_future/00_version_tracking/rust_1_98_preview.md",
         "../../07_future/01_edition_roadmap/02_edition_guide.md",
         "../../07_future/01_edition_roadmap/04_roadmap.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
-        "../../07_future/03_preview_features/02_mcdc_coverage_preview.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
-        "../../07_future/03_preview_features/04_parallel_frontend_preview.md",
-        "../../07_future/03_preview_features/05_derive_coerce_pointee_preview.md",
-        "../../07_future/03_preview_features/06_const_trait_impl_preview.md",
-        "../../07_future/03_preview_features/07_stable_abi_preview.md",
-        "../../07_future/03_preview_features/08_inline_const_pattern_preview.md",
-        "../../07_future/03_preview_features/09_return_type_notation_preview.md",
-        "../../07_future/03_preview_features/10_must_not_suspend_preview.md",
-        "../../07_future/03_preview_features/11_unsafe_fields_preview.md",
-        "../../07_future/03_preview_features/13_lifetime_capture_preview.md",
-        "../../07_future/03_preview_features/14_pin_ergonomics_preview.md",
-        "../../07_future/03_preview_features/15_rpitit_preview.md",
-        "../../07_future/03_preview_features/16_cranelift_backend_preview.md",
-        "../../07_future/03_preview_features/17_type_alias_impl_trait_preview.md",
-        "../../07_future/03_preview_features/18_arbitrary_self_types_preview.md",
-        "../../07_future/03_preview_features/19_const_trait_preview.md",
-        "../../07_future/03_preview_features/20_ergonomic_ref_counting_preview.md",
-        "../../07_future/03_preview_features/21_rust_specification_preview.md",
-        "../../07_future/03_preview_features/22_async_drop_preview.md",
-        "../../07_future/03_preview_features/23_field_projections_preview.md",
-        "../../07_future/03_preview_features/24_borrow_sanitizer.md",
-        "../../07_future/03_preview_features/25_gen_blocks_preview.md",
-        "../../07_future/03_preview_features/26_std_autodiff_preview.md",
-        "../../07_future/03_preview_features/27_cargo_semver_checks_preview.md",
-        "../../07_future/03_preview_features/28_wasm_target_evolution.md",
-        "../../07_future/03_preview_features/29_aarch64_sve_sme_preview.md",
-        "../../07_future/03_preview_features/30_rust_in_space.md",
-        "../../07_future/03_preview_features/31_specialization_preview.md",
-        "../../07_future/03_preview_features/32_compile_time_execution.md",
-        "../../07_future/03_preview_features/33_autoverus_preview.md",
-        "../../07_future/03_preview_features/35_f16_f128_preview.md",
-        "../../07_future/03_preview_features/36_unsafe_pinned_preview.md",
-        "../../07_future/03_preview_features/37_default_field_values_preview.md",
-        "../../07_future/03_preview_features/38_complex_numbers_preview.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/02_mcdc_coverage_preview.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/04_parallel_frontend_preview.md",
+        "../../07_future/02_preview_features/05_derive_coerce_pointee_preview.md",
+        "../../07_future/02_preview_features/06_const_trait_impl_preview.md",
+        "../../07_future/02_preview_features/07_stable_abi_preview.md",
+        "../../07_future/02_preview_features/08_inline_const_pattern_preview.md",
+        "../../07_future/02_preview_features/09_return_type_notation_preview.md",
+        "../../07_future/02_preview_features/10_must_not_suspend_preview.md",
+        "../../07_future/02_preview_features/11_unsafe_fields_preview.md",
+        "../../07_future/02_preview_features/13_lifetime_capture_preview.md",
+        "../../07_future/02_preview_features/14_pin_ergonomics_preview.md",
+        "../../07_future/02_preview_features/15_rpitit_preview.md",
+        "../../07_future/02_preview_features/16_cranelift_backend_preview.md",
+        "../../07_future/02_preview_features/17_type_alias_impl_trait_preview.md",
+        "../../07_future/02_preview_features/18_arbitrary_self_types_preview.md",
+        "../../07_future/02_preview_features/19_const_trait_preview.md",
+        "../../07_future/02_preview_features/20_ergonomic_ref_counting_preview.md",
+        "../../07_future/02_preview_features/21_rust_specification_preview.md",
+        "../../07_future/02_preview_features/22_async_drop_preview.md",
+        "../../07_future/02_preview_features/23_field_projections_preview.md",
+        "../../07_future/02_preview_features/24_borrow_sanitizer.md",
+        "../../07_future/02_preview_features/25_gen_blocks_preview.md",
+        "../../07_future/02_preview_features/26_std_autodiff_preview.md",
+        "../../07_future/02_preview_features/27_cargo_semver_checks_preview.md",
+        "../../07_future/02_preview_features/28_wasm_target_evolution.md",
+        "../../07_future/02_preview_features/29_aarch64_sve_sme_preview.md",
+        "../../07_future/02_preview_features/30_rust_in_space.md",
+        "../../07_future/02_preview_features/31_specialization_preview.md",
+        "../../07_future/02_preview_features/32_compile_time_execution.md",
+        "../../07_future/02_preview_features/33_autoverus_preview.md",
+        "../../07_future/02_preview_features/35_f16_f128_preview.md",
+        "../../07_future/02_preview_features/36_unsafe_pinned_preview.md",
+        "../../07_future/02_preview_features/37_default_field_values_preview.md",
+        "../../07_future/02_preview_features/38_complex_numbers_preview.md",
         "../../07_future/04_research_and_experimental/01_ai_integration.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
         "../../07_future/04_research_and_experimental/03_evolution.md",
@@ -7498,8 +7527,8 @@
         "../../07_future/00_version_tracking/rust_1_98_preview.md",
         "../../07_future/01_edition_roadmap/01_rust_edition_preview.md",
         "../../07_future/01_edition_roadmap/03_rust_edition_guide.md",
-        "../../07_future/03_preview_features/27_cargo_semver_checks_preview.md",
-        "../../07_future/03_preview_features/29_aarch64_sve_sme_preview.md"
+        "../../07_future/02_preview_features/27_cargo_semver_checks_preview.md",
+        "../../07_future/02_preview_features/29_aarch64_sve_sme_preview.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -7549,35 +7578,6 @@
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
       "matrix_rows": 67,
-      "pre_post": {
-        "pre": [],
-        "post": []
-      },
-      "backward_chains": 0,
-      "templated_chains": 0
-    },
-    {
-      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\07_placeholders\\01_placeholder_generic.md",
-      "layer": "L0",
-      "title": "占位符页面",
-      "positioning": "",
-      "line_count": 23,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "../00_framework/cpp_rust_engineering_roadmap.md",
-        "../00_framework/pattern_semantic_space_index.md",
-        "../00_framework/pl_foundations_roadmap.md",
-        "../03_audit/01_concept_audit_guide.md",
-        "../04_navigation/03_concept_index.md",
-        "../04_navigation/09_navigation.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 0,
       "pre_post": {
         "pre": [],
         "post": []
@@ -7943,7 +7943,7 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
-        "../../07_future/03_preview_features/16_cranelift_backend_preview.md",
+        "../../07_future/02_preview_features/16_cranelift_backend_preview.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
         "../01_ownership_borrow_lifetime/05_move_semantics.md",
         "../02_type_system/01_type_system.md"
@@ -8139,7 +8139,7 @@
         "../01_ownership_borrow_lifetime/01_ownership.md",
         "../01_ownership_borrow_lifetime/02_borrowing.md",
         "../07_modules_and_items/02_functions.md",
-        "../11_quizzes/27_quiz_closures_iterators.md"
+        "../11_quizzes/04_quiz_closures_iterators.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
@@ -8309,11 +8309,11 @@
         "../../02_intermediate/03_error_handling/01_error_handling.md",
         "../../03_advanced/01_async/01_async.md",
         "../../04_formal/03_operational_semantics/04_evaluation_strategies.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
         "../01_ownership_borrow_lifetime/02_borrowing.md",
         "../03_values_and_references/03_variable_model.md",
-        "../11_quizzes/29_quiz_pl_foundations.md",
+        "../11_quizzes/05_quiz_pl_foundations.md",
         "https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md"
       ],
       "transitions": 0,
@@ -8325,7 +8325,7 @@
           "[Variable Model](../03_values_and_references/03_variable_model.md) · [Evaluation Strategies](../../04_formal/03_operational_semantics/04_evaluation_strategies.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)"
         ],
         "post": [
-          "[Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Effects System](../../07_future/03_preview_features/01_effects_system.md) · [Async](../../03_advanced/01_async/01_async.md)"
+          "[Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Effects System](../../07_future/02_preview_features/01_effects_system.md) · [Async](../../03_advanced/01_async/01_async.md)"
         ]
       },
       "backward_chains": 0,
@@ -9097,7 +9097,7 @@
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../02_type_system/01_type_system.md",
-        "../11_quizzes/33_quiz_ownership_borrowing.md",
+        "../11_quizzes/06_quiz_ownership_borrowing.md",
         "01_ownership.md",
         "02_borrowing.md",
         "03_lifetimes.md",
@@ -9586,7 +9586,7 @@
         "../02_type_system/04_coercion_and_casting.md",
         "../06_strings_and_text/01_strings_and_text.md",
         "../08_error_handling/03_panic_and_abort.md",
-        "../11_quizzes/33_quiz_ownership_borrowing.md",
+        "../11_quizzes/06_quiz_ownership_borrowing.md",
         "01_ownership.md",
         "02_borrowing.md",
         "03_lifetimes.md",
@@ -10022,7 +10022,7 @@
         "../../00_meta/04_navigation/04_inter_layer_map.md",
         "../../02_intermediate/01_generics/01_generics.md",
         "../../03_advanced/01_async/01_async.md",
-        "../11_quizzes/33_quiz_ownership_borrowing.md",
+        "../11_quizzes/06_quiz_ownership_borrowing.md",
         "01_ownership.md",
         "02_borrowing.md",
         "03_lifetimes.md",
@@ -10525,7 +10525,7 @@
       "cross_references": [
         "../../00_meta/04_navigation/07_learning_guide.md",
         "../../02_intermediate/00_traits/05_construction_and_initialization.md",
-        "../../02_intermediate/09_quizzes/30_quiz_cpp_rust_foundations.md",
+        "../../02_intermediate/08_quizzes/30_quiz_cpp_rust_foundations.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../03_values_and_references/03_variable_model.md",
         "01_ownership.md",
@@ -10582,7 +10582,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/04_navigation/07_learning_guide.md",
-        "../11_quizzes/33_quiz_ownership_borrowing.md",
+        "../11_quizzes/06_quiz_ownership_borrowing.md",
         "01_ownership.md",
         "02_borrowing.md",
         "03_lifetimes.md"
@@ -11169,7 +11169,7 @@
         "../01_ownership_borrow_lifetime/02_borrowing.md",
         "../01_ownership_borrow_lifetime/03_lifetimes.md",
         "../01_ownership_borrow_lifetime/04_lifetimes_advanced.md",
-        "../11_quizzes/24_quiz_type_system.md",
+        "../11_quizzes/01_quiz_type_system.md",
         "01_type_system.md",
         "02_never_type.md",
         "04_coercion_and_casting.md",
@@ -11884,7 +11884,7 @@
         "../../03_advanced/06_low_level_patterns/03_type_erasure.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
         "../03_values_and_references/03_variable_model.md",
-        "../11_quizzes/29_quiz_pl_foundations.md",
+        "../11_quizzes/05_quiz_pl_foundations.md",
         "01_type_system.md"
       ],
       "transitions": 0,
@@ -12396,7 +12396,7 @@
         "../01_ownership_borrow_lifetime/02_borrowing.md",
         "../01_ownership_borrow_lifetime/05_move_semantics.md",
         "../02_type_system/01_type_system.md",
-        "../11_quizzes/29_quiz_pl_foundations.md"
+        "../11_quizzes/05_quiz_pl_foundations.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -12643,7 +12643,7 @@
         "../02_type_system/01_type_system.md",
         "../08_error_handling/01_error_handling_basics.md",
         "../08_error_handling/03_panic_and_abort.md",
-        "../11_quizzes/29_quiz_pl_foundations.md",
+        "../11_quizzes/05_quiz_pl_foundations.md",
         "02_patterns.md",
         "04_statements_and_expressions.md"
       ],
@@ -14009,7 +14009,7 @@
         "../../06_ecosystem/02_core_crates/01_core_crates.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
         "../02_type_system/01_type_system.md",
-        "../11_quizzes/26_quiz_modules_testing.md",
+        "../11_quizzes/03_quiz_modules_testing.md",
         "03_use_declarations.md",
         "04_structs.md",
         "05_enumerations.md",
@@ -15534,7 +15534,7 @@
         "../02_type_system/01_type_system.md",
         "../04_control_flow/01_control_flow.md",
         "../07_modules_and_items/05_enumerations.md",
-        "../11_quizzes/25_quiz_error_handling.md",
+        "../11_quizzes/02_quiz_error_handling.md",
         "02_error_handling_control_flow.md",
         "03_panic_and_abort.md"
       ],
@@ -16113,7 +16113,7 @@
         "../08_error_handling/01_error_handling_basics.md",
         "../08_error_handling/03_panic_and_abort.md",
         "../09_macros_basics/01_attributes_and_macros.md",
-        "../11_quizzes/26_quiz_modules_testing.md"
+        "../11_quizzes/03_quiz_modules_testing.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
@@ -16316,7 +16316,7 @@
         "../05_collections/01_collections.md",
         "../06_strings_and_text/01_strings_and_text.md",
         "../09_macros_basics/01_attributes_and_macros.md",
-        "33_quiz_ownership_borrowing.md"
+        "06_quiz_ownership_borrowing.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -16327,7 +16327,7 @@
           "> [Type System](../02_type_system/01_type_system.md) ·"
         ],
         "post": [
-          "[Ownership](33_quiz_ownership_borrowing.md)"
+          "[Ownership](06_quiz_ownership_borrowing.md)"
         ]
       },
       "backward_chains": 0,
@@ -19523,7 +19523,7 @@
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
         "../../04_formal/02_separation_logic/01_rustbelt.md",
         "../../07_future/00_version_tracking/01_rust_version_tracking.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
         "../00_traits/01_traits.md",
         "../00_traits/04_advanced_traits.md",
         "../00_traits/07_generic_associated_types.md",
@@ -19678,7 +19678,7 @@
         "../../01_foundation/02_type_system/03_numerics.md",
         "../../01_foundation/04_control_flow/04_statements_and_expressions.md",
         "../../01_foundation/07_modules_and_items/09_const_items_and_const_fn.md",
-        "../../07_future/03_preview_features/06_const_trait_impl_preview.md",
+        "../../07_future/02_preview_features/06_const_trait_impl_preview.md",
         "../00_traits/01_traits.md",
         "01_generics.md",
         "03_type_level_programming.md"
@@ -19692,7 +19692,7 @@
           "[Generics](01_generics.md) · [Traits](../00_traits/01_traits.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)"
         ],
         "post": [
-          "[Type-Level Programming](03_type_level_programming.md) · [const Trait Impl（预览）](../../07_future/03_preview_features/06_const_trait_impl_preview.md) · [Const Eval](../../01_foundation/04_control_flow/04_statements_and_expressions.md)"
+          "[Type-Level Programming](03_type_level_programming.md) · [const Trait Impl（预览）](../../07_future/02_preview_features/06_const_trait_impl_preview.md) · [Const Eval](../../01_foundation/04_control_flow/04_statements_and_expressions.md)"
         ]
       },
       "backward_chains": 0,
@@ -22200,7 +22200,7 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../05_comparative/README.md",
         "../02_memory_management/01_memory_management.md",
-        "../09_quizzes/30_quiz_cpp_rust_foundations.md",
+        "../08_quizzes/30_quiz_cpp_rust_foundations.md",
         "01_error_handling.md",
         "02_error_handling_deep_dive.md",
         "03_panic.md"
@@ -22976,7 +22976,7 @@
         "../00_traits/04_advanced_traits.md",
         "../01_generics/01_generics.md",
         "../03_error_handling/02_error_handling_deep_dive.md",
-        "../09_quizzes/30_quiz_cpp_rust_foundations.md"
+        "../08_quizzes/30_quiz_cpp_rust_foundations.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -24292,7 +24292,7 @@
         "../../05_comparative/README.md",
         "../00_traits/01_traits.md",
         "../01_generics/01_generics.md",
-        "../09_quizzes/30_quiz_cpp_rust_foundations.md",
+        "../08_quizzes/30_quiz_cpp_rust_foundations.md",
         "02_dsl_and_embedding.md"
       ],
       "transitions": 0,
@@ -24674,7 +24674,7 @@
         "../../01_foundation/00_start/03_closure_basics.md",
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../01_foundation/05_collections/01_collections.md",
-        "../../01_foundation/11_quizzes/27_quiz_closures_iterators.md",
+        "../../01_foundation/11_quizzes/04_quiz_closures_iterators.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/01_async.md",
         "../../03_advanced/01_async/09_stream_algebra_and_backpressure.md",
@@ -27253,7 +27253,7 @@
         "../../06_ecosystem/06_data_and_distributed/03_stream_processing_ecosystem.md",
         "../../06_ecosystem/README.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
         "../00_concurrency/09_quiz_concurrency_async.md",
         "../02_unsafe/01_unsafe.md",
         "../06_low_level_patterns/05_stream_processing_semantics.md",
@@ -28006,7 +28006,7 @@
         "../../02_intermediate/02_memory_management/01_memory_management.md",
         "../../02_intermediate/03_error_handling/01_error_handling.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
-        "../../07_future/03_preview_features/22_async_drop_preview.md",
+        "../../07_future/02_preview_features/22_async_drop_preview.md",
         "01_async.md",
         "02_async_advanced.md",
         "03_async_patterns.md",
@@ -28025,7 +28025,7 @@
           "[Async/Await](01_async.md) · [Pin 与 Unpin](08_pin_unpin.md) · [Future 与 Executor 机制](04_future_and_executor_mechanisms.md)"
         ],
         "post": [
-          "[Async Drop（预览）](../../07_future/03_preview_features/22_async_drop_preview.md) · [Ownership 形式化](../../04_formal/01_ownership_logic/02_ownership_formal.md)"
+          "[Async Drop（预览）](../../07_future/02_preview_features/22_async_drop_preview.md) · [Ownership 形式化](../../04_formal/01_ownership_logic/02_ownership_formal.md)"
         ]
       },
       "backward_chains": 0,
@@ -28244,7 +28244,7 @@
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/04_types_and_conversions/02_closure_types.md",
         "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
-        "../../07_future/03_preview_features/22_async_drop_preview.md",
+        "../../07_future/02_preview_features/22_async_drop_preview.md",
         "../02_unsafe/02_unsafe_boundary_panorama.md",
         "01_async.md",
         "02_async_advanced.md",
@@ -28267,7 +28267,7 @@
           "[Async/Await](01_async.md) · [Pin 与 Unpin](08_pin_unpin.md) · [Future 与 Executor 机制](04_future_and_executor_mechanisms.md)"
         ],
         "post": [
-          "[Async 取消安全](05_async_cancellation_safety.md) · [Async Drop（预览）](../../07_future/03_preview_features/22_async_drop_preview.md) · [Unsafe 边界全景](../02_unsafe/02_unsafe_boundary_panorama.md)"
+          "[Async 取消安全](05_async_cancellation_safety.md) · [Async Drop（预览）](../../07_future/02_preview_features/22_async_drop_preview.md) · [Unsafe 边界全景](../02_unsafe/02_unsafe_boundary_panorama.md)"
         ]
       },
       "backward_chains": 0,
@@ -28701,7 +28701,7 @@
         "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
         "../../07_future/00_version_tracking/migration_197_decision_tree.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
-        "../../07_future/03_preview_features/25_gen_blocks_preview.md",
+        "../../07_future/02_preview_features/25_gen_blocks_preview.md",
         "../02_unsafe/01_unsafe.md",
         "../README.md",
         "01_async.md",
@@ -28716,7 +28716,7 @@
           "[Async](01_async.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)"
         ],
         "post": [
-          "[Unsafe](../02_unsafe/01_unsafe.md) · [Gen Blocks](../../07_future/03_preview_features/25_gen_blocks_preview.md)"
+          "[Unsafe](../02_unsafe/01_unsafe.md) · [Gen Blocks](../../07_future/02_preview_features/25_gen_blocks_preview.md)"
         ]
       },
       "backward_chains": 3,
@@ -32125,7 +32125,7 @@
         "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
         "../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md",
         "../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md",
-        "../../07_future/03_preview_features/27_cargo_semver_checks_preview.md",
+        "../../07_future/02_preview_features/27_cargo_semver_checks_preview.md",
         "02_proc_macro.md",
         "04_macro_debugging_and_diagnostics.md",
         "05_production_grade_macro_development.md"
@@ -32139,7 +32139,7 @@
           "> [过程宏（Procedural Macro）](02_proc_macro.md) ·"
         ],
         "post": [
-          "> [Cargo semver-checks](../../07_future/03_preview_features/27_cargo_semver_checks_preview.md) ·"
+          "> [Cargo semver-checks](../../07_future/02_preview_features/27_cargo_semver_checks_preview.md) ·"
         ]
       },
       "backward_chains": 2,
@@ -35786,7 +35786,7 @@
         "../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md",
         "../../04_formal/05_rustc_internals/06_names_and_resolution.md",
         "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
-        "../../07_future/03_preview_features/27_cargo_semver_checks_preview.md"
+        "../../07_future/02_preview_features/27_cargo_semver_checks_preview.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -35797,7 +35797,7 @@
           "[Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md) · [Names, Scopes and Resolution](../../04_formal/05_rustc_internals/06_names_and_resolution.md)"
         ],
         "post": [
-          "[API Naming Conventions](../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md) · [Cargo SemVer Checks](../../07_future/03_preview_features/27_cargo_semver_checks_preview.md) · [Safety Boundaries](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)"
+          "[API Naming Conventions](../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md) · [Cargo SemVer Checks](../../07_future/02_preview_features/27_cargo_semver_checks_preview.md) · [Safety Boundaries](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)"
         ]
       },
       "backward_chains": 0,
@@ -38303,7 +38303,7 @@
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../03_advanced/02_unsafe/06_memory_model.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
         "../01_ownership_logic/02_ownership_formal.md",
         "../02_separation_logic/01_rustbelt.md",
         "../03_operational_semantics/01_denotational_semantics.md",
@@ -39362,9 +39362,9 @@
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md",
         "../../07_future/00_version_tracking/rust_1_98_preview.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
-        "../../07_future/03_preview_features/24_borrow_sanitizer.md",
-        "../../07_future/03_preview_features/33_autoverus_preview.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/24_borrow_sanitizer.md",
+        "../../07_future/02_preview_features/33_autoverus_preview.md",
         "../02_separation_logic/04_borrow_sanitizer_in_formal.md",
         "../04_model_checking/07_autoverus.md",
         "../04_model_checking/08_miri.md",
@@ -39767,7 +39767,7 @@
       "sources": [],
       "cross_references": [
         "../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
         "../04_model_checking/07_autoverus.md",
         "../04_model_checking/08_miri.md",
         "04_borrow_sanitizer_in_formal.md"
@@ -39802,7 +39802,7 @@
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md",
         "../../07_future/00_version_tracking/rust_1_98_preview.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
         "../01_ownership_logic/02_ownership_formal.md",
         "../01_ownership_logic/05_tree_borrows_deep_dive.md",
         "../04_model_checking/07_autoverus.md",
@@ -40350,7 +40350,7 @@
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../01_foundation/03_values_and_references/03_variable_model.md",
         "../../01_foundation/04_control_flow/01_control_flow.md",
-        "../../01_foundation/11_quizzes/29_quiz_pl_foundations.md",
+        "../../01_foundation/11_quizzes/05_quiz_pl_foundations.md",
         "../../03_advanced/01_async/01_async.md",
         "../00_type_theory/05_lambda_calculus.md",
         "../01_ownership_logic/02_ownership_formal.md"
@@ -41111,8 +41111,8 @@
         "../../02_intermediate/01_generics/01_generics.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
-        "../../07_future/03_preview_features/24_borrow_sanitizer.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/24_borrow_sanitizer.md",
         "../01_ownership_logic/05_tree_borrows_deep_dive.md",
         "../02_separation_logic/01_rustbelt.md",
         "../02_separation_logic/04_borrow_sanitizer_in_formal.md",
@@ -41250,7 +41250,7 @@
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
         "../../07_future/04_research_and_experimental/03_evolution.md",
         "../00_type_theory/01_type_theory.md",
         "../01_ownership_logic/01_linear_logic.md",
@@ -41416,8 +41416,8 @@
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md",
         "../../07_future/00_version_tracking/rust_1_98_preview.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
-        "../../07_future/03_preview_features/33_autoverus_preview.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/33_autoverus_preview.md",
         "../02_separation_logic/04_borrow_sanitizer_in_formal.md",
         "01_verification_toolchain.md"
       ],
@@ -41620,7 +41620,7 @@
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
         "../01_ownership_logic/05_tree_borrows_deep_dive.md",
         "../02_separation_logic/04_borrow_sanitizer_in_formal.md",
         "04_modern_verification_tools.md",
@@ -41676,7 +41676,7 @@
         "../../06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md",
         "../../06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md",
         "../../06_ecosystem/11_domain_applications/22_autosar_and_rust.md",
-        "../../07_future/03_preview_features/12_ferrocene_preview.md",
+        "../../07_future/02_preview_features/12_ferrocene_preview.md",
         "01_verification_toolchain.md",
         "03_aerospace_certification_formal_methods.md"
       ],
@@ -41686,7 +41686,7 @@
       "matrix_rows": 28,
       "pre_post": {
         "pre": [
-          "[Ferrocene](../../07_future/03_preview_features/12_ferrocene_preview.md) · [验证工具链](01_verification_toolchain.md) · [航空航天认证与形式化方法](03_aerospace_certification_formal_methods.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
+          "[Ferrocene](../../07_future/02_preview_features/12_ferrocene_preview.md) · [验证工具链](01_verification_toolchain.md) · [航空航天认证与形式化方法](03_aerospace_certification_formal_methods.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
         ],
         "post": [
           "[安全关键 Rust 专题索引](../../06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md) · [cargo vet 与供应链审计](../../06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md)"
@@ -44003,7 +44003,7 @@
         "../../04_formal/07_concurrency_semantics/03_actor_semantics.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/03_design_patterns/01_patterns.md",
-        "../../07_future/03_preview_features/01_effects_system.md",
+        "../../07_future/02_preview_features/01_effects_system.md",
         "../01_systems_languages/03_rust_vs_go.md",
         "../02_managed_languages/01_rust_vs_java.md",
         "01_paradigm_matrix.md"
@@ -46734,7 +46734,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\00_toolchain\\05_compiler_infrastructure.md",
       "layer": "L6",
       "title": "Rust 编译器基础设施深度解析",
-      "positioning": "系统梳理 Rust 编译器（rustc）的核心基础设施——并行前端、Cranelift 后端（两主题深度正文分别以 [04_parallel_frontend_preview](../../07_future/03_preview_features/04_parallel_frontend_preview.md)、[16_cranelift_backend_preview](../../07_future/03_preview_features/16_cranelift_backend_preview.md) 为权威页，本页仅保留摘要）、build-std、Sanitizer——分析其对编译速度、目标平台和开发体验的影响。",
+      "positioning": "系统梳理 Rust 编译器（rustc）的核心基础设施——并行前端、Cranelift 后端（两主题深度正文分别以 [04_parallel_frontend_preview](../../07_future/02_preview_features/04_parallel_frontend_preview.md)、[16_cranelift_backend_preview](../../07_future/02_preview_features/16_cranelift_backend_preview.md) 为权威页，本页仅保留摘要）、build-std、Sanitizer——分析其对编译速度、目标平台和开发体验的影响。",
       "line_count": 334,
       "theorem_chains": [
         {
@@ -46770,8 +46770,8 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/00_version_tracking/rust_1_97_preview.md",
         "../../07_future/01_edition_roadmap/04_roadmap.md",
-        "../../07_future/03_preview_features/04_parallel_frontend_preview.md",
-        "../../07_future/03_preview_features/16_cranelift_backend_preview.md",
+        "../../07_future/02_preview_features/04_parallel_frontend_preview.md",
+        "../../07_future/02_preview_features/16_cranelift_backend_preview.md",
         "../10_performance/01_performance_optimization.md",
         "01_toolchain.md"
       ],
@@ -60249,9 +60249,9 @@
         "../../04_formal/04_model_checking/01_verification_toolchain.md",
         "../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md",
         "../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md",
-        "../../07_future/03_preview_features/02_mcdc_coverage_preview.md",
-        "../../07_future/03_preview_features/03_safety_tags_preview.md",
-        "../../07_future/03_preview_features/12_ferrocene_preview.md",
+        "../../07_future/02_preview_features/02_mcdc_coverage_preview.md",
+        "../../07_future/02_preview_features/03_safety_tags_preview.md",
+        "../../07_future/02_preview_features/12_ferrocene_preview.md",
         "22_autosar_and_rust.md"
       ],
       "transitions": 0,
@@ -60286,7 +60286,7 @@
         "../../../content/safety_critical/07_case_studies/03_case_study_03_automotive_ecus.md",
         "../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
-        "../../07_future/03_preview_features/12_ferrocene_preview.md",
+        "../../07_future/02_preview_features/12_ferrocene_preview.md",
         "../07_security_and_cryptography/03_cargo_vet_supply_chain.md",
         "../13_quizzes/04_quiz_domain_applications.md",
         "14_industrial_case_studies.md",
@@ -60298,7 +60298,7 @@
       "matrix_rows": 26,
       "pre_post": {
         "pre": [
-          "[Ferrocene](../../07_future/03_preview_features/12_ferrocene_preview.md) · [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) · [安全关键 Rust 专题索引](21_safety_critical_topic_index.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
+          "[Ferrocene](../../07_future/02_preview_features/12_ferrocene_preview.md) · [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) · [安全关键 Rust 专题索引](21_safety_critical_topic_index.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
         ],
         "post": [
           "[Industrial Case Studies](14_industrial_case_studies.md) · [cargo vet 与供应链审计](../07_security_and_cryptography/03_cargo_vet_supply_chain.md)"
@@ -61311,20 +61311,20 @@
         "../../03_advanced/01_async/01_async.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
-        "../03_preview_features/02_mcdc_coverage_preview.md",
-        "../03_preview_features/03_safety_tags_preview.md",
-        "../03_preview_features/04_parallel_frontend_preview.md",
-        "../03_preview_features/05_derive_coerce_pointee_preview.md",
-        "../03_preview_features/06_const_trait_impl_preview.md",
-        "../03_preview_features/09_return_type_notation_preview.md",
-        "../03_preview_features/11_unsafe_fields_preview.md",
-        "../03_preview_features/12_ferrocene_preview.md",
-        "../03_preview_features/16_cranelift_backend_preview.md",
-        "../03_preview_features/20_ergonomic_ref_counting_preview.md",
-        "../03_preview_features/23_field_projections_preview.md",
-        "../03_preview_features/24_borrow_sanitizer.md",
-        "../03_preview_features/25_gen_blocks_preview.md",
-        "../03_preview_features/34_open_enums_preview.md",
+        "../02_preview_features/02_mcdc_coverage_preview.md",
+        "../02_preview_features/03_safety_tags_preview.md",
+        "../02_preview_features/04_parallel_frontend_preview.md",
+        "../02_preview_features/05_derive_coerce_pointee_preview.md",
+        "../02_preview_features/06_const_trait_impl_preview.md",
+        "../02_preview_features/09_return_type_notation_preview.md",
+        "../02_preview_features/11_unsafe_fields_preview.md",
+        "../02_preview_features/12_ferrocene_preview.md",
+        "../02_preview_features/16_cranelift_backend_preview.md",
+        "../02_preview_features/20_ergonomic_ref_counting_preview.md",
+        "../02_preview_features/23_field_projections_preview.md",
+        "../02_preview_features/24_borrow_sanitizer.md",
+        "../02_preview_features/25_gen_blocks_preview.md",
+        "../02_preview_features/34_open_enums_preview.md",
         "../04_research_and_experimental/02_formal_methods.md",
         "../04_research_and_experimental/03_evolution.md",
         "https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md",
@@ -61955,7 +61955,7 @@
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/01_cargo/19_cargo_commands_reference.md",
         "../../06_ecosystem/12_networking/05_networking_basics.md",
-        "../03_preview_features/15_rpitit_preview.md",
+        "../02_preview_features/15_rpitit_preview.md",
         "/crates/c10_networks/docs/tier_03_references/04_network_performance_benchmarks_reference.md",
         "01_rust_version_tracking.md",
         "rust_1_91_stabilized.md",
@@ -63393,7 +63393,7 @@
         "../../06_ecosystem/04_web_and_networking/07_network_protocols.md",
         "../../06_ecosystem/12_networking/05_networking_basics.md",
         "../01_edition_roadmap/02_edition_guide.md",
-        "../03_preview_features/13_lifetime_capture_preview.md",
+        "../02_preview_features/13_lifetime_capture_preview.md",
         "/crates/c10_networks/docs/00_master_index.md",
         "01_rust_version_tracking.md",
         "rust_1_95_stabilized.md",
@@ -63927,10 +63927,10 @@
         "../../04_formal/04_model_checking/07_autoverus.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
-        "../03_preview_features/03_safety_tags_preview.md",
-        "../03_preview_features/09_return_type_notation_preview.md",
-        "../03_preview_features/14_pin_ergonomics_preview.md",
-        "../03_preview_features/22_async_drop_preview.md",
+        "../02_preview_features/03_safety_tags_preview.md",
+        "../02_preview_features/09_return_type_notation_preview.md",
+        "../02_preview_features/14_pin_ergonomics_preview.md",
+        "../02_preview_features/22_async_drop_preview.md",
         "rust_1_97_preview.md",
         "rust_1_98_stabilized.md"
       ],
@@ -63982,10 +63982,10 @@
       "sources": [],
       "cross_references": [
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
-        "../03_preview_features/03_safety_tags_preview.md",
-        "../03_preview_features/09_return_type_notation_preview.md",
-        "../03_preview_features/14_pin_ergonomics_preview.md",
-        "../03_preview_features/22_async_drop_preview.md",
+        "../02_preview_features/03_safety_tags_preview.md",
+        "../02_preview_features/09_return_type_notation_preview.md",
+        "../02_preview_features/14_pin_ergonomics_preview.md",
+        "../02_preview_features/22_async_drop_preview.md",
         "01_rust_version_tracking.md",
         "03_rust_release_process.md",
         "rust_1_97_stabilized.md",
@@ -64433,9 +64433,9 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../00_version_tracking/01_rust_version_tracking.md",
-        "../03_preview_features/24_borrow_sanitizer.md",
-        "../03_preview_features/31_specialization_preview.md",
-        "../03_preview_features/34_open_enums_preview.md",
+        "../02_preview_features/24_borrow_sanitizer.md",
+        "../02_preview_features/31_specialization_preview.md",
+        "../02_preview_features/34_open_enums_preview.md",
         "../04_research_and_experimental/02_formal_methods.md",
         "../04_research_and_experimental/03_evolution.md",
         "../04_research_and_experimental/05_rust_in_ai.md",
@@ -68603,7 +68603,7 @@
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../00_version_tracking/01_rust_version_tracking.md",
-        "../03_preview_features/01_effects_system.md",
+        "../02_preview_features/01_effects_system.md",
         "02_formal_methods.md",
         "https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md"
       ],
@@ -68751,7 +68751,7 @@
         "../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md",
         "../../04_formal/04_model_checking/07_autoverus.md",
         "../../06_ecosystem/05_systems_and_embedded/02_cross_compilation.md",
-        "../03_preview_features/03_safety_tags_preview.md",
+        "../02_preview_features/03_safety_tags_preview.md",
         "03_evolution.md",
         "04_rust_for_linux.md"
       ],
@@ -69233,7 +69233,7 @@
         "../00_version_tracking/rust_1_96_stabilized.md",
         "../00_version_tracking/rust_1_97_stabilized.md",
         "../00_version_tracking/rust_1_98_preview.md",
-        "../03_preview_features/12_ferrocene_preview.md"
+        "../02_preview_features/12_ferrocene_preview.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,

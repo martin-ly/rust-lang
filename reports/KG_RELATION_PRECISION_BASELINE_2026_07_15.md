@@ -88,4 +88,4 @@
 
 ## 6. 机器可读
 
-- JSON: `reports/KG_RELATION_PRECISION_2026-07-15.json`
+- JSON: `reports/KG_RELATION_PRECISION_BASELINE_2026_07_15.json`

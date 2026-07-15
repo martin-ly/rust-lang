@@ -96,7 +96,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--strict", action="store_true")
     ap.add_argument("--out-date", default=_dt.date.today().isoformat())
+    ap.add_argument("--baseline", action="store_true", help="文件名加 BASELINE 后缀")
     args = ap.parse_args()
+    name_suffix = f"BASELINE_{args.out_date.replace('-', '_')}" if args.baseline else args.out_date
 
     data = json.load(open(KG, encoding="utf-8"))
     entities = data.get("entities", [])
@@ -144,8 +146,8 @@ def main():
         "core_predicate_distribution": dict(core_type_counts.most_common()),
     }
 
-    out_md = os.path.join(ROOT, "reports", f"KG_RELATION_PRECISION_{args.out_date}.md")
-    out_json = os.path.join(ROOT, "reports", f"KG_RELATION_PRECISION_{args.out_date}.json")
+    out_md = os.path.join(ROOT, "reports", f"KG_RELATION_PRECISION_{name_suffix}.md")
+    out_json = os.path.join(ROOT, "reports", f"KG_RELATION_PRECISION_{name_suffix}.json")
 
     with open(out_json, "w", encoding="utf-8") as f:
         json.dump(
@@ -206,7 +208,7 @@ def main():
             f.write("**结论**: 存在核心实体没有语义谓词，需补充。\n")
         else:
             f.write("**结论**: 核心 50 实体均已实例化至少一条语义谓词。\n")
-        f.write(f"\n## 6. 机器可读\n\n- JSON: `reports/KG_RELATION_PRECISION_{args.out_date}.json`\n")
+        f.write(f"\n## 6. 机器可读\n\n- JSON: `reports/KG_RELATION_PRECISION_{name_suffix}.json`\n")
 
     print(f"[KG relation precision] total_relations={total} generic_ratio={generic_ratio*100:.2f}%")
     print(f"  core_entities={len(core_ids)} core_relations={core_total} core_generic_ratio={core_generic_ratio*100:.2f}%")

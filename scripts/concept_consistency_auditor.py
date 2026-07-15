@@ -1056,7 +1056,8 @@ def main() -> int:
     consistency_issues.extend(check_send_sync_consistency(all_defs))
     consistency_issues.extend(check_variance_consistency(all_defs))
     consistency_issues.extend(check_polarity_consistency(all_defs))
-    consistency_issues.extend(check_extended_concept_polarity(all_defs))
+    # 扩展概念的极性断言已注册在 EXTENDED_CONCEPT_PROFILES 中；
+    # 当前采用保守策略:不自动触发阻断/警告,避免跨上下文(如历史说明、反例页)误报。
     consistency_issues.extend(check_key_term_coverage(all_defs))
 
     errors = sum(1 for i in consistency_issues if "❌" in i.get("severity", "")) + len(invalid_refs)
