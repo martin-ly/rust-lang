@@ -763,7 +763,7 @@ func ParseJSON(input string) string {
 | Rust vs C++ | [`./01_rust_vs_cpp.md`](01_rust_vs_cpp.md) | 同层对比 |
 | 范式矩阵 | [`./03_paradigm_matrix.md`](../00_paradigms/01_paradigm_matrix.md) | 定位参考 |
 | 安全边界 | [`./04_safety_boundaries.md`](../03_domain_comparisons/01_safety_boundaries.md) | 安全保证对比 |
-| 形式化方法 | [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | 验证能力对比 |
+| 形式化方法 | [`../07_future/04_research_and_experimental/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | 验证能力对比 |
 
 > **推理链**: Rust 的所有权系统 ⟹ 编译期消除数据竞争 ⟹ 零运行时 GC 开销 ⟹ 适合系统编程与高性能服务。
 > **推理链**: Go 的 GC 简化内存管理 ⟹ 降低开发者心智负担 ⟹ 适合快速开发与云原生微服务 ⟹ 但无法保证最坏情况延迟。

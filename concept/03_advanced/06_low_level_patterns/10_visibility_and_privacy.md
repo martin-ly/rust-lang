@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
 > **前置依赖**: [Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md) · [Names, Scopes and Resolution](../../04_formal/05_rustc_internals/06_names_and_resolution.md)
-> **后置概念**: [API Naming Conventions](../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md) · [Cargo SemVer Checks](../../07_future/03_preview_features/27_cargo_semver_checks_preview.md) · [Safety Boundaries](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)
+> **后置概念**: [API Naming Conventions](../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md) · [Cargo SemVer Checks](../../07_future/02_preview_features/27_cargo_semver_checks_preview.md) · [Safety Boundaries](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)
 > **定理链**: Module Hierarchy → Visibility Rule → Public API Surface
 > **主要来源**: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) · [TRPL — Modules](https://doc.rust-lang.org/book/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
@@ -183,7 +183,7 @@ flowchart TD
 | [Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md) | 可见性基于模块层次结构 |
 | [Names, Scopes and Resolution](../../04_formal/05_rustc_internals/06_names_and_resolution.md) | 名称解析遵守可见性规则 |
 | [API Naming Conventions](../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md) | 可见性决定公共 API 边界 |
-| [Cargo SemVer Checks](../../07_future/03_preview_features/27_cargo_semver_checks_preview.md) | 可见性变化影响语义化版本 |
+| [Cargo SemVer Checks](../../07_future/02_preview_features/27_cargo_semver_checks_preview.md) | 可见性变化影响语义化版本 |
 
 > **权威来源**: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html), [TRPL Ch7 — Modules](https://doc.rust-lang.org/book/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html)
 >

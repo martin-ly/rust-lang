@@ -8,7 +8,7 @@
 > **内容分级**: [专家级]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **目录归属说明**: 本文件虽非 unsafe 语法主题，但内存模型（抽象字节、provenance、未初始化内存）是 unsafe 代码未定义行为（UB）判定的语义基础，与 `02_unsafe/` 的 unsafe 语义强相关，故保留在本目录；其并发内存序维度见 [Atomics and Memory Ordering](../00_concurrency/05_atomics_and_memory_ordering.md)。
+> **目录归属说明**: 本文件虽非 unsafe 语法主题，但内存模型（抽象字节、provenance、未初始化内存）是 unsafe 代码未定义行为（UB）判定的语义基础，与 `02_unsafe/` 的 unsafe 语义强相关，故保留在本目录；其并发内存序维度见 [Atomics and Memory Ordering](../00_concurrency/06_atomics_and_memory_ordering.md)。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
 > **前置依赖**:
@@ -16,7 +16,7 @@
 > [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
 > [Behavior Considered Undefined](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md)
 > **后置概念**:
-> [Atomics and Memory Ordering](../00_concurrency/05_atomics_and_memory_ordering.md) ·
+> [Atomics and Memory Ordering](../00_concurrency/06_atomics_and_memory_ordering.md) ·
 > [Inline Assembly](../05_inline_assembly/01_inline_assembly.md) ·
 > [Tree Borrows](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md)
 > **定理链**: Byte Model → Provenance → UB Boundary
@@ -284,7 +284,7 @@ cargo miri test（需每日构建版工具链）
 |:---|:---|
 | [Behavior Considered Undefined](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | 内存模型定义了 UB 的边界 |
 | [Tree Borrows](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) | 别名模型是内存模型的一部分 |
-| [Atomics and Memory Ordering](../00_concurrency/05_atomics_and_memory_ordering.md) | 并发内存语义依赖内存模型 |
+| [Atomics and Memory Ordering](../00_concurrency/06_atomics_and_memory_ordering.md) | 并发内存语义依赖内存模型 |
 | [Inline Assembly](../05_inline_assembly/01_inline_assembly.md) | 内联汇编必须遵守内存模型约束 |
 | [Unsafe Rust](01_unsafe.md) | 内存模型主要约束 unsafe 代码 |
 | [Panic](../../02_intermediate/03_error_handling/03_panic.md) | panic 时的栈展开必须保持内存安全（Memory Safety） |
@@ -372,7 +372,7 @@ fn align_check() {
 
 ### 3. 与原子指令生成的关系（查询 → codegen 分支）
 
-原子指令通常要求操作数**自然对齐**：例如多字节原子的 load/store/CAS 需要地址按操作数宽度对齐；16 字节原子（如 `AtomicU128` 在支持的目标上）可能要求 16 字节对齐；32 位目标上的 64 位原子是否可由单条指令完成，取决于该目标的对齐与指令集。当对齐**不被保证**时，后端要么插入对齐检查/屏障，要么退回到 `compiler_rt` 的 `__atomic_*` libcall，要么在编译期拒绝。`cfg(target_has_atomic_primitive_alignment)` 让可移植代码**在编译期**区分这些情形（原理见 [`11_atomics_and_memory_ordering.md`](../00_concurrency/05_atomics_and_memory_ordering.md) 已引用的 LLVM Atomic Instructions；该页 §Rust 1.97.0 交叉语义 给出 codegen 侧的对称说明）。
+原子指令通常要求操作数**自然对齐**：例如多字节原子的 load/store/CAS 需要地址按操作数宽度对齐；16 字节原子（如 `AtomicU128` 在支持的目标上）可能要求 16 字节对齐；32 位目标上的 64 位原子是否可由单条指令完成，取决于该目标的对齐与指令集。当对齐**不被保证**时，后端要么插入对齐检查/屏障，要么退回到 `compiler_rt` 的 `__atomic_*` libcall，要么在编译期拒绝。`cfg(target_has_atomic_primitive_alignment)` 让可移植代码**在编译期**区分这些情形（原理见 [`11_atomics_and_memory_ordering.md`](../00_concurrency/06_atomics_and_memory_ordering.md) 已引用的 LLVM Atomic Instructions；该页 §Rust 1.97.0 交叉语义 给出 codegen 侧的对称说明）。
 
 > ⚠ **需专家复核**：本 cfg 的**取值域**（除版本页示例 `"64"` 外还可取哪些值，如按位宽 `"8"/"16"/"32"/"128"` 或 `"ptr"` 形式）在 release notes 与版本页中**未完整列出**；上例沿用版本页 §2.4 的 `"64"` 写法，具体可取值以 Rust Reference — Conditional compilation / 该 cfg 的稳定化文档为准。
 
@@ -383,7 +383,7 @@ fn align_check() {
 - **旧名 `target_has_atomic_equal_alignment` 的废弃**：任务背景（审计 §2.4/P2-2）指出该 cfg 曾用名 `target_has_atomic_equal_alignment`，1.97 起稳定为 `target_has_atomic_primitive_alignment`，旧名废弃。⚠ **需专家复核**：release notes 与版本页**未提及**该旧名及其废弃时间表；旧名/废弃说法当前仅来自审计背景，未在两类权威来源中核对到，使用前请以 Rust Reference 与对应稳定化 PR 为准。
 
 > **来源**: [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/) · [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§2.4）
-> **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`42_type_layout.md`](../../04_formal/05_rustc_internals/08_type_layout.md) · [`11_atomics_and_memory_ordering.md`](../00_concurrency/05_atomics_and_memory_ordering.md)
+> **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`42_type_layout.md`](../../04_formal/05_rustc_internals/08_type_layout.md) · [`11_atomics_and_memory_ordering.md`](../00_concurrency/06_atomics_and_memory_ordering.md)
 
 ---
 
@@ -401,7 +401,7 @@ fn align_check() {
 
 - **上位（is-a）**：[Unsafe](01_unsafe.md) 的语义基础层。
 - **下位（实例）**：抽象字节、provenance、`MaybeUninit`、别名模型、对齐与 layout。
-- **组合**：与 [原子操作与内存序](../00_concurrency/05_atomics_and_memory_ordering.md)、[Unsafe 边界全景](02_unsafe_boundary_panorama.md) 组合。
+- **组合**：与 [原子操作与内存序](../00_concurrency/06_atomics_and_memory_ordering.md)、[Unsafe 边界全景](02_unsafe_boundary_panorama.md) 组合。
 - **依赖**：依赖 [值与引用语义](../../01_foundation/03_values_and_references/02_value_vs_reference_semantics.md)。
 
 ---

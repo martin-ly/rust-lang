@@ -1194,7 +1194,7 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 > 对比视角见 [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)（RAII 语义差异）与 [`../05_comparative/03_paradigm_matrix.md`](../../05_comparative/00_paradigms/01_paradigm_matrix.md)（类型系统谱系）。
 > **过渡: L4 → L7**
 > 当前的形式化工具（RustBelt、Kani、Miri）覆盖了 Rust 安全子集的大部分，但 Polonius 的 loan-based 语义、Tree Borrows 的别名模型、以及 Effects System 的类型效应都还在演进中。形式化不是终点，而是语言设计迭代的基础。
-> 演进方向见 [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化方法工具链）与 [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)（语言演进路线图）。
+> 演进方向见 [`../07_future/04_research_and_experimental/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化方法工具链）与 [`../07_future/04_research_and_experimental/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)（语言演进路线图）。
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)

@@ -753,7 +753,7 @@ graph TD
 - [L5 Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) —— 并发模型对比
 - [L5 范式矩阵](../../05_comparative/00_paradigms/01_paradigm_matrix.md) —— 多语言表达力矩阵
 - [L6 设计模式](../../06_ecosystem/03_design_patterns/01_patterns.md) —— 惯用法与架构模式
-- [L7 Effects 系统](../../07_future/03_preview_features/01_effects_system.md) —— 表达力前沿方向
+- [L7 Effects 系统](../../07_future/02_preview_features/01_effects_system.md) —— 表达力前沿方向
 
 ---
 

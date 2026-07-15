@@ -88,7 +88,7 @@ CURATED_CEX: list[tuple[str, str, str]] = [
      "03_advanced/02_unsafe/01_unsafe.md:1422 “❌ 反例: Use-after-free（Miri 会报错）”"
      "——UAF 是对自动内存管理保证的反例"),
     ("ex:LockingPrimitives", "ex:Concurrency",
-     "03_advanced/00_concurrency/06_lock_free.md:409 “命题: 无锁总是优于锁” → "
+     "03_advanced/00_concurrency/07_lock_free.md:409 “命题: 无锁总是优于锁” → "
      ":422 “无锁只在高竞争场景显著优于锁”——对朴素并发性能信念的反例"),
 ]
 

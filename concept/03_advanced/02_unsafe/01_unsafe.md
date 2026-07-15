@@ -2653,7 +2653,7 @@ fn main() {
 > 安全基础见 [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)（借用（Borrowing）规则）与 [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)（所有权转移）。
 > **过渡: L3 → L6**
 > `cbindgen`、`cxx`、`diplomat` 等工具将 FFI 的 unsafe 边界自动化，而 `Miri` 和 `Kani` 则在 CI 中持续验证 unsafe 代码的正确性。unsafe 不是 "放弃安全"，而是 "将安全的责任从编译器转移到工具和流程"。
-> 工具化实践见 [`../06_ecosystem/01_toolchain.md`](../../06_ecosystem/00_toolchain/01_toolchain.md)（工具链安全审计）与 [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化验证工具）。
+> 工具化实践见 [`../06_ecosystem/01_toolchain.md`](../../06_ecosystem/00_toolchain/01_toolchain.md)（工具链安全审计）与 [`../07_future/04_research_and_experimental/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化验证工具）。
 ---
 
 ---

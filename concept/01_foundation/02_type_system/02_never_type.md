@@ -672,6 +672,6 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 
 - **上位（is-a）**：[Type System](01_type_system.md) 类型格中的底元素。
 - **下位（实例）**：空枚举 `enum Void {}`、永不返回函数签名等实例见本页「常见模式」节。
-- **对偶**：与单元类型 `()`（恰好一个值）相对，见 [语句与表达式](../04_control_flow/03_statements_and_expressions.md)。
+- **对偶**：与单元类型 `()`（恰好一个值）相对，见 [语句与表达式](../04_control_flow/04_statements_and_expressions.md)。
 - **组合**：与 [Error Handling](../08_error_handling/01_error_handling_basics.md) 组合为 `Result<T, !>` 表达「不可能失败」。
 - **依赖**：穷尽性分析依赖 [Patterns](../04_control_flow/02_patterns.md) 的可反驳性规则。

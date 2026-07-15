@@ -28,7 +28,7 @@
 > - [`concept/02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) — Trait 系统的跨语言对比
 > - [`concept/05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) — Rust vs C++ 深度对比
 > - [`concept/04_formal/01_linear_logic.md`](../../04_formal/01_ownership_logic/01_linear_logic.md) — 线性逻辑与所有权形式化
-> - [`concept/07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md) — 语言演进与 RFC 追踪
+> - [`concept/07_future/04_research_and_experimental/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md) — 语言演进与 RFC 追踪
 
 ---
 

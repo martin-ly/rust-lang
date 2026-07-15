@@ -12,7 +12,7 @@
 > **前置概念**:
 > [Concurrency](01_concurrency.md) ·
 > [Async](../01_async/01_async.md) ·
-> [Lock-free](06_lock_free.md) ·
+> [Lock-free](07_lock_free.md) ·
 > [Traits](../../02_intermediate/00_traits/01_traits.md) ·
 > [Distributed Systems](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md)
 > **后置概念**:

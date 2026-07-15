@@ -8,10 +8,10 @@
 > **受众**: [进阶 / 工程 / 研究者]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L4-L6
-> **权威来源**: 本文件为 `concept/` 权威页：CRDT 谱系与合并格形式化的唯一深度解释；[L3 谱系页](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) §5.3 保留导航式概览并链接回本页。
+> **权威来源**: 本文件为 `concept/` 权威页：CRDT 谱系与合并格形式化的唯一深度解释；[L3 谱系页](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) §5.3 保留导航式概览并链接回本页。
 > **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: C×Ana — 分析无协调复制数据类型的收敛证明与工程实现
-> **前置概念**: [L4 线性化与一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) · [L3 谱系页 §5.3](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
+> **前置概念**: [L4 线性化与一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) · [L3 谱系页 §5.3](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
 > **后置概念**: [L6 因果序与向量时钟](09_causal_ordering_vector_clocks.md) · [L6 分布式共识](06_distributed_consensus.md) · [L6 数据工程](05_data_engineering.md)
 
 ---
@@ -280,7 +280,7 @@ RGA/OR-Set 的「删除」不是移除状态，而是**追加墓碑**（tombston
 - [L4 线性化与一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) —— CRDT 在谱系最终一致端的位置；线性化 ↔ SEC 的强度对照
 - [L6 因果序与向量时钟](09_causal_ordering_vector_clocks.md) —— CmRDT 因果交付与 MV-Register 版本向量的形式基础
 - [L6 分布式共识](06_distributed_consensus.md) —— 需要线性化时走共识；CRDT 是无共识路线
-- [L3 谱系页 §5.3 CRDT 概览](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) —— 工程谱系视角（本页为形式化权威页）
+- [L3 谱系页 §5.3 CRDT 概览](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) —— 工程谱系视角（本页为形式化权威页）
 - [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) —— 分布式模型在坐标系中的位置
 - [L6 数据工程](05_data_engineering.md) —— CRDT 在数据管道中的应用场景
 

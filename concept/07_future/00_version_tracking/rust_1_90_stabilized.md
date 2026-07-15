@@ -892,7 +892,7 @@ fn main() {
 ```
 
 > **权威来源**: [Rust 1.75.0 Release Blog](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0/) · [Rust 1.85.0 Release Blog](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0/) · [Rust 1.65.0 Release Blog](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0/) · [Rust 1.51.0 Release Blog](https://blog.rust-lang.org/2021/03/25/Rust-1.51.0/) · [Rust Release Notes](https://doc.rust-lang.org/releases.html)（链接 2026-07-12 curl 实测 200；代码 rustc 1.97.0 实测）
-> 深度概念页：[RPITIT 预研](../03_preview_features/15_rpitit_preview.md) · [Async Closures](../../03_advanced/01_async/07_async_closures.md) · [GATs](../../02_intermediate/00_traits/07_generic_associated_types.md)
+> 深度概念页：[RPITIT 预研](../02_preview_features/15_rpitit_preview.md) · [Async Closures](../../03_advanced/01_async/07_async_closures.md) · [GATs](../../02_intermediate/00_traits/07_generic_associated_types.md)
 
 ---
 

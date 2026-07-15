@@ -12,6 +12,6 @@
 | 主题 | 权威来源 |
 |------|----------|
 | 异步高级主题 | [concept/03_advanced/01_async/02_async_advanced.md](../../../../concept/03_advanced/01_async/02_async_advanced.md) |
-| 跨平台并发 | [concept/03_advanced/00_concurrency/04_cross_platform_concurrency.md](../../../../concept/03_advanced/00_concurrency/04_cross_platform_concurrency.md) |
+| 跨平台并发 | [concept/03_advanced/00_concurrency/05_cross_platform_concurrency.md](../../../../concept/03_advanced/00_concurrency/05_cross_platform_concurrency.md) |
 | 条件编译 | [concept/03_advanced/03_proc_macros/11_conditional_compilation.md](../../../../concept/03_advanced/03_proc_macros/11_conditional_compilation.md) |
 | WASM 生态 | [concept/06_ecosystem/11_domain_applications/03_webassembly.md](../../../../concept/06_ecosystem/11_domain_applications/03_webassembly.md) |

@@ -17,7 +17,7 @@
 > [元编程](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) ·
 > [Cargo 注册表与包发布](../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md)
 > **后置概念**:
-> [Cargo semver-checks](../../07_future/03_preview_features/27_cargo_semver_checks_preview.md) ·
+> [Cargo semver-checks](../../07_future/02_preview_features/27_cargo_semver_checks_preview.md) ·
 > [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md)
 >
 > **主要来源**:

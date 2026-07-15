@@ -148,7 +148,7 @@
 | [01_ai_integration](../../07_future/04_research_and_experimental/01_ai_integration.md) | AI 生成-验证闭环、确定性容器、三层闭环 | 6 |
 | [02_formal_methods](../../07_future/04_research_and_experimental/02_formal_methods.md) | Creusot/Verus/Kani 工业化、TLA+ | 9 |
 | [03_evolution](../../07_future/04_research_and_experimental/03_evolution.md) | RFC 流程、Edition 机制、2015→2024 完整变更 | 6 |
-| [04_effects_system](../../07_future/03_preview_features/01_effects_system.md) | Effect System 概念预研、AsyncFn、跨语言对比 | 4 |
+| [04_effects_system](../../07_future/02_preview_features/01_effects_system.md) | Effect System 概念预研、AsyncFn、跨语言对比 | 4 |
 | [05_rust_version_tracking](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 1.79→1.97+ 形式模型演进跟踪 | 3 |
 
 > **反向驱动**: L7 的独特特征是"反馈"——AI 需求约束 Unsafe 精确性，形式化工具化推动 L4 扩展，语言演进扩展 L2 泛型系统。

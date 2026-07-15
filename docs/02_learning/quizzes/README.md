@@ -26,12 +26,12 @@
 
 | 主题 | 测验文件 | 题数 |
 | :--- | :--- | :---: |
-| 所有权、借用与生命周期 | [33_quiz_ownership_borrowing.md](../../../concept/01_foundation/11_quizzes/33_quiz_ownership_borrowing.md) | 15 |
-| 类型系统 | [24_quiz_type_system.md](../../../concept/01_foundation/11_quizzes/24_quiz_type_system.md) | 15 |
-| 错误处理 | [25_quiz_error_handling.md](../../../concept/01_foundation/11_quizzes/25_quiz_error_handling.md) | 15 |
-| 模块系统与测试 | [26_quiz_modules_testing.md](../../../concept/01_foundation/11_quizzes/26_quiz_modules_testing.md) | 15 |
-| 闭包与迭代器 | [27_quiz_closures_iterators.md](../../../concept/01_foundation/11_quizzes/27_quiz_closures_iterators.md) | 15 |
-| 通用 PL 基座 | [29_quiz_pl_foundations.md](../../../concept/01_foundation/11_quizzes/29_quiz_pl_foundations.md) | 11 |
+| 所有权、借用与生命周期 | [33_quiz_ownership_borrowing.md](../../../concept/01_foundation/11_quizzes/06_quiz_ownership_borrowing.md) | 15 |
+| 类型系统 | [24_quiz_type_system.md](../../../concept/01_foundation/11_quizzes/01_quiz_type_system.md) | 15 |
+| 错误处理 | [25_quiz_error_handling.md](../../../concept/01_foundation/11_quizzes/02_quiz_error_handling.md) | 15 |
+| 模块系统与测试 | [26_quiz_modules_testing.md](../../../concept/01_foundation/11_quizzes/03_quiz_modules_testing.md) | 15 |
+| 闭包与迭代器 | [27_quiz_closures_iterators.md](../../../concept/01_foundation/11_quizzes/04_quiz_closures_iterators.md) | 15 |
+| 通用 PL 基座 | [29_quiz_pl_foundations.md](../../../concept/01_foundation/11_quizzes/05_quiz_pl_foundations.md) | 11 |
 
 ### L2 中级层（02_intermediate）
 
@@ -39,13 +39,13 @@
 | :--- | :--- | :---: |
 | Trait 与泛型 | [04_quiz_traits_and_generics.md](../../../concept/02_intermediate/01_generics/04_quiz_traits_and_generics.md) | 15 |
 | 内存管理 | [05_quiz_memory_management.md](../../../concept/02_intermediate/02_memory_management/05_quiz_memory_management.md) | 15 |
-| C/C++ → Rust 基础对比 | [30_quiz_cpp_rust_foundations.md](../../../concept/02_intermediate/09_quizzes/30_quiz_cpp_rust_foundations.md) | 13 |
+| C/C++ → Rust 基础对比 | [30_quiz_cpp_rust_foundations.md](../../../concept/02_intermediate/08_quizzes/30_quiz_cpp_rust_foundations.md) | 13 |
 
 ### L3 高级层（03_advanced）
 
 | 主题 | 测验文件 | 题数 |
 | :--- | :--- | :---: |
-| 并发与异步（Async） | [08_quiz_concurrency_async.md](../../../concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md) | 15 |
+| 并发与异步（Async） | [08_quiz_concurrency_async.md](../../../concept/03_advanced/00_concurrency/09_quiz_concurrency_async.md) | 15 |
 | Unsafe Rust | [05_quiz_unsafe.md](../../../concept/03_advanced/02_unsafe/05_quiz_unsafe.md) | 15 |
 | 宏（Macro）系统 | [10_quiz_macros.md](../../../concept/03_advanced/03_proc_macros/10_quiz_macros.md) | 15 |
 

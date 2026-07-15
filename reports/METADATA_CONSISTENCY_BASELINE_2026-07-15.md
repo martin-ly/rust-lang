@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-07-15  **扫描**: 516 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-07-15  **扫描**: 520 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=320) | 0.0% | >=5% | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 1 (基=323) | 0.2% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
-| D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
+| D6 Summary 低信息量模板套话 | 1 | 0.2% | >=3% | pass |
 
-**受影响文件总数**: 0 / 516
+**受影响文件总数**: 2 / 520
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -94,8 +94,9 @@
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
 
-### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（0）
+### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（1）
 
+- `concept/07_future/02_preview_features/33_autoverus_preview.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [7] 无交集
 
 ### D3 关键字段同文件重声明（0）
 
@@ -106,8 +107,9 @@
 ### D5 稳定层正文残留 nightly/preview/unstable（0）
 
 
-### D6 Summary 低信息量模板套话（0）
+### D6 Summary 低信息量模板套话（1）
 
+- `concept/07_future/02_preview_features/19_const_trait_preview.md` — Summary 为空
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 

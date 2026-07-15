@@ -18,7 +18,7 @@
 | 含 `待补充` 标记 | **~70** | 多数为文件末尾 TODO 列表，部分为真实内容缺口 |
 | 含 `未完成` 标记 | **~20** | 需优先补全 |
 | 含 `WIP` 标记 | **4** | 异步闭包、eBPF、Cranelift、Rust Effect System 等 |
-| 缺失 EN/Summary | **1** | `concept/00_meta/01_trpl_3rd_ed_mapping.md` |
+| 缺失 EN/Summary | **1** | `concept/00_meta/06_trpl_3rd_ed_mapping.md` |
 | EN 标题含中文 | **1** | `concept/archive/rust_vs_cpp_formal_system_vs_mechanism_engineering_core_arguments_index.md` |
 | 真实 `LINK_PLACEHOLDER` | **0** | 历史问题已基本解决（仅报告/检查清单中保留文字说明） |
 
@@ -37,10 +37,10 @@
 
 | 文件 | 主题 |
 |---|---|
-| `concept/01_foundation/11_quizzes/26_quiz_modules_testing.md` | 测试模块测验 |
+| `concept/01_foundation/11_quizzes/03_quiz_modules_testing.md` | 测试模块测验 |
 | `concept/02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md` | DSL 与嵌入 |
-| `concept/03_advanced/00_concurrency/06_lock_free.md` | 无锁编程 |
-| `concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md` | 并发异步测验 |
+| `concept/03_advanced/00_concurrency/07_lock_free.md` | 无锁编程 |
+| `concept/03_advanced/00_concurrency/09_quiz_concurrency_async.md` | 并发异步测验 |
 | `concept/03_advanced/01_async/07_async_closures.md` | 异步闭包 |
 | `concept/03_advanced/01_async/03_async_patterns.md` | 异步模式 |
 | `concept/03_advanced/01_async/04_future_and_executor_mechanisms.md` | Future/Executor 机制 |
@@ -48,7 +48,7 @@
 | `concept/06_ecosystem/03_design_patterns/02_idioms_spectrum.md` | 惯用法谱系 |
 | `concept/06_ecosystem/03_design_patterns/14_design_patterns_glossary.md` | 设计模式术语表 |
 | `concept/07_future/03_preview_features/20_borrowsanitizer_preview.md` | BorrowSanitizer |
-| `concept/07_future/03_preview_features/16_cranelift_backend_preview.md` | Cranelift Backend |
+| `concept/07_future/02_preview_features/16_cranelift_backend_preview.md` | Cranelift Backend |
 | `concept/07_future/04_research_and_experimental/03_evolution.md` | Rust 演进 |
 | `concept/07_future/04_research_and_experimental/07_ebpf_rust.md` | eBPF |
 | `concept/07_future/05_roadmaps/24_roadmap.md` | Roadmap |

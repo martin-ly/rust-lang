@@ -7,7 +7,7 @@
 >
 > - [`concept/06_ecosystem/03_design_patterns/01_patterns.md`](../../../../concept/06_ecosystem/03_design_patterns/01_patterns.md)
 > - [`concept/03_advanced/00_concurrency/03_concurrency_patterns.md`](../../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md)
-> - [`concept/03_advanced/00_concurrency/06_lock_free.md`](../../../../concept/03_advanced/00_concurrency/06_lock_free.md)
+> - [`concept/03_advanced/00_concurrency/07_lock_free.md`](../../../../concept/03_advanced/00_concurrency/07_lock_free.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则，通用 Rust 概念解释统一维护在 `concept/` 中；
 > `docs/15_rust_formal_engineering_system/` 仅保留工程专题索引与链接。

@@ -738,8 +738,8 @@ crate 选型的可量化方法论：
 | 设计模式 | [`./02_patterns.md`](../03_design_patterns/01_patterns.md) | Builder/Typestate 模式 |
 | 应用领域 | [`./04_application_domains.md`](../06_data_and_distributed/01_application_domains.md) | crate 的工程落地 |
 | 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) | unsafe crate 审计 |
-| 形式化方法 | [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | crate 安全验证 |
-| 语言演进 | [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md) | async/AFIT 影响生态 |
+| 形式化方法 | [`../07_future/04_research_and_experimental/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | crate 安全验证 |
+| 语言演进 | [`../07_future/04_research_and_experimental/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md) | async/AFIT 影响生态 |
 
 ### 编译验证：serde 与 tokio 核心抽象
 
@@ -1170,7 +1170,7 @@ graph TD
 > 核心概念见 [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)（所有权）与 [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md)（并发安全）。
 > **过渡: L6 → L4**
 > 形式化验证工具（Kani、Miri、RustBelt）正在进入 crates.io 的供应链。`cargo-kani`、`cargo-miri` 等插件让形式化验证从学术研究走向 CI/CD 流水线——这不是未来，而是正在发生的生态演进。
-> 形式化工具链见 [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)。 [来源: [crates.io](https://crates.io/)]
+> 形式化工具链见 [`../07_future/04_research_and_experimental/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)。 [来源: [crates.io](https://crates.io/)]
 
 ---
 
@@ -1193,7 +1193,7 @@ graph TD
 
 > **过渡: L6 → L7**
 > Rust 生态仍在快速增长：2024 年 crates.io 下载量突破 500 亿，嵌入式、WASM、AI 推理等新领域正在涌现。生态的成熟度决定了 Rust 能否从"系统语言"扩展为"通用语言"。
-> 演进方向见 [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)（语言演进）与 [`../07_future/01_ai_integration.md`](../../07_future/04_research_and_experimental/01_ai_integration.md)（AI 集成）。
+> 演进方向见 [`../07_future/04_research_and_experimental/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)（语言演进）与 [`../07_future/04_research_and_experimental/01_ai_integration.md`](../../07_future/04_research_and_experimental/01_ai_integration.md)（AI 集成）。
 > **来源: crates.io; lib.rs; Rust Cookbook; [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** Crate 分析基于 crates.io 的公开数据和社区评估。✅
 > **[serde.rs](https://serde.rs/); [Tokio Documentation](https://docs.rs/tokio/latest/tokio/); [rayon docs](https://docs.rs/rayon/latest/rayon/); [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/); [Axum docs](https://docs.rs/axum/latest/axum/)** 各 crate 的具体分析参考了官方文档和最新版本说明。✅
 > **来源: crates.io; lib.rs; Rust Cookbook; [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/); docs.rs** Crate 分析基于官方仓库数据和社区评估。✅

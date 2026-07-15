@@ -621,7 +621,7 @@ graph TD
 
 ## 相关概念
 
-- [对应测验](../11_quizzes/29_quiz_pl_foundations.md) — 通用 PL 基座（变量模型、求值策略、效果、控制流、数据抽象）
+- [对应测验](../11_quizzes/05_quiz_pl_foundations.md) — 通用 PL 基座（变量模型、求值策略、效果、控制流、数据抽象）
 - **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/01_type_system.md)
 - **下层概念**: [Generics](../../02_intermediate/01_generics/01_generics.md) · [Async](../../03_advanced/01_async/01_async.md)
 
@@ -1721,7 +1721,7 @@ goto 的错误清理模式
 - **上位（is-a）**：结构化控制流（structured control flow）的 Rust 实例。
 - **下位（实例）**：`if` / `match` / `loop` / `for` / `while` / `if let` / `while let`。
 - **组合**：与 [模式](02_patterns.md) 组合实现 `match` 穷尽性。
-- **依赖**：依赖 [语句与表达式](03_statements_and_expressions.md) 的表达式导向设计。
+- **依赖**：依赖 [语句与表达式](04_statements_and_expressions.md) 的表达式导向设计。
 
 ---
 

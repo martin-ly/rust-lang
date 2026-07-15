@@ -53,8 +53,8 @@
 | [Rust 1.98+ 前沿特性预览](../../07_future/00_version_tracking/rust_1_98_preview.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Rust 2024 Edition (1.85.0+ stable)](../../07_future/01_edition_roadmap/01_rust_edition_preview.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 | [Rust Edition 机制与迁移指南](../../07_future/01_edition_roadmap/03_rust_edition_guide.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [cargo-semver-checks：从社区工具到 Cargo 官方集成](../../07_future/03_preview_features/27_cargo_semver_checks_preview.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
-| [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/03_preview_features/29_aarch64_sve_sme_preview.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
+| [cargo-semver-checks：从社区工具到 Cargo 官方集成](../../07_future/02_preview_features/27_cargo_semver_checks_preview.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
+| [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/02_preview_features/29_aarch64_sve_sme_preview.md) | L7 前沿趋势层 | 决策树/矩阵/示例 | 补充属性矩阵或示例反例 |
 
 ### P2：对齐国际标准
 

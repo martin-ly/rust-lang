@@ -539,9 +539,9 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 | `05_comparative/03_paradigm_matrix.md` | 3+ | 范式断言矩阵 |
 | `06_ecosystem/01_toolchain.md` | 3+ | `<!-- L6::... -->` |
 | `06_ecosystem/02_patterns.md` | 5+ | `{L6}` 章节标注 |
-| `07_future/01_ai_integration.md` | 2+ | 认知路径 + 断言矩阵 |
-| `07_future/02_formal_methods.md` | 2+ | 认知路径 + 断言矩阵 |
-| `07_future/03_evolution.md` | 2+ | 认知路径 + 断言矩阵 |
+| `07_future/04_research_and_experimental/01_ai_integration.md` | 2+ | 认知路径 + 断言矩阵 |
+| `07_future/04_research_and_experimental/02_formal_methods.md` | 2+ | 认知路径 + 断言矩阵 |
+| `07_future/04_research_and_experimental/03_evolution.md` | 2+ | 认知路径 + 断言矩阵 |
 
 ---
 

@@ -197,11 +197,11 @@ Type System（理解"类型即证明"）
 - [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](05_collections/02_collections_advanced.md)
 - [字符串与编码：Rust 的文本处理类型系统（Type System）](06_strings_and_text/02_strings_and_encoding.md)
 - 测验：所有权（Ownership）、借用（Borrowing）与生命周期（Lifetimes）（嵌入式互动试点）
-- [测验：类型系统（Type System）（嵌入式互动试点）](11_quizzes/24_quiz_type_system.md)
-- [测验：错误处理（Error Handling）（嵌入式互动试点）](11_quizzes/25_quiz_error_handling.md)
-- [测验：模块（Module）系统与测试（嵌入式互动试点）](11_quizzes/26_quiz_modules_testing.md)
+- [测验：类型系统（Type System）（嵌入式互动试点）](11_quizzes/01_quiz_type_system.md)
+- [测验：错误处理（Error Handling）（嵌入式互动试点）](11_quizzes/02_quiz_error_handling.md)
+- [测验：模块（Module）系统与测试（嵌入式互动试点）](11_quizzes/03_quiz_modules_testing.md)
 - 测验：闭包（Closures）与迭代器（Iterator）（嵌入式互动试点）
-- [测验：通用 PL 基座](11_quizzes/29_quiz_pl_foundations.md)
+- [测验：通用 PL 基座](11_quizzes/05_quiz_pl_foundations.md)
 
 ## 三、课程对齐路径
 

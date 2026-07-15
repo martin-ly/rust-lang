@@ -21,5 +21,5 @@
 | :--- | :--- |
 | WASM 学习路径与工具链 | [`concept/06_ecosystem/11_domain_applications/17_webassembly_advanced.md`](../../../concept/06_ecosystem/11_domain_applications/17_webassembly_advanced.md) |
 | WebAssembly 核心概念 | [`concept/06_ecosystem/11_domain_applications/03_webassembly.md`](../../../concept/06_ecosystem/11_domain_applications/03_webassembly.md) |
-| WASM Target 演进 | [`concept/07_future/03_preview_features/28_wasm_target_evolution.md`](../../../concept/07_future/03_preview_features/28_wasm_target_evolution.md) |
+| WASM Target 演进 | [`concept/07_future/02_preview_features/28_wasm_target_evolution.md`](../../../concept/07_future/02_preview_features/28_wasm_target_evolution.md) |
 | 速查练习 | [`concept/SUMMARY.md`](../../../concept/SUMMARY.md) |

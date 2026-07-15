@@ -99,7 +99,7 @@
     - `00_meta/01_terminology/03_bilingual_template.md`
     - `00_meta/03_audit/03_audit_checklist.md`
     - `00_meta/03_audit/05_template_deduplication_guide.md`
-    - `00_meta/placeholders/01_placeholder_generic.md`
+    - `00_meta/07_placeholders/01_placeholder_generic.md`
     - `sources/INDEX.md`
     - `sources/rfc_index.md`
     - `sources/theorem_tier_spec.md`
@@ -120,7 +120,7 @@
 
 - 按 `.kimi/RECTIFICATION_PLAN_2026_07_09.md` 第五章 P0 队列，完成 5 个高重复风险文件的整改：
   - `crates/c05_threads/docs/01_basic_threading.md` → 摘要 + 链接到 `concept/03_advanced/00_concurrency/01_concurrency.md`
-  - `crates/c05_threads/docs/11_parallel_algorithms.md` → 摘要 + 链接到 `concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md`
+  - `crates/c05_threads/docs/11_parallel_algorithms.md` → 摘要 + 链接到 `concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md`
   - `crates/c07_process/docs/01_process_model_and_lifecycle.md` → 摘要 + 链接到新建 `concept/03_advanced/02_process_ipc/01_process_model_and_lifecycle.md`
   - `crates/c09_design_pattern/docs/20_rust_design_patterns_comprehensive_guide_theory_practice_formal_verification.md` → 摘要 + 链接到 `concept/06_ecosystem/03_design_patterns/01_patterns.md`
   - `crates/c10_networks/docs/09_rust_190_examples_part3_advanced_protocols.md` → 摘要 + 链接到新建 `concept/06_ecosystem/09_networking/01_advanced_network_protocols.md`
@@ -138,7 +138,7 @@
   - 在 `borrow_sanitizer.md`、`safety_tags_preview.md`、`autoverus_preview.md`、`tree_borrows_deep_dive.md`、`08_safety_tags_preview.md`、`20_borrowsanitizer_preview.md` 之间新增交叉引用。
   - 整理 `concept/SUMMARY.md`。
 - **P2-9 TRPL 3rd Ed 章节映射**：
-  - 新建 `concept/00_meta/01_trpl_3rd_ed_mapping.md`（Ch1–Ch21 + 附录 A–G）。
+  - 新建 `concept/00_meta/06_trpl_3rd_ed_mapping.md`（Ch1–Ch21 + 附录 A–G）。
   - 更新 `concept/SUMMARY.md`。
 - **P2-10 Brown Book 研究引用**：
   - 在 `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`、`02_borrowing.md`、`03_lifetimes.md` 新增研究引用小节。
@@ -1291,8 +1291,8 @@
 
 ### 🔗 L3 概念 ↔ 测验闭环
 
-- **`concept/03_advanced/01_concurrency.md`**: 末尾添加指向 [L3 并发与异步测验](concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md) 的链接
-- **`concept/03_advanced/02_async.md`**: 末尾添加指向 [L3 并发与异步测验](concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md) 的链接
+- **`concept/03_advanced/01_concurrency.md`**: 末尾添加指向 [L3 并发与异步测验](concept/03_advanced/00_concurrency/09_quiz_concurrency_async.md) 的链接
+- **`concept/03_advanced/02_async.md`**: 末尾添加指向 [L3 并发与异步测验](concept/03_advanced/00_concurrency/09_quiz_concurrency_async.md) 的链接
 - **`concept/03_advanced/03_unsafe.md`**: 末尾添加指向 [L3 Unsafe Rust 测验](concept/03_advanced/02_unsafe/05_quiz_unsafe.md) 的链接
 - **`concept/03_advanced/04_macros.md`**: 末尾添加指向 [L3 宏系统测验](concept/03_advanced/03_proc_macros/10_quiz_macros.md) 的链接
 - **`concept/03_advanced/06_pin_unpin.md`**: 新增 4 道嵌入式测验（Pin 设计动机/Unpin 自动实现/`Pin::new` 限制/async 状态机自引用）

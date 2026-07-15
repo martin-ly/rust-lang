@@ -17,7 +17,7 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 应用 const 块于模式匹配（Pattern Matching）
 > **前置依赖**: [Const Generics](../../02_intermediate/01_generics/01_generics.md) · [Pattern Matching](../../01_foundation/04_control_flow/01_control_flow.md) · [Patterns](../../01_foundation/04_control_flow/02_patterns.md) · [Const Items and Const Fn](../../01_foundation/07_modules_and_items/09_const_items_and_const_fn.md)
-> **后置延伸**: [Const Trait](19_const_trait_preview.md)
+> **后置延伸**: [Const Trait Impl](06_const_trait_impl_preview.md)
 > **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [RFC 2920 — Inline Const](https://rust-lang.github.io/rfcs/2920-inline-const.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >

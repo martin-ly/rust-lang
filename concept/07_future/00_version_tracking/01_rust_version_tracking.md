@@ -572,20 +572,20 @@ timeline
 
 | 特性 | 当前状态 | 影响维度 | 概念文件 | 优先级 | 1.96 预期 |
 | :--- | :--- | :--- | :--- | :---: | :--- |
-| `return_type_notation` (RTN) | unstable | D2 类型 | [`concept/07_future/12_return_type_notation_preview.md`](../03_preview_features/09_return_type_notation_preview.md) | 中 | 继续演进 |
+| `return_type_notation` (RTN) | unstable | D2 类型 | [`concept/07_future/12_return_type_notation_preview.md`](../02_preview_features/09_return_type_notation_preview.md) | 中 | 继续演进 |
 | `associated_type_defaults` | unstable | D2 类型 | `02_intermediate/00_traits/01_traits.md` | 中 | 继续演进 |
 | `generic_const_exprs` | unstable | D1 计算 / D2 类型 | `02_intermediate/01_generics/01_generics.md` | 中 | 继续演进 |
-| `unsafe_fields` | experimental | D7 安全边界 | [`concept/07_future/13_unsafe_fields_preview.md`](../03_preview_features/11_unsafe_fields_preview.md) | **高** | 早期实验 |
+| `unsafe_fields` | experimental | D7 安全边界 | [`concept/07_future/13_unsafe_fields_preview.md`](../02_preview_features/11_unsafe_fields_preview.md) | **高** | 早期实验 |
 | `new_range_syntax` (`..<`) | unstable | D1 计算 | `01_foundation/02_type_system/01_type_system.md` | 低 | 继续演进 |
 | `effects` (keyword generics) | experimental | D3 控制流 / D7 安全 | `07_future/04_effects_system.md` | **高** | 长期演进 |
-| `const_trait_impl` (`~const`) | unstable | D1 计算 | [`concept/07_future/11_const_trait_impl_preview.md`](../03_preview_features/06_const_trait_impl_preview.md) | **高** | 继续演进 |
-| `gen_blocks` | unstable | D3 控制流 | [`concept/07_future/22_gen_blocks_preview.md`](../03_preview_features/25_gen_blocks_preview.md) | **高** | 继续演进 |
+| `const_trait_impl` (`~const`) | unstable | D1 计算 | [`concept/07_future/11_const_trait_impl_preview.md`](../02_preview_features/06_const_trait_impl_preview.md) | **高** | 继续演进 |
+| `gen_blocks` | unstable | D3 控制流 | [`concept/07_future/22_gen_blocks_preview.md`](../02_preview_features/25_gen_blocks_preview.md) | **高** | 继续演进 |
 | `next_solver` | nightly，目标 2026 稳定 | D2 类型 / D5 编译期 | `02_intermediate/00_traits/01_traits.md` §12 · `crates/c04_generic/next_solver_preview.rs` | **高** | 目标稳定 |
 | `adt_const_params` | unstable | D2 类型 / D1 计算 | `02_intermediate/01_generics/01_generics.md` | **高** | 目标稳定 |
 | `min_generic_const_args` | unstable | D2 类型 / D1 计算 | `02_intermediate/01_generics/01_generics.md` | **高** | 目标稳定 |
 | `public_private_deps` | unstable · [RFC 3516](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html) · Help Wanted | D6 生态 | `concept/06_ecosystem/10_public_private_deps.md` | 中 | 目标稳定 |
 | `cargo_script` | unstable · [RFC 3502](https://rust-lang.github.io/rfcs//3502-cargo-script.html)+3503 已批准 · nightly 已实现 | D6 生态 | `concept/06_ecosystem/09_cargo_script.md` | 中 | 目标稳定 |
-| **Ferrocene** | 已认证（ISO 26262 ASIL-D） | D7 安全 / D6 生态 | [`concept/07_future/35_ferrocene_preview.md`](../03_preview_features/12_ferrocene_preview.md) | **高** | 持续更新 |
+| **Ferrocene** | 已认证（ISO 26262 ASIL-D） | D7 安全 / D6 生态 | [`concept/07_future/35_ferrocene_preview.md`](../02_preview_features/12_ferrocene_preview.md) | **高** | 持续更新 |
 
 > **1.96.0 Stable 已知变更**:
 > `assert_matches!` / `debug_assert_matches!` 稳定；
@@ -986,18 +986,18 @@ Rust 1.96.0 已按计划进入 stable 通道；1.96.1 为 1.96 系列推荐 patc
 
 | 特性 | 当前状态 | 预计稳定 | 项目覆盖 | 跟踪文件 |
 |:---|:---:|:---:|:---:|:---|
-| **Open Enums** | nightly 实验 (GitHub #156628) | 2027+ | ✅ 已创建 | [`concept/07_future/open_enums_preview.md`](../03_preview_features/34_open_enums_preview.md) |
-| **Field Projections** | 🟢 `field_of!` 宏（Macro） + FRTs 已合并（PR #152730）；2026 三步计划推进中（a-mir-formality → Implementation → Experimentation） | 2028+ | ✅ 已更新 | [`concept/07_future/42_field_projections_preview.md`](../03_preview_features/23_field_projections_preview.md) |
-| **BorrowSanitizer** | 原型阶段（~80% Miri 测试通过） | 2027+ | ✅ 已创建 | [`concept/07_future/03_preview_features/24_borrow_sanitizer.md`](../03_preview_features/24_borrow_sanitizer.md) |
-| **MC/DC Coverage** | rustc 跟踪中 (rust#124656) | 2026–2027 | ✅ 已创建 | [`concept/07_future/07_mcdc_coverage_preview.md`](../03_preview_features/02_mcdc_coverage_preview.md) |
+| **Open Enums** | nightly 实验 (GitHub #156628) | 2027+ | ✅ 已创建 | [`concept/07_future/open_enums_preview.md`](../02_preview_features/34_open_enums_preview.md) |
+| **Field Projections** | 🟢 `field_of!` 宏（Macro） + FRTs 已合并（PR #152730）；2026 三步计划推进中（a-mir-formality → Implementation → Experimentation） | 2028+ | ✅ 已更新 | [`concept/07_future/42_field_projections_preview.md`](../02_preview_features/23_field_projections_preview.md) |
+| **BorrowSanitizer** | 原型阶段（~80% Miri 测试通过） | 2027+ | ✅ 已创建 | [`concept/07_future/02_preview_features/24_borrow_sanitizer.md`](../02_preview_features/24_borrow_sanitizer.md) |
+| **MC/DC Coverage** | rustc 跟踪中 (rust#124656) | 2026–2027 | ✅ 已创建 | [`concept/07_future/07_mcdc_coverage_preview.md`](../02_preview_features/02_mcdc_coverage_preview.md) |
 | **cargo-semver-checks** | 继续解决合并到 cargo 的 blockers | 2026–2027 | 🟡 跟踪中 | — |
 | **Cargo plumbing commands** | 原型 | 2027+ | 🔴 缺失 | 待加入工具链跟踪 |
-| **Safety Tags** | 设计讨论（Pre-RFC 准备中） | 2027+ | ✅ 已创建 | [`concept/07_future/08_safety_tags_preview.md`](../03_preview_features/03_safety_tags_preview.md) |
-| **Unsafe Fields** | ✅ RFC 3458 已接受（2026-02）；Clippy #16767 等待 review；Project Goals 2026 Continued | 2027+ | ✅ 已创建 | [`concept/07_future/13_unsafe_fields_preview.md`](../03_preview_features/11_unsafe_fields_preview.md) |
-| **Ergonomic ref-counting** | 🔄 RFC 决策和预览阶段；Project Goals 2026 Continued；Niko Matsakis + Santiago Pastorino 主导 | 2027+ | ✅ 已创建 | [`concept/07_future/17_ergonomic_ref_counting_preview.md`](../03_preview_features/20_ergonomic_ref_counting_preview.md) |
-| **derive(CoercePointee)** | nightly 可用 | 2027+ | 🟡 跟踪 | [`concept/07_future/10_derive_coerce_pointee_preview.md`](../03_preview_features/05_derive_coerce_pointee_preview.md) |
-| **并行前端编译** | nightly 可用 | 2026–2027 | 🟡 跟踪 | [`concept/07_future/09_parallel_frontend_preview.md`](../03_preview_features/04_parallel_frontend_preview.md) |
-| **Cranelift 后端** | ⚠️ **官方因资金不足进展停滞**（Project Goals 2026 Not completed） | 待定 | ✅ 已更新 | [`concept/07_future/38_cranelift_backend_preview.md`](../03_preview_features/16_cranelift_backend_preview.md) |
+| **Safety Tags** | 设计讨论（Pre-RFC 准备中） | 2027+ | ✅ 已创建 | [`concept/07_future/08_safety_tags_preview.md`](../02_preview_features/03_safety_tags_preview.md) |
+| **Unsafe Fields** | ✅ RFC 3458 已接受（2026-02）；Clippy #16767 等待 review；Project Goals 2026 Continued | 2027+ | ✅ 已创建 | [`concept/07_future/13_unsafe_fields_preview.md`](../02_preview_features/11_unsafe_fields_preview.md) |
+| **Ergonomic ref-counting** | 🔄 RFC 决策和预览阶段；Project Goals 2026 Continued；Niko Matsakis + Santiago Pastorino 主导 | 2027+ | ✅ 已创建 | [`concept/07_future/17_ergonomic_ref_counting_preview.md`](../02_preview_features/20_ergonomic_ref_counting_preview.md) |
+| **derive(CoercePointee)** | nightly 可用 | 2027+ | 🟡 跟踪 | [`concept/07_future/10_derive_coerce_pointee_preview.md`](../02_preview_features/05_derive_coerce_pointee_preview.md) |
+| **并行前端编译** | nightly 可用 | 2026–2027 | 🟡 跟踪 | [`concept/07_future/09_parallel_frontend_preview.md`](../02_preview_features/04_parallel_frontend_preview.md) |
+| **Cranelift 后端** | ⚠️ **官方因资金不足进展停滞**（Project Goals 2026 Not completed） | 待定 | ✅ 已更新 | [`concept/07_future/38_cranelift_backend_preview.md`](../02_preview_features/16_cranelift_backend_preview.md) |
 
 ---
 

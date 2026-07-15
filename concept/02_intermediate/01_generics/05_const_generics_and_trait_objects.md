@@ -139,6 +139,29 @@ fn use_buffer(b: &dyn Buffer) {
 ### 4.2 用泛型枚举做封闭类型集
 
 ```rust
+trait Buffer {
+    fn size(&self) -> usize;
+    fn data(&self) -> &[u8];
+}
+
+struct Buf16([u8; 16]);
+impl Buffer for Buf16 {
+    fn size(&self) -> usize { 16 }
+    fn data(&self) -> &[u8] { &self.0 }
+}
+
+struct Buf32([u8; 32]);
+impl Buffer for Buf32 {
+    fn size(&self) -> usize { 32 }
+    fn data(&self) -> &[u8] { &self.0 }
+}
+
+struct Buf64([u8; 64]);
+impl Buffer for Buf64 {
+    fn size(&self) -> usize { 64 }
+    fn data(&self) -> &[u8] { &self.0 }
+}
+
 enum DynBuffer {
     B16(Buf16),
     B32(Buf32),

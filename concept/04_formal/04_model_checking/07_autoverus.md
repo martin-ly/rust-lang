@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Eva
 > **前置依赖**: [形式化验证](01_verification_toolchain.md) · [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
-> **后置延伸**: [Safety Tags](../../07_future/03_preview_features/03_safety_tags_preview.md) · [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md)
+> **后置延伸**: [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md) · [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md)
 >
 > **来源**:
 > [Verus GitHub](https://github.com/verus-lang/verus) ·
@@ -180,10 +180,10 @@ B
 
 ## 相关概念
 
-- [AutoVerus / Verus 预览跟踪（L7 版本/生态动向）](../../07_future/03_preview_features/33_autoverus_preview.md)
+- [AutoVerus / Verus 预览跟踪（L7 版本/生态动向）](../../07_future/02_preview_features/33_autoverus_preview.md)
 - [形式化验证](01_verification_toolchain.md)
 - [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
-- [Safety Tags](../../07_future/03_preview_features/03_safety_tags_preview.md)
+- [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md)
 - [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md)
 - [Rust 1.98+ 预览](../../07_future/00_version_tracking/rust_1_98_preview.md)
 

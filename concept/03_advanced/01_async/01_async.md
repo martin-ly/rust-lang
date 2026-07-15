@@ -31,7 +31,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析 Pin 与状态机的交互
 > **前置依赖**: [L2 泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md) · L1 生命周期（Lifetimes）
-> **后置延伸**: [L4 异步（Async）语义形式化](../../04_formal/01_ownership_logic/02_ownership_formal.md) · [L6 Tokio](../../06_ecosystem/02_core_crates/01_core_crates.md) · [L7 效果系统](../../07_future/03_preview_features/01_effects_system.md)
+> **后置延伸**: [L4 异步（Async）语义形式化](../../04_formal/01_ownership_logic/02_ownership_formal.md) · [L6 Tokio](../../06_ecosystem/02_core_crates/01_core_crates.md) · [L7 效果系统](../../07_future/02_preview_features/01_effects_system.md)
 > **跨层映射**: L3→L4 Future [来源: [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)] ↔  continuation monad | L3→L7 async effects → algebraic effects
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性（Coherence） → T-052 async/await 转换正确性
 > **层级**: L3 高级概念
@@ -2654,7 +2654,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 ## 相关概念链接
 
 - **上层概念**: [L2 泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md)
-- **下层概念**: [L4 异步（Async）语义形式化](../../04_formal/01_ownership_logic/02_ownership_formal.md) · [L6 Tokio](../../06_ecosystem/02_core_crates/01_core_crates.md) · [L7 效果系统](../../07_future/03_preview_features/01_effects_system.md)
+- **下层概念**: [L4 异步（Async）语义形式化](../../04_formal/01_ownership_logic/02_ownership_formal.md) · [L6 Tokio](../../06_ecosystem/02_core_crates/01_core_crates.md) · [L7 效果系统](../../07_future/02_preview_features/01_effects_system.md)
 - [Stream 代数与背压](09_stream_algebra_and_backpressure.md) — Stream/Iterator 对偶、组合子代数与背压形式模型
 - [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) — work-stealing、LIFO slot 与饥饿分析
 - [Pin 投射反例集](11_pin_projection_counterexamples.md) — unsafe 手写投射 UB 目录与 pin-project 正确模式
@@ -2982,7 +2982,7 @@ fn main() {}
 1. 阅读 `crates/c06_async/` 中与"异步编程基础"相关的源码和示例
 2. 运行 `cargo test -p c06_async` 验证理解
 3. 完成 `exercises/src/async_programming/` 中的练习任务
-4. 完成 [L3 并发与异步测验](../00_concurrency/08_quiz_concurrency_async.md) 验证理解程度
+4. 完成 [L3 并发与异步测验](../00_concurrency/09_quiz_concurrency_async.md) 验证理解程度
 
 ---
 

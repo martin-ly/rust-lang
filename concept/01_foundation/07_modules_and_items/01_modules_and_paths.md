@@ -553,7 +553,7 @@ graph TD
 
 ## 相关概念
 
-- [对应测验](../11_quizzes/26_quiz_modules_testing.md) — 模块系统与测试（mod/use/pub、可见性、单元/集成测试）
+- [对应测验](../11_quizzes/03_quiz_modules_testing.md) — 模块系统与测试（mod/use/pub、可见性、单元/集成测试）
 - **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/01_type_system.md)
 - **下层概念**: [Crate Ecosystem](../../06_ecosystem/02_core_crates/01_core_crates.md) · [Workspace](../../06_ecosystem/00_toolchain/01_toolchain.md)
 

@@ -12,7 +12,7 @@
 > [Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) ·
 > [Workflow Patterns](../../../archive/rust-ownership-decidability/16-program-semantics/workflow-patterns)（归档只读）
 > **后置概念**: [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) ·
-> [Parallel Distributed Spectrum](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
+> [Parallel Distributed Spectrum](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
 > **主要来源**: [arXiv 2605.07788 — Multilingual Shared Semantic Space] ·
 > [Wikipedia: Algorithm](https://en.wikipedia.org/wiki/Algorithm) ·
 > [Wikipedia: Software design pattern](https://en.wikipedia.org/wiki/Software_design_pattern) ·

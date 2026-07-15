@@ -186,7 +186,7 @@ fn handle_signals() -> Result<(), Box<dyn std::error::Error>> {
 
 - [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [并发模型](../00_concurrency/01_concurrency.md)
-- [原子操作（Atomic Operations）与内存序](../00_concurrency/05_atomics_and_memory_ordering.md)
+- [原子操作（Atomic Operations）与内存序](../00_concurrency/06_atomics_and_memory_ordering.md)
 - [Rust 网络编程](../06_low_level_patterns/04_network_programming.md)
 
 ---

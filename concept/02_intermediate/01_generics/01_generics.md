@@ -16,7 +16,7 @@
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 实施泛型（Generics）参数化设计
 > **前置依赖**: L1 类型系统（Type System） · [L2 Trait](../00_traits/01_traits.md)
-> **后置延伸**: [L3 Async](../../03_advanced/01_async/01_async.md) · [L4 类型论](../../04_formal/00_type_theory/01_type_theory.md) · [L7 效果系统](../../07_future/03_preview_features/01_effects_system.md)
+> **后置延伸**: [L3 Async](../../03_advanced/01_async/01_async.md) · [L4 类型论](../../04_formal/00_type_theory/01_type_theory.md) · [L7 效果系统](../../07_future/02_preview_features/01_effects_system.md)
 > **跨层映射**: L2→L4 参数多态 ↔ System F | L2→L7 泛型（Generics）效果 → Effect System
 > **定理链编号**: T-230 参数多态保持 → T-231 单态化（Monomorphization） [来源: [Rust Reference — Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)]正确性 → T-232 约束满足可判定
 > **层级**: L2 进阶概念
@@ -2319,7 +2319,7 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 
 - [对应测验](04_quiz_traits_and_generics.md) — Trait 与泛型（bound、关联类型、trait 对象、单态化）
 - **上层概念**: [L2 Trait](../00_traits/01_traits.md) · [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) · [Traits](../00_traits/01_traits.md)
-- **下层概念**: [L3 Async](../../03_advanced/01_async/01_async.md) · [L4 类型论](../../04_formal/00_type_theory/01_type_theory.md) · [L7 效果系统](../../07_future/03_preview_features/01_effects_system.md) · [Advanced Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [GATs](../../03_advanced/01_async/01_async.md) · [Const Generics [来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)
+- **下层概念**: [L3 Async](../../03_advanced/01_async/01_async.md) · [L4 类型论](../../04_formal/00_type_theory/01_type_theory.md) · [L7 效果系统](../../07_future/02_preview_features/01_effects_system.md) · [Advanced Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [GATs](../../03_advanced/01_async/01_async.md) · [Const Generics [来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|

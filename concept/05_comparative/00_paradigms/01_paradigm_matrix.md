@@ -731,7 +731,7 @@ fn process(data: Vec<String>) -> Vec<String> {
 | 线性逻辑 | [`../04_formal/01_linear_logic.md`](../../04_formal/01_ownership_logic/01_linear_logic.md) | 形式化根基 |
 | 类型论 | [`../04_formal/02_type_theory.md`](../../04_formal/00_type_theory/01_type_theory.md) | 类型系统谱系 |
 | RustBelt | [`../04_formal/04_rustbelt.md`](../../04_formal/02_separation_logic/01_rustbelt.md) | 验证能力 |
-| 语言演进 | [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md) | 演进方向 |
+| 语言演进 | [`../07_future/04_research_and_experimental/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md) | 演进方向 |
 | 安全边界 | [`./04_safety_boundaries.md`](../03_domain_comparisons/01_safety_boundaries.md) | 能力边界 |
 
 ---

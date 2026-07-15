@@ -78,7 +78,7 @@ fn main() {}
 
 ### 2.3 新稳定 target features
 
-以下 target feature 在 1.97.0 稳定（均为 **LoongArch** 目标特性，详见权威页 [`05_atomics_and_memory_ordering.md`](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) §5）：
+以下 target feature 在 1.97.0 稳定（均为 **LoongArch** 目标特性，详见权威页 [`05_atomics_and_memory_ordering.md`](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) §5）：
 
 - `div32`
 - `lam-bh`

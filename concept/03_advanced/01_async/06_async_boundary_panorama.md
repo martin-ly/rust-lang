@@ -25,7 +25,7 @@
 ---
 
 > **前置概念**: [Async/Await](01_async.md) · [Pin 与 Unpin](08_pin_unpin.md) · [Future 与 Executor 机制](04_future_and_executor_mechanisms.md)
-> **后置概念**: [Async 取消安全](05_async_cancellation_safety.md) · [Async Drop（预览）](../../07_future/03_preview_features/22_async_drop_preview.md) · [Unsafe 边界全景](../02_unsafe/02_unsafe_boundary_panorama.md)
+> **后置概念**: [Async 取消安全](05_async_cancellation_safety.md) · [Async Drop（预览）](../../07_future/02_preview_features/22_async_drop_preview.md) · [Unsafe 边界全景](../02_unsafe/02_unsafe_boundary_panorama.md)
 
 ## 📑 目录
 
@@ -511,7 +511,7 @@ flowchart TD
 
 ## 十三、演进方向
 
-- **Async Drop（预览）**: drop 语义与 await 的交汇将新增"析构边界"，跟踪 [18_async_drop_preview.md](../../07_future/03_preview_features/22_async_drop_preview.md)。
+- **Async Drop（预览）**: drop 语义与 await 的交汇将新增"析构边界"，跟踪 [18_async_drop_preview.md](../../07_future/02_preview_features/22_async_drop_preview.md)。
 - **RTN（Return Type Notation）**: 若稳定，§九 dyn 兼容边界的判定条件 Q-T1 需要修订。
 - **取消安全 lint**: 社区对 `clippy` 取消安全类 lint 的提案（跟踪 `missing_drop_in_select` 类讨论）成熟后补入 §五检测手段。
 - **执行器公平性边界**: `yield_now` 预算的定量基线（Q-E3 的 10⁶ 量级）需用 tokio-console 实测校准。

@@ -873,4 +873,4 @@ ZST 不占用内存，可用于类型级标记（phantom types）、空迭代器
 
 ## 相关概念
 
-- [对应测验](../11_quizzes/29_quiz_pl_foundations.md) — 通用 PL 基座（变量模型、求值策略、效果、控制流、数据抽象）
+- [对应测验](../11_quizzes/05_quiz_pl_foundations.md) — 通用 PL 基座（变量模型、求值策略、效果、控制流、数据抽象）

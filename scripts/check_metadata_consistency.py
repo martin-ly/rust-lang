@@ -45,7 +45,7 @@ LEVEL_RE = re.compile(r"L\s*(\d+)")
 ASP_RE = re.compile(r"\b([ASP])\b")
 VER_RE = re.compile(r"\b1\.(\d{2,3})(?:\.\d+)?\b")
 # 2026-07-13 修复：`feature\s*\(` 增加 \b 词边界，避免把 `target_feature(` / `target-feature` 等
-# 平台能力属性误报为 nightly 特性门控（误报实例：concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md）
+# 平台能力属性误报为 nightly 特性门控（误报实例：concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md）
 NIGHTLY_RE = re.compile(r"\b(nightly|preview|unstable)\b|\bfeature\s*\(", re.IGNORECASE)
 
 SUMMARY_LOW_PATTERNS = [
@@ -71,7 +71,7 @@ D2_WHITELIST_FILES = {
         "L0 导航索引页，无概念正文，A/S/P 内容分级不适用",
     # L7 版本/生态跟踪页：文件头已声明“非概念权威页”，A/S/P=S+A 描述其跟踪对象（L4 权威页）
     # 的内容属性而非自身层级；跟踪页不按概念页分级。
-    "concept/07_future/03_preview_features/33_autoverus_preview.md":
+    "concept/07_future/02_preview_features/33_autoverus_preview.md":
         "L7 预览跟踪页（非概念权威页），A/S/P 描述被跟踪对象属性",
 }
 

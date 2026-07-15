@@ -62,7 +62,7 @@
 | 10 | `must_use` on `Result<T, !>` / `ControlFlow<!, T>` | ✓ uninhabited 等价 | ✓ [31_never_type](../../01_foundation/02_type_system/02_never_type.md) | ✗ | ✗ | ✗ | ✗ | ○ `Result`/`ControlFlow` 表面 | ✗ | ✓ `must_use` 诊断范围扩大（新 warning） |
 | 11 | `dead_code_pub_in_binary` lint | ✓ 新 allow-by-default lint | ✗ | ✗ | ✗ | ✗ | ○ 二进制 crate 可见性 | ✗ | ✗ | ✓ lint 新增 ⚠缺口→应补于 07_future/00_version_tracking/02_editions.md（lint-level 矩阵） |
 | 12 | 新 target features（`div32`/`lam-bh`/`lamcas`/`ld-seq-sa`/`scq`） | ✓ `#[target_feature]` 稳定集 | ✗ | ○ 部分特性与原子/顺序相关（`scq` 等） | ✗ | ✗ | ✗ | ✗ | ✓ aarch64 / x86_64 特性门 | ✗ |
-| 13 | `cfg(target_has_atomic_primitive_alignment)` | ✓ 新增 cfg 标志 | ○ 对齐/布局边界 | ⚠缺口→应补于 03_advanced/02_unsafe/06_memory_model.md + 03_advanced/00_concurrency/05_atomics_and_memory_ordering.md | ✗ | ✗ | ✗ | ✗ | ○ 取值随目标平台 | ✗ |
+| 13 | `cfg(target_has_atomic_primitive_alignment)` | ✓ 新增 cfg 标志 | ○ 对齐/布局边界 | ⚠缺口→应补于 03_advanced/02_unsafe/06_memory_model.md + 03_advanced/00_concurrency/06_atomics_and_memory_ordering.md | ✗ | ✗ | ✗ | ✗ | ○ 取值随目标平台 | ✗ |
 | 14 | import 中允许尾随 `self` | ✓ `use` 语法放宽 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
 | 15 | `nvptx64-nvidia-cuda` 基线提升（PTX 7.0 / sm_70） | ✗ | ✗ | ✗ | ○ codegen 基线（非 ABI 变更） | ✗ | ✗ | ✗ | ✓ NVIDIA PTX 目标（Maxwell/Pascal 不再默认） | ✓ 旧 GPU 需显式 `-C target-cpu=sm_52` |
 | 16 | Cargo `resolver.lockfile-path` | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ [60_resolver](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) | ✗ | ✗ | ✗ |
@@ -147,7 +147,7 @@ flowchart LR
 |---|---|---|---|
 | 1 | `03_advanced/04_ffi/03_linkage.md` | #1 #3 #22 #29 #31 | 5 处（Link-ABI 列） |
 | 2 | `04_formal/00_type_theory/07_type_checking_and_inference.md` | #23 #25 | 2 处（Type 列） |
-| 3 | `03_advanced/02_unsafe/06_memory_model.md` + `03_advanced/00_concurrency/05_atomics_and_memory_ordering.md` | #13 | 1 处（Memory 列） |
+| 3 | `03_advanced/02_unsafe/06_memory_model.md` + `03_advanced/00_concurrency/06_atomics_and_memory_ordering.md` | #13 | 1 处（Memory 列） |
 | 4 | `03_advanced/01_async/08_pin_unpin.md` + `01_foundation/02_type_system/04_coercion_and_casting.md` | #21 | 2 处（Async + Type 列） |
 | 5 | `04_formal/05_rustc_internals/05_application_binary_interface.md` | #1 #3 | 1 处显性（Link-ABI 列，标"仅横幅"） |
 | 6 | `07_future/00_version_tracking/02_editions.md` + `07_future/01_edition_roadmap/02_edition_guide.md` | #3 #11 #27 | 3 处（Compat-Lint 列，lint-level 矩阵） |
@@ -177,7 +177,7 @@ flowchart LR
 ### 4.3 Memory（内存模型）
 
 - **涉及特性**：#13（直接）；#12 #21 #29 #30（○ 间接）
-- **应反向嵌入核心页**：[`29_memory_model.md`](../../03_advanced/02_unsafe/06_memory_model.md)、[`11_atomics_and_memory_ordering.md`](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md)、[`42_type_layout.md`](../../04_formal/05_rustc_internals/08_type_layout.md)
+- **应反向嵌入核心页**：[`29_memory_model.md`](../../03_advanced/02_unsafe/06_memory_model.md)、[`11_atomics_and_memory_ordering.md`](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)、[`42_type_layout.md`](../../04_formal/05_rustc_internals/08_type_layout.md)
 - **覆盖状态**：**零命中/缺口**——`29_memory_model.md` grep `target_has_atomic_primitive_alignment` = 0；`11_atomics_and_memory_ordering.md` 仅元数据"1.97.0+"。**一处 ⚠缺口**。
 
 ### 4.4 Link-ABI（链接与 ABI）

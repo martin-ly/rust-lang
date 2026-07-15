@@ -22,4 +22,4 @@ canonical 链接。
 | 线程创建与 `thread::spawn` | [`concept/03_advanced/00_concurrency/01_concurrency.md`](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
 | `Send` / `Sync` 判定 | [`concept/03_advanced/00_concurrency/01_concurrency.md`](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
 | 线程同步原语对比 | [`concept/03_advanced/00_concurrency/01_concurrency.md`](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
-| 并发模式与并行算法 | [`concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md`](../../../concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) |
+| 并发模式与并行算法 | [`concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md`](../../../concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) |

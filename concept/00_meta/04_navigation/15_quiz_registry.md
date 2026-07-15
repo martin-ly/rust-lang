@@ -33,12 +33,12 @@
 
 | Quiz | 主题 | 题数 | 题型构成 | 难度分布（🟢/🟡/🔴） | 回链 |
 |:---|:---|:---:|:---|:---:|:---:|
-| [24_quiz_type_system](../../01_foundation/11_quizzes/24_quiz_type_system.md) | 类型系统 | 15+3 | 代码阅读/单选/多选/判断 | 6/9/0 | ✅ |
-| [25_quiz_error_handling](../../01_foundation/11_quizzes/25_quiz_error_handling.md) | 错误处理 | 15+3 | 代码阅读/单选/多选/判断 | 3/11/1 | ✅ |
-| [26_quiz_modules_testing](../../01_foundation/11_quizzes/26_quiz_modules_testing.md) | 模块系统与测试 | 15+3 | 代码阅读/单选/多选/判断 | 4/10/1 | ✅ |
-| [27_quiz_closures_iterators](../../01_foundation/11_quizzes/27_quiz_closures_iterators.md) | 闭包与迭代器 | 15+3 | 代码阅读/单选/多选/判断 | 3/11/1 | ✅ |
-| [29_quiz_pl_foundations](../../01_foundation/11_quizzes/29_quiz_pl_foundations.md) | 通用 PL 基座 | 11 | 单选/多选/判断 | 2/6/3 | ✅ |
-| [33_quiz_ownership_borrowing](../../01_foundation/11_quizzes/33_quiz_ownership_borrowing.md) | 所有权、借用与生命周期 | 15+3 | 代码阅读/单选/多选/判断 | 4/9/2 | ✅ |
+| [24_quiz_type_system](../../01_foundation/11_quizzes/01_quiz_type_system.md) | 类型系统 | 15+3 | 代码阅读/单选/多选/判断 | 6/9/0 | ✅ |
+| [25_quiz_error_handling](../../01_foundation/11_quizzes/02_quiz_error_handling.md) | 错误处理 | 15+3 | 代码阅读/单选/多选/判断 | 3/11/1 | ✅ |
+| [26_quiz_modules_testing](../../01_foundation/11_quizzes/03_quiz_modules_testing.md) | 模块系统与测试 | 15+3 | 代码阅读/单选/多选/判断 | 4/10/1 | ✅ |
+| [27_quiz_closures_iterators](../../01_foundation/11_quizzes/04_quiz_closures_iterators.md) | 闭包与迭代器 | 15+3 | 代码阅读/单选/多选/判断 | 3/11/1 | ✅ |
+| [29_quiz_pl_foundations](../../01_foundation/11_quizzes/05_quiz_pl_foundations.md) | 通用 PL 基座 | 11 | 单选/多选/判断 | 2/6/3 | ✅ |
+| [33_quiz_ownership_borrowing](../../01_foundation/11_quizzes/06_quiz_ownership_borrowing.md) | 所有权、借用与生命周期 | 15+3 | 代码阅读/单选/多选/判断 | 4/9/2 | ✅ |
 
 ### L2 进阶层（`concept/02_intermediate/`）
 
@@ -46,13 +46,13 @@
 |:---|:---|:---:|:---|:---:|:---:|
 | [04_quiz_traits_and_generics](../../02_intermediate/01_generics/04_quiz_traits_and_generics.md) | Trait 与泛型 | 15+3 | 代码阅读/单选/多选/判断 | 5/7/3 | ✅ |
 | [05_quiz_memory_management](../../02_intermediate/02_memory_management/05_quiz_memory_management.md) | 内存管理与智能指针 | 15+3 | 代码阅读/单选/多选/判断 | 3/9/3 | ✅ |
-| [30_quiz_cpp_rust_foundations](../../02_intermediate/09_quizzes/30_quiz_cpp_rust_foundations.md) | C/C++ → Rust 基础对比 | 13 | 单选/多选/判断 | 3/7/3 | ✅ |
+| [30_quiz_cpp_rust_foundations](../../02_intermediate/08_quizzes/30_quiz_cpp_rust_foundations.md) | C/C++ → Rust 基础对比 | 13 | 单选/多选/判断 | 3/7/3 | ✅ |
 
 ### L3 高级层（`concept/03_advanced/`）
 
 | Quiz | 主题 | 题数 | 题型构成 | 难度分布（🟢/🟡/🔴） | 回链 |
 |:---|:---|:---:|:---|:---:|:---:|
-| [08_quiz_concurrency_async](../../03_advanced/00_concurrency/08_quiz_concurrency_async.md) | 并发与异步 | 15+3 | 代码阅读/单选/多选/判断 | 2/8/5 | ✅ |
+| [08_quiz_concurrency_async](../../03_advanced/00_concurrency/09_quiz_concurrency_async.md) | 并发与异步 | 15+3 | 代码阅读/单选/多选/判断 | 2/8/5 | ✅ |
 | [05_quiz_unsafe](../../03_advanced/02_unsafe/05_quiz_unsafe.md) | Unsafe Rust | 15+3 | 代码阅读/单选/多选/判断 | 3/4/8 | ✅ |
 | [10_quiz_macros](../../03_advanced/03_proc_macros/10_quiz_macros.md) | 宏系统 | 15+3 | 代码阅读/单选/多选/判断 | 4/7/4 | ✅ |
 

@@ -75,8 +75,8 @@ flowchart TD
 | [Pin and Unpin](../../03_advanced/01_async/08_pin_unpin.md) | 正确 + 错误 | 自引用类型、Pin 投影 |
 | [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) | 错误 + 边界 | raw pointer、soundness 不变式 |
 | [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) | 正确 + 错误 | ABI 约定、生命周期桥接 |
-| [Atomics and Memory Ordering](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) | 边界 + 反例 | 错误 memory order、happens-before |
-| [Lock-free](../../03_advanced/00_concurrency/06_lock_free.md) | 边界 + 反例 | ABA、内存回收 |
+| [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) | 边界 + 反例 | 错误 memory order、happens-before |
+| [Lock-free](../../03_advanced/00_concurrency/07_lock_free.md) | 边界 + 反例 | ABA、内存回收 |
 | [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) | 正确 + 错误 | derive/attribute/function-like |
 
 ### 3.4 L4 形式化理论层
@@ -244,10 +244,10 @@ flowchart TD
 | [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) | 示例/反例节 ×16 · compile_fail ×8 | 反例：unsafe impl Send/Sync 破坏精化 · 示例与反例（Examples & Counter-examples） |
 | [Send 与 Sync：Auto Trait 的并发安全契约](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) | 示例/反例节 ×4 | 反例：编译期拒绝与 unsafe 手动 impl 对照 · 反例 1：`Rc` 跨线程（编译期拒绝 E0277） |
 | [并发 模式：从消息 传递到锁自由的数据结构](../../03_advanced/00_concurrency/03_concurrency_patterns.md) | 示例/反例节 ×7 · compile_fail ×7 | 常见陷阱 · 编译错误示例 |
-| [Cross-Platform Concurrency](../../03_advanced/00_concurrency/04_cross_platform_concurrency.md) | 示例/反例节 ×1 | 常见陷阱 |
-| [原子操作与内存序：无锁并发的精确控制](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) | 示例/反例节 ×8 · compile_fail ×3 | 常见陷阱 · 编译错误示例 |
-| [无锁编程与内存模型](../../03_advanced/00_concurrency/06_lock_free.md) | 示例/反例节 ×7 · compile_fail ×2 | 常见陷阱 · 编译错误示例 |
-| [并行与分布式模式谱系：从线程池到共识算法](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) | 示例/反例节 ×12 · compile_fail ×7 | 反例与边界测试 · 反例：在 Actor 中使用共享可变状态 |
+| [Cross-Platform Concurrency](../../03_advanced/00_concurrency/05_cross_platform_concurrency.md) | 示例/反例节 ×1 | 常见陷阱 |
+| [原子操作与内存序：无锁并发的精确控制](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) | 示例/反例节 ×8 · compile_fail ×3 | 常见陷阱 · 编译错误示例 |
+| [无锁编程与内存模型](../../03_advanced/00_concurrency/07_lock_free.md) | 示例/反例节 ×7 · compile_fail ×2 | 常见陷阱 · 编译错误示例 |
+| [并行与分布式模式谱系：从线程池到共识算法](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) | 示例/反例节 ×12 · compile_fail ×7 | 反例与边界测试 · 反例：在 Actor 中使用共享可变状态 |
 | [Async/Await](../../03_advanced/01_async/01_async.md) | 示例/反例节 ×15 · compile_fail ×4 | 示例与反例（Examples & Counter-examples） · 正确示例：async fn + .await |
 | [Async/Await 高级主题](../../03_advanced/01_async/02_async_advanced.md) | 示例/反例节 ×6 · compile_fail ×3 | 边界测试：高级异步模式的编译错误 · 边界测试：`select!` 宏中分支完成后的变量使用（编译错误） |
 | [异步模式：从 Future 到生产级并发](../../03_advanced/01_async/03_async_patterns.md) | 示例/反例节 ×10 · compile_fail ×5 | 边界测试：异步模式的编译错误 · 边界测试：`Stream` 与 `Future` 的所有权混淆（编译错误） |
@@ -490,37 +490,37 @@ flowchart TD
 | [Rust 1.97.0 稳定特性](../../07_future/00_version_tracking/rust_1_97_stabilized.md) | 示例/反例节 ×3 | `pin!` 示例 · 空 `export_name` 示例 |
 | [Edition 2024 完全指南：新特性与迁移策略](../../07_future/01_edition_roadmap/02_edition_guide.md) | 示例/反例节 ×7 · compile_fail ×1 | 常见陷阱 · 边界测试：Edition Guide 的编译错误 |
 | [Rust 2027 Edition 及未来路线图](../../07_future/01_edition_roadmap/04_roadmap.md) | 示例/反例节 ×8 · compile_fail ×1 | 常见陷阱 · 编译验证示例 |
-| [Effects System: Concept Pre-study](../../07_future/03_preview_features/01_effects_system.md) | compile_fail ×3 | compile_fail 代码块 |
-| [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](../../07_future/03_preview_features/02_mcdc_coverage_preview.md) | 示例/反例节 ×5 | 边界测试：MCDC 覆盖率预览的编译错误 · 边界测试：MCDC 测试的条件分解（编译错误/逻辑错误） |
-| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/03_safety_tags_preview.md) | 示例/反例节 ×6 · compile_fail ×4 | 边界测试：Safety Tags 预览的编译错误 · 边界测试：安全标签的层级不匹配（编译错误） |
-| [并行 前端编译预研：Rust 编译器 的多核扩展](../../07_future/03_preview_features/04_parallel_frontend_preview.md) | 示例/反例节 ×7 · compile_fail ×1 | 边界测试：并行前端预览的编译错误 · 边界测试：并行编译的宏展开顺序（编译错误） |
-| [派生 CoercePointee 预研：智能指针的自动类型强制](../../07_future/03_preview_features/05_derive_coerce_pointee_preview.md) | 示例/反例节 ×6 · compile_fail ×4 | 边界测试：CoercePointee 派生的编译错误 · 边界测试：非 `#[repr(transparent)]` 类型的 Coerc… |
-| [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/03_preview_features/06_const_trait_impl_preview.md) | 示例/反例节 ×6 · compile_fail ×5 | 边界测试：const trait impl 的编译错误 · 边界测试：const 上下文中调用非 const 方法（编译错误） |
-| [Stable ABI Preview](../../07_future/03_preview_features/07_stable_abi_preview.md) | 示例/反例节 ×1 | 边界测试：稳定 ABI 与 extern "C" 的符号兼容性（链接错误） |
-| [Inline Const Pattern 预览](../../07_future/03_preview_features/08_inline_const_pattern_preview.md) | 示例/反例节 ×2 · compile_fail ×1 | 边界测试：`const {}` 块在 pattern 中的使用（编译错误/未来… · ⚠️ 反例与陷阱 |
-| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/03_preview_features/09_return_type_notation_preview.md) | 示例/反例节 ×5 · compile_fail ×4 | 边界测试：Return Type Notation 预览的编译错误 · 边界测试：RTN 在类型位置使用（编译错误） |
-| [`must_not_suspend` Lint Preview](../../07_future/03_preview_features/10_must_not_suspend_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | 边界测试：`must_not_suspend` 与跨 await 点的借用（运… |
-| [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/03_preview_features/11_unsafe_fields_preview.md) | 示例/反例节 ×5 · compile_fail ×4 | 边界测试：Unsafe Fields 预览的编译错误 · 边界测试：unsafe 字段的显式访问要求（编译错误） |
-| [Lifetime Capture in `impl Trait` Preview](../../07_future/03_preview_features/13_lifetime_capture_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | 边界测试：impl trait 的精确 lifetime capture（编译… |
-| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/03_preview_features/14_pin_ergonomics_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
-| [特质中返回位置 impl Trait（RPITIT）预览](../../07_future/03_preview_features/15_rpitit_preview.md) | 示例/反例节 ×2 · compile_fail ×1 | 边界测试：RPITIT（Return Position Impl Trait… · ⚠️ 反例与陷阱 |
-| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/03_preview_features/16_cranelift_backend_preview.md) | 示例/反例节 ×9 · compile_fail ×1 | 边界测试：Cranelift 后端预览的编译错误 · 边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行时差异） |
-| [TAIT Preview](../../07_future/03_preview_features/17_type_alias_impl_trait_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | 边界测试：TAIT（Type Alias Impl Trait）的递归类型限制… |
-| [Arbitrary Self Types 预览：自定义方法接收器](../../07_future/03_preview_features/18_arbitrary_self_types_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
-| [Const Trait 实现预览](../../07_future/03_preview_features/19_const_trait_preview.md) | 示例/反例节 ×2 · compile_fail ×1 | 边界测试：const trait 与泛型 const 求值（编译错误/未来特性） · ⚠️ 反例与陷阱 |
-| [Ergonomic Ref-Counting 预研：人机工学引用计数](../../07_future/03_preview_features/20_ergonomic_ref_counting_preview.md) | 示例/反例节 ×1 | ⚠️ 反例与陷阱 |
-| [Rust 语言规范预研：从参考文档到形式化规范](../../07_future/03_preview_features/21_rust_specification_preview.md) | 示例/反例节 ×6 · compile_fail ×1 | 边界测试：Rust 规范预览的编译错误 · 边界测试：规范未定义行为的边界（编译错误/运行时 UB） |
-| [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/22_async_drop_preview.md) | 示例/反例节 ×7 · compile_fail ×4 | 常见陷阱 · 边界测试：async drop 的编译错误 |
-| [Field Projections 预览：安全的字段级投影](../../07_future/03_preview_features/23_field_projections_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
-| [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/24_borrow_sanitizer.md) | 示例/反例节 ×2 | 可编译示例 · 与 Miri 的对比示例 |
-| [Gen Blocks 预研：超越异步的泛化生成器](../../07_future/03_preview_features/25_gen_blocks_preview.md) | 示例/反例节 ×5 · compile_fail ×4 | 边界测试：Gen Blocks 预览的编译错误 · 边界测试：`gen` 块与 `Iterator` trait 的自动实现（编译… |
-| [WASM Target Evolution Preview](../../07_future/03_preview_features/28_wasm_target_evolution.md) | 示例/反例节 ×2 | 启用 target feature 示例 · 边界测试：WASI 的 capability-based security 与… |
-| [Specialization：Trait 实现的精确化与重叠解析](../../07_future/03_preview_features/31_specialization_preview.md) | 示例/反例节 ×7 · compile_fail ×4 | 常见陷阱 · 边界测试：特化（Specialization）的编译错误 |
-| [编译期执行与常量求值](../../07_future/03_preview_features/32_compile_time_execution.md) | 示例/反例节 ×7 · compile_fail ×3 | 常见陷阱 · 边界测试：编译期执行的编译错误 |
-| [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/03_preview_features/34_open_enums_preview.md) | 示例/反例节 ×6 · compile_fail ×4 | 边界测试：Open Enums 预览的编译错误 · 边界测试：开放枚举的穷尽匹配失效（编译错误） |
-| [f16 / f128 预研：半精度与四精度浮点类型](../../07_future/03_preview_features/35_f16_f128_preview.md) | 示例/反例节 ×2 · compile_fail ×1 | 实测示例（nightly 1.99.0） · ⚠️ 反例与陷阱 |
-| [UnsafePinned 预研：可变引用别名语义的精确标注](../../07_future/03_preview_features/36_unsafe_pinned_preview.md) | 示例/反例节 ×2 · compile_fail ×1 | 实测示例（nightly 1.99.0） · ⚠️ 反例与陷阱 |
-| [Default Field Values 预研：结构体字段默认值](../../07_future/03_preview_features/37_default_field_values_preview.md) | 示例/反例节 ×1 | 实测示例（nightly 1.99.0） |
+| [Effects System: Concept Pre-study](../../07_future/02_preview_features/01_effects_system.md) | compile_fail ×3 | compile_fail 代码块 |
+| [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](../../07_future/02_preview_features/02_mcdc_coverage_preview.md) | 示例/反例节 ×5 | 边界测试：MCDC 覆盖率预览的编译错误 · 边界测试：MCDC 测试的条件分解（编译错误/逻辑错误） |
+| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/02_preview_features/03_safety_tags_preview.md) | 示例/反例节 ×6 · compile_fail ×4 | 边界测试：Safety Tags 预览的编译错误 · 边界测试：安全标签的层级不匹配（编译错误） |
+| [并行 前端编译预研：Rust 编译器 的多核扩展](../../07_future/02_preview_features/04_parallel_frontend_preview.md) | 示例/反例节 ×7 · compile_fail ×1 | 边界测试：并行前端预览的编译错误 · 边界测试：并行编译的宏展开顺序（编译错误） |
+| [派生 CoercePointee 预研：智能指针的自动类型强制](../../07_future/02_preview_features/05_derive_coerce_pointee_preview.md) | 示例/反例节 ×6 · compile_fail ×4 | 边界测试：CoercePointee 派生的编译错误 · 边界测试：非 `#[repr(transparent)]` 类型的 Coerc… |
+| [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/02_preview_features/06_const_trait_impl_preview.md) | 示例/反例节 ×6 · compile_fail ×5 | 边界测试：const trait impl 的编译错误 · 边界测试：const 上下文中调用非 const 方法（编译错误） |
+| [Stable ABI Preview](../../07_future/02_preview_features/07_stable_abi_preview.md) | 示例/反例节 ×1 | 边界测试：稳定 ABI 与 extern "C" 的符号兼容性（链接错误） |
+| [Inline Const Pattern 预览](../../07_future/02_preview_features/08_inline_const_pattern_preview.md) | 示例/反例节 ×2 · compile_fail ×1 | 边界测试：`const {}` 块在 pattern 中的使用（编译错误/未来… · ⚠️ 反例与陷阱 |
+| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/02_preview_features/09_return_type_notation_preview.md) | 示例/反例节 ×5 · compile_fail ×4 | 边界测试：Return Type Notation 预览的编译错误 · 边界测试：RTN 在类型位置使用（编译错误） |
+| [`must_not_suspend` Lint Preview](../../07_future/02_preview_features/10_must_not_suspend_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | 边界测试：`must_not_suspend` 与跨 await 点的借用（运… |
+| [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/02_preview_features/11_unsafe_fields_preview.md) | 示例/反例节 ×5 · compile_fail ×4 | 边界测试：Unsafe Fields 预览的编译错误 · 边界测试：unsafe 字段的显式访问要求（编译错误） |
+| [Lifetime Capture in `impl Trait` Preview](../../07_future/02_preview_features/13_lifetime_capture_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | 边界测试：impl trait 的精确 lifetime capture（编译… |
+| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/02_preview_features/14_pin_ergonomics_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
+| [特质中返回位置 impl Trait（RPITIT）预览](../../07_future/02_preview_features/15_rpitit_preview.md) | 示例/反例节 ×2 · compile_fail ×1 | 边界测试：RPITIT（Return Position Impl Trait… · ⚠️ 反例与陷阱 |
+| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/02_preview_features/16_cranelift_backend_preview.md) | 示例/反例节 ×9 · compile_fail ×1 | 边界测试：Cranelift 后端预览的编译错误 · 边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行时差异） |
+| [TAIT Preview](../../07_future/02_preview_features/17_type_alias_impl_trait_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | 边界测试：TAIT（Type Alias Impl Trait）的递归类型限制… |
+| [Arbitrary Self Types 预览：自定义方法接收器](../../07_future/02_preview_features/18_arbitrary_self_types_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
+| [Const Trait 实现预览](../../07_future/02_preview_features/19_const_trait_preview.md) | 示例/反例节 ×2 · compile_fail ×1 | 边界测试：const trait 与泛型 const 求值（编译错误/未来特性） · ⚠️ 反例与陷阱 |
+| [Ergonomic Ref-Counting 预研：人机工学引用计数](../../07_future/02_preview_features/20_ergonomic_ref_counting_preview.md) | 示例/反例节 ×1 | ⚠️ 反例与陷阱 |
+| [Rust 语言规范预研：从参考文档到形式化规范](../../07_future/02_preview_features/21_rust_specification_preview.md) | 示例/反例节 ×6 · compile_fail ×1 | 边界测试：Rust 规范预览的编译错误 · 边界测试：规范未定义行为的边界（编译错误/运行时 UB） |
+| [Async Drop：异步资源的优雅销毁](../../07_future/02_preview_features/22_async_drop_preview.md) | 示例/反例节 ×7 · compile_fail ×4 | 常见陷阱 · 边界测试：async drop 的编译错误 |
+| [Field Projections 预览：安全的字段级投影](../../07_future/02_preview_features/23_field_projections_preview.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
+| [BorrowSanitizer：动态别名规则验证工具](../../07_future/02_preview_features/24_borrow_sanitizer.md) | 示例/反例节 ×2 | 可编译示例 · 与 Miri 的对比示例 |
+| [Gen Blocks 预研：超越异步的泛化生成器](../../07_future/02_preview_features/25_gen_blocks_preview.md) | 示例/反例节 ×5 · compile_fail ×4 | 边界测试：Gen Blocks 预览的编译错误 · 边界测试：`gen` 块与 `Iterator` trait 的自动实现（编译… |
+| [WASM Target Evolution Preview](../../07_future/02_preview_features/28_wasm_target_evolution.md) | 示例/反例节 ×2 | 启用 target feature 示例 · 边界测试：WASI 的 capability-based security 与… |
+| [Specialization：Trait 实现的精确化与重叠解析](../../07_future/02_preview_features/31_specialization_preview.md) | 示例/反例节 ×7 · compile_fail ×4 | 常见陷阱 · 边界测试：特化（Specialization）的编译错误 |
+| [编译期执行与常量求值](../../07_future/02_preview_features/32_compile_time_execution.md) | 示例/反例节 ×7 · compile_fail ×3 | 常见陷阱 · 边界测试：编译期执行的编译错误 |
+| [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/02_preview_features/34_open_enums_preview.md) | 示例/反例节 ×6 · compile_fail ×4 | 边界测试：Open Enums 预览的编译错误 · 边界测试：开放枚举的穷尽匹配失效（编译错误） |
+| [f16 / f128 预研：半精度与四精度浮点类型](../../07_future/02_preview_features/35_f16_f128_preview.md) | 示例/反例节 ×2 · compile_fail ×1 | 实测示例（nightly 1.99.0） · ⚠️ 反例与陷阱 |
+| [UnsafePinned 预研：可变引用别名语义的精确标注](../../07_future/02_preview_features/36_unsafe_pinned_preview.md) | 示例/反例节 ×2 · compile_fail ×1 | 实测示例（nightly 1.99.0） · ⚠️ 反例与陷阱 |
+| [Default Field Values 预研：结构体字段默认值](../../07_future/02_preview_features/37_default_field_values_preview.md) | 示例/反例节 ×1 | 实测示例（nightly 1.99.0） |
 | [AI × Rust：生成-验证闭环与确定性容器](../../07_future/04_research_and_experimental/01_ai_integration.md) | 示例/反例节 ×10 · compile_fail ×3 | 反例与边界测试 · 反例：AI 生成的 Rust 代码通过编译但逻辑错误 |
 | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 示例/反例节 ×8 · compile_fail ×2 | TLA+ 规约示例：Rust 并发协议的形式化规约 · 示例一：Rust `mpsc::channel` 的 TLA+ 规约 |
 | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | 示例/反例节 ×7 · compile_fail ×3 | 代码示例：同一功能在不同 Edition 中的写法差异 · 边界测试：语言演进的编译错误 |

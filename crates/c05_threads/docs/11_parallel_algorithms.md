@@ -4,7 +4,7 @@
 # Rust 并行算法（c05_threads 示例索引）
 
 > **权威来源**: 并行算法分类、Fork-Join、数据并行、任务并行、工作窃取等完整解释见
-> [`concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md`](../../../concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)。
+> [`concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md`](../../../concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)。
 
 本文件原为 `c05_threads` crate 的通用并行算法教程。根据 AGENTS.md §6.4 治理规则，
 通用 Rust 概念解释已迁移至 `concept/03_advanced/00_concurrency/`，此处仅保留索引与
@@ -19,7 +19,7 @@ canonical 链接。
 
 | 主题 | 权威来源 |
 | :--- | :--- |
-| 并行/分布式模式谱系 | [`concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md`](../../../concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) |
+| 并行/分布式模式谱系 | [`concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md`](../../../concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) |
 | 并发模式详解 | [`concept/03_advanced/00_concurrency/03_concurrency_patterns.md`](../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md) |
-| 原子操作与内存序 | [`concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md`](../../../concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) |
-| 无锁数据结构 | [`concept/03_advanced/00_concurrency/06_lock_free.md`](../../../concept/03_advanced/00_concurrency/06_lock_free.md) |
+| 原子操作与内存序 | [`concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md`](../../../concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) |
+| 无锁数据结构 | [`concept/03_advanced/00_concurrency/07_lock_free.md`](../../../concept/03_advanced/00_concurrency/07_lock_free.md) |

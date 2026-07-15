@@ -56,7 +56,7 @@
 | L0 元信息层 | [Rust 语义表达力多视角深化](../../00_meta/00_framework/expressiveness_multiview.md) | L5 对比分析层 | [Paradigm Matrix: Multi-Language Formal Comparison](../../05_comparative/00_paradigms/01_paradigm_matrix.md) | 相关概念节 |
 | L0 元信息层 | [Rust 语义表达力多视角深化](../../00_meta/00_framework/expressiveness_multiview.md) | L5 对比分析层 | [Rust vs Go：线性所有权 vs CSP 过程逻辑](../../05_comparative/01_systems_languages/03_rust_vs_go.md) | 相关概念节 |
 | L0 元信息层 | [Rust 语义表达力多视角深化](../../00_meta/00_framework/expressiveness_multiview.md) | L6 生态工程层 | [Design Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) | 相关概念节 |
-| L0 元信息层 | [Rust 语义表达力多视角深化](../../00_meta/00_framework/expressiveness_multiview.md) | L7 前沿趋势层 | [Effects System: Concept Pre-study](../../07_future/03_preview_features/01_effects_system.md) | 相关概念节 |
+| L0 元信息层 | [Rust 语义表达力多视角深化](../../00_meta/00_framework/expressiveness_multiview.md) | L7 前沿趋势层 | [Effects System: Concept Pre-study](../../07_future/02_preview_features/01_effects_system.md) | 相关概念节 |
 | L0 元信息层 | [Rust 知识体系全局思维导图](../../00_meta/00_framework/knowledge_mindmap.md) | L1 基础概念层 | [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 相关概念节 |
 | L0 元信息层 | [Rust 知识体系全局思维导图](../../00_meta/00_framework/knowledge_mindmap.md) | L3 高级概念层 | [Async/Await](../../03_advanced/01_async/01_async.md) | 相关概念节 |
 | L0 元信息层 | [模式语义空间索引：设计模式在概念体系中的坐标](../../00_meta/00_framework/pattern_semantic_space_index.md) | L1 基础概念层 | [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) | 前置概念 |
@@ -64,7 +64,7 @@
 | L0 元信息层 | [模式语义空间索引：设计模式在概念体系中的坐标](../../00_meta/00_framework/pattern_semantic_space_index.md) | L6 生态工程层 | [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | 后置概念 |
 | L0 元信息层 | [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../../00_meta/00_framework/pl_foundations_roadmap.md) | L1 基础概念层 | [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 前置概念 |
 | L0 元信息层 | [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../../00_meta/00_framework/pl_foundations_roadmap.md) | L1 基础概念层 | [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) | 前置概念 |
-| L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/00_framework/semantic_bridge_algorithms_patterns.md) | L3 高级概念层 | [并行与分布式模式谱系：从线程池到共识算法](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) | 后置概念 |
+| L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/00_framework/semantic_bridge_algorithms_patterns.md) | L3 高级概念层 | [并行与分布式模式谱系：从线程池到共识算法](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) | 后置概念 |
 | L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/00_framework/semantic_bridge_algorithms_patterns.md) | L6 生态工程层 | [Design Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) | 前置概念 |
 | L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/00_framework/semantic_bridge_algorithms_patterns.md) | L6 生态工程层 | [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | 后置概念 |
 | L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/00_framework/semantic_bridge_algorithms_patterns.md) | L6 生态工程层 | [算法与竞赛编程 (Algorithms & Competitive Programming)](../../06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md) | 前置概念 |
@@ -88,7 +88,7 @@
 | L1 基础概念层 | [零成本抽象：Rust 的性能哲学](../../01_foundation/00_start/02_zero_cost_abstractions.md) | L2 进阶概念层 | [Generics](../../02_intermediate/01_generics/01_generics.md) | 前置概念 |
 | L1 基础概念层 | [零成本抽象：Rust 的性能哲学](../../01_foundation/00_start/02_zero_cost_abstractions.md) | L5 对比分析层 | [Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | 后置概念 |
 | L1 基础概念层 | [零成本抽象：Rust 的性能哲学](../../01_foundation/00_start/02_zero_cost_abstractions.md) | L6 生态工程层 | [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) | 后置概念 |
-| L1 基础概念层 | [零成本抽象：Rust 的性能哲学](../../01_foundation/00_start/02_zero_cost_abstractions.md) | L7 前沿趋势层 | [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/03_preview_features/16_cranelift_backend_preview.md) | 相关概念节 |
+| L1 基础概念层 | [零成本抽象：Rust 的性能哲学](../../01_foundation/00_start/02_zero_cost_abstractions.md) | L7 前沿趋势层 | [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/02_preview_features/16_cranelift_backend_preview.md) | 相关概念节 |
 | L1 基础概念层 | [闭包基础：捕获环境与匿名函数](../../01_foundation/00_start/03_closure_basics.md) | L0 元信息层 | [International Authority Index](../../00_meta/02_sources/05_international_authority_index.md) | 相关概念节 |
 | L1 基础概念层 | [闭包基础：捕获环境与匿名函数](../../01_foundation/00_start/03_closure_basics.md) | L2 进阶概念层 | [Traits](../../02_intermediate/00_traits/01_traits.md) | 前置概念 |
 | L1 基础概念层 | [闭包基础：捕获环境与匿名函数](../../01_foundation/00_start/03_closure_basics.md) | L2 进阶概念层 | [闭包类型系统：Fn、FnMut、FnOnce 的捕获语义](../../02_intermediate/04_types_and_conversions/02_closure_types.md) | 后置概念 |
@@ -96,7 +96,7 @@
 | L1 基础概念层 | [闭包基础：捕获环境与匿名函数](../../01_foundation/00_start/03_closure_basics.md) | L3 高级概念层 | [Async/Await](../../03_advanced/01_async/01_async.md) | 后置概念 |
 | L1 基础概念层 | [副作用与纯度：从引用透明到 Rust 的所有权效果](../../01_foundation/00_start/04_effects_and_purity.md) | L3 高级概念层 | [Async/Await](../../03_advanced/01_async/01_async.md) | 后置概念 |
 | L1 基础概念层 | [副作用与纯度：从引用透明到 Rust 的所有权效果](../../01_foundation/00_start/04_effects_and_purity.md) | L4 形式化理论层 | [求值策略：Call-by-Value, Call-by-Name, Call-by-Need](../../04_formal/03_operational_semantics/04_evaluation_strategies.md) | 前置概念 |
-| L1 基础概念层 | [副作用与纯度：从引用透明到 Rust 的所有权效果](../../01_foundation/00_start/04_effects_and_purity.md) | L7 前沿趋势层 | [Effects System: Concept Pre-study](../../07_future/03_preview_features/01_effects_system.md) | 后置概念 |
+| L1 基础概念层 | [副作用与纯度：从引用透明到 Rust 的所有权效果](../../01_foundation/00_start/04_effects_and_purity.md) | L7 前沿趋势层 | [Effects System: Concept Pre-study](../../07_future/02_preview_features/01_effects_system.md) | 后置概念 |
 | L1 基础概念层 | [标准 I/O 与进程](../../01_foundation/00_start/05_std_io_and_process.md) | L0 元信息层 | [Rust 核心术语英中对照表](../../00_meta/01_terminology/01_terminology_glossary.md) | 相关概念节 |
 | L1 基础概念层 | [标准 I/O 与进程](../../01_foundation/00_start/05_std_io_and_process.md) | L3 高级概念层 | [Async/Await](../../03_advanced/01_async/01_async.md) | 后置概念 |
 | L1 基础概念层 | [标准 I/O 与进程](../../01_foundation/00_start/05_std_io_and_process.md) | L6 生态工程层 | [Application Domains](../../06_ecosystem/06_data_and_distributed/01_application_domains.md) | 后置概念 |
@@ -163,9 +163,9 @@
 | L1 基础概念层 | [模式匹配](../../01_foundation/04_control_flow/02_patterns.md) | L0 元信息层 | [Rust 核心术语英中对照表](../../00_meta/01_terminology/01_terminology_glossary.md) | 相关概念节 |
 | L1 基础概念层 | [模式匹配](../../01_foundation/04_control_flow/02_patterns.md) | L2 进阶概念层 | [Generics](../../02_intermediate/01_generics/01_generics.md) | 后置概念 |
 | L1 基础概念层 | [模式匹配](../../01_foundation/04_control_flow/02_patterns.md) | L2 进阶概念层 | [高级类型系统：从关联类型到类型级编程](../../02_intermediate/04_types_and_conversions/04_type_system_advanced.md) | 后置概念 |
-| L1 基础概念层 | [语句与表达式](../../01_foundation/04_control_flow/03_statements_and_expressions.md) | L0 元信息层 | [Rust 核心术语英中对照表](../../00_meta/01_terminology/01_terminology_glossary.md) | 相关概念节 |
-| L1 基础概念层 | [语句与表达式](../../01_foundation/04_control_flow/03_statements_and_expressions.md) | L2 进阶概念层 | [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) | 后置概念 |
-| L1 基础概念层 | [语句与表达式](../../01_foundation/04_control_flow/03_statements_and_expressions.md) | L3 高级概念层 | [Async/Await](../../03_advanced/01_async/01_async.md) | 后置概念 |
+| L1 基础概念层 | [语句与表达式](../../01_foundation/04_control_flow/04_statements_and_expressions.md) | L0 元信息层 | [Rust 核心术语英中对照表](../../00_meta/01_terminology/01_terminology_glossary.md) | 相关概念节 |
+| L1 基础概念层 | [语句与表达式](../../01_foundation/04_control_flow/04_statements_and_expressions.md) | L2 进阶概念层 | [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) | 后置概念 |
+| L1 基础概念层 | [语句与表达式](../../01_foundation/04_control_flow/04_statements_and_expressions.md) | L3 高级概念层 | [Async/Await](../../03_advanced/01_async/01_async.md) | 后置概念 |
 | L1 基础概念层 | [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/05_collections/01_collections.md) | L0 元信息层 | [International Authority Index](../../00_meta/02_sources/05_international_authority_index.md) | 相关概念节 |
 | L1 基础概念层 | [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/05_collections/01_collections.md) | L2 进阶概念层 | [Generics](../../02_intermediate/01_generics/01_generics.md) | 前置概念 |
 | L1 基础概念层 | [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/05_collections/01_collections.md) | L2 进阶概念层 | [智能指针：堆内存管理与共享语义](../../02_intermediate/02_memory_management/04_smart_pointers.md) | 后置概念 |

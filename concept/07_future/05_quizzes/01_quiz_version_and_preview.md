@@ -248,7 +248,7 @@ fn double_size<const N: usize>() -> [u8; N * 2] {
 
 **答案：B**
 
-**解析**：[Ferrocene 权威页](../03_preview_features/12_ferrocene_preview.md) 的定位声明明确：Ferrocene 不是待稳定语言特性，而是对上游 rustc 特定版本执行完整鉴定（qualification）流程后发布的**下游认证工具链发行版**，附监管机构可审查的证据包；页面保留在 `03_preview_features/` 仅为路径稳定。认证工具链生态对比见 [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md)。
+**解析**：[Ferrocene 权威页](../02_preview_features/12_ferrocene_preview.md) 的定位声明明确：Ferrocene 不是待稳定语言特性，而是对上游 rustc 特定版本执行完整鉴定（qualification）流程后发布的**下游认证工具链发行版**，附监管机构可审查的证据包；页面保留在 `03_preview_features/` 仅为路径稳定。认证工具链生态对比见 [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md)。
 
 </details>
 
@@ -304,7 +304,7 @@ fn double_size<const N: usize>() -> [u8; N * 2] {
 
 **答案**：B。
 
-**解析**：ISO 26262 ASIL D 对开发工具要求工具鉴定；上游 stable rustc 本身未经鉴定，而 Ferrocene 编译器经 TÜV SÜD 鉴定至 ASIL D / SIL 3 / Class C（[Ferrocene 权威页](../03_preview_features/12_ferrocene_preview.md) §1.1）。C 错：nightly 特性不能用于认证构建；D 错：lint 是开发期辅助，与监管认可的工具鉴定证据包完全不等价。汽车软件标准化路径另见 [AUTOSAR 与 Rust](../../06_ecosystem/11_domain_applications/22_autosar_and_rust.md)。
+**解析**：ISO 26262 ASIL D 对开发工具要求工具鉴定；上游 stable rustc 本身未经鉴定，而 Ferrocene 编译器经 TÜV SÜD 鉴定至 ASIL D / SIL 3 / Class C（[Ferrocene 权威页](../02_preview_features/12_ferrocene_preview.md) §1.1）。C 错：nightly 特性不能用于认证构建；D 错：lint 是开发期辅助，与监管认可的工具鉴定证据包完全不等价。汽车软件标准化路径另见 [AUTOSAR 与 Rust](../../06_ecosystem/11_domain_applications/22_autosar_and_rust.md)。
 
 </details>
 

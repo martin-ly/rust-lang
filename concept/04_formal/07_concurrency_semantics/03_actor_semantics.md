@@ -11,7 +11,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页：Actor 模型形式语义及其 Rust 映射的唯一深度解释。
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Ana — 分析命名进程 + 邮箱模型的形式根基与工程投影
-> **前置概念**: [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L4 进程代数与 Rust](01_process_calculi_for_rust.md) · [L3 谱系页 §4.1](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
+> **前置概念**: [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L4 进程代数与 Rust](01_process_calculi_for_rust.md) · [L3 谱系页 §4.1](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
 > **后置概念**: [线性化与一致性谱系](02_linearizability_and_consistency.md) · [L6 分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)
 
 ---
@@ -299,7 +299,7 @@ OTP 重启把 actor 状态重置为初值；若崩溃前 actor 已把**不一致
 
 - [L4 进程代数与 Rust](01_process_calculi_for_rust.md) —— 匿名进程 + 命名通道的对偶模型
 - [L4 线性化与一致性谱系](02_linearizability_and_consistency.md) —— 共享内存对象级正确性（Actor 模型中不需要的对象级条件）
-- [L3 谱系页 §4.1 Actor 工程概览](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) —— 本页是形式语义权威页，L3 页保留工程谱系视角
+- [L3 谱系页 §4.1 Actor 工程概览](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) —— 本页是形式语义权威页，L3 页保留工程谱系视角
 - [L6 分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) —— 跨节点时公平性假设失效后的协议补救
 - [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) —— Actor 在五模型坐标系中的位置
 - [L5 执行模型同构性矩阵 §七](../../05_comparative/00_paradigms/02_execution_model_isomorphism.md) —— Actor vs CSP 的工程对比
@@ -310,7 +310,7 @@ OTP 重启把 actor 状态重置为初值；若崩溃前 actor 已把**不一致
 
 > **认知路径**: 三要素（地址/邮箱/行为） ⟹ 三公理 ⟹ Agha 配置语义 ⟹ 监督树 ⟹ Rust 三框架映射 ⟹ 与 channel 的边界。
 
-学习顺序建议：先读 [L4 进程代数页](01_process_calculi_for_rust.md) 建立「命名通道 vs 命名进程」的对偶直觉，再读本页；§五的框架对照表应结合 [actix 文档](https://actix.rs/docs/actix/actor) 的最小示例动手验证；最后把 §六的两条边界与 [L3 谱系页 §4](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) 的工程示例对照阅读。
+学习顺序建议：先读 [L4 进程代数页](01_process_calculi_for_rust.md) 建立「命名通道 vs 命名进程」的对偶直觉，再读本页；§五的框架对照表应结合 [actix 文档](https://actix.rs/docs/actix/actor) 的最小示例动手验证；最后把 §六的两条边界与 [L3 谱系页 §4](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) 的工程示例对照阅读。
 
 **核心推理链**: 无共享状态 ⟹ 邮箱串行化 ⟹ 无需锁推理 ⟹ 监督接管失败 ⟹ 系统级容错——这条链解释了 Actor 模型在电信级系统（Erlang 的「九个 9」）中长青的原因。
 
@@ -326,7 +326,7 @@ OTP 重启把 actor 状态重置为初值；若崩溃前 actor 已把**不一致
 - [ractor（docs.rs）](https://docs.rs/ractor/latest/ractor/) · [ractor 仓库](https://github.com/slawlor/ractor) · [kameo（docs.rs）](https://docs.rs/kameo/latest/kameo/) · [kameo 仓库](https://github.com/tqwewe/kameo)
 - [std::sync::mpsc — Rust 标准库文档](https://doc.rust-lang.org/std/sync/mpsc/)（§六 channel 边界的官方契约）
 
-> **相关文件**: [同层：进程代数](01_process_calculi_for_rust.md) · [同层：线性化](02_linearizability_and_consistency.md) · [L3 工程谱系](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
+> **相关文件**: [同层：进程代数](01_process_calculi_for_rust.md) · [同层：线性化](02_linearizability_and_consistency.md) · [L3 工程谱系](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-12 ｜ **状态**: ✅ W5-3 新建（Rust 1.97 对齐）
 

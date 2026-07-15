@@ -2143,7 +2143,7 @@ Rust 1.89的消息传递模式提供了：
 
 ## 补充视角：C05 Crate 并发模式实践
 
-> 来源：`crates/c05_threads/docs/rust_194_updates/01_concurrency_patterns_rust_194.md`
+> 来源：`crates/c05_threads/docs/tier_04_rust_194_updates/01_concurrency_patterns_rust_194.md`
 > 按 AGENTS.md §6.4 迁移至此，作为 canonical 并发模式概念页的工程补充。
 > 下列模式并非 Rust 1.94 独占特性，而是使用 Rust 标准库及生态 crate 实现的常见并发工程模式。
 

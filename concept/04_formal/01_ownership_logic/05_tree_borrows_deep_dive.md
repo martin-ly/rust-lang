@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Str
 > **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [所有权（Ownership）形式化](02_ownership_formal.md) · [Miri](../04_model_checking/08_miri.md)
-> **后置延伸**: [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md) · [BorrowSanitizer 预览/活跃跟踪](../../07_future/03_preview_features/24_borrow_sanitizer.md) · [Safety Tags](../../07_future/03_preview_features/03_safety_tags_preview.md) · [AutoVerus / Verus](../../07_future/03_preview_features/33_autoverus_preview.md) · [Miri](../04_model_checking/08_miri.md)
+> **后置延伸**: [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md) · [BorrowSanitizer 预览/活跃跟踪](../../07_future/02_preview_features/24_borrow_sanitizer.md) · [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md) · [AutoVerus / Verus](../../07_future/02_preview_features/33_autoverus_preview.md) · [Miri](../04_model_checking/08_miri.md)
 >
 > **来源**: [Villani et al. — Tree Borrows (PLDI 2025)](https://perso.crans.org/vanile/treebor/) · [Tree Borrows — DOI 10.1145/3735592](https://doi.org/10.1145/3735592) · [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/mod.rs) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > **内容重叠提示**: 本文与 [`archive/docs/content/academic/10_tree_borrows_guide.md`](../../../archive/docs/content/academic/10_tree_borrows_guide.md)（归档只读） 内容高度重叠。`docs/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
@@ -144,9 +144,9 @@ B
 ## 相关概念
 
 - [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md)
-- [BorrowSanitizer 预览/活跃跟踪](../../07_future/03_preview_features/24_borrow_sanitizer.md)
-- [Safety Tags](../../07_future/03_preview_features/03_safety_tags_preview.md) · [深度形式化](../../07_future/03_preview_features/03_safety_tags_preview.md)
-- [AutoVerus / Verus](../../07_future/03_preview_features/33_autoverus_preview.md) · [深度](../04_model_checking/07_autoverus.md)
+- [BorrowSanitizer 预览/活跃跟踪](../../07_future/02_preview_features/24_borrow_sanitizer.md)
+- [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md) · [深度形式化](../../07_future/02_preview_features/03_safety_tags_preview.md)
+- [AutoVerus / Verus](../../07_future/02_preview_features/33_autoverus_preview.md) · [深度](../04_model_checking/07_autoverus.md)
 - [Miri](../04_model_checking/08_miri.md)
 - [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 - [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)

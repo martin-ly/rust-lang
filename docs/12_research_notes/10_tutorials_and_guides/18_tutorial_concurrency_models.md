@@ -23,7 +23,7 @@
 | :--- | :--- |
 | 并发模型 | [`concept/03_advanced/00_concurrency/01_concurrency.md`](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
 | 并发模式 | [`concept/03_advanced/00_concurrency/03_concurrency_patterns.md`](../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md) |
-| 原子操作与内存序 | [`concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md`](../../../concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) |
+| 原子操作与内存序 | [`concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md`](../../../concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) |
 | 异步编程 | [`concept/03_advanced/01_async/01_async.md`](../../../concept/03_advanced/01_async/01_async.md) |
 | 所有权 | [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md) |
 | 形式化视角 | [`concept/04_formal/02_separation_logic/01_rustbelt.md`](../../../concept/04_formal/02_separation_logic/01_rustbelt.md) |

@@ -65,7 +65,7 @@ flowchart LR
 |:---|:---:|:---|:---|
 | `Send` + `Sync` ⟹ 无线程数据竞争 | ⟹ | 编译期通过 marker trait 保证 | [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) |
 | `Mutex<T>` / `RwLock<T>` ⟹ 内部可变性 + 互斥 | ⟹ | 运行时保证单一写者 | [Interior Mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) |
-| Atomic + Memory Ordering ⟹ happens-before | ⟹ | 无锁算法的同步基础 | [Atomics and Memory Ordering](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) |
+| Atomic + Memory Ordering ⟹ happens-before | ⟹ | 无锁算法的同步基础 | [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) |
 | `Pin<T>` + `Unpin` ⟹ 自引用类型安全移动 | ⟹ | 固定位置保证 | [Pin and Unpin](../../03_advanced/01_async/08_pin_unpin.md) |
 
 ### 3.4 形式化对应
@@ -76,7 +76,7 @@ flowchart LR
 | 借用 / 别名互斥 | 分离逻辑 / RustBelt | [Separation Logic](../../04_formal/02_separation_logic/02_separation_logic.md), [RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md) |
 | 类型系统 | 类型论 / HM 推断 | [Type Theory](../../04_formal/00_type_theory/01_type_theory.md), [Type Inference](../../04_formal/00_type_theory/03_type_inference.md) |
 | 求值语义 | 操作语义 / 指称语义 | [Operational Semantics](../../04_formal/03_operational_semantics/03_operational_semantics.md), [Denotational Semantics](../../04_formal/03_operational_semantics/01_denotational_semantics.md) |
-| unsafe 契约 | Hoare 逻辑 / Safety Tags | [Hoare Logic](../../04_formal/03_operational_semantics/02_hoare_logic.md), [Safety Tags](../../07_future/03_preview_features/03_safety_tags_preview.md) |
+| unsafe 契约 | Hoare 逻辑 / Safety Tags | [Hoare Logic](../../04_formal/03_operational_semantics/02_hoare_logic.md), [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md) |
 
 ---
 

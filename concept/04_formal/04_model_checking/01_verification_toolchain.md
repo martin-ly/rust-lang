@@ -750,7 +750,7 @@ flowchart TD
 | 线性逻辑 | [`./01_linear_logic.md`](../01_ownership_logic/01_linear_logic.md) | 分离逻辑的理论基础 |
 | 类型论 | [`./02_type_theory.md`](../00_type_theory/01_type_theory.md) | a-mir-formality 的理论基础 |
 | Unsafe 边界 | [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/01_unsafe.md) | 验证对象的定义 |
-| 形式化方法工业化 | [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | L7 演进趋势 |
+| 形式化方法工业化 | [`../07_future/04_research_and_experimental/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | L7 演进趋势 |
 | Rust 版本跟踪 | [`../07_future/05_rust_version_tracking.md`](../../07_future/00_version_tracking/01_rust_version_tracking.md) | 工具链对新语言特性的支持状态 |
 
 ---

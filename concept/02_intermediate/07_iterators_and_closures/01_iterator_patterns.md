@@ -894,7 +894,7 @@ fn main() {
 
 ## 相关概念
 
-- [对应测验](../../01_foundation/11_quizzes/27_quiz_closures_iterators.md) — 闭包与迭代器（捕获、Fn traits、惰性求值、适配器）
+- [对应测验](../../01_foundation/11_quizzes/04_quiz_closures_iterators.md) — 闭包与迭代器（捕获、Fn traits、惰性求值、适配器）
 - **上层概念**: [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Generics](../01_generics/01_generics.md) · [Closures](../../01_foundation/00_start/03_closure_basics.md)
 - **下层概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Performance](../../06_ecosystem/10_performance/01_performance_optimization.md)
 

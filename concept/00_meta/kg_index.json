@@ -480,8 +480,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:00_meta/01_trpl_3rd_ed_mapping.md",
-      "path": "00_meta/01_trpl_3rd_ed_mapping.md",
+      "id": "concept:00_meta/06_trpl_3rd_ed_mapping.md",
+      "path": "00_meta/06_trpl_3rd_ed_mapping.md",
       "title": "",
       "en": "TRPL 3rd Ed Chapter Mapping",
       "summary": "Redirect stub pointing to the full TRPL 3rd Ed chapter-to-concept mapping in docs/01_learning/learning_mvp_path.md.",
@@ -1082,8 +1082,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:00_meta/placeholders/01_placeholder_generic.md",
-      "path": "00_meta/placeholders/01_placeholder_generic.md",
+      "id": "concept:00_meta/07_placeholders/01_placeholder_generic.md",
+      "path": "00_meta/07_placeholders/01_placeholder_generic.md",
       "title": "占位符页面",
       "en": "Placeholder",
       "summary": "This page is a generic placeholder for links in concept files that point to content not yet created.",
@@ -1885,8 +1885,8 @@
       ]
     },
     {
-      "id": "concept:01_foundation/04_control_flow/03_statements_and_expressions.md",
-      "path": "01_foundation/04_control_flow/03_statements_and_expressions.md",
+      "id": "concept:01_foundation/04_control_flow/04_statements_and_expressions.md",
+      "path": "01_foundation/04_control_flow/04_statements_and_expressions.md",
       "title": "语句与表达式（Statements and Expressions）",
       "en": "Statements and Expressions",
       "summary": "Rust 作为表达式语言的核心特征：表达式嵌套、求值顺序，以及语句如何封装和显式排序表达式求值。 Core characteristics of Rust as an expression language: nested expressions, evaluation order, and how statements sequence expression evaluation.",
@@ -2658,8 +2658,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:01_foundation/11_quizzes/24_quiz_type_system.md",
-      "path": "01_foundation/11_quizzes/24_quiz_type_system.md",
+      "id": "concept:01_foundation/11_quizzes/01_quiz_type_system.md",
+      "path": "01_foundation/11_quizzes/01_quiz_type_system.md",
       "title": "",
       "en": "Type System",
       "summary": "Type System — An interactive quiz checking L1 type-system fundamentals: scalar and compound types, enums, and matching.",
@@ -2681,8 +2681,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:01_foundation/11_quizzes/25_quiz_error_handling.md",
-      "path": "01_foundation/11_quizzes/25_quiz_error_handling.md",
+      "id": "concept:01_foundation/11_quizzes/02_quiz_error_handling.md",
+      "path": "01_foundation/11_quizzes/02_quiz_error_handling.md",
       "title": "",
       "en": "Error Handling",
       "summary": "Error Handling — An interactive quiz checking L1 error handling: Result, Option, the `?` operator, panic, and custom errors.",
@@ -2699,8 +2699,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:01_foundation/11_quizzes/26_quiz_modules_testing.md",
-      "path": "01_foundation/11_quizzes/26_quiz_modules_testing.md",
+      "id": "concept:01_foundation/11_quizzes/03_quiz_modules_testing.md",
+      "path": "01_foundation/11_quizzes/03_quiz_modules_testing.md",
       "title": "",
       "en": "Modules",
       "summary": "Modules — An interactive quiz checking L1 modules (packages, crates, visibility, paths) and testing fundamentals.",
@@ -2717,8 +2717,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:01_foundation/11_quizzes/27_quiz_closures_iterators.md",
-      "path": "01_foundation/11_quizzes/27_quiz_closures_iterators.md",
+      "id": "concept:01_foundation/11_quizzes/04_quiz_closures_iterators.md",
+      "path": "01_foundation/11_quizzes/04_quiz_closures_iterators.md",
       "title": "",
       "en": "Closures",
       "summary": "Closures — An interactive quiz checking closures (capture, Fn traits, move) and iterators (adapters, consumers, laziness).",
@@ -2735,8 +2735,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:01_foundation/11_quizzes/29_quiz_pl_foundations.md",
-      "path": "01_foundation/11_quizzes/29_quiz_pl_foundations.md",
+      "id": "concept:01_foundation/11_quizzes/05_quiz_pl_foundations.md",
+      "path": "01_foundation/11_quizzes/05_quiz_pl_foundations.md",
       "title": "",
       "en": "Quiz: General PL Foundations",
       "summary": "Embedded quiz for the general programming-language mechanism files: variable model, evaluation strategies, effects and purity, control flow, and data abstraction spectrum.",
@@ -2753,8 +2753,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:01_foundation/11_quizzes/33_quiz_ownership_borrowing.md",
-      "path": "01_foundation/11_quizzes/33_quiz_ownership_borrowing.md",
+      "id": "concept:01_foundation/11_quizzes/06_quiz_ownership_borrowing.md",
+      "path": "01_foundation/11_quizzes/06_quiz_ownership_borrowing.md",
       "title": "",
       "en": "Ownership",
       "summary": "Ownership — An interactive quiz checking ownership, borrowing, and lifetime fundamentals.",
@@ -4023,8 +4023,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:02_intermediate/09_quizzes/30_quiz_cpp_rust_foundations.md",
-      "path": "02_intermediate/09_quizzes/30_quiz_cpp_rust_foundations.md",
+      "id": "concept:02_intermediate/08_quizzes/30_quiz_cpp_rust_foundations.md",
+      "path": "02_intermediate/08_quizzes/30_quiz_cpp_rust_foundations.md",
       "title": "",
       "en": "Quiz: C/C++ to Rust Foundations",
       "summary": "Embedded quiz for the C/C++ engineering-layer comparison files: RTTI, macros, exception safety, construction, friend, move semantics, and value/reference semantics.",
@@ -4172,8 +4172,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/00_concurrency/04_cross_platform_concurrency.md",
-      "path": "03_advanced/00_concurrency/04_cross_platform_concurrency.md",
+      "id": "concept:03_advanced/00_concurrency/05_cross_platform_concurrency.md",
+      "path": "03_advanced/00_concurrency/05_cross_platform_concurrency.md",
       "title": "",
       "en": "Cross-Platform Concurrency",
       "summary": "Platform-specific threading models, synchronization primitives, and conditional-compilation strategies for writing portable concurrent Rust across Windows, Linux, macOS, and mobile targets.",
@@ -4192,8 +4192,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/00_concurrency/05_atomics_and_memory_ordering.md",
-      "path": "03_advanced/00_concurrency/05_atomics_and_memory_ordering.md",
+      "id": "concept:03_advanced/00_concurrency/06_atomics_and_memory_ordering.md",
+      "path": "03_advanced/00_concurrency/06_atomics_and_memory_ordering.md",
       "title": "",
       "en": "Concurrency",
       "summary": "Concurrency — Atomic types and memory ordering: load/store, compare-and-swap, and release-acquire for precise lock-free control.",
@@ -4229,8 +4229,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/00_concurrency/06_lock_free.md",
-      "path": "03_advanced/00_concurrency/06_lock_free.md",
+      "id": "concept:03_advanced/00_concurrency/07_lock_free.md",
+      "path": "03_advanced/00_concurrency/07_lock_free.md",
       "title": "",
       "en": "Locking Primitives",
       "summary": "Locking Primitives — Lock-free programming: atomic operations and memory ordering, with memory-safety guarantees and performance benefits.",
@@ -4254,8 +4254,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md",
-      "path": "03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md",
+      "id": "concept:03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md",
+      "path": "03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md",
       "title": "",
       "en": "Parallel Distributed Pattern Spectrum",
       "summary": "Parallel Distributed Pattern Spectrum: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.",
@@ -4279,8 +4279,8 @@
       ]
     },
     {
-      "id": "concept:03_advanced/00_concurrency/08_quiz_concurrency_async.md",
-      "path": "03_advanced/00_concurrency/08_quiz_concurrency_async.md",
+      "id": "concept:03_advanced/00_concurrency/09_quiz_concurrency_async.md",
+      "path": "03_advanced/00_concurrency/09_quiz_concurrency_async.md",
       "title": "",
       "en": "Concurrency",
       "summary": "Concurrency — An interactive quiz checking L3 concurrency (Send/Sync, Mutex/Arc, channels) and async (Future, Pin, await).",
@@ -6542,7 +6542,7 @@
       "path": "04_formal/02_separation_logic/03_safety_tags_in_formal.md",
       "title": "Safety Tags（安全标签）",
       "en": "Safety Tags in Formal Verification — Redirect Stub",
-      "summary": "Redirect stub: the RFC #3842 `safety` attributes proposal — structured, tool-checkable annotations of `unsafe` function safety contracts, plus their predicate-logic formalization and mapping to Kani/Prusti/Verus — is canonically covered in `concept/07_future/03_preview_features/03_safety_tags_preview.md`; this page keeps only the pointer.",
+      "summary": "Redirect stub: the RFC #3842 `safety` attributes proposal — structured, tool-checkable annotations of `unsafe` function safety contracts, plus their predicate-logic formalization and mapping to Kani/Prusti/Verus — is canonically covered in `concept/07_future/02_preview_features/03_safety_tags_preview.md`; this page keeps only the pointer.",
       "bloom": "L4-L7",
       "rust_version": null,
       "prerequisites": [],
@@ -12249,7 +12249,7 @@
       "path": "07_future/00_version_tracking/rust_1_94_stabilized.md",
       "title": "",
       "en": "Rust 1.94 Stabilized Features",
-      "summary": "Authoritative concept page for `c10_networks - Rust 1.94 更新概览`. Content migrated from `crates/c10_networks/docs/rust_194_updates/00_rust_194_overview.md`.",
+      "summary": "Authoritative concept page for `c10_networks - Rust 1.94 更新概览`. Content migrated from `crates/c10_networks/docs/tier_04_rust_194_updates/00_rust_194_overview.md`.",
       "bloom": "L2-L3",
       "rust_version": "1.94.0",
       "prerequisites": [],
@@ -12518,8 +12518,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/01_effects_system.md",
-      "path": "07_future/03_preview_features/01_effects_system.md",
+      "id": "concept:07_future/02_preview_features/01_effects_system.md",
+      "path": "07_future/02_preview_features/01_effects_system.md",
       "title": "",
       "en": "Effect System",
       "summary": "Effect System — A speculative pre-study tracking the type system's move toward explicit effect tracking.",
@@ -12557,8 +12557,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/02_mcdc_coverage_preview.md",
-      "path": "07_future/03_preview_features/02_mcdc_coverage_preview.md",
+      "id": "concept:07_future/02_preview_features/02_mcdc_coverage_preview.md",
+      "path": "07_future/02_preview_features/02_mcdc_coverage_preview.md",
       "title": "MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证",
       "en": "MC/DC Coverage Preview",
       "summary": "Preview of modified condition/decision coverage (MC/DC) support in Rust's coverage tooling.",
@@ -12588,8 +12588,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/03_safety_tags_preview.md",
-      "path": "07_future/03_preview_features/03_safety_tags_preview.md",
+      "id": "concept:07_future/02_preview_features/03_safety_tags_preview.md",
+      "path": "07_future/02_preview_features/03_safety_tags_preview.md",
       "title": "Safety Tags 概念预研：Unsafe 契约的机器可读标注",
       "en": "Safety Tags Preview",
       "summary": "Preview of safety tags for annotating and propagating unsafe preconditions in Rust.",
@@ -12619,8 +12619,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/04_parallel_frontend_preview.md",
-      "path": "07_future/03_preview_features/04_parallel_frontend_preview.md",
+      "id": "concept:07_future/02_preview_features/04_parallel_frontend_preview.md",
+      "path": "07_future/02_preview_features/04_parallel_frontend_preview.md",
       "title": "并行 前端编译预研：Rust 编译器 的多核扩展",
       "en": "Compiler Internals",
       "summary": "Compiler Internals — The compiler front end's shift from single-threaded to multi-core parallel, and its impact on build times and IDE responsiveness.",
@@ -12646,8 +12646,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/05_derive_coerce_pointee_preview.md",
-      "path": "07_future/03_preview_features/05_derive_coerce_pointee_preview.md",
+      "id": "concept:07_future/02_preview_features/05_derive_coerce_pointee_preview.md",
+      "path": "07_future/02_preview_features/05_derive_coerce_pointee_preview.md",
       "title": "派生 CoercePointee 预研：智能指针的自动类型强制",
       "en": "Derive CoercePointee Preview",
       "summary": "Preview of the `CoercePointee` derive for custom smart-pointer types.",
@@ -12677,8 +12677,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/06_const_trait_impl_preview.md",
-      "path": "07_future/03_preview_features/06_const_trait_impl_preview.md",
+      "id": "concept:07_future/02_preview_features/06_const_trait_impl_preview.md",
+      "path": "07_future/02_preview_features/06_const_trait_impl_preview.md",
       "title": "Const Trait Impl 预研：常量上下文中的 Trait 泛化",
       "en": "Const Trait Impl Preview",
       "summary": "Preview of const trait implementations (`const Trait`) for compile-time generic code.",
@@ -12708,8 +12708,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/07_stable_abi_preview.md",
-      "path": "07_future/03_preview_features/07_stable_abi_preview.md",
+      "id": "concept:07_future/02_preview_features/07_stable_abi_preview.md",
+      "path": "07_future/02_preview_features/07_stable_abi_preview.md",
       "title": "Stable ABI Preview",
       "en": "Stable Application Binary Interface (ABI) Preview",
       "summary": "Preview of Rust's long-term effort to define a stable ABI (`crabi`) for cross-version dynamic linking and FFI, currently experimental and under discussion.",
@@ -12730,8 +12730,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/08_inline_const_pattern_preview.md",
-      "path": "07_future/03_preview_features/08_inline_const_pattern_preview.md",
+      "id": "concept:07_future/02_preview_features/08_inline_const_pattern_preview.md",
+      "path": "07_future/02_preview_features/08_inline_const_pattern_preview.md",
       "title": "Inline Const Pattern 预览（Rust 1.98+ Nightly）",
       "en": "Inline Const Pattern Preview",
       "summary": "Preview of inline const patterns (`const { expr }` in match arms), extending stable inline const expressions into pattern matching contexts; nightly experimental.",
@@ -12752,8 +12752,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/09_return_type_notation_preview.md",
-      "path": "07_future/03_preview_features/09_return_type_notation_preview.md",
+      "id": "concept:07_future/02_preview_features/09_return_type_notation_preview.md",
+      "path": "07_future/02_preview_features/09_return_type_notation_preview.md",
       "title": "Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界",
       "en": "Return Type Notation Preview",
       "summary": "Preview of Return Type Notation (RTN), a mechanism to add bounds to the return types of `async fn` in traits (AFIT) and return-position `impl Trait` in traits (RPITIT).",
@@ -12791,8 +12791,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/10_must_not_suspend_preview.md",
-      "path": "07_future/03_preview_features/10_must_not_suspend_preview.md",
+      "id": "concept:07_future/02_preview_features/10_must_not_suspend_preview.md",
+      "path": "07_future/02_preview_features/10_must_not_suspend_preview.md",
       "title": "`must_not_suspend` Lint Preview",
       "en": "`must_not_suspend` Lint Preview",
       "summary": "Preview of the `must_not_suspend` lint that warns when types like `MutexGuard` or `RefCell` borrows are held across `.await` points in async code; nightly experimental.",
@@ -12813,8 +12813,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/11_unsafe_fields_preview.md",
-      "path": "07_future/03_preview_features/11_unsafe_fields_preview.md",
+      "id": "concept:07_future/02_preview_features/11_unsafe_fields_preview.md",
+      "path": "07_future/02_preview_features/11_unsafe_fields_preview.md",
       "title": "Unsafe Fields 预研：字段级安全边界的精确标注",
       "en": "Unsafe Fields Preview",
       "summary": "Preview of unsafe fields: marking individual fields as requiring unsafe access.",
@@ -12831,8 +12831,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/12_ferrocene_preview.md",
-      "path": "07_future/03_preview_features/12_ferrocene_preview.md",
+      "id": "concept:07_future/02_preview_features/12_ferrocene_preview.md",
+      "path": "07_future/02_preview_features/12_ferrocene_preview.md",
       "title": "Ferrocene：已交付的 Rust 安全关键认证工具链",
       "en": "Ferrocene: The Delivered Qualified Rust Toolchain for Safety-Critical Systems",
       "summary": "Ferrocene is the open-source, commercially delivered Rust toolchain qualified by TÜV SÜD for safety-critical development (ISO 26262 ASIL D, IEC 61508 SIL 3, IEC 62304 Class C), with a certified core library subset (ISO 26262 ASIL B / IEC 61508 SIL 2). Current release Ferrocene 26.02.0 tracks upstream rustc 1.92.",
@@ -12866,8 +12866,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/13_lifetime_capture_preview.md",
-      "path": "07_future/03_preview_features/13_lifetime_capture_preview.md",
+      "id": "concept:07_future/02_preview_features/13_lifetime_capture_preview.md",
+      "path": "07_future/02_preview_features/13_lifetime_capture_preview.md",
       "title": "Lifetime Capture in `impl Trait` Preview",
       "en": "Precise Lifetime Capture in `impl Trait` Preview",
       "summary": "Preview of precise lifetime capture rules (`use<'lt>` syntax) for `impl Trait` return types, stabilized in Rust 1.82 and enabled by default in Rust 2024 Edition.",
@@ -12888,8 +12888,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/14_pin_ergonomics_preview.md",
-      "path": "07_future/03_preview_features/14_pin_ergonomics_preview.md",
+      "id": "concept:07_future/02_preview_features/14_pin_ergonomics_preview.md",
+      "path": "07_future/02_preview_features/14_pin_ergonomics_preview.md",
       "title": "Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`",
       "en": "Pin Ergonomics Preview",
       "summary": "Preview of ergonomic improvements to working with `Pin` in Rust.",
@@ -12911,8 +12911,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/15_rpitit_preview.md",
-      "path": "07_future/03_preview_features/15_rpitit_preview.md",
+      "id": "concept:07_future/02_preview_features/15_rpitit_preview.md",
+      "path": "07_future/02_preview_features/15_rpitit_preview.md",
       "title": "特质中返回位置 impl Trait（RPITIT）预览",
       "en": "Return Position Impl Trait In Traits (RPITIT) Preview",
       "summary": "Preview of RPITIT, which allows `impl Trait` as return types in trait methods; stabilized in Rust 1.75.0 and extended with precise lifetime capture in Rust 1.82+.",
@@ -12933,8 +12933,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/16_cranelift_backend_preview.md",
-      "path": "07_future/03_preview_features/16_cranelift_backend_preview.md",
+      "id": "concept:07_future/02_preview_features/16_cranelift_backend_preview.md",
+      "path": "07_future/02_preview_features/16_cranelift_backend_preview.md",
       "title": "Cranelift 后端预研：Rust 编译器的快速调试编译",
       "en": "Compiler Internals",
       "summary": "Compiler Internals — Cranelift as an alternative rustc backend: effects on compile time, debug experience, and iteration speed versus LLVM.",
@@ -12960,8 +12960,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/17_type_alias_impl_trait_preview.md",
-      "path": "07_future/03_preview_features/17_type_alias_impl_trait_preview.md",
+      "id": "concept:07_future/02_preview_features/17_type_alias_impl_trait_preview.md",
+      "path": "07_future/02_preview_features/17_type_alias_impl_trait_preview.md",
       "title": "TAIT Preview",
       "en": "Type Alias Impl Trait (TAIT) Preview",
       "summary": "Preview of Type Alias Impl Trait (TAIT), which allows `impl Trait` inside type aliases to hide concrete types while preserving zero-cost abstraction; stabilized in Rust 1.75.0.",
@@ -12982,8 +12982,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/18_arbitrary_self_types_preview.md",
-      "path": "07_future/03_preview_features/18_arbitrary_self_types_preview.md",
+      "id": "concept:07_future/02_preview_features/18_arbitrary_self_types_preview.md",
+      "path": "07_future/02_preview_features/18_arbitrary_self_types_preview.md",
       "title": "Arbitrary Self Types 预览：自定义方法接收器",
       "en": "Arbitrary Self Types Preview",
       "summary": "Preview of arbitrary self types: extending method receivers beyond `&self`, `&mut self`, and `Box<Self>`.",
@@ -13017,8 +13017,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/19_const_trait_preview.md",
-      "path": "07_future/03_preview_features/19_const_trait_preview.md",
+      "id": "concept:07_future/02_preview_features/19_const_trait_preview.md",
+      "path": "07_future/02_preview_features/19_const_trait_preview.md",
       "title": "Const Trait 实现预览",
       "en": "Const Trait Implementation Preview",
       "summary": "Preview of const traits (`~const Trait`, `const impl`) that allow generic trait bounds inside `const fn` and other const contexts; still nightly/experimental.",
@@ -13039,8 +13039,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/20_ergonomic_ref_counting_preview.md",
-      "path": "07_future/03_preview_features/20_ergonomic_ref_counting_preview.md",
+      "id": "concept:07_future/02_preview_features/20_ergonomic_ref_counting_preview.md",
+      "path": "07_future/02_preview_features/20_ergonomic_ref_counting_preview.md",
       "title": "Ergonomic Ref-Counting 预研：人机工学引用计数",
       "en": "Ergonomic Ref Counting Preview",
       "summary": "Ergonomic Ref Counting Preview: emerging Rust language feature or ecosystem trend.",
@@ -13062,8 +13062,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/21_rust_specification_preview.md",
-      "path": "07_future/03_preview_features/21_rust_specification_preview.md",
+      "id": "concept:07_future/02_preview_features/21_rust_specification_preview.md",
+      "path": "07_future/02_preview_features/21_rust_specification_preview.md",
       "title": "Rust 语言规范预研：从参考文档到形式化规范",
       "en": "Rust Specification Preview",
       "summary": "Preview of the official Rust specification effort and its relation to the Reference.",
@@ -13093,8 +13093,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/22_async_drop_preview.md",
-      "path": "07_future/03_preview_features/22_async_drop_preview.md",
+      "id": "concept:07_future/02_preview_features/22_async_drop_preview.md",
+      "path": "07_future/02_preview_features/22_async_drop_preview.md",
       "title": "Async Drop：异步资源的优雅销毁",
       "en": "Async Drop Preview",
       "summary": "Preview of asynchronous destructors (`AsyncDrop`) for async resource cleanup.",
@@ -13124,8 +13124,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/23_field_projections_preview.md",
-      "path": "07_future/03_preview_features/23_field_projections_preview.md",
+      "id": "concept:07_future/02_preview_features/23_field_projections_preview.md",
+      "path": "07_future/02_preview_features/23_field_projections_preview.md",
       "title": "Field Projections 预览：安全的字段级投影",
       "en": "Field Projections Preview",
       "summary": "Preview of safe field projections and pinned field access for self-referential types.",
@@ -13159,8 +13159,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/24_borrow_sanitizer.md",
-      "path": "07_future/03_preview_features/24_borrow_sanitizer.md",
+      "id": "concept:07_future/02_preview_features/24_borrow_sanitizer.md",
+      "path": "07_future/02_preview_features/24_borrow_sanitizer.md",
       "title": "BorrowSanitizer：动态别名规则验证工具",
       "en": "BorrowSanitizer (BSan) — Dynamic aliasing rule verification for Rust",
       "summary": "BorrowSanitizer (BSan) — Dynamic aliasing rule verification for Rust: emerging Rust language feature or ecosystem trend.",
@@ -13182,8 +13182,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/25_gen_blocks_preview.md",
-      "path": "07_future/03_preview_features/25_gen_blocks_preview.md",
+      "id": "concept:07_future/02_preview_features/25_gen_blocks_preview.md",
+      "path": "07_future/02_preview_features/25_gen_blocks_preview.md",
       "title": "Gen Blocks 预研：超越异步的泛化生成器",
       "en": "Gen Blocks Preview",
       "summary": "Preview of generator blocks (`gen {}`) for ergonomic lazy iterators.",
@@ -13213,8 +13213,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/26_std_autodiff_preview.md",
-      "path": "07_future/03_preview_features/26_std_autodiff_preview.md",
+      "id": "concept:07_future/02_preview_features/26_std_autodiff_preview.md",
+      "path": "07_future/02_preview_features/26_std_autodiff_preview.md",
       "title": "`std::autodiff`：Rust 官方自动微分前沿追踪",
       "en": "Std Autodiff Preview",
       "summary": "Std Autodiff Preview: emerging Rust language feature or ecosystem trend.",
@@ -13248,8 +13248,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/27_cargo_semver_checks_preview.md",
-      "path": "07_future/03_preview_features/27_cargo_semver_checks_preview.md",
+      "id": "concept:07_future/02_preview_features/27_cargo_semver_checks_preview.md",
+      "path": "07_future/02_preview_features/27_cargo_semver_checks_preview.md",
       "title": "",
       "en": "Cargo SemVer Checks Preview",
       "summary": "Preview of `cargo-semver-checks` integration for automated semantic-versioning linting.",
@@ -13275,8 +13275,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/28_wasm_target_evolution.md",
-      "path": "07_future/03_preview_features/28_wasm_target_evolution.md",
+      "id": "concept:07_future/02_preview_features/28_wasm_target_evolution.md",
+      "path": "07_future/02_preview_features/28_wasm_target_evolution.md",
       "title": "",
       "en": "WebAssembly Target Evolution Preview",
       "summary": "Preview of Rust WebAssembly target evolution, including WASI p1/p2, component model, SIMD, threads, GC, and exception handling proposals.",
@@ -13293,8 +13293,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/29_aarch64_sve_sme_preview.md",
-      "path": "07_future/03_preview_features/29_aarch64_sve_sme_preview.md",
+      "id": "concept:07_future/02_preview_features/29_aarch64_sve_sme_preview.md",
+      "path": "07_future/02_preview_features/29_aarch64_sve_sme_preview.md",
       "title": "",
       "en": "Aarch64 Sve Sme Preview",
       "summary": "Aarch64 Sve Sme Preview: emerging Rust language feature or ecosystem trend.",
@@ -13319,8 +13319,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/30_rust_in_space.md",
-      "path": "07_future/03_preview_features/30_rust_in_space.md",
+      "id": "concept:07_future/02_preview_features/30_rust_in_space.md",
+      "path": "07_future/02_preview_features/30_rust_in_space.md",
       "title": "Rust in Space Preview",
       "en": "Rust in Space Preview",
       "summary": "Preview of Rust's adoption in aerospace and safety-critical systems, covering Ferrocene certification, no_std embedded deployment, and comparison with Ada/SPARK.",
@@ -13332,8 +13332,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/31_specialization_preview.md",
-      "path": "07_future/03_preview_features/31_specialization_preview.md",
+      "id": "concept:07_future/02_preview_features/31_specialization_preview.md",
+      "path": "07_future/02_preview_features/31_specialization_preview.md",
       "title": "Specialization：Trait 实现的精确化与重叠解析",
       "en": "Specialization Preview",
       "summary": "Preview of trait specialization: allowing overlapping impls with a default/fallback.",
@@ -13345,8 +13345,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/32_compile_time_execution.md",
-      "path": "07_future/03_preview_features/32_compile_time_execution.md",
+      "id": "concept:07_future/02_preview_features/32_compile_time_execution.md",
+      "path": "07_future/02_preview_features/32_compile_time_execution.md",
       "title": "编译期执行与常量求值",
       "en": "Compile Time Execution",
       "summary": "Compile Time Execution: emerging Rust language feature or ecosystem trend.",
@@ -13380,8 +13380,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/33_autoverus_preview.md",
-      "path": "07_future/03_preview_features/33_autoverus_preview.md",
+      "id": "concept:07_future/02_preview_features/33_autoverus_preview.md",
+      "path": "07_future/02_preview_features/33_autoverus_preview.md",
       "title": "",
       "en": "AutoVerus / Verus Preview Tracking",
       "summary": "L7 预览跟踪页：跟踪 Verus 与 AutoVerus 工具链的版本演进、生态集成与研究动向；概念机制与形式化解读以 L4 权威页为准。",
@@ -13393,8 +13393,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/34_open_enums_preview.md",
-      "path": "07_future/03_preview_features/34_open_enums_preview.md",
+      "id": "concept:07_future/02_preview_features/34_open_enums_preview.md",
+      "path": "07_future/02_preview_features/34_open_enums_preview.md",
       "title": "Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举",
       "en": "Open Enums Preview",
       "summary": "Open Enums Preview: emerging Rust language feature or ecosystem trend.",
@@ -13428,8 +13428,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/35_f16_f128_preview.md",
-      "path": "07_future/03_preview_features/35_f16_f128_preview.md",
+      "id": "concept:07_future/02_preview_features/35_f16_f128_preview.md",
+      "path": "07_future/02_preview_features/35_f16_f128_preview.md",
       "title": "f16 / f128 预研：半精度与四精度浮点类型",
       "en": "f16 and f128 Preview",
       "summary": "Preview of the `f16` (IEEE 754 binary16 half-precision) and `f128` (binary128 quad-precision) primitive float types introduced by RFC 3453 — syntax, semantics, ABI caveats, and ecosystem impact.",
@@ -13467,8 +13467,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/36_unsafe_pinned_preview.md",
-      "path": "07_future/03_preview_features/36_unsafe_pinned_preview.md",
+      "id": "concept:07_future/02_preview_features/36_unsafe_pinned_preview.md",
+      "path": "07_future/02_preview_features/36_unsafe_pinned_preview.md",
       "title": "UnsafePinned 预研：可变引用别名语义的精确标注",
       "en": "UnsafePinned Preview",
       "summary": "Preview of `core::pin::UnsafePinned` (RFC 3467) — the wrapper type that opts a field out of `&mut`-based aliasing guarantees, replacing the unsound `Unpin`-based noalias hack for self-referential generators and futures.",
@@ -13510,8 +13510,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/37_default_field_values_preview.md",
-      "path": "07_future/03_preview_features/37_default_field_values_preview.md",
+      "id": "concept:07_future/02_preview_features/37_default_field_values_preview.md",
+      "path": "07_future/02_preview_features/37_default_field_values_preview.md",
       "title": "Default Field Values 预研：结构体字段默认值",
       "en": "Default Field Values Preview",
       "summary": "Preview of struct default field values (RFC 3681) — declaring per-field defaults in struct definitions that apply in functional record update (`..`) syntax, changing struct construction ergonomics and `Default` trait interactions.",
@@ -13545,8 +13545,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:07_future/03_preview_features/38_complex_numbers_preview.md",
-      "path": "07_future/03_preview_features/38_complex_numbers_preview.md",
+      "id": "concept:07_future/02_preview_features/38_complex_numbers_preview.md",
+      "path": "07_future/02_preview_features/38_complex_numbers_preview.md",
       "title": "Complex Numbers 预研：标准库复数类型",
       "en": "Complex Numbers Preview",
       "summary": "Preview of `core::num::Complex` (RFC 3892) — a standard-library complex number type providing basic arithmetic, polar/Cartesian conversions, and const-friendly construction, reducing the ecosystem's dependency on external crates for a vocabulary type.",

@@ -6,10 +6,10 @@
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L4-L6
-> **权威来源**: 本文件为 `concept/` 中**认证工具链生态与认证包清单**的权威页；Ferrocene 产品本身的深度说明见 [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/03_preview_features/12_ferrocene_preview.md)。
+> **权威来源**: 本文件为 `concept/` 中**认证工具链生态与认证包清单**的权威页；Ferrocene 产品本身的深度说明见 [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/02_preview_features/12_ferrocene_preview.md)。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: P×Eva — 认证边界评估与供应链选型
-> **前置概念**: [Ferrocene](../../07_future/03_preview_features/12_ferrocene_preview.md) · [验证工具链](01_verification_toolchain.md) · [航空航天认证与形式化方法](03_aerospace_certification_formal_methods.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
+> **前置概念**: [Ferrocene](../../07_future/02_preview_features/12_ferrocene_preview.md) · [验证工具链](01_verification_toolchain.md) · [航空航天认证与形式化方法](03_aerospace_certification_formal_methods.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 > **后置概念**: [安全关键 Rust 专题索引](../../06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md) · [cargo vet 与供应链审计](../../06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md)
 >
 > **来源**: [Ferrocene Core Library Certification](https://public-docs.ferrocene.dev/main/certification/core/index.html)（2026-07-12 curl 实测） · [Ferrocene Qualification Report](https://public-docs.ferrocene.dev/main/qualification/report/index.html) · [HighTec 新闻稿（TÜV NORD ASIL D，2025-07-10）](https://www.presseagentur.com/hightec/detail.php?pr_id=7417&lang=en) · [AdaCore GNAT Pro for Rust](https://www.adacore.com/gnatpro-rust) · [Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/)
@@ -69,7 +69,7 @@ Ferrocene 是当前唯一公开**符号级认证清单**的 Rust 库认证案例
 | IEC 61508:2010 | SIL 2 | Route 3S（非合规开发评估，§7.4.2.12） |
 | ISO 26262:2018 | ASIL B | SEooC 软件产品开发，按 -2/-6/-8 裁剪 |
 
-认证版本与上游 rustc 绑定：开发分支当前 certified core 版本为 **1.98.0**；Ferrocene 26.02.0 发布版的 core 子集对应 rustc 1.92（见 [Ferrocene 页](../../07_future/03_preview_features/12_ferrocene_preview.md) §2.2）。
+认证版本与上游 rustc 绑定：开发分支当前 certified core 版本为 **1.98.0**；Ferrocene 26.02.0 发布版的 core 子集对应 rustc 1.92（见 [Ferrocene 页](../../07_future/02_preview_features/12_ferrocene_preview.md) §2.2）。
 
 ### 2.2 符号级清单与未认证代码
 
@@ -94,7 +94,7 @@ Ferrocene 是当前唯一公开**符号级认证清单**的 Rust 库认证案例
 
 - TÜV SÜD 鉴定编译器：ISO 26262 ASIL D、IEC 61508 SIL 3、IEC 62304 Class C；certified core 子集 ASIL B / SIL 2。
 - 开源 + 商业订阅；季度发行；当前 26.02.0（基于 rustc 1.92）。
-- 深度说明见 [Ferrocene 权威页](../../07_future/03_preview_features/12_ferrocene_preview.md)。
+- 深度说明见 [Ferrocene 权威页](../../07_future/02_preview_features/12_ferrocene_preview.md)。
 
 ### 3.2 HighTec Rust Development Platform（AURIX）
 
@@ -207,7 +207,7 @@ graph TD
 
 ## 相关概念
 
-- [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/03_preview_features/12_ferrocene_preview.md) — Ferrocene 产品深度页
+- [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/02_preview_features/12_ferrocene_preview.md) — Ferrocene 产品深度页
 - [AUTOSAR 与 Rust](../../06_ecosystem/11_domain_applications/22_autosar_and_rust.md) — 汽车软件标准中的 Rust 路径
 - [验证工具链](01_verification_toolchain.md) — 验证工具全景
 - [航空航天认证与形式化方法](03_aerospace_certification_formal_methods.md) — DO-178C/DO-333 映射

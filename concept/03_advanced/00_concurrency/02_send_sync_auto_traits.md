@@ -8,13 +8,13 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L3-L4
 > **受众**: [专家]
-> **权威来源**: 本文件为 `concept/` 权威页。Send/Sync 的**核心定义、判定规则与 auto trait 机制**统一收敛于本页；[并发模型](01_concurrency.md)、[原子操作与内存序](05_atomics_and_memory_ordering.md)、[无锁编程](06_lock_free.md) 保留各自的应用场景章节，通过链接指向本页，不重复契约推导。
+> **权威来源**: 本文件为 `concept/` 权威页。Send/Sync 的**核心定义、判定规则与 auto trait 机制**统一收敛于本页；[并发模型](01_concurrency.md)、[原子操作与内存序](06_atomics_and_memory_ordering.md)、[无锁编程](07_lock_free.md) 保留各自的应用场景章节，通过链接指向本页，不重复契约推导。
 >
 > **层次定位**: L3 高级概念 / 并发子域 — 类型系统（Type System）与并发（Concurrency）的交叉点
 > **A/S/P 标记**: **S** — Structure（结构性契约）
 > **双维定位**: C×Ana — 分析类型跨线程使用的安全性边界
 > **前置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [内部可变性（Interior Mutability）](../../02_intermediate/02_memory_management/02_interior_mutability.md)
-> **后置概念**: [Concurrency](01_concurrency.md) · [Atomics & Memory Ordering](05_atomics_and_memory_ordering.md) · [Lock-Free](06_lock_free.md) · [Unsafe Rust](../02_unsafe/01_unsafe.md) · [RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md)
+> **后置概念**: [Concurrency](01_concurrency.md) · [Atomics & Memory Ordering](06_atomics_and_memory_ordering.md) · [Lock-Free](07_lock_free.md) · [Unsafe Rust](../02_unsafe/01_unsafe.md) · [RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md)
 
 ---
 
@@ -490,8 +490,8 @@ flowchart TD
 | 文件 | 保留内容 | 与本页关系 |
 |:---|:---|:---|
 | [01_concurrency.md](01_concurrency.md) | fearless concurrency 全景、同步原语对比、happens-before 推理、并发模式场景 | 引用本页作为 Send/Sync 契约定义 |
-| [05_atomics_and_memory_ordering.md](05_atomics_and_memory_ordering.md) | `AtomicOrdering` 与 C11 内存模型映射 | Sync 合法性的底层定序机制 |
-| [06_lock_free.md](06_lock_free.md) | 无锁数据结构的 unsafe impl 实践 | 本页决策树"unsafe impl"分支的进阶实例 |
+| [06_atomics_and_memory_ordering.md](06_atomics_and_memory_ordering.md) | `AtomicOrdering` 与 C11 内存模型映射 | Sync 合法性的底层定序机制 |
+| [07_lock_free.md](07_lock_free.md) | 无锁数据结构的 unsafe impl 实践 | 本页决策树"unsafe impl"分支的进阶实例 |
 | [01_traits.md](../../02_intermediate/00_traits/01_traits.md) | Trait 系统总览、auto trait 在 trait 分类中的位置 | 机制入口，判定细节指向本页 |
 | [19_advanced_traits.md](../../02_intermediate/00_traits/04_advanced_traits.md) | marker trait、negative impl 语法 | 语法入口，语义契约指向本页 |
 | [08_interior_mutability.md](../../02_intermediate/02_memory_management/02_interior_mutability.md) | `UnsafeCell`/`Cell`/`RefCell` 单线程语义 | Sync 判定的前提概念 |
@@ -511,7 +511,7 @@ flowchart TD
 - **上位（is-a）**：[并发](01_concurrency.md) 安全性的类型化契约层。
 - **下位（实例）**：`Send`、`Sync`、负实现、`PhantomData` opt-out 惯用法。
 - **对偶**：`Send` 类型（`Arc`）⇄ `!Send` 类型（`Rc`）的线程边界对照（本文 §六）。
-- **组合**：与 [Unsafe](../02_unsafe/01_unsafe.md)（手动 impl 的 unsafe 义务）、[原子操作与内存序](05_atomics_and_memory_ordering.md) 组合。
+- **组合**：与 [Unsafe](../02_unsafe/01_unsafe.md)（手动 impl 的 unsafe 义务）、[原子操作与内存序](06_atomics_and_memory_ordering.md) 组合。
 - **依赖**：依赖 [所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 的转移语义。
 
 ---

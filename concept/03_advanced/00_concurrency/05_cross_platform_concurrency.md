@@ -214,7 +214,7 @@ strategy:
 
 - **上位（is-a）**：[并发](01_concurrency.md) 的平台可移植性维度。
 - **下位（实例）**：平台线程模型、同步原语映射、条件编译、移动端注意事项。
-- **组合**：与 [跨平台进程管理](../08_process_ipc/04_cross_platform_process_management.md)、[原子操作与内存序](05_atomics_and_memory_ordering.md)（§五）组合。
+- **组合**：与 [跨平台进程管理](../08_process_ipc/04_cross_platform_process_management.md)、[原子操作与内存序](06_atomics_and_memory_ordering.md)（§五）组合。
 - **依赖**：依赖 `std::sync` 的跨平台抽象（见 [并发](01_concurrency.md)）。
 
 ---

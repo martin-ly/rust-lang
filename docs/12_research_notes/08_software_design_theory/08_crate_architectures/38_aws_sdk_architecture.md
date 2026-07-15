@@ -192,7 +192,7 @@ while let Some(obj) = paginator.next().await {
 - [Tracing 可观测性架构](19_tracing_architecture.md) — 与 AWS SDK 的日志/追踪集成
 - [Azure SDK for Rust 架构](39_azure_sdk_architecture.md) — 云 SDK 设计对比
 - [异步编程模型](../../../../concept/03_advanced/01_async/01_async.md)
-- [分布式模式](../../../../concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
+- [分布式模式](../../../../concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
 
 ---
 

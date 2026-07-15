@@ -46,7 +46,6 @@
     - [核心概念总结](#核心概念总结)
     - [最佳实践](#最佳实践)
     - [下一步](#下一步)
-  - [**💡 并发编程是 Rust 的核心优势，类型系统保证线程安全！🦀**-](#-并发编程是-rust-的核心优势类型系统保证线程安全-)
 
 ## 📋 文档概述
 
@@ -3375,6 +3374,7 @@ RwLock (read-heavy): 234ms
 **维护状态**: 活跃维护
 
 **💡 并发编程是 Rust 的核心优势，类型系统保证线程安全！🦀**-
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

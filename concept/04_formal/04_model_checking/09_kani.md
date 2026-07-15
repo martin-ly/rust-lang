@@ -357,7 +357,7 @@ fn verify_vec_push_safety() {
 | [Miri](08_miri.md) | Rust MIR 解释器，动态检测 UB，与 Kani 形成“动态 + 有界静态”互补 | [Miri GitHub](https://github.com/rust-lang/miri) |
 | [Tree Borrows](../01_ownership_logic/05_tree_borrows_deep_dive.md) | Rust 别名模型演进方向，影响 Kani 对内存安全（Memory Safety）属性的建模 | [Tree Borrows 论文/博客](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) |
 | [Stacked Borrows](../01_ownership_logic/05_tree_borrows_deep_dive.md) | 早期 Rust 别名模型，与 Tree Borrows 共同构成 Kani/Miri 的内存模型基础 | [Stacked Borrows 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) |
-| [Safety Tags](../../07_future/03_preview_features/03_safety_tags_preview.md) | RFC #3842 提案，可将 `unsafe` 安全契约转化为 Kani 假设/断言 | [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
+| [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md) | RFC #3842 提案，可将 `unsafe` 安全契约转化为 Kani 假设/断言 | [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
 | [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md) | 运行时（Runtime）别名模型检测，与 Kani 共同覆盖“证明 + 运行期审计” | [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) |
 | [AutoVerus / Verus](07_autoverus.md) | SMT 演绎验证，适合需要无界完整证明的场景，与 Kani 的自动化模型检查形成选型对照 | [Verus GitHub](https://github.com/verus-lang/verus) |
 

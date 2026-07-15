@@ -66,7 +66,7 @@
 | 模式组合代数 | P0 | ✅ 完成 | [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) |
 | 算法-模式语义桥 | P0 | ✅ 完成 | [Algorithm-Pattern Semantic Bridge](../00_framework/semantic_bridge_algorithms_patterns.md) |
 | 统一模式索引 | P1 | ✅ 新增 | [Pattern Semantic Space Index](../00_framework/pattern_semantic_space_index.md) |
-| 并发/分布式模式谱系 | P2 | ✅ 已存在 | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) |
+| 并发/分布式模式谱系 | P2 | ✅ 已存在 | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) |
 | 模板去同质化 | P1 | ⚠️ 未启动 | 需后续为 23 个形式化模式文件设计差异化结构 |
 
 ---

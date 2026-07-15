@@ -2,7 +2,7 @@ schema_version: 1
 generated: '2026-07-13'
 purpose: 全库测验资产机器可读注册表（W3-a）。人类可读索引见 concept/00_meta/04_navigation/15_quiz_registry.md；一致性由 scripts/check_quiz_system.py 校验。
 standalone_quizzes:
-- path: concept/01_foundation/11_quizzes/24_quiz_type_system.md
+- path: concept/01_foundation/11_quizzes/01_quiz_type_system.md
   layer: L1
   topic: 类型系统（标量/复合类型、enum、模式匹配、类型转换）
   questions: 15
@@ -20,7 +20,7 @@ standalone_quizzes:
   concept_pages:
   - concept/01_foundation/02_type_system/01_type_system.md
   concept_to_quiz_backlink: true
-- path: concept/01_foundation/11_quizzes/25_quiz_error_handling.md
+- path: concept/01_foundation/11_quizzes/02_quiz_error_handling.md
   layer: L1
   topic: 错误处理（Result/Option、?、panic、自定义错误）
   questions: 15
@@ -38,7 +38,7 @@ standalone_quizzes:
   concept_pages:
   - concept/01_foundation/08_error_handling/01_error_handling_basics.md
   concept_to_quiz_backlink: true
-- path: concept/01_foundation/11_quizzes/26_quiz_modules_testing.md
+- path: concept/01_foundation/11_quizzes/03_quiz_modules_testing.md
   layer: L1
   topic: 模块系统与测试（mod/use/pub、可见性、单元/集成测试）
   questions: 15
@@ -57,7 +57,7 @@ standalone_quizzes:
   - concept/01_foundation/07_modules_and_items/01_modules_and_paths.md
   - concept/01_foundation/10_testing_basics/01_testing_basics.md
   concept_to_quiz_backlink: true
-- path: concept/01_foundation/11_quizzes/27_quiz_closures_iterators.md
+- path: concept/01_foundation/11_quizzes/04_quiz_closures_iterators.md
   layer: L1
   topic: 闭包与迭代器（捕获、Fn traits、惰性求值、适配器）
   questions: 15
@@ -76,7 +76,7 @@ standalone_quizzes:
   - concept/01_foundation/00_start/03_closure_basics.md
   - concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md
   concept_to_quiz_backlink: true
-- path: concept/01_foundation/11_quizzes/29_quiz_pl_foundations.md
+- path: concept/01_foundation/11_quizzes/05_quiz_pl_foundations.md
   layer: L1
   topic: 通用 PL 基座（变量模型、求值策略、效果、控制流、数据抽象）
   questions: 11
@@ -97,7 +97,7 @@ standalone_quizzes:
   - concept/01_foundation/04_control_flow/01_control_flow.md
   - concept/01_foundation/02_type_system/05_data_abstraction_spectrum.md
   concept_to_quiz_backlink: true
-- path: concept/01_foundation/11_quizzes/33_quiz_ownership_borrowing.md
+- path: concept/01_foundation/11_quizzes/06_quiz_ownership_borrowing.md
   layer: L1
   topic: 所有权、借用与生命周期
   questions: 15
@@ -154,7 +154,7 @@ standalone_quizzes:
   concept_pages:
   - concept/02_intermediate/02_memory_management/01_memory_management.md
   concept_to_quiz_backlink: true
-- path: concept/02_intermediate/09_quizzes/30_quiz_cpp_rust_foundations.md
+- path: concept/02_intermediate/08_quizzes/30_quiz_cpp_rust_foundations.md
   layer: L2
   topic: C/C++ → Rust 工程层基础对比（RTTI、宏、异常安全、构造、move 语义）
   questions: 13
@@ -174,7 +174,7 @@ standalone_quizzes:
   - concept/02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md
   - concept/01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md
   concept_to_quiz_backlink: true
-- path: concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md
+- path: concept/03_advanced/00_concurrency/09_quiz_concurrency_async.md
   layer: L3
   topic: 并发与异步（Send/Sync、Mutex/Arc、channel、Future/Pin/await）
   questions: 15
@@ -534,7 +534,7 @@ embedded_quizzes:
     blocks: 5
   - path: concept/01_foundation/04_control_flow/02_patterns.md
     blocks: 3
-  - path: concept/01_foundation/04_control_flow/03_statements_and_expressions.md
+  - path: concept/01_foundation/04_control_flow/04_statements_and_expressions.md
     blocks: 3
   - path: concept/01_foundation/05_collections/01_collections.md
     blocks: 5
@@ -638,11 +638,11 @@ embedded_quizzes:
     blocks: 3
   - path: concept/03_advanced/00_concurrency/03_concurrency_patterns.md
     blocks: 4
-  - path: concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md
+  - path: concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md
     blocks: 4
-  - path: concept/03_advanced/00_concurrency/06_lock_free.md
+  - path: concept/03_advanced/00_concurrency/07_lock_free.md
     blocks: 4
-  - path: concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md
+  - path: concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md
     blocks: 5
   - path: concept/03_advanced/01_async/01_async.md
     blocks: 4
@@ -930,69 +930,69 @@ embedded_quizzes:
     blocks: 5
   - path: concept/07_future/01_edition_roadmap/04_roadmap.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/01_effects_system.md
+  - path: concept/07_future/02_preview_features/01_effects_system.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/02_mcdc_coverage_preview.md
+  - path: concept/07_future/02_preview_features/02_mcdc_coverage_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/03_safety_tags_preview.md
+  - path: concept/07_future/02_preview_features/03_safety_tags_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/04_parallel_frontend_preview.md
+  - path: concept/07_future/02_preview_features/04_parallel_frontend_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/05_derive_coerce_pointee_preview.md
+  - path: concept/07_future/02_preview_features/05_derive_coerce_pointee_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/06_const_trait_impl_preview.md
+  - path: concept/07_future/02_preview_features/06_const_trait_impl_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/07_stable_abi_preview.md
+  - path: concept/07_future/02_preview_features/07_stable_abi_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/08_inline_const_pattern_preview.md
+  - path: concept/07_future/02_preview_features/08_inline_const_pattern_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/09_return_type_notation_preview.md
+  - path: concept/07_future/02_preview_features/09_return_type_notation_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/10_must_not_suspend_preview.md
+  - path: concept/07_future/02_preview_features/10_must_not_suspend_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/11_unsafe_fields_preview.md
+  - path: concept/07_future/02_preview_features/11_unsafe_fields_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/13_lifetime_capture_preview.md
+  - path: concept/07_future/02_preview_features/13_lifetime_capture_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/14_pin_ergonomics_preview.md
+  - path: concept/07_future/02_preview_features/14_pin_ergonomics_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/15_rpitit_preview.md
+  - path: concept/07_future/02_preview_features/15_rpitit_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/16_cranelift_backend_preview.md
+  - path: concept/07_future/02_preview_features/16_cranelift_backend_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/17_type_alias_impl_trait_preview.md
+  - path: concept/07_future/02_preview_features/17_type_alias_impl_trait_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/18_arbitrary_self_types_preview.md
+  - path: concept/07_future/02_preview_features/18_arbitrary_self_types_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/19_const_trait_preview.md
+  - path: concept/07_future/02_preview_features/19_const_trait_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/20_ergonomic_ref_counting_preview.md
+  - path: concept/07_future/02_preview_features/20_ergonomic_ref_counting_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/21_rust_specification_preview.md
+  - path: concept/07_future/02_preview_features/21_rust_specification_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/22_async_drop_preview.md
+  - path: concept/07_future/02_preview_features/22_async_drop_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/23_field_projections_preview.md
+  - path: concept/07_future/02_preview_features/23_field_projections_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/24_borrow_sanitizer.md
+  - path: concept/07_future/02_preview_features/24_borrow_sanitizer.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/25_gen_blocks_preview.md
+  - path: concept/07_future/02_preview_features/25_gen_blocks_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/26_std_autodiff_preview.md
+  - path: concept/07_future/02_preview_features/26_std_autodiff_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/27_cargo_semver_checks_preview.md
+  - path: concept/07_future/02_preview_features/27_cargo_semver_checks_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/28_wasm_target_evolution.md
+  - path: concept/07_future/02_preview_features/28_wasm_target_evolution.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/29_aarch64_sve_sme_preview.md
+  - path: concept/07_future/02_preview_features/29_aarch64_sve_sme_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/30_rust_in_space.md
+  - path: concept/07_future/02_preview_features/30_rust_in_space.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/31_specialization_preview.md
+  - path: concept/07_future/02_preview_features/31_specialization_preview.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/32_compile_time_execution.md
+  - path: concept/07_future/02_preview_features/32_compile_time_execution.md
     blocks: 5
-  - path: concept/07_future/03_preview_features/34_open_enums_preview.md
+  - path: concept/07_future/02_preview_features/34_open_enums_preview.md
     blocks: 5
   - path: concept/07_future/04_research_and_experimental/01_ai_integration.md
     blocks: 5

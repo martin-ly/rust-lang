@@ -4,7 +4,7 @@
 >
 > - [并发编程](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 > - [并发模式](../../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md)
-> - [无锁编程](../../../../concept/03_advanced/00_concurrency/06_lock_free.md)
+> - [无锁编程](../../../../concept/03_advanced/00_concurrency/07_lock_free.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
 
@@ -496,8 +496,8 @@ graph BT
 - [Tokio 异步运行时（Runtime）架构](06_tokio_architecture.md)
 - [Rayon 数据并行架构](16_rayon_architecture.md)
 - [并发编程模型](../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
-- [原子操作（Atomic Operations）与内存排序](../../../../concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md)
-- [无锁数据结构](../../../../concept/03_advanced/00_concurrency/06_lock_free.md)
+- [原子操作（Atomic Operations）与内存排序](../../../../concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)
+- [无锁数据结构](../../../../concept/03_advanced/00_concurrency/07_lock_free.md)
 - [形式化操作语义](../../../../concept/04_formal/03_operational_semantics/03_operational_semantics.md)
 
 ---

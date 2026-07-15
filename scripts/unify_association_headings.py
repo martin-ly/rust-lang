@@ -46,7 +46,7 @@ CORE_PAGES = [
     "01_foundation/03_values_and_references/01_reference_semantics.md",
     "01_foundation/04_control_flow/01_control_flow.md",
     "01_foundation/04_control_flow/02_patterns.md",
-    "01_foundation/04_control_flow/03_statements_and_expressions.md",
+    "01_foundation/04_control_flow/04_statements_and_expressions.md",
     "01_foundation/05_collections/01_collections.md",
     "01_foundation/07_modules_and_items/01_modules_and_paths.md",
     "01_foundation/08_error_handling/01_error_handling_basics.md",
@@ -66,7 +66,7 @@ CORE_PAGES = [
     "03_advanced/01_async/01_async.md",
     "03_advanced/02_unsafe/01_unsafe.md",
     "03_advanced/03_proc_macros/01_macros.md",
-    "03_advanced/00_concurrency/05_atomics_and_memory_ordering.md",
+    "03_advanced/00_concurrency/06_atomics_and_memory_ordering.md",
 ]
 
 # 关联区块标题（用于定位插入点）：标题文本（去编号前缀后）属于关联区块家族

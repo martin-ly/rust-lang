@@ -997,7 +997,7 @@ Rust 的任何语义扩展必须满足以下约束（由语言设计哲学决定
 | D7 安全边界 | [](../../04_formal/04_model_checking/01_verification_toolchain.md) | 全文 | `==>` 工具链扩展安全边界 |
 | 跨维度对比 | [](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | 全文 | `==>` 对比分析支撑 |
 | 演进趋势 | [](../../07_future/04_research_and_experimental/03_evolution.md) | 全文 | `==>` 语言演进方向 |
-| 演进趋势 | [](../../07_future/03_preview_features/01_effects_system.md) | 全文 | `==>` Effects 系统扩展控制流 |
+| 演进趋势 | [](../../07_future/02_preview_features/01_effects_system.md) | 全文 | `==>` Effects 系统扩展控制流 |
 
 ---
 

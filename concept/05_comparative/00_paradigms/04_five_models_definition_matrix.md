@@ -36,7 +36,7 @@
 | **Rust 载体** | 普通函数调用、`for` 循环 | `std::thread` + `Mutex`/`mpsc`（见 [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md)） | `rayon` 并行迭代、`rayon::join` | `async fn` + `Future` + executor（tokio，见 [L3 异步编程](../../03_advanced/01_async/01_async.md)） | RPC/消息（tonic、ractor cluster）；CRDT（见 [L6 CRDT 谱系](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)） |
 | **典型原语** | 调用栈、返回值 | `Mutex`/`RwLock`/`Atomic`、`mpsc::channel`、`select!` | `par_iter`、`join`、`scope` | `.await`、`Waker`、`Pin`、`select!` | 消息传递、向量时钟、共识（见 [L6 分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md)）、Actor（见 [L4 Actor 语义](../../04_formal/07_concurrency_semantics/03_actor_semantics.md)） |
 | **失效模式** | 无并发错误；性能瓶颈 = 调用链延迟 | 数据竞争（Rust 中 ⟹ 编译期拒绝）、死锁、饥饿 | 任务粒度过细 ⟹ 调度开销反超；负载不均 | `!Send` 跨 `.await`、Waker 丢失 ⟹ 任务永不唤醒、取消语义误用 | 部分失败、网络分区、消息乱序/丢失、时钟漂移、并发写发散 |
-| **权威页** | [L1 控制流](../../01_foundation/04_control_flow/01_control_flow.md) | [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) | [L3 谱系页 §3](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) | [L3 异步编程](../../03_advanced/01_async/01_async.md) | [L6 分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) |
+| **权威页** | [L1 控制流](../../01_foundation/04_control_flow/01_control_flow.md) | [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) | [L3 谱系页 §3](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) | [L3 异步编程](../../03_advanced/01_async/01_async.md) | [L6 分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) |
 
 > **过渡**: 矩阵给出静态坐标；下一节的正交性分析回答「这些模型如何组合」——真实系统几乎从不只属于一行。
 
@@ -123,7 +123,7 @@ flowchart TD
 - Lamport 1978 原文：[ACM DL](https://dl.acm.org/doi/10.1145/359545.359563)（ACM 反爬） · [作者主页 PDF](https://lamport.azurewebsites.net/pubs/time-clocks.pdf)
 - [The Rust Programming Language §16 Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Rust Async Book](https://rust-lang.github.io/async-book/index.html) · [docs.rs/tokio](https://docs.rs/tokio/latest/tokio/)
 
-> **相关文件**: [同层：执行模型同构性矩阵](02_execution_model_isomorphism.md) · [同层：范式矩阵](01_paradigm_matrix.md) · [L3 谱系页](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
+> **相关文件**: [同层：执行模型同构性矩阵](02_execution_model_isomorphism.md) · [同层：范式矩阵](01_paradigm_matrix.md) · [L3 谱系页](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-12 ｜ **状态**: ✅ W5-6 新建（Rust 1.97 对齐）
 

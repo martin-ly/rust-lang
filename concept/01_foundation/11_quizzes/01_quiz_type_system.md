@@ -8,7 +8,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
-> **后置概念**: [Ownership](33_quiz_ownership_borrowing.md)
+> **后置概念**: [Ownership](06_quiz_ownership_borrowing.md)
 ---
 
 > **来源**: · [自测题库](../../00_meta/04_navigation/12_self_assessment.md) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)

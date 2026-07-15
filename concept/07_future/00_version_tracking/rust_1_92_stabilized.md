@@ -217,7 +217,6 @@
       - [2. 利用新特性](#2-利用新特性-1)
     - [兼容性说明](#兼容性说明-2)
   - [总结](#总结-2)
-  - [**状态**: ✅ **完成**](#状态--完成)
   - [五、生态与工具链关联](#五生态与工具链关联)
   - [补充视角：宏系统改进](#补充视角宏系统改进)
   - [补充视角：算法与数据结构改进](#补充视角算法与数据结构改进)
@@ -2202,6 +2201,7 @@ Rust 1.92.0 在控制流和函数系统方面带来了：
 **最后更新**: 2025-12-11
 **维护者**: Rust 学习项目团队
 **状态**: ✅ **完成**
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

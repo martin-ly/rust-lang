@@ -1341,7 +1341,7 @@ fn main() {
 
 ## 相关概念
 
-- [对应测验](../11_quizzes/33_quiz_ownership_borrowing.md) — 所有权、借用与生命周期
+- [对应测验](../11_quizzes/06_quiz_ownership_borrowing.md) — 所有权、借用与生命周期
 - **上层概念**: [Ownership](01_ownership.md) · [Borrowing](02_borrowing.md)
 
 ## 参考来源

@@ -808,9 +808,9 @@ fn main() {
 ## 相关概念
 
 - [Edition Guide](03_rust_edition_guide.md) — Edition 机制与迁移策略
-- [BorrowSanitizer：动态别名规则验证工具](../03_preview_features/24_borrow_sanitizer.md) — 运行时（Runtime）借用（Borrowing）检查工业化路径
-- [Specialization Preview](../03_preview_features/31_specialization_preview.md) — Trait 特化机制深度分析
-- [Open Enums Preview](../03_preview_features/34_open_enums_preview.md) — 可扩展枚举（Enum）的设计空间
+- [BorrowSanitizer：动态别名规则验证工具](../02_preview_features/24_borrow_sanitizer.md) — 运行时（Runtime）借用（Borrowing）检查工业化路径
+- [Specialization Preview](../02_preview_features/31_specialization_preview.md) — Trait 特化机制深度分析
+- [Open Enums Preview](../02_preview_features/34_open_enums_preview.md) — 可扩展枚举（Enum）的设计空间
 - [Version Tracking](../00_version_tracking/01_rust_version_tracking.md) — 版本特性演进跟踪
 - [Evolution](../04_research_and_experimental/03_evolution.md) — 语言演进机制
 - [Formal Methods](../04_research_and_experimental/02_formal_methods.md) — 形式化验证工具链

@@ -96,7 +96,7 @@
 - `concept/01_foundation/03_values_and_references/03_variable_model.md` — 变量模型：从通用 PL 视角看 Rust 的所有权
 - `concept/01_foundation/04_control_flow/01_control_flow.md` — 控制流：表达式导向的流程控制
 - `concept/01_foundation/04_control_flow/02_patterns.md` — 模式匹配（Patterns）
-- `concept/01_foundation/04_control_flow/03_statements_and_expressions.md` — 语句与表达式（Statements and Expressions）
+- `concept/01_foundation/04_control_flow/04_statements_and_expressions.md` — 语句与表达式（Statements and Expressions）
 - `concept/01_foundation/05_collections/01_collections.md` — 集合类型：Rust 标准库的数据结构谱系
 - `concept/01_foundation/05_collections/02_collections_advanced.md` — 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析
 - `concept/01_foundation/06_strings_and_text/01_strings_and_text.md` — 字符串与文本：Rust 的 Unicode 处理与格式化系统
@@ -142,10 +142,10 @@
 
 - `concept/03_advanced/00_concurrency/01_concurrency.md` — Concurrency（并发模型）
 - `concept/03_advanced/00_concurrency/03_concurrency_patterns.md` — 并发 模式：从消息 传递到锁自由的数据结构
-- `concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md` — 原子操作与内存序：无锁并发的精确控制
-- `concept/03_advanced/00_concurrency/06_lock_free.md` — 无锁编程与内存模型
-- `concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md` — 并行与分布式模式谱系：从线程池到共识算法
-- `concept/03_advanced/00_concurrency/08_quiz_concurrency_async.md` — 测验：并发与异步（L3 试点扩展）
+- `concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md` — 原子操作与内存序：无锁并发的精确控制
+- `concept/03_advanced/00_concurrency/07_lock_free.md` — 无锁编程与内存模型
+- `concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md` — 并行与分布式模式谱系：从线程池到共识算法
+- `concept/03_advanced/00_concurrency/09_quiz_concurrency_async.md` — 测验：并发与异步（L3 试点扩展）
 - `concept/03_advanced/01_async/01_async.md` — Async/Await（异步编程）
 - `concept/03_advanced/01_async/08_pin_unpin.md` — Pin 与 Unpin：自引用类型的不动性保证
 - `concept/03_advanced/01_async/07_async_closures.md` — Async Closures（异步闭包）
@@ -191,7 +191,7 @@
 - `concept/04_formal/01_ownership_logic/06_behavior_considered_undefined.md` — 未定义行为清单（Behavior Considered Undefined）
 - `concept/04_formal/02_separation_logic/01_rustbelt.md` — RustBelt & Verification Toolchain（RustBelt 与验证工具链）
 - `concept/04_formal/02_separation_logic/02_separation_logic.md` — 分离逻辑：Rust 所有权的形式化根基
-- `concept/04_formal/02_separation_logic/03_safety_tags_in_formal.md` — Safety Tags（安全标签）（⚠️ 2026-07-12 已合并至 `concept/07_future/03_preview_features/03_safety_tags_preview.md`，本路径为重定向 stub）
+- `concept/04_formal/02_separation_logic/03_safety_tags_in_formal.md` — Safety Tags（安全标签）（⚠️ 2026-07-12 已合并至 `concept/07_future/02_preview_features/03_safety_tags_preview.md`，本路径为重定向 stub）
 - `concept/04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md` — BorrowSanitizer 运行时别名模型检测
 - `concept/04_formal/03_operational_semantics/01_denotational_semantics.md` — 指称语义与领域理论
 - `concept/04_formal/03_operational_semantics/02_hoare_logic.md` — Hoare 逻辑：程序验证的形式化基础与 Rust 契约
@@ -274,26 +274,26 @@
 - `concept/07_future/01_edition_roadmap/01_rust_edition_preview.md` — Rust 2024 Edition (1.85.0+ stable)
 - `concept/07_future/01_edition_roadmap/03_rust_edition_guide.md` — Rust Edition 机制与迁移指南
 - `concept/07_future/01_edition_roadmap/02_edition_guide.md` — Edition 2024 完全指南：新特性与迁移策略
-- `concept/07_future/03_preview_features/24_borrow_sanitizer.md` — BorrowSanitizer：动态别名规则验证工具
-- `concept/07_future/03_preview_features/01_effects_system.md` — Effects System: Concept Pre-study（效果系统：概念预研）
-- `concept/07_future/03_preview_features/02_mcdc_coverage_preview.md` — MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证
-- `concept/07_future/03_preview_features/03_safety_tags_preview.md` — Safety Tags 概念预研：Unsafe 契约的机器可读标注
-- `concept/07_future/03_preview_features/04_parallel_frontend_preview.md` — 并行 前端编译预研：Rust 编译器 的多核扩展
-- `concept/07_future/03_preview_features/05_derive_coerce_pointee_preview.md` — 派生 CoercePointee 预研：智能指针的自动类型强制
-- `concept/07_future/03_preview_features/06_const_trait_impl_preview.md` — Const Trait Impl 预研：常量上下文中的 Trait 泛化
-- `concept/07_future/03_preview_features/09_return_type_notation_preview.md` — Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界
-- `concept/07_future/03_preview_features/11_unsafe_fields_preview.md` — Unsafe Fields 预研：字段级安全边界的精确标注
-- `concept/07_future/03_preview_features/13_lifetime_capture_preview.md` — Lifetime Capture in `impl Trait` 预研
-- `concept/07_future/03_preview_features/14_pin_ergonomics_preview.md` — Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`
-- `concept/07_future/03_preview_features/17_type_alias_impl_trait_preview.md` — TAIT 预研
-- `concept/07_future/03_preview_features/19_const_trait_preview.md` — Const Trait 实现预览
-- `concept/07_future/03_preview_features/22_async_drop_preview.md` — Async Drop：异步资源的优雅销毁
-- `concept/07_future/03_preview_features/20_borrowsanitizer_preview.md` — BorrowSanitizer 概念预研：运行时借用检查工业化（⚠️ 旧页：内容已迁移至 `concept/07_future/03_preview_features/24_borrow_sanitizer.md`，2026-07-12 N0 止血阶段删除）
-- `concept/07_future/03_preview_features/25_gen_blocks_preview.md` — Generator Blocks（gen）预览
-- `concept/07_future/03_preview_features/34_open_enums_preview.md` — Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举
-- `concept/07_future/03_preview_features/31_specialization_preview.md` — Specialization：Trait 实现的精确化与重叠解析
-- `concept/07_future/03_preview_features/32_compile_time_execution.md` — 编译期执行与常量求值
-- `concept/07_future/03_preview_features/07_stable_abi_preview.md` — Stable ABI 预研
+- `concept/07_future/02_preview_features/24_borrow_sanitizer.md` — BorrowSanitizer：动态别名规则验证工具
+- `concept/07_future/02_preview_features/01_effects_system.md` — Effects System: Concept Pre-study（效果系统：概念预研）
+- `concept/07_future/02_preview_features/02_mcdc_coverage_preview.md` — MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证
+- `concept/07_future/02_preview_features/03_safety_tags_preview.md` — Safety Tags 概念预研：Unsafe 契约的机器可读标注
+- `concept/07_future/02_preview_features/04_parallel_frontend_preview.md` — 并行 前端编译预研：Rust 编译器 的多核扩展
+- `concept/07_future/02_preview_features/05_derive_coerce_pointee_preview.md` — 派生 CoercePointee 预研：智能指针的自动类型强制
+- `concept/07_future/02_preview_features/06_const_trait_impl_preview.md` — Const Trait Impl 预研：常量上下文中的 Trait 泛化
+- `concept/07_future/02_preview_features/09_return_type_notation_preview.md` — Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界
+- `concept/07_future/02_preview_features/11_unsafe_fields_preview.md` — Unsafe Fields 预研：字段级安全边界的精确标注
+- `concept/07_future/02_preview_features/13_lifetime_capture_preview.md` — Lifetime Capture in `impl Trait` 预研
+- `concept/07_future/02_preview_features/14_pin_ergonomics_preview.md` — Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`
+- `concept/07_future/02_preview_features/17_type_alias_impl_trait_preview.md` — TAIT 预研
+- `concept/07_future/02_preview_features/19_const_trait_preview.md` — Const Trait 实现预览
+- `concept/07_future/02_preview_features/22_async_drop_preview.md` — Async Drop：异步资源的优雅销毁
+- `concept/07_future/03_preview_features/20_borrowsanitizer_preview.md` — BorrowSanitizer 概念预研：运行时借用检查工业化（⚠️ 旧页：内容已迁移至 `concept/07_future/02_preview_features/24_borrow_sanitizer.md`，2026-07-12 N0 止血阶段删除）
+- `concept/07_future/02_preview_features/25_gen_blocks_preview.md` — Generator Blocks（gen）预览
+- `concept/07_future/02_preview_features/34_open_enums_preview.md` — Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举
+- `concept/07_future/02_preview_features/31_specialization_preview.md` — Specialization：Trait 实现的精确化与重叠解析
+- `concept/07_future/02_preview_features/32_compile_time_execution.md` — 编译期执行与常量求值
+- `concept/07_future/02_preview_features/07_stable_abi_preview.md` — Stable ABI 预研
 - … 共 54 篇
 
 ### L0_meta（3 篇）

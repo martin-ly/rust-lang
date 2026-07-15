@@ -1,7 +1,7 @@
 # TRPL 第三版（2024 Edition）对照差异分析 {#trpl-第三版2024-edition对照差异分析}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为 **TRPL 第三版与 `concept/` 知识体系的对齐差异分析**（独特比较/评估内容）；各 Rust 概念的深度解释以 `concept/` 权威页为准。逐章映射见 [`docs/02_learning/09_learning_mvp_path.md`](../02_learning/09_learning_mvp_path.md)（映射权威页）与 [`concept/00_meta/01_trpl_3rd_ed_mapping.md`](../../concept/00_meta/01_trpl_3rd_ed_mapping.md)（重定向 stub）。
+> **权威来源（Canonical）**: 本文件为 **TRPL 第三版与 `concept/` 知识体系的对齐差异分析**（独特比较/评估内容）；各 Rust 概念的深度解释以 `concept/` 权威页为准。逐章映射见 [`docs/02_learning/09_learning_mvp_path.md`](../02_learning/09_learning_mvp_path.md)（映射权威页）与 [`concept/00_meta/06_trpl_3rd_ed_mapping.md`](../../concept/00_meta/06_trpl_3rd_ed_mapping.md)（重定向 stub）。
 >
 > 根据 AGENTS.md §2 Canonical 规则：本文仅保留对齐矩阵、叙事/深度差异比较、强弱项评估与学习路径建议等独特内容，不重复各 concept 页中的概念定义、规则与定理推导。
 >

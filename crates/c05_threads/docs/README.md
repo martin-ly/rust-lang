@@ -15,6 +15,6 @@
 | :--- | :--- |
 | 并发模型 | [concept/03_advanced/00_concurrency/01_concurrency.md](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
 | 并发模式 | [concept/03_advanced/00_concurrency/03_concurrency_patterns.md](../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md) |
-| 原子操作与内存序 | [concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md](../../../concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) |
-| 无锁编程 | [concept/03_advanced/00_concurrency/06_lock_free.md](../../../concept/03_advanced/00_concurrency/06_lock_free.md) |
-| 跨平台并发 | [concept/03_advanced/00_concurrency/04_cross_platform_concurrency.md](../../../concept/03_advanced/00_concurrency/04_cross_platform_concurrency.md) |
+| 原子操作与内存序 | [concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md](../../../concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) |
+| 无锁编程 | [concept/03_advanced/00_concurrency/07_lock_free.md](../../../concept/03_advanced/00_concurrency/07_lock_free.md) |
+| 跨平台并发 | [concept/03_advanced/00_concurrency/05_cross_platform_concurrency.md](../../../concept/03_advanced/00_concurrency/05_cross_platform_concurrency.md) |

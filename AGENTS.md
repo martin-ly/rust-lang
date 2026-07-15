@@ -202,7 +202,7 @@ bash scripts/git_hooks/install.sh
 
 ### 5.1 CI 质量门（23 项：23 阻断 + 0 语义观察）
 
-所有合并到 `main`/`master` 的变更必须通过以下 **23 个阻断质量门**。语义观察门机制保留（见 §5.2）但当前 **0 个观察门**（2026-07-14 用户指示全部转阻断，4 门 --strict 实跑均 exit 0，见 `reports/GATE_FULL_BLOCKING_U1_2026_07_14.md`）：
+所有合并到 `main`/`master` 的变更必须通过以下 **23 个阻断质量门**。语义观察门机制保留（见 §5.2），当前新增 **2 个语义观察门**（`check_stub_purity.py`、`check_cross_domain_coverage.py`），用于持续度量伪 stub 与交叉语义覆盖缺口，达标后按 §5.2 转阻断：
 
 **阻断门（23）**：
 
@@ -230,15 +230,26 @@ bash scripts/git_hooks/install.sh
 22. `python scripts/check_mindmap_coverage.py --strict`（思维表征覆盖：内容页 mindmap 覆盖率与反例节存在率，仅 concept/ 排除 00_meta/stub；--strict 基线 mindmap≥10%/反例≥40%，2026-07-14 实测 90.0%/84.4% exit 0；2026-07-14 转阻断）
 23. `python scripts/semantic_health.py --strict`（综合语义健康分；grade=FAIL 时阻断；2026-07-14 实测 99.6 grade OK exit 0；聚合门，2026-07-14 转阻断）
 
-**语义观察门（0，机制保留）**：
+**语义观察门（2）**：
 
-> 说明：观察门机制（默认 exit 0、warning 不阻断、达标后按 §5.2 转阻断）保留；2026-07-14 起当前 0 个观察门。新增观察门时在 `run_quality_gates.sh` 观察段与 `quality_gates.yml` 以 `continue-on-error: true` 挂载，命名后缀 `(observe)`。权威覆盖门（16）目标基线为 concept/ 真内容页 any=100%、none=0、核心 L1–L4 无 P0 缺口=0。
+| # | 观察门 | 检查目标 | 当前基线 | 转阻断条件 |
+|---:|---|---|---|---|
+| O1 | `python scripts/check_stub_purity.py --strict` | `docs/`/`knowledge/`/`content/`/`crates/*/docs/` 中声明为 stub/redirect 的文件是否保留通用概念完整正文 | 伪 stub 214 / 空壳页 128 / 高重复 0（`reports/STUB_PURITY_BASELINE_2026_07_15.md`） | 伪 stub=0 且空壳页=0 |
+| O2 | `python scripts/check_cross_domain_coverage.py --strict` | Rust 关键交叉/边界语义域（let chains、unsafe extern、async+unsafe、FFI+async、Send/Sync boundaries 等）是否有 `concept/` 非 stub 权威页 | 16 主题中 3 个未覆盖（81.2% 覆盖，`reports/CROSS_DOMAIN_COVERAGE_BASELINE_2026_07_15.md`） | 覆盖率达 100% 且连续 4 周/10 次 CI 稳定 |
 
-### 5.2 观察门机制说明（P3-7，2026-07-12 建立；当前 0 个在观察）
+> 说明：观察门机制（默认 exit 0、warning 不阻断、达标后按 §5.2 转阻断）保留；新增观察门时在 `run_quality_gates.sh` 观察段与 `quality_gates.yml` 以 `continue-on-error: true` 挂载，命名后缀 `(observe)`。权威覆盖门（16）目标基线为 concept/ 真内容页 any=100%、none=0、核心 L1–L4 无 P0 缺口=0。
 
-**当前状态**：2026-07-14 用户指示全部转阻断后，**23 门全阻断、0 个观察门**。机制保留以备将来新增观察门。
+### 5.2 观察门机制说明（P3-7，2026-07-12 建立；当前 2 个在观察）
+
+**当前状态**：2026-07-15 起新增 O1/O2 两个语义观察门；23 个阻断门保持不变。
 
 **转正规则**：任一语义观察门**连续 4 周（或连续 10 次 CI 运行）达标**，经评估后转为阻断门（在 `run_quality_gates.sh` 与 `quality_gates.yml` 中改为 `--strict` 且 `continue-on-error: false`）。转正前提：本地实跑 `--strict` 当前 exit=0。转正后若指标退化阻断 PR，按正常阻断门流程处置，不自动降级。
+
+**强制转正历史与治理纪律**：
+
+- 2026-07-14，metadata consistency / concept code blocks / mindmap coverage / semantic health 4 门由观察门转为阻断门。其中 authority coverage / examples compile / naming convention / quiz system 4 门经 R4 评估建议转阻断，符合本机制；但 metadata consistency / concept code blocks / mindmap coverage / semantic health 4 门在 R4 报告中建议维持观察，后因“用户指示全部转阻断”直接转正。
+- **自 2026-07-15 起，任何观察门转正必须严格满足本机制规定的“连续 4 周/10 次 CI 达标 + 本地 --strict exit 0”**，不得以任何口头或一次性指示绕过。已被强制转正的门保持阻断地位，但后续新增观察门必须遵守本条。
+- 若发现已转阻断门的指标在后续 CI 中退化且无法短期修复，应按正常阻断门流程处置（修复或经评估后回调为观察门），并同步更新 AGENTS.md 与本表。
 
 **各门基线状态（2026-07-14 更新：R4 评估后 authority coverage / examples compile / naming convention / quiz system 四门转阻断，见 `reports/OBSERVE_GATE_PROMOTION_REVIEW_R4_2026_07_14.md`；metadata consistency / concept code blocks / mindmap coverage / semantic health 四门同日转阻断，见 `reports/GATE_FULL_BLOCKING_U1_2026_07_14.md`；其余摘自 `reports/` 最新基线）**：
 
@@ -258,7 +269,7 @@ bash scripts/git_hooks/install.sh
 | mindmap coverage | 内容页 404（已排除 quiz 评估页 21 + SUMMARY/sources/topic_index/1.98 骨架 5）：mindmap **404（100.0%）** / 反例 **399（98.8%）**（2026-07-14 复测；--strict 基线 mindmap≥10%/反例≥40%） | exit 0 | ✅ **已转阻断**（2026-07-14，用户指示全部转阻断；口径说明见 `scripts/check_mindmap_coverage.py`） |
 | quiz system | 注册表 21 独立 quiz 全一致 / 题型均≥3 种 / 难度标注 309/309=100% / quiz→concept 21/21、concept→quiz 回链 21/21；2026-07-14 --strict 实跑 exit 0 | exit 0 | ✅ **已转阻断**（2026-07-14，R4 评估，--strict 检查 1–3 失败即阻断） |
 
-**去重 v2 转阻断完成（P2-5 收尾，2026-07-12）**：v1（阻断门 8）报 1 对而 v2 报 552 对，v1 漏检属实；v2 可处理项 54 已于 2026-07-12 清零——autoverus 近克隆对（双向计数 2）按 canonical 裁定差异化改写（L4 `04_formal/04_model_checking/07_autoverus.md` 保留为概念权威页，L7 `07_future/03_preview_features/33_autoverus_preview.md` 改写为预览跟踪页），其余 52 对逐对人工复核后登记 SERIES 白名单（docs/05_practice 项目指南系列 48 对 + design_theory 子目录索引系列 4 对，证据注释见 `scripts/triage_overlap.py` `SERIES_PATH_RE`）。本门已转阻断：`run_quality_gates.sh` 与 `quality_gates.yml` 中可处理项（MERGE+DOCS_INTERNAL）> 0 即 exit 1，nightly 同步纳入 issue 触发条件。SERIES 白名单：`triage_overlap.py` 正则 + `SERIES_PATH_RE` 路径族 + 显式 `SERIES_PAIRS` 登记（2026-07-12 人工复核：c10 examples_collection/part2 分章、c02 readme_rust_189/190 版本系列、docs/05_practice 项目系列、design_theory 索引系列）。
+**去重 v2 转阻断完成（P2-5 收尾，2026-07-12）**：v1（阻断门 8）报 1 对而 v2 报 552 对，v1 漏检属实；v2 可处理项 54 已于 2026-07-12 清零——autoverus 近克隆对（双向计数 2）按 canonical 裁定差异化改写（L4 `04_formal/04_model_checking/07_autoverus.md` 保留为概念权威页，L7 `07_future/02_preview_features/33_autoverus_preview.md` 改写为预览跟踪页），其余 52 对逐对人工复核后登记 SERIES 白名单（docs/05_practice 项目指南系列 48 对 + design_theory 子目录索引系列 4 对，证据注释见 `scripts/triage_overlap.py` `SERIES_PATH_RE`）。本门已转阻断：`run_quality_gates.sh` 与 `quality_gates.yml` 中可处理项（MERGE+DOCS_INTERNAL）> 0 即 exit 1，nightly 同步纳入 issue 触发条件。SERIES 白名单：`triage_overlap.py` 正则 + `SERIES_PATH_RE` 路径族 + 显式 `SERIES_PAIRS` 登记（2026-07-12 人工复核：c10 examples_collection/part2 分章、c02 readme_rust_189/190 版本系列、docs/05_practice 项目系列、design_theory 索引系列）。
 
 ---
 

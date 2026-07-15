@@ -198,7 +198,7 @@ C2 (未覆盖范围) 是负面边界
 > - **L3 Unsafe**: [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/01_unsafe.md) §3 "Unsafe 抽象边界" ↔ C1 边界层。unsafe 代码的安全契约需在 Iris 中手动建模，RustBelt 提供方法论但不自动化验证 (Source: [Wikipedia — Type Theory](https://en.wikipedia.org/wiki/Type_theory))
 > - **L3 并发**: [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md) §2 "Send/Sync 语义" ↔ T1（无数据竞争）。CSL 是并发安全（Concurrency Safety）的逻辑根基，Mutex/Arc 的形式化规约见 §3
 > **Send/Sync 形式化语义**: `T: Send` ⇔ 类型 T 可安全跨线程转移所有权（值 move 无数据竞争）。`T: Sync` ⇔ `&T: Send`，即 T 的共享引用（Reference）可安全跨线程共享。
-> - **L7 形式化方法**: [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) §4 "验证工具链演进" ↔ §8 工具链映射。从 Miri（动态）到 Kani（模型检测）到 Coq/Iris（定理证明）构成完整光谱
+> - **L7 形式化方法**: [`../07_future/04_research_and_experimental/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) §4 "验证工具链演进" ↔ §8 工具链映射。从 Miri（动态）到 Kani（模型检测）到 Coq/Iris（定理证明）构成完整光谱
 
 ---
 
@@ -1112,7 +1112,7 @@ graph TD
 | 线性逻辑 | [`./01_linear_logic.md`](../01_ownership_logic/01_linear_logic.md) | 理论基础 |
 | 类型论 | [`./02_type_theory.md`](../00_type_theory/01_type_theory.md) | 类型规则 |
 | 所有权形式化 | [`./03_ownership_formal.md`](../01_ownership_logic/02_ownership_formal.md) | 操作语义 |
-| 形式化方法 | [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | 工具化 · L7 形式化方法映射 |
+| 形式化方法 | [`../07_future/04_research_and_experimental/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | 工具化 · L7 形式化方法映射 |
 | 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) | 验证范围 |
 
 ---

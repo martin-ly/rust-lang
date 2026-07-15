@@ -1488,8 +1488,8 @@ graph TD
 | Unsafe | [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/01_unsafe.md) | Miri 检测对象 |
 | 形式化验证 | [`../04_formal/04_rustbelt.md`](../../04_formal/02_separation_logic/01_rustbelt.md) | 理论基础 |
 | 设计模式 | [`./02_patterns.md`](../03_design_patterns/01_patterns.md) | 工程实践 |
-| AI × Rust | [`../07_future/01_ai_integration.md`](../../07_future/04_research_and_experimental/01_ai_integration.md) | 工具链扩展 |
-| 形式化工业化 | [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | 验证工具集成 |
+| AI × Rust | [`../07_future/04_research_and_experimental/01_ai_integration.md`](../../07_future/04_research_and_experimental/01_ai_integration.md) | 工具链扩展 |
+| 形式化工业化 | [`../07_future/04_research_and_experimental/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | 验证工具集成 |
 | 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) | 质量门禁 |
 
 ### 编译验证：Edition 机制与向后兼容性

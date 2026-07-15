@@ -17,7 +17,7 @@
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析 Rust 类型系统（Type System）的语义表达能力
 > **前置依赖**: [Type Theory](01_type_theory.md) · [Ownership Formalization](../01_ownership_logic/02_ownership_formal.md)
-> **后置延伸**: [Axiomatic Semantics](../03_operational_semantics/05_axiomatic_semantics.md) · [RustBelt](../02_separation_logic/01_rustbelt.md) · [Effects System](../../07_future/03_preview_features/01_effects_system.md)
+> **后置延伸**: [Axiomatic Semantics](../03_operational_semantics/05_axiomatic_semantics.md) · [RustBelt](../02_separation_logic/01_rustbelt.md) · [Effects System](../../07_future/02_preview_features/01_effects_system.md)
 > **跨层映射**: L4→L1 类型语义 ↔ 类型直觉 | L4→L2 Trait 系统 ↔ 存在/全称类型
 > **定理链编号**: T-130 进步定理 → T-131 保持定理 → T-132 类型安全完备性
 > **后置概念**: [Comparative Studies](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)

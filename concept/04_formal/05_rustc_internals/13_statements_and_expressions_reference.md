@@ -11,7 +11,7 @@
 > **定位声明**: 本页为 Rust Reference 对应章节的**规范摘译与注解**（规范条文摘译 + 示例 + 交叉引用），非形式化推导或机器验证证明；形式化理论内容见 [操作语义](../03_operational_semantics/03_operational_semantics.md)。依据 [A/S/P 标记规范](../../00_meta/03_audit/02_asp_marking_guide.md) §3.4，L4 形式化层同时容纳 S（Specification）规范分析类内容，故本页保留于 L4，Bloom 层级维持与内容相符的标注（理解/分析层的规范内容）。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
-> **前置依赖**: [Statements and Expressions](../../01_foundation/04_control_flow/03_statements_and_expressions.md) · [Variables](../../03_advanced/06_low_level_patterns/09_variables.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)
+> **前置依赖**: [Statements and Expressions](../../01_foundation/04_control_flow/04_statements_and_expressions.md) · [Variables](../../03_advanced/06_low_level_patterns/09_variables.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)
 > **后置概念**: [Patterns Reference](14_patterns_reference.md) · [Constant Evaluation](../03_operational_semantics/07_constant_evaluation.md) · [Destructors](09_destructors.md)
 > **定理链**: Statement → Expression → Value / Effect
 >

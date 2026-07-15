@@ -13,7 +13,7 @@
 > **双维定位**: C×Ana — 从状态机视角分析 Future 析构语义与操作不变量
 > **定位**: 系统化分析 Rust 异步（Async）的**取消安全（cancellation safety）**——drop 即取消的语义、形式化定义、Tokio 各 API 的安全性判定、经典陷阱与修正模式。
 > **前置概念**: [Async/Await](01_async.md) · [Pin 与 Unpin](08_pin_unpin.md) · [Future 与 Executor 机制](04_future_and_executor_mechanisms.md)
-> **后置概念**: [Async Drop（预览）](../../07_future/03_preview_features/22_async_drop_preview.md) · [Ownership 形式化](../../04_formal/01_ownership_logic/02_ownership_formal.md)
+> **后置概念**: [Async Drop（预览）](../../07_future/02_preview_features/22_async_drop_preview.md) · [Ownership 形式化](../../04_formal/01_ownership_logic/02_ownership_formal.md)
 
 ---
 
@@ -416,7 +416,7 @@ Future 被 drop 时，其状态机内活跃局部变量按**声明逆序**析构
 
 1. **尽力而为的同步清理**（如 `drop` 时 `spawn` 一个清理任务）——清理任务本身可能再被取消，需标记为不可中断段；
 2. **显式异步关闭协议**：`shutdown().await` 先于 drop 调用，Drop 仅做兜底；
-3. **`async_drop`（预览特性）**：让 `Drop` 本身异步化。详见 [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/22_async_drop_preview.md)。
+3. **`async_drop`（预览特性）**：让 `Drop` 本身异步化。详见 [Async Drop：异步资源的优雅销毁](../../07_future/02_preview_features/22_async_drop_preview.md)。
 
 边界判定：若资源的"释放"只是内存回收/文件描述符关闭，同步 Drop 足够，不要引入 async drop 复杂度；若释放涉及网络往返或跨任务协调，显式 `shutdown().await` 是当前（1.97 stable）唯一可移植的方案。
 
@@ -483,7 +483,7 @@ Future 被 drop 时，其状态机内活跃局部变量按**声明逆序**析构
 - [withoutboats — Asynchronous Clean-up](https://without.boats/blog/asynchronous-clean-up/) 及其异步系列博文（取消、清理与 async drop 的设计动机）
 - [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)（Future 惰性状态机与 drop 语义基础）
 - [Lagaillardie, Neykova & Yoshida: Stay Safe Under Panic — Affine Rust Programming with Multiparty Session Types（ECOOP 2022 全文, arXiv:2204.13464）](https://arxiv.org/abs/2204.13464)（P1 学术：Rust 取消/恐慌安全的会话类型形式化，2026-07-12 验证 HTTP 200）
-- 站内交叉引用：[Async/Await §8.7](01_async.md) · [Async 高级主题](02_async_advanced.md) · [Async 模式 §2.2/§10.2](03_async_patterns.md) · [Async Drop（预览）](../../07_future/03_preview_features/22_async_drop_preview.md) · [Pin 与 Unpin](08_pin_unpin.md)
+- 站内交叉引用：[Async/Await §8.7](01_async.md) · [Async 高级主题](02_async_advanced.md) · [Async 模式 §2.2/§10.2](03_async_patterns.md) · [Async Drop（预览）](../../07_future/02_preview_features/22_async_drop_preview.md) · [Pin 与 Unpin](08_pin_unpin.md)
 
 ---
 

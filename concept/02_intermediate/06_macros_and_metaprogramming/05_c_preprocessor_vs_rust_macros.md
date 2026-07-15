@@ -225,7 +225,7 @@ M!(t)  ⟶  E[x := α(t)]
 
 ## 相关概念
 
-- [对应测验](../09_quizzes/30_quiz_cpp_rust_foundations.md) — C/C++ → Rust 工程层基础对比（RTTI、宏、异常安全、构造、move 语义）
+- [对应测验](../08_quizzes/30_quiz_cpp_rust_foundations.md) — C/C++ → Rust 工程层基础对比（RTTI、宏、异常安全、构造、move 语义）
 - [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) — 属性与宏的基础入门，本文对比分析的 Rust 侧前提
 
 ---

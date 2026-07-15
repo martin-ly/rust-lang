@@ -1,7 +1,6 @@
 > **EN**: Advanced Concurrency Optimization
 > **Summary**: High-performance concurrency optimization in Rust, covering thread pools, work-stealing, lock-free data structures, parallel map/reduce, and benchmarking. This crate document now redirects to the canonical concept page.
-
-> **权威来源**: [concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md](../../../concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
+> **权威来源**: [concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md](../../../concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
 
 ## 主题速览
 

@@ -309,7 +309,7 @@ f: S -> Result<S', E>
 
 ## 相关概念
 
-- [对应测验](../09_quizzes/30_quiz_cpp_rust_foundations.md) — C/C++ → Rust 工程层基础对比（RTTI、宏、异常安全、构造、move 语义）
+- [对应测验](../08_quizzes/30_quiz_cpp_rust_foundations.md) — C/C++ → Rust 工程层基础对比（RTTI、宏、异常安全、构造、move 语义）
 
 ---
 

@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×App — 应用常量参数消除数组大小的抽象泄漏
 > **前置概念**: [Generics](01_generics.md) · [Traits](../00_traits/01_traits.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)
-> **后置概念**: [Type-Level Programming](03_type_level_programming.md) · [const Trait Impl（预览）](../../07_future/03_preview_features/06_const_trait_impl_preview.md) · [Const Eval](../../01_foundation/04_control_flow/03_statements_and_expressions.md)
+> **后置概念**: [Type-Level Programming](03_type_level_programming.md) · [const Trait Impl（预览）](../../07_future/02_preview_features/06_const_trait_impl_preview.md) · [Const Eval](../../01_foundation/04_control_flow/04_statements_and_expressions.md)
 
 ---
 
@@ -510,12 +510,12 @@ fn scaled_demo() {
 |:---|:---|:---|
 | [01_generics.md](01_generics.md) | 泛型参数空间总览（类型/生命周期/const/关联类型）、单态化全景 | 引用本页作为 const 参数的深度权威页 |
 | [03_type_level_programming.md](03_type_level_programming.md) | Peano 数、typenum、HList、类型级计算编码 | const generics 表达力不足时的替代方案，边界对照指向本页 §8 |
-| [11_const_trait_impl_preview.md](../../07_future/03_preview_features/06_const_trait_impl_preview.md) | `const trait`/`const fn` 在 trait 上下文的效果（const 计算的另一轴） | 互补：const generics 是"值级参数"，const trait 是"效果级参数" |
+| [11_const_trait_impl_preview.md](../../07_future/02_preview_features/06_const_trait_impl_preview.md) | `const trait`/`const fn` 在 trait 上下文的效果（const 计算的另一轴） | 互补：const generics 是"值级参数"，const trait 是"效果级参数" |
 
 ## 相关概念
 
 - **上层概念**: [Generics](01_generics.md) · [Traits](../00_traits/01_traits.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)
-- **下层概念**: [Type-Level Programming](03_type_level_programming.md) · [const Trait Impl（预览）](../../07_future/03_preview_features/06_const_trait_impl_preview.md) · [Const Eval](../../01_foundation/04_control_flow/03_statements_and_expressions.md)
+- **下层概念**: [Type-Level Programming](03_type_level_programming.md) · [const Trait Impl（预览）](../../07_future/02_preview_features/06_const_trait_impl_preview.md) · [Const Eval](../../01_foundation/04_control_flow/04_statements_and_expressions.md)
 
 ## 📋 关键属性
 

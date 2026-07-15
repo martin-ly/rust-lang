@@ -1,0 +1,271 @@
+{
+  "total": 16,
+  "covered_count": 16,
+  "uncovered_count": 0,
+  "coverage_rate": 100.0,
+  "topics": [
+    {
+      "topic": "let chains / if-let guards",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "01_foundation/04_control_flow/03_let_chains.md",
+          "title": "链式 let 与 let 守卫（Let Chains & If-Let Guards）",
+          "en": "Let Chains and If-Let Guards",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": []
+    },
+    {
+      "topic": "unsafe extern blocks (Edition 2024)",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "03_advanced/04_ffi/05_unsafe_extern_blocks.md",
+          "title": "`unsafe extern blocks`：Edition 2024 的 FFI 安全边界",
+          "en": "`unsafe extern blocks` in Rust Edition 2024",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": []
+    },
+    {
+      "topic": "async + unsafe boundary",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
+          "title": "Async 中的 Unsafe：异步上下文的安全契约",
+          "en": "Unsafe in Async Contexts",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": [
+        "03_advanced/01_async/12_async_unsafe_boundary.md"
+      ]
+    },
+    {
+      "topic": "FFI + async boundary",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "03_advanced/04_ffi/04_async_ffi_boundary.md",
+          "title": "Async FFI 边界：在异步运行时中调用外部代码",
+          "en": "Async FFI Boundary",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": [
+        "03_advanced/04_ffi/06_async_ffi_boundary.md"
+      ]
+    },
+    {
+      "topic": "no_std + async",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
+          "title": "裸机与嵌入式中的 Async：no_std 异步运行时",
+          "en": "Async in no_std and Embedded Systems",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": [
+        "06_ecosystem/05_systems_and_embedded/12_async_no_std_embedded.md"
+      ]
+    },
+    {
+      "topic": "const generics + trait objects",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
+          "title": "常量泛型与 Trait 对象：静态分发与动态分发的交叉边界",
+          "en": "Const Generics and Trait Objects",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": [
+        "02_intermediate/01_generics/06_const_generics_and_trait_objects.md"
+      ]
+    },
+    {
+      "topic": "GAT + async",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "03_advanced/01_async/14_gat_async_boundary.md",
+          "title": "GAT 与 Async 交叉边界语义",
+          "en": "Generic Associated Types (GATs) at the Async Boundary",
+          "stub": false
+        },
+        {
+          "path": "02_intermediate/00_traits/07_generic_associated_types.md",
+          "title": "泛型关联类型（Generic Associated Types, GATs）",
+          "en": "Generic Associated Types (GATs)",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": []
+    },
+    {
+      "topic": "Send/Sync boundary in trait objects / closures / async state machines",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "03_advanced/00_concurrency/04_send_sync_boundaries.md",
+          "title": "Send/Sync 边界判定",
+          "en": "Send/Sync Boundary Judgment — Trait Objects, Closures, and Async State Machines",
+          "stub": false
+        },
+        {
+          "path": "03_advanced/00_concurrency/02_send_sync_auto_traits.md",
+          "title": "Send 与 Sync：Auto Trait 的并发安全契约",
+          "en": "Send and Sync — Auto Traits as Compile-Time Concurrency Contracts",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": []
+    },
+    {
+      "topic": "Pin projection + structural projection",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "03_advanced/01_async/11_pin_projection_counterexamples.md",
+          "title": "Pin 投射反例集：unsafe 结构投射的 UB 目录与正确模式库",
+          "en": "Pin Projection Counterexamples",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": [
+        "03_advanced/01_async/03_pin_unpin.md"
+      ]
+    },
+    {
+      "topic": "allocator_api / per-container allocators",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "03_advanced/06_low_level_patterns/01_custom_allocators.md",
+          "title": "自定义分配器与内存布局优化",
+          "en": "Custom Allocators",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": []
+    },
+    {
+      "topic": "match ergonomics / default binding mode in Edition 2024",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "01_foundation/04_control_flow/02_patterns.md",
+          "title": "模式匹配（Patterns）",
+          "en": "Patterns",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": []
+    },
+    {
+      "topic": "temporary scope / tail expression drop (Edition 2024)",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "04_formal/05_rustc_internals/09_destructors.md",
+          "title": "析构函数与 Drop Scope（Destructors）",
+          "en": "Destructors",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": []
+    },
+    {
+      "topic": "const trait impl (effects system)",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "07_future/03_preview_features/06_const_trait_impl_preview.md",
+          "title": "Const Trait Impl 预研：常量上下文中的 Trait 泛化",
+          "en": "Const Trait Impl Preview",
+          "stub": false
+        }
+      ],
+      "stub_pages": [
+        {
+          "path": "07_future/03_preview_features/19_const_trait_preview.md",
+          "title": "Const Trait 实现预览",
+          "en": "Const Trait Implementation Preview",
+          "stub": true
+        }
+      ],
+      "missing_candidates": []
+    },
+    {
+      "topic": "RTN / RPITIT / TAIT precise capturing",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "07_future/03_preview_features/17_type_alias_impl_trait_preview.md",
+          "title": "TAIT Preview",
+          "en": "Type Alias Impl Trait (TAIT) Preview",
+          "stub": false
+        },
+        {
+          "path": "07_future/03_preview_features/13_lifetime_capture_preview.md",
+          "title": "Lifetime Capture in `impl Trait` Preview",
+          "en": "Precise Lifetime Capture in `impl Trait` Preview",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": [
+        "07_future/03_preview_features/20_return_type_notation_preview.md"
+      ]
+    },
+    {
+      "topic": "async fn / Future equivalence + Send across await",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "03_advanced/01_async/01_async.md",
+          "title": "Async/Await（异步编程）",
+          "en": "Async Programming",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": [
+        "03_advanced/01_async/02_async_state_machine.md"
+      ]
+    },
+    {
+      "topic": "unsafe op in unsafe fn (Edition 2024)",
+      "covered": true,
+      "authority_pages": [
+        {
+          "path": "03_advanced/02_unsafe/01_unsafe.md",
+          "title": "Unsafe Rust 安全编程",
+          "en": "Safe and Effective Unsafe Rust",
+          "stub": false
+        }
+      ],
+      "stub_pages": [],
+      "missing_candidates": []
+    }
+  ]
+}

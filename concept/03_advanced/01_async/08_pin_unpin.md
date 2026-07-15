@@ -15,7 +15,7 @@
 > **双维定位**: C×Ana — 分析 Pin 不动性对自引用（Reference）的必要性
 > **定位**: 深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。
 > **前置概念**: [Async](01_async.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)
-> **后置概念**: [Unsafe](../02_unsafe/01_unsafe.md) · [Gen Blocks](../../07_future/03_preview_features/25_gen_blocks_preview.md)
+> **后置概念**: [Unsafe](../02_unsafe/01_unsafe.md) · [Gen Blocks](../../07_future/02_preview_features/25_gen_blocks_preview.md)
 
 ---
 
@@ -383,7 +383,7 @@ graph TD
 ├── yield 点可能持有自引用
 ├── Pin 保证生成器在 yield 之间不被移动
 └── async 和 gen 都是"挂起/恢复型效果"，共享自引用状态机 + Pin 机制
-    [参见: Effect System 中的 Effect × Pin 交叉分析](../../07_future/03_preview_features/01_effects_system.md#64-effect--pin效果与自引用类型的交叉)
+    [参见: Effect System 中的 Effect × Pin 交叉分析](../../07_future/02_preview_features/01_effects_system.md#64-effect--pin效果与自引用类型的交叉)
 ```
 
 > **边界要点**: Pin 的边界主要与**内部可变性**和**Drop**交互相关。这些边界反映了 Pin 契约的复杂性——它不仅是一个类型包装器，更是一个**内存地址稳定性的语义保证**。
@@ -578,7 +578,7 @@ fn main() {
 - [Async](01_async.md) — 异步（Async）编程（Pin 的核心用例）
 - [Unsafe](../02_unsafe/01_unsafe.md) — unsafe Rust
 - [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）模型
-- [Gen Blocks](../../07_future/03_preview_features/25_gen_blocks_preview.md) — 生成器（也是 !Unpin）
+- [Gen Blocks](../../07_future/02_preview_features/25_gen_blocks_preview.md) — 生成器（也是 !Unpin）
 - [Pin 投射反例集](11_pin_projection_counterexamples.md) — 契约推导 ↔ UB 目录（分工页）
 
 ---

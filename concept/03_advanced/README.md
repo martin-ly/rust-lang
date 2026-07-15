@@ -188,7 +188,7 @@ graph TB
 | 06_pin_unpin.md | Pin 与 Unpin | 自引用（Reference）类型、PhantomPinned、async 状态机、Pin API 契约 | ✅ v1.0 | Ownership + Generics | Async, Gen Blocks |
 | [07_proc_macro.md](03_proc_macros/02_proc_macro.md) | 过程宏（Procedural Macro） | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ v1.0 | Trait + Type System | 生态 (代码生成), DSL |
 | [08_nll_and_polonius.md](02_unsafe/03_nll_and_polonius.md) | NLL 与 Polonius | 非词法生命周期、数据流分析、Origin 模型、借用检查演进 | ✅ v1.0 | Borrowing, Lifetimes | RustBelt, Pin |
-| [19_parallel_distributed_pattern_spectrum.md](00_concurrency/07_parallel_distributed_pattern_spectrum.md) | 并行-分布式谱系 | 线程池→工作窃取→Actor→CSP→数据流→共识的连续体 | ✅ v1.0 | Concurrency, Async | Distributed Systems |
+| [19_parallel_distributed_pattern_spectrum.md](00_concurrency/08_parallel_distributed_pattern_spectrum.md) | 并行-分布式谱系 | 线程池→工作窃取→Actor→CSP→数据流→共识的连续体 | ✅ v1.0 | Concurrency, Async | Distributed Systems |
 | [20_stream_processing_semantics.md](06_low_level_patterns/05_stream_processing_semantics.md) | 流处理语义 | Dataflow Model、Watermark、Exactly-Once、Differential Dataflow | ✅ v1.0 | Concurrency, Async | Stream Processing Ecosystem |
 
 ---
@@ -198,6 +198,7 @@ graph TB
 - [Async/Await 高级主题](01_async/02_async_advanced.md)
 - [异步（Async）模式：从 Future 到生产级并发](01_async/03_async_patterns.md)
 - [Async Closures（异步闭包）](01_async/07_async_closures.md)
+- [GAT 与 Async 交叉边界语义](01_async/14_gat_async_boundary.md)
 - [FFI 高级主题：跨语言边界的安全与性能](04_ffi/02_ffi_advanced.md)
 - [并发 模式：从消息 传递到锁自由的数据结构](00_concurrency/03_concurrency_patterns.md)
 - 原子操作（Atomic Operations）与内存序：无锁并发的精确控制
@@ -205,9 +206,9 @@ graph TB
 - 内联汇编（Inline Assembly）：`asm!` 宏（Macro）与跨平台 SIMD
 - [自定义分配器与内存布局优化](06_low_level_patterns/01_custom_allocators.md)
 - [零拷贝解析与序列化优化](06_low_level_patterns/02_zero_copy_parsing.md)
-- [无锁编程与内存模型](00_concurrency/06_lock_free.md)
+- [无锁编程与内存模型](00_concurrency/07_lock_free.md)
 - [类型擦除与动态分发](06_low_level_patterns/03_type_erasure.md)
-- [测验：并发与异步（Async）（嵌入式互动试点）](00_concurrency/08_quiz_concurrency_async.md)
+- [测验：并发与异步（Async）（嵌入式互动试点）](00_concurrency/09_quiz_concurrency_async.md)
 - [测验：Unsafe Rust（嵌入式互动试点）](02_unsafe/05_quiz_unsafe.md)
 - [测验：宏（Macro）系统（嵌入式互动试点）](03_proc_macros/10_quiz_macros.md)
 

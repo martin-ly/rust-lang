@@ -9,7 +9,7 @@
 > **权威来源**: 本文件为 `concept/` 中 **AUTOSAR×Rust 概念**的权威页；汽车 ECU 工程案例见 [`content/safety_critical/`](../../../content/safety_critical/) 专题套件（canonical 分工：概念在本页，案例在 content）。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: P×Und — 理解汽车软件标准体系中的 Rust 位置
-> **前置概念**: [Ferrocene](../../07_future/03_preview_features/12_ferrocene_preview.md) · [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) · [安全关键 Rust 专题索引](21_safety_critical_topic_index.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
+> **前置概念**: [Ferrocene](../../07_future/02_preview_features/12_ferrocene_preview.md) · [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) · [安全关键 Rust 专题索引](21_safety_critical_topic_index.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **后置概念**: [Industrial Case Studies](14_industrial_case_studies.md) · [cargo vet 与供应链审计](../07_security_and_cryptography/03_cargo_vet_supply_chain.md)
 >
 > **来源**: [AUTOSAR Adaptive Platform](https://www.autosar.org/standards/adaptive-platform)（2026-07-12 curl 实测） · [AUTOSAR R23-11 — AUTOSAR_AP_EXP_ARARustApplications.pdf](https://www.autosar.org/fileadmin/standards/R23-11/AP/AUTOSAR_AP_EXP_ARARustApplications.pdf)（实测 200） · [AUTOSAR R24-11 同文档更新版](https://www.autosar.org/fileadmin/standards/R24-11/AP/AUTOSAR_AP_EXP_ARARustApplications.pdf)（实测 200） · [SemiEngineering — Rust and virtual ECUs transforming AUTOSAR Classic（2025-07-08）](https://semiengineering.com/driving-the-future-how-rust-and-virtual-ecus-are-transforming-autosar-classic-automotive-software/) · [Synopsys — Validation of AUTOSAR Classic ECUs Running Rust SWCs（2025-01-27）](https://www.synopsys.com/blogs/chip-design/validation-of-autosar-classic-ecus-running-rust-swcs-a-safer-path-to-automotive-software.html)（实测 200）
@@ -162,7 +162,7 @@ graph TD
 - [对应测验](../13_quizzes/04_quiz_domain_applications.md) — 领域应用生态（区块链/Wasm、游戏 ECS、ML 与数据科学、安全关键 AUTOSAR、量子计算、算法竞赛）
 
 - [安全关键 Rust 专题索引](21_safety_critical_topic_index.md) — content/ 工程套件入口（ISO 26262/IEC 61508/DO-178C/MISRA）
-- [Ferrocene](../../07_future/03_preview_features/12_ferrocene_preview.md) — 认证编译器路径
+- [Ferrocene](../../07_future/02_preview_features/12_ferrocene_preview.md) — 认证编译器路径
 - [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) — Ferrocene/HighTec/AdaCore 与认证 crate 现状
 - [Industrial Case Studies](14_industrial_case_studies.md) — 工业应用案例
 - [cargo vet 与供应链审计](../07_security_and_cryptography/03_cargo_vet_supply_chain.md) — 依赖审查机制

@@ -11,7 +11,7 @@
 > **定位**: 深入探讨 Rust 中的**无锁编程**——从原子操作（Atomic Operations）到内存序，分析 lock-free 算法的内存安全（Memory Safety）保证与性能优势。
 > **前置概念**:
 > [Concurrency](01_concurrency.md) ·
-> [Atomics](05_atomics_and_memory_ordering.md) ·
+> [Atomics](06_atomics_and_memory_ordering.md) ·
 > [Unsafe](../02_unsafe/01_unsafe.md)
 > **后置概念**:
 > [Concurrent Patterns](03_concurrency_patterns.md) ·
@@ -635,7 +635,7 @@ fn main() {
 ## 相关概念
 
 - [Concurrency](01_concurrency.md) — 并发
-- [Atomics](05_atomics_and_memory_ordering.md) — 原子操作（Atomic Operations）
+- [Atomics](06_atomics_and_memory_ordering.md) — 原子操作（Atomic Operations）
 - [Unsafe](../02_unsafe/01_unsafe.md) — unsafe Rust
 - [Concurrent Patterns](03_concurrency_patterns.md) — 并发模式
 
@@ -1242,7 +1242,7 @@ hp[0].store(null_mut(), Ordering::SeqCst);
 - **上位（is-a）**：[Concurrency](01_concurrency.md) 同步机制的无阻塞极端。
 - **下位（实例）**：无锁队列/栈实例见本页「关键数据结构」节。
 - **对偶**：与锁（阻塞同步）相对，见 [Concurrency Patterns](03_concurrency_patterns.md)。
-- **组合**：与 [Atomics and Memory Ordering](05_atomics_and_memory_ordering.md) 组合实现。
+- **组合**：与 [Atomics and Memory Ordering](06_atomics_and_memory_ordering.md) 组合实现。
 - **依赖**：跨线程安全性依赖 [Send/Sync](02_send_sync_auto_traits.md) auto trait。
 
 ## 🧭 思维导图（Mindmap）

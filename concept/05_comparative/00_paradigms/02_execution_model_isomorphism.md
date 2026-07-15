@@ -733,7 +733,7 @@ graph TD
 - [L0 表达力多视角](../../00_meta/00_framework/expressiveness_multiview.md) —— 并发语义视角
 - [L0 可判定性谱系](../../00_meta/00_framework/decidability_spectrum.md) —— 并发安全（Concurrency Safety）的判定性边界
 - [L6 设计模式](../../06_ecosystem/03_design_patterns/01_patterns.md) —— 并发设计模式
-- [L7 Effects 系统](../../07_future/03_preview_features/01_effects_system.md) —— 异步与效果系统前沿
+- [L7 Effects 系统](../../07_future/02_preview_features/01_effects_system.md) —— 异步与效果系统前沿
 
 ---
 

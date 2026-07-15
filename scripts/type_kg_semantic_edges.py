@@ -60,21 +60,21 @@ CURATED_EQUIV: list[tuple[str, str, str, str]] = [
      "02_intermediate/03_error_handling/03_panic.md:9 Summary“Rust panic 的规范语义”，"
      "前置依赖指向 03_panic_and_abort.md；后者定位“系统讲解 Rust panic 机制”——同一 panic 概念的 L1/L2 两页"),
     ("ex:AutoVerusAndVerusAutomatedVerificationEcosystem", "ex:AutoVerusVerus", "E3-same-concept-xlayer",
-     "04_formal/04_model_checking/07_autoverus.md 与 07_future/03_preview_features/33_autoverus_preview.md "
+     "04_formal/04_model_checking/07_autoverus.md 与 07_future/02_preview_features/33_autoverus_preview.md "
      "Summary 逐字相同（“Verus 是用 Rust 本身编写规格与证明的 SMT 验证器；AutoVerus 是基于 LLM 的自动化证明生成系统…”），"
      "同一主题跨 L4/L7 双权威页"),
     ("ex:SafetyTagsForUnsafeCode", "ex:SafetyTagsForUnsafeCode_03previewfea", "E2-explicit-merge",
      "04_formal/02_separation_logic/03_safety_tags_in_formal.md 为显式重定向 stub："
-     "“本主题已合并至 07_future/03_preview_features/03_safety_tags_preview.md…v2 相似度 0.855”"),
+     "“本主题已合并至 07_future/02_preview_features/03_safety_tags_preview.md…v2 相似度 0.855”"),
     ("ex:SafetyTagsPreview", "ex:SafetyTagsForUnsafeCode_03previewfea", "E1-same-path-dup",
-     "两实体 ex:path 均为 07_future/03_preview_features/03_safety_tags_preview.md（抽取重复节点）"),
+     "两实体 ex:path 均为 07_future/02_preview_features/03_safety_tags_preview.md（抽取重复节点）"),
     ("ex:BorrowSanitizerRuntimeTreeBorrowsViolationDetection",
      "ex:BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust", "E3-same-concept-xlayer",
-     "04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md 与 07_future/03_preview_features/24_borrow_sanitizer.md "
+     "04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md 与 07_future/02_preview_features/24_borrow_sanitizer.md "
      "均为 BorrowSanitizer/BSan 权威页（MCP 958；LLVM 插桩动态别名检测），跨 L4/L7 双页"),
     ("ex:BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust", "ex:BorrowSanitizerPreview",
      "E1-same-path-dup",
-     "两实体 ex:path 均为 07_future/03_preview_features/24_borrow_sanitizer.md（抽取重复节点）"),
+     "两实体 ex:path 均为 07_future/02_preview_features/24_borrow_sanitizer.md（抽取重复节点）"),
     ("ex:RustBelt", "ex:RustBelt_02separation", "E3-same-concept-xlayer",
      "两实体 prefLabel 均为 RustBelt；00_meta/02_sources/02_rustbelt_predicate_map.md 定位"
      "“将 RustBelt（Jung et al., POPL 2018）的核心形式化谓词映射到 L1-L3 工程概念”，"
@@ -118,7 +118,7 @@ CURATED_INSTANCE: list[tuple[str, str, str, str]] = [
      "02_intermediate/02_memory_management/01_memory_management.md:101 设 §5.7“自定义 Allocator"
      "（#[global_allocator]）”章节——自定义分配器是内存管理机制的实例"),
     ("ex:LockingPrimitives", "ex:Concurrency", "I3-self-evident-kind",
-     "03_advanced/00_concurrency/06_lock_free.md:11“深入探讨 Rust 中的无锁编程”（位于 00_concurrency 章节）；"
+     "03_advanced/00_concurrency/07_lock_free.md:11“深入探讨 Rust 中的无锁编程”（位于 00_concurrency 章节）；"
      "01_concurrency.md:181-182 将锁/原子操作列为并发同步手段——无锁原语是并发技术的一种"),
     ("ex:NewtypeAndWrapperTypes", "ex:DesignPatterns", "I1-category-listed",
      "06_ecosystem/03_design_patterns/01_patterns.md:66“| Newtype | 结构型 | 类型区分 + 约束 | struct Wrapper(T) |”"
@@ -133,7 +133,7 @@ CURATED_INSTANCE: list[tuple[str, str, str, str]] = [
      "01_foundation/00_start/03_closure_basics.md:2 关键术语“闭包 (Closure) · Fn · FnMut · FnOnce”；"
      ":7 Summary 将 Fn/FnMut/FnOnce（闭包类型）作为闭包概念的组成"),
     ("ex:ConstantEvaluation", "ex:CompileTimeExecution", "I3-self-evident-kind",
-     "07_future/03_preview_features/32_compile_time_execution.md:1 标题“编译期执行与常量求值”"
+     "07_future/02_preview_features/32_compile_time_execution.md:1 标题“编译期执行与常量求值”"
      "——常量求值（const eval）是编译期执行的实例"),
     ("ex:TypeErasure", "ex:DispatchMechanisms", "I2-category-section",
      "02_intermediate/00_traits/02_dispatch_mechanisms.md:8 Summary 覆盖“动态分发、trait objects、vtables”；"

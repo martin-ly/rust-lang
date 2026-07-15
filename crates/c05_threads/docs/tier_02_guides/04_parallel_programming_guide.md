@@ -1,7 +1,7 @@
 > **EN**: Parallel Programming Guide
 > **Summary**: Practical guide to data parallelism with Rayon, including parallel iterators, fork-join, divide-and-conquer algorithms, and performance tuning. This crate document now redirects to the canonical concept page.
 
-> **权威来源**: [concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md](../../../../concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
+> **权威来源**: [concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md](../../../../concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
 
 ## 主题速览
 

@@ -416,7 +416,7 @@ RUSTFLAGS="-Zsanitizer=borrow" cargo run --target x86_64-unknown-linux-gnu
 **关键限制**: 仅检测运行时可达路径；静态分析覆盖不如 Miri 全面。
 
 > **与 Miri 的对比**: Miri 解释执行 MIR（100-1000x  slowdown），BSan 编译期插桩（2-5x slowdown）。BSan 适合 CI 集成，Miri 适合深度调试。
-> **深度文档**: [BorrowSanitizer 深度解析](../../07_future/03_preview_features/24_borrow_sanitizer.md)
+> **深度文档**: [BorrowSanitizer 深度解析](../../07_future/02_preview_features/24_borrow_sanitizer.md)
 
 ---
 
@@ -473,7 +473,7 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 | [Miri](08_miri.md) | Rust MIR 解释器，动态检测 UB | [Miri GitHub](https://github.com/rust-lang/miri) |
 | [Tree Borrows](../01_ownership_logic/05_tree_borrows_deep_dive.md) | Rust 别名模型演进方向 | [Tree Borrows 论文/博客](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) |
 | [Stacked Borrows](../01_ownership_logic/05_tree_borrows_deep_dive.md) | 早期 Rust 别名模型 | [Stacked Borrows 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) |
-| [Safety Tags](../../07_future/03_preview_features/03_safety_tags_preview.md) | `unsafe` 安全契约机器可读标注（RFC #3842） | [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
+| [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md) | `unsafe` 安全契约机器可读标注（RFC #3842） | [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
 | [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md) | 运行时别名模型检测 | [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) |
 | [AutoVerus / Verus](07_autoverus.md) | SMT 演绎验证与 LLM 辅助自动证明 | [Verus GitHub](https://github.com/verus-lang/verus) · [AutoVerus 论文](https://arxiv.org/abs/2409.13082) |
 

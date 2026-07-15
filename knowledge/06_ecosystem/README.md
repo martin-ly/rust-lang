@@ -109,8 +109,8 @@
 ## 相关概念
 
 - [Rust for Linux (concept)](../../concept/07_future/04_research_and_experimental/04_rust_for_linux.md) — 操作系统内核中的内存安全
-- [Cranelift 后端 (concept)](../../concept/07_future/03_preview_features/16_cranelift_backend_preview.md) — 快速调试编译
-- [并行前端 (concept)](../../concept/07_future/03_preview_features/04_parallel_frontend_preview.md) — SALSA 3.0 与多核编译加速
+- [Cranelift 后端 (concept)](../../concept/07_future/02_preview_features/16_cranelift_backend_preview.md) — 快速调试编译
+- [并行前端 (concept)](../../concept/07_future/02_preview_features/04_parallel_frontend_preview.md) — SALSA 3.0 与多核编译加速
 
 ## 📚 模块 8: 国际化对齐
 

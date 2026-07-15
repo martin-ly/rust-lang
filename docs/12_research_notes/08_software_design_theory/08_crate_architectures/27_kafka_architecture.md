@@ -330,7 +330,7 @@ match producer.send(record, timeout).await {
 - [Tokio 异步运行时架构](06_tokio_architecture.md)
 - [Tracing 可观测性架构](19_tracing_architecture.md)
 - [异步编程模型](../../../../concept/03_advanced/01_async/01_async.md)
-- [分布式模式](../../../../concept/03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md)
+- [分布式模式](../../../../concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
 - [Redis / redis-rs 架构](23_redis_architecture.md) — 缓存与消息队列对比
 
 ---

@@ -17,7 +17,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Und — 理解副作用在编程语言中的本质与 Rust 的控制机制
 > **前置概念**: [Variable Model](../03_values_and_references/03_variable_model.md) · [Evaluation Strategies](../../04_formal/03_operational_semantics/04_evaluation_strategies.md) · [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)
-> **后置概念**: [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Effects System](../../07_future/03_preview_features/01_effects_system.md) · [Async](../../03_advanced/01_async/01_async.md)
+> **后置概念**: [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Effects System](../../07_future/02_preview_features/01_effects_system.md) · [Async](../../03_advanced/01_async/01_async.md)
 > **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > [Haskell Wiki — Referential Transparency](https://wiki.haskell.org/Referential_transparency) ·
@@ -214,7 +214,7 @@ fn process_unsafe(ptr: *mut i32) {  // unsafe 块表示未定义效果
 > [来源: [Rust Keyword Generics Initiative 2024](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)] ·
 > [来源: [Rust Project Goals 2025H1](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html)]
 >
-> **延伸阅读**: [L7 Effects System 预研](../../07_future/03_preview_features/01_effects_system.md) — Rust 效果系统的完整概念框架、学术谱系与演进路线图
+> **延伸阅读**: [L7 Effects System 预研](../../07_future/02_preview_features/01_effects_system.md) — Rust 效果系统的完整概念框架、学术谱系与演进路线图
 
 ---
 
@@ -824,7 +824,7 @@ fn main() {
 
 ## 相关概念
 
-- [对应测验](../11_quizzes/29_quiz_pl_foundations.md) — 通用 PL 基座（变量模型、求值策略、效果、控制流、数据抽象）
+- [对应测验](../11_quizzes/05_quiz_pl_foundations.md) — 通用 PL 基座（变量模型、求值策略、效果、控制流、数据抽象）
 
 ## 🧭 思维导图（Mindmap）
 

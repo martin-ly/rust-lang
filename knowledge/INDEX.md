@@ -137,7 +137,7 @@
 
 ### G
 
-- **generators** - [concept/07_future/03_preview_features/25_gen_blocks_preview.md](../concept/07_future/03_preview_features/25_gen_blocks_preview.md) - 🧪 Nightly 实验性（稳定时间待定）
+- **generators** - [concept/07_future/02_preview_features/25_gen_blocks_preview.md](../concept/07_future/02_preview_features/25_gen_blocks_preview.md) - 🧪 Nightly 实验性（稳定时间待定）
 - **generics** - [02_intermediate/generics.md](02_intermediate/03_generics.md)
 - **Golden Ratio** - [05_reference/math_constants.md](05_reference/02_math_constants.md)
 

@@ -52,9 +52,9 @@
 | `#![register_{attribute,lint}_tool]`（RFC #3808） | RFC merged（2026-06-10） | [RFC Book](https://rust-lang.github.io/rfcs/3808-register-tool.html) |
 | `todo!()` 不再触发 `unreachable_code`（RFC #3928） | RFC merged（2026-06-25） | [RFC Book](https://rust-lang.github.io/rfcs/3928-todo-overreach.html) |
 | Safety Tags（RFC #3842） | FCP / 讨论中 | [rfcs#3842](https://github.com/rust-lang/rfcs/pull/3842) |
-| Pin Ergonomics（`&pin mut` / `&pin const`） | nightly only（Project Goal 2026） | [预览页](../03_preview_features/14_pin_ergonomics_preview.md) |
-| Async Drop | nightly only | [预览页](../03_preview_features/22_async_drop_preview.md) |
-| Return Type Notation（RTN） | nightly only | [预览页](../03_preview_features/09_return_type_notation_preview.md) |
+| Pin Ergonomics（`&pin mut` / `&pin const`） | nightly only（Project Goal 2026） | [预览页](../02_preview_features/14_pin_ergonomics_preview.md) |
+| Async Drop | nightly only | [预览页](../02_preview_features/22_async_drop_preview.md) |
+| Return Type Notation（RTN） | nightly only | [预览页](../02_preview_features/09_return_type_notation_preview.md) |
 | Public/Private Dependencies（RFC #3516） | RFC merged，Cargo 实现跟踪中 | [RFC Book](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html) |
 
 > **维护约定**：每两周按 §7.1 频率核对本表；1.98.0 发布（2026-08-20）后将 beta 行迁移至 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)（骨架已建，2026-07-14），本页滚动为 1.99+ 跟踪。
@@ -116,7 +116,7 @@ fn process(node: &pin mut ListNode) {
 }
 ```
 
-**深度文档**: [15_pin_ergonomics_preview.md](../03_preview_features/14_pin_ergonomics_preview.md)
+**深度文档**: [15_pin_ergonomics_preview.md](../02_preview_features/14_pin_ergonomics_preview.md)
 
 **教学提示**: 这是 async/self-referential 类型的基础；稳定后将大幅简化 futures 和 pin-project 类 crate 的教学。
 
@@ -221,7 +221,7 @@ where
 }
 ```
 
-**深度文档**: [12_return_type_notation_preview.md](../03_preview_features/09_return_type_notation_preview.md)
+**深度文档**: [12_return_type_notation_preview.md](../02_preview_features/09_return_type_notation_preview.md)
 
 **1.98+ 展望**: RTN 可能在 1.98 或 1.99 进入 FCP，是 async-fn-in-traits 完全替代 `#[async_trait]` 的关键拼图。
 
@@ -254,7 +254,7 @@ impl AsyncDrop for AsyncFile {
 }
 ```
 
-**深度文档**: [18_async_drop_preview.md](../03_preview_features/22_async_drop_preview.md)
+**深度文档**: [18_async_drop_preview.md](../02_preview_features/22_async_drop_preview.md)
 
 ---
 
@@ -565,7 +565,7 @@ serde = { version = "1.0", public = true }
 - `#[safety::checked(...)]` 标注调用处已检查的条件
 - Clippy / rust-analyzer 未来可提供 IDE 支持
 
-**深度文档**: [08_safety_tags_preview.md](../03_preview_features/03_safety_tags_preview.md)（原 `33_safety_tags_in_formal.md` 已合并重定向）
+**深度文档**: [08_safety_tags_preview.md](../02_preview_features/03_safety_tags_preview.md)（原 `33_safety_tags_in_formal.md` 已合并重定向）
 
 ---
 
@@ -658,10 +658,10 @@ WASM 组件模型（Component Model）是 1.98 周期嵌入式的核心跟踪项
 
 - [Rust 1.98.0 稳定特性（跟踪骨架）](rust_1_98_stabilized.md)
 - [Rust 1.97 前沿特性预览](rust_1_97_preview.md)
-- [Pin Ergonomics 预览](../03_preview_features/14_pin_ergonomics_preview.md)
-- [Return Type Notation 预览](../03_preview_features/09_return_type_notation_preview.md)
-- [Async Drop 预览](../03_preview_features/22_async_drop_preview.md)
-- [Safety Tags](../03_preview_features/03_safety_tags_preview.md)
+- [Pin Ergonomics 预览](../02_preview_features/14_pin_ergonomics_preview.md)
+- [Return Type Notation 预览](../02_preview_features/09_return_type_notation_preview.md)
+- [Async Drop 预览](../02_preview_features/22_async_drop_preview.md)
+- [Safety Tags](../02_preview_features/03_safety_tags_preview.md)
 - [BorrowSanitizer](../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md)
 - [AutoVerus / Verus](../../04_formal/04_model_checking/07_autoverus.md)
 - [Tree Borrows 深度](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md)

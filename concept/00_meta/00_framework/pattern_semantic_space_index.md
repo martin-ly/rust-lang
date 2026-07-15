@@ -64,7 +64,7 @@ graph TD
 | **通用基础** | [Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) | GoF  creational / structural / behavioral 模式全集 |
 | **算法-模式桥接** | [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md) | 算法策略 ↔ 设计模式的映射关系 |
 | **并发与并行** | [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) | Actor、CSP、Fork-Join、Pipeline、Work Stealing |
-| **分布式系统** | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) | Circuit Breaker、Bulkhead、Retry、Saga、Leader Election |
+| **分布式系统** | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) | Circuit Breaker、Bulkhead、Retry、Saga、Leader Election |
 | **架构风格** | [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) | Layered、Hexagonal、Microkernel、Event-Driven |
 | **微服务** | [Microservice Patterns](../../06_ecosystem/03_design_patterns/05_microservice_patterns.md) | API Gateway、Service Discovery、CQRS、Event Sourcing |
 | **事件驱动** | [Event Driven Architecture](../../06_ecosystem/03_design_patterns/06_event_driven_architecture.md) | Pub/Sub、Event Bus、Stream Processing |
@@ -126,10 +126,10 @@ Pattern Composition Algebra (L6)
 
 | 你面临的问题 | 起点 | 延伸阅读 |
 |:---|:---|:---|
-| 如何选择正确的并发模型 | [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) |
+| 如何选择正确的并发模型 | [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) |
 | 如何设计可扩展的 API | [API Design Patterns](../../06_ecosystem/03_design_patterns/18_api_design_patterns.md) | [System Composability](../../06_ecosystem/03_design_patterns/04_system_composability.md) |
 | 如何构建事件驱动系统 | [Event Driven Architecture](../../06_ecosystem/03_design_patterns/06_event_driven_architecture.md) | [Reactive Programming](../../06_ecosystem/04_web_and_networking/09_reactive_programming.md) |
-| 如何处理分布式失败 | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) | [CQRS and Event Sourcing](../../06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md) |
+| 如何处理分布式失败 | [Parallel Distributed Pattern Spectrum](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) | [CQRS and Event Sourcing](../../06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md) |
 
 ## 五、模式选择决策树
 

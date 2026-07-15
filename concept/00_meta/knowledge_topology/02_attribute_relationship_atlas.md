@@ -37,7 +37,7 @@
 | [Rust 核心术语英中对照表](../../00_meta/01_terminology/01_terminology_glossary.md) | L0 元信息层 | 初学者 | 综述级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 所有英文术语与 [TRPL](https://doc.rust-lang.org/book/title-page.html) 及 [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) 保持一致， 确保学习者能顺利对接 crates.io、RFC、GitHub Issue 等英文生态。 |
 | [Concept 文件双语模板 v2](../../00_meta/01_terminology/02_bilingual_template_v2.md) | L0 元信息层 | 初学者 \| 进阶 \| 研究者 | — | — | L1-L6 | — |
 | [Concept 文件双语模板](../../00_meta/01_terminology/03_bilingual_template.md) | L0 元信息层 | 初学者 \| 进阶 \| 研究者 | — | — | — | — |
-| [TRPL 3rd Ed 章节映射](../../00_meta/01_trpl_3rd_ed_mapping.md) | L0 元信息层 | — | — | — | — | — |
+| [TRPL 3rd Ed 章节映射](../06_trpl_3rd_ed_mapping.md) | L0 元信息层 | — | — | — | — | — |
 | [权威来源映射表](../../00_meta/02_sources/01_authority_source_map.md) | L0 元信息层 | 进阶 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [RustBelt 谓词映射图](../../00_meta/02_sources/02_rustbelt_predicate_map.md) | L0 元信息层 | 研究者 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [权威来源清单与知识来源关系分析](../../00_meta/02_sources/03_sources.md) | L0 元信息层 | 进阶 | 研究者级 | — | L3 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
@@ -101,7 +101,7 @@
 | [变量模型：从通用 PL 视角看 Rust 的所有权](../../01_foundation/03_values_and_references/03_variable_model.md) | L1 基础概念层 | 初学者 | 综述级 | S | L1-L4 | — |
 | [控制流：表达式导向的流程控制](../../01_foundation/04_control_flow/01_control_flow.md) | L1 基础概念层 | 初学者 | 综述级 | — | L2-L3 | — |
 | [模式匹配](../../01_foundation/04_control_flow/02_patterns.md) | L1 基础概念层 | 初学者 | 综述级 | S | L2-L3 | Pattern → Refutability → Exhaustiveness |
-| [语句与表达式](../../01_foundation/04_control_flow/03_statements_and_expressions.md) | L1 基础概念层 | 初学者 | 综述级 | S | L2-L3 | Expression → Evaluation Order → Statement Sequencing |
+| [语句与表达式](../../01_foundation/04_control_flow/04_statements_and_expressions.md) | L1 基础概念层 | 初学者 | 综述级 | S | L2-L3 | Expression → Evaluation Order → Statement Sequencing |
 | [集合类型：Rust 标准库的数据结构谱系](../../01_foundation/05_collections/01_collections.md) | L1 基础概念层 | 初学者 | 综述级 | A | L2-L4 | — |
 | [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](../../01_foundation/05_collections/02_collections_advanced.md) | L1 基础概念层 | 初学者 | 综述级 | — | L4-L5 | — |
 | [字符串与文本：Rust 的 Unicode 处理与格式化系统](../../01_foundation/06_strings_and_text/01_strings_and_text.md) | L1 基础概念层 | 初学者 | 综述级 | — | L2-L4 | — |
@@ -163,10 +163,10 @@
 | [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) | L3 高级概念层 | 专家 | 专家级 | — | L3-L5 | — |
 | [Send 与 Sync：Auto Trait 的并发安全契约](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) | L3 高级概念层 | 专家 | 专家级 | S | L3-L4 | — |
 | [并发 模式：从消息 传递到锁自由的数据结构](../../03_advanced/00_concurrency/03_concurrency_patterns.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | — |
-| [Cross-Platform Concurrency](../../03_advanced/00_concurrency/04_cross_platform_concurrency.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | — |
-| [原子操作与内存序：无锁并发的精确控制](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | — |
-| [无锁编程与内存模型](../../03_advanced/00_concurrency/06_lock_free.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | — |
-| [并行与分布式模式谱系：从线程池到共识算法](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) | L3 高级概念层 | 专家 | 专家级 | — | L3-L6 | — |
+| [Cross-Platform Concurrency](../../03_advanced/00_concurrency/05_cross_platform_concurrency.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | — |
+| [原子操作与内存序：无锁并发的精确控制](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | — |
+| [无锁编程与内存模型](../../03_advanced/00_concurrency/07_lock_free.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | — |
+| [并行与分布式模式谱系：从线程池到共识算法](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) | L3 高级概念层 | 专家 | 专家级 | — | L3-L6 | — |
 | [Async/Await](../../03_advanced/01_async/01_async.md) | L3 高级概念层 | 专家 | 专家级 | — | L3-L5 | — |
 | [Async/Await 高级主题](../../03_advanced/01_async/02_async_advanced.md) | L3 高级概念层 | 专家 | 专家级 | — | — | — |
 | [异步模式：从 Future 到生产级并发](../../03_advanced/01_async/03_async_patterns.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | — |
@@ -440,44 +440,44 @@
 | [Edition 2024 完全指南：新特性与迁移策略](../../07_future/01_edition_roadmap/02_edition_guide.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L3-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Rust Edition 机制与迁移指南](../../07_future/01_edition_roadmap/03_rust_edition_guide.md) | L7 前沿趋势层 | 研究者 | 研究级 | — | L2-L3 | — |
 | [Rust 2027 Edition 及未来路线图](../../07_future/01_edition_roadmap/04_roadmap.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Effects System: Concept Pre-study](../../07_future/03_preview_features/01_effects_system.md) | L7 前沿趋势层 | 专家 | 综述级 | S | L4-L7 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](../../07_future/03_preview_features/02_mcdc_coverage_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/03_safety_tags_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [并行 前端编译预研：Rust 编译器 的多核扩展](../../07_future/03_preview_features/04_parallel_frontend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [派生 CoercePointee 预研：智能指针的自动类型强制](../../07_future/03_preview_features/05_derive_coerce_pointee_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/03_preview_features/06_const_trait_impl_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Stable ABI Preview](../../07_future/03_preview_features/07_stable_abi_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L2-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Inline Const Pattern 预览](../../07_future/03_preview_features/08_inline_const_pattern_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | A | L2-L3 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/03_preview_features/09_return_type_notation_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [`must_not_suspend` Lint Preview](../../07_future/03_preview_features/10_must_not_suspend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | P | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/03_preview_features/11_unsafe_fields_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/03_preview_features/12_ferrocene_preview.md) | L7 前沿趋势层 | 专家 | 专家级 | — | L4-L5 | — |
-| [Lifetime Capture in `impl Trait` Preview](../../07_future/03_preview_features/13_lifetime_capture_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/03_preview_features/14_pin_ergonomics_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | L4-L5 | — |
-| [特质中返回位置 impl Trait（RPITIT）预览](../../07_future/03_preview_features/15_rpitit_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/03_preview_features/16_cranelift_backend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [TAIT Preview](../../07_future/03_preview_features/17_type_alias_impl_trait_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Arbitrary Self Types 预览：自定义方法接收器](../../07_future/03_preview_features/18_arbitrary_self_types_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Const Trait 实现预览](../../07_future/03_preview_features/19_const_trait_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Ergonomic Ref-Counting 预研：人机工学引用计数](../../07_future/03_preview_features/20_ergonomic_ref_counting_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust 语言规范预研：从参考文档到形式化规范](../../07_future/03_preview_features/21_rust_specification_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/22_async_drop_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Field Projections 预览：安全的字段级投影](../../07_future/03_preview_features/23_field_projections_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/24_borrow_sanitizer.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/工具链文档 |
-| [Gen Blocks 预研：超越异步的泛化生成器](../../07_future/03_preview_features/25_gen_blocks_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [`std::autodiff`：Rust 官方自动微分前沿追踪](../../07_future/03_preview_features/26_std_autodiff_preview.md) | L7 前沿趋势层 | 研究者 | 实验级 | — | L5-L6 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [cargo-semver-checks：从社区工具到 Cargo 官方集成](../../07_future/03_preview_features/27_cargo_semver_checks_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | P | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [WASM Target Evolution Preview](../../07_future/03_preview_features/28_wasm_target_evolution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L2-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/03_preview_features/29_aarch64_sve_sme_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Rust in Space Preview](../../07_future/03_preview_features/30_rust_in_space.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [Specialization：Trait 实现的精确化与重叠解析](../../07_future/03_preview_features/31_specialization_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [编译期执行与常量求值](../../07_future/03_preview_features/32_compile_time_execution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [AutoVerus / Verus 预览跟踪](../../07_future/03_preview_features/33_autoverus_preview.md) | L7 前沿趋势层 | 进阶 | 专家级 | — | L7（版本与生态跟踪） | N/A — 形式化验证工具/AI 辅助证明研究跟踪 |
-| [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/03_preview_features/34_open_enums_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [f16 / f128 预研：半精度与四精度浮点类型](../../07_future/03_preview_features/35_f16_f128_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/跟踪性文档，不涉及形式化定理链 |
-| [UnsafePinned 预研：可变引用别名语义的精确标注](../../07_future/03_preview_features/36_unsafe_pinned_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/跟踪性文档，不涉及形式化定理链 |
-| [Default Field Values 预研：结构体字段默认值](../../07_future/03_preview_features/37_default_field_values_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L2-L3 | N/A — 描述性/跟踪性文档，不涉及形式化定理链 |
-| [Complex Numbers 预研：标准库复数类型](../../07_future/03_preview_features/38_complex_numbers_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L2-L3 | N/A — 描述性/跟踪性文档，不涉及形式化定理链 |
+| [Effects System: Concept Pre-study](../../07_future/02_preview_features/01_effects_system.md) | L7 前沿趋势层 | 专家 | 综述级 | S | L4-L7 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](../../07_future/02_preview_features/02_mcdc_coverage_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/02_preview_features/03_safety_tags_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [并行 前端编译预研：Rust 编译器 的多核扩展](../../07_future/02_preview_features/04_parallel_frontend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [派生 CoercePointee 预研：智能指针的自动类型强制](../../07_future/02_preview_features/05_derive_coerce_pointee_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/02_preview_features/06_const_trait_impl_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Stable ABI Preview](../../07_future/02_preview_features/07_stable_abi_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L2-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Inline Const Pattern 预览](../../07_future/02_preview_features/08_inline_const_pattern_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | A | L2-L3 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](../../07_future/02_preview_features/09_return_type_notation_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [`must_not_suspend` Lint Preview](../../07_future/02_preview_features/10_must_not_suspend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | P | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/02_preview_features/11_unsafe_fields_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/02_preview_features/12_ferrocene_preview.md) | L7 前沿趋势层 | 专家 | 专家级 | — | L4-L5 | — |
+| [Lifetime Capture in `impl Trait` Preview](../../07_future/02_preview_features/13_lifetime_capture_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/02_preview_features/14_pin_ergonomics_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | L4-L5 | — |
+| [特质中返回位置 impl Trait（RPITIT）预览](../../07_future/02_preview_features/15_rpitit_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/02_preview_features/16_cranelift_backend_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [TAIT Preview](../../07_future/02_preview_features/17_type_alias_impl_trait_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Arbitrary Self Types 预览：自定义方法接收器](../../07_future/02_preview_features/18_arbitrary_self_types_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Const Trait 实现预览](../../07_future/02_preview_features/19_const_trait_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Ergonomic Ref-Counting 预研：人机工学引用计数](../../07_future/02_preview_features/20_ergonomic_ref_counting_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust 语言规范预研：从参考文档到形式化规范](../../07_future/02_preview_features/21_rust_specification_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Async Drop：异步资源的优雅销毁](../../07_future/02_preview_features/22_async_drop_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Field Projections 预览：安全的字段级投影](../../07_future/02_preview_features/23_field_projections_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [BorrowSanitizer：动态别名规则验证工具](../../07_future/02_preview_features/24_borrow_sanitizer.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/工具链文档 |
+| [Gen Blocks 预研：超越异步的泛化生成器](../../07_future/02_preview_features/25_gen_blocks_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [`std::autodiff`：Rust 官方自动微分前沿追踪](../../07_future/02_preview_features/26_std_autodiff_preview.md) | L7 前沿趋势层 | 研究者 | 实验级 | — | L5-L6 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [cargo-semver-checks：从社区工具到 Cargo 官方集成](../../07_future/02_preview_features/27_cargo_semver_checks_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | P | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [WASM Target Evolution Preview](../../07_future/02_preview_features/28_wasm_target_evolution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L2-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [AArch64 SVE / SME：可伸缩向量扩展预览](../../07_future/02_preview_features/29_aarch64_sve_sme_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Rust in Space Preview](../../07_future/02_preview_features/30_rust_in_space.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [Specialization：Trait 实现的精确化与重叠解析](../../07_future/02_preview_features/31_specialization_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [编译期执行与常量求值](../../07_future/02_preview_features/32_compile_time_execution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [AutoVerus / Verus 预览跟踪](../../07_future/02_preview_features/33_autoverus_preview.md) | L7 前沿趋势层 | 进阶 | 专家级 | — | L7（版本与生态跟踪） | N/A — 形式化验证工具/AI 辅助证明研究跟踪 |
+| [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/02_preview_features/34_open_enums_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [f16 / f128 预研：半精度与四精度浮点类型](../../07_future/02_preview_features/35_f16_f128_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L3-L4 | N/A — 描述性/跟踪性文档，不涉及形式化定理链 |
+| [UnsafePinned 预研：可变引用别名语义的精确标注](../../07_future/02_preview_features/36_unsafe_pinned_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L4-L5 | N/A — 描述性/跟踪性文档，不涉及形式化定理链 |
+| [Default Field Values 预研：结构体字段默认值](../../07_future/02_preview_features/37_default_field_values_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L2-L3 | N/A — 描述性/跟踪性文档，不涉及形式化定理链 |
+| [Complex Numbers 预研：标准库复数类型](../../07_future/02_preview_features/38_complex_numbers_preview.md) | L7 前沿趋势层 | 专家 | 实验级 | S | L2-L3 | N/A — 描述性/跟踪性文档，不涉及形式化定理链 |
 | [AI × Rust：生成-验证闭环与确定性容器](../../07_future/04_research_and_experimental/01_ai_integration.md) | L7 前沿趋势层 | 专家 | 实验级 | P | L4-L7 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | L7 前沿趋势层 | 专家 | 实验级 | P | L5-L7 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | L7 前沿趋势层 | 专家 | 综述级 | — | L4-L7 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |

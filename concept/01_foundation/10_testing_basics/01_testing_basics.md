@@ -607,7 +607,7 @@ graph TD
 
 ## 相关概念
 
-- [对应测验](../11_quizzes/26_quiz_modules_testing.md) — 模块系统与测试（mod/use/pub、可见性、单元/集成测试）
+- [对应测验](../11_quizzes/03_quiz_modules_testing.md) — 模块系统与测试（mod/use/pub、可见性、单元/集成测试）
 - [Modules](../07_modules_and_items/01_modules_and_paths.md) — 模块（Module）系统
 - [Error Handling](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md) — 错误处理（Error Handling）
 - [Testing Strategies](../../06_ecosystem/09_testing_and_quality/03_testing.md) — 测试策略

@@ -16,5 +16,5 @@
 | 并发模式总览 | [concept/03_advanced/00_concurrency/03_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md) |
 | 并行搜索提前返回 | [concept/03_advanced/00_concurrency/03_concurrency_patterns.md#补充视角c05-crate-并发模式实践](../../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md) |
 | 细粒度锁模式 | [concept/03_advanced/00_concurrency/03_concurrency_patterns.md](../../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md) |
-| 无锁数据结构 | [concept/03_advanced/00_concurrency/06_lock_free.md](../../../../concept/03_advanced/00_concurrency/06_lock_free.md) |
+| 无锁数据结构 | [concept/03_advanced/00_concurrency/07_lock_free.md](../../../../concept/03_advanced/00_concurrency/07_lock_free.md) |
 | 异步与线程混合 | [concept/03_advanced/01_async/01_async.md](../../../../concept/03_advanced/01_async/01_async.md) |

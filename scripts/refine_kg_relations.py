@@ -89,7 +89,7 @@ CURATED_CEX: list[tuple[str, str, str]] = [
     ("ex:SafeAndEffectiveUnsafeRust", "ex:MemoryManagement",
      "03_advanced/02_unsafe/01_unsafe.md:1422 “❌ 反例: Use-after-free（Miri 会报错）”"),
     ("ex:LockingPrimitives", "ex:Concurrency",
-     "03_advanced/00_concurrency/06_lock_free.md:409 “命题: 无锁总是优于锁” → :422 “无锁只在高竞争场景显著优于锁”"),
+     "03_advanced/00_concurrency/07_lock_free.md:409 “命题: 无锁总是优于锁” → :422 “无锁只在高竞争场景显著优于锁”"),
     ("ex:UnsafeCell", "ex:Borrowing",
      "02_intermediate/02_memory_management/02_interior_mutability.md UnsafeCell 是借用检查器的受控反例"),
     ("ex:RawPointers", "ex:Lifetimes",

@@ -549,7 +549,7 @@ graph TD
 
 ## 相关概念
 
-- [对应测验](../11_quizzes/27_quiz_closures_iterators.md) — 闭包与迭代器（捕获、Fn traits、惰性求值、适配器）
+- [对应测验](../11_quizzes/04_quiz_closures_iterators.md) — 闭包与迭代器（捕获、Fn traits、惰性求值、适配器）
 - [Traits](../../02_intermediate/00_traits/01_traits.md) — Trait 系统
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 所有权（Ownership）
 - [Iterator](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) — 迭代器（Iterator）

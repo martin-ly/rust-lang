@@ -8,10 +8,10 @@
 > **受众**: [进阶 / 研究者]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L4-L5
-> **权威来源**: 本文件为 `concept/` 权威页：线性化形式定义与一致性谱系的唯一深度解释；[L3 谱系页](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) §6.2 仅保留导航式概览并链接回本页。
+> **权威来源**: 本文件为 `concept/` 权威页：线性化形式定义与一致性谱系的唯一深度解释；[L3 谱系页](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) §6.2 仅保留导航式概览并链接回本页。
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Ana — 分析并发对象正确性条件及其证明方法
-> **前置概念**: [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L3 无锁结构谱系](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) · [L4 Hoare 逻辑](../03_operational_semantics/02_hoare_logic.md)
+> **前置概念**: [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L3 无锁结构谱系](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) · [L4 Hoare 逻辑](../03_operational_semantics/02_hoare_logic.md)
 > **后置概念**: [进程代数与 Rust](01_process_calculi_for_rust.md) · [L6 CRDT 谱系](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md) · [L6 因果序与向量时钟](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md)
 
 ---
@@ -168,7 +168,7 @@ complete(H)   ::= 删掉 H 中所有「有调用无返回」的未完成操作
 
 ## 四、一致性谱系与 CAP 的关系
 
-> **分工声明**: 本页是谱系的**形式定义权威页**；[L3 谱系页 §6.2](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) 保留导航式概览（强度排序图 + Rust 生态映射），不重复本页定义。
+> **分工声明**: 本页是谱系的**形式定义权威页**；[L3 谱系页 §6.2](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) 保留导航式概览（强度排序图 + Rust 生态映射），不重复本页定义。
 
 ```text
 一致性强度谱系（从强到弱；⇒ 表示「强于」，即满足前者 ⟹ 满足后者）：
@@ -314,7 +314,7 @@ fn pop_wrong(&self) -> Option<T> {
 
 - [L4 进程代数与 Rust](01_process_calculi_for_rust.md) —— 消息传递语境的形式骨架（本页是共享内存语境）
 - [L4 Actor 形式语义](03_actor_semantics.md) —— 无共享状态语境的正确性条件
-- [L3 并行与分布式模式谱系 §6.2](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) —— 一致性谱系的导航式概览（定义以本页为准）
+- [L3 并行与分布式模式谱系 §6.2](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) —— 一致性谱系的导航式概览（定义以本页为准）
 - [L6 CRDT 谱系](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md) —— 最终一致性的可证明收敛形式
 - [L6 因果序与向量时钟](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md) —— 因果一致性的形式化机制
 - [L6 分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) —— Raft 如何在多机实现线性化语义
@@ -342,7 +342,7 @@ fn pop_wrong(&self) -> Option<T> {
 - Treiber, R. K. *Systems Programming: Coping with Parallelism*. IBM RJ 5118, 1986.
 - [std::sync::atomic — Rust 标准库文档](https://doc.rust-lang.org/std/sync/atomic/)（Treiber 实例的 `AtomicPtr`/`Ordering` 契约）
 
-> **相关文件**: [同层：进程代数](01_process_calculi_for_rust.md) · [同层：Actor 语义](03_actor_semantics.md) · [L3 谱系概览](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) · [L6 CRDT](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)
+> **相关文件**: [同层：进程代数](01_process_calculi_for_rust.md) · [同层：Actor 语义](03_actor_semantics.md) · [L3 谱系概览](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) · [L6 CRDT](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-12 ｜ **状态**: ✅ W5-2 新建（Rust 1.97 对齐）
 

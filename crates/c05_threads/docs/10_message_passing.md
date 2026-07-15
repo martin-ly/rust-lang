@@ -2,7 +2,6 @@
 
 > **EN**: Message Passing Patterns (redirect stub)
 > **Summary**: Duplicate topic stub; its unique topic index (Actor model, typed channels, backpressure, pub-sub) has been merged into the main message-passing page.
-
 > **权威来源**: 本文件为同主题重复 stub，独特主题索引已并入主干：
 > [`03_message_passing.md`](03_message_passing.md)
 >

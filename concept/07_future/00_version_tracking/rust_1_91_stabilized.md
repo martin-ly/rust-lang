@@ -30,7 +30,7 @@
 | C 风格可变参数函数稳定（`sysv64`/`win64`/`efiapi`/`aapcs` ABI） | 语言 / FFI | 直接声明 C variadic 接口（如 `printf` 风格绑定） | [Release Blog](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) |
 | `dangling_pointers_from_locals` lint | 语言 / lint | 局部变量悬挂指针编译期预警 | [releases.rs](https://releases.rs/docs/1.91.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |
 | `{integer}::strict_*` 系列方法 | 标准库 / 整数 | 严格溢出语义（溢出即 panic），可移植位精确算法 | [releases.rs](https://releases.rs/docs/1.91.0/) |
-| `AtomicPtr::fetch_ptr_add/sub`、`fetch_or/and/xor` | 标准库 / 并发 | 无锁指针算术与位掩码原子操作 | [releases.rs](https://releases.rs/docs/1.91.0/) · [原子与内存序](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) |
+| `AtomicPtr::fetch_ptr_add/sub`、`fetch_or/and/xor` | 标准库 / 并发 | 无锁指针算术与位掩码原子操作 | [releases.rs](https://releases.rs/docs/1.91.0/) · [原子与内存序](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) |
 | `ptr::with_exposed_provenance(_mut)` | 内存模型 / unsafe | 指针来源（provenance）显式暴露，整数↔指针往返 | [releases.rs](https://releases.rs/docs/1.91.0/) · [内存模型](../../03_advanced/02_unsafe/06_memory_model.md) |
 | Cargo `build.build-dir` 稳定 | Cargo | 中间构建产物目录自定义（与 `target-dir` 分离） | [releases.rs](https://releases.rs/docs/1.91.0/) · [Cargo 配置](../../06_ecosystem/01_cargo/18_cargo_configuration.md) |
 | 内部升级 LLVM 21 | 编译器内部 | 新优化通道与目标支持 | [releases.rs](https://releases.rs/docs/1.91.0/) |

@@ -824,9 +824,9 @@ graph TD
 | Rust vs C++ | [`../05_comparative/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | 系统领域对比 |
 | Rust vs Go | [`../05_comparative/02_rust_vs_go.md`](../../05_comparative/01_systems_languages/03_rust_vs_go.md) | Web 后端对比 |
 | 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) | 领域安全约束 |
-| AI × Rust | [`../07_future/01_ai_integration.md`](../../07_future/04_research_and_experimental/01_ai_integration.md) | AI 应用领域 |
-| 形式化方法 | [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | 安全关键领域验证 |
-| 语言演进 | [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md) | 领域能力演进 |
+| AI × Rust | [`../07_future/04_research_and_experimental/01_ai_integration.md`](../../07_future/04_research_and_experimental/01_ai_integration.md) | AI 应用领域 |
+| 形式化方法 | [`../07_future/04_research_and_experimental/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md) | 安全关键领域验证 |
+| 语言演进 | [`../07_future/04_research_and_experimental/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md) | 领域能力演进 |
 
 ### 编译验证：Web 后端最小可运行示例
 
@@ -1186,7 +1186,7 @@ graph TD
 > **过渡: L6 → L7**
 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 > 应用领域是技术演进的试验场：WASM 推动 Rust 的 `no_std` 生态成熟、AI 推理推动 `unsafe` 张量操作的封装标准化、嵌入式推动 `const generics` 的编译期计算。Rust 的未来方向由实际应用需求驱动。
-> 未来方向见 [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)。
+> 未来方向见 [`../07_future/04_research_and_experimental/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)。
 
 ---
 

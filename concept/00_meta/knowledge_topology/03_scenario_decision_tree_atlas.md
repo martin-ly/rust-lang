@@ -46,7 +46,7 @@ flowchart LR
 |:---|:---|:---|
 | 数据是否需要在函数调用后继续使用？ | 返回值 / 借用 / `Rc`/`Arc` | [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md), [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md), [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md) |
 | 是否需要在多个所有者之间共享只读数据？ | `Rc<T>` / `Arc<T>` | [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md), [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) |
-| 是否需要在不可变引用下修改内部状态？ | `Cell` / `RefCell` / `Mutex` | [Interior Mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md), [Lock-free](../../03_advanced/00_concurrency/06_lock_free.md) |
+| 是否需要在不可变引用下修改内部状态？ | `Cell` / `RefCell` / `Mutex` | [Interior Mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md), [Lock-free](../../03_advanced/00_concurrency/07_lock_free.md) |
 | 堆分配还是栈分配？ | `Box<T>` / 栈数组 / 自定义分配器 | [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md), [Custom Allocators](../../03_advanced/06_low_level_patterns/01_custom_allocators.md) |
 | 是否需要写时克隆或零拷贝？ | `Cow<T>` / 切片借用 | [Cow and Borrowed](../../02_intermediate/02_memory_management/03_cow_and_borrowed.md), [Zero-copy Parsing](../../03_advanced/06_low_level_patterns/02_zero_copy_parsing.md) |
 
@@ -55,7 +55,7 @@ flowchart LR
 | 决策问题 | 候选方案 | 关键概念页 |
 |:---|:---|:---|
 | 任务是否需要共享可变状态？ | `Mutex` / `RwLock` / 消息通道 | [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md), [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) |
-| 是否需要无锁/原子操作？ | `Atomic*` + Memory Ordering | [Atomics and Memory Ordering](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md), [Lock-free](../../03_advanced/00_concurrency/06_lock_free.md) |
+| 是否需要无锁/原子操作？ | `Atomic*` + Memory Ordering | [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md), [Lock-free](../../03_advanced/00_concurrency/07_lock_free.md) |
 | I/O 密集型还是 CPU 密集型？ | `async`/await / 线程池 | [Async/Await](../../03_advanced/01_async/01_async.md), [Async Patterns](../../03_advanced/01_async/03_async_patterns.md) |
 | 自引用类型如何跨 await 点保存？ | `Pin<Box<Self>>` / `Pin<&mut Self>` | [Pin and Unpin](../../03_advanced/01_async/08_pin_unpin.md), [Async Closures](../../03_advanced/01_async/07_async_closures.md) |
 
@@ -88,7 +88,7 @@ flowchart LR
 | 决策问题 | 候选方案 | 关键概念页 |
 |:---|:---|:---|
 | 单 crate 还是多 crate 工作区？ | Workspace / single package | [Cargo Workspaces](../../06_ecosystem/01_cargo/14_cargo_workspaces.md), [Cargo Getting Started](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) |
-| 依赖版本冲突如何解决？ | SemVer / lockfile / resolver | [Cargo Dependency Resolution](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md), [cargo-semver-checks 预研](../../07_future/03_preview_features/27_cargo_semver_checks_preview.md) |
+| 依赖版本冲突如何解决？ | SemVer / lockfile / resolver | [Cargo Dependency Resolution](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md), [cargo-semver-checks 预研](../../07_future/02_preview_features/27_cargo_semver_checks_preview.md) |
 | 发布前需要哪些质量门禁？ | `clippy` / `rustfmt` / tests / docs | [Testing Strategies](../../06_ecosystem/09_testing_and_quality/01_testing_strategies.md), [DevOps and CI/CD](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) |
 
 ---
@@ -390,8 +390,8 @@ flowchart TD
 | [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) | 决策/场景节 ×5 · mermaid 判定图 ×6 | 决策/边界判定树（Decision / Boundary Tree） · "共享状态 vs 消息传递？" 决策树 |
 | [Send 与 Sync：Auto Trait 的并发安全契约](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 决策树：类型需要跨线程时怎么办 |
 | [并发 模式：从消息 传递到锁自由的数据结构](../../03_advanced/00_concurrency/03_concurrency_patterns.md) | 决策/场景节 ×2 · mermaid 判定图 ×1 | 模式适用场景 · 决策树 |
-| [原子操作与内存序：无锁并发的精确控制](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
-| [无锁编程与内存模型](../../03_advanced/00_concurrency/06_lock_free.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
+| [原子操作与内存序：无锁并发的精确控制](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
+| [无锁编程与内存模型](../../03_advanced/00_concurrency/07_lock_free.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
 | [Async/Await](../../03_advanced/01_async/01_async.md) | 决策/场景节 ×8 · mermaid 判定图 ×3 | 反命题决策树（Counter-proposition Decision Tre… · 决策/边界判定树（Decision / Boundary Tree） |
 | [Async/Await 高级主题](../../03_advanced/01_async/02_async_advanced.md) | 决策/场景节 ×1 | 测验 3：spawn_blocking 的使用场景（应用层） |
 | [异步模式：从 Future 到生产级并发](../../03_advanced/01_async/03_async_patterns.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
@@ -578,28 +578,28 @@ flowchart TD
 | [Rust 1.92 稳定特性](../../07_future/00_version_tracking/rust_1_92_stabilized.md) | 决策/场景节 ×2 | 使用场景 · 实际应用场景 |
 | [Edition 2024 完全指南：新特性与迁移策略](../../07_future/01_edition_roadmap/02_edition_guide.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
 | [Rust 2027 Edition 及未来路线图](../../07_future/01_edition_roadmap/04_roadmap.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
-| [Effects System: Concept Pre-study](../../07_future/03_preview_features/01_effects_system.md) | mermaid 判定图 ×3 | mermaid 判定节点图 |
-| [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](../../07_future/03_preview_features/02_mcdc_coverage_preview.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
-| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/03_preview_features/03_safety_tags_preview.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 使用场景 |
-| [并行 前端编译预研：Rust 编译器 的多核扩展](../../07_future/03_preview_features/04_parallel_frontend_preview.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
-| [派生 CoercePointee 预研：智能指针的自动类型强制](../../07_future/03_preview_features/05_derive_coerce_pointee_preview.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
-| [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/03_preview_features/06_const_trait_impl_preview.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
-| [Stable ABI Preview](../../07_future/03_preview_features/07_stable_abi_preview.md) | 决策/场景节 ×1 | 测验 5：哪些场景最需要 Rust 的稳定 ABI？（理解层） |
-| [Inline Const Pattern 预览](../../07_future/03_preview_features/08_inline_const_pattern_preview.md) | 决策/场景节 ×1 | 适用场景 |
-| [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/03_preview_features/11_unsafe_fields_preview.md) | mermaid 判定图 ×3 | mermaid 判定节点图 |
-| [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/03_preview_features/12_ferrocene_preview.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 选型决策树 |
-| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/03_preview_features/14_pin_ergonomics_preview.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
-| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/03_preview_features/16_cranelift_backend_preview.md) | 决策/场景节 ×2 · mermaid 判定图 ×1 | 使用场景分析 · 测验 5：Cranelift 是由谁开发的？它还可以用于什么场景？（理解层） |
-| [Arbitrary Self Types 预览：自定义方法接收器](../../07_future/03_preview_features/18_arbitrary_self_types_preview.md) | 决策/场景节 ×4 | 使用场景 · 场景 1：内核编程（Rust for Linux） |
-| [Rust 语言规范预研：从参考文档到形式化规范](../../07_future/03_preview_features/21_rust_specification_preview.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
-| [Async Drop：异步资源的优雅销毁](../../07_future/03_preview_features/22_async_drop_preview.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 设计决策矩阵 |
-| [Field Projections 预览：安全的字段级投影](../../07_future/03_preview_features/23_field_projections_preview.md) | 决策/场景节 ×4 | 使用场景 · 场景 1：MMIO 寄存器访问（嵌入式/内核） |
-| [BorrowSanitizer：动态别名规则验证工具](../../07_future/03_preview_features/24_borrow_sanitizer.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
-| [Gen Blocks 预研：超越异步的泛化生成器](../../07_future/03_preview_features/25_gen_blocks_preview.md) | mermaid 判定图 ×2 | mermaid 判定节点图 |
-| [Rust in Space Preview](../../07_future/03_preview_features/30_rust_in_space.md) | 决策/场景节 ×1 | 核心应用场景 |
-| [Specialization：Trait 实现的精确化与重叠解析](../../07_future/03_preview_features/31_specialization_preview.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 设计决策矩阵 |
-| [编译期执行与常量求值](../../07_future/03_preview_features/32_compile_time_execution.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
-| [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/03_preview_features/34_open_enums_preview.md) | mermaid 判定图 ×3 | mermaid 判定节点图 |
+| [Effects System: Concept Pre-study](../../07_future/02_preview_features/01_effects_system.md) | mermaid 判定图 ×3 | mermaid 判定节点图 |
+| [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](../../07_future/02_preview_features/02_mcdc_coverage_preview.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
+| [Safety Tags 概念预研：Unsafe 契约的机器可读标注](../../07_future/02_preview_features/03_safety_tags_preview.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 使用场景 |
+| [并行 前端编译预研：Rust 编译器 的多核扩展](../../07_future/02_preview_features/04_parallel_frontend_preview.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
+| [派生 CoercePointee 预研：智能指针的自动类型强制](../../07_future/02_preview_features/05_derive_coerce_pointee_preview.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
+| [Const Trait Impl 预研：常量上下文中的 Trait 泛化](../../07_future/02_preview_features/06_const_trait_impl_preview.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
+| [Stable ABI Preview](../../07_future/02_preview_features/07_stable_abi_preview.md) | 决策/场景节 ×1 | 测验 5：哪些场景最需要 Rust 的稳定 ABI？（理解层） |
+| [Inline Const Pattern 预览](../../07_future/02_preview_features/08_inline_const_pattern_preview.md) | 决策/场景节 ×1 | 适用场景 |
+| [Unsafe Fields 预研：字段级安全边界的精确标注](../../07_future/02_preview_features/11_unsafe_fields_preview.md) | mermaid 判定图 ×3 | mermaid 判定节点图 |
+| [Ferrocene：已交付的 Rust 安全关键认证工具链](../../07_future/02_preview_features/12_ferrocene_preview.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 选型决策树 |
+| [Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`](../../07_future/02_preview_features/14_pin_ergonomics_preview.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
+| [Cranelift 后端预研：Rust 编译器的快速调试编译](../../07_future/02_preview_features/16_cranelift_backend_preview.md) | 决策/场景节 ×2 · mermaid 判定图 ×1 | 使用场景分析 · 测验 5：Cranelift 是由谁开发的？它还可以用于什么场景？（理解层） |
+| [Arbitrary Self Types 预览：自定义方法接收器](../../07_future/02_preview_features/18_arbitrary_self_types_preview.md) | 决策/场景节 ×4 | 使用场景 · 场景 1：内核编程（Rust for Linux） |
+| [Rust 语言规范预研：从参考文档到形式化规范](../../07_future/02_preview_features/21_rust_specification_preview.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
+| [Async Drop：异步资源的优雅销毁](../../07_future/02_preview_features/22_async_drop_preview.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 设计决策矩阵 |
+| [Field Projections 预览：安全的字段级投影](../../07_future/02_preview_features/23_field_projections_preview.md) | 决策/场景节 ×4 | 使用场景 · 场景 1：MMIO 寄存器访问（嵌入式/内核） |
+| [BorrowSanitizer：动态别名规则验证工具](../../07_future/02_preview_features/24_borrow_sanitizer.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
+| [Gen Blocks 预研：超越异步的泛化生成器](../../07_future/02_preview_features/25_gen_blocks_preview.md) | mermaid 判定图 ×2 | mermaid 判定节点图 |
+| [Rust in Space Preview](../../07_future/02_preview_features/30_rust_in_space.md) | 决策/场景节 ×1 | 核心应用场景 |
+| [Specialization：Trait 实现的精确化与重叠解析](../../07_future/02_preview_features/31_specialization_preview.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 设计决策矩阵 |
+| [编译期执行与常量求值](../../07_future/02_preview_features/32_compile_time_execution.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
+| [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](../../07_future/02_preview_features/34_open_enums_preview.md) | mermaid 判定图 ×3 | mermaid 判定节点图 |
 | [AI × Rust：生成-验证闭环与确定性容器](../../07_future/04_research_and_experimental/01_ai_integration.md) | 决策/场景节 ×1 | 工具选择决策树 |
 | [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) | 决策/场景节 ×1 · mermaid 判定图 ×5 | 决策树：我应该用哪个验证工具？ |
 | [Language Evolution](../../07_future/04_research_and_experimental/03_evolution.md) | mermaid 判定图 ×3 | mermaid 判定节点图 |

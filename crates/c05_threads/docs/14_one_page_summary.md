@@ -15,6 +15,6 @@
 | :--- | :--- |
 | 线程创建 | [concept/03_advanced/00_concurrency/01_concurrency.md](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
 | `Send` / `Sync` | [concept/03_advanced/00_concurrency/01_concurrency.md](../../../concept/03_advanced/00_concurrency/01_concurrency.md) |
-| 同步原语 | [concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md](../../../concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) |
-| 原子操作 | [concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md](../../../concept/03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) |
+| 同步原语 | [concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md](../../../concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) |
+| 原子操作 | [concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md](../../../concept/03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) |
 | 并发模式 | [concept/03_advanced/00_concurrency/03_concurrency_patterns.md](../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md) |

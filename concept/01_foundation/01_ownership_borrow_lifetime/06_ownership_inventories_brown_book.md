@@ -36,7 +36,7 @@
 >
 > **对应练习**:
 > [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing) ·
-> [`23_quiz_ownership_borrowing.md`](../11_quizzes/33_quiz_ownership_borrowing.md)
+> [`23_quiz_ownership_borrowing.md`](../11_quizzes/06_quiz_ownership_borrowing.md)
 
 ---
 

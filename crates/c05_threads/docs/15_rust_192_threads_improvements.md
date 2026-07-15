@@ -2,7 +2,6 @@
 
 > **EN**: Threading / Concurrency Guide (crate example index)
 > **Summary**: A stub page pointing to the canonical concept authority. General Rust explanations have been migrated to `concept/`; runnable examples remain in the crate.
-
 > **权威来源**: 通用 Rust 概念解释已迁移至 canonical authority page:
 > [`concept/07_future/00_version_tracking/rust_1_92_stabilized.md`](../../../concept/07_future/00_version_tracking/rust_1_92_stabilized.md).
 

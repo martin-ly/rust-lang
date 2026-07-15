@@ -4,21 +4,41 @@
 功能:
 1. 扫描 concept/ 目录下的所有核心 .md 文件
 2. 提取关键概念定义:Send/Sync、所有权、借用、生命周期、内部可变性、
-   Pin/Unpin、协变/逆变/不变(变型)、unsafe
+   Pin/Unpin、协变/逆变/不变(变型)、unsafe,以及 Rust 1.97 关键边界术语
+   (async fn/Future、unsafe superpowers、Pin 投影、生命周期子类型、
+   Send/Sync 边界、let chains、unsafe extern blocks、const trait impl/effects、
+   RPITIT/RTN/TAIT、GAT+async、allocator_api、match ergonomics、临时作用域等)
 3. 检测同一概念在不同文件中的定义是否矛盾(极性冲突检测)
 4. 校验各概念的权威页(canonical page)是否存在且包含核心定义
 5. 检测跨文件引用的段落编号是否准确
 6. 生成审计报告到 reports/CONCEPT_CONSISTENCY_AUDIT_<YYYY_MM_DD>.md
 
 权威页基线(按 AGENTS.md §2 Canonical 规则):
-  - Send/Sync     : concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md
-  - 所有权        : concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md
-  - 借用          : concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md
-  - 生命周期      : concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md
-  - 内部可变性    : concept/02_intermediate/02_memory_management/02_interior_mutability.md
-  - Pin/Unpin     : concept/03_advanced/01_async/08_pin_unpin.md
-  - 变型(协变逆变): concept/04_formal/00_type_theory/02_subtype_variance.md
-  - unsafe        : concept/03_advanced/02_unsafe/01_unsafe.md
+  - Send/Sync        : concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md
+  - 所有权           : concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md
+  - 借用             : concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md
+  - 生命周期         : concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md
+  - 内部可变性       : concept/02_intermediate/02_memory_management/02_interior_mutability.md
+  - Pin/Unpin        : concept/03_advanced/01_async/08_pin_unpin.md
+  - 变型(协变逆变)   : concept/04_formal/00_type_theory/02_subtype_variance.md
+  - unsafe           : concept/03_advanced/02_unsafe/01_unsafe.md
+  - async fn/Future  : concept/03_advanced/01_async/01_async.md
+  - unsafe superpowers & unsafe_op_in_unsafe_fn
+                   : concept/03_advanced/02_unsafe/01_unsafe.md
+  - Pin 投影         : concept/03_advanced/01_async/08_pin_unpin.md
+  - 生命周期子类型   : concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md
+  - Send/Sync 边界   : concept/03_advanced/00_concurrency/04_send_sync_boundaries.md
+  - let chains       : concept/01_foundation/04_control_flow/03_let_chains.md
+  - unsafe extern blocks
+                   : concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md
+  - const trait impl : concept/07_future/02_preview_features/06_const_trait_impl_preview.md
+  - effects system   : concept/07_future/02_preview_features/01_effects_system.md
+  - RPITIT/RTN/TAIT  : concept/07_future/02_preview_features/15_rpitit_preview.md
+  - GAT + async      : concept/03_advanced/01_async/14_gat_async_boundary.md
+  - allocator_api    : concept/03_advanced/06_low_level_patterns/01_custom_allocators.md
+  - match ergonomics : concept/01_foundation/04_control_flow/02_patterns.md
+  - 临时作用域/tail drop
+                   : concept/04_formal/05_rustc_internals/09_destructors.md
 
 用法:
     python scripts/concept_consistency_auditor.py            # 观察模式, 报告 + exit 0
@@ -63,6 +83,180 @@ CANONICAL_PAGES: dict[str, str] = {
     "Pin/Unpin": "03_advanced/01_async/08_pin_unpin.md",
     "变型": "04_formal/00_type_theory/02_subtype_variance.md",
     "unsafe": "03_advanced/02_unsafe/01_unsafe.md",
+    # 扩展概念集(Rust 1.97 关键边界术语)
+    "async fn/Future": "03_advanced/01_async/01_async.md",
+    "unsafe superpowers": "03_advanced/02_unsafe/01_unsafe.md",
+    "Pin 投影": "03_advanced/01_async/08_pin_unpin.md",
+    "生命周期子类型": "01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+    "Send/Sync 边界": "03_advanced/00_concurrency/04_send_sync_boundaries.md",
+    "let chains": "01_foundation/04_control_flow/03_let_chains.md",
+    "unsafe extern blocks": "03_advanced/04_ffi/05_unsafe_extern_blocks.md",
+    "const trait impl": "07_future/02_preview_features/06_const_trait_impl_preview.md",
+    "effects system": "07_future/02_preview_features/01_effects_system.md",
+    "RPITIT/RTN/TAIT": "07_future/02_preview_features/15_rpitit_preview.md",
+    "GAT + async": "03_advanced/01_async/14_gat_async_boundary.md",
+    "allocator_api": "03_advanced/06_low_level_patterns/01_custom_allocators.md",
+    "match ergonomics": "01_foundation/04_control_flow/02_patterns.md",
+    "临时作用域/tail drop": "04_formal/05_rustc_internals/09_destructors.md",
+}
+
+# 扩展概念元数据:名称(中/英)、提取正则、极性断言、允许变型
+# 用于描述性文档与保守的极性漂移监控;未列出的概念沿用既有硬编码规则。
+EXTENDED_CONCEPT_PROFILES: dict[str, dict] = {
+    "async fn/Future": {
+        "name_en": "async fn / Future equivalence",
+        "canonical": "03_advanced/01_async/01_async.md",
+        "extract": [
+            ("async-Future-状态机", r"async fn.*状态机|async fn.*desugar.*Future|async/await.*语法糖.*Future|Future.*状态机.*async|async fn.*等价.*返回.*Future"),
+            ("async-Future-等价", r"async fn.*等价|async fn.*≡|async fn.*返回.*impl Future|async fn.*本质上.*Future"),
+        ],
+        "polarity_pos": r"async fn.*(等价|desugar|状态机|返回.*Future)",
+        "polarity_neg": r"async fn.*不.*返回.*Future|async fn.*不等价",
+        "allowed_variances": [],
+    },
+    "unsafe superpowers": {
+        "name_en": "unsafe five superpowers & unsafe_op_in_unsafe_fn",
+        "canonical": "03_advanced/02_unsafe/01_unsafe.md",
+        "extract": [
+            ("unsafe-superpowers-五种能力", r"five unsafe superpowers|five superpowers|unsafe.*superpowers|五种.*superpower|五种 unsafe 能力|unsafe.*五种能力"),
+            ("unsafe-superpowers-unsafe_op", r"unsafe_op_in_unsafe_fn|unsafe fn.*显式.*unsafe.*块|unsafe fn.*内部.*unsafe.*块"),
+        ],
+        "polarity_pos": r"unsafe_op_in_unsafe_fn.*(默认|deny|warn|需.*显式)",
+        "polarity_neg": r"unsafe fn.*内.*不需要.*unsafe.*块|unsafe_op_in_unsafe_fn.*关闭",
+        "allowed_variances": [],
+    },
+    "Pin 投影": {
+        "name_en": "Pin structural projection",
+        "canonical": "03_advanced/01_async/08_pin_unpin.md",
+        "extract": [
+            ("Pin-投影-结构", r"结构投射|structural projection|Pin.*投影|pin-project|字段投影|Pin<&mut Self>.*字段"),
+            ("Pin-投影-安全", r"Pin.*投影.*安全|投影.*保持.*地址|投影.*Unpin.*字段|unsafe.*投影.*UB"),
+        ],
+        "polarity_pos": r"结构投射.*安全|pin-project.*正确|投影.*保持.*不动",
+        "polarity_neg": r"手写.*投影.*UB|移动被 pin.*字段|投影.*破坏.*不动",
+        "allowed_variances": [],
+    },
+    "生命周期子类型": {
+        "name_en": "lifetime subtyping ('static <: 'a)",
+        "canonical": "01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "extract": [
+            ("生命周期-子类型-static", r"'static.*<:|'static.*子类型|子类型.*'static|lifetime.*subtyp|'static.*outlives"),
+            ("生命周期-子类型-outlives", r"'a: 'b|outlives|存活.*不短于|生命周期.*偏序|'a.*outlives.*'b"),
+        ],
+        "polarity_pos": r"'static.*(<:|outlives|子类型)|'a: 'b",
+        "polarity_neg": r"'static.*不.*outlives|生命周期.*不.*子类型",
+        "allowed_variances": ["covariant"],
+    },
+    "Send/Sync 边界": {
+        "name_en": "Send/Sync necessary/sufficient conditions in trait objects & bounds",
+        "canonical": "03_advanced/00_concurrency/04_send_sync_boundaries.md",
+        "extract": [
+            ("Send/Sync边界-充分必要", r"充分必要|dyn Trait \+ Send \+ Sync|T: Send\s*⇔|T: Sync\s*⇔|Arc<dyn.*Send.*Sync>"),
+            ("Send/Sync边界-trait对象", r"dyn Trait.*Send|trait object.*Send|自动实现.*Send/Sync|手动.*unsafe impl.*Send"),
+        ],
+        "polarity_pos": r"T: Send\s*⇔|T: Sync\s*⇔|dyn Trait \+ Send \+ Sync",
+        "polarity_neg": r"dyn Trait.*自动.*Send|Send.*不需要.*Sync",
+        "allowed_variances": [],
+    },
+    "let chains": {
+        "name_en": "let chains / if-let guards",
+        "canonical": "01_foundation/04_control_flow/03_let_chains.md",
+        "extract": [
+            ("let-chains-链式", r"let chains|链式 let|if let.*&&.*let|let 链"),
+            ("let-chains-守卫", r"if-let guards|let 守卫|if let.*守卫|match.*if let"),
+        ],
+        "polarity_pos": r"let chains|if-let guards",
+        "polarity_neg": r"let chains.*允许.*\|\||if-let guards.*不允许",
+        "allowed_variances": [],
+    },
+    "unsafe extern blocks": {
+        "name_en": "unsafe extern blocks",
+        "canonical": "03_advanced/04_ffi/05_unsafe_extern_blocks.md",
+        "extract": [
+            ("unsafe-extern-块", r"unsafe extern blocks|unsafe extern \"C\"|extern.*块.*unsafe|unsafe extern \""),
+            ("unsafe-extern-safe", r"safe fn.*extern|extern.*safe.*审计|safe FFI|unsafe extern.*safe"),
+        ],
+        "polarity_pos": r"unsafe extern.*块|extern.*必须.*unsafe|safe fn.*extern",
+        "polarity_neg": r"extern \"C\" \{.*\}.*safe|unsafe extern.*不需要",
+        "allowed_variances": [],
+    },
+    "const trait impl": {
+        "name_en": "const trait impl / ~const",
+        "canonical": "07_future/02_preview_features/06_const_trait_impl_preview.md",
+        "extract": [
+            ("const-trait-impl-定义", r"const trait impl|const impl Trait|~const|常量上下文.*Trait|const fn.*trait"),
+            ("const-trait-impl-效果", r"const.*效果|const.*effect|效果系统.*const|constness.*effect"),
+        ],
+        "polarity_pos": r"const impl Trait|const trait impl|~const",
+        "polarity_neg": r"const trait.*不稳定.*不可用|~const.*废弃",
+        "allowed_variances": [],
+    },
+    "effects system": {
+        "name_en": "effect system",
+        "canonical": "07_future/02_preview_features/01_effects_system.md",
+        "extract": [
+            ("effects-system-定义", r"effect system|效果系统|代数效应|generic over effects|效果多态"),
+            ("effects-system-现有", r"async.*效果|const.*效果|try.*效果|unsafe.*效果|效果.*关键字"),
+        ],
+        "polarity_pos": r"effect system|效果系统|代数效应",
+        "polarity_neg": r"Rust.*没有.*effect system|效果系统.*不现实",
+        "allowed_variances": [],
+    },
+    "RPITIT/RTN/TAIT": {
+        "name_en": "RPITIT / RTN / TAIT",
+        "canonical": "07_future/02_preview_features/15_rpitit_preview.md",
+        "extract": [
+            ("RPITIT-RTN-TAIT-定义", r"RPITIT|Return Position Impl Trait|RTN|Return Type Notation|TAIT|Type Alias Impl Trait|impl Trait.*trait.*返回"),
+            ("RPITIT-RTN-TAIT-捕获", r"use<'?[a-zA-Z0-9_, ]*'>|精确捕获|lifetime capture|hidden type"),
+        ],
+        "polarity_pos": r"RPITIT|RTN|TAIT|impl Trait.*trait",
+        "polarity_neg": r"RPITIT.*不稳定|TAIT.*未稳定",
+        "allowed_variances": [],
+    },
+    "GAT + async": {
+        "name_en": "GAT + async",
+        "canonical": "03_advanced/01_async/14_gat_async_boundary.md",
+        "extract": [
+            ("GAT-async-边界", r"GAT.*async|async trait.*GAT|type Future<'a>|where Self: 'a.*Future|GAT.*Future"),
+            ("GAT-async-生命周期", r"关联类型.*生命周期|type constructor.*lifetime|where Self: 'a"),
+        ],
+        "polarity_pos": r"type Future<'a>|where Self: 'a|GAT.*async",
+        "polarity_neg": r"GAT.*不需要.*where Self: 'a|async trait.*不需要.*GAT",
+        "allowed_variances": [],
+    },
+    "allocator_api": {
+        "name_en": "allocator_api / custom allocators",
+        "canonical": "03_advanced/06_low_level_patterns/01_custom_allocators.md",
+        "extract": [
+            ("allocator-api-GlobalAlloc", r"GlobalAlloc|allocator_api|#\[global_allocator\]|自定义分配器"),
+            ("allocator-api-Allocator", r"Allocator trait|Allocator API|alloc::alloc::Allocator|分配器属性"),
+        ],
+        "polarity_pos": r"GlobalAlloc|Allocator trait|allocator_api",
+        "polarity_neg": r"Allocator API.*已废弃|自定义分配器.*不安全.*避免",
+        "allowed_variances": [],
+    },
+    "match ergonomics": {
+        "name_en": "match ergonomics / default binding mode",
+        "canonical": "01_foundation/04_control_flow/02_patterns.md",
+        "extract": [
+            ("match-ergonomics-默认绑定", r"default binding mode|默认绑定模式|match ergonomics|绑定模式.*自动|ref.*绑定"),
+            ("match-ergonomics-引用", r"match.*引用.*自动|match &opt.*x.*&T|if let.*引用.*自动"),
+        ],
+        "polarity_pos": r"default binding mode|match ergonomics|自动.*ref",
+        "polarity_neg": r"match ergonomics.*不存在|默认绑定.*不自动",
+        "allowed_variances": [],
+    },
+    "临时作用域/tail drop": {
+        "name_en": "temporary scope / tail expression drop",
+        "canonical": "04_formal/05_rustc_internals/09_destructors.md",
+        "extract": [
+            ("temporary-scope-临时作用域", r"临时作用域|Temporary Scopes|temporary scope|临时生命周期"),
+            ("temporary-scope-tail", r"tail expression.*drop|块 tail expression.*临时.*drop|尾表达式.*drop|2024 Edition.*if let.*临时值.*drop"),
+        ],
+        "polarity_pos": r"临时作用域|tail expression.*drop|尾表达式.*drop",
+        "polarity_neg": r"临时作用域.*不.*drop|tail expression.*不.*drop",
+        "allowed_variances": [],
+    },
 }
 
 
@@ -194,6 +388,49 @@ _EXTRACT_RULES: list[tuple[str, str, Optional[str]]] = [
     ("unsafe-契约", r'Safety Contract.*unsafe|unsafe.*Safety Contract|安全契约.*unsafe|unsafe.*安全契约', None),
     ("unsafe-不变式", r'Validity Invariant|Safety Invariant|有效性不变式|安全性不变式', None),
     ("unsafe-UB", r'UB.*未定义行为|undefined behavior|unsafe.*UB|触发.*UB', r'表格|矩阵|mind map|mermaid'),
+    # ---- 扩展概念集:Rust 1.97 关键边界术语 ----
+    # async fn / Future 等价表述
+    ("async-Future-状态机", r'async fn.*状态机|async fn.*desugar.*Future|async/await.*语法糖.*Future|Future.*状态机.*async|async fn.*等价.*返回.*Future', None),
+    ("async-Future-等价", r'async fn.*等价|async fn.*≡|async fn.*返回.*impl Future|async fn.*本质上.*Future', None),
+    # unsafe five superpowers & unsafe_op_in_unsafe_fn
+    ("unsafe-superpowers-五种能力", r'five unsafe superpowers|five superpowers|unsafe.*superpowers|五种.*superpower|五种 unsafe 能力|unsafe.*五种能力', None),
+    ("unsafe-superpowers-unsafe_op", r'unsafe_op_in_unsafe_fn|unsafe fn.*显式.*unsafe.*块|unsafe fn.*内部.*unsafe.*块', None),
+    # Pin 投影规则(structural projection)
+    ("Pin-投影-结构", r'结构投射|structural projection|Pin.*投影|pin-project|字段投影|Pin<&mut Self>.*字段', None),
+    ("Pin-投影-安全", r'Pin.*投影.*安全|投影.*保持.*地址|投影.*Unpin.*字段|unsafe.*投影.*UB', None),
+    # 生命周期子类型化
+    ("生命周期-子类型-static", r'\'static.*<:|\'static.*子类型|子类型.*\'static|lifetime.*subtyp|\'static.*outlives', None),
+    ("生命周期-子类型-outlives", r"'a: 'b|outlives|存活.*不短于|生命周期.*偏序|'a.*outlives.*'b", None),
+    # Send/Sync 充分必要条件在 trait 对象、泛型边界
+    ("Send/Sync边界-充分必要", r'充分必要|dyn Trait \+ Send \+ Sync|T:\s*Send\s*⇔|T:\s*Sync\s*⇔|Arc<dyn.*Send.*Sync>', None),
+    ("Send/Sync边界-trait对象", r'dyn Trait.*Send|trait object.*Send|自动实现.*Send/Sync|手动.*unsafe impl.*Send', None),
+    # let chains / if-let guards
+    ("let-chains-链式", r'let chains|链式 let|if let.*&&.*let|let 链', None),
+    ("let-chains-守卫", r'if-let guards|let 守卫|if let.*守卫|match.*if let', None),
+    # unsafe extern blocks
+    ("unsafe-extern-块", r'unsafe extern blocks|unsafe extern "C"|extern.*块.*unsafe|unsafe extern "', None),
+    ("unsafe-extern-safe", r'safe fn.*extern|extern.*safe.*审计|safe FFI|unsafe extern.*safe', None),
+    # const trait impl / effects system
+    ("const-trait-impl-定义", r'const trait impl|const impl Trait|~const|常量上下文.*Trait|const fn.*trait', None),
+    ("const-trait-impl-效果", r'const.*效果|const.*effect|效果系统.*const|constness.*effect', None),
+    # effects system
+    ("effects-system-定义", r'effect system|效果系统|代数效应|generic over effects|效果多态', None),
+    ("effects-system-现有", r'async.*效果|const.*效果|try.*效果|unsafe.*效果|效果.*关键字', None),
+    # RPITIT / RTN / TAIT
+    ("RPITIT-RTN-TAIT-定义", r'RPITIT|Return Position Impl Trait|RTN|Return Type Notation|TAIT|Type Alias Impl Trait|impl Trait.*trait.*返回', None),
+    ("RPITIT-RTN-TAIT-捕获", r"use<'?[a-zA-Z0-9_, ]*'>|精确捕获|lifetime capture|hidden type", None),
+    # GAT + async
+    ("GAT-async-边界", r"GAT.*async|async trait.*GAT|type Future<'a>|where Self: 'a.*Future|GAT.*Future", None),
+    ("GAT-async-生命周期", r'关联类型.*生命周期|type constructor.*lifetime|where Self: \'a', None),
+    # allocator_api
+    ("allocator-api-GlobalAlloc", r'GlobalAlloc|allocator_api|#\[global_allocator\]|自定义分配器', None),
+    ("allocator-api-Allocator", r'Allocator trait|Allocator API|alloc::alloc::Allocator|分配器属性', None),
+    # match ergonomics / default binding mode
+    ("match-ergonomics-默认绑定", r'default binding mode|默认绑定模式|match ergonomics|绑定模式.*自动|ref.*绑定', None),
+    ("match-ergonomics-引用", r'match.*引用.*自动|match &opt.*x.*&T|if let.*引用.*自动', None),
+    # temporary scope / tail expression drop
+    ("temporary-scope-临时作用域", r'临时作用域|Temporary Scopes|temporary scope|临时生命周期', None),
+    ("temporary-scope-tail", r'tail expression.*drop|块 tail expression.*临时.*drop|尾表达式.*drop|2024 Edition.*if let.*临时值.*drop', None),
 ]
 
 # 编译提取规则
@@ -368,6 +605,20 @@ def check_canonical_presence(defs: list[ConceptDef], md_files: list[Path]) -> li
             "Pin/Unpin": ("Pin-", "Unpin-"),
             "变型": ("变型-",),
             "unsafe": ("unsafe-",),
+            "async fn/Future": ("async-Future-",),
+            "unsafe superpowers": ("unsafe-superpowers-",),
+            "Pin 投影": ("Pin-投影-",),
+            "生命周期子类型": ("生命周期-子类型-",),
+            "Send/Sync 边界": ("Send/Sync边界-",),
+            "let chains": ("let-chains-",),
+            "unsafe extern blocks": ("unsafe-extern-",),
+            "const trait impl": ("const-trait-impl-",),
+            "effects system": ("effects-system-",),
+            "RPITIT/RTN/TAIT": ("RPITIT-RTN-TAIT-",),
+            "GAT + async": ("GAT-async-",),
+            "allocator_api": ("allocator-api-",),
+            "match ergonomics": ("match-ergonomics-",),
+            "临时作用域/tail drop": ("temporary-scope-",),
         }[concept]
         n = sum(1 for d in defs if d.file == canonical and d.concept.startswith(prefixes))
         if n == 0:
@@ -528,6 +779,43 @@ def check_polarity_consistency(defs: list[ConceptDef]) -> list[dict]:
     return issues
 
 
+def check_extended_concept_polarity(defs: list[ConceptDef]) -> list[dict]:
+    """扩展概念集的保守极性漂移检测(仅警告,不阻断 strict)"""
+    issues = []
+    for name, profile in EXTENDED_CONCEPT_PROFILES.items():
+        pos_pat = re.compile(profile["polarity_pos"], re.IGNORECASE)
+        neg_pat = re.compile(profile["polarity_neg"], re.IGNORECASE)
+        labels = [label for label, _ in profile["extract"]]
+        if not labels:
+            continue
+        parts = labels[0].split("-")
+        prefix = "-".join(parts[:2]) + "-" if len(parts) >= 2 else labels[0]
+        pos_files: set[Path] = set()
+        neg_files: set[Path] = set()
+        for d in defs:
+            if not d.concept.startswith(prefix):
+                continue
+            if pos_pat.search(d.text):
+                pos_files.add(d.file)
+            if neg_pat.search(d.text):
+                neg_files.add(d.file)
+        conflicts = pos_files & neg_files
+        both = bool(pos_files) and bool(neg_files) and not conflicts
+        if conflicts or both:
+            involved = pos_files | neg_files
+            detail = (
+                f"正向断言出现于: {', '.join(_norm_path(f) for f in sorted(pos_files)) or '无'}; "
+                f"反向断言出现于: {', '.join(_norm_path(f) for f in sorted(neg_files)) or '无'}"
+            )
+            issues.append(_issue(
+                f"{name} 极性漂移(扩展概念)",
+                ", ".join(_norm_path(f) for f in sorted(involved)),
+                detail,
+                "⚠️ 警告",
+            ))
+    return issues
+
+
 def check_key_term_coverage(defs: list[ConceptDef]) -> list[dict]:
     """各概念权威页的关键术语覆盖检查(提示级,非阻断)"""
     issues = []
@@ -541,6 +829,21 @@ def check_key_term_coverage(defs: list[ConceptDef]) -> list[dict]:
         ("Unpin-", "Pin/Unpin", ["Unpin"], 1),
         ("变型-", "变型", ["协变", "逆变", "不变"], 2),
         ("unsafe-", "unsafe", ["unsafe"], 1),
+        # 扩展概念关键术语覆盖(提示级)
+        ("async-Future-", "async fn/Future", ["async fn", "Future", "状态机"], 2),
+        ("unsafe-superpowers-", "unsafe superpowers", ["superpowers", "unsafe_op_in_unsafe_fn"], 1),
+        ("Pin-投影-", "Pin 投影", ["投影", "结构投射"], 1),
+        ("生命周期-子类型-", "生命周期子类型", ["'static", "outlives", "子类型"], 2),
+        ("Send/Sync边界-", "Send/Sync 边界", ["Send", "Sync", "dyn Trait"], 2),
+        ("let-chains-", "let chains", ["let chains", "if-let guards"], 1),
+        ("unsafe-extern-", "unsafe extern blocks", ["unsafe extern", "safe fn"], 1),
+        ("const-trait-impl-", "const trait impl", ["const trait", "~const"], 1),
+        ("effects-system-", "effects system", ["effect system", "效果系统"], 1),
+        ("RPITIT-RTN-TAIT-", "RPITIT/RTN/TAIT", ["RPITIT", "RTN", "TAIT"], 1),
+        ("GAT-async-", "GAT + async", ["GAT", "Future", "where Self"], 2),
+        ("allocator-api-", "allocator_api", ["GlobalAlloc", "Allocator"], 1),
+        ("match-ergonomics-", "match ergonomics", ["binding mode", "ref"], 1),
+        ("temporary-scope-", "临时作用域/tail drop", ["临时作用域", "tail expression"], 1),
     ]
     by_file: dict[Path, str] = defaultdict(str)
     for d in defs:
@@ -579,7 +882,7 @@ def generate_report(
         "# 概念一致性审计报告 (Concept Consistency Audit)",
         "",
         f"> 生成时间: {datetime.datetime.now().isoformat()}",
-        f"> 生成脚本: `scripts/concept_consistency_auditor.py`(质量门 17,语义观察门)",
+        f"> 生成脚本: `scripts/concept_consistency_auditor.py`(扩展后监控 {len(CANONICAL_PAGES)} 个核心概念)",
         f"> 扫描文件数: {len(md_files)}",
         f"> 提取概念定义数: {len(all_defs)}",
         f"> 跨文件引用数: {len(cross_refs)}",
@@ -753,6 +1056,7 @@ def main() -> int:
     consistency_issues.extend(check_send_sync_consistency(all_defs))
     consistency_issues.extend(check_variance_consistency(all_defs))
     consistency_issues.extend(check_polarity_consistency(all_defs))
+    consistency_issues.extend(check_extended_concept_polarity(all_defs))
     consistency_issues.extend(check_key_term_coverage(all_defs))
 
     errors = sum(1 for i in consistency_issues if "❌" in i.get("severity", "")) + len(invalid_refs)

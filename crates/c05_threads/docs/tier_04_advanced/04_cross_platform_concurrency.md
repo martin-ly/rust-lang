@@ -8,7 +8,7 @@
 
 ---
 
-> **权威来源**: [concept/03_advanced/00_concurrency/04_cross_platform_concurrency.md](../../../../concept/03_advanced/00_concurrency/04_cross_platform_concurrency.md)
+> **权威来源**: [concept/03_advanced/00_concurrency/05_cross_platform_concurrency.md](../../../../concept/03_advanced/00_concurrency/05_cross_platform_concurrency.md)
 
 ---
 

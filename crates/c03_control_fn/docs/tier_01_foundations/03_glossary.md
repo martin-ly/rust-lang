@@ -16,4 +16,4 @@
 | :--- | :--- |
 | Control Flow Glossary | [concept/01_foundation/04_control_flow/01_control_flow.md](../../../../concept/01_foundation/04_control_flow/01_control_flow.md) |
 | Patterns | [concept/01_foundation/04_control_flow/02_patterns.md](../../../../concept/01_foundation/04_control_flow/02_patterns.md) |
-| Statements and Expressions | [concept/01_foundation/04_control_flow/03_statements_and_expressions.md](../../../../concept/01_foundation/04_control_flow/03_statements_and_expressions.md) |
+| Statements and Expressions | [concept/01_foundation/04_control_flow/04_statements_and_expressions.md](../../../../concept/01_foundation/04_control_flow/04_statements_and_expressions.md) |

@@ -986,7 +986,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 > 编译器实现见 `../03_advanced/03_proc_macros/04_macros.md`（宏（Macro）扩展与类型检查交互）与 `../06_ecosystem/01_toolchain.md`（编译流程）。
 > **过渡: L4 → L7**
 > Rust 的类型系统正在向更丰富的方向发展：Effects System 将副作用编码为类型约束、Generic Const Items 允许常量作为类型参数、Type Alias Impl Trait 简化存在类型的表达。这些演进不是偶然——它们都是类型论中已有概念的工程化落地。
-> 演进方向见 [`../07_future/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)（语言演进路线图）与 [`../07_future/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化方法的未来）。
+> 演进方向见 [`../07_future/04_research_and_experimental/03_evolution.md`](../../07_future/04_research_and_experimental/03_evolution.md)（语言演进路线图）与 [`../07_future/04_research_and_experimental/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)（形式化方法的未来）。
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism](https://dl.acm.org/doi/10.1145/6041.6042) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/)

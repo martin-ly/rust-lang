@@ -1,5 +1,5 @@
 > **EN**: Rust 1.94 Stabilized Features
-> **Summary**: Authoritative concept page for `c10_networks - Rust 1.94 更新概览`. Content migrated from `crates/c10_networks/docs/rust_194_updates/00_rust_194_overview.md`.
+> **Summary**: Authoritative concept page for `c10_networks - Rust 1.94 更新概览`. Content migrated from `crates/c10_networks/docs/tier_04_rust_194_updates/00_rust_194_overview.md`.
 > **受众**: [进阶]
 > **内容分级**: [参考级]
 > **Bloom 层级**: L2-L3
@@ -197,7 +197,7 @@ fn main() {
 ```
 
 > **权威来源**: [Rust 1.85.0 Release Blog（Edition 2024）](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0/) · [RFC 3617 — Precise capturing](https://rust-lang.github.io/rfcs/3617-precise-capturing.html) · [Rust Release Notes](https://doc.rust-lang.org/releases.html)（链接 2026-07-12 curl 实测 200；代码 rustc 1.97.0 实测）
-> 深度概念页：[Lifetime Capture 预研](../03_preview_features/13_lifetime_capture_preview.md) · [Edition 2024 完全指南](../01_edition_roadmap/02_edition_guide.md)
+> 深度概念页：[Lifetime Capture 预研](../02_preview_features/13_lifetime_capture_preview.md) · [Edition 2024 完全指南](../01_edition_roadmap/02_edition_guide.md)
 
 ---
 

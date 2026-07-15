@@ -672,7 +672,7 @@ graph TD
 
 ## 相关概念
 
-- [对应测验](../11_quizzes/25_quiz_error_handling.md) — 错误处理（Result/Option、?、panic、自定义错误）
+- [对应测验](../11_quizzes/02_quiz_error_handling.md) — 错误处理（Result/Option、?、panic、自定义错误）
 - **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/01_type_system.md) · [Control Flow](../04_control_flow/01_control_flow.md)
 - **下层概念**: [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
 

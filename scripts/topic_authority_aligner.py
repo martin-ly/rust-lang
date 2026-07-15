@@ -322,9 +322,9 @@ ROADMAP_TOPICS = [
 AUTHORITY_TOPIC_ALIASES = {
     # 形式化/验证生态
     "Iris: Higher-Order Concurrent Separation Logic Framework": "concept/04_formal/02_separation_logic/02_separation_logic.md",
-    "Borrow Sanitizer": "concept/07_future/03_preview_features/24_borrow_sanitizer.md",
+    "Borrow Sanitizer": "concept/07_future/02_preview_features/24_borrow_sanitizer.md",
     "Miri: Rust Interpreter for Undefined Behavior": "concept/04_formal/04_model_checking/08_miri.md",
-    "Ferrocene: Rust for Safety-Critical Systems": "concept/07_future/03_preview_features/12_ferrocene_preview.md",
+    "Ferrocene: Rust for Safety-Critical Systems": "concept/07_future/02_preview_features/12_ferrocene_preview.md",
     "Verus: Verified Rust for Low-Level Systems": "concept/04_formal/04_model_checking/04_modern_verification_tools.md",
     # 工业/应用生态
     "bindgen / cbindgen": "concept/03_advanced/04_ffi/01_rust_ffi.md",
@@ -337,8 +337,8 @@ AUTHORITY_TOPIC_ALIASES = {
     "PyO3": "concept/06_ecosystem/11_domain_applications/14_industrial_case_studies.md",
     "rayon": "concept/03_advanced/00_concurrency/03_concurrency_patterns.md",
     # 项目路线图
-    "Cranelift Backend": "concept/07_future/03_preview_features/16_cranelift_backend_preview.md",
-    "MCDC Coverage": "concept/07_future/03_preview_features/02_mcdc_coverage_preview.md",
+    "Cranelift Backend": "concept/07_future/02_preview_features/16_cranelift_backend_preview.md",
+    "MCDC Coverage": "concept/07_future/02_preview_features/02_mcdc_coverage_preview.md",
     "Rustdoc Search / Scraped Examples": "concept/06_ecosystem/09_testing_and_quality/02_documentation.md",
     "cortex-m / riscv-rt": "concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
     "ring / rustls": "concept/06_ecosystem/07_security_and_cryptography/02_security_cryptography.md",

@@ -12,7 +12,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 从通用程序语言（PL）理论视角审视 Rust 的设计根基，建立从 λ 演算到 Rust 类型系统（Type System）的概念桥梁。
 > **前置概念**: [Type Theory](../00_type_theory/01_type_theory.md) · [Linear Logic](../01_ownership_logic/01_linear_logic.md) · [Ownership Formal](../01_ownership_logic/02_ownership_formal.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
-> **后置延伸**: [Effects System](../../07_future/03_preview_features/01_effects_system.md) · [Evolution](../../07_future/04_research_and_experimental/03_evolution.md)
+> **后置延伸**: [Effects System](../../07_future/02_preview_features/01_effects_system.md) · [Evolution](../../07_future/04_research_and_experimental/03_evolution.md)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---

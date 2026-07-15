@@ -36,7 +36,7 @@ L3 并发编程（mpsc/Atomic 工程用法）
 
 ## 三、分工声明（Canonical）
 
-- 本子层是并发**形式语义**的权威层；[L3 并行与分布式模式谱系](../../03_advanced/00_concurrency/07_parallel_distributed_pattern_spectrum.md) 保留**工程谱系导航**视角（§6.2 已声明分工）；
+- 本子层是并发**形式语义**的权威层；[L3 并行与分布式模式谱系](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) 保留**工程谱系导航**视角（§6.2 已声明分工）；
 - [L5 执行模型同构性矩阵](../../05_comparative/00_paradigms/02_execution_model_isomorphism.md) 保留**跨语言对比**视角（§六 CSP/§七 Actor 已加「形式化见」链接，两页头部互相声明分工）；
 - 分布式延伸页（CRDT、因果序）归属 [L6 数据与分布式](../../06_ecosystem/06_data_and_distributed/)，与本子层互链。
 

@@ -5,7 +5,7 @@
 
 > **权威来源**:
 > 本文为 `content/safety_critical/` 专题套件的权威入口（AGENTS.md §2.1 第 3 条）。
-> 通用 Rust 概念解释请见 [concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md](../../concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md)（DO-178C/DO-333 形式化映射）与 [concept/07_future/03_preview_features/12_ferrocene_preview.md](../../concept/07_future/03_preview_features/12_ferrocene_preview.md)（Ferrocene 认证工具链）；
+> 通用 Rust 概念解释请见 [concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md](../../concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md)（DO-178C/DO-333 形式化映射）与 [concept/07_future/02_preview_features/12_ferrocene_preview.md](../../concept/07_future/02_preview_features/12_ferrocene_preview.md)（Ferrocene 认证工具链）；
 > concept/ 侧导航入口见 [concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md](../../concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md)。本文聚焦安全关键系统工程实践，不重复上述概念页正文。
 
 > **Bloom 层级**: L4-L6

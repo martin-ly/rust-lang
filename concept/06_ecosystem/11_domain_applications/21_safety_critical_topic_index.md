@@ -28,11 +28,11 @@
 | 页面 | 主题 |
 |:---|:---|
 | [航空航天认证与形式化方法](../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md) | DO-178C/DO-333 与 Rust 形式化映射（定理证明/模型检查/抽象解释） |
-| [Ferrocene：已交付认证工具链](../../07_future/03_preview_features/12_ferrocene_preview.md) | TÜV SÜD 鉴定工具链（ASIL D/SIL 3/Class C）与 certified core 子集 |
+| [Ferrocene：已交付认证工具链](../../07_future/02_preview_features/12_ferrocene_preview.md) | TÜV SÜD 鉴定工具链（ASIL D/SIL 3/Class C）与 certified core 子集 |
 | [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) | Ferrocene/HighTec/AdaCore 生态、认证 crate 现状与边界决策树 |
 | [AUTOSAR 与 Rust](22_autosar_and_rust.md) | AUTOSAR CP/AP 标准与 Rust 的关系、WG-SAF 进程 |
-| [MC/DC 覆盖率预研](../../07_future/03_preview_features/02_mcdc_coverage_preview.md) | DO-178C A 级覆盖率准则 |
-| [Safety Tags 预研](../../07_future/03_preview_features/03_safety_tags_preview.md) | 安全标注机制 |
+| [MC/DC 覆盖率预研](../../07_future/02_preview_features/02_mcdc_coverage_preview.md) | DO-178C A 级覆盖率准则 |
+| [Safety Tags 预研](../../07_future/02_preview_features/03_safety_tags_preview.md) | 安全标注机制 |
 | [形式化验证工具链](../../04_formal/04_model_checking/01_verification_toolchain.md) | 验证工具全景 |
 
 ## 3. 分工边界

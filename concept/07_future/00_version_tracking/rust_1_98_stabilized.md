@@ -38,9 +38,9 @@
 | 7 | `todo!()` 不再触发 `unreachable_code`（RFC #3928） | RFC merged（2026-06-25） | §2 | [RFC Book](https://rust-lang.github.io/rfcs/3928-todo-overreach.html) |
 | 8 | Public/Private Dependencies（RFC #3516） | RFC merged，Cargo 实现跟踪中 | §2 | [RFC Book](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html) |
 | 9 | Safety Tags（RFC #3842） | FCP / 讨论中 | §3 | [rfcs#3842](https://github.com/rust-lang/rfcs/pull/3842) |
-| 10 | Pin Ergonomics（`&pin mut` / `&pin const`） | nightly only（Project Goal 2026） | §4 | [预览页](../03_preview_features/14_pin_ergonomics_preview.md) |
-| 11 | Async Drop | nightly only | §4 | [预览页](../03_preview_features/22_async_drop_preview.md) |
-| 12 | Return Type Notation（RTN） | nightly only | §4 | [预览页](../03_preview_features/09_return_type_notation_preview.md) |
+| 10 | Pin Ergonomics（`&pin mut` / `&pin const`） | nightly only（Project Goal 2026） | §4 | [预览页](../02_preview_features/14_pin_ergonomics_preview.md) |
+| 11 | Async Drop | nightly only | §4 | [预览页](../02_preview_features/22_async_drop_preview.md) |
+| 12 | Return Type Notation（RTN） | nightly only | §4 | [预览页](../02_preview_features/09_return_type_notation_preview.md) |
 
 ---
 
@@ -91,7 +91,7 @@
 
 | 特性 | 状态 | 稳定后填充要点 |
 |:---|:---|:---|
-| Safety Tags（RFC #3842） | FCP / 讨论中（[rfcs#3842](https://github.com/rust-lang/rfcs/pull/3842)） | ⏳ 待稳定后实测填充：`#[safety(...)]` 属性语义与工具链支持；深度背景见 [Safety Tags 预览](../03_preview_features/03_safety_tags_preview.md) |
+| Safety Tags（RFC #3842） | FCP / 讨论中（[rfcs#3842](https://github.com/rust-lang/rfcs/pull/3842)） | ⏳ 待稳定后实测填充：`#[safety(...)]` 属性语义与工具链支持；深度背景见 [Safety Tags 预览](../02_preview_features/03_safety_tags_preview.md) |
 
 ---
 
@@ -101,9 +101,9 @@
 
 | 特性 | 状态 | 深度文档 |
 |:---|:---|:---|
-| Pin Ergonomics（`&pin mut` / `&pin const`） | nightly only（Project Goal 2026） | [Pin Ergonomics 预览](../03_preview_features/14_pin_ergonomics_preview.md) |
-| Async Drop | nightly only（MCP #727 已通过） | [Async Drop 预览](../03_preview_features/22_async_drop_preview.md) |
-| Return Type Notation（RTN） | nightly only（RFC 3654） | [RTN 预览](../03_preview_features/09_return_type_notation_preview.md) |
+| Pin Ergonomics（`&pin mut` / `&pin const`） | nightly only（Project Goal 2026） | [Pin Ergonomics 预览](../02_preview_features/14_pin_ergonomics_preview.md) |
+| Async Drop | nightly only（MCP #727 已通过） | [Async Drop 预览](../02_preview_features/22_async_drop_preview.md) |
+| Return Type Notation（RTN） | nightly only（RFC 3654） | [RTN 预览](../02_preview_features/09_return_type_notation_preview.md) |
 
 ---
 
