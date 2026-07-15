@@ -416,7 +416,7 @@ standalone_quizzes:
 embedded_quizzes:
   description: concept/ 页面内嵌入式测验（### 测验 N + <details> 答题块），按页聚合
   pages: 301
-  total_blocks: 1302
+  total_blocks: 1299
   items:
   - path: concept/00_meta/00_framework/bloom_taxonomy.md
     blocks: 3

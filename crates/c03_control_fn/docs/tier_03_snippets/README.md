@@ -5,6 +5,10 @@
 
 > **权威来源**: 本目录为 `crates/c03_control_fn` 的 tier 03 片段目录；通用 Rust 异步概念解释请见：
 > [`concept/03_advanced/01_async/`](../../../../concept/03_advanced/01_async/README.md)
+>
+> **国际权威参考**:
+> [Rust Reference — Async/Await](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) ·
+> [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html)
 
 ## 说明
 

@@ -3,8 +3,8 @@
   "scanned": 499,
   "coverage": {
     "P0": [
-      493,
-      98.8
+      494,
+      99.0
     ],
     "P1": [
       458,
@@ -15,16 +15,16 @@
       85.0
     ],
     "any": [
-      498,
-      99.8
+      499,
+      100.0
     ],
-    "none": 1
+    "none": 0
   },
   "content_scope": {
     "scanned": 414,
     "P0": [
-      413,
-      99.8
+      414,
+      100.0
     ],
     "P1": [
       405,
@@ -35,8 +35,8 @@
       98.3
     ],
     "any": [
-      413,
-      99.8
+      414,
+      100.0
     ],
     "gaps_p1": [
       "concept/01_foundation/04_control_flow/03_let_chains.md",
@@ -97,8 +97,8 @@
     },
     "L7": {
       "n": 66,
-      "P0": 64,
-      "any": 65
+      "P0": 65,
+      "any": 66
     },
     "L?": {
       "n": 3,
@@ -107,9 +107,7 @@
     }
   },
   "core_gaps_l1_l4_no_p0": [],
-  "none_any": [
-    "concept/07_future/02_preview_features/19_const_trait_preview.md"
-  ],
+  "none_any": [],
   "crates_docs": {
     "total": 568,
     "kinds": {
@@ -118,11 +116,9 @@
       "index_readme": 2
     },
     "content": 62,
-    "covered": 61,
-    "pct": 98.4,
-    "gaps": [
-      "crates/c03_control_fn/docs/tier_03_snippets/README.md"
-    ],
+    "covered": 62,
+    "pct": 100.0,
+    "gaps": [],
     "per_crate": {
       "c01_ownership_borrow_scope": {
         "content": 5,
@@ -134,7 +130,7 @@
       },
       "c03_control_fn": {
         "content": 5,
-        "covered": 4
+        "covered": 5
       },
       "c04_generic": {
         "content": 2,

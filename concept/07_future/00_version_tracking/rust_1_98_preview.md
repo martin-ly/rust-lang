@@ -717,4 +717,7 @@ fn main() {
 
 **陷阱本质**：预览页列出的 nightly-only API 在 stable 上没有入口。E0658 与 E0554 的区别在于：前者是「库 API 未稳定」，后者是「编译器拒绝 feature gate」——两者都不能靠配置绕过。
 
-**修正**：等待 1.98 稳定化（跟踪本页「零、1.98 周期跟踪清单」）；实验用 nightly + `#![feature(float_algebraic)]`，等效行为可先用 [`crates/c08_algorithms/src/rust_197_features.rs`](../../../crates/c08_algorithms/src/rust_197_features.rs) 中的演示实现过渡。
+**修正**：
+
+等待 1.98 稳定化（跟踪本页「零、1.98 周期跟踪清单」）；
+实验用 nightly + `#![feature(float_algebraic)]`，等效行为可先用 [`crates/c08_algorithms/src/rust_197_features.rs`](../../../crates/c08_algorithms/src/rust_197_features.rs) 中的演示实现过渡。

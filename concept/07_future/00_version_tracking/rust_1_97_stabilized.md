@@ -11,7 +11,12 @@
 > **最后更新**: 2026-07-10
 > **状态**: ✅ 已对齐 Rust 1.97.0 stable
 >
-> **权威来源**: · [Rust 1.97.0 Release Notes](https://releases.rs/docs/1.97.0/) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> **权威来源**:
+>
+> · [Rust 1.97.0 Release Notes](https://releases.rs/docs/1.97.0/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 >
 > **前置概念**: [Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.96 稳定特性](rust_1_96_stabilized.md)
 > **后置概念**: [Rust 1.97.0 前沿特性预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)

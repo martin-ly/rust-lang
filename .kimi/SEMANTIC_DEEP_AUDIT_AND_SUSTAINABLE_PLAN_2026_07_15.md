@@ -330,6 +330,57 @@
 
 ---
 
+## 11. 执行结果（2026-07-15）
+
+> 本计划当晚即进入执行。以下变更已全部落地并通过质量门。
+
+### 11.1 已完成的即时修复
+
+| 问题 | 修复动作 | 证据 |
+|---|---|---|
+| 全质量门失败 | 修复 quiz 注册表（`1302` → `1299`）、cargo test 路径、`const_trait_preview` 双 SUMMARY 条目、authority coverage 缺口 | `bash scripts/run_quality_gates.sh` exit 0 |
+| `const trait impl` 双权威页 | `19_const_trait_preview.md` 已为重定向 stub，指向 `06_const_trait_impl_preview.md` | 双权威页检查通过 |
+| `crates/c03_control_fn/snippets/` 路径断裂 | 保留原 `snippets/` 目录并补充 README 说明 AGENTS.md §4.0 豁免 | `cargo test --workspace` 通过 |
+
+### 11.2 新增语义深度检查器（观察门）
+
+| 脚本 | 作用 | 当前基线 | 状态 |
+|---|---|---|---|
+| `scripts/check_stub_purity.py` | 检测伪 stub / 空壳页 / 高重复正文 | 46 伪 stub / 128 空壳 / 0 高重复 | ✅ 观察门通过 |
+| `scripts/check_cross_domain_coverage.py` | 检查 16 个 Rust 1.97 交叉/边界语义域权威页覆盖 | 16/16 (100%) | ✅ 观察门通过 |
+| `scripts/check_kg_relation_precision.py` | 检查 KG 核心实体关系是否使用语义谓词 | core_generic_ratio=0.00% / global=70.10% | ✅ 观察门通过 |
+| `scripts/apply_kg_semantic_predicates.py` | 将核心 50 实体周边 `ex:RelationAnnotation` 迁移为语义谓词 | 2,389 条关系实例化 | 工具脚本 |
+
+### 11.3 新增/增强的权威页与机制
+
+- 新建 4 个交叉/边界语义权威页：
+  - `concept/01_foundation/04_control_flow/03_let_chains.md`
+  - `concept/03_advanced/01_async/14_gat_async_boundary.md`
+  - `concept/03_advanced/00_concurrency/04_send_sync_boundaries.md`
+  - `concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md`
+- `concept_consistency_auditor.py` 监控概念从 8 个扩展到 22 个。
+- `AGENTS.md` §5.2 观察门转正机制已恢复，并明确禁止未来以"用户指示"绕过。
+- `run_quality_gates.sh` 与 `.github/workflows/quality_gates.yml` 已挂载 O1/O2 观察门。
+
+### 11.4 最终质量门状态
+
+```
+✅ All 23 quality gates passed (23 blocking + 2 semantic observe).
+```
+
+- 23 阻断门全部通过（含 cargo/test/clippy/audit/vet/mdbook/去重/拓扑/KG/权威覆盖/测验/元数据/代码块/思维覆盖/语义健康等）。
+- 2 个新增语义观察门通过（stub purity、cross-domain coverage）。
+- 命名规范保留 64 条 WARN（均为 §4.0 允许的专题系列/版本跟踪/内容套件），ERROR=0，不阻断。
+
+### 11.5 剩余长期债务（按原计划阶段推进）
+
+- **Stub 纯度**: 46 伪 stub 与 128 空壳页仍需按阶段 A/B 逐步清理或迁移，当前仅作为观察门可见。
+- **KG 全局谓词**: 核心 50 实体已清零通用关系，但全局仍有 70.10% 关系使用 `ex:RelationAnnotation`，需分阶段扩展。
+- **决策树可执行化**: 仍未连接 rustc/Miri，保留为阶段 E 工作。
+- **版本语义反向注入**: 1.97 变更多沉淀在版本跟踪页，未系统反向注入权威页，保留为阶段 F 工作。
+
+---
+
 **附录：可直接复现的基线命令**
 
 ```bash

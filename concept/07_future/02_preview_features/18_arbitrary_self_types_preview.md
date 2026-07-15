@@ -5,7 +5,13 @@
 > **EN**: Arbitrary Self Types Preview
 > **Summary**: Preview of arbitrary self types: extending method receivers beyond `&self`, `&mut self`, and `Box<Self>`.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **来源**: [RFC 3519 — Arbitrary Self Types v2](https://rust-lang.github.io/rfcs//3519-arbitrary-self-types-v2.html) · [Rust Reference — Methods](https://doc.rust-lang.org/reference/items/associated-items.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+>
+> [RFC 3519 — Arbitrary Self Types v2](https://rust-lang.github.io/rfcs//3519-arbitrary-self-types-v2.html) ·
+> [Rust Reference — Methods](https://doc.rust-lang.org/reference/items/associated-items.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -18,11 +24,17 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **定位**: 探讨 Rust 中 arbitrary self types 的提案——允许 `self` 参数使用任意类型（不仅是 `Self`、`&Self`、`&mut Self`、`Box<Self>`、`Rc<Self>`、`Arc<Self>`、`Pin<P<Self>>`），分析其对嵌入式驱动、内核编程和自定义指针类型的影响。
-> **前置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Pin](../../03_advanced/01_async/08_pin_unpin.md) · [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md)
+> **前置概念**:
+>
+> [Traits](../../02_intermediate/00_traits/01_traits.md) ·
+> [Pin](../../03_advanced/01_async/08_pin_unpin.md) ·
+> [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
+> **后置概念**:
+> [Rust Specification](https://www.rust-lang.org/) ·
+> [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
 
 ## 📑 目录

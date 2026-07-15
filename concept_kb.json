@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 504,
-    "generated_at": "2026-07-15T09:54:06.536370+00:00"
+    "generated_at": "2026-07-15T10:04:15.739467+00:00"
   },
   "files": [
     {
@@ -63695,7 +63695,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
-      "line_count": 529,
+      "line_count": 534,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -63853,7 +63853,7 @@
       "layer": "L7",
       "title": "Rust 1.98+ 前沿特性预览",
       "positioning": "",
-      "line_count": 721,
+      "line_count": 724,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -66345,7 +66345,7 @@
       "layer": "L7",
       "title": "Arbitrary Self Types 预览：自定义方法接收器",
       "positioning": "探讨 Rust 中 arbitrary self types 的提案——允许 `self` 参数使用任意类型（不仅是 `Self`、`&Self`、`&mut Self`、`Box<Self>`、`Rc<Self>`、`Arc<Self>`、`Pin<P<Self>>`），分析其对嵌入式驱动、内核编程和自定义指针类型的影响。",
-      "line_count": 443,
+      "line_count": 455,
       "theorem_chains": [
         {
           "text": "| Arbitrary Self Types 预览：自定义方法接收器 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -66466,11 +66466,11 @@
       "matrix_rows": 15,
       "pre_post": {
         "pre": [
-          "[Traits](../../02_intermediate/00_traits/01_traits.md) · [Pin](../../03_advanced/01_async/08_pin_unpin.md) · [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md)",
+          ">",
           "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)"
         ],
         "post": [
-          "[Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)"
+          "> [Rust Specification](https://www.rust-lang.org/) ·"
         ]
       },
       "backward_chains": 0,
@@ -66481,7 +66481,7 @@
       "layer": "L7",
       "title": "Const Trait 实现预览",
       "positioning": "",
-      "line_count": 11,
+      "line_count": 13,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],

@@ -1684,6 +1684,19 @@
         "title_sim": 0.5,
         "shared": 6,
         "same_dir": true,
+        "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
+        "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
+        "t1": "C05 Threads 主索引导航",
+        "t2": "C05 Threads 术语表",
+        "lines1": 22,
+        "lines2": 22
+      },
+      {
+        "sim": 0.818,
+        "kw_sim": 0.818,
+        "title_sim": 0.5,
+        "shared": 6,
+        "same_dir": true,
         "f1": "crates/c04_generic/docs/00_master_index.md",
         "f2": "crates/c04_generic/docs/tier_01_foundations/01_project_overview.md",
         "t1": "C04 泛型编程 - 主索引",
@@ -1805,19 +1818,6 @@
         "f2": "crates/c04_generic/docs/tier_01_foundations/04_faq.md",
         "t1": "C04 泛型编程 - 术语表",
         "t2": "C04 泛型编程 - 常见问题",
-        "lines1": 22,
-        "lines2": 22
-      },
-      {
-        "sim": 0.818,
-        "kw_sim": 0.818,
-        "title_sim": 0.5,
-        "shared": 6,
-        "same_dir": true,
-        "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
-        "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
-        "t1": "C05 Threads 主索引导航",
-        "t2": "C05 Threads 术语表",
         "lines1": 22,
         "lines2": 22
       },
@@ -2062,11 +2062,11 @@
         "shared": 5,
         "same_dir": true,
         "f1": "crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md",
-        "f2": "crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md",
+        "f2": "crates/c01_ownership_borrow_scope/docs/07_role_based_navigation.md",
         "t1": "Rust 所有权系统概念关系网络",
-        "t2": "1.3 核心概念术语表",
+        "t2": "C01 角色导航系统",
         "lines1": 15,
-        "lines2": 22
+        "lines2": 15
       },
       {
         "sim": 0.727,
@@ -2075,21 +2075,8 @@
         "shared": 5,
         "same_dir": true,
         "f1": "crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md",
-        "f2": "crates/c01_ownership_borrow_scope/docs/07_role_based_navigation.md",
-        "t1": "Rust 所有权系统概念关系网络",
-        "t2": "C01 角色导航系统",
-        "lines1": 15,
-        "lines2": 15
-      },
-      {
-        "sim": 0.727,
-        "kw_sim": 0.727,
-        "title_sim": 0.0,
-        "shared": 5,
-        "same_dir": true,
-        "f1": "crates/c01_ownership_borrow_scope/docs/03_mind_map.md",
         "f2": "crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md",
-        "t1": "Rust 所有权系统思维导图",
+        "t1": "Rust 所有权系统概念关系网络",
         "t2": "1.3 核心概念术语表",
         "lines1": 15,
         "lines2": 22
@@ -2106,6 +2093,19 @@
         "t2": "C01 角色导航系统",
         "lines1": 15,
         "lines2": 15
+      },
+      {
+        "sim": 0.727,
+        "kw_sim": 0.727,
+        "title_sim": 0.0,
+        "shared": 5,
+        "same_dir": true,
+        "f1": "crates/c01_ownership_borrow_scope/docs/03_mind_map.md",
+        "f2": "crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md",
+        "t1": "Rust 所有权系统思维导图",
+        "t2": "1.3 核心概念术语表",
+        "lines1": 15,
+        "lines2": 22
       },
       {
         "sim": 0.727,

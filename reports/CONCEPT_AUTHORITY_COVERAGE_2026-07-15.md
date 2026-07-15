@@ -10,11 +10,11 @@
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 493 | 98.8% |
+| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 494 | 99.0% |
 | P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 458 | 91.8% |
 | P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 424 | 85.0% |
-| **任一权威（P0∪P1∪P2）** | **498** | **99.8%** |
-| 无任何国际权威引用（缺口） | 1 | 0.2% |
+| **任一权威（P0∪P1∪P2）** | **499** | **100.0%** |
+| 无任何国际权威引用（缺口） | 0 | 0.0% |
 
 ## 内容页口径覆盖率（排除 00_meta 工具页 / quiz / placeholders / sources 索引）
 
@@ -22,10 +22,10 @@
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方 | 413 | 99.8% |
+| P0 官方 | 414 | 100.0% |
 | P1 学术/形式化 | 405 | 97.8% |
 | P2 社区/生态 | 407 | 98.3% |
-| **任一权威** | **413** | **99.8%** |
+| **任一权威** | **414** | **100.0%** |
 
 内容页 P1 缺口（9）: `concept/01_foundation/04_control_flow/03_let_chains.md` · `concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md` · `concept/03_advanced/00_concurrency/04_send_sync_boundaries.md` · `concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md` · `concept/03_advanced/04_ffi/04_async_ffi_boundary.md` · `concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md` · `concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md` · `concept/07_future/00_version_tracking/rust_1_98_stabilized.md` · `concept/07_future/02_preview_features/19_const_trait_preview.md`
 
@@ -42,7 +42,7 @@
 | L4 | 55 | 55 | 100.0% | 55 | 100.0% |
 | L5 | 20 | 20 | 100.0% | 20 | 100.0% |
 | L6 | 128 | 124 | 96.9% | 128 | 100.0% |
-| L7 | 66 | 64 | 97.0% | 65 | 98.5% |
+| L7 | 66 | 65 | 98.5% | 66 | 100.0% |
 | L? | 3 | 3 | 100.0% | 3 | 100.0% |
 
 ## 核心缺口（L1-L4 且 无 P0 官方国际权威）
@@ -65,7 +65,7 @@
 
 > 扫描 crates docs md **568**（含嵌套子 crate）；stub/重定向 504，纯索引 README 2，代码清单页 0，quiz 0。
 
-- 非 stub 内容页 **62** 个，有国际权威来源引用 **61** 个（**98.4%**）。
+- 非 stub 内容页 **62** 个，有国际权威来源引用 **62** 个（**100.0%**）。
 - 权威域口径为 crates 扩展集（P0/P1/P2 超集 + tokio.rs/rustwasm/rust-embedded/webassembly.org/w3.org/egui/kani/aeneas 等生态权威），见脚本 `CRATES_AUTH_RE`。
 - 分类口径（stub 标记/纯索引 README/代码清单豁免）与 `tmp/crates_docs_authority_full.py` 一致。
 
@@ -73,7 +73,7 @@
 |:---|---:|---:|
 | c01_ownership_borrow_scope | 5 | 5 |
 | c02_type_system | 4 | 4 |
-| c03_control_fn | 5 | 4 |
+| c03_control_fn | 5 | 5 |
 | c04_generic | 2 | 2 |
 | c05_threads | 4 | 4 |
 | c06_async | 4 | 4 |
@@ -84,8 +84,6 @@
 | c11_macro_system_proc | 1 | 1 |
 | c12_wasm | 3 | 3 |
 | c17_resolver_v3_public_demo | 1 | 1 |
-
-crates 内容页缺口: `crates/c03_control_fn/docs/tier_03_snippets/README.md`
 
 
 ### crates stub canonical 链接健康度

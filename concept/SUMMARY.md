@@ -489,7 +489,6 @@
   - [Cranelift 后端预研：Rust 编译器的快速调试编译](07_future/02_preview_features/16_cranelift_backend_preview.md)
   - [TAIT 预研](07_future/02_preview_features/17_type_alias_impl_trait_preview.md)
   - [Arbitrary Self Types 预览：自定义方法接收器](07_future/02_preview_features/18_arbitrary_self_types_preview.md)
-  - [Const Trait 预研](07_future/02_preview_features/06_const_trait_impl_preview.md)
   - [Ergonomic Ref-Counting 预研：人机工学引用（Reference）计数](07_future/02_preview_features/20_ergonomic_ref_counting_preview.md)
   - [Rust 语言规范预研：从参考文档到形式化规范](07_future/02_preview_features/21_rust_specification_preview.md)
   - [Async Drop：异步资源的优雅销毁](07_future/02_preview_features/22_async_drop_preview.md)
