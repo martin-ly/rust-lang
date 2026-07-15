@@ -60,6 +60,7 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 

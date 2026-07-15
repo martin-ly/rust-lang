@@ -250,9 +250,9 @@ fn main() {
 }
 ```
 
-**实测错误**：`error[E0381]: used binding `x` is possibly-uninitialized`。
+**实测错误**：`error[E0381]: used binding`x`is possibly-uninitialized`。
 
-### ✅ 修正：用 if 表达式保证所有路径都有值。
+### ✅ 修正：用 if 表达式保证所有路径都有值
 
 ```rust
 fn main() {

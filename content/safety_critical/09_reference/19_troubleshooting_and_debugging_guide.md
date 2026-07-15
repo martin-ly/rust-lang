@@ -4,6 +4,7 @@
 **Summary**: Rust安全关键系统故障排除与调试入口；通用 Rust 编译器错误、生命周期与泛型问题排错请见 `concept/` 权威页。
 
 > **权威来源**: 本文件为安全关键领域专题入口；通用 Rust 概念解释请见：
+>
 > - [所有权系统](../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > - [借用与生命周期](../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)、[生命周期深入](../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 > - [错误处理基础](../../../concept/01_foundation/08_error_handling/01_error_handling_basics.md)
@@ -14,7 +15,6 @@
 > - [FFI](../../../concept/03_advanced/04_ffi/01_rust_ffi.md)
 >
 > 若 `concept/` 已覆盖相同主题，本文仅保留安全关键系统场景下的调试要点与决策树，不重复通用概念推导。
-
 > **Bloom 层级**: L4-L6
 >
 > 本文内容迁移自历史归档，已按 `AGENTS.md` 规则保留为安全关键领域专题实践。
@@ -28,13 +28,13 @@
 - **优先使用 Miri**：对任何 `unsafe` 边界或 FFI 交互，先用 `cargo miri test` 检测未定义行为。
 - **冻结工具链**：记录并锁定 `rust-toolchain.toml`，确保调试结果可复现。
 - **保留证据**：将缺陷、根因分析与修复措施写入安全案例（Safety Case）与变更记录。
-- ** worst-case 思维**：在实时/嵌入式场景中，结合 WCET 分析与硬件调试器（probe-rs、OpenOCD）验证。
+- **worst-case 思维**：在实时/嵌入式场景中，结合 WCET 分析与硬件调试器（probe-rs、OpenOCD）验证。
 
 ---
 
 ## 快速决策树
 
-```
+```text
 遇到编译错误？
 ├── 借用/生命周期错误 (E0499, E0597, E0507...)
 │   └── 参考 concept/01_foundation/01_ownership_borrow_lifetime/

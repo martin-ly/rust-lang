@@ -41,6 +41,7 @@
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [⚠️ 反例与陷阱：二分查找中点计算溢出（运行时陷阱）](#️-反例与陷阱二分查找中点计算溢出运行时陷阱)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 一、核心概念
 

@@ -60,6 +60,10 @@
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：含泛型方法的 trait 不能作 trait object（rustc 1.97.0，--edition 2024 实测）](#反例含泛型方法的-trait-不能作-trait-objectrustc-1970--edition-2024-实测)
+    - [✅ 修正：把方法参数具体化，或改用泛型函数静态分发](#-修正把方法参数具体化或改用泛型函数静态分发)
 
 ---
 

@@ -74,6 +74,7 @@ pub fn flags() -> MyFlags { /* ... */ }
   - [八、来源与延伸阅读](#八来源与延伸阅读)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 

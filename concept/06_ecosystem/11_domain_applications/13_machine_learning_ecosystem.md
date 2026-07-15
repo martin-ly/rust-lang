@@ -75,6 +75,7 @@
     - [测验 5：`ort`（ONNX Runtime Rust bindings）在模型部署中有什么优势？（理解层）](#测验-5ortonnx-runtime-rust-bindings在模型部署中有什么优势理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 > **变更日志**:
 >

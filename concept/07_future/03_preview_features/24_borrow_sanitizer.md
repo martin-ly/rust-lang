@@ -399,7 +399,6 @@ mindmap
       5.2 与 Safety Tags 的协同
 ```
 
-
 ## ⚠️ 反例与陷阱：安全代码的别名违规在编译期即被拒绝
 
 **反例**：试图在同一作用域制造两个可变别名——这正是 BorrowSanitizer 在 `unsafe` 代码中动态检查的情形，但安全代码中借用检查器直接拒绝：
@@ -414,7 +413,7 @@ fn main() {
 }
 ```
 
-实测（rustc 1.97.0, edition 2024）：`error[E0499]: cannot borrow `x` as mutable more than once at a time`。
+实测（rustc 1.97.0, edition 2024）：`error[E0499]: cannot borrow`x`as mutable more than once at a time`。
 
 **陷阱本质**：BSan 面向 `unsafe` + 原始指针场景——那里编译器无法静态证明别名唯一性。若误以为「安全代码也需要 BSan 兜底」，说明误解了分工：安全 Rust 的别名规则由借用检查器静态强制，BSan/Miri 只补 `unsafe` 盲区。
 

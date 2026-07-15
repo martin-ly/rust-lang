@@ -58,6 +58,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：const fn 中构造 `String`（rustc 1.97.0 实测）](#反例const-fn-中构造-stringrustc-1970-实测)
     - [✅ 修正：静态数据用 `&'static str`](#-修正静态数据用-static-str)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 > **前置概念**: N/A
 > **后置概念**: N/A

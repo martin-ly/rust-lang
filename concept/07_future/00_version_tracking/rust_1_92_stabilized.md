@@ -264,6 +264,8 @@
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
 
 ---
 

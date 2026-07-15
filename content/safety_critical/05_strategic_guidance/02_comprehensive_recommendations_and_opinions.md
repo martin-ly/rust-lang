@@ -4,7 +4,6 @@
 **Summary**: Rust安全关键系统应用 - 综合意见与建议 Comprehensive Recommendations And Opinions.
 
 > **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/06_ecosystem/03_design_patterns/03_system_design_principles.md`](../../../concept/06_ecosystem/03_design_patterns/03_system_design_principles.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
-
 > **Bloom 层级**: L4-L6
 >
 > 本文内容迁移自历史归档，已按 `AGENTS.md` 规则保留为安全关键领域专题实践。

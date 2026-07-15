@@ -70,6 +70,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：feature 关闭时引用 feature-gated 项（rustc 1.97.0 实测）](#反例feature-关闭时引用-feature-gated-项rustc-1970-实测)
     - [✅ 修正：调用点同样用 cfg 门控](#-修正调用点同样用-cfg-门控)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 

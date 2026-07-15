@@ -62,6 +62,8 @@
     - [测验 5：目前 Rust 社区如何 workaround MCDC 覆盖的缺失？（理解层）](#测验-5目前-rust-社区如何-workaround-mcdc-覆盖的缺失理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱：稳定通道上使用 `#[coverage(off)]`](#️-反例与陷阱稳定通道上使用-coverageoff)
 
 ---
 

@@ -69,6 +69,7 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [补充视角：WebAssembly 项目的 CI/CD 实践](#补充视角webassembly-项目的-cicd-实践)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 

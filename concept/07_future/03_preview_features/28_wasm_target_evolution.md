@@ -267,7 +267,6 @@ mindmap
     三、未来提案对 Rust 的影响
 ```
 
-
 ## ⚠️ 反例与陷阱：沿用已移除的 `wasm32-wasi` target 名
 
 **反例（迁移陷阱）**：CI 脚本仍写旧 target 名：

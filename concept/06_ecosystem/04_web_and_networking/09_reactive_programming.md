@@ -1039,7 +1039,7 @@ fn circular_signal_deadlock() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-以下自测题覆盖响应式编程的三个核心考点：响应式宣言的四个特征（响应性、弹性、消息驱动、容错）与 Rust 机制的对应、`futures::Stream` 与 `Iterator` 的 pull 语义异同、背压在有界 channel 中的具体行为。建议作答后对照解析，Stream 相关错题回查本章模型对比矩阵一节。es::Stream` 与响应式编…、测验 3：`tokio::sync::watch` 在响应式状态中有什…、测验 4：为什么 Rust 的响应式 UI 框架（如 `iced`、`…等5个方面的顺序逐层展开。
+以下自测题覆盖响应式编程的三个核心考点：响应式宣言的四个特征（响应性、弹性、消息驱动、容错）与 Rust 机制的对应、`futures::Stream` 与 `Iterator` 的 pull 语义异同、背压在有界 channel 中的具体行为。建议作答后对照解析，Stream 相关错题回查本章模型对比矩阵一节。es::Stream`与响应式编…、测验 3：`tokio::sync::watch` 在响应式状态中有什…、测验 4：为什么 Rust 的响应式 UI 框架（如 `iced`、`…等5个方面的顺序逐层展开。
 
 ### 测验 1：响应式编程（Reactive Programming）的核心抽象是什么？（理解层）
 

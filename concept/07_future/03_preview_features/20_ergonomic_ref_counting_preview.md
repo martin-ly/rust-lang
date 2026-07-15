@@ -66,6 +66,7 @@
     - [测验 4：`Weak` 指针在 Rust 中解决什么问题？（理解层）](#测验-4weak-指针在-rust-中解决什么问题理解层)
     - [测验 5：这个提案对 Rust 的 GC 讨论有什么影响？（理解层）](#测验-5这个提案对-rust-的-gc-讨论有什么影响理解层)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 一、核心概念
 

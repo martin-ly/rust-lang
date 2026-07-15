@@ -73,6 +73,7 @@
     - [测验 5：为什么事件驱动系统中需要"事件 schema 治理"（Schema Governance）？（理解层）](#测验-5为什么事件驱动系统中需要事件-schema-治理schema-governance理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 

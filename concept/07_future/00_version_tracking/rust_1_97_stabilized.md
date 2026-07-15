@@ -510,7 +510,6 @@ mindmap
       5.4 -m 简写
 ```
 
-
 ## ⚠️ 反例与陷阱：1.97 起空 `export_name` 报错
 
 **反例**：为「清除符号名」把 `export_name` 置空——旧版本部分容忍，1.97 起直接报错：
@@ -522,7 +521,7 @@ fn foo() {}
 fn main() { foo(); }
 ```
 
-实测（rustc 1.97.0, edition 2024）：`error: `export_name` may not be empty`。
+实测（rustc 1.97.0, edition 2024）：`error:`export_name`may not be empty`。
 
 **陷阱本质**：这是 1.97 兼容性变更之一（另见 v0 mangling 默认化）：空符号名在链接期无意义，过去被静默接受，导致难以排查的链接行为。此外 edition 2024 要求 `export_name` 包在 `unsafe(...)` 中，两层规则叠加容易只修一层。
 

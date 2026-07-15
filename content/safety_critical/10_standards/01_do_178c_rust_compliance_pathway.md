@@ -3,8 +3,10 @@
 **EN**: Do 178c Rust Compliance Pathway
 **Summary**: DO-178C Rust合规路径 Do 178c Rust Compliance Pathway.
 
-> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md`](../../../concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
-
+> **权威来源**:
+> 本文件为 `content/` 专题深度内容入口；
+> 通用 Rust 概念解释请见 [`concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md`](../../../concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md)。
+> 若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
 > **Bloom 层级**: L4-L6
 >
 > 本文内容迁移自历史归档，已按 `AGENTS.md` 规则保留为安全关键领域专题实践。
@@ -690,6 +692,7 @@ pub enum TestResult {
 ---
 
 *本文档应与DO-178C标准原文配合使用。*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -718,21 +721,13 @@ pub enum TestResult {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
 

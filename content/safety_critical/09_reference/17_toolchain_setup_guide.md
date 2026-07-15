@@ -19,7 +19,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                      IDE/编辑器层                            │
 │  VS Code + rust-analyzer / CLion / vim + coc-rust-analyzer  │
@@ -880,6 +880,7 @@ cargo update --workspace --locked --dry-run
 ---
 
 *定期更新此文档以反映工具链的最新发展。*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -908,13 +909,9 @@ cargo update --workspace --locked --dry-run
 ## 权威来源索引
 
 > **[来源: Wikipedia - Machine Learning]**
-
 > **[来源: Wikipedia - Artificial Intelligence]**
-
 > **[来源: tch-rs Documentation]**
-
 > **[来源: ACM - AI Systems]**
-
 > **[来源: ISO 26262 - Functional Safety]**
 > **[来源: IEC 61508 - Safety Standards]**
 > **[来源: MISRA Rust Guidelines]**

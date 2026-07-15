@@ -4,7 +4,6 @@
 **Summary**: Rust应用决策树图集 Rust Decision Trees.
 
 > **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/05_comparative/00_paradigms/01_paradigm_matrix.md`](../../../concept/05_comparative/00_paradigms/01_paradigm_matrix.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
-
 > **Bloom 层级**: L4-L6
 >
 > 本文内容迁移自历史归档，已按 `AGENTS.md` 规则保留为安全关键领域专题实践。
@@ -13,7 +12,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
                     ┌─────────────────────────────────────┐
                     │  开始: 选择认证工具链                 │
                     │  安全关键Rust开发                    │
@@ -78,10 +77,10 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
                     ┌─────────────────────────────────────┐
                     │  开始: 定义代码安全策略               │
-                    │  Rust项目开发                         │
+                    │  Rust项目开发                        │
                     └──────────────┬──────────────────────┘
                                    │
                                    ▼
@@ -157,10 +156,10 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```
+```text
                     ┌─────────────────────────────────────┐
                     │  开始: Rust安全关键系统培训规划       │
-                    │  团队能力建设                         │
+                    │  团队能力建设                        │
                     └──────────────┬──────────────────────┘
                                    │
                                    ▼

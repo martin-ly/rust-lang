@@ -4,7 +4,6 @@
 **Summary**: 安全完整性等级选择指南 Safety Integrity Level Selection Guide.
 
 > **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md`](../../../concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
-
 > **Bloom 层级**: L4-L6
 >
 > 本文内容迁移自历史归档，已按 `AGENTS.md` 规则保留为安全关键领域专题实践。
@@ -19,7 +18,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 风险 = 严重性(S) × 暴露率(E) × 可控性(C)
 
 严重性(S):

@@ -415,9 +415,9 @@ fn main() {
 }
 ```
 
-**实测错误**：`error[E0506]: cannot assign to `s` because it is borrowed`。
+**实测错误**：`error[E0506]: cannot assign to`s`because it is borrowed`。
 
-### ✅ 修正：收窄借用作用域后再赋值。
+### ✅ 修正：收窄借用作用域后再赋值
 
 ```rust
 fn main() {

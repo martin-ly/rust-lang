@@ -4,7 +4,6 @@
 **Summary**: Rust安全关键系统快速参考卡片 Quick Reference Card.
 
 > **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/00_meta/04_navigation/11_quick_reference.md`](../../../concept/00_meta/04_navigation/11_quick_reference.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
-
 > **Bloom 层级**: L4-L6
 >
 > 本文内容迁移自历史归档，已按 `AGENTS.md` 规则保留为安全关键领域专题实践。
@@ -94,6 +93,7 @@ cargo embed
 ---
 
 将此卡片打印并放在工作台上，随时查阅
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -122,11 +122,8 @@ cargo embed
 ## 权威来源索引
 
 > **[来源: ISO 26262 - Functional Safety]**
-
 > **[来源: IEC 61508 - Safety Standards]**
-
 > **[来源: MISRA Rust Guidelines]**
-
 > **[来源: Ferrocene Language Specification]**
 
 ---

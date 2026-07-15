@@ -73,6 +73,10 @@
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [反例：未实现 Add 却使用 +（rustc 1.97.0，--edition 2024 实测）](#反例未实现-add-却使用-rustc-1970--edition-2024-实测)
+    - [✅ 修正：实现 `std::ops::Add` 后再使用运算符](#-修正实现-stdopsadd-后再使用运算符)
 
 ---
 
@@ -949,9 +953,9 @@ fn main() {
 }
 ```
 
-**实测错误**：`error[E0369]: cannot add `S` to `S``。
+**实测错误**：`error[E0369]: cannot add`S` to `S``。
 
-### ✅ 修正：实现 `std::ops::Add` 后再使用运算符。
+### ✅ 修正：实现 `std::ops::Add` 后再使用运算符
 
 ```rust
 struct S;

@@ -4,7 +4,6 @@
 **Summary**: IEC 61508 Rust实施指南 Iec 61508 Rust Implementation Guide.
 
 > **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md`](../../../concept/06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
-
 > **Bloom 层级**: L4-L6
 >
 > 本文内容迁移自历史归档，已按 `AGENTS.md` 规则保留为安全关键领域专题实践。
@@ -688,19 +687,12 @@ impl SafetyOpcUaServer {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
 
 ---

@@ -701,7 +701,6 @@ mindmap
       6.1 Wasm Components
 ```
 
-
 ## ⚠️ 反例与陷阱：在 stable 上直接调用预览 API
 
 **反例**：看到本页 `float_algebraic` 等 API 预览后，在 stable 项目里直接使用：
@@ -714,7 +713,7 @@ fn main() {
 }
 ```
 
-实测（rustc 1.97.0 stable, edition 2024）：`error[E0658]: use of unstable library feature `float_algebraic``。
+实测（rustc 1.97.0 stable, edition 2024）：`error[E0658]: use of unstable library feature`float_algebraic``。
 
 **陷阱本质**：预览页列出的 nightly-only API 在 stable 上没有入口。E0658 与 E0554 的区别在于：前者是「库 API 未稳定」，后者是「编译器拒绝 feature gate」——两者都不能靠配置绕过。
 

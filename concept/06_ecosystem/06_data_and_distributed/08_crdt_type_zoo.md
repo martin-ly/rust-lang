@@ -45,6 +45,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：CRDT 状态比较缺少 `PartialEq`（rustc 1.97.0 实测）](#反例crdt-状态比较缺少-partialeqrustc-1970-实测)
     - [✅ 修正：derive 相等性](#-修正derive-相等性)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 

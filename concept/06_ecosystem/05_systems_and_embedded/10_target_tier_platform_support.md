@@ -117,9 +117,9 @@ impl Drop for Handle { // ❌ Copy 与 Drop 互斥
 }
 ```
 
-**实测错误**：`error[E0184]: the trait `Copy` cannot be implemented for this type; the type has a destructor`。
+**实测错误**：`error[E0184]: the trait`Copy`cannot be implemented for this type; the type has a destructor`。
 
-### ✅ 修正：纯数据类型用 Copy；需释放资源的类型用 Drop + 移动语义。
+### ✅ 修正：纯数据类型用 Copy；需释放资源的类型用 Drop + 移动语义
 
 ```rust
 #[derive(Clone, Copy)]

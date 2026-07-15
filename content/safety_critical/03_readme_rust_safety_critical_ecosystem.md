@@ -61,6 +61,7 @@
 **文档**: [02_rust_multi_dimensional_matrix.md](02_matrices/02_rust_multi_dimensional_matrix.md) (10 KB)
 
 > 同目录还有：
+>
 > - [`01_comprehensive_language_comparison_matrix.md`](02_matrices/01_comprehensive_language_comparison_matrix.md) — 综合语言对比
 > - [`03_rust_ownership_memory_model_matrix.md`](02_matrices/03_rust_ownership_memory_model_matrix.md) — 所有权与内存模型
 > - [`04_toolchain_evaluation_matrix.md`](02_matrices/04_toolchain_evaluation_matrix.md) — 工具链评估
@@ -89,6 +90,7 @@
 **文档**: [01_rust_decision_trees.md](03_decision_trees/01_rust_decision_trees.md) (26 KB)
 
 > 同目录还有：
+>
 > - [`02_safety_integrity_level_selection_guide.md`](03_decision_trees/02_safety_integrity_level_selection_guide.md) — ASIL/SIL 选择指南
 
 **内容**: 4个结构化决策框架
@@ -111,6 +113,7 @@
 **文档**: [02_rust_axiomatic_reasoning_trees.md](04_axiomatic_reasoning/02_rust_axiomatic_reasoning_trees.md) (32 KB)
 
 > 同目录还有：
+>
 > - [`01_formal_verification_practical_guide.md`](04_axiomatic_reasoning/01_formal_verification_practical_guide.md) — Miri/Kani/Verus 实战
 
 **内容**: 形式化公理定理证明系统
@@ -136,6 +139,7 @@
 **文档**: [02_comprehensive_recommendations_and_opinions.md](05_strategic_guidance/02_comprehensive_recommendations_and_opinions.md) (14 KB)
 
 > 同目录还有：
+>
 > - [`01_adoption_strategy_and_roi_analysis.md`](05_strategic_guidance/01_adoption_strategy_and_roi_analysis.md) — 采用策略与 ROI 分析
 
 **内容**: 全方位意见建议
@@ -159,6 +163,7 @@
 **文档**: [03_sustainable_roadmap_and_plans.md](06_roadmaps/03_sustainable_roadmap_and_plans.md) (15 KB)
 
 > 同目录还有：
+>
 > - [`01_education_and_training_roadmap.md`](06_roadmaps/01_education_and_training_roadmap.md) — 教育培训路线图
 > - [`02_rust_2026_2030_roadmap_forecast.md`](06_roadmaps/02_rust_2026_2030_roadmap_forecast.md) — 2026-2030 技术预测
 > - [`04_technology_watch_and_emerging_trends.md`](06_roadmaps/04_technology_watch_and_emerging_trends.md) — 技术观察与新兴趋势
@@ -210,6 +215,7 @@
 **文档**: [03_case_study_03_automotive_ecus.md](07_case_studies/03_case_study_03_automotive_ecus.md)
 
 > 同目录还有：
+>
 > - [`04_case_study_04_medical_devices.md`](07_case_studies/04_case_study_04_medical_devices.md) — 医疗设备 (IEC 62304)
 > - [`05_case_study_05_railway_signaling.md`](07_case_studies/05_case_study_05_railway_signaling.md) — 铁路信号 (EN 50128/50129)
 > - [`06_case_study_06_autonomous_driving.md`](07_case_studies/06_case_study_06_autonomous_driving.md) — 自动驾驶感知
@@ -232,6 +238,7 @@
 > **AGENTS.md 规范**: Level 1 (Rust 基础) 已链接至 `concept/` 权威页，本文件不再重复通用概念推导。
 
 > 同目录还有：
+>
 > - [`01_assessment_and_certification.md`](08_training/01_assessment_and_certification.md) — 评估与认证体系
 > - [`02_certification_prep_guide.md`](08_training/02_certification_prep_guide.md) — 认证备考指南
 > - [`03_hands_on_lab_exercises.md`](08_training/03_hands_on_lab_exercises.md) — 动手实验
@@ -316,6 +323,7 @@
 **文档**: [18_tools_configuration_guide.md](09_reference/18_tools_configuration_guide.md)
 
 > 同目录还有：
+>
 > - [`01_api_design_guidelines.md`](09_reference/01_api_design_guidelines.md) — API 设计指南
 > - [`05_deployment_and_maintenance_guide.md`](09_reference/05_deployment_and_maintenance_guide.md) — 部署与维护
 > - [`07_ffi_integration_guide.md`](09_reference/07_ffi_integration_guide.md) — FFI 集成
@@ -348,6 +356,7 @@
 **文档**: [04_misra_c_2025_addendum_6_guide.md](10_standards/04_misra_c_2025_addendum_6_guide.md) (11 KB)
 
 > 同目录还有：
+>
 > - [`01_do_178c_rust_compliance_pathway.md`](10_standards/01_do_178c_rust_compliance_pathway.md) — DO-178C 合规路径
 > - [`02_iec_61508_rust_implementation_guide.md`](10_standards/02_iec_61508_rust_implementation_guide.md) — IEC 61508 实施指南
 > - [`03_iso_26262_rust_implementation_guide.md`](10_standards/03_iso_26262_rust_implementation_guide.md) — ISO 26262 实施指南
