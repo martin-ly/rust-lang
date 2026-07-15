@@ -11,6 +11,7 @@
 ## 未覆盖主题
 
 未发现。
+
 ## 已覆盖主题
 
 - ✅ `01_foundation/04_control_flow/03_let_chains.md` — let chains / if-let guards
@@ -25,8 +26,8 @@
 - ✅ `03_advanced/06_low_level_patterns/01_custom_allocators.md` — allocator_api / per-container allocators
 - ✅ `01_foundation/04_control_flow/02_patterns.md` — match ergonomics / default binding mode in Edition 2024
 - ✅ `04_formal/05_rustc_internals/09_destructors.md` — temporary scope / tail expression drop (Edition 2024)
-- ✅ `07_future/03_preview_features/06_const_trait_impl_preview.md` — const trait impl (effects system)
-- ✅ `07_future/03_preview_features/17_type_alias_impl_trait_preview.md` — RTN / RPITIT / TAIT precise capturing
+- ✅ `07_future/02_preview_features/06_const_trait_impl_preview.md` — const trait impl (effects system)
+- ✅ `07_future/02_preview_features/17_type_alias_impl_trait_preview.md` — RTN / RPITIT / TAIT precise capturing
 - ✅ `03_advanced/01_async/01_async.md` — async fn / Future equivalence + Send across await
 - ✅ `03_advanced/02_unsafe/01_unsafe.md` — unsafe op in unsafe fn (Edition 2024)
 

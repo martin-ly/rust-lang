@@ -199,7 +199,7 @@
       "covered": true,
       "authority_pages": [
         {
-          "path": "07_future/03_preview_features/06_const_trait_impl_preview.md",
+          "path": "07_future/02_preview_features/06_const_trait_impl_preview.md",
           "title": "Const Trait Impl 预研：常量上下文中的 Trait 泛化",
           "en": "Const Trait Impl Preview",
           "stub": false
@@ -207,7 +207,7 @@
       ],
       "stub_pages": [
         {
-          "path": "07_future/03_preview_features/19_const_trait_preview.md",
+          "path": "07_future/02_preview_features/19_const_trait_preview.md",
           "title": "Const Trait 实现预览",
           "en": "Const Trait Implementation Preview",
           "stub": true
@@ -220,22 +220,26 @@
       "covered": true,
       "authority_pages": [
         {
-          "path": "07_future/03_preview_features/17_type_alias_impl_trait_preview.md",
+          "path": "07_future/02_preview_features/17_type_alias_impl_trait_preview.md",
           "title": "TAIT Preview",
           "en": "Type Alias Impl Trait (TAIT) Preview",
           "stub": false
         },
         {
-          "path": "07_future/03_preview_features/13_lifetime_capture_preview.md",
+          "path": "07_future/02_preview_features/13_lifetime_capture_preview.md",
           "title": "Lifetime Capture in `impl Trait` Preview",
           "en": "Precise Lifetime Capture in `impl Trait` Preview",
+          "stub": false
+        },
+        {
+          "path": "07_future/02_preview_features/09_return_type_notation_preview.md",
+          "title": "Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界",
+          "en": "Return Type Notation Preview",
           "stub": false
         }
       ],
       "stub_pages": [],
-      "missing_candidates": [
-        "07_future/03_preview_features/20_return_type_notation_preview.md"
-      ]
+      "missing_candidates": []
     },
     {
       "topic": "async fn / Future equivalence + Send across await",

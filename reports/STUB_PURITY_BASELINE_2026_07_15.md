@@ -5,9 +5,9 @@
 
 ## 汇总
 
-- 扫描页数：1139
+- 扫描页数：1136
 - 伪 stub（声明为 stub 但正文过长）：46
-- 空壳页（未声明 stub 但正文极短）：131
+- 空壳页（未声明 stub 但正文极短）：128
 - 高重复正文（vs concept/ 权威页相似度 > 0.25）：0
 
 ## 伪 stub (46)
@@ -59,7 +59,7 @@
 - `crates/c05_threads/docs/06_synchronization_primitives.md` — 正文 45 行 / 1705 字节
 - `crates/c06_async/docs/07_rust_191_async_improvements.md` — 正文 32 行 / 1040 字节
 
-## 空壳页 (131)
+## 空壳页 (128)
 
 - `knowledge/00_start/01_hello_world.md` — 正文 1 行 / 15 字节
 - `knowledge/00_start/02_installation.md` — 正文 1 行 / 14 字节
@@ -174,17 +174,14 @@
 - `crates/c04_generic/docs/tier_04_advanced/04_type_level_programming.md` — 正文 3 行 / 217 字节
 - `crates/c06_async/docs/03_reorganization_complete.md` — 正文 4 行 / 87 字节
 - `crates/c06_async/docs/04_reorganization_plan.md` — 正文 4 行 / 85 字节
-- `crates/c06_async/docs/rust_194_updates/00_rust_194_overview.md` — 正文 4 行 / 89 字节
 - `crates/c06_async/docs/tier_03_references/06_runtime_comparison_glommio_2025.md` — 正文 1 行 / 69 字节
+- `crates/c06_async/docs/tier_04_rust_194_updates/00_rust_194_overview.md` — 正文 4 行 / 89 字节
 - `crates/c07_process/docs/09_cross_platform_guide.md` — 正文 1 行 / 51 字节
 - `crates/c07_process/docs/10_advanced_process_management.md` — 正文 1 行 / 48 字节
 - `crates/c07_process/docs/11_performance_optimization_guide.md` — 正文 1 行 / 51 字节
 - `crates/c07_process/docs/18_pending_items.md` — 正文 4 行 / 151 字节
 - `crates/c07_process/docs/19_performance_optimization_usage_guide.md` — 正文 1 行 / 48 字节
-- `crates/c07_process/docs/tier_04_advanced/05_testing_and_benchmarking_expanded.md` — 正文 1 行 / 47 字节
-- `crates/c07_process/docs/tier_04_advanced/07_modern_process_libraries_final.md` — 正文 1 行 / 47 字节
 - `crates/c08_algorithms/docs/tier_04_advanced/04_algorithm_engineering_practice.md` — 正文 3 行 / 228 字节
-- `crates/c09_design_pattern/docs/tier_02_guides/04_behavioral_patterns_guide_supplement.md` — 正文 1 行 / 48 字节
 - `crates/c10_networks/docs/tier_02_guides/05_performance_and_security_optimization.md` — 正文 1 行 / 50 字节
 - `crates/c10_networks/docs/tier_04_advanced/01_formal_network_protocol_theory.md` — 正文 1 行 / 33 字节
 - `crates/c10_networks/docs/tier_04_advanced/02_high_performance_network_service_architecture.md` — 正文 3 行 / 252 字节

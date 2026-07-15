@@ -234,7 +234,7 @@ bash scripts/git_hooks/install.sh
 
 | # | 观察门 | 检查目标 | 当前基线 | 转阻断条件 |
 |---:|---|---|---|---|
-| O1 | `python scripts/check_stub_purity.py --strict` | `docs/`/`knowledge/`/`content/`/`crates/*/docs/` 中声明为 stub/redirect 的文件是否保留通用概念完整正文 | 伪 stub 46 / 空壳页 131 / 高重复 0（`reports/STUB_PURITY_BASELINE_2026_07_15.md`） | 伪 stub=0 且空壳页=0 |
+| O1 | `python scripts/check_stub_purity.py --strict` | `docs/`/`knowledge/`/`content/`/`crates/*/docs/` 中声明为 stub/redirect 的文件是否保留通用概念完整正文 | 伪 stub 46 / 空壳页 128 / 高重复 0（`reports/STUB_PURITY_BASELINE_2026_07_15.md`） | 伪 stub=0 且空壳页=0 |
 | O2 | `python scripts/check_cross_domain_coverage.py --strict` | Rust 关键交叉/边界语义域（let chains、unsafe extern、async+unsafe、FFI+async、Send/Sync boundaries 等）是否有 `concept/` 非 stub 权威页 | 16 主题 / 16 覆盖 = **100%**（`reports/CROSS_DOMAIN_COVERAGE_BASELINE_2026_07_15.md`） | 覆盖率达 100% 且连续 4 周/10 次 CI 稳定 |
 | O3 | `python scripts/check_kg_relation_precision.py --strict` | 核心 50 实体的 KG 关系是否使用具体语义谓词（`dependsOn`/`entails`/`mutexWith`/`refines`/`equivalentTo`/`counterExample`）而非通用 `ex:RelationAnnotation` | 核心 50 实体周边 generic_ratio=0%（`reports/KG_RELATION_PRECISION_2026-07-15.md`） | 核心 generic_ratio=0% 且连续 4 周/10 次 CI 稳定 |
 
