@@ -2,18 +2,18 @@
   "date": "2026-07-15",
   "dry_run": false,
   "entities": 512,
-  "relations_before": 7955,
-  "relations_after": 7132,
-  "changes": 4918,
+  "relations_before": 7950,
+  "relations_after": 7131,
+  "changes": 4914,
   "before": {
-    "ex:dependsOn": 783,
-    "ex:entails": 726,
+    "ex:dependsOn": 779,
+    "ex:entails": 725,
     "ex:relatedTo": 6446
   },
   "after": {
-    "ex:dependsOn": 1299,
-    "ex:entails": 1016,
-    "ex:relatedTo": 1559,
+    "ex:dependsOn": 1295,
+    "ex:entails": 1015,
+    "ex:relatedTo": 1563,
     "ex:hasPart": 3146,
     "ex:refines": 81,
     "ex:mutexWith": 10,
@@ -21,8 +21,8 @@
     "ex:counterExample": 5,
     "ex:appliesTo": 3
   },
-  "related_to_ratio_before": 0.8103,
-  "related_to_ratio_after": 0.2186,
+  "related_to_ratio_before": 0.8108,
+  "related_to_ratio_after": 0.2192,
   "changes_detail": [
     {
       "rule": "R0-dedup",
@@ -3377,45 +3377,9 @@
       "action": "removed redundant relatedTo",
       "subject": "ex:AsyncFFIBoundary",
       "predicate": "ex:relatedTo",
-      "object": "ex:AsyncProgramming",
-      "old_predicate": "ex:relatedTo",
-      "evidence": "(ex:AsyncFFIBoundary,ex:AsyncProgramming) 已存在 dependsOn/entails，删除冗余 relatedTo"
-    },
-    {
-      "rule": "R0-dedup",
-      "action": "removed redundant relatedTo",
-      "subject": "ex:AsyncFFIBoundary",
-      "predicate": "ex:relatedTo",
-      "object": "ex:WakerContractDeepDive",
-      "old_predicate": "ex:relatedTo",
-      "evidence": "(ex:AsyncFFIBoundary,ex:WakerContractDeepDive) 已存在 dependsOn/entails，删除冗余 relatedTo"
-    },
-    {
-      "rule": "R0-dedup",
-      "action": "removed redundant relatedTo",
-      "subject": "ex:AsyncFFIBoundary",
-      "predicate": "ex:relatedTo",
-      "object": "ex:SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts",
-      "old_predicate": "ex:relatedTo",
-      "evidence": "(ex:AsyncFFIBoundary,ex:SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts) 已存在 dependsOn/entails，删除冗余 relatedTo"
-    },
-    {
-      "rule": "R0-dedup",
-      "action": "removed redundant relatedTo",
-      "subject": "ex:AsyncFFIBoundary",
-      "predicate": "ex:relatedTo",
       "object": "ex:UnsafeInAsyncContexts",
       "old_predicate": "ex:relatedTo",
       "evidence": "(ex:AsyncFFIBoundary,ex:UnsafeInAsyncContexts) 已存在 dependsOn/entails，删除冗余 relatedTo"
-    },
-    {
-      "rule": "R0-dedup",
-      "action": "removed redundant relatedTo",
-      "subject": "ex:AsyncFFIBoundary",
-      "predicate": "ex:relatedTo",
-      "object": "ex:AsyncBoundaryPanorama",
-      "old_predicate": "ex:relatedTo",
-      "evidence": "(ex:AsyncFFIBoundary,ex:AsyncBoundaryPanorama) 已存在 dependsOn/entails，删除冗余 relatedTo"
     },
     {
       "rule": "R0-dedup",

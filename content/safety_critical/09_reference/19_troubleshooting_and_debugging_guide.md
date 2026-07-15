@@ -4,14 +4,14 @@
 **Summary**: Rust安全关键系统故障排除与调试入口；通用 Rust 编译器错误、生命周期与泛型问题排错请见 `concept/` 权威页。
 
 > **权威来源**: 本文件为安全关键领域专题入口；通用 Rust 概念解释请见：
-> - [所有权系统](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
-> - [借用与生命周期](../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)、[生命周期深入](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
-> - [错误处理基础](../../concept/01_foundation/08_error_handling/01_error_handling_basics.md)
-> - [泛型](../../concept/02_intermediate/01_generics/01_generics.md)
-> - [Trait](../../concept/02_intermediate/00_traits/01_traits.md)
-> - [Unsafe Rust](../../concept/03_advanced/02_unsafe/01_unsafe.md)
-> - [异步 Rust](../../concept/03_advanced/01_async/01_async.md)
-> - [FFI](../../concept/03_advanced/04_ffi/01_rust_ffi.md)
+> - [所有权系统](../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> - [借用与生命周期](../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)、[生命周期深入](../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
+> - [错误处理基础](../../../concept/01_foundation/08_error_handling/01_error_handling_basics.md)
+> - [泛型](../../../concept/02_intermediate/01_generics/01_generics.md)
+> - [Trait](../../../concept/02_intermediate/00_traits/01_traits.md)
+> - [Unsafe Rust](../../../concept/03_advanced/02_unsafe/01_unsafe.md)
+> - [异步 Rust](../../../concept/03_advanced/01_async/01_async.md)
+> - [FFI](../../../concept/03_advanced/04_ffi/01_rust_ffi.md)
 >
 > 若 `concept/` 已覆盖相同主题，本文仅保留安全关键系统场景下的调试要点与决策树，不重复通用概念推导。
 

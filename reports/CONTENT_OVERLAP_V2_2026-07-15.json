@@ -4,8 +4,8 @@
   "indexed": 1435,
   "threshold": 0.5,
   "min_shared": 5,
-  "candidates": 561063,
-  "hits": 551,
+  "candidates": 560674,
+  "hits": 553,
   "overlaps": [
     {
       "sim": 1.0,
@@ -482,19 +482,6 @@
       "shared": 5,
       "same_dir": true,
       "f1": "crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md",
-      "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
-      "t1": "Rust 所有权系统概念关系网络",
-      "t2": "Rust 所有权系统可视化文档导航",
-      "lines1": 15,
-      "lines2": 15
-    },
-    {
-      "sim": 0.8,
-      "kw_sim": 0.8,
-      "title_sim": 0.0,
-      "shared": 5,
-      "same_dir": true,
-      "f1": "crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md",
       "f2": "crates/c01_ownership_borrow_scope/docs/03_mind_map.md",
       "t1": "Rust 所有权系统概念关系网络",
       "t2": "Rust 所有权系统思维导图",
@@ -511,6 +498,19 @@
       "f2": "crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md",
       "t1": "Rust 所有权系统概念关系网络",
       "t2": "Rust 所有权系统多维矩阵对比分析",
+      "lines1": 15,
+      "lines2": 15
+    },
+    {
+      "sim": 0.8,
+      "kw_sim": 0.8,
+      "title_sim": 0.0,
+      "shared": 5,
+      "same_dir": true,
+      "f1": "crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md",
+      "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
+      "t1": "Rust 所有权系统概念关系网络",
+      "t2": "Rust 所有权系统可视化文档导航",
       "lines1": 15,
       "lines2": 15
     },
@@ -1964,19 +1964,6 @@
       "shared": 5,
       "same_dir": true,
       "f1": "crates/c01_ownership_borrow_scope/docs/00_master_index.md",
-      "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
-      "t1": "Rust 所有权系统完整指南 - 主索引",
-      "t2": "Rust 所有权系统可视化文档导航",
-      "lines1": 22,
-      "lines2": 15
-    },
-    {
-      "sim": 0.667,
-      "kw_sim": 0.667,
-      "title_sim": 0.0,
-      "shared": 5,
-      "same_dir": true,
-      "f1": "crates/c01_ownership_borrow_scope/docs/00_master_index.md",
       "f2": "crates/c01_ownership_borrow_scope/docs/03_mind_map.md",
       "t1": "Rust 所有权系统完整指南 - 主索引",
       "t2": "Rust 所有权系统思维导图",
@@ -2002,11 +1989,11 @@
       "title_sim": 0.0,
       "shared": 5,
       "same_dir": true,
-      "f1": "crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md",
-      "f2": "crates/c01_ownership_borrow_scope/docs/08_rust_190_comprehensive_mindmap.md",
-      "t1": "Rust 所有权系统概念关系网络",
-      "t2": "C01 所有权系统 思维导图（Rust 1.90）",
-      "lines1": 15,
+      "f1": "crates/c01_ownership_borrow_scope/docs/00_master_index.md",
+      "f2": "crates/c01_ownership_borrow_scope/docs/15_visualization_index.md",
+      "t1": "Rust 所有权系统完整指南 - 主索引",
+      "t2": "Rust 所有权系统可视化文档导航",
+      "lines1": 22,
       "lines2": 15
     },
     {
@@ -2015,12 +2002,12 @@
       "title_sim": 0.0,
       "shared": 5,
       "same_dir": true,
-      "f1": "crates/c01_ownership_borrow_scope/docs/07_role_based_navigation.md",
-      "f2": "crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md",
-      "t1": "C01 角色导航系统",
-      "t2": "1.3 核心概念术语表",
+      "f1": "crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md",
+      "f2": "crates/c01_ownership_borrow_scope/docs/08_rust_190_comprehensive_mindmap.md",
+      "t1": "Rust 所有权系统概念关系网络",
+      "t2": "C01 所有权系统 思维导图（Rust 1.90）",
       "lines1": 15,
-      "lines2": 22
+      "lines2": 15
     },
     {
       "sim": 0.667,
@@ -2047,6 +2034,19 @@
       "t2": "C01 所有权系统 思维导图（Rust 1.90）",
       "lines1": 15,
       "lines2": 15
+    },
+    {
+      "sim": 0.667,
+      "kw_sim": 0.667,
+      "title_sim": 0.0,
+      "shared": 5,
+      "same_dir": true,
+      "f1": "crates/c01_ownership_borrow_scope/docs/07_role_based_navigation.md",
+      "f2": "crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md",
+      "t1": "C01 角色导航系统",
+      "t2": "1.3 核心概念术语表",
+      "lines1": 15,
+      "lines2": 22
     },
     {
       "sim": 0.667,
@@ -6873,6 +6873,19 @@
     },
     {
       "sim": 0.5,
+      "kw_sim": 0.432,
+      "title_sim": 0.5,
+      "shared": 53,
+      "same_dir": true,
+      "f1": "content/safety_critical/README.md",
+      "f2": "content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md",
+      "t1": "Rust安全关键生态系统文档集",
+      "t2": "Rust安全关键生态系统文档集 - 主索引",
+      "lines1": 382,
+      "lines2": 443
+    },
+    {
+      "sim": 0.5,
       "kw_sim": 0.322,
       "title_sim": 0.5,
       "shared": 34,
@@ -6935,6 +6948,19 @@
       "t2": "metrics Crate 架构解构 {#metrics-crate-架构解构}",
       "lines1": 232,
       "lines2": 235
+    },
+    {
+      "sim": 0.5,
+      "kw_sim": 0.432,
+      "title_sim": 0.5,
+      "shared": 19,
+      "same_dir": true,
+      "f1": "content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md",
+      "f2": "content/safety_critical/README.md",
+      "t1": "Rust安全关键生态系统文档集 - 主索引",
+      "t2": "Rust安全关键生态系统文档集",
+      "lines1": 443,
+      "lines2": 382
     },
     {
       "sim": 0.5,

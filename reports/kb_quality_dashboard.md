@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-14T23:18:42.809261+00:00
+> 生成时间: 2026-07-15T04:15:20.565669+00:00
 > 扫描文件数: 500
 
 ## 全局指标
@@ -8,10 +8,10 @@
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
 | 总文件数 | 500 | 27 | ✅ |
-| 总定理链 (⟹) | 2094 | ≥270 | ✅ |
+| 总定理链 (⟹) | 2093 | ≥270 | ✅ |
 | 总反命题 | 670 | ≥40 | ✅ |
 | 总 Mermaid 图 | 1047 | ≥50 | ✅ |
-| 编译验证代码块 | 5117 | ≥150 | ✅ |
+| 编译验证代码块 | 5118 | ≥150 | ✅ |
 | 定理矩阵总行 | 23638 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | docs/content/knowledge 死链数量 | 0 | 0 | ✅ |
@@ -425,7 +425,7 @@
 | E:\_src\rust-lang\concept\00_meta\04_navigation\09_navigation.md | L0 | 295 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\04_navigation\10_problem_graph.md | L0 | 552 | 1 | 0 | 0 | 1 | 7 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\04_navigation\11_quick_reference.md | L0 | 859 | 1 | 0 | 0 | 1 | 0 | 25 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
-| E:\_src\rust-lang\concept\00_meta\04_navigation\12_self_assessment.md | L0 | 2295 | 1 | 0 | 0 | 1 | 0 | 56 | 6 | ✅ | ❌ | ❌ | 初学者 | 综述级 |
+| E:\_src\rust-lang\concept\00_meta\04_navigation\12_self_assessment.md | L0 | 2298 | 0 | 0 | 0 | 1 | 0 | 57 | 6 | ✅ | ❌ | ❌ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\04_navigation\13_foundations_gap_closure_index.md | L0 | 146 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | None |
 | E:\_src\rust-lang\concept\00_meta\04_navigation\14_learning_mvp_path_en.md | L0 | 290 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\00_meta\04_navigation\15_quiz_registry.md | L0 | 146 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |

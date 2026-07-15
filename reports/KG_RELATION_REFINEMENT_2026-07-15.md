@@ -1,13 +1,13 @@
 # KG 关系语义精化报告
 
 **日期**: 2026-07-15  **模式**: 已写回 kg_data_v3.json
-**实体数**: 512  **关系数**: 7955 → 7132
-**改动数**: 4918
+**实体数**: 512  **关系数**: 7950 → 7131
+**改动数**: 4914
 
 ## 目标
 
-将 `ex:relatedTo` 占比从 81.0% 降到 <50%。
-精化后：`ex:relatedTo` = 1559 / 7132 = **21.9%**
+将 `ex:relatedTo` 占比从 81.1% 降到 <50%。
+精化后：`ex:relatedTo` = 1563 / 7131 = **21.9%**
 
 ## 规则
 
@@ -27,9 +27,9 @@
 | 谓词 | 前 | 后 | Δ |
 |:---|---:|---:|---:|
 | ex:hasPart | 0 | 3146 | +3146 |
-| ex:relatedTo | 6446 | 1559 | -4887 |
-| ex:dependsOn | 783 | 1299 | +516 |
-| ex:entails | 726 | 1016 | +290 |
+| ex:relatedTo | 6446 | 1563 | -4883 |
+| ex:dependsOn | 779 | 1295 | +516 |
+| ex:entails | 725 | 1015 | +290 |
 | ex:refines | 0 | 81 | +81 |
 | ex:instanceOf | 0 | 13 | +13 |
 | ex:mutexWith | 0 | 10 | +10 |
@@ -38,8 +38,8 @@
 
 ## 关键指标
 
-- `ex:relatedTo` 占比：81.0% → 21.9%
-- `ex:relatedTo` 数量：6446 → 1559 (Δ -4887)
+- `ex:relatedTo` 占比：81.1% → 21.9%
+- `ex:relatedTo` 数量：6446 → 1563 (Δ -4883)
 - 新增谓词：`ex:hasPart` / `ex:partOf`（用于索引-内容包含关系）
 
 ## 逐边改动摘要（前 200 条）
@@ -246,7 +246,7 @@
 | R0-dedup | removed redundant relatedTo | ex:CowAndBorrowed | ex:relatedTo | ex:Ownership | (ex:CowAndBorrowed,ex:Ownership) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:CowAndBorrowed | ex:relatedTo | ex:Borrowing | (ex:CowAndBorrowed,ex:Borrowing) 已存在 dependsOn/entails，删除冗余 relatedTo |
 | R0-dedup | removed redundant relatedTo | ex:CowAndBorrowed | ex:relatedTo | ex:Traits | (ex:CowAndBorrowed,ex:Traits) 已存在 dependsOn/entails，删除冗余 relatedTo |
-| ... | ... | ... | ... | ... | 共 4918 条，详见 JSON |
+| ... | ... | ... | ... | ... | 共 4914 条，详见 JSON |
 
 ## 机器可读
 

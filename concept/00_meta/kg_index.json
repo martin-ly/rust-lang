@@ -5383,32 +5383,12 @@
         {
           "title": "Rust FFI",
           "path": "01_rust_ffi.md"
-        },
-        {
-          "title": "Async/Await",
-          "path": "../01_async/01_async.md"
-        },
-        {
-          "title": "Waker 契约",
-          "path": "../01_async/12_waker_contract_deep_dive.md"
-        },
-        {
-          "title": "Send 与 Sync",
-          "path": "../00_concurrency/02_send_sync_auto_traits.md"
-        },
-        {
-          "title": "Traits",
-          "path": "../../02_intermediate/00_traits/01_traits.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Async 中的 Unsafe",
           "path": "../02_unsafe/08_async_in_unsafe_contexts.md"
-        },
-        {
-          "title": "Async 边界全景",
-          "path": "../01_async/06_async_boundary_panorama.md"
         }
       ],
       "theorems": [],
@@ -13853,7 +13833,7 @@
       "title": "Rust 概念知识体系 —— 全面分析论证与权威对齐",
       "en": "Rust Concept Knowledge System",
       "summary": "Top-level index and navigation for the Rust layered concept knowledge system.",
-      "bloom": null,
+      "bloom": "Meta",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [],
       "postrequisites": [],
@@ -13866,7 +13846,7 @@
       "title": "",
       "en": "Authority Source Index",
       "summary": "Index of authoritative sources used throughout the concept knowledge system.",
-      "bloom": null,
+      "bloom": "Meta",
       "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
@@ -13879,7 +13859,7 @@
       "title": "",
       "en": "Rfc Index",
       "summary": "Rfc Index — An index tracking RFCs with structural impact on Rust's semantics, type system, memory model, concurrency, and ecosystem.",
-      "bloom": null,
+      "bloom": "Meta",
       "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
@@ -13892,7 +13872,7 @@
       "title": "",
       "en": "Theorem Tier Spec",
       "summary": "Theorem Tier Spec — A unified credibility-tiering standard for labeling theorems, lemmas, and corollaries across concept files.",
-      "bloom": null,
+      "bloom": "Meta",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [],
       "postrequisites": [],
@@ -13908,7 +13888,7 @@
       "title": "",
       "en": "Table of Contents",
       "summary": "mdBook navigation manifest for the `concept/` collection — the machine-read table of contents that drives the book's sidebar, reading order, and cross-page prev/next links.",
-      "bloom": null,
+      "bloom": "Meta",
       "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],

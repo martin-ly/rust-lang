@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 500,
-    "generated_at": "2026-07-14T23:18:42.810262+00:00"
+    "generated_at": "2026-07-15T04:15:20.566670+00:00"
   },
   "files": [
     {
@@ -2624,13 +2624,8 @@
       "layer": "L0",
       "title": "Rust 知识体系自测题库（Self-Assessment）",
       "positioning": "每个层级配套的自测题，用于验证知识掌握程度。答案和解析附在每题之后（可折叠）。",
-      "line_count": 2295,
-      "theorem_chains": [
-        {
-          "text": "| Self Assessment 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
-          "type": "table_row"
-        }
-      ],
+      "line_count": 2298,
+      "theorem_chains": [],
       "anti_propositions": [
         {
           "title": "### 反命题"
@@ -2985,6 +2980,14 @@
           "lines": 13,
           "should_fail": false,
           "code_preview": "struct MyFuture {     data: String,     pointer: *const String, } impl Future fo..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {     ..."
         },
         {
           "flags": [],

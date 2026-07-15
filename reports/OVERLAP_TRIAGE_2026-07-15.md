@@ -1,6 +1,6 @@
 # 重叠对分类（P1 改写执行清单）
 
-**来源**: `reports/CONTENT_OVERLAP_V2_2026-07-15.json`  **总对数**: 551
+**来源**: `reports/CONTENT_OVERLAP_V2_2026-07-15.json`  **总对数**: 553
 
 | 分类 | 数量 | 处置 |
 |---|:---:|:---|
@@ -8,7 +8,7 @@
 | DOCS_INTERNAL | 0 | docs/ 内同主题互抄（合并或互链） |
 | SERIES | 120 | 保留但标注为版本系列/分章（白名单） |
 | REVIEWED | 431 | 已批量复核确认非重复（stub/模板系列/同领域术语共现，白名单） |
-| REVIEW | 0 | 人工复核 |
+| REVIEW | 2 | 人工复核 |
 
 ## MERGE（0）Top 25
 
@@ -56,7 +56,6 @@
 |:---:|:---|:---|
 | 0.846 | `crates/c01_ownership_borrow_scope/docs/tier_03_references/03_lifetimes_reference.md` | `crates/c01_ownership_borrow_scope/docs/tier_04_advanced/01_advanced_lifetime_patterns.md` |
 | 0.846 | `crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md` | `crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md` |
-| 0.818 | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md` | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md` |
 | 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md` |
 | 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` |
 | 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md` |
@@ -67,6 +66,7 @@
 | 0.818 | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md` |
 | 0.818 | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` | `crates/c04_generic/docs/tier_01_foundations/04_faq.md` |
 | 0.818 | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md` | `crates/c04_generic/docs/tier_01_foundations/04_faq.md` |
+| 0.818 | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md` | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md` |
 | 0.818 | `crates/c02_type_system/docs/tier_01_foundations/01_project_overview.md` | `crates/c02_type_system/docs/tier_01_foundations/02_navigation.md` |
 | 0.818 | `crates/c02_type_system/docs/tier_01_foundations/01_project_overview.md` | `crates/c02_type_system/docs/tier_01_foundations/04_faq.md` |
 | 0.818 | `crates/c02_type_system/docs/tier_01_foundations/02_navigation.md` | `crates/c02_type_system/docs/tier_01_foundations/04_faq.md` |
@@ -80,10 +80,12 @@
 | 0.759 | `knowledge/04_expert/academic/README.md` | `knowledge/04_expert/miri/README.md` |
 | 0.759 | `knowledge/04_expert/miri/README.md` | `knowledge/06_ecosystem/deployment/README.md` |
 
-## REVIEW（0）Top 25
+## REVIEW（2）Top 25
 
 | sim | 文件1 | 文件2 |
 |:---:|:---|:---|
+| 0.5 | `content/safety_critical/README.md` | `content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md` |
+| 0.5 | `content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md` | `content/safety_critical/README.md` |
 
 ## 机器可读
 

@@ -13,15 +13,15 @@
 
 > **权威来源**: Level 1 为通用 Rust 基础，已由 `concept/` 权威页覆盖。本培训计划不再重复推导，学员请按以下路径完成前置学习：
 >
-> - [学习指南](../../concept/00_meta/04_navigation/07_learning_guide.md) — 官方推荐学习路径
-> - [所有权系统](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
-> - [借用与生命周期](../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
-> - [生命周期深入](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
-> - [错误处理基础](../../concept/01_foundation/08_error_handling/01_error_handling_basics.md)
-> - [泛型](../../concept/02_intermediate/01_generics/01_generics.md)
-> - [Trait](../../concept/02_intermediate/00_traits/01_traits.md)
+> - [学习指南](../../../concept/00_meta/04_navigation/07_learning_guide.md) — 官方推荐学习路径
+> - [所有权系统](../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> - [借用与生命周期](../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
+> - [生命周期深入](../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
+> - [错误处理基础](../../../concept/01_foundation/08_error_handling/01_error_handling_basics.md)
+> - [泛型](../../../concept/02_intermediate/01_generics/01_generics.md)
+> - [Trait](../../../concept/02_intermediate/00_traits/01_traits.md)
 >
-> 完成上述内容并通过 [`concept/00_meta/04_navigation/12_self_assessment.md`](../../concept/00_meta/04_navigation/12_self_assessment.md) 自评后，方可进入 Level 2。
+> 完成上述内容并通过 [`concept/00_meta/04_navigation/12_self_assessment.md`](../../../concept/00_meta/04_navigation/12_self_assessment.md) 自评后，方可进入 Level 2。
 
 ### Level 1 学习目标
 

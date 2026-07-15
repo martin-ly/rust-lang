@@ -1,8 +1,8 @@
 # 内容重叠检测 v2（语义质量门 P0-3）
 
 **日期**: 2026-07-15  **扫描**: 1942 文件（concept/knowledge/docs/content/crates，排除 archive/book/target）
-**纳入索引**: 1435（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 561063
-**阈值**: 0.5  **命中对**: 551（同目录 541 / 跨目录 10）
+**纳入索引**: 1435（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 560674
+**阈值**: 0.5  **命中对**: 553（同目录 543 / 跨目录 10）
 
 > 本版修正旧版『0 重复』假象：全文关键词（非前50）、纳入 crates、不豁免假 stub、同目录也检、去掉标题 x1.5 主导。
 
@@ -46,9 +46,9 @@
 | 0.818 | 0.818 | 0.333 | 5 | Y | `crates/c02_type_system/docs/tier_01_foundations/01_project_overview.md`(22) | `crates/c02_type_system/docs/tier_01_foundations/04_faq.md`(22) |
 | 0.818 | 0.818 | 0.333 | 5 | Y | `crates/c02_type_system/docs/tier_01_foundations/02_navigation.md`(22) | `crates/c02_type_system/docs/tier_01_foundations/04_faq.md`(22) |
 | 0.806 | 0.806 | 0.2 | 11 | Y | `docs/05_practice/08_project_07_chat_server.md`(115) | `docs/05_practice/12_project_11_web_server.md`(113) |
-| 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md`(15) | `crates/c01_ownership_borrow_scope/docs/15_visualization_index.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md`(15) | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md`(15) | `crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md`(15) |
+| 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md`(15) | `crates/c01_ownership_borrow_scope/docs/15_visualization_index.md`(15) |
 | 0.8 | 0.8 | 0.0 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md`(15) | `crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md`(15) |
 | 0.8 | 0.8 | 0.333 | 5 | Y | `crates/c09_design_pattern/docs/05_c09_comprehensive_enhancement_report_2025_10_19.md`(15) | `crates/c09_design_pattern/docs/07_enhancement_summary_2025_10_19.md`(15) |
 | 0.794 | 0.794 | 0.0 | 12 | Y | `knowledge/04_expert/README.md`(114) | `knowledge/06_ecosystem/README.md`(140) |
