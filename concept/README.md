@@ -2,6 +2,7 @@
 >
 > **EN**: Rust Concept Knowledge System
 > **Summary**: Top-level index and navigation for the Rust layered concept knowledge system.
+> **Bloom 层级**: Meta
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [初学者]
 > **权威来源**: 本文件为 `concept/` 权威页。

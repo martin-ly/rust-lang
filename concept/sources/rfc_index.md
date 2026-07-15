@@ -8,6 +8,7 @@
 >
 > **EN**: Rfc Index
 > **Summary**: Rfc Index — An index tracking RFCs with structural impact on Rust's semantics, type system, memory model, concurrency, and ecosystem.
+> **Bloom 层级**: Meta
 >
 > | RFC | 标题 | 状态 | 稳定版本 | 概念文件 |
 > | :--- | :--- | :---: | :---: | :--- |

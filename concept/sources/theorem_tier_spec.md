@@ -9,6 +9,7 @@
 >
 > **EN**: Theorem Tier Spec
 > **Summary**: Theorem Tier Spec — A unified credibility-tiering standard for labeling theorems, lemmas, and corollaries across concept files.
+> **Bloom 层级**: Meta
 > **定位**: 统一所有 `concept/` 文件中"定理/引理/推论"的可信度标注标准。
 > **原则**: 消除"伪形式化"——定理编号必须有对应的分级，证明深度必须与分级匹配。
 > **适用范围**: `concept/` 全部 45 个文件，retroactive 标注 + 新增内容强制执行。

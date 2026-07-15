@@ -1,0 +1,3680 @@
+{
+  "date": "2026-07-15",
+  "dry_run": true,
+  "phase": "phase2",
+  "entities": 512,
+  "relations_before": 7132,
+  "relations_after": 7132,
+  "changes": 405,
+  "before": {
+    "ex:dependsOn": 1299,
+    "ex:entails": 1016,
+    "ex:relatedTo": 1559,
+    "ex:hasPart": 3146,
+    "ex:refines": 81,
+    "ex:mutexWith": 10,
+    "ex:instanceOf": 13,
+    "ex:counterExample": 5,
+    "ex:appliesTo": 3
+  },
+  "after": {
+    "ex:dependsOn": 1299,
+    "ex:entails": 1019,
+    "ex:relatedTo": 1154,
+    "ex:hasPart": 3520,
+    "ex:refines": 88,
+    "ex:mutexWith": 10,
+    "ex:instanceOf": 13,
+    "ex:appliesTo": 24,
+    "ex:counterExample": 5
+  },
+  "related_to_ratio_before": 0.2186,
+  "related_to_ratio_after": 0.1618,
+  "changes_detail": [
+    {
+      "rule": "R11-curated-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:MicroservicePatterns",
+      "predicate": "ex:appliesTo",
+      "object": "ex:DistributedSystems",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "06_ecosystem/03_design_patterns/05_microservice_patterns.md 微服务模式应用于分布式系统"
+    },
+    {
+      "rule": "R11-curated-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:EventDrivenArchitecture",
+      "predicate": "ex:appliesTo",
+      "object": "ex:CloudNative",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "06_ecosystem/03_design_patterns/06_event_driven_architecture.md 事件驱动架构应用于云原生"
+    },
+    {
+      "rule": "R11-curated-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:CqrsEventSourcing",
+      "predicate": "ex:appliesTo",
+      "object": "ex:DistributedSystems",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md CQRS/事件溯源应用于分布式系统"
+    },
+    {
+      "rule": "R11-curated-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:CqrsEventSourcing",
+      "predicate": "ex:appliesTo",
+      "object": "ex:CloudNative",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md CQRS/事件溯源应用于云原生"
+    },
+    {
+      "rule": "R11-curated-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:AdvancedWebAssemblyDevelopmentWithRust",
+      "predicate": "ex:appliesTo",
+      "object": "ex:WebAssembly",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "06_ecosystem/11_domain_applications/17_webassembly_advanced.md 高级 WebAssembly 开发应用于 WebAssembly 领域"
+    },
+    {
+      "rule": "R11-curated-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:Robotics",
+      "predicate": "ex:appliesTo",
+      "object": "ex:EmbeddedSystems",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "06_ecosystem/11_domain_applications/06_robotics.md 机器人开发应用于嵌入式系统"
+    },
+    {
+      "rule": "R11-curated-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:EmbeddedGraphicsDevelopmentWithRust",
+      "predicate": "ex:appliesTo",
+      "object": "ex:EmbeddedSystems",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "06_ecosystem/11_domain_applications/07_embedded_graphics.md 嵌入式图形开发应用于嵌入式系统"
+    },
+    {
+      "rule": "R11-curated-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:GameEngineInternals",
+      "predicate": "ex:appliesTo",
+      "object": "ex:GameDevelopment",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "06_ecosystem/11_domain_applications/15_game_engine_internals.md 游戏引擎内部机制应用于游戏开发"
+    },
+    {
+      "rule": "R11-curated-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:CrossPlatformConcurrency",
+      "predicate": "ex:appliesTo",
+      "object": "ex:Concurrency",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "03_advanced/00_concurrency/04_cross_platform_concurrency.md 跨平台并发应用于并发领域"
+    },
+    {
+      "rule": "R11-curated-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:AsyncProcessManagementInRust",
+      "predicate": "ex:appliesTo",
+      "object": "ex:AsyncProgramming",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "03_advanced/08_process_ipc/03_async_process_management.md 异步进程管理应用于异步编程"
+    },
+    {
+      "rule": "R11-curated-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterProcessCommunicationMechanismsInRust",
+      "predicate": "ex:appliesTo",
+      "object": "ex:Concurrency",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "03_advanced/08_process_ipc/05_ipc_mechanisms.md 进程间通信机制应用于并发领域"
+    },
+    {
+      "rule": "R11-curated-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:DataEngineering",
+      "predicate": "ex:appliesTo",
+      "object": "ex:MachineLearningEcosystem",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "06_ecosystem/11_domain_applications/05_data_engineering.md 数据工程应用于机器学习生态"
+    },
+    {
+      "rule": "R11-curated-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:ZeroCopyParsing",
+      "predicate": "ex:appliesTo",
+      "object": "ex:SafeAndEffectiveUnsafeRust",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "03_advanced/06_low_level_patterns/02_zero_copy_parsing.md 零拷贝解析应用于 unsafe Rust 实践"
+    },
+    {
+      "rule": "R12-readme-entails",
+      "action": "retyped relatedTo",
+      "subject": "ex:Readme_03advanced",
+      "predicate": "ex:entails",
+      "object": "ex:FormalMethods_04formal",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "跨层 README 导航：L3 03_advanced/README.md → L4 04_formal/README.md"
+    },
+    {
+      "rule": "R12-readme-entails",
+      "action": "retyped relatedTo",
+      "subject": "ex:Readme_03advanced",
+      "predicate": "ex:entails",
+      "object": "ex:Readme_05comparativ",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "跨层 README 导航：L3 03_advanced/README.md → L5 05_comparative/README.md"
+    },
+    {
+      "rule": "R12-readme-entails",
+      "action": "retyped relatedTo",
+      "subject": "ex:Readme_03advanced",
+      "predicate": "ex:entails",
+      "object": "ex:Readme_06ecosystem",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "跨层 README 导航：L3 03_advanced/README.md → L6 06_ecosystem/README.md"
+    },
+    {
+      "rule": "R9-quiz-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:Generics_01generics",
+      "predicate": "ex:appliesTo",
+      "object": "ex:Generics",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "测验 04_quiz_traits_and_generics.md 应用于评估概念 01_generics.md"
+    },
+    {
+      "rule": "R9-quiz-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:Concurrency_00concurrenc_2",
+      "predicate": "ex:appliesTo",
+      "object": "ex:Concurrency_00concurrenc",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "测验 08_quiz_concurrency_async.md 应用于评估概念 03_concurrency_patterns.md"
+    },
+    {
+      "rule": "R9-quiz-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:Concurrency_00concurrenc_2",
+      "predicate": "ex:appliesTo",
+      "object": "ex:LockingPrimitives",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "测验 08_quiz_concurrency_async.md 应用于评估概念 06_lock_free.md"
+    },
+    {
+      "rule": "R9-quiz-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:UnsafeRust_02unsafe",
+      "predicate": "ex:appliesTo",
+      "object": "ex:SafeAndEffectiveUnsafeRust",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "测验 05_quiz_unsafe.md 应用于评估概念 01_unsafe.md"
+    },
+    {
+      "rule": "R9-quiz-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:Macros_03procmacros_1",
+      "predicate": "ex:appliesTo",
+      "object": "ex:Macros_03procmacros",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "测验 10_quiz_macros.md 应用于评估概念 01_macros.md"
+    },
+    {
+      "rule": "R9-quiz-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:Macros_03procmacros_1",
+      "predicate": "ex:appliesTo",
+      "object": "ex:ProceduralMacros",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "测验 10_quiz_macros.md 应用于评估概念 02_proc_macro.md"
+    },
+    {
+      "rule": "R9-quiz-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:FormalMethods_04modelcheck_1",
+      "predicate": "ex:appliesTo",
+      "object": "ex:VerificationToolchain",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "测验 06_quiz_formal_methods.md 应用于评估概念 01_verification_toolchain.md"
+    },
+    {
+      "rule": "R9-quiz-appliesTo",
+      "action": "retyped relatedTo",
+      "subject": "ex:Toolchain_00toolchain",
+      "predicate": "ex:appliesTo",
+      "object": "ex:Toolchain",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "测验 06_quiz_toolchain.md 应用于评估概念 01_toolchain.md"
+    },
+    {
+      "rule": "R10-atlas-adjacent-refines",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:refines",
+      "object": "ex:AttributeRelationshipAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "L0 atlas 相邻文件：01_concept_definition_atlas.md → 02_attribute_relationship_atlas.md"
+    },
+    {
+      "rule": "R10-atlas-adjacent-refines",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:refines",
+      "object": "ex:ConceptDefinitionAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "L0 atlas 相邻文件：02_attribute_relationship_atlas.md → 01_concept_definition_atlas.md"
+    },
+    {
+      "rule": "R10-atlas-adjacent-refines",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:refines",
+      "object": "ex:ScenarioDecisionTreeAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "L0 atlas 相邻文件：02_attribute_relationship_atlas.md → 03_scenario_decision_tree_atlas.md"
+    },
+    {
+      "rule": "R10-atlas-adjacent-refines",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:refines",
+      "object": "ex:AttributeRelationshipAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "L0 atlas 相邻文件：03_scenario_decision_tree_atlas.md → 02_attribute_relationship_atlas.md"
+    },
+    {
+      "rule": "R10-atlas-adjacent-refines",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:refines",
+      "object": "ex:ScenarioDecisionTreeAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "L0 atlas 相邻文件：04_example_counterexample_atlas.md → 03_scenario_decision_tree_atlas.md"
+    },
+    {
+      "rule": "R10-atlas-adjacent-refines",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:refines",
+      "object": "ex:LogicalReasoningAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "L0 atlas 相邻文件：04_example_counterexample_atlas.md → 05_logical_reasoning_atlas.md"
+    },
+    {
+      "rule": "R10-atlas-adjacent-refines",
+      "action": "retyped relatedTo",
+      "subject": "ex:LogicalReasoningAtlas",
+      "predicate": "ex:refines",
+      "object": "ex:InterLayerMappingAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "L0 atlas 相邻文件：05_logical_reasoning_atlas.md → 06_inter_layer_mapping_atlas.md"
+    },
+    {
+      "rule": "R7-atlas-hub-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ScenarioDecisionTreeAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "概念定义图谱包含专题图谱：01 → 03"
+    },
+    {
+      "rule": "R7-atlas-hub-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ExampleAndCounterexampleAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "概念定义图谱包含专题图谱：01 → 04"
+    },
+    {
+      "rule": "R7-atlas-hub-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:LogicalReasoningAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "概念定义图谱包含专题图谱：01 → 05"
+    },
+    {
+      "rule": "R7-atlas-hub-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:InterLayerMappingAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "概念定义图谱包含专题图谱：01 → 06"
+    },
+    {
+      "rule": "R7-atlas-hub-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:IntraLayerMappingAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "概念定义图谱包含专题图谱：01 → 07"
+    },
+    {
+      "rule": "R7-atlas-hub-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptSourceAlignmentAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "概念定义图谱包含专题图谱：01 → 08"
+    },
+    {
+      "rule": "R7-atlas-hub-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ReasoningJudgmentTreeAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "概念定义图谱包含专题图谱：01 → 09"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:PlPrerequisites",
+      "predicate": "ex:hasPart",
+      "object": "ex:EffectsAndPurity",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_pl_prerequisites.md 包含子主题 04_effects_and_purity.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:OwnershipBorrowingLifetimesKnowledgeMap",
+      "predicate": "ex:hasPart",
+      "object": "ex:MoveSemantics",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 00_ownership_borrow_lifetime_knowledge_map.md 包含子主题 05_move_semantics.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:OwnershipBorrowingLifetimesKnowledgeMap",
+      "predicate": "ex:hasPart",
+      "object": "ex:LifetimesAdvanced",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 00_ownership_borrow_lifetime_knowledge_map.md 包含子主题 04_lifetimes_advanced.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Ownership",
+      "predicate": "ex:hasPart",
+      "object": "ex:LifetimesAdvanced",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_ownership.md 包含子主题 04_lifetimes_advanced.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Ownership",
+      "predicate": "ex:hasPart",
+      "object": "ex:BrownUniversityOwnershipInventory",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_ownership.md 包含子主题 06_ownership_inventories_brown_book.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TypeSystem",
+      "predicate": "ex:hasPart",
+      "object": "ex:CoercionAndCasting",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_type_system.md 包含子主题 04_coercion_and_casting.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TypeSystem",
+      "predicate": "ex:hasPart",
+      "object": "ex:DataAbstractionSpectrum",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_type_system.md 包含子主题 05_data_abstraction_spectrum.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ControlFlow",
+      "predicate": "ex:hasPart",
+      "object": "ex:StatementsAndExpressions",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_control_flow.md 包含子主题 03_statements_and_expressions.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Modules",
+      "predicate": "ex:hasPart",
+      "object": "ex:Items",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_modules_and_paths.md 包含子主题 12_items.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Modules",
+      "predicate": "ex:hasPart",
+      "object": "ex:UseDeclarations",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_modules_and_paths.md 包含子主题 03_use_declarations.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Modules",
+      "predicate": "ex:hasPart",
+      "object": "ex:Structs",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_modules_and_paths.md 包含子主题 04_structs.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Modules",
+      "predicate": "ex:hasPart",
+      "object": "ex:Enumerations",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_modules_and_paths.md 包含子主题 05_enumerations.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Traits",
+      "predicate": "ex:hasPart",
+      "object": "ex:GenericAssociatedTypesGATs",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_traits.md 包含子主题 07_generic_associated_types.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Traits",
+      "predicate": "ex:hasPart",
+      "object": "ex:Traits_00traits",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_traits.md 包含子主题 04_advanced_traits.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Generics",
+      "predicate": "ex:hasPart",
+      "object": "ex:Generics_01generics",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_generics.md 包含子主题 04_quiz_traits_and_generics.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Generics",
+      "predicate": "ex:hasPart",
+      "object": "ex:TypeLevelProgramming",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_generics.md 包含子主题 03_type_level_programming.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:MemoryManagement",
+      "predicate": "ex:hasPart",
+      "object": "ex:MemoryManagement_02memorymana",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_memory_management.md 包含子主题 05_quiz_memory_management.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Modules_05modulesand",
+      "predicate": "ex:hasPart",
+      "object": "ex:IdiomaticRustAPINamingConventions",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_module_system.md 包含子主题 03_api_naming_conventions.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Concurrency",
+      "predicate": "ex:hasPart",
+      "object": "ex:Concurrency_00concurrenc_2",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_concurrency.md 包含子主题 08_quiz_concurrency_async.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AsyncProgramming",
+      "predicate": "ex:hasPart",
+      "object": "ex:AsyncCancellationSafety",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_async.md 包含子主题 05_async_cancellation_safety.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AsyncProgramming",
+      "predicate": "ex:hasPart",
+      "object": "ex:WakerContractDeepDive",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_async.md 包含子主题 12_waker_contract_deep_dive.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AsyncProgramming",
+      "predicate": "ex:hasPart",
+      "object": "ex:PinAndUnpin",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_async.md 包含子主题 08_pin_unpin.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AsyncProgramming",
+      "predicate": "ex:hasPart",
+      "object": "ex:StreamAlgebraAndBackpressure",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_async.md 包含子主题 09_stream_algebra_and_backpressure.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AsyncProgramming",
+      "predicate": "ex:hasPart",
+      "object": "ex:ExecutorFairnessAndScheduling",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_async.md 包含子主题 10_executor_fairness_and_scheduling.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AsyncProgramming",
+      "predicate": "ex:hasPart",
+      "object": "ex:PinProjectionCounterexamples",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_async.md 包含子主题 11_pin_projection_counterexamples.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AsyncProgramming",
+      "predicate": "ex:hasPart",
+      "object": "ex:AsyncBoundaryPanorama",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_async.md 包含子主题 06_async_boundary_panorama.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:SafeAndEffectiveUnsafeRust",
+      "predicate": "ex:hasPart",
+      "object": "ex:UnsafeRust_02unsafe",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_unsafe.md 包含子主题 05_quiz_unsafe.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Macros_03procmacros",
+      "predicate": "ex:hasPart",
+      "object": "ex:Macros_03procmacros_1",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_macros.md 包含子主题 10_quiz_macros.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:VerificationToolchain",
+      "predicate": "ex:hasPart",
+      "object": "ex:FormalMethods_04modelcheck_1",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_verification_toolchain.md 包含子主题 06_quiz_formal_methods.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:RustVsC",
+      "predicate": "ex:hasPart",
+      "object": "ex:RustVsGo",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_rust_vs_cpp.md 包含子主题 03_rust_vs_go.md"
+    },
+    {
+      "rule": "R8-hub-content-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Toolchain",
+      "predicate": "ex:hasPart",
+      "object": "ex:Toolchain_00toolchain",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "同目录同层概览/知识图谱 01_toolchain.md 包含子主题 06_quiz_toolchain.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:BoundaryExtensionTree",
+      "predicate": "ex:hasPart",
+      "object": "ex:Methodology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 boundary_extension_tree.md 包含元数据页 methodology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:BoundaryExtensionTree",
+      "predicate": "ex:hasPart",
+      "object": "ex:CrossLayerDependencyAndImplicationTopology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 boundary_extension_tree.md 包含元数据页 05_inter_layer_topology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:BoundaryExtensionTree",
+      "predicate": "ex:hasPart",
+      "object": "ex:IntraLayerModelMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 boundary_extension_tree.md 包含元数据页 06_intra_layer_model_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:BoundaryExtensionTree",
+      "predicate": "ex:hasPart",
+      "object": "ex:TheoremInferenceForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 boundary_extension_tree.md 包含元数据页 theorem_inference_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeMindmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 knowledge_mindmap.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:Methodology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 methodology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:LearningGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 07_learning_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:Sources",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 03_sources.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:InterLayerMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 04_inter_layer_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:CrossLayerDependencyAndImplicationTopology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 05_inter_layer_topology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:IntraLayerModelMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 06_intra_layer_model_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:TheoremInferenceForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 theorem_inference_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:BoundaryExtensionTree",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 boundary_extension_tree.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:SemanticSpace",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 semantic_space.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:SemanticExpressiveness",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 semantic_expressiveness.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:DecidabilitySpectrum",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 decidability_spectrum.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:ExpressivenessMultiview",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 expressiveness_multiview.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:CognitiveDimensionMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 cognitive_dimension_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:AspMarkingGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 02_asp_marking_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptDefinitionDecisionForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 concept_definition_decision_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:FaultTreeAnalysisCollection",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 fault_tree_analysis_collection.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:QualityDashboardV2",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 07_quality_dashboard_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:ProblemGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 10_problem_graph.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:CompetencyGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 competency_graph.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeGraphOntologyV20",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 kg_ontology_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:RustBelt",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 02_rustbelt_predicate_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:ParadigmTransitionMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 paradigm_transition_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Navigation",
+      "predicate": "ex:hasPart",
+      "object": "ex:AuditChecklist",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_navigation.md 包含元数据页 03_audit_checklist.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BloomTaxonomy",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 bloom_taxonomy.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BoundaryExtensionTree",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 boundary_extension_tree.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CognitiveDimensionMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 cognitive_dimension_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CompetencyGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 competency_graph.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptDefinitionDecisionForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 concept_definition_decision_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:DecidabilitySpectrum",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 decidability_spectrum.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ExpressivenessMultiview",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 expressiveness_multiview.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:FaultTreeAnalysisCollection",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 fault_tree_analysis_collection.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeMindmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 knowledge_mindmap.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Methodology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 methodology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ParadigmTransitionMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 paradigm_transition_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:PatternSemanticSpaceIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 pattern_semantic_space_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AlgorithmsPatternsSemanticBridge",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 semantic_bridge_algorithms_patterns.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:SemanticExpressiveness",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 semantic_expressiveness.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:SemanticSpace",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 semantic_space.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TheoremInferenceForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 theorem_inference_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:GlobalTheoremChainRegistry",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 theorem_registry.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Todos",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 todos.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TerminologyGlossary",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 01_terminology_glossary.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BilingualConceptTemplateV2",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 02_bilingual_template_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BilingualConceptTemplate",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 03_bilingual_template.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AuthoritySourceMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 01_authority_source_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:RustBelt",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 02_rustbelt_predicate_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Sources",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 03_sources.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TopicAuthorityAlignmentMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 04_topic_authority_alignment_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptAuditGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 01_concept_audit_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AspMarkingGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 02_asp_marking_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AuditChecklist",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 03_audit_checklist.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptConsistencyAuditChecklist",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 04_concept_consistency_audit_checklist.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TemplateDeduplicationGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 05_template_deduplication_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:GradingSystem",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 06_grading_system.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:QualityDashboardV2",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 07_quality_dashboard_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CrossReferenceMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 01_cross_reference_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CareerLandscape",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 02_career_landscape.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 03_concept_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:InterLayerMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 04_inter_layer_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CrossLayerDependencyAndImplicationTopology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 05_inter_layer_topology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:IntraLayerModelMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 06_intra_layer_model_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:LearningGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 07_learning_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:LearningMvpPath",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 08_learning_mvp_path.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Navigation",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 09_navigation.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ProblemGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 10_problem_graph.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:QuickReference",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 11_quick_reference.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:SelfAssessment",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 12_self_assessment.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:FoundationsGapClosureIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 13_foundations_gap_closure_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:RustMinimumViableLearningPath",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 14_learning_mvp_path_en.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeGraphOntologyV20",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 kg_ontology_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TopLevelOntologyAlignmentForRustKnowledgeGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含元数据页 kg_tlo_alignment.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BloomTaxonomy",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 bloom_taxonomy.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BoundaryExtensionTree",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 boundary_extension_tree.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CognitiveDimensionMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 cognitive_dimension_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CompetencyGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 competency_graph.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptDefinitionDecisionForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 concept_definition_decision_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:DecidabilitySpectrum",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 decidability_spectrum.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ExpressivenessMultiview",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 expressiveness_multiview.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:FaultTreeAnalysisCollection",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 fault_tree_analysis_collection.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeMindmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 knowledge_mindmap.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Methodology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 methodology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ParadigmTransitionMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 paradigm_transition_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:PatternSemanticSpaceIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 pattern_semantic_space_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AlgorithmsPatternsSemanticBridge",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 semantic_bridge_algorithms_patterns.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:SemanticExpressiveness",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 semantic_expressiveness.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:SemanticSpace",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 semantic_space.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TheoremInferenceForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 theorem_inference_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:GlobalTheoremChainRegistry",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 theorem_registry.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Todos",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 todos.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TerminologyGlossary",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 01_terminology_glossary.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BilingualConceptTemplateV2",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 02_bilingual_template_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BilingualConceptTemplate",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 03_bilingual_template.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AuthoritySourceMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 01_authority_source_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:RustBelt",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 02_rustbelt_predicate_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Sources",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 03_sources.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TopicAuthorityAlignmentMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 04_topic_authority_alignment_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptAuditGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 01_concept_audit_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AspMarkingGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 02_asp_marking_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AuditChecklist",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 03_audit_checklist.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptConsistencyAuditChecklist",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 04_concept_consistency_audit_checklist.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TemplateDeduplicationGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 05_template_deduplication_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:GradingSystem",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 06_grading_system.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:QualityDashboardV2",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 07_quality_dashboard_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CrossReferenceMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 01_cross_reference_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CareerLandscape",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 02_career_landscape.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 03_concept_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:InterLayerMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 04_inter_layer_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CrossLayerDependencyAndImplicationTopology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 05_inter_layer_topology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:IntraLayerModelMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 06_intra_layer_model_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:LearningGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 07_learning_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:LearningMvpPath",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 08_learning_mvp_path.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Navigation",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 09_navigation.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ProblemGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 10_problem_graph.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:QuickReference",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 11_quick_reference.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:SelfAssessment",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 12_self_assessment.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:FoundationsGapClosureIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 13_foundations_gap_closure_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:RustMinimumViableLearningPath",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 14_learning_mvp_path_en.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeGraphOntologyV20",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 kg_ontology_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TopLevelOntologyAlignmentForRustKnowledgeGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含元数据页 kg_tlo_alignment.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BoundaryExtensionTree",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 boundary_extension_tree.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptDefinitionDecisionForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 concept_definition_decision_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:DecidabilitySpectrum",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 decidability_spectrum.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ExpressivenessMultiview",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 expressiveness_multiview.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:FaultTreeAnalysisCollection",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 fault_tree_analysis_collection.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Methodology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 methodology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ParadigmTransitionMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 paradigm_transition_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:PatternSemanticSpaceIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 pattern_semantic_space_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:SemanticSpace",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 semantic_space.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BilingualConceptTemplateV2",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 02_bilingual_template_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BilingualConceptTemplate",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 03_bilingual_template.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptAuditGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 01_concept_audit_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AuditChecklist",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 03_audit_checklist.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 03_concept_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:IntraLayerModelMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 06_intra_layer_model_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:QuickReference",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含元数据页 11_quick_reference.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BloomTaxonomy",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 bloom_taxonomy.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:DecidabilitySpectrum",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 decidability_spectrum.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Methodology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 methodology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ParadigmTransitionMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 paradigm_transition_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AlgorithmsPatternsSemanticBridge",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 semantic_bridge_algorithms_patterns.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:SemanticSpace",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 semantic_space.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TheoremInferenceForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 theorem_inference_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BilingualConceptTemplateV2",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 02_bilingual_template_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BilingualConceptTemplate",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 03_bilingual_template.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AspMarkingGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 02_asp_marking_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AuditChecklist",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 03_audit_checklist.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 03_concept_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:SelfAssessment",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 12_self_assessment.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeGraphOntologyV20",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 kg_ontology_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TopLevelOntologyAlignmentForRustKnowledgeGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含元数据页 kg_tlo_alignment.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BoundaryExtensionTree",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 boundary_extension_tree.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:DecidabilitySpectrum",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 decidability_spectrum.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ExpressivenessMultiview",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 expressiveness_multiview.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeMindmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 knowledge_mindmap.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:PatternSemanticSpaceIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 pattern_semantic_space_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AlgorithmsPatternsSemanticBridge",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 semantic_bridge_algorithms_patterns.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:SemanticExpressiveness",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 semantic_expressiveness.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TheoremInferenceForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 theorem_inference_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CareerLandscape",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 02_career_landscape.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:InterLayerMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 04_inter_layer_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:IntraLayerModelMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 06_intra_layer_model_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TerminologyGlossary",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 01_terminology_glossary.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Methodology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 methodology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:LearningGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 07_learning_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeGraphOntologyV20",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含元数据页 kg_ontology_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:IntraLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 07_intra_layer_mapping_atlas.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:IntraLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 07_intra_layer_mapping_atlas.md 包含元数据页 03_concept_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:IntraLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeMindmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 07_intra_layer_mapping_atlas.md 包含元数据页 knowledge_mindmap.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:IntraLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TemplateDeduplicationGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 07_intra_layer_mapping_atlas.md 包含元数据页 05_template_deduplication_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:IntraLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:QualityDashboardV2",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 07_intra_layer_mapping_atlas.md 包含元数据页 07_quality_dashboard_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:IntraLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:FoundationsGapClosureIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 07_intra_layer_mapping_atlas.md 包含元数据页 13_foundations_gap_closure_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:IntraLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptAuditGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 07_intra_layer_mapping_atlas.md 包含元数据页 01_concept_audit_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:IntraLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:PatternSemanticSpaceIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 07_intra_layer_mapping_atlas.md 包含元数据页 pattern_semantic_space_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:IntraLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AlgorithmsPatternsSemanticBridge",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 07_intra_layer_mapping_atlas.md 包含元数据页 semantic_bridge_algorithms_patterns.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BloomTaxonomy",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 bloom_taxonomy.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BoundaryExtensionTree",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 boundary_extension_tree.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CognitiveDimensionMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 cognitive_dimension_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CompetencyGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 competency_graph.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptDefinitionDecisionForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 concept_definition_decision_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:DecidabilitySpectrum",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 decidability_spectrum.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ExpressivenessMultiview",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 expressiveness_multiview.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:FaultTreeAnalysisCollection",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 fault_tree_analysis_collection.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeMindmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 knowledge_mindmap.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Methodology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 methodology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ParadigmTransitionMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 paradigm_transition_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AlgorithmsPatternsSemanticBridge",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 semantic_bridge_algorithms_patterns.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:SemanticExpressiveness",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 semantic_expressiveness.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:SemanticSpace",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 semantic_space.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TheoremInferenceForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 theorem_inference_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Todos",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 todos.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TerminologyGlossary",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 01_terminology_glossary.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BilingualConceptTemplateV2",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 02_bilingual_template_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:BilingualConceptTemplate",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 03_bilingual_template.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AuthoritySourceMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 01_authority_source_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:RustBelt",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 02_rustbelt_predicate_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Sources",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 03_sources.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptAuditGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 01_concept_audit_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AspMarkingGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 02_asp_marking_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:AuditChecklist",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 03_audit_checklist.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:QualityDashboardV2",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 07_quality_dashboard_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CareerLandscape",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 02_career_landscape.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 03_concept_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:InterLayerMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 04_inter_layer_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:IntraLayerModelMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 06_intra_layer_model_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:LearningGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 07_learning_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:LearningMvpPath",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 08_learning_mvp_path.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Navigation",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 09_navigation.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ProblemGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 10_problem_graph.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:QuickReference",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 11_quick_reference.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:SelfAssessment",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 12_self_assessment.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeGraphOntologyV20",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含元数据页 kg_ontology_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:BloomTaxonomy",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 bloom_taxonomy.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:PatternSemanticSpaceIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 pattern_semantic_space_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:TerminologyGlossary",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 01_terminology_glossary.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:BilingualConceptTemplate",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 03_bilingual_template.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:AuthoritySourceMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 01_authority_source_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptAuditGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 01_concept_audit_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:GradingSystem",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 06_grading_system.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:TemplateDeduplicationGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 05_template_deduplication_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 03_concept_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:CrossReferenceMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 01_cross_reference_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeTopologyAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 README.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:AlgorithmsPatternsSemanticBridge",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 semantic_bridge_algorithms_patterns.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:FoundationsGapClosureIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 13_foundations_gap_closure_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:MetaFrameworkAndKnowledgeArchitectureQuiz",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 01_quiz_meta_framework.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Readme",
+      "predicate": "ex:hasPart",
+      "object": "ex:InterLayerMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 04_inter_layer_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Readme",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Readme_02intermedia",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Readme_03advanced",
+      "predicate": "ex:hasPart",
+      "object": "ex:Methodology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 methodology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Readme_03advanced",
+      "predicate": "ex:hasPart",
+      "object": "ex:LearningMvpPath",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 08_learning_mvp_path.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Readme_03advanced",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:FormalMethods_04formal",
+      "predicate": "ex:hasPart",
+      "object": "ex:LearningMvpPath",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 08_learning_mvp_path.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:FormalMethods_04formal",
+      "predicate": "ex:hasPart",
+      "object": "ex:Methodology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 methodology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:FormalMethods_04formal",
+      "predicate": "ex:hasPart",
+      "object": "ex:AspMarkingGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 02_asp_marking_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:FormalMethods_04formal",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Readme_05comparativ",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Readme_06ecosystem",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Roadmap",
+      "predicate": "ex:hasPart",
+      "object": "ex:Methodology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_roadmap.md 包含元数据页 methodology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Roadmap",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_roadmap.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Futures",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:RustConceptKnowledgeSystem",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptMetaLayer",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 README.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:BloomTaxonomy",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 bloom_taxonomy.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:CrossReferenceMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 01_cross_reference_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptAuditGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 01_concept_audit_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:AspMarkingGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 02_asp_marking_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:AuditChecklist",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 03_audit_checklist.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptConsistencyAuditChecklist",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 04_concept_consistency_audit_checklist.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:TemplateDeduplicationGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 05_template_deduplication_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:AuthoritySourceMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 01_authority_source_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:BoundaryExtensionTree",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 boundary_extension_tree.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:CareerLandscape",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 02_career_landscape.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:CognitiveDimensionMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 cognitive_dimension_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:CompetencyGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 competency_graph.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptDefinitionDecisionForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 concept_definition_decision_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:ConceptIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 03_concept_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:DecidabilitySpectrum",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 decidability_spectrum.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:ExpressivenessMultiview",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 expressiveness_multiview.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:FaultTreeAnalysisCollection",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 fault_tree_analysis_collection.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:GradingSystem",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 06_grading_system.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:InterLayerMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 04_inter_layer_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:CrossLayerDependencyAndImplicationTopology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 05_inter_layer_topology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:IntraLayerModelMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 06_intra_layer_model_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:Placeholder",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 01_placeholder_generic.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeGraphOntologyV20",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 kg_ontology_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeMindmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 knowledge_mindmap.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:LearningGuide",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 07_learning_guide.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:LearningMvpPath",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 08_learning_mvp_path.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:Methodology",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 methodology.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:Navigation",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 09_navigation.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:ParadigmTransitionMatrix",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 paradigm_transition_matrix.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:ProblemGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 10_problem_graph.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:QualityDashboardV2",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 07_quality_dashboard_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:QuickReference",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 11_quick_reference.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:RustBelt",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 02_rustbelt_predicate_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:SelfAssessment",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 12_self_assessment.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:AlgorithmsPatternsSemanticBridge",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 semantic_bridge_algorithms_patterns.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:PatternSemanticSpaceIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 pattern_semantic_space_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:FoundationsGapClosureIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 13_foundations_gap_closure_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:MetaFrameworkAndKnowledgeArchitectureQuiz",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 01_quiz_meta_framework.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:SemanticExpressiveness",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 semantic_expressiveness.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:SemanticSpace",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 semantic_space.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:Sources",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 03_sources.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:TerminologyGlossary",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 01_terminology_glossary.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:TheoremInferenceForest",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 theorem_inference_forest.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:GlobalTheoremChainRegistry",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 theorem_registry.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:Todos",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 todos.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:BilingualConceptTemplateV2",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 02_bilingual_template_v2.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:BilingualConceptTemplate",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 03_bilingual_template.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:TopLevelOntologyAlignmentForRustKnowledgeGraph",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 kg_tlo_alignment.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:TopicAuthorityAlignmentMap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 04_topic_authority_alignment_map.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:InternationalAuthorityIndex",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 05_international_authority_index.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:KnowledgeTopologyAtlas",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 README.md"
+    },
+    {
+      "rule": "R6-index-meta-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:RustMinimumViableLearningPath",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含元数据页 14_learning_mvp_path_en.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ComprehensiveRustMapping",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含映射/路线图 comprehensive_rust_mapping.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CCToRustEngineeringComparisonRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含映射/路线图 cpp_rust_engineering_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:GeneralPLFoundationsRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含映射/路线图 pl_foundations_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TRPL3rdEdChapterMapping",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含映射/路线图 01_trpl_3rd_ed_mapping.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:GapAndActionPlan",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含映射/路线图 10_gap_and_action_plan.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptDefinitionAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Roadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 01_concept_definition_atlas.md 包含映射/路线图 04_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ComprehensiveRustMapping",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含映射/路线图 comprehensive_rust_mapping.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CCToRustEngineeringComparisonRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含映射/路线图 cpp_rust_engineering_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:GeneralPLFoundationsRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含映射/路线图 pl_foundations_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:TRPL3rdEdChapterMapping",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含映射/路线图 01_trpl_3rd_ed_mapping.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:GapAndActionPlan",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含映射/路线图 10_gap_and_action_plan.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:AttributeRelationshipAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Roadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 02_attribute_relationship_atlas.md 包含映射/路线图 04_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CCToRustEngineeringComparisonRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含映射/路线图 cpp_rust_engineering_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ScenarioDecisionTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Roadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 03_scenario_decision_tree_atlas.md 包含映射/路线图 04_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CCToRustEngineeringComparisonRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含映射/路线图 cpp_rust_engineering_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ExampleAndCounterexampleAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Roadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 04_example_counterexample_atlas.md 包含映射/路线图 04_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:ComprehensiveRustMapping",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含映射/路线图 comprehensive_rust_mapping.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CCToRustEngineeringComparisonRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含映射/路线图 cpp_rust_engineering_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:InterLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:GeneralPLFoundationsRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 06_inter_layer_mapping_atlas.md 包含映射/路线图 pl_foundations_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:IntraLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:CCToRustEngineeringComparisonRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 07_intra_layer_mapping_atlas.md 包含映射/路线图 cpp_rust_engineering_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:IntraLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:GeneralPLFoundationsRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 07_intra_layer_mapping_atlas.md 包含映射/路线图 pl_foundations_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:IntraLayerMappingAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Roadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 07_intra_layer_mapping_atlas.md 包含映射/路线图 04_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:GeneralPLFoundationsRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含映射/路线图 pl_foundations_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ReasoningJudgmentTreeAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:Roadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 09_reasoning_judgment_tree_atlas.md 包含映射/路线图 04_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:KnowledgeTopologyAtlas",
+      "predicate": "ex:hasPart",
+      "object": "ex:GapAndActionPlan",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含映射/路线图 10_gap_and_action_plan.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:CCToRustEngineeringComparisonRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含映射/路线图 cpp_rust_engineering_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:ConceptMetaLayer",
+      "predicate": "ex:hasPart",
+      "object": "ex:GeneralPLFoundationsRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含映射/路线图 pl_foundations_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:Futures",
+      "predicate": "ex:hasPart",
+      "object": "ex:Roadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 README.md 包含映射/路线图 04_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:ComprehensiveRustMapping",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含映射/路线图 comprehensive_rust_mapping.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:TRPL3rdEdChapterMapping",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含映射/路线图 01_trpl_3rd_ed_mapping.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:CCToRustEngineeringComparisonRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含映射/路线图 cpp_rust_engineering_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:GeneralPLFoundationsRoadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含映射/路线图 pl_foundations_roadmap.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:GapAndActionPlan",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含映射/路线图 10_gap_and_action_plan.md"
+    },
+    {
+      "rule": "R6b-index-mapping-hasPart",
+      "action": "retyped relatedTo",
+      "subject": "ex:TableOfContents",
+      "predicate": "ex:hasPart",
+      "object": "ex:Roadmap",
+      "old_predicate": "ex:relatedTo",
+      "evidence": "索引页 SUMMARY.md 包含映射/路线图 04_roadmap.md"
+    }
+  ]
+}

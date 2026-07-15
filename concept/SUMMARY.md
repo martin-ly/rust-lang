@@ -1,5 +1,6 @@
 > **EN**: Table of Contents
 > **Summary**: mdBook navigation manifest for the `concept/` collection — the machine-read table of contents that drives the book's sidebar, reading order, and cross-page prev/next links.
+> **Bloom 层级**: Meta
 > **前置概念**: N/A
 > **后置概念**: N/A
 > **权威来源**: 本文件为 `concept/` 权威页。

@@ -99,6 +99,7 @@
     - [Q61: Strict Provenance](#q61-strict-provenance)
     - [Q62: Proc Macro Hygiene](#q62-proc-macro-hygiene)
     - [Q63: Pin Projection](#q63-pin-projection)
+    - [Q64: Send 推导](#q64-send-推导)
   - [L4 扩展层：线性逻辑、类型论、所有权形式化与 RustBelt（8 题） 题目基于 TAPL (Pierce, 2002); RustBelt (Jung et al., POPL 2018); Girard — Linear Logic / 1987; Wikipedia — Substructural Type System(https://en.wikipedia.org/wiki/Substructural\_type\_system)\]](#l4-扩展层线性逻辑类型论所有权形式化与-rustbelt8-题-题目基于-tapl-pierce-2002-rustbelt-jung-et-al-popl-2018-girard--linear-logic--1987-wikipedia--substructural-type-systemhttpsenwikipediaorgwikisubstructural_type_system)
     - [Q65: 子结构逻辑](#q65-子结构逻辑)
     - [Q66: Curry-Howard 同构](#q66-curry-howard-同构)
@@ -1694,13 +1695,14 @@ impl Future for MyFuture {
 
 **修正**：使用 `pin_project` 或手动 unsafe projection：
 
-rust,ignore
+```rust,ignore
 fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
     let this = unsafe { self.get_unchecked_mut() };
     // 现在可以安全访问 this.data 和 this.pointer
 }
 
 ```
+
 必须保证被投影的字段不会移动。
 
 [来源: [Rust Reference — Pin](https://doc.rust-lang.org/reference/expressions/operator-expr.html)]
@@ -1712,6 +1714,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 ### Q64: Send 推导
 
 以下类型是否自动实现 `Send`？
+
 ```rust
 struct Wrapper<T>(T);
 struct BadWrapper(*const u8);

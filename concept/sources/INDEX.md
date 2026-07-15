@@ -8,6 +8,7 @@
 >
 > **EN**: Authority Source Index
 > **Summary**: Index of authoritative sources used throughout the concept knowledge system.
+> **Bloom 层级**: Meta
 > **来源**:
 >
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
