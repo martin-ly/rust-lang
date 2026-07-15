@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 504,
-    "generated_at": "2026-07-15T09:27:20.577347+00:00"
+    "generated_at": "2026-07-15T09:54:06.536370+00:00"
   },
   "files": [
     {
@@ -12791,7 +12791,7 @@
       "layer": "L1",
       "title": "链式 let 与 let 守卫（Let Chains & If-Let Guards）",
       "positioning": "",
-      "line_count": 490,
+      "line_count": 491,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -12979,6 +12979,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../02_intermediate/03_error_handling/01_error_handling.md",
         "../02_type_system/01_type_system.md",
         "01_control_flow.md",

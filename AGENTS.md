@@ -230,18 +230,19 @@ bash scripts/git_hooks/install.sh
 22. `python scripts/check_mindmap_coverage.py --strict`（思维表征覆盖：内容页 mindmap 覆盖率与反例节存在率，仅 concept/ 排除 00_meta/stub；--strict 基线 mindmap≥10%/反例≥40%，2026-07-14 实测 90.0%/84.4% exit 0；2026-07-14 转阻断）
 23. `python scripts/semantic_health.py --strict`（综合语义健康分；grade=FAIL 时阻断；2026-07-14 实测 99.6 grade OK exit 0；聚合门，2026-07-14 转阻断）
 
-**语义观察门（2）**：
+**语义观察门（3）**：
 
 | # | 观察门 | 检查目标 | 当前基线 | 转阻断条件 |
 |---:|---|---|---|---|
-| O1 | `python scripts/check_stub_purity.py --strict` | `docs/`/`knowledge/`/`content/`/`crates/*/docs/` 中声明为 stub/redirect 的文件是否保留通用概念完整正文 | 伪 stub 214 / 空壳页 128 / 高重复 0（`reports/STUB_PURITY_BASELINE_2026_07_15.md`） | 伪 stub=0 且空壳页=0 |
-| O2 | `python scripts/check_cross_domain_coverage.py --strict` | Rust 关键交叉/边界语义域（let chains、unsafe extern、async+unsafe、FFI+async、Send/Sync boundaries 等）是否有 `concept/` 非 stub 权威页 | 16 主题中 3 个未覆盖（81.2% 覆盖，`reports/CROSS_DOMAIN_COVERAGE_BASELINE_2026_07_15.md`） | 覆盖率达 100% 且连续 4 周/10 次 CI 稳定 |
+| O1 | `python scripts/check_stub_purity.py --strict` | `docs/`/`knowledge/`/`content/`/`crates/*/docs/` 中声明为 stub/redirect 的文件是否保留通用概念完整正文 | 伪 stub 46 / 空壳页 131 / 高重复 0（`reports/STUB_PURITY_BASELINE_2026_07_15.md`） | 伪 stub=0 且空壳页=0 |
+| O2 | `python scripts/check_cross_domain_coverage.py --strict` | Rust 关键交叉/边界语义域（let chains、unsafe extern、async+unsafe、FFI+async、Send/Sync boundaries 等）是否有 `concept/` 非 stub 权威页 | 16 主题 / 16 覆盖 = **100%**（`reports/CROSS_DOMAIN_COVERAGE_BASELINE_2026_07_15.md`） | 覆盖率达 100% 且连续 4 周/10 次 CI 稳定 |
+| O3 | `python scripts/check_kg_relation_precision.py --strict` | 核心 50 实体的 KG 关系是否使用具体语义谓词（`dependsOn`/`entails`/`mutexWith`/`refines`/`equivalentTo`/`counterExample`）而非通用 `ex:RelationAnnotation` | 核心 50 实体周边 generic_ratio=0%（`reports/KG_RELATION_PRECISION_2026-07-15.md`） | 核心 generic_ratio=0% 且连续 4 周/10 次 CI 稳定 |
 
 > 说明：观察门机制（默认 exit 0、warning 不阻断、达标后按 §5.2 转阻断）保留；新增观察门时在 `run_quality_gates.sh` 观察段与 `quality_gates.yml` 以 `continue-on-error: true` 挂载，命名后缀 `(observe)`。权威覆盖门（16）目标基线为 concept/ 真内容页 any=100%、none=0、核心 L1–L4 无 P0 缺口=0。
 
 ### 5.2 观察门机制说明（P3-7，2026-07-12 建立；当前 2 个在观察）
 
-**当前状态**：2026-07-15 起新增 O1/O2 两个语义观察门；23 个阻断门保持不变。
+**当前状态**：2026-07-15 起新增 O1/O2/O3 三个语义观察门；23 个阻断门保持不变。
 
 **转正规则**：任一语义观察门**连续 4 周（或连续 10 次 CI 运行）达标**，经评估后转为阻断门（在 `run_quality_gates.sh` 与 `quality_gates.yml` 中改为 `--strict` 且 `continue-on-error: false`）。转正前提：本地实跑 `--strict` 当前 exit=0。转正后若指标退化阻断 PR，按正常阻断门流程处置，不自动降级。
 
@@ -294,8 +295,9 @@ bash scripts/git_hooks/install.sh
 | 版本页中心化管理 | Rust 新版本发布时 | `concept/07_future/rust_1_XX_*.md` |
 | 版本新鲜度巡检 | 每周（手动，不挂 CI 门：网络依赖检查不适合阻断） | `scripts/check_authority_freshness.py` |
 | 夜间质量报告 | 每天 | `.github/workflows/nightly_quality_report.yml` |
+| KG 谓词实例化 | 每次 `apply_renumber.py` 重新生成 KG 后 | `python scripts/apply_kg_semantic_predicates.py --apply` |
 | pre-commit 检查 | 每次本地提交 | `scripts/git_hooks/pre-commit` |
 
 ---
 
-**最后更新**：2026-07-14（已对齐 Rust 1.97.0 stable；23 门全阻断：23 阻断 + 0 观察）
+**最后更新**：2026-07-15（已对齐 Rust 1.97.0 stable；23 门全阻断：23 阻断 + 0 观察；KG 核心 50 实体语义谓词已重新实例化）

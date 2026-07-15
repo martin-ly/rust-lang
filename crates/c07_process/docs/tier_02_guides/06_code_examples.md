@@ -91,6 +91,7 @@
     ├── 进程监控
     └── 系统信息
 ```
+
 ---
 
 ## 📋 文档概述
@@ -194,6 +195,7 @@ fn main() {
     println!("进程完成: {}", status);
 }
 ```
+
 **说明**:
 
 - **Command**: 命令构建器
@@ -232,6 +234,7 @@ drwxr-xr-x  3 user  staff    96B Oct 25 09:00 ..
 等待进程...
 进程完成: exit status: 0
 ```
+
 ---
 
 ### 示例1.2: 进程输入输出
@@ -315,6 +318,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 **说明**:
 
 - **Stdio::piped()**: 创建管道捕获输出
@@ -346,6 +350,7 @@ cat 输出: Hello from stdin!
 
 执行完成 (输出已忽略): exit status: 0
 ```
+
 ---
 
 ### 示例1.3: 环境变量
@@ -425,6 +430,7 @@ fn main() {
     }
 }
 ```
+
 **说明**:
 
 - **env::var**: 读取环境变量
@@ -467,6 +473,7 @@ LANG = en_US.UTF-8
 删除: TEMP_VAR
 TEMP_VAR 不存在
 ```
+
 ---
 
 ### 示例1.4: 工作目录
@@ -541,6 +548,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 **说明**:
 
 - **current_dir**: 获取当前工作目录
@@ -577,6 +585,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 原始路径: "/home/user/project/./test_dir/../sub_dir"
 规范化路径: "/home/user/project/sub_dir"
 ```
+
 ---
 
 ## 🚀 Tier 2: 实践层示例
@@ -697,6 +706,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 **说明**:
 
 - **管道连接**: 将一个进程的输出作为另一个进程的输入
@@ -734,6 +744,7 @@ Line 3
 输出: Task 2
 输出: Task 3
 ```
+
 ---
 
 ### 示例2.2: 信号处理
@@ -748,6 +759,7 @@ Line 3
 [dependencies]
 signal-hook = "0.3"
 ```
+
 **代码**:
 
 ```rust
@@ -882,6 +894,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 **说明**:
 
 - **SIGINT**: Ctrl+C 中断信号
@@ -925,6 +938,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 退出作用域，自动清理
 清理: 终止子进程 54321
 ```
+
 ---
 
 ### 示例2.3: 进程监控
@@ -1087,6 +1101,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 **说明**:
 
 - **try_wait**: 非阻塞检查进程状态
@@ -1155,6 +1170,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 100+0 records out
 104857600 bytes transferred in 0.156 secs (671281024 bytes/sec)
 ```
+
 ---
 
 ### 示例2.4: 系统信息
@@ -1169,6 +1185,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 [dependencies]
 sysinfo = "0.30"
 ```
+
 **代码**:
 
 ```rust
@@ -1314,6 +1331,7 @@ fn main() {
     println!("\n子进程完成");
 }
 ```
+
 **说明**:
 
 - **System**: 系统信息查询
@@ -1424,6 +1442,7 @@ PID 12346: rustc
 
 子进程完成
 ```
+
 ---
 
 ## 📝 总结

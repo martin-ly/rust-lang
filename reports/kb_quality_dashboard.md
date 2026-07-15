@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-15T09:27:20.576347+00:00
+> 生成时间: 2026-07-15T09:54:06.535370+00:00
 > 扫描文件数: 504
 
 ## 全局指标
@@ -472,7 +472,7 @@
 | E:\_src\rust-lang\concept\01_foundation\03_values_and_references\03_variable_model.md | L1 | 757 | 0 | 0 | 0 | 2 | 1 | 12 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\04_control_flow\01_control_flow.md | L1 | 1737 | 3 | 2 | 0 | 2 | 6 | 25 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\04_control_flow\02_patterns.md | L1 | 400 | 0 | 0 | 0 | 0 | 1 | 14 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
-| E:\_src\rust-lang\concept\01_foundation\04_control_flow\03_let_chains.md | L1 | 490 | 0 | 0 | 0 | 4 | 1 | 24 | 0 | ❌ | ✅ | ✅ | 进阶初学者 | 核心概念 |
+| E:\_src\rust-lang\concept\01_foundation\04_control_flow\03_let_chains.md | L1 | 491 | 0 | 0 | 0 | 4 | 1 | 24 | 0 | ❌ | ✅ | ✅ | 进阶初学者 | 核心概念 |
 | E:\_src\rust-lang\concept\01_foundation\04_control_flow\04_statements_and_expressions.md | L1 | 292 | 0 | 0 | 0 | 0 | 1 | 7 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\05_collections\01_collections.md | L1 | 924 | 3 | 2 | 0 | 2 | 3 | 16 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\05_collections\02_collections_advanced.md | L1 | 1063 | 6 | 2 | 0 | 2 | 3 | 11 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |

@@ -1,7 +1,7 @@
 mod async_control_flow_example {
     include!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/docs/snippets/async_control_flow_example.rs"
+        "/docs/tier_03_snippets/async_control_flow_example.rs"
     ));
 }
 

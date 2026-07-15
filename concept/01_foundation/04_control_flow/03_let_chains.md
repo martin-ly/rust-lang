@@ -16,6 +16,7 @@
 > [Pattern Matching](02_patterns.md) ·
 > [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
 > **定理链**: Pattern → Refutability → Let Chain → If-Let Guard
+> **L0 对齐**: [术语表](../../00_meta/01_terminology/01_terminology_glossary.md)
 > **主要来源**:
 > [Rust Reference — If let expressions](https://doc.rust-lang.org/reference/expressions/if-expr.html#if-let-expressions) ·
 > [Rust Reference — Match expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html) ·

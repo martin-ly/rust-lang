@@ -4,7 +4,7 @@
     "scanned": 520,
     "counts": {
       "D1": 0,
-      "D2": 1,
+      "D2": 0,
       "D3": 0,
       "D4": 0,
       "D5": 0,
@@ -12,23 +12,18 @@
     },
     "pct": {
       "D1": 0.0,
-      "D2": 0.2,
+      "D2": 0.0,
       "D3": 0.0,
       "D4": 0.0,
       "D5": 0.0,
       "D6": 0.2
     },
     "D2_base_files_with_asp_and_bloom": 323,
-    "flagged_files": 2
+    "flagged_files": 1
   },
   "examples": {
     "D1": [],
-    "D2": [
-      [
-        "concept/07_future/02_preview_features/33_autoverus_preview.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [7] 无交集"
-      ]
-    ],
+    "D2": [],
     "D3": [],
     "D4": [],
     "D5": [],
@@ -43,11 +38,6 @@
     "concept/07_future/02_preview_features/19_const_trait_preview.md": {
       "D6": [
         "Summary 为空"
-      ]
-    },
-    "concept/07_future/02_preview_features/33_autoverus_preview.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [7] 无交集"
       ]
     }
   }

@@ -21,7 +21,6 @@
   - [3. 动态规划完整示例](#3-动态规划完整示例)
     - [3.1 背包问题全家桶](#31-背包问题全家桶)
   - [🎯 完整示例总结](#-完整示例总结)
-  - [**维护者**: c08\_algorithms 团队](#维护者-c08_algorithms-团队)
 
 ---
 
@@ -232,6 +231,7 @@ mod merge_sort_tests {
     }
 }
 ```
+
 ### 1.2 快速排序 - 多种优化
 
 ```rust
@@ -404,6 +404,7 @@ mod quick_sort_tests {
     }
 }
 ```
+
 ### 1.3 堆排序与优先队列
 
 ```rust
@@ -591,6 +592,7 @@ mod heap_tests {
     }
 }
 ```
+
 ---
 
 ## 2. 图算法完整示例
@@ -813,6 +815,7 @@ mod dijkstra_tests {
     }
 }
 ```
+
 ### 2.2 并查集 (Union-Find) - 完整实现
 
 ```rust
@@ -973,6 +976,7 @@ mod union_find_tests {
     }
 }
 ```
+
 ---
 
 ## 3. 动态规划完整示例
@@ -1189,6 +1193,7 @@ mod knapsack_tests {
     }
 }
 ```
+
 ---
 
 ## 🎯 完整示例总结
@@ -1212,6 +1217,7 @@ mod knapsack_tests {
 **最后更新**: 2025年10月19日
 **文档版本**: 1.0.0
 **维护者**: c08_algorithms 团队
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

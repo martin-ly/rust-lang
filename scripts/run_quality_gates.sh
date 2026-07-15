@@ -77,6 +77,7 @@ run_gate "Semantic Health (strict)" python scripts/semantic_health.py --strict
 
 run_gate "Stub Purity (observe)" python scripts/check_stub_purity.py
 run_gate "Cross-Domain Coverage (observe)" python scripts/check_cross_domain_coverage.py
+run_gate "KG Relation Precision (observe)" python scripts/check_kg_relation_precision.py
 
 # --- Content Overlap v2 (blocking, promoted 2026-07-12 per AGENTS.md §5.2) ---
 # 转正依据：2026-07-12 可处理项清零（原 MERGE 5 + DOCS_INTERNAL 49 = 54 → 0）：

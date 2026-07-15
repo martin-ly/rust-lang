@@ -5,20 +5,20 @@
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 1 (基=323) | 0.2% | >=5% | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=323) | 0.0% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 1 | 0.2% | >=3% | pass |
 
-**受影响文件总数**: 2 / 520
+**受影响文件总数**: 1 / 520
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
 ### D2 A/S/P ↔ Bloom 脱节豁免
 
 - `concept/00_meta/04_navigation/13_foundations_gap_closure_index.md` — L0 导航索引页，无概念正文，A/S/P 内容分级不适用
-- `concept/07_future/03_preview_features/33_autoverus_preview.md` — L7 预览跟踪页（非概念权威页），A/S/P 描述被跟踪对象属性
+- `concept/07_future/02_preview_features/33_autoverus_preview.md` — L7 预览跟踪页（非概念权威页），A/S/P 描述被跟踪对象属性
 
 ### D5 稳定层 nightly/preview 豁免
 
@@ -94,9 +94,8 @@
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
 
-### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（1）
+### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（0）
 
-- `concept/07_future/02_preview_features/33_autoverus_preview.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [7] 无交集
 
 ### D3 关键字段同文件重声明（0）
 

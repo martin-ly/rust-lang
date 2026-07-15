@@ -488,6 +488,20 @@ jobs:
         run: python scripts/check_cross_domain_coverage.py
         continue-on-error: true
 
+  kg-relation-precision:
+    name: KG Relation Precision (observe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run KG relation precision check (observe, promoted to blocking per AGENTS.md §5.2 when core generic ratio=0)
+        run: python scripts/check_kg_relation_precision.py
+        continue-on-error: true
+
   quality-gates-summary:
     name: Quality Gates Summary
     runs-on: ubuntu-latest
@@ -517,6 +531,7 @@ jobs:
       - examples-compile
       - stub-purity
       - cross-domain-coverage
+      - kg-relation-precision
     if: always() && github.event_name == 'pull_request'
     steps:
       - name: Generate summary comment
@@ -548,7 +563,8 @@ jobs:
               'Quiz System (strict)': '${{ needs.quiz-system.result }}',
               'Examples Compile Check (strict)': '${{ needs.examples-compile.result }}',
               'Stub Purity (observe)': '${{ needs.stub-purity.result }}',
-              'Cross-Domain Coverage (observe)': '${{ needs.cross-domain-coverage.result }}'
+              'Cross-Domain Coverage (observe)': '${{ needs.cross-domain-coverage.result }}',
+              'KG Relation Precision (observe)': '${{ needs.kg-relation-precision.result }}'
             };
 
             let status = '✅';
@@ -573,7 +589,7 @@ jobs:
             ${summary}
 
             ---
-            *All 23 quality gates completed (23 blocking + 2 semantic observe)*`;
+            *All 23 quality gates completed (23 blocking + 3 semantic observe)*`;
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,

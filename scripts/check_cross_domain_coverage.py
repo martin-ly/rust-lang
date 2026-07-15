@@ -85,7 +85,7 @@ CROSS_DOMAIN_TOPICS: dict[str, list[str]] = {
     "RTN / RPITIT / TAIT precise capturing": [
         "07_future/02_preview_features/17_type_alias_impl_trait_preview.md",
         "07_future/02_preview_features/13_lifetime_capture_preview.md",
-        "07_future/03_preview_features/20_return_type_notation_preview.md",
+        "07_future/02_preview_features/09_return_type_notation_preview.md",
     ],
     "async fn / Future equivalence + Send across await": [
         "03_advanced/01_async/01_async.md",
