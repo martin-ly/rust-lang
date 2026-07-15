@@ -1,4 +1,7 @@
 > **EN**: C06 Docs Reorganization Plan
+
+本文件为 crates/ 文档摘要；完整概念解释请见下方权威来源。
+
 > **Summary**: Historical plan for the c06_async docs reorganization. Contains no general concept explanations; see the canonical async concept page for authoritative content.
 >
 > **权威来源**: [concept/03_advanced/01_async/01_async.md](../../../concept/03_advanced/01_async/01_async.md)

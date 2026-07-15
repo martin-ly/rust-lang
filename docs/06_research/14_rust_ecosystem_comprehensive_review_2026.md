@@ -254,7 +254,7 @@ DOI: 10.1145/3704904
 
 **技术进展**:
 
-- Google Android Binder驱动（Rust重写）已合并到主线内核
+- Google Android Binder驱动（Rust重写）已并入到主线内核
 - DRM（图形子系统）约1年后将要求Rust用于新驱动
 - 工具链基线：使用Debian稳定版中的Rust版本
 
@@ -453,7 +453,7 @@ DOI: 10.1145/3704904
 | Rust 1.94工具链 | ✅ 已配置 | [^1] [^2] [^21] |
 | Rust 1.95预览 | ✅ 已记录 | [^22] |
 | array_windows使用 | ✅ 已演示 | [^1] |
-| LazyCell/LazyLock API | ✅ 已迁移 | [^2] |
+| LazyCell/LazyLock API | ✅ 已转移 | [^2] |
 | Tree Borrows | ✅ Miri CI配置 | [^5] [^7] [^12] [^20] |
 | Edition 2024准备 | ✅ 文档已更新 | [^9] [^10] |
 | AVX-512 FP16文档 | ✅ 已记录 | [^3] [^4] |

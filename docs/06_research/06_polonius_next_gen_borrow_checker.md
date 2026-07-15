@@ -565,7 +565,7 @@ fn bubble_sort(arr: &mut [i32]) {
 | Issue/PR | 状态 | 描述 |
 |----------|------|------|
 | rust-lang/rust#58792 | 开放 | Polonius 主跟踪 issue |
-| rust-lang/polonius#20 | 已合并 | Datalog 规则引擎优化 |
+| rust-lang/polonius#20 | 已并入 | Datalog 规则引擎优化 |
 | rust-lang/rust#119820 | 开放 | Polonius 性能基准测试 |
 | rust-lang/compiler-team#667 | 已接受 | Hybrid 模式 MCP |
 

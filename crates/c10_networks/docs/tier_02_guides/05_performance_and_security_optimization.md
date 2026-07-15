@@ -1,4 +1,7 @@
 > **EN**: Network Performance and Security Optimization
+
+本文件为 crates/ 文档摘要；完整概念解释请见下方权威来源。
+
 > **Summary**: Practical techniques for optimizing Rust network services: buffering, batching, connection limits, zero-copy I/O, input validation, IP filtering, rate limiting, TLS, and basic DDoS/slow-attack mitigations.
 >
 > **权威来源**: [concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md](../../../../concept/06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md) · [concept/06_ecosystem/12_networking/02_network_security.md](../../../../concept/06_ecosystem/12_networking/02_network_security.md)

@@ -1,7 +1,7 @@
 # Cranelift 后端编译加速跟踪报告 {#cranelift-后端编译加速跟踪报告}
 
 > **EN**: Cranelift Backend
-> **Summary**: Cranelift 后端编译加速跟踪报告 Cranelift Backend. (stub/archive redirect)
+> **Summary**: Cranelift 后端编译加速跟踪报告 Cranelift Backend. 
 > **分级**: [B]
 > **Bloom 层级**: L4-L5
 > **最后更新日期**: 2026-05-08
@@ -321,7 +321,7 @@ cargo +nightly build
 | 链接 | 状态 | 描述 |
 |------|------|------|
 | rust-lang/rust#77933 | 开放 | Rust Cranelift 后端主跟踪 issue |
-| rust-lang/rust#122852 | 已合并 | `codegen-backend` 不稳定标志 |
+| rust-lang/rust#122852 | 已并入 | `codegen-backend` 不稳定标志 |
 | bjorn3/rustc_codegen_cranelift | 活跃 | 社区驱动的 Cranelift 后端实现 |
 
 ### 6.2 预计稳定化时间 {#62-预计稳定化时间}

@@ -1,0 +1,540 @@
+{
+  "version": "1.1",
+  "date": "2026-07-15",
+  "description": "rustc error code -> decision tree/node lookup",
+  "source": "concept/00_meta/knowledge_topology/decision_trees.yaml",
+  "node_index": {
+    "E0106": [
+      {
+        "tree_id": "J-LIFE-02",
+        "node_id": "L",
+        "tree_title_zh": "生命周期判定树",
+        "tree_title_en": "Lifetime Judgment Tree",
+        "node_label": "症状：生命周期错误（lifetime may not live long enough）",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#32-生命周期判定树"
+      }
+    ],
+    "E0119": [
+      {
+        "tree_id": "DF-TRAIT-04",
+        "node_id": "D",
+        "tree_title_zh": "Trait 判定树",
+        "tree_title_en": "Trait Decision Tree",
+        "node_label": "概念定义：Trait 是定义共享行为的接口，可被类型实现，可被泛型约束",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#五trait-判定树"
+      }
+    ],
+    "E0277": [
+      {
+        "tree_id": "J-TYPE-03",
+        "node_id": "T",
+        "tree_title_zh": "类型不匹配判定树",
+        "tree_title_en": "Type Mismatch Judgment Tree",
+        "node_label": "症状：类型不匹配（expected ... found ... / trait bound unsatisfied）",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#33-类型不匹配判定树"
+      }
+    ],
+    "E0283": [
+      {
+        "tree_id": "DF-GENERIC-05",
+        "node_id": "D",
+        "tree_title_zh": "泛型判定树",
+        "tree_title_en": "Generics Decision Tree",
+        "node_label": "概念定义：泛型是参数化多态，编译器通过单态化生成具体代码",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#六泛型判定树"
+      }
+    ],
+    "E0308": [
+      {
+        "tree_id": "J-TYPE-03",
+        "node_id": "T",
+        "tree_title_zh": "类型不匹配判定树",
+        "tree_title_en": "Type Mismatch Judgment Tree",
+        "node_label": "症状：类型不匹配（expected ... found ... / trait bound unsatisfied）",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#33-类型不匹配判定树"
+      }
+    ],
+    "E0373": [
+      {
+        "tree_id": "DF-ASYNC-07",
+        "node_id": "D",
+        "tree_title_zh": "异步判定树",
+        "tree_title_en": "Async Decision Tree",
+        "node_label": "概念定义：async/await 是协作式多任务的语法糖，编译器将 async fn 变换为状态机",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#八异步判定树"
+      }
+    ],
+    "E0382": [
+      {
+        "tree_id": "DF-OWN-01",
+        "node_id": "D",
+        "tree_title_zh": "所有权判定树",
+        "tree_title_en": "Ownership Decision Tree",
+        "node_label": "概念定义：每个值在任意时刻有且只有一个所有者",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#二所有权判定树"
+      }
+    ],
+    "E0433": [
+      {
+        "tree_id": "J-MODULE-07",
+        "node_id": "D",
+        "tree_title_zh": "名称解析判定树",
+        "tree_title_en": "Name Resolution Judgment Tree",
+        "node_label": "症状：名称解析失败（failed to resolve use of undeclared crate/module）",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#71-名称解析判定树"
+      }
+    ],
+    "E0499": [
+      {
+        "tree_id": "J-BORROW-01",
+        "node_id": "B",
+        "tree_title_zh": "借用冲突判定树",
+        "tree_title_en": "Borrow Conflict Judgment Tree",
+        "node_label": "症状：借用冲突（cannot borrow as mutable/immutable）",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#31-借用冲突判定树"
+      }
+    ],
+    "E0501": [
+      {
+        "tree_id": "J-BORROW-01",
+        "node_id": "B",
+        "tree_title_zh": "借用冲突判定树",
+        "tree_title_en": "Borrow Conflict Judgment Tree",
+        "node_label": "症状：借用冲突（cannot borrow as mutable/immutable）",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#31-借用冲突判定树"
+      }
+    ],
+    "E0502": [
+      {
+        "tree_id": "J-BORROW-01",
+        "node_id": "B",
+        "tree_title_zh": "借用冲突判定树",
+        "tree_title_en": "Borrow Conflict Judgment Tree",
+        "node_label": "症状：借用冲突（cannot borrow as mutable/immutable）",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#31-借用冲突判定树"
+      }
+    ],
+    "E0503": [
+      {
+        "tree_id": "J-BORROW-01",
+        "node_id": "B",
+        "tree_title_zh": "借用冲突判定树",
+        "tree_title_en": "Borrow Conflict Judgment Tree",
+        "node_label": "症状：借用冲突（cannot borrow as mutable/immutable）",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#31-借用冲突判定树"
+      }
+    ],
+    "E0505": [
+      {
+        "tree_id": "J-BORROW-01",
+        "node_id": "B",
+        "tree_title_zh": "借用冲突判定树",
+        "tree_title_en": "Borrow Conflict Judgment Tree",
+        "node_label": "症状：借用冲突（cannot borrow as mutable/immutable）",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#31-借用冲突判定树"
+      }
+    ],
+    "E0597": [
+      {
+        "tree_id": "J-LIFE-02",
+        "node_id": "L",
+        "tree_title_zh": "生命周期判定树",
+        "tree_title_en": "Lifetime Judgment Tree",
+        "node_label": "症状：生命周期错误（lifetime may not live long enough）",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#32-生命周期判定树"
+      }
+    ],
+    "E0609": [
+      {
+        "tree_id": "J-FIELD-08",
+        "node_id": "D",
+        "tree_title_zh": "字段访问判定树",
+        "tree_title_en": "Field Access Judgment Tree",
+        "node_label": "症状：字段访问失败（no field on type）",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#72-字段访问判定树"
+      }
+    ],
+    "E0621": [
+      {
+        "tree_id": "J-LIFE-02",
+        "node_id": "L",
+        "tree_title_zh": "生命周期判定树",
+        "tree_title_en": "Lifetime Judgment Tree",
+        "node_label": "症状：生命周期错误（lifetime may not live long enough）",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#32-生命周期判定树"
+      }
+    ],
+    "E0700": [
+      {
+        "tree_id": "DF-ASYNC-07",
+        "node_id": "D",
+        "tree_title_zh": "异步判定树",
+        "tree_title_en": "Async Decision Tree",
+        "node_label": "概念定义：async/await 是协作式多任务的语法糖，编译器将 async fn 变换为状态机",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#八异步判定树"
+      }
+    ],
+    "E0729": [
+      {
+        "tree_id": "DF-ASYNC-07",
+        "node_id": "D",
+        "tree_title_zh": "异步判定树",
+        "tree_title_en": "Async Decision Tree",
+        "node_label": "概念定义：async/await 是协作式多任务的语法糖，编译器将 async fn 变换为状态机",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#八异步判定树"
+      }
+    ],
+    "E0733": [
+      {
+        "tree_id": "DF-ASYNC-07",
+        "node_id": "D",
+        "tree_title_zh": "异步判定树",
+        "tree_title_en": "Async Decision Tree",
+        "node_label": "概念定义：async/await 是协作式多任务的语法糖，编译器将 async fn 变换为状态机",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#八异步判定树"
+      }
+    ],
+    "E0759": [
+      {
+        "tree_id": "J-LIFE-02",
+        "node_id": "L",
+        "tree_title_zh": "生命周期判定树",
+        "tree_title_en": "Lifetime Judgment Tree",
+        "node_label": "症状：生命周期错误（lifetime may not live long enough）",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#32-生命周期判定树"
+      }
+    ]
+  },
+  "tree_index": {
+    "E0106": [
+      {
+        "tree_id": "J-LIFE-02",
+        "tree_title_zh": "生命周期判定树",
+        "tree_title_en": "Lifetime Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#32-生命周期判定树"
+      },
+      {
+        "tree_id": "DF-LIFE-03",
+        "tree_title_zh": "生命周期判定树",
+        "tree_title_en": "Lifetime Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#四生命周期判定树"
+      }
+    ],
+    "E0119": [
+      {
+        "tree_id": "DF-TRAIT-04",
+        "tree_title_zh": "Trait 判定树",
+        "tree_title_en": "Trait Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#五trait-判定树"
+      }
+    ],
+    "E0277": [
+      {
+        "tree_id": "J-TYPE-03",
+        "tree_title_zh": "类型不匹配判定树",
+        "tree_title_en": "Type Mismatch Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#33-类型不匹配判定树"
+      },
+      {
+        "tree_id": "DF-TRAIT-04",
+        "tree_title_zh": "Trait 判定树",
+        "tree_title_en": "Trait Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#五trait-判定树"
+      },
+      {
+        "tree_id": "DF-GENERIC-05",
+        "tree_title_zh": "泛型判定树",
+        "tree_title_en": "Generics Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#六泛型判定树"
+      },
+      {
+        "tree_id": "DF-CONC-06",
+        "tree_title_zh": "并发判定树",
+        "tree_title_en": "Concurrency Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#七并发判定树"
+      }
+    ],
+    "E0283": [
+      {
+        "tree_id": "J-TYPE-03",
+        "tree_title_zh": "类型不匹配判定树",
+        "tree_title_en": "Type Mismatch Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#33-类型不匹配判定树"
+      },
+      {
+        "tree_id": "DF-GENERIC-05",
+        "tree_title_zh": "泛型判定树",
+        "tree_title_en": "Generics Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#六泛型判定树"
+      }
+    ],
+    "E0308": [
+      {
+        "tree_id": "J-TYPE-03",
+        "tree_title_zh": "类型不匹配判定树",
+        "tree_title_en": "Type Mismatch Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#33-类型不匹配判定树"
+      }
+    ],
+    "E0373": [
+      {
+        "tree_id": "DF-ASYNC-07",
+        "tree_title_zh": "异步判定树",
+        "tree_title_en": "Async Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#八异步判定树"
+      }
+    ],
+    "E0382": [
+      {
+        "tree_id": "DF-OWN-01",
+        "tree_title_zh": "所有权判定树",
+        "tree_title_en": "Ownership Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#二所有权判定树"
+      }
+    ],
+    "E0433": [
+      {
+        "tree_id": "J-MODULE-07",
+        "tree_title_zh": "名称解析判定树",
+        "tree_title_en": "Name Resolution Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#71-名称解析判定树"
+      }
+    ],
+    "E0499": [
+      {
+        "tree_id": "J-BORROW-01",
+        "tree_title_zh": "借用冲突判定树",
+        "tree_title_en": "Borrow Conflict Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#31-借用冲突判定树"
+      },
+      {
+        "tree_id": "DF-BORROW-02",
+        "tree_title_zh": "借用判定树",
+        "tree_title_en": "Borrowing Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#三借用判定树"
+      }
+    ],
+    "E0501": [
+      {
+        "tree_id": "J-BORROW-01",
+        "tree_title_zh": "借用冲突判定树",
+        "tree_title_en": "Borrow Conflict Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#31-借用冲突判定树"
+      },
+      {
+        "tree_id": "DF-BORROW-02",
+        "tree_title_zh": "借用判定树",
+        "tree_title_en": "Borrowing Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#三借用判定树"
+      }
+    ],
+    "E0502": [
+      {
+        "tree_id": "J-BORROW-01",
+        "tree_title_zh": "借用冲突判定树",
+        "tree_title_en": "Borrow Conflict Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#31-借用冲突判定树"
+      },
+      {
+        "tree_id": "DF-BORROW-02",
+        "tree_title_zh": "借用判定树",
+        "tree_title_en": "Borrowing Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#三借用判定树"
+      }
+    ],
+    "E0503": [
+      {
+        "tree_id": "J-BORROW-01",
+        "tree_title_zh": "借用冲突判定树",
+        "tree_title_en": "Borrow Conflict Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#31-借用冲突判定树"
+      }
+    ],
+    "E0505": [
+      {
+        "tree_id": "J-BORROW-01",
+        "tree_title_zh": "借用冲突判定树",
+        "tree_title_en": "Borrow Conflict Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#31-借用冲突判定树"
+      }
+    ],
+    "E0597": [
+      {
+        "tree_id": "J-LIFE-02",
+        "tree_title_zh": "生命周期判定树",
+        "tree_title_en": "Lifetime Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#32-生命周期判定树"
+      },
+      {
+        "tree_id": "DF-BORROW-02",
+        "tree_title_zh": "借用判定树",
+        "tree_title_en": "Borrowing Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#三借用判定树"
+      },
+      {
+        "tree_id": "DF-LIFE-03",
+        "tree_title_zh": "生命周期判定树",
+        "tree_title_en": "Lifetime Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#四生命周期判定树"
+      },
+      {
+        "tree_id": "DF-ASYNC-07",
+        "tree_title_zh": "异步判定树",
+        "tree_title_en": "Async Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#八异步判定树"
+      }
+    ],
+    "E0609": [
+      {
+        "tree_id": "J-FIELD-08",
+        "tree_title_zh": "字段访问判定树",
+        "tree_title_en": "Field Access Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#72-字段访问判定树"
+      }
+    ],
+    "E0621": [
+      {
+        "tree_id": "J-LIFE-02",
+        "tree_title_zh": "生命周期判定树",
+        "tree_title_en": "Lifetime Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#32-生命周期判定树"
+      },
+      {
+        "tree_id": "DF-LIFE-03",
+        "tree_title_zh": "生命周期判定树",
+        "tree_title_en": "Lifetime Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#四生命周期判定树"
+      }
+    ],
+    "E0700": [
+      {
+        "tree_id": "DF-ASYNC-07",
+        "tree_title_zh": "异步判定树",
+        "tree_title_en": "Async Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#八异步判定树"
+      }
+    ],
+    "E0729": [
+      {
+        "tree_id": "DF-ASYNC-07",
+        "tree_title_zh": "异步判定树",
+        "tree_title_en": "Async Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#八异步判定树"
+      }
+    ],
+    "E0733": [
+      {
+        "tree_id": "DF-ASYNC-07",
+        "tree_title_zh": "异步判定树",
+        "tree_title_en": "Async Decision Tree",
+        "source_file": "concept/00_meta/00_framework/concept_definition_decision_forest.md",
+        "source_anchor": "#八异步判定树"
+      }
+    ],
+    "E0759": [
+      {
+        "tree_id": "J-LIFE-02",
+        "tree_title_zh": "生命周期判定树",
+        "tree_title_en": "Lifetime Judgment Tree",
+        "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
+        "source_anchor": "#32-生命周期判定树"
+      }
+    ]
+  },
+  "descriptions": {
+    "E0106": "missing lifetime specifier（函数/结构体签名缺少生命周期标注）",
+    "E0119": "conflicting implementations of trait（trait 实现冲突）",
+    "E0277": "the trait bound `T: Trait` is not satisfied（trait bound 未满足）",
+    "E0282": "type annotations needed（需要更多类型标注）",
+    "E0283": "type annotations needed: cannot resolve `T: Trait`（类型推断歧义）",
+    "E0308": "mismatched types（类型不匹配）",
+    "E0373": "async fn may outlive the current lifetime（async 状态机捕获引用跨 await）",
+    "E0382": "use of moved value（使用已移动值）",
+    "E0433": "failed to resolve use of undeclared crate/module（未解析的 crate/module）",
+    "E0499": "cannot borrow `X` as mutable more than once at a time（重复可变借用）",
+    "E0501": "cannot borrow `X` as mutable because it is also borrowed as immutable",
+    "E0502": "cannot borrow `X` as immutable because it is also borrowed as mutable",
+    "E0503": "cannot use `X` because it was mutably borrowed",
+    "E0505": "cannot move out of `X` because it is borrowed",
+    "E0597": "`X` does not live long enough（值生命周期不足）",
+    "E0609": "no field named `X` on type `Y`（字段访问失败）",
+    "E0621": "explicit lifetime required in function signature（函数签名需要显式生命周期）",
+    "E0700": "hidden type for `impl Trait` captures lifetime that does not appear in bounds",
+    "E0729": "feature `async_await` is required（async/await 特性门）",
+    "E0733": "recursive async function（递归 async fn）",
+    "E0759": "function cannot return a value referencing data owned by the current function"
+  },
+  "authority_pages": {
+    "E0106": "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+    "E0119": "concept/02_intermediate/00_traits/04_advanced_traits.md",
+    "E0277": "concept/02_intermediate/00_traits/01_traits.md",
+    "E0282": "concept/02_intermediate/01_generics/01_generics.md",
+    "E0283": "concept/02_intermediate/01_generics/01_generics.md",
+    "E0308": "concept/01_foundation/02_type_system/01_type_system.md",
+    "E0373": "concept/03_advanced/01_async/01_async.md",
+    "E0382": "concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+    "E0433": "concept/02_intermediate/05_modules_and_visibility/01_module_system.md",
+    "E0499": "concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+    "E0501": "concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+    "E0502": "concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+    "E0503": "concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+    "E0505": "concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+    "E0597": "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+    "E0609": "concept/01_foundation/07_modules_and_items/04_structs.md",
+    "E0621": "concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md",
+    "E0700": "concept/03_advanced/01_async/02_async_advanced.md",
+    "E0729": "concept/03_advanced/01_async/01_async.md",
+    "E0733": "concept/03_advanced/01_async/01_async.md",
+    "E0759": "concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md"
+  }
+}

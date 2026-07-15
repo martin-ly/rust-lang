@@ -1,4 +1,7 @@
 > **EN**: Rust 1.94 Async Update Overview
+
+本文件为 crates/ 文档摘要；完整概念解释请见下方权威来源。
+
 > **Summary**: Overview of Rust 1.94 updates relevant to async programming. Detailed version-specific coverage is maintained in the canonical version-tracking concept page.
 >
 > **权威来源**: [concept/07_future/00_version_tracking/rust_1_94_stabilized.md](../../../../concept/07_future/00_version_tracking/rust_1_94_stabilized.md)

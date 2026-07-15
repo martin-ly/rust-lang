@@ -6,9 +6,9 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 
----
-
 # C07 进程管理 - 待完善清单
+
+本文件为 crates/ 任务追踪记录，记录 C07 进程管理 crate 的待完善项与完成情况。
 
 > **最后更新**: 2026-02-13
 > **追踪**: 00_MASTER_INDEX 中「待完善工作」的详细项
@@ -23,8 +23,6 @@
 
 - [x] async_stdio_demo 完整实现（见 src/bin/async_stdio_demo.rs，默认启用 async feature）
 - [x] 实践示例文档扩展（11_practical_examples/ 导航与重定向已创建）
-
----
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >

@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 504,
-    "generated_at": "2026-07-15T10:04:15.739467+00:00"
+    "total_files": 505,
+    "generated_at": "2026-07-15T12:31:40.808662+00:00"
   },
   "files": [
     {
@@ -1766,6 +1766,32 @@
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
       "matrix_rows": 77,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\03_audit\\08_feature_inventory_methodology.md",
+      "layer": "L0",
+      "title": "Rust 语言特性盘点方法论",
+      "positioning": "",
+      "line_count": 48,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../07_future/00_version_tracking/01_rust_version_tracking.md",
+        "../00_framework/methodology.md",
+        "01_concept_audit_guide.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 4,
       "pre_post": {
         "pre": [],
         "post": []
@@ -7087,7 +7113,7 @@
       "layer": "L0",
       "title": "推理判定树图谱（Reasoning Judgment Tree Atlas）",
       "positioning": "",
-      "line_count": 696,
+      "line_count": 742,
       "theorem_chains": [
         {
           "text": "| [Async/Await](../../03_advanced/01_async/01_async.md) | 推理/定理节 ×7 | 定理矩阵（10 行，含 ⟹ 推理链） · 推理链层级图 |",
@@ -7486,7 +7512,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 6,
+      "mermaid_blocks": 8,
       "matrix_rows": 412,
       "pre_post": {
         "pre": [],
@@ -7546,7 +7572,7 @@
       "layer": "L0",
       "title": "Rust 知识体系知识图谱本体规范 v2.0（RDF 1.2 / RDF-star / SKOS 对齐版）",
       "positioning": "本文件是 `kg_ontology.md`（v1 已不再维护）的 v2 升级版，在保留原有教学关系本体的基础上，显式对齐 W3C RDF 1.2、RDF-star、SKOS、JSON-LD 1.1 与 SHACL 数据形状标准，使项目知识图谱从\"规范文档\"进化为\"可验证、可查询、可多语言消费\"的 Linked Data。",
-      "line_count": 329,
+      "line_count": 330,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -7555,7 +7581,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 46,
+      "matrix_rows": 47,
       "pre_post": {
         "pre": [],
         "post": []

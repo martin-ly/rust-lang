@@ -1,4 +1,7 @@
 > **EN**: Formal Network Protocol Theory
+
+本文件为 crates/ 文档摘要；完整概念解释请见下方权威来源。
+
 > **Summary**: Formal methods for network protocols in Rust: finite state machines, invariants, model checking, process calculus, Petri nets, TCP/IP formalization, HTTP semantics, protocol composition, and type-state verification with phantom types.
 >
 > **权威来源**: [concept/06_ecosystem/12_networking/06_formal_network_protocol_theory.md](../../../../concept/06_ecosystem/12_networking/06_formal_network_protocol_theory.md)

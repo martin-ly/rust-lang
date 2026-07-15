@@ -1,18 +1,18 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-15T10:04:15.738467+00:00
-> 扫描文件数: 504
+> 生成时间: 2026-07-15T12:31:40.807662+00:00
+> 扫描文件数: 505
 
 ## 全局指标
 
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
-| 总文件数 | 504 | 27 | ✅ |
+| 总文件数 | 505 | 27 | ✅ |
 | 总定理链 (⟹) | 2090 | ≥270 | ✅ |
 | 总反命题 | 681 | ≥40 | ✅ |
-| 总 Mermaid 图 | 1052 | ≥50 | ✅ |
+| 总 Mermaid 图 | 1055 | ≥50 | ✅ |
 | 编译验证代码块 | 5172 | ≥150 | ✅ |
-| 定理矩阵总行 | 23676 | — | — |
+| 定理矩阵总行 | 23681 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | docs/content/knowledge 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 317 | ≥50 | ✅ |
@@ -26,7 +26,7 @@
 
 | 层级 | 文件数 | 平均 ⟹/文件 | 平均过渡段/文件 | 认知路径 | ⟸/文件 | 模板化 | 前置覆盖 | 后置覆盖 | 双标签 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| L0 | 66 | 7.4 | 3.0 | 35/66 (53%) | 0.6 | 0 | 15/66 | 13/66 | 46/66 |
+| L0 | 67 | 7.3 | 3.0 | 35/67 (52%) | 0.6 | 0 | 15/67 | 13/67 | 46/67 |
 | L1 | 56 | 4.2 | 2.3 | 40/56 (71%) | 1.5 | 0 | 56/56 | 56/56 | 56/56 |
 | L2 | 39 | 5.4 | 1.2 | 25/39 (64%) | 1.9 | 0 | 39/39 | 39/39 | 39/39 |
 | L3 | 70 | 5.8 | 2.2 | 55/70 (78%) | 1.6 | 0 | 70/70 | 70/70 | 70/70 |
@@ -417,6 +417,7 @@
 | E:\_src\rust-lang\concept\00_meta\03_audit\05_template_deduplication_guide.md | L0 | 94 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 贡献者 | None |
 | E:\_src\rust-lang\concept\00_meta\03_audit\06_grading_system.md | L0 | 162 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\03_audit\07_quality_dashboard_v2.md | L0 | 330 | 1 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ❌ | ❌ | 专家 | 综述级 |
+| E:\_src\rust-lang\concept\00_meta\03_audit\08_feature_inventory_methodology.md | L0 | 48 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\00_meta\04_navigation\01_cross_reference_matrix.md | L0 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\00_meta\04_navigation\02_career_landscape.md | L0 | 236 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 入门 → 进阶 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\04_navigation\03_concept_index.md | L0 | 795 | 4 | 0 | 0 | 2 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
@@ -443,9 +444,9 @@
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\06_inter_layer_mapping_atlas.md | L0 | 203 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\07_intra_layer_mapping_atlas.md | L0 | 594 | 347 | 33 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\08_concept_source_alignment_atlas.md | L0 | 52 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
-| E:\_src\rust-lang\concept\00_meta\knowledge_topology\09_reasoning_judgment_tree_atlas.md | L0 | 696 | 4 | 0 | 0 | 0 | 6 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
+| E:\_src\rust-lang\concept\00_meta\knowledge_topology\09_reasoning_judgment_tree_atlas.md | L0 | 742 | 4 | 0 | 0 | 0 | 8 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\10_gap_and_action_plan.md | L0 | 78 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 元层 |
-| E:\_src\rust-lang\concept\00_meta\knowledge_topology\kg_ontology_v2.md | L0 | 329 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | None |
+| E:\_src\rust-lang\concept\00_meta\knowledge_topology\kg_ontology_v2.md | L0 | 330 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | None |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\kg_tlo_alignment.md | L0 | 263 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\01_foundation\00_start\00_start.md | L1 | 322 | 4 | 2 | 0 | 1 | 2 | 3 | 6 | ✅ | ✅ | ✅ | 初学者 | 初学者 |
 | E:\_src\rust-lang\concept\01_foundation\00_start\01_pl_prerequisites.md | L1 | 593 | 3 | 2 | 0 | 0 | 1 | 14 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |

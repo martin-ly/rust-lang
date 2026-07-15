@@ -1,7 +1,7 @@
 # Rust 形式化验证学术导读 {#rust-形式化验证学术导读}
 
 > **EN**: Rust Formal Verification
-> **Summary**: Rust 形式化验证学术导读 Rust Formal Verification. (stub/archive redirect)
+> **Summary**: Rust 形式化验证学术导读 Rust Formal Verification. 
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]

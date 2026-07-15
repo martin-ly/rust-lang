@@ -13,12 +13,15 @@
 #   conclusion 结论节点 —— 根因/修复策略/验证回边/边界结论；叶子必须为此类型
 #   condition  条件节点 —— 症状入口/定义/前提/规则/边界条件
 #
+# 树级可选字段:
+#   rustc_error_codes: [E0502, E0597, ...]  ——  本决策树覆盖的 rustc 错误码列表
+#
 # 边标签约定: 是 / 否 / 条件:<描述> / 入口 / 回边
 #
 # 校验: python scripts/check_decision_trees.py [--strict]
 
-version: "1.0"
-date: "2026-07-12"
+version: "1.1"
+date: "2026-07-15"
 maintainer: "concept/00_meta/knowledge_topology"
 validator: "scripts/check_decision_trees.py"
 kg: "concept/00_meta/kg_data_v3.json"
@@ -36,8 +39,12 @@ trees:
       file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
       anchor: "#31-借用冲突判定树"
     covered_concepts: [ex:Borrowing, ex:InteriorMutability, ex:SmartPointers]
+    rustc_error_codes: [E0499, E0501, E0502, E0503, E0505]
     nodes:
-      - {id: B, type: condition, label: "症状：借用冲突（cannot borrow as mutable/immutable）"}
+      - id: B
+        type: condition
+        label: "症状：借用冲突（cannot borrow as mutable/immutable）"
+        rustc_error_codes: [E0499, E0501, E0502, E0503, E0505]
       - id: Q1
         type: decision
         condition: "活跃别名数是否 ≥2（&T 与 &mut T 在重叠区域同时活跃）？"
@@ -86,8 +93,12 @@ trees:
       file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
       anchor: "#32-生命周期判定树"
     covered_concepts: [ex:Lifetimes, ex:PinAndUnpin, ex:SmartPointers]
+    rustc_error_codes: [E0106, E0597, E0621, E0759]
     nodes:
-      - {id: L, type: condition, label: "症状：生命周期错误（lifetime may not live long enough）"}
+      - id: L
+        type: condition
+        label: "症状：生命周期错误（lifetime may not live long enough）"
+        rustc_error_codes: [E0106, E0597, E0621, E0759]
       - id: Q1
         type: decision
         condition: "返回类型含引用且显式生命周期参数数 = 0？"
@@ -147,8 +158,12 @@ trees:
       file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
       anchor: "#33-类型不匹配判定树"
     covered_concepts: [ex:Traits, ex:Generics, ex:ErrorHandling, ex:AsyncAdvanced]
+    rustc_error_codes: [E0277, E0283, E0308]
     nodes:
-      - {id: T, type: condition, label: "症状：类型不匹配（expected ... found ... / trait bound unsatisfied）"}
+      - id: T
+        type: condition
+        label: "症状：类型不匹配（expected ... found ... / trait bound unsatisfied）"
+        rustc_error_codes: [E0277, E0308]
       - id: Q1
         type: decision
         condition: "'trait bound is not satisfied' 报错数是否 ≥1 条？"
@@ -371,8 +386,12 @@ trees:
       file: concept/00_meta/00_framework/concept_definition_decision_forest.md
       anchor: "#二所有权判定树"
     covered_concepts: [ex:Ownership, ex:MoveSemantics]
+    rustc_error_codes: [E0382]
     nodes:
-      - {id: D, type: condition, label: "概念定义：每个值在任意时刻有且只有一个所有者"}
+      - id: D
+        type: condition
+        label: "概念定义：每个值在任意时刻有且只有一个所有者"
+        rustc_error_codes: [E0382]
       - {id: P1, type: condition, label: "前提 P1：值有确定类型 T"}
       - {id: P2, type: condition, label: "前提 P2：类型 T 决定移动/复制语义"}
       - {id: P3, type: condition, label: "前提 P3：所有者离开作用域时值被释放（Drop）"}
@@ -429,6 +448,7 @@ trees:
       file: concept/00_meta/00_framework/concept_definition_decision_forest.md
       anchor: "#三借用判定树"
     covered_concepts: [ex:Borrowing, ex:InteriorMutability, ex:UnsafeRust]
+    rustc_error_codes: [E0499, E0501, E0502, E0597]
     nodes:
       - {id: D, type: condition, label: "概念定义：借用是通过引用（&T / &mut T）临时访问值，不转移所有权"}
       - {id: P1, type: condition, label: "前提 P1：借用必须从有效所有权派生"}
@@ -482,6 +502,7 @@ trees:
       file: concept/00_meta/00_framework/concept_definition_decision_forest.md
       anchor: "#四生命周期判定树"
     covered_concepts: [ex:Lifetimes, ex:Borrowing]
+    rustc_error_codes: [E0106, E0597, E0621]
     nodes:
       - {id: D, type: condition, label: "概念定义：生命周期是引用有效的程序点集合，编译期构造，不进入机器码"}
       - {id: P1, type: condition, label: "前提 P1：每个引用类型都有生命周期参数"}
@@ -542,8 +563,12 @@ trees:
       file: concept/00_meta/00_framework/concept_definition_decision_forest.md
       anchor: "#五trait-判定树"
     covered_concepts: [ex:Traits, ex:Generics]
+    rustc_error_codes: [E0119, E0277]
     nodes:
-      - {id: D, type: condition, label: "概念定义：Trait 是定义共享行为的接口，可被类型实现，可被泛型约束"}
+      - id: D
+        type: condition
+        label: "概念定义：Trait 是定义共享行为的接口，可被类型实现，可被泛型约束"
+        rustc_error_codes: [E0119]
       - {id: P1, type: condition, label: "前提 P1：Trait 可被外部类型实现"}
       - {id: P2, type: condition, label: "前提 P2：Orphan Rule 限制 impl 位置，防止一致性破坏"}
       - {id: P3, type: condition, label: "前提 P3：Trait 对象安全要求方法有确定性"}
@@ -610,8 +635,12 @@ trees:
       file: concept/00_meta/00_framework/concept_definition_decision_forest.md
       anchor: "#六泛型判定树"
     covered_concepts: [ex:Generics, ex:Traits]
+    rustc_error_codes: [E0277, E0283]
     nodes:
-      - {id: D, type: condition, label: "概念定义：泛型是参数化多态，编译器通过单态化生成具体代码"}
+      - id: D
+        type: condition
+        label: "概念定义：泛型是参数化多态，编译器通过单态化生成具体代码"
+        rustc_error_codes: [E0283]
       - {id: P1, type: condition, label: "前提 P1：泛型参数必须满足 Trait Bound 约束"}
       - {id: P2, type: condition, label: "前提 P2：类型推断基于 HM 算法约束统一化"}
       - {id: P3, type: condition, label: "前提 P3：单态化生成具体代码，无运行时开销"}
@@ -670,6 +699,7 @@ trees:
       file: concept/00_meta/00_framework/concept_definition_decision_forest.md
       anchor: "#七并发判定树"
     covered_concepts: [ex:Concurrency, ex:Ownership, ex:Borrowing]
+    rustc_error_codes: [E0277]
     nodes:
       - {id: D, type: condition, label: "概念定义：Rust 通过类型系统（Send/Sync）在编译期排除数据竞争"}
       - {id: P1, type: condition, label: "前提 P1：Send —— 类型可安全跨线程转移所有权"}
@@ -730,8 +760,12 @@ trees:
       file: concept/00_meta/00_framework/concept_definition_decision_forest.md
       anchor: "#八异步判定树"
     covered_concepts: [ex:AsyncProgramming, ex:Futures, ex:PinAndUnpin]
+    rustc_error_codes: [E0373, E0597, E0700, E0729, E0733]
     nodes:
-      - {id: D, type: condition, label: "概念定义：async/await 是协作式多任务的语法糖，编译器将 async fn 变换为状态机"}
+      - id: D
+        type: condition
+        label: "概念定义：async/await 是协作式多任务的语法糖，编译器将 async fn 变换为状态机"
+        rustc_error_codes: [E0373, E0700, E0729, E0733]
       - {id: P1, type: condition, label: "前提 P1：async fn 被编译为状态机"}
       - {id: P2, type: condition, label: "前提 P2：.await 是异步协作点，可能让出执行权"}
       - {id: P3, type: condition, label: "前提 P3：自引用结构需 Pin 保证内存稳定"}
@@ -884,3 +918,115 @@ trees:
       - {from: U, to: C, label: "条件: unsafe 实现 Send/Sync"}
       - {from: U, to: A, label: "条件: unsafe 突破 Pin"}
       - {from: U, to: B, label: "条件: unsafe 绕过借用检查"}
+
+  # ==========================================================================
+  # 新增：rustc error code 覆盖补全（模块解析 / 字段访问）
+  # ==========================================================================
+
+  - id: J-MODULE-07
+    title_zh: 名称解析判定树
+    title_en: Name Resolution Judgment Tree
+    source:
+      file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
+      anchor: "#71-名称解析判定树"
+    covered_concepts: [ex:Modules, ex:NamesScopesAndResolution]
+    rustc_error_codes: [E0433]
+    nodes:
+      - id: D
+        type: condition
+        label: "症状：名称解析失败（failed to resolve use of undeclared crate/module）"
+        rustc_error_codes: [E0433]
+      - id: Q1
+        type: decision
+        condition: "缺失项是否为外部 crate（路径以非 crate/self/super 名开头）？"
+        quantitative: true
+        threshold: "外部 crate 引用 ≥ 1 处"
+      - id: Q2
+        type: decision
+        condition: "路径中是否存在拼写错误的段数 ≥1 个？"
+        quantitative: true
+        threshold: "拼写错误段数 ≥ 1"
+      - id: Q3
+        type: decision
+        condition: "目标项所在模块的可见路径数是否 = 0（私有/未导入）？"
+        quantitative: true
+        threshold: "可见路径数 = 0"
+      - {id: R1, type: conclusion, label: "根因：缺少依赖 / 未声明 extern crate"}
+      - {id: R2, type: conclusion, label: "根因：路径拼写错误"}
+      - {id: R3, type: conclusion, label: "根因：模块未声明或路径层级错误"}
+      - {id: R4, type: conclusion, label: "根因：可见性不足（私有模块/项）"}
+      - {id: F1, type: conclusion, label: "修复：在 Cargo.toml 添加依赖或声明 extern crate"}
+      - {id: F2, type: conclusion, label: "修复：核对并修正路径拼写"}
+      - {id: F3, type: conclusion, label: "修复：添加 mod 声明或调整路径层级"}
+      - {id: F4, type: conclusion, label: "修复：使用 pub 提升可见性或使用 pub use 重导出"}
+      - {id: V6, type: conclusion, label: "验证回边：cargo check"}
+    edges:
+      - {from: D, to: Q1, label: "入口"}
+      - {from: Q1, to: R1, label: "是"}
+      - {from: Q1, to: Q2, label: "否"}
+      - {from: Q2, to: R2, label: "是"}
+      - {from: Q2, to: Q3, label: "否"}
+      - {from: Q3, to: R4, label: "是"}
+      - {from: Q3, to: R3, label: "否"}
+      - {from: R1, to: F1, label: "修复"}
+      - {from: R2, to: F2, label: "修复"}
+      - {from: R3, to: F3, label: "修复"}
+      - {from: R4, to: F4, label: "修复"}
+      - {from: F1, to: V6, label: "验证"}
+      - {from: F2, to: V6, label: "验证"}
+      - {from: F3, to: V6, label: "验证"}
+      - {from: F4, to: V6, label: "验证"}
+
+  - id: J-FIELD-08
+    title_zh: 字段访问判定树
+    title_en: Field Access Judgment Tree
+    source:
+      file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
+      anchor: "#72-字段访问判定树"
+    covered_concepts: [ex:Structs, ex:TypeSystem]
+    rustc_error_codes: [E0609]
+    nodes:
+      - id: D
+        type: condition
+        label: "症状：字段访问失败（no field on type）"
+        rustc_error_codes: [E0609]
+      - id: Q1
+        type: decision
+        condition: "字段名与目标类型字段名差异数是否 ≥1（拼写错误）？"
+        quantitative: true
+        threshold: "字段名差异 ≥ 1"
+      - id: Q2
+        type: decision
+        condition: "实际类型与期望含该字段的类型不一致数是否 ≥1 个？"
+        quantitative: true
+        threshold: "类型不一致 ≥ 1 处"
+      - id: Q3
+        type: decision
+        condition: "字段可见性为 private 且不在定义 crate 内的字段数是否 ≥1 个？"
+        quantitative: true
+        threshold: "私有字段访问 ≥ 1 个"
+      - {id: R1, type: conclusion, label: "根因：字段名拼写错误"}
+      - {id: R2, type: conclusion, label: "根因：实际类型不匹配"}
+      - {id: R3, type: conclusion, label: "根因：字段私有"}
+      - {id: R4, type: conclusion, label: "根因：dyn/泛型类型擦除字段信息"}
+      - {id: F1, type: conclusion, label: "修复：修正字段名"}
+      - {id: F2, type: conclusion, label: "修复：转换类型或检查变量绑定"}
+      - {id: F3, type: conclusion, label: "修复：将字段设为 pub 或改用访问器方法"}
+      - {id: F4, type: conclusion, label: "修复：具体化类型或使用 downcast"}
+      - {id: V7, type: conclusion, label: "验证回边：cargo check"}
+    edges:
+      - {from: D, to: Q1, label: "入口"}
+      - {from: Q1, to: R1, label: "是"}
+      - {from: Q1, to: Q2, label: "否"}
+      - {from: Q2, to: R2, label: "是"}
+      - {from: Q2, to: Q3, label: "否"}
+      - {from: Q3, to: R3, label: "是"}
+      - {from: Q3, to: R4, label: "否"}
+      - {from: R1, to: F1, label: "修复"}
+      - {from: R2, to: F2, label: "修复"}
+      - {from: R3, to: F3, label: "修复"}
+      - {from: R4, to: F4, label: "修复"}
+      - {from: F1, to: V7, label: "验证"}
+      - {from: F2, to: V7, label: "验证"}
+      - {from: F3, to: V7, label: "验证"}
+      - {from: F4, to: V7, label: "验证"}

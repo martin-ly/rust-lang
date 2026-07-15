@@ -367,7 +367,6 @@ let size = NonZeroU32::new(1024).unwrap();
 
 > **NonZero 洞察**: `NonZero` 类型是 Rust **类型系统（Type System）与优化**结合的经典案例——编译器利用**niche value**（零）压缩 `Option<T>` 的表示。
 > [来源: [std::num::NonZeroU32](https://doc.rust-lang.org/std/num/type.NonZeroU32.html)]
-
 > **Rust 1.97.0 注记**：整数与 `NonZero` 新增一批**位查询方法**（[release notes — Stabilized APIs](https://releases.rs/docs/1.97.0/)，curl 200 实测）：`isolate_highest_one()`/`isolate_lowest_one()` 返回仅保留最高/最低置位的值；`highest_one()`/`lowest_one()` 返回最高/最低置位的**位序号**（`Option<u32>`，`0` 时为 `None`）；`bit_width()` 返回表示该值所需的最少位数。`NonZero` 版本去掉了 `Option`（值非零保证不失败）：
 >
 > ```rust

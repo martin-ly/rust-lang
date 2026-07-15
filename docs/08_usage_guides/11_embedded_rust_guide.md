@@ -1,7 +1,7 @@
 # 嵌入式 Rust 专题指南 {#嵌入式-rust-专题指南}
 
 > **EN**: Embedded Rust Guide
-> **Summary**: 嵌入式 Rust 专题指南 Embedded Rust Guide. (stub/archive redirect)
+> **Summary**: 嵌入式 Rust 专题指南 Embedded Rust Guide. 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4
 >

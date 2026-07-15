@@ -1,7 +1,7 @@
 # VerusBelt (PLDI 2026) 研究笔记 {#verusbelt-pldi-2026-研究笔记}
 
 > **EN**: VerusBelt PLDI 2026
-> **Summary**: 研究笔记 VerusBelt PLDI 2026. (stub/archive redirect)
+> **Summary**: 研究笔记 VerusBelt PLDI 2026. 
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]

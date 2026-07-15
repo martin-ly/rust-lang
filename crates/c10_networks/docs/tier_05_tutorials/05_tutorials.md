@@ -3,11 +3,11 @@
 **EN**: C10 Networks Tutorials and Best Practices
 **Summary**: Crate-specific runnable examples and best practices for the `c10_networks` crate; general Rust networking concepts are linked to `concept/` authority pages.
 
-> **权威来源**: 本文件保留 `c10_networks` crate 独有的代码示例与实践项目；通用 Rust 网络编程概念请见：
+> **权威来源**: 本文档保留 `c10_networks` crate 独有的代码示例与实践项目；通用 Rust 网络编程概念请见：
 > [`concept/06_ecosystem/12_networking/05_networking_basics.md`](../../../../concept/06_ecosystem/12_networking/05_networking_basics.md)
 >
 > 根据 [AGENTS.md](../../../../AGENTS.md) §2 Canonical 规则与 §6.4 `crates/` 治理规则，
-> 通用 Rust 概念解释统一维护在 `concept/` 中；本文件仅保留与本 crate 直接相关的可运行示例、配置与操作步骤。
+> 通用 Rust 概念解释统一维护于 `concept/` 中；本文档仅保留与本 crate 直接相关的可运行示例、配置与操作步骤。
 
 ## 通用概念导航
 

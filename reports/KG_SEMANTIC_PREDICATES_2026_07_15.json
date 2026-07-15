@@ -1,0 +1,93 @@
+{
+  "date": "2026_07_15",
+  "apply": true,
+  "batches": [
+    "meta_navigation",
+    "ecosystem",
+    "future",
+    "rustc_internals",
+    "framework"
+  ],
+  "min_confidence": 0.65,
+  "processed_entities": 252,
+  "processed_relations": 7369,
+  "processed_generic_remaining": 226,
+  "changed_relations": 0,
+  "below_threshold_skipped": 0,
+  "batch_statistics": [
+    {
+      "batch": "meta_navigation",
+      "entities": 27,
+      "relations": 3294,
+      "generic_remaining": 40,
+      "generic_ratio": 0.0121
+    },
+    {
+      "batch": "ecosystem",
+      "entities": 122,
+      "relations": 2148,
+      "generic_remaining": 113,
+      "generic_ratio": 0.0526
+    },
+    {
+      "batch": "future",
+      "entities": 65,
+      "relations": 1166,
+      "generic_remaining": 57,
+      "generic_ratio": 0.0489
+    },
+    {
+      "batch": "rustc_internals",
+      "entities": 17,
+      "relations": 288,
+      "generic_remaining": 5,
+      "generic_ratio": 0.0174
+    },
+    {
+      "batch": "framework",
+      "entities": 21,
+      "relations": 473,
+      "generic_remaining": 11,
+      "generic_ratio": 0.0233
+    }
+  ],
+  "before_type_distribution": {
+    "ex:entails": 2971,
+    "ex:relatedTo": 2450,
+    "ex:dependsOn": 1743,
+    "ex:RelationAnnotation": 600,
+    "ex:refines": 173,
+    "ex:equivalentTo": 35,
+    "ex:enables": 14,
+    "ex:mutexWith": 3
+  },
+  "after_type_distribution": {
+    "ex:entails": 2971,
+    "ex:relatedTo": 2450,
+    "ex:dependsOn": 1743,
+    "ex:RelationAnnotation": 600,
+    "ex:refines": 173,
+    "ex:equivalentTo": 35,
+    "ex:enables": 14,
+    "ex:mutexWith": 3
+  },
+  "before_predicate_distribution": {
+    "ex:relatedTo": 3007,
+    "ex:entails": 2998,
+    "ex:dependsOn": 1759,
+    "ex:refines": 173,
+    "ex:equivalentTo": 35,
+    "ex:enables": 14,
+    "ex:mutexWith": 3
+  },
+  "after_predicate_distribution": {
+    "ex:relatedTo": 3007,
+    "ex:entails": 2998,
+    "ex:dependsOn": 1759,
+    "ex:refines": 173,
+    "ex:equivalentTo": 35,
+    "ex:enables": 14,
+    "ex:mutexWith": 3
+  },
+  "changes_sample": []
+}

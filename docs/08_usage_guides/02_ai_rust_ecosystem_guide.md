@@ -1,7 +1,7 @@
 # AI + Rust 生态指南 (Ai Rust Ecosystem Guide) {#ai-rust-生态指南}
 
 > **EN**: Ai Rust Ecosystem Guide
-> **Summary**: AI + Rust 生态指南 Ai Rust Ecosystem Guide. (stub/archive redirect)
+> **Summary**: AI + Rust 生态指南 Ai Rust Ecosystem Guide. 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4
 >

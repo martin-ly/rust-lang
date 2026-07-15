@@ -13,8 +13,6 @@
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [参考级]
 
----
-
 ## 语言
 
 | 特性 | 说明 |
@@ -64,8 +62,6 @@
 > 完整迁移判定树与修复动作请见权威页 [`concept/07_future/00_version_tracking/migration_197_decision_tree.md`](../../../concept/07_future/00_version_tracking/migration_197_decision_tree.md)。本节仅列出关键词，不重复迁移动作。
 
 - v0 symbol mangling、空 `export_name`、`pin!` deref coercion、Windows `WSAESHUTDOWN→BrokenPipe` 等变化均已在迁移判定树中给出可执行修复步骤。
-
----
 
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-07-10

@@ -1,4 +1,7 @@
 > **EN**: Advanced Macro Debugging
+
+本文件为 crates/ 文档摘要；完整概念解释请见下方权威来源。
+
 > **Summary**: Advanced debugging techniques for Rust macros: cargo expand, compiler plugin development, macro expansion tracing, breakpoint debugging, performance profiling, and improving diagnostic messages with Span management.
 >
 > **权威来源**: [concept/03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md](../../../../concept/03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md)

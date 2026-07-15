@@ -12,11 +12,11 @@
     "T2_top_symbol": "⟹",
     "T3_jump": [
       6,
-      189
+      215
     ],
-    "T3_jump_rate": 0.032,
+    "T3_jump_rate": 0.028,
     "T3_dead_ends": 0,
-    "T4_quant_rate": 1.0,
+    "T4_quant_rate": 0.98,
     "T5_leaks": 0,
     "T6_placeholders": 0
   },
@@ -94,17 +94,17 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
-      "lines": 696,
+      "lines": 742,
       "T3T4": {
-        "blocks": 6,
-        "nodes": 87,
+        "blocks": 8,
+        "nodes": 113,
         "jump_nodes": 0,
         "jump_rate": 0.0,
         "dead_ends": [],
         "dead_end_count": 0,
-        "diamonds": 21,
-        "quant_diamonds": 21,
-        "quant_rate": 1.0
+        "diamonds": 27,
+        "quant_diamonds": 26,
+        "quant_rate": 0.963
       },
       "issues": {}
     },
@@ -120,7 +120,7 @@
     },
     {
       "rel": "concept/00_meta/knowledge_topology/kg_ontology_v2.md",
-      "lines": 329,
+      "lines": 330,
       "issues": {}
     },
     {

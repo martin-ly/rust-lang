@@ -1,9 +1,9 @@
 # TRPL 第三版（2024 Edition）对照差异分析 {#trpl-第三版2024-edition对照差异分析}
 
 <!-- canonical-normalized 2026-07-11 -->
-> **权威来源（Canonical）**: 本文件为 **TRPL 第三版与 `concept/` 知识体系的对齐差异分析**（独特比较/评估内容）；各 Rust 概念的深度解释以 `concept/` 权威页为准。逐章映射见 [`docs/02_learning/09_learning_mvp_path.md`](../02_learning/09_learning_mvp_path.md)（映射权威页）与 [`concept/00_meta/06_trpl_3rd_ed_mapping.md`](../../concept/00_meta/06_trpl_3rd_ed_mapping.md)（重定向 stub）。
+> **权威来源（Canonical）**: 本文档是 **TRPL 第三版与 `concept/` 知识体系的对齐差异分析**（独特比较/评估内容）；各 Rust 概念的深度解释以 `concept/` 权威页为准。逐章映射见 [`docs/02_learning/09_learning_mvp_path.md`](../02_learning/09_learning_mvp_path.md)（映射权威页）与 [`concept/00_meta/06_trpl_3rd_ed_mapping.md`](../../concept/00_meta/06_trpl_3rd_ed_mapping.md)（重定向 stub）。
 >
-> 根据 AGENTS.md §2 Canonical 规则：本文仅保留对齐矩阵、叙事/深度差异比较、强弱项评估与学习路径建议等独特内容，不重复各 concept 页中的概念定义、规则与定理推导。
+> 说明：本文仅保留对齐矩阵、叙事/深度差异比较、强弱项评估与学习路径建议等独特内容，不重复各 concept 页中的概念定义、规则与定理推导。
 >
 > ⚠需专家复核：本文件若干历史 `concept/` 链接沿用旧路径风格（如 `00_pl_prerequisites.md`、`10_error_handling_basics.md`、`05_comparative/02_rust_vs_cpp.md` 等），本次 P1 不改动正文链接；建议在链接治理中统一核对校正。
 
@@ -107,7 +107,7 @@
 TRPL Ch 1-3  →  concept/01_foundation/ (L1 基础)
 TRPL Ch 4-6  →  concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md ~ 04_type_system.md
 TRPL Ch 7-9  →  concept/01_foundation/05_collections/01_collections.md ~ 10_error_handling_basics.md
-TRPL Ch 10   →  concept/02_intermediate/00_traits/01_traits.md + 02_generics.md + 01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md（原 18_lifetimes_advanced.md 已合并）
+TRPL Ch 10   →  concept/02_intermediate/00_traits/01_traits.md + 02_generics.md + 01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md（原 18_lifetimes_advanced.md 已并入）
 TRPL Ch 11   →  concept/01_foundation/10_testing_basics/01_testing_basics.md
 TRPL Ch 12   →  concept/00_meta/learning_mvp_path.md (Week 1 Day 7)
 TRPL Ch 13   →  concept/02_intermediate/04_types_and_conversions/02_closure_types.md + 15_iterator_patterns.md

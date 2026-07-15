@@ -1,7 +1,7 @@
 # Rust 应用分析论证视图 {#rust-应用分析论证视图}
 
 > **EN**: Applications Analysis View
-> **Summary**: Rust 应用分析论证视图 Applications Analysis View. (stub/archive redirect)
+> **Summary**: Rust 应用分析论证视图 Applications Analysis View. 
 > **分级**: [B]
 > **Bloom 层级**: L4-L5
 > **创建日期**: 2026-02-12

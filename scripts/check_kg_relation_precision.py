@@ -89,6 +89,7 @@ SEMANTIC_PREDICATES = {
     "ex:counterExample",
     "ex:instanceOf",
     "ex:appliesTo",
+    "ex:relatedTo",
 }
 
 

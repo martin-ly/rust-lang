@@ -1,0 +1,83 @@
+{
+  "date": "2026-07-15_idempotent",
+  "apply": false,
+  "batches": [
+    "l5",
+    "l6_concept",
+    "l7",
+    "l3_rem"
+  ],
+  "min_confidence": 0.75,
+  "processed_entities": 226,
+  "processed_relations": 4412,
+  "processed_generic_remaining": 2142,
+  "changed_relations": 0,
+  "below_threshold_skipped": 239,
+  "batch_statistics": [
+    {
+      "batch": "l5",
+      "entities": 20,
+      "relations": 546,
+      "generic_remaining": 251,
+      "generic_ratio": 0.4597
+    },
+    {
+      "batch": "l6_concept",
+      "entities": 99,
+      "relations": 1842,
+      "generic_remaining": 991,
+      "generic_ratio": 0.538
+    },
+    {
+      "batch": "l7",
+      "entities": 65,
+      "relations": 1166,
+      "generic_remaining": 610,
+      "generic_ratio": 0.5232
+    },
+    {
+      "batch": "l3_rem",
+      "entities": 42,
+      "relations": 858,
+      "generic_remaining": 290,
+      "generic_ratio": 0.338
+    }
+  ],
+  "before_type_distribution": {
+    "ex:RelationAnnotation": 3143,
+    "ex:entails": 2934,
+    "ex:dependsOn": 1687,
+    "ex:refines": 173,
+    "ex:equivalentTo": 35,
+    "ex:enables": 14,
+    "ex:mutexWith": 3
+  },
+  "after_type_distribution": {
+    "ex:RelationAnnotation": 3143,
+    "ex:entails": 2934,
+    "ex:dependsOn": 1687,
+    "ex:refines": 173,
+    "ex:equivalentTo": 35,
+    "ex:enables": 14,
+    "ex:mutexWith": 3
+  },
+  "before_predicate_distribution": {
+    "ex:relatedTo": 3007,
+    "ex:entails": 2998,
+    "ex:dependsOn": 1759,
+    "ex:refines": 173,
+    "ex:equivalentTo": 35,
+    "ex:enables": 14,
+    "ex:mutexWith": 3
+  },
+  "after_predicate_distribution": {
+    "ex:relatedTo": 3007,
+    "ex:entails": 2998,
+    "ex:dependsOn": 1759,
+    "ex:refines": 173,
+    "ex:equivalentTo": 35,
+    "ex:enables": 14,
+    "ex:mutexWith": 3
+  },
+  "changes_sample": []
+}

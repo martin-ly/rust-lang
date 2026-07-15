@@ -16,14 +16,14 @@
   },
   "relation_sample": {
     "@id": "_:rel1",
-    "@type": "ex:RelationAnnotation",
+    "@type": "ex:dependsOn",
     "ex:subject": "ex:ComprehensiveRustMapping",
     "ex:predicate": "ex:dependsOn",
     "ex:object": "ex:LearningGuide",
     "ex:source": "prerequisite:../04_navigation/07_learning_guide.md",
     "ex:confidence": 1.0,
     "ex:version": "1.97.0",
-    "ex:reviewed": false,
+    "ex:reviewed": true,
     "dcterms:created": "2026-07-11"
   },
   "K1_missing": [],

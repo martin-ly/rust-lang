@@ -10,6 +10,8 @@
 
 # Rust 2024 Edition `Future` in Prelude 影响分析 (Rust 2024 Edition Future In Prelude) {#rust-2024-edition-future-in-prelude-影响分析}
 
+本文件为 docs/ 指南摘要；完整概念解释请见 [`concept/07_future/01_edition_roadmap/02_edition_guide.md`](../../concept/07_future/01_edition_roadmap/02_edition_guide.md)。
+
 > **EN**: Rust 2024 Edition Future In Prelude
 > **Summary**: Rust 2024 Edition Future in Prelude 影响分析 Rust 2024 Edition Future In Prelude.
 > **Bloom 层级**: L2-L3

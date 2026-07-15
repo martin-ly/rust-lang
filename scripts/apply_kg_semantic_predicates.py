@@ -1,16 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""重新实例化 KG 核心 50 实体周边关系的语义谓词。
+"""为 KG 实体批次重新实例化语义谓词。
 
 背景：concept/00_meta/kg_data_v3.json 被 apply_renumber.py 重新生成后，所有关系
 的 @type 退化为 ex:RelationAnnotation。本脚本读取 atlas（层内/层间映射图谱）中的
-关系符号，为核心 50 实体周边的关系恢复精确语义谓词，并补充 ex:confidence /
+关系符号，为指定批次实体周边的关系恢复精确语义谓词，并补充 ex:confidence /
 ex:source。
 
 支持的语义谓词（与 check_kg_relation_precision.py 对齐）：
   ex:dependsOn / ex:enables / ex:entails / ex:impliedBy / ex:mutexWith /
   ex:refines / ex:refinedBy / ex:equivalentTo / ex:counterExample /
-  ex:instanceOf / ex:appliesTo
+  ex:instanceOf / ex:appliesTo / ex:relatedTo
+
+新增批次（2026-07-15）：
+  meta_navigation : 00_meta/knowledge_topology/ + 00_meta/04_navigation/ + SUMMARY.md
+  ecosystem       : 06_ecosystem/（含 cargo，覆盖设计模式、领域应用等）
+  future          : 07_future/（不含 archive）
+  rustc_internals : 04_formal/05_rustc_internals/
+  framework       : 00_meta/00_framework/
+
+导航/图谱边专用谓词：
+  ex:relatedTo — 用于 atlas、导航索引、SUMMARY.md 等弱语义连接，
+  作为消除 ex:RelationAnnotation 的兜底谓词。
 
 Atlas 符号映射（07_intra_layer_mapping_atlas.md / 06_inter_layer_mapping_atlas.md）：
   →   dependsOn   源依赖目标（前置概念）
@@ -24,8 +35,19 @@ Atlas 符号映射（07_intra_layer_mapping_atlas.md / 06_inter_layer_mapping_at
   06_inter 后置概念 → entails
   06_inter 相关概念节 → entails（弱前向引用）
 
+额外高置信度信号：
+  - ex:source 以 "prerequisite:" 开头 → ex:dependsOn
+  - ex:source 以 "postrequisite:" 开头 → ex:entails
+  - 对称谓词（mutexWith / equivalentTo）支持反向 atlas 查找
+
 用法：
-  python scripts/apply_kg_semantic_predicates.py [--apply] [--strict] [--date YYYY-MM-DD]
+  python scripts/apply_kg_semantic_predicates.py [--apply] [--strict]
+       [--batch core|l1|l2|async|unsafe|formal|meta_navigation|ecosystem|future|rustc_internals|framework]
+       [--all-batches]
+       [--min-confidence 0.75] [--date YYYY-MM-DD]
+
+默认（无 --batch / --all-batches）仅处理核心 50 实体，保持与旧版本兼容。
+meta_navigation / ecosystem / future / rustc_internals / framework 建议置信度 0.65。
 """
 from __future__ import annotations
 
@@ -97,6 +119,114 @@ CORE_PATHS = [
     "04_formal/00_type_theory/01_type_theory.md",
 ]
 
+BATCH_DEFINITIONS = {
+    "l1": ["01_foundation/"],
+    "l2": ["02_intermediate/"],
+    "async": ["03_advanced/01_async/"],
+    "unsafe": ["03_advanced/02_unsafe/"],
+    "formal": ["04_formal/"],
+    "l5": [
+        "05_comparative/00_paradigms/",
+        "05_comparative/01_systems_languages/",
+        "05_comparative/02_managed_languages/",
+        "05_comparative/03_domain_comparisons/",
+    ],
+    "l6_concept": [
+        "06_ecosystem/00_toolchain/",
+        "06_ecosystem/02_core_crates/",
+        "06_ecosystem/03_design_patterns/",
+        "06_ecosystem/04_web_and_networking/",
+        "06_ecosystem/05_systems_and_embedded/",
+        "06_ecosystem/06_data_and_distributed/",
+        "06_ecosystem/07_security_and_cryptography/",
+        "06_ecosystem/08_formal_verification/",
+        "06_ecosystem/09_testing_and_quality/",
+        "06_ecosystem/10_performance/",
+        "06_ecosystem/11_domain_applications/",
+        "06_ecosystem/12_networking/",
+    ],
+    "l7": [
+        "07_future/00_version_tracking/",
+        "07_future/01_edition_roadmap/",
+        "07_future/02_preview_features/",
+        "07_future/04_research_and_experimental/",
+    ],
+    "l3_rem": [
+        "03_advanced/00_concurrency/",
+        "03_advanced/03_proc_macros/",
+        "03_advanced/05_inline_assembly/",
+        "03_advanced/06_low_level_patterns/",
+        "03_advanced/07_unsafe_internals/",
+        "03_advanced/08_process_ipc/",
+    ],
+    "meta_navigation": [
+        "00_meta/knowledge_topology/",
+        "00_meta/04_navigation/",
+        "SUMMARY.md",
+    ],
+    "ecosystem": [
+        "06_ecosystem/",
+    ],
+    "future": [
+        "07_future/",
+    ],
+    "rustc_internals": [
+        "04_formal/05_rustc_internals/",
+    ],
+    "framework": [
+        "00_meta/00_framework/",
+    ],
+}
+
+# 始终排除的低价值路径（quiz、README、归档）
+BASE_EXCLUDED_PATH_REGEXES = [
+    re.compile(r"/\d\d_quizzes/"),
+    re.compile(r"(^|/)README\.md$"),
+    re.compile(r"^07_future/archive/"),
+]
+
+# 仅在批次未显式覆盖时排除的路径
+CONDITIONAL_EXCLUDED_PATH_REGEXES = {
+    "00_meta": re.compile(r"^00_meta/"),
+    "summary": re.compile(r"(^|/)SUMMARY\.md$"),
+    "cargo": re.compile(r"^06_ecosystem/01_cargo/"),
+    "ecosystem_quizzes": re.compile(r"^06_ecosystem/13_quizzes/"),
+}
+
+# 导航/图谱边路径前缀（用于兜底 ex:relatedTo）
+NAVIGATION_PATH_PREFIXES = (
+    "00_meta/knowledge_topology/",
+    "00_meta/04_navigation/",
+    "SUMMARY.md",
+)
+
+
+def batch_overrides(batch_names: list[str]) -> set[str]:
+    """根据当前处理批次决定允许哪些条件排除项。"""
+    overrides = set()
+    if "meta_navigation" in batch_names:
+        overrides |= {"00_meta", "summary"}
+    if "framework" in batch_names:
+        overrides |= {"00_meta"}
+    if "ecosystem" in batch_names:
+        overrides |= {"cargo", "ecosystem_quizzes"}
+    return overrides
+
+
+def is_excluded_path(path: str, overrides: set[str] | None = None) -> bool:
+    overrides = overrides or set()
+    for rx in BASE_EXCLUDED_PATH_REGEXES:
+        if rx.search(path):
+            return True
+    for key, rx in CONDITIONAL_EXCLUDED_PATH_REGEXES.items():
+        if key not in overrides and rx.search(path):
+            return True
+    return False
+
+
+def is_navigation_path(path: str) -> bool:
+    return path.startswith(NAVIGATION_PATH_PREFIXES)
+
 SEMANTIC_PREDICATES = {
     "ex:dependsOn",
     "ex:enables",
@@ -109,7 +239,11 @@ SEMANTIC_PREDICATES = {
     "ex:counterExample",
     "ex:instanceOf",
     "ex:appliesTo",
+    "ex:relatedTo",
 }
+
+# 对称谓词：关系方向反转后谓词不变
+SYMMETRIC_PREDICATES = {"ex:mutexWith", "ex:equivalentTo"}
 
 SYMBOL_TO_PREDICATE = {
     "→": "ex:dependsOn",
@@ -183,13 +317,21 @@ def parse_atlas(atlas_rel: str) -> list[tuple[str, str, str, str]]:
 
 
 def build_atlas_map(atlas_rels: list[str]) -> dict[tuple[str, str], tuple[str, str, str]]:
-    """构建 (src_path, tgt_path) -> (symbol, predicate, reason) 映射。"""
+    """构建 (src_path, tgt_path) -> (symbol, predicate, reason) 映射。
+
+    对对称谓词同时注册反向键，以便 KG 中的反向关系也能命中 atlas。
+    """
     mapping: dict[tuple[str, str], tuple[str, str, str]] = {}
     for rel in atlas_rels:
         for src_path, sym, tgt_path, reason in parse_atlas(rel):
             key = (src_path, tgt_path)
             if key not in mapping:
-                mapping[key] = (sym, SYMBOL_TO_PREDICATE[sym], reason)
+                pred = SYMBOL_TO_PREDICATE[sym]
+                mapping[key] = (sym, pred, reason)
+                if pred in SYMMETRIC_PREDICATES:
+                    rev = (tgt_path, src_path)
+                    if rev not in mapping:
+                        mapping[rev] = (sym, pred, reason)
     return mapping
 
 
@@ -207,14 +349,29 @@ def infer_predicate(
     s_path: str,
     o_path: str,
     atlas_map: dict[tuple[str, str], tuple[str, str, str]],
+    source_value: object | None,
 ) -> tuple[str, float, str] | None:
-    """对单条关系推断语义谓词，返回 (predicate, confidence, source)。"""
-    # 1. Atlas 精确匹配
+    """对单条关系推断语义谓词，返回 (predicate, confidence, source) 三元组。"""
+    source_str = ""
+    if isinstance(source_value, str):
+        source_str = source_value
+
+    # 1. Atlas 精确匹配（含对称谓词反向查找）
     if (s_path, o_path) in atlas_map:
         _sym, pred, reason = atlas_map[(s_path, o_path)]
         return pred, 0.95, f"atlas:{reason[:120]}"
 
-    # 2. 同目录同层相邻文件 → refines
+    # 2. 高置信度 source 信号
+    if source_str.startswith("prerequisite:"):
+        return "ex:dependsOn", 0.9, "inferred:source-prerequisite"
+    if source_str.startswith("postrequisite:"):
+        return "ex:entails", 0.9, "inferred:source-postrequisite"
+
+    # 3. 导航/图谱/索引页 → relatedTo（兜底消除 RelationAnnotation）
+    if is_navigation_path(s_path) or is_navigation_path(o_path):
+        return "ex:relatedTo", 0.72, "inferred:navigation-link"
+
+    # 4. 同目录同层相邻文件 → refines
     s_dir = Path(s_path).parent
     o_dir = Path(o_path).parent
     sl = entity_layer(s_path)
@@ -225,20 +382,66 @@ def infer_predicate(
         if sn is not None and on is not None and 1 <= abs(sn - on) <= 2:
             return "ex:refines", 0.8, "inferred:sibling-file"
 
-    # 3. 层方向推断
+    # 5. 层方向推断
     if sl < ol:
         return "ex:entails", 0.75, "inferred:layer-forward"
     if sl > ol:
         return "ex:dependsOn", 0.75, "inferred:layer-backward"
 
-    # 4. 同层前向引用
+    # 6. 同层前向引用（置信度低于默认阈值，通常不写入）
     return "ex:entails", 0.7, "inferred:same-layer"
+
+
+def select_batches(args: argparse.Namespace) -> tuple[list[str], dict[str, list[str]]]:
+    """根据命令行参数返回要处理的批次名称与路径前缀映射。"""
+    if args.all_batches:
+        return list(BATCH_DEFINITIONS.keys()), dict(BATCH_DEFINITIONS)
+    if args.batch:
+        names = [b.strip().lower() for b in args.batch.split(",") if b.strip()]
+        invalid = [n for n in names if n not in BATCH_DEFINITIONS]
+        if invalid:
+            raise ValueError(f"未知批次: {invalid}; 可用: {list(BATCH_DEFINITIONS.keys())}")
+        return names, {n: BATCH_DEFINITIONS[n] for n in names}
+    # 默认：核心 50 实体（兼容旧行为）
+    return ["core"], {"core": [""]}
+
+
+def collect_entity_ids(
+    entities: list[dict],
+    batches: dict[str, list[str]],
+    overrides: set[str],
+) -> dict[str, set[str]]:
+    """为每个批次收集实体 @id；'core' 使用固定路径列表。
+
+    按批次覆盖条件排除项，允许 meta_navigation / framework / ecosystem 等
+    批次处理原本被屏蔽的 00_meta、SUMMARY.md、cargo 等路径。
+    """
+    path_to_id = {e["ex:path"]: e["@id"] for e in entities}
+    result: dict[str, set[str]] = {}
+    for name, prefixes in batches.items():
+        if isinstance(prefixes, str):
+            prefixes = [prefixes]
+        if name == "core":
+            ids = {path_to_id[p] for p in CORE_PATHS if p in path_to_id and not is_excluded_path(p, overrides)}
+        else:
+            ids = set()
+            for prefix in prefixes:
+                ids.update(
+                    path_to_id[p]
+                    for p in path_to_id
+                    if p.startswith(prefix) and not is_excluded_path(p, overrides)
+                )
+        result[name] = ids
+    return result
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--apply", action="store_true", help="写回 kg_data_v3.json（默认 dry-run）")
-    ap.add_argument("--strict", action="store_true", help="若核心实体周边仍有通用谓词则 exit 1")
+    ap.add_argument("--strict", action="store_true", help="若被处理批次周边仍有通用谓词则 exit 1")
+    ap.add_argument("--batch", default=None, help="处理指定批次，逗号分隔，如 l1,l2,async,unsafe,formal")
+    ap.add_argument("--all-batches", action="store_true", help="处理全部扩展批次（含 l1/l2/async/unsafe/formal/meta_navigation/ecosystem/future/rustc_internals/framework）")
+    ap.add_argument("--min-confidence", type=float, default=0.75, help="仅写入置信度不低于此阈值的关系")
     ap.add_argument("--date", default=_dt.date.today().isoformat())
     args = ap.parse_args()
 
@@ -249,12 +452,21 @@ def main() -> int:
     path_to_id = {e["ex:path"]: e["@id"] for e in entities}
     id_to_path = {e["@id"]: e["ex:path"] for e in entities}
 
-    missing = [p for p in CORE_PATHS if p not in path_to_id]
-    if missing:
-        print("ERROR: 核心路径未在 KG 中找到:", missing, file=sys.stderr)
-        return 1
+    try:
+        batch_names, batch_defs = select_batches(args)
+    except ValueError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 2
 
-    core_ids = {path_to_id[p] for p in CORE_PATHS}
+    overrides = batch_overrides(batch_names)
+    batch_to_ids = collect_entity_ids(entities, batch_defs, overrides)
+    processed_ids = set().union(*batch_to_ids.values())
+
+    if "core" in batch_names:
+        missing = [p for p in CORE_PATHS if p not in path_to_id]
+        if missing:
+            print("ERROR: 核心路径未在 KG 中找到:", missing, file=sys.stderr)
+            return 1
 
     atlas_map = build_atlas_map(
         [
@@ -267,16 +479,21 @@ def main() -> int:
     before_pred = Counter(r.get("ex:predicate", "UNKNOWN") for r in relations)
 
     changed: list[dict] = []
+    below_threshold = 0
     generic_remaining = 0
 
     for r in relations:
         s = r.get("ex:subject")
         o = r.get("ex:object")
-        if s not in core_ids and o not in core_ids:
+        if s not in processed_ids and o not in processed_ids:
             continue
 
         s_path = id_to_path.get(s, "")
         o_path = id_to_path.get(o, "")
+        if not s_path or not o_path:
+            continue
+        if is_excluded_path(s_path, overrides) or is_excluded_path(o_path, overrides):
+            continue
         old_type = r.get("@type", "ex:RelationAnnotation")
         old_pred = r.get("ex:predicate", "ex:relatedTo")
 
@@ -287,11 +504,15 @@ def main() -> int:
             source = r.get("ex:source", "existing")
             rule = "existing-semantic"
         else:
-            inferred = infer_predicate(s_path, o_path, atlas_map)
+            inferred = infer_predicate(s_path, o_path, atlas_map, r.get("ex:source"))
             if inferred is None:
                 generic_remaining += 1
                 continue
             new_pred, conf_value, source = inferred
+            if conf_value < args.min_confidence:
+                below_threshold += 1
+                generic_remaining += 1
+                continue
             confidence = conf_value
             rule = source.split(":", 1)[0]
 
@@ -307,6 +528,7 @@ def main() -> int:
                 "new_predicate": new_pred,
                 "rule": rule,
                 "source": source,
+                "confidence": confidence,
             })
             r["@type"] = new_pred
             r["ex:predicate"] = new_pred
@@ -318,10 +540,22 @@ def main() -> int:
     after_type = Counter(r.get("@type", "UNKNOWN") for r in relations)
     after_pred = Counter(r.get("ex:predicate", "UNKNOWN") for r in relations)
 
-    core_rels = [r for r in relations if r.get("ex:subject") in core_ids or r.get("ex:object") in core_ids]
-    core_generic = sum(1 for r in core_rels if r.get("@type") == "ex:RelationAnnotation")
-    core_total = len(core_rels)
-    core_generic_ratio = core_generic / core_total if core_total else 0.0
+    # 各批次统计
+    batch_stats: list[dict] = []
+    for name in batch_names:
+        ids = batch_to_ids[name]
+        batch_rels = [r for r in relations if r.get("ex:subject") in ids or r.get("ex:object") in ids]
+        generic = sum(1 for r in batch_rels if r.get("@type") == "ex:RelationAnnotation")
+        batch_stats.append({
+            "batch": name,
+            "entities": len(ids),
+            "relations": len(batch_rels),
+            "generic_remaining": generic,
+            "generic_ratio": round(generic / len(batch_rels), 4) if batch_rels else 0.0,
+        })
+
+    total_processed_rels = sum(s["relations"] for s in batch_stats)
+    total_generic_remaining = sum(s["generic_remaining"] for s in batch_stats)
 
     # 报告
     out_md = ROOT / "reports" / f"KG_SEMANTIC_PREDICATES_{args.date}.md"
@@ -330,17 +564,18 @@ def main() -> int:
     report = {
         "date": args.date,
         "apply": args.apply,
-        "core_entities": len(core_ids),
-        "core_relations": core_total,
-        "core_generic_remaining": core_generic,
-        "core_generic_ratio": round(core_generic_ratio, 4),
+        "batches": batch_names,
+        "min_confidence": args.min_confidence,
+        "processed_entities": len(processed_ids),
+        "processed_relations": total_processed_rels,
+        "processed_generic_remaining": total_generic_remaining,
         "changed_relations": len(changed),
+        "below_threshold_skipped": below_threshold,
+        "batch_statistics": batch_stats,
         "before_type_distribution": dict(before_type.most_common()),
         "after_type_distribution": dict(after_type.most_common()),
         "before_predicate_distribution": dict(before_pred.most_common()),
         "after_predicate_distribution": dict(after_pred.most_common()),
-        "predicate_distribution_core": dict(Counter(r.get("@type") for r in core_rels).most_common()),
-        "core_entity_paths": sorted(CORE_PATHS),
         "changes_sample": changed[:200],
     }
 
@@ -348,32 +583,33 @@ def main() -> int:
         json.dump(report, f, ensure_ascii=False, indent=2)
 
     lines = [
-        "# KG 核心 50 实体语义谓词实例化报告",
+        f"# KG 语义谓词实例化报告（{', '.join(batch_names)}）",
         "",
         f"**日期**: {args.date}  ",
         f"**模式**: {'已写回 kg_data_v3.json' if args.apply else 'dry-run（未写回）'}  ",
-        f"**核心实体数**: {len(core_ids)}  **核心关系数**: {core_total}",
+        f"**置信度阈值**: {args.min_confidence}  ",
+        f"**处理实体数**: {len(processed_ids)}  **处理关系数**: {total_processed_rels}",
         "",
-        "## 1. 核心 50 实体周边通用谓词残留",
+        "## 1. 各批次通用谓词残留",
         "",
-        f"- `ex:RelationAnnotation` 残留: {core_generic}",
-        f"- 核心周边通用谓词占比: **{core_generic_ratio * 100:.2f}%**",
+        "| 批次 | 实体数 | 关系数 | 通用谓词残留 | 占比 |",
+        "|:---|---:|---:|---:|---:|",
+    ]
+    for s in batch_stats:
+        lines.append(
+            f"| `{s['batch']}` | {s['entities']} | {s['relations']} | "
+            f"{s['generic_remaining']} | {s['generic_ratio'] * 100:.2f}% |"
+        )
+    lines += [
+        "",
+        f"- 处理批次内通用谓词总计残留: **{total_generic_remaining}**",
+        f"- 因低于置信度阈值跳过: **{below_threshold}**",
         "",
         "## 2. 改动统计",
         "",
         f"- 修改的关系数: {len(changed)}",
         "",
-        "## 3. 核心周边语义谓词分布",
-        "",
-        "| 谓词 | 计数 |",
-        "|:---|---:|",
-    ]
-    for pred, cnt in Counter(r.get("@type") for r in core_rels).most_common():
-        lines.append(f"| `{pred}` | {cnt} |")
-
-    lines += [
-        "",
-        "## 4. 全局 @type 分布前后对比",
+        "## 3. 全局 @type 分布前后对比",
         "",
         "| 谓词 | 修改前 | 修改后 | Δ |",
         "|:---|---:|---:|---:|",
@@ -385,35 +621,25 @@ def main() -> int:
 
     lines += [
         "",
-        "## 5. 核心 50 实体路径列表",
+        "## 4. 改动样例（前 50 条）",
         "",
-        "| 序号 | 路径 |",
-        "|---:|:---|",
-    ]
-    for i, p in enumerate(CORE_PATHS, 1):
-        lines.append(f"| {i} | `{p}` |")
-
-    lines += [
-        "",
-        "## 6. 改动样例（前 50 条）",
-        "",
-        "| @id | 主语路径 | 宾语路径 | 旧谓词 | 新谓词 | 规则 |",
-        "|:---|:---|:---|:---|:---|:---|",
+        "| @id | 主语路径 | 宾语路径 | 旧谓词 | 新谓词 | 规则 | 置信度 |",
+        "|:---|:---|:---|:---|:---|:---|---:|",
     ]
     for c in changed[:50]:
         lines.append(
             f"| `{c['@id']}` | `{c['subject_path']}` | `{c['object_path']}` | "
-            f"`{c['old_predicate']}` | `{c['new_predicate']}` | {c['rule']} |"
+            f"`{c['old_predicate']}` | `{c['new_predicate']}` | {c['rule']} | {c['confidence']:.2f} |"
         )
 
     lines += [
         "",
-        "## 7. 结论",
+        "## 5. 结论",
         "",
-        "✅ 核心 50 实体周边语义谓词实例化完成。" if core_generic == 0
-        else f"⚠️ 核心周边仍有 {core_generic} 条通用谓词，需进一步处理。",
+        "✅ 语义谓词实例化完成。" if total_generic_remaining == 0
+        else f"⚠️ 处理批次内仍有 {total_generic_remaining} 条通用谓词（低于阈值 {below_threshold} 条），需进一步处理。",
         "",
-        "## 8. 机器可读",
+        "## 6. 机器可读",
         "",
         f"- JSON: `reports/KG_SEMANTIC_PREDICATES_{args.date}.json`",
     ]
@@ -421,9 +647,9 @@ def main() -> int:
     with open(out_md, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
-    print(f"[apply_kg_semantic_predicates] core_entities={len(core_ids)} core_relations={core_total}")
-    print(f"  changed={len(changed)} core_generic_remaining={core_generic}")
-    print(f"  report: {out_md.relative_to(ROOT).as_posix()}")
+    print(f"[apply_kg_semantic_predicates] batches={batch_names} processed_entities={len(processed_ids)}")
+    print(f"  processed_relations={total_processed_rels} changed={len(changed)} below_threshold={below_threshold}")
+    print(f"  generic_remaining={total_generic_remaining} report: {out_md.relative_to(ROOT).as_posix()}")
 
     if args.apply:
         data["relations"] = relations
@@ -435,7 +661,7 @@ def main() -> int:
     else:
         print("  dry-run：未写回 kg_data_v3.json（使用 --apply 执行）")
 
-    if args.strict and core_generic > 0:
+    if args.strict and total_generic_remaining > 0:
         return 1
     return 0
 

@@ -1,4 +1,7 @@
 > **EN**: Procedural Macro Code Generation Optimization
+
+本文件为 crates/ 文档摘要；完整概念解释请见下方权威来源。
+
 > **Summary**: Optimizing the output of procedural and declarative macros in Rust: readable token generation, compile-time overhead reduction, monomorphization bloat control, const folding, dead-code elimination, loop unrolling, SIMD hints, and measurement tooling.
 >
 > **权威来源**: [concept/03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md](../../../../concept/03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md)

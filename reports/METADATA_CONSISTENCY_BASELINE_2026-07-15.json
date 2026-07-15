@@ -1,7 +1,7 @@
 {
   "summary": {
     "date": "2026-07-15",
-    "scanned": 520,
+    "scanned": 521,
     "counts": {
       "D1": 0,
       "D2": 0,
@@ -18,7 +18,7 @@
       "D5": 0.0,
       "D6": 0.2
     },
-    "D2_base_files_with_asp_and_bloom": 323,
+    "D2_base_files_with_asp_and_bloom": 324,
     "flagged_files": 1
   },
   "examples": {

@@ -1,7 +1,7 @@
 # 🔗 跨模块集成示例指南 {#跨模块集成示例指南}
 
 > **EN**: Cross Module Integration Examples
-> **Summary**: 🔗 跨模块集成示例指南 Cross Module Integration Examples. (stub/archive redirect)
+> **Summary**: 🔗 跨模块集成示例指南 Cross Module Integration Examples. 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4
 >

@@ -96,11 +96,12 @@ ex:RelationShape
     a sh:NodeShape ;
     sh:targetSubjectsOf ex:dependsOn, ex:entails, ex:mutexWith,
                          ex:refines, ex:equivalentTo, ex:counterExample,
-                         ex:instanceOf, ex:appliesTo ;
+                         ex:instanceOf, ex:appliesTo, ex:relatedTo ;
     sh:property [
         sh:path [ sh:alternativePath (
             ex:dependsOn ex:entails ex:mutexWith ex:refines
             ex:equivalentTo ex:counterExample ex:instanceOf ex:appliesTo
+            ex:relatedTo
         ) ] ;
         sh:nodeKind sh:IRI ;
         sh:name "relation target" ;
@@ -194,3 +195,9 @@ ex:instanceOf a owl:ObjectProperty ;
 ex:appliesTo a owl:ObjectProperty ;
     rdfs:label "applies to"@en, "适用于"@zh ;
     owl:inverseOf ex:governedBy .
+
+ex:relatedTo a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "related to"@en, "相关于"@zh ;
+    rdfs:comment "用于 atlas、导航索引、SUMMARY.md 等弱语义连接的兜底谓词。"@zh ;
+    owl:inverseOf ex:relatedTo .

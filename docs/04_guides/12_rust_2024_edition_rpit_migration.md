@@ -10,6 +10,8 @@
 
 # Rust 2024 Edition RPIT Lifetime Capture 迁移指南 (Rust 2024 Edition Rpit Migration) {#rust-2024-edition-rpit-lifetime-capture-迁移指南}
 
+本文件为 docs/ 指南摘要；完整概念解释请见 [`concept/07_future/01_edition_roadmap/02_edition_guide.md`](../../concept/07_future/01_edition_roadmap/02_edition_guide.md)。
+
 > **EN**: Rust 2024 Edition Rpit Migration
 > **Summary**: Rust 2024 Edition RPIT Lifetime Capture 迁移指南 Rust 2024 Edition Rpit Migration.
 > **Bloom 层级**: L2-L3
