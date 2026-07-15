@@ -10,10 +10,24 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
-> **前置依赖**: [Control Flow](01_control_flow.md) · [Variables and Bindings](../03_values_and_references/03_variable_model.md) · [Patterns](02_patterns.md)
-> **后置概念**: [Closures](../00_start/03_closure_basics.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) · [Async/Await](../../03_advanced/01_async/01_async.md)
+> **前置依赖**:
+> [Control Flow](01_control_flow.md) ·
+> [Variables and Bindings](../03_values_and_references/03_variable_model.md) ·
+> [Patterns](02_patterns.md)
+> **后置概念**:
+> [Closures](../00_start/03_closure_basics.md) ·
+> [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) ·
+> [Async/Await](../../03_advanced/01_async/01_async.md)
 > **定理链**: Expression → Evaluation Order → Statement Sequencing
-> **主要来源**: [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [MIT 6.824 — Distributed Systems](https://pdos.csail.mit.edu/6.824/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL — Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**:
+> [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html) ·
+> [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) ·
+> [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [MIT 6.824 — Distributed Systems](https://pdos.csail.mit.edu/6.824/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [TRPL — Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **来源**: [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html)
 

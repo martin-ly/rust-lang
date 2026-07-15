@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 505,
-    "generated_at": "2026-07-15T13:07:07.730155+00:00"
+    "generated_at": "2026-07-15T13:09:31.701273+00:00"
   },
   "files": [
     {
@@ -13035,7 +13035,7 @@
       "layer": "L1",
       "title": "语句与表达式（Statements and Expressions）",
       "positioning": "",
-      "line_count": 292,
+      "line_count": 306,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -13102,10 +13102,10 @@
       "matrix_rows": 33,
       "pre_post": {
         "pre": [
-          "[Control Flow](01_control_flow.md) · [Variables and Bindings](../03_values_and_references/03_variable_model.md) · [Patterns](02_patterns.md)"
+          "> [Control Flow](01_control_flow.md) ·"
         ],
         "post": [
-          "[Closures](../00_start/03_closure_basics.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) · [Async/Await](../../03_advanced/01_async/01_async.md)"
+          "> [Closures](../00_start/03_closure_basics.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -13116,7 +13116,7 @@
       "layer": "L1",
       "title": "集合类型：Rust 标准库的数据结构谱系",
       "positioning": "系统分析 Rust **标准库集合类型**的设计——从 Vec/VecDeque 的顺序容器，到 HashMap/BTreeMap 的关联容器，再到 HashSet/BTreeSet 的集合类型，揭示每种数据结构的所有权（Ownership）语义、性能特征和选型策略。",
-      "line_count": 934,
+      "line_count": 938,
       "theorem_chains": [
         {
           "text": "| 集合类型：Rust 标准库的数据结构谱系 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -13299,7 +13299,7 @@
       "layer": "L1",
       "title": "高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析",
       "positioning": "深入分析 Rust **标准库高级集合类型**的设计权衡——从 BTreeMap/BTreeSet 的有序关联容器，到 HashMap 自定义 hasher，再到 VecDeque 的双端队列与 BinaryHeap 的优先队列，揭示每种数据结构的所有权（Ownership）语义、性能特征、内存布局与选型策略。",
-      "line_count": 1063,
+      "line_count": 1066,
       "theorem_chains": [
         {
           "text": "- **反命题 1：「`HashMap` 总是比 `BTreeMap` 快」** —— 有边界。小键集（<50 项）时 B 树的缓存友好性常反超哈希计算成本；有序遍历、范围查询、前缀扫描场景 B 树是唯一选择；哈希的另一隐性成本是 DoS 抗性（`HashMap` 默认 SipHash 有防护，换 `FxHash` 提速即放弃防护）。判定准则：需要顺序 ⟹ B 树；纯点查且规模大 ⟹ 哈希。",
@@ -48558,7 +48558,7 @@
       "layer": "L6",
       "title": "Cargo 配置与环境变量（Cargo Configuration）",
       "positioning": "把 Cargo 的“配置”与“环境变量”两大参考章节集中为一份可查阅权威页。",
-      "line_count": 244,
+      "line_count": 243,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48616,7 +48616,7 @@
       "layer": "L6",
       "title": "Cargo 命令参考（Cargo Commands Reference）",
       "positioning": "覆盖开发者日常最高频的 Cargo 命令，作为官方命令参考的浓缩权威页。",
-      "line_count": 227,
+      "line_count": 226,
       "theorem_chains": [],
       "anti_propositions": [
         {

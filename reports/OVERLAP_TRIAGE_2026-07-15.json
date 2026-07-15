@@ -1379,7 +1379,7 @@
         "sim": 0.565,
         "kw_sim": 0.565,
         "title_sim": 0.2,
-        "shared": 22,
+        "shared": 21,
         "same_dir": true,
         "f1": "crates/c08_algorithms/rust_192_c08_update_summary.md",
         "f2": "crates/c06_async/rust_192_c06_update_summary.md",
@@ -1554,19 +1554,6 @@
         "title_sim": 0.5,
         "shared": 6,
         "same_dir": true,
-        "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
-        "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
-        "t1": "C05 Threads 主索引导航",
-        "t2": "C05 Threads 术语表",
-        "lines1": 22,
-        "lines2": 22
-      },
-      {
-        "sim": 0.818,
-        "kw_sim": 0.818,
-        "title_sim": 0.5,
-        "shared": 6,
-        "same_dir": true,
         "f1": "crates/c04_generic/docs/00_master_index.md",
         "f2": "crates/c04_generic/docs/tier_01_foundations/01_project_overview.md",
         "t1": "C04 泛型编程 - 主索引",
@@ -1688,6 +1675,19 @@
         "f2": "crates/c04_generic/docs/tier_01_foundations/04_faq.md",
         "t1": "C04 泛型编程 - 术语表",
         "t2": "C04 泛型编程 - 常见问题",
+        "lines1": 22,
+        "lines2": 22
+      },
+      {
+        "sim": 0.818,
+        "kw_sim": 0.818,
+        "title_sim": 0.5,
+        "shared": 6,
+        "same_dir": true,
+        "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
+        "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
+        "t1": "C05 Threads 主索引导航",
+        "t2": "C05 Threads 术语表",
         "lines1": 22,
         "lines2": 22
       },
@@ -7439,19 +7439,6 @@
       },
       {
         "sim": 0.5,
-        "kw_sim": 0.356,
-        "title_sim": 0.5,
-        "shared": 7,
-        "same_dir": true,
-        "f1": "docs/12_research_notes/01_alignment_matrices/02_async_book_alignment.md",
-        "f2": "docs/12_research_notes/01_alignment_matrices/15_cargo_book_alignment.md",
-        "t1": "Async Book 对齐矩阵 {#async-book-对齐矩阵}",
-        "t2": "Cargo Book 对齐矩阵 {#cargo-book-对齐矩阵}",
-        "lines1": 128,
-        "lines2": 137
-      },
-      {
-        "sim": 0.5,
         "kw_sim": 0.5,
         "title_sim": 0.0,
         "shared": 7,
@@ -7462,6 +7449,19 @@
         "t2": "Event Sourcing 模式形式化定义 {#event-sourcing-",
         "lines1": 563,
         "lines2": 388
+      },
+      {
+        "sim": 0.5,
+        "kw_sim": 0.356,
+        "title_sim": 0.5,
+        "shared": 7,
+        "same_dir": true,
+        "f1": "docs/12_research_notes/01_alignment_matrices/02_async_book_alignment.md",
+        "f2": "docs/12_research_notes/01_alignment_matrices/15_cargo_book_alignment.md",
+        "t1": "Async Book 对齐矩阵 {#async-book-对齐矩阵}",
+        "t2": "Cargo Book 对齐矩阵 {#cargo-book-对齐矩阵}",
+        "lines1": 128,
+        "lines2": 137
       },
       {
         "sim": 0.5,
