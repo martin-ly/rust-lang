@@ -6938,19 +6938,6 @@
     },
     {
       "sim": 0.5,
-      "kw_sim": 0.315,
-      "title_sim": 0.5,
-      "shared": 19,
-      "same_dir": true,
-      "f1": "docs/12_research_notes/08_software_design_theory/08_crate_architectures/33_vector_architecture.md",
-      "f2": "docs/12_research_notes/08_software_design_theory/08_crate_architectures/35_metrics_architecture.md",
-      "t1": "vector Crate 架构解构 {#vector-crate-架构解构}",
-      "t2": "metrics Crate 架构解构 {#metrics-crate-架构解构}",
-      "lines1": 232,
-      "lines2": 235
-    },
-    {
-      "sim": 0.5,
       "kw_sim": 0.432,
       "title_sim": 0.5,
       "shared": 19,
@@ -6961,6 +6948,19 @@
       "t2": "Rust安全关键生态系统文档集",
       "lines1": 443,
       "lines2": 382
+    },
+    {
+      "sim": 0.5,
+      "kw_sim": 0.315,
+      "title_sim": 0.5,
+      "shared": 19,
+      "same_dir": true,
+      "f1": "docs/12_research_notes/08_software_design_theory/08_crate_architectures/33_vector_architecture.md",
+      "f2": "docs/12_research_notes/08_software_design_theory/08_crate_architectures/35_metrics_architecture.md",
+      "t1": "vector Crate 架构解构 {#vector-crate-架构解构}",
+      "t2": "metrics Crate 架构解构 {#metrics-crate-架构解构}",
+      "lines1": 232,
+      "lines2": 235
     },
     {
       "sim": 0.5,
