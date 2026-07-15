@@ -129,3 +129,14 @@ fn main() {
     let _ = Handle(0);
 }
 ```
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.90](../../07_future/00_version_tracking/rust_1_90_stabilized.md)**
+  - `x86_64-apple-darwin` 降为 Tier 2（含 host tools）
+- **[Rust 1.94](../../07_future/00_version_tracking/rust_1_94_stabilized.md)**
+  - 29 个 RISC-V target feature 稳定（含 RVA22U64 / RVA23U64 profile 大部）
+- **[Rust 1.97](../../07_future/00_version_tracking/rust_1_97_stabilized.md)**
+  - `nvptx64-nvidia-cuda` 基线提升

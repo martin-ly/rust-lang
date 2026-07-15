@@ -129,6 +129,7 @@ mindmap
     - [性能提示](#性能提示)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
 
 ---
@@ -1724,6 +1725,15 @@ goto 的错误清理模式
 - **依赖**：依赖 [语句与表达式](04_statements_and_expressions.md) 的表达式导向设计。
 
 ---
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.95](../../07_future/00_version_tracking/rust_1_95_stabilized.md)**
+  - `if let` guards on match arms（§1.2）
+- **[Rust 1.97](../../07_future/00_version_tracking/rust_1_97_stabilized.md)**
+  - `must_use` lint 扩展至 `Result<T, Uninhabited>` 与 `ControlFlow<Uninhabited, T>`
 
 ## 国际权威参考 / International Authority References（P2 生态）
 

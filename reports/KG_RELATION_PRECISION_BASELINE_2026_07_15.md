@@ -4,8 +4,8 @@
 
 ## 1. 全局 ex:RelationAnnotation 占比
 
-- `ex:RelationAnnotation` 数量: 586
-- 全局通用谓词占比: **7.34%**
+- `ex:RelationAnnotation` 数量: 0
+- 全局通用谓词占比: **0.00%**
 - 核心 50 周边通用谓词占比: **0.00%**
 
 ## 2. 核心 50 实体语义谓词覆盖

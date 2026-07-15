@@ -57,6 +57,7 @@
     - [测验 2：操作数约束（理解层）](#测验-2操作数约束理解层)
     - [测验 3：用内联汇编实现原子操作（应用层）](#测验-3用内联汇编实现原子操作应用层)
     - [测验 4：clobber 与内存屏障（分析层）](#测验-4clobber-与内存屏障分析层)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：不存在的寄存器约束（rustc 1.97.0 实测）](#反例不存在的寄存器约束rustc-1970-实测)
@@ -820,6 +821,13 @@ unsafe {
 > **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
 
 ---
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.93](../../07_future/00_version_tracking/rust_1_93_stabilized.md)**
+  - `asm_cfg` 稳定
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 

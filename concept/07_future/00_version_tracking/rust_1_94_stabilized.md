@@ -30,13 +30,13 @@
 
 | 特性 | 影响面 | 受益场景 | 权威源 |
 |:---|:---|:---|:---|
-| 29 个 RISC-V target feature 稳定（含 RVA22U64 / RVA23U64 profile 大部） | 平台 / 编译器 | RISC-V 向量与扩展指令的可移植调用 | [Release Blog](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/) |
+| 29 个 RISC-V target feature 稳定（含 RVA22U64 / RVA23U64 profile 大部） | 平台 / 编译器 | RISC-V 向量与扩展指令的可移植调用 | [Release Blog](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/) · [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) · [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) |
 | `<[T]>::array_windows` | 标准库 / 迭代器 | 定长滑动窗口（信号处理、协议解析） | [releases.rs](https://releases.rs/docs/1.94.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |
-| `LazyCell` / `LazyLock::get` / `get_mut` / `force_mut` | 标准库 | 懒初始化值的可控读写与强制求值 | [releases.rs](https://releases.rs/docs/1.94.0/) |
-| `f32` / `f64::mul_add` | 标准库 / 数值 | 融合乘加（FMA），数值精度与性能 | [releases.rs](https://releases.rs/docs/1.94.0/) |
-| `EULER_GAMMA` / `GOLDEN_RATIO` 浮点常量 | 标准库 / 数值 | 数学常量免外部 crate | [releases.rs](https://releases.rs/docs/1.94.0/) |
-| Cargo `include` 配置键稳定 + TOML v1.1 解析 | Cargo | 配置文件拆分复用；清单语法升级 | [releases.rs](https://releases.rs/docs/1.94.0/) · [Cargo 配置](../../06_ecosystem/01_cargo/18_cargo_configuration.md) |
-| std 宏改为经 prelude 导入（兼容性变更） | 兼容 / 宏 | 宏解析路径统一；glob 导入同名宏需调整 | [releases.rs](https://releases.rs/docs/1.94.0/) |
+| `LazyCell` / `LazyLock::get` / `get_mut` / `force_mut` | 标准库 | 懒初始化值的可控读写与强制求值 | [releases.rs](https://releases.rs/docs/1.94.0/) · [02 interior mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) · [02 interior mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) |
+| `f32` / `f64::mul_add` | 标准库 / 数值 | 融合乘加（FMA），数值精度与性能 | [releases.rs](https://releases.rs/docs/1.94.0/) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) |
+| `EULER_GAMMA` / `GOLDEN_RATIO` 浮点常量 | 标准库 / 数值 | 数学常量免外部 crate | [releases.rs](https://releases.rs/docs/1.94.0/) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) |
+| Cargo `include` 配置键稳定 + TOML v1.1 解析 | Cargo | 配置文件拆分复用；清单语法升级 | [releases.rs](https://releases.rs/docs/1.94.0/) · [Cargo 配置](../../06_ecosystem/01_cargo/18_cargo_configuration.md) · [18 cargo configuration](../../06_ecosystem/01_cargo/18_cargo_configuration.md) |
+| std 宏改为经 prelude 导入（兼容性变更） | 兼容 / 宏 | 宏解析路径统一；glob 导入同名宏需调整 | [releases.rs](https://releases.rs/docs/1.94.0/) · [10 preludes](../../01_foundation/07_modules_and_items/10_preludes.md) · [01 attributes and macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [10 preludes](../../01_foundation/07_modules_and_items/10_preludes.md) · [01 attributes and macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) |
 
 ---
 

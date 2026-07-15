@@ -72,13 +72,14 @@ run_gate "Mindmap Coverage (strict)" python scripts/check_mindmap_coverage.py --
 run_gate "Semantic Health (strict)" python scripts/semantic_health.py --strict
 
 # --- Semantic quality gates (observe / warning, non-blocking) ---
-# 观察门机制保留（见 AGENTS.md §5.2）：当前 4 个观察门（O1/O2/O3/O4）。新增观察门时在此段挂载
+# 观察门机制保留（见 AGENTS.md §5.2）：当前 5 个观察门（O1/O2/O3/O4/O5）。新增观察门时在此段挂载
 # （默认 exit 0、不加 --strict、命名后缀 (observe)），达标后按 §5.2 流程转阻断。
 
 run_gate "Stub Purity (observe)" python scripts/check_stub_purity.py
 run_gate "Cross-Domain Coverage (observe)" python scripts/check_cross_domain_coverage.py
 run_gate "KG Relation Precision (observe)" python scripts/check_kg_relation_precision.py
 run_gate "Decision Tree rustc Error Code Coverage (observe)" python scripts/check_decision_trees.py
+run_gate "Version Semantic Injection (observe)" python scripts/check_version_semantic_injection.py
 
 # --- Content Overlap v2 (blocking, promoted 2026-07-12 per AGENTS.md §5.2) ---
 # 转正依据：2026-07-12 可处理项清零（原 MERGE 5 + DOCS_INTERNAL 49 = 54 → 0）：
@@ -109,7 +110,7 @@ fi
 
 echo ""
 if [ "$FAILED" -eq 0 ]; then
-    echo "✅ All 23 quality gates passed (23 blocking + 4 semantic observe)."
+    echo "✅ All 23 quality gates passed (23 blocking + 5 semantic observe)."
     exit 0
 else
     echo "❌ Some quality gates failed."

@@ -27,14 +27,14 @@
 
 | 特性 | 影响面 | 受益场景 | 权威源 |
 |:---|:---|:---|:---|
-| `asm_cfg` 稳定 | 语言 / 内联汇编 | `#[cfg]` 驱动的汇编分支编译期选择 | [releases.rs](https://releases.rs/docs/1.93.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |
-| `system` ABI C 风格可变参数函数稳定 | 语言 / FFI | 全主流 ABI 的 variadic 声明能力 | [releases.rs](https://releases.rs/docs/1.93.0/) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) |
-| `MaybeUninit` 切片 API（`assume_init_ref/mut`、`write_copy/clone_of_slice`、`assume_init_drop`） | unsafe / 内存 | 部分初始化缓冲区的安全读写（见 §3.1） | [releases.rs](https://releases.rs/docs/1.93.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |
+| `asm_cfg` 稳定 | 语言 / 内联汇编 | `#[cfg]` 驱动的汇编分支编译期选择 | [releases.rs](https://releases.rs/docs/1.93.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [01 inline assembly](../../03_advanced/05_inline_assembly/01_inline_assembly.md) · [01 inline assembly](../../03_advanced/05_inline_assembly/01_inline_assembly.md) |
+| `system` ABI C 风格可变参数函数稳定 | 语言 / FFI | 全主流 ABI 的 variadic 声明能力 | [releases.rs](https://releases.rs/docs/1.93.0/) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [01 rust ffi](../../03_advanced/04_ffi/01_rust_ffi.md) |
+| `MaybeUninit` 切片 API（`assume_init_ref/mut`、`write_copy/clone_of_slice`、`assume_init_drop`） | unsafe / 内存 | 部分初始化缓冲区的安全读写（见 §3.1） | [releases.rs](https://releases.rs/docs/1.93.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [01 unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |
 | `String::into_raw_parts` / `Vec::into_raw_parts` | 标准库 / FFI | 堆缓冲区跨边界零拷贝移交（见 §3.2） | [releases.rs](https://releases.rs/docs/1.93.0/) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) |
-| `<[T]>::as_array` / `as_mut_array` | 标准库 | 切片↔定长数组零成本转换（见 §3.4） | [releases.rs](https://releases.rs/docs/1.93.0/) |
-| `fmt::from_fn` / `fmt::FromFn` | 标准库 / 格式化 | 闭包直接实现 `Display` 等格式化 trait（见 §3.7） | [releases.rs](https://releases.rs/docs/1.93.0/) |
-| `-Cjump-tables` 稳定（原 `-Zno-jump-tables`） | 编译器 | 禁用跳转表（嵌入式/侧信道缓解） | [releases.rs](https://releases.rs/docs/1.93.0/) |
-| `cargo clean --workspace` | Cargo | 工作区级清理 | [releases.rs](https://releases.rs/docs/1.93.0/) · [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) |
+| `<[T]>::as_array` / `as_mut_array` | 标准库 | 切片↔定长数组零成本转换（见 §3.4） | [releases.rs](https://releases.rs/docs/1.93.0/) · [01 collections](../../01_foundation/05_collections/01_collections.md) · [01 collections](../../01_foundation/05_collections/01_collections.md) |
+| `fmt::from_fn` / `fmt::FromFn` | 标准库 / 格式化 | 闭包直接实现 `Display` 等格式化 trait（见 §3.7） | [releases.rs](https://releases.rs/docs/1.93.0/) · [03 formatting and display](../../01_foundation/06_strings_and_text/03_formatting_and_display.md) · [03 formatting and display](../../01_foundation/06_strings_and_text/03_formatting_and_display.md) |
+| `-Cjump-tables` 稳定（原 `-Zno-jump-tables`） | 编译器 | 禁用跳转表（嵌入式/侧信道缓解） | [releases.rs](https://releases.rs/docs/1.93.0/) · [01 toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [01 toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) |
+| `cargo clean --workspace` | Cargo | 工作区级清理 | [releases.rs](https://releases.rs/docs/1.93.0/) · [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) · [19 cargo commands reference](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) |
 
 ---
 

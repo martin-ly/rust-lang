@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 505,
-    "generated_at": "2026-07-15T12:31:40.808662+00:00"
+    "generated_at": "2026-07-15T13:07:07.730155+00:00"
   },
   "files": [
     {
@@ -11394,7 +11394,7 @@
       "layer": "L1",
       "title": "数值类型与运算：从整数到浮点的完整图景",
       "positioning": "系统讲解 Rust **数值类型**——从整数、浮点、饱和运算到类型转换和溢出行为，揭示 Rust 如何在安全性与性能之间做出精确的设计选择。",
-      "line_count": 1131,
+      "line_count": 1147,
       "theorem_chains": [
         {
           "text": "| 数值类型与运算：从整数到浮点的完整图景 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11561,6 +11561,8 @@
         "../../02_intermediate/03_error_handling/01_error_handling.md",
         "../../06_ecosystem/10_performance/01_performance_optimization.md",
         "../../07_future/00_version_tracking/rust_1_90_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_94_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../00_start/02_zero_cost_abstractions.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
@@ -12444,7 +12446,7 @@
       "layer": "L1",
       "title": "控制流：表达式导向的流程控制",
       "positioning": "分析 Rust **控制流结构**的设计哲学——从表达式导向（expression-oriented）的 `if`/`match`/`loop`，到 `if let`/`while let` 的模式匹配（Pattern Matching）集成，揭示 Rust 如何将控制流转化为**值生成**而非**副作用执行**。",
-      "line_count": 1737,
+      "line_count": 1747,
       "theorem_chains": [
         {
           "text": "| 控制流：表达式导向的流程控制 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12662,6 +12664,7 @@
         "../../03_advanced/01_async/01_async.md",
         "../../04_formal/00_type_theory/01_type_theory.md",
         "../../07_future/00_version_tracking/rust_1_95_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../00_start/03_closure_basics.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
         "../01_ownership_borrow_lifetime/02_borrowing.md",
@@ -13113,7 +13116,7 @@
       "layer": "L1",
       "title": "集合类型：Rust 标准库的数据结构谱系",
       "positioning": "系统分析 Rust **标准库集合类型**的设计——从 Vec/VecDeque 的顺序容器，到 HashMap/BTreeMap 的关联容器，再到 HashSet/BTreeSet 的集合类型，揭示每种数据结构的所有权（Ownership）语义、性能特征和选型策略。",
-      "line_count": 924,
+      "line_count": 934,
       "theorem_chains": [
         {
           "text": "| 集合类型：Rust 标准库的数据结构谱系 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -13267,6 +13270,8 @@
         "../../02_intermediate/01_generics/01_generics.md",
         "../../02_intermediate/02_memory_management/04_smart_pointers.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
+        "../../07_future/00_version_tracking/rust_1_93_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_95_stabilized.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
         "../01_ownership_borrow_lifetime/02_borrowing.md",
         "../01_ownership_borrow_lifetime/06_ownership_inventories_brown_book.md",
@@ -13444,7 +13449,7 @@
       "layer": "L1",
       "title": "字符串与文本：Rust 的 Unicode 处理与格式化系统",
       "positioning": "> 系统分析 Rust **字符串类型**的设计——String [来源: [Rust String](https://doc.rust-lang.org/std/string/struct.String.html)] 与",
-      "line_count": 928,
+      "line_count": 936,
       "theorem_chains": [
         {
           "text": "| 字符串与文本：Rust 的 Unicode 处理与格式化系统 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -13761,7 +13766,7 @@
       "layer": "L1",
       "title": "格式化与显示（Display and Debug Formatting）",
       "positioning": "",
-      "line_count": 473,
+      "line_count": 481,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`{}` 和 `{:?}` 相同\" ⟹ 不成立。`{}` 调用 `Display`，`{:?}` 调用 `Debug`。",
@@ -15080,7 +15085,7 @@
       "layer": "L1",
       "title": "Preludes（预导入模块）",
       "positioning": "",
-      "line_count": 260,
+      "line_count": 267,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -15128,6 +15133,7 @@
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../03_advanced/04_ffi/03_linkage.md",
+        "../../07_future/00_version_tracking/rust_1_94_stabilized.md",
         "../09_macros_basics/01_attributes_and_macros.md",
         "01_modules_and_paths.md"
       ],
@@ -15151,7 +15157,7 @@
       "layer": "L1",
       "title": "Crate 与源文件（Crates and Source Files）",
       "positioning": "",
-      "line_count": 371,
+      "line_count": 378,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `Cargo.toml` 配置、源文件布局、模块（Module）路径解析串联起来。",
@@ -15235,6 +15241,7 @@
         "../../03_advanced/06_low_level_patterns/07_rust_runtime.md",
         "../../06_ecosystem/01_cargo/10_cargo_manifest_reference.md",
         "../../06_ecosystem/01_cargo/14_cargo_workspaces.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../09_macros_basics/01_attributes_and_macros.md",
         "01_modules_and_paths.md",
         "02_functions.md",
@@ -15880,7 +15887,7 @@
       "layer": "L1",
       "title": "属性与声明宏：编译期元编程基础",
       "positioning": "系统讲解 Rust **属性（attributes）**和**声明宏（macro_rules!）**——从编译期元编程的基础语法到模式匹配（Pattern Matching）、递归宏和卫生性，揭示 Rust 如何在编译期生成代码同时保持类型安全。",
-      "line_count": 986,
+      "line_count": 993,
       "theorem_chains": [
         {
           "text": "| 属性与声明宏（Declarative Macro）：编译期元编程基础 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16012,6 +16019,7 @@
         "../../00_meta/04_navigation/08_learning_mvp_path.md",
         "../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md",
         "../../03_advanced/03_proc_macros/02_proc_macro.md",
+        "../../07_future/00_version_tracking/rust_1_94_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_95_stabilized.md",
         "../02_type_system/01_type_system.md",
         "../07_modules_and_items/01_modules_and_paths.md",
@@ -20678,7 +20686,7 @@
       "layer": "L2",
       "title": "内部可变性：编译期规则的运行时逃逸",
       "positioning": "深入分析 Rust **内部可变性**（Interior Mutability）模式",
-      "line_count": 963,
+      "line_count": 973,
       "theorem_chains": [
         {
           "text": "| 独占访问即可满足可变性 | 外部可变性（`&mut`），编译期安全零开销 | §4.1 反命题树 TRUE | 共享所有权下 ⟹ 编译拒绝 |",
@@ -20816,6 +20824,8 @@
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/01_async.md",
         "../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md",
+        "../../07_future/00_version_tracking/rust_1_94_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
         "01_memory_management.md",
         "04_smart_pointers.md"
       ],
@@ -22107,7 +22117,7 @@
       "layer": "L2",
       "title": "Panic 机制",
       "positioning": "",
-      "line_count": 256,
+      "line_count": 263,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -22148,6 +22158,7 @@
         "../../03_advanced/04_ffi/02_ffi_advanced.md",
         "../../03_advanced/06_low_level_patterns/07_rust_runtime.md",
         "../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md",
+        "../../07_future/00_version_tracking/rust_1_92_stabilized.md",
         "01_error_handling.md"
       ],
       "transitions": 0,
@@ -24470,7 +24481,7 @@
       "layer": "L2",
       "title": "Rust 迭代器模式",
       "positioning": "深入探讨 Rust 迭代器（Iterator）模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。",
-      "line_count": 1453,
+      "line_count": 1466,
       "theorem_chains": [
         {
           "text": "| 逐元素变换 | `map`（惰性适配器） | §1.3 惰性求值 | 没有消费者 ⟹ 不执行任何计算（§10.2） |",
@@ -24707,8 +24718,10 @@
         "../../03_advanced/01_async/09_stream_algebra_and_backpressure.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/10_performance/01_performance_optimization.md",
+        "../../07_future/00_version_tracking/rust_1_92_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_94_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../00_traits/01_traits.md",
         "../01_generics/01_generics.md",
         "../04_types_and_conversions/02_closure_types.md"
@@ -25842,7 +25855,7 @@
       "layer": "L3",
       "title": "原子操作与内存序：无锁并发的精确控制",
       "positioning": "深入分析 Rust **原子类型（Atomic）**和**内存排序（Memory Ordering [来源: [Atomic Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]）**——从基本的 load/store 到 compare-and-swap 和释放-获取语义，揭示无锁编程中硬件内存模型的精确控制。",
-      "line_count": 1547,
+      "line_count": 1558,
       "theorem_chains": [
         {
           "text": "| 独立计数器（统计/性能计数） | `Relaxed` | §2.2 内存序选择决策树 | 与其他数据存在依赖 ⟹ `Relaxed` 不足 |",
@@ -29478,7 +29491,7 @@
       "layer": "L3",
       "title": "Unsafe Rust 安全编程",
       "positioning": "",
-      "line_count": 3530,
+      "line_count": 3542,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 重构增强——定理一致性（Coherence）矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注",
@@ -30045,7 +30058,9 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/README.md",
+        "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_92_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_93_stabilized.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
         "../00_concurrency/01_concurrency.md",
         "../README.md",
@@ -30993,7 +31008,7 @@
       "layer": "L3",
       "title": "Macros（宏系统）",
       "positioning": "",
-      "line_count": 2566,
+      "line_count": 2573,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构——增强定理一致性（Coherence）矩阵至11行（带⟹推理链）、新增3个反命题决策树、重写6步递进认知路径、补充章节过渡段落与层次一致性标注",
@@ -31560,6 +31575,7 @@
         "../../04_formal/00_type_theory/01_type_theory.md",
         "../../04_formal/README.md",
         "../../06_ecosystem/README.md",
+        "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
         "../README.md",
         "10_quiz_macros.md"
       ],
@@ -33660,7 +33676,7 @@
       "layer": "L3",
       "title": "Rust FFI：与外部代码的安全边界",
       "positioning": "系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。",
-      "line_count": 1010,
+      "line_count": 1024,
       "theorem_chains": [
         {
           "text": "| Rust FFI：与外部代码的安全边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -33831,8 +33847,10 @@
         "../../04_formal/README.md",
         "../../06_ecosystem/06_data_and_distributed/01_application_domains.md",
         "../../06_ecosystem/README.md",
+        "../../07_future/00_version_tracking/rust_1_90_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_93_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../02_unsafe/01_unsafe.md",
         "../README.md"
       ],
@@ -34015,7 +34033,7 @@
       "layer": "L3",
       "title": "Linkage（链接）",
       "positioning": "本小节为 Rust 1.97.0 在「编译器符号发射 ⟷ 链接器输入 ⟷ ABI 契约」边界的**交叉语义**补全，对应审计缺口（[`GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md`](../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md) §2.4、§4 P2-2 缺口#1）。原 `mangling / linker / export_name / v0` 在本页 0 命中，现补齐。",
-      "line_count": 455,
+      "line_count": 464,
       "theorem_chains": [
         {
           "text": "选型判定：Rust 用 Rust ⟹ `lib`；C/C++ 项目静态嵌入 ⟹ `staticlib`；动态加载/多语言共享 ⟹ `cdylib`；`dylib` 仅在「全 Rust 动态插件」场景考虑（且优先评估 `abi_stable` crate 的稳定 ABI 方案）。",
@@ -34147,6 +34165,8 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
         "../../07_future/00_version_tracking/migration_197_decision_tree.md",
+        "../../07_future/00_version_tracking/rust_1_90_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_95_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../../07_future/01_edition_roadmap/02_edition_guide.md",
         "../02_unsafe/01_unsafe.md",
@@ -34388,7 +34408,7 @@
       "layer": "L3",
       "title": "内联汇编 (Inline Assembly)",
       "positioning": "深入分析 Rust `asm!` 宏（Macro）的语法、约束系统、寄存器管理，以及 x86_64、aarch64、RISC-V、s390x 四大平台的差异，重点覆盖 Rust 1.96 为 s390x 引入的向量寄存器支持。",
-      "line_count": 875,
+      "line_count": 883,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -34602,6 +34622,7 @@
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../02_intermediate/01_generics/01_generics.md",
         "../../06_ecosystem/05_systems_and_embedded/02_cross_compilation.md",
+        "../../07_future/00_version_tracking/rust_1_93_stabilized.md",
         "../../07_future/04_research_and_experimental/04_rust_for_linux.md",
         "../02_unsafe/01_unsafe.md",
         "../02_unsafe/04_unsafe_rust_patterns.md",
@@ -46921,7 +46942,7 @@
       "layer": "L6",
       "title": "Rustdoc 1.96–1.97 变更",
       "positioning": "",
-      "line_count": 360,
+      "line_count": 368,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -46959,6 +46980,7 @@
         "../../05_comparative/02_managed_languages/02_rust_vs_python.md",
         "../../07_future/00_version_tracking/01_rust_version_tracking.md",
         "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../09_testing_and_quality/02_documentation.md",
         "01_toolchain.md"
       ],
@@ -47068,7 +47090,7 @@
       "layer": "L6",
       "title": "Rust 编译器的 LLVM 后端与代码生成",
       "positioning": "把“MIR 之后发生了什么”讲清楚：从 LLVM IR 生成、代码优化到目标文件与链接，覆盖 rustc 代码生成层的核心机制。",
-      "line_count": 330,
+      "line_count": 338,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -47085,6 +47107,7 @@
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
+        "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
         "05_compiler_infrastructure.md",
         "10_rustc_driver_and_stable_mir.md"
       ],
@@ -47920,7 +47943,7 @@
       "layer": "L6",
       "title": "Cargo 依赖解析",
       "positioning": "把“`cargo build` 时到底选了哪个版本、为什么选这个版本、特性如何合并”讲清楚。",
-      "line_count": 585,
+      "line_count": 593,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47949,6 +47972,7 @@
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
         "05_cargo_build_scripts.md",
         "08_cargo_registries_and_publishing.md"
       ],
@@ -48534,7 +48558,7 @@
       "layer": "L6",
       "title": "Cargo 配置与环境变量（Cargo Configuration）",
       "positioning": "把 Cargo 的“配置”与“环境变量”两大参考章节集中为一份可查阅权威页。",
-      "line_count": 234,
+      "line_count": 244,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48563,6 +48587,7 @@
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
+        "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_94_stabilized.md",
         "../05_systems_and_embedded/02_cross_compilation.md",
         "07_cargo_source_replacement.md",
@@ -48591,7 +48616,7 @@
       "layer": "L6",
       "title": "Cargo 命令参考（Cargo Commands Reference）",
       "positioning": "覆盖开发者日常最高频的 Cargo 命令，作为官方命令参考的浓缩权威页。",
-      "line_count": 215,
+      "line_count": 227,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48621,6 +48646,8 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
         "../../07_future/00_version_tracking/rust_1_90_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_93_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../00_toolchain/03_devops_and_ci_cd.md",
         "01_cargo_script.md",
         "04_cargo_196_features.md",
@@ -54974,7 +55001,7 @@
       "layer": "L6",
       "title": "Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁",
       "positioning": "",
-      "line_count": 132,
+      "line_count": 143,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -55001,6 +55028,9 @@
       "sources": [],
       "cross_references": [
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
+        "../../07_future/00_version_tracking/rust_1_90_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_94_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../00_toolchain/08_platform_rust_integration.md",
         "../00_toolchain/15_z_flags_reference.md",
         "01_wasi.md",
@@ -61974,6 +62004,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../01_foundation/02_type_system/03_numerics.md",
         "../../02_intermediate/00_traits/07_generic_associated_types.md",
         "../../03_advanced/01_async/01_async.md",
         "../../03_advanced/01_async/07_async_closures.md",
@@ -61981,6 +62012,7 @@
         "../../03_advanced/04_ffi/03_linkage.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/01_cargo/19_cargo_commands_reference.md",
+        "../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md",
         "../../06_ecosystem/12_networking/05_networking_basics.md",
         "../02_preview_features/15_rpitit_preview.md",
         "/crates/c10_networks/docs/tier_03_references/04_network_performance_benchmarks_reference.md",
@@ -62640,12 +62672,14 @@
       "cross_references": [
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/01_type_system.md",
+        "../../01_foundation/02_type_system/03_numerics.md",
         "../../01_foundation/04_control_flow/01_control_flow.md",
         "../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../03_advanced/02_unsafe/06_memory_model.md",
         "../../03_advanced/04_ffi/01_rust_ffi.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "../../06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md",
         "../../06_ecosystem/01_cargo/15_cargo_getting_started.md",
         "../../06_ecosystem/01_cargo/18_cargo_configuration.md",
         "../../06_ecosystem/09_testing_and_quality/03_testing.md",
@@ -63201,6 +63235,8 @@
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../01_foundation/04_control_flow/01_control_flow.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/03_error_handling/03_panic.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/00_concurrency/03_concurrency_patterns.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
@@ -63321,8 +63357,12 @@
       "cross_references": [
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/01_type_system.md",
+        "../../01_foundation/05_collections/01_collections.md",
+        "../../01_foundation/06_strings_and_text/03_formatting_and_display.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../03_advanced/04_ffi/01_rust_ffi.md",
+        "../../03_advanced/05_inline_assembly/01_inline_assembly.md",
+        "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/01_cargo/19_cargo_commands_reference.md",
         "../../06_ecosystem/11_domain_applications/03_webassembly.md",
         "01_rust_version_tracking.md",
@@ -63414,10 +63454,15 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../01_foundation/02_type_system/03_numerics.md",
+        "../../01_foundation/07_modules_and_items/10_preludes.md",
+        "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
+        "../../02_intermediate/02_memory_management/02_interior_mutability.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/01_cargo/18_cargo_configuration.md",
         "../../06_ecosystem/04_web_and_networking/07_network_protocols.md",
+        "../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md",
         "../../06_ecosystem/12_networking/05_networking_basics.md",
         "../01_edition_roadmap/02_edition_guide.md",
         "../02_preview_features/13_lifetime_capture_preview.md",
@@ -63548,9 +63593,11 @@
       "sources": [],
       "cross_references": [
         "../../01_foundation/04_control_flow/01_control_flow.md",
+        "../../01_foundation/05_collections/01_collections.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/04_ffi/03_linkage.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/07_security_and_cryptography/01_security_practices.md",
         "01_rust_version_tracking.md",
@@ -63634,10 +63681,12 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../02_intermediate/02_memory_management/02_interior_mutability.md",
         "../../02_intermediate/03_error_handling/01_error_handling.md",
         "../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/02_unsafe/06_memory_model.md",
+        "../../03_advanced/03_proc_macros/01_macros.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md",
         "../../06_ecosystem/09_testing_and_quality/03_testing.md",
@@ -63721,7 +63770,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
-      "line_count": 534,
+      "line_count": 565,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -63849,10 +63898,19 @@
       "sources": [],
       "cross_references": [
         "../../../docs/09_toolchain/10_rust_1_97_features.md",
+        "../../01_foundation/02_type_system/03_numerics.md",
+        "../../01_foundation/04_control_flow/01_control_flow.md",
+        "../../01_foundation/06_strings_and_text/01_strings_and_text.md",
+        "../../01_foundation/07_modules_and_items/11_crates_and_source_files.md",
+        "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md",
+        "../../03_advanced/04_ffi/01_rust_ffi.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/00_toolchain/07_rustdoc_196_changes.md",
         "../../06_ecosystem/01_cargo/15_cargo_getting_started.md",
+        "../../06_ecosystem/01_cargo/19_cargo_commands_reference.md",
+        "../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
+        "../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md",
         "../05_quizzes/01_quiz_version_and_preview.md",
         "01_rust_version_tracking.md",
         "rust_1_96_stabilized.md",

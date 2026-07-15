@@ -45,12 +45,12 @@
 | 特性 | 影响面 | 受益场景 | 权威源 |
 |:---|:---|:---|:---|
 | `assert_matches!` / `debug_assert_matches!`（§1.1） | 标准库 / 测试 | 模式匹配断言，替代手写 `assert!(matches!(...))` | [Release Blog](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · [assert_matches](../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md) |
-| `expr` metavariable 传入 `cfg`（§1.2） | 语言 / 宏 | 宏展开结果参与条件编译判定 | [releases.rs](https://releases.rs/docs/1.96.0/) |
-| `core::range` Copy 类型（§2.1） | 标准库 | `Range`/`RangeFrom`/`RangeToInclusive` 及迭代器 Copy 化 | [releases.rs](https://releases.rs/docs/1.96.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |
+| `expr` metavariable 传入 `cfg`（§1.2） | 语言 / 宏 | 宏展开结果参与条件编译判定 | [releases.rs](https://releases.rs/docs/1.96.0/) · [01 macros](../../03_advanced/03_proc_macros/01_macros.md) · [01 macros](../../03_advanced/03_proc_macros/01_macros.md) |
+| `core::range` Copy 类型（§2.1） | 标准库 | `Range`/`RangeFrom`/`RangeToInclusive` 及迭代器 Copy 化 | [releases.rs](https://releases.rs/docs/1.96.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [01 iterator patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |
 | `NonZero` 范围迭代（§2.2） | 标准库 | 非零整数范围直接迭代 | [releases.rs](https://releases.rs/docs/1.96.0/) |
-| `From<T>` for `AssertUnwindSafe` / `LazyCell` / `LazyLock`（§2.3） | 标准库 | 一键构造包装类型 | [releases.rs](https://releases.rs/docs/1.96.0/) |
+| `From<T>` for `AssertUnwindSafe` / `LazyCell` / `LazyLock`（§2.3） | 标准库 | 一键构造包装类型 | [releases.rs](https://releases.rs/docs/1.96.0/) · [02 interior mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) · [02 interior mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) |
 | 「valid for read/write」定义重构（§2.4） | unsafe / 内存模型 | 指针有效性契约排除 null 的统一定义 | [releases.rs](https://releases.rs/docs/1.96.0/) · [内存模型](../../03_advanced/02_unsafe/06_memory_model.md) |
-| Cargo git + alternate registry 共存；CVE-2026-5222/5223 修复（§3.1–3.2） | Cargo / 安全 | 混合源依赖解析；供应链安全修复 | [releases.rs](https://releases.rs/docs/1.96.0/) · [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) |
+| Cargo git + alternate registry 共存；CVE-2026-5222/5223 修复（§3.1–3.2） | Cargo / 安全 | 混合源依赖解析；供应链安全修复 | [releases.rs](https://releases.rs/docs/1.96.0/) · [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) · [06 cargo dependency resolution](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) |
 
 ---
 

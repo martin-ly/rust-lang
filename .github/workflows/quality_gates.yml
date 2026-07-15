@@ -516,6 +516,20 @@ jobs:
         run: python scripts/check_decision_trees.py
         continue-on-error: true
 
+  version-semantic-injection:
+    name: Version Semantic Injection (observe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run version semantic injection check (observe, promoted to blocking per AGENTS.md §5.2 when coverage stable >=80%)
+        run: python scripts/check_version_semantic_injection.py
+        continue-on-error: true
+
   quality-gates-summary:
     name: Quality Gates Summary
     runs-on: ubuntu-latest
@@ -547,6 +561,7 @@ jobs:
       - cross-domain-coverage
       - kg-relation-precision
       - decision-tree-rustc-error-code-coverage
+      - version-semantic-injection
     if: always() && github.event_name == 'pull_request'
     steps:
       - name: Generate summary comment
@@ -580,7 +595,8 @@ jobs:
               'Stub Purity (observe)': '${{ needs.stub-purity.result }}',
               'Cross-Domain Coverage (observe)': '${{ needs.cross-domain-coverage.result }}',
               'KG Relation Precision (observe)': '${{ needs.kg-relation-precision.result }}',
-              'Decision Tree rustc Error Code Coverage (observe)': '${{ needs.decision-tree-rustc-error-code-coverage.result }}'
+              'Decision Tree rustc Error Code Coverage (observe)': '${{ needs.decision-tree-rustc-error-code-coverage.result }}',
+              'Version Semantic Injection (observe)': '${{ needs.version-semantic-injection.result }}'
             };
 
             let status = '✅';
@@ -605,7 +621,7 @@ jobs:
             ${summary}
 
             ---
-            *All 23 quality gates completed (23 blocking + 4 semantic observe)*`;
+            *All 23 quality gates completed (23 blocking + 5 semantic observe)*`;
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,

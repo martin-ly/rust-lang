@@ -13874,7 +13874,7 @@
     },
     {
       "@id": "_:rel18",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:InternationalAuthorityIndex",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:AuthoritySourceMap",
@@ -13886,7 +13886,7 @@
     },
     {
       "@id": "_:rel19",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:InternationalAuthorityIndex",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Sources",
@@ -13898,7 +13898,7 @@
     },
     {
       "@id": "_:rel20",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:InternationalAuthorityIndex",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:TopicAuthorityAlignmentMap",
@@ -13934,7 +13934,7 @@
     },
     {
       "@id": "_:rel23",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:TemplateDeduplicationGuide",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:BilingualConceptTemplate",
@@ -13946,7 +13946,7 @@
     },
     {
       "@id": "_:rel24",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:TemplateDeduplicationGuide",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:ConceptConsistencyAuditChecklist",
@@ -13958,7 +13958,7 @@
     },
     {
       "@id": "_:rel25",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:TemplateDeduplicationGuide",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:QualityDashboardV2",
@@ -14042,7 +14042,7 @@
     },
     {
       "@id": "_:rel32",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:MetaFrameworkAndKnowledgeArchitectureQuiz",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:ConceptMetaLayer",
@@ -24410,7 +24410,7 @@
     },
     {
       "@id": "_:rel896",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:RustVsElixirConcurrencyAndFaultToleranceComparison",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:RustConceptKnowledgeSystem",
@@ -29558,7 +29558,7 @@
     },
     {
       "@id": "_:rel1325",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:NetworkingAndAsyncEcosystemQuiz",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:WebFrameworks",
@@ -29570,7 +29570,7 @@
     },
     {
       "@id": "_:rel1326",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:DatabaseAndStorageEcosystemQuiz",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:DatabaseAccess",
@@ -29582,7 +29582,7 @@
     },
     {
       "@id": "_:rel1327",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:SecurityAndTestingEcosystemQuiz",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:SecurityPractices_07securityan",
@@ -29594,7 +29594,7 @@
     },
     {
       "@id": "_:rel1328",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:DomainApplicationsEcosystemQuiz",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:BlockchainDevelopmentInRust",
@@ -31910,7 +31910,7 @@
     },
     {
       "@id": "_:rel1521",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:RustVersionTracking",
@@ -31922,7 +31922,7 @@
     },
     {
       "@id": "_:rel1522",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:BloomTaxonomy",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MetaFrameworkAndKnowledgeArchitectureQuiz",
@@ -31934,7 +31934,7 @@
     },
     {
       "@id": "_:rel1523",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:BloomTaxonomy",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustConceptKnowledgeSystem",
@@ -33206,7 +33206,7 @@
     },
     {
       "@id": "_:rel1629",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Methodology",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MetaFrameworkAndKnowledgeArchitectureQuiz",
@@ -34094,7 +34094,7 @@
     },
     {
       "@id": "_:rel1703",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AuthoritySourceMap",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -34130,7 +34130,7 @@
     },
     {
       "@id": "_:rel1706",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AuthoritySourceMap",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsC",
@@ -34190,7 +34190,7 @@
     },
     {
       "@id": "_:rel1711",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustBelt",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -34262,7 +34262,7 @@
     },
     {
       "@id": "_:rel1717",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Sources",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AuditChecklist",
@@ -34286,7 +34286,7 @@
     },
     {
       "@id": "_:rel1719",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Sources",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -34310,7 +34310,7 @@
     },
     {
       "@id": "_:rel1721",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AspMarkingGuide",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -34358,7 +34358,7 @@
     },
     {
       "@id": "_:rel1725",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AspMarkingGuide",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MetaFrameworkAndKnowledgeArchitectureQuiz",
@@ -34370,7 +34370,7 @@
     },
     {
       "@id": "_:rel1726",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AuditChecklist",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AuthoritySourceMap",
@@ -34394,7 +34394,7 @@
     },
     {
       "@id": "_:rel1728",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AuditChecklist",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Sources",
@@ -34418,7 +34418,7 @@
     },
     {
       "@id": "_:rel1730",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AuditChecklist",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -34430,7 +34430,7 @@
     },
     {
       "@id": "_:rel1731",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AuditChecklist",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:QualityDashboardV2",
@@ -34442,7 +34442,7 @@
     },
     {
       "@id": "_:rel1732",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptConsistencyAuditChecklist",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AuditChecklist",
@@ -34466,7 +34466,7 @@
     },
     {
       "@id": "_:rel1734",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TemplateDeduplicationGuide",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConceptConsistencyAuditChecklist",
@@ -34490,7 +34490,7 @@
     },
     {
       "@id": "_:rel1736",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:QualityDashboardV2",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -34514,7 +34514,7 @@
     },
     {
       "@id": "_:rel1738",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:QualityDashboardV2",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AuditChecklist",
@@ -37310,7 +37310,7 @@
     },
     {
       "@id": "_:rel1971",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:MetaFrameworkAndKnowledgeArchitectureQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConceptMetaLayer",
@@ -37322,7 +37322,7 @@
     },
     {
       "@id": "_:rel1972",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:MetaFrameworkAndKnowledgeArchitectureQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:BloomTaxonomy",
@@ -37334,7 +37334,7 @@
     },
     {
       "@id": "_:rel1973",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:MetaFrameworkAndKnowledgeArchitectureQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AspMarkingGuide",
@@ -37406,7 +37406,7 @@
     },
     {
       "@id": "_:rel1979",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Placeholder",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConceptAuditGuide",
@@ -66470,7 +66470,7 @@
     },
     {
       "@id": "_:rel4401",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:KnowledgeTopologyAtlas",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConceptDefinitionAtlas",
@@ -66482,7 +66482,7 @@
     },
     {
       "@id": "_:rel4402",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:KnowledgeTopologyAtlas",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AttributeRelationshipAtlas",
@@ -66494,7 +66494,7 @@
     },
     {
       "@id": "_:rel4403",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:KnowledgeTopologyAtlas",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ScenarioDecisionTreeAtlas",
@@ -66506,7 +66506,7 @@
     },
     {
       "@id": "_:rel4404",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:KnowledgeTopologyAtlas",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ExampleAndCounterexampleAtlas",
@@ -66518,7 +66518,7 @@
     },
     {
       "@id": "_:rel4405",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:KnowledgeTopologyAtlas",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:LogicalReasoningAtlas",
@@ -66530,7 +66530,7 @@
     },
     {
       "@id": "_:rel4406",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:KnowledgeTopologyAtlas",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InterLayerMappingAtlas",
@@ -66542,7 +66542,7 @@
     },
     {
       "@id": "_:rel4407",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:KnowledgeTopologyAtlas",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:IntraLayerMappingAtlas",
@@ -66554,7 +66554,7 @@
     },
     {
       "@id": "_:rel4408",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:KnowledgeTopologyAtlas",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConceptSourceAlignmentAtlas",
@@ -66566,7 +66566,7 @@
     },
     {
       "@id": "_:rel4409",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:KnowledgeTopologyAtlas",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ReasoningJudgmentTreeAtlas",
@@ -66578,7 +66578,7 @@
     },
     {
       "@id": "_:rel4410",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:KnowledgeTopologyAtlas",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:GapAndActionPlan",
@@ -66590,7 +66590,7 @@
     },
     {
       "@id": "_:rel4411",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:BloomTaxonomy",
@@ -66602,7 +66602,7 @@
     },
     {
       "@id": "_:rel4412",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:PatternSemanticSpaceIndex",
@@ -66614,7 +66614,7 @@
     },
     {
       "@id": "_:rel4413",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TerminologyGlossary",
@@ -66626,7 +66626,7 @@
     },
     {
       "@id": "_:rel4414",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:BilingualConceptTemplate",
@@ -66638,7 +66638,7 @@
     },
     {
       "@id": "_:rel4415",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AuthoritySourceMap",
@@ -66650,7 +66650,7 @@
     },
     {
       "@id": "_:rel4416",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConceptAuditGuide",
@@ -66662,7 +66662,7 @@
     },
     {
       "@id": "_:rel4417",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:GradingSystem",
@@ -66674,7 +66674,7 @@
     },
     {
       "@id": "_:rel4418",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TemplateDeduplicationGuide",
@@ -66686,7 +66686,7 @@
     },
     {
       "@id": "_:rel4419",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConceptIndex",
@@ -66698,7 +66698,7 @@
     },
     {
       "@id": "_:rel4420",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CrossReferenceMatrix",
@@ -66710,7 +66710,7 @@
     },
     {
       "@id": "_:rel4421",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:KnowledgeTopologyAtlas",
@@ -66722,7 +66722,7 @@
     },
     {
       "@id": "_:rel4422",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AlgorithmsPatternsSemanticBridge",
@@ -66734,7 +66734,7 @@
     },
     {
       "@id": "_:rel4423",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CCToRustEngineeringComparisonRoadmap",
@@ -66746,7 +66746,7 @@
     },
     {
       "@id": "_:rel4424",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:GeneralPLFoundationsRoadmap",
@@ -66758,7 +66758,7 @@
     },
     {
       "@id": "_:rel4425",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FoundationsGapClosureIndex",
@@ -66770,7 +66770,7 @@
     },
     {
       "@id": "_:rel4426",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConceptMetaLayer",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MetaFrameworkAndKnowledgeArchitectureQuiz",
@@ -66890,7 +66890,7 @@
     },
     {
       "@id": "_:rel4436",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:PlPrerequisites",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:EffectsAndPurity",
@@ -67058,7 +67058,7 @@
     },
     {
       "@id": "_:rel4450",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Closures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Closures_11quizzes",
@@ -67142,7 +67142,7 @@
     },
     {
       "@id": "_:rel4457",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Closures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Functions",
@@ -67274,7 +67274,7 @@
     },
     {
       "@id": "_:rel4468",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:EffectsAndPurity",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:QuizGeneralPLFoundations",
@@ -67334,7 +67334,7 @@
     },
     {
       "@id": "_:rel4473",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Keywords",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ControlFlow",
@@ -68522,7 +68522,7 @@
     },
     {
       "@id": "_:rel4572",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NeverType",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:StatementsAndExpressions",
@@ -68534,7 +68534,7 @@
     },
     {
       "@id": "_:rel4573",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NeverType",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ErrorHandling",
@@ -68546,7 +68546,7 @@
     },
     {
       "@id": "_:rel4574",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NeverType",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Patterns",
@@ -68858,7 +68858,7 @@
     },
     {
       "@id": "_:rel4600",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DataAbstractionSpectrum",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:QuizGeneralPLFoundations",
@@ -69146,7 +69146,7 @@
     },
     {
       "@id": "_:rel4624",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ControlFlow",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:QuizGeneralPLFoundations",
@@ -69230,7 +69230,7 @@
     },
     {
       "@id": "_:rel4631",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ControlFlow",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ErrorHandling",
@@ -69242,7 +69242,7 @@
     },
     {
       "@id": "_:rel4632",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ControlFlow",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Closures",
@@ -69314,7 +69314,7 @@
     },
     {
       "@id": "_:rel4638",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ControlFlow",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:PanicAndAbort",
@@ -69338,7 +69338,7 @@
     },
     {
       "@id": "_:rel4640",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ControlFlow",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:StatementsAndExpressions",
@@ -69434,7 +69434,7 @@
     },
     {
       "@id": "_:rel4648",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Patterns",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Enumerations",
@@ -69446,7 +69446,7 @@
     },
     {
       "@id": "_:rel4649",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Patterns",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NeverType",
@@ -69494,7 +69494,7 @@
     },
     {
       "@id": "_:rel4653",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:StatementsAndExpressions",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ControlFlow",
@@ -69578,7 +69578,7 @@
     },
     {
       "@id": "_:rel4660",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:StatementsAndExpressions",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Functions",
@@ -69590,7 +69590,7 @@
     },
     {
       "@id": "_:rel4661",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:StatementsAndExpressions",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NeverType",
@@ -69674,7 +69674,7 @@
     },
     {
       "@id": "_:rel4668",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Collections",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:BrownUniversityOwnershipInventory",
@@ -69710,7 +69710,7 @@
     },
     {
       "@id": "_:rel4671",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Collections",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Numerics",
@@ -69938,7 +69938,7 @@
     },
     {
       "@id": "_:rel4690",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:StringsAndText",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ErrorHandling",
@@ -70034,7 +70034,7 @@
     },
     {
       "@id": "_:rel4698",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:StringsAndEncoding",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ErrorHandling",
@@ -70082,7 +70082,7 @@
     },
     {
       "@id": "_:rel4702",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Modules",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Modules_11quizzes",
@@ -70166,7 +70166,7 @@
     },
     {
       "@id": "_:rel4709",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Modules",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Items",
@@ -70202,7 +70202,7 @@
     },
     {
       "@id": "_:rel4712",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Modules",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Structs",
@@ -70214,7 +70214,7 @@
     },
     {
       "@id": "_:rel4713",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Modules",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Enumerations",
@@ -70238,7 +70238,7 @@
     },
     {
       "@id": "_:rel4715",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Functions",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Items",
@@ -70274,7 +70274,7 @@
     },
     {
       "@id": "_:rel4718",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Functions",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Implementations",
@@ -70286,7 +70286,7 @@
     },
     {
       "@id": "_:rel4719",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Functions",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:StatementsAndExpressions",
@@ -70346,7 +70346,7 @@
     },
     {
       "@id": "_:rel4724",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:UseDeclarations",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Items",
@@ -70358,7 +70358,7 @@
     },
     {
       "@id": "_:rel4725",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Structs",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Items",
@@ -70418,7 +70418,7 @@
     },
     {
       "@id": "_:rel4730",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Enumerations",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Items",
@@ -70454,7 +70454,7 @@
     },
     {
       "@id": "_:rel4733",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Enumerations",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Patterns",
@@ -70478,7 +70478,7 @@
     },
     {
       "@id": "_:rel4735",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Implementations",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Items",
@@ -70622,7 +70622,7 @@
     },
     {
       "@id": "_:rel4747",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Preludes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Modules",
@@ -70634,7 +70634,7 @@
     },
     {
       "@id": "_:rel4748",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Preludes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Macros",
@@ -70670,7 +70670,7 @@
     },
     {
       "@id": "_:rel4751",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CratesAndSourceFiles",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Modules",
@@ -70694,7 +70694,7 @@
     },
     {
       "@id": "_:rel4753",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CratesAndSourceFiles",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Functions",
@@ -70838,7 +70838,7 @@
     },
     {
       "@id": "_:rel4765",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Items",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Modules",
@@ -70862,7 +70862,7 @@
     },
     {
       "@id": "_:rel4767",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Items",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Functions",
@@ -70874,7 +70874,7 @@
     },
     {
       "@id": "_:rel4768",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Items",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:UseDeclarations",
@@ -70886,7 +70886,7 @@
     },
     {
       "@id": "_:rel4769",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Items",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Structs",
@@ -70898,7 +70898,7 @@
     },
     {
       "@id": "_:rel4770",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Items",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Enumerations",
@@ -70910,7 +70910,7 @@
     },
     {
       "@id": "_:rel4771",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Items",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Implementations",
@@ -70922,7 +70922,7 @@
     },
     {
       "@id": "_:rel4772",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Items",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConstItemsAndConstFunctions",
@@ -70934,7 +70934,7 @@
     },
     {
       "@id": "_:rel4773",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Items",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:StaticItems",
@@ -70958,7 +70958,7 @@
     },
     {
       "@id": "_:rel4775",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ErrorHandling",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ErrorHandling_11quizzes",
@@ -70994,7 +70994,7 @@
     },
     {
       "@id": "_:rel4778",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ErrorHandling",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ControlFlow",
@@ -71102,7 +71102,7 @@
     },
     {
       "@id": "_:rel4787",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ErrorHandling",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Enumerations",
@@ -71162,7 +71162,7 @@
     },
     {
       "@id": "_:rel4792",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ErrorHandlingControlFlow",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Enumerations",
@@ -71258,7 +71258,7 @@
     },
     {
       "@id": "_:rel4800",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:PanicAndAbort",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Testing",
@@ -71270,7 +71270,7 @@
     },
     {
       "@id": "_:rel4801",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:PanicAndAbort",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NeverType",
@@ -71294,7 +71294,7 @@
     },
     {
       "@id": "_:rel4803",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Macros",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Modules",
@@ -71366,7 +71366,7 @@
     },
     {
       "@id": "_:rel4809",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Testing",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Modules_11quizzes",
@@ -71378,7 +71378,7 @@
     },
     {
       "@id": "_:rel4810",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Testing",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Modules",
@@ -71450,7 +71450,7 @@
     },
     {
       "@id": "_:rel4816",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Testing",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ErrorHandling",
@@ -71474,7 +71474,7 @@
     },
     {
       "@id": "_:rel4818",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Testing",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:PanicAndAbort",
@@ -71486,7 +71486,7 @@
     },
     {
       "@id": "_:rel4819",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Testing",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Macros",
@@ -71594,7 +71594,7 @@
     },
     {
       "@id": "_:rel4828",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:UsefulDevelopmentTools",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CratesAndSourceFiles",
@@ -71618,7 +71618,7 @@
     },
     {
       "@id": "_:rel4830",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TypeSystem_11quizzes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Numerics",
@@ -71630,7 +71630,7 @@
     },
     {
       "@id": "_:rel4831",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TypeSystem_11quizzes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Collections",
@@ -71654,7 +71654,7 @@
     },
     {
       "@id": "_:rel4833",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TypeSystem_11quizzes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CoercionAndCasting",
@@ -71678,7 +71678,7 @@
     },
     {
       "@id": "_:rel4835",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TypeSystem_11quizzes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Macros",
@@ -71690,7 +71690,7 @@
     },
     {
       "@id": "_:rel4836",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ErrorHandling_11quizzes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ErrorHandling",
@@ -71702,7 +71702,7 @@
     },
     {
       "@id": "_:rel4837",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ErrorHandling_11quizzes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Collections",
@@ -71714,7 +71714,7 @@
     },
     {
       "@id": "_:rel4838",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ErrorHandling_11quizzes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ControlFlow",
@@ -71726,7 +71726,7 @@
     },
     {
       "@id": "_:rel4839",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ErrorHandling_11quizzes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:PanicAndAbort",
@@ -71750,7 +71750,7 @@
     },
     {
       "@id": "_:rel4841",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Modules_11quizzes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Modules",
@@ -71762,7 +71762,7 @@
     },
     {
       "@id": "_:rel4842",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Modules_11quizzes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Testing",
@@ -71774,7 +71774,7 @@
     },
     {
       "@id": "_:rel4843",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Closures_11quizzes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Closures",
@@ -71798,7 +71798,7 @@
     },
     {
       "@id": "_:rel4845",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Closures_11quizzes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Collections",
@@ -71834,7 +71834,7 @@
     },
     {
       "@id": "_:rel4848",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:QuizGeneralPLFoundations",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:EffectsAndPurity",
@@ -71846,7 +71846,7 @@
     },
     {
       "@id": "_:rel4849",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:QuizGeneralPLFoundations",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ControlFlow",
@@ -71894,7 +71894,7 @@
     },
     {
       "@id": "_:rel4853",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Ownership_11quizzes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Collections",
@@ -71978,7 +71978,7 @@
     },
     {
       "@id": "_:rel4860",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ZeroCostAbstractions",
@@ -71990,7 +71990,7 @@
     },
     {
       "@id": "_:rel4861",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ControlFlow",
@@ -72002,7 +72002,7 @@
     },
     {
       "@id": "_:rel4862",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Collections",
@@ -72014,7 +72014,7 @@
     },
     {
       "@id": "_:rel4863",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:StringsAndText",
@@ -72026,7 +72026,7 @@
     },
     {
       "@id": "_:rel4864",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Numerics",
@@ -72038,7 +72038,7 @@
     },
     {
       "@id": "_:rel4865",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ValueSemanticsVsReferenceSemantics",
@@ -72062,7 +72062,7 @@
     },
     {
       "@id": "_:rel4867",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:EffectsAndPurity",
@@ -72074,7 +72074,7 @@
     },
     {
       "@id": "_:rel4868",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DataAbstractionSpectrum",
@@ -72098,7 +72098,7 @@
     },
     {
       "@id": "_:rel4870",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:PlPrerequisites",
@@ -72122,7 +72122,7 @@
     },
     {
       "@id": "_:rel4872",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NeverType",
@@ -72134,7 +72134,7 @@
     },
     {
       "@id": "_:rel4873",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Macros",
@@ -72146,7 +72146,7 @@
     },
     {
       "@id": "_:rel4874",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:PanicAndAbort",
@@ -72158,7 +72158,7 @@
     },
     {
       "@id": "_:rel4875",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CoercionAndCasting",
@@ -72170,7 +72170,7 @@
     },
     {
       "@id": "_:rel4876",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Closures",
@@ -72182,7 +72182,7 @@
     },
     {
       "@id": "_:rel4877",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Testing",
@@ -72194,7 +72194,7 @@
     },
     {
       "@id": "_:rel4878",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CollectionsAdvanced",
@@ -72206,7 +72206,7 @@
     },
     {
       "@id": "_:rel4879",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:StringsAndEncoding",
@@ -72218,7 +72218,7 @@
     },
     {
       "@id": "_:rel4880",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TypeSystem_11quizzes",
@@ -72230,7 +72230,7 @@
     },
     {
       "@id": "_:rel4881",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ErrorHandling_11quizzes",
@@ -72242,7 +72242,7 @@
     },
     {
       "@id": "_:rel4882",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Modules_11quizzes",
@@ -72254,7 +72254,7 @@
     },
     {
       "@id": "_:rel4883",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:QuizGeneralPLFoundations",
@@ -72266,7 +72266,7 @@
     },
     {
       "@id": "_:rel4884",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:Readme",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:InterLayerMap",
@@ -74330,7 +74330,7 @@
     },
     {
       "@id": "_:rel5056",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ExceptionSafetyCVsRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:QuizCCToRustFoundations",
@@ -74426,7 +74426,7 @@
     },
     {
       "@id": "_:rel5064",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RangeTypes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Iterators",
@@ -74558,7 +74558,7 @@
     },
     {
       "@id": "_:rel5075",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ClosureTypes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Iterators",
@@ -74666,7 +74666,7 @@
     },
     {
       "@id": "_:rel5084",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NewtypeAndWrapperTypes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Modules_05modulesand",
@@ -74798,7 +74798,7 @@
     },
     {
       "@id": "_:rel5095",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RTTIAndDynamicTypeIdentification",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:QuizCCToRustFoundations",
@@ -75098,7 +75098,7 @@
     },
     {
       "@id": "_:rel5120",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Assert_matchesMacro",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ErrorHandling_03errorhandl",
@@ -75506,7 +75506,7 @@
     },
     {
       "@id": "_:rel5154",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Metaprogramming",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RTTIAndDynamicTypeIdentification",
@@ -75530,7 +75530,7 @@
     },
     {
       "@id": "_:rel5156",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CPreprocessorVsRustMacros",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:QuizCCToRustFoundations",
@@ -75734,7 +75734,7 @@
     },
     {
       "@id": "_:rel5173",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Iterators",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ClosureTypes",
@@ -75770,7 +75770,7 @@
     },
     {
       "@id": "_:rel5176",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:QuizCCToRustFoundations",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ExceptionSafetyCVsRust",
@@ -75794,7 +75794,7 @@
     },
     {
       "@id": "_:rel5178",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:QuizCCToRustFoundations",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CPreprocessorVsRustMacros",
@@ -75842,7 +75842,7 @@
     },
     {
       "@id": "_:rel5182",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ErrorHandling_03errorhandl",
@@ -75854,7 +75854,7 @@
     },
     {
       "@id": "_:rel5183",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Assert_matchesMacro",
@@ -75866,7 +75866,7 @@
     },
     {
       "@id": "_:rel5184",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RangeTypes",
@@ -75890,7 +75890,7 @@
     },
     {
       "@id": "_:rel5186",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SerdePatterns",
@@ -75902,7 +75902,7 @@
     },
     {
       "@id": "_:rel5187",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Modules_05modulesand",
@@ -75914,7 +75914,7 @@
     },
     {
       "@id": "_:rel5188",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CowAndBorrowed",
@@ -75938,7 +75938,7 @@
     },
     {
       "@id": "_:rel5190",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DslAndEmbedding",
@@ -75950,7 +75950,7 @@
     },
     {
       "@id": "_:rel5191",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NewtypeAndWrapperTypes",
@@ -75962,7 +75962,7 @@
     },
     {
       "@id": "_:rel5192",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ErrorHandling_03errorhandl_1",
@@ -75974,7 +75974,7 @@
     },
     {
       "@id": "_:rel5193",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Iterators",
@@ -75986,7 +75986,7 @@
     },
     {
       "@id": "_:rel5194",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RTTIAndDynamicTypeIdentification",
@@ -75998,7 +75998,7 @@
     },
     {
       "@id": "_:rel5195",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CPreprocessorVsRustMacros",
@@ -76010,7 +76010,7 @@
     },
     {
       "@id": "_:rel5196",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ExceptionSafetyCVsRust",
@@ -76022,7 +76022,7 @@
     },
     {
       "@id": "_:rel5197",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConstructionAndInitialization",
@@ -76034,7 +76034,7 @@
     },
     {
       "@id": "_:rel5198",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FriendVsModulePrivacy",
@@ -76046,7 +76046,7 @@
     },
     {
       "@id": "_:rel5199",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:QuizCCToRustFoundations",
@@ -76094,7 +76094,7 @@
     },
     {
       "@id": "_:rel5203",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Metaprogramming",
@@ -76106,7 +76106,7 @@
     },
     {
       "@id": "_:rel5204",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Generics_01generics",
@@ -76118,7 +76118,7 @@
     },
     {
       "@id": "_:rel5205",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_02intermedia",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MemoryManagement_02memorymana",
@@ -76622,7 +76622,7 @@
     },
     {
       "@id": "_:rel5247",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CrossPlatformConcurrency",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConditionalCompilation",
@@ -76646,7 +76646,7 @@
     },
     {
       "@id": "_:rel5249",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CrossPlatformConcurrency",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -76658,7 +76658,7 @@
     },
     {
       "@id": "_:rel5250",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CrossPlatformConcurrency",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CrossPlatformProcessManagementInRust",
@@ -77186,7 +77186,7 @@
     },
     {
       "@id": "_:rel5294",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Concurrency_00concurrenc_2",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:StreamProcessingSemantics",
@@ -79082,7 +79082,7 @@
     },
     {
       "@id": "_:rel5452",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AsyncTraitObjectSafety",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TypeErasure",
@@ -80006,7 +80006,7 @@
     },
     {
       "@id": "_:rel5529",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:UnsafeReference",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TheRustRuntime",
@@ -80126,7 +80126,7 @@
     },
     {
       "@id": "_:rel5539",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:UnsafeInAsyncContexts",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:WakerContractDeepDive",
@@ -80222,7 +80222,7 @@
     },
     {
       "@id": "_:rel5547",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Macros_03procmacros",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -80234,7 +80234,7 @@
     },
     {
       "@id": "_:rel5548",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Macros_03procmacros",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Macros_03procmacros_1",
@@ -80258,7 +80258,7 @@
     },
     {
       "@id": "_:rel5550",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Macros_03procmacros",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_03advanced",
@@ -80282,7 +80282,7 @@
     },
     {
       "@id": "_:rel5552",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Macros_03procmacros",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_06ecosystem",
@@ -80294,7 +80294,7 @@
     },
     {
       "@id": "_:rel5553",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProceduralMacros",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Macros_03procmacros_1",
@@ -80342,7 +80342,7 @@
     },
     {
       "@id": "_:rel5557",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProceduralMacros",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -80354,7 +80354,7 @@
     },
     {
       "@id": "_:rel5558",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProceduralMacros",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MacroHygiene",
@@ -80402,7 +80402,7 @@
     },
     {
       "@id": "_:rel5562",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProceduralMacros",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ProductionGradeMacroDevelopment",
@@ -80426,7 +80426,7 @@
     },
     {
       "@id": "_:rel5564",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProceduralMacros",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_03advanced",
@@ -80450,7 +80450,7 @@
     },
     {
       "@id": "_:rel5566",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProceduralMacros",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_06ecosystem",
@@ -80474,7 +80474,7 @@
     },
     {
       "@id": "_:rel5568",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:MacroDebuggingAndDiagnostics",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MacroHygiene",
@@ -80546,7 +80546,7 @@
     },
     {
       "@id": "_:rel5574",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SynAndQuoteReference",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MacroDebuggingAndDiagnostics",
@@ -80570,7 +80570,7 @@
     },
     {
       "@id": "_:rel5576",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:MacroHygiene",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ProceduralMacros",
@@ -80606,7 +80606,7 @@
     },
     {
       "@id": "_:rel5579",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Macros_03procmacros_1",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Macros_03procmacros",
@@ -80630,7 +80630,7 @@
     },
     {
       "@id": "_:rel5581",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Macros_03procmacros_1",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ProceduralMacros",
@@ -80726,7 +80726,7 @@
     },
     {
       "@id": "_:rel5589",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConditionalCompilation",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -81290,7 +81290,7 @@
     },
     {
       "@id": "_:rel5636",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:InlineAssembly",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -81350,7 +81350,7 @@
     },
     {
       "@id": "_:rel5641",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CustomAllocators",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -81374,7 +81374,7 @@
     },
     {
       "@id": "_:rel5643",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CustomAllocators",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_03advanced",
@@ -81398,7 +81398,7 @@
     },
     {
       "@id": "_:rel5645",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CustomAllocators",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_06ecosystem",
@@ -81458,7 +81458,7 @@
     },
     {
       "@id": "_:rel5650",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ZeroCopyParsing",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -81482,7 +81482,7 @@
     },
     {
       "@id": "_:rel5652",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ZeroCopyParsing",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_03advanced",
@@ -81506,7 +81506,7 @@
     },
     {
       "@id": "_:rel5654",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ZeroCopyParsing",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_06ecosystem",
@@ -81566,7 +81566,7 @@
     },
     {
       "@id": "_:rel5659",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TypeErasure",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -81590,7 +81590,7 @@
     },
     {
       "@id": "_:rel5661",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TypeErasure",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_03advanced",
@@ -81614,7 +81614,7 @@
     },
     {
       "@id": "_:rel5663",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TypeErasure",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_06ecosystem",
@@ -81638,7 +81638,7 @@
     },
     {
       "@id": "_:rel5665",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TypeErasure",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AsyncTraitObjectSafety",
@@ -81722,7 +81722,7 @@
     },
     {
       "@id": "_:rel5672",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkProgramming",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -81782,7 +81782,7 @@
     },
     {
       "@id": "_:rel5677",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:StreamProcessingSemantics",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustConceptKnowledgeSystem",
@@ -81806,7 +81806,7 @@
     },
     {
       "@id": "_:rel5679",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:StreamProcessingSemantics",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_06ecosystem",
@@ -81818,7 +81818,7 @@
     },
     {
       "@id": "_:rel5680",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:OwnershipPerformanceOptimization",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -81854,7 +81854,7 @@
     },
     {
       "@id": "_:rel5683",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TheRustRuntime",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CustomAllocators",
@@ -81986,7 +81986,7 @@
     },
     {
       "@id": "_:rel5694",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:MemoryAllocationAndLifetime",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -82070,7 +82070,7 @@
     },
     {
       "@id": "_:rel5701",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Variables",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -82130,7 +82130,7 @@
     },
     {
       "@id": "_:rel5706",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:VisibilityAndPrivacy",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -82286,7 +82286,7 @@
     },
     {
       "@id": "_:rel5719",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AdvancedProcessManagementInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InterProcessCommunicationMechanismsInRust",
@@ -82346,7 +82346,7 @@
     },
     {
       "@id": "_:rel5724",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CrossPlatformProcessManagementInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ProcessModelAndLifecycleInRust",
@@ -82382,7 +82382,7 @@
     },
     {
       "@id": "_:rel5727",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CrossPlatformProcessManagementInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConditionalCompilation",
@@ -82418,7 +82418,7 @@
     },
     {
       "@id": "_:rel5730",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:InterProcessCommunicationMechanismsInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ProcessModelAndLifecycleInRust",
@@ -82454,7 +82454,7 @@
     },
     {
       "@id": "_:rel5733",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:InterProcessCommunicationMechanismsInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NetworkProgramming",
@@ -82466,7 +82466,7 @@
     },
     {
       "@id": "_:rel5734",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProcessMonitoringAndDiagnosticsInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ProcessModelAndLifecycleInRust",
@@ -82478,7 +82478,7 @@
     },
     {
       "@id": "_:rel5735",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProcessMonitoringAndDiagnosticsInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AdvancedProcessManagementInRust",
@@ -82490,7 +82490,7 @@
     },
     {
       "@id": "_:rel5736",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProcessMonitoringAndDiagnosticsInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AsyncProcessManagementInRust",
@@ -82526,7 +82526,7 @@
     },
     {
       "@id": "_:rel5739",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProcessSecurityAndSandboxingInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ProcessModelAndLifecycleInRust",
@@ -82538,7 +82538,7 @@
     },
     {
       "@id": "_:rel5740",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProcessSecurityAndSandboxingInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CrossPlatformProcessManagementInRust",
@@ -82586,7 +82586,7 @@
     },
     {
       "@id": "_:rel5744",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProcessPerformanceEngineeringInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ProcessModelAndLifecycleInRust",
@@ -82598,7 +82598,7 @@
     },
     {
       "@id": "_:rel5745",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProcessPerformanceEngineeringInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AsyncProcessManagementInRust",
@@ -82610,7 +82610,7 @@
     },
     {
       "@id": "_:rel5746",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProcessPerformanceEngineeringInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InterProcessCommunicationMechanismsInRust",
@@ -82646,7 +82646,7 @@
     },
     {
       "@id": "_:rel5749",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProcessPerformanceEngineeringInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AuthoritySourceMap",
@@ -82658,7 +82658,7 @@
     },
     {
       "@id": "_:rel5750",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProcessTestingAndBenchmarkingInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ProcessModelAndLifecycleInRust",
@@ -82670,7 +82670,7 @@
     },
     {
       "@id": "_:rel5751",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProcessTestingAndBenchmarkingInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AdvancedProcessManagementInRust",
@@ -82682,7 +82682,7 @@
     },
     {
       "@id": "_:rel5752",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ProcessTestingAndBenchmarkingInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AsyncProcessManagementInRust",
@@ -82730,7 +82730,7 @@
     },
     {
       "@id": "_:rel5756",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ModernProcessManagementLibrariesInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ProcessModelAndLifecycleInRust",
@@ -82742,7 +82742,7 @@
     },
     {
       "@id": "_:rel5757",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ModernProcessManagementLibrariesInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AsyncProcessManagementInRust",
@@ -82754,7 +82754,7 @@
     },
     {
       "@id": "_:rel5758",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ModernProcessManagementLibrariesInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CrossPlatformProcessManagementInRust",
@@ -82790,7 +82790,7 @@
     },
     {
       "@id": "_:rel5761",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ModernProcessManagementLibrariesInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AuthoritySourceMap",
@@ -82802,7 +82802,7 @@
     },
     {
       "@id": "_:rel5762",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Methodology",
@@ -82850,7 +82850,7 @@
     },
     {
       "@id": "_:rel5766",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Macros_03procmacros",
@@ -82874,7 +82874,7 @@
     },
     {
       "@id": "_:rel5768",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ProceduralMacros",
@@ -82910,7 +82910,7 @@
     },
     {
       "@id": "_:rel5771",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:StreamProcessingSemantics",
@@ -82958,7 +82958,7 @@
     },
     {
       "@id": "_:rel5775",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:GenericAssociatedTypesGATsAtTheAsyncBoundary",
@@ -83006,7 +83006,7 @@
     },
     {
       "@id": "_:rel5779",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CustomAllocators",
@@ -83018,7 +83018,7 @@
     },
     {
       "@id": "_:rel5780",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ZeroCopyParsing",
@@ -83042,7 +83042,7 @@
     },
     {
       "@id": "_:rel5782",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TypeErasure",
@@ -83054,7 +83054,7 @@
     },
     {
       "@id": "_:rel5783",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Concurrency_00concurrenc_2",
@@ -83066,7 +83066,7 @@
     },
     {
       "@id": "_:rel5784",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:UnsafeRust_02unsafe",
@@ -83078,7 +83078,7 @@
     },
     {
       "@id": "_:rel5785",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Macros_03procmacros_1",
@@ -83150,7 +83150,7 @@
     },
     {
       "@id": "_:rel5791",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_05comparativ",
@@ -83162,7 +83162,7 @@
     },
     {
       "@id": "_:rel5792",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_06ecosystem",
@@ -83174,7 +83174,7 @@
     },
     {
       "@id": "_:rel5793",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:LearningMvpPath",
@@ -83186,7 +83186,7 @@
     },
     {
       "@id": "_:rel5794",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_03advanced",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -83510,7 +83510,7 @@
     },
     {
       "@id": "_:rel5821",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TypeInference",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TypeInferenceComplexity",
@@ -83594,7 +83594,7 @@
     },
     {
       "@id": "_:rel5828",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:LambdaCalculus",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_03operationa_1",
@@ -83702,7 +83702,7 @@
     },
     {
       "@id": "_:rel5837",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TypeSemantics",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_03operationa_1",
@@ -83714,7 +83714,7 @@
     },
     {
       "@id": "_:rel5838",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TypeSemantics",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DenotationalSemantics",
@@ -84386,7 +84386,7 @@
     },
     {
       "@id": "_:rel5894",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TreeBorrowsDeepDive",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AutoVerusAndVerusAutomatedVerificationEcosystem",
@@ -84590,7 +84590,7 @@
     },
     {
       "@id": "_:rel5911",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustBelt_02separation",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_04modelcheck_1",
@@ -84674,7 +84674,7 @@
     },
     {
       "@id": "_:rel5918",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SeparationLogic",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_04modelcheck_1",
@@ -84758,7 +84758,7 @@
     },
     {
       "@id": "_:rel5925",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SafetyTagsInFormalVerificationRedirectStub",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AutoVerusAndVerusAutomatedVerificationEcosystem",
@@ -84770,7 +84770,7 @@
     },
     {
       "@id": "_:rel5926",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SafetyTagsInFormalVerificationRedirectStub",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MiriRustUndefinedBehaviorDetector",
@@ -84854,7 +84854,7 @@
     },
     {
       "@id": "_:rel5933",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:BorrowSanitizerRuntimeTreeBorrowsViolationDetection",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TreeBorrowsDeepDive",
@@ -84962,7 +84962,7 @@
     },
     {
       "@id": "_:rel5942",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_03operationa",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:VerificationToolchain",
@@ -85154,7 +85154,7 @@
     },
     {
       "@id": "_:rel5958",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AxiomaticSemantics",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DenotationalSemantics",
@@ -85250,7 +85250,7 @@
     },
     {
       "@id": "_:rel5966",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AeneasSymbolicSemantics",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustBelt_02separation",
@@ -85262,7 +85262,7 @@
     },
     {
       "@id": "_:rel5967",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AeneasSymbolicSemantics",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SeparationLogic",
@@ -85310,7 +85310,7 @@
     },
     {
       "@id": "_:rel5971",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AeneasSymbolicSemantics",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:BorrowSanitizerRuntimeTreeBorrowsViolationDetection",
@@ -85394,7 +85394,7 @@
     },
     {
       "@id": "_:rel5978",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:VerificationToolchain",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustBelt_02separation",
@@ -85418,7 +85418,7 @@
     },
     {
       "@id": "_:rel5980",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:VerificationToolchain",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_04modelcheck_1",
@@ -85562,7 +85562,7 @@
     },
     {
       "@id": "_:rel5992",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethodsMergedRedirect",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustBelt_02separation",
@@ -85586,7 +85586,7 @@
     },
     {
       "@id": "_:rel5994",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04modelcheck",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_03operationa",
@@ -85598,7 +85598,7 @@
     },
     {
       "@id": "_:rel5995",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04modelcheck",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustBelt_02separation",
@@ -85610,7 +85610,7 @@
     },
     {
       "@id": "_:rel5996",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04modelcheck",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SeparationLogic",
@@ -85658,7 +85658,7 @@
     },
     {
       "@id": "_:rel6000",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ModernVerificationTools",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:KaniRustBoundedModelChecker",
@@ -85670,7 +85670,7 @@
     },
     {
       "@id": "_:rel6001",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ModernVerificationTools",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MiriRustUndefinedBehaviorDetector",
@@ -85706,7 +85706,7 @@
     },
     {
       "@id": "_:rel6004",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ModernVerificationTools",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TreeBorrowsDeepDive",
@@ -85730,7 +85730,7 @@
     },
     {
       "@id": "_:rel6006",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ModernVerificationTools",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:BorrowSanitizerRuntimeTreeBorrowsViolationDetection",
@@ -85742,7 +85742,7 @@
     },
     {
       "@id": "_:rel6007",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ModernVerificationTools",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AutoVerusAndVerusAutomatedVerificationEcosystem",
@@ -85766,7 +85766,7 @@
     },
     {
       "@id": "_:rel6009",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04modelcheck_1",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SeparationLogic",
@@ -85778,7 +85778,7 @@
     },
     {
       "@id": "_:rel6010",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04modelcheck_1",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustBelt_02separation",
@@ -85790,7 +85790,7 @@
     },
     {
       "@id": "_:rel6011",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04modelcheck_1",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TypeSemantics",
@@ -85814,7 +85814,7 @@
     },
     {
       "@id": "_:rel6013",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04modelcheck_1",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_03operationa",
@@ -85826,7 +85826,7 @@
     },
     {
       "@id": "_:rel6014",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04modelcheck_1",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:VerificationToolchain",
@@ -85862,7 +85862,7 @@
     },
     {
       "@id": "_:rel6017",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AutoVerusAndVerusAutomatedVerificationEcosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:VerificationToolchain",
@@ -85946,7 +85946,7 @@
     },
     {
       "@id": "_:rel6024",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:MiriRustUndefinedBehaviorDetector",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SafetyTagsInFormalVerificationRedirectStub",
@@ -86006,7 +86006,7 @@
     },
     {
       "@id": "_:rel6029",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:KaniRustBoundedModelChecker",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ModernVerificationTools",
@@ -86030,7 +86030,7 @@
     },
     {
       "@id": "_:rel6031",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:KaniRustBoundedModelChecker",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TreeBorrowsDeepDive",
@@ -86126,7 +86126,7 @@
     },
     {
       "@id": "_:rel6039",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CertifiedToolchainsAndCertifiedPackageInventory",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:VerificationToolchain",
@@ -86138,7 +86138,7 @@
     },
     {
       "@id": "_:rel6040",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CertifiedToolchainsAndCertifiedPackageInventory",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_04modelcheck",
@@ -87506,7 +87506,7 @@
     },
     {
       "@id": "_:rel6154",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConcurrencySemanticsFormalModelsOfConcurrentComputation",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:LinearizabilityAndTheConsistencySpectrum",
@@ -87518,7 +87518,7 @@
     },
     {
       "@id": "_:rel6155",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ConcurrencySemanticsFormalModelsOfConcurrentComputation",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ActorSemanticsFromHewittSAxiomsToTheRustEcosystem",
@@ -87590,7 +87590,7 @@
     },
     {
       "@id": "_:rel6161",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_03operationa",
@@ -87602,7 +87602,7 @@
     },
     {
       "@id": "_:rel6162",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:LearningMvpPath",
@@ -87614,7 +87614,7 @@
     },
     {
       "@id": "_:rel6163",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Methodology",
@@ -87662,7 +87662,7 @@
     },
     {
       "@id": "_:rel6167",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustBelt_02separation",
@@ -87674,7 +87674,7 @@
     },
     {
       "@id": "_:rel6168",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:VerificationToolchain",
@@ -87686,7 +87686,7 @@
     },
     {
       "@id": "_:rel6169",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TypeSystem_00typetheory",
@@ -87698,7 +87698,7 @@
     },
     {
       "@id": "_:rel6170",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SeparationLogic",
@@ -87710,7 +87710,7 @@
     },
     {
       "@id": "_:rel6171",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TypeInference",
@@ -87722,7 +87722,7 @@
     },
     {
       "@id": "_:rel6172",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:BorrowCheckingDecidability",
@@ -87734,7 +87734,7 @@
     },
     {
       "@id": "_:rel6173",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TypeInferenceComplexity",
@@ -87746,7 +87746,7 @@
     },
     {
       "@id": "_:rel6174",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AeneasSymbolicSemantics",
@@ -87758,7 +87758,7 @@
     },
     {
       "@id": "_:rel6175",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_03operationa_1",
@@ -87770,7 +87770,7 @@
     },
     {
       "@id": "_:rel6176",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AxiomaticSemantics",
@@ -87782,7 +87782,7 @@
     },
     {
       "@id": "_:rel6177",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TypeSemantics",
@@ -87794,7 +87794,7 @@
     },
     {
       "@id": "_:rel6178",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:EvaluationStrategies",
@@ -87818,7 +87818,7 @@
     },
     {
       "@id": "_:rel6180",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:LinearizabilityAndTheConsistencySpectrum",
@@ -87830,7 +87830,7 @@
     },
     {
       "@id": "_:rel6181",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ActorSemanticsFromHewittSAxiomsToTheRustEcosystem",
@@ -87842,7 +87842,7 @@
     },
     {
       "@id": "_:rel6182",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:LinearLogic_01ownershipl",
@@ -87854,7 +87854,7 @@
     },
     {
       "@id": "_:rel6183",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CategoryTheory",
@@ -87866,7 +87866,7 @@
     },
     {
       "@id": "_:rel6184",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DenotationalSemantics",
@@ -87878,7 +87878,7 @@
     },
     {
       "@id": "_:rel6185",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethodsMergedRedirect",
@@ -87890,7 +87890,7 @@
     },
     {
       "@id": "_:rel6186",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:FormalMethods_04researchan",
@@ -87902,7 +87902,7 @@
     },
     {
       "@id": "_:rel6187",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:LambdaCalculus",
@@ -87914,7 +87914,7 @@
     },
     {
       "@id": "_:rel6188",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_04modelcheck",
@@ -87926,7 +87926,7 @@
     },
     {
       "@id": "_:rel6189",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ModernVerificationTools",
@@ -87938,7 +87938,7 @@
     },
     {
       "@id": "_:rel6190",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ProgrammingLanguageFoundations",
@@ -87950,7 +87950,7 @@
     },
     {
       "@id": "_:rel6191",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_04modelcheck_1",
@@ -87962,7 +87962,7 @@
     },
     {
       "@id": "_:rel6192",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TheRustcQuerySystemAndIncrementalCompilation",
@@ -87974,7 +87974,7 @@
     },
     {
       "@id": "_:rel6193",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MIRCodegenAndLLVMIRPrimer",
@@ -87986,7 +87986,7 @@
     },
     {
       "@id": "_:rel6194",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TheTraitSolverInRustc",
@@ -87998,7 +87998,7 @@
     },
     {
       "@id": "_:rel6195",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NameResolutionAndHIRInRustc",
@@ -88010,7 +88010,7 @@
     },
     {
       "@id": "_:rel6196",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FormalMethods_04formal",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:GenericsCompilerBehavior",
@@ -88058,7 +88058,7 @@
     },
     {
       "@id": "_:rel6200",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ParadigmMatrix",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsC",
@@ -88130,7 +88130,7 @@
     },
     {
       "@id": "_:rel6206",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ParadigmMatrix",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SecurityPractices",
@@ -88142,7 +88142,7 @@
     },
     {
       "@id": "_:rel6207",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:ParadigmMatrix",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -88190,7 +88190,7 @@
     },
     {
       "@id": "_:rel6211",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Concurrency_00paradigms",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsJava",
@@ -88274,7 +88274,7 @@
     },
     {
       "@id": "_:rel6218",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Concurrency_00paradigms",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsGo",
@@ -88334,7 +88334,7 @@
     },
     {
       "@id": "_:rel6223",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Concurrency_00paradigms",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -88430,7 +88430,7 @@
     },
     {
       "@id": "_:rel6231",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CVsRustConstructionOperatorsRTTIAndFriends",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsC",
@@ -88586,7 +88586,7 @@
     },
     {
       "@id": "_:rel6244",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:FiveExecutionModelsDefinitionMatrix",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ParadigmMatrix",
@@ -88622,7 +88622,7 @@
     },
     {
       "@id": "_:rel6247",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsC",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -88658,7 +88658,7 @@
     },
     {
       "@id": "_:rel6250",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsC",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Concurrency_00paradigms",
@@ -88670,7 +88670,7 @@
     },
     {
       "@id": "_:rel6251",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsC",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:QuizRustVsSystems",
@@ -88706,7 +88706,7 @@
     },
     {
       "@id": "_:rel6254",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsGo",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:QuizRustVsSystems",
@@ -88778,7 +88778,7 @@
     },
     {
       "@id": "_:rel6260",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsGo",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SecurityPractices",
@@ -88802,7 +88802,7 @@
     },
     {
       "@id": "_:rel6262",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsGo",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -88826,7 +88826,7 @@
     },
     {
       "@id": "_:rel6264",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsRuby",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsPython",
@@ -88850,7 +88850,7 @@
     },
     {
       "@id": "_:rel6266",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsRuby",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -88910,7 +88910,7 @@
     },
     {
       "@id": "_:rel6271",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsSwift",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -88970,7 +88970,7 @@
     },
     {
       "@id": "_:rel6276",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsZig",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -88994,7 +88994,7 @@
     },
     {
       "@id": "_:rel6278",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsJava",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsC",
@@ -89006,7 +89006,7 @@
     },
     {
       "@id": "_:rel6279",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsJava",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsGo",
@@ -89102,7 +89102,7 @@
     },
     {
       "@id": "_:rel6287",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsPython",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -89174,7 +89174,7 @@
     },
     {
       "@id": "_:rel6293",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsJavaScript",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -89246,7 +89246,7 @@
     },
     {
       "@id": "_:rel6299",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsKotlin",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -89306,7 +89306,7 @@
     },
     {
       "@id": "_:rel6304",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsScala",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -89378,7 +89378,7 @@
     },
     {
       "@id": "_:rel6310",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsC_02managedlan",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -89390,7 +89390,7 @@
     },
     {
       "@id": "_:rel6311",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsElixirConcurrencyAndFaultToleranceComparison",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsGo",
@@ -89402,7 +89402,7 @@
     },
     {
       "@id": "_:rel6312",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsElixirConcurrencyAndFaultToleranceComparison",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ParadigmMatrix",
@@ -89438,7 +89438,7 @@
     },
     {
       "@id": "_:rel6315",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsElixirConcurrencyAndFaultToleranceComparison",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -89462,7 +89462,7 @@
     },
     {
       "@id": "_:rel6317",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsTypeScript",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsC",
@@ -89522,7 +89522,7 @@
     },
     {
       "@id": "_:rel6322",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustVsTypeScript",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -89546,7 +89546,7 @@
     },
     {
       "@id": "_:rel6324",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SecurityPractices",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsC",
@@ -89690,7 +89690,7 @@
     },
     {
       "@id": "_:rel6336",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SecurityPractices",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -89726,7 +89726,7 @@
     },
     {
       "@id": "_:rel6339",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SecurityPractices",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AuthoritySourceMap",
@@ -89738,7 +89738,7 @@
     },
     {
       "@id": "_:rel6340",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:QuizRustVsSystems",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsGo",
@@ -89750,7 +89750,7 @@
     },
     {
       "@id": "_:rel6341",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:QuizRustVsSystems",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsC",
@@ -89810,7 +89810,7 @@
     },
     {
       "@id": "_:rel6346",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsC",
@@ -89822,7 +89822,7 @@
     },
     {
       "@id": "_:rel6347",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsGo",
@@ -89834,7 +89834,7 @@
     },
     {
       "@id": "_:rel6348",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsJava",
@@ -89846,7 +89846,7 @@
     },
     {
       "@id": "_:rel6349",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsPython",
@@ -89858,7 +89858,7 @@
     },
     {
       "@id": "_:rel6350",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsJavaScript",
@@ -89870,7 +89870,7 @@
     },
     {
       "@id": "_:rel6351",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CAbiObjectModel",
@@ -89882,7 +89882,7 @@
     },
     {
       "@id": "_:rel6352",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SecurityPractices",
@@ -89894,7 +89894,7 @@
     },
     {
       "@id": "_:rel6353",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CVsRustConstructionOperatorsRTTIAndFriends",
@@ -89906,7 +89906,7 @@
     },
     {
       "@id": "_:rel6354",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsRuby",
@@ -89918,7 +89918,7 @@
     },
     {
       "@id": "_:rel6355",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsSwift",
@@ -89930,7 +89930,7 @@
     },
     {
       "@id": "_:rel6356",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsZig",
@@ -89942,7 +89942,7 @@
     },
     {
       "@id": "_:rel6357",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsKotlin",
@@ -89954,7 +89954,7 @@
     },
     {
       "@id": "_:rel6358",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsScala",
@@ -89966,7 +89966,7 @@
     },
     {
       "@id": "_:rel6359",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsC_02managedlan",
@@ -89978,7 +89978,7 @@
     },
     {
       "@id": "_:rel6360",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsElixirConcurrencyAndFaultToleranceComparison",
@@ -89990,7 +89990,7 @@
     },
     {
       "@id": "_:rel6361",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsTypeScript",
@@ -90002,7 +90002,7 @@
     },
     {
       "@id": "_:rel6362",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:QuizRustVsSystems",
@@ -90098,7 +90098,7 @@
     },
     {
       "@id": "_:rel6370",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_05comparativ",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -93242,7 +93242,7 @@
     },
     {
       "@id": "_:rel6632",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:WebFrameworks",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NetworkingAndAsyncEcosystemQuiz",
@@ -93410,7 +93410,7 @@
     },
     {
       "@id": "_:rel6646",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:GlommioAndThreadPerCoreAsyncRuntimes",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NetworkingAndAsyncEcosystemQuiz",
@@ -93470,7 +93470,7 @@
     },
     {
       "@id": "_:rel6651",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkProtocols",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NetworkingAndAsyncEcosystemQuiz",
@@ -94430,7 +94430,7 @@
     },
     {
       "@id": "_:rel6731",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DatabaseAccess",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DatabaseAndStorageEcosystemQuiz",
@@ -94562,7 +94562,7 @@
     },
     {
       "@id": "_:rel6742",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DatabaseAccess_06dataanddis",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DatabaseAndStorageEcosystemQuiz",
@@ -95066,7 +95066,7 @@
     },
     {
       "@id": "_:rel6784",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SecurityPractices_07securityan",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SecurityAndTestingEcosystemQuiz",
@@ -95138,7 +95138,7 @@
     },
     {
       "@id": "_:rel6790",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SecurityPractices_07securityan_1",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SecurityAndTestingEcosystemQuiz",
@@ -95258,7 +95258,7 @@
     },
     {
       "@id": "_:rel6800",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:CargoVetAndSupplyChainAuditing",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SecurityAndTestingEcosystemQuiz",
@@ -95558,7 +95558,7 @@
     },
     {
       "@id": "_:rel6825",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Testing_09testingand",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SecurityAndTestingEcosystemQuiz",
@@ -95786,7 +95786,7 @@
     },
     {
       "@id": "_:rel6844",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:BlockchainDevelopmentInRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DomainApplicationsEcosystemQuiz",
@@ -95954,7 +95954,7 @@
     },
     {
       "@id": "_:rel6858",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:GameDevelopment",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DomainApplicationsEcosystemQuiz",
@@ -96062,7 +96062,7 @@
     },
     {
       "@id": "_:rel6867",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:WebAssembly_11domainappl",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DomainApplicationsEcosystemQuiz",
@@ -96350,7 +96350,7 @@
     },
     {
       "@id": "_:rel6891",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AlgorithmsCompetitiveProgramming",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DomainApplicationsEcosystemQuiz",
@@ -96410,7 +96410,7 @@
     },
     {
       "@id": "_:rel6896",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:MachineLearningEcosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DomainApplicationsEcosystemQuiz",
@@ -96638,7 +96638,7 @@
     },
     {
       "@id": "_:rel6915",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustInQuantumComputingEcosystems",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DomainApplicationsEcosystemQuiz",
@@ -96938,7 +96938,7 @@
     },
     {
       "@id": "_:rel6940",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AUTOSARAndRust",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DomainApplicationsEcosystemQuiz",
@@ -97370,7 +97370,7 @@
     },
     {
       "@id": "_:rel6976",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingTopicIndex",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AdvancedNetworkProtocolsInRust",
@@ -97382,7 +97382,7 @@
     },
     {
       "@id": "_:rel6977",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingTopicIndex",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NetworkSecurityInRust",
@@ -97394,7 +97394,7 @@
     },
     {
       "@id": "_:rel6978",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingTopicIndex",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CustomNetworkProtocolImplementationInRust",
@@ -97406,7 +97406,7 @@
     },
     {
       "@id": "_:rel6979",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingTopicIndex",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustNetworkProgrammingQuickStart",
@@ -97418,7 +97418,7 @@
     },
     {
       "@id": "_:rel6980",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingTopicIndex",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalNetworkProtocolTheory",
@@ -97430,7 +97430,7 @@
     },
     {
       "@id": "_:rel6981",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingTopicIndex",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NetworkingBasics",
@@ -97442,7 +97442,7 @@
     },
     {
       "@id": "_:rel6982",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingAndAsyncEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:WebFrameworks",
@@ -97454,7 +97454,7 @@
     },
     {
       "@id": "_:rel6983",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingAndAsyncEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:GlommioAndThreadPerCoreAsyncRuntimes",
@@ -97466,7 +97466,7 @@
     },
     {
       "@id": "_:rel6984",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingAndAsyncEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NetworkProtocols",
@@ -97478,7 +97478,7 @@
     },
     {
       "@id": "_:rel6985",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingAndAsyncEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:HighPerformanceNetworkServiceArchitecture",
@@ -97490,7 +97490,7 @@
     },
     {
       "@id": "_:rel6986",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingAndAsyncEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NetworkSecurityInRust",
@@ -97502,7 +97502,7 @@
     },
     {
       "@id": "_:rel6987",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingAndAsyncEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NetworkingBasics",
@@ -97514,7 +97514,7 @@
     },
     {
       "@id": "_:rel6988",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingAndAsyncEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:WebSocketRealTimeCommunication",
@@ -97526,7 +97526,7 @@
     },
     {
       "@id": "_:rel6989",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:NetworkingAndAsyncEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CustomNetworkProtocolImplementationInRust",
@@ -97538,7 +97538,7 @@
     },
     {
       "@id": "_:rel6990",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DatabaseAndStorageEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DatabaseAccess",
@@ -97550,7 +97550,7 @@
     },
     {
       "@id": "_:rel6991",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DatabaseAndStorageEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DatabaseAccess_06dataanddis",
@@ -97562,7 +97562,7 @@
     },
     {
       "@id": "_:rel6992",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DatabaseAndStorageEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DistributedConsensus",
@@ -97574,7 +97574,7 @@
     },
     {
       "@id": "_:rel6993",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DatabaseAndStorageEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CRDTTypeZooStateBasedOpBasedAndTheMergeLattice",
@@ -97586,7 +97586,7 @@
     },
     {
       "@id": "_:rel6994",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DatabaseAndStorageEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CausalOrderingAndVectorClocks",
@@ -97598,7 +97598,7 @@
     },
     {
       "@id": "_:rel6995",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SecurityAndTestingEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SecurityPractices_07securityan_1",
@@ -97610,7 +97610,7 @@
     },
     {
       "@id": "_:rel6996",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SecurityAndTestingEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SecurityPractices_07securityan",
@@ -97622,7 +97622,7 @@
     },
     {
       "@id": "_:rel6997",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SecurityAndTestingEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CargoVetAndSupplyChainAuditing",
@@ -97634,7 +97634,7 @@
     },
     {
       "@id": "_:rel6998",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SecurityAndTestingEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Testing_09testingand",
@@ -97646,7 +97646,7 @@
     },
     {
       "@id": "_:rel6999",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SecurityAndTestingEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Testing_09testingand_1",
@@ -97658,7 +97658,7 @@
     },
     {
       "@id": "_:rel7000",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:SecurityAndTestingEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:BenchmarkingWithCriterionInRust",
@@ -97670,7 +97670,7 @@
     },
     {
       "@id": "_:rel7001",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DomainApplicationsEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:BlockchainDevelopmentInRust",
@@ -97682,7 +97682,7 @@
     },
     {
       "@id": "_:rel7002",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DomainApplicationsEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:WebAssembly_11domainappl",
@@ -97694,7 +97694,7 @@
     },
     {
       "@id": "_:rel7003",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DomainApplicationsEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:GameDevelopment",
@@ -97706,7 +97706,7 @@
     },
     {
       "@id": "_:rel7004",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DomainApplicationsEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MachineLearningEcosystem",
@@ -97718,7 +97718,7 @@
     },
     {
       "@id": "_:rel7005",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DomainApplicationsEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AUTOSARAndRust",
@@ -97730,7 +97730,7 @@
     },
     {
       "@id": "_:rel7006",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DomainApplicationsEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustInQuantumComputingEcosystems",
@@ -97742,7 +97742,7 @@
     },
     {
       "@id": "_:rel7007",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:DomainApplicationsEcosystemQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AlgorithmsCompetitiveProgramming",
@@ -97754,7 +97754,7 @@
     },
     {
       "@id": "_:rel7008",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Toolchain",
@@ -97766,7 +97766,7 @@
     },
     {
       "@id": "_:rel7009",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DesignPatterns",
@@ -97778,7 +97778,7 @@
     },
     {
       "@id": "_:rel7010",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CoreCrates",
@@ -97790,7 +97790,7 @@
     },
     {
       "@id": "_:rel7011",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ApplicationDomains",
@@ -97802,7 +97802,7 @@
     },
     {
       "@id": "_:rel7012",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_08formalveri",
@@ -97814,7 +97814,7 @@
     },
     {
       "@id": "_:rel7013",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:BlockchainDevelopmentInRust",
@@ -97826,7 +97826,7 @@
     },
     {
       "@id": "_:rel7014",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:GameDevelopment",
@@ -97838,7 +97838,7 @@
     },
     {
       "@id": "_:rel7015",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:WebAssembly",
@@ -97850,7 +97850,7 @@
     },
     {
       "@id": "_:rel7016",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:WebAssembly_11domainappl",
@@ -97862,7 +97862,7 @@
     },
     {
       "@id": "_:rel7017",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:LoggingObservability",
@@ -97874,7 +97874,7 @@
     },
     {
       "@id": "_:rel7018",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Documentation",
@@ -97886,7 +97886,7 @@
     },
     {
       "@id": "_:rel7019",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:PerformanceOptimization",
@@ -97898,7 +97898,7 @@
     },
     {
       "@id": "_:rel7020",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Testing_09testingand_1",
@@ -97910,7 +97910,7 @@
     },
     {
       "@id": "_:rel7021",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CrossCompilation",
@@ -97922,7 +97922,7 @@
     },
     {
       "@id": "_:rel7022",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DistributedSystems",
@@ -97934,7 +97934,7 @@
     },
     {
       "@id": "_:rel7023",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MicroservicePatterns",
@@ -97946,7 +97946,7 @@
     },
     {
       "@id": "_:rel7024",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:EventDrivenArchitecture",
@@ -97958,7 +97958,7 @@
     },
     {
       "@id": "_:rel7025",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CqrsEventSourcing",
@@ -97970,7 +97970,7 @@
     },
     {
       "@id": "_:rel7026",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ReactiveProgramming",
@@ -97982,7 +97982,7 @@
     },
     {
       "@id": "_:rel7027",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DesignPatterns_03designpatt",
@@ -97994,7 +97994,7 @@
     },
     {
       "@id": "_:rel7028",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_03designpatt",
@@ -98006,7 +98006,7 @@
     },
     {
       "@id": "_:rel7029",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DesignPatterns_03designpatt_2",
@@ -98018,7 +98018,7 @@
     },
     {
       "@id": "_:rel7030",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SecurityPractices_07securityan_1",
@@ -98030,7 +98030,7 @@
     },
     {
       "@id": "_:rel7031",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustCompilerInternalsAndDriverArchitecture",
@@ -98042,7 +98042,7 @@
     },
     {
       "@id": "_:rel7032",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:StreamProcessingEcosystem",
@@ -98054,7 +98054,7 @@
     },
     {
       "@id": "_:rel7033",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DatabaseAccess_06dataanddis",
@@ -98066,7 +98066,7 @@
     },
     {
       "@id": "_:rel7034",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NetworkProtocols",
@@ -98078,7 +98078,7 @@
     },
     {
       "@id": "_:rel7035",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustForOperatingSystemKernelDevelopment",
@@ -98090,7 +98090,7 @@
     },
     {
       "@id": "_:rel7036",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:IdiomsSpectrum",
@@ -98102,7 +98102,7 @@
     },
     {
       "@id": "_:rel7037",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SystemDesignPrinciples",
@@ -98114,7 +98114,7 @@
     },
     {
       "@id": "_:rel7038",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CargoScriptWritingAndRunningRustScripts",
@@ -98126,7 +98126,7 @@
     },
     {
       "@id": "_:rel7039",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CargoPublicTrueDependencyVisibilityAndResolverV3",
@@ -98138,7 +98138,7 @@
     },
     {
       "@id": "_:rel7040",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Testing_09testingand",
@@ -98150,7 +98150,7 @@
     },
     {
       "@id": "_:rel7041",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SecurityPractices_07securityan",
@@ -98162,7 +98162,7 @@
     },
     {
       "@id": "_:rel7042",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:LicensingAndCompliance",
@@ -98174,7 +98174,7 @@
     },
     {
       "@id": "_:rel7043",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:GameDevelopment_11domainappl",
@@ -98186,7 +98186,7 @@
     },
     {
       "@id": "_:rel7044",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:EmbeddedSystems",
@@ -98198,7 +98198,7 @@
     },
     {
       "@id": "_:rel7045",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DatabaseAccess",
@@ -98210,7 +98210,7 @@
     },
     {
       "@id": "_:rel7046",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CloudNative",
@@ -98222,7 +98222,7 @@
     },
     {
       "@id": "_:rel7047",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CLIDevelopment",
@@ -98234,7 +98234,7 @@
     },
     {
       "@id": "_:rel7048",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:GameDevelopmentMergedRedirect",
@@ -98246,7 +98246,7 @@
     },
     {
       "@id": "_:rel7049",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:WebFrameworks",
@@ -98258,7 +98258,7 @@
     },
     {
       "@id": "_:rel7050",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DevOpsAndCICD",
@@ -98270,7 +98270,7 @@
     },
     {
       "@id": "_:rel7051",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AlgorithmsCompetitiveProgramming",
@@ -98282,7 +98282,7 @@
     },
     {
       "@id": "_:rel7052",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SystemComposability",
@@ -98294,7 +98294,7 @@
     },
     {
       "@id": "_:rel7053",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Toolchain_00toolchain",
@@ -98306,7 +98306,7 @@
     },
     {
       "@id": "_:rel7054",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MachineLearningEcosystem",
@@ -98318,7 +98318,7 @@
     },
     {
       "@id": "_:rel7055",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CompilerInternals",
@@ -98330,7 +98330,7 @@
     },
     {
       "@id": "_:rel7056",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_08formalveri_1",
@@ -98342,7 +98342,7 @@
     },
     {
       "@id": "_:rel7057",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DataEngineering",
@@ -98354,7 +98354,7 @@
     },
     {
       "@id": "_:rel7058",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:IntegratingRustIntoExistingPlatformsAndCodebases",
@@ -98366,7 +98366,7 @@
     },
     {
       "@id": "_:rel7059",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:IndustrialRustAdoptionCaseStudies",
@@ -98378,7 +98378,7 @@
     },
     {
       "@id": "_:rel7060",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:GameEngineInternals",
@@ -98390,7 +98390,7 @@
     },
     {
       "@id": "_:rel7061",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DistributedConsensus",
@@ -98402,7 +98402,7 @@
     },
     {
       "@id": "_:rel7062",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustInQuantumComputingEcosystems",
@@ -98414,7 +98414,7 @@
     },
     {
       "@id": "_:rel7063",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Robotics",
@@ -98426,7 +98426,7 @@
     },
     {
       "@id": "_:rel7064",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:EmbeddedGraphicsDevelopmentWithRust",
@@ -98438,7 +98438,7 @@
     },
     {
       "@id": "_:rel7065",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AdvancedWebAssemblyDevelopmentWithRust",
@@ -98450,7 +98450,7 @@
     },
     {
       "@id": "_:rel7066",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustForDataScienceAndScientificComputing",
@@ -98462,7 +98462,7 @@
     },
     {
       "@id": "_:rel7067",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CToRustTranslation",
@@ -98474,7 +98474,7 @@
     },
     {
       "@id": "_:rel7068",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsC",
@@ -98486,7 +98486,7 @@
     },
     {
       "@id": "_:rel7069",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVsGo",
@@ -98498,7 +98498,7 @@
     },
     {
       "@id": "_:rel7070",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Readme_06ecosystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -98786,7 +98786,7 @@
     },
     {
       "@id": "_:rel7094",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustEditions",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
@@ -98930,7 +98930,7 @@
     },
     {
       "@id": "_:rel7106",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustReleaseProcess",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
@@ -99446,7 +99446,7 @@
     },
     {
       "@id": "_:rel7149",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Rust191StabilizedFeatures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Futures",
@@ -99542,7 +99542,7 @@
     },
     {
       "@id": "_:rel7157",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Rust192StabilizedFeatures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Futures",
@@ -99950,7 +99950,7 @@
     },
     {
       "@id": "_:rel7191",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Rust1970StabilizedFeatures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
@@ -102698,7 +102698,7 @@
     },
     {
       "@id": "_:rel7420",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustReleaseProcess",
@@ -102710,7 +102710,7 @@
     },
     {
       "@id": "_:rel7421",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustEditions",
@@ -102722,7 +102722,7 @@
     },
     {
       "@id": "_:rel7422",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Rust190StabilizedFeatures",
@@ -102734,7 +102734,7 @@
     },
     {
       "@id": "_:rel7423",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Rust193StabilizedFeatures",
@@ -102758,7 +102758,7 @@
     },
     {
       "@id": "_:rel7425",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems",
@@ -102770,7 +102770,7 @@
     },
     {
       "@id": "_:rel7426",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
       "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:CertifiedToolchainsAndCertifiedPackageInventory",
@@ -102782,7 +102782,7 @@
     },
     {
       "@id": "_:rel7427",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Rust191StabilizedFeatures",
@@ -102794,7 +102794,7 @@
     },
     {
       "@id": "_:rel7428",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Rust192StabilizedFeatures",
@@ -102806,7 +102806,7 @@
     },
     {
       "@id": "_:rel7429",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AUTOSARAndRust",
@@ -102818,7 +102818,7 @@
     },
     {
       "@id": "_:rel7430",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustVersionTracking",
@@ -102830,7 +102830,7 @@
     },
     {
       "@id": "_:rel7431",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AIIntegration",
@@ -102842,7 +102842,7 @@
     },
     {
       "@id": "_:rel7432",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FormalMethods_04researchan",
@@ -102854,7 +102854,7 @@
     },
     {
       "@id": "_:rel7433",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Evolution",
@@ -102866,7 +102866,7 @@
     },
     {
       "@id": "_:rel7434",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:OpenEnumsPreview",
@@ -102878,7 +102878,7 @@
     },
     {
       "@id": "_:rel7435",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust",
@@ -102890,7 +102890,7 @@
     },
     {
       "@id": "_:rel7436",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MCDCCoveragePreview",
@@ -102902,7 +102902,7 @@
     },
     {
       "@id": "_:rel7437",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SafetyTagsPreview",
@@ -102914,7 +102914,7 @@
     },
     {
       "@id": "_:rel7438",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CompilerInternals_02previewfea",
@@ -102926,7 +102926,7 @@
     },
     {
       "@id": "_:rel7439",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DeriveCoercePointeePreview",
@@ -102938,7 +102938,7 @@
     },
     {
       "@id": "_:rel7440",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConstTraitImplPreview",
@@ -102950,7 +102950,7 @@
     },
     {
       "@id": "_:rel7441",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ReturnTypeNotationPreview",
@@ -102962,7 +102962,7 @@
     },
     {
       "@id": "_:rel7442",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:UnsafeFieldsPreview",
@@ -102974,7 +102974,7 @@
     },
     {
       "@id": "_:rel7443",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems",
@@ -102986,7 +102986,7 @@
     },
     {
       "@id": "_:rel7444",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:GenBlocksPreview",
@@ -102998,7 +102998,7 @@
     },
     {
       "@id": "_:rel7445",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CompilerInternals_02previewfea_1",
@@ -103010,7 +103010,7 @@
     },
     {
       "@id": "_:rel7446",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustSpecificationPreview",
@@ -103022,7 +103022,7 @@
     },
     {
       "@id": "_:rel7447",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:AsyncDropPreview",
@@ -103034,7 +103034,7 @@
     },
     {
       "@id": "_:rel7448",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SpecializationPreview",
@@ -103046,7 +103046,7 @@
     },
     {
       "@id": "_:rel7449",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:EffectSystem",
@@ -103058,7 +103058,7 @@
     },
     {
       "@id": "_:rel7450",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:StableApplicationBinaryInterfaceABIPreview",
@@ -103070,7 +103070,7 @@
     },
     {
       "@id": "_:rel7451",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InlineConstPatternPreview",
@@ -103082,7 +103082,7 @@
     },
     {
       "@id": "_:rel7452",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Must_not_suspendLintPreview",
@@ -103094,7 +103094,7 @@
     },
     {
       "@id": "_:rel7453",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:PreciseLifetimeCaptureInImplTraitPreview",
@@ -103106,7 +103106,7 @@
     },
     {
       "@id": "_:rel7454",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ReturnPositionImplTraitInTraitsRPITITPreview",
@@ -103118,7 +103118,7 @@
     },
     {
       "@id": "_:rel7455",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:TypeAliasImplTraitTAITPreview",
@@ -103130,7 +103130,7 @@
     },
     {
       "@id": "_:rel7456",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ArbitrarySelfTypesPreview",
@@ -103142,7 +103142,7 @@
     },
     {
       "@id": "_:rel7457",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:FieldProjectionsPreview",
@@ -103154,7 +103154,7 @@
     },
     {
       "@id": "_:rel7458",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:OperatingSystems",
@@ -103166,7 +103166,7 @@
     },
     {
       "@id": "_:rel7459",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustInAI",
@@ -103178,7 +103178,7 @@
     },
     {
       "@id": "_:rel7460",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:EditionGuide",
@@ -103190,7 +103190,7 @@
     },
     {
       "@id": "_:rel7461",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:StdAutodiffPreview",
@@ -103202,7 +103202,7 @@
     },
     {
       "@id": "_:rel7462",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustEditionMechanismAndMigrationGuide",
@@ -103214,7 +103214,7 @@
     },
     {
       "@id": "_:rel7463",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Roadmap",
@@ -103226,7 +103226,7 @@
     },
     {
       "@id": "_:rel7464",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:WebAssemblyTargetEvolutionPreview",
@@ -103238,7 +103238,7 @@
     },
     {
       "@id": "_:rel7465",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CargoSemVerChecksPreview",
@@ -103250,7 +103250,7 @@
     },
     {
       "@id": "_:rel7466",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Aarch64SveSmePreview",
@@ -103262,7 +103262,7 @@
     },
     {
       "@id": "_:rel7467",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustInSpacePreview",
@@ -103274,7 +103274,7 @@
     },
     {
       "@id": "_:rel7468",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:CompileTimeExecution",
@@ -103286,7 +103286,7 @@
     },
     {
       "@id": "_:rel7469",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:WebAssembly_04researchan",
@@ -103298,7 +103298,7 @@
     },
     {
       "@id": "_:rel7470",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:EBPFRust",
@@ -103310,7 +103310,7 @@
     },
     {
       "@id": "_:rel7471",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Rust196StabilizedFeaturesCurrentPatch1961",
@@ -103322,7 +103322,7 @@
     },
     {
       "@id": "_:rel7472",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Rust1970PreviewArchive",
@@ -103334,7 +103334,7 @@
     },
     {
       "@id": "_:rel7473",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:Futures",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -103346,7 +103346,7 @@
     },
     {
       "@id": "_:rel7474",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:RustConceptKnowledgeSystem",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -103358,7 +103358,7 @@
     },
     {
       "@id": "_:rel7475",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AuthoritySourceIndex",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:InternationalAuthorityIndex",
@@ -103370,7 +103370,7 @@
     },
     {
       "@id": "_:rel7476",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:AuthoritySourceIndex",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RfcIndex",
@@ -103394,7 +103394,7 @@
     },
     {
       "@id": "_:rel7478",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:RustConceptKnowledgeSystem",
@@ -103406,7 +103406,7 @@
     },
     {
       "@id": "_:rel7479",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:ConceptMetaLayer",
@@ -103910,7 +103910,7 @@
     },
     {
       "@id": "_:rel7521",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:MetaFrameworkAndKnowledgeArchitectureQuiz",
@@ -104102,7 +104102,7 @@
     },
     {
       "@id": "_:rel7537",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:KnowledgeTopologyAtlas",
@@ -104246,7 +104246,7 @@
     },
     {
       "@id": "_:rel7549",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:Readme",
@@ -104678,7 +104678,7 @@
     },
     {
       "@id": "_:rel7585",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:Ownership_11quizzes",
@@ -104690,7 +104690,7 @@
     },
     {
       "@id": "_:rel7586",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:TypeSystem_11quizzes",
@@ -104702,7 +104702,7 @@
     },
     {
       "@id": "_:rel7587",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:ErrorHandling_11quizzes",
@@ -104714,7 +104714,7 @@
     },
     {
       "@id": "_:rel7588",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:Modules_11quizzes",
@@ -104726,7 +104726,7 @@
     },
     {
       "@id": "_:rel7589",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:Closures_11quizzes",
@@ -104738,7 +104738,7 @@
     },
     {
       "@id": "_:rel7590",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:QuizGeneralPLFoundations",
@@ -104930,7 +104930,7 @@
     },
     {
       "@id": "_:rel7606",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:Readme_02intermedia",
@@ -105326,7 +105326,7 @@
     },
     {
       "@id": "_:rel7639",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:QuizCCToRustFoundations",
@@ -105410,7 +105410,7 @@
     },
     {
       "@id": "_:rel7646",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_03advanced",
@@ -106262,7 +106262,7 @@
     },
     {
       "@id": "_:rel7717",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:FormalMethods_04formal",
@@ -106922,7 +106922,7 @@
     },
     {
       "@id": "_:rel7772",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:entails",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:entails",
       "ex:object": "ex:ConcurrencySemanticsFormalModelsOfConcurrentComputation",
@@ -106970,7 +106970,7 @@
     },
     {
       "@id": "_:rel7776",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_05comparativ",
@@ -107222,7 +107222,7 @@
     },
     {
       "@id": "_:rel7797",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Readme_06ecosystem",
@@ -108362,7 +108362,7 @@
     },
     {
       "@id": "_:rel7892",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:NetworkingAndAsyncEcosystemQuiz",
@@ -108374,7 +108374,7 @@
     },
     {
       "@id": "_:rel7893",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DatabaseAndStorageEcosystemQuiz",
@@ -108386,7 +108386,7 @@
     },
     {
       "@id": "_:rel7894",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:SecurityAndTestingEcosystemQuiz",
@@ -108398,7 +108398,7 @@
     },
     {
       "@id": "_:rel7895",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:DomainApplicationsEcosystemQuiz",
@@ -108746,7 +108746,7 @@
     },
     {
       "@id": "_:rel7924",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:Futures",
@@ -108842,7 +108842,7 @@
     },
     {
       "@id": "_:rel7932",
-      "@type": "ex:RelationAnnotation",
+      "@type": "ex:relatedTo",
       "ex:subject": "ex:TableOfContents",
       "ex:predicate": "ex:relatedTo",
       "ex:object": "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",

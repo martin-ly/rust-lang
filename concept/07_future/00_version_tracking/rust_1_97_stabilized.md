@@ -52,7 +52,9 @@ Rust 1.97.0 的变更集中在以下几类：
 判定依据：升级 1.97 后 CI 新增警告多为 `dead_code_pub_in_binary`——批量处理脚本：先删明显死代码，剩余显式 `#[allow(dead_code)]` 并注释用途。
 
 ### 2.1 `must_use` lint 扩展至 `Result<T, Uninhabited>` 与 `ControlFlow<Uninhabited, T>`
-
+>
+> **相关概念**: [01 control flow](../../01_foundation/04_control_flow/01_control_flow.md)
+> **相关概念**: [01 control flow](../../01_foundation/04_control_flow/01_control_flow.md)
 当 `Result` 的错误类型或 `ControlFlow` 的断裂类型为不可构造类型（uninhabited）时，编译器将其等价于内部成功/继续类型 `T` 来触发 `must_use` 诊断。
 
 ```rust,ignore
@@ -70,7 +72,9 @@ fn main() {
 ```
 
 ### 2.2 `dead_code_pub_in_binary` lint
-
+>
+> **相关概念**: [01 toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
+> **相关概念**: [01 toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
 新增 allow-by-default lint，用于标记二进制 crate 中未被使用的 `pub` 条目。可在 CI 中显式启用：
 
 ```rust,ignore
@@ -82,7 +86,9 @@ fn main() {}
 ```
 
 ### 2.3 新稳定 target features
-
+>
+> **相关概念**: [06 atomics and memory ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)
+> **相关概念**: [06 atomics and memory ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)
 以下 target feature 在 1.97.0 稳定（均为 **LoongArch** 目标特性，详见权威页 [`05_atomics_and_memory_ordering.md`](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) §5）：
 
 - `div32`
@@ -99,7 +105,9 @@ fn native_sub_word_cas() {
 ```
 
 ### 2.4 `cfg(target_has_atomic_primitive_alignment)`
-
+>
+> **相关概念**: [06 atomics and memory ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)
+> **相关概念**: [06 atomics and memory ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)
 新增条件编译标志，用于判断目标平台上原子类型的对齐是否等于其对应原始整数类型的对齐。
 
 ```rust,ignore
@@ -110,7 +118,9 @@ fn assumes_atomic_align() {
 ```
 
 ### 2.5 import 中 `self` 的放宽
-
+>
+> **相关概念**: [11 crates and source files](../../01_foundation/07_modules_and_items/11_crates_and_source_files.md)
+> **相关概念**: [11 crates and source files](../../01_foundation/07_modules_and_items/11_crates_and_source_files.md)
 在更多情况下允许 import 列表中以 `self` 结尾，减少语法限制。
 
 ```rust,ignore
@@ -119,7 +129,9 @@ use std::io::{self, Write};
 ```
 
 ### 2.6 `{float}` 在未约束时回退到 `f32`
-
+>
+> **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)
+> **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)
 Rust 1.97.0 调整了浮点字面量类型推断：当 `{float}`（未约束的浮点字面量）出现在需要具体类型的上下文中且未通过其他约束确定为 `f64` 时，更可能回退到 `f32`。这一变更主要影响依赖旧推断行为的代码，并会触发未来兼容性警告。
 
 ```rust,ignore
@@ -189,7 +201,9 @@ linker_messages = "allow"
 判定依据：需要 Rust 写 GPU kernel 的团队当前首选 wgpu 计算（跨厂商）；nvptx 目标适合追踪，不适合押注。
 
 ### 3.1 `nvptx64-nvidia-cuda` 基线提升
-
+>
+> **相关概念**: [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md)
+> **相关概念**: [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md)
 Rust 1.97.0 提升了 NVIDIA PTX 目标的硬件与 ISA 基线：
 
 | 维度 | 旧基线 | 新基线（1.97+） |
@@ -220,7 +234,9 @@ Rust 1.97.0 提升了 NVIDIA PTX 目标的硬件与 ISA 基线：
 迁移建议：整数位查询与 `is_control` 两项可直接替换存量手写实现，属于零风险收益；UEFI 相关项仅影响该 target 的项目。
 
 ### 4.1 `Default for RepeatN`
-
+>
+> **相关概念**: [01 iterator patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
+> **相关概念**: [01 iterator patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
 `std::iter::RepeatN`（`std::iter::repeat_n` 的返回类型）现在实现 `Default`，可构造空迭代器。
 
 ```rust,ignore
@@ -231,7 +247,9 @@ assert_eq!(empty.count(), 0);
 ```
 
 ### 4.2 `Copy for ffi::FromBytesUntilNulError`
-
+>
+> **相关概念**: [01 rust ffi](../../03_advanced/04_ffi/01_rust_ffi.md)
+> **相关概念**: [01 rust ffi](../../03_advanced/04_ffi/01_rust_ffi.md)
 `std::ffi::FromBytesUntilNulError` 现在实现 `Copy`，可在不移动所有权的情况下复制错误值。
 
 ```rust,ignore
@@ -245,11 +263,15 @@ let _ = e;  // 仍可再次使用
 ```
 
 ### 4.3 `Send for std::fs::File` on UEFI
-
+>
+> **相关概念**: [03 embedded systems](../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md)
+> **相关概念**: [03 embedded systems](../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md)
 在 UEFI 目标（如 `x86_64-unknown-uefi`）上，`std::fs::File` 现在实现 `Send`。
 
 ### 4.4 整数位查询方法
-
+>
+> **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)
+> **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)
 所有整数类型（`u8` 到 `u128`、`i8` 到 `i128`、`usize`、`isize`）新增：
 
 | 方法 | 返回值 | 说明 |
@@ -274,7 +296,9 @@ assert_eq!(0b0_u32.highest_one(), None);
 ```
 
 ### 4.5 `NonZero` 位查询方法
-
+>
+> **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)
+> **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)
 `NonZero<{integer}>` 同步新增对应方法。由于输入保证非零，`isolate_*` 与 `bit_width` 返回 `NonZero<{integer}>` / `NonZero<u32>`（`bit_width` 至少为 1），`highest_one` / `lowest_one` 返回 `u32`。
 
 ```rust,ignore
@@ -290,6 +314,9 @@ assert_eq!(n.bit_width().get(), 7); // bit_width 返回 NonZeroU32
 ```
 
 ### 4.6 `char::is_control` 在 const 上下文稳定
+>
+> **相关概念**: [01 strings and text](../../01_foundation/06_strings_and_text/01_strings_and_text.md)
+> **相关概念**: [01 strings and text](../../01_foundation/06_strings_and_text/01_strings_and_text.md)
 
 ```rust,ignore
 const BELL: char = '\u{0007}';
@@ -350,7 +377,9 @@ lockfile-path = "Cargo.lock"
 `cargo clean --target-dir <dir>` 现在会在 `<dir>` 看起来不像 Cargo target 目录时报错，防止误删其他目录。
 
 ### 5.4 `-m` 简写
-
+>
+> **相关概念**: [19 cargo commands reference](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md)
+> **相关概念**: [19 cargo commands reference](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md)
 `cargo -m <path>` 等价于 `cargo --manifest-path <path>`。
 
 ```bash
@@ -375,7 +404,9 @@ Cargo 内部 `crates-io` crate 不再依赖 `curl`，减少构建依赖与平台
 两项均为向后兼容的纯增量：不使用的项目无任何迁移负担。使用场景判断：若 CI 中有独立的 `cargo doc` 阶段且只消费 JSON 或链接检查，`--emit` 值得启用；若文档站托管路径含敏感信息，`--remap-path-prefix` 应纳入发布流程。
 
 ### 6.1 `--emit` 标志
-
+>
+> **相关概念**: [07 rustdoc 196 changes](../../06_ecosystem/00_toolchain/07_rustdoc_196_changes.md)
+> **相关概念**: [07 rustdoc 196 changes](../../06_ecosystem/00_toolchain/07_rustdoc_196_changes.md)
 `rustdoc --emit` 输出格式控制正式稳定。stable 取值为 `html-static-files`、`html-non-static-files`、`dep-info`（注意没有 `html` 值，`--emit=html` 会报 `unrecognized emission type`）：
 
 ```bash

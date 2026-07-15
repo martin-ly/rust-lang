@@ -202,6 +202,13 @@ mod example {
 
 ---
 
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.94](../../07_future/00_version_tracking/rust_1_94_stabilized.md)**
+  - std 宏改为经 prelude 导入（兼容性变更）
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

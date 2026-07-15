@@ -2156,6 +2156,13 @@ mod internal {
 | 批量生成相似 impl | `macro_rules!` 重复模式 | §5.1 决策树 | 可用泛型 + blanket impl 替代时优先后者 |
 | 宏内标识符与外部冲突 | 声明宏自动卫生（gensym） | §3.1 卫生宏形式化 | 过程宏手动构造标识符 ⟹ 需正确处理 span |
 
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.96](../../07_future/00_version_tracking/rust_1_96_stabilized.md)**
+  - `expr` metavariable 传入 `cfg`（§1.2）
+
 ## 相关概念链接
 
 - **上层概念**: 无（入口概念，无前置依赖）

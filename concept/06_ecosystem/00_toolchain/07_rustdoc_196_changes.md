@@ -51,6 +51,7 @@
     - [7.3 典型应用场景](#73-典型应用场景)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
 
 ---
 
@@ -357,3 +358,10 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Rustdoc 1 96 1 97 变更」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.97](../../07_future/00_version_tracking/rust_1_97_stabilized.md)**
+  - `--emit` 标志

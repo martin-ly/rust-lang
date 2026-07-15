@@ -75,6 +75,7 @@ mindmap
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [十四、边界测试：集合的编译错误](#十四边界测试集合的编译错误)
@@ -514,6 +515,15 @@ graph TD
 | [Wikipedia — B-tree](https://en.wikipedia.org/wiki/B-tree) | ✅ 三级 | B-Tree 理论 |
 
 ---
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.93](../../07_future/00_version_tracking/rust_1_93_stabilized.md)**
+  - `<[T]>::as_array` / `as_mut_array`
+- **[Rust 1.95](../../07_future/00_version_tracking/rust_1_95_stabilized.md)**
+  - `Vec::push_mut` 等可变引用插入（§2.3）
 
 ## 相关概念
 

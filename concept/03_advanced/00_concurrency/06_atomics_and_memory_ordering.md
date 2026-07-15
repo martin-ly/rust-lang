@@ -52,6 +52,7 @@
     - [4.5 边界测试：`Ordering::Relaxed` 导致逻辑错误（编译通过但语义错误）](#45-边界测试orderingrelaxed-导致逻辑错误编译通过但语义错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [判定表：内存序选择判定](#判定表内存序选择判定)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [相关概念](#相关概念)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
@@ -737,6 +738,16 @@ fn fixed() {
 | 多生产者单消费者 | `Release` 写 / `Acquire` 读 | §2.2 决策树 | — |
 | 全局顺序敏感或不确定 | `SeqCst` | §2.2「不确定 → SeqCst」 | 性能瓶颈经 profile 证实后才降级 |
 | 选型总原则 | 从 `SeqCst` 开始，瓶颈证实后再降级 | §2.2 选择洞察 | 盲目降级 ⟹ 弱序 bug 极难复现 |
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.91](../../07_future/00_version_tracking/rust_1_91_stabilized.md)**
+  - `AtomicPtr::fetch_ptr_add/sub`、`fetch_or/and/xor`
+- **[Rust 1.97](../../07_future/00_version_tracking/rust_1_97_stabilized.md)**
+  - 新稳定 target features
+  - `cfg(target_has_atomic_primitive_alignment)`
 
 ## 相关概念
 

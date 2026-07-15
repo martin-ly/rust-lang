@@ -1,0 +1,1018 @@
+{
+  "total": 74,
+  "mapped_count": 74,
+  "unmapped_count": 0,
+  "coverage_rate": 100.0,
+  "features": [
+    {
+      "version": "1.90",
+      "filename": "rust_1_90_stabilized.md",
+      "feature": "`x86_64-unknown-linux-gnu` 默认使用 lld 链接器",
+      "row": "| `x86_64-unknown-linux-gnu` 默认使用 lld 链接器 | 编译器 / 链接 | Linux 构建提速、降低链接内存占用 | [Release Blog](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/) · [linkage](../../03_advanced/04_ffi/03_linkage.md) · [03 linkage](../../03_advanced/04_ffi/03_linkage.md) |",
+      "normalized": "xunknownlinuxgnu默认使用lld链接器",
+      "concept_links": [
+        "03_advanced/04_ffi/03_linkage.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/04_ffi/03_linkage.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.90",
+      "filename": "rust_1_90_stabilized.md",
+      "feature": "`u{N}::{checked,overflowing,saturating,wrapping}_sub_signed`",
+      "row": "| `u{N}::{checked,overflowing,saturating,wrapping}_sub_signed` | 标准库 / 整数 | 无符号-有符号混合减法的溢出可控语义 | [releases.rs](https://releases.rs/docs/1.90.0/) |",
+      "normalized": "u{n}::{checked,overflowing,saturating,wrapping}subsigned",
+      "concept_links": [],
+      "backlink_mentions": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.90",
+      "filename": "rust_1_90_stabilized.md",
+      "feature": "`CStr` / `CString` / `Cow<CStr>` 互比",
+      "row": "| `CStr` / `CString` / `Cow<CStr>` 互比 | 标准库 / FFI | C 字符串互操作无需手动转换 | [releases.rs](https://releases.rs/docs/1.90.0/) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [01 rust ffi](../../03_advanced/04_ffi/01_rust_ffi.md) |",
+      "normalized": "cstrcstringcow<cstr>互比",
+      "concept_links": [
+        "03_advanced/04_ffi/01_rust_ffi.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/04_ffi/01_rust_ffi.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.90",
+      "filename": "rust_1_90_stabilized.md",
+      "feature": "`f32`/`f64` `floor`/`ceil`/`trunc`/`fract`/`round`/`round_ties_even` 进入 const",
+      "row": "| `f32`/`f64` `floor`/`ceil`/`trunc`/`fract`/`round`/`round_ties_even` 进入 const | const 上下文 / 数值 | const 数值计算与查找表生成 | [releases.rs](https://releases.rs/docs/1.90.0/) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) |",
+      "normalized": "fffloorceiltruncfractroundroundtieseven进入const",
+      "concept_links": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.90",
+      "filename": "rust_1_90_stabilized.md",
+      "feature": "Cargo 多包发布稳定（multi-package publishing）",
+      "row": "| Cargo 多包发布稳定（multi-package publishing） | Cargo | workspace 一键发布多个 crate | [releases.rs](https://releases.rs/docs/1.90.0/) · [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) · [19 cargo commands reference](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) |",
+      "normalized": "cargo多包发布稳定",
+      "concept_links": [
+        "06_ecosystem/01_cargo/19_cargo_commands_reference.md"
+      ],
+      "backlink_mentions": [
+        "06_ecosystem/01_cargo/19_cargo_commands_reference.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.90",
+      "filename": "rust_1_90_stabilized.md",
+      "feature": "`x86_64-apple-darwin` 降为 Tier 2（含 host tools）",
+      "row": "| `x86_64-apple-darwin` 降为 Tier 2（含 host tools） | 平台 | Intel macOS CI/构建策略调整 | [releases.rs](https://releases.rs/docs/1.90.0/) · [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) · [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) |",
+      "normalized": "xappledarwin降为tier",
+      "concept_links": [
+        "06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md"
+      ],
+      "backlink_mentions": [
+        "06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.91",
+      "filename": "rust_1_91_stabilized.md",
+      "feature": "C 风格可变参数函数稳定（`sysv64`/`win64`/`efiapi`/`aapcs` ABI）",
+      "row": "| C 风格可变参数函数稳定（`sysv64`/`win64`/`efiapi`/`aapcs` ABI） | 语言 / FFI | 直接声明 C variadic 接口（如 `printf` 风格绑定） | [Release Blog](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [01 rust ffi](../../03_advanced/04_ffi/01_rust_ffi.md) |",
+      "normalized": "c风格可变参数函数稳定",
+      "concept_links": [
+        "03_advanced/04_ffi/01_rust_ffi.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/04_ffi/01_rust_ffi.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.91",
+      "filename": "rust_1_91_stabilized.md",
+      "feature": "`dangling_pointers_from_locals` lint",
+      "row": "| `dangling_pointers_from_locals` lint | 语言 / lint | 局部变量悬挂指针编译期预警 | [releases.rs](https://releases.rs/docs/1.91.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [01 unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |",
+      "normalized": "danglingpointersfromlocalslint",
+      "concept_links": [
+        "03_advanced/02_unsafe/01_unsafe.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/02_unsafe/01_unsafe.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.91",
+      "filename": "rust_1_91_stabilized.md",
+      "feature": "`{integer}::strict_*` 系列方法",
+      "row": "| `{integer}::strict_*` 系列方法 | 标准库 / 整数 | 严格溢出语义（溢出即 panic），可移植位精确算法 | [releases.rs](https://releases.rs/docs/1.91.0/) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) |",
+      "normalized": "{integer}::strict系列方法",
+      "concept_links": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.91",
+      "filename": "rust_1_91_stabilized.md",
+      "feature": "`AtomicPtr::fetch_ptr_add/sub`、`fetch_or/and/xor`",
+      "row": "| `AtomicPtr::fetch_ptr_add/sub`、`fetch_or/and/xor` | 标准库 / 并发 | 无锁指针算术与位掩码原子操作 | [releases.rs](https://releases.rs/docs/1.91.0/) · [原子与内存序](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) · [06 atomics and memory ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) |",
+      "normalized": "atomicptr::fetchptraddsub、fetchorandxor",
+      "concept_links": [
+        "03_advanced/00_concurrency/06_atomics_and_memory_ordering.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/00_concurrency/06_atomics_and_memory_ordering.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.91",
+      "filename": "rust_1_91_stabilized.md",
+      "feature": "`ptr::with_exposed_provenance(_mut)`",
+      "row": "| `ptr::with_exposed_provenance(_mut)` | 内存模型 / unsafe | 指针来源（provenance）显式暴露，整数↔指针往返 | [releases.rs](https://releases.rs/docs/1.91.0/) · [内存模型](../../03_advanced/02_unsafe/06_memory_model.md) |",
+      "normalized": "ptr::withexposedprovenance",
+      "concept_links": [
+        "03_advanced/02_unsafe/06_memory_model.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/02_unsafe/06_memory_model.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.91",
+      "filename": "rust_1_91_stabilized.md",
+      "feature": "Cargo `build.build-dir` 稳定",
+      "row": "| Cargo `build.build-dir` 稳定 | Cargo | 中间构建产物目录自定义（与 `target-dir` 分离） | [releases.rs](https://releases.rs/docs/1.91.0/) · [Cargo 配置](../../06_ecosystem/01_cargo/18_cargo_configuration.md) · [18 cargo configuration](../../06_ecosystem/01_cargo/18_cargo_configuration.md) |",
+      "normalized": "cargobuildbuilddir稳定",
+      "concept_links": [
+        "06_ecosystem/01_cargo/18_cargo_configuration.md"
+      ],
+      "backlink_mentions": [
+        "06_ecosystem/01_cargo/18_cargo_configuration.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.91",
+      "filename": "rust_1_91_stabilized.md",
+      "feature": "内部升级 LLVM 21",
+      "row": "| 内部升级 LLVM 21 | 编译器内部 | 新优化通道与目标支持 | [releases.rs](https://releases.rs/docs/1.91.0/) · [09 llvm backend and codegen](../../06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md) · [09 llvm backend and codegen](../../06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md) |",
+      "normalized": "内部升级llvm",
+      "concept_links": [
+        "06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md"
+      ],
+      "backlink_mentions": [
+        "06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.92",
+      "filename": "rust_1_92_stabilized.md",
+      "feature": "`MaybeUninit` 表示与有效性正式文档化",
+      "row": "| `MaybeUninit` 表示与有效性正式文档化 | unsafe / 内存模型 | 未初始化内存读写的契约边界明确化 | [Release Blog](https://blog.rust-lang.org/2025/12/11/Rust-1.92.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [01 unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |",
+      "normalized": "maybeuninit表示与有效性正式文档化",
+      "concept_links": [
+        "03_advanced/02_unsafe/01_unsafe.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/02_unsafe/01_unsafe.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.92",
+      "filename": "rust_1_92_stabilized.md",
+      "feature": "安全代码允许对联合体字段取 `&raw const/mut`",
+      "row": "| 安全代码允许对联合体字段取 `&raw const/mut` | 语言 / unsafe | 联合体字段取地址不再要求 unsafe 块 | [releases.rs](https://releases.rs/docs/1.92.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [01 unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |",
+      "normalized": "安全代码允许对联合体字段取&rawconstmut",
+      "concept_links": [
+        "03_advanced/02_unsafe/01_unsafe.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/02_unsafe/01_unsafe.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.92",
+      "filename": "rust_1_92_stabilized.md",
+      "feature": "同一关联项允许多个边界（trait 对象除外）",
+      "row": "| 同一关联项允许多个边界（trait 对象除外） | 类型系统 | 关联类型约束的多边界表达 | [releases.rs](https://releases.rs/docs/1.92.0/) · [类型系统](../../01_foundation/02_type_system/01_type_system.md) · [01 traits](../../02_intermediate/00_traits/01_traits.md) · [01 traits](../../02_intermediate/00_traits/01_traits.md) |",
+      "normalized": "同一关联项允许多个边界",
+      "concept_links": [
+        "01_foundation/02_type_system/01_type_system.md",
+        "02_intermediate/00_traits/01_traits.md"
+      ],
+      "backlink_mentions": [],
+      "mapped": true
+    },
+    {
+      "version": "1.92",
+      "filename": "rust_1_92_stabilized.md",
+      "feature": "`Box/Rc/Arc::new_zeroed(_slice)`",
+      "row": "| `Box/Rc/Arc::new_zeroed(_slice)` | 标准库 / 内存 | 零初始化堆分配（大缓冲、FFI 清零语义） | [releases.rs](https://releases.rs/docs/1.92.0/) |",
+      "normalized": "boxrcarc::newzeroed",
+      "concept_links": [],
+      "backlink_mentions": [
+        "03_advanced/02_unsafe/01_unsafe.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.92",
+      "filename": "rust_1_92_stabilized.md",
+      "feature": "`RwLockWriteGuard::downgrade`",
+      "row": "| `RwLockWriteGuard::downgrade` | 标准库 / 并发 | 写锁降级为读锁，避免读-写死锁 | [releases.rs](https://releases.rs/docs/1.92.0/) · [并发模式](../../03_advanced/00_concurrency/03_concurrency_patterns.md) |",
+      "normalized": "rwlockwriteguard::downgrade",
+      "concept_links": [
+        "03_advanced/00_concurrency/03_concurrency_patterns.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/00_concurrency/03_concurrency_patterns.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.92",
+      "filename": "rust_1_92_stabilized.md",
+      "feature": "`iter::Repeat::last/count` 改为 panic（兼容性变更）",
+      "row": "| `iter::Repeat::last/count` 改为 panic（兼容性变更） | 标准库 / 兼容 | 消除无限循环陷阱，暴露逻辑错误 | [releases.rs](https://releases.rs/docs/1.92.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [01 iterator patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |",
+      "normalized": "iter::repeat::lastcount改为panic",
+      "concept_links": [
+        "02_intermediate/07_iterators_and_closures/01_iterator_patterns.md"
+      ],
+      "backlink_mentions": [
+        "02_intermediate/07_iterators_and_closures/01_iterator_patterns.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.92",
+      "filename": "rust_1_92_stabilized.md",
+      "feature": "`Location::file_as_c_str`",
+      "row": "| `Location::file_as_c_str` | 标准库 | 零分配获取 panic 位置文件名（嵌入式/FFI 日志） | [releases.rs](https://releases.rs/docs/1.92.0/) · [03 panic](../../02_intermediate/03_error_handling/03_panic.md) · [03 panic](../../02_intermediate/03_error_handling/03_panic.md) |",
+      "normalized": "location::fileascstr",
+      "concept_links": [
+        "02_intermediate/03_error_handling/03_panic.md"
+      ],
+      "backlink_mentions": [
+        "02_intermediate/03_error_handling/03_panic.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.93",
+      "filename": "rust_1_93_stabilized.md",
+      "feature": "`asm_cfg` 稳定",
+      "row": "| `asm_cfg` 稳定 | 语言 / 内联汇编 | `#[cfg]` 驱动的汇编分支编译期选择 | [releases.rs](https://releases.rs/docs/1.93.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [01 inline assembly](../../03_advanced/05_inline_assembly/01_inline_assembly.md) · [01 inline assembly](../../03_advanced/05_inline_assembly/01_inline_assembly.md) |",
+      "normalized": "asmcfg稳定",
+      "concept_links": [
+        "03_advanced/02_unsafe/01_unsafe.md",
+        "03_advanced/05_inline_assembly/01_inline_assembly.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/05_inline_assembly/01_inline_assembly.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.93",
+      "filename": "rust_1_93_stabilized.md",
+      "feature": "`system` ABI C 风格可变参数函数稳定",
+      "row": "| `system` ABI C 风格可变参数函数稳定 | 语言 / FFI | 全主流 ABI 的 variadic 声明能力 | [releases.rs](https://releases.rs/docs/1.93.0/) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [01 rust ffi](../../03_advanced/04_ffi/01_rust_ffi.md) |",
+      "normalized": "systemabic风格可变参数函数稳定",
+      "concept_links": [
+        "03_advanced/04_ffi/01_rust_ffi.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/04_ffi/01_rust_ffi.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.93",
+      "filename": "rust_1_93_stabilized.md",
+      "feature": "`MaybeUninit` 切片 API（`assume_init_ref/mut`、`write_copy/clone_of_slice`、`assume_init_drop`）",
+      "row": "| `MaybeUninit` 切片 API（`assume_init_ref/mut`、`write_copy/clone_of_slice`、`assume_init_drop`） | unsafe / 内存 | 部分初始化缓冲区的安全读写（见 §3.1） | [releases.rs](https://releases.rs/docs/1.93.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [01 unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |",
+      "normalized": "maybeuninit切片api",
+      "concept_links": [
+        "03_advanced/02_unsafe/01_unsafe.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/02_unsafe/01_unsafe.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.93",
+      "filename": "rust_1_93_stabilized.md",
+      "feature": "`String::into_raw_parts` / `Vec::into_raw_parts`",
+      "row": "| `String::into_raw_parts` / `Vec::into_raw_parts` | 标准库 / FFI | 堆缓冲区跨边界零拷贝移交（见 §3.2） | [releases.rs](https://releases.rs/docs/1.93.0/) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) |",
+      "normalized": "string::intorawpartsvec::intorawparts",
+      "concept_links": [
+        "03_advanced/04_ffi/01_rust_ffi.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/04_ffi/01_rust_ffi.md",
+        "07_future/05_quizzes/01_quiz_version_and_preview.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.93",
+      "filename": "rust_1_93_stabilized.md",
+      "feature": "`<[T]>::as_array` / `as_mut_array`",
+      "row": "| `<[T]>::as_array` / `as_mut_array` | 标准库 | 切片↔定长数组零成本转换（见 §3.4） | [releases.rs](https://releases.rs/docs/1.93.0/) · [01 collections](../../01_foundation/05_collections/01_collections.md) · [01 collections](../../01_foundation/05_collections/01_collections.md) |",
+      "normalized": "<[t]>::asarrayasmutarray",
+      "concept_links": [
+        "01_foundation/05_collections/01_collections.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/05_collections/01_collections.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.93",
+      "filename": "rust_1_93_stabilized.md",
+      "feature": "`fmt::from_fn` / `fmt::FromFn`",
+      "row": "| `fmt::from_fn` / `fmt::FromFn` | 标准库 / 格式化 | 闭包直接实现 `Display` 等格式化 trait（见 §3.7） | [releases.rs](https://releases.rs/docs/1.93.0/) · [03 formatting and display](../../01_foundation/06_strings_and_text/03_formatting_and_display.md) · [03 formatting and display](../../01_foundation/06_strings_and_text/03_formatting_and_display.md) |",
+      "normalized": "fmt::fromfnfmt::fromfn",
+      "concept_links": [
+        "01_foundation/06_strings_and_text/03_formatting_and_display.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/06_strings_and_text/03_formatting_and_display.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.93",
+      "filename": "rust_1_93_stabilized.md",
+      "feature": "`-Cjump-tables` 稳定（原 `-Zno-jump-tables`）",
+      "row": "| `-Cjump-tables` 稳定（原 `-Zno-jump-tables`） | 编译器 | 禁用跳转表（嵌入式/侧信道缓解） | [releases.rs](https://releases.rs/docs/1.93.0/) · [01 toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [01 toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) |",
+      "normalized": "cjumptables稳定",
+      "concept_links": [
+        "06_ecosystem/00_toolchain/01_toolchain.md"
+      ],
+      "backlink_mentions": [],
+      "mapped": true
+    },
+    {
+      "version": "1.93",
+      "filename": "rust_1_93_stabilized.md",
+      "feature": "`cargo clean --workspace`",
+      "row": "| `cargo clean --workspace` | Cargo | 工作区级清理 | [releases.rs](https://releases.rs/docs/1.93.0/) · [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) · [19 cargo commands reference](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) |",
+      "normalized": "cargocleanworkspace",
+      "concept_links": [
+        "06_ecosystem/01_cargo/19_cargo_commands_reference.md"
+      ],
+      "backlink_mentions": [
+        "06_ecosystem/01_cargo/19_cargo_commands_reference.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.94",
+      "filename": "rust_1_94_stabilized.md",
+      "feature": "29 个 RISC-V target feature 稳定（含 RVA22U64 / RVA23U64 profile 大部）",
+      "row": "| 29 个 RISC-V target feature 稳定（含 RVA22U64 / RVA23U64 profile 大部） | 平台 / 编译器 | RISC-V 向量与扩展指令的可移植调用 | [Release Blog](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/) · [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) · [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) |",
+      "normalized": "个riscvtargetfeature稳定",
+      "concept_links": [
+        "06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md"
+      ],
+      "backlink_mentions": [
+        "06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.94",
+      "filename": "rust_1_94_stabilized.md",
+      "feature": "`<[T]>::array_windows`",
+      "row": "| `<[T]>::array_windows` | 标准库 / 迭代器 | 定长滑动窗口（信号处理、协议解析） | [releases.rs](https://releases.rs/docs/1.94.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |",
+      "normalized": "<[t]>::arraywindows",
+      "concept_links": [
+        "02_intermediate/07_iterators_and_closures/01_iterator_patterns.md"
+      ],
+      "backlink_mentions": [
+        "02_intermediate/07_iterators_and_closures/01_iterator_patterns.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.94",
+      "filename": "rust_1_94_stabilized.md",
+      "feature": "`LazyCell` / `LazyLock::get` / `get_mut` / `force_mut`",
+      "row": "| `LazyCell` / `LazyLock::get` / `get_mut` / `force_mut` | 标准库 | 懒初始化值的可控读写与强制求值 | [releases.rs](https://releases.rs/docs/1.94.0/) · [02 interior mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) · [02 interior mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) |",
+      "normalized": "lazycelllazylock::getgetmutforcemut",
+      "concept_links": [
+        "02_intermediate/02_memory_management/02_interior_mutability.md"
+      ],
+      "backlink_mentions": [
+        "02_intermediate/02_memory_management/02_interior_mutability.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.94",
+      "filename": "rust_1_94_stabilized.md",
+      "feature": "`f32` / `f64::mul_add`",
+      "row": "| `f32` / `f64::mul_add` | 标准库 / 数值 | 融合乘加（FMA），数值精度与性能 | [releases.rs](https://releases.rs/docs/1.94.0/) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) |",
+      "normalized": "ff::muladd",
+      "concept_links": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.94",
+      "filename": "rust_1_94_stabilized.md",
+      "feature": "`EULER_GAMMA` / `GOLDEN_RATIO` 浮点常量",
+      "row": "| `EULER_GAMMA` / `GOLDEN_RATIO` 浮点常量 | 标准库 / 数值 | 数学常量免外部 crate | [releases.rs](https://releases.rs/docs/1.94.0/) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) |",
+      "normalized": "eulergammagoldenratio浮点常量",
+      "concept_links": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.94",
+      "filename": "rust_1_94_stabilized.md",
+      "feature": "Cargo `include` 配置键稳定 + TOML v1.1 解析",
+      "row": "| Cargo `include` 配置键稳定 + TOML v1.1 解析 | Cargo | 配置文件拆分复用；清单语法升级 | [releases.rs](https://releases.rs/docs/1.94.0/) · [Cargo 配置](../../06_ecosystem/01_cargo/18_cargo_configuration.md) · [18 cargo configuration](../../06_ecosystem/01_cargo/18_cargo_configuration.md) |",
+      "normalized": "cargoinclude配置键稳定+tomlv解析",
+      "concept_links": [
+        "06_ecosystem/01_cargo/18_cargo_configuration.md"
+      ],
+      "backlink_mentions": [
+        "06_ecosystem/01_cargo/18_cargo_configuration.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.94",
+      "filename": "rust_1_94_stabilized.md",
+      "feature": "std 宏改为经 prelude 导入（兼容性变更）",
+      "row": "| std 宏改为经 prelude 导入（兼容性变更） | 兼容 / 宏 | 宏解析路径统一；glob 导入同名宏需调整 | [releases.rs](https://releases.rs/docs/1.94.0/) · [10 preludes](../../01_foundation/07_modules_and_items/10_preludes.md) · [01 attributes and macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [10 preludes](../../01_foundation/07_modules_and_items/10_preludes.md) · [01 attributes and macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) |",
+      "normalized": "std宏改为经prelude导入",
+      "concept_links": [
+        "01_foundation/07_modules_and_items/10_preludes.md",
+        "01_foundation/09_macros_basics/01_attributes_and_macros.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/07_modules_and_items/10_preludes.md",
+        "01_foundation/09_macros_basics/01_attributes_and_macros.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.95",
+      "filename": "rust_1_95_stabilized.md",
+      "feature": "`cfg_select!` 宏",
+      "row": "| `cfg_select!` 宏（§1.1） | 语言 / 条件编译 | 多分支 cfg 选择，替代嵌套 `#[cfg]` | [Release Blog](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) |",
+      "normalized": "cfgselect!宏",
+      "concept_links": [],
+      "backlink_mentions": [
+        "00_meta/knowledge_topology/01_concept_definition_atlas.md",
+        "01_foundation/09_macros_basics/01_attributes_and_macros.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.95",
+      "filename": "rust_1_95_stabilized.md",
+      "feature": "`if let` guards on match arms",
+      "row": "| `if let` guards on match arms（§1.2） | 语言 / 模式匹配 | match 守卫中的条件绑定 | [releases.rs](https://releases.rs/docs/1.95.0/) · [控制流](../../01_foundation/04_control_flow/01_control_flow.md) · [01 control flow](../../01_foundation/04_control_flow/01_control_flow.md) |",
+      "normalized": "ifletguardsonmatcharms",
+      "concept_links": [
+        "01_foundation/04_control_flow/01_control_flow.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/04_control_flow/01_control_flow.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.95",
+      "filename": "rust_1_95_stabilized.md",
+      "feature": "路径段关键字重命名导入",
+      "row": "| 路径段关键字重命名导入（§1.3） | 语言 / 模块 | `use foo::r#async as ...` 等关键字路径段 | [releases.rs](https://releases.rs/docs/1.95.0/) |",
+      "normalized": "路径段关键字重命名导入",
+      "concept_links": [],
+      "backlink_mentions": [
+        "00_meta/knowledge_topology/01_concept_definition_atlas.md",
+        "01_foundation/04_control_flow/01_control_flow.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.95",
+      "filename": "rust_1_95_stabilized.md",
+      "feature": "`core::range` 模块",
+      "row": "| `core::range` 模块（§2.1） | 标准库 | `no_std` 可用的范围类型与迭代器 | [releases.rs](https://releases.rs/docs/1.95.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |",
+      "normalized": "core::range模块",
+      "concept_links": [
+        "02_intermediate/07_iterators_and_closures/01_iterator_patterns.md"
+      ],
+      "backlink_mentions": [
+        "00_meta/knowledge_topology/01_concept_definition_atlas.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.95",
+      "filename": "rust_1_95_stabilized.md",
+      "feature": "原子 `update` / `try_update`",
+      "row": "| 原子 `update` / `try_update`（§2.2） | 标准库 / 并发 | CAS 循环的闭包化封装 | [releases.rs](https://releases.rs/docs/1.95.0/) · [原子与内存序](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) |",
+      "normalized": "原子updatetryupdate",
+      "concept_links": [
+        "03_advanced/00_concurrency/06_atomics_and_memory_ordering.md"
+      ],
+      "backlink_mentions": [
+        "00_meta/knowledge_topology/01_concept_definition_atlas.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.95",
+      "filename": "rust_1_95_stabilized.md",
+      "feature": "`Vec::push_mut` 等可变引用插入",
+      "row": "| `Vec::push_mut` 等可变引用插入（§2.3） | 标准库 | 插入即得 `&mut`，原地构造 | [releases.rs](https://releases.rs/docs/1.95.0/) · [01 collections](../../01_foundation/05_collections/01_collections.md) · [01 collections](../../01_foundation/05_collections/01_collections.md) |",
+      "normalized": "vec::pushmut等可变引用插入",
+      "concept_links": [
+        "01_foundation/05_collections/01_collections.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/05_collections/01_collections.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.95",
+      "filename": "rust_1_95_stabilized.md",
+      "feature": "`as_ref_unchecked` / `as_mut_unchecked`",
+      "row": "| `as_ref_unchecked` / `as_mut_unchecked`（§2.4） | unsafe | 裸指针转引用的显式不安全操作 | [releases.rs](https://releases.rs/docs/1.95.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |",
+      "normalized": "asrefuncheckedasmutunchecked",
+      "concept_links": [
+        "03_advanced/02_unsafe/01_unsafe.md"
+      ],
+      "backlink_mentions": [
+        "00_meta/knowledge_topology/01_concept_definition_atlas.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.95",
+      "filename": "rust_1_95_stabilized.md",
+      "feature": "`--remap-path-scope` 稳定",
+      "row": "| `--remap-path-scope` 稳定（§3.1） | 编译器 / 可重现构建 | 路径重映射的作用域控制 | [releases.rs](https://releases.rs/docs/1.95.0/) · [03 linkage](../../03_advanced/04_ffi/03_linkage.md) · [03 linkage](../../03_advanced/04_ffi/03_linkage.md) |",
+      "normalized": "remappathscope稳定",
+      "concept_links": [
+        "03_advanced/04_ffi/03_linkage.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/04_ffi/03_linkage.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.96",
+      "filename": "rust_1_96_stabilized.md",
+      "feature": "`assert_matches!` / `debug_assert_matches!`",
+      "row": "| `assert_matches!` / `debug_assert_matches!`（§1.1） | 标准库 / 测试 | 模式匹配断言，替代手写 `assert!(matches!(...))` | [Release Blog](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · [assert_matches](../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md) |",
+      "normalized": "assertmatches!debugassertmatches!",
+      "concept_links": [
+        "02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md"
+      ],
+      "backlink_mentions": [
+        "07_future/05_quizzes/01_quiz_version_and_preview.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.96",
+      "filename": "rust_1_96_stabilized.md",
+      "feature": "`expr` metavariable 传入 `cfg`",
+      "row": "| `expr` metavariable 传入 `cfg`（§1.2） | 语言 / 宏 | 宏展开结果参与条件编译判定 | [releases.rs](https://releases.rs/docs/1.96.0/) · [01 macros](../../03_advanced/03_proc_macros/01_macros.md) · [01 macros](../../03_advanced/03_proc_macros/01_macros.md) |",
+      "normalized": "exprmetavariable传入cfg",
+      "concept_links": [
+        "03_advanced/03_proc_macros/01_macros.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/03_proc_macros/01_macros.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.96",
+      "filename": "rust_1_96_stabilized.md",
+      "feature": "`core::range` Copy 类型",
+      "row": "| `core::range` Copy 类型（§2.1） | 标准库 | `Range`/`RangeFrom`/`RangeToInclusive` 及迭代器 Copy 化 | [releases.rs](https://releases.rs/docs/1.96.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [01 iterator patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |",
+      "normalized": "core::rangecopy类型",
+      "concept_links": [
+        "02_intermediate/07_iterators_and_closures/01_iterator_patterns.md"
+      ],
+      "backlink_mentions": [
+        "02_intermediate/07_iterators_and_closures/01_iterator_patterns.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.96",
+      "filename": "rust_1_96_stabilized.md",
+      "feature": "`NonZero` 范围迭代",
+      "row": "| `NonZero` 范围迭代（§2.2） | 标准库 | 非零整数范围直接迭代 | [releases.rs](https://releases.rs/docs/1.96.0/) |",
+      "normalized": "nonzero范围迭代",
+      "concept_links": [],
+      "backlink_mentions": [
+        "00_meta/knowledge_topology/01_concept_definition_atlas.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.96",
+      "filename": "rust_1_96_stabilized.md",
+      "feature": "`From<T>` for `AssertUnwindSafe` / `LazyCell` / `LazyLock`",
+      "row": "| `From<T>` for `AssertUnwindSafe` / `LazyCell` / `LazyLock`（§2.3） | 标准库 | 一键构造包装类型 | [releases.rs](https://releases.rs/docs/1.96.0/) · [02 interior mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) · [02 interior mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) |",
+      "normalized": "from<t>forassertunwindsafelazycelllazylock",
+      "concept_links": [
+        "02_intermediate/02_memory_management/02_interior_mutability.md"
+      ],
+      "backlink_mentions": [
+        "02_intermediate/02_memory_management/02_interior_mutability.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.96",
+      "filename": "rust_1_96_stabilized.md",
+      "feature": "「valid for read/write」定义重构",
+      "row": "| 「valid for read/write」定义重构（§2.4） | unsafe / 内存模型 | 指针有效性契约排除 null 的统一定义 | [releases.rs](https://releases.rs/docs/1.96.0/) · [内存模型](../../03_advanced/02_unsafe/06_memory_model.md) |",
+      "normalized": "「validforreadwrite」定义重构",
+      "concept_links": [
+        "03_advanced/02_unsafe/06_memory_model.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/02_unsafe/06_memory_model.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.96",
+      "filename": "rust_1_96_stabilized.md",
+      "feature": "Cargo git + alternate registry 共存；CVE-2026-5222/5223 修复",
+      "row": "| Cargo git + alternate registry 共存；CVE-2026-5222/5223 修复（§3.1–3.2） | Cargo / 安全 | 混合源依赖解析；供应链安全修复 | [releases.rs](https://releases.rs/docs/1.96.0/) · [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) · [06 cargo dependency resolution](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) |",
+      "normalized": "cargogit+alternateregistry共存；cve修复",
+      "concept_links": [
+        "06_ecosystem/01_cargo/06_cargo_dependency_resolution.md"
+      ],
+      "backlink_mentions": [
+        "06_ecosystem/01_cargo/06_cargo_dependency_resolution.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`must_use` lint 扩展至 `Result<T, Uninhabited>` 与 `ControlFlow<Uninhabited, T>` (§2.1)",
+      "row": "### 2.1 `must_use` lint 扩展至 `Result<T, Uninhabited>` 与 `ControlFlow<Uninhabited, T>`\n> **相关概念**: [01 control flow](../../01_foundation/04_control_flow/01_control_flow.md)\n> **相关概念**: [01 control flow](../../01_foundation/04_control_flow/01_control_flow.md)",
+      "normalized": "mustuselint扩展至result<t,uninhabited>与controlflow<uninhabited,t>",
+      "concept_links": [
+        "01_foundation/04_control_flow/01_control_flow.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/04_control_flow/01_control_flow.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`dead_code_pub_in_binary` lint (§2.2)",
+      "row": "### 2.2 `dead_code_pub_in_binary` lint\n> **相关概念**: [01 toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)\n> **相关概念**: [01 toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)",
+      "normalized": "deadcodepubinbinarylint",
+      "concept_links": [
+        "06_ecosystem/00_toolchain/01_toolchain.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/07_modules_and_items/11_crates_and_source_files.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "新稳定 target features (§2.3)",
+      "row": "### 2.3 新稳定 target features\n> **相关概念**: [06 atomics and memory ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)\n> **相关概念**: [06 atomics and memory ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)",
+      "normalized": "新稳定targetfeatures",
+      "concept_links": [
+        "03_advanced/00_concurrency/06_atomics_and_memory_ordering.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/00_concurrency/06_atomics_and_memory_ordering.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`cfg(target_has_atomic_primitive_alignment)` (§2.4)",
+      "row": "### 2.4 `cfg(target_has_atomic_primitive_alignment)`\n> **相关概念**: [06 atomics and memory ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)\n> **相关概念**: [06 atomics and memory ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)",
+      "normalized": "cfg",
+      "concept_links": [
+        "03_advanced/00_concurrency/06_atomics_and_memory_ordering.md"
+      ],
+      "backlink_mentions": [],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "import 中 `self` 的放宽 (§2.5)",
+      "row": "### 2.5 import 中 `self` 的放宽\n> **相关概念**: [11 crates and source files](../../01_foundation/07_modules_and_items/11_crates_and_source_files.md)\n> **相关概念**: [11 crates and source files](../../01_foundation/07_modules_and_items/11_crates_and_source_files.md)",
+      "normalized": "import中self的放宽",
+      "concept_links": [
+        "01_foundation/07_modules_and_items/11_crates_and_source_files.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/07_modules_and_items/11_crates_and_source_files.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`{float}` 在未约束时回退到 `f32` (§2.6)",
+      "row": "### 2.6 `{float}` 在未约束时回退到 `f32`\n> **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)\n> **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)",
+      "normalized": "{float}在未约束时回退到f",
+      "concept_links": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "v0 symbol mangling 默认启用 (§2.7)",
+      "row": "### 2.7 v0 symbol mangling 默认启用\n\nRust 1.97.0 将 v0 symbol mangling 方案设为默认。该方案自 1.59 起可通过 `-C symbol-mangling-version=v0` 选择，自 2025-11 起在 nightly 默认启用，现进入 stable。",
+      "normalized": "vsymbolmangling默认启用",
+      "concept_links": [],
+      "backlink_mentions": [
+        "03_advanced/04_ffi/03_linkage.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "链接器输出默认显示 (`linker_messages` lint) (§2.8)",
+      "row": "### 2.8 链接器输出默认显示 (`linker_messages` lint)\n\n历史上 rustc 在链接成功时隐藏 linker 的 stderr 输出。Rust 1.97.0 改为默认显示链接器输出，并通过 `linker_messages` lint 以 warning 形式报告。",
+      "normalized": "链接器输出默认显示",
+      "concept_links": [],
+      "backlink_mentions": [
+        "03_advanced/04_ffi/03_linkage.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`nvptx64-nvidia-cuda` 基线提升 (§3.1)",
+      "row": "### 3.1 `nvptx64-nvidia-cuda` 基线提升\n> **相关概念**: [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md)\n> **相关概念**: [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md)",
+      "normalized": "nvptxnvidiacuda基线提升",
+      "concept_links": [
+        "06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md"
+      ],
+      "backlink_mentions": [
+        "06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`Default for RepeatN` (§4.1)",
+      "row": "### 4.1 `Default for RepeatN`\n> **相关概念**: [01 iterator patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)\n> **相关概念**: [01 iterator patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)",
+      "normalized": "defaultforrepeatn",
+      "concept_links": [
+        "02_intermediate/07_iterators_and_closures/01_iterator_patterns.md"
+      ],
+      "backlink_mentions": [
+        "02_intermediate/07_iterators_and_closures/01_iterator_patterns.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`Copy for ffi::FromBytesUntilNulError` (§4.2)",
+      "row": "### 4.2 `Copy for ffi::FromBytesUntilNulError`\n> **相关概念**: [01 rust ffi](../../03_advanced/04_ffi/01_rust_ffi.md)\n> **相关概念**: [01 rust ffi](../../03_advanced/04_ffi/01_rust_ffi.md)",
+      "normalized": "copyforffi::frombytesuntilnulerror",
+      "concept_links": [
+        "03_advanced/04_ffi/01_rust_ffi.md"
+      ],
+      "backlink_mentions": [
+        "03_advanced/04_ffi/01_rust_ffi.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`Send for std::fs::File` on UEFI (§4.3)",
+      "row": "### 4.3 `Send for std::fs::File` on UEFI\n> **相关概念**: [03 embedded systems](../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md)\n> **相关概念**: [03 embedded systems](../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md)",
+      "normalized": "sendforstd::fs::fileonuefi",
+      "concept_links": [
+        "06_ecosystem/05_systems_and_embedded/03_embedded_systems.md"
+      ],
+      "backlink_mentions": [],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "整数位查询方法 (§4.4)",
+      "row": "### 4.4 整数位查询方法\n> **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)\n> **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)",
+      "normalized": "整数位查询方法",
+      "concept_links": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`NonZero` 位查询方法 (§4.5)",
+      "row": "### 4.5 `NonZero` 位查询方法\n> **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)\n> **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)",
+      "normalized": "nonzero位查询方法",
+      "concept_links": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/02_type_system/03_numerics.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`char::is_control` 在 const 上下文稳定 (§4.6)",
+      "row": "### 4.6 `char::is_control` 在 const 上下文稳定\n> **相关概念**: [01 strings and text](../../01_foundation/06_strings_and_text/01_strings_and_text.md)\n> **相关概念**: [01 strings and text](../../01_foundation/06_strings_and_text/01_strings_and_text.md)",
+      "normalized": "char::iscontrol在const上下文稳定",
+      "concept_links": [
+        "01_foundation/06_strings_and_text/01_strings_and_text.md"
+      ],
+      "backlink_mentions": [
+        "01_foundation/06_strings_and_text/01_strings_and_text.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`build.warnings` 配置 (§5.1)",
+      "row": "### 5.1 `build.warnings` 配置\n\n`[build]` 配置新增 `warnings` 字段，可统一控制**本地包（local packages）**的 lint 警告级别，常用于 CI 强制无警告。与 `RUSTFLAGS=\"-Dwarnings\"` 不同，该配置不会使 build cache 失效，且**不影响依赖 crate**。",
+      "normalized": "buildwarnings配置",
+      "concept_links": [],
+      "backlink_mentions": [
+        "06_ecosystem/00_toolchain/01_toolchain.md",
+        "06_ecosystem/01_cargo/23_cargo_197_features.md",
+        "07_future/05_quizzes/01_quiz_version_and_preview.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`resolver.lockfile-path` 配置 (§5.2)",
+      "row": "### 5.2 `resolver.lockfile-path` 配置\n\n允许指定锁文件路径，便于只读源码目录或单仓库多 lockfile 场景。",
+      "normalized": "resolverlockfilepath配置",
+      "concept_links": [],
+      "backlink_mentions": [
+        "06_ecosystem/00_toolchain/01_toolchain.md",
+        "06_ecosystem/01_cargo/23_cargo_197_features.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`cargo-clean` 目标目录校验 (§5.3)",
+      "row": "### 5.3 `cargo-clean` 目标目录校验\n\n`cargo clean --target-dir <dir>` 现在会在 `<dir>` 看起来不像 Cargo target 目录时报错，防止误删其他目录。",
+      "normalized": "cargoclean目标目录校验",
+      "concept_links": [],
+      "backlink_mentions": [
+        "06_ecosystem/01_cargo/23_cargo_197_features.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`-m` 简写 (§5.4)",
+      "row": "### 5.4 `-m` 简写\n> **相关概念**: [19 cargo commands reference](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md)\n> **相关概念**: [19 cargo commands reference](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md)",
+      "normalized": "m简写",
+      "concept_links": [
+        "06_ecosystem/01_cargo/19_cargo_commands_reference.md"
+      ],
+      "backlink_mentions": [],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`crates-io` 移除 `curl` 依赖 (§5.5)",
+      "row": "### 5.5 `crates-io` 移除 `curl` 依赖\n\nCargo 内部 `crates-io` crate 不再依赖 `curl`，减少构建依赖与平台差异。",
+      "normalized": "cratesio移除curl依赖",
+      "concept_links": [],
+      "backlink_mentions": [
+        "06_ecosystem/01_cargo/23_cargo_197_features.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`--emit` 标志 (§6.1)",
+      "row": "### 6.1 `--emit` 标志\n> **相关概念**: [07 rustdoc 196 changes](../../06_ecosystem/00_toolchain/07_rustdoc_196_changes.md)\n> **相关概念**: [07 rustdoc 196 changes](../../06_ecosystem/00_toolchain/07_rustdoc_196_changes.md)",
+      "normalized": "emit标志",
+      "concept_links": [
+        "06_ecosystem/00_toolchain/07_rustdoc_196_changes.md"
+      ],
+      "backlink_mentions": [
+        "06_ecosystem/00_toolchain/07_rustdoc_196_changes.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`--remap-path-prefix` (§6.2)",
+      "row": "### 6.2 `--remap-path-prefix`\n\n与 `rustc` 一致，允许在生成的文档路径中替换前缀，改善可重现构建与隐私。",
+      "normalized": "remappathprefix",
+      "concept_links": [],
+      "backlink_mentions": [
+        "06_ecosystem/00_toolchain/07_rustdoc_196_changes.md",
+        "07_future/05_quizzes/01_quiz_version_and_preview.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "`pin!` 示例 (§7.1)",
+      "row": "### 7.1 `pin!` 示例\n\n```rust,ignore",
+      "normalized": "pin!示例",
+      "concept_links": [],
+      "backlink_mentions": [
+        "00_meta/knowledge_topology/04_example_counterexample_atlas.md"
+      ],
+      "mapped": true
+    },
+    {
+      "version": "1.97",
+      "filename": "rust_1_97_stabilized.md",
+      "feature": "空 `export_name` 示例 (§7.2)",
+      "row": "### 7.2 空 `export_name` 示例\n\n```rust,ignore",
+      "normalized": "空exportname示例",
+      "concept_links": [],
+      "backlink_mentions": [
+        "00_meta/knowledge_topology/04_example_counterexample_atlas.md"
+      ],
+      "mapped": true
+    }
+  ],
+  "unmapped": []
+}

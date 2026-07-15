@@ -86,6 +86,7 @@ mindmap
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：字符串与文本的编译错误](#十二边界测试字符串与文本的编译错误)
@@ -530,6 +531,13 @@ graph TD
 | [RFC 504 — CString](https://github.com/rust-lang/rfcs/pull/504) | ✅ 一级 | C 字符串 RFC |
 
 ---
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.97](../../07_future/00_version_tracking/rust_1_97_stabilized.md)**
+  - `char::is_control` 在 const 上下文稳定
 
 ## 相关概念
 

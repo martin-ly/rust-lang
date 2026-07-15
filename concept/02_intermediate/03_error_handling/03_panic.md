@@ -148,6 +148,13 @@ Panic 可以是可恢复的，也可以是不可恢复的，具体取决于 pani
 
 ---
 
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.92](../../07_future/00_version_tracking/rust_1_92_stabilized.md)**
+  - `Location::file_as_c_str`
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

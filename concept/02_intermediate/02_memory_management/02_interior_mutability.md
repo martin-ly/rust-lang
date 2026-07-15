@@ -55,6 +55,7 @@
     - [编译错误 5：`RwLock` 读锁升级写锁（死锁风险）](#编译错误-5rwlock-读锁升级写锁死锁风险)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [判定表：内部可变性选型判定](#判定表内部可变性选型判定)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [相关概念](#相关概念)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
@@ -599,6 +600,15 @@ fn correct_upgrade() {
 | 多线程、仅标量状态 | `Atomic*` 无锁 | §4.1 反命题树 ALT2 | 复合不变量 ⟹ 单个原子无法保证 |
 | 性能敏感路径 | 优先 `Cell`/原子，避免锁 | §4.1 认知功能 | 未经测量的优化 ⟹ 可能引入数据竞争 |
 | 对外暴露的 API | 内部可变性封装在模块内，暴露 safe API | 最佳实践 | `RefCell` 泄漏到公共接口 ⟹ 设计意图存疑 |
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.94](../../07_future/00_version_tracking/rust_1_94_stabilized.md)**
+  - `LazyCell` / `LazyLock::get` / `get_mut` / `force_mut`
+- **[Rust 1.96](../../07_future/00_version_tracking/rust_1_96_stabilized.md)**
+  - `From<T>` for `AssertUnwindSafe` / `LazyCell` / `LazyLock`（§2.3）
 
 ## 相关概念
 

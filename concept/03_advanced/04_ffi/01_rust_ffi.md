@@ -53,6 +53,7 @@
     - [3.5 边界测试：裸指针生命周期与 FFI 边界（编译错误）](#35-边界测试裸指针生命周期与-ffi-边界编译错误)
     - [5.1 Rust 1.97 注记：`ffi::FromBytesUntilNulError` 实现 `Copy`](#51-rust-197-注记ffifrombytesuntilnulerror-实现-copy)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [相关概念](#相关概念)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
@@ -577,6 +578,19 @@ fn demo(e: Option<FromBytesUntilNulError>) {
 | [Rust FFI Omnibus](http://jakegoulding.com/rust-ffi-omnibus/) | 🔍 三级 | FFI 实例集合 |
 
 ---
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.90](../../07_future/00_version_tracking/rust_1_90_stabilized.md)**
+  - `CStr` / `CString` / `Cow<CStr>` 互比
+- **[Rust 1.91](../../07_future/00_version_tracking/rust_1_91_stabilized.md)**
+  - C 风格可变参数函数稳定（`sysv64`/`win64`/`efiapi`/`aapcs` ABI）
+- **[Rust 1.93](../../07_future/00_version_tracking/rust_1_93_stabilized.md)**
+  - `system` ABI C 风格可变参数函数稳定
+- **[Rust 1.97](../../07_future/00_version_tracking/rust_1_97_stabilized.md)**
+  - `Copy for ffi::FromBytesUntilNulError`
 
 ## 相关概念
 

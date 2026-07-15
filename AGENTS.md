@@ -202,7 +202,7 @@ bash scripts/git_hooks/install.sh
 
 ### 5.1 CI 质量门（23 项阻断 + 4 项语义观察）
 
-所有合并到 `main`/`master` 的变更必须通过以下 **23 个阻断质量门**。语义观察门机制保留（见 §5.2），当前 **4 个语义观察门**（O1 `check_stub_purity.py`、O2 `check_cross_domain_coverage.py`、O3 `check_kg_relation_precision.py`、O4 `check_decision_trees.py --strict`），用于持续度量伪 stub、交叉语义覆盖缺口、KG 谓词精度与决策树 rustc error code 映射覆盖率，达标后按 §5.2 转阻断：
+所有合并到 `main`/`master` 的变更必须通过以下 **23 个阻断质量门**。语义观察门机制保留（见 §5.2），当前 **5 个语义观察门**（O1 `check_stub_purity.py`、O2 `check_cross_domain_coverage.py`、O3 `check_kg_relation_precision.py`、O4 `check_decision_trees.py --strict`、O5 `check_version_semantic_injection.py --strict`），用于持续度量伪 stub、交叉语义覆盖缺口、KG 谓词精度、决策树 rustc error code 映射覆盖率与 Rust 1.90–1.97 稳定特性版本语义注入双向链接覆盖率，达标后按 §5.2 转阻断：
 
 **阻断门（23）**:
 
@@ -230,7 +230,7 @@ bash scripts/git_hooks/install.sh
 22. `python scripts/check_mindmap_coverage.py --strict`（思维表征覆盖：内容页 mindmap 覆盖率与反例节存在率，仅 concept/ 排除 00_meta/stub；--strict 基线 mindmap≥10%/反例≥40%，2026-07-14 实测 90.0%/84.4% exit 0；2026-07-14 转阻断）
 23. `python scripts/semantic_health.py --strict`（综合语义健康分；grade=FAIL 时阻断；2026-07-14 实测 99.6 grade OK exit 0；聚合门，2026-07-14 转阻断）
 
-**语义观察门（4）**：
+**语义观察门（5）**：
 
 | # | 观察门 | 检查目标 | 当前基线 | 转阻断条件 |
 |---:|---|---|---|---|
@@ -238,12 +238,13 @@ bash scripts/git_hooks/install.sh
 | O2 | `python scripts/check_cross_domain_coverage.py --strict` | Rust 关键交叉/边界语义域（let chains、unsafe extern、async+unsafe、FFI+async、Send/Sync boundaries 等）是否有 `concept/` 非 stub 权威页 | 16 主题 / 16 覆盖 = **100%**（`reports/CROSS_DOMAIN_COVERAGE_BASELINE_2026_07_15.md`） | 覆盖率达 100% 且连续 4 周/10 次 CI 稳定 |
 | O3 | `python scripts/check_kg_relation_precision.py --strict` | 核心 50 实体的 KG 关系是否使用具体语义谓词（`dependsOn`/`entails`/`mutexWith`/`refines`/`equivalentTo`/`counterExample`）而非通用 `ex:RelationAnnotation` | 核心 50 实体周边 generic_ratio=0%（`reports/KG_RELATION_PRECISION_2026-07-15.md`） | 核心 generic_ratio=0% 且连续 4 周/10 次 CI 稳定 |
 | O4 | `python scripts/check_decision_trees.py --strict` | 决策树 YAML 中 rustc error code 映射：节点级格式 `E\d{4}`、无节点歧义、Top 30 常见错误码覆盖率 | 20 码节点级映射 / 0 节点歧义 / Top 30 覆盖率 18/30=60%（`concept/00_meta/knowledge_topology/decision_tree_error_code_index.json`） | 节点歧义=0 且连续 4 周/10 次 CI 稳定 |
+| O5 | `python scripts/check_version_semantic_injection.py --strict` | Rust 1.90–1.97 稳定特性在版本跟踪页与 `concept/` 权威页之间的双向链接覆盖率 | 74 特性 / 74 映射 = **100%**（`reports/VERSION_SEMANTIC_INJECTION_BASELINE_2026_07_15.md`） | 覆盖率 ≥80% 且连续 4 周/10 次 CI 稳定 |
 
 > 说明：观察门机制（默认 exit 0、warning 不阻断、达标后按 §5.2 转阻断）保留；新增观察门时在 `run_quality_gates.sh` 观察段与 `quality_gates.yml` 以 `continue-on-error: true` 挂载，命名后缀 `(observe)`。权威覆盖门（16）目标基线为 concept/ 真内容页 any=100%、none=0、核心 L1–L4 无 P0 缺口=0。
 
 ### 5.2 观察门机制说明（P3-7，2026-07-12 建立；当前 4 个在观察）
 
-**当前状态**：2026-07-15 起新增 O1/O2/O3/O4 四个语义观察门；23 个阻断门保持不变。
+**当前状态**：2026-07-15 起新增 O1/O2/O3/O4/O5 五个语义观察门；23 个阻断门保持不变。
 
 **转正规则**：任一语义观察门**连续 4 周（或连续 10 次 CI 运行）达标**，经评估后转为阻断门（在 `run_quality_gates.sh` 与 `quality_gates.yml` 中改为 `--strict` 且 `continue-on-error: false`）。转正前提：本地实跑 `--strict` 当前 exit=0。转正后若指标退化阻断 PR，按正常阻断门流程处置，不自动降级。
 
@@ -282,7 +283,7 @@ bash scripts/git_hooks/install.sh
 3. **不要** 在 `archive/` 中创建新的活跃内容副本。
 4. **不要** 在 `crates/*/docs/` 中复制通用概念解释；应链接到 `concept/`。
 5. **新增重复内容必须被 CI 或人工 review 拦截**。
-6. **禁止未经验证的“完成”声明**：任何“已完成/全部通过/100%”类结论必须引用可机器复核的证据（质量门报告、脚本输出、CI 记录），且必须覆盖全部 23 个阻断质量门与 4 个语义观察门（若观察门状态变化，亦须一并核对）；仅部分门通过不得宣称“质量门全部通过”。报告与观察门状态矛盾时，以观察门最新报告为准并勘误原报告。
+6. **禁止未经验证的“完成”声明**：任何“已完成/全部通过/100%”类结论必须引用可机器复核的证据（质量门报告、脚本输出、CI 记录），且必须覆盖全部 23 个阻断质量门与 5 个语义观察门（若观察门状态变化，亦须一并核对）；仅部分门通过不得宣称“质量门全部通过”。报告与观察门状态矛盾时，以观察门最新报告为准并勘误原报告。
 
 ---
 
@@ -302,4 +303,4 @@ bash scripts/git_hooks/install.sh
 
 ---
 
-**最后更新**：2026-07-15（已对齐 Rust 1.97.0 stable；23 门全阻断 + 4 个语义观察门；决策树 rustc error code 映射已接入 `check_decision_trees.py` 与 `rustc_error_to_decision_tree.py`）
+**最后更新**：2026-07-15（已对齐 Rust 1.97.0 stable；23 门全阻断 + 5 个语义观察门；决策树 rustc error code 映射已接入 `check_decision_trees.py` 与 `rustc_error_to_decision_tree.py`；Rust 1.90–1.97 版本语义注入双向链接覆盖率 100%）

@@ -27,13 +27,13 @@
 
 | 特性 | 影响面 | 受益场景 | 权威源 |
 |:---|:---|:---|:---|
-| `MaybeUninit` 表示与有效性正式文档化 | unsafe / 内存模型 | 未初始化内存读写的契约边界明确化 | [Release Blog](https://blog.rust-lang.org/2025/12/11/Rust-1.92.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |
-| 安全代码允许对联合体字段取 `&raw const/mut` | 语言 / unsafe | 联合体字段取地址不再要求 unsafe 块 | [releases.rs](https://releases.rs/docs/1.92.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |
-| 同一关联项允许多个边界（trait 对象除外） | 类型系统 | 关联类型约束的多边界表达 | [releases.rs](https://releases.rs/docs/1.92.0/) · [类型系统](../../01_foundation/02_type_system/01_type_system.md) |
+| `MaybeUninit` 表示与有效性正式文档化 | unsafe / 内存模型 | 未初始化内存读写的契约边界明确化 | [Release Blog](https://blog.rust-lang.org/2025/12/11/Rust-1.92.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [01 unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |
+| 安全代码允许对联合体字段取 `&raw const/mut` | 语言 / unsafe | 联合体字段取地址不再要求 unsafe 块 | [releases.rs](https://releases.rs/docs/1.92.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [01 unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |
+| 同一关联项允许多个边界（trait 对象除外） | 类型系统 | 关联类型约束的多边界表达 | [releases.rs](https://releases.rs/docs/1.92.0/) · [类型系统](../../01_foundation/02_type_system/01_type_system.md) · [01 traits](../../02_intermediate/00_traits/01_traits.md) · [01 traits](../../02_intermediate/00_traits/01_traits.md) |
 | `Box/Rc/Arc::new_zeroed(_slice)` | 标准库 / 内存 | 零初始化堆分配（大缓冲、FFI 清零语义） | [releases.rs](https://releases.rs/docs/1.92.0/) |
 | `RwLockWriteGuard::downgrade` | 标准库 / 并发 | 写锁降级为读锁，避免读-写死锁 | [releases.rs](https://releases.rs/docs/1.92.0/) · [并发模式](../../03_advanced/00_concurrency/03_concurrency_patterns.md) |
-| `iter::Repeat::last/count` 改为 panic（兼容性变更） | 标准库 / 兼容 | 消除无限循环陷阱，暴露逻辑错误 | [releases.rs](https://releases.rs/docs/1.92.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |
-| `Location::file_as_c_str` | 标准库 | 零分配获取 panic 位置文件名（嵌入式/FFI 日志） | [releases.rs](https://releases.rs/docs/1.92.0/) |
+| `iter::Repeat::last/count` 改为 panic（兼容性变更） | 标准库 / 兼容 | 消除无限循环陷阱，暴露逻辑错误 | [releases.rs](https://releases.rs/docs/1.92.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [01 iterator patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |
+| `Location::file_as_c_str` | 标准库 | 零分配获取 panic 位置文件名（嵌入式/FFI 日志） | [releases.rs](https://releases.rs/docs/1.92.0/) · [03 panic](../../02_intermediate/03_error_handling/03_panic.md) · [03 panic](../../02_intermediate/03_error_handling/03_panic.md) |
 
 ---
 

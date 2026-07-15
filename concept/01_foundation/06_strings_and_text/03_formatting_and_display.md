@@ -61,6 +61,7 @@
     - [测验 1：Display vs Debug](#测验-1display-vs-debug)
     - [测验 2：格式化说明符](#测验-2格式化说明符)
   - [认知路径](#认知路径)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
@@ -440,6 +441,13 @@ D. `{:<8}`
 > **状态**: ✅ 权威来源对齐完成
 
 ---
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.93](../../07_future/00_version_tracking/rust_1_93_stabilized.md)**
+  - `fmt::from_fn` / `fmt::FromFn`
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 

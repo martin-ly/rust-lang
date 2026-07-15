@@ -45,13 +45,13 @@
 | 特性 | 影响面 | 受益场景 | 权威源 |
 |:---|:---|:---|:---|
 | `cfg_select!` 宏（§1.1） | 语言 / 条件编译 | 多分支 cfg 选择，替代嵌套 `#[cfg]` | [Release Blog](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) |
-| `if let` guards on match arms（§1.2） | 语言 / 模式匹配 | match 守卫中的条件绑定 | [releases.rs](https://releases.rs/docs/1.95.0/) · [控制流](../../01_foundation/04_control_flow/01_control_flow.md) |
+| `if let` guards on match arms（§1.2） | 语言 / 模式匹配 | match 守卫中的条件绑定 | [releases.rs](https://releases.rs/docs/1.95.0/) · [控制流](../../01_foundation/04_control_flow/01_control_flow.md) · [01 control flow](../../01_foundation/04_control_flow/01_control_flow.md) |
 | 路径段关键字重命名导入（§1.3） | 语言 / 模块 | `use foo::r#async as ...` 等关键字路径段 | [releases.rs](https://releases.rs/docs/1.95.0/) |
 | `core::range` 模块（§2.1） | 标准库 | `no_std` 可用的范围类型与迭代器 | [releases.rs](https://releases.rs/docs/1.95.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |
 | 原子 `update` / `try_update`（§2.2） | 标准库 / 并发 | CAS 循环的闭包化封装 | [releases.rs](https://releases.rs/docs/1.95.0/) · [原子与内存序](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) |
-| `Vec::push_mut` 等可变引用插入（§2.3） | 标准库 | 插入即得 `&mut`，原地构造 | [releases.rs](https://releases.rs/docs/1.95.0/) |
+| `Vec::push_mut` 等可变引用插入（§2.3） | 标准库 | 插入即得 `&mut`，原地构造 | [releases.rs](https://releases.rs/docs/1.95.0/) · [01 collections](../../01_foundation/05_collections/01_collections.md) · [01 collections](../../01_foundation/05_collections/01_collections.md) |
 | `as_ref_unchecked` / `as_mut_unchecked`（§2.4） | unsafe | 裸指针转引用的显式不安全操作 | [releases.rs](https://releases.rs/docs/1.95.0/) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) |
-| `--remap-path-scope` 稳定（§3.1） | 编译器 / 可重现构建 | 路径重映射的作用域控制 | [releases.rs](https://releases.rs/docs/1.95.0/) |
+| `--remap-path-scope` 稳定（§3.1） | 编译器 / 可重现构建 | 路径重映射的作用域控制 | [releases.rs](https://releases.rs/docs/1.95.0/) · [03 linkage](../../03_advanced/04_ffi/03_linkage.md) · [03 linkage](../../03_advanced/04_ffi/03_linkage.md) |
 
 ---
 

@@ -2633,6 +2633,18 @@ fn main() {
 | 读取未初始化内存 | UB：读取任意值 | §6.2 E4 | `MaybeUninit` 是合法途径 |
 | 验证 unsafe 代码行为 | 用 Miri 按 Tree Borrows 操作语义检测 | §五 别名模型 | Miri 未覆盖全部 UB 种类 ⟹ 通过 Miri ≠ 无 UB |
 
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.91](../../07_future/00_version_tracking/rust_1_91_stabilized.md)**
+  - `dangling_pointers_from_locals` lint
+- **[Rust 1.92](../../07_future/00_version_tracking/rust_1_92_stabilized.md)**
+  - `MaybeUninit` 表示与有效性正式文档化
+  - 安全代码允许对联合体字段取 `&raw const/mut`
+- **[Rust 1.93](../../07_future/00_version_tracking/rust_1_93_stabilized.md)**
+  - `MaybeUninit` 切片 API（`assume_init_ref/mut`、`write_copy/clone_of_slice`、`assume_init_drop`）
+
 ## 相关概念链接
 
 - **上层概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) · [Concurrency](../00_concurrency/01_concurrency.md)

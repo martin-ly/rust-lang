@@ -31,12 +31,12 @@
 
 | 特性 | 影响面 | 受益场景 | 权威源 |
 |:---|:---|:---|:---|
-| `x86_64-unknown-linux-gnu` 默认使用 lld 链接器 | 编译器 / 链接 | Linux 构建提速、降低链接内存占用 | [Release Blog](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/) · [linkage](../../03_advanced/04_ffi/03_linkage.md) |
+| `x86_64-unknown-linux-gnu` 默认使用 lld 链接器 | 编译器 / 链接 | Linux 构建提速、降低链接内存占用 | [Release Blog](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/) · [linkage](../../03_advanced/04_ffi/03_linkage.md) · [03 linkage](../../03_advanced/04_ffi/03_linkage.md) |
 | `u{N}::{checked,overflowing,saturating,wrapping}_sub_signed` | 标准库 / 整数 | 无符号-有符号混合减法的溢出可控语义 | [releases.rs](https://releases.rs/docs/1.90.0/) |
-| `CStr` / `CString` / `Cow<CStr>` 互比 | 标准库 / FFI | C 字符串互操作无需手动转换 | [releases.rs](https://releases.rs/docs/1.90.0/) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) |
-| `f32`/`f64` `floor`/`ceil`/`trunc`/`fract`/`round`/`round_ties_even` 进入 const | const 上下文 / 数值 | const 数值计算与查找表生成 | [releases.rs](https://releases.rs/docs/1.90.0/) |
-| Cargo 多包发布稳定（multi-package publishing） | Cargo | workspace 一键发布多个 crate | [releases.rs](https://releases.rs/docs/1.90.0/) · [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) |
-| `x86_64-apple-darwin` 降为 Tier 2（含 host tools） | 平台 | Intel macOS CI/构建策略调整 | [releases.rs](https://releases.rs/docs/1.90.0/) |
+| `CStr` / `CString` / `Cow<CStr>` 互比 | 标准库 / FFI | C 字符串互操作无需手动转换 | [releases.rs](https://releases.rs/docs/1.90.0/) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [01 rust ffi](../../03_advanced/04_ffi/01_rust_ffi.md) |
+| `f32`/`f64` `floor`/`ceil`/`trunc`/`fract`/`round`/`round_ties_even` 进入 const | const 上下文 / 数值 | const 数值计算与查找表生成 | [releases.rs](https://releases.rs/docs/1.90.0/) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) |
+| Cargo 多包发布稳定（multi-package publishing） | Cargo | workspace 一键发布多个 crate | [releases.rs](https://releases.rs/docs/1.90.0/) · [Cargo 命令参考](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) · [19 cargo commands reference](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) |
+| `x86_64-apple-darwin` 降为 Tier 2（含 host tools） | 平台 | Intel macOS CI/构建策略调整 | [releases.rs](https://releases.rs/docs/1.90.0/) · [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) · [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) |
 
 ---
 

@@ -48,6 +48,7 @@
   - [六、常见陷阱](#六常见陷阱)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [判定表：迭代器适配器与消费者判定](#判定表迭代器适配器与消费者判定)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [相关概念](#相关概念)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
@@ -87,6 +88,7 @@
     - [自定义迭代器最小实现](#自定义迭代器最小实现)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -891,6 +893,17 @@ fn main() {
 | 只读遍历 | `iter()`（产生 `&T`） | §2.4 | 需要修改元素 ⟹ `iter_mut()` |
 | 展平嵌套迭代 | `flat_map` | §10.5 | 内部迭代器所有权处理不当 ⟹ 编译错误（§10.5） |
 | 按条件截断序列 | `take_while`/`skip_while` | §12.1 | 二者语义互斥易混，误用 ⟹ 逻辑错误（§12.1） |
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.92](../../07_future/00_version_tracking/rust_1_92_stabilized.md)**
+  - `iter::Repeat::last/count` 改为 panic（兼容性变更）
+- **[Rust 1.96](../../07_future/00_version_tracking/rust_1_96_stabilized.md)**
+  - `core::range` Copy 类型（§2.1）
+- **[Rust 1.97](../../07_future/00_version_tracking/rust_1_97_stabilized.md)**
+  - `Default for RepeatN`
 
 ## 相关概念
 

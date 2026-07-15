@@ -74,6 +74,7 @@ mindmap
   - [五、常见陷阱](#五常见陷阱)
   - [五之一、const fn 中的浮点运算](#五之一const-fn-中的浮点运算)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：数值类型的编译错误](#十二边界测试数值类型的编译错误)
@@ -627,6 +628,22 @@ const fn is_nan_const(x: f64) -> bool {
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 二级 | 性能与类型尺寸优化 |
 
 ---
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.90](../../07_future/00_version_tracking/rust_1_90_stabilized.md)**
+  - `f32`/`f64` `floor`/`ceil`/`trunc`/`fract`/`round`/`round_ties_even` 进入 const
+- **[Rust 1.91](../../07_future/00_version_tracking/rust_1_91_stabilized.md)**
+  - `{integer}::strict_*` 系列方法
+- **[Rust 1.94](../../07_future/00_version_tracking/rust_1_94_stabilized.md)**
+  - `f32` / `f64::mul_add`
+  - `EULER_GAMMA` / `GOLDEN_RATIO` 浮点常量
+- **[Rust 1.97](../../07_future/00_version_tracking/rust_1_97_stabilized.md)**
+  - `{float}` 在未约束时回退到 `f32`
+  - 整数位查询方法
+  - `NonZero` 位查询方法
 
 ## 相关概念
 

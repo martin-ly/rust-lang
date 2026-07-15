@@ -45,6 +45,7 @@
     - [测验 4：Cranelift 后端适合什么场景？](#测验-4cranelift-后端适合什么场景)
   - [权威来源索引](#权威来源索引)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
@@ -309,6 +310,13 @@ Cranelift 编译速度快但优化较弱，适合 debug 构建或需要快速反
 **陷阱要点**：Rust 没有稳定的 rlib ABI——「同语言混链」的安全性以「同编译器版本」为前提，这与 C/C++ 的跨编译器链接习惯直接冲突。
 
 ---
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.91](../../07_future/00_version_tracking/rust_1_91_stabilized.md)**
+  - 内部升级 LLVM 21
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
