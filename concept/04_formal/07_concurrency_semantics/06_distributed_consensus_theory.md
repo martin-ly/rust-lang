@@ -549,7 +549,7 @@ loop {
 
 ### 5.3 openraft 与 hotstuff-rs
 
-- [openraft](https://docs.rs/openraft)（datafuselabs 维护）：异步 Raft。其类型设计的标志是把协议标识建模为强类型——`Vote`、`LeaderId`/`CommittedLeaderId`、`LogId` 各自成类，杜绝「任期与日志索引混用」这类整数混淆缺陷；存储层以 `RaftStorage`/`RaftLogStorage` 等 trait 契约表达，存储实现的错误被 trait 边界局部化、可独立审计。复制状态机的业务接入面同样以 `RaftStateMachine` trait 显式化。
+- [openraft](https://docs.rs/openraft)（datafuselabs 维护）：异步 Raft；截至 2026-07，0.9 线为稳定维护线，0.10 线处于 alpha（最新 `0.10.0-alpha.29`）。其类型设计的标志是把协议标识建模为强类型——`Vote`、`LeaderId`/`CommittedLeaderId`、`LogId` 各自成类，杜绝「任期与日志索引混用」这类整数混淆缺陷；存储层以 `RaftStorage`/`RaftLogStorage` 等 trait 契约表达，存储实现的错误被 trait 边界局部化、可独立审计。复制状态机的业务接入面同样以 `RaftStateMachine` trait 显式化。openraft 已被 Databend、Danube 等生产系统用作元数据共识层。
 - [hotstuff-rs](https://docs.rs/hotstuff-rs/)：HotStuff 谱系的 Rust 实现。其中心抽象是**仲裁证书（Quorum Certificate, QC）作为一等值**：QC 由门限签名聚合而成、按所有权在视图间传递，「证书不可伪造 + 证书单所有者」分别由密码学与类型系统各管一半。
 
 两个实现共享的 Rust 模式：**把协议不变量尽量搬进类型**（typestate/强标识/证书值），剩下搬不进的（活性、时序）交给确定性测试与运行时断言。

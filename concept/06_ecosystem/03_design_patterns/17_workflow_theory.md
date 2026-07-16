@@ -23,7 +23,7 @@
 > [分布式系统](../04_web_and_networking/01_distributed_systems.md)
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
-> **前置概念**: N/A
+> **前置概念**: [状态机语义与工作流模型](../../03_advanced/01_async/15_state_machine_semantics.md) — Rust async 状态机语义与通用状态机模型的 L3-L4 入口
 ---
 
 > **来源**: [Workflow Management Coalition — Terminology & Glossary](https://wfmc.org/wp-content/uploads/2022/09/TC-1011_term_glossary_v3.pdf) ·
@@ -1365,6 +1365,7 @@ async fn unbounded_backoff() -> Result<Output> {
 - [分布式系统](../04_web_and_networking/01_distributed_systems.md) — gRPC、Raft、Actor、服务发现
 - [架构设计模式](08_architecture_patterns.md) — 分层/六边形/洋葱/整洁架构
 - [微服务架构模式](05_microservice_patterns.md) — 服务发现、熔断、Saga
+- [状态机语义与工作流模型](../../03_advanced/01_async/15_state_machine_semantics.md) — Rust async 状态机语义与通用状态机模型（L3-L4 入口）
 - [Async/Await](../../03_advanced/01_async/01_async.md) — 异步编程基础
 - [异步状态机](../../03_advanced/01_async/01_async.md) — async/await 状态机转换
 - [公理语义](../../04_formal/03_operational_semantics/05_axiomatic_semantics.md) — Hoare 逻辑、正确性证明

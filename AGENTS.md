@@ -305,7 +305,7 @@ bash scripts/git_hooks/install.sh
 | Stub 纯净度审计 | 每月 | `python scripts/check_stub_purity.py --strict` |
 | 交叉/边界语义覆盖审计 | 每月 | `python scripts/check_cross_domain_coverage.py --strict` |
 | 版本语义注入双向链接审计 | Rust 新版本发布时 / 每月 | `python scripts/check_version_semantic_injection.py --strict` |
-| KG 刷新与谓词实例化 | 新增 `concept/` 权威页后 / 每次 `apply_renumber.py` 重新生成 KG 后 | 1. `python scripts/generate_kg_index.py`  <br>2. `python scripts/generate_kg_v3.py`  <br>3. `python scripts/apply_kg_semantic_predicates.py --all-batches --apply`  <br>4. `python scripts/fallback_kg_generic_to_related.py --apply`  <br>5. 校验 `python scripts/check_kg_shapes.py --strict` 与 `python scripts/check_kg_relation_precision.py --strict`（核心 generic_ratio 应为 0%） |
+| KG 刷新与谓词实例化 | 新增 `concept/` 权威页后 / 每次 `apply_renumber.py` 重新生成 KG 后 | 1. `python scripts/generate_kg_index.py`  <br>2. `python scripts/generate_kg_v3.py`  <br>3. `python scripts/apply_kg_semantic_predicates.py --all-batches --apply`  <br>4. `python scripts/fallback_kg_generic_to_related.py --apply`  <br>5. `python scripts/compress_kg_relatedto.py --apply`（将剩余 `ex:relatedTo` 按目录/层启发式压缩为 hasPart/partOf/refines/dependsOn/entails/equivalentTo）  <br>6. 校验 `python scripts/check_kg_shapes.py --strict` 与 `python scripts/check_kg_relation_precision.py --strict`（核心 generic_ratio 应为 0%） |
 | 决策树 rustc error code 映射维护 | 新增/调整决策树或 rustc 错误码变更时 / 每月 | `python scripts/check_decision_trees.py --strict` / `python scripts/rustc_error_to_decision_tree.py E0502` |
 | 月度语义深度评审 | 每月 | `.kimi/templates/monthly_semantic_review.md` |
 | pre-commit 检查 | 每次本地提交 | `scripts/git_hooks/pre-commit` |

@@ -205,6 +205,7 @@
   - [Waker 契约深度解析（Waker Contract Deep Dive）](03_advanced/01_async/12_waker_contract_deep_dive.md)
   - [Async Trait 对象安全（Async Trait Object Safety）](03_advanced/01_async/13_async_trait_object_safety.md)
   - [GAT 与 Async 交叉边界语义（Generic Associated Types at the Async Boundary）](03_advanced/01_async/14_gat_async_boundary.md)
+  - [状态机语义与工作流模型（State Machine Semantics and Workflow Models）](03_advanced/01_async/15_state_machine_semantics.md)
   - [过程宏（Procedural Macro）：编译期代码生成的元编程工具](03_advanced/03_proc_macros/02_proc_macro.md)
   - [过程宏（Procedural Macro）代码生成优化](03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md)
   - [宏（Macro）调试与诊断](03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md)

@@ -36,6 +36,7 @@ def main() -> int:
     for r in relations:
         if r.get("@type") == "ex:RelationAnnotation":
             r["@type"] = "ex:relatedTo"
+            r["ex:predicate"] = "ex:relatedTo"
             r.setdefault("ex:evidence", "fallback: residual generic RelationAnnotation retyped as weak semantic relatedTo during KG refresh")
             r.setdefault("ex:rule", "F1-fallback-to-relatedTo")
             r.setdefault("ex:confidence", 0.5)

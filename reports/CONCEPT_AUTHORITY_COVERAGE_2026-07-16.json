@@ -1,41 +1,41 @@
 {
   "date": "2026-07-16",
-  "scanned": 518,
+  "scanned": 519,
   "coverage": {
     "P0": [
-      513,
+      514,
       99.0
     ],
     "P1": [
-      465,
+      466,
       89.8
     ],
     "P2": [
       434,
-      83.8
+      83.6
     ],
     "any": [
-      518,
+      519,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 430,
+    "scanned": 431,
     "P0": [
-      430,
+      431,
       100.0
     ],
     "P1": [
-      411,
+      412,
       95.6
     ],
     "P2": [
       417,
-      97.0
+      96.8
     ],
     "any": [
-      430,
+      431,
       100.0
     ],
     "gaps_p1": [
@@ -64,6 +64,7 @@
       "concept/02_intermediate/00_traits/09_associated_type_defaults.md",
       "concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
       "concept/03_advanced/00_concurrency/04_send_sync_boundaries.md",
+      "concept/03_advanced/01_async/15_state_machine_semantics.md",
       "concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
       "concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md",
       "concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md",
@@ -92,9 +93,9 @@
       "any": 41
     },
     "L3": {
-      "n": 71,
-      "P0": 71,
-      "any": 71
+      "n": 72,
+      "P0": 72,
+      "any": 72
     },
     "L4": {
       "n": 59,

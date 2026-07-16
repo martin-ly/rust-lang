@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 523,
-    "generated_at": "2026-07-16T11:48:01.156440+00:00"
+    "total_files": 524,
+    "generated_at": "2026-07-16T12:59:33.298930+00:00"
   },
   "files": [
     {
@@ -29942,6 +29942,85 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\01_async\\15_state_machine_semantics.md",
+      "layer": "L3",
+      "title": "状态机语义与工作流模型",
+      "positioning": "",
+      "line_count": 210,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 5. 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "async fn example(x: i32) -> i32 {     let y = step1(x).await;     step2(y).await..."
+        },
+        {
+          "flags": [
+            "edition2024"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll};  ///..."
+        },
+        {
+          "flags": [
+            "edition2024"
+          ],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "#[derive(Debug, PartialEq)] enum TrafficLight {     Green,     Yellow,     Red, ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0004"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "enum State { A, B }  fn transition(s: State) -> State {     match s {         St..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "async fn bad() {     let m = std::sync::Mutex::new(0);     let mut guard = m.loc..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/04_control_flow/01_control_flow.md",
+        "../../01_foundation/04_control_flow/02_patterns.md",
+        "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
+        "../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md",
+        "../../06_ecosystem/03_design_patterns/17_workflow_theory.md",
+        "../00_concurrency/03_concurrency_patterns.md",
+        "01_async.md",
+        "04_future_and_executor_mechanisms.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 9,
+      "pre_post": {
+        "pre": [
+          "[Async/Await](01_async.md) · [Control Flow](../../01_foundation/04_control_flow/01_control_flow.md) · [Enums and Pattern Matching](../../01_foundation/04_control_flow/02_patterns.md)"
+        ],
+        "post": [
+          "[Workflow Theory & Formalization](../../06_ecosystem/03_design_patterns/17_workflow_theory.md) · [Concurrency Patterns](../00_concurrency/03_concurrency_patterns.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_unsafe\\00_before_formal.md",
       "layer": "L3",
       "title": "是否需要进入 L4 形式化层？",
@@ -53716,7 +53795,7 @@
       "layer": "L6",
       "title": "Workflow Theory & Formalization（工作流理论与形式化）",
       "positioning": "",
-      "line_count": 1480,
+      "line_count": 1481,
       "theorem_chains": [
         {
           "text": "| Workflow Theory & Formalization（工作流理论与形式化） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -53878,6 +53957,7 @@
       "sources": [],
       "cross_references": [
         "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/01_async/15_state_machine_semantics.md",
         "../../04_formal/00_type_theory/01_type_theory.md",
         "../../04_formal/00_type_theory/06_type_semantics.md",
         "../../04_formal/03_operational_semantics/03_operational_semantics.md",
@@ -53897,7 +53977,7 @@
       "pre_post": {
         "pre": [
           "[Async/Await](../../03_advanced/01_async/01_async.md) ·",
-          "N/A",
+          "[状态机语义与工作流模型](../../03_advanced/01_async/15_state_machine_semantics.md) — Rust async 状态机语义与通用状态机模型的 L3-L4 入口",
           "[Type Theory](../../04_formal/00_type_theory/01_type_theory.md)",
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
         ],

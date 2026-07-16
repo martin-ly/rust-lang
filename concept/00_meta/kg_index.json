@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 539,
+    "entity_count": 540,
     "schema": "simple KG index"
   },
   "entities": [
@@ -4941,6 +4941,43 @@
         {
           "title": "Async FFI 边界",
           "path": "../04_ffi/04_async_ffi_boundary.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": [
+        "c06_async"
+      ]
+    },
+    {
+      "id": "concept:03_advanced/01_async/15_state_machine_semantics.md",
+      "path": "03_advanced/01_async/15_state_machine_semantics.md",
+      "title": "状态机语义与工作流模型",
+      "en": "State Machine Semantics and Workflow Models",
+      "summary": "A semantic model view of state machines (Mealy/Moore, transition systems, statecharts), their use in explaining `async`/`await` desugaring, and their relationship to workflow models (BPMN, Petri nets), with Rust `enum` + `match` implementation patterns and canonical links to the deeper L6 workflow formalization page.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Async/Await",
+          "path": "01_async.md"
+        },
+        {
+          "title": "Control Flow",
+          "path": "../../01_foundation/04_control_flow/01_control_flow.md"
+        },
+        {
+          "title": "Enums and Pattern Matching",
+          "path": "../../01_foundation/04_control_flow/02_patterns.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Workflow Theory & Formalization",
+          "path": "../../06_ecosystem/03_design_patterns/17_workflow_theory.md"
+        },
+        {
+          "title": "Concurrency Patterns",
+          "path": "../00_concurrency/03_concurrency_patterns.md"
         }
       ],
       "theorems": [],
@@ -10635,7 +10672,12 @@
       "summary": "Formal Methods. Guide to 41 Workflow Theory.",
       "bloom": "L4-L5",
       "rust_version": "1.97.0+ (Edition 2024)",
-      "prerequisites": [],
+      "prerequisites": [
+        {
+          "title": "状态机语义与工作流模型",
+          "path": "../../03_advanced/01_async/15_state_machine_semantics.md"
+        }
+      ],
       "postrequisites": [
         {
           "title": "Future Roadmap",
