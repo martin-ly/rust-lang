@@ -1,9 +1,9 @@
 # 概念一致性审计报告 (Concept Consistency Audit)
 
-> 生成时间: 2026-07-16T11:43:19.957643
+> 生成时间: 2026-07-16T15:26:11.351435
 > 生成脚本: `scripts/concept_consistency_auditor.py`(扩展后监控 22 个核心概念)
 > 扫描文件数: 506
-> 提取概念定义数: 4444
+> 提取概念定义数: 4440
 > 跨文件引用数: 290
 
 ## 目录
@@ -77,7 +77,7 @@
 | 所有权-Move语义 | 259 | 94 |
 | effects-system-定义 | 240 | 30 |
 | Pin-自引用 | 234 | 67 |
-| const-trait-impl-定义 | 176 | 32 |
+| const-trait-impl-定义 | 175 | 31 |
 | allocator-api-GlobalAlloc | 165 | 37 |
 | Pin-投影-结构 | 163 | 33 |
 | effects-system-现有 | 159 | 19 |
@@ -85,28 +85,28 @@
 | 变型-定义 | 102 | 22 |
 | 内部可变性-运行时检查 | 101 | 32 |
 | 借用-可变独占 | 101 | 38 |
-| async-Future-状态机 | 96 | 38 |
 | 所有权-作用域绑定 | 96 | 54 |
+| async-Future-状态机 | 94 | 38 |
 | 生命周期-子类型-outlives | 92 | 27 |
-| let-chains-守卫 | 85 | 34 |
+| let-chains-守卫 | 86 | 34 |
 | const-trait-impl-效果 | 81 | 16 |
 | RPITIT-RTN-TAIT-捕获 | 80 | 24 |
-| GAT-async-生命周期 | 79 | 17 |
-| unsafe-extern-块 | 77 | 15 |
+| GAT-async-生命周期 | 78 | 17 |
+| unsafe-extern-块 | 76 | 14 |
 | 变型-规则 | 71 | 14 |
 | unsafe-extern-safe | 70 | 15 |
 | GAT-async-边界 | 69 | 19 |
 | 所有权-唯一所有权 | 66 | 32 |
 | unsafe-契约 | 61 | 32 |
-| let-chains-链式 | 55 | 7 |
+| let-chains-链式 | 56 | 7 |
 | unsafe-superpowers-unsafe_op | 52 | 13 |
-| 内部可变性-定义 | 51 | 25 |
+| 内部可变性-定义 | 50 | 24 |
 | match-ergonomics-默认绑定 | 48 | 29 |
 | Sync | 45 | 21 |
 | unsafe-不变式 | 37 | 6 |
 | async-Future-等价 | 36 | 21 |
+| Unpin-定义 | 36 | 12 |
 | 生命周期-子类型-static | 35 | 13 |
-| Unpin-定义 | 35 | 12 |
 | Send/Sync边界-trait对象 | 33 | 10 |
 | 借用-引用有效 | 32 | 18 |
 | temporary-scope-临时作用域 | 31 | 11 |
@@ -124,7 +124,7 @@
 | Pin-投影-安全 | 9 | 6 |
 | 生命周期-Rule1 | 7 | 2 |
 | unsafe-superpowers-五种能力 | 4 | 3 |
-| 内部可变性-UnsafeCell | 3 | 3 |
+| 内部可变性-UnsafeCell | 2 | 2 |
 | match-ergonomics-引用 | 2 | 2 |
 | temporary-scope-tail | 1 | 1 |
 

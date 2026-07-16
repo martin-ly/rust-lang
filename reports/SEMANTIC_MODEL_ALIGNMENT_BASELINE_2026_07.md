@@ -176,7 +176,6 @@
 | `rust_1_99_preview.md` | ❌ 未建立 | P1 | `concept/07_future/00_version_tracking/` |
 | Negative impls | ❌ 无权威页 | P1 | `concept/02_intermediate/` |
 | Associated type defaults | ❌ 无权威页 | P2 | `concept/02_intermediate/` |
-| `where` clauses on enum variants | ❌ 无权威页 | P2 | `concept/02_intermediate/` |
 | `let else` 深度页 | ⚠️ 仅在 `let_chains.md` 提及 | P2 | `concept/01_foundation/` |
 | Pin ergonomics (`&pin mut`) | preview stub | P1 | `concept/07_future/02_preview_features/14_pin_ergonomics_preview.md` → 深度页 |
 | Async drop | preview stub | P1 | `concept/07_future/02_preview_features/22_async_drop_preview.md` |
@@ -191,12 +190,56 @@
 
 ---
 
-## 7. 质量门基线（运行中）
+## 7. 质量门基线（已跑通）
 
-> `scripts/run_quality_gates.sh` 已在后台运行，输出保存至 `tmp/quality_gates_baseline_2026_07_16.log`。
-> 本报告将在该任务完成后更新最终基线结果。
+> `scripts/run_quality_gates.sh` 已于 2026-07-16 跑通，耗时约 3 分 17 秒。
+> 输出完整日志：`tmp/quality_gates_baseline_2026_07_16.log`
 
-### 7.1 工作区未提交变更
+### 7.1 总体结果
+
+**✅ All 23 quality gates passed (23 blocking + 5 semantic observe).**
+
+| 门 | 状态 |
+|---|---|
+| Cargo Check | ✅ passed |
+| Cargo Test | ✅ passed |
+| Cargo Clippy | ✅ passed |
+| Cargo Audit | ✅ passed |
+| Cargo Vet | ✅ passed |
+| mdbook Build | ✅ passed |
+| KB Auditor Link Check | ✅ passed |
+| Content Overlap Detection | ✅ passed |
+| i18n Term Coverage | ✅ passed |
+| Mermaid Syntax Check | ✅ passed |
+| Topology Quality (strict) | ✅ passed |
+| KG SHACL Validation (strict) | ✅ passed |
+| Canonical Uniqueness (strict) | ✅ passed |
+| Concept Consistency Audit (strict) | ✅ passed |
+| Concept Authority Coverage (strict, --include-crates) | ✅ passed |
+| Examples Compile Check (strict) | ✅ passed |
+| Naming Convention (strict) | ✅ passed |
+| Quiz System (strict) | ✅ passed |
+| Metadata Consistency (strict) | ✅ passed |
+| Concept Code Blocks (strict) | ✅ passed |
+| Mindmap Coverage (strict) | ✅ passed |
+| Semantic Health (strict) | ✅ passed |
+| Content Overlap v2 (blocking, actionable=0) | ✅ passed |
+| Stub Purity (observe) | ✅ passed |
+| Cross-Domain Coverage (observe) | ✅ passed |
+| KG Relation Precision (observe) | ✅ passed |
+| Decision Tree rustc Error Code Coverage (observe) | ✅ passed |
+| Version Semantic Injection (observe, 1.90–1.97) | ✅ passed |
+
+### 7.2 关键观察数据
+
+- **Version Semantic Injection**：1.90–1.97 共 74 个稳定特性，100% 映射到 `concept/` 权威页。
+- **Cross-Domain Coverage**：16/16 关键交叉语义域已覆盖。
+- **KG Relation Precision**：7989 关系，generic_ratio=0.00%，核心 50 实体 generic_ratio=0.00%。
+- **Decision Trees**：17 棵树，276 节点，Top 30 rustc error code 覆盖率 30/30（100%）。
+- **Content Overlap v2**：549 对命中，可处理项 MERGE+DOCS_INTERNAL=0，SERIES=121，REVIEWED=427，REVIEW=1。
+- **Examples Compile**：9 stdlib + 3 deps 示例全部编译通过。
+
+### 7.3 工作区未提交变更
 
 当前工作区存在 19 个未提交修改文件（与本次任务无关，可能来自前序工作）：
 
@@ -254,7 +297,7 @@
 
 - [ ] 基于 1.98 beta 信息，预填充 `rust_1_98_stabilized.md` 骨架中的实测内容（在稳定前用 beta 验证）
 - [ ] 建立 `rust_1_99_preview.md`
-- [ ] 创建缺失的 1.97 深度页：negative impls、associated type defaults、where on enum variants、let else
+- [ ] 创建缺失的 1.97 深度页：negative impls、associated type defaults、let else
 
 ---
 
